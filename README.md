@@ -4,7 +4,7 @@
 
 Zero Ecotope Framework 是一个基于 [Vert.x](http://vertx.io) 的中间件容器，它可以帮助软件开发人员在 Vert.x 中快速开发和实施，集中精力处理项目需求中的业务逻辑而忽略开发过程中的部分细节，项目起源于早期在 Vert.x 生态中缺少类似 [Spring Boot](https://spring.io/projects/spring-boot/) 的快速开发工具，Zero 项目的目标是打造 Vert.x 生态中的 Spring Boot，目前整个框架已经发展到**第六个**年头，大大小小运行了15个左右的企业项目：
 
-![](/docs/_image/life.png)
+![](https://raw.githubusercontent.com/zero-ws/zero-ecotope/master/docs/_image/life.png)
 
 > 一直没有发布 1.0 的版本是因为作为工业级和企业级项目框架，对数据本身比较严谨，一直等待着收集更多生产环境数据，从功能、性能、交付效率上为开发人员提供更加成熟的值得信赖的解决方案。
 
@@ -75,13 +75,13 @@ Zero Ecotope Framework 是一个基于 [Vert.x](http://vertx.io) 的中间件容
 
 **Zero Extension** 扩展包中的标准扩展模块如下（开发中心截图）：
 
-![](/docs/_image/extension.png)
+![](https://raw.githubusercontent.com/zero-ws/zero-ecotope/master/docs/_image/extension.png)
 
 ### 2.2. 完整拓扑
 
 和 `Zero Framework` 配套的框架为 `Aeon Framework` 云原生框架，二者整体架构图如下：
 
-![](/docs/_image/arch.png)
+![](https://raw.githubusercontent.com/zero-ws/zero-ecotope/master/docs/_image/arch.png)
 
 ### 2.3. 建模设计
 
@@ -93,13 +93,13 @@ Zero Ecotope Framework 是一个基于 [Vert.x](http://vertx.io) 的中间件容
 
 整体规范基础结构如下**缩略图**：
 
-![](/docs/_image/model.png)
+![](https://raw.githubusercontent.com/zero-ws/zero-ecotope/master/docs/_image/model.png)
 
 ### 2.3. 启动流程原理
 
 旧版启动流程原理图如下**缩略图**（两个月前的版本）：
 
-![](/docs/_image/booting.png)
+![](https://raw.githubusercontent.com/zero-ws/zero-ecotope/master/docs/_image/booting.png)
 
 ## 3. 环境搭建
 
@@ -222,7 +222,7 @@ public class Driver {
 
 使用: `445191171` 加作者微信，拉群.
 
-<img src="./docs/_image/chat.jpg" width="258" height="258" alt="作者微信"/>
+<img src="https://raw.githubusercontent.com/zero-ws/zero-ecotope/master/docs/_image/chat.jpg" width="258" height="258" alt="作者微信"/>
 
 ## DESIGNED IN CHINA（中国设计）
 
