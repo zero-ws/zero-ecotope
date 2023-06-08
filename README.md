@@ -1,129 +1,123 @@
-# Zero Framework
+# Zero Ecotope Framework
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/cn.vertxup/vertx-zero/badge.svg?style=plastic)](https://maven-badges.herokuapp.com/maven-central/cn.vertxup/vertx-zero/)  [![Apache License 2](https://img.shields.io/badge/license-ASF2-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0.txt)
+[![Apache License 2](https://img.shields.io/badge/license-ASF2-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0.txt)
 
-Zero is a middleware framework based on [Vert.x](http://vertx.io) and it could help software engineers focus on business
-requirements instead of technical detail of Vert.x. The original idea of this framework came
-from [Spring Boot](https://spring.io/projects/spring-boot/) as that there is no approximative tools in Vert.x sphere at
-that time.
+Zero Ecotope Framework 是一个基于 [Vert.x](http://vertx.io) 的中间件容器，它可以帮助软件开发人员在 Vert.x 中快速开发和实施，集中精力处理项目需求中的业务逻辑而忽略开发过程中的部分细节，项目起源于早期在 Vert.x 生态中缺少类似 [Spring Boot](https://spring.io/projects/spring-boot/) 的快速开发工具，Zero 项目的目标是打造 Vert.x 生态中的 Spring Boot，目前整个框架已经发展到**第六个**年头，大大小小运行了15个左右的企业项目：
 
-Zero has two metaphors, the original name is "Zero Up", "Up" means that I want to build a system that could be always
-running up online, "Zero" means no more workload for high production and you can build your own system efficiently with
-the default configuration only.
+![](/docs/_image/life.png)
 
-The latest Zero Micro Architecture ( [Aeon System](https://github.com/silentbalanceyh/vertx-zero-cloud) ) will be
-deployed to [K8S](https://kubernetes.io/) with [Istio](https://istio.io/) environment, it's a future focused method to
-build mature system with native cloud nature for more enterprise to execute critical valuable business efficiently. And
-I hope it could act as an important tool for more enterprise to complete digital transformation to satisfy the
-sustainable development, it could be high efficiently digital middleware in your side!
+> 一直没有发布 1.0 的版本是因为作为工业级和企业级项目框架，对数据本身比较严谨，一直等待着收集更多生产环境数据，从功能、性能、交付效率上为开发人员提供更加成熟的值得信赖的解决方案。
 
-* Gitee Repo: <https://gitee.com/silentbalanceyh/vertx-zero>
+2023年，Zero前后端进行了大规模的重构，前端引入了 `微框架` 和 `开发中心`，后端引入了云原生对接（[K8S](https://kubernetes.io/) 和 [Istio](https://istio.io/) ）、行业建模工具、元数据标准、企业数字化辅助方案，对 **开发、测试、运维** 流程提供了更加成熟的功能，解决企业在数字化转型过程中面临的各种问题。
 
-## 1. Features
+## 1. 基础功能
 
-**Critical For Beginner**: Zero Framework has been re-factor many times, the features are very complex now, you can
-refer following link for more details to know the power of Zero.
+* [功能支持表（英文）](FEATURES.md)
 
-* [功能支持表/Feature List](FEATURES.md)
+### 1.1. 项目结构
 
-### 1.1. Structure
+最新版的项目表（新版拆分在不同的库中）:
 
-Zero Framework ( Latest Version ) contains five major projects as following:
+| Name           | Comment                                                                                  |
+|----------------|------------------------------------------------------------------------------------------|
+| zero-ecotope | （语义：生态）<br/>根项目主项目、版本管理、文档管理等。                                                           |
+| zero-epic      | （语义：史诗篇章）<br/>内含 AMS （Agreed Metadata Specification）的接口设计和定义规范，可作为最底层跨框架的基础功能库底座。        |
+| zero-elite     | （语义：精英）<br/>Zero Core 核心框架，包含各种内置组件、功能函数、编排器等，为上层容器提供基础功能支撑。                             |
+| zero-energy    | （语义：能源）<br/>Zero Web 容器，容器主要用于单机运行和OSGI插件化运行，OSGI部分开发中。                                  |
+| zero-equip     | （语义：装备）<br/>**Infix Architecture** 下的功能插件模块。                                             |
+| zero-extension | （语义：扩展）<br/>**Zero Extension** 扩展业务插件模块，类似 [ODOO](https://www.odoo.com/). 的功能拓展，带部分业务功能。 |
+| zero-external | （语义：外部集成）<br/>**Zero External** 动态建模专用外联插件。                                              |
+| zero-entry | （语义：入口）<br/>Zero入口项目，包含开发模式的 `import POM` 和单机版脚手架专用依赖集。                                  |
 
-| Name         | Comment                                                                                                                                         |
-|--------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
-| vertx-gaia   | **Zero Core** Runtime, it contains minimum zero environment and you can deploy your projects on zero.                                           |
-| vertx-ifx    | **Infix Architecture**, Useful plug-ins that could be supported by Zero and you can choose as required.                                         |
-| vertx-import | Zero Usage dependency to perform development, it provides uniform entrance for your projects.                                                   |
-| vertx-semper | **Aeon System**, The native cloud environment based on K8S with Istio.                                                                          |
-| vertx-pin    | **Zero Extension** Modules, it provides common business features to satisfy many enterprise requirements such as [ODOO](https://www.odoo.com/). |
+### 1.2. 常用链接
 
-### 1.2. Usage Links
+| 项                                                                      | 说明                                                                                                         |
+|------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------|
+| [Zero Ui](https://www.vertxui.cn)                                      | Zero Ui：基于 `React` 和 `Ant Design (Pro/g2/g6)` 的前端框架。                                                       |
+| [Zero Ai](https://www.vertxai.cn)                                      | Zero Ai：快速开发常用脚本工具箱、代码生成、数据生成、模拟请求等                                                                        |
+| [Zero Docs (英文)](https://onemsg.github.io/vertx-zero/)                 | 热心网友提供的一份在线文档：[onemsg](https://github.com/onemsg), 作者BLOG <https://juejin.cn/user/3597257778669592/posts>. |
+| [Zero代码示例](https://github.com/silentbalanceyh/vertx-zero-example)      | 旧版本常用的Zero在线代码示例。                                                                                          |
+| [旧版英文文档](DOCUMENT.md)                                                  | 旧版 `0.4.8` 文档（英文）。                                                                                         |
+| [《Zero冥思录》](https://lang-yu.gitbook.io/zero/)                          | 中文版标准Zero引导教程（总19章）。                                                                                       |
+| [《Vert.x逐陆记》](https://lang-yu.gitbook.io/vert-x/)                      | 中文版Vert.x教程 ( In Progress，我很懒，只有前三章 )                                                                      |
+| [《Zero云平台白皮书》](https://www.vertx-cloud.cn/document/doc-web/index.html) | 开发实施手册：扩展模块、前端、云端、工具的工程化白皮书。                                                                               |
 
-| Name                                                                   | Comment                                                                                                                                                               |
-|------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [Zero Ui](https://www.vertxui.cn)                                      | Zero UI Framework based on React and Ant Design.                                                                                                                      |
-| [Zero Ai](https://www.vertxai.cn)                                      | Zero Ai Toolkit for rapid development.                                                                                                                                |
-| [Zero Docs (EN)](https://onemsg.github.io/vertx-zero/)                 | Document that created by [onemsg](https://github.com/onemsg), the author blog is <https://juejin.cn/user/3597257778669592/posts>.                                     |
-| [Zero Example](https://github.com/silentbalanceyh/vertx-zero-example)  | Zero original example demos for beginner.                                                                                                                             |
-| [Old Official Document](DOCUMENT.md)                                   | The previous zero document before `0.4.8`, EN version.                                                                                                                |
-| [《Zero冥思录》](https://lang-yu.gitbook.io/zero/)                          | The core training course for beginner to study Zero Framework, CN version.                                                                                            |
-| [《Vert.x逐陆记》](https://lang-yu.gitbook.io/vert-x/)                      | The basic vert.x framework training course, ( In Progress )                                                                                                           |
-| [《Zero云平台白皮书》](https://www.vertx-cloud.cn/document/doc-web/index.html) | The specification and guide for developer to process zero cloud platform / application. ( Include Zero Extension, Zero UI, Aeon Platform & Zero Ai etc ), CN version. |
+### 1.3. 元数据标准 ( AMS )
 
-### 1.3. Agreed Metadata Specification ( AMS )
-
-In latest version `0.9.0`, I have published a new project `vertx-ams` under `vertx-gaia` project, it's a shared library
-that could be cross Vertx, Spring and other project etc, it provide common features of JVM language and could help you
-to do development more efficiently instead of `Util`. For more details you can
-refer [《9.标准化》](https://www.vertx-cloud.cn/document/doc-web/index.html#_%E6%A0%87%E5%87%86%E5%8C%96).
-
-The reference link is : <https://gitee.com/silentbalanceyh/vertx-zero/tree/master/vertx-gaia/vertx-ams>, you can add
-following segment to your own project:
+最新版本中 `> 0.9.0`，重新设计了系统最底层，提供了跨框架和跨容器的 **元数据标准**，详情参考：[《9.标准化》](https://www.vertx-cloud.cn/document/doc-web/index.html#_%E6%A0%87%E5%87%86%E5%8C%96)，此标准可作为 Vert.x 引入独立项目的底层功能使用。
 
 ```xml
-
+<!-- 0.9.0 -->
 <dependency>
     <artifactId>vertx-ams</artifactId>
     <groupId>cn.vertxup</groupId>
     <version>${ZERO_VERSION}</version>
 </dependency>
+<!-- 1.0-SNAPSHOT -->
+<dependency>
+    <artifactId>zero-ams</artifactId>
+    <groupId>io.zerows</groupId>
+    <version>${ZERO_VERSION}</version>
+</dependency>
 ```
 
-> The latest doc involved serialization of jackson tools.
+## 2. 俯瞰
 
-## 2. Overlook
+> 换了个名字 `Ecotope` 是因为整个框架目前合计超过 50 多个子项目，而因为强迫症，目前所有项目的主项目命名为 `zero-e` 前缀，参考项目语义。
 
-Here I provide another view to let you know Zero Framework for more details.
+### 2.1. 模块化
 
-### 2.1. Modulat
+**Zero Extension** 扩展包开启了三种模块化场景，您可以根据自己所需单独配置：
 
-**Zero Extension** has been designed and re-factor to modulat environment, you can configure the modules as required,
-all the modules could support following:
+* 静态：基于配置数据的基础模块化，每次上模块必须重启容器（开发型、配置型）
+* 静态：基于后端元数据规范的模块化，第二管理端可动态配置模块（数据型）。
+* OSGI模块化：支持热部署的模块化，不下线模式（Aeon System）。
 
-* OSGI Specification
-* JDK 9 Module
+**Zero Extension** 扩展包中的标准扩展模块如下（开发中心截图）：
 
-here are some standard modules in Zero Extension.
+![](/docs/_image/extension.png)
 
-![](./docs/_image/extension.png)
+### 2.2. 完整拓扑
 
-### 2.2. Topology
+和 `Zero Framework` 配套的框架为 `Aeon Framework` 云原生框架，二者整体架构图如下：
 
-The whole **Zero Framework ( Aeon Environment )** is as following:
+![](/docs/_image/arch.png)
 
-![](./docs/_image/arch.png)
+### 2.3. 建模设计
 
-### 2.3. Modeling
+建模规范（AMS，纯接口高阶设计）的诞生为整体系统提供了 *云原生、低代码、建模、基础功能* 四大核心区域，使得最新版Zero可支持不同的建模设计：
 
-The latest version `0.9.0` has involved the specification of Industry Modeling to support more factors:
+* ISO规范下的标准化模型，如 `ISO-27001, ISO-20000, ISO-9001`。
+* 引入Eclipse EMF，可根据设计模型图生成工程化部署文件以及UML反向工程图。
+* `BPMN 2.0` 规范和 `JBPM` 规范提供了完整了企业流程规范。
 
-* ISO Specification such as ISO-27001, ISO-20000, ISO-9001 etc.
-* Eclipse Modeling Framework supported ( EMF ), include UML generator for reverse engineering.
-* BPMN 2.0 Specification supported.
+整体规范基础结构如下**缩略图**：
 
-### 2.3. Schematic
+![](/docs/_image/model.png)
 
-I have published the design schematic diagram of zero
-to: [Zero Architecture](https://www.edrawmax.cn/online/share.html?code=6a3c11741e9411edab98b3f29ce75cdd), you can refer
-the interaction graphic online and this working is on going. The main diagram of **Zero Booting** is as following:
+### 2.3. 启动流程原理
 
-![](./docs/_image/booting.png)
+旧版启动流程原理图如下**缩略图**（两个月前的版本）：
 
-## 3. Envrionment
+![](/docs/_image/booting.png)
 
-* **Back-End**: You can download scaffold project from <https://gitee.com/silentbalanceyh/vertx-zero-scaffold> to
-  initialize zero environment.
-* **Front-End**: You can use command `ai init -name` instead,
-  refer [Front-End Initialize](http://www.vertxai.cn/document/doc-web/module-ai.html#.init).
+## 3. 环境搭建
 
-### 3.1. Configuration in pom.xml
+* **后端脚手架**: <https://gitee.com/silentbalanceyh/vertx-zero-scaffold> 
+* **前端脚手架**: 使用AI命令 `ai init -name` 直接初始化
 
-If you want to use Zero framework, you can add following dependency into you `pom.xml` to use Zero:
+### 3.1. pom.xml 中配置
+
+您可以直接在 `pom.xml` 引入如下配置（1.0中换了 `groupId` ）：
 
 **JDK 17+**, vert.x 4.x
 
 ```xml
+<parent>
+  <artifactId>zero-import</artifactId>
+  <groupId>io.zerows</groupId>
+  <version>0.1.0-SNAPSHOT</version>
+</parent>
 
 <parent>
     <artifactId>vertx-import</artifactId>
@@ -154,9 +148,9 @@ If you want to use Zero framework, you can add following dependency into you `po
 </parent>
 ```
 
-### 3.2. Start Up ( Core )
+### 3.2. 单机启动
 
-In your project, you can provide main entry only as following to run Zero \( Annotated with `@Up` \) .
+基本启动代码如下：
 
 ```java
 import io.vertx.up.VertxApplication;
@@ -171,16 +165,16 @@ public class Driver {
 }
 ```
 
-Once the Zero is up, you can see following logs in your console \( The default port is `6083` \):
+启动后您可以在终端看到类似下边输出 \( 默认端口 `6083` \):
 
 ```
 [ ZERO ] ZeroHttpAgent Http Server has been started successfully. \
     Endpoint: http://0.0.0.0:6083/
 ```
 
-### 3.3. Start Up ( Native Cloud )
+### 3.3. 云端启动
 
-When you want to enable **Aeon System**, you can switch the code as following:
+云端启动依赖 **Aeon System**, 代码如：
 
 ```java
 import io.vertx.aeon.AeonApplication;
@@ -194,97 +188,39 @@ public class Driver {
 }
 ```
 
-## 4. Tips
+> 详细教程参考《Zero云端白皮书》。
 
-### 4.1. Data Specification
+## 5. 其他
 
-In zero framework, we designed uniform data specification as following response data format for business usage:
+### 5.1. 案例清单
 
-```json
-{
-    "data":
-}
-```
+* **Deprecated**: 已放弃
+* **In Progress**: 开发和升级开发
+* **Running**: 生产环境运行
 
-After `0.5.2`, it could support freedom data format response as you wanted such as:
+| 系统名                     | Zero版本 | 系统状态        |
+|-------------------------|--------|-------------|
+| TLK手机视频管理项目（对接爱奇艺）      | 0.4.6  | Deprecated  |
+| ISCCC企业认证评价项目           | 0.8.1  | Running     |
+| 数字化协同办公平台               | 0.8.1  | Running     |
+| 商机管理系统                  | 0.8.1  | Running     |
+| 水果进销存后台管理系统             | 0.8.1  | Running     |
+| 政府内部集中采购平台              | 0.8.1  | Running     |
+| 发票认证集成连接                | 0.8.1  | Running     |
+| CMDB配置化管理系统             | Latest | Running     |
+| ITSM流程管理平台              | Latest | Running     |
+| 资产报送对接                  | Latest | Running     |
+| ISO27000/ISO27001流程管理平台 | Latest | Running     |
+| 企业内部培训平台                | Latest | Running     |
+| 数据分析考卷系统                | Latest | Running     |
+| 医疗器材管理系统                | Latest | In Progress |
+| 酒店管理平台                  | Latest | In Progress |
+| IoT物联网控制中心              | Latest | In Progress |
+| 合规制度管理平台                | Latest | In Progress |
 
-```shell
-Hello World
-1
-...
-```
+### 5.2. 微信群
 
-If you want to switch to freedom mode, you can set the configuration in `vertx.yml` file:
-
-```yaml
-zero:
-  freedom: true     # The default value of `freedom` is false.
-```
-
-### 4.2. Logging in Zero
-
-You can use following function in your coding to get Logger component instead of `log4j` because we have re-designed the
-detail implementation of logging system.
-
-```java
-// Zero Logger initialized, connect to vert.x logging system directly 
-// but uniform managed by zero.
-
-import io.horizon.log.Annal;
-
-// Then in your class
-public final class Statute {
-
-    private static final Annal LOGGER = Annal.get(Statute.class);
-    ......
-}
-```
-
-### 4.3. Oracle Issue
-
-From `0.8.0`, if you want to use Zero Extension of Dynamic Modeling, you need the project
-of <https://github.com/silentbalanceyh/vertx-zero/tree/master/vertx-pin/zero-vista>. The latest version
-is `0.8.0-SNAPSHOT`, you can modify the version and rebuild it. This feature is not needed in Core Framework.
-
-> Above issue has been fixed in `0.9.0`.
-
-## 5. Other Information
-
-### 5.1. Cases List
-
-> Because of Contract and Confidentiality Agreement, removed Sensitive information of customer include system name,
-> customer name etc.
-
-* **Deprecated**: Not Running Now
-* **In Progress**: In Development or Upgraded Development
-* **Running**: Running on Production Environment
-
-| System Information                | Zero Version | Type       | System Status |
-|-----------------------------------|--------------|------------|---------------|
-| TLK Video Mobile System           | 0.4.6        | Commercial | Deprecated    |
-| ISCCC Enterprise Evaluation       | 0.8.1        | Commercial | Running       |
-| Digitization Cooperation Office   | 0.8.1        | Commercial | Running       |
-| Commercial Opportunity Management | 0.8.1        | Commercial | Running       |
-| Fruit PSI Management System       | 0.8.1        | Commercial | Running       |
-| Government Procurement System     | 0.8.1        | Commercial | Running       |
-| Invoice Verification Connector    | 0.8.1        | Commercial | Running       |
-| CMDB Platform of Bank             | Latest       | Commercial | Running       |
-| ITSM Platform of Bank             | Latest       | Commercial | Running       |
-| Integration of PBC Bank           | Latest       | Commercial | Running       |
-| ISO27000 Management Platform      | Latest       | Commercial | Running       |
-| Zero Training Platform            | Latest       | Internal   | Running       |
-| Data Analyzing Exam               | Latest       | Internal   | Running       |
-| Aeon Native Cloud Platform        | Latest       | Internal   | In Progress   |
-| Development Center                | Latest       | Internal   | In Progress   |
-| K8S Integration Monitor System    | Latest       | Internal   | In Progress   |
-| Medical Appliance Management      | Latest       | Commercial | In Progress   |
-| Hotel Management Platform         | Latest       | Commercial | In Progress   |
-| IoT Control System                | Latest       | Commercial | In Progress   |
-| Specification Management Platform | Latest       | Commercial | In Progress   |
-
-### 5.2. WeChat Group
-
-You can send request to me: `445191171` to contact with the author of zero.
+使用: `445191171` 加作者微信，拉群.
 
 <img src="./docs/_image/chat.jpg" width="258" height="258" alt="作者微信"/>
 
