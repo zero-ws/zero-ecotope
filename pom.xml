@@ -2281,9 +2281,11 @@
                                 <!--
                                 最底层
                                 - environment：常量、枚举、运行时
+                                - entry：入口专用目录
                                 - error：异常定义（非模块）
                                 - extension：第三方扩展
                                 -->
+                                <source>src/main/entry</source>
                                 <source>src/main/environment</source>
                                 <source>src/main/error</source>
                                 <source>src/main/extension</source>
@@ -2325,6 +2327,7 @@
                                 容器级
                                 - test: 测试专用
                                 - web: 标准容器
+                                - boot: 启动器专用目录
                                 -->
                                 <source>src/main/test</source>
                                 <source>src/main/web</source>
