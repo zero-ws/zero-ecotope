@@ -103,7 +103,7 @@ different from Service Node.
 In service node, you start up zero instance as following:
 
 ```java
-import io.vertx.up.VertxApplication;
+import io.vertx.boot.VertxApplication;
 import io.vertx.up.annotations.Up;
 
 @Up
@@ -119,7 +119,7 @@ But in api gateway, you must use another class for start up, you must use `io.ve
 annotation for launcher:
 
 ```java
-import io.vertx.up.VertxApplication;
+import io.vertx.boot.VertxApplication;
 import io.vertx.up.annotations.ApiGateway;
 import io.vertx.up.annotations.Up;
 

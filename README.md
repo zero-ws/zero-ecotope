@@ -2,13 +2,18 @@
 
 [![Apache License 2](https://img.shields.io/badge/license-ASF2-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0.txt)
 
-Zero Ecotope Framework 是一个基于 [Vert.x](http://vertx.io) 的中间件容器，它可以帮助软件开发人员在 Vert.x 中快速开发和实施，集中精力处理项目需求中的业务逻辑而忽略开发过程中的部分细节，项目起源于早期在 Vert.x 生态中缺少类似 [Spring Boot](https://spring.io/projects/spring-boot/) 的快速开发工具，Zero 项目的目标是打造 Vert.x 生态中的 Spring Boot，目前整个框架已经发展到**第六个**年头，大大小小运行了15个左右的企业项目：
+Zero Ecotope Framework 是一个基于 [Vert.x](http://vertx.io) 的中间件容器，它可以帮助软件开发人员在 Vert.x
+中快速开发和实施，集中精力处理项目需求中的业务逻辑而忽略开发过程中的部分细节，项目起源于早期在 Vert.x
+生态中缺少类似 [Spring Boot](https://spring.io/projects/spring-boot/) 的快速开发工具，Zero 项目的目标是打造 Vert.x 生态中的
+Spring Boot，目前整个框架已经发展到**第六个**年头，大大小小运行了15个左右的企业项目：
 
 ![](https://raw.githubusercontent.com/zero-ws/zero-ecotope/master/docs/_image/life.png)
 
 > 一直没有发布 1.0 的版本是因为作为工业级和企业级项目框架，对数据本身比较严谨，一直等待着收集更多生产环境数据，从功能、性能、交付效率上为开发人员提供更加成熟的值得信赖的解决方案。
 
-2023年，Zero前后端进行了大规模的重构，前端引入了 `微框架` 和 `开发中心`，后端引入了云原生对接（[K8S](https://kubernetes.io/) 和 [Istio](https://istio.io/) ）、行业建模工具、元数据标准、企业数字化辅助方案，对 **开发、测试、运维** 流程提供了更加成熟的功能，解决企业在数字化转型过程中面临的各种问题。
+2023年，Zero前后端进行了大规模的重构，前端引入了 `微框架` 和 `开发中心`，后端引入了云原生对接（[K8S](https://kubernetes.io/)
+和 [Istio](https://istio.io/) ）、行业建模工具、元数据标准、企业数字化辅助方案，对 **开发、测试、运维**
+流程提供了更加成熟的功能，解决企业在数字化转型过程中面临的各种问题。
 
 ## 1. 基础功能
 
@@ -20,14 +25,14 @@ Zero Ecotope Framework 是一个基于 [Vert.x](http://vertx.io) 的中间件容
 
 | Name           | Comment                                                                                  |
 |----------------|------------------------------------------------------------------------------------------|
-| zero-ecotope | （语义：生态）<br/>根项目主项目、版本管理、文档管理等。                                                           |
+| zero-ecotope   | （语义：生态）<br/>根项目主项目、版本管理、文档管理等。                                                           |
 | zero-epic      | （语义：史诗篇章）<br/>内含 AMS （Agreed Metadata Specification）的接口设计和定义规范，可作为最底层跨框架的基础功能库底座。        |
 | zero-elite     | （语义：精英）<br/>Zero Core 核心框架，包含各种内置组件、功能函数、编排器等，为上层容器提供基础功能支撑。                             |
 | zero-energy    | （语义：能源）<br/>Zero Web 容器，容器主要用于单机运行和OSGI插件化运行，OSGI部分开发中。                                  |
 | zero-equip     | （语义：装备）<br/>**Infix Architecture** 下的功能插件模块。                                             |
 | zero-extension | （语义：扩展）<br/>**Zero Extension** 扩展业务插件模块，类似 [ODOO](https://www.odoo.com/). 的功能拓展，带部分业务功能。 |
-| zero-external | （语义：外部集成）<br/>**Zero External** 动态建模专用外联插件。                                              |
-| zero-entry | （语义：入口）<br/>Zero入口项目，包含开发模式的 `import POM` 和单机版脚手架专用依赖集。                                  |
+| zero-external  | （语义：外部集成）<br/>**Zero External** 动态建模专用外联插件。                                              |
+| zero-entry     | （语义：入口）<br/>Zero入口项目，包含开发模式的 `import POM` 和单机版脚手架专用依赖集。                                  |
 
 ### 1.2. 常用链接
 
@@ -44,7 +49,9 @@ Zero Ecotope Framework 是一个基于 [Vert.x](http://vertx.io) 的中间件容
 
 ### 1.3. 元数据标准 ( AMS )
 
-最新版本中 `> 0.9.0`，重新设计了系统最底层，提供了跨框架和跨容器的 **元数据标准**，详情参考：[《9.标准化》](https://www.vertx-cloud.cn/document/doc-web/index.html#_%E6%A0%87%E5%87%86%E5%8C%96)，此标准可作为 Vert.x 引入独立项目的底层功能使用。
+最新版本中 `> 0.9.0`，重新设计了系统最底层，提供了跨框架和跨容器的 **元数据标准**
+，详情参考：[《9.标准化》](https://www.vertx-cloud.cn/document/doc-web/index.html#_%E6%A0%87%E5%87%86%E5%8C%96)，此标准可作为
+Vert.x 引入独立项目的底层功能使用。
 
 ```xml
 <!-- 0.9.0 -->
@@ -63,7 +70,8 @@ Zero Ecotope Framework 是一个基于 [Vert.x](http://vertx.io) 的中间件容
 
 ## 2. 俯瞰
 
-> 换了个名字 `Ecotope` 是因为整个框架目前合计超过 50 多个子项目，而因为强迫症，目前所有项目的主项目命名为 `zero-e` 前缀，参考项目语义。
+> 换了个名字 `Ecotope` 是因为整个框架目前合计超过 50 多个子项目，而因为强迫症，目前所有项目的主项目命名为 `zero-e`
+> 前缀，参考项目语义。
 
 ### 2.1. 模块化
 
@@ -103,7 +111,7 @@ Zero Ecotope Framework 是一个基于 [Vert.x](http://vertx.io) 的中间件容
 
 ## 3. 环境搭建
 
-* **后端脚手架**: <https://gitee.com/silentbalanceyh/vertx-zero-scaffold> 
+* **后端脚手架**: <https://gitee.com/silentbalanceyh/vertx-zero-scaffold>
 * **前端脚手架**: 使用AI命令 `ai init -name` 直接初始化
 
 ### 3.1. pom.xml 中配置
@@ -153,7 +161,7 @@ Zero Ecotope Framework 是一个基于 [Vert.x](http://vertx.io) 的中间件容
 基本启动代码如下：
 
 ```java
-import io.vertx.up.VertxApplication;
+import io.vertx.boot.VertxApplication;
 import io.vertx.up.annotations.Up;
 
 @Up

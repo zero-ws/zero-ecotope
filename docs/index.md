@@ -153,7 +153,7 @@ If you want to use Zero framework, you can add following dependency into you `po
 In your project, you can provide main entry only as following to run Zero \( Annotated with `@Up` \) .
 
 ```java
-import io.vertx.up.VertxApplication;
+import io.vertx.boot.VertxApplication;
 import io.vertx.up.annotations.Up;
 
 @Up
