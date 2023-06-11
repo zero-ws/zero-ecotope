@@ -43,3 +43,4 @@ script/code/*.jar
 git-push.sh
 git-upstream.sh
 tree.txt
+archive
