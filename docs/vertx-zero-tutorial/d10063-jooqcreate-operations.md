@@ -204,14 +204,14 @@ request, you can see following results:
 
 ```json
 {
-    "key":172,
-    "name":"Lang3",
+    "key": 172,
+    "name": "Lang3",
     "active": true,
-    "sigma": "test",
+    "sigma": "mock",
     "language": "cn",
-    "code":"LANG.CODEEX",
-    "type":"testx.type",
-    "order":3
+    "code": "LANG.CODEEX",
+    "type": "testx.type",
+    "order": 3
 }
 ```
 
@@ -228,7 +228,7 @@ request, you can see following results:
         "code": "LANG.CODEX",
         "name": "Lang3",
         "order": 3,
-        "sigma": "test",
+        "sigma": "mock",
         "language": "cn"
     }
 }

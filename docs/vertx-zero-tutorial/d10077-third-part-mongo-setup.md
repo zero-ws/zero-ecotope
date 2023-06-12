@@ -67,7 +67,7 @@ Be sure you could see the segment `security: { authorization: "enabled" }`
 ```shell
 ➜  ~ mongo localhost:6017
 MongoDB shell version v3.6.2
-connecting to: mongodb://localhost:6017/test
+connecting to: mongodb://localhost:6017/mock
 MongoDB server version: 3.6.2
 >
 ```

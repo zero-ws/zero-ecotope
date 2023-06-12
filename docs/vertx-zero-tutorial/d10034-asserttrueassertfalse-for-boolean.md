@@ -68,7 +68,7 @@ public class AssertActor {
 ```json
 {
     "code": -60004,
-    "message": "[ERR-60004] (ZeroSerializer) Web Exception occus: (400) - Zero system detect conversation from \"test\" to type \"class java.lang.Boolean\", but its conflict."
+    "message": "[ERR-60004] (ZeroSerializer) Web Exception occus: (400) - Zero system detect conversation from \"mock\" to type \"class java.lang.Boolean\", but its conflict."
 }
 ```
 

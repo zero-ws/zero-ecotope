@@ -77,6 +77,7 @@ import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.EndPoint;
 
 import jakarta.ws.rs.BodyParam;
+
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 
@@ -84,7 +85,7 @@ import javax.ws.rs.Path;
 @Path("/api")
 public interface MongoApi {
 
-    @Path("native/test")
+    @Path("native/mock")
     @POST
     @Address("ZERO://QUEUE/NATIVE/MONGO")
     JsonObject sayMongo(@BodyParam JsonObject params);

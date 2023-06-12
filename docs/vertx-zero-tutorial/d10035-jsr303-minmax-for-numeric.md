@@ -37,11 +37,11 @@ public class NumericActor {
     @Path("numeric")
     @GET
     public String sayNum(
-            @Min(10)
-            @Max(100)
-            @QueryParam("age") final Integer age,
-            @Min(1)
-            @QueryParam("test") final Integer test
+        @Min(10)
+        @Max(100)
+        @QueryParam("age") final Integer age,
+        @Min(1)
+        @QueryParam("mock") final Integer test
     ) {
         return "Hello, please check your age. " + age;
     }
