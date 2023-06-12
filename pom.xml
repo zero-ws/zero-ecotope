@@ -2370,6 +2370,12 @@
                                 <include>**/*</include>
                             </includes>
                         </fileset>
+                        <fileset>
+                            <directory>document</directory>
+                            <includes>
+                                <include>**/*</include>
+                            </includes>
+                        </fileset>
                     </filesets>
                 </configuration>
             </plugin>
