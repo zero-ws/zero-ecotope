@@ -306,6 +306,9 @@
         <maven.plugin.os>1.7.1</maven.plugin.os>
         <!-- https://mvnrepository.com/artifact/org.codehaus.mojo/build-helper-maven-plugin -->
         <maven.plugin.helper>3.4.0</maven.plugin.helper>
+        <!-- OSGI -->
+        <!-- https://mvnrepository.com/artifact/org.apache.felix/maven-bundle-plugin -->
+        <maven.plugin.bundle>5.1.9</maven.plugin.bundle>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -1964,6 +1967,12 @@
     <build>
         <pluginManagement>
             <plugins>
+                <!-- https://mvnrepository.com/artifact/org.apache.felix/maven-bundle-plugin -->
+                <plugin>
+                    <groupId>org.apache.felix</groupId>
+                    <artifactId>maven-bundle-plugin</artifactId>
+                    <version>${maven.plugin.bundle}</version>
+                </plugin>
                 <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-dependency-plugin -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
