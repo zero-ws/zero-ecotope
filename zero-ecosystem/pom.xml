@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <dependencyManagement>
         <dependencies>
+
             <!-- Apache -->
             <dependency>
                 <groupId>io.zerows</groupId>
@@ -172,6 +173,25 @@
                 <version>${zero.version}</version>
                 <scope>import</scope>
                 <type>pom</type>
+            </dependency>
+
+            <!--
+            Camunda 默认带的库相关信息
+            低优先级模式：Maven库中，放在后边的依赖优先级更低，前边的依赖优先级更高
+             -->
+            <dependency>
+                <groupId>org.camunda.bpm</groupId>
+                <artifactId>camunda-bom</artifactId>
+                <version>${camunda.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>org.camunda.bpm.dmn</groupId>
+                <artifactId>camunda-engine-dmn-bom</artifactId>
+                <version>${camunda.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>

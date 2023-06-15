@@ -13,6 +13,7 @@
     <name>Version Camunda / ${camunda.version}</name>
     <dependencyManagement>
         <dependencies>
+
             <!-- https://mvnrepository.com/artifact/org.camunda.commons/camunda-commons-testing -->
             <dependency>
                 <groupId>org.camunda.commons</groupId>
@@ -121,21 +122,6 @@
                         <artifactId>slf4j-api</artifactId>
                     </exclusion>
                 </exclusions>
-            </dependency>
-            <!-- Camunda -->
-            <dependency>
-                <groupId>org.camunda.bpm</groupId>
-                <artifactId>camunda-bom</artifactId>
-                <version>${camunda.version}</version>
-                <scope>import</scope>
-                <type>pom</type>
-            </dependency>
-            <dependency>
-                <groupId>org.camunda.bpm.dmn</groupId>
-                <artifactId>camunda-engine-dmn-bom</artifactId>
-                <version>${camunda.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>

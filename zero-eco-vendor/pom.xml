@@ -74,12 +74,6 @@
                 <artifactId>feign-jackson</artifactId>
                 <version>${feign.version}</version>
             </dependency>
-            <!-- https://mvnrepository.com/artifact/joda-time/joda-time -->
-            <dependency>
-                <groupId>joda-time</groupId>
-                <artifactId>joda-time</artifactId>
-                <version>${joda.version}</version>
-            </dependency>
             <!-- https://mvnrepository.com/artifact/info.picocli/picocli -->
             <dependency>
                 <groupId>info.picocli</groupId>
@@ -111,6 +105,12 @@
                 <groupId>org.checkerframework</groupId>
                 <artifactId>checker-qual</artifactId>
                 <version>${checker.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/joda-time/joda-time -->
+            <dependency>
+                <groupId>joda-time</groupId>
+                <artifactId>joda-time</artifactId>
+                <version>${joda.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
