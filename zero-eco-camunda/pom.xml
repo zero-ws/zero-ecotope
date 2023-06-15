@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>zero-ecotope</artifactId>
+        <groupId>io.zerows</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>zero-eco-camunda</artifactId>
+    <packaging>pom</packaging>
+    <name>Version Camunda / ${camunda.version}</name>
+    <dependencyManagement>
+        <dependencies>
+            <!-- https://mvnrepository.com/artifact/org.camunda.commons/camunda-commons-testing -->
+            <dependency>
+                <groupId>org.camunda.commons</groupId>
+                <artifactId>camunda-commons-testing</artifactId>
+                <version>${camunda.util.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.camunda.commons/camunda-commons-utils -->
+            <dependency>
+                <groupId>org.camunda.commons</groupId>
+                <artifactId>camunda-commons-utils</artifactId>
+                <version>${camunda.util.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.camunda.commons/camunda-commons-logging -->
+            <dependency>
+                <groupId>org.camunda.commons</groupId>
+                <artifactId>camunda-commons-logging</artifactId>
+                <version>${camunda.util.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.camunda.connect/camunda-connect-core -->
+            <dependency>
+                <groupId>org.camunda.connect</groupId>
+                <artifactId>camunda-connect-core</artifactId>
+                <version>${camunda.connect.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.camunda.connect/camunda-connect-soap-http-client -->
+            <dependency>
+                <groupId>org.camunda.connect</groupId>
+                <artifactId>camunda-connect-soap-http-client</artifactId>
+                <version>${camunda.connect.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.camunda.connect/camunda-connect-http-client -->
+            <dependency>
+                <groupId>org.camunda.connect</groupId>
+                <artifactId>camunda-connect-http-client</artifactId>
+                <version>${camunda.connect.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.camunda.connect/camunda-connect-connectors-all -->
+            <dependency>
+                <groupId>org.camunda.connect</groupId>
+                <artifactId>camunda-connect-connectors-all</artifactId>
+                <version>${camunda.connect.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.camunda.spin/camunda-spin-dataformat-xml-dom -->
+            <dependency>
+                <groupId>org.camunda.spin</groupId>
+                <artifactId>camunda-spin-dataformat-xml-dom</artifactId>
+                <version>${camunda.spin.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-api</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.camunda.spin/camunda-spin-dataformat-xml-dom-jakarta -->
+            <dependency>
+                <groupId>org.camunda.spin</groupId>
+                <artifactId>camunda-spin-dataformat-xml-dom-jakarta</artifactId>
+                <version>${camunda.spin.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.camunda.spin/camunda-spin-dataformat-all -->
+            <dependency>
+                <groupId>org.camunda.spin</groupId>
+                <artifactId>camunda-spin-dataformat-all</artifactId>
+                <version>${camunda.spin.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-api</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.camunda.spin/camunda-spin-dataformat-json-jackson -->
+            <dependency>
+                <groupId>org.camunda.spin</groupId>
+                <artifactId>camunda-spin-dataformat-json-jackson</artifactId>
+                <version>${camunda.spin.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-api</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.camunda.spin/camunda-spin-core -->
+            <dependency>
+                <groupId>org.camunda.spin</groupId>
+                <artifactId>camunda-spin-core</artifactId>
+                <version>${camunda.spin.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-api</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.camunda.bpm.extension.xslt/camunda-bpm-xslt -->
+            <dependency>
+                <groupId>org.camunda.bpm.extension.xslt</groupId>
+                <artifactId>camunda-bpm-xslt</artifactId>
+                <version>${camunda.bpm.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-api</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <!-- Camunda -->
+            <dependency>
+                <groupId>org.camunda.bpm</groupId>
+                <artifactId>camunda-bom</artifactId>
+                <version>${camunda.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>org.camunda.bpm.dmn</groupId>
+                <artifactId>camunda-engine-dmn-bom</artifactId>
+                <version>${camunda.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>
