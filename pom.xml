@@ -40,12 +40,12 @@
         <snapshotRepository>
             <id>oss</id>
             <name>Maven Central Snapshots Repository</name>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
         <repository>
             <id>oss</id>
             <name>Maven Central Staging Repository</name>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2</url>
         </repository>
     </distributionManagement>
     <modules>
@@ -476,7 +476,7 @@
                     <extensions>true</extensions>
                     <configuration>
                         <serverId>oss</serverId>
-                        <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                        <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
                         <autoReleaseAfterClose>true</autoReleaseAfterClose>
                     </configuration>
                 </plugin>
@@ -517,6 +517,12 @@
             <!-- Source -->
             <plugin>
                 <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>generate-sources</id>
+                        <phase>deploy</phase>
+                    </execution>
+                </executions>
             </plugin>
             <!-- Staging -->
             <plugin>
@@ -530,7 +536,8 @@
                 </configuration>
             </plugin>
             <!-- Deploy Only -->
-            <!--<plugin>
+            <!--
+            <plugin>
                 <artifactId>maven-gpg-plugin</artifactId>
                 <version>${maven.plugin.pgp}</version>
                 <executions>
@@ -541,13 +548,13 @@
                             <goal>sign</goal>
                         </goals>
                         <configuration>
-                            <executable>gpg2</executable>
                             <keyname>lang.yu</keyname>
-                            <passphrase>${env.Z_DBR_PASS}</passphrase>
+                            <passphraseServerId>oss</passphraseServerId>
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>-->
+            </plugin>
+            -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>versions-maven-plugin</artifactId>
