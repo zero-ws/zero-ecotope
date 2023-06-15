@@ -70,8 +70,19 @@
         <module>zero-eco-reactive</module><!-- Reactive 版本 -->
         <module>zero-eco-vendor</module><!-- 第三方其他：Vendor 版本 -->
         <module>zero-eco-vertx</module><!-- Vertx 版本 -->
-        <!-- Zero 版本号 -->
-        <module>zero-eco-version</module><!-- Version 版本 -->
+        <!--
+        project.version
+        （内部使用）Zero 版本号
+        -->
+        <module>zero-eco-version</module>
+        <!--
+        zero.version
+        （外部使用）插件部分，ecosystem 不导入，在 import 中导入
+        -->
+        <module>zero-version-core</module>
+        <module>zero-version-dynamic</module>
+        <module>zero-version-extension</module>
+        <module>zero-version-infix</module>
     </modules>
     <properties>
         <!-- Zero 固定版本号 -->
