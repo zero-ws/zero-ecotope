@@ -165,7 +165,7 @@
         <!-- module: ============== zero-eco-google ============================= -->
         <google.guice.version>7.0.0</google.guice.version>
         <google.guava.version>32.0.1-jre</google.guava.version>
-        <google.errorprone.version>2.19.1</google.errorprone.version>
+        <google.errorprone.version>2.20.0</google.errorprone.version>
         <google.jsr305.version>3.0.2</google.jsr305.version>
         <google.etcd.version>2.18.0</google.etcd.version>
         <google.protobuf.version>3.23.3</google.protobuf.version>
