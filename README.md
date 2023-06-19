@@ -60,11 +60,11 @@ Vert.x 引入独立项目的底层功能使用。
     <groupId>cn.vertxup</groupId>
     <version>${ZERO_VERSION}</version>
 </dependency>
-<!-- 1.0-SNAPSHOT -->
+        <!-- 1.0-SNAPSHOT -->
 <dependency>
-    <artifactId>zero-ams</artifactId>
-    <groupId>io.zerows</groupId>
-    <version>${ZERO_VERSION}</version>
+<artifactId>zero-ams</artifactId>
+<groupId>io.zerows</groupId>
+<version>${ZERO_VERSION}</version>
 </dependency>
 ```
 
@@ -118,14 +118,30 @@ Vert.x 引入独立项目的底层功能使用。
 
 您可以直接在 `pom.xml` 引入如下配置（1.0中换了 `groupId` ）：
 
+**JDK 17+**, vert.x 4.x（1.0-SNAPSHOT）
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <!-- 继承部分 -->
+    <parent>
+        <groupId>io.zerows</groupId>
+        <artifactId>zero-import</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <!-- 依赖部分 -->
+    <dependencies>
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-mini</artifactId>
+        </dependency>
+    </dependencies>
+</project>
+```
+
 **JDK 17+**, vert.x 4.x
 
 ```xml
-<parent>
-  <artifactId>zero-import</artifactId>
-  <groupId>io.zerows</groupId>
-  <version>0.1.0-SNAPSHOT</version>
-</parent>
 
 <parent>
     <artifactId>vertx-import</artifactId>
