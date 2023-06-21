@@ -210,7 +210,7 @@
 
         <!-- module: ============== zero-eco-netty ============================== -->
         <netty.tcnative.version>2.0.61.Final</netty.tcnative.version>
-        <netty.version>4.1.93.Final</netty.version>
+        <netty.version>4.1.94.Final</netty.version>
 
 
         <!-- module: ============== zero-eco-quiz =============================== -->
@@ -226,7 +226,7 @@
 
 
         <!-- module: ============== zero-eco-secure ============================= -->
-        <hibernate.validator.version>8.0.0.Final</hibernate.validator.version><!-- Bean Validation -->
+        <hibernate.validator.version>8.0.1.Final</hibernate.validator.version><!-- Bean Validation -->
         <jwt.version>4.4.0</jwt.version>
         <sshd.version>2.10.0</sshd.version><!-- For Security: CVE-2022-45047 -->
 
