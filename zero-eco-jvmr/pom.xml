@@ -13,7 +13,7 @@
     <name>Version JVM Reflection</name>
     <dependencyManagement>
         <dependencies>
-            <!-- http://www.mvnrepository.com/artifact/com.esotericsoftware/reflectasm/ -->
+            <!-- https://mvnrepository.com/artifact/com.esotericsoftware/reflectasm -->
             <dependency>
                 <groupId>com.esotericsoftware</groupId>
                 <artifactId>reflectasm</artifactId>
