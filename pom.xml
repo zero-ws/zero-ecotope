@@ -133,7 +133,7 @@
 
         <!-- module: ============== zero-eco-database =========================== -->
         <hikari.cp.version>5.0.1</hikari.cp.version><!-- Database -->
-        <jooq.version>3.18.4</jooq.version>
+        <jooq.version>3.18.5</jooq.version>
         <jooq.vertx.version>6.5.5</jooq.vertx.version>
         <mysql.version>8.0.33</mysql.version><!-- Database: RDBMS -->
         <liquibase.version>4.22.0</liquibase.version><!-- Database: Liquibase -->
