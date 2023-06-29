@@ -138,7 +138,7 @@
         <mysql.version>8.0.33</mysql.version><!-- Database: RDBMS -->
         <liquibase.version>4.23.0</liquibase.version><!-- Database: Liquibase -->
         <mongodb.async.version>3.12.14</mongodb.async.version><!-- Database: MongoDb -->
-        <neo4j.version>5.9.0</neo4j.version><!-- Database: Neo4j -->
+        <neo4j.version>5.10.0</neo4j.version><!-- Database: Neo4j -->
         <mybatis.version>3.5.13</mybatis.version>
 
 
@@ -158,13 +158,13 @@
         <logging.logback.version>1.4.8</logging.logback.version>
         <logging.logback.cal10n.version>0.8.1</logging.logback.cal10n.version>
         <logging.slf4j.version>2.0.7</logging.slf4j.version>
-        <elasticsearch.version>8.8.1</elasticsearch.version>
-        <elasticsearch.client.version>7.17.10</elasticsearch.client.version>
+        <elasticsearch.version>8.8.2</elasticsearch.version>
+        <elasticsearch.client.version>7.17.11</elasticsearch.client.version>
 
 
         <!-- module: ============== zero-eco-google ============================= -->
         <google.guice.version>7.0.0</google.guice.version>
-        <google.guava.version>32.0.1-jre</google.guava.version>
+        <google.guava.version>32.1.0-jre</google.guava.version>
         <google.errorprone.version>2.20.0</google.errorprone.version>
         <google.jsr305.version>3.0.2</google.jsr305.version>
         <google.etcd.version>2.18.0</google.etcd.version>
