@@ -164,7 +164,7 @@
 
         <!-- module: ============== zero-eco-google ============================= -->
         <google.guice.version>7.0.0</google.guice.version>
-        <google.guava.version>32.1.0-jre</google.guava.version>
+        <google.guava.version>32.1.1-jre</google.guava.version>
         <google.errorprone.version>2.20.0</google.errorprone.version>
         <google.jsr305.version>3.0.2</google.jsr305.version>
         <google.etcd.version>2.18.0</google.etcd.version>
@@ -174,7 +174,7 @@
 
 
         <!-- module: ============== zero-eco-grpc =============================== -->
-        <grpc.version>1.56.0</grpc.version>
+        <grpc.version>1.56.1</grpc.version>
 
 
         <!-- module: ============== zero-eco-jackson ============================ -->
