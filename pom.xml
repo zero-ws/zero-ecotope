@@ -238,7 +238,7 @@
         <feign.version>8.18.0</feign.version>
         <joda.version>2.12.5</joda.version>
         <jedis.version>4.4.3</jedis.version>
-        <checker.version>3.35.0</checker.version>
+        <checker.version>3.36.0</checker.version>
         <picoli.version>4.7.4</picoli.version>
         <hdr.version>2.1.12</hdr.version>
         <codehaus.janino.version>3.1.9</codehaus.janino.version>
