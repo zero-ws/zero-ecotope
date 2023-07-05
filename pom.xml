@@ -241,7 +241,7 @@
         <checker.version>3.36.0</checker.version>
         <picoli.version>4.7.4</picoli.version>
         <hdr.version>2.1.12</hdr.version>
-        <codehaus.janino.version>3.1.9</codehaus.janino.version>
+        <codehaus.janino.version>3.1.10</codehaus.janino.version>
         <codehaus.mojo.version>1.23</codehaus.mojo.version>
 
 
