@@ -119,7 +119,7 @@
 
         <!-- module: ============== zero-eco-camunda ============================ -->
         <camunda.version>7.19.0</camunda.version>
-        <camunda.spin.version>1.19.2</camunda.spin.version>
+        <camunda.spin.version>1.20.0</camunda.spin.version>
         <camunda.bpm.version>1.2.0</camunda.bpm.version>
         <camunda.connect.version>1.5.6</camunda.connect.version>
         <camunda.util.version>1.12.0</camunda.util.version>
@@ -135,7 +135,7 @@
         <hikari.cp.version>5.0.1</hikari.cp.version><!-- Database -->
         <jooq.version>3.18.5</jooq.version>
         <jooq.vertx.version>6.5.5</jooq.vertx.version>
-        <mysql.version>8.0.33</mysql.version><!-- Database: RDBMS -->
+        <mysql.version>8.1.0</mysql.version><!-- Database: RDBMS -->
         <liquibase.version>4.23.0</liquibase.version><!-- Database: Liquibase -->
         <mongodb.async.version>3.12.14</mongodb.async.version><!-- Database: MongoDb -->
         <neo4j.version>5.10.0</neo4j.version><!-- Database: Neo4j -->
