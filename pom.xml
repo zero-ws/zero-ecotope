@@ -97,7 +97,7 @@
         <!--                        子模块属性定义                                  -->
         <!-- module: ============== zero-eco-apache ============================= -->
         <common.jexl.version>3.3</common.jexl.version><!-- Apache Common -->
-        <common.lang3.version>3.12.0</common.lang3.version>
+        <common.lang3.version>3.13.0</common.lang3.version>
         <common.net.version>3.9.0</common.net.version>
         <common.codec.version>1.16.0</common.codec.version>
         <common.cli.version>1.5.0</common.cli.version>
@@ -138,7 +138,7 @@
         <mysql.version>8.1.0</mysql.version><!-- Database: RDBMS -->
         <liquibase.version>4.23.0</liquibase.version><!-- Database: Liquibase -->
         <mongodb.async.version>3.12.14</mongodb.async.version><!-- Database: MongoDb -->
-        <neo4j.version>5.10.0</neo4j.version><!-- Database: Neo4j -->
+        <neo4j.version>5.11.0</neo4j.version><!-- Database: Neo4j -->
         <mybatis.version>3.5.13</mybatis.version>
 
 
@@ -159,7 +159,7 @@
         <logging.logback.cal10n.version>0.8.1</logging.logback.cal10n.version>
         <logging.slf4j.version>2.0.7</logging.slf4j.version>
         <elasticsearch.version>8.9.0</elasticsearch.version>
-        <elasticsearch.client.version>7.17.11</elasticsearch.client.version>
+        <elasticsearch.client.version>7.17.12</elasticsearch.client.version>
 
 
         <!-- module: ============== zero-eco-google ============================= -->
@@ -174,7 +174,7 @@
 
 
         <!-- module: ============== zero-eco-grpc =============================== -->
-        <grpc.version>1.56.1</grpc.version>
+        <grpc.version>1.57.0</grpc.version>
 
 
         <!-- module: ============== zero-eco-jackson ============================ -->
@@ -210,7 +210,7 @@
 
         <!-- module: ============== zero-eco-netty ============================== -->
         <netty.tcnative.version>2.0.61.Final</netty.tcnative.version>
-        <netty.version>4.1.95.Final</netty.version>
+        <netty.version>4.1.96.Final</netty.version>
 
 
         <!-- module: ============== zero-eco-quiz =============================== -->
