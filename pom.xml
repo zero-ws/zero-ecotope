@@ -155,7 +155,7 @@
         <!-- module: ============== zero-eco-elk ================================ -->
         <logging.common.version>1.2</logging.common.version>
         <logging.log4j2.version>2.20.0</logging.log4j2.version>
-        <logging.logback.version>1.4.8</logging.logback.version>
+        <logging.logback.version>1.4.9</logging.logback.version>
         <logging.logback.cal10n.version>0.8.1</logging.logback.cal10n.version>
         <logging.slf4j.version>2.0.7</logging.slf4j.version>
         <elasticsearch.version>8.9.0</elasticsearch.version>
@@ -165,7 +165,7 @@
         <!-- module: ============== zero-eco-google ============================= -->
         <google.guice.version>7.0.0</google.guice.version>
         <google.guava.version>32.1.2-jre</google.guava.version>
-        <google.errorprone.version>2.21.0</google.errorprone.version>
+        <google.errorprone.version>2.21.1</google.errorprone.version>
         <google.jsr305.version>3.0.2</google.jsr305.version>
         <google.etcd.version>2.18.0</google.etcd.version>
         <google.protobuf.version>3.23.4</google.protobuf.version>
@@ -180,7 +180,7 @@
         <!-- module: ============== zero-eco-jackson ============================ -->
         <jackson.version>2.15.2</jackson.version>
         <jackson.uuid.generator>4.2.0</jackson.uuid.generator>
-        <yaml.version>2.0</yaml.version>
+        <yaml.version>2.1</yaml.version>
 
 
         <!-- module: ============== zero-eco-jsr ================================ -->
