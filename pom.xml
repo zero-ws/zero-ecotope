@@ -113,13 +113,13 @@
 
 
         <!-- module: ============== zero-eco-aspectj ============================= -->
-        <aspectj.version>1.9.19</aspectj.version>
+        <aspectj.version>1.9.20</aspectj.version>
         <jcabi.version>0.25.1</jcabi.version>
 
 
         <!-- module: ============== zero-eco-camunda ============================ -->
         <camunda.version>7.19.0</camunda.version>
-        <camunda.spin.version>1.20.0</camunda.spin.version>
+        <camunda.spin.version>1.21.0</camunda.spin.version>
         <camunda.bpm.version>1.2.0</camunda.bpm.version>
         <camunda.connect.version>1.5.6</camunda.connect.version>
         <camunda.util.version>1.12.0</camunda.util.version>
@@ -174,7 +174,7 @@
 
 
         <!-- module: ============== zero-eco-grpc =============================== -->
-        <grpc.version>1.57.1</grpc.version>
+        <grpc.version>1.57.2</grpc.version>
 
 
         <!-- module: ============== zero-eco-jackson ============================ -->
@@ -222,7 +222,7 @@
         <rxjava2.version>2.2.21</rxjava2.version>
         <rxjava3.version>3.1.6</rxjava3.version>
         <reactive.streams.version>1.0.4</reactive.streams.version>
-        <io.reactor.version>3.5.8</io.reactor.version>
+        <io.reactor.version>3.5.9</io.reactor.version>
 
 
         <!-- module: ============== zero-eco-secure ============================= -->
