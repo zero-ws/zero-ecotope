@@ -210,7 +210,7 @@
 
         <!-- module: ============== zero-eco-netty ============================== -->
         <netty.tcnative.version>2.0.61.Final</netty.tcnative.version>
-        <netty.version>4.1.96.Final</netty.version>
+        <netty.version>4.1.97.Final</netty.version>
 
 
         <!-- module: ============== zero-eco-quiz =============================== -->
@@ -220,7 +220,7 @@
 
         <!-- module: ============== zero-eco-reactive =========================== -->
         <rxjava2.version>2.2.21</rxjava2.version>
-        <rxjava3.version>3.1.6</rxjava3.version>
+        <rxjava3.version>3.1.7</rxjava3.version>
         <reactive.streams.version>1.0.4</reactive.streams.version>
         <io.reactor.version>3.5.9</io.reactor.version>
 
