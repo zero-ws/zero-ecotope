@@ -246,8 +246,8 @@
 
 
         <!-- module: ============== zero-eco-vertx ============================== -->
-        <vertx.version>4.4.4</vertx.version>
-        <stack.version>4.4.4</stack.version>
+        <vertx.version>4.4.5</vertx.version>
+        <stack.version>4.4.5</stack.version>
 
 
         <!-- ====================== Maven插件 ============================= -->
