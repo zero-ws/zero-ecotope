@@ -149,7 +149,7 @@
 
 
         <!-- module: ============== zero-eco-eclipse ============================ -->
-        <eclipse.git.version>6.6.0.202305301015-r</eclipse.git.version>
+        <eclipse.git.version>6.6.1.202309021850-r</eclipse.git.version>
 
 
         <!-- module: ============== zero-eco-elk ================================ -->
@@ -157,7 +157,7 @@
         <logging.log4j2.version>2.20.0</logging.log4j2.version>
         <logging.logback.version>1.4.11</logging.logback.version>
         <logging.logback.cal10n.version>0.8.1</logging.logback.cal10n.version>
-        <logging.slf4j.version>2.0.7</logging.slf4j.version>
+        <logging.slf4j.version>2.0.9</logging.slf4j.version>
         <elasticsearch.version>8.9.1</elasticsearch.version>
         <elasticsearch.client.version>7.17.12</elasticsearch.client.version>
 
@@ -237,8 +237,8 @@
         <scala.version>2.13.11</scala.version>
         <feign.version>8.18.0</feign.version>
         <joda.version>2.12.5</joda.version>
-        <jedis.version>4.4.3</jedis.version>
-        <checker.version>3.37.0</checker.version>
+        <jedis.version>5.0.0</jedis.version>
+        <checker.version>3.38.0</checker.version>
         <picoli.version>4.7.5</picoli.version>
         <hdr.version>2.1.12</hdr.version>
         <codehaus.janino.version>3.1.10</codehaus.janino.version>
