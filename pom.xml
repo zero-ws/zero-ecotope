@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.zerows</groupId>
     <artifactId>zero-ecotope</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0-RC</version>
     <name>Zero Ecotope Framework</name>
     <description>Zero Ecotope Framework is a tool for Service Mesh Micro Service.</description>
     <url>http://www.zerows.io</url>
@@ -86,7 +86,7 @@
     </modules>
     <properties>
         <!-- Zero 固定版本号 -->
-        <zero.version>1.0-SNAPSHOT</zero.version>
+        <zero.version>1.0-RC</zero.version>
 
         <!-- ====================== Java ======================================== -->
         <encoding>UTF-8</encoding>
