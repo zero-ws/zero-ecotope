@@ -67,7 +67,7 @@ Vert.x 引入独立项目的底层功能使用。
     <groupId>cn.vertxup</groupId>
     <version>${ZERO_VERSION}</version>
 </dependency>
-        <!-- 1.0-RC -->
+        <!-- 1.0-SNAPSHOT -->
 <dependency>
 <artifactId>zero-ams</artifactId>
 <groupId>io.zerows</groupId>
@@ -134,7 +134,7 @@ Vert.x 引入独立项目的底层功能使用。
     <parent>
         <groupId>io.zerows</groupId>
         <artifactId>zero-import</artifactId>
-        <version>1.0-RC</version>
+        <version>1.0-SNAPSHOT</version>
     </parent>
     <!-- 依赖部分 -->
     <dependencies>
