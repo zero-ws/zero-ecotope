@@ -149,7 +149,7 @@
 
 
         <!-- module: ============== zero-eco-eclipse ============================ -->
-        <eclipse.git.version>6.6.1.202309021850-r</eclipse.git.version>
+        <eclipse.git.version>6.7.0.202309050840-r</eclipse.git.version>
 
 
         <!-- module: ============== zero-eco-elk ================================ -->
@@ -234,7 +234,7 @@
         <!-- module: ============== zero-eco-vendor ============================== -->
         <io.termd.version>1.1.9</io.termd.version>
         <jetbrains.version>24.0.1</jetbrains.version>
-        <scala.version>2.13.11</scala.version>
+        <scala.version>2.13.12</scala.version>
         <feign.version>8.18.0</feign.version>
         <joda.version>2.12.5</joda.version>
         <jedis.version>5.0.0</jedis.version>
