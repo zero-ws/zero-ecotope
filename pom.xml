@@ -136,7 +136,7 @@
         <jooq.version>3.18.6</jooq.version>
         <jooq.vertx.version>6.5.5</jooq.vertx.version>
         <mysql.version>8.1.0</mysql.version><!-- Database: RDBMS -->
-        <liquibase.version>4.23.1</liquibase.version><!-- Database: Liquibase -->
+        <liquibase.version>4.23.2</liquibase.version><!-- Database: Liquibase -->
         <mongodb.async.version>3.12.14</mongodb.async.version><!-- Database: MongoDb -->
         <neo4j.version>5.12.0</neo4j.version><!-- Database: Neo4j -->
         <mybatis.version>3.5.13</mybatis.version>
@@ -158,7 +158,7 @@
         <logging.logback.version>1.4.11</logging.logback.version>
         <logging.logback.cal10n.version>0.8.1</logging.logback.cal10n.version>
         <logging.slf4j.version>2.0.9</logging.slf4j.version>
-        <elasticsearch.version>8.9.2</elasticsearch.version>
+        <elasticsearch.version>8.10.0</elasticsearch.version>
         <elasticsearch.client.version>7.17.13</elasticsearch.client.version>
 
 
@@ -179,7 +179,7 @@
 
         <!-- module: ============== zero-eco-jackson ============================ -->
         <jackson.version>2.15.2</jackson.version>
-        <jackson.uuid.generator>4.2.0</jackson.uuid.generator>
+        <jackson.uuid.generator>4.3.0</jackson.uuid.generator>
         <yaml.version>2.2</yaml.version>
 
 
@@ -222,7 +222,7 @@
         <rxjava2.version>2.2.21</rxjava2.version>
         <rxjava3.version>3.1.7</rxjava3.version>
         <reactive.streams.version>1.0.4</reactive.streams.version>
-        <io.reactor.version>3.5.9</io.reactor.version>
+        <io.reactor.version>3.5.10</io.reactor.version>
 
 
         <!-- module: ============== zero-eco-secure ============================= -->
