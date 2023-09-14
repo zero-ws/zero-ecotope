@@ -195,7 +195,7 @@
         <javax.el.version>3.0.1-b06</javax.el.version>
         <!-- New Uniform Version -->
         <jakarta.activation.version>2.0.1</jakarta.activation.version>
-        <jakarta.xml.bind.version>4.0.0</jakarta.xml.bind.version>
+        <jakarta.xml.bind.version>4.0.1</jakarta.xml.bind.version>
         <jakarta.el.version>5.0.0-M1</jakarta.el.version>
 
 
@@ -229,6 +229,7 @@
         <hibernate.validator.version>8.0.1.Final</hibernate.validator.version><!-- Bean Validation -->
         <jwt.version>4.4.0</jwt.version>
         <sshd.version>2.10.0</sshd.version><!-- For Security: CVE-2022-45047 -->
+        <inversoft.version>2.0.0</inversoft.version>
 
 
         <!-- module: ============== zero-eco-vendor ============================== -->
