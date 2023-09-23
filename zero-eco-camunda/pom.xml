@@ -123,6 +123,12 @@
                     </exclusion>
                 </exclusions>
             </dependency>
+            <!-- https://mvnrepository.com/artifact/org.camunda.template-engines/camunda-template-engines-freemarker -->
+            <dependency>
+                <groupId>org.camunda.template-engines</groupId>
+                <artifactId>camunda-template-engines-freemarker</artifactId>
+                <version>${camunda.template.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>

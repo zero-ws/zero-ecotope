@@ -119,10 +119,11 @@
 
         <!-- module: ============== zero-eco-camunda ============================ -->
         <camunda.version>7.19.0</camunda.version>
-        <camunda.spin.version>1.21.0</camunda.spin.version>
+        <camunda.spin.version>1.22.0</camunda.spin.version>
         <camunda.bpm.version>1.2.0</camunda.bpm.version>
-        <camunda.connect.version>1.5.6</camunda.connect.version>
-        <camunda.util.version>1.12.0</camunda.util.version>
+        <camunda.connect.version>1.6.0</camunda.connect.version>
+        <camunda.util.version>1.13.0</camunda.util.version>
+        <camunda.template.version>2.2.0</camunda.template.version>
 
 
         <!-- module: ============== zero-eco-cluster ============================ -->
