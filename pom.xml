@@ -101,7 +101,7 @@
         <common.net.version>3.9.0</common.net.version>
         <common.codec.version>1.16.0</common.codec.version>
         <common.cli.version>1.5.0</common.cli.version>
-        <common.io.version>2.13.0</common.io.version>
+        <common.io.version>2.14.0</common.io.version>
         <common.collection4.version>4.4</common.collection4.version>
         <common.text.version>1.10.0</common.text.version>
         <http.async.client.version>4.1.5</http.async.client.version><!-- Apache: Http Components -->
@@ -221,7 +221,7 @@
 
         <!-- module: ============== zero-eco-reactive =========================== -->
         <rxjava2.version>2.2.21</rxjava2.version>
-        <rxjava3.version>3.1.7</rxjava3.version>
+        <rxjava3.version>3.1.8</rxjava3.version>
         <reactive.streams.version>1.0.4</reactive.streams.version>
         <io.reactor.version>3.5.10</io.reactor.version>
 
