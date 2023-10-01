@@ -203,7 +203,7 @@
         <!-- module: ============== zero-eco-jvmr =============================== -->
         <jvmr.asm.version>1.11.9</jvmr.asm.version>
         <jvmr.lombok.version>1.18.30</jvmr.lombok.version>
-        <jvmr.asm.version>9.5</jvmr.asm.version>
+        <jvmr.asm.version>9.6</jvmr.asm.version>
         <jvmr.cglib.version>3.3.0</jvmr.cglib.version>
         <jvmr.reflection.version>0.10.2</jvmr.reflection.version>
         <jvmr.javassist.version>3.29.2-GA</jvmr.javassist.version>
