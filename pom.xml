@@ -134,7 +134,7 @@
 
         <!-- module: ============== zero-eco-database =========================== -->
         <hikari.cp.version>5.0.1</hikari.cp.version><!-- Database -->
-        <jooq.version>3.18.6</jooq.version>
+        <jooq.version>3.18.7</jooq.version>
         <jooq.vertx.version>6.5.5</jooq.vertx.version>
         <mysql.version>8.1.0</mysql.version><!-- Database: RDBMS -->
         <liquibase.version>4.24.0</liquibase.version><!-- Database: Liquibase -->
@@ -159,13 +159,13 @@
         <logging.logback.version>1.4.11</logging.logback.version>
         <logging.logback.cal10n.version>0.8.1</logging.logback.cal10n.version>
         <logging.slf4j.version>2.0.9</logging.slf4j.version>
-        <elasticsearch.version>8.10.2</elasticsearch.version>
-        <elasticsearch.client.version>7.17.13</elasticsearch.client.version>
+        <elasticsearch.version>8.10.3</elasticsearch.version>
+        <elasticsearch.client.version>7.17.14</elasticsearch.client.version>
 
 
         <!-- module: ============== zero-eco-google ============================= -->
         <google.guice.version>7.0.0</google.guice.version>
-        <google.guava.version>32.1.2-jre</google.guava.version>
+        <google.guava.version>32.1.3-jre</google.guava.version>
         <google.errorprone.version>2.22.0</google.errorprone.version>
         <google.jsr305.version>3.0.2</google.jsr305.version>
         <google.etcd.version>2.18.0</google.etcd.version>
@@ -179,7 +179,7 @@
 
 
         <!-- module: ============== zero-eco-jackson ============================ -->
-        <jackson.version>2.15.2</jackson.version>
+        <jackson.version>2.15.3</jackson.version>
         <jackson.uuid.generator>4.3.0</jackson.uuid.generator>
         <yaml.version>2.2</yaml.version>
 
@@ -211,7 +211,7 @@
 
         <!-- module: ============== zero-eco-netty ============================== -->
         <netty.tcnative.version>2.0.62.Final</netty.tcnative.version>
-        <netty.version>4.1.99.Final</netty.version>
+        <netty.version>4.1.100.Final</netty.version>
 
 
         <!-- module: ============== zero-eco-quiz =============================== -->
@@ -223,7 +223,7 @@
         <rxjava2.version>2.2.21</rxjava2.version>
         <rxjava3.version>3.1.8</rxjava3.version>
         <reactive.streams.version>1.0.4</reactive.streams.version>
-        <io.reactor.version>3.5.10</io.reactor.version>
+        <io.reactor.version>3.5.11</io.reactor.version>
 
 
         <!-- module: ============== zero-eco-secure ============================= -->
@@ -248,8 +248,8 @@
 
 
         <!-- module: ============== zero-eco-vertx ============================== -->
-        <vertx.version>4.4.5</vertx.version>
-        <stack.version>4.4.5</stack.version>
+        <vertx.version>4.4.6</vertx.version>
+        <stack.version>4.4.6</stack.version>
 
 
         <!-- ====================== Maven插件 ============================= -->
