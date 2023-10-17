@@ -155,11 +155,11 @@
 
         <!-- module: ============== zero-eco-elk ================================ -->
         <logging.common.version>1.2</logging.common.version>
-        <logging.log4j2.version>2.20.0</logging.log4j2.version>
+        <logging.log4j2.version>2.21.0</logging.log4j2.version>
         <logging.logback.version>1.4.11</logging.logback.version>
         <logging.logback.cal10n.version>0.8.1</logging.logback.cal10n.version>
         <logging.slf4j.version>2.0.9</logging.slf4j.version>
-        <elasticsearch.version>8.10.3</elasticsearch.version>
+        <elasticsearch.version>8.10.4</elasticsearch.version>
         <elasticsearch.client.version>7.17.14</elasticsearch.client.version>
 
 
