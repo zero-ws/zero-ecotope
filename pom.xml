@@ -101,7 +101,7 @@
         <common.net.version>3.10.0</common.net.version>
         <common.codec.version>1.16.0</common.codec.version>
         <common.cli.version>1.5.0</common.cli.version>
-        <common.io.version>2.14.0</common.io.version>
+        <common.io.version>2.15.0</common.io.version>
         <common.collection4.version>4.4</common.collection4.version>
         <common.text.version>1.10.0</common.text.version>
         <http.async.client.version>4.1.5</http.async.client.version><!-- Apache: Http Components -->
@@ -127,7 +127,7 @@
 
 
         <!-- module: ============== zero-eco-cluster ============================ -->
-        <hazelcast.version>5.3.4</hazelcast.version>
+        <hazelcast.version>5.3.5</hazelcast.version>
         <zookeeper.version>3.9.1</zookeeper.version>
         <ignite.version>2.15.0</ignite.version>
 
@@ -136,10 +136,10 @@
         <hikari.cp.version>5.0.1</hikari.cp.version><!-- Database -->
         <jooq.version>3.18.7</jooq.version>
         <jooq.vertx.version>6.5.5</jooq.vertx.version>
-        <mysql.version>8.1.0</mysql.version><!-- Database: RDBMS -->
+        <mysql.version>8.2.0</mysql.version><!-- Database: RDBMS -->
         <liquibase.version>4.24.0</liquibase.version><!-- Database: Liquibase -->
         <mongodb.async.version>3.12.14</mongodb.async.version><!-- Database: MongoDb -->
-        <neo4j.version>5.13.0</neo4j.version><!-- Database: Neo4j -->
+        <neo4j.version>5.14.0</neo4j.version><!-- Database: Neo4j -->
         <mybatis.version>3.5.13</mybatis.version>
 
 
@@ -155,7 +155,7 @@
 
         <!-- module: ============== zero-eco-elk ================================ -->
         <logging.common.version>1.2</logging.common.version>
-        <logging.log4j2.version>2.21.0</logging.log4j2.version>
+        <logging.log4j2.version>2.21.1</logging.log4j2.version>
         <logging.logback.version>1.4.11</logging.logback.version>
         <logging.logback.cal10n.version>0.8.1</logging.logback.cal10n.version>
         <logging.slf4j.version>2.0.9</logging.slf4j.version>
