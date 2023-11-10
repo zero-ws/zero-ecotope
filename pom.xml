@@ -127,7 +127,7 @@
 
 
         <!-- module: ============== zero-eco-cluster ============================ -->
-        <hazelcast.version>5.3.5</hazelcast.version>
+        <hazelcast.version>5.3.6</hazelcast.version>
         <zookeeper.version>3.9.1</zookeeper.version>
         <ignite.version>2.15.0</ignite.version>
 
@@ -211,7 +211,7 @@
 
         <!-- module: ============== zero-eco-netty ============================== -->
         <netty.tcnative.version>2.0.62.Final</netty.tcnative.version>
-        <netty.version>4.1.100.Final</netty.version>
+        <netty.version>4.1.101.Final</netty.version>
 
 
         <!-- module: ============== zero-eco-quiz =============================== -->
