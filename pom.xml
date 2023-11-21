@@ -239,7 +239,7 @@
         <scala.version>2.13.12</scala.version>
         <feign.version>8.18.0</feign.version>
         <joda.version>2.12.5</joda.version>
-        <jedis.version>5.0.2</jedis.version>
+        <jedis.version>5.1.0</jedis.version>
         <checker.version>3.40.0</checker.version>
         <picoli.version>4.7.5</picoli.version>
         <hdr.version>2.1.12</hdr.version>
