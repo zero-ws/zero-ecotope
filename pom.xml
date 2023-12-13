@@ -113,7 +113,7 @@
 
 
         <!-- module: ============== zero-eco-aspectj ============================= -->
-        <aspectj.version>1.9.20.1</aspectj.version>
+        <aspectj.version>1.9.21</aspectj.version>
         <jcabi.version>0.25.1</jcabi.version>
 
 
@@ -159,8 +159,8 @@
         <logging.logback.version>1.4.14</logging.logback.version>
         <logging.logback.cal10n.version>0.8.1</logging.logback.cal10n.version>
         <logging.slf4j.version>2.0.9</logging.slf4j.version>
-        <elasticsearch.version>8.11.2</elasticsearch.version>
-        <elasticsearch.client.version>7.17.15</elasticsearch.client.version>
+        <elasticsearch.version>8.11.3</elasticsearch.version>
+        <elasticsearch.client.version>7.17.16</elasticsearch.client.version>
 
 
         <!-- module: ============== zero-eco-google ============================= -->
@@ -192,7 +192,7 @@
         <jcache.version>1.1.1</jcache.version>
         <jsr340.version>4.0.1</jsr340.version>
         <jsr338.version>2.2</jsr338.version>
-        <jersey.version>3.1.4</jersey.version>
+        <jersey.version>3.1.5</jersey.version>
         <javax.el.version>3.0.1-b06</javax.el.version>
         <!-- New Uniform Version -->
         <jakarta.activation.version>2.0.1</jakarta.activation.version>
@@ -211,7 +211,7 @@
 
         <!-- module: ============== zero-eco-netty ============================== -->
         <netty.tcnative.version>2.0.62.Final</netty.tcnative.version>
-        <netty.version>4.1.101.Final</netty.version>
+        <netty.version>4.1.102.Final</netty.version>
 
 
         <!-- module: ============== zero-eco-quiz =============================== -->
@@ -223,7 +223,7 @@
         <rxjava2.version>2.2.21</rxjava2.version>
         <rxjava3.version>3.1.8</rxjava3.version>
         <reactive.streams.version>1.0.4</reactive.streams.version>
-        <io.reactor.version>3.6.0</io.reactor.version>
+        <io.reactor.version>3.6.1</io.reactor.version>
 
 
         <!-- module: ============== zero-eco-secure ============================= -->
