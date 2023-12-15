@@ -134,7 +134,7 @@
 
         <!-- module: ============== zero-eco-database =========================== -->
         <hikari.cp.version>5.1.0</hikari.cp.version><!-- Database -->
-        <jooq.version>3.18.7</jooq.version>
+        <jooq.version>3.19.0</jooq.version>
         <jooq.vertx.version>6.5.5</jooq.vertx.version>
         <mysql.version>8.2.0</mysql.version><!-- Database: RDBMS -->
         <liquibase.version>4.25.0</liquibase.version><!-- Database: Liquibase -->
@@ -211,7 +211,7 @@
 
         <!-- module: ============== zero-eco-netty ============================== -->
         <netty.tcnative.version>2.0.62.Final</netty.tcnative.version>
-        <netty.version>4.1.103.Final</netty.version>
+        <netty.version>4.1.104.Final</netty.version>
 
 
         <!-- module: ============== zero-eco-quiz =============================== -->
