@@ -140,7 +140,7 @@
         <liquibase.version>4.25.0</liquibase.version><!-- Database: Liquibase -->
         <mongodb.async.version>3.12.14</mongodb.async.version><!-- Database: MongoDb -->
         <neo4j.version>5.15.0</neo4j.version><!-- Database: Neo4j -->
-        <mybatis.version>3.5.14</mybatis.version>
+        <mybatis.version>3.5.15</mybatis.version>
 
 
         <!-- module: ============== zero-eco-doc ================================ -->
