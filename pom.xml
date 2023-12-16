@@ -206,7 +206,7 @@
         <jvmr.asm.version>9.6</jvmr.asm.version>
         <jvmr.cglib.version>3.3.0</jvmr.cglib.version>
         <jvmr.reflection.version>0.10.2</jvmr.reflection.version>
-        <jvmr.javassist.version>3.29.2-GA</jvmr.javassist.version>
+        <jvmr.javassist.version>3.30.0-GA</jvmr.javassist.version>
 
 
         <!-- module: ============== zero-eco-netty ============================== -->
@@ -239,7 +239,7 @@
         <feign.version>8.18.0</feign.version>
         <joda.version>2.12.5</joda.version>
         <jedis.version>5.1.0</jedis.version>
-        <checker.version>3.41.0</checker.version>
+        <checker.version>3.42.0</checker.version>
         <picoli.version>4.7.5</picoli.version>
         <hdr.version>2.1.12</hdr.version>
         <codehaus.janino.version>3.1.11</codehaus.janino.version>
