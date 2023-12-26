@@ -108,14 +108,14 @@ Here are two important api to get reference of `AsyncMap/LocalMap` of vert.x as 
 
 ```java
     /**
-     * Get reference of AsyncMap
-     */
-    AsyncMap<K, V> fetchAsync();
+ * Get stored of AsyncMap
+ */
+AsyncMap<K, V> fetchAsync();
 
-    /**
-     * Get reference of LocalMap
-     */
-    LocalMap<K, V> fetchSync();
+/**
+ * Get stored of LocalMap
+ */
+LocalMap<K, V> fetchSync();
 ```
 
 It means that some vert.x native developers want to use `AsyncMap/LocalMap` directly, in this situation you can call
