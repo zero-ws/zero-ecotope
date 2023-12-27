@@ -95,7 +95,7 @@
         <java.legacy.version>11</java.legacy.version>
 
         <!--                        子模块属性定义                                  -->
-        <!-- module: ============== zero-eco-apache ============================= -->
+        <!-- module: ============== zero-mod-apache ============================= -->
         <common.jexl.version>3.3</common.jexl.version><!-- Apache Common -->
         <common.lang3.version>3.14.0</common.lang3.version>
         <common.net.version>3.10.0</common.net.version>
@@ -112,12 +112,12 @@
         <annotation.api.version>6.0.53</annotation.api.version><!-- Apache Tomcat -->
 
 
-        <!-- module: ============== zero-eco-aspectj ============================= -->
+        <!-- module: ============== zero-mod-aspectj ============================= -->
         <aspectj.version>1.9.21</aspectj.version>
         <jcabi.version>0.25.1</jcabi.version>
 
 
-        <!-- module: ============== zero-eco-camunda ============================ -->
+        <!-- module: ============== zero-mod-camunda ============================ -->
         <camunda.version>7.20.0</camunda.version>
         <camunda.spin.version>1.22.0</camunda.spin.version>
         <camunda.bpm.version>1.2.0</camunda.bpm.version>
@@ -126,13 +126,13 @@
         <camunda.template.version>2.2.0</camunda.template.version>
 
 
-        <!-- module: ============== zero-eco-cluster ============================ -->
+        <!-- module: ============== zero-mod-cluster ============================ -->
         <hazelcast.version>5.3.6</hazelcast.version>
         <zookeeper.version>3.9.1</zookeeper.version>
         <ignite.version>2.16.0</ignite.version>
 
 
-        <!-- module: ============== zero-eco-database =========================== -->
+        <!-- module: ============== zero-mod-database =========================== -->
         <hikari.cp.version>5.1.0</hikari.cp.version><!-- Database -->
         <jooq.version>3.19.1</jooq.version>
         <jooq.vertx.version>6.5.5</jooq.vertx.version>
@@ -143,19 +143,19 @@
         <mybatis.version>3.5.15</mybatis.version>
 
 
-        <!-- module: ============== zero-eco-doc ================================ -->
+        <!-- module: ============== zero-mod-doc ================================ -->
         <mdoclet.version>1.4</mdoclet.version>
         <asciidoctor.version>2.2.2</asciidoctor.version>
         <asciidoctor.doc.version>2.2.1</asciidoctor.doc.version>
 
 
-        <!-- module: ============== zero-eco-eclipse ============================ -->
+        <!-- module: ============== zero-mod-eclipse ============================ -->
         <eclipse.git.version>6.8.0.202311291450-r</eclipse.git.version>
 
 
-        <!-- module: ============== zero-eco-elk ================================ -->
+        <!-- module: ============== zero-mod-elk ================================ -->
         <logging.common.version>1.3.0</logging.common.version>
-        <logging.log4j2.version>2.22.0</logging.log4j2.version>
+        <logging.log4j2.version>2.22.1</logging.log4j2.version>
         <logging.logback.version>1.4.14</logging.logback.version>
         <logging.logback.cal10n.version>0.8.1</logging.logback.cal10n.version>
         <logging.slf4j.version>2.0.9</logging.slf4j.version>
@@ -163,7 +163,7 @@
         <elasticsearch.client.version>7.17.16</elasticsearch.client.version>
 
 
-        <!-- module: ============== zero-eco-google ============================= -->
+        <!-- module: ============== zero-mod-google ============================= -->
         <google.guice.version>7.0.0</google.guice.version>
         <google.guava.version>33.0.0-jre</google.guava.version>
         <google.errorprone.version>2.24.0</google.errorprone.version>
@@ -174,17 +174,17 @@
         <google.j2objc.version>2.8</google.j2objc.version>
 
 
-        <!-- module: ============== zero-eco-grpc =============================== -->
+        <!-- module: ============== zero-mod-grpc =============================== -->
         <grpc.version>1.60.1</grpc.version>
 
 
-        <!-- module: ============== zero-eco-jackson ============================ -->
+        <!-- module: ============== zero-mod-jackson ============================ -->
         <jackson.version>2.16.1</jackson.version>
         <jackson.uuid.generator>4.3.0</jackson.uuid.generator>
         <yaml.version>2.2</yaml.version>
 
 
-        <!-- module: ============== zero-eco-jsr ================================ -->
+        <!-- module: ============== zero-mod-jsr ================================ -->
         <jsr303.version>2.0.1.Final</jsr303.version>
         <jsr311.version>2.1.1</jsr311.version>
         <jsr330.version>1</jsr330.version>
@@ -200,7 +200,7 @@
         <jakarta.el.version>5.0.0-M1</jakarta.el.version>
 
 
-        <!-- module: ============== zero-eco-jvmr =============================== -->
+        <!-- module: ============== zero-mod-jvmr =============================== -->
         <jvmr.asm.version>1.11.9</jvmr.asm.version>
         <jvmr.lombok.version>1.18.30</jvmr.lombok.version>
         <jvmr.asm.version>9.6</jvmr.asm.version>
@@ -209,30 +209,30 @@
         <jvmr.javassist.version>3.30.2-GA</jvmr.javassist.version>
 
 
-        <!-- module: ============== zero-eco-netty ============================== -->
+        <!-- module: ============== zero-mod-netty ============================== -->
         <netty.tcnative.version>2.0.62.Final</netty.tcnative.version>
         <netty.version>4.1.104.Final</netty.version>
 
 
-        <!-- module: ============== zero-eco-quiz =============================== -->
+        <!-- module: ============== zero-mod-quiz =============================== -->
         <junit.version>4.13.2</junit.version>
         <swagger.version>1.6.0</swagger.version>
 
 
-        <!-- module: ============== zero-eco-reactive =========================== -->
+        <!-- module: ============== zero-mod-reactive =========================== -->
         <rxjava2.version>2.2.21</rxjava2.version>
         <rxjava3.version>3.1.8</rxjava3.version>
         <reactive.streams.version>1.0.4</reactive.streams.version>
         <io.reactor.version>3.6.1</io.reactor.version>
 
 
-        <!-- module: ============== zero-eco-secure ============================= -->
+        <!-- module: ============== zero-mod-secure ============================= -->
         <hibernate.validator.version>8.0.1.Final</hibernate.validator.version><!-- Bean Validation -->
         <jwt.version>4.4.0</jwt.version>
         <sshd.version>2.11.0</sshd.version><!-- For Security: CVE-2022-45047 -->
         <inversoft.version>2.0.0</inversoft.version>
 
-        <!-- module: ============== zero-eco-vendor ============================== -->
+        <!-- module: ============== zero-mod-vendor ============================== -->
         <io.termd.version>1.1.9</io.termd.version>
         <jetbrains.version>24.1.0</jetbrains.version>
         <scala.version>2.13.12</scala.version>
@@ -246,7 +246,7 @@
         <codehaus.mojo.version>1.23</codehaus.mojo.version>
 
 
-        <!-- module: ============== zero-eco-vertx ============================== -->
+        <!-- module: ============== zero-mod-vertx ============================== -->
         <vertx.version>4.5.1</vertx.version>
         <stack.version>4.5.1</stack.version>
 
