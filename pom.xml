@@ -159,7 +159,7 @@
         <logging.logback.version>1.4.14</logging.logback.version>
         <logging.logback.cal10n.version>0.8.1</logging.logback.cal10n.version>
         <logging.slf4j.version>2.0.11</logging.slf4j.version>
-        <elasticsearch.version>8.11.4</elasticsearch.version>
+        <elasticsearch.version>8.12.0</elasticsearch.version>
         <elasticsearch.client.version>7.17.16</elasticsearch.client.version>
 
 
