@@ -134,7 +134,7 @@
 
         <!-- module: ============== zero-mod-database =========================== -->
         <hikari.cp.version>5.1.0</hikari.cp.version><!-- Database -->
-        <jooq.version>3.19.2</jooq.version>
+        <jooq.version>3.19.3</jooq.version>
         <jooq.vertx.version>6.5.5</jooq.vertx.version>
         <mysql.version>8.3.0</mysql.version><!-- Database: RDBMS -->
         <liquibase.version>4.25.1</liquibase.version><!-- Database: Liquibase -->
@@ -211,7 +211,7 @@
 
         <!-- module: ============== zero-mod-netty ============================== -->
         <netty.tcnative.version>2.0.62.Final</netty.tcnative.version>
-        <netty.version>4.1.105.Final</netty.version>
+        <netty.version>4.1.106.Final</netty.version>
 
 
         <!-- module: ============== zero-mod-quiz =============================== -->
@@ -229,7 +229,7 @@
         <!-- module: ============== zero-mod-secure ============================= -->
         <hibernate.validator.version>8.0.1.Final</hibernate.validator.version><!-- Bean Validation -->
         <jwt.version>4.4.0</jwt.version>
-        <sshd.version>2.11.0</sshd.version><!-- For Security: CVE-2022-45047 -->
+        <sshd.version>2.12.0</sshd.version><!-- For Security: CVE-2022-45047 -->
         <inversoft.version>2.0.0</inversoft.version>
 
         <!-- module: ============== zero-mod-vendor ============================== -->
