@@ -160,7 +160,7 @@
         <logging.logback.cal10n.version>0.8.1</logging.logback.cal10n.version>
         <logging.slf4j.version>2.0.11</logging.slf4j.version>
         <elasticsearch.version>8.12.0</elasticsearch.version>
-        <elasticsearch.client.version>7.17.16</elasticsearch.client.version>
+        <elasticsearch.client.version>7.17.17</elasticsearch.client.version>
 
 
         <!-- module: ============== zero-mod-google ============================= -->
