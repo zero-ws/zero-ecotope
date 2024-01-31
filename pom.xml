@@ -139,7 +139,7 @@
         <mysql.version>8.3.0</mysql.version><!-- Database: RDBMS -->
         <liquibase.version>4.25.1</liquibase.version><!-- Database: Liquibase -->
         <mongodb.async.version>3.12.14</mongodb.async.version><!-- Database: MongoDb -->
-        <neo4j.version>5.16.0</neo4j.version><!-- Database: Neo4j -->
+        <neo4j.version>5.17.0</neo4j.version><!-- Database: Neo4j -->
         <mybatis.version>3.5.15</mybatis.version>
 
 
@@ -247,8 +247,8 @@
 
 
         <!-- module: ============== zero-mod-vertx ============================== -->
-        <vertx.version>4.5.1</vertx.version>
-        <stack.version>4.5.1</stack.version>
+        <vertx.version>4.5.2</vertx.version>
+        <stack.version>4.5.2</stack.version>
 
 
         <!-- ====================== Maven插件 ============================= -->
