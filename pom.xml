@@ -159,8 +159,8 @@
         <logging.logback.version>1.4.14</logging.logback.version>
         <logging.logback.cal10n.version>0.8.1</logging.logback.cal10n.version>
         <logging.slf4j.version>2.0.12</logging.slf4j.version>
-        <elasticsearch.version>8.12.0</elasticsearch.version>
-        <elasticsearch.client.version>7.17.17</elasticsearch.client.version>
+        <elasticsearch.version>8.12.1</elasticsearch.version>
+        <elasticsearch.client.version>7.17.18</elasticsearch.client.version>
 
 
         <!-- module: ============== zero-mod-google ============================= -->
@@ -242,13 +242,13 @@
         <checker.version>3.42.0</checker.version>
         <picoli.version>4.7.5</picoli.version>
         <hdr.version>2.1.12</hdr.version>
-        <codehaus.janino.version>3.1.11</codehaus.janino.version>
+        <codehaus.janino.version>3.1.12</codehaus.janino.version>
         <codehaus.mojo.version>1.23</codehaus.mojo.version>
 
 
         <!-- module: ============== zero-mod-vertx ============================== -->
-        <vertx.version>4.5.2</vertx.version>
-        <stack.version>4.5.2</stack.version>
+        <vertx.version>4.5.3</vertx.version>
+        <stack.version>4.5.3</stack.version>
 
 
         <!-- ====================== Maven插件 ============================= -->
