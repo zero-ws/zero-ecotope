@@ -137,7 +137,7 @@
         <jooq.version>3.19.3</jooq.version>
         <jooq.vertx.version>6.5.5</jooq.vertx.version>
         <mysql.version>8.3.0</mysql.version><!-- Database: RDBMS -->
-        <liquibase.version>4.25.1</liquibase.version><!-- Database: Liquibase -->
+        <liquibase.version>4.26.0</liquibase.version><!-- Database: Liquibase -->
         <mongodb.async.version>3.12.14</mongodb.async.version><!-- Database: MongoDb -->
         <neo4j.version>5.17.0</neo4j.version><!-- Database: Neo4j -->
         <mybatis.version>3.5.15</mybatis.version>
@@ -256,13 +256,13 @@
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-assembly-plugin -->
         <maven.plugin.assembly>3.6.0</maven.plugin.assembly>
         <!-- http://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
-        <maven.plugin.compiler>3.11.0</maven.plugin.compiler>
+        <maven.plugin.compiler>3.12.1</maven.plugin.compiler>
         <!-- http://www.mvnrepository.com/artifact/org.apache.maven.plugins/maven-surefire-plugin -->
-        <maven.plugin.surefire>3.1.2</maven.plugin.surefire>
+        <maven.plugin.surefire>3.2.5</maven.plugin.surefire>
         <!-- http://www.mvnrepository.com/artifact/org.apache.maven.plugins/maven-clean-plugin -->
-        <maven.plugin.clean>3.2.0</maven.plugin.clean>
+        <maven.plugin.clean>3.3.2</maven.plugin.clean>
         <!-- http://www.mvnrepository.com/artifact/org.codehaus.mojo/versions-maven-plugin -->
-        <maven.plugin.version>2.16.0</maven.plugin.version>
+        <maven.plugin.version>2.16.2</maven.plugin.version>
         <!-- http://www.mvnrepository.com/artifact/org.apache.maven.plugins/maven-install-plugin/ -->
         <maven.plugin.install>3.1.1</maven.plugin.install>
         <!-- http://www.mvnrepository.com/artifact/org.apache.maven.plugins/maven-deploy-plugin -->
@@ -272,17 +272,17 @@
         <!-- http://www.mvnrepository.com/artifact/org.apache.maven.plugins/maven-resources-plugin -->
         <maven.plugin.resource>3.3.1</maven.plugin.resource>
         <!-- http://www.mvnrepository.com/artifact/org.apache.maven.plugins/maven-site-plugin/ -->
-        <maven.plugin.site>4.0.0-M8</maven.plugin.site>
+        <maven.plugin.site>4.0.0-M13</maven.plugin.site>
         <!-- http://www.mvnrepository.com/artifact/org.apache.maven.plugins/maven-enforcer-plugin/ -->
-        <maven.plugin.enforcer>3.3.0</maven.plugin.enforcer>
+        <maven.plugin.enforcer>3.4.1</maven.plugin.enforcer>
         <!-- http://mvnrepository.com/artifact/org.projectlombok/lombok-maven-plugin -->
         <maven.plugin.lombok>1.18.20.0</maven.plugin.lombok>
         <!-- https://mvnrepository.com/artifact/org.bsc.maven/maven-processor-plugin -->
-        <maven.plugin.processor>4.5</maven.plugin.processor>
+        <maven.plugin.processor>5.0</maven.plugin.processor>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-source-plugin -->
         <maven.plugin.source>3.3.0</maven.plugin.source>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-javadoc-plugin -->
-        <maven.plugin.javadoc>3.5.0</maven.plugin.javadoc>
+        <maven.plugin.javadoc>3.6.3</maven.plugin.javadoc>
         <!-- https://mvnrepository.com/artifact/org.sonatype.plugins/nexus-staging-maven-plugin -->
         <maven.plugin.staging>1.6.13</maven.plugin.staging>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-gpg-plugin -->
@@ -295,26 +295,26 @@
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-antrun-plugin -->
         <maven.plugin.antrun>3.1.0</maven.plugin.antrun>
         <!-- https://mvnrepository.com/artifact/org.codehaus.mojo/aspectj-maven-plugin -->
-        <maven.plugin.aspectj>1.14.0</maven.plugin.aspectj>
+        <maven.plugin.aspectj>1.15.0</maven.plugin.aspectj>
         <!-- https://mvnrepository.com/artifact/com.jcabi/jcabi-maven-plugin -->
         <maven.plugin.jcabi>0.17.0</maven.plugin.jcabi>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-project-info-reports-plugin -->
-        <maven.plugin.project.info>3.4.5</maven.plugin.project.info>
+        <maven.plugin.project.info>3.5.0</maven.plugin.project.info>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-dependency-plugin -->
-        <maven.plugin.dependency>3.6.0</maven.plugin.dependency>
+        <maven.plugin.dependency>3.6.1</maven.plugin.dependency>
 
         <!-- Container -->
         <!-- https://mvnrepository.com/artifact/io.fabric8/fabric8-maven-plugin -->
         <maven.plugin.fabric8>4.4.2</maven.plugin.fabric8>
         <!-- https://mvnrepository.com/artifact/io.fabric8/docker-maven-plugin -->
-        <maven.plugin.docker>0.43.0</maven.plugin.docker>
+        <maven.plugin.docker>0.43.4</maven.plugin.docker>
 
         <!-- https://mvnrepository.com/artifact/org.xolstice.maven.plugins/protobuf-maven-plugin -->
         <maven.plugin.protobuf>0.6.1</maven.plugin.protobuf>
         <!-- https://mvnrepository.com/artifact/kr.motd.maven/os-maven-plugin -->
         <maven.plugin.os>1.7.1</maven.plugin.os>
         <!-- https://mvnrepository.com/artifact/org.codehaus.mojo/build-helper-maven-plugin -->
-        <maven.plugin.helper>3.4.0</maven.plugin.helper>
+        <maven.plugin.helper>3.5.0</maven.plugin.helper>
         <!-- OSGI -->
         <!-- https://mvnrepository.com/artifact/org.apache.felix/maven-bundle-plugin -->
         <maven.plugin.bundle>5.1.9</maven.plugin.bundle>
