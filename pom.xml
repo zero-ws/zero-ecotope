@@ -155,7 +155,7 @@
 
         <!-- module: ============== zero-mod-elk ================================ -->
         <logging.common.version>1.3.0</logging.common.version>
-        <logging.log4j2.version>2.22.1</logging.log4j2.version>
+        <logging.log4j2.version>2.23.0</logging.log4j2.version>
         <logging.logback.version>1.5.0</logging.logback.version>
         <logging.logback.cal10n.version>0.8.1</logging.logback.cal10n.version>
         <logging.slf4j.version>2.0.12</logging.slf4j.version>
@@ -235,7 +235,7 @@
         <!-- module: ============== zero-mod-vendor ============================== -->
         <io.termd.version>1.1.9</io.termd.version>
         <jetbrains.version>24.1.0</jetbrains.version>
-        <scala.version>2.13.12</scala.version>
+        <scala.version>2.13.13</scala.version>
         <feign.version>8.18.0</feign.version>
         <joda.version>2.12.7</joda.version>
         <jedis.version>5.1.0</jedis.version>
