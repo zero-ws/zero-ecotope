@@ -139,7 +139,7 @@
         <mysql.version>8.3.0</mysql.version><!-- Database: RDBMS -->
         <liquibase.version>4.26.0</liquibase.version><!-- Database: Liquibase -->
         <mongodb.async.version>3.12.14</mongodb.async.version><!-- Database: MongoDb -->
-        <neo4j.version>5.17.0</neo4j.version><!-- Database: Neo4j -->
+        <neo4j.version>5.18.0</neo4j.version><!-- Database: Neo4j -->
         <mybatis.version>3.5.15</mybatis.version>
 
 
@@ -156,7 +156,7 @@
         <!-- module: ============== zero-mod-elk ================================ -->
         <logging.common.version>1.3.0</logging.common.version>
         <logging.log4j2.version>2.23.0</logging.log4j2.version>
-        <logging.logback.version>1.5.1</logging.logback.version>
+        <logging.logback.version>1.5.3</logging.logback.version>
         <logging.logback.cal10n.version>0.8.1</logging.logback.cal10n.version>
         <logging.slf4j.version>2.0.12</logging.slf4j.version>
         <elasticsearch.version>8.12.2</elasticsearch.version>
