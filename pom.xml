@@ -210,7 +210,7 @@
 
 
         <!-- module: ============== zero-mod-netty ============================== -->
-        <netty.tcnative.version>2.0.63.Final</netty.tcnative.version>
+        <netty.tcnative.version>2.0.65.Final</netty.tcnative.version>
         <netty.version>4.1.107.Final</netty.version>
 
 
