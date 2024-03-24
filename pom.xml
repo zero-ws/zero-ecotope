@@ -113,7 +113,7 @@
 
 
         <!-- module: ============== zero-mod-aspectj ============================= -->
-        <aspectj.version>1.9.21.2</aspectj.version>
+        <aspectj.version>1.9.22</aspectj.version>
         <jcabi.version>0.26.0</jcabi.version>
 
 
@@ -154,7 +154,7 @@
 
 
         <!-- module: ============== zero-mod-elk ================================ -->
-        <logging.common.version>1.3.0</logging.common.version>
+        <logging.common.version>1.3.1</logging.common.version>
         <logging.log4j2.version>2.23.1</logging.log4j2.version>
         <logging.logback.version>1.5.3</logging.logback.version>
         <logging.logback.cal10n.version>0.8.1</logging.logback.cal10n.version>
@@ -203,7 +203,7 @@
         <!-- module: ============== zero-mod-jvmr =============================== -->
         <jvmr.asm.version>1.11.9</jvmr.asm.version>
         <jvmr.lombok.version>1.18.32</jvmr.lombok.version>
-        <jvmr.asm.version>9.6</jvmr.asm.version>
+        <jvmr.asm.version>9.7</jvmr.asm.version>
         <jvmr.cglib.version>3.3.0</jvmr.cglib.version>
         <jvmr.reflection.version>0.10.2</jvmr.reflection.version>
         <jvmr.javassist.version>3.30.2-GA</jvmr.javassist.version>
