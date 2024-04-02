@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>zero-eco-reactive</artifactId>
     <packaging>pom</packaging>
-    <name>Version Reactive</name>
+    <name>Zero.Dependency.Reactive</name>
     <dependencyManagement>
         <dependencies>
             <!-- https://mvnrepository.com/artifact/io.reactivex.rxjava2/rxjava -->

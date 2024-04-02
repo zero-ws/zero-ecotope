@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>zero-eco-eclipse</artifactId>
     <packaging>pom</packaging>
-    <name>Version Eclipse</name>
+    <name>Zero.Dependency.Eclipse</name>
     <dependencyManagement>
         <dependencies>
             <!-- https://mvnrepository.com/artifact/org.eclipse.jgit/org.eclipse.jgit -->

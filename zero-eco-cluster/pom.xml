@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>zero-eco-cluster</artifactId>
     <packaging>pom</packaging>
-    <name>Version Cluster</name>
+    <name>Zero.Dependency.Cluster</name>
     <dependencyManagement>
         <dependencies>
             <!-- https://mvnrepository.com/artifact/com.hazelcast/hazelcast -->

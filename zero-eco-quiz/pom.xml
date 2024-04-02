@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>zero-eco-quiz</artifactId>
     <packaging>pom</packaging>
-    <name>Version JUnit / ${junit.version}</name>
+    <name>Zero.Dependency.JUnitTest.${junit.version}</name>
     <dependencyManagement>
         <dependencies>
             <!-- http://mvnrepository.com/artifact/junit/junit -->

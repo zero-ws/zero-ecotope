@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>zero-version-core</artifactId>
     <packaging>pom</packaging>
-    <name>Zero Import Core / ${zero.version}</name>
+    <name>Zero.Version.Environment.${zero.version}</name>
     <dependencyManagement>
         <dependencies>
             <!-- Zero Core -->

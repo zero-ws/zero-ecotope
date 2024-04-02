@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>zero-eco-netty</artifactId>
     <packaging>pom</packaging>
-    <name>Version Netty / ${netty.version}</name>
+    <name>Zero.Dependency.Netty.${netty.version}</name>
     <dependencyManagement>
         <dependencies>
             <!-- https://mvnrepository.com/artifact/io.netty/netty-tcnative-boringssl-static -->

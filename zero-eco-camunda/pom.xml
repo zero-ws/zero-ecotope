@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>zero-eco-camunda</artifactId>
     <packaging>pom</packaging>
-    <name>Version Camunda / ${camunda.version}</name>
+    <name>Zero.Dependency.Camunda.${camunda.version}</name>
     <dependencyManagement>
         <dependencies>
 

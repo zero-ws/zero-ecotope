@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>zero-version-infix</artifactId>
     <packaging>pom</packaging>
-    <name>Zero Import Infix / ${zero.version}</name>
+    <name>Zero.Version.Equip.${zero.version}</name>
     <dependencyManagement>
         <dependencies>
             <!-- Zero Infusion -->

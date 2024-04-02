@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>zero-eco-jvmr</artifactId>
     <packaging>pom</packaging>
-    <name>Version JVM Reflection</name>
+    <name>Zero.Dependency.JVM.Reflection</name>
     <dependencyManagement>
         <dependencies>
             <!-- https://mvnrepository.com/artifact/com.esotericsoftware/reflectasm -->

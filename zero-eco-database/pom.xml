@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>zero-eco-database</artifactId>
     <packaging>pom</packaging>
-    <name>Version Database</name>
+    <name>Zero.Dependency.Database</name>
     <dependencyManagement>
         <dependencies>
             <!-- https://mvnrepository.com/artifact/com.zaxxer/HikariCP -->

@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>zero-version-dynamic</artifactId>
     <packaging>pom</packaging>
-    <name>Zero Import Dynamic / ${zero.version}</name>
+    <name>Zero.Version.External.${zero.version}</name>
     <dependencyManagement>
         <dependencies>
             <!-- Dynamic Module -->

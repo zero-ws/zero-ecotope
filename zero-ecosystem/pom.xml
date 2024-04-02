@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>zero-ecosystem</artifactId>
-    <name>Zero Ecosystem ${zero.version}</name>
+    <name>Zero.Version.Ecosystem.${zero.version}</name>
     <packaging>pom</packaging>
     <dependencyManagement>
         <dependencies>

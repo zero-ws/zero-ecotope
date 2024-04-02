@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>zero-eco-aspectj</artifactId>
     <packaging>pom</packaging>
-    <name>Version Aspect J / ${aspectj.version}</name>
+    <name>Zero.Dependency.AspectJ.${aspectj.version}</name>
     <dependencyManagement>
         <dependencies>
             <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
@@ -29,7 +29,7 @@
                 <artifactId>aspectjrt</artifactId>
                 <version>${aspectj.version}</version>
             </dependency>
-            
+
             <!-- https://mvnrepository.com/artifact/com.jcabi/jcabi-aspects -->
             <dependency>
                 <groupId>com.jcabi</groupId>

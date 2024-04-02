@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>zero-eco-apache</artifactId>
     <packaging>pom</packaging>
-    <name>Version Apache</name>
+    <name>Zero.Dependency.Apache</name>
     <dependencyManagement>
         <dependencies>
             <!-- Common -->
@@ -170,7 +170,7 @@
                     </exclusion>
                 </exclusions>
             </dependency>
-            
+
             <!-- https://mvnrepository.com/artifact/org.apache.tomcat/annotations-api -->
             <dependency>
                 <groupId>org.apache.tomcat</groupId>

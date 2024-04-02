@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>zero-eco-vertx</artifactId>
     <packaging>pom</packaging>
-    <name>Version Vertx / ${vertx.version}</name>
+    <name>Zero.Dependency.Vertx.${vertx.version}</name>
     <dependencyManagement>
         <dependencies>
             <!-- vertx -->

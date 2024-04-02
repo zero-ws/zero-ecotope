@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>zero-eco-jackson</artifactId>
     <packaging>pom</packaging>
-    <name>Version Jackson / ${jackson.version}</name>
+    <name>Zero.Dependency.Jackson.${jackson.version}</name>
     <dependencyManagement>
         <dependencies>
             <!-- http://www.mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml -->

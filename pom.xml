@@ -6,7 +6,7 @@
     <groupId>io.zerows</groupId>
     <artifactId>zero-ecotope</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>Zero Ecotope Framework</name>
+    <name>Zero.Ecotope.Framework.POM.${zero.version}</name>
     <description>Zero Ecotope Framework is a tool for Service Mesh Micro Service.</description>
     <url>http://www.zerows.io</url>
     <packaging>pom</packaging>
@@ -102,7 +102,7 @@
         <common.codec.version>1.16.1</common.codec.version>
         <common.cli.version>1.6.0</common.cli.version>
         <common.io.version>2.16.0</common.io.version>
-        <common.collection4.version>4.4</common.collection4.version>
+        <common.collection4.version>4.5.0-M1</common.collection4.version>
         <common.text.version>1.11.0</common.text.version>
         <http.async.client.version>4.1.5</http.async.client.version><!-- Apache: Http Components -->
         <http.client.version>4.5.14</http.client.version>
@@ -140,7 +140,7 @@
         <liquibase.version>4.27.0</liquibase.version><!-- Database: Liquibase -->
         <liquibase.plugin.version>4.26.0</liquibase.plugin.version>
         <mongodb.async.version>3.12.14</mongodb.async.version><!-- Database: MongoDb -->
-        <neo4j.version>5.18.0</neo4j.version><!-- Database: Neo4j -->
+        <neo4j.version>5.19.0</neo4j.version><!-- Database: Neo4j -->
         <mybatis.version>3.5.15</mybatis.version>
 
 
@@ -160,7 +160,7 @@
         <logging.logback.version>1.5.3</logging.logback.version>
         <logging.logback.cal10n.version>0.8.1</logging.logback.cal10n.version>
         <logging.slf4j.version>2.0.12</logging.slf4j.version>
-        <elasticsearch.version>8.13.0</elasticsearch.version>
+        <elasticsearch.version>8.13.1</elasticsearch.version>
         <elasticsearch.client.version>7.17.19</elasticsearch.client.version>
 
 
