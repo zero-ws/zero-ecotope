@@ -14,6 +14,12 @@
     <dependencyManagement>
         <dependencies>
             <!-- Common -->
+            <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-compress -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-compress</artifactId>
+                <version>${common.compress.version}</version>
+            </dependency>
             <!-- https://mvnrepository.com/artifact/commons-net/commons-net -->
             <dependency>
                 <groupId>commons-net</groupId>
