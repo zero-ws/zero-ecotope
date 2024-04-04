@@ -142,7 +142,7 @@
         <liquibase.plugin.version>4.26.0</liquibase.plugin.version>
         <mongodb.async.version>3.12.14</mongodb.async.version><!-- Database: MongoDb -->
         <neo4j.version>5.19.0</neo4j.version><!-- Database: Neo4j -->
-        <mybatis.version>3.5.15</mybatis.version>
+        <mybatis.version>3.5.16</mybatis.version>
 
 
         <!-- module: ============== zero-mod-doc ================================ -->
