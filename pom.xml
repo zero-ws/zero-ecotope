@@ -101,7 +101,7 @@
         <common.net.version>3.10.0</common.net.version>
         <common.codec.version>1.16.1</common.codec.version>
         <common.cli.version>1.6.0</common.cli.version>
-        <common.io.version>2.16.0</common.io.version>
+        <common.io.version>2.16.1</common.io.version>
         <common.collection4.version>4.5.0-M1</common.collection4.version>
         <common.text.version>1.11.0</common.text.version>
         <common.compress.version>1.26.1</common.compress.version>
@@ -158,11 +158,11 @@
         <!-- module: ============== zero-mod-elk ================================ -->
         <logging.common.version>1.3.1</logging.common.version>
         <logging.log4j2.version>2.23.1</logging.log4j2.version>
-        <logging.logback.version>1.5.3</logging.logback.version>
+        <logging.logback.version>1.5.5</logging.logback.version>
         <logging.logback.cal10n.version>0.8.1</logging.logback.cal10n.version>
-        <logging.slf4j.version>2.0.12</logging.slf4j.version>
-        <elasticsearch.version>8.13.1</elasticsearch.version>
-        <elasticsearch.client.version>7.17.19</elasticsearch.client.version>
+        <logging.slf4j.version>2.0.13</logging.slf4j.version>
+        <elasticsearch.version>8.13.2</elasticsearch.version>
+        <elasticsearch.client.version>7.17.20</elasticsearch.client.version>
 
 
         <!-- module: ============== zero-mod-google ============================= -->
@@ -225,7 +225,7 @@
         <rxjava2.version>2.2.21</rxjava2.version>
         <rxjava3.version>3.1.8</rxjava3.version>
         <reactive.streams.version>1.0.4</reactive.streams.version>
-        <io.reactor.version>3.6.4</io.reactor.version>
+        <io.reactor.version>3.6.5</io.reactor.version>
 
 
         <!-- module: ============== zero-mod-secure ============================= -->
