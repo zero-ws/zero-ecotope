@@ -187,7 +187,7 @@ import io.vertx.ext.mongo.MongoClient;
 import io.vertx.up.commune.Envelop;
 import io.vertx.up.kidd.Heart;
 
-import jakarta.inject.infix.Mongo;
+import io.zerows.annotations.infix.Mongo;
 
 public class TopicService implements TopicStub {
 

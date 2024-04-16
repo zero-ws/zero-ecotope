@@ -49,7 +49,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.mongo.MongoClient;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
-import jakarta.inject.infix.Mongo;
+import io.zerows.annotations.infix.Mongo;
 import io.vertx.up.commune.Envelop;
 import io.vertx.up.util.Jackson;
 

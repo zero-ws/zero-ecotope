@@ -47,7 +47,7 @@ package up.god.micro.redis;
 import io.vertx.redis.RedisClient;
 import io.vertx.up.annotations.EndPoint;
 
-import jakarta.inject.infix.Redis;
+import io.zerows.annotations.infix.Redis;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 

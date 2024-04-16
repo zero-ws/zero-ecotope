@@ -7,8 +7,8 @@ To avoid object relationship complex, zero also support Simple dependency inject
 All the vert.x specific object could be inject as following way.
 
 ```java
-import jakarta.inject.infix.Mongo;
-import jakarta.inject.infix.MySql;
+import io.zerows.annotations.infix.Mongo;
+import io.zerows.annotations.infix.MySql;
 import jakarta.ws.rs.BodyParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -40,7 +40,7 @@ The following object is supported by current zero version
 import io.vertx.ext.mongo.MongoClient;
 import io.vertx.up.commune.Envelop;
 
-import jakarta.inject.infix.Mongo;
+import io.zerows.annotations.infix.Mongo;
 
 public class InjectDao {
 

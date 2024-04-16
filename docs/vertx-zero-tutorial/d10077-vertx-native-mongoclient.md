@@ -105,7 +105,7 @@ import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
 import io.vertx.up.commune.Envelop;
 
-import jakarta.inject.infix.Mongo;
+import io.zerows.annotations.infix.Mongo;
 
 @Queue
 public class MongoWorker {
