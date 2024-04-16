@@ -50,7 +50,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.up.annotations.Codex;
 import io.vertx.up.annotations.EndPoint;
 
-import jakarta.ws.rs.BodyParam;
+import io.zerows.annotations.jakarta.BodyParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 

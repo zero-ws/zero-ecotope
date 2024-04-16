@@ -9,7 +9,7 @@ All the vert.x specific object could be inject as following way.
 ```java
 import io.zerows.annotations.infix.Mongo;
 import io.zerows.annotations.infix.MySql;
-import jakarta.ws.rs.BodyParam;
+import io.zerows.annotations.jakarta.BodyParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 

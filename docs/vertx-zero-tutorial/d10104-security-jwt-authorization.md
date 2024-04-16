@@ -38,7 +38,8 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.EndPoint;
 
-import jakarta.ws.rs.BodyParam;
+import io.zerows.annotations.jakarta.BodyParam;
+
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 
@@ -83,8 +84,8 @@ public class LoginWorker {
     public Future<JsonObject> login(final Envelop envelop) {
         final JsonObject data = Ux.getJson(envelop);
         return Ux.Mongo.findOne("DB_USER", data)
-                // 1.Once login successfully, you can call security api store to store config.
-                .compose(item -> this.security.store(item));
+            // 1.Once login successfully, you can call security api store to store config.
+            .compose(item -> this.security.store(item));
     }
 
 
