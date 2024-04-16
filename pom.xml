@@ -111,6 +111,7 @@
         <poi.version>5.2.5</poi.version><!-- Apache POI: Excel -->
         <poi.schema.version>4.1.2</poi.schema.version>
         <annotation.api.version>6.0.53</annotation.api.version><!-- Apache Tomcat -->
+        <felix.version>7.0.5</felix.version>
 
 
         <!-- module: ============== zero-mod-aspectj ============================= -->
@@ -128,7 +129,7 @@
 
 
         <!-- module: ============== zero-mod-cluster ============================ -->
-        <hazelcast.version>5.3.7</hazelcast.version>
+        <hazelcast.version>5.4.0</hazelcast.version>
         <zookeeper.version>3.9.2</zookeeper.version>
         <ignite.version>2.16.0</ignite.version>
 
@@ -213,7 +214,7 @@
 
         <!-- module: ============== zero-mod-netty ============================== -->
         <netty.tcnative.version>2.0.65.Final</netty.tcnative.version>
-        <netty.version>4.1.108.Final</netty.version>
+        <netty.version>4.1.109.Final</netty.version>
 
 
         <!-- module: ============== zero-mod-quiz =============================== -->

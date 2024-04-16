@@ -250,10 +250,12 @@
                                 - java：Java语言主目录
                                 - jib：SPI、自定义组件
                                 - plugin: 插件
+                                - osgi：OSGI专用模块化源代码包
                                 -->
                                 <source>src/main/java</source>
                                 <source>src/main/jib</source>
                                 <source>src/main/plugin</source>
+                                <source>src/main/osgi</source>
 
                                 <!--
                                 核心级
@@ -282,8 +284,9 @@
                                 容器级
                                 - mock: 测试专用
                                 - web: 标准容器
-                                - boot: 启动器专用目录
+                                - test: 测试用例目录
                                 -->
+                                <source>src/main/mock</source>
                                 <source>src/main/test</source>
                                 <source>src/main/web</source>
                             </sources>

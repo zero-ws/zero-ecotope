@@ -183,6 +183,12 @@
                 <artifactId>annotations-api</artifactId>
                 <version>${annotation.api.version}</version>
             </dependency>
+            <!-- https://mvnrepository.com/artifact/org.apache.felix/org.apache.felix.framework -->
+            <dependency>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>org.apache.felix.framework</artifactId>
+                <version>${felix.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>
