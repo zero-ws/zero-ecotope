@@ -19,6 +19,38 @@
                 <artifactId>org.eclipse.jgit</artifactId>
                 <version>${eclipse.git.version}</version>
             </dependency>
+            <!-- OSGI Runtime -->
+            <!-- https://mvnrepository.com/artifact/org.osgi/org.osgi.framework -->
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>org.osgi.framework</artifactId>
+                <version>${osgi.framework.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.osgi/osgi.annotation -->
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>osgi.annotation</artifactId>
+                <version>${osgi.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.osgi/org.osgi.service.cm -->
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>org.osgi.service.cm</artifactId>
+                <version>${osgi.cm.version}</version>
+            </dependency>
+            <!-- DM -->
+            <!-- https://mvnrepository.com/artifact/org.apache.felix/org.apache.felix.dependencymanager -->
+            <dependency>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>org.apache.felix.dependencymanager</artifactId>
+                <version>${apache.felix.dm.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.apache.felix/org.apache.felix.logback -->
+            <dependency>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>org.apache.felix.logback</artifactId>
+                <version>${apache.felix.logback.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>

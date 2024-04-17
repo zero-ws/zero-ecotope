@@ -16,17 +16,25 @@
             <!--
                 新版依赖
                 zero-epic       / zero-ams
-                zero-elite      / zero-co
+                zero-elite      / zero-metadata
+                                / zero-co
                                 / zero-macro
                 zero-energy     / zero-web
                                 / zero-osgi
                 zero-equip        按需选择
              -->
+            <!-- OSGI -->
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-ams</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-core-runtime-metadata</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!-- Library -->
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-co</artifactId>
@@ -39,7 +47,7 @@
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-osgi</artifactId>
+                <artifactId>zero-rx</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

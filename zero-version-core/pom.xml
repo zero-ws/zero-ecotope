@@ -13,12 +13,18 @@
     <name>Zero.Version.Environment.${zero.version}</name>
     <dependencyManagement>
         <dependencies>
-            <!-- Zero Core -->
+            <!-- Zero OSGI -->
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-ams</artifactId>
                 <version>${zero.version}</version>
             </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-core-runtime-metadata</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <!-- Zero Core -->
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-macro</artifactId>
@@ -31,7 +37,7 @@
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-osgi</artifactId>
+                <artifactId>zero-rx</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>
