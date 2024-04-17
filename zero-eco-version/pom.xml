@@ -39,7 +39,12 @@
                 <artifactId>zero-core-runtime-domain</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-core-cloud-environment</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-osgi-development-kit</artifactId>
