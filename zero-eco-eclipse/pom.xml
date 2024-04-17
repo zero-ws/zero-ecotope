@@ -38,6 +38,12 @@
                 <artifactId>org.osgi.service.cm</artifactId>
                 <version>${osgi.cm.version}</version>
             </dependency>
+            <!-- https://mvnrepository.com/artifact/org.apache.felix/org.apache.felix.shell -->
+            <dependency>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>org.apache.felix.shell</artifactId>
+                <version>${apache.felix.shell.version}</version>
+            </dependency>
             <!-- DM -->
             <!-- https://mvnrepository.com/artifact/org.apache.felix/org.apache.felix.dependencymanager -->
             <dependency>
@@ -50,6 +56,12 @@
                 <groupId>org.apache.felix</groupId>
                 <artifactId>org.apache.felix.logback</artifactId>
                 <version>${apache.felix.logback.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.apache.felix/org.apache.felix.gogo.command -->
+            <dependency>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>org.apache.felix.gogo.command</artifactId>
+                <version>${apache.gogo.command.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
