@@ -24,6 +24,17 @@
                 <artifactId>zero-core-runtime-metadata</artifactId>
                 <version>${zero.version}</version>
             </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-core-runtime-domain</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-osgi-development-kit</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
             <!-- Zero Core -->
             <dependency>
                 <groupId>io.zerows</groupId>
