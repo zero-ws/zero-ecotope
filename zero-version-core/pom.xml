@@ -44,12 +44,40 @@
                 <artifactId>zero-core-region-configuration</artifactId>
                 <version>${zero.version}</version>
             </dependency>
+
+
+            <!-- Facade of Core -->
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-core-feature-plugins-expression</artifactId>
+                <artifactId>zero-core-dependency-facade</artifactId>
                 <version>${zero.version}</version>
             </dependency>
 
+
+            <!-- OSGI Feature -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-core-feature-toolkit-expression</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-core-feature-database-cp</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-core-feature-web-session</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-core-feature-web-shared</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+
+
+            <!-- Zero Development Kit -->
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-osgi-development-kit</artifactId>
@@ -59,11 +87,6 @@
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-macro</artifactId>
-                <version>${zero.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.zerows</groupId>
-                <artifactId>zero-core-dependency-facade</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>

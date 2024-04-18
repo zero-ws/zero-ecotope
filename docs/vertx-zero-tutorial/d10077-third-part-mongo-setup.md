@@ -75,8 +75,8 @@ MongoDB server version: 3.6.2
 2 - switch default database `admin`
 
 ```shell
-> use admin
-switched to db admin
+> use manager
+switched to db manager
 ```
 
 3 - database authorized and login:
@@ -111,8 +111,8 @@ Successfully added user: {
 6 - check the results, please be sure `_id` contains the prefix of database name is not `admin` here.
 
 ```shell
-> use admin
-switched to db admin
+> use manager
+switched to db manager
 > db.system.users.find({user:'zero_mongo'});
 { "_id" : "ZERO_MESH.zero_mongo", "user" : "zero_mongo", "db" : "ZERO_MESH", "credentials" : { "SCRAM-SHA-1" : { "iterationCount" : 10000, "salt" : "UO+X+9i/uAqGXQ2EIliRVg==", "storedKey" : "oK3WotUQHTs3dvpNeLHiYzTgP4w=", "serverKey" : "+Hgbv9XO2NRfRe7ZFa0DVsyRCJo=" } }, "roles" : [ { "role" : "dbOwner", "db" : "ZERO_MESH" } ] }
 ```
