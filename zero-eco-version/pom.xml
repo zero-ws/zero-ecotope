@@ -63,7 +63,7 @@
             <!-- Library -->
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-co</artifactId>
+                <artifactId>zero-core-dependency-facade</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

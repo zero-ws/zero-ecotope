@@ -58,7 +58,7 @@
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-co</artifactId>
+                <artifactId>zero-core-dependency-facade</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>
