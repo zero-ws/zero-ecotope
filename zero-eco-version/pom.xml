@@ -13,16 +13,6 @@
     <name>Zero.Development.Kit.${project.version}</name>
     <dependencyManagement>
         <dependencies>
-            <!--
-                新版依赖
-                zero-epic       / zero-ams
-                zero-elite      / zero-metadata
-                                / zero-co
-                                / zero-macro
-                zero-energy     / zero-web
-                                / zero-osgi
-                zero-equip        按需选择
-             -->
             <!-- OSGI -->
             <dependency>
                 <groupId>io.zerows</groupId>
@@ -52,6 +42,11 @@
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-core-region-configuration</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-core-feature-plugins-expression</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

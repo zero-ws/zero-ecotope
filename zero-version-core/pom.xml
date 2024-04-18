@@ -44,6 +44,11 @@
                 <artifactId>zero-core-region-configuration</artifactId>
                 <version>${zero.version}</version>
             </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-core-feature-plugins-expression</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>io.zerows</groupId>
