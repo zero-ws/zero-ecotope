@@ -31,7 +31,12 @@
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-core-cloud-environment</artifactId>
+                <artifactId>zero-core-region-cloud</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-core-region-security</artifactId>
                 <version>${zero.version}</version>
             </dependency>
 
