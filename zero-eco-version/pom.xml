@@ -110,6 +110,11 @@
                 <artifactId>zero-core-web-monitor</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-core-web-scheduler</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
 
             <!-- Zero Development Kit -->
