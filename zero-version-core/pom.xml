@@ -31,17 +31,17 @@
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-core-region-cloud</artifactId>
+                <artifactId>zero-core-runtime-cloud</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-core-region-security</artifactId>
+                <artifactId>zero-core-runtime-security</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-core-region-configuration</artifactId>
+                <artifactId>zero-core-runtime-configuration</artifactId>
                 <version>${zero.version}</version>
             </dependency>
 
@@ -95,7 +95,7 @@
             <!-- Zero Development Kit -->
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-osgi-development-kit</artifactId>
+                <artifactId>zero-core-development-kit</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <!-- Zero Core -->
