@@ -72,6 +72,11 @@
                 <artifactId>zero-core-feature-database-cache</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-core-feature-unit-testing</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>io.zerows</groupId>
