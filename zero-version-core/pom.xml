@@ -140,6 +140,17 @@
                 <version>${zero.version}</version>
             </dependency>
 
+            <!-- Zero Web Container -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-core-web-metadata</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-core-web-monitor</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
 
             <!-- Zero Development Kit -->
             <dependency>
@@ -148,16 +159,6 @@
                 <version>${zero.version}</version>
             </dependency>
             <!-- Zero Core -->
-            <dependency>
-                <groupId>io.zerows</groupId>
-                <artifactId>zero-macro</artifactId>
-                <version>${zero.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.zerows</groupId>
-                <artifactId>zero-rx</artifactId>
-                <version>${zero.version}</version>
-            </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-web</artifactId>
