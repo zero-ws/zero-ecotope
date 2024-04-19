@@ -13,7 +13,7 @@
     <name>Zero.Development.Kit.${project.version}</name>
     <dependencyManagement>
         <dependencies>
-            <!-- OSGI -->
+            <!--======================== OSGI Runtime ===============-->
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-runtime-specification-ams</artifactId>
@@ -44,17 +44,14 @@
                 <artifactId>zero-core-runtime-configuration</artifactId>
                 <version>${project.version}</version>
             </dependency>
-
-
-            <!-- Facade of Core -->
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-core-dependency-facade</artifactId>
+                <artifactId>zero-core-runtime-assembly</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
 
-            <!-- OSGI Feature -->
+            <!--======================== OSGI Plugins Feature ===============-->
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-core-feature-toolkit-expression</artifactId>
@@ -63,32 +60,38 @@
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-core-feature-database-cp</artifactId>
-                <version>${zero.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-core-feature-database-jooq</artifactId>
-                <version>${zero.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-core-feature-database-cache</artifactId>
-                <version>${zero.version}</version>
+                <version>${project.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-core-feature-web-session</artifactId>
-                <version>${zero.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-core-feature-web-shared</artifactId>
-                <version>${zero.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-core-feature-web-client</artifactId>
-                <version>${zero.version}</version>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-core-feature-web-cache</artifactId>
+                <version>${project.version}</version>
             </dependency>
 
 
@@ -100,6 +103,13 @@
             </dependency>
 
 
+            <!--======================== 将要移除部分 ===============-->
+            <!-- Facade of Core -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-core-dependency-facade</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <!-- Library -->
             <dependency>
                 <groupId>io.zerows</groupId>
@@ -116,6 +126,8 @@
                 <artifactId>zero-web</artifactId>
                 <version>${project.version}</version>
             </dependency>
+
+            <!--======================== 核心插件 ===============-->
             <!-- Zero Infix 插件 -->
             <dependency>
                 <groupId>io.zerows</groupId>

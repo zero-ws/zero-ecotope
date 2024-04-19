@@ -13,7 +13,48 @@
     <name>Zero.Version.Environment.${zero.version}</name>
     <dependencyManagement>
         <dependencies>
-            <!-- Zero OSGI -->
+            <!--
+            Zero Core Runtime
+            Zero 核心框架运行时，基础规范如下
+            zero-epic
+            - zero-runtime-specification-ams
+                io.horizon                          核心规范、库
+                io.modello                          建模规范、库
+                io.macrocosm                        云原生规范、库
+                io.zerows.jackson                   第三方扩展（仅带有 jackson）
+            zero-elite
+            - zero-core-runtime-metadata            元数据管理
+                io.vertx.up
+                io.zerows.core.metadata
+            - zero-core-runtime-domain              通用领域模型管理
+                io.zerows.core.domain
+            - zero-core-runtime-cloud               云原生对接
+                io.zerows.core.cloud
+            - zero-core-runtime-security            安全管理
+                io.zerows.core.security
+            - zero-core-runtime-configuration       配置管理
+                io.zerows.core.configuration
+            - zero-core-runtime-assembly            依赖注入扫描模型，主要做类扫描（内置DI）
+                io.zerows.core.assembly
+
+            - zero-core-feature-toolkit-expression
+                io.zerows.core.feature.toolkit.expression                 表达式工具
+            - zero-core-feature-database-cp
+                io.zerows.core.feature.database.cp                        数据库连接池
+                io.zerows.core.feature.database.atom                      数据库通用对象
+            - zero-core-feature-database-jooq
+                io.zerows.core.feature.database.jooq                      数据库操作
+            - zero-core-feature-database-cache
+                io.zerows.core.feature.database.cache                     数据库缓存
+            - zero-core-feature-web-session
+                io.zerows.core.feature.web.session                        Web 会话
+            - zero-core-feature-web-shared
+                io.zerows.core.feature.web.shared                         Web 共享
+            - zero-core-feature-web-client
+                io.zerows.core.feature.web.client                         Web 客户端
+            zero-energy
+            -->
+            <!--======================== OSGI Runtime ===============-->
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-runtime-specification-ams</artifactId>
@@ -44,17 +85,14 @@
                 <artifactId>zero-core-runtime-configuration</artifactId>
                 <version>${zero.version}</version>
             </dependency>
-
-
-            <!-- Facade of Core -->
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-core-dependency-facade</artifactId>
+                <artifactId>zero-core-runtime-assembly</artifactId>
                 <version>${zero.version}</version>
             </dependency>
 
 
-            <!-- OSGI Feature -->
+            <!--======================== OSGI Plugins Feature ===============-->
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-core-feature-toolkit-expression</artifactId>
@@ -75,6 +113,7 @@
                 <artifactId>zero-core-feature-database-cache</artifactId>
                 <version>${zero.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-core-feature-web-session</artifactId>
@@ -88,6 +127,11 @@
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-core-feature-web-client</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-core-feature-web-cache</artifactId>
                 <version>${zero.version}</version>
             </dependency>
 
