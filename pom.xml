@@ -100,7 +100,7 @@
         <common.lang3.version>3.14.0</common.lang3.version>
         <common.net.version>3.10.0</common.net.version>
         <common.codec.version>1.16.1</common.codec.version>
-        <common.cli.version>1.6.0</common.cli.version>
+        <common.cli.version>1.7.0</common.cli.version>
         <common.io.version>2.16.1</common.io.version>
         <common.collection4.version>4.5.0-M1</common.collection4.version>
         <common.text.version>1.12.0</common.text.version>

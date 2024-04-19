@@ -16,7 +16,7 @@
             <!-- OSGI -->
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-ams</artifactId>
+                <artifactId>zero-runtime-specification-ams</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
