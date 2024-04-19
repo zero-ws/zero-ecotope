@@ -97,7 +97,8 @@ public class TabularService implements TabularStub {
 
 In this example we used an api of `Ux.Jooq` class, this class is provided by zero system, once you have finished the
 configuration of Jooq, you can use `Ux.Jooq` tool in any place of zero system code. When you used `Ux.Jooq` class, you
-must call `on(Class<?>)` first and returned `io.vertx.up.uca.jooq.UxJooq` reference, once you get this reference you can
+must call `on(Class<?>)` first and returned `io.zerows.core.feature.database.jooq.operation.UxJooq` reference, once you
+get this reference you can
 call some common api now.
 
 Current example, we used `fetchOnneByID` method, you can check this method signature:
@@ -119,18 +120,18 @@ When you test the request with following, you can see the response data \( Pleas
 
 ```java
 {
-    "data": {
-        "pkId": 2,
-        "isActive": true,
-        "zsigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
-        "zlanguage": "cn",
-        "zcreateTime": "2018-02-07T12:09:32",
-        "scode": "Single",
-        "stype": "code.pricecat",
-        "iorder": 2,
-        "sname": "散客执行价"
+    "data":{
+    "pkId":2,
+    "isActive":true,
+    "zsigma":"ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+    "zlanguage":"cn",
+    "zcreateTime":"2018-02-07T12:09:32",
+    "scode":"Single",
+    "stype":"code.pricecat",
+    "iorder":2,
+    "sname":"散客执行价"
     }
-}
+    }
 ```
 
 Here we could see that the data object has been returned, but for some real business scenario, we need to normalize
@@ -171,8 +172,8 @@ public class TabularService implements TabularStub {
     @Override
     public Future<JsonObject> fetchOne(final Long id) {
         return Ux.Jooq.on(SysTabularDao.class)
-                .<SysTabular>findByIdAsync(id)
-                .compose(item -> Ux.thenJsonOne(item, "tabular"));
+            .<SysTabular>findByIdAsync(id)
+            .compose(item -> Ux.thenJsonOne(item, "tabular"));
     }
 }
 ```
