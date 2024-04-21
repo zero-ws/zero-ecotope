@@ -98,6 +98,16 @@
                 <artifactId>zero-core-feature-web-cache</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-core-feature-web-monitor</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-core-feature-web-mbse</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <!-- Zero Web Container -->
             <dependency>
@@ -113,11 +123,6 @@
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-core-web-metadata</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.zerows</groupId>
-                <artifactId>zero-core-web-monitor</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
