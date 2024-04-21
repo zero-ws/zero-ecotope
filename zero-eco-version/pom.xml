@@ -125,6 +125,11 @@
                 <artifactId>zero-core-web-scheduler</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-core-web-validation</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
 
             <!-- Zero Development Kit -->
