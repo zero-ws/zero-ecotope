@@ -23,7 +23,7 @@ import io.vertx.up.annotations.EndPoint;
 
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import io.zerows.annotations.jakarta.StreamParam;
+import io.zerows.core.web.request.annotations.StreamParam;
 import java.io.File;
 
 @EndPoint

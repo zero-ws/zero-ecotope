@@ -52,7 +52,7 @@ import io.vertx.up.util.Jackson;
 import up.god.micro.async.JavaJson;
 
 import javax.validation.Valid;
-import io.zerows.annotations.jakarta.BodyParam;
+import io.zerows.core.web.request.annotations.BodyParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 
