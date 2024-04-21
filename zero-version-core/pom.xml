@@ -143,6 +143,11 @@
             <!-- Zero Web Container -->
             <dependency>
                 <groupId>io.zerows</groupId>
+                <artifactId>zero-core-web-invocation</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
                 <artifactId>zero-core-web-metadata</artifactId>
                 <version>${zero.version}</version>
             </dependency>
