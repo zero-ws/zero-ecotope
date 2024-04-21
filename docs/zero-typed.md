@@ -8,9 +8,9 @@ The parameters \( Not belong to specific \), must be annotated with following
 * [x] `javax.ws.rs.PathParam`
 * [x] `javax.ws.rs.HeaderParam`
 * [x] `javax.ws.rs.CookieParam`
-* [x] `io.zerows.core.web.request.annotations.BodyParam`
-* [x] `io.zerows.core.web.request.annotations.StreamParam`
-* [x] `io.zerows.core.web.request.annotations.SessionParam`
+* [x] `io.zerows.core.web.io.annotations.BodyParam`
+* [x] `io.zerows.core.web.io.annotations.StreamParam`
+* [x] `io.zerows.core.web.io.annotations.SessionParam`
 
 The following parameter could be used by type without annotation \( Mustn't include \)
 

@@ -33,7 +33,7 @@ package up.god.micro.params;
 
 import io.vertx.up.annotations.EndPoint;
 
-import io.zerows.core.web.request.annotations.BodyParam;
+import io.zerows.core.web.io.annotations.BodyParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import java.util.ArrayList;
