@@ -151,7 +151,12 @@
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-core-feature-web-socket</artifactId>
+                <artifactId>zero-core-feature-web-websocket</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-core-feature-web-security</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>
@@ -196,13 +201,13 @@
             <!-- Zero Development Kit -->
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-core-development-kit</artifactId>
+                <artifactId>zero-core-entry-osgi</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <!-- Zero Core -->
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-web</artifactId>
+                <artifactId>zero-core-entry-standalone</artifactId>
                 <version>${zero.version}</version>
             </dependency>
         </dependencies>

@@ -33,8 +33,8 @@ Then you can create new class as following:
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.mongo.MongoAuth;
 import io.vertx.ext.web.handler.AuthHandler;
-import io.vertx.up.annotations.Authenticate;
-import io.vertx.up.annotations.Wall;
+import io.zerows.core.security.annotations.Authenticate;
+import io.zerows.core.security.annotations.Wall;
 import io.vertx.mod.plugin.mongo.MongoInfix;
 import io.vertx.up.secure.component.BasicOstium;
 
