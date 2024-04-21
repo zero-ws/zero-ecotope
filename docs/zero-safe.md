@@ -9,44 +9,50 @@
  *  Once the actuator executing met JVM exception ( inherit from Throwable ), the logger will record the error message.
  **/
 public static void safeJvm(
-final JvmActuator actuator,
-final Annal logger
-    )
-public static<T> T safeJvm(
-final JvmSupplier<T> supplier,
-final Annal logger
-    )
+    final JvmActuator actuator,
+    final Annal logger
+)
+
+public static <T> T safeJvm(
+    final JvmSupplier<T> supplier,
+    final Annal logger
+)
+
 /**
  *  Once the actuator executing met JVM exception ( inherit from ZeroException ), the logger will record the error message.
  **/
 public static void safeZero(
-final ZeroActuator actuator,
-final Annal logger
-    )
-public static<T> T safeZero(
-final ZeroSupplier<T> supplier,
-final Annal logger
-    )
+    final ZeroActuator actuator,
+    final Annal logger
+)
+
+public static <T> T safeZero(
+    final ZeroSupplier<T> supplier,
+    final Annal logger
+)
+
 /**
- * Once all the input objects are null, the Actuator function will not execute, be sure no null dot object input into actuator.
+ * Once all the input objects are null, the Actuator function will not action, be sure no null dot object input into actuator.
  **/
 public static void safeNull(
-final Actuator actuator,
-final Object...input
-    )
-public static<T> void safeNull(
-final Consumer<T> consumer,
-final T input
-    )
+    final Actuator actuator,
+    final Object... input
+)
+
+public static <T> void safeNull(
+    final Consumer<T> consumer,
+    final T input
+)
+
 /**
- * If condition is true, execute tSupplier, otherwise execute fSupplier.
+ * If condition is true, action tSupplier, otherwise action fSupplier.
  */
 public static void safeSemi(
-final boolean condition,
-final Annal logger,
-final Actuator tSupplier,
-final Actuator fSupplier
-    )
+    final boolean condition,
+    final Annal logger,
+    final Actuator tSupplier,
+    final Actuator fSupplier
+)
 ```
 
 ## 2. Example
