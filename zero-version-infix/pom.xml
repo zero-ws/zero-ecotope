@@ -21,7 +21,7 @@
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-ifx-sms</artifactId>
+                <artifactId>zero-plugins-integration-sms</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>
@@ -41,7 +41,7 @@
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-ifx-feign</artifactId>
+                <artifactId>zero-plugins-integration-feign</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>
@@ -51,27 +51,27 @@
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-ifx-iqiy</artifactId>
+                <artifactId>zero-plugins-video-iqiy</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-ifx-redis</artifactId>
+                <artifactId>zero-plugins-store-redis</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-ifx-mongo</artifactId>
+                <artifactId>zero-plugins-store-mongo</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-ifx-neo4j</artifactId>
+                <artifactId>zero-plugins-store-neo4j</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-ifx-liquibase</artifactId>
+                <artifactId>zero-plugins-store-liquibase</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>
