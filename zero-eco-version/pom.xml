@@ -160,7 +160,7 @@
             <!-- Zero Development Kit -->
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-core-entry-osgi</artifactId>
+                <artifactId>zero-entry-bootstrap-osgi</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -169,7 +169,7 @@
             <!-- Library -->
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-core-entry-standalone</artifactId>
+                <artifactId>zero-core-entry-facade</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
