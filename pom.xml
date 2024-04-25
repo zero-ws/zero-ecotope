@@ -314,6 +314,8 @@
         <maven.plugin.project.info>3.5.0</maven.plugin.project.info>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-dependency-plugin -->
         <maven.plugin.dependency>3.6.1</maven.plugin.dependency>
+        <!-- https://mvnrepository.com/artifact/com.coderplus.maven.plugins/copy-rename-maven-plugin -->
+        <maven.coderplus.copy>1.0.1</maven.coderplus.copy>
 
         <!-- Container -->
         <!-- https://mvnrepository.com/artifact/io.fabric8/fabric8-maven-plugin -->
@@ -479,6 +481,12 @@
                             <exclude>docoverride/**</exclude>
                         </excludes>
                     </configuration>
+                </plugin>
+                <!-- https://mvnrepository.com/artifact/com.coderplus.maven.plugins/copy-rename-maven-plugin -->
+                <plugin>
+                    <groupId>com.coderplus.maven.plugins</groupId>
+                    <artifactId>copy-rename-maven-plugin</artifactId>
+                    <version>${maven.coderplus.copy}</version>
                 </plugin>
                 <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-project-info-reports-plugin -->
                 <plugin>
