@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.zerows</groupId>
     <artifactId>zero-ecotope</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>Zero.Ecotope.Framework.POM.${zero.version}</name>
     <description>Zero Ecotope Framework is a tool for Service Mesh Micro Service.</description>
     <url>http://www.zerows.io</url>
@@ -86,7 +86,7 @@
     </modules>
     <properties>
         <!-- Zero 固定版本号 -->
-        <zero.version>1.0-SNAPSHOT</zero.version>
+        <zero.version>1.0.0</zero.version>
 
         <!-- ====================== Java ======================================== -->
         <encoding>UTF-8</encoding>
@@ -156,6 +156,7 @@
         <eclipse.git.version>6.9.0.202403050737-r</eclipse.git.version>
         <osgi.framework.version>1.10.0</osgi.framework.version>
         <osgi.version>8.1.0</osgi.version>
+        <osgi.core.version>8.0.0</osgi.core.version>
         <osgi.cm.version>1.6.1</osgi.cm.version>
         <apache.felix.logback.version>1.0.6</apache.felix.logback.version>
         <apache.felix.dm.version>4.6.1</apache.felix.dm.version>
@@ -274,6 +275,9 @@
         <maven.plugin.version>2.16.2</maven.plugin.version>
         <!-- http://www.mvnrepository.com/artifact/org.apache.maven.plugins/maven-install-plugin/ -->
         <maven.plugin.install>3.1.1</maven.plugin.install>
+        <!-- https://mvnrepository.com/artifact/org.codehaus.mojo/exec-maven-plugin -->
+        <maven.plugin.exec>3.2.0</maven.plugin.exec>
+
         <!-- http://www.mvnrepository.com/artifact/org.apache.maven.plugins/maven-deploy-plugin -->
         <maven.plugin.deploy>3.1.1</maven.plugin.deploy>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-jar-plugin -->
@@ -296,7 +300,6 @@
         <maven.plugin.staging>1.6.13</maven.plugin.staging>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-gpg-plugin -->
         <maven.plugin.pgp>3.1.0</maven.plugin.pgp>
-
         <!-- https://mvnrepository.com/artifact/org.eluder.coveralls/coveralls-maven-plugin -->
         <maven.plugin.coveralls>4.3.0</maven.plugin.coveralls>
         <!-- https://mvnrepository.com/artifact/org.codehaus.mojo/cobertura-maven-plugin -->
@@ -420,6 +423,12 @@
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>versions-maven-plugin</artifactId>
                     <version>${maven.plugin.version}</version>
+                </plugin>
+                <!-- https://mvnrepository.com/artifact/org.codehaus.mojo/exec-maven-plugin -->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>exec-maven-plugin</artifactId>
+                    <version>${maven.plugin.exec}</version>
                 </plugin>
                 <!-- http://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
                 <plugin>
