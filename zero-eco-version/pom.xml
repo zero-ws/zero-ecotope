@@ -177,7 +177,7 @@
             <!-- Zero Infix 插件 -->
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-equip</artifactId>
+                <artifactId>zero-plugins-equip</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!-- Zero Extension -->
