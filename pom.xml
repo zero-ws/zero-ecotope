@@ -142,7 +142,7 @@
         <liquibase.version>4.27.0</liquibase.version><!-- Database: Liquibase -->
         <liquibase.plugin.version>4.26.0</liquibase.plugin.version>
         <mongodb.async.version>3.12.14</mongodb.async.version><!-- Database: MongoDb -->
-        <neo4j.version>5.19.0</neo4j.version><!-- Database: Neo4j -->
+        <neo4j.version>5.20.0</neo4j.version><!-- Database: Neo4j -->
         <mybatis.version>3.5.16</mybatis.version>
 
 
@@ -176,7 +176,7 @@
         <!-- module: ============== zero-mod-google ============================= -->
         <google.guice.version>7.0.0</google.guice.version>
         <google.guava.version>33.1.0-jre</google.guava.version>
-        <google.errorprone.version>2.26.1</google.errorprone.version>
+        <google.errorprone.version>2.27.0</google.errorprone.version>
         <google.jsr305.version>3.0.2</google.jsr305.version>
         <google.etcd.version>2.18.0</google.etcd.version>
         <google.protobuf.version>4.26.1</google.protobuf.version>
