@@ -198,13 +198,13 @@
             </dependency>
 
 
-            <!-- Zero Development Kit -->
+            <!-- Zero OSGI Entry -->
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-entry-bootstrap-osgi</artifactId>
+                <artifactId>zero-core-entry-toolkit</artifactId>
                 <version>${zero.version}</version>
             </dependency>
-            <!-- Zero Core -->
+            <!-- Zero Standalone Entry -->
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-core-entry-facade</artifactId>

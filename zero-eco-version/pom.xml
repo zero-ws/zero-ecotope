@@ -157,21 +157,20 @@
             </dependency>
 
 
-            <!-- Zero Development Kit -->
+            <!-- Zero OSGI Entry -->
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-entry-bootstrap-osgi</artifactId>
-                <version>${project.version}</version>
+                <artifactId>zero-core-entry-toolkit</artifactId>
+                <version>${zero.version}</version>
             </dependency>
-
-
-            <!--======================== 将要移除部分 ===============-->
-            <!-- Library -->
+            <!-- Zero Standalone Entry -->
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-core-entry-facade</artifactId>
                 <version>${project.version}</version>
             </dependency>
+
+            <!--======================== 将要移除部分 ===============-->
 
             <!--======================== 核心插件 ===============-->
             <!-- Zero Infix 插件 -->
