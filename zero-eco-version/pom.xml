@@ -160,7 +160,7 @@
             <!-- Zero OSGI Entry -->
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-core-entry-toolkit</artifactId>
+                <artifactId>zero-core-entry-osgi</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <!-- Zero Standalone Entry -->
