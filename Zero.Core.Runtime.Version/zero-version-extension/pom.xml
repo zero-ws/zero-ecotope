@@ -36,7 +36,7 @@
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-ambient</artifactId>
+                <artifactId>zero-extension-runtime-ambient</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>
