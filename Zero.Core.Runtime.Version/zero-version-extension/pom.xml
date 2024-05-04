@@ -16,7 +16,7 @@
             <!-- Zero Extension -->
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-ke</artifactId>
+                <artifactId>zero-extension-module-runtime</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>
