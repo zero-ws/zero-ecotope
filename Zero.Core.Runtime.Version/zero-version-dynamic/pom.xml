@@ -16,17 +16,17 @@
             <!-- Dynamic Module -->
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>infix-hed</artifactId>
+                <artifactId>zero-plugins-dynamic-toolkit-hed</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>infix-mysql</artifactId>
+                <artifactId>zero-plugins-dynamic-database-mysql</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>infix-oracle</artifactId>
+                <artifactId>zero-plugins-dynamic-database-oracle</artifactId>
                 <version>${zero.version}</version>
             </dependency>
         </dependencies>
