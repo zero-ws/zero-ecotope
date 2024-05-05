@@ -142,7 +142,7 @@
 
         <!-- module: ============== zero-mod-google ============================= -->
         <google.guice.version>7.0.0</google.guice.version>
-        <google.guava.version>33.1.0-jre</google.guava.version>
+        <google.guava.version>33.2.0-jre</google.guava.version>
         <google.errorprone.version>2.27.1</google.errorprone.version>
         <google.jsr305.version>3.0.2</google.jsr305.version>
         <google.etcd.version>2.18.0</google.etcd.version>
@@ -156,7 +156,7 @@
 
 
         <!-- module: ============== zero-mod-jackson ============================ -->
-        <jackson.version>2.17.0</jackson.version>
+        <jackson.version>2.17.1</jackson.version>
         <jackson.uuid.generator>5.0.0</jackson.uuid.generator>
         <yaml.version>2.2</yaml.version>
 
