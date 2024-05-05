@@ -26,12 +26,12 @@
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-doc</artifactId>
+                <artifactId>zero-extension-commerce-document</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-rbac</artifactId>
+                <artifactId>zero-extension-commerce-rbac</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>
@@ -51,7 +51,7 @@
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-erp</artifactId>
+                <artifactId>zero-extension-commerce-erp</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>
@@ -66,17 +66,17 @@
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-lbs</artifactId>
+                <artifactId>zero-extension-commerce-lbs</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-fm</artifactId>
+                <artifactId>zero-extension-commerce-finance</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-psi</artifactId>
+                <artifactId>zero-extension-commerce-psi</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>
