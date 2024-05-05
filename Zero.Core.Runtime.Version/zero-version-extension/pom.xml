@@ -21,7 +21,7 @@
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-crud</artifactId>
+                <artifactId>zero-extension-runtime-crud</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>
@@ -86,7 +86,7 @@
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-is</artifactId>
+                <artifactId>zero-extension-runtime-integration</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>
