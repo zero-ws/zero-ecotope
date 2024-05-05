@@ -41,12 +41,12 @@
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-ui</artifactId>
+                <artifactId>zero-extension-mbse-ui</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-jet</artifactId>
+                <artifactId>zero-extension-mbse-action</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>
@@ -56,12 +56,12 @@
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-atom</artifactId>
+                <artifactId>zero-extension-mbse-basement</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-graphic</artifactId>
+                <artifactId>zero-extension-runtime-graphic</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>
@@ -81,7 +81,7 @@
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-wf</artifactId>
+                <artifactId>zero-extension-runtime-workflow</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>
@@ -91,12 +91,12 @@
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-battery</artifactId>
+                <artifactId>zero-extension-mbse-modulat</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-tpl</artifactId>
+                <artifactId>zero-extension-runtime-tpl</artifactId>
                 <version>${zero.version}</version>
             </dependency>
         </dependencies>
