@@ -218,7 +218,7 @@
         <jedis.version>5.1.2</jedis.version>
         <checker.version>3.43.0</checker.version>
         <picoli.version>4.7.5</picoli.version>
-        <hdr.version>2.1.12</hdr.version>
+        <hdr.version>2.2.1</hdr.version>
         <codehaus.janino.version>3.1.12</codehaus.janino.version>
         <codehaus.mojo.version>1.23</codehaus.mojo.version>
 
