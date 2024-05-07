@@ -299,6 +299,9 @@
         <!-- OSGI -->
         <!-- https://mvnrepository.com/artifact/org.apache.felix/maven-bundle-plugin -->
         <maven.plugin.bundle>5.1.9</maven.plugin.bundle>
+        <!-- ProGuard -->
+        <!-- https://mvnrepository.com/artifact/com.github.wvengen/proguard-maven-plugin -->
+        <maven.plugin.proguard>2.6.1</maven.plugin.proguard>
     </properties>
     <build>
         <pluginManagement>
