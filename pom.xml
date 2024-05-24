@@ -67,11 +67,11 @@
         <common.lang3.version>3.14.0</common.lang3.version>
         <common.net.version>3.10.0</common.net.version>
         <common.codec.version>1.17.0</common.codec.version>
-        <common.cli.version>1.7.0</common.cli.version>
+        <common.cli.version>1.8.0</common.cli.version>
         <common.io.version>2.16.1</common.io.version>
         <common.collection4.version>4.5.0-M1</common.collection4.version>
         <common.text.version>1.12.0</common.text.version>
-        <common.compress.version>1.26.1</common.compress.version>
+        <common.compress.version>1.26.2</common.compress.version>
         <http.async.client.version>4.1.5</http.async.client.version><!-- Apache: Http Components -->
         <http.client.version>4.5.14</http.client.version>
         <http.core.version>4.4.16</http.core.version>
@@ -106,7 +106,7 @@
         <jooq.version>3.19.8</jooq.version>
         <jooq.vertx.version>6.5.5</jooq.vertx.version>
         <mysql.version>8.4.0</mysql.version><!-- Database: RDBMS -->
-        <liquibase.version>4.27.0</liquibase.version><!-- Database: Liquibase -->
+        <liquibase.version>4.28.0</liquibase.version><!-- Database: Liquibase -->
         <liquibase.plugin.version>4.26.0</liquibase.plugin.version>
         <mongodb.async.version>3.12.14</mongodb.async.version><!-- Database: MongoDb -->
         <neo4j.version>5.20.0</neo4j.version><!-- Database: Neo4j -->
@@ -146,8 +146,8 @@
         <google.errorprone.version>2.27.1</google.errorprone.version>
         <google.jsr305.version>3.0.2</google.jsr305.version>
         <google.etcd.version>2.18.0</google.etcd.version>
-        <google.protobuf.version>4.26.1</google.protobuf.version>
-        <google.gson.version>2.10.1</google.gson.version>
+        <google.protobuf.version>4.27.0</google.protobuf.version>
+        <google.gson.version>2.11.0</google.gson.version>
         <google.j2objc.version>3.0.0</google.j2objc.version>
 
 
@@ -188,7 +188,7 @@
 
         <!-- module: ============== zero-mod-netty ============================== -->
         <netty.tcnative.version>2.0.65.Final</netty.tcnative.version>
-        <netty.version>4.1.109.Final</netty.version>
+        <netty.version>4.1.110.Final</netty.version>
 
 
         <!-- module: ============== zero-mod-quiz =============================== -->
