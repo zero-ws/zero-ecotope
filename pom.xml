@@ -224,8 +224,8 @@
 
 
         <!-- module: ============== zero-mod-vertx ============================== -->
-        <vertx.version>4.5.7</vertx.version>
-        <stack.version>4.5.7</stack.version>
+        <vertx.version>4.5.8</vertx.version>
+        <stack.version>4.5.8</stack.version>
 
 
         <!-- ====================== Maven插件 ============================= -->
