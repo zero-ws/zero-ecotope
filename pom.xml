@@ -120,7 +120,7 @@
 
 
         <!-- module: ============== zero-mod-eclipse ============================ -->
-        <eclipse.git.version>6.9.0.202403050737-r</eclipse.git.version>
+        <eclipse.git.version>6.10.0.202406032230-r</eclipse.git.version>
         <osgi.framework.version>1.10.0</osgi.framework.version>
         <osgi.version>8.1.0</osgi.version>
         <osgi.core.version>8.0.0</osgi.core.version>
@@ -136,7 +136,7 @@
         <logging.logback.version>1.5.6</logging.logback.version>
         <logging.logback.cal10n.version>0.8.1</logging.logback.cal10n.version>
         <logging.slf4j.version>2.0.13</logging.slf4j.version>
-        <elasticsearch.version>8.14.0</elasticsearch.version>
+        <elasticsearch.version>8.14.1</elasticsearch.version>
         <elasticsearch.client.version>7.17.20</elasticsearch.client.version>
 
 
@@ -200,7 +200,7 @@
         <rxjava2.version>2.2.21</rxjava2.version>
         <rxjava3.version>3.1.8</rxjava3.version>
         <reactive.streams.version>1.0.4</reactive.streams.version>
-        <io.reactor.version>3.6.6</io.reactor.version>
+        <io.reactor.version>3.6.7</io.reactor.version>
 
 
         <!-- module: ============== zero-mod-secure ============================= -->
