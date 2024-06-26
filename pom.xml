@@ -69,7 +69,7 @@
         <common.codec.version>1.17.0</common.codec.version>
         <common.cli.version>1.8.0</common.cli.version>
         <common.io.version>2.16.1</common.io.version>
-        <common.collection4.version>4.5.0-M1</common.collection4.version>
+        <common.collection4.version>4.5.0-M2</common.collection4.version>
         <common.text.version>1.12.0</common.text.version>
         <common.compress.version>1.26.2</common.compress.version>
         <http.async.client.version>4.1.5</http.async.client.version><!-- Apache: Http Components -->
@@ -103,7 +103,7 @@
 
         <!-- module: ============== zero-mod-database =========================== -->
         <hikari.cp.version>5.1.0</hikari.cp.version><!-- Database -->
-        <jooq.version>3.19.9</jooq.version>
+        <jooq.version>3.19.10</jooq.version>
         <jooq.vertx.version>6.5.5</jooq.vertx.version>
         <mysql.version>8.4.0</mysql.version><!-- Database: RDBMS -->
         <liquibase.version>4.28.0</liquibase.version><!-- Database: Liquibase -->
@@ -206,7 +206,7 @@
         <!-- module: ============== zero-mod-secure ============================= -->
         <hibernate.validator.version>8.0.1.Final</hibernate.validator.version><!-- Bean Validation -->
         <jwt.version>4.4.0</jwt.version>
-        <sshd.version>2.12.1</sshd.version><!-- For Security: CVE-2022-45047 -->
+        <sshd.version>2.13.1</sshd.version><!-- For Security: CVE-2022-45047 -->
         <inversoft.version>2.0.0</inversoft.version>
 
         <!-- module: ============== zero-mod-vendor ============================== -->
