@@ -66,7 +66,7 @@
         <common.jexl.version>3.4.0</common.jexl.version><!-- Apache Common -->
         <common.lang3.version>3.14.0</common.lang3.version>
         <common.net.version>3.11.1</common.net.version>
-        <common.codec.version>1.17.0</common.codec.version>
+        <common.codec.version>1.17.1</common.codec.version>
         <common.cli.version>1.8.0</common.cli.version>
         <common.io.version>2.16.1</common.io.version>
         <common.collection4.version>4.5.0-M2</common.collection4.version>
@@ -143,7 +143,7 @@
         <!-- module: ============== zero-mod-google ============================= -->
         <google.guice.version>7.0.0</google.guice.version>
         <google.guava.version>33.2.1-jre</google.guava.version>
-        <google.errorprone.version>2.28.0</google.errorprone.version>
+        <google.errorprone.version>2.29.2</google.errorprone.version>
         <google.jsr305.version>3.0.2</google.jsr305.version>
         <google.etcd.version>2.18.0</google.etcd.version>
         <google.protobuf.version>4.28.0-RC1</google.protobuf.version>
@@ -224,8 +224,8 @@
 
 
         <!-- module: ============== zero-mod-vertx ============================== -->
-        <vertx.version>4.5.8</vertx.version>
-        <stack.version>4.5.8</stack.version>
+        <vertx.version>4.5.9</vertx.version>
+        <stack.version>4.5.9</stack.version>
 
 
         <!-- ====================== Maven插件 ============================= -->
