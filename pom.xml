@@ -64,7 +64,7 @@
         <!--                        子模块属性定义                                  -->
         <!-- module: ============== zero-mod-apache ============================= -->
         <common.jexl.version>3.4.0</common.jexl.version><!-- Apache Common -->
-        <common.lang3.version>3.14.0</common.lang3.version>
+        <common.lang3.version>3.15.0</common.lang3.version>
         <common.net.version>3.11.1</common.net.version>
         <common.codec.version>1.17.1</common.codec.version>
         <common.cli.version>1.8.0</common.cli.version>
