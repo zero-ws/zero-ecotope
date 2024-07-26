@@ -61,7 +61,12 @@
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-extension-runtime-graphic</artifactId>
+                <artifactId>zero-extension-mbse-modulat</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-extension-commerce-api</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>
@@ -91,12 +96,17 @@
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-extension-mbse-modulat</artifactId>
+                <artifactId>zero-extension-runtime-tpl</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-extension-runtime-tpl</artifactId>
+                <artifactId>zero-extension-runtime-graphic</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-extension-runtime-report</artifactId>
                 <version>${zero.version}</version>
             </dependency>
         </dependencies>
