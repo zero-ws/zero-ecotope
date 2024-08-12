@@ -64,14 +64,14 @@
         <!--                        子模块属性定义                                  -->
         <!-- module: ============== zero-mod-apache ============================= -->
         <common.jexl.version>3.4.0</common.jexl.version><!-- Apache Common -->
-        <common.lang3.version>3.15.0</common.lang3.version>
+        <common.lang3.version>3.16.0</common.lang3.version>
         <common.net.version>3.11.1</common.net.version>
         <common.codec.version>1.17.1</common.codec.version>
         <common.cli.version>1.8.0</common.cli.version>
         <common.io.version>2.16.1</common.io.version>
         <common.collection4.version>4.5.0-M2</common.collection4.version>
         <common.text.version>1.12.0</common.text.version>
-        <common.compress.version>1.26.2</common.compress.version>
+        <common.compress.version>1.27.0</common.compress.version>
         <http.async.client.version>4.1.5</http.async.client.version><!-- Apache: Http Components -->
         <http.client.version>4.5.14</http.client.version>
         <http.core.version>4.4.16</http.core.version>
@@ -106,7 +106,7 @@
         <jooq.version>3.19.10</jooq.version>
         <jooq.vertx.version>6.5.5</jooq.vertx.version>
         <mysql.version>9.0.0</mysql.version><!-- Database: RDBMS -->
-        <liquibase.version>4.29.0</liquibase.version><!-- Database: Liquibase -->
+        <liquibase.version>4.29.1</liquibase.version><!-- Database: Liquibase -->
         <liquibase.plugin.version>4.26.0</liquibase.plugin.version>
         <mongodb.async.version>3.12.14</mongodb.async.version><!-- Database: MongoDb -->
         <neo4j.version>5.23.0</neo4j.version><!-- Database: Neo4j -->
@@ -136,23 +136,23 @@
         <logging.logback.version>1.5.6</logging.logback.version>
         <logging.logback.cal10n.version>0.8.1</logging.logback.cal10n.version>
         <logging.slf4j.version>2.0.13</logging.slf4j.version>
-        <elasticsearch.version>8.14.3</elasticsearch.version>
+        <elasticsearch.version>8.15.0</elasticsearch.version>
         <elasticsearch.client.version>7.17.20</elasticsearch.client.version>
 
 
         <!-- module: ============== zero-mod-google ============================= -->
         <google.guice.version>7.0.0</google.guice.version>
         <google.guava.version>33.2.1-jre</google.guava.version>
-        <google.errorprone.version>2.29.2</google.errorprone.version>
+        <google.errorprone.version>2.30.0</google.errorprone.version>
         <google.jsr305.version>3.0.2</google.jsr305.version>
         <google.etcd.version>2.18.0</google.etcd.version>
-        <google.protobuf.version>4.28.0-RC1</google.protobuf.version>
+        <google.protobuf.version>4.28.0-RC2</google.protobuf.version>
         <google.gson.version>2.11.0</google.gson.version>
         <google.j2objc.version>3.0.0</google.j2objc.version>
 
 
         <!-- module: ============== zero-mod-grpc =============================== -->
-        <grpc.version>1.65.1</grpc.version>
+        <grpc.version>1.66.0</grpc.version>
 
 
         <!-- module: ============== zero-mod-jackson ============================ -->
@@ -206,7 +206,7 @@
         <!-- module: ============== zero-mod-secure ============================= -->
         <hibernate.validator.version>8.0.1.Final</hibernate.validator.version><!-- Bean Validation -->
         <jwt.version>4.4.0</jwt.version>
-        <sshd.version>2.13.1</sshd.version><!-- For Security: CVE-2022-45047 -->
+        <sshd.version>2.13.2</sshd.version><!-- For Security: CVE-2022-45047 -->
         <inversoft.version>2.0.0</inversoft.version>
 
         <!-- module: ============== zero-mod-vendor ============================== -->
@@ -216,7 +216,7 @@
         <feign.version>8.18.0</feign.version>
         <joda.version>2.12.7</joda.version>
         <jedis.version>5.1.3</jedis.version>
-        <checker.version>3.45.0</checker.version>
+        <checker.version>3.46.0</checker.version>
         <picoli.version>4.7.6</picoli.version>
         <hdr.version>2.2.2</hdr.version>
         <codehaus.janino.version>3.1.12</codehaus.janino.version>
