@@ -67,7 +67,7 @@
         <common.lang3.version>3.16.0</common.lang3.version>
         <common.net.version>3.11.1</common.net.version>
         <common.codec.version>1.17.1</common.codec.version>
-        <common.cli.version>1.8.0</common.cli.version>
+        <common.cli.version>1.9.0</common.cli.version>
         <common.io.version>2.16.1</common.io.version>
         <common.collection4.version>4.5.0-M2</common.collection4.version>
         <common.text.version>1.12.0</common.text.version>
@@ -103,7 +103,7 @@
 
         <!-- module: ============== zero-mod-database =========================== -->
         <hikari.cp.version>5.1.0</hikari.cp.version><!-- Database -->
-        <jooq.version>3.19.10</jooq.version>
+        <jooq.version>3.19.11</jooq.version>
         <jooq.vertx.version>6.5.5</jooq.vertx.version>
         <mysql.version>9.0.0</mysql.version><!-- Database: RDBMS -->
         <liquibase.version>4.29.1</liquibase.version><!-- Database: Liquibase -->
@@ -133,7 +133,7 @@
         <!-- module: ============== zero-mod-elk ================================ -->
         <logging.common.version>1.3.3</logging.common.version>
         <logging.log4j2.version>2.23.1</logging.log4j2.version>
-        <logging.logback.version>1.5.6</logging.logback.version>
+        <logging.logback.version>1.5.7</logging.logback.version>
         <logging.logback.cal10n.version>0.8.1</logging.logback.cal10n.version>
         <logging.slf4j.version>2.0.13</logging.slf4j.version>
         <elasticsearch.version>8.15.0</elasticsearch.version>
@@ -198,9 +198,9 @@
 
         <!-- module: ============== zero-mod-reactive =========================== -->
         <rxjava2.version>2.2.21</rxjava2.version>
-        <rxjava3.version>3.1.8</rxjava3.version>
+        <rxjava3.version>3.1.9</rxjava3.version>
         <reactive.streams.version>1.0.4</reactive.streams.version>
-        <io.reactor.version>3.6.8</io.reactor.version>
+        <io.reactor.version>3.6.9</io.reactor.version>
 
 
         <!-- module: ============== zero-mod-secure ============================= -->
