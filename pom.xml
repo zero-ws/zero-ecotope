@@ -214,7 +214,7 @@
         <jetbrains.version>24.1.0</jetbrains.version>
         <scala.version>2.13.15-M1</scala.version>
         <feign.version>8.18.0</feign.version>
-        <joda.version>2.12.7</joda.version>
+        <joda.version>2.13.0</joda.version>
         <jedis.version>5.1.3</jedis.version>
         <checker.version>3.47.0</checker.version>
         <picoli.version>4.7.6</picoli.version>
@@ -224,8 +224,8 @@
 
 
         <!-- module: ============== zero-mod-vertx ============================== -->
-        <vertx.version>4.5.9</vertx.version>
-        <stack.version>4.5.9</stack.version>
+        <vertx.version>4.5.10</vertx.version>
+        <stack.version>4.5.10</stack.version>
 
 
         <!-- ====================== Maven插件 ============================= -->
