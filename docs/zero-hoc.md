@@ -43,9 +43,9 @@ public final class Statute {
 ```java
 
 /**
- *  1. If the condition is true ( arg 0 ), Zero system will build the target Exception 
+ *  1. If the condition is true ( arg 0 ), Zero system will web the target Exception 
  *  with Class<?> ( arg 2 ) and arguments ( arg 3 ).
- *  2. Once exception build successfully, the Annal ( arg 1 ) will record the exception first
+ *  2. Once exception web successfully, the Annal ( arg 1 ) will record the exception first
  *  3. Then the exception will be throw out.
  **/
 public static void flingZero(

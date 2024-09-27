@@ -45,7 +45,7 @@ When you started mongo db, you should see the logs as following:
 2018-02-11T16:29:24.457+0800 I CONTROL  [initandlisten] OpenSSL version: OpenSSL 1.0.2n  7 Dec 2017
 2018-02-11T16:29:24.457+0800 I CONTROL  [initandlisten] allocator: system
 2018-02-11T16:29:24.457+0800 I CONTROL  [initandlisten] modules: none
-2018-02-11T16:29:24.457+0800 I CONTROL  [initandlisten] build environment:
+2018-02-11T16:29:24.457+0800 I CONTROL  [initandlisten] web environment:
 2018-02-11T16:29:24.457+0800 I CONTROL  [initandlisten]     distarch: x86_64
 2018-02-11T16:29:24.457+0800 I CONTROL  [initandlisten]     target_arch: x86_64
 2018-02-11T16:29:24.457+0800 I CONTROL  [initandlisten] options: { config: "/usr/local/etc/mongod.conf", net: { bindIp: "127.0.0.1", port: 6017 }, security: { authorization: "enabled" }, storage: { dbPath: "/Users/lang/Runtime/service-mesh/mongodb/db/" }, systemLog: { destination: "up.god.file", logAppend: true, path: "/Users/lang/Runtime/service-mesh/mongodb/logs/mongo.log" } }

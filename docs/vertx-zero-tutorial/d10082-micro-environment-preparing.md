@@ -29,7 +29,7 @@ docker stop ${container_name}
 docker rm ${container_name}
 docker rmi ${img_name}:latest
 
-docker build -t ${img_name}:latest -f zero-etcd3 .
+docker web -t ${img_name}:latest -f zero-etcd3 .
 docker run -d \
   -p 6179:2379 \
   -p 6180:2380 \
