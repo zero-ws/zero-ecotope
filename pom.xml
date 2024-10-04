@@ -87,12 +87,12 @@
 
 
         <!-- module: ============== zero-mod-camunda ============================ -->
-        <camunda.version>7.21.0</camunda.version>
-        <camunda.spin.version>1.23.0</camunda.spin.version>
+        <camunda.version>7.22.0</camunda.version>
+        <camunda.spin.version>7.22.0</camunda.spin.version>
         <camunda.bpm.version>1.2.0</camunda.bpm.version>
-        <camunda.connect.version>1.6.0</camunda.connect.version>
-        <camunda.util.version>1.13.0</camunda.util.version>
-        <camunda.template.version>2.2.0</camunda.template.version>
+        <camunda.connect.version>7.22.0</camunda.connect.version>
+        <camunda.util.version>7.22.0</camunda.util.version>
+        <camunda.template.version>7.22.0</camunda.template.version>
 
 
         <!-- module: ============== zero-mod-cluster ============================ -->
@@ -206,7 +206,7 @@
         <!-- module: ============== zero-mod-secure ============================= -->
         <hibernate.validator.version>8.0.1.Final</hibernate.validator.version><!-- Bean Validation -->
         <jwt.version>4.4.0</jwt.version>
-        <sshd.version>2.13.2</sshd.version><!-- For Security: CVE-2022-45047 -->
+        <sshd.version>2.14.0</sshd.version><!-- For Security: CVE-2022-45047 -->
         <inversoft.version>2.0.0</inversoft.version>
 
         <!-- module: ============== zero-mod-vendor ============================== -->
@@ -216,7 +216,7 @@
         <feign.version>8.18.0</feign.version>
         <joda.version>2.13.0</joda.version>
         <jedis.version>5.2.0</jedis.version>
-        <checker.version>3.47.0</checker.version>
+        <checker.version>3.48.0</checker.version>
         <picoli.version>4.7.6</picoli.version>
         <hdr.version>2.2.2</hdr.version>
         <codehaus.janino.version>3.1.12</codehaus.janino.version>
