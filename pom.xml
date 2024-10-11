@@ -133,7 +133,7 @@
         <!-- module: ============== zero-mod-elk ================================ -->
         <logging.common.version>1.3.4</logging.common.version>
         <logging.log4j2.version>2.23.1</logging.log4j2.version>
-        <logging.logback.version>1.5.8</logging.logback.version>
+        <logging.logback.version>1.5.9</logging.logback.version>
         <logging.logback.cal10n.version>0.8.1</logging.logback.cal10n.version>
         <logging.slf4j.version>2.0.16</logging.slf4j.version>
         <elasticsearch.version>8.15.2</elasticsearch.version>
@@ -180,7 +180,7 @@
         <!-- module: ============== zero-mod-jvmr =============================== -->
         <jvmr.asm.version>1.11.9</jvmr.asm.version>
         <jvmr.lombok.version>1.18.34</jvmr.lombok.version>
-        <jvmr.asm.version>9.7</jvmr.asm.version>
+        <jvmr.asm.version>9.7.1</jvmr.asm.version>
         <jvmr.cglib.version>3.3.0</jvmr.cglib.version>
         <jvmr.reflection.version>0.10.2</jvmr.reflection.version>
         <jvmr.javassist.version>3.30.2-GA</jvmr.javassist.version>
