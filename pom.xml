@@ -102,14 +102,14 @@
 
 
         <!-- module: ============== zero-mod-database =========================== -->
-        <hikari.cp.version>6.0.0</hikari.cp.version><!-- Database -->
-        <jooq.version>3.19.14</jooq.version>
+        <hikari.cp.version>6.1.0</hikari.cp.version><!-- Database -->
+        <jooq.version>3.19.15</jooq.version>
         <jooq.vertx.version>6.5.5</jooq.vertx.version>
         <mysql.version>9.1.0</mysql.version><!-- Database: RDBMS -->
-        <liquibase.version>4.29.2</liquibase.version><!-- Database: Liquibase -->
+        <liquibase.version>4.30.0</liquibase.version><!-- Database: Liquibase -->
         <liquibase.plugin.version>4.26.0</liquibase.plugin.version>
         <mongodb.async.version>3.12.14</mongodb.async.version><!-- Database: MongoDb -->
-        <neo4j.version>5.26.1</neo4j.version><!-- Database: Neo4j -->
+        <neo4j.version>5.26.3</neo4j.version><!-- Database: Neo4j -->
         <mybatis.version>3.5.16</mybatis.version>
 
 
@@ -136,7 +136,7 @@
         <logging.logback.version>1.5.12</logging.logback.version>
         <logging.logback.cal10n.version>0.8.1</logging.logback.cal10n.version>
         <logging.slf4j.version>2.0.16</logging.slf4j.version>
-        <elasticsearch.version>8.15.3</elasticsearch.version>
+        <elasticsearch.version>8.16.0</elasticsearch.version>
         <elasticsearch.client.version>7.17.25</elasticsearch.client.version>
 
 
@@ -200,7 +200,7 @@
         <rxjava2.version>2.2.21</rxjava2.version>
         <rxjava3.version>3.1.9</rxjava3.version>
         <reactive.streams.version>1.0.4</reactive.streams.version>
-        <io.reactor.version>3.6.11</io.reactor.version>
+        <io.reactor.version>3.7.0</io.reactor.version>
 
 
         <!-- module: ============== zero-mod-secure ============================= -->
@@ -216,7 +216,7 @@
         <feign.version>8.18.0</feign.version>
         <joda.version>2.13.0</joda.version>
         <jedis.version>5.2.0</jedis.version>
-        <checker.version>3.48.1</checker.version>
+        <checker.version>3.48.2</checker.version>
         <picoli.version>4.7.6</picoli.version>
         <hdr.version>2.2.2</hdr.version>
         <codehaus.janino.version>3.1.12</codehaus.janino.version>
@@ -226,6 +226,8 @@
         <!-- module: ============== zero-mod-vertx ============================== -->
         <vertx.version>4.5.10</vertx.version>
         <stack.version>4.5.10</stack.version>
+
+        <vertx.legacy.version>4.5.11</vertx.legacy.version>
 
 
         <!-- ====================== Maven插件 ============================= -->
