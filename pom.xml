@@ -110,7 +110,7 @@
         <liquibase.plugin.version>4.26.0</liquibase.plugin.version>
         <mongodb.async.version>3.12.14</mongodb.async.version><!-- Database: MongoDb -->
         <neo4j.version>5.26.3</neo4j.version><!-- Database: Neo4j -->
-        <mybatis.version>3.5.16</mybatis.version>
+        <mybatis.version>3.5.17</mybatis.version>
 
 
         <!-- module: ============== zero-mod-doc ================================ -->
@@ -198,7 +198,7 @@
 
         <!-- module: ============== zero-mod-reactive =========================== -->
         <rxjava2.version>2.2.21</rxjava2.version>
-        <rxjava3.version>3.1.9</rxjava3.version>
+        <rxjava3.version>3.1.10</rxjava3.version>
         <reactive.streams.version>1.0.4</reactive.streams.version>
         <io.reactor.version>3.7.0</io.reactor.version>
 
@@ -226,7 +226,9 @@
         <!-- module: ============== zero-mod-vertx ============================== -->
         <vertx.version>4.5.11</vertx.version>
         <stack.version>4.5.11</stack.version>
-
+        <!--
+        mvn:io.vertx:vertx-io_uring-incubator
+        -->
         <vertx.legacy.version>4.5.11</vertx.legacy.version>
 
 
