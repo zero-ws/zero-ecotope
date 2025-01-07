@@ -66,10 +66,10 @@
         <common.jexl.version>3.4.0</common.jexl.version><!-- Apache Common -->
         <common.lang3.version>3.17.0</common.lang3.version>
         <common.net.version>3.11.1</common.net.version>
-        <common.codec.version>1.17.1</common.codec.version>
+        <common.codec.version>1.17.2</common.codec.version>
         <common.cli.version>1.9.0</common.cli.version>
         <common.io.version>2.18.0</common.io.version>
-        <common.collection4.version>4.5.0-M2</common.collection4.version>
+        <common.collection4.version>4.5.0-M3</common.collection4.version>
         <common.text.version>1.13.0</common.text.version>
         <common.compress.version>1.27.1</common.compress.version>
         <http.async.client.version>4.1.5</http.async.client.version><!-- Apache: Http Components -->
@@ -110,7 +110,7 @@
         <liquibase.plugin.version>4.26.0</liquibase.plugin.version>
         <mongodb.async.version>3.12.14</mongodb.async.version><!-- Database: MongoDb -->
         <neo4j.version>5.27.0</neo4j.version><!-- Database: Neo4j -->
-        <mybatis.version>3.5.17</mybatis.version>
+        <mybatis.version>3.5.19</mybatis.version>
 
 
         <!-- module: ============== zero-mod-doc ================================ -->
@@ -133,7 +133,7 @@
         <!-- module: ============== zero-mod-elk ================================ -->
         <logging.common.version>1.3.4</logging.common.version>
         <logging.log4j2.version>2.24.1</logging.log4j2.version>
-        <logging.logback.version>1.5.14</logging.logback.version>
+        <logging.logback.version>1.5.16</logging.logback.version>
         <logging.logback.cal10n.version>0.8.1</logging.logback.cal10n.version>
         <logging.slf4j.version>2.0.16</logging.slf4j.version>
         <elasticsearch.version>8.17.0</elasticsearch.version>
@@ -216,7 +216,7 @@
         <feign.version>8.18.0</feign.version>
         <joda.version>2.13.0</joda.version>
         <jedis.version>5.2.0</jedis.version>
-        <checker.version>3.48.3</checker.version>
+        <checker.version>3.48.4</checker.version>
         <picoli.version>4.7.6</picoli.version>
         <hdr.version>2.2.2</hdr.version>
         <codehaus.janino.version>3.1.12</codehaus.janino.version>
