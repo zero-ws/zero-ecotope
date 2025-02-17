@@ -106,7 +106,7 @@
         <jooq.version>3.19.18</jooq.version>
         <jooq.vertx.version>6.5.5</jooq.vertx.version>
         <mysql.version>9.2.0</mysql.version><!-- Database: RDBMS -->
-        <liquibase.version>4.31.0</liquibase.version><!-- Database: Liquibase -->
+        <liquibase.version>4.31.1</liquibase.version><!-- Database: Liquibase -->
         <liquibase.plugin.version>4.26.0</liquibase.plugin.version>
         <mongodb.async.version>3.12.14</mongodb.async.version><!-- Database: MongoDb -->
         <neo4j.version>5.28.1</neo4j.version><!-- Database: Neo4j -->
@@ -187,8 +187,8 @@
 
 
         <!-- module: ============== zero-mod-netty ============================== -->
-        <netty.tcnative.version>2.0.69.Final</netty.tcnative.version>
-        <netty.version>4.1.117.Final</netty.version>
+        <netty.tcnative.version>2.0.70.Final</netty.tcnative.version>
+        <netty.version>4.1.118.Final</netty.version>
 
 
         <!-- module: ============== zero-mod-quiz =============================== -->
