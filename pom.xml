@@ -103,7 +103,7 @@
 
         <!-- module: ============== zero-mod-database =========================== -->
         <hikari.cp.version>6.2.1</hikari.cp.version><!-- Database -->
-        <jooq.version>3.19.18</jooq.version>
+        <jooq.version>3.20.1</jooq.version>
         <jooq.vertx.version>6.5.5</jooq.vertx.version>
         <mysql.version>9.2.0</mysql.version><!-- Database: RDBMS -->
         <liquibase.version>4.31.1</liquibase.version><!-- Database: Liquibase -->
@@ -133,7 +133,7 @@
         <!-- module: ============== zero-mod-elk ================================ -->
         <logging.common.version>1.3.5</logging.common.version>
         <logging.log4j2.version>2.24.1</logging.log4j2.version>
-        <logging.logback.version>1.5.16</logging.logback.version>
+        <logging.logback.version>1.5.17</logging.logback.version>
         <logging.logback.cal10n.version>0.8.1</logging.logback.cal10n.version>
         <logging.slf4j.version>2.0.16</logging.slf4j.version>
         <elasticsearch.version>8.17.2</elasticsearch.version>
@@ -206,7 +206,7 @@
         <!-- module: ============== zero-mod-secure ============================= -->
         <hibernate.validator.version>8.0.1.Final</hibernate.validator.version><!-- Bean Validation -->
         <jwt.version>4.5.0</jwt.version>
-        <sshd.version>2.14.0</sshd.version><!-- For Security: CVE-2022-45047 -->
+        <sshd.version>2.15.0</sshd.version><!-- For Security: CVE-2022-45047 -->
         <inversoft.version>2.0.0</inversoft.version>
 
         <!-- module: ============== zero-mod-vendor ============================== -->
@@ -230,7 +230,7 @@
         mvn:io.vertx:vertx-io_uring-incubator
         -->
 
-        <vertx.legacy.version>4.5.12</vertx.legacy.version>
+        <vertx.legacy.version>4.5.13</vertx.legacy.version>
 
 
         <!-- ====================== Maven插件 ============================= -->
