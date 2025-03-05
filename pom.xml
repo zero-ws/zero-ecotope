@@ -58,8 +58,8 @@
         <!-- ====================== Java ======================================== -->
         <encoding>UTF-8</encoding>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>17</java.version>
-        <java.legacy.version>11</java.legacy.version>
+        <java.version>21</java.version>
+        <java.legacy.version>21</java.legacy.version>
 
         <!--                        子模块属性定义                                  -->
         <!-- module: ============== zero-mod-apache ============================= -->
