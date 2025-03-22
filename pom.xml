@@ -82,7 +82,7 @@
 
 
         <!-- module: ============== zero-mod-aspectj ============================= -->
-        <aspectj.version>1.9.22.1</aspectj.version>
+        <aspectj.version>1.9.23</aspectj.version>
         <jcabi.version>0.26.0</jcabi.version>
 
 
@@ -103,14 +103,14 @@
 
         <!-- module: ============== zero-mod-database =========================== -->
         <hikari.cp.version>6.2.1</hikari.cp.version><!-- Database -->
-        <jooq.version>3.20.1</jooq.version>
+        <jooq.version>3.20.2</jooq.version>
         <!-- <jooq.version>3.20.1</jooq.version> -->
         <jooq.vertx.version>6.5.5</jooq.vertx.version>
         <mysql.version>9.2.0</mysql.version><!-- Database: RDBMS -->
         <liquibase.version>4.31.1</liquibase.version><!-- Database: Liquibase -->
         <liquibase.plugin.version>4.26.0</liquibase.plugin.version>
         <mongodb.async.version>3.12.14</mongodb.async.version><!-- Database: MongoDb -->
-        <neo4j.version>5.28.2</neo4j.version><!-- Database: Neo4j -->
+        <neo4j.version>5.28.4</neo4j.version><!-- Database: Neo4j -->
         <mybatis.version>3.5.19</mybatis.version>
 
 
@@ -121,7 +121,7 @@
 
 
         <!-- module: ============== zero-mod-eclipse ============================ -->
-        <eclipse.git.version>7.1.0.202411261347-r</eclipse.git.version>
+        <eclipse.git.version>7.2.0.202503040940-r</eclipse.git.version>
         <osgi.framework.version>1.10.0</osgi.framework.version>
         <osgi.version>8.1.0</osgi.version>
         <osgi.core.version>8.0.0</osgi.core.version>
@@ -134,7 +134,7 @@
         <!-- module: ============== zero-mod-elk ================================ -->
         <logging.common.version>1.3.5</logging.common.version>
         <logging.log4j2.version>2.24.1</logging.log4j2.version>
-        <logging.logback.version>1.5.17</logging.logback.version>
+        <logging.logback.version>1.5.18</logging.logback.version>
         <logging.logback.cal10n.version>0.8.1</logging.logback.cal10n.version>
         <logging.slf4j.version>2.0.16</logging.slf4j.version>
         <elasticsearch.version>8.17.2</elasticsearch.version>
@@ -143,11 +143,11 @@
 
         <!-- module: ============== zero-mod-google ============================= -->
         <google.guice.version>7.0.0</google.guice.version>
-        <google.guava.version>33.4.0-jre</google.guava.version>
-        <google.errorprone.version>2.36.0</google.errorprone.version>
+        <google.guava.version>33.4.5-jre</google.guava.version>
+        <google.errorprone.version>2.37.0</google.errorprone.version>
         <google.jsr305.version>3.0.2</google.jsr305.version>
         <google.etcd.version>2.18.0</google.etcd.version>
-        <google.protobuf.version>4.30.0</google.protobuf.version>
+        <google.protobuf.version>4.30.1</google.protobuf.version>
         <google.gson.version>2.12.1</google.gson.version>
         <google.j2objc.version>3.0.0</google.j2objc.version>
 
@@ -201,7 +201,7 @@
         <rxjava2.version>2.2.21</rxjava2.version>
         <rxjava3.version>3.1.10</rxjava3.version>
         <reactive.streams.version>1.0.4</reactive.streams.version>
-        <io.reactor.version>3.7.3</io.reactor.version>
+        <io.reactor.version>3.8.0-M1</io.reactor.version>
 
 
         <!-- module: ============== zero-mod-secure ============================= -->
@@ -217,7 +217,7 @@
         <feign.version>8.18.0</feign.version>
         <joda.version>2.13.1</joda.version>
         <jedis.version>5.2.0</jedis.version>
-        <checker.version>3.49.0</checker.version>
+        <checker.version>3.49.1</checker.version>
         <picoli.version>4.7.6</picoli.version>
         <hdr.version>2.2.2</hdr.version>
         <codehaus.janino.version>3.1.12</codehaus.janino.version>
@@ -253,6 +253,8 @@
 
         <!-- http://www.mvnrepository.com/artifact/org.apache.maven.plugins/maven-deploy-plugin -->
         <maven.plugin.deploy>3.1.3</maven.plugin.deploy>
+        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-shade-plugin -->
+        <maven.plugin.shade>3.6.0</maven.plugin.shade>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-jar-plugin -->
         <maven.plugin.jar>3.4.2</maven.plugin.jar>
         <!-- http://www.mvnrepository.com/artifact/org.apache.maven.plugins/maven-resources-plugin -->
@@ -407,6 +409,11 @@
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>exec-maven-plugin</artifactId>
                     <version>${maven.plugin.exec}</version>
+                </plugin>
+                <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-shade-plugin -->
+                <plugin>
+                    <artifactId>maven-shade-plugin</artifactId>
+                    <version>${maven.plugin.shade}</version>
                 </plugin>
                 <!-- http://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
                 <plugin>
