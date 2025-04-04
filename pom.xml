@@ -87,12 +87,12 @@
 
 
         <!-- module: ============== zero-mod-camunda ============================ -->
-        <camunda.version>7.22.0</camunda.version>
-        <camunda.spin.version>7.22.0</camunda.spin.version>
+        <camunda.version>7.23.0</camunda.version>
+        <camunda.spin.version>7.23.0</camunda.spin.version>
         <camunda.bpm.version>1.2.0</camunda.bpm.version>
-        <camunda.connect.version>7.22.0</camunda.connect.version>
-        <camunda.util.version>7.22.0</camunda.util.version>
-        <camunda.template.version>7.22.0</camunda.template.version>
+        <camunda.connect.version>7.23.0</camunda.connect.version>
+        <camunda.util.version>7.23.0</camunda.util.version>
+        <camunda.template.version>7.23.0</camunda.template.version>
 
 
         <!-- module: ============== zero-mod-cluster ============================ -->
@@ -103,7 +103,7 @@
 
         <!-- module: ============== zero-mod-database =========================== -->
         <hikari.cp.version>6.3.0</hikari.cp.version><!-- Database -->
-        <jooq.version>3.20.2</jooq.version>
+        <jooq.version>3.20.3</jooq.version>
         <!-- <jooq.version>3.20.1</jooq.version> -->
         <jooq.vertx.version>6.5.5</jooq.vertx.version>
         <mysql.version>9.2.0</mysql.version><!-- Database: RDBMS -->
@@ -180,8 +180,8 @@
 
         <!-- module: ============== zero-mod-jvmr =============================== -->
         <jvmr.asm.version>1.11.9</jvmr.asm.version>
-        <jvmr.lombok.version>1.18.36</jvmr.lombok.version>
-        <jvmr.asm.version>9.7.1</jvmr.asm.version>
+        <jvmr.lombok.version>1.18.38</jvmr.lombok.version>
+        <jvmr.asm.version>9.8</jvmr.asm.version>
         <jvmr.cglib.version>3.3.0</jvmr.cglib.version>
         <jvmr.reflection.version>0.10.2</jvmr.reflection.version>
         <jvmr.javassist.version>3.30.2-GA</jvmr.javassist.version>
@@ -189,7 +189,7 @@
 
         <!-- module: ============== zero-mod-netty ============================== -->
         <netty.tcnative.version>2.0.70.Final</netty.tcnative.version>
-        <netty.version>4.1.118.Final</netty.version>
+        <netty.version>4.2.0.Final</netty.version>
 
 
         <!-- module: ============== zero-mod-quiz =============================== -->
@@ -215,9 +215,9 @@
         <jetbrains.version>24.1.0</jetbrains.version>
         <scala.version>2.13.16</scala.version>
         <feign.version>8.18.0</feign.version>
-        <joda.version>2.13.1</joda.version>
+        <joda.version>2.14.0</joda.version>
         <jedis.version>5.2.0</jedis.version>
-        <checker.version>3.49.1</checker.version>
+        <checker.version>3.49.2</checker.version>
         <picoli.version>4.7.6</picoli.version>
         <hdr.version>2.2.2</hdr.version>
         <codehaus.janino.version>3.1.12</codehaus.janino.version>
@@ -225,13 +225,13 @@
 
 
         <!-- module: ============== zero-mod-vertx ============================== -->
-        <vertx.version>4.5.13</vertx.version>
-        <stack.version>4.5.13</stack.version>
+        <vertx.version>4.5.14</vertx.version>
+        <stack.version>4.5.14</stack.version>
         <!--
         mvn:io.vertx:vertx-io_uring-incubator
         -->
 
-        <vertx.legacy.version>4.5.13</vertx.legacy.version>
+        <vertx.legacy.version>4.5.14</vertx.legacy.version>
 
 
         <!-- ====================== Maven插件 ============================= -->
