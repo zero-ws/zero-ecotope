@@ -63,26 +63,26 @@
 
         <!--                        子模块属性定义                                  -->
         <!-- module: ============== zero-mod-apache ============================= -->
-        <common.jexl.version>3.4.0</common.jexl.version><!-- Apache Common -->
+        <common.jexl.version>3.5.0</common.jexl.version><!-- Apache Common -->
         <common.lang3.version>3.17.0</common.lang3.version>
         <common.net.version>3.11.1</common.net.version>
         <common.codec.version>1.18.0</common.codec.version>
         <common.cli.version>1.9.0</common.cli.version>
-        <common.io.version>2.18.0</common.io.version>
+        <common.io.version>2.19.0</common.io.version>
         <common.collection4.version>4.5.0-M3</common.collection4.version>
-        <common.text.version>1.13.0</common.text.version>
+        <common.text.version>1.13.1</common.text.version>
         <common.compress.version>1.27.1</common.compress.version>
         <http.async.client.version>4.1.5</http.async.client.version><!-- Apache: Http Components -->
         <http.client.version>4.5.14</http.client.version>
         <http.core.version>4.4.16</http.core.version>
-        <poi.version>5.4.0</poi.version><!-- Apache POI: Excel -->
+        <poi.version>5.4.1</poi.version><!-- Apache POI: Excel -->
         <poi.schema.version>4.1.2</poi.schema.version>
         <annotation.api.version>6.0.53</annotation.api.version><!-- Apache Tomcat -->
         <felix.version>7.0.5</felix.version>
 
 
         <!-- module: ============== zero-mod-aspectj ============================= -->
-        <aspectj.version>1.9.23</aspectj.version>
+        <aspectj.version>1.9.24</aspectj.version>
         <jcabi.version>0.26.0</jcabi.version>
 
 
@@ -137,23 +137,23 @@
         <logging.logback.version>1.5.18</logging.logback.version>
         <logging.logback.cal10n.version>0.8.1</logging.logback.cal10n.version>
         <logging.slf4j.version>2.0.16</logging.slf4j.version>
-        <elasticsearch.version>8.17.2</elasticsearch.version>
+        <elasticsearch.version>9.0.0</elasticsearch.version>
         <elasticsearch.client.version>7.17.25</elasticsearch.client.version>
 
 
         <!-- module: ============== zero-mod-google ============================= -->
         <google.guice.version>7.0.0</google.guice.version>
-        <google.guava.version>33.4.6-jre</google.guava.version>
+        <google.guava.version>33.4.8-jre</google.guava.version>
         <google.errorprone.version>2.37.0</google.errorprone.version>
         <google.jsr305.version>3.0.2</google.jsr305.version>
         <google.etcd.version>2.18.0</google.etcd.version>
         <google.protobuf.version>4.30.2</google.protobuf.version>
-        <google.gson.version>2.12.1</google.gson.version>
+        <google.gson.version>2.13.0</google.gson.version>
         <google.j2objc.version>3.0.0</google.j2objc.version>
 
 
         <!-- module: ============== zero-mod-grpc =============================== -->
-        <grpc.version>1.71.0</grpc.version>
+        <grpc.version>1.72.0</grpc.version>
 
 
         <!-- module: ============== zero-mod-jackson ============================ -->
@@ -201,7 +201,7 @@
         <rxjava2.version>2.2.21</rxjava2.version>
         <rxjava3.version>3.1.10</rxjava3.version>
         <reactive.streams.version>1.0.4</reactive.streams.version>
-        <io.reactor.version>3.8.0-M1</io.reactor.version>
+        <io.reactor.version>3.8.0-M2</io.reactor.version>
 
 
         <!-- module: ============== zero-mod-secure ============================= -->
@@ -213,7 +213,7 @@
         <!-- module: ============== zero-mod-vendor ============================== -->
         <io.termd.version>1.1.10</io.termd.version>
         <jetbrains.version>24.1.0</jetbrains.version>
-        <scala.version>2.13.16</scala.version>
+        <scala.version>2.13.17-M1</scala.version>
         <feign.version>8.18.0</feign.version>
         <joda.version>2.14.0</joda.version>
         <jedis.version>5.2.0</jedis.version>
