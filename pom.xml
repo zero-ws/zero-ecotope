@@ -69,7 +69,7 @@
         <common.codec.version>1.18.0</common.codec.version>
         <common.cli.version>1.9.0</common.cli.version>
         <common.io.version>2.19.0</common.io.version>
-        <common.collection4.version>4.5.0-M3</common.collection4.version>
+        <common.collection4.version>4.5.0</common.collection4.version>
         <common.text.version>1.13.1</common.text.version>
         <common.compress.version>1.27.1</common.compress.version>
         <http.async.client.version>4.1.5</http.async.client.version><!-- Apache: Http Components -->
@@ -144,7 +144,7 @@
         <!-- module: ============== zero-mod-google ============================= -->
         <google.guice.version>7.0.0</google.guice.version>
         <google.guava.version>33.4.8-jre</google.guava.version>
-        <google.errorprone.version>2.37.0</google.errorprone.version>
+        <google.errorprone.version>2.38.0</google.errorprone.version>
         <google.jsr305.version>3.0.2</google.jsr305.version>
         <google.etcd.version>2.18.0</google.etcd.version>
         <google.protobuf.version>4.30.2</google.protobuf.version>
@@ -218,7 +218,7 @@
         <joda.version>2.14.0</joda.version>
         <jedis.version>5.2.0</jedis.version>
         <checker.version>3.49.2</checker.version>
-        <picoli.version>4.7.6</picoli.version>
+        <picoli.version>4.7.7</picoli.version>
         <hdr.version>2.2.2</hdr.version>
         <codehaus.janino.version>3.1.12</codehaus.janino.version>
         <codehaus.mojo.version>1.24</codehaus.mojo.version>
@@ -239,20 +239,20 @@
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-assembly-plugin -->
         <maven.plugin.assembly>3.7.1</maven.plugin.assembly>
         <!-- http://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
-        <maven.plugin.compiler>3.13.0</maven.plugin.compiler>
+        <maven.plugin.compiler>3.14.0</maven.plugin.compiler>
         <!-- http://www.mvnrepository.com/artifact/org.apache.maven.plugins/maven-surefire-plugin -->
-        <maven.plugin.surefire>3.5.2</maven.plugin.surefire>
+        <maven.plugin.surefire>3.5.3</maven.plugin.surefire>
         <!-- http://www.mvnrepository.com/artifact/org.apache.maven.plugins/maven-clean-plugin -->
-        <maven.plugin.clean>3.4.0</maven.plugin.clean>
+        <maven.plugin.clean>3.4.1</maven.plugin.clean>
         <!-- http://www.mvnrepository.com/artifact/org.codehaus.mojo/versions-maven-plugin -->
         <maven.plugin.version>2.18.0</maven.plugin.version>
         <!-- http://www.mvnrepository.com/artifact/org.apache.maven.plugins/maven-install-plugin/ -->
-        <maven.plugin.install>3.1.3</maven.plugin.install>
+        <maven.plugin.install>3.1.4</maven.plugin.install>
         <!-- https://mvnrepository.com/artifact/org.codehaus.mojo/exec-maven-plugin -->
         <maven.plugin.exec>3.5.0</maven.plugin.exec>
 
         <!-- http://www.mvnrepository.com/artifact/org.apache.maven.plugins/maven-deploy-plugin -->
-        <maven.plugin.deploy>3.1.3</maven.plugin.deploy>
+        <maven.plugin.deploy>3.1.4</maven.plugin.deploy>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-shade-plugin -->
         <maven.plugin.shade>3.6.0</maven.plugin.shade>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-jar-plugin -->
@@ -286,7 +286,7 @@
         <!-- https://mvnrepository.com/artifact/com.jcabi/jcabi-maven-plugin -->
         <maven.plugin.jcabi>0.17.0</maven.plugin.jcabi>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-project-info-reports-plugin -->
-        <maven.plugin.project.info>3.8.0</maven.plugin.project.info>
+        <maven.plugin.project.info>3.9.0</maven.plugin.project.info>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-dependency-plugin -->
         <maven.plugin.dependency>3.8.1</maven.plugin.dependency>
         <!-- https://mvnrepository.com/artifact/com.coderplus.maven.plugins/copy-rename-maven-plugin -->
@@ -296,7 +296,7 @@
         <!-- https://mvnrepository.com/artifact/io.fabric8/fabric8-maven-plugin -->
         <maven.plugin.fabric8>4.4.2</maven.plugin.fabric8>
         <!-- https://mvnrepository.com/artifact/io.fabric8/docker-maven-plugin -->
-        <maven.plugin.docker>0.45.1</maven.plugin.docker>
+        <maven.plugin.docker>0.46.0</maven.plugin.docker>
 
         <!-- https://mvnrepository.com/artifact/org.xolstice.maven.plugins/protobuf-maven-plugin -->
         <maven.plugin.protobuf>0.6.1</maven.plugin.protobuf>
@@ -309,7 +309,7 @@
         <maven.plugin.bundle>6.0.0</maven.plugin.bundle>
         <!-- ProGuard -->
         <!-- https://mvnrepository.com/artifact/com.github.wvengen/proguard-maven-plugin -->
-        <maven.plugin.proguard>2.6.1</maven.plugin.proguard>
+        <maven.plugin.proguard>2.7.0</maven.plugin.proguard>
     </properties>
     <build>
         <pluginManagement>
