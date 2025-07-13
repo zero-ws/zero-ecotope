@@ -203,7 +203,6 @@
                 <configuration>
                     <!-- 输出设置：路径/风格 -->
                     <outputDirectory>${basedir}/document</outputDirectory>
-                    <reportOutputDirectory>${basedir}</reportOutputDirectory>
                     <!-- 连接配置 -->
                     <doclint>none,-missing</doclint>
                     <detectJavaApiLink>true</detectJavaApiLink>
