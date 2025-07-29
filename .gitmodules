@@ -1,0 +1,6 @@
+[submodule "zero-core-runtime-dependency"]
+	path = zero-core-runtime-dependency
+	url = git@gitee.com:zero-ws/zero-energy.git
+[submodule "zero-plugins-equip"]
+	path = zero-plugins-equip
+	url = git@gitee.com:zero-ws/zero-plugins-equip.git
