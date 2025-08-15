@@ -71,7 +71,7 @@
         <common.io.version>2.20.0</common.io.version>
         <common.collection4.version>4.5.0</common.collection4.version>
         <common.text.version>1.14.0</common.text.version>
-        <common.compress.version>1.28.1</common.compress.version>
+        <common.compress.version>1.28.0</common.compress.version>
         <http.async.client.version>4.1.5</http.async.client.version><!-- Apache: Http Components -->
         <http.client.version>4.5.14</http.client.version>
         <http.core.version>4.4.16</http.core.version>
