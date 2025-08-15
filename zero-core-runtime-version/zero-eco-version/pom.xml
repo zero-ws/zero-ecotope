@@ -21,147 +21,45 @@
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-core-runtime-metadata</artifactId>
+                <artifactId>zero-core-runtime</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-core-runtime-domain</artifactId>
+                <artifactId>zero-core-database</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            <dependency>
-                <groupId>io.zerows</groupId>
-                <artifactId>zero-core-runtime-cloud</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.zerows</groupId>
-                <artifactId>zero-core-runtime-security</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.zerows</groupId>
-                <artifactId>zero-core-runtime-configuration</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.zerows</groupId>
-                <artifactId>zero-core-runtime-assembly</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-
-            <!--======================== OSGI Plugins Feature ===============-->
-            <dependency>
-                <groupId>io.zerows</groupId>
-                <artifactId>zero-core-feature-toolkit-expression</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.zerows</groupId>
-                <artifactId>zero-core-feature-database-cp</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.zerows</groupId>
-                <artifactId>zero-core-feature-database-jooq</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.zerows</groupId>
-                <artifactId>zero-core-feature-database-cache</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.zerows</groupId>
-                <artifactId>zero-core-feature-unit-testing</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>io.zerows</groupId>
-                <artifactId>zero-core-feature-web-session</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.zerows</groupId>
-                <artifactId>zero-core-feature-web-client</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.zerows</groupId>
-                <artifactId>zero-core-feature-web-cache</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.zerows</groupId>
-                <artifactId>zero-core-feature-web-monitor</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.zerows</groupId>
-                <artifactId>zero-core-feature-web-mbse</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.zerows</groupId>
-                <artifactId>zero-core-feature-web-websocket</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.zerows</groupId>
-                <artifactId>zero-core-feature-web-security</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.zerows</groupId>
-                <artifactId>zero-core-feature-web-utility-x</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
             <!-- Zero Web Container -->
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-core-web-invocation</artifactId>
+                <artifactId>zero-core-mature</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-core-web-io</artifactId>
+                <artifactId>zero-core-web</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-core-web-model</artifactId>
+                <artifactId>zero-core-testing</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-core-web-scheduler</artifactId>
+                <artifactId>zero-core-unity</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-core-web-validation</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.zerows</groupId>
-                <artifactId>zero-core-web-container</artifactId>
+                <artifactId>zero-core-container</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
-
-            <!-- Zero OSGI Entry -->
-            <dependency>
-                <groupId>io.zerows</groupId>
-                <artifactId>zero-core-entry-osgi</artifactId>
-                <version>${zero.version}</version>
-            </dependency>
             <!-- Zero Standalone Entry -->
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-core-entry-facade</artifactId>
+                <artifactId>zero-entry-facade</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
