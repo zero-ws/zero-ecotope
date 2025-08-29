@@ -2,7 +2,7 @@
 mvn clean package install -Dquickly -DskipTests=true -Dmaven.javadoc.skip=true -Dmaven.compile.fork=true -T 1C
 # 单独编译
 # shellcheck disable=SC2164
-cd zero-core-ams-specification
+cd zero-core-ams
 echo "Zero AMS"
 mvn clean package install -Dquickly -DskipTests=true -Dmaven.javadoc.skip=true -Dmaven.compile.fork=true -T 1C
 cd ..
