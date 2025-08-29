@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>zero-core-version</artifactId>
+        <groupId>io.zerows</groupId>
+        <version>1.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>zero-ecosystem</artifactId>
+    <name>Zero.Version.Ecosystem.${zero.version}</name>
+    <packaging>pom</packaging>
+    <dependencyManagement>
+        <dependencies>
+
+            <!-- Apache -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-eco-apache</artifactId>
+                <version>${zero.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <!-- AspectJ -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-eco-aspectj</artifactId>
+                <version>${zero.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <!-- Camunda -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-eco-camunda</artifactId>
+                <version>${zero.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <!-- Cluster -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-eco-cluster</artifactId>
+                <version>${zero.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <!-- Database -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-eco-database</artifactId>
+                <version>${zero.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <!-- Doc -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-eco-doc</artifactId>
+                <version>${zero.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <!-- Eclipse -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-eco-eclipse</artifactId>
+                <version>${zero.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <!-- ELK -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-eco-elk</artifactId>
+                <version>${zero.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <!-- gRpc -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-eco-google</artifactId>
+                <version>${zero.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <!-- gRpc -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-eco-grpc</artifactId>
+                <version>${zero.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <!-- Jackson -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-eco-jackson</artifactId>
+                <version>${zero.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <!-- JSR -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-eco-jsr</artifactId>
+                <version>${zero.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <!-- JVM Reflection -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-eco-jvmr</artifactId>
+                <version>${zero.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <!-- Netty -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-eco-netty</artifactId>
+                <version>${zero.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <!-- Quiz -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-eco-quiz</artifactId>
+                <version>${zero.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <!-- Reactive -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-eco-reactive</artifactId>
+                <version>${zero.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <!-- Secure -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-eco-secure</artifactId>
+                <version>${zero.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <!-- Zero Framework -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-eco-version</artifactId>
+                <version>${zero.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <!-- Vendor -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-eco-vendor</artifactId>
+                <version>${zero.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <!-- Vertx -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-eco-vertx</artifactId>
+                <version>${zero.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+
+            <!--
+            Camunda 默认带的库相关信息
+            低优先级模式：Maven库中，放在后边的依赖优先级更低，前边的依赖优先级更高
+             -->
+            <dependency>
+                <groupId>org.camunda.bpm</groupId>
+                <artifactId>camunda-bom</artifactId>
+                <version>${camunda.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>org.camunda.bpm.dmn</groupId>
+                <artifactId>camunda-engine-dmn-bom</artifactId>
+                <version>${camunda.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    <build>
+        <plugins>
+            <!-- Java Doc -->
+            <plugin>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <!-- 输出设置：路径/风格 -->
+                    <outputDirectory>${basedir}/document</outputDirectory>
+                    <!-- 连接配置 -->
+                    <doclint>none,-missing</doclint>
+                    <detectJavaApiLink>true</detectJavaApiLink>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <release>17</release>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>logs</directory>
+                            <includes>
+                                <include>**/*</include>
+                            </includes>
+                        </fileset>
+                        <fileset>
+                            <directory>archive</directory>
+                            <includes>
+                                <include>**/*</include>
+                            </includes>
+                        </fileset>
+                        <fileset>
+                            <directory>target</directory>
+                            <includes>
+                                <include>**/*</include>
+                            </includes>
+                        </fileset>
+                        <fileset>
+                            <directory>file-exported</directory>
+                            <includes>
+                                <include>**/*</include>
+                            </includes>
+                        </fileset>
+                        <fileset>
+                            <directory>file-uploads</directory>
+                            <includes>
+                                <include>**/*</include>
+                            </includes>
+                        </fileset>
+                        <fileset>
+                            <directory>document</directory>
+                            <includes>
+                                <include>**/*</include>
+                            </includes>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <includes>
+                        <include>**/*Tc.java</include>
+                        <include>**/*Te.java</include>
+                    </includes>
+                    <excludes>
+                        <exclude>**/Base*.java</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

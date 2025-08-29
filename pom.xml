@@ -49,7 +49,7 @@
         </repository>
     </distributionManagement>
     <modules>
-        <module>zero-core-runtime-version</module>
+        <module>zero-core-version</module>
     </modules>
     <properties>
         <!-- Zero 固定版本号 -->

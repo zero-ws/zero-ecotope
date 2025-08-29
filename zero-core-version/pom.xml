@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>io.zerows</groupId>
+        <artifactId>zero-ecotope</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>zero-core-version</artifactId>
+    <packaging>pom</packaging>
+    <name>Zero::Core::Version</name>
+    <modules>
+        <!-- 导入过程父类 -->
+        <module>zero-ecosystem</module>
+        <module>zero-eco-apache</module><!-- Apache 版本 -->
+        <module>zero-eco-aspectj</module><!-- AspectJ 版本 -->
+        <module>zero-eco-camunda</module><!-- Camunda 版本 -->
+        <module>zero-eco-cluster</module><!-- Cluster 版本 -->
+        <module>zero-eco-database</module><!-- Database 版本 -->
+        <module>zero-eco-doc</module><!-- Doc 版本 -->
+        <module>zero-eco-eclipse</module><!-- Eclipse 版本 -->
+        <module>zero-eco-elk</module><!-- ELK 版本 -->
+        <module>zero-eco-google</module><!-- Google 版本 -->
+        <module>zero-eco-grpc</module><!-- GRPC 版本 -->
+        <module>zero-eco-jackson</module><!-- Jackson 版本 -->
+        <module>zero-eco-jsr</module><!-- JSR 版本 -->
+        <module>zero-eco-jvmr</module><!-- 反射 版本 -->
+        <module>zero-eco-netty</module><!-- Netty 版本 -->
+        <module>zero-eco-quiz</module><!-- Reactive 版本 -->
+        <module>zero-eco-secure</module><!-- Secure 版本 -->
+        <module>zero-eco-reactive</module><!-- Reactive 版本 -->
+        <module>zero-eco-vendor</module><!-- 第三方其他：Vendor 版本 -->
+        <module>zero-eco-vertx</module><!-- Vertx 版本 -->
+        <!--
+        project.version
+        （内部使用）Zero 版本号
+        -->
+        <module>zero-eco-version</module>
+        <!--
+        zero.version
+        （外部使用）插件部分，ecosystem 不导入，在 import 中导入
+        -->
+        <module>zero-version-core</module>
+        <module>zero-version-dynamic</module>
+        <module>zero-version-extension</module>
+        <module>zero-version-infix</module>
+    </modules>
+</project>
