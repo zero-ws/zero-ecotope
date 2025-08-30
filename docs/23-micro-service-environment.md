@@ -104,7 +104,7 @@ In service node, you start up zero instance as following:
 
 ```java
 import io.vertx.boot.VertxApplication;
-import io.vertx.up.annotations.Up;
+import io.zerows.core.annotations.Up;
 
 @Up
 public class io.god.Anchor {
@@ -121,7 +121,7 @@ annotation for launcher:
 ```java
 import io.vertx.boot.VertxApplication;
 import io.vertx.up.annotations.ApiGateway;
-import io.vertx.up.annotations.Up;
+import io.zerows.core.annotations.Up;
 
 @Up
 @ApiGateway

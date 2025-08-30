@@ -12,7 +12,7 @@ For the first point please refer [Getting Start](zero-starter.md)
 ```java
 package org.exmaple;
 
-import io.vertx.up.annotations.EndPoint;
+import io.zerows.core.annotations.EndPoint;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

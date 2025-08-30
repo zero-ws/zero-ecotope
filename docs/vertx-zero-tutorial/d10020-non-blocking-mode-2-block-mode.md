@@ -34,7 +34,7 @@ Demo projects:
 ```java
 package up.god.micro.request;
 
-import io.vertx.up.annotations.EndPoint;
+import io.zerows.core.annotations.EndPoint;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -60,7 +60,7 @@ public class PingModeActor {
 
 ### Programming Rules
 
-1. The sender class should be annotated with `io.vertx.up.annotations.EndPoint`.
+1. The sender class should be annotated with `io.zerows.core.annotations.EndPoint`.
 2. Other annotations all belong to JSR311, you should set one http method annotation to java method.
 3. The java method return type must be `void`or `boolean` , it's the only difference from Sync Mode.
 4. Do not use `@Address` annotation, this mode should disable event bus.

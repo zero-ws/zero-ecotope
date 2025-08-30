@@ -45,7 +45,7 @@ provide all the native configuration keys to `redis` in zero system.
 package up.god.micro.redis;
 
 import io.vertx.redis.RedisClient;
-import io.vertx.up.annotations.EndPoint;
+import io.zerows.core.annotations.EndPoint;
 
 import io.zerows.annotations.infix.Redis;
 import javax.ws.rs.GET;

@@ -35,7 +35,7 @@ The record the message key, here are `notnull.username` and `notnull.password` a
 ```java
 package up.god.micro.validation;
 
-import io.vertx.up.annotations.EndPoint;
+import io.zerows.core.annotations.EndPoint;
 
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.GET;

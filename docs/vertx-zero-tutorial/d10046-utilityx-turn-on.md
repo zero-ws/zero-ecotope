@@ -1,11 +1,11 @@
 # Utility X Turn-On
 
 From this chapter our tutorial will focus on the tool box that zero system provided, we call it **Utility X**, and in
-your code the class name is `io.vertx.up.unity.Ux`. The package name word `aiki` is Hausa language and it means "Work",
+your code the class name is `io.zerows.unity.Ux`. The package name word `aiki` is Hausa language and it means "Work",
 this class will help the developers to process some duplicated works those are not related to business workflow. Here
 are three core parts in Utility X:
 
-* `io.vertx.up.unity.Ux`: The uniform tool class, it contains static method only. \( There is no object \)
+* `io.zerows.unity.Ux`: The uniform tool class, it contains static method only. \( There is no object \)
 * `io.vertx.up.atom.unity.Uson`: **\( Data Structure \) **The json container to store JsonObject and process it in "
   Stream Mode", please refer `Rxjava` to know the "Stream Mode", it will process the JsonObject with multi Fluent
   methods.

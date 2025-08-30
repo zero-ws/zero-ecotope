@@ -23,8 +23,8 @@ Here are four projects in this demo:
 ```java
 package up.god.micro.multi;
 
-import io.vertx.up.annotations.Address;
-import io.vertx.up.annotations.EndPoint;
+import io.zerows.core.annotations.Address;
+import io.zerows.core.annotations.EndPoint;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -47,9 +47,9 @@ package up.god.micro.multi;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.unity.Ux;
-import io.vertx.up.annotations.Address;
-import io.vertx.up.annotations.Queue;
+import io.zerows.unity.Ux;
+import io.zerows.core.annotations.Address;
+import io.zerows.core.annotations.Queue;
 import io.vertx.up.commune.Envelop;
 
 @Queue
@@ -74,7 +74,7 @@ package up.god.ipc;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.annotations.Ipc;
+import io.zerows.core.annotations.Ipc;
 import io.vertx.up.commune.Envelop;
 
 public class MultiInsider {
@@ -94,7 +94,7 @@ package up.god.ipc;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.annotations.Ipc;
+import io.zerows.core.annotations.Ipc;
 import io.vertx.up.commune.Envelop;
 
 public class MultiInsider {

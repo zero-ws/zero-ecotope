@@ -7,8 +7,8 @@ verify request data here.
 
 ```java
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.annotations.Codex;
-import io.vertx.up.annotations.EndPoint;
+import io.zerows.core.annotations.Codex;
+import io.zerows.core.annotations.EndPoint;
 
 import io.zerows.core.web.io.annotations.BodyParam;
 import javax.ws.rs.POST;

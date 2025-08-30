@@ -185,7 +185,7 @@ Vert.x 引入独立项目的底层功能使用。
 
 ```java
 import io.vertx.boot.VertxApplication;
-import io.vertx.up.annotations.Up;
+import io.zerows.core.annotations.Up;
 
 @Up
 public class Driver {
@@ -209,7 +209,7 @@ public class Driver {
 
 ```java
 import io.vertx.aeon.AeonApplication;
-import io.vertx.up.annotations.Up;
+import io.zerows.core.annotations.Up;
 
 @Up
 public class Driver {

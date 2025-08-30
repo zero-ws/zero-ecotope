@@ -28,7 +28,7 @@ The following parameter could be used by type without annotation \( Mustn't incl
 package org.exmaple;
 
 import io.vertx.core.http.HttpServerRequest;
-import io.vertx.up.annotations.EndPoint;
+import io.zerows.core.annotations.EndPoint;
 
 import javax.ws.rs.*;
 

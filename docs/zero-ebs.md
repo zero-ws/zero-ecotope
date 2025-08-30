@@ -12,8 +12,8 @@ careful this class is **interface** instead of class.
 
 ```java
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.annotations.Address;
-import io.vertx.up.annotations.EndPoint;
+import io.zerows.core.annotations.Address;
+import io.zerows.core.annotations.EndPoint;
 
 import io.zerows.core.web.io.annotations.BodyParam;
 import javax.ws.rs.POST;
@@ -35,8 +35,8 @@ public interface SpeakAddrApi {
 ```java
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.annotations.Address;
-import io.vertx.up.annotations.Queue;
+import io.zerows.core.annotations.Address;
+import io.zerows.core.annotations.Queue;
 import io.vertx.up.commune.Envelop;
 
 @Queue

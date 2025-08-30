@@ -11,7 +11,7 @@ Demo projects:
 ```java
 package up.god.micro.params;
 
-import io.vertx.up.annotations.EndPoint;
+import io.zerows.core.annotations.EndPoint;
 
 import javax.ws.rs.CookieParam;
 import javax.ws.rs.GET;

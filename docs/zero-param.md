@@ -8,7 +8,7 @@
 package org.exmaple;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.annotations.EndPoint;
+import io.zerows.core.annotations.EndPoint;
 
 import javax.ws.rs.*;
 

@@ -21,7 +21,7 @@ Demo projects:
 package up.god.micro.params;
 
 import io.vertx.core.buffer.Buffer;
-import io.vertx.up.annotations.EndPoint;
+import io.zerows.core.annotations.EndPoint;
 
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;

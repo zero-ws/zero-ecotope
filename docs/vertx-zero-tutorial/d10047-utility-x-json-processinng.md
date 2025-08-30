@@ -79,7 +79,7 @@ package io.vertx.up.unity;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.quiz.TestBase;
-import io.vertx.up.util.Jackson;
+import io.zerows.core.util.Jackson;
 import org.junit.Assert;
 import org.junit.Test;
 

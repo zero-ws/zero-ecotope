@@ -31,7 +31,7 @@ package up.god.micro.params;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.annotations.EndPoint;
+import io.zerows.core.annotations.EndPoint;
 
 import io.zerows.core.web.io.annotations.BodyParam;
 import javax.ws.rs.POST;

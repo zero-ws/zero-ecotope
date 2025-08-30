@@ -24,8 +24,8 @@ Demo Projects and environment
 ```java
 package up.god.micro.mesh;
 
-import io.vertx.up.annotations.Address;
-import io.vertx.up.annotations.EndPoint;
+import io.zerows.core.annotations.Address;
+import io.zerows.core.annotations.EndPoint;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -49,10 +49,10 @@ package up.god.micro.mesh;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.unity.Ux;
-import io.vertx.up.annotations.Address;
-import io.vertx.up.annotations.Ipc;
-import io.vertx.up.annotations.Queue;
+import io.zerows.unity.Ux;
+import io.zerows.core.annotations.Address;
+import io.zerows.core.annotations.Ipc;
+import io.zerows.core.annotations.Queue;
 import io.vertx.up.commune.Envelop;
 
 @Queue
@@ -75,7 +75,7 @@ public class HuttWorker {
 package up.god.ipc.mesh;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.annotations.Ipc;
+import io.zerows.core.annotations.Ipc;
 import io.vertx.up.commune.Envelop;
 
 public class HuttInsider {
@@ -95,7 +95,7 @@ public class HuttInsider {
 package up.god.ipc.mesh;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.annotations.Ipc;
+import io.zerows.core.annotations.Ipc;
 import io.vertx.up.commune.Envelop;
 
 public class HuttInsider {
@@ -116,7 +116,7 @@ public class HuttInsider {
 package up.god.ipc.mesh;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.annotations.Ipc;
+import io.zerows.core.annotations.Ipc;
 import io.vertx.up.commune.Envelop;
 
 public class HuttInsider {

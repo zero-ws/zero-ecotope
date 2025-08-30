@@ -47,8 +47,8 @@ package up.god.micro.validation;
 
 
 import com.google.gson.JsonObject;
-import io.vertx.up.annotations.EndPoint;
-import io.vertx.up.util.Jackson;
+import io.zerows.core.annotations.EndPoint;
+import io.zerows.core.util.Jackson;
 import up.god.micro.async.JavaJson;
 
 import javax.validation.Valid;

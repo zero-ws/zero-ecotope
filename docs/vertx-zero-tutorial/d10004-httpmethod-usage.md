@@ -24,7 +24,7 @@ Please refer following entire class source code for different usage of Http Meth
 ```java
 package up.god.micro.method;
 
-import io.vertx.up.annotations.EndPoint;
+import io.zerows.core.annotations.EndPoint;
 
 import javax.ws.rs.*;
 

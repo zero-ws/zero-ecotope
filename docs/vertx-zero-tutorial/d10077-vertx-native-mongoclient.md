@@ -73,8 +73,8 @@ Finally when you have finished configuration, the folder structure of project sh
 package up.god.micro.mongo;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.annotations.Address;
-import io.vertx.up.annotations.EndPoint;
+import io.zerows.core.annotations.Address;
+import io.zerows.core.annotations.EndPoint;
 
 import io.zerows.core.web.io.annotations.BodyParam;
 
@@ -100,9 +100,9 @@ package up.god.micro.mongo;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.mongo.MongoClient;
-import io.vertx.up.unity.Ux;
-import io.vertx.up.annotations.Address;
-import io.vertx.up.annotations.Queue;
+import io.zerows.unity.Ux;
+import io.zerows.core.annotations.Address;
+import io.zerows.core.annotations.Queue;
 import io.vertx.up.commune.Envelop;
 
 import io.zerows.annotations.infix.Mongo;

@@ -14,8 +14,8 @@ Demo projects:
 ```java
 package up.god.micro.params;
 
-import io.vertx.up.annotations.EndPoint;
-import io.vertx.up.annotations.SessionData;
+import io.zerows.core.annotations.EndPoint;
+import io.zerows.core.annotations.SessionData;
 
 import javax.ws.rs.*;
 
@@ -106,7 +106,7 @@ Repeat the step of 3.1, you'll found different response from zero, it's differen
 This tutorial describes the session usage in zero system, with JSR311 zero system defined new annotation to process
 session variable in zero system. Here are additional annotation such as:
 
-* `io.vertx.up.annotations.SessionData`
+* `io.zerows.core.annotations.SessionData`
 
 This annotation provide session key as attribute to store session data, it will capture the method return value and
 stored into session, then we could use @SessionParam annotation to pick up the value that you stored in previous

@@ -25,7 +25,7 @@ Demo projects:
 ```java
 package up.god.micro.validation;
 
-import io.vertx.up.annotations.EndPoint;
+import io.zerows.core.annotations.EndPoint;
 
 import javax.validation.constraints.Digits;
 import javax.ws.rs.GET;

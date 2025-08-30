@@ -36,8 +36,8 @@ Demo projects:
 package up.god.micro.async;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.annotations.Address;
-import io.vertx.up.annotations.EndPoint;
+import io.zerows.core.annotations.Address;
+import io.zerows.core.annotations.EndPoint;
 
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -72,9 +72,9 @@ package up.god.micro.async;
 import io.vertx.core.Future;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.unity.Ux;
-import io.vertx.up.annotations.Address;
-import io.vertx.up.annotations.Queue;
+import io.zerows.unity.Ux;
+import io.zerows.core.annotations.Address;
+import io.zerows.core.annotations.Queue;
 import io.vertx.up.commune.Envelop;
 
 @Queue
@@ -97,8 +97,8 @@ public class VertxStyleWorker {
 
 ### Programming Rules
 
-1. The worker class must be annotated with `io.vertx.up.annotations.Queue`.
-2. You must use `io.vertx.up.annotations.Address` annotation to set address of string type in **Sender/Consumer** both.
+1. The worker class must be annotated with `io.zerows.core.annotations.Queue`.
+2. You must use `io.zerows.core.annotations.Address` annotation to set address of string type in **Sender/Consumer** both.
 3. Address value should be the same shared in **Sender/Consumer**.
 4. The worker method signature should be as following:
     1. `void method(Message<Envelop>)`

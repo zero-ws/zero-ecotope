@@ -53,8 +53,8 @@ It's interface annotated with `@EndPoint`, the source code is as following:
 package com.tlk.topic.api;
 
 import com.tlk.up.god.cv.Addr;
-import io.vertx.up.annotations.Address;
-import io.vertx.up.annotations.EndPoint;
+import io.zerows.core.annotations.Address;
+import io.zerows.core.annotations.EndPoint;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
@@ -99,8 +99,8 @@ import com.tlk.up.god.cv.Addr;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.mongo.FindOptions;
-import io.vertx.up.annotations.Address;
-import io.vertx.up.annotations.Queue;
+import io.zerows.core.annotations.Address;
+import io.zerows.core.annotations.Queue;
 import io.vertx.up.commune.Envelop;
 import io.vertx.up.kidd.Rapider;
 

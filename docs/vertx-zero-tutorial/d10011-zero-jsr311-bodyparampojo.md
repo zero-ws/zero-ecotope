@@ -31,7 +31,7 @@ Then you can create your own endpoint for `JsonUser`
 ```java
 package up.god.micro.params;
 
-import io.vertx.up.annotations.EndPoint;
+import io.zerows.core.annotations.EndPoint;
 
 import io.zerows.core.web.io.annotations.BodyParam;
 import javax.ws.rs.POST;

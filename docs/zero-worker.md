@@ -12,8 +12,8 @@ The sender will send the data processed to EventBus
 package org.exmaple;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.annotations.Address;
-import io.vertx.up.annotations.EndPoint;
+import io.zerows.core.annotations.Address;
+import io.zerows.core.annotations.EndPoint;
 
 import io.zerows.core.web.io.annotations.BodyParam;
 import javax.ws.rs.GET;
@@ -39,8 +39,8 @@ public class ZeroSender {
 package org.exmaple;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.annotations.Address;
-import io.vertx.up.annotations.Queue;
+import io.zerows.core.annotations.Address;
+import io.zerows.core.annotations.Queue;
 import io.vertx.up.commune.Envelop;
 
 @Queue

@@ -38,8 +38,8 @@ public class JavaJson {
 ```java
 package up.god.micro.async;
 
-import io.vertx.up.annotations.Address;
-import io.vertx.up.annotations.EndPoint;
+import io.zerows.core.annotations.Address;
+import io.zerows.core.annotations.EndPoint;
 
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -77,8 +77,8 @@ public class JavaDirectActor {
 ```java
 package up.god.micro.async;
 
-import io.vertx.up.annotations.Address;
-import io.vertx.up.annotations.Queue;
+import io.zerows.core.annotations.Address;
+import io.zerows.core.annotations.Queue;
 
 @Queue
 public class JavaDirectWorker {

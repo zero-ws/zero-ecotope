@@ -52,8 +52,8 @@ columns:
 ```java
 package up.god.micro.advanced;
 
-import io.vertx.up.annotations.Address;
-import io.vertx.up.annotations.EndPoint;
+import io.zerows.core.annotations.Address;
+import io.zerows.core.annotations.EndPoint;
 
 import io.zerows.core.web.io.annotations.BodyParam;
 import javax.ws.rs.POST;
@@ -79,9 +79,9 @@ package up.god.micro.advanced;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.unity.Ux;
-import io.vertx.up.annotations.Address;
-import io.vertx.up.annotations.Queue;
+import io.zerows.unity.Ux;
+import io.zerows.core.annotations.Address;
+import io.zerows.core.annotations.Queue;
 import io.vertx.up.commune.Envelop;
 
 import jakarta.inject.Inject;
@@ -123,7 +123,7 @@ package up.god.micro.advanced;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.unity.Ux;
+import io.zerows.unity.Ux;
 import io.vertx.up.atom.query.Inquiry;
 import up.god.domain.tables.daos.SysTabularDao;
 

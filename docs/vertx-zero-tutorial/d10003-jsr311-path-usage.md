@@ -16,7 +16,7 @@ The first mode is using `javax.ws.rs.Path`on class and method both as following:
 ```java
 package up.god.micro.path;
 
-import io.vertx.up.annotations.EndPoint;
+import io.zerows.core.annotations.EndPoint;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -42,7 +42,7 @@ Another mode for `javax.ws.rs.Path` usage is as following:
 ```java
 package up.god.micro.path;
 
-import io.vertx.up.annotations.EndPoint;
+import io.zerows.core.annotations.EndPoint;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

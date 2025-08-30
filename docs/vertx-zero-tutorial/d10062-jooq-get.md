@@ -14,8 +14,8 @@ Demo projects:
 ```java
 package up.god.micro.tabular;
 
-import io.vertx.up.annotations.Address;
-import io.vertx.up.annotations.EndPoint;
+import io.zerows.core.annotations.Address;
+import io.zerows.core.annotations.EndPoint;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -39,9 +39,9 @@ package up.god.micro.tabular;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.unity.Ux;
-import io.vertx.up.annotations.Address;
-import io.vertx.up.annotations.Queue;
+import io.zerows.unity.Ux;
+import io.zerows.core.annotations.Address;
+import io.zerows.core.annotations.Queue;
 import io.vertx.up.commune.Envelop;
 
 import jakarta.inject.Inject;
@@ -81,7 +81,7 @@ package up.god.micro.tabular;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.unity.Ux;
+import io.zerows.unity.Ux;
 import up.god.domain.tables.daos.SysTabularDao;
 
 public class TabularService implements TabularStub {
@@ -163,7 +163,7 @@ package up.god.micro.tabular;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.unity.Ux;
+import io.zerows.unity.Ux;
 import up.god.domain.tables.daos.SysTabularDao;
 import up.god.domain.tables.pojos.SysTabular;
 

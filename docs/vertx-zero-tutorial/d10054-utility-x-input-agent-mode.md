@@ -41,8 +41,8 @@ package com.tlk.micro.comment;
 import com.tlk.infra.up.god.cv.Addr;
 import com.tlk.infra.up.god.cv.InValid;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.annotations.Address;
-import io.vertx.up.annotations.EndPoint;
+import io.zerows.core.annotations.Address;
+import io.zerows.core.annotations.EndPoint;
 
 import javax.validation.constraints.Min;
 import javax.ws.rs.DefaultValue;
@@ -73,8 +73,8 @@ public interface IrCommentApi {
 package com.tlk.micro.comment;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.unity.Ux;
-import io.vertx.up.fn.Fn;
+import io.zerows.unity.Ux;
+import io.zerows.core.fn.Fn;
 
 public class IrCommentActor implements IrCommentApi {
 
@@ -103,9 +103,9 @@ import com.tlk.eon.TargetType;
 import com.tlk.infra.up.god.cv.Addr;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.unity.Ux;
-import io.vertx.up.annotations.Address;
-import io.vertx.up.annotations.Queue;
+import io.zerows.unity.Ux;
+import io.zerows.core.annotations.Address;
+import io.zerows.core.annotations.Queue;
 import io.vertx.up.commune.Envelop;
 import io.vertx.mod.plugin.mongo.MongoReadOpts;
 

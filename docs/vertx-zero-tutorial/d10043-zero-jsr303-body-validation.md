@@ -19,7 +19,7 @@ Demo projects:
 Advanced Validation is supported by zero system in all styles \( **JSR303 is not supported by interface style **\). Here
 we'll use another new annotation that defined by zero system:
 
-* `io.vertx.up.annotations.Codex`
+* `io.zerows.core.annotations.Codex`
 
 This annotation will tell zero system that there should be a codex up.god.file that bind to current request.
 
@@ -47,8 +47,8 @@ password:
 package up.god.micro.validation;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.annotations.Codex;
-import io.vertx.up.annotations.EndPoint;
+import io.zerows.core.annotations.Codex;
+import io.zerows.core.annotations.EndPoint;
 
 import io.zerows.core.web.io.annotations.BodyParam;
 import javax.ws.rs.POST;

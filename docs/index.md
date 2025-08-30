@@ -154,7 +154,7 @@ In your project, you can provide main entry only as following to run Zero \( Ann
 
 ```java
 import io.vertx.boot.VertxApplication;
-import io.vertx.up.annotations.Up;
+import io.zerows.core.annotations.Up;
 
 @Up
 public class Driver {
@@ -178,7 +178,7 @@ When you want to enable **Aeon System**, you can switch the code as following:
 
 ```java
 import io.vertx.aeon.AeonApplication;
-import io.vertx.up.annotations.Up;
+import io.zerows.core.annotations.Up;
 
 @Up
 public class Driver {

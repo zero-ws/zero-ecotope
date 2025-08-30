@@ -7,7 +7,7 @@ The interface annotation could be as following:
 **UserApi**
 
 ```java
-import io.vertx.up.annotations.EndPoint;
+import io.zerows.core.annotations.EndPoint;
 
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.GET;

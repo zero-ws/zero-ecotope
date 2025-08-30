@@ -8,8 +8,8 @@ In your originator, you can write code as following:
 
 ```java
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.annotations.EndPoint;
-import io.vertx.up.annotations.Ipc;
+import io.zerows.core.annotations.EndPoint;
+import io.zerows.core.annotations.Ipc;
 
 import io.zerows.core.web.io.annotations.BodyParam;
 import javax.ws.rs.POST;
@@ -44,7 +44,7 @@ You must be sure current terminator name is "ipc-coeus" in `vertx-server.yml` as
 Then you can write the code as following:
 
 ```java
-import io.vertx.up.annotations.Ipc;
+import io.zerows.core.annotations.Ipc;
 import io.vertx.up.commune.Envelop;
 
 public class SpeakWorker {

@@ -17,7 +17,7 @@ If you used zero up only in standalone environment, you can put following simple
 package up.god;
 
 import io.vertx.boot.VertxApplication;
-import io.vertx.up.annotations.Up;
+import io.zerows.core.annotations.Up;
 
 @Up
 public class io.god.Anchor {
@@ -117,7 +117,7 @@ Api Gateway source code is the same as standalone service as following:
 package up.god;
 
 import io.vertx.boot.VertxApplication;
-import io.vertx.up.annotations.Up;
+import io.zerows.core.annotations.Up;
 
 @Up
 public class io.god.Anchor {
@@ -177,7 +177,7 @@ Service source code is the same as Standalone mode here.
 package up.god;
 
 import io.vertx.boot.VertxApplication;
-import io.vertx.up.annotations.Up;
+import io.zerows.core.annotations.Up;
 
 @Up
 public class io.god.Anchor {
