@@ -1,29 +1,30 @@
 #!/usr/bin/env bash
+echo "[ END ] Build Zero Ecotope"
 mvn clean package install -Dquickly -DskipTests=true -Dmaven.javadoc.skip=true -Dmaven.compile.fork=true -T 1C
 # 单独编译
 # shellcheck disable=SC2164
 cd zero-core-ams
-echo "Zero AMS"
+echo "[ END ] Build Zero AMS"
 mvn clean package install -Dquickly -DskipTests=true -Dmaven.javadoc.skip=true -Dmaven.compile.fork=true -T 1C
 cd ..
 # shellcheck disable=SC2164
 cd zero-energy
-echo "Zero Core"
+echo "[ END ] Build Zero Core"
 mvn clean package install -Dquickly -DskipTests=true -Dmaven.javadoc.skip=true -Dmaven.compile.fork=true -T 1C
 cd ..
 # shellcheck disable=SC2164
 cd zero-plugins-equip
-echo "Zero Plugins Equip"
+echo "[ END ] Build Zero Plugins Equip"
 mvn clean package install -Dquickly -DskipTests=true -Dmaven.javadoc.skip=true -Dmaven.compile.fork=true -T 1C
 cd ..
 # shellcheck disable=SC2164
 cd zero-plugins-extension
-echo "Zero Plugins Extension"
+echo "[ END ] Build Zero Plugins Extension"
 mvn clean package install -Dquickly -DskipTests=true -Dmaven.javadoc.skip=true -Dmaven.compile.fork=true -T 1C
 cd ..
 # shellcheck disable=SC2164
 cd zero-plugins-external
-echo "Zero Plugins External"
+echo "[ END ] Build Zero Plugins External"
 mvn clean package install -Dquickly -DskipTests=true -Dmaven.javadoc.skip=true -Dmaven.compile.fork=true -T 1C
 cd ..
-echo "[END] Finished Compiled"
+echo "[ END ] Finished Compiled"

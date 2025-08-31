@@ -15,7 +15,7 @@ package up.god.micro.media;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.annotations.EndPoint;
-import io.zerows.agreed.constant.VValue;
+import io.zerows.ams.constant.VValue;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
