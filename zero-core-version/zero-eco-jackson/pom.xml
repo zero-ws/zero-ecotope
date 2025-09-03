@@ -154,7 +154,7 @@
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-annotations</artifactId>
-                <version>${jackson.version}</version>
+                <version>${jackson.annotation.version}</version>
             </dependency>
 
             <!-- https://mvnrepository.com/artifact/com.fasterxml.uuid/java-uuid-generator -->

@@ -97,12 +97,12 @@
 
         <!-- module: ============== zero-mod-cluster ============================ -->
         <hazelcast.version>5.5.0</hazelcast.version>
-        <zookeeper.version>3.9.3</zookeeper.version>
+        <zookeeper.version>3.9.4</zookeeper.version>
         <ignite.version>3.0.0</ignite.version>
 
 
         <!-- module: ============== zero-mod-database =========================== -->
-        <hikari.cp.version>7.0.1</hikari.cp.version><!-- Database -->
+        <hikari.cp.version>7.0.2</hikari.cp.version><!-- Database -->
         <jooq.version>3.20.6</jooq.version>
         <!-- <jooq.version>3.20.1</jooq.version> -->
         <jooq.vertx.version>6.5.5</jooq.vertx.version>
@@ -137,7 +137,7 @@
         <logging.logback.version>1.5.18</logging.logback.version>
         <logging.logback.cal10n.version>0.8.1</logging.logback.cal10n.version>
         <logging.slf4j.version>2.0.16</logging.slf4j.version>
-        <elasticsearch.version>9.1.2</elasticsearch.version>
+        <elasticsearch.version>9.1.3</elasticsearch.version>
         <elasticsearch.client.version>7.17.25</elasticsearch.client.version>
 
 
@@ -153,13 +153,14 @@
 
 
         <!-- module: ============== zero-mod-grpc =============================== -->
-        <grpc.version>1.74.0</grpc.version>
+        <grpc.version>1.75.0</grpc.version>
 
 
         <!-- module: ============== zero-mod-jackson ============================ -->
-        <jackson.version>2.19.2</jackson.version>
+        <jackson.version>2.20.0</jackson.version>
+        <jackson.annotation.version>2.20</jackson.annotation.version>
         <jackson.uuid.generator>5.1.0</jackson.uuid.generator>
-        <yaml.version>2.4</yaml.version>
+        <yaml.version>2.5</yaml.version>
 
 
         <!-- module: ============== zero-mod-jsr ================================ -->
@@ -170,7 +171,7 @@
         <jcache.version>1.1.1</jcache.version>
         <jsr340.version>4.0.1</jsr340.version>
         <jsr338.version>2.2</jsr338.version>
-        <jersey.version>4.0.0-M2</jersey.version>
+        <jersey.version>4.0.0-M3</jersey.version>
         <javax.el.version>3.0.1-b06</javax.el.version>
         <!-- New Uniform Version -->
         <jakarta.activation.version>2.0.1</jakarta.activation.version>
@@ -188,8 +189,8 @@
 
 
         <!-- module: ============== zero-mod-netty ============================== -->
-        <netty.tcnative.version>2.0.72.Final</netty.tcnative.version>
-        <netty.version>4.2.4.Final</netty.version>
+        <netty.tcnative.version>2.0.73.Final</netty.tcnative.version>
+        <netty.version>4.2.5.Final</netty.version>
 
 
         <!-- module: ============== zero-mod-quiz =============================== -->
@@ -207,7 +208,7 @@
         <!-- module: ============== zero-mod-secure ============================= -->
         <hibernate.validator.version>8.0.1.Final</hibernate.validator.version><!-- Bean Validation -->
         <jwt.version>4.5.0</jwt.version>
-        <sshd.version>2.15.0</sshd.version><!-- For Security: CVE-2022-45047 -->
+        <sshd.version>2.16.0</sshd.version><!-- For Security: CVE-2022-45047 -->
         <inversoft.version>2.0.0</inversoft.version>
 
         <!-- module: ============== zero-mod-vendor ============================== -->
@@ -216,8 +217,8 @@
         <scala.version>2.13.17-M1</scala.version>
         <feign.version>8.18.0</feign.version>
         <joda.version>2.14.0</joda.version>
-        <jedis.version>6.1.0</jedis.version>
-        <checker.version>3.49.5</checker.version>
+        <jedis.version>6.2.0</jedis.version>
+        <checker.version>3.50.0</checker.version>
         <picoli.version>4.7.7</picoli.version>
         <hdr.version>2.2.2</hdr.version>
         <codehaus.janino.version>3.1.12</codehaus.janino.version>
@@ -225,12 +226,12 @@
 
 
         <!-- module: ============== zero-mod-vertx ============================== -->
-        <vertx.version>4.5.18</vertx.version>
+        <vertx.version>4.5.21</vertx.version>
         <!--
         mvn:io.vertx:vertx-io_uring-incubator
         -->
 
-        <vertx.legacy.version>4.5.18</vertx.legacy.version>
+        <vertx.legacy.version>4.5.21</vertx.legacy.version>
 
 
         <!-- ====================== Maven插件 ============================= -->
