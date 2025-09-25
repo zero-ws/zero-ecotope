@@ -1,6 +1,3 @@
 [submodule "zero-plugins-equip"]
 	path = zero-plugins-equip
 	url = git@gitee.com:zero-ws/zero-plugins-equip.git
-[submodule "zero-energy"]
-	path = zero-energy
-	url = git@gitee.com:zero-ws/zero-energy.git
