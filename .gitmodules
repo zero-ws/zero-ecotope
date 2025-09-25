@@ -7,6 +7,3 @@
 [submodule "zero-plugins-extension"]
 	path = zero-plugins-extension
 	url = git@gitee.com:zero-ws/zero-plugins-extension.git
-[submodule "zero-plugins-external"]
-	path = zero-plugins-external
-	url = git@gitee.com:zero-ws/zero-plugins-external.git
