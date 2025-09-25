@@ -11,4 +11,11 @@
 
     <artifactId>zero-bootstrap</artifactId>
     <name>Zero::Bootstrap</name>
+    <dependencies>
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>r2mo-boot-vertx</artifactId>
+            <version>${r2mo.version}</version>
+        </dependency>
+    </dependencies>
 </project>

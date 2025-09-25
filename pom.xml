@@ -55,6 +55,8 @@
     <properties>
         <!-- Zero 固定版本号 -->
         <zero.version>1.0.0</zero.version>
+        <!-- R2MO -->
+        <r2mo.version>1.0-M16</r2mo.version>
 
         <!-- ====================== Java ======================================== -->
         <encoding>UTF-8</encoding>
@@ -227,7 +229,7 @@
 
 
         <!-- module: ============== zero-mod-vertx ============================== -->
-        <vertx.version>4.5.21</vertx.version>
+        <vertx.version>5.0.4</vertx.version>
         <!--
         mvn:io.vertx:vertx-io_uring-incubator
         -->
@@ -525,78 +527,9 @@
             </plugins>
         </pluginManagement>
         <plugins>
-            <!-- Source -->
-            <plugin>
-                <artifactId>maven-source-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>generate-sources</id>
-                        <phase>deploy</phase>
-                    </execution>
-                </executions>
-            </plugin>
-            <!-- Staging -->
-            <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>nexus-staging-maven-plugin</artifactId>
-                <extensions>true</extensions>
-                <configuration>
-                    <serverId>oss</serverId>
-                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
-                </configuration>
-            </plugin>
-            <!-- Deploy Only -->
-
-            <!--
-                        <plugin>
-                            <artifactId>maven-gpg-plugin</artifactId>
-                            <version>${maven.plugin.pgp}</version>
-                            <executions>
-                                <execution>
-                                    <id>sign-artifacts</id>
-                                    <phase>verify</phase>
-                                    <goals>
-                                        <goal>sign</goal>
-                                    </goals>
-                                    <configuration>
-                                        <keyname>lang.yu</keyname>
-                                        <passphraseServerId>oss</passphraseServerId>
-                                    </configuration>
-                                </execution>
-                            </executions>
-                        </plugin>
-            -->
-
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>versions-maven-plugin</artifactId>
-            </plugin>
-            <!--
-            Fix warning:   Project does not define minimum Maven version required for web, default is: 2.0
-            [ERROR] Project does not define required minimum version of Maven.
-            [ERROR] Update the pom.xml to contain maven-enforcer-plugin to
-            [ERROR] force the Maven version which is needed to web this project.
-            [ERROR] See https://maven.apache.org/enforcer/enforcer-rules/requireMavenVersion.html
-            [ERROR] Using the minimum version of Maven: null
-            -->
-            <plugin>
-                <artifactId>maven-enforcer-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>enforce-maven</id>
-                        <goals>
-                            <goal>enforce</goal>
-                        </goals>
-                        <configuration>
-                            <rules>
-                                <requireMavenVersion>
-                                    <version>3.0</version>
-                                </requireMavenVersion>
-                            </rules>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
