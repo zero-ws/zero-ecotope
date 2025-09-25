@@ -1,0 +1,12 @@
+{
+    "name": "role",
+    "daoCls": "S_ROLE",
+    "field": {
+        "unique": [
+            [
+                "code",
+                "sigma"
+            ]
+        ]
+    }
+}

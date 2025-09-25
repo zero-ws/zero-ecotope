@@ -1,0 +1,68 @@
+{
+    "_tabs": {
+        "className": "ex-tabs-tab-block-right",
+        "tabPosition": "right",
+        "defaultActiveKey": "tabPending",
+        "items": "待确认,tabPending,form;已确认,tabDone,check-circle"
+    },
+    "_assist": {
+        "data.pending": {
+            "uri": "/api/todo/categories",
+            "method": "POST",
+            "magic": {
+                "status": "ENUM:PENDING"
+            }
+        },
+        "data.done": {
+            "uri": "/api/todo/categories",
+            "method": "POST",
+            "magic": {
+                "status": "ENUM:FINISHED"
+            }
+        },
+        "data.category": {
+            "uri": "/api/type/categories/:type",
+            "magic": {
+                "type": "FIX:ci.type"
+            }
+        },
+        "resource.departments": {
+            "uri": "/api/dept/by/sigma"
+        },
+        "resource.teams": {
+            "uri": "/api/team/by/sigma"
+        },
+        "tabular": {
+            "uri": "/api/types/tabulars",
+            "method": "POST",
+            "magic": {
+                "$body": [
+                    "ci.environment",
+                    "ci.status",
+                    "ci.approval.status"
+                ]
+            },
+            "group": "type"
+        }
+    },
+    "_module": {
+        "selection": {
+            "mode": "CHILDREN_ALL_INCLUDE",
+            "condition": {
+                "modelCategory,i": "key"
+            }
+        },
+        "pending": {
+            "$category": true,
+            "config": {
+                "tree": "text=name"
+            }
+        },
+        "done": {
+            "$category": true,
+            "config": {
+                "tree": "text=name"
+            }
+        }
+    }
+}

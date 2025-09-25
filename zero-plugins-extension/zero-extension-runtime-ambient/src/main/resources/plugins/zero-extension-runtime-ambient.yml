@@ -1,0 +1,26 @@
+# --------------------
+# 模块描述符
+# --------------------
+shape:
+  id: zero-extension-runtime-ambient
+  name: "Zero.Extension.Runtime.Ambient"
+  # -------------------------------------------------------
+  # 默认配置目录直接走 name 来完成，可解析也可自动化
+  # 子目录说明
+  #     configuration.json                         当前模块全局配置
+  #
+  #     configuration/workflow/meta-workflow.xlsx  工作流定义文件
+  #                  /workflow/<name>              工作流主目录
+  #                  /bag/meta-modules.xlsx        模块化主目录
+  #                  /bag/<name>                   单模块目录（Bag / 模块内部 Block 目录）
+  #                  /menu/meta-menu.xlsx          菜单定义文件
+  #                  /web/<path>/UI.json           前端配置文件专用目录（资源文件）
+  #
+  #     model/<identifier>/descriptor.json         模型描述文件（引用实体、引用表、引用Dao）
+  #                       /ui.json                 UI 相关配置（主要针对视图级）
+  #                       /ticket.json             工作流专用工单配置
+  #
+  #     data/refs/<identifier>/<column>.json       共享列配置（位于 skeleton 项目）
+  #     data/initialize/                           初始化数据目录
+  #                    /<identifier>/<column>.json 表结构之下的列引用文件，不同列只有一个文件
+  # -------------------------------------------------------

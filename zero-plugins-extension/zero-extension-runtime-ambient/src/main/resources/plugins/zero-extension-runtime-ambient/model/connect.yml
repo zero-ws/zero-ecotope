@@ -1,0 +1,59 @@
+- dao: X_TABULAR          # X_TABULAR
+  unique:
+    - code
+    - type
+    - appId
+- dao: X_ACTIVITY         # X_ACTIVITY
+  unique:
+    - key
+- dao: X_MODULE           # X_MODULE
+  unique:
+    - entry
+    - appId
+- dao: X_CATEGORY         # X_CATEGORY
+  unique:
+    - code
+    - type
+    - appId
+- dao: X_NOTICE           # X_NOTICE
+  unique:
+    - appId
+    - code
+- dao: X_MENU             # X_MENU
+  unique:
+    - name
+    - appId
+- dao: X_LINKAGE          # X_LINKAGE
+  unique:
+    - name
+    - region
+- dao: X_ACTIVITY_CHANGE  # X_ACTIVITY_CHANGE
+  unique:
+    - key
+- dao: X_NUMBER           # X_NUMBER
+  unique:
+    - code
+    - appId
+- dao: X_TAG              # X_TAG
+  unique:
+    - name
+    - appId
+- dao: X_SOURCE           # X_SOURCE
+  unique:
+    - appId
+- dao: X_LOG              # X_LOG
+  unique:
+    - key
+- dao: X_ATTACHMENT       # X_ATTACHMENT
+  unique:
+    - fileUrl
+    - sigma
+- dao: X_ACTIVITY_RULE    # X_ACTIVITY_RULE
+  unique:
+    - key
+- dao: X_APP              # X_APP
+  unique:
+    - name
+- dao: X_TENANT           # X_TENANT
+  unique:
+    - code

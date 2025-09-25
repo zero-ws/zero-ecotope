@@ -1,0 +1,43 @@
+# 模型表
+- dao: M_MODEL
+  unique:
+    - namespace
+    - identifier
+# 属性表
+- dao: M_ATTRIBUTE
+  unique:
+    - name
+    - modelId
+# 关联表
+- dao: M_JOIN
+  unique:
+    - model
+    - namespace
+    - entity
+    - entityKey
+# 实体表
+- dao: M_ENTITY
+  unique:
+    - namespace
+    - identifier
+# 字段表
+- dao: M_FIELD
+  unique:
+    - name
+    - entityId
+# 键表
+- dao: M_KEY
+  unique:
+    - name
+    - entityId
+# 索引表
+- dao: M_INDEX
+  unique:
+    - name
+    - entityId
+# 模型表
+- dao: M_RELATION
+  unique:
+    - type
+    - upstream
+    - downstream

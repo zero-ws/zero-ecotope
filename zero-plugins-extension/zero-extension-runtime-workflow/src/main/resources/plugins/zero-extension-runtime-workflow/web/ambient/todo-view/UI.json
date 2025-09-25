@@ -1,0 +1,176 @@
+{
+    "_tabs": {
+        "defaultActiveKey": "tabHistory",
+        "type": "card",
+        "items": "属性变更,tabHistory;配置项信息,tabRecord;最新关系,tabRelation",
+        "forceRender": [
+            "tabRecord"
+        ]
+    },
+    "_page": {
+        "title": "待确认变更详情",
+        "left": [
+            "btnConfirm,确认,$opConfirm,primary,check",
+            "btnReject,拒绝,$opReject,,stop,,className=uc_red"
+        ]
+    },
+    "_assist": {
+        "data.category": {
+            "uri": "/api/type/categories/:type",
+            "magic": {
+                "type": "FIX:ci.type"
+            }
+        },
+        "category": {
+            "uri": "/api/types/categories",
+            "method": "POST",
+            "magic": {
+                "$body": []
+            },
+            "group": "type"
+        },
+        "tabular": {
+            "uri": "/api/types/tabulars",
+            "method": "POST",
+            "magic": {
+                "$body": [
+                    "ci.environment",
+                    "ci.status",
+                    "ci.approval.status",
+                    "remove.mode",
+                    "add.mode",
+                    "level.info.system",
+                    "level.protect",
+                    "deployment.mode",
+                    "high.availability.mode",
+                    "archiving.mode",
+                    "read.write.mode",
+                    "colony.type",
+                    "ci.line.type",
+                    "company.nature",
+                    "company.status",
+                    "vendor.type",
+                    "payment.mode",
+                    "ci.line.status",
+                    "ci.machine",
+                    "category.network.area",
+                    "category.database",
+                    "category.middleware",
+                    "root.control.type",
+                    "weekdays.type",
+                    "time.slot.type",
+                    "system.type",
+                    "tools.type",
+                    "brand.land.type",
+                    "host.category.type",
+                    "app.category.type",
+                    "facility.ownership.type",
+                    "deploy.area",
+                    "operation.department",
+                    "administrative.department",
+                    "service.level",
+                    "alternator.type",
+                    "types.of.hve",
+                    "low.vect",
+                    "low.vet",
+                    "transformer.type",
+                    "precision.pd",
+                    "ups.system",
+                    "ups.type",
+                    "ups.module",
+                    "battery.type",
+                    "app.agency.type",
+                    "deploy.gallery",
+                    "deploy.floor",
+                    "deploy.computer.room",
+                    "ddn.scope.type",
+                    "ddn.type",
+                    "general.enumeration",
+                    "access.control.type",
+                    "supply.mode",
+                    "return.mode",
+                    "cold.source.system",
+                    "natural.cooling",
+                    "fan.type",
+                    "external.unit.type",
+                    "cac.type",
+                    "ac.type",
+                    "humidifier.type",
+                    "vs.performance",
+                    "vs.level",
+                    "deploy.mode",
+                    "security.function",
+                    "log.location",
+                    "safe.deploy.mode",
+                    "throughput.type",
+                    "vpn.type",
+                    "is.secret",
+                    "light.path.num",
+                    "line.rate",
+                    "wavelength.range",
+                    "room.gb",
+                    "room.uptime.tier",
+                    "db.level",
+                    "functional.orientation",
+                    "construction.mode",
+                    "electricity.type",
+                    "net.level",
+                    "power.scheme",
+                    "build.anti.seismic",
+                    "build.prevent.thunder",
+                    "outfire.system.type",
+                    "duty.condition",
+                    "product.architecture",
+                    "equ.type",
+                    "operational.mode",
+                    "ddr.type",
+                    "switch.function",
+                    "general.yn",
+                    "general.yno",
+                    "reserve.type",
+                    "location.storage",
+                    "upgrade.type",
+                    "disaster.recovery.mod",
+                    "intellectual.property",
+                    "service.object",
+                    "development.mode",
+                    "disaster.recovery.level",
+                    "maintenance.mode"
+                ]
+            },
+            "group": "type"
+        },
+        "resource.customers": {
+            "uri": "/api/customer/by/sigma"
+        },
+        "resource.departments": {
+            "uri": "/api/dept/by/sigma"
+        },
+        "resource.teams": {
+            "uri": "/api/team/by/sigma"
+        },
+        "resource.employees": {
+            "uri": "/api/employee/by/sigma"
+        },
+        "security.users": {
+            "uri": "/api/user/by/sigma"
+        },
+        "model.identifiers": {
+            "uri": "/api/model"
+        }
+    },
+    "_module": {
+        "form": {
+            "__PATTERN__": "form.:identifier.view"
+        },
+        "configuration": {
+            "tabRelation": {
+                "relation": {
+                    "definition": true,
+                    "source": "data.category"
+                },
+                "editable": false
+            }
+        }
+    }
+}

@@ -1,0 +1,29 @@
+databaseChangeLog:
+  # Schema表结构 - 建模表
+  - include:
+      file: MYSQL/M_MODEL.sql
+      relativeToChangelogFile: true
+  - include:
+      file: MYSQL/M_ATTRIBUTE.sql
+      relativeToChangelogFile: true
+  - include:
+      file: MYSQL/M_ENTITY.sql
+      relativeToChangelogFile: true
+  - include:
+      file: MYSQL/M_FIELD.sql
+      relativeToChangelogFile: true
+  - include:
+      file: MYSQL/M_INDEX.sql
+      relativeToChangelogFile: true
+  - include:
+      file: MYSQL/M_KEY.sql
+      relativeToChangelogFile: true
+  - include:
+      file: MYSQL/M_JOIN.sql
+      relativeToChangelogFile: true
+  - include:
+      file: MYSQL/M_RELATION.sql
+      relativeToChangelogFile: true
+  - include:
+      file: MYSQL/M_ACC.sql
+      relativeToChangelogFile: true

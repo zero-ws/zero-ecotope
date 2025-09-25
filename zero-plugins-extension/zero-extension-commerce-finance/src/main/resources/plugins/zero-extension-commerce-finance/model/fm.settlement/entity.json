@@ -1,0 +1,12 @@
+{
+    "name": "settlement",
+    "daoCls": "F_SETTLEMENT",
+    "field": {
+        "unique": [
+            [
+                "code",
+                "sigma"
+            ]
+        ]
+    }
+}

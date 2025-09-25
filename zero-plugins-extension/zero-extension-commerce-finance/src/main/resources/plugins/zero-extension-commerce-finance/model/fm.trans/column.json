@@ -1,0 +1,48 @@
+[
+    "serial,交易单号,,true",
+    "name,应收单号,,true",
+    "amount,交易金额,CURRENCY",
+
+    {
+        "metadata": "type,交易类型,MAPPING",
+        "$mapping": {
+            "SETTLEMENT": "直接结算,check-circle,16,#268941",
+            "DEBT": "应收,link,16,#0e8be6",
+            "REFUND": "退款,link,16,#ff686b"
+        }
+    },
+    {
+        "metadata": "status,交易状态,MAPPING",
+        "$mapping": {
+            "FINISHED": "已完成",
+            "PENDING": "未完成"
+        }
+    },
+    {
+        "metadata": "rounded,抹零方式,MAPPING",
+        "$mapping": {
+            "NONE": "未处理",
+            "HALF": "四舍五入",
+            "FLOOR": "零头舍弃",
+            "CEIL": "零头入进",
+            "INPUT": "自定义"
+        }
+    },
+    "amountGap,零头金额,CURRENCY",
+    {
+        "title": "交易人",
+        "dataIndex": "createdBy",
+        "$render": "USER",
+        "$config": {
+            "uri": "/api/user/:key",
+            "field": "realname"
+        },
+        "$empty": "（系统）"
+    },
+    {
+        "title": "交易时间",
+        "dataIndex": "createdAt",
+        "$render": "DATE",
+        "$format": "YYYY-MM-DD HH:mm:ss"
+    }
+]

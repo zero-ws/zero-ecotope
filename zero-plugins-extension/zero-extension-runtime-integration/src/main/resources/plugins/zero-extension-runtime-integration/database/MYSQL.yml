@@ -1,0 +1,17 @@
+databaseChangeLog:
+  # 集成专用
+  - include:
+      file: MYSQL/I_INTEGRATION.sql
+      relativeToChangelogFile: true
+  # 文档管理目录集成
+  - include:
+      file: MYSQL/I_DIRECTORY.sql
+      relativeToChangelogFile: true
+  # 消息管理
+  - include:
+      file: MYSQL/I_MESSAGE.sql
+      relativeToChangelogFile: true
+  # 公文包，文档组
+  - include:
+      file: MYSQL/I_PORTFOLIO.sql
+      relativeToChangelogFile: true

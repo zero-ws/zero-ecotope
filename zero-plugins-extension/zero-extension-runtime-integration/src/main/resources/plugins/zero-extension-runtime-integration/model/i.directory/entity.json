@@ -1,0 +1,20 @@
+{
+    "name": "i-directory",
+    "daoCls": "I_DIRECTORY",
+    "field": {
+        "numbers": {
+            "code": "NUM.DIRECTORY"
+        },
+        "unique": [
+            [
+                "storePath",
+                "sigma"
+            ]
+        ],
+        "array": [
+            "visitMode",
+            "visitRole",
+            "visitGroup"
+        ]
+    }
+}

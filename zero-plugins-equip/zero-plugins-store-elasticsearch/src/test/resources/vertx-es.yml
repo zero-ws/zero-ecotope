@@ -1,0 +1,8 @@
+elasticsearch:
+  config:
+    hostname: ox.integration.cn
+    port: 9200
+    scheme: http
+    index: xxxx
+    username: xxxxxxx
+    password: xxxxxxx

@@ -1,0 +1,18 @@
+{
+    "patterns": [
+        "/api/{0}",
+        "/api/{0}/by/sigma",
+        "/api/{0}/:key",
+        "/api/batch/{0}/delete",
+        "/api/batch/{0}/update",
+        "/api/columns/{0}/my",
+        "/api/columns/{0}/full",
+        "/api/{0}/search",
+        "/api/{0}/missing",
+        "/api/{0}/existing",
+        "/api/{0}/import",
+        "/api/{0}/export"
+    ],
+    "columnKeyField": "dataIndex",
+    "columnLabelField": "title"
+}

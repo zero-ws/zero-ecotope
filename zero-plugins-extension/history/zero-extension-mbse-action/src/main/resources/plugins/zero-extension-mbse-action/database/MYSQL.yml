@@ -1,0 +1,11 @@
+databaseChangeLog:
+  # 安全表
+  - include:
+      file: MYSQL/I_API.sql
+      relativeToChangelogFile: true
+  - include:
+      file: MYSQL/I_SERVICE.sql
+      relativeToChangelogFile: true
+  - include:
+      file: MYSQL/I_JOB.sql
+      relativeToChangelogFile: true

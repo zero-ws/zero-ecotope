@@ -1,0 +1,12 @@
+{
+    "name": "wh",
+    "daoCls": "P_WH",
+    "field": {
+        "unique": [
+            [
+                "code",
+                "sigma"
+            ]
+        ]
+    }
+}

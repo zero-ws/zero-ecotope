@@ -1,0 +1,13 @@
+{
+    "query": {
+        "type": "zero.service.catalog"
+    },
+    "store": {
+        "runComponent": "io.zerows.extension.runtime.integration.uca.command.FsReadOnly",
+        "initialize": {
+            "visitMode": [
+                "r"
+            ]
+        }
+    }
+}

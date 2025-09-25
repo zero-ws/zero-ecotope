@@ -1,0 +1,12 @@
+{
+    "name": "currency",
+    "daoCls": "F_CURRENCY",
+    "field": {
+        "unique": [
+            [
+                "code",
+                "sigma"
+            ]
+        ]
+    }
+}

@@ -1,0 +1,37 @@
+package io.zerows.common.datamation;
+
+import io.zerows.ams.util.HUt;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
+
+import java.util.Objects;
+import java.util.concurrent.ConcurrentMap;
+import java.util.function.BiFunction;
+import java.util.function.Function;
+
+/**
+ * @author <a href="http://www.origin-x.cn">Lang</a>
+ */
+class DirectoryKit {
+
+    static JsonArray process(final JsonArray process,
+                             final Function<JsonObject, JsonObject> function) {
+        final JsonArray normalized = new JsonArray();
+        HUt.itJArray(process).map(function).forEach(normalized::add);
+        return normalized;
+    }
+
+    static JsonObject process(final ConcurrentMap<String, KMapping> dataMap,
+                              final JsonObject input,
+                              final BiFunction<KMapping, String, String> applier) {
+        final JsonObject normalized = Objects.isNull(input) ? new JsonObject() : input.copy();
+        dataMap.forEach((field, item) -> {
+            final Object fromValue = input.getValue(field);
+            if (Objects.nonNull(fromValue) && fromValue instanceof String) {
+                final String toValue = applier.apply(item, fromValue.toString());
+                normalized.put(field, toValue);
+            }
+        });
+        return normalized;
+    }
+}

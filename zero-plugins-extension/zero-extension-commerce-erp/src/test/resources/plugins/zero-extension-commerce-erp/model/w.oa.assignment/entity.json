@@ -1,0 +1,22 @@
+{
+    "name": "w-oa-assignment",
+    "daoCls": "T_OA_ASSIGNMENT",
+    "field": {
+        "unique": [
+            [
+                "key"
+            ]
+        ]
+    },
+    "connect": {
+        "targetIndent": "w.todo",
+        "target": {
+            "w.todo": {
+                "keyJoin": "traceId"
+            }
+        },
+        "source": {
+            "keyJoin": "key"
+        }
+    }
+}

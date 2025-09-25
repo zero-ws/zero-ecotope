@@ -1,0 +1,12 @@
+{
+    "name": "doc-clause",
+    "daoCls": "D_DOC_CLAUSE",
+    "field": {
+        "unique": [
+            [
+                "code",
+                "sigma"
+            ]
+        ]
+    }
+}

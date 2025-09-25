@@ -1,0 +1,21 @@
+- dao: B_AUTHORITY   # B_AUTHORITY
+  unique:
+    - code
+    - blockId
+- dao: B_WEB  # B_WEB
+  unique:
+    - code
+    - blockId
+- dao: B_COMPONENT # B_COMPONENT
+  unique:
+    - specImpl
+    - blockId
+- dao: B_BAG # B_BAG
+  unique:
+    - name
+    - appId
+- dao: B_BLOCK # B_BLOCK
+  unique:
+    - name
+    - appId
+    - bagId

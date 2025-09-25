@@ -1,0 +1,12 @@
+{
+    "name": "tent",
+    "daoCls": "L_TENT",
+    "field": {
+        "unique": [
+            [
+                "code",
+                "sigma"
+            ]
+        ]
+    }
+}

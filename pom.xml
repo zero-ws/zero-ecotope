@@ -51,6 +51,11 @@
     <modules>
         <module>zero-core-version</module>
         <module>zero-bootstrap</module>
+        <module>zero-core-ams</module>
+        <module>zero-energy</module>
+        <module>zero-plugins-equip</module>
+        <module>zero-plugins-extension</module>
+        <module>zero-plugins-external</module>
     </modules>
     <properties>
         <!-- Zero 固定版本号 -->

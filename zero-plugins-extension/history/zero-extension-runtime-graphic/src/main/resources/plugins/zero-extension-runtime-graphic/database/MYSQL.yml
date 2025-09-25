@@ -1,0 +1,17 @@
+databaseChangeLog:
+  # 图相关表
+  - include:
+      file: MYSQL/G_GRAPHIC.sql
+      relativeToChangelogFile: true
+  - include:
+      file: MYSQL/G_NODE.sql
+      relativeToChangelogFile: true
+  - include:
+      file: MYSQL/G_EDGE.sql
+      relativeToChangelogFile: true
+  - include:
+      file: MYSQL/G_CLUSTER.sql
+      relativeToChangelogFile: true
+  - include:
+      file: MYSQL/R_CLUSTER_NODE.sql
+      relativeToChangelogFile: true

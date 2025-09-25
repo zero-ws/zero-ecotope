@@ -1,0 +1,22 @@
+{
+    "name": "w-vendor-assessment",
+    "daoCls": "T_VENDOR_ASSESSMENT",
+    "field": {
+        "unique": [
+            [
+                "key"
+            ]
+        ]
+    },
+    "connect": {
+        "targetIndent": "w.todo",
+        "target": {
+            "w.todo": {
+                "keyJoin": "traceId"
+            }
+        },
+        "source": {
+            "keyJoin": "key"
+        }
+    }
+}

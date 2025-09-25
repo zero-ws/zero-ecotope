@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>zero-ecosystem</artifactId>
+        <groupId>io.zerows</groupId>
+        <version>1.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>pom</packaging>
+    <artifactId>zero-plugins-external</artifactId>
+    <name>Zero.Plugins.Dynamic.POM.${zero.version}</name>
+    <modules>
+        <module>zero-plugins-dynamic-toolkit-hed</module>
+    </modules>
+    <build>
+        <plugins>
+            <!--
+            <plugin>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>${maven.plugin.pgp}</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                        <configuration>
+                            <executable>gpg2</executable>
+                            <keyname>lang.yu</keyname>
+                            <passphrase>${dev.Z_DBR_PASS}</passphrase>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            -->
+            <plugin>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <!-- 输出设置：路径/风格 -->
+                    <outputDirectory>${basedir}/document</outputDirectory>
+                    <!--                    <destDir>document</destDir>-->
+                    <!-- 连接配置 -->
+                    <doclint>none,-missing</doclint>
+                    <detectJavaApiLink>true</detectJavaApiLink>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <release>17</release>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

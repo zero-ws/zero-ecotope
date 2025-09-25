@@ -1,0 +1,7 @@
+{
+    "name": "条款",
+    "module": "doc.clause",
+    "identifier": "d.doc.clause",
+    "api": "doc-clause",
+    "type": "resource.document"
+}

@@ -1,0 +1,15 @@
+{
+    "config": {
+        "_form": {
+            "ui": [
+                [
+                    "subject=ZERO-E.SEC"
+                ],
+                [
+                    "pLoginWechat,微信登录,,,aiCheckbox,valuePropName=checked",
+                    "pLoginSMS,短信登录,,,aiCheckbox,valuePropName=checked"
+                ]
+            ]
+        }
+    }
+}

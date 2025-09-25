@@ -1,0 +1,66 @@
+- dao: UI_LAYOUT      # 布局 UI_LAYOUT
+  unique:
+    - name
+    - sigma
+- dao: UI_PAGE      # 页面 UI_PAGE
+  unique:
+    - app
+    - module
+    - page
+    - sigma
+- dao: UI_CONTROL     # 控件 UI_CONTROL
+  unique:
+    - sign
+    - sigma
+- dao: UI_COLUMN     # 列 UI_COLUMN
+  unique:
+    - controlId
+    - dataIndex
+- dao: UI_FORM     # 表单 UI_FORM
+  unique:
+    - code
+    - sigma
+- dao: UI_FIELD    # 字段 UI_FIELD
+  unique:
+    - controlId
+    - xPoint
+    - yPoint
+- dao: UI_LIST    # 列表 UI_LIST
+  unique:
+    - code
+    - sigma
+- dao: UI_VIEW   # 视图 UI_VIEW
+  unique:
+    - code
+    - name
+    - sigma
+- dao: UI_OP   # 操作 UI_OP
+  unique:
+    - controlId
+    - sigma
+    - clientKey
+    - action
+- dao: UI_VISITOR  # 访问 UI_VISITOR
+  unique:
+    - identifier
+    - page
+    - path
+    - sigma
+# -------------- Option ----------------
+# 全部是单向表
+# 配置片段
+- dao: V_FRAGMENT
+  unique:
+    - key
+# 搜索配置
+- dao: V_SEARCH
+  unique:
+    - key
+# 表格配置
+- dao: V_TABLE
+  unique:
+    - key
+# 查询配置
+- dao: V_QUERY
+  unique:
+    - key

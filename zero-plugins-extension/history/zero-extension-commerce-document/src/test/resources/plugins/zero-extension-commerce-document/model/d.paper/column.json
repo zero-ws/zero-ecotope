@@ -1,0 +1,63 @@
+[
+    {
+        "title": "名称",
+        "dataIndex": "name",
+        "sorter": true,
+        "$filter.type": "SEARCH",
+        "$filter.config": {
+            "placeholder": "输入名称",
+            "button": {
+                "search": "搜索",
+                "reset": "重置"
+            }
+        }
+    },
+    {
+        "title": "编号",
+        "dataIndex": "code",
+        "sorter": true,
+        "$filter.type": "SEARCH",
+        "$filter.config": {
+            "placeholder": "输入编号",
+            "button": {
+                "search": "搜索",
+                "reset": "重置"
+            }
+        }
+    },
+    {
+        "title": "类型",
+        "dataIndex": "type"
+    },
+    {
+        "metadata": "status,状态,MAPPING",
+        "$mapping": {
+            "DRAFT": "草稿",
+            "PENDING": "待审批",
+            "RELEASE": "已发布",
+            "ARCHIVE": "已归档",
+            "RUNNING": "活动中",
+            "STOPPED": "已结束"
+        }
+    },
+    {
+        "title": "版本",
+        "dataIndex": "version"
+    },
+    {
+        "title": "更新人",
+        "dataIndex": "updatedBy",
+        "$render": "USER",
+        "$config": {
+            "uri": "/api/user/:key",
+            "field": "realname"
+        },
+        "$empty": "（系统）"
+    },
+    {
+        "title": "更新时间",
+        "dataIndex": "updatedAt",
+        "$render": "DATE",
+        "$format": "YYYY-MM-DD HH:mm"
+    }
+]

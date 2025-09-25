@@ -1,0 +1,12 @@
+{
+    "name": "city",
+    "daoCls": "L_CITY",
+    "field": {
+        "unique": [
+            [
+                "code",
+                "sigma"
+            ]
+        ]
+    }
+}

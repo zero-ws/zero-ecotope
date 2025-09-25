@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>zero-energy</artifactId>
+        <groupId>io.zerows</groupId>
+        <version>1.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>zero-entry-facade</artifactId>
+    <packaging>bundle</packaging>
+    <name>Zero::Entry::Facade</name>
+    <dependencies>
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-core-testing</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!-- New -->
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-core-runtime</artifactId>
+        </dependency>
+        <!-- Package keep: io.vertx.up.unity -->
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-core-unity</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-core-container</artifactId>
+        </dependency>
+
+
+        <!-- Reflection -->
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.ow2.asm</groupId>
+            <artifactId>asm</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.javassist</groupId>
+            <artifactId>javassist</artifactId>
+        </dependency>
+
+
+        <!-- io_uring -->
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-io_uring-incubator</artifactId>
+        </dependency>
+
+
+        <!-- 请求错误：无法访问目标地址，检查对口是否可被正常访问 -->
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-codec-http2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-handler-proxy</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-resolver-dns</artifactId>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>aspectj-maven-plugin</artifactId>
+                <version>${maven.plugin.aspectj}</version>
+                <configuration>
+                    <privateScope>true</privateScope>
+                    <showWeaveInfo>true</showWeaveInfo>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <complianceLevel>${java.version}</complianceLevel>
+                    <verbose>false</verbose>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjtools</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjrt</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <phase>process-sources</phase>
+                        <goals>
+                            <goal>compile</goal>       <!-- use this goal to weave all your main classes -->
+                            <goal>test-compile</goal>  <!-- use this goal to weave all your mock classes -->
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Export-Package>
+                            <!-- 编译警告 -->
+                        </Export-Package>
+                        <Import-Package>
+                            *;resolution:=optional,
+                        </Import-Package>
+                        <Embed-Transitive>true</Embed-Transitive>
+                        <!--
+                        在 JDK 9 之后，OSGI的打包会引起部分警告信息：
+                        [WARNING] Osgi io.zerows:zero-ams:bundle:1.0.0 :
+                        Classes found in the wrong directory: {META-INF/versions/9/module-info.class=module-info.class}
+                        此错误信息在编译的时候不会有问题，但在IDEA识别时会阻拦IDEA的运行，如直接导致IDEA中无法启动应用，因此，
+                        需要在打包的时候忽略此错误信息，具体配置如下：
+                        -->
+                        <_fixupmessages>
+                            "Classes found in the wrong directory";restrict:=error;is:=ignore
+                        </_fixupmessages>
+                    </instructions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

@@ -1,0 +1,12 @@
+{
+    "name": "graphic",
+    "daoCls": "G_GRAPHIC",
+    "field": {
+        "unique": [
+            [
+                "code",
+                "sigma"
+            ]
+        ]
+    }
+}

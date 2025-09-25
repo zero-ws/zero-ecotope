@@ -1,0 +1,8 @@
+- dao: G_GRAPHIC    # 图形 G_GRAPHIC
+  unique:
+    - sigma
+    - code
+- dao: G_CLUSTER   # 集群 G_CLUSTER
+  unique:
+    - name
+    - graphicId

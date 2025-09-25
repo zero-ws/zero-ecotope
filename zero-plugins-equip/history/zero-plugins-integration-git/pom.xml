@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>io.zerows</groupId>
+        <artifactId>zero-plugins-equip</artifactId>
+        <version>1.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>zero-plugins-integration-git</artifactId>
+    <name>Zero.Plugins.Integration.Git</name>
+    <packaging>bundle</packaging>
+    <dependencies>
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-core-runtime</artifactId>
+        </dependency>
+        <!-- Git -->
+        <dependency>
+            <groupId>org.eclipse.jgit</groupId>
+            <artifactId>org.eclipse.jgit</artifactId>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Export-Package>
+                            <!-- SPI Required -->
+                            io.zerows.core.metadata.osgi.spi.*;-split-package:=merge-first,
+
+                            io.zerows.plugins.integration.git.*,
+                        </Export-Package>
+                        <Import-Package>
+                            *;resolution:=optional,
+                        </Import-Package>
+                        <Embed-Transitive>true</Embed-Transitive>
+                        <!--
+                        在 JDK 9 之后，OSGI的打包会引起部分警告信息：
+                        [WARNING] Osgi io.zerows:zero-ams:bundle:1.0.0 :
+                        Classes found in the wrong directory: {META-INF/versions/9/module-info.class=module-info.class}
+                        此错误信息在编译的时候不会有问题，但在IDEA识别时会阻拦IDEA的运行，如直接导致IDEA中无法启动应用，因此，
+                        需要在打包的时候忽略此错误信息，具体配置如下：
+                        -->
+                        <_fixupmessages>
+                            "Classes found in the wrong directory";restrict:=error;is:=ignore
+                        </_fixupmessages>
+                    </instructions>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.plugin.compiler}</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <!--<compilerArgs>
+                        <arg>-verbose</arg>
+                        <arg>-Xlint:all,-options,-path</arg>
+                    </compilerArgs>-->
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <!-- <includeScope>compile</includeScope> -->
+                            <type>jar</type>
+                            <includeTypes>jar</includeTypes>
+                            <!-- 存放服务依赖的jar包，存放在服务相同目录的lib文件夹下 -->
+                            <outputDirectory>
+                                target/lib
+                            </outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

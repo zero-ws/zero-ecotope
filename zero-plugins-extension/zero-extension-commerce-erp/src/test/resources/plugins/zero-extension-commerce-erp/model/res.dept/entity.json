@@ -1,0 +1,34 @@
+{
+    "name": "dept",
+    "daoCls": "E_DEPT",
+    "field": {
+        "unique": [
+            [
+                "code",
+                "companyId"
+            ]
+        ]
+    },
+    "transform": {
+        "tree": {
+            "in": "name",
+            "field": "deptId"
+        },
+        "fabric": {
+            "source": [
+                {
+                    "source": "ASSIST",
+                    "key": "resource.companys",
+                    "component": "io.zerows.extension.commerce.erp.osgi.spi.dict.CompanyDict"
+                }
+            ],
+            "epsilon": {
+                "companyId": {
+                    "source": "resource.companys",
+                    "in": "name",
+                    "out": "key"
+                }
+            }
+        }
+    }
+}

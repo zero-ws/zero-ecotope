@@ -1,0 +1,125 @@
+package io.zerows.core.web.model.uca.scan;
+
+import io.reactivex.rxjava3.core.Observable;
+import io.vertx.core.http.HttpServerRequest;
+import io.vertx.core.http.HttpServerResponse;
+import io.zerows.ams.constant.VValue;
+import io.zerows.core.annotations.Ordered;
+import io.zerows.core.constant.KWeb;
+import io.zerows.core.fn.Fx;
+import io.zerows.core.uca.log.Annal;
+import io.zerows.core.util.Ut;
+import io.zerows.core.web.model.atom.Event;
+import io.zerows.core.web.model.exception.BootFilterOrderException;
+import io.zerows.core.web.model.exception.BootFilterSpecificationException;
+import io.zerows.core.web.model.zdk.web.Filter;
+import io.zerows.module.metadata.zdk.uca.Inquirer;
+
+import javax.servlet.annotation.WebFilter;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+
+/**
+ * Filter processing
+ * path = Event Chain
+ */
+public class InquirerFilter implements Inquirer<ConcurrentMap<String, Set<Event>>> {
+
+    private static final Annal LOGGER = Annal.get(InquirerFilter.class);
+
+    @Override
+    public ConcurrentMap<String, Set<Event>> scan(final Set<Class<?>> clazzes) {
+        // Scan all classess that are annotated with @WebFilter
+        final ConcurrentMap<String, Set<Event>> filters = new ConcurrentHashMap<>();
+        Observable.fromIterable(clazzes)
+            .filter(item -> item.isAnnotationPresent(WebFilter.class))
+            .map(this::ensure)
+            .subscribe(item -> this.extract(filters, item))
+            .dispose();
+        return filters;
+    }
+
+    private Class<?> ensure(final Class<?> clazz) {
+        Fx.outBoot(!Filter.class.isAssignableFrom(clazz), LOGGER,
+            BootFilterSpecificationException.class, this.getClass(), clazz);
+        return clazz;
+    }
+
+    private void extract(final ConcurrentMap<String, Set<Event>> map,
+                         final Class<?> clazz) {
+        final Annotation annotation = clazz.getAnnotation(WebFilter.class);
+        final String[] pathes = Ut.invoke(annotation, "value");
+        // Multi pathes supported
+        for (final String path : pathes) {
+            final Event event = this.extract(path, clazz);
+            // Set<Event> initialized.
+            Set<Event> events = map.get(path);
+            if (null == events) {
+                events = new HashSet<>();
+            }
+            // Add new event to set
+            events.add(event);
+            map.put(path, events);
+        }
+    }
+
+    private Event extract(final String path, final Class<?> clazz) {
+        final Event event = new Event();
+        event.setPath(path);
+        final Annotation annotation = clazz.getAnnotation(Ordered.class);
+        int order = KWeb.ORDER.FILTER;
+        if (null != annotation) {
+            final Integer setted = Ut.invoke(annotation, "value");
+            // Order specification
+            Fx.outBoot(setted < 0, LOGGER,
+                BootFilterOrderException.class, this.getClass(), clazz);
+            order = order + setted;
+        }
+        event.setOrder(order);
+        event.setProxy(clazz);
+        // Action
+        final Method action = this.findMethod(clazz);
+        event.setAction(action);
+        event.setConsumes(new HashSet<>());
+        event.setProduces(new HashSet<>());
+        return event;
+    }
+
+    private Method findMethod(final Class<?> clazz) {
+        final List<Method> methods = new ArrayList<>();
+        // One method only
+        final Method[] scanned = clazz.getDeclaredMethods();
+        Observable.fromArray(scanned)
+            .filter(item -> "doFilter".equals(item.getName()))
+            .subscribe(methods::add)
+            .dispose();
+        // No overwritting
+        if (VValue.ONE == methods.size()) {
+            return methods.get(VValue.IDX);
+        } else {
+            // Search for correct signature
+            return Observable.fromIterable(methods)
+                .filter(this::isValidFilter)
+                .blockingFirst();
+        }
+    }
+
+    private boolean isValidFilter(final Method method) {
+        final Class<?>[] parameters = method.getParameterTypes();
+        boolean valid = false;
+        if (VValue.TWO == parameters.length) {
+            final Class<?> requestCls = parameters[VValue.IDX];
+            final Class<?> responseCls = parameters[VValue.ONE];
+            if (HttpServerRequest.class == requestCls && HttpServerResponse.class == responseCls) {
+                valid = true;
+            }
+        }
+        return valid;
+    }
+}

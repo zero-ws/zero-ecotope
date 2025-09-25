@@ -1,0 +1,13 @@
+{
+    "name": "i-integration",
+    "daoCls": "I_INTEGRATION",
+    "field": {
+        "unique": [
+            [
+                "endpoint",
+                "path",
+                "appId"
+            ]
+        ]
+    }
+}

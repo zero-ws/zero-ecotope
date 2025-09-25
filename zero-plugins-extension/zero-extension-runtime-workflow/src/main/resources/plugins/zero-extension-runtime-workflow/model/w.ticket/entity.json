@@ -1,0 +1,12 @@
+{
+    "name": "ticket",
+    "daoCls": "W_TICKET",
+    "field": {
+        "unique": [
+            [
+                "code",
+                "sigma"
+            ]
+        ]
+    }
+}

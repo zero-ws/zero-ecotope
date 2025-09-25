@@ -1,0 +1,10 @@
+databaseChangeLog:
+  - include:
+      file: MYSQL/W_FLOW.sql
+      relativeToChangelogFile: true
+  - include:
+      file: MYSQL/W_TODO.sql
+      relativeToChangelogFile: true
+  - include:
+      file: MYSQL/W_TICKET.sql
+      relativeToChangelogFile: true

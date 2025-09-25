@@ -1,0 +1,22 @@
+{
+    "name": "w-vendor-hour",
+    "daoCls": "T_VENDOR_HOUR",
+    "field": {
+        "unique": [
+            [
+                "key"
+            ]
+        ]
+    },
+    "connect": {
+        "targetIndent": "w.todo",
+        "target": {
+            "w.todo": {
+                "keyJoin": "traceId"
+            }
+        },
+        "source": {
+            "keyJoin": "key"
+        }
+    }
+}

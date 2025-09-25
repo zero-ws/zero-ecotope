@@ -1,0 +1,22 @@
+{
+    "name": "w-vendor-check-out",
+    "daoCls": "T_VENDOR_CHECK_OUT",
+    "field": {
+        "unique": [
+            [
+                "key"
+            ]
+        ]
+    },
+    "connect": {
+        "targetIndent": "w.todo",
+        "target": {
+            "w.todo": {
+                "keyJoin": "traceId"
+            }
+        },
+        "source": {
+            "keyJoin": "key"
+        }
+    }
+}

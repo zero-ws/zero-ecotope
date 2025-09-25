@@ -1,0 +1,11 @@
+openapi: 3.1.0
+info:
+  title: Hotel API
+  version: 1.0.0
+paths:
+  /hotel:
+    get:
+      operationId: getHotels
+      responses:
+        '200':
+          description: OK

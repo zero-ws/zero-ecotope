@@ -1,0 +1,12 @@
+{
+    "name": "model",
+    "daoCls": "M_MODEL",
+    "field": {
+        "unique": [
+            [
+                "sigma",
+                "identifier"
+            ]
+        ]
+    }
+}

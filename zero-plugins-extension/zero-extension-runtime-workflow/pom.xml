@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>zero-plugins-extension</artifactId>
+        <groupId>io.zerows</groupId>
+        <version>1.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>zero-extension-runtime-workflow</artifactId>
+
+    <name>Zero.Extension.Runtime.Workflow.DB</name>
+    <packaging>bundle</packaging>
+    <dependencies>
+        <!-- Kern -->
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-extension-runtime-skeleton</artifactId>
+        </dependency>
+        <!-- Camunda -->
+        <dependency>
+            <groupId>org.camunda.bpm</groupId>
+            <artifactId>camunda-engine</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-beans</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>joda-time</groupId>
+                    <artifactId>joda-time</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.camunda.spin</groupId>
+                    <artifactId>camunda-spin-core</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.camunda.spin</groupId>
+            <artifactId>camunda-spin-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.uuid</groupId>
+            <artifactId>java-uuid-generator</artifactId>
+        </dependency>
+        <!--
+        Joda Caused by: java.lang.ClassNotFoundException: org.joda.time.DateTime
+        -->
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+                        <Export-Package>
+                            <!-- SPI Required -->
+                            io.zerows.core.metadata.osgi.spi.*;-split-package:=merge-first,
+
+                            io.zerows.extension.runtime.workflow.*,
+                        </Export-Package>
+                        <Import-Package>
+                            *;resolution:=optional,
+                        </Import-Package>
+                        <Embed-Transitive>true</Embed-Transitive>
+                        <_fixupmessages>
+                            "Classes found in the wrong directory";restrict:=error;is:=ignore
+                        </_fixupmessages>
+                    </instructions>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <configuration>
+                    <propertyProviderClass>io.zerows.extension.runtime.skeleton.secure.ZeroLiquibaseEncryption
+                    </propertyProviderClass>
+                    <!-- 配置文件路径 -->
+                    <propertyFile>plugins/${project.artifactId}/database/MYSQL.properties</propertyFile>
+                    <changeLogFile>plugins/${project.artifactId}/database/MYSQL.yml</changeLogFile>
+                    <!-- 配置参数 -->
+                    <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
+                    <outputFileEncoding>UTF-8</outputFileEncoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

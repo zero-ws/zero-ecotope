@@ -1,0 +1,12 @@
+{
+    "name": "paper",
+    "daoCls": "D_PAPER",
+    "field": {
+        "unique": [
+            [
+                "code",
+                "sigma"
+            ]
+        ]
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "name": "x-attachment",
+    "daoCls": "X_ATTACHMENT",
+    "field": {
+        "unique": [
+            [
+                "fileUrl",
+                "sigma"
+            ]
+        ]
+    }
+}

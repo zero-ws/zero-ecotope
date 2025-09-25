@@ -1,0 +1,12 @@
+{
+    "name": "bank",
+    "daoCls": "F_BANK",
+    "field": {
+        "unique": [
+            [
+                "code",
+                "sigma"
+            ]
+        ]
+    }
+}

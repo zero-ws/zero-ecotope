@@ -1,0 +1,21 @@
+databaseChangeLog:
+  # 报表数据源
+  - include:
+      file: MYSQL/KP_DATA_SET.sql
+      relativeToChangelogFile: true
+  # 报表定义
+  - include:
+      file: MYSQL/KP_REPORT.sql
+      relativeToChangelogFile: true
+  # 报表维度定义 1:1
+  - include:
+      file: MYSQL/KP_DIMENSION.sql
+      relativeToChangelogFile: true
+  # 报表特征定义（有就追加）
+  - include:
+      file: MYSQL/KP_FEATURE.sql
+      relativeToChangelogFile: true
+  # 报表实例表（实际存在的报表）
+  - include:
+      file: MYSQL/KP_REPORT_INSTANCE.sql
+      relativeToChangelogFile: true

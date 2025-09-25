@@ -1,0 +1,12 @@
+{
+    "name": "permission",
+    "daoCls": "S_PERMISSION",
+    "field": {
+        "unique": [
+            [
+                "code",
+                "sigma"
+            ]
+        ]
+    }
+}

@@ -1,0 +1,35 @@
+- dao: L_COUNTRY
+  unique:
+    - code
+    - sigma
+- dao: L_STATE
+  unique:
+    - code
+    - sigma
+    - countryId
+- dao: L_CITY
+  unique:
+    - name
+    - sigma
+    - stateId
+- dao: L_REGION
+  unique:
+    - name
+    - sigma
+    - cityId
+- dao: L_FLOOR
+  unique:
+    - code
+    - sigma
+- dao: L_LOCATION
+  unique:
+    - code
+    - sigma
+- dao: L_TENT
+  unique:
+    - code
+    - sigma
+- dao: L_YARD
+  unique:
+    - code
+    - sigma

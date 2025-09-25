@@ -1,0 +1,15 @@
+- dao: I_API
+  unique:
+    - uri
+    - method
+    - sigma
+# Api Configuration
+- dao: I_SERVICE
+  unique:
+    - name
+    - namespace
+# Task 任务专用表
+- dao: I_JOB
+  unique:
+    - name
+    - namespace

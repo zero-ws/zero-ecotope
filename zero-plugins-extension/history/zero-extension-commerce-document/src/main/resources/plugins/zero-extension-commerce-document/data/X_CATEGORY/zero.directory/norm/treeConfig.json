@@ -1,0 +1,14 @@
+{
+    "query": {
+        "type": "zero.document.norm"
+    },
+    "store": {
+        "runComponent": "io.zerows.extension.runtime.integration.uca.command.FsReadOnly",
+        "initialize": {
+            "visitMode": [
+                "r",
+                "w"
+            ]
+        }
+    }
+}

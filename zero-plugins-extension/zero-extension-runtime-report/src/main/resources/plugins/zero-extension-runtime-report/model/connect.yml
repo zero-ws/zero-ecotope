@@ -1,0 +1,17 @@
+- dao: KP_DATA_SET          # KP_DATA_SET 数据源表
+  unique:
+    - key
+- dao: KP_DIMENSION         # KP_DIMENSION 维度表
+  unique:
+    - key
+- dao: KP_FEATURE           # KP_FEATURE 特征表
+  unique:
+    - key
+- dao: KP_REPORT            # KP_REPORT 报表主表
+  unique:
+    - name
+    - sigma
+- dao: KP_REPORT_INSTANCE   # KP_REPORT_INSTANCE 报表实例
+  unique:
+    - reportId
+    - name

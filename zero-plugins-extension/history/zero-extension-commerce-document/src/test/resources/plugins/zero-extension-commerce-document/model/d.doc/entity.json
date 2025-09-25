@@ -1,0 +1,13 @@
+{
+    "name": "doc",
+    "daoCls": "D_DOC",
+    "field": {
+        "unique": [
+            [
+                "name",
+                "sigma",
+                "version"
+            ]
+        ]
+    }
+}

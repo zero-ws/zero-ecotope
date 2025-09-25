@@ -1,0 +1,13 @@
+{
+    "name": "pos",
+    "daoCls": "P_POS",
+    "field": {
+        "unique": [
+            [
+                "code",
+                "whId",
+                "sigma"
+            ]
+        ]
+    }
+}

@@ -1,0 +1,19 @@
+- dao: MY_MENU # 我的菜单 MY_MENU
+  unique:
+    - owner
+    - type
+    - page
+    - position
+    - uiMenu
+- dao: TPL_MESSAGE # 消息模板 TPL_MESSAGE
+  unique:
+    - appId
+    - code
+- dao: TPL_MODEL   # 模型模板 TPL_MODEL
+  unique:
+    - code
+    - sigma
+- dao: TPL_TICKET  # 工单模板 TPL_TICKET
+  unique:
+    - code
+    - sigma

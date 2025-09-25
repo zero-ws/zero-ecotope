@@ -1,0 +1,31 @@
+{
+    "name": "x-tag",
+    "daoCls": "X_TAG",
+    "field": {
+        "unique": [
+            [
+                "name",
+                "appId"
+            ]
+        ]
+    },
+    "transform": {
+        "fabric": {
+            "source": [
+                {
+                    "source": "TABULAR",
+                    "types": [
+                        "tag.type"
+                    ]
+                }
+            ],
+            "epsilon": {
+                "type": {
+                    "source": "tag.type",
+                    "in": "name",
+                    "out": "key"
+                }
+            }
+        }
+    }
+}

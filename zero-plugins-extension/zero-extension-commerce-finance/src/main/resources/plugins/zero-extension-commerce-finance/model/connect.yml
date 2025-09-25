@@ -1,0 +1,32 @@
+- dao: F_BANK             # F_BANK
+  unique:
+    - code
+- dao: F_BOOK             # F_BOOK
+  unique:
+    - code
+- dao: F_CURRENCY         # F_CURRENCY
+  unique:
+    - code
+- dao: F_DEBT             # F_DEBT
+  unique:
+    - code
+- dao: F_SETTLEMENT       # F_SETTLEMENT
+  unique:
+    - code
+- dao: F_SUBJECT          # F_SUBJECT
+  unique:
+    - code
+- dao: F_PAY_TERM         # F_PAY_TERM
+  unique:
+    - code
+- dao: F_TRANS            # F_TRANS
+  unique:
+    - code
+- dao: F_BILL             # F_BILL
+  unique:
+    - code
+    - orderId
+- dao: F_BILL_ITEM        # F_BILL_ITEM
+  unique:
+    - code
+    - billId

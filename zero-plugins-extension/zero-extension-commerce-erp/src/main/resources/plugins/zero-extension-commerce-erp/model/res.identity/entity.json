@@ -1,0 +1,12 @@
+{
+    "name": "identity",
+    "daoCls": "E_IDENTITY",
+    "field": {
+        "unique": [
+            [
+                "idcType",
+                "idcNumber"
+            ]
+        ]
+    }
+}

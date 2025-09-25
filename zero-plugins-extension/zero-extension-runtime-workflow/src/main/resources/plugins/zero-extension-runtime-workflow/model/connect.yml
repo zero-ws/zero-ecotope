@@ -1,0 +1,12 @@
+- dao: W_TODO     # W_TODO
+  unique:
+    - code
+    - sigma
+- dao: W_FLOW     # W_FLOW
+  unique:
+    - code
+    - sigma
+- dao: W_TICKET   # W_TICKET
+  unique:
+    - code
+    - sigma
