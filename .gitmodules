@@ -10,6 +10,3 @@
 [submodule "zero-plugins-external"]
 	path = zero-plugins-external
 	url = git@gitee.com:zero-ws/zero-plugins-external.git
-[submodule "zero-core-ams"]
-	path = zero-core-ams
-	url = https://gitee.com/zero-ws/zero-effect.git
