@@ -48,7 +48,7 @@ class WfFlow {
         linkageJ.fieldNames().forEach(field -> {
             final Object value = linkageJ.getValue(field);
             /*
-             * Secondary format for
+             * Secondary formatFail for
              * field1: path1
              * field1: path2
              */

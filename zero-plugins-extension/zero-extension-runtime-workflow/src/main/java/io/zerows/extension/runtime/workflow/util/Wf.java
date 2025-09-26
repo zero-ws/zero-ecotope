@@ -1,9 +1,9 @@
 package io.zerows.extension.runtime.workflow.util;
 
-import io.zerows.extension.runtime.workflow.eon.em.PassWay;
+import io.vertx.core.json.JsonObject;
 import io.zerows.core.uca.log.Log;
 import io.zerows.core.uca.log.LogModule;
-import io.vertx.core.json.JsonObject;
+import io.zerows.extension.runtime.workflow.eon.em.PassWay;
 import org.camunda.bpm.engine.repository.ProcessDefinition;
 import org.camunda.bpm.engine.task.Task;
 
@@ -19,7 +19,7 @@ public class Wf {
      * {
      *      "definitionId": "Process Definition Id",
      *      "definitionKey": "Process Definition Key",
-     *      "bpmn": "Xml format of BPMN 2.0 diagram",
+     *      "bpmn": "Xml formatFail of BPMN 2.0 diagram",
      *      "name": "Process Definition Name"
      * }
      */

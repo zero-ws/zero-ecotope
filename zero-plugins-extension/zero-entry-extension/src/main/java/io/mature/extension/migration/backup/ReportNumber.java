@@ -2,6 +2,7 @@ package io.mature.extension.migration.backup;
 
 import io.zerows.ams.constant.VValue;
 import io.zerows.ams.constant.em.Environment;
+import io.zerows.core.fn.RFn;
 import io.zerows.specification.access.app.HApp;
 import io.mature.extension.migration.AbstractStep;
 import io.mature.extension.refine.Ox;
@@ -9,7 +10,6 @@ import io.zerows.specification.modeling.operation.HDao;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.Fx;
 import io.zerows.unity.Ux;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XNumberDao;
@@ -51,7 +51,7 @@ public class ReportNumber extends AbstractStep {
                 .compose(normalized -> {
                     final List<Future<JsonObject>> futures = new ArrayList<>();
                     normalized.stream().map(this::procAsync).forEach(futures::add);
-                    return Fx.combineA(futures);
+                    return RFn.combineA(futures);
                 })
                 .compose(combined -> {
                     /* 元素结构：JsonArray

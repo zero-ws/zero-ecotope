@@ -1,11 +1,11 @@
 package io.zerows.extension.runtime.ambient.osgi.spi.component;
 
-import io.zerows.common.datamation.KDictSource;
-import io.zerows.common.datamation.KDictUse;
-import io.zerows.ams.constant.em.EmDict;
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.ams.constant.em.EmDict;
+import io.zerows.common.datamation.KDictSource;
+import io.zerows.common.datamation.KDictUse;
 import io.zerows.core.constant.KName;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.runtime.ambient.uca.dict.Dpm;
@@ -19,7 +19,7 @@ import java.util.concurrent.ConcurrentMap;
  */
 public abstract class ExAttributeComponent {
     /**
-     * Here are json format of `definition`
+     * Here are json formatFail of `definition`
      *
      * ```json
      * // <pre><code class="json">

@@ -1,7 +1,7 @@
 package io.zerows.module.assembly.store;
 
+import io.zerows.boot.enums.VertxComponent;
 import io.zerows.core.annotations.*;
-import io.zerows.core.constant.KMeta;
 import io.zerows.core.running.context.KRunner;
 import io.zerows.core.util.Ut;
 import io.zerows.module.assembly.uca.scan.*;
@@ -59,32 +59,32 @@ public class ORepositoryClass extends AbstractAmbiguity implements ORepository {
             // @Infusion
             () -> {
                 final Inquirer<Set<Class<?>>> plugins = Ut.singleton(InquirerPlugin.class);
-                processor.compile(KMeta.Typed.INFUSION, plugins::scan);
+                processor.compile(VertxComponent.INFUSION, plugins::scan);
             },
             // @Queue
             () -> {
                 final Inquirer<Set<Class<?>>> queues = Ut.singleton(InquirerQueue.class);
-                processor.compile(KMeta.Typed.QUEUE, queues::scan);
+                processor.compile(VertxComponent.QUEUE, queues::scan);
             },
             // @EndPoint
             () -> {
                 final Inquirer<Set<Class<?>>> endPoints = Ut.singleton(InquirerEndPoint.class);
-                processor.compile(KMeta.Typed.ENDPOINT, endPoints::scan);
+                processor.compile(VertxComponent.ENDPOINT, endPoints::scan);
             },
             // Dot / @Worker
             () -> {
                 final Inquirer<Set<Class<?>>> workers = Ut.singleton(InquirerMWorker.class);
-                processor.compile(KMeta.Typed.WORKER, workers::scan);
+                processor.compile(VertxComponent.WORKER, workers::scan);
             },
             // Dot / @Agent
             () -> {
                 final Inquirer<Set<Class<?>>> agents = Ut.singleton(InquirerMAgent.class);
-                processor.compile(KMeta.Typed.AGENT, agents::scan);
+                processor.compile(VertxComponent.AGENT, agents::scan);
             },
             // Dot / @Agent ( type = ServerType )
             () -> {
                 final Inquirer<Set<Class<?>>> rpcs = Ut.singleton(InquirerIpc.class);
-                processor.compile(KMeta.Typed.IPC, rpcs::scan);
+                processor.compile(VertxComponent.IPC, rpcs::scan);
             }
         );
         final long end = System.currentTimeMillis();

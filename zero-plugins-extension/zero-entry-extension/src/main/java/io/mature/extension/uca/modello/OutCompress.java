@@ -1,7 +1,7 @@
 package io.mature.extension.uca.modello;
 
-import io.zerows.common.program.Kv;
 import io.vertx.core.json.JsonObject;
+import io.zerows.common.program.Kv;
 import io.zerows.core.constant.KName;
 import io.zerows.core.util.Ut;
 import io.zerows.specification.modeling.HRecord;
@@ -16,7 +16,7 @@ public class OutCompress implements OComponent {
         /*
          * {
          *     "name": "当前属性名称",
-         *     "format": "当前属性数据类型",
+         *     "formatFail": "当前属性数据类型",
          *     "rule": "PREFIX,...",
          *     "result": "ONE"
          * }

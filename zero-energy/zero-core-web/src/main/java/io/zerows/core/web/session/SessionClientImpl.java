@@ -10,7 +10,7 @@ import io.vertx.ext.web.sstore.ClusteredSessionStore;
 import io.vertx.ext.web.sstore.LocalSessionStore;
 import io.vertx.ext.web.sstore.SessionStore;
 import io.zerows.core.constant.configure.YmlCore;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.session.eon.em.SessionType;
 import io.zerows.core.web.session.exception._500SessionClientInitException;
@@ -38,7 +38,7 @@ public class SessionClientImpl implements SessionClient {
                 STORE = ClusteredSessionStore.create(this.vertx);
             } else {
                 final String store = config.getString(YmlCore.session.config.STORE);
-                Fx.outWeb(Ut.isNil(store), _500SessionClientInitException.class, this.getClass());
+                RFn.outWeb(Ut.isNil(store), _500SessionClientInitException.class, this.getClass());
                 LOGGER.info(Info.SESSION_STORE, store);
                 /*
                  * SessionStore -> Defined here

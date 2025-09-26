@@ -7,7 +7,7 @@ import io.zerows.common.app.KDS;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.unity.Ux;
 import io.zerows.core.database.atom.Database;
 import io.zerows.extension.mbse.basement.uca.jdbc.Pin;
@@ -61,7 +61,7 @@ public class MetaReport extends AbstractStep {
                     .filter(category -> Objects.nonNull(category.getIdentifier()))
                     .map(this::procAsync)
                     .forEach(futures::add);
-                return Fx.combineA(futures);
+                return RFn.combineA(futures);
             })
             .compose(combined -> {
                 final String folder = this.ioRoot(config);

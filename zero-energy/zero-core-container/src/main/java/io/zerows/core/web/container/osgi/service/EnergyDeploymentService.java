@@ -1,8 +1,8 @@
 package io.zerows.core.web.container.osgi.service;
 
+import io.zerows.boot.enums.VertxComponent;
 import io.zerows.core.annotations.Agent;
 import io.zerows.core.annotations.Worker;
-import io.zerows.core.constant.KMeta;
 import io.zerows.core.running.context.KRunner;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.container.store.under.StoreVertx;
@@ -74,7 +74,7 @@ public class EnergyDeploymentService implements EnergyDeployment {
         if (deployCls.isAnnotationPresent(Agent.class)) {
             // 单 Agent 发布
             this.executeContainer(containers, runVertx -> {
-                final StubLinear linear = StubLinear.of(owner, KMeta.Typed.AGENT);
+                final StubLinear linear = StubLinear.of(owner, VertxComponent.AGENT);
                 linear.runDeploy(deployCls, runVertx);
 
                 DEPLOYED.computeIfAbsent(runVertx.hashCode(), (key) -> new HashSet<>()).add(deployCls);
@@ -84,7 +84,7 @@ public class EnergyDeploymentService implements EnergyDeployment {
         if (deployCls.isAnnotationPresent(Worker.class)) {
             // 单 Worker 发布
             this.executeContainer(containers, runVertx -> {
-                final StubLinear linear = StubLinear.of(owner, KMeta.Typed.WORKER);
+                final StubLinear linear = StubLinear.of(owner, VertxComponent.WORKER);
                 linear.runDeploy(deployCls, runVertx);
 
                 DEPLOYED.computeIfAbsent(runVertx.hashCode(), (key) -> new HashSet<>()).add(deployCls);
@@ -97,7 +97,7 @@ public class EnergyDeploymentService implements EnergyDeployment {
         if (deployCls.isAnnotationPresent(Agent.class)) {
             // 多 Agent 发布
             this.executeContainer(containers, runVertx -> {
-                final StubLinear linear = StubLinear.of(owner, KMeta.Typed.AGENT);
+                final StubLinear linear = StubLinear.of(owner, VertxComponent.AGENT);
                 linear.runUndeploy(deployCls, runVertx);
 
                 DEPLOYED.computeIfAbsent(runVertx.hashCode(), (key) -> new HashSet<>()).remove(deployCls);
@@ -107,7 +107,7 @@ public class EnergyDeploymentService implements EnergyDeployment {
         if (deployCls.isAnnotationPresent(Worker.class)) {
             // 多 Worker 发布
             this.executeContainer(containers, runVertx -> {
-                final StubLinear linear = StubLinear.of(owner, KMeta.Typed.WORKER);
+                final StubLinear linear = StubLinear.of(owner, VertxComponent.WORKER);
                 linear.runUndeploy(deployCls, runVertx);
 
                 DEPLOYED.computeIfAbsent(runVertx.hashCode(), (key) -> new HashSet<>()).remove(deployCls);
@@ -141,21 +141,21 @@ public class EnergyDeploymentService implements EnergyDeployment {
     // -------------------- 单独发布流程 -----------------------------
     private void deployPlugins(final Bundle owner, final RunVertx runVertx) {
         // Infusion 插件处理
-        KRunner.run(() -> this.deployComponents(owner, runVertx, KMeta.Typed.INFUSION, false), "deployment-infix");
+        KRunner.run(() -> this.deployComponents(owner, runVertx, VertxComponent.INFUSION, false), "deployment-infix");
 
         // Rule 验证规则处理
-        KRunner.run(() -> this.deployComponents(owner, runVertx, KMeta.Typed.CODEX, false), "deployment-codex");
+        KRunner.run(() -> this.deployComponents(owner, runVertx, VertxComponent.CODEX, false), "deployment-codex");
     }
 
     private void deployComponents(final Bundle owner, final RunVertx runVertx) {
         // Agent 发布流程
-        KRunner.run(() -> this.deployComponents(owner, runVertx, KMeta.Typed.AGENT, true), "deployment-agent");
+        KRunner.run(() -> this.deployComponents(owner, runVertx, VertxComponent.AGENT, true), "deployment-agent");
 
         // Worker 发布流程
-        KRunner.run(() -> this.deployComponents(owner, runVertx, KMeta.Typed.WORKER, true), "deployment-worker");
+        KRunner.run(() -> this.deployComponents(owner, runVertx, VertxComponent.WORKER, true), "deployment-worker");
     }
 
-    private void deployComponents(final Bundle owner, final RunVertx runVertx, final KMeta.Typed type,
+    private void deployComponents(final Bundle owner, final RunVertx runVertx, final VertxComponent type,
                                   final boolean cached) {
         final Set<Class<?>> scanClass = this.classPending(runVertx, type, cached);
         final StubLinear linear = StubLinear.of(owner, type);
@@ -168,13 +168,13 @@ public class EnergyDeploymentService implements EnergyDeployment {
 
     private void undeployToVertx(final Bundle owner, final RunVertx runVertx) {
         // Agent 撤销流程
-        this.undeployToVertx(owner, runVertx, KMeta.Typed.AGENT);
+        this.undeployToVertx(owner, runVertx, VertxComponent.AGENT);
 
         // Worker 撤销流程
-        this.undeployToVertx(owner, runVertx, KMeta.Typed.WORKER);
+        this.undeployToVertx(owner, runVertx, VertxComponent.WORKER);
     }
 
-    private void undeployToVertx(final Bundle owner, final RunVertx runVertx, final KMeta.Typed type) {
+    private void undeployToVertx(final Bundle owner, final RunVertx runVertx, final VertxComponent type) {
         final Set<Class<?>> deployedClass = DEPLOYED.getOrDefault(runVertx.hashCode(), new HashSet<>());
         final StubLinear linear = StubLinear.of(owner, type);
         deployedClass.forEach(deployed -> linear.runUndeploy(deployed, runVertx));
@@ -186,7 +186,7 @@ public class EnergyDeploymentService implements EnergyDeployment {
     }
 
     // -------------------- 数据抽取专用方法 -----------------------------
-    private Set<Class<?>> classPending(final RunVertx runVertx, final KMeta.Typed type, final boolean cached) {
+    private Set<Class<?>> classPending(final RunVertx runVertx, final VertxComponent type, final boolean cached) {
         // 所有类
         final Set<Class<?>> scanClass = OCacheClass.entireValue(type);
         if (!cached) {

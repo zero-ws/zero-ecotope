@@ -24,7 +24,7 @@ public class WingSelector {
             /*
              * Default String mode
              *
-             * 1. Content-Type is `* / *` format
+             * 1. Content-Type is `* / *` formatFail
              * 2. Replied body directly
              */
             type = MediaType.WILDCARD_TYPE;

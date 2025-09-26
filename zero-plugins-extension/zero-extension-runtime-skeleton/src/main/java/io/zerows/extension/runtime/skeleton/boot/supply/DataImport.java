@@ -8,7 +8,7 @@ import io.vertx.core.Vertx;
 import io.zerows.common.program.KTimer;
 import io.zerows.core.constant.configure.YmlCore;
 import io.zerows.core.database.jooq.JooqInfix;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.cache.shared.MapInfix;
 import io.zerows.core.web.cache.shared.SharedClient;
@@ -66,13 +66,13 @@ public class DataImport {
     private static void ensureEnvironment() {
         // 检查一：Jooq基础环境是否准备
         final Configuration jooq = JooqInfix.get(YmlCore.jooq.PROVIDER);
-        Fx.outWeb(Objects.isNull(jooq), _417LoadingNotReadyException.class, DataImport.class, "jooq / provider");
+        RFn.outWeb(Objects.isNull(jooq), _417LoadingNotReadyException.class, DataImport.class, "jooq / provider");
         // 检查二：Excel导入环境是否准备
         final ExcelClient excel = ExcelInfix.getClient();
-        Fx.outWeb(Objects.isNull(excel), _417LoadingNotReadyException.class, DataImport.class, "excel");
+        RFn.outWeb(Objects.isNull(excel), _417LoadingNotReadyException.class, DataImport.class, "excel");
         // 检查三：Map导入环境是否准备
         final SharedClient<String, Object> shared = MapInfix.getClient();
-        Fx.outWeb(Objects.isNull(shared), _417LoadingNotReadyException.class, DataImport.class, "shared");
+        RFn.outWeb(Objects.isNull(shared), _417LoadingNotReadyException.class, DataImport.class, "shared");
     }
 
     /**
@@ -164,7 +164,7 @@ public class DataImport {
     private Future<Boolean> future(final String folder, final String prefix, final boolean oob) {
         final List<Future<String>> files = new ArrayList<>();
         DataIo.ioFiles(folder, prefix, oob).map(this::execute).forEach(files::add);
-        return Fx.combineT(files).compose(nil -> Ux.future(Boolean.TRUE));
+        return RFn.combineT(files).compose(nil -> Ux.future(Boolean.TRUE));
     }
 
     // 内部执行专用方法

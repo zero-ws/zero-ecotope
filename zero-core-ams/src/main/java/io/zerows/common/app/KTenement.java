@@ -1,13 +1,13 @@
 package io.zerows.common.app;
 
-import io.zerows.core.exception.boot.CombineOwnerException;
+import io.zerows.ams.util.HUt;
+import io.zerows.core.exception.boot._40102Exception500CombineOwner;
 import io.zerows.core.running.boot.KRegistry;
 import io.zerows.specification.access.app.HApp;
 import io.zerows.specification.access.cloud.HTenant;
 import io.zerows.specification.configuration.boot.HRegistry;
 import io.zerows.specification.security.identity.HOwner;
 import io.zerows.specification.vital.HOI;
-import io.zerows.ams.util.HUt;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -96,7 +96,7 @@ public class KTenement implements HOI {
     public HOI apply(final HOI target) {
         if (Objects.nonNull(target)) {
             if (!target.equals(this)) {
-                throw new CombineOwnerException(this.getClass(), this.id, target.owner());
+                throw new _40102Exception500CombineOwner(this.id, target.owner());
             }
         }
         return this;

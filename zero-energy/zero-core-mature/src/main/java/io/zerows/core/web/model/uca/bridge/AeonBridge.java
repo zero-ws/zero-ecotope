@@ -1,10 +1,10 @@
 package io.zerows.core.web.model.uca.bridge;
 
 import io.reactivex.rxjava3.core.Observable;
+import io.zerows.boot.enums.VertxComponent;
 import io.zerows.core.annotations.Address;
-import io.zerows.core.constant.KMeta;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.model.atom.Receipt;
@@ -33,7 +33,7 @@ public class AeonBridge {
 
     static {
         /* 1. Get all endpoints **/
-        final Set<Class<?>> endpoints = OCacheClass.entireValue(KMeta.Typed.ENDPOINT);
+        final Set<Class<?>> endpoints = OCacheClass.entireValue(VertxComponent.ENDPOINT);
 
         /* 2. Scan for @Address to matching **/
         Observable.fromIterable(endpoints)
@@ -60,7 +60,7 @@ public class AeonBridge {
         final Annotation annotation = method.getDeclaredAnnotation(Address.class);
         final String address = Ut.invoke(annotation, KName.VALUE);
         // 2. Ensure address incoming.
-        Fx.outBoot(!ADDRESS.contains(address), LOGGER,
+        RFn.outBoot(!ADDRESS.contains(address), LOGGER,
             BootAddressWrongException.class,
             AeonBridge.class, address, clazz, method);
 

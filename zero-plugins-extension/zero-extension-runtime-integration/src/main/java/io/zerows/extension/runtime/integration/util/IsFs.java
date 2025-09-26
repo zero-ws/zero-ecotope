@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.unity.Ux;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.runtime.integration.domain.tables.daos.IDirectoryDao;
@@ -43,7 +43,7 @@ class IsFs {
         final ConcurrentMap<Fs, JsonArray> componentMap = fsGroup(data);
         final List<Future<JsonArray>> futures = new ArrayList<>();
         componentMap.forEach((fs, dataEach) -> futures.add(fsRunner.apply(fs, dataEach.copy())));
-        return Fx.compressA(futures);
+        return RFn.compressA(futures);
     }
 
     /*

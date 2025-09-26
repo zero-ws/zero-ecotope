@@ -4,7 +4,7 @@ import io.r2mo.typed.cc.Cc;
 import io.zerows.ams.constant.VValue;
 import io.zerows.ams.constant.em.EmApp;
 import io.zerows.ams.util.HUt;
-import io.zerows.core.exception.boot.AmbientConnectException;
+import io.zerows.core.exception.boot._40103Exception500ConnectAmbient;
 import io.zerows.specification.access.HBelong;
 import io.zerows.specification.access.app.HArk;
 import io.zerows.specification.access.cloud.HFrontier;
@@ -18,10 +18,10 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * @author lang : 2023-06-06
  */
-class KAmbientContext {
+class _KAmbientContext {
     private static final Cc<String, HArk> CC_ARK = Cc.open();
 
-    KAmbientContext() {
+    _KAmbientContext() {
     }
 
     HArk running() {
@@ -29,7 +29,7 @@ class KAmbientContext {
         if (VValue.ONE == arks.size()) {
             return arks.iterator().next();
         }
-        throw new AmbientConnectException(KAmbientContext.class);
+        throw new _40103Exception500ConnectAmbient();
     }
 
     HArk running(final String cacheKey) {

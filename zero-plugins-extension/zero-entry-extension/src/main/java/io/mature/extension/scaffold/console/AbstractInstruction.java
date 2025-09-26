@@ -1,10 +1,5 @@
 package io.mature.extension.scaffold.console;
 
-import io.zerows.ams.constant.em.Environment;
-import io.zerows.core.exception.internal.EmptyIoException;
-import io.zerows.core.fn.Fx;
-import io.zerows.specification.access.app.HApp;
-import io.zerows.specification.access.app.HArk;
 import io.mature.extension.error._501EnvironmentException;
 import io.mature.extension.refine.Ox;
 import io.mature.stellar.Ok;
@@ -12,8 +7,10 @@ import io.mature.stellar.owner.OkA;
 import io.mature.stellar.vendor.OkB;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
+import io.zerows.ams.constant.em.Environment;
 import io.zerows.core.constant.KName;
-import io.zerows.unity.Ux;
+import io.zerows.core.exception.boot._11002Exception500EmptyIo;
+import io.zerows.core.fn.RFn;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XCategoryDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XCategory;
@@ -21,6 +18,9 @@ import io.zerows.plugins.common.shell.AbstractCommander;
 import io.zerows.plugins.common.shell.atom.CommandInput;
 import io.zerows.plugins.common.shell.eon.EmCommand;
 import io.zerows.plugins.common.shell.refine.Sl;
+import io.zerows.specification.access.app.HApp;
+import io.zerows.specification.access.app.HArk;
+import io.zerows.unity.Ux;
 
 import java.util.*;
 import java.util.function.BiFunction;
@@ -49,7 +49,7 @@ public abstract class AbstractInstruction extends AbstractCommander {
                 final HArk app = okB.configArk();
                 return executor.apply(app, config);
             });
-        } catch (final EmptyIoException ex) {
+        } catch (final _11002Exception500EmptyIo ex) {
             Sl.output("文件不存在：file = {0}, details = {1}", filename, ex.getMessage());
             return Ux.future(EmCommand.TermStatus.FAILURE);
         }
@@ -117,7 +117,7 @@ public abstract class AbstractInstruction extends AbstractCommander {
             condition.mergeIn(attachedJson, true);
             return this.identifiers(condition)
                 /* identifiers 中处理每一个 */
-                .compose(identifiers -> Fx.combineT(new ArrayList<>(identifiers), consumer));
+                .compose(identifiers -> RFn.combineT(new ArrayList<>(identifiers), consumer));
         });
     }
 

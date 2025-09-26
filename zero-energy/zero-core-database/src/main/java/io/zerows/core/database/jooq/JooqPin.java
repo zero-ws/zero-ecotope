@@ -7,7 +7,7 @@ import io.zerows.core.constant.configure.YmlCore;
 import io.zerows.core.database.atom.Database;
 import io.zerows.core.database.cp.zdk.DataPool;
 import io.zerows.core.database.jooq.exception.BootJooqConfigurationException;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.core.util.Ut;
 import io.zerows.module.metadata.uca.environment.MatureOn;
 import io.zerows.module.metadata.uca.logging.OLog;
@@ -45,7 +45,7 @@ public class JooqPin {
         final ConcurrentMap<String, Configuration> configurationMap =
             new ConcurrentHashMap<>();
 
-        Fx.outBoot(Ut.isNil(config) || !config.containsKey(YmlCore.jooq.PROVIDER),
+        RFn.outBoot(Ut.isNil(config) || !config.containsKey(YmlCore.jooq.PROVIDER),
             LOGGER, BootJooqConfigurationException.class, JooqPin.class);
 
         if (Ut.isNotNil(config)) {

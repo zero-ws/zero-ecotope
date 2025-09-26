@@ -5,9 +5,8 @@ import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.core.Promise;
-import io.zerows.ams.fn.HFn;
 import io.zerows.core.exception.WebException;
-import io.zerows.core.exception.internal.InvokingSpecException;
+import io.zerows.core.exception.boot._11011Exception500InvokingPre;
 import io.zerows.core.exception.web._412ArgumentNullException;
 
 import java.lang.reflect.Method;
@@ -130,8 +129,8 @@ final class UInvoker {
                  * -- The basic condition is
                  *    method declared length = args length + 1
                  */
-                HFn.out(method.getParameters().length != args.length + 1,
-                    InvokingSpecException.class, UInvoker.class, method);
+                Fn.jvmKo(method.getParameters().length != args.length + 1,
+                    _11011Exception500InvokingPre.class, method);
                 /*
                  * void.class, the system should provide secondary parameters
                  */

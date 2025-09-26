@@ -212,11 +212,11 @@ class _Bundle extends _Ai {
          *            Ut.Bnd.failWeb(_401ImageCodeWrongException.class, this.getClass(), imageCode)
          *        );
          *     3. 旧版：
-         *        return Fx.outWeb(_400SigmaMissingException.class, HHotel.class);
+         *        return RFn.outWeb(_400SigmaMissingException.class, HHotel.class);
          * </code></pre>
          * 注：这两个方法的区别
          * <pre><code>
-         *     1. {@see Fx#outWeb(Class, Object...)}()}，此方法不支持 OSGI 环境，旧版异步流中只有一个方法返回了 Future，基于此
+         *     1. {@see RFn#outWeb(Class, Object...)}()}，此方法不支持 OSGI 环境，旧版异步流中只有一个方法返回了 Future，基于此
          *        未来所有版本都会替换成 {@link Future} 的形式，所以旧版会直接 @Deprecated 掉
          *     2. 当前方法支持 OSGI 环境，可在 OSGI 模块化环境中直接使用。
          *     3. 当前方法除了 {@link WebException} 以外，还支持 {@link BootingException}，操作的异常类型更全。
@@ -226,14 +226,14 @@ class _Bundle extends _Ai {
          * 总结起来参考等价方法
          * <pre><code>
          *     旧环境                      新环境（带 OSGI）
-         *     Fx.out
-         *     Fx.outWeb                  throw Ut.Bnd.failWeb
-         *     Fx.outBoot                 throw Ut.Bnd.failBoot
+         *     RFn.out
+         *     RFn.outWeb                  throw Ut.Bnd.failWeb
+         *     RFn.outBoot                 throw Ut.Bnd.failBoot
          *     Ut.failWeb                 Ut.Bnd.failWeb
          *     （异步）                    Ut.Bnd.failOut
          * </code></pre>
          * 异步模式不再提供旧方法（高频编程位置），毕竟 throw 抛异常的模式是位于旧版的启动流程中最多，而不需要让这些异常带有特定的意义存在，
-         * 所以直接使用 Fx.out??? 的方式构造也无关结果。
+         * 所以直接使用 RFn.out??? 的方式构造也无关结果。
          *
          * @param exceptionCls 异常类，必须是 WebException 或 BootingException，其他异常转换成 501
          * @param target       目标类，一般是 getClass() 结果或当前类

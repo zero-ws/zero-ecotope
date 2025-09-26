@@ -2,10 +2,10 @@ package io.zerows.extension.runtime.crud.uca.op;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
+import io.zerows.core.fn.RFn;
 import io.zerows.unity.Ux;
 import io.zerows.ams.constant.em.typed.ChangeFlag;
 import io.zerows.core.database.jooq.operation.UxJooq;
-import io.zerows.core.fn.Fx;
 import io.zerows.extension.runtime.crud.bootstrap.IxPin;
 import io.zerows.extension.runtime.crud.eon.em.QrType;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
@@ -53,7 +53,7 @@ class StepImport implements Agonic {
             // 「AOP」Internal Call to Trigger
             combine.add(Agonic.write(ChangeFlag.UPDATE).runAAsync(updated, in));
         }
-        return Fx.compressA(combine);
+        return RFn.compressA(combine);
     }
 
     private Future<JsonArray> runCompress(final JsonArray source, final IxMod in) {

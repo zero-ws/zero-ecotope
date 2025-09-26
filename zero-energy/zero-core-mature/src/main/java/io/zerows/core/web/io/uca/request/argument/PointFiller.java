@@ -2,7 +2,7 @@ package io.zerows.core.web.io.uca.request.argument;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.io.exception._415PointDefineException;
 import io.zerows.module.domain.atom.commune.Vis;
@@ -26,7 +26,7 @@ public class PointFiller implements Filler {
             || JsonArray.class == paramType                     // 3) Type is JsonArray data structure
             || Vis.class == paramType                     // 4) View structure defined
         );
-        Fx.out(!valid, _415PointDefineException.class, this.getClass(), paramType);
+        RFn.out(!valid, _415PointDefineException.class, this.getClass(), paramType);
 
         final String literal = datum.request().getParam(name);
         if (Objects.isNull(literal)) {

@@ -7,7 +7,7 @@ import io.zerows.module.domain.uca.serialization.ZeroType;
 /**
  * 「Co」JSR311 for .@QueryParam
  *
- * This `Filler` is for query string `/api/xxx?name={name}` format to extract to
+ * This `Filler` is for query string `/api/xxx?name={name}` formatFail to extract to
  *
  * ```shell
  * // <pre><code>

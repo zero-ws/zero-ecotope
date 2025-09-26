@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>zero-version</artifactId>
+        <groupId>io.zerows</groupId>
+        <version>1.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>zero-eco-jsr</artifactId>
+    <packaging>pom</packaging>
+    <name>Zero.Dependency.JSR</name>
+    <dependencyManagement>
+        <dependencies>
+            <!-- JSR303: https://mvnrepository.com/artifact/javax.validation/validation-api -->
+            <dependency>
+                <groupId>javax.validation</groupId>
+                <artifactId>validation-api</artifactId>
+                <version>${jsr303.version}</version>
+            </dependency>
+            <!-- JSR311: https://mvnrepository.com/artifact/javax.ws.rs/javax.ws.rs-api -->
+            <dependency>
+                <groupId>javax.ws.rs</groupId>
+                <artifactId>javax.ws.rs-api</artifactId>
+                <version>${jsr311.version}</version>
+            </dependency>
+            <!-- JSR330: https://mvnrepository.com/artifact/javax.inject/javax.inject -->
+            <dependency>
+                <groupId>javax.inject</groupId>
+                <artifactId>javax.inject</artifactId>
+                <version>${jsr330.version}</version>
+            </dependency>
+            <!-- JAXB: https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
+            <dependency>
+                <groupId>javax.xml.bind</groupId>
+                <artifactId>jaxb-api</artifactId>
+                <version>${jaxb.version}</version>
+            </dependency>
+            <!-- JSR170 / JCache: https://mvnrepository.com/artifact/javax.cache/cache-api -->
+            <dependency>
+                <groupId>javax.cache</groupId>
+                <artifactId>cache-api</artifactId>
+                <version>${jcache.version}</version>
+            </dependency>
+            <!-- JSR338: https://mvnrepository.com/artifact/javax.persistence/javax.persistence-api -->
+            <dependency>
+                <groupId>javax.persistence</groupId>
+                <artifactId>javax.persistence-api</artifactId>
+                <version>${jsr338.version}</version>
+            </dependency>
+            <!-- JSR340: https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>${jsr340.version}</version>
+            </dependency>
+            <!-- Jersey: http://mvnrepository.com/artifact/org.glassfish.jersey.core/jersey-common -->
+            <dependency>
+                <groupId>org.glassfish.jersey.core</groupId>
+                <artifactId>jersey-common</artifactId>
+                <version>${jersey.version}</version>
+            </dependency>
+            <!-- JEL: https://mvnrepository.com/artifact/javax.el/javax.el-api -->
+            <dependency>
+                <groupId>javax.el</groupId>
+                <artifactId>javax.el-api</artifactId>
+                <version>${javax.el.version}</version>
+            </dependency>
+            <!-- 新版 -->
+            <!-- https://mvnrepository.com/artifact/org.glassfish/jakarta.el -->
+            <dependency>
+                <groupId>org.glassfish</groupId>
+                <artifactId>jakarta.el</artifactId>
+                <version>${jakarta.el.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/com.sun.activation/jakarta.activation -->
+            <dependency>
+                <groupId>com.sun.activation</groupId>
+                <artifactId>jakarta.activation</artifactId>
+                <version>${jakarta.activation.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/jakarta.xml.bind/jakarta.xml.bind-api -->
+            <dependency>
+                <groupId>jakarta.xml.bind</groupId>
+                <artifactId>jakarta.xml.bind-api</artifactId>
+                <version>${jakarta.xml.bind.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

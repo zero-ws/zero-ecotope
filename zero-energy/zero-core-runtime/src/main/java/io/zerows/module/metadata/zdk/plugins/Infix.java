@@ -1,7 +1,7 @@
 package io.zerows.module.metadata.zdk.plugins;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.core.util.Ut;
 import io.zerows.module.metadata.exception.BootKeyMissingException;
 import io.zerows.module.metadata.store.OZeroStore;
@@ -14,7 +14,7 @@ public interface Infix {
                       final Function<JsonObject, R> executor,
                       final Class<?> clazz) {
         final OLog logger = Ut.Log.plugin(clazz);
-        Fx.outBoot(!OZeroStore.is(key), logger, BootKeyMissingException.class,
+        RFn.outBoot(!OZeroStore.is(key), logger, BootKeyMissingException.class,
             clazz, key);
         final JsonObject options = OZeroStore.option(key);
         return executor.apply(options);

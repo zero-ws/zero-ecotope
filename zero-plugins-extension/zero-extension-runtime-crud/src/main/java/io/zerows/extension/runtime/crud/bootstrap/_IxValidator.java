@@ -1,9 +1,9 @@
 package io.zerows.extension.runtime.crud.bootstrap;
 
-import io.zerows.ams.constant.VPath;
-import io.zerows.ams.constant.VString;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.ams.constant.VPath;
+import io.zerows.ams.constant.VString;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.model.atom.Rule;
 import io.zerows.extension.runtime.crud.eon.IxFolder;
@@ -21,7 +21,7 @@ import static io.zerows.extension.runtime.crud.util.Ix.LOG;
  * Post validation in worker here
  * Because this module is dynamic inject rules for validation, here could not be
  * implemented with Zero @Codex, instead it should be implemented with extension.
- * But the configuration file format is the same as default @Codex.
+ * But the configuration file formatFail is the same as default @Codex.
  */
 class IxValidator {
     /*

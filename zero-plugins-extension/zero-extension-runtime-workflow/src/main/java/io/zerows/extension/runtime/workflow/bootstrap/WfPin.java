@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.configure.YmlCore;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.core.running.boot.KPivot;
 import io.zerows.core.web.model.extension.HExtension;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
@@ -98,7 +98,7 @@ public class WfPin implements HRegistry.Mod<Vertx> {
             final List<Future<Boolean>> futures = new ArrayList<>();
             // Deployment for .bpmn files
             workflows.forEach(workflow -> DeployOn.get(workflow).initialize());
-            return Fx.combineT(futures).compose(nil -> Future.succeededFuture(Boolean.TRUE));
+            return RFn.combineT(futures).compose(nil -> Future.succeededFuture(Boolean.TRUE));
         });
     }
 }

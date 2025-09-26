@@ -2,8 +2,8 @@ package io.zerows.module.assembly.uca.di;
 
 import io.r2mo.function.Fn;
 import io.reactivex.rxjava3.core.Observable;
+import io.zerows.boot.enums.VertxComponent;
 import io.zerows.core.annotations.Infusion;
-import io.zerows.core.constant.KMeta;
 import io.zerows.core.util.Ut;
 import io.zerows.module.assembly.eon.MessageOfDI;
 import io.zerows.module.metadata.store.OCacheClass;
@@ -51,7 +51,7 @@ class DiInfix {
         }
         final Class<?> typeOf = proxy.getClass();
 
-        final Set<Class<?>> classTps = OCacheClass.entireValue(KMeta.Typed.INFUSION);
+        final Set<Class<?>> classTps = OCacheClass.entireValue(VertxComponent.INFUSION);
         if (!classTps.contains(typeOf)) {
             return proxy;
         }

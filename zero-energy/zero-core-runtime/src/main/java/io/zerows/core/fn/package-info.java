@@ -1,6 +1,6 @@
 /*
  * Function package for some code execution defined here.
- * It means that you can use `Fx.xx` to be sure some specific code workflow instead of
+ * It means that you can use `RFn.xx` to be sure some specific code workflow instead of
  * duplicated checking such as
  * 1) Null Pointer checking
  * 2) Jvm unexpected exception

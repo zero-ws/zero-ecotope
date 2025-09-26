@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.ams.constant.VString;
 import io.zerows.ams.constant.VValue;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.core.util.Ut;
 import io.zerows.module.security.atom.manage.KPermit;
 import io.zerows.module.security.zdk.manager.AbstractAdmit;
@@ -22,7 +22,7 @@ public class HSDimNorm extends AbstractAdmit {
 
     @Override
     public Future<JsonObject> compile(final KPermit permit, final JsonObject request) {
-        return Fx.choiceJ(request, KName.ITEMS,
+        return RFn.choiceJ(request, KName.ITEMS,
             itemJ -> {
                 final Class<?> daoCls = Ut.valueC(itemJ, KName.DAO, null);
                 if (Objects.isNull(daoCls)) {

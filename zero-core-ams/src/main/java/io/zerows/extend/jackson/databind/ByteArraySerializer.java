@@ -11,7 +11,7 @@ import java.util.Base64;
  * # 「Tp」Jackson Serializer
  *
  * This serializer came from `vert.x` internally. In vert.x all the data `byte[]` will be converted to
- * `Base 64 format` to stored into `io.vertx.core.json.JsonArray/io.vertx.core.json.JsonObject` for usage.
+ * `Base 64 formatFail` to stored into `io.vertx.core.json.JsonArray/io.vertx.core.json.JsonObject` for usage.
  * ZeroModule is new module that will be registry on zero framework, In this situation it must support default
  * features in `vert.x` first.
  *

@@ -6,7 +6,7 @@ import io.zerows.ams.constant.VString;
 import io.zerows.ams.constant.VValue;
 import io.zerows.core.database.jooq.exception.BootJooqCondClauseException;
 import io.zerows.core.database.jooq.exception.BootJooqCondFieldException;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.core.uca.qr.Criteria;
 import io.zerows.core.uca.qr.Sorter;
 import io.zerows.core.uca.qr.syntax.Ir;
@@ -305,7 +305,7 @@ public class JooqCond {
 
             if (Objects.nonNull(fnAnalyze)) {
                 final Field metaField = fnAnalyze.apply(targetField);
-                Fx.outBoot(Objects.isNull(metaField), LOGGER, BootJooqCondFieldException.class, JooqCond.class, targetField);
+                RFn.outBoot(Objects.isNull(metaField), LOGGER, BootJooqCondFieldException.class, JooqCond.class, targetField);
 
                 /*
                  * 1) fields = ( field,op )
@@ -319,7 +319,7 @@ public class JooqCond {
                  * Clause extraction
                  */
                 final Clause clause = Clause.get(type);
-                Fx.outBoot(Objects.isNull(clause), LOGGER, BootJooqCondClauseException.class,
+                RFn.outBoot(Objects.isNull(clause), LOGGER, BootJooqCondClauseException.class,
                     JooqCond.class, metaField.getName(), type, targetField);
 
                 /*

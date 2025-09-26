@@ -7,7 +7,7 @@ import io.zerows.unity.Ux;
 import io.zerows.ams.constant.VValue;
 import io.zerows.ams.constant.em.typed.ChangeFlag;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.runtime.skeleton.osgi.spi.business.ExActivity;
 import io.zerows.extension.runtime.workflow.atom.EngineOn;
@@ -244,7 +244,7 @@ public class WRecord implements Serializable {
             .compose(workflow -> this.dataTicket(response, workflow))
             // `history` field mount
             .compose(this::dataHistory)
-            .compose(Fx.ofJObject(KName.HISTORY, response));
+            .compose(RFn.ofJObject(KName.HISTORY, response));
     }
 
     public Future<WRecord> futureAfter(final JsonObject dataAfter) {

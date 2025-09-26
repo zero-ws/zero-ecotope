@@ -18,7 +18,7 @@ import io.zerows.module.metadata.uca.logging.OLog;
  * 2. The `package` name is the same as current class, the root folder is `mock` in testing resources.
  * 3. You can provide `filename` that will be used in testing classes.
  *
- * Here support three file format
+ * Here support three file formatFail
  *
  * 1. String
  * 2. JsonObject

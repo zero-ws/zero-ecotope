@@ -5,7 +5,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.em.EmSecure;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.extension.commerce.rbac.exception._404AdmitCompilerNullException;
 import io.zerows.module.security.atom.manage.KPermit;
 
@@ -34,7 +34,7 @@ public interface HAdmitCompiler {
 
         // Error-80225
         final Class<?> targetCls = Objects.isNull(target) ? HAdmitCompiler.class : target;
-        Fx.out(Objects.isNull(compiler), _404AdmitCompilerNullException.class, targetCls, in);
+        RFn.out(Objects.isNull(compiler), _404AdmitCompilerNullException.class, targetCls, in);
         return compiler;
     }
 

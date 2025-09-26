@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>zero-version</artifactId>
+        <groupId>io.zerows</groupId>
+        <version>1.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>zero-eco-eclipse</artifactId>
+    <packaging>pom</packaging>
+    <name>Zero.Dependency.Eclipse</name>
+    <dependencyManagement>
+        <dependencies>
+            <!-- https://mvnrepository.com/artifact/org.eclipse.jgit/org.eclipse.jgit -->
+            <dependency>
+                <groupId>org.eclipse.jgit</groupId>
+                <artifactId>org.eclipse.jgit</artifactId>
+                <version>${eclipse.git.version}</version>
+            </dependency>
+            <!-- OSGI Runtime -->
+            <!-- https://mvnrepository.com/artifact/org.osgi/org.osgi.framework -->
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>org.osgi.framework</artifactId>
+                <version>${osgi.framework.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.osgi/osgi.core -->
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>osgi.core</artifactId>
+                <version>${osgi.core.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.osgi/osgi.annotation -->
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>osgi.annotation</artifactId>
+                <version>${osgi.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.osgi/org.osgi.service.cm -->
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>org.osgi.service.cm</artifactId>
+                <version>${osgi.cm.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.apache.felix/org.apache.felix.shell -->
+            <dependency>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>org.apache.felix.shell</artifactId>
+                <version>${apache.felix.shell.version}</version>
+            </dependency>
+            <!-- DM -->
+            <!-- https://mvnrepository.com/artifact/org.apache.felix/org.apache.felix.dependencymanager -->
+            <dependency>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>org.apache.felix.dependencymanager</artifactId>
+                <version>${apache.felix.dm.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.apache.felix/org.apache.felix.logback -->
+            <dependency>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>org.apache.felix.logback</artifactId>
+                <version>${apache.felix.logback.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.apache.felix/org.apache.felix.gogo.command -->
+            <dependency>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>org.apache.felix.gogo.command</artifactId>
+                <version>${apache.gogo.command.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

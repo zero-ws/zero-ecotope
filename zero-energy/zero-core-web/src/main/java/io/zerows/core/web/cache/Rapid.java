@@ -27,7 +27,7 @@ public interface Rapid<K, V> {
     static <TK, TV> Rapid<TK, TV> object(final String key, final int ttl) {
         return P.CC_RAPID.pick(() -> new RapidObject<TV>(key, ttl),
             RapidObject.class.getName() + key + ttl);
-        // return Fx.po?lThread(P.CACHED_THREAD, () -> new RapidObject<TV>(key, ttl), RapidObject.class.getName() + key + ttl);
+        // return RFn.po?lThread(P.CACHED_THREAD, () -> new RapidObject<TV>(key, ttl), RapidObject.class.getName() + key + ttl);
     }
 
     /*
@@ -42,7 +42,7 @@ public interface Rapid<K, V> {
     static Rapid<Set<String>, ConcurrentMap<String, JsonArray>> map(final String key, final int ttl) {
         return P.CC_RAPID.pick(() -> new RapidDict(key, ttl),
             RapidDict.class.getName() + key + ttl);
-        // return Fx.po?lThread(P.CACHED_THREAD, () -> new RapidDict(key, ttl), RapidDict.class.getName() + key + ttl);
+        // return RFn.po?lThread(P.CACHED_THREAD, () -> new RapidDict(key, ttl), RapidDict.class.getName() + key + ttl);
     }
 
     /*
@@ -52,7 +52,7 @@ public interface Rapid<K, V> {
     static <T> Rapid<String, T> user(final User user, final String rootKey) {
         return P.CC_RAPID.pick(() -> new RapidUser<T>(user, rootKey),
             RapidUser.class.getName() + String.valueOf(user.hashCode()) + rootKey);
-        // return Fx.po?lThread(P.CACHED_THREAD, () -> new RapidUser<Tool>(user, rootKey), RapidUser.class.getName() + String.valueOf(user.hashCode()) + rootKey);
+        // return RFn.po?lThread(P.CACHED_THREAD, () -> new RapidUser<Tool>(user, rootKey), RapidUser.class.getName() + String.valueOf(user.hashCode()) + rootKey);
     }
 
     static <T> Rapid<String, T> user(final User user) {

@@ -6,7 +6,7 @@ import io.zerows.core.annotations.Adjust;
 import io.zerows.core.annotations.Codex;
 import io.zerows.core.annotations.EndPoint;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.model.atom.Event;
@@ -76,7 +76,7 @@ public class ExtractorEvent implements Extractor<Set<Event>> {
             .map(item -> item.stream().map(Annotation::annotationType).collect(Collectors.toList()))
             .filter(item -> item.contains(Codex.class))
             .count().blockingGet();
-        Fx.outBoot(methods.length < counter, LOGGER,
+        RFn.outBoot(methods.length < counter, LOGGER,
             BootCodexMoreException.class,
             this.getClass(), clazz);
         // 2.Build Set

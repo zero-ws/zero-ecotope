@@ -24,6 +24,6 @@ public class ExtractorWorker implements Extractor<DeploymentOptions> {
         final NodeVertx nodeVertx = network.get();
 
         return CC_OPTIONS.pick(() -> nodeVertx.optionDeployment(clazz), clazz);
-        // Fx.po?l(OPTIONS, clazz, () -> rotate.spinWorker(clazz));
+        // RFn.po?l(OPTIONS, clazz, () -> rotate.spinWorker(clazz));
     }
 }

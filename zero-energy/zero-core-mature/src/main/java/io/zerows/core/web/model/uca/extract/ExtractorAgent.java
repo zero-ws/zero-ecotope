@@ -23,6 +23,6 @@ public class ExtractorAgent implements Extractor<DeploymentOptions> {
         final NodeVertx nodeVertx = network.get();
 
         return CC_OPTIONS.pick(() -> nodeVertx.optionDeployment(clazz), clazz);
-        // Fx.po?l(OPTIONS, clazz, () -> rotate.spinAgent(clazz));
+        // RFn.po?l(OPTIONS, clazz, () -> rotate.spinAgent(clazz));
     }
 }

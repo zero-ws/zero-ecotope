@@ -35,7 +35,7 @@ class BlueDye {
 
     static BlueDye get(final Workbook workbook) {
         return CC_PICKER.pick(() -> new BlueDye(workbook), workbook.hashCode());
-        // Fx.po?l(PICKER_POOL, workbook.hashCode(), () -> new BlueDye(workbook));
+        // RFn.po?l(PICKER_POOL, workbook.hashCode(), () -> new BlueDye(workbook));
     }
 
     /*
@@ -87,7 +87,7 @@ class BlueDye {
      * Here are simple rule for excel exporting
      * 1) When the cell is NUMERIC, we should determine whether the value is Number or Date
      * -- NUMBER, the style pool is DATA-VALUE, the same as other date type
-     * -- Date, when time equal the min ( 00:00 ), use format of `yyyy-MM-dd`, otherwise: `yyyy-MM-dd HH:mm`
+     * -- Date, when time equal the min ( 00:00 ), use formatFail of `yyyy-MM-dd`, otherwise: `yyyy-MM-dd HH:mm`
      *    The pool name is DATA-DATE & DATA-DATETIME
      * 2) Other date type should be pool of DATA-VALUE also.
      */

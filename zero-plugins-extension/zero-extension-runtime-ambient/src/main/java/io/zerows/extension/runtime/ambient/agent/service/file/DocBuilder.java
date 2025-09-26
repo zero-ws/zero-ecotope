@@ -5,7 +5,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.runtime.ambient.bootstrap.AtConfig;
@@ -37,7 +37,7 @@ public class DocBuilder implements DocBStub {
     public Future<JsonArray> initialize(final String appId, final String type) {
         final JsonObject condition = this.qrCond(appId, type, null);
         return Ux.Jooq.on(XCategoryDao.class).fetchJAsync(condition)
-            .compose(Fx.ofJArray(
+            .compose(RFn.ofJArray(
                 KName.METADATA,
                 KName.Component.TREE_CONFIG,
                 KName.Component.RUN_CONFIG
@@ -45,7 +45,7 @@ public class DocBuilder implements DocBStub {
             .compose(categories -> {
                 final List<Future<JsonArray>> futures = new ArrayList<>();
                 Ut.itJArray(categories).map(this::seekAsync).forEach(futures::add);
-                return Fx.compressA(futures);
+                return RFn.compressA(futures);
             });
     }
 
@@ -53,7 +53,7 @@ public class DocBuilder implements DocBStub {
     public Future<JsonArray> initialize(final String appId, final String type, final String name) {
         final JsonObject condition = this.qrCond(appId, type, name);
         return Ux.Jooq.on(XCategoryDao.class).fetchJOneAsync(condition)
-            .compose(Fx.ofJObject(
+            .compose(RFn.ofJObject(
                 KName.METADATA,
                 KName.Component.TREE_CONFIG,
                 KName.Component.RUN_CONFIG
@@ -115,7 +115,7 @@ public class DocBuilder implements DocBStub {
         configuration.put(KName.STORE, storeRef);
 
         final Arbor arbor = CC_ARBOR.pick(() -> Ut.instance(arborCls), arborCls.getName());
-        // Fx.po?lThread(POOL_ARBOR, () -> Ut.instance(arborCls), arborCls.getName());
+        // RFn.po?lThread(POOL_ARBOR, () -> Ut.instance(arborCls), arborCls.getName());
         LOG.File.info(LOGGER, "Arbor = {0}, Configuration = {1}", arborCls.getName(), configuration.encode());
         return arbor.generate(input, configuration);
     }

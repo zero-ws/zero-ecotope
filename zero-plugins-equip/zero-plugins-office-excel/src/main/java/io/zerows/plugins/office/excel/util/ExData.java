@@ -179,7 +179,7 @@ class ExData {
             final Cell cell = row.createCell(index, cellType);
             /* All type should be OK for set String */
             ExOut.value(cell, type, value);
-            /* Datetime cell format */
+            /* Datetime cell formatFail */
         }
     }
 }

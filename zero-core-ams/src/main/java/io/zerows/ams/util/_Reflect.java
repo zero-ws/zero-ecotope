@@ -22,6 +22,7 @@ class _Reflect extends _Random {
      *
      * @return 实例化对象
      */
+    @Deprecated
     public static <T> T service(final Class<T> interfaceCls) {
         return USPI.service(interfaceCls, (Class<?>) null, false);
     }
@@ -40,6 +41,7 @@ class _Reflect extends _Random {
      *
      * @return 实例化对象
      */
+    @Deprecated
     public static <T> T service(final Class<T> interfaceCls, final boolean strict) {
         return USPI.service(interfaceCls, (Class<?>) null, strict);
     }
@@ -54,6 +56,7 @@ class _Reflect extends _Random {
      *
      * @return 实例化对象
      */
+    @Deprecated
     public static <T> T service(final Class<T> interfaceCls, final ClassLoader loader) {
         return USPI.service(interfaceCls, loader, false);
     }

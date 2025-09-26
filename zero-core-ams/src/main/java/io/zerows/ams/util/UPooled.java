@@ -1,7 +1,7 @@
 package io.zerows.ams.util;
 
 import io.zerows.ams.constant.VString;
-import io.zerows.core.exception.internal.PoolNullException;
+import io.zerows.core.exception.boot._11007Exception404PoolIsNull;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentMap;
@@ -28,7 +28,7 @@ final class UPooled {
     static <K, V> V pool(final ConcurrentMap<K, V> pool, final K key, final Supplier<V> poolFn) {
         if (Objects.isNull(pool)) {
             // ERR-10004, 缓存传入 pool 不可为空
-            throw new PoolNullException(UPooled.class);
+            throw new _11007Exception404PoolIsNull();
         }
         /*
          * 双重检查，防止并发

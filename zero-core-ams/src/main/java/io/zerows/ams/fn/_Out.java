@@ -23,6 +23,7 @@ class _Out extends _Combine {
      * @param bootClass BootingException 异常类
      * @param args      异常参数
      */
+    @Deprecated
     public static void outBoot(final boolean condition, final HLogger logger,
                                final Class<? extends BootingException> bootClass, final Object... args) {
         if (condition) {
@@ -37,6 +38,7 @@ class _Out extends _Combine {
      * @param bootClass BootingException 异常类
      * @param args      异常参数
      */
+    @Deprecated
     public static void outBoot(final boolean condition,
                                final Class<? extends BootingException> bootClass, final Object... args) {
         if (condition) {
@@ -53,6 +55,7 @@ class _Out extends _Combine {
      * @param webClass  WebException 异常类
      * @param args      异常参数
      */
+    @Deprecated
     public static void outWeb(final boolean condition, final HLogger logger,
                               final Class<? extends WebException> webClass, final Object... args) {
         if (condition) {
@@ -67,6 +70,7 @@ class _Out extends _Combine {
      * @param webClass  WebException 异常类
      * @param args      异常参数
      */
+    @Deprecated
     public static void outWeb(final boolean condition,
                               final Class<? extends WebException> webClass, final Object... args) {
         if (condition) {
@@ -87,6 +91,7 @@ class _Out extends _Combine {
      * @param message   消息
      * @param <T>       泛型
      */
+    @Deprecated
     public static <T> void outArg(final T condition, final Class<?> clazz, final String message) {
         HThrow.outArg(condition, clazz, message);
     }
@@ -98,12 +103,14 @@ class _Out extends _Combine {
      * @param clazz     异常类
      * @param args      反射参数
      */
+    @Deprecated
     public static void out(final boolean condition, final Class<?> clazz, final Object... args) {
         if (condition) {
             HThrow.out(clazz, args);
         }
     }
 
+    @Deprecated
     public static <T> Function<Throwable, T> outAsync(final Supplier<T> supplier) {
         return HThrow.outAsync(supplier);
     }

@@ -5,15 +5,15 @@ import io.mature.stellar.owner.MockitoA;
 import io.mature.stellar.owner.OkA;
 import io.mature.stellar.owner.ProductionA;
 import io.mature.stellar.vendor.OkB;
+import io.r2mo.spi.SPI;
 import io.vertx.boot.supply.Electy;
 import io.vertx.core.Future;
 import io.vertx.core.Promise;
 import io.vertx.core.Vertx;
 import io.zerows.ams.constant.em.Environment;
-import io.zerows.ams.util.HUt;
 import io.zerows.common.datamation.KFabric;
 import io.zerows.core.annotations.Up;
-import io.zerows.core.exception.internal.BootIoMissingException;
+import io.zerows.core.exception.boot._11010Exception500BootIoMissing;
 import io.zerows.core.running.boot.KConfigurer;
 import io.zerows.core.running.boot.KEnvironment;
 import io.zerows.core.spi.BootIo;
@@ -74,9 +74,10 @@ public class Ok {
 
     private static KConfigurer<Vertx> configurer() {
         /*  提取SPI部分，严格模式  */
-        final BootIo io = HUt.service(BootIo.class);
+
+        final BootIo io = SPI.findOne(BootIo.class);
         if (Objects.isNull(io)) {
-            throw new BootIoMissingException(Ok.class);
+            throw new _11010Exception500BootIoMissing(Ok.class);
         }
         final HEnergy energy = io.energy(Ok.class, new String[]{});
 

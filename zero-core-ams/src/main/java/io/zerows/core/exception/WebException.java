@@ -1,20 +1,21 @@
 package io.zerows.core.exception;
 
-import io.zerows.common.program.KFailure;
 import io.vertx.core.json.JsonObject;
 import io.zerows.ams.constant.VName;
 import io.zerows.ams.constant.VString;
 import io.zerows.ams.constant.em.app.HttpStatusCode;
 import io.zerows.ams.constant.error.ErrorMessage;
-import io.zerows.core.spi.HorizonIo;
 import io.zerows.ams.util.HUt;
+import io.zerows.common.program.KFailure;
+import io.zerows.core.spi.HorizonIo;
 
 import java.util.UUID;
 
 /**
  *
  */
-public abstract class WebException extends AbstractException {
+@Deprecated
+public abstract class WebException extends BaseZeroException {
     private final UUID id;
     private final KFailure failure;
     protected HttpStatusCode status;

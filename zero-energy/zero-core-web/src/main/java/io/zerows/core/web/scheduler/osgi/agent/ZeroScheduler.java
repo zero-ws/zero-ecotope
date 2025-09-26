@@ -6,7 +6,7 @@ import io.vertx.core.Vertx;
 import io.zerows.ams.constant.VValue;
 import io.zerows.core.annotations.Worker;
 import io.zerows.core.constant.em.EmJob;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.scheduler.atom.Mission;
 import io.zerows.core.web.scheduler.uca.center.Agha;
@@ -51,7 +51,7 @@ public class ZeroScheduler extends AbstractVerticle {
                 /* Start each job here by different types */
                 final List<Future<Void>> futures = new ArrayList<>();
                 missions.forEach(mission -> futures.add(this.start(mission)));
-                Fx.combineT(futures).onSuccess(nil -> LOGGER.info(INFO.JOB_STARTED));
+                RFn.combineT(futures).onSuccess(nil -> LOGGER.info(INFO.JOB_STARTED));
             }
         } else {
             LOGGER.info(INFO.JOB_CONFIG_NULL);

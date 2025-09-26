@@ -5,7 +5,7 @@ import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.Message;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.invocation.exception._500ReturnNullException;
 import io.zerows.core.web.model.commune.Envelop;
@@ -54,14 +54,14 @@ public class FutureInvoker extends AbstractInvoker {
             final Future<Envelop> result = Ut.invoke(proxy, method.getName(), envelop);
 
             // Null Pointer return value checking
-            Fx.out(Objects.isNull(result), _500ReturnNullException.class, getClass(), method);
+            RFn.out(Objects.isNull(result), _500ReturnNullException.class, getClass(), method);
 
             result.onComplete(item -> message.reply(item.result()));
         } else {
             final Future tResult = Ut.invoke(proxy, method.getName(), envelop);
 
             // Null Pointer return value checking
-            Fx.out(Objects.isNull(tResult), _500ReturnNullException.class, getClass(), method);
+            RFn.out(Objects.isNull(tResult), _500ReturnNullException.class, getClass(), method);
 
             tResult.onComplete(invokeHandler(message));
         }
@@ -91,14 +91,14 @@ public class FutureInvoker extends AbstractInvoker {
             final Future<Envelop> result = Ut.invoke(proxy, method.getName(), envelop);
 
             // Null Pointer return value checking
-            Fx.out(Objects.isNull(result), _500ReturnNullException.class, getClass(), method);
+            RFn.out(Objects.isNull(result), _500ReturnNullException.class, getClass(), method);
 
             result.onComplete(item -> handler.handle(Future.succeededFuture((O) item.result())));
         } else {
             final Future result = Ut.invoke(proxy, method.getName(), envelop);
 
             // Null Pointer return value checking
-            Fx.out(Objects.isNull(result), _500ReturnNullException.class, getClass(), method);
+            RFn.out(Objects.isNull(result), _500ReturnNullException.class, getClass(), method);
             handler.handle(result);
         }
     }

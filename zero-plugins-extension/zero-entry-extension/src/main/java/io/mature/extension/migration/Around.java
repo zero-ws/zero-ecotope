@@ -1,13 +1,13 @@
 package io.mature.extension.migration;
 
 import io.zerows.ams.constant.em.Environment;
+import io.zerows.core.fn.RFn;
 import io.zerows.specification.access.app.HApp;
 import io.zerows.specification.access.app.HArk;
 import io.mature.extension.refine.Ox;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.Fx;
 import io.zerows.unity.Ux;
 import io.zerows.core.util.Ut;
 import io.zerows.core.database.cp.zdk.DataPool;
@@ -55,7 +55,7 @@ public class Around {
                  * 组件配置
                  */
                 final JsonObject componentConfig = Ut.valueJObject(component.getJsonObject("config"));
-                return this.captureAsync(componentCls, componentConfig).compose(Fx.ifNil(
+                return this.captureAsync(componentCls, componentConfig).compose(RFn.ifNil(
                     () -> config,
                     step -> step.procAsync(config))
                 );

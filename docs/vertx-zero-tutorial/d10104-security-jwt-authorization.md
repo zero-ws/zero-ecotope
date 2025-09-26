@@ -176,7 +176,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.atom.typed.Uson;
 import io.zerows.unity.Ux;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.vertx.up.secure.Security;
 
 import jakarta.inject.Inject;

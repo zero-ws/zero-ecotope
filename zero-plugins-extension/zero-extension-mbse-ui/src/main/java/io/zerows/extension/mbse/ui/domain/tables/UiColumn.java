@@ -8,8 +8,8 @@ import io.zerows.extension.mbse.ui.domain.Indexes;
 import io.zerows.extension.mbse.ui.domain.Keys;
 import io.zerows.extension.mbse.ui.domain.Zdb;
 import io.zerows.extension.mbse.ui.domain.tables.records.UiColumnRecord;
-import org.jooq.Record;
 import org.jooq.*;
+import org.jooq.Record;
 import org.jooq.impl.DSL;
 import org.jooq.impl.SQLDataType;
 import org.jooq.impl.TableImpl;
@@ -94,9 +94,9 @@ public class UiColumn extends TableImpl<UiColumnRecord> {
      */
     public final TableField<UiColumnRecord, String> OPTION = createField(DSL.name("OPTION"), SQLDataType.CLOB, this, "「option」- $option专用，executor时");
     /**
-     * The column <code>ZDB.UI_COLUMN.FORMAT</code>. 「format」- $format时间格式专用
+     * The column <code>ZDB.UI_COLUMN.FORMAT</code>. 「formatFail」- $format时间格式专用
      */
-    public final TableField<UiColumnRecord, String> FORMAT = createField(DSL.name("FORMAT"), SQLDataType.VARCHAR(128), this, "「format」- $format时间格式专用");
+    public final TableField<UiColumnRecord, String> FORMAT = createField(DSL.name("FORMAT"), SQLDataType.VARCHAR(128), this, "「formatFail」- $format时间格式专用");
     /**
      * The column <code>ZDB.UI_COLUMN.DATUM</code>. 「datum」- $datum专用
      */

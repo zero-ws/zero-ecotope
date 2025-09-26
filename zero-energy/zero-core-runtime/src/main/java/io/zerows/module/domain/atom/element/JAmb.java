@@ -94,7 +94,7 @@ public class JAmb {
      *
      * - TRUE: The data is {@link io.vertx.core.json.JsonObject} type.
      * - FALSE: The data is {@link io.vertx.core.json.JsonArray} type.
-     * - null: Invalid of current, the data part is null or invalid format.
+     * - null: Invalid of current, the data part is null or invalid formatFail.
      *
      * @return {@link java.lang.Boolean} The flag of current object.
      */

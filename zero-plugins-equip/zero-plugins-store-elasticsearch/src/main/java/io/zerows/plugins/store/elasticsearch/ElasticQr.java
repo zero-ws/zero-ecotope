@@ -1,6 +1,6 @@
 package io.zerows.plugins.store.elasticsearch;
 
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.core.uca.log.Annal;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
@@ -87,7 +87,7 @@ class ElasticQr {
     }
 
     private void paramRequired(final JsonObject params) {
-        Fx.outWeb(!params.containsKey("index"), _404IndexNameMissingExceptionn.class, this.getClass());
-        Fx.outWeb(!params.containsKey("searchText"), _404SearchTextMissingExceptionn.class, this.getClass());
+        RFn.outWeb(!params.containsKey("index"), _404IndexNameMissingExceptionn.class, this.getClass());
+        RFn.outWeb(!params.containsKey("searchText"), _404SearchTextMissingExceptionn.class, this.getClass());
     }
 }

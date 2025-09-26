@@ -9,7 +9,7 @@ import java.time.LocalTime;
  */
 class JobDaily extends AbstractJobAt {
     /*
-     * The time format should be:
+     * The time formatFail should be:
      *
      * D,00:08,00:15 ....
      * D,00:12,....

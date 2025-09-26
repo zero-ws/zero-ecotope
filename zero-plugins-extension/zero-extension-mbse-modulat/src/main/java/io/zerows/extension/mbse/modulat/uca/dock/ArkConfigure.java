@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.core.shareddata.ClusterSerializable;
 import io.zerows.ams.constant.em.modeling.EmModel;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.mbse.modulat.domain.tables.daos.BBagDao;
 import io.zerows.extension.mbse.modulat.domain.tables.pojos.BBag;
@@ -82,7 +82,7 @@ class ArkConfigure extends AbstractArk {
                 futures.put(configKey, this.configureBag(bag));
             }
         });
-        return Fx.combineM(futures).compose(dataMap -> {
+        return RFn.combineM(futures).compose(dataMap -> {
             if (open) {
                 final JsonObject rapidJ = Ut.toJObject(dataMap);
                 return Ux.future(rapidJ);

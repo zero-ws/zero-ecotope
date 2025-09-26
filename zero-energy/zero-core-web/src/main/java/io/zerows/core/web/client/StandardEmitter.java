@@ -72,7 +72,7 @@ class StandardEmitter extends AbstractEmitter {
              */
             final Rotator rotator = CACHE.CC_ROTATOR.pick(
                 () -> executor.apply(this.integration()).bind(this.client), request.hashCode());
-            // Fx.po?l(Pool.POOL_ROTATOR, request.hashCode(), () -> executor.apply(this.integration()).bind(this.client));
+            // RFn.po?l(Pool.POOL_ROTATOR, request.hashCode(), () -> executor.apply(this.integration()).bind(this.client));
             /*
              * 执行请求
              */

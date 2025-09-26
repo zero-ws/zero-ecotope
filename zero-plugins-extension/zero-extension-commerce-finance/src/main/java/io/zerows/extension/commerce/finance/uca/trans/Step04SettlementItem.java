@@ -3,7 +3,7 @@ package io.zerows.extension.commerce.finance.uca.trans;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.unity.Ux;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.commerce.finance.domain.tables.daos.FSettlementItemDao;
@@ -43,7 +43,7 @@ class Step04SettlementItem implements Trade<FSettlement, FSettlementItem> {
                 futures.add(Maker.upSTI().buildAsync(items, settlement));
             }
         });
-        return Fx.combineT(futures)
+        return RFn.combineT(futures)
             .compose(result -> {
                 final List<FSettlementItem> inserted = new ArrayList<>();
                 result.forEach(inserted::addAll);

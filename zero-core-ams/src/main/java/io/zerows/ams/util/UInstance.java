@@ -2,7 +2,7 @@ package io.zerows.ams.util;
 
 import io.r2mo.function.Fn;
 import io.zerows.ams.constant.VString;
-import io.zerows.core.exception.internal.OperationException;
+import io.zerows.core.exception.boot._11005Exception501OperationInvalid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -160,7 +160,7 @@ class UInstance {
             constructor = Arrays.stream(clazz.getDeclaredConstructors())
                 .filter(item -> length == item.getParameterTypes().length)
                 .map(item -> (Constructor<T>) item)
-                .findAny().orElseThrow(() -> new OperationException(UInstance.class, "Constructor / 0 / 1", clazz));
+                .findAny().orElseThrow(() -> new _11005Exception501OperationInvalid("Constructor / 0 / 1"));
             constructor.setAccessible(Boolean.TRUE);
             //            return HFn.failOr(() -> ((T) constructor.newInstance(params)), constructor);
         } else {
@@ -175,7 +175,7 @@ class UInstance {
                     .filter(item -> length == item.getParameterTypes().length)
                     .filter(item -> typeMatch(item.getParameterTypes(), types))
                     .map(item -> (Constructor<T>) item)
-                    .findAny().orElseThrow(() -> new OperationException(UInstance.class, "Constructor / N", clazz));
+                    .findAny().orElseThrow(() -> new _11005Exception501OperationInvalid("Constructor / N"));
                 constructor.setAccessible(Boolean.TRUE);
                 //                return HFn.failOr(() -> ((T) constructor.newInstance(params)), constructor);
             } finally {

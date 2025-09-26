@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.unity.Ux;
 import io.zerows.core.util.Ut;
 import io.zerows.core.database.jooq.operation.UxJooq;
@@ -110,7 +110,7 @@ public class QuinnVisit implements Quinn {
             final List<Future<List<SVisitant>>> futures = new ArrayList<>();
             futures.add(jq.insertAsync(qAdd));
             futures.add(jq.updateAsync(qUp));
-            return Fx.combineT(futures).compose(matrix -> {
+            return RFn.combineT(futures).compose(matrix -> {
                 final List<SVisitant> visitants = new ArrayList<>();
                 matrix.forEach(visitants::addAll);
                 return Ux.future(visitants);

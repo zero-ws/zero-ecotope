@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>zero-version</artifactId>
+        <groupId>io.zerows</groupId>
+        <version>1.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>zero-eco-reactive</artifactId>
+    <packaging>pom</packaging>
+    <name>Zero.Dependency.Reactive</name>
+    <dependencyManagement>
+        <dependencies>
+            <!-- https://mvnrepository.com/artifact/io.reactivex.rxjava2/rxjava -->
+            <dependency>
+                <groupId>io.reactivex.rxjava2</groupId>
+                <artifactId>rxjava</artifactId>
+                <version>${rxjava2.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.reactivestreams</groupId>
+                        <artifactId>reactive-streams</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/io.reactivex.rxjava3/rxjava -->
+            <dependency>
+                <groupId>io.reactivex.rxjava3</groupId>
+                <artifactId>rxjava</artifactId>
+                <version>${rxjava3.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.reactivestreams/reactive-streams -->
+            <dependency>
+                <groupId>org.reactivestreams</groupId>
+                <artifactId>reactive-streams</artifactId>
+                <version>${reactive.streams.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/io.projectreactor/reactor-core -->
+            <dependency>
+                <groupId>io.projectreactor</groupId>
+                <artifactId>reactor-core</artifactId>
+                <version>${io.reactor.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

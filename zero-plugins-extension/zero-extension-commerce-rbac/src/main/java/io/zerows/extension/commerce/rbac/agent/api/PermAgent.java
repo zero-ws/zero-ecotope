@@ -43,7 +43,7 @@ public interface PermAgent {
      * Single Api for the permission management of un-related
      * - 1) The permissions are not related to any S_PERM_SET
      * - 2) The actions are also not related to any S_PERMISSION
-     * The query data format is the same as standard `search engine` api here
+     * The query data formatFail is the same as standard `search engine` api here
      * {
      *      "criteria": {},
      *      "projection": [],

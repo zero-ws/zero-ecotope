@@ -1,6 +1,6 @@
 package io.zerows.ams.util;
 
-import io.zerows.core.exception.internal.SPINullException;
+import io.zerows.core.exception.boot._11000Exception404SPINotFound;
 
 import java.util.*;
 
@@ -79,7 +79,7 @@ final class USPI {
             service = null;
         }
         if (Objects.isNull(service) && strict) {
-            throw new SPINullException(USPI.class);
+            throw new _11000Exception404SPINotFound(USPI.class);
         }
         return service;
     }

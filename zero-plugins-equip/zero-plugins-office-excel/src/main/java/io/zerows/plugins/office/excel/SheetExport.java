@@ -54,7 +54,7 @@ class SheetExport {
 
         /*
          * 2. Create the sheet of workbook
-         * In current version, we only select 2007 format instead of other version such as 2003
+         * In current version, we only select 2007 formatFail instead of other version such as 2003
          * The sheet name is `identifier` ( Table Name )
          */
         final XSSFSheet sheet = workbook.createSheet(identifier);

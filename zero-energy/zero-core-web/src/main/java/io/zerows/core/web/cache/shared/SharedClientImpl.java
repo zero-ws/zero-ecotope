@@ -36,7 +36,7 @@ public class SharedClientImpl<K, V> implements SharedClient<K, V> {
 
     public static <K, V> SharedClient<K, V> create(final Vertx vertx, final String name) {
         return CC_CLIENTS.pick(() -> new SharedClientImpl(vertx, name), name);
-        // return Fx.po?l(CLIENTS, name, () -> new SharedClientImpl(vertx, name));
+        // return RFn.po?l(CLIENTS, name, () -> new SharedClientImpl(vertx, name));
     }
 
     private void async(final Handler<AsyncResult<AsyncMap<K, V>>> handler) {

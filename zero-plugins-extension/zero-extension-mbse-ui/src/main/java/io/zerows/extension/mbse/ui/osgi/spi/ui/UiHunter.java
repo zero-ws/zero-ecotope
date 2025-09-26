@@ -13,7 +13,7 @@ import io.zerows.module.domain.atom.typed.UData;
  * `runComponent` here, the component must be extend from UiHunter to get the
  * correct controlId instead.
  *
- * The request format is as following
+ * The request formatFail is as following
  * // <pre><code class="json">
  * {
  *     alias: "直接配置，通常是：EDIT, ADD, FILTER, LIST",

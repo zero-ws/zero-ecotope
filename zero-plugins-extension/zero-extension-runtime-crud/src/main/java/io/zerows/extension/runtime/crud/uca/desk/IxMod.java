@@ -4,7 +4,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.ams.constant.VString;
 import io.zerows.core.exception.WebException;
 import io.zerows.core.exception.web._500InternalServerException;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.mbse.atom.specification.KModule;
 import io.zerows.core.web.model.commune.Envelop;
@@ -76,7 +76,7 @@ public class IxMod {
         final KModule module;
         try {
             module = IxPin.getActor(actor);
-            Fx.out(Objects.isNull(module), _404ModuleMissingException.class, this.getClass(), actor);
+            RFn.out(Objects.isNull(module), _404ModuleMissingException.class, this.getClass(), actor);
             this.module = module;
         } catch (final WebException error) {
             // 自定义异常

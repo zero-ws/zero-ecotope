@@ -1,7 +1,7 @@
 package io.vertx.boot.launcher;
 
 import io.vertx.core.Vertx;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.container.exception.BootRpcEnvironmentException;
 import io.zerows.core.web.container.store.BootStore;
@@ -38,7 +38,7 @@ public class MicroLauncher implements HLauncher<Vertx> {
      */
     @Override
     public <T extends HConfig> void start(final HConfig.HOn<T> on, final Consumer<Vertx> server) {
-        Fx.outBoot(!STORE.isEtcd(), BootRpcEnvironmentException.class, this.getClass());
+        RFn.outBoot(!STORE.isEtcd(), BootRpcEnvironmentException.class, this.getClass());
         // 初始化微服务环境
         final UddiRegistry registry = Ut.singleton(UddiRegistry.class);
         final HBoot boot = STORE.boot();

@@ -1,8 +1,8 @@
 package io.zerows.extension.commerce.rbac.uca.timer;
 
 import io.vertx.core.Future;
+import io.zerows.core.fn.RFn;
 import io.zerows.unity.Ux;
-import io.zerows.core.fn.Fx;
 import io.zerows.core.web.cache.Rapid;
 import io.zerows.module.metadata.zdk.AbstractAmbiguity;
 import org.osgi.framework.Bundle;
@@ -46,7 +46,7 @@ abstract class AbstractClock<T> extends AbstractAmbiguity implements ScClock<T> 
     public Future<Boolean> remove(final String... keys) {
         final List<Future<Boolean>> waitingQ = new ArrayList<>();
         Arrays.asList(keys).forEach(key -> waitingQ.add(this.ofCache().clear(key).compose(nil -> Ux.futureT())));
-        return Fx.combineB(waitingQ);
+        return RFn.combineB(waitingQ);
     }
 
     @Override

@@ -1,7 +1,7 @@
 package io.zerows.core.web.container.uca.routing;
 
+import io.zerows.core.fn.RFn;
 import io.zerows.core.uca.log.Annal;
-import io.zerows.core.fn.Fx;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.container.exception.BootAnnotationRepeatException;
 import io.zerows.core.web.container.exception.BootEventActionNoneException;
@@ -25,7 +25,7 @@ public class Verifier {
     @SuppressWarnings("all")
     public static void verify(final Event event) {
         final Method method = event.getAction();
-        Fx.outBoot(null == method, LOGGER, BootEventActionNoneException.class,
+        RFn.outBoot(null == method, LOGGER, BootEventActionNoneException.class,
             Verifier.class, event);
         /* Specification **/
         verify(method, BodyParam.class);
@@ -46,7 +46,7 @@ public class Verifier {
         });
         final int occurs = integer.get();
 
-        Fx.outBoot(1 < occurs, LOGGER, BootAnnotationRepeatException.class,
+        RFn.outBoot(1 < occurs, LOGGER, BootAnnotationRepeatException.class,
             Verifier.class, method.getName(), annoCls, occurs);
     }
 
@@ -57,7 +57,7 @@ public class Verifier {
             .toList();
 
         final int multi = annotationList.size();
-        Fx.outBoot(1 < multi, LOGGER, BootParamAnnotationException.class,
+        RFn.outBoot(1 < multi, LOGGER, BootParamAnnotationException.class,
             Verifier.class, parameter.getName(), multi);
     }
 }

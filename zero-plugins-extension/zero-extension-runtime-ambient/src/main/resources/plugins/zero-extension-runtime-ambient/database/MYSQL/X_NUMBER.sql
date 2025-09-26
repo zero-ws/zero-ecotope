@@ -15,7 +15,7 @@ CREATE TABLE `X_NUMBER`
     `COMMENT`       VARCHAR(255) DEFAULT NULL COMMENT '「comment」- 编号备注信息，用于描述编号数据,comment,S_COMMENT',
 
     `CURRENT`       BIGINT(20)  NOT NULL COMMENT '「current」编号当前值，对应${seed}，每次变化时current提取后更新为：current + step或current - step,current,L_CURRENT',
-    `FORMAT`        VARCHAR(255) DEFAULT NULL COMMENT '「format」格式信息，用于处理最终格式：,format,S_FORMAT',
+    `FORMAT`        VARCHAR(255) DEFAULT NULL COMMENT '「formatFail」格式信息，用于处理最终格式：,formatFail,S_FORMAT',
     `IDENTIFIER`    VARCHAR(64)  DEFAULT NULL COMMENT '「identifier」编号对应的identifier，用于查询当前identifier使用的序号信息,identifier,S_IDENTIFIER',
     `PREFIX`        varchar(64)  DEFAULT NULL COMMENT '「prefix」编号前缀,prefix,S_PREFIX',
     `SUFFIX`        varchar(64)  DEFAULT NULL COMMENT '「suffix」编号后缀,suffix,S_SUFFIX',

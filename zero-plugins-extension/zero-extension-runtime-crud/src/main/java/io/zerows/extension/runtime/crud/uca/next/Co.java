@@ -1,7 +1,7 @@
 package io.zerows.extension.runtime.crud.uca.next;
 
-import io.zerows.core.exception.web._501NotSupportException;
 import io.vertx.core.Future;
+import io.zerows.core.exception.web._501NotSupportException;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.runtime.crud.eon.Pooled;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
@@ -13,7 +13,7 @@ import java.util.List;
  * The interface for module selection
  * Phase 1: Combine input request into IxOpt and pass to IxPanel
  *
- * 1) Combine input ( Envelop, Body, Module ) three format
+ * 1) Combine input ( Envelop, Body, Module ) three formatFail
  * 2) Calculate the result to IxOpt
  *
  * > This component will be called by IxOpt internal

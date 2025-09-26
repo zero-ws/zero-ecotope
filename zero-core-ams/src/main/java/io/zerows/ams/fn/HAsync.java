@@ -1,7 +1,7 @@
 package io.zerows.ams.fn;
 
 import io.vertx.core.Future;
-import io.zerows.core.exception.AbstractException;
+import io.zerows.core.exception.BaseZeroException;
 
 import java.util.*;
 import java.util.function.Function;
@@ -46,7 +46,7 @@ class HAsync {
     }
 
     @SuppressWarnings("all")
-    static <T, E extends AbstractException> Future<T> pass(
+    static <T, E extends BaseZeroException> Future<T> pass(
         final T response, final E error,
         final Function<Collection<Boolean>, Boolean> checkFn,
         final Set<Function<T, Future<Boolean>>> executors) {

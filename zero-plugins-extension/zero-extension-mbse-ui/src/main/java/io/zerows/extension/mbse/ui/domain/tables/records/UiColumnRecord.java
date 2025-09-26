@@ -366,7 +366,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
     }
 
     /**
-     * Getter for <code>ZDB.UI_COLUMN.FORMAT</code>. 「format」- $format时间格式专用
+     * Getter for <code>ZDB.UI_COLUMN.FORMAT</code>. 「formatFail」- $format时间格式专用
      */
     @Override
     public String getFormat() {
@@ -374,7 +374,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
     }
 
     /**
-     * Setter for <code>ZDB.UI_COLUMN.FORMAT</code>. 「format」- $format时间格式专用
+     * Setter for <code>ZDB.UI_COLUMN.FORMAT</code>. 「formatFail」- $format时间格式专用
      */
     @Override
     public UiColumnRecord setFormat(String value) {

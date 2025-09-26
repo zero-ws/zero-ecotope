@@ -1,12 +1,12 @@
 package io.zerows.extension.runtime.ambient.util;
 
+import io.zerows.core.fn.RFn;
 import io.zerows.core.uca.log.Annal;
 import io.vertx.core.Future;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.Fx;
 import io.zerows.unity.Ux;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.runtime.ambient.bootstrap.AtConfig;
@@ -40,7 +40,7 @@ class AtFs {
         if (Objects.nonNull(config)) {
             appJ.put(KName.STORE_PATH, config.getStorePath());
         }
-        return Ux.futureJ(appJ).compose(Fx.ofJObject(KName.App.LOGO));
+        return Ux.futureJ(appJ).compose(RFn.ofJObject(KName.App.LOGO));
     }
 
     static Future<Buffer> fileDownload(final JsonArray attachment) {
@@ -153,6 +153,6 @@ class AtFs {
         if (Ut.isNotNil(dataR)) {
             futures.add(fnRemote.apply(dataR));
         }
-        return Fx.compressA(futures);
+        return RFn.compressA(futures);
     }
 }

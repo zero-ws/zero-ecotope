@@ -14,11 +14,11 @@ import java.util.Objects;
 class AtSerial {
     /**
      * The basic rule for number generation
-     * 1) format: the expression such as : `${var}`, the system
+     * 1) formatFail: the expression such as : `${var}`, the system
      * will use common-expression parser to parse and generate.
      * ${prefix}: Prefix stored in PREFIX
      * ${suffix}: Suffix stored in SUFFIX
-     * ${time}:   The timestamp that will apply based on TIME format pattern
+     * ${time}:   The timestamp that will apply based on TIME formatFail pattern
      * ${seed}:   The seed calculated by I_LENGTH, I_STEP, IS_DECREMENT
      *
      * @param number the system serial definition

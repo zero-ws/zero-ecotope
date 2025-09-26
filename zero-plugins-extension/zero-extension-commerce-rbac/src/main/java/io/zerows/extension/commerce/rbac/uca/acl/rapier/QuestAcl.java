@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.unity.Ux;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.model.commune.Envelop;
@@ -72,7 +72,7 @@ class QuestAcl implements Quest {
                 final SResource resource = resourceMap.get(packet.getResource());
                 futureMap.put(resource.getCode(), this.syntaxRegion.regionJ(resource, owner, packet));
             });
-            return Fx.combineM(futureMap);
+            return RFn.combineM(futureMap);
         }).compose(map -> Ux.future(Ut.toJObject(map)));
     }
 
@@ -96,7 +96,7 @@ class QuestAcl implements Quest {
                 return this.syncViews(resource, resourceData);
             }));
         });
-        return Fx.combineM(futureM).compose(map -> Ux.future(Ut.toJObject(map)));
+        return RFn.combineM(futureM).compose(map -> Ux.future(Ut.toJObject(map)));
     }
 
     private Future<JsonArray> syncViews(final SResource resource, final JsonArray viewData) {
@@ -112,7 +112,7 @@ class QuestAcl implements Quest {
             );
             futures.add(Quinn.visit().saveAsync(resource, owner, viewJ));
         });
-        return Fx.combineA(futures);
+        return RFn.combineA(futures);
     }
 
     @Override

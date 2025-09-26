@@ -1,8 +1,8 @@
 package io.zerows.core.web.container.osgi.service;
 
 import io.vertx.core.Future;
-import io.zerows.core.constant.KMeta;
-import io.zerows.core.fn.Fx;
+import io.zerows.boot.enums.VertxComponent;
+import io.zerows.core.fn.RFn;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.container.store.under.StoreVertx;
 import io.zerows.core.web.container.uca.store.StubLinear;
@@ -29,7 +29,7 @@ public class EnergyVertxService implements EnergyVertx {
     }
 
     @Override
-    public synchronized StubLinear ofLinear(final Bundle bundle, final KMeta.Typed type) {
+    public synchronized StubLinear ofLinear(final Bundle bundle, final VertxComponent type) {
         return StubLinear.of(bundle, type);
     }
 
@@ -48,7 +48,7 @@ public class EnergyVertxService implements EnergyVertx {
         final StubVertx service = this.ofVertx(bundle);
         vertxOptions.forEach((name, nodeVertx) ->
             futureMap.put(name, service.createAsync(nodeVertx, clusterOptions.isEnabled())));
-        return Fx.combineM(futureMap)
+        return RFn.combineM(futureMap)
             // 此处返回谁都可以，只是单纯为了其他位置可重用
             .compose(nil -> Future.succeededFuture(StoreVertx.of(bundle)));
     }

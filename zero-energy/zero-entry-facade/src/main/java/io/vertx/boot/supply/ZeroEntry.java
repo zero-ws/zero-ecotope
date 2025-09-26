@@ -3,7 +3,7 @@ package io.vertx.boot.supply;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.zerows.core.constant.configure.YmlCore;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.core.web.container.store.BootStore;
 import io.zerows.module.cloud.util.Ho;
 import io.zerows.module.metadata.store.OZeroStore;
@@ -25,8 +25,8 @@ class ZeroEntry {
              * Fix: Cannot invoke "io.vertx.mod.ambient.atom.AtConfig.getInitializer()"
              * because the return value of "io.vertx.mod.ambient.init.AtPin.getConfig()" is null
              */
-            // 2. 是否执行扩展，调用 Fx.passion 带顺序
-            .compose(arkSet -> whenExtension(config, () -> Fx.passion(Boolean.TRUE,
+            // 2. 是否执行扩展，调用 RFn.passion 带顺序
+            .compose(arkSet -> whenExtension(config, () -> RFn.passion(Boolean.TRUE,
                 // 2.1. 扩展：配置
                 done -> ZeroEnroll.registryAmbient(vertx, config, arkSet)
             )))
@@ -41,8 +41,8 @@ class ZeroEntry {
         return (vertx, config) -> ZeroEnroll.registryStart(vertx, config)
 
 
-            // 2. 是否执行扩展，调用 Fx.passion 带顺序
-            .compose(arkSet -> whenExtension(config, () -> Fx.passion(Boolean.TRUE,
+            // 2. 是否执行扩展，调用 RFn.passion 带顺序
+            .compose(arkSet -> whenExtension(config, () -> RFn.passion(Boolean.TRUE,
                 // 2.1. 扩展：配置
                 done -> ZeroEnroll.registryAmbient(vertx, config, arkSet),
                 // 2.2. 扩展：初始化

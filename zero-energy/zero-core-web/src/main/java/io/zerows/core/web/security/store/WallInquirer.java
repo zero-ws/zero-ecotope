@@ -2,7 +2,7 @@ package io.zerows.core.web.security.store;
 
 import io.vertx.ext.web.handler.AuthorizationHandler;
 import io.zerows.core.constant.em.EmSecure;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.model.uca.extract.ExtractorEvent;
 import io.zerows.core.web.security.exception.BootWallDuplicatedException;
@@ -86,7 +86,7 @@ public class WallInquirer implements Inquirer<Set<Aegis>> {
     private void verifyConfig(final Class<?> clazz, final Aegis reference, final String typeKey) {
         final EmSecure.AuthWall wall = EmSecure.AuthWall.from(typeKey);
         /* Wall Type Wrong */
-        Fx.outBoot(Objects.isNull(wall), LOGGER, BootWallTypeWrongException.class,
+        RFn.outBoot(Objects.isNull(wall), LOGGER, BootWallTypeWrongException.class,
             this.getClass(), typeKey, clazz);
         reference.setType(wall);
         final ConcurrentMap<String, AegisItem> configMap = AegisItem.configMap();
@@ -98,7 +98,7 @@ public class WallInquirer implements Inquirer<Set<Aegis>> {
             /* Standard */
             reference.setDefined(Boolean.FALSE);
             final AegisItem found = configMap.getOrDefault(wall.key(), null);
-            Fx.outBoot(Objects.isNull(found), LOGGER, BootWallKeyMissingException.class,
+            RFn.outBoot(Objects.isNull(found), LOGGER, BootWallKeyMissingException.class,
                 this.getClass(), wall.key(), clazz);
             reference.setItem(found);
         }
@@ -111,13 +111,13 @@ public class WallInquirer implements Inquirer<Set<Aegis>> {
     private void verifyProxy(final Class<?> clazz, final Aegis reference) {
         final Method[] methods = clazz.getDeclaredMethods();
         // Duplicated Method checking
-        Fx.outBoot(this.verifyMethod(methods, Authenticate.class), LOGGER,
+        RFn.outBoot(this.verifyMethod(methods, Authenticate.class), LOGGER,
             BootWallMethodDuplicatedException.class, this.getClass(),
             Authenticate.class.getSimpleName(), clazz.getName());
-        Fx.outBoot(this.verifyMethod(methods, Authorized.class), LOGGER,
+        RFn.outBoot(this.verifyMethod(methods, Authorized.class), LOGGER,
             BootWallMethodDuplicatedException.class, this.getClass(),
             Authorized.class.getSimpleName(), clazz.getName());
-        Fx.outBoot(this.verifyMethod(methods, AuthorizedResource.class), LOGGER,
+        RFn.outBoot(this.verifyMethod(methods, AuthorizedResource.class), LOGGER,
             BootWallMethodDuplicatedException.class, this.getClass(),
             AuthorizedResource.class.getSimpleName(), clazz.getName());
 
@@ -167,7 +167,7 @@ public class WallInquirer implements Inquirer<Set<Aegis>> {
         });
 
         // Duplicated adding.
-        Fx.outBoot(dupSet.size() != wallClses.size(), LOGGER,
+        RFn.outBoot(dupSet.size() != wallClses.size(), LOGGER,
             BootWallDuplicatedException.class, this.getClass(),
             wallClses.stream().map(Class::getName).collect(Collectors.toSet()));
     }

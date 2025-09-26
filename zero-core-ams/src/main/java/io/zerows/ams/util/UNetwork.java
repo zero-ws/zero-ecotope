@@ -13,7 +13,7 @@ final class UNetwork {
     }
 
     /**
-     * @return ip address of ipv4 format
+     * @return ip address of ipv4 formatFail
      */
     static String getIPv4() {
         return IPHost.getInstance().getExtranetIPv4Address();
@@ -24,14 +24,14 @@ final class UNetwork {
     }
 
     /**
-     * @return ip address of ipv6 format
+     * @return ip address of ipv6 formatFail
      */
     static String getIPv6() {
         return IPHost.getInstance().getExtranetIPv6Address();
     }
 
     /**
-     * @return ip address of common format ( detect by system about 4 or 6 )
+     * @return ip address of common formatFail ( detect by system about 4 or 6 )
      */
     static String getIP() {
         return IPHost.getInstance().getExtranetIPAddress();

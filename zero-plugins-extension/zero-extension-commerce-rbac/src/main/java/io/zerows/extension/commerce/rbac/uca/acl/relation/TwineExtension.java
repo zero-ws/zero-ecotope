@@ -3,12 +3,11 @@ package io.zerows.extension.commerce.rbac.uca.acl.relation;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.unity.Ux;
 import io.zerows.common.program.KRef;
 import io.zerows.core.constant.KName;
 import io.zerows.core.database.jooq.operation.UxJoin;
 import io.zerows.core.database.jooq.operation.UxJooq;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.mbse.atom.specification.KQr;
 import io.zerows.extension.commerce.rbac.atom.ScConfig;
@@ -20,6 +19,7 @@ import io.zerows.extension.commerce.rbac.eon.AuthMsg;
 import io.zerows.extension.runtime.skeleton.osgi.spi.business.ExOwner;
 import io.zerows.extension.runtime.skeleton.secure.Twine;
 import io.zerows.module.domain.atom.typed.UObject;
+import io.zerows.unity.Ux;
 
 import java.util.Collection;
 import java.util.List;
@@ -173,7 +173,7 @@ class TwineExtension implements Twine<SUser> {
             final KQr qr = CONFIG.category(modelId);
             futureMap.put(modelId, this.runBatch(groupList, qr));
         });
-        return Fx.combineM(futureMap);
+        return RFn.combineM(futureMap);
     }
 
     private Future<JsonArray> runBatch(final List<SUser> users, final KQr qr) {
@@ -215,7 +215,7 @@ class TwineExtension implements Twine<SUser> {
             /*
              * There are two fields in S_USER table: MODEL_ID & MODEL_KEY
              * This branch means that MODEL_KEY is null, you could not do any Extension part.
-             * Returned SUser json data format only.
+             * Returned SUser json data formatFail only.
              */
             LOG.Web.info(this.getClass(), AuthMsg.EXTENSION_EMPTY + " Null modelKey");
             return Ux.futureJ(user);
@@ -237,7 +237,7 @@ class TwineExtension implements Twine<SUser> {
          * Simple situation for extension information processing
          * 1. User Extension `executor` bind to UxJooq running
          * 2. Zero extension provide the configuration part and do executor
-         * 3. Returned data format is InJson of Extension
+         * 3. Returned data formatFail is InJson of Extension
          */
         LOG.Web.info(this.getClass(), AuthMsg.EXTENSION_BY_USER, user.getModelKey());
         return executor.apply(qr).compose(extensionJ -> {

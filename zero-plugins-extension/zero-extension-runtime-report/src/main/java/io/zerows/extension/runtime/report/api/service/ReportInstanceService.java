@@ -6,7 +6,7 @@ import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.unity.Ux;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.runtime.report.atom.RGeneration;
@@ -57,7 +57,7 @@ public class ReportInstanceService implements ReportInstanceStub {
     public Future<JsonObject> fetchInstance(final String key) {
         return Ux.Jooq.on(KpReportInstanceDao.class)
             .fetchByIdAsync(key)
-            .compose(Ux::futureJ).compose(Fx.ofJObject(
+            .compose(Ux::futureJ).compose(RFn.ofJObject(
                 "reportContent",
                 "reportData"
             ));
@@ -175,7 +175,7 @@ public class ReportInstanceService implements ReportInstanceStub {
             final KpFeature feature = generation.featureGlobal(featureName);
             futures.add(input.prepare(params, configureJ, feature));
         });
-        return Fx.combineT(futures).compose(processed -> {
+        return RFn.combineT(futures).compose(processed -> {
             final ConcurrentMap<String, Object> paramMap = new ConcurrentHashMap<>();
             processed.forEach(kv -> {
                 if (paramMap.containsKey(kv.key())) {

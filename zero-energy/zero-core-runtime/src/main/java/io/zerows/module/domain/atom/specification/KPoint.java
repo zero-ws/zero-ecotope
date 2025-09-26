@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.vertx.core.json.JsonObject;
 import io.zerows.ams.constant.em.modeling.EmModel;
 import io.zerows.common.datamation.KMapping;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.core.util.Ut;
 import io.zerows.extend.jackson.databind.ClassDeserializer;
 import io.zerows.extend.jackson.databind.ClassSerializer;
@@ -154,7 +154,7 @@ public class KPoint implements Serializable {
             return EmModel.Join.DAO;
         }
         /* P3: classDefine also null, throw error out. */
-        Fx.out(Objects.isNull(this.classDefine), _409JoinTargetException.class, this.getClass());
+        RFn.out(Objects.isNull(this.classDefine), _409JoinTargetException.class, this.getClass());
         return EmModel.Join.DEFINE;
     }
 
@@ -181,7 +181,7 @@ public class KPoint implements Serializable {
             return EmModel.Join.DEFINE;
         }
         /* P3: keyJoin */
-        Fx.out(Ut.isNil(this.keyJoin), _409JoinTargetException.class, this.getClass());
+        RFn.out(Ut.isNil(this.keyJoin), _409JoinTargetException.class, this.getClass());
         return EmModel.Join.CRUD;
     }
 

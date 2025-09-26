@@ -2,9 +2,9 @@ package io.zerows.plugins.office.excel.atom;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.core.fn.RFn;
 import io.zerows.unity.Ux;
 import io.zerows.ams.constant.VString;
-import io.zerows.core.fn.Fx;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.model.uca.normalize.Oneness;
 import io.zerows.module.metadata.atom.configuration.modeling.MDConnect;
@@ -207,7 +207,7 @@ public class ExTable implements Serializable {
     }
 
     public MDConnect getConnect() {
-        Fx.outWeb(null == this.connect, _404ConnectMissingException.class, this.getClass(), this.name);
+        RFn.outWeb(null == this.connect, _404ConnectMissingException.class, this.getClass(), this.name);
         return this.connect;
     }
 

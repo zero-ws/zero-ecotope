@@ -22,8 +22,8 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class KAmbient implements HAmbient {
     private final ConcurrentMap<String, JsonObject> configuration = new ConcurrentHashMap<>();
-    private final KAmbientContext context = new KAmbientContext();
-    private final KAmbientRuntime vector = new KAmbientRuntime();
+    private final _KAmbientContext context = new _KAmbientContext();
+    private final _KAmbientRuntime vector = new _KAmbientRuntime();
     private EmApp.Mode mode;
 
     private KAmbient() {

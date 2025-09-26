@@ -4,7 +4,7 @@ import io.r2mo.function.Fn;
 import io.vertx.core.Future;
 import io.zerows.core.exception.BootingException;
 import io.zerows.core.exception.WebException;
-import io.zerows.core.exception.internal.SPINullException;
+import io.zerows.core.exception.boot._11000Exception404SPINotFound;
 import io.zerows.core.exception.web._501NotSupportException;
 import io.zerows.core.spi.HorizonIo;
 import org.osgi.framework.Bundle;
@@ -76,7 +76,7 @@ class BundleSPI {
     static <T> T service(final Class<?> interfaceCls, final Bundle bundle) {
         final String name = nameSPI(interfaceCls, bundle);
         if (Ut.isNil(name)) {
-            throw new SPINullException(BundleSPI.class);
+            throw new _11000Exception404SPINotFound(BundleSPI.class);
         }
         return Fn.jvmOr(() -> {
             final Class<?> implClass = bundle.loadClass(name);
@@ -99,7 +99,7 @@ class BundleSPI {
                 }
             } catch (final IOException ex) {
                 ex.printStackTrace();
-                throw new SPINullException(BundleSPI.class);
+                throw new _11000Exception404SPINotFound(BundleSPI.class);
             }
         }
         return serviceName;

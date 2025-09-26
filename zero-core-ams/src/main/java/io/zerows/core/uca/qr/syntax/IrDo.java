@@ -1,8 +1,8 @@
 package io.zerows.core.uca.qr.syntax;
 
-import io.zerows.ams.util.HUt;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.ams.util.HUt;
 
 import java.util.List;
 import java.util.function.BiConsumer;
@@ -51,9 +51,9 @@ public interface IrDo {
 
     /**
      * Save new condition to LINEAR component.
-     * The parameters are following format:
-     * 1. fieldExpr is format of `field,op`, it contains two parts.
-     * 2. fieldExpr is format of `field`, the default op is =.
+     * The parameters are following formatFail:
+     * 1. fieldExpr is formatFail of `field,op`, it contains two parts.
+     * 2. fieldExpr is formatFail of `field`, the default op is =.
      *
      * @param fieldExpr {@link java.lang.String}
      * @param value     {@link java.lang.Object}

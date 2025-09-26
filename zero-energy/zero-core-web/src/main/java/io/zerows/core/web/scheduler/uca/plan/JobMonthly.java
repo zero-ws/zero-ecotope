@@ -11,7 +11,7 @@ import java.time.temporal.TemporalAdjusters;
 class JobMonthly extends AbstractJobAt {
 
     /*
-     * The time format should be:
+     * The time formatFail should be:
      *
      * M,00:15/2,00:16/5 ....
      */

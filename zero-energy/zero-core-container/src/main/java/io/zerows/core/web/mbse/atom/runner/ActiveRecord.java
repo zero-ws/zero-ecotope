@@ -18,7 +18,7 @@ import java.util.concurrent.ConcurrentMap;
  */
 public abstract class ActiveRecord implements HRecord {
     /*
-     * The core data structure to get data in json format
+     * The core data structure to get data in json formatFail
      */
     private final transient JsonObject data = new JsonObject();
 

@@ -2,16 +2,16 @@ package io.mature.stellar.owner;
 
 import io.mature.stellar.ArgoStore;
 import io.mature.stellar.vendor.OkB;
+import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.fn.Fx;
-import io.zerows.core.util.Ut;
+import io.zerows.ams.constant.em.Environment;
 import io.zerows.common.app.KDS;
 import io.zerows.common.app.KGlobal;
 import io.zerows.common.app.KIntegration;
-import io.zerows.ams.constant.em.Environment;
 import io.zerows.core.database.atom.Database;
-import io.zerows.core.exception.boot.AmbientConnectException;
+import io.zerows.core.exception.boot._40103Exception500ConnectAmbient;
 import io.zerows.core.running.boot.KPivot;
+import io.zerows.core.util.Ut;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
 import io.zerows.specification.access.app.HAmbient;
 import io.zerows.specification.access.app.HApp;
@@ -51,7 +51,7 @@ public abstract class AbstractPartyA implements OkA {
         {
             // 检查环境是否启动完成
             final HAmbient ambient = KPivot.running();
-            Fx.outBoot(Objects.isNull(ambient), AmbientConnectException.class, this.getClass());
+            Fn.jvmKo(Objects.isNull(ambient), _40103Exception500ConnectAmbient.class);
             // 启动完成则可以直接提取应用信息
             final String appId = globalRef.appId();
             final String sigma = globalRef.sigma();
@@ -60,7 +60,7 @@ public abstract class AbstractPartyA implements OkA {
             } else {
                 this.ark = Ke.ark(appId);
             }
-            Fx.outBoot(Objects.isNull(this.ark), AmbientConnectException.class, this.getClass());
+            Fn.jvmKo(Objects.isNull(this.ark), _40103Exception500ConnectAmbient.class);
             final HApp app = this.ark.app();
             LOG.Ok.info(this.getClass(), "HAmbient Environment has been initialized! = {0}", app.name());
         }

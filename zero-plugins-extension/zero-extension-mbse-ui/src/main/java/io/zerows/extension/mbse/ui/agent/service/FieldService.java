@@ -1,16 +1,16 @@
 package io.zerows.extension.mbse.ui.agent.service;
 
-import io.zerows.core.fn.Fx;
-import io.zerows.core.uca.log.Annal;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
-import io.zerows.unity.Ux;
+import io.zerows.core.fn.RFn;
+import io.zerows.core.uca.log.Annal;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.mbse.ui.domain.tables.daos.UiFieldDao;
 import io.zerows.extension.mbse.ui.domain.tables.pojos.UiField;
 import io.zerows.extension.mbse.ui.eon.em.RowType;
+import io.zerows.unity.Ux;
 
 import java.util.Comparator;
 import java.util.List;
@@ -64,7 +64,7 @@ public class FieldService implements FieldStub {
                 .insertAsync(fields)
                 .compose(Ux::futureA)
                 // 3. mountOut
-                .compose(Fx.ofJArray(
+                .compose(RFn.ofJArray(
                     OPTION_JSX,
                     OPTION_CONFIG,
                     OPTION_ITEM,
@@ -167,21 +167,21 @@ public class FieldService implements FieldStub {
                      * moment
                      * 1) When `Edit/Add` status
                      * 2) When `View` status
-                     * In this kind of situation, the config `optionJsx` must contains `config.format` here.
+                     * In this kind of situation, the config `optionJsx` must contains `config.formatFail` here.
                      */
                     final JsonObject optionJsx = cell.getJsonObject(OPTION_JSX);
 
                     if (Ut.isNotNil(optionJsx)) {
                         final JsonObject config = optionJsx.getJsonObject("config");
-                        if (Ut.isNotNil(config) && config.containsKey("format")) {
+                        if (Ut.isNotNil(config) && config.containsKey("formatFail")) {
                             /*
                              * Date here for moment = true
                              * Here are some difference between two components
-                             * 1) For `Date`, the format should be string
-                             * 2) For `TableEditor`, the format should be object
+                             * 1) For `Date`, the formatFail should be string
+                             * 2) For `TableEditor`, the formatFail should be object
                              * The table editor is added new here
                              */
-                            final Object format = config.getValue("format");
+                            final Object format = config.getValue("formatFail");
                             if (String.class == format.getClass()) {
                                 dataCell.put("moment", true);
                             }

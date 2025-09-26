@@ -6,7 +6,7 @@ import io.zerows.module.domain.uca.serialization.ZeroType;
 /**
  * 「Co」JSR311 for .@PathParam
  *
- * This `Filler` is for path parsing `/api/xxx/name/{name}` format to extract to
+ * This `Filler` is for path parsing `/api/xxx/name/{name}` formatFail to extract to
  *
  * ```shell
  * // <pre><code>

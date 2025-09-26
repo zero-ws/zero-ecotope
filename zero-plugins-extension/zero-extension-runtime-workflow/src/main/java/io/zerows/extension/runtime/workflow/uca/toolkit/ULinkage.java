@@ -3,7 +3,7 @@ package io.zerows.extension.runtime.workflow.uca.toolkit;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.unity.Ux;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.runtime.workflow.atom.EngineOn;
@@ -70,7 +70,7 @@ public class ULinkage {
             final Respect respect = this.metadata.linkRespect(field);
             futures.put(field, respect.fetchAsync(record));
         });
-        return Fx.combineM(futures).compose(dataMap -> {
+        return RFn.combineM(futures).compose(dataMap -> {
             dataMap.forEach((field, linkageData) -> {
                 if (previous) {
                     final JsonArray stored = record.linkage(field);
@@ -121,7 +121,7 @@ public class ULinkage {
             final Respect respect = this.metadata.linkRespect(field);
             futures.put(field, respect.syncAsync(linkageData, params, record));
         });
-        return Fx.combineM(futures).compose(dataMap -> {
+        return RFn.combineM(futures).compose(dataMap -> {
             dataMap.forEach(record::linkage);
             return Ux.future(record);
         });

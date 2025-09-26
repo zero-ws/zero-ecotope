@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Session;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.commerce.rbac.agent.service.business.GroupStub;
 import io.zerows.extension.commerce.rbac.agent.service.login.jwt.JwtStub;
@@ -88,6 +88,6 @@ public class TokenService implements TokenStub {
             .forEach(item -> futures.add(this.groupStub.fetchRoleIdsAsync(item.getString(AuthKey.F_GROUP_ID))
                 .compose(roles -> UObject.create(item).append("role", roles).toFuture())
             ));
-        return Fx.combineA(futures);
+        return RFn.combineA(futures);
     }
 }

@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.unity.Ux;
 import io.zerows.common.program.KRef;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.core.spi.modeler.Indent;
 import io.zerows.core.uca.qr.syntax.Ir;
 import io.zerows.core.util.Ut;
@@ -126,7 +126,7 @@ public class ValueRule implements Valve {
         final XActivityRule rule = ruleList.iterator().next();
         serialC.forEach((code, size) ->
             serialQ.put(code, Ux.channel(Indent.class, ConcurrentLinkedQueue::new, stub -> stub.indent(code, rule.getSigma(), size))));
-        return Fx.combineM(serialQ).compose(Ux::future);
+        return RFn.combineM(serialQ).compose(Ux::future);
     }
 
     private String ruleIndent(final XActivityRule rule) {

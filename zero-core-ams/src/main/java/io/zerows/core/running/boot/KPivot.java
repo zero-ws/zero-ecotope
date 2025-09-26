@@ -1,10 +1,11 @@
 package io.zerows.core.running.boot;
 
 import io.vertx.core.Future;
+import io.zerows.ams.fn.HFn;
+import io.zerows.ams.util.HUt;
 import io.zerows.common.app.KDS;
 import io.zerows.common.app.KDatabase;
 import io.zerows.core.running.context.KAmbient;
-import io.zerows.ams.fn.HFn;
 import io.zerows.specification.access.HBelong;
 import io.zerows.specification.access.app.HAmbient;
 import io.zerows.specification.access.app.HApp;
@@ -14,7 +15,6 @@ import io.zerows.specification.access.cloud.HGalaxy;
 import io.zerows.specification.access.cloud.HSpace;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.boot.HRegistry;
-import io.zerows.ams.util.HUt;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -76,13 +76,13 @@ public class KPivot<T> {
 
     public Set<HArk> registry(final HConfig config) {
         // 前置检查（注册拦截）
-        KPivotT.fail(getClass(), RUNNING);
+        KPivotTool.fail(getClass(), RUNNING);
 
         Set<HArk> contextDefault = this.context.registry(this.container, config);
         final Set<HArk> contextCombine = new HashSet<>();
         if (Objects.nonNull(this.extension)) {
             final Set<HArk> contextExtension = this.extension.registry(this.container, config);
-            contextCombine.addAll(KPivotT.combine(contextDefault, contextExtension));
+            contextCombine.addAll(KPivotTool.combine(contextDefault, contextExtension));
         }
         contextCombine.forEach(RUNNING::registry);
         return contextCombine;
@@ -94,7 +94,7 @@ public class KPivot<T> {
             return Future.succeededFuture(new HashSet<>());
         }
         // 前置检查（异步注册拦截）
-        return KPivotT.failAsync(getClass(), RUNNING).compose(nil ->
+        return KPivotTool.failAsync(getClass(), RUNNING).compose(nil ->
             HFn.<Set<HArk>, Set<HArk>, Set<HArk>>combineT(
                 // 第一个异步结果
                 () -> this.context.registryAsync(this.container, config),
@@ -107,7 +107,7 @@ public class KPivot<T> {
 
     // ------------------------ 私有部分 -----------------------
     private Future<Set<HArk>> registryOut(final Set<HArk> source, final Set<HArk> extension) {
-        final Set<HArk> combine = KPivotT.combine(source, extension);
+        final Set<HArk> combine = KPivotTool.combine(source, extension);
         combine.forEach(RUNNING::registry);
         return Future.succeededFuture(combine);
     }

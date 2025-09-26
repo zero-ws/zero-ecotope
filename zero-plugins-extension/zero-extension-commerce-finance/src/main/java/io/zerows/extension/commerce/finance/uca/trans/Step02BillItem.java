@@ -1,5 +1,6 @@
 package io.zerows.extension.commerce.finance.uca.trans;
 
+import io.zerows.core.fn.RFn;
 import io.zerows.extension.commerce.finance.domain.tables.daos.FBillItemDao;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FBillItem;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FSettlement;
@@ -9,7 +10,6 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.extension.commerce.finance.uca.enter.Maker;
 import io.zerows.extension.commerce.finance.uca.replica.IkWay;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.Fx;
 import io.zerows.unity.Ux;
 import io.zerows.core.util.Ut;
 
@@ -75,7 +75,7 @@ class Step02BillItem implements Trade<FSettlement, FBillItem> {
             final JsonArray dataArray = grouped.get(key);
             futures.add(this.buildItems(dataArray, settlement));
         });
-        return Fx.combineT(futures).compose(combined -> {
+        return RFn.combineT(futures).compose(combined -> {
             final List<FBillItem> items = new ArrayList<>();
             combined.forEach(items::addAll);
             return Ux.future(items);

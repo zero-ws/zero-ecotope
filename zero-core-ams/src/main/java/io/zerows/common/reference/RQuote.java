@@ -1,8 +1,8 @@
 package io.zerows.common.reference;
 
+import io.vertx.core.json.JsonObject;
 import io.zerows.ams.util.HUt;
 import io.zerows.specification.modeling.HAttribute;
-import io.vertx.core.json.JsonObject;
 
 import java.io.Serializable;
 import java.util.concurrent.ConcurrentHashMap;
@@ -132,7 +132,7 @@ public class RQuote implements Serializable {
             final JsonObject sourceReference = referenceConfig.copy();
             this.sourceReference.put(name, sourceReference);
             /*
-             * InJson data format, here defined `rule` field and convert to `DataQRule`
+             * InJson data formatFail, here defined `rule` field and convert to `DataQRule`
              */
             final RRule rule = service.referenceRule();
             this.sourceRule.put(name, rule);

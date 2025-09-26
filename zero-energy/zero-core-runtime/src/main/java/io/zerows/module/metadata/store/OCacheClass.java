@@ -1,7 +1,7 @@
 package io.zerows.module.metadata.store;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.core.constant.KMeta;
+import io.zerows.boot.enums.VertxComponent;
 import io.zerows.core.util.Ut;
 import io.zerows.module.metadata.zdk.running.OCache;
 import org.osgi.framework.Bundle;
@@ -34,14 +34,14 @@ public interface OCacheClass extends OCache<Set<Class<?>>> {
             .collect(Collectors.toSet());
     }
 
-    static KMeta.Typed entireType(final Class<?> clazz) {
+    static VertxComponent entireType(final Class<?> clazz) {
         return OCacheClassAmbiguity.META().stream()
             .map(meta -> meta.getType(clazz))
             .filter(Objects::nonNull)
             .findFirst().orElse(null);
     }
 
-    static Set<Class<?>> entireValue(final KMeta.Typed type) {
+    static Set<Class<?>> entireValue(final VertxComponent type) {
         return OCacheClassAmbiguity.META().stream()
             .flatMap(meta -> meta.get(type).stream())
             .filter(Objects::nonNull)
@@ -50,9 +50,9 @@ public interface OCacheClass extends OCache<Set<Class<?>>> {
 
 
     // ------------------ 实例方法 ------------------
-    OCacheClass compile(KMeta.Typed type, Function<Set<Class<?>>, Set<Class<?>>> compiler);
+    OCacheClass compile(VertxComponent type, Function<Set<Class<?>>, Set<Class<?>>> compiler);
 
-    Set<Class<?>> value(KMeta.Typed type);
+    Set<Class<?>> value(VertxComponent type);
 
-    KMeta.Typed valueType(Class<?> clazz);
+    VertxComponent valueType(Class<?> clazz);
 }

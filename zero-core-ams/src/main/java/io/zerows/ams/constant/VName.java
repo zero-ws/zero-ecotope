@@ -172,7 +172,7 @@ public interface VName {
 
 
     String EPSILON = "epsilon";                  /* Dictionary Consumer */
-    String FORMAT = "format";                    /* DataFormat json configuration of uniform */
+    String FORMAT = "formatFail";                    /* DataFormat json configuration of uniform */
 
     String MATRIX = "matrix";                    /* Attribute Matrix for 8 dim */
     String REFERENCE = "reference";              /* Attribute Reference for */

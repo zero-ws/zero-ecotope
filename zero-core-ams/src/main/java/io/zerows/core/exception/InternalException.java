@@ -9,7 +9,8 @@ import io.zerows.ams.util.HUt;
  *
  * @author lang : 2023/4/27
  */
-public abstract class InternalException extends AbstractException {
+@Deprecated
+public abstract class InternalException extends BaseZeroException {
     private final Class<?> caller;
     private final String message;
 

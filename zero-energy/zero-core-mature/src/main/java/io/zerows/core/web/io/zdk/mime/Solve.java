@@ -15,7 +15,7 @@ public interface Solve<T> {
     /**
      * Resolving workflow in `Resolver`
      *
-     * @param content The body content of Class format
+     * @param content The body content of Class formatFail
      *
      * @return The deserialization generic pojo class here
      * @throws WebException exception of Web request

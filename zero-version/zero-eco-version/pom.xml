@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>zero-version</artifactId>
+        <groupId>io.zerows</groupId>
+        <version>1.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>zero-eco-version</artifactId>
+    <packaging>pom</packaging>
+    <name>Zero.Development.Kit.${project.version}</name>
+    <dependencyManagement>
+        <dependencies>
+            <!--======================== OSGI Runtime ===============-->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-core-ams</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-core-runtime</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-core-database</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!-- Zero Web Container -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-core-mature</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-core-web</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-core-testing</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-core-unity</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-core-container</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- Zero Standalone Entry -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-entry-facade</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!--======================== 将要移除部分 ===============-->
+
+            <!--======================== 核心插件 ===============-->
+            <!-- Zero Infix 插件 -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-plugins-equip</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!-- Zero Extension -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-extension-runtime-skeleton</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

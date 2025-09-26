@@ -31,9 +31,9 @@ package io.zerows.extension.runtime.workflow.eon.em;
  *    - Method 2:  MODEL_FORM -> ( filename stored ), static form
  *                            --- src/resources/plugin/ui/forms/
  *                            --- The MODEL_FORM stored the filename such as "request.data.form" ( InJson Format )
- *                            --- The extension is synced with camunda of form ( XML Format ) but format different
+ *                            --- The extension is synced with camunda of form ( XML Format ) but formatFail different
  *    - Method 3: INSTANCE -> W_INSTANCE -> ( formKey in camunda ) to read form
- *                            --- The format is:  camunda-forms:deployment:<MODEL_FORM> here
+ *                            --- The formatFail is:  camunda-forms:deployment:<MODEL_FORM> here
  * 4. Op extracting way（ in camunda the `idea` will move the node ）:
  *    - Start Action          --- Start new workflow in camunda
  *    - Approval Action       --- Confirm for processing

@@ -31,7 +31,7 @@ public class SockOptions implements Serializable {
     /*
      * The `input` parameter data structure should be:
      *
-     * The yml format
+     * The yml formatFail
      *
      * config:
      *    port:

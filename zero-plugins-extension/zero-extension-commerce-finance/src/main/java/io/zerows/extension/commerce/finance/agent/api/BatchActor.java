@@ -1,6 +1,6 @@
 package io.zerows.extension.commerce.finance.agent.api;
 
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.extension.commerce.finance.domain.tables.daos.FSettlementDao;
 import io.zerows.extension.commerce.finance.agent.service.end.DebtStub;
 import io.zerows.extension.commerce.finance.agent.service.end.SettleRStub;
@@ -28,7 +28,7 @@ public class BatchActor {
 
     @Address(Addr.Settle.FETCH_BY_KEY)
     public Future<JsonObject> fetchSettlement(final JsonArray keys) {
-        return Fx.ofJObject(this.settleRStub::fetchSettlement).apply(keys);
+        return RFn.ofJObject(this.settleRStub::fetchSettlement).apply(keys);
     }
 
 
@@ -45,6 +45,6 @@ public class BatchActor {
 
     @Address(Addr.Settle.FETCH_DEBT)
     public Future<JsonObject> fetchDebt(final JsonArray keys) {
-        return Fx.ofJObject(this.debtStub::fetchDebt).apply(keys);
+        return RFn.ofJObject(this.debtStub::fetchDebt).apply(keys);
     }
 }

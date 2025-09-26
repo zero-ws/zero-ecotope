@@ -6,7 +6,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.unity.Ux;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
@@ -42,7 +42,7 @@ public class BeforePk extends AbstractBefore {
                 futures.put(field, Ox.viGet(this.atom, identifier, viField, viValue));
             }
         });
-        return Fx.combineM(futures).compose(map -> {
+        return RFn.combineM(futures).compose(map -> {
             config.keySet().forEach(field -> {
                 final HRecord ref = map.getOrDefault(field, null);
                 final Object value = this.extractValue(ref, config.getOrDefault(field, new JsonObject()));
@@ -66,7 +66,7 @@ public class BeforePk extends AbstractBefore {
                 futures.put(field, Ox.viGetMap(this.atom, identifier, viField, Ut.toJArray(values)));
             }
         });
-        return Fx.combineM(futures).compose(map -> {
+        return RFn.combineM(futures).compose(map -> {
             // 单字段读取
             Ut.itJArray(records).forEach(record -> map.forEach((field, valueMap) -> {
                 /*

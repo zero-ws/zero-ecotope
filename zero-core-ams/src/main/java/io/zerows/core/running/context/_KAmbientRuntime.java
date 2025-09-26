@@ -2,11 +2,11 @@ package io.zerows.core.running.context;
 
 import io.zerows.ams.constant.VName;
 import io.zerows.ams.constant.em.EmApp;
+import io.zerows.ams.util.HUt;
 import io.zerows.specification.access.HBelong;
 import io.zerows.specification.access.app.HApp;
 import io.zerows.specification.access.app.HArk;
 import io.zerows.specification.vital.HOI;
-import io.zerows.ams.util.HUt;
 
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
@@ -15,7 +15,7 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * @author lang : 2023-06-07
  */
-class KAmbientRuntime {
+class _KAmbientRuntime {
     private static final ConcurrentMap<String, String> VECTOR = new ConcurrentHashMap<>();
 
     /**

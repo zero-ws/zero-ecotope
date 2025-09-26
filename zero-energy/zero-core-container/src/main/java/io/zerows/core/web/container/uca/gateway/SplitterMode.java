@@ -3,7 +3,7 @@ package io.zerows.core.web.container.uca.gateway;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.core.annotations.Address;
 import io.zerows.core.annotations.Ipc;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.core.web.container.exception.BootChannelMultiException;
 import io.zerows.core.web.io.zdk.Aim;
@@ -39,7 +39,7 @@ public class SplitterMode {
         final boolean annotated = method.isAnnotationPresent(Address.class);
         final boolean rpc = method.isAnnotationPresent(Ipc.class);
         // 2. Only one channel enabled
-        Fx.outBoot(rpc && annotated, LOGGER, BootChannelMultiException.class,
+        RFn.outBoot(rpc && annotated, LOGGER, BootChannelMultiException.class,
             this.getClass(), method);
 
         final Differ<RoutingContext> differ;

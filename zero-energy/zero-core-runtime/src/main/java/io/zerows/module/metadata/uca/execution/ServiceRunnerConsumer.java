@@ -1,7 +1,7 @@
 package io.zerows.module.metadata.uca.execution;
 
 import io.vertx.core.Future;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.module.metadata.atom.service.CallbackParameter;
 import io.zerows.module.metadata.zdk.service.ServiceInvocation;
 import org.osgi.framework.Bundle;
@@ -26,7 +26,7 @@ class ServiceRunnerConsumer extends AbstractServiceRunner {
         waitServices.stream().map(invocation -> Exec.startInvoke(invocation, parameter.context()))
             .forEach(executed::add);
 
-        Fx.combineT(executed).onComplete(this::handleExecuted);
+        RFn.combineT(executed).onComplete(this::handleExecuted);
     }
 
     @Override
@@ -37,7 +37,7 @@ class ServiceRunnerConsumer extends AbstractServiceRunner {
         waitServices.stream().map(invocation -> Exec.stopInvoke(invocation, parameter.context()))
             .forEach(executed::add);
 
-        Fx.combineT(executed).onComplete(this::handleExecuted);
+        RFn.combineT(executed).onComplete(this::handleExecuted);
     }
 
     private Set<ServiceInvocation> getServices(final CallbackParameter parameter) {

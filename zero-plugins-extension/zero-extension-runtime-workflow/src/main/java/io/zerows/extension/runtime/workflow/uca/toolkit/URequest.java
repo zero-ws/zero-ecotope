@@ -44,7 +44,7 @@ public class URequest {
          * Fix issue: Cannot deserialize value of type `java.lang.String` from Object value (token `JsonToken.START_OBJECT`)
          * through reference chain: io.zerows.extension.running.workflow.domain.tables.pojos.WTodo["toUser"]
          *
-         * Because there are three data format of `toUser`
+         * Because there are three data formatFail of `toUser`
          * 1) String
          * 2) JsonObject
          * 3) JsonArray
@@ -54,7 +54,7 @@ public class URequest {
          *
          * 1) When the user click `Saving` button instead of `Submit`
          * -- 1.1) Based on configuration these kind of situation, the `toUser` could not be JsonObject / JsonArray
-         * -- 1.2) When the `toUser` is String format, it also could be updated in code logical
+         * -- 1.2) When the `toUser` is String formatFail, it also could be updated in code logical
          * 2) When the user click `Submit` button
          * -- In this kind of situation, this field is not needed to be updated here because the `toUser` stored the
          *    previous field value here.

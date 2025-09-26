@@ -49,7 +49,7 @@
         </repository>
     </distributionManagement>
     <modules>
-        <module>zero-core-version</module>
+        <module>zero-version</module>
         <module>zero-bootstrap</module>
         <module>zero-core-ams</module>
         <module>zero-energy</module>

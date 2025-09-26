@@ -12,7 +12,7 @@ import java.time.temporal.TemporalAdjusters;
 class JobWeekly extends AbstractJobAt {
 
     /*
-     * The time format should be:
+     * The time formatFail should be:
      *
      * W,00:15/2,00:16/4 ....
      */

@@ -2,7 +2,7 @@ package io.zerows.module.metadata.zdk.plugins;
 
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.core.util.Ut;
 import io.zerows.module.metadata.exception.BootDynamicKeyMissingException;
 import io.zerows.module.metadata.store.OZeroStore;
@@ -30,7 +30,7 @@ public class InfixConfig implements Serializable {
     public InfixConfig(final String key, final String rule) {
         final JsonObject raw = OZeroStore.option(key);
         // Check up exception for key
-        Fx.outBoot(!OZeroStore.is(key),
+        RFn.outBoot(!OZeroStore.is(key),
             LOGGER, BootDynamicKeyMissingException.class,
             this.getClass(), key, raw);
 
@@ -41,12 +41,12 @@ public class InfixConfig implements Serializable {
 
     public static InfixConfig create(final String key) {
         return CC_CACHE.pick(() -> new InfixConfig(key, null), key);
-        // return Fx.po?l(CACHE, key, () -> new InfixConfig(key, null));
+        // return RFn.po?l(CACHE, key, () -> new InfixConfig(key, null));
     }
 
     public static InfixConfig create(final String key, final String rule) {
         return CC_CACHE.pick(() -> new InfixConfig(key, rule), key);
-        // return Fx.po?l(CACHE, key, () -> new InfixConfig(key, rule));
+        // return RFn.po?l(CACHE, key, () -> new InfixConfig(key, rule));
     }
 
     public JsonObject getConfig() {

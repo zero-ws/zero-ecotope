@@ -8,7 +8,7 @@ class _Color extends _App {
     }
 
     /*
-     * flag(N|B)(Color)       String.format （只支持单参）
+     * flag(N|B)(Color)       String.formatFail （只支持单参）
      */
     // color = blank
     public static String rgbBlankB(final String pattern, final String flag) {

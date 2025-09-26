@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.unity.Ux;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.mbse.ui.domain.tables.daos.UiControlDao;
@@ -52,7 +52,7 @@ public class ControlService implements ControlStub {
         return Ux.Jooq.on(UiControlDao.class)
             .<UiControl>fetchByIdAsync(control)
             .compose(Ux::futureJ)
-            .compose(Fx.ofJObject(
+            .compose(RFn.ofJObject(
                 KName.Ui.CONTAINER_CONFIG,
                 KName.Ui.COMPONENT_CONFIG,
                 KName.Ui.ASSIST,

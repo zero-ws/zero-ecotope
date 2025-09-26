@@ -1,10 +1,10 @@
 package io.zerows.common.app;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.exception.boot.CombineAppException;
+import io.zerows.ams.util.HUt;
+import io.zerows.core.exception.boot._40101Exception500CombineApp;
 import io.zerows.core.running.HMacrocosm;
 import io.zerows.specification.access.app.HApp;
-import io.zerows.ams.util.HUt;
 
 import java.util.Objects;
 
@@ -71,7 +71,7 @@ public class KApp implements HApp {
             this.option().mergeIn(HUt.valueJObject(target.option()));
             return this;
         } else {
-            throw new CombineAppException(this.getClass(), this.ns, this.name);
+            throw new _40101Exception500CombineApp(this.ns, this.name);
         }
     }
 

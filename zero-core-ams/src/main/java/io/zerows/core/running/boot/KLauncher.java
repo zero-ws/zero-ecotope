@@ -1,14 +1,14 @@
 package io.zerows.core.running.boot;
 
+import io.r2mo.spi.SPI;
 import io.vertx.core.json.JsonArray;
 import io.zerows.ams.constant.VMessage;
-import io.zerows.core.exception.internal.BootIoMissingException;
+import io.zerows.core.exception.boot._11010Exception500BootIoMissing;
 import io.zerows.core.spi.BootIo;
 import io.zerows.core.uca.log.LogAs;
 import io.zerows.specification.access.HLauncher;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HEnergy;
-import io.zerows.ams.util.HUt;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -30,9 +30,9 @@ public class KLauncher<T> {
 
     private KLauncher(final Class<?> bootCls, final String[] args) {
         /*  提取SPI部分，严格模式  */
-        final BootIo io = HUt.service(BootIo.class);
+        final BootIo io = SPI.findOne(BootIo.class);
         if (Objects.isNull(io)) {
-            throw new BootIoMissingException(bootCls);
+            throw new _11010Exception500BootIoMissing(getClass());
         }
 
 

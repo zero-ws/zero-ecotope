@@ -22,7 +22,7 @@ Extension by zero for specifical usage.
 ## 2. Fn
 
 In Zero system, there defined a supper static class for function abstract to simply the coding, this class
-is `io.zerows.core.fn.Fx`, You also could use following function in your coding.
+is `io.zerows.core.fn.RFn`, You also could use following function in your coding.
 
 ```java
 // Zero Logger initialized, connect to vert.x logging system directly but uniform managed by zero.

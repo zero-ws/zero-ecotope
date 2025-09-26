@@ -1,8 +1,8 @@
 package io.zerows.core.exception;
 
-import io.zerows.common.program.KFailure;
 import io.zerows.ams.constant.VString;
 import io.zerows.ams.constant.error.ErrorMessage;
+import io.zerows.common.program.KFailure;
 import io.zerows.core.spi.HorizonIo;
 
 /**
@@ -10,7 +10,8 @@ import io.zerows.core.spi.HorizonIo;
  * 1. 模型校验
  * 2. 容器启动
  */
-public abstract class BootingException extends AbstractException {
+@Deprecated
+public abstract class BootingException extends BaseZeroException {
 
     private final KFailure failure;
 

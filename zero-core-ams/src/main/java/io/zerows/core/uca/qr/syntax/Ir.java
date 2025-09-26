@@ -167,7 +167,7 @@ public interface Ir {
      */
     interface Instant {
         /**
-         * {@link java.time.LocalDate} Date format only here.
+         * {@link java.time.LocalDate} Date formatFail only here.
          */
         String DAY = "day";
         /**
@@ -175,11 +175,11 @@ public interface Ir {
          */
         String DATE = "date";
         /**
-         * {@link java.time.LocalTime} Time format only.
+         * {@link java.time.LocalTime} Time formatFail only.
          */
         String TIME = "time";
         /**
-         * {@link java.time.LocalDateTime} Full format and timestamp.
+         * {@link java.time.LocalDateTime} Full formatFail and timestamp.
          */
         String DATETIME = "datetime";
 

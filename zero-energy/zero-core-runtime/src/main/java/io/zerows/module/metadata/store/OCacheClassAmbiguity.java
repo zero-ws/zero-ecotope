@@ -1,6 +1,6 @@
 package io.zerows.module.metadata.store;
 
-import io.zerows.core.constant.KMeta;
+import io.zerows.boot.enums.VertxComponent;
 import io.zerows.module.metadata.uca.scanner.ClassScanner;
 import io.zerows.module.metadata.zdk.AbstractAmbiguity;
 import io.zerows.module.metadata.zdk.uca.Inquirer;
@@ -73,13 +73,13 @@ class OCacheClassAmbiguity extends AbstractAmbiguity implements OCacheClass {
     }
 
     @Override
-    public Set<Class<?>> value(final KMeta.Typed type) {
+    public Set<Class<?>> value(final VertxComponent type) {
         return this.meta.get(type);
     }
 
     @Override
-    public KMeta.Typed valueType(final Class<?> clazz) {
-        KMeta.Typed type = this.meta.getType(clazz);
+    public VertxComponent valueType(final Class<?> clazz) {
+        VertxComponent type = this.meta.getType(clazz);
         if (Objects.isNull(type)) {
             this.logger().info("Could not extract type from bundle, try to parse from Global Data. class = \"{}\"",
                 clazz.getName());
@@ -103,7 +103,7 @@ class OCacheClassAmbiguity extends AbstractAmbiguity implements OCacheClass {
     }
 
     @Override
-    public OCacheClass compile(final KMeta.Typed type, final Function<Set<Class<?>>, Set<Class<?>>> compiler) {
+    public OCacheClass compile(final VertxComponent type, final Function<Set<Class<?>>, Set<Class<?>>> compiler) {
         if (Objects.isNull(this.caller())) {
             this.logger().info("Scanned \"{}\" of typed classes from current environment.",
                 type.name());
@@ -132,7 +132,7 @@ class OCacheClassAmbiguity extends AbstractAmbiguity implements OCacheClass {
     static class OClassCacheInternal {
 
         private final Set<Class<?>> classSet = new HashSet<>();
-        private final ConcurrentMap<KMeta.Typed, Set<Class<?>>> classMap = new ConcurrentHashMap<>();
+        private final ConcurrentMap<VertxComponent, Set<Class<?>>> classMap = new ConcurrentHashMap<>();
 
         private OClassCacheInternal() {
         }
@@ -145,7 +145,7 @@ class OCacheClassAmbiguity extends AbstractAmbiguity implements OCacheClass {
             this.classSet.addAll(classes);
         }
 
-        void addBy(final KMeta.Typed type, final Set<Class<?>> classes) {
+        void addBy(final VertxComponent type, final Set<Class<?>> classes) {
             final Set<Class<?>> stored = this.classMap.getOrDefault(type, new HashSet<>());
             stored.addAll(classes);
             this.classMap.put(type, stored);
@@ -159,7 +159,7 @@ class OCacheClassAmbiguity extends AbstractAmbiguity implements OCacheClass {
          * @param type     类型
          * @param compiler 编译器
          */
-        void compile(final KMeta.Typed type, final Function<Set<Class<?>>, Set<Class<?>>> compiler) {
+        void compile(final VertxComponent type, final Function<Set<Class<?>>, Set<Class<?>>> compiler) {
             this.addBy(type, compiler.apply(this.classSet));
         }
 
@@ -167,12 +167,12 @@ class OCacheClassAmbiguity extends AbstractAmbiguity implements OCacheClass {
             return this.classSet;
         }
 
-        Set<Class<?>> get(final KMeta.Typed type) {
+        Set<Class<?>> get(final VertxComponent type) {
             return this.classMap.getOrDefault(type, new HashSet<>());
         }
 
-        KMeta.Typed getType(final Class<?> clazz) {
-            for (final KMeta.Typed type : this.classMap.keySet()) {
+        VertxComponent getType(final Class<?> clazz) {
+            for (final VertxComponent type : this.classMap.keySet()) {
                 if (this.classMap.get(type).contains(clazz)) {
                     return type;
                 }
@@ -180,7 +180,7 @@ class OCacheClassAmbiguity extends AbstractAmbiguity implements OCacheClass {
             return null;
         }
 
-        void remove(final KMeta.Typed type) {
+        void remove(final VertxComponent type) {
             final Set<Class<?>> removed = this.classMap.remove(type);
 
             this.classSet.removeAll(removed);

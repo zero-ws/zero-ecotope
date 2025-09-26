@@ -2,7 +2,7 @@ package io.zerows.extension.runtime.workflow.uca.toolkit;
 
 import io.zerows.ams.constant.VValue;
 import io.zerows.ams.constant.em.typed.ChangeFlag;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.core.uca.aop.Around;
 import io.zerows.core.uca.aop.Aspect;
 import io.zerows.core.uca.aop.AspectRobin;
@@ -118,7 +118,7 @@ public class UTracker {
                     .apply(json);
                 runner.add(future);
             });
-            return Fx.combineA(runner).compose(nil -> Ux.future(record));
+            return RFn.combineA(runner).compose(nil -> Ux.future(record));
         }
     }
 

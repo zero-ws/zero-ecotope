@@ -32,7 +32,7 @@ public class Terminal {
     private Terminal(final Vertx vertx) {
         this.vertx = vertx;
         this.scanner = CC_SCANNER.pick(() -> new Scanner(System.in), vertx.hashCode());
-        // Fx.po?l(POOL_SCANNER, vertx.hashCode(), () -> new Scanner(System.in));
+        // RFn.po?l(POOL_SCANNER, vertx.hashCode(), () -> new Scanner(System.in));
         this.scanner.useDelimiter("\n");
     }
 

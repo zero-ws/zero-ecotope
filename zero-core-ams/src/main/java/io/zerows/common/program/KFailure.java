@@ -3,17 +3,17 @@ package io.zerows.common.program;
 import io.vertx.core.json.JsonObject;
 import io.zerows.ams.constant.em.app.HttpStatusCode;
 import io.zerows.ams.util.HUt;
-import io.zerows.core.exception.AbstractException;
+import io.zerows.core.exception.BaseZeroException;
 import io.zerows.core.exception.WebException;
-import io.zerows.core.exception.internal.ErrorMissingException;
-import io.zerows.core.exception.internal.SPINullException;
+import io.zerows.core.exception.boot._11000Exception404SPINotFound;
+import io.zerows.core.exception.boot._11003Exception404ErrorMissing;
 import io.zerows.core.spi.HorizonIo;
 import io.zerows.core.uca.log.Log;
 
 import java.util.Objects;
 
 /**
- * 新容器，带内置 SPI 绑定的专用异常信息处理程序，用于桥接 {@link AbstractException} 实现消息的
+ * 新容器，带内置 SPI 绑定的专用异常信息处理程序，用于桥接 {@link BaseZeroException} 实现消息的
  * 可定制化，包括不同上下文环境的消息定制化部分。
  * <pre><code>
  *     1. 在原始基础上追加一层，每个异常构造构造时构造对应的 {@link KFailure}
@@ -101,7 +101,7 @@ public class KFailure {
                     this.message = HUt.fromMessage(this.pattern, String.valueOf(this.errorCode), this.caller.getSimpleName(), error);
                 }
             } else {
-                throw new ErrorMissingException(this.caller, this.errorCode);
+                throw new _11003Exception404ErrorMissing(this.errorCode);
             }
         }
         return this.message;
@@ -144,7 +144,7 @@ public class KFailure {
             // 外部传入的 HorizonIo
             this.horizonIo;
         if (Objects.isNull(io)) {
-            throw new SPINullException(this.getClass());
+            throw new _11000Exception404SPINotFound(this.getClass());
         }
         Log.info(this.getClass(), "HorizonIo = {0}", io.getClass().getName());
         return io;

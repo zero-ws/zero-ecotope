@@ -15,12 +15,12 @@ public interface UiValve {
 
     static UiValve dynamic() {
         return CC_VALVE.pick(StoreValve::new, StoreValve.class.getName());
-        // return Fx.po?l(Pool.VALVE_MAP, StoreValve.class.getName(), StoreValve::new);
+        // return RFn.po?l(Pool.VALVE_MAP, StoreValve.class.getName(), StoreValve::new);
     }
 
     static UiValve fixed() {
         return CC_VALVE.pick(FileValve::new, FileValve.class.getName());
-        // return Fx.po?l(Pool.VALVE_MAP, FileValve.class.getName(), FileValve::new);
+        // return RFn.po?l(Pool.VALVE_MAP, FileValve.class.getName(), FileValve::new);
     }
 
     Future<JsonArray> fetchColumn(Vis view, String identifier, String sigma);

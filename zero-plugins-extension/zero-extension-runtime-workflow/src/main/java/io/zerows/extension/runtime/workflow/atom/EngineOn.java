@@ -1,6 +1,6 @@
 package io.zerows.extension.runtime.workflow.atom;
 
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.runtime.workflow.atom.configuration.MetaInstance;
 import io.zerows.extension.runtime.workflow.atom.runtime.WRequest;
@@ -44,7 +44,7 @@ public class EngineOn {
         return WfPool.CC_ENGINE.pick(() -> {
             final WFlow flow = WfPin.getFlow(definitionKey);
             /* Defined Exception throw out because of configuration data */
-            Fx.out(Objects.isNull(flow), _404WorkflowNullException.class, EngineOn.class, definitionKey);
+            RFn.out(Objects.isNull(flow), _404WorkflowNullException.class, EngineOn.class, definitionKey);
             return new EngineOn(flow);
         }, definitionKey);
     }
@@ -161,7 +161,7 @@ public class EngineOn {
     private <C extends Behaviour> C component(final Class<?> clazz, final String componentValue) {
         final String keyComponent = this.metadata.recordComponentKey(clazz, componentValue);
         /*
-         * Here are component pool based on keyComponent, the format is as following:
+         * Here are component pool based on keyComponent, the formatFail is as following:
          * className + ConfigRecord ( hashCode ) + componentValue ( hashCode Optional )
          * - authorizedComponent
          *   authorized on user to check who could do actions

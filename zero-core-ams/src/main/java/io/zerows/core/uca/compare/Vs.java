@@ -33,15 +33,15 @@ public class Vs implements Serializable {
     /**
      * Here are new `typeMap` of name = HTField
      *
-     * Because HTField contains `type, name, alias` and etc, it means that you can determine the format
+     * Because HTField contains `type, name, alias` and etc, it means that you can determine the formatFail
      * Elementary / JsonObject / JsonArray by `isComplex` here.
      *
-     * When format = Elementary ( Not Complex )
+     * When formatFail = Elementary ( Not Complex )
      *
      * 1. name is the attribute name of model ( HAttribute ).
      * 2. type is the java type that could be reflected ( stored in HTField )
      *
-     * When format = JsonObject / JsonArray ( Complex )
+     * When formatFail = JsonObject / JsonArray ( Complex )
      *
      * 1. name is the attribute name of model ( HAttribute ).
      * 2. The data type is fixed: JsonObject / JsonArray.

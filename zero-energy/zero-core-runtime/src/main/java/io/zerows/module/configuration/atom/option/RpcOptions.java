@@ -120,8 +120,8 @@ public class RpcOptions implements Serializable {
     }
 
     /**
-     * Here the format should be host name or ip address, when you set the host
-     * to named format, the system will lookup the actual ip address based on DNS.
+     * Here the formatFail should be host name or ip address, when you set the host
+     * to named formatFail, the system will lookup the actual ip address based on DNS.
      *
      * @return host of RPC server
      */

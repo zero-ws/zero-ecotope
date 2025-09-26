@@ -3,8 +3,8 @@ package io.zerows.core.web.container.uca.store;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Vertx;
 import io.zerows.ams.constant.VString;
+import io.zerows.boot.enums.VertxComponent;
 import io.zerows.core.annotations.Infusion;
-import io.zerows.core.constant.KMeta;
 import io.zerows.core.exception.web._501NotSupportException;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.container.store.under.StoreVertx;
@@ -36,21 +36,21 @@ public interface StubLinear {
 
     Cc<String, StubLinear> CC_SKELETON = Cc.open();
 
-    ConcurrentMap<KMeta.Typed, Function<Bundle, StubLinear>> RUNNER = new ConcurrentHashMap<>() {
+    ConcurrentMap<VertxComponent, Function<Bundle, StubLinear>> RUNNER = new ConcurrentHashMap<>() {
         {
-            this.put(KMeta.Typed.AGENT, LinearAgent::new);
-            this.put(KMeta.Typed.WORKER, LinearWorker::new);
-            this.put(KMeta.Typed.IPC, LinearRpc::new);
-            this.put(KMeta.Typed.CODEX, LinearCodex::new);
-            this.put(KMeta.Typed.INFUSION, LinearInfusion::new);
+            this.put(VertxComponent.AGENT, LinearAgent::new);
+            this.put(VertxComponent.WORKER, LinearWorker::new);
+            this.put(VertxComponent.IPC, LinearRpc::new);
+            this.put(VertxComponent.CODEX, LinearCodex::new);
+            this.put(VertxComponent.INFUSION, LinearInfusion::new);
         }
     };
 
-    static StubLinear of(final KMeta.Typed type) {
+    static StubLinear of(final VertxComponent type) {
         return of(null, type);
     }
 
-    static StubLinear of(final Bundle bundle, final KMeta.Typed type) {
+    static StubLinear of(final Bundle bundle, final VertxComponent type) {
         final String cacheKey = Ut.Bnd.keyCache(bundle, StubLinear.class);
         final String cacheLinear = type.name() + VString.SLASH + cacheKey;
         return StubLinear.CC_SKELETON.pick(() -> {
@@ -62,7 +62,7 @@ public interface StubLinear {
     }
 
     // --------------------- 启动执行 ---------------------
-    static void standalone(final Vertx vertx, final KMeta.Typed type) {
+    static void standalone(final Vertx vertx, final VertxComponent type) {
         final RunVertx runVertx = StoreVertx.of(null).valueGet(vertx.hashCode());
         final Set<Class<?>> scanClass = OCacheClass.entireValue(type);
         final StubLinear linear = StubLinear.of(type);

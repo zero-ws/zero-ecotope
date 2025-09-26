@@ -29,22 +29,22 @@ public class At {
 
     public static Init initApp() {
         return CC_INIT.pick(AppInit::new, AppInit.class.getName());
-        // return Fx.po?l(Pool.INIT_POOL, AppInit.class.getName(), AppInit::new);
+        // return RFn.po?l(Pool.INIT_POOL, AppInit.class.getName(), AppInit::new);
     }
 
     public static Init initSource() {
         return CC_INIT.pick(SourceInit::new, SourceInit.class.getName());
-        // return Fx.po?l(Pool.INIT_POOL, SourceInit.class.getName(), SourceInit::new);
+        // return RFn.po?l(Pool.INIT_POOL, SourceInit.class.getName(), SourceInit::new);
     }
 
     public static Init initDatabase() {
         return CC_INIT.pick(DatabaseInit::new, DatabaseInit.class.getName());
-        // return Fx.po?l(Pool.INIT_POOL, DatabaseInit.class.getName(), DatabaseInit::new);
+        // return RFn.po?l(Pool.INIT_POOL, DatabaseInit.class.getName(), DatabaseInit::new);
     }
 
     public static Init initData() {
         return CC_INIT.pick(DatumInit::new, DatumInit.class.getName());
-        // return Fx.po?l(Pool.INIT_POOL, DatumInit.class.getName(), DatumInit::new);
+        // return RFn.po?l(Pool.INIT_POOL, DatumInit.class.getName(), DatumInit::new);
     }
 
     public static List<String> generate(final XNumber number, final Integer count) {

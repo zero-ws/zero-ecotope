@@ -25,7 +25,7 @@ public interface Auditor {
     static Auditor history(final DataAtom atom, final JsonObject options) {
         final String catchKey = Ut.keyAtom(atom, options);
         return AuditorHistory.CC_AUDITOR.pick(() -> new AuditorHistory(options).bind(atom), catchKey);
-        // Fx.po?l(AuditorHistory.POOL_HISTORY, argument.atomKey(options), () -> new AuditorHistory(options).bind(argument));
+        // RFn.po?l(AuditorHistory.POOL_HISTORY, argument.atomKey(options), () -> new AuditorHistory(options).bind(argument));
     }
 
     Auditor bind(DataAtom atom);

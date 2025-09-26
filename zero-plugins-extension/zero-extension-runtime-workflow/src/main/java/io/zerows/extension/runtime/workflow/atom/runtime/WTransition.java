@@ -3,7 +3,6 @@ package io.zerows.extension.runtime.workflow.atom.runtime;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.unity.Ux;
 import io.zerows.core.constant.KName;
 import io.zerows.core.uca.aop.AspectRobin;
 import io.zerows.core.util.Ut;
@@ -15,6 +14,7 @@ import io.zerows.extension.runtime.workflow.uca.camunda.Io;
 import io.zerows.extension.runtime.workflow.uca.conformity.Gear;
 import io.zerows.extension.runtime.workflow.util.Wf;
 import io.zerows.module.domain.atom.specification.KFlow;
+import io.zerows.unity.Ux;
 import org.camunda.bpm.engine.repository.ProcessDefinition;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.task.Task;
@@ -161,7 +161,7 @@ public class WTransition {
      * 4) Grid
      *
      * For different PassWay here
-     * 1. Before Camunda Engine, the PassWay will be calculated by data format.
+     * 1. Before Camunda Engine, the PassWay will be calculated by data formatFail.
      * 2. After Camunda Engine, the PassWay could be passed directly
      */
     public Future<WTransition> end(final ProcessInstance instance) {

@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.unity.Ux;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XCategoryDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XCategory;
@@ -43,7 +43,7 @@ public class CatalogArbor extends AbstractArbor {
                 });
                 return Ux.futureA(compress);
             })
-            .compose(Fx.ofJArray(
+            .compose(RFn.ofJArray(
                 KName.METADATA,
                 KName.Component.TREE_CONFIG,
                 KName.Component.RUN_CONFIG

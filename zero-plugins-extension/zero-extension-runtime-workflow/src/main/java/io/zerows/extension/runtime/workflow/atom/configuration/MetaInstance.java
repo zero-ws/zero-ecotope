@@ -1,15 +1,15 @@
 package io.zerows.extension.runtime.workflow.atom.configuration;
 
-import io.zerows.extension.runtime.workflow.eon.em.RecordMode;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.extension.runtime.workflow.atom.runtime.WRecord;
-import io.zerows.extension.runtime.workflow.uca.modeling.Respect;
 import io.zerows.core.constant.KName;
-import io.zerows.unity.Ux;
-import io.zerows.core.util.Ut;
 import io.zerows.core.database.jooq.operation.UxJooq;
+import io.zerows.core.util.Ut;
+import io.zerows.extension.runtime.workflow.atom.runtime.WRecord;
+import io.zerows.extension.runtime.workflow.eon.em.RecordMode;
+import io.zerows.extension.runtime.workflow.uca.modeling.Respect;
+import io.zerows.unity.Ux;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -25,13 +25,13 @@ public class MetaInstance {
     private final transient ConfigChild children;
 
     /*
-     * The format of startJson to web following instances:
+     * The formatFail of startJson to web following instances:
      * - ConfigRecord
      * - ConfigTodo
      * - ConfigLinkage
      * - ConfigChild
      *
-     * The configuration format
+     * The configuration formatFail
      * {
      *     "todo": {},
      *     "record": {},

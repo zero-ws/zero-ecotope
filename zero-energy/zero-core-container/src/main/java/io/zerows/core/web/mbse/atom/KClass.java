@@ -22,7 +22,7 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.function.BiFunction;
 
 /**
- * M/U means modal unit, its format is following, please refer the related definition.yml file and definition.json
+ * M/U means modal unit, its formatFail is following, please refer the related definition.yml file and definition.json
  * file for more details of KClass structure.
  * KClass will be shared data structure ( JsonObject Part ) with KModule in up framework
  *

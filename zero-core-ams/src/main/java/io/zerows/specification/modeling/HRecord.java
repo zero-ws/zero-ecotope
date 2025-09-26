@@ -1,7 +1,7 @@
 package io.zerows.specification.modeling;
 
-import io.zerows.ams.constant.VValue;
 import io.vertx.core.json.JsonObject;
+import io.zerows.ams.constant.VValue;
 import io.zerows.specification.atomic.HJson;
 
 import java.io.Serializable;
@@ -10,11 +10,11 @@ import java.util.concurrent.ConcurrentMap;
 
 /*
  * Record interface for some data record using
- * 1. namespace: There are some format of `xxx.yyy.xxx`, and each `application` must contain only one namespace,
+ * 1. namespace: There are some formatFail of `xxx.yyy.xxx`, and each `application` must contain only one namespace,
  * it must be income scope to split different application.
  * 2. identifier: In the whole environment, there must be gold rule:
  *  2.1 ) namespace + identifier should be unique ( Business Scope )
- *  2.2 ) Above format should be global id of one defined model.
+ *  2.2 ) Above formatFail should be global id of one defined model.
  */
 public interface HRecord extends Serializable, HMeta, HCheck, HClone, HJson {
     /*

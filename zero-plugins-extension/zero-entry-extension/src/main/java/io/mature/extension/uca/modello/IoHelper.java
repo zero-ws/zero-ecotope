@@ -1,8 +1,8 @@
 package io.mature.extension.uca.modello;
 
-import io.zerows.ams.constant.em.modeling.EmValue;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.ams.constant.em.modeling.EmValue;
 import io.zerows.core.constant.KName;
 import io.zerows.core.util.Ut;
 import io.zerows.specification.modeling.HRecord;
@@ -54,7 +54,7 @@ class IoHelper {
      *     "attribute": {
      *          "name": "xxx",
      *          "alias": "Text",
-     *          "format": "JsonArray | JsonObject | Elementary"
+     *          "formatFail": "JsonArray | JsonObject | Elementary"
      *     },
      *     "sourceData": {},
      *     "source": "来源模型identifier",
@@ -82,7 +82,7 @@ class IoHelper {
      * // <pre><code class="json">
      * {
      *     "name": "当前属性名称",
-     *     "format": "当前属性数据类型",
+     *     "formatFail": "当前属性数据类型",
      *     "rule": "PREFIX,...",
      *     "result": "ONE"
      * }

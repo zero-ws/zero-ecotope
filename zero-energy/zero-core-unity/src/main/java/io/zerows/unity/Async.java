@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.Promise;
 import io.zerows.ams.constant.VValue;
 import io.zerows.common.program.KRef;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.core.util.Ut;
 import io.zerows.module.metadata.osgi.channel.Pocket;
 import io.zerows.module.metadata.uca.logging.OLog;
@@ -36,7 +36,7 @@ class Async {
     static <T> Future<T> future(final T input, final Set<Function<T, Future<T>>> set) {
         final List<Future<T>> futures = new ArrayList<>();
         set.stream().map(consumer -> consumer.apply(input)).forEach(futures::add);
-        Fx.combineT(futures).compose(nil -> {
+        RFn.combineT(futures).compose(nil -> {
             LOGGER.info("「Job Infusion」 There are `{0}` jobs that are finished successfully!", String.valueOf(set.size()));
             return ToCommon.future(nil);
         });

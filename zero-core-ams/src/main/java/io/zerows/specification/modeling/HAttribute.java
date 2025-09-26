@@ -1,8 +1,8 @@
 package io.zerows.specification.modeling;
 
+import io.zerows.ams.constant.em.modeling.EmValue;
 import io.zerows.common.normalize.KMarkAttribute;
 import io.zerows.common.reference.RRule;
-import io.zerows.ams.constant.em.modeling.EmValue;
 import io.zerows.specification.modeling.metadata.HMetaField;
 
 import java.util.List;
@@ -36,7 +36,7 @@ import java.util.List;
  *     "name",
  *     "alias",
  *     "type",
- *     "format": "JsonArray, JsonObject, Elementary, Expression",
+ *     "formatFail": "JsonArray, JsonObject, Elementary, Expression",
  *     "fields": [
  *         {
  *              "field": "",

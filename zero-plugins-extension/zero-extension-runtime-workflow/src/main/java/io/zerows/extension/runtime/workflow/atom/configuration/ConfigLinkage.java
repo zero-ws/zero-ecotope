@@ -88,6 +88,6 @@ class ConfigLinkage implements Serializable {
         final Class<?> respectCls = this.respectMap.get(field);
         final String hashKey = Ut.encryptMD5(field + query.hashCode() + respectCls.getName());
         return CC_RESPECT.pick(() -> Ut.instance(respectCls, query), hashKey);
-        // Fx.p?ol(POOL_RESPECT, hashKey, () -> Ut.instance(respectCls, query));
+        // RFn.p?ol(POOL_RESPECT, hashKey, () -> Ut.instance(respectCls, query));
     }
 }

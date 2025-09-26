@@ -1,7 +1,7 @@
 package io.zerows.extension.runtime.ambient.bootstrap;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.model.extension.HExtension;
 import io.zerows.extension.runtime.ambient.eon.AtConstant;
@@ -50,7 +50,7 @@ final class AtConfiguration {
         if (Objects.isNull(initClass)) {
             return null;
         } else {
-            Fx.outWeb(!Ut.isImplement(initClass, Init.class), _500InitSpecificationException.class,
+            RFn.outWeb(!Ut.isImplement(initClass, Init.class), _500InitSpecificationException.class,
                 AtPin.class, initClass.getName());
             return Init.generate(initClass);
         }
@@ -61,7 +61,7 @@ final class AtConfiguration {
         if (Objects.isNull(prerequisite)) {
             return null;
         } else {
-            Fx.outWeb(!Ut.isImplement(prerequisite, Prerequisite.class), _500PrerequisiteSpecException.class,
+            RFn.outWeb(!Ut.isImplement(prerequisite, Prerequisite.class), _500PrerequisiteSpecException.class,
                 AtPin.class, prerequisite.getName());
             return Prerequisite.generate(prerequisite);
         }

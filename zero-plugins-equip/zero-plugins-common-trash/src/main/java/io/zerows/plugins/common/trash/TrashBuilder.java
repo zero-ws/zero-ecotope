@@ -1,12 +1,12 @@
 package io.zerows.plugins.common.trash;
 
-import io.zerows.core.uca.log.Annal;
 import io.vertx.codegen.annotations.Fluent;
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.util.Ut;
 import io.zerows.core.database.jooq.JooqInfix;
+import io.zerows.core.uca.log.Annal;
+import io.zerows.core.util.Ut;
 import org.jooq.*;
 import org.jooq.impl.DSL;
 import org.jooq.impl.SQLDataType;
@@ -49,7 +49,7 @@ class TrashBuilder {
         this.identifier = identifier;
         final String tableName = this.identifier.toUpperCase()
             /*
-             * Here two format
+             * Here two formatFail
              * 1) such as `ci.server` that contains `.`;
              * 2) such as `x-tabular` that contains `-`;
              */

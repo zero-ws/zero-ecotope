@@ -35,7 +35,7 @@ public interface Emitter {
                  * 2) You can provide your own token implementation such as other authorization
                  */
                 return CACHE.CC_EMITTER.pick(() -> new StandardEmitter(integration), integration.hashCode());
-                // return Fx.po?l(Pool.POOL_EMITTER, integration.hashCode(), () -> new StandardEmitter(integration));
+                // return RFn.po?l(Pool.POOL_EMITTER, integration.hashCode(), () -> new StandardEmitter(integration));
             } else {
                 /*
                  * If the `integration` contains publicKeyFile configured
@@ -45,7 +45,7 @@ public interface Emitter {
                  * It could set `TLS / SSL` of https
                  */
                 return CACHE.CC_EMITTER.pick(() -> new LegacyEmitter(integration), integration.hashCode());
-                // return Fx.po?l(Pool.POOL_EMITTER, integration.hashCode(), () -> new LegacyEmitter(integration));
+                // return RFn.po?l(Pool.POOL_EMITTER, integration.hashCode(), () -> new LegacyEmitter(integration));
             }
         }
     }

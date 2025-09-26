@@ -5,7 +5,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.core.util.Ut;
 
 import java.util.ArrayList;
@@ -80,7 +80,7 @@ class JoinWriter {
                     return Ut.future(resultArray);
                 }));
                 futures.add(childJq.deleteJAsync(compared.get(ChangeFlag.DELETE)));
-                return Fx.compressA(futures);
+                return RFn.compressA(futures);
             });
         } else {
             return Ut.futureA();

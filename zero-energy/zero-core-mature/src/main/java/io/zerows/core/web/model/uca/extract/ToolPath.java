@@ -2,7 +2,7 @@ package io.zerows.core.web.model.uca.extract;
 
 import io.zerows.ams.constant.VString;
 import io.zerows.ams.constant.VValue;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.model.exception.BootPathAnnoEmptyException;
@@ -29,7 +29,7 @@ class ToolPath {
      * @return normalized uri
      */
     public static String resolve(final Path path) {
-        Fx.outBoot(null == path, LOGGER,
+        RFn.outBoot(null == path, LOGGER,
             BootPathAnnoEmptyException.class, ToolPath.class);
         // Calculate single path
         return resolve(path, null);
@@ -45,7 +45,7 @@ class ToolPath {
      */
     @SuppressWarnings("all")
     public static String resolve(final Path path, final String root) {
-        Fx.outBoot(null == path, LOGGER,
+        RFn.outBoot(null == path, LOGGER,
             BootPathAnnoEmptyException.class, ToolPath.class);
         if (Ut.isNil(root)) {
             return calculate(path(path.value()));

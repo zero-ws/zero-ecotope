@@ -153,7 +153,7 @@ public interface ElasticSearchClient {
     /**
      * get search result from ElasticSearch by search text
      *
-     * @param params params will be used to search, format likes below
+     * @param params params will be used to search, formatFail likes below
      *               {
      *               "index": "", --- required
      *               "searchText": "", --- required

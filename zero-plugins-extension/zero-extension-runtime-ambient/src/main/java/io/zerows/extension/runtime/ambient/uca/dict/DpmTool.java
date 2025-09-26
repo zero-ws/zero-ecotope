@@ -1,9 +1,9 @@
 package io.zerows.extension.runtime.ambient.uca.dict;
 
-import io.zerows.ams.constant.VString;
-import io.zerows.ams.constant.em.EmDict;
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonObject;
+import io.zerows.ams.constant.VString;
+import io.zerows.ams.constant.em.EmDict;
 import io.zerows.core.constant.KName;
 import io.zerows.core.util.Ut;
 
@@ -31,7 +31,7 @@ class DpmTool {
      * @param params  {@link MultiMap} The parameters map that came from vert.x
      * @param typeSet {@link Set<String>} The definition of dict source.
      *
-     * @return {@link JsonObject} Return to json data with criteria format
+     * @return {@link JsonObject} Return to json data with criteria formatFail
      */
     static JsonObject condition(final MultiMap params, final Set<String> typeSet) {
         /* Result */

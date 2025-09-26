@@ -4,8 +4,8 @@ import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.ams.constant.VString;
-import io.zerows.core.exception.internal.EmptyIoException;
-import io.zerows.core.exception.internal.JsonFormatException;
+import io.zerows.core.exception.boot._11002Exception500EmptyIo;
+import io.zerows.core.exception.boot._11004Exception415JsonFormat;
 import io.zerows.core.uca.log.LogUtil;
 
 import java.io.*;
@@ -34,7 +34,7 @@ final class Io {
         try {
             content = new JsonArray(ioString(in, null));
         } catch (final Throwable ex) {
-            throw new JsonFormatException(Io.class, "Stream/JArray");
+            throw new _11004Exception415JsonFormat("Stream/JArray");
         }
         return content;
     }
@@ -43,11 +43,10 @@ final class Io {
         if (Objects.isNull(url)) {
             return new JsonArray();
         }
-        try (final InputStream in = url.openStream()) {
-            return ioJArray(in);
-        } catch (final Throwable ex) {
-            throw new EmptyIoException(Io.class, "URL/JArray: " + url.getPath());
-        }
+        return Fn.jvmAs(
+            url::openStream, Io::ioJArray,
+            () -> new _11002Exception500EmptyIo("URL/JArray: " + url.getPath())
+        );
     }
 
     static JsonArray ioJArray(final String filename) {
@@ -55,7 +54,7 @@ final class Io {
         try {
             content = new JsonArray(ioString(filename, null));
         } catch (final Throwable ex) {
-            throw new JsonFormatException(Io.class, filename);
+            throw new _11004Exception415JsonFormat(filename);
         }
         return content;
     }
@@ -65,7 +64,7 @@ final class Io {
         try {
             content = new JsonObject(ioString(filename, null));
         } catch (final Throwable ex) {
-            throw new JsonFormatException(Io.class, filename);
+            throw new _11004Exception415JsonFormat(filename);
         }
         return content;
     }
@@ -75,7 +74,7 @@ final class Io {
         try {
             content = new JsonObject(ioString(in, null));
         } catch (final Throwable ex) {
-            throw new JsonFormatException(Io.class, "Stream/JObject");
+            throw new _11004Exception415JsonFormat("Stream/JObject");
         }
         return content;
     }
@@ -84,11 +83,10 @@ final class Io {
         if (Objects.isNull(url)) {
             return new JsonObject();
         }
-        try (final InputStream in = url.openStream()) {
-            return ioJObject(in);
-        } catch (final Throwable ex) {
-            throw new EmptyIoException(Io.class, "URL/JObject: " + url.getPath());
-        }
+        return Fn.jvmAs(
+            url::openStream, Io::ioJObject,
+            () -> new _11002Exception500EmptyIo("URL/JObject: " + url.getPath())
+        );
     }
 
 
@@ -96,11 +94,10 @@ final class Io {
         if (Objects.isNull(url)) {
             return VString.EMPTY;
         }
-        try (final InputStream in = url.openStream()) {
-            return ioString(in, joined);
-        } catch (final Throwable ex) {
-            throw new EmptyIoException(Io.class, "URL/String: " + url.getPath());
-        }
+        return Fn.jvmAs(
+            url::openStream, in -> ioString(in, joined),
+            () -> new _11002Exception500EmptyIo("URL/String: " + url.getPath())
+        );
     }
 
     static String ioString(final InputStream in, final String joined) {
@@ -161,7 +158,7 @@ final class Io {
         }
         final URL url = ioURL(filename);
         if (null == url) {
-            throw new EmptyIoException(Io.class, filename);
+            throw new _11002Exception500EmptyIo(filename);
         }
         return new File(url.getFile());
     }

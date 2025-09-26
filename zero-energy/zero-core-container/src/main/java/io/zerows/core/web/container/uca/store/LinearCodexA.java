@@ -3,10 +3,11 @@ package io.zerows.core.web.container.uca.store;
 import io.vertx.core.json.JsonObject;
 import io.zerows.ams.constant.VPath;
 import io.zerows.ams.constant.VString;
-import io.zerows.core.exception.internal.EmptyIoException;
+import io.zerows.core.exception.boot._11002Exception500EmptyIo;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.model.atom.running.RunVertx;
 import io.zerows.module.metadata.cache.CStore;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.concurrent.ConcurrentMap;
@@ -14,6 +15,7 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * @author lang : 2024-05-03
  */
+@Slf4j
 class LinearCodexA implements StubLinear {
 
     @Override
@@ -25,8 +27,8 @@ class LinearCodexA implements StubLinear {
                 final ConcurrentMap<String, JsonObject> store = CStore.CC_CODEX.get();
                 // 移除
                 store.remove(rule.substring(0, rule.lastIndexOf(VString.DOT)));
-            } catch (final EmptyIoException ex) {
-                this.logger().fatal(ex);
+            } catch (final _11002Exception500EmptyIo ex) {
+                log.error(ex.getMessage(), ex);
             }
         });
     }
@@ -44,8 +46,8 @@ class LinearCodexA implements StubLinear {
                 final ConcurrentMap<String, JsonObject> store = CStore.CC_CODEX.get();
                 // 追加
                 store.put(rule.substring(0, rule.lastIndexOf(VString.DOT)), ruleData);
-            } catch (final EmptyIoException ex) {
-                this.logger().fatal(ex);
+            } catch (final _11002Exception500EmptyIo ex) {
+                log.error(ex.getMessage(), ex);
             }
         });
     }

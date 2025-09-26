@@ -8,9 +8,8 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.ams.constant.VString;
 import io.zerows.ams.constant.em.typed.EmType;
-import io.zerows.core.exception.internal.EmptyIoException;
+import io.zerows.core.exception.boot._11002Exception500EmptyIo;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Objects;
@@ -45,11 +44,10 @@ class IoYaml {
         if (Objects.isNull(url)) {
             return null;
         }
-        try (final InputStream in = url.openStream()) {
-            return ioYaml(in);
-        } catch (final IOException ex) {
-            throw new EmptyIoException(IoYaml.class, "URL/Yaml: " + url.getPath());
-        }
+        return Fn.jvmAs(
+            url::openStream, IoYaml::ioYaml,
+            () -> new _11002Exception500EmptyIo("URL/Yaml: " + url.getPath())
+        );
     }
 
     @SuppressWarnings("unchecked")
@@ -72,12 +70,12 @@ class IoYaml {
     private static JsonNode ioYamlNode(final InputStream in, final String filename) {
         final JsonNode node = Fn.jvmOr(() -> {
             if (null == in) {
-                throw new EmptyIoException(Io.class, filename);
+                throw new _11002Exception500EmptyIo(filename);
             }
             return YAML.readTree(in);
         });
         if (null == node) {
-            throw new EmptyIoException(Io.class, filename);
+            throw new _11002Exception500EmptyIo(filename);
         }
         return node;
     }

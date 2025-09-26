@@ -1,6 +1,6 @@
 package io.zerows.extension.mbse.ui.agent.service;
 
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.core.uca.qr.Sorter;
 import io.zerows.core.uca.qr.syntax.Ir;
@@ -93,14 +93,14 @@ public class ListService implements ListStub {
         );
         return Ux.future(listJson)
             /* vQuery */
-            .compose(Fx.ofJObject(ListStub.FIELD_V_QUERY, this.optionStub::fetchQuery))
+            .compose(RFn.ofJObject(ListStub.FIELD_V_QUERY, this.optionStub::fetchQuery))
             /* vSearch */
-            .compose(Fx.ofJObject(ListStub.FIELD_V_SEARCH, this.optionStub::fetchSearch))
+            .compose(RFn.ofJObject(ListStub.FIELD_V_SEARCH, this.optionStub::fetchSearch))
             /* vTable */
-            .compose(Fx.ofJObject(ListStub.FIELD_V_TABLE, this.optionStub::fetchTable))
+            .compose(RFn.ofJObject(ListStub.FIELD_V_TABLE, this.optionStub::fetchTable))
             /* vSegment */
-            .compose(Fx.ofTree(ListStub.FIELD_V_SEGMENT, this.optionStub::fetchFragment))
+            .compose(RFn.ofTree(ListStub.FIELD_V_SEGMENT, this.optionStub::fetchFragment))
             /* Combiner for final processing */
-            .compose(Fx.ofWebUi("classCombiner"));
+            .compose(RFn.ofWebUi("classCombiner"));
     }
 }

@@ -3,14 +3,14 @@ package io.zerows.extension.mbse.ui.agent.service.column;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.fn.Fx;
-import io.zerows.unity.Ux;
 import io.zerows.ams.constant.VString;
 import io.zerows.core.constant.KName;
+import io.zerows.core.fn.RFn;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.mbse.ui.domain.tables.daos.UiColumnDao;
 import io.zerows.extension.mbse.ui.domain.tables.pojos.UiColumn;
 import io.zerows.module.domain.atom.commune.Vis;
+import io.zerows.unity.Ux;
 
 import java.util.Comparator;
 import java.util.stream.Collectors;
@@ -23,7 +23,7 @@ class StoreValve implements UiValve {
     public Future<JsonArray> fetchColumn(final Vis vis, final String identifier, final String sigma) {
         /*
          * Default global controlId is
-         * 1) The format is VIEW-identifier
+         * 1) The formatFail is VIEW-identifier
          * 2) sigma could distinguish multi applications
          */
         final String controlId = vis.view() + "-" + identifier;
@@ -54,31 +54,31 @@ class StoreValve implements UiValve {
          * fixed
          * width
          */
-        Fx.monad(column::getSorter, (sorter) -> columnJson.put("sorter", sorter));
-        Fx.monad(column::getFixed, (fixed) -> {
+        RFn.monad(column::getSorter, (sorter) -> columnJson.put("sorter", sorter));
+        RFn.monad(column::getFixed, (fixed) -> {
             if (fixed) {
                 columnJson.put("fixed", "left");
             } else {
                 columnJson.put("fixed", "right");
             }
         });
-        Fx.monad(column::getClassName, (className) -> columnJson.put("className", className));
-        Fx.monad(column::getWidth, (width) -> columnJson.put("width", width));
+        RFn.monad(column::getClassName, (className) -> columnJson.put("className", className));
+        RFn.monad(column::getWidth, (width) -> columnJson.put("width", width));
         /*
          * If render
          */
-        Fx.monad(column::getRender, (render) -> {
+        RFn.monad(column::getRender, (render) -> {
             columnJson.put("$render", render);
             if ("DATE".equals(render)) {
-                assert null != column.getFormat() : " $format should not be null when DATE";
-                columnJson.put("$format", column.getFormat());
+                assert null != column.getFormat() : " $formatFail should not be null when DATE";
+                columnJson.put("$formatFail", column.getFormat());
             } else if ("DATUM".equals(render)) {
                 // columnJson.put("$datum")
                 assert null != column.getDatum() : " $datum should not be null when DATUM";
                 columnJson.put("$datum", column.getDatum());
             }
         });
-        Fx.monad(column::getFilterType, (filterType) -> {
+        RFn.monad(column::getFilterType, (filterType) -> {
             columnJson.put("$filter.type", filterType);
             columnJson.put("$filter.config", column.getFilterConfig());
             Ut.valueToJObject(columnJson, "$filter.config");
@@ -86,12 +86,12 @@ class StoreValve implements UiValve {
         /*
          * Zero Config
          */
-        Fx.monad(column::getEmpty, (empty) -> columnJson.put("$empty", empty));
-        Fx.monad(column::getMapping, (mapping) -> {
+        RFn.monad(column::getEmpty, (empty) -> columnJson.put("$empty", empty));
+        RFn.monad(column::getMapping, (mapping) -> {
             columnJson.put("$mapping", mapping);
             Ut.valueToJObject(columnJson, "$mapping");
         });
-        Fx.monad(column::getConfig, (config) -> {
+        RFn.monad(column::getConfig, (config) -> {
             columnJson.put("$config", config);
             Ut.valueToJObject(columnJson, "$config");
         });

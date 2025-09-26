@@ -3,10 +3,10 @@ package io.zerows.common.app;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.zerows.common.datamation.KDictUse;
+import io.vertx.core.json.JsonObject;
 import io.zerows.ams.constant.VString;
 import io.zerows.ams.util.HUt;
-import io.vertx.core.json.JsonObject;
+import io.zerows.common.datamation.KDictUse;
 import io.zerows.extend.jackson.databind.JsonObjectDeserializer;
 import io.zerows.extend.jackson.databind.JsonObjectSerializer;
 import io.zerows.specification.atomic.HCopier;
@@ -65,7 +65,7 @@ public class KIntegration implements HJson, Serializable, HCopier<KIntegration> 
     private String publicKeyFile;
 
     /*
-     * options for configuration of JSON format
+     * options for configuration of JSON formatFail
      */
     @JsonSerialize(using = JsonObjectSerializer.class)
     @JsonDeserialize(using = JsonObjectDeserializer.class)

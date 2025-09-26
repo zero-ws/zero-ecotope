@@ -3,7 +3,7 @@ package io.zerows.extension.runtime.workflow.agent.service;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.unity.Ux;
 import io.zerows.core.util.Ut;
 import io.zerows.core.database.jooq.operation.UxJooq;
@@ -94,12 +94,12 @@ public class TaskService implements TaskStub {
 
     private Future<WRecord> readTodo(final String key, final WRecord response) {
         return Ux.Jooq.on(WTodoDao.class).<WTodo>fetchByIdAsync(key)
-            .compose(Fx.ifNil(response::bind, todo -> Ux.future(response.task(todo))));
+            .compose(RFn.ifNil(response::bind, todo -> Ux.future(response.task(todo))));
     }
 
     private Future<WRecord> readTicket(final String key, final WRecord response) {
         return Ux.Jooq.on(WTicketDao.class).<WTicket>fetchByIdAsync(key)
-            .compose(Fx.ifNil(response::bind, ticket -> Ux.future(response.ticket(ticket))));
+            .compose(RFn.ifNil(response::bind, ticket -> Ux.future(response.ticket(ticket))));
     }
 
     private Future<WRecord> readChild(final WRecord response) {

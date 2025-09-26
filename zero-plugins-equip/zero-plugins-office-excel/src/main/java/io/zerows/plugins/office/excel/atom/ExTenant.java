@@ -6,7 +6,7 @@ import io.zerows.common.app.KGlobal;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.unity.Ux;
 import io.zerows.core.util.Ut;
 import io.zerows.plugins.office.excel.ExcelClient;
@@ -89,7 +89,7 @@ public class ExTenant implements Serializable {
             Ut.itJArray(this.tenant.getSource(), String.class, (expr, index) ->
                 futures.add(this.dictionary(expr)));
         }
-        return Fx.combineT(futures).compose(result -> {
+        return RFn.combineT(futures).compose(result -> {
             final ConcurrentMap<String, JsonObject> dataResult = new ConcurrentHashMap<>();
             if (Objects.nonNull(result)) {
                 result.stream().filter(Objects::nonNull)
@@ -140,7 +140,7 @@ public class ExTenant implements Serializable {
                         return Ux.future(data);
                     }))
                     .forEach(futures::add);
-                return Fx.compressA(futures);
+                return RFn.compressA(futures);
             }).compose(dataArray -> {
                 // Result
                 final String key = segments[4];

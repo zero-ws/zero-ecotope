@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.ams.constant.em.typed.ChangeFlag;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.module.metadata.uca.logging.OLog;
 import io.zerows.specification.modeling.HRecord;
 
@@ -488,7 +488,7 @@ final class Compare {
             if (!qUpdate.isEmpty()) {
                 futures.add(updateAsyncFn.apply(qUpdate).compose(Ut::futureA));
             }
-            return Fx.compressA(futures);
+            return RFn.compressA(futures);
         }
     }
 }

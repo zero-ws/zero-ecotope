@@ -3,7 +3,7 @@ package io.zerows.ams.util;
 import io.r2mo.function.Fn;
 import io.vertx.core.buffer.Buffer;
 import io.zerows.ams.constant.VPath;
-import io.zerows.core.exception.internal.EmptyIoException;
+import io.zerows.core.exception.boot._11002Exception500EmptyIo;
 import io.zerows.core.uca.fs.LocalDir;
 import io.zerows.core.uca.log.LogUtil;
 
@@ -37,11 +37,10 @@ final class IoStream {
         if (Objects.isNull(url)) {
             return Buffer.buffer();
         }
-        try (final InputStream in = url.openStream()) {
-            return ioBuffer(in);
-        } catch (final IOException ex) {
-            throw new EmptyIoException(IoStream.class, "URL/Buffer: " + url.getPath());
-        }
+        return Fn.jvmAs(
+            url::openStream, IoStream::ioBuffer,
+            () -> new _11002Exception500EmptyIo("URL/Buffer: " + url.getPath())
+        );
     }
 
     @SuppressWarnings("all")
@@ -201,7 +200,7 @@ final class IoStream {
             in = readJar(filename);
         }
         if (null == in) {
-            throw new EmptyIoException(IoStream.class, filename);
+            throw new _11002Exception500EmptyIo(filename);
         }
         return in;
     }

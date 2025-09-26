@@ -1,8 +1,8 @@
 package io.zerows.core.web.io.uca.response.wrap;
 
+import io.vertx.core.http.HttpServerResponse;
 import io.zerows.ams.constant.VString;
 import io.zerows.ams.constant.em.app.HttpStatusCode;
-import io.vertx.core.http.HttpServerResponse;
 import io.zerows.core.web.model.commune.Envelop;
 
 import java.util.Objects;
@@ -32,7 +32,7 @@ public class JsonWings extends AbstractWings {
         } else {
             /*
              * Default String mode
-             * 1. Content-Type is `* / *` format
+             * 1. Content-Type is `* / *` formatFail
              * 2. Replied body directly
              */
             response.end(envelop.outString());

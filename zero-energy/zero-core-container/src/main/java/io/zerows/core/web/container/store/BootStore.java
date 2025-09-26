@@ -5,7 +5,7 @@ import io.zerows.ams.constant.em.EmApp;
 import io.zerows.core.annotations.Up;
 import io.zerows.core.constant.configure.YmlCore;
 import io.zerows.core.exception.BootingException;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.core.running.boot.KBoot;
 import io.zerows.core.web.container.eon.em.FeatureMark;
 import io.zerows.core.web.container.exception.BootUpClassArgsException;
@@ -29,11 +29,9 @@ public class BootStore implements HStation {
     /**
      * 针对 Annotation 部分的创建
      */
-    private static final ConcurrentMap<String, Annotation> STORE_ANNO =
-        new ConcurrentHashMap<>();
+    private static final ConcurrentMap<String, Annotation> STORE_ANNO = new ConcurrentHashMap<>();
     private static volatile BootStore STORE;
-    private final ConcurrentMap<FeatureMark, Boolean> features =
-        new ConcurrentHashMap<>();
+    private final ConcurrentMap<FeatureMark, Boolean> features = new ConcurrentHashMap<>();
 
     private final HBoot boot;
 
@@ -81,7 +79,7 @@ public class BootStore implements HStation {
      */
     private static void ensure(final Class<?> clazz) {
         // Step 1
-        Fx.out(Objects.isNull(clazz), BootUpClassArgsException.class, BootStore.class);
+        RFn.out(Objects.isNull(clazz), BootUpClassArgsException.class, BootStore.class);
         // Step 2
         STORE_ANNO.putAll(Anno.get(clazz));
         if (!STORE_ANNO.containsKey(Up.class.getName())) {

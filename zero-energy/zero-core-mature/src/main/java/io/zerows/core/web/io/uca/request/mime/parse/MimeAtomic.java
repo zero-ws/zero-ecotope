@@ -45,12 +45,12 @@ public class MimeAtomic<T> implements Atomic<T> {
         if (EmMime.Flow.TYPED == income.getMime()) {
             /* Resolver **/
             final Atomic<T> atomic = CC_ATOMIC.pick(TypedAtomic::new, TypedAtomic.class.getName());
-            // Fx.po?lThread(POOL_ATOMIC, TypedAtomic::new, TypedAtomic.class.getName());
+            // RFn.po?lThread(POOL_ATOMIC, TypedAtomic::new, TypedAtomic.class.getName());
             epsilon = atomic.ingest(context, income);
         } else if (EmMime.Flow.STANDARD == income.getMime()) {
             /* System standard filler **/
             final Atomic<T> atomic = CC_ATOMIC.pick(StandardAtomic::new, StandardAtomic.class.getName());
-            // Fx.po?lThread(POOL_ATOMIC, StandardAtomic::new, StandardAtomic.class.getName());
+            // RFn.po?lThread(POOL_ATOMIC, StandardAtomic::new, StandardAtomic.class.getName());
             epsilon = atomic.ingest(context, income);
         } else {
             /* Resolver **/
@@ -81,7 +81,7 @@ public class MimeAtomic<T> implements Atomic<T> {
                 LOGGER.info(INFO.RESOLVER, resolver, header, context.request().absoluteURI());
             }
             return CC_RESOLVER.pick(() -> Ut.instance(resolver), resolver);
-            // Fx.po?lThread(POOL_RESOLVER, () -> Ut.instance(resolver), resolver);
+            // RFn.po?lThread(POOL_RESOLVER, () -> Ut.instance(resolver), resolver);
         } else {
             LOGGER.info(INFO.RESOLVER_CONFIG, resolverCls, header);
             /*
@@ -93,15 +93,15 @@ public class MimeAtomic<T> implements Atomic<T> {
                  * Resolver Directly
                  */
                 return CC_RESOLVER.pick(() -> Ut.instance(resolverCls), resolverCls.getName());
-                // Fx.po?lThread(POOL_RESOLVER, () -> Ut.instance(resolverCls), resolverCls.getName());
+                // RFn.po?lThread(POOL_RESOLVER, () -> Ut.instance(resolverCls), resolverCls.getName());
             } else {
                 /*
                  * Solve component, contract to set Solve<Tool> here.
                  */
                 final Resolver<T> resolver = CC_RESOLVER.pick(() -> Ut.instance(SolveResolver.class), SolveResolver.class.getName());
-                // Fx.po?lThread(POOL_RESOLVER, () -> Ut.instance(SolveResolver.class), SolveResolver.class.getName());
+                // RFn.po?lThread(POOL_RESOLVER, () -> Ut.instance(SolveResolver.class), SolveResolver.class.getName());
                 final Solve solve = CC_SOLVE.pick(() -> Ut.instance(resolverCls), resolverCls.getName());
-                // Fx.po?lThread(POOL_SOLVE, () -> Ut.instance(resolverCls), resolverCls.getName());
+                // RFn.po?lThread(POOL_SOLVE, () -> Ut.instance(resolverCls), resolverCls.getName());
                 Ut.contract(resolver, Solve.class, solve);
                 return resolver;
             }

@@ -4,7 +4,7 @@ import io.reactivex.rxjava3.core.Observable;
 import io.vertx.core.eventbus.Message;
 import io.zerows.core.annotations.Address;
 import io.zerows.core.annotations.Queue;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.module.assembly.exception.BootWorkerConflictException;
 import io.zerows.module.metadata.zdk.uca.Inquirer;
 
@@ -39,7 +39,7 @@ public class InquirerQueue implements Inquirer<Set<Class<?>>> {
                 final Class<?> returnType = method.getReturnType();
                 final Class<?> parameterTypes = method.getParameterTypes()[0];
                 if (Message.class.isAssignableFrom(parameterTypes)) {
-                    Fx.outBoot(void.class != returnType && Void.class != returnType, this.logger(),
+                    RFn.outBoot(void.class != returnType && Void.class != returnType, this.logger(),
                         BootWorkerConflictException.class, this.getClass(), method);
                 }
             })

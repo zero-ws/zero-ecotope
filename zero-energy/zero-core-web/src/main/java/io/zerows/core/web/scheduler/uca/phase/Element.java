@@ -25,7 +25,7 @@ class Element {
         JobIncome income = null;
         if (Objects.nonNull(incomeCls) && Ut.isImplement(incomeCls, JobIncome.class)) {
             income = CC_INCOME.pick(() -> Ut.instance(incomeCls), mission.getCode());
-            // income = Fx.po?l(Pool.INCOMES, mission.getCode(), () -> Ut.instance(incomeCls));
+            // income = RFn.po?l(Pool.INCOMES, mission.getCode(), () -> Ut.instance(incomeCls));
         }
         return income;
     }
@@ -35,7 +35,7 @@ class Element {
         JobOutcome outcome = null;
         if (Objects.nonNull(outcomeCls) && Ut.isImplement(outcomeCls, JobOutcome.class)) {
             outcome = CC_OUTCOME.pick(() -> Ut.instance(outcomeCls), mission.getCode());
-            // outcome = Fx.po?l(Pool.OUTCOMES, mission.getCode(), () -> Ut.instance(outcomeCls));
+            // outcome = RFn.po?l(Pool.OUTCOMES, mission.getCode(), () -> Ut.instance(outcomeCls));
         }
         return outcome;
     }

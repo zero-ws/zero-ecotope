@@ -1,8 +1,8 @@
 package io.zerows.core.web.container.uca.gateway;
 
+import io.zerows.core.fn.RFn;
 import io.zerows.core.uca.log.Annal;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.core.fn.Fx;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.container.exception.BootReturnTypeException;
 import io.zerows.core.web.container.uca.mode.AimIpc;
@@ -32,12 +32,12 @@ class DifferIpc implements Differ<RoutingContext> {
             // Exception because this method must has return type to
             // send message to event bus. It means that it require
             // return types.
-            Fx.outBoot(true, LOGGER, BootReturnTypeException.class,
+            RFn.outBoot(true, LOGGER, BootReturnTypeException.class,
                 this.getClass(), method);
         } else {
             // Mode 6: Ipc channel enabled
             aim = CACHE.CC_AIMS.pick(() -> Ut.instance(AimIpc.class), "Mode Ipc");
-            // Fx.po?l(Pool.AIMS, Thread.currentThread().getName() + "-mode-ipc",() -> Ut.instance(IpcAim.class));
+            // RFn.po?l(Pool.AIMS, Thread.currentThread().getName() + "-mode-ipc",() -> Ut.instance(IpcAim.class));
         }
         return aim;
     }

@@ -1,8 +1,8 @@
 package io.zerows.core.web.model.store;
 
 import io.zerows.ams.constant.em.app.ServerType;
+import io.zerows.boot.enums.VertxComponent;
 import io.zerows.core.annotations.QaS;
-import io.zerows.core.constant.KMeta;
 import io.zerows.core.running.context.KRunner;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.model.atom.Event;
@@ -80,8 +80,8 @@ public class ORepositoryMeta extends AbstractAmbiguity implements ORepository {
         start = end;
 
         final OActorComponent actorComponent = new OActorComponent();
-        final Set<Class<?>> classesEndpoint = OCacheClass.entireValue(KMeta.Typed.ENDPOINT);
-        final Set<Class<?>> classQueue = OCacheClass.entireValue(KMeta.Typed.QUEUE);
+        final Set<Class<?>> classesEndpoint = OCacheClass.entireValue(VertxComponent.ENDPOINT);
+        final Set<Class<?>> classQueue = OCacheClass.entireValue(VertxComponent.QUEUE);
         KRunner.run("meditate-core-component",
             // @EndPoint -> Event
             () -> {

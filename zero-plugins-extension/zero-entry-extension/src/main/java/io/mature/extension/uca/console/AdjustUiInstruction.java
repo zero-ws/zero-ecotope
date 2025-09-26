@@ -1,7 +1,7 @@
 package io.mature.extension.uca.console;
 
 import io.zerows.common.program.KRef;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.specification.access.app.HApp;
 import io.zerows.specification.access.app.HArk;
 import io.mature.extension.refine.Ox;
@@ -174,7 +174,7 @@ public class AdjustUiInstruction extends AbstractInstruction {
     private Future<JsonArray> uiList(final String identifier, final String sigma) {
         final JsonObject condition = this.uiCond(identifier, sigma);
         return Ux.Jooq.on(UiListDao.class).<UiList>fetchAndAsync(condition)
-            .compose(lists -> Fx.combineT(lists, this::uiListField))
+            .compose(lists -> RFn.combineT(lists, this::uiListField))
             .compose(Ux::futureA);
     }
 
@@ -194,7 +194,7 @@ public class AdjustUiInstruction extends AbstractInstruction {
     private Future<JsonArray> uiForm(final String identifier, final String sigma) {
         final JsonObject condition = this.uiCond(identifier, sigma);
         return Ux.Jooq.on(UiFormDao.class).<UiForm>fetchAndAsync(condition)
-            .compose(forms -> Fx.combineT(forms, this::uiFormField))
+            .compose(forms -> RFn.combineT(forms, this::uiFormField))
             .compose(Ux::futureA);
     }
 

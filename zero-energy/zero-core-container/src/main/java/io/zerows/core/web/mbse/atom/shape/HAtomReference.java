@@ -152,7 +152,7 @@ public class HAtomReference implements HReference {
              */
             final HApp app = this.ark.app();
             final RQuote quote = this.ccReference.pick(() -> RQuote.create(app.name()), source);
-            // Fx.po?l(this.references, source, () -> RQuote.create(appName));
+            // RFn.po?l(this.references, source, () -> RQuote.create(appName));
             final JsonObject referenceConfig = reference.sourceReference();
             quote.add(hAttribute, referenceConfig, dao);
             /*
@@ -163,7 +163,7 @@ public class HAtomReference implements HReference {
             final String field = reference.name();
             final String referenceField = reference.sourceField();
             final RResult result = this.ccResult.pick(() -> new RResult(referenceField, referenceConfig, hAttribute), field);
-            // Fx.po?l(this.result, field, () -> new RResult(referenceField, referenceConfig, hAttribute));
+            // RFn.po?l(this.result, field, () -> new RResult(referenceField, referenceConfig, hAttribute));
             /*
              * Qr Engine, stored quote reference map.
              *
@@ -174,7 +174,7 @@ public class HAtomReference implements HReference {
                 this.ccQuery.pick(() -> new RQuery(field, reference.sourceField())
                     .bind(quote.dao(field))
                     .bind(result.joined()), field);
-                // Fx.po?l(this.queries, field, () -> new RQuery(field, attribute.getSourceField()).bind(quote.dao(field)).bind(result.joined()));
+                // RFn.po?l(this.queries, field, () -> new RQuery(field, attribute.getSourceField()).bind(quote.dao(field)).bind(result.joined()));
             }
         }
     }
@@ -212,7 +212,7 @@ public class HAtomReference implements HReference {
         final Function<JsonObject, JsonArray> actionS = this.actionS(atom, join);
         // RDao Creation
         final RDao dao = this.ccDao.pick(() -> new RDao(source), this.ark.cached(source));
-        // Fx.po?l(this.sourceDao, appName + "/" + source, () -> new RDao(source));
+        // RFn.po?l(this.sourceDao, appName + "/" + source, () -> new RDao(source));
         return dao.actionA(actionA).actionS(actionS);
     }
 

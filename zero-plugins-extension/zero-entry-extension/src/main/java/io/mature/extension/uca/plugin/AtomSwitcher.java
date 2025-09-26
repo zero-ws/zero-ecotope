@@ -6,7 +6,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.unity.Ux;
 import io.zerows.core.util.Ut;
 import io.zerows.core.spi.modeler.Identifier;
@@ -89,7 +89,7 @@ public class AtomSwitcher implements Switcher {
             // #NEW_LOG
             LOG.Uca.debug(this.getClass(), " Identifier 选择器：{0}", this.indent.getClass());
             final JsonObject config = Ox.pluginOptions(this.indent.getClass(), input);
-            return this.indent.resolve(input, config).compose(Fx.ifNil(
+            return this.indent.resolve(input, config).compose(RFn.ifNil(
 
                 /* 默认值，配置优先 */
                 () -> defaultAtom,
@@ -120,7 +120,7 @@ public class AtomSwitcher implements Switcher {
             // #NEW_LOG
             LOG.Uca.debug(this.getClass(), " Identifier 选择器（批量）：{0}", this.indent.getClass());
             final JsonObject config = Ox.pluginOptions(this.indent.getClass(), input);
-            return this.indent.resolve(input, atom.identifier(), config).compose(Fx.ifNil(
+            return this.indent.resolve(input, atom.identifier(), config).compose(RFn.ifNil(
                 /* 默认值，配置优先 */
                 HashSet::new,
 

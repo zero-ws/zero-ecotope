@@ -1,7 +1,7 @@
 package io.zerows.module.assembly.osgi.command;
 
 import io.zerows.ams.constant.VString;
-import io.zerows.core.constant.KMeta;
+import io.zerows.boot.enums.VertxComponent;
 import io.zerows.core.util.Ut;
 import io.zerows.module.metadata.store.OCacheClass;
 import io.zerows.module.metadata.zdk.running.OCommand;
@@ -24,7 +24,7 @@ interface ServiceT {
         processor.value().forEach(classSet -> treeMap.put(classSet.getName(), classSet));
         treeMap.forEach((name, clazz) -> {
             builder.append(VString.INDENT).append(name);
-            final KMeta.Typed type = processor.valueType(clazz);
+            final VertxComponent type = processor.valueType(clazz);
             if (Objects.nonNull(type)) {
                 builder.append(", Type = ").append(type);
             }

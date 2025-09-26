@@ -24,7 +24,7 @@ public class IPAllFilter implements IPFilter {
     /**
      * @param ipAddress The ip address literal string
      *
-     * @return boolean check whether the ip address format is ok
+     * @return boolean check whether the ip address formatFail is ok
      */
     @Override
     public boolean accept(final String ipAddress) {

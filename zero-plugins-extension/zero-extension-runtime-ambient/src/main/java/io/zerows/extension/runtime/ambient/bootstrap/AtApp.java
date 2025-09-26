@@ -3,7 +3,7 @@ package io.zerows.extension.runtime.ambient.bootstrap;
 import io.r2mo.typed.cc.Cc;
 import io.zerows.core.constant.KName;
 import io.zerows.core.database.jooq.operation.UxJooq;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XAppDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XApp;
 import io.zerows.extension.runtime.ambient.exception._500AmbientErrorException;
@@ -26,15 +26,15 @@ public class AtApp {
 
     private AtApp(final String name) {
         final UxJooq jooq = Ux.Jooq.on(XAppDao.class);
-        Fx.outWeb(null == jooq, _500AmbientErrorException.class, this.getClass());
+        RFn.outWeb(null == jooq, _500AmbientErrorException.class, this.getClass());
         /* Current */
         this.app = jooq.fetchOne(KName.NAME, name);
-        Fx.outWeb(null == this.app, _500ApplicationInitException.class,
+        RFn.outWeb(null == this.app, _500ApplicationInitException.class,
             this.getClass(), name);
     }
 
     public static AtApp create(final String name) {
-        return CC_APP.pick(() -> new AtApp(name), name); // Fx.po?l(Pool.APP_POOL, name, () -> new AtApp(name));
+        return CC_APP.pick(() -> new AtApp(name), name); // RFn.po?l(Pool.APP_POOL, name, () -> new AtApp(name));
     }
 
     public XApp getApp() {

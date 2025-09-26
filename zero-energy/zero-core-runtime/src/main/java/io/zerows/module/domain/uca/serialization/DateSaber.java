@@ -18,7 +18,7 @@ class DateSaber extends AbstractSaber {
             this.verifyInput(!Ut.isDate(literal), paramType, literal);
             final Date reference = Ut.parse(literal);
             if (Calendar.class == paramType) {
-                // Specific date format
+                // Specific date formatFail
                 final Calendar calendar = Calendar.getInstance();
                 calendar.setTime(reference);
                 return calendar;

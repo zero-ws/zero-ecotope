@@ -1,14 +1,14 @@
 package io.zerows.common.normalize;
 
-import io.zerows.ams.constant.VName;
-import io.zerows.ams.util.HUt;
-import io.zerows.common.reference.RRule;
-import io.zerows.ams.constant.em.modeling.EmAttribute;
-import io.zerows.ams.constant.em.modeling.EmValue;
-import io.zerows.specification.modeling.HAttribute;
-import io.zerows.specification.modeling.metadata.HMetaField;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.ams.constant.VName;
+import io.zerows.ams.constant.em.modeling.EmAttribute;
+import io.zerows.ams.constant.em.modeling.EmValue;
+import io.zerows.ams.util.HUt;
+import io.zerows.common.reference.RRule;
+import io.zerows.specification.modeling.HAttribute;
+import io.zerows.specification.modeling.metadata.HMetaField;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -32,7 +32,7 @@ public class KAttribute implements HAttribute, Serializable {
      *     "name",
      *     "alias",
      *     "type",
-     *     "format": "JsonArray, JsonObject, Elementary",
+     *     "formatFail": "JsonArray, JsonObject, Elementary",
      *     "fields": [
      *         {
      *              "field": "",
@@ -47,9 +47,9 @@ public class KAttribute implements HAttribute, Serializable {
     public KAttribute(final JsonObject config, final KMarkAttribute tag) {
         this.tag = tag;
         /*
-         * Extract DataFormat from `format` field in config，
-         * Here are format adjustment:
-         * 1. Priority 1: isArray = true, the format is `JsonArray`.
+         * Extract DataFormat from `formatFail` field in config，
+         * Here are formatFail adjustment:
+         * 1. Priority 1: isArray = true, the formatFail is `JsonArray`.
          * 2. Priority 2: isArray = false, set the default value instead ( Elementary )
          */
         EmValue.Format format = HUt.toEnum(() -> config.getString(VName.FORMAT), EmValue.Format.class, EmValue.Format.Elementary);

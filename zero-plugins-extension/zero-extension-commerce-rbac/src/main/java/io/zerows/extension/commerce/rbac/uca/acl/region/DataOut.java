@@ -108,7 +108,7 @@ class DataOut {
     }
 
     /*
-     * There are three data format that could be enabled for region.
+     * There are three data formatFail that could be enabled for region.
      * 1. InJson Object:
      * {
      *     "data": {}

@@ -70,8 +70,8 @@ public class LocalDirEmbed extends AbstractLocalDir {
             // Return the JAR file name
             return jarPart;
         }
-        // Return null or throw an exception if the path format is invalid
-        throw new IllegalArgumentException("Invalid path format: " + path);
+        // Return null or throw an exception if the path formatFail is invalid
+        throw new IllegalArgumentException("Invalid path formatFail: " + path);
     }
 
     private Set<String> jarListDirectoriesN(final String jarPath, final String input) {

@@ -4,7 +4,7 @@ import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.configure.YmlCore;
-import io.zerows.core.fn.Fx;
+import io.zerows.core.fn.RFn;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.core.util.Ut;
 import io.zerows.plugins.store.elasticsearch.exception._404ConfigurationMissingExceptionn;
@@ -53,11 +53,11 @@ public class ElasticSearchHelper {
 
     static ElasticSearchHelper helper(final Class<?> target) {
         return CC_HELPER.pick(() -> new ElasticSearchHelper(target), target.getName());
-        // Fx.po?l(Pool.HELPERS, target.getName(), () -> new ElasticSearchHelper(target));
+        // RFn.po?l(Pool.HELPERS, target.getName(), () -> new ElasticSearchHelper(target));
     }
 
     RestHighLevelClient getClient(final JsonObject options) {
-        Fx.outWeb(Ut.isNil(options), _404ConfigurationMissingExceptionn.class, this.getClass());
+        RFn.outWeb(Ut.isNil(options), _404ConfigurationMissingExceptionn.class, this.getClass());
         final CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
         credentialsProvider.setCredentials(AuthScope.ANY,
             new UsernamePasswordCredentials(
@@ -110,7 +110,7 @@ public class ElasticSearchHelper {
     /**
      * web mappings for index from fields and fields' type
      *
-     * @param mappings fields with type, format like below
+     * @param mappings fields with type, formatFail like below
      *                 {
      *                 "field": "String",
      *                 ...

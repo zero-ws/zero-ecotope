@@ -2,7 +2,7 @@ package io.zerows.core.web.container.osgi.service;
 
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
-import io.zerows.core.constant.KMeta;
+import io.zerows.boot.enums.VertxComponent;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.container.store.under.StoreVertx;
 import io.zerows.core.web.container.uca.store.StubLinear;
@@ -36,7 +36,7 @@ public interface EnergyVertx {
     StubVertx ofVertx(Bundle bundle);
 
 
-    StubLinear ofLinear(Bundle bundle, KMeta.Typed type);
+    StubLinear ofLinear(Bundle bundle, VertxComponent type);
 
     /**
      * 网络启动专用，用于启动如下基础结构（特殊方法，通常这个接口不带此方法）

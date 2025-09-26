@@ -1,8 +1,8 @@
 package io.zerows.plugins.office.excel.util;
 
-import io.zerows.ams.constant.VString;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.ams.constant.VString;
 import io.zerows.core.util.Ut;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
@@ -109,7 +109,7 @@ public class ExOut {
             final BigDecimal decimal = new BigDecimal(value.toString());
             cell.setCellValue(decimal.doubleValue());
         } else {
-            // Number format of empty
+            // Number formatFail of empty
             cell.setCellValue(liberal);
         }
     }
@@ -123,7 +123,7 @@ public class ExOut {
             final double parsed = Double.parseDouble(liberal);
             cell.setCellValue(parsed);
         } else {
-            // Number format of empty
+            // Number formatFail of empty
             cell.setCellValue(liberal);
         }
     }
