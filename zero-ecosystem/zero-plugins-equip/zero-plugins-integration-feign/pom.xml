@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>zero-plugins-integration-feign</artifactId>
-    <name>Zero.Plugins.Integration.Feign</name>
+    <name>Zero::Plugins::🧩 - Integration Feign</name>
     <dependencies>
         <dependency>
             <groupId>io.zerows</groupId>

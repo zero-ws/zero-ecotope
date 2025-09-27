@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>zero-extension-commerce-erp</artifactId>
-    <name>Zero.Extension.Commerce.ERP.DB</name>
+    <name>Zero::💎 - Extension::Commerce ERP</name>
     <dependencies>
         <!-- Kern -->
         <dependency>
@@ -18,4 +18,22 @@
             <artifactId>zero-extension-runtime-skeleton</artifactId>
         </dependency>
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <configuration>
+                    <propertyProviderClass>io.zerows.extension.runtime.skeleton.secure.ZeroLiquibaseEncryption
+                    </propertyProviderClass>
+                    <!-- 配置文件路径 -->
+                    <propertyFile>plugins/${project.artifactId}/database/MYSQL.properties</propertyFile>
+                    <changeLogFile>plugins/${project.artifactId}/database/MYSQL.yml</changeLogFile>
+                    <!-- 配置参数 -->
+                    <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
+                    <outputFileEncoding>UTF-8</outputFileEncoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

@@ -10,11 +10,11 @@
     </parent>
 
     <artifactId>zero-core-ams</artifactId>
-    <name>Zero::Core::AMS</name>
+    <name>🧬 - Zero::Core::AMS</name>
     <dependencies>
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-bootstrap</artifactId>
+            <artifactId>zero-connect</artifactId>
             <version>${zero.version}</version>
         </dependency>
         <!-- Vert.x -->

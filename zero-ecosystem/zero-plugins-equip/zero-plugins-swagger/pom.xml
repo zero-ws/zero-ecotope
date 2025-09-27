@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>zero-plugins-swagger</artifactId>
-    <name>Zero.Plugins.Swagger</name>
+    <name>Zero::Plugins::🧩 - Swagger</name>
     <dependencies>
         <dependency>
             <groupId>io.vertx</groupId>

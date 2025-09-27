@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>zero-plugins-common-shell</artifactId>
-    <name>Zero.Plugins.Common.Shell</name>
+    <name>Zero::Plugins::🧩 - Common Shell</name>
     <dependencies>
         <dependency>
             <groupId>io.zerows</groupId>

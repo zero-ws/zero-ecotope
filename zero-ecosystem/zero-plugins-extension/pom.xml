@@ -11,7 +11,7 @@
 
     <artifactId>zero-plugins-extension</artifactId>
     <packaging>pom</packaging>
-    <name>Zero.Plugins.Extension.POM.${zero.version}</name>
+    <name>(POM) 📚️ - Zero::Extension</name>
     <modules>
         <!-- 扩展模块骨架 -->
         <module>zero-extension-runtime-skeleton</module>
@@ -42,7 +42,8 @@
 
         <!-- 上层开发库 -->
         <module>zero-extension-commerce-api</module>
-        <!-- 入口 -->
-        <module>zero-entry-extension</module>
+
+        <!-- 独立运行程序 -->
+        <module>zero-runner-toolkit-hed</module>
     </modules>
 </project>

@@ -10,8 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>zero-extension-commerce-rbac</artifactId>
-    <name>Zero.Extension.Commerce.RBAC.DB</name>
-    <packaging>bundle</packaging>
+    <name>Zero::💎 - Extension::Commerce RBAC</name>
     <dependencies>
         <!-- Kern -->
         <dependency>
@@ -21,40 +20,17 @@
         <dependency>
             <groupId>io.zerows</groupId>
             <artifactId>zero-plugins-common-security</artifactId>
-            <version>${project.version}</version>
+            <version>${zero.version}</version>
         </dependency>
         <!-- 短信扩展 -->
         <dependency>
             <groupId>io.zerows</groupId>
             <artifactId>zero-plugins-integration-sms</artifactId>
-            <version>${project.version}</version>
+            <version>${zero.version}</version>
         </dependency>
     </dependencies>
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
-                <extensions>true</extensions>
-                <configuration>
-                    <instructions>
-                        <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-                        <Export-Package>
-                            <!-- SPI Required -->
-                            io.zerows.core.metadata.osgi.spi.*;-split-package:=merge-first,
-
-                            io.zerows.extension.commerce.rbac.*,
-                        </Export-Package>
-                        <Import-Package>
-                            *;resolution:=optional,
-                        </Import-Package>
-                        <Embed-Transitive>true</Embed-Transitive>
-                        <_fixupmessages>
-                            "Classes found in the wrong directory";restrict:=error;is:=ignore
-                        </_fixupmessages>
-                    </instructions>
-                </configuration>
-            </plugin>
             <plugin>
                 <groupId>org.liquibase</groupId>
                 <artifactId>liquibase-maven-plugin</artifactId>

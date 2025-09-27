@@ -1,1 +1,0 @@
-mvnd clean package install -DskipTests=true -Dmaven.javadoc.skip=true -Dmaven.compile.fork=true -T 1C -Dvalidate.skip=true -Denforcer.skip=true -Dcheckstyle.skip=true

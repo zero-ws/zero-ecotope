@@ -6,7 +6,7 @@
     <groupId>io.zerows</groupId>
     <artifactId>zero-ecotope</artifactId>
     <version>1.0.0</version>
-    <name>Zero Framework ${zero.version}</name>
+    <name>(POM) 📚️ - Zero Framework ${zero.version}</name>
     <description>Zero Ecotope Framework is a tool for Service Mesh Micro Service.</description>
     <url>http://www.zerows.io</url>
     <packaging>pom</packaging>

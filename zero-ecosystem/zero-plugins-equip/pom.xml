@@ -11,7 +11,7 @@
 
     <artifactId>zero-plugins-equip</artifactId>
     <packaging>pom</packaging>
-    <name>Zero.Plugins.Infix.POM.${zero.version}</name>
+    <name>(POM) 📚️ - Zero::Plugins</name>
     <modules>
         <!-- Common -->
         <!--        <module>zero-plugins-common-security</module>-->

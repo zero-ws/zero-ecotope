@@ -8,7 +8,7 @@
     <artifactId>zero-version</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
-    <name>Zero Framework Version ${zero.version}</name>
+    <name>(POM) 📚️ - Zero Framework Version ${zero.version}</name>
     <properties>
         <rachel-momo.version>1.0.1</rachel-momo.version>
         <zero.version>1.0.0</zero.version>
@@ -22,6 +22,11 @@
                 <version>${rachel-momo.version}</version>
                 <scope>import</scope>
                 <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-connect</artifactId>
+                <version>${zero.version}</version>
             </dependency>
             <!-- ================= 核心容器 ================== -->
             <dependency>
@@ -130,7 +135,7 @@
             <!-- ================= 动态插件 ================== -->
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-plugins-dynamic-toolkit-hed</artifactId>
+                <artifactId>zero-runner-toolkit-hed</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <!-- ===================== 商业接口部分 ==================== -->

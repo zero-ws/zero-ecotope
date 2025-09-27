@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>zero-extension-commerce-api</artifactId>
-    <name>Zero.Extension.Commerce.Api</name>
+    <name>🧬 - Zero::Extension::Commerce Api</name>
     <dependencies>
         <!-- Kern -->
         <dependency>
