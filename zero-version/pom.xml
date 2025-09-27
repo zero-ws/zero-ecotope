@@ -3,49 +3,224 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>io.zerows</groupId>
-        <artifactId>zero-ecotope</artifactId>
-        <version>1.0.0</version>
-    </parent>
 
+    <groupId>io.zerows</groupId>
     <artifactId>zero-version</artifactId>
+    <version>1.0.0</version>
     <packaging>pom</packaging>
-    <name>Zero::Core::Version</name>
-    <modules>
-        <!-- 导入过程父类 -->
-        <module>zero-ecosystem</module>
-        <module>zero-eco-apache</module><!-- Apache 版本 -->
-        <module>zero-eco-aspectj</module><!-- AspectJ 版本 -->
-        <module>zero-eco-camunda</module><!-- Camunda 版本 -->
-        <module>zero-eco-cluster</module><!-- Cluster 版本 -->
-        <module>zero-eco-database</module><!-- Database 版本 -->
-        <module>zero-eco-doc</module><!-- Doc 版本 -->
-        <module>zero-eco-eclipse</module><!-- Eclipse 版本 -->
-        <module>zero-eco-elk</module><!-- ELK 版本 -->
-        <module>zero-eco-google</module><!-- Google 版本 -->
-        <module>zero-eco-grpc</module><!-- GRPC 版本 -->
-        <module>zero-eco-jackson</module><!-- Jackson 版本 -->
-        <module>zero-eco-jsr</module><!-- JSR 版本 -->
-        <module>zero-eco-jvmr</module><!-- 反射 版本 -->
-        <module>zero-eco-netty</module><!-- Netty 版本 -->
-        <module>zero-eco-quiz</module><!-- Reactive 版本 -->
-        <module>zero-eco-secure</module><!-- Secure 版本 -->
-        <module>zero-eco-reactive</module><!-- Reactive 版本 -->
-        <module>zero-eco-vendor</module><!-- 第三方其他：Vendor 版本 -->
-        <module>zero-eco-vertx</module><!-- Vertx 版本 -->
-        <!--
-        project.version
-        （内部使用）Zero 版本号
-        -->
-        <module>zero-eco-version</module>
-        <!--
-        zero.version
-        （外部使用）插件部分，ecosystem 不导入，在 import 中导入
-        -->
-        <module>zero-version-core</module>
-        <module>zero-version-dynamic</module>
-        <module>zero-version-extension</module>
-        <module>zero-version-infix</module>
-    </modules>
+    <name>Zero Framework Version ${zero.version}</name>
+    <properties>
+        <rachel-momo.version>1.0.1</rachel-momo.version>
+        <zero.version>1.0.0</zero.version>
+    </properties>
+    <dependencyManagement>
+        <dependencies>
+            <!-- Import Stack -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>rachel-momo-stack</artifactId>
+                <version>${rachel-momo.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <!-- ================= 核心容器 ================== -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-core-ams</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-core-runtime</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-core-database</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-core-mature</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-core-web</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-core-testing</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-core-unity</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <!-- Zero Web Container -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-core-container</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+
+
+            <!-- ================= 入口 ================== -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-entry-facade</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <!-- ================= 静态插件 ================== -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-plugins-common-shell</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-plugins-common-trash</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-plugins-integration-sms</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-plugins-integration-wechat</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-plugins-integration-feign</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-plugins-office-excel</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-plugins-store-elasticsearch</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-plugins-store-liquibase</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-plugins-websocket-stomp</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-plugins-swagger</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <!-- ================= 动态插件 ================== -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-plugins-dynamic-toolkit-hed</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <!-- ===================== 商业接口部分 ==================== -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-extension-commerce-api</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-extension-commerce-erp</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-extension-commerce-finance</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-extension-commerce-lbs</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-extension-commerce-rbac</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <!-- ===================== 核心建模部分 ==================== -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-extension-mbse-modulat</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-extension-mbse-ui</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-extension-mbse-action</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-extension-mbse-basement</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <!-- ===================== 运行时部分 ==================== -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-extension-runtime-ambient</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-extension-runtime-crud</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-extension-runtime-integration</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-extension-runtime-report</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-extension-runtime-skeleton</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-extension-runtime-tpl</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-extension-runtime-workflow</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-extension-runtime-graphic</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>
