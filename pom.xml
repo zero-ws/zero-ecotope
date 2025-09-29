@@ -53,10 +53,7 @@
         <module>zero-ecosystem</module>
     </modules>
     <properties>
-        <!-- Zero 固定版本号 -->
         <zero.version>1.0.0</zero.version>
-        <!-- R2MO -->
-        <r2mo.version>1.0-M16</r2mo.version>
 
         <!-- ====================== Java ======================================== -->
         <encoding>UTF-8</encoding>

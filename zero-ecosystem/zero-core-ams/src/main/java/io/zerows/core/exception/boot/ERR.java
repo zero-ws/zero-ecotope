@@ -6,7 +6,7 @@ import io.r2mo.vertx.common.exception.VertxE;
 /**
  * @author lang : 2025-09-26
  */
-public interface ERR {
+interface ERR {
 
     VertxE _11000 = VertxE
         .of(-11000, "[ ZERO ] （通用）无法在 META-INF/services/{} 中找到任何实现类，请检查配置.")
