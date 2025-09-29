@@ -1,14 +1,15 @@
 package io.zerows.core.uca.qr;
 
-import io.zerows.core.exception.web._500QQueryMetaNullException;
-import io.zerows.ams.fn.HFn;
+import io.r2mo.function.Fn;
+import io.vertx.core.json.JsonObject;
+import io.zerows.core.exception.web._60024Exception500QueryMetaNull;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.core.uca.qr.syntax.Ir;
 import io.zerows.core.uca.qr.syntax.IrDo;
 import io.zerows.core.uca.qr.syntax.IrItem;
-import io.vertx.core.json.JsonObject;
 
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.function.BiConsumer;
 
 /**
@@ -45,7 +46,7 @@ public class Criteria implements Serializable {
      * @param data {@link io.vertx.core.json.JsonObject}
      */
     private Criteria(final JsonObject data) {
-        HFn.outWeb(null == data, LOGGER, _500QQueryMetaNullException.class, this.getClass());
+        Fn.jvmKo(Objects.isNull(data), _60024Exception500QueryMetaNull.class);
         assert data != null : "If null dot, the exception will be thrown out.";
         if (IrDo.isComplex(data)) {
             this.mode = Ir.Mode.TREE;

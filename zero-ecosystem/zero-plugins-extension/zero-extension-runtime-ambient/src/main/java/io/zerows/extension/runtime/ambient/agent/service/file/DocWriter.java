@@ -1,19 +1,20 @@
 package io.zerows.extension.runtime.ambient.agent.service.file;
 
-import io.zerows.common.program.Kv;
-import io.zerows.core.uca.log.Annal;
+import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.common.program.Kv;
 import io.zerows.core.constant.KName;
-import io.zerows.unity.Ux;
-import io.zerows.core.util.Ut;
 import io.zerows.core.database.jooq.operation.UxJooq;
+import io.zerows.core.uca.log.Annal;
+import io.zerows.core.util.Ut;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XAttachmentDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XAttachment;
-import io.zerows.extension.runtime.skeleton.exception._400FileNameInValidException;
+import io.zerows.extension.runtime.skeleton.exception._81002Exception400FilenameInvalid;
 import io.zerows.extension.runtime.skeleton.osgi.spi.business.ExIo;
 import io.zerows.extension.runtime.skeleton.osgi.spi.feature.Attachment;
+import io.zerows.unity.Ux;
 import jakarta.inject.Inject;
 
 import java.util.concurrent.ConcurrentMap;
@@ -51,7 +52,7 @@ public class DocWriter implements DocWStub {
         // isFileName Checking
         final String name = documentJ.getString(KName.NAME);
         if (!Ut.isFileName(name)) {
-            return Ut.Bnd.failOut(_400FileNameInValidException.class, this.getClass());
+            return FnVertx.failOut(_81002Exception400FilenameInvalid.class);
         }
         final String key = documentJ.getString(KName.KEY);
         final UxJooq jq = Ux.Jooq.on(XAttachmentDao.class);

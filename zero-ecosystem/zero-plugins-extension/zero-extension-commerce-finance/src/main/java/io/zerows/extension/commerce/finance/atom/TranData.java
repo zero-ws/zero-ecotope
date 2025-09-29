@@ -1,13 +1,13 @@
 package io.zerows.extension.commerce.finance.atom;
 
-import io.zerows.core.exception.web._501NotImplementException;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
-import io.zerows.unity.Ux;
+import io.zerows.core.exception.web._80413Exception501NotImplement;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FTrans;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FTransItem;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FTransOf;
 import io.zerows.specification.atomic.HJson;
+import io.zerows.unity.Ux;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -112,7 +112,7 @@ public class TranData implements Serializable, HJson {
 
     @Override
     public void fromJson(final JsonObject json) {
-        throw new _501NotImplementException(this.getClass());
+        throw new _80413Exception501NotImplement();
     }
 
 

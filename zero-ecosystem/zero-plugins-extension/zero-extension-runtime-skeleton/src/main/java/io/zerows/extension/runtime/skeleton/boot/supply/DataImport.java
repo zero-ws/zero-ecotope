@@ -1,5 +1,6 @@
 package io.zerows.extension.runtime.skeleton.boot.supply;
 
+import io.r2mo.function.Fn;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
@@ -12,7 +13,7 @@ import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.cache.shared.MapInfix;
 import io.zerows.core.web.cache.shared.SharedClient;
-import io.zerows.extension.runtime.skeleton.exception._417LoadingNotReadyException;
+import io.zerows.extension.runtime.skeleton.exception._80214Exception417LoadingNotReady;
 import io.zerows.plugins.office.excel.ExcelClient;
 import io.zerows.plugins.office.excel.ExcelInfix;
 import io.zerows.unity.Ux;
@@ -66,13 +67,13 @@ public class DataImport {
     private static void ensureEnvironment() {
         // 检查一：Jooq基础环境是否准备
         final Configuration jooq = JooqInfix.get(YmlCore.jooq.PROVIDER);
-        FnZero.outWeb(Objects.isNull(jooq), _417LoadingNotReadyException.class, DataImport.class, "jooq / provider");
+        Fn.jvmKo(Objects.isNull(jooq), _80214Exception417LoadingNotReady.class, "jooq / provider");
         // 检查二：Excel导入环境是否准备
         final ExcelClient excel = ExcelInfix.getClient();
-        FnZero.outWeb(Objects.isNull(excel), _417LoadingNotReadyException.class, DataImport.class, "excel");
+        Fn.jvmKo(Objects.isNull(excel), _80214Exception417LoadingNotReady.class, "excel");
         // 检查三：Map导入环境是否准备
         final SharedClient<String, Object> shared = MapInfix.getClient();
-        FnZero.outWeb(Objects.isNull(shared), _417LoadingNotReadyException.class, DataImport.class, "shared");
+        Fn.jvmKo(Objects.isNull(shared), _80214Exception417LoadingNotReady.class, "shared");
     }
 
     /**

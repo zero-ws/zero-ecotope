@@ -7,7 +7,7 @@ import io.vertx.core.Handler;
 import io.vertx.core.Promise;
 import io.zerows.core.exception.WebException;
 import io.zerows.core.exception.boot._11011Exception500InvokingPre;
-import io.zerows.core.exception.web._412ArgumentNullException;
+import io.zerows.core.exception.web._60059Exception412ArgumentNull;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -47,7 +47,7 @@ final class UInvoker {
     private static Method methodSeek(final Object instance, final String name, final Object... args) {
         // Direct invoke, multi overwrite for unbox/box issue still existing.
         if (TIs.isNil(name) || Objects.isNull(instance)) {
-            throw new _412ArgumentNullException(UInvoker.class, "name | instance");
+            throw new _60059Exception412ArgumentNull("name | instance");
         }
         final Class<?> clazz = instance.getClass();
         final List<Class<?>> types = new ArrayList<>();
@@ -85,7 +85,7 @@ final class UInvoker {
 
         /* Method checking */
         if (Objects.isNull(method)) {
-            throw new _412ArgumentNullException(UInvoker.class, "method: " + name + " is null");
+            throw new _60059Exception412ArgumentNull("method: " + name + " is null");
         }
 
         final Class<?> returnType = method.getReturnType();

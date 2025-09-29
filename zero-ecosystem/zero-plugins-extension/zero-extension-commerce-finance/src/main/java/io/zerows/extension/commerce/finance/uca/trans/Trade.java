@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 import io.zerows.ams.annotations.Memory;
-import io.zerows.core.exception.web._501NotImplementException;
+import io.zerows.core.exception.web._80413Exception501NotImplement;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.*;
 import io.zerows.extension.commerce.finance.eon.em.EmPay;
 
@@ -84,11 +84,11 @@ public interface Trade<IN, OUT> {
      * - List<IN> -> List<OUT>   多到多    （多到多会包含散开的情况）
      */
     default Future<OUT> flatter(final JsonObject data, final IN assist) {
-        throw new _501NotImplementException(this.getClass());
+        throw new _80413Exception501NotImplement();
     }
 
     default Future<List<OUT>> flatter(final JsonArray data, final List<IN> assist) {
-        throw new _501NotImplementException(this.getClass());
+        throw new _80413Exception501NotImplement();
     }
 
     /*
@@ -96,11 +96,11 @@ public interface Trade<IN, OUT> {
      * - IN -> List<OUT>         单到多的散开接口
      */
     default Future<List<OUT>> scatter(final JsonObject data, final IN assist) {
-        throw new _501NotImplementException(this.getClass());
+        throw new _80413Exception501NotImplement();
     }
 
     default Future<List<OUT>> scatter(final JsonArray data, final IN assist) {
-        throw new _501NotImplementException(this.getClass());
+        throw new _80413Exception501NotImplement();
     }
 }
 

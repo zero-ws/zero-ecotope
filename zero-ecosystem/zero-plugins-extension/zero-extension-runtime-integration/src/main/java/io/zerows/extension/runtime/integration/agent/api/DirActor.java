@@ -1,5 +1,6 @@
 package io.zerows.extension.runtime.integration.agent.api;
 
+import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.annotations.Address;
@@ -9,7 +10,7 @@ import io.zerows.core.constant.KName;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.runtime.integration.agent.service.DirStub;
 import io.zerows.extension.runtime.integration.eon.Addr;
-import io.zerows.extension.runtime.skeleton.exception._400FileNameInValidException;
+import io.zerows.extension.runtime.skeleton.exception._81002Exception400FilenameInvalid;
 import jakarta.inject.Inject;
 
 /**
@@ -27,7 +28,7 @@ public class DirActor {
         // isFileName Checking
         final String name = data.getString(KName.NAME);
         if (!Ut.isFileName(name)) {
-            return Ut.Bnd.failOut(_400FileNameInValidException.class, this.getClass());
+            return FnVertx.failOut(_81002Exception400FilenameInvalid.class);
         }
         return this.stub.create(data);
     }
@@ -38,7 +39,7 @@ public class DirActor {
         // isFileName Checking
         final String name = data.getString(KName.NAME);
         if (!Ut.isFileName(name)) {
-            return Ut.Bnd.failOut(_400FileNameInValidException.class, this.getClass());
+            return FnVertx.failOut(_81002Exception400FilenameInvalid.class);
         }
         return this.stub.update(key, data);
     }

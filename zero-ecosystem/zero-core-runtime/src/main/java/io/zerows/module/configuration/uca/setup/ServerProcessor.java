@@ -5,9 +5,9 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.ams.constant.em.app.ServerType;
 import io.zerows.core.constant.KName;
 import io.zerows.core.constant.configure.YmlCore;
+import io.zerows.core.exception.boot._30001Exception500ServerConfig;
 import io.zerows.core.util.Ut;
 import io.zerows.module.configuration.atom.NodeVertx;
-import io.zerows.module.configuration.exception.ServerConfigException;
 import io.zerows.module.configuration.zdk.Processor;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HSetting;
@@ -64,11 +64,11 @@ class ServerProcessor implements Processor<NodeVertx, HSetting> {
         final HConfig config = setting.infix(YmlCore.server.__KEY);
 
         if (Objects.isNull(config) || Ut.isNil(config.options())) {
-            throw new ServerConfigException(this.getClass(), "Server configuration Null.");
+            throw new _30001Exception500ServerConfig("[ R2MO ] 服务器配置 null");
         } else {
             final JsonObject serverData = config.options();
             if (!serverData.containsKey(YmlCore.server.__KEY)) {
-                throw new ServerConfigException(this.getClass(), serverData.encode());
+                throw new _30001Exception500ServerConfig(serverData.encode());
             }
             return Ut.valueJArray(serverData, YmlCore.server.__KEY);
         }

@@ -1,7 +1,6 @@
 package io.zerows.ams.util;
 
 import io.zerows.core.exception.WebException;
-import io.zerows.core.exception.web._500InternalCauseException;
 import io.zerows.core.exception.web._500InternalServerException;
 
 import java.util.Objects;
@@ -26,7 +25,7 @@ class UError {
             // 调用 getCause() 模式
             final Throwable cause = error.getCause();
             if (Objects.isNull(cause)) {
-                return new _500InternalCauseException(target, error);
+                return null; // new _500InternalServerException(error);
             }
 
             // 递归调用

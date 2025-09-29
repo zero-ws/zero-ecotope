@@ -6,9 +6,8 @@ import io.zerows.ams.constant.VValue;
 import io.zerows.ams.util.HUt;
 import io.zerows.core.annotations.Contract;
 import io.zerows.core.exception.BootingException;
-import io.zerows.core.fn.FnZero;
 import io.zerows.module.metadata.exception.BootDuplicatedImplException;
-import io.zerows.module.metadata.exception._412ContractFieldException;
+import io.zerows.module.metadata.exception._60040Exception412ContractField;
 import io.zerows.module.metadata.store.OCacheClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -153,8 +152,7 @@ final class Instance {
         final Field[] filtered = Arrays.stream(fields)
             .filter(field -> field.isAnnotationPresent(Contract.class))
             .toArray(Field[]::new);
-        FnZero.out(1 != filtered.length, _412ContractFieldException.class,
-            executor, fieldType, instance.getClass(), filtered.length);
+        Fn.jvmKo(1 != filtered.length, _60040Exception412ContractField.class, fieldType, instance.getClass(), filtered.length);
         return filtered[VValue.IDX];
     }
 

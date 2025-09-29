@@ -1,13 +1,14 @@
 package io.zerows.core.uca.qr;
 
+import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.fn.HFn;
-import io.zerows.core.exception.web._400QPagerIndexException;
-import io.zerows.core.exception.web._400QPagerInvalidException;
-import io.zerows.core.exception.web._500QQueryMetaNullException;
+import io.zerows.core.exception.web._60023Exception400QrPageInvalid;
+import io.zerows.core.exception.web._60024Exception500QueryMetaNull;
+import io.zerows.core.exception.web._60025Exception400QrPageIndex;
 import io.zerows.core.uca.log.Annal;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Pager implements Serializable {
 
@@ -66,19 +67,15 @@ public class Pager implements Serializable {
     @SuppressWarnings("all")
     private void ensure(final JsonObject pageJson) {
         // Pager building checking
-        HFn.outWeb(null == pageJson, LOGGER,
-            _500QQueryMetaNullException.class, this.getClass());
+        Fn.jvmKo(Objects.isNull(pageJson), _60024Exception500QueryMetaNull.class);
         // Required
-        HFn.outWeb(!pageJson.containsKey(PAGE), LOGGER,
-            _400QPagerInvalidException.class, this.getClass(), PAGE);
-        HFn.outWeb(!pageJson.containsKey(SIZE), LOGGER,
-            _400QPagerInvalidException.class, this.getClass(), SIZE);
+        Fn.jvmKo(!pageJson.containsKey(PAGE), _60023Exception400QrPageInvalid.class, PAGE);
+        Fn.jvmKo(!pageJson.containsKey(SIZE), _60023Exception400QrPageInvalid.class, SIZE);
     }
 
     private void init(final Integer page, final Integer size) {
         // Page/Size
-        HFn.outWeb(1 > page, LOGGER,
-            _400QPagerIndexException.class, this.getClass(), page);
+        Fn.jvmKo(1 > page, _60025Exception400QrPageIndex.class, page);
         this.page = page;
         // Default Size is 10
         this.size = 0 < size ? size : 10;

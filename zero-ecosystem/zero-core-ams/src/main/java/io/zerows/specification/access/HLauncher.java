@@ -1,6 +1,6 @@
 package io.zerows.specification.access;
 
-import io.zerows.core.exception.web._501NotImplementException;
+import io.zerows.core.exception.web._80413Exception501NotImplement;
 import io.zerows.specification.configuration.HConfig;
 
 import java.util.concurrent.ConcurrentHashMap;
@@ -77,7 +77,7 @@ public interface HLauncher<WebContainer> {
      * @param server 服务器引用
      */
     default <WebConfig extends HConfig> void restart(final HConfig.HRun<WebConfig> run, final Consumer<WebContainer> server) {
-        throw new _501NotImplementException(this.getClass());
+        throw new _80413Exception501NotImplement();
     }
 
     /**
@@ -87,7 +87,7 @@ public interface HLauncher<WebContainer> {
      * @param server 服务器引用
      */
     default <WebConfig extends HConfig> void refresh(final HConfig.HRun<WebConfig> run, final Consumer<WebContainer> server) {
-        throw new _501NotImplementException(this.getClass());
+        throw new _80413Exception501NotImplement();
     }
 
     /**

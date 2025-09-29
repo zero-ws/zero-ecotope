@@ -8,4 +8,7 @@ import io.r2mo.vertx.common.exception.VertxE;
  */
 interface ERR {
     VertxE _60045 = VertxE.of(-60045).state(HttpResponseStatus.BAD_REQUEST);
+    VertxE _80214 = VertxE.of(-80214).state(HttpResponseStatus.EXPECTATION_FAILED);
+    VertxE _80219 = VertxE.of(-80219).state(HttpResponseStatus.FORBIDDEN);
+    VertxE _81002 = VertxE.of(-81002).state(HttpResponseStatus.BAD_REQUEST);
 }

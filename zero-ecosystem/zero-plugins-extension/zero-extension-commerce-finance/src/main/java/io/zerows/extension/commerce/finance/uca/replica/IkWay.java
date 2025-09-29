@@ -3,7 +3,7 @@ package io.zerows.extension.commerce.finance.uca.replica;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonObject;
 import io.zerows.ams.annotations.Memory;
-import io.zerows.core.exception.web._501NotImplementException;
+import io.zerows.core.exception.web._80413Exception501NotImplement;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.*;
 import io.zerows.extension.commerce.finance.eon.FmConstant;
 
@@ -126,11 +126,11 @@ public interface IkWay<INPUT, OUTPUT> {
     }
 
     default void transfer(final INPUT input, final OUTPUT output) {
-        throw new _501NotImplementException(this.getClass());
+        throw new _80413Exception501NotImplement();
     }
 
     default void transfer(final INPUT input, final List<OUTPUT> outputs) {
-        throw new _501NotImplementException(this.getClass());
+        throw new _80413Exception501NotImplement();
     }
 }
 

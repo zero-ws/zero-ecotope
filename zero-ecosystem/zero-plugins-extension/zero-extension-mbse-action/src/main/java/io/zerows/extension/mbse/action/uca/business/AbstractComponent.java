@@ -1,24 +1,24 @@
 package io.zerows.extension.mbse.action.uca.business;
 
+import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.unity.Ux;
 import io.zerows.common.datamation.KDictUse;
 import io.zerows.common.datamation.KFabric;
 import io.zerows.common.datamation.KMap;
 import io.zerows.common.normalize.KIdentity;
 import io.zerows.core.annotations.Contract;
-import io.zerows.core.exception.WebException;
-import io.zerows.core.exception.web._501NotImplementException;
+import io.zerows.core.exception.web._80413Exception501NotImplement;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.mbse.atom.runner.ActIn;
 import io.zerows.core.web.mbse.atom.runner.ActOut;
 import io.zerows.core.web.model.zdk.Service;
 import io.zerows.extension.mbse.action.osgi.spi.jet.JtComponent;
-import io.zerows.extension.runtime.skeleton.exception._400SigmaMissingException;
+import io.zerows.extension.runtime.skeleton.exception._60045Exception400SigmaMissing;
 import io.zerows.module.domain.atom.commune.XHeader;
 import io.zerows.specification.modeling.HRule;
+import io.zerows.unity.Ux;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentMap;
@@ -131,8 +131,7 @@ public abstract class AbstractComponent implements JtComponent, Service {
     protected Future<ActOut> transferAsync(final ActIn request, final Function<String, Future<ActOut>> executor) {
         final String sigma = request.sigma();
         if (Ut.isNil(sigma)) {
-            final WebException error = new _400SigmaMissingException(this.getClass());
-            return ActOut.future(error);
+            return FnVertx.failOut(_60045Exception400SigmaMissing.class);
         } else {
             return executor.apply(sigma);
         }
@@ -145,7 +144,7 @@ public abstract class AbstractComponent implements JtComponent, Service {
      */
     @Override
     public Future<ActOut> transferAsync(final ActIn actIn) {
-        return Ut.Bnd.failOut(_501NotImplementException.class, this.getClass());
+        return FnVertx.failOut(_80413Exception501NotImplement.class);
     }
 
     // ------------ Specific Method that will be used in sub-class ------------

@@ -1,9 +1,9 @@
 package io.zerows.extension.commerce.finance.uca.enter;
 
-import io.zerows.core.exception.web._501NotImplementException;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.core.exception.web._80413Exception501NotImplement;
 
 import java.util.List;
 
@@ -13,10 +13,10 @@ import java.util.List;
 interface MakerOn<H, T> {
 
     default Future<T> buildAsync(final JsonObject data, final H assist) {
-        throw new _501NotImplementException(this.getClass());
+        throw new _80413Exception501NotImplement();
     }
 
     default Future<List<T>> buildAsync(final JsonArray data, final H assist) {
-        throw new _501NotImplementException(this.getClass());
+        throw new _80413Exception501NotImplement();
     }
 }

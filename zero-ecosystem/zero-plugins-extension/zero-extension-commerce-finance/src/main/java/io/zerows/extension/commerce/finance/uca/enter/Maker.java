@@ -4,7 +4,7 @@ import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.ams.annotations.Memory;
-import io.zerows.core.exception.web._501NotImplementException;
+import io.zerows.core.exception.web._80413Exception501NotImplement;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.*;
 
 import java.util.List;
@@ -71,7 +71,7 @@ public interface Maker<H, T> extends MakerOn<H, T> {
 
     // --------------- 实例方法 -------------------
     default Future<T> buildFastAsync(final JsonObject data) {
-        throw new _501NotImplementException(this.getClass());
+        throw new _80413Exception501NotImplement();
     }
 }
 

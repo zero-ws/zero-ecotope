@@ -1,9 +1,9 @@
 package io.zerows.extension.runtime.crud.uca.dao;
 
-import io.zerows.core.exception.web._501NotImplementException;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.core.exception.web._80413Exception501NotImplement;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 
 import java.util.function.Function;
@@ -46,6 +46,6 @@ public interface Operate<I, O> {
      * @return {@link Function} 函数
      */
     default Function<I, Future<O>> annexFn(final IxMod in) {
-        throw new _501NotImplementException(this.getClass());
+        throw new _80413Exception501NotImplement();
     }
 }

@@ -1,11 +1,11 @@
 package io.zerows.core.uca.qr.syntax;
 
-import io.zerows.ams.constant.VString;
-import io.zerows.core.exception.web._400QOpUnknownException;
-import io.zerows.core.exception.web._500QQueryMetaNullException;
-import io.zerows.ams.fn.HFn;
-import io.zerows.ams.util.HUt;
+import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonArray;
+import io.zerows.ams.constant.VString;
+import io.zerows.ams.util.HUt;
+import io.zerows.core.exception.web._60024Exception500QueryMetaNull;
+import io.zerows.core.exception.web._60026Exception400QrOpUnknown;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -35,13 +35,13 @@ public class IrItem implements Serializable {
 
     public IrItem(final String fieldExpr) {
         /* First checking for `fieldExpr` literal */
-        HFn.out(HUt.isNil(fieldExpr), _500QQueryMetaNullException.class, this.getClass());
+        Fn.jvmKo(HUt.isNil(fieldExpr), _60024Exception500QueryMetaNull.class);
         this.qrKey = fieldExpr;
         if (fieldExpr.contains(VString.COMMA)) {
             this.field = fieldExpr.split(VString.COMMA)[0];
             this.op = fieldExpr.split(VString.COMMA)[1];
             /* op un support of query engine */
-            HFn.out(!Ir.Op.VALUES.contains(this.op), _400QOpUnknownException.class, this.getClass(), this.op);
+            Fn.jvmKo(!Ir.Op.VALUES.contains(this.op), _60026Exception400QrOpUnknown.class, this.op);
         } else {
             this.field = fieldExpr;
             this.op = Ir.Op.EQ;

@@ -1,6 +1,8 @@
 package io.zerows.extension.commerce.rbac.plugins.authorization;
 
 import io.r2mo.function.Fn;
+import io.r2mo.typed.exception.web._403ForbiddenException;
+import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
@@ -8,7 +10,6 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.authorization.Authorization;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.core.exception.web._403ForbiddenException;
 import io.zerows.core.util.Ut;
 import io.zerows.module.security.atom.Aegis;
 import io.zerows.plugins.common.security.authorization.AuthorizationResource;
@@ -43,7 +44,7 @@ public class ProfileResource implements AuthorizationResource {
             future.onComplete(res -> {
                 if (res.succeeded()) {
                     if (Objects.isNull(res.result())) {
-                        handler.handle(Ut.Bnd.failOut(_403ForbiddenException.class, this.getClass()));
+                        handler.handle(FnVertx.failOut(_403ForbiddenException.class, "[ R2MO ] 访问被禁止/拒绝！"));
                     } else {
                         final ConcurrentMap<String, Set<String>> profiles = new ConcurrentHashMap<>();
                         Ut.<JsonArray>itJObject(res.result(), (values, field) -> profiles.put(field, Ut.toSet(values)));
