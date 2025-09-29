@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.unity.Ux;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.runtime.ambient.agent.service.linkage.LinkService;
@@ -29,7 +29,7 @@ public class ExLinkage implements Linkage {
 
     @Override
     public Future<JsonArray> fetch(final JsonObject criteria) {
-        return Ux.Jooq.on(XLinkageDao.class).fetchJAsync(criteria).compose(RFn.ofJArray(
+        return Ux.Jooq.on(XLinkageDao.class).fetchJAsync(criteria).compose(FnZero.ofJArray(
             KName.SOURCE_DATA,
             KName.TARGET_DATA
         ));

@@ -63,7 +63,7 @@ public interface DataPool {
          * (DataSourceConnectionProvider).
          *
          * The old code is as:
-         * final Connection connection = RFn.getJvm(() -> pool.getDataSource().getConnection());
+         * final Connection connection = FnZero.getJvm(() -> pool.getDataSource().getConnection());
          * final ConnectionProvider provider = new DefaultConnectionProvider(connection);
          *
          * Here the new version is as following:

@@ -8,7 +8,7 @@ import io.zerows.ams.constant.em.typed.ChangeFlag;
 import io.zerows.core.constant.KName;
 import io.zerows.core.database.atom.Database;
 import io.zerows.core.database.jooq.operation.UxJooq;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.mbse.basement.atom.Model;
 import io.zerows.extension.mbse.basement.atom.Schema;
@@ -48,7 +48,7 @@ class SchemaRefine implements AoRefine {
             // 2. 更新 MEntity 相关内容
             final List<Future<JsonObject>> futures = new ArrayList<>();
             schemata.stream().map(this::saveSchema).forEach(futures::add);
-            return RFn.combineA(futures)
+            return FnZero.combineA(futures)
                 .compose(nil -> Ux.future(appJson))
                 .otherwise(Ux.otherwise(() -> null));
         };
@@ -110,7 +110,7 @@ class SchemaRefine implements AoRefine {
                 combine.add(this.saveField(schema, entity));
                 // Schema -> Key
                 combine.add(this.saveKey(schema, entity));
-                return RFn.compressA(combine)
+                return FnZero.compressA(combine)
                     .compose(nil -> Ux.future(entity))
                     .compose(Ux::futureJ)
                     .otherwise(Ux.otherwise(() -> null));

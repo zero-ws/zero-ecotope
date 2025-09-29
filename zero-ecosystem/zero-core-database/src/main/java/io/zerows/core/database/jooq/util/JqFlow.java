@@ -41,7 +41,7 @@ public class JqFlow {
         final Class<?> entityCls = analyzer.type();
         final String normalized = analyzer.pojoFile(pojo);
         return CC_FLOW.pick(() -> new JqFlow(analyzer, normalized), entityCls.getName() + "," + normalized);
-        // RFn.po?l(Pool.POOL_FLOW, entityCls.getName() + "," + normalized, () -> new JqFlow(analyzer, normalized));
+        // FnZero.po?l(Pool.POOL_FLOW, entityCls.getName() + "," + normalized, () -> new JqFlow(analyzer, normalized));
     }
 
     // ============ JqFlow re-bind and calculation =========

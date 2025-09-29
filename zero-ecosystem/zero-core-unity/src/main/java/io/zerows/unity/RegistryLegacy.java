@@ -7,7 +7,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.configure.YmlCore;
 import io.zerows.core.database.jooq.JooqInfix;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
 
 import java.lang.reflect.Method;
@@ -53,7 +53,7 @@ class RegistryLegacy {
                 methodSet.forEach(method -> queue.add(json -> invokeComponent(componentCls, method, vertx)));
             }
         });
-        return RFn.parallel(Boolean.TRUE, queue);
+        return FnZero.parallel(Boolean.TRUE, queue);
     }
 
     private static Set<Method> registryBridgeMethod(final Class<?> clazz) {
@@ -111,7 +111,7 @@ class RegistryLegacy {
                 }
             }
         });
-        return RFn.combineB(async);
+        return FnZero.combineB(async);
     }
 
     private static Future<Boolean> invokeComponent(final Class<?> clazz, final String methodName, final Vertx vertx) {

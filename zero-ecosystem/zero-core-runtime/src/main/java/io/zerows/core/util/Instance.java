@@ -6,7 +6,7 @@ import io.zerows.ams.constant.VValue;
 import io.zerows.ams.util.HUt;
 import io.zerows.core.annotations.Contract;
 import io.zerows.core.exception.BootingException;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.module.metadata.exception.BootDuplicatedImplException;
 import io.zerows.module.metadata.exception._412ContractFieldException;
 import io.zerows.module.metadata.store.OCacheClass;
@@ -153,7 +153,7 @@ final class Instance {
         final Field[] filtered = Arrays.stream(fields)
             .filter(field -> field.isAnnotationPresent(Contract.class))
             .toArray(Field[]::new);
-        RFn.out(1 != filtered.length, _412ContractFieldException.class,
+        FnZero.out(1 != filtered.length, _412ContractFieldException.class,
             executor, fieldType, instance.getClass(), filtered.length);
         return filtered[VValue.IDX];
     }

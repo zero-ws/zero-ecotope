@@ -1,6 +1,6 @@
 package io.zerows.extension.mbse.ui.agent.service;
 
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.uca.log.Annal;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
@@ -37,7 +37,7 @@ public class DoService implements DoStub {
         return Ux.Jooq.on(UiOpDao.class)
             .<UiOp>fetchAsync(KName.Ui.CONTROL_ID, control)
             .compose(Ux::futureA)
-            .compose(RFn.ofJArray(KName.Ui.CONFIG));
+            .compose(FnZero.ofJArray(KName.Ui.CONFIG));
     }
 
     @Override
@@ -58,6 +58,6 @@ public class DoService implements DoStub {
         return Ux.Jooq.on(UiOpDao.class)
             .<UiOp>fetchAsync(condition)
             .compose(Ux::futureA)
-            .compose(RFn.ofJArray(KName.Ui.CONFIG));
+            .compose(FnZero.ofJArray(KName.Ui.CONFIG));
     }
 }

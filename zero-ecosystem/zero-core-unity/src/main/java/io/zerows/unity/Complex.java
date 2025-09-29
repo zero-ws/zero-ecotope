@@ -1,11 +1,11 @@
 package io.zerows.unity;
 
 import io.zerows.common.program.KRef;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.uca.qr.Pagination;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.fn.RFn;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,7 +101,7 @@ class Complex {
                     pageSet.stream()
                         .map(each -> pageConsumer.apply(each).compose(responseBuilder))
                         .forEach(futures::add);
-                    return RFn.combineT(futures).compose(list -> {
+                    return FnZero.combineT(futures).compose(list -> {
                         final R result = list.stream().reduce(fnReduce).orElse(null);
                         final R firstRef = firstResult.get();
                         return Ux.future(fnReduce.apply(firstRef, result));

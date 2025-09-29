@@ -6,7 +6,7 @@ import io.vertx.ext.auth.authentication.AuthenticationProvider;
 import io.vertx.ext.web.handler.AuthenticationHandler;
 import io.vertx.ext.web.handler.AuthorizationHandler;
 import io.zerows.core.constant.em.EmSecure;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.security.exception.BootWallProviderConflictException;
 import io.zerows.core.web.security.exception.BootWallSizeException;
@@ -104,14 +104,14 @@ class BoltWhich implements Bolt {
              * The size should be 1 ( For non-extension )
              */
             final AegisItem item = config.item();
-            RFn.outBoot(Objects.isNull(item), BootWallSizeException.class,
+            FnZero.outBoot(Objects.isNull(item), BootWallSizeException.class,
                 this.getClass(), config.getType(), 1);
         }
         final Set<Class<?>> provider = config.providers();
         /*
          * Must be valid type of provider
          */
-        provider.forEach(item -> RFn.outBoot(!AuthenticationProvider.class.isAssignableFrom(item),
+        provider.forEach(item -> FnZero.outBoot(!AuthenticationProvider.class.isAssignableFrom(item),
             BootWallProviderConflictException.class,
             this.getClass(), item));
         return config;

@@ -5,7 +5,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.unity.Ux;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.runtime.integration.domain.tables.pojos.IDirectory;
@@ -86,7 +86,7 @@ class IsStore {
                 futures.add(mkdir(compared.getOrDefault(ChangeFlag.ADD, new JsonArray()), config));
                 futures.add(mkdir(compared.getOrDefault(ChangeFlag.UPDATE, new JsonArray()), queried));
                 futures.add(Ux.future(compared.getOrDefault(ChangeFlag.NONE, new JsonArray())));
-                return RFn.compressA(futures);
+                return FnZero.compressA(futures);
             })
             .compose(synced -> IsFs.run(synced, (fs, dataGroup) -> fs.synchronize(dataGroup, config)))
             .compose(synced -> {

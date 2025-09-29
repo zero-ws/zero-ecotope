@@ -3,7 +3,7 @@ package io.zerows.extension.runtime.skeleton.refine;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.unity.Ux;
 import io.zerows.ams.constant.VString;
 import io.zerows.core.constant.KName;
@@ -67,7 +67,7 @@ class KeTool {
                 Ke.LOG.Turnel.warn(KeTool.class, "Criteria must be not empty");
             }
         });
-        return RFn.combineM(futures).compose(mapData -> {
+        return FnZero.combineM(futures).compose(mapData -> {
             mapData.forEach(data::put);
             return Ux.future(data);
         });

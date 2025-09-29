@@ -5,7 +5,7 @@ import io.mature.extension.scaffold.plugin.AspectSwitcher;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.unity.Ux;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.mbse.atom.runner.ActIn;
@@ -172,7 +172,7 @@ public abstract class AbstractHMore extends AbstractHub implements HWay<JsonArra
      * o - One
      * m - Many ( A, S, L )
      *
-     * Recommend you to use non-Ax API ( Instead you should use Ux/Ut/RFn )
+     * Recommend you to use non-Ax API ( Instead you should use Ux/Ut/FnZero )
      *
      * Ax tool is used in .compose only to remove `->`.
      *
@@ -183,7 +183,7 @@ public abstract class AbstractHMore extends AbstractHub implements HWay<JsonArra
         return set -> {
             final List<Future<JsonArray>> futures = new ArrayList<>();
             set.forEach(item -> futures.add(consumer.apply(item)));
-            return RFn.compressA(futures);
+            return FnZero.compressA(futures);
         };
     }
 }

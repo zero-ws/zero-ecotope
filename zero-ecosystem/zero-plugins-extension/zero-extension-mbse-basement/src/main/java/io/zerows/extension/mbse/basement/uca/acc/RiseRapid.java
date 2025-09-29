@@ -7,7 +7,7 @@ import io.zerows.ams.constant.em.modeling.EmAttribute;
 import io.zerows.ams.constant.em.typed.ChangeFlag;
 import io.zerows.core.constant.KName;
 import io.zerows.core.database.atom.Database;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.domain.tables.daos.MAccDao;
@@ -37,7 +37,7 @@ class RiseRapid implements Rise {
 
     @Override
     public Future<Apt> fetchBatch(final JsonObject criteria, final DataAtom atom) {
-        return RFn.combineT(
+        return FnZero.combineT(
             this.inputData(criteria, atom),
             this.inputAcc(criteria, atom),
             (data, acc) -> this.combineAcc(data, acc, atom)

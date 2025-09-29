@@ -29,7 +29,7 @@ public class UriAeon {
          */
         final String threadId = Thread.currentThread().getName();
         CC_NEURO.pick(() -> UriNeuro.getInstance(threadId).bind(router));
-        // RFn.po?lThread(NEURO, () -> UriNeuro.getInstance(threadId).bind(router));
+        // FnZero.po?lThread(NEURO, () -> UriNeuro.getInstance(threadId).bind(router));
     }
 
 

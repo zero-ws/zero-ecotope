@@ -4,7 +4,7 @@ import io.r2mo.function.Actuator;
 import io.r2mo.function.Fn;
 import io.zerows.ams.constant.VValue;
 import io.zerows.core.exception.WebException;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.extension.mbse.basement.atom.data.DataEvent;
 import io.zerows.extension.mbse.basement.atom.element.DataMatrix;
@@ -116,7 +116,7 @@ abstract class AbstractJQCrud {
     }
 
     private void ensure(final String table, final DataMatrix matrix) {
-        RFn.outWeb(matrix.getAttributes().isEmpty(), logger(), _417ConditionEmptyException.class, getClass(), table);
+        FnZero.outWeb(matrix.getAttributes().isEmpty(), logger(), _417ConditionEmptyException.class, getClass(), table);
     }
 
     private void ensure(final String table, final List<DataMatrix> matrixes) {

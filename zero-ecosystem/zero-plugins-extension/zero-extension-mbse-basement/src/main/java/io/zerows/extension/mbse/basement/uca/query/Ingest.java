@@ -1,7 +1,7 @@
 package io.zerows.extension.mbse.basement.uca.query;
 
 import io.zerows.ams.constant.em.modeling.EmModel;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.uca.qr.Criteria;
 import io.zerows.core.uca.qr.Sorter;
 import io.zerows.extension.mbse.basement.atom.element.DataTpl;
@@ -36,7 +36,7 @@ public interface Ingest {
      */
     default Condition onCondition(final DataTpl tpl,
                                   final Criteria criteria) {
-        RFn.outWeb(true, _501IngestImplementException.class, this.getClass());
+        FnZero.outWeb(true, _501IngestImplementException.class, this.getClass());
         return null;
     }
 
@@ -46,7 +46,7 @@ public interface Ingest {
     @SuppressWarnings("all")
     default List<OrderField> onOrder(final DataTpl tpl,
                                      final Sorter sorter) {
-        RFn.outWeb(true, _501IngestImplementException.class, this.getClass());
+        FnZero.outWeb(true, _501IngestImplementException.class, this.getClass());
         return null;
     }
 
@@ -55,7 +55,7 @@ public interface Ingest {
      */
     default Table<Record> onTable(final DataTpl tpl,
                                   final Set<String> tables) {
-        RFn.outWeb(true, _501IngestImplementException.class, this.getClass());
+        FnZero.outWeb(true, _501IngestImplementException.class, this.getClass());
         return null;
     }
 
@@ -65,7 +65,7 @@ public interface Ingest {
     default Condition onCondition(final DataTpl tpl,
                                   final Criteria criteria,
                                   final ConcurrentMap<String, String> aliasMap) {
-        RFn.outWeb(true, _501IngestImplementException.class, this.getClass());
+        FnZero.outWeb(true, _501IngestImplementException.class, this.getClass());
         return null;
     }
 
@@ -73,14 +73,14 @@ public interface Ingest {
     default List<OrderField> onOrder(final DataTpl tpl,
                                      final Sorter sorter,
                                      final ConcurrentMap<String, String> aliasMap) {
-        RFn.outWeb(true, _501IngestImplementException.class, this.getClass());
+        FnZero.outWeb(true, _501IngestImplementException.class, this.getClass());
         return null;
     }
 
     default Table<Record> onTable(final DataTpl tpl,
                                   final Set<String> tables,
                                   final ConcurrentMap<String, String> aliasMap) {
-        RFn.outWeb(true, _501IngestImplementException.class, this.getClass());
+        FnZero.outWeb(true, _501IngestImplementException.class, this.getClass());
         return null;
     }
 }

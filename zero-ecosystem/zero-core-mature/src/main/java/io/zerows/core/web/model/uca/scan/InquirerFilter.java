@@ -6,7 +6,7 @@ import io.vertx.core.http.HttpServerResponse;
 import io.zerows.ams.constant.VValue;
 import io.zerows.core.annotations.Ordered;
 import io.zerows.core.constant.KWeb;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.model.atom.Event;
@@ -46,7 +46,7 @@ public class InquirerFilter implements Inquirer<ConcurrentMap<String, Set<Event>
     }
 
     private Class<?> ensure(final Class<?> clazz) {
-        RFn.outBoot(!Filter.class.isAssignableFrom(clazz), LOGGER,
+        FnZero.outBoot(!Filter.class.isAssignableFrom(clazz), LOGGER,
             BootFilterSpecificationException.class, this.getClass(), clazz);
         return clazz;
     }
@@ -77,7 +77,7 @@ public class InquirerFilter implements Inquirer<ConcurrentMap<String, Set<Event>
         if (null != annotation) {
             final Integer setted = Ut.invoke(annotation, "value");
             // Order specification
-            RFn.outBoot(setted < 0, LOGGER,
+            FnZero.outBoot(setted < 0, LOGGER,
                 BootFilterOrderException.class, this.getClass(), clazz);
             order = order + setted;
         }

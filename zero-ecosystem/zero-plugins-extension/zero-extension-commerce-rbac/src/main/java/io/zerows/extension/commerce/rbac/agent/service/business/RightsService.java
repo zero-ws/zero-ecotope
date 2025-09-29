@@ -8,7 +8,7 @@ import io.zerows.ams.constant.em.typed.ChangeFlag;
 import io.zerows.common.program.KRef;
 import io.zerows.core.constant.KName;
 import io.zerows.core.database.jooq.operation.UxJooq;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.RRolePermDao;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.SPermSetDao;
@@ -99,7 +99,7 @@ public class RightsService implements RightsStub {
              */
             combined.add(jooq.insertAsync(compared.get(ChangeFlag.ADD)));
             combined.add(jooq.updateAsync(compared.get(ChangeFlag.UPDATE)));
-            return RFn.compressL(combined).compose(processed ->
+            return FnZero.compressL(combined).compose(processed ->
                 /*
                  * Codes here for future usage
                  */
@@ -137,7 +137,7 @@ public class RightsService implements RightsStub {
             final List<SPermission> deleted = map.get(ChangeFlag.DELETE);
             futures.add(this.deletePerm(permSet, deleted));
 
-            return RFn.compressL(futures);
+            return FnZero.compressL(futures);
         }).compose(Ux::futureA);
     }
 

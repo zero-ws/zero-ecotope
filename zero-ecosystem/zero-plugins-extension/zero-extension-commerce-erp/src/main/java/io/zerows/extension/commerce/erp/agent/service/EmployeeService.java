@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.unity.Ux;
 import io.zerows.core.util.Ut;
 import io.zerows.core.spi.modeler.Indent;
@@ -76,7 +76,7 @@ public class EmployeeService implements EmployeeStub {
     @Override
     public Future<JsonObject> updateAsync(final String key, final JsonObject data) {
         return this.fetchAsync(key)
-            .compose(RFn.ofJObject(original -> {
+            .compose(FnZero.ofJObject(original -> {
                 final String userId = original.getString(KName.USER_ID);
                 final String current = data.getString(KName.USER_ID);
                 if (Ut.isNil(userId) && Ut.isNil(current)) {
@@ -138,7 +138,7 @@ public class EmployeeService implements EmployeeStub {
     @Override
     public Future<Boolean> deleteAsync(final String key) {
         return this.fetchAsync(key)
-            .compose(RFn.ifNil(() -> Boolean.TRUE, item -> Ux.channelA(Trash.class,
+            .compose(FnZero.ifNil(() -> Boolean.TRUE, item -> Ux.channelA(Trash.class,
                 () -> this.deleteAsync(key, item),
                 tunnel -> tunnel.backupAsync("res.employee", item)
                     .compose(backup -> this.deleteAsync(key, item)))));
@@ -153,7 +153,7 @@ public class EmployeeService implements EmployeeStub {
 
     private Future<JsonObject> updateReference(final String key, final JsonObject data) {
         return this.switchJ(data, (user, filters) -> user.rapport(key, filters)
-            .compose(RFn.ofJObject(response ->
+            .compose(FnZero.ofJObject(response ->
                 Ux.future(data.put(KName.USER_ID, response.getString(KName.KEY))))));
     }
 
@@ -167,7 +167,7 @@ public class EmployeeService implements EmployeeStub {
             }
             return Ux.future(input);
             /*
-             RFn.ofJObject(response -> {
+             FnZero.ofJObject(response -> {
             final String userId = response.getString(KName.KEY);
             if (Ut.notNil(userId)) {
                 return Ux.future(input.put(KName.USER_ID, userId));

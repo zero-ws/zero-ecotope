@@ -1,7 +1,7 @@
 package io.zerows.core.web.io.uca.request.mime;
 
 import io.zerows.core.exception.WebException;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.core.web.io.exception._415MediaNotSupportException;
 import io.zerows.core.web.model.atom.Event;
@@ -23,7 +23,7 @@ final class MediaAtom {
                     MediaType.MEDIA_TYPE_WILDCARD.equals(media.getType()) ||
                         media.getType().equalsIgnoreCase(type.getType()));
             /* 2. Type checking **/
-            RFn.outWeb(!match, LOGGER,
+            FnZero.outWeb(!match, LOGGER,
                 _415MediaNotSupportException.class,
                 MediaAtom.class, type, medias);
             /* 3. Start to parsing expected sub type **/
@@ -33,7 +33,7 @@ final class MediaAtom {
                         media.getSubtype().equalsIgnoreCase(type.getSubtype())
                 );
             /* 4. Subtype checking **/
-            RFn.outWeb(!match, LOGGER,
+            FnZero.outWeb(!match, LOGGER,
                 _415MediaNotSupportException.class,
                 MediaAtom.class, type, medias);
         }

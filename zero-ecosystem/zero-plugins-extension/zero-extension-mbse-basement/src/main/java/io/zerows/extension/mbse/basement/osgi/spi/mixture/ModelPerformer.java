@@ -4,7 +4,7 @@ import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.mbse.exception._404ModelNotFoundException;
 import io.zerows.extension.mbse.basement.atom.Model;
@@ -46,7 +46,7 @@ public class ModelPerformer implements AoPerformer {
         final MModel model = Ux.Jooq.on(MModelDao.class)
             .fetchOne(this.tool.onCriteria(identifier));
         final String namespace = Ao.toNS(this.appName);
-        RFn.outWeb(null == model, _404ModelNotFoundException.class, this.getClass(), namespace, identifier);
+        FnZero.outWeb(null == model, _404ModelNotFoundException.class, this.getClass(), namespace, identifier);
         JsonObject json = Ut.serializeJson(model);
         // 1. 初始化
         json = AoModeler.init().executor(json);
@@ -93,7 +93,7 @@ public class ModelPerformer implements AoPerformer {
         private Future<JsonArray> startList(final List<MModel> modelList) {
             final List<Future<JsonObject>> futures = new ArrayList<>();
             modelList.stream().map(this::execute).forEach(futures::add);
-            return RFn.combineA(futures);
+            return FnZero.combineA(futures);
         }
 
         private Future<JsonObject> execute(final MModel model) {

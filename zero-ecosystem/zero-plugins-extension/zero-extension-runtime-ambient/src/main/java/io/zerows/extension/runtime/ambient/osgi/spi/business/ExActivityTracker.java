@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.unity.Ux;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XActivityChangeDao;
@@ -25,7 +25,7 @@ public class ExActivityTracker implements ExActivity {
     public Future<JsonArray> activities(final String modelId, final String modelKey) {
         return this.fetchActivities(modelId, modelKey)
             .compose(Ux::futureA)
-            .compose(RFn.ofJArray(KName.RECORD_NEW, KName.RECORD_OLD));
+            .compose(FnZero.ofJArray(KName.RECORD_NEW, KName.RECORD_OLD));
     }
 
     @Override

@@ -3,7 +3,7 @@ package io.zerows.extension.runtime.skeleton.refine;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.unity.Ux;
 import io.zerows.ams.constant.VValue;
 import io.zerows.core.constant.KName;
@@ -69,9 +69,9 @@ class KeCompare {
                 String.valueOf(updated.size()));
 
             final List<Future<JsonArray>> futures = new ArrayList<>();
-            futures.add(RFn.ofJArray(iFun).apply(inserted));
-            futures.add(RFn.ofJArray(uFun).apply(updated));
-            return RFn.compressA(futures);
+            futures.add(FnZero.ofJArray(iFun).apply(inserted));
+            futures.add(FnZero.ofJArray(uFun).apply(updated));
+            return FnZero.compressA(futures);
         };
     }
 

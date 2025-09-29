@@ -23,7 +23,7 @@ public interface ActionOn {
         final Supplier<ActionOn> supplier = T.POOL_SUPPLIER.get(caseType);
         Objects.requireNonNull(supplier);
         return WfPool.CC_ACTION.pick(supplier, caseType.name());
-        // RFn.po?lThread(WfPool.POOL_ACTION, supplier, caseType.name());
+        // FnZero.po?lThread(WfPool.POOL_ACTION, supplier, caseType.name());
     }
 
     // -------------------- Single ---------------

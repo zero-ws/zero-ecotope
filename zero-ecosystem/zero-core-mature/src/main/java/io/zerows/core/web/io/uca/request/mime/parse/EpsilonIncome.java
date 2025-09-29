@@ -48,7 +48,7 @@ public class EpsilonIncome implements Income<List<Epsilon<Object>>> {
             epsilon.setDefaultValue(this.getDefault(annoTypes[idx], epsilon.getArgType()));
 
             /* Epsilon income -> outcome **/
-            final Atomic<Object> atomic = CC_ATOMIC.pick(MimeAtomic::new); // RFn.po?lThread(POOL_ATOMIC, MimeAtomic::new);
+            final Atomic<Object> atomic = CC_ATOMIC.pick(MimeAtomic::new); // FnZero.po?lThread(POOL_ATOMIC, MimeAtomic::new);
             final Epsilon<Object> outcome = atomic.ingest(context, epsilon);
             args.add(outcome);
         }

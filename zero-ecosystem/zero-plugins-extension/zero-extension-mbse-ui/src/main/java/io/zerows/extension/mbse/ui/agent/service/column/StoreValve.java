@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.ams.constant.VString;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.mbse.ui.domain.tables.daos.UiColumnDao;
 import io.zerows.extension.mbse.ui.domain.tables.pojos.UiColumn;
@@ -54,20 +54,20 @@ class StoreValve implements UiValve {
          * fixed
          * width
          */
-        RFn.monad(column::getSorter, (sorter) -> columnJson.put("sorter", sorter));
-        RFn.monad(column::getFixed, (fixed) -> {
+        FnZero.monad(column::getSorter, (sorter) -> columnJson.put("sorter", sorter));
+        FnZero.monad(column::getFixed, (fixed) -> {
             if (fixed) {
                 columnJson.put("fixed", "left");
             } else {
                 columnJson.put("fixed", "right");
             }
         });
-        RFn.monad(column::getClassName, (className) -> columnJson.put("className", className));
-        RFn.monad(column::getWidth, (width) -> columnJson.put("width", width));
+        FnZero.monad(column::getClassName, (className) -> columnJson.put("className", className));
+        FnZero.monad(column::getWidth, (width) -> columnJson.put("width", width));
         /*
          * If render
          */
-        RFn.monad(column::getRender, (render) -> {
+        FnZero.monad(column::getRender, (render) -> {
             columnJson.put("$render", render);
             if ("DATE".equals(render)) {
                 assert null != column.getFormat() : " $formatFail should not be null when DATE";
@@ -78,7 +78,7 @@ class StoreValve implements UiValve {
                 columnJson.put("$datum", column.getDatum());
             }
         });
-        RFn.monad(column::getFilterType, (filterType) -> {
+        FnZero.monad(column::getFilterType, (filterType) -> {
             columnJson.put("$filter.type", filterType);
             columnJson.put("$filter.config", column.getFilterConfig());
             Ut.valueToJObject(columnJson, "$filter.config");
@@ -86,12 +86,12 @@ class StoreValve implements UiValve {
         /*
          * Zero Config
          */
-        RFn.monad(column::getEmpty, (empty) -> columnJson.put("$empty", empty));
-        RFn.monad(column::getMapping, (mapping) -> {
+        FnZero.monad(column::getEmpty, (empty) -> columnJson.put("$empty", empty));
+        FnZero.monad(column::getMapping, (mapping) -> {
             columnJson.put("$mapping", mapping);
             Ut.valueToJObject(columnJson, "$mapping");
         });
-        RFn.monad(column::getConfig, (config) -> {
+        FnZero.monad(column::getConfig, (config) -> {
             columnJson.put("$config", config);
             Ut.valueToJObject(columnJson, "$config");
         });

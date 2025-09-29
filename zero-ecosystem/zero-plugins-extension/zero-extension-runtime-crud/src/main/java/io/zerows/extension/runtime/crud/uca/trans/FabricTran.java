@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.unity.Ux;
 import io.zerows.common.datamation.KDictConfig;
 import io.zerows.common.datamation.KDictSource;
@@ -38,7 +38,7 @@ class FabricTran implements Tran {
     @Override
     public Future<JsonObject> inJAsync(final JsonObject data, final IxMod in) {
         if (in.canTransform()) {
-            return this.fabric(in).compose(RFn.ifNil(() -> data, fabric ->
+            return this.fabric(in).compose(FnZero.ifNil(() -> data, fabric ->
                 this.isFrom ? fabric.inFrom(data) : fabric.inTo(data)));
         } else {
             return Ux.future(data);
@@ -48,7 +48,7 @@ class FabricTran implements Tran {
     @Override
     public Future<JsonArray> inAAsync(final JsonArray data, final IxMod in) {
         if (in.canTransform()) {
-            return this.fabric(in).compose(RFn.ifNil(() -> data, fabric ->
+            return this.fabric(in).compose(FnZero.ifNil(() -> data, fabric ->
                 this.isFrom ? fabric.inFrom(data) : fabric.inTo(data)));
         } else {
             return Ux.future(data);

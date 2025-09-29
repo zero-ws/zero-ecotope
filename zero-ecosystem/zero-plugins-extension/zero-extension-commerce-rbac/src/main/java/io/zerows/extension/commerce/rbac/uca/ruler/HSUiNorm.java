@@ -3,7 +3,7 @@ package io.zerows.extension.commerce.rbac.uca.ruler;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.commerce.rbac.uca.ruler.element.HAdmitCompiler;
 import io.zerows.module.security.atom.manage.KPermit;
@@ -37,6 +37,6 @@ public class HSUiNorm extends AbstractAdmit {
          * 2）否则直接处理 data 节点的数据
          */
         final JsonObject output = Ut.valueJObject(config, KName.OUTPUT);
-        return compiler.ingest(qr, config).compose(data -> RFn.ifJArray(data, output));
+        return compiler.ingest(qr, config).compose(data -> FnZero.ifJArray(data, output));
     }
 }

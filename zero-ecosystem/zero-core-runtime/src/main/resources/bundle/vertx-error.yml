@@ -45,7 +45,7 @@ error:
   E60060: "(500) - Method invoking met exception, but could not find WebException, ex = {0}"
   E80413: "(501) - (Jet) This api Method does not implement here, please provide in programming"
 
-  # ----------- (DemonException) Checked, Standard Zero Configuration Failed --------------------
+  # ----------- (DemonException) Checked, Standard Zero Configuration FnVertx --------------------
   # 30001 - 39999
   # Core configuration Error
   E30001: Vert.x zero server config is missing in current data "{0}"

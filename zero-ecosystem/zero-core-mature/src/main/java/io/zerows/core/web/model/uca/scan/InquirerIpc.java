@@ -3,7 +3,7 @@ package io.zerows.core.web.model.uca.scan;
 import io.reactivex.rxjava3.core.Observable;
 import io.zerows.core.annotations.EndPoint;
 import io.zerows.core.annotations.Ipc;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.model.commune.Envelop;
@@ -60,7 +60,7 @@ public class InquirerIpc implements Inquirer<ConcurrentMap<String, Method>> {
      * @return Whether this method is valid
      */
     private Method ensureSpec(final Method method) {
-        RFn.outBoot(Ut.isVoid(method.getReturnType()), LOGGER,
+        FnZero.outBoot(Ut.isVoid(method.getReturnType()), LOGGER,
             BootIpcMethodReturnException.class, this.getClass(),
             method);
         final Annotation annotation = method.getAnnotation(Ipc.class);
@@ -69,7 +69,7 @@ public class InquirerIpc implements Inquirer<ConcurrentMap<String, Method>> {
             // TypedArgument specification: Non Start Node
             // This specification is only for continue node
             final Class<?>[] argTypes = method.getParameterTypes();
-            RFn.outBoot(1 != argTypes.length || Envelop.class != argTypes[0], LOGGER,
+            FnZero.outBoot(1 != argTypes.length || Envelop.class != argTypes[0], LOGGER,
                 BootIpcMethodArgException.class, this.getClass(), method);
         }
         return method;
@@ -92,7 +92,7 @@ public class InquirerIpc implements Inquirer<ConcurrentMap<String, Method>> {
                 .filter(clazz::isAssignableFrom)
                 .count().blockingGet();
             // If counter == 0, zero system disable this definition
-            RFn.outBoot(0 == counter, LOGGER,
+            FnZero.outBoot(0 == counter, LOGGER,
                 BootRpcAgentAbsenceException.class, this.getClass(), clazz);
         }
         return method;
@@ -112,14 +112,14 @@ public class InquirerIpc implements Inquirer<ConcurrentMap<String, Method>> {
         if (Ut.isNil(to) && Ut.isNil(name)) {
             // If ( to is null and name is null, value must be required, or the system do not know the direction
             final String from = Ut.invoke(annotation, "value");
-            RFn.outBoot(Ut.isNil(from), this.logger(),
+            FnZero.outBoot(Ut.isNil(from), this.logger(),
                 BootUnknownDirectionException.class, this.getClass(),
                 method);
             // Passed validation.
             return method;
         }
         // to and name must not be null
-        RFn.outBoot(Ut.isNil(to) || Ut.isNil(name), LOGGER,
+        FnZero.outBoot(Ut.isNil(to) || Ut.isNil(name), LOGGER,
             BootIpcMethodTargetException.class, this.getClass(),
             method, to, name);
         return method;

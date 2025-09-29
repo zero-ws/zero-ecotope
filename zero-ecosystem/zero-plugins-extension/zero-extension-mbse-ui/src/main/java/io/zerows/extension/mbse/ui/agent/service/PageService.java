@@ -2,7 +2,7 @@ package io.zerows.extension.mbse.ui.agent.service;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.unity.Ux;
 import io.zerows.core.constant.KName;
 import io.zerows.core.util.Ut;
@@ -33,7 +33,7 @@ public class PageService implements PageStub {
                 /*
                  * Configuration converted to InJson
                  */
-                .compose(RFn.ofJObject(KName.Ui.CONFIG));
+                .compose(FnZero.ofJObject(KName.Ui.CONFIG));
         if (DevEnv.cacheUi()) {
             // Ui Cache Enabled
             return Rapid.<String, JsonObject>object(UiConstant.POOL_LAYOUT)
@@ -106,7 +106,7 @@ public class PageService implements PageStub {
             .compose(layout -> {
                 final JsonObject pageJson = Ux.toJson(page);
                 pageJson.put("layout", layout);
-                return RFn.ofJObject(
+                return FnZero.ofJObject(
                     KName.Ui.CONTAINER_CONFIG,
                     KName.Ui.ASSIST,
                     KName.Ui.GRID

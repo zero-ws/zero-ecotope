@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.shareddata.ClusterSerializable;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.unity.Ux;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.commerce.rbac.atom.ScOwner;
@@ -79,7 +79,7 @@ class SyntaxRegion {
             // data
             final List<Future<JsonObject>> futures = new ArrayList<>();
             views.forEach(view -> futures.add(this.regionView(resource, view, packet)));
-            return RFn.combineA(futures).compose(data -> {
+            return FnZero.combineA(futures).compose(data -> {
                 response.put(KName.DATA, data);
                 return Ux.future(response);
             });
@@ -109,7 +109,7 @@ class SyntaxRegion {
         eyeletM.put(KName.Rbac.PACK_V, this.regionV(packet, view));
         eyeletM.put(KName.Rbac.PACK_H, this.regionH(packet, view));
         eyeletM.put(KName.Rbac.PACK_Q, this.regionQ(packet, view));
-        return RFn.combineM(eyeletM).compose(map -> {
+        return FnZero.combineM(eyeletM).compose(map -> {
             final JsonObject vqh = Ut.toJObject(map);
             // view / position for front-end calculation
             // 多视图管理时需在前端执行过滤提取数据

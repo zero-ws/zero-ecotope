@@ -1,7 +1,7 @@
 package io.zerows.extension.mbse.basement.uca.jdbc;
 
 import io.zerows.common.app.KDatabase;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.mbse.basement.exception._501PinNotFoundException;
@@ -22,7 +22,7 @@ public interface Pin {
     static Pin getInstance() {
         final Class<?> clazz = Ao.pluginPin();
         final Annal logger = Annal.get(Pin.class);
-        RFn.outWeb(null == clazz, logger, _501PinNotFoundException.class, clazz, "implPin");
+        FnZero.outWeb(null == clazz, logger, _501PinNotFoundException.class, clazz, "implPin");
         return Ut.singleton(clazz);
     }
 

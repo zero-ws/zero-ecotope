@@ -7,7 +7,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.core.shareddata.AsyncMap;
 import io.vertx.ext.healthchecks.Status;
 import io.zerows.core.constant.KWeb;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -36,7 +36,7 @@ class VerticleQuota extends AbstractQuota {
                     keys.forEach(key -> mapped.put(key, this.readAsync(key, map)));
                 }
             });
-            final Future<ConcurrentMap<String, JsonObject>> future = RFn.combineM(mapped);
+            final Future<ConcurrentMap<String, JsonObject>> future = FnZero.combineM(mapped);
             future.onComplete(handler -> {
                 if (handler.succeeded()) {
                     final JsonObject meansure = new JsonObject();

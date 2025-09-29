@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.zerows.ams.constant.em.app.EmTraffic;
 import io.zerows.common.program.KRef;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.model.commune.Envelop;
 import io.zerows.core.web.model.zdk.Commercial;
@@ -92,14 +92,14 @@ class JtPandora {
          * Super class definitions
          */
         if (EmTraffic.Channel.DEFINE == channelType) {
-            RFn.out(!Ut.isImplement(channelClass, JtChannel.class),
+            FnZero.out(!Ut.isImplement(channelClass, JtChannel.class),
                 _424ChannelDefineException.class, JtPandora.class,
                 channelClass.getName());
         } else {
             /*
              * The channelClass must be in EXPECTED_MAP
              */
-            RFn.out(!EXPECTED_MAP.containsValue(channelClass),
+            FnZero.out(!EXPECTED_MAP.containsValue(channelClass),
                 _424ChannelDefinitionException.class, JtPandora.class,
                 Ut.fromJoin(EXPECTED_MAP.values().stream().map(Class::getSimpleName).collect(Collectors.toSet())),
                 channelClass);
@@ -107,7 +107,7 @@ class JtPandora {
              * The channel type must match the target class specification.
              */
             final Class<?> expectedClass = EXPECTED_MAP.get(channelType);
-            RFn.out(expectedClass != channelClass,
+            FnZero.out(expectedClass != channelClass,
                 _424ChannelConflictException.class, JtPandora.class,
                 channelClass.getName(), channelType);
         }

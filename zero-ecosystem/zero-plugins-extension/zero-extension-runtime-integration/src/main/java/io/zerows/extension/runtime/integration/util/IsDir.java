@@ -7,7 +7,7 @@ import io.zerows.ams.constant.VString;
 import io.zerows.common.program.Kv;
 import io.zerows.core.constant.KName;
 import io.zerows.core.database.jooq.operation.UxJooq;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.runtime.integration.domain.tables.daos.IDirectoryDao;
 import io.zerows.extension.runtime.integration.domain.tables.pojos.IDirectory;
@@ -83,7 +83,7 @@ class IsDir {
     }
 
     static Future<JsonObject> output(final JsonObject response) {
-        return RFn.ofJObject(
+        return FnZero.ofJObject(
             KName.METADATA,
             KName.VISIT_GROUP,
             KName.VISIT_ROLE,
@@ -96,7 +96,7 @@ class IsDir {
     }
 
     static Future<JsonArray> output(final JsonArray response) {
-        return RFn.ofJArray(
+        return FnZero.ofJArray(
             KName.METADATA,
             KName.VISIT_GROUP,
             KName.VISIT_ROLE,

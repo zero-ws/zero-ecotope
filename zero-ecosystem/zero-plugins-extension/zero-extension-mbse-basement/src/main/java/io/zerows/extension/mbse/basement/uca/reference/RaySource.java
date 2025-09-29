@@ -8,7 +8,7 @@ import io.zerows.common.reference.RDao;
 import io.zerows.common.reference.RQuote;
 import io.zerows.common.reference.RRule;
 import io.zerows.core.constant.KWeb;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.web.cache.Rapid;
 import io.zerows.specification.modeling.HRecord;
 import io.zerows.unity.Ux;
@@ -75,7 +75,7 @@ class RaySource {
                             return dao.fetchByAsync(condition);
                         }));
             });
-            return RFn.combineM(futureMap).compose(queriedMap -> {
+            return FnZero.combineM(futureMap).compose(queriedMap -> {
                 final ConcurrentMap<String, JsonArray> data = new ConcurrentHashMap<>();
                 queriedMap.forEach((hashCode, dataArray) -> {
                     fieldCodes.forEach((field, codeKey) -> {

@@ -1,7 +1,7 @@
 package io.zerows.extension.mbse.basement.uca.id;
 
 import io.zerows.ams.constant.em.modeling.EmKey;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.extension.mbse.basement.atom.Model;
 import io.zerows.extension.mbse.basement.atom.Schema;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MField;
@@ -38,7 +38,7 @@ Ensurer {
         /*
          * 第一检查条件：一对多的 Join 模式，keyMap的尺寸必须大于 1
          */
-        RFn.outWeb(1 >= joins.size(), _417PrimaryKeyResultException.class, clazz,
+        FnZero.outWeb(1 >= joins.size(), _417PrimaryKeyResultException.class, clazz,
             /* ARG1：出现该异常的目标类名 */ clazz.getName(),
             /* ARG2：当前实体的主键信息 */ AoId.keyInfo(joins));
 
@@ -48,7 +48,7 @@ Ensurer {
          * key -> Entity1 / key
          * key -> Entity2 / ciKey / key
          */
-        RFn.outWeb(joins.size() < model.schema().size(), _417PrimaryKeySizeException.class, clazz,
+        FnZero.outWeb(joins.size() < model.schema().size(), _417PrimaryKeySizeException.class, clazz,
             /* ARG1：实际的主键数量 */ model.schema().size(), // 没个 Schema 一个主键
             /* ARG2：期望的主键数量 */ String.valueOf(joins.size()));
 
@@ -63,7 +63,7 @@ Ensurer {
             /*
              * 第三检查条件：没个 Schema 的主键只能是单字段主键
              */
-            RFn.outWeb(1 < keys.size(), _417PrimaryKeySizeException.class, clazz,
+            FnZero.outWeb(1 < keys.size(), _417PrimaryKeySizeException.class, clazz,
                 /* ARG1：实际的主键数量 */ keys.size(),
                 /* ARG2：期望的主键数量 */ String.valueOf(1));
 

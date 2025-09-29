@@ -146,7 +146,7 @@ public class DirService implements DirStub {
                  * one storage to another one storage.
                  */
                 final StoreUp store = CC_UP.pick(StoreMigration::new, StoreMigration.class.getName());
-                // RFn.po?lThread(POOL_UP, StoreMigration::new, StoreMigration.class.getName());
+                // FnZero.po?lThread(POOL_UP, StoreMigration::new, StoreMigration.class.getName());
                 LOG.Web.info(this.getClass(), "KIntegration Changing: {0}", store.getClass());
                 return store.migrate(directory, directoryJ);
             } else {

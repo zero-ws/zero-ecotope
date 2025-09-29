@@ -5,7 +5,7 @@ import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KWeb;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.web.mbse.exception.BootActSpecificationException;
 import io.zerows.core.web.model.commune.Envelop;
 import io.zerows.specification.modeling.HRecord;
@@ -98,12 +98,12 @@ public class ActIn extends ActMapping implements Serializable {
     }
 
     public JsonObject getQuery() {
-        RFn.outBoot(this.isBatch, BootActSpecificationException.class, this.getClass(), this.isBatch);
+        FnZero.outBoot(this.isBatch, BootActSpecificationException.class, this.getClass(), this.isBatch);
         return this.json.getQuery();
     }
 
     public HRecord getRecord() {
-        RFn.outBoot(this.isBatch, BootActSpecificationException.class, this.getClass(), this.isBatch);
+        FnZero.outBoot(this.isBatch, BootActSpecificationException.class, this.getClass(), this.isBatch);
         return this.json.getRecord(this.definition, this.mapping);
     }
 
@@ -112,7 +112,7 @@ public class ActIn extends ActMapping implements Serializable {
     }
 
     public HRecord[] getRecords() {
-        RFn.outBoot(!this.isBatch, BootActSpecificationException.class, this.getClass(), this.isBatch);
+        FnZero.outBoot(!this.isBatch, BootActSpecificationException.class, this.getClass(), this.isBatch);
         return this.jarray.getRecords(this.definition, this.mapping);
     }
 

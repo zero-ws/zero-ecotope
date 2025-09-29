@@ -39,9 +39,9 @@ public abstract class AbstractAim {
     private static final Cc<String, ValidatorEntry> CC_VALIDATOR = Cc.openThread();
 
     private transient final Analyzer analyzer = CC_ANALYZER.pick(MediaAnalyzer::new, MediaAnalyzer.class.getName());
-    // RFn.po?lThread(POOL_ANALYZER, MediaAnalyzer::new, MediaAnalyzer.class.getName());
+    // FnZero.po?lThread(POOL_ANALYZER, MediaAnalyzer::new, MediaAnalyzer.class.getName());
     private transient final ValidatorEntry verifier = CC_VALIDATOR.pick(ValidatorEntry::new);
-    // RFn.po?lThread(POOL_VALIDATOR, Validator::new);
+    // FnZero.po?lThread(POOL_VALIDATOR, Validator::new);
 
     /**
      * Template method

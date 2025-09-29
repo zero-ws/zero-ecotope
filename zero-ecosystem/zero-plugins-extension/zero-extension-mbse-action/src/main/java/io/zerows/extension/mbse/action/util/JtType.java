@@ -2,7 +2,7 @@ package io.zerows.extension.mbse.action.util;
 
 import io.vertx.core.AbstractVerticle;
 import io.zerows.ams.constant.em.app.EmTraffic;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.mbse.action.atom.JtWorker;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IApi;
@@ -20,14 +20,14 @@ class JtType {
     private static Class<?> toWorker(final Supplier<String> supplier) {
         final String workerStr = supplier.get();
         final Class<?> clazz = Ut.clazz(workerStr, JtConstant.COMPONENT_DEFAULT_WORKER);
-        RFn.out(AbstractVerticle.class != clazz.getSuperclass(), _500WorkerSpecException.class, JtRoute.class, clazz);
+        FnZero.out(AbstractVerticle.class != clazz.getSuperclass(), _500WorkerSpecException.class, JtRoute.class, clazz);
         return clazz;
     }
 
     private static Class<?> toConsumer(final Supplier<String> supplier) {
         final String consumerStr = supplier.get();
         final Class<?> clazz = Ut.clazz(consumerStr, JtConstant.COMPONENT_DEFAULT_CONSUMER);
-        RFn.out(!Ut.isImplement(clazz, JtConsumer.class), _500ConsumerSpecException.class, JtRoute.class, clazz);
+        FnZero.out(!Ut.isImplement(clazz, JtConsumer.class), _500ConsumerSpecException.class, JtRoute.class, clazz);
         return clazz;
     }
 

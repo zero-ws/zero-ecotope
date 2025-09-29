@@ -3,7 +3,7 @@ package io.zerows.extension.mbse.basement.uca.sql;
 import io.zerows.ams.constant.VValue;
 import io.zerows.ams.constant.em.modeling.EmKey;
 import io.zerows.ams.constant.em.typed.ChangeFlag;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.mbse.basement.atom.Schema;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MField;
@@ -46,7 +46,7 @@ public final class SqlDDLProvider {
     }
 
     public List<String> prepareCreateLines(final Schema schema) {
-        RFn.outWeb(null == this.sentence, _501AoSentenceNullException.class, this.getClass());
+        FnZero.outWeb(null == this.sentence, _501AoSentenceNullException.class, this.getClass());
         final List<String> lines = new ArrayList<>();
         {
             /*
@@ -79,8 +79,8 @@ public final class SqlDDLProvider {
     }
 
     public List<String> prepareAlterLines(final Schema schema) {
-        RFn.outWeb(null == this.sentence, _501AoSentenceNullException.class, this.getClass());
-        RFn.outWeb(null == this.reflector, _501AoReflectorNullException.class, this.getClass());
+        FnZero.outWeb(null == this.sentence, _501AoSentenceNullException.class, this.getClass());
+        FnZero.outWeb(null == this.reflector, _501AoReflectorNullException.class, this.getClass());
         // 删除约束语句
         final List<String> lines = new ArrayList<>(this.prepareDropConstraints(schema));
         // 列状态处理
@@ -129,7 +129,7 @@ public final class SqlDDLProvider {
         columns.forEach(column -> {
             final MField field = schema.getFieldByColumn(column);
             // NOT NULL，系统中有数据，不可添加非空字段
-            RFn.outWeb(VValue.ZERO < rows && !field.getIsNullable(), _500NullableAddException.class, this.getClass(),
+            FnZero.outWeb(VValue.ZERO < rows && !field.getIsNullable(), _500NullableAddException.class, this.getClass(),
                 /* ARG1：被修改的表名 */ table,
                 /* ARG2：被修改的列名 */ column);
             final String sql = this.sentence.columnAdd(table, field);
@@ -153,7 +153,7 @@ public final class SqlDDLProvider {
                 if (checkResult == CheckResult.SKIP) {
                     continue;
                 } else if (checkResult == CheckResult.FAILED) {
-                    RFn.outWeb(true, _500TypeAlterException.class, this.getClass(),
+                    FnZero.outWeb(true, _500TypeAlterException.class, this.getClass(),
                         /* ARG1：被修改的表名 */ table,
                         /* ARG2：被修改的列名 */ column);
                 }
@@ -161,7 +161,7 @@ public final class SqlDDLProvider {
                 // 已存在NULL数据时，字段不可变更为 NOT NULL
                 if (VValue.ZERO < rows) {
                     final long nullRows = this.reflector.getNullRows(table, this.sentence.columnDdl(column));
-                    RFn.outWeb(VValue.ZERO < nullRows && !field.getIsNullable(), _500NullableAlterException.class, this.getClass(),
+                    FnZero.outWeb(VValue.ZERO < nullRows && !field.getIsNullable(), _500NullableAlterException.class, this.getClass(),
                         /* ARG1：被修改的表名 */ table,
                         /* ARG2：被修改的列名 */ column);
                 }

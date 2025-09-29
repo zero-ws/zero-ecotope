@@ -15,7 +15,7 @@ public class OProxyInstance {
 
     public static OProxyInstance create(final Class<?> interfaceCls) {
         return CC_V_INSTANCE.pick(() -> new OProxyInstance(interfaceCls), interfaceCls);
-        // return RFn.po?l(V_POOL, interfaceCls, () -> new OProxyInstance(interfaceCls));
+        // return FnZero.po?l(V_POOL, interfaceCls, () -> new OProxyInstance(interfaceCls));
     }
 
     @SuppressWarnings("unchecked")

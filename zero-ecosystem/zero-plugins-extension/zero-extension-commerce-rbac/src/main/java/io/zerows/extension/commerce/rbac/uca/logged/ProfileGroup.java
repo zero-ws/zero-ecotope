@@ -89,7 +89,7 @@ public class ProfileGroup implements Serializable {
         return null;
         //        return Future.join(futures)
         //            /* Composite Result */
-        //            .compose(RFn::<ProfileRole>combineT)
+        //            .compose(FnZero::<ProfileRole>combineT)
         //            .compose(profiles -> {
         //                /* Bind each fetchProfile to group Id */
         //                profiles.forEach(profile -> profile.setGroup(this));

@@ -5,7 +5,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.unity.Ux;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.runtime.report.atom.RDimension;
@@ -68,7 +68,7 @@ public class ReportService implements ReportStub {
                     .compose(data -> this.instanceStub.buildAsync(data, params, generation));
             })
             .compose(Ux::futureJ)
-            .compose(RFn.ofJObject(
+            .compose(FnZero.ofJObject(
                 "reportData",
                 "reportContent"
             ));

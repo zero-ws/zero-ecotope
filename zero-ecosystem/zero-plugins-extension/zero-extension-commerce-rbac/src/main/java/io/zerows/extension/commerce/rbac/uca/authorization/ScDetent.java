@@ -85,17 +85,17 @@ public interface ScDetent {
 
         static ScDetent horizon() {
             return CC_DETENT.pick(GdHorizon::new, GdHorizon.class.getName());
-            // return RFn.po?l(Pool.DETENT_POOL, GdHorizon.class.getName(), GdHorizon::new);
+            // return FnZero.po?l(Pool.DETENT_POOL, GdHorizon.class.getName(), GdHorizon::new);
         }
 
         static ScDetent critical() {
             return CC_DETENT.pick(GdCritical::new, GdCritical.class.getName());
-            // return RFn.po?l(Pool.DETENT_POOL, GdCritical.class.getName(), GdCritical::new);
+            // return FnZero.po?l(Pool.DETENT_POOL, GdCritical.class.getName(), GdCritical::new);
         }
 
         static ScDetent overlook() {
             return CC_DETENT.pick(GdOverlook::new, GdOverlook.class.getName());
-            // return RFn.p?ol(Pool.DETENT_POOL, GdOverlook.class.getName(), GdOverlook::new);
+            // return FnZero.p?ol(Pool.DETENT_POOL, GdOverlook.class.getName(), GdOverlook::new);
         }
 
         /*
@@ -105,7 +105,7 @@ public interface ScDetent {
 
             static ScDetent horizon() {
                 return CC_DETENT.pick(GpHorizon::new, GpHorizon.class.getName());
-                // return RFn.po?l(Pool.DETENT_POOL, GpHorizon.class.getName(), GpHorizon::new);
+                // return FnZero.po?l(Pool.DETENT_POOL, GpHorizon.class.getName(), GpHorizon::new);
             }
 
             static ScDetent critical(final List<ProfileGroup> original) {
@@ -123,7 +123,7 @@ public interface ScDetent {
         interface Child {
             static ScDetent horizon() {
                 return CC_DETENT.pick(GcHorizon::new, GcHorizon.class.getName());
-                // return RFn.po?l(Pool.DETENT_POOL, GcHorizon.class.getName(), GcHorizon::new);
+                // return FnZero.po?l(Pool.DETENT_POOL, GcHorizon.class.getName(), GcHorizon::new);
             }
 
             static ScDetent critical(final List<ProfileGroup> original) {

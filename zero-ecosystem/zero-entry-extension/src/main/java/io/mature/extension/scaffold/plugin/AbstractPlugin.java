@@ -5,7 +5,7 @@ import io.zerows.ams.constant.em.typed.ChangeFlag;
 import io.zerows.common.datamation.KFabric;
 import io.zerows.common.datamation.KMapping;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
@@ -39,7 +39,7 @@ public abstract class AbstractPlugin<T> {
     }
 
     protected KFabric fabric(final JsonObject options) {
-        RFn.out(Objects.isNull(this.fabric), _501FabricIssueException.class, this.getClass());
+        FnZero.out(Objects.isNull(this.fabric), _501FabricIssueException.class, this.getClass());
         final Object mapping = options.getValue(KName.MAPPING);
         final KMapping item = this.mapping(mapping);
         /* 双条件检查，为 NULL 和 Empty 都没有任何 Mapping 配置*/

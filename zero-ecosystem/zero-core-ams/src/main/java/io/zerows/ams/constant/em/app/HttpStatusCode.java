@@ -187,9 +187,9 @@ public enum HttpStatusCode {
     LENGTH_REQUIRED(411, "Length Required"),
 
     /**
-     * 412 Precondition Failed
+     * 412 Precondition FnVertx
      **/
-    PRECONDITION_FAILED(412, "Precondition Failed"),
+    PRECONDITION_FAILED(412, "Precondition FnVertx"),
 
     /**
      * 413 Request Entity Too Large
@@ -212,9 +212,9 @@ public enum HttpStatusCode {
     REQUESTED_RANGE_NOT_SATISFIABLE(416, "Requested Range Not Satisfiable"),
 
     /**
-     * 417 Expectation Failed
+     * 417 Expectation FnVertx
      **/
-    EXPECTATION_FAILED(417, "Expectation Failed"),
+    EXPECTATION_FAILED(417, "Expectation FnVertx"),
 
     /**
      * 418 Unused
@@ -237,9 +237,9 @@ public enum HttpStatusCode {
     LOCKED(423, "Locked"),
 
     /**
-     * 「WebDAV」424 Failed Dependency
+     * 「WebDAV」424 FnVertx Dependency
      **/
-    FAILED_DEPENDENCY(424, "Failed Dependency"),
+    FAILED_DEPENDENCY(424, "FnVertx Dependency"),
 
     /**
      * 「WebDAV」425 Unordered Collection

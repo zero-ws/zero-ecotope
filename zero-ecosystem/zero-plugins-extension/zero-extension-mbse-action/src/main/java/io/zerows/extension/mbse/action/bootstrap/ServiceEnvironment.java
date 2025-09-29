@@ -9,7 +9,7 @@ import io.zerows.core.constant.KName;
 import io.zerows.core.database.atom.Database;
 import io.zerows.core.database.cp.zdk.DataPool;
 import io.zerows.core.exception.boot._40103Exception500ConnectAmbient;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.mbse.action.atom.JtJob;
@@ -96,7 +96,7 @@ public class ServiceEnvironment {
              * IJob + IService
              */
             futures.add(this.initJobs(vertx));
-            return RFn.combineT(futures).compose(res -> Ux.future(this));
+            return FnZero.combineT(futures).compose(res -> Ux.future(this));
         });
     }
 

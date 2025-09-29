@@ -10,7 +10,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.ams.constant.em.Environment;
 import io.zerows.core.constant.KName;
 import io.zerows.core.exception.boot._11002Exception500EmptyIo;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XCategoryDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XCategory;
@@ -117,7 +117,7 @@ public abstract class AbstractInstruction extends AbstractCommander {
             condition.mergeIn(attachedJson, true);
             return this.identifiers(condition)
                 /* identifiers 中处理每一个 */
-                .compose(identifiers -> RFn.combineT(new ArrayList<>(identifiers), consumer));
+                .compose(identifiers -> FnZero.combineT(new ArrayList<>(identifiers), consumer));
         });
     }
 

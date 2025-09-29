@@ -1,6 +1,6 @@
 package io.zerows.core.web.model.uca.extract;
 
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.model.exception.BootAccessProxyException;
@@ -12,14 +12,14 @@ public class ToolVerifier {
 
     public static void noArg(final Class<?> clazz, final Class<?> target) {
         final Annal logger = Annal.get(target);
-        RFn.outBoot(!Ut.isDefaultConstructor(clazz), logger,
+        FnZero.outBoot(!Ut.isDefaultConstructor(clazz), logger,
             BootNoArgConstructorException.class,
             logger, clazz);
     }
 
     public static void modifier(final Class<?> clazz, final Class<?> target) {
         final Annal logger = Annal.get(target);
-        RFn.outBoot(!Modifier.isPublic(clazz.getModifiers()), logger,
+        FnZero.outBoot(!Modifier.isPublic(clazz.getModifiers()), logger,
             BootAccessProxyException.class,
             target, clazz);
     }

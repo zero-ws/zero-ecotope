@@ -7,7 +7,7 @@ import io.zerows.ams.constant.VString;
 import io.zerows.ams.constant.em.typed.ChangeFlag;
 import io.zerows.core.constant.KName;
 import io.zerows.core.database.jooq.operation.UxJooq;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.mbse.basement.atom.Model;
 import io.zerows.extension.mbse.basement.domain.tables.daos.MAttributeDao;
@@ -43,7 +43,7 @@ class ModelRefine implements AoRefine {
             // 1. 更新某一个模型
             final List<Future<JsonObject>> futures = new ArrayList<>();
             models.stream().map(this::saveModelAsync).forEach(futures::add);
-            return RFn.combineA(futures)
+            return FnZero.combineA(futures)
                 .compose(nil -> Ux.future(appJson));
         };
     }
@@ -65,7 +65,7 @@ class ModelRefine implements AoRefine {
             criteria.put(KName.IDENTIFIER, entity.getIdentifier());
             LOG.Uca.info(this.getClass(), "3. AoRefine.model(): Model `{0}`, Upsert Criteria = `{1}`",
                 entity.getIdentifier(), criteria.encode());
-            final Future<JsonObject> execute = RFn.compressA(futures)
+            final Future<JsonObject> execute = FnZero.compressA(futures)
                 .compose(nil -> Ux.Jooq.on(MModelDao.class).upsertAsync(criteria, model.dbModel()))
                 .compose(Ux::futureJ);
             execute.onSuccess(pre::complete);

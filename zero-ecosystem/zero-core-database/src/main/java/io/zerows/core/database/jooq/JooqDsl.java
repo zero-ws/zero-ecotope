@@ -8,7 +8,7 @@ import io.vertx.core.Promise;
 import io.vertx.core.Vertx;
 import io.zerows.core.database.jooq.exception.BootJooqClassInvalidException;
 import io.zerows.core.database.jooq.exception.BootJooqVertxNullException;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
 import io.zerows.module.metadata.uca.logging.OLog;
 import org.jooq.Configuration;
@@ -46,14 +46,14 @@ public class JooqDsl {
 
     static JooqDsl init(final Vertx vertxRef, final Configuration configurationRef, final Class<?> daoCls) {
         // Checking when initializing
-        RFn.out(!Ut.isImplement(daoCls, VertxDAO.class), BootJooqClassInvalidException.class, JooqDsl.class, daoCls.getName());
-        RFn.outBoot(null == vertxRef, LOGGER, BootJooqVertxNullException.class, daoCls);
+        FnZero.out(!Ut.isImplement(daoCls, VertxDAO.class), BootJooqClassInvalidException.class, JooqDsl.class, daoCls.getName());
+        FnZero.outBoot(null == vertxRef, LOGGER, BootJooqVertxNullException.class, daoCls);
 
         // Calculate the key of current pool
         final String poolKey = String.valueOf(vertxRef.hashCode()) + ":" +
             String.valueOf(configurationRef.hashCode()) + ":" + daoCls.getName();
         return CC_DSL.pick(() -> new JooqDsl(poolKey).bind(vertxRef, configurationRef).store(daoCls), poolKey);
-        // return RFn.po?l(DSL_MAP, poolKey, () -> new JooqDsl(poolKey).bind(vertxRef, configurationRef).get(daoCls));
+        // return FnZero.po?l(DSL_MAP, poolKey, () -> new JooqDsl(poolKey).bind(vertxRef, configurationRef).get(daoCls));
     }
 
     private JooqDsl bind(final Vertx vertxRef, final Configuration configurationRef) {

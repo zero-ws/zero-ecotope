@@ -1,6 +1,6 @@
 package io.zerows.extension.mbse.basement.uca.dao.internal;
 
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.core.uca.qr.Criteria;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
@@ -53,12 +53,12 @@ public abstract class AbstractUtil<T extends AoBinder> implements AoBinder<T> {
     // ---------------------------
     protected DataEvent event() {
         /* 检查 this.io.vertx.up.argument / this.sentence */
-        RFn.outWeb(null == this.atom, _417DataAtomNullException.class, this.getClass());
+        FnZero.outWeb(null == this.atom, _417DataAtomNullException.class, this.getClass());
         return DataEvent.create(this.atom, this.sentence).init(EventType.SINGLE);
     }
 
     protected DataEvent events() {
-        RFn.outWeb(null == this.atom, _417DataAtomNullException.class, this.getClass());
+        FnZero.outWeb(null == this.atom, _417DataAtomNullException.class, this.getClass());
         return DataEvent.create(this.atom, this.sentence).init(EventType.BATCH);
     }
 

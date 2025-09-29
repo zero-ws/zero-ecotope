@@ -6,7 +6,7 @@ import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonArray;
 import io.zerows.ams.constant.em.EmDict;
 import io.zerows.common.datamation.KDictSource;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.extension.runtime.ambient.agent.service.DatumService;
 import io.zerows.extension.runtime.ambient.agent.service.DatumStub;
 import io.zerows.extension.runtime.ambient.uca.dict.Dpm;
@@ -56,7 +56,7 @@ public class ExAmbientDictionary implements Dictionary {
              * 2) Category ( type -> JsonArray )     size > 0
              * 3) Assist ( type -> JsonArray )       size > 0
              */
-            return RFn.compressM(futures).compose(dict -> {
+            return FnZero.compressM(futures).compose(dict -> {
                 final StringBuilder report = new StringBuilder();
                 report.append("[ PT ] Dictionary Total：").append(dict.size());
                 dict.forEach((key, array) -> report

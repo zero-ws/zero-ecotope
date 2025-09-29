@@ -29,7 +29,7 @@ public class MediaAnalyzer implements Analyzer {
         MediaAtom.accept(event, requestMedia);
 
         /* Extract definition from method **/
-        final Income<List<Epsilon<Object>>> income = CC_EPSILON.pick(EpsilonIncome::new); // RFn.po?lThread(POOL_EPSILON, EpsilonIncome::new);
+        final Income<List<Epsilon<Object>>> income = CC_EPSILON.pick(EpsilonIncome::new); // FnZero.po?lThread(POOL_EPSILON, EpsilonIncome::new);
         final List<Epsilon<Object>> epsilons = income.in(context, event);
 
         /* Extract value list **/

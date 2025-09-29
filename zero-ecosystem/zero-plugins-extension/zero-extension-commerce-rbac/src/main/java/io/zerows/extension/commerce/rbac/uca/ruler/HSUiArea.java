@@ -3,7 +3,7 @@ package io.zerows.extension.commerce.rbac.uca.ruler;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.unity.Ux;
 import io.zerows.core.constant.KName;
 import io.zerows.core.util.Ut;
@@ -65,9 +65,9 @@ public class HSUiArea extends HSUiNorm {
                 .compose(semi::uiConfigure).compose(semi::uiCompile)
                 .compose(item -> Ux.future(HValve.output(item))));
         });
-        return RFn.combineM(futureMap)
+        return FnZero.combineM(futureMap)
             /* children = {} */
-            .compose(normalized -> RFn.ifJObject(KName.CHILDREN, Ut.toJObject(normalized)));
+            .compose(normalized -> FnZero.ifJObject(KName.CHILDREN, Ut.toJObject(normalized)));
     }
 
     private JsonObject valueChild(final String code, final JsonObject requestJ) {

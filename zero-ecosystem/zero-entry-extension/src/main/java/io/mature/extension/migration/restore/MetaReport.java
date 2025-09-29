@@ -1,13 +1,13 @@
 package io.mature.extension.migration.restore;
 
 import io.zerows.ams.constant.em.Environment;
+import io.zerows.core.fn.FnZero;
 import io.zerows.specification.access.app.HApp;
 import io.mature.extension.migration.AbstractStep;
 import io.zerows.common.app.KDS;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.RFn;
 import io.zerows.unity.Ux;
 import io.zerows.core.database.atom.Database;
 import io.zerows.extension.mbse.basement.uca.jdbc.Pin;
@@ -61,7 +61,7 @@ public class MetaReport extends AbstractStep {
                     .filter(category -> Objects.nonNull(category.getIdentifier()))
                     .map(this::procAsync)
                     .forEach(futures::add);
-                return RFn.combineA(futures);
+                return FnZero.combineA(futures);
             })
             .compose(combined -> {
                 final String folder = this.ioRoot(config);

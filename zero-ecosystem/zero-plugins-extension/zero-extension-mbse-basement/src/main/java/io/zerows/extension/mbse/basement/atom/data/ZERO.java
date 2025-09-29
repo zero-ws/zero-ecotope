@@ -1,6 +1,6 @@
 package io.zerows.extension.mbse.basement.atom.data;
 
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.mbse.basement.atom.Model;
@@ -109,13 +109,13 @@ class Bridge {
 
             /* 找不到实体报错 */
             final String unique = model.namespace() + "-" + model.identifier();
-            RFn.outWeb(null == schema, _417RelatedSchemaMissingException.class, Bridge.class,
+            FnZero.outWeb(null == schema, _417RelatedSchemaMissingException.class, Bridge.class,
                 /* ARG1：当前关联关系对应的实体名 */ join.getEntity(),
                 /* ARG2：当前主键的唯一标识 */ key.getUnique());
 
             final MField field = schema.getField(join.getEntityKey());
             /* 找不到字段定义 */
-            RFn.outWeb(null == field, _417RelatedFieldMissingException.class, Bridge.class,
+            FnZero.outWeb(null == field, _417RelatedFieldMissingException.class, Bridge.class,
                 /* ARG1：当前关联关系对应的实体字段名 */ join.getEntityKey(),
                 /* ARG2：当前关联关系对应的实体名 */ join.getEntity(),
                 /* ARG3：当前主键的唯一标识 */ key.getUnique());

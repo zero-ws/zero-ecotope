@@ -1,7 +1,7 @@
 package io.zerows.module.domain.uca.destine;
 
 import io.vertx.core.json.JsonArray;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
 import io.zerows.module.domain.atom.specification.KJoin;
 import io.zerows.module.domain.atom.specification.KPoint;
@@ -39,7 +39,7 @@ class HymnJArray extends HymnBase<JsonArray> {
         final Set<String> idSet = new HashSet<>();
         Ut.itJArray(dataA).map(this::id)
             .filter(Objects::nonNull).forEach(idSet::add);
-        RFn.out(1 != idSet.size(), _412IndentUnknownException.class, this.getClass(), this.joinRef.getTargetIndent());
+        FnZero.out(1 != idSet.size(), _412IndentUnknownException.class, this.getClass(), this.joinRef.getTargetIndent());
 
 
         // 根据解析到的 identifier 提取连接点

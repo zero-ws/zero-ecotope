@@ -24,7 +24,7 @@ interface CACHE {
                     /* SubType `*` */
                     this.put(MediaType.WILDCARD_TYPE.getSubtype(),
                         () -> CACHE.CC_WINGS.pick(JsonWings::new, MediaType.WILDCARD_TYPE.toString())
-                        // () -> RFn.po?lThread(POOL_THREAD, JsonWings::new, MediaType.WILDCARD_TYPE.toString())
+                        // () -> FnZero.po?lThread(POOL_THREAD, JsonWings::new, MediaType.WILDCARD_TYPE.toString())
                     );
                 }
             });
@@ -36,13 +36,13 @@ interface CACHE {
                     /* SubType: json */
                     this.put(MediaType.APPLICATION_JSON_TYPE.getSubtype(),
                         () -> CACHE.CC_WINGS.pick(JsonWings::new, MediaType.APPLICATION_JSON_TYPE.toString())
-                        // () -> RFn.po?lThread(POOL_THREAD, JsonWings::new, MediaType.APPLICATION_JSON_TYPE.toString())
+                        // () -> FnZero.po?lThread(POOL_THREAD, JsonWings::new, MediaType.APPLICATION_JSON_TYPE.toString())
                     );
 
                     /* SubType: octet-stream */
                     this.put(MediaType.APPLICATION_OCTET_STREAM_TYPE.getSubtype(),
                         () -> CACHE.CC_WINGS.pick(BufferWings::new, MediaType.APPLICATION_OCTET_STREAM_TYPE.toString())
-                        // () -> RFn.po?lThread(POOL_THREAD, BufferWings::new, MediaType.APPLICATION_OCTET_STREAM_TYPE.toString()));
+                        // () -> FnZero.po?lThread(POOL_THREAD, BufferWings::new, MediaType.APPLICATION_OCTET_STREAM_TYPE.toString()));
                     );
                 }
             });

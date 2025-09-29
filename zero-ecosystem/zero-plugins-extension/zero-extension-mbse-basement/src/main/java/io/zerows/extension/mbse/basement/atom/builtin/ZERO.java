@@ -4,7 +4,7 @@ package io.zerows.extension.mbse.basement.atom.builtin;
 import io.zerows.ams.constant.VValue;
 import io.zerows.ams.constant.em.modeling.EmKey;
 import io.zerows.ams.constant.em.modeling.EmModel;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.mbse.basement.atom.Model;
 import io.zerows.extension.mbse.basement.atom.Schema;
@@ -94,7 +94,7 @@ class Bridge {
          * joins.size() >= schema.size() >= 1
          * 否则直接抛出异常信息
          */
-        RFn.outWeb(joins.size() < 1 || schema.size() < 1 || schema.size() < joins.size(),
+        FnZero.outWeb(joins.size() < 1 || schema.size() < 1 || schema.size() < joins.size(),
             _417RelationCounterException.class, Bridge.class,
             /* ARG1：当前模型的标识，同一个应用中的模型标识唯一 */ model.dbModel().getIdentifier(),
             /* ARG2：当前模型 Model 中对应的实体数量 */ schema.size(),

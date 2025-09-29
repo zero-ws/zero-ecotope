@@ -5,7 +5,7 @@ import io.zerows.ams.constant.em.EmApp;
 import io.zerows.core.annotations.Up;
 import io.zerows.core.constant.configure.YmlCore;
 import io.zerows.core.exception.BootingException;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.running.boot.KBoot;
 import io.zerows.core.web.container.eon.em.FeatureMark;
 import io.zerows.core.web.container.exception.BootUpClassArgsException;
@@ -79,7 +79,7 @@ public class BootStore implements HStation {
      */
     private static void ensure(final Class<?> clazz) {
         // Step 1
-        RFn.out(Objects.isNull(clazz), BootUpClassArgsException.class, BootStore.class);
+        FnZero.out(Objects.isNull(clazz), BootUpClassArgsException.class, BootStore.class);
         // Step 2
         STORE_ANNO.putAll(Anno.get(clazz));
         if (!STORE_ANNO.containsKey(Up.class.getName())) {

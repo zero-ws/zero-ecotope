@@ -1,6 +1,6 @@
 package io.zerows.extension.mbse.basement.uca.id;
 
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.mbse.basement.atom.Model;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MJoin;
@@ -49,7 +49,7 @@ class DirectId extends AbstractId {
         /*
          * 一对一的模式，不执行 Join，keyMap的尺寸必须等于 1
          */
-        RFn.outWeb(1 != joinSet.size(), _417PrimaryKeyResultException.class, this.getClass(),
+        FnZero.outWeb(1 != joinSet.size(), _417PrimaryKeyResultException.class, this.getClass(),
             /* ARG1：出现该异常的目标类名 */ this.getClass().getName(),
             /* ARG2：当前实体的主键信息 */ AoId.keyInfo(joinSet));
     }

@@ -1,6 +1,6 @@
 package io.zerows.extension.mbse.basement.uca.id;
 
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.extension.mbse.basement.atom.Model;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MJoin;
 import io.zerows.extension.mbse.basement.exception._417PrimaryKeySizeException;
@@ -45,7 +45,7 @@ class JoinMultiId extends AbstractId {
         /*
          * 第四检查条件：keyMap必须有一个字段不是主键
          */
-        RFn.outWeb(0 == falseCount, _417PrimaryKeySizeException.class, this.getClass(),
+        FnZero.outWeb(0 == falseCount, _417PrimaryKeySizeException.class, this.getClass(),
             /* ARG1：实际的主键数量 */ valid.size(),
             /* ARG2：期望的主键数量 */ "> 0");
     }

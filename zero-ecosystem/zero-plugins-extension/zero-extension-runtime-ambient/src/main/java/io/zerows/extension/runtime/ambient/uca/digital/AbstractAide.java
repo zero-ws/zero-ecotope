@@ -5,7 +5,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.unity.Ux;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XTabularDao;
@@ -23,7 +23,7 @@ public abstract class AbstractAide implements Aide {
     protected Future<JsonArray> fetchDict(final JsonObject criteria) {
         return Ux.Jooq.on(XTabularDao.class).fetchAsync(criteria)
             .compose(Ux::futureA)
-            .compose(RFn.ofJArray(KName.METADATA));
+            .compose(FnZero.ofJArray(KName.METADATA));
     }
 
     // --------------- condition building -----------------

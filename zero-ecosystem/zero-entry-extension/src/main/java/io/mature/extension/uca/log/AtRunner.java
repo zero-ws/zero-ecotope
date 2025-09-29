@@ -1,7 +1,7 @@
 package io.mature.extension.uca.log;
 
 import io.zerows.ams.constant.em.typed.ChangeFlag;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.uca.compare.Vs;
 import io.zerows.ams.constant.em.modeling.EmAttribute;
 import io.zerows.specification.modeling.HAttribute;
@@ -158,7 +158,7 @@ class AtRunner {
                         .insertAsync(changeList)
                         .compose(nil -> Ux.future(inserted))
                         .compose(Ux::futureJ)
-                        .compose(RFn.ofJObject(KName.METADATA, KName.RECORD_NEW, KName.RECORD_OLD))
+                        .compose(FnZero.ofJObject(KName.METADATA, KName.RECORD_NEW, KName.RECORD_OLD))
                         .compose(activityResult -> {
                             /*
                              * 特殊字段判断是否继续生成待确认

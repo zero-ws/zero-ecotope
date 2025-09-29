@@ -15,7 +15,7 @@ public class MapInfix implements Infix {
     private static void initInternal(final Vertx vertx,
                                      final String name) {
         CC_CLIENTS.pick(() -> SharedClient.createShared(vertx, name), name);
-        // RFn.po?l(CLIENTS, name, () -> SharedClient.createShared(vertx, name));
+        // FnZero.po?l(CLIENTS, name, () -> SharedClient.createShared(vertx, name));
     }
 
     public static void init(final Vertx vertx) {

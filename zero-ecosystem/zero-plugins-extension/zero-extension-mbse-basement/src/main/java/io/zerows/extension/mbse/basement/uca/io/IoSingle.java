@@ -1,7 +1,7 @@
 package io.zerows.extension.mbse.basement.uca.io;
 
 import io.zerows.ams.constant.VValue;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.extension.mbse.basement.exception._417EventTypeConflictException;
 import io.zerows.extension.mbse.basement.uca.plugin.IoHub;
 import io.zerows.specification.modeling.HRecord;
@@ -9,7 +9,7 @@ import io.zerows.specification.modeling.HRecord;
 public class IoSingle extends AbstractIo {
 
     private void ensure(final Integer length) {
-        RFn.outWeb(1 < length, _417EventTypeConflictException.class, this.getClass());
+        FnZero.outWeb(1 < length, _417EventTypeConflictException.class, this.getClass());
     }
 
     @Override

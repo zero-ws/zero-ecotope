@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.unity.Ux;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.runtime.workflow.atom.runtime.WTask;
@@ -50,7 +50,7 @@ public class GearMulti extends AbstractGear {
             queue.add(starter.buildAsync(eachData, task, null));
         });
 
-        return RFn.combineT(queue).compose(generatedQ -> {
+        return FnZero.combineT(queue).compose(generatedQ -> {
 
             final AtomicInteger seed = new AtomicInteger(1);
             generatedQ.forEach(generated -> {
@@ -82,7 +82,7 @@ public class GearMulti extends AbstractGear {
             // 1. Deserialize new WTodo
             queue.add(generator.buildAsync(eachData, task, todo));
         });
-        return RFn.combineT(queue).compose(generatedQ -> {
+        return FnZero.combineT(queue).compose(generatedQ -> {
 
             final AtomicInteger seed = new AtomicInteger(1);
             generatedQ.forEach(generated -> {

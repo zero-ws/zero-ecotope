@@ -3,7 +3,7 @@ package io.zerows.extension.runtime.crud.uca.input;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.unity.Ux;
 import io.zerows.core.constant.KName;
 import io.zerows.core.spi.modeler.Indent;
@@ -52,7 +52,7 @@ class SerialPre implements Pre {
                     numberMap.put(numberField, stub.indent(code, sigma));
                 });
             /* Combine number map here for generation */
-            return RFn.combineM(numberMap).compose(generated -> {
+            return FnZero.combineM(numberMap).compose(generated -> {
                 generated.forEach(data::put);
                 return Ux.future(data);
             });
@@ -78,7 +78,7 @@ class SerialPre implements Pre {
                     return stub.indent(code, sigma, size);
                 })));
             /* Combine */
-            return RFn.combineM(numberMap).compose(generated -> {
+            return FnZero.combineM(numberMap).compose(generated -> {
                 generated.forEach((numberField, numberQueue) -> this.runFill(data, numberField, numberQueue));
                 return Ux.future(data);
             });

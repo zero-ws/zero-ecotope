@@ -3,7 +3,7 @@ package io.zerows.extension.runtime.ambient.agent.service.application;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.unity.Ux;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XMenuDao;
 
@@ -17,6 +17,6 @@ public class MenuService implements MenuStub {
         return Ux.Jooq.on(XMenuDao.class)
             .fetchJAsync(KName.APP_ID, appId)
             // metadata field extraction
-            .compose(RFn.ofJArray(KName.METADATA));
+            .compose(FnZero.ofJArray(KName.METADATA));
     }
 }

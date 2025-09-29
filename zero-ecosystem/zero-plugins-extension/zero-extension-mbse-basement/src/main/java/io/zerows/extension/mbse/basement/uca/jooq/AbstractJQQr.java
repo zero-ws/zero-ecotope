@@ -2,7 +2,7 @@ package io.zerows.extension.mbse.basement.uca.jooq;
 
 import io.zerows.ams.constant.VValue;
 import io.zerows.ams.constant.em.modeling.EmModel;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.atom.data.DataEvent;
@@ -105,10 +105,10 @@ abstract class AbstractJQQr {
 
         if (EmModel.Type.DIRECT == type) {
             /* 4.单表单映射 */
-            RFn.outWeb(VValue.ONE != matrix.size(), _417TableCounterException.class, clazz, matrix.size());
+            FnZero.outWeb(VValue.ONE != matrix.size(), _417TableCounterException.class, clazz, matrix.size());
         } else if (EmModel.Type.JOINED == type) {
             /* 6.单表多映射 */
-            RFn.outWeb(VValue.ONE >= matrix.size(), _417TableCounterException.class, clazz, matrix.size());
+            FnZero.outWeb(VValue.ONE >= matrix.size(), _417TableCounterException.class, clazz, matrix.size());
         }
         return matrix;
     }

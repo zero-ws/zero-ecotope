@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.mbse.ui.domain.tables.daos.UiFieldDao;
@@ -64,7 +64,7 @@ public class FieldService implements FieldStub {
                 .insertAsync(fields)
                 .compose(Ux::futureA)
                 // 3. mountOut
-                .compose(RFn.ofJArray(
+                .compose(FnZero.ofJArray(
                     OPTION_JSX,
                     OPTION_CONFIG,
                     OPTION_ITEM,

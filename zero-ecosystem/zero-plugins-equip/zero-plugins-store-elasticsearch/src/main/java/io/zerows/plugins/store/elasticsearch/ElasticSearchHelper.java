@@ -4,7 +4,7 @@ import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.configure.YmlCore;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.core.util.Ut;
 import io.zerows.plugins.store.elasticsearch.exception._404ConfigurationMissingExceptionn;
@@ -53,11 +53,11 @@ public class ElasticSearchHelper {
 
     static ElasticSearchHelper helper(final Class<?> target) {
         return CC_HELPER.pick(() -> new ElasticSearchHelper(target), target.getName());
-        // RFn.po?l(Pool.HELPERS, target.getName(), () -> new ElasticSearchHelper(target));
+        // FnZero.po?l(Pool.HELPERS, target.getName(), () -> new ElasticSearchHelper(target));
     }
 
     RestHighLevelClient getClient(final JsonObject options) {
-        RFn.outWeb(Ut.isNil(options), _404ConfigurationMissingExceptionn.class, this.getClass());
+        FnZero.outWeb(Ut.isNil(options), _404ConfigurationMissingExceptionn.class, this.getClass());
         final CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
         credentialsProvider.setCredentials(AuthScope.ANY,
             new UsernamePasswordCredentials(

@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.ams.constant.VValue;
 import io.zerows.ams.constant.em.modeling.EmModel;
 import io.zerows.core.exception.WebException;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.uca.qr.Criteria;
 import io.zerows.core.uca.qr.Pager;
 import io.zerows.core.uca.qr.Sorter;
@@ -208,12 +208,12 @@ public class DataEvent implements Serializable {
         /* DataRow 不能为空，有操作旧必须保证 rows 中有数据 */
         final List<DataRow> rows = this.io.getRows();
 
-        RFn.outWeb(null == rows || rows.isEmpty(), _417DataRowNullException.class, this.getClass(),
+        FnZero.outWeb(null == rows || rows.isEmpty(), _417DataRowNullException.class, this.getClass(),
             /* ARG1：当前 Model 的模型标识符 */ this.atom.identifier());
 
         final DataRow row = rows.get(VValue.IDX);
 
-        RFn.outWeb(null == row, _417DataRowNullException.class, this.getClass(),
+        FnZero.outWeb(null == row, _417DataRowNullException.class, this.getClass(),
             /* ARG1：当前 Model 的模型标识符 */ this.atom.identifier());
 
         return row;

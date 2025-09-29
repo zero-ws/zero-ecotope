@@ -5,7 +5,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.unity.Ux;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.runtime.report.atom.RDimension;
@@ -128,7 +128,7 @@ class StepGeneratorData extends AbstractStepGenerator {
             final OFeature oFeature = OFeature.of(feature.getValuePath());
             preFeatureMap.put(feature.getName(), oFeature.outAsync(sourceData, params, feature));
         });
-        return RFn.combineM(preFeatureMap).compose(matrixMap -> {
+        return FnZero.combineM(preFeatureMap).compose(matrixMap -> {
             // 抽取维度配置
             final JsonObject dimConfig = Ut.toJObject(featureOfDim.getValueConfig());
             final String dimField = Ut.valueString(dimConfig, RpConstant.DimValue.FIELD_GROUP);

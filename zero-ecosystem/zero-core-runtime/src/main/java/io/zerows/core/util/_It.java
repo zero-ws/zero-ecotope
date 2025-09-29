@@ -33,7 +33,7 @@ class _It extends _Ir {
      *
      * `it` means iterator method here
      * `et` means `Error Iterator` to be sure comsumer should throw some checked exception
-     * The previous `et` have been moved to `RFn` class instead, in Ut there are only `it` left
+     * The previous `et` have been moved to `FnZero` class instead, in Ut there are only `it` left
      */
     public static <K, V> void itMap(final ConcurrentMap<K, V> map, final BiConsumer<K, V> fnEach) {
         CollectionIt.exec(map, fnEach);

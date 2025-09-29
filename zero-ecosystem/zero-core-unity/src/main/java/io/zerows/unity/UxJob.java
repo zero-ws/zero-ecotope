@@ -2,7 +2,7 @@ package io.zerows.unity;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.scheduler.plugins.JobClient;
 import io.zerows.core.web.scheduler.plugins.JobInfix;
@@ -18,7 +18,7 @@ public class UxJob {
 
     // Start job
     public Future<Boolean> startAsync(final String code) {
-        return RFn.pack(future -> this.client.startAsync(code, res -> {
+        return FnZero.pack(future -> this.client.startAsync(code, res -> {
             LOGGER.info(INFO.UxJob.JOB_START, code, res.result());
             future.complete(Boolean.TRUE);
         }));
@@ -26,7 +26,7 @@ public class UxJob {
 
     // Stop job
     public Future<Boolean> stopAsync(final String code) {
-        return RFn.pack(future -> this.client.stopAsync(code,
+        return FnZero.pack(future -> this.client.stopAsync(code,
             res -> {
                 LOGGER.info(INFO.UxJob.JOB_STOP, code);
                 future.complete(Boolean.TRUE);
@@ -35,7 +35,7 @@ public class UxJob {
 
     // Resume job
     public Future<Boolean> resumeAsync(final String code) {
-        return RFn.pack(future -> this.client.resumeAsync(code,
+        return FnZero.pack(future -> this.client.resumeAsync(code,
             res -> {
                 LOGGER.info(INFO.UxJob.JOB_RESUME, code);
                 future.complete(Boolean.TRUE);

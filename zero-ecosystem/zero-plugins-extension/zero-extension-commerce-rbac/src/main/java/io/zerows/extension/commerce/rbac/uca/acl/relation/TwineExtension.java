@@ -7,7 +7,7 @@ import io.zerows.common.program.KRef;
 import io.zerows.core.constant.KName;
 import io.zerows.core.database.jooq.operation.UxJoin;
 import io.zerows.core.database.jooq.operation.UxJooq;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.mbse.atom.specification.KQr;
 import io.zerows.extension.commerce.rbac.atom.ScConfig;
@@ -173,7 +173,7 @@ class TwineExtension implements Twine<SUser> {
             final KQr qr = CONFIG.category(modelId);
             futureMap.put(modelId, this.runBatch(groupList, qr));
         });
-        return RFn.combineM(futureMap);
+        return FnZero.combineM(futureMap);
     }
 
     private Future<JsonArray> runBatch(final List<SUser> users, final KQr qr) {

@@ -3,7 +3,7 @@ package io.zerows.module.security.zdk.manager;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.em.EmSecure;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.module.security.atom.manage.KCatena;
 import io.zerows.module.security.atom.manage.KPermit;
 import io.zerows.module.security.atom.manage.KSemi;
@@ -59,7 +59,7 @@ public abstract class AbstractValve implements HValve {
         final KPermit permit = catena.permit();
 
         // Error-80223: uiType不能定义为NONE
-        RFn.out(EmSecure.ScIn.NONE == permit.source(), _409UiSourceNoneException.class, this.getClass(), permit.code());
+        FnZero.out(EmSecure.ScIn.NONE == permit.source(), _409UiSourceNoneException.class, this.getClass(), permit.code());
         /*
          * 管理界面分为两个区域：
          * DM - 维度管理区域，UI - 数据管理区域
@@ -89,7 +89,7 @@ public abstract class AbstractValve implements HValve {
         if (EmSecure.ScDim.NONE == permit.shape()) {
             final EmSecure.ActPhase phase = permit.phase();
             // Error-80224，这种模式下，uiPhase 只能定义成 EAGER（由于没有维度）
-            RFn.out(EmSecure.ActPhase.EAGER != phase, _409UiPhaseEagerException.class, this.getClass(), phase);
+            FnZero.out(EmSecure.ActPhase.EAGER != phase, _409UiPhaseEagerException.class, this.getClass(), phase);
             // 只处理 Ui 部分，不处理其他部分
             return Future.succeededFuture(catena)
                 .compose(semi::uiConfigure)

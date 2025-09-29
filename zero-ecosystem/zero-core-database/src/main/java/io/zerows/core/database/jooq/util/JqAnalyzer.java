@@ -8,7 +8,7 @@ import io.zerows.core.database.jooq.JooqDsl;
 import io.zerows.core.database.jooq.condition.JooqCond;
 import io.zerows.core.database.jooq.exception.BootJooqFieldMissingException;
 import io.zerows.core.database.jooq.exception.BootJooqMergeException;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
 import io.zerows.module.metadata.atom.mapping.Mirror;
 import io.zerows.module.metadata.atom.mapping.Mojo;
@@ -54,7 +54,7 @@ public class JqAnalyzer {
 
     private JqAnalyzer(final JooqDsl dsl) {
         this.dsl = CC_DAO.pick(() -> dsl, dsl.hashCode());
-        // RFn.po?l(DAO_POOL, dsl.hashCode(), () -> dsl);
+        // FnZero.po?l(DAO_POOL, dsl.hashCode(), () -> dsl);
         // Mapping initializing
         this.table = Ut.field(dsl.dao(), "table");
 
@@ -289,7 +289,7 @@ public class JqAnalyzer {
 
     public Field column(final String field) {
         String columnField = columnName(field);
-        RFn.outBoot(null == columnField, LOGGER,
+        FnZero.outBoot(null == columnField, LOGGER,
             BootJooqFieldMissingException.class, getClass(), field, this.entityCls);
         LOGGER.debug(INFO.JOOQ_FIELD, field, columnField);
         /*
@@ -346,7 +346,7 @@ public class JqAnalyzer {
     }
 
     public <T> T copyEntity(final T target, final T updated) {
-        RFn.outBoot(null == updated, LOGGER, BootJooqMergeException.class,
+        FnZero.outBoot(null == updated, LOGGER, BootJooqMergeException.class,
             getClass(), null == target ? null : target.getClass(), Ut.serialize(target));
         if (Objects.isNull(target) && Objects.isNull(updated)) {
             return null;

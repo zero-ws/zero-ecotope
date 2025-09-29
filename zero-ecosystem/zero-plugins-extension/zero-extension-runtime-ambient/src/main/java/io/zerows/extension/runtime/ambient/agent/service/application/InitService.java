@@ -2,7 +2,7 @@ package io.zerows.extension.runtime.ambient.agent.service.application;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.unity.Ux;
 import io.zerows.core.constant.KName;
 import io.zerows.core.uca.log.Annal;
@@ -63,7 +63,7 @@ public class InitService implements InitStub {
             /* Data Loading */
             .compose(At.initData().apply())
             /* Image */
-            .compose(RFn.ofJObject(KName.App.LOGO));
+            .compose(FnZero.ofJObject(KName.App.LOGO));
     }
 
     /**
@@ -131,7 +131,7 @@ public class InitService implements InitStub {
             .compose(appJson -> this.initOutput(appJson, outPath))
             .compose(this::initDefined)
             /* Image */
-            .compose(RFn.ofJObject(KName.App.LOGO));
+            .compose(FnZero.ofJObject(KName.App.LOGO));
     }
 
     private Future<JsonObject> initOutput(final JsonObject combined, final String outPath) {

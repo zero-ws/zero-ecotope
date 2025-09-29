@@ -1,7 +1,7 @@
 package io.mature.extension.migration;
 
 import io.zerows.ams.constant.em.Environment;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.specification.access.app.HApp;
 import io.zerows.specification.access.app.HArk;
 import io.mature.extension.refine.Ox;
@@ -55,7 +55,7 @@ public class Around {
                  * 组件配置
                  */
                 final JsonObject componentConfig = Ut.valueJObject(component.getJsonObject("config"));
-                return this.captureAsync(componentCls, componentConfig).compose(RFn.ifNil(
+                return this.captureAsync(componentCls, componentConfig).compose(FnZero.ifNil(
                     () -> config,
                     step -> step.procAsync(config))
                 );

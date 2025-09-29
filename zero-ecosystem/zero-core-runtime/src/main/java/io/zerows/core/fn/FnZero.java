@@ -33,8 +33,8 @@ import java.util.function.Supplier;
  * - Predicate  |
  */
 @SuppressWarnings("all")
-public final class RFn extends _Out {
-    private RFn() {
+public final class FnZero extends _Out {
+    private FnZero() {
     }
 
     // 安全执行确认：Supplier<Tool> -> Consumer<Tool>

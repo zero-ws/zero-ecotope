@@ -1,6 +1,6 @@
 package io.zerows.extension.commerce.finance.agent.api;
 
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.extension.commerce.finance.domain.tables.daos.*;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.*;
 import io.zerows.extension.commerce.finance.agent.service.BookStub;
@@ -164,6 +164,6 @@ public class FetchActor {
     @Address(Addr.BillItem.FETCH_BOOK_BY_KEY)
     public Future<JsonObject> fetchBook(final String bookId) {
         // Null Prevent
-        return RFn.ofJObject(this.bookStub::fetchByKey).apply(bookId);
+        return FnZero.ofJObject(this.bookStub::fetchByKey).apply(bookId);
     }
 }

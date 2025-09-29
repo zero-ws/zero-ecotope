@@ -41,7 +41,7 @@ public class ScRole {
 
     public static ScRole login(final String roleId) {
         return CC_ROLE.pick(() -> new ScRole(roleId), roleId);
-        // return RFn.po?l(ROLES, roleId, () -> new ScRole(roleId));
+        // return FnZero.po?l(ROLES, roleId, () -> new ScRole(roleId));
     }
 
     public String key() {

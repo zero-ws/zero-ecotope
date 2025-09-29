@@ -13,7 +13,7 @@ import io.zerows.ams.constant.em.modeling.EmValue;
 import io.zerows.core.constant.KName;
 import io.zerows.core.exception.WebException;
 import io.zerows.core.exception.web._500InternalServerException;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.model.exception.BootIndexExceedException;
 import io.zerows.module.security.atom.token.JwtToken;
@@ -151,7 +151,7 @@ public class Envelop implements Serializable {
 
     /* Get `data` part by argIndex here */
     public <T> T data(final Integer argIndex, final Class<T> clazz) {
-        RFn.outBoot(!Rib.isIndex(argIndex), BootIndexExceedException.class, this.getClass(), argIndex);
+        FnZero.outBoot(!Rib.isIndex(argIndex), BootIndexExceedException.class, this.getClass(), argIndex);
         return Rib.get(this.data, clazz, argIndex);
     }
 

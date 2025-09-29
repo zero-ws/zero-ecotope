@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.unity.Ux;
 import io.zerows.core.util.Ut;
 
@@ -78,7 +78,7 @@ public abstract class AbstractDataSet implements DataSet {
             // input / refField -> output
             outMap.put(whereField, Ut.valueString(refConfig, KName.OUTPUT));
         });
-        return RFn.combineM(dataMap).compose(queryMap -> {
+        return FnZero.combineM(dataMap).compose(queryMap -> {
             /*
              * {
              *     "field": {

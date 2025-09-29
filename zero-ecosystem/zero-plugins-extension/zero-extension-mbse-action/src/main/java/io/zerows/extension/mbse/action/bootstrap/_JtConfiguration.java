@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.configure.YmlCore;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.mbse.action.atom.JtConfig;
 import io.zerows.extension.mbse.action.eon.JtConstant;
@@ -55,7 +55,7 @@ class JtConfiguration {
         final ConcurrentMap<String, Future<ServiceEnvironment>> futures = new ConcurrentHashMap<>();
         stored.forEach((appId, each) ->
             futures.put(appId, new ServiceEnvironment(each).init(vertx)));
-        return RFn.combineM(futures).compose(processed -> {
+        return FnZero.combineM(futures).compose(processed -> {
             CONTEXT.putAll(processed);
             Jt.LOG.Init.info(JtConfiguration.class, "ServiceEnvironment initialized !!!");
             return Ux.future(Boolean.TRUE);

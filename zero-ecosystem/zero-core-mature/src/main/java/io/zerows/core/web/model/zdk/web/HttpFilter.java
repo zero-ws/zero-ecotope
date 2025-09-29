@@ -1,6 +1,6 @@
 package io.zerows.core.web.model.zdk.web;
 
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.uca.log.Annal;
 import io.vertx.core.http.Cookie;
 import io.vertx.core.http.HttpServerRequest;
@@ -57,6 +57,6 @@ public abstract class HttpFilter implements Filter {
     }
 
     public void init() {
-        RFn.outBoot(null == this.context, this.logger, BootFilterContextException.class, this.getClass());
+        FnZero.outBoot(null == this.context, this.logger, BootFilterContextException.class, this.getClass());
     }
 }

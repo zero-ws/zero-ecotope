@@ -2,7 +2,7 @@ package io.zerows.core.web.invocation.uca.runner;
 
 import io.vertx.core.Future;
 import io.vertx.core.eventbus.Message;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.invocation.exception.BootInvokerNullException;
 import io.zerows.core.web.model.commune.Envelop;
@@ -93,7 +93,7 @@ public class JetSelector {
                 invoker = CACHE.CCT_INVOKER.pick(DynamicInvoker::new, DynamicInvoker.class.getName()); // Ut.?ingleton(DynamicInvoker.class);
             }
         }
-        RFn.outBoot(null == invoker, LOGGER,
+        FnZero.outBoot(null == invoker, LOGGER,
             BootInvokerNullException.class, JetSelector.class,
             returnType, paramCls);
         return invoker;

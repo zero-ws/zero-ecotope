@@ -4,7 +4,7 @@ import io.mature.extension.uca.log.Ko;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.unity.Ux;
 import io.zerows.core.database.cp.zdk.DS;
 import io.zerows.core.database.cp.zdk.DataPool;
@@ -154,7 +154,7 @@ final class OxPlugin {
                                       final BiFunction<JsonArray, DataAtom, Future<JsonArray>> consumer) {
         final List<Future<JsonArray>> futures = new ArrayList<>();
         groupSet.forEach(group -> futures.add(consumer.apply(group.data(), group.atom())));
-        return RFn.compressA(futures);
+        return FnZero.compressA(futures);
     }
 
     /**

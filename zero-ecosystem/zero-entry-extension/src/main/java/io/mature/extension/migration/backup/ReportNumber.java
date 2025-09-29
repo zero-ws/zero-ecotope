@@ -2,7 +2,7 @@ package io.mature.extension.migration.backup;
 
 import io.zerows.ams.constant.VValue;
 import io.zerows.ams.constant.em.Environment;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.specification.access.app.HApp;
 import io.mature.extension.migration.AbstractStep;
 import io.mature.extension.refine.Ox;
@@ -51,7 +51,7 @@ public class ReportNumber extends AbstractStep {
                 .compose(normalized -> {
                     final List<Future<JsonObject>> futures = new ArrayList<>();
                     normalized.stream().map(this::procAsync).forEach(futures::add);
-                    return RFn.combineA(futures);
+                    return FnZero.combineA(futures);
                 })
                 .compose(combined -> {
                     /* 元素结构：JsonArray

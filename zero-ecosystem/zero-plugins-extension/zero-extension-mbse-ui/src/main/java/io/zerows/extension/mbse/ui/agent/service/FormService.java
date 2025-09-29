@@ -1,11 +1,11 @@
 package io.zerows.extension.mbse.ui.agent.service;
 
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.uca.log.Annal;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.RFn;
 import io.zerows.unity.Ux;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.mbse.ui.domain.tables.daos.UiFormDao;
@@ -47,7 +47,7 @@ public class FormService implements FormStub {
         return Ux.Jooq.on(UiFormDao.class).<UiForm>fetchAndAsync(condition)
             /* List<UiForm> */
             .compose(Ux::futureA)
-            .compose(RFn.ofJArray(
+            .compose(FnZero.ofJArray(
                 KName.Ui.HIDDEN,
                 KName.METADATA
             ));
@@ -100,7 +100,7 @@ public class FormService implements FormStub {
             .updateAsync(key, uiForm)
             .compose(Ux::futureJ)
             // 3. mountOut
-            .compose(RFn.ofJObject(
+            .compose(FnZero.ofJObject(
                 KName.Ui.HIDDEN,
                 KName.Ui.ROW,
                 KName.METADATA

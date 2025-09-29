@@ -1,6 +1,6 @@
 package io.zerows.extension.runtime.ambient.util;
 
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.uca.log.Annal;
 import io.vertx.core.Future;
 import io.vertx.core.buffer.Buffer;
@@ -40,7 +40,7 @@ class AtFs {
         if (Objects.nonNull(config)) {
             appJ.put(KName.STORE_PATH, config.getStorePath());
         }
-        return Ux.futureJ(appJ).compose(RFn.ofJObject(KName.App.LOGO));
+        return Ux.futureJ(appJ).compose(FnZero.ofJObject(KName.App.LOGO));
     }
 
     static Future<Buffer> fileDownload(final JsonArray attachment) {
@@ -153,6 +153,6 @@ class AtFs {
         if (Ut.isNotNil(dataR)) {
             futures.add(fnRemote.apply(dataR));
         }
-        return RFn.compressA(futures);
+        return FnZero.compressA(futures);
     }
 }

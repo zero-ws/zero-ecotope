@@ -1,6 +1,6 @@
 package io.zerows.extension.mbse.basement.uca.jooq.internal;
 
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.extension.mbse.basement.atom.element.DataMatrix;
 import io.zerows.extension.mbse.basement.exception._417ConditionWhereException;
 import org.jooq.Condition;
@@ -16,7 +16,7 @@ class IWhere {
 
     static Condition key(final DataMatrix matrix) {
         final Set<String> keys = matrix.getKeys();
-        RFn.outWeb(keys.isEmpty(), _417ConditionWhereException.class, IWhere.class);
+        FnZero.outWeb(keys.isEmpty(), _417ConditionWhereException.class, IWhere.class);
         final Set<Condition> conditions = keys.stream()
             .map(field -> IWhere.Cond.eq(field, matrix))
             .collect(Collectors.toSet());
@@ -25,7 +25,7 @@ class IWhere {
 
     static Condition keys(final List<DataMatrix> matrixList) {
         final Iterator<DataMatrix> it = matrixList.iterator();
-        RFn.outWeb(!it.hasNext(), _417ConditionWhereException.class, IWhere.class);
+        FnZero.outWeb(!it.hasNext(), _417ConditionWhereException.class, IWhere.class);
         Condition condition = key(it.next());
         while (it.hasNext()) {
             condition = condition.or(key(it.next()));

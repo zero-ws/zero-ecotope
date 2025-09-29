@@ -5,7 +5,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.unity.Ux;
 import io.zerows.core.util.Ut;
 import io.zerows.core.database.jooq.operation.UxJooq;
@@ -67,9 +67,9 @@ public class LinkService implements LinkStub {
         final List<Future<List<XLinkage>>> futures = new ArrayList<>();
         futures.add(jooq.insertAsync(queueA));
         futures.add(jooq.updateAsync(queueU));
-        return RFn.compressL(futures)
+        return FnZero.compressL(futures)
             .compose(Ux::futureA)
-            .compose(RFn.ofJArray(KName.SOURCE_DATA, KName.TARGET_DATA));
+            .compose(FnZero.ofJArray(KName.SOURCE_DATA, KName.TARGET_DATA));
     }
 
     @Override

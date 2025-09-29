@@ -3,7 +3,7 @@ package io.zerows.extension.mbse.action.agent.service;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.core.uca.qr.syntax.Ir;
 import io.zerows.core.util.Ut;
@@ -78,7 +78,7 @@ public class JobService implements JobStub {
              * 1) Supplier here for `JsonObject` generated
              * 2) Mission conversation here to JsonObject directly
              */
-            .compose(RFn.ofJObject(job -> JobKit.fetchMission(Jt.jobCode(job))));
+            .compose(FnZero.ofJObject(job -> JobKit.fetchMission(Jt.jobCode(job))));
     }
 
     @Override

@@ -3,7 +3,7 @@ package io.zerows.extension.mbse.modulat.agent.service;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.unity.Ux;
 import io.zerows.core.util.Ut;
 import io.zerows.core.database.jooq.operation.UxJooq;
@@ -81,7 +81,7 @@ public class BagArgService implements BagArgStub {
         Objects.requireNonNull(bagId);
         return Ux.Jooq.on(BBagDao.class).<BBag>fetchByIdAsync(bagId)
             // Cache Processing
-            .compose(RFn.ofJObject(bag -> this.saveConfigure(bag, data)));
+            .compose(FnZero.ofJObject(bag -> this.saveConfigure(bag, data)));
     }
 
     @Override
@@ -89,7 +89,7 @@ public class BagArgService implements BagArgStub {
         Objects.requireNonNull(nameAbbr);
         return Ux.Jooq.on(BBagDao.class).<BBag>fetchOneAsync("nameAbbr", nameAbbr)
             // Cache Processing
-            .compose(RFn.ofJObject(bag -> this.saveConfigure(bag, data)));
+            .compose(FnZero.ofJObject(bag -> this.saveConfigure(bag, data)));
     }
 
     private Future<JsonObject> saveConfigure(final BBag bag, final JsonObject data) {

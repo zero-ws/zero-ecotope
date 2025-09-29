@@ -3,7 +3,7 @@ package io.zerows.core.web.cache.shared;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.zerows.common.program.Kv;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.cache.shared.exception._500PoolInternalException;
 import io.zerows.module.metadata.uca.logging.OLog;
@@ -40,65 +40,65 @@ public class UxPool {
 
     // Put Operation
     public <K, V> Future<Kv<K, V>> put(final K key, final V value) {
-        return RFn.<Kv<K, V>>pack(future -> this.client.put(key, value, res -> {
+        return FnZero.<Kv<K, V>>pack(future -> this.client.put(key, value, res -> {
             LOGGER.debug(INFO.UxPool.POOL_PUT, key, value, this.name);
-            RFn.pack(res, future, Ut.failWeb(_500PoolInternalException.class, this.getClass(), this.name, "put"));
+            FnZero.pack(res, future, Ut.failWeb(_500PoolInternalException.class, this.getClass(), this.name, "put"));
         }));
     }
 
     public <K, V> Future<Kv<K, V>> put(final K key, final V value, int expiredSecs) {
-        return RFn.<Kv<K, V>>pack(future -> this.client.<K, V>put(key, value, expiredSecs, res -> {
+        return FnZero.<Kv<K, V>>pack(future -> this.client.<K, V>put(key, value, expiredSecs, res -> {
             LOGGER.debug(INFO.UxPool.POOL_PUT_TIMER, key, value, this.name, String.valueOf(expiredSecs));
-            RFn.pack(res, future, Ut.failWeb(_500PoolInternalException.class, this.getClass(), this.name, "put"));
+            FnZero.pack(res, future, Ut.failWeb(_500PoolInternalException.class, this.getClass(), this.name, "put"));
         }));
     }
 
     // Remove
     public <K, V> Future<Kv<K, V>> remove(final K key) {
-        return RFn.<Kv<K, V>>pack(future -> this.client.<K, V>remove(key, res -> {
+        return FnZero.<Kv<K, V>>pack(future -> this.client.<K, V>remove(key, res -> {
             LOGGER.debug(INFO.UxPool.POOL_REMOVE, key, this.name);
-            RFn.pack(res, future, Ut.failWeb(_500PoolInternalException.class, this.getClass(), this.name, "remove"));
+            FnZero.pack(res, future, Ut.failWeb(_500PoolInternalException.class, this.getClass(), this.name, "remove"));
         }));
     }
 
     // Get
     public <K, V> Future<V> get(final K key) {
-        return RFn.<V>pack(future -> this.client.get(key, res -> {
+        return FnZero.<V>pack(future -> this.client.get(key, res -> {
             LOGGER.debug(INFO.UxPool.POOL_GET, key, this.name, false);
-            RFn.pack(res, future, Ut.failWeb(_500PoolInternalException.class, this.getClass(), this.name, "get"));
+            FnZero.pack(res, future, Ut.failWeb(_500PoolInternalException.class, this.getClass(), this.name, "get"));
         }));
     }
 
     public <K, V> Future<ConcurrentMap<K, V>> get(final Set<K> keys) {
         final ConcurrentMap<K, Future<V>> futureMap = new ConcurrentHashMap<>();
         keys.forEach(key -> futureMap.put(key, this.get(key)));
-        return RFn.combineM(futureMap);
+        return FnZero.combineM(futureMap);
     }
 
     public <K, V> Future<V> get(final K key, final boolean once) {
-        return RFn.<V>pack(future -> this.client.get(key, once, res -> {
+        return FnZero.<V>pack(future -> this.client.get(key, once, res -> {
             LOGGER.debug(INFO.UxPool.POOL_GET, key, this.name, once);
-            RFn.pack(res, future, Ut.failWeb(_500PoolInternalException.class, this.getClass(), this.name, "get"));
+            FnZero.pack(res, future, Ut.failWeb(_500PoolInternalException.class, this.getClass(), this.name, "get"));
         }));
     }
 
     public Future<Boolean> clear() {
-        return RFn.<Boolean>pack(future -> this.client.clear(res -> {
+        return FnZero.<Boolean>pack(future -> this.client.clear(res -> {
             LOGGER.debug(INFO.UxPool.POOL_CLEAR, this.name);
-            RFn.pack(res, future, Ut.failWeb(_500PoolInternalException.class, this.getClass(), this.name, "clear"));
+            FnZero.pack(res, future, Ut.failWeb(_500PoolInternalException.class, this.getClass(), this.name, "clear"));
         }));
     }
 
     // Count
     public Future<Integer> size() {
-        return RFn.<Integer>pack(future -> this.client.size(res -> {
-            RFn.pack(res, future, Ut.failWeb(_500PoolInternalException.class, this.getClass(), this.name, "size"));
+        return FnZero.<Integer>pack(future -> this.client.size(res -> {
+            FnZero.pack(res, future, Ut.failWeb(_500PoolInternalException.class, this.getClass(), this.name, "size"));
         }));
     }
 
     public Future<Set<String>> keys() {
-        return RFn.<Set<String>>pack(future -> this.client.keys(res -> {
-            RFn.pack(res, future, Ut.failWeb(_500PoolInternalException.class, this.getClass(), this.name, "keys"));
+        return FnZero.<Set<String>>pack(future -> this.client.keys(res -> {
+            FnZero.pack(res, future, Ut.failWeb(_500PoolInternalException.class, this.getClass(), this.name, "keys"));
         }));
     }
 }

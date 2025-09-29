@@ -5,7 +5,7 @@ import io.zerows.core.exception.web._500InternalServerException;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.extension.runtime.crud.exception._409ModuleConflictException;
 import io.zerows.extension.runtime.crud.exception._409MultiModuleException;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
@@ -54,7 +54,7 @@ class ExcelPre implements Pre {
         final KModule module = in.module();
         final String expected = module.getTable();
         final String actual = content.key();
-        RFn.out(!expected.equals(actual), _409ModuleConflictException.class, this.getClass(), actual, expected);
+        FnZero.out(!expected.equals(actual), _409ModuleConflictException.class, this.getClass(), actual, expected);
 
         /* Tenant Information */
         return this.client.extractAsync(content.value());
@@ -78,7 +78,7 @@ class ExcelPre implements Pre {
                     }
                     tableMap.get(item.getName()).add(item);
                 });
-            RFn.out(1 != tableMap.size(), _409MultiModuleException.class, this.getClass(), tableMap.size());
+            FnZero.out(1 != tableMap.size(), _409MultiModuleException.class, this.getClass(), tableMap.size());
             final String tableName = tableMap.keySet().iterator().next();
             kv.set(tableName, tableMap.get(tableName));
             return kv;

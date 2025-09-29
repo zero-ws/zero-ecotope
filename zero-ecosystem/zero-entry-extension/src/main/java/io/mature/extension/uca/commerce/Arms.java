@@ -9,7 +9,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.ams.constant.em.typed.ChangeFlag;
 import io.zerows.common.datamation.KFabric;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.util.Ao;
@@ -137,7 +137,7 @@ public class Arms {
                 if (this.types.contains(ChangeFlag.DELETE)) {
                     futures.add(this.deleteRecord(map.get(ChangeFlag.DELETE), hex.batch(ChangeFlag.DELETE)));
                 }
-                return RFn.compressA(futures);
+                return FnZero.compressA(futures);
             });
     }
 

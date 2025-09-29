@@ -8,7 +8,7 @@ import io.vertx.ext.auth.User;
 import io.zerows.common.program.KRef;
 import io.zerows.core.constant.KName;
 import io.zerows.core.constant.KWeb;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.cache.Rapid;
@@ -60,7 +60,7 @@ public class ScUser {
         return null;
         //        return Future.join(futures)
         //            /* Composite Result */
-        //            .compose(RFn::<ProfileRole>combineT)
+        //            .compose(FnZero::<ProfileRole>combineT)
         //            /* User Process */
         //            .compose(ScDetent.user(profile)::procAsync);
     }
@@ -78,7 +78,7 @@ public class ScUser {
         final KRef childHod = new KRef();
         return null;
         //
-        //        return Future.join(futures).compose(RFn::<ProfileGroup>combineT).compose(profiles -> Ux.future(profiles)
+        //        return Future.join(futures).compose(FnZero::<ProfileGroup>combineT).compose(profiles -> Ux.future(profiles)
         //            /* Group Direct Mode */
         //            .compose(Align::flat)
         //            .compose(ScDetent.group(profile)::procAsync)
@@ -192,7 +192,7 @@ public class ScUser {
 
     // ------------------------- Session Method -----------------------
     public Future<JsonObject> view() {
-        return this.<JsonObject>get(KName.VIEW).compose(RFn.ifJObject(item -> item));
+        return this.<JsonObject>get(KName.VIEW).compose(FnZero.ifJObject(item -> item));
     }
 
     public Future<JsonObject> view(final String viewKey) {
@@ -225,7 +225,7 @@ public class ScUser {
      * }
      */
     public Future<JsonObject> profile() {
-        return this.<JsonObject>get(KName.PROFILE).compose(RFn.ifJObject(item -> item));
+        return this.<JsonObject>get(KName.PROFILE).compose(FnZero.ifJObject(item -> item));
     }
 
     public Future<JsonObject> permissions() {

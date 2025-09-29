@@ -5,7 +5,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.unity.Ux;
 import io.zerows.core.util.Ut;
 
@@ -37,7 +37,7 @@ public class TableRestore extends AbstractStatic {
             final List<Future<JsonArray>> inserted = new ArrayList<>();
             files.stream().map(file -> targetFolder + "/" + file)
                 .map(this::ioAsync).forEach(inserted::add);
-            return RFn.compressA(inserted).compose(nil -> {
+            return FnZero.compressA(inserted).compose(nil -> {
                 LOG.Shell.info(this.getClass(), "表名：{0} 数据还原完成！记录数：{1}",
                     this.jooq.table(), String.valueOf(nil.size()));
                 /*
@@ -45,7 +45,7 @@ public class TableRestore extends AbstractStatic {
                  */
                 final List<Future<JsonObject>> upgrade = new ArrayList<>();
                 Ut.itJArray(original).map(this::upsertAsync).forEach(upgrade::add);
-                return RFn.combineA(upgrade).compose(up -> {
+                return FnZero.combineA(upgrade).compose(up -> {
                     LOG.Shell.info(this.getClass(), "表名：{0} 数据还原完成！升级记录：{1}",
                         this.jooq.table(), String.valueOf(up.size()));
                     return Ux.future(config);

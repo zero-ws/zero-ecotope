@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.unity.Ux;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.mbse.ui.domain.tables.daos.*;
@@ -22,7 +22,7 @@ public class OptionService implements OptionStub {
         return Ux.Jooq.on(VQueryDao.class)
             .<VQuery>fetchByIdAsync(id)
             .compose(Ux::futureJ)
-            .compose(RFn.ofJObject(
+            .compose(FnZero.ofJObject(
                 FIELD_QUERY_CRITERIA,
                 FIELD_QUERY_PROJECTION
             ));
@@ -33,7 +33,7 @@ public class OptionService implements OptionStub {
         return Ux.Jooq.on(VSearchDao.class)
             .<VSearch>fetchByIdAsync(id)
             .compose(Ux::futureJ)
-            .compose(RFn.ofJObject(
+            .compose(FnZero.ofJObject(
                 FIELD_SEARCH_NOTICE,
                 FIELD_SEARCH_VIEW,
                 FIELD_SEARCH_COND
@@ -45,7 +45,7 @@ public class OptionService implements OptionStub {
         return Ux.Jooq.on(VFragmentDao.class)
             .<VFragment>fetchByIdAsync(id)
             .compose(Ux::futureJ)
-            .compose(RFn.ofJObject(
+            .compose(FnZero.ofJObject(
                 FIELD_FRAGMENT_MODEL,
                 FIELD_FRAGMENT_NOTICE,
                 FIELD_FRAGMENT_CONFIG,
@@ -58,7 +58,7 @@ public class OptionService implements OptionStub {
         return Ux.Jooq.on(VTableDao.class)
             .<VTable>fetchByIdAsync(id)
             .compose(Ux::futureJ)
-            .compose(RFn.ofJObject(
+            .compose(FnZero.ofJObject(
                 FIELD_TABLE_OP_CONFIG
             ));
     }
@@ -84,7 +84,7 @@ public class OptionService implements OptionStub {
                 .insertAsync(ops)
                 .compose(Ux::futureA)
                 // 3. mountOut
-                .compose(RFn.ofJArray(
+                .compose(FnZero.ofJArray(
                     FIELD_OP_CONFIG,
                     FIELD_OP_PLUGIN,
                     KName.METADATA

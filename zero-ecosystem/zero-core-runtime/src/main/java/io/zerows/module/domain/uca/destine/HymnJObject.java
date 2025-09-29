@@ -1,7 +1,7 @@
 package io.zerows.module.domain.uca.destine;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.fn.RFn;
+import io.zerows.core.fn.FnZero;
 import io.zerows.core.uca.log.Log;
 import io.zerows.core.util.Ut;
 import io.zerows.module.domain.atom.specification.KJoin;
@@ -36,7 +36,7 @@ class HymnJObject extends HymnBase<JsonObject> {
     public KPoint pointer(final JsonObject dataJ) {
         // 先从数据节点解析 identifier
         final String identifier = this.id(dataJ);
-        RFn.out(Ut.isNil(identifier), _412IndentParsingException.class,
+        FnZero.out(Ut.isNil(identifier), _412IndentParsingException.class,
             this.getClass(), this.joinRef.getTargetIndent(), dataJ);
 
 
