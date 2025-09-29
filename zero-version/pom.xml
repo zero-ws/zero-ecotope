@@ -10,7 +10,7 @@
     <packaging>pom</packaging>
     <name>(POM) 📚️ - Zero Framework Version ${zero.version}</name>
     <properties>
-        <rachel-momo.version>1.0.1</rachel-momo.version>
+        <rachel-momo.version>1.0.4</rachel-momo.version>
         <zero.version>1.0.0</zero.version>
     </properties>
     <dependencyManagement>
