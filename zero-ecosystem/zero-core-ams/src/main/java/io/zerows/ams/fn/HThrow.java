@@ -2,7 +2,6 @@ package io.zerows.ams.fn;
 
 import io.vertx.core.Future;
 import io.zerows.ams.util.HUt;
-import io.zerows.core.exception.BootingException;
 import io.zerows.core.exception.WebException;
 import io.zerows.core.exception.web._412ArgumentNullException;
 import io.zerows.core.exception.web._500InternalServerException;
@@ -54,16 +53,9 @@ class HThrow {
 
     /*
      * - WebException
-     * - BootingException
      */
     static void out(final Class<?> errorCls, final Object... args) {
-        if (BootingException.class == errorCls.getSuperclass()) {
-            final BootingException error = HUt.instance(errorCls, args);
-            if (null != error) {
-                callerAt(error::caller, error::getMessage);
-                throw error;
-            }
-        } else if (WebException.class == errorCls.getSuperclass()) {
+        if (WebException.class == errorCls.getSuperclass()) {
             final WebException error = HUt.instance(errorCls, args);
             if (null != error) {
                 callerAt(error::caller, error::getMessage);
@@ -89,27 +81,6 @@ class HThrow {
             if (Objects.nonNull(logger)) {
                 logger.warn(error.getMessage());
             }
-            throw error;
-        }
-    }
-
-    static void outBoot(final HLogger logger,
-                        final Class<? extends BootingException> upClass,
-                        final Object... args) {
-        final BootingException error = HUt.instance(upClass, args);
-        if (null != error) {
-            if (Objects.nonNull(logger)) {
-                logger.fatal(error);
-            }
-            throw error;
-        }
-    }
-
-    static void outBoot(final Class<? extends BootingException> upClass,
-                        final Object... args) {
-        final BootingException error = HUt.instance(upClass, args);
-        if (null != error) {
-            callerAt(error::caller, error::getMessage);
             throw error;
         }
     }

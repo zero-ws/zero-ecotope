@@ -3,7 +3,6 @@ package io.zerows.core.util;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.exception.BootingException;
 import io.zerows.core.exception.WebException;
 import io.zerows.core.spi.HorizonIo;
 import io.zerows.module.metadata.zdk.running.OCommand;
@@ -214,7 +213,7 @@ class _Bundle extends _Ai {
          *     1. {@see FnZero#outWeb(Class, Object...)}()}，此方法不支持 OSGI 环境，旧版异步流中只有一个方法返回了 Future，基于此
          *        未来所有版本都会替换成 {@link Future} 的形式，所以旧版会直接 @Deprecated 掉
          *     2. 当前方法支持 OSGI 环境，可在 OSGI 模块化环境中直接使用。
-         *     3. 当前方法除了 {@link WebException} 以外，还支持 {@link BootingException}，操作的异常类型更全。
+         *     3. 当前方法除了 {@link WebException} 以外，操作的异常类型更全。
          * </code></pre>
          * 旧版中的 outWeb / outBoot / out 三个核心方法是抛出异常，此异常依旧保留，虽然在 OSGI 环境中可能会有一定的兼容问题，但依旧可以
          * 在异常发生的时候再执行相关重构，所以如此就统一了对应的异常处理。

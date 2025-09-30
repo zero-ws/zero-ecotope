@@ -1,6 +1,5 @@
 package io.zerows.ams.fn;
 
-import io.zerows.core.exception.BootingException;
 import io.zerows.core.exception.WebException;
 import io.zerows.specification.atomic.HLogger;
 
@@ -12,38 +11,6 @@ import java.util.function.Supplier;
  */
 class _Out extends _Combine {
     protected _Out() {
-    }
-
-    /**
-     * 检查条件，如果满足条件则抛出 BootingException 异常，且支持传入 HLogger 日志记录器
-     * 如果日志记录器不为空，则以日志记录器记录异常信息
-     *
-     * @param condition 条件
-     * @param logger    日志记录器
-     * @param bootClass BootingException 异常类
-     * @param args      异常参数
-     */
-    @Deprecated
-    public static void outBoot(final boolean condition, final HLogger logger,
-                               final Class<? extends BootingException> bootClass, final Object... args) {
-        if (condition) {
-            HThrow.outBoot(logger, bootClass, args);
-        }
-    }
-
-    /**
-     * 检查条件，如果满足条件则抛出 BootingException 异常
-     *
-     * @param condition 条件
-     * @param bootClass BootingException 异常类
-     * @param args      异常参数
-     */
-    @Deprecated
-    public static void outBoot(final boolean condition,
-                               final Class<? extends BootingException> bootClass, final Object... args) {
-        if (condition) {
-            HThrow.outBoot(bootClass, args);
-        }
     }
 
     /**
@@ -97,7 +64,7 @@ class _Out extends _Combine {
     }
 
     /**
-     * 条件满足后抛出对应异常 {@link BootingException} 和 {@link WebException}
+     * 条件满足后抛出对应异常 {@link WebException}
      *
      * @param condition 满足抛异常的条件
      * @param clazz     异常类

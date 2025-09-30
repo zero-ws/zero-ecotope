@@ -2,7 +2,6 @@ package io.zerows.core.util;
 
 import io.r2mo.function.Fn;
 import io.vertx.core.Future;
-import io.zerows.core.exception.BootingException;
 import io.zerows.core.exception.WebException;
 import io.zerows.core.exception.boot._11000Exception404SPINotFound;
 import io.zerows.core.exception.web._501NotSupportException;
@@ -29,10 +28,6 @@ class BundleSPI {
 
             // Web
             return Future.failedFuture(failWeb((Class<? extends WebException>) exceptionCls, target, args));
-        } else if (BootingException.class.isAssignableFrom(exceptionCls)) {
-
-            // Booting
-            return Future.failedFuture(failBoot((Class<? extends BootingException>) exceptionCls, target, args));
         } else {
 
             // 501
@@ -43,13 +38,6 @@ class BundleSPI {
     static <T extends WebException> WebException failWeb(final Class<T> exceptionCls,
                                                          final Class<?> target, final Object... args) {
         final WebException failure = failCommon(exceptionCls, target, args);
-        final HorizonIo io = serviceIo(target);
-        return failure.io(io);
-    }
-
-    static <T extends BootingException> BootingException failBoot(final Class<T> exceptionCls,
-                                                                  final Class<?> target, final Object... args) {
-        final BootingException failure = failCommon(exceptionCls, target, args);
         final HorizonIo io = serviceIo(target);
         return failure.io(io);
     }
