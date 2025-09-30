@@ -1,15 +1,16 @@
 package io.zerows.extension.commerce.rbac.uca.timer;
 
-import io.zerows.core.exception.web._501NotSupportException;
+import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.unity.Ux;
+import io.zerows.core.exception.web._501NotSupportException;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.commerce.rbac.atom.ScConfig;
 import io.zerows.extension.commerce.rbac.bootstrap.ScPin;
 import io.zerows.extension.commerce.rbac.eon.ScConstant;
-import io.zerows.extension.commerce.rbac.exception._401SmsCodeExpiredException;
-import io.zerows.extension.commerce.rbac.exception._401SmsCodeWrongException;
+import io.zerows.extension.commerce.rbac.exception._80229Exception401SmsCodeWrong;
+import io.zerows.extension.commerce.rbac.exception._80230Exception409SmsCodeExpired;
+import io.zerows.unity.Ux;
 import org.osgi.framework.Bundle;
 
 import java.util.Objects;
@@ -54,8 +55,8 @@ class ScClockSMS extends AbstractClock<String> {
     /**
      * 异常说明
      * <pre><code>
-     *     {@link _401SmsCodeExpiredException} 短信码过期异常
-     *     {@link _401SmsCodeWrongException} 短信码错误不匹配
+     *     {@link _80230Exception409SmsCodeExpired} 短信码过期异常
+     *     {@link _80229Exception401SmsCodeWrong} 短信码错误不匹配
      * </code></pre>
      *
      * @param stored   缓存中存储的值
@@ -70,11 +71,11 @@ class ScClockSMS extends AbstractClock<String> {
         // identity = sessionId
         if (Objects.isNull(stored)) {
             // 401: Authorization Code Expired, The item is null, it means that code is expired
-            return Ut.Bnd.failOut(_401SmsCodeExpiredException.class, this.getClass(), identity, waiting);
+            return FnVertx.failOut(_80230Exception409SmsCodeExpired.class, identity, waiting);
         }
         if (!waiting.equals(stored)) {
             // 401: Wrong code provided ( Api Client )
-            return Ut.Bnd.failOut(_401SmsCodeWrongException.class, this.getClass(), waiting);
+            return FnVertx.failOut(_80229Exception401SmsCodeWrong.class, waiting);
         }
         return Ux.future(identity);
     }

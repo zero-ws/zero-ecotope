@@ -1,6 +1,6 @@
 package io.mature.extension.uca.console;
 
-import io.mature.extension.error._400EnvUnsupportException;
+import io.mature.extension.error._81000Exception400EnvUnsupported;
 import io.mature.extension.refine.Ox;
 import io.mature.extension.scaffold.console.AbstractInstruction;
 import io.zerows.plugins.common.shell.atom.CommandInput;
@@ -43,7 +43,7 @@ public class EnvironmentInstruction extends AbstractInstruction {
                 Ox.runCmd(commands);
                 return EmCommand.TermStatus.SUCCESS;
             } else {
-                throw new _400EnvUnsupportException(this.getClass(), envName);
+                throw new _81000Exception400EnvUnsupported(envName);
             }
         });
     }

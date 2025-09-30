@@ -1,15 +1,17 @@
 package io.zerows.extension.runtime.ambient.bootstrap;
 
+import io.r2mo.function.Fn;
 import io.r2mo.typed.cc.Cc;
 import io.zerows.core.constant.KName;
 import io.zerows.core.database.jooq.operation.UxJooq;
-import io.zerows.core.fn.FnZero;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XAppDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XApp;
-import io.zerows.extension.runtime.ambient.exception._500AmbientErrorException;
-import io.zerows.extension.runtime.ambient.exception._500ApplicationInitException;
+import io.zerows.extension.runtime.ambient.exception._80300Exception500AmbientError;
+import io.zerows.extension.runtime.ambient.exception._80301Exception500ApplicationInit;
 import io.zerows.unity.Ux;
 import org.jooq.DSLContext;
+
+import java.util.Objects;
 
 @SuppressWarnings("all")
 public class AtApp {
@@ -26,11 +28,10 @@ public class AtApp {
 
     private AtApp(final String name) {
         final UxJooq jooq = Ux.Jooq.on(XAppDao.class);
-        FnZero.outWeb(null == jooq, _500AmbientErrorException.class, this.getClass());
+        Fn.jvmKo(Objects.isNull(jooq), _80300Exception500AmbientError.class);
         /* Current */
         this.app = jooq.fetchOne(KName.NAME, name);
-        FnZero.outWeb(null == this.app, _500ApplicationInitException.class,
-            this.getClass(), name);
+        Fn.jvmKo(Objects.isNull(this.app), _80301Exception500ApplicationInit.class, name);
     }
 
     public static AtApp create(final String name) {

@@ -1,15 +1,16 @@
 package io.zerows.extension.commerce.rbac.uca.timer;
 
-import io.zerows.core.exception.web._501NotSupportException;
+import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.unity.Ux;
+import io.zerows.core.exception.web._501NotSupportException;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.commerce.rbac.atom.ScConfig;
 import io.zerows.extension.commerce.rbac.bootstrap.ScPin;
 import io.zerows.extension.commerce.rbac.eon.ScConstant;
-import io.zerows.extension.commerce.rbac.exception._401CodeExpiredException;
-import io.zerows.extension.commerce.rbac.exception._401CodeWrongException;
+import io.zerows.extension.commerce.rbac.exception._80200Exception401CodeWrong;
+import io.zerows.extension.commerce.rbac.exception._80201Exception401CodeExpired;
+import io.zerows.unity.Ux;
 import org.osgi.framework.Bundle;
 
 import java.util.Objects;
@@ -54,8 +55,8 @@ class ScClockCode extends AbstractClock<String> {
     /**
      * 异常说明
      * <pre><code>
-     *     {@link _401CodeExpiredException} 授权码过期异常
-     *     {@link _401CodeWrongException} 授权码错误异常
+     *     {@link _80201Exception401CodeExpired} 授权码过期异常
+     *     {@link _80200Exception401CodeWrong} 授权码错误异常
      * </code></pre>
      *
      * @param stored   缓存中存储的值
@@ -70,11 +71,11 @@ class ScClockCode extends AbstractClock<String> {
         // identity = clientId
         if (Objects.isNull(stored)) {
             // 401: Authorization Code Expired, The item is null, it means that code is expired
-            return Ut.Bnd.failOut(_401CodeExpiredException.class, this.getClass(), identity, waiting);
+            return FnVertx.failOut(_80201Exception401CodeExpired.class, identity, waiting);
         }
         if (!waiting.equals(stored)) {
             // 401: Wrong code provided ( Api Client )
-            return Ut.Bnd.failOut(_401CodeWrongException.class, this.getClass(), waiting);
+            return FnVertx.failOut(_80200Exception401CodeWrong.class, waiting);
         }
         // Successfully
         return Ux.future(identity);

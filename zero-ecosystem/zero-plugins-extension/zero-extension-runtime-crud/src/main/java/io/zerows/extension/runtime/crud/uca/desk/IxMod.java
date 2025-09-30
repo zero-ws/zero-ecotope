@@ -1,15 +1,15 @@
 package io.zerows.extension.runtime.crud.uca.desk;
 
+import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonObject;
 import io.zerows.ams.constant.VString;
 import io.zerows.core.exception.WebException;
 import io.zerows.core.exception.web._500InternalServerException;
-import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.mbse.atom.specification.KModule;
 import io.zerows.core.web.model.commune.Envelop;
 import io.zerows.extension.runtime.crud.bootstrap.IxPin;
-import io.zerows.extension.runtime.crud.exception._404ModuleMissingException;
+import io.zerows.extension.runtime.crud.exception._80100Exception404ModuleMissing;
 import io.zerows.extension.runtime.crud.util.Ix;
 import io.zerows.module.domain.atom.specification.KJoin;
 
@@ -76,7 +76,7 @@ public class IxMod {
         final KModule module;
         try {
             module = IxPin.getActor(actor);
-            FnZero.out(Objects.isNull(module), _404ModuleMissingException.class, this.getClass(), actor);
+            Fn.jvmKo(Objects.isNull(module), _80100Exception404ModuleMissing.class, actor);
             this.module = module;
         } catch (final WebException error) {
             // 自定义异常

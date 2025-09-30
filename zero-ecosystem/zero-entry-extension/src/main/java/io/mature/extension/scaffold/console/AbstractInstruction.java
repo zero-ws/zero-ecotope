@@ -1,6 +1,6 @@
 package io.mature.extension.scaffold.console;
 
-import io.mature.extension.error._501EnvironmentException;
+import io.mature.extension.error._81001Exception501EnvDevelopment;
 import io.mature.extension.refine.Ox;
 import io.mature.stellar.Ok;
 import io.mature.stellar.owner.OkA;
@@ -97,7 +97,7 @@ public abstract class AbstractInstruction extends AbstractCommander {
      */
     protected <T> T runDevelopment(final Supplier<T> supplier) {
         if (Environment.Production == this.environment) {
-            throw new _501EnvironmentException(this.getClass());
+            throw new _81001Exception501EnvDevelopment();
         }
         return supplier.get();
     }

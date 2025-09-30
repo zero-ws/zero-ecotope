@@ -1,19 +1,20 @@
 package io.zerows.extension.commerce.rbac.uca.timer;
 
-import io.zerows.ams.constant.VValue;
+import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
+import io.zerows.ams.constant.VValue;
 import io.zerows.core.constant.KName;
-import io.zerows.unity.Ux;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.commerce.rbac.atom.ScConfig;
 import io.zerows.extension.commerce.rbac.atom.ScToken;
 import io.zerows.extension.commerce.rbac.bootstrap.ScPin;
 import io.zerows.extension.commerce.rbac.eon.AuthMsg;
 import io.zerows.extension.commerce.rbac.eon.ScConstant;
-import io.zerows.extension.commerce.rbac.exception._401TokenCounterException;
-import io.zerows.extension.commerce.rbac.exception._401TokenExpiredException;
-import io.zerows.extension.commerce.rbac.exception._401TokenInvalidException;
+import io.zerows.extension.commerce.rbac.exception._80206Exception401TokenCounter;
+import io.zerows.extension.commerce.rbac.exception._80207Exception401TokenInvalid;
+import io.zerows.extension.commerce.rbac.exception._80208Exception401TokenExpired;
+import io.zerows.unity.Ux;
 import org.osgi.framework.Bundle;
 
 import java.util.*;
@@ -152,9 +153,9 @@ class ScClockToken extends AbstractClock<ScToken> {
     /**
      * 异常说明
      * <pre><code>
-     *     {@link _401TokenCounterException} 无法找到 Token
-     *     {@link _401TokenInvalidException} Token 不匹配
-     *     {@link _401TokenExpiredException} Token 超时
+     *     {@link _80206Exception401TokenCounter} 无法找到 Token
+     *     {@link _80207Exception401TokenInvalid} Token 不匹配
+     *     {@link _80208Exception401TokenExpired} Token 超时
      * </code></pre>
      *
      * @param stored   缓存中存储的值
@@ -170,7 +171,7 @@ class ScClockToken extends AbstractClock<ScToken> {
         if (Objects.isNull(stored)) {
             // WebToken size
             this.logger().info(AuthMsg.TOKEN_SIZE_NULL, null, identity);
-            return Ut.Bnd.failOut(_401TokenCounterException.class, this.getClass(), 0, identity);
+            return FnVertx.failOut(_80206Exception401TokenCounter.class, 0, identity);
         }
 
 
@@ -179,7 +180,7 @@ class ScClockToken extends AbstractClock<ScToken> {
         if (!Arrays.equals(authBytes, stored.authToken())) {
             // WebToken invalid
             this.logger().info(AuthMsg.TOKEN_INVALID, waiting);
-            return Ut.Bnd.failOut(_401TokenInvalidException.class, this.getClass(), waiting);
+            return FnVertx.failOut(_80207Exception401TokenInvalid.class, waiting);
         }
 
 
@@ -188,7 +189,7 @@ class ScClockToken extends AbstractClock<ScToken> {
         final long expiredAt = stored.expiredAt();
         if (expiredAt < currentAt) {
             this.logger().info(AuthMsg.TOKEN_EXPIRED, waiting, expiredAt);
-            return Ut.Bnd.failOut(_401TokenExpiredException.class, this.getClass(), waiting);
+            return FnVertx.failOut(_80208Exception401TokenExpired.class, waiting);
         }
         return Ux.futureT();
     }

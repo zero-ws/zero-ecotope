@@ -1,20 +1,21 @@
 package io.zerows.extension.commerce.rbac.agent.service.login.pre;
 
-import io.zerows.ams.constant.VValue;
+import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Session;
+import io.zerows.ams.constant.VValue;
 import io.zerows.core.constant.KName;
-import io.zerows.unity.Ux;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.commerce.rbac.agent.service.login.TokenStub;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.SUserDao;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SUser;
 import io.zerows.extension.commerce.rbac.eon.AuthKey;
-import io.zerows.extension.commerce.rbac.exception._404MobileNotFoundException;
+import io.zerows.extension.commerce.rbac.exception._80227Exception404MobileNotFound;
 import io.zerows.extension.commerce.rbac.uca.timer.ClockFactory;
 import io.zerows.extension.commerce.rbac.uca.timer.ScClock;
 import io.zerows.plugins.integration.sms.SmsInfix;
+import io.zerows.unity.Ux;
 import jakarta.inject.Inject;
 
 import java.util.Objects;
@@ -39,7 +40,7 @@ public class SmsService implements SmsStub {
         final String mobile = Ut.valueString(params, KName.MOBILE);
         return this.fetchUser(mobile).compose(query -> {
             if (Objects.isNull(query)) {
-                return Ut.Bnd.failOut(_404MobileNotFoundException.class, this.getClass(), mobile);
+                return FnVertx.failOut(_80227Exception404MobileNotFound.class, mobile);
             }
             final String imageCode = Ut.valueString(params, AuthKey.CAPTCHA_IMAGE);
             return this.imageStub.verify(sessionId, imageCode);

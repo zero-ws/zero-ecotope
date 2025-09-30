@@ -1,16 +1,16 @@
 package io.zerows.extension.commerce.rbac.agent.service.login;
 
+import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Session;
-import io.zerows.unity.Ux;
-import io.zerows.core.util.Ut;
 import io.zerows.extension.commerce.rbac.agent.service.login.pre.CodeStub;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.OUserDao;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.OUser;
 import io.zerows.extension.commerce.rbac.eon.AuthKey;
 import io.zerows.extension.commerce.rbac.eon.AuthMsg;
-import io.zerows.extension.commerce.rbac.exception._401CodeGenerationException;
+import io.zerows.extension.commerce.rbac.exception._80202Exception401CodeGeneration;
+import io.zerows.unity.Ux;
 import jakarta.inject.Inject;
 
 import java.util.Objects;
@@ -31,8 +31,9 @@ public class AuthService implements AuthStub {
         return Ux.Jooq.on(OUserDao.class).<OUser>fetchOneAsync(filters).compose(item -> {
             if (Objects.isNull(item)) {
                 // Could not identify OUser record, error throw.
-                return Ut.Bnd.failOut(_401CodeGenerationException.class, this.getClass(),
-                    filters.getString(AuthKey.F_CLIENT_ID), filters.getString(AuthKey.F_CLIENT_SECRET));
+                final String clientId = filters.getString(AuthKey.F_CLIENT_ID);
+                final String clientSecret = filters.getString(AuthKey.F_CLIENT_SECRET);
+                return FnVertx.failOut(_80202Exception401CodeGeneration.class, clientId, clientSecret);
             } else {
                 // Provide correct parameters, OUser record existing.
                 return this.codeStub.authorize(item.getClientId());

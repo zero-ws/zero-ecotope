@@ -1,10 +1,10 @@
 package io.zerows.extension.commerce.rbac.agent.service.accredit;
 
+import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
-import io.zerows.unity.Ux;
 import io.zerows.common.program.KRef;
 import io.zerows.core.constant.KName;
 import io.zerows.core.uca.log.Annal;
@@ -15,15 +15,16 @@ import io.zerows.extension.commerce.rbac.domain.tables.pojos.SAction;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SResource;
 import io.zerows.extension.commerce.rbac.eon.AuthMsg;
 import io.zerows.extension.commerce.rbac.eon.ScConstant;
-import io.zerows.extension.commerce.rbac.exception._403ActionDinnedException;
-import io.zerows.extension.commerce.rbac.exception._404ActionMissingException;
-import io.zerows.extension.commerce.rbac.exception._404ResourceMissingException;
+import io.zerows.extension.commerce.rbac.exception._80209Exception404ActionMissing;
+import io.zerows.extension.commerce.rbac.exception._80210Exception404ResourceMissing;
+import io.zerows.extension.commerce.rbac.exception._80211Exception403ActionDinned;
 import io.zerows.extension.commerce.rbac.uca.acl.rapier.Quinn;
 import io.zerows.extension.commerce.rbac.uca.logged.ScResource;
 import io.zerows.extension.commerce.rbac.uca.logged.ScUser;
 import io.zerows.extension.commerce.rbac.util.Sc;
 import io.zerows.extension.runtime.skeleton.eon.em.OwnerType;
 import io.zerows.module.security.atom.DataBound;
+import io.zerows.unity.Ux;
 import jakarta.inject.Inject;
 
 import java.util.Objects;
@@ -153,7 +154,7 @@ public class AccreditService implements AccreditStub {
         final Integer required = resource.getLevel();
         final Integer actual = action.getLevel();
         if (actual < required) {
-            return Ut.Bnd.failOut(_403ActionDinnedException.class, this.getClass(), required, actual);
+            return FnVertx.failOut(_80211Exception403ActionDinned.class, required, actual);
         } else {
             LOG.Credit.debug(LOGGER, AuthMsg.CREDIT_LEVEL, action.getLevel(), resource.getLevel());
             return Future.succeededFuture(resource);
@@ -167,7 +168,7 @@ public class AccreditService implements AccreditStub {
     private Future<SAction> inspectAction(final ScResource request, final SAction action) {
         if (Objects.isNull(action)) {
             final String requestUri = request.method() + " " + request.uri();
-            return Ut.Bnd.failOut(_404ActionMissingException.class, this.getClass(), requestUri);
+            return FnVertx.failOut(_80209Exception404ActionMissing.class, requestUri);
         } else {
             LOG.Credit.debug(LOGGER, AuthMsg.CREDIT_ACTION, request.uriRequest(), request.method(), request.uri());
             return Future.succeededFuture(action);
@@ -181,7 +182,7 @@ public class AccreditService implements AccreditStub {
     private Future<SResource> inspectResource(final ScResource request, final SAction action, final SResource resource) {
         if (Objects.isNull(resource)) {
             final String requestUri = request.method() + " " + request.uri();
-            return Ut.Bnd.failOut(_404ResourceMissingException.class, this.getClass(), action.getResourceId(), requestUri);
+            return FnVertx.failOut(_80210Exception404ResourceMissing.class, action.getResourceId(), requestUri);
         } else {
             LOG.Credit.debug(LOGGER, AuthMsg.CREDIT_RESOURCE, resource.getKey());
             return Future.succeededFuture(resource);

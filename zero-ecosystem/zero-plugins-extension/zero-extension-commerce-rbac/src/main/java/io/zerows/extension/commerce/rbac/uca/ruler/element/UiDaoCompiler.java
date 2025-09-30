@@ -1,14 +1,14 @@
 package io.zerows.extension.commerce.rbac.uca.ruler.element;
 
+import io.r2mo.function.Fn;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.FnZero;
-import io.zerows.unity.Ux;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.model.store.module.OCacheDao;
-import io.zerows.extension.commerce.rbac.exception._404AdmitDaoNullException;
+import io.zerows.extension.commerce.rbac.exception._80226Exception404AdmitDaoNull;
+import io.zerows.unity.Ux;
 
 import java.util.Objects;
 
@@ -29,7 +29,7 @@ public class UiDaoCompiler implements HAdmitCompiler {
         final Class<?> daoCls = OCacheDao.findDao(daoStr); // Ut.clazz(daoStr, null);
 
         // Error-80226, uiConfig中没有配置dao节点
-        FnZero.out(Objects.isNull(daoCls), _404AdmitDaoNullException.class, this.getClass(), daoStr);
+        Fn.jvmKo(Objects.isNull(daoCls), _80226Exception404AdmitDaoNull.class, daoStr);
         return Ux.Jooq.on(daoCls).fetchJAsync(qr);
     }
 }

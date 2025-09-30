@@ -1,12 +1,12 @@
 package io.zerows.extension.commerce.rbac.uca.ruler.element;
 
+import io.r2mo.function.Fn;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.em.EmSecure;
-import io.zerows.core.fn.FnZero;
-import io.zerows.extension.commerce.rbac.exception._404AdmitCompilerNullException;
+import io.zerows.extension.commerce.rbac.exception._80225Exception404AdmitCompilerNull;
 import io.zerows.module.security.atom.manage.KPermit;
 
 import java.util.Objects;
@@ -34,7 +34,7 @@ public interface HAdmitCompiler {
 
         // Error-80225
         final Class<?> targetCls = Objects.isNull(target) ? HAdmitCompiler.class : target;
-        FnZero.out(Objects.isNull(compiler), _404AdmitCompilerNullException.class, targetCls, in);
+        Fn.jvmKo(Objects.isNull(compiler), _80225Exception404AdmitCompilerNull.class, in);
         return compiler;
     }
 

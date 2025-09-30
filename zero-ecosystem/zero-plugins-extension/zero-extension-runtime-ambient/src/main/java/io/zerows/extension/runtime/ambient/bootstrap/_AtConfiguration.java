@@ -1,12 +1,12 @@
 package io.zerows.extension.runtime.ambient.bootstrap;
 
+import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.model.extension.HExtension;
 import io.zerows.extension.runtime.ambient.eon.AtConstant;
-import io.zerows.extension.runtime.ambient.exception._500InitSpecificationException;
-import io.zerows.extension.runtime.ambient.exception._500PrerequisiteSpecException;
+import io.zerows.extension.runtime.ambient.exception._80302Exception500InitSpecification;
+import io.zerows.extension.runtime.ambient.exception._80303Exception500PrerequisiteSpec;
 import io.zerows.extension.runtime.skeleton.eon.KeMsg;
 import io.zerows.extension.runtime.skeleton.osgi.spi.extension.Init;
 import io.zerows.extension.runtime.skeleton.osgi.spi.extension.Prerequisite;
@@ -50,8 +50,7 @@ final class AtConfiguration {
         if (Objects.isNull(initClass)) {
             return null;
         } else {
-            FnZero.outWeb(!Ut.isImplement(initClass, Init.class), _500InitSpecificationException.class,
-                AtPin.class, initClass.getName());
+            Fn.jvmKo(!Ut.isImplement(initClass, Init.class), _80302Exception500InitSpecification.class, initClass.getName());
             return Init.generate(initClass);
         }
     }
@@ -61,8 +60,7 @@ final class AtConfiguration {
         if (Objects.isNull(prerequisite)) {
             return null;
         } else {
-            FnZero.outWeb(!Ut.isImplement(prerequisite, Prerequisite.class), _500PrerequisiteSpecException.class,
-                AtPin.class, prerequisite.getName());
+            Fn.jvmKo(!Ut.isImplement(prerequisite, Prerequisite.class), _80303Exception500PrerequisiteSpec.class, prerequisite.getName());
             return Prerequisite.generate(prerequisite);
         }
     }

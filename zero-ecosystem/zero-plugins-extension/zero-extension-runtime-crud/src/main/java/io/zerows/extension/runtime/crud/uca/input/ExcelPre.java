@@ -1,19 +1,19 @@
 package io.zerows.extension.runtime.crud.uca.input;
 
-import io.zerows.common.program.Kv;
-import io.zerows.core.exception.web._500InternalServerException;
+import io.r2mo.function.Fn;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.fn.FnZero;
-import io.zerows.extension.runtime.crud.exception._409ModuleConflictException;
-import io.zerows.extension.runtime.crud.exception._409MultiModuleException;
-import io.zerows.extension.runtime.crud.uca.desk.IxMod;
+import io.zerows.common.program.Kv;
 import io.zerows.core.constant.KName;
-import io.zerows.unity.Ux;
+import io.zerows.core.exception.web._500InternalServerException;
 import io.zerows.core.web.mbse.atom.specification.KModule;
+import io.zerows.extension.runtime.crud.exception._80102Exception409MultiModule;
+import io.zerows.extension.runtime.crud.exception._80103Exception409ModuleConflict;
+import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 import io.zerows.plugins.office.excel.ExcelClient;
 import io.zerows.plugins.office.excel.atom.ExTable;
+import io.zerows.unity.Ux;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -54,7 +54,7 @@ class ExcelPre implements Pre {
         final KModule module = in.module();
         final String expected = module.getTable();
         final String actual = content.key();
-        FnZero.out(!expected.equals(actual), _409ModuleConflictException.class, this.getClass(), actual, expected);
+        Fn.jvmKo(!expected.equals(actual), _80103Exception409ModuleConflict.class, actual, expected);
 
         /* Tenant Information */
         return this.client.extractAsync(content.value());
@@ -78,7 +78,7 @@ class ExcelPre implements Pre {
                     }
                     tableMap.get(item.getName()).add(item);
                 });
-            FnZero.out(1 != tableMap.size(), _409MultiModuleException.class, this.getClass(), tableMap.size());
+            Fn.jvmKo(1 != tableMap.size(), _80102Exception409MultiModule.class, tableMap);
             final String tableName = tableMap.keySet().iterator().next();
             kv.set(tableName, tableMap.get(tableName));
             return kv;

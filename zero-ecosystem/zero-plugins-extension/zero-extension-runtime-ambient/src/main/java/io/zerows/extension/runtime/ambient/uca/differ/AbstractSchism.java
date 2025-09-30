@@ -1,19 +1,19 @@
 package io.zerows.extension.runtime.ambient.uca.differ;
 
-import io.zerows.common.program.KRef;
-import io.zerows.core.exception.web._501NotSupportException;
-import io.zerows.common.normalize.KMarkAtom;
-import io.zerows.ams.constant.em.modeling.EmAttribute;
-import io.zerows.specification.modeling.HAtom;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.unity.Ux;
+import io.zerows.ams.constant.em.modeling.EmAttribute;
+import io.zerows.common.normalize.KMarkAtom;
+import io.zerows.common.program.KRef;
+import io.zerows.core.exception.web._501NotSupportException;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XActivityChangeDao;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XActivityDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XActivity;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XActivityChange;
-import io.zerows.extension.runtime.ambient.exception._409TrackableConflictException;
+import io.zerows.extension.runtime.ambient.exception._80304Exception409TrackableConflict;
+import io.zerows.specification.modeling.HAtom;
+import io.zerows.unity.Ux;
 
 import java.util.List;
 import java.util.Objects;
@@ -37,13 +37,13 @@ public abstract class AbstractSchism implements Schism {
             trackable = marker.trackable();
         }
         if (!trackable) {
-            throw new _409TrackableConflictException(this.getClass(), atom.identifier());
+            throw new _80304Exception409TrackableConflict(atom.identifier());
         }
         this.atom = atom;
         // Second Checking
         final Set<String> trackFields = this.onTrack();
         if (trackFields.isEmpty()) {
-            throw new _409TrackableConflictException(this.getClass(), atom.identifier());
+            throw new _80304Exception409TrackableConflict(atom.identifier());
         }
         return this;
     }
