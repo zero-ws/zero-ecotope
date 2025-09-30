@@ -3,7 +3,7 @@ package io.zerows.module.metadata.zdk.plugins;
 import io.r2mo.function.Fn;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonObject;
-import io.zerows.module.metadata.exception._10005Exception500PluginDynamic;
+import io.zerows.epoch.runtime.exception._10005Exception500PluginDynamic;
 import io.zerows.module.metadata.store.OZeroStore;
 
 import java.io.Serializable;

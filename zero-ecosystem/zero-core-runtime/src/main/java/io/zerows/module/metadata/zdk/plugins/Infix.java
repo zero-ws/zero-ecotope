@@ -2,7 +2,7 @@ package io.zerows.module.metadata.zdk.plugins;
 
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonObject;
-import io.zerows.module.metadata.exception._40020Exception500PluginStatic;
+import io.zerows.epoch.runtime.exception._40020Exception500PluginStatic;
 import io.zerows.module.metadata.store.OZeroStore;
 
 import java.util.function.Function;

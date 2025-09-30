@@ -1,14 +1,14 @@
 package io.zerows.core.database.jooq;
 
+import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonObject;
 import io.zerows.ams.constant.em.EmDS;
 import io.zerows.core.constant.KName;
 import io.zerows.core.constant.configure.YmlCore;
 import io.zerows.core.database.atom.Database;
 import io.zerows.core.database.cp.zdk.DataPool;
-import io.zerows.core.database.jooq.exception.BootJooqConfigurationException;
-import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
+import io.zerows.epoch.database.exception._40065Exception500JooqConfiguration;
 import io.zerows.module.metadata.uca.environment.MatureOn;
 import io.zerows.module.metadata.uca.logging.OLog;
 import org.jooq.Configuration;
@@ -45,8 +45,8 @@ public class JooqPin {
         final ConcurrentMap<String, Configuration> configurationMap =
             new ConcurrentHashMap<>();
 
-        FnZero.outBoot(Ut.isNil(config) || !config.containsKey(YmlCore.jooq.PROVIDER),
-            LOGGER, BootJooqConfigurationException.class, JooqPin.class);
+        Fn.jvmKo(Ut.isNil(config) || !config.containsKey(YmlCore.jooq.PROVIDER),
+            _40065Exception500JooqConfiguration.class);
 
         if (Ut.isNotNil(config)) {
             /*

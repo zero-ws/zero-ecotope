@@ -1,16 +1,16 @@
 package io.zerows.core.database.jooq.condition;
 
+import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.ams.constant.VString;
 import io.zerows.ams.constant.VValue;
-import io.zerows.core.database.jooq.exception.BootJooqCondClauseException;
-import io.zerows.core.database.jooq.exception.BootJooqCondFieldException;
-import io.zerows.core.fn.FnZero;
 import io.zerows.core.uca.qr.Criteria;
 import io.zerows.core.uca.qr.Sorter;
 import io.zerows.core.uca.qr.syntax.Ir;
 import io.zerows.core.util.Ut;
+import io.zerows.epoch.database.exception._40055Exception500JooqCondField;
+import io.zerows.epoch.database.exception._40067Exception500JooqCondClause;
 import io.zerows.module.metadata.uca.environment.DevEnv;
 import io.zerows.module.metadata.uca.logging.OLog;
 import org.jooq.Condition;
@@ -305,7 +305,7 @@ public class JooqCond {
 
             if (Objects.nonNull(fnAnalyze)) {
                 final Field metaField = fnAnalyze.apply(targetField);
-                FnZero.outBoot(Objects.isNull(metaField), LOGGER, BootJooqCondFieldException.class, JooqCond.class, targetField);
+                Fn.jvmKo(Objects.isNull(metaField), _40055Exception500JooqCondField.class, targetField);
 
                 /*
                  * 1) fields = ( field,op )
@@ -319,8 +319,7 @@ public class JooqCond {
                  * Clause extraction
                  */
                 final Clause clause = Clause.get(type);
-                FnZero.outBoot(Objects.isNull(clause), LOGGER, BootJooqCondClauseException.class,
-                    JooqCond.class, metaField.getName(), type, targetField);
+                Fn.jvmKo(Objects.isNull(clause), _40067Exception500JooqCondClause.class, metaField.getName(), type, targetField);
 
                 /*
                  * Get condition of this term

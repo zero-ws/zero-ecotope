@@ -1,4 +1,4 @@
-package io.zerows.module.metadata.exception;
+package io.zerows.epoch.runtime.exception;
 
 import io.r2mo.vertx.common.exception.VertxBootException;
 

@@ -1,15 +1,15 @@
 package io.zerows.core.database.jooq.util;
 
+import io.r2mo.function.Fn;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonObject;
 import io.zerows.ams.constant.VString;
 import io.zerows.ams.constant.VValue;
 import io.zerows.core.database.jooq.JooqDsl;
 import io.zerows.core.database.jooq.condition.JooqCond;
-import io.zerows.core.database.jooq.exception.BootJooqFieldMissingException;
-import io.zerows.core.database.jooq.exception.BootJooqMergeException;
-import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
+import io.zerows.epoch.database.exception._40057Exception500JooqCombine;
+import io.zerows.epoch.database.exception._40059Exception500JooqFieldMissing;
 import io.zerows.module.metadata.atom.mapping.Mirror;
 import io.zerows.module.metadata.atom.mapping.Mojo;
 import io.zerows.module.metadata.uca.logging.OLog;
@@ -289,8 +289,8 @@ public class JqAnalyzer {
 
     public Field column(final String field) {
         String columnField = columnName(field);
-        FnZero.outBoot(null == columnField, LOGGER,
-            BootJooqFieldMissingException.class, getClass(), field, this.entityCls);
+        Fn.jvmKo(Objects.isNull(columnField),
+            _40059Exception500JooqFieldMissing.class, field, this.entityCls);
         LOGGER.debug(INFO.JOOQ_FIELD, field, columnField);
         /*
          * Old code for field construct, following code will caurse Type/DataType missing
@@ -346,8 +346,8 @@ public class JqAnalyzer {
     }
 
     public <T> T copyEntity(final T target, final T updated) {
-        FnZero.outBoot(null == updated, LOGGER, BootJooqMergeException.class,
-            getClass(), null == target ? null : target.getClass(), Ut.serialize(target));
+        Fn.jvmKo(Objects.isNull(updated), _40057Exception500JooqCombine.class,
+            null == target ? null : target.getClass(), Ut.serialize(target));
         if (Objects.isNull(target) && Objects.isNull(updated)) {
             return null;
         }

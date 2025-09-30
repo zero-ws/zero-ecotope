@@ -1,19 +1,20 @@
 package io.zerows.core.database.jooq;
 
 import io.github.jklingsporn.vertx.jooq.classic.VertxDAO;
+import io.r2mo.function.Fn;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.core.Promise;
 import io.vertx.core.Vertx;
-import io.zerows.core.database.jooq.exception.BootJooqClassInvalidException;
-import io.zerows.core.database.jooq.exception.BootJooqVertxNullException;
-import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
+import io.zerows.epoch.database.exception._40060Exception500JooqVertxNull;
+import io.zerows.epoch.database.exception._40066Exception500JooqClassInvalid;
 import io.zerows.module.metadata.uca.logging.OLog;
 import org.jooq.Configuration;
 import org.jooq.DSLContext;
 
+import java.util.Objects;
 import java.util.concurrent.Callable;
 
 /**
@@ -46,8 +47,8 @@ public class JooqDsl {
 
     static JooqDsl init(final Vertx vertxRef, final Configuration configurationRef, final Class<?> daoCls) {
         // Checking when initializing
-        FnZero.out(!Ut.isImplement(daoCls, VertxDAO.class), BootJooqClassInvalidException.class, JooqDsl.class, daoCls.getName());
-        FnZero.outBoot(null == vertxRef, LOGGER, BootJooqVertxNullException.class, daoCls);
+        Fn.jvmKo(!Ut.isImplement(daoCls, VertxDAO.class), _40066Exception500JooqClassInvalid.class, daoCls.getName());
+        Fn.jvmKo(Objects.isNull(vertxRef), _40060Exception500JooqVertxNull.class);
 
         // Calculate the key of current pool
         final String poolKey = String.valueOf(vertxRef.hashCode()) + ":" +

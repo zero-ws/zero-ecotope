@@ -1,7 +1,7 @@
 package io.zerows.extension.mbse.basement.osgi.spi.mixture;
 
 import io.zerows.core.running.boot.KPivot;
-import io.zerows.core.web.mbse.exception._404ModelNotFoundException;
+import io.zerows.epoch.container.exception._80510Exception404ModelNotFound;
 import io.zerows.extension.mbse.basement.atom.Model;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.eon.AoCache;
@@ -26,7 +26,7 @@ public class HLoadAtom implements HLoad {
             final AoPerformer performer = AoPerformer.getInstance(appName);
             final Model model = AoCache.CC_MODEL.pick(() -> performer.fetch(identifier), unique);
             return new DataAtom(model);
-        } catch (final _404ModelNotFoundException ignored) {
+        } catch (final _80510Exception404ModelNotFound ignored) {
             /*
              * 这里的改动主要基于动静态模型同时操作导致，如果可以找到Model则证明模型存在于系统中，这种
              * 情况下可直接初始化DataAtom走标准流程，否则直接返回null引用，使得系统无法返回正常模型，

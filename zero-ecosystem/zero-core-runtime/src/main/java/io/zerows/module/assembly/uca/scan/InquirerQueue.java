@@ -1,13 +1,13 @@
 package io.zerows.module.assembly.uca.scan;
 
-import io.reactivex.rxjava3.core.Observable;
+import io.r2mo.function.Fn;
 import io.vertx.core.eventbus.Message;
 import io.zerows.core.annotations.Address;
 import io.zerows.core.annotations.Queue;
-import io.zerows.core.fn.FnZero;
-import io.zerows.module.assembly.exception.BootWorkerConflictException;
+import io.zerows.epoch.runtime.exception._40049Exception500WorkerConflict;
 import io.zerows.module.metadata.zdk.uca.Inquirer;
 
+import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -31,18 +31,16 @@ public class InquirerQueue implements Inquirer<Set<Class<?>>> {
     }
 
     private void ensure(final Set<Class<?>> clazzes) {
-        Observable.fromIterable(clazzes)
+        clazzes.stream()
             .map(Class::getDeclaredMethods)
-            .flatMap(Observable::fromArray)
+            .flatMap(Arrays::stream)
             .filter(method -> method.isAnnotationPresent(Address.class))
-            .subscribe(method -> {
+            .forEach(method -> {
                 final Class<?> returnType = method.getReturnType();
                 final Class<?> parameterTypes = method.getParameterTypes()[0];
                 if (Message.class.isAssignableFrom(parameterTypes)) {
-                    FnZero.outBoot(void.class != returnType && Void.class != returnType, this.logger(),
-                        BootWorkerConflictException.class, this.getClass(), method);
+                    Fn.jvmKo(void.class != returnType && Void.class != returnType, _40049Exception500WorkerConflict.class, method);
                 }
-            })
-            .dispose();
+            });
     }
 }

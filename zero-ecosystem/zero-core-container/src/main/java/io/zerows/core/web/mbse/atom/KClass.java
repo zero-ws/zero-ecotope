@@ -5,9 +5,9 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.mbse.atom.specification.KModule;
-import io.zerows.core.web.mbse.exception._404ModelNotFoundException;
-import io.zerows.core.web.mbse.exception._409IdentifierConflictException;
 import io.zerows.core.web.mbse.uca.mixture.HOne;
+import io.zerows.epoch.container.exception._80510Exception404ModelNotFound;
+import io.zerows.epoch.container.exception._80547Exception409IdentifierConflict;
 import io.zerows.module.domain.atom.specification.KPoint;
 import io.zerows.module.metadata.uca.logging.OLog;
 import io.zerows.specification.access.app.HApp;
@@ -300,7 +300,7 @@ public class KClass implements Serializable {
             final String fileCls = "hybrid/" + identifier + ".json";
             if (!Ut.ioExist(fileCls)) {
                 LOGGER.warn("[ KClass ] Class Not Found = {0}", fileCls);
-                throw new _404ModelNotFoundException(KClass.class, namespace, identifier);
+                throw new _80510Exception404ModelNotFound(namespace, identifier);
             }
             // JsonObject read
             final JsonObject classJ = Ut.ioJObject(fileCls);
@@ -309,7 +309,7 @@ public class KClass implements Serializable {
             if (valueJ instanceof final String fileMod) {
                 if (!Ut.ioExist(fileMod)) {
                     LOGGER.warn("[ KClass ] Module Not Found = {0}", fileMod);
-                    throw new _404ModelNotFoundException(KClass.class, namespace, identifier);
+                    throw new _80510Exception404ModelNotFound(namespace, identifier);
                 }
                 moduleJ.mergeIn(Ut.ioJObject(fileMod));
             } else if (valueJ instanceof JsonObject) {
@@ -318,7 +318,7 @@ public class KClass implements Serializable {
             final String idConfig = classJ.getString(KName.IDENTIFIER);
             if (!identifier.equals(idConfig)) {
                 LOGGER.warn("[ KClass ] Identifier Conflict: {0} , {1}", identifier, idConfig);
-                throw new _409IdentifierConflictException(KClass.class, identifier, idConfig);
+                throw new _80547Exception409IdentifierConflict(identifier, idConfig);
             }
             classJ.put(KName.MODULE, moduleJ);
             LOGGER.info("[ KClass ] InJson Input = {0}", classJ.encode());

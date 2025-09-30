@@ -1,13 +1,13 @@
 package io.zerows.core.database.jooq;
 
+import io.r2mo.function.Fn;
 import io.vertx.core.Vertx;
 import io.zerows.common.app.KDatabase;
 import io.zerows.core.annotations.Infusion;
 import io.zerows.core.constant.configure.YmlCore;
 import io.zerows.core.database.cp.zdk.DataPool;
-import io.zerows.core.database.jooq.exception.BootJooqConfigurationException;
-import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
+import io.zerows.epoch.database.exception._40065Exception500JooqConfiguration;
 import io.zerows.module.metadata.uca.logging.OLog;
 import io.zerows.module.metadata.zdk.plugins.Infix;
 import org.jooq.Configuration;
@@ -59,7 +59,7 @@ public class JooqInfix implements Infix {
     private static Configuration configSafe(final String key) {
         Objects.requireNonNull(key);
         final Configuration configuration = CONFIGURATION.get(key);
-        FnZero.outBoot(Objects.isNull(configuration), LOGGER, BootJooqConfigurationException.class, JooqInfix.class);
+        Fn.jvmKo(Objects.isNull(configuration), _40065Exception500JooqConfiguration.class);
         return configuration;
     }
 

@@ -1,12 +1,13 @@
 package io.zerows.extension.mbse.basement.osgi.spi.mixture;
 
+import io.r2mo.function.Fn;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
-import io.zerows.core.web.mbse.exception._404ModelNotFoundException;
+import io.zerows.epoch.container.exception._80510Exception404ModelNotFound;
 import io.zerows.extension.mbse.basement.atom.Model;
 import io.zerows.extension.mbse.basement.domain.tables.daos.MModelDao;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MModel;
@@ -14,10 +15,7 @@ import io.zerows.extension.mbse.basement.uca.phantom.AoModeler;
 import io.zerows.extension.mbse.basement.util.Ao;
 import io.zerows.unity.Ux;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class ModelPerformer implements AoPerformer {
     private static final Cc<String, ModelInternal> CC_TOOL = Cc.open();
@@ -46,7 +44,7 @@ public class ModelPerformer implements AoPerformer {
         final MModel model = Ux.Jooq.on(MModelDao.class)
             .fetchOne(this.tool.onCriteria(identifier));
         final String namespace = Ao.toNS(this.appName);
-        FnZero.outWeb(null == model, _404ModelNotFoundException.class, this.getClass(), namespace, identifier);
+        Fn.jvmKo(Objects.isNull(model), _80510Exception404ModelNotFound.class, namespace, identifier);
         JsonObject json = Ut.serializeJson(model);
         // 1. 初始化
         json = AoModeler.init().executor(json);

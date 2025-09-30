@@ -4,8 +4,8 @@ import io.r2mo.typed.cc.Cc;
 import io.zerows.core.running.boot.KPivot;
 import io.zerows.core.web.mbse.atom.internal.NormAtom;
 import io.zerows.core.web.mbse.atom.internal.NormModel;
-import io.zerows.core.web.mbse.exception._404ModelNotFoundException;
-import io.zerows.core.web.mbse.exception._409IdentifierConflictException;
+import io.zerows.epoch.container.exception._80510Exception404ModelNotFound;
+import io.zerows.epoch.container.exception._80547Exception409IdentifierConflict;
 import io.zerows.specification.access.app.HAmbient;
 import io.zerows.specification.access.app.HArk;
 import io.zerows.specification.modeling.HAtom;
@@ -26,7 +26,7 @@ public class HLoadNorm implements HLoad {
             final String unique = ark.cached(identifier);
             final HModel model = CC_MODEL.pick(() -> new NormModel(ark, identifier), unique);
             return new NormAtom(model);
-        } catch (final _404ModelNotFoundException | _409IdentifierConflictException ignored) {
+        } catch (final _80510Exception404ModelNotFound | _80547Exception409IdentifierConflict ignored) {
             /*
              * 这里的改动主要基于动静态模型同时操作导致，如果可以找到Model则证明模型存在于系统中，这种
              * 情况下可直接初始化DataAtom走标准流程，否则直接返回null引用，使得系统无法返回正常模型，
