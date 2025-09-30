@@ -13,7 +13,7 @@ import io.zerows.core.web.io.annotations.BodyParam;
 import io.zerows.core.web.model.commune.Envelop;
 import io.zerows.core.web.model.zdk.Commercial;
 import io.zerows.core.web.scheduler.atom.Mission;
-import io.zerows.core.web.scheduler.exception._417JobMethodException;
+import io.zerows.epoch.web.exception._60041Exception417JobMethod;
 
 import java.util.Objects;
 
@@ -98,7 +98,7 @@ public class ParameterJob implements ParameterBuilder<Envelop> {
              */
             return underway;
         } else {
-            throw new _417JobMethodException(this.getClass(), this.mission.getCode());
+            throw new _60041Exception417JobMethod(this.mission.getCode());
         }
     }
 }

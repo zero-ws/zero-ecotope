@@ -3,17 +3,17 @@ package io.zerows.core.web.scheduler.atom;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonObject;
 import io.zerows.ams.constant.VValue;
 import io.zerows.core.annotations.Off;
 import io.zerows.core.annotations.On;
 import io.zerows.core.constant.em.EmJob;
-import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.scheduler.atom.specification.KScheduler;
 import io.zerows.core.web.scheduler.eon.MessageOfJob;
-import io.zerows.core.web.scheduler.exception._409JobFormulaErrorException;
-import io.zerows.core.web.scheduler.exception._501JobOnMissingException;
+import io.zerows.epoch.web.exception._60042Exception501JobOnMissing;
+import io.zerows.epoch.web.exception._60054Exception409JobFormulaError;
 import io.zerows.extend.jackson.databind.ClassDeserializer;
 import io.zerows.extend.jackson.databind.ClassSerializer;
 import io.zerows.extend.jackson.databind.JsonObjectDeserializer;
@@ -270,8 +270,7 @@ public class Mission implements Serializable {
             this.on = Arrays.stream(clazz.getDeclaredMethods())
                 .filter(method -> method.isAnnotationPresent(On.class))
                 .findFirst().orElse(null);
-            FnZero.out(null == this.on, _501JobOnMissingException.class,
-                this.getClass(), clazz.getName());
+            Fn.jvmKo(Objects.isNull(this.on), _60042Exception501JobOnMissing.class, clazz.getName());
             /*
              * KIncome / IncomeAddress
              */
@@ -363,7 +362,7 @@ public class Mission implements Serializable {
     // ========================== Ensure the correct configuration =======================
     public void detectPre(final String formula) {
         if (EmJob.JobType.FORMULA == this.type) {
-            FnZero.outWeb(Ut.isNil(formula), _409JobFormulaErrorException.class, this.getClass(), formula);
+            Fn.jvmKo(Ut.isNil(formula), _60054Exception409JobFormulaError.class, formula);
         }
     }
 

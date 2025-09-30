@@ -8,8 +8,8 @@ import io.zerows.core.web.invocation.uca.parameter.ParameterBuilder;
 import io.zerows.core.web.model.commune.Envelop;
 import io.zerows.core.web.scheduler.atom.Mission;
 import io.zerows.core.web.scheduler.eon.MessageOfJob;
-import io.zerows.core.web.scheduler.exception._417JobMethodException;
 import io.zerows.core.web.scheduler.uca.parameter.ParameterJob;
+import io.zerows.epoch.web.exception._60041Exception417JobMethod;
 import io.zerows.module.metadata.uca.logging.OLog;
 
 import java.lang.reflect.Method;
@@ -102,7 +102,7 @@ class RunOn {
                 argsList.add(builder.build(envelop, parameterType, this.underway));
             }
         } else {
-            throw new _417JobMethodException(this.getClass(), mission.getCode());
+            throw new _60041Exception417JobMethod(mission.getCode());
         }
         return argsList.toArray();
     }

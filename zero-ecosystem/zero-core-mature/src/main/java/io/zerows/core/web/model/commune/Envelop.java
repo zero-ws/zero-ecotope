@@ -108,6 +108,10 @@ public class Envelop implements Serializable {
         return new Envelop(error);
     }
 
+    public static Envelop failure(final io.r2mo.typed.exception.WebException error) {
+        return null;
+    }
+
     /*
      * 包装专用方法，用来执行数据封装，在 RPC 持续请求中会用到
      */

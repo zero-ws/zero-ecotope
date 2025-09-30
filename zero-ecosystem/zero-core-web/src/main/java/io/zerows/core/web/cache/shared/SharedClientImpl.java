@@ -1,6 +1,7 @@
 package io.zerows.core.web.cache.shared;
 
 import io.r2mo.typed.cc.Cc;
+import io.r2mo.typed.exception.WebException;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
@@ -9,9 +10,8 @@ import io.vertx.core.shareddata.AsyncMap;
 import io.vertx.core.shareddata.LocalMap;
 import io.vertx.core.shareddata.SharedData;
 import io.zerows.common.program.Kv;
-import io.zerows.core.exception.WebException;
 import io.zerows.core.util.Ut;
-import io.zerows.core.web.cache.shared.exception._500SharedDataModeException;
+import io.zerows.epoch.web.exception._60034Exception500SharedDataMode;
 import io.zerows.module.metadata.uca.logging.OLog;
 
 import java.util.Objects;
@@ -50,7 +50,7 @@ public class SharedClientImpl<K, V> implements SharedClient<K, V> {
                     LOGGER.info(INFO.INFO_ASYNC_END, String.valueOf(this.asyncMap.hashCode()), this.poolName);
                     handler.handle(Future.succeededFuture(res.result()));
                 } else {
-                    final WebException error = new _500SharedDataModeException(getClass(), res.cause());
+                    final WebException error = new _60034Exception500SharedDataMode(res.cause());
                     handler.handle(Future.failedFuture(error));
                 }
             });
@@ -116,7 +116,7 @@ public class SharedClientImpl<K, V> implements SharedClient<K, V> {
                         .replace(key, value).onComplete(replaced -> this.putHandler(replaced, key, value, handler));
                 }
             } else {
-                final WebException error = new _500SharedDataModeException(getClass(), res.cause());
+                final WebException error = new _60034Exception500SharedDataMode(res.cause());
                 handler.handle(Future.failedFuture(error));
             }
         }));
@@ -139,7 +139,7 @@ public class SharedClientImpl<K, V> implements SharedClient<K, V> {
                         .replace(key, value, ms).onComplete(replaced -> this.putHandler(replaced, key, value, handler));
                 }
             } else {
-                final WebException error = new _500SharedDataModeException(getClass(), res.cause());
+                final WebException error = new _60034Exception500SharedDataMode(res.cause());
                 handler.handle(Future.failedFuture(error));
             }
         }));
@@ -152,7 +152,7 @@ public class SharedClientImpl<K, V> implements SharedClient<K, V> {
             LOGGER.info(INFO.INFO_TIMER_EXPIRE, key);
             handler.handle(Future.succeededFuture(Kv.create(key, value)));
         } else {
-            final WebException error = new _500SharedDataModeException(getClass(), done.cause());
+            final WebException error = new _60034Exception500SharedDataMode(done.cause());
             handler.handle(Future.failedFuture(error));
         }
     }
@@ -191,7 +191,7 @@ public class SharedClientImpl<K, V> implements SharedClient<K, V> {
                 final V reference = res.result();
                 handler.handle(Future.succeededFuture(Kv.create(key, reference)));
             } else {
-                final WebException error = new _500SharedDataModeException(getClass(), res.cause());
+                final WebException error = new _60034Exception500SharedDataMode(res.cause());
                 handler.handle(Future.failedFuture(error));
             }
         }));

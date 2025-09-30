@@ -1,9 +1,9 @@
 package io.zerows.core.web.validation.uca.rules;
 
-import io.zerows.core.exception.WebException;
+import io.r2mo.typed.exception.WebException;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.model.atom.Rule;
-import io.zerows.core.web.validation.exception._400ValidationRuleException;
+import io.zerows.epoch.web.exception._60005Exception400ValidationRule;
 import io.zerows.module.metadata.uca.logging.OLog;
 
 public abstract class BaseRuler implements Ruler {
@@ -13,11 +13,7 @@ public abstract class BaseRuler implements Ruler {
         final Object value,
         final Rule rule) {
         final String message = rule.getMessage();
-        final WebException error = new _400ValidationRuleException(
-            this.getClass(), field, value, message);
-        error.readable(message);
-        this.logger().info(INFO.MSG_FAILURE, error.toJson());
-        return error;
+        return new _60005Exception400ValidationRule(field, value, message);
     }
 
     protected OLog logger() {

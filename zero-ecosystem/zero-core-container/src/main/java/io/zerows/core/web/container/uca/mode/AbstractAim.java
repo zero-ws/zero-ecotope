@@ -3,6 +3,7 @@ package io.zerows.core.web.container.uca.mode;
 import io.r2mo.function.Actuator;
 import io.r2mo.function.Fn;
 import io.r2mo.typed.cc.Cc;
+import io.r2mo.typed.exception.WebException;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.http.Cookie;
@@ -11,11 +12,8 @@ import io.vertx.ext.web.Session;
 import io.zerows.ams.constant.VValue;
 import io.zerows.core.annotations.Address;
 import io.zerows.core.constant.KWeb;
-import io.zerows.core.exception.WebException;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.core.util.Ut;
-import io.zerows.core.web.container.exception._500DeliveryErrorException;
-import io.zerows.core.web.container.exception._500EntityCastException;
 import io.zerows.core.web.invocation.uca.runner.InvokerUtil;
 import io.zerows.core.web.io.atom.WrapRequest;
 import io.zerows.core.web.io.uca.request.mime.Analyzer;
@@ -24,6 +22,8 @@ import io.zerows.core.web.model.atom.Event;
 import io.zerows.core.web.model.atom.Rule;
 import io.zerows.core.web.model.commune.Envelop;
 import io.zerows.core.web.validation.ValidatorEntry;
+import io.zerows.epoch.container.exception._60002Exception500DeliveryError;
+import io.zerows.epoch.container.exception._60003Exception500EntityCast;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -94,14 +94,12 @@ public abstract class AbstractAim {
         final Throwable cause = handler.cause();
         final WebException error;
         if (Objects.isNull(cause)) {
-            error = new _500DeliveryErrorException(this.getClass(),
-                address, "Unknown");
+            error = new _60002Exception500DeliveryError(address, "Unknown");
         } else {
             if (cause instanceof WebException) {
                 error = (WebException) cause;
             } else {
-                error = new _500DeliveryErrorException(this.getClass(),
-                    address, "Jvm: " + cause.getMessage());
+                error = new _60002Exception500DeliveryError(address, "Jvm: " + cause.getMessage());
             }
         }
         return Envelop.failure(error);
@@ -116,8 +114,7 @@ public abstract class AbstractAim {
             envelop = message.body();
         } catch (final Throwable ex) {
             final WebException error
-                = new _500EntityCastException(this.getClass(),
-                address, ex.getMessage());
+                = new _60003Exception500EntityCast(address, ex.getMessage());
             envelop = Envelop.failure(error);
         }
         return envelop;

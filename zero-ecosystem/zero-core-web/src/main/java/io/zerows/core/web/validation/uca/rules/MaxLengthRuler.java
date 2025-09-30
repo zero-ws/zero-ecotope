@@ -1,7 +1,7 @@
 package io.zerows.core.web.validation.uca.rules;
 
+import io.r2mo.typed.exception.WebException;
 import io.zerows.ams.constant.VValue;
-import io.zerows.core.exception.WebException;
 import io.zerows.core.web.model.atom.Rule;
 
 /**

@@ -1,6 +1,6 @@
 package io.zerows.core.web.validation.uca.rules;
 
-import io.zerows.core.exception.WebException;
+import io.r2mo.typed.exception.WebException;
 import io.zerows.core.web.model.atom.Rule;
 
 import java.util.Collection;
@@ -11,8 +11,7 @@ class EmptyRuler extends BaseRuler {
                                final Object value,
                                final Rule rule) {
         WebException error = null;
-        if (null != value && value instanceof Collection) {
-            final Collection reference = (Collection) value;
+        if (value instanceof final Collection<?> reference) {
             if (reference.isEmpty()) {
                 error = this.failure(field, value, rule);
             }

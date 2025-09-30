@@ -1,16 +1,15 @@
 package io.zerows.core.web.security.store;
 
+import io.r2mo.function.Fn;
 import io.vertx.ext.web.handler.AuthorizationHandler;
 import io.zerows.core.constant.em.EmSecure;
-import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.model.uca.extract.ExtractorEvent;
-import io.zerows.core.web.security.exception.BootWallDuplicatedException;
-import io.zerows.core.web.security.exception.BootWallKeyMissingException;
-import io.zerows.core.web.security.exception.BootWallMethodDuplicatedException;
-import io.zerows.core.web.security.exception.BootWallTypeWrongException;
+import io.zerows.epoch.web.exception._40038Exception400WallDuplicated;
+import io.zerows.epoch.web.exception._40040Exception400WallKeyMissing;
+import io.zerows.epoch.web.exception._40041Exception500WallMethodDuplicated;
+import io.zerows.epoch.web.exception._40075Exception400WallTypeWrong;
 import io.zerows.module.assembly.uca.di.DiPlugin;
-import io.zerows.module.metadata.uca.logging.OLog;
 import io.zerows.module.metadata.zdk.uca.Inquirer;
 import io.zerows.module.security.annotations.Authenticate;
 import io.zerows.module.security.annotations.Authorized;
@@ -30,7 +29,6 @@ import java.util.stream.Collectors;
  */
 public class WallInquirer implements Inquirer<Set<Aegis>> {
 
-    private final static OLog LOGGER = Ut.Log.security(WallInquirer.class);
     private static final DiPlugin PLUGIN = DiPlugin.create(ExtractorEvent.class);
 
     @Override
@@ -86,8 +84,7 @@ public class WallInquirer implements Inquirer<Set<Aegis>> {
     private void verifyConfig(final Class<?> clazz, final Aegis reference, final String typeKey) {
         final EmSecure.AuthWall wall = EmSecure.AuthWall.from(typeKey);
         /* Wall Type Wrong */
-        FnZero.outBoot(Objects.isNull(wall), LOGGER, BootWallTypeWrongException.class,
-            this.getClass(), typeKey, clazz);
+        Fn.jvmKo(Objects.isNull(wall), _40075Exception400WallTypeWrong.class, typeKey, clazz);
         reference.setType(wall);
         final ConcurrentMap<String, AegisItem> configMap = AegisItem.configMap();
         if (EmSecure.AuthWall.EXTENSION == wall) {
@@ -98,8 +95,7 @@ public class WallInquirer implements Inquirer<Set<Aegis>> {
             /* Standard */
             reference.setDefined(Boolean.FALSE);
             final AegisItem found = configMap.getOrDefault(wall.key(), null);
-            FnZero.outBoot(Objects.isNull(found), LOGGER, BootWallKeyMissingException.class,
-                this.getClass(), wall.key(), clazz);
+            Fn.jvmKo(Objects.isNull(found), _40040Exception400WallKeyMissing.class, wall.key(), clazz);
             reference.setItem(found);
         }
     }
@@ -111,15 +107,15 @@ public class WallInquirer implements Inquirer<Set<Aegis>> {
     private void verifyProxy(final Class<?> clazz, final Aegis reference) {
         final Method[] methods = clazz.getDeclaredMethods();
         // Duplicated Method checking
-        FnZero.outBoot(this.verifyMethod(methods, Authenticate.class), LOGGER,
-            BootWallMethodDuplicatedException.class, this.getClass(),
-            Authenticate.class.getSimpleName(), clazz.getName());
-        FnZero.outBoot(this.verifyMethod(methods, Authorized.class), LOGGER,
-            BootWallMethodDuplicatedException.class, this.getClass(),
-            Authorized.class.getSimpleName(), clazz.getName());
-        FnZero.outBoot(this.verifyMethod(methods, AuthorizedResource.class), LOGGER,
-            BootWallMethodDuplicatedException.class, this.getClass(),
-            AuthorizedResource.class.getSimpleName(), clazz.getName());
+        Fn.jvmKo(this.verifyMethod(methods, Authenticate.class),
+            _40041Exception500WallMethodDuplicated.class,
+            Authenticate.class.getSimpleName(), clazz);
+        Fn.jvmKo(this.verifyMethod(methods, Authorized.class),
+            _40041Exception500WallMethodDuplicated.class,
+            Authorized.class.getSimpleName(), clazz);
+        Fn.jvmKo(this.verifyMethod(methods, AuthorizedResource.class),
+            _40041Exception500WallMethodDuplicated.class,
+            AuthorizedResource.class.getSimpleName(), clazz);
 
         /* Proxy **/
         reference.setProxy(PLUGIN.createProxy(clazz, null));
@@ -167,8 +163,8 @@ public class WallInquirer implements Inquirer<Set<Aegis>> {
         });
 
         // Duplicated adding.
-        FnZero.outBoot(dupSet.size() != wallClses.size(), LOGGER,
-            BootWallDuplicatedException.class, this.getClass(),
+        Fn.jvmKo(dupSet.size() != wallClses.size(),
+            _40038Exception400WallDuplicated.class,
             wallClses.stream().map(Class::getName).collect(Collectors.toSet()));
     }
 }

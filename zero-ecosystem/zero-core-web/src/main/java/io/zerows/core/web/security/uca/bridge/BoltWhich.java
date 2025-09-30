@@ -1,15 +1,15 @@
 package io.zerows.core.web.security.uca.bridge;
 
+import io.r2mo.function.Fn;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Vertx;
 import io.vertx.ext.auth.authentication.AuthenticationProvider;
 import io.vertx.ext.web.handler.AuthenticationHandler;
 import io.vertx.ext.web.handler.AuthorizationHandler;
 import io.zerows.core.constant.em.EmSecure;
-import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
-import io.zerows.core.web.security.exception.BootWallProviderConflictException;
-import io.zerows.core.web.security.exception.BootWallSizeException;
+import io.zerows.epoch.web.exception._40076Exception400WallSize;
+import io.zerows.epoch.web.exception._40077Exception400WallProviderConflict;
 import io.zerows.module.metadata.uca.logging.OLog;
 import io.zerows.module.security.atom.Aegis;
 import io.zerows.module.security.atom.AegisItem;
@@ -104,16 +104,14 @@ class BoltWhich implements Bolt {
              * The size should be 1 ( For non-extension )
              */
             final AegisItem item = config.item();
-            FnZero.outBoot(Objects.isNull(item), BootWallSizeException.class,
-                this.getClass(), config.getType(), 1);
+            Fn.jvmKo(Objects.isNull(item), _40076Exception400WallSize.class, config.getType(), 1);
         }
         final Set<Class<?>> provider = config.providers();
         /*
          * Must be valid type of provider
          */
-        provider.forEach(item -> FnZero.outBoot(!AuthenticationProvider.class.isAssignableFrom(item),
-            BootWallProviderConflictException.class,
-            this.getClass(), item));
+        provider.forEach(item -> Fn.jvmKo(!AuthenticationProvider.class.isAssignableFrom(item),
+            _40077Exception400WallProviderConflict.class, item));
         return config;
     }
 }

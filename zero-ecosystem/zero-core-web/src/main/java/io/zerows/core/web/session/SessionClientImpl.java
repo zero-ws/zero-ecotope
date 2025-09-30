@@ -1,5 +1,6 @@
 package io.zerows.core.web.session;
 
+import io.r2mo.function.Fn;
 import io.vertx.core.Future;
 import io.vertx.core.Promise;
 import io.vertx.core.Vertx;
@@ -10,10 +11,9 @@ import io.vertx.ext.web.sstore.ClusteredSessionStore;
 import io.vertx.ext.web.sstore.LocalSessionStore;
 import io.vertx.ext.web.sstore.SessionStore;
 import io.zerows.core.constant.configure.YmlCore;
-import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.session.eon.em.SessionType;
-import io.zerows.core.web.session.exception._500SessionClientInitException;
+import io.zerows.epoch.web.exception._20005Exception500SessionClientInit;
 import io.zerows.module.metadata.uca.logging.OLog;
 
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -38,7 +38,7 @@ public class SessionClientImpl implements SessionClient {
                 STORE = ClusteredSessionStore.create(this.vertx);
             } else {
                 final String store = config.getString(YmlCore.session.config.STORE);
-                FnZero.outWeb(Ut.isNil(store), _500SessionClientInitException.class, this.getClass());
+                Fn.jvmKo(Ut.isNil(store), _20005Exception500SessionClientInit.class);
                 LOGGER.info(Info.SESSION_STORE, store);
                 /*
                  * SessionStore -> Defined here

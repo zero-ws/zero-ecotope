@@ -1,11 +1,12 @@
 package io.zerows.core.web.cache.shared;
 
 import io.r2mo.typed.cc.Cc;
+import io.r2mo.typed.exception.WebException;
 import io.vertx.core.Future;
 import io.zerows.common.program.Kv;
 import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
-import io.zerows.core.web.cache.shared.exception._500PoolInternalException;
+import io.zerows.epoch.web.exception._60035Exception500PoolInternal;
 import io.zerows.module.metadata.uca.logging.OLog;
 
 import java.util.Set;
@@ -42,14 +43,16 @@ public class UxPool {
     public <K, V> Future<Kv<K, V>> put(final K key, final V value) {
         return FnZero.<Kv<K, V>>pack(future -> this.client.put(key, value, res -> {
             LOGGER.debug(INFO.UxPool.POOL_PUT, key, value, this.name);
-            FnZero.pack(res, future, Ut.failWeb(_500PoolInternalException.class, this.getClass(), this.name, "put"));
+            final WebException error = new _60035Exception500PoolInternal(this.name, "put");
+            FnZero.pack(res, future, error);
         }));
     }
 
     public <K, V> Future<Kv<K, V>> put(final K key, final V value, int expiredSecs) {
         return FnZero.<Kv<K, V>>pack(future -> this.client.<K, V>put(key, value, expiredSecs, res -> {
             LOGGER.debug(INFO.UxPool.POOL_PUT_TIMER, key, value, this.name, String.valueOf(expiredSecs));
-            FnZero.pack(res, future, Ut.failWeb(_500PoolInternalException.class, this.getClass(), this.name, "put"));
+            final WebException error = new _60035Exception500PoolInternal(this.name, "put");
+            FnZero.pack(res, future, error);
         }));
     }
 
@@ -57,7 +60,8 @@ public class UxPool {
     public <K, V> Future<Kv<K, V>> remove(final K key) {
         return FnZero.<Kv<K, V>>pack(future -> this.client.<K, V>remove(key, res -> {
             LOGGER.debug(INFO.UxPool.POOL_REMOVE, key, this.name);
-            FnZero.pack(res, future, Ut.failWeb(_500PoolInternalException.class, this.getClass(), this.name, "remove"));
+            final WebException error = new _60035Exception500PoolInternal(this.name, "remove");
+            FnZero.pack(res, future, error);
         }));
     }
 
@@ -65,7 +69,8 @@ public class UxPool {
     public <K, V> Future<V> get(final K key) {
         return FnZero.<V>pack(future -> this.client.get(key, res -> {
             LOGGER.debug(INFO.UxPool.POOL_GET, key, this.name, false);
-            FnZero.pack(res, future, Ut.failWeb(_500PoolInternalException.class, this.getClass(), this.name, "get"));
+            final WebException error = new _60035Exception500PoolInternal(this.name, "get");
+            FnZero.pack(res, future, error);
         }));
     }
 
@@ -78,27 +83,31 @@ public class UxPool {
     public <K, V> Future<V> get(final K key, final boolean once) {
         return FnZero.<V>pack(future -> this.client.get(key, once, res -> {
             LOGGER.debug(INFO.UxPool.POOL_GET, key, this.name, once);
-            FnZero.pack(res, future, Ut.failWeb(_500PoolInternalException.class, this.getClass(), this.name, "get"));
+            final WebException error = new _60035Exception500PoolInternal(this.name, "get");
+            FnZero.pack(res, future, error);
         }));
     }
 
     public Future<Boolean> clear() {
         return FnZero.<Boolean>pack(future -> this.client.clear(res -> {
             LOGGER.debug(INFO.UxPool.POOL_CLEAR, this.name);
-            FnZero.pack(res, future, Ut.failWeb(_500PoolInternalException.class, this.getClass(), this.name, "clear"));
+            final WebException error = new _60035Exception500PoolInternal(this.name, "clear");
+            FnZero.pack(res, future, error);
         }));
     }
 
     // Count
     public Future<Integer> size() {
         return FnZero.<Integer>pack(future -> this.client.size(res -> {
-            FnZero.pack(res, future, Ut.failWeb(_500PoolInternalException.class, this.getClass(), this.name, "size"));
+            final WebException error = new _60035Exception500PoolInternal(this.name, "size");
+            FnZero.pack(res, future, error);
         }));
     }
 
     public Future<Set<String>> keys() {
         return FnZero.<Set<String>>pack(future -> this.client.keys(res -> {
-            FnZero.pack(res, future, Ut.failWeb(_500PoolInternalException.class, this.getClass(), this.name, "keys"));
+            final WebException error = new _60035Exception500PoolInternal(this.name, "keys");
+            FnZero.pack(res, future, error);
         }));
     }
 }

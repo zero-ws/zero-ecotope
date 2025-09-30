@@ -5,13 +5,12 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.ams.constant.VString;
 import io.zerows.core.constant.KWeb;
-import io.zerows.core.exception.WebException;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.io.annotations.BodyParam;
 import io.zerows.core.web.io.atom.WrapRequest;
 import io.zerows.core.web.model.atom.Event;
 import io.zerows.core.web.model.atom.Rule;
-import io.zerows.core.web.validation.exception._400ValidationException;
+import io.zerows.epoch.web.exception._60000Exception400Validation;
 import io.zerows.module.metadata.cache.CStore;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
@@ -61,11 +60,7 @@ public class ValidatorEntry {
     private <T> void replyError(final T proxy, final Method method,
                                 final ConstraintViolation<T> item) {
         if (null != item) {
-            final WebException error
-                = new _400ValidationException(this.getClass(),
-                proxy.getClass(), method, item.getMessage());
-            error.readable(item.getMessage());
-            throw error;
+            throw new _60000Exception400Validation(proxy.getClass(), method, item.getMessage());
         }
     }
 
