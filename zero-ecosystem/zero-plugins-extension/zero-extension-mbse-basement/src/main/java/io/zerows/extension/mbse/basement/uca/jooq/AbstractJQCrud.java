@@ -4,14 +4,13 @@ import io.r2mo.function.Actuator;
 import io.r2mo.function.Fn;
 import io.zerows.ams.constant.VValue;
 import io.zerows.core.exception.WebException;
-import io.zerows.core.fn.FnZero;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.extension.mbse.basement.atom.data.DataEvent;
 import io.zerows.extension.mbse.basement.atom.element.DataMatrix;
 import io.zerows.extension.mbse.basement.atom.element.DataRow;
-import io.zerows.extension.mbse.basement.exception._417ConditionEmptyException;
-import io.zerows.extension.mbse.basement.exception._417DataTransactionException;
 import io.zerows.extension.mbse.basement.exception._417DataUnexpectException;
+import io.zerows.extension.mbse.basement.exception._80518Exception500DataTransaction;
+import io.zerows.extension.mbse.basement.exception._80522Exception417ConditionEmpty;
 import io.zerows.extension.mbse.basement.uca.jooq.internal.Jq;
 import org.jooq.DSLContext;
 import org.jooq.Record;
@@ -98,8 +97,7 @@ abstract class AbstractJQCrud {
             }
         } catch (final DataAccessException ex) {
             this.logger().fatal(ex);
-            final WebException error = new _417DataTransactionException(getClass(), ex);
-            event.failure(error);
+            event.failure(new _80518Exception500DataTransaction(ex));
         } catch (final Throwable ex) {
             ex.printStackTrace();
         }
@@ -116,7 +114,7 @@ abstract class AbstractJQCrud {
     }
 
     private void ensure(final String table, final DataMatrix matrix) {
-        FnZero.outWeb(matrix.getAttributes().isEmpty(), logger(), _417ConditionEmptyException.class, getClass(), table);
+        Fn.jvmKo(matrix.getAttributes().isEmpty(), _80522Exception417ConditionEmpty.class, table);
     }
 
     private void ensure(final String table, final List<DataMatrix> matrixes) {

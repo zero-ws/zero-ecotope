@@ -1,6 +1,6 @@
 package io.zerows.extension.mbse.basement.atom.data;
 
-import io.zerows.core.fn.FnZero;
+import io.r2mo.function.Fn;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.mbse.basement.atom.Model;
@@ -12,8 +12,8 @@ import io.zerows.extension.mbse.basement.atom.element.DataTpl;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MAttribute;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MField;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MJoin;
-import io.zerows.extension.mbse.basement.exception._417RelatedFieldMissingException;
-import io.zerows.extension.mbse.basement.exception._417RelatedSchemaMissingException;
+import io.zerows.extension.mbse.basement.exception._80536Exception417RelatedField;
+import io.zerows.extension.mbse.basement.exception._80537Exception417RelatedSchema;
 
 import java.util.Arrays;
 import java.util.List;
@@ -109,13 +109,13 @@ class Bridge {
 
             /* 找不到实体报错 */
             final String unique = model.namespace() + "-" + model.identifier();
-            FnZero.outWeb(null == schema, _417RelatedSchemaMissingException.class, Bridge.class,
+            Fn.jvmKo(Objects.isNull(schema), _80537Exception417RelatedSchema.class,
                 /* ARG1：当前关联关系对应的实体名 */ join.getEntity(),
                 /* ARG2：当前主键的唯一标识 */ key.getUnique());
 
             final MField field = schema.getField(join.getEntityKey());
             /* 找不到字段定义 */
-            FnZero.outWeb(null == field, _417RelatedFieldMissingException.class, Bridge.class,
+            Fn.jvmKo(Objects.isNull(field), _80536Exception417RelatedField.class,
                 /* ARG1：当前关联关系对应的实体字段名 */ join.getEntityKey(),
                 /* ARG2：当前关联关系对应的实体名 */ join.getEntity(),
                 /* ARG3：当前主键的唯一标识 */ key.getUnique());

@@ -1,12 +1,12 @@
 package io.zerows.extension.mbse.basement.uca.jooq.internal;
 
+import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.ams.constant.VString;
-import io.zerows.core.fn.FnZero;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.extension.mbse.basement.atom.element.DataMatrix;
-import io.zerows.extension.mbse.basement.exception._417TableCounterException;
+import io.zerows.extension.mbse.basement.exception._80524Exception500TableCounter;
 import org.jooq.*;
 import org.jooq.Record;
 import org.jooq.impl.DSL;
@@ -41,8 +41,8 @@ class Meta {
      */
     static Table<Record> natureJoin(final ConcurrentMap<String, String> tableMap) {
         final Iterator<String> it = tableMap.keySet().iterator();
-        FnZero.outWeb(1 < tableMap.size() && !it.hasNext(),
-            _417TableCounterException.class, Meta.class, "> 1");
+        
+        Fn.jvmKo(1 < tableMap.size() && !it.hasNext(), _80524Exception500TableCounter.class, "> 1");
         String table = it.next();
         Table<Record> result = table(table, tableMap.get(table));
         while (it.hasNext()) {
@@ -62,8 +62,8 @@ class Meta {
                                   final ConcurrentMap<String, String> joined,
                                   final ConcurrentMap<String, String> aliasMap) {
         final Table<Record> first = table(leader, aliasMap.get(leader));
-        FnZero.outWeb(1 == aliasMap.size() && Objects.isNull(first),
-            _417TableCounterException.class, Meta.class, "> 1");
+
+        Fn.jvmKo(1 == aliasMap.size() && Objects.isNull(first), _80524Exception500TableCounter.class, "> 1");
         /*
          * 读取被 join 的第一张表
          */

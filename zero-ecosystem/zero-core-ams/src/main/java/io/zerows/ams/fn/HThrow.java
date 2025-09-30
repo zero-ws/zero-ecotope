@@ -3,7 +3,6 @@ package io.zerows.ams.fn;
 import io.vertx.core.Future;
 import io.zerows.ams.util.HUt;
 import io.zerows.core.exception.BootingException;
-import io.zerows.core.exception.InternalException;
 import io.zerows.core.exception.WebException;
 import io.zerows.core.exception.web._412ArgumentNullException;
 import io.zerows.core.exception.web._500InternalServerException;
@@ -66,16 +65,6 @@ class HThrow {
             }
         } else if (WebException.class == errorCls.getSuperclass()) {
             final WebException error = HUt.instance(errorCls, args);
-            if (null != error) {
-                callerAt(error::caller, error::getMessage);
-                throw error;
-            }
-        }
-    }
-
-    static void outInternal(final Class<?> errorCls, final Object... args) {
-        if (InternalException.class == errorCls.getSuperclass()) {
-            final InternalException error = HUt.instance(errorCls, args);
             if (null != error) {
                 callerAt(error::caller, error::getMessage);
                 throw error;

@@ -7,7 +7,7 @@ import io.zerows.common.reference.RRule;
 import io.zerows.core.fn.FnZero;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.atom.element.DataTpl;
-import io.zerows.extension.mbse.basement.exception._501AnonymousAtomException;
+import io.zerows.extension.mbse.basement.exception._80540Exception501AnonymousAtom;
 import io.zerows.specification.modeling.HRecord;
 import io.zerows.specification.modeling.HReference;
 import io.zerows.unity.Ux;
@@ -61,14 +61,14 @@ public abstract class AbstractRay<T> implements AoRay<T> {
      * @param tpl {@link io.zerows.extension.mbse.basement.atom.element.DataTpl} The template that will be bind.
      *
      * @return {@link AoRay} The component reference
-     * @throws _501AnonymousAtomException Atom in tpl contains errors.
+     * @throws _80540Exception501AnonymousAtom Atom in tpl contains errors.
      */
     @Override
     public AoRay<T> on(final DataTpl tpl) {
         this.tpl = tpl;
         final DataAtom atom = tpl.atom();
         if (Objects.isNull(atom)) {
-            throw new _501AnonymousAtomException(tpl.getClass());
+            throw new _80540Exception501AnonymousAtom();
         }
         final HReference reference = atom.reference();
         reference.refInput().forEach((identifier, quote) -> {

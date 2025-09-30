@@ -5,10 +5,9 @@ import io.r2mo.typed.cc.Cc;
 import io.zerows.ams.constant.VValue;
 import io.zerows.common.app.KDatabase;
 import io.zerows.core.database.cp.zdk.DataPool;
-import io.zerows.core.fn.FnZero;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.core.util.Ut;
-import io.zerows.extension.mbse.basement.exception._500EmptySQLException;
+import io.zerows.extension.mbse.basement.exception._80502Exception500EmptySQL;
 import io.zerows.extension.mbse.basement.uca.sql.SqlOutput;
 import org.jooq.*;
 import org.jooq.Record;
@@ -37,7 +36,7 @@ public class DataConnection implements AoConnection {
 
     @Override
     public int execute(final String sql) {
-        FnZero.outWeb(Ut.isNil(sql), _500EmptySQLException.class, this.getClass());
+        Fn.jvmKo(Ut.isNil(sql), _80502Exception500EmptySQL.class);
         this.getLogger().debug("[DB] 执行SQL：{0}", sql);
         final DSLContext context = this.getDSL();
         final Query query = context.query(sql);
@@ -76,7 +75,7 @@ public class DataConnection implements AoConnection {
     }
 
     private Result fetch(final String sql) {
-        FnZero.outWeb(Ut.isNil(sql), _500EmptySQLException.class, this.getClass());
+        Fn.jvmKo(Ut.isNil(sql), _80502Exception500EmptySQL.class);
         this.getLogger().debug("[DB] 执行SQL select：{0}", sql);
         final DSLContext context = this.getDSL();
         final ResultQuery<Record> query = context.resultQuery(sql);
@@ -85,7 +84,7 @@ public class DataConnection implements AoConnection {
 
     @Override
     public Long count(final String sql) {
-        FnZero.outWeb(Ut.isNil(sql), _500EmptySQLException.class, this.getClass());
+        Fn.jvmKo(Ut.isNil(sql), _80502Exception500EmptySQL.class);
         this.getLogger().debug("[DB] 执行SQL count：{0}", sql);
         final DSLContext context = this.getDSL();
         final ResultQuery<Record> query = context.resultQuery(sql);

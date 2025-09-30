@@ -1,18 +1,19 @@
 package io.mature.extension.scaffold.stdn;
 
 import io.mature.extension.scaffold.plugin.AspectSwitcher;
+import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.unity.Ux;
 import io.zerows.ams.constant.em.typed.ChangeFlag;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.mbse.atom.runner.ActIn;
 import io.zerows.core.web.mbse.atom.runner.ActOut;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
-import io.zerows.extension.mbse.basement.exception._404RecordMissingException;
+import io.zerows.extension.mbse.basement.exception._80529Exception404RecordMissing;
 import io.zerows.extension.mbse.basement.osgi.spi.robin.Switcher;
 import io.zerows.module.domain.atom.commune.dynamic.Apt;
 import io.zerows.specification.modeling.operation.HDao;
+import io.zerows.unity.Ux;
 
 import java.util.Objects;
 
@@ -178,15 +179,15 @@ public abstract class AbstractHOne extends AbstractHub implements HWay<JsonObjec
                 /*
                  * 找不到记录的异常信息
                  */
-                return Ut.Bnd.failOut(_404RecordMissingException.class, this.getClass(), key);
-            } else {
-                /*
-                 * 构造 Apt作为主流程中的参数
-                 */
-                final JsonObject current = request.getJObject();
-                this.diffNull(original, current);
-                return Ux.future(Apt.create(original, current));
+                return FnVertx.failOut(_80529Exception404RecordMissing.class, key);
             }
+
+            /*
+             * 构造 Apt作为主流程中的参数
+             */
+            final JsonObject current = request.getJObject();
+            this.diffNull(original, current);
+            return Ux.future(Apt.create(original, current));
         });
     }
 }

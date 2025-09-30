@@ -1,10 +1,10 @@
 package io.zerows.extension.mbse.basement.atom.builtin;
 
 
+import io.r2mo.function.Fn;
 import io.zerows.ams.constant.VValue;
 import io.zerows.ams.constant.em.modeling.EmKey;
 import io.zerows.ams.constant.em.modeling.EmModel;
-import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.mbse.basement.atom.Model;
 import io.zerows.extension.mbse.basement.atom.Schema;
@@ -12,7 +12,7 @@ import io.zerows.extension.mbse.basement.atom.element.DataKey;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MAttribute;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MField;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MJoin;
-import io.zerows.extension.mbse.basement.exception._417RelationCounterException;
+import io.zerows.extension.mbse.basement.exception._80538Exception417RelationCounter;
 import org.jooq.tools.StringUtils;
 
 import java.util.List;
@@ -94,8 +94,8 @@ class Bridge {
          * joins.size() >= schema.size() >= 1
          * 否则直接抛出异常信息
          */
-        FnZero.outWeb(joins.size() < 1 || schema.size() < 1 || schema.size() < joins.size(),
-            _417RelationCounterException.class, Bridge.class,
+        Fn.jvmKo(joins.isEmpty() || schema.isEmpty() || schema.size() < joins.size(),
+            _80538Exception417RelationCounter.class,
             /* ARG1：当前模型的标识，同一个应用中的模型标识唯一 */ model.dbModel().getIdentifier(),
             /* ARG2：当前模型 Model 中对应的实体数量 */ schema.size(),
             /* ARG3：当前模型 Model 中定义的 MJoin 的数量 */ joins.size());

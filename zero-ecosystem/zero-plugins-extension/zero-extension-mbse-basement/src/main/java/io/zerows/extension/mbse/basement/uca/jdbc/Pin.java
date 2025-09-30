@@ -1,13 +1,14 @@
 package io.zerows.extension.mbse.basement.uca.jdbc;
 
+import io.r2mo.function.Fn;
 import io.zerows.common.app.KDatabase;
-import io.zerows.core.fn.FnZero;
-import io.zerows.core.uca.log.Annal;
 import io.zerows.core.util.Ut;
-import io.zerows.extension.mbse.basement.exception._501PinNotFoundException;
+import io.zerows.extension.mbse.basement.exception._80508Exception404PinNotFound;
 import io.zerows.extension.mbse.basement.uca.metadata.AoBuilder;
 import io.zerows.extension.mbse.basement.util.Ao;
 import io.zerows.specification.modeling.operation.HDao;
+
+import java.util.Objects;
 
 /**
  * 统一读取组件的接口，新版的数据访问层在 yml 文件中仅定义 Pin 插件就可以了，
@@ -21,8 +22,7 @@ public interface Pin {
      */
     static Pin getInstance() {
         final Class<?> clazz = Ao.pluginPin();
-        final Annal logger = Annal.get(Pin.class);
-        FnZero.outWeb(null == clazz, logger, _501PinNotFoundException.class, clazz, "implPin");
+        Fn.jvmKo(Objects.isNull(clazz), _80508Exception404PinNotFound.class, "implPin");
         return Ut.singleton(clazz);
     }
 

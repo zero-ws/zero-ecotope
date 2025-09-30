@@ -1,22 +1,23 @@
 package io.mature.extension.scaffold.component;
 
+import io.r2mo.function.Fn;
+import io.r2mo.typed.exception.WebException;
+import io.r2mo.typed.exception.web._501NotSupportException;
+import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.unity.Ux;
 import io.zerows.common.datamation.KFabric;
 import io.zerows.common.datamation.KMapping;
 import io.zerows.common.normalize.KIdentity;
 import io.zerows.core.annotations.Contract;
 import io.zerows.core.constant.KName;
 import io.zerows.core.database.atom.Database;
-import io.zerows.core.exception.WebException;
-import io.zerows.core.exception.web._501NotSupportException;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.mbse.atom.runner.ActIn;
 import io.zerows.extension.mbse.action.uca.business.AbstractComponent;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
-import io.zerows.extension.mbse.basement.exception._400KeyLengthException;
+import io.zerows.extension.mbse.basement.exception._80527Exception400KeyLength;
 import io.zerows.extension.mbse.basement.osgi.spi.robin.Switcher;
 import io.zerows.extension.mbse.basement.util.Ao;
 import io.zerows.feature.web.utility.uca.FieldMapper;
@@ -24,6 +25,7 @@ import io.zerows.module.domain.atom.commune.XHeader;
 import io.zerows.specification.modeling.HRecord;
 import io.zerows.specification.modeling.HRule;
 import io.zerows.specification.modeling.operation.HDao;
+import io.zerows.unity.Ux;
 
 import java.lang.reflect.Array;
 import java.util.Objects;
@@ -307,7 +309,7 @@ public abstract class AbstractAdaptor extends AbstractComponent {
     /**
      * 「批量」使用{@link ActIn}输入对象构造{@link HRecord}[]数据记录的主键集。
      *
-     * 若定义长度有问题，则抛出`-80527`异常{@link _400KeyLengthException}。
+     * 若定义长度有问题，则抛出`-80527`异常{@link _80527Exception400KeyLength}。
      *
      * @param request {@link ActIn} 通道专用的请求对象。
      * @param <ID>    泛型对象，主键类型。
@@ -319,20 +321,18 @@ public abstract class AbstractAdaptor extends AbstractComponent {
         /* 解决 Bug：java.lang.ClassCastException: [Ljava.lang.Object; cannot be cast to [Ljava.lang.String; */
         final HRecord[] records = this.activeRecords(request);
         final int length = records.length;
-        if (0 == length) {
-            /* 无主键异常`io.vertx.mod.error._400KeyLengthException`抛出。*/
-            throw new _400KeyLengthException(this.getClass());
-        } else {
-            final HRecord record = records[0];
-            final ID key = record.key();
-            final ID[] keys = (ID[]) Array.newInstance(key.getClass(), length);
-            /* 构造主键集 */
-            for (int idx = 0; idx < length; idx++) {
-                final HRecord found = records[idx];
-                keys[idx] = found.key();
-            }
-            return keys;
+
+        Fn.jvmKo(0 == length, _80527Exception400KeyLength.class);
+
+        final HRecord record = records[0];
+        final ID key = record.key();
+        final ID[] keys = (ID[]) Array.newInstance(key.getClass(), length);
+        /* 构造主键集 */
+        for (int idx = 0; idx < length; idx++) {
+            final HRecord found = records[idx];
+            keys[idx] = found.key();
         }
+        return keys;
     }
 
     // ------------ 字典翻译器方法重写 -----------------
@@ -401,7 +401,7 @@ public abstract class AbstractAdaptor extends AbstractComponent {
      * @return {@link Future}
      */
     protected <T> Future<T> transferFailure() {
-        final WebException error = Ut.Bnd.failWeb(_501NotSupportException.class, this.getClass());
+        final WebException error = new _501NotSupportException("[ R2MO ] 未实现的 API 操作!");
         LOG.Plugin.info(this.getClass(), "[ Infusion ] Do not support api: {0}", error.getMessage());
         return Future.failedFuture(error);
     }
@@ -425,7 +425,8 @@ public abstract class AbstractAdaptor extends AbstractComponent {
         } else if (input instanceof final JsonArray normalized) {
             return arrayExecutor.apply(normalized).compose(json -> Ux.future((T) json));
         } else {
-            return Ut.Bnd.failOut(_501NotSupportException.class, this.getClass());
+            return FnVertx.failOut(_501NotSupportException.class,
+                "[ R2MO ] 输入类型导致无法执行，当前仅支持 JsonObject/JsonArray 类型！");
         }
     }
 }

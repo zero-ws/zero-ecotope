@@ -187,11 +187,6 @@ class _Bundle extends _Ai {
             return BundleSPI.failWeb(exceptionCls, target, args);
         }
 
-        public static <T extends BootingException> BootingException failBoot(
-            final Class<T> exceptionCls, final Class<?> target, final Object... args) {
-            return BundleSPI.failBoot(exceptionCls, target, args);
-        }
-
         /**
          * 此处的特殊性是不可以带 boolean 的检查参数，通常外层可能为
          * <pre><code>

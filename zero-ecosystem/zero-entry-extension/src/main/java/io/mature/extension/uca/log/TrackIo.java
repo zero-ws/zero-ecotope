@@ -8,10 +8,9 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.ams.constant.em.modeling.EmAttribute;
 import io.zerows.common.normalize.KMarkAtom;
-import io.zerows.core.exception.WebException;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
-import io.zerows.extension.mbse.basement.exception._400TrackingErrorException;
+import io.zerows.extension.mbse.basement.exception._80545Exception400Tracking;
 import io.zerows.extension.mbse.basement.osgi.spi.plugin.AspectPlugin;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XActivity;
 import io.zerows.specification.modeling.operation.HDao;
@@ -67,8 +66,7 @@ public class TrackIo {
             return Ux.future(response);
         } else {
             if (Objects.isNull(newArray) && Objects.isNull(oldArray)) {
-                final WebException error = new _400TrackingErrorException(this.getClass());
-                return Future.failedFuture(error);
+                return Future.failedFuture(new _80545Exception400Tracking());
             } else {
                 final Numeration numeration = Numeration.service(this.atom.ark().sigma());
                 return numeration.clazz(XActivity.class, counter).compose(serials -> {
@@ -117,8 +115,7 @@ public class TrackIo {
              * 新旧数据专用
              */
             if (Objects.isNull(newRecord) && Objects.isNull(oldRecord)) {
-                final WebException error = new _400TrackingErrorException(this.getClass());
-                return Future.failedFuture(error);
+                return Future.failedFuture(new _80545Exception400Tracking());
             } else {
                 final Numeration numeration = Numeration.service(this.atom.ark().sigma());
                 return numeration.clazz(XActivity.class).compose(serial -> {

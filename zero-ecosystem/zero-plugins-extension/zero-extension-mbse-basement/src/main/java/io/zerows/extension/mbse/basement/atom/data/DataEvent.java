@@ -1,12 +1,12 @@
 package io.zerows.extension.mbse.basement.atom.data;
 
+import io.r2mo.function.Fn;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.ams.constant.VValue;
 import io.zerows.ams.constant.em.modeling.EmModel;
 import io.zerows.core.exception.WebException;
-import io.zerows.core.fn.FnZero;
 import io.zerows.core.uca.qr.Criteria;
 import io.zerows.core.uca.qr.Pager;
 import io.zerows.core.uca.qr.Sorter;
@@ -17,7 +17,7 @@ import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.atom.element.DataRow;
 import io.zerows.extension.mbse.basement.atom.element.DataTpl;
 import io.zerows.extension.mbse.basement.eon.em.EventType;
-import io.zerows.extension.mbse.basement.exception._417DataRowNullException;
+import io.zerows.extension.mbse.basement.exception._80533Exception404DataRowNull;
 import io.zerows.extension.mbse.basement.uca.io.AoIo;
 import io.zerows.extension.mbse.basement.uca.metadata.AoSentence;
 import io.zerows.extension.mbse.basement.uca.plugin.IoHub;
@@ -208,12 +208,12 @@ public class DataEvent implements Serializable {
         /* DataRow 不能为空，有操作旧必须保证 rows 中有数据 */
         final List<DataRow> rows = this.io.getRows();
 
-        FnZero.outWeb(null == rows || rows.isEmpty(), _417DataRowNullException.class, this.getClass(),
+        Fn.jvmKo(Objects.isNull(rows) || rows.isEmpty(), _80533Exception404DataRowNull.class,
             /* ARG1：当前 Model 的模型标识符 */ this.atom.identifier());
 
         final DataRow row = rows.get(VValue.IDX);
 
-        FnZero.outWeb(null == row, _417DataRowNullException.class, this.getClass(),
+        Fn.jvmKo(Objects.isNull(row), _80533Exception404DataRowNull.class,
             /* ARG1：当前 Model 的模型标识符 */ this.atom.identifier());
 
         return row;
@@ -307,6 +307,10 @@ public class DataEvent implements Serializable {
 
     public void failure(final WebException ex) {
         this.exception = ex;
+    }
+
+    public void failure(final io.r2mo.typed.exception.WebException ex) {
+        // TODO:
     }
 
     /*

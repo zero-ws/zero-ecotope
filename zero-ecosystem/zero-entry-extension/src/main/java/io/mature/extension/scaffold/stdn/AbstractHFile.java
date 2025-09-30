@@ -1,20 +1,20 @@
 package io.mature.extension.scaffold.stdn;
 
+import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
-import io.zerows.unity.Ux;
-import io.zerows.core.util.Ut;
 import io.zerows.core.web.mbse.atom.runner.ActIn;
 import io.zerows.core.web.mbse.atom.runner.ActOut;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
-import io.zerows.extension.mbse.basement.exception._400FileRequiredException;
-import io.zerows.extension.mbse.basement.exception._409IdentifierConflictException;
-import io.zerows.extension.mbse.basement.exception._417DataEmptyException;
+import io.zerows.extension.mbse.basement.exception._80526Exception400FileRequired;
+import io.zerows.extension.mbse.basement.exception._80531Exception409IdentifierConflict;
+import io.zerows.extension.mbse.basement.exception._80532Exception404DataEmpty;
 import io.zerows.module.domain.atom.commune.dynamic.Apt;
 import io.zerows.plugins.office.excel.ExcelClient;
 import io.zerows.plugins.office.excel.ExcelInfix;
 import io.zerows.plugins.office.excel.atom.ExRecord;
 import io.zerows.plugins.office.excel.atom.ExTable;
+import io.zerows.unity.Ux;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -53,7 +53,7 @@ public abstract class AbstractHFile extends AbstractHMore {
          */
         final File[] files = request.getFiles();
         if (0 >= files.length) {
-            return Ut.Bnd.failOut(_400FileRequiredException.class, this.getClass());
+            return FnVertx.failOut(_80526Exception400FileRequired.class);
         }
 
 
@@ -76,7 +76,7 @@ public abstract class AbstractHFile extends AbstractHMore {
             final long counter = tables.stream().filter(table -> !table.getName().equals(identifier)).count();
             if (0 < counter) {
                 LOG.Uca.warn(this.getClass(), "文件规范错误，期望 identifier = {0}", identifier);
-                return Ut.Bnd.failOut(_409IdentifierConflictException.class, this.getClass(), identifier);
+                return FnVertx.failOut(_80531Exception409IdentifierConflict.class, identifier);
             }
 
 
@@ -90,7 +90,7 @@ public abstract class AbstractHFile extends AbstractHMore {
              * 字典翻译
              */
             if (data.isEmpty()) {
-                return Ut.Bnd.failOut(_417DataEmptyException.class, this.getClass());
+                return FnVertx.failOut(_80532Exception404DataEmpty.class, this.getClass());
             }
 
 

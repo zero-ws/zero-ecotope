@@ -6,6 +6,7 @@ import io.mature.stellar.owner.OkA;
 import io.mature.stellar.owner.ProductionA;
 import io.mature.stellar.vendor.OkB;
 import io.r2mo.spi.SPI;
+import io.r2mo.vertx.function.FnVertx;
 import io.vertx.boot.supply.Electy;
 import io.vertx.core.Future;
 import io.vertx.core.Promise;
@@ -17,9 +18,8 @@ import io.zerows.core.exception.boot._11010Exception500BootIoMissing;
 import io.zerows.core.running.boot.KConfigurer;
 import io.zerows.core.running.boot.KEnvironment;
 import io.zerows.core.spi.BootIo;
-import io.zerows.core.util.Ut;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
-import io.zerows.extension.mbse.basement.exception._417DataAtomNullException;
+import io.zerows.extension.mbse.basement.exception._80517Exception404DataAtomNull;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HEnergy;
 import io.zerows.unity.Ux;
@@ -35,7 +35,7 @@ public class Ok {
 
     public static Future<KFabric> fabric(final DataAtom atom, final String nameB) {
         if (Objects.isNull(atom)) {
-            return Ut.Bnd.failOut(_417DataAtomNullException.class, Ok.class);
+            return FnVertx.failOut(_80517Exception404DataAtomNull.class);
         }
         return of(Environment.Production).compose(okA -> {
             final OkB partyB = okA.partyB(nameB);

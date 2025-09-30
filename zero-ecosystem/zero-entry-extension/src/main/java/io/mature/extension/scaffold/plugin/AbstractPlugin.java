@@ -1,15 +1,15 @@
 package io.mature.extension.scaffold.plugin;
 
+import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonObject;
 import io.zerows.ams.constant.em.typed.ChangeFlag;
 import io.zerows.common.datamation.KFabric;
 import io.zerows.common.datamation.KMapping;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.FnZero;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
-import io.zerows.extension.mbse.basement.exception._501FabricIssueException;
+import io.zerows.extension.mbse.basement.exception._80539Exception404FabricIssue;
 import io.zerows.module.cloud.eon.VDBC;
 
 import java.util.Objects;
@@ -39,7 +39,7 @@ public abstract class AbstractPlugin<T> {
     }
 
     protected KFabric fabric(final JsonObject options) {
-        FnZero.out(Objects.isNull(this.fabric), _501FabricIssueException.class, this.getClass());
+        Fn.jvmKo(Objects.isNull(this.fabric), _80539Exception404FabricIssue.class);
         final Object mapping = options.getValue(KName.MAPPING);
         final KMapping item = this.mapping(mapping);
         /* 双条件检查，为 NULL 和 Empty 都没有任何 Mapping 配置*/
