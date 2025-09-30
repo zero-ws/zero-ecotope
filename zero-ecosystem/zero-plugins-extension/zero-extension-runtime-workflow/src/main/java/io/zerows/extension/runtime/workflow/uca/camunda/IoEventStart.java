@@ -1,14 +1,15 @@
 package io.zerows.extension.runtime.workflow.uca.camunda;
 
-import io.zerows.ams.constant.VValue;
+import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
+import io.zerows.ams.constant.VValue;
 import io.zerows.core.constant.KName;
-import io.zerows.unity.Ux;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.runtime.workflow.bootstrap.WfPin;
-import io.zerows.extension.runtime.workflow.exception._409EventStartUniqueException;
-import io.zerows.extension.runtime.workflow.exception._501EventStartMissingException;
+import io.zerows.extension.runtime.workflow.exception._80601Exception501EventStartMissing;
+import io.zerows.extension.runtime.workflow.exception._80602Exception409EventStartUnique;
+import io.zerows.unity.Ux;
 import org.camunda.bpm.engine.RepositoryService;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.camunda.bpm.model.bpmn.instance.StartEvent;
@@ -33,7 +34,7 @@ class IoEventStart extends AbstractIo<StartEvent> {
         final BpmnModelInstance instance = service.getBpmnModelInstance(definitionId);
         final Collection<StartEvent> starts = instance.getModelElementsByType(StartEvent.class);
         if (starts.isEmpty()) {
-            return Ut.Bnd.failOut(_501EventStartMissingException.class, this.getClass(), definitionId);
+            return FnVertx.failOut(_80601Exception501EventStartMissing.class, definitionId);
         }
         return Ux.future(new ArrayList<>(starts));
     }
@@ -47,7 +48,7 @@ class IoEventStart extends AbstractIo<StartEvent> {
             if (VValue.ONE == size) {
                 return Ux.future(list.get(VValue.IDX));
             } else {
-                return Ut.Bnd.failOut(_409EventStartUniqueException.class, this.getClass(), size, definitionId);
+                return FnVertx.failOut(_80602Exception409EventStartUnique.class, size, definitionId);
             }
         });
     }

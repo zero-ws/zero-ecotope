@@ -1,7 +1,8 @@
 package io.zerows.extension.runtime.workflow.atom.runtime;
 
+import io.r2mo.function.Fn;
 import io.zerows.extension.runtime.workflow.eon.em.PassWay;
-import io.zerows.extension.runtime.workflow.exception._409InValidTaskApiException;
+import io.zerows.extension.runtime.workflow.exception._80610Exception409InValidTaskApi;
 import org.camunda.bpm.engine.task.Task;
 
 import java.util.ArrayList;
@@ -108,9 +109,8 @@ public class WTask {
     }
 
     private void ensure(final PassWay expected) {
-        if (expected != this.type) {
-            throw new _409InValidTaskApiException(this.getClass(), this.type, expected);
-        }
+        Fn.jvmKo(expected != this.type,
+            _80610Exception409InValidTaskApi.class, this.type, expected);
     }
 
     public PassWay vague() {

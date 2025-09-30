@@ -2,8 +2,8 @@ package io.zerows.extension.mbse.action.plugins;
 
 import io.r2mo.typed.cc.Cc;
 import io.zerows.core.web.model.commune.Envelop;
-import io.zerows.extension.mbse.action.exception._400RequiredParamException;
-import io.zerows.extension.mbse.action.exception._500DefinitionErrorException;
+import io.zerows.extension.mbse.action.exception._80403Exception400RequiredParam;
+import io.zerows.extension.mbse.action.exception._80406Exception500DefinitionError;
 
 /*
  * Uniform Error throw out and web Envelop ( Failure )
@@ -24,10 +24,10 @@ public class JetThanatos {
     }
 
     public Envelop to400RequiredParam(final String filename) {
-        return Envelop.failure(new _400RequiredParamException(this.target, filename));
+        return Envelop.failure(new _80403Exception400RequiredParam(filename));
     }
 
     public Envelop to500DefinitionError(final String key) {
-        return Envelop.failure(new _500DefinitionErrorException(this.target, key));
+        return Envelop.failure(new _80406Exception500DefinitionError(key));
     }
 }

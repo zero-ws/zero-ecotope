@@ -1,6 +1,7 @@
 package io.zerows.extension.runtime.report.uca.process;
 
 import io.r2mo.typed.cc.Cc;
+import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
@@ -13,7 +14,7 @@ import io.zerows.extension.runtime.report.domain.tables.pojos.KpDataSet;
 import io.zerows.extension.runtime.report.domain.tables.pojos.KpDimension;
 import io.zerows.extension.runtime.report.eon.em.EmDim;
 import io.zerows.extension.runtime.report.eon.em.EmReport;
-import io.zerows.extension.runtime.report.exception._400ReportDimTypeException;
+import io.zerows.extension.runtime.report.exception._80703Exception400ReportDimType;
 import io.zerows.extension.runtime.report.uca.feature.RQueryComponent;
 import io.zerows.extension.runtime.report.uca.pull.DataSet;
 import io.zerows.unity.Ux;
@@ -106,7 +107,7 @@ class DimProcImpl extends AbstractDimProc {
         final EmDim.Type typeOf = Ut.toEnum(dimension.getType(), EmDim.Type.class, null);
         if (Objects.isNull(typeOf)) {
             // ERR-80703
-            return Ut.Bnd.failOut(_400ReportDimTypeException.class, this.getClass(), dimension.getReportId(), dimension.getKey());
+            return FnVertx.failOut(_80703Exception400ReportDimType.class, dimension.getReportId(), dimension.getKey());
         }
         // 状态处理
         final EmReport.UcaStatus statusOf = Ut.toEnum(dimension.getStatus(), EmReport.UcaStatus.class, EmReport.UcaStatus.ACTIVE);

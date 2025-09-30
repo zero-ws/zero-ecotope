@@ -1,5 +1,6 @@
 package io.zerows.extension.runtime.workflow.atom.runtime;
 
+import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
@@ -9,7 +10,7 @@ import io.zerows.core.util.Ut;
 import io.zerows.extension.runtime.workflow.domain.tables.pojos.WTicket;
 import io.zerows.extension.runtime.workflow.domain.tables.pojos.WTodo;
 import io.zerows.extension.runtime.workflow.eon.em.PassWay;
-import io.zerows.extension.runtime.workflow.exception._409InValidInstanceException;
+import io.zerows.extension.runtime.workflow.exception._80605Exception409InValidInstance;
 import io.zerows.extension.runtime.workflow.uca.camunda.Io;
 import io.zerows.extension.runtime.workflow.uca.conformity.Gear;
 import io.zerows.extension.runtime.workflow.util.Wf;
@@ -229,7 +230,7 @@ public class WTransition {
             final Io<Task> ioTask = Io.ioTask();
             return ioTask.run(flow.taskId()).compose(task -> {
                 if (Objects.isNull(task)) {
-                    return Ut.Bnd.failOut(_409InValidInstanceException.class, this.getClass(), this.instance.getId());
+                    return FnVertx.failOut(_80605Exception409InValidInstance.class, this.instance.getId());
                 } else {
                     this.from = task;
                     // Task Definition Key ( e.xxx )

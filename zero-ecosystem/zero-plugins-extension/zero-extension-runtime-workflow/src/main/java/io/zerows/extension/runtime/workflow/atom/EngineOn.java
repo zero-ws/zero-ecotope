@@ -1,13 +1,13 @@
 package io.zerows.extension.runtime.workflow.atom;
 
-import io.zerows.core.fn.FnZero;
+import io.r2mo.function.Fn;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.runtime.workflow.atom.configuration.MetaInstance;
 import io.zerows.extension.runtime.workflow.atom.runtime.WRequest;
 import io.zerows.extension.runtime.workflow.bootstrap.WfPin;
 import io.zerows.extension.runtime.workflow.domain.tables.pojos.WFlow;
 import io.zerows.extension.runtime.workflow.eon.WfPool;
-import io.zerows.extension.runtime.workflow.exception._404WorkflowNullException;
+import io.zerows.extension.runtime.workflow.exception._80603Exception404WorkflowNull;
 import io.zerows.extension.runtime.workflow.uca.central.Behaviour;
 import io.zerows.extension.runtime.workflow.uca.coadjutor.Stay;
 import io.zerows.extension.runtime.workflow.uca.coadjutor.StayCancel;
@@ -44,7 +44,7 @@ public class EngineOn {
         return WfPool.CC_ENGINE.pick(() -> {
             final WFlow flow = WfPin.getFlow(definitionKey);
             /* Defined Exception throw out because of configuration data */
-            FnZero.out(Objects.isNull(flow), _404WorkflowNullException.class, EngineOn.class, definitionKey);
+            Fn.jvmKo(Objects.isNull(flow), _80603Exception404WorkflowNull.class, definitionKey);
             return new EngineOn(flow);
         }, definitionKey);
     }

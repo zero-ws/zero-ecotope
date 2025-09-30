@@ -1,8 +1,9 @@
 package io.zerows.extension.runtime.workflow.uca.camunda;
 
-import io.zerows.extension.runtime.workflow.eon.WfPool;
-import io.zerows.extension.runtime.workflow.exception._404ProcessMissingException;
+import io.r2mo.function.Fn;
 import io.zerows.extension.runtime.workflow.bootstrap.WfPin;
+import io.zerows.extension.runtime.workflow.eon.WfPool;
+import io.zerows.extension.runtime.workflow.exception._80600Exception404ProcessMissing;
 import org.camunda.bpm.engine.HistoryService;
 import org.camunda.bpm.engine.RepositoryService;
 import org.camunda.bpm.engine.RuntimeService;
@@ -61,9 +62,7 @@ public abstract class AbstractIo<I> implements Io<I> {
                 .latestVersion()
                 .processDefinitionKey(idOrKey).singleResult();
         }, idOrKey);
-        if (Objects.isNull(result)) {
-            throw new _404ProcessMissingException(this.getClass(), idOrKey);
-        }
+        Fn.jvmKo(Objects.isNull(result), _80600Exception404ProcessMissing.class, idOrKey);
         return result;
     }
 

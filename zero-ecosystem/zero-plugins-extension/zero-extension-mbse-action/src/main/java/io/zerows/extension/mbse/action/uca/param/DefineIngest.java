@@ -5,8 +5,8 @@ import io.zerows.core.util.Ut;
 import io.zerows.core.web.model.commune.Envelop;
 import io.zerows.extension.mbse.action.atom.JtUri;
 import io.zerows.extension.mbse.action.eon.JtConstant;
-import io.zerows.extension.mbse.action.exception._501IngestMissingException;
-import io.zerows.extension.mbse.action.exception._501IngestSpecException;
+import io.zerows.extension.mbse.action.exception._80401Exception501IngestMissing;
+import io.zerows.extension.mbse.action.exception._80402Exception501IngestSpec;
 import io.zerows.extension.mbse.action.osgi.spi.jet.JtIngest;
 import io.zerows.module.metadata.store.OZeroStore;
 
@@ -17,9 +17,9 @@ class DefineIngest implements JtIngest {
     public Envelop in(final RoutingContext context, final JtUri uri) {
         final Class<?> clazz = OZeroStore.classInject(JtConstant.COMPONENT_INGEST_KEY);
         if (Objects.isNull(clazz)) {
-            return Envelop.failure(new _501IngestMissingException(this.getClass()));
+            return Envelop.failure(new _80401Exception501IngestMissing());
         } else if (!Ut.isImplement(clazz, JtIngest.class)) {
-            return Envelop.failure(new _501IngestSpecException(this.getClass(), clazz.getName()));
+            return Envelop.failure(new _80402Exception501IngestSpec(clazz.getName()));
         } else {
             final JtIngest ingest = Ut.instance(clazz);
             return ingest.in(context, uri);

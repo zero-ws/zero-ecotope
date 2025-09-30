@@ -1,12 +1,12 @@
 package io.zerows.extension.runtime.report.api.service;
 
-import io.zerows.common.program.KRef;
+import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.common.program.KRef;
 import io.zerows.core.constant.KName;
 import io.zerows.core.fn.FnZero;
-import io.zerows.unity.Ux;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.runtime.report.atom.RDimension;
 import io.zerows.extension.runtime.report.atom.RGeneration;
@@ -19,10 +19,11 @@ import io.zerows.extension.runtime.report.domain.tables.pojos.KpDimension;
 import io.zerows.extension.runtime.report.domain.tables.pojos.KpFeature;
 import io.zerows.extension.runtime.report.domain.tables.pojos.KpReport;
 import io.zerows.extension.runtime.report.eon.em.EmReport;
-import io.zerows.extension.runtime.report.exception._400ReportDataSetException;
-import io.zerows.extension.runtime.report.exception._404ReportMissingException;
+import io.zerows.extension.runtime.report.exception._80701Exception404ReportMissing;
+import io.zerows.extension.runtime.report.exception._80702Exception404ReportDataSet;
 import io.zerows.extension.runtime.report.uca.process.DimProc;
 import io.zerows.extension.runtime.report.uca.pull.DataSet;
+import io.zerows.unity.Ux;
 import jakarta.inject.Inject;
 
 import java.util.List;
@@ -37,7 +38,7 @@ public class ReportService implements ReportStub {
     @Inject
     private ReportInstanceStub instanceStub;
 
-    public void setInstanceStub(ReportInstanceStub instanceStub) {
+    public void setInstanceStub(final ReportInstanceStub instanceStub) {
         this.instanceStub = instanceStub;
     }
 
@@ -55,7 +56,7 @@ public class ReportService implements ReportStub {
             .compose(report -> {
                 if (Objects.isNull(report)) {
                     // ERR-80701
-                    return Ut.Bnd.failOut(_404ReportMissingException.class, this.getClass(), reportId);
+                    return FnVertx.failOut(_80701Exception404ReportMissing.class, reportId);
                 }
                 // 配置构造
                 return this.buildGeneration(report, params);
@@ -88,12 +89,12 @@ public class ReportService implements ReportStub {
         final String dsId = report.getDataSetId();
         if (Ut.isNil(dsId)) {
             // ERR-80702
-            return Ut.Bnd.failOut(_400ReportDataSetException.class, this.getClass(), reportId);
+            return FnVertx.failOut(_80702Exception404ReportDataSet.class, reportId);
         }
         return Ux.Jooq.on(KpDataSetDao.class).<KpDataSet>fetchByIdAsync(dsId).compose(dataSet -> {
             if (Objects.isNull(dataSet)) {
                 // ERR-80702
-                return Ut.Bnd.failOut(_400ReportDataSetException.class, this.getClass(), reportId);
+                return FnVertx.failOut(_80702Exception404ReportDataSet.class, reportId);
             }
 
             return DataSet.Tool.outputArray(params, dataSet);

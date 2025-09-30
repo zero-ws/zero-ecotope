@@ -1,9 +1,9 @@
 package io.zerows.extension.runtime.workflow.agent.api;
 
+import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
-import io.zerows.unity.Ux;
 import io.zerows.core.annotations.Address;
 import io.zerows.core.annotations.Queue;
 import io.zerows.core.constant.KName;
@@ -12,10 +12,11 @@ import io.zerows.extension.runtime.workflow.agent.service.FlowStub;
 import io.zerows.extension.runtime.workflow.agent.service.TaskStub;
 import io.zerows.extension.runtime.workflow.domain.tables.daos.WTicketDao;
 import io.zerows.extension.runtime.workflow.eon.HighWay;
-import io.zerows.extension.runtime.workflow.exception._404ProcessMissingException;
+import io.zerows.extension.runtime.workflow.exception._80600Exception404ProcessMissing;
 import io.zerows.extension.runtime.workflow.uca.camunda.Io;
 import io.zerows.extension.runtime.workflow.uca.transition.Vm;
 import io.zerows.module.domain.atom.commune.XHeader;
+import io.zerows.unity.Ux;
 import jakarta.inject.Inject;
 import org.camunda.bpm.engine.history.HistoricProcessInstance;
 import org.camunda.bpm.engine.repository.ProcessDefinition;
@@ -141,7 +142,7 @@ public class QueueActor {
         final Io<Task> ioTask = Io.ioTask();
         final ProcessDefinition definition = ioTask.inProcess(definitionId);
         if (Objects.isNull(definition)) {
-            return Ut.Bnd.failOut(_404ProcessMissingException.class, this.getClass(), definitionId);
+            return FnVertx.failOut(_80600Exception404ProcessMissing.class, definitionId);
         }
 
 

@@ -1,17 +1,17 @@
 package io.zerows.extension.mbse.action.uca.micro;
 
+import io.r2mo.function.Fn;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.zerows.ams.constant.em.app.EmTraffic;
 import io.zerows.common.program.KRef;
-import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.model.commune.Envelop;
 import io.zerows.core.web.model.zdk.Commercial;
 import io.zerows.core.web.scheduler.atom.Mission;
-import io.zerows.extension.mbse.action.exception._424ChannelConflictException;
-import io.zerows.extension.mbse.action.exception._424ChannelDefineException;
-import io.zerows.extension.mbse.action.exception._424ChannelDefinitionException;
+import io.zerows.extension.mbse.action.exception._80408Exception424ChannelConflict;
+import io.zerows.extension.mbse.action.exception._80409Exception424ChannelDefinition;
+import io.zerows.extension.mbse.action.exception._80410Exception424ChannelInterface;
 import io.zerows.extension.mbse.action.osgi.spi.jet.JtChannel;
 import io.zerows.extension.mbse.action.uca.monitor.JtMonitor;
 import io.zerows.extension.mbse.action.uca.tunnel.ActorChannel;
@@ -92,23 +92,19 @@ class JtPandora {
          * Super class definitions
          */
         if (EmTraffic.Channel.DEFINE == channelType) {
-            FnZero.out(!Ut.isImplement(channelClass, JtChannel.class),
-                _424ChannelDefineException.class, JtPandora.class,
-                channelClass.getName());
+            Fn.jvmKo(!Ut.isImplement(channelClass, JtChannel.class), _80410Exception424ChannelInterface.class, channelClass.getName());
         } else {
             /*
              * The channelClass must be in EXPECTED_MAP
              */
-            FnZero.out(!EXPECTED_MAP.containsValue(channelClass),
-                _424ChannelDefinitionException.class, JtPandora.class,
+            Fn.jvmKo(!EXPECTED_MAP.containsValue(channelClass), _80409Exception424ChannelDefinition.class,
                 Ut.fromJoin(EXPECTED_MAP.values().stream().map(Class::getSimpleName).collect(Collectors.toSet())),
                 channelClass);
             /*
              * The channel type must match the target class specification.
              */
             final Class<?> expectedClass = EXPECTED_MAP.get(channelType);
-            FnZero.out(expectedClass != channelClass,
-                _424ChannelConflictException.class, JtPandora.class,
+            Fn.jvmKo(expectedClass != channelClass, _80408Exception424ChannelConflict.class,
                 channelClass.getName(), channelType);
         }
         /*

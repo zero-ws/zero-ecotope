@@ -1,17 +1,18 @@
 package io.zerows.extension.runtime.workflow.uca.component;
 
-import io.zerows.core.exception.web._501NotSupportException;
+import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
-import io.zerows.unity.Ux;
+import io.zerows.core.exception.web._501NotSupportException;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.runtime.workflow.atom.runtime.WRecord;
 import io.zerows.extension.runtime.workflow.atom.runtime.WRequest;
 import io.zerows.extension.runtime.workflow.atom.runtime.WTransition;
 import io.zerows.extension.runtime.workflow.eon.WfPool;
-import io.zerows.extension.runtime.workflow.exception._404RunOnSupplierException;
-import io.zerows.extension.runtime.workflow.exception._500EventTypeNullException;
+import io.zerows.extension.runtime.workflow.exception._80606Exception500EventTypeNull;
+import io.zerows.extension.runtime.workflow.exception._80607Exception404RunOnSupplier;
 import io.zerows.extension.runtime.workflow.uca.central.Behaviour;
 import io.zerows.extension.runtime.workflow.util.Wf;
+import io.zerows.unity.Ux;
 import org.camunda.bpm.engine.task.Task;
 import org.camunda.bpm.model.bpmn.impl.BpmnModelConstants;
 
@@ -41,13 +42,13 @@ public interface MoveOn extends Behaviour {
         final String eventType = Wf.nameEvent(task);
         if (Objects.isNull(eventType)) {
             // Error-80606: event type could not be parsed and extracted from task
-            return Ut.Bnd.failOut(_500EventTypeNullException.class, MoveOn.class, task.getTaskDefinitionKey());
+            return FnVertx.failOut(_80606Exception500EventTypeNull.class, task.getTaskDefinitionKey());
         }
 
         final Supplier<MoveOn> supplier = Pool.SUPPLIER.getOrDefault(eventType, null);
         if (Objects.isNull(supplier)) {
             // Error-80607: The supplier of event type could not be found.
-            return Ut.Bnd.failOut(_404RunOnSupplierException.class, MoveOn.class, eventType);
+            return FnVertx.failOut(_80607Exception404RunOnSupplier.class, eventType);
         }
         final MoveOn moveOn = supplier.get();
         LOG.Web.info(MoveOn.class, "MoveOn {0} has been selected, type = {0}",

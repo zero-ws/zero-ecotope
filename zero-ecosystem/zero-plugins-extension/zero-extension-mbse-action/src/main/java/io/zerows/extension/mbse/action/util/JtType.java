@@ -1,15 +1,15 @@
 package io.zerows.extension.mbse.action.util;
 
+import io.r2mo.function.Fn;
 import io.vertx.core.AbstractVerticle;
 import io.zerows.ams.constant.em.app.EmTraffic;
-import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.mbse.action.atom.JtWorker;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IApi;
 import io.zerows.extension.mbse.action.eon.JtConstant;
 import io.zerows.extension.mbse.action.eon.em.WorkerType;
-import io.zerows.extension.mbse.action.exception._500ConsumerSpecException;
-import io.zerows.extension.mbse.action.exception._500WorkerSpecException;
+import io.zerows.extension.mbse.action.exception._80404Exception500WorkerSpec;
+import io.zerows.extension.mbse.action.exception._80405Exception500ConsumerSpec;
 import io.zerows.extension.mbse.action.osgi.spi.jet.JtConsumer;
 import io.zerows.extension.mbse.action.uca.tunnel.AdaptorChannel;
 
@@ -20,14 +20,14 @@ class JtType {
     private static Class<?> toWorker(final Supplier<String> supplier) {
         final String workerStr = supplier.get();
         final Class<?> clazz = Ut.clazz(workerStr, JtConstant.COMPONENT_DEFAULT_WORKER);
-        FnZero.out(AbstractVerticle.class != clazz.getSuperclass(), _500WorkerSpecException.class, JtRoute.class, clazz);
+        Fn.jvmKo(!AbstractVerticle.class.isAssignableFrom(clazz.getSuperclass()), _80404Exception500WorkerSpec.class, clazz);
         return clazz;
     }
 
     private static Class<?> toConsumer(final Supplier<String> supplier) {
         final String consumerStr = supplier.get();
         final Class<?> clazz = Ut.clazz(consumerStr, JtConstant.COMPONENT_DEFAULT_CONSUMER);
-        FnZero.out(!Ut.isImplement(clazz, JtConsumer.class), _500ConsumerSpecException.class, JtRoute.class, clazz);
+        Fn.jvmKo(!Ut.isImplement(clazz, JtConsumer.class), _80405Exception500ConsumerSpec.class, clazz);
         return clazz;
     }
 
