@@ -1,18 +1,18 @@
 package io.zerows.core.web.model.uca.bridge;
 
+import io.r2mo.function.Fn;
 import io.reactivex.rxjava3.core.Observable;
 import io.zerows.boot.enums.VertxComponent;
 import io.zerows.core.annotations.Address;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.FnZero;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.model.atom.Receipt;
 import io.zerows.core.web.model.atom.action.OJointAction;
 import io.zerows.core.web.model.eon.em.EmAction;
-import io.zerows.core.web.model.exception.BootAddressWrongException;
 import io.zerows.core.web.model.store.OCacheJoint;
 import io.zerows.core.web.model.util.Anno;
+import io.zerows.epoch.mature.exception._40012Exception500AddressWrong;
 import io.zerows.module.metadata.store.OCacheClass;
 
 import java.lang.annotation.Annotation;
@@ -60,9 +60,7 @@ public class AeonBridge {
         final Annotation annotation = method.getDeclaredAnnotation(Address.class);
         final String address = Ut.invoke(annotation, KName.VALUE);
         // 2. Ensure address incoming.
-        FnZero.outBoot(!ADDRESS.contains(address), LOGGER,
-            BootAddressWrongException.class,
-            AeonBridge.class, address, clazz, method);
+        Fn.jvmKo(!ADDRESS.contains(address), _40012Exception500AddressWrong.class, address, clazz, method);
 
 
         // 访问已扫描缓存

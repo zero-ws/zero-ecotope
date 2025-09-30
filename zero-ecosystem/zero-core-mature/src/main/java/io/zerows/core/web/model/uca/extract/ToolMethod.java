@@ -1,14 +1,15 @@
 package io.zerows.core.web.model.uca.extract;
 
-import io.zerows.core.fn.FnZero;
-import io.zerows.core.uca.log.Annal;
+import io.r2mo.function.Fn;
 import io.vertx.core.http.HttpMethod;
-import io.zerows.core.web.model.exception.BootMethodNullException;
+import io.zerows.core.uca.log.Annal;
+import io.zerows.epoch.mature.exception._40007Exception500MethodNull;
 import jakarta.ws.rs.*;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -35,8 +36,7 @@ public class ToolMethod {
     @SuppressWarnings("all")
     public static HttpMethod resolve(final Method method) {
         // 1. Method checking.
-        FnZero.outBoot(null == method, LOGGER,
-            BootMethodNullException.class, ToolMethod.class);
+        Fn.jvmKo(Objects.isNull(method), _40007Exception500MethodNull.class);
         final Annotation[] annotations = method.getDeclaredAnnotations();
         // 2. Method ignore
         HttpMethod result = null;

@@ -26,8 +26,8 @@ public class SockExtractor implements Extractor<Set<Remind>> {
     @Override
     public Set<Remind> extract(final Class<?> clazz) {
         // 1. Class verify
-        ToolVerifier.noArg(clazz, this.getClass());
-        ToolVerifier.modifier(clazz, this.getClass());
+        ToolVerifier.noArg(clazz);
+        ToolVerifier.modifier(clazz);
         // 2. Scan method to find @WebSocket
         final Set<Remind> websockets = new HashSet<>();
         final Method[] methods = clazz.getDeclaredMethods();

@@ -7,6 +7,17 @@ import io.r2mo.vertx.common.exception.VertxE;
  * @author lang : 2025-09-30
  */
 interface ERR {
+    VertxE _40001 = VertxE.of(40001).state(HttpResponseStatus.INTERNAL_SERVER_ERROR);
+    VertxE _40002 = VertxE.of(40002).state(HttpResponseStatus.INTERNAL_SERVER_ERROR);
+    VertxE _40008 = VertxE.of(40008).state(HttpResponseStatus.INTERNAL_SERVER_ERROR);
+    VertxE _40013 = VertxE.of(40013).state(HttpResponseStatus.INTERNAL_SERVER_ERROR);
+    VertxE _40014 = VertxE.of(40014).state(HttpResponseStatus.INTERNAL_SERVER_ERROR);
+    VertxE _40016 = VertxE.of(40016).state(HttpResponseStatus.INTERNAL_SERVER_ERROR);
+    VertxE _40029 = VertxE.of(40029).state(HttpResponseStatus.INTERNAL_SERVER_ERROR);
+    VertxE _40030 = VertxE.of(40030).state(HttpResponseStatus.INTERNAL_SERVER_ERROR);
+    VertxE _40037 = VertxE.of(40037).state(HttpResponseStatus.INTERNAL_SERVER_ERROR);
+    VertxE _40042 = VertxE.of(40042).state(HttpResponseStatus.INTERNAL_SERVER_ERROR);
+    // Web 类型
     VertxE _60002 = VertxE.of(-60002).state(HttpResponseStatus.INTERNAL_SERVER_ERROR);
     VertxE _60003 = VertxE.of(-60003).state(HttpResponseStatus.INTERNAL_SERVER_ERROR);
     VertxE _60052 = VertxE.of(-60052).state(HttpResponseStatus.LENGTH_REQUIRED);

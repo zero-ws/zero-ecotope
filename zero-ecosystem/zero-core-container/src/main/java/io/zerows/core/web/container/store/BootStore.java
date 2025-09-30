@@ -1,16 +1,16 @@
 package io.zerows.core.web.container.store;
 
+import io.r2mo.function.Fn;
+import io.r2mo.vertx.common.exception.VertxBootException;
 import io.vertx.core.json.JsonObject;
 import io.zerows.ams.constant.em.EmApp;
 import io.zerows.core.annotations.Up;
 import io.zerows.core.constant.configure.YmlCore;
-import io.zerows.core.exception.BootingException;
-import io.zerows.core.fn.FnZero;
 import io.zerows.core.running.boot.KBoot;
 import io.zerows.core.web.container.eon.em.FeatureMark;
-import io.zerows.core.web.container.exception.BootUpClassArgsException;
-import io.zerows.core.web.container.exception.BootUpClassInvalidException;
 import io.zerows.core.web.model.util.Anno;
+import io.zerows.epoch.container.exception._40001Exception500UpClassArgs;
+import io.zerows.epoch.container.exception._40002Exception500UpClassInvalid;
 import io.zerows.module.cloud.util.Ho;
 import io.zerows.module.metadata.store.OZeroStore;
 import io.zerows.specification.configuration.HBoot;
@@ -79,11 +79,11 @@ public class BootStore implements HStation {
      */
     private static void ensure(final Class<?> clazz) {
         // Step 1
-        FnZero.out(Objects.isNull(clazz), BootUpClassArgsException.class, BootStore.class);
+        Fn.jvmKo(Objects.isNull(clazz), _40001Exception500UpClassArgs.class);
         // Step 2
         STORE_ANNO.putAll(Anno.get(clazz));
         if (!STORE_ANNO.containsKey(Up.class.getName())) {
-            final BootingException warning = new BootUpClassInvalidException(BootStore.class, clazz.getName());
+            final VertxBootException warning = new _40002Exception500UpClassInvalid(clazz);
             Ho.LOG.Env.info(BootStore.class, warning.getMessage());
         }
     }

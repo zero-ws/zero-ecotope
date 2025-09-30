@@ -1,21 +1,22 @@
 package io.zerows.core.web.container.uca.routing;
 
-import io.zerows.core.fn.FnZero;
+import io.r2mo.function.Fn;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.core.util.Ut;
-import io.zerows.core.web.container.exception.BootAnnotationRepeatException;
-import io.zerows.core.web.container.exception.BootEventActionNoneException;
-import io.zerows.core.web.container.exception.BootParamAnnotationException;
 import io.zerows.core.web.io.annotations.BodyParam;
 import io.zerows.core.web.io.annotations.StreamParam;
 import io.zerows.core.web.io.uca.request.argument.Filler;
 import io.zerows.core.web.model.atom.Event;
+import io.zerows.epoch.container.exception._40008Exception500EventActionNone;
+import io.zerows.epoch.container.exception._40029Exception500AnnotationRepeat;
+import io.zerows.epoch.container.exception._40030Exception500ParamAnnotation;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Verifier {
@@ -25,8 +26,7 @@ public class Verifier {
     @SuppressWarnings("all")
     public static void verify(final Event event) {
         final Method method = event.getAction();
-        FnZero.outBoot(null == method, LOGGER, BootEventActionNoneException.class,
-            Verifier.class, event);
+        Fn.jvmKo(Objects.isNull(method), _40008Exception500EventActionNone.class, event);
         /* Specification **/
         verify(method, BodyParam.class);
         verify(method, StreamParam.class);
@@ -46,8 +46,7 @@ public class Verifier {
         });
         final int occurs = integer.get();
 
-        FnZero.outBoot(1 < occurs, LOGGER, BootAnnotationRepeatException.class,
-            Verifier.class, method.getName(), annoCls, occurs);
+        Fn.jvmKo(1 < occurs, _40029Exception500AnnotationRepeat.class, method, annoCls, occurs);
     }
 
     public static void verify(final Parameter parameter) {
@@ -57,7 +56,6 @@ public class Verifier {
             .toList();
 
         final int multi = annotationList.size();
-        FnZero.outBoot(1 < multi, LOGGER, BootParamAnnotationException.class,
-            Verifier.class, parameter.getName(), multi);
+        Fn.jvmKo(1 < multi, _40030Exception500ParamAnnotation.class, parameter.getName(), multi);
     }
 }

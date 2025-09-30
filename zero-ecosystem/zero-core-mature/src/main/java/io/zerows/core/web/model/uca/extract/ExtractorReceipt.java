@@ -17,8 +17,8 @@ public class ExtractorReceipt implements Extractor<Set<Receipt>> {
     @Override
     public Set<Receipt> extract(final Class<?> clazz) {
         // 1. Class verify
-        ToolVerifier.noArg(clazz, this.getClass());
-        ToolVerifier.modifier(clazz, this.getClass());
+        ToolVerifier.noArg(clazz);
+        ToolVerifier.modifier(clazz);
         // 2. Scan method to find @Address
         final Set<Receipt> receipts = new HashSet<>();
         final Method[] methods = clazz.getDeclaredMethods();

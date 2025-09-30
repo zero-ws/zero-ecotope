@@ -1,14 +1,15 @@
 package io.zerows.core.web.model.uca.extract;
 
+import io.r2mo.function.Fn;
 import io.zerows.ams.constant.VString;
 import io.zerows.ams.constant.VValue;
-import io.zerows.core.fn.FnZero;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.core.util.Ut;
-import io.zerows.core.web.model.exception.BootPathAnnoEmptyException;
+import io.zerows.epoch.mature.exception._40006Exception500PathAnnoEmpty;
 import io.zerows.module.metadata.uca.environment.DevEnv;
 import jakarta.ws.rs.Path;
 
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -29,9 +30,8 @@ class ToolPath {
      * @return normalized uri
      */
     public static String resolve(final Path path) {
-        FnZero.outBoot(null == path, LOGGER,
-            BootPathAnnoEmptyException.class, ToolPath.class);
         // Calculate single path
+        Fn.jvmKo(Objects.isNull(path), _40006Exception500PathAnnoEmpty.class);
         return resolve(path, null);
     }
 
@@ -45,8 +45,7 @@ class ToolPath {
      */
     @SuppressWarnings("all")
     public static String resolve(final Path path, final String root) {
-        FnZero.outBoot(null == path, LOGGER,
-            BootPathAnnoEmptyException.class, ToolPath.class);
+        Fn.jvmKo(Objects.isNull(path), _40006Exception500PathAnnoEmpty.class);
         if (Ut.isNil(root)) {
             return calculate(path(path.value()));
         }

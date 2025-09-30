@@ -1,17 +1,17 @@
 package io.zerows.core.web.model.uca.extract;
 
+import io.r2mo.function.Fn;
 import io.reactivex.rxjava3.core.Observable;
 import io.vertx.core.http.HttpMethod;
 import io.zerows.core.annotations.Adjust;
 import io.zerows.core.annotations.Codex;
 import io.zerows.core.annotations.EndPoint;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.FnZero;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.model.atom.Event;
-import io.zerows.core.web.model.exception.BootCodexMoreException;
-import io.zerows.core.web.model.exception.BootEventSourceException;
+import io.zerows.epoch.mature.exception._40005Exception500EventSource;
+import io.zerows.epoch.mature.exception._40036Exception500CodexMore;
 import jakarta.ws.rs.Path;
 
 import java.lang.annotation.Annotation;
@@ -54,12 +54,12 @@ public class ExtractorEvent implements Extractor<Set<Event>> {
         // Check basic specification: No Arg Constructor
         if (!clazz.isInterface()) {
             // Class direct.
-            ToolVerifier.noArg(clazz, this.getClass());
+            ToolVerifier.noArg(clazz);
         }
-        ToolVerifier.modifier(clazz, this.getClass());
+        ToolVerifier.modifier(clazz);
         // Event Source Checking
         if (!clazz.isAnnotationPresent(EndPoint.class)) {
-            throw new BootEventSourceException(this.getClass(), clazz.getName());
+            throw new _40005Exception500EventSource(clazz);
         }
     }
 
@@ -76,9 +76,7 @@ public class ExtractorEvent implements Extractor<Set<Event>> {
             .map(item -> item.stream().map(Annotation::annotationType).collect(Collectors.toList()))
             .filter(item -> item.contains(Codex.class))
             .count().blockingGet();
-        FnZero.outBoot(methods.length < counter, LOGGER,
-            BootCodexMoreException.class,
-            this.getClass(), clazz);
+        Fn.jvmKo(methods.length < counter, _40036Exception500CodexMore.class, clazz);
         // 2.Build Set
         events.addAll(Arrays.stream(methods).filter(ToolMethod::isValid)
             .map(item -> this.extract(item, root))

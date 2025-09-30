@@ -1,13 +1,12 @@
 package io.zerows.core.web.model.uca.scan;
 
+import io.r2mo.function.Fn;
 import io.reactivex.rxjava3.core.Observable;
 import io.zerows.core.annotations.EndPoint;
 import io.zerows.core.annotations.Ipc;
-import io.zerows.core.fn.FnZero;
-import io.zerows.core.uca.log.Annal;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.model.commune.Envelop;
-import io.zerows.core.web.model.exception.*;
+import io.zerows.epoch.mature.exception.*;
 import io.zerows.module.metadata.zdk.uca.Inquirer;
 
 import java.lang.annotation.Annotation;
@@ -20,8 +19,6 @@ import java.util.concurrent.ConcurrentMap;
  * This class is for @Ipc and @Address must be in @Queue class instead of other specification.
  */
 public class InquirerIpc implements Inquirer<ConcurrentMap<String, Method>> {
-
-    private static final Annal LOGGER = Annal.get(InquirerIpc.class);
 
     /**
      * @param classes all classes must be annotated with @Queue
@@ -60,17 +57,14 @@ public class InquirerIpc implements Inquirer<ConcurrentMap<String, Method>> {
      * @return Whether this method is valid
      */
     private Method ensureSpec(final Method method) {
-        FnZero.outBoot(Ut.isVoid(method.getReturnType()), LOGGER,
-            BootIpcMethodReturnException.class, this.getClass(),
-            method);
+        Fn.jvmKo(Ut.isVoid(method.getReturnType()), _40044Exception500IpcReturn.class, method);
         final Annotation annotation = method.getAnnotation(Ipc.class);
         final String value = Ut.invoke(annotation, "value");
         if (!Ut.isNil(value)) {
             // TypedArgument specification: Non Start Node
             // This specification is only for continue node
             final Class<?>[] argTypes = method.getParameterTypes();
-            FnZero.outBoot(1 != argTypes.length || Envelop.class != argTypes[0], LOGGER,
-                BootIpcMethodArgException.class, this.getClass(), method);
+            Fn.jvmKo(1 != argTypes.length || Envelop.class != argTypes[0], _40046Exception500IpcArgument.class, method);
         }
         return method;
     }
@@ -92,8 +86,7 @@ public class InquirerIpc implements Inquirer<ConcurrentMap<String, Method>> {
                 .filter(clazz::isAssignableFrom)
                 .count().blockingGet();
             // If counter == 0, zero system disable this definition
-            FnZero.outBoot(0 == counter, LOGGER,
-                BootRpcAgentAbsenceException.class, this.getClass(), clazz);
+            Fn.jvmKo(0 == counter, _40048Exception500RpcAgentAbsence.class, clazz);
         }
         return method;
     }
@@ -112,16 +105,12 @@ public class InquirerIpc implements Inquirer<ConcurrentMap<String, Method>> {
         if (Ut.isNil(to) && Ut.isNil(name)) {
             // If ( to is null and name is null, value must be required, or the system do not know the direction
             final String from = Ut.invoke(annotation, "value");
-            FnZero.outBoot(Ut.isNil(from), this.logger(),
-                BootUnknownDirectionException.class, this.getClass(),
-                method);
+            Fn.jvmKo(Ut.isNil(from), _40045Exception500IpcDirection.class, method);
             // Passed validation.
             return method;
         }
         // to and name must not be null
-        FnZero.outBoot(Ut.isNil(to) || Ut.isNil(name), LOGGER,
-            BootIpcMethodTargetException.class, this.getClass(),
-            method, to, name);
+        Fn.jvmKo(Ut.isNil(to) || Ut.isNil(name), _40043Exception500IpcTarget.class, method, to, name);
         return method;
     }
 }

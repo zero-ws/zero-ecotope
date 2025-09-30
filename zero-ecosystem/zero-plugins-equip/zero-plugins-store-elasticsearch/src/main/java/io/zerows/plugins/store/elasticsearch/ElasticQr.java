@@ -1,11 +1,11 @@
 package io.zerows.plugins.store.elasticsearch;
 
-import io.zerows.core.fn.FnZero;
-import io.zerows.core.uca.log.Annal;
+import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.plugins.store.elasticsearch.exception._404IndexNameMissingExceptionn;
-import io.zerows.plugins.store.elasticsearch.exception._404SearchTextMissingExceptionn;
+import io.zerows.core.uca.log.Annal;
+import io.zerows.plugins.store.elasticsearch.exception._20007Exception404MissingIndexName;
+import io.zerows.plugins.store.elasticsearch.exception._20008Exception404MissingSearchText;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
@@ -87,7 +87,7 @@ class ElasticQr {
     }
 
     private void paramRequired(final JsonObject params) {
-        FnZero.outWeb(!params.containsKey("index"), _404IndexNameMissingExceptionn.class, this.getClass());
-        FnZero.outWeb(!params.containsKey("searchText"), _404SearchTextMissingExceptionn.class, this.getClass());
+        Fn.jvmKo(!params.containsKey("index"), _20007Exception404MissingIndexName.class, this.getClass());
+        Fn.jvmKo(!params.containsKey("searchText"), _20008Exception404MissingSearchText.class, this.getClass());
     }
 }

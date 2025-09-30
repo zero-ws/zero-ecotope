@@ -1,20 +1,19 @@
 package io.zerows.core.web.model.zdk.web;
 
-import io.zerows.core.fn.FnZero;
-import io.zerows.core.uca.log.Annal;
+import io.r2mo.function.Fn;
 import io.vertx.core.http.Cookie;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.http.HttpServerResponse;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.Session;
-import io.zerows.core.web.model.exception.BootFilterContextException;
+import io.zerows.core.uca.log.Annal;
+import io.zerows.epoch.mature.exception._40051Exception500FilterContext;
 
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public abstract class HttpFilter implements Filter {
-
-    private transient final Annal logger = Annal.get(this.getClass());
     private transient RoutingContext context;
 
     @Override
@@ -57,6 +56,6 @@ public abstract class HttpFilter implements Filter {
     }
 
     public void init() {
-        FnZero.outBoot(null == this.context, this.logger, BootFilterContextException.class, this.getClass());
+        Fn.jvmKo(Objects.isNull(this.context), _40051Exception500FilterContext.class);
     }
 }

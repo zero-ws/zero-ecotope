@@ -1,23 +1,24 @@
 package io.zerows.core.web.container.uca.gateway;
 
-import io.zerows.ams.constant.VValue;
-import io.zerows.core.fn.FnZero;
-import io.zerows.core.uca.log.Annal;
+import io.r2mo.function.Fn;
 import io.vertx.core.eventbus.Message;
 import io.vertx.ext.web.RoutingContext;
+import io.zerows.ams.constant.VValue;
 import io.zerows.core.annotations.Address;
+import io.zerows.core.uca.log.Annal;
 import io.zerows.core.util.Ut;
-import io.zerows.core.web.container.exception.BootReturnTypeException;
-import io.zerows.core.web.container.exception.BootWorkerMissingException;
 import io.zerows.core.web.container.uca.mode.AimAsync;
 import io.zerows.core.web.container.uca.mode.AimOneWay;
 import io.zerows.core.web.io.zdk.Aim;
 import io.zerows.core.web.model.atom.Event;
 import io.zerows.core.web.model.atom.Receipt;
 import io.zerows.core.web.model.store.OCacheActor;
+import io.zerows.epoch.container.exception._40013Exception500ReturnType;
+import io.zerows.epoch.container.exception._40014Exception500WorkerMissing;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -49,8 +50,7 @@ class DifferEvent implements Differ<RoutingContext> {
             // Exception because this method must has return type to
             // send message to event bus. It means that it require
             // return types.
-            FnZero.outBoot(true, LOGGER, BootReturnTypeException.class,
-                this.getClass(), method);
+            throw new _40013Exception500ReturnType(method);
         } else {
             final Class<?> replierType = replier.getReturnType();
             if (Void.class == replierType || void.class == replierType) {
@@ -95,13 +95,11 @@ class DifferEvent implements Differ<RoutingContext> {
 
         final Method method;
         // Get null found throw exception.
-        FnZero.outBoot(null == found, LOGGER, BootWorkerMissingException.class,
-            this.getClass(), address);
+        Fn.jvmKo(Objects.isNull(found), _40014Exception500WorkerMissing.class, address);
         /* Above sentence will throw exception when found is null */
         method = found.getMethod();
 
-        FnZero.outBoot(null == method, LOGGER, BootWorkerMissingException.class,
-            this.getClass(), address);
+        Fn.jvmKo(Objects.isNull(method), _40014Exception500WorkerMissing.class, address);
         return method;
     }
 

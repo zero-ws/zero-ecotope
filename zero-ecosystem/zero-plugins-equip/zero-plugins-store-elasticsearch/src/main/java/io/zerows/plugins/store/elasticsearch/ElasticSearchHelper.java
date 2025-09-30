@@ -1,13 +1,13 @@
 package io.zerows.plugins.store.elasticsearch;
 
+import io.r2mo.function.Fn;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.configure.YmlCore;
-import io.zerows.core.fn.FnZero;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.core.util.Ut;
-import io.zerows.plugins.store.elasticsearch.exception._404ConfigurationMissingExceptionn;
+import io.zerows.plugins.store.elasticsearch.exception._20006Exception404MissingConfiguration;
 import org.apache.http.HttpHost;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
@@ -57,7 +57,7 @@ public class ElasticSearchHelper {
     }
 
     RestHighLevelClient getClient(final JsonObject options) {
-        FnZero.outWeb(Ut.isNil(options), _404ConfigurationMissingExceptionn.class, this.getClass());
+        Fn.jvmKo(Ut.isNil(options), _20006Exception404MissingConfiguration.class, this.getClass().getName());
         final CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
         credentialsProvider.setCredentials(AuthScope.ANY,
             new UsernamePasswordCredentials(

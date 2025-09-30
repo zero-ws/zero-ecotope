@@ -1,11 +1,11 @@
 package io.vertx.boot.launcher;
 
+import io.r2mo.function.Fn;
 import io.vertx.core.Vertx;
-import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
-import io.zerows.core.web.container.exception.BootRpcEnvironmentException;
 import io.zerows.core.web.container.store.BootStore;
 import io.zerows.core.web.invocation.micro.uddi.UddiRegistry;
+import io.zerows.epoch.container.exception._40037Exception500RpcEnvironment;
 import io.zerows.specification.access.HLauncher;
 import io.zerows.specification.configuration.HBoot;
 import io.zerows.specification.configuration.HConfig;
@@ -38,7 +38,7 @@ public class MicroLauncher implements HLauncher<Vertx> {
      */
     @Override
     public <T extends HConfig> void start(final HConfig.HOn<T> on, final Consumer<Vertx> server) {
-        FnZero.outBoot(!STORE.isEtcd(), BootRpcEnvironmentException.class, this.getClass());
+        Fn.jvmKo(!STORE.isEtcd(), _40037Exception500RpcEnvironment.class);
         // 初始化微服务环境
         final UddiRegistry registry = Ut.singleton(UddiRegistry.class);
         final HBoot boot = STORE.boot();

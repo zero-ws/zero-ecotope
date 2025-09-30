@@ -1,18 +1,18 @@
 package io.zerows.core.web.model.uca.scan;
 
+import io.r2mo.function.Fn;
 import io.reactivex.rxjava3.core.Observable;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.http.HttpServerResponse;
 import io.zerows.ams.constant.VValue;
 import io.zerows.core.annotations.Ordered;
 import io.zerows.core.constant.KWeb;
-import io.zerows.core.fn.FnZero;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.model.atom.Event;
-import io.zerows.core.web.model.exception.BootFilterOrderException;
-import io.zerows.core.web.model.exception.BootFilterSpecificationException;
 import io.zerows.core.web.model.zdk.web.Filter;
+import io.zerows.epoch.mature.exception._40052Exception500FilterSpecification;
+import io.zerows.epoch.mature.exception._40053Exception500FilterOrder;
 import io.zerows.module.metadata.zdk.uca.Inquirer;
 
 import javax.servlet.annotation.WebFilter;
@@ -46,8 +46,7 @@ public class InquirerFilter implements Inquirer<ConcurrentMap<String, Set<Event>
     }
 
     private Class<?> ensure(final Class<?> clazz) {
-        FnZero.outBoot(!Filter.class.isAssignableFrom(clazz), LOGGER,
-            BootFilterSpecificationException.class, this.getClass(), clazz);
+        Fn.jvmKo(!Filter.class.isAssignableFrom(clazz), _40052Exception500FilterSpecification.class, clazz);
         return clazz;
     }
 
@@ -77,8 +76,7 @@ public class InquirerFilter implements Inquirer<ConcurrentMap<String, Set<Event>
         if (null != annotation) {
             final Integer setted = Ut.invoke(annotation, "value");
             // Order specification
-            FnZero.outBoot(setted < 0, LOGGER,
-                BootFilterOrderException.class, this.getClass(), clazz);
+            Fn.jvmKo(setted < 0, _40053Exception500FilterOrder.class, clazz);
             order = order + setted;
         }
         event.setOrder(order);

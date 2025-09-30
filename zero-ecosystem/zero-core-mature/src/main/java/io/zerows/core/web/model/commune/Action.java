@@ -9,7 +9,7 @@ import io.zerows.core.constant.KName;
 import io.zerows.core.exception.WebException;
 import io.zerows.core.exception.web._500InternalServerException;
 import io.zerows.core.util.Ut;
-import io.zerows.core.web.model.exception._000HttpWebException;
+import io.zerows.epoch.mature.exception._60049Exception500HttpWeb;
 import io.zerows.module.security.zdk.authority.Acl;
 
 import java.util.Objects;
@@ -74,7 +74,7 @@ class Action {
                 final Throwable actual = ex.getCause();
                 if (Objects.isNull(actual)) {
                     // No Cause
-                    return Envelop.failure(new _000HttpWebException(Envelop.class, (HttpException) ex));
+                    return Envelop.failure(new _60049Exception500HttpWeb((HttpException) ex));
                 } else {
                     /*
                      * 1. Loop to search until `WebException`
