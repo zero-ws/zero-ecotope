@@ -3,32 +3,32 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>zero-ecosystem</artifactId>
+        <artifactId>zero-entry</artifactId>
         <groupId>io.zerows</groupId>
         <version>1.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>zero-entry-facade</artifactId>
+    <artifactId>zero-entry-standalone</artifactId>
     <name>✅️ - Zero::Entry::Facade</name>
     <dependencies>
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-core-testing</artifactId>
+            <artifactId>zero-epoch-adhoc</artifactId>
             <scope>test</scope>
         </dependency>
         <!-- New -->
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-core-runtime</artifactId>
-        </dependency>
-        <!-- Package keep: io.vertx.up.unity -->
-        <dependency>
-            <groupId>io.zerows</groupId>
-            <artifactId>zero-core-unity</artifactId>
+            <artifactId>zero-epoch-use</artifactId>
         </dependency>
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-core-container</artifactId>
+            <artifactId>zero-epoch-execution</artifactId>
+        </dependency>
+        <!-- Zero Web Container -->
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-epoch-bootstrap</artifactId>
         </dependency>
 
 

@@ -8,12 +8,12 @@
         <artifactId>zero-ecosystem</artifactId>
         <version>1.0.0</version>
     </parent>
-    <artifactId>zero-core-runtime</artifactId>
-    <name>Zero::⚗️ - Core::Runtime</name>
+    <artifactId>zero-epoch-use</artifactId>
+    <name>Zero::⚗️ - Epoch::Use</name>
     <dependencies>
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-core-ams</artifactId>
+            <artifactId>zero-epoch</artifactId>
         </dependency>
 
 

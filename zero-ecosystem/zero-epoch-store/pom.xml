@@ -9,12 +9,12 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>zero-core-database</artifactId>
-    <name>Zero::⚗️ - Core::Database</name>
+    <artifactId>zero-epoch-store</artifactId>
+    <name>Zero::⚗️ - Epoch::Store</name>
     <dependencies>
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-core-runtime</artifactId>
+            <artifactId>zero-epoch-use</artifactId>
         </dependency>
 
         <dependency>

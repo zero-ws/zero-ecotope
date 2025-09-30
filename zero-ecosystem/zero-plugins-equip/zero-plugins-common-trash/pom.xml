@@ -15,7 +15,7 @@
     <dependencies>
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-core-database</artifactId>
+            <artifactId>zero-epoch-store</artifactId>
         </dependency>
     </dependencies>
 </project>

@@ -9,12 +9,12 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>zero-core-unity</artifactId>
-    <name>Zero::⚗️ - Core::Unity</name>
+    <artifactId>zero-epoch-execution</artifactId>
+    <name>Zero::⚗️ - Epoch::Execution</name>
     <dependencies>
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-core-web</artifactId>
+            <artifactId>zero-epoch-focus</artifactId>
         </dependency>
     </dependencies>
 </project>

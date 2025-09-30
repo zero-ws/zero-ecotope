@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://maven.apache.org/POM/4.0.0"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
@@ -9,18 +9,12 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>zero-core-container</artifactId>
-    <name>Zero::⚗️ - Core::Container</name>
+    <artifactId>zero-overlay</artifactId>
+    <name>Zero::Overlay / R2MO 🔗</name>
     <dependencies>
-        <!-- Dependency -->
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-core-unity</artifactId>
-        </dependency>
-        <!-- Health Checking -->
-        <dependency>
-            <groupId>io.vertx</groupId>
-            <artifactId>vertx-health-check</artifactId>
+            <artifactId>r2mo-boot-vertx</artifactId>
         </dependency>
     </dependencies>
 </project>

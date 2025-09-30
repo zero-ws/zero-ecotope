@@ -26,49 +26,49 @@
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-connect</artifactId>
+                <artifactId>zero-overlay</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <!-- ================= 核心容器 ================== -->
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-core-ams</artifactId>
+                <artifactId>zero-epoch</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-core-runtime</artifactId>
+                <artifactId>zero-epoch-use</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-core-database</artifactId>
+                <artifactId>zero-epoch-store</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-core-mature</artifactId>
+                <artifactId>zero-epoch-modeling</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-core-web</artifactId>
+                <artifactId>zero-epoch-focus</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-core-testing</artifactId>
+                <artifactId>zero-epoch-adhoc</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-core-unity</artifactId>
+                <artifactId>zero-epoch-execution</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <!-- Zero Web Container -->
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-core-container</artifactId>
+                <artifactId>zero-epoch-bootstrap</artifactId>
                 <version>${zero.version}</version>
             </dependency>
 
@@ -76,7 +76,7 @@
             <!-- ================= 入口 ================== -->
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-entry-facade</artifactId>
+                <artifactId>zero-entry-standalone</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <!-- ================= 静态插件 ================== -->

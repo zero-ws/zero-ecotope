@@ -3,7 +3,7 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>zero-ecosystem</artifactId>
+        <artifactId>zero-entry</artifactId>
         <groupId>io.zerows</groupId>
         <version>1.0.0</version>
     </parent>
@@ -24,7 +24,7 @@
         <!-- Switch to Up -->
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-entry-facade</artifactId>
+            <artifactId>zero-entry-standalone</artifactId>
         </dependency>
     </dependencies>
     <dependencyManagement>

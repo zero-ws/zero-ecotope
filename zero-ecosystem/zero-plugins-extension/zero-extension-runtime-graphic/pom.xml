@@ -24,7 +24,7 @@
             <exclusions>
                 <exclusion>
                     <groupId>io.zerows</groupId>
-                    <artifactId>zero-entry-facade</artifactId>
+                    <artifactId>zero-entry-standalone</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>

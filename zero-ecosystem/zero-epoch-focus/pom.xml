@@ -9,22 +9,23 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>zero-core-testing</artifactId>
-    <name>Zero::⚗️ - Core::💜 - Testing</name>
+    <artifactId>zero-epoch-focus</artifactId>
+    <name>Zero::⚗️ - Epoch::Focus</name>
     <dependencies>
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-core-database</artifactId>
+            <artifactId>zero-epoch-modeling</artifactId>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator -->
         <dependency>
-            <groupId>io.zerows</groupId>
-            <artifactId>zero-core-runtime</artifactId>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>8.0.3.Final</version>
         </dependency>
-
-        <!-- Unit Testing -->
+        <!-- EL -->
         <dependency>
-            <groupId>io.vertx</groupId>
-            <artifactId>vertx-unit</artifactId>
+            <groupId>org.glassfish</groupId>
+            <artifactId>jakarta.el</artifactId>
         </dependency>
     </dependencies>
 </project>

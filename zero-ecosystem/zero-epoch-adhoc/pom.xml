@@ -8,25 +8,23 @@
         <artifactId>zero-ecosystem</artifactId>
         <version>1.0.0</version>
     </parent>
-    <name>✅️ - Zero::Entry::Mini</name>
-    <artifactId>zero-entry-mini</artifactId>
+
+    <artifactId>zero-epoch-adhoc</artifactId>
+    <name>Zero::⚗️ - Epoch::💜 - Ad-Hoc</name>
     <dependencies>
         <dependency>
-            <groupId>io.netty</groupId>
-            <artifactId>netty-resolver-dns-native-macos</artifactId>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-epoch-store</artifactId>
         </dependency>
-        <!-- Switch to Up -->
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-entry-facade</artifactId>
+            <artifactId>zero-epoch-use</artifactId>
         </dependency>
-        <!-- Import Stack -->
+
+        <!-- Unit Testing -->
         <dependency>
-            <groupId>io.zerows</groupId>
-            <artifactId>zero-version</artifactId>
-            <version>${zero.version}</version>
-            <scope>import</scope>
-            <type>pom</type>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-unit</artifactId>
         </dependency>
     </dependencies>
 </project>

@@ -14,7 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-core-unity</artifactId>
+            <artifactId>zero-epoch-execution</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.poi</groupId>

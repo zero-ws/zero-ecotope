@@ -3,7 +3,7 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>zero-ecosystem</artifactId>
+        <artifactId>zero-entry</artifactId>
         <groupId>io.zerows</groupId>
         <version>1.0.0</version>
     </parent>
@@ -21,43 +21,43 @@
         <!-- 入口依赖 -->
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-entry-facade</artifactId>
+            <artifactId>zero-entry-standalone</artifactId>
             <version>${zero.version}</version>
         </dependency>
 
         <!-- ================= 核心容器 ================== -->
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-core-ams</artifactId>
+            <artifactId>zero-epoch</artifactId>
         </dependency>
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-core-runtime</artifactId>
+            <artifactId>zero-epoch-use</artifactId>
         </dependency>
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-core-database</artifactId>
+            <artifactId>zero-epoch-store</artifactId>
         </dependency>
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-core-mature</artifactId>
+            <artifactId>zero-epoch-modeling</artifactId>
         </dependency>
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-core-web</artifactId>
+            <artifactId>zero-epoch-focus</artifactId>
         </dependency>
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-core-testing</artifactId>
+            <artifactId>zero-epoch-adhoc</artifactId>
         </dependency>
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-core-unity</artifactId>
+            <artifactId>zero-epoch-execution</artifactId>
         </dependency>
         <!-- Zero Web Container -->
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-core-container</artifactId>
+            <artifactId>zero-epoch-bootstrap</artifactId>
         </dependency>
 
         <!-- ================= 静态插件 ================== -->

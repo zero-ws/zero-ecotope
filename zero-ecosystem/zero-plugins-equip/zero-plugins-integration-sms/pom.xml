@@ -13,7 +13,7 @@
     <dependencies>
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-core-runtime</artifactId>
+            <artifactId>zero-epoch-use</artifactId>
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.aliyun/aliyun-java-sdk-core -->
         <dependency>

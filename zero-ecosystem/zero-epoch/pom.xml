@@ -9,12 +9,12 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>zero-core-ams</artifactId>
-    <name>🧬 - Zero::Core::AMS</name>
+    <artifactId>zero-epoch</artifactId>
+    <name>🧬 - Zero::Epoch</name>
     <dependencies>
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-connect</artifactId>
+            <artifactId>zero-overlay</artifactId>
             <version>${zero.version}</version>
         </dependency>
         <!-- Vert.x -->

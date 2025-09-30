@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>io.zerows</groupId>
+        <artifactId>zero-entry</artifactId>
+        <version>1.0.0</version>
+    </parent>
+    <name>✅️ - Zero::Entry::Mini</name>
+    <artifactId>zero-entry-mini</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-resolver-dns-native-macos</artifactId>
+        </dependency>
+        <!-- Switch to Up -->
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-entry-standalone</artifactId>
+        </dependency>
+        <!-- Import Stack -->
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-version</artifactId>
+            <version>${zero.version}</version>
+            <scope>import</scope>
+            <type>pom</type>
+        </dependency>
+    </dependencies>
+</project>

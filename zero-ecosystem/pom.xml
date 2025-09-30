@@ -13,24 +13,21 @@
     <name>(POM) 📚️ - Zero::Ecosystem</name>
     <packaging>pom</packaging>
     <modules>
-        <module>zero-connect</module>
-        <module>zero-core-ams</module>
-        <module>zero-core-runtime</module>
-        <module>zero-core-database</module>
-        <module>zero-core-mature</module>
-        <module>zero-core-web</module>
+        <module>zero-overlay</module>
+        <module>zero-epoch</module>
+        <module>zero-epoch-use</module>
+        <module>zero-epoch-store</module>
+        <module>zero-epoch-modeling</module>
+        <module>zero-epoch-focus</module>
         <!-- 工具层 -->
-        <module>zero-core-unity</module>
-        <module>zero-core-container</module>
+        <module>zero-epoch-execution</module>
+        <module>zero-epoch-bootstrap</module>
         <!-- 测试 -->
-        <module>zero-core-testing</module>
+        <module>zero-epoch-adhoc</module>
         <module>zero-plugins-equip</module>
         <module>zero-plugins-extension</module>
         <!-- 入口 -->
-        <module>zero-entry-extension</module>
-        <module>zero-entry-facade</module>
-        <module>zero-entry-import</module>
-        <module>zero-entry-mini</module>
+        <module>zero-entry</module>
     </modules>
     <dependencyManagement>
         <dependencies>

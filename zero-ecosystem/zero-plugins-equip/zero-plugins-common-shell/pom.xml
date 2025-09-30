@@ -14,7 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-core-runtime</artifactId>
+            <artifactId>zero-epoch-use</artifactId>
         </dependency>
         <dependency>
             <groupId>commons-cli</groupId>

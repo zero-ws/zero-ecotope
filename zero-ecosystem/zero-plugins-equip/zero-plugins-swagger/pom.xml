@@ -23,7 +23,7 @@
         </dependency>
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-core-runtime</artifactId>
+            <artifactId>zero-epoch-use</artifactId>
         </dependency>
         <dependency>
             <groupId>io.swagger.core.v3</groupId>
