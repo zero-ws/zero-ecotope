@@ -1,5 +1,0 @@
-typed:
-  endpoint: STRING
-  config: JOBJECT
-  retry: JOBJECT
-  timeout: JOBJECT

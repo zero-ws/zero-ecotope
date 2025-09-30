@@ -1,1 +1,0 @@
-keytool -importkeystore -srckeystore keystore.jceks -destkeystore keystore.jceks -deststoretype pkcs12

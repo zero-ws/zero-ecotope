@@ -1,4 +1,0 @@
-typed:
-  period: INTEGER
-  maxPeriod: INTEGER
-  attempts: INTEGER

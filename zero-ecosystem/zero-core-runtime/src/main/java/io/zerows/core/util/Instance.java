@@ -1,12 +1,12 @@
 package io.zerows.core.util;
 
 import io.r2mo.function.Fn;
+import io.r2mo.vertx.common.exception.VertxBootException;
 import io.vertx.core.json.JsonObject;
 import io.zerows.ams.constant.VValue;
 import io.zerows.ams.util.HUt;
 import io.zerows.core.annotations.Contract;
-import io.zerows.core.exception.BootingException;
-import io.zerows.module.metadata.exception.BootDuplicatedImplException;
+import io.zerows.module.metadata.exception._40028Exception503DuplicatedImpl;
 import io.zerows.module.metadata.exception._60040Exception412ContractField;
 import io.zerows.module.metadata.store.OCacheClass;
 import org.slf4j.Logger;
@@ -91,7 +91,8 @@ final class Instance {
         final int size = filtered.size();
         // Non-Unique throw error out.
         if (VValue.ONE < size) {
-            final BootingException error = new BootDuplicatedImplException(Instance.class, interfaceCls);
+            // final BootingException error = new BootDuplicatedImplException(Instance.class, interfaceCls);
+            final VertxBootException error = new _40028Exception503DuplicatedImpl(interfaceCls);
             LOGGER.error("[Tool] Error occurs {}", error.getMessage());
             throw error;
         }

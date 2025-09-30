@@ -7,9 +7,9 @@ import io.zerows.common.app.KIntegration;
 import io.zerows.common.app.KIntegrationApi;
 import io.zerows.core.constant.KWeb;
 import io.zerows.core.util.Ut;
-import io.zerows.core.web.client.exception._500RequestConfigException;
-import io.zerows.core.web.client.exception._501HttpClientNullException;
-import io.zerows.core.web.client.exception._JexlExpressionException;
+import io.zerows.epoch.web.exception._60046Exception500RequestConfig;
+import io.zerows.epoch.web.exception._60047Exception501HttpClientNull;
+import io.zerows.module.metadata.exception._15002Exception500JexlExpression;
 import io.zerows.module.metadata.uca.logging.OLog;
 import jakarta.ws.rs.core.MediaType;
 import org.apache.http.HttpEntity;
@@ -72,13 +72,13 @@ public abstract class AbstractRotator implements Rotator {
              */
             try {
                 return request.getPath(params);
-            } catch (final _JexlExpressionException ex) {
+            } catch (final _15002Exception500JexlExpression ex) {
                 ex.printStackTrace();
-                throw new _500RequestConfigException(this.getClass(), request, params);
+                throw new _60046Exception500RequestConfig(request, params.encode());
             }
         } else {
             if (Ut.isNil(exprPath)) {
-                throw new _500RequestConfigException(this.getClass(), request, params);
+                throw new _60046Exception500RequestConfig(request, params.encode());
             } else {
                 /*
                  * No paring
@@ -137,7 +137,7 @@ public abstract class AbstractRotator implements Rotator {
 
     protected CloseableHttpClient client() {
         if (Objects.isNull(this.client)) {
-            throw new _501HttpClientNullException(this.getClass());
+            throw new _60047Exception501HttpClientNull();
         }
         return this.client;
     }

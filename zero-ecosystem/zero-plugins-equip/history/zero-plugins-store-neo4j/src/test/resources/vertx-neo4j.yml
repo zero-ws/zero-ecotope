@@ -1,6 +1,0 @@
-neo4j:
-  port: 7687
-  protocol: bolt
-  hostname: 0.0.0.0
-  username: neo4j
-  password: "******"

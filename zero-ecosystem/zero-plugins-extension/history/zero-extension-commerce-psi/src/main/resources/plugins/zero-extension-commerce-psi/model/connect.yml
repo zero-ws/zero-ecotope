@@ -1,9 +1,0 @@
-- dao: P_WH    # P_WH
-  unique:
-    - code
-    - sigma
-- dao: P_POS   # P_POS
-  unique:
-    - code
-    - whId
-    - sigma

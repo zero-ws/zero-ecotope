@@ -1,12 +1,10 @@
 package io.zerows.module.metadata.zdk.plugins;
 
+import io.r2mo.function.Fn;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.fn.FnZero;
-import io.zerows.core.util.Ut;
-import io.zerows.module.metadata.exception.BootDynamicKeyMissingException;
+import io.zerows.module.metadata.exception._10005Exception500PluginDynamic;
 import io.zerows.module.metadata.store.OZeroStore;
-import io.zerows.module.metadata.uca.logging.OLog;
 
 import java.io.Serializable;
 
@@ -16,8 +14,6 @@ import java.io.Serializable;
  * config: Configuration Data of third part.
  */
 public class InfixConfig implements Serializable {
-
-    private static final OLog LOGGER = Ut.Log.configure(InfixConfig.class);
 
     private static final Cc<String, InfixConfig> CC_CACHE = Cc.open();
 
@@ -29,10 +25,7 @@ public class InfixConfig implements Serializable {
 
     public InfixConfig(final String key, final String rule) {
         final JsonObject raw = OZeroStore.option(key);
-        // Check up exception for key
-        FnZero.outBoot(!OZeroStore.is(key),
-            LOGGER, BootDynamicKeyMissingException.class,
-            this.getClass(), key, raw);
+        Fn.jvmKo(!OZeroStore.is(key), _10005Exception500PluginDynamic.class, key, raw.encode());
 
         // Check up exception for JsonObject
         this.endpoint = raw.getString(KEY_ENDPOINT);
