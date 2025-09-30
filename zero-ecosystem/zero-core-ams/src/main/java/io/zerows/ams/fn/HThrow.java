@@ -1,13 +1,10 @@
 package io.zerows.ams.fn;
 
+import io.r2mo.typed.exception.WebException;
+import io.r2mo.typed.exception.web._500ServerInternalException;
 import io.vertx.core.Future;
 import io.zerows.ams.util.HUt;
-import io.zerows.core.exception.WebException;
-import io.zerows.core.exception.web._412ArgumentNullException;
-import io.zerows.core.exception.web._500InternalServerException;
 import io.zerows.core.running.HMacrocosm;
-import io.zerows.core.uca.log.Annal;
-import io.zerows.specification.atomic.HLogger;
 
 import java.util.Objects;
 import java.util.function.Function;
@@ -33,7 +30,7 @@ class HThrow {
         final WebException failure;
         if (Objects.isNull(error)) {
             // 异常为 null
-            failure = new _500InternalServerException(target, "Otherwise Web Error without Throwable!");
+            failure = new _500ServerInternalException("[ R2MO ] 其他 Web 异常没有传入 Throwable！");
         } else {
 
             final Boolean isDebug = HUt.envWith(HMacrocosm.DEV_JVM_STACK, Boolean.FALSE, Boolean.class);
@@ -45,68 +42,9 @@ class HThrow {
                 failure = (WebException) error;
             } else {
                 // 其他异常，做 WebException 封装
-                failure = new _500InternalServerException(target, error.getMessage());
+                failure = new _500ServerInternalException("[ R2MO ] 其他 Web 异常：" + error.getMessage());
             }
         }
         return Future.failedFuture(failure);
-    }
-
-    /*
-     * - WebException
-     */
-    static void out(final Class<?> errorCls, final Object... args) {
-        if (WebException.class == errorCls.getSuperclass()) {
-            final WebException error = HUt.instance(errorCls, args);
-            if (null != error) {
-                callerAt(error::caller, error::getMessage);
-                throw error;
-            }
-        }
-    }
-
-    static void outWeb(final Class<? extends WebException> webClass,
-                       final Object... args) {
-        final WebException error = HUt.instance(webClass, args);
-        if (null != error) {
-            callerAt(error::caller, error::getMessage);
-            throw error;
-        }
-    }
-
-    static void outWeb(final HLogger logger,
-                       final Class<? extends WebException> webClass,
-                       final Object... args) {
-        final WebException error = HUt.instance(webClass, args);
-        if (null != error) {
-            if (Objects.nonNull(logger)) {
-                logger.warn(error.getMessage());
-            }
-            throw error;
-        }
-    }
-
-    static <T> void outArg(final T condition, final Class<?> clazz, final String message) {
-        if (condition instanceof final Boolean check) {
-            // If boolean, condition = true, throw Error
-            if (check) {
-                outWeb(_412ArgumentNullException.class, clazz, message);
-            }
-        } else if (condition instanceof final String check) {
-            // If string, condition = empty or null, throw Error
-            if (HUt.isNil(check)) {
-                outWeb(_412ArgumentNullException.class, clazz, message);
-            }
-        } else if (Objects.isNull(condition)) {
-            // If object, condition = null, throw Error
-            outWeb(_412ArgumentNullException.class, clazz, message);
-        }
-    }
-
-    private static void callerAt(final Supplier<Class<?>> supplier, final Supplier<String> message) {
-        final Class<?> target = supplier.get();
-        if (null != target) {
-            final Annal logger = Annal.get(target);
-            logger.warn(message.get());
-        }
     }
 }

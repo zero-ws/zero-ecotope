@@ -1,8 +1,8 @@
 package io.zerows.core.uca.compare;
 
-import io.zerows.specification.modeling.metadata.HMetaField;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.specification.modeling.metadata.HMetaField;
 
 import java.math.BigDecimal;
 import java.time.Instant;

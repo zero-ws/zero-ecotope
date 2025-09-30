@@ -1,7 +1,7 @@
 package io.zerows.core.uca.log.internal;
 
-import io.zerows.core.uca.log.Annal;
 import io.zerows.ams.util.HUt;
+import io.zerows.core.uca.log.Annal;
 
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;

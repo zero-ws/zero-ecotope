@@ -1,6 +1,7 @@
 package io.zerows.core.web.io.zdk.mime;
 
-import io.zerows.core.exception.WebException;
+
+import io.r2mo.typed.exception.WebException;
 
 /**
  * # 「Co」Zero Solve

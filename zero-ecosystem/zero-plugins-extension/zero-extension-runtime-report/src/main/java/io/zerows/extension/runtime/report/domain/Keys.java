@@ -4,17 +4,8 @@
 package io.zerows.extension.runtime.report.domain;
 
 
-import io.zerows.extension.runtime.report.domain.tables.KpDataSet;
-import io.zerows.extension.runtime.report.domain.tables.KpDimension;
-import io.zerows.extension.runtime.report.domain.tables.KpFeature;
-import io.zerows.extension.runtime.report.domain.tables.KpReport;
-import io.zerows.extension.runtime.report.domain.tables.KpReportInstance;
-import io.zerows.extension.runtime.report.domain.tables.records.KpDataSetRecord;
-import io.zerows.extension.runtime.report.domain.tables.records.KpDimensionRecord;
-import io.zerows.extension.runtime.report.domain.tables.records.KpFeatureRecord;
-import io.zerows.extension.runtime.report.domain.tables.records.KpReportInstanceRecord;
-import io.zerows.extension.runtime.report.domain.tables.records.KpReportRecord;
-
+import io.zerows.extension.runtime.report.domain.tables.*;
+import io.zerows.extension.runtime.report.domain.tables.records.*;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.DSL;

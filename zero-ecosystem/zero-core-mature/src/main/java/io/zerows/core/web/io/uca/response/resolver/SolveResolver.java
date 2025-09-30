@@ -1,9 +1,9 @@
 package io.zerows.core.web.io.uca.response.resolver;
 
-import io.zerows.core.exception.web._500InternalServerException;
-import io.zerows.core.uca.log.Annal;
+import io.r2mo.typed.exception.web._500ServerInternalException;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.core.annotations.Contract;
+import io.zerows.core.uca.log.Annal;
 import io.zerows.core.web.io.zdk.mime.Resolver;
 import io.zerows.core.web.io.zdk.mime.Solve;
 import io.zerows.core.web.model.atom.Epsilon;
@@ -19,7 +19,7 @@ public class SolveResolver<T> implements Resolver<T> {
     @Override
     public Epsilon<T> resolve(final RoutingContext context, final Epsilon<T> income) {
         if (Objects.isNull(this.internalResolver)) {
-            throw new _500InternalServerException(this.getClass(), "Solve instance is null");
+            throw new _500ServerInternalException("[ R2MO ] Solve 实例为空");
         } else {
             // Default content from `context`
             final String content = context.body().asString();

@@ -1,8 +1,8 @@
 package io.zerows.core.uca.metadata;
 
+import io.vertx.core.json.JsonObject;
 import io.zerows.ams.constant.VName;
 import io.zerows.ams.util.HUt;
-import io.vertx.core.json.JsonObject;
 
 /**
  * @author lang : 2024-06-26

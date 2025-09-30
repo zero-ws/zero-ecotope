@@ -1,9 +1,9 @@
 package io.zerows.core.uca.compare;
 
-import io.zerows.ams.util.HUt;
-import io.zerows.specification.modeling.element.HKey;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.ams.util.HUt;
+import io.zerows.specification.modeling.element.HKey;
 
 import java.util.Objects;
 import java.util.Set;

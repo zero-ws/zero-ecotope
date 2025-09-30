@@ -1,7 +1,7 @@
 package io.zerows.common.normalize;
 
-import io.zerows.ams.util.HUt;
 import io.zerows.ams.constant.em.modeling.EmKey;
+import io.zerows.ams.util.HUt;
 import io.zerows.specification.modeling.element.HKey;
 
 import java.util.HashSet;

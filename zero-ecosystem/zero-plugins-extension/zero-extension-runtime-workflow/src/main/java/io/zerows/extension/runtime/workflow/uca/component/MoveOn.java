@@ -2,7 +2,7 @@ package io.zerows.extension.runtime.workflow.uca.component;
 
 import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
-import io.zerows.core.exception.web._501NotSupportException;
+import io.zerows.core.exception.web._60050Exception501NotSupport;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.runtime.workflow.atom.runtime.WRecord;
 import io.zerows.extension.runtime.workflow.atom.runtime.WRequest;
@@ -66,10 +66,10 @@ public interface MoveOn extends Behaviour {
      *  Event Fire by Programming
      */
     default Future<WRecord> transferAsync(final WRequest request, final WTransition process) {
-        return Ut.Bnd.failOut(_501NotSupportException.class, this.getClass());
+        return FnVertx.failOut(_60050Exception501NotSupport.class, this.getClass());
     }
 
     default Future<WTransition> moveAsync(final WRequest request, final WTransition process) {
-        return Ut.Bnd.failOut(_501NotSupportException.class, this.getClass());
+        return FnVertx.failOut(_60050Exception501NotSupport.class, this.getClass());
     }
 }

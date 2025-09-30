@@ -1,12 +1,12 @@
 package io.zerows.plugins.office.excel.uca.cell;
 
+import io.vertx.core.json.JsonArray;
 import io.zerows.ams.constant.VName;
 import io.zerows.ams.constant.VPath;
 import io.zerows.ams.constant.VString;
 import io.zerows.ams.constant.VValue;
-import io.zerows.core.exception.web._501NotSupportException;
-import io.vertx.core.json.JsonArray;
 import io.zerows.core.constant.KName;
+import io.zerows.core.exception.web._60050Exception501NotSupport;
 import io.zerows.core.util.Ut;
 import io.zerows.plugins.office.excel.eon.ExConstant;
 
@@ -89,7 +89,7 @@ public class ExprValue implements ExValue {
         final BiFunction<String, ConcurrentMap<String, String>, String> exprFn =
             PATH_FN.getOrDefault(value.trim(), null);
         if (Objects.isNull(exprFn)) {
-            throw Ut.Bnd.failWeb(_501NotSupportException.class, this.getClass());
+            throw new _60050Exception501NotSupport(this.getClass());
         }
         final String filepath = exprFn.apply(pathRoot, paramMap);
         return Ut.ioPath(filepath, field) + VString.DOT + VPath.SUFFIX.JSON;

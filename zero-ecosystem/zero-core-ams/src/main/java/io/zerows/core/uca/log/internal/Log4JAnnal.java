@@ -1,8 +1,8 @@
 package io.zerows.core.uca.log.internal;
 
+import io.r2mo.typed.exception.AbstractException;
 import io.zerows.ams.constant.VString;
 import io.zerows.ams.util.HUt;
-import io.zerows.core.exception.BaseZeroException;
 import io.zerows.core.running.HMacrocosm;
 import io.zerows.core.uca.log.Annal;
 import org.slf4j.Logger;
@@ -32,7 +32,7 @@ public class Log4JAnnal extends AbstractAnnal implements Annal {
         Objects.requireNonNull(ex);
         final String message = HUt.isNil(prefix) ? ex.getMessage() :
             prefix + VString.SLASH + ex.getMessage();
-        if (ex instanceof BaseZeroException) {
+        if (ex instanceof AbstractException) {
             this.logger.warn(message);
         } else {
             this.logger.error(message);

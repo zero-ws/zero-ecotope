@@ -4,8 +4,8 @@ import io.zerows.ams.constant.VValue;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.extension.mbse.basement.atom.element.DataMatrix;
 import io.zerows.extension.mbse.basement.atom.element.DataRow;
-import org.jooq.Record;
 import org.jooq.*;
+import org.jooq.Record;
 
 import java.util.ArrayList;
 import java.util.List;

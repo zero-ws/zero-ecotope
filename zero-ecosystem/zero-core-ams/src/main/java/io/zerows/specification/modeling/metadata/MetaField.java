@@ -1,8 +1,8 @@
 package io.zerows.specification.modeling.metadata;
 
+import io.zerows.ams.constant.em.modeling.EmKey;
 import io.zerows.ams.util.HUt;
 import io.zerows.common.normalize.KKey;
-import io.zerows.ams.constant.em.modeling.EmKey;
 import io.zerows.specification.modeling.element.HKey;
 
 import java.util.*;

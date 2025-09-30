@@ -1,8 +1,8 @@
 package io.vertx.domain;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.unity.Ux;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SUser;
+import io.zerows.unity.Ux;
 import org.junit.Test;
 
 enum TestValue {

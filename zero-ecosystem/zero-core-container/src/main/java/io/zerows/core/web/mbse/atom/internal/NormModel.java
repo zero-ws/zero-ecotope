@@ -1,14 +1,14 @@
 package io.zerows.core.web.mbse.atom.internal;
 
-import io.zerows.core.exception.web._501NotSupportException;
-import io.zerows.specification.access.app.HArk;
-import io.zerows.ams.constant.em.modeling.EmModel;
-import io.zerows.specification.modeling.HAttribute;
-import io.zerows.specification.modeling.HRule;
 import io.vertx.core.json.JsonObject;
+import io.zerows.ams.constant.em.modeling.EmModel;
+import io.zerows.core.exception.web._60050Exception501NotSupport;
 import io.zerows.core.web.mbse.atom.KClass;
 import io.zerows.core.web.mbse.atom.KHybrid;
 import io.zerows.core.web.mbse.atom.shape.AbstractHModel;
+import io.zerows.specification.access.app.HArk;
+import io.zerows.specification.modeling.HAttribute;
+import io.zerows.specification.modeling.HRule;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentMap;
@@ -46,12 +46,12 @@ public class NormModel extends AbstractHModel {
 
     @Override
     public JsonObject toJson() {
-        throw new _501NotSupportException(this.getClass());
+        throw new _60050Exception501NotSupport(this.getClass());
     }
 
     @Override
     public void fromJson(final JsonObject json) {
-        throw new _501NotSupportException(this.getClass());
+        throw new _60050Exception501NotSupport(this.getClass());
     }
 
     @Override

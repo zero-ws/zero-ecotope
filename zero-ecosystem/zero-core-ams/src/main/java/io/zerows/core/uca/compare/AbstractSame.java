@@ -1,8 +1,8 @@
 package io.zerows.core.uca.compare;
 
+import io.zerows.ams.util.HUt;
 import io.zerows.core.spi.typed.VsExtension;
 import io.zerows.specification.modeling.metadata.HMetaField;
-import io.zerows.ams.util.HUt;
 
 import java.util.Objects;
 import java.util.ServiceLoader;

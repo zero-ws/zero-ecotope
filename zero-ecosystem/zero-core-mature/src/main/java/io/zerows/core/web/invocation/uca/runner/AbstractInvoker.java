@@ -1,5 +1,7 @@
 package io.zerows.core.web.invocation.uca.runner;
 
+import io.r2mo.typed.exception.WebException;
+import io.r2mo.typed.exception.web._500ServerInternalException;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
@@ -87,7 +89,8 @@ public abstract class AbstractInvoker implements Invoker {
                 if (null != handler.cause()) {
                     handler.cause().printStackTrace();
                 }
-                message.reply(Envelop.failure(Ut.failWeb(getClass(), handler.cause())));
+                final WebException error = new _500ServerInternalException("[ R2MO ] 其他异步调用异常：" + handler.cause().getMessage());
+                message.reply(Envelop.failure(error));
             }
         };
     }

@@ -1,9 +1,9 @@
 package io.mature.extension.spi.component;
 
-import io.zerows.core.uca.qr.Criteria;
 import io.mature.extension.scaffold.component.AbstractAdaptor;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
+import io.zerows.core.uca.qr.Criteria;
 import io.zerows.core.web.mbse.atom.runner.ActIn;
 import io.zerows.core.web.mbse.atom.runner.ActOut;
 

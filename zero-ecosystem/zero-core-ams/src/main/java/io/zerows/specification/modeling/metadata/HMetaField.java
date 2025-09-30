@@ -1,9 +1,9 @@
 package io.zerows.specification.modeling.metadata;
 
+import io.zerows.ams.util.HUt;
 import io.zerows.core.spi.modeler.MetaOn;
 import io.zerows.specification.modeling.element.HConstraint;
 import io.zerows.specification.modeling.element.HKey;
-import io.zerows.ams.util.HUt;
 
 import java.util.Collection;
 import java.util.List;

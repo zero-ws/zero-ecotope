@@ -1,10 +1,10 @@
 package io.zerows.specification.modeling.norm;
 
 import io.zerows.ams.constant.VString;
-import io.zerows.specification.modeling.HLife;
 import io.zerows.specification.access.cloud.HDomain;
 import io.zerows.specification.access.cloud.HPlatform;
 import io.zerows.specification.access.cloud.HTenant;
+import io.zerows.specification.modeling.HLife;
 
 /**
  * 名空间定义，定义对应名空间的规范相关信息，当一个元素转换成标准时，一定会包含名空间的引用，名空间引用使用组合模式（非继承），不同名空间

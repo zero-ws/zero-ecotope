@@ -1,11 +1,11 @@
 package io.zerows.core.database.jooq.operation;
 
-import io.zerows.ams.constant.em.typed.ChangeFlag;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
+import io.zerows.ams.constant.em.typed.ChangeFlag;
+import io.zerows.core.database.jooq.util.JqAnalyzer;
 import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
-import io.zerows.core.database.jooq.util.JqAnalyzer;
 
 import java.util.ArrayList;
 import java.util.List;

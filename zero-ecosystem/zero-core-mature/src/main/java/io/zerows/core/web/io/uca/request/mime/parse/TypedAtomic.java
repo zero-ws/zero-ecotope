@@ -1,6 +1,6 @@
 package io.zerows.core.web.io.uca.request.mime.parse;
 
-import io.zerows.core.exception.WebException;
+import io.r2mo.typed.exception.WebException;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.core.web.invocation.uca.parameter.ParameterBuilder;
 import io.zerows.core.web.model.atom.Epsilon;

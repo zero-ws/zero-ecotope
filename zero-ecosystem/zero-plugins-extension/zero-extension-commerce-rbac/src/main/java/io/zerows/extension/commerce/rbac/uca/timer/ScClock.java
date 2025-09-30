@@ -3,7 +3,6 @@ package io.zerows.extension.commerce.rbac.uca.timer;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.exception.WebException;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.cache.Rapid;
 import io.zerows.extension.commerce.rbac.atom.ScToken;
@@ -93,7 +92,7 @@ public interface ScClock<T> {
     Future<T> put(String key, T value, String... moreKeys);
 
     /**
-     * 验证专用方法，用于验证当前存储值和等待验证值是否相同，内置会抛出对应的 {@link WebException} 异常
+     * 验证专用方法，用于验证当前存储值和等待验证值是否相同，内置会抛出对应的 {@see WebException} 异常
      *
      * @param stored   缓存中存储的值
      * @param waiting  等待验证的值（字面量）

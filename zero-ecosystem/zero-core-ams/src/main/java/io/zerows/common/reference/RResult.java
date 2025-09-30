@@ -1,12 +1,12 @@
 package io.zerows.common.reference;
 
-import io.zerows.common.program.Kv;
-import io.zerows.ams.constant.VName;
-import io.zerows.ams.util.HUt;
-import io.zerows.ams.constant.em.modeling.EmValue;
-import io.zerows.specification.modeling.HAttribute;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.ams.constant.VName;
+import io.zerows.ams.constant.em.modeling.EmValue;
+import io.zerows.ams.util.HUt;
+import io.zerows.common.program.Kv;
+import io.zerows.specification.modeling.HAttribute;
 
 import java.io.Serializable;
 import java.util.ArrayList;

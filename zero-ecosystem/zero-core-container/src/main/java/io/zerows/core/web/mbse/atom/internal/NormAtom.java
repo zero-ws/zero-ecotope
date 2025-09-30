@@ -1,7 +1,7 @@
 package io.zerows.core.web.mbse.atom.internal;
 
-import io.zerows.specification.modeling.HModel;
 import io.zerows.core.web.mbse.atom.shape.AbstractHAtom;
+import io.zerows.specification.modeling.HModel;
 
 /**
  * This argument is a standard implementation because of all the attributes is static and fixed, you can not configure

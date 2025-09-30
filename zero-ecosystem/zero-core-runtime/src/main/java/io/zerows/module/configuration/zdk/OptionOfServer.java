@@ -2,7 +2,7 @@ package io.zerows.module.configuration.zdk;
 
 import io.vertx.core.http.HttpServerOptions;
 import io.zerows.ams.constant.em.app.ServerType;
-import io.zerows.core.exception.web._501NotSupportException;
+import io.zerows.core.exception.web._60050Exception501NotSupport;
 
 import java.io.Serializable;
 
@@ -37,10 +37,10 @@ public interface OptionOfServer<T> extends Serializable {
      * @return HttpServerOptions
      */
     default HttpServerOptions serverBridge() {
-        throw new _501NotSupportException(this.getClass());
+        throw new _60050Exception501NotSupport(this.getClass());
     }
 
     default OptionOfServer<T> serverBridge(final HttpServerOptions serverOptions) {
-        throw new _501NotSupportException(this.getClass());
+        throw new _60050Exception501NotSupport(this.getClass());
     }
 }

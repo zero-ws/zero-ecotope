@@ -4,16 +4,7 @@
 package io.zerows.extension.runtime.ambient.domain;
 
 
-import io.zerows.extension.runtime.ambient.domain.tables.XActivity;
-import io.zerows.extension.runtime.ambient.domain.tables.XActivityChange;
-import io.zerows.extension.runtime.ambient.domain.tables.XActivityRule;
-import io.zerows.extension.runtime.ambient.domain.tables.XApp;
-import io.zerows.extension.runtime.ambient.domain.tables.XCategory;
-import io.zerows.extension.runtime.ambient.domain.tables.XLinkage;
-import io.zerows.extension.runtime.ambient.domain.tables.XLog;
-import io.zerows.extension.runtime.ambient.domain.tables.XMenu;
-import io.zerows.extension.runtime.ambient.domain.tables.XTabular;
-
+import io.zerows.extension.runtime.ambient.domain.tables.*;
 import org.jooq.Index;
 import org.jooq.OrderField;
 import org.jooq.impl.DSL;

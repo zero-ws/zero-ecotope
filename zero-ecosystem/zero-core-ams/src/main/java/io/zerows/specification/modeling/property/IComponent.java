@@ -1,7 +1,7 @@
 package io.zerows.specification.modeling.property;
 
-import io.zerows.common.program.Kv;
 import io.vertx.core.json.JsonObject;
+import io.zerows.common.program.Kv;
 import io.zerows.specification.modeling.HRecord;
 
 /**

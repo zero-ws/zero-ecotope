@@ -1,10 +1,7 @@
 package io.zerows.core.util;
 
 import io.r2mo.function.Fn;
-import io.vertx.core.Future;
-import io.zerows.core.exception.WebException;
 import io.zerows.core.exception.boot._11000Exception404SPINotFound;
-import io.zerows.core.exception.web._501NotSupportException;
 import io.zerows.core.spi.HorizonIo;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
@@ -19,36 +16,6 @@ import java.util.Objects;
  * @author lang : 2023-07-07
  */
 class BundleSPI {
-
-    @SuppressWarnings("unchecked")
-    static <T> Future<T> failOut(final Class<?> exceptionCls,
-                                 final Class<?> target, final Object... args) {
-        Objects.requireNonNull(exceptionCls);
-        if (WebException.class.isAssignableFrom(exceptionCls)) {
-
-            // Web
-            return Future.failedFuture(failWeb((Class<? extends WebException>) exceptionCls, target, args));
-        } else {
-
-            // 501
-            return Future.failedFuture(failWeb(_501NotSupportException.class, BundleSPI.class));
-        }
-    }
-
-    static <T extends WebException> WebException failWeb(final Class<T> exceptionCls,
-                                                         final Class<?> target, final Object... args) {
-        final WebException failure = failCommon(exceptionCls, target, args);
-        final HorizonIo io = serviceIo(target);
-        return failure.io(io);
-    }
-
-    private static <T> T failCommon(final Class<T> exceptionCls,
-                                    final Class<?> target, final Object... args) {
-        final Object[] newArgs = new Object[args.length + 1];
-        newArgs[0] = target;
-        System.arraycopy(args, 0, newArgs, 1, args.length);
-        return Ut.instance(exceptionCls, newArgs);
-    }
 
     static HorizonIo serviceIo(final Class<?> clazz) {
         final Bundle bundle = FrameworkUtil.getBundle(clazz);

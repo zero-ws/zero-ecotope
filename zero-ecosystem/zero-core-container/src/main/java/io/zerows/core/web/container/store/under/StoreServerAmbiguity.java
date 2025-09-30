@@ -1,7 +1,7 @@
 package io.zerows.core.web.container.store.under;
 
 import io.vertx.core.http.HttpServer;
-import io.zerows.core.exception.web._501NotSupportException;
+import io.zerows.core.exception.web._60050Exception501NotSupport;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.model.atom.running.RunServer;
 import io.zerows.module.metadata.zdk.AbstractAmbiguity;
@@ -31,7 +31,7 @@ class StoreServerAmbiguity extends AbstractAmbiguity implements StoreServer {
     @Override
     public HttpServer server() {
         if (1 != RUNNING.size()) {
-            throw Ut.Bnd.failWeb(_501NotSupportException.class, this.getClass());
+            throw new _60050Exception501NotSupport(this.getClass());
         }
         final RunServer runServer = RUNNING.values().iterator().next();
         return Objects.isNull(runServer) ? null : runServer.instance();

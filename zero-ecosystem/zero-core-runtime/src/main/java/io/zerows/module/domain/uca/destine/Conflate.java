@@ -2,7 +2,7 @@ package io.zerows.module.domain.uca.destine;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.exception.web._501NotSupportException;
+import io.zerows.core.exception.web._60050Exception501NotSupport;
 import io.zerows.module.domain.atom.specification.KJoin;
 import io.zerows.module.domain.atom.specification.KPoint;
 
@@ -38,7 +38,7 @@ public interface Conflate<I, O> {
 
     // 默认实现是为了 QR 部分量身打造，不可直接使用
     default O treat(final I active, final I assist, final String identifier) {
-        throw new _501NotSupportException(this.getClass());
+        throw new _60050Exception501NotSupport(this.getClass());
     }
 
     O treat(final I active, final String identifier);

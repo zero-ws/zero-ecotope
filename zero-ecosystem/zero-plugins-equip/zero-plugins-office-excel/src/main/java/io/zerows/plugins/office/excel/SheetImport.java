@@ -1,5 +1,6 @@
 package io.zerows.plugins.office.excel;
 
+import io.r2mo.typed.exception.web._500ServerInternalException;
 import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
@@ -7,7 +8,6 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.ams.constant.em.typed.ChangeFlag;
 import io.zerows.core.database.jooq.operation.UxJooq;
-import io.zerows.core.exception.web._500InternalServerException;
 import io.zerows.core.fn.FnZero;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.core.util.Ut;
@@ -211,8 +211,7 @@ class SheetImport {
         if (Objects.nonNull(error)) {
             return FnVertx.failOut(_60039Exception500ExportingError.class, error.getMessage());
         } else {
-            return Ut.Bnd.failOut(_500InternalServerException.class, this.getClass(),
-                "Unexpected Error when Importing");
+            return FnVertx.failOut(_500ServerInternalException.class, "[ R2MO ] 未知错误，导入失败！");
         }
     }
 

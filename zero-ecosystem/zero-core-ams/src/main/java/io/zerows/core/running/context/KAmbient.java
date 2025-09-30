@@ -2,7 +2,7 @@ package io.zerows.core.running.context;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.ams.constant.em.EmApp;
-import io.zerows.core.exception.web._501NotSupportException;
+import io.zerows.core.exception.web._60050Exception501NotSupport;
 import io.zerows.specification.access.app.HAmbient;
 import io.zerows.specification.access.app.HArk;
 
@@ -49,7 +49,7 @@ public class KAmbient implements HAmbient {
     @Override
     public HArk running() {
         if (EmApp.Mode.CUBE != this.mode) {
-            throw new _501NotSupportException(this.getClass());
+            throw new _60050Exception501NotSupport(this.getClass());
         }
         return this.context.running();
     }

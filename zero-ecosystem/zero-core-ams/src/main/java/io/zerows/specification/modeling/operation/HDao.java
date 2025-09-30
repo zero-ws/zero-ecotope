@@ -1,8 +1,8 @@
 package io.zerows.specification.modeling.operation;
 
-import io.zerows.core.uca.qr.Criteria;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
+import io.zerows.core.uca.qr.Criteria;
 import io.zerows.specification.modeling.HAtom;
 import io.zerows.specification.modeling.HRecord;
 

@@ -2,14 +2,14 @@ package io.zerows.extension.mbse.basement.uca.jooq;
 
 import io.r2mo.function.Actuator;
 import io.r2mo.function.Fn;
+import io.r2mo.typed.exception.WebException;
 import io.zerows.ams.constant.VValue;
-import io.zerows.core.exception.WebException;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.extension.mbse.basement.atom.data.DataEvent;
 import io.zerows.extension.mbse.basement.atom.element.DataMatrix;
 import io.zerows.extension.mbse.basement.atom.element.DataRow;
-import io.zerows.extension.mbse.basement.exception._417DataUnexpectException;
 import io.zerows.extension.mbse.basement.exception._80518Exception500DataTransaction;
+import io.zerows.extension.mbse.basement.exception._80519Exception500DataUnexpect;
 import io.zerows.extension.mbse.basement.exception._80522Exception417ConditionEmpty;
 import io.zerows.extension.mbse.basement.uca.jooq.internal.Jq;
 import org.jooq.DSLContext;
@@ -24,7 +24,6 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-@SuppressWarnings("all")
 abstract class AbstractJQCrud {
     protected final transient DSLContext context;
 
@@ -40,9 +39,9 @@ abstract class AbstractJQCrud {
             // 执行结果（单表）
             final R expected = actorFn.apply(table, matrix);
             // 执行结果（检查）
-            output(expected, testFn,
+            this.output(expected, testFn,
                 /* 成功 */ () -> row.success(table),
-                /* 失败 */ () -> new _417DataUnexpectException(getClass(), table, String.valueOf(expected)));
+                /* 失败 */ () -> new _80519Exception500DataUnexpect(table, String.valueOf(expected)));
         }))));
     }
 
@@ -64,7 +63,7 @@ abstract class AbstractJQCrud {
             /* 执行结果 */
             final Record[] records = actorFn.apply(table, values);
             // 合并结果集
-            output(table, rows, records);
+            this.output(table, rows, records);
         })));
     }
 
@@ -75,9 +74,9 @@ abstract class AbstractJQCrud {
             /* 执行结果（单表）*/
             final R[] expected = actorFn.apply(table, values);
             /* 单张表检查结果 */
-            output(expected, testFn,
+            this.output(expected, testFn,
                 /* 成功 */ () -> rows.forEach(row -> row.success(table)),
-                /* 失败 */ () -> new _417DataUnexpectException(getClass(), table, expected.toString())
+                /* 失败 */ () -> new _80519Exception500DataUnexpect(table, expected.toString())
             );
         })));
     }
@@ -118,7 +117,7 @@ abstract class AbstractJQCrud {
     }
 
     private void ensure(final String table, final List<DataMatrix> matrixes) {
-        matrixes.forEach(matrix -> ensure(table, matrix));
+        matrixes.forEach(matrix -> this.ensure(table, matrix));
     }
 
     private <T> void output(final T expected,

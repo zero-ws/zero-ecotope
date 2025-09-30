@@ -1,12 +1,12 @@
 package io.zerows.extension.mbse.basement.atom.data;
 
 import io.r2mo.function.Fn;
+import io.r2mo.typed.exception.WebException;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.ams.constant.VValue;
 import io.zerows.ams.constant.em.modeling.EmModel;
-import io.zerows.core.exception.WebException;
 import io.zerows.core.uca.qr.Criteria;
 import io.zerows.core.uca.qr.Pager;
 import io.zerows.core.uca.qr.Sorter;
@@ -307,10 +307,6 @@ public class DataEvent implements Serializable {
 
     public void failure(final WebException ex) {
         this.exception = ex;
-    }
-
-    public void failure(final io.r2mo.typed.exception.WebException ex) {
-        // TODO:
     }
 
     /*

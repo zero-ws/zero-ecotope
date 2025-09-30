@@ -5,7 +5,7 @@ package io.zerows.ams.fn;
  *
  * @author lang : 2023/4/27
  */
-public class HFn extends _Out {
+public class HFn extends _Combine {
     protected HFn() {
     }
 }

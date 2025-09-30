@@ -4,27 +4,8 @@
 package io.zerows.extension.runtime.tpl.domain;
 
 
-import io.zerows.extension.runtime.tpl.domain.tables.MyApp;
-import io.zerows.extension.runtime.tpl.domain.tables.MyDesktop;
-import io.zerows.extension.runtime.tpl.domain.tables.MyFavor;
-import io.zerows.extension.runtime.tpl.domain.tables.MyMenu;
-import io.zerows.extension.runtime.tpl.domain.tables.MyNotify;
-import io.zerows.extension.runtime.tpl.domain.tables.MySetting;
-import io.zerows.extension.runtime.tpl.domain.tables.MyTpl;
-import io.zerows.extension.runtime.tpl.domain.tables.TplMessage;
-import io.zerows.extension.runtime.tpl.domain.tables.TplModel;
-import io.zerows.extension.runtime.tpl.domain.tables.TplTicket;
-import io.zerows.extension.runtime.tpl.domain.tables.records.MyAppRecord;
-import io.zerows.extension.runtime.tpl.domain.tables.records.MyDesktopRecord;
-import io.zerows.extension.runtime.tpl.domain.tables.records.MyFavorRecord;
-import io.zerows.extension.runtime.tpl.domain.tables.records.MyMenuRecord;
-import io.zerows.extension.runtime.tpl.domain.tables.records.MyNotifyRecord;
-import io.zerows.extension.runtime.tpl.domain.tables.records.MySettingRecord;
-import io.zerows.extension.runtime.tpl.domain.tables.records.MyTplRecord;
-import io.zerows.extension.runtime.tpl.domain.tables.records.TplMessageRecord;
-import io.zerows.extension.runtime.tpl.domain.tables.records.TplModelRecord;
-import io.zerows.extension.runtime.tpl.domain.tables.records.TplTicketRecord;
-
+import io.zerows.extension.runtime.tpl.domain.tables.*;
+import io.zerows.extension.runtime.tpl.domain.tables.records.*;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.DSL;

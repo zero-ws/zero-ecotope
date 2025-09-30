@@ -1,14 +1,14 @@
 package io.mature.boot.supply;
 
-import io.zerows.common.datamation.KDictConfig;
-import io.zerows.common.datamation.KMap;
-import io.zerows.common.app.KIntegration;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.common.app.KIntegration;
+import io.zerows.common.datamation.KDictConfig;
+import io.zerows.common.datamation.KMap;
 import io.zerows.core.constant.KName;
-import io.zerows.unity.Ux;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.runtime.ambient.osgi.spi.component.ExAmbientDictionary;
+import io.zerows.unity.Ux;
 
 /**
  * @author lang : 2023-06-11

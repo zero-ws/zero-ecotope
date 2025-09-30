@@ -1,9 +1,9 @@
 package io.zerows.extension.runtime.workflow.atom.configuration;
 
-import io.zerows.extension.runtime.workflow.eon.em.RecordMode;
-import io.zerows.ams.constant.em.typed.ChangeFlag;
 import io.vertx.core.json.JsonObject;
+import io.zerows.ams.constant.em.typed.ChangeFlag;
 import io.zerows.core.constant.KName;
+import io.zerows.extension.runtime.workflow.eon.em.RecordMode;
 
 import java.io.Serializable;
 import java.util.Objects;

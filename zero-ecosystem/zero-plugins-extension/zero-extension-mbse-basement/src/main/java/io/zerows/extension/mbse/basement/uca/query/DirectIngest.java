@@ -1,15 +1,15 @@
 package io.zerows.extension.mbse.basement.uca.query;
 
+import io.vertx.core.json.JsonObject;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.core.uca.qr.Criteria;
 import io.zerows.core.uca.qr.Sorter;
 import io.zerows.core.uca.qr.syntax.QTree;
-import io.zerows.extension.mbse.basement.uca.jooq.internal.Jq;
-import io.vertx.core.json.JsonObject;
 import io.zerows.extension.mbse.basement.atom.element.DataMatrix;
 import io.zerows.extension.mbse.basement.atom.element.DataTpl;
-import org.jooq.Record;
+import io.zerows.extension.mbse.basement.uca.jooq.internal.Jq;
 import org.jooq.*;
+import org.jooq.Record;
 import org.jooq.impl.DSL;
 
 import java.util.ArrayList;

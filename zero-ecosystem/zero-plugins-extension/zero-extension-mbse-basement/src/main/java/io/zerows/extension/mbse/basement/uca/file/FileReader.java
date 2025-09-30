@@ -1,9 +1,9 @@
 package io.zerows.extension.mbse.basement.uca.file;
 
+import io.zerows.core.util.Ut;
 import io.zerows.extension.mbse.basement.atom.Model;
 import io.zerows.extension.mbse.basement.atom.Schema;
 import io.zerows.extension.mbse.basement.util.Ao;
-import io.zerows.core.util.Ut;
 
 import java.util.HashSet;
 import java.util.List;

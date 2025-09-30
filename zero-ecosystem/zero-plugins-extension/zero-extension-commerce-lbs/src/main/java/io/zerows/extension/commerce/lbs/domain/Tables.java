@@ -4,14 +4,7 @@
 package io.zerows.extension.commerce.lbs.domain;
 
 
-import io.zerows.extension.commerce.lbs.domain.tables.LCity;
-import io.zerows.extension.commerce.lbs.domain.tables.LCountry;
-import io.zerows.extension.commerce.lbs.domain.tables.LFloor;
-import io.zerows.extension.commerce.lbs.domain.tables.LLocation;
-import io.zerows.extension.commerce.lbs.domain.tables.LRegion;
-import io.zerows.extension.commerce.lbs.domain.tables.LState;
-import io.zerows.extension.commerce.lbs.domain.tables.LTent;
-import io.zerows.extension.commerce.lbs.domain.tables.LYard;
+import io.zerows.extension.commerce.lbs.domain.tables.*;
 
 
 /**

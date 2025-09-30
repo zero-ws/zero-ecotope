@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 /**
  * @author lang : 2023-05-27
@@ -160,5 +161,9 @@ class _Async {
     @SafeVarargs
     public static <T> Future<T> passion(final T input, final Function<T, Future<T>>... executors) {
         return HAsync.passion(input, Arrays.asList(executors));
+    }
+
+    public static <T> Function<Throwable, T> outAsync(final Supplier<T> supplier) {
+        return HThrow.outAsync(supplier);
     }
 }

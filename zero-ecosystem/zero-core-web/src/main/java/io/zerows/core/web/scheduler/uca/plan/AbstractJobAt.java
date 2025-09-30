@@ -2,7 +2,7 @@ package io.zerows.core.web.scheduler.uca.plan;
 
 import io.zerows.ams.constant.VString;
 import io.zerows.common.program.Kv;
-import io.zerows.core.exception.web._501NotSupportException;
+import io.zerows.core.exception.web._60050Exception501NotSupport;
 import io.zerows.core.util.Ut;
 import io.zerows.module.metadata.uca.logging.OLog;
 
@@ -77,7 +77,7 @@ public abstract class AbstractJobAt implements JobAt {
      */
 
     protected LocalDateTime analyze(final LocalDateTime startAt, final LocalTime time, final String segment) {
-        throw new _501NotSupportException(this.getClass());
+        throw new _60050Exception501NotSupport(this.getClass());
     }
 
     protected OLog logger() {

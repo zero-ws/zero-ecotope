@@ -1,7 +1,7 @@
 package io.zerows.core.uca.metadata;
 
-import io.zerows.ams.util.HUt;
 import io.vertx.core.json.JsonObject;
+import io.zerows.ams.util.HUt;
 
 import java.io.Serializable;
 import java.util.Objects;

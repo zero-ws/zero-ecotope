@@ -1,10 +1,10 @@
 package io.zerows.core.database.jooq.operation;
 
-import io.zerows.core.uca.qr.syntax.Ir;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.database.jooq.util.JqAnalyzer;
+import io.zerows.core.uca.qr.syntax.Ir;
 
 import java.math.BigDecimal;
 import java.util.List;

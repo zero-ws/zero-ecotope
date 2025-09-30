@@ -4,16 +4,7 @@
 package io.zerows.extension.runtime.tpl.domain;
 
 
-import io.zerows.extension.runtime.tpl.domain.tables.MyApp;
-import io.zerows.extension.runtime.tpl.domain.tables.MyDesktop;
-import io.zerows.extension.runtime.tpl.domain.tables.MyFavor;
-import io.zerows.extension.runtime.tpl.domain.tables.MyMenu;
-import io.zerows.extension.runtime.tpl.domain.tables.MyNotify;
-import io.zerows.extension.runtime.tpl.domain.tables.MySetting;
-import io.zerows.extension.runtime.tpl.domain.tables.MyTpl;
-import io.zerows.extension.runtime.tpl.domain.tables.TplMessage;
-import io.zerows.extension.runtime.tpl.domain.tables.TplModel;
-import io.zerows.extension.runtime.tpl.domain.tables.TplTicket;
+import io.zerows.extension.runtime.tpl.domain.tables.*;
 
 
 /**

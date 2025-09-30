@@ -4,41 +4,8 @@
 package io.zerows.extension.runtime.ambient.domain;
 
 
-import io.zerows.extension.runtime.ambient.domain.tables.RTagObject;
-import io.zerows.extension.runtime.ambient.domain.tables.XActivity;
-import io.zerows.extension.runtime.ambient.domain.tables.XActivityChange;
-import io.zerows.extension.runtime.ambient.domain.tables.XActivityRule;
-import io.zerows.extension.runtime.ambient.domain.tables.XApp;
-import io.zerows.extension.runtime.ambient.domain.tables.XAttachment;
-import io.zerows.extension.runtime.ambient.domain.tables.XCategory;
-import io.zerows.extension.runtime.ambient.domain.tables.XLinkage;
-import io.zerows.extension.runtime.ambient.domain.tables.XLog;
-import io.zerows.extension.runtime.ambient.domain.tables.XMenu;
-import io.zerows.extension.runtime.ambient.domain.tables.XModule;
-import io.zerows.extension.runtime.ambient.domain.tables.XNotice;
-import io.zerows.extension.runtime.ambient.domain.tables.XNumber;
-import io.zerows.extension.runtime.ambient.domain.tables.XSource;
-import io.zerows.extension.runtime.ambient.domain.tables.XTabular;
-import io.zerows.extension.runtime.ambient.domain.tables.XTag;
-import io.zerows.extension.runtime.ambient.domain.tables.XTenant;
-import io.zerows.extension.runtime.ambient.domain.tables.records.RTagObjectRecord;
-import io.zerows.extension.runtime.ambient.domain.tables.records.XActivityChangeRecord;
-import io.zerows.extension.runtime.ambient.domain.tables.records.XActivityRecord;
-import io.zerows.extension.runtime.ambient.domain.tables.records.XActivityRuleRecord;
-import io.zerows.extension.runtime.ambient.domain.tables.records.XAppRecord;
-import io.zerows.extension.runtime.ambient.domain.tables.records.XAttachmentRecord;
-import io.zerows.extension.runtime.ambient.domain.tables.records.XCategoryRecord;
-import io.zerows.extension.runtime.ambient.domain.tables.records.XLinkageRecord;
-import io.zerows.extension.runtime.ambient.domain.tables.records.XLogRecord;
-import io.zerows.extension.runtime.ambient.domain.tables.records.XMenuRecord;
-import io.zerows.extension.runtime.ambient.domain.tables.records.XModuleRecord;
-import io.zerows.extension.runtime.ambient.domain.tables.records.XNoticeRecord;
-import io.zerows.extension.runtime.ambient.domain.tables.records.XNumberRecord;
-import io.zerows.extension.runtime.ambient.domain.tables.records.XSourceRecord;
-import io.zerows.extension.runtime.ambient.domain.tables.records.XTabularRecord;
-import io.zerows.extension.runtime.ambient.domain.tables.records.XTagRecord;
-import io.zerows.extension.runtime.ambient.domain.tables.records.XTenantRecord;
-
+import io.zerows.extension.runtime.ambient.domain.tables.*;
+import io.zerows.extension.runtime.ambient.domain.tables.records.*;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.DSL;

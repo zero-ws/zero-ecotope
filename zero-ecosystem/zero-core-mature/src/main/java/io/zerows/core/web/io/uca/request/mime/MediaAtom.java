@@ -1,8 +1,7 @@
 package io.zerows.core.web.io.uca.request.mime;
 
 import io.r2mo.function.Fn;
-import io.zerows.core.exception.WebException;
-import io.zerows.core.uca.log.Annal;
+import io.r2mo.typed.exception.WebException;
 import io.zerows.core.web.model.atom.Event;
 import io.zerows.epoch.mature.exception._60006Exception415MediaNotSupport;
 import jakarta.ws.rs.core.MediaType;
@@ -11,7 +10,6 @@ import java.util.Set;
 
 final class MediaAtom {
 
-    private static final Annal LOGGER = Annal.get(MediaAtom.class);
 
     static void accept(final Event event,
                        final MediaType type) throws WebException {

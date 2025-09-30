@@ -4,8 +4,8 @@
 package io.zerows.extension.commerce.erp.domain.tables.pojos;
 
 
-import io.zerows.extension.commerce.erp.domain.tables.interfaces.ITVendorHour;
 import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.zerows.extension.commerce.erp.domain.tables.interfaces.ITVendorHour;
 
 import java.time.LocalDateTime;
 

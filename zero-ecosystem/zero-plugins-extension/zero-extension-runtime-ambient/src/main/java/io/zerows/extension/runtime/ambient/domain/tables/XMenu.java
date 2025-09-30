@@ -8,29 +8,16 @@ import io.zerows.extension.runtime.ambient.domain.Indexes;
 import io.zerows.extension.runtime.ambient.domain.Keys;
 import io.zerows.extension.runtime.ambient.domain.Zdb;
 import io.zerows.extension.runtime.ambient.domain.tables.records.XMenuRecord;
+import org.jooq.*;
+import org.jooq.Record;
+import org.jooq.impl.DSL;
+import org.jooq.impl.SQLDataType;
+import org.jooq.impl.TableImpl;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
-
-import org.jooq.Field;
-import org.jooq.ForeignKey;
-import org.jooq.Function18;
-import org.jooq.Index;
-import org.jooq.Name;
-import org.jooq.Record;
-import org.jooq.Records;
-import org.jooq.Row18;
-import org.jooq.Schema;
-import org.jooq.SelectField;
-import org.jooq.Table;
-import org.jooq.TableField;
-import org.jooq.TableOptions;
-import org.jooq.UniqueKey;
-import org.jooq.impl.DSL;
-import org.jooq.impl.SQLDataType;
-import org.jooq.impl.TableImpl;
 
 
 /**

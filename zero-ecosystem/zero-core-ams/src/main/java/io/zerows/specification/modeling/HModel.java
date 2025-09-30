@@ -1,7 +1,7 @@
 package io.zerows.specification.modeling;
 
-import io.zerows.common.normalize.KMarkAtom;
 import io.zerows.ams.constant.em.modeling.EmModel;
+import io.zerows.common.normalize.KMarkAtom;
 import io.zerows.specification.access.app.HArk;
 import io.zerows.specification.modeling.property.IComponent;
 import io.zerows.specification.modeling.property.INormalizer;

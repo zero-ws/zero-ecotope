@@ -4,16 +4,7 @@
 package io.zerows.extension.commerce.finance.domain;
 
 
-import io.zerows.extension.commerce.finance.domain.tables.FBill;
-import io.zerows.extension.commerce.finance.domain.tables.FBillItem;
-import io.zerows.extension.commerce.finance.domain.tables.FBook;
-import io.zerows.extension.commerce.finance.domain.tables.FInvoice;
-import io.zerows.extension.commerce.finance.domain.tables.FPreAuthorize;
-import io.zerows.extension.commerce.finance.domain.tables.FSettlement;
-import io.zerows.extension.commerce.finance.domain.tables.FSettlementItem;
-import io.zerows.extension.commerce.finance.domain.tables.FTransItem;
-import io.zerows.extension.commerce.finance.domain.tables.FTransOf;
-
+import io.zerows.extension.commerce.finance.domain.tables.*;
 import org.jooq.Index;
 import org.jooq.OrderField;
 import org.jooq.impl.DSL;

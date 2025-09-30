@@ -1,14 +1,14 @@
 package io.zerows.core.web.mbse.atom.shape;
 
+import io.vertx.core.json.JsonObject;
 import io.zerows.ams.util.HUt;
-import io.zerows.specification.access.app.HArk;
 import io.zerows.common.normalize.KMarkAtom;
 import io.zerows.common.normalize.KMarkAttribute;
+import io.zerows.specification.access.app.HArk;
 import io.zerows.specification.modeling.HAttribute;
 import io.zerows.specification.modeling.HModel;
 import io.zerows.specification.modeling.HReference;
 import io.zerows.specification.modeling.HRule;
-import io.vertx.core.json.JsonObject;
 
 import java.util.Objects;
 import java.util.Optional;

@@ -5,7 +5,7 @@ import io.zerows.common.program.Kv;
 import io.zerows.core.database.jooq.JooqDsl;
 import io.zerows.core.database.jooq.JooqInfix;
 import io.zerows.core.database.jooq.util.JqAnalyzer;
-import io.zerows.core.exception.web._501NotSupportException;
+import io.zerows.core.exception.web._60050Exception501NotSupport;
 import io.zerows.module.metadata.atom.mapping.Mojo;
 import org.jooq.Field;
 import org.jooq.Table;
@@ -191,7 +191,7 @@ class JoinStore {
             final Class<?> daoCls = analyzers.iterator().next();
             return UxJooq.of(daoCls);
         } else {
-            throw new _501NotSupportException(this.getClass());
+            throw new _60050Exception501NotSupport(this.getClass());
         }
     }
 
@@ -203,7 +203,7 @@ class JoinStore {
             final JqAnalyzer analyzer = analyzers.iterator().next();
             return analyzer.primarySet();
         } else {
-            throw new _501NotSupportException(this.getClass());
+            throw new _60050Exception501NotSupport(this.getClass());
         }
     }
 

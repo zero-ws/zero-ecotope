@@ -1,7 +1,7 @@
 package io.zerows.extension.runtime.skeleton.osgi.spi.ui;
 
-import io.zerows.core.uca.log.Annal;
 import io.zerows.core.database.jooq.operation.UxJooq;
+import io.zerows.core.uca.log.Annal;
 
 /*
  * All sub-class for extension of Jooq type

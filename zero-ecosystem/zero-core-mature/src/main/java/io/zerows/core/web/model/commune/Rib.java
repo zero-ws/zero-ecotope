@@ -1,6 +1,6 @@
 package io.zerows.core.web.model.commune;
 
-import io.zerows.core.exception.WebException;
+import io.r2mo.typed.exception.WebException;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KWeb;

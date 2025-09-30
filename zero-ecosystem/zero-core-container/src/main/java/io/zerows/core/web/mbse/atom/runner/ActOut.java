@@ -1,17 +1,18 @@
 package io.zerows.core.web.mbse.atom.runner;
 
+import io.r2mo.spi.SPI;
+import io.r2mo.typed.webflow.WebState;
 import io.vertx.core.Future;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.unity.Ux;
-import io.zerows.ams.constant.em.app.HttpStatusCode;
 import io.zerows.common.datamation.KMap;
 import io.zerows.common.datamation.KMapping;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.model.commune.Envelop;
 import io.zerows.module.metadata.uca.logging.OLog;
 import io.zerows.specification.modeling.HRecord;
+import io.zerows.unity.Ux;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -25,12 +26,12 @@ public class ActOut extends ActMapping implements Serializable {
     /*
      * Success or Failure response building
      */
-    ActOut(final Object data, final HttpStatusCode statusCode) {
+    ActOut(final Object data, final WebState statusCode) {
         this.envelop = Envelop.success(data, statusCode);
     }
 
     ActOut(final Object data) {
-        this.envelop = Envelop.success(data, HttpStatusCode.OK);
+        this.envelop = Envelop.success(data, SPI.V_STATUS.ok());
     }
 
     ActOut(final Throwable ex) {
@@ -122,7 +123,7 @@ public class ActOut extends ActMapping implements Serializable {
                         LOGGER.info("identifier `{0}`, extract child mapping. {1}", this.identifier, kMapping.toString());
                     }
                 }
-                final HttpStatusCode status = this.envelop.status();
+                final WebState status = this.envelop.status();
                 if (response instanceof JsonObject) {
                     /*
                      * JsonObject here for mapping

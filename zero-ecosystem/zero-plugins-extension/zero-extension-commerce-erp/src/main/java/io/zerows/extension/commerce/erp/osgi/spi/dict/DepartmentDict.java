@@ -3,12 +3,12 @@ package io.zerows.extension.commerce.erp.osgi.spi.dict;
 import io.vertx.core.Future;
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonArray;
-import io.zerows.unity.Ux;
 import io.zerows.common.datamation.KDictSource;
 import io.zerows.core.constant.KName;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.commerce.erp.domain.tables.daos.EDeptDao;
 import io.zerows.module.cloud.zdk.spi.DictionaryPlugin;
+import io.zerows.unity.Ux;
 
 /*
  * Dict for `resource.departments` here

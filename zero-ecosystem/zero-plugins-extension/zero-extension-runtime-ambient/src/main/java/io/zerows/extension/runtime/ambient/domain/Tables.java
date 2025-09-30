@@ -4,23 +4,7 @@
 package io.zerows.extension.runtime.ambient.domain;
 
 
-import io.zerows.extension.runtime.ambient.domain.tables.RTagObject;
-import io.zerows.extension.runtime.ambient.domain.tables.XActivity;
-import io.zerows.extension.runtime.ambient.domain.tables.XActivityChange;
-import io.zerows.extension.runtime.ambient.domain.tables.XActivityRule;
-import io.zerows.extension.runtime.ambient.domain.tables.XApp;
-import io.zerows.extension.runtime.ambient.domain.tables.XAttachment;
-import io.zerows.extension.runtime.ambient.domain.tables.XCategory;
-import io.zerows.extension.runtime.ambient.domain.tables.XLinkage;
-import io.zerows.extension.runtime.ambient.domain.tables.XLog;
-import io.zerows.extension.runtime.ambient.domain.tables.XMenu;
-import io.zerows.extension.runtime.ambient.domain.tables.XModule;
-import io.zerows.extension.runtime.ambient.domain.tables.XNotice;
-import io.zerows.extension.runtime.ambient.domain.tables.XNumber;
-import io.zerows.extension.runtime.ambient.domain.tables.XSource;
-import io.zerows.extension.runtime.ambient.domain.tables.XTabular;
-import io.zerows.extension.runtime.ambient.domain.tables.XTag;
-import io.zerows.extension.runtime.ambient.domain.tables.XTenant;
+import io.zerows.extension.runtime.ambient.domain.tables.*;
 
 
 /**

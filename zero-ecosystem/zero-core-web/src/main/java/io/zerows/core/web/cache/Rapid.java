@@ -4,7 +4,7 @@ import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.ext.auth.User;
-import io.zerows.core.exception.web._501NotSupportException;
+import io.zerows.core.exception.web._60050Exception501NotSupport;
 
 import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
@@ -60,11 +60,11 @@ public interface Rapid<K, V> {
     }
 
     default Future<V> cached(final K key, final Supplier<Future<V>> executor) {
-        throw new _501NotSupportException(getClass());
+        throw new _60050Exception501NotSupport(getClass());
     }
 
     default Future<V> cached(final K key, final Function<K, Future<V>> executor) {
-        throw new _501NotSupportException(getClass());
+        throw new _60050Exception501NotSupport(getClass());
     }
 
     Future<V> write(K key, V value);

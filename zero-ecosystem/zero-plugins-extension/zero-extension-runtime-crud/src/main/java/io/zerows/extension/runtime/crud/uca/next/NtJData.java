@@ -1,9 +1,10 @@
 package io.zerows.extension.runtime.crud.uca.next;
 
+import io.netty.handler.codec.http.HttpResponseStatus;
+import io.r2mo.spi.SPI;
+import io.r2mo.typed.webflow.WebState;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.unity.Ux;
-import io.zerows.ams.constant.em.app.HttpStatusCode;
 import io.zerows.core.constant.em.EmPRI;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.mbse.atom.specification.KModule;
@@ -12,6 +13,7 @@ import io.zerows.extension.runtime.crud.uca.desk.IxReply;
 import io.zerows.module.domain.atom.specification.KJoin;
 import io.zerows.module.domain.atom.specification.KPoint;
 import io.zerows.module.domain.uca.destine.Conflate;
+import io.zerows.unity.Ux;
 
 import java.util.Objects;
 
@@ -92,8 +94,9 @@ class NtJData implements Co<JsonObject, JsonObject, JsonObject, JsonObject> {
 
     @Override
     public Future<JsonObject> ok(final JsonObject active, final JsonObject standBy) {
-        final HttpStatusCode status = IxReply.getStatus(standBy, false);
-        if (HttpStatusCode.NO_CONTENT == status) {
+        final WebState status = IxReply.getStatus(standBy, false);
+        final HttpResponseStatus statusValue = status.value();
+        if (SPI.V_STATUS.ok204().state() == statusValue.code()) {
             return Ux.future(active);
         }
         if (this.in.canJoin()) {

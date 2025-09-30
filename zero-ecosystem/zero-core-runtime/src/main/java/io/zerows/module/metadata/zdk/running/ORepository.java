@@ -2,7 +2,7 @@ package io.zerows.module.metadata.zdk.running;
 
 import io.r2mo.typed.cc.Cc;
 import io.zerows.ams.constant.VString;
-import io.zerows.core.exception.web._501NotSupportException;
+import io.zerows.core.exception.web._60050Exception501NotSupport;
 import io.zerows.core.util.Ut;
 import io.zerows.module.metadata.store.OZeroStore;
 import io.zerows.specification.configuration.HSetting;
@@ -57,11 +57,11 @@ public interface ORepository {
     }
 
     default void whenUpdate(final HSetting setting) {
-        throw Ut.Bnd.failWeb(_501NotSupportException.class, this.getClass());
+        throw new _60050Exception501NotSupport(this.getClass());
     }
 
     default void whenRemove() {
-        throw Ut.Bnd.failWeb(_501NotSupportException.class, this.getClass());
+        throw new _60050Exception501NotSupport(this.getClass());
     }
 
     Bundle caller();

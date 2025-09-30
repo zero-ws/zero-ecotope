@@ -1,7 +1,7 @@
 package io.zerows.extension.mbse.basement.uca.jooq;
 
-import io.zerows.extension.mbse.basement.uca.metadata.AoSentence;
 import io.zerows.extension.mbse.basement.atom.data.DataEvent;
+import io.zerows.extension.mbse.basement.uca.metadata.AoSentence;
 import org.jooq.DSLContext;
 import org.jooq.SelectWhereStep;
 

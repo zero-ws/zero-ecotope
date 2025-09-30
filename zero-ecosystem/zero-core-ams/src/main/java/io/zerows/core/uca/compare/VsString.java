@@ -1,8 +1,8 @@
 package io.zerows.core.uca.compare;
 
+import io.vertx.core.json.JsonArray;
 import io.zerows.ams.constant.VString;
 import io.zerows.ams.util.HUt;
-import io.vertx.core.json.JsonArray;
 
 import java.time.LocalDateTime;
 import java.util.Objects;

@@ -2,10 +2,10 @@ package io.mature.extension.uca.console;
 
 import io.mature.extension.scaffold.console.AbstractInstruction;
 import io.vertx.core.Future;
-import io.zerows.unity.Ux;
 import io.zerows.core.util.Ut;
 import io.zerows.plugins.common.shell.atom.CommandInput;
 import io.zerows.plugins.common.shell.eon.EmCommand;
+import io.zerows.unity.Ux;
 
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;

@@ -1,11 +1,11 @@
 package io.zerows.extension.commerce.rbac.uca.acl.rapier;
 
 import io.r2mo.typed.cc.Cc;
+import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
-import io.zerows.core.exception.web._501NotSupportException;
-import io.zerows.core.util.Ut;
+import io.zerows.core.exception.web._60050Exception501NotSupport;
 import io.zerows.extension.commerce.rbac.atom.ScOwner;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SResource;
 import io.zerows.unity.Ux;
@@ -70,7 +70,7 @@ public interface Quinn {
 
     default <T> Future<T> saveAsync(final SResource resource, final ScOwner owner, final JsonObject data) {
         Objects.requireNonNull(resource);
-        return Ut.Bnd.failOut(_501NotSupportException.class, this.getClass());
+        return FnVertx.failOut(_60050Exception501NotSupport.class, this.getClass());
     }
 
 
@@ -82,10 +82,10 @@ public interface Quinn {
      * 新接口中直接替换原始流程生成完整的 DataBound，移除掉原始的 ViewStub / VisitStub 以及 MatrixStub 部分逻辑
      */
     default <T> Future<T> saveAsync(final String resourceId, final ScOwner owner, final JsonObject data) {
-        return Ut.Bnd.failOut(_501NotSupportException.class, this.getClass());
+        return FnVertx.failOut(_60050Exception501NotSupport.class, this.getClass());
     }
 
     default <T> Future<T> fetchAsync(final String resourceId, final ScOwner owner) {
-        return Ut.Bnd.failOut(_501NotSupportException.class, this.getClass());
+        return FnVertx.failOut(_60050Exception501NotSupport.class, this.getClass());
     }
 }

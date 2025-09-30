@@ -1,9 +1,9 @@
 package io.zerows.extension.mbse.basement.uca.jooq;
 
-import io.zerows.extension.mbse.basement.uca.jooq.internal.Jq;
+import io.zerows.core.util.Ut;
 import io.zerows.extension.mbse.basement.atom.data.DataEvent;
 import io.zerows.extension.mbse.basement.atom.element.DataMatrix;
-import io.zerows.core.util.Ut;
+import io.zerows.extension.mbse.basement.uca.jooq.internal.Jq;
 import org.jooq.*;
 
 import java.util.ArrayList;

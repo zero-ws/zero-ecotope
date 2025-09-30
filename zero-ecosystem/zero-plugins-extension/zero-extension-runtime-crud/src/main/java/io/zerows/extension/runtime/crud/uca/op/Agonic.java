@@ -1,11 +1,11 @@
 package io.zerows.extension.runtime.crud.uca.op;
 
-import io.zerows.ams.constant.em.typed.ChangeFlag;
-import io.zerows.core.exception.web._501NotSupportException;
+import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.util.Ut;
+import io.zerows.ams.constant.em.typed.ChangeFlag;
+import io.zerows.core.exception.web._60050Exception501NotSupport;
 import io.zerows.extension.runtime.crud.eon.Pooled;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 import io.zerows.extension.runtime.crud.uca.op.aop.AgonicAop;
@@ -61,18 +61,18 @@ public interface Agonic {
     }
 
     default Future<JsonObject> runJAsync(final JsonObject input, final IxMod in) {
-        return Ut.Bnd.failOut(_501NotSupportException.class, this.getClass());
+        return FnVertx.failOut(_60050Exception501NotSupport.class, this.getClass());
     }
 
     default Future<JsonArray> runAAsync(final JsonArray input, final IxMod in) {
-        return Ut.Bnd.failOut(_501NotSupportException.class, this.getClass());
+        return FnVertx.failOut(_60050Exception501NotSupport.class, this.getClass());
     }
 
     default Future<JsonArray> runJAAsync(final JsonObject input, final IxMod in) {
-        return Ut.Bnd.failOut(_501NotSupportException.class, this.getClass());
+        return FnVertx.failOut(_60050Exception501NotSupport.class, this.getClass());
     }
 
     default Future<JsonObject> runAJAsync(final JsonArray input, final IxMod in) {
-        return Ut.Bnd.failOut(_501NotSupportException.class, this.getClass());
+        return FnVertx.failOut(_60050Exception501NotSupport.class, this.getClass());
     }
 }

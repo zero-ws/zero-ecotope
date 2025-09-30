@@ -18,6 +18,7 @@ package io.zerows.ams.constant.em.app;
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Deprecated
 public enum HttpStatusCode {
     // ~ 1xx =================================================
     /**

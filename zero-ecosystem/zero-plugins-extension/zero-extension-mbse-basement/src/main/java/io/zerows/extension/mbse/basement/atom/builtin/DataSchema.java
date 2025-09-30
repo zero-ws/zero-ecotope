@@ -2,9 +2,9 @@ package io.zerows.extension.mbse.basement.atom.builtin;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.extension.mbse.basement.atom.Schema;
 import io.zerows.core.constant.KName;
 import io.zerows.core.util.Ut;
+import io.zerows.extension.mbse.basement.atom.Schema;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MEntity;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MField;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MIndex;

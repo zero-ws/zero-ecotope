@@ -1,7 +1,7 @@
 package io.zerows.plugins.store.elasticsearch;
 
-import io.zerows.ams.constant.em.typed.ChangeFlag;
 import io.vertx.core.json.JsonObject;
+import io.zerows.ams.constant.em.typed.ChangeFlag;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;

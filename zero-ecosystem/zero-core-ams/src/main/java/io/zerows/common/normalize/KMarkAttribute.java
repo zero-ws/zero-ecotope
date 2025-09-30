@@ -1,10 +1,10 @@
 package io.zerows.common.normalize;
 
-import io.zerows.ams.constant.VString;
-import io.zerows.ams.util.HUt;
-import io.zerows.ams.constant.em.modeling.EmAttribute;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.ams.constant.VString;
+import io.zerows.ams.constant.em.modeling.EmAttribute;
+import io.zerows.ams.util.HUt;
 
 import java.util.List;
 import java.util.Objects;

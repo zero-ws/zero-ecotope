@@ -1,10 +1,10 @@
 package io.zerows.extension.mbse.basement.atom;
 
-import io.zerows.specification.modeling.operation.HLinkage;
-import io.zerows.specification.modeling.HLife;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MEntity;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MField;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MKey;
+import io.zerows.specification.modeling.HLife;
+import io.zerows.specification.modeling.operation.HLinkage;
 
 import java.util.List;
 import java.util.Set;

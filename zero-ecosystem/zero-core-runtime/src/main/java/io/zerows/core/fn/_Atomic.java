@@ -1,8 +1,8 @@
 package io.zerows.core.fn;
 
-import io.zerows.ams.fn.HFn;
 import io.vertx.core.Future;
 import io.vertx.core.Promise;
+import io.zerows.ams.fn.HFn;
 
 import java.util.function.Consumer;
 

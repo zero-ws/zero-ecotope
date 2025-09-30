@@ -1,6 +1,12 @@
 package io.zerows.core.web.model.commune;
 
+import io.r2mo.base.web.ForStatus;
 import io.r2mo.function.Fn;
+import io.r2mo.spi.SPI;
+import io.r2mo.typed.exception.WebException;
+import io.r2mo.typed.exception.web._500ServerInternalException;
+import io.r2mo.typed.webflow.WebState;
+import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.MultiMap;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.http.HttpMethod;
@@ -9,11 +15,8 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.Session;
-import io.zerows.ams.constant.em.app.HttpStatusCode;
 import io.zerows.ams.constant.em.modeling.EmValue;
 import io.zerows.core.constant.KName;
-import io.zerows.core.exception.WebException;
-import io.zerows.core.exception.web._500InternalServerException;
 import io.zerows.core.util.Ut;
 import io.zerows.epoch.mature.exception._40032Exception500IndexExceed;
 import io.zerows.module.security.atom.token.JwtToken;
@@ -25,9 +28,10 @@ import java.util.Objects;
 import java.util.function.Consumer;
 
 public class Envelop implements Serializable {
+    private final static ForStatus STATE = SPI.V_STATUS;
 
     /* Basic Data for Envelop such as: Data, Error, Status */
-    private final HttpStatusCode status;
+    private final WebState status;
     private final WebException error;
     private final JsonObject data;
 
@@ -49,7 +53,7 @@ public class Envelop implements Serializable {
      * @param status http status of this Envelop
      * @param <T>    The type of stored data
      */
-    private <T> Envelop(final T data, final HttpStatusCode status) {
+    private <T> Envelop(final T data, final WebState status) {
         this.data = Rib.input(data);
         this.error = null;
         this.status = status;
@@ -61,7 +65,7 @@ public class Envelop implements Serializable {
     private Envelop(final WebException error) {
         this.status = error.getStatus();
         this.error = error;
-        this.data = error.toJson();
+        this.data = FnVertx.adapt(error);
     }
 
     /*
@@ -75,26 +79,26 @@ public class Envelop implements Serializable {
      */
     // 204, null
     public static Envelop ok() {
-        return new Envelop(null, HttpStatusCode.NO_CONTENT);
+        return new Envelop(null, SPI.V_STATUS.ok());
     }
 
     public static Envelop okJson() {
-        return new Envelop(new JsonObject(), HttpStatusCode.OK);
+        return new Envelop(new JsonObject(), STATE.ok());
     }
 
     // 200, Tool
     public static <T> Envelop success(final T entity) {
-        return new Envelop(entity, HttpStatusCode.OK);
+        return new Envelop(entity, STATE.ok());
     }
 
     // xxx, Tool
-    public static <T> Envelop success(final T entity, final HttpStatusCode status) {
+    public static <T> Envelop success(final T entity, final WebState status) {
         return new Envelop(entity, status);
     }
 
     // default error 500
     public static Envelop failure(final String message) {
-        return new Envelop(new _500InternalServerException(Envelop.class, message));
+        return new Envelop(new _500ServerInternalException(message));
     }
 
     // default error 500 ( JVM Error )
@@ -106,10 +110,6 @@ public class Envelop implements Serializable {
     // other error with WebException
     public static Envelop failure(final WebException error) {
         return new Envelop(error);
-    }
-
-    public static Envelop failure(final io.r2mo.typed.exception.WebException error) {
-        return null;
     }
 
     /*
@@ -193,7 +193,7 @@ public class Envelop implements Serializable {
 
     // ------------------ Below are Bean Get -------------------
     /* HttpStatusCode */
-    public HttpStatusCode status() {
+    public WebState status() {
         return this.status;
     }
 

@@ -1,6 +1,6 @@
 package io.zerows.module.metadata.zdk.running;
 
-import io.zerows.core.exception.web._501NotSupportException;
+import io.zerows.core.exception.web._60050Exception501NotSupport;
 import io.zerows.core.util.Ut;
 import io.zerows.module.metadata.uca.logging.OLog;
 import io.zerows.module.metadata.zdk.AbstractAmbiguity;
@@ -61,7 +61,7 @@ public interface OCache<T> {
      * @return 返回当前缓存中的所有键
      */
     default Set<String> keys() {
-        throw Ut.Bnd.failWeb(_501NotSupportException.class, this.getClass());
+        throw new _60050Exception501NotSupport(this.getClass());
     }
 
     /**
@@ -70,7 +70,7 @@ public interface OCache<T> {
      * @return 返回当前缓存中的所有值
      */
     default T value() {
-        throw Ut.Bnd.failWeb(_501NotSupportException.class, this.getClass());
+        throw new _60050Exception501NotSupport(this.getClass());
     }
 
     /**
@@ -81,7 +81,7 @@ public interface OCache<T> {
      * @return 需筛选的类型
      */
     default T valueGet(final String key) {
-        throw Ut.Bnd.failWeb(_501NotSupportException.class, this.getClass());
+        throw new _60050Exception501NotSupport(this.getClass());
     }
 
     // -------------------- 两种模式的追加和移除 --------------------

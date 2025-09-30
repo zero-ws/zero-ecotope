@@ -1,9 +1,9 @@
 package io.zerows.plugins.swagger;
 
+import io.swagger.v3.core.util.Yaml;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.StaticHandler;
-import io.swagger.v3.core.util.Yaml;
 
 public class SwaggerRouteBuilder {
 

@@ -1,8 +1,8 @@
 package io.zerows.core.uca.log.internal;
 
+import io.zerows.ams.util.HUt;
 import io.zerows.core.spi.HorizonIo;
 import io.zerows.core.uca.log.Annal;
-import io.zerows.ams.util.HUt;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;

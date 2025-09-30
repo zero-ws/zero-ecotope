@@ -1,10 +1,10 @@
 package io.zerows.core.uca.aop;
 
-import io.zerows.core.exception.web._501NotSupportException;
-import io.zerows.ams.util.HUt;
-import io.zerows.ams.constant.spec.VPC;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.ams.constant.spec.VPC;
+import io.zerows.ams.util.HUt;
+import io.zerows.core.exception.web._60050Exception501NotSupport;
 import io.zerows.specification.atomic.HReturn;
 
 import java.util.Collection;
@@ -74,7 +74,7 @@ class AspectConfig {
                 final JsonArray inputA = (JsonArray) input;
                 return HUt.valueString(inputA, by);
             } else {
-                throw new _501NotSupportException(this.getClass());
+                throw new _60050Exception501NotSupport(this.getClass());
             }
         }
     }

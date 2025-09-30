@@ -1,12 +1,12 @@
 package io.zerows.extension.commerce.rbac.uca.acl.relation;
 
 import io.r2mo.typed.cc.Cc;
+import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.ams.constant.VValue;
-import io.zerows.core.exception.web._501NotSupportException;
-import io.zerows.core.util.Ut;
+import io.zerows.core.exception.web._60050Exception501NotSupport;
 import io.zerows.unity.Ux;
 
 /*
@@ -32,7 +32,7 @@ public interface IdcStub {
      * 2) Update
      */
     default Future<JsonArray> saveAsync(final JsonArray user, final String by) {
-        return Ut.Bnd.failOut(_501NotSupportException.class, this.getClass());
+        return FnVertx.failOut(_60050Exception501NotSupport.class, this.getClass());
     }
 
     default Future<JsonObject> saveAsync(final JsonObject user, final String by) {

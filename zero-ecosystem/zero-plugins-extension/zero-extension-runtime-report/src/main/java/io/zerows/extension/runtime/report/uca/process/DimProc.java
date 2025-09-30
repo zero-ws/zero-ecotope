@@ -1,11 +1,11 @@
 package io.zerows.extension.runtime.report.uca.process;
 
 import io.r2mo.typed.cc.Cc;
+import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.exception.web._501NotSupportException;
-import io.zerows.core.util.Ut;
+import io.zerows.core.exception.web._60050Exception501NotSupport;
 import io.zerows.extension.runtime.report.atom.RDimension;
 import io.zerows.extension.runtime.report.domain.tables.pojos.KpDimension;
 import org.osgi.framework.Bundle;
@@ -48,10 +48,10 @@ public interface DimProc {
      * @return 处理之后的维度信息
      */
     default Future<List<RDimension>> dimAsync(final JsonObject params, final List<KpDimension> dimension) {
-        return Ut.Bnd.failOut(_501NotSupportException.class, this.getClass());
+        return FnVertx.failOut(_60050Exception501NotSupport.class, this.getClass());
     }
 
     default Future<RDimension> dimAsync(final JsonObject params, final JsonArray source, final KpDimension dimension) {
-        return Ut.Bnd.failOut(_501NotSupportException.class, this.getClass());
+        return FnVertx.failOut(_60050Exception501NotSupport.class, this.getClass());
     }
 }

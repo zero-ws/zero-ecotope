@@ -1,7 +1,7 @@
 package io.zerows.core.web.container.uca.mode;
 
-import io.zerows.ams.constant.em.app.HttpStatusCode;
-import io.zerows.core.exception.web._500InternalServerException;
+import io.r2mo.typed.exception.web._500ServerInternalException;
+import io.r2mo.typed.webflow.WebState;
 import io.vertx.core.Future;
 import io.vertx.core.http.HttpServerResponse;
 import io.vertx.ext.web.RoutingContext;
@@ -29,7 +29,7 @@ public final class Answer {
     public static Envelop previous(final RoutingContext context) {
         Envelop envelop = context.get(KWeb.ARGS.REQUEST_BODY);
         if (Objects.isNull(envelop)) {
-            envelop = Envelop.failure(new _500InternalServerException(Answer.class, "Previous Error of " + KWeb.ARGS.REQUEST_BODY));
+            envelop = Envelop.failure(new _500ServerInternalException("[ R2MO ] 之前出现的错误：" + KWeb.ARGS.REQUEST_BODY));
         }
         return envelop;
     }
@@ -110,9 +110,9 @@ public final class Answer {
              * It's not needed for current position to set or here will cause following bug:
              *   java.lang.IllegalStateException: Response head already sent
              */
-            final HttpStatusCode code = envelop.status();
-            response.setStatusCode(code.code());
-            response.setStatusMessage(code.message());
+            final WebState code = envelop.status();
+            response.setStatusCode(code.state());
+            response.setStatusMessage(code.name());
             /*
              * Bind Data
              */

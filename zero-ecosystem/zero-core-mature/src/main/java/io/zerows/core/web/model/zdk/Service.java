@@ -1,9 +1,9 @@
 package io.zerows.core.web.model.zdk;
 
+import io.vertx.core.json.JsonObject;
 import io.zerows.common.datamation.KMap;
 import io.zerows.common.normalize.KIdentity;
 import io.zerows.specification.modeling.HRule;
-import io.vertx.core.json.JsonObject;
 
 /*
  * Uniform interface for Job/Component definition

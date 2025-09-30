@@ -5,7 +5,7 @@ import io.vertx.core.Vertx;
 import io.zerows.ams.constant.VString;
 import io.zerows.boot.enums.VertxComponent;
 import io.zerows.core.annotations.Infusion;
-import io.zerows.core.exception.web._501NotSupportException;
+import io.zerows.core.exception.web._60050Exception501NotSupport;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.container.store.under.StoreVertx;
 import io.zerows.core.web.container.verticle.ZeroHttpAgent;
@@ -84,11 +84,11 @@ public interface StubLinear {
 
 
     default void runDeploy(final Class<?> clazz, final RunVertx runVertx) {
-        throw Ut.Bnd.failWeb(_501NotSupportException.class, this.getClass());
+        throw new _60050Exception501NotSupport(this.getClass());
     }
 
     default void runUndeploy(final Class<?> clazz, final RunVertx runVertx) {
-        throw Ut.Bnd.failWeb(_501NotSupportException.class, this.getClass());
+        throw new _60050Exception501NotSupport(this.getClass());
     }
 
     default OLog logger() {

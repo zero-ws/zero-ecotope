@@ -1,23 +1,23 @@
 package io.zerows.extension.mbse.action.atom;
 
-import io.zerows.common.datamation.KDictConfig;
-import io.zerows.common.datamation.KMap;
+import io.vertx.core.json.JsonObject;
 import io.zerows.ams.constant.em.Environment;
 import io.zerows.ams.constant.em.app.EmTraffic;
-import io.zerows.specification.access.app.HApp;
-import io.zerows.specification.access.app.HArk;
 import io.zerows.common.app.KIntegration;
+import io.zerows.common.datamation.KDictConfig;
+import io.zerows.common.datamation.KMap;
 import io.zerows.common.normalize.KIdentity;
-import io.zerows.specification.modeling.HRule;
-import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
-import io.zerows.core.util.Ut;
 import io.zerows.core.database.atom.Database;
+import io.zerows.core.util.Ut;
 import io.zerows.core.web.model.zdk.Commercial;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IService;
 import io.zerows.extension.mbse.action.eon.JtKey;
 import io.zerows.extension.mbse.action.util.Jt;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
+import io.zerows.specification.access.app.HApp;
+import io.zerows.specification.access.app.HArk;
+import io.zerows.specification.modeling.HRule;
 
 import java.util.Objects;
 

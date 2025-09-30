@@ -1,7 +1,7 @@
 package io.zerows.core.web.container.store.under;
 
 import io.vertx.core.Vertx;
-import io.zerows.core.exception.web._501NotSupportException;
+import io.zerows.core.exception.web._60050Exception501NotSupport;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.model.atom.running.RunVertx;
 import io.zerows.module.metadata.atom.MultiKeyMap;
@@ -36,7 +36,7 @@ class StoreVertxAmbiguity extends AbstractAmbiguity implements StoreVertx {
     @Override
     public Vertx vertx() {
         if (1 != RUNNING.values().size()) {
-            throw Ut.Bnd.failWeb(_501NotSupportException.class, this.getClass());
+            throw new _60050Exception501NotSupport(this.getClass());
         }
         final RunVertx runVertx = RUNNING.values().iterator().next();
         return Objects.isNull(runVertx) ? null : runVertx.instance();

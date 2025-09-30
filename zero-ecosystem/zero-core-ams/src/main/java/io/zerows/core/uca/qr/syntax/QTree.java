@@ -1,9 +1,9 @@
 package io.zerows.core.uca.qr.syntax;
 
-import io.zerows.ams.constant.VString;
-import io.zerows.core.uca.qr.Criteria;
-import io.zerows.ams.util.HUt;
 import io.vertx.core.json.JsonObject;
+import io.zerows.ams.constant.VString;
+import io.zerows.ams.util.HUt;
+import io.zerows.core.uca.qr.Criteria;
 
 import java.util.Objects;
 

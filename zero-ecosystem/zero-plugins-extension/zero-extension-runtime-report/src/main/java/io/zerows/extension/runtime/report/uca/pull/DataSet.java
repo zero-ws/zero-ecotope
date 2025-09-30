@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.ams.constant.VString;
 import io.zerows.core.constant.KName;
-import io.zerows.core.exception.web._501NotSupportException;
+import io.zerows.core.exception.web._60050Exception501NotSupport;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.runtime.report.domain.tables.pojos.KpDataSet;
 import io.zerows.extension.runtime.report.eon.RpConstant;
@@ -55,7 +55,7 @@ public interface DataSet {
             );
         }
         // Not Support
-        throw Ut.Bnd.failWeb(_501NotSupportException.class, DataSet.class);
+        throw new _60050Exception501NotSupport(DataSet.class);
     }
 
     /**

@@ -1,8 +1,8 @@
 package io.zerows.extension.runtime.workflow.bootstrap;
 
+import io.vertx.core.json.JsonObject;
 import io.zerows.ams.constant.VPath;
 import io.zerows.ams.constant.VString;
-import io.vertx.core.json.JsonObject;
 import io.zerows.core.util.Ut;
 
 import java.util.List;

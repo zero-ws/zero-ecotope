@@ -4,37 +4,8 @@
 package io.zerows.extension.commerce.finance.domain;
 
 
-import io.zerows.extension.commerce.finance.domain.tables.FBank;
-import io.zerows.extension.commerce.finance.domain.tables.FBill;
-import io.zerows.extension.commerce.finance.domain.tables.FBillItem;
-import io.zerows.extension.commerce.finance.domain.tables.FBook;
-import io.zerows.extension.commerce.finance.domain.tables.FCurrency;
-import io.zerows.extension.commerce.finance.domain.tables.FDebt;
-import io.zerows.extension.commerce.finance.domain.tables.FInvoice;
-import io.zerows.extension.commerce.finance.domain.tables.FPayTerm;
-import io.zerows.extension.commerce.finance.domain.tables.FPreAuthorize;
-import io.zerows.extension.commerce.finance.domain.tables.FSettlement;
-import io.zerows.extension.commerce.finance.domain.tables.FSettlementItem;
-import io.zerows.extension.commerce.finance.domain.tables.FSubject;
-import io.zerows.extension.commerce.finance.domain.tables.FTrans;
-import io.zerows.extension.commerce.finance.domain.tables.FTransItem;
-import io.zerows.extension.commerce.finance.domain.tables.FTransOf;
-import io.zerows.extension.commerce.finance.domain.tables.records.FBankRecord;
-import io.zerows.extension.commerce.finance.domain.tables.records.FBillItemRecord;
-import io.zerows.extension.commerce.finance.domain.tables.records.FBillRecord;
-import io.zerows.extension.commerce.finance.domain.tables.records.FBookRecord;
-import io.zerows.extension.commerce.finance.domain.tables.records.FCurrencyRecord;
-import io.zerows.extension.commerce.finance.domain.tables.records.FDebtRecord;
-import io.zerows.extension.commerce.finance.domain.tables.records.FInvoiceRecord;
-import io.zerows.extension.commerce.finance.domain.tables.records.FPayTermRecord;
-import io.zerows.extension.commerce.finance.domain.tables.records.FPreAuthorizeRecord;
-import io.zerows.extension.commerce.finance.domain.tables.records.FSettlementItemRecord;
-import io.zerows.extension.commerce.finance.domain.tables.records.FSettlementRecord;
-import io.zerows.extension.commerce.finance.domain.tables.records.FSubjectRecord;
-import io.zerows.extension.commerce.finance.domain.tables.records.FTransItemRecord;
-import io.zerows.extension.commerce.finance.domain.tables.records.FTransOfRecord;
-import io.zerows.extension.commerce.finance.domain.tables.records.FTransRecord;
-
+import io.zerows.extension.commerce.finance.domain.tables.*;
+import io.zerows.extension.commerce.finance.domain.tables.records.*;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.DSL;

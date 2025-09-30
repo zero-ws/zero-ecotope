@@ -1,11 +1,12 @@
 package io.zerows.ams.util;
 
 import io.r2mo.function.Fn;
+import io.r2mo.typed.exception.WebException;
+import io.r2mo.typed.exception.web._500ServerInternalException;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.core.Promise;
-import io.zerows.core.exception.WebException;
 import io.zerows.core.exception.boot._11011Exception500InvokingPre;
 import io.zerows.core.exception.web._60059Exception412ArgumentNull;
 
@@ -97,7 +98,7 @@ final class UInvoker {
             ex.printStackTrace();
             if (Future.class.isAssignableFrom(returnType)) {
                 // Async Calling
-                final WebException error = HUt.failWeb(null, ex, true); // Instance.errorWeb(ex);
+                final WebException error = new _500ServerInternalException("[ R2MO ] 调用过程中的其他异常：" + ex.getMessage());
                 result = Future.failedFuture(error);
             } else {
                 // Sync Calling

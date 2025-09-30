@@ -1,9 +1,9 @@
 package io.mature.extension.uca.concrete;
 
-import io.zerows.core.exception.web._501NotSupportException;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.core.exception.web._60050Exception501NotSupport;
 
 /*
  * 单操作专用接口
@@ -21,6 +21,6 @@ public interface Arrow {
      * 操作批量记录（默认设置异常抛出）
      */
     default Future<JsonArray> processAsync(final JsonArray records) {
-        throw new _501NotSupportException(this.getClass());
+        throw new _60050Exception501NotSupport(this.getClass());
     }
 }

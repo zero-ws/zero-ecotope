@@ -1,9 +1,8 @@
 package io.zerows.core.web.io.uca.request.mime;
 
 import io.r2mo.typed.cc.Cc;
+import io.r2mo.typed.exception.WebException;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.core.exception.WebException;
-import io.zerows.core.uca.log.Annal;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.io.uca.request.mime.parse.EpsilonIncome;
 import io.zerows.core.web.io.uca.request.mime.parse.Income;
@@ -17,7 +16,6 @@ import java.util.List;
 
 public class MediaAnalyzer implements Analyzer {
 
-    private static final Annal LOGGER = Annal.get(MediaAnalyzer.class);
     private static final Cc<String, Income<List<Epsilon<Object>>>> CC_EPSILON = Cc.openThread();
 
     @Override

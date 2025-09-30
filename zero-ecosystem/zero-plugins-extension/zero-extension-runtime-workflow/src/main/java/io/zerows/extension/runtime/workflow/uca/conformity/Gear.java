@@ -1,11 +1,11 @@
 package io.zerows.extension.runtime.workflow.uca.conformity;
 
 import io.r2mo.typed.cc.Cc;
+import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.common.program.Kv;
-import io.zerows.core.exception.web._501NotSupportException;
-import io.zerows.core.util.Ut;
+import io.zerows.core.exception.web._60050Exception501NotSupport;
 import io.zerows.extension.runtime.workflow.atom.runtime.WTask;
 import io.zerows.extension.runtime.workflow.domain.tables.pojos.WTicket;
 import io.zerows.extension.runtime.workflow.domain.tables.pojos.WTodo;
@@ -89,10 +89,10 @@ public interface Gear {
     Future<WTask> taskAsync(ProcessInstance instance, Task from);
 
     default Future<List<WTodo>> todoAsync(final JsonObject parameters, final WTask wTask, final WTicket ticket) {
-        return Ut.Bnd.failOut(_501NotSupportException.class, this.getClass());
+        return FnVertx.failOut(_60050Exception501NotSupport.class, this.getClass());
     }
 
     default Future<List<WTodo>> todoAsync(final JsonObject parameters, final WTask wTask, final WTicket ticket, final WTodo todo) {
-        return Ut.Bnd.failOut(_501NotSupportException.class, this.getClass());
+        return FnVertx.failOut(_60050Exception501NotSupport.class, this.getClass());
     }
 }

@@ -1,6 +1,6 @@
 package io.zerows.core.web.io.uca.request.mime;
 
-import io.zerows.core.exception.WebException;
+import io.r2mo.typed.exception.WebException;
 import io.zerows.core.web.io.uca.request.mime.parse.Income;
 import io.zerows.core.web.model.atom.Event;
 import io.zerows.core.web.model.commune.Envelop;

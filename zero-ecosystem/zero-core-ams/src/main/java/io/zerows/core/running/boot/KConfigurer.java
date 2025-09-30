@@ -1,9 +1,9 @@
 package io.zerows.core.running.boot;
 
+import io.r2mo.typed.exception.AbstractException;
 import io.zerows.ams.constant.VMessage;
 import io.zerows.ams.constant.em.EmBoot;
 import io.zerows.ams.util.HUt;
-import io.zerows.core.exception.BaseZeroException;
 import io.zerows.core.uca.log.LogAs;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HEnergy;
@@ -106,7 +106,7 @@ public class KConfigurer<T> {
                 LogAs.Boot.info(this.getClass(), VMessage.HOn.COMPONENT_CONFIG, configuration.options().encodePrettily());
             }
             return on;
-        } catch (final BaseZeroException error) {
+        } catch (final AbstractException error) {
             error.printStackTrace();
             throw error;
         }

@@ -4,15 +4,7 @@
 package io.zerows.extension.commerce.rbac.domain;
 
 
-import io.zerows.extension.commerce.rbac.domain.tables.OUser;
-import io.zerows.extension.commerce.rbac.domain.tables.RUserGroup;
-import io.zerows.extension.commerce.rbac.domain.tables.RUserRole;
-import io.zerows.extension.commerce.rbac.domain.tables.SAction;
-import io.zerows.extension.commerce.rbac.domain.tables.SPacket;
-import io.zerows.extension.commerce.rbac.domain.tables.SPath;
-import io.zerows.extension.commerce.rbac.domain.tables.SUser;
-import io.zerows.extension.commerce.rbac.domain.tables.SVisitant;
-
+import io.zerows.extension.commerce.rbac.domain.tables.*;
 import org.jooq.Index;
 import org.jooq.OrderField;
 import org.jooq.impl.DSL;

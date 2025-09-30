@@ -3,7 +3,7 @@ package io.zerows.core.spi.modeler;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.exception.web._501NotSupportException;
+import io.zerows.core.exception.web._60050Exception501NotSupport;
 
 import java.util.concurrent.ConcurrentMap;
 
@@ -31,6 +31,6 @@ public interface Identifier {
      * The default implementation is Not Support Exception throw out
      */
     default Future<ConcurrentMap<String, JsonArray>> resolve(final JsonObject data, final String identifier, final JsonObject config) {
-        return Future.failedFuture(new _501NotSupportException(this.getClass()));
+        return Future.failedFuture(new _60050Exception501NotSupport(this.getClass()));
     }
 }

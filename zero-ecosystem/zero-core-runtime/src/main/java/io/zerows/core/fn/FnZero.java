@@ -33,7 +33,7 @@ import java.util.function.Supplier;
  * - Predicate  |
  */
 @SuppressWarnings("all")
-public final class FnZero extends _Out {
+public final class FnZero extends _Of {
     private FnZero() {
     }
 

@@ -1,6 +1,6 @@
 package io.zerows.core.web.mbse.atom.runner;
 
-import io.zerows.ams.constant.em.app.HttpStatusCode;
+import io.r2mo.spi.SPI;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
@@ -12,7 +12,7 @@ import java.util.Objects;
 class Act {
 
     static ActOut empty() {
-        return new ActOut(new JsonObject(), HttpStatusCode.NO_CONTENT);
+        return new ActOut(new JsonObject(), SPI.V_STATUS.ok204());
     }
 
     static ActOut response(final Boolean result) {

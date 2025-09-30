@@ -4,7 +4,7 @@ import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.Message;
-import io.zerows.core.exception.web._501NotSupportException;
+import io.zerows.core.exception.web._60050Exception501NotSupport;
 import io.zerows.core.web.model.commune.Envelop;
 import io.zerows.epoch.mature.exception._60027Exception501RpcReject;
 
@@ -46,6 +46,6 @@ public class MessageInvoker extends AbstractInvoker {
     public <I, O> void handle(final Object proxy, final Method method,
                               final I input, final Handler<AsyncResult<O>> handler) {
         // Return void is reject by Standard Invoke
-        throw new _501NotSupportException(this.getClass());
+        throw new _60050Exception501NotSupport(this.getClass());
     }
 }

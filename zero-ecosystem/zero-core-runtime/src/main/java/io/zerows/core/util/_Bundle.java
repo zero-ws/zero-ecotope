@@ -1,9 +1,7 @@
 package io.zerows.core.util;
 
-import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.exception.WebException;
 import io.zerows.core.spi.HorizonIo;
 import io.zerows.module.metadata.zdk.running.OCommand;
 import org.apache.felix.dm.Component;
@@ -178,67 +176,6 @@ class _Bundle extends _Ai {
                                               final Supplier<ServiceDependency> serviceSupplier,
                                               final Class<?>... serviceClsArr) {
             return BundleInfo.addDependency(callback, serviceSupplier, serviceClsArr);
-        }
-
-        // --------------------- Exception
-        public static <T extends WebException> WebException failWeb(
-            final Class<T> exceptionCls, final Class<?> target, final Object... args) {
-            return BundleSPI.failWeb(exceptionCls, target, args);
-        }
-
-        /**
-         * 此处的特殊性是不可以带 boolean 的检查参数，通常外层可能为
-         * <pre><code>
-         *     if(condition){
-         *         return {@link Future#failedFuture(Throwable)};
-         *     }
-         * </code></pre>
-         * 上述代码流程中只是截断返回，而不是截断抛出异常，基于此设计，此处的方法不包含 boolean 参数，不可以像 outWeb 那种模式直接
-         * throw 抛出，抛出异常在异步数据流中无意义。
-         * <p>
-         * 简化的代码部分：
-         * <pre><code>
-         *     1. 形态1：
-         *        final WebException error = Ut.Bnd.failWeb(_404MobileNotFoundException.class, this.getClass(), mobile);
-         *        return Future.failedFuture(error);
-         *     2. 形态2：
-         *        return Future.failedFuture(
-         *            Ut.Bnd.failWeb(_401ImageCodeWrongException.class, this.getClass(), imageCode)
-         *        );
-         *     3. 旧版：
-         *        return FnZero.outWeb(_400SigmaMissingException.class, HHotel.class);
-         * </code></pre>
-         * 注：这两个方法的区别
-         * <pre><code>
-         *     1. {@see FnZero#outWeb(Class, Object...)}()}，此方法不支持 OSGI 环境，旧版异步流中只有一个方法返回了 Future，基于此
-         *        未来所有版本都会替换成 {@link Future} 的形式，所以旧版会直接 @Deprecated 掉
-         *     2. 当前方法支持 OSGI 环境，可在 OSGI 模块化环境中直接使用。
-         *     3. 当前方法除了 {@link WebException} 以外，操作的异常类型更全。
-         * </code></pre>
-         * 旧版中的 outWeb / outBoot / out 三个核心方法是抛出异常，此异常依旧保留，虽然在 OSGI 环境中可能会有一定的兼容问题，但依旧可以
-         * 在异常发生的时候再执行相关重构，所以如此就统一了对应的异常处理。
-         * 总结起来参考等价方法
-         * <pre><code>
-         *     旧环境                      新环境（带 OSGI）
-         *     FnZero.out
-         *     FnZero.outWeb                  throw Ut.Bnd.failWeb
-         *     FnZero.outBoot                 throw Ut.Bnd.failBoot
-         *     Ut.failWeb                 Ut.Bnd.failWeb
-         *     （异步）                    Ut.Bnd.failOut
-         * </code></pre>
-         * 异步模式不再提供旧方法（高频编程位置），毕竟 throw 抛异常的模式是位于旧版的启动流程中最多，而不需要让这些异常带有特定的意义存在，
-         * 所以直接使用 FnZero.out??? 的方式构造也无关结果。
-         *
-         * @param exceptionCls 异常类，必须是 WebException 或 BootingException，其他异常转换成 501
-         * @param target       目标类，一般是 getClass() 结果或当前类
-         * @param args         参数表
-         * @param <T>          主要配合外层的 <T> 定义
-         *
-         * @return 异步结果 Monad
-         */
-        public static <T> Future<T> failOut(final Class<?> exceptionCls,
-                                            final Class<?> target, final Object... args) {
-            return BundleSPI.failOut(exceptionCls, target, args);
         }
     }
 }

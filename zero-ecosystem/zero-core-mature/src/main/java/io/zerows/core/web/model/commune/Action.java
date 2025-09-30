@@ -1,13 +1,13 @@
 package io.zerows.core.web.model.commune;
 
+import io.r2mo.typed.exception.WebException;
+import io.r2mo.typed.exception.web._500ServerInternalException;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.HttpException;
 import io.zerows.ams.constant.em.modeling.EmValue;
 import io.zerows.core.constant.KName;
-import io.zerows.core.exception.WebException;
-import io.zerows.core.exception.web._500InternalServerException;
 import io.zerows.core.util.Ut;
 import io.zerows.epoch.mature.exception._60049Exception500HttpWeb;
 import io.zerows.module.security.zdk.authority.Acl;
@@ -65,9 +65,9 @@ class Action {
 
     /** Exception **/
     static Envelop outFailure(final Throwable ex) {
-        if (ex instanceof WebException) {
+        if (ex instanceof final WebException exWeb) {
             // Throwable converted to WebException
-            return Envelop.failure((WebException) ex);
+            return Envelop.failure(exWeb);
         } else {
             if (ex instanceof HttpException) {
                 // Http Exception, When this situation, the ex may contain WebException internal
@@ -84,7 +84,7 @@ class Action {
                 }
             } else {
                 // Common JVM Exception
-                return Envelop.failure(new _500InternalServerException(Envelop.class, ex.getMessage()));
+                return Envelop.failure(new _500ServerInternalException("[ R2MO ] 异常：" + ex.getMessage()));
             }
         }
     }

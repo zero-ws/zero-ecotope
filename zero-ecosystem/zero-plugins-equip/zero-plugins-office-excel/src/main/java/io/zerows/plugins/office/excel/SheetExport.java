@@ -1,6 +1,7 @@
 package io.zerows.plugins.office.excel;
 
 import io.r2mo.function.Fn;
+import io.r2mo.typed.exception.web._500ServerInternalException;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
@@ -9,7 +10,6 @@ import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
 import io.zerows.ams.constant.VPath;
 import io.zerows.ams.constant.VString;
-import io.zerows.core.exception.web._500InternalServerException;
 import io.zerows.core.util.Ut;
 import io.zerows.plugins.office.excel.exception._60039Exception500ExportingError;
 import io.zerows.plugins.office.excel.util.ExFn;
@@ -181,8 +181,7 @@ class SheetExport {
                 if (Objects.nonNull(error)) {
                     promise.fail(new _60039Exception500ExportingError(error.getMessage()));
                 } else {
-                    promise.fail(new _500InternalServerException(this.getClass(),
-                        "Unexpected Error when Exporting"));
+                    promise.fail(new _500ServerInternalException("[ R2MO ] 未知错误，导出失败！"));
                 }
             }
         };

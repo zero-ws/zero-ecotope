@@ -1,8 +1,8 @@
 package io.zerows.core.web.invocation.uca.parameter;
 
-import io.zerows.common.program.KRef;
-import io.zerows.core.exception.web._501NotSupportException;
 import io.vertx.ext.web.RoutingContext;
+import io.zerows.common.program.KRef;
+import io.zerows.core.exception.web._60050Exception501NotSupport;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.model.commune.Envelop;
 
@@ -22,11 +22,11 @@ public interface ParameterBuilder<SOURCE> {
     }
 
     default Object build(final SOURCE envelop, final Class<?> type) {
-        throw new _501NotSupportException(this.getClass());
+        throw new _60050Exception501NotSupport(this.getClass());
     }
 
     default Object build(final SOURCE envelop, final Class<?> type, final KRef underway) {
-        throw new _501NotSupportException(this.getClass());
+        throw new _60050Exception501NotSupport(this.getClass());
     }
 }
 

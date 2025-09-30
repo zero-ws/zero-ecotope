@@ -1,14 +1,16 @@
 package io.zerows.extension.runtime.crud.uca.desk;
 
-import io.zerows.ams.constant.em.app.HttpStatusCode;
+import io.r2mo.base.web.ForStatus;
+import io.r2mo.spi.SPI;
+import io.r2mo.typed.webflow.WebState;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.unity.Ux;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.mbse.atom.specification.KModule;
 import io.zerows.core.web.model.commune.Envelop;
 import io.zerows.extension.runtime.crud.util.Ix;
+import io.zerows.unity.Ux;
 
 import java.util.List;
 
@@ -20,20 +22,21 @@ public final class IxReply {
 
     private static String STATUS = "$STATUS$";
     private static String RESULT = "$RESULT$";
+    private static final ForStatus FOR_STATUS = SPI.V_STATUS;
 
     /* STATUS Code */
     public static Future<Envelop> successPost(final JsonObject input) {
-        final HttpStatusCode statusCode = getStatus(input, true);
+        final WebState statusCode = getStatus(input, true);
         return Ux.future(Envelop.success(input, statusCode));
     }
 
     public static Future<Envelop> successPostB(final JsonObject input) {
-        final HttpStatusCode statusCode = getStatus(input, true);
+        final WebState statusCode = getStatus(input, true);
         final Boolean result = input.getBoolean(RESULT, Boolean.FALSE);
         return Ux.future(Envelop.success(result, statusCode));
     }
 
-    public static HttpStatusCode getStatus(final JsonObject input, final boolean isEnd) {
+    public static WebState getStatus(final JsonObject input, final boolean isEnd) {
         if (Ut.isNil(input)) {
             /*
              * isEnd = true
@@ -41,15 +44,15 @@ public final class IxReply {
              * isEnd = false
              * 证明此处可能是第二子记录无法找到，这种情况直接返回 204 即可
              */
-            return isEnd ? HttpStatusCode.NOT_FOUND : HttpStatusCode.NO_CONTENT;
+            return isEnd ? FOR_STATUS.V404() : FOR_STATUS.ok204();
         }
-        final HttpStatusCode statusCode;
+        final WebState statusCode;
         if (input.containsKey(STATUS)) {
             final int status = input.getInteger(STATUS);
-            statusCode = HttpStatusCode.fromCode(status);
+            statusCode = FOR_STATUS.valueOf(status);
             input.remove(STATUS);
         } else {
-            statusCode = HttpStatusCode.OK;
+            statusCode = FOR_STATUS.ok();
         }
         return statusCode;
     }

@@ -9,7 +9,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.impl.Origin;
 import io.zerows.core.constant.KWeb;
 import io.zerows.core.constant.configure.YmlCore;
-import io.zerows.core.exception.web._501NotSupportException;
+import io.zerows.core.exception.web._60050Exception501NotSupport;
 import io.zerows.core.util.Ut;
 import io.zerows.extend.jackson.databind.JsonArrayDeserializer;
 import io.zerows.extend.jackson.databind.JsonArraySerializer;
@@ -55,7 +55,7 @@ public class CorsConfig implements Serializable {
         final Bundle bundle = FrameworkUtil.getBundle(CorsConfig.class);
         if (Objects.nonNull(bundle)) {
             Ut.Log.configure(CorsConfig.class).info("This api is not supported in OSGI environment.");
-            throw Ut.Bnd.failWeb(_501NotSupportException.class, CorsConfig.class);
+            throw new _60050Exception501NotSupport(CorsConfig.class);
         }
         final HSetting setting = OZeroStore.setting();
         INSTANCE = get(setting);

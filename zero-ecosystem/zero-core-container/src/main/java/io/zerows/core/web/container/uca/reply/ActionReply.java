@@ -1,6 +1,7 @@
 package io.zerows.core.web.container.uca.reply;
 
-import io.zerows.ams.constant.em.app.HttpStatusCode;
+import io.netty.handler.codec.http.HttpResponseStatus;
+import io.r2mo.typed.webflow.WebState;
 import io.vertx.core.Future;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.core.web.model.commune.Envelop;
@@ -18,8 +19,9 @@ public class ActionReply implements OAmbit {
          * - 2. projection 影响
          * - 3. rows 影响
          */
-        final HttpStatusCode code = envelop.status();
-        if (HttpStatusCode.OK != code) {
+        final WebState code = envelop.status();
+        final HttpResponseStatus status = code.value();
+        if (HttpResponseStatus.OK.code() != status.code()) {
             // 直接返回
             return Future.succeededFuture(envelop);
         }

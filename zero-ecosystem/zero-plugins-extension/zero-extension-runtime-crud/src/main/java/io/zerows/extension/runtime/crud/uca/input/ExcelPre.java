@@ -1,12 +1,12 @@
 package io.zerows.extension.runtime.crud.uca.input;
 
 import io.r2mo.function.Fn;
+import io.r2mo.typed.exception.web._500ServerInternalException;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.common.program.Kv;
 import io.zerows.core.constant.KName;
-import io.zerows.core.exception.web._500InternalServerException;
 import io.zerows.core.web.mbse.atom.specification.KModule;
 import io.zerows.extension.runtime.crud.exception._80102Exception409MultiModule;
 import io.zerows.extension.runtime.crud.exception._80103Exception409ModuleConflict;
@@ -84,7 +84,7 @@ class ExcelPre implements Pre {
             return kv;
         } catch (final IOException ex) {
             ex.printStackTrace();
-            throw new _500InternalServerException(this.getClass(), ex.getMessage());
+            throw new _500ServerInternalException("[ R2MO ] IO 异常: " + ex.getMessage());
         }
     }
 }

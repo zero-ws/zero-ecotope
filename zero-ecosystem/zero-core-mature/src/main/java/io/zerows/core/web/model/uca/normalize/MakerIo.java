@@ -1,8 +1,7 @@
 package io.zerows.core.web.model.uca.normalize;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.core.exception.web._501NotSupportException;
-import io.zerows.core.util.Ut;
+import io.zerows.core.exception.web._60050Exception501NotSupport;
 import org.osgi.framework.Bundle;
 
 import java.util.concurrent.ConcurrentMap;
@@ -34,6 +33,6 @@ interface MakerIo<T> {
     ConcurrentMap<String, T> build(String filename, Bundle owner, Object... args);
 
     default T buildOne(final String filename, final Bundle owner, final Object... args) {
-        throw Ut.Bnd.failWeb(_501NotSupportException.class, this.getClass());
+        throw new _60050Exception501NotSupport(this.getClass());
     }
 }

@@ -2,10 +2,10 @@ package io.zerows.extension.mbse.ui.agent.service.column;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
-import io.zerows.unity.Ux;
 import io.zerows.extension.mbse.ui.bootstrap.UiPin;
 import io.zerows.extension.mbse.ui.eon.UiMsg;
 import io.zerows.module.domain.atom.commune.Vis;
+import io.zerows.unity.Ux;
 
 import static io.zerows.extension.mbse.ui.util.Ui.LOG;
 

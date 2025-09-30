@@ -3,15 +3,19 @@ package io.zerows.plugins.swagger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import io.swagger.v3.oas.models.*;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.PathItem;
+import io.swagger.v3.oas.models.Paths;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.media.MediaType;
-import io.swagger.v3.oas.models.responses.*;
+import io.swagger.v3.oas.models.responses.ApiResponses;
 import jakarta.ws.rs.*;
 
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
 
 /**
  * OpenAPI 文档生成器。

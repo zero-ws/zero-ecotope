@@ -1,9 +1,9 @@
 package io.zerows.specification.atomic;
 
-import io.zerows.core.exception.web._501NotSupportException;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
+import io.zerows.core.exception.web._60050Exception501NotSupport;
 
 /**
  * 「抽象指令」
@@ -87,7 +87,7 @@ public interface HCommand<I, R> {
          */
         @Override
         default Future<R> configure(final I input) {
-            return Future.failedFuture(new _501NotSupportException(this.getClass()));
+            return Future.failedFuture(new _60050Exception501NotSupport(this.getClass()));
         }
 
         /**
@@ -100,7 +100,7 @@ public interface HCommand<I, R> {
          */
         @Override
         default Future<R> synchro(final I input, final JsonObject request) {
-            return Future.failedFuture(new _501NotSupportException(this.getClass()));
+            return Future.failedFuture(new _60050Exception501NotSupport(this.getClass()));
         }
 
         /**
@@ -113,7 +113,7 @@ public interface HCommand<I, R> {
          */
         @Override
         default Future<R> compile(final I input, final JsonObject request) {
-            return Future.failedFuture(new _501NotSupportException(this.getClass()));
+            return Future.failedFuture(new _60050Exception501NotSupport(this.getClass()));
         }
     }
 }

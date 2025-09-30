@@ -2,7 +2,6 @@ package io.zerows.ams.fn;
 
 import io.vertx.core.Future;
 import io.zerows.ams.util.HUt;
-import io.zerows.core.exception.web._500InternalServerException;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -18,24 +17,6 @@ import java.util.function.Supplier;
 class _Combine extends _Async {
     protected _Combine() {
     }
-
-    /**
-     * 最简单的合并函数，直接将输入的异步结果合并到一起，合并过程中有两点需要注意：
-     * <pre><code>
-     *     1. 该函数一般为组合函数的后半段，不考虑前置操作，则包含了多个异步结果
-     *     2. 该函数中如果出现了异常，在打开 Stack 的模式下 Z_DEV_JVM_STACK 时执行异常打印
-     *     3. 默认情况下该函数会直接输出 {@link _500InternalServerException} 异常
-     *       （若返回的 WebException 则输出的异常为 WebException）
-     * </code></pre>
-     *
-     * @param res CompositeFuture 输入的异步结果
-     * @param <T> 泛型类型
-     *
-     * @return Future<List < T>> 返回执行过的结果数组
-     */
-    //    public static <T> Future<List<T>> combineT(final CompositeFuture res) {
-    //        return HArrange.combineT(res);
-    //    }
 
     /**
      * 二元组合函数

@@ -6,7 +6,6 @@ import io.vertx.ext.auth.authentication.AuthenticationProvider;
 import io.vertx.ext.auth.authorization.AuthorizationProvider;
 import io.vertx.ext.web.handler.AuthenticationHandler;
 import io.vertx.ext.web.handler.AuthorizationHandler;
-import io.zerows.unity.Ux;
 import io.zerows.core.constant.em.EmSecure;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.commerce.rbac.plugins.authorization.ProfileProvider;
@@ -17,6 +16,7 @@ import io.zerows.module.security.zdk.LeeBuiltIn;
 import io.zerows.module.security.zdk.LeeExtension;
 import io.zerows.plugins.common.security.authorization.AuthorizationBuiltInHandler;
 import io.zerows.plugins.common.security.authorization.AuthorizationResource;
+import io.zerows.unity.Ux;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>

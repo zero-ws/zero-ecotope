@@ -1,8 +1,8 @@
 package io.zerows.extension.runtime.crud.uca.next;
 
+import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
-import io.zerows.core.exception.web._501NotSupportException;
-import io.zerows.core.util.Ut;
+import io.zerows.core.exception.web._60050Exception501NotSupport;
 import io.zerows.extension.runtime.crud.eon.Pooled;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 import io.zerows.extension.runtime.crud.uca.desk.IxRequest;
@@ -71,7 +71,7 @@ public interface Co<I, A, S, O> {
      * response - The API final result
      */
     default Future<O> ok(final A active, final S standBy) {
-        return Ut.Bnd.failOut(_501NotSupportException.class, this.getClass());
+        return FnVertx.failOut(_60050Exception501NotSupport.class, this.getClass());
     }
 
     /*
@@ -82,7 +82,7 @@ public interface Co<I, A, S, O> {
      * standBy - The standBy result
      */
     default Future<S> next(final I input, final A active) {
-        return Ut.Bnd.failOut(_501NotSupportException.class, this.getClass());
+        return FnVertx.failOut(_60050Exception501NotSupport.class, this.getClass());
     }
 
     default Co<I, A, S, O> bind(final IxRequest request) {

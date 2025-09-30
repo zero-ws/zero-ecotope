@@ -3,7 +3,7 @@ package io.zerows.extension.commerce.rbac.uca.timer;
 import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.exception.web._501NotSupportException;
+import io.zerows.core.exception.web._60050Exception501NotSupport;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.commerce.rbac.atom.ScConfig;
 import io.zerows.extension.commerce.rbac.bootstrap.ScPin;
@@ -43,7 +43,7 @@ class ScClockCode extends AbstractClock<String> {
 
     @Override
     public String generate(final JsonObject config) {
-        throw Ut.Bnd.failWeb(_501NotSupportException.class, this.getClass());
+        throw new _60050Exception501NotSupport(this.getClass());
     }
 
 

@@ -2,8 +2,8 @@ package io.vertx.up.unity;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.vertx.core.json.JsonArray;
-import io.zerows.core.util.Ut;
 import io.zerows.core.testing.EpicBase;
+import io.zerows.core.util.Ut;
 import io.zerows.unity.Ux;
 import org.junit.Assert;
 import org.junit.Test;

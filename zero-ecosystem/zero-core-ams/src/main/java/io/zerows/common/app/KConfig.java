@@ -1,9 +1,9 @@
 package io.zerows.common.app;
 
 import io.vertx.core.json.JsonObject;
+import io.zerows.ams.util.HUt;
 import io.zerows.core.running.boot.KSetting;
 import io.zerows.specification.configuration.HConfig;
-import io.zerows.ams.util.HUt;
 
 /**
  * 「常用配置」

@@ -15,7 +15,7 @@ import java.util.Set;
 /**
  * @author lang : 2023/4/27
  */
-class _From extends _Error {
+class _From extends _Env {
     protected _From() {
     }
 

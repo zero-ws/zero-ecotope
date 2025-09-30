@@ -3,7 +3,6 @@ package io.zerows.extension.runtime.crud.uca.op.view;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
-import io.zerows.unity.Ux;
 import io.zerows.core.database.jooq.operation.UxJooq;
 import io.zerows.extension.runtime.crud.bootstrap.IxPin;
 import io.zerows.extension.runtime.crud.eon.em.QrType;
@@ -12,6 +11,7 @@ import io.zerows.extension.runtime.crud.uca.input.Pre;
 import io.zerows.extension.runtime.crud.uca.op.Agonic;
 import io.zerows.extension.runtime.skeleton.osgi.spi.ui.ApeakMy;
 import io.zerows.extension.runtime.skeleton.osgi.spi.web.Seeker;
+import io.zerows.unity.Ux;
 
 /**
  * 「视图同步」

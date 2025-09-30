@@ -8,25 +8,16 @@ import io.zerows.extension.commerce.finance.domain.Indexes;
 import io.zerows.extension.commerce.finance.domain.Keys;
 import io.zerows.extension.commerce.finance.domain.Zdb;
 import io.zerows.extension.commerce.finance.domain.tables.records.FBillRecord;
+import org.jooq.*;
+import org.jooq.Record;
+import org.jooq.impl.DSL;
+import org.jooq.impl.SQLDataType;
+import org.jooq.impl.TableImpl;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
-
-import org.jooq.Field;
-import org.jooq.ForeignKey;
-import org.jooq.Index;
-import org.jooq.Name;
-import org.jooq.Record;
-import org.jooq.Schema;
-import org.jooq.Table;
-import org.jooq.TableField;
-import org.jooq.TableOptions;
-import org.jooq.UniqueKey;
-import org.jooq.impl.DSL;
-import org.jooq.impl.SQLDataType;
-import org.jooq.impl.TableImpl;
 
 
 /**

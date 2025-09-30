@@ -1,9 +1,10 @@
 package io.zerows.core.web.model.commune;
 
+import io.r2mo.typed.exception.WebException;
+import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonObject;
 import io.zerows.ams.constant.VName;
-import io.zerows.core.exception.WebException;
 import io.zerows.module.domain.uca.serialization.ZeroType;
 
 import java.util.Objects;
@@ -31,7 +32,7 @@ class RibTool {
         if (Objects.isNull(error)) {
             return data;
         } else {
-            return error.toJson();
+            return FnVertx.adapt(error);
         }
     }
 
@@ -40,7 +41,7 @@ class RibTool {
             // final JsonObject response = data.getJsonObject(VName.DATA);
             return data.getBuffer(VName.DATA);
         } else {
-            final JsonObject errorJson = error.toJson();
+            final JsonObject errorJson = FnVertx.adapt(error);
             return Buffer.buffer(errorJson.encode());
         }
     }

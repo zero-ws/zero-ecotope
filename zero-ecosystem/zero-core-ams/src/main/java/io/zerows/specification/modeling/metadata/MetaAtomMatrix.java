@@ -1,10 +1,10 @@
 package io.zerows.specification.modeling.metadata;
 
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import io.zerows.ams.constant.VString;
 import io.zerows.ams.constant.VValue;
 import io.zerows.ams.util.HUt;
-import io.vertx.core.json.JsonArray;
-import io.vertx.core.json.JsonObject;
 
 import java.util.ArrayList;
 import java.util.List;

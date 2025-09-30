@@ -4,23 +4,8 @@
 package io.zerows.extension.commerce.lbs.domain;
 
 
-import io.zerows.extension.commerce.lbs.domain.tables.LCity;
-import io.zerows.extension.commerce.lbs.domain.tables.LCountry;
-import io.zerows.extension.commerce.lbs.domain.tables.LFloor;
-import io.zerows.extension.commerce.lbs.domain.tables.LLocation;
-import io.zerows.extension.commerce.lbs.domain.tables.LRegion;
-import io.zerows.extension.commerce.lbs.domain.tables.LState;
-import io.zerows.extension.commerce.lbs.domain.tables.LTent;
-import io.zerows.extension.commerce.lbs.domain.tables.LYard;
-import io.zerows.extension.commerce.lbs.domain.tables.records.LCityRecord;
-import io.zerows.extension.commerce.lbs.domain.tables.records.LCountryRecord;
-import io.zerows.extension.commerce.lbs.domain.tables.records.LFloorRecord;
-import io.zerows.extension.commerce.lbs.domain.tables.records.LLocationRecord;
-import io.zerows.extension.commerce.lbs.domain.tables.records.LRegionRecord;
-import io.zerows.extension.commerce.lbs.domain.tables.records.LStateRecord;
-import io.zerows.extension.commerce.lbs.domain.tables.records.LTentRecord;
-import io.zerows.extension.commerce.lbs.domain.tables.records.LYardRecord;
-
+import io.zerows.extension.commerce.lbs.domain.tables.*;
+import io.zerows.extension.commerce.lbs.domain.tables.records.*;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.DSL;

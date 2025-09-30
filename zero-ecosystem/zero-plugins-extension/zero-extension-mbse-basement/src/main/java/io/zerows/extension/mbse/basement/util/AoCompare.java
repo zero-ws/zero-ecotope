@@ -2,7 +2,6 @@ package io.zerows.extension.mbse.basement.util;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.unity.Ux;
 import io.zerows.ams.constant.VValue;
 import io.zerows.ams.constant.em.typed.ChangeFlag;
 import io.zerows.common.program.Kv;
@@ -12,6 +11,7 @@ import io.zerows.core.util.Ut;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.module.domain.atom.commune.dynamic.Apt;
 import io.zerows.specification.modeling.HRule;
+import io.zerows.unity.Ux;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
