@@ -27,7 +27,10 @@ interface ERR {
     VertxE _40052 = VertxE.of(-40052).state(HttpResponseStatus.INTERNAL_SERVER_ERROR);
     VertxE _40053 = VertxE.of(-40053).state(HttpResponseStatus.INTERNAL_SERVER_ERROR);
     // Web 类型
+    VertxE _60006 = VertxE.of(-60006).state(HttpResponseStatus.UNSUPPORTED_MEDIA_TYPE);
     VertxE _60027 = VertxE.of(-60027).state(HttpResponseStatus.NOT_IMPLEMENTED);
+    VertxE _60048 = VertxE.of(-60048).state(HttpResponseStatus.UNSUPPORTED_MEDIA_TYPE);
     VertxE _60049 = VertxE.of(-60049).state(HttpResponseStatus.INTERNAL_SERVER_ERROR);
     VertxE _60051 = VertxE.of(-60051).state(HttpResponseStatus.INTERNAL_SERVER_ERROR);
+    VertxE _80306 = VertxE.of(-80306).state(HttpResponseStatus.FORBIDDEN);
 }

@@ -1,10 +1,10 @@
 package io.zerows.core.web.io.uca.request.mime;
 
+import io.r2mo.function.Fn;
 import io.zerows.core.exception.WebException;
-import io.zerows.core.fn.FnZero;
 import io.zerows.core.uca.log.Annal;
-import io.zerows.core.web.io.exception._415MediaNotSupportException;
 import io.zerows.core.web.model.atom.Event;
+import io.zerows.epoch.mature.exception._60006Exception415MediaNotSupport;
 import jakarta.ws.rs.core.MediaType;
 
 import java.util.Set;
@@ -23,9 +23,7 @@ final class MediaAtom {
                     MediaType.MEDIA_TYPE_WILDCARD.equals(media.getType()) ||
                         media.getType().equalsIgnoreCase(type.getType()));
             /* 2. Type checking **/
-            FnZero.outWeb(!match, LOGGER,
-                _415MediaNotSupportException.class,
-                MediaAtom.class, type, medias);
+            Fn.jvmKo(!match, _60006Exception415MediaNotSupport.class, type, medias);
             /* 3. Start to parsing expected sub type **/
             match = medias.stream()
                 .anyMatch(media ->
@@ -33,9 +31,7 @@ final class MediaAtom {
                         media.getSubtype().equalsIgnoreCase(type.getSubtype())
                 );
             /* 4. Subtype checking **/
-            FnZero.outWeb(!match, LOGGER,
-                _415MediaNotSupportException.class,
-                MediaAtom.class, type, medias);
+            Fn.jvmKo(!match, _60006Exception415MediaNotSupport.class, type, medias);
         }
     }
 }

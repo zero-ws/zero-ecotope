@@ -9,10 +9,9 @@ import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
 import io.zerows.ams.constant.VPath;
 import io.zerows.ams.constant.VString;
-import io.zerows.core.exception.WebException;
 import io.zerows.core.exception.web._500InternalServerException;
 import io.zerows.core.util.Ut;
-import io.zerows.plugins.office.excel.exception._500ExportingErrorException;
+import io.zerows.plugins.office.excel.exception._60039Exception500ExportingError;
 import io.zerows.plugins.office.excel.util.ExFn;
 import io.zerows.specification.modeling.metadata.HMetaAtom;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -180,8 +179,7 @@ class SheetExport {
             } else {
                 final Throwable error = handler.cause();
                 if (Objects.nonNull(error)) {
-                    final WebException failure = new _500ExportingErrorException(this.getClass(), error.getMessage());
-                    promise.fail(failure);
+                    promise.fail(new _60039Exception500ExportingError(error.getMessage()));
                 } else {
                     promise.fail(new _500InternalServerException(this.getClass(),
                         "Unexpected Error when Exporting"));

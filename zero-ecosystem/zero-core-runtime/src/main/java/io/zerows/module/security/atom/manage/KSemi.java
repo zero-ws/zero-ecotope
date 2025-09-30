@@ -1,10 +1,10 @@
 package io.zerows.module.security.atom.manage;
 
+import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.zerows.core.constant.em.EmSecure;
-import io.zerows.core.util.Ut;
+import io.zerows.epoch.runtime.exception._60058Exception409DmComponent;
 import io.zerows.module.security.cache.CStoreSecurity;
-import io.zerows.module.security.exception._409DmComponentException;
 import io.zerows.module.security.zdk.authority.HAdmit;
 
 import java.util.Objects;
@@ -34,7 +34,7 @@ public class KSemi {
         final HAdmit dm = catena.admit(true);
         if (Objects.isNull(dm)) {
             // 60058, `runComponent` 配置错误，而规则中又配置了维度管理信息
-            return Ut.Bnd.failOut(_409DmComponentException.class, this.getClass(), this.permit.shape());
+            return FnVertx.failOut(_60058Exception409DmComponent.class, this.permit.phase());
         } else {
             return dm.configure(this.permit)
                 .compose(dmJ -> catena.config(dmJ, true));

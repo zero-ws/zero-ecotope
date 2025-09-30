@@ -1,12 +1,12 @@
 package io.zerows.module.domain.uca.destine;
 
+import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.fn.FnZero;
 import io.zerows.core.uca.log.Log;
 import io.zerows.core.util.Ut;
+import io.zerows.epoch.runtime.exception._80543Exception412IndentParsing;
 import io.zerows.module.domain.atom.specification.KJoin;
 import io.zerows.module.domain.atom.specification.KPoint;
-import io.zerows.module.domain.exception._412IndentParsingException;
 
 import java.util.Objects;
 
@@ -36,8 +36,8 @@ class HymnJObject extends HymnBase<JsonObject> {
     public KPoint pointer(final JsonObject dataJ) {
         // 先从数据节点解析 identifier
         final String identifier = this.id(dataJ);
-        FnZero.out(Ut.isNil(identifier), _412IndentParsingException.class,
-            this.getClass(), this.joinRef.getTargetIndent(), dataJ);
+        Fn.jvmKo(Ut.isNil(identifier), _80543Exception412IndentParsing.class,
+            this.joinRef.getTargetIndent(), dataJ.encode());
 
 
         // 根据解析到的 identifier 提取连接点

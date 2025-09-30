@@ -1,7 +1,7 @@
 package io.zerows.module.domain.uca.serialization;
 
 import io.vertx.core.json.DecodeException;
-import io.zerows.module.domain.exception._400ParameterFromStringException;
+import io.zerows.epoch.runtime.exception._60004Exception400ParamFromString;
 
 import java.util.function.Function;
 
@@ -19,7 +19,7 @@ public abstract class AbstractJsonSaber extends AbstractSaber {
             } catch (final DecodeException ex) {
                 // Do not do anything
                 // getLogger().checked(ex);
-                throw new _400ParameterFromStringException(this.getClass(), paramType, literal);
+                throw new _60004Exception400ParamFromString(paramType, literal);
             }
         }
         return null;

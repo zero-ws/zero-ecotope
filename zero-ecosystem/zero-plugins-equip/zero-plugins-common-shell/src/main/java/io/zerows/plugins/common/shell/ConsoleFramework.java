@@ -1,10 +1,10 @@
 package io.zerows.plugins.common.shell;
 
-import io.zerows.ams.constant.em.Environment;
-import io.zerows.core.uca.log.Annal;
 import io.vertx.core.Vertx;
+import io.zerows.ams.constant.em.Environment;
 import io.zerows.core.constant.configure.YmlCore;
-import io.zerows.plugins.common.shell.exception.BootInternalConflictException;
+import io.zerows.core.uca.log.Annal;
+import io.zerows.plugins.common.shell.exception._40070Exception500InternalConflict;
 import io.zerows.plugins.common.shell.refine.Sl;
 
 import java.util.Objects;
@@ -92,7 +92,7 @@ public class ConsoleFramework {
      */
     public ConsoleFramework bind(final String name, final Consumer<String> consumer) {
         if (YmlCore.shell.boot.CONFIG.equals(name)) {
-            throw new BootInternalConflictException(ConsoleFramework.class);
+            throw new _40070Exception500InternalConflict();
         }
         INTERNAL.put(name, consumer);
         return this;

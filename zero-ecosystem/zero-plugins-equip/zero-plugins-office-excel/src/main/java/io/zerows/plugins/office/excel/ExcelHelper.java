@@ -16,7 +16,7 @@ import io.zerows.plugins.office.excel.atom.ExRecord;
 import io.zerows.plugins.office.excel.atom.ExTable;
 import io.zerows.plugins.office.excel.atom.ExTenant;
 import io.zerows.plugins.office.excel.atom.ExWorkbook;
-import io.zerows.plugins.office.excel.exception._404ExcelFileNullException;
+import io.zerows.plugins.office.excel.exception._60037Exception404ExcelFileNull;
 import io.zerows.plugins.office.excel.uca.data.DataApply;
 import io.zerows.plugins.office.excel.uca.data.DataTaker;
 import io.zerows.plugins.office.excel.uca.initialize.*;
@@ -104,12 +104,12 @@ class ExcelHelper {
      */
     @SuppressWarnings("all")
     Workbook getWorkbook(final String filename) {
-        FnZero.outWeb(null == filename, _404ExcelFileNullException.class, this.target, filename);
+        Fn.jvmKo(Objects.isNull(filename), _60037Exception404ExcelFileNull.class, filename);
         /*
          * Here the InputStream directly from
          */
         final InputStream in = Ut.ioStream(filename, getClass());
-        FnZero.outWeb(null == in, _404ExcelFileNullException.class, this.target, filename);
+        Fn.jvmKo(Objects.isNull(in), _60037Exception404ExcelFileNull.class, filename);
         final Workbook workbook;
         if (filename.endsWith(VPath.SUFFIX.EXCEL_2003)) {
             workbook = CC_WORKBOOK.pick(() -> Fn.jvmOr(() -> new HSSFWorkbook(in)), filename);
@@ -123,7 +123,7 @@ class ExcelHelper {
 
     @SuppressWarnings("all")
     Workbook getWorkbook(final InputStream in, final boolean isXlsx) {
-        FnZero.outWeb(null == in, _404ExcelFileNullException.class, this.target, "Stream");
+        Fn.jvmKo(Objects.isNull(in), _60037Exception404ExcelFileNull.class, "Stream");
         final Workbook workbook;
         if (isXlsx) {
             workbook = CC_WORKBOOK_STREAM.pick(() -> Fn.jvmOr(() -> new XSSFWorkbook(in)), in.hashCode());

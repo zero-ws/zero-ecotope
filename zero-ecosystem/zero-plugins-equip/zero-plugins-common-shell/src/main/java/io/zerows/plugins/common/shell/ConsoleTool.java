@@ -1,14 +1,15 @@
 package io.zerows.plugins.common.shell;
 
-import io.zerows.ams.constant.VValue;
+import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
+import io.zerows.ams.constant.VValue;
 import io.zerows.core.util.Ut;
 import io.zerows.plugins.common.shell.atom.CommandAtom;
 import io.zerows.plugins.common.shell.atom.CommandInput;
 import io.zerows.plugins.common.shell.eon.EmCommand;
-import io.zerows.plugins.common.shell.exception.BootCommandParseException;
-import io.zerows.plugins.common.shell.exception.BootCommandUnknownException;
-import io.zerows.plugins.common.shell.exception.BootPluginMissingException;
+import io.zerows.plugins.common.shell.exception._40071Exception500CommandParse;
+import io.zerows.plugins.common.shell.exception._40073Exception500CommandUnknown;
+import io.zerows.plugins.common.shell.exception._40074Exception500PluginMissing;
 import io.zerows.plugins.common.shell.refine.Sl;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -44,7 +45,7 @@ class ConsoleTool {
                 final CommandLine parsed = parser.parse(command.options(), args);
                 return Future.succeededFuture(parsed);
             } catch (final ParseException ex) {
-                return Ut.Bnd.failOut(BootCommandParseException.class, ConsoleTool.class, Ut.fromJoin(args), ex);
+                return FnVertx.failOut(_40071Exception500CommandParse.class, Ut.fromJoin(args), ex);
             }
         });
     }
@@ -81,7 +82,7 @@ class ConsoleTool {
                     /*
                      * Could not be found
                      */
-                    return Ut.Bnd.failOut(BootPluginMissingException.class, ConsoleTool.class,
+                    return FnVertx.failOut(_40074Exception500PluginMissing.class,
                         command.getName() + ", ( " + command.getPlugin() + " )");
                 }
             }
@@ -118,7 +119,7 @@ class ConsoleTool {
             /*
              * Unknown command of input throw out exception
              */
-            return Ut.Bnd.failOut(BootCommandUnknownException.class, ConsoleTool.class, commandName);
+            return FnVertx.failOut(_40073Exception500CommandUnknown.class, commandName);
         }
 
 
@@ -128,7 +129,7 @@ class ConsoleTool {
              */
             return Future.succeededFuture(atom);
         } else {
-            return Ut.Bnd.failOut(BootPluginMissingException.class, ConsoleTool.class, atom.getName());
+            return FnVertx.failOut(_40074Exception500PluginMissing.class, atom.getName());
         }
     }
 }

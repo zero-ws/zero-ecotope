@@ -1,7 +1,7 @@
 package io.zerows.module.domain.uca.serialization;
 
-import io.zerows.core.fn.FnZero;
-import io.zerows.module.domain.exception._400FilePathMissingException;
+import io.r2mo.function.Fn;
+import io.zerows.epoch.runtime.exception._60021Exception400FilePathMissing;
 
 import java.io.File;
 
@@ -12,8 +12,7 @@ class FileSaber extends AbstractSaber {
                        final String filename) {
         final File file = new File(filename);
         // Throw 400 Error
-        FnZero.outWeb(!file.exists() || !file.canRead(), this.logger(),
-            _400FilePathMissingException.class, this.getClass(), filename);
+        Fn.jvmKo(!file.exists() || !file.canRead(), _60021Exception400FilePathMissing.class, filename);
         return file;
     }
 }

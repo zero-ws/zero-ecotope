@@ -2,13 +2,13 @@ package io.zerows.plugins.common.shell.atom;
 
 import io.r2mo.function.Fn;
 import io.r2mo.typed.cc.Cc;
+import io.r2mo.vertx.common.exception.VertxBootException;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
-import io.zerows.core.exception.BootingException;
 import io.zerows.core.util.Ut;
-import io.zerows.plugins.common.shell.exception.BootCommandMissingException;
+import io.zerows.plugins.common.shell.exception._40072Exception500CommandMissing;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,8 +21,7 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class Terminal {
 
-    private static final BootingException ERROR_ARG_MISSING =
-        new BootCommandMissingException(Terminal.class);
+    private static final VertxBootException ERROR_ARG_MISSING = new _40072Exception500CommandMissing();
     private static final Cc<Integer, Scanner> CC_SCANNER = Cc.open();
 
     private final transient Scanner scanner;

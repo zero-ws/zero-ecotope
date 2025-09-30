@@ -8,7 +8,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.ams.constant.em.typed.ChangeFlag;
 import io.zerows.core.util.Ut;
-import io.zerows.module.domain.exception._AptParameterException;
+import io.zerows.epoch.runtime.exception._15000Exception500AptParameter;
 import io.zerows.module.metadata.uca.logging.OLog;
 
 import java.util.Objects;
@@ -60,14 +60,14 @@ public class Apt {
     /* Ok for update only */
     public static Apt create(final JsonArray original, final JsonArray current, final String field) {
         if (Ut.isNil(original) && Ut.isNil(current)) {
-            throw new _AptParameterException(Apt.class);
+            throw new _15000Exception500AptParameter();
         }
         return new Apt(original, current, field);
     }
 
     public static Apt create(final JsonObject original, final JsonObject current) {
         if (Ut.isNil(original) && Ut.isNil(current)) {
-            throw new _AptParameterException(Apt.class);
+            throw new _15000Exception500AptParameter();
         }
         return new Apt(original, current);
     }

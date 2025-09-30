@@ -1,7 +1,7 @@
 package io.zerows.ams.fn;
 
+import io.r2mo.typed.exception.AbstractException;
 import io.vertx.core.Future;
-import io.zerows.core.exception.BaseZeroException;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -29,7 +29,7 @@ class _Async {
      *
      * @return {@link Future}
      */
-    public static <T, E extends BaseZeroException> Future<T> passAll(
+    public static <T, E extends AbstractException> Future<T> passAll(
         final T response, final E error,
         final Set<Function<T, Future<Boolean>>> executors) {
         return HAsync.pass(response, error, list -> list.stream().allMatch(Boolean::booleanValue), executors);
@@ -47,7 +47,7 @@ class _Async {
      *
      * @return {@link Future}
      */
-    public static <T, E extends BaseZeroException> Future<T> passAny(
+    public static <T, E extends AbstractException> Future<T> passAny(
         final T response, final E error,
         final Set<Function<T, Future<Boolean>>> executors) {
         return HAsync.pass(response, error, list -> list.stream().allMatch(Boolean::booleanValue), executors);
@@ -64,7 +64,7 @@ class _Async {
      *
      * @return {@link Future}
      */
-    public static <T, E extends BaseZeroException> Future<T> passNone(
+    public static <T, E extends AbstractException> Future<T> passNone(
         final T response, final E error,
         final Set<Function<T, Future<Boolean>>> executors) {
         return HAsync.pass(response, error, list -> list.stream().noneMatch(Boolean::booleanValue), executors);

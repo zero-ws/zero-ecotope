@@ -3,16 +3,16 @@ package io.zerows.module.domain.atom.specification;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonObject;
 import io.zerows.ams.constant.em.modeling.EmModel;
 import io.zerows.common.datamation.KMapping;
-import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
+import io.zerows.epoch.runtime.exception._80542Exception409JoinTarget;
 import io.zerows.extend.jackson.databind.ClassDeserializer;
 import io.zerows.extend.jackson.databind.ClassSerializer;
 import io.zerows.extend.jackson.databind.JsonObjectDeserializer;
 import io.zerows.extend.jackson.databind.JsonObjectSerializer;
-import io.zerows.module.domain.exception._409JoinTargetException;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -154,7 +154,7 @@ public class KPoint implements Serializable {
             return EmModel.Join.DAO;
         }
         /* P3: classDefine also null, throw error out. */
-        FnZero.out(Objects.isNull(this.classDefine), _409JoinTargetException.class, this.getClass());
+        Fn.jvmKo(Objects.isNull(this.classDefine), _80542Exception409JoinTarget.class);
         return EmModel.Join.DEFINE;
     }
 
@@ -181,7 +181,7 @@ public class KPoint implements Serializable {
             return EmModel.Join.DEFINE;
         }
         /* P3: keyJoin */
-        FnZero.out(Ut.isNil(this.keyJoin), _409JoinTargetException.class, this.getClass());
+        Fn.jvmKo(Ut.isNil(this.keyJoin), _80542Exception409JoinTarget.class);
         return EmModel.Join.CRUD;
     }
 
