@@ -1,14 +1,14 @@
 package io.zerows.core.web.invocation.uca.runner;
 
+import io.r2mo.function.Fn;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.Promise;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.Message;
-import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
-import io.zerows.core.web.invocation.exception._500ReturnNullException;
 import io.zerows.core.web.model.commune.Envelop;
+import io.zerows.epoch.mature.exception._60051Exception500ReturnNull;
 
 import java.lang.reflect.Method;
 import java.util.Objects;
@@ -51,7 +51,7 @@ public class AsyncInvoker extends AbstractInvoker {
             final Future<Envelop> result = Ut.invoke(proxy, method.getName(), envelop);
 
             // Null Pointer return value checking
-            FnZero.out(Objects.isNull(result), _500ReturnNullException.class, getClass(), method);
+            Fn.jvmKo(Objects.isNull(result), _60051Exception500ReturnNull.class, method);
 
             result.onComplete(item -> message.reply(item.result()));
             // result.setHandler(item -> message.reply(item.result()));
@@ -96,7 +96,7 @@ public class AsyncInvoker extends AbstractInvoker {
             final Future<Envelop> result = Ut.invoke(proxy, method.getName(), envelop);
 
             // Null Pointer return value checking
-            FnZero.out(Objects.isNull(result), _500ReturnNullException.class, this.getClass(), method);
+            Fn.jvmKo(Objects.isNull(result), _60051Exception500ReturnNull.class, method);
 
             result.onComplete(item -> handler.handle(Future.succeededFuture((O) item.result())));
             // result.setHandler(item -> message.reply(item.result()));

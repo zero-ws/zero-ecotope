@@ -1,14 +1,14 @@
 package io.zerows.core.web.invocation.uca.runner;
 
+import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Session;
 import io.zerows.ams.constant.VValue;
-import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
-import io.zerows.core.web.invocation.exception.BootAsyncSignatureException;
-import io.zerows.core.web.invocation.exception.BootWorkerArgumentException;
 import io.zerows.core.web.invocation.uca.parameter.ParameterBuilder;
 import io.zerows.core.web.model.commune.Envelop;
+import io.zerows.epoch.mature.exception._40017Exception500WorkerArgument;
+import io.zerows.epoch.mature.exception._40018Exception500AsyncSignature;
 import io.zerows.module.domain.uca.serialization.ZeroType;
 import io.zerows.module.metadata.uca.logging.OLog;
 
@@ -89,9 +89,7 @@ public class InvokerUtil {
         final Class<?>[] params = method.getParameterTypes();
         final OLog logger = Ut.Log.uca(target);
         // 2. The parameters
-        FnZero.outBoot(VValue.ZERO == params.length,
-            logger, BootWorkerArgumentException.class,
-            target, method);
+        Fn.jvmKo(VValue.ZERO == params.length, _40017Exception500WorkerArgument.class, method);
     }
 
     static void verify(
@@ -99,10 +97,7 @@ public class InvokerUtil {
         final Class<?> returnType,
         final Class<?> paramType,
         final Class<?> target) {
-        final OLog logger = Ut.Log.uca(target);
-        FnZero.outBoot(condition, logger,
-            BootAsyncSignatureException.class, target,
-            returnType.getName(), paramType.getName());
+        Fn.jvmKo(condition, _40018Exception500AsyncSignature.class, returnType, paramType);
     }
 
     private static Object getValue(final Class<?> type,

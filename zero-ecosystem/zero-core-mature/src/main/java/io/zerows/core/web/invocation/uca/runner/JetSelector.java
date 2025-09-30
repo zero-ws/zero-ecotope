@@ -1,12 +1,14 @@
 package io.zerows.core.web.invocation.uca.runner;
 
+import io.r2mo.function.Fn;
 import io.vertx.core.Future;
 import io.vertx.core.eventbus.Message;
-import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
-import io.zerows.core.web.invocation.exception.BootInvokerNullException;
 import io.zerows.core.web.model.commune.Envelop;
+import io.zerows.epoch.mature.exception._40047Exception500InvokerNull;
 import io.zerows.module.metadata.uca.logging.OLog;
+
+import java.util.Objects;
 
 /**
  *
@@ -93,9 +95,7 @@ public class JetSelector {
                 invoker = CACHE.CCT_INVOKER.pick(DynamicInvoker::new, DynamicInvoker.class.getName()); // Ut.?ingleton(DynamicInvoker.class);
             }
         }
-        FnZero.outBoot(null == invoker, LOGGER,
-            BootInvokerNullException.class, JetSelector.class,
-            returnType, paramCls);
+        Fn.jvmKo(Objects.isNull(invoker), _40047Exception500InvokerNull.class, returnType, paramCls);
         return invoker;
     }
 }

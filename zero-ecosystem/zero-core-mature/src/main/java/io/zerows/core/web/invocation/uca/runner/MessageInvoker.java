@@ -1,12 +1,12 @@
 package io.zerows.core.web.invocation.uca.runner;
 
-import io.zerows.core.exception.web._501NotSupportException;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.Message;
-import io.zerows.core.web.invocation.exception._501RpcRejectException;
+import io.zerows.core.exception.web._501NotSupportException;
 import io.zerows.core.web.model.commune.Envelop;
+import io.zerows.epoch.mature.exception._60027Exception501RpcReject;
 
 import java.lang.reflect.Method;
 
@@ -39,7 +39,7 @@ public class MessageInvoker extends AbstractInvoker {
                      final Message<Envelop> message,
                      final Vertx vertx) {
         // Return void is reject by Rpc continue
-        throw new _501RpcRejectException(this.getClass());
+        throw new _60027Exception501RpcReject();
     }
 
     @Override
