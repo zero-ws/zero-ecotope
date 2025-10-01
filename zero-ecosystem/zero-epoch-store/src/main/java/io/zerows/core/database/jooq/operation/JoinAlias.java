@@ -1,6 +1,6 @@
 package io.zerows.core.database.jooq.operation;
 
-import io.zerows.ams.constant.VString;
+import io.zerows.epoch.constant.VString;
 import io.zerows.core.database.jooq.util.JqAnalyzer;
 import org.jooq.Field;
 import org.jooq.impl.DSL;

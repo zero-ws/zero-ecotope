@@ -2,7 +2,7 @@ package io.mature.extension.refine;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.em.Environment;
+import io.zerows.epoch.enums.Environment;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.runtime.ambient.agent.service.application.AppService;
 import io.zerows.extension.runtime.ambient.agent.service.application.AppStub;

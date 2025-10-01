@@ -1,11 +1,11 @@
 package io.zerows.ams.util;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.VName;
-import io.zerows.ams.constant.VString;
-import io.zerows.ams.constant.VValue;
-import io.zerows.ams.constant.em.EmApp;
-import io.zerows.core.running.HMacrocosm;
+import io.zerows.epoch.constant.VName;
+import io.zerows.epoch.constant.VString;
+import io.zerows.epoch.constant.VValue;
+import io.zerows.epoch.enums.EmApp;
+import io.zerows.epoch.runtime.HMacrocosm;
 import io.zerows.specification.access.app.HApp;
 import io.zerows.specification.access.app.HArk;
 import io.zerows.specification.vital.HOI;

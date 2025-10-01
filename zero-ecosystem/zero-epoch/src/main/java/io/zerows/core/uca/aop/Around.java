@@ -1,6 +1,6 @@
 package io.zerows.core.uca.aop;
 
-import io.zerows.ams.constant.em.typed.ChangeFlag;
+import io.zerows.epoch.enums.typed.ChangeFlag;
 
 import java.util.Set;
 

@@ -1,6 +1,6 @@
 package io.zerows.ams.util;
 
-import io.zerows.ams.constant.VValue;
+import io.zerows.epoch.constant.VValue;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;

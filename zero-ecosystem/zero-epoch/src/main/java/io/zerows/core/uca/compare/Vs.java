@@ -2,8 +2,8 @@ package io.zerows.core.uca.compare;
 
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.VName;
-import io.zerows.ams.constant.VString;
+import io.zerows.epoch.constant.VName;
+import io.zerows.epoch.constant.VString;
 import io.zerows.ams.util.HUt;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.specification.modeling.metadata.HMetaField;

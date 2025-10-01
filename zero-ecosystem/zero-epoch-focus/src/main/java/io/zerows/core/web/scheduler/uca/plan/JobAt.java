@@ -1,7 +1,7 @@
 package io.zerows.core.web.scheduler.uca.plan;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.ams.constant.em.typed.PerMode;
+import io.zerows.epoch.enums.typed.PerMode;
 
 import java.time.Instant;
 import java.util.List;

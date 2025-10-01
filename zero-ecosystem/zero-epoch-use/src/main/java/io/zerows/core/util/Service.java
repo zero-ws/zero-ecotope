@@ -1,6 +1,6 @@
 package io.zerows.core.util;
 
-import io.zerows.ams.constant.VValue;
+import io.zerows.epoch.constant.VValue;
 import io.zerows.module.metadata.cache.CStore;
 
 import java.io.BufferedReader;

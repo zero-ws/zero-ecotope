@@ -2,7 +2,7 @@ package io.zerows.extension.runtime.workflow.uca.toolkit;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.em.typed.ChangeFlag;
+import io.zerows.epoch.enums.typed.ChangeFlag;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.runtime.workflow.atom.runtime.WRecord;
 import io.zerows.extension.runtime.workflow.atom.runtime.WTransition;

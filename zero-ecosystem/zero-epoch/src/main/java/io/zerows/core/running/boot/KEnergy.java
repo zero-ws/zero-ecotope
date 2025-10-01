@@ -1,9 +1,9 @@
 package io.zerows.core.running.boot;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.em.EmApp;
-import io.zerows.ams.constant.em.EmBoot;
-import io.zerows.ams.constant.spec.VBoot;
+import io.zerows.epoch.enums.EmApp;
+import io.zerows.epoch.enums.EmBoot;
+import io.zerows.epoch.constant.spec.VBoot;
 import io.zerows.ams.util.HUt;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HEnergy;

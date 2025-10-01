@@ -10,7 +10,7 @@ import com.fasterxml.jackson.databind.json.JsonMapper;
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.VString;
+import io.zerows.epoch.constant.VString;
 import io.zerows.extend.jackson.databind.OriginalNamingStrategy;
 import io.zerows.extend.jackson.databind.module.HorizonModule;
 

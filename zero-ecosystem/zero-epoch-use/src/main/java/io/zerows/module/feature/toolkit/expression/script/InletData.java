@@ -1,7 +1,7 @@
 package io.zerows.module.feature.toolkit.expression.script;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.em.typed.ChangeFlag;
+import io.zerows.epoch.enums.typed.ChangeFlag;
 import io.zerows.core.util.Ut;
 import org.apache.commons.jexl3.JexlContext;
 

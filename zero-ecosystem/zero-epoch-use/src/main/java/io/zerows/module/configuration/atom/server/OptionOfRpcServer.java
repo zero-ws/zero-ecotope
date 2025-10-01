@@ -1,6 +1,6 @@
 package io.zerows.module.configuration.atom.server;
 
-import io.zerows.ams.constant.em.app.ServerType;
+import io.zerows.epoch.enums.app.ServerType;
 import io.zerows.module.configuration.atom.option.RpcOptions;
 import io.zerows.module.configuration.zdk.AbstractOptionBridge;
 import io.zerows.module.configuration.zdk.OptionOfServer;

@@ -1,6 +1,6 @@
 package io.zerows.specification.modeling.norm;
 
-import io.zerows.ams.constant.VString;
+import io.zerows.epoch.constant.VString;
 import io.zerows.specification.access.cloud.HDomain;
 import io.zerows.specification.access.cloud.HPlatform;
 import io.zerows.specification.access.cloud.HTenant;

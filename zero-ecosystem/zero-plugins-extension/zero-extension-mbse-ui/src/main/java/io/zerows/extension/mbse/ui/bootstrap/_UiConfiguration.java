@@ -2,9 +2,9 @@ package io.zerows.extension.mbse.ui.bootstrap;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.VPath;
-import io.zerows.ams.constant.VString;
-import io.zerows.ams.constant.VValue;
+import io.zerows.epoch.constant.VPath;
+import io.zerows.epoch.constant.VString;
+import io.zerows.epoch.constant.VValue;
 import io.zerows.core.constant.KName;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.core.util.Ut;

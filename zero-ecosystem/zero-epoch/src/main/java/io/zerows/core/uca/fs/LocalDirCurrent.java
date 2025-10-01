@@ -1,6 +1,6 @@
 package io.zerows.core.uca.fs;
 
-import io.zerows.ams.constant.VString;
+import io.zerows.epoch.constant.VString;
 
 import java.io.File;
 import java.util.ArrayList;

@@ -3,7 +3,7 @@ package io.zerows.core.web.container.uca.gateway;
 import io.r2mo.function.Fn;
 import io.vertx.core.eventbus.Message;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.ams.constant.VValue;
+import io.zerows.epoch.constant.VValue;
 import io.zerows.core.annotations.Address;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.core.util.Ut;

@@ -1,9 +1,9 @@
 package io.zerows.specification.storage;
 
-import io.zerows.ams.annotations.reference.One2One;
-import io.zerows.ams.constant.em.EmDS;
-import io.zerows.ams.constant.em.typed.EmType;
 import io.zerows.common.app.KDatabase;
+import io.zerows.epoch.annotation.reference.One2One;
+import io.zerows.epoch.enums.EmDS;
+import io.zerows.epoch.enums.typed.EmType;
 import io.zerows.specification.atomic.HContract;
 import io.zerows.specification.atomic.HExecutor;
 import io.zerows.specification.development.ncloud.HPlot;

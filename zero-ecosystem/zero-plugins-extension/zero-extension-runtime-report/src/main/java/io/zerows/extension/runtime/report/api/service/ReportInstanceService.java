@@ -4,6 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.ams.fn.HFn;
 import io.zerows.common.program.Kv;
 import io.zerows.core.constant.KName;
 import io.zerows.core.fn.FnZero;
@@ -107,11 +108,11 @@ public class ReportInstanceService implements ReportInstanceStub {
                 paramMap.forEach(paramsMiddle::put);
                 final String reportStartTime = Ut.valueString(params, "reportStartTime");
                 final String reportEndTime = Ut.valueString(params, "reportEndTime");
-                if(reportStartTime==null&&reportEndTime==null){
+                if (reportStartTime == null && reportEndTime == null) {
                     final String timeStr = Ut.valueString(params, "reportAt");
                     final String time = Ut.fromDate(Ut.parseFull(timeStr), "yyyy-MM-dd");
                     paramsMiddle.put("time", time);
-                }else {
+                } else {
                     final String time = Ut.fromDate(Ut.parseFull(reportStartTime), "yyyy-MM-dd");
                     final String time2 = Ut.fromDate(Ut.parseFull(reportEndTime), "yyyy-MM-dd");
                     paramsMiddle.put("time", time);
@@ -175,7 +176,7 @@ public class ReportInstanceService implements ReportInstanceStub {
             final KpFeature feature = generation.featureGlobal(featureName);
             futures.add(input.prepare(params, configureJ, feature));
         });
-        return FnZero.combineT(futures).compose(processed -> {
+        return HFn.combineT(futures).compose(processed -> {
             final ConcurrentMap<String, Object> paramMap = new ConcurrentHashMap<>();
             processed.forEach(kv -> {
                 if (paramMap.containsKey(kv.key())) {

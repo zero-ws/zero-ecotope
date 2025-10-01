@@ -1,8 +1,8 @@
 package io.zerows.module.assembly.osgi.command;
 
-import io.zerows.ams.constant.VString;
-import io.zerows.boot.enums.VertxComponent;
+import io.zerows.epoch.constant.VString;
 import io.zerows.core.util.Ut;
+import io.zerows.epoch.enums.VertxComponent;
 import io.zerows.module.metadata.store.OCacheClass;
 import io.zerows.module.metadata.zdk.running.OCommand;
 import org.osgi.framework.Bundle;

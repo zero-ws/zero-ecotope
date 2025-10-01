@@ -1,6 +1,6 @@
 package io.zerows.core.web.model.atom.action;
 
-import io.zerows.ams.constant.em.app.ServerType;
+import io.zerows.epoch.enums.app.ServerType;
 import io.zerows.core.web.model.atom.Event;
 import io.zerows.core.web.model.atom.Receipt;
 

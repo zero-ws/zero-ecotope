@@ -1,8 +1,8 @@
 package io.zerows.plugins.store.liquibase;
 
 import io.zerows.core.constant.KName;
-import io.zerows.core.running.HMacrocosm;
 import io.zerows.core.util.Ut;
+import io.zerows.epoch.runtime.HMacrocosm;
 import io.zerows.module.metadata.uca.logging.OLog;
 
 import java.util.Properties;

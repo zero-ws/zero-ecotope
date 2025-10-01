@@ -2,7 +2,7 @@ package io.zerows.core.web.container.uca.routing;
 
 import io.reactivex.rxjava3.core.Observable;
 import io.vertx.ext.web.Route;
-import io.zerows.ams.constant.VString;
+import io.zerows.epoch.constant.VString;
 import io.zerows.core.web.io.uca.routing.OAxisSub;
 import io.zerows.core.web.model.atom.Event;
 import io.zerows.core.web.model.atom.running.RunRoute;

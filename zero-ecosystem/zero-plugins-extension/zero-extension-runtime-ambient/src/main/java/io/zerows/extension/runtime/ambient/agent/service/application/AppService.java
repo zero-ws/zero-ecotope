@@ -3,7 +3,7 @@ package io.zerows.extension.runtime.ambient.agent.service.application;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.VString;
+import io.zerows.epoch.constant.VString;
 import io.zerows.core.constant.KName;
 import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;

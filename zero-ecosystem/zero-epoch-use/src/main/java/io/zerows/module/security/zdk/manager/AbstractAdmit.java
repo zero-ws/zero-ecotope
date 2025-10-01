@@ -3,7 +3,7 @@ package io.zerows.module.security.zdk.manager;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.em.EmApp;
+import io.zerows.epoch.enums.EmApp;
 import io.zerows.core.constant.KName;
 import io.zerows.core.running.boot.KPivot;
 import io.zerows.core.util.Ut;

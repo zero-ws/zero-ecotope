@@ -1,7 +1,7 @@
 package io.zerows.core.uca.log;
 
 import io.zerows.ams.util.HUt;
-import io.zerows.core.running.HMacrocosm;
+import io.zerows.epoch.runtime.HMacrocosm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

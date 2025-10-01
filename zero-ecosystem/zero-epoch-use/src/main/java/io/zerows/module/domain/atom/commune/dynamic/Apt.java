@@ -6,7 +6,7 @@ import io.vertx.codegen.annotations.Fluent;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.em.typed.ChangeFlag;
+import io.zerows.epoch.enums.typed.ChangeFlag;
 import io.zerows.core.util.Ut;
 import io.zerows.epoch.runtime.exception._15000Exception500AptParameter;
 import io.zerows.module.metadata.uca.logging.OLog;

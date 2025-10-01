@@ -1,7 +1,7 @@
 package io.zerows.module.cloud.eon;
 
-import io.zerows.ams.constant.em.typed.ChangeFlag;
-import io.zerows.ams.constant.spec.VPC;
+import io.zerows.epoch.enums.typed.ChangeFlag;
+import io.zerows.epoch.constant.spec.VPC;
 import io.zerows.core.spi.modeler.Identifier;
 
 /**

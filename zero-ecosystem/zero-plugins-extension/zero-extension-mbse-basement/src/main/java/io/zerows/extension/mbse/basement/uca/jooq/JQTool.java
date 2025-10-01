@@ -1,6 +1,6 @@
 package io.zerows.extension.mbse.basement.uca.jooq;
 
-import io.zerows.ams.constant.VValue;
+import io.zerows.epoch.constant.VValue;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.core.uca.qr.Pager;
 import io.zerows.core.uca.qr.Sorter;

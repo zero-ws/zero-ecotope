@@ -1,6 +1,5 @@
 package io.zerows.core.web.container.osgi.service;
 
-import io.zerows.boot.enums.VertxComponent;
 import io.zerows.core.annotations.Agent;
 import io.zerows.core.annotations.Worker;
 import io.zerows.core.running.context.KRunner;
@@ -8,6 +7,7 @@ import io.zerows.core.util.Ut;
 import io.zerows.core.web.container.store.under.StoreVertx;
 import io.zerows.core.web.container.uca.store.StubLinear;
 import io.zerows.core.web.model.atom.running.RunVertx;
+import io.zerows.epoch.enums.VertxComponent;
 import io.zerows.module.metadata.osgi.service.EnergyDeployment;
 import io.zerows.module.metadata.store.OCacheClass;
 import org.osgi.framework.Bundle;

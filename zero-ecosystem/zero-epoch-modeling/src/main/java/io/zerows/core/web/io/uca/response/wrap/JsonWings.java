@@ -1,8 +1,8 @@
 package io.zerows.core.web.io.uca.response.wrap;
 
 import io.vertx.core.http.HttpServerResponse;
-import io.zerows.ams.constant.VString;
-import io.zerows.ams.constant.em.app.HttpStatusCode;
+import io.zerows.epoch.constant.VString;
+import io.zerows.epoch.enums.app.HttpStatusCode;
 import io.zerows.core.web.model.commune.Envelop;
 
 import java.util.Objects;

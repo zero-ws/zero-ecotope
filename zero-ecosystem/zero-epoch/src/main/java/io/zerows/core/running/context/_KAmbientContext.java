@@ -1,8 +1,8 @@
 package io.zerows.core.running.context;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.ams.constant.VValue;
-import io.zerows.ams.constant.em.EmApp;
+import io.zerows.epoch.constant.VValue;
+import io.zerows.epoch.enums.EmApp;
 import io.zerows.ams.util.HUt;
 import io.zerows.core.exception.boot._40103Exception500ConnectAmbient;
 import io.zerows.specification.access.HBelong;

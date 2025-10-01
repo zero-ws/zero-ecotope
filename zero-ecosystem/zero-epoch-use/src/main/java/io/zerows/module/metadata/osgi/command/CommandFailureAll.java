@@ -1,7 +1,7 @@
 package io.zerows.module.metadata.osgi.command;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.VString;
+import io.zerows.epoch.constant.VString;
 import io.zerows.module.metadata.store.OCacheFailure;
 import io.zerows.module.metadata.zdk.running.OCommand;
 import org.osgi.framework.Bundle;

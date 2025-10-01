@@ -2,7 +2,7 @@ package io.zerows.core.web.model.atom;
 
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.http.HttpMethod;
-import io.zerows.ams.constant.VString;
+import io.zerows.epoch.constant.VString;
 import io.zerows.core.constant.KWeb;
 import io.zerows.module.assembly.uca.di.DiPlugin;
 import jakarta.ws.rs.core.MediaType;

@@ -2,7 +2,7 @@ package io.zerows.common.datamation;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.em.EmAop;
+import io.zerows.epoch.enums.EmAop;
 import io.zerows.ams.util.HUt;
 
 import java.io.Serializable;

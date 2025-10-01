@@ -1,7 +1,7 @@
 package io.zerows.core.uca.metadata;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.em.EmMeta;
+import io.zerows.epoch.enums.EmMeta;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;

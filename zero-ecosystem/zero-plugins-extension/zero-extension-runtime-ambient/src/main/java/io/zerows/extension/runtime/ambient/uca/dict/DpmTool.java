@@ -2,8 +2,8 @@ package io.zerows.extension.runtime.ambient.uca.dict;
 
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.VString;
-import io.zerows.ams.constant.em.EmDict;
+import io.zerows.epoch.constant.VString;
+import io.zerows.epoch.enums.EmDict;
 import io.zerows.core.constant.KName;
 import io.zerows.core.util.Ut;
 

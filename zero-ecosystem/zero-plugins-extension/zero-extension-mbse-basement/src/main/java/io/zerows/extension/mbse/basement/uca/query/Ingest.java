@@ -1,6 +1,6 @@
 package io.zerows.extension.mbse.basement.uca.query;
 
-import io.zerows.ams.constant.em.modeling.EmModel;
+import io.zerows.epoch.enums.modeling.EmModel;
 import io.zerows.core.uca.qr.Criteria;
 import io.zerows.core.uca.qr.Sorter;
 import io.zerows.extension.mbse.basement.atom.element.DataTpl;

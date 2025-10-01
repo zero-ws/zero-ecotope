@@ -2,7 +2,7 @@ package io.zerows.module.domain.atom.commune.dynamic;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.em.typed.ChangeFlag;
+import io.zerows.epoch.enums.typed.ChangeFlag;
 import io.zerows.core.util.Ut;
 
 import java.util.concurrent.ConcurrentHashMap;

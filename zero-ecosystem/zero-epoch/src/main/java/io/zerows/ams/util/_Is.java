@@ -2,7 +2,7 @@ package io.zerows.ams.util;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.VEnv;
+import io.zerows.epoch.constant.VEnv;
 
 import java.time.LocalDateTime;
 import java.util.*;

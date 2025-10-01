@@ -1,7 +1,7 @@
 package io.zerows.ams.util;
 
 import io.r2mo.function.Fn;
-import io.zerows.ams.constant.VValue;
+import io.zerows.epoch.constant.VValue;
 
 import java.net.URLDecoder;
 import java.net.URLEncoder;

@@ -1,6 +1,6 @@
 package io.zerows.core.spi;
 
-import io.zerows.ams.constant.spec.VBoot;
+import io.zerows.epoch.constant.spec.VBoot;
 import io.zerows.core.running.boot.KEnergy;
 import io.zerows.specification.access.HLauncher;
 import io.zerows.specification.configuration.HEnergy;

@@ -6,12 +6,12 @@ import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.em.typed.ChangeFlag;
+import io.zerows.ams.fn.HFn;
 import io.zerows.core.database.jooq.operation.UxJooq;
-import io.zerows.core.fn.FnZero;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.model.uca.normalize.Oneness;
+import io.zerows.epoch.enums.typed.ChangeFlag;
 import io.zerows.module.metadata.atom.configuration.modeling.MDConnect;
 import io.zerows.plugins.office.excel.atom.ExTable;
 import io.zerows.plugins.office.excel.exception._60039Exception500ExportingError;
@@ -193,7 +193,7 @@ class SheetImport {
                 .compose(data -> Ux.future(this.saveEntity(data, table)))
             ));
         /* Set<Tool> handler */
-        return FnZero.combineT(futures).compose(result -> {
+        return HFn.combineT(futures).compose(result -> {
             final Set<T> entitySet = new HashSet<>();
             result.forEach(entitySet::addAll);
             return Ux.future(entitySet);

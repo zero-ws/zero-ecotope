@@ -1,6 +1,6 @@
 package io.zerows.core.annotations;
 
-import io.zerows.ams.constant.VString;
+import io.zerows.epoch.constant.VString;
 import io.zerows.core.constant.em.EmJob;
 
 import java.lang.annotation.*;

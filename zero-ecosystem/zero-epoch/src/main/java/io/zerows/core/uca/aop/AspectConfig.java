@@ -2,7 +2,7 @@ package io.zerows.core.uca.aop;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.spec.VPC;
+import io.zerows.epoch.constant.spec.VPC;
 import io.zerows.ams.util.HUt;
 import io.zerows.core.exception.web._60050Exception501NotSupport;
 import io.zerows.specification.atomic.HReturn;

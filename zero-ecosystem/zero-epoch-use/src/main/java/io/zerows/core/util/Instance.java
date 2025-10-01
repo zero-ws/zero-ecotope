@@ -3,7 +3,7 @@ package io.zerows.core.util;
 import io.r2mo.function.Fn;
 import io.r2mo.vertx.common.exception.VertxBootException;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.VValue;
+import io.zerows.epoch.constant.VValue;
 import io.zerows.ams.util.HUt;
 import io.zerows.core.annotations.Contract;
 import io.zerows.epoch.runtime.exception._40028Exception503DuplicatedImpl;

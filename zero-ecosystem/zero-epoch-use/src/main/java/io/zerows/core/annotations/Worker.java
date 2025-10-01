@@ -1,6 +1,6 @@
 package io.zerows.core.annotations;
 
-import io.zerows.ams.constant.em.app.EmTraffic;
+import io.zerows.epoch.enums.app.EmTraffic;
 import io.zerows.core.constant.KWeb;
 
 import java.lang.annotation.*;

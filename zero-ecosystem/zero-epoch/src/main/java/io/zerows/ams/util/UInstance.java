@@ -1,7 +1,7 @@
 package io.zerows.ams.util;
 
 import io.r2mo.function.Fn;
-import io.zerows.ams.constant.VString;
+import io.zerows.epoch.constant.VString;
 import io.zerows.core.exception.boot._11005Exception501OperationInvalid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

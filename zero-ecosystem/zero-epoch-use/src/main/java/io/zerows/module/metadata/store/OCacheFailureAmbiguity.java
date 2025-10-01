@@ -3,7 +3,6 @@ package io.zerows.module.metadata.store;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
 import io.zerows.core.constant.configure.YmlCore;
-import io.zerows.core.spi.HorizonIo;
 import io.zerows.core.util.Ut;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HSetting;
@@ -55,14 +54,6 @@ class OCacheFailureAmbiguity implements OCacheFailure {
         return this;
     }
 
-    /**
-     * 实例方法只提取当前 {@link Bundle} 的基础方法，新版 {@link HorizonIo} 中的提取直接走
-     * 静态模式。
-     *
-     * @param errorCode 键值
-     *
-     * @return {@link JsonObject}
-     */
     @Override
     public JsonObject valueGet(final String errorCode) {
         final String key = errorCode.startsWith("E") ? errorCode : "E" + errorCode;

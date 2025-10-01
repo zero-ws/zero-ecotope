@@ -1,6 +1,6 @@
 package io.zerows.module.configuration.atom;
 
-import io.zerows.ams.constant.em.app.ServerType;
+import io.zerows.epoch.enums.app.ServerType;
 import io.zerows.module.configuration.atom.option.ClusterOptions;
 import io.zerows.specification.configuration.HSetting;
 

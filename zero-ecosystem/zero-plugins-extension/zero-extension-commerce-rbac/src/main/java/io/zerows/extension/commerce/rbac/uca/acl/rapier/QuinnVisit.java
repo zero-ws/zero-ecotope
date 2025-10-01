@@ -3,9 +3,9 @@ package io.zerows.extension.commerce.rbac.uca.acl.rapier;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.ams.fn.HFn;
 import io.zerows.core.constant.KName;
 import io.zerows.core.database.jooq.operation.UxJooq;
-import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.commerce.rbac.atom.ScOwner;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.SViewDao;
@@ -110,7 +110,7 @@ public class QuinnVisit implements Quinn {
             final List<Future<List<SVisitant>>> futures = new ArrayList<>();
             futures.add(jq.insertAsync(qAdd));
             futures.add(jq.updateAsync(qUp));
-            return FnZero.combineT(futures).compose(matrix -> {
+            return HFn.combineT(futures).compose(matrix -> {
                 final List<SVisitant> visitants = new ArrayList<>();
                 matrix.forEach(visitants::addAll);
                 return Ux.future(visitants);

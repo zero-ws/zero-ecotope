@@ -1,8 +1,8 @@
 package io.zerows.extension.runtime.ambient.util;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.em.modeling.EmAttribute;
-import io.zerows.ams.constant.em.typed.ChangeFlag;
+import io.zerows.epoch.enums.modeling.EmAttribute;
+import io.zerows.epoch.enums.typed.ChangeFlag;
 import io.zerows.common.normalize.KMarkAtom;
 import io.zerows.core.uca.compare.Vs;
 import io.zerows.core.util.Ut;

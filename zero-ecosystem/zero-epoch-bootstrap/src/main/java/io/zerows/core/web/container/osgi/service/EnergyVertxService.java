@@ -1,13 +1,13 @@
 package io.zerows.core.web.container.osgi.service;
 
 import io.vertx.core.Future;
-import io.zerows.boot.enums.VertxComponent;
 import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.container.store.under.StoreVertx;
 import io.zerows.core.web.container.uca.store.StubLinear;
 import io.zerows.core.web.container.uca.store.StubVertx;
 import io.zerows.core.web.model.atom.running.RunVertx;
+import io.zerows.epoch.enums.VertxComponent;
 import io.zerows.module.configuration.atom.NodeNetwork;
 import io.zerows.module.configuration.atom.NodeVertx;
 import io.zerows.module.configuration.atom.option.ClusterOptions;

@@ -1,8 +1,8 @@
 package io.zerows.core.constant.configure;
 
-import io.zerows.ams.constant.VPath;
-import io.zerows.ams.constant.VString;
-import io.zerows.ams.constant.em.EmDS;
+import io.zerows.epoch.constant.VPath;
+import io.zerows.epoch.constant.VString;
+import io.zerows.epoch.enums.EmDS;
 import io.zerows.ams.util.HUt;
 import io.zerows.core.annotations.Infusion;
 import io.zerows.core.constant.KName;

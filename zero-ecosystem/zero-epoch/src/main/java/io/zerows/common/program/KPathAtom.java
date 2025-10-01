@@ -1,8 +1,8 @@
 package io.zerows.common.program;
 
-import io.zerows.ams.constant.VString;
-import io.zerows.ams.constant.em.Environment;
-import io.zerows.ams.constant.spec.VWeb;
+import io.zerows.epoch.constant.VString;
+import io.zerows.epoch.enums.Environment;
+import io.zerows.epoch.constant.spec.VWeb;
 import io.zerows.ams.util.HUt;
 
 /**

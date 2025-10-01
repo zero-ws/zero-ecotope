@@ -2,8 +2,8 @@ package io.zerows.common.normalize;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.VString;
-import io.zerows.ams.constant.em.modeling.EmAttribute;
+import io.zerows.epoch.constant.VString;
+import io.zerows.epoch.enums.modeling.EmAttribute;
 import io.zerows.ams.util.HUt;
 
 import java.util.List;

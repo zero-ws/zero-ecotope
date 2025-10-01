@@ -1,8 +1,8 @@
 package io.zerows.extension.mbse.action.atom;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.em.Environment;
-import io.zerows.ams.constant.em.app.EmTraffic;
+import io.zerows.epoch.enums.Environment;
+import io.zerows.epoch.enums.app.EmTraffic;
 import io.zerows.common.app.KIntegration;
 import io.zerows.common.datamation.KDictConfig;
 import io.zerows.common.datamation.KMap;

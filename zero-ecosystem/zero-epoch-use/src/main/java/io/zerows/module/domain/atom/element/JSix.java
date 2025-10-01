@@ -1,8 +1,8 @@
 package io.zerows.module.domain.atom.element;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.VString;
-import io.zerows.ams.constant.em.typed.ChangeFlag;
+import io.zerows.epoch.constant.VString;
+import io.zerows.epoch.enums.typed.ChangeFlag;
 import io.zerows.core.util.Ut;
 
 import java.io.Serializable;

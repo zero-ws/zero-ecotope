@@ -2,9 +2,7 @@ package io.zerows.core.uca.log;
 
 import io.r2mo.typed.cc.Cc;
 import io.zerows.ams.util.HUt;
-import io.zerows.core.spi.HorizonIo;
 
-import java.util.Objects;
 import java.util.function.Function;
 
 /**
@@ -47,9 +45,8 @@ public class LogFactory {
      *
      * @return {@link LogModule}
      */
-    public LogModule osgi(final String type, final HorizonIo io) {
-        Objects.requireNonNull(io);
-        return new LogModule(this.module).bind(type).bind(HUt::rgbCyanN).io(io);
+    public LogModule osgi(final String type) {
+        return new LogModule(this.module).bind(type).bind(HUt::rgbCyanN);
     }
     // ----------------- 粗体
 

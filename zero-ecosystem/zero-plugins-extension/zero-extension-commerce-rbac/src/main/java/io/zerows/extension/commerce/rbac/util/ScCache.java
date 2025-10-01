@@ -3,7 +3,7 @@ package io.zerows.extension.commerce.rbac.util;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.ams.constant.VString;
+import io.zerows.epoch.constant.VString;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.cache.Rapid;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SPath;

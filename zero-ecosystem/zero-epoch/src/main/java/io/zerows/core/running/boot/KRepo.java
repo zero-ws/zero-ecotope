@@ -1,7 +1,7 @@
 package io.zerows.core.running.boot;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.zerows.ams.constant.em.EmCloud;
+import io.zerows.epoch.enums.EmCloud;
 import io.zerows.ams.util.HUt;
 
 import java.io.Serializable;

@@ -1,7 +1,7 @@
 package io.zerows.module.cloud.atom;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.em.EmCloud;
+import io.zerows.epoch.enums.EmCloud;
 import io.zerows.core.constant.KName;
 import io.zerows.core.running.boot.KPlot;
 import io.zerows.core.running.boot.KRepo;

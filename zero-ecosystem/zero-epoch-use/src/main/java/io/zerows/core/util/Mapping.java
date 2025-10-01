@@ -2,7 +2,7 @@ package io.zerows.core.util;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.VString;
+import io.zerows.epoch.constant.VString;
 import io.zerows.common.datamation.KMapping;
 import io.zerows.core.constant.KName;
 

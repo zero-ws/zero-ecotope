@@ -1,7 +1,7 @@
 package io.zerows.extension.mbse.basement.uca.apply;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.em.modeling.EmAttribute;
+import io.zerows.epoch.enums.modeling.EmAttribute;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MModel;
 
 import static io.zerows.extension.mbse.basement.util.Ao.LOG;

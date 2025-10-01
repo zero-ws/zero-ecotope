@@ -1,7 +1,7 @@
 package io.zerows.module.metadata.zdk.running;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.ams.constant.VString;
+import io.zerows.epoch.constant.VString;
 import io.zerows.core.exception.web._60050Exception501NotSupport;
 import io.zerows.core.util.Ut;
 import io.zerows.module.metadata.store.OZeroStore;

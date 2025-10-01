@@ -1,7 +1,7 @@
 package io.zerows.core.uca.metadata;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.VName;
+import io.zerows.epoch.constant.VName;
 import io.zerows.ams.util.HUt;
 
 /**

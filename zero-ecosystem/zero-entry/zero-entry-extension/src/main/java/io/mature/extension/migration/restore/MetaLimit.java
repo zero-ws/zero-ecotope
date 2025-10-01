@@ -4,7 +4,7 @@ import io.mature.extension.migration.AbstractStep;
 import io.mature.extension.migration.modeling.Revision;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.em.Environment;
+import io.zerows.epoch.enums.Environment;
 import io.zerows.core.constant.KName;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.mbse.basement.domain.tables.daos.MAttributeDao;

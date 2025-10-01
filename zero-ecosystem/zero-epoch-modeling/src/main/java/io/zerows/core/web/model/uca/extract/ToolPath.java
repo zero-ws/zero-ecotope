@@ -1,8 +1,8 @@
 package io.zerows.core.web.model.uca.extract;
 
 import io.r2mo.function.Fn;
-import io.zerows.ams.constant.VString;
-import io.zerows.ams.constant.VValue;
+import io.zerows.epoch.constant.VString;
+import io.zerows.epoch.constant.VValue;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.core.util.Ut;
 import io.zerows.epoch.mature.exception._40006Exception500PathAnnoEmpty;

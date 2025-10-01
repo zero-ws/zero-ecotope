@@ -1,9 +1,9 @@
 package io.zerows.extension.runtime.integration.bootstrap;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.running.HMacrocosm;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.model.extension.HExtension;
+import io.zerows.epoch.runtime.HMacrocosm;
 import io.zerows.extension.runtime.integration.atom.IsConfig;
 import io.zerows.extension.runtime.integration.eon.IsConstant;
 import io.zerows.extension.runtime.skeleton.eon.KeMsg;

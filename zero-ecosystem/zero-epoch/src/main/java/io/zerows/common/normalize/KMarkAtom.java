@@ -1,6 +1,6 @@
 package io.zerows.common.normalize;
 
-import io.zerows.ams.constant.em.modeling.EmAttribute;
+import io.zerows.epoch.enums.modeling.EmAttribute;
 
 import java.util.HashSet;
 import java.util.Objects;

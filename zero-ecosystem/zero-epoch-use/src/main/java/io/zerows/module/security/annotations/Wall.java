@@ -1,6 +1,6 @@
 package io.zerows.module.security.annotations;
 
-import io.zerows.ams.constant.VValue;
+import io.zerows.epoch.constant.VValue;
 
 import java.lang.annotation.*;
 

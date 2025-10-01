@@ -1,6 +1,6 @@
 package io.zerows.specification.development.program;
 
-import io.zerows.ams.annotations.reference.One2One;
+import io.zerows.epoch.annotation.reference.One2One;
 import io.zerows.specification.modeling.norm.HVersion;
 
 /**

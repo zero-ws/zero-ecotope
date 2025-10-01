@@ -2,7 +2,7 @@ package io.zerows.core.web.container.verticle;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.eventbus.EventBus;
-import io.zerows.ams.constant.VValue;
+import io.zerows.epoch.constant.VValue;
 import io.zerows.core.annotations.Ipc;
 import io.zerows.core.annotations.Worker;
 import io.zerows.core.util.Ut;

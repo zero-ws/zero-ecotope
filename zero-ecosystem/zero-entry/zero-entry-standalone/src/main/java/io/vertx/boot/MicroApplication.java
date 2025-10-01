@@ -2,10 +2,10 @@ package io.vertx.boot;
 
 import io.vertx.boot.supply.Electy;
 import io.vertx.core.Vertx;
-import io.zerows.boot.enums.VertxComponent;
 import io.zerows.core.running.boot.KLauncher;
 import io.zerows.core.running.context.KRunner;
 import io.zerows.core.web.container.uca.store.StubLinear;
+import io.zerows.epoch.enums.VertxComponent;
 import io.zerows.specification.configuration.HConfig;
 
 /**

@@ -2,9 +2,9 @@ package io.zerows.extension.mbse.basement.atom.builtin;
 
 
 import io.r2mo.function.Fn;
-import io.zerows.ams.constant.VValue;
-import io.zerows.ams.constant.em.modeling.EmKey;
-import io.zerows.ams.constant.em.modeling.EmModel;
+import io.zerows.epoch.constant.VValue;
+import io.zerows.epoch.enums.modeling.EmKey;
+import io.zerows.epoch.enums.modeling.EmModel;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.mbse.basement.atom.Model;
 import io.zerows.extension.mbse.basement.atom.Schema;

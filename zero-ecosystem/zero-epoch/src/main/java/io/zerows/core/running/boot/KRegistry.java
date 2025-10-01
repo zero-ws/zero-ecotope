@@ -1,7 +1,7 @@
 package io.zerows.core.running.boot;
 
 import io.vertx.core.Future;
-import io.zerows.ams.constant.em.EmApp;
+import io.zerows.epoch.enums.EmApp;
 import io.zerows.core.running.context.KArk;
 import io.zerows.specification.access.app.HApp;
 import io.zerows.specification.access.app.HArk;

@@ -1,9 +1,7 @@
 package io.zerows.module.metadata.uca.logging;
 
-import io.zerows.core.spi.HorizonIo;
 import io.zerows.core.uca.log.Log;
 import io.zerows.core.uca.log.LogModule;
-import io.zerows.core.util.Ut;
 
 /**
  * @author lang : 2024-04-17
@@ -17,8 +15,7 @@ class LogConsole implements OLog {
     LogConsole(final Class<?> clazz, final String name) {
         this.targetClass = clazz;
 
-        final HorizonIo io = Ut.Bnd.serviceIo(clazz);
-        this.internalLogger = Log.modulat(MODULE).osgi(name, io);
+        this.internalLogger = Log.modulat(MODULE).osgi(name);
     }
 
     @Override

@@ -2,8 +2,8 @@ package io.zerows.extension.runtime.ambient.uca.boot;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.VOption;
-import io.zerows.ams.constant.em.EmDS;
+import io.zerows.epoch.constant.VOption;
+import io.zerows.epoch.enums.EmDS;
 import io.zerows.common.app.KDS;
 import io.zerows.common.app.KDatabase;
 import io.zerows.core.constant.KName;

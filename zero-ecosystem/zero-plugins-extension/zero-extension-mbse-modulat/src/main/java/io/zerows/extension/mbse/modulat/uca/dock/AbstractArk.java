@@ -2,8 +2,8 @@ package io.zerows.extension.mbse.modulat.uca.dock;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.VValue;
-import io.zerows.ams.constant.em.modeling.EmModel;
+import io.zerows.epoch.constant.VValue;
+import io.zerows.epoch.enums.modeling.EmModel;
 import io.zerows.core.constant.KName;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.mbse.modulat.agent.service.BagArgService;

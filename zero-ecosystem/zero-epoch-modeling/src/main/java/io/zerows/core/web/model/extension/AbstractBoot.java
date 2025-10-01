@@ -2,7 +2,7 @@ package io.zerows.core.web.model.extension;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.VString;
+import io.zerows.epoch.constant.VString;
 import io.zerows.core.util.Ut;
 import io.zerows.module.metadata.atom.configuration.MDConfiguration;
 import io.zerows.module.metadata.atom.configuration.modeling.MDConnect;

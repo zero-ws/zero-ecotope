@@ -1,11 +1,11 @@
 package io.zerows.core.database.atom;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.annotations.Legacy;
-import io.zerows.ams.constant.em.EmDS;
 import io.zerows.common.app.KDatabase;
 import io.zerows.core.constant.configure.YmlCore;
 import io.zerows.core.util.Ut;
+import io.zerows.epoch.annotation.Legacy;
+import io.zerows.epoch.enums.EmDS;
 import io.zerows.module.metadata.store.OZeroStore;
 import io.zerows.module.metadata.uca.environment.MatureOn;
 import io.zerows.module.metadata.uca.logging.OLog;

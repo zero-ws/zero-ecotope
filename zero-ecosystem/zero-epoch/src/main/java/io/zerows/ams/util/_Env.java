@@ -1,8 +1,8 @@
 package io.zerows.ams.util;
 
-import io.zerows.ams.constant.VEnv;
-import io.zerows.ams.constant.VString;
-import io.zerows.ams.constant.em.app.OsType;
+import io.zerows.epoch.constant.VEnv;
+import io.zerows.epoch.constant.VString;
+import io.zerows.epoch.enums.app.OsType;
 import io.zerows.common.program.Kv;
 
 import java.util.Properties;

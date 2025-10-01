@@ -1,6 +1,6 @@
 package io.zerows.extension.mbse.basement.uca.metadata;
 
-import io.zerows.ams.constant.em.modeling.EmKey;
+import io.zerows.epoch.enums.modeling.EmKey;
 
 import java.util.List;
 import java.util.concurrent.ConcurrentMap;

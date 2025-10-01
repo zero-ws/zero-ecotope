@@ -1,7 +1,7 @@
 package io.zerows.extension.mbse.basement.uca.io;
 
 import io.r2mo.function.Fn;
-import io.zerows.ams.constant.VValue;
+import io.zerows.epoch.constant.VValue;
 import io.zerows.extension.mbse.basement.exception._80534Exception417EventTypeConflict;
 import io.zerows.extension.mbse.basement.uca.plugin.IoHub;
 import io.zerows.specification.modeling.HRecord;

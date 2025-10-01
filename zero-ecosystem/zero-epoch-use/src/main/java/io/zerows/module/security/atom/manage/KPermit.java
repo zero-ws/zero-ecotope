@@ -1,7 +1,7 @@
 package io.zerows.module.security.atom.manage;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.VString;
+import io.zerows.epoch.constant.VString;
 import io.zerows.core.constant.KName;
 import io.zerows.core.constant.em.EmSecure;
 import io.zerows.core.util.Ut;

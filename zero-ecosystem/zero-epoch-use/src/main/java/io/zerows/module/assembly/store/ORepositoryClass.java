@@ -1,9 +1,9 @@
 package io.zerows.module.assembly.store;
 
-import io.zerows.boot.enums.VertxComponent;
 import io.zerows.core.annotations.*;
 import io.zerows.core.running.context.KRunner;
 import io.zerows.core.util.Ut;
+import io.zerows.epoch.enums.VertxComponent;
 import io.zerows.module.assembly.uca.scan.*;
 import io.zerows.module.metadata.store.OCacheClass;
 import io.zerows.module.metadata.zdk.AbstractAmbiguity;

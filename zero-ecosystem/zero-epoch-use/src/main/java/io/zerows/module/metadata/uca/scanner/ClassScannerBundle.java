@@ -1,6 +1,6 @@
 package io.zerows.module.metadata.uca.scanner;
 
-import io.zerows.ams.constant.VString;
+import io.zerows.epoch.constant.VString;
 import org.osgi.framework.Bundle;
 
 import java.net.URL;

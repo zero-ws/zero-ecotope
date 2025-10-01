@@ -3,16 +3,16 @@ package io.zerows.core.web.scheduler.osgi.agent;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
-import io.zerows.ams.constant.VValue;
+import io.zerows.ams.fn.HFn;
 import io.zerows.core.annotations.Worker;
 import io.zerows.core.constant.em.EmJob;
-import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.scheduler.atom.Mission;
 import io.zerows.core.web.scheduler.uca.center.Agha;
 import io.zerows.core.web.scheduler.uca.running.JobConfig;
 import io.zerows.core.web.scheduler.uca.running.JobPin;
 import io.zerows.core.web.scheduler.uca.running.JobStore;
+import io.zerows.epoch.constant.VValue;
 import io.zerows.module.metadata.uca.environment.DevEnv;
 import io.zerows.module.metadata.uca.logging.OLog;
 
@@ -51,7 +51,7 @@ public class ZeroScheduler extends AbstractVerticle {
                 /* Start each job here by different types */
                 final List<Future<Void>> futures = new ArrayList<>();
                 missions.forEach(mission -> futures.add(this.start(mission)));
-                FnZero.combineT(futures).onSuccess(nil -> LOGGER.info(INFO.JOB_STARTED));
+                HFn.combineT(futures).onSuccess(nil -> LOGGER.info(INFO.JOB_STARTED));
             }
         } else {
             LOGGER.info(INFO.JOB_CONFIG_NULL);

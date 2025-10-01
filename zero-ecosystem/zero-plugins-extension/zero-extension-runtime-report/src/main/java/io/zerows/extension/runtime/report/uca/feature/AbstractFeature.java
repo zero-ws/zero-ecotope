@@ -1,6 +1,6 @@
 package io.zerows.extension.runtime.report.uca.feature;
 
-import io.zerows.ams.constant.VString;
+import io.zerows.epoch.constant.VString;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.runtime.report.domain.tables.pojos.KpFeature;
 import io.zerows.extension.runtime.report.eon.em.EmReport;

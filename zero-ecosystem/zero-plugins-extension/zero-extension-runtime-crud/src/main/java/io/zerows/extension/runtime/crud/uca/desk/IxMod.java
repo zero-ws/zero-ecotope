@@ -4,7 +4,7 @@ import io.r2mo.function.Fn;
 import io.r2mo.typed.exception.WebException;
 import io.r2mo.typed.exception.web._500ServerInternalException;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.VString;
+import io.zerows.epoch.constant.VString;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.mbse.atom.specification.KModule;
 import io.zerows.core.web.model.commune.Envelop;

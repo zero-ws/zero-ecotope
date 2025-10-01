@@ -3,7 +3,7 @@ package io.zerows.module.domain.atom.typed;
 import io.reactivex.rxjava3.core.Observable;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.VValue;
+import io.zerows.epoch.constant.VValue;
 import io.zerows.core.util.Ut;
 
 import java.util.concurrent.ConcurrentHashMap;

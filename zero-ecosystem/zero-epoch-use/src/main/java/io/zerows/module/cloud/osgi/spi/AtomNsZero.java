@@ -1,10 +1,10 @@
 package io.zerows.module.cloud.osgi.spi;
 
-import io.zerows.ams.constant.VEnv;
 import io.zerows.ams.util.HUt;
-import io.zerows.core.running.HMacrocosm;
 import io.zerows.core.spi.modeler.AtomNs;
 import io.zerows.core.util.Ut;
+import io.zerows.epoch.constant.VEnv;
+import io.zerows.epoch.runtime.HMacrocosm;
 import io.zerows.module.cloud.util.Ho;
 
 /**

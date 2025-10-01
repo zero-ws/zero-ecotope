@@ -2,8 +2,8 @@ package io.zerows.extension.runtime.workflow.uca.conformity;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
+import io.zerows.ams.fn.HFn;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.runtime.workflow.atom.runtime.WTask;
 import io.zerows.extension.runtime.workflow.domain.tables.pojos.WTicket;
@@ -51,7 +51,7 @@ public class GearForkJoin extends AbstractGear {
             queue.add(starter.buildAsync(eachData, task, null));
         });
 
-        return FnZero.combineT(queue).compose(generatedQ -> {
+        return HFn.combineT(queue).compose(generatedQ -> {
             final AtomicInteger seed = new AtomicInteger(1);
             generatedQ.forEach(generated -> {
                 // Duplicate entry 'da89a198-a9fb-40f8-a3cc-6a77df8cea22' for key 'PRIMARY'
@@ -86,7 +86,7 @@ public class GearForkJoin extends AbstractGear {
             // 1. Deserialize new WTodo
             queue.add(generator.buildAsync(eachData, task, todo));
         });
-        return FnZero.combineT(queue).compose(generatedQ -> {
+        return HFn.combineT(queue).compose(generatedQ -> {
 
             final AtomicInteger seed = new AtomicInteger(1);
             generatedQ.forEach(generated -> {

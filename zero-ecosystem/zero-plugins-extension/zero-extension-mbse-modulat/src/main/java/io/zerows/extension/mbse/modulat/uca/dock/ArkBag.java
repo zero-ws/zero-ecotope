@@ -2,7 +2,7 @@ package io.zerows.extension.mbse.modulat.uca.dock;
 
 import io.vertx.core.Future;
 import io.vertx.core.shareddata.ClusterSerializable;
-import io.zerows.ams.constant.em.modeling.EmModel;
+import io.zerows.epoch.enums.modeling.EmModel;
 
 class ArkBag extends AbstractArk {
     /*

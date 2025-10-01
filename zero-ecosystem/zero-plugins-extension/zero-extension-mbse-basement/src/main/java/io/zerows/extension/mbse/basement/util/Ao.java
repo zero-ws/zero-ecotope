@@ -2,7 +2,7 @@ package io.zerows.extension.mbse.basement.util;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.em.typed.ChangeFlag;
+import io.zerows.epoch.enums.typed.ChangeFlag;
 import io.zerows.common.normalize.KIdentity;
 import io.zerows.core.database.atom.Database;
 import io.zerows.core.uca.log.Log;

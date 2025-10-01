@@ -1,7 +1,7 @@
 package io.zerows.module.domain.uca.destine;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.ams.annotations.Memory;
+import io.zerows.epoch.annotation.Memory;
 
 
 @SuppressWarnings("all")

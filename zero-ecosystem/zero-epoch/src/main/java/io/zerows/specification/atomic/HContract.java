@@ -1,7 +1,7 @@
 package io.zerows.specification.atomic;
 
-import io.zerows.ams.constant.VValue;
-import io.zerows.ams.constant.em.EmUca;
+import io.zerows.epoch.constant.VValue;
+import io.zerows.epoch.enums.EmUca;
 import io.zerows.specification.access.app.HMod;
 import io.zerows.specification.development.ncloud.HCube;
 import io.zerows.specification.development.ncloud.HNovae;

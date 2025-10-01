@@ -1,6 +1,6 @@
 package io.zerows.common.normalize;
 
-import io.zerows.ams.constant.em.modeling.EmKey;
+import io.zerows.epoch.enums.modeling.EmKey;
 import io.zerows.ams.util.HUt;
 import io.zerows.specification.modeling.element.HKey;
 

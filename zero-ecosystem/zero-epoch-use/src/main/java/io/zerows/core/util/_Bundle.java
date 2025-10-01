@@ -2,7 +2,6 @@ package io.zerows.core.util;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.spi.HorizonIo;
 import io.zerows.module.metadata.zdk.running.OCommand;
 import org.apache.felix.dm.Component;
 import org.apache.felix.dm.ServiceDependency;
@@ -46,10 +45,6 @@ class _Bundle extends _Ai {
 
         public static <T> T serviceSPI(final Class<T> interfaceCls, final Bundle bundle) {
             return BundleSPI.service(interfaceCls, bundle);
-        }
-
-        public static HorizonIo serviceIo(final Class<?> clazz) {
-            return BundleSPI.serviceIo(clazz);
         }
 
         public static <T> T service(final Class<T> interfaceCls, final Bundle bundle) {

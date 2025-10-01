@@ -1,7 +1,7 @@
 package io.zerows.core.running.context;
 
-import io.zerows.ams.constant.VName;
-import io.zerows.ams.constant.em.EmApp;
+import io.zerows.epoch.constant.VName;
+import io.zerows.epoch.enums.EmApp;
 import io.zerows.ams.util.HUt;
 import io.zerows.specification.access.HBelong;
 import io.zerows.specification.access.app.HApp;

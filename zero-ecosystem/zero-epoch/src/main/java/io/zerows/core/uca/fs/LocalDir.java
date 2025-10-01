@@ -1,7 +1,7 @@
 package io.zerows.core.uca.fs;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.ams.constant.VString;
+import io.zerows.epoch.constant.VString;
 
 import java.io.File;
 import java.net.URL;

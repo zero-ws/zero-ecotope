@@ -2,7 +2,7 @@ package io.zerows.core.web.client;
 
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.VString;
+import io.zerows.epoch.constant.VString;
 import io.zerows.common.app.KIntegration;
 import io.zerows.common.app.KIntegrationApi;
 import io.zerows.core.constant.KWeb;

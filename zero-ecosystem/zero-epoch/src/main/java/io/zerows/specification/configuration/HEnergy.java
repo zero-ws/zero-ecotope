@@ -1,7 +1,7 @@
 package io.zerows.specification.configuration;
 
-import io.zerows.ams.constant.em.EmApp;
-import io.zerows.ams.constant.em.EmBoot;
+import io.zerows.epoch.enums.EmApp;
+import io.zerows.epoch.enums.EmBoot;
 
 /**
  * @author lang : 2023-05-31

@@ -2,8 +2,8 @@ package io.zerows.common.reference;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.VName;
-import io.zerows.ams.constant.em.modeling.EmValue;
+import io.zerows.epoch.constant.VName;
+import io.zerows.epoch.enums.modeling.EmValue;
 import io.zerows.ams.util.HUt;
 import io.zerows.common.program.Kv;
 import io.zerows.specification.modeling.HAttribute;

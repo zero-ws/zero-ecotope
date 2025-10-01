@@ -1,7 +1,7 @@
 package io.vertx.boot.launcher;
 
 import io.vertx.core.Vertx;
-import io.zerows.ams.constant.em.EmApp;
+import io.zerows.epoch.enums.EmApp;
 import io.zerows.core.running.boot.KEnvironment;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.container.store.BootStore;

@@ -1,6 +1,6 @@
 package io.zerows.core.constant;
 
-import io.zerows.ams.constant.VName;
+import io.zerows.epoch.constant.VName;
 import io.zerows.core.uca.qr.syntax.Ir;
 
 import java.util.HashSet;

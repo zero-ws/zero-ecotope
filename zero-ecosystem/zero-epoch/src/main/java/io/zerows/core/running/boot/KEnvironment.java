@@ -1,12 +1,12 @@
 package io.zerows.core.running.boot;
 
-import io.zerows.ams.constant.VMessage;
-import io.zerows.ams.constant.em.Environment;
-import io.zerows.ams.constant.em.app.OsType;
-import io.zerows.ams.constant.spec.VBoot;
 import io.zerows.ams.util.HUt;
-import io.zerows.core.running.HMacrocosm;
 import io.zerows.core.uca.log.LogAs;
+import io.zerows.epoch.constant.VMessage;
+import io.zerows.epoch.constant.spec.VBoot;
+import io.zerows.epoch.enums.Environment;
+import io.zerows.epoch.enums.app.OsType;
+import io.zerows.epoch.runtime.HMacrocosm;
 
 import java.util.Properties;
 import java.util.concurrent.ConcurrentMap;

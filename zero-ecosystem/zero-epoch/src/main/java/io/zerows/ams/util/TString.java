@@ -1,6 +1,6 @@
 package io.zerows.ams.util;
 
-import io.zerows.ams.constant.VString;
+import io.zerows.epoch.constant.VString;
 
 import java.util.*;
 

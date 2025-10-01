@@ -1,7 +1,7 @@
 package io.zerows.extension.runtime.workflow.atom.configuration;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.em.typed.ChangeFlag;
+import io.zerows.epoch.enums.typed.ChangeFlag;
 import io.zerows.core.constant.KName;
 import io.zerows.extension.runtime.workflow.eon.em.RecordMode;
 

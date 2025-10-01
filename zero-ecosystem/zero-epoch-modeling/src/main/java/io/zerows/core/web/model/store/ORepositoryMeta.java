@@ -1,7 +1,6 @@
 package io.zerows.core.web.model.store;
 
-import io.zerows.ams.constant.em.app.ServerType;
-import io.zerows.boot.enums.VertxComponent;
+import io.zerows.epoch.enums.app.ServerType;
 import io.zerows.core.annotations.QaS;
 import io.zerows.core.running.context.KRunner;
 import io.zerows.core.util.Ut;
@@ -11,6 +10,7 @@ import io.zerows.core.web.model.atom.action.OActorComponent;
 import io.zerows.core.web.model.atom.action.OJointAction;
 import io.zerows.core.web.model.eon.em.EmAction;
 import io.zerows.core.web.model.uca.scan.*;
+import io.zerows.epoch.enums.VertxComponent;
 import io.zerows.module.cloud.atom.KSwitcher;
 import io.zerows.module.metadata.store.OCacheClass;
 import io.zerows.module.metadata.uca.logging.OLog;

@@ -1,8 +1,8 @@
 package io.zerows.module.configuration.zdk;
 
 import io.vertx.core.http.HttpServerOptions;
-import io.zerows.ams.constant.VString;
-import io.zerows.ams.constant.em.app.ServerType;
+import io.zerows.epoch.constant.VString;
+import io.zerows.epoch.enums.app.ServerType;
 
 /**
  * @author lang : 2024-04-20

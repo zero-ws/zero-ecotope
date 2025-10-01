@@ -1,6 +1,6 @@
 package io.mature.stellar.owner;
 
-import io.zerows.ams.constant.em.Environment;
+import io.zerows.epoch.enums.Environment;
 
 /**
  * @author lang : 2023-06-13

@@ -2,9 +2,9 @@ package io.zerows.common.normalize;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.VName;
-import io.zerows.ams.constant.em.modeling.EmAttribute;
-import io.zerows.ams.constant.em.modeling.EmValue;
+import io.zerows.epoch.constant.VName;
+import io.zerows.epoch.enums.modeling.EmAttribute;
+import io.zerows.epoch.enums.modeling.EmValue;
 import io.zerows.ams.util.HUt;
 import io.zerows.common.reference.RRule;
 import io.zerows.specification.modeling.HAttribute;

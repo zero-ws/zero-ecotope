@@ -2,7 +2,7 @@ package io.zerows.module.domain.uca.destine;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.VString;
+import io.zerows.epoch.constant.VString;
 import io.zerows.module.domain.atom.specification.KJoin;
 
 /**

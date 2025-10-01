@@ -1,8 +1,8 @@
 package io.zerows.core.uca.crypto;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.ams.annotations.Memory;
 import io.zerows.common.program.KPair;
+import io.zerows.epoch.annotation.Memory;
 
 /**
  * Encrypt / Decrypt Interface for

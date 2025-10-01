@@ -1,7 +1,7 @@
 package io.zerows.core.util;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.em.typed.ChangeFlag;
+import io.zerows.epoch.enums.typed.ChangeFlag;
 import io.zerows.ams.util.HUt;
 import io.zerows.common.datamation.KMapping;
 

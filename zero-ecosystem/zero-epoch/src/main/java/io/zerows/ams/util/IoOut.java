@@ -3,8 +3,8 @@ package io.zerows.ams.util;
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.VValue;
-import io.zerows.ams.constant.em.typed.CompressLevel;
+import io.zerows.epoch.constant.VValue;
+import io.zerows.epoch.enums.typed.CompressLevel;
 import io.zerows.common.program.KHugeFile;
 
 import java.io.File;

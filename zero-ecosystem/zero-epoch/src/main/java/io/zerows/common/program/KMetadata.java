@@ -1,7 +1,7 @@
 package io.zerows.common.program;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.em.EmMeta;
+import io.zerows.epoch.enums.EmMeta;
 import io.zerows.ams.util.HUt;
 import io.zerows.core.uca.metadata.MetaAt;
 

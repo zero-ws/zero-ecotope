@@ -1,6 +1,6 @@
 package io.zerows.module.metadata.store;
 
-import io.zerows.boot.enums.VertxComponent;
+import io.zerows.epoch.enums.VertxComponent;
 import io.zerows.module.metadata.uca.scanner.ClassScanner;
 import io.zerows.module.metadata.zdk.AbstractAmbiguity;
 import io.zerows.module.metadata.zdk.uca.Inquirer;

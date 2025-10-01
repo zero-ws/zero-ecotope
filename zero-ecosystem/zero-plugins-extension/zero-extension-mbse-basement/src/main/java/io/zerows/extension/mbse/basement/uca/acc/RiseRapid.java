@@ -3,12 +3,12 @@ package io.zerows.extension.mbse.basement.uca.acc;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.em.modeling.EmAttribute;
-import io.zerows.ams.constant.em.typed.ChangeFlag;
+import io.zerows.ams.fn.HFn;
 import io.zerows.core.constant.KName;
 import io.zerows.core.database.atom.Database;
-import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
+import io.zerows.epoch.enums.modeling.EmAttribute;
+import io.zerows.epoch.enums.typed.ChangeFlag;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.domain.tables.daos.MAccDao;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MAcc;
@@ -37,7 +37,7 @@ class RiseRapid implements Rise {
 
     @Override
     public Future<Apt> fetchBatch(final JsonObject criteria, final DataAtom atom) {
-        return FnZero.combineT(
+        return HFn.combineT(
             this.inputData(criteria, atom),
             this.inputAcc(criteria, atom),
             (data, acc) -> this.combineAcc(data, acc, atom)

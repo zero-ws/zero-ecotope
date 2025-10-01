@@ -1,7 +1,7 @@
 package io.zerows.core.uca.fs;
 
 import io.r2mo.function.Fn;
-import io.zerows.ams.constant.VMessage;
+import io.zerows.epoch.constant.VMessage;
 import io.zerows.ams.util.HUt;
 import io.zerows.core.uca.log.LogAs;
 import io.zerows.specification.vital.HFS;

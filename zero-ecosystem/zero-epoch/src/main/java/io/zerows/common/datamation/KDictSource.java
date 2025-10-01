@@ -2,8 +2,8 @@ package io.zerows.common.datamation;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.VName;
-import io.zerows.ams.constant.em.EmDict;
+import io.zerows.epoch.constant.VName;
+import io.zerows.epoch.enums.EmDict;
 import io.zerows.ams.util.HUt;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.specification.atomic.HCopier;

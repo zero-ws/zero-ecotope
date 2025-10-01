@@ -2,7 +2,7 @@ package io.zerows.extension.commerce.rbac.agent.service.view;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.VValue;
+import io.zerows.epoch.constant.VValue;
 import io.zerows.core.constant.KName;
 import io.zerows.core.uca.qr.syntax.Ir;
 import io.zerows.core.util.Ut;

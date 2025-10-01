@@ -2,7 +2,7 @@ package io.zerows.extension.mbse.basement.uca.jdbc;
 
 import io.r2mo.function.Fn;
 import io.r2mo.typed.cc.Cc;
-import io.zerows.ams.constant.VValue;
+import io.zerows.epoch.constant.VValue;
 import io.zerows.common.app.KDatabase;
 import io.zerows.core.database.cp.zdk.DataPool;
 import io.zerows.core.uca.log.Annal;

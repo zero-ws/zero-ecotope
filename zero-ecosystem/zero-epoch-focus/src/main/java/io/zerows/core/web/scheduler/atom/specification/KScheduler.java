@@ -1,6 +1,6 @@
 package io.zerows.core.web.scheduler.atom.specification;
 
-import io.zerows.ams.constant.VValue;
+import io.zerows.epoch.constant.VValue;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.scheduler.eon.MessageOfJob;
 import io.zerows.module.metadata.uca.logging.OLog;

@@ -1,6 +1,6 @@
 package io.zerows.specification.security.identity;
 
-import io.zerows.ams.constant.em.app.SecurityLevel;
+import io.zerows.epoch.enums.app.SecurityLevel;
 
 /**
  * 「安全凭证」

@@ -3,7 +3,7 @@ package io.zerows.core.web.io.uca.request.mime.parse;
 import io.r2mo.typed.cc.Cc;
 import io.r2mo.typed.exception.WebException;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.ams.constant.VValue;
+import io.zerows.epoch.constant.VValue;
 import io.zerows.core.constant.KWeb;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.core.util.Ut;

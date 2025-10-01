@@ -1,7 +1,7 @@
 package io.zerows.specification.storage;
 
-import io.zerows.ams.annotations.reference.One2One;
-import io.zerows.ams.constant.em.app.OsType;
+import io.zerows.epoch.annotation.reference.One2One;
+import io.zerows.epoch.enums.app.OsType;
 import io.zerows.specification.modeling.norm.HUri;
 import io.zerows.specification.vital.HFS;
 

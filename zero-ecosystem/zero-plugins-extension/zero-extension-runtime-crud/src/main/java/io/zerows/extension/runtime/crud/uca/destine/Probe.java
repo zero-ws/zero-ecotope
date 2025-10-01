@@ -1,6 +1,6 @@
 package io.zerows.extension.runtime.crud.uca.destine;
 
-import io.zerows.ams.constant.em.modeling.EmModel;
+import io.zerows.epoch.enums.modeling.EmModel;
 import io.zerows.core.web.mbse.atom.specification.KModule;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 import io.zerows.module.domain.atom.specification.KPoint;

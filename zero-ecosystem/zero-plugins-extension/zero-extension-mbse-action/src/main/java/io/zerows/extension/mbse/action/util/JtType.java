@@ -2,7 +2,7 @@ package io.zerows.extension.mbse.action.util;
 
 import io.r2mo.function.Fn;
 import io.vertx.core.AbstractVerticle;
-import io.zerows.ams.constant.em.app.EmTraffic;
+import io.zerows.epoch.enums.app.EmTraffic;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.mbse.action.atom.JtWorker;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IApi;

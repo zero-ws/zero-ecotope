@@ -3,7 +3,7 @@ package io.zerows.core.util;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.em.typed.ChangeFlag;
+import io.zerows.epoch.enums.typed.ChangeFlag;
 import io.zerows.core.constant.KName;
 import io.zerows.core.fn.FnZero;
 import io.zerows.module.metadata.uca.logging.OLog;

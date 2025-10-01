@@ -4,7 +4,7 @@ import io.mature.extension.migration.AbstractStep;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.em.Environment;
+import io.zerows.epoch.enums.Environment;
 import io.zerows.core.annotations.Contract;
 import io.zerows.core.database.cp.zdk.DataPool;
 import io.zerows.core.database.jooq.JooqDsl;

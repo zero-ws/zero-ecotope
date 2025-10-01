@@ -1,7 +1,7 @@
 package io.zerows.core.web.mbse.atom.internal;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.em.modeling.EmModel;
+import io.zerows.epoch.enums.modeling.EmModel;
 import io.zerows.core.exception.web._60050Exception501NotSupport;
 import io.zerows.core.web.mbse.atom.KClass;
 import io.zerows.core.web.mbse.atom.KHybrid;

@@ -1,6 +1,6 @@
 package io.zerows.core.web.websocket.annotations;
 
-import io.zerows.ams.constant.VString;
+import io.zerows.epoch.constant.VString;
 import io.zerows.core.constant.DefaultClass;
 import io.zerows.core.web.websocket.eon.em.RemindType;
 

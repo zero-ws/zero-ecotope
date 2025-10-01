@@ -1,6 +1,6 @@
 package io.zerows.module.metadata.uca.logging;
 
-import io.zerows.ams.constant.VString;
+import io.zerows.epoch.constant.VString;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.module.metadata.cache.CStore;
 import io.zerows.specification.atomic.HLogger;

@@ -4,7 +4,7 @@ import io.mature.stellar.Party;
 import io.mature.stellar.owner.OkA;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.VString;
+import io.zerows.epoch.constant.VString;
 import io.zerows.common.app.KIntegration;
 import io.zerows.common.datamation.KDictConfig;
 import io.zerows.common.datamation.KFabric;

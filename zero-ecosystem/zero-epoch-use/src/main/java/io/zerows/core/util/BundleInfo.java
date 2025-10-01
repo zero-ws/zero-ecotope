@@ -1,6 +1,6 @@
 package io.zerows.core.util;
 
-import io.zerows.ams.constant.VString;
+import io.zerows.epoch.constant.VString;
 import io.zerows.core.constant.KName;
 import org.apache.felix.dm.Component;
 import org.apache.felix.dm.ServiceDependency;

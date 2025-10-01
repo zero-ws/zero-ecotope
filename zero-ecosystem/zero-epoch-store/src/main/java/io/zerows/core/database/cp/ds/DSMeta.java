@@ -1,6 +1,6 @@
 package io.zerows.core.database.cp.ds;
 
-import io.zerows.ams.constant.em.EmDS;
+import io.zerows.epoch.enums.EmDS;
 import org.jooq.SQLDialect;
 
 import java.util.concurrent.ConcurrentHashMap;

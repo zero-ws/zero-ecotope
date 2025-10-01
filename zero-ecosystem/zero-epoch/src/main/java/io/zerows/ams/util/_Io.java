@@ -3,8 +3,8 @@ package io.zerows.ams.util;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.VString;
-import io.zerows.ams.constant.em.Environment;
+import io.zerows.epoch.constant.VString;
+import io.zerows.epoch.enums.Environment;
 import io.zerows.core.uca.fs.LocalDir;
 
 import java.io.File;

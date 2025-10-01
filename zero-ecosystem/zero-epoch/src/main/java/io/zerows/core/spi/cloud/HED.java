@@ -1,9 +1,9 @@
 package io.zerows.core.spi.cloud;
 
-import io.zerows.ams.annotations.Development;
-import io.zerows.ams.constant.VString;
 import io.zerows.ams.util.HUt;
 import io.zerows.common.program.KPair;
+import io.zerows.epoch.annotation.Development;
+import io.zerows.epoch.constant.VString;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;

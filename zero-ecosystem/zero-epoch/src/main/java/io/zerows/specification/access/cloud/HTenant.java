@@ -1,6 +1,6 @@
 package io.zerows.specification.access.cloud;
 
-import io.zerows.ams.annotations.reference.One2One;
+import io.zerows.epoch.annotation.reference.One2One;
 import io.zerows.specification.access.HBoundary;
 import io.zerows.specification.security.identity.HAccount;
 

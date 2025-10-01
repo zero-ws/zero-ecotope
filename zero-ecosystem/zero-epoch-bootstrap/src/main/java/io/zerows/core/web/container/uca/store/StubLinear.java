@@ -2,8 +2,7 @@ package io.zerows.core.web.container.uca.store;
 
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Vertx;
-import io.zerows.ams.constant.VString;
-import io.zerows.boot.enums.VertxComponent;
+import io.zerows.epoch.constant.VString;
 import io.zerows.core.annotations.Infusion;
 import io.zerows.core.exception.web._60050Exception501NotSupport;
 import io.zerows.core.util.Ut;
@@ -11,6 +10,7 @@ import io.zerows.core.web.container.store.under.StoreVertx;
 import io.zerows.core.web.container.verticle.ZeroHttpAgent;
 import io.zerows.core.web.container.verticle.ZeroHttpWorker;
 import io.zerows.core.web.model.atom.running.RunVertx;
+import io.zerows.epoch.enums.VertxComponent;
 import io.zerows.module.metadata.store.OCacheClass;
 import io.zerows.module.metadata.uca.logging.OLog;
 import org.osgi.framework.Bundle;

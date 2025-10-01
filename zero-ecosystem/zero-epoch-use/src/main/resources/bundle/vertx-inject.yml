@@ -1,1 +1,1 @@
-logger: io.zerows.core.uca.log.internal.Log4JAnnal
+logger: io.zerows.core.uca.log.Log4JAnnal

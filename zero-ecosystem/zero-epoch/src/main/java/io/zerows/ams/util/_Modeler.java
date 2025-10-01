@@ -2,8 +2,8 @@ package io.zerows.ams.util;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.annotations.HighOrder;
-import io.zerows.ams.constant.em.EmApp;
+import io.zerows.epoch.annotation.HighOrder;
+import io.zerows.epoch.enums.EmApp;
 import io.zerows.specification.access.app.HArk;
 import io.zerows.specification.modeling.HAtom;
 import io.zerows.specification.modeling.HRecord;

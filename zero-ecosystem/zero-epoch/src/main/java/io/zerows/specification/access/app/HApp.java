@@ -1,9 +1,9 @@
 package io.zerows.specification.access.app;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.VName;
-import io.zerows.ams.constant.VValue;
-import io.zerows.ams.constant.em.EmApp;
+import io.zerows.epoch.constant.VName;
+import io.zerows.epoch.constant.VValue;
+import io.zerows.epoch.enums.EmApp;
 import io.zerows.ams.util.HUt;
 import io.zerows.core.spi.modeler.AtomNs;
 import io.zerows.specification.access.HBoundary;

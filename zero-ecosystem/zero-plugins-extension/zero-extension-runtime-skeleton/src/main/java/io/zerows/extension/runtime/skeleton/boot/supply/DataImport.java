@@ -6,10 +6,10 @@ import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
+import io.zerows.ams.fn.HFn;
 import io.zerows.common.program.KTimer;
 import io.zerows.core.constant.configure.YmlCore;
 import io.zerows.core.database.jooq.JooqInfix;
-import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.cache.shared.MapInfix;
 import io.zerows.core.web.cache.shared.SharedClient;
@@ -165,7 +165,7 @@ public class DataImport {
     private Future<Boolean> future(final String folder, final String prefix, final boolean oob) {
         final List<Future<String>> files = new ArrayList<>();
         DataIo.ioFiles(folder, prefix, oob).map(this::execute).forEach(files::add);
-        return FnZero.combineT(files).compose(nil -> Ux.future(Boolean.TRUE));
+        return HFn.combineT(files).compose(nil -> Ux.future(Boolean.TRUE));
     }
 
     // 内部执行专用方法

@@ -2,7 +2,7 @@ package io.zerows.specification.modeling.metadata;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.VValue;
+import io.zerows.epoch.constant.VValue;
 import io.zerows.ams.util.HUt;
 
 import java.util.Collection;

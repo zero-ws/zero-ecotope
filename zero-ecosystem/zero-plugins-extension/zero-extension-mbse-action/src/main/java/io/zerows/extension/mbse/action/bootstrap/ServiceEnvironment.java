@@ -4,12 +4,12 @@ import io.r2mo.function.Fn;
 import io.vertx.codegen.annotations.Fluent;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
+import io.zerows.ams.fn.HFn;
 import io.zerows.common.app.KDS;
 import io.zerows.core.constant.KName;
 import io.zerows.core.database.atom.Database;
 import io.zerows.core.database.cp.zdk.DataPool;
 import io.zerows.core.exception.boot._40103Exception500ConnectAmbient;
-import io.zerows.core.fn.FnZero;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.mbse.action.atom.JtJob;
@@ -96,7 +96,7 @@ public class ServiceEnvironment {
              * IJob + IService
              */
             futures.add(this.initJobs(vertx));
-            return FnZero.combineT(futures).compose(res -> Ux.future(this));
+            return HFn.combineT(futures).compose(res -> Ux.future(this));
         });
     }
 

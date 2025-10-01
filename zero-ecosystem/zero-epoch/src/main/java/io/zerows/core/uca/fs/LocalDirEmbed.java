@@ -1,7 +1,7 @@
 package io.zerows.core.uca.fs;
 
 import io.r2mo.function.Fn;
-import io.zerows.ams.constant.VString;
+import io.zerows.epoch.constant.VString;
 import io.zerows.ams.util.HUt;
 
 import java.io.File;

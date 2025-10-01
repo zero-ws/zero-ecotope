@@ -1,8 +1,8 @@
 package io.zerows.core.running.boot;
 
 import io.r2mo.typed.exception.AbstractException;
-import io.zerows.ams.constant.VMessage;
-import io.zerows.ams.constant.em.EmBoot;
+import io.zerows.epoch.constant.VMessage;
+import io.zerows.epoch.enums.EmBoot;
 import io.zerows.ams.util.HUt;
 import io.zerows.core.uca.log.LogAs;
 import io.zerows.specification.configuration.HConfig;

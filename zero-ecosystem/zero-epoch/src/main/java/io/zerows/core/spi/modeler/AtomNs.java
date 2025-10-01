@@ -1,6 +1,6 @@
 package io.zerows.core.spi.modeler;
 
-import io.zerows.ams.constant.VString;
+import io.zerows.epoch.constant.VString;
 
 import java.util.Objects;
 

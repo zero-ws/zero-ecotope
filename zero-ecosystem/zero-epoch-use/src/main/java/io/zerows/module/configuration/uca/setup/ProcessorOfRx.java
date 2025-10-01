@@ -1,6 +1,6 @@
 package io.zerows.module.configuration.uca.setup;
 
-import io.zerows.ams.constant.em.app.ServerType;
+import io.zerows.epoch.enums.app.ServerType;
 
 /**
  * @author lang : 2024-04-20

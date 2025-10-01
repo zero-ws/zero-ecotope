@@ -2,7 +2,7 @@ package io.zerows.extension.mbse.basement.uca.metadata;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.VValue;
+import io.zerows.epoch.constant.VValue;
 import io.zerows.core.constant.KName;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.core.util.Ut;

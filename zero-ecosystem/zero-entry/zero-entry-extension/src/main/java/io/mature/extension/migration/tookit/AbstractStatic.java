@@ -3,7 +3,7 @@ package io.mature.extension.migration.tookit;
 import io.mature.extension.migration.MigrateStep;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.em.Environment;
+import io.zerows.epoch.enums.Environment;
 import io.zerows.core.annotations.Contract;
 import io.zerows.core.constant.KName;
 import io.zerows.core.database.cp.zdk.DataPool;

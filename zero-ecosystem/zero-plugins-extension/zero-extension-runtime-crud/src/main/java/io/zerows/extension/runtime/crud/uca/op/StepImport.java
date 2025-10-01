@@ -2,7 +2,7 @@ package io.zerows.extension.runtime.crud.uca.op;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
-import io.zerows.ams.constant.em.typed.ChangeFlag;
+import io.zerows.epoch.enums.typed.ChangeFlag;
 import io.zerows.core.database.jooq.operation.UxJooq;
 import io.zerows.core.fn.FnZero;
 import io.zerows.extension.runtime.crud.bootstrap.IxPin;

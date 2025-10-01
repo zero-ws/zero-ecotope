@@ -2,7 +2,7 @@ package io.zerows.core.running.boot;
 
 import io.r2mo.spi.SPI;
 import io.vertx.core.json.JsonArray;
-import io.zerows.ams.constant.VMessage;
+import io.zerows.epoch.constant.VMessage;
 import io.zerows.core.exception.boot._11010Exception500BootIoMissing;
 import io.zerows.core.spi.BootIo;
 import io.zerows.core.uca.log.LogAs;

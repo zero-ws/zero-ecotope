@@ -3,7 +3,7 @@ package io.zerows.common.app;
 import io.vertx.core.json.JsonObject;
 import io.zerows.ams.util.HUt;
 import io.zerows.core.exception.boot._40101Exception500CombineApp;
-import io.zerows.core.running.HMacrocosm;
+import io.zerows.epoch.runtime.HMacrocosm;
 import io.zerows.specification.access.app.HApp;
 
 import java.util.Objects;

@@ -3,7 +3,7 @@ package io.zerows.extension.runtime.ambient.uca.differ;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.VString;
+import io.zerows.epoch.constant.VString;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XActivity;
 import io.zerows.specification.access.app.HArk;
 import io.zerows.specification.modeling.HAtom;

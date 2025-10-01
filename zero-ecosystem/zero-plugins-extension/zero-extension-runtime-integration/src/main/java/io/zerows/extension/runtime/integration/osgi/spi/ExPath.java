@@ -4,10 +4,10 @@ import io.vertx.core.Future;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.ams.fn.HFn;
 import io.zerows.common.program.Kv;
 import io.zerows.core.constant.KName;
 import io.zerows.core.database.jooq.operation.UxJooq;
-import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.runtime.integration.domain.tables.daos.IDirectoryDao;
 import io.zerows.extension.runtime.integration.domain.tables.pojos.IDirectory;
@@ -165,7 +165,7 @@ public class ExPath implements ExIo {
                     final ConcurrentMap<String, String> renameMap = Is.trashIn(storeSet);
                     futures.add(fs.rm(renameMap.values()));
                 });
-                return FnZero.combineT(futures);
+                return HFn.combineT(futures);
             }))
             .compose(nil -> Ux.future(directoryJ));
     }
@@ -229,7 +229,7 @@ public class ExPath implements ExIo {
             }
             futures.add(fs.rename(renameMap));
         });
-        return FnZero.combineT(futures).compose(nil -> Ux.futureT());
+        return HFn.combineT(futures).compose(nil -> Ux.futureT());
     }
 
     private Future<ConcurrentMap<Fs, Set<String>>> directoryD(final JsonArray directoryD) {

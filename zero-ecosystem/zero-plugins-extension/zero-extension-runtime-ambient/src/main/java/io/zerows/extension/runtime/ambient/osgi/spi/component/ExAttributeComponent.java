@@ -3,7 +3,7 @@ package io.zerows.extension.runtime.ambient.osgi.spi.component;
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.em.EmDict;
+import io.zerows.epoch.enums.EmDict;
 import io.zerows.common.datamation.KDictSource;
 import io.zerows.common.datamation.KDictUse;
 import io.zerows.core.constant.KName;

@@ -1,9 +1,9 @@
 package io.zerows.ams.util;
 
 import io.r2mo.function.Fn;
-import io.zerows.ams.annotations.ChatGPT;
-import io.zerows.ams.constant.VValue;
 import io.zerows.core.uca.log.LogUtil;
+import io.zerows.epoch.annotation.ChatGPT;
+import io.zerows.epoch.constant.VValue;
 
 import java.io.*;
 import java.nio.ByteBuffer;

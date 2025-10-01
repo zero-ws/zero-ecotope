@@ -3,10 +3,10 @@ package io.zerows.extension.mbse.ui.uca.qbe;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.VString;
+import io.zerows.ams.fn.HFn;
 import io.zerows.core.constant.KName;
-import io.zerows.core.fn.FnZero;
 import io.zerows.core.web.cache.Rapid;
+import io.zerows.epoch.constant.VString;
 import io.zerows.extension.mbse.ui.domain.tables.pojos.UiView;
 import io.zerows.extension.mbse.ui.eon.UiConstant;
 import io.zerows.specification.vital.HQR;
@@ -32,7 +32,7 @@ public class QBECache {
                 qr.getName();
             futures.add(RAPID.write(key, qr).compose(v -> Ux.futureT()));
         });
-        return FnZero.combineT(futures).compose(done -> Ux.future(listQr));
+        return HFn.combineT(futures).compose(done -> Ux.future(listQr));
     }
 
     public static Future<UiView> cached(final JsonObject qr, final Supplier<Future<UiView>> executor) {

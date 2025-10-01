@@ -1,6 +1,6 @@
 package io.zerows.extension.commerce.rbac.atom;
 
-import io.zerows.ams.constant.VValue;
+import io.zerows.epoch.constant.VValue;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.runtime.skeleton.eon.em.OwnerType;
 import io.zerows.module.domain.atom.commune.Vis;

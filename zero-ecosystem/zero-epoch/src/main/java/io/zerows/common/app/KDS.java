@@ -1,7 +1,7 @@
 package io.zerows.common.app;
 
-import io.zerows.ams.constant.VValue;
-import io.zerows.ams.constant.em.EmDS;
+import io.zerows.epoch.constant.VValue;
+import io.zerows.epoch.enums.EmDS;
 
 import java.util.Collection;
 import java.util.LinkedHashSet;

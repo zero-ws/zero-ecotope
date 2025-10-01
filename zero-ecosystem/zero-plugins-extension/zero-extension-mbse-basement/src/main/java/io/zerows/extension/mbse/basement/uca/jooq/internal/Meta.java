@@ -3,7 +3,7 @@ package io.zerows.extension.mbse.basement.uca.jooq.internal;
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.VString;
+import io.zerows.epoch.constant.VString;
 import io.zerows.core.uca.log.Annal;
 import io.zerows.extension.mbse.basement.atom.element.DataMatrix;
 import io.zerows.extension.mbse.basement.exception._80524Exception500TableCounter;
@@ -41,7 +41,7 @@ class Meta {
      */
     static Table<Record> natureJoin(final ConcurrentMap<String, String> tableMap) {
         final Iterator<String> it = tableMap.keySet().iterator();
-        
+
         Fn.jvmKo(1 < tableMap.size() && !it.hasNext(), _80524Exception500TableCounter.class, "> 1");
         String table = it.next();
         Table<Record> result = table(table, tableMap.get(table));

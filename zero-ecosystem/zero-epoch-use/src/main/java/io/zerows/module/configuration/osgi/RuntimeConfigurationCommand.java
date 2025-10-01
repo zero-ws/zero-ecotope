@@ -1,6 +1,6 @@
 package io.zerows.module.configuration.osgi;
 
-import io.zerows.ams.constant.VString;
+import io.zerows.epoch.constant.VString;
 import io.zerows.core.util.Ut;
 import io.zerows.module.configuration.osgi.command.CommandNodeNetwork;
 import io.zerows.module.configuration.osgi.command.CommandNodeVertx;

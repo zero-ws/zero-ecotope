@@ -3,7 +3,7 @@ package io.zerows.core.web.validation;
 import io.reactivex.rxjava3.core.Observable;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.VString;
+import io.zerows.epoch.constant.VString;
 import io.zerows.core.constant.KWeb;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.io.annotations.BodyParam;

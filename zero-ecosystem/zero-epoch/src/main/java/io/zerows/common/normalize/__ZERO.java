@@ -1,7 +1,7 @@
 package io.zerows.common.normalize;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.em.modeling.EmAttribute;
+import io.zerows.epoch.enums.modeling.EmAttribute;
 
 import java.util.Arrays;
 import java.util.List;

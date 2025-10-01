@@ -3,7 +3,7 @@ package io.zerows.core.web.client;
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.em.app.EmTraffic;
+import io.zerows.epoch.enums.app.EmTraffic;
 import io.zerows.common.app.KIntegration;
 import io.zerows.core.util.Ut;
 import io.zerows.module.metadata.uca.logging.OLog;

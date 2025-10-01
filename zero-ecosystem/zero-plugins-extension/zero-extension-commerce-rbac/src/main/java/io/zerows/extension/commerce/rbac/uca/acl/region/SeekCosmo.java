@@ -3,7 +3,7 @@ package io.zerows.extension.commerce.rbac.uca.acl.region;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.em.EmAop;
+import io.zerows.epoch.enums.EmAop;
 import io.zerows.core.constant.KName;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.model.commune.Envelop;

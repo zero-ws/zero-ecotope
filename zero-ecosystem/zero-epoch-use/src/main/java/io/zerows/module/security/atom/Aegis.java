@@ -1,6 +1,6 @@
 package io.zerows.module.security.atom;
 
-import io.zerows.ams.constant.VValue;
+import io.zerows.epoch.constant.VValue;
 import io.zerows.core.constant.em.EmSecure;
 import io.zerows.core.util.Ut;
 import io.zerows.module.metadata.uca.logging.OLog;

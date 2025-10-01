@@ -1,7 +1,7 @@
 package io.zerows.module.security.cache;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.ams.annotations.Memory;
+import io.zerows.epoch.annotation.Memory;
 import io.zerows.module.metadata.cache.CStore;
 import io.zerows.module.security.atom.manage.KPermit;
 import io.zerows.module.security.atom.manage.KSemi;

@@ -1,7 +1,7 @@
 package io.zerows.core.uca.net;
 
 import io.r2mo.function.Fn;
-import io.zerows.ams.constant.VString;
+import io.zerows.epoch.constant.VString;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;

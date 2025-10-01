@@ -1,6 +1,6 @@
 package io.zerows.core.web.model.uca.scan;
 
-import io.zerows.ams.constant.em.app.ServerType;
+import io.zerows.epoch.enums.app.ServerType;
 import io.zerows.core.annotations.Agent;
 import io.zerows.core.util.Ut;
 import io.zerows.module.metadata.zdk.uca.Inquirer;

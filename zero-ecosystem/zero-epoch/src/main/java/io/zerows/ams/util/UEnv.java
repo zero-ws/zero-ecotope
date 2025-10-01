@@ -1,7 +1,7 @@
 package io.zerows.ams.util;
 
 import io.r2mo.function.Fn;
-import io.zerows.ams.constant.VString;
+import io.zerows.epoch.constant.VString;
 import io.zerows.common.program.Kv;
 
 import java.lang.reflect.Field;

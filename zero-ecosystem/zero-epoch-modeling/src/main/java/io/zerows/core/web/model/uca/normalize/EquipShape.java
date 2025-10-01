@@ -1,8 +1,8 @@
 package io.zerows.core.web.model.uca.normalize;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.VPath;
-import io.zerows.ams.constant.VString;
+import io.zerows.epoch.constant.VPath;
+import io.zerows.epoch.constant.VString;
 import io.zerows.core.constant.KName;
 import io.zerows.core.util.Ut;
 import io.zerows.module.metadata.atom.configuration.MDConfiguration;

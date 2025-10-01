@@ -3,7 +3,7 @@ package io.zerows.extension.mbse.basement.uca.reference;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.em.modeling.EmValue;
+import io.zerows.epoch.enums.modeling.EmValue;
 import io.zerows.common.program.Kv;
 import io.zerows.common.reference.RResult;
 import io.zerows.core.util.Ut;

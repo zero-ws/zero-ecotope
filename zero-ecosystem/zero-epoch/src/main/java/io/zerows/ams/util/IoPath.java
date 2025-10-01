@@ -1,7 +1,7 @@
 package io.zerows.ams.util;
 
-import io.zerows.ams.constant.VString;
-import io.zerows.ams.constant.em.Environment;
+import io.zerows.epoch.constant.VString;
+import io.zerows.epoch.enums.Environment;
 
 import java.util.ArrayList;
 import java.util.List;

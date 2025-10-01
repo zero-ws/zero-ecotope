@@ -2,7 +2,7 @@ package io.zerows.core.database.jooq;
 
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.constant.em.EmDS;
+import io.zerows.epoch.enums.EmDS;
 import io.zerows.core.constant.KName;
 import io.zerows.core.constant.configure.YmlCore;
 import io.zerows.core.database.atom.Database;

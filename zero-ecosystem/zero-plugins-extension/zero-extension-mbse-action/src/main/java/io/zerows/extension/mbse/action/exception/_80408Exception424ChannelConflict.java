@@ -1,7 +1,7 @@
 package io.zerows.extension.mbse.action.exception;
 
 import io.r2mo.vertx.common.exception.VertxWebException;
-import io.zerows.ams.constant.em.app.EmTraffic;
+import io.zerows.epoch.enums.app.EmTraffic;
 
 /**
  * @author lang : 2025-09-30

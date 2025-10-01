@@ -1,7 +1,5 @@
 package io.zerows.core.uca.log;
 
-import io.zerows.core.uca.log.internal.BridgeAnnal;
-import io.zerows.core.uca.log.internal.Log4JAnnal;
 import org.slf4j.Logger;
 
 import java.util.Objects;
@@ -49,11 +47,7 @@ public final class Log {
         if (input instanceof Logger) {
             Objects.requireNonNull(input);
             // 确保不重复创建
-            return CACHE.CC_ANNAL_INTERNAL.pick(() -> new Log4JAnnal((Logger) input), input.hashCode());
-        } else if (input instanceof Annal) {
-            Objects.requireNonNull(input);
-            // 确保不重复创建
-            return CACHE.CC_ANNAL_INTERNAL.pick(() -> new BridgeAnnal((Annal) input), input.hashCode());
+            return Annal.CC_LOGGER_EXTENSION.pick(() -> new Log4JAnnal((Logger) input), input.hashCode());
         } else {
             // 内部方法自带缓存
             return Annal.get((Class<?>) input);

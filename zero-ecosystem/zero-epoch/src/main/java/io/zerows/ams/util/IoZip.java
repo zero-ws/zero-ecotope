@@ -2,9 +2,9 @@ package io.zerows.ams.util;
 
 import io.r2mo.function.Fn;
 import io.vertx.core.buffer.Buffer;
-import io.zerows.ams.annotations.ChatGPT;
-import io.zerows.ams.constant.VValue;
-import io.zerows.ams.constant.em.typed.CompressLevel;
+import io.zerows.epoch.annotation.ChatGPT;
+import io.zerows.epoch.constant.VValue;
+import io.zerows.epoch.enums.typed.CompressLevel;
 
 import java.io.*;
 import java.util.Set;
