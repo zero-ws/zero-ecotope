@@ -2,9 +2,9 @@ package io.zerows.extension.mbse.action.uca.tunnel;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.common.datamation.KFabric;
-import io.zerows.common.datamation.KMap;
-import io.zerows.common.normalize.KIdentity;
+import io.zerows.epoch.common.shared.datamation.KFabric;
+import io.zerows.epoch.common.shared.datamation.KMap;
+import io.zerows.epoch.common.shared.normalize.KIdentity;
 import io.zerows.core.constant.KWeb;
 import io.zerows.core.database.atom.Database;
 import io.zerows.core.util.Ut;

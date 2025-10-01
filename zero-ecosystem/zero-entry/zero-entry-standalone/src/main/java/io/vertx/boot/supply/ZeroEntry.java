@@ -2,7 +2,7 @@ package io.vertx.boot.supply;
 
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
-import io.zerows.ams.fn.FnBase;
+import io.zerows.epoch.support.FnBase;
 import io.zerows.core.constant.configure.YmlCore;
 import io.zerows.core.web.container.store.BootStore;
 import io.zerows.module.cloud.util.Ho;

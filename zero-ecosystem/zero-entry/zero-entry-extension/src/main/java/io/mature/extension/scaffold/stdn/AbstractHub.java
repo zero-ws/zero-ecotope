@@ -9,7 +9,7 @@ import io.mature.extension.uca.log.TrackIo;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.common.app.KIntegration;
+import io.zerows.epoch.common.shared.app.KIntegration;
 import io.zerows.core.constant.KName;
 import io.zerows.core.database.atom.Database;
 import io.zerows.core.util.Ut;

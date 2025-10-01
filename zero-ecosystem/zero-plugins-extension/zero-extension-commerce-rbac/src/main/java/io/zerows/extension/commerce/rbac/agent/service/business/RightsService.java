@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.VString;
 import io.zerows.epoch.enums.typed.ChangeFlag;
-import io.zerows.common.program.KRef;
+import io.zerows.epoch.common.shared.program.KRef;
 import io.zerows.core.constant.KName;
 import io.zerows.core.database.jooq.operation.UxJooq;
 import io.zerows.core.fn.FnZero;

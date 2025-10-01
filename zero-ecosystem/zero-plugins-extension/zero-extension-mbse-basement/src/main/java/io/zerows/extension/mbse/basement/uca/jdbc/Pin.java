@@ -1,7 +1,7 @@
 package io.zerows.extension.mbse.basement.uca.jdbc;
 
 import io.r2mo.function.Fn;
-import io.zerows.common.app.KDatabase;
+import io.zerows.epoch.common.shared.app.KDatabase;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.mbse.basement.exception._80508Exception404PinNotFound;
 import io.zerows.extension.mbse.basement.uca.metadata.AoBuilder;

@@ -1,8 +1,8 @@
 package io.zerows.module.metadata.uca.environment;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.common.program.KVar;
-import io.zerows.common.program.KVarSet;
+import io.zerows.epoch.common.shared.program.KVar;
+import io.zerows.epoch.common.shared.program.KVarSet;
 import io.zerows.core.util.Ut;
 import io.zerows.specification.configuration.boot.HMature;
 

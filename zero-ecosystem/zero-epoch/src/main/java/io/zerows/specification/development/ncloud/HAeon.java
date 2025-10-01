@@ -2,8 +2,8 @@ package io.zerows.specification.development.ncloud;
 
 import io.zerows.epoch.enums.EmCloud;
 import io.zerows.epoch.exception.web._80413Exception501NotImplement;
-import io.zerows.core.running.boot.KPlot;
-import io.zerows.core.running.boot.KRepo;
+import io.zerows.epoch.common.shared.boot.KPlot;
+import io.zerows.epoch.common.shared.boot.KRepo;
 import io.zerows.specification.configuration.HConfig;
 
 import java.util.concurrent.ConcurrentMap;

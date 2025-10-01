@@ -3,7 +3,7 @@ package io.zerows.core.web.scheduler.osgi.agent;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
-import io.zerows.ams.fn.FnBase;
+import io.zerows.epoch.support.FnBase;
 import io.zerows.core.annotations.Worker;
 import io.zerows.core.constant.em.EmJob;
 import io.zerows.core.util.Ut;

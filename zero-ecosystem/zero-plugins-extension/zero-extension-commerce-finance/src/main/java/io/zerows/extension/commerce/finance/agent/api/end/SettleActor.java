@@ -2,7 +2,7 @@ package io.zerows.extension.commerce.finance.agent.api.end;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.common.program.KRef;
+import io.zerows.epoch.common.shared.program.KRef;
 import io.zerows.core.annotations.Address;
 import io.zerows.core.annotations.Me;
 import io.zerows.core.annotations.Queue;

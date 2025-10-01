@@ -2,7 +2,7 @@ package io.zerows.core.web.io.uca.response.wrap;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.configure.YmlCore;
-import io.zerows.epoch.common.uca.log.Annal;
+import io.zerows.epoch.common.log.Annal;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.model.commune.Envelop;
 import io.zerows.module.metadata.store.OZeroStore;

@@ -1,6 +1,6 @@
 package io.zerows.epoch.common.uca.compare;
 
-import io.zerows.ams.util.UtBase;
+import io.zerows.epoch.support.UtBase;
 
 import java.time.Instant;
 import java.time.LocalDate;

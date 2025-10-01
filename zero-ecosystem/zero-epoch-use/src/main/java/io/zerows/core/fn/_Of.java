@@ -3,7 +3,7 @@ package io.zerows.core.fn;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.util.UtBase;
+import io.zerows.epoch.support.UtBase;
 import io.zerows.core.util.Ut;
 
 import java.util.function.Consumer;

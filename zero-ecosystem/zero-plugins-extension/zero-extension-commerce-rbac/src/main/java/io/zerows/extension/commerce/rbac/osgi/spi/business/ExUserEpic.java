@@ -3,7 +3,7 @@ package io.zerows.extension.commerce.rbac.osgi.spi.business;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.common.program.KRef;
+import io.zerows.epoch.common.shared.program.KRef;
 import io.zerows.core.constant.KName;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.SUserDao;

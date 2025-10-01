@@ -4,7 +4,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.VName;
 import io.zerows.epoch.constant.VValue;
 import io.zerows.epoch.enums.EmApp;
-import io.zerows.ams.util.UtBase;
+import io.zerows.epoch.support.UtBase;
 import io.zerows.epoch.spi.modeler.AtomNs;
 import io.zerows.specification.access.HBoundary;
 import io.zerows.specification.access.cloud.HFrontier;

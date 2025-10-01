@@ -2,7 +2,7 @@ package io.zerows.extension.commerce.finance.uca.trans;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
-import io.zerows.ams.fn.FnBase;
+import io.zerows.epoch.support.FnBase;
 import io.zerows.core.constant.KName;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.commerce.finance.domain.tables.daos.FSettlementItemDao;

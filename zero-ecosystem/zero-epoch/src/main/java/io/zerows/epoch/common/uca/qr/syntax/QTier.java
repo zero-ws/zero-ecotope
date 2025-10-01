@@ -1,6 +1,6 @@
 package io.zerows.epoch.common.uca.qr.syntax;
 
-import io.zerows.ams.util.UtBase;
+import io.zerows.epoch.support.UtBase;
 
 import java.util.HashSet;
 import java.util.Set;

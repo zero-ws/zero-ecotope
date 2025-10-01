@@ -2,7 +2,7 @@ package io.zerows.core.web.model.uca.scan;
 
 import io.zerows.core.annotations.Address;
 import io.zerows.core.annotations.QaS;
-import io.zerows.core.running.context.KRunner;
+import io.zerows.epoch.common.shared.context.KRunner;
 import io.zerows.core.util.Ut;
 import io.zerows.module.metadata.zdk.uca.Inquirer;
 

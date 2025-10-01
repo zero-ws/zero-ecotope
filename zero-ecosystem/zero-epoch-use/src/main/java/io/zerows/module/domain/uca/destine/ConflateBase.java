@@ -3,7 +3,7 @@ package io.zerows.module.domain.uca.destine;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
-import io.zerows.epoch.common.uca.log.Log;
+import io.zerows.epoch.common.log.Log;
 import io.zerows.core.util.Ut;
 import io.zerows.module.domain.atom.specification.KJoin;
 import io.zerows.module.domain.atom.specification.KPoint;

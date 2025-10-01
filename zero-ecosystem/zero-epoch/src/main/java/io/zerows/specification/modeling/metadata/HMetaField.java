@@ -1,6 +1,6 @@
 package io.zerows.specification.modeling.metadata;
 
-import io.zerows.ams.util.UtBase;
+import io.zerows.epoch.support.UtBase;
 import io.zerows.epoch.spi.modeler.MetaOn;
 import io.zerows.specification.modeling.element.HConstraint;
 import io.zerows.specification.modeling.element.HKey;

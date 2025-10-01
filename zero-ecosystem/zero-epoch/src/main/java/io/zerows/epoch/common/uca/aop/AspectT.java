@@ -5,8 +5,8 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.VName;
 import io.zerows.epoch.enums.typed.ChangeFlag;
-import io.zerows.ams.fn.FnBase;
-import io.zerows.ams.util.UtBase;
+import io.zerows.epoch.support.FnBase;
+import io.zerows.epoch.support.UtBase;
 
 import java.util.*;
 import java.util.function.Function;

@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
 import io.zerows.core.fn.FnZero;
 import io.zerows.epoch.spi.modeler.Indent;
-import io.zerows.epoch.common.uca.log.Annal;
+import io.zerows.epoch.common.log.Annal;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.mbse.atom.specification.KModule;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;

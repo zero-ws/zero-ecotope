@@ -1,7 +1,7 @@
 package io.zerows.epoch.web.exception;
 
 import io.r2mo.vertx.common.exception.VertxWebException;
-import io.zerows.common.app.KIntegrationApi;
+import io.zerows.epoch.common.shared.app.KIntegrationApi;
 
 /**
  * @author lang : 2025-09-30

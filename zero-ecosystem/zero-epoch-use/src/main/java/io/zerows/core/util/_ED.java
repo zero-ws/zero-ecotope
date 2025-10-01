@@ -1,6 +1,6 @@
 package io.zerows.core.util;
 
-import io.zerows.ams.util.UtBase;
+import io.zerows.epoch.support.UtBase;
 
 /**
  * @author lang : 2023-06-19

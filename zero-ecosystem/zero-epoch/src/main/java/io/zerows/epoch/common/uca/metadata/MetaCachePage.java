@@ -1,7 +1,7 @@
 package io.zerows.epoch.common.uca.metadata;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.util.UtBase;
+import io.zerows.epoch.support.UtBase;
 
 import java.io.Serializable;
 import java.util.Objects;

@@ -1,9 +1,9 @@
 package io.zerows.core.web.mbse.atom.shape;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.util.UtBase;
-import io.zerows.common.normalize.KMarkAtom;
-import io.zerows.common.normalize.KMarkAttribute;
+import io.zerows.epoch.support.UtBase;
+import io.zerows.epoch.common.shared.normalize.KMarkAtom;
+import io.zerows.epoch.common.shared.normalize.KMarkAttribute;
 import io.zerows.specification.access.app.HArk;
 import io.zerows.specification.modeling.HAttribute;
 import io.zerows.specification.modeling.HModel;

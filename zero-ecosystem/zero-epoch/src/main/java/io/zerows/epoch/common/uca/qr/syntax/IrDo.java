@@ -2,7 +2,7 @@ package io.zerows.epoch.common.uca.qr.syntax;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.util.UtBase;
+import io.zerows.epoch.support.UtBase;
 
 import java.util.List;
 import java.util.function.BiConsumer;

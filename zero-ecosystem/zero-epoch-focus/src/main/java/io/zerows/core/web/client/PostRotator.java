@@ -1,8 +1,8 @@
 package io.zerows.core.web.client;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.common.app.KIntegration;
-import io.zerows.common.app.KIntegrationApi;
+import io.zerows.epoch.common.shared.app.KIntegration;
+import io.zerows.epoch.common.shared.app.KIntegrationApi;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 

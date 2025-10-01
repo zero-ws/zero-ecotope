@@ -1,6 +1,6 @@
 package io.zerows.specification.development.program;
 
-import io.zerows.core.running.boot.KRepo;
+import io.zerows.epoch.common.shared.boot.KRepo;
 import io.zerows.epoch.annotation.reference.One2One;
 import io.zerows.epoch.constant.VValue;
 import io.zerows.specification.development.compiled.HTrash;

@@ -2,7 +2,7 @@ package io.zerows.epoch.common.uca.metadata;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.VName;
-import io.zerows.ams.util.UtBase;
+import io.zerows.epoch.support.UtBase;
 
 /**
  * @author lang : 2024-06-26

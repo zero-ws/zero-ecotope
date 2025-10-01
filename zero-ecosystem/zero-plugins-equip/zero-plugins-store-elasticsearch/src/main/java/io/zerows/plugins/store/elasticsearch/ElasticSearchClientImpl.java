@@ -5,7 +5,7 @@ import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.enums.typed.ChangeFlag;
-import io.zerows.epoch.common.uca.log.Annal;
+import io.zerows.epoch.common.log.Annal;
 import io.zerows.core.util.Ut;
 import org.elasticsearch.action.get.GetRequest;
 import org.elasticsearch.action.get.GetResponse;

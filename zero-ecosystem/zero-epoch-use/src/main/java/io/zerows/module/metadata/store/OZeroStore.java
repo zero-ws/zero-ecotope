@@ -3,7 +3,7 @@ package io.zerows.module.metadata.store;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.configure.YmlCore;
 import io.zerows.epoch.spi.boot.HEquip;
-import io.zerows.epoch.common.uca.log.Log4JAnnal;
+import io.zerows.epoch.common.log.Log4JAnnal;
 import io.zerows.core.util.Ut;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HSetting;

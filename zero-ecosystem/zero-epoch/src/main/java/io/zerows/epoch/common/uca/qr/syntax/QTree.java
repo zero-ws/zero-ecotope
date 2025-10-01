@@ -2,7 +2,7 @@ package io.zerows.epoch.common.uca.qr.syntax;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.VString;
-import io.zerows.ams.util.UtBase;
+import io.zerows.epoch.support.UtBase;
 import io.zerows.epoch.common.uca.qr.Criteria;
 
 import java.util.Objects;

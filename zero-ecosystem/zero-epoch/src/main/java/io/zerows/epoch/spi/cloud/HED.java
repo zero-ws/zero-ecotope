@@ -1,7 +1,7 @@
 package io.zerows.epoch.spi.cloud;
 
-import io.zerows.ams.util.UtBase;
-import io.zerows.common.program.KPair;
+import io.zerows.epoch.support.UtBase;
+import io.zerows.epoch.common.shared.program.KPair;
 import io.zerows.epoch.annotation.Development;
 import io.zerows.epoch.constant.VString;
 

@@ -1,7 +1,7 @@
 package io.zerows.core.database.atom;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.common.app.KDatabase;
+import io.zerows.epoch.common.shared.app.KDatabase;
 import io.zerows.core.constant.configure.YmlCore;
 import io.zerows.core.util.Ut;
 import io.zerows.epoch.annotation.Legacy;

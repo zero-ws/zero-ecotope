@@ -1,6 +1,6 @@
 package io.mature.extension.uca.modello;
 
-import io.zerows.common.program.Kv;
+import io.zerows.epoch.common.shared.program.Kv;
 import io.zerows.specification.modeling.property.OExpression;
 
 import java.util.Objects;

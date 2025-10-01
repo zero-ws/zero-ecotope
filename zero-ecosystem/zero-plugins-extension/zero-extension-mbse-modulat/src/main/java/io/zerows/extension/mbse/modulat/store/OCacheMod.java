@@ -2,7 +2,7 @@ package io.zerows.extension.mbse.modulat.store;
 
 import io.r2mo.typed.cc.Cc;
 import io.zerows.epoch.constant.VString;
-import io.zerows.common.app.KDS;
+import io.zerows.epoch.common.shared.app.KDS;
 import io.zerows.core.util.Ut;
 import io.zerows.module.metadata.zdk.running.OCache;
 import io.zerows.specification.access.app.HApp;

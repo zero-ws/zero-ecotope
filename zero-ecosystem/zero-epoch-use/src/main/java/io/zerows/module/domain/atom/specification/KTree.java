@@ -5,8 +5,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
 import io.zerows.core.util.Ut;
-import io.zerows.extend.jackson.databind.JsonObjectDeserializer;
-import io.zerows.extend.jackson.databind.JsonObjectSerializer;
+import io.zerows.epoch.integrated.jackson.databind.JsonObjectDeserializer;
+import io.zerows.epoch.integrated.jackson.databind.JsonObjectSerializer;
 
 import java.io.Serializable;
 

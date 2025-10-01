@@ -2,7 +2,7 @@ package io.zerows.epoch.common.uca.fs;
 
 import io.r2mo.function.Fn;
 import io.zerows.epoch.constant.VString;
-import io.zerows.ams.util.UtBase;
+import io.zerows.epoch.support.UtBase;
 
 import java.io.File;
 import java.net.URL;

@@ -3,9 +3,9 @@ package io.mature.stellar.vendor;
 import io.mature.boot.supply.Envoy;
 import io.mature.stellar.owner.OkA;
 import io.vertx.core.json.JsonObject;
-import io.zerows.common.app.KIntegration;
-import io.zerows.common.datamation.KDictConfig;
-import io.zerows.common.datamation.KMap;
+import io.zerows.epoch.common.shared.app.KIntegration;
+import io.zerows.epoch.common.shared.datamation.KDictConfig;
+import io.zerows.epoch.common.shared.datamation.KMap;
 
 /**
  * ## 默认组装器实现

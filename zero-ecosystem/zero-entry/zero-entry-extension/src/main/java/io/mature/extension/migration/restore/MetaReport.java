@@ -4,7 +4,7 @@ import io.mature.extension.migration.AbstractStep;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.enums.Environment;
-import io.zerows.common.app.KDS;
+import io.zerows.epoch.common.shared.app.KDS;
 import io.zerows.core.constant.KName;
 import io.zerows.core.database.atom.Database;
 import io.zerows.core.fn.FnZero;

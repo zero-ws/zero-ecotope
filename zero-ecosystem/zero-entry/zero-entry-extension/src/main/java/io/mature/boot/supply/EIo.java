@@ -3,7 +3,7 @@ package io.mature.boot.supply;
 import io.zerows.epoch.constant.VPath;
 import io.zerows.epoch.constant.VString;
 import io.zerows.epoch.constant.spec.VWeb;
-import io.zerows.common.app.KIntegration;
+import io.zerows.epoch.common.shared.app.KIntegration;
 
 import java.util.Objects;
 

@@ -2,7 +2,7 @@ package io.zerows.core.database.cp.ds;
 
 import com.zaxxer.hikari.HikariDataSource;
 import io.r2mo.typed.cc.Cc;
-import io.zerows.common.app.KDatabase;
+import io.zerows.epoch.common.shared.app.KDatabase;
 import io.zerows.core.database.atom.Database;
 import io.zerows.core.database.cp.zdk.DataPool;
 import io.zerows.core.util.Ut;

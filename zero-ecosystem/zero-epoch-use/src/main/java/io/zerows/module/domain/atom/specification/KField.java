@@ -6,10 +6,10 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
 import io.zerows.core.util.Ut;
-import io.zerows.extend.jackson.databind.JsonArrayDeserializer;
-import io.zerows.extend.jackson.databind.JsonArraySerializer;
-import io.zerows.extend.jackson.databind.JsonObjectDeserializer;
-import io.zerows.extend.jackson.databind.JsonObjectSerializer;
+import io.zerows.epoch.integrated.jackson.databind.JsonArrayDeserializer;
+import io.zerows.epoch.integrated.jackson.databind.JsonArraySerializer;
+import io.zerows.epoch.integrated.jackson.databind.JsonObjectDeserializer;
+import io.zerows.epoch.integrated.jackson.databind.JsonObjectSerializer;
 
 import java.io.Serializable;
 import java.util.HashSet;

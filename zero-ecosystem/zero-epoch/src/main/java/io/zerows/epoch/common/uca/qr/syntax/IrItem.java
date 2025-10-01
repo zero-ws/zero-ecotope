@@ -3,7 +3,7 @@ package io.zerows.epoch.common.uca.qr.syntax;
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonArray;
 import io.zerows.epoch.constant.VString;
-import io.zerows.ams.util.UtBase;
+import io.zerows.epoch.support.UtBase;
 import io.zerows.epoch.exception.web._60024Exception500QueryMetaNull;
 import io.zerows.epoch.exception.web._60026Exception400QrOpUnknown;
 

@@ -2,7 +2,7 @@ package io.zerows.epoch.common.uca.qr.syntax;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.util.UtBase;
+import io.zerows.epoch.support.UtBase;
 import io.zerows.epoch.common.uca.qr.Criteria;
 import io.zerows.epoch.common.uca.qr.Pager;
 import io.zerows.epoch.common.uca.qr.Sorter;

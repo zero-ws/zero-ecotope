@@ -1,7 +1,7 @@
 package io.mature.extension.uca.modello;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.common.program.Kv;
+import io.zerows.epoch.common.shared.program.Kv;
 import io.zerows.extension.runtime.ambient.osgi.spi.component.ExAttributeComponent;
 import io.zerows.specification.modeling.HRecord;
 import io.zerows.specification.modeling.property.OComponent;

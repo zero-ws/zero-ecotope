@@ -2,7 +2,7 @@ package io.zerows.core.web.container.osgi.service;
 
 import io.zerows.core.annotations.Agent;
 import io.zerows.core.annotations.Worker;
-import io.zerows.core.running.context.KRunner;
+import io.zerows.epoch.common.shared.context.KRunner;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.container.store.under.StoreVertx;
 import io.zerows.core.web.container.uca.store.StubLinear;

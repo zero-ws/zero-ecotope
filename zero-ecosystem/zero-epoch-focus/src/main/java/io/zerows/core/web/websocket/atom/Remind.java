@@ -4,8 +4,8 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.r2mo.typed.cc.Cc;
 import io.zerows.core.web.websocket.eon.em.RemindType;
-import io.zerows.extend.jackson.databind.ClassDeserializer;
-import io.zerows.extend.jackson.databind.ClassSerializer;
+import io.zerows.epoch.integrated.jackson.databind.ClassDeserializer;
+import io.zerows.epoch.integrated.jackson.databind.ClassSerializer;
 import io.zerows.module.assembly.uca.di.DiPlugin;
 
 import java.io.Serializable;

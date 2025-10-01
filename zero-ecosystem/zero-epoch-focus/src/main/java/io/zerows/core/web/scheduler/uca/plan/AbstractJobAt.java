@@ -1,7 +1,7 @@
 package io.zerows.core.web.scheduler.uca.plan;
 
 import io.zerows.epoch.constant.VString;
-import io.zerows.common.program.Kv;
+import io.zerows.epoch.common.shared.program.Kv;
 import io.zerows.epoch.exception.web._60050Exception501NotSupport;
 import io.zerows.core.util.Ut;
 import io.zerows.module.metadata.uca.logging.OLog;

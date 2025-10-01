@@ -3,7 +3,7 @@ package io.zerows.epoch.common.uca.qr;
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.exception.web._60024Exception500QueryMetaNull;
-import io.zerows.epoch.common.uca.log.Annal;
+import io.zerows.epoch.common.log.Annal;
 import io.zerows.epoch.common.uca.qr.syntax.Ir;
 import io.zerows.epoch.common.uca.qr.syntax.IrDo;
 import io.zerows.epoch.common.uca.qr.syntax.IrItem;

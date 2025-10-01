@@ -7,7 +7,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.enums.modeling.EmAttribute;
-import io.zerows.common.normalize.KMarkAtom;
+import io.zerows.epoch.common.shared.normalize.KMarkAtom;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.exception._80545Exception400Tracking;

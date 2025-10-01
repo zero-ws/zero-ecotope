@@ -1,7 +1,7 @@
 package io.zerows.epoch.common.uca.crypto;
 
 import io.zerows.epoch.constant.VValue;
-import io.zerows.common.program.KPair;
+import io.zerows.epoch.common.shared.program.KPair;
 
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;

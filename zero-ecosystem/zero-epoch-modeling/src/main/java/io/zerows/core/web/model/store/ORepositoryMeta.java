@@ -2,7 +2,7 @@ package io.zerows.core.web.model.store;
 
 import io.zerows.epoch.enums.app.ServerType;
 import io.zerows.core.annotations.QaS;
-import io.zerows.core.running.context.KRunner;
+import io.zerows.epoch.common.shared.context.KRunner;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.model.atom.Event;
 import io.zerows.core.web.model.atom.Receipt;

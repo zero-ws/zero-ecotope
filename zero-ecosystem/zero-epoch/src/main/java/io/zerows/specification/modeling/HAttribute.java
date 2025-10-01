@@ -1,8 +1,8 @@
 package io.zerows.specification.modeling;
 
 import io.zerows.epoch.enums.modeling.EmValue;
-import io.zerows.common.normalize.KMarkAttribute;
-import io.zerows.common.reference.RRule;
+import io.zerows.epoch.common.shared.normalize.KMarkAttribute;
+import io.zerows.epoch.common.shared.reference.RRule;
 import io.zerows.specification.modeling.metadata.HMetaField;
 
 import java.util.List;

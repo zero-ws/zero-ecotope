@@ -1,6 +1,6 @@
 package io.zerows.core.util;
 
-import io.zerows.ams.util.UtBase;
+import io.zerows.epoch.support.UtBase;
 import io.zerows.module.metadata.eon.OMessage;
 import io.zerows.module.metadata.zdk.running.OCommand;
 import org.osgi.framework.Bundle;

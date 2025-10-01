@@ -1,7 +1,7 @@
 package io.zerows.epoch.spi;
 
 import io.zerows.epoch.constant.spec.VBoot;
-import io.zerows.core.running.boot.KEnergy;
+import io.zerows.epoch.common.shared.boot.KEnergy;
 import io.zerows.specification.access.HLauncher;
 import io.zerows.specification.configuration.HEnergy;
 

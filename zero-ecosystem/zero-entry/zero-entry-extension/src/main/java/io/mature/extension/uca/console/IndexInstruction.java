@@ -5,7 +5,7 @@ import io.mature.extension.scaffold.console.AbstractInstruction;
 import io.mature.stellar.vendor.OkB;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
-import io.zerows.common.program.KRef;
+import io.zerows.epoch.common.shared.program.KRef;
 import io.zerows.core.constant.KName;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.util.Ao;

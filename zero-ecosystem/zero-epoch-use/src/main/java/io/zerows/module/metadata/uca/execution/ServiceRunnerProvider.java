@@ -1,7 +1,7 @@
 package io.zerows.module.metadata.uca.execution;
 
 import io.vertx.core.Future;
-import io.zerows.ams.fn.FnBase;
+import io.zerows.epoch.support.FnBase;
 import io.zerows.module.metadata.atom.service.CallbackParameter;
 import io.zerows.module.metadata.zdk.service.ServiceContext;
 import io.zerows.module.metadata.zdk.service.ServiceInvocation;

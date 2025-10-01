@@ -3,7 +3,7 @@ package io.mature.extension.refine;
 import io.mature.extension.cv.OxCv;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.common.app.KDS;
+import io.zerows.epoch.common.shared.app.KDS;
 import io.zerows.core.constant.KName;
 import io.zerows.core.database.atom.Database;
 import io.zerows.core.util.Ut;

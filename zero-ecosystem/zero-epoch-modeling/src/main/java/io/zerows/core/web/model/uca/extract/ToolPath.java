@@ -3,7 +3,7 @@ package io.zerows.core.web.model.uca.extract;
 import io.r2mo.function.Fn;
 import io.zerows.epoch.constant.VString;
 import io.zerows.epoch.constant.VValue;
-import io.zerows.epoch.common.uca.log.Annal;
+import io.zerows.epoch.common.log.Annal;
 import io.zerows.core.util.Ut;
 import io.zerows.epoch.mature.exception._40006Exception500PathAnnoEmpty;
 import io.zerows.module.metadata.uca.environment.DevEnv;

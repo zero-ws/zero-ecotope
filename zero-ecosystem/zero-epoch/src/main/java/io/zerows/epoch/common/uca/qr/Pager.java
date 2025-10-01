@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.exception.web._60023Exception400QrPageInvalid;
 import io.zerows.epoch.exception.web._60024Exception500QueryMetaNull;
 import io.zerows.epoch.exception.web._60025Exception400QrPageIndex;
-import io.zerows.epoch.common.uca.log.Annal;
+import io.zerows.epoch.common.log.Annal;
 
 import java.io.Serializable;
 import java.util.Objects;

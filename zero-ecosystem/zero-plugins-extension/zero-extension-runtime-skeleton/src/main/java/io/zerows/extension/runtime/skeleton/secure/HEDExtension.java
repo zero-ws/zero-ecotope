@@ -1,6 +1,6 @@
 package io.zerows.extension.runtime.skeleton.secure;
 
-import io.zerows.common.program.KPair;
+import io.zerows.epoch.common.shared.program.KPair;
 import io.zerows.epoch.spi.cloud.HED;
 
 /**

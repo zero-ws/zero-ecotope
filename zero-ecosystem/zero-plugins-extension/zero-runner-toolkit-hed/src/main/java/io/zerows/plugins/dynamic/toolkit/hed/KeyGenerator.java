@@ -1,6 +1,6 @@
 package io.zerows.plugins.dynamic.toolkit.hed;
 
-import io.zerows.common.program.KPair;
+import io.zerows.epoch.common.shared.program.KPair;
 import io.zerows.core.util.Ut;
 
 public class KeyGenerator {

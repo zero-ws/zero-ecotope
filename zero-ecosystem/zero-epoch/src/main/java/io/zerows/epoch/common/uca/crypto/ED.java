@@ -1,7 +1,7 @@
 package io.zerows.epoch.common.uca.crypto;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.common.program.KPair;
+import io.zerows.epoch.common.shared.program.KPair;
 import io.zerows.epoch.annotation.Memory;
 
 /**

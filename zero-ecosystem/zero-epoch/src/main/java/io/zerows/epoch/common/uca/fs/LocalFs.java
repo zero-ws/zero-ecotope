@@ -2,8 +2,8 @@ package io.zerows.epoch.common.uca.fs;
 
 import io.r2mo.function.Fn;
 import io.zerows.epoch.constant.VMessage;
-import io.zerows.ams.util.UtBase;
-import io.zerows.epoch.common.uca.log.LogAs;
+import io.zerows.epoch.support.UtBase;
+import io.zerows.epoch.common.log.LogAs;
 import io.zerows.specification.vital.HFS;
 import org.apache.commons.io.FileUtils;
 

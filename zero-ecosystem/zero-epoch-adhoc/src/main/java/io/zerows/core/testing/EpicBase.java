@@ -3,7 +3,7 @@ package io.zerows.core.testing;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.common.app.KIntegration;
+import io.zerows.epoch.common.shared.app.KIntegration;
 import io.zerows.core.database.atom.Database;
 import io.zerows.epoch.common.uca.qr.Criteria;
 import io.zerows.core.util.Ut;

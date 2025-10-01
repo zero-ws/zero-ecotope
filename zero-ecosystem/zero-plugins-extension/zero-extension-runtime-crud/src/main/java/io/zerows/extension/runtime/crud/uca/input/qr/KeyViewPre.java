@@ -3,7 +3,7 @@ package io.zerows.extension.runtime.crud.uca.input.qr;
 import io.vertx.core.Future;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.json.JsonObject;
-import io.zerows.common.program.Kv;
+import io.zerows.epoch.common.shared.program.Kv;
 import io.zerows.core.constant.KName;
 import io.zerows.extension.runtime.crud.eon.IxMsg;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;

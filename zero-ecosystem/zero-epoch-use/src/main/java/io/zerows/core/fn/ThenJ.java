@@ -3,8 +3,8 @@ package io.zerows.core.fn;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.fn.FnBase;
-import io.zerows.epoch.common.uca.log.Log;
+import io.zerows.epoch.support.FnBase;
+import io.zerows.epoch.common.log.Log;
 import io.zerows.core.util.Ut;
 
 import java.util.Arrays;

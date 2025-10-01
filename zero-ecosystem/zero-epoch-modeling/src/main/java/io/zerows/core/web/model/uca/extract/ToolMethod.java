@@ -2,7 +2,7 @@ package io.zerows.core.web.model.uca.extract;
 
 import io.r2mo.function.Fn;
 import io.vertx.core.http.HttpMethod;
-import io.zerows.epoch.common.uca.log.Annal;
+import io.zerows.epoch.common.log.Annal;
 import io.zerows.epoch.mature.exception._40007Exception500MethodNull;
 import jakarta.ws.rs.*;
 

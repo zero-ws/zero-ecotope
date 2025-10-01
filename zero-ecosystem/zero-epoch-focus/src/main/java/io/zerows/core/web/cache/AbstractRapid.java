@@ -3,7 +3,7 @@ package io.zerows.core.web.cache;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
-import io.zerows.ams.fn.FnBase;
+import io.zerows.epoch.support.FnBase;
 import io.zerows.core.constant.KName;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.cache.shared.UxPool;

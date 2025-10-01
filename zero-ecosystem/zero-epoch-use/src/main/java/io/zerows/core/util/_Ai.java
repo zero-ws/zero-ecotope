@@ -2,8 +2,8 @@ package io.zerows.core.util;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.enums.typed.ChangeFlag;
-import io.zerows.ams.util.UtBase;
-import io.zerows.common.datamation.KMapping;
+import io.zerows.epoch.support.UtBase;
+import io.zerows.epoch.common.shared.datamation.KMapping;
 
 /**
  * @author lang : 2023-06-19

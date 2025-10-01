@@ -3,7 +3,7 @@ package io.mature.boot.supply;
 import io.mature.stellar.owner.OkA;
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonObject;
-import io.zerows.common.app.KGlobal;
+import io.zerows.epoch.common.shared.app.KGlobal;
 import io.zerows.core.constant.KName;
 import io.zerows.specification.access.app.HApp;
 import io.zerows.specification.access.app.HArk;

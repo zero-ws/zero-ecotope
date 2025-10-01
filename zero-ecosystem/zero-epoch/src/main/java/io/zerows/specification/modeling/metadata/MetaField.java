@@ -1,8 +1,8 @@
 package io.zerows.specification.modeling.metadata;
 
 import io.zerows.epoch.enums.modeling.EmKey;
-import io.zerows.ams.util.UtBase;
-import io.zerows.common.normalize.KKey;
+import io.zerows.epoch.support.UtBase;
+import io.zerows.epoch.common.shared.normalize.KKey;
 import io.zerows.specification.modeling.element.HKey;
 
 import java.util.*;

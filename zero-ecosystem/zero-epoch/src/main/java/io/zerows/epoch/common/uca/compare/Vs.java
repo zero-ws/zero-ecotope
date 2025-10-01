@@ -4,8 +4,8 @@ import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.VName;
 import io.zerows.epoch.constant.VString;
-import io.zerows.ams.util.UtBase;
-import io.zerows.epoch.common.uca.log.Annal;
+import io.zerows.epoch.support.UtBase;
+import io.zerows.epoch.common.log.Annal;
 import io.zerows.specification.modeling.metadata.HMetaField;
 
 import java.io.Serializable;

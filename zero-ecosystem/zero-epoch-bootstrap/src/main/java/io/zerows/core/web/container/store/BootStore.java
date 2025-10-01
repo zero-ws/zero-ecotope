@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.enums.EmApp;
 import io.zerows.core.annotations.Up;
 import io.zerows.core.constant.configure.YmlCore;
-import io.zerows.core.running.boot.KBoot;
+import io.zerows.epoch.common.shared.boot.KBoot;
 import io.zerows.core.web.container.eon.em.FeatureMark;
 import io.zerows.core.web.model.util.Anno;
 import io.zerows.epoch.container.exception._40001Exception500UpClassArgs;

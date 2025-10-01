@@ -1,7 +1,7 @@
 package io.zerows.core.web.client;
 
 import io.vertx.core.MultiMap;
-import io.zerows.common.app.KIntegration;
+import io.zerows.epoch.common.shared.app.KIntegration;
 import io.zerows.module.security.atom.token.WebToken;
 import org.apache.http.HttpHeaders;
 

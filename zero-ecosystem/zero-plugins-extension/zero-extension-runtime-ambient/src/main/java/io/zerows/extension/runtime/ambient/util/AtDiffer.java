@@ -3,7 +3,7 @@ package io.zerows.extension.runtime.ambient.util;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.enums.modeling.EmAttribute;
 import io.zerows.epoch.enums.typed.ChangeFlag;
-import io.zerows.common.normalize.KMarkAtom;
+import io.zerows.epoch.common.shared.normalize.KMarkAtom;
 import io.zerows.epoch.common.uca.compare.Vs;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XActivity;

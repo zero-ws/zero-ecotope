@@ -4,7 +4,7 @@ import io.mature.stellar.Party;
 import io.mature.stellar.vendor.OkB;
 import io.zerows.epoch.enums.Environment;
 import io.zerows.epoch.constant.spec.VWeb;
-import io.zerows.common.app.KGlobal;
+import io.zerows.epoch.common.shared.app.KGlobal;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>

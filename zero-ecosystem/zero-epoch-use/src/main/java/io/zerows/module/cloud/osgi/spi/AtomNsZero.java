@@ -1,6 +1,6 @@
 package io.zerows.module.cloud.osgi.spi;
 
-import io.zerows.ams.util.UtBase;
+import io.zerows.epoch.support.UtBase;
 import io.zerows.epoch.spi.modeler.AtomNs;
 import io.zerows.core.util.Ut;
 import io.zerows.epoch.constant.VEnv;

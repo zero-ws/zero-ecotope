@@ -1,7 +1,7 @@
 package io.zerows.feature.web.utility.uca;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.common.datamation.KMapping;
+import io.zerows.epoch.common.shared.datamation.KMapping;
 import io.zerows.core.util.Ut;
 
 public class FieldMapper implements Mapper {

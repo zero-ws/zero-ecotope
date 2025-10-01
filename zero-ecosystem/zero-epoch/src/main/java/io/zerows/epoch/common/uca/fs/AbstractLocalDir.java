@@ -1,7 +1,7 @@
 package io.zerows.epoch.common.uca.fs;
 
-import io.zerows.ams.util.UtBase;
-import io.zerows.epoch.common.uca.log.LogUtil;
+import io.zerows.epoch.support.UtBase;
+import io.zerows.epoch.common.log.LogUtil;
 
 import java.io.File;
 import java.net.URL;

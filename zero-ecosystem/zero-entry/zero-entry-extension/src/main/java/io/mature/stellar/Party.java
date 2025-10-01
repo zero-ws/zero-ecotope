@@ -1,7 +1,7 @@
 package io.mature.stellar;
 
-import io.zerows.common.app.KDS;
-import io.zerows.common.app.KGlobal;
+import io.zerows.epoch.common.shared.app.KDS;
+import io.zerows.epoch.common.shared.app.KGlobal;
 import io.zerows.core.database.atom.Database;
 import io.zerows.specification.access.app.HArk;
 

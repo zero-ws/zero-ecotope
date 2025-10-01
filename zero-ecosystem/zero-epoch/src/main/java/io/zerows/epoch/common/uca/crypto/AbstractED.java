@@ -1,10 +1,10 @@
 package io.zerows.epoch.common.uca.crypto;
 
 import io.r2mo.function.Fn;
-import io.zerows.ams.util.UtBase;
-import io.zerows.common.program.KPair;
+import io.zerows.epoch.support.UtBase;
+import io.zerows.epoch.common.shared.program.KPair;
 import io.zerows.epoch.spi.cloud.HED;
-import io.zerows.epoch.common.uca.log.Annal;
+import io.zerows.epoch.common.log.Annal;
 import io.zerows.epoch.constant.VString;
 import io.zerows.epoch.constant.VValue;
 import io.zerows.epoch.runtime.HMacrocosm;

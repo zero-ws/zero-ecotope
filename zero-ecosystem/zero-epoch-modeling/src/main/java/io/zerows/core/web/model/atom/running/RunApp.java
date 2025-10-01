@@ -1,6 +1,6 @@
 package io.zerows.core.web.model.atom.running;
 
-import io.zerows.common.app.KApp;
+import io.zerows.epoch.common.shared.app.KApp;
 
 import java.io.Serializable;
 

@@ -6,8 +6,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.json.JsonObject;
-import io.zerows.extend.jackson.databind.JsonObjectDeserializer;
-import io.zerows.extend.jackson.databind.JsonObjectSerializer;
+import io.zerows.epoch.integrated.jackson.databind.JsonObjectDeserializer;
+import io.zerows.epoch.integrated.jackson.databind.JsonObjectSerializer;
 import io.zerows.module.metadata.eon.em.EmDeploy;
 
 import java.io.Serializable;

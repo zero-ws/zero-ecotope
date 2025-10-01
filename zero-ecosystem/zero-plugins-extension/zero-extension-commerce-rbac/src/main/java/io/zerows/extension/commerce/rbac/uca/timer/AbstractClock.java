@@ -1,7 +1,7 @@
 package io.zerows.extension.commerce.rbac.uca.timer;
 
 import io.vertx.core.Future;
-import io.zerows.ams.fn.FnBase;
+import io.zerows.epoch.support.FnBase;
 import io.zerows.core.web.cache.Rapid;
 import io.zerows.module.metadata.zdk.AbstractAmbiguity;
 import io.zerows.unity.Ux;

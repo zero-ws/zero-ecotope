@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.VString;
 import io.zerows.epoch.constant.VValue;
 import io.zerows.epoch.enums.typed.ChangeFlag;
-import io.zerows.ams.util.UtBase;
+import io.zerows.epoch.support.UtBase;
 import io.zerows.core.constant.KName;
 import io.zerows.module.metadata.uca.logging.OLog;
 

@@ -3,8 +3,8 @@ package io.zerows.plugins.common.shell.atom;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.vertx.core.json.JsonObject;
-import io.zerows.extend.jackson.databind.JsonObjectDeserializer;
-import io.zerows.extend.jackson.databind.JsonObjectSerializer;
+import io.zerows.epoch.integrated.jackson.databind.JsonObjectDeserializer;
+import io.zerows.epoch.integrated.jackson.databind.JsonObjectSerializer;
 import org.apache.commons.cli.Option;
 
 import java.io.Serializable;

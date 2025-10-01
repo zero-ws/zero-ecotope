@@ -3,7 +3,7 @@ package io.zerows.extension.commerce.lbs.osgi.spi;
 import io.vertx.core.Future;
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonArray;
-import io.zerows.common.datamation.KDictSource;
+import io.zerows.epoch.common.shared.datamation.KDictSource;
 import io.zerows.core.constant.KName;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.commerce.lbs.domain.tables.daos.LTentDao;

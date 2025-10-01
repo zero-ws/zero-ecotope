@@ -1,6 +1,6 @@
 package io.zerows.epoch.common.uca.qr.syntax;
 
-import io.zerows.ams.util.UtBase;
+import io.zerows.epoch.support.UtBase;
 
 public class QValue implements QLeaf {
 

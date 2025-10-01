@@ -2,7 +2,7 @@ package io.zerows.epoch.common.uca.compare;
 
 import io.vertx.core.json.JsonArray;
 import io.zerows.epoch.constant.VString;
-import io.zerows.ams.util.UtBase;
+import io.zerows.epoch.support.UtBase;
 
 import java.time.LocalDateTime;
 import java.util.Objects;

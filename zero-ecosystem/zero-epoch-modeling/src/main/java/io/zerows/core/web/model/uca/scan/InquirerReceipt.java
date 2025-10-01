@@ -1,7 +1,7 @@
 package io.zerows.core.web.model.uca.scan;
 
 import io.r2mo.function.Fn;
-import io.zerows.epoch.common.uca.log.Annal;
+import io.zerows.epoch.common.log.Annal;
 import io.zerows.core.web.model.atom.Receipt;
 import io.zerows.core.web.model.uca.scan.parallel.QueueThread;
 import io.zerows.module.metadata.zdk.uca.Inquirer;

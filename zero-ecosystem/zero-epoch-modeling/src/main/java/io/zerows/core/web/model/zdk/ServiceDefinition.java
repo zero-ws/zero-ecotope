@@ -1,6 +1,6 @@
 package io.zerows.core.web.model.zdk;
 
-import io.zerows.common.datamation.KDictConfig;
+import io.zerows.epoch.common.shared.datamation.KDictConfig;
 
 /*
  * Service

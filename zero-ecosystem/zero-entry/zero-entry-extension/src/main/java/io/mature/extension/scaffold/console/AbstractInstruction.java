@@ -7,7 +7,7 @@ import io.mature.stellar.owner.OkA;
 import io.mature.stellar.vendor.OkB;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.fn.FnBase;
+import io.zerows.epoch.support.FnBase;
 import io.zerows.core.constant.KName;
 import io.zerows.epoch.exception.boot._11002Exception500EmptyIo;
 import io.zerows.core.util.Ut;

@@ -1,6 +1,6 @@
 package io.vertx.boot.lighter;
 
-import io.zerows.common.app.KConfig;
+import io.zerows.epoch.common.shared.app.KConfig;
 import io.zerows.specification.configuration.boot.HMature;
 
 /**

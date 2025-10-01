@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.VPath;
 import io.zerows.epoch.constant.VString;
-import io.zerows.ams.util.UtBase;
+import io.zerows.epoch.support.UtBase;
 import org.osgi.framework.Bundle;
 
 import java.io.File;

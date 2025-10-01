@@ -1,7 +1,7 @@
 package io.zerows.extension.mbse.basement.uca.query;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.common.uca.log.Annal;
+import io.zerows.epoch.common.log.Annal;
 import io.zerows.epoch.common.uca.qr.Criteria;
 import io.zerows.epoch.common.uca.qr.Sorter;
 import io.zerows.epoch.common.uca.qr.syntax.QTree;

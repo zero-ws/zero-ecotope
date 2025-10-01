@@ -1,6 +1,6 @@
 package io.mature.extension.scaffold.component;
 
-import io.zerows.common.app.KIntegration;
+import io.zerows.epoch.common.shared.app.KIntegration;
 import io.zerows.core.annotations.Contract;
 
 /**

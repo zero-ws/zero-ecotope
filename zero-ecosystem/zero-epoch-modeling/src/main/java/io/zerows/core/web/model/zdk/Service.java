@@ -1,8 +1,8 @@
 package io.zerows.core.web.model.zdk;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.common.datamation.KMap;
-import io.zerows.common.normalize.KIdentity;
+import io.zerows.epoch.common.shared.datamation.KMap;
+import io.zerows.epoch.common.shared.normalize.KIdentity;
 import io.zerows.specification.modeling.HRule;
 
 /*

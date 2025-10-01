@@ -1,9 +1,9 @@
 package io.zerows.specification.modeling;
 
-import io.zerows.common.reference.RQuery;
-import io.zerows.common.reference.RQuote;
-import io.zerows.common.reference.RReference;
-import io.zerows.common.reference.RResult;
+import io.zerows.epoch.common.shared.reference.RQuery;
+import io.zerows.epoch.common.shared.reference.RQuote;
+import io.zerows.epoch.common.shared.reference.RReference;
+import io.zerows.epoch.common.shared.reference.RResult;
 
 import java.util.concurrent.ConcurrentMap;
 

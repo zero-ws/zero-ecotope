@@ -1,6 +1,6 @@
 package io.zerows.specification.storage;
 
-import io.zerows.common.app.KDatabase;
+import io.zerows.epoch.common.shared.app.KDatabase;
 import io.zerows.epoch.annotation.reference.One2One;
 import io.zerows.epoch.enums.EmDS;
 import io.zerows.epoch.enums.typed.EmType;

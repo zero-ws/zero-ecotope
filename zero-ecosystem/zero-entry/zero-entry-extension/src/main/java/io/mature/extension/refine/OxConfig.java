@@ -4,7 +4,7 @@ import io.mature.extension.cv.em.TypeLog;
 import io.mature.stellar.ArgoStore;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.VString;
-import io.zerows.common.normalize.KIdentity;
+import io.zerows.epoch.common.shared.normalize.KIdentity;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.module.cloud.eon.VDBC;

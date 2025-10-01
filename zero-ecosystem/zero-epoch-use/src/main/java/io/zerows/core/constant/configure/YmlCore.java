@@ -3,7 +3,7 @@ package io.zerows.core.constant.configure;
 import io.zerows.epoch.constant.VPath;
 import io.zerows.epoch.constant.VString;
 import io.zerows.epoch.enums.EmDS;
-import io.zerows.ams.util.UtBase;
+import io.zerows.epoch.support.UtBase;
 import io.zerows.core.annotations.Infusion;
 import io.zerows.core.constant.KName;
 import io.zerows.core.constant.KPlugin;

@@ -1,6 +1,6 @@
 package io.zerows.plugins.office.excel.atom;
 
-import io.zerows.epoch.common.uca.log.Annal;
+import io.zerows.epoch.common.log.Annal;
 import org.apache.poi.ss.util.CellRangeAddress;
 
 /**

@@ -3,7 +3,7 @@ package io.zerows.extension.mbse.ui.osgi.spi;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
-import io.zerows.epoch.common.uca.log.Annal;
+import io.zerows.epoch.common.log.Annal;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.mbse.ui.agent.service.FieldService;
 import io.zerows.extension.mbse.ui.agent.service.FormService;

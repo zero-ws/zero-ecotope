@@ -3,7 +3,7 @@ package io.zerows.epoch.common.uca.aop;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.enums.EmAop;
 import io.zerows.epoch.constant.spec.VPC;
-import io.zerows.ams.util.UtBase;
+import io.zerows.epoch.support.UtBase;
 import io.zerows.specification.atomic.HReturn;
 
 import java.util.ArrayList;

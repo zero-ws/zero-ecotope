@@ -2,7 +2,7 @@ package io.zerows.core.database.jooq;
 
 import io.r2mo.function.Fn;
 import io.vertx.core.Vertx;
-import io.zerows.common.app.KDatabase;
+import io.zerows.epoch.common.shared.app.KDatabase;
 import io.zerows.core.annotations.Infusion;
 import io.zerows.core.constant.configure.YmlCore;
 import io.zerows.core.database.cp.zdk.DataPool;

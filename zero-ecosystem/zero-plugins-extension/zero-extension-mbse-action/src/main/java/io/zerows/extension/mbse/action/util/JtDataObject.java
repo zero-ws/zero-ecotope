@@ -1,9 +1,9 @@
 package io.zerows.extension.mbse.action.util;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.common.app.KDS;
-import io.zerows.common.app.KIntegration;
-import io.zerows.common.datamation.KDictConfig;
+import io.zerows.epoch.common.shared.app.KDS;
+import io.zerows.epoch.common.shared.app.KIntegration;
+import io.zerows.epoch.common.shared.datamation.KDictConfig;
 import io.zerows.core.constant.KName;
 import io.zerows.core.database.atom.Database;
 import io.zerows.core.util.Ut;

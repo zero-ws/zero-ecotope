@@ -1,7 +1,7 @@
 package io.zerows.core.web.mbse.uca.mixture;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.core.running.boot.KPivot;
+import io.zerows.epoch.common.shared.boot.KPivot;
 import io.zerows.core.web.mbse.atom.internal.NormAtom;
 import io.zerows.core.web.mbse.atom.internal.NormModel;
 import io.zerows.epoch.container.exception._80510Exception404ModelNotFound;
