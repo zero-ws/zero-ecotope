@@ -29,6 +29,11 @@
                 <artifactId>zero-overlay</artifactId>
                 <version>${zero.version}</version>
             </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>r2mo-typed-vertx</artifactId>
+                <version>${r2mo.version}</version>
+            </dependency>
             <!-- ================= 核心容器 ================== -->
             <dependency>
                 <groupId>io.zerows</groupId>

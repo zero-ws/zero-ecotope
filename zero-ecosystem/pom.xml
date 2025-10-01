@@ -15,15 +15,6 @@
     <modules>
         <module>zero-overlay</module>
         <module>zero-epoch</module>
-        <module>zero-epoch-use</module>
-        <module>zero-epoch-store</module>
-        <module>zero-epoch-modeling</module>
-        <module>zero-epoch-focus</module>
-        <!-- 工具层 -->
-        <module>zero-epoch-execution</module>
-        <module>zero-epoch-bootstrap</module>
-        <!-- 测试 -->
-        <module>zero-epoch-adhoc</module>
         <module>zero-plugins-equip</module>
         <module>zero-plugins-extension</module>
         <!-- 入口 -->

@@ -28,7 +28,7 @@
         <!-- ================= 核心容器 ================== -->
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-epoch</artifactId>
+            <artifactId>zero-overlay</artifactId>
         </dependency>
         <dependency>
             <groupId>io.zerows</groupId>

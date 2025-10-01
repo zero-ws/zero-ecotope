@@ -23,11 +23,6 @@
             <artifactId>zero-plugins-office-excel</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>io.zerows</groupId>
-            <artifactId>zero-plugins-store-redis</artifactId>
-            <version>${project.version}</version>
-        </dependency>
         <!-- MySQL -->
         <dependency>
             <groupId>com.mysql</groupId>

@@ -5,29 +5,22 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.zerows</groupId>
-        <artifactId>zero-ecosystem</artifactId>
+        <artifactId>zero-epoch</artifactId>
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>zero-epoch-modeling</artifactId>
-    <name>Zero::⚗️ - Epoch::Modeling</name>
+    <artifactId>zero-epoch-bootstrap</artifactId>
+    <name>Zero::⚗️ - Epoch::Bootstrap</name>
     <dependencies>
+        <!-- Dependency -->
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-epoch-use</artifactId>
+            <artifactId>zero-epoch-execution</artifactId>
         </dependency>
-        <dependency>
-            <groupId>io.zerows</groupId>
-            <artifactId>zero-epoch-store</artifactId>
-        </dependency>
-
+        <!-- Health Checking -->
         <dependency>
             <groupId>io.vertx</groupId>
-            <artifactId>vertx-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
+            <artifactId>vertx-health-check</artifactId>
         </dependency>
     </dependencies>
 </project>
