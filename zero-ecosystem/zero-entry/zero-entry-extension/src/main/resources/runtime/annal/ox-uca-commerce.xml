@@ -16,13 +16,13 @@
         <queueSize>8192</queueSize>
         <appender-ref ref="COMMERCE"/>
     </appender>
-    <logger name="io.mature.extension.uca.commerce" level="INFO">
+    <logger name="io.zerows.epoch.bootplus.extension.uca.commerce" level="INFO">
         <appender-ref ref="ASYNC_COMMERCE"/>
     </logger>
-    <logger name="io.mature.extension.uca.concrete" level="INFO">
+    <logger name="io.zerows.epoch.bootplus.extension.uca.concrete" level="INFO">
         <appender-ref ref="ASYNC_COMMERCE"/>
     </logger>
-    <logger name="io.mature.extension.uca.connector" level="INFO">
+    <logger name="io.zerows.epoch.bootplus.extension.uca.connector" level="INFO">
         <appender-ref ref="ASYNC_COMMERCE"/>
     </logger>
 </included>

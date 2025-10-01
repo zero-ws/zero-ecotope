@@ -2,18 +2,18 @@ package io.zerows.extension.runtime.ambient.osgi.spi.extension;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.constant.KName;
-import io.zerows.core.fn.FnZero;
+import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.common.log.Annal;
-import io.zerows.core.util.Ut;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.corpus.domain.atom.typed.UObject;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.program.fn.Fx;
 import io.zerows.extension.runtime.ambient.bootstrap.AtConfig;
 import io.zerows.extension.runtime.ambient.bootstrap.AtPin;
 import io.zerows.extension.runtime.ambient.eon.AtMsg;
 import io.zerows.extension.runtime.skeleton.osgi.spi.extension.Init;
-import io.zerows.module.domain.atom.typed.UObject;
 import io.zerows.plugins.office.excel.ExcelClient;
 import io.zerows.plugins.office.excel.ExcelInfix;
-import io.zerows.unity.Ux;
 
 import java.util.List;
 import java.util.Objects;
@@ -58,7 +58,7 @@ public class DatumInit implements Init {
             .map(file -> dataFolder + file)
             .map(this::doLoading)
             .collect(Collectors.toList());
-        return FnZero.combineA(futures)
+        return Fx.combineA(futures)
             /* Stored each result */
             .compose(results -> UObject.create().append(KName.RESULT, results)
                 .toFuture())

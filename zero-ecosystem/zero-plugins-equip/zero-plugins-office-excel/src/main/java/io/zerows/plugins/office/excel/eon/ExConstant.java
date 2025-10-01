@@ -1,6 +1,6 @@
 package io.zerows.plugins.office.excel.eon;
 
-import io.zerows.core.constant.KName;
+import io.zerows.epoch.based.constant.KName;
 
 /**
  * @author lang : 2024-06-13

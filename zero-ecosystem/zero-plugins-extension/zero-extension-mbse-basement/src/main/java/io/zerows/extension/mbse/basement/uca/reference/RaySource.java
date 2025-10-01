@@ -3,15 +3,15 @@ package io.zerows.extension.mbse.basement.uca.reference;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.based.constant.KWeb;
 import io.zerows.epoch.common.shared.program.Kv;
 import io.zerows.epoch.common.shared.reference.RDao;
 import io.zerows.epoch.common.shared.reference.RQuote;
 import io.zerows.epoch.common.shared.reference.RRule;
-import io.zerows.core.constant.KWeb;
-import io.zerows.core.fn.FnZero;
-import io.zerows.core.web.cache.Rapid;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.corpus.web.cache.Rapid;
+import io.zerows.epoch.program.fn.Fx;
 import io.zerows.specification.modeling.HRecord;
-import io.zerows.unity.Ux;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
@@ -75,7 +75,7 @@ class RaySource {
                             return dao.fetchByAsync(condition);
                         }));
             });
-            return FnZero.combineM(futureMap).compose(queriedMap -> {
+            return Fx.combineM(futureMap).compose(queriedMap -> {
                 final ConcurrentMap<String, JsonArray> data = new ConcurrentHashMap<>();
                 queriedMap.forEach((hashCode, dataArray) -> {
                     fieldCodes.forEach((field, codeKey) -> {

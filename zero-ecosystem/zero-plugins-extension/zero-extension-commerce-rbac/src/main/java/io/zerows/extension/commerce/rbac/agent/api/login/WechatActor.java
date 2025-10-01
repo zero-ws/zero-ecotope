@@ -2,8 +2,8 @@ package io.zerows.extension.commerce.rbac.agent.api.login;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.annotations.Address;
-import io.zerows.core.annotations.Queue;
+import io.zerows.epoch.annotations.Address;
+import io.zerows.epoch.annotations.Queue;
 import io.zerows.extension.commerce.rbac.eon.Addr;
 
 /**

@@ -2,10 +2,11 @@ package io.zerows.extension.runtime.workflow.agent.service;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.constant.KName;
-import io.zerows.core.database.jooq.operation.UxJooq;
-import io.zerows.core.fn.FnZero;
-import io.zerows.core.util.Ut;
+import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.corpus.database.jooq.operation.UxJooq;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.program.fn.Fx;
 import io.zerows.extension.runtime.workflow.atom.EngineOn;
 import io.zerows.extension.runtime.workflow.atom.configuration.MetaInstance;
 import io.zerows.extension.runtime.workflow.atom.runtime.WRecord;
@@ -14,7 +15,6 @@ import io.zerows.extension.runtime.workflow.domain.tables.daos.WTodoDao;
 import io.zerows.extension.runtime.workflow.domain.tables.pojos.WTicket;
 import io.zerows.extension.runtime.workflow.domain.tables.pojos.WTodo;
 import io.zerows.extension.runtime.workflow.uca.toolkit.ULinkage;
-import io.zerows.unity.Ux;
 import jakarta.inject.Inject;
 
 import java.util.Objects;
@@ -94,12 +94,12 @@ public class TaskService implements TaskStub {
 
     private Future<WRecord> readTodo(final String key, final WRecord response) {
         return Ux.Jooq.on(WTodoDao.class).<WTodo>fetchByIdAsync(key)
-            .compose(FnZero.ifNil(response::bind, todo -> Ux.future(response.task(todo))));
+            .compose(Fx.ifNil(response::bind, todo -> Ux.future(response.task(todo))));
     }
 
     private Future<WRecord> readTicket(final String key, final WRecord response) {
         return Ux.Jooq.on(WTicketDao.class).<WTicket>fetchByIdAsync(key)
-            .compose(FnZero.ifNil(response::bind, ticket -> Ux.future(response.ticket(ticket))));
+            .compose(Fx.ifNil(response::bind, ticket -> Ux.future(response.ticket(ticket))));
     }
 
     private Future<WRecord> readChild(final WRecord response) {

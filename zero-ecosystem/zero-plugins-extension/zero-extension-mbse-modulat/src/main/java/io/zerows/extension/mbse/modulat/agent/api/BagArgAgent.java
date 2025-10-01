@@ -1,11 +1,11 @@
 package io.zerows.extension.mbse.modulat.agent.api;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.annotations.Address;
-import io.zerows.core.annotations.EndPoint;
-import io.zerows.core.annotations.Off;
-import io.zerows.core.constant.KName;
-import io.zerows.core.web.io.annotations.BodyParam;
+import io.zerows.epoch.annotations.Address;
+import io.zerows.epoch.annotations.EndPoint;
+import io.zerows.epoch.annotations.Off;
+import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.corpus.io.annotations.BodyParam;
 import io.zerows.extension.mbse.modulat.eon.Addr;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.PUT;

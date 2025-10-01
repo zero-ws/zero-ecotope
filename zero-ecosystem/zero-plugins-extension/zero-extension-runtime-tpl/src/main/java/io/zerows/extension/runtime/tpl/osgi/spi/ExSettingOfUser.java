@@ -2,11 +2,11 @@ package io.zerows.extension.runtime.tpl.osgi.spi;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.constant.KName;
+import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.corpus.Ux;
 import io.zerows.extension.runtime.skeleton.eon.em.OwnerType;
 import io.zerows.extension.runtime.skeleton.osgi.spi.business.ExSetting;
 import io.zerows.extension.runtime.tpl.domain.tables.daos.MyNotifyDao;
-import io.zerows.unity.Ux;
 
 /**
  * @author lang : 2024-04-09

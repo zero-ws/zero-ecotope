@@ -19,11 +19,11 @@ package up.god.micro.params;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.FileUpload;
-import io.zerows.core.annotations.EndPoint;
+import io.zerows.epoch.annotations.EndPoint;
 
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import io.zerows.core.web.io.annotations.StreamParam;
+import io.zerows.epoch.corpus.annotations.io.StreamParam;
 import java.io.File;
 
 @EndPoint

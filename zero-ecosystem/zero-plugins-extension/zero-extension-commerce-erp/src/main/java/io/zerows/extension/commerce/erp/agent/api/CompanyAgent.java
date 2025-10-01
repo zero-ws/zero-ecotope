@@ -1,8 +1,8 @@
 package io.zerows.extension.commerce.erp.agent.api;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.annotations.Address;
-import io.zerows.core.annotations.EndPoint;
+import io.zerows.epoch.annotations.Address;
+import io.zerows.epoch.annotations.EndPoint;
 import io.zerows.extension.commerce.erp.eon.Addr;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;

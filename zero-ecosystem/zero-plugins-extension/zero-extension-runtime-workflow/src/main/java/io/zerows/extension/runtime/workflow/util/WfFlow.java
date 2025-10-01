@@ -2,8 +2,8 @@ package io.zerows.extension.runtime.workflow.util;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.constant.KName;
-import io.zerows.core.util.Ut;
+import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.program.Ut;
 import io.zerows.extension.runtime.workflow.bootstrap.WfPin;
 import io.zerows.extension.runtime.workflow.eon.em.PassWay;
 import org.camunda.bpm.engine.RepositoryService;

@@ -2,15 +2,15 @@ package io.zerows.extension.runtime.crud.uca.desk;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.constant.KName;
-import io.zerows.core.constant.em.EmPRI;
-import io.zerows.core.util.Ut;
-import io.zerows.core.web.model.commune.Envelop;
+import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.corpus.domain.atom.commune.Vis;
+import io.zerows.epoch.corpus.domain.atom.specification.KJoin;
+import io.zerows.epoch.corpus.domain.atom.specification.KPoint;
+import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.enums.EmPRI;
+import io.zerows.epoch.program.Ut;
 import io.zerows.extension.runtime.crud.eon.em.ApiSpec;
-import io.zerows.module.domain.atom.commune.Vis;
-import io.zerows.module.domain.atom.specification.KJoin;
-import io.zerows.module.domain.atom.specification.KPoint;
-import io.zerows.unity.Ux;
 
 import java.util.Objects;
 

@@ -4,8 +4,8 @@ import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.core.web.model.commune.Envelop;
-import io.zerows.core.web.model.store.OCacheUri;
+import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.corpus.model.store.OCacheUri;
 import io.zerows.extension.mbse.action.atom.JtUri;
 import io.zerows.extension.mbse.action.osgi.spi.jet.JtIngest;
 

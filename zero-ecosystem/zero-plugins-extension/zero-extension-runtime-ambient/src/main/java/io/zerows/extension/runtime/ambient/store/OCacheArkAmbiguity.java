@@ -1,7 +1,7 @@
 package io.zerows.extension.runtime.ambient.store;
 
-import io.zerows.module.metadata.atom.MultiKeyMap;
-import io.zerows.module.metadata.zdk.AbstractAmbiguity;
+import io.zerows.epoch.corpus.metadata.atom.MultiKeyMap;
+import io.zerows.epoch.corpus.metadata.zdk.AbstractAmbiguity;
 import io.zerows.specification.access.app.HApp;
 import io.zerows.specification.access.app.HArk;
 import org.osgi.framework.Bundle;

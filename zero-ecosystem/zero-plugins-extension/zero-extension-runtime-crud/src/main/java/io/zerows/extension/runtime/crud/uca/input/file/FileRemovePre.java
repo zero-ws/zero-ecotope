@@ -3,11 +3,11 @@ package io.zerows.extension.runtime.crud.uca.input.file;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.fn.FnZero;
-import io.zerows.core.util.Ut;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.program.fn.Fx;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 import io.zerows.extension.runtime.skeleton.osgi.spi.feature.Attachment;
-import io.zerows.unity.Ux;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +34,6 @@ class FileRemovePre extends FileAction {
     public Future<JsonArray> inAAsync(final JsonArray data, final IxMod in) {
         final List<Future<JsonObject>> futures = new ArrayList<>();
         Ut.itJArray(data).forEach(json -> futures.add(this.inJAsync(json, in)));
-        return FnZero.combineA(futures);
+        return Fx.combineA(futures);
     }
 }

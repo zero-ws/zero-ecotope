@@ -4,18 +4,18 @@ import io.vertx.core.Future;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.enums.typed.ChangeFlag;
-import io.zerows.core.constant.KName;
-import io.zerows.core.database.jooq.operation.UxJooq;
-import io.zerows.core.fn.FnZero;
+import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.common.log.Annal;
-import io.zerows.core.util.Ut;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.corpus.database.jooq.operation.UxJooq;
+import io.zerows.epoch.enums.typed.ChangeFlag;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.program.fn.Fx;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XAttachmentDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XAttachment;
 import io.zerows.extension.runtime.ambient.util.At;
 import io.zerows.extension.runtime.skeleton.osgi.spi.business.ExIo;
 import io.zerows.extension.runtime.skeleton.osgi.spi.feature.Attachment;
-import io.zerows.unity.Ux;
 
 import java.time.Instant;
 import java.util.List;
@@ -117,7 +117,7 @@ public class ExAttachment implements Attachment {
         });
         final List<XAttachment> attachments = Ux.fromJson(attachmentJ, XAttachment.class);
         return Ux.Jooq.on(XAttachmentDao.class).updateAsyncJ(attachments)
-            .compose(FnZero.ofJArray(KName.METADATA));
+            .compose(Fx.ofJArray(KName.METADATA));
     }
 
     @Override
@@ -207,7 +207,7 @@ public class ExAttachment implements Attachment {
                 }
             });
             return Ux.future(files);
-        })).compose(FnZero.ofJArray(KName.METADATA)).compose(attachments -> {
+        })).compose(Fx.ofJArray(KName.METADATA)).compose(attachments -> {
             Ut.itJArray(attachments).forEach(file -> file.put(KName.DIRECTORY, Boolean.FALSE));
             return Ux.future(attachments);
         });

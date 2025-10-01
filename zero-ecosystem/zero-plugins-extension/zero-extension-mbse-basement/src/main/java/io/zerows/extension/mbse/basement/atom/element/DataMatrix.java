@@ -1,7 +1,7 @@
 package io.zerows.extension.mbse.basement.atom.element;
 
 import io.vertx.codegen.annotations.Fluent;
-import io.zerows.core.util.Ut;
+import io.zerows.epoch.program.Ut;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MAttribute;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MField;
 import io.zerows.extension.mbse.basement.eon.AoMsg;

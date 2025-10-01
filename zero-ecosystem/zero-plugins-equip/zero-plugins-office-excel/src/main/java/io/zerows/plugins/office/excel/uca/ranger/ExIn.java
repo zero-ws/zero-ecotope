@@ -1,7 +1,7 @@
 package io.zerows.plugins.office.excel.uca.ranger;
 
-import io.zerows.core.util.Ut;
-import io.zerows.module.metadata.uca.logging.OLog;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.corpus.metadata.uca.logging.OLog;
 import io.zerows.plugins.office.excel.atom.ExTable;
 import io.zerows.specification.modeling.metadata.HMetaAtom;
 import org.apache.poi.ss.usermodel.Cell;

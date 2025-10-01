@@ -3,15 +3,15 @@ package io.zerows.extension.runtime.skeleton.refine;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.constant.VValue;
-import io.zerows.core.constant.KName;
-import io.zerows.core.fn.FnZero;
+import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.common.log.Annal;
-import io.zerows.core.util.Ut;
-import io.zerows.module.domain.atom.commune.dynamic.Apt;
+import io.zerows.epoch.constant.VValue;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.corpus.domain.atom.commune.dynamic.Apt;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.program.fn.Fx;
 import io.zerows.specification.modeling.metadata.HMetaAtom;
 import io.zerows.specification.modeling.metadata.HMetaField;
-import io.zerows.unity.Ux;
 
 import java.time.Instant;
 import java.util.*;
@@ -69,9 +69,9 @@ class KeCompare {
                 String.valueOf(updated.size()));
 
             final List<Future<JsonArray>> futures = new ArrayList<>();
-            futures.add(FnZero.ofJArray(iFun).apply(inserted));
-            futures.add(FnZero.ofJArray(uFun).apply(updated));
-            return FnZero.compressA(futures);
+            futures.add(Fx.ofJArray(iFun).apply(inserted));
+            futures.add(Fx.ofJArray(uFun).apply(updated));
+            return Fx.compressA(futures);
         };
     }
 

@@ -3,8 +3,9 @@ package io.zerows.extension.commerce.finance.agent.service.end;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.constant.KName;
-import io.zerows.core.util.Ut;
+import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.program.Ut;
 import io.zerows.extension.commerce.finance.domain.tables.daos.FDebtDao;
 import io.zerows.extension.commerce.finance.domain.tables.daos.FSettlementDao;
 import io.zerows.extension.commerce.finance.domain.tables.daos.FSettlementItemDao;
@@ -14,7 +15,6 @@ import io.zerows.extension.commerce.finance.domain.tables.pojos.FSettlementItem;
 import io.zerows.extension.commerce.finance.eon.em.EmDebt;
 import io.zerows.extension.commerce.finance.eon.em.EmTran;
 import io.zerows.extension.commerce.finance.util.Fm;
-import io.zerows.unity.Ux;
 import jakarta.inject.Inject;
 
 import java.util.ArrayList;
@@ -175,8 +175,8 @@ public class SettleRService implements SettleRStub {
                     // 计算 PENDING / DONE / PART
                     final int size = groupItems.size();
                     final ArrayList<String> finishedSet = new ArrayList<>();
-                    for (FSettlementItem groupItem : groupItems) {
-                        String finishedId = groupItem.getFinishedId();
+                    for (final FSettlementItem groupItem : groupItems) {
+                        final String finishedId = groupItem.getFinishedId();
                         if (Ut.isNotNull(finishedId)) {
                             finishedSet.add(finishedId);
                         }

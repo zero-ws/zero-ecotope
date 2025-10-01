@@ -10,7 +10,7 @@ import io.zerows.extension.mbse.action.bootstrap.JtPin;
 import io.zerows.extension.mbse.action.eon.em.WorkerType;
 import io.zerows.extension.mbse.action.uca.monitor.JtMonitor;
 import io.zerows.extension.mbse.action.util.Jt;
-import io.zerows.module.metadata.uca.environment.DevOps;
+import io.zerows.epoch.corpus.metadata.uca.environment.DevOps;
 
 import java.util.Objects;
 import java.util.Set;

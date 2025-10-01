@@ -28,7 +28,7 @@ Demo projects:
 ```java
 package up.god.micro.validation;
 
-import io.zerows.core.annotations.EndPoint;
+import io.zerows.epoch.annotations.EndPoint;
 
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;

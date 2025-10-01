@@ -53,8 +53,8 @@ Once you have finished above three configuration, the shared data will be enable
 package up.god.micro;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.annotations.EndPoint;
-import io.zerows.core.annotations.Infusion;
+import io.zerows.epoch.annotations.EndPoint;
+import io.zerows.epoch.annotations.Infusion;
 import io.vertx.mod.plugin.shared.SharedClient;
 
 import javax.ws.rs.GET;

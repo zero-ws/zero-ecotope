@@ -2,13 +2,13 @@ package io.zerows.extension.commerce.rbac.agent.api;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.annotations.Address;
-import io.zerows.core.annotations.Queue;
+import io.zerows.epoch.annotations.Address;
+import io.zerows.epoch.annotations.Queue;
+import io.zerows.epoch.corpus.Ux;
 import io.zerows.extension.commerce.rbac.agent.service.business.ResourceStub;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.SActionDao;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.SResourceDao;
 import io.zerows.extension.commerce.rbac.eon.Addr;
-import io.zerows.unity.Ux;
 import jakarta.inject.Inject;
 
 import static io.zerows.extension.commerce.rbac.util.Sc.LOG;

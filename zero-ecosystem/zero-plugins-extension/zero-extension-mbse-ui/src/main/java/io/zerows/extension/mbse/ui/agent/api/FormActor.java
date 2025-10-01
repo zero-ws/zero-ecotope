@@ -3,14 +3,14 @@ package io.zerows.extension.mbse.ui.agent.api;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.annotations.Address;
-import io.zerows.core.annotations.Queue;
+import io.zerows.epoch.annotations.Address;
+import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.common.log.Annal;
+import io.zerows.epoch.corpus.Ux;
 import io.zerows.extension.mbse.ui.agent.service.FieldStub;
 import io.zerows.extension.mbse.ui.agent.service.FormStub;
 import io.zerows.extension.mbse.ui.agent.service.OptionStub;
 import io.zerows.extension.mbse.ui.eon.Addr;
-import io.zerows.unity.Ux;
 import jakarta.inject.Inject;
 
 import static io.zerows.extension.mbse.ui.util.Ui.LOG;

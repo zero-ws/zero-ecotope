@@ -3,9 +3,9 @@ package io.zerows.extension.runtime.report.uca.combiner;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.corpus.Ux;
 import io.zerows.extension.runtime.report.atom.RGeneration;
 import io.zerows.extension.runtime.report.domain.tables.pojos.KpReportInstance;
-import io.zerows.unity.Ux;
 
 /**
  * @author lang : 2024-11-25
@@ -63,9 +63,9 @@ class StepGeneratorFacade extends AbstractStepGenerator {
              *     reportContent
              */
             .compose(processed -> this.generatorData.build(processed, params, sourceData))
-             /*
-              * 在最底部加上合计
-              */
-            .compose(processed->this.generatorTotal.build(processed,params,sourceData));
+            /*
+             * 在最底部加上合计
+             */
+            .compose(processed -> this.generatorTotal.build(processed, params, sourceData));
     }
 }

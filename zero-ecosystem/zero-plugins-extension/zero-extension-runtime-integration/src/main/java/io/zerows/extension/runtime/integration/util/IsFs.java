@@ -3,14 +3,14 @@ package io.zerows.extension.runtime.integration.util;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.constant.KName;
-import io.zerows.core.fn.FnZero;
-import io.zerows.core.util.Ut;
+import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.program.fn.Fx;
 import io.zerows.extension.runtime.integration.domain.tables.daos.IDirectoryDao;
 import io.zerows.extension.runtime.integration.domain.tables.pojos.IDirectory;
 import io.zerows.extension.runtime.integration.uca.command.Fs;
 import io.zerows.extension.runtime.integration.uca.command.FsDefault;
-import io.zerows.unity.Ux;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -43,7 +43,7 @@ class IsFs {
         final ConcurrentMap<Fs, JsonArray> componentMap = fsGroup(data);
         final List<Future<JsonArray>> futures = new ArrayList<>();
         componentMap.forEach((fs, dataEach) -> futures.add(fsRunner.apply(fs, dataEach.copy())));
-        return FnZero.compressA(futures);
+        return Fx.compressA(futures);
     }
 
     /*

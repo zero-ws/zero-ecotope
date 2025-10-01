@@ -1,7 +1,7 @@
 package io.zerows.launcher.backbone.hunt;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.annotations.EndPoint;
+import io.zerows.epoch.annotations.EndPoint;
 import jakarta.ws.rs.*;
 
 import java.math.BigDecimal;

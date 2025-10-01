@@ -1,7 +1,7 @@
 package io.zerows.extension.mbse.basement.uca.apply;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.constant.KName;
+import io.zerows.epoch.based.constant.KName;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MModel;
 
 import static io.zerows.extension.mbse.basement.util.Ao.LOG;

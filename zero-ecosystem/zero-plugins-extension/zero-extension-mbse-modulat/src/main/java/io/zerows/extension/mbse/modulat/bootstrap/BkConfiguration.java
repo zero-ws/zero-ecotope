@@ -2,12 +2,12 @@ package io.zerows.extension.mbse.modulat.bootstrap;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.constant.configure.YmlCore;
-import io.zerows.core.util.Ut;
-import io.zerows.core.web.model.extension.HExtension;
+import io.zerows.epoch.based.configure.YmlCore;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.corpus.model.extension.HExtension;
 import io.zerows.extension.mbse.modulat.eon.BkConstant;
-import io.zerows.module.metadata.atom.configuration.MDConfiguration;
-import io.zerows.module.metadata.store.OZeroStore;
+import io.zerows.epoch.corpus.metadata.atom.configuration.MDConfiguration;
+import io.zerows.epoch.corpus.metadata.store.OZeroStore;
 
 import java.util.HashSet;
 import java.util.Set;

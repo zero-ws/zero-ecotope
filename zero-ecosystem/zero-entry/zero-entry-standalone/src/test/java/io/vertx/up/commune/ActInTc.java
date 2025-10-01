@@ -1,9 +1,9 @@
 package io.vertx.up.commune;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.testing.EpicBase;
-import io.zerows.core.web.mbse.atom.runner.ActIn;
-import io.zerows.core.web.model.commune.Envelop;
+import io.zerows.epoch.corpus.mbse.atom.runner.ActIn;
+import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.testsuite.EpicBase;
 import org.junit.Test;
 
 public class ActInTc extends EpicBase {

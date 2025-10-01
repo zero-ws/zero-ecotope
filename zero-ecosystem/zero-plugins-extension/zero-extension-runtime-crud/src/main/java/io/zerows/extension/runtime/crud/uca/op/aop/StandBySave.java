@@ -3,19 +3,19 @@ package io.zerows.extension.runtime.crud.uca.op.aop;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.database.jooq.operation.UxJooq;
-import io.zerows.core.util.Ut;
-import io.zerows.core.web.mbse.atom.specification.KModule;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.corpus.database.jooq.operation.UxJooq;
+import io.zerows.epoch.corpus.domain.atom.specification.KJoin;
+import io.zerows.epoch.corpus.domain.atom.specification.KPoint;
+import io.zerows.epoch.corpus.domain.uca.destine.Conflate;
+import io.zerows.epoch.corpus.domain.uca.destine.Hymn;
+import io.zerows.epoch.corpus.mbse.atom.specification.KModule;
+import io.zerows.epoch.program.Ut;
 import io.zerows.extension.runtime.crud.bootstrap.IxPin;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 import io.zerows.extension.runtime.crud.uca.input.Pre;
 import io.zerows.extension.runtime.crud.uca.op.Agonic;
 import io.zerows.extension.runtime.crud.util.Ix;
-import io.zerows.module.domain.atom.specification.KJoin;
-import io.zerows.module.domain.atom.specification.KPoint;
-import io.zerows.module.domain.uca.destine.Conflate;
-import io.zerows.module.domain.uca.destine.Hymn;
-import io.zerows.unity.Ux;
 
 import java.util.Objects;
 

@@ -4,19 +4,19 @@ import io.vertx.core.Future;
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.common.shared.datamation.KDictConfig;
 import io.zerows.epoch.common.shared.datamation.KDictSource;
 import io.zerows.epoch.common.shared.datamation.KDictUse;
 import io.zerows.epoch.common.shared.datamation.KFabric;
-import io.zerows.core.constant.KName;
-import io.zerows.core.fn.FnZero;
-import io.zerows.core.web.mbse.atom.specification.KModule;
-import io.zerows.core.web.model.commune.Envelop;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.corpus.cloud.zdk.spi.Dictionary;
+import io.zerows.epoch.corpus.domain.atom.specification.KTransform;
+import io.zerows.epoch.corpus.mbse.atom.specification.KModule;
+import io.zerows.epoch.corpus.metadata.osgi.channel.Pocket;
+import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.program.fn.Fx;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
-import io.zerows.module.cloud.zdk.spi.Dictionary;
-import io.zerows.module.domain.atom.specification.KTransform;
-import io.zerows.module.metadata.osgi.channel.Pocket;
-import io.zerows.unity.Ux;
 
 import java.util.List;
 import java.util.Objects;
@@ -38,7 +38,7 @@ class FabricTran implements Tran {
     @Override
     public Future<JsonObject> inJAsync(final JsonObject data, final IxMod in) {
         if (in.canTransform()) {
-            return this.fabric(in).compose(FnZero.ifNil(() -> data, fabric ->
+            return this.fabric(in).compose(Fx.ifNil(() -> data, fabric ->
                 this.isFrom ? fabric.inFrom(data) : fabric.inTo(data)));
         } else {
             return Ux.future(data);
@@ -48,7 +48,7 @@ class FabricTran implements Tran {
     @Override
     public Future<JsonArray> inAAsync(final JsonArray data, final IxMod in) {
         if (in.canTransform()) {
-            return this.fabric(in).compose(FnZero.ifNil(() -> data, fabric ->
+            return this.fabric(in).compose(Fx.ifNil(() -> data, fabric ->
                 this.isFrom ? fabric.inFrom(data) : fabric.inTo(data)));
         } else {
             return Ux.future(data);

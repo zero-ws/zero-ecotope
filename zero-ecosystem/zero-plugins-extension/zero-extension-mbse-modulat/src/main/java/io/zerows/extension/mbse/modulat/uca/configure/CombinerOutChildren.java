@@ -3,9 +3,9 @@ package io.zerows.extension.mbse.modulat.uca.configure;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.constant.KName;
+import io.zerows.epoch.based.constant.KName;
 import io.zerows.extension.mbse.modulat.domain.tables.pojos.BBag;
-import io.zerows.unity.Ux;
+import io.zerows.epoch.corpus.Ux;
 
 import java.util.Collection;
 import java.util.Objects;

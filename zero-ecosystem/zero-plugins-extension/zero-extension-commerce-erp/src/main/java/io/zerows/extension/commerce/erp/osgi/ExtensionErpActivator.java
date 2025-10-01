@@ -1,8 +1,8 @@
 package io.zerows.extension.commerce.erp.osgi;
 
-import io.zerows.core.util.Ut;
-import io.zerows.module.metadata.eon.OMessage;
-import io.zerows.module.metadata.zdk.service.ServiceConnector;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.corpus.metadata.eon.OMessage;
+import io.zerows.epoch.corpus.metadata.zdk.service.ServiceConnector;
 import org.apache.felix.dm.DependencyActivatorBase;
 import org.apache.felix.dm.DependencyManager;
 import org.osgi.annotation.bundle.Header;

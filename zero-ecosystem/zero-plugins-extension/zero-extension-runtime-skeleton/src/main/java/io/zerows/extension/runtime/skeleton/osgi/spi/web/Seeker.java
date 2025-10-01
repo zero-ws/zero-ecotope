@@ -2,8 +2,8 @@ package io.zerows.extension.runtime.skeleton.osgi.spi.web;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.constant.KName;
-import io.zerows.core.database.jooq.operation.UxJooq;
+import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.corpus.database.jooq.operation.UxJooq;
 
 /*
  * View seeking interface

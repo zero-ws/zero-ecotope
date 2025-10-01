@@ -2,7 +2,7 @@ package io.zerows.plugins.store.elasticsearch;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.constant.configure.YmlCore;
+import io.zerows.epoch.based.configure.YmlCore;
 import org.elasticsearch.ElasticsearchException;
 import org.elasticsearch.action.admin.indices.alias.Alias;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;

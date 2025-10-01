@@ -9,10 +9,10 @@ import io.vertx.ext.stomp.Frame;
 import io.vertx.ext.stomp.ServerFrame;
 import io.vertx.ext.stomp.StompServerConnection;
 import io.vertx.ext.stomp.StompServerHandler;
-import io.zerows.core.constant.KName;
-import io.zerows.core.util.Ut;
-import io.zerows.core.web.security.uca.bridge.Bolt;
-import io.zerows.module.security.zdk.Lee;
+import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.corpus.web.security.uca.bridge.Bolt;
+import io.zerows.epoch.corpus.security.zdk.Lee;
 import io.zerows.plugins.websocket.stomp.socket.ServerWsHandler;
 import jakarta.ws.rs.core.HttpHeaders;
 

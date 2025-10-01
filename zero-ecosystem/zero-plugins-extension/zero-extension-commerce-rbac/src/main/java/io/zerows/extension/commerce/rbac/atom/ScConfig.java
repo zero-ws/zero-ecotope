@@ -4,8 +4,8 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.util.Ut;
-import io.zerows.core.web.mbse.atom.specification.KQr;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.corpus.mbse.atom.specification.KQr;
 import io.zerows.epoch.integrated.jackson.databind.JsonObjectDeserializer;
 import io.zerows.epoch.integrated.jackson.databind.JsonObjectSerializer;
 

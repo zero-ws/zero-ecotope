@@ -3,13 +3,15 @@ package io.zerows.extension.commerce.rbac.uca.acl.relation;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.common.shared.program.KRef;
-import io.zerows.core.constant.KName;
-import io.zerows.core.database.jooq.operation.UxJoin;
-import io.zerows.core.database.jooq.operation.UxJooq;
-import io.zerows.core.fn.FnZero;
-import io.zerows.core.util.Ut;
-import io.zerows.core.web.mbse.atom.specification.KQr;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.corpus.database.jooq.operation.UxJoin;
+import io.zerows.epoch.corpus.database.jooq.operation.UxJooq;
+import io.zerows.epoch.corpus.domain.atom.typed.UObject;
+import io.zerows.epoch.corpus.mbse.atom.specification.KQr;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.program.fn.Fx;
 import io.zerows.extension.commerce.rbac.atom.ScConfig;
 import io.zerows.extension.commerce.rbac.bootstrap.ScPin;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.SUserDao;
@@ -18,8 +20,6 @@ import io.zerows.extension.commerce.rbac.eon.AuthKey;
 import io.zerows.extension.commerce.rbac.eon.AuthMsg;
 import io.zerows.extension.runtime.skeleton.osgi.spi.business.ExOwner;
 import io.zerows.extension.runtime.skeleton.secure.Twine;
-import io.zerows.module.domain.atom.typed.UObject;
-import io.zerows.unity.Ux;
 
 import java.util.Collection;
 import java.util.List;
@@ -173,7 +173,7 @@ class TwineExtension implements Twine<SUser> {
             final KQr qr = CONFIG.category(modelId);
             futureMap.put(modelId, this.runBatch(groupList, qr));
         });
-        return FnZero.combineM(futureMap);
+        return Fx.combineM(futureMap);
     }
 
     private Future<JsonArray> runBatch(final List<SUser> users, final KQr qr) {

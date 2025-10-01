@@ -2,17 +2,17 @@ package io.zerows.extension.mbse.action.agent.service;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.constant.KName;
-import io.zerows.core.fn.FnZero;
+import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.common.log.Annal;
 import io.zerows.epoch.common.uca.qr.syntax.Ir;
-import io.zerows.core.util.Ut;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.program.fn.Fx;
 import io.zerows.extension.mbse.action.domain.tables.daos.IJobDao;
 import io.zerows.extension.mbse.action.domain.tables.daos.IServiceDao;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IJob;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IService;
 import io.zerows.extension.mbse.action.util.Jt;
-import io.zerows.unity.Ux;
 import jakarta.inject.Inject;
 
 import java.util.List;
@@ -78,7 +78,7 @@ public class JobService implements JobStub {
              * 1) Supplier here for `JsonObject` generated
              * 2) Mission conversation here to JsonObject directly
              */
-            .compose(FnZero.ofJObject(job -> JobKit.fetchMission(Jt.jobCode(job))));
+            .compose(Fx.ofJObject(job -> JobKit.fetchMission(Jt.jobCode(job))));
     }
 
     @Override

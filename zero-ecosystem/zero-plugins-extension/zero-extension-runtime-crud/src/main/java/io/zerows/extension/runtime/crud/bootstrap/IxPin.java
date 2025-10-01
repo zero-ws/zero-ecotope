@@ -1,12 +1,12 @@
 package io.zerows.extension.runtime.crud.bootstrap;
 
 import io.vertx.core.Vertx;
-import io.zerows.core.database.jooq.operation.UxJoin;
-import io.zerows.core.database.jooq.operation.UxJooq;
-import io.zerows.core.web.mbse.atom.specification.KModule;
-import io.zerows.core.web.mbse.uca.mixture.HOne;
-import io.zerows.core.web.model.atom.Rule;
-import io.zerows.core.web.model.commune.Envelop;
+import io.zerows.epoch.corpus.database.jooq.operation.UxJoin;
+import io.zerows.epoch.corpus.database.jooq.operation.UxJooq;
+import io.zerows.epoch.corpus.mbse.atom.specification.KModule;
+import io.zerows.epoch.corpus.mbse.uca.mixture.HOne;
+import io.zerows.epoch.corpus.model.atom.Rule;
+import io.zerows.epoch.corpus.model.commune.Envelop;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
 import io.zerows.specification.access.app.HAmbient;

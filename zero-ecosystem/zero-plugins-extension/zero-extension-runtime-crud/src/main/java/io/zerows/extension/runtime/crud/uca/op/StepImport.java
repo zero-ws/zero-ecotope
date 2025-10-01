@@ -2,16 +2,16 @@ package io.zerows.extension.runtime.crud.uca.op;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.corpus.database.jooq.operation.UxJooq;
+import io.zerows.epoch.corpus.domain.atom.specification.KField;
 import io.zerows.epoch.enums.typed.ChangeFlag;
-import io.zerows.core.database.jooq.operation.UxJooq;
-import io.zerows.core.fn.FnZero;
+import io.zerows.epoch.program.fn.Fx;
 import io.zerows.extension.runtime.crud.bootstrap.IxPin;
 import io.zerows.extension.runtime.crud.eon.em.QrType;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 import io.zerows.extension.runtime.crud.uca.input.Pre;
 import io.zerows.extension.runtime.crud.util.Ix;
-import io.zerows.module.domain.atom.specification.KField;
-import io.zerows.unity.Ux;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +53,7 @@ class StepImport implements Agonic {
             // 「AOP」Internal Call to Trigger
             combine.add(Agonic.write(ChangeFlag.UPDATE).runAAsync(updated, in));
         }
-        return FnZero.compressA(combine);
+        return Fx.compressA(combine);
     }
 
     private Future<JsonArray> runCompress(final JsonArray source, final IxMod in) {

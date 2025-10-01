@@ -31,9 +31,9 @@ Then you can create your own endpoint for `JsonUser`
 ```java
 package up.god.micro.params;
 
-import io.zerows.core.annotations.EndPoint;
+import io.zerows.epoch.annotations.EndPoint;
 
-import io.zerows.core.web.io.annotations.BodyParam;
+import io.zerows.epoch.corpus.annotations.io.BodyParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import java.util.ArrayList;

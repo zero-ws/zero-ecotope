@@ -1,8 +1,8 @@
 package io.zerows.extension.mbse.action.osgi.spi.jet;
 
 import io.vertx.core.Future;
-import io.zerows.core.web.model.commune.Envelop;
-import io.zerows.core.web.model.zdk.Commercial;
+import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.corpus.model.zdk.Commercial;
 
 /*
  * Consumer interface

@@ -2,11 +2,11 @@ package io.zerows.extension.commerce.rbac.agent.service.login.jwt;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.corpus.Ux;
 import io.zerows.extension.commerce.rbac.atom.ScToken;
 import io.zerows.extension.commerce.rbac.uca.logged.ScUser;
 import io.zerows.extension.commerce.rbac.uca.timer.ClockFactory;
 import io.zerows.extension.commerce.rbac.uca.timer.ScClock;
-import io.zerows.unity.Ux;
 
 /*
  * Jwt WebToken Service for:

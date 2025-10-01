@@ -2,11 +2,11 @@ package io.zerows.extension.runtime.ambient.agent.api.application;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.annotations.Address;
-import io.zerows.core.annotations.Queue;
-import io.zerows.core.database.atom.Database;
-import io.zerows.core.fn.FnZero;
-import io.zerows.core.util.Ut;
+import io.zerows.epoch.annotations.Address;
+import io.zerows.epoch.annotations.Queue;
+import io.zerows.epoch.corpus.database.atom.Database;
+import io.zerows.epoch.program.fn.Fx;
+import io.zerows.epoch.program.Ut;
 import io.zerows.extension.runtime.ambient.agent.service.application.InitStub;
 import io.zerows.extension.runtime.ambient.eon.Addr;
 import jakarta.inject.Inject;
@@ -30,6 +30,6 @@ public class InitActor {
     @Address(Addr.Init.CONNECT)
     public Future<JsonObject> connect(final JsonObject data) {
         final Database database = Ut.deserialize(data, Database.class);
-        return FnZero.ifBool(database.test());
+        return Fx.ifBool(database.test());
     }
 }

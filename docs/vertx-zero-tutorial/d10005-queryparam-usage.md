@@ -19,7 +19,7 @@ Here are example for `@QueryParam` annotation in zero system:
 ```java
 package up.god.micro.params;
 
-import io.zerows.core.annotations.EndPoint;
+import io.zerows.epoch.annotations.EndPoint;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;

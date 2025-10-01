@@ -2,7 +2,7 @@ package io.zerows.extension.mbse.basement.uca.file.excel;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.constant.KName;
+import io.zerows.epoch.based.constant.KName;
 import io.zerows.plugins.office.excel.atom.ExRecord;
 
 import java.util.Objects;

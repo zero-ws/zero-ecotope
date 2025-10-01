@@ -33,7 +33,7 @@ Demo projects:
 ```java
 package up.god.micro.request;
 
-import io.zerows.core.annotations.EndPoint;
+import io.zerows.epoch.annotations.EndPoint;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -52,7 +52,7 @@ public class SyncModeActor {
 
 ### Programming Rules
 
-1. The sender class should be annotated with `io.zerows.core.annotations.EndPoint`.
+1. The sender class should be annotated with `io.zerows.epoch.annotations.EndPoint`.
 2. Other annotations all belong to JSR311, you should set one http method annotation to java method.
 3. The java method return type must not be `void`.
 4. Do not use `@Address` annotation, this mode should disable event bus.

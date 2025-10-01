@@ -1,0 +1,51 @@
+package io.zerows.epoch.corpus.model.zdk;
+
+import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.common.shared.datamation.KMap;
+import io.zerows.epoch.common.shared.normalize.KIdentity;
+import io.zerows.specification.modeling.HRule;
+
+/*
+ * Uniform interface for Job/Component definition
+ * AbstractJob / AbstractComponent
+ *
+ * 「Tree Structure」
+ * Component:
+ * |- Adaptor: AdaptorComponent ( database )
+ * ---- | - Director: AbstractDirector ( database, mission )
+ * ---- | - Connector: AbstractConnector ( database, integration )
+ * -------- | - Actor: AbstractActor ( database, integration, mission )
+ * |- Job: AbstractJob ( database )
+ * ---- | - AbstractIncome
+ * ---- | - AbstractOutcome
+ */
+public interface Service {
+
+    /*
+     * `serviceConfig` ( SERVICE_CONFIG ) of I_SERVICE
+     */
+    JsonObject options();
+
+    /*
+     * `identifier`
+     * `identifierComponent`
+     * It's for Job / Component here
+     * 1) Get identifier directly
+     * 2) Check whether there exist `identifierComponent` to determine the final
+     * used `identifier` instead of static
+     */
+    KIdentity identity();
+
+    /*
+     * `mappingConfig`
+     * `mappingMode`
+     * `mappingComponent` of I_SERVICE
+     * It's also for Job / Component here
+     */
+    KMap mapping();
+
+    /*
+     * `rule`
+     */
+    HRule rule();
+}

@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS I_SERVICE
      * Component：只可见 Record，生成 ActOut
      *
      * 构造最终对象：io.modello.argument.app.KIntegrationn
-     * 构造最终对象：io.zerows.core.database.atom.Database
+     * 构造最终对象：io.zerows.epoch.corpus.atom.database.Database
      */
     `CONFIG_INTEGRATION`   MEDIUMTEXT COMMENT '「configIntegration」- 集成配置信息，第三方专用',
     `CONFIG_DATABASE`      MEDIUMTEXT COMMENT '「configDatabase」- 数据库配置，当前通道访问的Database',

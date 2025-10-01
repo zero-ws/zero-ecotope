@@ -1,7 +1,7 @@
 package io.vertx.quiz.example;
 
-import io.zerows.core.annotations.EndPoint;
-import io.zerows.core.annotations.Up;
+import io.zerows.epoch.annotations.EndPoint;
+import io.zerows.epoch.annotations.Up;
 
 @Up
 @EndPoint

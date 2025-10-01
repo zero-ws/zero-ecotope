@@ -2,12 +2,15 @@ package io.zerows.extension.runtime.ambient.osgi.spi.feature;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.common.shared.program.KRef;
-import io.zerows.core.constant.KName;
-import io.zerows.core.fn.FnZero;
-import io.zerows.epoch.spi.modeler.Indent;
 import io.zerows.epoch.common.uca.qr.syntax.Ir;
-import io.zerows.core.util.Ut;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.corpus.feature.toolkit.expression.wffs.Formula;
+import io.zerows.epoch.corpus.feature.toolkit.expression.wffs.Regulation;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.program.fn.Fx;
+import io.zerows.epoch.spi.modeler.Indent;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XActivityRuleDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XActivityRule;
 import io.zerows.extension.runtime.ambient.eon.em.TubeType;
@@ -15,9 +18,6 @@ import io.zerows.extension.runtime.ambient.exception._80305Exception500IndentMis
 import io.zerows.extension.runtime.ambient.uca.darkly.Tube;
 import io.zerows.extension.runtime.skeleton.osgi.spi.feature.Valve;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
-import io.zerows.module.feature.toolkit.expression.wffs.Formula;
-import io.zerows.module.feature.toolkit.expression.wffs.Regulation;
-import io.zerows.unity.Ux;
 
 import java.util.Comparator;
 import java.util.List;
@@ -126,7 +126,7 @@ public class ValueRule implements Valve {
         final XActivityRule rule = ruleList.iterator().next();
         serialC.forEach((code, size) ->
             serialQ.put(code, Ux.channel(Indent.class, ConcurrentLinkedQueue::new, stub -> stub.indent(code, rule.getSigma(), size))));
-        return FnZero.combineM(serialQ).compose(Ux::future);
+        return Fx.combineM(serialQ).compose(Ux::future);
     }
 
     private String ruleIndent(final XActivityRule rule) {

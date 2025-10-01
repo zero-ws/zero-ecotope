@@ -3,12 +3,13 @@ package io.zerows.extension.mbse.basement.osgi.spi.ambient;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.constant.VString;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.corpus.database.jooq.operation.UxJooq;
 import io.zerows.epoch.enums.typed.ChangeFlag;
-import io.zerows.core.constant.KName;
-import io.zerows.core.database.jooq.operation.UxJooq;
-import io.zerows.core.fn.FnZero;
-import io.zerows.core.util.Ut;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.program.fn.Fx;
 import io.zerows.extension.mbse.basement.atom.Model;
 import io.zerows.extension.mbse.basement.domain.tables.daos.MAttributeDao;
 import io.zerows.extension.mbse.basement.domain.tables.daos.MJoinDao;
@@ -17,7 +18,6 @@ import io.zerows.extension.mbse.basement.domain.tables.pojos.MAttribute;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MJoin;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MModel;
 import io.zerows.extension.mbse.basement.util.Ao;
-import io.zerows.unity.Ux;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -43,7 +43,7 @@ class ModelRefine implements AoRefine {
             // 1. 更新某一个模型
             final List<Future<JsonObject>> futures = new ArrayList<>();
             models.stream().map(this::saveModelAsync).forEach(futures::add);
-            return FnZero.combineA(futures)
+            return Fx.combineA(futures)
                 .compose(nil -> Ux.future(appJson));
         };
     }
@@ -65,7 +65,7 @@ class ModelRefine implements AoRefine {
             criteria.put(KName.IDENTIFIER, entity.getIdentifier());
             LOG.Uca.info(this.getClass(), "3. AoRefine.model(): Model `{0}`, Upsert Criteria = `{1}`",
                 entity.getIdentifier(), criteria.encode());
-            final Future<JsonObject> execute = FnZero.compressA(futures)
+            final Future<JsonObject> execute = Fx.compressA(futures)
                 .compose(nil -> Ux.Jooq.on(MModelDao.class).upsertAsync(criteria, model.dbModel()))
                 .compose(Ux::futureJ);
             execute.onSuccess(pre::complete);

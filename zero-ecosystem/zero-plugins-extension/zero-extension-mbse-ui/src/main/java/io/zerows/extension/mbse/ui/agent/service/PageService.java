@@ -2,16 +2,16 @@ package io.zerows.extension.mbse.ui.agent.service;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.constant.KName;
-import io.zerows.core.fn.FnZero;
-import io.zerows.core.util.Ut;
-import io.zerows.core.web.cache.Rapid;
+import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.corpus.metadata.uca.environment.DevEnv;
+import io.zerows.epoch.corpus.web.cache.Rapid;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.program.fn.Fx;
 import io.zerows.extension.mbse.ui.domain.tables.daos.UiLayoutDao;
 import io.zerows.extension.mbse.ui.domain.tables.daos.UiPageDao;
 import io.zerows.extension.mbse.ui.domain.tables.pojos.UiPage;
 import io.zerows.extension.mbse.ui.eon.UiConstant;
-import io.zerows.module.metadata.uca.environment.DevEnv;
-import io.zerows.unity.Ux;
 import jakarta.inject.Inject;
 
 import java.util.Objects;
@@ -33,7 +33,7 @@ public class PageService implements PageStub {
                 /*
                  * Configuration converted to InJson
                  */
-                .compose(FnZero.ofJObject(KName.Ui.CONFIG));
+                .compose(Fx.ofJObject(KName.Ui.CONFIG));
         if (DevEnv.cacheUi()) {
             // Ui Cache Enabled
             return Rapid.<String, JsonObject>object(UiConstant.POOL_LAYOUT)
@@ -106,7 +106,7 @@ public class PageService implements PageStub {
             .compose(layout -> {
                 final JsonObject pageJson = Ux.toJson(page);
                 pageJson.put("layout", layout);
-                return FnZero.ofJObject(
+                return Fx.ofJObject(
                     KName.Ui.CONTAINER_CONFIG,
                     KName.Ui.ASSIST,
                     KName.Ui.GRID

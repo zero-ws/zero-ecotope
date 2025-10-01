@@ -2,19 +2,19 @@ package io.zerows.extension.mbse.action.uca.tunnel;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.based.constant.KWeb;
 import io.zerows.epoch.common.shared.datamation.KFabric;
 import io.zerows.epoch.common.shared.datamation.KMap;
 import io.zerows.epoch.common.shared.normalize.KIdentity;
-import io.zerows.core.constant.KWeb;
-import io.zerows.core.database.atom.Database;
-import io.zerows.core.util.Ut;
-import io.zerows.core.web.cache.Rapid;
-import io.zerows.core.web.model.commune.Envelop;
-import io.zerows.core.web.model.zdk.Commercial;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.corpus.database.atom.Database;
+import io.zerows.epoch.corpus.domain.atom.commune.XHeader;
+import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.corpus.model.zdk.Commercial;
+import io.zerows.epoch.corpus.web.cache.Rapid;
+import io.zerows.epoch.program.Ut;
 import io.zerows.extension.mbse.action.osgi.spi.jet.JtComponent;
-import io.zerows.module.domain.atom.commune.XHeader;
 import io.zerows.specification.modeling.HRule;
-import io.zerows.unity.Ux;
 
 import java.util.Objects;
 import java.util.function.Supplier;

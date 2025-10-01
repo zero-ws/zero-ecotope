@@ -2,12 +2,12 @@ package io.zerows.extension.commerce.rbac.uca.ruler;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.constant.KName;
-import io.zerows.core.fn.FnZero;
-import io.zerows.core.util.Ut;
+import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.program.fn.Fx;
+import io.zerows.epoch.program.Ut;
 import io.zerows.extension.commerce.rbac.uca.ruler.element.HAdmitCompiler;
-import io.zerows.module.security.atom.manage.KPermit;
-import io.zerows.module.security.zdk.manager.AbstractAdmit;
+import io.zerows.epoch.corpus.security.atom.manage.KPermit;
+import io.zerows.epoch.corpus.security.zdk.manager.AbstractAdmit;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
@@ -37,6 +37,6 @@ public class HSUiNorm extends AbstractAdmit {
          * 2）否则直接处理 data 节点的数据
          */
         final JsonObject output = Ut.valueJObject(config, KName.OUTPUT);
-        return compiler.ingest(qr, config).compose(data -> FnZero.ifJArray(data, output));
+        return compiler.ingest(qr, config).compose(data -> Fx.ifJArray(data, output));
     }
 }

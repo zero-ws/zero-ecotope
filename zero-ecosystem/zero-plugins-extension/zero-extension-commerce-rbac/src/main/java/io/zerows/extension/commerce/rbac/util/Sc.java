@@ -8,7 +8,7 @@ import io.vertx.ext.web.RoutingContext;
 import io.zerows.epoch.common.log.Log;
 import io.zerows.epoch.common.log.LogModule;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.*;
-import io.zerows.module.security.zdk.authority.Acl;
+import io.zerows.epoch.corpus.security.zdk.authority.Acl;
 
 import java.util.List;
 import java.util.function.Function;

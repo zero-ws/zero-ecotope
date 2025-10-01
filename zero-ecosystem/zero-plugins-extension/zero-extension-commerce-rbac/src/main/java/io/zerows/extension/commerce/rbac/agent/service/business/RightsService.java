@@ -3,20 +3,20 @@ package io.zerows.extension.commerce.rbac.agent.service.business;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.constant.VString;
-import io.zerows.epoch.enums.typed.ChangeFlag;
+import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.common.shared.program.KRef;
-import io.zerows.core.constant.KName;
-import io.zerows.core.database.jooq.operation.UxJooq;
-import io.zerows.core.fn.FnZero;
-import io.zerows.core.util.Ut;
+import io.zerows.epoch.constant.VString;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.corpus.database.jooq.operation.UxJooq;
+import io.zerows.epoch.enums.typed.ChangeFlag;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.program.fn.Fx;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.RRolePermDao;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.SPermSetDao;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.SPermissionDao;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.RRolePerm;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SPermSet;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SPermission;
-import io.zerows.unity.Ux;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -99,7 +99,7 @@ public class RightsService implements RightsStub {
              */
             combined.add(jooq.insertAsync(compared.get(ChangeFlag.ADD)));
             combined.add(jooq.updateAsync(compared.get(ChangeFlag.UPDATE)));
-            return FnZero.compressL(combined).compose(processed ->
+            return Fx.compressL(combined).compose(processed ->
                 /*
                  * Codes here for future usage
                  */
@@ -137,7 +137,7 @@ public class RightsService implements RightsStub {
             final List<SPermission> deleted = map.get(ChangeFlag.DELETE);
             futures.add(this.deletePerm(permSet, deleted));
 
-            return FnZero.compressL(futures);
+            return Fx.compressL(futures);
         }).compose(Ux::futureA);
     }
 

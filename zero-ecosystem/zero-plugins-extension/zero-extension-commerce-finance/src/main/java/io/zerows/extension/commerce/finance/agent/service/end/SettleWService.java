@@ -4,16 +4,16 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
+import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.common.shared.program.KRef;
-import io.zerows.core.constant.KName;
-import io.zerows.core.util.Ut;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.program.Ut;
 import io.zerows.extension.commerce.finance.domain.tables.daos.FSettlementItemDao;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FSettlement;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FSettlementItem;
 import io.zerows.extension.commerce.finance.eon.FmConstant;
 import io.zerows.extension.commerce.finance.eon.em.EmPay;
 import io.zerows.extension.commerce.finance.uca.trans.Trade;
-import io.zerows.unity.Ux;
 
 import java.util.HashSet;
 import java.util.List;
@@ -130,7 +130,7 @@ public class SettleWService implements SettleWStub {
                  **/
                 final Set<String> ignoreSet = new HashSet<>();
                 items.stream()
-                        .filter(item->item.getDebtId()==null)
+                    .filter(item -> item.getDebtId() == null)
                     .filter(item -> !itemsKeys.contains(item.getKey()))
                     .forEach(item -> ignoreSet.add(item.getSettlementId()));
                 final Set<String> settlementSet = Ut.toSet(settlementIds);

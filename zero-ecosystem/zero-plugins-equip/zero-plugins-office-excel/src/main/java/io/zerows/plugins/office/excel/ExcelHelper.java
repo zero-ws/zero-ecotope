@@ -6,12 +6,12 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.VPath;
-import io.zerows.core.fn.FnZero;
+import io.zerows.epoch.program.fn.Fx;
 import io.zerows.epoch.common.log.Annal;
-import io.zerows.core.util.Ut;
-import io.zerows.core.web.model.uca.normalize.Oneness;
-import io.zerows.module.metadata.atom.configuration.MDConfiguration;
-import io.zerows.module.metadata.atom.configuration.modeling.MDConnect;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.corpus.model.uca.normalize.Oneness;
+import io.zerows.epoch.corpus.metadata.atom.configuration.MDConfiguration;
+import io.zerows.epoch.corpus.metadata.atom.configuration.modeling.MDConnect;
 import io.zerows.plugins.office.excel.atom.ExRecord;
 import io.zerows.plugins.office.excel.atom.ExTable;
 import io.zerows.plugins.office.excel.atom.ExTenant;
@@ -75,7 +75,7 @@ class ExcelHelper {
     Future<JsonArray> extract(final Set<ExTable> tables) {
         final List<Future<JsonArray>> futures = new ArrayList<>();
         tables.forEach(table -> futures.add(this.extract(table)));
-        return FnZero.compressA(futures);
+        return Fx.compressA(futures);
     }
 
     Future<JsonArray> extract(final ExTable table) {

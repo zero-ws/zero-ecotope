@@ -23,8 +23,8 @@ Demo projects:
 package up.god.micro.fetch;
 
 import io.vertx.core.json.JsonArray;
-import io.zerows.core.annotations.Address;
-import io.zerows.core.annotations.EndPoint;
+import io.zerows.epoch.annotations.Address;
+import io.zerows.epoch.annotations.EndPoint;
 
 import javax.ws.rs.*;
 
@@ -59,8 +59,8 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.unity.Ux;
-import io.zerows.core.annotations.Address;
-import io.zerows.core.annotations.Queue;
+import io.zerows.epoch.annotations.Address;
+import io.zerows.epoch.annotations.Queue;
 import io.vertx.up.commune.Envelop;
 
 import jakarta.inject.Inject;

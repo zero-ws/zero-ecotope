@@ -47,11 +47,11 @@ mongo: io.vertx.mod.plugin.mongo.MongoInfix
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.mongo.MongoClient;
-import io.zerows.core.annotations.Address;
-import io.zerows.core.annotations.Queue;
+import io.zerows.epoch.annotations.Address;
+import io.zerows.epoch.annotations.Queue;
 import io.zerows.annotations.infix.Mongo;
 import io.vertx.up.commune.Envelop;
-import io.zerows.core.util.Jackson;
+import io.zerows.epoch.program.Jackson;
 
 @Queue
 public class UserWorker {

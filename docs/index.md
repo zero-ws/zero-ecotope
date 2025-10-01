@@ -153,8 +153,8 @@ If you want to use Zero framework, you can add following dependency into you `po
 In your project, you can provide main entry only as following to run Zero \( Annotated with `@Up` \) .
 
 ```java
-import io.vertx.boot.VertxApplication;
-import io.zerows.core.annotations.Up;
+import io.zerows.epoch.boot.VertxApplication;
+import io.zerows.epoch.annotations.Up;
 
 @Up
 public class Driver {
@@ -178,7 +178,7 @@ When you want to enable **Aeon System**, you can switch the code as following:
 
 ```java
 import io.vertx.aeon.AeonApplication;
-import io.zerows.core.annotations.Up;
+import io.zerows.epoch.annotations.Up;
 
 @Up
 public class Driver {

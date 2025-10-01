@@ -4,10 +4,11 @@ import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.common.shared.program.KRef;
-import io.zerows.core.constant.KName;
-import io.zerows.core.fn.FnZero;
-import io.zerows.core.util.Ut;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.program.fn.Fx;
 import io.zerows.extension.runtime.report.atom.RDimension;
 import io.zerows.extension.runtime.report.atom.RGeneration;
 import io.zerows.extension.runtime.report.domain.tables.daos.KpDataSetDao;
@@ -23,7 +24,6 @@ import io.zerows.extension.runtime.report.exception._80701Exception404ReportMiss
 import io.zerows.extension.runtime.report.exception._80702Exception404ReportDataSet;
 import io.zerows.extension.runtime.report.uca.process.DimProc;
 import io.zerows.extension.runtime.report.uca.pull.DataSet;
-import io.zerows.unity.Ux;
 import jakarta.inject.Inject;
 
 import java.util.List;
@@ -69,7 +69,7 @@ public class ReportService implements ReportStub {
                     .compose(data -> this.instanceStub.buildAsync(data, params, generation));
             })
             .compose(Ux::futureJ)
-            .compose(FnZero.ofJObject(
+            .compose(Fx.ofJObject(
                 "reportData",
                 "reportContent"
             ));

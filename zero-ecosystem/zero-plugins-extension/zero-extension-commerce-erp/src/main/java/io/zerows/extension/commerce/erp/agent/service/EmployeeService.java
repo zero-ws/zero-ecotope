@@ -3,16 +3,16 @@ package io.zerows.extension.commerce.erp.agent.service;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.constant.KName;
-import io.zerows.core.fn.FnZero;
+import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.program.fn.Fx;
 import io.zerows.epoch.spi.modeler.Indent;
-import io.zerows.core.util.Ut;
 import io.zerows.extension.commerce.erp.domain.tables.daos.EEmployeeDao;
 import io.zerows.extension.commerce.erp.domain.tables.pojos.EEmployee;
 import io.zerows.extension.runtime.skeleton.eon.em.BizInternal;
 import io.zerows.extension.runtime.skeleton.osgi.spi.business.ExUser;
 import io.zerows.extension.runtime.skeleton.osgi.spi.feature.Trash;
-import io.zerows.unity.Ux;
 
 import java.util.Set;
 import java.util.function.BiFunction;
@@ -76,7 +76,7 @@ public class EmployeeService implements EmployeeStub {
     @Override
     public Future<JsonObject> updateAsync(final String key, final JsonObject data) {
         return this.fetchAsync(key)
-            .compose(FnZero.ofJObject(original -> {
+            .compose(Fx.ofJObject(original -> {
                 final String userId = original.getString(KName.USER_ID);
                 final String current = data.getString(KName.USER_ID);
                 if (Ut.isNil(userId) && Ut.isNil(current)) {
@@ -138,7 +138,7 @@ public class EmployeeService implements EmployeeStub {
     @Override
     public Future<Boolean> deleteAsync(final String key) {
         return this.fetchAsync(key)
-            .compose(FnZero.ifNil(() -> Boolean.TRUE, item -> Ux.channelA(Trash.class,
+            .compose(Fx.ifNil(() -> Boolean.TRUE, item -> Ux.channelA(Trash.class,
                 () -> this.deleteAsync(key, item),
                 tunnel -> tunnel.backupAsync("res.employee", item)
                     .compose(backup -> this.deleteAsync(key, item)))));
@@ -153,7 +153,7 @@ public class EmployeeService implements EmployeeStub {
 
     private Future<JsonObject> updateReference(final String key, final JsonObject data) {
         return this.switchJ(data, (user, filters) -> user.rapport(key, filters)
-            .compose(FnZero.ofJObject(response ->
+            .compose(Fx.ofJObject(response ->
                 Ux.future(data.put(KName.USER_ID, response.getString(KName.KEY))))));
     }
 

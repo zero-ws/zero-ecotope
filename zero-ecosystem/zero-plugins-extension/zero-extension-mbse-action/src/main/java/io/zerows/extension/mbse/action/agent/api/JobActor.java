@@ -2,11 +2,11 @@ package io.zerows.extension.mbse.action.agent.api;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.annotations.Address;
-import io.zerows.core.annotations.Queue;
+import io.zerows.epoch.annotations.Address;
+import io.zerows.epoch.annotations.Queue;
+import io.zerows.epoch.corpus.Ux;
 import io.zerows.extension.mbse.action.agent.service.JobStub;
 import io.zerows.extension.mbse.action.eon.JtAddr;
-import io.zerows.unity.Ux;
 import jakarta.inject.Inject;
 
 @Queue

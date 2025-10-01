@@ -20,9 +20,9 @@
 * [x] `javax.ws.rs.PathParam`
 * [x] `javax.ws.rs.HeaderParam`
 * [x] `javax.ws.rs.CookieParam`
-* [x] `io.zerows.core.web.io.annotations.BodyParam`
-* [x] `io.zerows.core.web.io.annotations.StreamParam`
-* [x] `io.zerows.core.web.io.annotations.SessionParam`
+* [x] `io.zerows.epoch.corpus.annotations.io.BodyParam`
+* [x] `io.zerows.epoch.corpus.annotations.io.StreamParam`
+* [x] `io.zerows.epoch.corpus.annotations.io.SessionParam`
 
 ## 2. Java Types
 

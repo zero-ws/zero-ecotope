@@ -2,13 +2,13 @@ package io.zerows.extension.runtime.ambient.bootstrap;
 
 import io.r2mo.function.Fn;
 import io.r2mo.typed.cc.Cc;
-import io.zerows.core.constant.KName;
-import io.zerows.core.database.jooq.operation.UxJooq;
+import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.corpus.database.jooq.operation.UxJooq;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XAppDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XApp;
 import io.zerows.extension.runtime.ambient.exception._80300Exception500AmbientError;
 import io.zerows.extension.runtime.ambient.exception._80301Exception500ApplicationInit;
-import io.zerows.unity.Ux;
 import org.jooq.DSLContext;
 
 import java.util.Objects;

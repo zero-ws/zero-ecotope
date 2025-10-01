@@ -7,10 +7,10 @@ verify request data here.
 
 ```java
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.annotations.Codex;
-import io.zerows.core.annotations.EndPoint;
+import io.zerows.epoch.annotations.Codex;
+import io.zerows.epoch.annotations.EndPoint;
 
-import io.zerows.core.web.io.annotations.BodyParam;
+import io.zerows.epoch.corpus.annotations.io.BodyParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 

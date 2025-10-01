@@ -2,11 +2,11 @@ package io.zerows.extension.runtime.crud.agent.api;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.annotations.Address;
-import io.zerows.core.annotations.Adjust;
-import io.zerows.core.annotations.EndPoint;
-import io.zerows.core.constant.KName;
-import io.zerows.core.constant.KWeb;
+import io.zerows.epoch.annotations.Address;
+import io.zerows.epoch.annotations.Adjust;
+import io.zerows.epoch.annotations.EndPoint;
+import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.based.constant.KWeb;
 import io.zerows.extension.runtime.crud.eon.Addr;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;

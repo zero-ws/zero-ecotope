@@ -11,8 +11,8 @@ This chapter will introduce interface style for more details. In this chapter we
 ```java
 package up.god.micro.styles;
 
-import io.zerows.core.annotations.Address;
-import io.zerows.core.annotations.EndPoint;
+import io.zerows.epoch.annotations.Address;
+import io.zerows.epoch.annotations.EndPoint;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -40,8 +40,8 @@ package up.god.micro.styles;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.unity.Ux;
-import io.zerows.core.annotations.Address;
-import io.zerows.core.annotations.Queue;
+import io.zerows.epoch.annotations.Address;
+import io.zerows.epoch.annotations.Queue;
 import io.vertx.up.commune.Envelop;
 
 @Queue

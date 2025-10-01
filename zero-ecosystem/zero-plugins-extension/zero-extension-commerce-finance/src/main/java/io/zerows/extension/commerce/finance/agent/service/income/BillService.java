@@ -2,8 +2,9 @@ package io.zerows.extension.commerce.finance.agent.service.income;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.constant.KName;
-import io.zerows.core.fn.FnZero;
+import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.program.fn.Fx;
 import io.zerows.extension.commerce.finance.domain.tables.daos.FBillDao;
 import io.zerows.extension.commerce.finance.domain.tables.daos.FBillItemDao;
 import io.zerows.extension.commerce.finance.domain.tables.daos.FPreAuthorizeDao;
@@ -12,7 +13,6 @@ import io.zerows.extension.commerce.finance.domain.tables.pojos.FBillItem;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FPreAuthorize;
 import io.zerows.extension.commerce.finance.uca.account.Book;
 import io.zerows.extension.commerce.finance.uca.replica.IkWay;
-import io.zerows.unity.Ux;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -43,7 +43,7 @@ public class BillService implements BillStub {
             }
             final List<FBillItem> itemList = new ArrayList<>();
             itemList.add(billItem);
-            return FnZero.combineA(futures)
+            return Fx.combineA(futures)
                 .compose(nil -> Book.of().income(bill, itemList))
                 .compose(nil -> this.billAsync(bill, itemList));
         });

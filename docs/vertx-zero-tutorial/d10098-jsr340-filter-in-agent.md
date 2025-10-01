@@ -22,10 +22,10 @@ At first we'll implement an actor in our project that has been introduced before
 package up.god.micro.filter;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.annotations.EndPoint;
+import io.zerows.epoch.annotations.EndPoint;
 
-import io.zerows.core.web.io.annotations.BodyParam;
-import io.zerows.core.web.io.annotations.ContextParam;
+import io.zerows.epoch.corpus.annotations.io.BodyParam;
+import io.zerows.epoch.corpus.annotations.io.ContextParam;
 
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;

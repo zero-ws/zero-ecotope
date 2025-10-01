@@ -2,7 +2,7 @@ package io.zerows.extension.runtime.ambient.uca.darkly;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.constant.KName;
+import io.zerows.epoch.based.constant.KName;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XActivityRule;
 import io.zerows.extension.runtime.ambient.eon.em.TubeType;
 

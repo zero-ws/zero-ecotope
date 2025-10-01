@@ -184,8 +184,8 @@ Vert.x 引入独立项目的底层功能使用。
 基本启动代码如下：
 
 ```java
-import io.vertx.boot.VertxApplication;
-import io.zerows.core.annotations.Up;
+import io.zerows.epoch.boot.VertxApplication;
+import io.zerows.epoch.annotations.Up;
 
 @Up
 public class Driver {
@@ -209,7 +209,7 @@ public class Driver {
 
 ```java
 import io.vertx.aeon.AeonApplication;
-import io.zerows.core.annotations.Up;
+import io.zerows.epoch.annotations.Up;
 
 @Up
 public class Driver {

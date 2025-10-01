@@ -36,8 +36,8 @@ Demo projects:
 package up.god.micro.request;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.annotations.Address;
-import io.zerows.core.annotations.EndPoint;
+import io.zerows.epoch.annotations.Address;
+import io.zerows.epoch.annotations.EndPoint;
 
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -61,8 +61,8 @@ public class AsyncActor {
 package up.god.micro.request;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.annotations.Address;
-import io.zerows.core.annotations.Queue;
+import io.zerows.epoch.annotations.Address;
+import io.zerows.epoch.annotations.Queue;
 import io.vertx.up.commune.Envelop;
 
 @Queue

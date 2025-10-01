@@ -5,11 +5,11 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.VString;
 import io.zerows.epoch.constant.VValue;
-import io.zerows.core.constant.KName;
-import io.zerows.core.fn.FnZero;
-import io.zerows.core.util.Ut;
-import io.zerows.module.security.atom.manage.KPermit;
-import io.zerows.module.security.zdk.manager.AbstractAdmit;
+import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.program.fn.Fx;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.corpus.security.atom.manage.KPermit;
+import io.zerows.epoch.corpus.security.zdk.manager.AbstractAdmit;
 
 import java.util.Objects;
 
@@ -22,7 +22,7 @@ public class HSDimNorm extends AbstractAdmit {
 
     @Override
     public Future<JsonObject> compile(final KPermit permit, final JsonObject request) {
-        return FnZero.choiceJ(request, KName.ITEMS,
+        return Fx.choiceJ(request, KName.ITEMS,
             itemJ -> {
                 final Class<?> daoCls = Ut.valueC(itemJ, KName.DAO, null);
                 if (Objects.isNull(daoCls)) {

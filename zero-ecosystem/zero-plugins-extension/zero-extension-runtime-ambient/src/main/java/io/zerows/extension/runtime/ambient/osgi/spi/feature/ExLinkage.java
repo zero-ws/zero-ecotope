@@ -3,14 +3,14 @@ package io.zerows.extension.runtime.ambient.osgi.spi.feature;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.constant.KName;
-import io.zerows.core.fn.FnZero;
-import io.zerows.core.util.Ut;
+import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.program.fn.Fx;
 import io.zerows.extension.runtime.ambient.agent.service.linkage.LinkService;
 import io.zerows.extension.runtime.ambient.agent.service.linkage.LinkStub;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XLinkageDao;
 import io.zerows.extension.runtime.skeleton.osgi.spi.feature.Linkage;
-import io.zerows.unity.Ux;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
@@ -29,7 +29,7 @@ public class ExLinkage implements Linkage {
 
     @Override
     public Future<JsonArray> fetch(final JsonObject criteria) {
-        return Ux.Jooq.on(XLinkageDao.class).fetchJAsync(criteria).compose(FnZero.ofJArray(
+        return Ux.Jooq.on(XLinkageDao.class).fetchJAsync(criteria).compose(Fx.ofJArray(
             KName.SOURCE_DATA,
             KName.TARGET_DATA
         ));

@@ -2,15 +2,15 @@ package io.zerows.extension.mbse.basement.uca.reference;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
-import io.zerows.epoch.support.FnBase;
 import io.zerows.epoch.common.shared.reference.RResult;
 import io.zerows.epoch.common.shared.reference.RRule;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.support.FnBase;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.atom.element.DataTpl;
 import io.zerows.extension.mbse.basement.exception._80540Exception501AnonymousAtom;
 import io.zerows.specification.modeling.HRecord;
 import io.zerows.specification.modeling.HReference;
-import io.zerows.unity.Ux;
 
 import java.util.List;
 import java.util.Objects;

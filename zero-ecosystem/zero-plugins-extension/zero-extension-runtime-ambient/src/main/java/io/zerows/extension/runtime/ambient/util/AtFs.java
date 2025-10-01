@@ -4,15 +4,15 @@ import io.vertx.core.Future;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.constant.KName;
-import io.zerows.core.fn.FnZero;
+import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.common.log.Annal;
-import io.zerows.core.util.Ut;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.program.fn.Fx;
 import io.zerows.extension.runtime.ambient.bootstrap.AtConfig;
 import io.zerows.extension.runtime.ambient.bootstrap.AtPin;
 import io.zerows.extension.runtime.skeleton.osgi.spi.business.ExIo;
 import io.zerows.specification.vital.HFS;
-import io.zerows.unity.Ux;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -40,7 +40,7 @@ class AtFs {
         if (Objects.nonNull(config)) {
             appJ.put(KName.STORE_PATH, config.getStorePath());
         }
-        return Ux.futureJ(appJ).compose(FnZero.ofJObject(KName.App.LOGO));
+        return Ux.futureJ(appJ).compose(Fx.ofJObject(KName.App.LOGO));
     }
 
     static Future<Buffer> fileDownload(final JsonArray attachment) {
@@ -153,6 +153,6 @@ class AtFs {
         if (Ut.isNotNil(dataR)) {
             futures.add(fnRemote.apply(dataR));
         }
-        return FnZero.compressA(futures);
+        return Fx.compressA(futures);
     }
 }

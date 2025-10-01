@@ -5,7 +5,7 @@ import io.zerows.epoch.enums.modeling.EmAttribute;
 import io.zerows.epoch.enums.typed.ChangeFlag;
 import io.zerows.epoch.common.shared.normalize.KMarkAtom;
 import io.zerows.epoch.common.uca.compare.Vs;
-import io.zerows.core.util.Ut;
+import io.zerows.epoch.program.Ut;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XActivity;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XActivityChange;
 import io.zerows.extension.runtime.ambient.eon.em.ActivityStatus;

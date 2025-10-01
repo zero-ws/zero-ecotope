@@ -2,12 +2,12 @@ package io.zerows.extension.runtime.crud.bootstrap;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.util.Ut;
-import io.zerows.core.web.model.extension.HExtension;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.corpus.model.extension.HExtension;
 import io.zerows.extension.runtime.crud.atom.IxConfig;
 import io.zerows.extension.runtime.crud.eon.IxConstant;
 import io.zerows.extension.runtime.skeleton.eon.KeMsg;
-import io.zerows.module.metadata.atom.configuration.MDConfiguration;
+import io.zerows.epoch.corpus.metadata.atom.configuration.MDConfiguration;
 import io.zerows.specification.access.app.HAmbient;
 
 import java.text.MessageFormat;

@@ -6,8 +6,8 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.enums.EmDict;
 import io.zerows.epoch.common.shared.datamation.KDictSource;
 import io.zerows.epoch.common.shared.datamation.KDictUse;
-import io.zerows.core.constant.KName;
-import io.zerows.core.util.Ut;
+import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.program.Ut;
 import io.zerows.extension.runtime.ambient.uca.dict.Dpm;
 
 import java.util.Objects;

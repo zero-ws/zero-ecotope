@@ -3,15 +3,15 @@ package io.zerows.extension.runtime.skeleton.refine;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.based.configure.YmlCore;
+import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.constant.VString;
-import io.zerows.core.constant.KName;
-import io.zerows.core.constant.configure.YmlCore;
-import io.zerows.core.database.atom.Database;
-import io.zerows.core.database.cp.zdk.DataPool;
-import io.zerows.core.fn.FnZero;
-import io.zerows.core.util.Ut;
-import io.zerows.module.metadata.store.OZeroStore;
-import io.zerows.unity.Ux;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.corpus.database.atom.Database;
+import io.zerows.epoch.corpus.database.cp.zdk.DataPool;
+import io.zerows.epoch.corpus.metadata.store.OZeroStore;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.program.fn.Fx;
 import org.jooq.Configuration;
 
 import java.util.Objects;
@@ -67,7 +67,7 @@ class KeTool {
                 Ke.LOG.Turnel.warn(KeTool.class, "Criteria must be not empty");
             }
         });
-        return FnZero.combineM(futures).compose(mapData -> {
+        return Fx.combineM(futures).compose(mapData -> {
             mapData.forEach(data::put);
             return Ux.future(data);
         });

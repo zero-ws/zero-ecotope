@@ -1,11 +1,11 @@
 package io.vertx.up.backbone.origin;
 
 import io.vertx.quiz.example.WallKeeper2;
-import io.zerows.core.util.Ut;
-import io.zerows.core.web.security.store.WallInquirer;
-import io.zerows.module.metadata.store.OCacheClass;
-import io.zerows.module.metadata.zdk.uca.Inquirer;
-import io.zerows.module.security.atom.Aegis;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.corpus.web.security.store.WallInquirer;
+import io.zerows.epoch.corpus.metadata.store.OCacheClass;
+import io.zerows.epoch.corpus.metadata.zdk.uca.Inquirer;
+import io.zerows.epoch.corpus.security.atom.Aegis;
 
 import java.util.Set;
 

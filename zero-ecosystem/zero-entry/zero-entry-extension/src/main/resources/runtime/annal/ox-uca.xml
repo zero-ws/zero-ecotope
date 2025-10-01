@@ -16,7 +16,7 @@
         <queueSize>8192</queueSize>
         <appender-ref ref="UCA"/>
     </appender>
-    <logger name="io.mature.extension.uca" level="INFO">
+    <logger name="io.zerows.epoch.bootplus.extension.uca" level="INFO">
         <appender-ref ref="ASYNC_UCA"/>
     </logger>
 </included>

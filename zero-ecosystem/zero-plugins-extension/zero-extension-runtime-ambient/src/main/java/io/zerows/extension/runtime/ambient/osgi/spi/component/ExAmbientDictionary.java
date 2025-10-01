@@ -4,14 +4,14 @@ import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonArray;
-import io.zerows.epoch.enums.EmDict;
 import io.zerows.epoch.common.shared.datamation.KDictSource;
-import io.zerows.core.fn.FnZero;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.corpus.cloud.zdk.spi.Dictionary;
+import io.zerows.epoch.enums.EmDict;
+import io.zerows.epoch.program.fn.Fx;
 import io.zerows.extension.runtime.ambient.agent.service.DatumService;
 import io.zerows.extension.runtime.ambient.agent.service.DatumStub;
 import io.zerows.extension.runtime.ambient.uca.dict.Dpm;
-import io.zerows.module.cloud.zdk.spi.Dictionary;
-import io.zerows.unity.Ux;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +56,7 @@ public class ExAmbientDictionary implements Dictionary {
              * 2) Category ( type -> JsonArray )     size > 0
              * 3) Assist ( type -> JsonArray )       size > 0
              */
-            return FnZero.compressM(futures).compose(dict -> {
+            return Fx.compressM(futures).compose(dict -> {
                 final StringBuilder report = new StringBuilder();
                 report.append("[ PT ] Dictionary Total：").append(dict.size());
                 dict.forEach((key, array) -> report

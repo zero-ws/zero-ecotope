@@ -35,10 +35,10 @@ refer: [D10103 - Configuration, vertx-secure.yml](d10103-configuration-vertx-sec
 package up.god.micro.jwt;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.annotations.Address;
-import io.zerows.core.annotations.EndPoint;
+import io.zerows.epoch.annotations.Address;
+import io.zerows.epoch.annotations.EndPoint;
 
-import io.zerows.core.web.io.annotations.BodyParam;
+import io.zerows.epoch.corpus.annotations.io.BodyParam;
 
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -67,8 +67,8 @@ package up.god.micro.jwt;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.unity.Ux;
-import io.zerows.core.annotations.Address;
-import io.zerows.core.annotations.Queue;
+import io.zerows.epoch.annotations.Address;
+import io.zerows.epoch.annotations.Queue;
 import io.vertx.up.commune.Envelop;
 import io.vertx.up.secure.Security;
 
@@ -176,7 +176,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.atom.typed.Uson;
 import io.zerows.unity.Ux;
-import io.zerows.core.fn.FnZero;
+import io.zerows.epoch.program.fn.FnZero;
 import io.vertx.up.secure.Security;
 
 import jakarta.inject.Inject;

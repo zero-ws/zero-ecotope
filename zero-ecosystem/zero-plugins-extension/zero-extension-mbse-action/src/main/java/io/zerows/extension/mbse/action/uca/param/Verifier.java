@@ -2,9 +2,9 @@ package io.zerows.extension.mbse.action.uca.param;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.constant.KWeb;
-import io.zerows.core.util.Ut;
-import io.zerows.core.web.model.commune.Envelop;
+import io.zerows.epoch.based.constant.KWeb;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.corpus.model.commune.Envelop;
 import io.zerows.extension.mbse.action.plugins.JetThanatos;
 
 import java.util.Iterator;

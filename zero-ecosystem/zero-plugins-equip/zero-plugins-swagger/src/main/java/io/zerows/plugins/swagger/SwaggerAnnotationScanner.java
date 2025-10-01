@@ -5,7 +5,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.zerows.module.metadata.store.OCacheClass;
+import io.zerows.epoch.corpus.metadata.store.OCacheClass;
 import jakarta.ws.rs.*;
 
 import java.lang.reflect.Method;

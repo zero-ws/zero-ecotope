@@ -1,7 +1,7 @@
 package io.zerows.extension.commerce.rbac.uca.authorization;
 
 import io.zerows.epoch.common.log.Annal;
-import io.zerows.core.util.Ut;
+import io.zerows.epoch.program.Ut;
 import io.zerows.extension.commerce.rbac.uca.logged.ProfileGroup;
 import io.zerows.extension.commerce.rbac.uca.logged.ProfileRole;
 

@@ -3,10 +3,11 @@ package io.zerows.extension.commerce.finance.agent.service.end;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.common.shared.program.KRef;
-import io.zerows.core.constant.KName;
-import io.zerows.core.fn.FnZero;
-import io.zerows.core.util.Ut;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.program.fn.Fx;
 import io.zerows.extension.commerce.finance.atom.TranData;
 import io.zerows.extension.commerce.finance.domain.tables.daos.*;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.*;
@@ -14,7 +15,6 @@ import io.zerows.extension.commerce.finance.eon.FmConstant;
 import io.zerows.extension.commerce.finance.eon.em.EmTran;
 import io.zerows.extension.commerce.finance.uca.replica.IkWay;
 import io.zerows.extension.commerce.finance.uca.trans.Trade;
-import io.zerows.unity.Ux;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -204,7 +204,7 @@ public class TransService implements TransStub {
             futureMap.put(KName.Finance.DEBTS, Ux.Jooq.on(FDebtDao.class)
                 .fetchJInAsync(KName.KEY, Ut.toJArray(keyDebt))
             );
-            return FnZero.combineM(futureMap);
+            return Fx.combineM(futureMap);
         });
     }
 }

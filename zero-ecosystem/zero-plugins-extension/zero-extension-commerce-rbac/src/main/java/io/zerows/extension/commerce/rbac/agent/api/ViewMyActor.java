@@ -4,20 +4,20 @@ import io.vertx.core.Future;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.annotations.Address;
-import io.zerows.core.annotations.Queue;
-import io.zerows.core.constant.KName;
-import io.zerows.core.fn.FnZero;
+import io.zerows.epoch.annotations.Address;
+import io.zerows.epoch.annotations.Queue;
+import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.common.uca.qr.syntax.Ir;
-import io.zerows.core.util.Ut;
-import io.zerows.core.web.model.commune.Envelop;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.program.fn.Fx;
 import io.zerows.extension.commerce.rbac.agent.service.accredit.ActionStub;
 import io.zerows.extension.commerce.rbac.agent.service.view.PersonalStub;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.SViewDao;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SAction;
 import io.zerows.extension.commerce.rbac.eon.Addr;
 import io.zerows.extension.runtime.skeleton.eon.em.OwnerType;
-import io.zerows.unity.Ux;
 import jakarta.inject.Inject;
 
 import java.util.HashSet;
@@ -71,7 +71,7 @@ public class ViewMyActor {
                 return this.personalStub.byUser(action.getResourceId(), userId,
                         data.getString(KName.POSITION))
                     .compose(Ux::futureA)
-                    .compose(FnZero.ofJArray(Ir.KEY_CRITERIA, Ir.KEY_PROJECTION, KName.Rbac.ROWS));
+                    .compose(Fx.ofJArray(Ir.KEY_CRITERIA, Ir.KEY_PROJECTION, KName.Rbac.ROWS));
             }
         });
     }
@@ -113,7 +113,7 @@ public class ViewMyActor {
     public Future<JsonObject> pViewById(final String key) {
         return this.personalStub.byId(key)
             .compose(Ux::futureJ)
-            .compose(FnZero.ofJObject(Ir.KEY_CRITERIA, Ir.KEY_PROJECTION, "rows"));
+            .compose(Fx.ofJObject(Ir.KEY_CRITERIA, Ir.KEY_PROJECTION, "rows"));
     }
 
     @Address(Addr.View.VIEW_P_UPDATE)
@@ -127,7 +127,7 @@ public class ViewMyActor {
         data.put(KName.USER, userId);
         return this.personalStub.update(key, data)
             .compose(Ux::futureJ)
-            .compose(FnZero.ofJObject(Ir.KEY_CRITERIA, Ir.KEY_PROJECTION, "rows"));
+            .compose(Fx.ofJObject(Ir.KEY_CRITERIA, Ir.KEY_PROJECTION, "rows"));
     }
 
 

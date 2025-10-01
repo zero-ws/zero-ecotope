@@ -3,12 +3,12 @@ package io.zerows.extension.runtime.ambient.osgi.spi.feature;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.constant.KName;
-import io.zerows.core.fn.FnZero;
+import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.program.fn.Fx;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XCategoryDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XCategory;
 import io.zerows.extension.runtime.skeleton.osgi.spi.phantom.AbstractArbor;
-import io.zerows.unity.Ux;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -43,7 +43,7 @@ public class CatalogArbor extends AbstractArbor {
                 });
                 return Ux.futureA(compress);
             })
-            .compose(FnZero.ofJArray(
+            .compose(Fx.ofJArray(
                 KName.METADATA,
                 KName.Component.TREE_CONFIG,
                 KName.Component.RUN_CONFIG

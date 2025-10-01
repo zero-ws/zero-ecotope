@@ -1,7 +1,7 @@
 package io.zerows.extension.runtime.skeleton.osgi.spi.web;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.constant.KName;
+import io.zerows.epoch.based.constant.KName;
 
 /*
  * Interface for authorization resource key processing

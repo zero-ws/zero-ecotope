@@ -27,8 +27,8 @@ Demo Projects and environment
 package up.god.micro.agent;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.annotations.EndPoint;
-import io.zerows.core.annotations.Ipc;
+import io.zerows.epoch.annotations.EndPoint;
+import io.zerows.epoch.annotations.Ipc;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -68,7 +68,7 @@ public class SimpleActor implements SimpleApi {
 package up.god.ipc;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.annotations.Ipc;
+import io.zerows.epoch.annotations.Ipc;
 import io.vertx.up.commune.Envelop;
 
 public class SimpleInsider {

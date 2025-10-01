@@ -4,16 +4,16 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Session;
-import io.zerows.core.constant.KName;
-import io.zerows.core.fn.FnZero;
-import io.zerows.core.util.Ut;
+import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.program.fn.Fx;
+import io.zerows.epoch.program.Ut;
 import io.zerows.extension.commerce.rbac.agent.service.business.GroupStub;
 import io.zerows.extension.commerce.rbac.agent.service.login.jwt.JwtStub;
 import io.zerows.extension.commerce.rbac.atom.ScConfig;
 import io.zerows.extension.commerce.rbac.bootstrap.ScPin;
 import io.zerows.extension.commerce.rbac.eon.AuthKey;
 import io.zerows.extension.commerce.rbac.uca.acl.relation.Junc;
-import io.zerows.module.domain.atom.typed.UObject;
+import io.zerows.epoch.corpus.domain.atom.typed.UObject;
 import jakarta.inject.Inject;
 
 import java.util.ArrayList;
@@ -88,6 +88,6 @@ public class TokenService implements TokenStub {
             .forEach(item -> futures.add(this.groupStub.fetchRoleIdsAsync(item.getString(AuthKey.F_GROUP_ID))
                 .compose(roles -> UObject.create(item).append("role", roles).toFuture())
             ));
-        return FnZero.combineA(futures);
+        return Fx.combineA(futures);
     }
 }

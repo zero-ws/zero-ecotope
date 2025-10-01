@@ -3,12 +3,12 @@ package io.zerows.extension.runtime.workflow.uca.modeling;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.constant.KName;
-import io.zerows.core.database.jooq.operation.UxJooq;
-import io.zerows.core.fn.FnZero;
-import io.zerows.core.util.Ut;
+import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.corpus.database.jooq.operation.UxJooq;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.program.fn.Fx;
 import io.zerows.extension.runtime.workflow.atom.configuration.MetaInstance;
-import io.zerows.unity.Ux;
 
 import java.util.List;
 import java.util.Set;
@@ -22,7 +22,7 @@ class ActionDao implements ActionOn {
     public <T> Future<JsonObject> createAsync(final JsonObject params, final MetaInstance metadata) {
         final UxJooq jooq = metadata.recordDao();
         Ut.valueToString(params, KName.METADATA);
-        return jooq.insertJAsync(params).compose(FnZero.ofJObject(KName.METADATA))
+        return jooq.insertJAsync(params).compose(Fx.ofJObject(KName.METADATA))
             // Normalize Data
             .compose(record -> Ux.futureN(params, null, record));
     }
@@ -36,7 +36,7 @@ class ActionDao implements ActionOn {
             final JsonObject original = Ux.toJson(query);
             Ut.valueToString(params, KName.METADATA);
             final T entity = Ux.updateT(query, params);
-            return jooq.updateAsync(entity).compose(Ux::futureJ).compose(FnZero.ofJObject(KName.METADATA))
+            return jooq.updateAsync(entity).compose(Ux::futureJ).compose(Fx.ofJObject(KName.METADATA))
                 // Normalize Data
                 .compose(record -> Ux.futureN(params, original, record));
         });
@@ -47,14 +47,14 @@ class ActionDao implements ActionOn {
         final UxJooq jooq = metadata.recordDao();
         return jooq.fetchByIdAsync(key)
             .compose(Ux::futureJ)
-            .compose(FnZero.ofJObject(KName.METADATA));
+            .compose(Fx.ofJObject(KName.METADATA));
     }
 
     @Override
     public <T> Future<JsonArray> createAsync(JsonArray params, MetaInstance metadata) {
         final UxJooq jooq = metadata.recordDao();
         Ut.itJArray(params).forEach(json -> Ut.valueToString(json, KName.METADATA));
-        return jooq.insertJAsync(params).compose(FnZero.ofJArray(KName.METADATA))
+        return jooq.insertJAsync(params).compose(Fx.ofJArray(KName.METADATA))
             // Normalize Data
             .compose(records -> Ux.futureN(null, records));
     }
@@ -67,7 +67,7 @@ class ActionDao implements ActionOn {
         return jooq.<T>fetchAsync(condition).compose(query -> {
             final JsonArray original = Ux.toJson(query);
             final List<T> updated = Ux.updateT(query, params);
-            return jooq.<T>updateAsync(updated).compose(Ux::futureA).compose(FnZero.ofJArray(KName.METADATA))
+            return jooq.<T>updateAsync(updated).compose(Ux::futureA).compose(Fx.ofJArray(KName.METADATA))
                 // Normalize Data
                 .compose(records -> Ux.futureN(original, records));
         });
@@ -80,6 +80,6 @@ class ActionDao implements ActionOn {
         condition.put(KName.KEY + ",i", Ut.toJArray(keys));
         return jooq.<T>fetchAsync(condition)
             .compose(Ux::futureA)
-            .compose(FnZero.ofJArray(KName.METADATA));
+            .compose(Fx.ofJArray(KName.METADATA));
     }
 }

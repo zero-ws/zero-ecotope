@@ -3,13 +3,13 @@ package io.zerows.extension.runtime.crud.uca.input.view;
 import io.vertx.core.Future;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.common.shared.program.Kv;
-import io.zerows.core.constant.KName;
-import io.zerows.core.web.mbse.atom.specification.KColumn;
-import io.zerows.core.web.mbse.atom.specification.KModule;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.corpus.mbse.atom.specification.KColumn;
+import io.zerows.epoch.corpus.mbse.atom.specification.KModule;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 import io.zerows.extension.runtime.crud.util.Ix;
-import io.zerows.unity.Ux;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>

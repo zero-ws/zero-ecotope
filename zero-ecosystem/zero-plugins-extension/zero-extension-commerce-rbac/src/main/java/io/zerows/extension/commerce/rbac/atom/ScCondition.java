@@ -3,7 +3,7 @@ package io.zerows.extension.commerce.rbac.atom;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.vertx.core.json.JsonArray;
-import io.zerows.core.constant.KName;
+import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.integrated.jackson.databind.JsonArrayDeserializer;
 import io.zerows.epoch.integrated.jackson.databind.JsonArraySerializer;
 

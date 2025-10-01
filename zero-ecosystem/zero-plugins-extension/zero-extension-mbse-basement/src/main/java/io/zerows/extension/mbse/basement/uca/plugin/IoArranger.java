@@ -2,14 +2,14 @@ package io.zerows.extension.mbse.basement.uca.plugin;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.common.shared.program.Kv;
-import io.zerows.core.constant.KName;
-import io.zerows.core.fn.TiConsumer;
-import io.zerows.core.util.Ut;
+import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.program.fn.TiConsumer;
+import io.zerows.epoch.program.Ut;
 import io.zerows.extension.mbse.basement.atom.Model;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.atom.element.DataTpl;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MAttribute;
-import io.zerows.module.domain.atom.element.JComponent;
+import io.zerows.epoch.corpus.domain.atom.element.JComponent;
 import io.zerows.specification.modeling.HAttribute;
 import io.zerows.specification.modeling.HRecord;
 import io.zerows.specification.modeling.property.*;

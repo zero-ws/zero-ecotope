@@ -2,9 +2,9 @@ package io.zerows.extension.mbse.action.agent.api;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.annotations.Address;
-import io.zerows.core.annotations.Queue;
-import io.zerows.core.web.container.store.uri.UriAeon;
+import io.zerows.epoch.annotations.Address;
+import io.zerows.epoch.annotations.Queue;
+import io.zerows.epoch.corpus.container.store.uri.UriAeon;
 import io.zerows.extension.mbse.action.eon.JtAddr;
 
 /**

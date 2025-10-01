@@ -2,14 +2,15 @@ package io.zerows.extension.mbse.basement.util;
 
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.common.shared.app.KDS;
 import io.zerows.epoch.common.shared.app.KDatabase;
 import io.zerows.epoch.common.shared.normalize.KIdentity;
-import io.zerows.core.constant.KName;
-import io.zerows.core.database.atom.Database;
-import io.zerows.core.database.cp.zdk.DS;
-import io.zerows.core.database.cp.zdk.DataPool;
-import io.zerows.core.util.Ut;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.corpus.database.atom.Database;
+import io.zerows.epoch.corpus.database.cp.zdk.DS;
+import io.zerows.epoch.corpus.database.cp.zdk.DataPool;
+import io.zerows.epoch.program.Ut;
 import io.zerows.extension.mbse.basement.atom.Model;
 import io.zerows.extension.mbse.basement.atom.Schema;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
@@ -24,7 +25,6 @@ import io.zerows.specification.modeling.HAtom;
 import io.zerows.specification.modeling.HRecord;
 import io.zerows.specification.modeling.operation.HDao;
 import io.zerows.specification.modeling.operation.HLoad;
-import io.zerows.unity.Ux;
 
 import java.util.Objects;
 import java.util.function.Supplier;

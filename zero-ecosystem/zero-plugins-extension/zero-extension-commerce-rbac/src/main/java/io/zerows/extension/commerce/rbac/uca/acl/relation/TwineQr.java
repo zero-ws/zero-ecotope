@@ -3,17 +3,17 @@ package io.zerows.extension.commerce.rbac.uca.acl.relation;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.constant.KName;
-import io.zerows.core.fn.FnZero;
+import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.common.uca.qr.syntax.Ir;
-import io.zerows.core.util.Ut;
-import io.zerows.core.web.mbse.atom.specification.KQr;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.corpus.mbse.atom.specification.KQr;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.program.fn.Fx;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.RUserGroupDao;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.RUserRoleDao;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.RUserGroup;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.RUserRole;
 import io.zerows.extension.commerce.rbac.eon.AuthKey;
-import io.zerows.unity.Ux;
 
 import java.util.Arrays;
 import java.util.Set;
@@ -58,7 +58,7 @@ class TwineQr {
                     loop.put(field, normalize((JsonObject) fieldV));
                 }
             }
-            return FnZero.combineM(loop).compose(mapped -> {
+            return Fx.combineM(loop).compose(mapped -> {
                 mapped.forEach(resultJ::put);
                 return Ux.future(resultJ);
             });

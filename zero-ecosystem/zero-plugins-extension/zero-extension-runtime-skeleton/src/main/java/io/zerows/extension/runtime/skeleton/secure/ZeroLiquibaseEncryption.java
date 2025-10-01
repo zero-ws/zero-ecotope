@@ -1,9 +1,9 @@
 package io.zerows.extension.runtime.skeleton.secure;
 
 import io.zerows.epoch.common.shared.program.KPair;
-import io.zerows.core.constant.KName;
+import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.spi.cloud.HED;
-import io.zerows.core.util.Ut;
+import io.zerows.epoch.program.Ut;
 
 import java.util.Properties;
 import java.util.regex.Matcher;

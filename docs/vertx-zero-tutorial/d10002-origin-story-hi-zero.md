@@ -18,7 +18,7 @@ The demo project is in `vertx-zeus` , the project name is `up-rhea`.
 ```java
 package up.god.micro.origin;
 
-import io.zerows.core.annotations.EndPoint;
+import io.zerows.epoch.annotations.EndPoint;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -82,10 +82,10 @@ Once zero is up, you can test this endpoint with postman tool or curl, you shoul
 
 Now zero is up, the first example has been finished. here `@GET, @Path, @QueryParam` belong to JSR 311, you also could
 use other JSR 311 annotations to write different endpoint. But one thing is that you must define the class as EndPoint
-with zero annotation `io.zerows.core.annotations.EndPoint` , it will tell zero system to scan this class to extract all the
+with zero annotation `io.zerows.epoch.annotations.EndPoint` , it will tell zero system to scan this class to extract all the
 restful endpoints that will be published. In total:
 
-* All api classes must be annotated with `io.zerows.core.annotations.EndPoint`, this kind of classes will be scanned by
+* All api classes must be annotated with `io.zerows.epoch.annotations.EndPoint`, this kind of classes will be scanned by
   zero.
 * Zero implemented some part of JSR311, you can use JSR311 annotations such as `javax.ws.rs.@GET`, `javax.ws.rs.@Path`,
   etc.

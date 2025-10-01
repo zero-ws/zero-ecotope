@@ -5,15 +5,15 @@ import io.r2mo.spi.SPI;
 import io.r2mo.typed.webflow.WebState;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.constant.em.EmPRI;
-import io.zerows.core.util.Ut;
-import io.zerows.core.web.mbse.atom.specification.KModule;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.corpus.domain.atom.specification.KJoin;
+import io.zerows.epoch.corpus.domain.atom.specification.KPoint;
+import io.zerows.epoch.corpus.domain.uca.destine.Conflate;
+import io.zerows.epoch.corpus.mbse.atom.specification.KModule;
+import io.zerows.epoch.enums.EmPRI;
+import io.zerows.epoch.program.Ut;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 import io.zerows.extension.runtime.crud.uca.desk.IxReply;
-import io.zerows.module.domain.atom.specification.KJoin;
-import io.zerows.module.domain.atom.specification.KPoint;
-import io.zerows.module.domain.uca.destine.Conflate;
-import io.zerows.unity.Ux;
 
 import java.util.Objects;
 

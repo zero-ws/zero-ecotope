@@ -22,7 +22,7 @@ Demo projects:
 package up.god.micro.validation;
 
 
-import io.zerows.core.annotations.EndPoint;
+import io.zerows.epoch.annotations.EndPoint;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;

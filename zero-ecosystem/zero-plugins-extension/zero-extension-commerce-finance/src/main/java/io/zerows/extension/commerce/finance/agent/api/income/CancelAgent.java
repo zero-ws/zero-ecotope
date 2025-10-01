@@ -1,10 +1,10 @@
 package io.zerows.extension.commerce.finance.agent.api.income;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.annotations.Address;
-import io.zerows.core.annotations.EndPoint;
-import io.zerows.core.constant.KName;
-import io.zerows.core.web.io.annotations.BodyParam;
+import io.zerows.epoch.annotations.Address;
+import io.zerows.epoch.annotations.EndPoint;
+import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.corpus.io.annotations.BodyParam;
 import io.zerows.extension.commerce.finance.eon.Addr;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;

@@ -2,7 +2,7 @@ package io.zerows.extension.mbse.ui.util;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.util.Ut;
+import io.zerows.epoch.program.Ut;
 import io.zerows.extension.mbse.ui.atom.UiJson;
 
 class UiOption {

@@ -1,7 +1,7 @@
 package io.zerows.extension.runtime.skeleton.boot.supply;
 
-import io.zerows.core.util.Ut;
-import io.zerows.core.web.model.extension.HExtension;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.corpus.model.extension.HExtension;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
 
 import java.util.List;

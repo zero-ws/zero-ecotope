@@ -1,0 +1,88 @@
+package io.zerows.epoch.bootplus.extension.migration.tookit;
+
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.annotations.Contract;
+import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.bootplus.extension.migration.MigrateStep;
+import io.zerows.epoch.common.uca.qr.Pager;
+import io.zerows.epoch.common.uca.qr.Sorter;
+import io.zerows.epoch.common.uca.qr.syntax.Ir;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.corpus.database.cp.zdk.DataPool;
+import io.zerows.epoch.corpus.database.jooq.operation.UxJooq;
+import io.zerows.epoch.enums.Environment;
+import io.zerows.epoch.program.Ut;
+
+import java.util.function.Supplier;
+
+public abstract class AbstractStatic extends AbstractTool {
+    @Contract
+    protected transient UxJooq jooq;
+    @Contract
+    protected transient Class<?> daoCls;
+
+    public AbstractStatic(final Environment environment) {
+        super(environment);
+    }
+
+    protected JsonObject toCondition(final Pager pager, final JsonObject filters) {
+        final JsonObject condition = new JsonObject();
+        condition.put(Ir.KEY_PAGER, pager.toJson());
+        condition.put(Ir.KEY_CRITERIA, filters);
+        condition.put(Ir.KEY_SORTER, new JsonArray()
+            .add(Sorter.create(KName.CREATED_AT, false).toJson()));
+        return condition;
+    }
+
+    /*
+     * 备份工具
+     * 1 - stepT：直接调用 Jooq 执行备份（每一页10000条数据，并且压缩）
+     *     格式：xxx.zero （压缩格式）
+     * 2 - stepH：直接调用 mysqldump 执行备份
+     *     格式：xxx.sql（标准Sql备份）
+     */
+    protected MigrateStep backupT(final Class<?> daoCls, final String folder) {
+        return this.step(daoCls, folder, () -> new TableBackup(this.environment));
+    }
+
+    protected MigrateStep backupH(final Class<?> daoCls, final String folder) {
+        return this.step(daoCls, folder, () -> new TableHugeBackup(this.environment));
+    }
+
+    protected MigrateStep restoreH(final Class<?> daoCls, final String folder) {
+        return this.step(daoCls, folder, () -> new TableHugeRestore(this.environment));
+    }
+
+    protected MigrateStep restoreT(final Class<?> daoCls, final String folder) {
+        return this.step(daoCls, folder, () -> new TableRestore(this.environment));
+    }
+
+    private MigrateStep step(final Class<?> daoCls, final String folder,
+                             final Supplier<MigrateStep> supplier) {
+        /*
+         * 调用 pool() 处理
+         */
+        final UxJooq jooq = Ux.Jooq.on(daoCls, this.pool());
+        final MigrateStep step = supplier.get().bind(this.ark);
+        Ut.contract(step, UxJooq.class, jooq);
+        Ut.contract(step, Class.class, daoCls);
+        Ut.contract(step, String.class, folder);
+        return step;
+    }
+
+    @Override
+    public String table() {
+        return this.jooq.table();
+    }
+
+    @Override
+    public DataPool pool() {
+        return DataPool.create();
+    }
+
+    @Override
+    public Class<?> dao() {
+        return this.daoCls;
+    }
+}

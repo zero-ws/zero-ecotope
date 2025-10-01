@@ -2,7 +2,7 @@ package io.zerows.extension.mbse.basement.uca.query;
 
 import io.zerows.epoch.common.uca.qr.syntax.*;
 import io.zerows.epoch.constant.VValue;
-import io.zerows.core.database.jooq.condition.Clause;
+import io.zerows.epoch.corpus.database.jooq.condition.Clause;
 import io.zerows.extension.mbse.basement.atom.element.DataMatrix;
 import io.zerows.extension.mbse.basement.uca.jooq.internal.Jq;
 import org.jooq.Condition;

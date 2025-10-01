@@ -3,9 +3,9 @@ package io.vertx.up.uca.serialization;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.unit.TestContext;
-import io.zerows.core.testing.ZeroBase;
-import io.zerows.core.web.model.commune.Envelop;
-import io.zerows.module.domain.uca.serialization.ZeroType;
+import io.zerows.epoch.corpus.domain.uca.serialization.ZeroType;
+import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.testsuite.ZeroBase;
 import org.junit.Assert;
 import org.junit.Test;
 

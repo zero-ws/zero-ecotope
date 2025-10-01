@@ -2,8 +2,8 @@ package io.vertx.up.uca.web;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.testing.ZeroBase;
-import io.zerows.module.domain.uca.serialization.ZeroType;
+import io.zerows.epoch.corpus.domain.uca.serialization.ZeroType;
+import io.zerows.epoch.testsuite.ZeroBase;
 import org.junit.Test;
 
 import java.math.BigDecimal;

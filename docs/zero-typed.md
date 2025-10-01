@@ -8,9 +8,9 @@ The parameters \( Not belong to specific \), must be annotated with following
 * [x] `javax.ws.rs.PathParam`
 * [x] `javax.ws.rs.HeaderParam`
 * [x] `javax.ws.rs.CookieParam`
-* [x] `io.zerows.core.web.io.annotations.BodyParam`
-* [x] `io.zerows.core.web.io.annotations.StreamParam`
-* [x] `io.zerows.core.web.io.annotations.SessionParam`
+* [x] `io.zerows.epoch.corpus.annotations.io.BodyParam`
+* [x] `io.zerows.epoch.corpus.annotations.io.StreamParam`
+* [x] `io.zerows.epoch.corpus.annotations.io.SessionParam`
 
 The following parameter could be used by type without annotation \( Mustn't include \)
 
@@ -28,7 +28,7 @@ The following parameter could be used by type without annotation \( Mustn't incl
 package org.exmaple;
 
 import io.vertx.core.http.HttpServerRequest;
-import io.zerows.core.annotations.EndPoint;
+import io.zerows.epoch.annotations.EndPoint;
 
 import javax.ws.rs.*;
 

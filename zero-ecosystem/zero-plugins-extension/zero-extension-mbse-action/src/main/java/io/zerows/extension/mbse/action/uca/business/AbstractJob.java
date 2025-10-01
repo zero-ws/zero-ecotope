@@ -2,23 +2,23 @@ package io.zerows.extension.mbse.action.uca.business;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.based.constant.KWeb;
+import io.zerows.epoch.common.log.Annal;
 import io.zerows.epoch.common.shared.app.KIntegration;
 import io.zerows.epoch.common.shared.datamation.KDictConfig;
 import io.zerows.epoch.common.shared.datamation.KFabric;
 import io.zerows.epoch.common.shared.datamation.KMap;
 import io.zerows.epoch.common.shared.normalize.KIdentity;
 import io.zerows.epoch.common.shared.program.KRef;
-import io.zerows.core.constant.KName;
-import io.zerows.core.constant.KWeb;
-import io.zerows.core.database.atom.Database;
-import io.zerows.epoch.common.log.Annal;
-import io.zerows.core.util.Ut;
-import io.zerows.core.web.model.zdk.Service;
-import io.zerows.core.web.scheduler.atom.Mission;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.corpus.database.atom.Database;
+import io.zerows.epoch.corpus.model.zdk.Service;
+import io.zerows.epoch.corpus.web.scheduler.atom.Mission;
+import io.zerows.epoch.program.Ut;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IService;
 import io.zerows.extension.mbse.action.util.Jt;
 import io.zerows.specification.modeling.HRule;
-import io.zerows.unity.Ux;
 
 import java.util.Objects;
 

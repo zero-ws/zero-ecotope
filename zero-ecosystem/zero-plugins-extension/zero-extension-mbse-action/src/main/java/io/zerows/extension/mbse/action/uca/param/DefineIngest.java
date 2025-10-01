@@ -1,14 +1,14 @@
 package io.zerows.extension.mbse.action.uca.param;
 
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.core.util.Ut;
-import io.zerows.core.web.model.commune.Envelop;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.corpus.model.commune.Envelop;
 import io.zerows.extension.mbse.action.atom.JtUri;
 import io.zerows.extension.mbse.action.eon.JtConstant;
 import io.zerows.extension.mbse.action.exception._80401Exception501IngestMissing;
 import io.zerows.extension.mbse.action.exception._80402Exception501IngestSpec;
 import io.zerows.extension.mbse.action.osgi.spi.jet.JtIngest;
-import io.zerows.module.metadata.store.OZeroStore;
+import io.zerows.epoch.corpus.metadata.store.OZeroStore;
 
 import java.util.Objects;
 

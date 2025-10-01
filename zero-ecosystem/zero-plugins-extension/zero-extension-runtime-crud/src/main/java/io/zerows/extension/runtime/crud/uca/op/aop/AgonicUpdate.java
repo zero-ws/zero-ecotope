@@ -3,11 +3,13 @@ package io.zerows.extension.runtime.crud.uca.op.aop;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.enums.typed.ChangeFlag;
-import io.zerows.core.constant.KName;
-import io.zerows.core.database.jooq.operation.UxJooq;
+import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.common.uca.qr.syntax.Ir;
-import io.zerows.core.util.Ut;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.corpus.database.jooq.operation.UxJooq;
+import io.zerows.epoch.corpus.domain.atom.specification.KField;
+import io.zerows.epoch.enums.typed.ChangeFlag;
+import io.zerows.epoch.program.Ut;
 import io.zerows.extension.runtime.crud.bootstrap.IxPin;
 import io.zerows.extension.runtime.crud.eon.em.QrType;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
@@ -15,8 +17,6 @@ import io.zerows.extension.runtime.crud.uca.desk.IxReply;
 import io.zerows.extension.runtime.crud.uca.input.Pre;
 import io.zerows.extension.runtime.crud.uca.op.Agonic;
 import io.zerows.extension.runtime.crud.util.Ix;
-import io.zerows.module.domain.atom.specification.KField;
-import io.zerows.unity.Ux;
 
 import static io.zerows.extension.runtime.crud.util.Ix.LOG;
 

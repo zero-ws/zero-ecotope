@@ -7,7 +7,7 @@ import io.zerows.extension.commerce.finance.atom.TranData;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FBook;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FPreAuthorize;
 import io.zerows.extension.commerce.finance.eon.FmConstant;
-import io.zerows.module.domain.atom.specification.KNaming;
+import io.zerows.epoch.corpus.domain.atom.specification.KNaming;
 
 import java.math.BigDecimal;
 import java.util.List;

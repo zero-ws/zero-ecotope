@@ -3,7 +3,7 @@ package io.zerows.extension.commerce.rbac.agent.service.login;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Session;
-import io.zerows.module.metadata.uca.logging.OLog;
+import io.zerows.epoch.corpus.metadata.uca.logging.OLog;
 
 /*
  * Major interface that has been used in Worker component

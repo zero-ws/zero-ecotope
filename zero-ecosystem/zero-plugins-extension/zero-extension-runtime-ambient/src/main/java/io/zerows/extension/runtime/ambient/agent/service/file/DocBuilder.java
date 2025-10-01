@@ -4,15 +4,15 @@ import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.constant.KName;
-import io.zerows.core.fn.FnZero;
+import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.common.log.Annal;
-import io.zerows.core.util.Ut;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.program.fn.Fx;
 import io.zerows.extension.runtime.ambient.bootstrap.AtConfig;
 import io.zerows.extension.runtime.ambient.bootstrap.AtPin;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XCategoryDao;
 import io.zerows.extension.runtime.skeleton.osgi.spi.feature.Arbor;
-import io.zerows.unity.Ux;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +37,7 @@ public class DocBuilder implements DocBStub {
     public Future<JsonArray> initialize(final String appId, final String type) {
         final JsonObject condition = this.qrCond(appId, type, null);
         return Ux.Jooq.on(XCategoryDao.class).fetchJAsync(condition)
-            .compose(FnZero.ofJArray(
+            .compose(Fx.ofJArray(
                 KName.METADATA,
                 KName.Component.TREE_CONFIG,
                 KName.Component.RUN_CONFIG
@@ -45,7 +45,7 @@ public class DocBuilder implements DocBStub {
             .compose(categories -> {
                 final List<Future<JsonArray>> futures = new ArrayList<>();
                 Ut.itJArray(categories).map(this::seekAsync).forEach(futures::add);
-                return FnZero.compressA(futures);
+                return Fx.compressA(futures);
             });
     }
 
@@ -53,7 +53,7 @@ public class DocBuilder implements DocBStub {
     public Future<JsonArray> initialize(final String appId, final String type, final String name) {
         final JsonObject condition = this.qrCond(appId, type, name);
         return Ux.Jooq.on(XCategoryDao.class).fetchJOneAsync(condition)
-            .compose(FnZero.ofJObject(
+            .compose(Fx.ofJObject(
                 KName.METADATA,
                 KName.Component.TREE_CONFIG,
                 KName.Component.RUN_CONFIG

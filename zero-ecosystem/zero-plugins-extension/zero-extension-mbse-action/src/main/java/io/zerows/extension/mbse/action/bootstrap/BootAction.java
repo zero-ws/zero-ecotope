@@ -1,6 +1,6 @@
 package io.zerows.extension.mbse.action.bootstrap;
 
-import io.zerows.core.web.model.extension.AbstractBoot;
+import io.zerows.epoch.corpus.model.extension.AbstractBoot;
 import io.zerows.extension.mbse.action.eon.JtConstant;
 
 /**

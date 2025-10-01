@@ -3,7 +3,7 @@ package io.zerows.extension.commerce.rbac.uca.acl.rapier;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.web.model.commune.Envelop;
+import io.zerows.epoch.corpus.model.commune.Envelop;
 import io.zerows.extension.commerce.rbac.atom.ScOwner;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SPacket;
 

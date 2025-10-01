@@ -2,7 +2,7 @@ package io.zerows.extension.commerce.rbac.uca.acl.rapid.addon;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.extension.commerce.rbac.uca.acl.rapid.Dwarf;
-import io.zerows.module.security.zdk.authority.Acl;
+import io.zerows.epoch.corpus.security.zdk.authority.Acl;
 
 public class DwarfAddOn implements Dwarf {
     @Override

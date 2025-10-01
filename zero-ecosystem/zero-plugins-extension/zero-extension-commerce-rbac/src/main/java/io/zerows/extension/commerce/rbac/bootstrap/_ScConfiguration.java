@@ -1,12 +1,12 @@
 package io.zerows.extension.commerce.rbac.bootstrap;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.util.Ut;
-import io.zerows.core.web.model.extension.HExtension;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.corpus.model.extension.HExtension;
 import io.zerows.extension.commerce.rbac.atom.ScConfig;
 import io.zerows.extension.commerce.rbac.eon.ScConstant;
 import io.zerows.extension.runtime.skeleton.eon.KeMsg;
-import io.zerows.module.metadata.atom.configuration.MDConfiguration;
+import io.zerows.epoch.corpus.metadata.atom.configuration.MDConfiguration;
 import io.zerows.specification.access.app.HAmbient;
 
 import java.util.Objects;

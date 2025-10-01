@@ -3,13 +3,13 @@ package io.zerows.extension.runtime.ambient.agent.service;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.constant.KName;
-import io.zerows.core.fn.FnZero;
-import io.zerows.core.util.Ut;
+import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.corpus.metadata.uca.environment.DevEnv;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.program.fn.Fx;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XModuleDao;
 import io.zerows.extension.runtime.skeleton.osgi.spi.environment.Modeling;
-import io.zerows.module.metadata.uca.environment.DevEnv;
-import io.zerows.unity.Ux;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
@@ -34,7 +34,7 @@ public class ModelService implements ModelStub {
             .fetchOneAsync(filters)
             .compose(Ux::futureJ)
             /* KMetadata Field Usage */
-            .compose(FnZero.ofJObject(KName.METADATA)));
+            .compose(Fx.ofJObject(KName.METADATA)));
     }
 
     @Override

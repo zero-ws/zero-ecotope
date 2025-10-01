@@ -3,7 +3,7 @@ package io.zerows.extension.commerce.rbac.uca.meansure;
 import io.vertx.core.Promise;
 import io.vertx.core.Vertx;
 import io.vertx.ext.healthchecks.Status;
-import io.zerows.core.web.monitor.meansure.AbstractQuota;
+import io.zerows.epoch.corpus.monitor.meansure.AbstractQuota;
 import io.zerows.extension.commerce.rbac.eon.ScConstant;
 
 /**

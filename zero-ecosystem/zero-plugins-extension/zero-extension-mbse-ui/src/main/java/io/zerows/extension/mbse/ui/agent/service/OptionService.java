@@ -3,12 +3,12 @@ package io.zerows.extension.mbse.ui.agent.service;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.constant.KName;
-import io.zerows.core.fn.FnZero;
-import io.zerows.core.util.Ut;
+import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.program.fn.Fx;
 import io.zerows.extension.mbse.ui.domain.tables.daos.*;
 import io.zerows.extension.mbse.ui.domain.tables.pojos.*;
-import io.zerows.unity.Ux;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,7 +22,7 @@ public class OptionService implements OptionStub {
         return Ux.Jooq.on(VQueryDao.class)
             .<VQuery>fetchByIdAsync(id)
             .compose(Ux::futureJ)
-            .compose(FnZero.ofJObject(
+            .compose(Fx.ofJObject(
                 FIELD_QUERY_CRITERIA,
                 FIELD_QUERY_PROJECTION
             ));
@@ -33,7 +33,7 @@ public class OptionService implements OptionStub {
         return Ux.Jooq.on(VSearchDao.class)
             .<VSearch>fetchByIdAsync(id)
             .compose(Ux::futureJ)
-            .compose(FnZero.ofJObject(
+            .compose(Fx.ofJObject(
                 FIELD_SEARCH_NOTICE,
                 FIELD_SEARCH_VIEW,
                 FIELD_SEARCH_COND
@@ -45,7 +45,7 @@ public class OptionService implements OptionStub {
         return Ux.Jooq.on(VFragmentDao.class)
             .<VFragment>fetchByIdAsync(id)
             .compose(Ux::futureJ)
-            .compose(FnZero.ofJObject(
+            .compose(Fx.ofJObject(
                 FIELD_FRAGMENT_MODEL,
                 FIELD_FRAGMENT_NOTICE,
                 FIELD_FRAGMENT_CONFIG,
@@ -58,7 +58,7 @@ public class OptionService implements OptionStub {
         return Ux.Jooq.on(VTableDao.class)
             .<VTable>fetchByIdAsync(id)
             .compose(Ux::futureJ)
-            .compose(FnZero.ofJObject(
+            .compose(Fx.ofJObject(
                 FIELD_TABLE_OP_CONFIG
             ));
     }
@@ -84,7 +84,7 @@ public class OptionService implements OptionStub {
                 .insertAsync(ops)
                 .compose(Ux::futureA)
                 // 3. mountOut
-                .compose(FnZero.ofJArray(
+                .compose(Fx.ofJArray(
                     FIELD_OP_CONFIG,
                     FIELD_OP_PLUGIN,
                     KName.METADATA

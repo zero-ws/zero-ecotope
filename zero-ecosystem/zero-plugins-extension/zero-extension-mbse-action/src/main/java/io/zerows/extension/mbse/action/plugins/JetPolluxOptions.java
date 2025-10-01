@@ -2,15 +2,15 @@ package io.zerows.extension.mbse.action.plugins;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.VValue;
-import io.zerows.core.constant.configure.YmlCore;
-import io.zerows.core.util.Ut;
-import io.zerows.core.web.io.uca.routing.OAxis;
+import io.zerows.epoch.based.configure.YmlCore;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.corpus.io.uca.routing.OAxis;
 import io.zerows.extension.mbse.action.atom.JtUri;
 import io.zerows.extension.mbse.action.bootstrap.JtPin;
 import io.zerows.extension.mbse.action.bootstrap.ServiceEnvironment;
 import io.zerows.extension.mbse.action.uca.monitor.JtMonitor;
-import io.zerows.module.metadata.store.OZeroStore;
-import io.zerows.module.metadata.uca.logging.OLog;
+import io.zerows.epoch.corpus.metadata.store.OZeroStore;
+import io.zerows.epoch.corpus.metadata.uca.logging.OLog;
 import org.osgi.framework.Bundle;
 
 import java.util.Objects;

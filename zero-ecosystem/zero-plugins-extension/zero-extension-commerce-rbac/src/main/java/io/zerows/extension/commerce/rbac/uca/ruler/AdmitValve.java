@@ -2,11 +2,11 @@ package io.zerows.extension.commerce.rbac.uca.ruler;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.module.security.atom.manage.KCatena;
-import io.zerows.module.security.atom.manage.KPermit;
-import io.zerows.module.security.zdk.authority.HValve;
-import io.zerows.module.security.zdk.manager.AbstractValve;
-import io.zerows.unity.Ux;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.corpus.security.atom.manage.KCatena;
+import io.zerows.epoch.corpus.security.atom.manage.KPermit;
+import io.zerows.epoch.corpus.security.zdk.authority.HValve;
+import io.zerows.epoch.corpus.security.zdk.manager.AbstractValve;
 
 /**
  * Dim  =  FLAT

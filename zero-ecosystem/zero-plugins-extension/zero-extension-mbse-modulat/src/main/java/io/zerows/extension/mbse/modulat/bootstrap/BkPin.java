@@ -8,7 +8,7 @@ import io.zerows.extension.runtime.skeleton.osgi.spi.modeler.Modulat;
 import io.zerows.specification.access.app.HApp;
 import io.zerows.specification.access.app.HArk;
 import io.zerows.specification.configuration.boot.HRegistry;
-import io.zerows.unity.Ux;
+import io.zerows.epoch.corpus.Ux;
 
 import java.util.Objects;
 import java.util.Set;

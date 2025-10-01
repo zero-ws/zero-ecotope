@@ -9,7 +9,7 @@ import io.zerows.epoch.common.shared.app.KIntegration;
 import io.zerows.epoch.common.shared.datamation.KDictConfig;
 import io.zerows.epoch.common.shared.datamation.KMap;
 import io.zerows.epoch.common.shared.normalize.KIdentity;
-import io.zerows.core.database.atom.Database;
+import io.zerows.epoch.corpus.database.atom.Database;
 import io.zerows.epoch.common.log.Log;
 import io.zerows.epoch.common.log.LogModule;
 import io.zerows.extension.mbse.action.atom.JtConfig;

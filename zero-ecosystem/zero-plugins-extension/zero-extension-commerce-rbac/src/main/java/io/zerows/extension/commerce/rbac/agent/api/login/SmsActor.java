@@ -3,11 +3,11 @@ package io.zerows.extension.commerce.rbac.agent.api.login;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Session;
-import io.zerows.core.annotations.Address;
-import io.zerows.core.annotations.Queue;
+import io.zerows.epoch.annotations.Address;
+import io.zerows.epoch.annotations.Queue;
 import io.zerows.extension.commerce.rbac.agent.service.login.pre.SmsStub;
 import io.zerows.extension.commerce.rbac.eon.Addr;
-import io.zerows.module.domain.atom.commune.XHeader;
+import io.zerows.epoch.corpus.domain.atom.commune.XHeader;
 import jakarta.inject.Inject;
 
 /**

@@ -2,17 +2,17 @@ package io.zerows.extension.runtime.ambient.agent.service.application;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.constant.KName;
-import io.zerows.core.fn.FnZero;
+import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.common.log.Annal;
-import io.zerows.core.util.Ut;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.corpus.domain.atom.typed.UObject;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.program.fn.Fx;
 import io.zerows.extension.runtime.ambient.bootstrap.AtPin;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XAppDao;
 import io.zerows.extension.runtime.ambient.util.At;
 import io.zerows.extension.runtime.skeleton.osgi.spi.extension.Init;
 import io.zerows.extension.runtime.skeleton.osgi.spi.extension.Prerequisite;
-import io.zerows.module.domain.atom.typed.UObject;
-import io.zerows.unity.Ux;
 import jakarta.inject.Inject;
 
 import java.util.Objects;
@@ -63,7 +63,7 @@ public class InitService implements InitStub {
             /* Data Loading */
             .compose(At.initData().apply())
             /* Image */
-            .compose(FnZero.ofJObject(KName.App.LOGO));
+            .compose(Fx.ofJObject(KName.App.LOGO));
     }
 
     /**
@@ -131,7 +131,7 @@ public class InitService implements InitStub {
             .compose(appJson -> this.initOutput(appJson, outPath))
             .compose(this::initDefined)
             /* Image */
-            .compose(FnZero.ofJObject(KName.App.LOGO));
+            .compose(Fx.ofJObject(KName.App.LOGO));
     }
 
     private Future<JsonObject> initOutput(final JsonObject combined, final String outPath) {

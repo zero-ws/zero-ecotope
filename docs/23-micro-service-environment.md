@@ -90,11 +90,11 @@ In `vertx-server.yml`, you must define new node for Api Gateway as following, be
 
 ```yaml
 server:
-- name: gateway-cronus
-  type: api
-  config:
-    port: 6099
-    host: 0.0.0.0
+  - name: gateway-cronus
+    type: api
+    config:
+      port: 6099
+      host: 0.0.0.0
 ```
 
 Also you must set the same configuration for etcd in Api Gateway project. The last point is that the launcher class is
@@ -103,13 +103,15 @@ different from Service Node.
 In service node, you start up zero instance as following:
 
 ```java
-import io.vertx.boot.VertxApplication;
-import io.zerows.core.annotations.Up;
+import io.zerows.epoch.boot.VertxApplication;
+import io.zerows.epoch.annotations.Up;
 
 @Up
-public class io.god.Anchor {
+public class io.god.
 
-    public static void main(final String[] args) {
+Anchor {
+
+    public static void main ( final String[] args){
         VertxApplication.run(io.god.Anchor.class);
     }
 }
@@ -119,15 +121,17 @@ But in api gateway, you must use another class for start up, you must use `io.ve
 annotation for launcher:
 
 ```java
-import io.vertx.boot.VertxApplication;
+import io.zerows.epoch.boot.VertxApplication;
 import io.vertx.up.annotations.ApiGateway;
-import io.zerows.core.annotations.Up;
+import io.zerows.epoch.annotations.Up;
 
 @Up
 @ApiGateway
-public class io.god.Anchor {
+public class io.god.
 
-    public static void main(final String[] args) {
+Anchor {
+
+    public static void main ( final String[] args){
         VertxApplication.run(io.god.Anchor.class);
     }
 }

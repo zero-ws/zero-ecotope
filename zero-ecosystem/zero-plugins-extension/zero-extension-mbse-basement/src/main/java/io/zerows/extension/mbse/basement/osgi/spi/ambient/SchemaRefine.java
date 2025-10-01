@@ -3,13 +3,14 @@ package io.zerows.extension.mbse.basement.osgi.spi.ambient;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.constant.VString;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.corpus.database.atom.Database;
+import io.zerows.epoch.corpus.database.jooq.operation.UxJooq;
 import io.zerows.epoch.enums.typed.ChangeFlag;
-import io.zerows.core.constant.KName;
-import io.zerows.core.database.atom.Database;
-import io.zerows.core.database.jooq.operation.UxJooq;
-import io.zerows.core.fn.FnZero;
-import io.zerows.core.util.Ut;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.program.fn.Fx;
 import io.zerows.extension.mbse.basement.atom.Model;
 import io.zerows.extension.mbse.basement.atom.Schema;
 import io.zerows.extension.mbse.basement.domain.tables.daos.MEntityDao;
@@ -21,7 +22,6 @@ import io.zerows.extension.mbse.basement.domain.tables.pojos.MKey;
 import io.zerows.extension.mbse.basement.uca.jdbc.Pin;
 import io.zerows.extension.mbse.basement.uca.metadata.AoBuilder;
 import io.zerows.extension.mbse.basement.util.Ao;
-import io.zerows.unity.Ux;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentMap;
@@ -48,7 +48,7 @@ class SchemaRefine implements AoRefine {
             // 2. 更新 MEntity 相关内容
             final List<Future<JsonObject>> futures = new ArrayList<>();
             schemata.stream().map(this::saveSchema).forEach(futures::add);
-            return FnZero.combineA(futures)
+            return Fx.combineA(futures)
                 .compose(nil -> Ux.future(appJson))
                 .otherwise(Ux.otherwise(() -> null));
         };
@@ -110,7 +110,7 @@ class SchemaRefine implements AoRefine {
                 combine.add(this.saveField(schema, entity));
                 // Schema -> Key
                 combine.add(this.saveKey(schema, entity));
-                return FnZero.compressA(combine)
+                return Fx.compressA(combine)
                     .compose(nil -> Ux.future(entity))
                     .compose(Ux::futureJ)
                     .otherwise(Ux.otherwise(() -> null));

@@ -2,12 +2,12 @@ package io.zerows.extension.runtime.crud.uca.op;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.constant.KName;
-import io.zerows.core.fn.FnZero;
+import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.program.fn.Fx;
 import io.zerows.extension.runtime.crud.uca.dao.Operate;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 import io.zerows.extension.runtime.crud.util.Ix;
-import io.zerows.unity.Ux;
 
 import static io.zerows.extension.runtime.crud.util.Ix.LOG;
 
@@ -28,7 +28,7 @@ class JoinSearch implements Agonic {
              *     "metadata": {}
              * }
              */
-            .compose(FnZero.ofPage(KName.METADATA))
+            .compose(Fx.ofPage(KName.METADATA))
             /*
              * 针对后期 Page 分页接口之后的序列化执行
              * {

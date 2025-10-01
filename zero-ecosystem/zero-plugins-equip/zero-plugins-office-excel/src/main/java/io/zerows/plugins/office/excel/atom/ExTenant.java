@@ -3,15 +3,15 @@ package io.zerows.plugins.office.excel.atom;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.support.FnBase;
 import io.zerows.epoch.common.shared.app.KGlobal;
 import io.zerows.epoch.common.shared.program.Kv;
-import io.zerows.core.fn.FnZero;
-import io.zerows.core.util.Ut;
 import io.zerows.epoch.constant.VString;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.program.fn.Fx;
+import io.zerows.epoch.support.FnBase;
 import io.zerows.plugins.office.excel.ExcelClient;
 import io.zerows.plugins.office.excel.ExcelInfix;
-import io.zerows.unity.Ux;
 
 import java.io.Serializable;
 import java.util.*;
@@ -141,7 +141,7 @@ public class ExTenant implements Serializable {
                         return Ux.future(data);
                     }))
                     .forEach(futures::add);
-                return FnZero.compressA(futures);
+                return Fx.compressA(futures);
             }).compose(dataArray -> {
                 // Result
                 final String key = segments[4];

@@ -1,7 +1,7 @@
 package io.zerows.extension.runtime.skeleton.refine;
 
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.module.domain.atom.commune.Vis;
+import io.zerows.epoch.corpus.domain.atom.commune.Vis;
 
 /**
  * @author lang : 2023-06-07

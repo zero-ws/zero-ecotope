@@ -1,0 +1,12 @@
+package io.zerows.epoch.corpus.mature.exception;
+
+import io.r2mo.vertx.common.exception.VertxBootException;
+
+/**
+ * @author lang : 2025-09-30
+ */
+public class _40006Exception500PathAnnoEmpty extends VertxBootException {
+    public _40006Exception500PathAnnoEmpty() {
+        super(ERR._40006);
+    }
+}

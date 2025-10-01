@@ -19,16 +19,16 @@
     <logger name="cn.vertxup.tp.modular.dao" level="INFO">
         <appender-ref ref="ASYNC_DATABASE"/>
     </logger>
-    <logger name="io.mature.extension.uca.jdbc" level="INFO">
+    <logger name="io.zerows.epoch.bootplus.extension.uca.jdbc" level="INFO">
         <appender-ref ref="ASYNC_DATABASE"/>
     </logger>
     <logger name="cn.vertxup.tp.modular.jooq" level="INFO">
         <appender-ref ref="ASYNC_DATABASE"/>
     </logger>
-    <logger name="io.mature.extension.uca.query" level="INFO">
+    <logger name="io.zerows.epoch.bootplus.extension.uca.query" level="INFO">
         <appender-ref ref="ASYNC_DATABASE"/>
     </logger>
-    <logger name="io.mature.extension.uca.tunnel" level="INFO">
+    <logger name="io.zerows.epoch.bootplus.extension.uca.tunnel" level="INFO">
         <appender-ref ref="ASYNC_DATABASE"/>
     </logger>
 </included>

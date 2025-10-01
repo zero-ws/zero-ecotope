@@ -3,15 +3,15 @@ package io.zerows.extension.runtime.crud.uca.input;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.constant.KName;
-import io.zerows.core.fn.FnZero;
-import io.zerows.epoch.spi.modeler.Indent;
+import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.common.log.Annal;
-import io.zerows.core.util.Ut;
-import io.zerows.core.web.mbse.atom.specification.KModule;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.corpus.domain.atom.specification.KField;
+import io.zerows.epoch.corpus.mbse.atom.specification.KModule;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.program.fn.Fx;
+import io.zerows.epoch.spi.modeler.Indent;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
-import io.zerows.module.domain.atom.specification.KField;
-import io.zerows.unity.Ux;
 
 import java.util.Objects;
 import java.util.Queue;
@@ -52,7 +52,7 @@ class SerialPre implements Pre {
                     numberMap.put(numberField, stub.indent(code, sigma));
                 });
             /* Combine number map here for generation */
-            return FnZero.combineM(numberMap).compose(generated -> {
+            return Fx.combineM(numberMap).compose(generated -> {
                 generated.forEach(data::put);
                 return Ux.future(data);
             });
@@ -78,7 +78,7 @@ class SerialPre implements Pre {
                     return stub.indent(code, sigma, size);
                 })));
             /* Combine */
-            return FnZero.combineM(numberMap).compose(generated -> {
+            return Fx.combineM(numberMap).compose(generated -> {
                 generated.forEach((numberField, numberQueue) -> this.runFill(data, numberField, numberQueue));
                 return Ux.future(data);
             });

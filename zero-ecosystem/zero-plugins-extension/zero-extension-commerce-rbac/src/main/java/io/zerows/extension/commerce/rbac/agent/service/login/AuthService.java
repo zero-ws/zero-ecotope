@@ -10,7 +10,7 @@ import io.zerows.extension.commerce.rbac.domain.tables.pojos.OUser;
 import io.zerows.extension.commerce.rbac.eon.AuthKey;
 import io.zerows.extension.commerce.rbac.eon.AuthMsg;
 import io.zerows.extension.commerce.rbac.exception._80202Exception401CodeGeneration;
-import io.zerows.unity.Ux;
+import io.zerows.epoch.corpus.Ux;
 import jakarta.inject.Inject;
 
 import java.util.Objects;

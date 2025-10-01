@@ -2,14 +2,14 @@ package io.zerows.extension.runtime.ambient.agent.api.application;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
-import io.zerows.core.annotations.Address;
-import io.zerows.core.annotations.Queue;
-import io.zerows.core.constant.KName;
-import io.zerows.core.util.Ut;
+import io.zerows.epoch.annotations.Address;
+import io.zerows.epoch.annotations.Queue;
+import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.corpus.domain.atom.typed.UArray;
+import io.zerows.epoch.program.Ut;
 import io.zerows.extension.runtime.ambient.agent.service.application.AppStub;
 import io.zerows.extension.runtime.ambient.eon.Addr;
-import io.zerows.module.domain.atom.typed.UArray;
-import io.zerows.unity.Ux;
 import jakarta.inject.Inject;
 
 /**

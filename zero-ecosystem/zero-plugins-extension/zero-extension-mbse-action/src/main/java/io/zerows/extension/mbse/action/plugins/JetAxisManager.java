@@ -1,7 +1,7 @@
 package io.zerows.extension.mbse.action.plugins;
 
-import io.zerows.core.web.io.management.AxisDynamicFactory;
-import io.zerows.core.web.io.uca.routing.OAxis;
+import io.zerows.epoch.corpus.io.management.AxisDynamicFactory;
+import io.zerows.epoch.corpus.io.uca.routing.OAxis;
 import org.osgi.framework.Bundle;
 
 import java.util.Objects;

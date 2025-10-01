@@ -16,13 +16,13 @@
         <queueSize>8192</queueSize>
         <appender-ref ref="WF"/>
     </appender>
-    <logger name="io.mature.extension.uca.confirm" level="INFO">
+    <logger name="io.zerows.epoch.bootplus.extension.uca.confirm" level="INFO">
         <appender-ref ref="ASYNC_WF"/>
     </logger>
-    <logger name="io.mature.extension.uca.ticket" level="INFO">
+    <logger name="io.zerows.epoch.bootplus.extension.uca.ticket" level="INFO">
         <appender-ref ref="ASYNC_WF"/>
     </logger>
-    <logger name="io.mature.extension.uca.workflow" level="INFO">
+    <logger name="io.zerows.epoch.bootplus.extension.uca.workflow" level="INFO">
         <appender-ref ref="ASYNC_WF"/>
     </logger>
 </included>

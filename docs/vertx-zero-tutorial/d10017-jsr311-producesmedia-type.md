@@ -15,7 +15,7 @@ Demo projects:
 package up.god.micro.media;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.annotations.EndPoint;
+import io.zerows.epoch.annotations.EndPoint;
 
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;

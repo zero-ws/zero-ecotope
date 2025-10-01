@@ -3,14 +3,14 @@ package io.zerows.extension.runtime.ambient.agent.service.linkage;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.constant.VString;
-import io.zerows.core.constant.KName;
-import io.zerows.core.database.jooq.operation.UxJooq;
-import io.zerows.core.fn.FnZero;
-import io.zerows.core.util.Ut;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.corpus.database.jooq.operation.UxJooq;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.program.fn.Fx;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XLinkageDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XLinkage;
-import io.zerows.unity.Ux;
 
 import java.util.*;
 
@@ -67,9 +67,9 @@ public class LinkService implements LinkStub {
         final List<Future<List<XLinkage>>> futures = new ArrayList<>();
         futures.add(jooq.insertAsync(queueA));
         futures.add(jooq.updateAsync(queueU));
-        return FnZero.compressL(futures)
+        return Fx.compressL(futures)
             .compose(Ux::futureA)
-            .compose(FnZero.ofJArray(KName.SOURCE_DATA, KName.TARGET_DATA));
+            .compose(Fx.ofJArray(KName.SOURCE_DATA, KName.TARGET_DATA));
     }
 
     @Override

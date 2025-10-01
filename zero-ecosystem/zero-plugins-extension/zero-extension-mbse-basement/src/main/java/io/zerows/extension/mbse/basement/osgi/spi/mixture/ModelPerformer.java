@@ -5,15 +5,15 @@ import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.fn.FnZero;
-import io.zerows.core.util.Ut;
-import io.zerows.epoch.container.exception._80510Exception404ModelNotFound;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.corpus.container.exception._80510Exception404ModelNotFound;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.program.fn.Fx;
 import io.zerows.extension.mbse.basement.atom.Model;
 import io.zerows.extension.mbse.basement.domain.tables.daos.MModelDao;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MModel;
 import io.zerows.extension.mbse.basement.uca.phantom.AoModeler;
 import io.zerows.extension.mbse.basement.util.Ao;
-import io.zerows.unity.Ux;
 
 import java.util.*;
 
@@ -91,7 +91,7 @@ public class ModelPerformer implements AoPerformer {
         private Future<JsonArray> startList(final List<MModel> modelList) {
             final List<Future<JsonObject>> futures = new ArrayList<>();
             modelList.stream().map(this::execute).forEach(futures::add);
-            return FnZero.combineA(futures);
+            return Fx.combineA(futures);
         }
 
         private Future<JsonObject> execute(final MModel model) {

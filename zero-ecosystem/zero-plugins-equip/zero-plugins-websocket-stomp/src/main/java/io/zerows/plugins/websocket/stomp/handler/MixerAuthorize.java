@@ -4,10 +4,10 @@ import io.vertx.core.Vertx;
 import io.vertx.ext.auth.authentication.AuthenticationProvider;
 import io.vertx.ext.stomp.StompServerHandler;
 import io.vertx.ext.stomp.StompServerOptions;
-import io.zerows.core.util.Ut;
-import io.zerows.core.web.security.store.OCacheSecurity;
-import io.zerows.core.web.security.uca.bridge.Bolt;
-import io.zerows.module.security.atom.Aegis;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.corpus.web.security.store.OCacheSecurity;
+import io.zerows.epoch.corpus.web.security.uca.bridge.Bolt;
+import io.zerows.epoch.corpus.security.atom.Aegis;
 
 import java.util.Objects;
 import java.util.Set;

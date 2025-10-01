@@ -1,6 +1,6 @@
 package io.zerows.extension.runtime.skeleton.osgi.spi.ui;
 
-import io.zerows.core.database.jooq.operation.UxJooq;
+import io.zerows.epoch.corpus.database.jooq.operation.UxJooq;
 import io.zerows.epoch.common.log.Annal;
 
 /*

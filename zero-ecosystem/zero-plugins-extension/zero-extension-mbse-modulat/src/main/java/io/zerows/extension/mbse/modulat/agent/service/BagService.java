@@ -3,12 +3,12 @@ package io.zerows.extension.mbse.modulat.agent.service;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.common.shared.program.KRef;
-import io.zerows.core.constant.KName;
-import io.zerows.core.fn.FnZero;
-import io.zerows.core.util.Ut;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.program.fn.Fx;
 import io.zerows.extension.mbse.modulat.domain.tables.daos.BBagDao;
-import io.zerows.unity.Ux;
 import jakarta.inject.Inject;
 
 import java.util.Set;
@@ -35,7 +35,7 @@ public class BagService implements BagStub {
     }
 
     private Future<JsonArray> fetchBag(final JsonObject condition) {
-        return Ux.Jooq.on(BBagDao.class).fetchJAsync(condition).compose(FnZero.ofJArray(
+        return Ux.Jooq.on(BBagDao.class).fetchJAsync(condition).compose(Fx.ofJArray(
             KName.Flow.UI_STYLE,
             KName.Flow.UI_CONFIG
         ));

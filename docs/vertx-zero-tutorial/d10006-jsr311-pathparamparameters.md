@@ -12,7 +12,7 @@ Demo projects:
 ```java
 package up.god.micro.params;
 
-import io.zerows.core.annotations.EndPoint;
+import io.zerows.epoch.annotations.EndPoint;
 
 import javax.ws.rs.*;
 

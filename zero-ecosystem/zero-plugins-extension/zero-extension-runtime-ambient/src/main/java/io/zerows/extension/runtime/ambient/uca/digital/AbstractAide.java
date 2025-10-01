@@ -3,12 +3,12 @@ package io.zerows.extension.runtime.ambient.uca.digital;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.constant.VValue;
-import io.zerows.core.constant.KName;
-import io.zerows.core.fn.FnZero;
-import io.zerows.core.util.Ut;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.program.fn.Fx;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XTabularDao;
-import io.zerows.unity.Ux;
 
 import java.util.Objects;
 
@@ -23,7 +23,7 @@ public abstract class AbstractAide implements Aide {
     protected Future<JsonArray> fetchDict(final JsonObject criteria) {
         return Ux.Jooq.on(XTabularDao.class).fetchAsync(criteria)
             .compose(Ux::futureA)
-            .compose(FnZero.ofJArray(KName.METADATA));
+            .compose(Fx.ofJArray(KName.METADATA));
     }
 
     // --------------- condition building -----------------

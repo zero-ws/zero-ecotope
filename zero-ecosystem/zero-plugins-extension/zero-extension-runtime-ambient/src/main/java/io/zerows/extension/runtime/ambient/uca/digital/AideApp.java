@@ -3,10 +3,10 @@ package io.zerows.extension.runtime.ambient.uca.digital;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.constant.KName;
-import io.zerows.core.fn.FnZero;
+import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.program.fn.Fx;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XTabularDao;
-import io.zerows.unity.Ux;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
@@ -24,6 +24,6 @@ public class AideApp extends AbstractAide {
     public Future<JsonObject> fetch(final String field, final String type, final String code) {
         return Ux.Jooq.on(XTabularDao.class)
             .fetchOneAsync(this.condApp(field, type, code))
-            .compose(Ux::futureJ).compose(FnZero.ofJObject(KName.METADATA));
+            .compose(Ux::futureJ).compose(Fx.ofJObject(KName.METADATA));
     }
 }

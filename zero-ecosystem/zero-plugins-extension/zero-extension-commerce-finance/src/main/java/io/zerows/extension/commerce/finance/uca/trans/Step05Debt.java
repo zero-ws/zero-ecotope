@@ -2,10 +2,11 @@ package io.zerows.extension.commerce.finance.uca.trans;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.constant.VValue;
+import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.common.shared.program.KRef;
-import io.zerows.core.constant.KName;
-import io.zerows.core.util.Ut;
+import io.zerows.epoch.constant.VValue;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.program.Ut;
 import io.zerows.extension.commerce.finance.domain.tables.daos.FDebtDao;
 import io.zerows.extension.commerce.finance.domain.tables.daos.FSettlementItemDao;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FDebt;
@@ -13,7 +14,6 @@ import io.zerows.extension.commerce.finance.domain.tables.pojos.FSettlement;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FSettlementItem;
 import io.zerows.extension.commerce.finance.eon.FmConstant;
 import io.zerows.extension.commerce.finance.uca.enter.Maker;
-import io.zerows.unity.Ux;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -68,11 +68,11 @@ class Step05Debt implements Trade<List<FSettlement>, FDebt> {
             .compose(ref::future)
             .compose(items -> Maker.ofD().buildAsync(data, items))
             .compose(entity -> {
-                String string = data.getString("amount");
+                final String string = data.getString("amount");
                 entity.setAmount(new BigDecimal(string));
                 entity.setAmountBalance(new BigDecimal(string));
                 entity.setKey(null);
-               return Ux.Jooq.on(FDebtDao.class).insertAsync(entity);
+                return Ux.Jooq.on(FDebtDao.class).insertAsync(entity);
             })
             .compose(inserted -> {
                 // 更新 items

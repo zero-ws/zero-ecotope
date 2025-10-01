@@ -2,18 +2,18 @@ package io.zerows.extension.mbse.modulat.agent.service;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.constant.KName;
-import io.zerows.core.database.jooq.operation.UxJooq;
-import io.zerows.core.fn.FnZero;
-import io.zerows.core.util.Ut;
-import io.zerows.core.web.cache.Rapid;
+import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.corpus.database.jooq.operation.UxJooq;
+import io.zerows.epoch.corpus.web.cache.Rapid;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.program.fn.Fx;
 import io.zerows.extension.mbse.modulat.atom.PowerApp;
 import io.zerows.extension.mbse.modulat.domain.tables.daos.BBagDao;
 import io.zerows.extension.mbse.modulat.domain.tables.daos.BBlockDao;
 import io.zerows.extension.mbse.modulat.domain.tables.pojos.BBag;
 import io.zerows.extension.mbse.modulat.domain.tables.pojos.BBlock;
 import io.zerows.extension.mbse.modulat.uca.configure.Combiner;
-import io.zerows.unity.Ux;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -81,7 +81,7 @@ public class BagArgService implements BagArgStub {
         Objects.requireNonNull(bagId);
         return Ux.Jooq.on(BBagDao.class).<BBag>fetchByIdAsync(bagId)
             // Cache Processing
-            .compose(FnZero.ofJObject(bag -> this.saveConfigure(bag, data)));
+            .compose(Fx.ofJObject(bag -> this.saveConfigure(bag, data)));
     }
 
     @Override
@@ -89,7 +89,7 @@ public class BagArgService implements BagArgStub {
         Objects.requireNonNull(nameAbbr);
         return Ux.Jooq.on(BBagDao.class).<BBag>fetchOneAsync("nameAbbr", nameAbbr)
             // Cache Processing
-            .compose(FnZero.ofJObject(bag -> this.saveConfigure(bag, data)));
+            .compose(Fx.ofJObject(bag -> this.saveConfigure(bag, data)));
     }
 
     private Future<JsonObject> saveConfigure(final BBag bag, final JsonObject data) {
@@ -99,8 +99,8 @@ public class BagArgService implements BagArgStub {
             // Parameters Store Code Logical
             .compose(blocks -> blockStub.saveParameters(blocks, data))
             // Refresh Cache of appId
-            .compose(config -> PowerApp.getLatest(bag.getAppId(),true)
-            .compose(nil -> Ux.future(config)));
+            .compose(config -> PowerApp.getLatest(bag.getAppId(), true)
+                .compose(nil -> Ux.future(config)));
     }
 
     @Override

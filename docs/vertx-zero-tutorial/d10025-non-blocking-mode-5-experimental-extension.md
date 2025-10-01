@@ -18,8 +18,8 @@ Demo projects:
 package up.god.micro.async;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.annotations.Address;
-import io.zerows.core.annotations.EndPoint;
+import io.zerows.epoch.annotations.Address;
+import io.zerows.epoch.annotations.EndPoint;
 
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -44,8 +44,8 @@ package up.god.micro.async;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.annotations.Address;
-import io.zerows.core.annotations.Queue;
+import io.zerows.epoch.annotations.Address;
+import io.zerows.epoch.annotations.Queue;
 
 @Queue
 public class VertxAsyncWorker {
@@ -62,8 +62,8 @@ public class VertxAsyncWorker {
 
 ### Programming Rules
 
-1. The worker class must be annotated with `io.zerows.core.annotations.Queue`.
-2. You must use `io.zerows.core.annotations.Address` annotation to set address of string type in **Sender/Consumer** both.
+1. The worker class must be annotated with `io.zerows.epoch.annotations.Queue`.
+2. You must use `io.zerows.epoch.annotations.Address` annotation to set address of string type in **Sender/Consumer** both.
 3. Address value should be the same shared in **Sender/Consumer.**
 4. The biggest difference between standard mode 5 and current mode is that there is no limitation in current mode, we
    could be sure the method signature should be: `Future<T> method( I )`, except the return type should

@@ -5,9 +5,9 @@ import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.constant.em.EmSecure;
+import io.zerows.epoch.enums.EmSecure;
 import io.zerows.extension.commerce.rbac.exception._80225Exception404AdmitCompilerNull;
-import io.zerows.module.security.atom.manage.KPermit;
+import io.zerows.epoch.corpus.security.atom.manage.KPermit;
 
 import java.util.Objects;
 import java.util.function.Supplier;

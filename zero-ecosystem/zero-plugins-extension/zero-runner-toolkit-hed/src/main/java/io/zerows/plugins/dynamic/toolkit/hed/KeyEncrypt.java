@@ -1,6 +1,6 @@
 package io.zerows.plugins.dynamic.toolkit.hed;
 
-import io.zerows.core.util.Ut;
+import io.zerows.epoch.program.Ut;
 
 public class KeyEncrypt {
     public static void main(final String[] args) {

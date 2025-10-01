@@ -3,9 +3,9 @@
 Because body request often used in restful web service application, zero system extend JSR311 and defined new
 annotations for common usage.
 
-* `io.zerows.core.web.io.annotations.BodyParam`
-* `io.zerows.core.web.io.annotations.SessionParam`
-* `io.zerows.core.web.io.annotations.StreamParam`
+* `io.zerows.epoch.corpus.annotations.io.BodyParam`
+* `io.zerows.epoch.corpus.annotations.io.SessionParam`
+* `io.zerows.epoch.corpus.annotations.io.StreamParam`
 
 Above three annotations are defined by zero system, because it's useful in different requirements, current tutorial will
 describe the usage of @BodyParam. There are some simple rules for @BodyParam:
@@ -31,9 +31,9 @@ package up.god.micro.params;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.annotations.EndPoint;
+import io.zerows.epoch.annotations.EndPoint;
 
-import io.zerows.core.web.io.annotations.BodyParam;
+import io.zerows.epoch.corpus.annotations.io.BodyParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 

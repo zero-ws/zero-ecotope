@@ -4,13 +4,13 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.common.log.Annal;
 import io.zerows.epoch.common.uca.qr.Criteria;
+import io.zerows.epoch.corpus.Ux;
 import io.zerows.extension.mbse.basement.uca.dao.internal.*;
 import io.zerows.extension.mbse.basement.uca.jdbc.AoConnection;
 import io.zerows.extension.mbse.basement.uca.metadata.AoSentence;
 import io.zerows.specification.modeling.HAtom;
 import io.zerows.specification.modeling.HRecord;
 import io.zerows.specification.modeling.operation.HDao;
-import io.zerows.unity.Ux;
 
 import java.util.Objects;
 

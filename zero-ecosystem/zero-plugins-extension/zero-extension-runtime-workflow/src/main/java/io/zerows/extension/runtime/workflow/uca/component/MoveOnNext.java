@@ -8,7 +8,7 @@ import io.zerows.extension.runtime.workflow.atom.runtime.WTransition;
 import io.zerows.extension.runtime.workflow.exception._80605Exception409InValidInstance;
 import io.zerows.extension.runtime.workflow.uca.camunda.RunOn;
 import io.zerows.extension.runtime.workflow.uca.central.AbstractMoveOn;
-import io.zerows.module.domain.atom.specification.KFlow;
+import io.zerows.epoch.corpus.domain.atom.specification.KFlow;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 
 import java.util.Objects;

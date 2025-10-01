@@ -1,7 +1,7 @@
 package io.zerows.extension.mbse.action.uca.valve;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.core.web.model.commune.Envelop;
+import io.zerows.epoch.corpus.model.commune.Envelop;
 import io.zerows.extension.mbse.action.atom.JtUri;
 
 /*

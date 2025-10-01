@@ -3,11 +3,12 @@ package io.zerows.extension.commerce.finance.agent.api;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.annotations.Address;
-import io.zerows.core.annotations.Queue;
-import io.zerows.core.constant.KName;
-import io.zerows.core.fn.FnZero;
-import io.zerows.core.util.Ut;
+import io.zerows.epoch.annotations.Address;
+import io.zerows.epoch.annotations.Queue;
+import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.program.fn.Fx;
 import io.zerows.extension.commerce.finance.agent.service.BookStub;
 import io.zerows.extension.commerce.finance.agent.service.FetchStub;
 import io.zerows.extension.commerce.finance.agent.service.end.SettleRStub;
@@ -16,7 +17,6 @@ import io.zerows.extension.commerce.finance.atom.BillData;
 import io.zerows.extension.commerce.finance.domain.tables.daos.*;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.*;
 import io.zerows.extension.commerce.finance.eon.Addr;
-import io.zerows.unity.Ux;
 import jakarta.inject.Inject;
 
 import java.util.ArrayList;
@@ -63,11 +63,11 @@ public class FetchActor {
              */
             .compose(nil -> data.response(false))
             /*
-            * 查询预授权信息
-            */
-            .compose(dataSouse-> Ux.Jooq.on(FPreAuthorizeDao.class).<FPreAuthorize>fetchAsync("orderId",orderId).compose(item->{
-               dataSouse.put("preAuthorize", item.isEmpty() ?new JsonArray(): Ux.toJson(item));
-               return Ux.future(dataSouse);
+             * 查询预授权信息
+             */
+            .compose(dataSouse -> Ux.Jooq.on(FPreAuthorizeDao.class).<FPreAuthorize>fetchAsync("orderId", orderId).compose(item -> {
+                dataSouse.put("preAuthorize", item.isEmpty() ? new JsonArray() : Ux.toJson(item));
+                return Ux.future(dataSouse);
             }));
     }
 
@@ -118,27 +118,27 @@ public class FetchActor {
                 return this.fetchStub.fetchSettlements(items);
             }).compose(settlements -> {
                 Set<String> serial = null;
-                for (FSettlement item : settlements) {
+                for (final FSettlement item : settlements) {
                     serial = Set.of("ST:" + item.getSerial());
                 }
                 return Ux.Jooq.on(FTransDao.class).<FTrans>fetchAsync("NAME", serial)
-                        .compose(fTrans -> {
-                            Set<String> seria = null;
-                            for (FTrans item : fTrans) {
-                                seria = Set.of(item.getKey());
-                            }
-                            return Ux.Jooq.on(FTransItemDao.class).<FTransItem>fetchAsync("TRANSACTION_ID", seria);
-                        }).compose(fTransItems -> {
-                            final JsonArray settlementJ = Ux.toJson(settlements);
-                            final JsonArray newSettlements = new JsonArray();
-                            settlementJ.forEach(item -> {
-                                final JsonObject entries = Ux.toJson(item);
-                                entries.put("payment", Ux.toJson(fTransItems));
-                                newSettlements.add(entries);
-                            });
-                            response.put("settlements", newSettlements);
-                            return Ux.future(response);
+                    .compose(fTrans -> {
+                        Set<String> seria = null;
+                        for (final FTrans item : fTrans) {
+                            seria = Set.of(item.getKey());
+                        }
+                        return Ux.Jooq.on(FTransItemDao.class).<FTransItem>fetchAsync("TRANSACTION_ID", seria);
+                    }).compose(fTransItems -> {
+                        final JsonArray settlementJ = Ux.toJson(settlements);
+                        final JsonArray newSettlements = new JsonArray();
+                        settlementJ.forEach(item -> {
+                            final JsonObject entries = Ux.toJson(item);
+                            entries.put("payment", Ux.toJson(fTransItems));
+                            newSettlements.add(entries);
                         });
+                        response.put("settlements", newSettlements);
+                        return Ux.future(response);
+                    });
             }).otherwise(Ux.otherwise(new JsonObject()));
         });
     }
@@ -164,6 +164,6 @@ public class FetchActor {
     @Address(Addr.BillItem.FETCH_BOOK_BY_KEY)
     public Future<JsonObject> fetchBook(final String bookId) {
         // Null Prevent
-        return FnZero.ofJObject(this.bookStub::fetchByKey).apply(bookId);
+        return Fx.ofJObject(this.bookStub::fetchByKey).apply(bookId);
     }
 }

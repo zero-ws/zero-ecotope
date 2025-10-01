@@ -3,10 +3,12 @@ package io.zerows.extension.runtime.ambient.agent.service.application;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.constant.VString;
-import io.zerows.core.constant.KName;
-import io.zerows.core.fn.FnZero;
-import io.zerows.core.util.Ut;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.corpus.domain.atom.typed.UObject;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.program.fn.Fx;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XAppDao;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XSourceDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XApp;
@@ -14,8 +16,6 @@ import io.zerows.extension.runtime.ambient.util.At;
 import io.zerows.extension.runtime.skeleton.osgi.spi.business.ExApp;
 import io.zerows.extension.runtime.skeleton.osgi.spi.feature.Attachment;
 import io.zerows.extension.runtime.skeleton.osgi.spi.modeler.Modulat;
-import io.zerows.module.domain.atom.typed.UObject;
-import io.zerows.unity.Ux;
 
 public class AppService implements AppStub {
 
@@ -80,7 +80,7 @@ public class AppService implements AppStub {
             /* Get Result */
             .compose(Ux::futureJ)
             /* JDBC */
-            .compose(FnZero.ofJObject("jdbcConfig"));
+            .compose(Fx.ofJObject("jdbcConfig"));
     }
 
     @Override
@@ -88,7 +88,7 @@ public class AppService implements AppStub {
         return this.updateLogo(appId, data)
             .compose(updated -> Ux.Jooq.on(XAppDao.class).updateJAsync(appId, updated)
                 /* Image field: logo */
-                .compose(FnZero.ofJObject(KName.App.LOGO)));
+                .compose(Fx.ofJObject(KName.App.LOGO)));
     }
 
     private Future<JsonObject> updateLogo(final String appId, final JsonObject data) {

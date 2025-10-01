@@ -2,15 +2,15 @@ package io.zerows.extension.runtime.ambient.bootstrap;
 
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.util.Ut;
-import io.zerows.core.web.model.extension.HExtension;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.corpus.model.extension.HExtension;
 import io.zerows.extension.runtime.ambient.eon.AtConstant;
 import io.zerows.extension.runtime.ambient.exception._80302Exception500InitSpecification;
 import io.zerows.extension.runtime.ambient.exception._80303Exception500PrerequisiteSpec;
 import io.zerows.extension.runtime.skeleton.eon.KeMsg;
 import io.zerows.extension.runtime.skeleton.osgi.spi.extension.Init;
 import io.zerows.extension.runtime.skeleton.osgi.spi.extension.Prerequisite;
-import io.zerows.module.metadata.atom.configuration.MDConfiguration;
+import io.zerows.epoch.corpus.metadata.atom.configuration.MDConfiguration;
 import io.zerows.specification.access.app.HAmbient;
 
 import java.util.Objects;

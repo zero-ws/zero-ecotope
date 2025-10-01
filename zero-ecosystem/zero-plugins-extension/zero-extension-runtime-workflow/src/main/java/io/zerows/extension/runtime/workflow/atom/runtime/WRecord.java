@@ -4,11 +4,13 @@ import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.constant.VValue;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.corpus.cloud.zdk.spi.Dictionary;
 import io.zerows.epoch.enums.typed.ChangeFlag;
-import io.zerows.core.constant.KName;
-import io.zerows.core.fn.FnZero;
-import io.zerows.core.util.Ut;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.program.fn.Fx;
 import io.zerows.extension.runtime.skeleton.osgi.spi.business.ExActivity;
 import io.zerows.extension.runtime.workflow.atom.EngineOn;
 import io.zerows.extension.runtime.workflow.atom.configuration.MetaInstance;
@@ -20,8 +22,6 @@ import io.zerows.extension.runtime.workflow.eon.em.TodoStatus;
 import io.zerows.extension.runtime.workflow.exception._80611Exception410TaskState;
 import io.zerows.extension.runtime.workflow.uca.camunda.Io;
 import io.zerows.extension.runtime.workflow.uca.modeling.ActionOn;
-import io.zerows.module.cloud.zdk.spi.Dictionary;
-import io.zerows.unity.Ux;
 import org.camunda.bpm.engine.history.HistoricProcessInstance;
 import org.camunda.bpm.engine.task.Task;
 
@@ -245,7 +245,7 @@ public class WRecord implements Serializable {
             .compose(workflow -> this.dataTicket(response, workflow))
             // `history` field mount
             .compose(this::dataHistory)
-            .compose(FnZero.ofJObject(KName.HISTORY, response));
+            .compose(Fx.ofJObject(KName.HISTORY, response));
     }
 
     public Future<WRecord> futureAfter(final JsonObject dataAfter) {

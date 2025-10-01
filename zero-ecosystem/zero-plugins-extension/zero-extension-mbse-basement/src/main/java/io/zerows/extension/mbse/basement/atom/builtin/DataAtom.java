@@ -1,7 +1,7 @@
 package io.zerows.extension.mbse.basement.atom.builtin;
 
-import io.zerows.core.constant.KName;
-import io.zerows.core.web.mbse.atom.shape.AbstractHAtom;
+import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.corpus.mbse.atom.shape.AbstractHAtom;
 import io.zerows.extension.mbse.basement.atom.Model;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MModel;
 import io.zerows.extension.mbse.basement.util.Ao;

@@ -7,7 +7,7 @@ This article is a sample demo to describe how to use vert.x zero in your project
 ```java
 package org.exmaple;
 
-import io.zerows.core.annotations.EndPoint;
+import io.zerows.epoch.annotations.EndPoint;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

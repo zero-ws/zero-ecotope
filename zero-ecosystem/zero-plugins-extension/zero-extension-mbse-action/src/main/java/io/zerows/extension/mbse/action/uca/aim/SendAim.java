@@ -7,14 +7,14 @@ import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.core.web.container.uca.mode.Answer;
-import io.zerows.core.web.container.uca.reply.ActionNext;
-import io.zerows.core.web.container.uca.reply.OAmbit;
-import io.zerows.core.web.model.commune.Envelop;
+import io.zerows.epoch.corpus.container.uca.mode.Answer;
+import io.zerows.epoch.corpus.container.uca.reply.ActionNext;
+import io.zerows.epoch.corpus.container.uca.reply.OAmbit;
+import io.zerows.epoch.corpus.model.commune.Envelop;
 import io.zerows.extension.mbse.action.atom.JtUri;
 import io.zerows.extension.mbse.action.uca.monitor.JtMonitor;
-import io.zerows.module.configuration.atom.NodeNetwork;
-import io.zerows.module.configuration.store.OCacheNode;
+import io.zerows.epoch.corpus.configuration.atom.NodeNetwork;
+import io.zerows.epoch.corpus.configuration.store.OCacheNode;
 
 import java.util.Objects;
 

@@ -4,11 +4,12 @@ import io.vertx.core.Future;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.support.FnBase;
+import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.common.shared.program.Kv;
-import io.zerows.core.constant.KName;
-import io.zerows.core.fn.FnZero;
-import io.zerows.core.util.Ut;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.program.fn.Fx;
+import io.zerows.epoch.support.FnBase;
 import io.zerows.extension.runtime.report.atom.RGeneration;
 import io.zerows.extension.runtime.report.domain.tables.daos.KpReportInstanceDao;
 import io.zerows.extension.runtime.report.domain.tables.pojos.KpFeature;
@@ -16,7 +17,6 @@ import io.zerows.extension.runtime.report.domain.tables.pojos.KpReport;
 import io.zerows.extension.runtime.report.domain.tables.pojos.KpReportInstance;
 import io.zerows.extension.runtime.report.uca.combiner.StepGenerator;
 import io.zerows.extension.runtime.report.uca.pull.DataInput;
-import io.zerows.unity.Ux;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +58,7 @@ public class ReportInstanceService implements ReportInstanceStub {
     public Future<JsonObject> fetchInstance(final String key) {
         return Ux.Jooq.on(KpReportInstanceDao.class)
             .fetchByIdAsync(key)
-            .compose(Ux::futureJ).compose(FnZero.ofJObject(
+            .compose(Ux::futureJ).compose(Fx.ofJObject(
                 "reportContent",
                 "reportData"
             ));

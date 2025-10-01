@@ -5,16 +5,16 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
-import io.zerows.epoch.common.shared.program.KRef;
-import io.zerows.core.constant.KName;
-import io.zerows.core.constant.KWeb;
-import io.zerows.core.fn.FnZero;
+import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.based.constant.KWeb;
 import io.zerows.epoch.common.log.Annal;
-import io.zerows.core.util.Ut;
-import io.zerows.core.web.cache.Rapid;
+import io.zerows.epoch.common.shared.program.KRef;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.corpus.metadata.uca.environment.DevEnv;
+import io.zerows.epoch.corpus.web.cache.Rapid;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.program.fn.Fx;
 import io.zerows.extension.commerce.rbac.eon.AuthKey;
-import io.zerows.module.metadata.uca.environment.DevEnv;
-import io.zerows.unity.Ux;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -192,7 +192,7 @@ public class ScUser {
 
     // ------------------------- Session Method -----------------------
     public Future<JsonObject> view() {
-        return this.<JsonObject>get(KName.VIEW).compose(FnZero.ifJObject(item -> item));
+        return this.<JsonObject>get(KName.VIEW).compose(Fx.ifJObject(item -> item));
     }
 
     public Future<JsonObject> view(final String viewKey) {
@@ -225,7 +225,7 @@ public class ScUser {
      * }
      */
     public Future<JsonObject> profile() {
-        return this.<JsonObject>get(KName.PROFILE).compose(FnZero.ifJObject(item -> item));
+        return this.<JsonObject>get(KName.PROFILE).compose(Fx.ifJObject(item -> item));
     }
 
     public Future<JsonObject> permissions() {

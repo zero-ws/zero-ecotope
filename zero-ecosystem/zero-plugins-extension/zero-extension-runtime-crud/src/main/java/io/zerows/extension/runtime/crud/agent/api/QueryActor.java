@@ -2,17 +2,17 @@ package io.zerows.extension.runtime.crud.agent.api;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.annotations.Address;
-import io.zerows.core.annotations.Queue;
-import io.zerows.core.constant.KName;
-import io.zerows.core.web.model.commune.Envelop;
+import io.zerows.epoch.annotations.Address;
+import io.zerows.epoch.annotations.Queue;
+import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.corpus.model.commune.Envelop;
 import io.zerows.extension.runtime.crud.eon.Addr;
 import io.zerows.extension.runtime.crud.eon.em.ApiSpec;
 import io.zerows.extension.runtime.crud.uca.desk.IxPanel;
 import io.zerows.extension.runtime.crud.uca.desk.IxRequest;
 import io.zerows.extension.runtime.crud.uca.input.Pre;
 import io.zerows.extension.runtime.crud.uca.op.Agonic;
-import io.zerows.unity.Ux;
 
 /*
  * JqTool Engine for

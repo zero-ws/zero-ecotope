@@ -1,6 +1,6 @@
 package io.vertx.quiz.example;
 
-import io.zerows.core.annotations.EndPoint;
+import io.zerows.epoch.annotations.EndPoint;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 

@@ -3,18 +3,18 @@ package io.zerows.extension.mbse.ui.agent.service;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.constant.KName;
-import io.zerows.core.fn.FnZero;
+import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.common.log.Annal;
 import io.zerows.epoch.common.uca.qr.Sorter;
 import io.zerows.epoch.common.uca.qr.syntax.Ir;
-import io.zerows.core.util.Ut;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.program.fn.Fx;
 import io.zerows.extension.mbse.ui.domain.tables.daos.UiListDao;
 import io.zerows.extension.mbse.ui.domain.tables.daos.UiViewDao;
 import io.zerows.extension.mbse.ui.domain.tables.pojos.UiList;
 import io.zerows.extension.mbse.ui.domain.tables.pojos.UiView;
 import io.zerows.extension.mbse.ui.uca.qbe.QBECache;
-import io.zerows.unity.Ux;
 import jakarta.inject.Inject;
 
 import java.util.Objects;
@@ -93,14 +93,14 @@ public class ListService implements ListStub {
         );
         return Ux.future(listJson)
             /* vQuery */
-            .compose(FnZero.ofJObject(ListStub.FIELD_V_QUERY, this.optionStub::fetchQuery))
+            .compose(Fx.ofJObject(ListStub.FIELD_V_QUERY, this.optionStub::fetchQuery))
             /* vSearch */
-            .compose(FnZero.ofJObject(ListStub.FIELD_V_SEARCH, this.optionStub::fetchSearch))
+            .compose(Fx.ofJObject(ListStub.FIELD_V_SEARCH, this.optionStub::fetchSearch))
             /* vTable */
-            .compose(FnZero.ofJObject(ListStub.FIELD_V_TABLE, this.optionStub::fetchTable))
+            .compose(Fx.ofJObject(ListStub.FIELD_V_TABLE, this.optionStub::fetchTable))
             /* vSegment */
-            .compose(FnZero.ofTree(ListStub.FIELD_V_SEGMENT, this.optionStub::fetchFragment))
+            .compose(Fx.ofTree(ListStub.FIELD_V_SEGMENT, this.optionStub::fetchFragment))
             /* Combiner for final processing */
-            .compose(FnZero.ofWebUi("classCombiner"));
+            .compose(Fx.ofWebUi("classCombiner"));
     }
 }

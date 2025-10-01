@@ -3,10 +3,10 @@ package io.zerows.extension.runtime.report.uca.pull;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.constant.KName;
-import io.zerows.core.fn.FnZero;
-import io.zerows.core.util.Ut;
-import io.zerows.unity.Ux;
+import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.program.fn.Fx;
 
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -54,16 +54,16 @@ public abstract class AbstractDataSet implements DataSet {
             final JsonArray ids = Ut.valueJArray(data, whereField);
             final JsonObject condition = Ux.whereAnd();
             if (refConfig.containsKey("byField")) {
-                Object byFieldValue = refConfig.getValue("byField");
+                final Object byFieldValue = refConfig.getValue("byField");
 
                 if (byFieldValue instanceof Boolean) {
                     // 如果 byField 是布尔类型
                     if ((Boolean) byFieldValue) {
                         condition.put(refField + ",i", ids);
-                    }else {
+                    } else {
                         condition.put(this.loadKey(refConfig) + ",i", ids);
                     }
-                } else if (byFieldValue instanceof String byFieldStr) {
+                } else if (byFieldValue instanceof final String byFieldStr) {
                     // 如果 byField 是字符串类型list = {ArrayList@32413}  size = 2
                     condition.put(byFieldStr + ",i", ids);
                 } else {
@@ -78,7 +78,7 @@ public abstract class AbstractDataSet implements DataSet {
             // input / refField -> output
             outMap.put(whereField, Ut.valueString(refConfig, KName.OUTPUT));
         });
-        return FnZero.combineM(dataMap).compose(queryMap -> {
+        return Fx.combineM(dataMap).compose(queryMap -> {
             /*
              * {
              *     "field": {
@@ -96,7 +96,7 @@ public abstract class AbstractDataSet implements DataSet {
                 final String keyField = this.loadKey(refConfig);
                 // 数据连接
                 if (refConfig.containsKey("byField")) {
-                    Object byFieldValue = refConfig.getValue("byField");
+                    final Object byFieldValue = refConfig.getValue("byField");
                     if (byFieldValue instanceof Boolean) {
                         // 如果 byField 是布尔类型
                         if ((Boolean) byFieldValue) {
@@ -105,7 +105,7 @@ public abstract class AbstractDataSet implements DataSet {
                             childData.put(whereField, Ut.toJObject(whereMap));
                         }
                     }
-                    if(byFieldValue instanceof String byFieldStr){
+                    if (byFieldValue instanceof final String byFieldStr) {
                         final ConcurrentMap<String, JsonObject> whereMap = Ut.elementMap(queryData, byFieldStr);
                         childData.put(whereField, Ut.toJObject(whereMap));
                     }

@@ -3,16 +3,16 @@ package io.zerows.extension.commerce.finance.agent.api;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.annotations.Address;
-import io.zerows.core.annotations.Queue;
-import io.zerows.core.constant.KName;
-import io.zerows.core.fn.FnZero;
-import io.zerows.core.util.Ut;
+import io.zerows.epoch.annotations.Address;
+import io.zerows.epoch.annotations.Queue;
+import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.program.fn.Fx;
 import io.zerows.extension.commerce.finance.agent.service.end.DebtStub;
 import io.zerows.extension.commerce.finance.agent.service.end.SettleRStub;
 import io.zerows.extension.commerce.finance.domain.tables.daos.FSettlementDao;
 import io.zerows.extension.commerce.finance.eon.Addr;
-import io.zerows.unity.Ux;
 import jakarta.inject.Inject;
 
 /**
@@ -28,7 +28,7 @@ public class BatchActor {
 
     @Address(Addr.Settle.FETCH_BY_KEY)
     public Future<JsonObject> fetchSettlement(final JsonArray keys) {
-        return FnZero.ofJObject(this.settleRStub::fetchSettlement).apply(keys);
+        return Fx.ofJObject(this.settleRStub::fetchSettlement).apply(keys);
     }
 
 
@@ -45,6 +45,6 @@ public class BatchActor {
 
     @Address(Addr.Settle.FETCH_DEBT)
     public Future<JsonObject> fetchDebt(final JsonArray keys) {
-        return FnZero.ofJObject(this.debtStub::fetchDebt).apply(keys);
+        return Fx.ofJObject(this.debtStub::fetchDebt).apply(keys);
     }
 }

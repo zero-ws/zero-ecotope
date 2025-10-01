@@ -5,10 +5,11 @@ import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.program.fn.Fx;
 import io.zerows.epoch.support.FnBase;
-import io.zerows.core.constant.KName;
-import io.zerows.core.fn.FnZero;
-import io.zerows.core.util.Ut;
 import io.zerows.extension.runtime.report.atom.RDimension;
 import io.zerows.extension.runtime.report.domain.tables.daos.KpDataSetDao;
 import io.zerows.extension.runtime.report.domain.tables.pojos.KpDataSet;
@@ -18,7 +19,6 @@ import io.zerows.extension.runtime.report.eon.em.EmReport;
 import io.zerows.extension.runtime.report.exception._80703Exception400ReportDimType;
 import io.zerows.extension.runtime.report.uca.feature.RQueryComponent;
 import io.zerows.extension.runtime.report.uca.pull.DataSet;
-import io.zerows.unity.Ux;
 import org.osgi.framework.Bundle;
 
 import java.util.ArrayList;
@@ -93,11 +93,11 @@ class DimProcImpl extends AbstractDimProc {
                             resultMap.put(dataSetItem.getKey(), result);
                         });
                     }
-                    return FnZero.combineM(resultMap);
+                    return Fx.combineM(resultMap);
 
                 });
             } else {
-                return FnZero.combineM(resultMap);
+                return Fx.combineM(resultMap);
             }
         });
     }

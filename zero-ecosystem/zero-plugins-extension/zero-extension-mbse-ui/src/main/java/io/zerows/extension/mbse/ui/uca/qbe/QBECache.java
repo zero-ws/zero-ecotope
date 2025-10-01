@@ -3,14 +3,14 @@ package io.zerows.extension.mbse.ui.uca.qbe;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.support.FnBase;
-import io.zerows.core.constant.KName;
-import io.zerows.core.web.cache.Rapid;
+import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.constant.VString;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.corpus.web.cache.Rapid;
+import io.zerows.epoch.support.FnBase;
 import io.zerows.extension.mbse.ui.domain.tables.pojos.UiView;
 import io.zerows.extension.mbse.ui.eon.UiConstant;
 import io.zerows.specification.vital.HQR;
-import io.zerows.unity.Ux;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -3,14 +3,14 @@ package io.zerows.extension.runtime.ambient.osgi.spi.business;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.constant.KName;
-import io.zerows.core.fn.FnZero;
-import io.zerows.core.util.Ut;
+import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.program.fn.Fx;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XActivityChangeDao;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XActivityDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XActivity;
 import io.zerows.extension.runtime.skeleton.osgi.spi.business.ExActivity;
-import io.zerows.unity.Ux;
 
 import java.util.List;
 import java.util.Objects;
@@ -25,7 +25,7 @@ public class ExActivityTracker implements ExActivity {
     public Future<JsonArray> activities(final String modelId, final String modelKey) {
         return this.fetchActivities(modelId, modelKey)
             .compose(Ux::futureA)
-            .compose(FnZero.ofJArray(KName.RECORD_NEW, KName.RECORD_OLD));
+            .compose(Fx.ofJArray(KName.RECORD_NEW, KName.RECORD_OLD));
     }
 
     @Override

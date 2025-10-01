@@ -2,13 +2,13 @@ package io.zerows.extension.commerce.rbac.uca.logged;
 
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.constant.KName;
-import io.zerows.core.constant.KWeb;
+import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.based.constant.KWeb;
 import io.zerows.extension.commerce.rbac.atom.ScConfig;
 import io.zerows.extension.commerce.rbac.bootstrap.ScPin;
 import io.zerows.extension.commerce.rbac.eon.AuthKey;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
-import io.zerows.module.domain.atom.commune.Vis;
+import io.zerows.epoch.corpus.domain.atom.commune.Vis;
 
 /**
  * For annotation @AuthorizedResource to stored resource data structure

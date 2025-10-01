@@ -3,14 +3,14 @@ package io.zerows.extension.runtime.workflow.uca.toolkit;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.fn.FnZero;
-import io.zerows.core.util.Ut;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.program.fn.Fx;
 import io.zerows.extension.runtime.workflow.atom.EngineOn;
 import io.zerows.extension.runtime.workflow.atom.configuration.MetaInstance;
 import io.zerows.extension.runtime.workflow.atom.runtime.WRecord;
 import io.zerows.extension.runtime.workflow.domain.tables.pojos.WTicket;
 import io.zerows.extension.runtime.workflow.uca.modeling.Respect;
-import io.zerows.unity.Ux;
 
 import java.util.Objects;
 import java.util.Set;
@@ -70,7 +70,7 @@ public class ULinkage {
             final Respect respect = this.metadata.linkRespect(field);
             futures.put(field, respect.fetchAsync(record));
         });
-        return FnZero.combineM(futures).compose(dataMap -> {
+        return Fx.combineM(futures).compose(dataMap -> {
             dataMap.forEach((field, linkageData) -> {
                 if (previous) {
                     final JsonArray stored = record.linkage(field);
@@ -121,7 +121,7 @@ public class ULinkage {
             final Respect respect = this.metadata.linkRespect(field);
             futures.put(field, respect.syncAsync(linkageData, params, record));
         });
-        return FnZero.combineM(futures).compose(dataMap -> {
+        return Fx.combineM(futures).compose(dataMap -> {
             dataMap.forEach(record::linkage);
             return Ux.future(record);
         });

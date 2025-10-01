@@ -3,15 +3,15 @@ package io.zerows.extension.commerce.rbac.uca.acl.rapier;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.constant.KName;
-import io.zerows.core.fn.FnZero;
-import io.zerows.core.util.Ut;
-import io.zerows.core.web.model.commune.Envelop;
+import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.program.fn.Fx;
 import io.zerows.extension.commerce.rbac.atom.ScOwner;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.SResourceDao;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SPacket;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SResource;
-import io.zerows.unity.Ux;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,7 +72,7 @@ class QuestAcl implements Quest {
                 final SResource resource = resourceMap.get(packet.getResource());
                 futureMap.put(resource.getCode(), this.syntaxRegion.regionJ(resource, owner, packet));
             });
-            return FnZero.combineM(futureMap);
+            return Fx.combineM(futureMap);
         }).compose(map -> Ux.future(Ut.toJObject(map)));
     }
 
@@ -96,7 +96,7 @@ class QuestAcl implements Quest {
                 return this.syncViews(resource, resourceData);
             }));
         });
-        return FnZero.combineM(futureM).compose(map -> Ux.future(Ut.toJObject(map)));
+        return Fx.combineM(futureM).compose(map -> Ux.future(Ut.toJObject(map)));
     }
 
     private Future<JsonArray> syncViews(final SResource resource, final JsonArray viewData) {
@@ -112,7 +112,7 @@ class QuestAcl implements Quest {
             );
             futures.add(Quinn.visit().saveAsync(resource, owner, viewJ));
         });
-        return FnZero.combineA(futures);
+        return Fx.combineA(futures);
     }
 
     @Override

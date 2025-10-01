@@ -3,12 +3,12 @@ package io.zerows.extension.runtime.ambient.agent.api.application;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.annotations.Address;
-import io.zerows.core.annotations.Queue;
+import io.zerows.epoch.annotations.Address;
+import io.zerows.epoch.annotations.Queue;
 import io.zerows.extension.runtime.ambient.agent.service.application.AppStub;
 import io.zerows.extension.runtime.ambient.agent.service.application.MenuStub;
 import io.zerows.extension.runtime.ambient.eon.Addr;
-import io.zerows.module.domain.atom.commune.XHeader;
+import io.zerows.epoch.corpus.domain.atom.commune.XHeader;
 import jakarta.inject.Inject;
 
 /**

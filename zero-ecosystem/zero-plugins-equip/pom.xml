@@ -15,6 +15,7 @@
     <modules>
         <!-- Common -->
         <!--        <module>zero-plugins-common-security</module>-->
+        <module>zero-plugins-common-security</module>
         <module>zero-plugins-common-shell</module>
         <module>zero-plugins-common-trash</module>
         <module>zero-plugins-swagger</module>
@@ -33,7 +34,7 @@
         <module>zero-plugins-store-elasticsearch</module>
         <module>zero-plugins-store-liquibase</module>
         <!--        <module>zero-plugins-store-mongo</module>  -->
-        <!--        <module>zero-plugins-store-neo4j</module>-->
+        <module>zero-plugins-store-neo4j</module>
         <!--        <module>zero-plugins-store-redis</module>-->
 
         <!-- Web -->

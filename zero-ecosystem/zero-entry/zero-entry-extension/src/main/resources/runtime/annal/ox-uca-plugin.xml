@@ -16,7 +16,7 @@
         <queueSize>8192</queueSize>
         <appender-ref ref="PLG"/>
     </appender>
-    <logger name="io.mature.extension.uca.plugin" level="INFO">
+    <logger name="io.zerows.epoch.bootplus.extension.uca.plugin" level="INFO">
         <appender-ref ref="ASYNC_PLG"/>
     </logger>
 </included>
