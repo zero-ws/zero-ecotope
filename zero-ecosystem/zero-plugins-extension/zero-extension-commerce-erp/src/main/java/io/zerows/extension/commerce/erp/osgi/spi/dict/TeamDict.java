@@ -6,8 +6,8 @@ import io.vertx.core.json.JsonArray;
 import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.common.shared.datamation.KDictSource;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.epoch.corpus.cloud.zdk.spi.DictionaryPlugin;
 import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.underlying.DictionaryPlugin;
 import io.zerows.extension.commerce.erp.domain.tables.daos.ETeamDao;
 
 /*

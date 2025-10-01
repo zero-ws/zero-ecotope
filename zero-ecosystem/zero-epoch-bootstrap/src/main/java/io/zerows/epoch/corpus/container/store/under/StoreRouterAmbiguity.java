@@ -1,8 +1,8 @@
 package io.zerows.epoch.corpus.container.store.under;
 
-import io.zerows.epoch.corpus.model.atom.running.RunRoute;
-import io.zerows.epoch.corpus.model.atom.running.RunThread;
-import io.zerows.epoch.corpus.metadata.zdk.AbstractAmbiguity;
+import io.zerows.epoch.corpus.model.running.RunRoute;
+import io.zerows.epoch.corpus.model.running.RunThread;
+import io.zerows.epoch.sdk.metadata.AbstractAmbiguity;
 import org.osgi.framework.Bundle;
 
 import java.util.Objects;

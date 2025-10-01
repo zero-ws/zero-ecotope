@@ -9,7 +9,7 @@ import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.common.log.Annal;
 import io.zerows.epoch.common.shared.program.KRef;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.epoch.corpus.security.atom.DataBound;
+import io.zerows.epoch.corpus.security.DataBound;
 import io.zerows.epoch.corpus.web.cache.Rapid;
 import io.zerows.epoch.program.Ut;
 import io.zerows.extension.commerce.rbac.atom.ScOwner;

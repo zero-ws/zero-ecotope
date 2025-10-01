@@ -1,6 +1,6 @@
 package io.zerows.extension.runtime.tpl.bootstrap;
 
-import io.zerows.epoch.corpus.model.extension.AbstractBoot;
+import io.zerows.epoch.corpus.extension.AbstractBoot;
 import io.zerows.extension.runtime.tpl.eon.TplConstant;
 
 /**

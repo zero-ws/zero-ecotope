@@ -10,12 +10,12 @@ import io.zerows.epoch.common.shared.datamation.KDictSource;
 import io.zerows.epoch.common.shared.datamation.KDictUse;
 import io.zerows.epoch.common.shared.datamation.KFabric;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.epoch.corpus.cloud.zdk.spi.Dictionary;
-import io.zerows.epoch.corpus.domain.atom.specification.KTransform;
 import io.zerows.epoch.corpus.mbse.atom.specification.KModule;
-import io.zerows.epoch.corpus.metadata.osgi.channel.Pocket;
+import io.zerows.epoch.corpus.metadata.specification.KTransform;
 import io.zerows.epoch.corpus.model.commune.Envelop;
 import io.zerows.epoch.program.fn.Fx;
+import io.zerows.epoch.underlying.Dictionary;
+import io.zerows.epoch.underlying.channel.Pocket;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 
 import java.util.List;

@@ -5,9 +5,9 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Session;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
+import io.zerows.epoch.corpus.metadata.commune.XHeader;
 import io.zerows.extension.commerce.rbac.agent.service.login.pre.SmsStub;
 import io.zerows.extension.commerce.rbac.eon.Addr;
-import io.zerows.epoch.corpus.domain.atom.commune.XHeader;
 import jakarta.inject.Inject;
 
 /**

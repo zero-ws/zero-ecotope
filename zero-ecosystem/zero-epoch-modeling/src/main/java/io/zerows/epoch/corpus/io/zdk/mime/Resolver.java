@@ -2,7 +2,7 @@ package io.zerows.epoch.corpus.io.zdk.mime;
 
 import io.r2mo.typed.exception.WebException;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.epoch.corpus.model.atom.Epsilon;
+import io.zerows.epoch.corpus.model.Epsilon;
 
 /**
  * # 「Co」Zero Resolver

@@ -2,7 +2,7 @@ package io.zerows.epoch.corpus.io.uca.request.argument;
 
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.epoch.corpus.domain.uca.serialization.ZeroType;
+import io.zerows.epoch.component.serialization.ZeroType;
 
 /**
  * 「Co」JSR311 for .@HeaderParam

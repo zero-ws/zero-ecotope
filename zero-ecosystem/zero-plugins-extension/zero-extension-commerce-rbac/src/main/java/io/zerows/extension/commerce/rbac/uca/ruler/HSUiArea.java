@@ -5,12 +5,12 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.epoch.corpus.security.atom.manage.KCatena;
-import io.zerows.epoch.corpus.security.atom.manage.KPermit;
-import io.zerows.epoch.corpus.security.atom.manage.KSemi;
-import io.zerows.epoch.corpus.security.zdk.authority.HValve;
+import io.zerows.epoch.corpus.security.manage.KCatena;
+import io.zerows.epoch.corpus.security.manage.KPermit;
+import io.zerows.epoch.corpus.security.manage.KSemi;
 import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.program.fn.Fx;
+import io.zerows.epoch.sdk.security.authority.HValve;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;

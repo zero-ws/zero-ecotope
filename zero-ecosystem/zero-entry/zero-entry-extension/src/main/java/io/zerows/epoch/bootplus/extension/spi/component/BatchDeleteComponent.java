@@ -1,12 +1,12 @@
 package io.zerows.epoch.bootplus.extension.spi.component;
 
-import io.zerows.epoch.bootplus.extension.scaffold.stdn.AbstractHMore;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
+import io.zerows.epoch.bootplus.extension.scaffold.stdn.AbstractHMore;
 import io.zerows.epoch.corpus.mbse.atom.runner.ActIn;
 import io.zerows.epoch.corpus.mbse.atom.runner.ActOut;
+import io.zerows.epoch.corpus.metadata.commune.Apt;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
-import io.zerows.epoch.corpus.domain.atom.commune.dynamic.Apt;
 
 /**
  * ## 「Channel」批量删除通道

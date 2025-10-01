@@ -3,10 +3,10 @@ package io.zerows.epoch.corpus.container.uca.mode;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.epoch.corpus.invocation.micro.uddi.Uddi;
-import io.zerows.epoch.corpus.invocation.micro.uddi.UddiClient;
+import io.zerows.epoch.component.uddi.Uddi;
+import io.zerows.epoch.component.uddi.UddiClient;
 import io.zerows.epoch.corpus.io.zdk.Aim;
-import io.zerows.epoch.corpus.model.atom.Event;
+import io.zerows.epoch.corpus.model.Event;
 import io.zerows.epoch.corpus.model.commune.Envelop;
 
 public class AimIpc extends AbstractAim implements Aim<RoutingContext> {

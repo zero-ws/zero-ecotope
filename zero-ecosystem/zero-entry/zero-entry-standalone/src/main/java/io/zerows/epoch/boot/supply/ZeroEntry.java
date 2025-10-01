@@ -3,9 +3,9 @@ package io.zerows.epoch.boot.supply;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.zerows.epoch.based.configure.YmlCore;
-import io.zerows.epoch.corpus.cloud.util.Ho;
+import io.zerows.epoch.corpus.cloud.LogCloud;
 import io.zerows.epoch.corpus.container.store.BootStore;
-import io.zerows.epoch.corpus.metadata.store.OZeroStore;
+import io.zerows.epoch.mem.OZeroStore;
 import io.zerows.epoch.support.FnBase;
 import io.zerows.specification.configuration.HConfig;
 
@@ -71,7 +71,7 @@ class ZeroEntry {
          */
         final BootStore store = BootStore.singleton();
         if (!store.isInit()) {
-            Ho.LOG.Env.info(ZeroEnroll.class, MSG_EXT_CONFIGURATION, config);
+            LogCloud.LOG.Env.info(ZeroEnroll.class, MSG_EXT_CONFIGURATION, config);
             return Future.succeededFuture(Boolean.TRUE);
         }
         if (!OZeroStore.is(YmlCore.init.__KEY)) {

@@ -2,10 +2,10 @@ package io.zerows.epoch.corpus.io.uca.response.resolver;
 
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.epoch.common.log.Annal;
-import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.component.serialization.ZeroType;
 import io.zerows.epoch.corpus.io.zdk.mime.Resolver;
-import io.zerows.epoch.corpus.model.atom.Epsilon;
-import io.zerows.epoch.corpus.domain.uca.serialization.ZeroType;
+import io.zerows.epoch.corpus.model.Epsilon;
+import io.zerows.epoch.program.Ut;
 
 /**
  * InJson Resolver

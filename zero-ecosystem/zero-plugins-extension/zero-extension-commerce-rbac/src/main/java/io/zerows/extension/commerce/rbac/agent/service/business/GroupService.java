@@ -6,7 +6,7 @@ import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.common.log.Annal;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.database.jooq.operation.UxJooq;
-import io.zerows.epoch.corpus.domain.atom.typed.UArray;
+import io.zerows.epoch.corpus.metadata.typed.UArray;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.RGroupRoleDao;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.SGroupDao;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.RGroupRole;

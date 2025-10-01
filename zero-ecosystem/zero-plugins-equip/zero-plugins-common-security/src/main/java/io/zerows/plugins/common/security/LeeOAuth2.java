@@ -9,8 +9,8 @@ import io.vertx.ext.auth.oauth2.OAuth2Options;
 import io.vertx.ext.web.handler.AuthenticationHandler;
 import io.vertx.ext.web.handler.OAuth2AuthHandler;
 import io.zerows.epoch.based.configure.YmlCore;
-import io.zerows.epoch.corpus.security.atom.Aegis;
-import io.zerows.epoch.corpus.security.atom.AegisItem;
+import io.zerows.epoch.corpus.security.Aegis;
+import io.zerows.epoch.corpus.security.AegisItem;
 import io.zerows.epoch.program.Ut;
 import io.zerows.plugins.common.security.authenticate.AdapterProvider;
 

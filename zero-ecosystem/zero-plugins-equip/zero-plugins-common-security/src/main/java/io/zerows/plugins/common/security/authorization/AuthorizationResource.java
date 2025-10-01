@@ -10,9 +10,9 @@ import io.vertx.ext.auth.authorization.Authorization;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.based.constant.KWeb;
-import io.zerows.epoch.corpus.model.store.OCacheUri;
-import io.zerows.epoch.corpus.domain.atom.commune.Vis;
-import io.zerows.epoch.corpus.security.atom.Aegis;
+import io.zerows.epoch.corpus.metadata.commune.Vis;
+import io.zerows.epoch.corpus.security.Aegis;
+import io.zerows.epoch.mem.OCacheUri;
 
 import java.util.Objects;
 

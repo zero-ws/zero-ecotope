@@ -10,12 +10,12 @@ import io.vertx.core.Handler;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.based.constant.KWeb;
-import io.zerows.epoch.corpus.web.cache.Rapid;
-import io.zerows.epoch.corpus.metadata.uca.environment.DevEnv;
-import io.zerows.epoch.corpus.security.atom.Aegis;
-import io.zerows.epoch.corpus.security.atom.Against;
-import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.common.log.Annal;
+import io.zerows.epoch.component.environment.DevEnv;
+import io.zerows.epoch.corpus.security.Aegis;
+import io.zerows.epoch.corpus.security.Against;
+import io.zerows.epoch.corpus.web.cache.Rapid;
+import io.zerows.epoch.program.Ut;
 
 import java.lang.reflect.Method;
 import java.util.Objects;

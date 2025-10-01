@@ -2,7 +2,7 @@ package io.zerows.epoch.corpus.web.validation.uca.rules;
 
 import io.r2mo.typed.exception.WebException;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.corpus.model.atom.Rule;
+import io.zerows.epoch.corpus.model.Rule;
 
 class LengthRuler extends BaseRuler {
 

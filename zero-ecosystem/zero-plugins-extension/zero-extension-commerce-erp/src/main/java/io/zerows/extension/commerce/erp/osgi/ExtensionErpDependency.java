@@ -1,8 +1,8 @@
 package io.zerows.extension.commerce.erp.osgi;
 
+import io.zerows.epoch.sdk.metadata.dependency.AbstractConnectorBase;
+import io.zerows.epoch.sdk.metadata.service.ServiceConnector;
 import io.zerows.extension.runtime.skeleton.osgi.ExtensionServiceConnector;
-import io.zerows.epoch.corpus.metadata.zdk.dependency.AbstractConnectorBase;
-import io.zerows.epoch.corpus.metadata.zdk.service.ServiceConnector;
 import org.osgi.framework.Bundle;
 
 /**

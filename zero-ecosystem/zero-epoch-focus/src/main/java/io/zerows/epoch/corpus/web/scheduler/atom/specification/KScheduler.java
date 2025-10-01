@@ -1,9 +1,9 @@
 package io.zerows.epoch.corpus.web.scheduler.atom.specification;
 
+import io.zerows.epoch.common.log.OLog;
 import io.zerows.epoch.constant.VValue;
-import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.corpus.web.scheduler.eon.MessageOfJob;
-import io.zerows.epoch.corpus.metadata.uca.logging.OLog;
+import io.zerows.epoch.program.Ut;
 
 import java.io.Serializable;
 import java.time.Instant;

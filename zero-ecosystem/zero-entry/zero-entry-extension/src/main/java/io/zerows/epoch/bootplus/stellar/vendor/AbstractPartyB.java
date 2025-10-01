@@ -10,7 +10,7 @@ import io.zerows.epoch.bootplus.stellar.owner.OkA;
 import io.zerows.epoch.common.shared.datamation.KDictConfig;
 import io.zerows.epoch.common.shared.datamation.KFabric;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.epoch.corpus.database.atom.Database;
+import io.zerows.epoch.corpus.database.Database;
 import io.zerows.specification.access.app.HArk;
 
 /**

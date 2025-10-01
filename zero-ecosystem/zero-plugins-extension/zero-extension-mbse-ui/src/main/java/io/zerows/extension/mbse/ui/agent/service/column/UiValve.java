@@ -3,7 +3,7 @@ package io.zerows.extension.mbse.ui.agent.service.column;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
-import io.zerows.epoch.corpus.domain.atom.commune.Vis;
+import io.zerows.epoch.corpus.metadata.commune.Vis;
 
 /*
  * Apeak choice for different usage,

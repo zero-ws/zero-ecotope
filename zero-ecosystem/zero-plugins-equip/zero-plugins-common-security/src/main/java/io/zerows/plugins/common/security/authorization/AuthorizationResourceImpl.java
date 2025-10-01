@@ -9,10 +9,10 @@ import io.vertx.ext.auth.authorization.AndAuthorization;
 import io.vertx.ext.auth.authorization.Authorization;
 import io.vertx.ext.auth.authorization.OrAuthorization;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.epoch.corpus.security.annotations.AuthorizedResource;
-import io.zerows.epoch.corpus.security.atom.Aegis;
-import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.annotations.security.AuthorizedResource;
+import io.zerows.epoch.corpus.security.Aegis;
 import io.zerows.epoch.enums.EmSecure;
+import io.zerows.epoch.program.Ut;
 import io.zerows.plugins.common.security.profile.PermissionAuthorization;
 
 import java.lang.annotation.Annotation;

@@ -2,14 +2,14 @@ package io.zerows.epoch.boot.supply;
 
 import io.vertx.core.Vertx;
 import io.zerows.epoch.common.shared.context.KRunner;
-import io.zerows.epoch.corpus.assembly.store.ORepositoryClass;
-import io.zerows.epoch.corpus.configuration.store.ORepositoryOption;
-import io.zerows.epoch.corpus.metadata.zdk.running.ORepository;
-import io.zerows.epoch.corpus.model.store.ORepositoryMeta;
 import io.zerows.epoch.corpus.web.scheduler.store.ORepositoryJob;
 import io.zerows.epoch.corpus.web.security.store.ORepositorySecurity;
 import io.zerows.epoch.corpus.web.websocket.store.ORepositorySock;
+import io.zerows.epoch.mem.ORepositoryClass;
+import io.zerows.epoch.mem.ORepositoryMeta;
+import io.zerows.epoch.mem.ORepositoryOption;
 import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.sdk.metadata.running.ORepository;
 import io.zerows.specification.configuration.HConfig;
 
 import java.util.function.BiConsumer;

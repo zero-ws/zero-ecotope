@@ -1,12 +1,12 @@
 package io.zerows.epoch.corpus.database.cp.zdk;
 
 import io.r2mo.typed.cc.Cc;
+import io.zerows.epoch.common.log.OLog;
 import io.zerows.epoch.common.shared.app.KDatabase;
-import io.zerows.epoch.corpus.database.atom.Database;
+import io.zerows.epoch.corpus.database.Database;
 import io.zerows.epoch.corpus.database.cp.ds.DSMeta;
 import io.zerows.epoch.corpus.database.cp.ds.HikariDataPool;
 import io.zerows.epoch.program.Ut;
-import io.zerows.epoch.corpus.metadata.uca.logging.OLog;
 import org.jooq.Configuration;
 import org.jooq.ConnectionProvider;
 import org.jooq.DSLContext;

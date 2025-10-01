@@ -1,8 +1,8 @@
 package io.zerows.extension.runtime.ambient.configuration;
 
-import io.zerows.epoch.corpus.model.extension.HExtension;
+import io.zerows.epoch.corpus.configuration.module.MDConfiguration;
+import io.zerows.epoch.corpus.extension.HExtension;
 import io.zerows.extension.runtime.ambient.eon.AtConstant;
-import io.zerows.epoch.corpus.metadata.atom.configuration.MDConfiguration;
 import org.junit.Test;
 
 /**

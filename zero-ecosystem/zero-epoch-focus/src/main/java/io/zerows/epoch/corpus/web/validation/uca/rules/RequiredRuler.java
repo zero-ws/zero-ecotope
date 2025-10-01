@@ -1,8 +1,8 @@
 package io.zerows.epoch.corpus.web.validation.uca.rules;
 
 import io.r2mo.typed.exception.WebException;
+import io.zerows.epoch.corpus.model.Rule;
 import io.zerows.epoch.program.Ut;
-import io.zerows.epoch.corpus.model.atom.Rule;
 
 /**
  * {

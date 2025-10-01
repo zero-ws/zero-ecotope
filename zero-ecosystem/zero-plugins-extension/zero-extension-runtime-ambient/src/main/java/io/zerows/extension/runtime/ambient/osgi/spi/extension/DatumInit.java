@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.common.log.Annal;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.epoch.corpus.domain.atom.typed.UObject;
+import io.zerows.epoch.corpus.metadata.typed.UObject;
 import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.program.fn.Fx;
 import io.zerows.extension.runtime.ambient.bootstrap.AtConfig;

@@ -1,6 +1,11 @@
 package io.zerows.extension.mbse.basement.uca.query;
 
-import io.zerows.epoch.common.uca.qr.syntax.*;
+import io.zerows.epoch.common.uca.qr.syntax.QBranch;
+import io.zerows.epoch.common.uca.qr.syntax.QLeaf;
+import io.zerows.epoch.common.uca.qr.syntax.QNode;
+import io.zerows.epoch.common.uca.qr.syntax.QOp;
+import io.zerows.epoch.common.uca.qr.syntax.QTree;
+import io.zerows.epoch.common.uca.qr.syntax.QValue;
 import io.zerows.epoch.constant.VValue;
 import io.zerows.epoch.corpus.database.jooq.condition.Clause;
 import io.zerows.extension.mbse.basement.atom.element.DataMatrix;
@@ -9,7 +14,11 @@ import org.jooq.Condition;
 import org.jooq.Field;
 import org.jooq.impl.DSL;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
 
 

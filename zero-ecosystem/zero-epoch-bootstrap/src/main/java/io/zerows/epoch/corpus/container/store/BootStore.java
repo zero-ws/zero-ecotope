@@ -6,13 +6,13 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Up;
 import io.zerows.epoch.based.configure.YmlCore;
 import io.zerows.epoch.common.shared.boot.KBoot;
-import io.zerows.epoch.corpus.cloud.util.Ho;
+import io.zerows.epoch.corpus.cloud.LogCloud;
 import io.zerows.epoch.corpus.container.eon.em.FeatureMark;
 import io.zerows.epoch.corpus.container.exception._40001Exception500UpClassArgs;
 import io.zerows.epoch.corpus.container.exception._40002Exception500UpClassInvalid;
-import io.zerows.epoch.corpus.metadata.store.OZeroStore;
-import io.zerows.epoch.corpus.model.util.Anno;
+import io.zerows.epoch.corpus.model.Anno;
 import io.zerows.epoch.enums.EmApp;
+import io.zerows.epoch.mem.OZeroStore;
 import io.zerows.specification.configuration.HBoot;
 import io.zerows.specification.configuration.HSetting;
 import io.zerows.specification.configuration.HStation;
@@ -84,7 +84,7 @@ public class BootStore implements HStation {
         STORE_ANNO.putAll(Anno.get(clazz));
         if (!STORE_ANNO.containsKey(Up.class.getName())) {
             final VertxBootException warning = new _40002Exception500UpClassInvalid(clazz);
-            Ho.LOG.Env.info(BootStore.class, warning.getMessage());
+            LogCloud.LOG.Env.info(BootStore.class, warning.getMessage());
         }
     }
 

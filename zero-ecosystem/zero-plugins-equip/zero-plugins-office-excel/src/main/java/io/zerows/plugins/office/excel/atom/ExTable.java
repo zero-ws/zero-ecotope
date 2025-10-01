@@ -3,15 +3,20 @@ package io.zerows.plugins.office.excel.atom;
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.component.normalize.Oneness;
 import io.zerows.epoch.constant.VString;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.epoch.corpus.metadata.atom.configuration.modeling.MDConnect;
-import io.zerows.epoch.corpus.model.uca.normalize.Oneness;
+import io.zerows.epoch.corpus.configuration.module.modeling.MDConnect;
 import io.zerows.epoch.program.Ut;
 import io.zerows.plugins.office.excel.exception._60038Exception404ConnectMissing;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 

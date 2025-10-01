@@ -2,8 +2,8 @@ package io.zerows.epoch.corpus;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.corpus.metadata.commune.Vis;
 import io.zerows.epoch.corpus.model.commune.Envelop;
-import io.zerows.epoch.corpus.domain.atom.commune.Vis;
 
 /**
  * @author lang : 2023-06-11

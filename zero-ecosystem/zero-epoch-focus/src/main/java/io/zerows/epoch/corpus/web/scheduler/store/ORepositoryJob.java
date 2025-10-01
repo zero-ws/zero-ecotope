@@ -1,11 +1,11 @@
 package io.zerows.epoch.corpus.web.scheduler.store;
 
-import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.corpus.web.scheduler.atom.Mission;
-import io.zerows.epoch.corpus.metadata.store.OCacheClass;
-import io.zerows.epoch.corpus.metadata.zdk.AbstractAmbiguity;
-import io.zerows.epoch.corpus.metadata.zdk.running.ORepository;
-import io.zerows.epoch.corpus.metadata.zdk.uca.Inquirer;
+import io.zerows.epoch.mem.OCacheClass;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.sdk.metadata.AbstractAmbiguity;
+import io.zerows.epoch.sdk.metadata.running.ORepository;
+import io.zerows.epoch.sdk.metadata.uca.Inquirer;
 import io.zerows.specification.configuration.HSetting;
 import org.osgi.framework.Bundle;
 

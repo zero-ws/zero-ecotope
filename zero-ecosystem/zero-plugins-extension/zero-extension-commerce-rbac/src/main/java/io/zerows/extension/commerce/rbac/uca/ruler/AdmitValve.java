@@ -3,10 +3,10 @@ package io.zerows.extension.commerce.rbac.uca.ruler;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.epoch.corpus.security.atom.manage.KCatena;
-import io.zerows.epoch.corpus.security.atom.manage.KPermit;
-import io.zerows.epoch.corpus.security.zdk.authority.HValve;
-import io.zerows.epoch.corpus.security.zdk.manager.AbstractValve;
+import io.zerows.epoch.corpus.security.manage.KCatena;
+import io.zerows.epoch.corpus.security.manage.KPermit;
+import io.zerows.epoch.sdk.security.authority.HValve;
+import io.zerows.epoch.sdk.security.manager.AbstractValve;
 
 /**
  * Dim  =  FLAT

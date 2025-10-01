@@ -1,7 +1,7 @@
 package io.zerows.epoch.corpus.container.exception;
 
 import io.r2mo.vertx.common.exception.VertxBootException;
-import io.zerows.epoch.corpus.model.atom.Event;
+import io.zerows.epoch.corpus.model.Event;
 
 /**
  * @author lang : 2025-09-30

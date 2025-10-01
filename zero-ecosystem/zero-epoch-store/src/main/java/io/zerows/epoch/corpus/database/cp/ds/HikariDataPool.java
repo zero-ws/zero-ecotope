@@ -2,11 +2,11 @@ package io.zerows.epoch.corpus.database.cp.ds;
 
 import com.zaxxer.hikari.HikariDataSource;
 import io.r2mo.typed.cc.Cc;
+import io.zerows.epoch.common.log.OLog;
 import io.zerows.epoch.common.shared.app.KDatabase;
-import io.zerows.epoch.corpus.database.atom.Database;
+import io.zerows.epoch.corpus.database.Database;
 import io.zerows.epoch.corpus.database.cp.zdk.DataPool;
 import io.zerows.epoch.program.Ut;
-import io.zerows.epoch.corpus.metadata.uca.logging.OLog;
 import org.jooq.Configuration;
 import org.jooq.DSLContext;
 import org.jooq.SQLDialect;

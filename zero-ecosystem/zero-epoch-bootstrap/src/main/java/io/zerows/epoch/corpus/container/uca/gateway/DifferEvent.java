@@ -11,9 +11,9 @@ import io.zerows.epoch.corpus.container.exception._40014Exception500WorkerMissin
 import io.zerows.epoch.corpus.container.uca.mode.AimAsync;
 import io.zerows.epoch.corpus.container.uca.mode.AimOneWay;
 import io.zerows.epoch.corpus.io.zdk.Aim;
-import io.zerows.epoch.corpus.model.atom.Event;
-import io.zerows.epoch.corpus.model.atom.Receipt;
-import io.zerows.epoch.corpus.model.store.OCacheActor;
+import io.zerows.epoch.corpus.model.Event;
+import io.zerows.epoch.corpus.model.Receipt;
+import io.zerows.epoch.mem.OCacheActor;
 import io.zerows.epoch.program.Ut;
 
 import java.lang.annotation.Annotation;

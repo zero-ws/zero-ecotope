@@ -1,8 +1,8 @@
 package io.zerows.epoch.corpus.io.management;
 
-import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.common.log.OLog;
 import io.zerows.epoch.corpus.io.uca.routing.OAxis;
-import io.zerows.epoch.corpus.metadata.uca.logging.OLog;
+import io.zerows.epoch.program.Ut;
 import org.osgi.framework.Bundle;
 
 /**

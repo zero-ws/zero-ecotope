@@ -1,8 +1,8 @@
 package io.zerows.extension.runtime.workflow.uca.deployment;
 
 import io.vertx.core.Future;
+import io.zerows.epoch.corpus.configuration.module.children.MDWorkflow;
 import io.zerows.extension.runtime.workflow.eon.WfPool;
-import io.zerows.epoch.corpus.metadata.atom.configuration.children.MDWorkflow;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>

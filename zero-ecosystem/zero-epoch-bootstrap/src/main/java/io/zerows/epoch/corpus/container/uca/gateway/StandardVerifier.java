@@ -5,7 +5,7 @@ import io.vertx.ext.web.RoutingContext;
 import io.zerows.epoch.corpus.container.uca.mode.AbstractAim;
 import io.zerows.epoch.corpus.io.atom.WrapRequest;
 import io.zerows.epoch.corpus.io.zdk.Sentry;
-import io.zerows.epoch.corpus.model.atom.Rule;
+import io.zerows.epoch.corpus.model.Rule;
 
 import java.util.List;
 import java.util.Map;

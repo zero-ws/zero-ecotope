@@ -1,9 +1,9 @@
 package io.zerows.extension.commerce.rbac.atom;
 
 import io.zerows.epoch.constant.VValue;
+import io.zerows.epoch.corpus.metadata.commune.Vis;
 import io.zerows.epoch.program.Ut;
 import io.zerows.extension.runtime.skeleton.eon.em.OwnerType;
-import io.zerows.epoch.corpus.domain.atom.commune.Vis;
 
 import java.io.Serializable;
 import java.util.HashSet;

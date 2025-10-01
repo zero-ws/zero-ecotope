@@ -3,10 +3,10 @@ package io.zerows.epoch.corpus.web.scheduler.uca.timer;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.zerows.epoch.annotations.Contract;
-import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.common.log.OLog;
 import io.zerows.epoch.corpus.web.scheduler.atom.specification.KScheduler;
 import io.zerows.epoch.corpus.web.scheduler.eon.MessageOfJob;
-import io.zerows.epoch.corpus.metadata.uca.logging.OLog;
+import io.zerows.epoch.program.Ut;
 
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;

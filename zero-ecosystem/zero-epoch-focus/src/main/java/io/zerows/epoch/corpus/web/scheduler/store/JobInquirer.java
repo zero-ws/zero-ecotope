@@ -1,10 +1,10 @@
 package io.zerows.epoch.corpus.web.scheduler.store;
 
 import io.zerows.epoch.annotations.Job;
-import io.zerows.epoch.program.Ut;
-import io.zerows.epoch.corpus.model.uca.extract.Extractor;
+import io.zerows.epoch.component.extract.Extractor;
 import io.zerows.epoch.corpus.web.scheduler.atom.Mission;
-import io.zerows.epoch.corpus.metadata.zdk.uca.Inquirer;
+import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.sdk.metadata.uca.Inquirer;
 
 import java.util.Objects;
 import java.util.Set;

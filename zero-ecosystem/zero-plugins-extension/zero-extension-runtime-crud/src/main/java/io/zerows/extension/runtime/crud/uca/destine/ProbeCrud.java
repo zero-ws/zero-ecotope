@@ -1,8 +1,8 @@
 package io.zerows.extension.runtime.crud.uca.destine;
 
+import io.zerows.epoch.corpus.metadata.specification.KPoint;
 import io.zerows.epoch.corpus.model.commune.Envelop;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
-import io.zerows.epoch.corpus.domain.atom.specification.KPoint;
 
 /**
  * @author lang : 2023-08-18

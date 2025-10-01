@@ -4,7 +4,7 @@ import io.r2mo.typed.exception.WebException;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.epoch.corpus.io.zdk.mime.Resolver;
-import io.zerows.epoch.corpus.model.atom.Epsilon;
+import io.zerows.epoch.corpus.model.Epsilon;
 
 public class BufferResolver<T> implements Resolver<T> {
 

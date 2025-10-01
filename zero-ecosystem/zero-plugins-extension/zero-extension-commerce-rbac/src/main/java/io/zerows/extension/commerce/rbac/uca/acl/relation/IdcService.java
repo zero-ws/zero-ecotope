@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.common.shared.program.KRef;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.epoch.corpus.domain.atom.commune.dynamic.Apt;
+import io.zerows.epoch.corpus.metadata.commune.Apt;
 import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.support.FnBase;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.OUserDao;

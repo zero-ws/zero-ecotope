@@ -11,8 +11,8 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.configure.YmlCore;
 import io.zerows.epoch.common.shared.boot.KLauncher;
 import io.zerows.epoch.common.shared.boot.KPivot;
-import io.zerows.epoch.corpus.cloud.util.Ho;
-import io.zerows.epoch.corpus.metadata.store.OZeroStore;
+import io.zerows.epoch.corpus.cloud.LogCloud;
+import io.zerows.epoch.mem.OZeroStore;
 import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.spi.BootIo;
 import io.zerows.epoch.support.FnBase;
@@ -22,7 +22,11 @@ import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.boot.HMature;
 import io.zerows.specification.configuration.boot.HRegistry;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.Vector;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -141,7 +145,7 @@ class ZeroEnroll {
     private static List<HRegistry.Mod<Vertx>> registerComponent() {
         if (REGISTERS.isEmpty()) {
             final JsonObject initConfig = OZeroStore.option(YmlCore.init.__KEY);
-            Ho.LOG.Env.info(ZeroEnroll.class, MSG_EXT_COMPONENT, initConfig.encode());
+            LogCloud.LOG.Env.info(ZeroEnroll.class, MSG_EXT_COMPONENT, initConfig.encode());
             // 1. nativeComponent first
             final JsonArray bridges = Ut.valueJArray(initConfig, YmlCore.init.CONFIGURE);
             // 2. 针对每个组件的统一初始化

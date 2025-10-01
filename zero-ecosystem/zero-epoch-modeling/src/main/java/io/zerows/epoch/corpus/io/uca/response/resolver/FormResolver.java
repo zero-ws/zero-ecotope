@@ -5,7 +5,7 @@ import io.vertx.ext.web.FileUpload;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.epoch.corpus.io.util.UtilUpload;
 import io.zerows.epoch.corpus.io.zdk.mime.Resolver;
-import io.zerows.epoch.corpus.model.atom.Epsilon;
+import io.zerows.epoch.corpus.model.Epsilon;
 
 import java.util.HashSet;
 import java.util.Set;

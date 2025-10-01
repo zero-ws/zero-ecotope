@@ -12,7 +12,7 @@ import io.zerows.epoch.common.log.Annal;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.io.plugins.extension.PlugAuditor;
 import io.zerows.epoch.corpus.model.commune.Envelop;
-import io.zerows.epoch.corpus.model.store.OCacheUri;
+import io.zerows.epoch.mem.OCacheUri;
 import io.zerows.extension.runtime.skeleton.eon.KeIpc;
 
 import java.time.Instant;

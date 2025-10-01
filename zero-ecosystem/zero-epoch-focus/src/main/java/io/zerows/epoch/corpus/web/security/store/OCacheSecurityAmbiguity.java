@@ -1,7 +1,7 @@
 package io.zerows.epoch.corpus.web.security.store;
 
-import io.zerows.epoch.corpus.metadata.zdk.AbstractAmbiguity;
-import io.zerows.epoch.corpus.security.atom.Aegis;
+import io.zerows.epoch.corpus.security.Aegis;
+import io.zerows.epoch.sdk.metadata.AbstractAmbiguity;
 import org.osgi.framework.Bundle;
 
 import java.util.HashSet;

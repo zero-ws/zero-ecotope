@@ -9,8 +9,8 @@ import io.zerows.epoch.common.log.LogModule;
 import io.zerows.epoch.common.shared.program.Kv;
 import io.zerows.epoch.common.uca.aop.Aspect;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.epoch.corpus.domain.atom.specification.KField;
 import io.zerows.epoch.corpus.mbse.atom.specification.KModule;
+import io.zerows.epoch.corpus.metadata.specification.KField;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 import io.zerows.specification.modeling.metadata.HMetaAtom;
 

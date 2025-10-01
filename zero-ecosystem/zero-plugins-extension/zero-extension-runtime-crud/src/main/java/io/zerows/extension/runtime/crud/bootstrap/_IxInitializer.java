@@ -3,11 +3,11 @@ package io.zerows.extension.runtime.crud.bootstrap;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.based.constant.KWeb;
-import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.corpus.mbse.atom.specification.KColumn;
 import io.zerows.epoch.corpus.mbse.atom.specification.KModule;
+import io.zerows.epoch.corpus.metadata.specification.KField;
+import io.zerows.epoch.program.Ut;
 import io.zerows.extension.runtime.crud.util.Ix;
-import io.zerows.epoch.corpus.domain.atom.specification.KField;
 
 import java.util.Objects;
 

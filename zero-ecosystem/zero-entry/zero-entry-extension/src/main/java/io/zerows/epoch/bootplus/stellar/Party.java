@@ -2,7 +2,7 @@ package io.zerows.epoch.bootplus.stellar;
 
 import io.zerows.epoch.common.shared.app.KDS;
 import io.zerows.epoch.common.shared.app.KGlobal;
-import io.zerows.epoch.corpus.database.atom.Database;
+import io.zerows.epoch.corpus.database.Database;
 import io.zerows.specification.access.app.HArk;
 
 /**

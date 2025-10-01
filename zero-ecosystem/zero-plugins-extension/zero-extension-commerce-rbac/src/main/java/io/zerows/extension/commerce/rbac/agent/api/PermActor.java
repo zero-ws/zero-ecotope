@@ -8,7 +8,7 @@ import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.epoch.corpus.domain.atom.commune.XHeader;
+import io.zerows.epoch.corpus.metadata.commune.XHeader;
 import io.zerows.epoch.program.Ut;
 import io.zerows.extension.commerce.rbac.agent.service.business.PermStub;
 import io.zerows.extension.commerce.rbac.agent.service.business.RightsStub;

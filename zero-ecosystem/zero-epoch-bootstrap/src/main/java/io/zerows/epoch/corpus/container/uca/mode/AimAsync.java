@@ -8,12 +8,12 @@ import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.epoch.corpus.assembly.atom.OProxyInstance;
-import io.zerows.epoch.corpus.configuration.atom.NodeNetwork;
-import io.zerows.epoch.corpus.configuration.store.OCacheNode;
+import io.zerows.epoch.corpus.assembly.OProxyInstance;
+import io.zerows.epoch.corpus.configuration.NodeNetwork;
 import io.zerows.epoch.corpus.io.zdk.Aim;
-import io.zerows.epoch.corpus.model.atom.Event;
+import io.zerows.epoch.corpus.model.Event;
 import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.mem.OCacheNode;
 
 import java.util.Objects;
 

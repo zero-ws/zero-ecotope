@@ -2,17 +2,17 @@ package io.zerows.extension.mbse.ui.bootstrap;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.common.log.Annal;
 import io.zerows.epoch.constant.VPath;
 import io.zerows.epoch.constant.VString;
 import io.zerows.epoch.constant.VValue;
-import io.zerows.epoch.based.constant.KName;
-import io.zerows.epoch.common.log.Annal;
+import io.zerows.epoch.corpus.configuration.module.MDConfiguration;
+import io.zerows.epoch.corpus.extension.HExtension;
 import io.zerows.epoch.program.Ut;
-import io.zerows.epoch.corpus.model.extension.HExtension;
 import io.zerows.extension.mbse.ui.atom.UiConfig;
 import io.zerows.extension.mbse.ui.eon.UiConstant;
 import io.zerows.extension.runtime.skeleton.eon.KeMsg;
-import io.zerows.epoch.corpus.metadata.atom.configuration.MDConfiguration;
 import io.zerows.specification.access.app.HAmbient;
 
 import java.util.List;

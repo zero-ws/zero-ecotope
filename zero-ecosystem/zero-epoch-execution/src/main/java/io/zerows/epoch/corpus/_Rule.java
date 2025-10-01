@@ -2,10 +2,10 @@ package io.zerows.epoch.corpus;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.enums.typed.ChangeFlag;
 import io.zerows.epoch.common.shared.normalize.KRuleTerm;
+import io.zerows.epoch.corpus.metadata.commune.Apt;
+import io.zerows.epoch.enums.typed.ChangeFlag;
 import io.zerows.epoch.program.Ut;
-import io.zerows.epoch.corpus.domain.atom.commune.dynamic.Apt;
 
 import java.util.Collection;
 import java.util.Objects;

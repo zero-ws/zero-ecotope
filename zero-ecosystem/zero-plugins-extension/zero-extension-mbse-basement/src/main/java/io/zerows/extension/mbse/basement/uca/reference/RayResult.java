@@ -3,11 +3,11 @@ package io.zerows.extension.mbse.basement.uca.reference;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.enums.modeling.EmValue;
 import io.zerows.epoch.common.shared.program.Kv;
 import io.zerows.epoch.common.shared.reference.RResult;
+import io.zerows.epoch.corpus.metadata.element.JAmb;
+import io.zerows.epoch.enums.modeling.EmValue;
 import io.zerows.epoch.program.Ut;
-import io.zerows.epoch.corpus.domain.atom.element.JAmb;
 import io.zerows.specification.modeling.HRecord;
 
 import java.util.Arrays;

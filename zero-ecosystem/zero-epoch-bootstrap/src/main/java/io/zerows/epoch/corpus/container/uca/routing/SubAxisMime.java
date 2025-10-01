@@ -4,8 +4,8 @@ import io.reactivex.rxjava3.core.Observable;
 import io.vertx.ext.web.Route;
 import io.zerows.epoch.constant.VString;
 import io.zerows.epoch.corpus.io.uca.routing.OAxisSub;
-import io.zerows.epoch.corpus.model.atom.Event;
-import io.zerows.epoch.corpus.model.atom.running.RunRoute;
+import io.zerows.epoch.corpus.model.Event;
+import io.zerows.epoch.corpus.model.running.RunRoute;
 import jakarta.ws.rs.core.MediaType;
 import org.osgi.framework.Bundle;
 

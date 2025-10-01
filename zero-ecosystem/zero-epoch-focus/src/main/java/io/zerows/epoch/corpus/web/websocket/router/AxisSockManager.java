@@ -1,9 +1,9 @@
 package io.zerows.epoch.corpus.web.websocket.router;
 
+import io.zerows.epoch.corpus.configuration.NodeNetwork;
 import io.zerows.epoch.corpus.io.management.AxisSockFactory;
 import io.zerows.epoch.corpus.io.uca.routing.OAxis;
-import io.zerows.epoch.corpus.configuration.atom.NodeNetwork;
-import io.zerows.epoch.corpus.configuration.store.OCacheNode;
+import io.zerows.epoch.mem.OCacheNode;
 import org.osgi.framework.Bundle;
 
 /**

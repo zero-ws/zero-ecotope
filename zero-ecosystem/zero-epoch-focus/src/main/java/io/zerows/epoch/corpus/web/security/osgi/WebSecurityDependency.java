@@ -1,11 +1,11 @@
 package io.zerows.epoch.corpus.web.security.osgi;
 
+import io.zerows.epoch.based.constant.osgi.OMessage;
 import io.zerows.epoch.corpus.web.security.osgi.service.EnergySecure;
 import io.zerows.epoch.corpus.web.security.osgi.service.EnergySecureService;
-import io.zerows.epoch.corpus.metadata.eon.OMessage;
-import io.zerows.epoch.corpus.metadata.zdk.dependency.AbstractConnectorBase;
-import io.zerows.epoch.corpus.metadata.zdk.dependency.AbstractConnectorService;
-import io.zerows.epoch.corpus.metadata.zdk.service.ServiceConnector;
+import io.zerows.epoch.sdk.metadata.dependency.AbstractConnectorBase;
+import io.zerows.epoch.sdk.metadata.dependency.AbstractConnectorService;
+import io.zerows.epoch.sdk.metadata.service.ServiceConnector;
 import org.apache.felix.dm.Component;
 import org.apache.felix.dm.DependencyManager;
 import org.osgi.framework.Bundle;

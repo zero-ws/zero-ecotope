@@ -8,8 +8,8 @@ import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.Session;
 import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.based.constant.KWeb;
+import io.zerows.epoch.corpus.metadata.commune.Vis;
 import io.zerows.epoch.program.Ut;
-import io.zerows.epoch.corpus.domain.atom.commune.Vis;
 
 import java.io.Serializable;
 import java.util.Arrays;

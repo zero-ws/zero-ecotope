@@ -1,8 +1,8 @@
 package io.zerows.extension.commerce.erp.configuration;
 
-import io.zerows.epoch.corpus.model.extension.HExtension;
+import io.zerows.epoch.corpus.configuration.module.MDConfiguration;
+import io.zerows.epoch.corpus.extension.HExtension;
 import io.zerows.extension.commerce.erp.eon.ErpConstant;
-import io.zerows.epoch.corpus.metadata.atom.configuration.MDConfiguration;
 
 /**
  * @author lang : 2024-05-08

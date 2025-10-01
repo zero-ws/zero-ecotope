@@ -2,7 +2,7 @@ package io.zerows.plugins.common.security.authenticate;
 
 import io.vertx.ext.auth.ChainAuth;
 import io.vertx.ext.auth.authentication.AuthenticationProvider;
-import io.zerows.epoch.corpus.security.atom.Aegis;
+import io.zerows.epoch.corpus.security.Aegis;
 
 import java.util.Objects;
 

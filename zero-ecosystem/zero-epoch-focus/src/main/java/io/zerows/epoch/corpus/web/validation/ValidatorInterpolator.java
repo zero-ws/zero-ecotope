@@ -1,7 +1,7 @@
 package io.zerows.epoch.corpus.web.validation;
 
+import io.zerows.epoch.common.log.OLog;
 import io.zerows.epoch.program.Ut;
-import io.zerows.epoch.corpus.metadata.uca.logging.OLog;
 import jakarta.el.ELManager;
 import jakarta.el.ExpressionFactory;
 import org.hibernate.validator.internal.engine.messageinterpolation.InterpolationTerm;

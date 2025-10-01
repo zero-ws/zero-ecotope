@@ -1,7 +1,7 @@
 package io.zerows.epoch.corpus.container.uca.store;
 
-import io.zerows.epoch.corpus.model.atom.running.RunVertx;
-import io.zerows.epoch.corpus.metadata.zdk.AbstractAmbiguity;
+import io.zerows.epoch.corpus.model.running.RunVertx;
+import io.zerows.epoch.sdk.metadata.AbstractAmbiguity;
 import org.osgi.framework.Bundle;
 
 import java.util.Objects;

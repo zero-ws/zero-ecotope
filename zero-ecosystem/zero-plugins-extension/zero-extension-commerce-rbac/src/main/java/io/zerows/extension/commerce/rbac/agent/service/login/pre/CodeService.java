@@ -2,10 +2,10 @@ package io.zerows.extension.commerce.rbac.agent.service.login.pre;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.corpus.metadata.typed.UObject;
 import io.zerows.extension.commerce.rbac.eon.AuthKey;
 import io.zerows.extension.commerce.rbac.uca.timer.ClockFactory;
 import io.zerows.extension.commerce.rbac.uca.timer.ScClock;
-import io.zerows.epoch.corpus.domain.atom.typed.UObject;
 
 public class CodeService implements CodeStub {
     private final ScClock<String> cache;

@@ -2,12 +2,12 @@ package io.zerows.epoch.corpus.mbse.uca.mixture;
 
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.component.destine.Hymn;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.database.jooq.operation.UxJoin;
-import io.zerows.epoch.corpus.domain.atom.specification.KJoin;
-import io.zerows.epoch.corpus.domain.atom.specification.KPoint;
-import io.zerows.epoch.corpus.domain.uca.destine.Hymn;
 import io.zerows.epoch.corpus.mbse.atom.specification.KModule;
+import io.zerows.epoch.corpus.metadata.specification.KJoin;
+import io.zerows.epoch.corpus.metadata.specification.KPoint;
 import io.zerows.epoch.program.Ut;
 
 import java.util.Objects;

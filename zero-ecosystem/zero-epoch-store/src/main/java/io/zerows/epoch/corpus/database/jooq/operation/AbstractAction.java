@@ -2,16 +2,28 @@ package io.zerows.epoch.corpus.database.jooq.operation;
 
 import io.github.jklingsporn.vertx.jooq.classic.VertxDAO;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.common.log.OLog;
+import io.zerows.epoch.component.environment.DevEnv;
 import io.zerows.epoch.corpus.database.jooq.JooqDsl;
 import io.zerows.epoch.corpus.database.jooq.condition.JooqCond;
 import io.zerows.epoch.corpus.database.jooq.util.JqAnalyzer;
 import io.zerows.epoch.program.Ut;
-import io.zerows.epoch.corpus.metadata.uca.environment.DevEnv;
-import io.zerows.epoch.corpus.metadata.uca.logging.OLog;
-import org.jooq.*;
+import org.jooq.Condition;
+import org.jooq.DSLContext;
+import org.jooq.Field;
+import org.jooq.Operator;
+import org.jooq.TableField;
+import org.jooq.UniqueKey;
+import org.jooq.UpdateConditionStep;
 import org.jooq.impl.DSL;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>

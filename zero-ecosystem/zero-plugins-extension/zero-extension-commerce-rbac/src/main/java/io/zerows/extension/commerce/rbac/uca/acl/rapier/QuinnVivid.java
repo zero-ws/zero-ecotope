@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.common.uca.qr.syntax.Ir;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.epoch.corpus.security.atom.DataBound;
+import io.zerows.epoch.corpus.security.DataBound;
 import io.zerows.epoch.program.Ut;
 import io.zerows.extension.commerce.rbac.atom.ScOwner;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SResource;

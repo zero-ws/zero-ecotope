@@ -2,7 +2,7 @@ package io.zerows.epoch.corpus.web.validation.uca.combine;
 
 import io.r2mo.typed.exception.WebException;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.corpus.model.atom.Rule;
+import io.zerows.epoch.corpus.model.Rule;
 import io.zerows.epoch.corpus.web.validation.uca.rules.Ruler;
 
 import java.util.List;

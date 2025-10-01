@@ -6,7 +6,7 @@ import io.zerows.epoch.annotations.Contract;
 import io.zerows.epoch.common.log.Annal;
 import io.zerows.epoch.corpus.io.zdk.mime.Resolver;
 import io.zerows.epoch.corpus.io.zdk.mime.Solve;
-import io.zerows.epoch.corpus.model.atom.Epsilon;
+import io.zerows.epoch.corpus.model.Epsilon;
 
 import java.util.Objects;
 

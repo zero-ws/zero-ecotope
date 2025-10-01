@@ -3,11 +3,11 @@ package io.zerows.extension.commerce.finance.util;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.common.log.Log;
 import io.zerows.epoch.common.log.LogModule;
+import io.zerows.epoch.corpus.metadata.specification.KNaming;
 import io.zerows.extension.commerce.finance.atom.TranData;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FBook;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FPreAuthorize;
 import io.zerows.extension.commerce.finance.eon.FmConstant;
-import io.zerows.epoch.corpus.domain.atom.specification.KNaming;
 
 import java.math.BigDecimal;
 import java.util.List;

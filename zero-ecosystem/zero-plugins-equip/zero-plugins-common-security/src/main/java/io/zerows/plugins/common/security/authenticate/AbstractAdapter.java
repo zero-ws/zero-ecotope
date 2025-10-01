@@ -2,11 +2,11 @@ package io.zerows.plugins.common.security.authenticate;
 
 import io.vertx.ext.auth.authentication.AuthenticationProvider;
 import io.zerows.epoch.based.configure.YmlCore;
-import io.zerows.epoch.corpus.security.atom.Aegis;
-import io.zerows.epoch.corpus.security.atom.AegisItem;
-import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.common.log.Annal;
+import io.zerows.epoch.corpus.security.Aegis;
+import io.zerows.epoch.corpus.security.AegisItem;
 import io.zerows.epoch.enums.EmSecure;
+import io.zerows.epoch.program.Ut;
 
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;

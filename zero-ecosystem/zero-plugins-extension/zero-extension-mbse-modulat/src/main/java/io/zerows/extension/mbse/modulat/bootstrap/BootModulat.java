@@ -1,6 +1,6 @@
 package io.zerows.extension.mbse.modulat.bootstrap;
 
-import io.zerows.epoch.corpus.model.extension.AbstractBoot;
+import io.zerows.epoch.corpus.extension.AbstractBoot;
 import io.zerows.extension.mbse.modulat.eon.BkConstant;
 
 import java.util.Set;

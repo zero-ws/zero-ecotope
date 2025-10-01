@@ -7,7 +7,7 @@ import io.zerows.epoch.common.shared.app.KDS;
 import io.zerows.epoch.common.shared.app.KDatabase;
 import io.zerows.epoch.common.shared.normalize.KIdentity;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.epoch.corpus.database.atom.Database;
+import io.zerows.epoch.corpus.database.Database;
 import io.zerows.epoch.corpus.database.cp.zdk.DS;
 import io.zerows.epoch.corpus.database.cp.zdk.DataPool;
 import io.zerows.epoch.program.Ut;

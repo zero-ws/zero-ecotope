@@ -3,13 +3,13 @@ package io.zerows.epoch.corpus.container.osgi.service;
 import io.zerows.epoch.annotations.Agent;
 import io.zerows.epoch.annotations.Worker;
 import io.zerows.epoch.common.shared.context.KRunner;
-import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.corpus.container.store.under.StoreVertx;
 import io.zerows.epoch.corpus.container.uca.store.StubLinear;
-import io.zerows.epoch.corpus.model.atom.running.RunVertx;
+import io.zerows.epoch.corpus.model.running.RunVertx;
 import io.zerows.epoch.enums.VertxComponent;
-import io.zerows.epoch.corpus.metadata.osgi.service.EnergyDeployment;
-import io.zerows.epoch.corpus.metadata.store.OCacheClass;
+import io.zerows.epoch.mem.OCacheClass;
+import io.zerows.epoch.osgi.metadata.service.EnergyDeployment;
+import io.zerows.epoch.program.Ut;
 import org.osgi.framework.Bundle;
 
 import java.util.Arrays;

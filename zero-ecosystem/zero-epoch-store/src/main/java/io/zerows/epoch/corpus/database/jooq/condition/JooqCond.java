@@ -3,23 +3,27 @@ package io.zerows.epoch.corpus.database.jooq.condition;
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.constant.VString;
-import io.zerows.epoch.constant.VValue;
+import io.zerows.epoch.common.log.OLog;
 import io.zerows.epoch.common.uca.qr.Criteria;
 import io.zerows.epoch.common.uca.qr.Sorter;
 import io.zerows.epoch.common.uca.qr.syntax.Ir;
-import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.component.environment.DevEnv;
+import io.zerows.epoch.constant.VString;
+import io.zerows.epoch.constant.VValue;
 import io.zerows.epoch.corpus.database.exception._40055Exception500JooqCondField;
 import io.zerows.epoch.corpus.database.exception._40067Exception500JooqCondClause;
-import io.zerows.epoch.corpus.metadata.uca.environment.DevEnv;
-import io.zerows.epoch.corpus.metadata.uca.logging.OLog;
+import io.zerows.epoch.program.Ut;
 import org.jooq.Condition;
 import org.jooq.Field;
 import org.jooq.Operator;
 import org.jooq.OrderField;
 import org.jooq.impl.DSL;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import java.util.function.Function;
 
 @SuppressWarnings("all")

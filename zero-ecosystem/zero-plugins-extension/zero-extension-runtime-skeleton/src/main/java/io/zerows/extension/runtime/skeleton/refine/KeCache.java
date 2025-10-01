@@ -6,10 +6,10 @@ import io.vertx.ext.web.RoutingContext;
 import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.common.log.Annal;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.epoch.corpus.domain.atom.commune.Vis;
-import io.zerows.epoch.corpus.metadata.osgi.channel.KIncome;
-import io.zerows.epoch.corpus.metadata.osgi.channel.Pocket;
-import io.zerows.epoch.corpus.model.store.OCacheUri;
+import io.zerows.epoch.corpus.metadata.commune.Vis;
+import io.zerows.epoch.mem.OCacheUri;
+import io.zerows.epoch.underlying.channel.KIncome;
+import io.zerows.epoch.underlying.channel.Pocket;
 import io.zerows.extension.runtime.skeleton.osgi.spi.web.Orbit;
 
 /*

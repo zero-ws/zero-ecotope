@@ -2,7 +2,7 @@ package io.zerows.epoch.program;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.corpus.metadata.atom.mapping.Mirror;
+import io.zerows.epoch.corpus.metadata.mapping.Mirror;
 
 import java.util.ArrayList;
 import java.util.List;

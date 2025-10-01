@@ -4,10 +4,10 @@ import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.epoch.based.configure.YmlCore;
-import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.corpus.io.plugins.extension.PlugRegion;
+import io.zerows.epoch.corpus.metadata.element.JComponent;
 import io.zerows.epoch.corpus.model.commune.Envelop;
-import io.zerows.epoch.corpus.domain.atom.element.JComponent;
+import io.zerows.epoch.program.Ut;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
 

@@ -1,6 +1,6 @@
 package io.zerows.epoch.corpus.container.uca.store;
 
-import io.zerows.epoch.corpus.model.atom.running.RunVertx;
+import io.zerows.epoch.corpus.model.running.RunVertx;
 import org.osgi.framework.Bundle;
 
 import java.util.Objects;

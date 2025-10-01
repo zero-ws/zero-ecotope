@@ -1,9 +1,9 @@
 package io.zerows.plugins.store.liquibase;
 
 import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.common.log.OLog;
 import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.runtime.HMacrocosm;
-import io.zerows.epoch.corpus.metadata.uca.logging.OLog;
 
 import java.util.Properties;
 

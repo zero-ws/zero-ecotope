@@ -13,7 +13,7 @@
     <dependencies>
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-epoch</artifactId>
+            <artifactId>zero-overlay</artifactId>
         </dependency>
 
 

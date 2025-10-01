@@ -2,8 +2,8 @@ package io.zerows.extension.runtime.ambient.bootstrap;
 
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
+import io.zerows.epoch.component.di.DiPlugin;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.epoch.corpus.assembly.uca.di.DiPlugin;
 import io.zerows.epoch.program.Ut;
 import io.zerows.extension.runtime.ambient.agent.service.file.DocBStub;
 import io.zerows.extension.runtime.ambient.agent.service.file.DocBuilder;

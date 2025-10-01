@@ -1,9 +1,9 @@
 package io.zerows.extension.runtime.crud.uca.destine;
 
-import io.zerows.epoch.enums.modeling.EmModel;
 import io.zerows.epoch.corpus.mbse.atom.specification.KModule;
+import io.zerows.epoch.corpus.metadata.specification.KPoint;
+import io.zerows.epoch.enums.modeling.EmModel;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
-import io.zerows.epoch.corpus.domain.atom.specification.KPoint;
 
 import java.util.Objects;
 import java.util.function.Supplier;

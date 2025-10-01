@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.epoch.corpus.io.zdk.Aim;
-import io.zerows.epoch.corpus.model.atom.Event;
+import io.zerows.epoch.corpus.model.Event;
 import io.zerows.epoch.corpus.model.commune.Envelop;
 
 /**

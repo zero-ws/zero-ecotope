@@ -1,8 +1,8 @@
 package io.zerows.epoch.corpus.database.jooq.condition;
 
 import io.vertx.core.json.JsonArray;
+import io.zerows.epoch.common.log.OLog;
 import io.zerows.epoch.program.Ut;
-import io.zerows.epoch.corpus.metadata.uca.logging.OLog;
 import org.jooq.Condition;
 import org.jooq.Field;
 

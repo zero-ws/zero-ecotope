@@ -8,9 +8,14 @@ import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.based.constant.KWeb;
 import io.zerows.epoch.corpus.io.annotations.BodyParam;
 import io.zerows.epoch.corpus.io.annotations.PointParam;
+import io.zerows.epoch.corpus.metadata.commune.Vis;
 import io.zerows.extension.mbse.ui.eon.Addr;
-import io.zerows.epoch.corpus.domain.atom.commune.Vis;
-import jakarta.ws.rs.*;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.HeaderParam;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.QueryParam;
 
 @EndPoint
 @Path("/api")

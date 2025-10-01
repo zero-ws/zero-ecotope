@@ -1,15 +1,15 @@
 package io.zerows.extension.runtime.crud.bootstrap;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.component.environment.DevEnv;
+import io.zerows.epoch.corpus.configuration.module.MDConfiguration;
+import io.zerows.epoch.corpus.configuration.module.modeling.MDEntity;
+import io.zerows.epoch.corpus.extension.HExtension;
 import io.zerows.epoch.corpus.mbse.atom.specification.KModule;
-import io.zerows.epoch.corpus.model.extension.HExtension;
+import io.zerows.epoch.corpus.metadata.MultiKeyMap;
+import io.zerows.epoch.program.Ut;
 import io.zerows.extension.runtime.crud.eon.IxConstant;
 import io.zerows.extension.runtime.crud.eon.IxMsg;
-import io.zerows.epoch.corpus.metadata.atom.MultiKeyMap;
-import io.zerows.epoch.corpus.metadata.atom.configuration.MDConfiguration;
-import io.zerows.epoch.corpus.metadata.atom.configuration.modeling.MDEntity;
-import io.zerows.epoch.corpus.metadata.uca.environment.DevEnv;
 
 import java.util.Objects;
 import java.util.Set;

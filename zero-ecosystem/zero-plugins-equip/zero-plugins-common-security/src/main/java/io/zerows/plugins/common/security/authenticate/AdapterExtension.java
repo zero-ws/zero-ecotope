@@ -1,7 +1,7 @@
 package io.zerows.plugins.common.security.authenticate;
 
 import io.vertx.ext.auth.authentication.AuthenticationProvider;
-import io.zerows.epoch.corpus.security.atom.Aegis;
+import io.zerows.epoch.corpus.security.Aegis;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>

@@ -7,7 +7,7 @@ import io.zerows.epoch.annotations.Ipc;
 import io.zerows.epoch.common.log.Annal;
 import io.zerows.epoch.corpus.container.exception._40042Exception500ChannelMulti;
 import io.zerows.epoch.corpus.io.zdk.Aim;
-import io.zerows.epoch.corpus.model.atom.Event;
+import io.zerows.epoch.corpus.model.Event;
 
 import java.lang.reflect.Method;
 

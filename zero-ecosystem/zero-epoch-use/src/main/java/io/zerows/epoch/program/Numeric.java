@@ -2,7 +2,7 @@ package io.zerows.epoch.program;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.corpus.metadata.uca.logging.OLog;
+import io.zerows.epoch.common.log.OLog;
 
 import java.math.BigDecimal;
 

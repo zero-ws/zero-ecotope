@@ -6,11 +6,11 @@ import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.ext.web.RoutingContext;
+import io.zerows.epoch.corpus.configuration.NodeNetwork;
 import io.zerows.epoch.corpus.io.zdk.Aim;
-import io.zerows.epoch.corpus.model.atom.Event;
+import io.zerows.epoch.corpus.model.Event;
 import io.zerows.epoch.corpus.model.commune.Envelop;
-import io.zerows.epoch.corpus.configuration.atom.NodeNetwork;
-import io.zerows.epoch.corpus.configuration.store.OCacheNode;
+import io.zerows.epoch.mem.OCacheNode;
 
 /**
  * OneWayAim: Event Bus: One-Way

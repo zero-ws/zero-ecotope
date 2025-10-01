@@ -1,7 +1,7 @@
 package io.zerows.epoch.corpus.io.uca.request.mime.parse;
 
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.epoch.corpus.model.atom.Event;
+import io.zerows.epoch.corpus.model.Event;
 
 /**
  * # 「Co」Zero Framework for MIME parsing

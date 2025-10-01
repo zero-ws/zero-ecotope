@@ -2,9 +2,9 @@ package io.zerows.extension.commerce.finance.agent.service;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.corpus.metadata.specification.KNaming;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FBook;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FPreAuthorize;
-import io.zerows.epoch.corpus.domain.atom.specification.KNaming;
 
 import java.util.List;
 

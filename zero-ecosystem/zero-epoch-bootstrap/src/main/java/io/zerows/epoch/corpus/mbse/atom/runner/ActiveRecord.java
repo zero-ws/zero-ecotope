@@ -1,8 +1,8 @@
 package io.zerows.epoch.corpus.mbse.atom.runner;
 
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.common.log.OLog;
 import io.zerows.epoch.program.Ut;
-import io.zerows.epoch.corpus.metadata.uca.logging.OLog;
 import io.zerows.specification.modeling.HRecord;
 
 import java.util.Arrays;

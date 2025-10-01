@@ -4,7 +4,7 @@ import io.zerows.epoch.corpus.container.uca.plugins.OAxisDynamicGateway;
 import io.zerows.epoch.corpus.container.uca.plugins.OAxisGateway;
 import io.zerows.epoch.corpus.container.uca.plugins.OAxisSockGateway;
 import io.zerows.epoch.corpus.io.uca.routing.OAxis;
-import io.zerows.epoch.corpus.model.atom.running.RunServer;
+import io.zerows.epoch.corpus.model.running.RunServer;
 import org.osgi.framework.Bundle;
 
 import java.util.Objects;

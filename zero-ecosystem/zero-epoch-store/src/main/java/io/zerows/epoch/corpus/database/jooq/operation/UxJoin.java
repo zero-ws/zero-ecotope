@@ -4,11 +4,11 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.constant.KName;
-import io.zerows.epoch.corpus.database.jooq.util.JqTool;
 import io.zerows.epoch.common.uca.qr.syntax.Ir;
+import io.zerows.epoch.corpus.database.jooq.util.JqTool;
+import io.zerows.epoch.corpus.metadata.mapping.Mirror;
+import io.zerows.epoch.corpus.metadata.mapping.Mojo;
 import io.zerows.epoch.program.Ut;
-import io.zerows.epoch.corpus.metadata.atom.mapping.Mirror;
-import io.zerows.epoch.corpus.metadata.atom.mapping.Mojo;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;

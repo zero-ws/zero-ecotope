@@ -1,8 +1,8 @@
 package io.zerows.epoch.program.fn;
 
 import io.vertx.core.Future;
+import io.zerows.epoch.common.log.OLog;
 import io.zerows.epoch.program.Ut;
-import io.zerows.epoch.corpus.metadata.uca.logging.OLog;
 
 import java.util.Objects;
 import java.util.function.Consumer;

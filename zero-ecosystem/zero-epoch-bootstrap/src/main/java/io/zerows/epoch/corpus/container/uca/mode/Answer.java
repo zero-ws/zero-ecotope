@@ -9,7 +9,7 @@ import io.zerows.epoch.based.constant.KWeb;
 import io.zerows.epoch.corpus.container.uca.reply.ActionReply;
 import io.zerows.epoch.corpus.container.uca.reply.OAmbit;
 import io.zerows.epoch.corpus.io.uca.response.hooker.Later;
-import io.zerows.epoch.corpus.model.atom.Event;
+import io.zerows.epoch.corpus.model.Event;
 import io.zerows.epoch.corpus.model.commune.Envelop;
 import jakarta.ws.rs.core.MediaType;
 

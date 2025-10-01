@@ -1,7 +1,7 @@
 package io.zerows.epoch.corpus.container.uca.routing;
 
 import io.zerows.epoch.corpus.io.uca.routing.OAxis;
-import io.zerows.epoch.corpus.model.atom.running.RunServer;
+import io.zerows.epoch.corpus.model.running.RunServer;
 import org.osgi.framework.Bundle;
 
 /**

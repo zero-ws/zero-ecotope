@@ -2,7 +2,7 @@ package io.zerows.extension.mbse.action.uca.micro;
 
 import io.vertx.core.Future;
 import io.zerows.epoch.corpus.model.commune.Envelop;
-import io.zerows.epoch.corpus.model.zdk.Commercial;
+import io.zerows.epoch.sdk.modeling.Commercial;
 import io.zerows.extension.mbse.action.osgi.spi.jet.JtConsumer;
 import io.zerows.extension.mbse.action.uca.monitor.JtMonitor;
 

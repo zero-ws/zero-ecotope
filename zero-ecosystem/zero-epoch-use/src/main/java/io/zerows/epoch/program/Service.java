@@ -1,7 +1,7 @@
 package io.zerows.epoch.program;
 
 import io.zerows.epoch.constant.VValue;
-import io.zerows.epoch.corpus.metadata.cache.CStore;
+import io.zerows.epoch.mem.cache.CStore;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,7 +9,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.*;
+import java.util.Enumeration;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.Objects;
+import java.util.ServiceConfigurationError;
+import java.util.Set;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>

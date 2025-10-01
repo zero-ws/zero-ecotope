@@ -7,9 +7,9 @@ import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.based.constant.KWeb;
 import io.zerows.epoch.common.shared.datamation.KDictSource;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.epoch.corpus.cloud.zdk.spi.DictionaryPlugin;
 import io.zerows.epoch.corpus.web.cache.Rapid;
 import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.underlying.DictionaryPlugin;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;

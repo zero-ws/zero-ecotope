@@ -1,15 +1,15 @@
 package io.zerows.epoch.bootplus.extension.spi.component;
 
-import io.zerows.epoch.bootplus.extension.refine.Ox;
-import io.zerows.epoch.bootplus.extension.scaffold.stdn.AbstractHFile;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.zerows.epoch.based.constant.KName;
-import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.bootplus.extension.refine.Ox;
+import io.zerows.epoch.bootplus.extension.scaffold.stdn.AbstractHFile;
 import io.zerows.epoch.corpus.mbse.atom.runner.ActIn;
+import io.zerows.epoch.corpus.metadata.commune.Apt;
+import io.zerows.epoch.program.Ut;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
-import io.zerows.epoch.corpus.domain.atom.commune.dynamic.Apt;
 
 /**
  * ## 「Channel」上传通道

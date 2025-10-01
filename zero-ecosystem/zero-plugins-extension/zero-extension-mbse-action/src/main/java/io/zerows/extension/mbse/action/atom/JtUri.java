@@ -4,7 +4,7 @@ import io.vertx.core.http.HttpMethod;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.constant.KWeb;
 import io.zerows.epoch.program.Ut;
-import io.zerows.epoch.corpus.model.zdk.Api;
+import io.zerows.epoch.sdk.modeling.Api;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IApi;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IService;
 import io.zerows.extension.mbse.action.eon.JtKey;

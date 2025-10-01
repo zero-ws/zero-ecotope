@@ -1,15 +1,15 @@
 package io.zerows.epoch.corpus.container.osgi;
 
+import io.zerows.epoch.based.constant.osgi.OMessage;
 import io.zerows.epoch.corpus.container.osgi.service.EnergyDeploymentService;
 import io.zerows.epoch.corpus.container.osgi.service.EnergyVertx;
 import io.zerows.epoch.corpus.container.osgi.service.EnergyVertxService;
 import io.zerows.epoch.corpus.container.osgi.service.provider.InvocationContainer;
-import io.zerows.epoch.corpus.metadata.eon.OMessage;
-import io.zerows.epoch.corpus.metadata.osgi.service.EnergyDeployment;
-import io.zerows.epoch.corpus.metadata.zdk.dependency.AbstractConnectorBase;
-import io.zerows.epoch.corpus.metadata.zdk.dependency.AbstractConnectorService;
-import io.zerows.epoch.corpus.metadata.zdk.service.ServiceConnector;
-import io.zerows.epoch.corpus.metadata.zdk.service.ServiceInvocation;
+import io.zerows.epoch.osgi.metadata.service.EnergyDeployment;
+import io.zerows.epoch.sdk.metadata.dependency.AbstractConnectorBase;
+import io.zerows.epoch.sdk.metadata.dependency.AbstractConnectorService;
+import io.zerows.epoch.sdk.metadata.service.ServiceConnector;
+import io.zerows.epoch.sdk.metadata.service.ServiceInvocation;
 import org.apache.felix.dm.Component;
 import org.apache.felix.dm.DependencyManager;
 import org.osgi.framework.Bundle;

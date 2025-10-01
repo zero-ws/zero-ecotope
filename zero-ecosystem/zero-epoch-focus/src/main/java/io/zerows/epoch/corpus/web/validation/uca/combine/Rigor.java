@@ -1,7 +1,7 @@
 package io.zerows.epoch.corpus.web.validation.uca.combine;
 
 import io.r2mo.typed.exception.WebException;
-import io.zerows.epoch.corpus.model.atom.Rule;
+import io.zerows.epoch.corpus.model.Rule;
 
 import java.util.List;
 import java.util.Map;

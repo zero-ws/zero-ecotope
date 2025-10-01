@@ -3,10 +3,10 @@ package io.zerows.epoch.corpus;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.configure.YmlCore;
-import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.common.log.OLog;
 import io.zerows.epoch.corpus.model.commune.Envelop;
-import io.zerows.epoch.corpus.metadata.store.OZeroStore;
-import io.zerows.epoch.corpus.metadata.uca.logging.OLog;
+import io.zerows.epoch.mem.OZeroStore;
+import io.zerows.epoch.program.Ut;
 
 import java.util.Objects;
 import java.util.function.BiFunction;

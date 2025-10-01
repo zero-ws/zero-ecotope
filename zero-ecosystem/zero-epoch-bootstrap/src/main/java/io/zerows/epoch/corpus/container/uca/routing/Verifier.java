@@ -8,7 +8,7 @@ import io.zerows.epoch.corpus.container.exception._40030Exception500ParamAnnotat
 import io.zerows.epoch.corpus.io.annotations.BodyParam;
 import io.zerows.epoch.corpus.io.annotations.StreamParam;
 import io.zerows.epoch.corpus.io.uca.request.argument.Filler;
-import io.zerows.epoch.corpus.model.atom.Event;
+import io.zerows.epoch.corpus.model.Event;
 import io.zerows.epoch.program.Ut;
 
 import java.lang.annotation.Annotation;

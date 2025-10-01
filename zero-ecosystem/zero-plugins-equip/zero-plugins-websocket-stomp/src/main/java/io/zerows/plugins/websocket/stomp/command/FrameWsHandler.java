@@ -3,7 +3,7 @@ package io.zerows.plugins.websocket.stomp.command;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.ext.stomp.ServerFrame;
-import io.zerows.epoch.corpus.security.atom.Aegis;
+import io.zerows.epoch.corpus.security.Aegis;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>

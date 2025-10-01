@@ -5,7 +5,7 @@ import io.vertx.core.Vertx;
 import io.zerows.epoch.annotations.Infusion;
 import io.zerows.epoch.based.configure.YmlCore;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.epoch.corpus.metadata.zdk.plugins.Infix;
+import io.zerows.epoch.sdk.metadata.plugins.Infix;
 
 @Infusion
 @SuppressWarnings("all")
