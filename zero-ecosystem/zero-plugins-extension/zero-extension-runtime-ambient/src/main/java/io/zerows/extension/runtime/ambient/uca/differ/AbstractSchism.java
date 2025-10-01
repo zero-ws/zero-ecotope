@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.enums.modeling.EmAttribute;
 import io.zerows.common.normalize.KMarkAtom;
 import io.zerows.common.program.KRef;
-import io.zerows.core.exception.web._60050Exception501NotSupport;
+import io.zerows.epoch.exception.web._60050Exception501NotSupport;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XActivityChangeDao;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XActivityDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XActivity;

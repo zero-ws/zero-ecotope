@@ -1,7 +1,7 @@
 package io.zerows.core.web.io.uca.response.resolver;
 
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.core.uca.log.Annal;
+import io.zerows.epoch.common.uca.log.Annal;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.io.zdk.mime.Resolver;
 import io.zerows.core.web.model.atom.Epsilon;

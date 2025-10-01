@@ -6,7 +6,7 @@ import io.mature.extension.uca.ui.FieldStatus;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.fn.HFn;
+import io.zerows.ams.fn.FnBase;
 import io.zerows.common.program.KRef;
 import io.zerows.core.constant.KName;
 import io.zerows.core.util.Ut;
@@ -174,7 +174,7 @@ public class AdjustUiInstruction extends AbstractInstruction {
     private Future<JsonArray> uiList(final String identifier, final String sigma) {
         final JsonObject condition = this.uiCond(identifier, sigma);
         return Ux.Jooq.on(UiListDao.class).<UiList>fetchAndAsync(condition)
-            .compose(lists -> HFn.combineT(lists, this::uiListField))
+            .compose(lists -> FnBase.combineT(lists, this::uiListField))
             .compose(Ux::futureA);
     }
 
@@ -194,7 +194,7 @@ public class AdjustUiInstruction extends AbstractInstruction {
     private Future<JsonArray> uiForm(final String identifier, final String sigma) {
         final JsonObject condition = this.uiCond(identifier, sigma);
         return Ux.Jooq.on(UiFormDao.class).<UiForm>fetchAndAsync(condition)
-            .compose(forms -> HFn.combineT(forms, this::uiFormField))
+            .compose(forms -> FnBase.combineT(forms, this::uiFormField))
             .compose(Ux::futureA);
     }
 

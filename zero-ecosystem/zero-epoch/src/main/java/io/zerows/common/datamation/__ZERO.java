@@ -2,7 +2,7 @@ package io.zerows.common.datamation;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.util.HUt;
+import io.zerows.ams.util.UtBase;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentMap;
@@ -17,7 +17,7 @@ class DirectoryKit {
     static JsonArray process(final JsonArray process,
                              final Function<JsonObject, JsonObject> function) {
         final JsonArray normalized = new JsonArray();
-        HUt.itJArray(process).map(function).forEach(normalized::add);
+        UtBase.itJArray(process).map(function).forEach(normalized::add);
         return normalized;
     }
 

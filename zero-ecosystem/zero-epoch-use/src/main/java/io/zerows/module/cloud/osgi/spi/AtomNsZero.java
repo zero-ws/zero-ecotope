@@ -1,7 +1,7 @@
 package io.zerows.module.cloud.osgi.spi;
 
-import io.zerows.ams.util.HUt;
-import io.zerows.core.spi.modeler.AtomNs;
+import io.zerows.ams.util.UtBase;
+import io.zerows.epoch.spi.modeler.AtomNs;
 import io.zerows.core.util.Ut;
 import io.zerows.epoch.constant.VEnv;
 import io.zerows.epoch.runtime.HMacrocosm;
@@ -35,7 +35,7 @@ public class AtomNsZero implements AtomNs {
         // 再计算名空间
         final String namespace = Ut.isNil(appName)
             ? VEnv.APP.NS_DEFAULT :                     // io.mature.aeon
-            HUt.fromMessage(prefix, appName);           // io.mature.{0} 或 Z_NS
+            UtBase.fromMessage(prefix, appName);           // io.mature.{0} 或 Z_NS
         Ho.LOG.Aeon.debug(this.getClass(),
             "名空间: {0}, 前缀：{1}", namespace, prefix);
         Ho.LOG.Aeon.debug(this.getClass(),

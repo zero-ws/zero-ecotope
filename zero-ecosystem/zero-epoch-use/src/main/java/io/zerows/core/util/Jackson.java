@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.VString;
 import io.zerows.epoch.constant.VValue;
 import io.zerows.epoch.enums.typed.ChangeFlag;
-import io.zerows.ams.util.HUt;
+import io.zerows.ams.util.UtBase;
 import io.zerows.core.constant.KName;
 import io.zerows.module.metadata.uca.logging.OLog;
 
@@ -97,7 +97,7 @@ final class Jackson {
                 }
             } else {
                 /* 3.2. Address the middle search **/
-                if (HUt.isJObject(curVal)) {
+                if (UtBase.isJObject(curVal)) {
                     final JsonObject continueNode = current.getJsonObject(path);
                     /* 4.Extract new key **/
                     final String[] continueKeys =
@@ -116,7 +116,7 @@ final class Jackson {
     static <T> JsonArray zip(final JsonArray array, final String fieldFrom,
                              final String fieldOn,
                              final ConcurrentMap<T, JsonArray> grouped, final String fieldTo) {
-        HUt.itJArray(array).forEach(json -> {
+        UtBase.itJArray(array).forEach(json -> {
             final T fieldV = (T) json.getValue(fieldFrom, null);
             final JsonArray data;
             if (Objects.nonNull(fieldV)) {
@@ -124,11 +124,11 @@ final class Jackson {
             } else {
                 data = new JsonArray();
             }
-            if (HUt.isNil(fieldTo)) {
+            if (UtBase.isNil(fieldTo)) {
                 json.put(fieldOn, data);
             } else {
                 final JsonArray replaced = new JsonArray();
-                HUt.itJArray(data).forEach(each -> replaced.add(each.getValue(fieldTo)));
+                UtBase.itJArray(data).forEach(each -> replaced.add(each.getValue(fieldTo)));
                 json.put(fieldOn, replaced);
             }
         });
@@ -151,11 +151,11 @@ final class Jackson {
 
     static <T> T deserialize(final String value, final Class<T> type, final boolean isSmart) {
         final String smart = isSmart ? deserializeSmart(value, type) : value;
-        return HUt.deserialize(smart, type);
+        return UtBase.deserialize(smart, type);
     }
 
     static <T, R extends Iterable> R serializeJson(final T t, final boolean isSmart) {
-        final String content = HUt.serialize(t);
+        final String content = UtBase.serialize(t);
         if (content.trim().startsWith(VString.LEFT_BRACE)) {
             return isSmart ?
                 serializeSmart(new JsonObject(content)) : ((R) new JsonObject(content));
@@ -167,8 +167,8 @@ final class Jackson {
 
     // ---------------------- Jackson Advanced for Smart Serilization / DeSerialization
     private static <T> String deserializeSmart(final String literal, final Class<T> type) {
-        if (HUt.isJObject(literal) || HUt.isJArray(literal)) {
-            if (HUt.isJArray(literal)) {
+        if (UtBase.isJObject(literal) || UtBase.isJArray(literal)) {
+            if (UtBase.isJArray(literal)) {
                 return deserializeSmart(new JsonArray(literal), type);
             } else {
                 return deserializeSmart(new JsonObject(literal), type);
@@ -215,7 +215,7 @@ final class Jackson {
     }
 
     private static <T> String deserializeSmart(final JsonArray item, final Class<T> type) {
-        HUt.itJArray(item).forEach(json -> deserializeSmart(json, type));
+        UtBase.itJArray(item).forEach(json -> deserializeSmart(json, type));
         return item.encode();
     }
 
@@ -229,9 +229,9 @@ final class Jackson {
             } else if (value instanceof String) {
                 // Tool -> JsonObject / JsonArray
                 final String literal = (String) value;
-                if (HUt.isJArray(literal)) {
+                if (UtBase.isJArray(literal)) {
                     item.put(field, serializeSmart(new JsonArray(literal)));
-                } else if (HUt.isJObject(literal)) {
+                } else if (UtBase.isJObject(literal)) {
                     item.put(field, serializeSmart(new JsonObject(literal)));
                 }
             }
@@ -240,7 +240,7 @@ final class Jackson {
     }
 
     private static <T, R extends Iterable> R serializeSmart(final JsonArray item) {
-        HUt.itJArray(item).forEach(json -> serializeSmart(json));
+        UtBase.itJArray(item).forEach(json -> serializeSmart(json));
         return (R) item;
     }
 
@@ -278,15 +278,15 @@ final class Jackson {
     }
 
     static ChangeFlag flag(final JsonObject recordN, final JsonObject recordO) {
-        if (HUt.isNil(recordO)) {
-            if (HUt.isNil(recordN)) {
+        if (UtBase.isNil(recordO)) {
+            if (UtBase.isNil(recordN)) {
                 return ChangeFlag.NONE;
             } else {
                 /* Old = null, New = not null, ADD */
                 return ChangeFlag.ADD;
             }
         } else {
-            if (HUt.isNil(recordN)) {
+            if (UtBase.isNil(recordN)) {
                 /* Old = not null, New = null, DELETE */
                 return ChangeFlag.DELETE;
             } else {
@@ -331,14 +331,14 @@ final class Jackson {
 
     @SuppressWarnings("unchecked")
     static <T> T decodeJ(final String literal) {
-        if (HUt.isNil(literal)) {
+        if (UtBase.isNil(literal)) {
             return null;
         }
         final String trimInput = literal.trim();
         if (trimInput.startsWith(VString.LEFT_BRACE)) {
-            return (T) HUt.toJObject(literal);
+            return (T) UtBase.toJObject(literal);
         } else if (trimInput.startsWith(VString.LEFT_SQUARE)) {
-            return (T) HUt.toJArray(literal);
+            return (T) UtBase.toJArray(literal);
         }
         return null;
     }

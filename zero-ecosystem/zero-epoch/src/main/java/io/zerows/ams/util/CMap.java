@@ -30,9 +30,9 @@ class CMap {
 
     static ConcurrentMap<String, JsonObject> map(final JsonArray data, final String field) {
         final ConcurrentMap<String, JsonObject> mapped = new ConcurrentHashMap<>();
-        HUt.itJArray(data).forEach(json -> {
+        UtBase.itJArray(data).forEach(json -> {
             final String key = json.getString(field);
-            if (HUt.isNotNil(key)) {
+            if (UtBase.isNotNil(key)) {
                 mapped.put(key, json.copy());
             }
         });
@@ -42,7 +42,7 @@ class CMap {
     @SuppressWarnings("unchecked")
     static <T> ConcurrentMap<String, T> map(final JsonArray data, final String field, final String to) {
         final ConcurrentMap<String, T> mapped = new ConcurrentHashMap<>();
-        HUt.itJArray(data).forEach(json -> {
+        UtBase.itJArray(data).forEach(json -> {
             final String key = json.getString(field);
             /*
              * Fix Issue:
@@ -50,7 +50,7 @@ class CMap {
              *      at java.base/java.util.concurrent.ConcurrentHashMap.putVal(ConcurrentHashMap.java:1011)
              *      at java.base/java.util.concurrent.ConcurrentHashMap.put(ConcurrentHashMap.java:1006)
              */
-            if (HUt.isNotNil(key) && Objects.nonNull(json.getValue(to))) {
+            if (UtBase.isNotNil(key) && Objects.nonNull(json.getValue(to))) {
                 mapped.put(key, (T) json.getValue(to));
             }
         });

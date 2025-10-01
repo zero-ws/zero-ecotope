@@ -3,8 +3,8 @@ package io.zerows.core.running.boot;
 import io.r2mo.typed.exception.AbstractException;
 import io.zerows.epoch.constant.VMessage;
 import io.zerows.epoch.enums.EmBoot;
-import io.zerows.ams.util.HUt;
-import io.zerows.core.uca.log.LogAs;
+import io.zerows.ams.util.UtBase;
+import io.zerows.epoch.common.uca.log.LogAs;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HEnergy;
 import io.zerows.specification.configuration.boot.HMature;
@@ -42,7 +42,7 @@ public class KConfigurer<T> {
 
     public KConfigurer<T> bind(final String[] args) {
         this.arguments = args;
-        LogAs.Boot.info(this.getClass(), VMessage.HOn.COMPONENT_ARGS, args.length, HUt.fromJoin(args));
+        LogAs.Boot.info(this.getClass(), VMessage.HOn.COMPONENT_ARGS, args.length, UtBase.fromJoin(args));
         return this;
     }
 
@@ -53,7 +53,7 @@ public class KConfigurer<T> {
         Optional.ofNullable(preCls).ifPresent(pClass -> {
             // 配置绑定
             configuration.pre(pClass);
-            final HMature.HPre<T> pre = HUt.singleton(pClass);
+            final HMature.HPre<T> pre = UtBase.singleton(pClass);
             pre.beforeStart(started, configuration.options());
         });
     }
@@ -88,7 +88,7 @@ public class KConfigurer<T> {
             // 未配置组件，直接跳过
             return null;
         }
-        HConfig.HOn on = HUt.singleton(implOn);
+        HConfig.HOn on = UtBase.singleton(implOn);
         if (Objects.isNull(on)) {
             // 组件初始化失败，直接跳过
             return null;

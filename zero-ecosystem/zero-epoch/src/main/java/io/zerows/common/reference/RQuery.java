@@ -3,7 +3,7 @@ package io.zerows.common.reference;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.VString;
-import io.zerows.ams.util.HUt;
+import io.zerows.ams.util.UtBase;
 import io.zerows.common.program.Kv;
 
 import java.io.Serializable;
@@ -51,7 +51,7 @@ public class RQuery implements Serializable {
         if (value instanceof JsonArray) {
             condition.put(this.sourceField + ",i", value);
         } else {
-            final String operator = HUt.isNil(op) ? "=" : op;
+            final String operator = UtBase.isNil(op) ? "=" : op;
             condition.put(this.sourceField + "," + operator, value);
         }
         condition.put(VString.EMPTY, Boolean.TRUE);
@@ -64,7 +64,7 @@ public class RQuery implements Serializable {
             final String name = kv.value();
             final String extract = kv.key();
 
-            final JsonArray compress = HUt.toJArray(HUt.valueSetString(data, extract));
+            final JsonArray compress = UtBase.toJArray(UtBase.valueSetString(data, extract));
             query.put(name, compress);
         });
         return query;

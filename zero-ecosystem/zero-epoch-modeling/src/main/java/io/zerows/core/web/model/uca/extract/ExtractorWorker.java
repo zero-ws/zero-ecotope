@@ -2,7 +2,7 @@ package io.zerows.core.web.model.uca.extract;
 
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.DeploymentOptions;
-import io.zerows.core.uca.log.Annal;
+import io.zerows.epoch.common.uca.log.Annal;
 import io.zerows.module.configuration.atom.NodeNetwork;
 import io.zerows.module.configuration.atom.NodeVertx;
 import io.zerows.module.configuration.store.OCacheNode;

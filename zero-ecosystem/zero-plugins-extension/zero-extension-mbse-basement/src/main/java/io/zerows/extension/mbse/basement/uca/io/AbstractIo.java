@@ -1,6 +1,6 @@
 package io.zerows.extension.mbse.basement.uca.io;
 
-import io.zerows.core.uca.log.Annal;
+import io.zerows.epoch.common.uca.log.Annal;
 import io.zerows.extension.mbse.basement.atom.element.DataRow;
 import io.zerows.extension.mbse.basement.atom.element.DataTpl;
 

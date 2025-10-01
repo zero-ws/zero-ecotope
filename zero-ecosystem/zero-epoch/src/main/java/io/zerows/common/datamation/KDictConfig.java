@@ -2,7 +2,7 @@ package io.zerows.common.datamation;
 
 import io.vertx.core.json.JsonArray;
 import io.zerows.epoch.enums.EmDict;
-import io.zerows.ams.util.HUt;
+import io.zerows.ams.util.UtBase;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -58,9 +58,9 @@ public class KDictConfig implements Serializable {
     private Class<?> component;
 
     public KDictConfig(final String literal) {
-        if (HUt.isJArray(literal)) {
+        if (UtBase.isJArray(literal)) {
             final JsonArray parameters = new JsonArray(literal);
-            HUt.itJArray(parameters)
+            UtBase.itJArray(parameters)
                 .map(KDictSource::new)
                 .forEach(this.source::add);
         }
@@ -68,7 +68,7 @@ public class KDictConfig implements Serializable {
 
     public KDictConfig(final JsonArray input) {
         if (Objects.nonNull(input)) {
-            HUt.itJArray(input)
+            UtBase.itJArray(input)
                 .map(KDictSource::new)
                 .forEach(this.source::add);
         }

@@ -7,9 +7,9 @@ import io.mature.stellar.owner.OkA;
 import io.mature.stellar.vendor.OkB;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.fn.HFn;
+import io.zerows.ams.fn.FnBase;
 import io.zerows.core.constant.KName;
-import io.zerows.core.exception.boot._11002Exception500EmptyIo;
+import io.zerows.epoch.exception.boot._11002Exception500EmptyIo;
 import io.zerows.core.util.Ut;
 import io.zerows.epoch.enums.Environment;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XCategoryDao;
@@ -117,7 +117,7 @@ public abstract class AbstractInstruction extends AbstractCommander {
             condition.mergeIn(attachedJson, true);
             return this.identifiers(condition)
                 /* identifiers 中处理每一个 */
-                .compose(identifiers -> HFn.combineT(new ArrayList<>(identifiers), consumer));
+                .compose(identifiers -> FnBase.combineT(new ArrayList<>(identifiers), consumer));
         });
     }
 

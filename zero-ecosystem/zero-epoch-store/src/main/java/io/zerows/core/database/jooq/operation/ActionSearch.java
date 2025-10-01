@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.VValue;
 import io.zerows.core.database.jooq.util.JqAnalyzer;
 import io.zerows.core.database.jooq.util.JqFlow;
-import io.zerows.core.uca.qr.syntax.Ir;
+import io.zerows.epoch.common.uca.qr.syntax.Ir;
 import io.zerows.core.util.Ut;
 
 import java.util.Objects;

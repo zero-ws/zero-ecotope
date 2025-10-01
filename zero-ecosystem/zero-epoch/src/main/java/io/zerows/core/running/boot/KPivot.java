@@ -1,8 +1,8 @@
 package io.zerows.core.running.boot;
 
 import io.vertx.core.Future;
-import io.zerows.ams.fn.HFn;
-import io.zerows.ams.util.HUt;
+import io.zerows.ams.fn.FnBase;
+import io.zerows.ams.util.UtBase;
 import io.zerows.common.app.KDS;
 import io.zerows.common.app.KDatabase;
 import io.zerows.core.running.context.KAmbient;
@@ -61,7 +61,7 @@ public class KPivot<T> {
     private KPivot(final T container) {
         this.container = container;
         this.context = new KRegistry<>();
-        this.extension = HUt.service(HRegistry.class, false);
+        this.extension = UtBase.service(HRegistry.class, false);
     }
 
     public static HAmbient running() {
@@ -95,7 +95,7 @@ public class KPivot<T> {
         }
         // 前置检查（异步注册拦截）
         return KPivotTool.failAsync(getClass(), RUNNING).compose(nil ->
-            HFn.<Set<HArk>, Set<HArk>, Set<HArk>>combineT(
+            FnBase.<Set<HArk>, Set<HArk>, Set<HArk>>combineT(
                 // 第一个异步结果
                 () -> this.context.registryAsync(this.container, config),
                 // 第二个异步结果

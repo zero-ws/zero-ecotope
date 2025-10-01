@@ -3,8 +3,8 @@ package io.zerows.common.datamation;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.util.HUt;
-import io.zerows.core.uca.log.Annal;
+import io.zerows.ams.util.UtBase;
+import io.zerows.epoch.common.uca.log.Annal;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
@@ -142,20 +142,20 @@ public class KFabric {
                  * Build current `DualItem`
                  */
                 final JsonObject dataItem = new JsonObject();
-                HUt.itJArray(dataArray).forEach(item -> {
+                UtBase.itJArray(dataArray).forEach(item -> {
                     /*
                      * Data in ( From ) - out ( To )
                      */
                     final String inValue = item.getString(epsilon.getIn());
                     final String outValue = item.getString(epsilon.getOut());
-                    if (HUt.isNotNil(inValue) && HUt.isNotNil(outValue)) {
+                    if (UtBase.isNotNil(inValue) && UtBase.isNotNil(outValue)) {
                         dataItem.put(inValue, outValue);
                     }
                 });
                 /*
                  * Fill data in our data structure
                  */
-                if (HUt.isNotNil(dataItem)) {
+                if (UtBase.isNotNil(dataItem)) {
 
                     /*
                      * From Data Map processing
@@ -168,7 +168,7 @@ public class KFabric {
                      */
                     if (Objects.nonNull(this.mapping)) {
                         final String hitField = this.mapping.to(fromField);
-                        if (HUt.isNotNil(hitField)) {
+                        if (UtBase.isNotNil(hitField)) {
                             this.toData.put(hitField, item);
                         }
                     }

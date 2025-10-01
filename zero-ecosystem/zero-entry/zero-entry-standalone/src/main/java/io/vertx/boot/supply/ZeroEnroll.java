@@ -8,11 +8,11 @@ import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.fn.HFn;
+import io.zerows.ams.fn.FnBase;
 import io.zerows.core.constant.configure.YmlCore;
 import io.zerows.core.running.boot.KLauncher;
 import io.zerows.core.running.boot.KPivot;
-import io.zerows.core.spi.BootIo;
+import io.zerows.epoch.spi.BootIo;
 import io.zerows.core.util.Ut;
 import io.zerows.module.cloud.util.Ho;
 import io.zerows.module.metadata.store.OZeroStore;
@@ -96,7 +96,7 @@ class ZeroEnroll {
             registers.stream()
                 .map(register -> register.configureAsync(vertx, ambient))
                 .forEach(futures::add);
-            return HFn.combineB(futures);
+            return FnBase.combineB(futures);
         });
     }
 
@@ -115,7 +115,7 @@ class ZeroEnroll {
             arkSet.forEach(ark -> registers.stream()
                 .map(register -> register.initializeAsync(vertx, ark))
                 .forEach(futures::add));
-            return HFn.combineB(futures);
+            return FnBase.combineB(futures);
         });
     }
 

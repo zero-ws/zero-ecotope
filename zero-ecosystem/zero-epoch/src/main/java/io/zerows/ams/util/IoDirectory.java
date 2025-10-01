@@ -2,8 +2,8 @@ package io.zerows.ams.util;
 
 import io.r2mo.function.Fn;
 import io.zerows.epoch.constant.VPath;
-import io.zerows.core.uca.fs.LocalDir;
-import io.zerows.core.uca.log.LogUtil;
+import io.zerows.epoch.common.uca.fs.LocalDir;
+import io.zerows.epoch.common.uca.log.LogUtil;
 
 import java.io.File;
 import java.io.IOException;

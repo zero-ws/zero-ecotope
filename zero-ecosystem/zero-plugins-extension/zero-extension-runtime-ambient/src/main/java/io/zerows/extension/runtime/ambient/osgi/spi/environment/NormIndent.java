@@ -3,7 +3,7 @@ package io.zerows.extension.runtime.ambient.osgi.spi.environment;
 import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.zerows.epoch.constant.VValue;
-import io.zerows.core.spi.modeler.Indent;
+import io.zerows.epoch.spi.modeler.Indent;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.runtime.ambient.agent.service.DatumService;
 import io.zerows.extension.runtime.ambient.agent.service.DatumStub;

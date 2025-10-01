@@ -2,7 +2,7 @@ package io.zerows.common.datamation;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.util.HUt;
+import io.zerows.ams.util.UtBase;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -58,7 +58,7 @@ public class KMapping implements Serializable {
     }
 
     void init(final JsonObject input) {
-        if (HUt.isNotNil(input)) {
+        if (UtBase.isNotNil(input)) {
             input.fieldNames().stream()
                 /* Only stored string value here */
                 .filter(field -> input.getValue(field) instanceof String)

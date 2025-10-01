@@ -3,10 +3,10 @@ package io.zerows.extension.commerce.rbac.agent.service.business;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.fn.HFn;
+import io.zerows.ams.fn.FnBase;
 import io.zerows.core.constant.KName;
 import io.zerows.core.database.jooq.operation.UxJooq;
-import io.zerows.core.uca.qr.syntax.Ir;
+import io.zerows.epoch.common.uca.qr.syntax.Ir;
 import io.zerows.core.util.Ut;
 import io.zerows.epoch.constant.VString;
 import io.zerows.extension.commerce.rbac.agent.service.accredit.ActionStub;
@@ -63,7 +63,7 @@ public class PermService implements PermStub {
             })
             .compose(jooq::updateAsync)
         ).forEach(entities::add);
-        return HFn.combineT(entities).compose(actions -> {
+        return FnBase.combineT(entities).compose(actions -> {
 
             /*
              * Build relation between actionId -> permissionId
@@ -82,7 +82,7 @@ public class PermService implements PermStub {
                     return Ux.future(action);
                 }).compose(jooq::updateAsync)
             ));
-            return HFn.combineT(actionList);
+            return FnBase.combineT(actionList);
         }).compose(nil -> Ux.future(relation));
     }
 

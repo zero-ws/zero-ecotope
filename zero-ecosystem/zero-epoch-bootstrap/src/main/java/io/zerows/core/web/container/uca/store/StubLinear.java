@@ -4,7 +4,7 @@ import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Vertx;
 import io.zerows.epoch.constant.VString;
 import io.zerows.core.annotations.Infusion;
-import io.zerows.core.exception.web._60050Exception501NotSupport;
+import io.zerows.epoch.exception.web._60050Exception501NotSupport;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.container.store.under.StoreVertx;
 import io.zerows.core.web.container.verticle.ZeroHttpAgent;

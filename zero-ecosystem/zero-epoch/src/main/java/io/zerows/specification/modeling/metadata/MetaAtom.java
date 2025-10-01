@@ -3,7 +3,7 @@ package io.zerows.specification.modeling.metadata;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.VValue;
-import io.zerows.ams.util.HUt;
+import io.zerows.ams.util.UtBase;
 
 import java.util.Collection;
 import java.util.List;
@@ -45,7 +45,7 @@ class MetaAtom implements HMetaAtom {
     // Elementary
     @Override
     public HMetaAtom add(final String name, final String alias, final Class<?> type) {
-        if (HUt.isNotNil(name)) {
+        if (UtBase.isNotNil(name)) {
             /* JsonArray */
             final HMetaField typeItem = HMetaField.of(name, alias, type);
             this.shape.put(name, typeItem);
@@ -55,7 +55,7 @@ class MetaAtom implements HMetaAtom {
 
     @Override
     public HMetaAtom add(final String name, final String alias, final Collection<HMetaField> children) {
-        if (HUt.isNotNil(name)) {
+        if (UtBase.isNotNil(name)) {
             this.complex = true;
             // 分析当前类型，并设置当前字段元数据
             final Class<?> fieldType;

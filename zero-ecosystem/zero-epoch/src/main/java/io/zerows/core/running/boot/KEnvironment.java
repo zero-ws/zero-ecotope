@@ -1,7 +1,7 @@
 package io.zerows.core.running.boot;
 
-import io.zerows.ams.util.HUt;
-import io.zerows.core.uca.log.LogAs;
+import io.zerows.ams.util.UtBase;
+import io.zerows.epoch.common.uca.log.LogAs;
 import io.zerows.epoch.constant.VMessage;
 import io.zerows.epoch.constant.spec.VBoot;
 import io.zerows.epoch.enums.Environment;
@@ -46,12 +46,12 @@ public class KEnvironment {
          * 判断是否开启了开发环境，如果开启了开发环境，那么就会读取 .dev.development 文件
          * 加载文件中的环境变量到系统层（只适用于开发）
          */
-        if (HUt.ioExist(VBoot._ENV_DEVELOPMENT)) {
+        if (UtBase.ioExist(VBoot._ENV_DEVELOPMENT)) {
             // 1. 环境变量设置
-            final OsType os = HUt.envOs();
+            final OsType os = UtBase.envOs();
             LogAs.Boot.warn(KEnvironment.class, VMessage.KEnvironment.DEVELOPMENT,
                 os.name(), VBoot._ENV_DEVELOPMENT);
-            final Properties properties = HUt.ioProperties(VBoot._ENV_DEVELOPMENT);
+            final Properties properties = UtBase.ioProperties(VBoot._ENV_DEVELOPMENT);
             // 1.1. 环境变量注入
             if (!properties.containsKey(HMacrocosm.ZERO_ENV)) {
                 properties.put(HMacrocosm.ZERO_ENV, Environment.Development.name());
@@ -61,10 +61,10 @@ public class KEnvironment {
              * --add-opens java.base/java.util=ALL-UNNAMED
              * --add-opens java.base/java.lang=ALL-UNNAMED
              */
-            final ConcurrentMap<String, String> written = HUt.envOut(properties);
+            final ConcurrentMap<String, String> written = UtBase.envOut(properties);
 
             // 2. 环境变量打印
-            final String environments = HUt.envString(written);
+            final String environments = UtBase.envString(written);
             LogAs.Boot.info(KEnvironment.class, VMessage.KEnvironment.ENV, environments);
         }
     }

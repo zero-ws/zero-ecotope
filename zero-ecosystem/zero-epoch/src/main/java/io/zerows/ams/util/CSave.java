@@ -21,7 +21,7 @@ class CSave {
 
     static JsonArray save(final JsonArray array, final JsonObject json, final String field) {
         final AtomicBoolean isFound = new AtomicBoolean(Boolean.FALSE);
-        HUt.itJArray(array).forEach(each -> {
+        UtBase.itJArray(array).forEach(each -> {
             final boolean isSame = isSameBy(each, json, field);
             if (isSame) {
                 each.mergeIn(json, true);

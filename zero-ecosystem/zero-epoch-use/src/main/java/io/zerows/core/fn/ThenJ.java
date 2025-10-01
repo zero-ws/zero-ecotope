@@ -3,8 +3,8 @@ package io.zerows.core.fn;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.fn.HFn;
-import io.zerows.core.uca.log.Log;
+import io.zerows.ams.fn.FnBase;
+import io.zerows.epoch.common.uca.log.Log;
 import io.zerows.core.util.Ut;
 
 import java.util.Arrays;
@@ -52,7 +52,7 @@ final class ThenJ {
                 Ut.itList(finished.list(), (item, index) -> resultMap.put(index.toString(), item));
             }
             return Future.succeededFuture(resultMap);
-        }).otherwise(HFn.outAsync(JsonObject::new));
+        }).otherwise(FnBase.outAsync(JsonObject::new));
     }
 
     static Future<JsonObject> combineJ(
@@ -66,6 +66,6 @@ final class ThenJ {
                 Ut.itList(secondary, (item, index) -> operatorFun[index].accept(first, item));
             }
             return Future.succeededFuture(first);
-        })).otherwise(HFn.outAsync(JsonObject::new));
+        })).otherwise(FnBase.outAsync(JsonObject::new));
     }
 }

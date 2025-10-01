@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.VString;
 import io.zerows.epoch.constant.VValue;
 import io.zerows.core.constant.KName;
-import io.zerows.core.uca.qr.syntax.Ir;
+import io.zerows.epoch.common.uca.qr.syntax.Ir;
 import io.zerows.core.util.Ut;
 
 import java.io.Serializable;

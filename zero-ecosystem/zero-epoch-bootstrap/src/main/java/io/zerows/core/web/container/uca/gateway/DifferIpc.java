@@ -1,7 +1,7 @@
 package io.zerows.core.web.container.uca.gateway;
 
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.core.uca.log.Annal;
+import io.zerows.epoch.common.uca.log.Annal;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.container.uca.mode.AimIpc;
 import io.zerows.core.web.io.zdk.Aim;

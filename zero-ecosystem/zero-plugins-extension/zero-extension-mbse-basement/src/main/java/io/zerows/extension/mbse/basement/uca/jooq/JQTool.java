@@ -1,9 +1,9 @@
 package io.zerows.extension.mbse.basement.uca.jooq;
 
 import io.zerows.epoch.constant.VValue;
-import io.zerows.core.uca.log.Annal;
-import io.zerows.core.uca.qr.Pager;
-import io.zerows.core.uca.qr.Sorter;
+import io.zerows.epoch.common.uca.log.Annal;
+import io.zerows.epoch.common.uca.qr.Pager;
+import io.zerows.epoch.common.uca.qr.Sorter;
 import io.zerows.extension.mbse.basement.atom.data.DataEvent;
 import io.zerows.extension.mbse.basement.atom.element.DataTpl;
 import io.zerows.extension.mbse.basement.uca.metadata.AoSentence;

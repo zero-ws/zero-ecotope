@@ -29,7 +29,7 @@ class URGB {
     }
 
     static String color(final String pattern, final String flag, final int color, final boolean bold) {
-        if (HUt.isNil(pattern)) {
+        if (UtBase.isNil(pattern)) {
             return color(flag, color, bold);
         } else {
             return String.format(pattern, color(flag, color, bold));

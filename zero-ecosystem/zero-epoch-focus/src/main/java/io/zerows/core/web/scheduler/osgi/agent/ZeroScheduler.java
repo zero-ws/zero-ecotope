@@ -3,7 +3,7 @@ package io.zerows.core.web.scheduler.osgi.agent;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
-import io.zerows.ams.fn.HFn;
+import io.zerows.ams.fn.FnBase;
 import io.zerows.core.annotations.Worker;
 import io.zerows.core.constant.em.EmJob;
 import io.zerows.core.util.Ut;
@@ -51,7 +51,7 @@ public class ZeroScheduler extends AbstractVerticle {
                 /* Start each job here by different types */
                 final List<Future<Void>> futures = new ArrayList<>();
                 missions.forEach(mission -> futures.add(this.start(mission)));
-                HFn.combineT(futures).onSuccess(nil -> LOGGER.info(INFO.JOB_STARTED));
+                FnBase.combineT(futures).onSuccess(nil -> LOGGER.info(INFO.JOB_STARTED));
             }
         } else {
             LOGGER.info(INFO.JOB_CONFIG_NULL);

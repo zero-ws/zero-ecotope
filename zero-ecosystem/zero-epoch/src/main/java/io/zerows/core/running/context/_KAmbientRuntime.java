@@ -2,7 +2,7 @@ package io.zerows.core.running.context;
 
 import io.zerows.epoch.constant.VName;
 import io.zerows.epoch.enums.EmApp;
-import io.zerows.ams.util.HUt;
+import io.zerows.ams.util.UtBase;
 import io.zerows.specification.access.HBelong;
 import io.zerows.specification.access.app.HApp;
 import io.zerows.specification.access.app.HArk;
@@ -35,7 +35,7 @@ class _KAmbientRuntime {
      */
     void registry(final HArk ark, final EmApp.Mode mode) {
         // 提取缓存键和应用程序引用
-        final String key = HUt.keyApp(ark);
+        final String key = UtBase.keyApp(ark);
         final HApp app = ark.app();
 
         // 1. 基础规范：name / ns

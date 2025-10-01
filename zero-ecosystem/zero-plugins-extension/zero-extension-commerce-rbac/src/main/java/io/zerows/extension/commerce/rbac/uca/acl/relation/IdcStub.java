@@ -6,7 +6,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.VValue;
-import io.zerows.core.exception.web._60050Exception501NotSupport;
+import io.zerows.epoch.exception.web._60050Exception501NotSupport;
 import io.zerows.unity.Ux;
 
 /*

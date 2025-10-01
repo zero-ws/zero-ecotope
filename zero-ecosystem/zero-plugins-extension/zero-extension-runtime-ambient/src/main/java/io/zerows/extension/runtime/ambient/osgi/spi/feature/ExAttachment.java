@@ -8,7 +8,7 @@ import io.zerows.epoch.enums.typed.ChangeFlag;
 import io.zerows.core.constant.KName;
 import io.zerows.core.database.jooq.operation.UxJooq;
 import io.zerows.core.fn.FnZero;
-import io.zerows.core.uca.log.Annal;
+import io.zerows.epoch.common.uca.log.Annal;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XAttachmentDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XAttachment;

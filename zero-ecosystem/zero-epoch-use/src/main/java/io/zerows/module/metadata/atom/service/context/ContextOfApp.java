@@ -1,6 +1,6 @@
 package io.zerows.module.metadata.atom.service.context;
 
-import io.zerows.core.spi.boot.HEquip;
+import io.zerows.epoch.spi.boot.HEquip;
 import io.zerows.module.metadata.eon.em.EmService;
 import io.zerows.module.metadata.store.OZeroEquip;
 import io.zerows.specification.configuration.*;

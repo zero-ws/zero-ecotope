@@ -3,8 +3,8 @@ package io.zerows.common.app;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.util.HUt;
-import io.zerows.core.uca.log.Annal;
+import io.zerows.ams.util.UtBase;
+import io.zerows.epoch.common.uca.log.Annal;
 import io.zerows.epoch.constant.VOption;
 import io.zerows.epoch.enums.EmDS;
 import io.zerows.epoch.runtime.HMacrocosm;
@@ -63,7 +63,7 @@ public class KDatabase implements Serializable, HCopier<KDatabase>, HJson {
     }
 
     public static KDatabase configure(final JsonObject databaseJ) {
-        final JsonObject jooq = HUt.valueJObject(databaseJ);
+        final JsonObject jooq = UtBase.valueJObject(databaseJ);
         final KDatabase database = new KDatabase();
         database.fromJson(jooq);
         return database;
@@ -132,11 +132,11 @@ public class KDatabase implements Serializable, HCopier<KDatabase>, HJson {
     }
 
     public String getSmartPassword() {
-        final Boolean enabled = HUt.envWith(HMacrocosm.HED_ENABLED, false, Boolean.class);
+        final Boolean enabled = UtBase.envWith(HMacrocosm.HED_ENABLED, false, Boolean.class);
         this.logger().info("[ HED ] Encrypt of HED enabled: {0}", enabled);
         if (enabled) {
             // HED_ENABLED=true
-            return HUt.decryptRSAV(this.password);
+            return UtBase.decryptRSAV(this.password);
         } else {
             return this.password;
         }
@@ -202,9 +202,9 @@ public class KDatabase implements Serializable, HCopier<KDatabase>, HJson {
 
     @Override
     public void fromJson(final JsonObject data) {
-        if (HUt.isNotNil(data)) {
+        if (UtBase.isNotNil(data)) {
             // category
-            this.category = HUt.toEnum(() -> data.getString(VOption.database.CATEGORY), EmDS.Category.class, EmDS.Category.MYSQL5);
+            this.category = UtBase.toEnum(() -> data.getString(VOption.database.CATEGORY), EmDS.Category.class, EmDS.Category.MYSQL5);
             // hostname
             this.hostname = data.getString(VOption.database.HOSTNAME);
             // port
@@ -218,8 +218,8 @@ public class KDatabase implements Serializable, HCopier<KDatabase>, HJson {
             this.password = data.getString(VOption.database.PASSWORD);
             this.driverClassName = data.getString(VOption.database.DRIVER_CLASS_NAME);
             // options
-            final JsonObject options = HUt.valueJObject(data, VOption.database.OPTIONS);
-            if (HUt.isNotNil(options)) {
+            final JsonObject options = UtBase.valueJObject(data, VOption.database.OPTIONS);
+            if (UtBase.isNotNil(options)) {
                 this.options.mergeIn(options);
                 this.logger().info("Database Options: {0}", this.options.encode());
             }

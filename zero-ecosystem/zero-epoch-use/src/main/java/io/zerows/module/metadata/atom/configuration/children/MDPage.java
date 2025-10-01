@@ -1,7 +1,7 @@
 package io.zerows.module.metadata.atom.configuration.children;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.uca.metadata.MetaCachePage;
+import io.zerows.epoch.common.uca.metadata.MetaCachePage;
 import io.zerows.core.util.Ut;
 import io.zerows.module.metadata.atom.configuration.MDConfiguration;
 import io.zerows.module.metadata.atom.configuration.MDId;

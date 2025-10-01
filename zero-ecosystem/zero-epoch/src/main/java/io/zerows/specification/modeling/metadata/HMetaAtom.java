@@ -1,8 +1,8 @@
 package io.zerows.specification.modeling.metadata;
 
 import io.vertx.core.json.JsonArray;
-import io.zerows.ams.util.HUt;
-import io.zerows.core.spi.modeler.MetaOn;
+import io.zerows.ams.util.UtBase;
+import io.zerows.epoch.spi.modeler.MetaOn;
 
 import java.util.Collection;
 import java.util.List;
@@ -31,7 +31,7 @@ public interface HMetaAtom extends HMetaAtomMatrix {
     static HMetaAtom of() {
         final MetaOn metaOn = CACHE.CCT_META_ON.pick(
             // 缓存 + SPI 双模式，既保证性能又保证扩展
-            () -> HUt.service(MetaOn.class, false),
+            () -> UtBase.service(MetaOn.class, false),
             MetaOn.class.getName()
         );
         return Objects.isNull(metaOn) ? new MetaAtom() : metaOn.atom();

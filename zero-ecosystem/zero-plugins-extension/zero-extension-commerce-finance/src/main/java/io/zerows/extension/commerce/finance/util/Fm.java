@@ -1,8 +1,8 @@
 package io.zerows.extension.commerce.finance.util;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.uca.log.Log;
-import io.zerows.core.uca.log.LogModule;
+import io.zerows.epoch.common.uca.log.Log;
+import io.zerows.epoch.common.uca.log.LogModule;
 import io.zerows.extension.commerce.finance.atom.TranData;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FBook;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FPreAuthorize;

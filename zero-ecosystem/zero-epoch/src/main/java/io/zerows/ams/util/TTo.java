@@ -25,7 +25,7 @@ final class TTo {
     }
 
     static List<String> toList(final JsonArray keys) {
-        final JsonArray keysData = HUt.valueJArray(keys);
+        final JsonArray keysData = UtBase.valueJArray(keys);
         final List<String> keyList = new ArrayList<>();
         UIterator.itJString(keysData).forEach(keyList::add);
         return keyList;
@@ -37,11 +37,11 @@ final class TTo {
             return ((Collection<?>) value);
         }
         // JsonArray
-        if (HUt.isJArray(value)) {
+        if (UtBase.isJArray(value)) {
             return ((JsonArray) value).getList();
         }
         // Object[]
-        if (HUt.isArray(value)) {
+        if (UtBase.isArray(value)) {
             // Array
             final Object[] values = (Object[]) value;
             return Arrays.asList(values);
@@ -55,10 +55,10 @@ final class TTo {
             return "null";
         }
         final String literal;
-        if (HUt.isJObject(reference)) {
+        if (UtBase.isJObject(reference)) {
             // Fix issue for serialization
             literal = ((JsonObject) reference).encode();
-        } else if (HUt.isJArray(reference)) {
+        } else if (UtBase.isJArray(reference)) {
             // Fix issue for serialization
             literal = ((JsonArray) reference).encode();
         } else {

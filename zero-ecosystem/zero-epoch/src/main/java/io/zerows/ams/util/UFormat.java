@@ -1,6 +1,6 @@
 package io.zerows.ams.util;
 
-import io.zerows.core.uca.log.LogUtil;
+import io.zerows.epoch.common.uca.log.LogUtil;
 import org.slf4j.helpers.MessageFormatter;
 
 import java.text.MessageFormat;

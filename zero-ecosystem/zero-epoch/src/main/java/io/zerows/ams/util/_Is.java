@@ -120,7 +120,7 @@ class _Is extends _Io {
      * @return 是否只有 notnull 参数为非空
      */
     public static boolean isOneOk(final String notnull, final String... args) {
-        return HUt.isNotNil(notnull) && HUt.isNil(args);
+        return UtBase.isNotNil(notnull) && UtBase.isNil(args);
     }
 
     /**

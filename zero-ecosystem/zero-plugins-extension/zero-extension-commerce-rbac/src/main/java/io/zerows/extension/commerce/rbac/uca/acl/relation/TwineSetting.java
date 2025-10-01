@@ -4,7 +4,7 @@ import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
-import io.zerows.core.exception.web._60050Exception501NotSupport;
+import io.zerows.epoch.exception.web._60050Exception501NotSupport;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SUser;
 import io.zerows.extension.runtime.skeleton.osgi.spi.business.ExSetting;

@@ -1,6 +1,6 @@
 package io.zerows.common.program;
 
-import io.zerows.ams.util.HUt;
+import io.zerows.ams.util.UtBase;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -54,7 +54,7 @@ public class KTimer {
     public String value() {
         final long duration = this.end - this.start;
         // toMills
-        final LocalDateTime datetime = HUt.toDuration(duration);
+        final LocalDateTime datetime = UtBase.toDuration(duration);
         final DateTimeFormatter format = DateTimeFormatter.ofPattern("HH:mm:ss.SSS");
         return format.format(datetime);
     }

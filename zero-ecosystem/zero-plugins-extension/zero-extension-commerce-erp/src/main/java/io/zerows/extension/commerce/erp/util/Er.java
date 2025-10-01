@@ -1,7 +1,7 @@
 package io.zerows.extension.commerce.erp.util;
 
-import io.zerows.core.uca.log.Log;
-import io.zerows.core.uca.log.LogModule;
+import io.zerows.epoch.common.uca.log.Log;
+import io.zerows.epoch.common.uca.log.LogModule;
 
 /*
  *

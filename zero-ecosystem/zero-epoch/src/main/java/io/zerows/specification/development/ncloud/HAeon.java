@@ -1,7 +1,7 @@
 package io.zerows.specification.development.ncloud;
 
 import io.zerows.epoch.enums.EmCloud;
-import io.zerows.core.exception.web._80413Exception501NotImplement;
+import io.zerows.epoch.exception.web._80413Exception501NotImplement;
 import io.zerows.core.running.boot.KPlot;
 import io.zerows.core.running.boot.KRepo;
 import io.zerows.specification.configuration.HConfig;

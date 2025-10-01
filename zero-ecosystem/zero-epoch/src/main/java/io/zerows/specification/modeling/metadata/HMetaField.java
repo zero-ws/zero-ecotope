@@ -1,7 +1,7 @@
 package io.zerows.specification.modeling.metadata;
 
-import io.zerows.ams.util.HUt;
-import io.zerows.core.spi.modeler.MetaOn;
+import io.zerows.ams.util.UtBase;
+import io.zerows.epoch.spi.modeler.MetaOn;
 import io.zerows.specification.modeling.element.HConstraint;
 import io.zerows.specification.modeling.element.HKey;
 
@@ -34,7 +34,7 @@ public interface HMetaField extends HMetaFieldChildren, HMetaFieldKey {
                          final Class<?> type) {
         final MetaOn metaOn = CACHE.CCT_META_ON.pick(
             // 缓存 + SPI 双模式，既保证性能又保证扩展
-            () -> HUt.service(MetaOn.class, false),
+            () -> UtBase.service(MetaOn.class, false),
             MetaOn.class.getName()
         );
         return Objects.isNull(metaOn) ? new MetaField(name, alias, type) : metaOn.field(name, alias, type);

@@ -6,8 +6,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.VString;
-import io.zerows.ams.util.HUt;
-import io.zerows.core.uca.log.Annal;
+import io.zerows.ams.util.UtBase;
+import io.zerows.epoch.common.uca.log.Annal;
 import io.zerows.extend.jackson.databind.JsonArrayDeserializer;
 import io.zerows.extend.jackson.databind.JsonArraySerializer;
 import io.zerows.extend.jackson.databind.JsonObjectDeserializer;
@@ -87,8 +87,8 @@ public class RRule implements Serializable {
 
     // -------------------------- 获取函数 ------------------------
     public Set<String> getUnique() {
-        if (HUt.isNotNil(this.unique)) {
-            return HUt.toSet(this.unique);
+        if (UtBase.isNotNil(this.unique)) {
+            return UtBase.toSet(this.unique);
         } else {
             return new HashSet<>();
         }
@@ -115,8 +115,8 @@ public class RRule implements Serializable {
     }
 
     public Set<String> getRequired() {
-        if (HUt.isNotNil(this.required)) {
-            return HUt.toSet(this.required);
+        if (UtBase.isNotNil(this.required)) {
+            return UtBase.toSet(this.required);
         } else {
             return new HashSet<>();
         }
@@ -146,10 +146,10 @@ public class RRule implements Serializable {
 
     public String keyDao() {
         final StringBuilder key = new StringBuilder();
-        if (HUt.isNotNil(this.condition)) {
+        if (UtBase.isNotNil(this.condition)) {
             key.append("condition:").append(this.condition.hashCode());
         }
-        if (HUt.isNotNil(this.conditions)) {
+        if (UtBase.isNotNil(this.conditions)) {
             key.append("conditions:").append(this.conditions.hashCode());
         }
         return key.toString();
@@ -175,11 +175,11 @@ public class RRule implements Serializable {
             final String target = this.condition.getString(field);
             // Null Pointer for record
             final Object value = record.get(target);
-            if (Objects.nonNull(value) && HUt.isNotNil(value.toString())) {
+            if (Objects.nonNull(value) && UtBase.isNotNil(value.toString())) {
                 tpl.put(field, value);
             }
         });
-        if (HUt.isNotNil(tpl)) {
+        if (UtBase.isNotNil(tpl)) {
             LOGGER.info("[ EMF ] Reference condition building: {0}", tpl.encode());
         }
         // If null of "", the AND operator will be set.
@@ -202,9 +202,9 @@ public class RRule implements Serializable {
             final Set<Object> values = Arrays.stream(records)
                 .map(record -> record.get(target))
                 .filter(Objects::nonNull).collect(Collectors.toSet());
-            final JsonArray valueArray = HUt.toJArray(values);
-            if (HUt.isNotNil(valueArray)) {
-                tpl.put(field, HUt.toJArray(values));
+            final JsonArray valueArray = UtBase.toJArray(values);
+            if (UtBase.isNotNil(valueArray)) {
+                tpl.put(field, UtBase.toJArray(values));
             }
         });
         // If null of "", the AND operator will be set.
@@ -215,7 +215,7 @@ public class RRule implements Serializable {
     private Stream<String> compile(final JsonObject condition) {
         return condition.fieldNames().stream()
             // 过滤条件
-            .filter(HUt::isNotNil)
+            .filter(UtBase::isNotNil)
             // 过滤空
             .filter(field -> Objects.nonNull(condition.getValue(field)))
             // 过滤非String类型

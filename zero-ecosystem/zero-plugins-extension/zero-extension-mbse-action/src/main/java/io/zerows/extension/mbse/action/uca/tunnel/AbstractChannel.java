@@ -7,7 +7,7 @@ import io.zerows.common.datamation.KDictConfig;
 import io.zerows.common.datamation.KFabric;
 import io.zerows.core.annotations.Contract;
 import io.zerows.core.constant.KWeb;
-import io.zerows.core.uca.log.Annal;
+import io.zerows.epoch.common.uca.log.Annal;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.mbse.atom.runner.ActIn;
 import io.zerows.core.web.mbse.atom.runner.ActOut;

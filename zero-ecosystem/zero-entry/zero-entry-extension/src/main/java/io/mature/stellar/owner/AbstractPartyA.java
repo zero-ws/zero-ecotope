@@ -9,7 +9,7 @@ import io.zerows.common.app.KDS;
 import io.zerows.common.app.KGlobal;
 import io.zerows.common.app.KIntegration;
 import io.zerows.core.database.atom.Database;
-import io.zerows.core.exception.boot._40103Exception500ConnectAmbient;
+import io.zerows.epoch.exception.boot._40103Exception500ConnectAmbient;
 import io.zerows.core.running.boot.KPivot;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.runtime.skeleton.refine.Ke;

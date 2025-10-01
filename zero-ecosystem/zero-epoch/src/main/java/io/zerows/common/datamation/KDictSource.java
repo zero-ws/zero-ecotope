@@ -4,8 +4,8 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.VName;
 import io.zerows.epoch.enums.EmDict;
-import io.zerows.ams.util.HUt;
-import io.zerows.core.uca.log.Annal;
+import io.zerows.ams.util.UtBase;
+import io.zerows.epoch.common.uca.log.Annal;
 import io.zerows.specification.atomic.HCopier;
 
 import java.io.Serializable;
@@ -68,7 +68,7 @@ public class KDictSource implements Serializable, HCopier<KDictSource> {
          * Source normalize for `source type`
          */
         final String source = definition.getString(VName.SOURCE);
-        this.source = HUt.toEnum(() -> source, EmDict.Type.class, EmDict.Type.NONE);
+        this.source = UtBase.toEnum(() -> source, EmDict.Type.class, EmDict.Type.NONE);
         if (EmDict.Type.CATEGORY == this.source || EmDict.Type.TABULAR == this.source) {
             /*
              * Different definition for
@@ -87,14 +87,14 @@ public class KDictSource implements Serializable, HCopier<KDictSource> {
              */
             this.key = definition.getString(VName.KEY);
             final String className = definition.getString(VName.COMPONENT);
-            if (HUt.isNotNil(className)) {
-                this.component = HUt.clazz(className);
+            if (UtBase.isNotNil(className)) {
+                this.component = UtBase.clazz(className);
                 if (Objects.isNull(this.component)) {
                     LOGGER.warn("The component `{0}` could not be initialized", className);
                 }
             }
             final JsonObject componentConfig = definition.getJsonObject("componentConfig");
-            if (HUt.isNotNil(componentConfig)) {
+            if (UtBase.isNotNil(componentConfig)) {
                 this.componentConfig.mergeIn(componentConfig);
             }
         }
@@ -119,7 +119,7 @@ public class KDictSource implements Serializable, HCopier<KDictSource> {
         if (Objects.isNull(this.component)) {
             return null;
         } else {
-            return HUt.singleton(this.component);
+            return UtBase.singleton(this.component);
         }
     }
 
@@ -128,7 +128,7 @@ public class KDictSource implements Serializable, HCopier<KDictSource> {
     }
 
     public JsonObject getPluginConfig() {
-        return HUt.valueJObject(this.componentConfig);
+        return UtBase.valueJObject(this.componentConfig);
     }
 
     @Override

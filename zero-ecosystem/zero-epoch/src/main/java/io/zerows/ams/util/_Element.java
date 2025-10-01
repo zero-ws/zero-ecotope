@@ -698,7 +698,7 @@ class _Element extends _EDS {
      * @return 统计结果
      */
     public static ConcurrentMap<String, Integer> elementCount(final JsonArray input, final JsonArray fieldArray) {
-        final Set<String> fieldSet = HUt.toSet(fieldArray);
+        final Set<String> fieldSet = UtBase.toSet(fieldArray);
         return CCount.count(input, fieldSet);
     }
 

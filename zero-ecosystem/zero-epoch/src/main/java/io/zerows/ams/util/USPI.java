@@ -1,6 +1,6 @@
 package io.zerows.ams.util;
 
-import io.zerows.core.exception.boot._11000Exception404SPINotFound;
+import io.zerows.epoch.exception.boot._11000Exception404SPINotFound;
 
 import java.util.*;
 

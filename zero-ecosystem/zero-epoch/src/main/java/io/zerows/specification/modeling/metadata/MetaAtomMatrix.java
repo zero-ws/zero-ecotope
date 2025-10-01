@@ -4,7 +4,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.VString;
 import io.zerows.epoch.constant.VValue;
-import io.zerows.ams.util.HUt;
+import io.zerows.ams.util.UtBase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +37,7 @@ class MetaAtomMatrix {
         // index = 3
         final JsonArray secondary = data.getJsonArray(VValue.THREE);
 
-        if (HUt.isNotNil(fields) && HUt.isNotNil(secondary)) {
+        if (UtBase.isNotNil(fields) && UtBase.isNotNil(secondary)) {
             // parent processing
             final ConcurrentMap<Integer, String> parentMap = new ConcurrentHashMap<>();
 
@@ -51,7 +51,7 @@ class MetaAtomMatrix {
             for (int idx = 0; idx < length; idx++) {
                 final Object item = fields.getValue(idx);
                 final String field = this.fieldCompile(item);
-                if (HUt.isNotNil(field)) {
+                if (UtBase.isNotNil(field)) {
                     final Class<?> type = atom.type(field);
                     if (JsonArray.class != type) {
                         this.types.add(type);
@@ -73,7 +73,7 @@ class MetaAtomMatrix {
                 final Object item = secondary.getValue(idx);
                 final String field = this.fieldCompile(item);
                 final String parent = parentMap.getOrDefault(idx, null);
-                if (HUt.isNotNil(field) && HUt.isNotNil(parent)) {
+                if (UtBase.isNotNil(field) && UtBase.isNotNil(parent)) {
                     /*
                      * Find type based on parent/child both
                      */
@@ -87,7 +87,7 @@ class MetaAtomMatrix {
         this.types.clear();
         // index = 2
         final JsonArray fields = data.getJsonArray(VValue.ONE);
-        if (HUt.isNotNil(fields)) {
+        if (UtBase.isNotNil(fields)) {
             fields.forEach(item -> {
                 final String field = this.fieldCompile(item);
                 this.types.add(atom.type(field));

@@ -7,7 +7,7 @@ import io.vertx.core.http.HttpServerRequest;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.common.program.Kv;
 import io.zerows.core.annotations.Codex;
-import io.zerows.core.uca.log.Annal;
+import io.zerows.epoch.common.uca.log.Annal;
 import io.zerows.core.web.container.uca.reply.ActionNext;
 import io.zerows.core.web.container.uca.reply.OAmbit;
 import io.zerows.core.web.io.atom.WrapRequest;

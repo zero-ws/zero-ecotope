@@ -1,6 +1,6 @@
 package io.zerows.module.metadata.zdk.service;
 
-import io.zerows.core.uca.log.LogModule;
+import io.zerows.epoch.common.uca.log.LogModule;
 import io.zerows.core.util.Ut;
 import io.zerows.module.metadata.uca.logging.OLog;
 import org.apache.felix.dm.Component;

@@ -4,7 +4,7 @@ import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.Message;
-import io.zerows.core.exception.web._60050Exception501NotSupport;
+import io.zerows.epoch.exception.web._60050Exception501NotSupport;
 import io.zerows.core.web.model.commune.Envelop;
 import io.zerows.epoch.mature.exception._60027Exception501RpcReject;
 

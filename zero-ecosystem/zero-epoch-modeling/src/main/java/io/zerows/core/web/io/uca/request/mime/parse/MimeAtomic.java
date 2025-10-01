@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.core.constant.configure.YmlCore;
 import io.zerows.core.constant.em.EmMime;
-import io.zerows.core.uca.log.Annal;
+import io.zerows.epoch.common.uca.log.Annal;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.io.uca.response.resolver.SolveResolver;
 import io.zerows.core.web.io.uca.response.resolver.UnsetResolver;

@@ -3,7 +3,7 @@ package io.zerows.extension.mbse.basement.util;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.VPath;
 import io.zerows.epoch.constant.VString;
-import io.zerows.core.exception.boot._11002Exception500EmptyIo;
+import io.zerows.epoch.exception.boot._11002Exception500EmptyIo;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.mbse.basement.atom.builtin.DataModel;
 import io.zerows.extension.mbse.basement.atom.builtin.DataSchema;

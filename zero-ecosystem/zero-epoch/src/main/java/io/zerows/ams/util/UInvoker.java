@@ -7,8 +7,8 @@ import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.core.Promise;
-import io.zerows.core.exception.boot._11011Exception500InvokingPre;
-import io.zerows.core.exception.web._60059Exception412ArgumentNull;
+import io.zerows.epoch.exception.boot._11011Exception500InvokingPre;
+import io.zerows.epoch.exception.web._60059Exception412ArgumentNull;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -197,7 +197,7 @@ final class UInvoker {
     }
 
     private static boolean isEqualAnd(final Class<?> clazz, final Class<?> interfaceCls) {
-        return clazz == interfaceCls || HUt.isImplement(clazz, interfaceCls);
+        return clazz == interfaceCls || UtBase.isImplement(clazz, interfaceCls);
     }
 
     private static boolean isMatch(final Method method, final String name, final Class<?>[] arguments) {

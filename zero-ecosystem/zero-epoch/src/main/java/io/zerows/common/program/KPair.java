@@ -1,6 +1,6 @@
 package io.zerows.common.program;
 
-import io.zerows.ams.util.HUt;
+import io.zerows.ams.util.UtBase;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -36,7 +36,7 @@ public class KPair implements Serializable {
     }
 
     public boolean valid() {
-        return HUt.isNotNil(this.privateKey) && HUt.isNotNil(this.publicKey);
+        return UtBase.isNotNil(this.privateKey) && UtBase.isNotNil(this.publicKey);
     }
 
     @Override

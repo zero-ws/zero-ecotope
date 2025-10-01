@@ -4,7 +4,7 @@ import io.r2mo.function.Actuator;
 import io.r2mo.function.Fn;
 import io.r2mo.typed.exception.WebException;
 import io.zerows.epoch.constant.VValue;
-import io.zerows.core.uca.log.Annal;
+import io.zerows.epoch.common.uca.log.Annal;
 import io.zerows.extension.mbse.basement.atom.data.DataEvent;
 import io.zerows.extension.mbse.basement.atom.element.DataMatrix;
 import io.zerows.extension.mbse.basement.atom.element.DataRow;

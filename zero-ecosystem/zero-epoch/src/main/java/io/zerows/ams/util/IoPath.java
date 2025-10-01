@@ -72,7 +72,7 @@ class IoPath {
         final String[] names = path.split(separator);
         String result = null;
         for (final String found : names) {
-            if (HUt.isNotNil(found)) {
+            if (UtBase.isNotNil(found)) {
                 result = found;
                 break;
             }
@@ -86,7 +86,7 @@ class IoPath {
         String result = null;
         for (int idx = names.length - 1; idx < names.length; idx--) {
             final String found = names[idx];
-            if (HUt.isNotNil(found)) {
+            if (UtBase.isNotNil(found)) {
                 result = found;
                 break;
             }

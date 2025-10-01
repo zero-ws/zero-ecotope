@@ -1,8 +1,8 @@
 package io.zerows.extension.mbse.basement.uca.query;
 
 import io.zerows.epoch.enums.modeling.EmModel;
-import io.zerows.core.uca.qr.Criteria;
-import io.zerows.core.uca.qr.Sorter;
+import io.zerows.epoch.common.uca.qr.Criteria;
+import io.zerows.epoch.common.uca.qr.Sorter;
 import io.zerows.extension.mbse.basement.atom.element.DataTpl;
 import io.zerows.extension.mbse.basement.exception._80503Exception501IngestImplement;
 import io.zerows.extension.mbse.basement.uca.metadata.AoSentence;

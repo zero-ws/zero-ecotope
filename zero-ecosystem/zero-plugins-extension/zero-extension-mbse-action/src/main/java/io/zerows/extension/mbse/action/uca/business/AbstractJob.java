@@ -11,7 +11,7 @@ import io.zerows.common.program.KRef;
 import io.zerows.core.constant.KName;
 import io.zerows.core.constant.KWeb;
 import io.zerows.core.database.atom.Database;
-import io.zerows.core.uca.log.Annal;
+import io.zerows.epoch.common.uca.log.Annal;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.model.zdk.Service;
 import io.zerows.core.web.scheduler.atom.Mission;

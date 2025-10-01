@@ -2,7 +2,7 @@ package io.zerows.module.metadata.osgi.service;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.configure.YmlCore;
-import io.zerows.core.spi.boot.HEquip;
+import io.zerows.epoch.spi.boot.HEquip;
 import io.zerows.module.metadata.store.OCacheFailure;
 import io.zerows.module.metadata.store.OZeroEquip;
 import io.zerows.specification.configuration.HConfig;

@@ -3,9 +3,9 @@ package io.zerows.unity;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.fn.HFn;
+import io.zerows.ams.fn.FnBase;
 import io.zerows.common.program.KRef;
-import io.zerows.core.uca.qr.Pagination;
+import io.zerows.epoch.common.uca.qr.Pagination;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,7 +101,7 @@ class Complex {
                     pageSet.stream()
                         .map(each -> pageConsumer.apply(each).compose(responseBuilder))
                         .forEach(futures::add);
-                    return HFn.combineT(futures).compose(list -> {
+                    return FnBase.combineT(futures).compose(list -> {
                         final R result = list.stream().reduce(fnReduce).orElse(null);
                         final R firstRef = firstResult.get();
                         return Ux.future(fnReduce.apply(firstRef, result));

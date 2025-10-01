@@ -3,7 +3,7 @@ package io.zerows.unity;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.uca.qr.Pagination;
+import io.zerows.epoch.common.uca.qr.Pagination;
 
 import java.util.function.Function;
 import java.util.function.Predicate;

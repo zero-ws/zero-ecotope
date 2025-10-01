@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.VPath;
 import io.zerows.epoch.constant.VString;
-import io.zerows.ams.util.HUt;
+import io.zerows.ams.util.UtBase;
 import org.osgi.framework.Bundle;
 
 import java.io.File;
@@ -32,7 +32,7 @@ final class BundleIo {
         final String cachedKey = Objects.isNull(bundle) ?
             filepath : filepath + VString.SLASH + bundle.getBundleId();
         final JsonObject storeDefault = CCD_FILE_DEFAULT.pick(() -> ioSmart(filepath, bundle), cachedKey);
-        return HUt.valueJObject(storeDefault);
+        return UtBase.valueJObject(storeDefault);
     }
 
     static JsonObject ioCombine(final String filename, final Bundle bundle) {
@@ -50,13 +50,13 @@ final class BundleIo {
     static JsonObject ioPriority(final String filename, final Bundle bundle) {
         // 提供配置
         final JsonObject configureJ = ioConfigure(filename, bundle);
-        if (HUt.isNotNil(configureJ)) {
+        if (UtBase.isNotNil(configureJ)) {
             return configureJ;
         }
 
         // 默认配置
         final JsonObject defaultJ = ioDefault(filename, bundle);
-        return HUt.valueJObject(defaultJ);
+        return UtBase.valueJObject(defaultJ);
     }
 
     static JsonObject ioConfigure(final String filename, final Bundle bundle) {
@@ -72,7 +72,7 @@ final class BundleIo {
     }
 
     private static JsonObject ioSmart(final String filename, final Bundle bundle) {
-        if (HUt.isNil(filename)) {
+        if (UtBase.isNil(filename)) {
             return new JsonObject();
         }
         return filename.endsWith(VString.DOT + VPath.SUFFIX.JSON)
@@ -80,19 +80,19 @@ final class BundleIo {
     }
 
     static JsonObject ioJObject(final String filename, final Bundle bundle) {
-        return ioSafe(filename, bundle, JsonObject::new, HUt::ioJObject);
+        return ioSafe(filename, bundle, JsonObject::new, UtBase::ioJObject);
     }
 
     static JsonObject ioYamlJ(final String filename, final Bundle bundle) {
-        return ioSafe(filename, bundle, JsonObject::new, HUt::ioYaml);
+        return ioSafe(filename, bundle, JsonObject::new, UtBase::ioYaml);
     }
 
     static JsonArray ioYamlA(final String filename, final Bundle bundle) {
-        return ioSafe(filename, bundle, JsonArray::new, HUt::ioYaml);
+        return ioSafe(filename, bundle, JsonArray::new, UtBase::ioYaml);
     }
 
     static JsonArray ioJArray(final String filename, final Bundle bundle) {
-        return ioSafe(filename, bundle, JsonArray::new, HUt::ioJArray);
+        return ioSafe(filename, bundle, JsonArray::new, UtBase::ioJArray);
     }
 
     static URL ioURL(final String filename, final Bundle bundle) {

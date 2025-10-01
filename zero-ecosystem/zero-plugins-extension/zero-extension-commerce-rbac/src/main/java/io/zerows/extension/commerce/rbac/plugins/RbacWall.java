@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 import io.zerows.core.constant.KName;
-import io.zerows.core.uca.log.Annal;
+import io.zerows.epoch.common.uca.log.Annal;
 import io.zerows.extension.commerce.rbac.agent.service.accredit.AccreditStub;
 import io.zerows.extension.commerce.rbac.agent.service.login.jwt.JwtStub;
 import io.zerows.extension.commerce.rbac.eon.AuthMsg;

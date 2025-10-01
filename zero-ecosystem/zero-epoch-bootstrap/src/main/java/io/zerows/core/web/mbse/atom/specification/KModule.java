@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.enums.EmDS;
 import io.zerows.core.database.jooq.JooqPin;
-import io.zerows.core.uca.aop.Aspect;
+import io.zerows.epoch.common.uca.aop.Aspect;
 import io.zerows.core.util.Ut;
 import io.zerows.extend.jackson.databind.ClassDeserializer;
 import io.zerows.extend.jackson.databind.ClassSerializer;

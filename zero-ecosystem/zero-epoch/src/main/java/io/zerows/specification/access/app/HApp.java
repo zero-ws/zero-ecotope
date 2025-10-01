@@ -4,8 +4,8 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.VName;
 import io.zerows.epoch.constant.VValue;
 import io.zerows.epoch.enums.EmApp;
-import io.zerows.ams.util.HUt;
-import io.zerows.core.spi.modeler.AtomNs;
+import io.zerows.ams.util.UtBase;
+import io.zerows.epoch.spi.modeler.AtomNs;
 import io.zerows.specification.access.HBoundary;
 import io.zerows.specification.access.cloud.HFrontier;
 import io.zerows.specification.access.cloud.HGalaxy;
@@ -147,6 +147,6 @@ public interface HApp extends HBoundary<String>,
      */
     default String appId() {
         final String appId = this.option(VName.APP_ID);
-        return HUt.isNil(appId) ? this.option(VName.KEY) : appId;
+        return UtBase.isNil(appId) ? this.option(VName.KEY) : appId;
     }
 }

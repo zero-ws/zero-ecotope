@@ -4,7 +4,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.enums.EmApp;
 import io.zerows.epoch.enums.EmBoot;
 import io.zerows.epoch.constant.spec.VBoot;
-import io.zerows.ams.util.HUt;
+import io.zerows.ams.util.UtBase;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HEnergy;
 
@@ -47,17 +47,17 @@ public class KEnergy implements HEnergy {
      */
     public static HEnergy of(final JsonObject config) {
         final KEnergy energy = new KEnergy();
-        final JsonObject component = HUt.valueJObject(config, VBoot.COMPONENT);
-        final JsonObject configJ = HUt.valueJObject(config, VBoot.CONFIG);
+        final JsonObject component = UtBase.valueJObject(config, VBoot.COMPONENT);
+        final JsonObject configJ = UtBase.valueJObject(config, VBoot.CONFIG);
         /*
          * - pre, 针对 on / off / run 的特殊配置
          * - on
          * - off
          * - run
          */
-        HUt.<String>itJObject(component).forEach(entry -> {
+        UtBase.<String>itJObject(component).forEach(entry -> {
             final EmBoot.LifeCycle lifeCycle = EmBoot.LifeCycle.from(entry.getKey());
-            final Class<?> clazz = HUt.clazz(entry.getValue());
+            final Class<?> clazz = UtBase.clazz(entry.getValue());
             energy.bind(lifeCycle, clazz);
             /*
              *  configJ
@@ -69,16 +69,16 @@ public class KEnergy implements HEnergy {
              */
             final Object configV = configJ.getValue(entry.getKey());
             if (configV instanceof String) {
-                final Class<?> instanceCls = HUt.clazz((String) configV, null);
+                final Class<?> instanceCls = UtBase.clazz((String) configV, null);
                 if (Objects.nonNull(instanceCls)) {
-                    final HConfig configRef = HUt.singleton(instanceCls);
+                    final HConfig configRef = UtBase.singleton(instanceCls);
                     energy.bind(clazz, configRef);
                 }
             } else if (configV instanceof JsonObject) {
                 JsonObject options = (JsonObject) configV;
-                final Class<?> instanceCls = HUt.valueC(options, VBoot.COMPONENT, null);
+                final Class<?> instanceCls = UtBase.valueC(options, VBoot.COMPONENT, null);
                 if (Objects.nonNull(instanceCls)) {
-                    final HConfig configRef = HUt.singleton(instanceCls);
+                    final HConfig configRef = UtBase.singleton(instanceCls);
                     options = options.copy();
                     options.remove(VBoot.COMPONENT);
                     configRef.options(options);

@@ -2,7 +2,7 @@ package io.zerows.unity;
 
 import io.vertx.core.Future;
 import io.vertx.core.Promise;
-import io.zerows.ams.fn.HFn;
+import io.zerows.ams.fn.FnBase;
 import io.zerows.common.program.KRef;
 import io.zerows.core.util.Ut;
 import io.zerows.epoch.constant.VValue;
@@ -36,7 +36,7 @@ class Async {
     static <T> Future<T> future(final T input, final Set<Function<T, Future<T>>> set) {
         final List<Future<T>> futures = new ArrayList<>();
         set.stream().map(consumer -> consumer.apply(input)).forEach(futures::add);
-        HFn.combineT(futures).compose(nil -> {
+        FnBase.combineT(futures).compose(nil -> {
             LOGGER.info("「Job Infusion」 There are `{0}` jobs that are finished successfully!", String.valueOf(set.size()));
             return ToCommon.future(nil);
         });

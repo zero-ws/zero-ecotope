@@ -5,7 +5,7 @@ import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
-import io.zerows.ams.util.HUt;
+import io.zerows.ams.util.UtBase;
 import io.zerows.extend.jackson.databind.module.HorizonModule;
 
 import java.io.IOException;
@@ -51,7 +51,7 @@ public class AdjustDateTimeDeserializer extends LocalDateTimeDeserializer {
                 try {
                     if (this._formatter == DEFAULT_FORMATTER && string.length() > 10 && string.charAt(10) == 'T') {
                         /// System.out.println(string.endsWith("Z"));
-                        return string.endsWith("Z") ? HUt.toDateTime(HUt.parse(string)) :
+                        return string.endsWith("Z") ? UtBase.toDateTime(UtBase.parse(string)) :
                             LocalDateTime.parse(string, DEFAULT_FORMATTER);
                     } else {
                         return LocalDateTime.parse(string, this._formatter);

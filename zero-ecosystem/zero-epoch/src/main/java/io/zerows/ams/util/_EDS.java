@@ -1,7 +1,7 @@
 package io.zerows.ams.util;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.uca.crypto.ED;
+import io.zerows.epoch.common.uca.crypto.ED;
 
 /**
  * @author lang : 2023/4/28

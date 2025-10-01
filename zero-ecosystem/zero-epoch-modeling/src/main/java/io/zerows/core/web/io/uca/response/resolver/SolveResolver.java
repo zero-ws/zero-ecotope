@@ -3,7 +3,7 @@ package io.zerows.core.web.io.uca.response.resolver;
 import io.r2mo.typed.exception.web._500ServerInternalException;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.core.annotations.Contract;
-import io.zerows.core.uca.log.Annal;
+import io.zerows.epoch.common.uca.log.Annal;
 import io.zerows.core.web.io.zdk.mime.Resolver;
 import io.zerows.core.web.io.zdk.mime.Solve;
 import io.zerows.core.web.model.atom.Epsilon;

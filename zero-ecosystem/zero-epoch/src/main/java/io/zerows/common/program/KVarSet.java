@@ -1,7 +1,7 @@
 package io.zerows.common.program;
 
 
-import io.zerows.ams.util.HUt;
+import io.zerows.ams.util.UtBase;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -58,7 +58,7 @@ public class KVarSet implements Serializable {
             attr = KVar.of(name);
         }
         attr.bind(Objects.isNull(type) ? String.class : type);
-        if (HUt.isNotNil(alias)) {
+        if (UtBase.isNotNil(alias)) {
             attr.bind(alias);
         }
         attr.value(value);

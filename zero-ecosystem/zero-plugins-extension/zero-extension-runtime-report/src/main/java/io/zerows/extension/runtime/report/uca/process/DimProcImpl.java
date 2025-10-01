@@ -5,7 +5,7 @@ import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.fn.HFn;
+import io.zerows.ams.fn.FnBase;
 import io.zerows.core.constant.KName;
 import io.zerows.core.fn.FnZero;
 import io.zerows.core.util.Ut;
@@ -60,7 +60,7 @@ class DimProcImpl extends AbstractDimProc {
                     futureList.add(this.dimAsync(params, source, dimension));
                 }
             });
-            return HFn.combineT(futureList);
+            return FnBase.combineT(futureList);
         });
     }
 

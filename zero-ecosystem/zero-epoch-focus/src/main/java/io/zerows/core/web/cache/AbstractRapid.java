@@ -3,7 +3,7 @@ package io.zerows.core.web.cache;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
-import io.zerows.ams.fn.HFn;
+import io.zerows.ams.fn.FnBase;
 import io.zerows.core.constant.KName;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.cache.shared.UxPool;
@@ -53,14 +53,14 @@ public class AbstractRapid<K, T> implements Rapid<K, T> {
     public Future<T> writeMulti(final Set<K> keySet, final T value) {
         final List<Future<T>> futures = new ArrayList<>();
         keySet.forEach(key -> futures.add(this.write(key, value)));
-        return HFn.combineT(futures).compose(nil -> Ut.future(value));
+        return FnBase.combineT(futures).compose(nil -> Ut.future(value));
     }
 
     @Override
     public Future<Boolean> writeMulti(final Set<K> keySet) {
         final List<Future<T>> futures = new ArrayList<>();
         keySet.forEach(key -> futures.add(this.clear(key)));
-        return HFn.combineT(futures).compose(nil -> Ut.futureT());
+        return FnBase.combineT(futures).compose(nil -> Ut.futureT());
     }
 
     @Override

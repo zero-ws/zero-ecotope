@@ -1,7 +1,7 @@
 package io.zerows.module.metadata.uca.execution;
 
 import io.vertx.core.Future;
-import io.zerows.ams.fn.HFn;
+import io.zerows.ams.fn.FnBase;
 import io.zerows.module.metadata.atom.service.CallbackParameter;
 import io.zerows.module.metadata.zdk.service.ServiceContext;
 import io.zerows.module.metadata.zdk.service.ServiceInvocation;
@@ -28,7 +28,7 @@ class ServiceRunnerProvider extends AbstractServiceRunner {
             waitServices.stream().map(invocation -> Exec.startInvoke(invocation, context))
                 .forEach(executed::add);
 
-            HFn.combineT(executed).onComplete(this::handleExecuted);
+            FnBase.combineT(executed).onComplete(this::handleExecuted);
         });
     }
 
@@ -40,7 +40,7 @@ class ServiceRunnerProvider extends AbstractServiceRunner {
             waitServices.stream().map(invocation -> Exec.stopInvoke(invocation, context))
                 .forEach(executed::add);
 
-            HFn.combineT(executed).onComplete(this::handleExecuted);
+            FnBase.combineT(executed).onComplete(this::handleExecuted);
         });
     }
 

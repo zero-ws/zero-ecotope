@@ -1,6 +1,6 @@
 package io.zerows.specification.access;
 
-import io.zerows.core.exception.web._80413Exception501NotImplement;
+import io.zerows.epoch.exception.web._80413Exception501NotImplement;
 import io.zerows.specification.configuration.HConfig;
 
 import java.util.concurrent.ConcurrentHashMap;

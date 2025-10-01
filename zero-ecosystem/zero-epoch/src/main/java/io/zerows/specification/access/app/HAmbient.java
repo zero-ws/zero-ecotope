@@ -2,7 +2,7 @@ package io.zerows.specification.access.app;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.enums.EmApp;
-import io.zerows.ams.util.HUt;
+import io.zerows.ams.util.UtBase;
 import io.zerows.specification.access.HBelong;
 import io.zerows.specification.access.cloud.HFrontier;
 import io.zerows.specification.access.cloud.HGalaxy;
@@ -77,7 +77,7 @@ public interface HAmbient {
      * @return 模块配置
      */
     default <T> T extension(final String name, final Class<T> configCls) {
-        return HUt.deserialize(this.extension(name), configCls);
+        return UtBase.deserialize(this.extension(name), configCls);
     }
 
     JsonObject extension(final String name);

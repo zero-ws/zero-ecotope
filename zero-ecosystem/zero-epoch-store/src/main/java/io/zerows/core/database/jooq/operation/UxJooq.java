@@ -15,7 +15,7 @@ import io.zerows.core.database.jooq.util.JqAnalyzer;
 import io.zerows.core.database.jooq.util.JqCond;
 import io.zerows.core.database.jooq.util.JqFlow;
 import io.zerows.core.database.jooq.util.JqTool;
-import io.zerows.core.uca.qr.Sorter;
+import io.zerows.epoch.common.uca.qr.Sorter;
 import io.zerows.core.util.Ut;
 import io.zerows.module.metadata.uca.logging.OLog;
 

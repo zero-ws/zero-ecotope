@@ -1,7 +1,7 @@
 package io.zerows.module.metadata.uca.logging;
 
-import io.zerows.core.uca.log.Log;
-import io.zerows.core.uca.log.LogModule;
+import io.zerows.epoch.common.uca.log.Log;
+import io.zerows.epoch.common.uca.log.LogModule;
 
 /**
  * @author lang : 2024-04-17

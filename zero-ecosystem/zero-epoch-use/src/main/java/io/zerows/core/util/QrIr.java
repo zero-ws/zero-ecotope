@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.VString;
 import io.zerows.common.program.Kv;
 import io.zerows.core.constant.KWeb;
-import io.zerows.core.uca.qr.syntax.Ir;
+import io.zerows.epoch.common.uca.qr.syntax.Ir;
 import io.zerows.module.metadata.uca.logging.OLog;
 
 import java.util.Objects;

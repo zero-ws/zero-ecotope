@@ -9,7 +9,7 @@ import io.zerows.common.reference.*;
 import io.zerows.core.constant.KName;
 import io.zerows.core.database.jooq.operation.UxJoin;
 import io.zerows.core.database.jooq.operation.UxJooq;
-import io.zerows.core.exception.web._60050Exception501NotSupport;
+import io.zerows.epoch.exception.web._60050Exception501NotSupport;
 import io.zerows.core.util.Ut;
 import io.zerows.module.domain.atom.specification.KJoin;
 import io.zerows.module.domain.atom.specification.KPoint;

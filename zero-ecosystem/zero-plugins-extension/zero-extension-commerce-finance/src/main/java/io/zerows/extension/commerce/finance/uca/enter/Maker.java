@@ -3,7 +3,7 @@ package io.zerows.extension.commerce.finance.uca.enter;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.exception.web._80413Exception501NotImplement;
+import io.zerows.epoch.exception.web._80413Exception501NotImplement;
 import io.zerows.epoch.annotation.Memory;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.*;
 

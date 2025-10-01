@@ -1,7 +1,7 @@
 package io.zerows.core.web.model.uca.scan.parallel;
 
 import io.r2mo.function.Actuator;
-import io.zerows.core.uca.log.Annal;
+import io.zerows.epoch.common.uca.log.Annal;
 
 import java.util.ArrayList;
 import java.util.List;

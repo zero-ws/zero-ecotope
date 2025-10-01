@@ -3,7 +3,7 @@ package io.mature.extension.uca.graphic;
 import io.mature.extension.refine.Ox;
 import io.vertx.core.Future;
 import io.zerows.core.constant.KWeb;
-import io.zerows.core.uca.log.Annal;
+import io.zerows.epoch.common.uca.log.Annal;
 import io.zerows.plugins.store.neo4j.Neo4jClient;
 import io.zerows.plugins.store.neo4j.Neo4jInfix;
 

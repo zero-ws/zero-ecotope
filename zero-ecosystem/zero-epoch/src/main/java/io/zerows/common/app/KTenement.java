@@ -1,7 +1,7 @@
 package io.zerows.common.app;
 
-import io.zerows.ams.util.HUt;
-import io.zerows.core.exception.boot._40102Exception500CombineOwner;
+import io.zerows.ams.util.UtBase;
+import io.zerows.epoch.exception.boot._40102Exception500CombineOwner;
 import io.zerows.core.running.boot.KRegistry;
 import io.zerows.specification.access.app.HApp;
 import io.zerows.specification.access.cloud.HTenant;
@@ -62,7 +62,7 @@ public class KTenement implements HOI {
     }
 
     public KTenement(final String id) {
-        this.id = HUt.keyOwner(id);
+        this.id = UtBase.keyOwner(id);
     }
 
     @Override

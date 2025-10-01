@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.VName;
 import io.zerows.epoch.enums.modeling.EmAttribute;
 import io.zerows.epoch.enums.modeling.EmValue;
-import io.zerows.ams.util.HUt;
+import io.zerows.ams.util.UtBase;
 import io.zerows.common.reference.RRule;
 import io.zerows.specification.modeling.HAttribute;
 import io.zerows.specification.modeling.metadata.HMetaField;
@@ -52,7 +52,7 @@ public class KAttribute implements HAttribute, Serializable {
          * 1. Priority 1: isArray = true, the formatFail is `JsonArray`.
          * 2. Priority 2: isArray = false, set the default value instead ( Elementary )
          */
-        EmValue.Format format = HUt.toEnum(() -> config.getString(VName.FORMAT), EmValue.Format.class, EmValue.Format.Elementary);
+        EmValue.Format format = UtBase.toEnum(() -> config.getString(VName.FORMAT), EmValue.Format.class, EmValue.Format.Elementary);
         if (tag.value(EmAttribute.Marker.array)) {
             format = EmValue.Format.JsonArray;
         }
@@ -61,7 +61,7 @@ public class KAttribute implements HAttribute, Serializable {
         /*
          * Here the type must be fixed or null
          */
-        final Class<?> type = HUt.clazz(config.getString(VName.TYPE), String.class);
+        final Class<?> type = UtBase.clazz(config.getString(VName.TYPE), String.class);
         final String name = config.getString(VName.NAME);
         final String alias = config.getString(VName.ALIAS);
         this.type = HMetaField.of(name, alias, type);
@@ -71,12 +71,12 @@ public class KAttribute implements HAttribute, Serializable {
          * instead of simple, then add children into HTField for complex
          */
         if (EmValue.Format.Elementary != format) {
-            final JsonArray fields = HUt.valueJArray(config.getJsonArray(VName.FIELDS));
-            HUt.itJArray(fields).forEach(item -> {
+            final JsonArray fields = UtBase.valueJArray(config.getJsonArray(VName.FIELDS));
+            UtBase.itJArray(fields).forEach(item -> {
                 final String field = item.getString(VName.FIELD);
-                if (HUt.isNotNil(field)) {
+                if (UtBase.isNotNil(field)) {
                     final String fieldAlias = item.getString(VName.ALIAS, null);
-                    final Class<?> subType = HUt.clazz(item.getString(VName.TYPE), String.class);
+                    final Class<?> subType = UtBase.clazz(item.getString(VName.TYPE), String.class);
                     this.shapes.add(HMetaField.of(field, fieldAlias, subType));
                 }
             });
@@ -87,8 +87,8 @@ public class KAttribute implements HAttribute, Serializable {
          * Bind `rule` processing, the `rule` should be configured in config instead of
          */
         if (config.containsKey(VName.RULE)) {
-            final JsonObject ruleJ = HUt.valueJObject(config, VName.RULE);
-            this.rule = HUt.deserialize(ruleJ, RRule.class);
+            final JsonObject ruleJ = UtBase.valueJObject(config, VName.RULE);
+            this.rule = UtBase.deserialize(ruleJ, RRule.class);
             /* Bind type into rule */
             this.rule.type(this.type.type());
             /* Unique rule for diffSet */

@@ -1,6 +1,6 @@
 package io.zerows.core.util;
 
-import io.zerows.ams.util.HUt;
+import io.zerows.ams.util.UtBase;
 
 /**
  * @author lang : 2023-06-19
@@ -24,7 +24,7 @@ class _ED extends _Compare {
 
     public static String encryptBase64(final String username, final String password) {
         final String input = username + ":" + password;
-        return HUt.encryptBase64(input);
+        return UtBase.encryptBase64(input);
     }
 
     public static String encryptJ(final Object value) {

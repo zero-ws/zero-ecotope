@@ -3,7 +3,7 @@ package io.zerows.core.constant.configure;
 import io.zerows.epoch.constant.VPath;
 import io.zerows.epoch.constant.VString;
 import io.zerows.epoch.enums.EmDS;
-import io.zerows.ams.util.HUt;
+import io.zerows.ams.util.UtBase;
 import io.zerows.core.annotations.Infusion;
 import io.zerows.core.constant.KName;
 import io.zerows.core.constant.KPlugin;
@@ -44,7 +44,7 @@ public interface YmlCore {
     String FREEDOM = "freedom";
 
     static String of(final String filename) {
-        if (HUt.isNil(filename)) {
+        if (UtBase.isNil(filename)) {
             // vertx.yml
             return VERTX + VString.DOT + VPath.SUFFIX.YML;
         } else {

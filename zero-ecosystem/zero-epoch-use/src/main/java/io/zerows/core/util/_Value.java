@@ -2,7 +2,7 @@ package io.zerows.core.util;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.uca.qr.syntax.Ir;
+import io.zerows.epoch.common.uca.qr.syntax.Ir;
 
 import java.util.function.BinaryOperator;
 import java.util.function.Function;

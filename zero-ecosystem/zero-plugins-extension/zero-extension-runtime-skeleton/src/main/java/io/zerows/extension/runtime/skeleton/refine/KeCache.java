@@ -4,7 +4,7 @@ import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.core.constant.KName;
-import io.zerows.core.uca.log.Annal;
+import io.zerows.epoch.common.uca.log.Annal;
 import io.zerows.core.web.model.store.OCacheUri;
 import io.zerows.extension.runtime.skeleton.osgi.spi.web.Orbit;
 import io.zerows.module.domain.atom.commune.Vis;

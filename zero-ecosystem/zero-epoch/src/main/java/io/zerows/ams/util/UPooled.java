@@ -1,7 +1,7 @@
 package io.zerows.ams.util;
 
 import io.zerows.epoch.constant.VString;
-import io.zerows.core.exception.boot._11007Exception404PoolIsNull;
+import io.zerows.epoch.exception.boot._11007Exception404PoolIsNull;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentMap;

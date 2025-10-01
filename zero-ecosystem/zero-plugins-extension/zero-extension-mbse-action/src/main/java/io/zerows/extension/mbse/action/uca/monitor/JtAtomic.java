@@ -2,7 +2,7 @@ package io.zerows.extension.mbse.action.uca.monitor;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.running.context.KRunner;
-import io.zerows.core.uca.log.Annal;
+import io.zerows.epoch.common.uca.log.Annal;
 import io.zerows.extension.mbse.action.eon.JtMsg;
 
 import java.util.concurrent.atomic.AtomicBoolean;

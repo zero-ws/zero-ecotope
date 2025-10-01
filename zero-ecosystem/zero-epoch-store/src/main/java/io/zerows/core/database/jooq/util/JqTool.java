@@ -5,7 +5,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.VString;
-import io.zerows.core.uca.qr.syntax.Ir;
+import io.zerows.epoch.common.uca.qr.syntax.Ir;
 import io.zerows.core.util.Ut;
 import io.zerows.module.metadata.atom.mapping.Mirror;
 import io.zerows.module.metadata.atom.mapping.Mojo;

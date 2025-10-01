@@ -2,7 +2,7 @@ package io.zerows.extension.mbse.basement.uca.reference;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
-import io.zerows.ams.fn.HFn;
+import io.zerows.ams.fn.FnBase;
 import io.zerows.common.reference.RResult;
 import io.zerows.common.reference.RRule;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
@@ -119,7 +119,7 @@ public abstract class AbstractRay<T> implements AoRay<T> {
     public abstract Future<T> execAsync(T input);
 
     protected Future<ConcurrentMap<String, JsonArray>> thenCombine(final List<Future<ConcurrentMap<String, JsonArray>>> futures) {
-        return HFn.combineT(futures).compose(listMap -> {
+        return FnBase.combineT(futures).compose(listMap -> {
             final ConcurrentMap<String, JsonArray> response = new ConcurrentHashMap<>();
             listMap.forEach(response::putAll);
             return Ux.future(response);

@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
 import io.zerows.core.database.jooq.operation.UxJooq;
-import io.zerows.core.uca.qr.Sorter;
+import io.zerows.epoch.common.uca.qr.Sorter;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.runtime.integration.domain.tables.daos.IMessageDao;
 import io.zerows.extension.runtime.integration.domain.tables.pojos.IMessage;

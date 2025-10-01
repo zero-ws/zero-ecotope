@@ -1,6 +1,6 @@
 package io.zerows.core.web.model.uca.extract;
 
-import io.zerows.core.uca.log.Annal;
+import io.zerows.epoch.common.uca.log.Annal;
 import io.zerows.core.util.Ut;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.Produces;

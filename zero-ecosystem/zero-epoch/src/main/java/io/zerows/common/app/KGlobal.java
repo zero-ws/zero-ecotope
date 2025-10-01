@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.VName;
-import io.zerows.ams.util.HUt;
+import io.zerows.ams.util.UtBase;
 import io.zerows.extend.jackson.databind.JsonArrayDeserializer;
 import io.zerows.extend.jackson.databind.JsonArraySerializer;
 import io.zerows.extend.jackson.databind.JsonObjectDeserializer;
@@ -68,9 +68,9 @@ public class KGlobal implements Serializable, HCopier<KGlobal> {
 
     public void setIntegration(final JsonObject integration) {
         this.integration = integration;
-        if (HUt.isNotNil(integration)) {
+        if (UtBase.isNotNil(integration)) {
             // KIntegration Configuration
-            HUt.<JsonObject>itJObject(integration, (vendor, name) -> {
+            UtBase.<JsonObject>itJObject(integration, (vendor, name) -> {
                 final String configFile = vendor.getString(VName.CONFIG, null);
                 Objects.requireNonNull(configFile);
                 // Basic Information of
@@ -122,7 +122,7 @@ public class KGlobal implements Serializable, HCopier<KGlobal> {
         if (Objects.isNull(this.global)) {
             return application;
         } else {
-            return HUt.valueCopy(application, this.global,
+            return UtBase.valueCopy(application, this.global,
                 VName.APP_ID, VName.SIGMA, VName.APP_KEY
             );
         }
@@ -133,11 +133,11 @@ public class KGlobal implements Serializable, HCopier<KGlobal> {
     }
 
     public String appId() {
-        return HUt.valueString(this.global, VName.APP_ID);
+        return UtBase.valueString(this.global, VName.APP_ID);
     }
 
     public String sigma() {
-        return HUt.valueString(this.global, VName.SIGMA);
+        return UtBase.valueString(this.global, VName.SIGMA);
     }
 
     @Override

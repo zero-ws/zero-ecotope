@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.enums.app.ServerType;
 import io.zerows.core.constant.KName;
 import io.zerows.core.constant.configure.YmlCore;
-import io.zerows.core.exception.boot._30001Exception500ServerConfig;
+import io.zerows.epoch.exception.boot._30001Exception500ServerConfig;
 import io.zerows.core.util.Ut;
 import io.zerows.module.configuration.atom.NodeVertx;
 import io.zerows.module.configuration.zdk.Processor;

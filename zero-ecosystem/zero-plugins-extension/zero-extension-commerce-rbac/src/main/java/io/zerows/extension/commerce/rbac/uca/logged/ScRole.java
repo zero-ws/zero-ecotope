@@ -3,7 +3,7 @@ package io.zerows.extension.commerce.rbac.uca.logged;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
-import io.zerows.core.uca.log.Annal;
+import io.zerows.epoch.common.uca.log.Annal;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.cache.Rapid;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.RRolePermDao;

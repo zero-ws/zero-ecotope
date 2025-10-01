@@ -1,7 +1,7 @@
 package io.zerows.core.fn;
 
 import io.vertx.core.Future;
-import io.zerows.ams.fn.HFn;
+import io.zerows.ams.fn.FnBase;
 import io.zerows.core.util.Ut;
 
 import java.util.ArrayList;
@@ -30,6 +30,6 @@ final class ThenL {
                 });
             }
             return Future.succeededFuture(result);
-        }).otherwise(HFn.outAsync(ArrayList::new));
+        }).otherwise(FnBase.outAsync(ArrayList::new));
     }
 }

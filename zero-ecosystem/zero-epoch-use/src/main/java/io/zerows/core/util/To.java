@@ -4,7 +4,7 @@ import io.vertx.core.MultiMap;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.util.HUt;
+import io.zerows.ams.util.UtBase;
 import io.zerows.core.constant.KName;
 
 import java.util.*;
@@ -64,7 +64,7 @@ final class To {
 
     static HttpMethod toMethod(final Supplier<String> supplier, final HttpMethod defaultValue) {
         final String method = supplier.get();
-        if (HUt.isNil(method)) {
+        if (UtBase.isNil(method)) {
             return defaultValue;
         } else {
             return HttpMethod.valueOf(method);

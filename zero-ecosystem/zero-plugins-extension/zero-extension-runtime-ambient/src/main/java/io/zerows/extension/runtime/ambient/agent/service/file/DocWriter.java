@@ -7,7 +7,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.common.program.Kv;
 import io.zerows.core.constant.KName;
 import io.zerows.core.database.jooq.operation.UxJooq;
-import io.zerows.core.uca.log.Annal;
+import io.zerows.epoch.common.uca.log.Annal;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XAttachmentDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XAttachment;

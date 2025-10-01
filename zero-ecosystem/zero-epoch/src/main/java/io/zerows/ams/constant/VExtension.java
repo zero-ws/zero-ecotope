@@ -1,6 +1,6 @@
 package io.zerows.ams.constant;
 
-import io.zerows.ams.util.HUt;
+import io.zerows.ams.util.UtBase;
 
 /**
  * -----------------------------------------------------------------------------
@@ -52,7 +52,7 @@ public interface VExtension {
     interface workflow {
         // workflow/{code}
         static String of(final String code) {
-            return HUt.fromMessage(WORKFLOW + "/{}", code);
+            return UtBase.fromMessage(WORKFLOW + "/{}", code);
         }
     }
 
@@ -61,13 +61,13 @@ public interface VExtension {
 
         // plugin/{module}
         static String of(final String mod) {
-            return HUt.fromMessage(PLUGIN + "/{}", mod);
+            return UtBase.fromMessage(PLUGIN + "/{}", mod);
         }
 
         interface mod {
             // plugin/{module}/configuration.json
             static String configuration_json(final String mod) {
-                return HUt.fromMessage(plugin.of(mod) + "/configuration.json");
+                return UtBase.fromMessage(plugin.of(mod) + "/configuration.json");
             }
 
             /**
@@ -90,22 +90,22 @@ public interface VExtension {
             interface oob {
                 // plugin/{module}/oob/
                 static String of(final String mod) {
-                    return HUt.fromMessage(PLUGIN + "/{}/oob", mod);
+                    return UtBase.fromMessage(PLUGIN + "/{}/oob", mod);
                 }
 
                 // plugin/{module}/oob/initialize.json
                 static String initialize_json(final String mod) {
-                    return HUt.fromMessage(oob.of(mod) + "/initialize.json");
+                    return UtBase.fromMessage(oob.of(mod) + "/initialize.json");
                 }
 
                 // plugin/{module}/oob/initialize.yml
                 static String initialize_yml(final String mod) {
-                    return HUt.fromMessage(oob.of(mod) + "/initialize.yml");
+                    return UtBase.fromMessage(oob.of(mod) + "/initialize.yml");
                 }
 
                 // plugin/{module}/oob/module.json
                 static String module_json(final String mod) {
-                    return HUt.fromMessage(oob.of(mod) + "/module.json");
+                    return UtBase.fromMessage(oob.of(mod) + "/module.json");
                 }
             }
         }
@@ -122,18 +122,18 @@ public interface VExtension {
 
             // plugin/sql/{module}.properties
             static String liquibase_properties(final String mod) {
-                return HUt.fromMessage(PLUGIN + "/{}/{}.properties", SQL, mod);
+                return UtBase.fromMessage(PLUGIN + "/{}/{}.properties", SQL, mod);
             }
 
             // plugin/sql/{module}.yml
             static String liquibase_yml(final String mod) {
-                return HUt.fromMessage(PLUGIN + "/{}/{}.yml", SQL, mod);
+                return UtBase.fromMessage(PLUGIN + "/{}/{}.yml", SQL, mod);
             }
 
             interface mod {
                 // plugin/sql/{module}
                 static String of(final String mod) {
-                    return HUt.fromMessage(PLUGIN + "/{}/{}", SQL, mod);
+                    return UtBase.fromMessage(PLUGIN + "/{}/{}", SQL, mod);
                 }
             }
         }
@@ -142,7 +142,7 @@ public interface VExtension {
     interface modulat {
         // modulat/{module}
         static String of(final String mod) {
-            return HUt.fromMessage(MODULAT + "/{}", mod);
+            return UtBase.fromMessage(MODULAT + "/{}", mod);
         }
     }
 
@@ -152,21 +152,21 @@ public interface VExtension {
 
         // cab/{language}/{uri}
         static String of(final String language, final String uri) {
-            return HUt.fromMessage(CAB + "/{}/{}", language, uri);
+            return UtBase.fromMessage(CAB + "/{}/{}", language, uri);
         }
     }
 
     interface authority {
         // authority/{code}
         static String of(final String code) {
-            return HUt.fromMessage(AUTHORITY + "/{}", code);
+            return UtBase.fromMessage(AUTHORITY + "/{}", code);
         }
     }
 
     interface action {
         // action/{code}
         default String of(final String code) {
-            return HUt.fromMessage(ACTION + "/{}", code);
+            return UtBase.fromMessage(ACTION + "/{}", code);
         }
     }
 }

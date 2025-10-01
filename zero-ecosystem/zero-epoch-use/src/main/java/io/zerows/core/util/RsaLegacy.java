@@ -1,7 +1,7 @@
 package io.zerows.core.util;
 
 import io.r2mo.function.Fn;
-import io.zerows.ams.util.HUt;
+import io.zerows.ams.util.UtBase;
 
 import javax.crypto.Cipher;
 import java.security.KeyFactory;
@@ -36,7 +36,7 @@ class RsaLegacy {
     private static RSAPublicKey loadRSAPublicKeyByFile(final String keyPath)
         throws Exception {
         // 1. loading Public Key string by given path
-        final String publicKeyStr = HUt.ioString(keyPath);
+        final String publicKeyStr = UtBase.ioString(keyPath);
         //2. generate Public Key Object
         final byte[] buffer = Base64.getDecoder().decode(publicKeyStr);
         final KeyFactory keyFactory = KeyFactory.getInstance("RSA");

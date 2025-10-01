@@ -1,7 +1,7 @@
 package io.zerows.common.normalize;
 
 import io.zerows.epoch.enums.modeling.EmKey;
-import io.zerows.ams.util.HUt;
+import io.zerows.ams.util.UtBase;
 import io.zerows.specification.modeling.element.HKey;
 
 import java.util.HashSet;
@@ -47,7 +47,7 @@ public class KKey implements HKey {
     public HKey key(final String key) {
         // 清空
         this.fields.clear();
-        if (HUt.isNotNil(key)) {
+        if (UtBase.isNotNil(key)) {
             this.fields.add(key);
         }
         return this;

@@ -1,7 +1,7 @@
 package io.zerows.ams.util;
 
 import io.r2mo.function.Fn;
-import io.zerows.core.uca.log.LogUtil;
+import io.zerows.epoch.common.uca.log.LogUtil;
 import io.zerows.epoch.annotation.ChatGPT;
 import io.zerows.epoch.constant.VValue;
 

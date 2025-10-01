@@ -2,7 +2,7 @@ package io.zerows.core.running.context;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.enums.EmApp;
-import io.zerows.core.exception.web._60050Exception501NotSupport;
+import io.zerows.epoch.exception.web._60050Exception501NotSupport;
 import io.zerows.specification.access.app.HAmbient;
 import io.zerows.specification.access.app.HArk;
 

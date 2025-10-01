@@ -1,8 +1,8 @@
 package io.zerows.extension.mbse.basement.uca.dao.internal;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.uca.qr.Criteria;
-import io.zerows.core.uca.qr.syntax.Ir;
+import io.zerows.epoch.common.uca.qr.Criteria;
+import io.zerows.epoch.common.uca.qr.syntax.Ir;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.mbse.basement.atom.data.DataEvent;
 import io.zerows.specification.modeling.HRecord;

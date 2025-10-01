@@ -4,7 +4,7 @@ import io.r2mo.function.Fn;
 import io.reactivex.rxjava3.core.Observable;
 import io.zerows.core.annotations.Address;
 import io.zerows.core.constant.KName;
-import io.zerows.core.uca.log.Annal;
+import io.zerows.epoch.common.uca.log.Annal;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.model.atom.Receipt;
 import io.zerows.core.web.model.atom.action.OJointAction;

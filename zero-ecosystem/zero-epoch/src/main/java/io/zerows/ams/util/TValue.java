@@ -124,16 +124,16 @@ class TValue {
             UIterator.itJArray(array).forEach(item -> valueToJson(item, field));
         } else if (json instanceof JsonObject) {
             final JsonObject object = (JsonObject) json;
-            if (HUt.isNotNil(object)) {
+            if (UtBase.isNotNil(object)) {
                 final Object value = object.getValue(field);
                 if (value instanceof String) {
                     final String literal = (String) value;
                     // String Literal
-                    if (HUt.isJObject(literal)) {
-                        final JsonObject replaced = HUt.toJObject(literal, TValue::valueToMetadata);
+                    if (UtBase.isJObject(literal)) {
+                        final JsonObject replaced = UtBase.toJObject(literal, TValue::valueToMetadata);
                         object.put(field, replaced);
-                    } else if (HUt.isJArray(literal)) {
-                        final JsonArray replaced = HUt.toJArray(literal, TValue::valueToMetadata);
+                    } else if (UtBase.isJArray(literal)) {
+                        final JsonArray replaced = UtBase.toJArray(literal, TValue::valueToMetadata);
                         object.put(field, replaced);
                     }
                 } else if (value instanceof JsonObject) {

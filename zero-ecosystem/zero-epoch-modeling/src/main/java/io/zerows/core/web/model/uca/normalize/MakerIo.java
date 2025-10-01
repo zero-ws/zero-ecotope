@@ -1,7 +1,7 @@
 package io.zerows.core.web.model.uca.normalize;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.core.exception.web._60050Exception501NotSupport;
+import io.zerows.epoch.exception.web._60050Exception501NotSupport;
 import org.osgi.framework.Bundle;
 
 import java.util.concurrent.ConcurrentMap;

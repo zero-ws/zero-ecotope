@@ -30,7 +30,7 @@ class UIterator {
     }
 
     static Stream<JsonObject> itJArray(final JsonArray array) {
-        final JsonArray source = HUt.valueJArray(array);
+        final JsonArray source = UtBase.valueJArray(array);
         // 并行
         return source.stream().filter(item -> item instanceof JsonObject).map(item -> (JsonObject) item);
     }
@@ -52,7 +52,7 @@ class UIterator {
     @SuppressWarnings("unchecked")
     static <T> void itJObject(final JsonObject data,
                               final BiConsumer<T, String> consumer) {
-        if (HUt.isNil(data)) {
+        if (UtBase.isNil(data)) {
             return;
         }
         for (final String name : data.fieldNames()) {
@@ -68,7 +68,7 @@ class UIterator {
     }
 
     static Stream<String> itJString(final JsonArray array) {
-        final JsonArray source = HUt.valueJArray(array);
+        final JsonArray source = UtBase.valueJArray(array);
         // 并行
         return source.stream().filter(item -> item instanceof String).map(item -> (String) item);
     }

@@ -7,7 +7,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.VPath;
 import io.zerows.core.fn.FnZero;
-import io.zerows.core.uca.log.Annal;
+import io.zerows.epoch.common.uca.log.Annal;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.model.uca.normalize.Oneness;
 import io.zerows.module.metadata.atom.configuration.MDConfiguration;

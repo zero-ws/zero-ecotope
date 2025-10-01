@@ -2,7 +2,7 @@ package io.zerows.core.fn;
 
 import io.vertx.core.Future;
 import io.zerows.epoch.constant.VValue;
-import io.zerows.ams.fn.HFn;
+import io.zerows.ams.fn.FnBase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +41,7 @@ final class ThenM {
                 }
             }
             return Future.succeededFuture(resultMap);
-        }).otherwise(HFn.outAsync(ConcurrentHashMap::new));
+        }).otherwise(FnBase.outAsync(ConcurrentHashMap::new));
     }
 
     /*
@@ -96,7 +96,7 @@ final class ThenM {
                     }));
             }
             return Future.succeededFuture(resultMap);
-        }).otherwise(HFn.outAsync(ConcurrentHashMap::new));
+        }).otherwise(FnBase.outAsync(ConcurrentHashMap::new));
     }
 
 }

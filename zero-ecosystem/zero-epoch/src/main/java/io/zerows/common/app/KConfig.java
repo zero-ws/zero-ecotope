@@ -1,7 +1,7 @@
 package io.zerows.common.app;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.util.HUt;
+import io.zerows.ams.util.UtBase;
 import io.zerows.core.running.boot.KSetting;
 import io.zerows.specification.configuration.HConfig;
 
@@ -23,7 +23,7 @@ public class KConfig implements HConfig {
 
     @Override
     public HConfig options(final JsonObject options) {
-        this.options.mergeIn(HUt.valueJObject(options));
+        this.options.mergeIn(UtBase.valueJObject(options));
         return this;
     }
 

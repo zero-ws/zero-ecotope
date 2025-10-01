@@ -3,7 +3,7 @@ package io.zerows.core.fn;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.fn.HFn;
+import io.zerows.ams.fn.FnBase;
 import io.zerows.core.util.Ut;
 
 import java.util.ArrayList;
@@ -36,8 +36,8 @@ final class ThenA {
                 // 拉平后执行组合
                 final List<JsonObject> completed = Ut.elementZip(first.getList(), secondary, combinerOf);
                 return Future.succeededFuture(new JsonArray(completed));
-            }).otherwise(HFn.outAsync(JsonArray::new));
-        }).otherwise(HFn.outAsync(JsonArray::new));
+            }).otherwise(FnBase.outAsync(JsonArray::new));
+        }).otherwise(FnBase.outAsync(JsonArray::new));
     }
 
     static Future<JsonArray> combineA(final List<Future<JsonObject>> futures) {
@@ -45,7 +45,7 @@ final class ThenA {
             final JsonArray result = Objects.isNull(finished)
                 ? new JsonArray() : new JsonArray(finished.list());
             return Future.succeededFuture(result);
-        }).otherwise(HFn.outAsync(JsonArray::new));
+        }).otherwise(FnBase.outAsync(JsonArray::new));
     }
 
     static Future<JsonArray> compressA(final List<Future<JsonArray>> futures) {
@@ -60,6 +60,6 @@ final class ThenA {
                 });
             }
             return Future.succeededFuture(resultMap);
-        }).otherwise(HFn.outAsync(JsonArray::new));
+        }).otherwise(FnBase.outAsync(JsonArray::new));
     }
 }

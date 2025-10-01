@@ -1,7 +1,7 @@
 package io.zerows.specification.atomic;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.util.HUt;
+import io.zerows.ams.util.UtBase;
 
 import java.io.Serializable;
 
@@ -14,7 +14,7 @@ import java.io.Serializable;
  *     2. 文件级：文件级只支持从文件系统读取和加载数据文件，直接将路径中的 json 文件读取
  *        到内存中，并且实现到对象的转换。
  * </code></pre>
- * 默认场景下，该接口中从文件加载数据会直接调用 {@link HUt#ioJObject} 静态方法，该静态
+ * 默认场景下，该接口中从文件加载数据会直接调用 {@link UtBase#ioJObject} 静态方法，该静态
  * 方法会检索文件路径，然后读取相关内容，最终加载到当前对象中。
  *
  * @author lang
@@ -36,7 +36,7 @@ public interface HJson extends Serializable {
 
     /**
      * 「重载方法」直接从文件系统加载数据文件，然后填充到当前对象。
-     * 默认实现调用了 {@link HUt#ioJObject} 静态方法，该静态方法会检索文件路径，然后读取相关内容，
+     * 默认实现调用了 {@link UtBase#ioJObject} 静态方法，该静态方法会检索文件路径，然后读取相关内容，
      * 转换流程如：
      * <pre><code>
      *     File -> JsonObject -> T
@@ -45,7 +45,7 @@ public interface HJson extends Serializable {
      * @param jsonFile 输入的文件路径
      */
     default void fromFile(final String jsonFile) {
-        final JsonObject data = HUt.ioJObject(jsonFile);
+        final JsonObject data = UtBase.ioJObject(jsonFile);
         this.fromJson(data);
     }
 }

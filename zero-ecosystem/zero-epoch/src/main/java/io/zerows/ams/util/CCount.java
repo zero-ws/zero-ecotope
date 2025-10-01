@@ -14,7 +14,7 @@ class CCount {
     static ConcurrentMap<String, Integer> count(final JsonArray array, final Set<String> fields) {
         final ConcurrentMap<String, Integer> counter = new ConcurrentHashMap<>();
         fields.forEach(field -> {
-            final Set<String> set = HUt.valueSetString(array, field);
+            final Set<String> set = UtBase.valueSetString(array, field);
             counter.put(field, set.size());
         });
         return counter;

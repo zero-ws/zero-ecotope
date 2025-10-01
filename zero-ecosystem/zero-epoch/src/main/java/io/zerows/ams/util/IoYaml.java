@@ -8,7 +8,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.VString;
 import io.zerows.epoch.enums.typed.EmType;
-import io.zerows.core.exception.boot._11002Exception500EmptyIo;
+import io.zerows.epoch.exception.boot._11002Exception500EmptyIo;
 
 import java.io.InputStream;
 import java.net.URL;

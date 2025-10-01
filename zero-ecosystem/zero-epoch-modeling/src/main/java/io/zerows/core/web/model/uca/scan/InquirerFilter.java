@@ -7,7 +7,7 @@ import io.vertx.core.http.HttpServerResponse;
 import io.zerows.epoch.constant.VValue;
 import io.zerows.core.annotations.Ordered;
 import io.zerows.core.constant.KWeb;
-import io.zerows.core.uca.log.Annal;
+import io.zerows.epoch.common.uca.log.Annal;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.model.atom.Event;
 import io.zerows.core.web.model.zdk.web.Filter;

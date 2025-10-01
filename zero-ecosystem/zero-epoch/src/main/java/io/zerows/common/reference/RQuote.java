@@ -1,7 +1,7 @@
 package io.zerows.common.reference;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.util.HUt;
+import io.zerows.ams.util.UtBase;
 import io.zerows.specification.modeling.HAttribute;
 
 import java.io.Serializable;
@@ -128,7 +128,7 @@ public class RQuote implements Serializable {
         /*
          * sourceReference
          */
-        if (HUt.isNotNil(referenceConfig)) {
+        if (UtBase.isNotNil(referenceConfig)) {
             final JsonObject sourceReference = referenceConfig.copy();
             this.sourceReference.put(name, sourceReference);
             /*

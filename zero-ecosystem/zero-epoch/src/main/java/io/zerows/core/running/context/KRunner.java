@@ -1,7 +1,7 @@
 package io.zerows.core.running.context;
 
 import io.r2mo.function.Fn;
-import io.zerows.core.uca.log.Annal;
+import io.zerows.epoch.common.uca.log.Annal;
 import io.zerows.specification.atomic.HThread;
 
 import java.util.ArrayList;

@@ -8,7 +8,7 @@ import io.zerows.core.annotations.Address;
 import io.zerows.core.annotations.Queue;
 import io.zerows.core.constant.KName;
 import io.zerows.core.fn.FnZero;
-import io.zerows.core.uca.qr.syntax.Ir;
+import io.zerows.epoch.common.uca.qr.syntax.Ir;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.model.commune.Envelop;
 import io.zerows.extension.commerce.rbac.agent.service.accredit.ActionStub;

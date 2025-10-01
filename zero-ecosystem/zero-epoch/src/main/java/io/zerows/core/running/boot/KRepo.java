@@ -2,7 +2,7 @@ package io.zerows.core.running.boot;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.zerows.epoch.enums.EmCloud;
-import io.zerows.ams.util.HUt;
+import io.zerows.ams.util.UtBase;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -57,7 +57,7 @@ public class KRepo implements Serializable {
          * 3. 如果环境变量无法提取，则直接使用 path 作为目录，此处解耦使用常量字符串
          *    后期若有其他需求再执行相关变更，此对象应该放到底层做云端对接
          */
-        return HUt.envWith("AEON_APP", this.path);
+        return UtBase.envWith("AEON_APP", this.path);
     }
 
     public void setPath(final String path) {
@@ -81,7 +81,7 @@ public class KRepo implements Serializable {
     }
 
     public String getSecret() {
-        return HUt.env(this.secret);
+        return UtBase.env(this.secret);
     }
 
     public void setSecret(final String secret) {

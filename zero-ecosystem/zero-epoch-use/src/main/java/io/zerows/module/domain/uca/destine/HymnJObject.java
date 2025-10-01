@@ -2,7 +2,7 @@ package io.zerows.module.domain.uca.destine;
 
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.uca.log.Log;
+import io.zerows.epoch.common.uca.log.Log;
 import io.zerows.core.util.Ut;
 import io.zerows.epoch.runtime.exception._80543Exception412IndentParsing;
 import io.zerows.module.domain.atom.specification.KJoin;

@@ -3,7 +3,7 @@ package io.zerows.common.program;
 import io.zerows.epoch.constant.VString;
 import io.zerows.epoch.enums.Environment;
 import io.zerows.epoch.constant.spec.VWeb;
-import io.zerows.ams.util.HUt;
+import io.zerows.ams.util.UtBase;
 
 /**
  * @author lang : 2023-06-12
@@ -61,7 +61,7 @@ public class KPathAtom {
     }
 
     public String output() {
-        return HUt.ioPath(this.output, this.environment);
+        return UtBase.ioPath(this.output, this.environment);
     }
 
     public String ui(final String identifier) {

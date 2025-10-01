@@ -1,7 +1,7 @@
 package io.zerows.specification.modeling.metadata;
 
 import io.zerows.epoch.enums.modeling.EmKey;
-import io.zerows.ams.util.HUt;
+import io.zerows.ams.util.UtBase;
 import io.zerows.common.normalize.KKey;
 import io.zerows.specification.modeling.element.HKey;
 
@@ -141,7 +141,7 @@ class MetaField implements HMetaField {
     }
 
     private <T> T children(final String field, final Function<HMetaField, T> fetchFn) {
-        if (HUt.isNil(field)) {
+        if (UtBase.isNil(field)) {
             return null;
         } else {
             final HMetaField item = this.vector.getOrDefault(field, null);

@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.VValue;
 import io.zerows.core.constant.KName;
 import io.zerows.core.fn.FnZero;
-import io.zerows.core.uca.log.Annal;
+import io.zerows.epoch.common.uca.log.Annal;
 import io.zerows.core.util.Ut;
 import io.zerows.module.domain.atom.commune.dynamic.Apt;
 import io.zerows.specification.modeling.metadata.HMetaAtom;

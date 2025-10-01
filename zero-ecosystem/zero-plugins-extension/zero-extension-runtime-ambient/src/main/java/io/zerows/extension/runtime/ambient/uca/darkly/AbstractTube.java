@@ -4,7 +4,7 @@ import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
-import io.zerows.core.uca.compare.Vs;
+import io.zerows.epoch.common.uca.compare.Vs;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.mbse.uca.mixture.HLoadSmart;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XActivity;

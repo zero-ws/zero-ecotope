@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.enums.typed.ChangeFlag;
 import io.zerows.core.constant.KName;
 import io.zerows.core.database.jooq.operation.UxJooq;
-import io.zerows.core.uca.qr.syntax.Ir;
+import io.zerows.epoch.common.uca.qr.syntax.Ir;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.runtime.crud.bootstrap.IxPin;
 import io.zerows.extension.runtime.crud.eon.em.QrType;

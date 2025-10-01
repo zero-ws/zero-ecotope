@@ -3,7 +3,7 @@ package io.zerows.extension.commerce.rbac.uca.acl.region;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.em.EmSecure;
-import io.zerows.core.uca.qr.syntax.Ir;
+import io.zerows.epoch.common.uca.qr.syntax.Ir;
 import io.zerows.core.web.model.commune.Envelop;
 import io.zerows.extension.commerce.rbac.util.Sc;
 import io.zerows.module.security.zdk.authority.Acl;

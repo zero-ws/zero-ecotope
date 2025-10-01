@@ -2,8 +2,8 @@ package io.zerows.extension.runtime.ambient.osgi.spi.environment;
 
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
-import io.zerows.ams.fn.HFn;
-import io.zerows.core.exception.web._60050Exception501NotSupport;
+import io.zerows.ams.fn.FnBase;
+import io.zerows.epoch.exception.web._60050Exception501NotSupport;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XApp;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XSource;
 import io.zerows.extension.runtime.ambient.store.OCacheArk;
@@ -36,7 +36,7 @@ public class RegistryExtension implements HRegistry<Vertx> {
 
     @Override
     public Future<Set<HArk>> registryAsync(final Vertx container, final HConfig config) {
-        return HFn.combineT(
+        return FnBase.combineT(
             // appId = XApp
             () -> Cabinet.<XApp>of(CabinetApp::new).loadAsync(container),
             // appId = XSource

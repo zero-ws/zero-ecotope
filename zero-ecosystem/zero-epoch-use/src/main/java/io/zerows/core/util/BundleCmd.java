@@ -1,6 +1,6 @@
 package io.zerows.core.util;
 
-import io.zerows.ams.util.HUt;
+import io.zerows.ams.util.UtBase;
 import io.zerows.module.metadata.eon.OMessage;
 import io.zerows.module.metadata.zdk.running.OCommand;
 import org.osgi.framework.Bundle;
@@ -22,7 +22,7 @@ class BundleCmd {
         context.registerService(commandCls.getName(), Ut.instance(commandCls, context), props);
 
         _Log.Log.command(commandCls).info(OMessage.Osgi.COMMAND.REGISTER,
-            HUt.fromJoin(args));
+            UtBase.fromJoin(args));
     }
 
     static OCommand commandBuild(final String value, final Map<String, OCommand> store) {

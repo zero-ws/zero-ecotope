@@ -1,6 +1,6 @@
 package io.zerows.ams.util;
 
-import io.zerows.core.uca.compare.Vs;
+import io.zerows.epoch.common.uca.compare.Vs;
 
 import java.util.HashSet;
 import java.util.Objects;

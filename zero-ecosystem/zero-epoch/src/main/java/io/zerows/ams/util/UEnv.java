@@ -28,7 +28,7 @@ class UEnv {
 
     static String readEnv(final String name, final String defaultValue) {
         final String parsed = System.getenv(name);
-        return HUt.isNil(parsed) ? defaultValue : parsed;
+        return UtBase.isNil(parsed) ? defaultValue : parsed;
     }
 
     static <T> T readEnv(final String name, final Class<T> clazz) {
@@ -41,7 +41,7 @@ class UEnv {
      */
     static <T> T readEnv(final String name, final T defaultValue, final Class<T> clazz) {
         final String literal = readEnv(name, VString.EMPTY);
-        if (HUt.isNil(literal)) {
+        if (UtBase.isNil(literal)) {
             return defaultValue;
         }
 
@@ -70,7 +70,7 @@ class UEnv {
             final String name = it.nextElement();
             final String value = properties.getProperty(name);
             // .dev.development （环境变量设置，JDK 11之后带参数执行）
-            if (HUt.isNotNil(value)) {
+            if (UtBase.isNotNil(value)) {
                 envMap.put(name, value);
                 envResult.put(name, value);
             }

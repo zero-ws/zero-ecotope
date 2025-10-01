@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.database.jooq.operation.UxJooq;
-import io.zerows.core.uca.aop.Aspect;
+import io.zerows.epoch.common.uca.aop.Aspect;
 import io.zerows.core.web.mbse.atom.specification.KModule;
 import io.zerows.extension.runtime.crud.bootstrap.IxPin;
 import io.zerows.extension.runtime.crud.uca.dao.Operate;

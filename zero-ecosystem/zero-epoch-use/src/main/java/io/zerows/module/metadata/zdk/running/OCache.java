@@ -1,6 +1,6 @@
 package io.zerows.module.metadata.zdk.running;
 
-import io.zerows.core.exception.web._60050Exception501NotSupport;
+import io.zerows.epoch.exception.web._60050Exception501NotSupport;
 import io.zerows.core.util.Ut;
 import io.zerows.module.metadata.uca.logging.OLog;
 import io.zerows.module.metadata.zdk.AbstractAmbiguity;

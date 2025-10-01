@@ -5,7 +5,7 @@ import io.zerows.epoch.constant.VString;
 import io.zerows.epoch.constant.VValue;
 import io.zerows.epoch.enums.modeling.EmKey;
 import io.zerows.common.app.KDatabase;
-import io.zerows.core.uca.log.Annal;
+import io.zerows.epoch.common.uca.log.Annal;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MField;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MKey;

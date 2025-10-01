@@ -2,8 +2,8 @@ package io.zerows.common.datamation;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.util.HUt;
-import io.zerows.core.uca.log.Annal;
+import io.zerows.ams.util.UtBase;
+import io.zerows.epoch.common.uca.log.Annal;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
@@ -45,27 +45,27 @@ class KDictData {
      * Api for update / add / get operation on `dictData`
      */
     void itemUpdate(final String dictName, final JsonObject input, final String keyField) {
-        final JsonObject data = HUt.valueJObject(input);
+        final JsonObject data = UtBase.valueJObject(input);
         final JsonArray original = this.item(dictName);
         // Check not null
         if (Objects.nonNull(data.getValue(keyField))) {
-            final JsonArray updated = HUt.elementSave(original, data, keyField);
+            final JsonArray updated = UtBase.elementSave(original, data, keyField);
             this.dictData.put(dictName, updated);
         }
     }
 
     void itemUpdate(final String dictName, final JsonArray input, final String keyField) {
-        final JsonArray data = HUt.valueJArray(input);
-        HUt.itJArray(data).filter(item -> Objects.nonNull(item.getValue(keyField)))
+        final JsonArray data = UtBase.valueJArray(input);
+        UtBase.itJArray(data).filter(item -> Objects.nonNull(item.getValue(keyField)))
             .forEach(json -> this.itemUpdate(dictName, json, keyField));
     }
 
     boolean itemExist(final String dictName, final String value, final String keyField) {
-        if (HUt.isNil(keyField, value)) {
+        if (UtBase.isNil(keyField, value)) {
             return false;
         } else {
             final JsonArray original = this.item(dictName);
-            final long counter = HUt.itJArray(original)
+            final long counter = UtBase.itJArray(original)
                 .map(each -> each.getValue(keyField))
                 .filter(Objects::nonNull)
                 .filter(value::equals).count();
@@ -76,6 +76,6 @@ class KDictData {
     JsonObject itemFind(final String dictName, final String value, final String keyField) {
         final JsonArray dictData = this.item(dictName);
         // Find the `keyField` = value as condition
-        return HUt.elementFind(dictData, keyField, value);
+        return UtBase.elementFind(dictData, keyField, value);
     }
 }

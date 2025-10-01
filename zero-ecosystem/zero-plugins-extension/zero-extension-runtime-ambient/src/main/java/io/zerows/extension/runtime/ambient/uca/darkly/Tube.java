@@ -3,7 +3,7 @@ package io.zerows.extension.runtime.ambient.uca.darkly;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.exception.web._60050Exception501NotSupport;
+import io.zerows.epoch.exception.web._60050Exception501NotSupport;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XActivityRule;
 import io.zerows.extension.runtime.ambient.eon.em.TubeType;

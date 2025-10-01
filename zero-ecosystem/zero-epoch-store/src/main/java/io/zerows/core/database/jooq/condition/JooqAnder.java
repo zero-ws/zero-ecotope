@@ -1,6 +1,6 @@
 package io.zerows.core.database.jooq.condition;
 
-import io.zerows.core.uca.qr.syntax.Ir;
+import io.zerows.epoch.common.uca.qr.syntax.Ir;
 import io.zerows.core.util.Ut;
 import org.jooq.Condition;
 import org.jooq.impl.DSL;

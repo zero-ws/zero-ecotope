@@ -1,7 +1,7 @@
 package io.zerows.common.datamation;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.util.HUt;
+import io.zerows.ams.util.UtBase;
 import io.zerows.specification.atomic.HCopier;
 import io.zerows.specification.atomic.HJson;
 
@@ -34,7 +34,7 @@ public class KDictUse implements Serializable, HJson, HCopier<KDictUse> {
 
     public static ConcurrentMap<String, KDictUse> epsilon(final JsonObject epsilonJson) {
         final ConcurrentMap<String, KDictUse> epsilonMap = new ConcurrentHashMap<>();
-        if (HUt.isNotNil(epsilonJson)) {
+        if (UtBase.isNotNil(epsilonJson)) {
             epsilonJson.fieldNames().stream()
                 .filter(field -> epsilonJson.getValue(field) instanceof JsonObject)
                 .forEach(field -> {
@@ -81,7 +81,7 @@ public class KDictUse implements Serializable, HJson, HCopier<KDictUse> {
 
     @Override
     public JsonObject toJson() {
-        return HUt.serializeJson(this);
+        return UtBase.serializeJson(this);
     }
 
     @Override
@@ -96,7 +96,7 @@ public class KDictUse implements Serializable, HJson, HCopier<KDictUse> {
 
     @Override
     public void fromJson(final JsonObject json) {
-        if (HUt.isNotNil(json)) {
+        if (UtBase.isNotNil(json)) {
             this.source = json.getString("source");
             this.in = json.getString("in");
             this.out = json.getString("out");
@@ -121,6 +121,6 @@ public class KDictUse implements Serializable, HJson, HCopier<KDictUse> {
     }
 
     public boolean isValid() {
-        return HUt.isNotNil(this.in) && HUt.isNotNil(this.out) && HUt.isNotNil(this.source);
+        return UtBase.isNotNil(this.in) && UtBase.isNotNil(this.out) && UtBase.isNotNil(this.source);
     }
 }

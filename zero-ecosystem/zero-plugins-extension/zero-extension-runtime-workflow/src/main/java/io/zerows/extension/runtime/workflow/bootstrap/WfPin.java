@@ -3,7 +3,7 @@ package io.zerows.extension.runtime.workflow.bootstrap;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.fn.HFn;
+import io.zerows.ams.fn.FnBase;
 import io.zerows.core.constant.configure.YmlCore;
 import io.zerows.core.running.boot.KPivot;
 import io.zerows.core.web.model.extension.HExtension;
@@ -98,7 +98,7 @@ public class WfPin implements HRegistry.Mod<Vertx> {
             final List<Future<Boolean>> futures = new ArrayList<>();
             // Deployment for .bpmn files
             workflows.forEach(workflow -> DeployOn.get(workflow).initialize());
-            return HFn.combineT(futures).compose(nil -> Future.succeededFuture(Boolean.TRUE));
+            return FnBase.combineT(futures).compose(nil -> Future.succeededFuture(Boolean.TRUE));
         });
     }
 }

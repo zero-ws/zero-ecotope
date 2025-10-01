@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.common.app.KIntegration;
 import io.zerows.core.database.atom.Database;
-import io.zerows.core.uca.qr.Criteria;
+import io.zerows.epoch.common.uca.qr.Criteria;
 import io.zerows.core.util.Ut;
 import io.zerows.module.metadata.uca.logging.OLog;
 

@@ -2,13 +2,13 @@ package io.zerows.core.util;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.enums.typed.ChangeFlag;
-import io.zerows.ams.util.HUt;
+import io.zerows.ams.util.UtBase;
 import io.zerows.common.datamation.KMapping;
 
 /**
  * @author lang : 2023-06-19
  */
-class _Ai extends HUt {
+class _Ai extends UtBase {
 
     /*
      * Ai analyzing for type based on

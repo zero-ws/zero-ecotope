@@ -4,7 +4,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.VString;
 import io.zerows.epoch.enums.modeling.EmAttribute;
-import io.zerows.ams.util.HUt;
+import io.zerows.ams.util.UtBase;
 
 import java.util.List;
 import java.util.Objects;
@@ -62,7 +62,7 @@ public class KMarkAttribute {
     }
 
     public static KMarkAttribute of(final JsonArray arrayA) {
-        final List<String> literal = HUt.toList(arrayA);
+        final List<String> literal = UtBase.toList(arrayA);
         return new KMarkAttribute(literal);
     }
 

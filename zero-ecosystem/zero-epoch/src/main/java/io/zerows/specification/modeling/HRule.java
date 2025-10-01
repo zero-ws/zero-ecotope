@@ -1,7 +1,7 @@
 package io.zerows.specification.modeling;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.util.HUt;
+import io.zerows.ams.util.UtBase;
 import io.zerows.common.normalize.KRule;
 import io.zerows.common.normalize.KRuleTerm;
 
@@ -16,11 +16,11 @@ import java.util.Set;
  */
 public interface HRule extends Serializable {
     static HRule of(final String content) {
-        return HUt.deserialize(content, KRule.class);
+        return UtBase.deserialize(content, KRule.class);
     }
 
     static HRule of(final JsonObject content) {
-        return HUt.deserialize(content, KRule.class);
+        return UtBase.deserialize(content, KRule.class);
     }
 
     /**

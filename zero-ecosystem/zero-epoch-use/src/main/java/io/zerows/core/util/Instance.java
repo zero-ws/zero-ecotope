@@ -4,7 +4,7 @@ import io.r2mo.function.Fn;
 import io.r2mo.vertx.common.exception.VertxBootException;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.VValue;
-import io.zerows.ams.util.HUt;
+import io.zerows.ams.util.UtBase;
 import io.zerows.core.annotations.Contract;
 import io.zerows.epoch.runtime.exception._40028Exception503DuplicatedImpl;
 import io.zerows.epoch.runtime.exception._60040Exception412ContractField;
@@ -46,7 +46,7 @@ final class Instance {
      * 2) Initialize the `key` string ( class name ) with interfaceCls
      */
     static <T> T plugin(final JsonObject options, final String key, final Class<?> interfaceCls) {
-        if (HUt.isNil(options) || HUt.isNil(key)) {
+        if (UtBase.isNil(options) || UtBase.isNil(key)) {
             /*
              * options or key are either invalid
              */
@@ -54,22 +54,22 @@ final class Instance {
         }
 
         final String pluginClsName = options.getString(key);
-        if (HUt.isNil(pluginClsName)) {
+        if (UtBase.isNil(pluginClsName)) {
             /*
              * class name is "" or null
              */
             return null;
         }
 
-        final Class<?> pluginCls = HUt.clazz(pluginClsName, null);
+        final Class<?> pluginCls = UtBase.clazz(pluginClsName, null);
         if (Objects.isNull(pluginCls)) {
             /*
              * class could not be found.
              */
             return null;
         } else {
-            if (HUt.isImplement(pluginCls, interfaceCls)) {
-                return HUt.instance(pluginCls);
+            if (UtBase.isImplement(pluginCls, interfaceCls)) {
+                return UtBase.instance(pluginCls);
             } else {
                 /*
                  * The class does not implement interface Cls
@@ -136,7 +136,7 @@ final class Instance {
             return Arrays.stream(fields)
                 .filter(field -> fieldType == field.getType() ||          // Direct match
                     fieldType == field.getType().getSuperclass() ||  // Super
-                    HUt.isImplement(field.getType(), fieldType));
+                    UtBase.isImplement(field.getType(), fieldType));
         });
     }
 

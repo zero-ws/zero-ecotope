@@ -1,8 +1,8 @@
 package io.zerows.common.app;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.util.HUt;
-import io.zerows.core.exception.boot._40101Exception500CombineApp;
+import io.zerows.ams.util.UtBase;
+import io.zerows.epoch.exception.boot._40101Exception500CombineApp;
 import io.zerows.epoch.runtime.HMacrocosm;
 import io.zerows.specification.access.app.HApp;
 
@@ -18,11 +18,11 @@ public class KApp implements HApp {
     private final String ns;
 
     public KApp(final String name) {
-        final String nameApp = HUt.envWith(HMacrocosm.Z_APP, name);
+        final String nameApp = UtBase.envWith(HMacrocosm.Z_APP, name);
         // 应用名称
         this.name = nameApp;
         // 名空间
-        this.ns = HUt.nsApp(nameApp);
+        this.ns = UtBase.nsApp(nameApp);
     }
 
     @Override
@@ -32,13 +32,13 @@ public class KApp implements HApp {
 
     @Override
     public void option(final JsonObject configuration, final boolean clear) {
-        if (HUt.isNil(configuration)) {
+        if (UtBase.isNil(configuration)) {
             return;
         }
         if (clear) {
             this.configuration.clear();
         }
-        this.configuration.mergeIn(HUt.valueJObject(configuration), true);
+        this.configuration.mergeIn(UtBase.valueJObject(configuration), true);
     }
 
     @Override
@@ -68,7 +68,7 @@ public class KApp implements HApp {
             return this;
         }
         if (target.equals(this)) {
-            this.option().mergeIn(HUt.valueJObject(target.option()));
+            this.option().mergeIn(UtBase.valueJObject(target.option()));
             return this;
         } else {
             throw new _40101Exception500CombineApp(this.ns, this.name);

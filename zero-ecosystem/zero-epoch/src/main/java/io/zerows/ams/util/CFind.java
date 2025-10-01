@@ -14,7 +14,7 @@ import java.util.function.Predicate;
  */
 class CFind {
     static JsonObject find(final JsonArray array, final String field, final Object value) {
-        return HUt.itJArray(array).filter(item -> {
+        return UtBase.itJArray(array).filter(item -> {
             if (Objects.isNull(value)) {
                 return Objects.isNull(item.getValue(field));
             } else {
@@ -24,9 +24,9 @@ class CFind {
     }
 
     static JsonObject find(final JsonArray array, final JsonObject subsetQ) {
-        return HUt.itJArray(array).filter(item -> {
+        return UtBase.itJArray(array).filter(item -> {
             final Set<String> keys = subsetQ.fieldNames();
-            final JsonObject subset = HUt.elementSubset(item, keys);
+            final JsonObject subset = UtBase.elementSubset(item, keys);
             return subset.equals(subsetQ);
         }).findAny().orElse(new JsonObject());
     }

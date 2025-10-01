@@ -2,7 +2,7 @@ package io.zerows.core.util;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.VValue;
-import io.zerows.ams.util.HUt;
+import io.zerows.ams.util.UtBase;
 
 import java.util.Collection;
 import java.util.List;
@@ -80,8 +80,8 @@ final class CollectionIt {
     static <T> void exec(final JsonObject data, final String flag,
                          final Boolean sec, // S - Start, E - End, C - Contains
                          final BiConsumer<T, String> consumer) {
-        if (HUt.isNil(flag)) {
-            HUt.itJObject(data, consumer);
+        if (UtBase.isNil(flag)) {
+            UtBase.itJObject(data, consumer);
         } else {
             data.stream().filter(entry -> {
                 final String field = entry.getKey();

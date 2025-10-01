@@ -7,7 +7,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.common.normalize.KIdentity;
 import io.zerows.core.constant.KName;
 import io.zerows.core.fn.FnZero;
-import io.zerows.core.spi.modeler.Identifier;
+import io.zerows.epoch.spi.modeler.Identifier;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.atom.data.DataGroup;

@@ -2,7 +2,7 @@ package io.zerows.extension.commerce.rbac.uca.acl.rapid.addon;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
-import io.zerows.core.uca.qr.syntax.Ir;
+import io.zerows.epoch.common.uca.qr.syntax.Ir;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.commerce.rbac.uca.acl.rapid.Dwarf;
 import io.zerows.module.security.zdk.authority.Acl;

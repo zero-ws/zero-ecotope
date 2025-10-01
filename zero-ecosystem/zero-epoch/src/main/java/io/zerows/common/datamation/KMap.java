@@ -3,7 +3,7 @@ package io.zerows.common.datamation;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.enums.EmAop;
-import io.zerows.ams.util.HUt;
+import io.zerows.ams.util.UtBase;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -74,7 +74,7 @@ public class KMap implements Serializable {
     }
 
     public KMap init(final JsonObject input) {
-        if (HUt.isNotNil(input)) {
+        if (UtBase.isNotNil(input)) {
             /*
              * Mix data structure for
              * {
@@ -93,7 +93,7 @@ public class KMap implements Serializable {
                 .forEach(field -> {
                     final JsonObject fieldValue = input.getJsonObject(field);
                     /* Init here */
-                    if (HUt.isNotNil(fieldValue)) {
+                    if (UtBase.isNotNil(fieldValue)) {
                         /* InJson mapping here */
                         final KMapping item = new KMapping(fieldValue);
                         this.mapping.put(field, item);

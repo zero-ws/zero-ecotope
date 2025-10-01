@@ -5,7 +5,7 @@ import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
-import io.zerows.core.exception.web._60050Exception501NotSupport;
+import io.zerows.epoch.exception.web._60050Exception501NotSupport;
 import io.zerows.extension.commerce.rbac.atom.ScOwner;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SResource;
 import io.zerows.unity.Ux;

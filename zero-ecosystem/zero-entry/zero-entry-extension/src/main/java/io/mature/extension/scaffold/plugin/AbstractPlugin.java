@@ -6,7 +6,7 @@ import io.zerows.epoch.enums.typed.ChangeFlag;
 import io.zerows.common.datamation.KFabric;
 import io.zerows.common.datamation.KMapping;
 import io.zerows.core.constant.KName;
-import io.zerows.core.uca.log.Annal;
+import io.zerows.epoch.common.uca.log.Annal;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.exception._80539Exception404FabricIssue;

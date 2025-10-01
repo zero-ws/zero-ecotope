@@ -6,9 +6,9 @@ import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.fn.HFn;
+import io.zerows.ams.fn.FnBase;
 import io.zerows.core.database.jooq.operation.UxJooq;
-import io.zerows.core.uca.log.Annal;
+import io.zerows.epoch.common.uca.log.Annal;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.model.uca.normalize.Oneness;
 import io.zerows.epoch.enums.typed.ChangeFlag;
@@ -193,7 +193,7 @@ class SheetImport {
                 .compose(data -> Ux.future(this.saveEntity(data, table)))
             ));
         /* Set<Tool> handler */
-        return HFn.combineT(futures).compose(result -> {
+        return FnBase.combineT(futures).compose(result -> {
             final Set<T> entitySet = new HashSet<>();
             result.forEach(entitySet::addAll);
             return Ux.future(entitySet);

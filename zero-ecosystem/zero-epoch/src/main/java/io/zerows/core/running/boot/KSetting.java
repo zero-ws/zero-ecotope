@@ -1,6 +1,6 @@
 package io.zerows.core.running.boot;
 
-import io.zerows.core.spi.BootIo;
+import io.zerows.epoch.spi.BootIo;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HSetting;
 import io.zerows.specification.storage.HStore;

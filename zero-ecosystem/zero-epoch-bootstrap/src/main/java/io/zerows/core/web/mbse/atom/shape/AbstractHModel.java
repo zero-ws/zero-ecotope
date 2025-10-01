@@ -1,7 +1,7 @@
 package io.zerows.core.web.mbse.atom.shape;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.util.HUt;
+import io.zerows.ams.util.UtBase;
 import io.zerows.common.normalize.KMarkAtom;
 import io.zerows.common.normalize.KMarkAttribute;
 import io.zerows.specification.access.app.HArk;
@@ -75,7 +75,7 @@ public abstract class AbstractHModel implements HModel {
     public void fromFile(final String file) {
         // Model会关心文件路径，所以这里需要这个操作
         this.jsonFile = file;
-        final JsonObject data = HUt.ioJObject(this.jsonFile);
+        final JsonObject data = UtBase.ioJObject(this.jsonFile);
         this.fromJson(data);
     }
 

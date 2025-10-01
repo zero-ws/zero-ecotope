@@ -9,7 +9,7 @@ import io.zerows.core.annotations.Address;
 import io.zerows.core.annotations.Me;
 import io.zerows.core.annotations.Queue;
 import io.zerows.core.constant.KName;
-import io.zerows.core.uca.qr.Sorter;
+import io.zerows.epoch.common.uca.qr.Sorter;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.commerce.rbac.agent.service.view.RuleStub;
 import io.zerows.extension.commerce.rbac.atom.ScOwner;

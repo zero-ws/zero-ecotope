@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.VString;
-import io.zerows.ams.util.HUt;
+import io.zerows.ams.util.UtBase;
 import io.zerows.common.datamation.KDictUse;
 import io.zerows.extend.jackson.databind.JsonObjectDeserializer;
 import io.zerows.extend.jackson.databind.JsonObjectSerializer;
@@ -162,10 +162,10 @@ public class KIntegration implements HJson, Serializable, HCopier<KIntegration> 
     }
 
     public String getPublicKey() {
-        if (HUt.isNil(this.publicKeyFile)) {
+        if (UtBase.isNil(this.publicKeyFile)) {
             return VString.EMPTY;
         }
-        return HUt.ioString(this.publicKeyFile);
+        return UtBase.ioString(this.publicKeyFile);
     }
 
     public JsonObject getOptions() {
@@ -210,7 +210,7 @@ public class KIntegration implements HJson, Serializable, HCopier<KIntegration> 
 
     @Override
     public JsonObject toJson() {
-        return HUt.serializeJson(this);
+        return UtBase.serializeJson(this);
     }
 
     @Override
@@ -226,14 +226,14 @@ public class KIntegration implements HJson, Serializable, HCopier<KIntegration> 
          * KIntegration Request
          */
         final JsonObject apis = data.getJsonObject("apis");
-        if (HUt.isNotNil(apis)) {
-            HUt.<JsonObject>itJObject(apis, (json, field) -> {
-                final KIntegrationApi request = HUt.deserialize(json, KIntegrationApi.class);
+        if (UtBase.isNotNil(apis)) {
+            UtBase.<JsonObject>itJObject(apis, (json, field) -> {
+                final KIntegrationApi request = UtBase.deserialize(json, KIntegrationApi.class);
                 this.apis.put(field, request);
             });
         }
         final JsonObject options = data.getJsonObject("options");
-        if (HUt.isNotNil(options)) {
+        if (UtBase.isNotNil(options)) {
             this.options = options.copy();
         }
     }

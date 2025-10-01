@@ -3,7 +3,7 @@ package io.zerows.extension.mbse.basement.uca.phantom;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
-import io.zerows.core.uca.log.Annal;
+import io.zerows.epoch.common.uca.log.Annal;
 import io.zerows.unity.Ux;
 
 import java.util.function.Function;

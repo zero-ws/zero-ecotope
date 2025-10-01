@@ -15,7 +15,7 @@ class CSubset {
     // 子集
     static JsonArray subset(final JsonArray array, final Predicate<JsonObject> matchFn) {
         final JsonArray subset = new JsonArray();
-        HUt.itJArray(array).filter(matchFn).forEach(subset::add);
+        UtBase.itJArray(array).filter(matchFn).forEach(subset::add);
         return subset;
     }
 

@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.VValue;
 import io.zerows.core.constant.KName;
-import io.zerows.core.uca.qr.syntax.Ir;
+import io.zerows.epoch.common.uca.qr.syntax.Ir;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.SViewDao;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SView;

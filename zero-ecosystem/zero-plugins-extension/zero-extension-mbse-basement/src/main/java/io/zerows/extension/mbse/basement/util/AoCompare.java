@@ -6,7 +6,7 @@ import io.zerows.epoch.constant.VValue;
 import io.zerows.epoch.enums.typed.ChangeFlag;
 import io.zerows.common.program.Kv;
 import io.zerows.core.constant.KName;
-import io.zerows.core.uca.compare.Vs;
+import io.zerows.epoch.common.uca.compare.Vs;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.module.domain.atom.commune.dynamic.Apt;

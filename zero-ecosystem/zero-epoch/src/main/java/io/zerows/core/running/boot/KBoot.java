@@ -3,7 +3,7 @@ package io.zerows.core.running.boot;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.enums.EmApp;
 import io.zerows.epoch.constant.spec.VBoot;
-import io.zerows.ams.util.HUt;
+import io.zerows.ams.util.UtBase;
 import io.zerows.specification.configuration.HBoot;
 import io.zerows.specification.configuration.HEnergy;
 
@@ -19,7 +19,7 @@ public class KBoot implements HBoot {
     private EmApp.Type type;
 
     private KBoot(final JsonObject bootJ) {
-        this.launcherCls = HUt.valueC(bootJ, VBoot.LAUNCHER);
+        this.launcherCls = UtBase.valueC(bootJ, VBoot.LAUNCHER);
         this.energy = KEnergy.of(bootJ);
     }
 

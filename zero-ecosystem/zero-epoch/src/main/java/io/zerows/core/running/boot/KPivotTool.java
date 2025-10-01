@@ -1,8 +1,8 @@
 package io.zerows.core.running.boot;
 
 import io.vertx.core.Future;
-import io.zerows.ams.util.HUt;
-import io.zerows.core.exception.boot._40104Exception409RegistryDuplicated;
+import io.zerows.ams.util.UtBase;
+import io.zerows.epoch.exception.boot._40104Exception409RegistryDuplicated;
 import io.zerows.specification.access.app.HAmbient;
 import io.zerows.specification.access.app.HArk;
 import io.zerows.specification.vital.HOI;
@@ -45,7 +45,7 @@ class KPivotTool {
                 .collect(Collectors.toList());
 
             // 2. 再做二次查找到唯一记录
-            final HArk found = HUt.elementFind(ownerList,
+            final HArk found = UtBase.elementFind(ownerList,
                 item -> source.app().equals(item.app()));
             if (Objects.nonNull(found)) {
                 source.apply(found);

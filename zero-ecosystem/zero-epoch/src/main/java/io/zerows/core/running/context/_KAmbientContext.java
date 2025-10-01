@@ -3,8 +3,8 @@ package io.zerows.core.running.context;
 import io.r2mo.typed.cc.Cc;
 import io.zerows.epoch.constant.VValue;
 import io.zerows.epoch.enums.EmApp;
-import io.zerows.ams.util.HUt;
-import io.zerows.core.exception.boot._40103Exception500ConnectAmbient;
+import io.zerows.ams.util.UtBase;
+import io.zerows.epoch.exception.boot._40103Exception500ConnectAmbient;
 import io.zerows.specification.access.HBelong;
 import io.zerows.specification.access.app.HArk;
 import io.zerows.specification.access.cloud.HFrontier;
@@ -43,7 +43,7 @@ class _KAmbientContext {
     }
 
     EmApp.Mode registry(final HArk ark) {
-        final String cacheKey = HUt.keyApp(ark);
+        final String cacheKey = UtBase.keyApp(ark);
         CC_ARK.get().put(cacheKey, ark);
         // 注册结束后编织应用的上下文
         // 环境中应用程序超过 1 个时才执行其他判断

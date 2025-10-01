@@ -9,7 +9,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.impl.Origin;
 import io.zerows.core.constant.KWeb;
 import io.zerows.core.constant.configure.YmlCore;
-import io.zerows.core.exception.web._60050Exception501NotSupport;
+import io.zerows.epoch.exception.web._60050Exception501NotSupport;
 import io.zerows.core.util.Ut;
 import io.zerows.extend.jackson.databind.JsonArrayDeserializer;
 import io.zerows.extend.jackson.databind.JsonArraySerializer;

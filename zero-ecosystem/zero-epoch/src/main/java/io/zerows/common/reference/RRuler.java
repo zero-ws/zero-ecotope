@@ -2,7 +2,7 @@ package io.zerows.common.reference;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.util.HUt;
+import io.zerows.ams.util.UtBase;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -18,14 +18,14 @@ public final class RRuler {
 
     public static JsonArray required(final JsonArray source, final RRule rule) {
         /* required fields */
-        return rulerAnd(source, rule.getRequired(), value -> HUt.isNotNil(value.toString()));
+        return rulerAnd(source, rule.getRequired(), value -> UtBase.isNotNil(value.toString()));
     }
 
     public static JsonArray duplicated(final JsonArray source, final RRule rule) {
         /* unique field */
         final Set<JsonObject> added = new HashSet<>();
         return ruler(source, rule.getUnique(), json -> {
-            final JsonObject uniqueJson = HUt.elementSubset(json, rule.getUnique());
+            final JsonObject uniqueJson = UtBase.elementSubset(json, rule.getUnique());
             if (added.contains(uniqueJson)) {
                 return false;
             } else {
@@ -63,7 +63,7 @@ public final class RRuler {
         } else {
             /* Code Logical */
             final JsonArray processed = new JsonArray();
-            HUt.itJArray(source).filter(fnFilter).forEach(processed::add);
+            UtBase.itJArray(source).filter(fnFilter).forEach(processed::add);
             return processed;
         }
     }

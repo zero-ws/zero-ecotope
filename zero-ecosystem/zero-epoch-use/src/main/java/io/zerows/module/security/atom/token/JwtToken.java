@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 import io.zerows.core.constant.KName;
 import io.zerows.core.constant.em.EmSecure;
-import io.zerows.core.exception.web._60050Exception501NotSupport;
+import io.zerows.epoch.exception.web._60050Exception501NotSupport;
 import io.zerows.core.util.Ut;
 import io.zerows.module.security.atom.AegisItem;
 import io.zerows.module.security.zdk.Lee;

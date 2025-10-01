@@ -7,7 +7,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 import io.zerows.common.program.KRef;
 import io.zerows.core.constant.KName;
-import io.zerows.core.uca.log.Annal;
+import io.zerows.epoch.common.uca.log.Annal;
 import io.zerows.core.util.Ut;
 import io.zerows.core.web.cache.Rapid;
 import io.zerows.extension.commerce.rbac.atom.ScOwner;

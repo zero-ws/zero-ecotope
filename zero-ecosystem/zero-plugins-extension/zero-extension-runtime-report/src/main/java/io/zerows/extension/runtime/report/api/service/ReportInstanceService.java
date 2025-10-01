@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.fn.HFn;
+import io.zerows.ams.fn.FnBase;
 import io.zerows.common.program.Kv;
 import io.zerows.core.constant.KName;
 import io.zerows.core.fn.FnZero;
@@ -176,7 +176,7 @@ public class ReportInstanceService implements ReportInstanceStub {
             final KpFeature feature = generation.featureGlobal(featureName);
             futures.add(input.prepare(params, configureJ, feature));
         });
-        return HFn.combineT(futures).compose(processed -> {
+        return FnBase.combineT(futures).compose(processed -> {
             final ConcurrentMap<String, Object> paramMap = new ConcurrentHashMap<>();
             processed.forEach(kv -> {
                 if (paramMap.containsKey(kv.key())) {

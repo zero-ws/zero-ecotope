@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.util.HUt;
+import io.zerows.ams.util.UtBase;
 import io.zerows.extend.jackson.databind.JsonObjectDeserializer;
 import io.zerows.extend.jackson.databind.JsonObjectSerializer;
 
@@ -55,8 +55,8 @@ public class KIntegrationApi implements Serializable {
 
     public void setExecutor(final String endpoint, final String expr) {
         this.executor = params -> {
-            final JsonObject normalized = HUt.valueJObject(params);
-            final String result = HUt.fromExpression(expr, normalized);
+            final JsonObject normalized = UtBase.valueJObject(params);
+            final String result = UtBase.fromExpression(expr, normalized);
             return endpoint + result;
         };
     }

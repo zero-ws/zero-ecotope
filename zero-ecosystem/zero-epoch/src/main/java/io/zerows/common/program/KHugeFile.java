@@ -1,7 +1,7 @@
 package io.zerows.common.program;
 
 import io.r2mo.function.Fn;
-import io.zerows.ams.util.HUt;
+import io.zerows.ams.util.UtBase;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -29,7 +29,7 @@ public class KHugeFile {
 
     public KHugeFile(final String fileName, final int byteBufferSize) {
         Fn.jvmAt(() -> {
-            final File file = HUt.ioFile(fileName);
+            final File file = UtBase.ioFile(fileName);
             this.inputStream = new FileInputStream(file);
             this.fileChannel = this.inputStream.getChannel();
             this.fileSize = this.fileChannel.size();

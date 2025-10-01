@@ -1,7 +1,7 @@
 package io.zerows.common.reference;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.ams.util.HUt;
+import io.zerows.ams.util.UtBase;
 
 import java.io.Serializable;
 
@@ -42,14 +42,14 @@ public class RReference implements Serializable {
     }
 
     public RReference sourceReference(final JsonObject sourceReference) {
-        final JsonObject valued = HUt.valueJObject(sourceReference);
+        final JsonObject valued = UtBase.valueJObject(sourceReference);
         this.sourceReference.mergeIn(valued, true);
         return this;
     }
 
     public RReference sourceReference(final String sourceReference) {
-        final JsonObject config = HUt.toJObject(sourceReference);
-        if (HUt.isNotNil(config)) {
+        final JsonObject config = UtBase.toJObject(sourceReference);
+        if (UtBase.isNotNil(config)) {
             this.sourceReference(config);
         }
         return this;
@@ -60,7 +60,7 @@ public class RReference implements Serializable {
     }
 
     public boolean isReference() {
-        return HUt.isNotNil(this.sourceReference);
+        return UtBase.isNotNil(this.sourceReference);
     }
 
     @Override

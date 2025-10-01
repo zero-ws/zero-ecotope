@@ -2,14 +2,14 @@ package io.zerows.core.fn;
 
 import io.vertx.core.Future;
 import io.vertx.core.Promise;
-import io.zerows.ams.fn.HFn;
+import io.zerows.ams.fn.FnBase;
 
 import java.util.function.Consumer;
 
 /**
  * @author lang : 2023/4/27
  */
-class _Atomic extends HFn {
+class _Atomic extends FnBase {
     protected _Atomic() {
     }
 

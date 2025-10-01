@@ -4,7 +4,7 @@ import io.r2mo.function.Fn;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.core.annotations.Address;
 import io.zerows.core.annotations.Ipc;
-import io.zerows.core.uca.log.Annal;
+import io.zerows.epoch.common.uca.log.Annal;
 import io.zerows.core.web.io.zdk.Aim;
 import io.zerows.core.web.model.atom.Event;
 import io.zerows.epoch.container.exception._40042Exception500ChannelMulti;

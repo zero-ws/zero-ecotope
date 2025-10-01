@@ -8,7 +8,7 @@ import io.zerows.core.constant.KName;
 import io.zerows.core.constant.KPlugin;
 import io.zerows.core.constant.configure.YmlCore;
 import io.zerows.core.running.boot.KSetting;
-import io.zerows.core.spi.boot.HEquip;
+import io.zerows.epoch.spi.boot.HEquip;
 import io.zerows.core.util.Ut;
 import io.zerows.module.metadata.zdk.AbstractAmbiguity;
 import io.zerows.specification.configuration.HConfig;

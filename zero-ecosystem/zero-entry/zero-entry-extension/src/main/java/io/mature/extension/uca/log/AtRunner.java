@@ -6,7 +6,7 @@ import io.zerows.epoch.enums.modeling.EmAttribute;
 import io.zerows.epoch.enums.typed.ChangeFlag;
 import io.zerows.core.constant.KName;
 import io.zerows.core.fn.FnZero;
-import io.zerows.core.uca.compare.Vs;
+import io.zerows.epoch.common.uca.compare.Vs;
 import io.zerows.core.util.Ut;
 import io.zerows.extension.mbse.basement.atom.Model;
 import io.zerows.extension.mbse.basement.atom.Schema;

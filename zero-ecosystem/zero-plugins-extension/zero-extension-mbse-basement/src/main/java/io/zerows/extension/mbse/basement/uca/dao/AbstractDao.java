@@ -2,8 +2,8 @@ package io.zerows.extension.mbse.basement.uca.dao;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.core.uca.log.Annal;
-import io.zerows.core.uca.qr.Criteria;
+import io.zerows.epoch.common.uca.log.Annal;
+import io.zerows.epoch.common.uca.qr.Criteria;
 import io.zerows.extension.mbse.basement.uca.dao.internal.*;
 import io.zerows.extension.mbse.basement.uca.jdbc.AoConnection;
 import io.zerows.extension.mbse.basement.uca.metadata.AoSentence;

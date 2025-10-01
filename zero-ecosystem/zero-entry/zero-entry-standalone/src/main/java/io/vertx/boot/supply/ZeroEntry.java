@@ -2,7 +2,7 @@ package io.vertx.boot.supply;
 
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
-import io.zerows.ams.fn.HFn;
+import io.zerows.ams.fn.FnBase;
 import io.zerows.core.constant.configure.YmlCore;
 import io.zerows.core.web.container.store.BootStore;
 import io.zerows.module.cloud.util.Ho;
@@ -26,7 +26,7 @@ class ZeroEntry {
              * because the return value of "io.vertx.mod.ambient.init.AtPin.getConfig()" is null
              */
             // 2. 是否执行扩展，调用 FnZero.passion 带顺序
-            .compose(arkSet -> whenExtension(config, () -> HFn.passion(Boolean.TRUE,
+            .compose(arkSet -> whenExtension(config, () -> FnBase.passion(Boolean.TRUE,
                 // 2.1. 扩展：配置
                 done -> ZeroEnroll.registryAmbient(vertx, config, arkSet)
             )))
@@ -42,7 +42,7 @@ class ZeroEntry {
 
 
             // 2. 是否执行扩展，调用 FnZero.passion 带顺序
-            .compose(arkSet -> whenExtension(config, () -> HFn.passion(Boolean.TRUE,
+            .compose(arkSet -> whenExtension(config, () -> FnBase.passion(Boolean.TRUE,
                 // 2.1. 扩展：配置
                 done -> ZeroEnroll.registryAmbient(vertx, config, arkSet),
                 // 2.2. 扩展：初始化

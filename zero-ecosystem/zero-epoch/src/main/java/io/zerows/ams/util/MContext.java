@@ -24,7 +24,7 @@ class MContext {
 
     static String keyApp(final HArk ark) {
         Objects.requireNonNull(ark);
-        final String ownerId = HUt.keyOwner(Optional.ofNullable(ark.owner())
+        final String ownerId = UtBase.keyOwner(Optional.ofNullable(ark.owner())
             .map(HOI::owner).orElse(VValue.DEFAULT));
         final HApp app = ark.app();
         Objects.requireNonNull(app);
@@ -32,8 +32,8 @@ class MContext {
     }
 
     static String keyOwner(final String id) {
-        String valueOwner = HUt.envWith(HMacrocosm.Z_TENANT, id);
-        if (HUt.isNil(valueOwner)) {
+        String valueOwner = UtBase.envWith(HMacrocosm.Z_TENANT, id);
+        if (UtBase.isNil(valueOwner)) {
             valueOwner = VValue.DEFAULT;
         }
         return valueOwner;
