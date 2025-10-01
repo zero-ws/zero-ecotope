@@ -1,7 +1,7 @@
 package io.zerows.module.metadata.cache;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.epoch.annotation.Memory;
+import io.zerows.epoch.annotations.monitor.Memory;
 
 /**
  * @author lang : 2024-04-17

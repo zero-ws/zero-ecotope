@@ -2,7 +2,7 @@ package io.zerows.epoch.support;
 
 import io.r2mo.function.Fn;
 import io.zerows.epoch.common.log.LogUtil;
-import io.zerows.epoch.annotation.ChatGPT;
+import io.zerows.epoch.annotations.monitor.ChatGPT;
 import io.zerows.epoch.constant.VValue;
 
 import java.io.*;

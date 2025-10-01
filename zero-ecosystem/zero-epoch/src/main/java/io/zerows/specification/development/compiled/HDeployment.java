@@ -1,7 +1,7 @@
 package io.zerows.specification.development.compiled;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.annotation.reference.One2One;
+import io.zerows.epoch.annotations.monitor.One2One;
 import io.zerows.specification.access.app.HArk;
 import io.zerows.specification.access.app.HBackend;
 import io.zerows.specification.modeling.element.HDescriptor;

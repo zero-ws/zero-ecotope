@@ -1,6 +1,6 @@
 package io.zerows.specification.modeling;
 
-import io.zerows.epoch.annotation.reference.One2One;
+import io.zerows.epoch.annotations.monitor.One2One;
 import io.zerows.specification.modeling.element.HClassifier;
 import io.zerows.specification.modeling.element.HField;
 import io.zerows.specification.modeling.element.HKey;

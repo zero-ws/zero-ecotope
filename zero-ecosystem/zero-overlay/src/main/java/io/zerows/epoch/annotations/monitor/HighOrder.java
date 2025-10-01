@@ -1,4 +1,4 @@
-package io.zerows.epoch.annotation;
+package io.zerows.epoch.annotations.monitor;
 
 import java.lang.annotation.*;
 

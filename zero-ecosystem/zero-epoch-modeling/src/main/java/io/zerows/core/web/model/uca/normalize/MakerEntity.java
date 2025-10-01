@@ -4,7 +4,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.core.constant.KName;
 import io.zerows.core.util.Ut;
-import io.zerows.epoch.annotation.ChatGPT;
+import io.zerows.epoch.annotations.monitor.ChatGPT;
 import io.zerows.module.metadata.atom.configuration.modeling.MDConnect;
 import io.zerows.module.metadata.atom.configuration.modeling.MDEntity;
 import org.osgi.framework.Bundle;

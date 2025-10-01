@@ -2,7 +2,7 @@ package io.zerows.module.cloud.cache;
 
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.annotation.Memory;
+import io.zerows.epoch.annotations.monitor.Memory;
 import io.zerows.module.cloud.atom.AeonConfig;
 import io.zerows.module.metadata.cache.CStore;
 import io.zerows.specification.development.ncloud.HAeon;

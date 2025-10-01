@@ -1,6 +1,6 @@
 package io.zerows.core.constant.configure;
 
-import io.zerows.core.annotations.infix.*;
+import io.zerows.core.annotations.impl.*;
 
 /**
  * @author lang : 2023-05-29

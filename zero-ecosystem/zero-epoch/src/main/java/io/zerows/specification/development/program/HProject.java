@@ -1,6 +1,6 @@
 package io.zerows.specification.development.program;
 
-import io.zerows.epoch.annotation.reference.One2One;
+import io.zerows.epoch.annotations.monitor.One2One;
 import io.zerows.specification.development.compiled.HLibrary;
 import io.zerows.specification.security.identity.HOwner;
 

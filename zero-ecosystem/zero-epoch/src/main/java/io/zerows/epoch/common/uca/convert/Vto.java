@@ -1,7 +1,7 @@
 package io.zerows.epoch.common.uca.convert;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.epoch.annotation.Memory;
+import io.zerows.epoch.annotations.monitor.Memory;
 
 /*
  * Vto date here

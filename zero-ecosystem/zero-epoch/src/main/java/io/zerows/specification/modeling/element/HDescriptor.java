@@ -1,6 +1,6 @@
 package io.zerows.specification.modeling.element;
 
-import io.zerows.epoch.annotation.reference.One2One;
+import io.zerows.epoch.annotations.monitor.One2One;
 import io.zerows.specification.modeling.norm.HNs;
 import io.zerows.specification.storage.HStore;
 

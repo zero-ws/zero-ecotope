@@ -1,7 +1,7 @@
 package io.zerows.core.constant;
 
-import io.zerows.core.annotations.infix.*;
 import io.zerows.core.constant.configure.YmlCore;
+import io.zerows.core.annotations.impl.*;
 import jakarta.inject.Inject;
 
 import java.lang.annotation.Annotation;

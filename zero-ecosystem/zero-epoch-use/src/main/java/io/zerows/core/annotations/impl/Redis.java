@@ -1,4 +1,4 @@
-package io.zerows.core.annotations.infix;
+package io.zerows.core.annotations.impl;
 
 import java.lang.annotation.*;
 

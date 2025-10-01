@@ -2,7 +2,7 @@ package io.zerows.epoch.common.uca.crypto;
 
 import io.r2mo.typed.cc.Cc;
 import io.zerows.epoch.common.shared.program.KPair;
-import io.zerows.epoch.annotation.Memory;
+import io.zerows.epoch.annotations.monitor.Memory;
 
 /**
  * Encrypt / Decrypt Interface for

@@ -1,7 +1,7 @@
 package io.zerows.extension.runtime.crud.uca.destine;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.epoch.annotation.Memory;
+import io.zerows.epoch.annotations.monitor.Memory;
 import io.zerows.epoch.enums.modeling.EmModel;
 
 import java.util.concurrent.ConcurrentHashMap;
