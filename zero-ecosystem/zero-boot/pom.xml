@@ -9,13 +9,15 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>zero-entry</artifactId>
-    <name>(POM) 📚️ - Zero::Entry</name>
+    <artifactId>zero-boot</artifactId>
+    <name>(POM) 📚️ - Zero::Boot</name>
     <packaging>pom</packaging>
     <modules>
-        <module>zero-entry-extension</module>
-        <module>zero-entry-import</module>
-        <module>zero-entry-mini</module>
-        <module>zero-entry-standalone</module>
+        <!-- 核心模块启动器 -->
+        <module>zero-boot-mini-actor</module>
+        <!-- 扩展模块启动器 -->
+        <module>zero-boot-entire-actor</module>
+        <!-- 扩展模块启动（继承模式）-->
+        <module>zero-boot-entire-import</module>
     </modules>
 </project>

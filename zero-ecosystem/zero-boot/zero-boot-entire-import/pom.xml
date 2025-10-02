@@ -3,14 +3,14 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>zero-entry</artifactId>
+        <artifactId>zero-boot</artifactId>
         <groupId>io.zerows</groupId>
         <version>1.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>zero-entry-import</artifactId>
+    <artifactId>zero-boot-entire-import</artifactId>
     <packaging>pom</packaging>
-    <name>(POM) 🫆 - Zero::Entry::Import</name>
+    <name>(POM) 🫆 - Zero::Boot::App Import</name>
     <properties>
         <!-- ====================== Java ======================================== -->
         <encoding>UTF-8</encoding>
@@ -24,7 +24,7 @@
         <!-- Switch to Up -->
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-entry-standalone</artifactId>
+            <artifactId>zero-boot-mini-actor</artifactId>
         </dependency>
     </dependencies>
     <dependencyManagement>
@@ -37,16 +37,15 @@
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
-
             <!-- Business Scaffold -->
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-entry-extension</artifactId>
+                <artifactId>zero-boot-entire-actor</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-entry-mini</artifactId>
+                <artifactId>zero-boot-mini-actor</artifactId>
                 <version>${zero.version}</version>
             </dependency>
         </dependencies>

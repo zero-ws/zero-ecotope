@@ -3,13 +3,13 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>zero-entry</artifactId>
+        <artifactId>zero-boot</artifactId>
         <groupId>io.zerows</groupId>
         <version>1.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>zero-entry-standalone</artifactId>
-    <name>✅️ - Zero::Entry::Facade</name>
+    <artifactId>zero-boot-mini-actor</artifactId>
+    <name>✅️ - Zero::Boot::Mini Actor</name>
     <dependencies>
         <dependency>
             <groupId>io.zerows</groupId>
@@ -28,7 +28,7 @@
         <!-- Zero Web Container -->
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-epoch-bootstrap</artifactId>
+            <artifactId>zero-epoch-cosmic</artifactId>
         </dependency>
 
 

@@ -19,7 +19,7 @@
         <module>zero-epoch-focus</module>
         <!-- 工具层 -->
         <module>zero-epoch-execution</module>
-        <module>zero-epoch-bootstrap</module>
+        <module>zero-epoch-cosmic</module>
         <!-- 测试 -->
         <module>zero-epoch-adhoc</module>
     </modules>

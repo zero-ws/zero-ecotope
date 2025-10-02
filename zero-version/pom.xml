@@ -16,7 +16,9 @@
     </properties>
     <dependencyManagement>
         <dependencies>
-            <!-- Import Stack -->
+            <!--
+            版本管理专用 Stack
+            -->
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>rachel-momo-stack</artifactId>
@@ -68,7 +70,7 @@
             <!-- Zero Web Container -->
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-epoch-bootstrap</artifactId>
+                <artifactId>zero-epoch-cosmic</artifactId>
                 <version>${zero.version}</version>
             </dependency>
 
@@ -76,7 +78,7 @@
             <!-- ================= 入口 ================== -->
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-entry-standalone</artifactId>
+                <artifactId>zero-boot-mini-actor</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <!-- ================= 静态插件 ================== -->

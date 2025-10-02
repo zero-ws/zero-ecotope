@@ -18,7 +18,7 @@
         <module>zero-plugins-equip</module>
         <module>zero-plugins-extension</module>
         <!-- 入口 -->
-        <module>zero-entry</module>
+        <module>zero-boot</module>
     </modules>
     <dependencyManagement>
         <dependencies>

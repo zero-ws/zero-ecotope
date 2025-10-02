@@ -24,7 +24,7 @@
             <exclusions>
                 <exclusion>
                     <groupId>io.zerows</groupId>
-                    <artifactId>zero-entry-standalone</artifactId>
+                    <artifactId>zero-boot-mini-actor</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>

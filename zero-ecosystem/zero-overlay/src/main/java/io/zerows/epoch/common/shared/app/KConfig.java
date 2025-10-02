@@ -1,49 +1,92 @@
 package io.zerows.epoch.common.shared.app;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.common.shared.boot.KSetting;
-import io.zerows.epoch.support.UtBase;
 import io.zerows.specification.configuration.HConfig;
+import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
- * 「常用配置」
- * 读取配置专用，常用配置可以用来直接生成 {@link KSetting}
+ * 「常用配置」KConfig
  *
- * @author lang : 2023-05-30
+ * <p>用于读取与承载“最小配置集合”的轻量配置器，实现 {@link HConfig} 接口。</p>
+ *
+ * <h2>🧩 设计要点</h2>
+ * <ul>
+ *   <li>🔧 <b>预处理器</b>：通过 {@link #pre} 指定一个预处理类（通常是某个配置预处理/校验/转换器的 Class）。</li>
+ *   <li>📦 <b>配置容器</b>：内部使用 Vert.x 的 {@link JsonObject} 存放键值对（见 {@link #options}）。</li>
+ *   <li>🔁 <b>链式调用</b>：配合 {@link Accessors#fluent()} 提供流式 API（如：{@code cfg.put("k","v").put("a",1)}）。</li>
+ * </ul>
+ *
+ * <h2>⚠️ 并发与线程模型</h2>
+ * <ul>
+ *   <li>🧵 <b>线程安全</b>：本类未做同步控制；在 <i>单线程/同一事件循环</i> 中读取/写入更安全。</li>
+ *   <li>🚦 <b>跨线程访问</b>：若需跨线程并发访问，请自行在外层加锁或在构建完成后改为只读使用。</li>
+ * </ul>
+ *
+ * <h2>💡 典型用法</h2>
+ * <pre>{@code
+ * // 1) 构建配置并设置预处理器
+ * KConfig cfg = new KConfig()
+ *     .pre(MyPreprocessor.class)
+ *     .put("endpoint", "https://api.example.com")
+ *     .put("timeoutMs", 3000);
+ *
+ * // 2) 读取配置
+ * String endpoint = cfg.get("endpoint");
+ * Integer timeout = cfg.get("timeoutMs");
+ *
+ * // 3) 获取底层 JsonObject 以便与 Vert.x 生态对接
+ * JsonObject raw = cfg.options();
+ * }</pre>
+ *
+ * @author lang
+ * @see HConfig
+ * @since 2023-05-30
  */
+@Data
+@Accessors(fluent = true)
 public class KConfig implements HConfig {
 
+    /**
+     * 📦 配置项容器。
+     * <p>使用 Vert.x 的 {@link JsonObject} 管理键值对，便于与 Vert.x 生态统一。</p>
+     * <p><b>注意：</b>默认可变，若需只读可在外层封装快照或拷贝。</p>
+     */
     private final JsonObject options = new JsonObject();
-    private Class<?> preCls;
 
-    @Override
-    public JsonObject options() {
-        return this.options;
-    }
+    /**
+     * 🧯 预处理器类型（可选）。
+     * <p>用于在正式使用前进行：参数校验、默认值填充、结构规范化等。</p>
+     * <p>约定：该类通常应为“无参构造 + 可静态调用”的工具类，或实现既定的预处理接口。</p>
+     */
+    private Class<?> pre;
 
-    @Override
-    public HConfig options(final JsonObject options) {
-        this.options.mergeIn(UtBase.valueJObject(options));
-        return this;
-    }
-
-    @Override
-    public Class<?> pre() {
-        return this.preCls;
-    }
-
-    @Override
-    public HConfig pre(final Class<?> preCls) {
-        this.preCls = preCls;
-        return this;
-    }
-
+    /**
+     * ➕ 写入/覆盖配置项。
+     *
+     * <p>支持链式调用：{@code config.put("k1", v1).put("k2", v2)}</p>
+     *
+     * @param field 配置字段名（键） 🔑
+     * @param value 配置值（可为任意可被 {@link JsonObject} 支持的类型） 🧱
+     *
+     * @return 当前 {@code HConfig} 实例（便于链式调用） 🔗
+     */
     @Override
     public HConfig put(final String field, final Object value) {
         this.options.put(field, value);
         return this;
     }
 
+    /**
+     * 🔍 读取配置项。
+     *
+     * <p>调用方需自行确保类型正确，建议在调用处进行必要的类型断言或转换。</p>
+     *
+     * @param field 配置字段名（键） 🔑
+     * @param <T>   期望返回的类型参数
+     *
+     * @return 配置值；若键不存在则返回 {@code null}（与 {@link JsonObject#getValue(String)} 行为一致） 🫥
+     */
     @Override
     @SuppressWarnings("unchecked")
     public <T> T get(final String field) {

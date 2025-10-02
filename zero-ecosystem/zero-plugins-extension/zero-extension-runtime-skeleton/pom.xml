@@ -15,7 +15,7 @@
         <!-- 模块化改造 -->
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-entry-standalone</artifactId>
+            <artifactId>zero-boot-mini-actor</artifactId>
         </dependency>
         <!-- 插件 -->
         <dependency>
