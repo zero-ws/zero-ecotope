@@ -1,8 +1,8 @@
 package io.zerows.epoch.component.normalize;
 
 import io.zerows.epoch.constant.VPath;
-import io.zerows.epoch.corpus.configuration.module.MDConfiguration;
-import io.zerows.epoch.corpus.configuration.module.MDId;
+import io.zerows.epoch.configuration.module.MDConfiguration;
+import io.zerows.epoch.configuration.module.MDId;
 import io.zerows.epoch.program.Ut;
 import org.osgi.framework.Bundle;
 

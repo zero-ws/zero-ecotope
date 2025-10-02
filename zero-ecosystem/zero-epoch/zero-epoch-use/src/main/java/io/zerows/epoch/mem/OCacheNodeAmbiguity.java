@@ -1,7 +1,7 @@
 package io.zerows.epoch.mem;
 
-import io.zerows.epoch.corpus.configuration.NodeNetwork;
-import io.zerows.epoch.corpus.configuration.NodeVertx;
+import io.zerows.epoch.configuration.NodeNetwork;
+import io.zerows.epoch.configuration.NodeVertx;
 import io.zerows.epoch.sdk.metadata.AbstractAmbiguity;
 import org.osgi.framework.Bundle;
 

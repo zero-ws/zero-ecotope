@@ -2,7 +2,7 @@ package io.zerows.epoch.mem.module;
 
 import io.github.jklingsporn.vertx.jooq.shared.internal.AbstractVertxDAO;
 import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
-import io.zerows.epoch.corpus.configuration.module.modeling.MDMeta;
+import io.zerows.epoch.configuration.module.MDMeta;
 import io.zerows.epoch.mem.OCacheClass;
 import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.sdk.metadata.AbstractAmbiguity;

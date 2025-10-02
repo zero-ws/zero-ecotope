@@ -1,8 +1,8 @@
 package io.zerows.epoch.osgi.configuration.service;
 
 import io.zerows.epoch.common.log.OLog;
-import io.zerows.epoch.corpus.configuration.NodeNetwork;
-import io.zerows.epoch.corpus.configuration.NodeVertx;
+import io.zerows.epoch.configuration.NodeNetwork;
+import io.zerows.epoch.configuration.NodeVertx;
 import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.sdk.metadata.service.ServiceContext;
 

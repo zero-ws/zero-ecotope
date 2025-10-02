@@ -5,8 +5,8 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.component.environment.MatureOn;
-import io.zerows.epoch.component.transformer.HttpServerTransformer;
-import io.zerows.epoch.corpus.configuration.NodeVertx;
+import io.zerows.epoch.component.transformer.TransformerHttpServer;
+import io.zerows.epoch.configuration.NodeVertx;
 import io.zerows.epoch.enums.app.ServerType;
 import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.sdk.options.Processor;
@@ -19,13 +19,13 @@ class ProcessorOfHttp implements Processor<NodeVertx, JsonArray> {
     private final transient Transformer<HttpServerOptions> httpTransformer;
 
     ProcessorOfHttp() {
-        this.httpTransformer = Ut.singleton(HttpServerTransformer.class);
+        this.httpTransformer = Ut.singleton(TransformerHttpServer.class);
     }
 
     @Override
     public void makeup(final NodeVertx target, final JsonArray setting) {
         // 此处保证所有的配置都为同一种类型的服务器配置
-        this.logger().debug(INFO.V_BEFORE, KName.SERVER, this.typeOfHttp(), setting);
+        this.logger().debug(ProcessorMessage.V_BEFORE, KName.SERVER, this.typeOfHttp(), setting);
 
 
         // 验证已通过，直接构造 HttpServerOptions
@@ -47,7 +47,7 @@ class ProcessorOfHttp implements Processor<NodeVertx, JsonArray> {
             target.optionServer(serverName, this.typeOfHttp(), options);
         });
         if (Ut.isNotNil(setting)) {
-            this.logger().info(INFO.V_AFTER, KName.SERVER, this.typeOfHttp(), setting);
+            this.logger().info(ProcessorMessage.V_AFTER, KName.SERVER, this.typeOfHttp(), setting);
         }
     }
 

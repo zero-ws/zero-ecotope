@@ -2,7 +2,7 @@ package io.zerows.extension.runtime.workflow.uca.deployment;
 
 import io.vertx.core.Future;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.epoch.corpus.configuration.module.children.MDWorkflow;
+import io.zerows.epoch.configuration.module.MDWorkflow;
 import io.zerows.epoch.program.Ut;
 import org.camunda.bpm.engine.repository.DeploymentBuilder;
 

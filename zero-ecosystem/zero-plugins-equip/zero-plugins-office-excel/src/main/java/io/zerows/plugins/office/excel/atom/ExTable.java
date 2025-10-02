@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.component.normalize.Oneness;
 import io.zerows.epoch.constant.VString;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.epoch.corpus.configuration.module.modeling.MDConnect;
+import io.zerows.epoch.configuration.module.MDConnect;
 import io.zerows.epoch.program.Ut;
 import io.zerows.plugins.office.excel.exception._60038Exception404ConnectMissing;
 

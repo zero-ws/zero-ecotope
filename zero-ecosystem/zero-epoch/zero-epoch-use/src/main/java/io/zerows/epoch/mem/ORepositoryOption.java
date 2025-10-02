@@ -1,7 +1,7 @@
 package io.zerows.epoch.mem;
 
-import io.zerows.epoch.component.setup.CommonProcessor;
-import io.zerows.epoch.corpus.configuration.NodeNetwork;
+import io.zerows.epoch.component.setup.ProcessorCommon;
+import io.zerows.epoch.configuration.NodeNetwork;
 import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.sdk.metadata.AbstractAmbiguity;
 import io.zerows.epoch.sdk.metadata.running.ORepository;
@@ -38,7 +38,7 @@ public class ORepositoryOption extends AbstractAmbiguity implements ORepository 
         final NodeNetwork network = OCacheNode.of(this.caller()).network();
 
         // 构造处理器
-        final Processor<NodeNetwork, HSetting> processor = CommonProcessor.of();
+        final Processor<NodeNetwork, HSetting> processor = ProcessorCommon.of();
         processor.makeup(network, setting);
     }
 
@@ -53,7 +53,7 @@ public class ORepositoryOption extends AbstractAmbiguity implements ORepository 
          * 所以此处会判断是否已经初始化，如果已经初始化则不再初始化，否则会初始化。
          */
         if (!network.isReady()) {
-            final Processor<NodeNetwork, HSetting> processor = CommonProcessor.of();
+            final Processor<NodeNetwork, HSetting> processor = ProcessorCommon.of();
             processor.makeup(network, setting);
             Ut.Log.energy(this.getClass()).info(
                 "Initialization --> ...Prepare configuration for Bundle = {}",

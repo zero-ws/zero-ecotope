@@ -4,9 +4,9 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.common.log.OLog;
 import io.zerows.epoch.constant.VString;
-import io.zerows.epoch.corpus.configuration.module.MDConfiguration;
-import io.zerows.epoch.corpus.configuration.module.modeling.MDConnect;
-import io.zerows.epoch.corpus.configuration.module.modeling.MDEntity;
+import io.zerows.epoch.configuration.module.MDConfiguration;
+import io.zerows.epoch.configuration.module.MDConnect;
+import io.zerows.epoch.configuration.module.MDEntity;
 import io.zerows.epoch.program.Ut;
 
 import java.util.ArrayList;

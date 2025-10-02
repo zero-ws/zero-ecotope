@@ -4,7 +4,7 @@ import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.zerows.epoch.common.log.OLog;
-import io.zerows.epoch.corpus.configuration.NodeVertx;
+import io.zerows.epoch.configuration.NodeVertx;
 import io.zerows.epoch.corpus.model.running.RunVertx;
 import io.zerows.epoch.program.Ut;
 import org.osgi.framework.Bundle;

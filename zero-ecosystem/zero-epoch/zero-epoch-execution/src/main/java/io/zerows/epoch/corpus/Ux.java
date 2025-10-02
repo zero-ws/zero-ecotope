@@ -10,7 +10,7 @@ import io.zerows.epoch.common.shared.app.KIntegration;
 import io.zerows.epoch.common.shared.program.Kv;
 import io.zerows.epoch.constant.VString;
 import io.zerows.epoch.constant.VValue;
-import io.zerows.epoch.corpus.configuration.module.modeling.MDConnect;
+import io.zerows.epoch.configuration.module.MDConnect;
 import io.zerows.epoch.corpus.database.cp.zdk.DataPool;
 import io.zerows.epoch.corpus.database.jooq.operation.UxJoin;
 import io.zerows.epoch.corpus.database.jooq.operation.UxJooq;

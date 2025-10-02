@@ -1,7 +1,7 @@
 package io.zerows.epoch.mem.module;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.epoch.corpus.configuration.module.modeling.MDMeta;
+import io.zerows.epoch.configuration.module.MDMeta;
 import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.sdk.metadata.running.OCache;
 import org.osgi.framework.Bundle;

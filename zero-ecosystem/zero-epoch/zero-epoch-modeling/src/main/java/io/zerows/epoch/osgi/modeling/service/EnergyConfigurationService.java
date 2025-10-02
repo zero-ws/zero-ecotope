@@ -1,6 +1,6 @@
 package io.zerows.epoch.osgi.modeling.service;
 
-import io.zerows.epoch.corpus.configuration.module.MDConfiguration;
+import io.zerows.epoch.configuration.module.MDConfiguration;
 import io.zerows.epoch.mem.module.OCacheConfiguration;
 import io.zerows.epoch.osgi.metadata.service.EnergyConfiguration;
 import io.zerows.specification.configuration.HSetting;

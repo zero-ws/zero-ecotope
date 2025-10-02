@@ -1,7 +1,7 @@
 package io.zerows.epoch.mem.module;
 
-import io.zerows.epoch.corpus.configuration.module.MDConfiguration;
-import io.zerows.epoch.corpus.configuration.module.MDId;
+import io.zerows.epoch.configuration.module.MDConfiguration;
+import io.zerows.epoch.configuration.module.MDId;
 import io.zerows.epoch.sdk.metadata.AbstractAmbiguity;
 import org.osgi.framework.Bundle;
 

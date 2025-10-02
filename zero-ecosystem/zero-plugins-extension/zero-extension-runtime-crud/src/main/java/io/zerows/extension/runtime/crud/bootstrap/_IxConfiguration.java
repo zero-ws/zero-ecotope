@@ -2,7 +2,7 @@ package io.zerows.extension.runtime.crud.bootstrap;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.corpus.configuration.module.MDConfiguration;
+import io.zerows.epoch.configuration.module.MDConfiguration;
 import io.zerows.epoch.corpus.extension.HExtension;
 import io.zerows.epoch.program.Ut;
 import io.zerows.extension.runtime.crud.atom.IxConfig;

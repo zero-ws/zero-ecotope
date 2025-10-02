@@ -22,6 +22,10 @@ import java.util.concurrent.ConcurrentMap;
  */
 class DiInfix {
 
+    public static final String IMPL_NULL = "The system scanned null infix for key = {0} " +
+        "on the field \"{1}\" of {2}";
+    public static final String IMPL_WRONG = "The hitted class {0} does not implement the interface" +
+        "of {1}";
     private static final ConcurrentMap<Class<?>, Class<?>> INFUSION = infusionMap();
     private transient final OLog logger;
 
@@ -67,10 +71,10 @@ class DiInfix {
                         final String fieldName = field.getName();
                         Ut.field(proxy, fieldName, tpRef);
                     } else {
-                        this.logger.warn(MessageOfDI.IMPL_WRONG, infixCls.getName(), Infix.class.getName());
+                        this.logger.warn(IMPL_WRONG, infixCls.getName(), Infix.class.getName());
                     }
                 } else {
-                    this.logger.warn(MessageOfDI.IMPL_NULL, field.getType().getName(), field.getName(), type.getName());
+                    this.logger.warn(IMPL_NULL, field.getType().getName(), field.getName(), type.getName());
                 }
             })
             .dispose();

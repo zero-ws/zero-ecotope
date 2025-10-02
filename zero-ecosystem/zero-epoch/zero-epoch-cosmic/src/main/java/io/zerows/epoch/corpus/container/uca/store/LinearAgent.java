@@ -2,7 +2,7 @@ package io.zerows.epoch.corpus.container.uca.store;
 
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.ThreadingModel;
-import io.zerows.epoch.corpus.configuration.NodeVertx;
+import io.zerows.epoch.configuration.NodeVertx;
 import io.zerows.epoch.corpus.model.running.RunVertx;
 import io.zerows.epoch.sdk.metadata.AbstractAmbiguity;
 import org.osgi.framework.Bundle;

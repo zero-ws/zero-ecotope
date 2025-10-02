@@ -1,7 +1,9 @@
 package io.zerows.epoch.component.destine;
 
+import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.annotations.monitor.Memory;
 import io.zerows.epoch.constant.VString;
 import io.zerows.epoch.corpus.metadata.specification.KJoin;
 
@@ -17,6 +19,9 @@ import io.zerows.epoch.corpus.metadata.specification.KJoin;
  */
 @SuppressWarnings("all")
 interface BuilderConflate {
+    @Memory(Conflate.class)
+    Cc<String, Conflate> CCT_CONFLATE = Cc.openThread();
+
     /**
      * 查询条件构造器专用静态方法，此方法会关联两个核心实现类
      * <pre><code>
@@ -34,11 +39,11 @@ interface BuilderConflate {
         if (isArray) {
             final String cacheKey = String.valueOf(joinRef.hashCode()) + VString.SLASH +
                 ConflateAQr.class.getName();
-            return POOL.CCT_CONFLATE.pick(() -> new ConflateAQr(joinRef), cacheKey);
+            return CCT_CONFLATE.pick(() -> new ConflateAQr(joinRef), cacheKey);
         } else {
             final String cacheKey = String.valueOf(joinRef.hashCode()) + VString.SLASH +
                 ConflateJQr.class.getName();
-            return POOL.CCT_CONFLATE.pick(() -> new ConflateJQr(joinRef), cacheKey);
+            return CCT_CONFLATE.pick(() -> new ConflateJQr(joinRef), cacheKey);
         }
     }
 
@@ -58,9 +63,9 @@ interface BuilderConflate {
         final String cacheKey = String.valueOf(joinRef.hashCode()) + VString.SLASH +
             ConflateAIo.class.getName() + VString.SLASH + String.valueOf(isOut);
         if (isOut) {
-            return POOL.CCT_CONFLATE.pick(() -> new ConflateAIo(joinRef, true), cacheKey);
+            return CCT_CONFLATE.pick(() -> new ConflateAIo(joinRef, true), cacheKey);
         } else {
-            return POOL.CCT_CONFLATE.pick(() -> new ConflateAIo(joinRef, false), cacheKey);
+            return CCT_CONFLATE.pick(() -> new ConflateAIo(joinRef, false), cacheKey);
         }
     }
 
@@ -80,11 +85,11 @@ interface BuilderConflate {
         if (isOut) {
             final String cacheKey = String.valueOf(joinRef.hashCode()) + VString.SLASH +
                 ConflateJOut.class.getName();
-            return POOL.CCT_CONFLATE.pick(() -> new ConflateJOut(joinRef), cacheKey);
+            return CCT_CONFLATE.pick(() -> new ConflateJOut(joinRef), cacheKey);
         } else {
             final String cacheKey = String.valueOf(joinRef.hashCode()) + VString.SLASH +
                 ConflateJIn.class.getName();
-            return POOL.CCT_CONFLATE.pick(() -> new ConflateJIn(joinRef), cacheKey);
+            return CCT_CONFLATE.pick(() -> new ConflateJIn(joinRef), cacheKey);
         }
     }
 }

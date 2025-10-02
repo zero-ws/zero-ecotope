@@ -1,7 +1,9 @@
 package io.zerows.epoch.component.destine;
 
+import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.annotations.monitor.Memory;
 import io.zerows.epoch.corpus.metadata.specification.KJoin;
 import io.zerows.epoch.corpus.metadata.specification.KPoint;
 
@@ -20,16 +22,19 @@ import io.zerows.epoch.corpus.metadata.specification.KPoint;
 @SuppressWarnings("unchecked")
 public interface Hymn<T> {
 
+    @Memory(Hymn.class)
+    Cc<String, Hymn> CCT_HYMN = Cc.openThread();
+
     static Hymn<String> ofString(final KJoin join) {
-        return POOL.CCT_HYMN.pick(() -> new HymnString(join), HymnString.class.getName());
+        return CCT_HYMN.pick(() -> new HymnString(join), HymnString.class.getName());
     }
 
     static Hymn<JsonObject> ofJObject(final KJoin join) {
-        return POOL.CCT_HYMN.pick(() -> new HymnJObject(join), HymnJObject.class.getName());
+        return CCT_HYMN.pick(() -> new HymnJObject(join), HymnJObject.class.getName());
     }
 
     static Hymn<JsonArray> ofJArray(final KJoin join) {
-        return POOL.CCT_HYMN.pick(() -> new HymnJArray(join), HymnJArray.class.getName());
+        return CCT_HYMN.pick(() -> new HymnJArray(join), HymnJArray.class.getName());
     }
 
     /**

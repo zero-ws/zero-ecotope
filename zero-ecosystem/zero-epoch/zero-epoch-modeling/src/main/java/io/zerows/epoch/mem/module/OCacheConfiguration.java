@@ -1,9 +1,9 @@
 package io.zerows.epoch.mem.module;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.epoch.corpus.configuration.module.MDConfiguration;
-import io.zerows.epoch.corpus.configuration.module.children.MDPage;
-import io.zerows.epoch.corpus.configuration.module.modeling.MDConnect;
+import io.zerows.epoch.configuration.module.MDConfiguration;
+import io.zerows.epoch.configuration.module.MDPage;
+import io.zerows.epoch.configuration.module.MDConnect;
 import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.sdk.metadata.running.OCache;
 import io.zerows.specification.configuration.HSetting;

@@ -1,7 +1,7 @@
 package io.zerows.epoch.corpus.container.osgi.service.provider;
 
 import io.vertx.core.Future;
-import io.zerows.epoch.corpus.configuration.NodeNetwork;
+import io.zerows.epoch.configuration.NodeNetwork;
 import io.zerows.epoch.corpus.container.osgi.service.EnergyVertx;
 import io.zerows.epoch.osgi.configuration.service.EnergyOption;
 import io.zerows.epoch.osgi.metadata.service.EnergyDeployment;

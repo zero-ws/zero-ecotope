@@ -18,13 +18,15 @@ import java.util.stream.Collectors;
  */
 public class InquirerQueue implements Inquirer<Set<Class<?>>> {
 
+    public static final String QUEUE = "( {0} Queue ) The Zero system has found {0} components of @Queue.";
+
     @Override
     public Set<Class<?>> scan(final Set<Class<?>> classes) {
         final Set<Class<?>> queues = classes.stream()
             .filter((item) -> item.isAnnotationPresent(Queue.class))
             .collect(Collectors.toSet());
         if (!queues.isEmpty()) {
-            this.logger().info(INFO.QUEUE, queues.size());
+            this.logger().info(QUEUE, queues.size());
             this.ensure(queues);
         }
         return queues;

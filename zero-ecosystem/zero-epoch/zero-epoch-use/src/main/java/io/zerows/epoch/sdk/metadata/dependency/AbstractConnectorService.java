@@ -1,6 +1,6 @@
 package io.zerows.epoch.sdk.metadata.dependency;
 
-import io.zerows.epoch.corpus.configuration.module.MDConfiguration;
+import io.zerows.epoch.configuration.module.MDConfiguration;
 import io.zerows.epoch.corpus.metadata.service.CallbackParameter;
 import io.zerows.epoch.corpus.metadata.service.context.ContextOfApp;
 import io.zerows.epoch.corpus.metadata.service.context.ContextOfPlugin;

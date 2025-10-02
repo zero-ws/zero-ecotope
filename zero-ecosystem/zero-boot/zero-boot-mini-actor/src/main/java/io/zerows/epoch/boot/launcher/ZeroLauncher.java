@@ -1,7 +1,7 @@
 package io.zerows.epoch.boot.launcher;
 
 import io.vertx.core.Vertx;
-import io.zerows.epoch.corpus.configuration.NodeNetwork;
+import io.zerows.epoch.configuration.NodeNetwork;
 import io.zerows.epoch.corpus.container.osgi.service.EnergyVertx;
 import io.zerows.epoch.corpus.container.osgi.service.EnergyVertxService;
 import io.zerows.epoch.corpus.container.store.under.StoreVertx;

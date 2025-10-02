@@ -15,7 +15,7 @@ import java.util.function.BiConsumer;
 /**
  * @author lang : 2024-07-02
  */
-class ServiceRunnerProvider extends AbstractServiceRunner {
+class ServiceRunnerProvider extends ServiceRunnerBase {
     ServiceRunnerProvider(final Bundle owner) {
         super(owner);
     }

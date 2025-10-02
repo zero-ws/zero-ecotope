@@ -3,9 +3,9 @@ package io.zerows.epoch.component.setup;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.constant.KName;
-import io.zerows.epoch.component.transformer.RpcTransformer;
-import io.zerows.epoch.corpus.configuration.NodeVertx;
-import io.zerows.epoch.corpus.configuration.option.RpcOptions;
+import io.zerows.epoch.component.transformer.TransformerRpc;
+import io.zerows.epoch.configuration.NodeVertx;
+import io.zerows.epoch.configuration.option.RpcOptions;
 import io.zerows.epoch.enums.app.ServerType;
 import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.sdk.options.Processor;
@@ -18,12 +18,12 @@ class ProcessorOfIpc implements Processor<NodeVertx, JsonArray> {
     private final transient Transformer<RpcOptions> rpcTransformer;
 
     ProcessorOfIpc() {
-        this.rpcTransformer = new RpcTransformer();
+        this.rpcTransformer = new TransformerRpc();
     }
 
     @Override
     public void makeup(final NodeVertx target, final JsonArray setting) {
-        this.logger().debug(INFO.V_BEFORE, KName.SERVER, ServerType.IPC, setting);
+        this.logger().debug(ProcessorMessage.V_BEFORE, KName.SERVER, ServerType.IPC, setting);
 
         Ut.itJArray(setting, (item, index) -> {
             final JsonObject configureJ = Ut.valueJObject(item, KName.CONFIG);
@@ -33,7 +33,7 @@ class ProcessorOfIpc implements Processor<NodeVertx, JsonArray> {
             target.optionServer(serverName, options);
         });
         if (Ut.isNotNil(setting)) {
-            this.logger().info(INFO.V_AFTER, KName.SERVER, ServerType.IPC, setting);
+            this.logger().info(ProcessorMessage.V_AFTER, KName.SERVER, ServerType.IPC, setting);
         }
     }
 }

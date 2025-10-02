@@ -6,7 +6,7 @@ import org.osgi.framework.Bundle;
 /**
  * @author lang : 2024-07-02
  */
-class ServiceRunnerContext extends AbstractServiceRunner {
+class ServiceRunnerContext extends ServiceRunnerBase {
     ServiceRunnerContext(final Bundle owner) {
         super(owner);
     }

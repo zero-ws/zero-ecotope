@@ -12,13 +12,15 @@ import java.util.stream.Collectors;
  */
 public class InquirerMWorker implements Inquirer<Set<Class<?>>> {
 
+    public static final String WORKER = "( Worker ) The Zero system has found {0} components of @Worker.";
+
     @Override
     public Set<Class<?>> scan(final Set<Class<?>> classes) {
         final Set<Class<?>> workers = classes.stream()
             .filter((item) -> item.isAnnotationPresent(Worker.class))
             .collect(Collectors.toSet());
         if (!workers.isEmpty()) {
-            this.logger().info(INFO.WORKER, workers.size());
+            this.logger().info(WORKER, workers.size());
         }
         return workers;
     }

@@ -1,9 +1,9 @@
 package io.zerows.epoch.corpus.container.osgi.service;
 
 import io.vertx.core.Future;
-import io.zerows.epoch.corpus.configuration.NodeNetwork;
-import io.zerows.epoch.corpus.configuration.NodeVertx;
-import io.zerows.epoch.corpus.configuration.option.ClusterOptions;
+import io.zerows.epoch.configuration.NodeNetwork;
+import io.zerows.epoch.configuration.NodeVertx;
+import io.zerows.epoch.configuration.option.ClusterOptions;
 import io.zerows.epoch.corpus.container.store.under.StoreVertx;
 import io.zerows.epoch.corpus.container.uca.store.StubLinear;
 import io.zerows.epoch.corpus.container.uca.store.StubVertx;

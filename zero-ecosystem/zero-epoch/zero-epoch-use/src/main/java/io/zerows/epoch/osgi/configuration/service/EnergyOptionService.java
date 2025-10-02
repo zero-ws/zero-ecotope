@@ -1,7 +1,7 @@
 package io.zerows.epoch.osgi.configuration.service;
 
-import io.zerows.epoch.corpus.configuration.NodeNetwork;
-import io.zerows.epoch.corpus.configuration.NodeVertx;
+import io.zerows.epoch.configuration.NodeNetwork;
+import io.zerows.epoch.configuration.NodeVertx;
 import io.zerows.epoch.mem.OCacheNode;
 import io.zerows.epoch.mem.ORepositoryOption;
 import io.zerows.epoch.sdk.metadata.running.ORepository;

@@ -1,8 +1,8 @@
 package io.zerows.epoch.osgi.configuration.command;
 
 import io.zerows.epoch.constant.VString;
-import io.zerows.epoch.corpus.configuration.NodeNetwork;
-import io.zerows.epoch.corpus.configuration.option.ClusterOptions;
+import io.zerows.epoch.configuration.NodeNetwork;
+import io.zerows.epoch.configuration.option.ClusterOptions;
 import io.zerows.epoch.mem.OCacheNode;
 import io.zerows.epoch.sdk.metadata.running.OCommand;
 import org.osgi.framework.Bundle;

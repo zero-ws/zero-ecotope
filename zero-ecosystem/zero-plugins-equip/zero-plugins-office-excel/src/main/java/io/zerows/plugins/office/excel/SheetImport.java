@@ -9,7 +9,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.common.log.Annal;
 import io.zerows.epoch.component.normalize.Oneness;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.epoch.corpus.configuration.module.modeling.MDConnect;
+import io.zerows.epoch.configuration.module.MDConnect;
 import io.zerows.epoch.corpus.database.jooq.operation.UxJooq;
 import io.zerows.epoch.enums.typed.ChangeFlag;
 import io.zerows.epoch.program.Ut;

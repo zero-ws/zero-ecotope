@@ -37,49 +37,49 @@ public class ZeroType {
     private static final ConcurrentMap<Class<?>, Supplier<Saber>> SABERS =
         new ConcurrentHashMap<>() {
             {
-                this.put(int.class, ZeroType.supplier(IntegerSaber.class));
-                this.put(Integer.class, ZeroType.supplier(IntegerSaber.class));
-                this.put(short.class, ZeroType.supplier(ShortSaber.class));
-                this.put(Short.class, ZeroType.supplier(ShortSaber.class));
-                this.put(long.class, ZeroType.supplier(LongSaber.class));
-                this.put(Long.class, ZeroType.supplier(LongSaber.class));
+                this.put(int.class, ZeroType.supplier(SaberNumericInteger.class));
+                this.put(Integer.class, ZeroType.supplier(SaberNumericInteger.class));
+                this.put(short.class, ZeroType.supplier(SaberNumericShort.class));
+                this.put(Short.class, ZeroType.supplier(SaberNumericShort.class));
+                this.put(long.class, ZeroType.supplier(SaberNumericLong.class));
+                this.put(Long.class, ZeroType.supplier(SaberNumericLong.class));
 
-                this.put(double.class, ZeroType.supplier(DoubleSaber.class));
-                this.put(Double.class, ZeroType.supplier(DoubleSaber.class));
+                this.put(double.class, ZeroType.supplier(SaberDecimalDouble.class));
+                this.put(Double.class, ZeroType.supplier(SaberDecimalDouble.class));
 
-                this.put(LocalDate.class, ZeroType.supplier(Java8DataTimeSaber.class));
-                this.put(LocalDateTime.class, ZeroType.supplier(Java8DataTimeSaber.class));
-                this.put(LocalTime.class, ZeroType.supplier(Java8DataTimeSaber.class));
+                this.put(LocalDate.class, ZeroType.supplier(SaberJava8DataTime.class));
+                this.put(LocalDateTime.class, ZeroType.supplier(SaberJava8DataTime.class));
+                this.put(LocalTime.class, ZeroType.supplier(SaberJava8DataTime.class));
 
-                this.put(float.class, ZeroType.supplier(FloatSaber.class));
-                this.put(Float.class, ZeroType.supplier(FloatSaber.class));
-                this.put(BigDecimal.class, ZeroType.supplier(BigDecimalSaber.class));
+                this.put(float.class, ZeroType.supplier(SaberDecimalFloat.class));
+                this.put(Float.class, ZeroType.supplier(SaberDecimalFloat.class));
+                this.put(BigDecimal.class, ZeroType.supplier(SaberDecimalBig.class));
 
-                this.put(Enum.class, ZeroType.supplier(EnumSaber.class));
+                this.put(Enum.class, ZeroType.supplier(SaberEnum.class));
 
-                this.put(boolean.class, ZeroType.supplier(BooleanSaber.class));
-                this.put(Boolean.class, ZeroType.supplier(BooleanSaber.class));
+                this.put(boolean.class, ZeroType.supplier(SaberBoolean.class));
+                this.put(Boolean.class, ZeroType.supplier(SaberBoolean.class));
 
-                this.put(Date.class, ZeroType.supplier(DateSaber.class));
-                this.put(Calendar.class, ZeroType.supplier(DateSaber.class));
+                this.put(Date.class, ZeroType.supplier(SaberDate.class));
+                this.put(Calendar.class, ZeroType.supplier(SaberDate.class));
 
-                this.put(JsonObject.class, ZeroType.supplier(JsonObjectSaber.class));
-                this.put(JsonArray.class, ZeroType.supplier(JsonArraySaber.class));
+                this.put(JsonObject.class, ZeroType.supplier(SaberJsonObject.class));
+                this.put(JsonArray.class, ZeroType.supplier(SaberJsonArray.class));
 
-                this.put(String.class, ZeroType.supplier(StringSaber.class));
-                this.put(StringBuffer.class, ZeroType.supplier(StringBufferSaber.class));
-                this.put(StringBuilder.class, ZeroType.supplier(StringBufferSaber.class));
+                this.put(String.class, ZeroType.supplier(SaberString.class));
+                this.put(StringBuffer.class, ZeroType.supplier(SaberStringBuffer.class));
+                this.put(StringBuilder.class, ZeroType.supplier(SaberStringBuffer.class));
 
-                this.put(Buffer.class, ZeroType.supplier(BufferSaber.class));
-                this.put(Set.class, ZeroType.supplier(CollectionSaber.class));
-                this.put(List.class, ZeroType.supplier(CollectionSaber.class));
-                this.put(Collection.class, ZeroType.supplier(CollectionSaber.class));
+                this.put(Buffer.class, ZeroType.supplier(SaberBuffer.class));
+                this.put(Set.class, ZeroType.supplier(SaberCollection.class));
+                this.put(List.class, ZeroType.supplier(SaberCollection.class));
+                this.put(Collection.class, ZeroType.supplier(SaberCollection.class));
 
-                this.put(byte[].class, ZeroType.supplier(ByteArraySaber.class));
-                this.put(Byte[].class, ZeroType.supplier(ByteArraySaber.class));
+                this.put(byte[].class, ZeroType.supplier(SaberByteArray.class));
+                this.put(Byte[].class, ZeroType.supplier(SaberByteArray.class));
 
-                this.put(File.class, ZeroType.supplier(FileSaber.class));
-                this.put(Vis.class, ZeroType.supplier(VisSaber.class));
+                this.put(File.class, ZeroType.supplier(SaberFile.class));
+                this.put(Vis.class, ZeroType.supplier(SaberVis.class));
             }
         };
 
@@ -114,7 +114,7 @@ public class ZeroType {
                 saber = supplier.get();
             }
             if (null == saber) {
-                saber = supplier(CommonSaber.class).get();
+                saber = supplier(SaberCommon.class).get();
             }
             reference = saber.from(paramType, literal);
         }
@@ -178,7 +178,7 @@ public class ZeroType {
                     saber = supplier.get();
                 }
                 if (null == saber) {
-                    saber = supplier(CommonSaber.class).get();
+                    saber = supplier(SaberCommon.class).get();
                 }
                 reference = saber.from(input);
             }

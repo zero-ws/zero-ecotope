@@ -7,7 +7,7 @@ import io.vertx.core.VertxException;
 import io.vertx.core.WorkerExecutor;
 import io.vertx.core.eventbus.EventBus;
 import io.zerows.epoch.component.codec.EnvelopCodec;
-import io.zerows.epoch.component.transformer.VertxTransformer;
+import io.zerows.epoch.component.transformer.TransformerVertx;
 import io.zerows.epoch.corpus.model.commune.Envelop;
 import io.zerows.epoch.program.Ut;
 
@@ -21,7 +21,7 @@ class VertxNative {
     private static synchronized Vertx nativeRef() {
         synchronized (VertxNative.class) {
             if (Objects.isNull(VERTX_NATIVE)) {
-                VERTX_NATIVE = Vertx.vertx(VertxTransformer.nativeOption());
+                VERTX_NATIVE = Vertx.vertx(TransformerVertx.nativeOption());
                 final EventBus eventBus = VERTX_NATIVE.eventBus();
                 eventBus.registerDefaultCodec(Envelop.class, Ut.singleton(EnvelopCodec.class));
             }

@@ -1,6 +1,6 @@
 package io.zerows.extension.runtime.skeleton.osgi;
 
-import io.zerows.epoch.corpus.configuration.module.MDConfiguration;
+import io.zerows.epoch.configuration.module.MDConfiguration;
 import io.zerows.epoch.corpus.extension.HExtension;
 import io.zerows.epoch.sdk.metadata.dependency.AbstractConnectorService;
 import io.zerows.epoch.sdk.metadata.service.ServiceContext;

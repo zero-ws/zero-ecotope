@@ -1,8 +1,8 @@
 package io.zerows.epoch.mem;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.epoch.corpus.configuration.NodeNetwork;
-import io.zerows.epoch.corpus.configuration.NodeVertx;
+import io.zerows.epoch.configuration.NodeNetwork;
+import io.zerows.epoch.configuration.NodeVertx;
 import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.sdk.metadata.running.OCache;
 import org.osgi.framework.Bundle;

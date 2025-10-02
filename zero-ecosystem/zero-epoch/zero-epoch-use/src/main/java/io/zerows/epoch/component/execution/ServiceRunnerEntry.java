@@ -6,7 +6,7 @@ import org.osgi.framework.Bundle;
 /**
  * @author lang : 2024-07-02
  */
-class ServiceRunnerEntry extends AbstractServiceRunner {
+class ServiceRunnerEntry extends ServiceRunnerBase {
     private final ServiceRunner consumer;
     private final ServiceRunner provider;
     private final ServiceRunner context;

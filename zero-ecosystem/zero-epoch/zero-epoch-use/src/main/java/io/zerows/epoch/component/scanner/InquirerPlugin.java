@@ -10,6 +10,8 @@ import java.util.Set;
 
 public class InquirerPlugin implements Inquirer<Set<Class<?>>> {
 
+    public static final String PLUGIN = "Plugins {} has been scanned with @Infusion. ";
+
     @Override
     public Set<Class<?>> scan(final Set<Class<?>> allClasses) {
         final Set<Class<?>> plugins = new HashSet<>();
@@ -20,7 +22,7 @@ public class InquirerPlugin implements Inquirer<Set<Class<?>>> {
             .dispose();
         // Ensure Tp Client
         if (!plugins.isEmpty()) {
-            this.logger().info(INFO.PLUGIN, plugins.size());
+            this.logger().info(PLUGIN, plugins.size());
         }
         return plugins;
     }

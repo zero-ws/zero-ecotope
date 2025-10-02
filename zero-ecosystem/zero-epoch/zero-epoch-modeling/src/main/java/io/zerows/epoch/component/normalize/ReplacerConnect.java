@@ -3,8 +3,8 @@ package io.zerows.epoch.component.normalize;
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.constant.KName;
-import io.zerows.epoch.corpus.configuration.module.modeling.MDConnect;
-import io.zerows.epoch.corpus.configuration.module.modeling.MDMeta;
+import io.zerows.epoch.configuration.module.MDConnect;
+import io.zerows.epoch.configuration.module.MDMeta;
 import io.zerows.epoch.mem.module.OCacheDao;
 import io.zerows.epoch.program.Ut;
 

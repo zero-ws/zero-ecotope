@@ -13,7 +13,7 @@ import java.util.Set;
 /**
  * @author lang : 2024-07-02
  */
-class ServiceRunnerConsumer extends AbstractServiceRunner {
+class ServiceRunnerConsumer extends ServiceRunnerBase {
     ServiceRunnerConsumer(final Bundle owner) {
         super(owner);
     }

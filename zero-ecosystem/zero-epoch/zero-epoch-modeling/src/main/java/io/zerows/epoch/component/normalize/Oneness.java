@@ -1,7 +1,7 @@
 package io.zerows.epoch.component.normalize;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.epoch.corpus.configuration.module.modeling.MDConnect;
+import io.zerows.epoch.configuration.module.MDConnect;
 
 import java.util.Set;
 

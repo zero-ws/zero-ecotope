@@ -7,7 +7,7 @@ import io.zerows.epoch.common.log.Annal;
 import io.zerows.epoch.constant.VPath;
 import io.zerows.epoch.constant.VString;
 import io.zerows.epoch.constant.VValue;
-import io.zerows.epoch.corpus.configuration.module.MDConfiguration;
+import io.zerows.epoch.configuration.module.MDConfiguration;
 import io.zerows.epoch.corpus.extension.HExtension;
 import io.zerows.epoch.program.Ut;
 import io.zerows.extension.mbse.ui.atom.UiConfig;
