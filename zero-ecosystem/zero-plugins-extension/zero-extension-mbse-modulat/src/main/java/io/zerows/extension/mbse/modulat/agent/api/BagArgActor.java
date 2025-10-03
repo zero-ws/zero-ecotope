@@ -7,9 +7,9 @@ import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Me;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.corpus.Ux;
 import io.zerows.extension.mbse.modulat.agent.service.BagArgStub;
 import io.zerows.extension.mbse.modulat.eon.Addr;
+import io.zerows.program.Ux;
 import jakarta.inject.Inject;
 
 /**

@@ -3,7 +3,6 @@ package io.zerows.extension.runtime.ambient.uca.differ;
 import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.corpus.Ux;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XActivityChangeDao;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XActivityDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XActivity;
@@ -13,6 +12,7 @@ import io.zerows.platform.enums.modeling.EmAttribute;
 import io.zerows.platform.exception._60050Exception501NotSupport;
 import io.zerows.platform.metadata.KMarkAtom;
 import io.zerows.platform.metadata.KRef;
+import io.zerows.program.Ux;
 import io.zerows.specification.modeling.HAtom;
 
 import java.util.List;

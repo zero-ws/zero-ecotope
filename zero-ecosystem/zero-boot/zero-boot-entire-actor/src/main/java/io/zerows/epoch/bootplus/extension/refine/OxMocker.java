@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.platform.metadata.KIntegration;
-import io.zerows.epoch.corpus.Ux;
+import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
 import java.util.function.Supplier;

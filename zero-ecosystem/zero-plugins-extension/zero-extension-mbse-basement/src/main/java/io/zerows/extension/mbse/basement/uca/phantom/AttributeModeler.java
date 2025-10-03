@@ -3,11 +3,11 @@ package io.zerows.extension.mbse.basement.uca.phantom;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.constant.KName;
 import io.zerows.component.log.Annal;
-import io.zerows.epoch.corpus.Ux;
+import io.zerows.epoch.constant.KName;
 import io.zerows.extension.mbse.basement.domain.tables.daos.MAttributeDao;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MAttribute;
+import io.zerows.program.Ux;
 
 import java.util.List;
 import java.util.function.Function;

@@ -7,7 +7,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.component.log.Annal;
 import io.zerows.extension.mbse.basement.domain.tables.daos.MKeyDao;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MKey;
-import io.zerows.epoch.corpus.Ux;
+import io.zerows.program.Ux;
 
 import java.util.List;
 import java.util.function.Function;

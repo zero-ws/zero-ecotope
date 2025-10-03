@@ -7,7 +7,6 @@ import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Me;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.corpus.Ux;
 import io.zerows.extension.commerce.finance.agent.service.income.VarietyStub;
 import io.zerows.extension.commerce.finance.domain.tables.daos.FBookDao;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FBillItem;
@@ -15,6 +14,7 @@ import io.zerows.extension.commerce.finance.domain.tables.pojos.FBook;
 import io.zerows.extension.commerce.finance.eon.Addr;
 import io.zerows.extension.commerce.finance.uca.enter.Maker;
 import io.zerows.extension.commerce.finance.uca.replica.IkWay;
+import io.zerows.program.Ux;
 import jakarta.inject.Inject;
 
 import java.time.LocalDateTime;

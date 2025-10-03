@@ -5,11 +5,11 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Contract;
 import io.zerows.epoch.bootplus.extension.migration.AbstractStep;
-import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.database.cp.DataPool;
 import io.zerows.epoch.database.jooq.JooqDsl;
 import io.zerows.epoch.database.jooq.JooqInfix;
 import io.zerows.platform.enums.Environment;
+import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import org.jooq.DSLContext;
 

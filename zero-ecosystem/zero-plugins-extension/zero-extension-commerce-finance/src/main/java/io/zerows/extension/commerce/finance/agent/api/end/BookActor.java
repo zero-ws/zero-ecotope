@@ -6,7 +6,7 @@ import io.vertx.ext.auth.User;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.corpus.Ux;
+import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.extension.commerce.finance.domain.tables.daos.FBookDao;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FBook;

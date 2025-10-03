@@ -3,9 +3,9 @@ package io.zerows.epoch.bootplus.extension.migration.modeling;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.bootplus.extension.refine.Ox;
-import io.zerows.epoch.corpus.Ux;
-import io.zerows.support.Ut;
 import io.zerows.extension.mbse.basement.util.Ao;
+import io.zerows.program.Ux;
+import io.zerows.support.Ut;
 
 import java.util.HashSet;
 import java.util.Set;

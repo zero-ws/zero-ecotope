@@ -4,7 +4,6 @@ import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.zerows.epoch.annotations.Contract;
 import io.zerows.epoch.bootplus.extension.refine.Ox;
-import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.web.scheduler.atom.Mission;
 import io.zerows.epoch.corpus.web.scheduler.zdk.JobOutcome;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IService;
@@ -12,6 +11,7 @@ import io.zerows.extension.mbse.action.uca.business.AbstractJob;
 import io.zerows.extension.mbse.action.util.Jt;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.util.Ao;
+import io.zerows.program.Ux;
 import io.zerows.specification.modeling.HRule;
 import io.zerows.specification.modeling.operation.HDao;
 

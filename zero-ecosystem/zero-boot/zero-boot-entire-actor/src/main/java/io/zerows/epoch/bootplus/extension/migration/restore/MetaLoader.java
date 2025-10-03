@@ -5,7 +5,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.enums.Environment;
 import io.zerows.extension.runtime.skeleton.boot.supply.DataImport;
-import io.zerows.epoch.corpus.Ux;
+import io.zerows.program.Ux;
 
 import static io.zerows.epoch.bootplus.extension.refine.Ox.LOG;
 

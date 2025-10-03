@@ -3,12 +3,12 @@ package io.zerows.extension.sdk.cross.spi.business;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.database.jooq.operation.UxJooq;
 import io.zerows.extension.commerce.erp.domain.tables.daos.ECompanyDao;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XTenantDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XTenant;
 import io.zerows.extension.runtime.skeleton.osgi.spi.business.ExOwner;
+import io.zerows.program.Ux;
 
 import java.util.Objects;
 

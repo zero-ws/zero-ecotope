@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.bootplus.extension.scaffold.plugin.AbstractAfter;
 import io.zerows.epoch.bootplus.extension.uca.elasticsearch.EsIndex;
-import io.zerows.epoch.corpus.Ux;
+import io.zerows.program.Ux;
 
 /*
  * Es 专用处理，无关返回值

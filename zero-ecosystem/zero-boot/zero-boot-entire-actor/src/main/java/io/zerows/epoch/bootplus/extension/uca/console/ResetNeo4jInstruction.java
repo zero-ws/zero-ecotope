@@ -2,7 +2,7 @@ package io.zerows.epoch.bootplus.extension.uca.console;
 
 import io.vertx.core.Future;
 import io.zerows.epoch.bootplus.extension.scaffold.console.AbstractInstruction;
-import io.zerows.epoch.corpus.Ux;
+import io.zerows.program.Ux;
 import io.zerows.plugins.common.shell.atom.CommandInput;
 import io.zerows.plugins.common.shell.eon.EmCommand;
 import io.zerows.plugins.common.shell.refine.Sl;

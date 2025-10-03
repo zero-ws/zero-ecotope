@@ -3,10 +3,10 @@ package io.zerows.epoch.bootplus.extension.spi.component;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.bootplus.extension.scaffold.stdn.AbstractHOne;
-import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.mbse.atom.runner.ActIn;
 import io.zerows.epoch.metadata.commune.Apt;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
+import io.zerows.program.Ux;
 
 /**
  * ## 「Channel」创建记录通道

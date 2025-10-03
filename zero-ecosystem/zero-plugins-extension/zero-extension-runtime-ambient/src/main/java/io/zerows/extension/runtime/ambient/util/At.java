@@ -7,7 +7,6 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.Log;
 import io.zerows.component.log.LogModule;
-import io.zerows.epoch.corpus.Ux;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XActivity;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XActivityChange;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XNumber;
@@ -16,6 +15,7 @@ import io.zerows.extension.runtime.ambient.osgi.spi.extension.DatabaseInit;
 import io.zerows.extension.runtime.ambient.osgi.spi.extension.DatumInit;
 import io.zerows.extension.runtime.ambient.osgi.spi.extension.SourceInit;
 import io.zerows.extension.runtime.skeleton.osgi.spi.extension.Init;
+import io.zerows.program.Ux;
 import io.zerows.specification.modeling.HAtom;
 
 import java.util.List;

@@ -1,9 +1,9 @@
 package io.vertx.up.unity;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.corpus.Ux;
-import io.zerows.support.Ut;
 import io.zerows.epoch.testsuite.EpicBase;
+import io.zerows.program.Ux;
+import io.zerows.support.Ut;
 import net.sf.cglib.beans.BeanCopier;
 import org.junit.Assert;
 import org.junit.Test;

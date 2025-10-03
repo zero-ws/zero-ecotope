@@ -6,8 +6,8 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.bootplus.extension.refine.Ox;
 import io.zerows.epoch.bootplus.extension.scaffold.plugin.AbstractAfter;
 import io.zerows.epoch.bootplus.extension.uca.graphic.Pixel;
-import io.zerows.epoch.corpus.Ux;
 import io.zerows.platform.enums.typed.ChangeFlag;
+import io.zerows.program.Ux;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>

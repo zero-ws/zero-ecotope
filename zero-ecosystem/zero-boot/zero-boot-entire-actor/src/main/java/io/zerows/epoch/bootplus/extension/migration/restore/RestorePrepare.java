@@ -4,8 +4,8 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.bootplus.extension.migration.AbstractStep;
 import io.zerows.epoch.bootplus.extension.migration.MigrateStep;
-import io.zerows.epoch.corpus.Ux;
 import io.zerows.platform.enums.Environment;
+import io.zerows.program.Ux;
 
 public class RestorePrepare extends AbstractStep {
     private transient final MigrateStep cleaner;

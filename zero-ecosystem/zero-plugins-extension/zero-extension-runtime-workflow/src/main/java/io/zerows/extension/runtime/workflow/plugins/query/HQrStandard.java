@@ -3,11 +3,11 @@ package io.zerows.extension.runtime.workflow.plugins.query;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.platform.constant.VString;
-import io.zerows.epoch.corpus.Ux;
-import io.zerows.support.Ut;
 import io.zerows.extension.runtime.skeleton.osgi.spi.business.ExUser;
+import io.zerows.platform.constant.VString;
+import io.zerows.program.Ux;
 import io.zerows.specification.vital.HQR;
+import io.zerows.support.Ut;
 
 /**
  * 本组专用查询组件

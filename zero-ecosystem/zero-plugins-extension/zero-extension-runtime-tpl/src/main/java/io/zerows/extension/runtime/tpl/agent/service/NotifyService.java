@@ -8,7 +8,7 @@ import io.zerows.extension.runtime.skeleton.eon.em.OwnerType;
 import io.zerows.extension.runtime.skeleton.osgi.spi.business.ExUser;
 import io.zerows.extension.runtime.tpl.domain.tables.daos.MyNotifyDao;
 import io.zerows.extension.runtime.tpl.domain.tables.pojos.MyNotify;
-import io.zerows.epoch.corpus.Ux;
+import io.zerows.program.Ux;
 
 import java.util.Objects;
 

@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.bootplus.extension.scaffold.plugin.AbstractAfter;
 import io.zerows.epoch.bootplus.extension.uca.graphic.Pixel;
-import io.zerows.epoch.corpus.Ux;
+import io.zerows.program.Ux;
 
 /**
  * 图引擎专用处理器

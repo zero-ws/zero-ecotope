@@ -2,9 +2,9 @@ package io.vertx.up.unity;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.metadata.typed.UArray;
 import io.zerows.epoch.testsuite.ZeroBase;
+import io.zerows.program.Ux;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -4,7 +4,7 @@ import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.bootplus.extension.scaffold.plugin.AspectSwitcher;
-import io.zerows.epoch.corpus.Ux;
+import io.zerows.program.Ux;
 import io.zerows.epoch.corpus.mbse.atom.runner.ActIn;
 import io.zerows.epoch.corpus.mbse.atom.runner.ActOut;
 import io.zerows.epoch.metadata.commune.Apt;

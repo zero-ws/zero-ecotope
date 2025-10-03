@@ -2,9 +2,9 @@ package io.vertx.up.util;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.unit.TestContext;
-import io.zerows.epoch.corpus.Ux;
-import io.zerows.support.Ut;
 import io.zerows.epoch.testsuite.ZeroBase;
+import io.zerows.program.Ux;
+import io.zerows.support.Ut;
 import org.junit.Test;
 
 import java.util.Date;

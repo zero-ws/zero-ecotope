@@ -3,12 +3,12 @@ package io.zerows.extension.runtime.crud.uca.input.qr;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.platform.constant.VString;
-import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.mbse.atom.specification.KModule;
 import io.zerows.epoch.metadata.specification.KJoin;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 import io.zerows.extension.runtime.crud.uca.input.Pre;
+import io.zerows.platform.constant.VString;
+import io.zerows.program.Ux;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>

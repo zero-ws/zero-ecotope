@@ -2,7 +2,7 @@ package io.zerows.extension.mbse.basement.uca.reference;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
-import io.zerows.epoch.corpus.Ux;
+import io.zerows.program.Ux;
 import io.zerows.specification.modeling.HRecord;
 
 import java.util.ArrayList;

@@ -3,12 +3,12 @@ package io.zerows.epoch.bootplus.boot.supply;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.platform.metadata.KIntegration;
-import io.zerows.platform.metadata.KDictConfig;
-import io.zerows.platform.metadata.KMap;
-import io.zerows.epoch.corpus.Ux;
-import io.zerows.support.Ut;
 import io.zerows.extension.runtime.ambient.osgi.spi.component.ExAmbientDictionary;
+import io.zerows.platform.metadata.KDictConfig;
+import io.zerows.platform.metadata.KIntegration;
+import io.zerows.platform.metadata.KMap;
+import io.zerows.program.Ux;
+import io.zerows.support.Ut;
 
 /**
  * @author lang : 2023-06-11

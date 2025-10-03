@@ -8,7 +8,7 @@ import io.zerows.extension.commerce.rbac.atom.ScConfig;
 import io.zerows.extension.commerce.rbac.bootstrap.ScPin;
 import io.zerows.extension.commerce.rbac.eon.ScConstant;
 import io.zerows.extension.commerce.rbac.exception._80221Exception401MaximumTimes;
-import io.zerows.epoch.corpus.Ux;
+import io.zerows.program.Ux;
 
 import java.util.Objects;
 import java.util.function.Supplier;

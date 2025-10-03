@@ -2,7 +2,7 @@ package io.zerows.epoch.corpus.mbse.plugins;
 
 import io.r2mo.typed.cc.Cc;
 import io.zerows.epoch.application.YmlCore;
-import io.zerows.epoch.corpus.Ux;
+import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.specification.modeling.HAtom;
 import io.zerows.specification.modeling.operation.HLoad;

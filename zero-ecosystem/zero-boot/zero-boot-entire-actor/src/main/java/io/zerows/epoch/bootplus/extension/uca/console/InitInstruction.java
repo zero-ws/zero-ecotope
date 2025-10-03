@@ -6,11 +6,11 @@ import io.zerows.epoch.bootplus.extension.migration.MigrateStep;
 import io.zerows.epoch.bootplus.extension.migration.restore.MetaLimit;
 import io.zerows.epoch.bootplus.extension.refine.Ox;
 import io.zerows.epoch.bootplus.extension.scaffold.console.AbstractInstruction;
-import io.zerows.epoch.corpus.Ux;
 import io.zerows.extension.runtime.ambient.agent.service.application.InitStub;
 import io.zerows.plugins.common.shell.atom.CommandInput;
 import io.zerows.plugins.common.shell.eon.EmCommand;
 import io.zerows.plugins.common.shell.refine.Sl;
+import io.zerows.program.Ux;
 import io.zerows.specification.access.app.HApp;
 import io.zerows.specification.access.app.HArk;
 

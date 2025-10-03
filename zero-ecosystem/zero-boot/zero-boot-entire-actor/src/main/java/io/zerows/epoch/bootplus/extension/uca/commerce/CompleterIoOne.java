@@ -8,7 +8,7 @@ import io.zerows.epoch.bootplus.extension.uca.concrete.AgileEdit;
 import io.zerows.epoch.bootplus.extension.uca.concrete.AgileFind;
 import io.zerows.epoch.bootplus.extension.uca.log.Ko;
 import io.zerows.epoch.bootplus.extension.uca.plugin.AgileSwitcher;
-import io.zerows.epoch.corpus.Ux;
+import io.zerows.program.Ux;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.osgi.spi.robin.Switcher;
 import io.zerows.specification.modeling.operation.HDao;

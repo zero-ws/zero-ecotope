@@ -3,9 +3,15 @@ package io.zerows.epoch.bootplus.extension.migration.restore;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.bootplus.extension.migration.tookit.AbstractStatic;
-import io.zerows.epoch.corpus.Ux;
+import io.zerows.extension.runtime.ambient.domain.tables.daos.XAppDao;
+import io.zerows.extension.runtime.ambient.domain.tables.daos.XCategoryDao;
+import io.zerows.extension.runtime.ambient.domain.tables.daos.XMenuDao;
+import io.zerows.extension.runtime.ambient.domain.tables.daos.XModuleDao;
+import io.zerows.extension.runtime.ambient.domain.tables.daos.XNumberDao;
+import io.zerows.extension.runtime.ambient.domain.tables.daos.XSourceDao;
+import io.zerows.extension.runtime.ambient.domain.tables.daos.XTabularDao;
 import io.zerows.platform.enums.Environment;
-import io.zerows.extension.runtime.ambient.domain.tables.daos.*;
+import io.zerows.program.Ux;
 
 public class RestoreSystem extends AbstractStatic {
 

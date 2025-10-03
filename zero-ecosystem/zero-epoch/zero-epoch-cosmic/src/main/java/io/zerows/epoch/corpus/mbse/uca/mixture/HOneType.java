@@ -2,7 +2,7 @@ package io.zerows.epoch.corpus.mbse.uca.mixture;
 
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.corpus.Ux;
+import io.zerows.program.Ux;
 import io.zerows.epoch.database.jooq.operation.UxJooq;
 import io.zerows.epoch.database.jooq.util.JqAnalyzer;
 import io.zerows.epoch.corpus.mbse.atom.KClass;

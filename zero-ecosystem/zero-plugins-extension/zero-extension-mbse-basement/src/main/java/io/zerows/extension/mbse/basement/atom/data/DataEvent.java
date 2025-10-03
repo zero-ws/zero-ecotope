@@ -9,10 +9,6 @@ import io.zerows.component.qr.Criteria;
 import io.zerows.component.qr.Pager;
 import io.zerows.component.qr.Sorter;
 import io.zerows.component.qr.syntax.Ir;
-import io.zerows.platform.constant.VValue;
-import io.zerows.epoch.corpus.Ux;
-import io.zerows.platform.enums.modeling.EmModel;
-import io.zerows.support.Ut;
 import io.zerows.extension.mbse.basement.atom.Model;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.atom.element.DataRow;
@@ -23,10 +19,19 @@ import io.zerows.extension.mbse.basement.uca.io.AoIo;
 import io.zerows.extension.mbse.basement.uca.metadata.AoSentence;
 import io.zerows.extension.mbse.basement.uca.plugin.IoHub;
 import io.zerows.extension.mbse.basement.util.Ao;
+import io.zerows.platform.constant.VValue;
+import io.zerows.platform.enums.modeling.EmModel;
+import io.zerows.program.Ux;
 import io.zerows.specification.modeling.HRecord;
+import io.zerows.support.Ut;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 
 public class DataEvent implements Serializable {
 

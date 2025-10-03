@@ -3,7 +3,7 @@ package io.zerows.extension.commerce.rbac.uca.authorization;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.corpus.Ux;
+import io.zerows.program.Ux;
 import io.zerows.extension.commerce.rbac.uca.authorization.child.GcCritical;
 import io.zerows.extension.commerce.rbac.uca.authorization.child.GcHorizon;
 import io.zerows.extension.commerce.rbac.uca.authorization.child.GcOverlook;

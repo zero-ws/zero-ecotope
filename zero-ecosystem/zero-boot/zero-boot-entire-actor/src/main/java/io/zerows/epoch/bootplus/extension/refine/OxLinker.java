@@ -4,8 +4,8 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.qr.Criteria;
-import io.zerows.epoch.corpus.Ux;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
+import io.zerows.program.Ux;
 import io.zerows.specification.modeling.HRecord;
 
 import java.util.Arrays;

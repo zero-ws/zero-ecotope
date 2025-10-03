@@ -5,13 +5,13 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Me;
 import io.zerows.epoch.annotations.Queue;
-import io.zerows.epoch.corpus.Ux;
 import io.zerows.extension.commerce.finance.agent.service.income.BillStub;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FBillItem;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FPreAuthorize;
 import io.zerows.extension.commerce.finance.eon.Addr;
 import io.zerows.extension.commerce.finance.uca.enter.Maker;
 import io.zerows.extension.commerce.finance.util.Fm;
+import io.zerows.program.Ux;
 import jakarta.inject.Inject;
 
 /**

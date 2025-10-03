@@ -2,7 +2,7 @@ package io.zerows.epoch.bootplus.extension.scaffold.plugin;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.corpus.Ux;
+import io.zerows.program.Ux;
 
 /**
  *

@@ -3,11 +3,11 @@ package io.zerows.extension.runtime.ambient.uca.digital;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.database.jooq.operation.UxJooq;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XNumberDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XNumber;
 import io.zerows.extension.runtime.ambient.util.At;
+import io.zerows.program.Ux;
 
 import java.util.Objects;
 

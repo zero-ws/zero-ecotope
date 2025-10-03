@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.mbse.modulat.domain.tables.pojos.BBag;
-import io.zerows.epoch.corpus.Ux;
+import io.zerows.program.Ux;
 
 import java.util.Collection;
 import java.util.Objects;

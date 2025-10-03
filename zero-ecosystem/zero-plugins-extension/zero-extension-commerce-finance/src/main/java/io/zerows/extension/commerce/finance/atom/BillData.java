@@ -3,10 +3,10 @@ package io.zerows.extension.commerce.finance.atom;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.corpus.Ux;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FBill;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FBillItem;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FSettlement;
+import io.zerows.program.Ux;
 
 import java.io.Serializable;
 import java.util.ArrayList;

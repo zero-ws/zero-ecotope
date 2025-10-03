@@ -7,7 +7,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.epoch.constant.KName;
 import io.zerows.platform.constant.VValue;
-import io.zerows.epoch.corpus.Ux;
+import io.zerows.program.Ux;
 import io.zerows.epoch.corpus.model.commune.Envelop;
 import io.zerows.support.Ut;
 import io.zerows.extension.mbse.action.atom.JtConfig;

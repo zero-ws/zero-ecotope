@@ -3,9 +3,9 @@ package io.zerows.extension.mbse.ui.osgi.spi.secure;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.corpus.Ux;
-import io.zerows.support.Ut;
 import io.zerows.extension.runtime.skeleton.osgi.spi.modeler.Confine;
+import io.zerows.program.Ux;
+import io.zerows.support.Ut;
 
 import static io.zerows.extension.mbse.ui.util.Ui.LOG;
 
