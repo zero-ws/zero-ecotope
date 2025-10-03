@@ -3,7 +3,7 @@ package io.zerows.extension.commerce.finance.util;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.Log;
 import io.zerows.component.log.LogModule;
-import io.zerows.epoch.corpus.metadata.specification.KNaming;
+import io.zerows.epoch.metadata.specification.KNaming;
 import io.zerows.extension.commerce.finance.atom.TranData;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FBook;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FPreAuthorize;

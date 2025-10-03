@@ -9,7 +9,7 @@ import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.application.YmlCore;
-import io.zerows.epoch.corpus.cloud.LogCloud;
+import io.zerows.epoch.metadata.cloud.LogCloud;
 import io.zerows.management.OZeroStore;
 import io.zerows.support.Ut;
 import io.zerows.platform.metadata.KLauncher;

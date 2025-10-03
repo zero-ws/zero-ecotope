@@ -2,7 +2,7 @@ package io.zerows.epoch.corpus.web.client;
 
 import io.vertx.core.MultiMap;
 import io.zerows.platform.metadata.KIntegration;
-import io.zerows.epoch.corpus.security.token.WebToken;
+import io.zerows.epoch.metadata.security.WebToken;
 import org.apache.http.HttpHeaders;
 
 import java.util.Objects;

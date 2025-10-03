@@ -1,8 +1,8 @@
 package io.zerows.osgi.metadata.command;
 
 import io.zerows.platform.constant.VString;
-import io.zerows.epoch.sdk.management.OCache;
-import io.zerows.epoch.sdk.osgi.OCommand;
+import io.zerows.sdk.management.OCache;
+import io.zerows.sdk.osgi.OCommand;
 import org.osgi.framework.Bundle;
 
 /**

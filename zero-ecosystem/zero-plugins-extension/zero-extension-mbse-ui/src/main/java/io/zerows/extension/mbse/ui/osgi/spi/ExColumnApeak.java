@@ -3,7 +3,7 @@ package io.zerows.extension.mbse.ui.osgi.spi;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.corpus.metadata.commune.Vis;
+import io.zerows.epoch.metadata.commune.Vis;
 import io.zerows.extension.mbse.ui.agent.service.column.UiValve;
 import io.zerows.extension.mbse.ui.eon.UiMsg;
 import io.zerows.extension.runtime.skeleton.osgi.spi.ui.Anchoret;

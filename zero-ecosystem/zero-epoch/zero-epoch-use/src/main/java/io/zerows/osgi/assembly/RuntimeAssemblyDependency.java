@@ -1,10 +1,10 @@
 package io.zerows.osgi.assembly;
 
 import io.zerows.epoch.constant.OMessage;
-import io.zerows.epoch.sdk.osgi.AbstractConnectorBase;
-import io.zerows.epoch.sdk.osgi.AbstractConnectorService;
-import io.zerows.epoch.sdk.osgi.ServiceConnector;
-import io.zerows.epoch.sdk.osgi.ServiceInvocation;
+import io.zerows.sdk.osgi.AbstractConnectorBase;
+import io.zerows.sdk.osgi.AbstractConnectorService;
+import io.zerows.sdk.osgi.ServiceConnector;
+import io.zerows.sdk.osgi.ServiceInvocation;
 import io.zerows.osgi.assembly.service.EnergyClass;
 import io.zerows.osgi.assembly.service.EnergyClassService;
 import io.zerows.osgi.assembly.service.provider.InvocationAssembly;

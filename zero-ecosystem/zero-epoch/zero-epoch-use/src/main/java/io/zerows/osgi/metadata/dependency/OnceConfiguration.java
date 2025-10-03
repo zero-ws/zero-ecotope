@@ -3,8 +3,8 @@ package io.zerows.osgi.metadata.dependency;
 import io.zerows.epoch.configuration.MDConfiguration;
 import io.zerows.platform.enums.EmService;
 import io.zerows.osgi.metadata.service.EnergyConfiguration;
-import io.zerows.epoch.sdk.osgi.OOnce;
-import io.zerows.epoch.sdk.osgi.ServiceContext;
+import io.zerows.sdk.osgi.OOnce;
+import io.zerows.sdk.osgi.ServiceContext;
 import io.zerows.specification.configuration.HSetting;
 
 import java.util.Objects;

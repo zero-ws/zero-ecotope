@@ -2,8 +2,8 @@ package io.zerows.management.cache;
 
 import io.r2mo.typed.cc.Cc;
 import io.zerows.platform.annotations.Memory;
-import io.zerows.epoch.corpus.security.manage.KPermit;
-import io.zerows.epoch.corpus.security.manage.KSemi;
+import io.zerows.epoch.metadata.security.KPermit;
+import io.zerows.epoch.metadata.security.KSemi;
 
 /**
  * @author lang : 2024-04-18

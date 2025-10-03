@@ -8,8 +8,8 @@ import io.vertx.ext.web.handler.BasicAuthHandler;
 import io.zerows.epoch.application.YmlCore;
 import io.zerows.epoch.constant.KName;
 import io.zerows.platform.constant.VString;
-import io.zerows.epoch.corpus.security.Aegis;
-import io.zerows.epoch.corpus.security.AegisItem;
+import io.zerows.epoch.metadata.security.Aegis;
+import io.zerows.epoch.metadata.security.AegisItem;
 import io.zerows.support.Ut;
 import io.zerows.plugins.common.security.authenticate.AdapterProvider;
 

@@ -4,8 +4,8 @@ import io.zerows.epoch.configuration.NodeNetwork;
 import io.zerows.epoch.configuration.NodeVertx;
 import io.zerows.management.OCacheNode;
 import io.zerows.management.ORepositoryOption;
-import io.zerows.epoch.sdk.management.ORepository;
-import io.zerows.epoch.sdk.osgi.ServiceContext;
+import io.zerows.sdk.management.ORepository;
+import io.zerows.sdk.osgi.ServiceContext;
 import io.zerows.specification.configuration.HSetting;
 import org.osgi.framework.Bundle;
 

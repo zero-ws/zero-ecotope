@@ -3,7 +3,7 @@ package io.zerows.extension.mbse.ui.agent.service.column;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.epoch.corpus.metadata.commune.Vis;
+import io.zerows.epoch.metadata.commune.Vis;
 import io.zerows.extension.mbse.ui.bootstrap.UiPin;
 import io.zerows.extension.mbse.ui.eon.UiMsg;
 

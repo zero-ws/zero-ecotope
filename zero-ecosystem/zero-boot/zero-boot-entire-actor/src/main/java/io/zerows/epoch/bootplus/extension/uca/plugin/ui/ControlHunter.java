@@ -6,7 +6,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.bootplus.extension.uca.plugin.indent.KeyIndent;
 import io.zerows.component.log.Annal;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.epoch.corpus.metadata.typed.UData;
+import io.zerows.epoch.metadata.typed.UData;
 import io.zerows.support.Ut;
 import io.zerows.spi.modeler.Identifier;
 import io.zerows.extension.mbse.ui.domain.tables.daos.UiVisitorDao;

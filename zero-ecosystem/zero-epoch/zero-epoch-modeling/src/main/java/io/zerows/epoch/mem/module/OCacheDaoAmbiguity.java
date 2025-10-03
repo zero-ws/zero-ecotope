@@ -5,7 +5,7 @@ import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.epoch.configuration.MDMeta;
 import io.zerows.management.OCacheClass;
 import io.zerows.support.Ut;
-import io.zerows.epoch.sdk.osgi.AbstractAmbiguity;
+import io.zerows.sdk.osgi.AbstractAmbiguity;
 import org.osgi.framework.Bundle;
 
 import java.util.ArrayList;

@@ -1,7 +1,7 @@
 package io.zerows.extension.commerce.rbac.uca.acl.rapid.addon;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.sdk.security.Acl;
+import io.zerows.sdk.security.Acl;
 import io.zerows.extension.commerce.rbac.uca.acl.rapid.Dwarf;
 
 public class DwarfAddOn implements Dwarf {

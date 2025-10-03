@@ -3,7 +3,7 @@ package io.zerows.epoch.corpus.database.jooq.util;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.corpus.metadata.mapping.Mojo;
+import io.zerows.epoch.metadata.typed.Mojo;
 import io.zerows.support.Ut;
 import org.jooq.Field;
 import org.jooq.Record;

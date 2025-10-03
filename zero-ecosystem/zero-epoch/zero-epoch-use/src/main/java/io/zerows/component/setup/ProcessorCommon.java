@@ -3,7 +3,7 @@ package io.zerows.component.setup;
 import io.r2mo.typed.cc.Cc;
 import io.zerows.epoch.configuration.NodeNetwork;
 import io.zerows.epoch.configuration.NodeVertx;
-import io.zerows.epoch.sdk.environment.Processor;
+import io.zerows.sdk.environment.Processor;
 import io.zerows.specification.configuration.HSetting;
 
 /**

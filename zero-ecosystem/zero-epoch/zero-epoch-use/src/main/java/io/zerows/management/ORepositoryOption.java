@@ -3,9 +3,9 @@ package io.zerows.management;
 import io.zerows.component.setup.ProcessorCommon;
 import io.zerows.epoch.configuration.NodeNetwork;
 import io.zerows.support.Ut;
-import io.zerows.epoch.sdk.osgi.AbstractAmbiguity;
-import io.zerows.epoch.sdk.management.ORepository;
-import io.zerows.epoch.sdk.environment.Processor;
+import io.zerows.sdk.osgi.AbstractAmbiguity;
+import io.zerows.sdk.management.ORepository;
+import io.zerows.sdk.environment.Processor;
 import io.zerows.specification.configuration.HSetting;
 import org.osgi.framework.Bundle;
 

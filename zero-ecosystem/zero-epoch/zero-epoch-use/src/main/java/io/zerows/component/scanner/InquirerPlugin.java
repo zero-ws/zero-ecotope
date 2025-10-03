@@ -2,7 +2,7 @@ package io.zerows.component.scanner;
 
 import io.reactivex.rxjava3.core.Observable;
 import io.zerows.epoch.annotations.Infusion;
-import io.zerows.epoch.sdk.environment.Inquirer;
+import io.zerows.sdk.environment.Inquirer;
 
 import java.lang.reflect.Field;
 import java.util.HashSet;

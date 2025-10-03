@@ -12,7 +12,7 @@ import io.vertx.ext.stomp.StompServerHandler;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.corpus.web.security.uca.bridge.Bolt;
 import io.zerows.support.Ut;
-import io.zerows.epoch.sdk.security.Lee;
+import io.zerows.sdk.security.Lee;
 import io.zerows.plugins.websocket.stomp.socket.ServerWsHandler;
 import jakarta.ws.rs.core.HttpHeaders;
 

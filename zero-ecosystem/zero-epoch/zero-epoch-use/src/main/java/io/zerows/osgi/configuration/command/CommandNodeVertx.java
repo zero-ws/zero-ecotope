@@ -1,6 +1,6 @@
 package io.zerows.osgi.configuration.command;
 
-import io.zerows.epoch.sdk.osgi.OCommand;
+import io.zerows.sdk.osgi.OCommand;
 import org.osgi.framework.Bundle;
 
 /**

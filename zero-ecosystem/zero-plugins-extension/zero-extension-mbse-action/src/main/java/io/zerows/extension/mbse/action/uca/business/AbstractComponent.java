@@ -8,7 +8,7 @@ import io.zerows.epoch.annotations.Contract;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.mbse.atom.runner.ActIn;
 import io.zerows.epoch.corpus.mbse.atom.runner.ActOut;
-import io.zerows.epoch.corpus.metadata.commune.XHeader;
+import io.zerows.epoch.metadata.commune.XHeader;
 import io.zerows.support.Ut;
 import io.zerows.epoch.sdk.modeling.Service;
 import io.zerows.extension.mbse.action.osgi.spi.jet.JtComponent;

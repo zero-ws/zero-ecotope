@@ -1,8 +1,8 @@
 package io.zerows.extension.mbse.modulat.store;
 
-import io.zerows.epoch.corpus.metadata.MultiKeyMap;
+import io.zerows.epoch.metadata.MultiKeyMap;
 import io.zerows.support.Ut;
-import io.zerows.epoch.sdk.osgi.AbstractAmbiguity;
+import io.zerows.sdk.osgi.AbstractAmbiguity;
 import io.zerows.specification.access.app.HMod;
 import org.osgi.framework.Bundle;
 

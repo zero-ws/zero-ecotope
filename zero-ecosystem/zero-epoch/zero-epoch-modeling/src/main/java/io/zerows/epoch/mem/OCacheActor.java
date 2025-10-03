@@ -4,7 +4,7 @@ import io.r2mo.typed.cc.Cc;
 import io.zerows.epoch.corpus.model.Event;
 import io.zerows.epoch.corpus.model.action.OActorComponent;
 import io.zerows.support.Ut;
-import io.zerows.epoch.sdk.management.OCache;
+import io.zerows.sdk.management.OCache;
 import org.osgi.framework.Bundle;
 
 import java.util.Objects;

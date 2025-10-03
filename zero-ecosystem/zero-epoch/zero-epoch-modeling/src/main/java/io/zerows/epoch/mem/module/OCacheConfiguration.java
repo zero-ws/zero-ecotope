@@ -5,7 +5,7 @@ import io.zerows.epoch.configuration.MDConfiguration;
 import io.zerows.epoch.configuration.MDPage;
 import io.zerows.epoch.configuration.MDConnect;
 import io.zerows.support.Ut;
-import io.zerows.epoch.sdk.management.OCache;
+import io.zerows.sdk.management.OCache;
 import io.zerows.specification.configuration.HSetting;
 import org.osgi.framework.Bundle;
 

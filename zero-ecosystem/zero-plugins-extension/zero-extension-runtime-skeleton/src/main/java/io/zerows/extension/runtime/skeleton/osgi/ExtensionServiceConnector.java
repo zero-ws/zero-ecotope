@@ -2,8 +2,8 @@ package io.zerows.extension.runtime.skeleton.osgi;
 
 import io.zerows.epoch.configuration.MDConfiguration;
 import io.zerows.epoch.corpus.extension.HExtension;
-import io.zerows.epoch.sdk.osgi.AbstractConnectorService;
-import io.zerows.epoch.sdk.osgi.ServiceContext;
+import io.zerows.sdk.osgi.AbstractConnectorService;
+import io.zerows.sdk.osgi.ServiceContext;
 import org.apache.felix.dm.Component;
 import org.apache.felix.dm.DependencyManager;
 import org.apache.felix.dm.ServiceDependency;

@@ -5,7 +5,7 @@ import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.corpus.security.manage.KPermit;
+import io.zerows.epoch.metadata.security.KPermit;
 import io.zerows.platform.enums.EmSecure;
 import io.zerows.extension.commerce.rbac.exception._80225Exception404AdmitCompilerNull;
 

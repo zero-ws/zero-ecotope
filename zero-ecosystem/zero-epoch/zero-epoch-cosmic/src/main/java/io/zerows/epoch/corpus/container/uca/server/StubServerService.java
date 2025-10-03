@@ -8,8 +8,8 @@ import io.zerows.epoch.configuration.option.SockOptions;
 import io.zerows.epoch.corpus.model.running.RunServer;
 import io.zerows.epoch.corpus.model.running.RunVertx;
 import io.zerows.platform.enums.app.ServerType;
-import io.zerows.epoch.sdk.osgi.AbstractAmbiguity;
-import io.zerows.epoch.sdk.environment.OptionOfServer;
+import io.zerows.sdk.osgi.AbstractAmbiguity;
+import io.zerows.sdk.environment.OptionOfServer;
 import org.osgi.framework.Bundle;
 
 import java.util.HashSet;

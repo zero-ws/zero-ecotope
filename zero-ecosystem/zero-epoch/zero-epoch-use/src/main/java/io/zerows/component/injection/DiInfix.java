@@ -8,7 +8,7 @@ import io.zerows.platform.enums.VertxComponent;
 import io.zerows.management.OCacheClass;
 import io.zerows.management.OZeroStore;
 import io.zerows.support.Ut;
-import io.zerows.epoch.sdk.plugins.Infix;
+import io.zerows.sdk.plugins.Infix;
 
 import java.lang.reflect.Method;
 import java.util.HashSet;

@@ -4,12 +4,12 @@ import io.vertx.core.Vertx;
 import io.vertx.ext.auth.authentication.AuthenticationProvider;
 import io.vertx.ext.web.handler.AuthenticationHandler;
 import io.vertx.ext.web.handler.AuthorizationHandler;
-import io.zerows.epoch.corpus.security.Aegis;
+import io.zerows.epoch.metadata.security.Aegis;
 import io.zerows.platform.enums.EmSecure;
 import io.zerows.support.Ut;
-import io.zerows.epoch.sdk.security.Lee;
-import io.zerows.epoch.sdk.security.LeeBuiltIn;
-import io.zerows.epoch.sdk.security.LeeExtension;
+import io.zerows.sdk.security.Lee;
+import io.zerows.sdk.security.LeeBuiltIn;
+import io.zerows.sdk.security.LeeExtension;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>

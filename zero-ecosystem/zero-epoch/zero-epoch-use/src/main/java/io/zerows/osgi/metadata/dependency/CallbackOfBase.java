@@ -1,7 +1,7 @@
 package io.zerows.osgi.metadata.dependency;
 
 import io.zerows.osgi.metadata.service.EnergyFailure;
-import io.zerows.epoch.sdk.osgi.OCallback;
+import io.zerows.sdk.osgi.OCallback;
 import org.osgi.framework.Bundle;
 
 /**

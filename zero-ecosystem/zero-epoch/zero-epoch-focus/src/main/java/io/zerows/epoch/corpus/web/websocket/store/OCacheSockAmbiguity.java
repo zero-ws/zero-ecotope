@@ -1,7 +1,7 @@
 package io.zerows.epoch.corpus.web.websocket.store;
 
 import io.zerows.epoch.corpus.web.websocket.atom.Remind;
-import io.zerows.epoch.sdk.osgi.AbstractAmbiguity;
+import io.zerows.sdk.osgi.AbstractAmbiguity;
 import org.osgi.framework.Bundle;
 
 import java.util.HashSet;

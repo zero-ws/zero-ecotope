@@ -2,7 +2,7 @@ package io.zerows.support;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.sdk.osgi.OCommand;
+import io.zerows.sdk.osgi.OCommand;
 import org.apache.felix.dm.Component;
 import org.apache.felix.dm.ServiceDependency;
 import org.osgi.framework.Bundle;

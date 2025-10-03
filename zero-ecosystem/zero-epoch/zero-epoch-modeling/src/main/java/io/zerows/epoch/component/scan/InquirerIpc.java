@@ -11,7 +11,7 @@ import io.zerows.epoch.corpus.exception._40046Exception500IpcArgument;
 import io.zerows.epoch.corpus.exception._40048Exception500RpcAgentAbsence;
 import io.zerows.epoch.corpus.model.commune.Envelop;
 import io.zerows.support.Ut;
-import io.zerows.epoch.sdk.environment.Inquirer;
+import io.zerows.sdk.environment.Inquirer;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;

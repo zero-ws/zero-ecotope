@@ -4,7 +4,7 @@ import io.r2mo.function.Fn;
 import io.zerows.epoch.corpus.web.websocket.annotations.Subscribe;
 import io.zerows.epoch.corpus.web.websocket.atom.Remind;
 import io.zerows.epoch.corpus.web.websocket.eon.MessageOfSock;
-import io.zerows.epoch.sdk.environment.Inquirer;
+import io.zerows.sdk.environment.Inquirer;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;

@@ -1,7 +1,7 @@
 package io.zerows.epoch.corpus.container.osgi;
 
 import io.zerows.epoch.corpus.container.osgi.command.CommandRunningVertx;
-import io.zerows.epoch.sdk.osgi.AbstractCommand;
+import io.zerows.sdk.osgi.AbstractCommand;
 import org.apache.felix.service.command.Descriptor;
 import org.apache.felix.service.command.Parameter;
 import org.osgi.framework.BundleContext;

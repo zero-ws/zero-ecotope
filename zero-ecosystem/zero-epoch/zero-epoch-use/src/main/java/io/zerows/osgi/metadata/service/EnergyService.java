@@ -2,8 +2,8 @@ package io.zerows.osgi.metadata.service;
 
 import io.zerows.component.log.OLog;
 import io.zerows.support.Ut;
-import io.zerows.epoch.sdk.osgi.ServiceContext;
-import io.zerows.epoch.sdk.osgi.ServiceInvocation;
+import io.zerows.sdk.osgi.ServiceContext;
+import io.zerows.sdk.osgi.ServiceInvocation;
 import org.osgi.framework.Bundle;
 
 import java.util.ArrayList;

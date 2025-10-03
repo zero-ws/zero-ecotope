@@ -4,7 +4,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.qr.syntax.Ir;
 import io.zerows.support.Ut;
-import io.zerows.epoch.sdk.security.Acl;
+import io.zerows.sdk.security.Acl;
 import io.zerows.extension.commerce.rbac.util.Sc;
 
 import java.util.Objects;

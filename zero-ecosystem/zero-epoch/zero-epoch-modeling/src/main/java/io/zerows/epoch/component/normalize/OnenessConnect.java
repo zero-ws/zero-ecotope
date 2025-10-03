@@ -3,8 +3,8 @@ package io.zerows.epoch.component.normalize;
 import io.vertx.core.json.JsonArray;
 import io.zerows.epoch.configuration.MDConnect;
 import io.zerows.epoch.configuration.MDMeta;
-import io.zerows.epoch.corpus.metadata.mapping.Mirror;
-import io.zerows.epoch.corpus.metadata.mapping.Mojo;
+import io.zerows.epoch.metadata.typed.Mirror;
+import io.zerows.epoch.metadata.typed.Mojo;
 import io.zerows.support.Ut;
 
 import java.util.HashSet;

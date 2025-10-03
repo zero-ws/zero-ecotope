@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.mbse.atom.specification.KModule;
-import io.zerows.epoch.corpus.metadata.specification.KField;
+import io.zerows.epoch.metadata.specification.KField;
 import io.zerows.support.Ut;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 import io.zerows.extension.runtime.crud.uca.input.Pre;

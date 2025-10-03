@@ -1,7 +1,7 @@
 package io.zerows.osgi.assembly.service;
 
 import io.zerows.management.ORepositoryClass;
-import io.zerows.epoch.sdk.management.ORepository;
+import io.zerows.sdk.management.ORepository;
 import org.osgi.framework.Bundle;
 
 /**

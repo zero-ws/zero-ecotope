@@ -6,8 +6,8 @@ import io.zerows.component.destine.Hymn;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.database.jooq.operation.UxJoin;
 import io.zerows.epoch.corpus.mbse.atom.specification.KModule;
-import io.zerows.epoch.corpus.metadata.specification.KJoin;
-import io.zerows.epoch.corpus.metadata.specification.KPoint;
+import io.zerows.epoch.metadata.specification.KJoin;
+import io.zerows.epoch.metadata.specification.KPoint;
 import io.zerows.support.Ut;
 
 import java.util.Objects;

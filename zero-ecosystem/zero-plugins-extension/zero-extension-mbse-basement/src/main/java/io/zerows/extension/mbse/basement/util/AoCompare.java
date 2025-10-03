@@ -7,7 +7,7 @@ import io.zerows.platform.metadata.Kv;
 import io.zerows.component.compare.Vs;
 import io.zerows.platform.constant.VValue;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.epoch.corpus.metadata.commune.Apt;
+import io.zerows.epoch.metadata.commune.Apt;
 import io.zerows.platform.enums.typed.ChangeFlag;
 import io.zerows.support.Ut;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;

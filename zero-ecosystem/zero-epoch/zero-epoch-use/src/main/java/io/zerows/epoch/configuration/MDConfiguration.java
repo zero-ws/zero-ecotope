@@ -1,7 +1,7 @@
 package io.zerows.epoch.configuration;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.corpus.metadata.MultiKeyMap;
+import io.zerows.epoch.metadata.MultiKeyMap;
 import org.osgi.framework.Bundle;
 
 import java.util.HashSet;

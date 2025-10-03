@@ -1,8 +1,8 @@
 package io.zerows.osgi.metadata.dependency;
 
 import io.zerows.osgi.metadata.service.EnergyService;
-import io.zerows.epoch.sdk.osgi.OOnce;
-import io.zerows.epoch.sdk.osgi.ServiceContext;
+import io.zerows.sdk.osgi.OOnce;
+import io.zerows.sdk.osgi.ServiceContext;
 
 import java.util.Objects;
 

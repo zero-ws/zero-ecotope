@@ -6,7 +6,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.platform.constant.VString;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.mbse.atom.specification.KModule;
-import io.zerows.epoch.corpus.metadata.specification.KJoin;
+import io.zerows.epoch.metadata.specification.KJoin;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 import io.zerows.extension.runtime.crud.uca.input.Pre;
 

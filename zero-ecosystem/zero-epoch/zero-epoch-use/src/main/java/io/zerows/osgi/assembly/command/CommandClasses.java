@@ -4,7 +4,7 @@ import io.zerows.platform.constant.VString;
 import io.zerows.platform.enums.VertxComponent;
 import io.zerows.management.OCacheClass;
 import io.zerows.support.Ut;
-import io.zerows.epoch.sdk.osgi.OCommand;
+import io.zerows.sdk.osgi.OCommand;
 import org.osgi.framework.Bundle;
 
 import java.util.Map;

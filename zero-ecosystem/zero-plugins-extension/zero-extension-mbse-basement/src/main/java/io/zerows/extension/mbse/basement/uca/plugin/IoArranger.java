@@ -3,7 +3,7 @@ package io.zerows.extension.mbse.basement.uca.plugin;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.platform.metadata.Kv;
-import io.zerows.epoch.corpus.metadata.element.JComponent;
+import io.zerows.epoch.metadata.typed.JComponent;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.TiConsumer;
 import io.zerows.extension.mbse.basement.atom.Model;

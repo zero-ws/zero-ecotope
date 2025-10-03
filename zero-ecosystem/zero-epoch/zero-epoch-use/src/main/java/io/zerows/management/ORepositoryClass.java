@@ -14,9 +14,9 @@ import io.zerows.component.scanner.InquirerPlugin;
 import io.zerows.component.scanner.InquirerQueue;
 import io.zerows.platform.enums.VertxComponent;
 import io.zerows.support.Ut;
-import io.zerows.epoch.sdk.osgi.AbstractAmbiguity;
-import io.zerows.epoch.sdk.management.ORepository;
-import io.zerows.epoch.sdk.environment.Inquirer;
+import io.zerows.sdk.osgi.AbstractAmbiguity;
+import io.zerows.sdk.management.ORepository;
+import io.zerows.sdk.environment.Inquirer;
 import io.zerows.specification.configuration.HSetting;
 import org.osgi.framework.Bundle;
 

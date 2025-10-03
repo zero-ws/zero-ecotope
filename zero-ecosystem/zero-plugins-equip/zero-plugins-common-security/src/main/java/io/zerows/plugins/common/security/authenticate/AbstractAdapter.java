@@ -3,8 +3,8 @@ package io.zerows.plugins.common.security.authenticate;
 import io.vertx.ext.auth.authentication.AuthenticationProvider;
 import io.zerows.epoch.application.YmlCore;
 import io.zerows.component.log.Annal;
-import io.zerows.epoch.corpus.security.Aegis;
-import io.zerows.epoch.corpus.security.AegisItem;
+import io.zerows.epoch.metadata.security.Aegis;
+import io.zerows.epoch.metadata.security.AegisItem;
 import io.zerows.platform.enums.EmSecure;
 import io.zerows.support.Ut;
 

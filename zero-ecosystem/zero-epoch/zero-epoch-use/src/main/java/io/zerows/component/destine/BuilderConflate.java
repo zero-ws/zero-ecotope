@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.annotations.Memory;
 import io.zerows.platform.constant.VString;
-import io.zerows.epoch.corpus.metadata.specification.KJoin;
+import io.zerows.epoch.metadata.specification.KJoin;
 
 /**
  * 针对组件 {@link Conflate} 的专用内部构造接口，此接口可根据不同输入信息构造对应的条件

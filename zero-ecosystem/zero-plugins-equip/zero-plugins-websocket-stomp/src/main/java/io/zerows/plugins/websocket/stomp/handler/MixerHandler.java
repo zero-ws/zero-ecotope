@@ -3,7 +3,7 @@ package io.zerows.plugins.websocket.stomp.handler;
 import io.vertx.core.Vertx;
 import io.vertx.ext.stomp.StompServerHandler;
 import io.vertx.ext.stomp.StompServerOptions;
-import io.zerows.epoch.corpus.security.Aegis;
+import io.zerows.epoch.metadata.security.Aegis;
 import io.zerows.plugins.websocket.stomp.command.FrameWsHandler;
 
 /**

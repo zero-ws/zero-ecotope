@@ -1,8 +1,8 @@
 package io.zerows.epoch.mem;
 
 import io.zerows.epoch.corpus.model.action.OActorComponent;
-import io.zerows.epoch.sdk.osgi.AbstractAmbiguity;
-import io.zerows.epoch.sdk.management.OCache;
+import io.zerows.sdk.osgi.AbstractAmbiguity;
+import io.zerows.sdk.management.OCache;
 import org.osgi.framework.Bundle;
 
 /**

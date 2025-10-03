@@ -1,7 +1,7 @@
 package io.zerows.osgi.metadata;
 
 import io.zerows.epoch.constant.OMessage;
-import io.zerows.epoch.sdk.osgi.ServiceConnector;
+import io.zerows.sdk.osgi.ServiceConnector;
 import io.zerows.support.Ut;
 import org.apache.felix.dm.DependencyActivatorBase;
 import org.apache.felix.dm.DependencyManager;

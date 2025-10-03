@@ -7,7 +7,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.mbse.atom.specification.KModule;
-import io.zerows.epoch.corpus.metadata.specification.KTransform;
+import io.zerows.epoch.metadata.specification.KTransform;
 import io.zerows.epoch.corpus.model.commune.Envelop;
 import io.zerows.epoch.spi.Dictionary;
 import io.zerows.epoch.spi.channel.Pocket;

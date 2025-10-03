@@ -1,8 +1,8 @@
 package io.zerows.osgi.metadata;
 
 import io.zerows.epoch.constant.OConstant;
-import io.zerows.epoch.sdk.osgi.AbstractCommand;
-import io.zerows.epoch.sdk.osgi.OCommand;
+import io.zerows.sdk.osgi.AbstractCommand;
+import io.zerows.sdk.osgi.OCommand;
 import io.zerows.osgi.metadata.command.CommandCache;
 import io.zerows.osgi.metadata.command.CommandFailureAll;
 import io.zerows.osgi.metadata.command.CommandFailureBundle;

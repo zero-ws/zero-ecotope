@@ -5,7 +5,7 @@ import io.zerows.platform.metadata.Kv;
 import io.zerows.epoch.corpus.database.jooq.JooqDsl;
 import io.zerows.epoch.corpus.database.jooq.JooqInfix;
 import io.zerows.epoch.corpus.database.jooq.util.JqAnalyzer;
-import io.zerows.epoch.corpus.metadata.mapping.Mojo;
+import io.zerows.epoch.metadata.typed.Mojo;
 import io.zerows.platform.exception._60050Exception501NotSupport;
 import org.jooq.Field;
 import org.jooq.Table;

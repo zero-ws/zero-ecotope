@@ -5,7 +5,7 @@ import io.zerows.epoch.application.YmlCore;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KPlugin;
 import io.zerows.support.Ut;
-import io.zerows.epoch.sdk.osgi.AbstractAmbiguity;
+import io.zerows.sdk.osgi.AbstractAmbiguity;
 import io.zerows.platform.constant.VBoot;
 import io.zerows.platform.constant.VPath;
 import io.zerows.platform.constant.VString;

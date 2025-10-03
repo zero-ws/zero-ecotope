@@ -7,13 +7,13 @@ import io.vertx.ext.auth.authentication.AuthenticationProvider;
 import io.vertx.ext.web.handler.AuthenticationHandler;
 import io.vertx.ext.web.handler.AuthorizationHandler;
 import io.zerows.component.log.OLog;
-import io.zerows.epoch.corpus.security.Aegis;
-import io.zerows.epoch.corpus.security.AegisItem;
+import io.zerows.epoch.metadata.security.Aegis;
+import io.zerows.epoch.metadata.security.AegisItem;
 import io.zerows.epoch.corpus.web.exception._40076Exception400WallSize;
 import io.zerows.epoch.corpus.web.exception._40077Exception400WallProviderConflict;
 import io.zerows.platform.enums.EmSecure;
 import io.zerows.support.Ut;
-import io.zerows.epoch.sdk.security.Lee;
+import io.zerows.sdk.security.Lee;
 
 import java.util.Objects;
 import java.util.Set;

@@ -8,15 +8,15 @@ import io.zerows.epoch.annotations.security.AuthorizedResource;
 import io.zerows.epoch.annotations.security.Wall;
 import io.zerows.component.injection.DiPlugin;
 import io.zerows.epoch.component.extract.ExtractorEvent;
-import io.zerows.epoch.corpus.security.Aegis;
-import io.zerows.epoch.corpus.security.AegisItem;
+import io.zerows.epoch.metadata.security.Aegis;
+import io.zerows.epoch.metadata.security.AegisItem;
 import io.zerows.epoch.corpus.web.exception._40038Exception400WallDuplicated;
 import io.zerows.epoch.corpus.web.exception._40040Exception400WallKeyMissing;
 import io.zerows.epoch.corpus.web.exception._40041Exception500WallMethodDuplicated;
 import io.zerows.epoch.corpus.web.exception._40075Exception400WallTypeWrong;
 import io.zerows.platform.enums.EmSecure;
 import io.zerows.support.Ut;
-import io.zerows.epoch.sdk.environment.Inquirer;
+import io.zerows.sdk.environment.Inquirer;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;

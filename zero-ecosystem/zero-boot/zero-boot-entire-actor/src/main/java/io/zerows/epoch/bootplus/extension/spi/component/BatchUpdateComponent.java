@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.bootplus.extension.scaffold.stdn.AbstractHMore;
 import io.zerows.epoch.corpus.mbse.atom.runner.ActIn;
 import io.zerows.epoch.corpus.mbse.atom.runner.ActOut;
-import io.zerows.epoch.corpus.metadata.commune.Apt;
+import io.zerows.epoch.metadata.commune.Apt;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 
 /**

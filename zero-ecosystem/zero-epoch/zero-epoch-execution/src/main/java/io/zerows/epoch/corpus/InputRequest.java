@@ -5,11 +5,11 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Session;
 import io.zerows.epoch.corpus.model.commune.Envelop;
-import io.zerows.epoch.corpus.security.AegisItem;
+import io.zerows.epoch.metadata.security.AegisItem;
 import io.zerows.platform.enums.EmSecure;
 import io.zerows.support.Ut;
-import io.zerows.epoch.sdk.security.Lee;
-import io.zerows.epoch.sdk.security.LeeBuiltIn;
+import io.zerows.sdk.security.Lee;
+import io.zerows.sdk.security.LeeBuiltIn;
 
 import java.time.Instant;
 import java.util.Objects;

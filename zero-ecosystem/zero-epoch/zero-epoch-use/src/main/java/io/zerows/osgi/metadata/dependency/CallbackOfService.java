@@ -2,14 +2,14 @@ package io.zerows.osgi.metadata.dependency;
 
 import io.zerows.component.execution.ServiceRunner;
 import io.zerows.epoch.configuration.MDConfiguration;
-import io.zerows.epoch.corpus.metadata.service.CallbackParameter;
+import io.zerows.epoch.metadata.service.CallbackParameter;
 import io.zerows.osgi.metadata.service.EnergyConfiguration;
 import io.zerows.osgi.metadata.service.EnergyDeployment;
 import io.zerows.osgi.metadata.service.EnergyFailure;
 import io.zerows.osgi.metadata.service.EnergyService;
-import io.zerows.epoch.sdk.osgi.OCallback;
-import io.zerows.epoch.sdk.osgi.OOnce;
-import io.zerows.epoch.sdk.osgi.ServiceContext;
+import io.zerows.sdk.osgi.OCallback;
+import io.zerows.sdk.osgi.OOnce;
+import io.zerows.sdk.osgi.ServiceContext;
 import io.zerows.specification.access.app.HApp;
 import io.zerows.specification.access.app.HArk;
 import io.zerows.specification.configuration.HSetting;

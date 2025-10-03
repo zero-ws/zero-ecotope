@@ -9,7 +9,7 @@ import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.database.jooq.operation.UxJoin;
 import io.zerows.epoch.corpus.database.jooq.operation.UxJooq;
 import io.zerows.epoch.corpus.mbse.atom.specification.KQr;
-import io.zerows.epoch.corpus.metadata.typed.UObject;
+import io.zerows.epoch.metadata.typed.UObject;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
 import io.zerows.extension.commerce.rbac.atom.ScConfig;

@@ -2,7 +2,7 @@ package io.zerows.osgi.metadata.command;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.management.OCacheFailure;
-import io.zerows.epoch.sdk.osgi.OCommand;
+import io.zerows.sdk.osgi.OCommand;
 import org.osgi.framework.Bundle;
 
 /**

@@ -14,7 +14,7 @@ import io.zerows.epoch.configuration.MDConnect;
 import io.zerows.epoch.corpus.database.cp.zdk.DataPool;
 import io.zerows.epoch.corpus.database.jooq.operation.UxJoin;
 import io.zerows.epoch.corpus.database.jooq.operation.UxJooq;
-import io.zerows.epoch.corpus.security.token.JwtToken;
+import io.zerows.epoch.metadata.security.TokenJwt;
 import io.zerows.epoch.corpus.web.cache.shared.UxPool;
 import io.zerows.support.Ut;
 import io.zerows.specification.modeling.HRecord;
@@ -281,7 +281,7 @@ public final class Ux extends _Where {
      * key part for extract data from environment
      */
     public static String keyUser(final User user) {
-        return JwtToken.of(user).user();
+        return TokenJwt.of(user).user();
     }
 
     // ---------------------------------- Children Utility
@@ -517,11 +517,11 @@ public final class Ux extends _Where {
     public static class Jwt {
 
         public static String token(final JsonObject data) {
-            return JwtToken.of(data).token();
+            return TokenJwt.of(data).token();
         }
 
         public static JsonObject extract(final String token) {
-            return JwtToken.of(token).data();
+            return TokenJwt.of(token).data();
         }
     }
 

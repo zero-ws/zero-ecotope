@@ -7,8 +7,8 @@ import io.zerows.epoch.corpus.database.jooq.operation.UxJooq;
 import io.zerows.epoch.corpus.database.jooq.util.JqAnalyzer;
 import io.zerows.epoch.corpus.mbse.atom.KClass;
 import io.zerows.epoch.corpus.mbse.atom.specification.KModule;
-import io.zerows.epoch.corpus.metadata.specification.KJoin;
-import io.zerows.epoch.corpus.metadata.specification.KPoint;
+import io.zerows.epoch.metadata.specification.KJoin;
+import io.zerows.epoch.metadata.specification.KPoint;
 import io.zerows.support.Ut;
 
 import java.util.Objects;

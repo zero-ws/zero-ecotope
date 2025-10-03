@@ -1,7 +1,7 @@
 package io.zerows.component.destine;
 
-import io.zerows.epoch.corpus.metadata.specification.KJoin;
-import io.zerows.epoch.corpus.metadata.specification.KPoint;
+import io.zerows.epoch.metadata.specification.KJoin;
+import io.zerows.epoch.metadata.specification.KPoint;
 import io.zerows.platform.enums.EmPRI;
 
 import java.util.Objects;

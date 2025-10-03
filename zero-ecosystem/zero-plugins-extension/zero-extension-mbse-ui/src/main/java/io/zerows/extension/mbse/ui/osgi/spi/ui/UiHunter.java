@@ -1,7 +1,7 @@
 package io.zerows.extension.mbse.ui.osgi.spi.ui;
 
 import io.vertx.core.Future;
-import io.zerows.epoch.corpus.metadata.typed.UData;
+import io.zerows.epoch.metadata.typed.UData;
 import io.zerows.extension.mbse.ui.domain.tables.pojos.UiVisitor;
 
 /**

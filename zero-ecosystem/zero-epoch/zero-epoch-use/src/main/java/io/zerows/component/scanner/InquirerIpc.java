@@ -3,7 +3,7 @@ package io.zerows.component.scanner;
 
 import io.zerows.epoch.annotations.Agent;
 import io.zerows.platform.enums.app.ServerType;
-import io.zerows.epoch.sdk.environment.Inquirer;
+import io.zerows.sdk.environment.Inquirer;
 
 import java.util.Objects;
 import java.util.Set;

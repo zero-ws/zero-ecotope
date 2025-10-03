@@ -9,7 +9,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 import io.vertx.ext.auth.authorization.Authorization;
 import io.vertx.ext.auth.authorization.AuthorizationProvider;
-import io.zerows.epoch.corpus.security.Aegis;
+import io.zerows.epoch.metadata.security.Aegis;
 import io.zerows.support.Ut;
 
 import java.lang.reflect.Method;

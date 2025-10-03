@@ -2,8 +2,8 @@ package io.zerows.epoch.configuration;
 
 import io.zerows.epoch.configuration.option.SockOptions;
 import io.zerows.platform.enums.app.ServerType;
-import io.zerows.epoch.sdk.environment.OptionOfServerBase;
-import io.zerows.epoch.sdk.environment.OptionOfServer;
+import io.zerows.sdk.environment.OptionOfServerBase;
+import io.zerows.sdk.environment.OptionOfServer;
 
 /**
  * @author lang : 2024-04-20

@@ -3,7 +3,7 @@ package io.zerows.plugins.integration.wechat;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Vertx;
 import io.zerows.epoch.annotations.Infusion;
-import io.zerows.epoch.sdk.plugins.Infix;
+import io.zerows.sdk.plugins.Infix;
 
 /**
  * @author lang : 2024-07-12

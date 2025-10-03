@@ -1,6 +1,6 @@
 package io.zerows.component.serialization;
 
-import io.zerows.epoch.corpus.metadata.commune.Vis;
+import io.zerows.epoch.metadata.commune.Vis;
 
 class SaberVis extends SaberBase {
 

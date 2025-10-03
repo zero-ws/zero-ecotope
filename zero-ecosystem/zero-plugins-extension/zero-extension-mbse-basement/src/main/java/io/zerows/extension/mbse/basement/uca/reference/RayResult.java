@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.metadata.Kv;
 import io.zerows.platform.metadata.RResult;
-import io.zerows.epoch.corpus.metadata.element.JAmb;
+import io.zerows.epoch.metadata.typed.JAmb;
 import io.zerows.platform.enums.modeling.EmValue;
 import io.zerows.support.Ut;
 import io.zerows.specification.modeling.HRecord;

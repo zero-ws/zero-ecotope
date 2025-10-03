@@ -3,8 +3,8 @@ package io.zerows.osgi.assembly.service.provider;
 import io.vertx.core.Future;
 import io.zerows.osgi.assembly.service.EnergyClass;
 import io.zerows.osgi.metadata.service.EnergyDeployment;
-import io.zerows.epoch.sdk.osgi.AbstractServiceInvocation;
-import io.zerows.epoch.sdk.osgi.ServiceContext;
+import io.zerows.sdk.osgi.AbstractServiceInvocation;
+import io.zerows.sdk.osgi.ServiceContext;
 import org.osgi.framework.Bundle;
 
 import java.util.Objects;

@@ -16,7 +16,7 @@ import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.AuthorizationHandler;
 import io.zerows.epoch.constant.KName;
 import io.zerows.component.log.Annal;
-import io.zerows.epoch.corpus.security.Aegis;
+import io.zerows.epoch.metadata.security.Aegis;
 
 import java.util.ArrayList;
 import java.util.Collection;

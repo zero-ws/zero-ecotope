@@ -1,7 +1,7 @@
 package io.zerows.plugins.integration.wechat;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.sdk.plugins.InfixConfig;
+import io.zerows.sdk.plugins.InfixConfig;
 
 import java.io.Serializable;
 

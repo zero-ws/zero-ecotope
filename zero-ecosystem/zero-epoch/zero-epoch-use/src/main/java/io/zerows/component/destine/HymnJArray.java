@@ -3,8 +3,8 @@ package io.zerows.component.destine;
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonArray;
 import io.zerows.epoch.exception._80548Exception412IndentUnknown;
-import io.zerows.epoch.corpus.metadata.specification.KJoin;
-import io.zerows.epoch.corpus.metadata.specification.KPoint;
+import io.zerows.epoch.metadata.specification.KJoin;
+import io.zerows.epoch.metadata.specification.KPoint;
 import io.zerows.support.Ut;
 
 import java.util.HashSet;

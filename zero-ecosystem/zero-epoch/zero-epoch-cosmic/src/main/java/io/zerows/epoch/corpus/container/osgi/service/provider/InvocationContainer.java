@@ -5,8 +5,8 @@ import io.zerows.epoch.configuration.NodeNetwork;
 import io.zerows.epoch.corpus.container.osgi.service.EnergyVertx;
 import io.zerows.osgi.configuration.service.EnergyOption;
 import io.zerows.osgi.metadata.service.EnergyDeployment;
-import io.zerows.epoch.sdk.osgi.AbstractServiceInvocation;
-import io.zerows.epoch.sdk.osgi.ServiceContext;
+import io.zerows.sdk.osgi.AbstractServiceInvocation;
+import io.zerows.sdk.osgi.ServiceContext;
 import org.osgi.framework.Bundle;
 
 import java.util.Objects;

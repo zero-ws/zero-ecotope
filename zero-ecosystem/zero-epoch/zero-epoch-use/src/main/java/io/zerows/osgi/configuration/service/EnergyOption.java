@@ -4,7 +4,7 @@ import io.zerows.component.log.OLog;
 import io.zerows.epoch.configuration.NodeNetwork;
 import io.zerows.epoch.configuration.NodeVertx;
 import io.zerows.support.Ut;
-import io.zerows.epoch.sdk.osgi.ServiceContext;
+import io.zerows.sdk.osgi.ServiceContext;
 
 import java.util.Set;
 

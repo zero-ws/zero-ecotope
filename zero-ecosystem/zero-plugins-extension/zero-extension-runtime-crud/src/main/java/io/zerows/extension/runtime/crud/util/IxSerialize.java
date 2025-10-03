@@ -6,7 +6,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.component.log.Annal;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.mbse.atom.specification.KModule;
-import io.zerows.epoch.corpus.metadata.specification.KField;
+import io.zerows.epoch.metadata.specification.KField;
 import io.zerows.support.Ut;
 
 import java.util.ArrayList;

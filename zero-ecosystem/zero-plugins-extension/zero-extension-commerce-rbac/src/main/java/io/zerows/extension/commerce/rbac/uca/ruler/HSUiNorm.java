@@ -3,10 +3,10 @@ package io.zerows.extension.commerce.rbac.uca.ruler;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.corpus.security.manage.KPermit;
+import io.zerows.epoch.metadata.security.KPermit;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
-import io.zerows.epoch.sdk.security.AbstractAdmit;
+import io.zerows.sdk.security.AbstractAdmit;
 import io.zerows.extension.commerce.rbac.uca.ruler.element.HAdmitCompiler;
 
 /**

@@ -6,7 +6,7 @@ import io.r2mo.typed.exception.web._500ServerInternalException;
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.constant.VString;
 import io.zerows.epoch.corpus.mbse.atom.specification.KModule;
-import io.zerows.epoch.corpus.metadata.specification.KJoin;
+import io.zerows.epoch.metadata.specification.KJoin;
 import io.zerows.epoch.corpus.model.commune.Envelop;
 import io.zerows.support.Ut;
 import io.zerows.extension.runtime.crud.bootstrap.IxPin;

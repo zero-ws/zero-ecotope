@@ -10,7 +10,7 @@ import io.zerows.platform.metadata.Kv;
 import io.zerows.component.aop.Aspect;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.mbse.atom.specification.KModule;
-import io.zerows.epoch.corpus.metadata.specification.KField;
+import io.zerows.epoch.metadata.specification.KField;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 import io.zerows.specification.modeling.metadata.HMetaAtom;
 

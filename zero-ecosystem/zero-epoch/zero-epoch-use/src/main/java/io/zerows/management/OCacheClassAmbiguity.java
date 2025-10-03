@@ -2,8 +2,8 @@ package io.zerows.management;
 
 import io.zerows.component.scanner.ClassScanner;
 import io.zerows.platform.enums.VertxComponent;
-import io.zerows.epoch.sdk.osgi.AbstractAmbiguity;
-import io.zerows.epoch.sdk.environment.Inquirer;
+import io.zerows.sdk.osgi.AbstractAmbiguity;
+import io.zerows.sdk.environment.Inquirer;
 import org.osgi.framework.Bundle;
 
 import java.util.HashSet;

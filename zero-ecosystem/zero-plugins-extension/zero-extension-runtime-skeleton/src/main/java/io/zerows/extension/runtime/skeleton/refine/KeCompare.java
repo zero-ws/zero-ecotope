@@ -7,7 +7,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.component.log.Annal;
 import io.zerows.platform.constant.VValue;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.epoch.corpus.metadata.commune.Apt;
+import io.zerows.epoch.metadata.commune.Apt;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
 import io.zerows.specification.modeling.metadata.HMetaAtom;

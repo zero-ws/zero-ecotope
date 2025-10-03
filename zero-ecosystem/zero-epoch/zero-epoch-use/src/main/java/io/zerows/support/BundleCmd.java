@@ -1,7 +1,7 @@
 package io.zerows.support;
 
 import io.zerows.epoch.constant.OMessage;
-import io.zerows.epoch.sdk.osgi.OCommand;
+import io.zerows.sdk.osgi.OCommand;
 import io.zerows.support.base.UtBase;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;

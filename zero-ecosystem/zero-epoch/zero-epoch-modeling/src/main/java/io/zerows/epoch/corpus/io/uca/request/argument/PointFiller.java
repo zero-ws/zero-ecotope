@@ -4,7 +4,7 @@ import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonArray;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.epoch.corpus.exception._60048Exception415PointDefine;
-import io.zerows.epoch.corpus.metadata.commune.Vis;
+import io.zerows.epoch.metadata.commune.Vis;
 import io.zerows.support.Ut;
 
 import java.util.List;

@@ -8,7 +8,7 @@ import io.zerows.platform.constant.VValue;
 import io.zerows.epoch.corpus.container.handler.AuthenticateEndurer;
 import io.zerows.epoch.corpus.io.uca.routing.OAxis;
 import io.zerows.epoch.corpus.model.running.RunServer;
-import io.zerows.epoch.corpus.security.Aegis;
+import io.zerows.epoch.metadata.security.Aegis;
 import io.zerows.epoch.corpus.web.security.store.OCacheSecurity;
 import io.zerows.epoch.corpus.web.security.uca.bridge.Bolt;
 import io.zerows.support.Ut;

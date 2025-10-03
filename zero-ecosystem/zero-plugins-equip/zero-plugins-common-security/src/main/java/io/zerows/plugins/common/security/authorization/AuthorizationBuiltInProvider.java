@@ -7,7 +7,7 @@ import io.vertx.core.Handler;
 import io.vertx.ext.auth.User;
 import io.vertx.ext.auth.authorization.Authorization;
 import io.vertx.ext.auth.authorization.AuthorizationProvider;
-import io.zerows.epoch.corpus.security.Aegis;
+import io.zerows.epoch.metadata.security.Aegis;
 import io.zerows.plugins.common.security.profile.PermissionAuthorization;
 
 import java.lang.reflect.Method;

@@ -4,8 +4,8 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.component.log.Log;
-import io.zerows.epoch.corpus.metadata.specification.KJoin;
-import io.zerows.epoch.corpus.metadata.specification.KPoint;
+import io.zerows.epoch.metadata.specification.KJoin;
+import io.zerows.epoch.metadata.specification.KPoint;
 import io.zerows.support.Ut;
 
 import java.util.Objects;

@@ -5,7 +5,7 @@ import io.vertx.ext.stomp.Frame;
 import io.vertx.ext.stomp.ServerFrame;
 import io.vertx.ext.stomp.StompServerConnection;
 import io.vertx.ext.stomp.impl.FrameParser;
-import io.zerows.epoch.corpus.security.Aegis;
+import io.zerows.epoch.metadata.security.Aegis;
 
 import java.util.ArrayList;
 import java.util.Arrays;

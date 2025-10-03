@@ -1,7 +1,7 @@
 package io.zerows.epoch.corpus.web.scheduler.store;
 
 import io.zerows.epoch.corpus.web.scheduler.atom.Mission;
-import io.zerows.epoch.sdk.osgi.AbstractAmbiguity;
+import io.zerows.sdk.osgi.AbstractAmbiguity;
 import org.osgi.framework.Bundle;
 
 import java.util.HashSet;

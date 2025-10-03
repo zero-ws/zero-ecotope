@@ -8,7 +8,7 @@ import io.vertx.ext.web.RoutingContext;
 import io.zerows.epoch.annotations.Codex;
 import io.zerows.component.log.Annal;
 import io.zerows.platform.metadata.Kv;
-import io.zerows.epoch.corpus.assembly.OProxyInstance;
+import io.zerows.component.injection.OProxyInstance;
 import io.zerows.epoch.corpus.container.exception._60052Exception411ContentLength;
 import io.zerows.epoch.corpus.container.uca.reply.ActionNext;
 import io.zerows.epoch.corpus.container.uca.reply.OAmbit;

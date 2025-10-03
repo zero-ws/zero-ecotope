@@ -2,7 +2,7 @@ package io.zerows.component.transformer;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.configuration.option.ClusterOptions;
-import io.zerows.epoch.sdk.environment.Transformer;
+import io.zerows.sdk.environment.Transformer;
 
 import java.util.Objects;
 

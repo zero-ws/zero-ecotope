@@ -3,7 +3,7 @@ package io.zerows.extension.commerce.rbac.uca.ruler;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.corpus.security.manage.KPermit;
+import io.zerows.epoch.metadata.security.KPermit;
 import io.zerows.extension.commerce.rbac.uca.ruler.element.HAdmitCompiler;
 
 public class HSDimArea extends HSDimNorm {

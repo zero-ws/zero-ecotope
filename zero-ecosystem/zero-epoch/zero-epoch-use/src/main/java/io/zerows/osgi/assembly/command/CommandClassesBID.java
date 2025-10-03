@@ -1,6 +1,6 @@
 package io.zerows.osgi.assembly.command;
 
-import io.zerows.epoch.sdk.osgi.OCommand;
+import io.zerows.sdk.osgi.OCommand;
 import org.osgi.framework.Bundle;
 
 /**

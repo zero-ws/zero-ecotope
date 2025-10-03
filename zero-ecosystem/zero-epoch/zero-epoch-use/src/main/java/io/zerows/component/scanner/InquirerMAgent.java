@@ -2,7 +2,7 @@ package io.zerows.component.scanner;
 
 
 import io.zerows.epoch.annotations.Agent;
-import io.zerows.epoch.sdk.environment.Inquirer;
+import io.zerows.sdk.environment.Inquirer;
 
 import java.util.Set;
 import java.util.stream.Collectors;

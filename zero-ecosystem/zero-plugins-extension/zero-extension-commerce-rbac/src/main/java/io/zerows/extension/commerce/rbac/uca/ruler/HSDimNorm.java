@@ -6,10 +6,10 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.constant.VValue;
-import io.zerows.epoch.corpus.security.manage.KPermit;
+import io.zerows.epoch.metadata.security.KPermit;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
-import io.zerows.epoch.sdk.security.AbstractAdmit;
+import io.zerows.sdk.security.AbstractAdmit;
 
 import java.util.Objects;
 

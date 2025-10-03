@@ -8,7 +8,7 @@ import io.zerows.epoch.corpus.container.exception._80510Exception404ModelNotFoun
 import io.zerows.epoch.corpus.container.exception._80547Exception409IdentifierConflict;
 import io.zerows.epoch.corpus.mbse.atom.specification.KModule;
 import io.zerows.epoch.corpus.mbse.uca.mixture.HOne;
-import io.zerows.epoch.corpus.metadata.specification.KPoint;
+import io.zerows.epoch.metadata.specification.KPoint;
 import io.zerows.support.Ut;
 import io.zerows.specification.access.app.HApp;
 import io.zerows.specification.access.app.HArk;

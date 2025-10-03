@@ -9,7 +9,7 @@ import io.zerows.epoch.configuration.option.RpcOptions;
 import io.zerows.epoch.configuration.option.SockOptions;
 import io.zerows.platform.enums.EmDeploy;
 import io.zerows.platform.enums.app.ServerType;
-import io.zerows.epoch.sdk.environment.OptionOfServer;
+import io.zerows.sdk.environment.OptionOfServer;
 import io.zerows.specification.configuration.HSetting;
 
 import java.io.Serializable;

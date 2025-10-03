@@ -8,7 +8,7 @@ import io.zerows.epoch.bootplus.extension.scaffold.plugin.AspectSwitcher;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.mbse.atom.runner.ActIn;
 import io.zerows.epoch.corpus.mbse.atom.runner.ActOut;
-import io.zerows.epoch.corpus.metadata.commune.Apt;
+import io.zerows.epoch.metadata.commune.Apt;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;

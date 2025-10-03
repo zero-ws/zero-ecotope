@@ -4,7 +4,7 @@ import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.QaS;
 import io.zerows.platform.metadata.KRunner;
 import io.zerows.support.Ut;
-import io.zerows.epoch.sdk.environment.Inquirer;
+import io.zerows.sdk.environment.Inquirer;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;

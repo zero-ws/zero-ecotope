@@ -1,6 +1,6 @@
 package io.zerows.component.execution;
 
-import io.zerows.epoch.corpus.metadata.service.CallbackParameter;
+import io.zerows.epoch.metadata.service.CallbackParameter;
 import org.osgi.framework.Bundle;
 
 /**

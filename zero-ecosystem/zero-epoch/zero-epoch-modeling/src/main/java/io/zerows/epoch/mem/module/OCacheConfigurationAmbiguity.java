@@ -2,7 +2,7 @@ package io.zerows.epoch.mem.module;
 
 import io.zerows.epoch.configuration.MDConfiguration;
 import io.zerows.epoch.configuration.MDId;
-import io.zerows.epoch.sdk.osgi.AbstractAmbiguity;
+import io.zerows.sdk.osgi.AbstractAmbiguity;
 import org.osgi.framework.Bundle;
 
 import java.util.HashSet;

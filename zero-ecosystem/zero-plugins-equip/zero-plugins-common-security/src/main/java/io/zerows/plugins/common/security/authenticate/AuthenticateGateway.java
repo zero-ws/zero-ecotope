@@ -12,8 +12,8 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.component.log.Annal;
 import io.zerows.component.environment.DevEnv;
-import io.zerows.epoch.corpus.security.Aegis;
-import io.zerows.epoch.corpus.security.Against;
+import io.zerows.epoch.metadata.security.Aegis;
+import io.zerows.epoch.metadata.security.Against;
 import io.zerows.epoch.corpus.web.cache.Rapid;
 import io.zerows.support.Ut;
 

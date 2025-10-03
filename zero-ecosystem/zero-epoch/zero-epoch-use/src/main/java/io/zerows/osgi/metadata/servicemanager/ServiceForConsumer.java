@@ -1,6 +1,6 @@
 package io.zerows.osgi.metadata.servicemanager;
 
-import io.zerows.epoch.sdk.osgi.ServiceInvocation;
+import io.zerows.sdk.osgi.ServiceInvocation;
 import org.osgi.framework.Bundle;
 
 import java.util.HashSet;

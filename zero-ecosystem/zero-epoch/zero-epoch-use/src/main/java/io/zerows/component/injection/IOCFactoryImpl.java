@@ -5,7 +5,7 @@ import io.r2mo.typed.cc.Cc;
 import io.zerows.component.scanner.InquirerGuice;
 import io.zerows.management.OCacheClass;
 import io.zerows.support.Ut;
-import io.zerows.epoch.sdk.environment.Inquirer;
+import io.zerows.sdk.environment.Inquirer;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
 

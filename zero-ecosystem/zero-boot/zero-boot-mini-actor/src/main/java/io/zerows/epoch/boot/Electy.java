@@ -8,7 +8,7 @@ import io.zerows.management.ORepositoryClass;
 import io.zerows.epoch.mem.ORepositoryMeta;
 import io.zerows.management.ORepositoryOption;
 import io.zerows.support.Ut;
-import io.zerows.epoch.sdk.management.ORepository;
+import io.zerows.sdk.management.ORepository;
 import io.zerows.platform.metadata.KRunner;
 import io.zerows.specification.configuration.HConfig;
 
