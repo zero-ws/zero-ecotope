@@ -4,8 +4,8 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.integrated.jackson.databind.RuleTermDeserializer;
-import io.zerows.integrated.jackson.databind.RuleTermSerializer;
+import io.zerows.integrated.jackson.RuleTermDeserializer;
+import io.zerows.integrated.jackson.RuleTermSerializer;
 
 import java.io.Serializable;
 import java.util.HashSet;

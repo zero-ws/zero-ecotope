@@ -4,13 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.vertx.core.json.JsonObject;
-import io.zerows.metadata.datamation.KDictUse;
 import io.zerows.constant.VString;
-import io.zerows.integrated.jackson.databind.JsonObjectDeserializer;
-import io.zerows.integrated.jackson.databind.JsonObjectSerializer;
-import io.zerows.support.UtBase;
+import io.zerows.integrated.jackson.JsonObjectDeserializer;
+import io.zerows.integrated.jackson.JsonObjectSerializer;
+import io.zerows.metadata.datamation.KDictUse;
 import io.zerows.specification.atomic.HCopier;
 import io.zerows.specification.atomic.HJson;
+import io.zerows.support.UtBase;
 
 import java.io.Serializable;
 import java.util.Objects;

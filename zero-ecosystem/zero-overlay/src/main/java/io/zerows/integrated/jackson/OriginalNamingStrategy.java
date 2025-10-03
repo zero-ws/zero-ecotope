@@ -1,4 +1,4 @@
-package io.zerows.integrated.jackson.databind;
+package io.zerows.integrated.jackson;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.cfg.MapperConfig;

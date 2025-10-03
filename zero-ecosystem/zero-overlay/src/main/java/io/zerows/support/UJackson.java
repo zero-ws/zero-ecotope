@@ -11,8 +11,8 @@ import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.constant.VString;
-import io.zerows.integrated.jackson.databind.OriginalNamingStrategy;
-import io.zerows.integrated.jackson.databind.module.HorizonModule;
+import io.zerows.integrated.jackson.ModuleHorizon;
+import io.zerows.integrated.jackson.OriginalNamingStrategy;
 
 import java.util.List;
 import java.util.Objects;
@@ -60,7 +60,7 @@ class UJackson {
         MAPPER.setPropertyNamingStrategy(OriginalNamingStrategy.JOOQ_NAME);
 
         // 注册自定义模块
-        final HorizonModule module = new HorizonModule();
+        final ModuleHorizon module = new ModuleHorizon();
         MAPPER.registerModule(module);
     }
 

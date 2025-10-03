@@ -7,12 +7,12 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.Annal;
 import io.zerows.constant.VString;
-import io.zerows.integrated.jackson.databind.JsonArrayDeserializer;
-import io.zerows.integrated.jackson.databind.JsonArraySerializer;
-import io.zerows.integrated.jackson.databind.JsonObjectDeserializer;
-import io.zerows.integrated.jackson.databind.JsonObjectSerializer;
-import io.zerows.support.UtBase;
+import io.zerows.integrated.jackson.JsonArrayDeserializer;
+import io.zerows.integrated.jackson.JsonArraySerializer;
+import io.zerows.integrated.jackson.JsonObjectDeserializer;
+import io.zerows.integrated.jackson.JsonObjectSerializer;
 import io.zerows.specification.modeling.HRecord;
+import io.zerows.support.UtBase;
 
 import java.io.Serializable;
 import java.util.Arrays;

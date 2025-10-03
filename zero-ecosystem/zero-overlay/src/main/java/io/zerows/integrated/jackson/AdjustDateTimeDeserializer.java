@@ -1,11 +1,10 @@
-package io.zerows.integrated.jackson.databind;
+package io.zerows.integrated.jackson;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
-import io.zerows.integrated.jackson.databind.module.HorizonModule;
 import io.zerows.support.UtBase;
 
 import java.io.IOException;
@@ -19,7 +18,7 @@ import java.time.format.DateTimeFormatter;
  * 该反序列化器继承自 `LocalDateTimeDeserializer`，用于处理带时区的日期时间计算。
  * 当您将日期时间设置到 Java 对象时，这里提供日期时间的标准，默认格式为 UTC。
  * <p>
- * 该组件被 {@link HorizonModule} 使用，如下所示：
+ * 该组件被 {@link ModuleHorizon} 使用，如下所示：
  *
  * <pre>{@code
  *      this.addDeserializer(LocalDateTime.class, new AdjustDateTimeDeserializer());

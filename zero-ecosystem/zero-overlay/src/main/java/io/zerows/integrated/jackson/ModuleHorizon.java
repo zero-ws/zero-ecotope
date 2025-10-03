@@ -1,4 +1,4 @@
-package io.zerows.integrated.jackson.databind.module;
+package io.zerows.integrated.jackson;
 
 import com.fasterxml.jackson.core.json.PackageVersion;
 import com.fasterxml.jackson.databind.BeanDescription;
@@ -49,12 +49,6 @@ import com.fasterxml.jackson.datatype.jsr310.ser.ZonedDateTimeSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.key.ZonedDateTimeKeySerializer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.integrated.jackson.databind.AdjustDateTimeDeserializer;
-import io.zerows.integrated.jackson.databind.ByteArraySerializer;
-import io.zerows.integrated.jackson.databind.JsonArrayDeserializer;
-import io.zerows.integrated.jackson.databind.JsonArraySerializer;
-import io.zerows.integrated.jackson.databind.JsonObjectDeserializer;
-import io.zerows.integrated.jackson.databind.JsonObjectSerializer;
 
 import java.io.Serial;
 import java.time.Duration;
@@ -76,11 +70,11 @@ import java.util.Iterator;
 /**
  * @author lang : 2023-05-09
  */
-public class HorizonModule extends SimpleModule {
+public class ModuleHorizon extends SimpleModule {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    public HorizonModule() {
+    public ModuleHorizon() {
         super(PackageVersion.VERSION);
         // Serializer
         this.addSerializer(JsonObject.class, new JsonObjectSerializer());
@@ -155,7 +149,7 @@ public class HorizonModule extends SimpleModule {
                     }
 
                     if (!inst.canCreateFromString()) {
-                        final AnnotatedMethod factory = HorizonModule.this._findFactory(ac, "of", String.class);
+                        final AnnotatedMethod factory = ModuleHorizon.this._findFactory(ac, "of", String.class);
                         if (factory != null) {
                             inst.configureFromStringCreator(factory);
                         }

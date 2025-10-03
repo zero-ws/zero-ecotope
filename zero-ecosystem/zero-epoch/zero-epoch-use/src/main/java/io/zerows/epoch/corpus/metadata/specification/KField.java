@@ -5,11 +5,11 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.constant.KName;
-import io.zerows.integrated.jackson.databind.JsonArrayDeserializer;
-import io.zerows.integrated.jackson.databind.JsonArraySerializer;
-import io.zerows.integrated.jackson.databind.JsonObjectDeserializer;
-import io.zerows.integrated.jackson.databind.JsonObjectSerializer;
 import io.zerows.epoch.program.Ut;
+import io.zerows.integrated.jackson.JsonArrayDeserializer;
+import io.zerows.integrated.jackson.JsonArraySerializer;
+import io.zerows.integrated.jackson.JsonObjectDeserializer;
+import io.zerows.integrated.jackson.JsonObjectSerializer;
 
 import java.io.Serializable;
 import java.util.HashSet;

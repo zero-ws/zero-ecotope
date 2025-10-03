@@ -1,4 +1,4 @@
-package io.zerows.integrated.jackson.databind;
+package io.zerows.integrated.jackson;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
