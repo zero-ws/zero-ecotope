@@ -1,7 +1,7 @@
 package io.zerows.extension.mbse.action.uca.monitor;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.shared.context.KRunner;
+import io.zerows.metadata.context.KRunner;
 import io.zerows.component.log.Annal;
 import io.zerows.extension.mbse.action.eon.JtMsg;
 

@@ -1,7 +1,7 @@
 package io.zerows.specification.storage;
 
 import io.zerows.annotations.monitor.One2One;
-import io.zerows.component.shared.app.KDatabase;
+import io.zerows.metadata.app.KDatabase;
 import io.zerows.enums.EmDS;
 import io.zerows.enums.typed.EmType;
 import io.zerows.specification.atomic.HContract;

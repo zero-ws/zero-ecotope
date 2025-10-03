@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Me;
 import io.zerows.epoch.annotations.Queue;
-import io.zerows.component.shared.program.KRef;
+import io.zerows.metadata.program.KRef;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.extension.commerce.finance.agent.service.end.AdjustStub;
 import io.zerows.extension.commerce.finance.agent.service.end.DebtStub;

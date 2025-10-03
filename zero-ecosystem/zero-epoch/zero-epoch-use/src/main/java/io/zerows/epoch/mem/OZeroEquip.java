@@ -4,7 +4,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.configure.YmlCore;
 import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.based.constant.KPlugin;
-import io.zerows.component.shared.boot.KSetting;
+import io.zerows.metadata.boot.KSetting;
 import io.zerows.constant.VBoot;
 import io.zerows.constant.VPath;
 import io.zerows.constant.VString;

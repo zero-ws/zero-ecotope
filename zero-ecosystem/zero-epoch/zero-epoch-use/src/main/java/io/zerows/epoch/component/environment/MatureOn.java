@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.based.constant.KWeb;
-import io.zerows.component.shared.program.KVarSet;
+import io.zerows.metadata.program.KVarSet;
 import io.zerows.constant.VString;
 import io.zerows.constant.VValue;
 import io.zerows.enums.EmDS;

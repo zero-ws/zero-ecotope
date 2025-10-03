@@ -2,7 +2,7 @@ package io.zerows.component.crypto;
 
 import io.r2mo.typed.cc.Cc;
 import io.zerows.annotations.monitor.Memory;
-import io.zerows.component.shared.program.KPair;
+import io.zerows.metadata.program.KPair;
 
 /**
  * Encrypt / Decrypt Interface for

@@ -7,7 +7,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 import io.zerows.epoch.based.constant.KName;
 import io.zerows.component.log.Annal;
-import io.zerows.component.shared.program.KRef;
+import io.zerows.metadata.program.KRef;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.security.DataBound;
 import io.zerows.epoch.corpus.web.cache.Rapid;

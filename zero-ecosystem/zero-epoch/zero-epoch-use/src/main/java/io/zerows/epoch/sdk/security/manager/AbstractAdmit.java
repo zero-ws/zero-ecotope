@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.constant.KName;
-import io.zerows.component.shared.boot.KPivot;
+import io.zerows.metadata.boot.KPivot;
 import io.zerows.epoch.corpus.security.manage.KPermit;
 import io.zerows.enums.EmApp;
 import io.zerows.epoch.program.Ut;

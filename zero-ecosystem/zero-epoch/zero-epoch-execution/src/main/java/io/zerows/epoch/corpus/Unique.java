@@ -3,7 +3,7 @@ package io.zerows.epoch.corpus;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.constant.KName;
-import io.zerows.component.shared.normalize.KRuleTerm;
+import io.zerows.metadata.normalize.KRuleTerm;
 import io.zerows.epoch.corpus.metadata.commune.Apt;
 import io.zerows.enums.typed.ChangeFlag;
 import io.zerows.epoch.program.Ut;

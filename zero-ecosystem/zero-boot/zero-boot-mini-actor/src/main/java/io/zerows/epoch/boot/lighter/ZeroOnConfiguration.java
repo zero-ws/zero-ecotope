@@ -1,6 +1,6 @@
 package io.zerows.epoch.boot.lighter;
 
-import io.zerows.component.shared.app.KConfig;
+import io.zerows.metadata.app.KConfig;
 import io.zerows.specification.configuration.boot.HMature;
 
 /**

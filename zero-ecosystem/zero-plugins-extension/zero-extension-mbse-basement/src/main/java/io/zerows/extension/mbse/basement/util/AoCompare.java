@@ -3,7 +3,7 @@ package io.zerows.extension.mbse.basement.util;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.constant.KName;
-import io.zerows.component.shared.program.Kv;
+import io.zerows.metadata.program.Kv;
 import io.zerows.component.compare.Vs;
 import io.zerows.constant.VValue;
 import io.zerows.epoch.corpus.Ux;

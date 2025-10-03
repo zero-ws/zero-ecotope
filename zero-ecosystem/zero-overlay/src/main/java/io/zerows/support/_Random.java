@@ -1,6 +1,6 @@
 package io.zerows.support;
 
-import io.zerows.component.shared.program.KPair;
+import io.zerows.metadata.program.KPair;
 import io.zerows.component.crypto.ED;
 
 /**

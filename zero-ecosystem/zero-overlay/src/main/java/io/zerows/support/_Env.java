@@ -1,6 +1,6 @@
 package io.zerows.support;
 
-import io.zerows.component.shared.program.Kv;
+import io.zerows.metadata.program.Kv;
 import io.zerows.constant.VEnv;
 import io.zerows.constant.VString;
 import io.zerows.enums.app.OsType;

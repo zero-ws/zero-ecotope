@@ -5,7 +5,7 @@ import io.zerows.epoch.annotations.EndPoint;
 import io.zerows.epoch.annotations.Infusion;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.annotations.Worker;
-import io.zerows.component.shared.context.KRunner;
+import io.zerows.metadata.context.KRunner;
 import io.zerows.epoch.component.scanner.InquirerEndPoint;
 import io.zerows.epoch.component.scanner.InquirerIpc;
 import io.zerows.epoch.component.scanner.InquirerMAgent;

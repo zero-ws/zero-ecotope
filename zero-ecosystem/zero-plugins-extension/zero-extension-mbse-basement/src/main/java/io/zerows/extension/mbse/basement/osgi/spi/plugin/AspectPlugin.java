@@ -4,7 +4,7 @@ import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.shared.datamation.KFabric;
+import io.zerows.metadata.datamation.KFabric;
 import io.zerows.exception.web._60050Exception501NotSupport;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 

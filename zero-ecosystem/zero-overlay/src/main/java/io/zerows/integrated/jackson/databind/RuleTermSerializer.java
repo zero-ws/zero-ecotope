@@ -3,7 +3,7 @@ package io.zerows.integrated.jackson.databind;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import io.zerows.component.shared.normalize.KRuleTerm;
+import io.zerows.metadata.normalize.KRuleTerm;
 
 import java.io.IOException;
 import java.util.ArrayList;

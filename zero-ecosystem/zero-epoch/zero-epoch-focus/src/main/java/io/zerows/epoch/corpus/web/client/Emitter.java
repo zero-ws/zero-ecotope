@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.shared.app.KIntegration;
+import io.zerows.metadata.app.KIntegration;
 import io.zerows.epoch.program.Ut;
 
 import java.util.Objects;

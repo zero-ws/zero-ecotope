@@ -6,7 +6,7 @@ import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.zerows.epoch.based.constant.KName;
 import io.zerows.component.log.Annal;
-import io.zerows.component.shared.app.KDS;
+import io.zerows.metadata.app.KDS;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.database.Database;
 import io.zerows.epoch.corpus.database.cp.zdk.DataPool;

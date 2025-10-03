@@ -5,7 +5,7 @@ import io.r2mo.vertx.common.exception.VertxBootException;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Up;
 import io.zerows.epoch.based.configure.YmlCore;
-import io.zerows.component.shared.boot.KBoot;
+import io.zerows.metadata.boot.KBoot;
 import io.zerows.epoch.corpus.cloud.LogCloud;
 import io.zerows.epoch.corpus.container.eon.em.FeatureMark;
 import io.zerows.epoch.corpus.container.exception._40001Exception500UpClassArgs;

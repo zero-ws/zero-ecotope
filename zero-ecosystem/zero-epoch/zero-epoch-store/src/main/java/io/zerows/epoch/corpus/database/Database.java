@@ -4,7 +4,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.annotations.monitor.Legacy;
 import io.zerows.epoch.based.configure.YmlCore;
 import io.zerows.component.log.OLog;
-import io.zerows.component.shared.app.KDatabase;
+import io.zerows.metadata.app.KDatabase;
 import io.zerows.epoch.component.environment.MatureOn;
 import io.zerows.enums.EmDS;
 import io.zerows.epoch.mem.OZeroStore;

@@ -2,7 +2,7 @@ package io.zerows.epoch.bootplus.extension.uca.modello;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.shared.program.Kv;
+import io.zerows.metadata.program.Kv;
 import io.zerows.epoch.based.constant.KName;
 import io.zerows.component.log.Annal;
 import io.zerows.epoch.program.Ut;

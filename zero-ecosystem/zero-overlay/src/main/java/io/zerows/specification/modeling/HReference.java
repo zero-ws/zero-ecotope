@@ -1,9 +1,9 @@
 package io.zerows.specification.modeling;
 
-import io.zerows.component.shared.reference.RQuery;
-import io.zerows.component.shared.reference.RQuote;
-import io.zerows.component.shared.reference.RReference;
-import io.zerows.component.shared.reference.RResult;
+import io.zerows.metadata.reference.RQuery;
+import io.zerows.metadata.reference.RQuote;
+import io.zerows.metadata.reference.RReference;
+import io.zerows.metadata.reference.RResult;
 
 import java.util.concurrent.ConcurrentMap;
 

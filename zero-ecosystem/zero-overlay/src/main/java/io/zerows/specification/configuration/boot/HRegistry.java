@@ -1,7 +1,7 @@
 package io.zerows.specification.configuration.boot;
 
 import io.vertx.core.Future;
-import io.zerows.component.shared.app.KTenement;
+import io.zerows.metadata.app.KTenement;
 import io.zerows.specification.access.app.HAmbient;
 import io.zerows.specification.access.app.HApp;
 import io.zerows.specification.access.app.HArk;

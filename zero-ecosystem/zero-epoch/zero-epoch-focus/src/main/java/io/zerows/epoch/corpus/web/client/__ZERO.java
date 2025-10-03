@@ -2,7 +2,7 @@ package io.zerows.epoch.corpus.web.client;
 
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.http.HttpMethod;
-import io.zerows.component.shared.app.KIntegration;
+import io.zerows.metadata.app.KIntegration;
 import io.zerows.annotations.monitor.Memory;
 
 import java.util.concurrent.ConcurrentHashMap;

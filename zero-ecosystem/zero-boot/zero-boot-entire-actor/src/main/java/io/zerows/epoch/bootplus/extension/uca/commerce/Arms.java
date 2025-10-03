@@ -7,7 +7,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.bootplus.extension.refine.Ox;
 import io.zerows.epoch.bootplus.extension.scaffold.plugin.AspectSwitcher;
 import io.zerows.epoch.bootplus.extension.uca.log.TrackIo;
-import io.zerows.component.shared.datamation.KFabric;
+import io.zerows.metadata.datamation.KFabric;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.metadata.commune.Apt;
 import io.zerows.epoch.corpus.metadata.element.JSix;

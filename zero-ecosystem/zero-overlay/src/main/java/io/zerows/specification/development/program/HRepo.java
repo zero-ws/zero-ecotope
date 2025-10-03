@@ -1,7 +1,7 @@
 package io.zerows.specification.development.program;
 
 import io.zerows.annotations.monitor.One2One;
-import io.zerows.component.shared.boot.KRepo;
+import io.zerows.metadata.boot.KRepo;
 import io.zerows.constant.VValue;
 import io.zerows.specification.development.compiled.HTrash;
 

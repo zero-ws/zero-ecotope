@@ -1,6 +1,6 @@
 package io.zerows.component.crypto;
 
-import io.zerows.component.shared.program.KPair;
+import io.zerows.metadata.program.KPair;
 import io.zerows.constant.VValue;
 
 import java.security.interfaces.RSAPrivateKey;

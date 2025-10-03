@@ -1,7 +1,7 @@
 package io.zerows.specification.access.app;
 
-import io.zerows.component.shared.app.KDS;
-import io.zerows.component.shared.app.KDatabase;
+import io.zerows.metadata.app.KDS;
+import io.zerows.metadata.app.KDatabase;
 import io.zerows.constant.VName;
 import io.zerows.constant.VString;
 import io.zerows.specification.vital.HOI;

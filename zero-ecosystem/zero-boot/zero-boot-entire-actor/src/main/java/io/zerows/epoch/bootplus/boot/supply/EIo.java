@@ -1,6 +1,6 @@
 package io.zerows.epoch.bootplus.boot.supply;
 
-import io.zerows.component.shared.app.KIntegration;
+import io.zerows.metadata.app.KIntegration;
 import io.zerows.constant.VPath;
 import io.zerows.constant.VString;
 import io.zerows.constant.VWeb;

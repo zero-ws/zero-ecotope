@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.exception._80542Exception409JoinTarget;
-import io.zerows.component.shared.datamation.KMapping;
+import io.zerows.metadata.datamation.KMapping;
 import io.zerows.enums.modeling.EmModel;
 import io.zerows.integrated.jackson.databind.ClassDeserializer;
 import io.zerows.integrated.jackson.databind.ClassSerializer;

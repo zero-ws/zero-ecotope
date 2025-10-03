@@ -1,7 +1,7 @@
 package io.zerows.epoch.corpus.database.jooq.operation;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.shared.program.Kv;
+import io.zerows.metadata.program.Kv;
 import io.zerows.epoch.corpus.database.jooq.JooqDsl;
 import io.zerows.epoch.corpus.database.jooq.JooqInfix;
 import io.zerows.epoch.corpus.database.jooq.util.JqAnalyzer;

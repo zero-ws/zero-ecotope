@@ -2,7 +2,7 @@ package io.zerows.component.crypto;
 
 import io.r2mo.function.Fn;
 import io.zerows.component.log.Annal;
-import io.zerows.component.shared.program.KPair;
+import io.zerows.metadata.program.KPair;
 import io.zerows.constant.VString;
 import io.zerows.constant.VValue;
 import io.zerows.runtime.HMacrocosm;

@@ -2,7 +2,7 @@ package io.zerows.extension.runtime.workflow.uca.conformity;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.shared.program.Kv;
+import io.zerows.metadata.program.Kv;
 import io.zerows.constant.VString;
 import io.zerows.constant.VValue;
 import io.zerows.epoch.corpus.Ux;

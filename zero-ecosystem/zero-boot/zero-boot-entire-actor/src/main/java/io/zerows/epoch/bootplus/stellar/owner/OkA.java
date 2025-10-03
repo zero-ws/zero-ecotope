@@ -2,7 +2,7 @@ package io.zerows.epoch.bootplus.stellar.owner;
 
 import io.zerows.epoch.bootplus.stellar.Party;
 import io.zerows.epoch.bootplus.stellar.vendor.OkB;
-import io.zerows.component.shared.app.KGlobal;
+import io.zerows.metadata.app.KGlobal;
 import io.zerows.constant.VWeb;
 import io.zerows.enums.Environment;
 

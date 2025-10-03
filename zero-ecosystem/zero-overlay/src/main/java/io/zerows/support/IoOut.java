@@ -3,7 +3,7 @@ package io.zerows.support;
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.shared.program.KHugeFile;
+import io.zerows.metadata.program.KHugeFile;
 import io.zerows.constant.VValue;
 import io.zerows.enums.typed.CompressLevel;
 

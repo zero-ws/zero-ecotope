@@ -1,6 +1,6 @@
 package io.zerows.specification.modeling;
 
-import io.zerows.component.shared.normalize.KMarkAtom;
+import io.zerows.metadata.normalize.KMarkAtom;
 import io.zerows.enums.modeling.EmModel;
 import io.zerows.specification.access.app.HArk;
 import io.zerows.specification.modeling.property.IComponent;

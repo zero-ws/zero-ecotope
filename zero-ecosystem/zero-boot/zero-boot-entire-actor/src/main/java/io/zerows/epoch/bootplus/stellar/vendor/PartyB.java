@@ -3,9 +3,9 @@ package io.zerows.epoch.bootplus.stellar.vendor;
 import io.zerows.epoch.bootplus.boot.supply.Envoy;
 import io.zerows.epoch.bootplus.stellar.owner.OkA;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.shared.app.KIntegration;
-import io.zerows.component.shared.datamation.KDictConfig;
-import io.zerows.component.shared.datamation.KMap;
+import io.zerows.metadata.app.KIntegration;
+import io.zerows.metadata.datamation.KDictConfig;
+import io.zerows.metadata.datamation.KMap;
 
 /**
  * ## 默认组装器实现

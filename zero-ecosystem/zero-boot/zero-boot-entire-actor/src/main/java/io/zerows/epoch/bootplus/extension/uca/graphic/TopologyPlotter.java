@@ -3,7 +3,7 @@ package io.zerows.epoch.bootplus.extension.uca.graphic;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.constant.KName;
-import io.zerows.component.shared.program.KRef;
+import io.zerows.metadata.program.KRef;
 import io.zerows.constant.VString;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.program.Ut;

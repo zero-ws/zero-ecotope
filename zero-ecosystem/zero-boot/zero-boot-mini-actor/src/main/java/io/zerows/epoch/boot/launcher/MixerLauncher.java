@@ -1,7 +1,7 @@
 package io.zerows.epoch.boot.launcher;
 
 import io.vertx.core.Vertx;
-import io.zerows.component.shared.boot.KEnvironment;
+import io.zerows.metadata.boot.KEnvironment;
 import io.zerows.epoch.corpus.container.store.BootStore;
 import io.zerows.enums.EmApp;
 import io.zerows.epoch.program.Ut;

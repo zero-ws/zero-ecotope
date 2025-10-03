@@ -4,7 +4,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.Log;
 import io.zerows.component.log.LogModule;
-import io.zerows.component.shared.normalize.KIdentity;
+import io.zerows.metadata.normalize.KIdentity;
 import io.zerows.epoch.corpus.database.Database;
 import io.zerows.epoch.corpus.metadata.commune.Apt;
 import io.zerows.epoch.corpus.metadata.element.JBag;

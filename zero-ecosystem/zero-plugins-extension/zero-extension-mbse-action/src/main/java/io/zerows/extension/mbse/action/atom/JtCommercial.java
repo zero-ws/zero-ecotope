@@ -2,10 +2,10 @@ package io.zerows.extension.mbse.action.atom;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.constant.KName;
-import io.zerows.component.shared.app.KIntegration;
-import io.zerows.component.shared.datamation.KDictConfig;
-import io.zerows.component.shared.datamation.KMap;
-import io.zerows.component.shared.normalize.KIdentity;
+import io.zerows.metadata.app.KIntegration;
+import io.zerows.metadata.datamation.KDictConfig;
+import io.zerows.metadata.datamation.KMap;
+import io.zerows.metadata.normalize.KIdentity;
 import io.zerows.epoch.corpus.database.Database;
 import io.zerows.enums.Environment;
 import io.zerows.enums.app.EmTraffic;

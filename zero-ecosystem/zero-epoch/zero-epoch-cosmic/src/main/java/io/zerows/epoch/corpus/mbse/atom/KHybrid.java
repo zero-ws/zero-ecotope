@@ -2,10 +2,10 @@ package io.zerows.epoch.corpus.mbse.atom;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.shared.normalize.KAttribute;
-import io.zerows.component.shared.normalize.KMarkAtom;
-import io.zerows.component.shared.normalize.KMarkAttribute;
-import io.zerows.component.shared.reference.RReference;
+import io.zerows.metadata.normalize.KAttribute;
+import io.zerows.metadata.normalize.KMarkAtom;
+import io.zerows.metadata.normalize.KMarkAttribute;
+import io.zerows.metadata.reference.RReference;
 import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.program.Ut;
 import io.zerows.specification.modeling.HAttribute;

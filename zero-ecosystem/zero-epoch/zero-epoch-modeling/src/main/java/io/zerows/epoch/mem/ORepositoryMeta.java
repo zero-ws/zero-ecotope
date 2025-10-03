@@ -2,7 +2,7 @@ package io.zerows.epoch.mem;
 
 import io.zerows.epoch.annotations.QaS;
 import io.zerows.component.log.OLog;
-import io.zerows.component.shared.context.KRunner;
+import io.zerows.metadata.context.KRunner;
 import io.zerows.epoch.component.scan.InquirerAgent;
 import io.zerows.epoch.component.scan.InquirerEvent;
 import io.zerows.epoch.component.scan.InquirerFilter;

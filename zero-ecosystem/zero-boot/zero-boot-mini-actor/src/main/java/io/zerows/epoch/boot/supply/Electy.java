@@ -1,7 +1,7 @@
 package io.zerows.epoch.boot.supply;
 
 import io.vertx.core.Vertx;
-import io.zerows.component.shared.context.KRunner;
+import io.zerows.metadata.context.KRunner;
 import io.zerows.epoch.corpus.web.scheduler.store.ORepositoryJob;
 import io.zerows.epoch.corpus.web.security.store.ORepositorySecurity;
 import io.zerows.epoch.corpus.web.websocket.store.ORepositorySock;

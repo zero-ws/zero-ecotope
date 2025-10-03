@@ -3,7 +3,7 @@ package io.zerows.extension.mbse.action.uca.micro;
 import io.r2mo.function.Fn;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
-import io.zerows.component.shared.program.KRef;
+import io.zerows.metadata.program.KRef;
 import io.zerows.epoch.corpus.model.commune.Envelop;
 import io.zerows.epoch.corpus.web.scheduler.atom.Mission;
 import io.zerows.enums.app.EmTraffic;

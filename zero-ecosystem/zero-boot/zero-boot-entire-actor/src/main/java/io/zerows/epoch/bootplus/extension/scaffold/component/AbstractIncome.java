@@ -7,7 +7,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Contract;
 import io.zerows.epoch.based.constant.KWeb;
 import io.zerows.epoch.bootplus.extension.refine.Ox;
-import io.zerows.component.shared.program.KRef;
+import io.zerows.metadata.program.KRef;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.model.commune.Envelop;
 import io.zerows.epoch.corpus.web.scheduler.atom.Mission;

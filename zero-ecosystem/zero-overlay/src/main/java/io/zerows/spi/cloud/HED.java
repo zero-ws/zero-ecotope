@@ -1,7 +1,7 @@
 package io.zerows.spi.cloud;
 
 import io.zerows.annotations.monitor.Development;
-import io.zerows.component.shared.program.KPair;
+import io.zerows.metadata.program.KPair;
 import io.zerows.constant.VString;
 import io.zerows.support.UtBase;
 

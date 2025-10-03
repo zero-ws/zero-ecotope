@@ -1,6 +1,6 @@
 package io.zerows.epoch.sdk.modeling;
 
-import io.zerows.component.shared.app.KIntegration;
+import io.zerows.metadata.app.KIntegration;
 import io.zerows.epoch.corpus.database.Database;
 import io.zerows.enums.app.EmTraffic;
 import io.zerows.specification.atomic.HJson;

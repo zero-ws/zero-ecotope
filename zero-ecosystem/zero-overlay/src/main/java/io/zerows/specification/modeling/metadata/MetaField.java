@@ -1,6 +1,6 @@
 package io.zerows.specification.modeling.metadata;
 
-import io.zerows.component.shared.normalize.KKey;
+import io.zerows.metadata.normalize.KKey;
 import io.zerows.enums.modeling.EmKey;
 import io.zerows.support.UtBase;
 import io.zerows.specification.modeling.element.HKey;

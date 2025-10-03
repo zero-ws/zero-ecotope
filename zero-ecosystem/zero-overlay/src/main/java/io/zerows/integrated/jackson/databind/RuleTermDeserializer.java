@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import io.vertx.core.json.JsonArray;
-import io.zerows.component.shared.normalize.KRuleTerm;
+import io.zerows.metadata.normalize.KRuleTerm;
 import io.zerows.support.UtBase;
 
 import java.io.IOException;

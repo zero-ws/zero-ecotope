@@ -2,8 +2,8 @@ package io.zerows.extension.mbse.basement.uca.reference;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
-import io.zerows.component.shared.reference.RResult;
-import io.zerows.component.shared.reference.RRule;
+import io.zerows.metadata.reference.RResult;
+import io.zerows.metadata.reference.RRule;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.support.FnBase;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
