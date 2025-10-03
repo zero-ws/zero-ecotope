@@ -3,7 +3,7 @@ package io.zerows.epoch.corpus.database.jooq;
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.configure.YmlCore;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 import io.zerows.component.log.OLog;
 import io.zerows.epoch.component.environment.MatureOn;
 import io.zerows.epoch.corpus.database.Database;

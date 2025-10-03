@@ -3,7 +3,7 @@ package io.zerows.epoch.corpus.container.store.uri;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Route;
 import io.vertx.ext.web.Router;
-import io.zerows.epoch.based.constant.KWeb;
+import io.zerows.epoch.constant.KWeb;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>

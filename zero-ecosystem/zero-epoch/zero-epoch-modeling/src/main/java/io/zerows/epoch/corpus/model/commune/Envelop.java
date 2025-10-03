@@ -15,7 +15,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.Session;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.corpus.exception._40032Exception500IndexExceed;
 import io.zerows.epoch.corpus.security.token.JwtToken;
 import io.zerows.enums.modeling.EmValue;

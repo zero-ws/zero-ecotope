@@ -3,7 +3,7 @@ package io.zerows.epoch.corpus.container.uca.store;
 import io.r2mo.function.Fn;
 import io.vertx.core.Vertx;
 import io.zerows.epoch.annotations.Infusion;
-import io.zerows.epoch.based.constant.KPlugin;
+import io.zerows.epoch.constant.KPlugin;
 import io.zerows.epoch.corpus.container.exception._40016Exception500PluginInitialize;
 import io.zerows.epoch.corpus.model.running.RunVertx;
 import io.zerows.epoch.mem.OZeroStore;

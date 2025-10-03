@@ -3,7 +3,7 @@ package io.zerows.epoch.component.normalize;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.annotations.monitor.ChatGPT;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.configuration.module.MDConnect;
 import io.zerows.epoch.configuration.module.MDEntity;
 import io.zerows.epoch.program.Ut;

@@ -1,7 +1,7 @@
 package io.zerows.extension.commerce.finance.atom;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.exception.web._80413Exception501NotImplement;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FTrans;

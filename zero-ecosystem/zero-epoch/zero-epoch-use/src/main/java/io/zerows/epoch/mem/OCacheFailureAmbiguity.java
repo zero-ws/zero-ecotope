@@ -2,7 +2,7 @@ package io.zerows.epoch.mem;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.configure.YmlCore;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.program.Ut;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HSetting;

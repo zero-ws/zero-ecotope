@@ -2,7 +2,7 @@ package io.zerows.epoch.bootplus.extension.refine;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.bootplus.extension.cv.OxCv;
 import io.zerows.metadata.app.KDS;
 import io.zerows.epoch.corpus.database.Database;

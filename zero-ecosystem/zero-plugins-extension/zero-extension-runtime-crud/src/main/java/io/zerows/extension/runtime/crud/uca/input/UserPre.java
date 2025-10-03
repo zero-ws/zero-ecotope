@@ -2,7 +2,7 @@ package io.zerows.extension.runtime.crud.uca.input;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.model.commune.Envelop;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;

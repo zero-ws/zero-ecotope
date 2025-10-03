@@ -1,4 +1,4 @@
-package io.zerows.epoch.based.constant.osgi;
+package io.zerows.epoch.constant.osgi;
 
 /**
  * @author lang : 2024-04-22

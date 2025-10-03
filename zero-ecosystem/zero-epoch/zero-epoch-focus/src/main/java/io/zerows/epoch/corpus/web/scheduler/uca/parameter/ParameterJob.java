@@ -5,7 +5,7 @@ import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 import io.vertx.ext.web.Session;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 import io.zerows.metadata.program.KRef;
 import io.zerows.epoch.component.parameter.ParameterBuilder;
 import io.zerows.epoch.corpus.io.annotations.BodyParam;

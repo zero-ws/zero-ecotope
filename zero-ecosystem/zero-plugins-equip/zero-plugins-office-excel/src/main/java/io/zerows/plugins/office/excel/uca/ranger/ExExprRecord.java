@@ -1,7 +1,7 @@
 package io.zerows.plugins.office.excel.uca.ranger;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.program.Ut;
 import io.zerows.plugins.office.excel.atom.ExRecord;
 import io.zerows.plugins.office.excel.eon.ExConstant;

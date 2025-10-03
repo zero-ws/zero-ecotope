@@ -1,7 +1,7 @@
 package io.zerows.epoch.bootplus.extension.refine;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.based.constant.cloud.VDBC;
+import io.zerows.epoch.constant.cloud.VDBC;
 import io.zerows.epoch.bootplus.extension.cv.em.TypeLog;
 import io.zerows.epoch.bootplus.stellar.ArgoStore;
 import io.zerows.metadata.normalize.KIdentity;

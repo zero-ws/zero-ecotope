@@ -1,4 +1,4 @@
-package io.zerows.epoch.based.constant;
+package io.zerows.epoch.constant;
 
 /*
  * Class for annotation default, only taken place for future use

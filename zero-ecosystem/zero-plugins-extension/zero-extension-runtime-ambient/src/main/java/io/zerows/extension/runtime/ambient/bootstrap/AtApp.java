@@ -2,7 +2,7 @@ package io.zerows.extension.runtime.ambient.bootstrap;
 
 import io.r2mo.function.Fn;
 import io.r2mo.typed.cc.Cc;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.database.jooq.operation.UxJooq;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XAppDao;

@@ -1,8 +1,8 @@
 package io.zerows.epoch.based.configure;
 
 import io.zerows.epoch.annotations.Infusion;
-import io.zerows.epoch.based.constant.KName;
-import io.zerows.epoch.based.constant.KPlugin;
+import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.constant.KPlugin;
 import io.zerows.constant.VPath;
 import io.zerows.constant.VString;
 import io.zerows.enums.EmDS;

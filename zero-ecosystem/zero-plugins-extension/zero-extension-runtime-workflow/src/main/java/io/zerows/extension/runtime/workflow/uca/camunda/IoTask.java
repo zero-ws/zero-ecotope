@@ -2,7 +2,7 @@ package io.zerows.extension.runtime.workflow.uca.camunda;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.extension.runtime.workflow.bootstrap.WfPin;
 import org.camunda.bpm.engine.TaskService;

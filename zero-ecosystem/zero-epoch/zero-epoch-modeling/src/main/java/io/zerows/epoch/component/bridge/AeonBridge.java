@@ -3,7 +3,7 @@ package io.zerows.epoch.component.bridge;
 import io.r2mo.function.Fn;
 import io.reactivex.rxjava3.core.Observable;
 import io.zerows.epoch.annotations.Address;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 import io.zerows.component.log.Annal;
 import io.zerows.epoch.corpus.exception._40012Exception500AddressWrong;
 import io.zerows.epoch.corpus.model.Anno;

@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.shareddata.ClusterSerializable;
 import io.vertx.ext.auth.User;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 import io.zerows.metadata.app.KIntegration;
 import io.zerows.metadata.program.Kv;
 import io.zerows.constant.VString;

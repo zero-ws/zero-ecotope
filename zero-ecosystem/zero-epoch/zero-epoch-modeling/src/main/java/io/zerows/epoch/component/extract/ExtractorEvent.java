@@ -6,7 +6,7 @@ import io.vertx.core.http.HttpMethod;
 import io.zerows.epoch.annotations.Adjust;
 import io.zerows.epoch.annotations.Codex;
 import io.zerows.epoch.annotations.EndPoint;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 import io.zerows.component.log.Annal;
 import io.zerows.epoch.corpus.exception._40005Exception500EventSource;
 import io.zerows.epoch.corpus.exception._40036Exception500CodexMore;

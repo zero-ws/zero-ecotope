@@ -1,4 +1,4 @@
-package io.zerows.epoch.corpus.container.store;
+package io.zerows.epoch.boot.impl;
 
 import io.r2mo.function.Fn;
 import io.r2mo.vertx.common.exception.VertxBootException;

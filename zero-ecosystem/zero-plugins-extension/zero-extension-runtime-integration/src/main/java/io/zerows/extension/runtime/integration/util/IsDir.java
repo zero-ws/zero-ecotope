@@ -3,7 +3,7 @@ package io.zerows.extension.runtime.integration.util;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 import io.zerows.metadata.program.Kv;
 import io.zerows.constant.VString;
 import io.zerows.epoch.corpus.Ux;

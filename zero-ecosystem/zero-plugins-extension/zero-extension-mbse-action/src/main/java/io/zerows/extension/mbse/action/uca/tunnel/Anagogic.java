@@ -2,7 +2,7 @@ package io.zerows.extension.mbse.action.uca.tunnel;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.based.constant.KWeb;
+import io.zerows.epoch.constant.KWeb;
 import io.zerows.metadata.datamation.KFabric;
 import io.zerows.metadata.datamation.KMap;
 import io.zerows.metadata.normalize.KIdentity;

@@ -1,7 +1,7 @@
 package io.zerows.epoch.bootplus.extension.uca.graphic;
 
 import io.zerows.epoch.bootplus.extension.refine.Ox;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 import io.zerows.specification.access.app.HApp;
 import io.zerows.specification.access.app.HArk;
 import io.zerows.specification.modeling.operation.HDao;

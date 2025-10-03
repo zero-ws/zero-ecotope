@@ -8,7 +8,7 @@ import io.zerows.enums.modeling.EmValue;
 import io.zerows.metadata.normalize.KAttribute;
 import io.zerows.metadata.normalize.KMarkAttribute;
 import io.zerows.metadata.reference.RRule;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.program.Ut;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MAttribute;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MField;

@@ -1,6 +1,6 @@
 package io.zerows.epoch.program;
 
-import io.zerows.epoch.based.constant.osgi.OMessage;
+import io.zerows.epoch.constant.osgi.OMessage;
 import io.zerows.epoch.sdk.metadata.running.OCommand;
 import io.zerows.support.UtBase;
 import org.osgi.framework.Bundle;

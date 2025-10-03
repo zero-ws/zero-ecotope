@@ -1,6 +1,6 @@
 package io.zerows.epoch.osgi.domain;
 
-import io.zerows.epoch.based.constant.osgi.OMessage;
+import io.zerows.epoch.constant.osgi.OMessage;
 import io.zerows.epoch.program.Ut;
 import org.apache.felix.dm.DependencyActivatorBase;
 import org.apache.felix.dm.DependencyManager;

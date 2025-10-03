@@ -1,7 +1,7 @@
 package io.zerows.extension.commerce.finance.uca.replica;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FBillItem;
 import io.zerows.extension.commerce.finance.eon.FmConstant;
 

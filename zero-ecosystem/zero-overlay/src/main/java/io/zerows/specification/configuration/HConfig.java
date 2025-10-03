@@ -2,7 +2,6 @@ package io.zerows.specification.configuration;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.metadata.app.KConfig;
-import io.zerows.specification.access.HLauncher;
 import io.zerows.specification.atomic.HCommand;
 
 /**

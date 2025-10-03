@@ -2,7 +2,7 @@ package io.zerows.extension.commerce.rbac.uca.acl.rapier;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 import io.zerows.component.qr.syntax.Ir;
 import io.zerows.epoch.component.environment.DevEnv;
 import io.zerows.epoch.corpus.Ux;

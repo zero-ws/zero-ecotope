@@ -2,7 +2,7 @@ package io.zerows.epoch.configuration.option;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.spi.cluster.ClusterManager;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.program.Ut;
 
 /**

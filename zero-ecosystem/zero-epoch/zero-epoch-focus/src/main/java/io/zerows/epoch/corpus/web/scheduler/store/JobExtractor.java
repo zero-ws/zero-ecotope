@@ -2,8 +2,8 @@ package io.zerows.epoch.corpus.web.scheduler.store;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Job;
-import io.zerows.epoch.based.constant.KName;
-import io.zerows.epoch.based.constant.KWeb;
+import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.component.extract.Extractor;
 import io.zerows.constant.VPath;
 import io.zerows.constant.VString;

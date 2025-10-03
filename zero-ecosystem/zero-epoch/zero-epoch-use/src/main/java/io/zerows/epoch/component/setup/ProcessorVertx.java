@@ -4,7 +4,7 @@ import io.vertx.core.VertxOptions;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.configure.YmlCore;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.component.transformer.TransformerCluster;
 import io.zerows.epoch.component.transformer.TransformerVertx;
 import io.zerows.epoch.configuration.NodeNetwork;

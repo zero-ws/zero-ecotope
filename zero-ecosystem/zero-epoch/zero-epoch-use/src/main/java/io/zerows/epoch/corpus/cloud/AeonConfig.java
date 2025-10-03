@@ -1,9 +1,9 @@
 package io.zerows.epoch.corpus.cloud;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.based.constant.KName;
-import io.zerows.epoch.based.constant.cloud.HName;
-import io.zerows.epoch.based.constant.cloud.HPath;
+import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.constant.cloud.HName;
+import io.zerows.epoch.constant.cloud.HPath;
 import io.zerows.metadata.boot.KPlot;
 import io.zerows.metadata.boot.KRepo;
 import io.zerows.epoch.component.environment.MatureOn;

@@ -3,7 +3,7 @@ package io.zerows.epoch.bootplus.extension.uca.modello;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.enums.modeling.EmValue;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.program.Ut;
 import io.zerows.specification.modeling.HRecord;
 import io.zerows.specification.modeling.property.OExpression;

@@ -3,7 +3,7 @@ package io.zerows.epoch.corpus.io.uca.request.mime.parse;
 import io.r2mo.typed.cc.Cc;
 import io.r2mo.typed.exception.WebException;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.epoch.based.constant.KWeb;
+import io.zerows.epoch.constant.KWeb;
 import io.zerows.component.log.Annal;
 import io.zerows.epoch.component.serialization.ZeroType;
 import io.zerows.constant.VValue;

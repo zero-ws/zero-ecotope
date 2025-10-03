@@ -2,7 +2,7 @@ package io.zerows.epoch.sdk.security.authority;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.corpus.security.manage.KCatena;
 import io.zerows.specification.atomic.HCommand;
 

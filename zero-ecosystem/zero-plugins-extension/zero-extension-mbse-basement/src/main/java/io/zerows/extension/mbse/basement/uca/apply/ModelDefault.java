@@ -2,7 +2,7 @@ package io.zerows.extension.mbse.basement.uca.apply;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.enums.modeling.EmModel;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 
 import static io.zerows.extension.mbse.basement.util.Ao.LOG;
 

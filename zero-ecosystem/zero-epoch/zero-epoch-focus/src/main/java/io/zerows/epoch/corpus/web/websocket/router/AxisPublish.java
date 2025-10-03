@@ -6,7 +6,7 @@ import io.vertx.ext.web.Route;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.sockjs.SockJSHandler;
 import io.vertx.ext.web.handler.sockjs.SockJSHandlerOptions;
-import io.zerows.epoch.based.constant.KWeb;
+import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.configuration.option.SockOptions;
 import io.zerows.epoch.corpus.io.uca.routing.OAxis;
 import io.zerows.epoch.corpus.model.running.RunServer;

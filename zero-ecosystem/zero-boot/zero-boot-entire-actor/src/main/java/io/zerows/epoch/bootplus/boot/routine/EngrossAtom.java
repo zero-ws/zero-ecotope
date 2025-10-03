@@ -2,7 +2,7 @@ package io.zerows.epoch.bootplus.boot.routine;
 
 import io.zerows.epoch.bootplus.boot.argument.ArgAtom;
 import io.zerows.epoch.bootplus.exploit.atom.QModeller;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.program.Ut;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
 

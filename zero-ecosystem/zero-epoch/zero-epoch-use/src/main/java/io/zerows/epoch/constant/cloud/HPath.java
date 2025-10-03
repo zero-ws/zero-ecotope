@@ -1,4 +1,4 @@
-package io.zerows.epoch.based.constant.cloud;
+package io.zerows.epoch.constant.cloud;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>

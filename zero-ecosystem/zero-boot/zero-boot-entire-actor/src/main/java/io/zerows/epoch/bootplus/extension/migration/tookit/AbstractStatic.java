@@ -3,7 +3,7 @@ package io.zerows.epoch.bootplus.extension.migration.tookit;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Contract;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.bootplus.extension.migration.MigrateStep;
 import io.zerows.component.qr.Pager;
 import io.zerows.component.qr.Sorter;

@@ -1,6 +1,6 @@
 package io.zerows.extension.commerce.rbac.eon;
 
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 
 public interface AuthKey {
     /**

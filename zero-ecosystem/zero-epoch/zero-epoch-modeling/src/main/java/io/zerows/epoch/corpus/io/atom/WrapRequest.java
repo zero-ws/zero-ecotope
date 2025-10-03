@@ -1,6 +1,6 @@
 package io.zerows.epoch.corpus.io.atom;
 
-import io.zerows.epoch.based.constant.KWeb;
+import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.corpus.io.uca.request.argument.Filler;
 import io.zerows.epoch.corpus.model.Event;
 import io.zerows.epoch.program.Ut;

@@ -3,7 +3,7 @@ package io.zerows.extension.runtime.ambient.agent.api.application;
 import io.vertx.core.json.JsonArray;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.EndPoint;
-import io.zerows.epoch.based.constant.KWeb;
+import io.zerows.epoch.constant.KWeb;
 import io.zerows.extension.runtime.ambient.eon.Addr;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.HeaderParam;

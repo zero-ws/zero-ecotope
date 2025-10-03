@@ -2,7 +2,7 @@ package io.zerows.epoch.bootplus.extension.uca.console;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.bootplus.extension.refine.Ox;
 import io.zerows.epoch.bootplus.extension.scaffold.console.AbstractInstruction;
 import io.zerows.epoch.bootplus.stellar.vendor.OkB;

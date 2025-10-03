@@ -2,7 +2,7 @@ package io.zerows.extension.runtime.workflow.atom.runtime;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 import io.zerows.component.aop.AspectRobin;
 import io.zerows.constant.VString;
 import io.zerows.epoch.corpus.Ux;

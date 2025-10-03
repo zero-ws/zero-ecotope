@@ -2,7 +2,7 @@ package io.zerows.extension.runtime.tpl.osgi.spi;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.program.Ut;
 import io.zerows.extension.runtime.skeleton.eon.em.EmMessage;

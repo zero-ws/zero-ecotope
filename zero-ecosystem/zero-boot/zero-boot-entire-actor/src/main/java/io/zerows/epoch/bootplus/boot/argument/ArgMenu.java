@@ -1,6 +1,6 @@
 package io.zerows.epoch.bootplus.boot.argument;
 
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 
 import java.util.List;
 import java.util.Objects;

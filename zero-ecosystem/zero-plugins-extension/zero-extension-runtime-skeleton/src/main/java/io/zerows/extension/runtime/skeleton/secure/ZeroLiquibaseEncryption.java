@@ -1,7 +1,7 @@
 package io.zerows.extension.runtime.skeleton.secure;
 
 import io.zerows.metadata.program.KPair;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 import io.zerows.spi.cloud.HED;
 import io.zerows.epoch.program.Ut;
 

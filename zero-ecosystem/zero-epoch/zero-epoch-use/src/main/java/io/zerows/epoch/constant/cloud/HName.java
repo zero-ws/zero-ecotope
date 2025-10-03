@@ -1,6 +1,6 @@
-package io.zerows.epoch.based.constant.cloud;
+package io.zerows.epoch.constant.cloud;
 
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 
 /**
  * 新的常量文件，区别于Zero中的KName

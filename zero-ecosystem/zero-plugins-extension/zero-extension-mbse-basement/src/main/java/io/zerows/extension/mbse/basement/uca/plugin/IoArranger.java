@@ -1,7 +1,7 @@
 package io.zerows.extension.mbse.basement.uca.plugin;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 import io.zerows.metadata.program.Kv;
 import io.zerows.epoch.corpus.metadata.element.JComponent;
 import io.zerows.epoch.program.Ut;

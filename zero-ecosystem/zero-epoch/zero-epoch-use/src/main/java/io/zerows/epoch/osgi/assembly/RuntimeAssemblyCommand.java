@@ -1,6 +1,6 @@
 package io.zerows.epoch.osgi.assembly;
 
-import io.zerows.epoch.based.constant.osgi.OConstant;
+import io.zerows.epoch.constant.osgi.OConstant;
 import io.zerows.epoch.osgi.assembly.command.CommandClasses;
 import io.zerows.epoch.osgi.assembly.command.CommandClassesBID;
 import io.zerows.epoch.sdk.metadata.AbstractCommand;

@@ -2,7 +2,7 @@ package io.zerows.extension.commerce.lbs.agent.api;
 
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.EndPoint;
-import io.zerows.epoch.based.constant.KWeb;
+import io.zerows.epoch.constant.KWeb;
 import io.zerows.extension.commerce.lbs.eon.Addr;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.HeaderParam;

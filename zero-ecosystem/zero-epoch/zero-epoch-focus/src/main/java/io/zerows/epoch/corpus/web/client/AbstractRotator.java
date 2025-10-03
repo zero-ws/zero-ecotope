@@ -2,7 +2,7 @@ package io.zerows.epoch.corpus.web.client;
 
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.based.constant.KWeb;
+import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.based.exception._15002Exception500JexlExpression;
 import io.zerows.component.log.OLog;
 import io.zerows.metadata.app.KIntegration;

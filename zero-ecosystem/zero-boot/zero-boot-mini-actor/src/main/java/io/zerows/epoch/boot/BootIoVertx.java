@@ -1,8 +1,8 @@
 package io.zerows.epoch.boot;
 
-import io.zerows.epoch.corpus.container.store.BootStore;
+import io.zerows.epoch.boot.impl.BootStore;
 import io.zerows.epoch.program.Ut;
-import io.zerows.specification.access.HLauncher;
+import io.zerows.specification.configuration.HLauncher;
 import io.zerows.specification.configuration.HBoot;
 import io.zerows.specification.configuration.HEnergy;
 import io.zerows.spi.BootIo;

@@ -3,7 +3,7 @@ package io.zerows.epoch.corpus.web.cache;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 import io.zerows.component.log.OLog;
 import io.zerows.epoch.corpus.web.cache.shared.UxPool;
 import io.zerows.epoch.program.Ut;

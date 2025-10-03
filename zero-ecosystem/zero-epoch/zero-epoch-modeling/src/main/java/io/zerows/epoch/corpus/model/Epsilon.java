@@ -1,6 +1,6 @@
 package io.zerows.epoch.corpus.model;
 
-import io.zerows.epoch.based.constant.KWeb;
+import io.zerows.epoch.constant.KWeb;
 import io.zerows.enums.EmMime;
 
 import java.io.Serializable;

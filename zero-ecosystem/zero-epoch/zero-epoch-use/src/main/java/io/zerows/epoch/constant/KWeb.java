@@ -1,4 +1,4 @@
-package io.zerows.epoch.based.constant;
+package io.zerows.epoch.constant;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;

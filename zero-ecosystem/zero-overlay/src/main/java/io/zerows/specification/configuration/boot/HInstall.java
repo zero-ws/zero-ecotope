@@ -1,6 +1,6 @@
 package io.zerows.specification.configuration.boot;
 
-import io.zerows.specification.access.HLauncher;
+import io.zerows.specification.configuration.HLauncher;
 
 /**
  * 「模块启动器」模块启动专用接口

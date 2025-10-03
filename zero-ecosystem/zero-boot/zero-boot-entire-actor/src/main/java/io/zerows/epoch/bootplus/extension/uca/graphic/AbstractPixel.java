@@ -2,7 +2,7 @@ package io.zerows.epoch.bootplus.extension.uca.graphic;
 
 import io.zerows.epoch.bootplus.extension.refine.Ox;
 import io.vertx.core.Future;
-import io.zerows.epoch.based.constant.KWeb;
+import io.zerows.epoch.constant.KWeb;
 import io.zerows.component.log.Annal;
 import io.zerows.plugins.store.neo4j.Neo4jClient;
 import io.zerows.plugins.store.neo4j.Neo4jInfix;

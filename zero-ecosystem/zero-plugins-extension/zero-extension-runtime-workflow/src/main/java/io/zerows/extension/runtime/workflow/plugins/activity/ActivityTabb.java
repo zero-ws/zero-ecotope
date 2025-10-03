@@ -3,7 +3,7 @@ package io.zerows.extension.runtime.workflow.plugins.activity;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 import io.zerows.component.aop.After;
 import io.zerows.component.aop.Around;
 import io.zerows.component.qr.syntax.Ir;

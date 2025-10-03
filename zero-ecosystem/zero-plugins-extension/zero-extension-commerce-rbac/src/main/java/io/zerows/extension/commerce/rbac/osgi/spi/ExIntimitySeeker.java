@@ -4,7 +4,7 @@ import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.corpus.metadata.typed.UObject;
 import io.zerows.epoch.program.Ut;
 import io.zerows.extension.commerce.rbac.agent.service.accredit.ActionService;

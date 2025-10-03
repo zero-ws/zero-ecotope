@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.constant.VString;
 import io.zerows.enums.typed.ChangeFlag;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 import io.zerows.specification.modeling.HRecord;
 
 import java.util.Arrays;

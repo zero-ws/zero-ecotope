@@ -2,8 +2,8 @@ package io.zerows.extension.mbse.action.uca.business;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.based.constant.KName;
-import io.zerows.epoch.based.constant.KWeb;
+import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.constant.KWeb;
 import io.zerows.component.log.Annal;
 import io.zerows.metadata.app.KIntegration;
 import io.zerows.metadata.datamation.KDictConfig;

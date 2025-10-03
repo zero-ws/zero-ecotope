@@ -7,7 +7,7 @@ import io.zerows.epoch.annotations.security.Authenticate;
 import io.zerows.epoch.annotations.security.Authorized;
 import io.zerows.epoch.annotations.security.AuthorizedResource;
 import io.zerows.epoch.annotations.security.Wall;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 import io.zerows.component.log.Annal;
 import io.zerows.extension.commerce.rbac.agent.service.accredit.AccreditStub;
 import io.zerows.extension.commerce.rbac.agent.service.login.jwt.JwtStub;

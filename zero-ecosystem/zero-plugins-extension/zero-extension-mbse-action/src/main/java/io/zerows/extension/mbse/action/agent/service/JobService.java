@@ -2,7 +2,7 @@ package io.zerows.extension.mbse.action.agent.service;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 import io.zerows.component.log.Annal;
 import io.zerows.component.qr.syntax.Ir;
 import io.zerows.epoch.corpus.Ux;

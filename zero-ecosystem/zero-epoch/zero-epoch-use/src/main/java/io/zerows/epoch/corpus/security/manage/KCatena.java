@@ -3,7 +3,7 @@ package io.zerows.epoch.corpus.security.manage;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 import io.zerows.constant.VString;
 import io.zerows.enums.EmSecure;
 import io.zerows.epoch.mem.cache.CStoreSecurity;

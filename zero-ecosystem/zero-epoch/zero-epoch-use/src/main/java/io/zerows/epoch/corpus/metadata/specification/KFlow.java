@@ -1,7 +1,7 @@
 package io.zerows.epoch.corpus.metadata.specification;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 
 import java.io.Serializable;
 

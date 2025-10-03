@@ -2,7 +2,7 @@ package io.zerows.epoch.corpus.cloud;
 
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.based.constant.cloud.HName;
+import io.zerows.epoch.constant.cloud.HName;
 import io.zerows.epoch.program.Ut;
 import io.zerows.specification.atomic.HCommand;
 import io.zerows.specification.configuration.HConfig;

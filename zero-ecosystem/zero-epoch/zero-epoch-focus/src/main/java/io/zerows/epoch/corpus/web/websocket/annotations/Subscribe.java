@@ -1,7 +1,7 @@
 package io.zerows.epoch.corpus.web.websocket.annotations;
 
 import io.zerows.constant.VString;
-import io.zerows.epoch.based.constant.DefaultClass;
+import io.zerows.epoch.constant.DefaultClass;
 import io.zerows.epoch.corpus.web.websocket.eon.em.RemindType;
 
 import java.lang.annotation.*;

@@ -1,6 +1,6 @@
 package io.zerows.epoch.osgi.modeling;
 
-import io.zerows.epoch.based.constant.osgi.OMessage;
+import io.zerows.epoch.constant.osgi.OMessage;
 import io.zerows.epoch.configuration.module.MDConfiguration;
 import io.zerows.epoch.corpus.extension.HExtension;
 import io.zerows.epoch.osgi.metadata.service.EnergyConfiguration;

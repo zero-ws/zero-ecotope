@@ -3,7 +3,7 @@ package io.zerows.epoch.component.setup;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.configure.YmlCore;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.configuration.NodeVertx;
 import io.zerows.enums.app.ServerType;
 import io.zerows.exception.boot._30001Exception500ServerConfig;

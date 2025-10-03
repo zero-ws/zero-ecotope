@@ -1,7 +1,7 @@
 package io.zerows.extension.mbse.modulat.uca.configure;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.program.Ut;
 import io.zerows.extension.mbse.modulat.domain.tables.pojos.BBag;
 

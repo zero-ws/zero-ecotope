@@ -2,7 +2,7 @@ package io.zerows.epoch.program;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 
 import java.util.List;
 

@@ -3,8 +3,8 @@ package io.zerows.epoch.component.environment;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.based.constant.KName;
-import io.zerows.epoch.based.constant.KWeb;
+import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.constant.KWeb;
 import lombok.extern.slf4j.Slf4j;
 
 /**

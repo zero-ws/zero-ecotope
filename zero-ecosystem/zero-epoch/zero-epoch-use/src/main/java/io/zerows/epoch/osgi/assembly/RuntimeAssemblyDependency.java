@@ -1,6 +1,6 @@
 package io.zerows.epoch.osgi.assembly;
 
-import io.zerows.epoch.based.constant.osgi.OMessage;
+import io.zerows.epoch.constant.osgi.OMessage;
 import io.zerows.epoch.osgi.assembly.service.EnergyClass;
 import io.zerows.epoch.osgi.assembly.service.EnergyClassService;
 import io.zerows.epoch.osgi.assembly.service.provider.InvocationAssembly;

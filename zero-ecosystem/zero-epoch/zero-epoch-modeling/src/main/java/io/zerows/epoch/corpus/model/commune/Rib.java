@@ -3,7 +3,7 @@ package io.zerows.epoch.corpus.model.commune;
 import io.r2mo.typed.exception.WebException;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.based.constant.KWeb;
+import io.zerows.epoch.constant.KWeb;
 
 class Rib {
 

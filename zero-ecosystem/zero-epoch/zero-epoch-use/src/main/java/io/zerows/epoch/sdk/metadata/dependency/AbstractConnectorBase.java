@@ -1,7 +1,7 @@
 package io.zerows.epoch.sdk.metadata.dependency;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.osgi.metadata.dependency.CallbackOfBase;
 import io.zerows.epoch.osgi.metadata.service.EnergyFailure;
 import io.zerows.epoch.sdk.metadata.service.ServiceConnector;

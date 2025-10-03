@@ -2,8 +2,8 @@ package io.zerows.extension.commerce.rbac.uca.logged;
 
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.based.constant.KName;
-import io.zerows.epoch.based.constant.KWeb;
+import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.corpus.metadata.commune.Vis;
 import io.zerows.extension.commerce.rbac.atom.ScConfig;
 import io.zerows.extension.commerce.rbac.bootstrap.ScPin;

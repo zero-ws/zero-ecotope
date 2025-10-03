@@ -1,8 +1,8 @@
 package io.zerows.extension.runtime.crud.bootstrap;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.based.constant.KName;
-import io.zerows.epoch.based.constant.KWeb;
+import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.corpus.mbse.atom.specification.KColumn;
 import io.zerows.epoch.corpus.mbse.atom.specification.KModule;
 import io.zerows.epoch.corpus.metadata.specification.KField;

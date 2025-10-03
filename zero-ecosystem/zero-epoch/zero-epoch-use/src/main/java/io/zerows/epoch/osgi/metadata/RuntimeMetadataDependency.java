@@ -1,6 +1,6 @@
 package io.zerows.epoch.osgi.metadata;
 
-import io.zerows.epoch.based.constant.osgi.OMessage;
+import io.zerows.epoch.constant.osgi.OMessage;
 import io.zerows.epoch.osgi.metadata.service.EnergyFailure;
 import io.zerows.epoch.osgi.metadata.service.EnergyFailureService;
 import io.zerows.epoch.osgi.metadata.service.EnergyService;

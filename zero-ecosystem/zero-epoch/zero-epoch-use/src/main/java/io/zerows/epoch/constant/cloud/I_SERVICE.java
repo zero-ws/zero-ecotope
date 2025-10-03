@@ -1,4 +1,4 @@
-package io.zerows.epoch.based.constant.cloud;
+package io.zerows.epoch.constant.cloud;
 
 import io.zerows.constant.VPC;
 import io.zerows.enums.typed.ChangeFlag;

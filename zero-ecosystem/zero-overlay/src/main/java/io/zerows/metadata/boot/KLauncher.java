@@ -7,7 +7,7 @@ import io.zerows.constant.VMessage;
 import io.zerows.exception.boot._11010Exception500BootIoMissing;
 import io.zerows.spi.BootIo;
 import io.zerows.spi.HPI;
-import io.zerows.specification.access.HLauncher;
+import io.zerows.specification.configuration.HLauncher;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HEnergy;
 

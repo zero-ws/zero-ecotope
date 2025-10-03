@@ -1,6 +1,6 @@
 package io.zerows.extension.commerce.erp.osgi;
 
-import io.zerows.epoch.based.constant.osgi.OMessage;
+import io.zerows.epoch.constant.osgi.OMessage;
 import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.sdk.metadata.service.ServiceConnector;
 import org.apache.felix.dm.DependencyActivatorBase;

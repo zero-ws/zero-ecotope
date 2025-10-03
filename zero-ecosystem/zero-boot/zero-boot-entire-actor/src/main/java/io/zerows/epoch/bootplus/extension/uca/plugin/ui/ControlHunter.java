@@ -2,7 +2,7 @@ package io.zerows.epoch.bootplus.extension.uca.plugin.ui;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.bootplus.extension.uca.plugin.indent.KeyIndent;
 import io.zerows.component.log.Annal;
 import io.zerows.epoch.corpus.Ux;

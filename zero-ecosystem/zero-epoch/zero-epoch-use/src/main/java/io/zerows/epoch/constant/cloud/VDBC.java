@@ -1,4 +1,4 @@
-package io.zerows.epoch.based.constant.cloud;
+package io.zerows.epoch.constant.cloud;
 
 /**
  * 扩展配置部分的标准化
@@ -12,6 +12,6 @@ public interface VDBC {
     /**
      * 关联数据表：{@see I_SERVICE}
      */
-    interface I_SERVICE extends io.zerows.epoch.based.constant.cloud.I_SERVICE {
+    interface I_SERVICE extends io.zerows.epoch.constant.cloud.I_SERVICE {
     }
 }

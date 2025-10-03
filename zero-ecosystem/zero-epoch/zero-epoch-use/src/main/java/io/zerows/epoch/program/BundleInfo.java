@@ -1,7 +1,7 @@
 package io.zerows.epoch.program;
 
 import io.zerows.constant.VString;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 import org.apache.felix.dm.Component;
 import org.apache.felix.dm.ServiceDependency;
 import org.osgi.framework.Bundle;

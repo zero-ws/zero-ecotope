@@ -1,6 +1,6 @@
 package io.zerows.epoch.osgi.configuration;
 
-import io.zerows.epoch.based.constant.osgi.OConstant;
+import io.zerows.epoch.constant.osgi.OConstant;
 import io.zerows.constant.VString;
 import io.zerows.epoch.osgi.configuration.command.CommandNodeNetwork;
 import io.zerows.epoch.osgi.configuration.command.CommandNodeVertx;

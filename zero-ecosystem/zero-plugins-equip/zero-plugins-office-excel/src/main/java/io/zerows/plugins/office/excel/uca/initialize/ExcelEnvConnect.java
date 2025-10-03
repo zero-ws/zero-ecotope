@@ -2,7 +2,7 @@ package io.zerows.plugins.office.excel.uca.initialize;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.component.normalize.EquipAt;
 import io.zerows.epoch.component.normalize.Replacer;
 import io.zerows.epoch.configuration.module.MDConfiguration;

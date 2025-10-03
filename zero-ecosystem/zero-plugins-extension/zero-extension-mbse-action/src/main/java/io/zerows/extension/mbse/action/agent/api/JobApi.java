@@ -3,7 +3,7 @@ package io.zerows.extension.mbse.action.agent.api;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.EndPoint;
-import io.zerows.epoch.based.constant.KWeb;
+import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.corpus.io.annotations.BodyParam;
 import io.zerows.extension.mbse.action.eon.JtAddr;
 import jakarta.ws.rs.*;

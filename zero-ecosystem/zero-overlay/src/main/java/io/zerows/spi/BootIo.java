@@ -1,6 +1,6 @@
 package io.zerows.spi;
 
-import io.zerows.specification.access.HLauncher;
+import io.zerows.specification.configuration.HLauncher;
 import io.zerows.specification.configuration.HEnergy;
 
 /**

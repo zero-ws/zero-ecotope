@@ -2,7 +2,7 @@ package io.zerows.epoch.bootplus.extension.spi.component;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.bootplus.extension.refine.Ox;
 import io.zerows.epoch.bootplus.extension.scaffold.stdn.AbstractHFile;
 import io.zerows.epoch.corpus.mbse.atom.runner.ActIn;

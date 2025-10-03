@@ -3,7 +3,7 @@ package io.zerows.extension.mbse.modulat.osgi.spi;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.extension.mbse.modulat.uca.dock.Ark;
 import io.zerows.extension.runtime.skeleton.osgi.spi.modeler.Modulat;

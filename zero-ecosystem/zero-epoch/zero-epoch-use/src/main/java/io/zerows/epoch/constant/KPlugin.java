@@ -1,4 +1,4 @@
-package io.zerows.epoch.based.constant;
+package io.zerows.epoch.constant;
 
 import io.zerows.epoch.annotations.impl.*;
 import io.zerows.epoch.based.configure.YmlCore;

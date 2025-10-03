@@ -6,7 +6,7 @@ import io.zerows.metadata.normalize.KAttribute;
 import io.zerows.metadata.normalize.KMarkAtom;
 import io.zerows.metadata.normalize.KMarkAttribute;
 import io.zerows.metadata.reference.RReference;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.program.Ut;
 import io.zerows.specification.modeling.HAttribute;
 import io.zerows.specification.modeling.HRule;

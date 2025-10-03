@@ -2,7 +2,7 @@ package io.zerows.extension.commerce.finance.uca.trans;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 import io.zerows.metadata.program.KRef;
 import io.zerows.constant.VValue;
 import io.zerows.epoch.corpus.Ux;

@@ -3,7 +3,7 @@ package io.zerows.epoch.corpus.security.token;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
-import io.zerows.epoch.based.constant.KName;
+import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.corpus.security.AegisItem;
 import io.zerows.enums.EmSecure;
 import io.zerows.exception.web._60050Exception501NotSupport;
