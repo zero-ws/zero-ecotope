@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.mem.cache.CStore;
+import io.zerows.management.cache.CStore;
 import io.zerows.epoch.program.Ut;
 import io.zerows.specification.atomic.HCombiner;
 

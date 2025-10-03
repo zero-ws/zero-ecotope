@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.configure.YmlCore;
 import io.zerows.platform.constant.VName;
 import io.zerows.epoch.corpus.metadata.element.JComponent;
-import io.zerows.epoch.mem.OZeroStore;
+import io.zerows.management.OZeroStore;
 import io.zerows.epoch.program.Ut;
 import org.osgi.framework.Bundle;
 

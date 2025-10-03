@@ -7,8 +7,8 @@ import io.zerows.epoch.corpus.container.store.under.StoreVertx;
 import io.zerows.epoch.corpus.container.uca.store.StubLinear;
 import io.zerows.epoch.corpus.model.running.RunVertx;
 import io.zerows.platform.enums.VertxComponent;
-import io.zerows.epoch.mem.OCacheClass;
-import io.zerows.epoch.osgi.metadata.service.EnergyDeployment;
+import io.zerows.management.OCacheClass;
+import io.zerows.osgi.metadata.service.EnergyDeployment;
 import io.zerows.epoch.program.Ut;
 import org.osgi.framework.Bundle;
 

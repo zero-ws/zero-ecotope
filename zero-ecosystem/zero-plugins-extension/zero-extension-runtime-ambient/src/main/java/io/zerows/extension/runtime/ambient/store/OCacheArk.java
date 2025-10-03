@@ -2,7 +2,7 @@ package io.zerows.extension.runtime.ambient.store;
 
 import io.r2mo.typed.cc.Cc;
 import io.zerows.epoch.program.Ut;
-import io.zerows.epoch.sdk.metadata.running.OCache;
+import io.zerows.epoch.sdk.management.OCache;
 import io.zerows.specification.access.app.HApp;
 import io.zerows.specification.access.app.HArk;
 import org.osgi.framework.Bundle;

@@ -3,7 +3,7 @@ package io.zerows.epoch.mem;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.http.HttpMethod;
 import io.zerows.epoch.program.Ut;
-import io.zerows.epoch.sdk.metadata.running.OCache;
+import io.zerows.epoch.sdk.management.OCache;
 import org.osgi.framework.Bundle;
 
 import java.util.Objects;

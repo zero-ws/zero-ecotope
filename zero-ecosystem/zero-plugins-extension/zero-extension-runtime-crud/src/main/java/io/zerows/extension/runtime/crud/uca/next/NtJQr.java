@@ -2,7 +2,7 @@ package io.zerows.extension.runtime.crud.uca.next;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.component.destine.Conflate;
+import io.zerows.component.destine.Conflate;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.extension.runtime.crud.eon.Pooled;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;

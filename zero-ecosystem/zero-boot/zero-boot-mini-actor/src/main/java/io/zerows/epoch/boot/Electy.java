@@ -4,11 +4,11 @@ import io.vertx.core.Vertx;
 import io.zerows.epoch.corpus.web.scheduler.store.ORepositoryJob;
 import io.zerows.epoch.corpus.web.security.store.ORepositorySecurity;
 import io.zerows.epoch.corpus.web.websocket.store.ORepositorySock;
-import io.zerows.epoch.mem.ORepositoryClass;
+import io.zerows.management.ORepositoryClass;
 import io.zerows.epoch.mem.ORepositoryMeta;
-import io.zerows.epoch.mem.ORepositoryOption;
+import io.zerows.management.ORepositoryOption;
 import io.zerows.epoch.program.Ut;
-import io.zerows.epoch.sdk.metadata.running.ORepository;
+import io.zerows.epoch.sdk.management.ORepository;
 import io.zerows.platform.metadata.KRunner;
 import io.zerows.specification.configuration.HConfig;
 

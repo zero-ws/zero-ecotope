@@ -6,7 +6,7 @@ import feign.Retryer;
 import feign.codec.ErrorDecoder;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.sdk.metadata.plugins.InfixConfig;
+import io.zerows.epoch.sdk.plugins.InfixConfig;
 import io.zerows.plugins.integration.feign.codec.JsonObjectDecoder;
 import io.zerows.plugins.integration.feign.codec.JsonObjectEncoder;
 

@@ -3,9 +3,9 @@ package io.zerows.epoch.mem.module;
 import io.github.jklingsporn.vertx.jooq.shared.internal.AbstractVertxDAO;
 import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.epoch.configuration.module.MDMeta;
-import io.zerows.epoch.mem.OCacheClass;
+import io.zerows.management.OCacheClass;
 import io.zerows.epoch.program.Ut;
-import io.zerows.epoch.sdk.metadata.AbstractAmbiguity;
+import io.zerows.epoch.sdk.osgi.AbstractAmbiguity;
 import org.osgi.framework.Bundle;
 
 import java.util.ArrayList;

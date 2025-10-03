@@ -1,7 +1,7 @@
 package io.zerows.extension.runtime.ambient.osgi;
 
-import io.zerows.epoch.sdk.metadata.dependency.AbstractConnectorBase;
-import io.zerows.epoch.sdk.metadata.service.ServiceConnector;
+import io.zerows.epoch.sdk.osgi.AbstractConnectorBase;
+import io.zerows.epoch.sdk.osgi.ServiceConnector;
 import io.zerows.extension.runtime.skeleton.osgi.ExtensionServiceConnector;
 import org.osgi.framework.Bundle;
 

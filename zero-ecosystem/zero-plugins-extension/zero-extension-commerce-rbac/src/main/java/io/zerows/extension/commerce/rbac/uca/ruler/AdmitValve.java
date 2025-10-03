@@ -5,8 +5,8 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.security.manage.KCatena;
 import io.zerows.epoch.corpus.security.manage.KPermit;
-import io.zerows.epoch.sdk.security.authority.HValve;
-import io.zerows.epoch.sdk.security.manager.AbstractValve;
+import io.zerows.epoch.sdk.security.HValve;
+import io.zerows.epoch.sdk.security.AbstractValve;
 
 /**
  * Dim  =  FLAT

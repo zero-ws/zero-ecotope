@@ -3,7 +3,7 @@ package io.zerows.epoch.corpus.model;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.http.HttpMethod;
 import io.zerows.epoch.constant.KWeb;
-import io.zerows.epoch.component.di.DiPlugin;
+import io.zerows.component.injection.DiPlugin;
 import io.zerows.platform.constant.VString;
 import jakarta.ws.rs.core.MediaType;
 

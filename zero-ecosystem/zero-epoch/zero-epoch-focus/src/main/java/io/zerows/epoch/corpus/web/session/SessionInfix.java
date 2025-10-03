@@ -5,7 +5,7 @@ import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Infusion;
 import io.zerows.epoch.based.configure.YmlCore;
-import io.zerows.epoch.sdk.metadata.plugins.Infix;
+import io.zerows.epoch.sdk.plugins.Infix;
 
 import java.util.Objects;
 

@@ -6,9 +6,9 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.enums.EmSecure;
-import io.zerows.epoch.mem.cache.CStoreSecurity;
+import io.zerows.management.cache.CStoreSecurity;
 import io.zerows.epoch.program.Ut;
-import io.zerows.epoch.sdk.security.authority.HAdmit;
+import io.zerows.epoch.sdk.security.HAdmit;
 
 import java.io.Serializable;
 import java.util.Objects;

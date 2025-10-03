@@ -1,7 +1,7 @@
 package io.zerows.extension.runtime.crud.bootstrap;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.component.environment.DevEnv;
+import io.zerows.component.environment.DevEnv;
 import io.zerows.epoch.configuration.module.MDConfiguration;
 import io.zerows.epoch.configuration.module.MDEntity;
 import io.zerows.epoch.corpus.extension.HExtension;

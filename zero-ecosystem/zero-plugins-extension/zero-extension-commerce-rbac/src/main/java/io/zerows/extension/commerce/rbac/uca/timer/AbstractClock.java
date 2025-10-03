@@ -3,7 +3,7 @@ package io.zerows.extension.commerce.rbac.uca.timer;
 import io.vertx.core.Future;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.web.cache.Rapid;
-import io.zerows.epoch.sdk.metadata.AbstractAmbiguity;
+import io.zerows.epoch.sdk.osgi.AbstractAmbiguity;
 import io.zerows.support.FnBase;
 import org.osgi.framework.Bundle;
 

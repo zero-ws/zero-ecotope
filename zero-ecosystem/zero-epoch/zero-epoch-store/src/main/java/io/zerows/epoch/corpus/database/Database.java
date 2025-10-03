@@ -5,9 +5,9 @@ import io.zerows.platform.annotations.Legacy;
 import io.zerows.epoch.based.configure.YmlCore;
 import io.zerows.component.log.OLog;
 import io.zerows.platform.metadata.KDatabase;
-import io.zerows.epoch.component.environment.MatureOn;
+import io.zerows.component.environment.MatureOn;
 import io.zerows.platform.enums.EmDS;
-import io.zerows.epoch.mem.OZeroStore;
+import io.zerows.management.OZeroStore;
 import io.zerows.epoch.program.Ut;
 
 import java.sql.DriverManager;

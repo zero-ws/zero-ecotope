@@ -2,7 +2,7 @@ package io.zerows.epoch.corpus.container.osgi;
 
 import io.zerows.epoch.constant.osgi.OMessage;
 import io.zerows.epoch.program.Ut;
-import io.zerows.epoch.sdk.metadata.service.ServiceConnector;
+import io.zerows.epoch.sdk.osgi.ServiceConnector;
 import org.apache.felix.dm.DependencyActivatorBase;
 import org.apache.felix.dm.DependencyManager;
 import org.osgi.annotation.bundle.Header;

@@ -3,7 +3,7 @@ package io.zerows.epoch.corpus.cloud;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.annotations.Memory;
-import io.zerows.epoch.mem.cache.CStore;
+import io.zerows.management.cache.CStore;
 import io.zerows.specification.development.ncloud.HAeon;
 import io.zerows.specification.development.ncloud.HStarter;
 

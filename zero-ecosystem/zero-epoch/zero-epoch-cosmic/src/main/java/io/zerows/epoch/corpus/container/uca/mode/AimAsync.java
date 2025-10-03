@@ -13,7 +13,7 @@ import io.zerows.epoch.configuration.NodeNetwork;
 import io.zerows.epoch.corpus.io.zdk.Aim;
 import io.zerows.epoch.corpus.model.Event;
 import io.zerows.epoch.corpus.model.commune.Envelop;
-import io.zerows.epoch.mem.OCacheNode;
+import io.zerows.management.OCacheNode;
 
 import java.util.Objects;
 

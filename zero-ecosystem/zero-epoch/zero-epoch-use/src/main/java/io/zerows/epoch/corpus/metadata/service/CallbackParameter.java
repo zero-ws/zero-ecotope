@@ -1,8 +1,8 @@
 package io.zerows.epoch.corpus.metadata.service;
 
 import io.zerows.epoch.configuration.module.MDConfiguration;
-import io.zerows.epoch.sdk.metadata.service.ServiceContext;
-import io.zerows.epoch.sdk.metadata.service.ServiceInvocation;
+import io.zerows.epoch.sdk.osgi.ServiceContext;
+import io.zerows.epoch.sdk.osgi.ServiceInvocation;
 import io.zerows.specification.configuration.HSetting;
 import org.apache.felix.dm.DependencyManager;
 

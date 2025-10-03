@@ -12,7 +12,7 @@ import io.zerows.epoch.corpus.container.store.under.StoreVertx;
 import io.zerows.epoch.corpus.model.commune.Envelop;
 import io.zerows.epoch.corpus.model.running.RunVertx;
 import io.zerows.epoch.program.Ut;
-import io.zerows.epoch.sdk.metadata.AbstractAmbiguity;
+import io.zerows.epoch.sdk.osgi.AbstractAmbiguity;
 import org.osgi.framework.Bundle;
 
 import java.util.Objects;

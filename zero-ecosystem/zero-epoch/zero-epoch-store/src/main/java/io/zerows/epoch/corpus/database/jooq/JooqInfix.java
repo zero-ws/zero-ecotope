@@ -9,7 +9,7 @@ import io.zerows.platform.metadata.KDatabase;
 import io.zerows.epoch.corpus.database.cp.zdk.DataPool;
 import io.zerows.epoch.corpus.database.exception._40065Exception500JooqConfiguration;
 import io.zerows.epoch.program.Ut;
-import io.zerows.epoch.sdk.metadata.plugins.Infix;
+import io.zerows.epoch.sdk.plugins.Infix;
 import org.jooq.Configuration;
 import org.jooq.DSLContext;
 

@@ -9,7 +9,7 @@ import io.zerows.platform.constant.VString;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.database.Database;
 import io.zerows.epoch.corpus.database.cp.zdk.DataPool;
-import io.zerows.epoch.mem.OZeroStore;
+import io.zerows.management.OZeroStore;
 import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.program.fn.Fx;
 import org.jooq.Configuration;

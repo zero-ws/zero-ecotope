@@ -8,7 +8,7 @@ import io.zerows.platform.metadata.KPivot;
 import io.zerows.epoch.configuration.module.MDConfiguration;
 import io.zerows.epoch.configuration.module.MDWorkflow;
 import io.zerows.epoch.corpus.extension.HExtension;
-import io.zerows.epoch.mem.OZeroStore;
+import io.zerows.management.OZeroStore;
 import io.zerows.support.FnBase;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
 import io.zerows.extension.runtime.workflow.domain.tables.pojos.WFlow;

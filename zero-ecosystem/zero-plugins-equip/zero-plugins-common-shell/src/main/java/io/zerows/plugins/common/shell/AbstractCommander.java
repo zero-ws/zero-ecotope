@@ -3,7 +3,7 @@ package io.zerows.plugins.common.shell;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.zerows.component.log.Annal;
-import io.zerows.epoch.component.serialization.ZeroType;
+import io.zerows.component.serialization.ZeroType;
 import io.zerows.platform.enums.Environment;
 import io.zerows.epoch.program.Ut;
 import io.zerows.plugins.common.shell.atom.CommandAtom;

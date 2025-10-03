@@ -4,7 +4,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.configure.YmlCore;
 import io.zerows.epoch.program.Ut;
-import io.zerows.epoch.sdk.metadata.plugins.Infix;
+import io.zerows.epoch.sdk.plugins.Infix;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>

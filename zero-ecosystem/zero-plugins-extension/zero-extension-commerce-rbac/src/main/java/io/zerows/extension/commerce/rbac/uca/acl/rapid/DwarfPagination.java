@@ -3,7 +3,7 @@ package io.zerows.extension.commerce.rbac.uca.acl.rapid;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.program.Ut;
-import io.zerows.epoch.sdk.security.authority.Acl;
+import io.zerows.epoch.sdk.security.Acl;
 
 /*
  * Here are the pagination list filter `Dwarf`

@@ -2,7 +2,7 @@ package io.zerows.extension.commerce.rbac.uca.acl.rapid;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.program.Ut;
-import io.zerows.epoch.sdk.security.authority.Acl;
+import io.zerows.epoch.sdk.security.Acl;
 import io.zerows.extension.commerce.rbac.eon.em.RegionType;
 import io.zerows.extension.commerce.rbac.exception._80215Exception500DwarfNull;
 import io.zerows.extension.commerce.rbac.uca.acl.rapid.addon.DwarfAddOn;

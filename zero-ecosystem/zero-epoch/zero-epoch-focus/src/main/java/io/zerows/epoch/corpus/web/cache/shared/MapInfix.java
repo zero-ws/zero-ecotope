@@ -3,7 +3,7 @@ package io.zerows.epoch.corpus.web.cache.shared;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Vertx;
 import io.zerows.epoch.annotations.Infusion;
-import io.zerows.epoch.sdk.metadata.plugins.Infix;
+import io.zerows.epoch.sdk.plugins.Infix;
 
 @Infusion
 @SuppressWarnings("all")

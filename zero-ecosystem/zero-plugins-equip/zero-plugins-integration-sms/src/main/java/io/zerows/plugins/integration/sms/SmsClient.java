@@ -8,7 +8,7 @@ import io.vertx.core.Promise;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.OLog;
-import io.zerows.epoch.sdk.metadata.plugins.InfixClient;
+import io.zerows.epoch.sdk.plugins.InfixClient;
 
 /**
  * AliSmsClient for app.zero.cloud of <a href="https://dysms.console.aliyun.com/dysms.htm">阿里巴巴短信服务</a>

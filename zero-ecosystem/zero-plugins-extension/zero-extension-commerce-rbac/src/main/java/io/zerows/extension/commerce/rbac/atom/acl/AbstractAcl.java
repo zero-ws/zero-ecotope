@@ -1,6 +1,6 @@
 package io.zerows.extension.commerce.rbac.atom.acl;
 
-import io.zerows.epoch.sdk.security.authority.AclView;
+import io.zerows.epoch.sdk.security.AclView;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>

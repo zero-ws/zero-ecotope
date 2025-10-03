@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.component.log.Annal;
-import io.zerows.epoch.component.di.DiPlugin;
+import io.zerows.component.injection.DiPlugin;
 import io.zerows.platform.constant.VString;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.program.Ut;

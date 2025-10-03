@@ -1,6 +1,6 @@
 package io.zerows.epoch.testsuite;
 
-import io.zerows.epoch.component.di.DiPlugin;
+import io.zerows.component.injection.DiPlugin;
 import io.zerows.epoch.corpus.database.jooq.JooqInfix;
 
 /**

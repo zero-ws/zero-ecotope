@@ -1,7 +1,7 @@
 package io.vertx.up.uca.web;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.component.serialization.ZeroType;
+import io.zerows.component.serialization.ZeroType;
 import io.zerows.epoch.testsuite.ZeroBase;
 import org.junit.Test;
 

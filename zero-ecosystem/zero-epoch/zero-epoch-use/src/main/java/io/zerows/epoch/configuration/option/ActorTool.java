@@ -4,7 +4,7 @@ import io.vertx.core.DeploymentOptions;
 import io.vertx.core.ThreadingModel;
 import io.zerows.epoch.annotations.Agent;
 import io.zerows.epoch.annotations.Worker;
-import io.zerows.epoch.component.transformer.TransformerActor;
+import io.zerows.component.transformer.TransformerActor;
 import io.zerows.platform.enums.EmDeploy;
 import io.zerows.epoch.program.Ut;
 

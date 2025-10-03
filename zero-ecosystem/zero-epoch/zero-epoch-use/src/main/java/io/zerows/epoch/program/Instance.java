@@ -7,7 +7,7 @@ import io.zerows.epoch.annotations.Contract;
 import io.zerows.epoch.based.exception._40028Exception503DuplicatedImpl;
 import io.zerows.epoch.based.exception._60040Exception412ContractField;
 import io.zerows.platform.constant.VValue;
-import io.zerows.epoch.mem.OCacheClass;
+import io.zerows.management.OCacheClass;
 import io.zerows.support.UtBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

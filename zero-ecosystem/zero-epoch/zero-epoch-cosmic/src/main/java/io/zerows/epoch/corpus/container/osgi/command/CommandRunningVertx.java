@@ -2,7 +2,7 @@ package io.zerows.epoch.corpus.container.osgi.command;
 
 import io.vertx.core.Vertx;
 import io.zerows.epoch.corpus.container.store.under.StoreVertx;
-import io.zerows.epoch.sdk.metadata.running.OCommand;
+import io.zerows.epoch.sdk.osgi.OCommand;
 import org.osgi.framework.Bundle;
 
 import java.util.Objects;

@@ -4,7 +4,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.enums.EmSecure;
 import io.zerows.epoch.program.Ut;
-import io.zerows.epoch.sdk.security.authority.Acl;
+import io.zerows.epoch.sdk.security.Acl;
 
 import java.util.HashSet;
 import java.util.Objects;

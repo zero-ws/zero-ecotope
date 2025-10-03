@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.configure.YmlCore;
 import io.zerows.epoch.configuration.module.MDConfiguration;
 import io.zerows.epoch.corpus.extension.HExtension;
-import io.zerows.epoch.mem.OZeroStore;
+import io.zerows.management.OZeroStore;
 import io.zerows.epoch.program.Ut;
 import io.zerows.extension.mbse.modulat.eon.BkConstant;
 

@@ -9,7 +9,7 @@ import io.zerows.platform.constant.VValue;
 import io.zerows.epoch.corpus.security.manage.KPermit;
 import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.program.fn.Fx;
-import io.zerows.epoch.sdk.security.manager.AbstractAdmit;
+import io.zerows.epoch.sdk.security.AbstractAdmit;
 
 import java.util.Objects;
 

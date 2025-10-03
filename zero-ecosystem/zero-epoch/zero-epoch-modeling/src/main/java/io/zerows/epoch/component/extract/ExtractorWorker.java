@@ -5,7 +5,7 @@ import io.vertx.core.DeploymentOptions;
 import io.zerows.component.log.Annal;
 import io.zerows.epoch.configuration.NodeNetwork;
 import io.zerows.epoch.configuration.NodeVertx;
-import io.zerows.epoch.mem.OCacheNode;
+import io.zerows.management.OCacheNode;
 
 /**
  * Worker bottle deployment

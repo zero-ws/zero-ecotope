@@ -10,7 +10,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.configure.YmlCore;
 import io.zerows.epoch.corpus.cloud.LogCloud;
-import io.zerows.epoch.mem.OZeroStore;
+import io.zerows.management.OZeroStore;
 import io.zerows.epoch.program.Ut;
 import io.zerows.platform.metadata.KLauncher;
 import io.zerows.platform.metadata.KPivot;

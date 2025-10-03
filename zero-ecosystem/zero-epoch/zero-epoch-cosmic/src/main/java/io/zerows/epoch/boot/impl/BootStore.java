@@ -12,7 +12,7 @@ import io.zerows.epoch.corpus.container.exception._40001Exception500UpClassArgs;
 import io.zerows.epoch.corpus.container.exception._40002Exception500UpClassInvalid;
 import io.zerows.epoch.corpus.model.Anno;
 import io.zerows.platform.enums.EmApp;
-import io.zerows.epoch.mem.OZeroStore;
+import io.zerows.management.OZeroStore;
 import io.zerows.specification.configuration.HBoot;
 import io.zerows.specification.configuration.HSetting;
 import io.zerows.specification.configuration.HStation;

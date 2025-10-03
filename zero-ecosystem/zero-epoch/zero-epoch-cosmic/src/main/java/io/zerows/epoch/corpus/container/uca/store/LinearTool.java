@@ -2,7 +2,7 @@ package io.zerows.epoch.corpus.container.uca.store;
 
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Vertx;
-import io.zerows.epoch.component.environment.DevOps;
+import io.zerows.component.environment.DevOps;
 import io.zerows.epoch.corpus.model.running.RunVertx;
 import io.zerows.epoch.program.Ut;
 

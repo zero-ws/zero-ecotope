@@ -2,7 +2,7 @@ package io.zerows.epoch.mem;
 
 import io.zerows.epoch.corpus.model.action.OJointAction;
 import io.zerows.epoch.corpus.model.action.OJointMap;
-import io.zerows.epoch.sdk.metadata.AbstractAmbiguity;
+import io.zerows.epoch.sdk.osgi.AbstractAmbiguity;
 import org.osgi.framework.Bundle;
 
 /**

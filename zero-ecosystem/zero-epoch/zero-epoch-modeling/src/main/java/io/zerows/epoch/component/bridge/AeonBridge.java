@@ -11,7 +11,7 @@ import io.zerows.epoch.corpus.model.Receipt;
 import io.zerows.epoch.corpus.model.action.OJointAction;
 import io.zerows.platform.enums.EmAction;
 import io.zerows.platform.enums.VertxComponent;
-import io.zerows.epoch.mem.OCacheClass;
+import io.zerows.management.OCacheClass;
 import io.zerows.epoch.mem.OCacheJoint;
 import io.zerows.epoch.program.Ut;
 

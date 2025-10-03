@@ -5,7 +5,7 @@ import io.zerows.platform.constant.VPath;
 import io.zerows.platform.constant.VString;
 import io.zerows.epoch.corpus.model.running.RunVertx;
 import io.zerows.platform.exception._11002Exception500EmptyIo;
-import io.zerows.epoch.mem.cache.CStore;
+import io.zerows.management.cache.CStore;
 import io.zerows.epoch.program.Ut;
 import lombok.extern.slf4j.Slf4j;
 

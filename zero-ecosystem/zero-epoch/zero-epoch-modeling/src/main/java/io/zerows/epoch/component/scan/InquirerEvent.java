@@ -3,7 +3,7 @@ package io.zerows.epoch.component.scan;
 import io.r2mo.function.Fn;
 import io.zerows.epoch.component.scan.parallel.EndPointThread;
 import io.zerows.epoch.corpus.model.Event;
-import io.zerows.epoch.sdk.metadata.uca.Inquirer;
+import io.zerows.epoch.sdk.environment.Inquirer;
 
 import java.util.ArrayList;
 import java.util.HashSet;

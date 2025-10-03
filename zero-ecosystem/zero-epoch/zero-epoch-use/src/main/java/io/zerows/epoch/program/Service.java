@@ -1,7 +1,7 @@
 package io.zerows.epoch.program;
 
 import io.zerows.platform.constant.VValue;
-import io.zerows.epoch.mem.cache.CStore;
+import io.zerows.management.cache.CStore;
 
 import java.io.BufferedReader;
 import java.io.IOException;

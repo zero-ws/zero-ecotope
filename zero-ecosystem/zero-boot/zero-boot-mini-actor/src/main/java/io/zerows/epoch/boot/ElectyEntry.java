@@ -5,7 +5,7 @@ import io.vertx.core.Vertx;
 import io.zerows.epoch.based.configure.YmlCore;
 import io.zerows.epoch.boot.impl.BootStore;
 import io.zerows.epoch.corpus.cloud.LogCloud;
-import io.zerows.epoch.mem.OZeroStore;
+import io.zerows.management.OZeroStore;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.support.FnBase;
 

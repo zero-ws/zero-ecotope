@@ -10,7 +10,7 @@ import io.zerows.platform.metadata.RQuery;
 import io.zerows.platform.metadata.RQuote;
 import io.zerows.platform.metadata.RReference;
 import io.zerows.platform.metadata.RResult;
-import io.zerows.epoch.component.destine.Hymn;
+import io.zerows.component.destine.Hymn;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.database.jooq.operation.UxJoin;
 import io.zerows.epoch.corpus.database.jooq.operation.UxJooq;

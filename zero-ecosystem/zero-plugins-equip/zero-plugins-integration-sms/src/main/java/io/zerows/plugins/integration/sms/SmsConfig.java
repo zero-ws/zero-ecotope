@@ -2,7 +2,7 @@ package io.zerows.plugins.integration.sms;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.program.Ut;
-import io.zerows.epoch.sdk.metadata.plugins.InfixConfig;
+import io.zerows.epoch.sdk.plugins.InfixConfig;
 
 import java.io.Serializable;
 import java.util.Objects;

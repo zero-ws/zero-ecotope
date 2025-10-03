@@ -10,7 +10,7 @@ import io.zerows.epoch.corpus.io.atom.WrapRequest;
 import io.zerows.epoch.corpus.model.Event;
 import io.zerows.epoch.corpus.model.Rule;
 import io.zerows.epoch.corpus.web.exception._60000Exception400Validation;
-import io.zerows.epoch.mem.cache.CStore;
+import io.zerows.management.cache.CStore;
 import io.zerows.epoch.program.Ut;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
