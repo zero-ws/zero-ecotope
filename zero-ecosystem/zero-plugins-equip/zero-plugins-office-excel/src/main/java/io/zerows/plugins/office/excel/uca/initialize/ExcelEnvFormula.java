@@ -2,7 +2,7 @@ package io.zerows.plugins.office.excel.uca.initialize;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.constant.VString;
+import io.zerows.platform.constant.VString;
 import io.zerows.epoch.based.configure.YmlCore;
 import io.zerows.epoch.program.Ut;
 import org.apache.poi.ss.usermodel.Workbook;

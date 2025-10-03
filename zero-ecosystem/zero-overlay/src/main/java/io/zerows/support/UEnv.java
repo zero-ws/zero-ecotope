@@ -1,8 +1,8 @@
 package io.zerows.support;
 
 import io.r2mo.function.Fn;
-import io.zerows.metadata.program.Kv;
-import io.zerows.constant.VString;
+import io.zerows.platform.metadata.Kv;
+import io.zerows.platform.constant.VString;
 
 import java.lang.reflect.Field;
 import java.util.Enumeration;

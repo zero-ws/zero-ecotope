@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.configure.YmlCore;
-import io.zerows.metadata.boot.KPivot;
+import io.zerows.platform.metadata.KPivot;
 import io.zerows.epoch.configuration.module.MDConfiguration;
 import io.zerows.epoch.configuration.module.MDWorkflow;
 import io.zerows.epoch.corpus.extension.HExtension;

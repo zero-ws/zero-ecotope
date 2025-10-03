@@ -5,7 +5,7 @@ import io.vertx.core.Vertx;
 import io.zerows.epoch.annotations.Infusion;
 import io.zerows.epoch.based.configure.YmlCore;
 import io.zerows.component.log.OLog;
-import io.zerows.metadata.app.KDatabase;
+import io.zerows.platform.metadata.KDatabase;
 import io.zerows.epoch.corpus.database.cp.zdk.DataPool;
 import io.zerows.epoch.corpus.database.exception._40065Exception500JooqConfiguration;
 import io.zerows.epoch.program.Ut;

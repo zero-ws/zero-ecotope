@@ -1,9 +1,9 @@
 package io.zerows.specification.access.app;
 
-import io.zerows.metadata.app.KDS;
-import io.zerows.metadata.app.KDatabase;
-import io.zerows.constant.VName;
-import io.zerows.constant.VString;
+import io.zerows.platform.metadata.KDS;
+import io.zerows.platform.metadata.KDatabase;
+import io.zerows.platform.constant.VName;
+import io.zerows.platform.constant.VString;
 import io.zerows.specification.vital.HOI;
 
 import java.util.Objects;

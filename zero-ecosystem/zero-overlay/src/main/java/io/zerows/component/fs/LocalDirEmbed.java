@@ -1,7 +1,7 @@
 package io.zerows.component.fs;
 
 import io.r2mo.function.Fn;
-import io.zerows.constant.VString;
+import io.zerows.platform.constant.VString;
 import io.zerows.support.UtBase;
 
 import java.io.File;

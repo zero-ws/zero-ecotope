@@ -1,6 +1,6 @@
 package io.zerows.epoch.annotations;
 
-import io.zerows.enums.IpcType;
+import io.zerows.platform.enums.IpcType;
 
 import java.lang.annotation.*;
 

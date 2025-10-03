@@ -1,7 +1,7 @@
 package io.zerows.specification.development.ncloud;
 
-import io.zerows.metadata.boot.KRepo;
-import io.zerows.enums.EmCloud;
+import io.zerows.platform.metadata.KRepo;
+import io.zerows.platform.enums.EmCloud;
 import io.zerows.specification.atomic.HCommand;
 import io.zerows.specification.atomic.HContract;
 

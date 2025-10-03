@@ -4,7 +4,7 @@ import io.r2mo.function.Fn;
 import io.reactivex.rxjava3.core.Observable;
 import io.zerows.epoch.annotations.Infusion;
 import io.zerows.component.log.OLog;
-import io.zerows.enums.VertxComponent;
+import io.zerows.platform.enums.VertxComponent;
 import io.zerows.epoch.mem.OCacheClass;
 import io.zerows.epoch.mem.OZeroStore;
 import io.zerows.epoch.program.Ut;

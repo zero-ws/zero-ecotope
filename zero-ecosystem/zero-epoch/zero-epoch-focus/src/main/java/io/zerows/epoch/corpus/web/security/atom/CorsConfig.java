@@ -12,7 +12,7 @@ import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.component.environment.MatureOn;
 import io.zerows.epoch.mem.OZeroStore;
 import io.zerows.epoch.program.Ut;
-import io.zerows.exception.web._60050Exception501NotSupport;
+import io.zerows.platform.exception._60050Exception501NotSupport;
 import io.zerows.integrated.jackson.JsonArrayDeserializer;
 import io.zerows.integrated.jackson.JsonArraySerializer;
 import io.zerows.specification.configuration.HConfig;

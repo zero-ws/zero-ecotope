@@ -1,6 +1,6 @@
 package io.zerows.epoch.annotations.security;
 
-import io.zerows.enums.EmSecure;
+import io.zerows.platform.enums.EmSecure;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

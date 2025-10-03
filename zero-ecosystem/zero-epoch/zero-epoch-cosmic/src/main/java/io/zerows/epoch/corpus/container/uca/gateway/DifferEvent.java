@@ -5,7 +5,7 @@ import io.vertx.core.eventbus.Message;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.component.log.Annal;
-import io.zerows.constant.VValue;
+import io.zerows.platform.constant.VValue;
 import io.zerows.epoch.corpus.container.exception._40013Exception500ReturnType;
 import io.zerows.epoch.corpus.container.exception._40014Exception500WorkerMissing;
 import io.zerows.epoch.corpus.container.uca.mode.AimAsync;

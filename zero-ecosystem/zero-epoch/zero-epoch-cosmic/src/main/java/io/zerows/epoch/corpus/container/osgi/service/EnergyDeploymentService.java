@@ -2,11 +2,11 @@ package io.zerows.epoch.corpus.container.osgi.service;
 
 import io.zerows.epoch.annotations.Agent;
 import io.zerows.epoch.annotations.Worker;
-import io.zerows.metadata.context.KRunner;
+import io.zerows.platform.metadata.KRunner;
 import io.zerows.epoch.corpus.container.store.under.StoreVertx;
 import io.zerows.epoch.corpus.container.uca.store.StubLinear;
 import io.zerows.epoch.corpus.model.running.RunVertx;
-import io.zerows.enums.VertxComponent;
+import io.zerows.platform.enums.VertxComponent;
 import io.zerows.epoch.mem.OCacheClass;
 import io.zerows.epoch.osgi.metadata.service.EnergyDeployment;
 import io.zerows.epoch.program.Ut;

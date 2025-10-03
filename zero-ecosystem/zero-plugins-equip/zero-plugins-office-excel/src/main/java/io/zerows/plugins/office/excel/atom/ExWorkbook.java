@@ -1,6 +1,6 @@
 package io.zerows.plugins.office.excel.atom;
 
-import io.zerows.constant.VString;
+import io.zerows.platform.constant.VString;
 import org.apache.poi.ss.usermodel.Workbook;
 
 import java.io.Serializable;

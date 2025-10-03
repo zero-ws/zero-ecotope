@@ -2,8 +2,8 @@ package io.zerows.component.qr.syntax;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.constant.VString;
-import io.zerows.constant.VValue;
+import io.zerows.platform.constant.VString;
+import io.zerows.platform.constant.VValue;
 import io.zerows.support.UtBase;
 
 import java.util.Objects;

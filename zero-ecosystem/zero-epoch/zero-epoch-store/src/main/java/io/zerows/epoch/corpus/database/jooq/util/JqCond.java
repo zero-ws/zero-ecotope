@@ -1,7 +1,7 @@
 package io.zerows.epoch.corpus.database.jooq.util;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.constant.VString;
+import io.zerows.platform.constant.VString;
 import io.zerows.component.qr.syntax.Ir;
 
 import java.util.Set;

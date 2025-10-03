@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.OLog;
 import io.zerows.component.qr.syntax.Ir;
-import io.zerows.constant.VString;
+import io.zerows.platform.constant.VString;
 import io.zerows.epoch.corpus.metadata.mapping.Mirror;
 import io.zerows.epoch.corpus.metadata.mapping.Mojo;
 import io.zerows.epoch.program.Ut;

@@ -2,7 +2,7 @@ package io.zerows.plugins.office.excel;
 
 import io.zerows.component.log.OLog;
 import io.zerows.epoch.component.environment.DevEnv;
-import io.zerows.constant.VValue;
+import io.zerows.platform.constant.VValue;
 import io.zerows.epoch.configuration.module.MDConnect;
 import io.zerows.epoch.mem.module.OCacheConfiguration;
 import io.zerows.epoch.program.Ut;

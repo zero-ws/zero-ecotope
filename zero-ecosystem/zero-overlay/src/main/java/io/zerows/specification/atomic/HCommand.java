@@ -3,7 +3,7 @@ package io.zerows.specification.atomic;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
-import io.zerows.exception.web._60050Exception501NotSupport;
+import io.zerows.platform.exception._60050Exception501NotSupport;
 
 /**
  * 「抽象指令」

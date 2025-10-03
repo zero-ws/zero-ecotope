@@ -1,7 +1,7 @@
 package io.zerows.epoch.sdk.metadata;
 
 import io.zerows.epoch.constant.osgi.OConstant;
-import io.zerows.constant.VString;
+import io.zerows.platform.constant.VString;
 import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.sdk.metadata.running.OCommand;
 import org.osgi.framework.Bundle;

@@ -1,6 +1,6 @@
 package io.zerows.extension.mbse.basement.osgi.spi.plugin;
 
-import io.zerows.metadata.datamation.KFabric;
+import io.zerows.platform.metadata.KFabric;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 
 @SuppressWarnings("unchecked")

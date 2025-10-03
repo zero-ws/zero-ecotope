@@ -1,7 +1,7 @@
 package io.zerows.epoch.osgi.metadata;
 
 import io.zerows.epoch.constant.osgi.OConstant;
-import io.zerows.constant.VString;
+import io.zerows.platform.constant.VString;
 import io.zerows.epoch.osgi.metadata.command.CommandCache;
 import io.zerows.epoch.osgi.metadata.command.CommandFailureAll;
 import io.zerows.epoch.osgi.metadata.command.CommandFailureBundle;

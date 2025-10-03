@@ -9,7 +9,7 @@ import io.zerows.epoch.mem.ORepositoryMeta;
 import io.zerows.epoch.mem.ORepositoryOption;
 import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.sdk.metadata.running.ORepository;
-import io.zerows.metadata.context.KRunner;
+import io.zerows.platform.metadata.KRunner;
 import io.zerows.specification.configuration.HConfig;
 
 import java.util.function.BiConsumer;

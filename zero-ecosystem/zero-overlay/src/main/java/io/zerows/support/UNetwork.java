@@ -3,7 +3,7 @@ package io.zerows.support;
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.net.IPHost;
-import io.zerows.constant.VValue;
+import io.zerows.platform.constant.VValue;
 
 import java.net.InetAddress;
 import java.util.Locale;

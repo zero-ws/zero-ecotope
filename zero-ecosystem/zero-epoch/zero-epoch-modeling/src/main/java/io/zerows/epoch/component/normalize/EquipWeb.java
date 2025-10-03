@@ -1,6 +1,6 @@
 package io.zerows.epoch.component.normalize;
 
-import io.zerows.constant.VPath;
+import io.zerows.platform.constant.VPath;
 import io.zerows.epoch.configuration.module.MDConfiguration;
 import io.zerows.epoch.configuration.module.MDId;
 import io.zerows.epoch.configuration.module.MDPage;

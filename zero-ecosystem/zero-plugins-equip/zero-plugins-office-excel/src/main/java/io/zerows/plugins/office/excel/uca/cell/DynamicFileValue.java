@@ -1,7 +1,7 @@
 package io.zerows.plugins.office.excel.uca.cell;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.constant.VString;
+import io.zerows.platform.constant.VString;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.program.Ut;
 import io.zerows.plugins.office.excel.eon.ExConstant;

@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.bootplus.extension.migration.AbstractStep;
 import io.zerows.epoch.bootplus.extension.migration.MigrateStep;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.enums.Environment;
+import io.zerows.platform.enums.Environment;
 import io.zerows.extension.mbse.basement.util.Ao;
 import io.zerows.extension.runtime.skeleton.boot.supply.DataImport;
 

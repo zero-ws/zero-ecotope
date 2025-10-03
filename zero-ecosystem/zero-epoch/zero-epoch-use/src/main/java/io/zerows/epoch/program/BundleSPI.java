@@ -1,7 +1,7 @@
 package io.zerows.epoch.program;
 
 import io.r2mo.function.Fn;
-import io.zerows.exception.boot._11000Exception404SPINotFound;
+import io.zerows.platform.exception._11000Exception404SPINotFound;
 import org.osgi.framework.Bundle;
 
 import java.io.BufferedReader;

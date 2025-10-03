@@ -1,7 +1,7 @@
 package io.zerows.epoch.mem;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.enums.VertxComponent;
+import io.zerows.platform.enums.VertxComponent;
 import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.sdk.metadata.running.OCache;
 import org.osgi.framework.Bundle;

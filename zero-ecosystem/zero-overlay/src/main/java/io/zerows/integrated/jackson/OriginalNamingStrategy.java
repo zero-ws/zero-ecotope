@@ -3,7 +3,7 @@ package io.zerows.integrated.jackson;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.cfg.MapperConfig;
 import com.fasterxml.jackson.databind.introspect.AnnotatedMethod;
-import io.zerows.constant.VValue;
+import io.zerows.platform.constant.VValue;
 
 import java.util.Locale;
 

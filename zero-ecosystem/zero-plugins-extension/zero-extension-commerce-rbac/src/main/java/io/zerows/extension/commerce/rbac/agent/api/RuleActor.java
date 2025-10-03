@@ -9,7 +9,7 @@ import io.zerows.epoch.annotations.Me;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.constant.KName;
 import io.zerows.component.qr.Sorter;
-import io.zerows.constant.VString;
+import io.zerows.platform.constant.VString;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.metadata.commune.Vis;
 import io.zerows.epoch.corpus.metadata.commune.XHeader;

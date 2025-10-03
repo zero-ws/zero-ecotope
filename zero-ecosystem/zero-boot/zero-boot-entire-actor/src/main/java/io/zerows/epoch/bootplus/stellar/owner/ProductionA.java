@@ -1,6 +1,6 @@
 package io.zerows.epoch.bootplus.stellar.owner;
 
-import io.zerows.enums.Environment;
+import io.zerows.platform.enums.Environment;
 
 /**
  * @author lang : 2023-06-13

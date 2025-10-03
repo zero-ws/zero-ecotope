@@ -1,7 +1,7 @@
 package io.zerows.specification.modeling;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.constant.VValue;
+import io.zerows.platform.constant.VValue;
 import io.zerows.specification.atomic.HJson;
 
 import java.io.Serializable;

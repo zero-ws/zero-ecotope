@@ -3,7 +3,7 @@ package io.zerows.extension.mbse.modulat.uca.dock;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.shareddata.ClusterSerializable;
-import io.zerows.enums.modeling.EmModel;
+import io.zerows.platform.enums.modeling.EmModel;
 
 /*
  * Connect to HArk part for configuration in each application

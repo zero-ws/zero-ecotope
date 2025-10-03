@@ -1,7 +1,7 @@
 package io.zerows.epoch.program.fn;
 
 import io.vertx.core.Future;
-import io.zerows.constant.VValue;
+import io.zerows.platform.constant.VValue;
 import io.zerows.support.FnBase;
 
 import java.util.ArrayList;

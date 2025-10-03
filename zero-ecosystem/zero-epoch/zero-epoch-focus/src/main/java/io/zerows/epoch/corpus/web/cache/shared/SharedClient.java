@@ -4,7 +4,7 @@ import io.vertx.codegen.annotations.Fluent;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
-import io.zerows.metadata.program.Kv;
+import io.zerows.platform.metadata.Kv;
 
 import java.util.Set;
 

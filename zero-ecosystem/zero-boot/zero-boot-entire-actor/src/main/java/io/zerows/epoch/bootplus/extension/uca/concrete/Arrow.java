@@ -3,7 +3,7 @@ package io.zerows.epoch.bootplus.extension.uca.concrete;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.exception.web._60050Exception501NotSupport;
+import io.zerows.platform.exception._60050Exception501NotSupport;
 
 /*
  * 单操作专用接口

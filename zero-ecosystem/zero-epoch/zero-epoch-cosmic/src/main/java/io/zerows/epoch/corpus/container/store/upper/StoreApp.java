@@ -1,7 +1,7 @@
 package io.zerows.epoch.corpus.container.store.upper;
 
-import io.zerows.constant.VString;
-import io.zerows.metadata.app.KDS;
+import io.zerows.platform.constant.VString;
+import io.zerows.platform.metadata.KDS;
 import io.zerows.epoch.corpus.container.store.under.StoreRouter;
 import io.zerows.epoch.corpus.container.store.under.StoreServer;
 import io.zerows.specification.access.app.HApp;

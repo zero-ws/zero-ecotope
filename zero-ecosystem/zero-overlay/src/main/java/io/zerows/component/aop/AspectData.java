@@ -3,7 +3,7 @@ package io.zerows.component.aop;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.constant.VName;
+import io.zerows.platform.constant.VName;
 import io.zerows.support.UtBase;
 
 /**

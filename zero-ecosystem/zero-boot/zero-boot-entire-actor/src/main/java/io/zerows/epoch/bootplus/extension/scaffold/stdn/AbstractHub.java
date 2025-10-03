@@ -10,7 +10,7 @@ import io.zerows.epoch.bootplus.extension.scaffold.component.AbstractActor;
 import io.zerows.epoch.bootplus.extension.uca.commerce.Completer;
 import io.zerows.epoch.bootplus.extension.uca.commerce.CompleterDefault;
 import io.zerows.epoch.bootplus.extension.uca.log.TrackIo;
-import io.zerows.metadata.app.KIntegration;
+import io.zerows.platform.metadata.KIntegration;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.database.Database;
 import io.zerows.epoch.corpus.mbse.atom.runner.ActIn;

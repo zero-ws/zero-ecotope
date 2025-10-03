@@ -1,6 +1,6 @@
 package io.zerows.support;
 
-import io.zerows.exception.boot._11000Exception404SPINotFound;
+import io.zerows.platform.exception._11000Exception404SPINotFound;
 
 import java.util.ArrayList;
 import java.util.Collection;

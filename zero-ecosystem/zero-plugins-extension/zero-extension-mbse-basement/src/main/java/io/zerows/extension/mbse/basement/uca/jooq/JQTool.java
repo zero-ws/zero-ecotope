@@ -1,6 +1,6 @@
 package io.zerows.extension.mbse.basement.uca.jooq;
 
-import io.zerows.constant.VValue;
+import io.zerows.platform.constant.VValue;
 import io.zerows.component.log.Annal;
 import io.zerows.component.qr.Pager;
 import io.zerows.component.qr.Sorter;

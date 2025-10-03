@@ -1,7 +1,7 @@
 package io.zerows.spi;
 
 import io.r2mo.spi.SPI;
-import io.zerows.exception.boot._11000Exception404SPINotFound;
+import io.zerows.platform.exception._11000Exception404SPINotFound;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,7 +1,7 @@
 package io.zerows.epoch.corpus.web.exception;
 
 import io.r2mo.vertx.common.exception.VertxWebException;
-import io.zerows.metadata.app.KIntegrationApi;
+import io.zerows.platform.metadata.KIntegrationApi;
 
 /**
  * @author lang : 2025-09-30

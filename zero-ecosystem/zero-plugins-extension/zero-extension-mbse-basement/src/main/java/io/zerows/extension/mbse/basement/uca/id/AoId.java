@@ -1,6 +1,6 @@
 package io.zerows.extension.mbse.basement.uca.id;
 
-import io.zerows.enums.modeling.EmKey;
+import io.zerows.platform.enums.modeling.EmKey;
 import io.zerows.extension.mbse.basement.atom.Model;
 import io.zerows.extension.mbse.basement.atom.element.DataMatrix;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MJoin;

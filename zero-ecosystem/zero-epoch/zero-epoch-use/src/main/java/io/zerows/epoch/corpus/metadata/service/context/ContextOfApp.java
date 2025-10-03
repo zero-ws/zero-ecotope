@@ -1,6 +1,6 @@
 package io.zerows.epoch.corpus.metadata.service.context;
 
-import io.zerows.enums.EmService;
+import io.zerows.platform.enums.EmService;
 import io.zerows.epoch.mem.OZeroEquip;
 import io.zerows.spi.boot.HEquip;
 import io.zerows.specification.configuration.HBoot;

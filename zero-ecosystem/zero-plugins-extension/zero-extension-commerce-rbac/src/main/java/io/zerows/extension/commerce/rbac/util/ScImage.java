@@ -3,7 +3,7 @@ package io.zerows.extension.commerce.rbac.util;
 import io.r2mo.function.Fn;
 import io.vertx.core.Future;
 import io.vertx.core.buffer.Buffer;
-import io.zerows.constant.VPath;
+import io.zerows.platform.constant.VPath;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.extension.commerce.rbac.atom.ScConfig;
 import io.zerows.extension.commerce.rbac.bootstrap.ScPin;

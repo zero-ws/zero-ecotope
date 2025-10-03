@@ -1,6 +1,6 @@
 package io.zerows.plugins.office.excel.uca.ranger;
 
-import io.zerows.metadata.program.KRef;
+import io.zerows.platform.metadata.KRef;
 import io.zerows.plugins.office.excel.atom.ExRecord;
 import io.zerows.plugins.office.excel.atom.ExTable;
 import io.zerows.plugins.office.excel.util.ExFn;

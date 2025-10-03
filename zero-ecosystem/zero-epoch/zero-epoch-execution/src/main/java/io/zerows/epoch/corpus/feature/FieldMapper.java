@@ -1,7 +1,7 @@
 package io.zerows.epoch.corpus.feature;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.metadata.datamation.KMapping;
+import io.zerows.platform.metadata.KMapping;
 import io.zerows.epoch.program.Ut;
 
 public class FieldMapper implements Mapper {

@@ -2,7 +2,7 @@ package io.zerows.epoch.corpus.database.cp.zdk;
 
 import io.r2mo.typed.cc.Cc;
 import io.zerows.component.log.OLog;
-import io.zerows.metadata.app.KDatabase;
+import io.zerows.platform.metadata.KDatabase;
 import io.zerows.epoch.corpus.database.Database;
 import io.zerows.epoch.corpus.database.cp.ds.DSMeta;
 import io.zerows.epoch.corpus.database.cp.ds.HikariDataPool;

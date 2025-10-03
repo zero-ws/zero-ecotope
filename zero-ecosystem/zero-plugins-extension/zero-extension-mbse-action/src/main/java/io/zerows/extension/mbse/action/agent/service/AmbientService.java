@@ -7,7 +7,7 @@ import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.web.scheduler.atom.Mission;
 import io.zerows.epoch.corpus.web.scheduler.plugins.JobClient;
 import io.zerows.epoch.corpus.web.scheduler.plugins.JobInfix;
-import io.zerows.enums.EmJob;
+import io.zerows.platform.enums.EmJob;
 import io.zerows.extension.mbse.action.atom.JtJob;
 import io.zerows.extension.mbse.action.atom.JtUri;
 import io.zerows.extension.mbse.action.bootstrap.JtPin;

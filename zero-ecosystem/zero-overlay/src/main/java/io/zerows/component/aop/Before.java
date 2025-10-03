@@ -3,7 +3,7 @@ package io.zerows.component.aop;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.enums.typed.ChangeFlag;
+import io.zerows.platform.enums.typed.ChangeFlag;
 
 import java.util.HashSet;
 import java.util.Set;

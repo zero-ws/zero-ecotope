@@ -8,7 +8,7 @@ import io.zerows.component.log.OLog;
 import io.zerows.epoch.component.runner.Invoker;
 import io.zerows.epoch.component.runner.InvokerUtil;
 import io.zerows.epoch.component.runner.JetSelector;
-import io.zerows.constant.VValue;
+import io.zerows.platform.constant.VValue;
 import io.zerows.epoch.corpus.model.Receipt;
 import io.zerows.epoch.corpus.model.commune.Envelop;
 import io.zerows.epoch.mem.OCacheActor;

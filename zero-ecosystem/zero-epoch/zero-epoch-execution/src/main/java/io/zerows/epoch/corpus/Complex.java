@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.support.FnBase;
-import io.zerows.metadata.program.KRef;
+import io.zerows.platform.metadata.KRef;
 import io.zerows.component.qr.Pagination;
 
 import java.util.ArrayList;

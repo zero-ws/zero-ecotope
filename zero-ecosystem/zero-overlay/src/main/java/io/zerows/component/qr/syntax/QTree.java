@@ -2,7 +2,7 @@ package io.zerows.component.qr.syntax;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.qr.Criteria;
-import io.zerows.constant.VString;
+import io.zerows.platform.constant.VString;
 import io.zerows.support.UtBase;
 
 import java.util.Objects;

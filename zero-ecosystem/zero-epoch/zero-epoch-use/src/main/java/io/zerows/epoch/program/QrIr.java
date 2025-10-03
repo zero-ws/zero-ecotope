@@ -5,9 +5,9 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.component.log.OLog;
-import io.zerows.metadata.program.Kv;
+import io.zerows.platform.metadata.Kv;
 import io.zerows.component.qr.syntax.Ir;
-import io.zerows.constant.VString;
+import io.zerows.platform.constant.VString;
 
 import java.util.Objects;
 import java.util.Set;

@@ -1,7 +1,7 @@
 package io.zerows.epoch.mem;
 
 import io.zerows.epoch.component.scanner.ClassScanner;
-import io.zerows.enums.VertxComponent;
+import io.zerows.platform.enums.VertxComponent;
 import io.zerows.epoch.sdk.metadata.AbstractAmbiguity;
 import io.zerows.epoch.sdk.metadata.uca.Inquirer;
 import org.osgi.framework.Bundle;

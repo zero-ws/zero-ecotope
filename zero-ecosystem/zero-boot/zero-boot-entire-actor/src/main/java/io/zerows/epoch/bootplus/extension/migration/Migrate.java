@@ -2,7 +2,7 @@ package io.zerows.epoch.bootplus.extension.migration;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.enums.Environment;
+import io.zerows.platform.enums.Environment;
 import io.zerows.specification.access.app.HArk;
 
 /*

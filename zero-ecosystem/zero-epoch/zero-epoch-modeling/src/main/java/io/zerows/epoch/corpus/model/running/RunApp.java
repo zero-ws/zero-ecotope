@@ -1,6 +1,6 @@
 package io.zerows.epoch.corpus.model.running;
 
-import io.zerows.metadata.app.KApp;
+import io.zerows.platform.metadata.KApp;
 
 import java.io.Serializable;
 

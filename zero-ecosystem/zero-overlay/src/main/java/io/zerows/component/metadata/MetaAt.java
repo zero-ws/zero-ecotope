@@ -1,7 +1,7 @@
 package io.zerows.component.metadata;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.enums.EmMeta;
+import io.zerows.platform.enums.EmMeta;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;

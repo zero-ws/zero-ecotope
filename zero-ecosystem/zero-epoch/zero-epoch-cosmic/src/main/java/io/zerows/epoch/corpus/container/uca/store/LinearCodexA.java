@@ -1,10 +1,10 @@
 package io.zerows.epoch.corpus.container.uca.store;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.constant.VPath;
-import io.zerows.constant.VString;
+import io.zerows.platform.constant.VPath;
+import io.zerows.platform.constant.VString;
 import io.zerows.epoch.corpus.model.running.RunVertx;
-import io.zerows.exception.boot._11002Exception500EmptyIo;
+import io.zerows.platform.exception._11002Exception500EmptyIo;
 import io.zerows.epoch.mem.cache.CStore;
 import io.zerows.epoch.program.Ut;
 import lombok.extern.slf4j.Slf4j;

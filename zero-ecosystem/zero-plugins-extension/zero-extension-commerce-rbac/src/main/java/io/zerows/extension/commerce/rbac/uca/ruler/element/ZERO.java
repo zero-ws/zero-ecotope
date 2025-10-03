@@ -1,6 +1,6 @@
 package io.zerows.extension.commerce.rbac.uca.ruler.element;
 
-import io.zerows.enums.EmSecure;
+import io.zerows.platform.enums.EmSecure;
 import io.zerows.extension.commerce.rbac.eon.em.PackType;
 
 import java.util.concurrent.ConcurrentHashMap;

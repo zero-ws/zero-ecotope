@@ -1,13 +1,13 @@
 package io.zerows.epoch.bootplus.stellar;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.constant.VWeb;
 import io.zerows.epoch.corpus.metadata.element.JSix;
-import io.zerows.enums.Environment;
-import io.zerows.enums.typed.ChangeFlag;
 import io.zerows.epoch.program.Ut;
-import io.zerows.runtime.HMacrocosm;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
+import io.zerows.platform.HEnvironmentVariable;
+import io.zerows.platform.constant.VWeb;
+import io.zerows.platform.enums.Environment;
+import io.zerows.platform.enums.typed.ChangeFlag;
 import io.zerows.specification.access.app.HAmbient;
 
 /**
@@ -46,7 +46,7 @@ public class ArgoStore {
     private static final JSix HEX;
 
     static {
-        final String envValue = Ut.env(HMacrocosm.ZERO_ENV);
+        final String envValue = Ut.env(HEnvironmentVariable.ZERO_ENV);
         final Environment environment = Ut.toEnum(envValue, Environment.class, Environment.Production);
         final String vPath = Ut.ioPath(VWeb.runtime.CONFIGURATION_JSON, environment);
         Ke.LOG.Ok.info(ArgoStore.class, "Environment On = {0}, Path = {1}", environment, vPath);

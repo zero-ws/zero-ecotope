@@ -1,6 +1,6 @@
 package io.zerows.extension.commerce.rbac.uca.logged;
 
-import io.zerows.constant.VString;
+import io.zerows.platform.constant.VString;
 import io.zerows.extension.commerce.rbac.eon.em.SeekGroup;
 import io.zerows.extension.commerce.rbac.eon.em.SeekRole;
 

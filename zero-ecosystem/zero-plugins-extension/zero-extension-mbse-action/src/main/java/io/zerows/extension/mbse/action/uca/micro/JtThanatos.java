@@ -2,7 +2,7 @@ package io.zerows.extension.mbse.action.uca.micro;
 
 import io.vertx.core.Future;
 import io.zerows.epoch.annotations.On;
-import io.zerows.metadata.program.KRef;
+import io.zerows.platform.metadata.KRef;
 import io.zerows.epoch.corpus.model.commune.Envelop;
 import io.zerows.epoch.corpus.web.scheduler.atom.Mission;
 import io.zerows.epoch.corpus.web.scheduler.zdk.AbstractMission;

@@ -3,10 +3,10 @@ package io.zerows.epoch.based.configure;
 import io.zerows.epoch.annotations.Infusion;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KPlugin;
-import io.zerows.constant.VPath;
-import io.zerows.constant.VString;
-import io.zerows.enums.EmDS;
-import io.zerows.enums.EmSecure;
+import io.zerows.platform.constant.VPath;
+import io.zerows.platform.constant.VString;
+import io.zerows.platform.enums.EmDS;
+import io.zerows.platform.enums.EmSecure;
 import io.zerows.support.UtBase;
 
 /**

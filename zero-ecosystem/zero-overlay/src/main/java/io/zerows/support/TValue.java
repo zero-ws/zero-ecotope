@@ -3,7 +3,7 @@ package io.zerows.support;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.shareddata.ClusterSerializable;
-import io.zerows.metadata.program.KMetadata;
+import io.zerows.platform.metadata.KMetadata;
 
 import java.util.Arrays;
 import java.util.Objects;

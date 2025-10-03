@@ -3,7 +3,7 @@ package io.zerows.epoch.bootplus.extension.refine;
 import io.zerows.epoch.bootplus.extension.cv.OxCv;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.enums.modeling.EmAttribute;
+import io.zerows.platform.enums.modeling.EmAttribute;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.program.Ut;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;

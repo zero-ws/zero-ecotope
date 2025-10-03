@@ -7,7 +7,7 @@ import io.vertx.core.http.HttpServerResponse;
 import io.zerows.epoch.annotations.Ordered;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.component.log.Annal;
-import io.zerows.constant.VValue;
+import io.zerows.platform.constant.VValue;
 import io.zerows.epoch.corpus.exception._40052Exception500FilterSpecification;
 import io.zerows.epoch.corpus.exception._40053Exception500FilterOrder;
 import io.zerows.epoch.corpus.model.Event;

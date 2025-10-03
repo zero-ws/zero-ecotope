@@ -11,7 +11,7 @@ import io.zerows.component.qr.syntax.Ir;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.database.cp.zdk.DataPool;
 import io.zerows.epoch.corpus.database.jooq.operation.UxJooq;
-import io.zerows.enums.Environment;
+import io.zerows.platform.enums.Environment;
 import io.zerows.epoch.program.Ut;
 
 import java.util.function.Supplier;

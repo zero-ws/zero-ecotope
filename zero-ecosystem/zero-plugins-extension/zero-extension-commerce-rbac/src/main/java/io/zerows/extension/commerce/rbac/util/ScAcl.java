@@ -2,7 +2,7 @@ package io.zerows.extension.commerce.rbac.util;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.enums.EmSecure;
+import io.zerows.platform.enums.EmSecure;
 import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.sdk.security.authority.Acl;
 

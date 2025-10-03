@@ -1,6 +1,6 @@
 package io.zerows.extension.runtime.skeleton.secure;
 
-import io.zerows.metadata.program.KPair;
+import io.zerows.platform.metadata.KPair;
 import io.zerows.spi.cloud.HED;
 
 /**

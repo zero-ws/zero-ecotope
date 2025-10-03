@@ -1,6 +1,6 @@
 package io.zerows.epoch.based.configure;
 
-import io.zerows.constant.VOption;
+import io.zerows.platform.constant.VOption;
 
 /**
  * @author lang : 2023-05-29

@@ -7,8 +7,8 @@ import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.core.Promise;
-import io.zerows.exception.boot._11011Exception500InvokingPre;
-import io.zerows.exception.web._60059Exception412ArgumentNull;
+import io.zerows.platform.exception._11011Exception500InvokingPre;
+import io.zerows.platform.exception._60059Exception412ArgumentNull;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;

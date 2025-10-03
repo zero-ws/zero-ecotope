@@ -2,8 +2,8 @@ package io.zerows.epoch.program;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.constant.VString;
-import io.zerows.metadata.datamation.KMapping;
+import io.zerows.platform.constant.VString;
+import io.zerows.platform.metadata.KMapping;
 import io.zerows.epoch.constant.KName;
 
 import java.util.Objects;

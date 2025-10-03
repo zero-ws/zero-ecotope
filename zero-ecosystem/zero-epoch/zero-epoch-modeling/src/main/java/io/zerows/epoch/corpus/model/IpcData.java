@@ -2,7 +2,7 @@ package io.zerows.epoch.corpus.model;
 
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonObject;
-import io.zerows.enums.IpcType;
+import io.zerows.platform.enums.IpcType;
 
 import java.io.Serializable;
 

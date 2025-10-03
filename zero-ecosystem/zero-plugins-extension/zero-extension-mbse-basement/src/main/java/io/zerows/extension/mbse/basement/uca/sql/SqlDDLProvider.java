@@ -1,9 +1,9 @@
 package io.zerows.extension.mbse.basement.uca.sql;
 
 import io.r2mo.function.Fn;
-import io.zerows.constant.VValue;
-import io.zerows.enums.modeling.EmKey;
-import io.zerows.enums.typed.ChangeFlag;
+import io.zerows.platform.constant.VValue;
+import io.zerows.platform.enums.modeling.EmKey;
+import io.zerows.platform.enums.typed.ChangeFlag;
 import io.zerows.epoch.program.Ut;
 import io.zerows.extension.mbse.basement.atom.Schema;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MField;

@@ -6,7 +6,7 @@ import io.zerows.epoch.bootplus.extension.migration.backup.ReportNumber;
 import io.zerows.epoch.bootplus.extension.migration.restore.AdjustNumber;
 import io.zerows.epoch.bootplus.extension.refine.Ox;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.enums.Environment;
+import io.zerows.platform.enums.Environment;
 
 /*
  * 单命令专用类

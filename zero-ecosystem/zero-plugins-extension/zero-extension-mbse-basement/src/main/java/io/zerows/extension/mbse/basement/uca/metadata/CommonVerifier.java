@@ -1,6 +1,6 @@
 package io.zerows.extension.mbse.basement.uca.metadata;
 
-import io.zerows.constant.VValue;
+import io.zerows.platform.constant.VValue;
 import io.zerows.extension.mbse.basement.uca.jdbc.AoConnection;
 
 public class CommonVerifier implements AoVerifier {

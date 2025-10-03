@@ -1,7 +1,7 @@
 package io.zerows.component.metadata;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.constant.VName;
+import io.zerows.platform.constant.VName;
 import io.zerows.support.UtBase;
 
 /**

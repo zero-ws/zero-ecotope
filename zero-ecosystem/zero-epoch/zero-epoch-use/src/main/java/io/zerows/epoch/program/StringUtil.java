@@ -1,7 +1,7 @@
 package io.zerows.epoch.program;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.constant.VString;
+import io.zerows.platform.constant.VString;
 
 import java.util.HashSet;
 import java.util.Set;

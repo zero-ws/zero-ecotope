@@ -5,14 +5,14 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonObject;
-import io.zerows.enums.modeling.EmModel;
+import io.zerows.platform.enums.modeling.EmModel;
 import io.zerows.epoch.based.exception._80542Exception409JoinTarget;
 import io.zerows.epoch.program.Ut;
 import io.zerows.integrated.jackson.ClassDeserializer;
 import io.zerows.integrated.jackson.ClassSerializer;
 import io.zerows.integrated.jackson.JsonObjectDeserializer;
 import io.zerows.integrated.jackson.JsonObjectSerializer;
-import io.zerows.metadata.datamation.KMapping;
+import io.zerows.platform.metadata.KMapping;
 
 import java.io.Serializable;
 import java.util.Objects;

@@ -4,8 +4,8 @@ import io.r2mo.function.Actuator;
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.annotations.monitor.ChatGPT;
-import io.zerows.constant.VValue;
+import io.zerows.platform.annotations.ChatGPT;
+import io.zerows.platform.constant.VValue;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;

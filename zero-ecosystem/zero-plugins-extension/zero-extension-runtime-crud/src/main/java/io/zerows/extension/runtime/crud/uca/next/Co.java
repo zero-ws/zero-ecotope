@@ -2,7 +2,7 @@ package io.zerows.extension.runtime.crud.uca.next;
 
 import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
-import io.zerows.exception.web._60050Exception501NotSupport;
+import io.zerows.platform.exception._60050Exception501NotSupport;
 import io.zerows.extension.runtime.crud.eon.Pooled;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 import io.zerows.extension.runtime.crud.uca.desk.IxRequest;

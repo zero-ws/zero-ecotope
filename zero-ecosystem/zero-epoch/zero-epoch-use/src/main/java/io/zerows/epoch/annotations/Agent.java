@@ -1,6 +1,6 @@
 package io.zerows.epoch.annotations;
 
-import io.zerows.enums.app.ServerType;
+import io.zerows.platform.enums.app.ServerType;
 import io.zerows.epoch.constant.KWeb;
 
 import java.lang.annotation.*;

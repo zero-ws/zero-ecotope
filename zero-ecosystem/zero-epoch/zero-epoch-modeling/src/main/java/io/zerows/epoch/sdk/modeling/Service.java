@@ -1,8 +1,8 @@
 package io.zerows.epoch.sdk.modeling;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.metadata.datamation.KMap;
-import io.zerows.metadata.normalize.KIdentity;
+import io.zerows.platform.metadata.KIdentity;
+import io.zerows.platform.metadata.KMap;
 import io.zerows.specification.modeling.HRule;
 
 /*

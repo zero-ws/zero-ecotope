@@ -4,7 +4,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.bootplus.extension.cv.OxCv;
-import io.zerows.metadata.app.KDS;
+import io.zerows.platform.metadata.KDS;
 import io.zerows.epoch.corpus.database.Database;
 import io.zerows.epoch.program.Ut;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;

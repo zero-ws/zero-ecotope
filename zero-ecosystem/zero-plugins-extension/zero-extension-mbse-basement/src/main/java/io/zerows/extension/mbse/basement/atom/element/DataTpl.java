@@ -1,7 +1,7 @@
 package io.zerows.extension.mbse.basement.atom.element;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.enums.modeling.EmModel;
+import io.zerows.platform.enums.modeling.EmModel;
 import io.zerows.extension.mbse.basement.atom.Model;
 import io.zerows.extension.mbse.basement.atom.Schema;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;

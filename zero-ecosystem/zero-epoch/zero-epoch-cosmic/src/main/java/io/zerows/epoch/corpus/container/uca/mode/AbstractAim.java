@@ -13,7 +13,7 @@ import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.component.log.Annal;
 import io.zerows.epoch.component.runner.InvokerUtil;
-import io.zerows.constant.VValue;
+import io.zerows.platform.constant.VValue;
 import io.zerows.epoch.corpus.container.exception._60002Exception500DeliveryError;
 import io.zerows.epoch.corpus.container.exception._60003Exception500EntityCast;
 import io.zerows.epoch.corpus.io.atom.WrapRequest;

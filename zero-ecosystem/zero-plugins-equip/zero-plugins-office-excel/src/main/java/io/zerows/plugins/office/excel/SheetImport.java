@@ -11,7 +11,7 @@ import io.zerows.epoch.component.normalize.Oneness;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.configuration.module.MDConnect;
 import io.zerows.epoch.corpus.database.jooq.operation.UxJooq;
-import io.zerows.enums.typed.ChangeFlag;
+import io.zerows.platform.enums.typed.ChangeFlag;
 import io.zerows.epoch.program.Ut;
 import io.zerows.support.FnBase;
 import io.zerows.plugins.office.excel.atom.ExTable;

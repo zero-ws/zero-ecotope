@@ -1,7 +1,7 @@
 package io.zerows.support;
 
-import io.zerows.constant.VString;
-import io.zerows.exception.boot._11007Exception404PoolIsNull;
+import io.zerows.platform.constant.VString;
+import io.zerows.platform.exception._11007Exception404PoolIsNull;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentMap;

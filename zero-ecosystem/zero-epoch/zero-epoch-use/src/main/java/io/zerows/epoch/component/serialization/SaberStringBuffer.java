@@ -1,6 +1,6 @@
 package io.zerows.epoch.component.serialization;
 
-import io.zerows.constant.VString;
+import io.zerows.platform.constant.VString;
 
 /**
  * StringBuffer, StringBuilder

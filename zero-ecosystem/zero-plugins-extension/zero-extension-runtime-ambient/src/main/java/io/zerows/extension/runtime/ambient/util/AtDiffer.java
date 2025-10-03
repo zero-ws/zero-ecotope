@@ -1,20 +1,24 @@
 package io.zerows.extension.runtime.ambient.util;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.enums.modeling.EmAttribute;
-import io.zerows.enums.typed.ChangeFlag;
-import io.zerows.metadata.normalize.KMarkAtom;
 import io.zerows.component.compare.Vs;
 import io.zerows.epoch.program.Ut;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XActivity;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XActivityChange;
 import io.zerows.extension.runtime.ambient.eon.em.ActivityStatus;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
+import io.zerows.platform.enums.modeling.EmAttribute;
+import io.zerows.platform.enums.typed.ChangeFlag;
+import io.zerows.platform.metadata.KMarkAtom;
 import io.zerows.specification.modeling.HAtom;
 import io.zerows.specification.modeling.HAttribute;
 import io.zerows.specification.modeling.metadata.HMetaField;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>

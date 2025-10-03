@@ -1,6 +1,6 @@
 package io.zerows.epoch.bootplus.extension.scaffold.component;
 
-import io.zerows.metadata.app.KIntegration;
+import io.zerows.platform.metadata.KIntegration;
 import io.zerows.epoch.annotations.Contract;
 
 /**

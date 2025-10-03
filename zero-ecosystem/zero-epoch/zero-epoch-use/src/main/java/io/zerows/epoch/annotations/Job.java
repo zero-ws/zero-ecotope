@@ -1,7 +1,7 @@
 package io.zerows.epoch.annotations;
 
-import io.zerows.constant.VString;
-import io.zerows.enums.EmJob;
+import io.zerows.platform.constant.VString;
+import io.zerows.platform.enums.EmJob;
 
 import java.lang.annotation.*;
 import java.util.concurrent.TimeUnit;

@@ -9,7 +9,7 @@ import io.zerows.epoch.corpus.container.store.under.StoreVertx;
 import io.zerows.epoch.corpus.container.uca.store.StubLinear;
 import io.zerows.epoch.corpus.container.uca.store.StubVertx;
 import io.zerows.epoch.corpus.model.running.RunVertx;
-import io.zerows.enums.VertxComponent;
+import io.zerows.platform.enums.VertxComponent;
 import io.zerows.epoch.program.Ut;
 import org.osgi.framework.Bundle;
 

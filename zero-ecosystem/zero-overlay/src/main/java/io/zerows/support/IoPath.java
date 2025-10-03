@@ -1,7 +1,7 @@
 package io.zerows.support;
 
-import io.zerows.constant.VString;
-import io.zerows.enums.Environment;
+import io.zerows.platform.constant.VString;
+import io.zerows.platform.enums.Environment;
 
 import java.util.ArrayList;
 import java.util.List;

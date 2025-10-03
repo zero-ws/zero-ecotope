@@ -1,7 +1,7 @@
 package io.zerows.support;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.constant.VString;
+import io.zerows.platform.constant.VString;
 import io.zerows.spi.modeler.AtomNs;
 import io.zerows.specification.modeling.HAtom;
 

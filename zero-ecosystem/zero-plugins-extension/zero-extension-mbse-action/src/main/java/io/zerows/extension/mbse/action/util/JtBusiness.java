@@ -7,14 +7,14 @@ import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.metadata.datamation.KDictConfig;
-import io.zerows.metadata.datamation.KMap;
-import io.zerows.metadata.normalize.KIdentity;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.enums.EmAop;
 import io.zerows.epoch.program.Ut;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IService;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
+import io.zerows.platform.enums.EmAop;
+import io.zerows.platform.metadata.KDictConfig;
+import io.zerows.platform.metadata.KIdentity;
+import io.zerows.platform.metadata.KMap;
 import io.zerows.specification.access.app.HApp;
 import io.zerows.specification.access.app.HArk;
 

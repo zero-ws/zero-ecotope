@@ -2,7 +2,7 @@ package io.zerows.plugins.common.shell;
 
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
-import io.zerows.enums.Environment;
+import io.zerows.platform.enums.Environment;
 import io.zerows.plugins.common.shell.atom.CommandAtom;
 import io.zerows.plugins.common.shell.atom.Terminal;
 import io.zerows.plugins.common.shell.eon.EmCommand;

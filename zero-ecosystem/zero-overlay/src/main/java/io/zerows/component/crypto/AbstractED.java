@@ -2,10 +2,10 @@ package io.zerows.component.crypto;
 
 import io.r2mo.function.Fn;
 import io.zerows.component.log.Annal;
-import io.zerows.metadata.program.KPair;
-import io.zerows.constant.VString;
-import io.zerows.constant.VValue;
-import io.zerows.runtime.HMacrocosm;
+import io.zerows.platform.metadata.KPair;
+import io.zerows.platform.HEnvironmentVariable;
+import io.zerows.platform.constant.VString;
+import io.zerows.platform.constant.VValue;
 import io.zerows.spi.cloud.HED;
 import io.zerows.support.UtBase;
 
@@ -58,7 +58,7 @@ public abstract class AbstractED<P extends PublicKey, V extends PrivateKey> impl
          * 2. Extract the default ( jar -> Service Loader )
          * 3. Extract the app ( Classpath )
          */
-        final String hedCls = UtBase.envWith(HMacrocosm.HED_COMPONENT, VString.EMPTY);
+        final String hedCls = UtBase.envWith(HEnvironmentVariable.HED_COMPONENT, VString.EMPTY);
         HED hed = null;
 
 

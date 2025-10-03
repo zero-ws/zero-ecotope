@@ -2,7 +2,7 @@ package io.zerows.epoch.corpus.mbse.atom.runner;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.metadata.datamation.KMap;
+import io.zerows.platform.metadata.KMap;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.corpus.model.commune.Envelop;

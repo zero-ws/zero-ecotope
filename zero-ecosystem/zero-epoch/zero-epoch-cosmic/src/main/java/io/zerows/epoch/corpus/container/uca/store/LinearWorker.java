@@ -5,7 +5,7 @@ import io.vertx.core.ThreadingModel;
 import io.zerows.epoch.configuration.NodeVertx;
 import io.zerows.epoch.configuration.option.ActorTool;
 import io.zerows.epoch.corpus.model.running.RunVertx;
-import io.zerows.enums.EmDeploy;
+import io.zerows.platform.enums.EmDeploy;
 import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.sdk.metadata.AbstractAmbiguity;
 import org.osgi.framework.Bundle;

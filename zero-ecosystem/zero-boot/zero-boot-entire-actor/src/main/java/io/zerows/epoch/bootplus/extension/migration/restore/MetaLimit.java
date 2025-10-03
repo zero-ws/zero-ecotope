@@ -6,7 +6,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.bootplus.extension.migration.AbstractStep;
 import io.zerows.epoch.bootplus.extension.migration.modeling.Revision;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.enums.Environment;
+import io.zerows.platform.enums.Environment;
 import io.zerows.epoch.program.Ut;
 import io.zerows.extension.mbse.basement.domain.tables.daos.MAttributeDao;
 import io.zerows.extension.mbse.basement.domain.tables.daos.MEntityDao;

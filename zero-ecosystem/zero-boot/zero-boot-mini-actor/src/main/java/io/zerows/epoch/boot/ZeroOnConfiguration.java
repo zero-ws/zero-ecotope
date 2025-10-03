@@ -1,6 +1,6 @@
 package io.zerows.epoch.boot;
 
-import io.zerows.metadata.app.KConfig;
+import io.zerows.platform.metadata.KConfig;
 import io.zerows.specification.configuration.boot.HMature;
 
 /**

@@ -1,6 +1,6 @@
 package io.zerows.epoch.corpus.metadata.specification;
 
-import io.zerows.enums.EmPRI;
+import io.zerows.platform.enums.EmPRI;
 
 import java.io.Serializable;
 import java.util.Objects;

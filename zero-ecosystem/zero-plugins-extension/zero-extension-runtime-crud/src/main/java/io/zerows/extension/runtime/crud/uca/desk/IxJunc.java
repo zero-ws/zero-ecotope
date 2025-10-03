@@ -7,7 +7,7 @@ import io.zerows.epoch.component.destine.Hymn;
 import io.zerows.epoch.corpus.mbse.atom.specification.KModule;
 import io.zerows.epoch.corpus.metadata.specification.KJoin;
 import io.zerows.epoch.corpus.metadata.specification.KPoint;
-import io.zerows.enums.EmPRI;
+import io.zerows.platform.enums.EmPRI;
 import io.zerows.extension.runtime.crud.eon.Pooled;
 import io.zerows.extension.runtime.crud.uca.destine.Probe;
 

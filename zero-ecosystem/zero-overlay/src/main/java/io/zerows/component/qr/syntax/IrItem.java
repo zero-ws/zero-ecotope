@@ -2,9 +2,9 @@ package io.zerows.component.qr.syntax;
 
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonArray;
-import io.zerows.constant.VString;
-import io.zerows.exception.web._60024Exception500QueryMetaNull;
-import io.zerows.exception.web._60026Exception400QrOpUnknown;
+import io.zerows.platform.constant.VString;
+import io.zerows.platform.exception._60024Exception500QueryMetaNull;
+import io.zerows.platform.exception._60026Exception400QrOpUnknown;
 import io.zerows.support.UtBase;
 
 import java.io.Serializable;

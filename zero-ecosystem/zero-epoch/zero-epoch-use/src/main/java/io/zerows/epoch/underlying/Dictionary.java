@@ -3,7 +3,7 @@ package io.zerows.epoch.underlying;
 import io.vertx.core.Future;
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonArray;
-import io.zerows.metadata.datamation.KDictSource;
+import io.zerows.platform.metadata.KDictSource;
 
 import java.util.List;
 import java.util.concurrent.ConcurrentMap;

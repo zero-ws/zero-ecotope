@@ -16,7 +16,7 @@ import io.zerows.epoch.corpus.web.scheduler.uca.running.JobConfig;
 import io.zerows.epoch.corpus.web.scheduler.uca.running.JobPin;
 import io.zerows.epoch.corpus.web.scheduler.uca.running.JobStore;
 import io.zerows.epoch.corpus.web.scheduler.uca.timer.Interval;
-import io.zerows.enums.EmJob;
+import io.zerows.platform.enums.EmJob;
 import io.zerows.epoch.program.Ut;
 
 import java.util.Objects;

@@ -7,7 +7,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.component.normalize.EquipAt;
 import io.zerows.epoch.configuration.module.MDConfiguration;
 import io.zerows.epoch.configuration.module.MDConnect;
-import io.zerows.constant.VBoot;
+import io.zerows.platform.constant.VBoot;
 import io.zerows.epoch.mem.OZeroStore;
 import io.zerows.epoch.program.Ut;
 import io.zerows.specification.configuration.HSetting;

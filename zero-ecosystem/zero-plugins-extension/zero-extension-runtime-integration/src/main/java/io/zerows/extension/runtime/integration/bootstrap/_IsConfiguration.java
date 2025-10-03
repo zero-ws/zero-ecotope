@@ -4,10 +4,10 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.configuration.module.MDConfiguration;
 import io.zerows.epoch.corpus.extension.HExtension;
 import io.zerows.epoch.program.Ut;
-import io.zerows.runtime.HMacrocosm;
 import io.zerows.extension.runtime.integration.atom.IsConfig;
 import io.zerows.extension.runtime.integration.eon.IsConstant;
 import io.zerows.extension.runtime.skeleton.eon.KeMsg;
+import io.zerows.platform.HEnvironmentVariable;
 import io.zerows.specification.access.app.HAmbient;
 
 import java.util.Objects;
@@ -41,7 +41,7 @@ final class IsConfiguration {
             LOG.Init.info(IsConfiguration.class, KeMsg.Configuration.DATA_T, CONFIG.toString());
             {
                 // 新环境变量 Z_SIS_STORE
-                final String storeRoot = Ut.envWith(HMacrocosm.SIS_STORE, CONFIG.getStoreRoot());
+                final String storeRoot = Ut.envWith(HEnvironmentVariable.SIS_STORE, CONFIG.getStoreRoot());
                 CONFIG.setStoreRoot(storeRoot);
                 LOG.Init.info(IsConfiguration.class, "Is StoreRoot = {0}", storeRoot);
             }

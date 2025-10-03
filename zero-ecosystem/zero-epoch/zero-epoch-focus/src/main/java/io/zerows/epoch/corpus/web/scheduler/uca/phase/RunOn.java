@@ -3,7 +3,7 @@ package io.zerows.epoch.corpus.web.scheduler.uca.phase;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.zerows.component.log.OLog;
-import io.zerows.metadata.program.KRef;
+import io.zerows.platform.metadata.KRef;
 import io.zerows.epoch.component.parameter.ParameterBuilder;
 import io.zerows.epoch.corpus.model.commune.Envelop;
 import io.zerows.epoch.corpus.web.exception._60041Exception417JobMethod;

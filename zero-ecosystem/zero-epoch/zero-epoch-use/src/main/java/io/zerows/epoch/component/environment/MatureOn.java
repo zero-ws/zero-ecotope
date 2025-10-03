@@ -5,12 +5,12 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
-import io.zerows.metadata.program.KVarSet;
-import io.zerows.constant.VString;
-import io.zerows.constant.VValue;
-import io.zerows.enums.EmDS;
 import io.zerows.epoch.program.Ut;
-import io.zerows.runtime.HMacrocosm;
+import io.zerows.platform.metadata.KVarSet;
+import io.zerows.platform.HEnvironmentVariable;
+import io.zerows.platform.constant.VString;
+import io.zerows.platform.constant.VValue;
+import io.zerows.platform.enums.EmDS;
 import io.zerows.specification.configuration.boot.HMature;
 
 import java.util.Arrays;
@@ -22,18 +22,18 @@ import java.util.Objects;
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
-public class MatureOn implements HMacrocosm {
+public class MatureOn implements HEnvironmentVariable {
     private static final Cc<String, HMature> CC_MATURE = Cc.openThread();
 
     // Cloud Connected
     public static JsonObject envPlot(final JsonObject plot) {
         final KVarSet set = KVarSet.of()
-            .save(KName.CLOUD, HMacrocosm.AEON_CLOUD)                                  // AEON_CLOUD
-            .save(KName.CHILD, HMacrocosm.AEON_APP)                                    // AEON_APP
-            .save(KName.NAME, HMacrocosm.Z_APP)                                        // Z_APP
-            .save(KName.NAMESPACE, HMacrocosm.Z_NS)                                    // Z_NS
-            .saveWith(KName.LANGUAGE, HMacrocosm.Z_LANG, KWeb.ARGS.V_LANGUAGE)   // Z_LANG
-            .save(KName.SIGMA, HMacrocosm.Z_SIGMA);                                    // Z_SIGMA
+            .save(KName.CLOUD, HEnvironmentVariable.AEON_CLOUD)                                  // AEON_CLOUD
+            .save(KName.CHILD, HEnvironmentVariable.AEON_APP)                                    // AEON_APP
+            .save(KName.NAME, HEnvironmentVariable.Z_APP)                                        // Z_APP
+            .save(KName.NAMESPACE, HEnvironmentVariable.Z_NS)                                    // Z_NS
+            .saveWith(KName.LANGUAGE, HEnvironmentVariable.Z_LANG, KWeb.ARGS.V_LANGUAGE)   // Z_LANG
+            .save(KName.SIGMA, HEnvironmentVariable.Z_SIGMA);                                    // Z_SIGMA
         // 创建拷贝
         final JsonObject plotJ = Ut.valueJObject(plot, true);
         final HMature mature = CC_MATURE.pick(MatureEnv::new, MatureEnv.class.getName());
@@ -42,7 +42,7 @@ public class MatureOn implements HMacrocosm {
 
     // Restful Connected ( Multi Support )
     public static JsonObject envApi(final JsonObject api, final Integer index) {
-        final KVarSet set = envServer(HMacrocosm.API_HOST, HMacrocosm.API_PORT, index);
+        final KVarSet set = envServer(HEnvironmentVariable.API_HOST, HEnvironmentVariable.API_PORT, index);
         // 创建拷贝
         final JsonObject apiJ = Ut.valueJObject(api, true);
         final HMature mature = CC_MATURE.pick(MatureEnv::new, MatureEnv.class.getName());
@@ -51,7 +51,7 @@ public class MatureOn implements HMacrocosm {
 
     // Socket Connected ( Multi Support )
     public static JsonObject envSock(final JsonObject sock, final Integer index) {
-        final KVarSet set = envServer(HMacrocosm.SOCK_HOST, HMacrocosm.SOCK_PORT, index);
+        final KVarSet set = envServer(HEnvironmentVariable.SOCK_HOST, HEnvironmentVariable.SOCK_PORT, index);
         // 创建拷贝
         final JsonObject sockJ = Ut.valueJObject(sock, true);
         final HMature mature = CC_MATURE.pick(MatureEnv::new, MatureEnv.class.getName());
@@ -69,13 +69,13 @@ public class MatureOn implements HMacrocosm {
         final KVarSet set;
         if (EmDS.Stored.WORKFLOW == mode) {
             // Workflow
-            set = envDatabase(HMacrocosm.DBW_HOST, HMacrocosm.DBW_PORT, HMacrocosm.DBW_INSTANCE);
+            set = envDatabase(HEnvironmentVariable.DBW_HOST, HEnvironmentVariable.DBW_PORT, HEnvironmentVariable.DBW_INSTANCE);
         } else if (EmDS.Stored.HISTORY == mode) {
             // History
-            set = envDatabase(HMacrocosm.DBH_HOST, HMacrocosm.DBH_PORT, HMacrocosm.DBH_INSTANCE);
+            set = envDatabase(HEnvironmentVariable.DBH_HOST, HEnvironmentVariable.DBH_PORT, HEnvironmentVariable.DBH_INSTANCE);
         } else {
             // Database
-            set = envDatabase(HMacrocosm.DBS_HOST, HMacrocosm.DBS_PORT, HMacrocosm.DBS_INSTANCE);
+            set = envDatabase(HEnvironmentVariable.DBS_HOST, HEnvironmentVariable.DBS_PORT, HEnvironmentVariable.DBS_INSTANCE);
         }
         // 创建拷贝
         final JsonObject databaseJ = Ut.valueJObject(database, true);
@@ -96,7 +96,7 @@ public class MatureOn implements HMacrocosm {
 
     // Domain Connected
     public static JsonArray envDomain(final JsonArray domainA) {
-        final String domain = Ut.env(HMacrocosm.CORS_DOMAIN);
+        final String domain = Ut.env(HEnvironmentVariable.CORS_DOMAIN);
         if (Ut.isNil(domain)) {
             return domainA;
         }
@@ -126,8 +126,8 @@ public class MatureOn implements HMacrocosm {
         } else {
             // HOST1, HOST2
             // PORT1, PORT2
-            envHost = HMacrocosm.API_HOST + index;
-            envPort = HMacrocosm.API_PORT + index;
+            envHost = HEnvironmentVariable.API_HOST + index;
+            envPort = HEnvironmentVariable.API_PORT + index;
         }
         return KVarSet.of()
             .saveWith(KName.HOST, envHost, KWeb.DEPLOY.HOST)       // Z_API_HOSTX

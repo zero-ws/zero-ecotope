@@ -4,8 +4,8 @@ import io.r2mo.function.Fn;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.constant.VPath;
-import io.zerows.constant.VString;
+import io.zerows.platform.constant.VPath;
+import io.zerows.platform.constant.VString;
 import io.zerows.support.UtBase;
 import org.osgi.framework.Bundle;
 

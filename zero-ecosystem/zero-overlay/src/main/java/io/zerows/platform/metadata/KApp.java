@@ -1,0 +1,94 @@
+package io.zerows.platform.metadata;
+
+import io.vertx.core.json.JsonObject;
+import io.zerows.platform.exception._40101Exception500CombineApp;
+import io.zerows.platform.HEnvironmentVariable;
+import io.zerows.specification.access.app.HApp;
+import io.zerows.support.UtBase;
+
+import java.util.Objects;
+
+/**
+ * @author lang : 2023-06-06
+ */
+public class KApp implements HApp {
+
+    private final String name;
+    private final JsonObject configuration = new JsonObject();
+    private final String ns;
+
+    public KApp(final String name) {
+        final String nameApp = UtBase.envWith(HEnvironmentVariable.Z_APP, name);
+        // 应用名称
+        this.name = nameApp;
+        // 名空间
+        this.ns = UtBase.nsApp(nameApp);
+    }
+
+    @Override
+    public JsonObject option() {
+        return this.configuration;
+    }
+
+    @Override
+    public void option(final JsonObject configuration, final boolean clear) {
+        if (UtBase.isNil(configuration)) {
+            return;
+        }
+        if (clear) {
+            this.configuration.clear();
+        }
+        this.configuration.mergeIn(UtBase.valueJObject(configuration), true);
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public <T> T option(final String key) {
+        return (T) this.configuration.getValue(key, null);
+    }
+
+    @Override
+    public <T> void option(final String key, final T value) {
+        this.configuration.put(key, value);
+    }
+
+    @Override
+    public String name() {
+        return this.name;
+    }
+
+    @Override
+    public String ns() {
+        return this.ns;
+    }
+
+    @Override
+    public HApp apply(final HApp target) {
+        if (Objects.isNull(target)) {
+            return this;
+        }
+        if (target.equals(this)) {
+            this.option().mergeIn(UtBase.valueJObject(target.option()));
+            return this;
+        } else {
+            throw new _40101Exception500CombineApp(this.ns, this.name);
+        }
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || this.getClass() != o.getClass()) {
+            return false;
+        }
+        final KApp kApp = (KApp) o;
+        return Objects.equals(this.name, kApp.name) && Objects.equals(this.ns, kApp.ns);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.name, this.ns);
+    }
+}

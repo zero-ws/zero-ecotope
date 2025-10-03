@@ -3,7 +3,7 @@ package io.zerows.extension.runtime.ambient.osgi.spi.feature;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.metadata.program.KRef;
+import io.zerows.platform.metadata.KRef;
 import io.zerows.component.qr.syntax.Ir;
 import io.zerows.epoch.component.expression.Formula;
 import io.zerows.epoch.component.expression.Regulation;

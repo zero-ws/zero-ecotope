@@ -3,7 +3,7 @@ package io.zerows.epoch.corpus.security;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.configure.YmlCore;
 import io.zerows.component.log.OLog;
-import io.zerows.enums.EmSecure;
+import io.zerows.platform.enums.EmSecure;
 import io.zerows.epoch.mem.OZeroStore;
 import io.zerows.epoch.program.Ut;
 

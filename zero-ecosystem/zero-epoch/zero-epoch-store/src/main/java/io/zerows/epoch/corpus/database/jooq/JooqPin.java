@@ -9,7 +9,7 @@ import io.zerows.epoch.component.environment.MatureOn;
 import io.zerows.epoch.corpus.database.Database;
 import io.zerows.epoch.corpus.database.cp.zdk.DataPool;
 import io.zerows.epoch.corpus.database.exception._40065Exception500JooqConfiguration;
-import io.zerows.enums.EmDS;
+import io.zerows.platform.enums.EmDS;
 import io.zerows.epoch.program.Ut;
 import org.jooq.Configuration;
 import org.jooq.Table;

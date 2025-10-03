@@ -6,7 +6,7 @@ import io.zerows.epoch.configuration.module.MDConfiguration;
 import io.zerows.epoch.corpus.metadata.service.context.ContextOfApp;
 import io.zerows.epoch.corpus.metadata.service.context.ContextOfModule;
 import io.zerows.epoch.corpus.metadata.service.context.ContextOfPlugin;
-import io.zerows.enums.EmService;
+import io.zerows.platform.enums.EmService;
 import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.sdk.metadata.dependency.OCallback;
 import io.zerows.specification.configuration.HSetting;

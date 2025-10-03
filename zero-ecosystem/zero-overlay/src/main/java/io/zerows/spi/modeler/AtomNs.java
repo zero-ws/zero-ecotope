@@ -1,6 +1,6 @@
 package io.zerows.spi.modeler;
 
-import io.zerows.constant.VString;
+import io.zerows.platform.constant.VString;
 
 import java.util.Objects;
 

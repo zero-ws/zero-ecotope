@@ -2,7 +2,7 @@ package io.zerows.extension.commerce.rbac.atom;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.constant.VValue;
+import io.zerows.platform.constant.VValue;
 import io.zerows.epoch.corpus.metadata.MultiKeyMap;
 import io.zerows.extension.commerce.rbac.uca.timer.ScClock;
 import io.zerows.specification.atomic.HJson;

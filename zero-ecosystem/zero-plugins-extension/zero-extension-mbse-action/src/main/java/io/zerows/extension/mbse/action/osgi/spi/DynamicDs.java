@@ -2,7 +2,7 @@ package io.zerows.extension.mbse.action.osgi.spi;
 
 import io.r2mo.function.Fn;
 import io.vertx.core.MultiMap;
-import io.zerows.metadata.app.KDS;
+import io.zerows.platform.metadata.KDS;
 import io.zerows.epoch.corpus.database.Database;
 import io.zerows.epoch.corpus.database.cp.zdk.DS;
 import io.zerows.epoch.corpus.database.cp.zdk.DataPool;

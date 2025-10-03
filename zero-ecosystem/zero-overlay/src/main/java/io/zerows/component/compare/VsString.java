@@ -1,7 +1,7 @@
 package io.zerows.component.compare;
 
 import io.vertx.core.json.JsonArray;
-import io.zerows.constant.VString;
+import io.zerows.platform.constant.VString;
 import io.zerows.support.UtBase;
 
 import java.time.LocalDateTime;

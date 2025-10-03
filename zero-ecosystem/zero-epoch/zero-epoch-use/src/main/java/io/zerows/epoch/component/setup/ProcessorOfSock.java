@@ -7,7 +7,7 @@ import io.zerows.epoch.component.environment.MatureOn;
 import io.zerows.epoch.component.transformer.TransformerSock;
 import io.zerows.epoch.configuration.NodeVertx;
 import io.zerows.epoch.configuration.option.SockOptions;
-import io.zerows.enums.app.ServerType;
+import io.zerows.platform.enums.app.ServerType;
 import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.sdk.options.Processor;
 import io.zerows.epoch.sdk.options.Transformer;

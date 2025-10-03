@@ -1,7 +1,7 @@
 package io.zerows.specification.access.app;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.enums.EmApp;
+import io.zerows.platform.enums.EmApp;
 import io.zerows.support.UtBase;
 import io.zerows.specification.access.HBelong;
 import io.zerows.specification.access.cloud.HFrontier;

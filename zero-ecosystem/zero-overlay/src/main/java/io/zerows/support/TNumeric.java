@@ -1,6 +1,6 @@
 package io.zerows.support;
 
-import io.zerows.constant.VString;
+import io.zerows.platform.constant.VString;
 
 import java.util.Objects;
 

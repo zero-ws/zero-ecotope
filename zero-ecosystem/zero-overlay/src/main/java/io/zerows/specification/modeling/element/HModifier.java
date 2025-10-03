@@ -1,6 +1,6 @@
 package io.zerows.specification.modeling.element;
 
-import io.zerows.enums.modeling.ScopeType;
+import io.zerows.platform.enums.modeling.ScopeType;
 
 /**
  * 「修饰符」Mark

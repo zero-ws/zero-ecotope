@@ -3,7 +3,7 @@ package io.zerows.epoch.corpus.security.manage;
 import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.zerows.epoch.based.exception._60058Exception409DmComponent;
-import io.zerows.enums.EmSecure;
+import io.zerows.platform.enums.EmSecure;
 import io.zerows.epoch.mem.cache.CStoreSecurity;
 import io.zerows.epoch.sdk.security.authority.HAdmit;
 

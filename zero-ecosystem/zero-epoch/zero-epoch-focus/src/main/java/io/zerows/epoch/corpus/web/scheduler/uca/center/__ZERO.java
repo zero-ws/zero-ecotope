@@ -1,6 +1,6 @@
 package io.zerows.epoch.corpus.web.scheduler.uca.center;
 
-import io.zerows.enums.EmJob;
+import io.zerows.platform.enums.EmJob;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;

@@ -3,8 +3,8 @@ package io.zerows.component.compare;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.Annal;
-import io.zerows.constant.VName;
-import io.zerows.constant.VString;
+import io.zerows.platform.constant.VName;
+import io.zerows.platform.constant.VString;
 import io.zerows.support.UtBase;
 import io.zerows.specification.modeling.metadata.HMetaField;
 

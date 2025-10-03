@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.bootplus.extension.migration.AbstractStep;
 import io.zerows.epoch.bootplus.extension.refine.Ox;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.enums.Environment;
+import io.zerows.platform.enums.Environment;
 import io.zerows.epoch.program.Ut;
 
 import java.io.File;

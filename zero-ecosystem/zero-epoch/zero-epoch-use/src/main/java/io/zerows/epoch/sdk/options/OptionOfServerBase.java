@@ -1,8 +1,8 @@
 package io.zerows.epoch.sdk.options;
 
 import io.vertx.core.http.HttpServerOptions;
-import io.zerows.constant.VString;
-import io.zerows.enums.app.ServerType;
+import io.zerows.platform.constant.VString;
+import io.zerows.platform.enums.app.ServerType;
 
 /**
  * @author lang : 2024-04-20

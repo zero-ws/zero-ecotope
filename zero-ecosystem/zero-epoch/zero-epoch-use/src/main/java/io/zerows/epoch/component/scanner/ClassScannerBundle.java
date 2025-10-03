@@ -1,6 +1,6 @@
 package io.zerows.epoch.component.scanner;
 
-import io.zerows.constant.VString;
+import io.zerows.platform.constant.VString;
 import org.osgi.framework.Bundle;
 
 import java.net.URL;

@@ -2,7 +2,7 @@ package io.zerows.epoch.component.scan;
 
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.QaS;
-import io.zerows.metadata.context.KRunner;
+import io.zerows.platform.metadata.KRunner;
 import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.sdk.metadata.uca.Inquirer;
 

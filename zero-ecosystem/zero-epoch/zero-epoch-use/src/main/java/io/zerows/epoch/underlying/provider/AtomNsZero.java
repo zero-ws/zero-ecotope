@@ -1,9 +1,9 @@
 package io.zerows.epoch.underlying.provider;
 
-import io.zerows.constant.VEnv;
 import io.zerows.epoch.corpus.cloud.LogCloud;
 import io.zerows.epoch.program.Ut;
-import io.zerows.runtime.HMacrocosm;
+import io.zerows.platform.HEnvironmentVariable;
+import io.zerows.platform.constant.VEnv;
 import io.zerows.spi.modeler.AtomNs;
 import io.zerows.support.UtBase;
 
@@ -31,7 +31,7 @@ public class AtomNsZero implements AtomNs {
     @Override
     public String ns(final String appName) {
         // 先计算名空间前缀
-        final String prefix = Ut.envWith(HMacrocosm.Z_NS, VEnv.APP.NS);
+        final String prefix = Ut.envWith(HEnvironmentVariable.Z_NS, VEnv.APP.NS);
         // 再计算名空间
         final String namespace = Ut.isNil(appName)
             ? VEnv.APP.NS_DEFAULT :                     // io.mature.aeon

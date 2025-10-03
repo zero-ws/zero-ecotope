@@ -5,7 +5,7 @@ import io.vertx.core.Promise;
 import io.zerows.epoch.corpus.web.scheduler.atom.Mission;
 import io.zerows.epoch.corpus.web.scheduler.atom.specification.KScheduler;
 import io.zerows.epoch.corpus.web.scheduler.uca.timer.Interval;
-import io.zerows.enums.EmJob;
+import io.zerows.platform.enums.EmJob;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>

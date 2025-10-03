@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Session;
 import io.zerows.epoch.corpus.model.commune.Envelop;
 import io.zerows.epoch.corpus.security.AegisItem;
-import io.zerows.enums.EmSecure;
+import io.zerows.platform.enums.EmSecure;
 import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.sdk.security.Lee;
 import io.zerows.epoch.sdk.security.LeeBuiltIn;

@@ -2,9 +2,9 @@ package io.zerows.extension.mbse.action.util;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.metadata.app.KDS;
-import io.zerows.metadata.app.KIntegration;
-import io.zerows.metadata.datamation.KDictConfig;
+import io.zerows.platform.metadata.KDS;
+import io.zerows.platform.metadata.KIntegration;
+import io.zerows.platform.metadata.KDictConfig;
 import io.zerows.epoch.corpus.database.Database;
 import io.zerows.epoch.program.Ut;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IApi;

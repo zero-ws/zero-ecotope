@@ -4,7 +4,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.corpus.web.scheduler.atom.Mission;
 import io.zerows.epoch.corpus.web.scheduler.atom.specification.KScheduler;
-import io.zerows.enums.EmJob;
+import io.zerows.platform.enums.EmJob;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IJob;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IService;
 import io.zerows.extension.mbse.action.eon.JtKey;

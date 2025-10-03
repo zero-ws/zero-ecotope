@@ -2,8 +2,8 @@ package io.zerows.epoch.component.normalize;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.constant.VPath;
-import io.zerows.constant.VString;
+import io.zerows.platform.constant.VPath;
+import io.zerows.platform.constant.VString;
 import io.zerows.epoch.configuration.module.MDConfiguration;
 import io.zerows.epoch.configuration.module.MDId;
 import io.zerows.epoch.program.Ut;

@@ -16,7 +16,7 @@ import io.vertx.ext.web.handler.impl.HTTPAuthorizationHandler;
 import io.zerows.component.log.Annal;
 import io.zerows.epoch.corpus.security.Aegis;
 import io.zerows.epoch.corpus.security.AegisItem;
-import io.zerows.enums.EmSecure;
+import io.zerows.platform.enums.EmSecure;
 import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.sdk.security.LeeBuiltIn;
 import io.zerows.plugins.common.security.authenticate.AuthenticateBuiltInProvider;

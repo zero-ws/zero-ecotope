@@ -1,6 +1,6 @@
 package io.zerows.component.fs;
 
-import io.zerows.constant.VString;
+import io.zerows.platform.constant.VString;
 
 import java.io.File;
 import java.util.ArrayList;

@@ -5,7 +5,7 @@ import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.database.cp.zdk.DS;
 import io.zerows.epoch.corpus.database.jooq.operation.UxJooq;
 import io.zerows.epoch.corpus.mbse.atom.specification.KModule;
-import io.zerows.enums.EmDS;
+import io.zerows.platform.enums.EmDS;
 import io.zerows.epoch.program.Ut;
 
 import java.util.Objects;

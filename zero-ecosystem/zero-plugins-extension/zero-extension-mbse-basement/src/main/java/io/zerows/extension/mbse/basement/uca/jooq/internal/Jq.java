@@ -1,6 +1,6 @@
 package io.zerows.extension.mbse.basement.uca.jooq.internal;
 
-import io.zerows.constant.VValue;
+import io.zerows.platform.constant.VValue;
 import io.zerows.component.log.Annal;
 import io.zerows.extension.mbse.basement.atom.element.DataMatrix;
 import io.zerows.extension.mbse.basement.atom.element.DataRow;

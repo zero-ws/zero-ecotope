@@ -1,7 +1,7 @@
 package io.zerows.extension.runtime.report.uca.combiner;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.constant.VString;
+import io.zerows.platform.constant.VString;
 import io.zerows.epoch.program.Ut;
 import io.zerows.extension.runtime.report.atom.RGeneration;
 

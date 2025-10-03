@@ -2,10 +2,10 @@ package io.zerows.epoch.corpus.web.client;
 
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonObject;
-import io.zerows.constant.VPath;
-import io.zerows.constant.VString;
-import io.zerows.metadata.app.KIntegration;
-import io.zerows.metadata.app.KIntegrationApi;
+import io.zerows.platform.constant.VPath;
+import io.zerows.platform.constant.VString;
+import io.zerows.platform.metadata.KIntegration;
+import io.zerows.platform.metadata.KIntegrationApi;
 import io.zerows.epoch.program.Ut;
 import org.apache.http.config.Registry;
 import org.apache.http.config.RegistryBuilder;

@@ -1,8 +1,8 @@
 package io.zerows.epoch.corpus.web.client;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.metadata.app.KIntegration;
-import io.zerows.metadata.app.KIntegrationApi;
+import io.zerows.platform.metadata.KIntegration;
+import io.zerows.platform.metadata.KIntegrationApi;
 import org.apache.http.client.methods.HttpGet;
 
 public class GetRotator extends AbstractRotator {

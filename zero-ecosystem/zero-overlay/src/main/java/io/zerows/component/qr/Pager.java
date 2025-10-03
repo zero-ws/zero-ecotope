@@ -3,9 +3,9 @@ package io.zerows.component.qr;
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.Annal;
-import io.zerows.exception.web._60023Exception400QrPageInvalid;
-import io.zerows.exception.web._60024Exception500QueryMetaNull;
-import io.zerows.exception.web._60025Exception400QrPageIndex;
+import io.zerows.platform.exception._60023Exception400QrPageInvalid;
+import io.zerows.platform.exception._60024Exception500QueryMetaNull;
+import io.zerows.platform.exception._60025Exception400QrPageIndex;
 
 import java.io.Serializable;
 import java.util.Objects;

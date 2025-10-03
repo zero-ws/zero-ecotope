@@ -1,6 +1,6 @@
 package io.zerows.plugins.store.liquibase.hed;
 
-import io.zerows.metadata.program.KPair;
+import io.zerows.platform.metadata.KPair;
 import io.zerows.spi.cloud.HED;
 
 /**

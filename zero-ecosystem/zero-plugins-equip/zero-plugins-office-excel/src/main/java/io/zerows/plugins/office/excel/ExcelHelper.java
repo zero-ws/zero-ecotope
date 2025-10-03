@@ -7,7 +7,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.Annal;
 import io.zerows.epoch.component.normalize.Oneness;
-import io.zerows.constant.VPath;
+import io.zerows.platform.constant.VPath;
 import io.zerows.epoch.configuration.module.MDConfiguration;
 import io.zerows.epoch.configuration.module.MDConnect;
 import io.zerows.epoch.program.Ut;

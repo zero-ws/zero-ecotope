@@ -3,7 +3,7 @@ package io.zerows.plugins.office.excel.uca.data;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
-import io.zerows.constant.VString;
+import io.zerows.platform.constant.VString;
 import io.zerows.plugins.office.excel.atom.ExTenant;
 
 /**

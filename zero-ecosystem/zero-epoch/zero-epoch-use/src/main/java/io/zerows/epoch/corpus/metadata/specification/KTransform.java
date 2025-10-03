@@ -7,8 +7,8 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.program.Ut;
 import io.zerows.integrated.jackson.JsonObjectDeserializer;
 import io.zerows.integrated.jackson.JsonObjectSerializer;
-import io.zerows.metadata.datamation.KDictConfig;
-import io.zerows.metadata.datamation.KDictUse;
+import io.zerows.platform.metadata.KDictConfig;
+import io.zerows.platform.metadata.KDictUse;
 
 import java.io.Serializable;
 import java.util.concurrent.ConcurrentMap;

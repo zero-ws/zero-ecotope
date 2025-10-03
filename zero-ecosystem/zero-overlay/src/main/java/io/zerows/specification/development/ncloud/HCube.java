@@ -1,6 +1,6 @@
 package io.zerows.specification.development.ncloud;
 
-import io.zerows.annotations.monitor.One2One;
+import io.zerows.platform.annotations.One2One;
 import io.zerows.specification.atomic.HContract;
 import io.zerows.specification.development.program.HBranch;
 import io.zerows.specification.development.program.HResource;

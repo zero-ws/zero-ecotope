@@ -6,7 +6,7 @@ import io.vertx.ext.web.Session;
 import io.zerows.component.log.OLog;
 import io.zerows.epoch.component.parameter.ParameterBuilder;
 import io.zerows.epoch.component.serialization.ZeroType;
-import io.zerows.constant.VValue;
+import io.zerows.platform.constant.VValue;
 import io.zerows.epoch.corpus.exception._40017Exception500WorkerArgument;
 import io.zerows.epoch.corpus.exception._40018Exception500AsyncSignature;
 import io.zerows.epoch.corpus.model.commune.Envelop;

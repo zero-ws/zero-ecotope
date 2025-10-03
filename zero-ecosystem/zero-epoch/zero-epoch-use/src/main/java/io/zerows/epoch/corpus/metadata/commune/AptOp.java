@@ -1,7 +1,7 @@
 package io.zerows.epoch.corpus.metadata.commune;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.enums.typed.ChangeFlag;
+import io.zerows.platform.enums.typed.ChangeFlag;
 
 /*
  * Package scope

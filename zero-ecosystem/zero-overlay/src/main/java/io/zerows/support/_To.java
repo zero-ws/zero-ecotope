@@ -3,7 +3,7 @@ package io.zerows.support;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.constant.VString;
+import io.zerows.platform.constant.VString;
 
 import java.time.Instant;
 import java.time.LocalDate;

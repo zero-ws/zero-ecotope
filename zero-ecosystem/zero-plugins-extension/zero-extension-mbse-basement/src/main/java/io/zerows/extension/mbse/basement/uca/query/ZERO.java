@@ -1,6 +1,6 @@
 package io.zerows.extension.mbse.basement.uca.query;
 
-import io.zerows.enums.modeling.EmModel;
+import io.zerows.platform.enums.modeling.EmModel;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;

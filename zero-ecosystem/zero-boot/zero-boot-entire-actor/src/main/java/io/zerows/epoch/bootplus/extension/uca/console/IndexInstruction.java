@@ -6,7 +6,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.bootplus.extension.refine.Ox;
 import io.zerows.epoch.bootplus.extension.scaffold.console.AbstractInstruction;
 import io.zerows.epoch.bootplus.stellar.vendor.OkB;
-import io.zerows.metadata.program.KRef;
+import io.zerows.platform.metadata.KRef;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.util.Ao;

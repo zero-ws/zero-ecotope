@@ -4,7 +4,7 @@ import io.r2mo.function.Fn;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.enums.typed.ChangeFlag;
+import io.zerows.platform.enums.typed.ChangeFlag;
 import io.zerows.component.log.Annal;
 import io.zerows.epoch.program.Ut;
 import org.elasticsearch.action.get.GetRequest;

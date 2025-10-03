@@ -1,8 +1,8 @@
 package io.zerows.specification.modeling;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.metadata.normalize.KRule;
-import io.zerows.metadata.normalize.KRuleTerm;
+import io.zerows.platform.metadata.KRule;
+import io.zerows.platform.metadata.KRuleTerm;
 import io.zerows.support.UtBase;
 
 import java.io.Serializable;

@@ -1,7 +1,7 @@
 package io.zerows.epoch.component.normalize;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.exception.web._60050Exception501NotSupport;
+import io.zerows.platform.exception._60050Exception501NotSupport;
 import org.osgi.framework.Bundle;
 
 import java.util.concurrent.ConcurrentMap;

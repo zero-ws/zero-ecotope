@@ -6,7 +6,7 @@ import io.vertx.ext.web.RoutingContext;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.component.log.Annal;
 import io.zerows.epoch.component.serialization.ZeroType;
-import io.zerows.constant.VValue;
+import io.zerows.platform.constant.VValue;
 import io.zerows.epoch.corpus.io.uca.request.argument.Filler;
 import io.zerows.epoch.corpus.model.Epsilon;
 import io.zerows.epoch.corpus.model.Event;

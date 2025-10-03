@@ -4,10 +4,10 @@ import io.vertx.core.Future;
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.metadata.datamation.KDictConfig;
-import io.zerows.metadata.datamation.KDictUse;
-import io.zerows.metadata.datamation.KFabric;
-import io.zerows.metadata.datamation.KMap;
+import io.zerows.platform.metadata.KDictConfig;
+import io.zerows.platform.metadata.KDictUse;
+import io.zerows.platform.metadata.KFabric;
+import io.zerows.platform.metadata.KMap;
 
 import java.util.concurrent.ConcurrentMap;
 

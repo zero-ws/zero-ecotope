@@ -1,9 +1,9 @@
 package io.zerows.support;
 
-import io.zerows.metadata.program.Kv;
-import io.zerows.constant.VEnv;
-import io.zerows.constant.VString;
-import io.zerows.enums.app.OsType;
+import io.zerows.platform.metadata.Kv;
+import io.zerows.platform.constant.VEnv;
+import io.zerows.platform.constant.VString;
+import io.zerows.platform.enums.app.OsType;
 
 import java.util.Properties;
 import java.util.concurrent.ConcurrentMap;

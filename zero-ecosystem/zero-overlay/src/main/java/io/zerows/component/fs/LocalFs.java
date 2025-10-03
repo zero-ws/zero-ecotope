@@ -2,7 +2,7 @@ package io.zerows.component.fs;
 
 import io.r2mo.function.Fn;
 import io.zerows.component.log.LogAs;
-import io.zerows.constant.VMessage;
+import io.zerows.platform.constant.VMessage;
 import io.zerows.support.UtBase;
 import io.zerows.specification.vital.HFS;
 import org.apache.commons.io.FileUtils;

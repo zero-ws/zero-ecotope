@@ -1,7 +1,7 @@
 package io.zerows.extension.mbse.action.uca.tunnel;
 
 import io.vertx.core.Future;
-import io.zerows.metadata.app.KIntegration;
+import io.zerows.platform.metadata.KIntegration;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.database.Database;
 import io.zerows.epoch.corpus.mbse.atom.runner.ActIn;

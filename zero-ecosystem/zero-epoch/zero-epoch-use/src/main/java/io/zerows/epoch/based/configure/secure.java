@@ -1,6 +1,6 @@
 package io.zerows.epoch.based.configure;
 
-import io.zerows.constant.VName;
+import io.zerows.platform.constant.VName;
 
 /**
  * @author lang : 2023-05-29

@@ -11,7 +11,7 @@ import io.zerows.epoch.corpus.io.uca.response.resolver.UnsetResolver;
 import io.zerows.epoch.corpus.io.zdk.mime.Resolver;
 import io.zerows.epoch.corpus.io.zdk.mime.Solve;
 import io.zerows.epoch.corpus.model.Epsilon;
-import io.zerows.enums.EmMime;
+import io.zerows.platform.enums.EmMime;
 import io.zerows.epoch.mem.OZeroStore;
 import io.zerows.epoch.program.Ut;
 import jakarta.ws.rs.core.HttpHeaders;

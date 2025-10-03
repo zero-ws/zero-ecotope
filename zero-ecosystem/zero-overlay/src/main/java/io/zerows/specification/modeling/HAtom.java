@@ -1,7 +1,7 @@
 package io.zerows.specification.modeling;
 
-import io.zerows.metadata.normalize.KMarkAtom;
-import io.zerows.metadata.normalize.KMarkAttribute;
+import io.zerows.platform.metadata.KMarkAtom;
+import io.zerows.platform.metadata.KMarkAttribute;
 import io.zerows.specification.access.app.HArk;
 import io.zerows.specification.modeling.metadata.HMetaAtom;
 import io.zerows.specification.modeling.operation.HDiff;

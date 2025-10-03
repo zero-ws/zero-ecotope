@@ -3,7 +3,7 @@ package io.zerows.extension.commerce.rbac.uca.acl.relation;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
-import io.zerows.constant.VString;
+import io.zerows.platform.constant.VString;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SGroup;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SRole;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SUser;

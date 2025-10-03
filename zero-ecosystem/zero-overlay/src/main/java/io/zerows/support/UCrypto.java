@@ -1,7 +1,7 @@
 package io.zerows.support;
 
 import io.r2mo.function.Fn;
-import io.zerows.constant.VValue;
+import io.zerows.platform.constant.VValue;
 
 import java.net.URLDecoder;
 import java.net.URLEncoder;

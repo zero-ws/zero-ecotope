@@ -1,8 +1,8 @@
 package io.zerows.specification.modeling;
 
-import io.zerows.metadata.normalize.KMarkAttribute;
-import io.zerows.metadata.reference.RRule;
-import io.zerows.enums.modeling.EmValue;
+import io.zerows.platform.enums.modeling.EmValue;
+import io.zerows.platform.metadata.KMarkAttribute;
+import io.zerows.platform.metadata.RRule;
 import io.zerows.specification.modeling.metadata.HMetaField;
 
 import java.util.List;

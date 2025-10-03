@@ -6,7 +6,7 @@ import io.zerows.component.log.Annal;
 import io.zerows.component.qr.syntax.Ir;
 import io.zerows.component.qr.syntax.IrDo;
 import io.zerows.component.qr.syntax.IrItem;
-import io.zerows.exception.web._60024Exception500QueryMetaNull;
+import io.zerows.platform.exception._60024Exception500QueryMetaNull;
 
 import java.io.Serializable;
 import java.util.Objects;

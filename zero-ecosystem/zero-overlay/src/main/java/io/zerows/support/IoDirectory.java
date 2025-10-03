@@ -3,7 +3,7 @@ package io.zerows.support;
 import io.r2mo.function.Fn;
 import io.zerows.component.log.LogUtil;
 import io.zerows.component.fs.LocalDir;
-import io.zerows.constant.VPath;
+import io.zerows.platform.constant.VPath;
 
 import java.io.File;
 import java.io.IOException;

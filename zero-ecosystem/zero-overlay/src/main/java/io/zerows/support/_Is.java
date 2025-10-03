@@ -2,7 +2,7 @@ package io.zerows.support;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.constant.VEnv;
+import io.zerows.platform.constant.VEnv;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;

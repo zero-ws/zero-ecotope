@@ -1,7 +1,7 @@
 package io.zerows.epoch.bootplus.stellar;
 
-import io.zerows.metadata.app.KDS;
-import io.zerows.metadata.app.KGlobal;
+import io.zerows.platform.metadata.KDS;
+import io.zerows.platform.metadata.KGlobal;
 import io.zerows.epoch.corpus.database.Database;
 import io.zerows.specification.access.app.HArk;
 

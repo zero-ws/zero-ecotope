@@ -1,7 +1,7 @@
 package io.zerows.specification.development.program;
 
 import io.vertx.core.buffer.Buffer;
-import io.zerows.enums.EmLib;
+import io.zerows.platform.enums.EmLib;
 import io.zerows.specification.atomic.HContract;
 
 /**

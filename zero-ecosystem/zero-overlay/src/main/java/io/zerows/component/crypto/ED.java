@@ -1,8 +1,8 @@
 package io.zerows.component.crypto;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.annotations.monitor.Memory;
-import io.zerows.metadata.program.KPair;
+import io.zerows.platform.annotations.Memory;
+import io.zerows.platform.metadata.KPair;
 
 /**
  * Encrypt / Decrypt Interface for

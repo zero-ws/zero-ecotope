@@ -1,6 +1,6 @@
 package io.zerows.epoch.component.serialization;
 
-import io.zerows.constant.VValue;
+import io.zerows.platform.constant.VValue;
 
 class SaberByteArray extends SaberBase {
 

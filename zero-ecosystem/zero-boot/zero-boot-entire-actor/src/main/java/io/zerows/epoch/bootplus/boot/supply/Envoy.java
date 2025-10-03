@@ -5,9 +5,9 @@ import io.zerows.epoch.bootplus.stellar.vendor.AbstractPartyB;
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.boot.Electy;
-import io.zerows.metadata.app.KIntegration;
-import io.zerows.metadata.datamation.KDictConfig;
-import io.zerows.metadata.datamation.KMap;
+import io.zerows.platform.metadata.KIntegration;
+import io.zerows.platform.metadata.KDictConfig;
+import io.zerows.platform.metadata.KMap;
 
 /**
  * 和内置的 {@link Electy} 形成对比

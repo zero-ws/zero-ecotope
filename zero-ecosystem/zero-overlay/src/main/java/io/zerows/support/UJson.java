@@ -5,7 +5,7 @@ import io.vertx.core.json.DecodeException;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.shareddata.ClusterSerializable;
-import io.zerows.enums.Result;
+import io.zerows.platform.enums.Result;
 
 import java.util.Arrays;
 import java.util.Collection;

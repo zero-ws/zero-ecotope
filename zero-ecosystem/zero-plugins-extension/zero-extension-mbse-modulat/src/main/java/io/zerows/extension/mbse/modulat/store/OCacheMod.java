@@ -1,8 +1,8 @@
 package io.zerows.extension.mbse.modulat.store;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.metadata.app.KDS;
-import io.zerows.constant.VString;
+import io.zerows.platform.metadata.KDS;
+import io.zerows.platform.constant.VString;
 import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.sdk.metadata.running.OCache;
 import io.zerows.specification.access.app.HApp;

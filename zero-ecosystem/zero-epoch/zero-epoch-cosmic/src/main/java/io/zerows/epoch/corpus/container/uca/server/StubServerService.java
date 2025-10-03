@@ -7,7 +7,7 @@ import io.zerows.epoch.configuration.NodeVertx;
 import io.zerows.epoch.configuration.option.SockOptions;
 import io.zerows.epoch.corpus.model.running.RunServer;
 import io.zerows.epoch.corpus.model.running.RunVertx;
-import io.zerows.enums.app.ServerType;
+import io.zerows.platform.enums.app.ServerType;
 import io.zerows.epoch.sdk.metadata.AbstractAmbiguity;
 import io.zerows.epoch.sdk.options.OptionOfServer;
 import org.osgi.framework.Bundle;
