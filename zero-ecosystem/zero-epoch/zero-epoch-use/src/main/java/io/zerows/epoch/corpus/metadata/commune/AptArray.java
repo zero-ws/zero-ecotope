@@ -2,7 +2,7 @@ package io.zerows.epoch.corpus.metadata.commune;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 
 import java.io.Serializable;
 import java.util.Objects;

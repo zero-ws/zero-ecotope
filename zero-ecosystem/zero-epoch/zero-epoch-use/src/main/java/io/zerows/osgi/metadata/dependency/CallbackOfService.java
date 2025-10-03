@@ -1,7 +1,7 @@
 package io.zerows.osgi.metadata.dependency;
 
 import io.zerows.component.execution.ServiceRunner;
-import io.zerows.epoch.configuration.module.MDConfiguration;
+import io.zerows.epoch.configuration.MDConfiguration;
 import io.zerows.epoch.corpus.metadata.service.CallbackParameter;
 import io.zerows.osgi.metadata.service.EnergyConfiguration;
 import io.zerows.osgi.metadata.service.EnergyDeployment;

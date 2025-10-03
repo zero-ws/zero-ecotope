@@ -1,7 +1,7 @@
 package io.zerows.epoch.corpus.database.jooq.condition.date;
 
 import io.zerows.epoch.corpus.database.jooq.condition.Term;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 import org.jooq.Condition;
 import org.jooq.Field;
 

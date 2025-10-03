@@ -23,7 +23,7 @@ import io.zerows.epoch.corpus.model.Event;
 import io.zerows.epoch.corpus.model.Rule;
 import io.zerows.epoch.corpus.model.commune.Envelop;
 import io.zerows.epoch.corpus.web.validation.ValidatorEntry;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;

@@ -10,7 +10,7 @@ import io.vertx.ext.auth.User;
 import io.vertx.ext.auth.authorization.Authorization;
 import io.vertx.ext.auth.authorization.AuthorizationProvider;
 import io.zerows.epoch.corpus.security.Aegis;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 
 import java.lang.reflect.Method;
 import java.util.Set;

@@ -1,7 +1,7 @@
 package io.zerows.component.log;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.support.UtBase;
+import io.zerows.support.base.UtBase;
 
 import java.util.function.Function;
 

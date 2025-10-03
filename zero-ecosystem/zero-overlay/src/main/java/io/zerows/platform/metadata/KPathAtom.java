@@ -3,7 +3,7 @@ package io.zerows.platform.metadata;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.constant.VWeb;
 import io.zerows.platform.enums.Environment;
-import io.zerows.support.UtBase;
+import io.zerows.support.base.UtBase;
 
 /**
  * @author lang : 2023-06-12

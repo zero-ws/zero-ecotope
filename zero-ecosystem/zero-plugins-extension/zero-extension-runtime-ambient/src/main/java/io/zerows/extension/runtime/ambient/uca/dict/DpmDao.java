@@ -10,7 +10,7 @@ import io.zerows.platform.metadata.KDictSource;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.database.jooq.operation.UxJooq;
 import io.zerows.epoch.corpus.web.cache.Rapid;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;

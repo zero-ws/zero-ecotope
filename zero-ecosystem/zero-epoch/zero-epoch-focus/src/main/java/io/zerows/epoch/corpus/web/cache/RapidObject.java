@@ -1,7 +1,7 @@
 package io.zerows.epoch.corpus.web.cache;
 
 import io.vertx.core.Future;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 
 import java.util.Objects;
 import java.util.function.Supplier;

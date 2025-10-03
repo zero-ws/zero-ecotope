@@ -1,7 +1,7 @@
 package io.zerows.component.serialization;
 
 import io.r2mo.function.Fn;
-import io.zerows.epoch.based.exception._60021Exception400FilePathMissing;
+import io.zerows.epoch.exception._60021Exception400FilePathMissing;
 
 import java.io.File;
 

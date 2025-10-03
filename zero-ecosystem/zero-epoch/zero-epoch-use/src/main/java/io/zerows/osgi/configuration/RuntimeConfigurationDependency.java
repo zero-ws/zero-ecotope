@@ -1,6 +1,6 @@
 package io.zerows.osgi.configuration;
 
-import io.zerows.epoch.constant.osgi.OMessage;
+import io.zerows.epoch.constant.OMessage;
 import io.zerows.osgi.configuration.service.EnergyOption;
 import io.zerows.osgi.configuration.service.EnergyOptionService;
 import io.zerows.epoch.sdk.osgi.AbstractConnectorBase;

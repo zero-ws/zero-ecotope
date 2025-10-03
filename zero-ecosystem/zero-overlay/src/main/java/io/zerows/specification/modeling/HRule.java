@@ -3,7 +3,7 @@ package io.zerows.specification.modeling;
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.metadata.KRule;
 import io.zerows.platform.metadata.KRuleTerm;
-import io.zerows.support.UtBase;
+import io.zerows.support.base.UtBase;
 
 import java.io.Serializable;
 import java.util.List;

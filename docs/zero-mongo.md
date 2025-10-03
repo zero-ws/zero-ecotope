@@ -51,7 +51,7 @@ import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.annotations.infix.Mongo;
 import io.vertx.up.commune.Envelop;
-import io.zerows.epoch.program.Jackson;
+import io.zerows.support.Jackson;
 
 @Queue
 public class UserWorker {

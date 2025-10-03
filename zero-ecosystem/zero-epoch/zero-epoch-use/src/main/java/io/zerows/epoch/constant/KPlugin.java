@@ -1,7 +1,7 @@
 package io.zerows.epoch.constant;
 
 import io.zerows.epoch.annotations.impl.*;
-import io.zerows.epoch.based.configure.YmlCore;
+import io.zerows.epoch.application.YmlCore;
 import jakarta.inject.Inject;
 
 import java.lang.annotation.Annotation;

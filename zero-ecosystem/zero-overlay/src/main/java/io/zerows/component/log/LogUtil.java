@@ -1,7 +1,7 @@
 package io.zerows.component.log;
 
 import io.zerows.platform.HEnvironmentVariable;
-import io.zerows.support.UtBase;
+import io.zerows.support.base.UtBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

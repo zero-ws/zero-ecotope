@@ -1,7 +1,7 @@
 package io.zerows.epoch.sdk.osgi;
 
 import io.zerows.component.log.OLog;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 
 /**
  * 回调专用接口，所有回调统一实现此接口

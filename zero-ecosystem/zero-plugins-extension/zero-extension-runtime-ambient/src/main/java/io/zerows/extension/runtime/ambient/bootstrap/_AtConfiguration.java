@@ -2,9 +2,9 @@ package io.zerows.extension.runtime.ambient.bootstrap;
 
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.configuration.module.MDConfiguration;
+import io.zerows.epoch.configuration.MDConfiguration;
 import io.zerows.epoch.corpus.extension.HExtension;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 import io.zerows.extension.runtime.ambient.eon.AtConstant;
 import io.zerows.extension.runtime.ambient.exception._80302Exception500InitSpecification;
 import io.zerows.extension.runtime.ambient.exception._80303Exception500PrerequisiteSpec;

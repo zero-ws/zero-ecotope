@@ -2,7 +2,7 @@ package io.zerows.epoch.corpus.database.jooq.condition;
 
 import io.vertx.core.json.JsonArray;
 import io.zerows.component.log.OLog;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 import org.jooq.Condition;
 import org.jooq.Field;
 

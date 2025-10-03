@@ -1,6 +1,6 @@
 package io.zerows.platform.metadata;
 
-import io.zerows.support.UtBase;
+import io.zerows.support.base.UtBase;
 
 import java.io.Serializable;
 import java.util.Objects;

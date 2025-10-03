@@ -4,7 +4,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.constant.VName;
 import io.zerows.platform.enums.modeling.EmValue;
-import io.zerows.support.UtBase;
+import io.zerows.support.base.UtBase;
 import io.zerows.specification.modeling.HAttribute;
 
 import java.io.Serializable;

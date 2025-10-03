@@ -9,8 +9,8 @@ import io.zerows.epoch.corpus.container.uca.store.StubLinear;
 import io.zerows.epoch.corpus.container.uca.store.StubVertx;
 import io.zerows.epoch.corpus.model.running.RunVertx;
 import io.zerows.platform.enums.VertxComponent;
-import io.zerows.epoch.program.Ut;
-import io.zerows.epoch.program.fn.Fx;
+import io.zerows.support.Ut;
+import io.zerows.support.fn.Fx;
 import org.osgi.framework.Bundle;
 
 import java.util.concurrent.ConcurrentHashMap;

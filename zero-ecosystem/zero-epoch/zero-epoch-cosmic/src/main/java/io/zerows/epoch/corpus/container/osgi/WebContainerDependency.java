@@ -1,6 +1,6 @@
 package io.zerows.epoch.corpus.container.osgi;
 
-import io.zerows.epoch.constant.osgi.OMessage;
+import io.zerows.epoch.constant.OMessage;
 import io.zerows.epoch.corpus.container.osgi.service.EnergyDeploymentService;
 import io.zerows.epoch.corpus.container.osgi.service.EnergyVertx;
 import io.zerows.epoch.corpus.container.osgi.service.EnergyVertxService;

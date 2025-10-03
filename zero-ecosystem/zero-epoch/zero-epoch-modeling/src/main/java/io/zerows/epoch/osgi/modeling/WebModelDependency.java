@@ -1,7 +1,7 @@
 package io.zerows.epoch.osgi.modeling;
 
-import io.zerows.epoch.constant.osgi.OMessage;
-import io.zerows.epoch.configuration.module.MDConfiguration;
+import io.zerows.epoch.constant.OMessage;
+import io.zerows.epoch.configuration.MDConfiguration;
 import io.zerows.epoch.corpus.extension.HExtension;
 import io.zerows.osgi.metadata.service.EnergyConfiguration;
 import io.zerows.epoch.osgi.modeling.service.EnergyConfigurationService;

@@ -5,11 +5,11 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.component.normalize.EquipAt;
 import io.zerows.epoch.component.normalize.Replacer;
-import io.zerows.epoch.configuration.module.MDConfiguration;
-import io.zerows.epoch.configuration.module.MDConnect;
+import io.zerows.epoch.configuration.MDConfiguration;
+import io.zerows.epoch.configuration.MDConnect;
 import io.zerows.epoch.corpus.extension.HExtension;
 import io.zerows.epoch.mem.module.OCacheConfiguration;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 
 import java.util.List;
 import java.util.Objects;

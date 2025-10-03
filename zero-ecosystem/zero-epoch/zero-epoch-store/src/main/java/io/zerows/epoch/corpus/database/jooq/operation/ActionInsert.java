@@ -2,7 +2,7 @@ package io.zerows.epoch.corpus.database.jooq.operation;
 
 import io.vertx.core.Future;
 import io.zerows.epoch.corpus.database.jooq.util.JqAnalyzer;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 import org.jooq.InsertSetMoreStep;
 import org.jooq.InsertSetStep;
 import org.jooq.InsertValuesStepN;

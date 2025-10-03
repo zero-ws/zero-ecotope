@@ -2,7 +2,7 @@ package io.zerows.platform.metadata;
 
 import io.vertx.core.json.JsonArray;
 import io.zerows.platform.enums.EmDict;
-import io.zerows.support.UtBase;
+import io.zerows.support.base.UtBase;
 
 import java.io.Serializable;
 import java.util.ArrayList;

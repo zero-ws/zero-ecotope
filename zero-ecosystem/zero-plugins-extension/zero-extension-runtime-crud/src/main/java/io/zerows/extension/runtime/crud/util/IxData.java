@@ -11,7 +11,7 @@ import io.zerows.epoch.corpus.database.jooq.util.JqAnalyzer;
 import io.zerows.epoch.corpus.mbse.atom.specification.KModule;
 import io.zerows.epoch.corpus.metadata.specification.KField;
 import io.zerows.epoch.corpus.model.commune.Envelop;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 import io.zerows.extension.runtime.crud.bootstrap.IxPin;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 import io.zerows.specification.modeling.metadata.HMetaAtom;

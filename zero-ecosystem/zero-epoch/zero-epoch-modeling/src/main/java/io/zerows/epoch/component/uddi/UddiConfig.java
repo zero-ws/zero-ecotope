@@ -2,7 +2,7 @@ package io.zerows.epoch.component.uddi;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.management.OZeroStore;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 
 class UddiConfig {
 

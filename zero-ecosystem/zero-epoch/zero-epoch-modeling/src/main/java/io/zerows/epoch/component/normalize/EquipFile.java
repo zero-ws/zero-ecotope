@@ -1,9 +1,9 @@
 package io.zerows.epoch.component.normalize;
 
 import io.zerows.platform.constant.VPath;
-import io.zerows.epoch.configuration.module.MDConfiguration;
-import io.zerows.epoch.configuration.module.MDId;
-import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.configuration.MDConfiguration;
+import io.zerows.epoch.configuration.MDId;
+import io.zerows.support.Ut;
 import org.osgi.framework.Bundle;
 
 import java.util.List;

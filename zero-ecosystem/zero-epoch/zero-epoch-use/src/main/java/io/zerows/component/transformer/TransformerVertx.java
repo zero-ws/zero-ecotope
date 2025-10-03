@@ -2,7 +2,7 @@ package io.zerows.component.transformer;
 
 import io.vertx.core.VertxOptions;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.based.configure.YmlCore;
+import io.zerows.epoch.application.YmlCore;
 import io.zerows.epoch.sdk.environment.Transformer;
 
 import java.util.Objects;

@@ -1,6 +1,6 @@
 package io.zerows.extension.mbse.action.uca.tunnel;
 
-import io.zerows.epoch.underlying.Dictionary;
+import io.zerows.epoch.spi.Dictionary;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;

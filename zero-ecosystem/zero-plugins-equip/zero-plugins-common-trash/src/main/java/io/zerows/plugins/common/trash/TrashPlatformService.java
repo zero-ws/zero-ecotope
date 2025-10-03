@@ -3,7 +3,7 @@ package io.zerows.plugins.common.trash;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 
 public class TrashPlatformService implements TrashPlatform {
 

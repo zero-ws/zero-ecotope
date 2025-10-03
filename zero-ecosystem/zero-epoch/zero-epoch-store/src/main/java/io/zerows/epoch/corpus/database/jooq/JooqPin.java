@@ -2,7 +2,7 @@ package io.zerows.epoch.corpus.database.jooq;
 
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.based.configure.YmlCore;
+import io.zerows.epoch.application.YmlCore;
 import io.zerows.epoch.constant.KName;
 import io.zerows.component.log.OLog;
 import io.zerows.component.environment.MatureOn;
@@ -10,7 +10,7 @@ import io.zerows.epoch.corpus.database.Database;
 import io.zerows.epoch.corpus.database.cp.zdk.DataPool;
 import io.zerows.epoch.corpus.database.exception._40065Exception500JooqConfiguration;
 import io.zerows.platform.enums.EmDS;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 import org.jooq.Configuration;
 import org.jooq.Table;
 

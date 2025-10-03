@@ -13,7 +13,7 @@ import io.zerows.platform.constant.VString;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.metadata.commune.Vis;
 import io.zerows.epoch.corpus.metadata.commune.XHeader;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 import io.zerows.extension.commerce.rbac.agent.service.view.RuleStub;
 import io.zerows.extension.commerce.rbac.atom.ScOwner;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.SPathDao;

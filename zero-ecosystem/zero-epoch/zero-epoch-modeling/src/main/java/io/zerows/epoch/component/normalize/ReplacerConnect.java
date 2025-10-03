@@ -3,10 +3,10 @@ package io.zerows.epoch.component.normalize;
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.configuration.module.MDConnect;
-import io.zerows.epoch.configuration.module.MDMeta;
+import io.zerows.epoch.configuration.MDConnect;
+import io.zerows.epoch.configuration.MDMeta;
 import io.zerows.epoch.mem.module.OCacheDao;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 
 import java.util.Objects;
 

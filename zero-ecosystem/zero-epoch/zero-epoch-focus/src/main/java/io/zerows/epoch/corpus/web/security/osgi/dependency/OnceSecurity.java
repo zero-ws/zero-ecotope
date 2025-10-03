@@ -1,7 +1,7 @@
 package io.zerows.epoch.corpus.web.security.osgi.dependency;
 
 import io.zerows.epoch.corpus.web.security.osgi.service.EnergySecure;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 import io.zerows.epoch.sdk.osgi.OOnce;
 import io.zerows.epoch.sdk.osgi.ServiceContext;
 

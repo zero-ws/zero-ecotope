@@ -3,7 +3,7 @@ package io.zerows.epoch.sdk.plugins;
 import io.r2mo.function.Fn;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.based.exception._10005Exception500PluginDynamic;
+import io.zerows.epoch.exception._10005Exception500PluginDynamic;
 import io.zerows.management.OZeroStore;
 
 import java.io.Serializable;

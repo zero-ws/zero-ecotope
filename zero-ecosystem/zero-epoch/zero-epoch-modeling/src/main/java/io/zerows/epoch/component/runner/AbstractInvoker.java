@@ -14,7 +14,7 @@ import io.zerows.epoch.component.uddi.UddiClient;
 import io.zerows.platform.constant.VValue;
 import io.zerows.epoch.corpus.model.commune.Envelop;
 import io.zerows.platform.enums.modeling.EmValue;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;

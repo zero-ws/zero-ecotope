@@ -2,7 +2,7 @@ package io.zerows.epoch.corpus.mbse.atom.specification;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 import io.zerows.specification.atomic.HJson;
 
 import java.io.Serializable;

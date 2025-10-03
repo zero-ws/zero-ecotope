@@ -13,7 +13,7 @@ import io.zerows.component.qr.syntax.Ir;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.mbse.atom.specification.KModule;
 import io.zerows.epoch.corpus.model.commune.Envelop;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 import io.zerows.extension.runtime.crud.eon.Addr;
 import io.zerows.extension.runtime.crud.eon.em.ApiSpec;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;

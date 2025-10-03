@@ -3,7 +3,7 @@ package io.zerows.component.scanner;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.reflect.ClassPath;
 import io.r2mo.function.Fn;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 import org.osgi.framework.Bundle;
 
 import java.util.Arrays;

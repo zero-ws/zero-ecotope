@@ -1,7 +1,7 @@
 package io.zerows.component.injection;
 
 import com.google.inject.AbstractModule;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 import jakarta.inject.Inject;
 
 import java.lang.reflect.Field;

@@ -1,6 +1,6 @@
 package io.zerows.extension.commerce.erp.configuration;
 
-import io.zerows.epoch.configuration.module.MDConfiguration;
+import io.zerows.epoch.configuration.MDConfiguration;
 import io.zerows.epoch.corpus.extension.HExtension;
 import io.zerows.extension.commerce.erp.eon.ErpConstant;
 

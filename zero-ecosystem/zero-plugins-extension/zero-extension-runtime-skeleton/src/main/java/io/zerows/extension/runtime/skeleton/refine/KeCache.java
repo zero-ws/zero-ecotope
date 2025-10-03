@@ -8,8 +8,8 @@ import io.zerows.component.log.Annal;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.metadata.commune.Vis;
 import io.zerows.epoch.mem.OCacheUri;
-import io.zerows.epoch.underlying.channel.KIncome;
-import io.zerows.epoch.underlying.channel.Pocket;
+import io.zerows.epoch.spi.channel.KIncome;
+import io.zerows.epoch.spi.channel.Pocket;
 import io.zerows.extension.runtime.skeleton.osgi.spi.web.Orbit;
 
 /*

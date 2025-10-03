@@ -7,7 +7,7 @@ import io.zerows.component.environment.DevEnv;
 import io.zerows.epoch.corpus.database.jooq.JooqDsl;
 import io.zerows.epoch.corpus.database.jooq.condition.JooqCond;
 import io.zerows.epoch.corpus.database.jooq.util.JqAnalyzer;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 import org.jooq.Condition;
 import org.jooq.DSLContext;
 import org.jooq.Field;

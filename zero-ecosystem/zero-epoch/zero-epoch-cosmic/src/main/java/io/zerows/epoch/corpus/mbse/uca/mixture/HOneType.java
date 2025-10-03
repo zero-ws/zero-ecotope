@@ -9,7 +9,7 @@ import io.zerows.epoch.corpus.mbse.atom.KClass;
 import io.zerows.epoch.corpus.mbse.atom.specification.KModule;
 import io.zerows.epoch.corpus.metadata.specification.KJoin;
 import io.zerows.epoch.corpus.metadata.specification.KPoint;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;

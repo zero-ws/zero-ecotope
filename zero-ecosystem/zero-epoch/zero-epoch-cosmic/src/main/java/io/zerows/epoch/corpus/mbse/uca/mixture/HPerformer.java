@@ -1,7 +1,7 @@
 package io.zerows.epoch.corpus.mbse.uca.mixture;
 
 import io.vertx.core.Future;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 import io.zerows.specification.modeling.HModel;
 
 /**

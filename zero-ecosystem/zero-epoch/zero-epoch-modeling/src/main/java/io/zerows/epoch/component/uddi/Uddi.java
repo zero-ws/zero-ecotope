@@ -1,7 +1,7 @@
 package io.zerows.epoch.component.uddi;
 
 import io.r2mo.typed.exception.web._500ServerInternalException;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 
 import java.util.Objects;
 

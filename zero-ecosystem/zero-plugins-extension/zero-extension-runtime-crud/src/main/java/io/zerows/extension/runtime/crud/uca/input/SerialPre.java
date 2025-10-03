@@ -8,8 +8,8 @@ import io.zerows.component.log.Annal;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.mbse.atom.specification.KModule;
 import io.zerows.epoch.corpus.metadata.specification.KField;
-import io.zerows.epoch.program.Ut;
-import io.zerows.epoch.program.fn.Fx;
+import io.zerows.support.Ut;
+import io.zerows.support.fn.Fx;
 import io.zerows.spi.modeler.Indent;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 

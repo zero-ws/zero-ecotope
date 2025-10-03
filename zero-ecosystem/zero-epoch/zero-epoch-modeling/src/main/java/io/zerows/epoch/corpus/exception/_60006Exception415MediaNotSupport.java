@@ -1,7 +1,7 @@
 package io.zerows.epoch.corpus.exception;
 
 import io.r2mo.vertx.common.exception.VertxWebException;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 import jakarta.ws.rs.core.MediaType;
 
 import java.util.Set;

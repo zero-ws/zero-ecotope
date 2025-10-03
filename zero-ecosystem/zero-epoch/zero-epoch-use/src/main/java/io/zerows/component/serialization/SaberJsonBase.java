@@ -1,7 +1,7 @@
 package io.zerows.component.serialization;
 
 import io.vertx.core.json.DecodeException;
-import io.zerows.epoch.based.exception._60004Exception400ParamFromString;
+import io.zerows.epoch.exception._60004Exception400ParamFromString;
 
 import java.util.function.Function;
 

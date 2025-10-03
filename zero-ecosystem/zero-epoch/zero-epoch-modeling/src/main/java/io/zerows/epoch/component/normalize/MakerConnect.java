@@ -1,8 +1,8 @@
 package io.zerows.epoch.component.normalize;
 
 import io.vertx.core.json.JsonArray;
-import io.zerows.epoch.configuration.module.MDConnect;
-import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.configuration.MDConnect;
+import io.zerows.support.Ut;
 import org.osgi.framework.Bundle;
 
 import java.util.List;

@@ -1,7 +1,7 @@
 package io.zerows.platform.metadata;
 
 import io.r2mo.function.Fn;
-import io.zerows.support.UtBase;
+import io.zerows.support.base.UtBase;
 
 import java.io.File;
 import java.io.FileInputStream;

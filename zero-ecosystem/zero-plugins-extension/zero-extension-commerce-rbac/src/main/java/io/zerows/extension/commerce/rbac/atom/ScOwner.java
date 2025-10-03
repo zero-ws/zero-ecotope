@@ -2,7 +2,7 @@ package io.zerows.extension.commerce.rbac.atom;
 
 import io.zerows.platform.constant.VValue;
 import io.zerows.epoch.corpus.metadata.commune.Vis;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 import io.zerows.extension.runtime.skeleton.eon.em.OwnerType;
 
 import java.io.Serializable;

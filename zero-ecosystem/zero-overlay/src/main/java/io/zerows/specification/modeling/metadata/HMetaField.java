@@ -1,7 +1,7 @@
 package io.zerows.specification.modeling.metadata;
 
 import io.zerows.spi.modeler.MetaOn;
-import io.zerows.support.UtBase;
+import io.zerows.support.base.UtBase;
 import io.zerows.specification.modeling.element.HConstraint;
 import io.zerows.specification.modeling.element.HKey;
 

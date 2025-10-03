@@ -4,7 +4,7 @@ import io.r2mo.typed.exception.AbstractException;
 import io.zerows.component.log.LogAs;
 import io.zerows.platform.constant.VMessage;
 import io.zerows.platform.enums.EmBoot;
-import io.zerows.support.UtBase;
+import io.zerows.support.base.UtBase;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HEnergy;
 import io.zerows.specification.configuration.boot.HMature;

@@ -2,7 +2,7 @@ package io.zerows.platform.metadata;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.zerows.platform.enums.EmCloud;
-import io.zerows.support.UtBase;
+import io.zerows.support.base.UtBase;
 
 import java.io.Serializable;
 import java.util.Objects;

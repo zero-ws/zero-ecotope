@@ -1,6 +1,6 @@
 package io.zerows.component.qr.syntax;
 
-import io.zerows.support.UtBase;
+import io.zerows.support.base.UtBase;
 
 import java.util.HashSet;
 import java.util.Set;

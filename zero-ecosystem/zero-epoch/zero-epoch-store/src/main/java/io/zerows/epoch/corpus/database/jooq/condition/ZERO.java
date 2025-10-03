@@ -2,7 +2,7 @@ package io.zerows.epoch.corpus.database.jooq.condition;
 
 import io.zerows.component.qr.syntax.Ir;
 import io.zerows.epoch.corpus.database.jooq.condition.date.*;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

@@ -26,7 +26,7 @@ package io.vertx.up.unity;
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.vertx.core.json.JsonArray;
 import io.vertx.quiz.TestBase;
-import io.zerows.epoch.program.Jackson;
+import io.zerows.support.Jackson;
 import org.junit.Assert;
 import org.junit.Test;
 

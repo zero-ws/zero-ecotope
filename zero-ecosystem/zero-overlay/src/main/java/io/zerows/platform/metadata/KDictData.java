@@ -3,7 +3,7 @@ package io.zerows.platform.metadata;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.Annal;
-import io.zerows.support.UtBase;
+import io.zerows.support.base.UtBase;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;

@@ -1,6 +1,6 @@
 package io.zerows.component.qr.syntax;
 
-import io.zerows.support.UtBase;
+import io.zerows.support.base.UtBase;
 
 public class QValue implements QLeaf {
 

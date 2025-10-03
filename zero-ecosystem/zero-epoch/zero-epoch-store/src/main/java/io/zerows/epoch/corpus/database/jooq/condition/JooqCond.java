@@ -12,7 +12,7 @@ import io.zerows.platform.constant.VString;
 import io.zerows.platform.constant.VValue;
 import io.zerows.epoch.corpus.database.exception._40055Exception500JooqCondField;
 import io.zerows.epoch.corpus.database.exception._40067Exception500JooqCondClause;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 import org.jooq.Condition;
 import org.jooq.Field;
 import org.jooq.Operator;

@@ -3,7 +3,7 @@ package io.zerows.component.injection;
 import com.google.inject.AbstractModule;
 import com.google.inject.name.Names;
 import io.zerows.component.log.OLog;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 import jakarta.inject.Named;
 
 import java.lang.annotation.Annotation;

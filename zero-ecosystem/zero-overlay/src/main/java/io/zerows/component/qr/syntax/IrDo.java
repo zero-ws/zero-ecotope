@@ -2,7 +2,7 @@ package io.zerows.component.qr.syntax;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.support.UtBase;
+import io.zerows.support.base.UtBase;
 
 import java.util.List;
 import java.util.function.BiConsumer;

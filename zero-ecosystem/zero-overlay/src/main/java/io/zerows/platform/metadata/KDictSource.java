@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.Annal;
 import io.zerows.platform.constant.VName;
 import io.zerows.platform.enums.EmDict;
-import io.zerows.support.UtBase;
+import io.zerows.support.base.UtBase;
 import io.zerows.specification.atomic.HCopier;
 
 import java.io.Serializable;

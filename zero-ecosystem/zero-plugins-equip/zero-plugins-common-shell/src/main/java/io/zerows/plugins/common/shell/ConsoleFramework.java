@@ -2,7 +2,7 @@ package io.zerows.plugins.common.shell;
 
 import io.vertx.core.Vertx;
 import io.zerows.platform.enums.Environment;
-import io.zerows.epoch.based.configure.YmlCore;
+import io.zerows.epoch.application.YmlCore;
 import io.zerows.component.log.Annal;
 import io.zerows.plugins.common.shell.exception._40070Exception500InternalConflict;
 import io.zerows.plugins.common.shell.refine.Sl;

@@ -7,7 +7,7 @@ import io.zerows.platform.metadata.KIntegration;
 import io.zerows.platform.metadata.KDictConfig;
 import io.zerows.platform.metadata.KMap;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 import io.zerows.extension.runtime.ambient.osgi.spi.component.ExAmbientDictionary;
 
 /**

@@ -7,7 +7,7 @@ import io.zerows.platform.constant.VString;
 import io.zerows.platform.constant.VValue;
 import io.zerows.platform.metadata.KPair;
 import io.zerows.spi.HED;
-import io.zerows.support.UtBase;
+import io.zerows.support.base.UtBase;
 
 import javax.crypto.Cipher;
 import java.nio.charset.StandardCharsets;

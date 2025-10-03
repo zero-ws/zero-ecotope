@@ -4,9 +4,9 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.platform.constant.VPath;
 import io.zerows.platform.constant.VString;
-import io.zerows.epoch.configuration.module.MDConfiguration;
-import io.zerows.epoch.configuration.module.MDId;
-import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.configuration.MDConfiguration;
+import io.zerows.epoch.configuration.MDId;
+import io.zerows.support.Ut;
 import org.osgi.framework.Bundle;
 
 import java.util.Objects;

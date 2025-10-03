@@ -3,7 +3,7 @@ package io.zerows.platform.metadata;
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.constant.VBoot;
 import io.zerows.platform.enums.EmApp;
-import io.zerows.support.UtBase;
+import io.zerows.support.base.UtBase;
 import io.zerows.specification.configuration.HBoot;
 import io.zerows.specification.configuration.HEnergy;
 

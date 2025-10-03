@@ -6,7 +6,7 @@ import io.zerows.platform.constant.VBoot;
 import io.zerows.platform.constant.VMessage;
 import io.zerows.platform.enums.Environment;
 import io.zerows.platform.enums.app.OsType;
-import io.zerows.support.UtBase;
+import io.zerows.support.base.UtBase;
 
 import java.util.Properties;
 import java.util.concurrent.ConcurrentMap;

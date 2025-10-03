@@ -7,7 +7,7 @@ import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.model.commune.Envelop;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 import io.zerows.extension.commerce.lbs.domain.tables.daos.*;
 import io.zerows.extension.commerce.lbs.domain.tables.pojos.LCity;
 import io.zerows.extension.commerce.lbs.domain.tables.pojos.LRegion;

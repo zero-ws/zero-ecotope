@@ -3,7 +3,7 @@ package io.zerows.specification.modeling.metadata;
 import io.zerows.platform.enums.modeling.EmKey;
 import io.zerows.platform.metadata.KKey;
 import io.zerows.specification.modeling.element.HKey;
-import io.zerows.support.UtBase;
+import io.zerows.support.base.UtBase;
 
 import java.util.ArrayList;
 import java.util.Collection;

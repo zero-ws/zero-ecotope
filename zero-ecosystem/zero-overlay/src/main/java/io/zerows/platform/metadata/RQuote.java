@@ -1,7 +1,7 @@
 package io.zerows.platform.metadata;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.support.UtBase;
+import io.zerows.support.base.UtBase;
 import io.zerows.specification.modeling.HAttribute;
 
 import java.io.Serializable;

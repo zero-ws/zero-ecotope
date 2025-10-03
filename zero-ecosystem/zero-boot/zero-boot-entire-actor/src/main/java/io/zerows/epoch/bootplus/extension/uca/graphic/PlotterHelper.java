@@ -7,7 +7,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.bootplus.extension.refine.Ox;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.epoch.program.fn.Fx;
+import io.zerows.support.fn.Fx;
 import io.zerows.plugins.store.neo4j.Neo4jClient;
 import io.zerows.plugins.store.neo4j.Neo4jInfix;
 

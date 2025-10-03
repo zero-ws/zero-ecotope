@@ -2,7 +2,7 @@ package io.zerows.component.injection;
 
 import com.google.inject.AbstractModule;
 import io.zerows.component.log.OLog;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Member;

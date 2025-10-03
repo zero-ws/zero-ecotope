@@ -5,7 +5,7 @@ import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
-import io.zerows.support.UtBase;
+import io.zerows.support.base.UtBase;
 
 import java.io.IOException;
 import java.time.DateTimeException;

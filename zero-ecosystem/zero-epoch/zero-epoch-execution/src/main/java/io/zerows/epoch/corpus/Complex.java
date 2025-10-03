@@ -3,7 +3,7 @@ package io.zerows.epoch.corpus;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.support.FnBase;
+import io.zerows.support.base.FnBase;
 import io.zerows.platform.metadata.KRef;
 import io.zerows.component.qr.Pagination;
 

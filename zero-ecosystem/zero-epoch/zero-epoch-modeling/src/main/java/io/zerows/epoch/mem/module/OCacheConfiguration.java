@@ -1,10 +1,10 @@
 package io.zerows.epoch.mem.module;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.epoch.configuration.module.MDConfiguration;
-import io.zerows.epoch.configuration.module.MDPage;
-import io.zerows.epoch.configuration.module.MDConnect;
-import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.configuration.MDConfiguration;
+import io.zerows.epoch.configuration.MDPage;
+import io.zerows.epoch.configuration.MDConnect;
+import io.zerows.support.Ut;
 import io.zerows.epoch.sdk.management.OCache;
 import io.zerows.specification.configuration.HSetting;
 import org.osgi.framework.Bundle;

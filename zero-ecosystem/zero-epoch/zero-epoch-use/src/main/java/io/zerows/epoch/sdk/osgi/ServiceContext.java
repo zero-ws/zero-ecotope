@@ -2,12 +2,12 @@ package io.zerows.epoch.sdk.osgi;
 
 import io.r2mo.typed.cc.Cc;
 import io.zerows.component.log.OLog;
-import io.zerows.epoch.configuration.module.MDConfiguration;
+import io.zerows.epoch.configuration.MDConfiguration;
 import io.zerows.epoch.corpus.metadata.service.context.ContextOfApp;
 import io.zerows.epoch.corpus.metadata.service.context.ContextOfModule;
 import io.zerows.epoch.corpus.metadata.service.context.ContextOfPlugin;
 import io.zerows.platform.enums.EmService;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 import io.zerows.specification.configuration.HSetting;
 import org.osgi.framework.Bundle;
 

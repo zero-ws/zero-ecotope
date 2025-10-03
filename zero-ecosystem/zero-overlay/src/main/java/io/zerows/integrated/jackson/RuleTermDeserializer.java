@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import io.vertx.core.json.JsonArray;
 import io.zerows.platform.metadata.KRuleTerm;
-import io.zerows.support.UtBase;
+import io.zerows.support.base.UtBase;
 
 import java.io.IOException;
 

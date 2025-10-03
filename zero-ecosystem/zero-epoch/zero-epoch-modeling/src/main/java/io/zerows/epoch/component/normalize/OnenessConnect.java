@@ -1,11 +1,11 @@
 package io.zerows.epoch.component.normalize;
 
 import io.vertx.core.json.JsonArray;
-import io.zerows.epoch.configuration.module.MDConnect;
-import io.zerows.epoch.configuration.module.MDMeta;
+import io.zerows.epoch.configuration.MDConnect;
+import io.zerows.epoch.configuration.MDMeta;
 import io.zerows.epoch.corpus.metadata.mapping.Mirror;
 import io.zerows.epoch.corpus.metadata.mapping.Mojo;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 
 import java.util.HashSet;
 import java.util.Objects;

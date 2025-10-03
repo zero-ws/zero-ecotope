@@ -2,7 +2,7 @@ package io.zerows.epoch.corpus;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 
 import java.util.List;
 

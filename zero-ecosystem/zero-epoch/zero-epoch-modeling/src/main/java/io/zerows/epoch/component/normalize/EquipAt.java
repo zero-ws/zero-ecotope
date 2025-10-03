@@ -3,9 +3,9 @@ package io.zerows.epoch.component.normalize;
 import io.r2mo.typed.cc.Cc;
 import io.zerows.component.log.OLog;
 import io.zerows.platform.constant.VString;
-import io.zerows.epoch.configuration.module.MDConfiguration;
-import io.zerows.epoch.configuration.module.MDId;
-import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.configuration.MDConfiguration;
+import io.zerows.epoch.configuration.MDId;
+import io.zerows.support.Ut;
 
 /**
  * 扩展模块初始化器，主要用于构造扩展配置相关信息，执行扩展模块的完整解析流程

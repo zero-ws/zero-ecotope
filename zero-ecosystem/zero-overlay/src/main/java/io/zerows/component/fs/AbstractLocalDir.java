@@ -1,7 +1,7 @@
 package io.zerows.component.fs;
 
 import io.zerows.component.log.LogUtil;
-import io.zerows.support.UtBase;
+import io.zerows.support.base.UtBase;
 
 import java.io.File;
 import java.net.URL;

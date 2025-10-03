@@ -1,6 +1,6 @@
 package io.zerows.epoch.corpus.mbse.atom.specification;
 
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 
 import java.io.Serializable;
 

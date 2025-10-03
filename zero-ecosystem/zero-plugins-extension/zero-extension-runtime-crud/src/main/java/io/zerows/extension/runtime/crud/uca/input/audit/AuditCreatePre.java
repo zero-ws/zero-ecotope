@@ -8,7 +8,7 @@ import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.mbse.atom.specification.KModule;
 import io.zerows.epoch.corpus.metadata.specification.KField;
 import io.zerows.epoch.corpus.model.commune.Envelop;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 
 import java.util.Objects;

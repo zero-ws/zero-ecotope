@@ -8,7 +8,7 @@ import io.zerows.epoch.constant.KWeb;
 import io.zerows.platform.metadata.KDictSource;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.web.cache.Rapid;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XCategoryDao;
 
 import java.util.concurrent.ConcurrentMap;

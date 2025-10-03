@@ -1,7 +1,7 @@
 package io.zerows.epoch.corpus.database.jooq.condition;
 
 import io.zerows.component.qr.syntax.Ir;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 import org.jooq.Condition;
 import org.jooq.impl.DSL;
 

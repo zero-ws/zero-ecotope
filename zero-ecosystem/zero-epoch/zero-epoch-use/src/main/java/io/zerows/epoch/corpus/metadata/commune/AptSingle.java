@@ -2,7 +2,7 @@ package io.zerows.epoch.corpus.metadata.commune;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.enums.typed.ChangeFlag;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;

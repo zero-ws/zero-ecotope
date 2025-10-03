@@ -2,7 +2,7 @@ package io.zerows.extension.mbse.basement.atom.builtin;
 
 import io.zerows.platform.enums.modeling.EmAttribute;
 import io.zerows.platform.metadata.RReference;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 import io.zerows.epoch.corpus.mbse.atom.shape.HAtomReference;
 import io.zerows.extension.mbse.basement.atom.Model;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MAttribute;

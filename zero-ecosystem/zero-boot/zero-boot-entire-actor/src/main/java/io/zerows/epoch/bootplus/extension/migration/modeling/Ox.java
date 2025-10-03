@@ -1,6 +1,6 @@
 package io.zerows.epoch.bootplus.extension.migration.modeling;
 
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 import io.zerows.extension.mbse.basement.domain.tables.daos.MAttributeDao;
 import io.zerows.extension.mbse.basement.domain.tables.daos.MEntityDao;
 import io.zerows.extension.mbse.basement.domain.tables.daos.MFieldDao;

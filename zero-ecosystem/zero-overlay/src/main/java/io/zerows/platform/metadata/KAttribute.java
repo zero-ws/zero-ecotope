@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.platform.constant.VName;
 import io.zerows.platform.enums.modeling.EmAttribute;
 import io.zerows.platform.enums.modeling.EmValue;
-import io.zerows.support.UtBase;
+import io.zerows.support.base.UtBase;
 import io.zerows.specification.modeling.HAttribute;
 import io.zerows.specification.modeling.metadata.HMetaField;
 

@@ -58,7 +58,7 @@ package com.tlk.micro.comment;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.unity.Ux;
-import io.zerows.epoch.program.fn.FnZero;
+import io.zerows.support.fn.FnZero;
 
 public class IrCommentActor implements IrCommentApi {
 

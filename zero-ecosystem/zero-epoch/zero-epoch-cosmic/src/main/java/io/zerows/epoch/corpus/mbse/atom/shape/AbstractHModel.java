@@ -8,7 +8,7 @@ import io.zerows.specification.modeling.HAttribute;
 import io.zerows.specification.modeling.HModel;
 import io.zerows.specification.modeling.HReference;
 import io.zerows.specification.modeling.HRule;
-import io.zerows.support.UtBase;
+import io.zerows.support.base.UtBase;
 
 import java.util.Objects;
 import java.util.Optional;

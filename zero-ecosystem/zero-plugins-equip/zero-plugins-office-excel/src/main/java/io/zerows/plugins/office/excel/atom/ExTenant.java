@@ -7,9 +7,9 @@ import io.zerows.platform.metadata.KGlobal;
 import io.zerows.platform.metadata.Kv;
 import io.zerows.platform.constant.VString;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.epoch.program.Ut;
-import io.zerows.epoch.program.fn.Fx;
-import io.zerows.support.FnBase;
+import io.zerows.support.Ut;
+import io.zerows.support.fn.Fx;
+import io.zerows.support.base.FnBase;
 import io.zerows.plugins.office.excel.ExcelClient;
 import io.zerows.plugins.office.excel.ExcelInfix;
 

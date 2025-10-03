@@ -1,6 +1,6 @@
 package io.zerows.specification.access.app;
 
-import io.zerows.support.UtBase;
+import io.zerows.support.base.UtBase;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.specification.modeling.norm.HNs;
 

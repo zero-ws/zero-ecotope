@@ -2,7 +2,7 @@ package io.zerows.component.fs;
 
 import io.r2mo.function.Fn;
 import io.zerows.platform.constant.VString;
-import io.zerows.support.UtBase;
+import io.zerows.support.base.UtBase;
 
 import java.io.File;
 import java.net.URL;

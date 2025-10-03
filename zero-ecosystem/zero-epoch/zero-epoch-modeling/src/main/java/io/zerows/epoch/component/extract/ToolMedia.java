@@ -1,7 +1,7 @@
 package io.zerows.epoch.component.extract;
 
 import io.zerows.component.log.Annal;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;

@@ -1,6 +1,6 @@
 package io.zerows.osgi.metadata.service;
 
-import io.zerows.epoch.configuration.module.MDConfiguration;
+import io.zerows.epoch.configuration.MDConfiguration;
 import io.zerows.specification.configuration.HSetting;
 import org.osgi.framework.Bundle;
 

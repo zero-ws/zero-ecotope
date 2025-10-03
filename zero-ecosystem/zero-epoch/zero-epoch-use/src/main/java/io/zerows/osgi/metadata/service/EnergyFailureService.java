@@ -1,7 +1,7 @@
 package io.zerows.osgi.metadata.service;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.based.configure.YmlCore;
+import io.zerows.epoch.application.YmlCore;
 import io.zerows.management.OCacheFailure;
 import io.zerows.management.OZeroEquip;
 import io.zerows.spi.HEquip;

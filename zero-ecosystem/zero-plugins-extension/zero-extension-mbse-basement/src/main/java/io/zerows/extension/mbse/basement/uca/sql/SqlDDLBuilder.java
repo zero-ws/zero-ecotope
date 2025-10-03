@@ -1,7 +1,7 @@
 package io.zerows.extension.mbse.basement.uca.sql;
 
 import io.zerows.platform.constant.VString;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 import io.zerows.extension.mbse.basement.eon.sql.SqlStatement;
 
 import java.text.MessageFormat;

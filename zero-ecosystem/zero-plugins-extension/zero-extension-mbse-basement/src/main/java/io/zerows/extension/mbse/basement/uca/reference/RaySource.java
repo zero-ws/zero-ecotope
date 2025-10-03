@@ -10,7 +10,7 @@ import io.zerows.platform.metadata.RQuote;
 import io.zerows.platform.metadata.RRule;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.web.cache.Rapid;
-import io.zerows.epoch.program.fn.Fx;
+import io.zerows.support.fn.Fx;
 import io.zerows.specification.modeling.HRecord;
 
 import java.util.Objects;

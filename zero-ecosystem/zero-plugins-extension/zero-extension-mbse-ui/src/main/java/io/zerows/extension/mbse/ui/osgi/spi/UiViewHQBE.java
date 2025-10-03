@@ -7,7 +7,7 @@ import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.io.zdk.qbe.HQBE;
 import io.zerows.epoch.corpus.metadata.commune.XHeader;
 import io.zerows.epoch.corpus.model.commune.Envelop;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 import io.zerows.extension.mbse.ui.domain.tables.daos.UiViewDao;
 import io.zerows.extension.mbse.ui.domain.tables.pojos.UiView;
 import io.zerows.extension.mbse.ui.uca.qbe.QBECache;

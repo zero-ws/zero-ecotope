@@ -5,14 +5,14 @@ import io.vertx.core.Future;
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.corpus.feature.FieldMapper;
+import io.zerows.epoch.spi.Dictionary;
 import io.zerows.platform.metadata.KDictConfig;
 import io.zerows.platform.metadata.KDictUse;
 import io.zerows.platform.metadata.KFabric;
 import io.zerows.platform.metadata.KMap;
 import io.zerows.platform.metadata.KMapping;
-import io.zerows.epoch.corpus.feature.FieldMapper;
-import io.zerows.epoch.program.Ut;
-import io.zerows.epoch.underlying.Dictionary;
+import io.zerows.support.Ut;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;

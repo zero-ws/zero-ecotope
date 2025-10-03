@@ -2,7 +2,7 @@ package io.zerows.component.compare;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.support.UtBase;
+import io.zerows.support.base.UtBase;
 import io.zerows.specification.modeling.element.HKey;
 
 import java.util.Objects;

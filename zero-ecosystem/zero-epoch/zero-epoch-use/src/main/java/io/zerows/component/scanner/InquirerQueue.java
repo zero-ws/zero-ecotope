@@ -4,7 +4,7 @@ import io.r2mo.function.Fn;
 import io.vertx.core.eventbus.Message;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
-import io.zerows.epoch.based.exception._40049Exception500WorkerConflict;
+import io.zerows.epoch.exception._40049Exception500WorkerConflict;
 import io.zerows.epoch.sdk.environment.Inquirer;
 
 import java.util.Arrays;

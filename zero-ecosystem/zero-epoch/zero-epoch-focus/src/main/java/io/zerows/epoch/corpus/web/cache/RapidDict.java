@@ -2,8 +2,8 @@ package io.zerows.epoch.corpus.web.cache;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
-import io.zerows.epoch.program.fn.Fx;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.fn.Fx;
+import io.zerows.support.Ut;
 
 import java.util.Objects;
 import java.util.Set;

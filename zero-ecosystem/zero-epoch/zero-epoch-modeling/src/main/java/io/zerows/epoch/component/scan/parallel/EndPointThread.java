@@ -4,7 +4,7 @@ import io.zerows.component.log.Annal;
 import io.zerows.epoch.component.extract.Extractor;
 import io.zerows.epoch.component.extract.ExtractorEvent;
 import io.zerows.epoch.corpus.model.Event;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 
 import java.util.HashSet;
 import java.util.Set;

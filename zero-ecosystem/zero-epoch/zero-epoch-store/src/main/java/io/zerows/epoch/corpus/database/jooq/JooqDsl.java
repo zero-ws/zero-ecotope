@@ -10,7 +10,7 @@ import io.vertx.core.Vertx;
 import io.zerows.component.log.OLog;
 import io.zerows.epoch.corpus.database.exception._40060Exception500JooqVertxNull;
 import io.zerows.epoch.corpus.database.exception._40066Exception500JooqClassInvalid;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 import org.jooq.Configuration;
 import org.jooq.DSLContext;
 

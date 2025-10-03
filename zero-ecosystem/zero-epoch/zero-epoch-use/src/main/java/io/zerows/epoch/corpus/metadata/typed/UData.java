@@ -3,7 +3,7 @@ package io.zerows.epoch.corpus.metadata.typed;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 
 import java.io.Serializable;
 import java.util.Objects;

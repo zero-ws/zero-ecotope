@@ -1,13 +1,13 @@
 package io.zerows.osgi.assembly;
 
-import io.zerows.epoch.constant.osgi.OMessage;
-import io.zerows.osgi.assembly.service.EnergyClass;
-import io.zerows.osgi.assembly.service.EnergyClassService;
-import io.zerows.osgi.assembly.service.provider.InvocationAssembly;
+import io.zerows.epoch.constant.OMessage;
 import io.zerows.epoch.sdk.osgi.AbstractConnectorBase;
 import io.zerows.epoch.sdk.osgi.AbstractConnectorService;
 import io.zerows.epoch.sdk.osgi.ServiceConnector;
 import io.zerows.epoch.sdk.osgi.ServiceInvocation;
+import io.zerows.osgi.assembly.service.EnergyClass;
+import io.zerows.osgi.assembly.service.EnergyClassService;
+import io.zerows.osgi.assembly.service.provider.InvocationAssembly;
 import org.apache.felix.dm.Component;
 import org.apache.felix.dm.DependencyManager;
 import org.osgi.framework.Bundle;

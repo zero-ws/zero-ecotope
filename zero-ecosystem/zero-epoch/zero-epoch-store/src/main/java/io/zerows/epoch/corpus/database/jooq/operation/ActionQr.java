@@ -9,7 +9,7 @@ import io.zerows.epoch.corpus.database.jooq.util.JqOut;
 import io.zerows.component.qr.Pager;
 import io.zerows.component.qr.Sorter;
 import io.zerows.component.qr.syntax.Ir;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 import org.jooq.*;
 
 import java.util.List;

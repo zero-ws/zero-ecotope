@@ -7,7 +7,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.platform.metadata.KPivot;
 import io.zerows.epoch.corpus.security.manage.KPermit;
 import io.zerows.platform.enums.EmApp;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 import io.zerows.specification.access.app.HAmbient;
 import io.zerows.specification.access.app.HArk;
 import io.zerows.specification.modeling.HAtom;

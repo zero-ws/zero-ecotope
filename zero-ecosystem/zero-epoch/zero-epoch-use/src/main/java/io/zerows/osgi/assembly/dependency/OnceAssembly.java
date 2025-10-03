@@ -1,7 +1,7 @@
 package io.zerows.osgi.assembly.dependency;
 
 import io.zerows.osgi.assembly.service.EnergyClass;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 import io.zerows.epoch.sdk.osgi.OOnce;
 import io.zerows.epoch.sdk.osgi.ServiceContext;
 import org.osgi.framework.Bundle;

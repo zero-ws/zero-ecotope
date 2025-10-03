@@ -7,7 +7,6 @@ import io.vertx.core.http.HttpServerOptions;
 import io.zerows.epoch.configuration.option.ActorTool;
 import io.zerows.epoch.configuration.option.RpcOptions;
 import io.zerows.epoch.configuration.option.SockOptions;
-import io.zerows.epoch.configuration.server.OptionBuilder;
 import io.zerows.platform.enums.EmDeploy;
 import io.zerows.platform.enums.app.ServerType;
 import io.zerows.epoch.sdk.environment.OptionOfServer;
@@ -119,15 +118,15 @@ public class NodeVertx implements Serializable {
     public void optionServer(final String name,
                              final ServerType type,
                              final HttpServerOptions serverOptions) {
-        this.serverOptions.put(name, OptionBuilder.ofHttp(name, type, serverOptions));
+        this.serverOptions.put(name, OptionOfBuilder.ofHttp(name, type, serverOptions));
     }
 
     public void optionServer(final String name, final RpcOptions serverOptions) {
-        this.serverOptions.put(name, OptionBuilder.ofRpc(name, serverOptions));
+        this.serverOptions.put(name, OptionOfBuilder.ofRpc(name, serverOptions));
     }
 
     public void optionServer(final String name, final SockOptions serverOptions) {
-        this.serverOptions.put(name, OptionBuilder.ofSock(name, serverOptions));
+        this.serverOptions.put(name, OptionOfBuilder.ofSock(name, serverOptions));
     }
 
     @SuppressWarnings("all")

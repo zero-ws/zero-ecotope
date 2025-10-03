@@ -4,10 +4,10 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.OLog;
 import io.zerows.platform.constant.VString;
-import io.zerows.epoch.configuration.module.MDConfiguration;
-import io.zerows.epoch.configuration.module.MDConnect;
-import io.zerows.epoch.configuration.module.MDEntity;
-import io.zerows.epoch.program.Ut;
+import io.zerows.epoch.configuration.MDConfiguration;
+import io.zerows.epoch.configuration.MDConnect;
+import io.zerows.epoch.configuration.MDEntity;
+import io.zerows.support.Ut;
 
 import java.util.ArrayList;
 import java.util.HashSet;

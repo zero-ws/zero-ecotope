@@ -1,7 +1,7 @@
 package io.zerows.epoch.corpus.web.validation;
 
 import io.zerows.component.log.OLog;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 import org.hibernate.validator.internal.util.CollectionHelper;
 import org.hibernate.validator.internal.util.Contracts;
 import org.hibernate.validator.internal.util.logging.Messages;

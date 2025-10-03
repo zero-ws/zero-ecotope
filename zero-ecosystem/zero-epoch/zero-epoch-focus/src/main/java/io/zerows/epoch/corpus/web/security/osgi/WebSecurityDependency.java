@@ -1,6 +1,6 @@
 package io.zerows.epoch.corpus.web.security.osgi;
 
-import io.zerows.epoch.constant.osgi.OMessage;
+import io.zerows.epoch.constant.OMessage;
 import io.zerows.epoch.corpus.web.security.osgi.service.EnergySecure;
 import io.zerows.epoch.corpus.web.security.osgi.service.EnergySecureService;
 import io.zerows.epoch.sdk.osgi.AbstractConnectorBase;

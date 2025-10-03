@@ -1,7 +1,7 @@
 package io.zerows.epoch.corpus.web.exception;
 
 import io.r2mo.vertx.common.exception.VertxBootException;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 
 import java.util.Set;
 

@@ -1,6 +1,6 @@
 package io.zerows.epoch.corpus.database.jooq.operation;
 
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 
 /*
  * Helper for join

@@ -1,6 +1,6 @@
 package io.zerows.platform.metadata;
 
-import io.zerows.support.UtBase;
+import io.zerows.support.base.UtBase;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

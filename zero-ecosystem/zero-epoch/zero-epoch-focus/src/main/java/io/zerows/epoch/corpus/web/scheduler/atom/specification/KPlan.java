@@ -3,7 +3,7 @@ package io.zerows.epoch.corpus.web.scheduler.atom.specification;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.constant.VValue;
 import io.zerows.platform.enums.typed.PerMode;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 import io.zerows.epoch.corpus.web.scheduler.uca.plan.JobAt;
 
 import java.time.Instant;

@@ -2,7 +2,7 @@ package io.zerows.epoch.sdk.plugins;
 
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.based.exception._40020Exception500PluginStatic;
+import io.zerows.epoch.exception._40020Exception500PluginStatic;
 import io.zerows.management.OZeroStore;
 
 import java.util.function.Function;

@@ -4,7 +4,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.platform.exception._40101Exception500CombineApp;
 import io.zerows.platform.HEnvironmentVariable;
 import io.zerows.specification.access.app.HApp;
-import io.zerows.support.UtBase;
+import io.zerows.support.base.UtBase;
 
 import java.util.Objects;
 

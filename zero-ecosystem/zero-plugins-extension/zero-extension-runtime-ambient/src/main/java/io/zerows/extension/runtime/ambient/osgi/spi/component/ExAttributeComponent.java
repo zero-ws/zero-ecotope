@@ -7,7 +7,7 @@ import io.zerows.platform.enums.EmDict;
 import io.zerows.platform.metadata.KDictSource;
 import io.zerows.platform.metadata.KDictUse;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 import io.zerows.extension.runtime.ambient.uca.dict.Dpm;
 
 import java.util.Objects;

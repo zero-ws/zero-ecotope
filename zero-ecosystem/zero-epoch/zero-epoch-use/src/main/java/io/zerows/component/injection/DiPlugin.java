@@ -4,7 +4,7 @@ import com.google.inject.Injector;
 import io.r2mo.typed.cc.Cc;
 import io.zerows.component.log.OLog;
 import io.zerows.epoch.corpus.assembly.OProxyInstance;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 import jakarta.inject.Named;
 
 import java.lang.annotation.Annotation;

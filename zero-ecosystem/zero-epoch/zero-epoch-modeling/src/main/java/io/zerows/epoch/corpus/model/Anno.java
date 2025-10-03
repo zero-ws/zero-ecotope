@@ -1,6 +1,6 @@
 package io.zerows.epoch.corpus.model;
 
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 
 import java.lang.annotation.Annotation;
 import java.util.Arrays;

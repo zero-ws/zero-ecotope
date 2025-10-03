@@ -7,8 +7,8 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.platform.constant.VString;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.database.jooq.operation.UxJooq;
-import io.zerows.epoch.program.Ut;
-import io.zerows.epoch.program.fn.Fx;
+import io.zerows.support.Ut;
+import io.zerows.support.fn.Fx;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XLinkageDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XLinkage;
 

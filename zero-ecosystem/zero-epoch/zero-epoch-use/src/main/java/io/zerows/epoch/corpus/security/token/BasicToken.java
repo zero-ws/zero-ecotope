@@ -2,7 +2,7 @@ package io.zerows.epoch.corpus.security.token;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 
 /*
  * This token if for Basic authorization in Http client here

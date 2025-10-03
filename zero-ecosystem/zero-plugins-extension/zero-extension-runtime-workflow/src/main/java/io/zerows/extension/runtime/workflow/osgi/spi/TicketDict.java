@@ -4,11 +4,11 @@ import io.vertx.core.Future;
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonArray;
 import io.zerows.epoch.constant.KName;
-import io.zerows.platform.metadata.KDictSource;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.epoch.program.Ut;
-import io.zerows.epoch.underlying.DictionaryPlugin;
+import io.zerows.epoch.spi.DictionaryPlugin;
 import io.zerows.extension.runtime.workflow.domain.tables.daos.WTicketDao;
+import io.zerows.platform.metadata.KDictSource;
+import io.zerows.support.Ut;
 
 /*
  * Dict for `resource.docs` here

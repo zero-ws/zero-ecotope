@@ -7,7 +7,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.platform.constant.VString;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.web.cache.Rapid;
-import io.zerows.support.FnBase;
+import io.zerows.support.base.FnBase;
 import io.zerows.extension.mbse.ui.domain.tables.pojos.UiView;
 import io.zerows.extension.mbse.ui.eon.UiConstant;
 import io.zerows.specification.vital.HQR;

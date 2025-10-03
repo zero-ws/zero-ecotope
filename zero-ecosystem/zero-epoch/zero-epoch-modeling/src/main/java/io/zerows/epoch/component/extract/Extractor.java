@@ -1,7 +1,7 @@
 package io.zerows.epoch.component.extract;
 
 import io.zerows.component.log.OLog;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 
 public interface Extractor<T> {
 

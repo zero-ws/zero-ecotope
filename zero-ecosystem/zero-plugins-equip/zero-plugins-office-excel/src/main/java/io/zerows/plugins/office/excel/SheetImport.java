@@ -9,11 +9,11 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.Annal;
 import io.zerows.epoch.component.normalize.Oneness;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.epoch.configuration.module.MDConnect;
+import io.zerows.epoch.configuration.MDConnect;
 import io.zerows.epoch.corpus.database.jooq.operation.UxJooq;
 import io.zerows.platform.enums.typed.ChangeFlag;
-import io.zerows.epoch.program.Ut;
-import io.zerows.support.FnBase;
+import io.zerows.support.Ut;
+import io.zerows.support.base.FnBase;
 import io.zerows.plugins.office.excel.atom.ExTable;
 import io.zerows.plugins.office.excel.exception._60039Exception500ExportingError;
 

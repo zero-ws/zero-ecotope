@@ -1,9 +1,9 @@
 package io.zerows.osgi.assembly;
 
-import io.zerows.epoch.constant.osgi.OConstant;
+import io.zerows.epoch.constant.OConstant;
+import io.zerows.epoch.sdk.osgi.AbstractCommand;
 import io.zerows.osgi.assembly.command.CommandClasses;
 import io.zerows.osgi.assembly.command.CommandClassesBID;
-import io.zerows.epoch.sdk.osgi.AbstractCommand;
 import org.apache.felix.service.command.Descriptor;
 import org.apache.felix.service.command.Parameter;
 import org.osgi.framework.BundleContext;

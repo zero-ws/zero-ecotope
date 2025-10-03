@@ -1,0 +1,40 @@
+package io.zerows.support.base;
+
+import io.r2mo.typed.cc.Cc;
+import io.zerows.platform.annotations.Memory;
+
+@SuppressWarnings("all")
+interface CACHE {
+    /**
+     * 全局单件模式专用
+     */
+    @Memory(Object.class)
+    Cc<String, Object> CC_SINGLETON = Cc.open();
+    /**
+     * 全局类缓存专用
+     */
+    @Memory(Class.class)
+    Cc<String, Class<?>> CC_CLASSES = Cc.open();
+}
+
+/**
+ * @author lang : 2023/4/28
+ */
+interface INFO {
+    interface Io {
+        String INF_PATH = "「I/O」Absolute path is hitted: {0}.";
+    }
+
+    interface IoStream {
+        String INF_PATH = "「I/O」The system class Stream try to data from {0}, got stream: {1}.";
+        String INF_CUR = "「I/O」Current path is scanned by the system, up.god.file existing ? {0}.";
+        String __FILE_ROOT = "「DevOps」root = {0}, file = {1}";
+        String __FILE_INPUT_STREAM = "「DevOps」\t\t{0} 1. new FileInputStream(File)";
+        String __RESOURCE_AS_STREAM = "「DevOps」\t\t{0} 2. clazz.getResourceAsStream(String)";
+        String __CLASS_LOADER = "「DevOps」\t\t{0} 3. Thread.currentThread().getContextClassLoader()";
+        String __CLASS_LOADER_STREAM = "「DevOps」\t\t{0} 4. Stream.class.getResourceAsStream(String)";
+        String __CLASS_LOADER_SYSTEM = "「DevOps」\t\t{0} 5. ClassLoader.getSystemResourceAsStream(String)";
+        String __JAR_RESOURCE = "「DevOps」\t\t{0} 6. Read from jar file";
+    }
+}
+

@@ -3,7 +3,7 @@ package io.zerows.plugins.office.excel;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Vertx;
 import io.zerows.epoch.annotations.Infusion;
-import io.zerows.epoch.based.configure.YmlCore;
+import io.zerows.epoch.application.YmlCore;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.sdk.plugins.Infix;
 

@@ -1,8 +1,8 @@
 package io.zerows.epoch.sdk.osgi;
 
-import io.zerows.epoch.constant.osgi.OConstant;
+import io.zerows.epoch.constant.OConstant;
 import io.zerows.platform.constant.VString;
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 

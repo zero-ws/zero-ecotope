@@ -3,7 +3,7 @@ package io.zerows.component.aop;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.constant.VPC;
-import io.zerows.support.UtBase;
+import io.zerows.support.base.UtBase;
 
 import java.util.ArrayList;
 import java.util.List;

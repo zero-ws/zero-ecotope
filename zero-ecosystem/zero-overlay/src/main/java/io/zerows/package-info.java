@@ -8,8 +8,8 @@
  *        - specification -> 规范定义
  *        - spi -> Service Provider Interface 核心定义
  *        - Support -> 提供辅助工具
- *          - {@link io.zerows.support.FnBase} 函数基础
- *          - {@link io.zerows.support.UtBase} 工具基础
+ *          - {@link io.zerows.support.base.FnBase} 函数基础
+ *          - {@link io.zerows.support.base.UtBase} 工具基础
  *     2. Epoch 平台共享 io.zerows.platform
  *        - annotations / 平台注解
  *        - constant / 平台常量

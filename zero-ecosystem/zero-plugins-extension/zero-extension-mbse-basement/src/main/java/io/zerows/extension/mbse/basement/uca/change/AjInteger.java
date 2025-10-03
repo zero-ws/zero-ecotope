@@ -1,6 +1,6 @@
 package io.zerows.extension.mbse.basement.uca.change;
 
-import io.zerows.epoch.program.Ut;
+import io.zerows.support.Ut;
 
 final class AjInteger extends AbstractAdjuster {
 

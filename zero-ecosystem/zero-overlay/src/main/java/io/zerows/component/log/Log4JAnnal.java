@@ -3,7 +3,7 @@ package io.zerows.component.log;
 import io.r2mo.typed.exception.AbstractException;
 import io.zerows.platform.HEnvironmentVariable;
 import io.zerows.platform.constant.VString;
-import io.zerows.support.UtBase;
+import io.zerows.support.base.UtBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
