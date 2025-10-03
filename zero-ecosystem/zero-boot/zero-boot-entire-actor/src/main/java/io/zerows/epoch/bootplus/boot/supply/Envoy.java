@@ -4,7 +4,7 @@ import io.zerows.epoch.bootplus.stellar.owner.OkA;
 import io.zerows.epoch.bootplus.stellar.vendor.AbstractPartyB;
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.boot.supply.Electy;
+import io.zerows.epoch.boot.Electy;
 import io.zerows.metadata.app.KIntegration;
 import io.zerows.metadata.datamation.KDictConfig;
 import io.zerows.metadata.datamation.KMap;

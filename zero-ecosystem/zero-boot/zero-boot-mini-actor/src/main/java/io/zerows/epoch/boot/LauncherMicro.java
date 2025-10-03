@@ -1,4 +1,4 @@
-package io.zerows.epoch.boot.launcher;
+package io.zerows.epoch.boot;
 
 import io.r2mo.function.Fn;
 import io.vertx.core.Vertx;
@@ -17,13 +17,13 @@ import java.util.function.Consumer;
  *
  * @author lang : 2023-05-30
  */
-public class MicroLauncher implements HLauncher<Vertx> {
+public class LauncherMicro implements HLauncher<Vertx> {
     private static final BootStore STORE = BootStore.singleton();
 
     private transient final HLauncher<Vertx> zero;
 
-    public MicroLauncher() {
-        this.zero = Ut.singleton(ZeroLauncher.class);
+    public LauncherMicro() {
+        this.zero = Ut.singleton(LauncherZero.class);
     }
 
     /**

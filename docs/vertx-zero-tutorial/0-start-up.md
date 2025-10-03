@@ -16,7 +16,7 @@ If you used zero up only in standalone environment, you can put following simple
 ```java
 package up.god;
 
-import io.zerows.epoch.boot.VertxApplication;
+import io.zerows.epoch.VertxApplication;
 import io.zerows.epoch.annotations.Up;
 
 @Up
@@ -118,7 +118,7 @@ Api Gateway source code is the same as standalone service as following:
 ```java
 package up.god;
 
-import io.zerows.epoch.boot.VertxApplication;
+import io.zerows.epoch.VertxApplication;
 import io.zerows.epoch.annotations.Up;
 
 @Up
@@ -180,7 +180,7 @@ Service source code is the same as Standalone mode here.
 ```java
 package up.god;
 
-import io.zerows.epoch.boot.VertxApplication;
+import io.zerows.epoch.VertxApplication;
 import io.zerows.epoch.annotations.Up;
 
 @Up

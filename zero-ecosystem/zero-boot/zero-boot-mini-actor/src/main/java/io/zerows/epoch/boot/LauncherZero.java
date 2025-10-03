@@ -1,4 +1,4 @@
-package io.zerows.epoch.boot.launcher;
+package io.zerows.epoch.boot;
 
 import io.vertx.core.Vertx;
 import io.zerows.epoch.configuration.NodeNetwork;
@@ -21,7 +21,7 @@ import java.util.function.Consumer;
  *
  * @author lang : 2023-05-30
  */
-public class ZeroLauncher implements HLauncher<Vertx> {
+public class LauncherZero implements HLauncher<Vertx> {
 
     private static final EnergyVertx SERVICE = new EnergyVertxService();
     private static final ConcurrentMap<String, Vertx> STORED_DATA = new ConcurrentHashMap<>();

@@ -1,4 +1,4 @@
-package io.zerows.epoch.boot.supply;
+package io.zerows.epoch.boot;
 
 import io.r2mo.function.Actuator;
 import io.r2mo.function.Fn;
@@ -9,18 +9,18 @@ import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.configure.YmlCore;
-import io.zerows.metadata.boot.KLauncher;
-import io.zerows.metadata.boot.KPivot;
 import io.zerows.epoch.corpus.cloud.LogCloud;
 import io.zerows.epoch.mem.OZeroStore;
 import io.zerows.epoch.program.Ut;
-import io.zerows.spi.BootIo;
-import io.zerows.support.FnBase;
+import io.zerows.metadata.boot.KLauncher;
+import io.zerows.metadata.boot.KPivot;
 import io.zerows.specification.access.app.HAmbient;
 import io.zerows.specification.access.app.HArk;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.boot.HMature;
 import io.zerows.specification.configuration.boot.HRegistry;
+import io.zerows.spi.BootIo;
+import io.zerows.support.FnBase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +48,7 @@ import java.util.function.Supplier;
  *
  * @author lang : 2023-06-10
  */
-class ZeroEnroll {
+class ElectyEnroll {
     private static final String MSG_EXT_COMPONENT = "Extension components initialized {0}";
 
     private static final List<HRegistry.Mod<Vertx>> REGISTERS = new Vector<>();
@@ -145,7 +145,7 @@ class ZeroEnroll {
     private static List<HRegistry.Mod<Vertx>> registerComponent() {
         if (REGISTERS.isEmpty()) {
             final JsonObject initConfig = OZeroStore.option(YmlCore.init.__KEY);
-            LogCloud.LOG.Env.info(ZeroEnroll.class, MSG_EXT_COMPONENT, initConfig.encode());
+            LogCloud.LOG.Env.info(ElectyEnroll.class, MSG_EXT_COMPONENT, initConfig.encode());
             // 1. nativeComponent first
             final JsonArray bridges = Ut.valueJArray(initConfig, YmlCore.init.CONFIGURE);
             // 2. 针对每个组件的统一初始化

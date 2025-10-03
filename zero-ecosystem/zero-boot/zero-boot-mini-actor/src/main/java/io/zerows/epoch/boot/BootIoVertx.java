@@ -1,12 +1,11 @@
-package io.zerows.epoch.boot.configuration;
+package io.zerows.epoch.boot;
 
-import io.zerows.epoch.boot.launcher.MixerLauncher;
 import io.zerows.epoch.corpus.container.store.BootStore;
 import io.zerows.epoch.program.Ut;
-import io.zerows.spi.BootIo;
 import io.zerows.specification.access.HLauncher;
 import io.zerows.specification.configuration.HBoot;
 import io.zerows.specification.configuration.HEnergy;
+import io.zerows.spi.BootIo;
 
 import java.util.Objects;
 
@@ -24,7 +23,7 @@ public class BootIoVertx implements BootIo {
          */
         final BootStore store = BootStore.singleton();
         final Class<?> launcher = store.boot().launcher();
-        return Ut.singleton(Objects.isNull(launcher) ? MixerLauncher.class : launcher);
+        return Ut.singleton(Objects.isNull(launcher) ? LauncherMixer.class : launcher);
     }
 
     @Override

@@ -1,7 +1,6 @@
-package io.zerows.epoch.boot.supply;
+package io.zerows.epoch.boot;
 
 import io.vertx.core.Vertx;
-import io.zerows.metadata.context.KRunner;
 import io.zerows.epoch.corpus.web.scheduler.store.ORepositoryJob;
 import io.zerows.epoch.corpus.web.security.store.ORepositorySecurity;
 import io.zerows.epoch.corpus.web.websocket.store.ORepositorySock;
@@ -10,6 +9,7 @@ import io.zerows.epoch.mem.ORepositoryMeta;
 import io.zerows.epoch.mem.ORepositoryOption;
 import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.sdk.metadata.running.ORepository;
+import io.zerows.metadata.context.KRunner;
 import io.zerows.specification.configuration.HConfig;
 
 import java.util.function.BiConsumer;
@@ -75,10 +75,10 @@ public class Electy {
     }
 
     public static BiConsumer<Vertx, HConfig> whenInstruction(final BiConsumer<Vertx, HConfig> endFn) {
-        return ZeroEntry.whenInstruction(endFn);
+        return ElectyEntry.whenInstruction(endFn);
     }
 
     public static BiConsumer<Vertx, HConfig> whenContainer(final BiConsumer<Vertx, HConfig> endFn) {
-        return ZeroEntry.whenContainer(endFn);
+        return ElectyEntry.whenContainer(endFn);
     }
 }

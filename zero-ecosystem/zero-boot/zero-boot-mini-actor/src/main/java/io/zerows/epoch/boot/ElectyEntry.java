@@ -1,4 +1,4 @@
-package io.zerows.epoch.boot.supply;
+package io.zerows.epoch.boot;
 
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
@@ -6,8 +6,8 @@ import io.zerows.epoch.based.configure.YmlCore;
 import io.zerows.epoch.corpus.cloud.LogCloud;
 import io.zerows.epoch.corpus.container.store.BootStore;
 import io.zerows.epoch.mem.OZeroStore;
-import io.zerows.support.FnBase;
 import io.zerows.specification.configuration.HConfig;
+import io.zerows.support.FnBase;
 
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
@@ -15,12 +15,12 @@ import java.util.function.Supplier;
 /**
  * @author lang : 2023-06-10
  */
-class ZeroEntry {
+class ElectyEntry {
     private static final String MSG_EXT_CONFIGURATION = "Extension configuration missing {0}";
 
     static BiConsumer<Vertx, HConfig> whenInstruction(final BiConsumer<Vertx, HConfig> endFn) {
         // 1. 环境注册
-        return (vertx, config) -> ZeroEnroll.registryStart(vertx, config)
+        return (vertx, config) -> ElectyEnroll.registryStart(vertx, config)
             /*
              * Fix: Cannot invoke "io.vertx.mod.ambient.atom.AtConfig.getInitializer()"
              * because the return value of "io.vertx.mod.ambient.init.AtPin.getConfig()" is null
@@ -28,30 +28,30 @@ class ZeroEntry {
             // 2. 是否执行扩展，调用 FnZero.passion 带顺序
             .compose(arkSet -> whenExtension(config, () -> FnBase.passion(Boolean.TRUE,
                 // 2.1. 扩展：配置
-                done -> ZeroEnroll.registryAmbient(vertx, config, arkSet)
+                done -> ElectyEnroll.registryAmbient(vertx, config, arkSet)
             )))
 
 
             // 3. 注册结束之后的统一回调
-            .onComplete(ZeroEnroll.registryEnd(() -> endFn.accept(vertx, config)));
+            .onComplete(ElectyEnroll.registryEnd(() -> endFn.accept(vertx, config)));
     }
 
     static BiConsumer<Vertx, HConfig> whenContainer(final BiConsumer<Vertx, HConfig> endFn) {
         // 1. 环境注册
-        return (vertx, config) -> ZeroEnroll.registryStart(vertx, config)
+        return (vertx, config) -> ElectyEnroll.registryStart(vertx, config)
 
 
             // 2. 是否执行扩展，调用 FnZero.passion 带顺序
             .compose(arkSet -> whenExtension(config, () -> FnBase.passion(Boolean.TRUE,
                 // 2.1. 扩展：配置
-                done -> ZeroEnroll.registryAmbient(vertx, config, arkSet),
+                done -> ElectyEnroll.registryAmbient(vertx, config, arkSet),
                 // 2.2. 扩展：初始化
-                done -> ZeroEnroll.registryArk(vertx, config, arkSet))
+                done -> ElectyEnroll.registryArk(vertx, config, arkSet))
             ))
 
 
             // 3. 注册结束之后的统一回调
-            .onComplete(ZeroEnroll.registryEnd(() -> endFn.accept(vertx, config)));
+            .onComplete(ElectyEnroll.registryEnd(() -> endFn.accept(vertx, config)));
     }
 
     private static Future<Boolean> whenExtension(final HConfig config, final Supplier<Future<Boolean>> supplier) {
@@ -71,7 +71,7 @@ class ZeroEntry {
          */
         final BootStore store = BootStore.singleton();
         if (!store.isInit()) {
-            LogCloud.LOG.Env.info(ZeroEnroll.class, MSG_EXT_CONFIGURATION, config);
+            LogCloud.LOG.Env.info(ElectyEnroll.class, MSG_EXT_CONFIGURATION, config);
             return Future.succeededFuture(Boolean.TRUE);
         }
         if (!OZeroStore.is(YmlCore.init.__KEY)) {

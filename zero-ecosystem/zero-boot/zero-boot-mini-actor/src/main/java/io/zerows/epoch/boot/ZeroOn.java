@@ -1,6 +1,5 @@
-package io.zerows.epoch.boot.lighter;
+package io.zerows.epoch.boot;
 
-import io.zerows.epoch.boot.supply.Electy;
 import io.zerows.epoch.corpus.container.eon.em.FeatureMark;
 import io.zerows.specification.configuration.HConfig;
 

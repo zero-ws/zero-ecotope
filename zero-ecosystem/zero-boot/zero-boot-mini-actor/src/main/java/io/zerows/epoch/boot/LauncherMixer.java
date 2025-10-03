@@ -1,10 +1,10 @@
-package io.zerows.epoch.boot.launcher;
+package io.zerows.epoch.boot;
 
 import io.vertx.core.Vertx;
-import io.zerows.metadata.boot.KEnvironment;
-import io.zerows.epoch.corpus.container.store.BootStore;
 import io.zerows.enums.EmApp;
+import io.zerows.epoch.corpus.container.store.BootStore;
 import io.zerows.epoch.program.Ut;
+import io.zerows.metadata.boot.KEnvironment;
 import io.zerows.specification.access.HLauncher;
 import io.zerows.specification.configuration.HBoot;
 import io.zerows.specification.configuration.HConfig;
@@ -14,14 +14,14 @@ import java.util.function.Consumer;
 /**
  * @author lang : 2023-05-30
  */
-public class MixerLauncher implements HLauncher<Vertx> {
+public class LauncherMixer implements HLauncher<Vertx> {
     private static final BootStore STORE = BootStore.singleton();
     private transient final HLauncher<Vertx> micro;
     private transient final HLauncher<Vertx> zero;
 
-    public MixerLauncher() {
-        this.micro = Ut.singleton(MicroLauncher.class);
-        this.zero = Ut.singleton(ZeroLauncher.class);
+    public LauncherMixer() {
+        this.micro = Ut.singleton(LauncherMicro.class);
+        this.zero = Ut.singleton(LauncherZero.class);
     }
 
     @Override
