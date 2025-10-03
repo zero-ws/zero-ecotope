@@ -1,4 +1,4 @@
-package io.zerows.spi.boot;
+package io.zerows.spi;
 
 import io.zerows.specification.configuration.HSetting;
 

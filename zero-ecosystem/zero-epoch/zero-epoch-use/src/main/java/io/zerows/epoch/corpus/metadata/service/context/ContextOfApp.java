@@ -1,13 +1,13 @@
 package io.zerows.epoch.corpus.metadata.service.context;
 
-import io.zerows.platform.enums.EmService;
 import io.zerows.epoch.mem.OZeroEquip;
-import io.zerows.spi.boot.HEquip;
+import io.zerows.platform.enums.EmService;
 import io.zerows.specification.configuration.HBoot;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HEnergy;
 import io.zerows.specification.configuration.HSetting;
 import io.zerows.specification.configuration.HStation;
+import io.zerows.spi.HEquip;
 import org.osgi.framework.Bundle;
 
 import java.util.Objects;

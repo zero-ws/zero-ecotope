@@ -1,8 +1,8 @@
-package io.zerows.spi.cloud;
+package io.zerows.spi;
 
 import io.zerows.platform.annotations.Development;
-import io.zerows.platform.metadata.KPair;
 import io.zerows.platform.constant.VString;
+import io.zerows.platform.metadata.KPair;
 import io.zerows.support.UtBase;
 
 import java.text.MessageFormat;

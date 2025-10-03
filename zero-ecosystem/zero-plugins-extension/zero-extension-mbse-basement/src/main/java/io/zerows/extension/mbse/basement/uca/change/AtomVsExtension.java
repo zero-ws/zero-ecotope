@@ -1,6 +1,6 @@
 package io.zerows.extension.mbse.basement.uca.change;
 
-import io.zerows.spi.typed.VsExtension;
+import io.zerows.spi.VsExtension;
 
 import java.util.Objects;
 

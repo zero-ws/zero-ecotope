@@ -2,7 +2,7 @@ package io.zerows.extension.runtime.skeleton.secure;
 
 import io.zerows.platform.metadata.KPair;
 import io.zerows.epoch.constant.KName;
-import io.zerows.spi.cloud.HED;
+import io.zerows.spi.HED;
 import io.zerows.epoch.program.Ut;
 
 import java.util.Properties;

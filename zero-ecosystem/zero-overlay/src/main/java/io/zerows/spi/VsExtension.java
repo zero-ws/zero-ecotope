@@ -1,4 +1,4 @@
-package io.zerows.spi.typed;
+package io.zerows.spi;
 
 /**
  * 比较扩展专用方法

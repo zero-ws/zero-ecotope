@@ -1,7 +1,7 @@
 package io.zerows.plugins.store.liquibase.hed;
 
 import io.zerows.platform.metadata.KPair;
-import io.zerows.spi.cloud.HED;
+import io.zerows.spi.HED;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
