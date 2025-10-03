@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
-import io.zerows.epoch.metadata.commune.XHeader;
+import io.zerows.epoch.metadata.XHeader;
 import io.zerows.extension.runtime.ambient.agent.service.application.AppStub;
 import io.zerows.extension.runtime.ambient.agent.service.application.MenuStub;
 import io.zerows.extension.runtime.ambient.eon.Addr;

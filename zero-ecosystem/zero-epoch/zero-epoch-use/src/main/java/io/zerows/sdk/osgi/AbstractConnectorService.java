@@ -1,15 +1,15 @@
 package io.zerows.sdk.osgi;
 
 import io.zerows.epoch.configuration.MDConfiguration;
-import io.zerows.epoch.metadata.service.CallbackParameter;
-import io.zerows.epoch.metadata.service.ContextOfApp;
-import io.zerows.epoch.metadata.service.ContextOfPlugin;
+import io.zerows.epoch.metadata.environment.CallbackParameter;
+import io.zerows.epoch.metadata.environment.ContextOfApp;
+import io.zerows.epoch.metadata.environment.ContextOfPlugin;
 import io.zerows.osgi.metadata.dependency.CallbackOfService;
 import io.zerows.osgi.metadata.service.EnergyConfiguration;
 import io.zerows.osgi.metadata.service.EnergyDeployment;
 import io.zerows.osgi.metadata.service.EnergyService;
-import io.zerows.support.Ut;
 import io.zerows.specification.configuration.HSetting;
+import io.zerows.support.Ut;
 import org.apache.felix.dm.Component;
 import org.apache.felix.dm.DependencyManager;
 import org.apache.felix.dm.ServiceDependency;

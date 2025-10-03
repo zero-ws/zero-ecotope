@@ -8,7 +8,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.corpus.io.annotations.BodyParam;
 import io.zerows.epoch.corpus.io.annotations.PointParam;
-import io.zerows.epoch.metadata.commune.Vis;
+import io.zerows.epoch.metadata.KView;
 import io.zerows.extension.mbse.ui.eon.Addr;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.HeaderParam;
@@ -135,5 +135,5 @@ public interface UiApi {
     JsonArray fetchListQr(@PathParam(KName.ID) String id,
                           @PathParam(KName.POSITION) String position,
                           @QueryParam(KName.TYPE) String type,
-                          @PointParam(KName.VIEW) Vis view);
+                          @PointParam(KName.VIEW) KView view);
 }

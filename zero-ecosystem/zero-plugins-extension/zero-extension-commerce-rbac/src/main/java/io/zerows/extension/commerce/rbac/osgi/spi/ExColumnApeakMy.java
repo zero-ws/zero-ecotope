@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.qr.syntax.Ir;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.metadata.commune.Vis;
+import io.zerows.epoch.metadata.KView;
 import io.zerows.epoch.metadata.security.DataBound;
 import io.zerows.extension.commerce.rbac.atom.ScOwner;
 import io.zerows.extension.commerce.rbac.eon.AuthMsg;
@@ -28,7 +28,7 @@ public class ExColumnApeakMy extends Anchoret<ApeakMy> implements ApeakMy {
             return Ux.futureA();
         }
         final String userId = params.getString(ApeakMy.ARG1);
-        final Vis view = Vis.smart(params.getValue(ApeakMy.ARG2));
+        final KView view = KView.smart(params.getValue(ApeakMy.ARG2));
         // DataBound Building
         final ScOwner owner = new ScOwner(userId, OwnerType.USER);
         owner.bind(view);
@@ -54,7 +54,7 @@ public class ExColumnApeakMy extends Anchoret<ApeakMy> implements ApeakMy {
         final JsonObject viewData = params.copy();
 
         final ScOwner owner = new ScOwner(userId, OwnerType.USER);
-        final Vis vis = Vis.smart(viewData.getValue(KName.VIEW));
+        final KView vis = KView.smart(viewData.getValue(KName.VIEW));
         owner.bind(vis);
         /* Two Params: projection, criteria, rows */
         Ut.valueCopy(viewData, viewInput,

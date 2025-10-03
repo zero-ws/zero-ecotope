@@ -8,7 +8,7 @@ import io.zerows.epoch.annotations.EndPoint;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.corpus.io.annotations.BodyParam;
 import io.zerows.epoch.corpus.io.annotations.PointParam;
-import io.zerows.epoch.metadata.commune.Vis;
+import io.zerows.epoch.metadata.KView;
 import io.zerows.extension.commerce.rbac.eon.Addr;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
@@ -59,7 +59,7 @@ public interface RuleAgent {
         @PathParam(KName.OWNER) String owner,
         @BodyParam JsonObject region,
         // ?view=[] Matrix Param for View Located
-        @PointParam(KName.VIEW) Vis view);
+        @PointParam(KName.VIEW) KView view);
 
     // ---------------- 权限保存 -------------------
     /*

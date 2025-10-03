@@ -9,7 +9,7 @@ import io.zerows.epoch.database.jooq.JooqDsl;
 import io.zerows.epoch.database.jooq.condition.JooqCond;
 import io.zerows.epoch.database.jooq.util.JqAnalyzer;
 import io.zerows.epoch.database.jooq.util.JqOut;
-import io.zerows.epoch.metadata.typed.Mojo;
+import io.zerows.epoch.metadata.Mojo;
 import io.zerows.support.Ut;
 import org.jooq.Condition;
 import org.jooq.DSLContext;

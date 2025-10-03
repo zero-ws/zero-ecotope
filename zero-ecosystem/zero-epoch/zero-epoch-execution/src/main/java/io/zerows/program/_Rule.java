@@ -2,7 +2,7 @@ package io.zerows.program;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.metadata.commune.Apt;
+import io.zerows.epoch.metadata.Apt;
 import io.zerows.platform.enums.typed.ChangeFlag;
 import io.zerows.platform.metadata.KRuleTerm;
 import io.zerows.support.Ut;

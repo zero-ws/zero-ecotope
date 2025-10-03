@@ -4,7 +4,7 @@ import io.vertx.core.http.HttpMethod;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
-import io.zerows.epoch.metadata.commune.Vis;
+import io.zerows.epoch.metadata.KView;
 import io.zerows.extension.commerce.rbac.atom.ScConfig;
 import io.zerows.extension.commerce.rbac.bootstrap.ScPin;
 import io.zerows.extension.commerce.rbac.eon.AuthKey;
@@ -24,7 +24,7 @@ public class ScResource {
     private transient final String uri;
     private transient final String requestUri;
     private transient final String sigma;
-    private transient final Vis view;
+    private transient final KView view;
     private transient final HttpMethod method;
 
     /*
@@ -52,7 +52,7 @@ public class ScResource {
          * Extension for orbit
          */
         this.uri = Ke.uri(uri, this.requestUri);
-        this.view = Vis.smart(metadata.getValue(KName.VIEW));
+        this.view = KView.smart(metadata.getValue(KName.VIEW));
         /*
          * Support multi applications
          */
@@ -81,7 +81,7 @@ public class ScResource {
         return this.sigma;
     }
 
-    public Vis view() {
+    public KView view() {
         return this.view;
     }
 

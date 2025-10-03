@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.metadata.commune.Vis;
+import io.zerows.epoch.metadata.KView;
 import io.zerows.extension.runtime.crud.eon.IxMsg;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 import io.zerows.extension.runtime.crud.uca.input.Pre;
@@ -25,7 +25,7 @@ class KeyViewPre implements Pre {
         final String sessionKey = Ke.keyView(
             impactUri.value().name(),
             impactUri.key(),
-            Vis.smart(data.getValue(KName.VIEW))
+            KView.smart(data.getValue(KName.VIEW))
         );
         LOG.Dao.info(this.getClass(), IxMsg.CACHE_KEY_PROJECTION, sessionKey);
         data.put(KName.DATA_KEY, sessionKey);

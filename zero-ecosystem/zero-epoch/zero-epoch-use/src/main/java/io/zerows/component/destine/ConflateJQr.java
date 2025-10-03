@@ -1,7 +1,7 @@
 package io.zerows.component.destine;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.metadata.specification.KJoin;
+import io.zerows.epoch.metadata.KJoin;
 
 /**
  * @author lang : 2023-07-31

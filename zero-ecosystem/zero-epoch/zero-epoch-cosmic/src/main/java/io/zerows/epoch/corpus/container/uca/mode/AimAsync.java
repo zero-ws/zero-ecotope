@@ -7,11 +7,11 @@ import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
+import io.zerows.epoch.assembly.DiProxyInstance;
 import io.zerows.epoch.basicore.Event;
 import io.zerows.epoch.configuration.NodeNetwork;
 import io.zerows.epoch.corpus.io.zdk.Aim;
 import io.zerows.epoch.web.Envelop;
-import io.zerows.epoch.metacore.DiProxyInstance;
 import io.zerows.management.OCacheNode;
 import io.zerows.program.Ux;
 

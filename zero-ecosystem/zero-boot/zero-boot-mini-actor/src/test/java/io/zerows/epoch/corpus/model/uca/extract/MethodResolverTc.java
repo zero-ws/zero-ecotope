@@ -3,7 +3,7 @@ package io.zerows.epoch.corpus.model.uca.extract;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.unit.TestContext;
 import io.vertx.quiz.example.RMethod1;
-import io.zerows.epoch.metacore.ExtractToolMethod;
+import io.zerows.epoch.assembly.ExtractToolMethod;
 import io.zerows.epoch.testsuite.ZeroBase;
 import org.junit.Test;
 

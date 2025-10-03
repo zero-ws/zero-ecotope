@@ -2,7 +2,7 @@ package io.zerows.epoch.corpus.io.uca.response.resolver;
 
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.component.log.Annal;
-import io.zerows.component.serialization.ZeroType;
+import io.zerows.weaver.ZeroType;
 import io.zerows.epoch.corpus.io.zdk.mime.Resolver;
 import io.zerows.epoch.corpus.model.Epsilon;
 import io.zerows.support.Ut;

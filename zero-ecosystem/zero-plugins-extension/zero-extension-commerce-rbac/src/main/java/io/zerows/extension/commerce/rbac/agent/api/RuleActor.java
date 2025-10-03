@@ -11,8 +11,8 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.component.qr.Sorter;
 import io.zerows.platform.constant.VString;
 import io.zerows.program.Ux;
-import io.zerows.epoch.metadata.commune.Vis;
-import io.zerows.epoch.metadata.commune.XHeader;
+import io.zerows.epoch.metadata.KView;
+import io.zerows.epoch.metadata.XHeader;
 import io.zerows.support.Ut;
 import io.zerows.extension.commerce.rbac.agent.service.view.RuleStub;
 import io.zerows.extension.commerce.rbac.atom.ScOwner;
@@ -55,7 +55,7 @@ public class RuleActor {
      */
     @Address(Addr.Rule.FETCH_REGION_VALUES)
     public Future<JsonObject> fetchValues(final String ownerId, final JsonObject pathJ,
-                                          final Vis view) {
+                                          final KView view) {
         final ScOwner owner = new ScOwner(ownerId, pathJ.getString(KName.RUN_TYPE));
         owner.bind(view);
         return this.stub.regionAsync(pathJ, owner);

@@ -3,7 +3,7 @@ package io.zerows.extension.commerce.finance.util;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.platform.constant.VString;
-import io.zerows.epoch.metadata.specification.KNaming;
+import io.zerows.epoch.metadata.KNaming;
 import io.zerows.support.Ut;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FBook;
 import io.zerows.extension.commerce.finance.eon.FmConstant;

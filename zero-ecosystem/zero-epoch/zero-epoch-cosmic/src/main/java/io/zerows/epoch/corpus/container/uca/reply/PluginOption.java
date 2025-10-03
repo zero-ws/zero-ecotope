@@ -4,7 +4,7 @@ import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.application.YmlCore;
 import io.zerows.platform.constant.VName;
-import io.zerows.epoch.metadata.typed.JComponent;
+import io.zerows.epoch.metadata.JComponent;
 import io.zerows.management.OZeroStore;
 import io.zerows.support.Ut;
 import org.osgi.framework.Bundle;

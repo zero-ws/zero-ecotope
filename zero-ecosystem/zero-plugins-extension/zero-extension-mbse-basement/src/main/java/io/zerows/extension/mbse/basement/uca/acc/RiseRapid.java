@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.database.Database;
-import io.zerows.epoch.metadata.commune.Apt;
+import io.zerows.epoch.metadata.Apt;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.domain.tables.daos.MAccDao;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MAcc;

@@ -11,7 +11,7 @@ import io.vertx.ext.web.RoutingContext;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.management.OCacheUri;
-import io.zerows.epoch.metadata.commune.Vis;
+import io.zerows.epoch.metadata.KView;
 import io.zerows.epoch.metadata.security.Aegis;
 
 import java.util.Objects;
@@ -68,7 +68,7 @@ public interface AuthorizationResource {
          * It's important
          */
         final String literal = request.getParam(KName.VIEW);
-        final Vis view = Vis.create(literal);
+        final KView view = KView.create(literal);
         metadata.put(KName.VIEW, view);
         normalized.put(KName.METADATA, metadata);
         /*

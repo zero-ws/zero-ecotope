@@ -7,7 +7,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.corpus.mbse.atom.specification.KQr;
 import io.zerows.epoch.database.jooq.operation.UxJoin;
 import io.zerows.epoch.database.jooq.operation.UxJooq;
-import io.zerows.epoch.metadata.typed.UObject;
+import io.zerows.epoch.metadata.UObject;
 import io.zerows.extension.commerce.rbac.atom.ScConfig;
 import io.zerows.extension.commerce.rbac.bootstrap.ScPin;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.SUserDao;

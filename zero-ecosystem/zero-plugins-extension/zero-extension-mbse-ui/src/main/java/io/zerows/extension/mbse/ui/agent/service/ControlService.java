@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.Annal;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.metadata.typed.UData;
+import io.zerows.epoch.metadata.UData;
 import io.zerows.extension.mbse.ui.domain.tables.daos.UiControlDao;
 import io.zerows.extension.mbse.ui.domain.tables.daos.UiVisitorDao;
 import io.zerows.extension.mbse.ui.domain.tables.pojos.UiControl;

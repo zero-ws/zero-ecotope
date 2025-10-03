@@ -3,8 +3,8 @@ package io.zerows.epoch.corpus.mbse.uca.mixture;
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.corpus.mbse.atom.specification.KModule;
-import io.zerows.epoch.metadata.specification.KJoin;
-import io.zerows.epoch.metadata.specification.KPoint;
+import io.zerows.epoch.metadata.KJoin;
+import io.zerows.epoch.metadata.KPoint;
 import io.zerows.support.Ut;
 
 import java.util.Objects;

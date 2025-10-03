@@ -7,16 +7,16 @@ import io.vertx.core.http.HttpServerRequest;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.component.log.Annal;
 import io.zerows.epoch.annotations.Codex;
+import io.zerows.epoch.assembly.DiProxyInstance;
 import io.zerows.epoch.basicore.Event;
 import io.zerows.epoch.corpus.container.exception._60052Exception411ContentLength;
 import io.zerows.epoch.corpus.container.uca.reply.ActionNext;
 import io.zerows.epoch.corpus.container.uca.reply.OAmbit;
 import io.zerows.epoch.corpus.io.atom.WrapRequest;
 import io.zerows.epoch.corpus.model.Rule;
-import io.zerows.epoch.web.Envelop;
 import io.zerows.epoch.corpus.web.validation.ValidatorEntry;
 import io.zerows.epoch.corpus.web.validation.uca.combine.Rigor;
-import io.zerows.epoch.metacore.DiProxyInstance;
+import io.zerows.epoch.web.Envelop;
 import io.zerows.platform.metadata.Kv;
 
 import java.lang.reflect.Method;

@@ -8,7 +8,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.corpus.io.annotations.BodyParam;
 import io.zerows.epoch.corpus.io.annotations.PointParam;
-import io.zerows.epoch.metadata.commune.Vis;
+import io.zerows.epoch.metadata.KView;
 import io.zerows.extension.runtime.crud.eon.Addr;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
@@ -41,7 +41,7 @@ public interface PostAgent {
     JsonObject search(@PathParam("actor") String actor,
                       @BodyParam JsonObject data,
                       @QueryParam(KName.MODULE) String module,
-                      @PointParam(KName.VIEW) Vis view);
+                      @PointParam(KName.VIEW) KView view);
 
     /*
      * Existing/Missing Interface for Async Validation

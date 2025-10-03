@@ -7,7 +7,7 @@ import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Me;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.metadata.commune.XHeader;
+import io.zerows.epoch.metadata.XHeader;
 import io.zerows.extension.mbse.ui.agent.service.ControlStub;
 import io.zerows.extension.mbse.ui.agent.service.DoStub;
 import io.zerows.extension.mbse.ui.agent.service.FormStub;

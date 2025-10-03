@@ -8,8 +8,8 @@ import io.zerows.component.destine.Hymn;
 import io.zerows.program.Ux;
 import io.zerows.epoch.database.jooq.operation.UxJooq;
 import io.zerows.epoch.corpus.mbse.atom.specification.KModule;
-import io.zerows.epoch.metadata.specification.KJoin;
-import io.zerows.epoch.metadata.specification.KPoint;
+import io.zerows.epoch.metadata.KJoin;
+import io.zerows.epoch.metadata.KPoint;
 import io.zerows.extension.runtime.crud.bootstrap.IxPin;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 

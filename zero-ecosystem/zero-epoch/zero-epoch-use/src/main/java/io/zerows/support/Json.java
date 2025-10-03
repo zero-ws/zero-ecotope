@@ -2,7 +2,7 @@ package io.zerows.support;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.metadata.typed.Mirror;
+import io.zerows.epoch.metadata.Mirror;
 
 import java.util.ArrayList;
 import java.util.List;

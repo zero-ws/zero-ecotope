@@ -4,9 +4,9 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.web.Envelop;
-import io.zerows.epoch.metadata.commune.Vis;
-import io.zerows.epoch.metadata.specification.KJoin;
-import io.zerows.epoch.metadata.specification.KPoint;
+import io.zerows.epoch.metadata.KView;
+import io.zerows.epoch.metadata.KJoin;
+import io.zerows.epoch.metadata.KPoint;
 import io.zerows.extension.runtime.crud.eon.em.ApiSpec;
 import io.zerows.platform.enums.EmPRI;
 import io.zerows.program.Ux;
@@ -32,7 +32,7 @@ public class IxRequest {
     private transient IxMod active;
     private transient IxMod standBy;
     // Input Parameters
-    private transient Vis view;
+    private transient KView view;
     private transient String key;
     private transient String actor;
     private transient JsonObject bodyJ;
@@ -112,7 +112,7 @@ public class IxRequest {
 
         // 若视图为 null，则使用默认视图 [DEFAULT, DEFAULT]
         if (Objects.isNull(this.view)) {
-            this.view = Vis.smart(null);
+            this.view = KView.smart(null);
         }
 
         // 此处计算的 module 就是最终的被连接模型

@@ -4,7 +4,7 @@ import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.metadata.Kv;
-import io.zerows.epoch.metadata.typed.JAmb;
+import io.zerows.epoch.metadata.JAmb;
 import io.zerows.support.Ut;
 import io.zerows.specification.modeling.HRecord;
 

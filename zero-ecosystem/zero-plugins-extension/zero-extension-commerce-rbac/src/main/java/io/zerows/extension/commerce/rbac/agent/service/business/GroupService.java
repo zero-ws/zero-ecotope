@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.zerows.component.log.Annal;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.database.jooq.operation.UxJooq;
-import io.zerows.epoch.metadata.typed.UArray;
+import io.zerows.epoch.metadata.UArray;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.RGroupRoleDao;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.SGroupDao;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.RGroupRole;

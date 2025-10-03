@@ -5,7 +5,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.program.Ux;
-import io.zerows.epoch.metadata.specification.KFlow;
+import io.zerows.epoch.metadata.KFlow;
 import io.zerows.support.Ut;
 
 import java.io.Serializable;

@@ -1,8 +1,8 @@
 package io.zerows.epoch.corpus.web.websocket.store;
 
 import io.zerows.component.log.OLog;
+import io.zerows.epoch.assembly.Extractor;
 import io.zerows.epoch.corpus.web.websocket.atom.Remind;
-import io.zerows.epoch.metacore.Extractor;
 import io.zerows.support.Ut;
 
 import java.util.HashSet;

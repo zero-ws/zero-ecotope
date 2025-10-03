@@ -8,7 +8,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.corpus.mbse.atom.runner.ActIn;
 import io.zerows.epoch.corpus.mbse.atom.runner.ActOut;
 import io.zerows.epoch.web.Envelop;
-import io.zerows.epoch.metadata.commune.Vis;
+import io.zerows.epoch.metadata.KView;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.runtime.skeleton.osgi.spi.ui.ApeakMy;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
@@ -80,7 +80,7 @@ public class ViewComponent extends AbstractAdaptor {
         return Ox.viewMy(envelop, atom.identifier()).compose(params -> {
             final String literal = params.getString(KName.VIEW);
             final String sessionKey = Ke.keyView(params.getString(KName.METHOD),
-                params.getString(KName.URI), Vis.create(literal));
+                params.getString(KName.URI), KView.create(literal));
             params.put(KName.DATA_KEY, sessionKey);
             return Ux.channelA(ApeakMy.class,
                 () -> ActOut.future(new JsonObject()),

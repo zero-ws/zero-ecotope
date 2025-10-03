@@ -1,6 +1,6 @@
 package io.zerows.epoch.spi.provider;
 
-import io.zerows.epoch.metadata.cloud.LogCloud;
+import io.zerows.epoch.metadata.environment.LogCloud;
 import io.zerows.platform.HEnvironmentVariable;
 import io.zerows.platform.constant.VEnv;
 import io.zerows.spi.modeler.AtomNs;

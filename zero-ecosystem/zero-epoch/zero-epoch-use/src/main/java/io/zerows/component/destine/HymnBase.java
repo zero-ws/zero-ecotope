@@ -2,8 +2,8 @@ package io.zerows.component.destine;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.Log;
-import io.zerows.epoch.metadata.specification.KJoin;
-import io.zerows.epoch.metadata.specification.KPoint;
+import io.zerows.epoch.metadata.KJoin;
+import io.zerows.epoch.metadata.KPoint;
 import io.zerows.platform.enums.EmPRI;
 import io.zerows.support.Ut;
 

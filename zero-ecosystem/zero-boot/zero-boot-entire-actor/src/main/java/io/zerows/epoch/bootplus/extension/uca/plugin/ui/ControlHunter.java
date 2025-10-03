@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.Annal;
 import io.zerows.epoch.bootplus.extension.uca.plugin.indent.KeyIndent;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.metadata.typed.UData;
+import io.zerows.epoch.metadata.UData;
 import io.zerows.extension.mbse.ui.domain.tables.daos.UiVisitorDao;
 import io.zerows.extension.mbse.ui.domain.tables.pojos.UiVisitor;
 import io.zerows.extension.mbse.ui.osgi.spi.ui.UiHunter;

@@ -4,7 +4,7 @@ import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonArray;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.epoch.corpus.exception._60048Exception415PointDefine;
-import io.zerows.epoch.metadata.commune.Vis;
+import io.zerows.epoch.metadata.KView;
 import io.zerows.support.Ut;
 
 import java.util.List;
@@ -24,7 +24,7 @@ public class PointFiller implements Filler {
         final boolean valid = Objects.nonNull(paramType)        // 1) Type is not null
             && (paramType.isAssignableFrom(List.class)          // 2) Type is implements List interface
             || JsonArray.class == paramType                     // 3) Type is JsonArray data structure
-            || Vis.class == paramType                     // 4) View structure defined
+            || KView.class == paramType                     // 4) View structure defined
         );
         Fn.jvmKo(!valid, _60048Exception415PointDefine.class, paramType);
 
@@ -47,7 +47,7 @@ public class PointFiller implements Filler {
         } else if (paramType.isAssignableFrom(List.class)) {
             reference = value.getList();
         } else {
-            reference = Vis.create(value);
+            reference = KView.create(value);
         }
         return reference;
     }

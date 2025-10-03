@@ -1,7 +1,7 @@
 package io.zerows.epoch.bootplus.stellar;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.metadata.typed.JSix;
+import io.zerows.epoch.metadata.JSix;
 import io.zerows.support.Ut;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
 import io.zerows.platform.HEnvironmentVariable;

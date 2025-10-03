@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Session;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.metadata.typed.UObject;
+import io.zerows.epoch.metadata.UObject;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
 import io.zerows.extension.commerce.rbac.agent.service.business.GroupStub;

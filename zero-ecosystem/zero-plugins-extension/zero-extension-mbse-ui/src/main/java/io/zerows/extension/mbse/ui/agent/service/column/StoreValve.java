@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.metadata.commune.Vis;
+import io.zerows.epoch.metadata.KView;
 import io.zerows.extension.mbse.ui.domain.tables.daos.UiColumnDao;
 import io.zerows.extension.mbse.ui.domain.tables.pojos.UiColumn;
 import io.zerows.platform.constant.VString;
@@ -20,7 +20,7 @@ import static io.zerows.extension.mbse.ui.util.Ui.LOG;
 class StoreValve implements UiValve {
 
     @Override
-    public Future<JsonArray> fetchColumn(final Vis vis, final String identifier, final String sigma) {
+    public Future<JsonArray> fetchColumn(final KView vis, final String identifier, final String sigma) {
         /*
          * Default global controlId is
          * 1) The formatFail is VIEW-identifier

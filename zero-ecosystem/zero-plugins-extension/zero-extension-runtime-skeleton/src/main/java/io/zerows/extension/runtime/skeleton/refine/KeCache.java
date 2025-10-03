@@ -6,7 +6,7 @@ import io.vertx.ext.web.RoutingContext;
 import io.zerows.component.log.Annal;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.management.OCacheUri;
-import io.zerows.epoch.metadata.commune.Vis;
+import io.zerows.epoch.metadata.KView;
 import io.zerows.epoch.spi.channel.KIncome;
 import io.zerows.epoch.spi.channel.Pocket;
 import io.zerows.extension.runtime.skeleton.osgi.spi.web.Orbit;
@@ -20,7 +20,7 @@ class KeCache {
     private static final Annal LOGGER = Annal.get(KeCache.class);
     private static final String LOGGER_VIEW = "Input view = {1}, Try cacheKey: \u001b[0;34m{0}\u001b[m, uri = {2}, method = {3}";
 
-    static String keyView(final String method, final String uri, final Vis view) {
+    static String keyView(final String method, final String uri, final KView view) {
         /*
          * session-POST:uri:position/name
          */
@@ -56,7 +56,7 @@ class KeCache {
         /* Cache Data */
         final String literal = request.getParam(KName.VIEW);
         /* Url Encoding / Decoding */
-        final Vis vis = Vis.create(literal);
+        final KView vis = KView.create(literal);
         final String cacheKey = keyView(request.method().name(), uri, vis);
         /* Cache Data */
         Ke.LOG.Ke.debug(LOGGER, LOGGER_VIEW, cacheKey, literal, uri, request.method().name());

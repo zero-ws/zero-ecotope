@@ -8,7 +8,7 @@ import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Me;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.metadata.commune.XHeader;
+import io.zerows.epoch.metadata.XHeader;
 import io.zerows.extension.runtime.integration.agent.service.MessageStub;
 import io.zerows.extension.runtime.integration.eon.Addr;
 import io.zerows.extension.runtime.skeleton.eon.em.EmMessage;

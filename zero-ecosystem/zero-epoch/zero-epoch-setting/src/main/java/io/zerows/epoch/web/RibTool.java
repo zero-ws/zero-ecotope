@@ -4,7 +4,7 @@ import io.r2mo.typed.exception.WebException;
 import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.serialization.ZeroType;
+import io.zerows.weaver.ZeroType;
 import io.zerows.platform.constant.VName;
 
 import java.util.Objects;

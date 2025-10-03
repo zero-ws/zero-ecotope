@@ -2,8 +2,8 @@ package io.vertx.up.unity;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.metadata.typed.UArray;
-import io.zerows.epoch.metadata.typed.UObject;
+import io.zerows.epoch.metadata.UArray;
+import io.zerows.epoch.metadata.UObject;
 import io.zerows.epoch.testsuite.EpicBase;
 import org.junit.Assert;
 import org.junit.Test;

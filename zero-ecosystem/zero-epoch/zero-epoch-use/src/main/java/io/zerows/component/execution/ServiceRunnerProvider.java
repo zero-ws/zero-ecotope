@@ -1,7 +1,7 @@
 package io.zerows.component.execution;
 
 import io.vertx.core.Future;
-import io.zerows.epoch.metadata.service.CallbackParameter;
+import io.zerows.epoch.metadata.environment.CallbackParameter;
 import io.zerows.sdk.osgi.ServiceContext;
 import io.zerows.sdk.osgi.ServiceInvocation;
 import io.zerows.support.base.FnBase;

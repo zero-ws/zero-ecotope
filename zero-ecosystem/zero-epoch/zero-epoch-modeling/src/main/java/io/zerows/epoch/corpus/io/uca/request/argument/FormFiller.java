@@ -3,7 +3,7 @@ package io.zerows.epoch.corpus.io.uca.request.argument;
 import io.vertx.core.file.FileSystem;
 import io.vertx.ext.web.FileUpload;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.component.serialization.ZeroType;
+import io.zerows.weaver.ZeroType;
 import io.zerows.epoch.corpus.io.util.UtilUpload;
 
 import java.util.HashSet;

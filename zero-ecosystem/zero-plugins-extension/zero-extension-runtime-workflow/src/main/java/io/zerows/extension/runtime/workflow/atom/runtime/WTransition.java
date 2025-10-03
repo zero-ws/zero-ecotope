@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.aop.AspectRobin;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.metadata.specification.KFlow;
+import io.zerows.epoch.metadata.KFlow;
 import io.zerows.extension.runtime.workflow.domain.tables.pojos.WTicket;
 import io.zerows.extension.runtime.workflow.domain.tables.pojos.WTodo;
 import io.zerows.extension.runtime.workflow.eon.em.PassWay;

@@ -11,7 +11,7 @@ import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.corpus.io.annotations.BodyParam;
 import io.zerows.epoch.corpus.io.annotations.PointParam;
 import io.zerows.epoch.corpus.io.annotations.StreamParam;
-import io.zerows.epoch.metadata.commune.Vis;
+import io.zerows.epoch.metadata.KView;
 import io.zerows.extension.runtime.crud.eon.Addr;
 import io.zerows.extension.runtime.crud.eon.IxMsg;
 import io.zerows.program.Ux;
@@ -57,7 +57,7 @@ public class FileAgent {
     public JsonObject exportFile(@PathParam("actor") final String actor,
                                  @BodyParam final JsonObject condition,
                                  @QueryParam(KName.MODULE) final String module,
-                                 @PointParam(KName.VIEW) final Vis view) {
+                                 @PointParam(KName.VIEW) final KView view) {
         /*
          * Toggle formatFail here
          * {

@@ -6,7 +6,7 @@ import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.epoch.corpus.web.cache.Rapid;
 import io.zerows.epoch.database.Database;
-import io.zerows.epoch.metadata.commune.XHeader;
+import io.zerows.epoch.metadata.XHeader;
 import io.zerows.epoch.sdk.modeling.Commercial;
 import io.zerows.extension.mbse.action.osgi.spi.jet.JtComponent;
 import io.zerows.platform.metadata.KFabric;

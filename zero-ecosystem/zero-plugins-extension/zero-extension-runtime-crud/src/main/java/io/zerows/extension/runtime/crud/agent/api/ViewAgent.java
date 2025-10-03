@@ -7,7 +7,7 @@ import io.zerows.epoch.annotations.EndPoint;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.corpus.io.annotations.PointParam;
-import io.zerows.epoch.metadata.commune.Vis;
+import io.zerows.epoch.metadata.KView;
 import io.zerows.extension.runtime.crud.eon.Addr;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
@@ -26,7 +26,7 @@ public interface ViewAgent {
     @Adjust(KWeb.ORDER.MODULE)
     JsonArray getFull(@PathParam(KName.ACTOR) String actor,
                       @QueryParam(KName.MODULE) String module,
-                      @PointParam(KName.VIEW) Vis view);
+                      @PointParam(KName.VIEW) KView view);
 
     @GET
     @Path("/columns/{actor}/my")
@@ -34,5 +34,5 @@ public interface ViewAgent {
     @Adjust(KWeb.ORDER.MODULE)
     JsonArray getMy(@PathParam(KName.ACTOR) String actor,
                     @QueryParam(KName.MODULE) String module,
-                    @PointParam(KName.VIEW) Vis view);
+                    @PointParam(KName.VIEW) KView view);
 }

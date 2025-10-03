@@ -3,7 +3,7 @@ package io.zerows.extension.runtime.workflow.uca.component;
 import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.metadata.specification.KFlow;
+import io.zerows.epoch.metadata.KFlow;
 import io.zerows.extension.runtime.workflow.atom.runtime.WRequest;
 import io.zerows.extension.runtime.workflow.atom.runtime.WTransition;
 import io.zerows.extension.runtime.workflow.exception._80605Exception409InValidInstance;

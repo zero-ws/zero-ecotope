@@ -5,7 +5,7 @@ import io.vertx.core.Future;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.epoch.application.YmlCore;
 import io.zerows.epoch.corpus.io.plugins.extension.PlugRegion;
-import io.zerows.epoch.metadata.typed.JComponent;
+import io.zerows.epoch.metadata.JComponent;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.support.Ut;
 import org.osgi.framework.Bundle;

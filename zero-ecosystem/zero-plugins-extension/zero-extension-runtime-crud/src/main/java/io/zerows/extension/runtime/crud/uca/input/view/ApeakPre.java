@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.corpus.mbse.atom.specification.KColumn;
 import io.zerows.epoch.corpus.mbse.atom.specification.KModule;
-import io.zerows.epoch.metadata.commune.Vis;
+import io.zerows.epoch.metadata.KView;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 import io.zerows.extension.runtime.crud.uca.input.Pre;
 import io.zerows.program.Ux;
@@ -44,7 +44,7 @@ class ApeakPre implements Pre {
     protected void viewProc(final JsonObject data, final KColumn column) {
         if (Objects.isNull(data.getValue(KName.VIEW))) {
             // Vis: Fix bug of default view
-            data.put(KName.VIEW, Vis.smart(column.getView()));
+            data.put(KName.VIEW, KView.smart(column.getView()));
         }
     }
 }

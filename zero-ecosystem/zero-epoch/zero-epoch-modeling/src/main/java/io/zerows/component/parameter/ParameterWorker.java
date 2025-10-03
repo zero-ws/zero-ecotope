@@ -8,7 +8,7 @@ import io.vertx.core.http.HttpServerResponse;
 import io.vertx.ext.auth.User;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.Session;
-import io.zerows.epoch.metadata.commune.XHeader;
+import io.zerows.epoch.metadata.XHeader;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.support.Ut;
 

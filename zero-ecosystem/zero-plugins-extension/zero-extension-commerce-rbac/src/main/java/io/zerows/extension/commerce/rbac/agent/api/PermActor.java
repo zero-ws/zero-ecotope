@@ -7,7 +7,7 @@ import io.vertx.ext.auth.User;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.metadata.commune.XHeader;
+import io.zerows.epoch.metadata.XHeader;
 import io.zerows.extension.commerce.rbac.agent.service.business.PermStub;
 import io.zerows.extension.commerce.rbac.agent.service.business.RightsStub;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.RRolePermDao;

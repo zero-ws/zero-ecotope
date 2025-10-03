@@ -2,8 +2,8 @@ package io.zerows.epoch.basicore;
 
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.http.HttpMethod;
+import io.zerows.epoch.assembly.DiPlugin;
 import io.zerows.epoch.constant.KWeb;
-import io.zerows.epoch.metacore.DiPlugin;
 import io.zerows.platform.constant.VString;
 import jakarta.ws.rs.core.MediaType;
 import lombok.Data;

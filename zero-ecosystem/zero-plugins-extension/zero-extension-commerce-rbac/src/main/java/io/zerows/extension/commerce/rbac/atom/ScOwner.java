@@ -1,7 +1,7 @@
 package io.zerows.extension.commerce.rbac.atom;
 
 import io.zerows.platform.constant.VValue;
-import io.zerows.epoch.metadata.commune.Vis;
+import io.zerows.epoch.metadata.KView;
 import io.zerows.support.Ut;
 import io.zerows.extension.runtime.skeleton.eon.em.OwnerType;
 
@@ -39,7 +39,7 @@ public class ScOwner implements Serializable {
         this(owner, OwnerType.ROLE);
     }
 
-    public ScOwner bind(final Vis vis) {
+    public ScOwner bind(final KView vis) {
         if (Objects.nonNull(vis)) {
             this.view = vis.view();
             this.position = vis.position();

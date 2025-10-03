@@ -6,8 +6,8 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.component.qr.syntax.Ir;
 import io.zerows.epoch.database.jooq.util.JqTool;
-import io.zerows.epoch.metadata.typed.Mirror;
-import io.zerows.epoch.metadata.typed.Mojo;
+import io.zerows.epoch.metadata.Mirror;
+import io.zerows.epoch.metadata.Mojo;
 import io.zerows.support.Ut;
 
 import java.util.Objects;

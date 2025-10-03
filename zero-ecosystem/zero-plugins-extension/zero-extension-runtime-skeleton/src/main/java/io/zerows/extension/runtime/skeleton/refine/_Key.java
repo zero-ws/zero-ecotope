@@ -1,7 +1,7 @@
 package io.zerows.extension.runtime.skeleton.refine;
 
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.epoch.metadata.commune.Vis;
+import io.zerows.epoch.metadata.KView;
 
 /**
  * @author lang : 2023-06-07
@@ -10,7 +10,7 @@ class _Key {
     protected _Key() {
     }
 
-    public static String keyView(final String method, final String uri, final Vis view) {
+    public static String keyView(final String method, final String uri, final KView view) {
         return KeCache.keyView(method, uri, view);
     }
 

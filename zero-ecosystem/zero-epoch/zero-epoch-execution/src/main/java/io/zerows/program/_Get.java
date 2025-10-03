@@ -3,7 +3,7 @@ package io.zerows.program;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.web.Envelop;
-import io.zerows.epoch.metadata.commune.Vis;
+import io.zerows.epoch.metadata.KView;
 
 /**
  * @author lang : 2023-06-11
@@ -57,23 +57,23 @@ class _Get extends _Dict {
 
     // -> Message<Envelop> -> String ( Interface mode )
 
-    public static Vis getVis(final Envelop envelop, final int index) {
-        return InputRequest.request(envelop, index, Vis.class);
+    public static KView getVis(final Envelop envelop, final int index) {
+        return InputRequest.request(envelop, index, KView.class);
     }
 
     // -> Message<Envelop> -> String ( Interface mode )
-    public static Vis getVis(final Envelop envelop) {
-        return InputRequest.request(envelop, 0, Vis.class);
+    public static KView getVis(final Envelop envelop) {
+        return InputRequest.request(envelop, 0, KView.class);
     }
 
     // -> Message<Envelop> -> String ( Interface mode )
-    public static Vis getVis1(final Envelop envelop) {
-        return InputRequest.request(envelop, 1, Vis.class);
+    public static KView getVis1(final Envelop envelop) {
+        return InputRequest.request(envelop, 1, KView.class);
     }
 
     // -> Message<Envelop> -> String ( Interface mode )
-    public static Vis getVis2(final Envelop envelop) {
-        return InputRequest.request(envelop, 2, Vis.class);
+    public static KView getVis2(final Envelop envelop) {
+        return InputRequest.request(envelop, 2, KView.class);
     }
 
     // -> Message<Envelop> -> JsonObject ( Interface mode )

@@ -8,7 +8,7 @@ import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.Session;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
-import io.zerows.epoch.metadata.commune.Vis;
+import io.zerows.epoch.metadata.KView;
 import io.zerows.support.Ut;
 
 import java.io.Serializable;
@@ -133,7 +133,7 @@ class Assist implements Serializable {
         this.reference.queryParams().forEach(argumentJ::put);
         // Iterate each arguments to check the `JsonObject`
         Arrays.stream(arguments).forEach(value -> {
-            if (value instanceof final Vis vis) {
+            if (value instanceof final KView vis) {
                 // Vis ( Inherit from JsonObject )
                 argumentJ.put(KName.VIEW, vis.view());
                 argumentJ.put(KName.POSITION, vis.position());

@@ -3,7 +3,7 @@ package io.zerows.epoch.corpus.io.util;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.ext.web.FileUpload;
 import io.zerows.component.log.Annal;
-import io.zerows.component.serialization.ZeroType;
+import io.zerows.weaver.ZeroType;
 
 import java.io.File;
 import java.util.ArrayList;

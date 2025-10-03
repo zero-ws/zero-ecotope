@@ -5,8 +5,8 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.component.destine.Hymn;
 import io.zerows.epoch.corpus.mbse.atom.specification.KModule;
 import io.zerows.epoch.database.jooq.operation.UxJoin;
-import io.zerows.epoch.metadata.specification.KJoin;
-import io.zerows.epoch.metadata.specification.KPoint;
+import io.zerows.epoch.metadata.KJoin;
+import io.zerows.epoch.metadata.KPoint;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 

@@ -1,6 +1,6 @@
 package io.zerows.epoch.corpus.web.scheduler.uca.running;
 
-import io.zerows.epoch.metadata.typed.JComponent;
+import io.zerows.epoch.metadata.JComponent;
 import io.zerows.epoch.corpus.web.scheduler.uca.timer.VertxInterval;
 
 import java.io.Serializable;

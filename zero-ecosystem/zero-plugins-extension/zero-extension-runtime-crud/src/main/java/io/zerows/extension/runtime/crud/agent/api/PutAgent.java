@@ -9,7 +9,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.corpus.io.annotations.BodyParam;
 import io.zerows.epoch.corpus.io.annotations.PointParam;
-import io.zerows.epoch.metadata.commune.Vis;
+import io.zerows.epoch.metadata.KView;
 import io.zerows.extension.runtime.crud.eon.Addr;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
@@ -45,5 +45,5 @@ public interface PutAgent {
     JsonArray getMy(@PathParam("actor") String actor,
                     @BodyParam JsonObject viewData,
                     @QueryParam(KName.MODULE) String module,
-                    @PointParam(KName.VIEW) Vis view);
+                    @PointParam(KName.VIEW) KView view);
 }

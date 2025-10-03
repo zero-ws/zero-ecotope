@@ -1,7 +1,7 @@
 package io.zerows.epoch.basicore;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.epoch.metacore.DiPlugin;
+import io.zerows.epoch.assembly.DiPlugin;
 import lombok.Data;
 
 import java.io.Serializable;

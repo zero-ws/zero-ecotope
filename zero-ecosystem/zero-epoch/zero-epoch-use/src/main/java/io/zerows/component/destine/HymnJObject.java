@@ -4,8 +4,8 @@ import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.exception._80543Exception412IndentParsing;
 import io.zerows.component.log.Log;
-import io.zerows.epoch.metadata.specification.KJoin;
-import io.zerows.epoch.metadata.specification.KPoint;
+import io.zerows.epoch.metadata.KJoin;
+import io.zerows.epoch.metadata.KPoint;
 import io.zerows.support.Ut;
 
 import java.util.Objects;
