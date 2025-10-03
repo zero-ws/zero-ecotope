@@ -14,6 +14,12 @@
     <packaging>pom</packaging>
     <modules>
         <module>zero-epoch-use</module>
+        <module>zero-epoch-configuration</module>
+        <module>zero-epoch-management</module>
+        <!--
+        - memory：内存管理，负责内存的基础分配管理模块
+        - configuration：配置管理，负责系统配置的加载与管理
+        -->
         <module>zero-epoch-store</module>
         <module>zero-epoch-modeling</module>
         <module>zero-epoch-focus</module>
