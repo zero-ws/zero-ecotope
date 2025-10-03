@@ -2,7 +2,7 @@ package io.zerows.epoch.boot;
 
 import io.r2mo.function.Fn;
 import io.vertx.core.Vertx;
-import io.zerows.epoch.component.uddi.UddiRegistry;
+import io.zerows.component.uddi.UddiRegistry;
 import io.zerows.epoch.boot.impl.BootStore;
 import io.zerows.epoch.corpus.container.exception._40037Exception500RpcEnvironment;
 import io.zerows.support.Ut;

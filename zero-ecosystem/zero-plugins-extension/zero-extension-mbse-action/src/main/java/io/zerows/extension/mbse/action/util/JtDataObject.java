@@ -5,7 +5,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.platform.metadata.KDS;
 import io.zerows.platform.metadata.KIntegration;
 import io.zerows.platform.metadata.KDictConfig;
-import io.zerows.epoch.corpus.database.Database;
+import io.zerows.epoch.database.Database;
 import io.zerows.support.Ut;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IApi;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IJob;

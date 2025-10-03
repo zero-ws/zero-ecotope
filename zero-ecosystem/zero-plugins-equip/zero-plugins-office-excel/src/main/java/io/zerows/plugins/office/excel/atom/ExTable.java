@@ -3,7 +3,7 @@ package io.zerows.plugins.office.excel.atom;
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.component.normalize.Oneness;
+import io.zerows.component.normalize.Oneness;
 import io.zerows.platform.constant.VString;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.configuration.MDConnect;

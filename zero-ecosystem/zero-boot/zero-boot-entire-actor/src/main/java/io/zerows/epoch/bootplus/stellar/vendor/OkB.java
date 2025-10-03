@@ -10,7 +10,7 @@ import io.zerows.platform.metadata.KFabric;
 import io.zerows.platform.metadata.KMap;
 import io.zerows.platform.constant.VString;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.epoch.corpus.database.Database;
+import io.zerows.epoch.database.Database;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.specification.access.app.HArk;
 import io.zerows.specification.atomic.HCopier;

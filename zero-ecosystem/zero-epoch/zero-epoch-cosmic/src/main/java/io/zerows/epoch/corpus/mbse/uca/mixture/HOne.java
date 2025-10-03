@@ -3,8 +3,8 @@ package io.zerows.epoch.corpus.mbse.uca.mixture;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.corpus.database.jooq.operation.UxJoin;
-import io.zerows.epoch.corpus.database.jooq.operation.UxJooq;
+import io.zerows.epoch.database.jooq.operation.UxJoin;
+import io.zerows.epoch.database.jooq.operation.UxJooq;
 import io.zerows.epoch.corpus.mbse.atom.specification.KModule;
 
 import java.util.concurrent.ConcurrentMap;

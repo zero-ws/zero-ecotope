@@ -2,7 +2,7 @@ package io.zerows.epoch.corpus.io.uca.request.mime.parse;
 
 import io.r2mo.typed.exception.WebException;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.epoch.component.parameter.ParameterBuilder;
+import io.zerows.component.parameter.ParameterBuilder;
 import io.zerows.epoch.corpus.model.Epsilon;
 
 @SuppressWarnings("unchecked")

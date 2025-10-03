@@ -7,7 +7,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.bootplus.extension.refine.Ox;
 import io.zerows.platform.metadata.KDS;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.epoch.corpus.database.Database;
+import io.zerows.epoch.database.Database;
 import io.zerows.platform.enums.Environment;
 import io.zerows.support.Ut;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;

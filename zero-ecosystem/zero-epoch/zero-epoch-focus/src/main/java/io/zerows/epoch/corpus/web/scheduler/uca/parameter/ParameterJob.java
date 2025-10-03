@@ -7,7 +7,7 @@ import io.vertx.ext.auth.User;
 import io.vertx.ext.web.Session;
 import io.zerows.epoch.constant.KName;
 import io.zerows.platform.metadata.KRef;
-import io.zerows.epoch.component.parameter.ParameterBuilder;
+import io.zerows.component.parameter.ParameterBuilder;
 import io.zerows.epoch.corpus.io.annotations.BodyParam;
 import io.zerows.epoch.corpus.model.commune.Envelop;
 import io.zerows.epoch.corpus.web.exception._60041Exception417JobMethod;

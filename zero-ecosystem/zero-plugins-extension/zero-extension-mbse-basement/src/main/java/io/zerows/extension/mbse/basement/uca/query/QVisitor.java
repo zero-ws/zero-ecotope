@@ -7,7 +7,7 @@ import io.zerows.component.qr.syntax.QOp;
 import io.zerows.component.qr.syntax.QTree;
 import io.zerows.component.qr.syntax.QValue;
 import io.zerows.platform.constant.VValue;
-import io.zerows.epoch.corpus.database.jooq.condition.Clause;
+import io.zerows.epoch.database.jooq.condition.Clause;
 import io.zerows.extension.mbse.basement.atom.element.DataMatrix;
 import io.zerows.extension.mbse.basement.uca.jooq.internal.Jq;
 import org.jooq.Condition;

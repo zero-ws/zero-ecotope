@@ -5,7 +5,7 @@ import io.vertx.core.Vertx;
 import io.vertx.core.VertxBuilder;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.spi.cluster.ClusterManager;
-import io.zerows.epoch.component.codec.EnvelopCodec;
+import io.zerows.component.codec.EnvelopCodec;
 import io.zerows.epoch.configuration.NodeNetwork;
 import io.zerows.epoch.configuration.NodeVertx;
 import io.zerows.epoch.corpus.container.store.under.StoreVertx;

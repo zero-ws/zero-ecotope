@@ -4,7 +4,7 @@ package io.zerows.epoch.corpus.extension;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.component.normalize.EquipAt;
+import io.zerows.component.normalize.EquipAt;
 import io.zerows.epoch.configuration.MDConfiguration;
 import io.zerows.epoch.configuration.MDConnect;
 import io.zerows.platform.constant.VBoot;

@@ -5,8 +5,8 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.bootplus.extension.migration.tookit.AbstractStatic;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.epoch.corpus.database.Database;
-import io.zerows.epoch.corpus.database.cp.zdk.DataPool;
+import io.zerows.epoch.database.Database;
+import io.zerows.epoch.database.cp.DataPool;
 import io.zerows.platform.enums.Environment;
 import io.zerows.support.Ut;
 

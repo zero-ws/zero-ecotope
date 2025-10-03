@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.platform.constant.VString;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.epoch.corpus.database.jooq.operation.UxJooq;
+import io.zerows.epoch.database.jooq.operation.UxJooq;
 import io.zerows.support.Ut;
 import io.zerows.extension.commerce.finance.domain.tables.daos.FBillDao;
 import io.zerows.extension.commerce.finance.domain.tables.daos.FBillItemDao;

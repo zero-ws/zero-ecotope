@@ -7,7 +7,7 @@ import io.vertx.ext.auth.User;
 import io.zerows.epoch.constant.KName;
 import io.zerows.component.qr.syntax.Ir;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.epoch.corpus.database.jooq.operation.UxJooq;
+import io.zerows.epoch.database.jooq.operation.UxJooq;
 import io.zerows.epoch.metadata.typed.Mirror;
 import io.zerows.epoch.metadata.typed.Mojo;
 import io.zerows.epoch.metadata.typed.UArray;

@@ -7,7 +7,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.bootplus.extension.migration.AbstractStep;
 import io.zerows.epoch.bootplus.extension.refine.Ox;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.epoch.corpus.database.cp.zdk.DataPool;
+import io.zerows.epoch.database.cp.DataPool;
 import io.zerows.platform.enums.Environment;
 import io.zerows.support.Ut;
 

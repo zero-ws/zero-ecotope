@@ -3,7 +3,7 @@ package io.zerows.epoch.bootplus.extension.uca.console;
 import io.vertx.core.Future;
 import io.zerows.epoch.bootplus.extension.scaffold.console.AbstractInstruction;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.epoch.corpus.database.cp.zdk.DataPool;
+import io.zerows.epoch.database.cp.DataPool;
 import io.zerows.extension.runtime.skeleton.boot.supply.DataImport;
 import io.zerows.plugins.common.shell.atom.CommandInput;
 import io.zerows.plugins.common.shell.eon.EmCommand;

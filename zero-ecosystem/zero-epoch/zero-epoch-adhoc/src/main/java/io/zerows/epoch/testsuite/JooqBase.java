@@ -1,7 +1,7 @@
 package io.zerows.epoch.testsuite;
 
 import io.zerows.component.injection.DiPlugin;
-import io.zerows.epoch.corpus.database.jooq.JooqInfix;
+import io.zerows.epoch.database.jooq.JooqInfix;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>

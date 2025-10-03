@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.constant.VString;
-import io.zerows.epoch.corpus.database.jooq.operation.UxJooq;
+import io.zerows.epoch.database.jooq.operation.UxJooq;
 import io.zerows.extension.runtime.tpl.domain.tables.daos.MyMenuDao;
 import io.zerows.extension.runtime.tpl.domain.tables.pojos.MyMenu;
 import io.zerows.epoch.corpus.Ux;

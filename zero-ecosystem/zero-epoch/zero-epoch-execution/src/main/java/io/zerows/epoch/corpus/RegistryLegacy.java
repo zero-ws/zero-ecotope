@@ -7,7 +7,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.support.base.FnBase;
 import io.zerows.epoch.application.YmlCore;
-import io.zerows.epoch.corpus.database.jooq.JooqInfix;
+import io.zerows.epoch.database.jooq.JooqInfix;
 import io.zerows.support.Ut;
 
 import java.lang.reflect.Method;

@@ -7,7 +7,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.platform.metadata.Kv;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.configuration.MDConnect;
-import io.zerows.epoch.corpus.database.jooq.operation.UxJoin;
+import io.zerows.epoch.database.jooq.operation.UxJoin;
 import io.zerows.epoch.corpus.extension.HExtension;
 import io.zerows.support.Ut;
 

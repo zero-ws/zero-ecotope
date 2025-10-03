@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.platform.metadata.Kv;
 import io.zerows.platform.constant.VString;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.epoch.corpus.database.jooq.operation.UxJooq;
+import io.zerows.epoch.database.jooq.operation.UxJooq;
 import io.zerows.epoch.corpus.mbse.atom.specification.KModule;
 import io.zerows.epoch.metadata.specification.KTransform;
 import io.zerows.epoch.metadata.specification.KTree;

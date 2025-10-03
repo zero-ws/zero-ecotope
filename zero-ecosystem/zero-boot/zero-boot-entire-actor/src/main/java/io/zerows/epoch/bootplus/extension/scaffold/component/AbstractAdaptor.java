@@ -10,7 +10,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Contract;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.epoch.corpus.database.Database;
+import io.zerows.epoch.database.Database;
 import io.zerows.epoch.corpus.feature.FieldMapper;
 import io.zerows.epoch.corpus.mbse.atom.runner.ActIn;
 import io.zerows.epoch.metadata.commune.XHeader;

@@ -9,7 +9,7 @@ import io.vertx.core.Vertx;
 import io.zerows.epoch.application.YmlCore;
 import io.zerows.platform.metadata.KTimer;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.epoch.corpus.database.jooq.JooqInfix;
+import io.zerows.epoch.database.jooq.JooqInfix;
 import io.zerows.epoch.corpus.web.cache.shared.MapInfix;
 import io.zerows.epoch.corpus.web.cache.shared.SharedClient;
 import io.zerows.support.Ut;

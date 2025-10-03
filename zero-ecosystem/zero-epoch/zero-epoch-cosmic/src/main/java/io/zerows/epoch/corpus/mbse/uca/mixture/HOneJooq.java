@@ -2,8 +2,8 @@ package io.zerows.epoch.corpus.mbse.uca.mixture;
 
 import io.vertx.core.MultiMap;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.epoch.corpus.database.cp.zdk.DS;
-import io.zerows.epoch.corpus.database.jooq.operation.UxJooq;
+import io.zerows.epoch.database.cp.DS;
+import io.zerows.epoch.database.jooq.operation.UxJooq;
 import io.zerows.epoch.corpus.mbse.atom.specification.KModule;
 import io.zerows.platform.enums.EmDS;
 import io.zerows.support.Ut;

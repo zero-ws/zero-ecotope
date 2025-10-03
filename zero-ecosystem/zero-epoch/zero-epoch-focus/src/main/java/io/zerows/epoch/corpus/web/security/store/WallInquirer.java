@@ -7,7 +7,7 @@ import io.zerows.epoch.annotations.security.Authorized;
 import io.zerows.epoch.annotations.security.AuthorizedResource;
 import io.zerows.epoch.annotations.security.Wall;
 import io.zerows.component.injection.DiPlugin;
-import io.zerows.epoch.component.extract.ExtractorEvent;
+import io.zerows.component.extract.ExtractorEvent;
 import io.zerows.epoch.metadata.security.Aegis;
 import io.zerows.epoch.metadata.security.AegisItem;
 import io.zerows.epoch.corpus.web.exception._40038Exception400WallDuplicated;

@@ -8,7 +8,7 @@ import io.zerows.platform.metadata.KDS;
 import io.zerows.platform.metadata.KGlobal;
 import io.zerows.platform.metadata.KIntegration;
 import io.zerows.platform.metadata.KPivot;
-import io.zerows.epoch.corpus.database.Database;
+import io.zerows.epoch.database.Database;
 import io.zerows.platform.enums.Environment;
 import io.zerows.platform.exception._40103Exception500ConnectAmbient;
 import io.zerows.support.Ut;

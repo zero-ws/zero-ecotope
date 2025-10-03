@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.OLog;
 import io.zerows.platform.metadata.KIntegration;
 import io.zerows.component.qr.Criteria;
-import io.zerows.epoch.corpus.database.Database;
+import io.zerows.epoch.database.Database;
 import io.zerows.support.Ut;
 
 /**

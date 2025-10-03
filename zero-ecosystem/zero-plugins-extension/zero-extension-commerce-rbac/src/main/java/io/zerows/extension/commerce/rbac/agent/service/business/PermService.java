@@ -7,7 +7,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.component.qr.syntax.Ir;
 import io.zerows.platform.constant.VString;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.epoch.corpus.database.jooq.operation.UxJooq;
+import io.zerows.epoch.database.jooq.operation.UxJooq;
 import io.zerows.support.Ut;
 import io.zerows.support.base.FnBase;
 import io.zerows.extension.commerce.rbac.agent.service.accredit.ActionStub;

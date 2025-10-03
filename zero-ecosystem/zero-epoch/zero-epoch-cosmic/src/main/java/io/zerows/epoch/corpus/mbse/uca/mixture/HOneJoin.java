@@ -4,7 +4,7 @@ import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.destine.Hymn;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.epoch.corpus.database.jooq.operation.UxJoin;
+import io.zerows.epoch.database.jooq.operation.UxJoin;
 import io.zerows.epoch.corpus.mbse.atom.specification.KModule;
 import io.zerows.epoch.metadata.specification.KJoin;
 import io.zerows.epoch.metadata.specification.KPoint;

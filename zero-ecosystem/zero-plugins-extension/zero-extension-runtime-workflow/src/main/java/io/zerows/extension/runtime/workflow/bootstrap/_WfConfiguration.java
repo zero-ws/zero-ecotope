@@ -5,7 +5,7 @@ import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.application.YmlCore;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.epoch.corpus.database.Database;
+import io.zerows.epoch.database.Database;
 import io.zerows.management.OZeroStore;
 import io.zerows.support.Ut;
 import io.zerows.extension.runtime.skeleton.eon.KeMsg;

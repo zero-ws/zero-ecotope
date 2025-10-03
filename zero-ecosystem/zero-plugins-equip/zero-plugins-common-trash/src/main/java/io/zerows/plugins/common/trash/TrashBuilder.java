@@ -4,7 +4,7 @@ import io.vertx.codegen.annotations.Fluent;
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.corpus.database.jooq.JooqInfix;
+import io.zerows.epoch.database.jooq.JooqInfix;
 import io.zerows.component.log.Annal;
 import io.zerows.support.Ut;
 import org.jooq.*;

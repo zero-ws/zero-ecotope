@@ -6,7 +6,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.Annal;
-import io.zerows.epoch.component.normalize.Oneness;
+import io.zerows.component.normalize.Oneness;
 import io.zerows.platform.constant.VPath;
 import io.zerows.epoch.configuration.MDConfiguration;
 import io.zerows.epoch.configuration.MDConnect;

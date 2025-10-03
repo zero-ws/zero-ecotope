@@ -7,7 +7,7 @@ import io.zerows.platform.metadata.KDS;
 import io.zerows.platform.metadata.KDatabase;
 import io.zerows.platform.metadata.KArk;
 import io.zerows.platform.constant.VOption;
-import io.zerows.epoch.corpus.database.Database;
+import io.zerows.epoch.database.Database;
 import io.zerows.platform.enums.EmDS;
 import io.zerows.support.Ut;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XApp;

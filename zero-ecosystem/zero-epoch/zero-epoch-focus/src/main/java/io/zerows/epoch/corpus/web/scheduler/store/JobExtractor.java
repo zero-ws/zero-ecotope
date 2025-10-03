@@ -4,7 +4,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Job;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
-import io.zerows.epoch.component.extract.Extractor;
+import io.zerows.component.extract.Extractor;
 import io.zerows.platform.constant.VPath;
 import io.zerows.platform.constant.VString;
 import io.zerows.epoch.corpus.web.scheduler.atom.Mission;
