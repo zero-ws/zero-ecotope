@@ -1,7 +1,7 @@
 package io.zerows.epoch.corpus.io.uca.response.hooker;
 
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.web.Envelop;
 
 import java.lang.reflect.Method;
 

@@ -2,7 +2,7 @@ package io.zerows.component.parameter;
 
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.platform.metadata.KRef;
-import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.web.Envelop;
 import io.zerows.platform.exception._60050Exception501NotSupport;
 import io.zerows.support.Ut;
 

@@ -3,7 +3,7 @@ package io.zerows.extension.runtime.crud.uca.desk;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.web.Envelop;
 import io.zerows.epoch.metadata.commune.Vis;
 import io.zerows.epoch.metadata.specification.KJoin;
 import io.zerows.epoch.metadata.specification.KPoint;

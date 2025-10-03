@@ -1,10 +1,10 @@
 package io.zerows.epoch.corpus.container.store.uri;
 
 import io.zerows.epoch.annotations.Address;
-import io.zerows.epoch.corpus.model.Event;
-import io.zerows.epoch.corpus.model.Receipt;
-import io.zerows.epoch.corpus.model.action.OActorComponent;
-import io.zerows.epoch.mem.OCacheActor;
+import io.zerows.epoch.basicore.ActorComponent;
+import io.zerows.epoch.basicore.Event;
+import io.zerows.epoch.basicore.Receipt;
+import io.zerows.epoch.management.OCacheActor;
 import io.zerows.support.Ut;
 
 import java.lang.annotation.Annotation;
@@ -29,7 +29,7 @@ class UriStore {
         /*
          * Initialize data here.
          */
-        final OActorComponent actor = OCacheActor.entireValue();
+        final ActorComponent actor = OCacheActor.entireValue();
         final Set<Receipt> receipts = actor.getReceipts();
         final ConcurrentMap<String, Receipt> receiptMap = Ut.elementMap(new ArrayList<>(receipts), Receipt::getAddress);
         final Set<Event> events = actor.getEvents();

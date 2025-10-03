@@ -9,7 +9,7 @@ import io.zerows.component.serialization.ZeroType;
 import io.zerows.platform.constant.VValue;
 import io.zerows.epoch.corpus.exception._40017Exception500WorkerArgument;
 import io.zerows.epoch.corpus.exception._40018Exception500AsyncSignature;
-import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.web.Envelop;
 import io.zerows.support.Ut;
 
 import java.lang.reflect.InvocationTargetException;

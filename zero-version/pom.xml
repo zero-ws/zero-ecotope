@@ -44,12 +44,7 @@
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-epoch-configuration</artifactId>
-                <version>${zero.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.zerows</groupId>
-                <artifactId>zero-epoch-management</artifactId>
+                <artifactId>zero-epoch-setting</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>

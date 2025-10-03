@@ -9,7 +9,7 @@ import io.zerows.epoch.annotations.Infusion;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
-import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.commerce.rbac.eon.Addr;
 import io.zerows.extension.commerce.rbac.uca.acl.relation.IdcStub;
 import io.zerows.plugins.office.excel.ExcelClient;

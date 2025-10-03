@@ -2,7 +2,7 @@ package io.zerows.extension.runtime.ambient.bootstrap;
 
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
-import io.zerows.component.injection.DiPlugin;
+import io.zerows.epoch.metacore.DiPlugin;
 import io.zerows.extension.runtime.ambient.agent.service.file.DocBStub;
 import io.zerows.extension.runtime.ambient.agent.service.file.DocBuilder;
 import io.zerows.extension.runtime.skeleton.osgi.spi.extension.Init;

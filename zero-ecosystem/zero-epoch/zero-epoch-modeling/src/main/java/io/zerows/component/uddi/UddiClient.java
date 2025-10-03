@@ -2,7 +2,7 @@ package io.zerows.component.uddi;
 
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
-import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.web.Envelop;
 
 import java.lang.reflect.Method;
 

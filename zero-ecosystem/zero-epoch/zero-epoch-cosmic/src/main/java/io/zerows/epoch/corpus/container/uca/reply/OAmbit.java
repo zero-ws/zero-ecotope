@@ -4,7 +4,7 @@ import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.support.Ut;
-import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.web.Envelop;
 
 /**
  * AOP 模式下的处理流程，前置和后置都带特定的处理流程，以保证 AOP 的完整性

@@ -1,7 +1,7 @@
 package io.zerows.epoch.corpus.io.uca.response.wrap;
 
 import io.vertx.core.http.HttpServerResponse;
-import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.web.Envelop;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>

@@ -14,12 +14,13 @@
     <packaging>pom</packaging>
     <modules>
         <module>zero-epoch-use</module>
-        <module>zero-epoch-configuration</module>
-        <module>zero-epoch-management</module>
         <!--
-        - memory：内存管理，负责内存的基础分配管理模块
-        - configuration：配置管理，负责系统配置的加载与管理
+        - 设置模块，主要提供基础层之上的支持功能，其中包括
+          - io.zerows.epoch.boot:               启动器
+          - io.zerows.epoch.configuration:      配置
+          - io.zerows.epoch.management:         基本管理功能
         -->
+        <module>zero-epoch-setting</module>
         <module>zero-epoch-store</module>
         <module>zero-epoch-modeling</module>
         <module>zero-epoch-focus</module>

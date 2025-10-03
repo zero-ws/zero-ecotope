@@ -4,7 +4,7 @@ import io.vertx.core.eventbus.EventBus;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.epoch.annotations.Off;
 import io.zerows.support.Ut;
-import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.web.Envelop;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;

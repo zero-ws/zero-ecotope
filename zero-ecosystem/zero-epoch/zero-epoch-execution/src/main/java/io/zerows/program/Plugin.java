@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.OLog;
 import io.zerows.epoch.application.YmlCore;
-import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.web.Envelop;
 import io.zerows.management.OZeroStore;
 import io.zerows.support.Ut;
 

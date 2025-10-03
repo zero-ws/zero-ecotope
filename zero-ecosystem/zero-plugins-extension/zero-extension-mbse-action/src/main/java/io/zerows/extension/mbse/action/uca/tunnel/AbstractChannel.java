@@ -8,7 +8,7 @@ import io.zerows.epoch.annotations.Contract;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.corpus.mbse.atom.runner.ActIn;
 import io.zerows.epoch.corpus.mbse.atom.runner.ActOut;
-import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.web.Envelop;
 import io.zerows.epoch.corpus.web.scheduler.atom.Mission;
 import io.zerows.epoch.sdk.modeling.Commercial;
 import io.zerows.extension.mbse.action.exception._80407Exception501ChannelError;

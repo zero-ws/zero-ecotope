@@ -1,7 +1,7 @@
 package io.zerows.epoch.corpus.io.zdk;
 
 import io.vertx.core.Handler;
-import io.zerows.epoch.corpus.model.Event;
+import io.zerows.epoch.basicore.Event;
 
 /**
  * Hunt to aim and select the objective

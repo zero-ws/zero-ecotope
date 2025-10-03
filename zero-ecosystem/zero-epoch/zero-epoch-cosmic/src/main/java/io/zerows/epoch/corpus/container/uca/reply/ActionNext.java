@@ -2,7 +2,7 @@ package io.zerows.epoch.corpus.container.uca.reply;
 
 import io.vertx.core.Future;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.web.Envelop;
 
 /**
  * @author lang : 2024-06-27

@@ -7,7 +7,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.platform.constant.VString;
 import io.zerows.epoch.corpus.mbse.atom.specification.KModule;
 import io.zerows.epoch.metadata.specification.KJoin;
-import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.web.Envelop;
 import io.zerows.support.Ut;
 import io.zerows.extension.runtime.crud.bootstrap.IxPin;
 import io.zerows.extension.runtime.crud.exception._80100Exception404ModuleMissing;

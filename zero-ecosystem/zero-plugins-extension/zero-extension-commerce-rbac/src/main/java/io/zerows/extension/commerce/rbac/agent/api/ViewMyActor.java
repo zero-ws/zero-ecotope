@@ -8,7 +8,7 @@ import io.zerows.component.qr.syntax.Ir;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.commerce.rbac.agent.service.accredit.ActionStub;
 import io.zerows.extension.commerce.rbac.agent.service.view.PersonalStub;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.SViewDao;

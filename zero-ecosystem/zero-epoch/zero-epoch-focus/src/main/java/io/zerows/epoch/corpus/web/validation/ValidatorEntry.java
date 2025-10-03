@@ -3,14 +3,14 @@ package io.zerows.epoch.corpus.web.validation;
 import io.reactivex.rxjava3.core.Observable;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.basicore.Event;
 import io.zerows.epoch.constant.KWeb;
-import io.zerows.platform.constant.VString;
 import io.zerows.epoch.corpus.io.annotations.BodyParam;
 import io.zerows.epoch.corpus.io.atom.WrapRequest;
-import io.zerows.epoch.corpus.model.Event;
 import io.zerows.epoch.corpus.model.Rule;
 import io.zerows.epoch.corpus.web.exception._60000Exception400Validation;
-import io.zerows.management.cache.CStore;
+import io.zerows.management.OCacheStore;
+import io.zerows.platform.constant.VString;
 import io.zerows.support.Ut;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
@@ -32,7 +32,7 @@ public class ValidatorEntry {
 
     private static final ConcurrentMap<String, Map<String, List<Rule>>>
         RULERS = new ConcurrentHashMap<>();
-    private static final ConcurrentMap<String, JsonObject> STORED = CStore.CC_CODEX.get();
+    private static final ConcurrentMap<String, JsonObject> STORED = OCacheStore.CC_CODEX.get();
 
     /**
      * Validate the method parameters based on javax.validation: Hibernate Validator.

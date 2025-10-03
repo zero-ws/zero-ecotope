@@ -3,7 +3,7 @@ package io.zerows.epoch.corpus.model.uca.extract;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.unit.TestContext;
 import io.vertx.quiz.example.RMethod1;
-import io.zerows.component.extract.ToolMethod;
+import io.zerows.epoch.metacore.ExtractToolMethod;
 import io.zerows.epoch.testsuite.ZeroBase;
 import org.junit.Test;
 
@@ -15,7 +15,7 @@ public class MethodResolverTc extends ZeroBase {
     public void testMethod1(final TestContext context)
         throws NoSuchMethodException {
         final Method method = RMethod1.class.getDeclaredMethod("sayHell");
-        final HttpMethod httpMethod = ToolMethod.resolve(method);
+        final HttpMethod httpMethod = ExtractToolMethod.resolve(method);
         context.assertEquals(HttpMethod.GET, httpMethod);
     }
 
@@ -23,7 +23,7 @@ public class MethodResolverTc extends ZeroBase {
     public void testMethod2(final TestContext context)
         throws NoSuchMethodException {
         final Method method = RMethod1.class.getDeclaredMethod("sayHell1");
-        final HttpMethod httpMethod = ToolMethod.resolve(method);
+        final HttpMethod httpMethod = ExtractToolMethod.resolve(method);
         context.assertNull(httpMethod);
     }
 }

@@ -20,14 +20,5 @@
             <groupId>io.zerows</groupId>
             <artifactId>zero-epoch-store</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>io.vertx</groupId>
-            <artifactId>vertx-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-        </dependency>
     </dependencies>
 </project>

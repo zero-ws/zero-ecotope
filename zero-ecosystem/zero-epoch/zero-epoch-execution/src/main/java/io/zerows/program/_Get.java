@@ -2,7 +2,7 @@ package io.zerows.program;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.web.Envelop;
 import io.zerows.epoch.metadata.commune.Vis;
 
 /**

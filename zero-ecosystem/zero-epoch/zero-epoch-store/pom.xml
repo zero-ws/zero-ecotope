@@ -14,7 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-epoch-management</artifactId>
+            <artifactId>zero-epoch-setting</artifactId>
         </dependency>
 
         <dependency>

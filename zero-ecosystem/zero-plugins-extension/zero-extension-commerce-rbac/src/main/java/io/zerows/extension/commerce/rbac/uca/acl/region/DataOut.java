@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.Annal;
 import io.zerows.component.qr.syntax.Ir;
 import io.zerows.platform.constant.VValue;
-import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.web.Envelop;
 import io.zerows.support.Ut;
 import io.zerows.sdk.security.Acl;
 import io.zerows.extension.commerce.rbac.eon.AuthMsg;

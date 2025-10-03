@@ -1,7 +1,7 @@
 package io.zerows.support;
 
+import io.zerows.management.OCacheStore;
 import io.zerows.platform.constant.VValue;
-import io.zerows.management.cache.CStore;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -53,7 +53,7 @@ class Service {
         if (Objects.isNull(interfaceCls) || !interfaceCls.isInterface()) {
             return null;
         }
-        return (T) CStore.CC_SPI.pick(() -> {
+        return (T) OCacheStore.CC_SPI.pick(() -> {
             // AeonService instance
             final Service service = new Service(interfaceCls, loader);
             return service.service();

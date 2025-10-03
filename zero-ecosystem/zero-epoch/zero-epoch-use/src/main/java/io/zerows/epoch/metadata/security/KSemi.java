@@ -3,8 +3,8 @@ package io.zerows.epoch.metadata.security;
 import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.zerows.epoch.exception._60058Exception409DmComponent;
+import io.zerows.management.OCacheStore;
 import io.zerows.platform.enums.EmSecure;
-import io.zerows.management.cache.CStoreSecurity;
 import io.zerows.sdk.security.HAdmit;
 
 import java.util.Objects;
@@ -26,7 +26,7 @@ public class KSemi {
     public static KSemi create(final KPermit permit) {
         Objects.requireNonNull(permit);
         // 缓存组件，和 KPermit 一致
-        return CStoreSecurity.CC_SEMI.pick(() -> new KSemi(permit), permit.keyCache());
+        return OCacheStore.CC_SEMI.pick(() -> new KSemi(permit), permit.keyCache());
     }
 
     // DM -> configure

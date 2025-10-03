@@ -7,7 +7,7 @@ import io.zerows.platform.constant.VString;
 import io.zerows.platform.enums.app.HttpStatusCode;
 import io.zerows.epoch.corpus.io.uca.response.wrap.WingSelector;
 import io.zerows.epoch.corpus.io.uca.response.wrap.Wings;
-import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.web.Envelop;
 import jakarta.ws.rs.core.MediaType;
 
 import java.time.Instant;

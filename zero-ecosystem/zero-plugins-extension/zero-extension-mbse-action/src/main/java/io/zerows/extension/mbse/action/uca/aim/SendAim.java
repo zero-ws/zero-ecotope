@@ -11,7 +11,7 @@ import io.zerows.epoch.configuration.NodeNetwork;
 import io.zerows.epoch.corpus.container.uca.mode.Answer;
 import io.zerows.epoch.corpus.container.uca.reply.ActionNext;
 import io.zerows.epoch.corpus.container.uca.reply.OAmbit;
-import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.web.Envelop;
 import io.zerows.management.OCacheNode;
 import io.zerows.extension.mbse.action.atom.JtUri;
 import io.zerows.extension.mbse.action.uca.monitor.JtMonitor;

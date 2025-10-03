@@ -4,7 +4,7 @@ import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.unit.TestContext;
 import io.zerows.component.serialization.ZeroType;
-import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.web.Envelop;
 import io.zerows.epoch.testsuite.ZeroBase;
 import org.junit.Assert;
 import org.junit.Test;

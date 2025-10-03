@@ -3,13 +3,13 @@ package io.zerows.epoch.corpus.web.websocket.store;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.constant.DefaultClass;
 import io.zerows.epoch.constant.KName;
-import io.zerows.component.extract.Extractor;
-import io.zerows.component.extract.ToolMethod;
-import io.zerows.component.extract.ToolVerifier;
-import io.zerows.platform.constant.VString;
 import io.zerows.epoch.corpus.web.websocket.annotations.Subscribe;
 import io.zerows.epoch.corpus.web.websocket.atom.Remind;
 import io.zerows.epoch.corpus.web.websocket.eon.em.RemindType;
+import io.zerows.epoch.metacore.ExtractToolMethod;
+import io.zerows.epoch.metacore.ExtractToolVerifier;
+import io.zerows.epoch.metacore.Extractor;
+import io.zerows.platform.constant.VString;
 import io.zerows.support.Ut;
 
 import java.lang.annotation.Annotation;
@@ -26,13 +26,13 @@ public class SockExtractor implements Extractor<Set<Remind>> {
     @Override
     public Set<Remind> extract(final Class<?> clazz) {
         // 1. Class verify
-        ToolVerifier.noArg(clazz);
-        ToolVerifier.modifier(clazz);
+        ExtractToolVerifier.noArg(clazz);
+        ExtractToolVerifier.modifier(clazz);
         // 2. Scan method to find @WebSocket
         final Set<Remind> websockets = new HashSet<>();
         final Method[] methods = clazz.getDeclaredMethods();
         Arrays.stream(methods)
-            .filter(ToolMethod::isValid)
+            .filter(ExtractToolMethod::isValid)
             .filter(method -> method.isAnnotationPresent(Subscribe.class))
             .map(this::extract)
             .forEach(websockets::add);

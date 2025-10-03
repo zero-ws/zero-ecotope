@@ -1,7 +1,7 @@
 package io.zerows.epoch.corpus.web.scheduler.zdk;
 
 import io.vertx.core.Future;
-import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.web.Envelop;
 
 /*
  * Job outcome, this outcome interface should provide Future<JobOut> to action

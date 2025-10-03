@@ -5,9 +5,9 @@ import io.vertx.core.Handler;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.component.uddi.Uddi;
 import io.zerows.component.uddi.UddiClient;
+import io.zerows.epoch.basicore.Event;
 import io.zerows.epoch.corpus.io.zdk.Aim;
-import io.zerows.epoch.corpus.model.Event;
-import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.web.Envelop;
 
 public class AimIpc extends AbstractAim implements Aim<RoutingContext> {
 

@@ -1,6 +1,6 @@
 package io.zerows.epoch.boot;
 
-import io.zerows.epoch.corpus.container.eon.em.FeatureMark;
+import io.zerows.epoch.boot.internal.FeatureMark;
 import io.zerows.specification.configuration.HConfig;
 
 import java.util.Objects;

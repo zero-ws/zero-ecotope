@@ -5,7 +5,7 @@ import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.Message;
 import io.zerows.epoch.corpus.exception._60027Exception501RpcReject;
-import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.web.Envelop;
 import io.zerows.platform.exception._60050Exception501NotSupport;
 
 import java.lang.reflect.Method;

@@ -8,7 +8,7 @@ import io.vertx.core.eventbus.EventBus;
 import io.zerows.component.log.OLog;
 import io.zerows.platform.metadata.KRef;
 import io.zerows.epoch.configuration.NodeNetwork;
-import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.web.Envelop;
 import io.zerows.epoch.corpus.web.scheduler.atom.Mission;
 import io.zerows.epoch.corpus.web.scheduler.eon.MessageOfJob;
 import io.zerows.epoch.corpus.web.scheduler.zdk.JobOutcome;

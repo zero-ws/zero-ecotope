@@ -4,7 +4,7 @@ import io.netty.handler.codec.http.HttpResponseStatus;
 import io.r2mo.typed.webflow.WebState;
 import io.vertx.core.Future;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.web.Envelop;
 
 /**
  * @author lang : 2024-06-27

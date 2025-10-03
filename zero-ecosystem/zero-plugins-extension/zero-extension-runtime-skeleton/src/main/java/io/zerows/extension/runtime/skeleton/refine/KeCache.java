@@ -5,7 +5,7 @@ import io.vertx.core.http.HttpServerRequest;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.component.log.Annal;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.mem.OCacheUri;
+import io.zerows.epoch.management.OCacheUri;
 import io.zerows.epoch.metadata.commune.Vis;
 import io.zerows.epoch.spi.channel.KIncome;
 import io.zerows.epoch.spi.channel.Pocket;

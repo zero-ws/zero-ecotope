@@ -1,7 +1,7 @@
 package io.zerows.extension.mbse.action.uca.param;
 
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.web.Envelop;
 import io.zerows.management.OZeroStore;
 import io.zerows.support.Ut;
 import io.zerows.extension.mbse.action.atom.JtUri;

@@ -1,9 +1,9 @@
 package io.zerows.epoch.corpus.io.uca.request.mime;
 
 import io.r2mo.typed.exception.WebException;
+import io.zerows.epoch.basicore.Event;
 import io.zerows.epoch.corpus.io.uca.request.mime.parse.Income;
-import io.zerows.epoch.corpus.model.Event;
-import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.web.Envelop;
 
 /**
  * Mime resolution for web request

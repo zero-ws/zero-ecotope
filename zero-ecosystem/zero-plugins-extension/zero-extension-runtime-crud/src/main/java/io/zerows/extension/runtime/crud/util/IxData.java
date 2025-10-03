@@ -10,7 +10,7 @@ import io.zerows.epoch.database.jooq.operation.UxJooq;
 import io.zerows.epoch.database.jooq.util.JqAnalyzer;
 import io.zerows.epoch.corpus.mbse.atom.specification.KModule;
 import io.zerows.epoch.metadata.specification.KField;
-import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.web.Envelop;
 import io.zerows.support.Ut;
 import io.zerows.extension.runtime.crud.bootstrap.IxPin;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;

@@ -3,7 +3,7 @@ package io.zerows.extension.mbse.action.uca.tunnel;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KWeb;
-import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.web.Envelop;
 import io.zerows.epoch.corpus.web.cache.Rapid;
 import io.zerows.epoch.database.Database;
 import io.zerows.epoch.metadata.commune.XHeader;

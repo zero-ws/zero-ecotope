@@ -2,15 +2,15 @@ package io.zerows.epoch.metadata.cloud;
 
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonObject;
+import io.zerows.management.OCacheStore;
 import io.zerows.platform.annotations.Memory;
-import io.zerows.management.cache.CStore;
 import io.zerows.specification.development.ncloud.HAeon;
 import io.zerows.specification.development.ncloud.HStarter;
 
 /**
  * @author lang : 2023/5/2
  */
-public interface CStoreCloud extends CStore {
+public interface CStoreCloud extends OCacheStore {
 
 
     /*

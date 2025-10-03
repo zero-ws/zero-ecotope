@@ -5,19 +5,19 @@ import io.vertx.core.Future;
 import io.vertx.core.http.HttpHeaders;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.epoch.annotations.Codex;
 import io.zerows.component.log.Annal;
-import io.zerows.platform.metadata.Kv;
-import io.zerows.component.injection.OProxyInstance;
+import io.zerows.epoch.annotations.Codex;
+import io.zerows.epoch.basicore.Event;
 import io.zerows.epoch.corpus.container.exception._60052Exception411ContentLength;
 import io.zerows.epoch.corpus.container.uca.reply.ActionNext;
 import io.zerows.epoch.corpus.container.uca.reply.OAmbit;
 import io.zerows.epoch.corpus.io.atom.WrapRequest;
-import io.zerows.epoch.corpus.model.Event;
 import io.zerows.epoch.corpus.model.Rule;
-import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.web.Envelop;
 import io.zerows.epoch.corpus.web.validation.ValidatorEntry;
 import io.zerows.epoch.corpus.web.validation.uca.combine.Rigor;
+import io.zerows.epoch.metacore.DiProxyInstance;
+import io.zerows.platform.metadata.Kv;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
@@ -121,7 +121,7 @@ class Flower {
         WebException error = null;
         try {
             final Object delegate;
-            if (proxy instanceof final OProxyInstance proxyInstance) {
+            if (proxy instanceof final DiProxyInstance proxyInstance) {
                 // Validation for dynamic proxy
                 delegate = proxyInstance.proxy();
             } else {

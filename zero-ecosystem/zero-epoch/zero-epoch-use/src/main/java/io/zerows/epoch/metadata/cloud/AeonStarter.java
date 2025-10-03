@@ -3,6 +3,7 @@ package io.zerows.epoch.metadata.cloud;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.HName;
+import io.zerows.management.OCacheStore;
 import io.zerows.specification.atomic.HCommand;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.development.ncloud.HNovae;
@@ -84,7 +85,7 @@ public class AeonStarter implements HStarter, Serializable {
         if (Objects.isNull(instanceCls)) {
             return null;
         }
-        final HCommand.Async event = CStoreCloud.CCT_EVENT.pick(() -> {
+        final HCommand.Async event = OCacheStore.CCT_EVENT.pick(() -> {
             final HCommand.Async instance = Ut.instance(instanceCls);
             instance.bind(vertx);
             return instance;

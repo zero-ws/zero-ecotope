@@ -4,11 +4,11 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
+import io.zerows.management.OCacheStore;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.enums.EmSecure;
-import io.zerows.management.cache.CStoreSecurity;
-import io.zerows.support.Ut;
 import io.zerows.sdk.security.HAdmit;
+import io.zerows.support.Ut;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -95,7 +95,7 @@ public class KCatena implements Serializable {
             return null;
         }
 
-        final HAdmit dm = (HAdmit) CStoreSecurity.CCT_EVENT.pick(() -> Ut.instance(admitCls),
+        final HAdmit dm = (HAdmit) OCacheStore.CCT_EVENT.pick(() -> Ut.instance(admitCls),
             // <sigma> / <name>
             sigma + VString.SLASH + admitCls.getName());
         return dm.bind(sigma);
@@ -108,7 +108,7 @@ public class KCatena implements Serializable {
         final String code = Ut.valueString(requestJ, KName.CODE);
         Ut.requireNonNull(sigma, code);
         // 此处 Permit
-        return CStoreSecurity.CC_PERMIT.pick(() -> permit(requestJ), sigma + VString.SLASH + code);
+        return OCacheStore.CC_PERMIT.pick(() -> permit(requestJ), sigma + VString.SLASH + code);
     }
 
     // ----------- 单独取数 -----------

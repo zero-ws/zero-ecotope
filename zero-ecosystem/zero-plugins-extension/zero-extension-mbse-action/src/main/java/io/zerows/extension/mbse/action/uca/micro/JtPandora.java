@@ -4,7 +4,7 @@ import io.r2mo.function.Fn;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.zerows.platform.metadata.KRef;
-import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.web.Envelop;
 import io.zerows.epoch.corpus.web.scheduler.atom.Mission;
 import io.zerows.platform.enums.app.EmTraffic;
 import io.zerows.support.Ut;

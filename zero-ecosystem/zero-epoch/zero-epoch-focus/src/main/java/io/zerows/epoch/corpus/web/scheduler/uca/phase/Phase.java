@@ -3,7 +3,7 @@ package io.zerows.epoch.corpus.web.scheduler.uca.phase;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
-import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.web.Envelop;
 import io.zerows.epoch.corpus.web.scheduler.atom.Mission;
 
 /*

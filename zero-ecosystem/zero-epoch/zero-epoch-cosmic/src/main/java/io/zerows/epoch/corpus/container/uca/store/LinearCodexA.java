@@ -1,11 +1,11 @@
 package io.zerows.epoch.corpus.container.uca.store;
 
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.corpus.model.running.RunVertx;
+import io.zerows.management.OCacheStore;
 import io.zerows.platform.constant.VPath;
 import io.zerows.platform.constant.VString;
-import io.zerows.epoch.corpus.model.running.RunVertx;
 import io.zerows.platform.exception._11002Exception500EmptyIo;
-import io.zerows.management.cache.CStore;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,7 +24,7 @@ class LinearCodexA implements StubLinear {
         rules.forEach(rule -> {
             try {
                 // Codex 文件定义了相关规则
-                final ConcurrentMap<String, JsonObject> store = CStore.CC_CODEX.get();
+                final ConcurrentMap<String, JsonObject> store = OCacheStore.CC_CODEX.get();
                 // 移除
                 store.remove(rule.substring(0, rule.lastIndexOf(VString.DOT)));
             } catch (final _11002Exception500EmptyIo ex) {
@@ -43,7 +43,7 @@ class LinearCodexA implements StubLinear {
 
 
                 // Codex 文件定义了相关规则
-                final ConcurrentMap<String, JsonObject> store = CStore.CC_CODEX.get();
+                final ConcurrentMap<String, JsonObject> store = OCacheStore.CC_CODEX.get();
                 // 追加
                 store.put(rule.substring(0, rule.lastIndexOf(VString.DOT)), ruleData);
             } catch (final _11002Exception500EmptyIo ex) {

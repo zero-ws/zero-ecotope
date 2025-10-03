@@ -3,7 +3,6 @@ package io.zerows.epoch.boot;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.zerows.epoch.application.YmlCore;
-import io.zerows.epoch.boot.impl.BootStore;
 import io.zerows.epoch.metadata.cloud.LogCloud;
 import io.zerows.management.OZeroStore;
 import io.zerows.specification.configuration.HConfig;

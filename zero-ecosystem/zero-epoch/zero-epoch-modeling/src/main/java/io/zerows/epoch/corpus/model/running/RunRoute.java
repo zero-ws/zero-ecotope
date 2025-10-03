@@ -2,8 +2,8 @@ package io.zerows.epoch.corpus.model.running;
 
 import io.vertx.ext.web.Route;
 import io.vertx.ext.web.Router;
+import io.zerows.epoch.basicore.Event;
 import io.zerows.platform.constant.VString;
-import io.zerows.epoch.corpus.model.Event;
 
 import java.io.Serializable;
 import java.util.Objects;

@@ -7,11 +7,11 @@ import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.component.injection.OProxyInstance;
+import io.zerows.epoch.basicore.Event;
 import io.zerows.epoch.configuration.NodeNetwork;
 import io.zerows.epoch.corpus.io.zdk.Aim;
-import io.zerows.epoch.corpus.model.Event;
-import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.web.Envelop;
+import io.zerows.epoch.metacore.DiProxyInstance;
 import io.zerows.management.OCacheNode;
 import io.zerows.program.Ux;
 
@@ -92,7 +92,7 @@ public class AimAsync extends AbstractAim implements Aim<RoutingContext> {
          * Whether it's interface mode or agent mode
          */
         final Future<Envelop> invoked;
-        if (proxy instanceof OProxyInstance) {
+        if (proxy instanceof DiProxyInstance) {
             final JsonObject message = new JsonObject();
             for (int idx = 0; idx < arguments.length; idx++) {
                 message.put(String.valueOf(idx), arguments[idx]);

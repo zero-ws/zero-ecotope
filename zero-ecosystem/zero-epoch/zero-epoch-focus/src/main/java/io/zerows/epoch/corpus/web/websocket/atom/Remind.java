@@ -3,8 +3,8 @@ package io.zerows.epoch.corpus.web.websocket.atom;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.r2mo.typed.cc.Cc;
-import io.zerows.component.injection.DiPlugin;
 import io.zerows.epoch.corpus.web.websocket.eon.em.RemindType;
+import io.zerows.epoch.metacore.DiPlugin;
 import io.zerows.integrated.jackson.ClassDeserializer;
 import io.zerows.integrated.jackson.ClassSerializer;
 

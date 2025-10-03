@@ -12,7 +12,7 @@ import io.zerows.component.log.OLog;
 import io.zerows.component.uddi.Uddi;
 import io.zerows.component.uddi.UddiClient;
 import io.zerows.platform.constant.VValue;
-import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.web.Envelop;
 import io.zerows.platform.enums.modeling.EmValue;
 import io.zerows.support.Ut;
 

@@ -6,7 +6,7 @@ import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.Session;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
-import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.commerce.rbac.agent.service.business.UserStub;
 import io.zerows.extension.commerce.rbac.agent.service.login.LoginStub;
 import io.zerows.extension.commerce.rbac.eon.Addr;

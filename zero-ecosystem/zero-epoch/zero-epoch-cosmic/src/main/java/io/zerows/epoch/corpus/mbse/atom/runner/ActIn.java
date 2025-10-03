@@ -7,7 +7,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.platform.metadata.KMap;
 import io.zerows.epoch.corpus.container.exception._40064Exception500ActSpecification;
-import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.web.Envelop;
 import io.zerows.specification.modeling.HRecord;
 
 import java.io.File;

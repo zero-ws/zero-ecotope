@@ -2,7 +2,7 @@ package io.zerows.program;
 
 import io.vertx.core.Future;
 import io.vertx.core.shareddata.ClusterSerializable;
-import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.web.Envelop;
 import io.zerows.support.Ut;
 
 import java.util.function.Function;

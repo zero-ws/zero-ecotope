@@ -5,7 +5,7 @@ import io.vertx.core.Vertx;
 import io.zerows.component.log.OLog;
 import io.zerows.platform.metadata.KRef;
 import io.zerows.component.parameter.ParameterBuilder;
-import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.web.Envelop;
 import io.zerows.epoch.corpus.web.exception._60041Exception417JobMethod;
 import io.zerows.epoch.corpus.web.scheduler.atom.Mission;
 import io.zerows.epoch.corpus.web.scheduler.eon.MessageOfJob;

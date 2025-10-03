@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.platform.enums.typed.ChangeFlag;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
-import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.runtime.crud.eon.Addr;
 import io.zerows.extension.runtime.crud.eon.em.ApiSpec;
 import io.zerows.extension.runtime.crud.uca.desk.IxPanel;

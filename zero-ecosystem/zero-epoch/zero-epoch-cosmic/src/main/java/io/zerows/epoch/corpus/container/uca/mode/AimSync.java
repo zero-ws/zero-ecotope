@@ -3,9 +3,9 @@ package io.zerows.epoch.corpus.container.uca.mode;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.ext.web.RoutingContext;
+import io.zerows.epoch.basicore.Event;
 import io.zerows.epoch.corpus.io.zdk.Aim;
-import io.zerows.epoch.corpus.model.Event;
-import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.web.Envelop;
 
 /**
  * SyncAim: Non-Event Bus: Request-Response

@@ -8,7 +8,7 @@ import io.vertx.core.VertxException;
 import io.vertx.core.WorkerExecutor;
 import io.zerows.epoch.annotations.Contract;
 import io.zerows.component.log.OLog;
-import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.web.Envelop;
 import io.zerows.epoch.corpus.web.scheduler.atom.Mission;
 import io.zerows.epoch.corpus.web.scheduler.eon.MessageOfJob;
 import io.zerows.epoch.corpus.web.scheduler.uca.phase.Phase;

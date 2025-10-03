@@ -2,10 +2,10 @@ package io.zerows.component.normalize;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.configuration.MDConfiguration;
-import io.zerows.epoch.configuration.MDId;
 import io.zerows.epoch.configuration.MDConnect;
 import io.zerows.epoch.configuration.MDEntity;
-import io.zerows.epoch.mem.module.OCacheConfiguration;
+import io.zerows.epoch.configuration.MDId;
+import io.zerows.epoch.management.OCacheConfiguration;
 import org.osgi.framework.Bundle;
 
 import java.util.Set;

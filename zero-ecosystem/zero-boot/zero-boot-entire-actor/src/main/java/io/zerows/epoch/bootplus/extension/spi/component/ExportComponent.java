@@ -9,7 +9,7 @@ import io.zerows.epoch.bootplus.extension.scaffold.component.AbstractAdaptor;
 import io.zerows.epoch.bootplus.extension.scaffold.plugin.AspectSwitcher;
 import io.zerows.epoch.corpus.mbse.atom.runner.ActIn;
 import io.zerows.epoch.corpus.mbse.atom.runner.ActOut;
-import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
 import io.zerows.plugins.office.excel.ExcelClient;

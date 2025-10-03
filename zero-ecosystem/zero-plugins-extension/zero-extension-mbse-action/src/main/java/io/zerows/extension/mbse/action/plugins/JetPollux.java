@@ -8,8 +8,7 @@ import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.corpus.container.handler.CommonEndurer;
 import io.zerows.epoch.corpus.io.uca.routing.OAxis;
 import io.zerows.epoch.corpus.model.running.RunServer;
-import io.zerows.epoch.mem.OCacheUri;
-import io.zerows.support.Ut;
+import io.zerows.epoch.management.OCacheUri;
 import io.zerows.extension.mbse.action.atom.JtConfig;
 import io.zerows.extension.mbse.action.atom.JtUri;
 import io.zerows.extension.mbse.action.bootstrap.JtPin;
@@ -20,6 +19,7 @@ import io.zerows.extension.mbse.action.uca.aim.JtAim;
 import io.zerows.extension.mbse.action.uca.aim.PreAim;
 import io.zerows.extension.mbse.action.uca.aim.SendAim;
 import io.zerows.extension.mbse.action.uca.monitor.JtMonitor;
+import io.zerows.support.Ut;
 import org.osgi.framework.Bundle;
 
 import java.util.Objects;

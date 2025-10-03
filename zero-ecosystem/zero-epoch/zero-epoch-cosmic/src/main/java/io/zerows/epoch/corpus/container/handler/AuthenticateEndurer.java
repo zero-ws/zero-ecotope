@@ -5,7 +5,7 @@ import io.vertx.core.Handler;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.component.log.Annal;
 import io.zerows.epoch.corpus.container.uca.mode.Answer;
-import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.web.Envelop;
 import io.zerows.program.Ux;
 
 /**

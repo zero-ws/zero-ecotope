@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
-import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.commerce.lbs.domain.tables.daos.LCityDao;
 import io.zerows.extension.commerce.lbs.domain.tables.daos.LCountryDao;
 import io.zerows.extension.commerce.lbs.domain.tables.daos.LFloorDao;

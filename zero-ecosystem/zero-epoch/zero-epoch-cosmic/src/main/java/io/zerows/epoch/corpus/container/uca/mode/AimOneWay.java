@@ -6,10 +6,10 @@ import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.ext.web.RoutingContext;
+import io.zerows.epoch.basicore.Event;
 import io.zerows.epoch.configuration.NodeNetwork;
 import io.zerows.epoch.corpus.io.zdk.Aim;
-import io.zerows.epoch.corpus.model.Event;
-import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.web.Envelop;
 import io.zerows.management.OCacheNode;
 
 /**

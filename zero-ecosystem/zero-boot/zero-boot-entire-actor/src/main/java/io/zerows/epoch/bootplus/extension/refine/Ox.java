@@ -9,7 +9,7 @@ import io.zerows.epoch.bootplus.extension.cv.em.TypeLog;
 import io.zerows.epoch.bootplus.extension.uca.code.Numeration;
 import io.zerows.epoch.bootplus.stellar.ArgoStore;
 import io.zerows.epoch.constant.VDBC;
-import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.web.Envelop;
 import io.zerows.epoch.database.cp.DataPool;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.atom.data.DataGroup;

@@ -1,8 +1,8 @@
 package io.zerows.epoch.corpus.container.uca.routing;
 
 import io.vertx.ext.web.Route;
+import io.zerows.epoch.basicore.Event;
 import io.zerows.epoch.corpus.io.uca.routing.OAxisSub;
-import io.zerows.epoch.corpus.model.Event;
 import io.zerows.epoch.corpus.model.running.RunRoute;
 import org.osgi.framework.Bundle;
 

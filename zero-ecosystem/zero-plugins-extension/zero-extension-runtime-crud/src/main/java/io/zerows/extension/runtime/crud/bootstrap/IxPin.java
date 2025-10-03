@@ -6,7 +6,7 @@ import io.zerows.epoch.database.jooq.operation.UxJooq;
 import io.zerows.epoch.corpus.mbse.atom.specification.KModule;
 import io.zerows.epoch.corpus.mbse.uca.mixture.HOne;
 import io.zerows.epoch.corpus.model.Rule;
-import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
 import io.zerows.specification.access.app.HAmbient;

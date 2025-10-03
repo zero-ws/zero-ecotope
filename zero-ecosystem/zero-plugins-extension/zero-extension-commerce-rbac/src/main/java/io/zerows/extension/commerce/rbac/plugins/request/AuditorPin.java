@@ -10,8 +10,8 @@ import io.zerows.component.log.Annal;
 import io.zerows.epoch.application.YmlCore;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.corpus.io.plugins.extension.PlugAuditor;
-import io.zerows.epoch.corpus.model.commune.Envelop;
-import io.zerows.epoch.mem.OCacheUri;
+import io.zerows.epoch.web.Envelop;
+import io.zerows.epoch.management.OCacheUri;
 import io.zerows.extension.runtime.skeleton.eon.KeIpc;
 import io.zerows.program.Ux;
 

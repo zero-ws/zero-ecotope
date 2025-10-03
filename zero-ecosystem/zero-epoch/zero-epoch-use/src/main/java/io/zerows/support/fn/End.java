@@ -4,9 +4,9 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.management.cache.CStore;
-import io.zerows.support.Ut;
+import io.zerows.management.OCacheStore;
 import io.zerows.specification.atomic.HCombiner;
+import io.zerows.support.Ut;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
@@ -46,7 +46,7 @@ class End {
         if (Objects.isNull(clazz)) {
             return Future.succeededFuture(json);
         }
-        final HCombiner<JsonObject> combiner = (HCombiner<JsonObject>) CStore.CC_COMBINER.pick(() -> Ut.instance(clazz), clazz.getName());
+        final HCombiner<JsonObject> combiner = (HCombiner<JsonObject>) OCacheStore.CC_COMBINER.pick(() -> Ut.instance(clazz), clazz.getName());
         return combiner.executeAsync(json);
     }
 

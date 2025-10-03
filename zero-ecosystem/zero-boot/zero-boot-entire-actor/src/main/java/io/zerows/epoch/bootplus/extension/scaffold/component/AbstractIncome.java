@@ -7,7 +7,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Contract;
 import io.zerows.epoch.bootplus.extension.refine.Ox;
 import io.zerows.epoch.constant.KWeb;
-import io.zerows.epoch.corpus.model.commune.Envelop;
+import io.zerows.epoch.web.Envelop;
 import io.zerows.epoch.corpus.web.scheduler.atom.Mission;
 import io.zerows.epoch.corpus.web.scheduler.zdk.JobIncome;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IService;

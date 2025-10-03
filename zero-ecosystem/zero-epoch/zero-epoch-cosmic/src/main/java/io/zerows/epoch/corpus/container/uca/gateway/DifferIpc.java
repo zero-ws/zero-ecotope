@@ -2,10 +2,10 @@ package io.zerows.epoch.corpus.container.uca.gateway;
 
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.component.log.Annal;
+import io.zerows.epoch.basicore.Event;
 import io.zerows.epoch.corpus.container.exception._40013Exception500ReturnType;
 import io.zerows.epoch.corpus.container.uca.mode.AimIpc;
 import io.zerows.epoch.corpus.io.zdk.Aim;
-import io.zerows.epoch.corpus.model.Event;
 import io.zerows.support.Ut;
 
 import java.lang.reflect.Method;

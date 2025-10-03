@@ -8,6 +8,7 @@ import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.Session;
 import io.zerows.component.log.Annal;
 import io.zerows.epoch.corpus.exception._40051Exception500FilterContext;
+import io.zerows.epoch.web.Filter;
 
 import java.util.Map;
 import java.util.Objects;
