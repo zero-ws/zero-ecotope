@@ -1,7 +1,7 @@
 package io.zerows.specification.modeling.property;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.common.shared.program.Kv;
+import io.zerows.component.shared.program.Kv;
 import io.zerows.specification.modeling.HRecord;
 
 /**

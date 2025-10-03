@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.bootplus.extension.migration.tookit.AbstractStatic;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.epoch.enums.Environment;
+import io.zerows.enums.Environment;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.OUserDao;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.RUserRoleDao;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.SRoleDao;

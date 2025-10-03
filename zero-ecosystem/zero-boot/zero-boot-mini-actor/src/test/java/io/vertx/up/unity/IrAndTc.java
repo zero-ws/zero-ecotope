@@ -1,7 +1,7 @@
 package io.vertx.up.unity;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.constant.VString;
+import io.zerows.constant.VString;
 import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.testsuite.ZeroBase;
 import org.junit.Assert;

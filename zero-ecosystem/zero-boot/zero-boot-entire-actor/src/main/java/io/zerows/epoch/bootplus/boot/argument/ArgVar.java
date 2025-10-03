@@ -1,6 +1,6 @@
 package io.zerows.epoch.bootplus.boot.argument;
 
-import io.zerows.epoch.common.shared.program.KVar;
+import io.zerows.component.shared.program.KVar;
 
 /**
  * 专用参数变量，直接从 {@link KVar} 继承，而 {@link KVar} 中已经包含了当前变量的相关信息：

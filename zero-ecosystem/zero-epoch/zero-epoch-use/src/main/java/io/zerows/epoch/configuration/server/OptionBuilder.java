@@ -3,7 +3,7 @@ package io.zerows.epoch.configuration.server;
 import io.vertx.core.http.HttpServerOptions;
 import io.zerows.epoch.configuration.option.RpcOptions;
 import io.zerows.epoch.configuration.option.SockOptions;
-import io.zerows.epoch.enums.app.ServerType;
+import io.zerows.enums.app.ServerType;
 import io.zerows.epoch.sdk.options.OptionOfServer;
 
 /**

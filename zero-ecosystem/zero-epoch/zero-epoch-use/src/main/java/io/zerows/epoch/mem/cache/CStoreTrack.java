@@ -1,7 +1,7 @@
 package io.zerows.epoch.mem.cache;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.epoch.common.log.OLog;
+import io.zerows.component.log.OLog;
 
 /**
  * @author lang : 2024-04-17

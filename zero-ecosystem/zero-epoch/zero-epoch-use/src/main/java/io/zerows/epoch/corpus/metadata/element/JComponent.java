@@ -4,11 +4,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.common.log.OLog;
-import io.zerows.epoch.integrated.jackson.databind.ClassDeserializer;
-import io.zerows.epoch.integrated.jackson.databind.ClassSerializer;
-import io.zerows.epoch.integrated.jackson.databind.JsonObjectDeserializer;
-import io.zerows.epoch.integrated.jackson.databind.JsonObjectSerializer;
+import io.zerows.component.log.OLog;
+import io.zerows.integrated.jackson.databind.ClassDeserializer;
+import io.zerows.integrated.jackson.databind.ClassSerializer;
+import io.zerows.integrated.jackson.databind.JsonObjectDeserializer;
+import io.zerows.integrated.jackson.databind.JsonObjectSerializer;
 import io.zerows.epoch.program.Ut;
 
 import java.io.Serializable;

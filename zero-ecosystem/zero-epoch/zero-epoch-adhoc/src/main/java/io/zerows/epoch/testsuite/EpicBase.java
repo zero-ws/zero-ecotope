@@ -3,9 +3,9 @@ package io.zerows.epoch.testsuite;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.common.log.OLog;
-import io.zerows.epoch.common.shared.app.KIntegration;
-import io.zerows.epoch.common.uca.qr.Criteria;
+import io.zerows.component.log.OLog;
+import io.zerows.component.shared.app.KIntegration;
+import io.zerows.component.qr.Criteria;
 import io.zerows.epoch.corpus.database.Database;
 import io.zerows.epoch.program.Ut;
 

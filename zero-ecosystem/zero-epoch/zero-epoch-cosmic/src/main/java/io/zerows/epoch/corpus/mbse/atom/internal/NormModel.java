@@ -1,8 +1,8 @@
 package io.zerows.epoch.corpus.mbse.atom.internal;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.enums.modeling.EmModel;
-import io.zerows.epoch.exception.web._60050Exception501NotSupport;
+import io.zerows.enums.modeling.EmModel;
+import io.zerows.exception.web._60050Exception501NotSupport;
 import io.zerows.epoch.corpus.mbse.atom.KClass;
 import io.zerows.epoch.corpus.mbse.atom.KHybrid;
 import io.zerows.epoch.corpus.mbse.atom.shape.AbstractHModel;

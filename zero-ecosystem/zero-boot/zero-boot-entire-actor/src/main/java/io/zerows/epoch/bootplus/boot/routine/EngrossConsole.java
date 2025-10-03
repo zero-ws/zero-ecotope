@@ -3,7 +3,7 @@ package io.zerows.epoch.bootplus.boot.routine;
 import io.vertx.core.Vertx;
 import io.zerows.epoch.boot.VertxApplication;
 import io.zerows.epoch.boot.supply.Electy;
-import io.zerows.epoch.common.shared.boot.KLauncher;
+import io.zerows.component.shared.boot.KLauncher;
 import io.zerows.plugins.common.shell.ConsoleFramework;
 
 /**

@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.constant.KName;
-import io.zerows.epoch.common.log.Annal;
+import io.zerows.component.log.Annal;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.extension.mbse.basement.domain.tables.daos.MAttributeDao;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MAttribute;

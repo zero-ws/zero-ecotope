@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonArray;
 import io.zerows.epoch.based.constant.KName;
-import io.zerows.epoch.common.shared.datamation.KDictSource;
+import io.zerows.component.shared.datamation.KDictSource;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.underlying.DictionaryPlugin;

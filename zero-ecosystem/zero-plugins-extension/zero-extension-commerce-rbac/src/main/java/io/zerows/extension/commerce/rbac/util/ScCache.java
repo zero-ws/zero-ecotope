@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.epoch.component.environment.DevEnv;
-import io.zerows.epoch.constant.VString;
+import io.zerows.constant.VString;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.web.cache.Rapid;
 import io.zerows.epoch.program.Ut;

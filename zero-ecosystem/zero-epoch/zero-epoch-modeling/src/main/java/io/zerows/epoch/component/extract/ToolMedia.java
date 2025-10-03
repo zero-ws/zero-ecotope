@@ -1,6 +1,6 @@
 package io.zerows.epoch.component.extract;
 
-import io.zerows.epoch.common.log.Annal;
+import io.zerows.component.log.Annal;
 import io.zerows.epoch.program.Ut;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.Produces;

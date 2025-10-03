@@ -7,7 +7,7 @@ import io.vertx.core.Vertx;
 import io.vertx.core.VertxException;
 import io.vertx.core.WorkerExecutor;
 import io.zerows.epoch.annotations.Contract;
-import io.zerows.epoch.common.log.OLog;
+import io.zerows.component.log.OLog;
 import io.zerows.epoch.corpus.model.commune.Envelop;
 import io.zerows.epoch.corpus.web.scheduler.atom.Mission;
 import io.zerows.epoch.corpus.web.scheduler.eon.MessageOfJob;
@@ -16,7 +16,7 @@ import io.zerows.epoch.corpus.web.scheduler.uca.running.JobConfig;
 import io.zerows.epoch.corpus.web.scheduler.uca.running.JobPin;
 import io.zerows.epoch.corpus.web.scheduler.uca.running.JobStore;
 import io.zerows.epoch.corpus.web.scheduler.uca.timer.Interval;
-import io.zerows.epoch.enums.EmJob;
+import io.zerows.enums.EmJob;
 import io.zerows.epoch.program.Ut;
 
 import java.util.Objects;

@@ -3,7 +3,7 @@ package io.zerows.epoch.component.runner;
 import io.r2mo.function.Fn;
 import io.vertx.core.Future;
 import io.vertx.core.eventbus.Message;
-import io.zerows.epoch.common.log.OLog;
+import io.zerows.component.log.OLog;
 import io.zerows.epoch.corpus.exception._40047Exception500InvokerNull;
 import io.zerows.epoch.corpus.model.commune.Envelop;
 import io.zerows.epoch.program.Ut;

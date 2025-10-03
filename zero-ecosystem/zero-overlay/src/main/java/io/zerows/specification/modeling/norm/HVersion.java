@@ -1,6 +1,6 @@
 package io.zerows.specification.modeling.norm;
 
-import io.zerows.epoch.constant.VString;
+import io.zerows.constant.VString;
 
 /**
  * 「版本」Version

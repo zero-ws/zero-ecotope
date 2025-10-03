@@ -1,6 +1,6 @@
 package io.vertx.quiz.example;
 
-import io.zerows.epoch.constant.VString;
+import io.zerows.constant.VString;
 import jakarta.ws.rs.GET;
 
 public class RMethod1 {

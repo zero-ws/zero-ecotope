@@ -1,9 +1,9 @@
 package io.zerows.extension.mbse.basement.uca.jooq;
 
 import io.r2mo.function.Fn;
-import io.zerows.epoch.constant.VValue;
-import io.zerows.epoch.enums.modeling.EmModel;
-import io.zerows.epoch.common.log.Annal;
+import io.zerows.constant.VValue;
+import io.zerows.enums.modeling.EmModel;
+import io.zerows.component.log.Annal;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.atom.data.DataEvent;
 import io.zerows.extension.mbse.basement.atom.element.DataMatrix;

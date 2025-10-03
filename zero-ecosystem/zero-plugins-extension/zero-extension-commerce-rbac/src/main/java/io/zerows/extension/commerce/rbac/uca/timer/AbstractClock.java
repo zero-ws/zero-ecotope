@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.web.cache.Rapid;
 import io.zerows.epoch.sdk.metadata.AbstractAmbiguity;
-import io.zerows.epoch.support.FnBase;
+import io.zerows.support.FnBase;
 import org.osgi.framework.Bundle;
 
 import java.util.ArrayList;

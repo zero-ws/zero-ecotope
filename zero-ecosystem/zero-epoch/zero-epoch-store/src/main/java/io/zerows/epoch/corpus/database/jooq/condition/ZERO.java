@@ -1,6 +1,6 @@
 package io.zerows.epoch.corpus.database.jooq.condition;
 
-import io.zerows.epoch.common.uca.qr.syntax.Ir;
+import io.zerows.component.qr.syntax.Ir;
 import io.zerows.epoch.corpus.database.jooq.condition.date.*;
 import io.zerows.epoch.program.Ut;
 

@@ -1,6 +1,6 @@
 package io.zerows.specification.vital;
 
-import io.zerows.epoch.enums.EmApp;
+import io.zerows.enums.EmApp;
 import io.zerows.specification.access.HBelong;
 import io.zerows.specification.access.app.HAmbient;
 import io.zerows.specification.access.app.HArk;

@@ -14,7 +14,7 @@ import io.zerows.epoch.corpus.web.exception._40038Exception400WallDuplicated;
 import io.zerows.epoch.corpus.web.exception._40040Exception400WallKeyMissing;
 import io.zerows.epoch.corpus.web.exception._40041Exception500WallMethodDuplicated;
 import io.zerows.epoch.corpus.web.exception._40075Exception400WallTypeWrong;
-import io.zerows.epoch.enums.EmSecure;
+import io.zerows.enums.EmSecure;
 import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.sdk.metadata.uca.Inquirer;
 

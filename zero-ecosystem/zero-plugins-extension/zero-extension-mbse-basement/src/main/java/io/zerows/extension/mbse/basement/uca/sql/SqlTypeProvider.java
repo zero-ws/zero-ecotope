@@ -3,7 +3,7 @@ package io.zerows.extension.mbse.basement.uca.sql;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.common.shared.app.KDatabase;
+import io.zerows.component.shared.app.KDatabase;
 import io.zerows.epoch.program.Ut;
 
 import java.util.concurrent.ConcurrentHashMap;

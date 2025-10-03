@@ -1,8 +1,8 @@
 package io.zerows.epoch.sdk.modeling;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.common.shared.datamation.KMap;
-import io.zerows.epoch.common.shared.normalize.KIdentity;
+import io.zerows.component.shared.datamation.KMap;
+import io.zerows.component.shared.normalize.KIdentity;
 import io.zerows.specification.modeling.HRule;
 
 /*

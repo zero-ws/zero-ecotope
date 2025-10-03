@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.based.constant.KName;
-import io.zerows.epoch.common.log.Annal;
+import io.zerows.component.log.Annal;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.metadata.commune.XHeader;
 import io.zerows.epoch.program.Ut;

@@ -9,8 +9,8 @@ import io.vertx.core.Vertx;
 import io.vertx.core.shareddata.AsyncMap;
 import io.vertx.core.shareddata.LocalMap;
 import io.vertx.core.shareddata.SharedData;
-import io.zerows.epoch.common.log.OLog;
-import io.zerows.epoch.common.shared.program.Kv;
+import io.zerows.component.log.OLog;
+import io.zerows.component.shared.program.Kv;
 import io.zerows.epoch.corpus.web.exception._60034Exception500SharedDataMode;
 import io.zerows.epoch.program.Ut;
 

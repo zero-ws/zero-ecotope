@@ -3,11 +3,11 @@ package io.zerows.epoch.based.configure;
 import io.zerows.epoch.annotations.Infusion;
 import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.based.constant.KPlugin;
-import io.zerows.epoch.constant.VPath;
-import io.zerows.epoch.constant.VString;
-import io.zerows.epoch.enums.EmDS;
-import io.zerows.epoch.enums.EmSecure;
-import io.zerows.epoch.support.UtBase;
+import io.zerows.constant.VPath;
+import io.zerows.constant.VString;
+import io.zerows.enums.EmDS;
+import io.zerows.enums.EmSecure;
+import io.zerows.support.UtBase;
 
 /**
  * 重新规划配置部分专用，针对文件部分形成梯度配置键值，完成类似 YAML 结构的配置文件

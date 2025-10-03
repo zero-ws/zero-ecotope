@@ -4,7 +4,7 @@ import io.reactivex.rxjava3.core.Observable;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.constant.KWeb;
-import io.zerows.epoch.constant.VString;
+import io.zerows.constant.VString;
 import io.zerows.epoch.corpus.io.annotations.BodyParam;
 import io.zerows.epoch.corpus.io.atom.WrapRequest;
 import io.zerows.epoch.corpus.model.Event;

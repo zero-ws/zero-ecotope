@@ -3,7 +3,7 @@ package io.zerows.extension.commerce.rbac.agent.service.login;
 import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.common.log.OLog;
+import io.zerows.component.log.OLog;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.program.Ut;
 import io.zerows.extension.commerce.rbac.agent.service.business.UserStub;

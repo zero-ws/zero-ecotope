@@ -3,7 +3,7 @@ package io.zerows.epoch.bootplus.boot.routine;
 import io.zerows.epoch.bootplus.boot.argument.ArgLoad;
 import io.vertx.core.Vertx;
 import io.zerows.epoch.based.constant.KName;
-import io.zerows.epoch.common.shared.boot.KLauncher;
+import io.zerows.component.shared.boot.KLauncher;
 import io.zerows.epoch.program.Ut;
 import io.zerows.extension.runtime.skeleton.boot.supply.DataImport;
 

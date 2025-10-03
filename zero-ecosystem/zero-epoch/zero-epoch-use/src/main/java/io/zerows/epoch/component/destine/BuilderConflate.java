@@ -3,8 +3,8 @@ package io.zerows.epoch.component.destine;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.annotations.monitor.Memory;
-import io.zerows.epoch.constant.VString;
+import io.zerows.annotations.monitor.Memory;
+import io.zerows.constant.VString;
 import io.zerows.epoch.corpus.metadata.specification.KJoin;
 
 /**

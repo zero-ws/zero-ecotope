@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
-import io.zerows.epoch.common.log.Annal;
+import io.zerows.component.log.Annal;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.extension.mbse.ui.agent.service.FieldStub;
 import io.zerows.extension.mbse.ui.agent.service.FormStub;

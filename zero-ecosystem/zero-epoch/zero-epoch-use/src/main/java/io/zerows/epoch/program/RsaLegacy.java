@@ -1,7 +1,7 @@
 package io.zerows.epoch.program;
 
 import io.r2mo.function.Fn;
-import io.zerows.epoch.support.UtBase;
+import io.zerows.support.UtBase;
 
 import javax.crypto.Cipher;
 import java.security.KeyFactory;

@@ -1,6 +1,6 @@
 package io.zerows.epoch.annotations;
 
-import io.zerows.epoch.enums.modeling.EmValue;
+import io.zerows.enums.modeling.EmValue;
 
 import java.lang.annotation.*;
 

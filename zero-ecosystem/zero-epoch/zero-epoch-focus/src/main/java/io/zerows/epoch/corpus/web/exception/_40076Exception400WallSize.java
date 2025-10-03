@@ -1,7 +1,7 @@
 package io.zerows.epoch.corpus.web.exception;
 
 import io.r2mo.vertx.common.exception.VertxBootException;
-import io.zerows.epoch.enums.EmSecure;
+import io.zerows.enums.EmSecure;
 
 /**
  * @author lang : 2025-09-30

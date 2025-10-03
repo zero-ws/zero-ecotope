@@ -2,8 +2,8 @@ package io.zerows.epoch.corpus.security.manage;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.constant.KName;
-import io.zerows.epoch.constant.VString;
-import io.zerows.epoch.enums.EmSecure;
+import io.zerows.constant.VString;
+import io.zerows.enums.EmSecure;
 import io.zerows.epoch.program.Ut;
 
 import java.io.Serializable;

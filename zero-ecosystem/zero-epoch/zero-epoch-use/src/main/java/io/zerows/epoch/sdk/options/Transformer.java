@@ -1,7 +1,7 @@
 package io.zerows.epoch.sdk.options;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.common.log.OLog;
+import io.zerows.component.log.OLog;
 import io.zerows.epoch.program.Ut;
 
 public interface Transformer<T> {

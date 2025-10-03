@@ -1,8 +1,8 @@
 package io.zerows.epoch.based.constant.cloud;
 
-import io.zerows.epoch.constant.spec.VPC;
-import io.zerows.epoch.enums.typed.ChangeFlag;
-import io.zerows.epoch.spi.modeler.Identifier;
+import io.zerows.constant.VPC;
+import io.zerows.enums.typed.ChangeFlag;
+import io.zerows.spi.modeler.Identifier;
 
 /**
  * @author lang : 2023-06-03

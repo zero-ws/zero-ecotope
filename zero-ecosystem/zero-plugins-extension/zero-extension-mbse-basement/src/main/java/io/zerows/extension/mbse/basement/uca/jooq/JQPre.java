@@ -3,11 +3,11 @@ package io.zerows.extension.mbse.basement.uca.jooq;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.constant.VString;
-import io.zerows.epoch.constant.VValue;
-import io.zerows.epoch.common.uca.qr.Criteria;
-import io.zerows.epoch.common.uca.qr.syntax.Ir;
-import io.zerows.epoch.common.uca.qr.syntax.IrItem;
+import io.zerows.constant.VString;
+import io.zerows.constant.VValue;
+import io.zerows.component.qr.Criteria;
+import io.zerows.component.qr.syntax.Ir;
+import io.zerows.component.qr.syntax.IrItem;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.specification.modeling.HReference;
 

@@ -1,6 +1,6 @@
 package io.zerows.epoch.bootplus.extension.uca.modello;
 
-import io.zerows.epoch.common.shared.program.Kv;
+import io.zerows.component.shared.program.Kv;
 import io.zerows.specification.modeling.property.OExpression;
 
 import java.util.Objects;

@@ -1,8 +1,8 @@
 package io.zerows.epoch.corpus.mbse.atom.shape;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.epoch.common.shared.normalize.KMarkAtom;
-import io.zerows.epoch.common.uca.compare.Vs;
+import io.zerows.component.shared.normalize.KMarkAtom;
+import io.zerows.component.compare.Vs;
 import io.zerows.specification.access.app.HArk;
 import io.zerows.specification.modeling.HAtom;
 import io.zerows.specification.modeling.HAttribute;

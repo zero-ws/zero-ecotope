@@ -1,6 +1,6 @@
 package io.zerows.epoch.osgi.metadata.service;
 
-import io.zerows.epoch.common.log.OLog;
+import io.zerows.component.log.OLog;
 import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.sdk.metadata.service.ServiceContext;
 import io.zerows.epoch.sdk.metadata.service.ServiceInvocation;

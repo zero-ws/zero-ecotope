@@ -9,7 +9,7 @@ import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.program.fn.Fx;
-import io.zerows.epoch.support.FnBase;
+import io.zerows.support.FnBase;
 import io.zerows.extension.runtime.report.atom.RDimension;
 import io.zerows.extension.runtime.report.domain.tables.daos.KpDataSetDao;
 import io.zerows.extension.runtime.report.domain.tables.pojos.KpDataSet;

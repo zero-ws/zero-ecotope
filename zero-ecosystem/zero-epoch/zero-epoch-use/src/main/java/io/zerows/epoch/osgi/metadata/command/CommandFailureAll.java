@@ -1,7 +1,7 @@
 package io.zerows.epoch.osgi.metadata.command;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.constant.VString;
+import io.zerows.constant.VString;
 import io.zerows.epoch.mem.OCacheFailure;
 import io.zerows.epoch.sdk.metadata.running.OCommand;
 import org.osgi.framework.Bundle;

@@ -1,6 +1,6 @@
 package io.zerows.extension.mbse.basement.uca.query;
 
-import io.zerows.epoch.common.uca.qr.Criteria;
+import io.zerows.component.qr.Criteria;
 import io.zerows.extension.mbse.basement.atom.element.DataTpl;
 import org.jooq.Condition;
 

@@ -1,6 +1,6 @@
 package io.zerows.epoch.corpus.web.security.osgi.service;
 
-import io.zerows.epoch.common.log.OLog;
+import io.zerows.component.log.OLog;
 import io.zerows.epoch.program.Ut;
 import org.osgi.framework.Bundle;
 

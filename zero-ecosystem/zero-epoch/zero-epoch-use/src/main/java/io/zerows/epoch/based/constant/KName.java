@@ -1,7 +1,7 @@
 package io.zerows.epoch.based.constant;
 
-import io.zerows.epoch.constant.VName;
-import io.zerows.epoch.common.uca.qr.syntax.Ir;
+import io.zerows.constant.VName;
+import io.zerows.component.qr.syntax.Ir;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -2,7 +2,7 @@ package io.zerows.epoch.component.serialization;
 
 import io.r2mo.function.Fn;
 import io.zerows.epoch.based.exception._60004Exception400ParamFromString;
-import io.zerows.epoch.common.log.OLog;
+import io.zerows.component.log.OLog;
 import io.zerows.epoch.program.Ut;
 
 public abstract class SaberBase implements Saber {

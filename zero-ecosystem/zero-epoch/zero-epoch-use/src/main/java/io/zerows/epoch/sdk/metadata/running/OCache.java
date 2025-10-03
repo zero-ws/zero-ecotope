@@ -1,7 +1,7 @@
 package io.zerows.epoch.sdk.metadata.running;
 
-import io.zerows.epoch.common.log.OLog;
-import io.zerows.epoch.exception.web._60050Exception501NotSupport;
+import io.zerows.component.log.OLog;
+import io.zerows.exception.web._60050Exception501NotSupport;
 import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.sdk.metadata.AbstractAmbiguity;
 import org.osgi.framework.Bundle;

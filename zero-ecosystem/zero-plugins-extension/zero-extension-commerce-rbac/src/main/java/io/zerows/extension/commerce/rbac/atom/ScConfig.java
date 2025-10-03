@@ -6,8 +6,8 @@ import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.corpus.mbse.atom.specification.KQr;
-import io.zerows.epoch.integrated.jackson.databind.JsonObjectDeserializer;
-import io.zerows.epoch.integrated.jackson.databind.JsonObjectSerializer;
+import io.zerows.integrated.jackson.databind.JsonObjectDeserializer;
+import io.zerows.integrated.jackson.databind.JsonObjectSerializer;
 
 import java.io.Serializable;
 import java.util.concurrent.TimeUnit;

@@ -1,6 +1,6 @@
 package io.zerows.epoch.component.scan.parallel;
 
-import io.zerows.epoch.common.log.Annal;
+import io.zerows.component.log.Annal;
 import io.zerows.epoch.component.extract.Extractor;
 import io.zerows.epoch.component.extract.ExtractorEvent;
 import io.zerows.epoch.corpus.model.Event;

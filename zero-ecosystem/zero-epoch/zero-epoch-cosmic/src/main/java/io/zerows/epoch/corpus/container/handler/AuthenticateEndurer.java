@@ -3,7 +3,7 @@ package io.zerows.epoch.corpus.container.handler;
 import io.r2mo.typed.exception.WebException;
 import io.vertx.core.Handler;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.epoch.common.log.Annal;
+import io.zerows.component.log.Annal;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.container.uca.mode.Answer;
 import io.zerows.epoch.corpus.model.commune.Envelop;

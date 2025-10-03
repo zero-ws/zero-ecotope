@@ -1,12 +1,12 @@
 package io.zerows.epoch.sdk.metadata.service;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.epoch.common.log.OLog;
+import io.zerows.component.log.OLog;
 import io.zerows.epoch.configuration.module.MDConfiguration;
 import io.zerows.epoch.corpus.metadata.service.context.ContextOfApp;
 import io.zerows.epoch.corpus.metadata.service.context.ContextOfModule;
 import io.zerows.epoch.corpus.metadata.service.context.ContextOfPlugin;
-import io.zerows.epoch.enums.EmService;
+import io.zerows.enums.EmService;
 import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.sdk.metadata.dependency.OCallback;
 import io.zerows.specification.configuration.HSetting;

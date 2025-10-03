@@ -1,7 +1,7 @@
 package io.zerows.epoch.component.scan.parallel;
 
 import io.r2mo.function.Actuator;
-import io.zerows.epoch.common.log.Annal;
+import io.zerows.component.log.Annal;
 
 import java.util.ArrayList;
 import java.util.List;

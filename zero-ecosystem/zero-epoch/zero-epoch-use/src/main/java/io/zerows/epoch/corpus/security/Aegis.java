@@ -1,8 +1,8 @@
 package io.zerows.epoch.corpus.security;
 
-import io.zerows.epoch.common.log.OLog;
-import io.zerows.epoch.constant.VValue;
-import io.zerows.epoch.enums.EmSecure;
+import io.zerows.component.log.OLog;
+import io.zerows.constant.VValue;
+import io.zerows.enums.EmSecure;
 import io.zerows.epoch.program.Ut;
 import io.zerows.specification.atomic.HCopier;
 import org.jetbrains.annotations.NotNull;

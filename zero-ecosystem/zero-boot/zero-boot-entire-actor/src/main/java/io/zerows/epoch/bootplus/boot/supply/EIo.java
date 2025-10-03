@@ -1,9 +1,9 @@
 package io.zerows.epoch.bootplus.boot.supply;
 
-import io.zerows.epoch.constant.VPath;
-import io.zerows.epoch.constant.VString;
-import io.zerows.epoch.constant.spec.VWeb;
-import io.zerows.epoch.common.shared.app.KIntegration;
+import io.zerows.component.shared.app.KIntegration;
+import io.zerows.constant.VPath;
+import io.zerows.constant.VString;
+import io.zerows.constant.VWeb;
 
 import java.util.Objects;
 

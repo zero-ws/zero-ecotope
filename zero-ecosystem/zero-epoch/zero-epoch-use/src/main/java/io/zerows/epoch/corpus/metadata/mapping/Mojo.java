@@ -5,9 +5,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.zerows.epoch.based.constant.KName;
-import io.zerows.epoch.common.log.OLog;
-import io.zerows.epoch.integrated.jackson.databind.ClassDeserializer;
-import io.zerows.epoch.integrated.jackson.databind.ClassSerializer;
+import io.zerows.component.log.OLog;
+import io.zerows.integrated.jackson.databind.ClassDeserializer;
+import io.zerows.integrated.jackson.databind.ClassSerializer;
 import io.zerows.epoch.program.Ut;
 
 import java.io.Serializable;

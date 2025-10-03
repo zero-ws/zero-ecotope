@@ -3,8 +3,8 @@ package io.zerows.extension.mbse.ui.util;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.common.log.Log;
-import io.zerows.epoch.common.log.LogModule;
+import io.zerows.component.log.Log;
+import io.zerows.component.log.LogModule;
 
 import java.util.function.Supplier;
 

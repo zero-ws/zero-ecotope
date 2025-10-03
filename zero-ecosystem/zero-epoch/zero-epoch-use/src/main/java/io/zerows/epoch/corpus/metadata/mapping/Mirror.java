@@ -3,7 +3,7 @@ package io.zerows.epoch.corpus.metadata.mapping;
 import io.r2mo.typed.cc.Cc;
 import io.reactivex.rxjava3.core.Observable;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.common.log.OLog;
+import io.zerows.component.log.OLog;
 import io.zerows.epoch.program.Ut;
 
 import java.text.MessageFormat;

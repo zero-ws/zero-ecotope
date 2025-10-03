@@ -3,7 +3,7 @@ package io.zerows.epoch.bootplus.extension.migration.restore;
 import io.zerows.epoch.bootplus.extension.migration.AbstractStep;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.enums.Environment;
+import io.zerows.enums.Environment;
 import io.zerows.extension.runtime.skeleton.boot.supply.DataImport;
 import io.zerows.epoch.corpus.Ux;
 

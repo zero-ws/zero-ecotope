@@ -1,6 +1,6 @@
 package io.zerows.specification.modeling.element;
 
-import io.zerows.epoch.enums.modeling.EmKey;
+import io.zerows.enums.modeling.EmKey;
 
 import java.util.Set;
 

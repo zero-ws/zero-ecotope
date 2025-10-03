@@ -1,8 +1,8 @@
 package io.zerows.epoch.sdk.modeling;
 
-import io.zerows.epoch.common.shared.app.KIntegration;
+import io.zerows.component.shared.app.KIntegration;
 import io.zerows.epoch.corpus.database.Database;
-import io.zerows.epoch.enums.app.EmTraffic;
+import io.zerows.enums.app.EmTraffic;
 import io.zerows.specification.atomic.HJson;
 import io.zerows.specification.modeling.HRule;
 

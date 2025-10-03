@@ -11,7 +11,7 @@ import io.vertx.ext.web.sstore.ClusteredSessionStore;
 import io.vertx.ext.web.sstore.LocalSessionStore;
 import io.vertx.ext.web.sstore.SessionStore;
 import io.zerows.epoch.based.configure.YmlCore;
-import io.zerows.epoch.common.log.OLog;
+import io.zerows.component.log.OLog;
 import io.zerows.epoch.corpus.web.exception._20005Exception500SessionClientInit;
 import io.zerows.epoch.corpus.web.session.eon.em.SessionType;
 import io.zerows.epoch.program.Ut;

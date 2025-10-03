@@ -3,9 +3,9 @@ package io.zerows.epoch.corpus;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.support.FnBase;
-import io.zerows.epoch.common.shared.program.KRef;
-import io.zerows.epoch.common.uca.qr.Pagination;
+import io.zerows.support.FnBase;
+import io.zerows.component.shared.program.KRef;
+import io.zerows.component.qr.Pagination;
 
 import java.util.ArrayList;
 import java.util.List;

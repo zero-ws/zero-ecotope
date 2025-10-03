@@ -1,7 +1,7 @@
 package io.zerows.epoch.osgi.assembly.command;
 
-import io.zerows.epoch.constant.VString;
-import io.zerows.epoch.enums.VertxComponent;
+import io.zerows.constant.VString;
+import io.zerows.enums.VertxComponent;
 import io.zerows.epoch.mem.OCacheClass;
 import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.sdk.metadata.running.OCommand;

@@ -1,6 +1,6 @@
 package io.zerows.epoch.component.expression;
 
-import io.zerows.epoch.common.log.OLog;
+import io.zerows.component.log.OLog;
 import io.zerows.epoch.component.environment.DevEnv;
 import io.zerows.epoch.program.Ut;
 

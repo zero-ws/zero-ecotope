@@ -1,9 +1,9 @@
 package io.zerows.epoch.program;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.enums.typed.ChangeFlag;
-import io.zerows.epoch.support.UtBase;
-import io.zerows.epoch.common.shared.datamation.KMapping;
+import io.zerows.enums.typed.ChangeFlag;
+import io.zerows.support.UtBase;
+import io.zerows.component.shared.datamation.KMapping;
 
 /**
  * @author lang : 2023-06-19

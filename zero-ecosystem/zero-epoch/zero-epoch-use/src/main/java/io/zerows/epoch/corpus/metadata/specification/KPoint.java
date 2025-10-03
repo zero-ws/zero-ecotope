@@ -6,12 +6,12 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.exception._80542Exception409JoinTarget;
-import io.zerows.epoch.common.shared.datamation.KMapping;
-import io.zerows.epoch.enums.modeling.EmModel;
-import io.zerows.epoch.integrated.jackson.databind.ClassDeserializer;
-import io.zerows.epoch.integrated.jackson.databind.ClassSerializer;
-import io.zerows.epoch.integrated.jackson.databind.JsonObjectDeserializer;
-import io.zerows.epoch.integrated.jackson.databind.JsonObjectSerializer;
+import io.zerows.component.shared.datamation.KMapping;
+import io.zerows.enums.modeling.EmModel;
+import io.zerows.integrated.jackson.databind.ClassDeserializer;
+import io.zerows.integrated.jackson.databind.ClassSerializer;
+import io.zerows.integrated.jackson.databind.JsonObjectDeserializer;
+import io.zerows.integrated.jackson.databind.JsonObjectSerializer;
 import io.zerows.epoch.program.Ut;
 
 import java.io.Serializable;

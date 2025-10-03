@@ -3,7 +3,7 @@ package io.zerows.epoch.corpus.io.uca.response.resolver;
 import io.r2mo.typed.exception.web._500ServerInternalException;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.epoch.annotations.Contract;
-import io.zerows.epoch.common.log.Annal;
+import io.zerows.component.log.Annal;
 import io.zerows.epoch.corpus.io.zdk.mime.Resolver;
 import io.zerows.epoch.corpus.io.zdk.mime.Solve;
 import io.zerows.epoch.corpus.model.Epsilon;

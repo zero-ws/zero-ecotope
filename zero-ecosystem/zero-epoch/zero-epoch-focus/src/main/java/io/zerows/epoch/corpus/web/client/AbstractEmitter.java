@@ -3,9 +3,9 @@ package io.zerows.epoch.corpus.web.client;
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.common.log.OLog;
-import io.zerows.epoch.common.shared.app.KIntegration;
-import io.zerows.epoch.enums.app.EmTraffic;
+import io.zerows.component.log.OLog;
+import io.zerows.component.shared.app.KIntegration;
+import io.zerows.enums.app.EmTraffic;
 import io.zerows.epoch.program.Ut;
 
 import javax.net.ssl.SSLContext;

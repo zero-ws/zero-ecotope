@@ -1,6 +1,6 @@
 package io.zerows.epoch.corpus.web.websocket.store;
 
-import io.zerows.epoch.common.log.OLog;
+import io.zerows.component.log.OLog;
 import io.zerows.epoch.component.extract.Extractor;
 import io.zerows.epoch.corpus.web.websocket.atom.Remind;
 import io.zerows.epoch.program.Ut;

@@ -1,8 +1,8 @@
 package io.zerows.epoch.component.normalize;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.epoch.common.log.OLog;
-import io.zerows.epoch.constant.VString;
+import io.zerows.component.log.OLog;
+import io.zerows.constant.VString;
 import io.zerows.epoch.configuration.module.MDConfiguration;
 import io.zerows.epoch.configuration.module.MDId;
 import io.zerows.epoch.program.Ut;

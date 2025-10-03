@@ -1,7 +1,7 @@
 package io.zerows.epoch.component.di;
 
 import com.google.inject.AbstractModule;
-import io.zerows.epoch.common.log.OLog;
+import io.zerows.component.log.OLog;
 import io.zerows.epoch.program.Ut;
 
 import java.lang.reflect.Constructor;

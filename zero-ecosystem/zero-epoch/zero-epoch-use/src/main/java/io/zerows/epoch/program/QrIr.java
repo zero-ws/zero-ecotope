@@ -4,10 +4,10 @@ package io.zerows.epoch.program;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.constant.KWeb;
-import io.zerows.epoch.common.log.OLog;
-import io.zerows.epoch.common.shared.program.Kv;
-import io.zerows.epoch.common.uca.qr.syntax.Ir;
-import io.zerows.epoch.constant.VString;
+import io.zerows.component.log.OLog;
+import io.zerows.component.shared.program.Kv;
+import io.zerows.component.qr.syntax.Ir;
+import io.zerows.constant.VString;
 
 import java.util.Objects;
 import java.util.Set;

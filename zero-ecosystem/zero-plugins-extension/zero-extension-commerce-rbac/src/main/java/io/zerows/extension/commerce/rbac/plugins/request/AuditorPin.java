@@ -8,7 +8,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.epoch.based.configure.YmlCore;
 import io.zerows.epoch.based.constant.KName;
-import io.zerows.epoch.common.log.Annal;
+import io.zerows.component.log.Annal;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.io.plugins.extension.PlugAuditor;
 import io.zerows.epoch.corpus.model.commune.Envelop;

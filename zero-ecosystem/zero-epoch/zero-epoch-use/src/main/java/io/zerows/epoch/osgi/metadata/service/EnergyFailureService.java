@@ -4,7 +4,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.configure.YmlCore;
 import io.zerows.epoch.mem.OCacheFailure;
 import io.zerows.epoch.mem.OZeroEquip;
-import io.zerows.epoch.spi.boot.HEquip;
+import io.zerows.spi.boot.HEquip;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HSetting;
 import org.osgi.framework.Bundle;

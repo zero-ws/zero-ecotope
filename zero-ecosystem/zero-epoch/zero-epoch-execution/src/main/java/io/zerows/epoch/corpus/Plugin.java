@@ -3,7 +3,7 @@ package io.zerows.epoch.corpus;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.configure.YmlCore;
-import io.zerows.epoch.common.log.OLog;
+import io.zerows.component.log.OLog;
 import io.zerows.epoch.corpus.model.commune.Envelop;
 import io.zerows.epoch.mem.OZeroStore;
 import io.zerows.epoch.program.Ut;

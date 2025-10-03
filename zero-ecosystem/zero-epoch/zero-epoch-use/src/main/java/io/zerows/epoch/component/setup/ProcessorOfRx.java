@@ -1,6 +1,6 @@
 package io.zerows.epoch.component.setup;
 
-import io.zerows.epoch.enums.app.ServerType;
+import io.zerows.enums.app.ServerType;
 
 /**
  * @author lang : 2024-04-20

@@ -1,9 +1,9 @@
 package io.zerows.specification.access.app;
 
-import io.zerows.epoch.common.shared.app.KDS;
-import io.zerows.epoch.common.shared.app.KDatabase;
-import io.zerows.epoch.constant.VName;
-import io.zerows.epoch.constant.VString;
+import io.zerows.component.shared.app.KDS;
+import io.zerows.component.shared.app.KDatabase;
+import io.zerows.constant.VName;
+import io.zerows.constant.VString;
 import io.zerows.specification.vital.HOI;
 
 import java.util.Objects;

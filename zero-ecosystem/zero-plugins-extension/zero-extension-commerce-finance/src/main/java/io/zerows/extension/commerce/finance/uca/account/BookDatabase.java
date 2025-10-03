@@ -2,7 +2,7 @@ package io.zerows.extension.commerce.finance.uca.account;
 
 import io.vertx.core.Future;
 import io.zerows.epoch.based.constant.KName;
-import io.zerows.epoch.common.shared.program.KRef;
+import io.zerows.component.shared.program.KRef;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.database.jooq.operation.UxJooq;
 import io.zerows.epoch.program.Ut;

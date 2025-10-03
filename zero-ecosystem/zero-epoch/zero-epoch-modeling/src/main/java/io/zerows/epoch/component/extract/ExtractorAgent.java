@@ -2,7 +2,7 @@ package io.zerows.epoch.component.extract;
 
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.DeploymentOptions;
-import io.zerows.epoch.common.log.Annal;
+import io.zerows.component.log.Annal;
 import io.zerows.epoch.configuration.NodeNetwork;
 import io.zerows.epoch.configuration.NodeVertx;
 import io.zerows.epoch.mem.OCacheNode;

@@ -2,9 +2,9 @@ package io.zerows.epoch.corpus.web.scheduler.plugins;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.constant.KName;
-import io.zerows.epoch.common.log.OLog;
+import io.zerows.component.log.OLog;
 import io.zerows.epoch.corpus.web.scheduler.atom.Mission;
-import io.zerows.epoch.enums.EmJob;
+import io.zerows.enums.EmJob;
 import io.zerows.epoch.program.Ut;
 
 import java.util.List;

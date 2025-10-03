@@ -1,7 +1,7 @@
 package io.zerows.epoch.corpus.web.scheduler.atom.specification;
 
-import io.zerows.epoch.common.log.OLog;
-import io.zerows.epoch.constant.VValue;
+import io.zerows.component.log.OLog;
+import io.zerows.constant.VValue;
 import io.zerows.epoch.corpus.web.scheduler.eon.MessageOfJob;
 import io.zerows.epoch.program.Ut;
 

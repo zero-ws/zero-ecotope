@@ -5,13 +5,13 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Contract;
 import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.bootplus.extension.migration.MigrateStep;
-import io.zerows.epoch.common.uca.qr.Pager;
-import io.zerows.epoch.common.uca.qr.Sorter;
-import io.zerows.epoch.common.uca.qr.syntax.Ir;
+import io.zerows.component.qr.Pager;
+import io.zerows.component.qr.Sorter;
+import io.zerows.component.qr.syntax.Ir;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.database.cp.zdk.DataPool;
 import io.zerows.epoch.corpus.database.jooq.operation.UxJooq;
-import io.zerows.epoch.enums.Environment;
+import io.zerows.enums.Environment;
 import io.zerows.epoch.program.Ut;
 
 import java.util.function.Supplier;

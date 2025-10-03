@@ -1,7 +1,7 @@
 package io.zerows.epoch.corpus.cloud;
 
-import io.zerows.epoch.common.log.Log;
-import io.zerows.epoch.common.log.LogModule;
+import io.zerows.component.log.Log;
+import io.zerows.component.log.LogModule;
 
 /**
  * @author lang : 2023/4/26

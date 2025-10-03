@@ -1,7 +1,7 @@
 package io.zerows.epoch.component.uddi;
 
 import io.vertx.core.http.HttpServerOptions;
-import io.zerows.epoch.enums.Etat;
+import io.zerows.enums.Etat;
 
 import java.util.Set;
 

@@ -1,6 +1,6 @@
 package io.zerows.epoch.annotations;
 
-import io.zerows.epoch.constant.VString;
+import io.zerows.constant.VString;
 import io.zerows.epoch.based.constant.DefaultClass;
 
 import java.lang.annotation.*;

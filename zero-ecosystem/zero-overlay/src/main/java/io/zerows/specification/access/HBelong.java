@@ -1,6 +1,6 @@
 package io.zerows.specification.access;
 
-import io.zerows.epoch.annotations.monitor.One2One;
+import io.zerows.annotations.monitor.One2One;
 
 /**
  * 「实体所属」

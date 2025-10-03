@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.core.shareddata.ClusterSerializable;
 import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.epoch.enums.modeling.EmModel;
+import io.zerows.enums.modeling.EmModel;
 import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.program.fn.Fx;
 import io.zerows.extension.mbse.modulat.domain.tables.daos.BBagDao;

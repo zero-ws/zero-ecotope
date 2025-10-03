@@ -1,6 +1,6 @@
 package io.zerows.extension.mbse.basement.uca.sql;
 
-import io.zerows.epoch.constant.VString;
+import io.zerows.constant.VString;
 import io.zerows.epoch.program.Ut;
 import io.zerows.extension.mbse.basement.eon.sql.SqlStatement;
 

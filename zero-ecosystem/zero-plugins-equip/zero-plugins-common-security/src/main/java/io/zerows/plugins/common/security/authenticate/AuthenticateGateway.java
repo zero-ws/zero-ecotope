@@ -10,7 +10,7 @@ import io.vertx.core.Handler;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.based.constant.KWeb;
-import io.zerows.epoch.common.log.Annal;
+import io.zerows.component.log.Annal;
 import io.zerows.epoch.component.environment.DevEnv;
 import io.zerows.epoch.corpus.security.Aegis;
 import io.zerows.epoch.corpus.security.Against;

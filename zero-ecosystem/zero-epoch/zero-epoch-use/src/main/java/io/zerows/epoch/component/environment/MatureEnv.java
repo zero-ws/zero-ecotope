@@ -1,8 +1,8 @@
 package io.zerows.epoch.component.environment;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.common.shared.program.KVar;
-import io.zerows.epoch.common.shared.program.KVarSet;
+import io.zerows.component.shared.program.KVar;
+import io.zerows.component.shared.program.KVarSet;
 import io.zerows.epoch.program.Ut;
 import io.zerows.specification.configuration.boot.HMature;
 

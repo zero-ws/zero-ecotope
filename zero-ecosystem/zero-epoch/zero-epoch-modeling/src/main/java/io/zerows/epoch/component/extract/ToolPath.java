@@ -1,10 +1,10 @@
 package io.zerows.epoch.component.extract;
 
 import io.r2mo.function.Fn;
-import io.zerows.epoch.common.log.Annal;
+import io.zerows.component.log.Annal;
 import io.zerows.epoch.component.environment.DevEnv;
-import io.zerows.epoch.constant.VString;
-import io.zerows.epoch.constant.VValue;
+import io.zerows.constant.VString;
+import io.zerows.constant.VValue;
 import io.zerows.epoch.corpus.exception._40006Exception500PathAnnoEmpty;
 import io.zerows.epoch.program.Ut;
 import jakarta.ws.rs.Path;

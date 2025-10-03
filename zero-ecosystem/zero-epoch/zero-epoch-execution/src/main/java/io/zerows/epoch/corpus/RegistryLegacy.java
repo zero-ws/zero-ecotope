@@ -5,7 +5,7 @@ import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.support.FnBase;
+import io.zerows.support.FnBase;
 import io.zerows.epoch.based.configure.YmlCore;
 import io.zerows.epoch.corpus.database.jooq.JooqInfix;
 import io.zerows.epoch.program.Ut;

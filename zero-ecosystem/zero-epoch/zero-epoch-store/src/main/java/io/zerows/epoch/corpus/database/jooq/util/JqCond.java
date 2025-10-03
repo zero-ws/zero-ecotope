@@ -1,8 +1,8 @@
 package io.zerows.epoch.corpus.database.jooq.util;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.constant.VString;
-import io.zerows.epoch.common.uca.qr.syntax.Ir;
+import io.zerows.constant.VString;
+import io.zerows.component.qr.syntax.Ir;
 
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;

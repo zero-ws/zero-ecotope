@@ -1,7 +1,7 @@
 package io.zerows.extension.mbse.modulat.util;
 
-import io.zerows.epoch.common.log.Log;
-import io.zerows.epoch.common.log.LogModule;
+import io.zerows.component.log.Log;
+import io.zerows.component.log.LogModule;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>

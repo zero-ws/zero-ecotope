@@ -1,7 +1,7 @@
 package io.zerows.extension.commerce.finance.uca.account;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.epoch.annotations.monitor.Memory;
+import io.zerows.annotations.monitor.Memory;
 
 /**
  * @author lang : 2024-01-19

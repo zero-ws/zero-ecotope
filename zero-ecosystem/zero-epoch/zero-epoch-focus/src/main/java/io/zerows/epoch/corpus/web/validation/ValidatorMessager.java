@@ -1,6 +1,6 @@
 package io.zerows.epoch.corpus.web.validation;
 
-import io.zerows.epoch.common.log.OLog;
+import io.zerows.component.log.OLog;
 import io.zerows.epoch.program.Ut;
 import jakarta.validation.MessageInterpolator;
 import jakarta.validation.ValidationException;

@@ -8,7 +8,7 @@ import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.mbse.atom.runner.ActIn;
 import io.zerows.epoch.corpus.mbse.atom.runner.ActOut;
 import io.zerows.epoch.corpus.metadata.commune.Apt;
-import io.zerows.epoch.enums.typed.ChangeFlag;
+import io.zerows.enums.typed.ChangeFlag;
 import io.zerows.epoch.program.Ut;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.exception._80529Exception404RecordMissing;

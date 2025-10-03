@@ -1,7 +1,7 @@
 package io.zerows.epoch.corpus.web.websocket.router;
 
 import io.vertx.core.http.HttpServerOptions;
-import io.zerows.epoch.common.log.OLog;
+import io.zerows.component.log.OLog;
 import io.zerows.epoch.configuration.option.SockOptions;
 import io.zerows.epoch.corpus.io.uca.routing.OAxis;
 import io.zerows.epoch.corpus.model.running.RunServer;

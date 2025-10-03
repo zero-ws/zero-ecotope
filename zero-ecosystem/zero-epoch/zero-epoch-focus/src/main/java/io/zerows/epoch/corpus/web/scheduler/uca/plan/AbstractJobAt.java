@@ -1,9 +1,9 @@
 package io.zerows.epoch.corpus.web.scheduler.uca.plan;
 
-import io.zerows.epoch.common.log.OLog;
-import io.zerows.epoch.common.shared.program.Kv;
-import io.zerows.epoch.constant.VString;
-import io.zerows.epoch.exception.web._60050Exception501NotSupport;
+import io.zerows.component.log.OLog;
+import io.zerows.component.shared.program.Kv;
+import io.zerows.constant.VString;
+import io.zerows.exception.web._60050Exception501NotSupport;
 import io.zerows.epoch.program.Ut;
 
 import java.time.Instant;

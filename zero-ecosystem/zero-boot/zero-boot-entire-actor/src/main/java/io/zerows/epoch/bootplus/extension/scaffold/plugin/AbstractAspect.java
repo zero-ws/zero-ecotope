@@ -1,6 +1,6 @@
 package io.zerows.epoch.bootplus.extension.scaffold.plugin;
 
-import io.zerows.epoch.common.shared.datamation.KFabric;
+import io.zerows.component.shared.datamation.KFabric;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.osgi.spi.plugin.AspectPlugin;
 

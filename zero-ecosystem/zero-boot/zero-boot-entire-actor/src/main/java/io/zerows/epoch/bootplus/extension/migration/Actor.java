@@ -6,7 +6,7 @@ import io.zerows.epoch.bootplus.extension.migration.backup.EnvAll;
 import io.zerows.epoch.bootplus.extension.migration.backup.ReportAll;
 import io.zerows.epoch.bootplus.extension.migration.restore.RestoreAll;
 import io.zerows.epoch.bootplus.extension.migration.restore.RestorePrepare;
-import io.zerows.epoch.enums.Environment;
+import io.zerows.enums.Environment;
 
 public class Actor {
 

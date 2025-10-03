@@ -3,7 +3,7 @@ package io.zerows.epoch.corpus.metadata.typed;
 import io.reactivex.rxjava3.core.Observable;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.constant.VValue;
+import io.zerows.constant.VValue;
 import io.zerows.epoch.program.Ut;
 
 import java.util.concurrent.ConcurrentHashMap;

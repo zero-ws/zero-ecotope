@@ -3,7 +3,7 @@ package io.zerows.epoch.bootplus.extension.spi.component;
 import io.zerows.epoch.bootplus.extension.scaffold.component.AbstractAdaptor;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.common.uca.qr.Criteria;
+import io.zerows.component.qr.Criteria;
 import io.zerows.epoch.corpus.mbse.atom.runner.ActIn;
 import io.zerows.epoch.corpus.mbse.atom.runner.ActOut;
 

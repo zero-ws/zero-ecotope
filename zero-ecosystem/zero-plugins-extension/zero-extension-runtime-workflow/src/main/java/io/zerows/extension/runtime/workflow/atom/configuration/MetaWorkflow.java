@@ -4,8 +4,8 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.vertx.core.json.JsonArray;
 import io.zerows.epoch.corpus.database.Database;
-import io.zerows.epoch.integrated.jackson.databind.JsonArrayDeserializer;
-import io.zerows.epoch.integrated.jackson.databind.JsonArraySerializer;
+import io.zerows.integrated.jackson.databind.JsonArrayDeserializer;
+import io.zerows.integrated.jackson.databind.JsonArraySerializer;
 import io.zerows.epoch.program.Ut;
 
 import java.util.Set;

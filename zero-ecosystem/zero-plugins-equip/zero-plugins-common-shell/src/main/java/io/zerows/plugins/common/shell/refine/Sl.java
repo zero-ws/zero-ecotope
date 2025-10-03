@@ -1,6 +1,6 @@
 package io.zerows.plugins.common.shell.refine;
 
-import io.zerows.epoch.enums.Environment;
+import io.zerows.enums.Environment;
 import io.zerows.plugins.common.shell.atom.CommandAtom;
 import io.zerows.plugins.common.shell.eon.EmCommand;
 

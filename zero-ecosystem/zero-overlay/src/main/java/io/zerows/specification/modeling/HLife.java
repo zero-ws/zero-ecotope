@@ -1,6 +1,6 @@
 package io.zerows.specification.modeling;
 
-import io.zerows.epoch.enums.Environment;
+import io.zerows.enums.Environment;
 import io.zerows.specification.atomic.HJson;
 import io.zerows.specification.development.program.HResource;
 import io.zerows.specification.modeling.norm.HNs;

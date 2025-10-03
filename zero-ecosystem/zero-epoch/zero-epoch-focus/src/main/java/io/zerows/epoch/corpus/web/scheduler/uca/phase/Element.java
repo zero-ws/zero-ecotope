@@ -7,8 +7,8 @@ import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.corpus.web.scheduler.atom.Mission;
 import io.zerows.epoch.corpus.web.scheduler.zdk.JobIncome;
 import io.zerows.epoch.corpus.web.scheduler.zdk.JobOutcome;
-import io.zerows.epoch.common.shared.context.KRunner;
-import io.zerows.epoch.enums.EmJob;
+import io.zerows.component.shared.context.KRunner;
+import io.zerows.enums.EmJob;
 
 import java.util.Objects;
 

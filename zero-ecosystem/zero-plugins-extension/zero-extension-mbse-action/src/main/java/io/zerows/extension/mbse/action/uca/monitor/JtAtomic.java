@@ -1,8 +1,8 @@
 package io.zerows.extension.mbse.action.uca.monitor;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.common.shared.context.KRunner;
-import io.zerows.epoch.common.log.Annal;
+import io.zerows.component.shared.context.KRunner;
+import io.zerows.component.log.Annal;
 import io.zerows.extension.mbse.action.eon.JtMsg;
 
 import java.util.concurrent.atomic.AtomicBoolean;

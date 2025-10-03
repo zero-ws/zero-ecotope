@@ -4,7 +4,7 @@ import io.vertx.config.ConfigRetriever;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Promise;
 import io.vertx.ext.web.Router;
-import io.zerows.epoch.constant.VValue;
+import io.zerows.constant.VValue;
 import io.zerows.epoch.annotations.Worker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

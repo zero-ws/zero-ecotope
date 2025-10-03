@@ -1,9 +1,9 @@
 package io.zerows.epoch.corpus.database.jooq.operation;
 
 import io.vertx.core.json.JsonArray;
-import io.zerows.epoch.common.log.OLog;
-import io.zerows.epoch.common.uca.qr.Pager;
-import io.zerows.epoch.common.uca.qr.syntax.Ir;
+import io.zerows.component.log.OLog;
+import io.zerows.component.qr.Pager;
+import io.zerows.component.qr.syntax.Ir;
 import io.zerows.epoch.component.environment.DevEnv;
 import io.zerows.epoch.corpus.database.jooq.JooqDsl;
 import io.zerows.epoch.corpus.database.jooq.condition.JooqCond;

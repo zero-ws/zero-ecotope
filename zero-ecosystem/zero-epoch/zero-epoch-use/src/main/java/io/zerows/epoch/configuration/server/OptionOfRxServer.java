@@ -1,7 +1,7 @@
 package io.zerows.epoch.configuration.server;
 
 import io.vertx.core.http.HttpServerOptions;
-import io.zerows.epoch.enums.app.ServerType;
+import io.zerows.enums.app.ServerType;
 import io.zerows.epoch.sdk.options.OptionOfServerBase;
 import io.zerows.epoch.sdk.options.OptionOfServer;
 

@@ -7,7 +7,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.based.constant.KName;
-import io.zerows.epoch.common.uca.qr.syntax.Ir;
+import io.zerows.component.qr.syntax.Ir;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.model.commune.Envelop;
 import io.zerows.epoch.program.Ut;

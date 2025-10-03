@@ -1,7 +1,7 @@
 package io.zerows.plugins.office.excel.uca.cell;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.epoch.common.log.OLog;
+import io.zerows.component.log.OLog;
 import io.zerows.epoch.program.Ut;
 
 import java.util.concurrent.ConcurrentMap;

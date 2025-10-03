@@ -1,7 +1,7 @@
 package io.zerows.epoch.corpus.web.client;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.common.shared.app.KIntegrationApi;
+import io.zerows.component.shared.app.KIntegrationApi;
 import org.apache.http.impl.client.CloseableHttpClient;
 
 /*

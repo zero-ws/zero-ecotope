@@ -1,7 +1,7 @@
 package io.zerows.plugins.websocket.stomp.handler;
 
 import io.vertx.core.Vertx;
-import io.zerows.epoch.common.log.OLog;
+import io.zerows.component.log.OLog;
 import io.zerows.epoch.program.Ut;
 
 import java.util.Objects;

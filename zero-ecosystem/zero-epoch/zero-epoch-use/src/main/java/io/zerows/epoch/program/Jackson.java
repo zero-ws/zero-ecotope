@@ -4,11 +4,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.constant.KName;
-import io.zerows.epoch.common.log.OLog;
-import io.zerows.epoch.constant.VString;
-import io.zerows.epoch.constant.VValue;
-import io.zerows.epoch.enums.typed.ChangeFlag;
-import io.zerows.epoch.support.UtBase;
+import io.zerows.component.log.OLog;
+import io.zerows.constant.VString;
+import io.zerows.constant.VValue;
+import io.zerows.enums.typed.ChangeFlag;
+import io.zerows.support.UtBase;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;

@@ -1,10 +1,10 @@
 package io.zerows.extension.mbse.basement.uca.query;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.common.log.Annal;
-import io.zerows.epoch.common.uca.qr.Criteria;
-import io.zerows.epoch.common.uca.qr.Sorter;
-import io.zerows.epoch.common.uca.qr.syntax.QTree;
+import io.zerows.component.log.Annal;
+import io.zerows.component.qr.Criteria;
+import io.zerows.component.qr.Sorter;
+import io.zerows.component.qr.syntax.QTree;
 import io.zerows.extension.mbse.basement.atom.element.DataMatrix;
 import io.zerows.extension.mbse.basement.atom.element.DataTpl;
 import io.zerows.extension.mbse.basement.uca.jooq.internal.Jq;

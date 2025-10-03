@@ -2,9 +2,9 @@ package io.zerows.specification.configuration.boot;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.common.shared.boot.KLauncher;
-import io.zerows.epoch.common.shared.boot.KPivot;
-import io.zerows.epoch.common.shared.program.KVarSet;
+import io.zerows.component.shared.boot.KLauncher;
+import io.zerows.component.shared.boot.KPivot;
+import io.zerows.component.shared.program.KVarSet;
 import io.zerows.specification.access.app.HArk;
 import io.zerows.specification.configuration.HConfig;
 

@@ -2,7 +2,7 @@ package io.zerows.plugins.store.neo4j.refine;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.program.Ut;
-import io.zerows.epoch.common.log.Annal;
+import io.zerows.component.log.Annal;
 import org.neo4j.driver.Record;
 import org.neo4j.driver.Result;
 import org.neo4j.driver.exceptions.NoSuchRecordException;

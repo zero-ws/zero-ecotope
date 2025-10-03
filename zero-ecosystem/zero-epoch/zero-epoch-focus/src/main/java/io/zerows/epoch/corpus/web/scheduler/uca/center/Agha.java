@@ -2,7 +2,7 @@ package io.zerows.epoch.corpus.web.scheduler.uca.center;
 
 import io.vertx.core.Future;
 import io.zerows.epoch.corpus.web.scheduler.atom.Mission;
-import io.zerows.epoch.enums.EmJob;
+import io.zerows.enums.EmJob;
 
 /**
  * Job manager to manage each job here.

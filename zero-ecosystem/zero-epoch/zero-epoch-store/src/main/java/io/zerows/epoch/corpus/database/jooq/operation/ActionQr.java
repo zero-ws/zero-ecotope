@@ -6,9 +6,9 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.corpus.database.jooq.condition.JooqCond;
 import io.zerows.epoch.corpus.database.jooq.util.JqAnalyzer;
 import io.zerows.epoch.corpus.database.jooq.util.JqOut;
-import io.zerows.epoch.common.uca.qr.Pager;
-import io.zerows.epoch.common.uca.qr.Sorter;
-import io.zerows.epoch.common.uca.qr.syntax.Ir;
+import io.zerows.component.qr.Pager;
+import io.zerows.component.qr.Sorter;
+import io.zerows.component.qr.syntax.Ir;
 import io.zerows.epoch.program.Ut;
 import org.jooq.*;
 

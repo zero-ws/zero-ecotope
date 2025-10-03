@@ -1,6 +1,6 @@
 package io.zerows.epoch.sdk.modeling;
 
-import io.zerows.epoch.common.shared.datamation.KDictConfig;
+import io.zerows.component.shared.datamation.KDictConfig;
 
 /*
  * Service

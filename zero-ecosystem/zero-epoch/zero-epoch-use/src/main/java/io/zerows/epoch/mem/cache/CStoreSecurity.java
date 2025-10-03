@@ -1,7 +1,7 @@
 package io.zerows.epoch.mem.cache;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.epoch.annotations.monitor.Memory;
+import io.zerows.annotations.monitor.Memory;
 import io.zerows.epoch.corpus.security.manage.KPermit;
 import io.zerows.epoch.corpus.security.manage.KSemi;
 

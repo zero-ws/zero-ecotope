@@ -3,7 +3,7 @@ package io.zerows.epoch.corpus.mbse.atom;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.constant.KName;
-import io.zerows.epoch.common.log.OLog;
+import io.zerows.component.log.OLog;
 import io.zerows.epoch.corpus.container.exception._80510Exception404ModelNotFound;
 import io.zerows.epoch.corpus.container.exception._80547Exception409IdentifierConflict;
 import io.zerows.epoch.corpus.mbse.atom.specification.KModule;

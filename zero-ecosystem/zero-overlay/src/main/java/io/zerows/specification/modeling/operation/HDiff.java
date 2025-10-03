@@ -1,6 +1,6 @@
 package io.zerows.specification.modeling.operation;
 
-import io.zerows.epoch.common.uca.compare.Vs;
+import io.zerows.component.compare.Vs;
 
 /**
  * 模型比对器专用方法，现阶段版本直接返回比对器 {@link Vs}

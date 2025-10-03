@@ -3,9 +3,9 @@ package io.zerows.extension.runtime.workflow.atom.runtime;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.constant.VString;
-import io.zerows.epoch.integrated.jackson.databind.JsonObjectDeserializer;
-import io.zerows.epoch.integrated.jackson.databind.JsonObjectSerializer;
+import io.zerows.constant.VString;
+import io.zerows.integrated.jackson.databind.JsonObjectDeserializer;
+import io.zerows.integrated.jackson.databind.JsonObjectSerializer;
 
 import java.io.Serializable;
 import java.util.Objects;

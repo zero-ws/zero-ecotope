@@ -2,7 +2,7 @@ package io.zerows.epoch.component.extract;
 
 import io.r2mo.function.Fn;
 import io.vertx.core.http.HttpMethod;
-import io.zerows.epoch.common.log.Annal;
+import io.zerows.component.log.Annal;
 import io.zerows.epoch.corpus.exception._40007Exception500MethodNull;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;

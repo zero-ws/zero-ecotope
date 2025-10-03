@@ -2,8 +2,8 @@ package io.zerows.epoch.program;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.common.shared.datamation.KMapping;
-import io.zerows.epoch.common.uca.convert.V;
+import io.zerows.component.shared.datamation.KMapping;
+import io.zerows.component.convert.V;
 
 import java.math.BigDecimal;
 import java.time.Instant;

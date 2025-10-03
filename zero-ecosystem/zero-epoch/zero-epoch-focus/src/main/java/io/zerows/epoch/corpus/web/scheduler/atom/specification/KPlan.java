@@ -1,8 +1,8 @@
 package io.zerows.epoch.corpus.web.scheduler.atom.specification;
 
-import io.zerows.epoch.constant.VString;
-import io.zerows.epoch.constant.VValue;
-import io.zerows.epoch.enums.typed.PerMode;
+import io.zerows.constant.VString;
+import io.zerows.constant.VValue;
+import io.zerows.enums.typed.PerMode;
 import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.corpus.web.scheduler.uca.plan.JobAt;
 

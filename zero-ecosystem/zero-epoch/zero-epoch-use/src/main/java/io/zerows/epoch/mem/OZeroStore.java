@@ -2,9 +2,9 @@ package io.zerows.epoch.mem;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.configure.YmlCore;
-import io.zerows.epoch.common.log.Log4JAnnal;
+import io.zerows.component.log.Log4JAnnal;
 import io.zerows.epoch.program.Ut;
-import io.zerows.epoch.spi.boot.HEquip;
+import io.zerows.spi.boot.HEquip;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HSetting;
 

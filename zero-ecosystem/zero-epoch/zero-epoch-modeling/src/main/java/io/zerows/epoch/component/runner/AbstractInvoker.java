@@ -8,12 +8,12 @@ import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.Message;
 import io.zerows.epoch.annotations.Me;
-import io.zerows.epoch.common.log.OLog;
+import io.zerows.component.log.OLog;
 import io.zerows.epoch.component.uddi.Uddi;
 import io.zerows.epoch.component.uddi.UddiClient;
-import io.zerows.epoch.constant.VValue;
+import io.zerows.constant.VValue;
 import io.zerows.epoch.corpus.model.commune.Envelop;
-import io.zerows.epoch.enums.modeling.EmValue;
+import io.zerows.enums.modeling.EmValue;
 import io.zerows.epoch.program.Ut;
 
 import java.lang.annotation.Annotation;

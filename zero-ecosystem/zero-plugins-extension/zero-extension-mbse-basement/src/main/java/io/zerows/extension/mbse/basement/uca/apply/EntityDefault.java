@@ -1,7 +1,7 @@
 package io.zerows.extension.mbse.basement.uca.apply;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.constant.VString;
+import io.zerows.constant.VString;
 import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.program.Ut;
 import io.zerows.extension.mbse.basement.eon.em.EntityType;

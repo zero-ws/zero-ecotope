@@ -1,8 +1,8 @@
 package io.zerows.extension.runtime.workflow.util;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.common.log.Log;
-import io.zerows.epoch.common.log.LogModule;
+import io.zerows.component.log.Log;
+import io.zerows.component.log.LogModule;
 import io.zerows.extension.runtime.workflow.eon.em.PassWay;
 import org.camunda.bpm.engine.repository.ProcessDefinition;
 import org.camunda.bpm.engine.task.Task;

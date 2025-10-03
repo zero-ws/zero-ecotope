@@ -2,8 +2,8 @@ package io.zerows.specification.vital;
 
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
-import io.zerows.epoch.annotations.monitor.Memory;
-import io.zerows.epoch.common.uca.fs.LocalFs;
+import io.zerows.annotations.monitor.Memory;
+import io.zerows.component.fs.LocalFs;
 import io.zerows.specification.storage.HStore;
 
 import java.util.Set;

@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.configure.YmlCore;
 import io.zerows.epoch.based.constant.KName;
-import io.zerows.epoch.constant.VString;
+import io.zerows.constant.VString;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.database.Database;
 import io.zerows.epoch.corpus.database.cp.zdk.DataPool;

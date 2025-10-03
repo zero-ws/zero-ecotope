@@ -7,7 +7,7 @@ import io.zerows.epoch.bootplus.extension.refine.Ox;
 import io.zerows.epoch.bootplus.extension.scaffold.plugin.AbstractAfter;
 import io.zerows.epoch.bootplus.extension.uca.graphic.Pixel;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.epoch.enums.typed.ChangeFlag;
+import io.zerows.enums.typed.ChangeFlag;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>

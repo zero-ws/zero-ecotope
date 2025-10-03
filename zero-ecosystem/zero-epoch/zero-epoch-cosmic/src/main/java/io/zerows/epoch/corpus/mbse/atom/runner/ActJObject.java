@@ -1,9 +1,9 @@
 package io.zerows.epoch.corpus.mbse.atom.runner;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.common.shared.datamation.KMap;
+import io.zerows.component.shared.datamation.KMap;
 import io.zerows.epoch.based.constant.KWeb;
-import io.zerows.epoch.common.uca.qr.syntax.Ir;
+import io.zerows.component.qr.syntax.Ir;
 import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.corpus.model.commune.Envelop;
 import io.zerows.specification.modeling.HRecord;

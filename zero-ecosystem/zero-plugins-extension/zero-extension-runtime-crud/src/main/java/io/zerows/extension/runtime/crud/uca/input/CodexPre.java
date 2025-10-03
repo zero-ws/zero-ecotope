@@ -3,7 +3,7 @@ package io.zerows.extension.runtime.crud.uca.input;
 import io.r2mo.typed.exception.WebException;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.constant.VString;
+import io.zerows.constant.VString;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.mbse.atom.specification.KModule;
 import io.zerows.epoch.corpus.model.Rule;

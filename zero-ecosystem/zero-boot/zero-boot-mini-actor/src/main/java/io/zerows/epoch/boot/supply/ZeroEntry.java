@@ -6,7 +6,7 @@ import io.zerows.epoch.based.configure.YmlCore;
 import io.zerows.epoch.corpus.cloud.LogCloud;
 import io.zerows.epoch.corpus.container.store.BootStore;
 import io.zerows.epoch.mem.OZeroStore;
-import io.zerows.epoch.support.FnBase;
+import io.zerows.support.FnBase;
 import io.zerows.specification.configuration.HConfig;
 
 import java.util.function.BiConsumer;

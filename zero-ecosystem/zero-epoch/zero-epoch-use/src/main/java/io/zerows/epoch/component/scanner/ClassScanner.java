@@ -1,7 +1,7 @@
 package io.zerows.epoch.component.scanner;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.epoch.common.log.OLog;
+import io.zerows.component.log.OLog;
 import io.zerows.epoch.program.Ut;
 import org.junit.runner.RunWith;
 import org.osgi.framework.Bundle;

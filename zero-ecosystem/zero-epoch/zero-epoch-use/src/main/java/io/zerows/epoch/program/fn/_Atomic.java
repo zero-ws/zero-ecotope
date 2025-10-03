@@ -2,7 +2,7 @@ package io.zerows.epoch.program.fn;
 
 import io.vertx.core.Future;
 import io.vertx.core.Promise;
-import io.zerows.epoch.support.FnBase;
+import io.zerows.support.FnBase;
 
 import java.util.function.Consumer;
 

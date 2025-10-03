@@ -4,7 +4,7 @@ import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.component.normalize.Oneness;
-import io.zerows.epoch.constant.VString;
+import io.zerows.constant.VString;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.configuration.module.MDConnect;
 import io.zerows.epoch.program.Ut;

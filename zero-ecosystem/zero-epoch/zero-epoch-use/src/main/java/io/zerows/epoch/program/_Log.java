@@ -1,6 +1,6 @@
 package io.zerows.epoch.program;
 
-import io.zerows.epoch.common.log.OLog;
+import io.zerows.component.log.OLog;
 
 /**
  * @author lang : 2024-04-17

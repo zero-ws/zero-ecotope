@@ -6,7 +6,7 @@ import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.component.extract.Extractor;
 import io.zerows.epoch.component.extract.ToolMethod;
 import io.zerows.epoch.component.extract.ToolVerifier;
-import io.zerows.epoch.constant.VString;
+import io.zerows.constant.VString;
 import io.zerows.epoch.corpus.web.websocket.annotations.Subscribe;
 import io.zerows.epoch.corpus.web.websocket.atom.Remind;
 import io.zerows.epoch.corpus.web.websocket.eon.em.RemindType;

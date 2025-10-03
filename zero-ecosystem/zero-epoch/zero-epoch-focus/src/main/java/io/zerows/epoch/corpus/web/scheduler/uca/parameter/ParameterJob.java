@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 import io.vertx.ext.web.Session;
 import io.zerows.epoch.based.constant.KName;
-import io.zerows.epoch.common.shared.program.KRef;
+import io.zerows.component.shared.program.KRef;
 import io.zerows.epoch.component.parameter.ParameterBuilder;
 import io.zerows.epoch.corpus.io.annotations.BodyParam;
 import io.zerows.epoch.corpus.model.commune.Envelop;

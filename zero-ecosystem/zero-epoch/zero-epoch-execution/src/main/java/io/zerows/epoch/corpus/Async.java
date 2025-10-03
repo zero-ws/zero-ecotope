@@ -2,11 +2,11 @@ package io.zerows.epoch.corpus;
 
 import io.vertx.core.Future;
 import io.vertx.core.Promise;
-import io.zerows.epoch.common.log.OLog;
-import io.zerows.epoch.common.shared.program.KRef;
-import io.zerows.epoch.constant.VValue;
+import io.zerows.component.log.OLog;
+import io.zerows.component.shared.program.KRef;
+import io.zerows.constant.VValue;
 import io.zerows.epoch.program.Ut;
-import io.zerows.epoch.support.FnBase;
+import io.zerows.support.FnBase;
 import io.zerows.epoch.underlying.channel.Pocket;
 
 import java.util.ArrayList;

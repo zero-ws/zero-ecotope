@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.bootplus.extension.migration.AbstractStep;
 import io.zerows.epoch.bootplus.extension.migration.MigrateStep;
 import io.zerows.epoch.corpus.Ux;
-import io.zerows.epoch.enums.Environment;
+import io.zerows.enums.Environment;
 
 public class RestoreAll extends AbstractStep {
     private transient final MigrateStep history;

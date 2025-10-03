@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.corpus.database.jooq.util.JqAnalyzer;
 import io.zerows.epoch.corpus.database.jooq.util.JqFlow;
-import io.zerows.epoch.common.uca.qr.Sorter;
+import io.zerows.component.qr.Sorter;
 
 import java.util.List;
 

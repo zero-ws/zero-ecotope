@@ -1,6 +1,6 @@
 package io.zerows.specification.vital;
 
-import io.zerows.epoch.enums.EmLib;
+import io.zerows.enums.EmLib;
 import io.zerows.specification.development.compiled.HLibrary;
 import io.zerows.specification.development.program.HEditor;
 

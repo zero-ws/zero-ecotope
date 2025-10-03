@@ -5,7 +5,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.constant.KName;
-import io.zerows.epoch.common.uca.aop.AspectRobin;
+import io.zerows.component.aop.AspectRobin;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.metadata.specification.KFlow;
 import io.zerows.epoch.program.Ut;

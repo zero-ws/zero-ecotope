@@ -8,7 +8,7 @@ import io.zerows.epoch.based.exception._80224Exception409UiPhaseEager;
 import io.zerows.epoch.corpus.security.manage.KCatena;
 import io.zerows.epoch.corpus.security.manage.KPermit;
 import io.zerows.epoch.corpus.security.manage.KSemi;
-import io.zerows.epoch.enums.EmSecure;
+import io.zerows.enums.EmSecure;
 import io.zerows.epoch.sdk.security.authority.HValve;
 
 /**

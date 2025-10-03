@@ -1,7 +1,7 @@
 package io.zerows.specification.atomic;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.support.UtBase;
+import io.zerows.support.UtBase;
 
 import java.io.Serializable;
 

@@ -1,11 +1,11 @@
 package io.zerows.epoch.underlying.provider;
 
-import io.zerows.epoch.constant.VEnv;
+import io.zerows.constant.VEnv;
 import io.zerows.epoch.corpus.cloud.LogCloud;
 import io.zerows.epoch.program.Ut;
-import io.zerows.epoch.runtime.HMacrocosm;
-import io.zerows.epoch.spi.modeler.AtomNs;
-import io.zerows.epoch.support.UtBase;
+import io.zerows.runtime.HMacrocosm;
+import io.zerows.spi.modeler.AtomNs;
+import io.zerows.support.UtBase;
 
 /**
  * Zero框架内部专用名空间，也是默认名空间，默认名空间使用：

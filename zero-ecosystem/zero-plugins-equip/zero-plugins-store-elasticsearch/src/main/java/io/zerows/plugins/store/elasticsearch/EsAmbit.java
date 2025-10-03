@@ -3,7 +3,7 @@ package io.zerows.plugins.store.elasticsearch;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.enums.typed.ChangeFlag;
+import io.zerows.enums.typed.ChangeFlag;
 
 import java.util.concurrent.ConcurrentMap;
 

@@ -8,7 +8,7 @@ import io.zerows.epoch.bootplus.extension.migration.AbstractStep;
 import io.zerows.epoch.bootplus.extension.refine.Ox;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.database.cp.zdk.DataPool;
-import io.zerows.epoch.enums.Environment;
+import io.zerows.enums.Environment;
 import io.zerows.epoch.program.Ut;
 
 import java.io.File;

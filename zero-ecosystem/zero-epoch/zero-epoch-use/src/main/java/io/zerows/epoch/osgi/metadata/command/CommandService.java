@@ -1,6 +1,6 @@
 package io.zerows.epoch.osgi.metadata.command;
 
-import io.zerows.epoch.constant.VString;
+import io.zerows.constant.VString;
 import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.sdk.metadata.running.OCommand;
 import org.osgi.framework.Bundle;

@@ -3,7 +3,7 @@ package io.zerows.plugins.store.neo4j;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.configure.YmlCore;
 import io.zerows.epoch.program.Ut;
-import io.zerows.epoch.common.log.Annal;
+import io.zerows.component.log.Annal;
 import org.neo4j.driver.AuthToken;
 import org.neo4j.driver.AuthTokens;
 import org.neo4j.driver.Config;

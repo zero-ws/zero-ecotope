@@ -1,7 +1,7 @@
 package io.zerows.epoch.configuration;
 
 import io.zerows.epoch.configuration.option.ClusterOptions;
-import io.zerows.epoch.enums.app.ServerType;
+import io.zerows.enums.app.ServerType;
 import io.zerows.specification.configuration.HSetting;
 
 import java.io.Serializable;

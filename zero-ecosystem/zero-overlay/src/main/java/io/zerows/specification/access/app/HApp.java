@@ -1,11 +1,11 @@
 package io.zerows.specification.access.app;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.constant.VName;
-import io.zerows.epoch.constant.VValue;
-import io.zerows.epoch.enums.EmApp;
-import io.zerows.epoch.spi.modeler.AtomNs;
-import io.zerows.epoch.support.UtBase;
+import io.zerows.constant.VName;
+import io.zerows.constant.VValue;
+import io.zerows.enums.EmApp;
+import io.zerows.spi.modeler.AtomNs;
+import io.zerows.support.UtBase;
 import io.zerows.specification.access.HBoundary;
 import io.zerows.specification.access.cloud.HFrontier;
 import io.zerows.specification.access.cloud.HGalaxy;

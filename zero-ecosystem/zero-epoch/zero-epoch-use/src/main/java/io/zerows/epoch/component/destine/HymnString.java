@@ -2,7 +2,7 @@ package io.zerows.epoch.component.destine;
 
 import io.zerows.epoch.corpus.metadata.specification.KJoin;
 import io.zerows.epoch.corpus.metadata.specification.KPoint;
-import io.zerows.epoch.enums.EmPRI;
+import io.zerows.enums.EmPRI;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentMap;

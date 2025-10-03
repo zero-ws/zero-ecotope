@@ -1,6 +1,6 @@
 package io.zerows.epoch.sdk.metadata.dependency;
 
-import io.zerows.epoch.common.log.OLog;
+import io.zerows.component.log.OLog;
 import io.zerows.epoch.component.execution.ServiceRunner;
 import io.zerows.epoch.osgi.metadata.dependency.CallbackOfBase;
 import io.zerows.epoch.osgi.metadata.dependency.CallbackOfService;

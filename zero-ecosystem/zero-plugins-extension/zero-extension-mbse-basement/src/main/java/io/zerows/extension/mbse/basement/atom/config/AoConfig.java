@@ -2,8 +2,8 @@ package io.zerows.extension.mbse.basement.atom.config;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.zerows.epoch.integrated.jackson.databind.ClassDeserializer;
-import io.zerows.epoch.integrated.jackson.databind.ClassSerializer;
+import io.zerows.integrated.jackson.databind.ClassDeserializer;
+import io.zerows.integrated.jackson.databind.ClassSerializer;
 
 /*
  * Configuration for different implementation here.

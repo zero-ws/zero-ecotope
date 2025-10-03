@@ -9,7 +9,7 @@ import io.vertx.ext.auth.User;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.based.constant.KName;
-import io.zerows.epoch.common.uca.qr.syntax.Ir;
+import io.zerows.component.qr.syntax.Ir;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.program.Ut;
 import io.zerows.extension.runtime.report.api.service.ReportInstanceStub;

@@ -5,7 +5,7 @@ import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.program.Ut;
-import io.zerows.epoch.common.log.Annal;
+import io.zerows.component.log.Annal;
 import io.zerows.plugins.store.neo4j.refine.N4J;
 import io.zerows.plugins.store.neo4j.sync.GraphicAnalyzer;
 import io.zerows.plugins.store.neo4j.sync.N4JSession;

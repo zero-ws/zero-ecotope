@@ -1,7 +1,7 @@
 package io.zerows.epoch.corpus.container.uca.plugins;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.epoch.common.log.OLog;
+import io.zerows.component.log.OLog;
 import io.zerows.epoch.corpus.container.uca.routing.AxisExtension;
 import io.zerows.epoch.corpus.io.uca.routing.OAxis;
 import io.zerows.epoch.program.Ut;

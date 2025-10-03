@@ -2,7 +2,7 @@ package io.zerows.extension.runtime.workflow.atom.configuration;
 
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.constant.VString;
+import io.zerows.constant.VString;
 import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.program.Ut;
 import io.zerows.extension.runtime.workflow.uca.modeling.Respect;

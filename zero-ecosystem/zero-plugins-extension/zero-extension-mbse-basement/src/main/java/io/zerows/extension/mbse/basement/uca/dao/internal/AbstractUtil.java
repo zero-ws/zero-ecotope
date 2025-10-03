@@ -1,8 +1,8 @@
 package io.zerows.extension.mbse.basement.uca.dao.internal;
 
 import io.r2mo.function.Fn;
-import io.zerows.epoch.common.log.Annal;
-import io.zerows.epoch.common.uca.qr.Criteria;
+import io.zerows.component.log.Annal;
+import io.zerows.component.qr.Criteria;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.atom.data.DataEvent;
 import io.zerows.extension.mbse.basement.eon.em.EventType;

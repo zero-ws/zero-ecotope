@@ -2,10 +2,10 @@ package io.zerows.extension.mbse.basement.uca.jdbc;
 
 import io.r2mo.function.Fn;
 import io.r2mo.typed.cc.Cc;
-import io.zerows.epoch.constant.VValue;
-import io.zerows.epoch.common.shared.app.KDatabase;
+import io.zerows.constant.VValue;
+import io.zerows.component.shared.app.KDatabase;
 import io.zerows.epoch.corpus.database.cp.zdk.DataPool;
-import io.zerows.epoch.common.log.Annal;
+import io.zerows.component.log.Annal;
 import io.zerows.epoch.program.Ut;
 import io.zerows.extension.mbse.basement.exception._80502Exception500EmptySQL;
 import io.zerows.extension.mbse.basement.uca.sql.SqlOutput;

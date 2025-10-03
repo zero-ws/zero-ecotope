@@ -1,8 +1,8 @@
 package io.zerows.specification.modeling.metadata;
 
 import io.vertx.core.json.JsonArray;
-import io.zerows.epoch.spi.modeler.MetaOn;
-import io.zerows.epoch.support.UtBase;
+import io.zerows.spi.modeler.MetaOn;
+import io.zerows.support.UtBase;
 
 import java.util.Collection;
 import java.util.List;

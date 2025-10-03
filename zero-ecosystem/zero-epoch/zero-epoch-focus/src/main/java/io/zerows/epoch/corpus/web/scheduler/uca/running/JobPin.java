@@ -1,7 +1,7 @@
 package io.zerows.epoch.corpus.web.scheduler.uca.running;
 
 import io.zerows.epoch.based.configure.YmlCore;
-import io.zerows.epoch.common.log.OLog;
+import io.zerows.component.log.OLog;
 import io.zerows.epoch.corpus.web.scheduler.eon.MessageOfJob;
 import io.zerows.epoch.mem.OZeroStore;
 import io.zerows.epoch.program.Ut;

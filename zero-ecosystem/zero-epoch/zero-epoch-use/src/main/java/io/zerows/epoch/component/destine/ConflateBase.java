@@ -3,7 +3,7 @@ package io.zerows.epoch.component.destine;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.constant.KName;
-import io.zerows.epoch.common.log.Log;
+import io.zerows.component.log.Log;
 import io.zerows.epoch.corpus.metadata.specification.KJoin;
 import io.zerows.epoch.corpus.metadata.specification.KPoint;
 import io.zerows.epoch.program.Ut;

@@ -4,7 +4,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.bootplus.extension.refine.Ox;
 import io.zerows.epoch.corpus.metadata.commune.Apt;
-import io.zerows.epoch.enums.typed.ChangeFlag;
+import io.zerows.enums.typed.ChangeFlag;
 import io.zerows.epoch.program.Ut;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 

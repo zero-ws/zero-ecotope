@@ -1,6 +1,6 @@
 package io.zerows.epoch.corpus.io.uca.response.wrap;
 
-import io.zerows.epoch.common.log.Annal;
+import io.zerows.component.log.Annal;
 import jakarta.ws.rs.core.MediaType;
 
 import java.util.Objects;

@@ -2,7 +2,7 @@ package io.zerows.epoch.component.di;
 
 import com.google.inject.Injector;
 import io.r2mo.typed.cc.Cc;
-import io.zerows.epoch.common.log.OLog;
+import io.zerows.component.log.OLog;
 import io.zerows.epoch.corpus.assembly.OProxyInstance;
 import io.zerows.epoch.program.Ut;
 import jakarta.inject.Named;

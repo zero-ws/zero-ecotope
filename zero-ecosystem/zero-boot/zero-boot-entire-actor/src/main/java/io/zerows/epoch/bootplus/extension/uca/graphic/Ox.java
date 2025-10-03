@@ -1,6 +1,6 @@
 package io.zerows.epoch.bootplus.extension.uca.graphic;
 
-import io.zerows.epoch.enums.typed.ChangeFlag;
+import io.zerows.enums.typed.ChangeFlag;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;

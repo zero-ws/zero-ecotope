@@ -3,7 +3,7 @@ package io.zerows.extension.runtime.ambient.uca.boot;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
-import io.zerows.epoch.common.log.OLog;
+import io.zerows.component.log.OLog;
 import io.zerows.epoch.program.Ut;
 
 import java.util.concurrent.ConcurrentMap;

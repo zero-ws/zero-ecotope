@@ -2,12 +2,12 @@ package io.zerows.extension.mbse.basement.atom.builtin;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.constant.VString;
-import io.zerows.epoch.enums.modeling.EmAttribute;
-import io.zerows.epoch.enums.modeling.EmValue;
-import io.zerows.epoch.common.shared.normalize.KAttribute;
-import io.zerows.epoch.common.shared.normalize.KMarkAttribute;
-import io.zerows.epoch.common.shared.reference.RRule;
+import io.zerows.constant.VString;
+import io.zerows.enums.modeling.EmAttribute;
+import io.zerows.enums.modeling.EmValue;
+import io.zerows.component.shared.normalize.KAttribute;
+import io.zerows.component.shared.normalize.KMarkAttribute;
+import io.zerows.component.shared.reference.RRule;
 import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.program.Ut;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MAttribute;

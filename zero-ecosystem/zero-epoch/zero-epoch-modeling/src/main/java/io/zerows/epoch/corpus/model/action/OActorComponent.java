@@ -2,7 +2,7 @@ package io.zerows.epoch.corpus.model.action;
 
 import io.zerows.epoch.corpus.model.Event;
 import io.zerows.epoch.corpus.model.Receipt;
-import io.zerows.epoch.enums.app.ServerType;
+import io.zerows.enums.app.ServerType;
 
 import java.io.Serializable;
 import java.util.ArrayList;

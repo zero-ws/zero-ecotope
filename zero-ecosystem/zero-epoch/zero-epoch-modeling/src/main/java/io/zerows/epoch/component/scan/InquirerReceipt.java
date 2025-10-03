@@ -1,7 +1,7 @@
 package io.zerows.epoch.component.scan;
 
 import io.r2mo.function.Fn;
-import io.zerows.epoch.common.log.Annal;
+import io.zerows.component.log.Annal;
 import io.zerows.epoch.component.scan.parallel.QueueThread;
 import io.zerows.epoch.corpus.model.Receipt;
 import io.zerows.epoch.sdk.metadata.uca.Inquirer;

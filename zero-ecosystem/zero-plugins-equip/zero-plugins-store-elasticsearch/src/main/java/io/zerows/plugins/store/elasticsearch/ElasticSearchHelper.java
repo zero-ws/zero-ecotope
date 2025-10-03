@@ -5,7 +5,7 @@ import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.configure.YmlCore;
-import io.zerows.epoch.common.log.Annal;
+import io.zerows.component.log.Annal;
 import io.zerows.epoch.program.Ut;
 import io.zerows.plugins.store.elasticsearch.exception._20006Exception404MissingConfiguration;
 import org.apache.http.HttpHost;

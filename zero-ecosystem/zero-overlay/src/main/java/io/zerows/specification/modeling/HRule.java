@@ -1,9 +1,9 @@
 package io.zerows.specification.modeling;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.common.shared.normalize.KRule;
-import io.zerows.epoch.common.shared.normalize.KRuleTerm;
-import io.zerows.epoch.support.UtBase;
+import io.zerows.component.shared.normalize.KRule;
+import io.zerows.component.shared.normalize.KRuleTerm;
+import io.zerows.support.UtBase;
 
 import java.io.Serializable;
 import java.util.List;

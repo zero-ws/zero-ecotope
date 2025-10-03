@@ -1,8 +1,8 @@
 package io.zerows.epoch.mem;
 
 import io.zerows.epoch.annotations.QaS;
-import io.zerows.epoch.common.log.OLog;
-import io.zerows.epoch.common.shared.context.KRunner;
+import io.zerows.component.log.OLog;
+import io.zerows.component.shared.context.KRunner;
 import io.zerows.epoch.component.scan.InquirerAgent;
 import io.zerows.epoch.component.scan.InquirerEvent;
 import io.zerows.epoch.component.scan.InquirerFilter;
@@ -14,9 +14,9 @@ import io.zerows.epoch.corpus.model.Event;
 import io.zerows.epoch.corpus.model.Receipt;
 import io.zerows.epoch.corpus.model.action.OActorComponent;
 import io.zerows.epoch.corpus.model.action.OJointAction;
-import io.zerows.epoch.enums.EmAction;
-import io.zerows.epoch.enums.VertxComponent;
-import io.zerows.epoch.enums.app.ServerType;
+import io.zerows.enums.EmAction;
+import io.zerows.enums.VertxComponent;
+import io.zerows.enums.app.ServerType;
 import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.sdk.metadata.AbstractAmbiguity;
 import io.zerows.epoch.sdk.metadata.running.ORepository;

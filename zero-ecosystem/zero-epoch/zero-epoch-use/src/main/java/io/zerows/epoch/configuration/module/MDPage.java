@@ -1,7 +1,7 @@
 package io.zerows.epoch.configuration.module;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.common.uca.metadata.MetaCachePage;
+import io.zerows.component.metadata.MetaCachePage;
 import io.zerows.epoch.program.Ut;
 import org.osgi.framework.Bundle;
 

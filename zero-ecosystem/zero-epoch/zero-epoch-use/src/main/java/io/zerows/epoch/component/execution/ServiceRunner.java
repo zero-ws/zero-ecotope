@@ -2,7 +2,7 @@ package io.zerows.epoch.component.execution;
 
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
-import io.zerows.epoch.common.log.OLog;
+import io.zerows.component.log.OLog;
 import io.zerows.epoch.corpus.metadata.service.CallbackParameter;
 import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.sdk.metadata.service.ServiceContext;

@@ -1,7 +1,7 @@
 package io.zerows.epoch.sdk.security.authority;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.enums.EmSecure;
+import io.zerows.enums.EmSecure;
 
 import java.io.Serializable;
 import java.util.Set;

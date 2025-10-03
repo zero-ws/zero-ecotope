@@ -2,8 +2,8 @@ package io.zerows.epoch.corpus.extension;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.common.log.OLog;
-import io.zerows.epoch.constant.VString;
+import io.zerows.component.log.OLog;
+import io.zerows.constant.VString;
 import io.zerows.epoch.configuration.module.MDConfiguration;
 import io.zerows.epoch.configuration.module.MDConnect;
 import io.zerows.epoch.configuration.module.MDEntity;

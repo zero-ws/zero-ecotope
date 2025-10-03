@@ -1,7 +1,7 @@
 package io.zerows.specification.configuration;
 
-import io.zerows.epoch.enums.EmApp;
-import io.zerows.epoch.enums.EmBoot;
+import io.zerows.enums.EmApp;
+import io.zerows.enums.EmBoot;
 
 /**
  * 基于启动配置存储专用配置器，内置包含

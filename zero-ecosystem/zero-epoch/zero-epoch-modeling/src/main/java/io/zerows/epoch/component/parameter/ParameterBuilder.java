@@ -1,9 +1,9 @@
 package io.zerows.epoch.component.parameter;
 
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.epoch.common.shared.program.KRef;
+import io.zerows.component.shared.program.KRef;
 import io.zerows.epoch.corpus.model.commune.Envelop;
-import io.zerows.epoch.exception.web._60050Exception501NotSupport;
+import io.zerows.exception.web._60050Exception501NotSupport;
 import io.zerows.epoch.program.Ut;
 
 /**

@@ -7,7 +7,7 @@ import io.vertx.ext.web.handler.AuthenticationHandler;
 import io.vertx.ext.web.handler.BasicAuthHandler;
 import io.zerows.epoch.based.configure.YmlCore;
 import io.zerows.epoch.based.constant.KName;
-import io.zerows.epoch.constant.VString;
+import io.zerows.constant.VString;
 import io.zerows.epoch.corpus.security.Aegis;
 import io.zerows.epoch.corpus.security.AegisItem;
 import io.zerows.epoch.program.Ut;

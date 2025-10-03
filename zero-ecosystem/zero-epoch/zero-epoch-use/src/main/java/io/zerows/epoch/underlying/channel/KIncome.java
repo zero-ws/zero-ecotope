@@ -1,7 +1,7 @@
 package io.zerows.epoch.underlying.channel;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.common.log.OLog;
+import io.zerows.component.log.OLog;
 import io.zerows.epoch.program.Ut;
 
 import java.io.Serializable;

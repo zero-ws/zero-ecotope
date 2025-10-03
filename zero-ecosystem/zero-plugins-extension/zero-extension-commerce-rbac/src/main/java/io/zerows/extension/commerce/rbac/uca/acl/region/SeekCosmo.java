@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.model.commune.Envelop;
-import io.zerows.epoch.enums.EmAop;
+import io.zerows.enums.EmAop;
 import io.zerows.epoch.program.Ut;
 import io.zerows.extension.commerce.rbac.uca.acl.rapier.Quest;
 

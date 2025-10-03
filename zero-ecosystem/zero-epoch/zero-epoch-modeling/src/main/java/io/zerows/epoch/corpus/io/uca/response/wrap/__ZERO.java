@@ -1,7 +1,7 @@
 package io.zerows.epoch.corpus.io.uca.response.wrap;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.epoch.annotations.monitor.Memory;
+import io.zerows.annotations.monitor.Memory;
 import jakarta.ws.rs.core.MediaType;
 
 import java.util.concurrent.ConcurrentHashMap;

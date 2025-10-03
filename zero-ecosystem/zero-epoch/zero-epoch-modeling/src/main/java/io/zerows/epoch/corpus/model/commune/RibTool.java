@@ -5,7 +5,7 @@ import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.component.serialization.ZeroType;
-import io.zerows.epoch.constant.VName;
+import io.zerows.constant.VName;
 
 import java.util.Objects;
 

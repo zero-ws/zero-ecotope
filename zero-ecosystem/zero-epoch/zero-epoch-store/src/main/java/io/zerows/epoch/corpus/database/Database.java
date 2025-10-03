@@ -1,12 +1,12 @@
 package io.zerows.epoch.corpus.database;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.annotations.monitor.Legacy;
+import io.zerows.annotations.monitor.Legacy;
 import io.zerows.epoch.based.configure.YmlCore;
-import io.zerows.epoch.common.log.OLog;
-import io.zerows.epoch.common.shared.app.KDatabase;
+import io.zerows.component.log.OLog;
+import io.zerows.component.shared.app.KDatabase;
 import io.zerows.epoch.component.environment.MatureOn;
-import io.zerows.epoch.enums.EmDS;
+import io.zerows.enums.EmDS;
 import io.zerows.epoch.mem.OZeroStore;
 import io.zerows.epoch.program.Ut;
 

@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.based.constant.KName;
 import io.zerows.epoch.based.constant.KWeb;
-import io.zerows.epoch.common.shared.program.Kv;
+import io.zerows.component.shared.program.Kv;
 import io.zerows.epoch.corpus.database.jooq.operation.UxJooq;
 import io.zerows.epoch.corpus.database.jooq.util.JqAnalyzer;
 import io.zerows.epoch.corpus.mbse.atom.specification.KModule;

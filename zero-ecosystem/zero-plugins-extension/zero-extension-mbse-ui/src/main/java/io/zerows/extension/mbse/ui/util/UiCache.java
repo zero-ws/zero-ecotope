@@ -3,7 +3,7 @@ package io.zerows.extension.mbse.ui.util;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.common.log.Annal;
+import io.zerows.component.log.Annal;
 import io.zerows.epoch.program.Ut;
 import io.zerows.epoch.corpus.web.cache.Rapid;
 import io.zerows.extension.mbse.ui.bootstrap.UiPin;

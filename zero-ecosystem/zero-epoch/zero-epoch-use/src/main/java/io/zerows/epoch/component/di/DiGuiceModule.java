@@ -2,7 +2,7 @@ package io.zerows.epoch.component.di;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.name.Names;
-import io.zerows.epoch.common.log.OLog;
+import io.zerows.component.log.OLog;
 import io.zerows.epoch.program.Ut;
 import jakarta.inject.Named;
 import jakarta.inject.Singleton;

@@ -1,7 +1,7 @@
 package io.zerows.epoch.sdk.metadata.service;
 
-import io.zerows.epoch.common.log.LogModule;
-import io.zerows.epoch.common.log.OLog;
+import io.zerows.component.log.LogModule;
+import io.zerows.component.log.OLog;
 import io.zerows.epoch.program.Ut;
 import org.apache.felix.dm.Component;
 import org.apache.felix.dm.DependencyManager;

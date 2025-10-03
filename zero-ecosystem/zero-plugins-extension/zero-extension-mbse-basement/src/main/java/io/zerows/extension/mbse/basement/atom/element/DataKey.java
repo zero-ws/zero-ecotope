@@ -1,7 +1,7 @@
 package io.zerows.extension.mbse.basement.atom.element;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.epoch.enums.modeling.EmKey;
+import io.zerows.enums.modeling.EmKey;
 
 import java.io.Serializable;
 import java.util.concurrent.ConcurrentHashMap;

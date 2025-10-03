@@ -1,6 +1,6 @@
 package io.zerows.epoch.corpus.model.action;
 
-import io.zerows.epoch.enums.EmAction;
+import io.zerows.enums.EmAction;
 
 import java.io.Serializable;
 import java.util.Objects;

@@ -5,14 +5,14 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 import io.zerows.epoch.based.constant.KName;
-import io.zerows.epoch.common.uca.qr.syntax.Ir;
+import io.zerows.component.qr.syntax.Ir;
 import io.zerows.epoch.corpus.Ux;
 import io.zerows.epoch.corpus.database.jooq.operation.UxJooq;
 import io.zerows.epoch.corpus.metadata.mapping.Mirror;
 import io.zerows.epoch.corpus.metadata.mapping.Mojo;
 import io.zerows.epoch.corpus.metadata.typed.UArray;
 import io.zerows.epoch.program.Ut;
-import io.zerows.epoch.spi.modeler.Indent;
+import io.zerows.spi.modeler.Indent;
 
 import java.time.Instant;
 import java.time.LocalDateTime;

@@ -1,11 +1,11 @@
 package io.zerows.epoch.corpus.web.scheduler.uca.running;
 
-import io.zerows.epoch.common.log.OLog;
+import io.zerows.component.log.OLog;
 import io.zerows.epoch.corpus.web.scheduler.atom.Mission;
 import io.zerows.epoch.corpus.web.scheduler.eon.MessageOfJob;
 import io.zerows.epoch.corpus.web.scheduler.plugins.JobClient;
 import io.zerows.epoch.corpus.web.scheduler.plugins.JobInfix;
-import io.zerows.epoch.enums.EmJob;
+import io.zerows.enums.EmJob;
 import io.zerows.epoch.program.Ut;
 
 import java.util.HashSet;

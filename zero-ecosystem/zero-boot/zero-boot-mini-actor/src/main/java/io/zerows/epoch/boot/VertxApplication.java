@@ -2,10 +2,10 @@ package io.zerows.epoch.boot;
 
 import io.vertx.core.Vertx;
 import io.zerows.epoch.boot.supply.Electy;
-import io.zerows.epoch.common.shared.boot.KLauncher;
-import io.zerows.epoch.common.shared.context.KRunner;
+import io.zerows.component.shared.boot.KLauncher;
+import io.zerows.component.shared.context.KRunner;
 import io.zerows.epoch.corpus.container.uca.store.StubLinear;
-import io.zerows.epoch.enums.VertxComponent;
+import io.zerows.enums.VertxComponent;
 import io.zerows.specification.configuration.HConfig;
 
 /**

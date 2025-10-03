@@ -1,7 +1,7 @@
 package io.zerows.epoch.component.expression;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.enums.typed.ChangeFlag;
+import io.zerows.enums.typed.ChangeFlag;
 import io.zerows.epoch.program.Ut;
 import org.apache.commons.jexl3.JexlContext;
 

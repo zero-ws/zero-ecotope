@@ -1,12 +1,12 @@
 package io.zerows.epoch.bootplus.stellar;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.constant.spec.VWeb;
+import io.zerows.constant.VWeb;
 import io.zerows.epoch.corpus.metadata.element.JSix;
-import io.zerows.epoch.enums.Environment;
-import io.zerows.epoch.enums.typed.ChangeFlag;
+import io.zerows.enums.Environment;
+import io.zerows.enums.typed.ChangeFlag;
 import io.zerows.epoch.program.Ut;
-import io.zerows.epoch.runtime.HMacrocosm;
+import io.zerows.runtime.HMacrocosm;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
 import io.zerows.specification.access.app.HAmbient;
 

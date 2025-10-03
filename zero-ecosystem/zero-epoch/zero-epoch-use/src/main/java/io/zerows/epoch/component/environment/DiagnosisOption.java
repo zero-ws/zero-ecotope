@@ -2,7 +2,7 @@ package io.zerows.epoch.component.environment;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.zerows.epoch.program.Ut;
-import io.zerows.epoch.runtime.HMacrocosm;
+import io.zerows.runtime.HMacrocosm;
 
 import java.io.Serializable;
 

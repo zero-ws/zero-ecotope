@@ -1,6 +1,6 @@
 package io.zerows.plugins.office.excel.uca.ranger;
 
-import io.zerows.epoch.common.log.OLog;
+import io.zerows.component.log.OLog;
 import io.zerows.epoch.program.Ut;
 import io.zerows.plugins.office.excel.atom.ExTable;
 import io.zerows.specification.modeling.metadata.HMetaAtom;

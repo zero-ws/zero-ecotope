@@ -1,7 +1,7 @@
 package io.zerows.specification.modeling;
 
-import io.zerows.epoch.common.shared.normalize.KMarkAtom;
-import io.zerows.epoch.common.shared.normalize.KMarkAttribute;
+import io.zerows.component.shared.normalize.KMarkAtom;
+import io.zerows.component.shared.normalize.KMarkAttribute;
 import io.zerows.specification.access.app.HArk;
 import io.zerows.specification.modeling.metadata.HMetaAtom;
 import io.zerows.specification.modeling.operation.HDiff;

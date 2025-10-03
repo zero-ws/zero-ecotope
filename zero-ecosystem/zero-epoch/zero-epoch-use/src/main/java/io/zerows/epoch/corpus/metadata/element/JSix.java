@@ -1,8 +1,8 @@
 package io.zerows.epoch.corpus.metadata.element;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.constant.VString;
-import io.zerows.epoch.enums.typed.ChangeFlag;
+import io.zerows.constant.VString;
+import io.zerows.enums.typed.ChangeFlag;
 import io.zerows.epoch.program.Ut;
 
 import java.io.Serializable;

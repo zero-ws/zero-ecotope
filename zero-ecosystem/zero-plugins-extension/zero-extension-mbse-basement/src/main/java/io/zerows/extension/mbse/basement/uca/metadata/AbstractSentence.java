@@ -1,11 +1,11 @@
 package io.zerows.extension.mbse.basement.uca.metadata;
 
 import io.vertx.core.json.JsonArray;
-import io.zerows.epoch.constant.VString;
-import io.zerows.epoch.constant.VValue;
-import io.zerows.epoch.enums.modeling.EmKey;
-import io.zerows.epoch.common.shared.app.KDatabase;
-import io.zerows.epoch.common.log.Annal;
+import io.zerows.constant.VString;
+import io.zerows.constant.VValue;
+import io.zerows.enums.modeling.EmKey;
+import io.zerows.component.shared.app.KDatabase;
+import io.zerows.component.log.Annal;
 import io.zerows.epoch.program.Ut;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MField;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MKey;
