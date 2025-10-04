@@ -1,4 +1,4 @@
-package io.zerows.component.scanner;
+package io.zerows.epoch.assembly;
 
 import io.reactivex.rxjava3.core.Observable;
 import io.zerows.epoch.annotations.Infusion;
@@ -8,7 +8,7 @@ import java.lang.reflect.Field;
 import java.util.HashSet;
 import java.util.Set;
 
-public class InquirerPlugin implements Inquirer<Set<Class<?>>> {
+public class InquirerClassPlugin implements Inquirer<Set<Class<?>>> {
 
     public static final String PLUGIN = "Plugins {} has been scanned with @Infusion. ";
 

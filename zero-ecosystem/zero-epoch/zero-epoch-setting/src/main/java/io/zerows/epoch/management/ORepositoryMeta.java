@@ -2,12 +2,12 @@ package io.zerows.epoch.management;
 
 import io.zerows.component.log.OLog;
 import io.zerows.epoch.annotations.QaS;
-import io.zerows.epoch.assembly.InquirerAgent;
-import io.zerows.epoch.assembly.InquirerEvent;
-import io.zerows.epoch.assembly.InquirerFilter;
-import io.zerows.epoch.assembly.InquirerIpc;
-import io.zerows.epoch.assembly.InquirerJoinQaS;
-import io.zerows.epoch.assembly.InquirerReceipt;
+import io.zerows.epoch.assembly.InquirerForAgent;
+import io.zerows.epoch.assembly.InquirerForEvent;
+import io.zerows.epoch.assembly.InquirerForFilter;
+import io.zerows.epoch.assembly.InquirerForIpc;
+import io.zerows.epoch.assembly.InquirerForQaS;
+import io.zerows.epoch.assembly.InquirerForReceipt;
 import io.zerows.epoch.basicore.ActorComponent;
 import io.zerows.epoch.basicore.Event;
 import io.zerows.epoch.basicore.JointAction;
@@ -62,7 +62,7 @@ public class ORepositoryMeta extends AbstractAmbiguity implements ORepository {
                 final HAeon aeon = KSwitcher.aeon();
                 if (Objects.nonNull(aeon)) {
                     /* Aeon System Enabled */
-                    final Inquirer<ConcurrentMap<String, Method>> inquirer = Ut.singleton(InquirerJoinQaS.class);
+                    final Inquirer<ConcurrentMap<String, Method>> inquirer = Ut.singleton(InquirerForQaS.class);
                     final JointAction action = JointAction.of(EmAction.JoinPoint.QAS);
                     action.put(inquirer.scan(classAll));
                     processor.add(action);
@@ -70,7 +70,7 @@ public class ORepositoryMeta extends AbstractAmbiguity implements ORepository {
             },
             // @Ipc
             () -> {
-                final Inquirer<ConcurrentMap<String, Method>> inquirer = Ut.singleton(InquirerIpc.class);
+                final Inquirer<ConcurrentMap<String, Method>> inquirer = Ut.singleton(InquirerForIpc.class);
                 final JointAction action = JointAction.of(EmAction.JoinPoint.IPC);
                 action.put(inquirer.scan(classAll));
                 processor.add(action);
@@ -90,7 +90,7 @@ public class ORepositoryMeta extends AbstractAmbiguity implements ORepository {
             // @EndPoint -> Event
             () -> {
                 if (!classesEndpoint.isEmpty()) {
-                    final Inquirer<Set<Event>> event = Ut.singleton(InquirerEvent.class);
+                    final Inquirer<Set<Event>> event = Ut.singleton(InquirerForEvent.class);
                     final Set<Event> events = event.scan(classesEndpoint);
                     actorComponent.addEvents(events);
 
@@ -101,19 +101,19 @@ public class ORepositoryMeta extends AbstractAmbiguity implements ORepository {
             },
             // @WebFilter -> JSR340
             () -> {
-                final Inquirer<ConcurrentMap<String, Set<Event>>> filters = Ut.singleton(InquirerFilter.class);
+                final Inquirer<ConcurrentMap<String, Set<Event>>> filters = Ut.singleton(InquirerForFilter.class);
                 actorComponent.addFilters(filters.scan(classAll));
             },
             // @Queue/@QaS -> Receipt
             () -> {
                 if (!classQueue.isEmpty()) {
-                    final Inquirer<Set<Receipt>> receipt = Ut.singleton(InquirerReceipt.class);
+                    final Inquirer<Set<Receipt>> receipt = Ut.singleton(InquirerForReceipt.class);
                     actorComponent.addReceipts(receipt.scan(classQueue));
                 }
             },
             // Agent Component
             () -> {
-                final Inquirer<ConcurrentMap<ServerType, List<Class<?>>>> agent = Ut.singleton(InquirerAgent.class);
+                final Inquirer<ConcurrentMap<ServerType, List<Class<?>>>> agent = Ut.singleton(InquirerForAgent.class);
                 actorComponent.addAgents(agent.scan(classAll));
             }
         );

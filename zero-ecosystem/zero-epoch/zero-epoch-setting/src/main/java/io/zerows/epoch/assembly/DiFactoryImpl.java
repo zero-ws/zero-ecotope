@@ -32,7 +32,7 @@ class DiFactoryImpl implements DiFactory {
     public Injector build() {
         final String cacheKey = this.ambiguityKey();
         final Inquirer<Injector> inquirer = CC_GUICE
-            .pick(InquirerGuice::new, cacheKey);
+            .pick(InquirerForGuice::new, cacheKey);
         // 不论哪个环境都会直接访问到 OCacheClass 中的核心数据结构
         return DiFactoryImpl.CC_SKELETON
             .pick(() -> this.build(inquirer, "Booting"), cacheKey);
@@ -42,7 +42,7 @@ class DiFactoryImpl implements DiFactory {
     public Injector refresh() {
         final String cacheKey = this.ambiguityKey();
         final Inquirer<Injector> inquirer = CC_GUICE
-            .pick(InquirerGuice::new, cacheKey);
+            .pick(InquirerForGuice::new, cacheKey);
 
         final Injector replaced = this.build(inquirer, "Refreshing");
 

@@ -1,4 +1,4 @@
-package io.zerows.component.scanner;
+package io.zerows.epoch.assembly;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.reflect.ClassPath;

@@ -18,7 +18,7 @@ import java.util.function.Consumer;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 @SuppressWarnings("all")
-public class InquirerGuice implements Inquirer<Injector> {
+public class InquirerForGuice implements Inquirer<Injector> {
     private static final DiGuice jsrField = Ut.singleton(DiGuiceField.class);
     private static final DiGuice jsrMethod = Ut.singleton(DiGuiceMethod.class);
     private static final DiGuice jsrCon = Ut.singleton(DiGuiceConstructor.class);

@@ -13,7 +13,7 @@ import java.util.Set;
 /**
  *
  */
-public class InquirerEvent implements Inquirer<Set<Event>> {
+public class InquirerForEvent implements Inquirer<Set<Event>> {
 
 
     @Override

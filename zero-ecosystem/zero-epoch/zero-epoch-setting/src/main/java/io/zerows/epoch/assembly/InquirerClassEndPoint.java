@@ -1,4 +1,4 @@
-package io.zerows.component.scanner;
+package io.zerows.epoch.assembly;
 
 import io.zerows.epoch.annotations.EndPoint;
 import io.zerows.sdk.environment.Inquirer;
@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 /**
  *
  */
-public class InquirerEndPoint implements Inquirer<Set<Class<?>>> {
+public class InquirerClassEndPoint implements Inquirer<Set<Class<?>>> {
 
     public static final String ENDPOINT = "( {0} EndPoint ) The Zero system has found {0} components of @EndPoint.";
 

@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
-public class InquirerJoinQaS implements Inquirer<ConcurrentMap<String, Method>> {
+public class InquirerForQaS implements Inquirer<ConcurrentMap<String, Method>> {
 
     public static final String HQAS = "( {0} QaS ) The Zero system has found " +
         "{1} points of @QaS.";

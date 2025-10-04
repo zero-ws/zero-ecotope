@@ -22,7 +22,7 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * This class is for @Ipc and @Address must be in @Queue class instead of other specification.
  */
-public class InquirerIpc implements Inquirer<ConcurrentMap<String, Method>> {
+public class InquirerForIpc implements Inquirer<ConcurrentMap<String, Method>> {
 
     public static final String IPC = "( {0} Ipc ) The Zero system has found " +
         "{1} points of @Ipc.";

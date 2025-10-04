@@ -1,4 +1,4 @@
-package io.zerows.component.scanner;
+package io.zerows.epoch.assembly;
 
 import io.r2mo.typed.cc.Cc;
 import io.zerows.component.log.OLog;

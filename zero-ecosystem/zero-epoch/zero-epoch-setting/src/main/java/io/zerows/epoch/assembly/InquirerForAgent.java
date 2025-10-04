@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 /**
  * This component is for @Agent annotated class
  */
-public class InquirerAgent implements
+public class InquirerForAgent implements
     Inquirer<ConcurrentMap<ServerType, List<Class<?>>>> {
 
     @Override

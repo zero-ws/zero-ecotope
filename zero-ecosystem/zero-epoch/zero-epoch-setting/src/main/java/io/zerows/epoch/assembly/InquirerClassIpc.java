@@ -1,4 +1,4 @@
-package io.zerows.component.scanner;
+package io.zerows.epoch.assembly;
 
 
 import io.zerows.epoch.annotations.Agent;
@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 /**
  *
  */
-public class InquirerIpc implements Inquirer<Set<Class<?>>> {
+public class InquirerClassIpc implements Inquirer<Set<Class<?>>> {
 
     public static final String RPC = "( Rpc ) The Zero system has found {0} components of @Agent.";
 

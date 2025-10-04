@@ -1,4 +1,4 @@
-package io.zerows.component.scanner;
+package io.zerows.epoch.assembly;
 
 
 import io.zerows.epoch.annotations.Worker;
@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 /**
  *
  */
-public class InquirerMWorker implements Inquirer<Set<Class<?>>> {
+public class InquirerClassWorker implements Inquirer<Set<Class<?>>> {
 
     public static final String WORKER = "( Worker ) The Zero system has found {0} components of @Worker.";
 

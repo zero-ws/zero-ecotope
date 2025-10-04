@@ -15,9 +15,9 @@ import java.util.Set;
  * Receipt annotation scan
  * This thread is for Receipt extraction
  */
-public class InquirerReceipt implements Inquirer<Set<Receipt>> {
+public class InquirerForReceipt implements Inquirer<Set<Receipt>> {
 
-    private static final Annal LOGGER = Annal.get(InquirerReceipt.class);
+    private static final Annal LOGGER = Annal.get(InquirerForReceipt.class);
 
     @Override
     public Set<Receipt> scan(final Set<Class<?>> queues) {

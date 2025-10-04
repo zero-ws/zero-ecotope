@@ -28,7 +28,7 @@ import java.util.concurrent.ConcurrentMap;
  * Filter processing
  * path = Event Chain
  */
-public class InquirerFilter implements Inquirer<ConcurrentMap<String, Set<Event>>> {
+public class InquirerForFilter implements Inquirer<ConcurrentMap<String, Set<Event>>> {
 
     @Override
     public ConcurrentMap<String, Set<Event>> scan(final Set<Class<?>> clazzes) {

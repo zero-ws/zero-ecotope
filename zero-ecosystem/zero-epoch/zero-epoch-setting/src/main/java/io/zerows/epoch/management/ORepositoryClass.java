@@ -1,16 +1,16 @@
 package io.zerows.epoch.management;
 
-import io.zerows.component.scanner.InquirerEndPoint;
-import io.zerows.component.scanner.InquirerIpc;
-import io.zerows.component.scanner.InquirerMAgent;
-import io.zerows.component.scanner.InquirerMWorker;
-import io.zerows.component.scanner.InquirerPlugin;
-import io.zerows.component.scanner.InquirerQueue;
 import io.zerows.epoch.annotations.Agent;
 import io.zerows.epoch.annotations.EndPoint;
 import io.zerows.epoch.annotations.Infusion;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.annotations.Worker;
+import io.zerows.epoch.assembly.InquirerClassAgent;
+import io.zerows.epoch.assembly.InquirerClassEndPoint;
+import io.zerows.epoch.assembly.InquirerClassIpc;
+import io.zerows.epoch.assembly.InquirerClassPlugin;
+import io.zerows.epoch.assembly.InquirerClassQueue;
+import io.zerows.epoch.assembly.InquirerClassWorker;
 import io.zerows.platform.enums.VertxComponent;
 import io.zerows.platform.metadata.KRunner;
 import io.zerows.sdk.environment.Inquirer;
@@ -40,11 +40,11 @@ public class ORepositoryClass extends AbstractAmbiguity implements ORepository {
     /**
      * 全局环境专用方法
      * <pre><code>
-     *     1. {@link Infusion} - {@link InquirerPlugin}
-     *     2. {@link Queue} - {@link InquirerQueue}
-     *     3. {@link EndPoint} - {@link InquirerEndPoint}
-     *     4. {@link Worker} - {@link InquirerMWorker}
-     *     5. {@link Agent} - {@link InquirerMAgent}
+     *     1. {@link Infusion} - {@link InquirerClassPlugin}
+     *     2. {@link Queue} - {@link InquirerClassQueue}
+     *     3. {@link EndPoint} - {@link InquirerClassEndPoint}
+     *     4. {@link Worker} - {@link InquirerClassWorker}
+     *     5. {@link Agent} - {@link InquirerClassAgent}
      * </code></pre>
      */
     @Override
@@ -66,32 +66,32 @@ public class ORepositoryClass extends AbstractAmbiguity implements ORepository {
         KRunner.run("meditate-class",
             // @Infusion
             () -> {
-                final Inquirer<Set<Class<?>>> plugins = Ut.singleton(InquirerPlugin.class);
+                final Inquirer<Set<Class<?>>> plugins = Ut.singleton(InquirerClassPlugin.class);
                 processor.compile(VertxComponent.INFUSION, plugins::scan);
             },
             // @Queue
             () -> {
-                final Inquirer<Set<Class<?>>> queues = Ut.singleton(InquirerQueue.class);
+                final Inquirer<Set<Class<?>>> queues = Ut.singleton(InquirerClassQueue.class);
                 processor.compile(VertxComponent.QUEUE, queues::scan);
             },
             // @EndPoint
             () -> {
-                final Inquirer<Set<Class<?>>> endPoints = Ut.singleton(InquirerEndPoint.class);
+                final Inquirer<Set<Class<?>>> endPoints = Ut.singleton(InquirerClassEndPoint.class);
                 processor.compile(VertxComponent.ENDPOINT, endPoints::scan);
             },
             // Dot / @Worker
             () -> {
-                final Inquirer<Set<Class<?>>> workers = Ut.singleton(InquirerMWorker.class);
+                final Inquirer<Set<Class<?>>> workers = Ut.singleton(InquirerClassWorker.class);
                 processor.compile(VertxComponent.WORKER, workers::scan);
             },
             // Dot / @Agent
             () -> {
-                final Inquirer<Set<Class<?>>> agents = Ut.singleton(InquirerMAgent.class);
+                final Inquirer<Set<Class<?>>> agents = Ut.singleton(InquirerClassAgent.class);
                 processor.compile(VertxComponent.AGENT, agents::scan);
             },
             // Dot / @Agent ( type = ServerType )
             () -> {
-                final Inquirer<Set<Class<?>>> rpcs = Ut.singleton(InquirerIpc.class);
+                final Inquirer<Set<Class<?>>> rpcs = Ut.singleton(InquirerClassIpc.class);
                 processor.compile(VertxComponent.IPC, rpcs::scan);
             }
         );

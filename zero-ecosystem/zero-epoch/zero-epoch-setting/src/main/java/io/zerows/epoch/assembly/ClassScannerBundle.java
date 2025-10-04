@@ -1,4 +1,4 @@
-package io.zerows.component.scanner;
+package io.zerows.epoch.assembly;
 
 import io.zerows.platform.constant.VString;
 import org.osgi.framework.Bundle;

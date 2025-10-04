@@ -1,4 +1,4 @@
-package io.zerows.component.scanner;
+package io.zerows.epoch.assembly;
 
 import io.r2mo.function.Fn;
 import io.vertx.core.eventbus.Message;
@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
  * It will scan all classes that annotated with @Queue, zero system
  * will extract worker class from this scanned classes.
  */
-public class InquirerQueue implements Inquirer<Set<Class<?>>> {
+public class InquirerClassQueue implements Inquirer<Set<Class<?>>> {
 
     public static final String QUEUE = "( {0} Queue ) The Zero system has found {0} components of @Queue.";
 

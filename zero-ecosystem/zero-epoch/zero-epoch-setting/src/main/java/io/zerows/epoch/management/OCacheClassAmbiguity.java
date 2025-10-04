@@ -1,6 +1,6 @@
 package io.zerows.epoch.management;
 
-import io.zerows.component.scanner.ClassScanner;
+import io.zerows.epoch.assembly.ClassScanner;
 import io.zerows.platform.enums.VertxComponent;
 import io.zerows.sdk.environment.Inquirer;
 import io.zerows.sdk.osgi.AbstractAmbiguity;
