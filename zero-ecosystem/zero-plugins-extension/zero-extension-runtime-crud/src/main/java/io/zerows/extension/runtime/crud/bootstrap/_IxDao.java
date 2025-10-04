@@ -5,7 +5,7 @@ import io.zerows.component.environment.DevEnv;
 import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.epoch.basicore.MDEntity;
 import io.zerows.epoch.corpus.extension.HExtension;
-import io.zerows.epoch.corpus.mbse.atom.specification.KModule;
+import io.zerows.epoch.corpus.mbse.metadata.KModule;
 import io.zerows.epoch.metadata.MultiKeyMap;
 import io.zerows.extension.runtime.crud.eon.IxConstant;
 import io.zerows.extension.runtime.crud.eon.IxMsg;

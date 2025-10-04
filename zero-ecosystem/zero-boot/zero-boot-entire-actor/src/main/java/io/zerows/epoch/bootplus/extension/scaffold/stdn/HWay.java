@@ -1,8 +1,8 @@
 package io.zerows.epoch.bootplus.extension.scaffold.stdn;
 
 import io.vertx.core.Future;
-import io.zerows.epoch.corpus.mbse.atom.runner.ActIn;
-import io.zerows.epoch.corpus.mbse.atom.runner.ActOut;
+import io.zerows.epoch.corpus.mbse.metadata.ActIn;
+import io.zerows.epoch.corpus.mbse.metadata.ActOut;
 import io.zerows.epoch.metadata.Apt;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 

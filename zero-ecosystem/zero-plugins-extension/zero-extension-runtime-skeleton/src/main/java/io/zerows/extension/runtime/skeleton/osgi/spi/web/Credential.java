@@ -1,7 +1,7 @@
 package io.zerows.extension.runtime.skeleton.osgi.spi.web;
 
 import io.vertx.core.Future;
-import io.zerows.epoch.corpus.mbse.atom.specification.KCredential;
+import io.zerows.epoch.corpus.mbse.metadata.KCredential;
 
 /*
  * It's for account to do `O_USER` data creation

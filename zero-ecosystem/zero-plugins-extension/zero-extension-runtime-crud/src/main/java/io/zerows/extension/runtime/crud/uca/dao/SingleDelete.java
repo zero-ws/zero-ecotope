@@ -5,13 +5,13 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.destine.Conflate;
 import io.zerows.component.destine.Hymn;
-import io.zerows.program.Ux;
+import io.zerows.epoch.corpus.mbse.metadata.KModule;
 import io.zerows.epoch.database.jooq.operation.UxJooq;
-import io.zerows.epoch.corpus.mbse.atom.specification.KModule;
 import io.zerows.epoch.metadata.KJoin;
 import io.zerows.epoch.metadata.KPoint;
 import io.zerows.extension.runtime.crud.bootstrap.IxPin;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
+import io.zerows.program.Ux;
 
 import java.util.Objects;
 import java.util.function.Function;

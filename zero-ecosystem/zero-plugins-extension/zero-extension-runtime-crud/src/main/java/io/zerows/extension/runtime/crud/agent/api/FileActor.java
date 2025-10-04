@@ -10,7 +10,7 @@ import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Infusion;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.corpus.mbse.atom.specification.KModule;
+import io.zerows.epoch.corpus.mbse.metadata.KModule;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.runtime.crud.eon.Addr;
 import io.zerows.extension.runtime.crud.eon.em.ApiSpec;

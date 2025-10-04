@@ -1,9 +1,9 @@
 package io.zerows.epoch.bootplus.extension.spi.component;
 
-import io.zerows.epoch.bootplus.extension.scaffold.stdn.AbstractHOne;
 import io.vertx.core.Future;
-import io.zerows.epoch.corpus.mbse.atom.runner.ActIn;
-import io.zerows.epoch.corpus.mbse.atom.runner.ActOut;
+import io.zerows.epoch.bootplus.extension.scaffold.stdn.AbstractHOne;
+import io.zerows.epoch.corpus.mbse.metadata.ActIn;
+import io.zerows.epoch.corpus.mbse.metadata.ActOut;
 
 /**
  * ## 「Channel」读取数据通道

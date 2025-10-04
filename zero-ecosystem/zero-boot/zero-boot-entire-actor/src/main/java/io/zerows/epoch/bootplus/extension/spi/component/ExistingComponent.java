@@ -1,11 +1,11 @@
 package io.zerows.epoch.bootplus.extension.spi.component;
 
-import io.zerows.epoch.bootplus.extension.scaffold.component.AbstractAdaptor;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.qr.Criteria;
-import io.zerows.epoch.corpus.mbse.atom.runner.ActIn;
-import io.zerows.epoch.corpus.mbse.atom.runner.ActOut;
+import io.zerows.epoch.bootplus.extension.scaffold.component.AbstractAdaptor;
+import io.zerows.epoch.corpus.mbse.metadata.ActIn;
+import io.zerows.epoch.corpus.mbse.metadata.ActOut;
 
 /**
  * ## 「Channel」存在检查通道

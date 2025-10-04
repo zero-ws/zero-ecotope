@@ -4,10 +4,10 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.corpus.mbse.atom.specification.KQr;
-import io.zerows.support.Ut;
+import io.zerows.epoch.corpus.mbse.metadata.KQr;
 import io.zerows.integrated.jackson.JsonObjectDeserializer;
 import io.zerows.integrated.jackson.JsonObjectSerializer;
+import io.zerows.support.Ut;
 
 import java.io.Serializable;
 import java.util.concurrent.TimeUnit;

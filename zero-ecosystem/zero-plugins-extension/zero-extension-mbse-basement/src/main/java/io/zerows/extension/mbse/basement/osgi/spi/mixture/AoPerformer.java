@@ -2,7 +2,7 @@ package io.zerows.extension.mbse.basement.osgi.spi.mixture;
 
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
-import io.zerows.epoch.corpus.mbse.uca.mixture.HPerformer;
+import io.zerows.epoch.corpus.mbse.HPerformer;
 import io.zerows.extension.mbse.basement.atom.Model;
 
 import java.util.Set;
