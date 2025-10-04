@@ -3,12 +3,11 @@ package io.zerows.epoch.jigsaw;
 import io.r2mo.typed.cc.Cc;
 import io.zerows.platform.exception._60050Exception501NotSupport;
 import io.zerows.specification.development.compiled.HBundle;
-import org.osgi.framework.Bundle;
 
 import java.util.concurrent.ConcurrentMap;
 
 /**
- * 内部接口，根据路径和 {@link Bundle} 构造对象专用接口，父子接口操作
+ * 内部接口，根据路径和 {@link HBundle} 构造对象专用接口，父子接口操作
  * <pre><code>
  *     1. 输入1：路径信息（可能相对路径可能绝对路径）
  *     2. 输入2：当前操作的 Bundle，如果非 OSGI 此值为 null

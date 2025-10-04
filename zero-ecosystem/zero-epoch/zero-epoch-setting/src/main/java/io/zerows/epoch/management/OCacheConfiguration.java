@@ -6,7 +6,6 @@ import io.zerows.epoch.basicore.MDConnect;
 import io.zerows.epoch.basicore.MDPage;
 import io.zerows.specification.configuration.HSetting;
 import io.zerows.specification.development.compiled.HBundle;
-import org.osgi.framework.Bundle;
 
 import java.util.Objects;
 import java.util.Set;
@@ -63,7 +62,7 @@ public interface OCacheConfiguration extends OCache<MDConfiguration> {
      *                           module-03 = ...
      *
      *      2. Osgi 环境
-     *        - OSGI 环境在每个模块启动时会根据 {@link Bundle} 对应的 SymbolicName 信息来计算配置信息，每个模块对应一个配置信息，
+     *        - OSGI 环境在每个模块启动时会根据 {@link HBundle} 对应的 SymbolicName 信息来计算配置信息，每个模块对应一个配置信息，
      *          最终会将信息存储在 {@link OCacheConfiguration} 中，如此执行之后，每个 Bundle 都会拥有自己独立的配置，且可以执行热插拔
      *          管理。
      *        - 最终提供的配置信息如下：

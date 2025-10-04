@@ -7,6 +7,7 @@ import io.vertx.core.Promise;
 import io.vertx.core.Vertx;
 import io.zerows.epoch.annotations.Up;
 import io.zerows.epoch.boot.Electy;
+import io.zerows.epoch.boot.ZeroEnvironment;
 import io.zerows.epoch.bootplus.stellar.owner.DevelopmentA;
 import io.zerows.epoch.bootplus.stellar.owner.MockitoA;
 import io.zerows.epoch.bootplus.stellar.owner.OkA;
@@ -17,7 +18,6 @@ import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.exception._80517Exception404DataAtomNull;
 import io.zerows.platform.enums.Environment;
 import io.zerows.platform.exception._11010Exception500BootIoMissing;
-import io.zerows.platform.metadata.KEnvironment;
 import io.zerows.platform.metadata.KFabric;
 import io.zerows.program.Ux;
 import io.zerows.specification.configuration.HConfig;
@@ -86,7 +86,7 @@ public class Ok {
          * 环境提取，此处环境变量提取为非容器启动环境，而是单纯的模拟环境处理，这样的处理模式之下
          * 环境变量为测试 Mock 提供了第一模拟环境，来完成环境变量基础注入流程
          **/
-        KEnvironment.initialize();
+        ZeroEnvironment.initialize();
 
         return ZeroConfigurer.of(energy);
     }

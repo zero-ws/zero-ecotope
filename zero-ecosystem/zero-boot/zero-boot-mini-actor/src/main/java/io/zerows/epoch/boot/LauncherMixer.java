@@ -2,7 +2,6 @@ package io.zerows.epoch.boot;
 
 import io.vertx.core.Vertx;
 import io.zerows.platform.enums.EmApp;
-import io.zerows.platform.metadata.KEnvironment;
 import io.zerows.specification.configuration.HBoot;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HLauncher;
@@ -26,7 +25,7 @@ public class LauncherMixer implements HLauncher<Vertx> {
     @Override
     public <T extends HConfig> void start(final HConfig.HOn<T> on, final Consumer<Vertx> server) {
         // 环境变量处理提前
-        KEnvironment.initialize();
+        ZeroEnvironment.initialize();
 
         final HBoot boot = STORE.boot();
         if (EmApp.Type.APPLICATION == boot.app()) {

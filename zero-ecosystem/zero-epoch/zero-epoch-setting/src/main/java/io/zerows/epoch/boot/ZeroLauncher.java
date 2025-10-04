@@ -63,7 +63,7 @@ import java.util.function.BiConsumer;
  * <h2>⚠️ 异常与日志</h2>
  * <ul>
  *   <li>❌ 未发现 {@link BootIo} 时会抛出 {@link _11010Exception500BootIoMissing}。</li>
- *   <li>📝 通过 {@link log} 输出启动组件相关日志（如发现的 {@link HLauncher} 实现类）。</li>
+ *   <li>📝 通过 {@see log} 输出启动组件相关日志（如发现的 {@link HLauncher} 实现类）。</li>
  * </ul>
  *
  * @param <T> 服务器/框架的核心实例类型（由底层 {@link HLauncher} 决定）
@@ -72,15 +72,16 @@ import java.util.function.BiConsumer;
  * @since 2023-05-30
  */
 @Slf4j
-@SuppressWarnings("all")
 public class ZeroLauncher<T> {
     /** 🔒 单例实例（无并发保护，外层需确保仅初始化一次） */
+    @SuppressWarnings("rawtypes")
     private static ZeroLauncher INSTANCE;
 
     /** 🚀 实际的底层启动器，由 {@link BootIo#launcher()} 提供 */
     private final HLauncher<T> launcher;
 
     /** 🧱 启动前后配置器，负责绑定参数、生成/提取 {@link HConfig.HOn}、执行预初始化等 */
+    @SuppressWarnings("rawtypes")
     private final ZeroConfigurer configurer;
 
     /**
@@ -92,21 +93,32 @@ public class ZeroLauncher<T> {
      *   <li>构造 {@link HEnergy} 并创建 {@link ZeroConfigurer}，绑定命令行参数。</li>
      *   <li>拉起 {@link HLauncher} 实例并记录日志。</li>
      * </ol>
+     * 🧬 默认实现类：
+     * <pre>
+     *    - 启动器：{@link BootIo} / {@link ZeroBootIo}
+     *    - 配置器：{@link ZeroConfigurer}
+     * </pre>
      *
      * @param bootCls 启动入口类（通常为 Main/Boot 类） 📌
      * @param args    命令行参数（将作为 {@code "arguments"} 注入 {@link HConfig}） 🧵
      */
     private ZeroLauncher(final Class<?> bootCls, final String[] args) {
-        /*  提取 SPI 部分（严格模式）  */
+        /*
+         * 🟤BOOT-001: 系统中直接查找 BootIo，此处调用了 HPI.findOverwrite 进行查找，查找过程中如果出现自定义
+         *   的 BootIo 实现，则直接覆盖 ZeroBootIo 的实现，否则直接使用 ZeroBootIo 的实现作为默认实现处理，默认
+         *   实现可启动一个最小的 Zero App 应用实例
+         */
         final BootIo io = HPI.findOverwrite(BootIo.class);
         if (Objects.isNull(io)) {
-            throw new _11010Exception500BootIoMissing(getClass());
+            throw new _11010Exception500BootIoMissing(this.getClass());
         }
 
-        /*  配置部分：从 BootIo 取能量上下文，交给 KConfigurer 绑定  */
+
+
+
+        /*  配置部分：从 BootIo 取能量上下文，交给 ZeroConfigurer 绑定  */
         final HEnergy energy = io.energy(bootCls, args);
-        this.configurer = ZeroConfigurer.of(energy)
-            .bind(args);
+        this.configurer = ZeroConfigurer.of(energy).bind(args);
 
         /*  启动器部分：获取底层 HLauncher 并记录其实现类  */
         this.launcher = io.launcher();

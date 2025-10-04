@@ -1,8 +1,8 @@
 package io.zerows.platform.metadata;
 
 import io.r2mo.function.Fn;
-import io.zerows.component.log.Annal;
 import io.zerows.specification.atomic.HThread;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -14,9 +14,8 @@ import java.util.function.Consumer;
 /**
  * Multi thread helper tool to do some multi-thread works.
  */
+@Slf4j
 public final class KRunner {
-
-    private static final Annal LOGGER = Annal.get(KRunner.class);
 
     // Execute single thread
     public static Thread run(final Runnable hooker,
@@ -69,7 +68,7 @@ public final class KRunner {
             try {
                 item.join();
             } catch (final InterruptedException ex) {
-                LOGGER.fatal(ex);
+                log.error("[ ZERO ] 多线程等待异常", ex);
             }
         });
         for (final HThread<T> meanThread : meanThreads) {

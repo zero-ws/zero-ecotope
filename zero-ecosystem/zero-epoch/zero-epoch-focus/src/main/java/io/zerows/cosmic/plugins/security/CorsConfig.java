@@ -16,9 +16,9 @@ import io.zerows.management.OZeroStore;
 import io.zerows.platform.exception._60050Exception501NotSupport;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HSetting;
+import io.zerows.specification.development.compiled.HBundle;
+import io.zerows.spi.HPI;
 import io.zerows.support.Ut;
-import org.osgi.framework.Bundle;
-import org.osgi.framework.FrameworkUtil;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -52,7 +52,7 @@ public class CorsConfig implements Serializable {
         if (Objects.nonNull(INSTANCE)) {
             return INSTANCE;
         }
-        final Bundle bundle = FrameworkUtil.getBundle(CorsConfig.class);
+        final HBundle bundle = HPI.findBundle(CorsConfig.class);
         if (Objects.nonNull(bundle)) {
             Ut.Log.configure(CorsConfig.class).info("This api is not supported in OSGI environment.");
             throw new _60050Exception501NotSupport(CorsConfig.class);

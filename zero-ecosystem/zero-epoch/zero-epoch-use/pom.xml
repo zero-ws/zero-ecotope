@@ -31,30 +31,6 @@
             <artifactId>vertx-jooq-classic-jdbc</artifactId>
         </dependency>
 
-
-        <!-- OSGI Runtime -->
-        <!-- https://mvnrepository.com/artifact/org.osgi/org.osgi.framework -->
-        <dependency>
-            <groupId>org.osgi</groupId>
-            <artifactId>org.osgi.framework</artifactId>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.osgi/osgi.annotation -->
-        <dependency>
-            <groupId>org.osgi</groupId>
-            <artifactId>osgi.annotation</artifactId>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.felix/org.apache.felix.dependencymanager -->
-        <dependency>
-            <groupId>org.apache.felix</groupId>
-            <artifactId>org.apache.felix.dependencymanager</artifactId>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.felix/org.apache.felix.gogo.command -->
-        <dependency>
-            <groupId>org.apache.felix</groupId>
-            <artifactId>org.apache.felix.gogo.command</artifactId>
-        </dependency>
-
-
         <!-- Google -->
         <!-- Dependency -->
         <dependency>

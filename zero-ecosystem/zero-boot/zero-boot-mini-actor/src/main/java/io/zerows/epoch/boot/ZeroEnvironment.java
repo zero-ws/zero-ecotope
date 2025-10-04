@@ -1,12 +1,16 @@
-package io.zerows.platform.metadata;
+package io.zerows.epoch.boot;
 
+import io.r2mo.base.io.HStore;
+import io.r2mo.spi.SPI;
 import io.zerows.component.log.LogAs;
 import io.zerows.platform.HEnvironmentVariable;
 import io.zerows.platform.constant.VBoot;
 import io.zerows.platform.constant.VMessage;
 import io.zerows.platform.enums.Environment;
 import io.zerows.platform.enums.app.OsType;
+import io.zerows.support.Ut;
 import io.zerows.support.base.UtBase;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Properties;
 import java.util.concurrent.ConcurrentMap;
@@ -26,7 +30,10 @@ import java.util.concurrent.ConcurrentMap;
  *
  * @author lang : 2023-05-30
  */
-public class KEnvironment {
+@Slf4j
+public class ZeroEnvironment {
+    private final static HStore STORE = SPI.V_STORE;
+
     /**
      * 环境变量初始化验证，内置启动会被两处调用
      * <pre><code>
@@ -46,12 +53,11 @@ public class KEnvironment {
          * 判断是否开启了开发环境，如果开启了开发环境，那么就会读取 .dev.development 文件
          * 加载文件中的环境变量到系统层（只适用于开发）
          */
-        if (UtBase.ioExist(VBoot._ENV_DEVELOPMENT)) {
+        if (Ut.ioExist(VBoot._ENV_DEVELOPMENT)) {
             // 1. 环境变量设置
-            final OsType os = UtBase.envOs();
-            LogAs.Boot.warn(KEnvironment.class, VMessage.KEnvironment.DEVELOPMENT,
-                os.name(), VBoot._ENV_DEVELOPMENT);
-            final Properties properties = UtBase.ioProperties(VBoot._ENV_DEVELOPMENT);
+            final OsType os = Ut.envOs();
+            log.info("[ Zero ] 操作系统：OS = {},  `{}` 文件存在，当前强制切换为开发环境", os.name(), VBoot._ENV_DEVELOPMENT);
+            final Properties properties = Ut.ioProperties(VBoot._ENV_DEVELOPMENT);
             // 1.1. 环境变量注入
             if (!properties.containsKey(HEnvironmentVariable.ZERO_ENV)) {
                 properties.put(HEnvironmentVariable.ZERO_ENV, Environment.Development.name());
@@ -65,7 +71,7 @@ public class KEnvironment {
 
             // 2. 环境变量打印
             final String environments = UtBase.envString(written);
-            LogAs.Boot.info(KEnvironment.class, VMessage.KEnvironment.ENV, environments);
+            LogAs.Boot.info(ZeroEnvironment.class, VMessage.KEnvironment.ENV, environments);
         }
     }
 }

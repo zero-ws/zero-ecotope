@@ -2,8 +2,8 @@ package io.zerows.specification.vital;
 
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
-import io.zerows.platform.annotations.Memory;
 import io.zerows.component.fs.LocalFs;
+import io.zerows.platform.annotations.Memory;
 import io.zerows.specification.storage.HStore;
 
 import java.util.Set;
@@ -21,6 +21,7 @@ import java.util.concurrent.ConcurrentMap;
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Deprecated
 public interface HFS extends HStore {
     /*
      * HFS 抽象缓存

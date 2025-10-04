@@ -6,7 +6,6 @@ import io.zerows.epoch.configuration.ProcessorCommon;
 import io.zerows.specification.configuration.HSetting;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
-import org.osgi.framework.Bundle;
 
 import java.util.Objects;
 
@@ -27,7 +26,7 @@ public class ORepositoryOption extends AbstractAmbiguity implements ORepository 
      * </code></pre>
      *
      * <pre><code>
-     *     1. {@link Bundle}
+     *     1. {@link HBundle}
      *     2. {@link HSetting}
      * </code></pre>
      */

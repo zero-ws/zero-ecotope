@@ -2,8 +2,8 @@ package io.zerows.epoch.management;
 
 import io.zerows.component.log.OLog;
 import io.zerows.platform.exception._60050Exception501NotSupport;
+import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
-import org.osgi.framework.Bundle;
 
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -49,7 +49,7 @@ public interface OCache<T> {
     // ------------ 数据提取接口 ---------------
 
     /**
-     * 只返回当前 {@link Bundle} 中存储的键值数据
+     * 只返回当前 {@link HBundle} 中存储的键值数据
      * <pre><code>
      *     1. 如果是 Set 则返回每一个元素的
      *        1）有 id 返回 id（key）
