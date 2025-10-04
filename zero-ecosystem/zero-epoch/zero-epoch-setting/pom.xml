@@ -8,7 +8,6 @@
         <artifactId>zero-epoch</artifactId>
         <version>1.0.0</version>
     </parent>
-
     <artifactId>zero-epoch-setting</artifactId>
     <name>Zero::⚗️ - Epoch::Setting</name>
     <dependencies>
