@@ -1,8 +1,8 @@
 package io.zerows.epoch.configuration;
 
 import io.vertx.core.http.HttpServerOptions;
-import io.zerows.epoch.configuration.option.RpcOptions;
-import io.zerows.epoch.configuration.option.SockOptions;
+import io.zerows.epoch.basicore.option.RpcOptions;
+import io.zerows.epoch.basicore.option.SockOptions;
 import io.zerows.platform.enums.app.ServerType;
 
 /**

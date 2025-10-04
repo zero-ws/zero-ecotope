@@ -1,4 +1,4 @@
-package io.zerows.epoch.configuration.option;
+package io.zerows.epoch.basicore.option;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.spi.cluster.ClusterManager;

@@ -1,6 +1,8 @@
 package io.zerows.epoch.jigsaw;
 
 import io.vertx.core.json.JsonArray;
+import io.zerows.epoch.basicore.MDConnect;
+import io.zerows.epoch.basicore.MDMeta;
 import io.zerows.epoch.metadata.Mirror;
 import io.zerows.epoch.metadata.Mojo;
 import io.zerows.support.Ut;

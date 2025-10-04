@@ -2,6 +2,8 @@ package io.zerows.epoch.jigsaw;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.basicore.MDConnect;
+import io.zerows.epoch.basicore.MDEntity;
 import io.zerows.epoch.constant.KName;
 import io.zerows.platform.annotations.ChatGPT;
 import io.zerows.support.Ut;

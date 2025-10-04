@@ -2,7 +2,8 @@ package io.zerows.epoch.configuration;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.configuration.option.RpcOptions;
+import io.zerows.epoch.basicore.NodeVertx;
+import io.zerows.epoch.basicore.option.RpcOptions;
 import io.zerows.epoch.constant.KName;
 import io.zerows.platform.enums.app.ServerType;
 import io.zerows.support.Ut;

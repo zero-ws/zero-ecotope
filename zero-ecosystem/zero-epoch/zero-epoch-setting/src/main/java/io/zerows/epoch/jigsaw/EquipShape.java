@@ -1,6 +1,8 @@
 package io.zerows.epoch.jigsaw;
 
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.basicore.MDConfiguration;
+import io.zerows.epoch.basicore.MDId;
 import io.zerows.epoch.constant.KName;
 import io.zerows.platform.constant.VPath;
 import io.zerows.platform.constant.VString;

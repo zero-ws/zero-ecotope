@@ -1,7 +1,7 @@
-package io.zerows.epoch.constant;
+package io.zerows.epoch.metadata;
 
 /*
  * Class for annotation default, only taken place for future use
  */
-public class DefaultClass {
+public class KEmptyInstance {
 }

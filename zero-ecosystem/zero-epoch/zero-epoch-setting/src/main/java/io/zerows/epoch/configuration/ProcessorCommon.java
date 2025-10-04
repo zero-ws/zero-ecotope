@@ -1,6 +1,8 @@
 package io.zerows.epoch.configuration;
 
 import io.r2mo.typed.cc.Cc;
+import io.zerows.epoch.basicore.NodeNetwork;
+import io.zerows.epoch.basicore.NodeVertx;
 import io.zerows.specification.configuration.HSetting;
 
 /**

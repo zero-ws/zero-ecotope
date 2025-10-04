@@ -1,4 +1,4 @@
-package io.zerows.epoch.configuration.option;
+package io.zerows.epoch.basicore.option;
 
 import io.vertx.codegen.annotations.Fluent;
 import io.vertx.core.json.JsonObject;

@@ -1,4 +1,4 @@
-package io.zerows.epoch.jigsaw;
+package io.zerows.epoch.basicore;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;

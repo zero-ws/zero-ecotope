@@ -1,4 +1,4 @@
-package io.zerows.epoch.jigsaw;
+package io.zerows.epoch.basicore;
 
 import io.github.jklingsporn.vertx.jooq.shared.internal.AbstractVertxDAO;
 import io.zerows.support.Ut;

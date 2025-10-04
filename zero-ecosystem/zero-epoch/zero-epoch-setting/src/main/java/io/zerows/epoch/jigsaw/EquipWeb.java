@@ -1,5 +1,8 @@
 package io.zerows.epoch.jigsaw;
 
+import io.zerows.epoch.basicore.MDConfiguration;
+import io.zerows.epoch.basicore.MDId;
+import io.zerows.epoch.basicore.MDPage;
 import io.zerows.platform.constant.VPath;
 import io.zerows.support.Ut;
 

@@ -1,9 +1,14 @@
 package io.zerows.epoch.annotations;
 
+import io.zerows.epoch.metadata.KEmptyInstance;
 import io.zerows.platform.constant.VString;
-import io.zerows.epoch.constant.DefaultClass;
 
-import java.lang.annotation.*;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
@@ -18,7 +23,7 @@ public @interface Off {
      */
     String address() default VString.EMPTY;
 
-    
+
     /*
      * When there exist multi publish addresses, the address will be disabled
      * instead of send message from single point to multi points here.
@@ -29,5 +34,5 @@ public @interface Off {
     String[] addresses() default {};
 
 
-    Class<?> outcome() default DefaultClass.class;
+    Class<?> outcome() default KEmptyInstance.class;
 }

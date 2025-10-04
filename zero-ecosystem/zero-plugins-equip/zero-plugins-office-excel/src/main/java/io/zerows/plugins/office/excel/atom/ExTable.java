@@ -3,7 +3,7 @@ package io.zerows.plugins.office.excel.atom;
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.jigsaw.MDConnect;
+import io.zerows.epoch.basicore.MDConnect;
 import io.zerows.epoch.jigsaw.Oneness;
 import io.zerows.platform.constant.VString;
 import io.zerows.plugins.office.excel.exception._60038Exception404ConnectMissing;

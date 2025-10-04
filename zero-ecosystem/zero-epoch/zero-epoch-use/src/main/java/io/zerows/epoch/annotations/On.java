@@ -1,9 +1,14 @@
 package io.zerows.epoch.annotations;
 
+import io.zerows.epoch.metadata.KEmptyInstance;
 import io.zerows.platform.constant.VString;
-import io.zerows.epoch.constant.DefaultClass;
 
-import java.lang.annotation.*;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
@@ -17,5 +22,5 @@ public @interface On {
      */
     String address() default VString.EMPTY;
 
-    Class<?> income() default DefaultClass.class;
+    Class<?> income() default KEmptyInstance.class;
 }

@@ -1,6 +1,10 @@
 package io.zerows.epoch.jigsaw;
 
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.basicore.MDConfiguration;
+import io.zerows.epoch.basicore.MDConnect;
+import io.zerows.epoch.basicore.MDEntity;
+import io.zerows.epoch.basicore.MDId;
 import io.zerows.epoch.management.OCacheConfiguration;
 import org.osgi.framework.Bundle;
 

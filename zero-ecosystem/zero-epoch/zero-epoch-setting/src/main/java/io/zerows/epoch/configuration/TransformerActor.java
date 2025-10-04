@@ -4,7 +4,7 @@ import io.vertx.core.DeploymentOptions;
 import io.vertx.core.ThreadingModel;
 import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.configuration.option.ActorOptions;
+import io.zerows.epoch.basicore.option.ActorOptions;
 import io.zerows.platform.enums.EmDeploy;
 import io.zerows.support.Ut;
 

@@ -1,6 +1,6 @@
 package io.zerows.epoch.corpus.web.websocket.router;
 
-import io.zerows.epoch.configuration.NodeNetwork;
+import io.zerows.epoch.basicore.NodeNetwork;
 import io.zerows.epoch.corpus.io.management.AxisSockFactory;
 import io.zerows.epoch.corpus.io.uca.routing.OAxis;
 import io.zerows.epoch.management.OCacheNode;

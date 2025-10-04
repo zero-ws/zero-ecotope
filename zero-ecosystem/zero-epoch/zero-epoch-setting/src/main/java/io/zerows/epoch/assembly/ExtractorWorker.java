@@ -2,8 +2,8 @@ package io.zerows.epoch.assembly;
 
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.DeploymentOptions;
-import io.zerows.epoch.configuration.NodeNetwork;
-import io.zerows.epoch.configuration.NodeVertx;
+import io.zerows.epoch.basicore.NodeNetwork;
+import io.zerows.epoch.basicore.NodeVertx;
 import io.zerows.epoch.management.OCacheNode;
 import lombok.extern.slf4j.Slf4j;
 

@@ -1,7 +1,7 @@
 package io.zerows.epoch.management;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.epoch.jigsaw.MDMeta;
+import io.zerows.epoch.basicore.MDMeta;
 import io.zerows.sdk.management.OCache;
 import io.zerows.support.Ut;
 import org.osgi.framework.Bundle;

@@ -3,9 +3,9 @@ package io.zerows.epoch.corpus.extension;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.OLog;
-import io.zerows.epoch.jigsaw.MDConfiguration;
-import io.zerows.epoch.jigsaw.MDConnect;
-import io.zerows.epoch.jigsaw.MDEntity;
+import io.zerows.epoch.basicore.MDConfiguration;
+import io.zerows.epoch.basicore.MDConnect;
+import io.zerows.epoch.basicore.MDEntity;
 import io.zerows.platform.constant.VString;
 import io.zerows.support.Ut;
 

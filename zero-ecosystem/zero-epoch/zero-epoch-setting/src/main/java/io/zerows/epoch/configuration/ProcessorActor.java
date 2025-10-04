@@ -2,7 +2,8 @@ package io.zerows.epoch.configuration;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.application.YmlCore;
-import io.zerows.epoch.configuration.option.ActorOptions;
+import io.zerows.epoch.basicore.NodeVertx;
+import io.zerows.epoch.basicore.option.ActorOptions;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HSetting;
 import io.zerows.support.Ut;

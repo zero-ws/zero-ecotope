@@ -1,6 +1,6 @@
 package io.zerows.epoch.configuration;
 
-import io.zerows.epoch.configuration.option.SockOptions;
+import io.zerows.epoch.basicore.option.SockOptions;
 import io.zerows.platform.enums.app.ServerType;
 
 /**

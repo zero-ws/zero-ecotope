@@ -1,7 +1,7 @@
 package io.zerows.epoch.management;
 
-import io.zerows.epoch.jigsaw.MDConfiguration;
-import io.zerows.epoch.jigsaw.MDId;
+import io.zerows.epoch.basicore.MDConfiguration;
+import io.zerows.epoch.basicore.MDId;
 import io.zerows.sdk.management.AbstractAmbiguity;
 import org.osgi.framework.Bundle;
 

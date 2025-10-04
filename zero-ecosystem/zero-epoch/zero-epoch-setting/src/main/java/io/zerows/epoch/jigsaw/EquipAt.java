@@ -2,6 +2,8 @@ package io.zerows.epoch.jigsaw;
 
 import io.r2mo.typed.cc.Cc;
 import io.zerows.component.log.OLog;
+import io.zerows.epoch.basicore.MDConfiguration;
+import io.zerows.epoch.basicore.MDId;
 import io.zerows.platform.constant.VString;
 import io.zerows.support.Ut;
 

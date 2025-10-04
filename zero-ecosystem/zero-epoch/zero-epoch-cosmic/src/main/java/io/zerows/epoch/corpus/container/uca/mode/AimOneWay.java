@@ -7,7 +7,7 @@ import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.epoch.basicore.ActorEvent;
-import io.zerows.epoch.configuration.NodeNetwork;
+import io.zerows.epoch.basicore.NodeNetwork;
 import io.zerows.epoch.corpus.io.zdk.Aim;
 import io.zerows.epoch.management.OCacheNode;
 import io.zerows.epoch.web.Envelop;

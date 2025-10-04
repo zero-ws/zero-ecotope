@@ -1,10 +1,15 @@
 package io.zerows.epoch.corpus.web.websocket.annotations;
 
-import io.zerows.platform.constant.VString;
-import io.zerows.epoch.constant.DefaultClass;
 import io.zerows.epoch.corpus.web.websocket.eon.em.RemindType;
+import io.zerows.epoch.metadata.KEmptyInstance;
+import io.zerows.platform.constant.VString;
 
-import java.lang.annotation.*;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * This annotation will be comments to `websocket` method and the
@@ -35,7 +40,7 @@ public @interface Subscribe {
      */
     String name() default VString.EMPTY;
 
-    Class<?> input() default DefaultClass.class;
+    Class<?> input() default KEmptyInstance.class;
 
     String value();
 

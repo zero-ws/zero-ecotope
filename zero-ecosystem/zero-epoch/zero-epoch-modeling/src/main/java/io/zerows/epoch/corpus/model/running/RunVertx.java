@@ -3,7 +3,7 @@ package io.zerows.epoch.corpus.model.running;
 import io.vertx.core.Vertx;
 import io.vertx.ext.web.Route;
 import io.zerows.epoch.basicore.ActorEvent;
-import io.zerows.epoch.configuration.NodeVertx;
+import io.zerows.epoch.basicore.NodeVertx;
 import io.zerows.epoch.sdk.modeling.running.RunInstance;
 import io.zerows.specification.configuration.HSetting;
 import io.zerows.support.Ut;

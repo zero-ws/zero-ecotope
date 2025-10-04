@@ -1,5 +1,7 @@
 package io.zerows.epoch.jigsaw;
 
+import io.zerows.epoch.basicore.MDConfiguration;
+import io.zerows.epoch.basicore.MDId;
 import io.zerows.epoch.management.OCacheConfiguration;
 import io.zerows.epoch.management.OCacheDao;
 

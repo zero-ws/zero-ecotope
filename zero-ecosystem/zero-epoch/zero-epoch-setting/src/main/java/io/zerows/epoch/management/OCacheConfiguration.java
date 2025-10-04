@@ -1,9 +1,9 @@
 package io.zerows.epoch.management;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.epoch.jigsaw.MDConfiguration;
-import io.zerows.epoch.jigsaw.MDConnect;
-import io.zerows.epoch.jigsaw.MDPage;
+import io.zerows.epoch.basicore.MDConfiguration;
+import io.zerows.epoch.basicore.MDConnect;
+import io.zerows.epoch.basicore.MDPage;
 import io.zerows.sdk.management.OCache;
 import io.zerows.specification.configuration.HSetting;
 import io.zerows.support.Ut;

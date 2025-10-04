@@ -6,7 +6,7 @@ import io.vertx.core.http.HttpServerOptions;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.stomp.StompServer;
 import io.vertx.ext.stomp.StompServerOptions;
-import io.zerows.epoch.configuration.option.SockOptions;
+import io.zerows.epoch.basicore.option.SockOptions;
 import io.zerows.epoch.corpus.io.uca.routing.OAxis;
 import io.zerows.epoch.corpus.model.running.RunServer;
 import io.zerows.epoch.metadata.security.Aegis;

@@ -1,6 +1,6 @@
 package io.zerows.epoch.configuration;
 
-import io.zerows.epoch.configuration.option.RpcOptions;
+import io.zerows.epoch.basicore.option.RpcOptions;
 import io.zerows.platform.enums.app.ServerType;
 
 /**

@@ -15,6 +15,7 @@ import java.util.function.Supplier;
 /**
  * @author lang : 2023-05-30
  */
+@Deprecated
 public class OZeroStore {
     private static HSetting SETTING;
     private static final ConcurrentMap<String, Class<?>> INJECTION = new ConcurrentHashMap<>();

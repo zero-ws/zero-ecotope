@@ -1,12 +1,14 @@
-package io.zerows.epoch.configuration;
+package io.zerows.epoch.basicore;
 
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.VertxOptions;
 import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.http.HttpServerOptions;
-import io.zerows.epoch.configuration.option.ActorTool;
-import io.zerows.epoch.configuration.option.RpcOptions;
-import io.zerows.epoch.configuration.option.SockOptions;
+import io.zerows.epoch.basicore.option.ActorTool;
+import io.zerows.epoch.basicore.option.RpcOptions;
+import io.zerows.epoch.basicore.option.SockOptions;
+import io.zerows.epoch.configuration.OptionOfBuilder;
+import io.zerows.epoch.configuration.OptionOfServer;
 import io.zerows.platform.enums.EmDeploy;
 import io.zerows.platform.enums.app.ServerType;
 import io.zerows.specification.configuration.HSetting;

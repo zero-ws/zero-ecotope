@@ -7,7 +7,7 @@ import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.epoch.configuration.NodeNetwork;
+import io.zerows.epoch.basicore.NodeNetwork;
 import io.zerows.epoch.corpus.container.uca.mode.Answer;
 import io.zerows.epoch.corpus.container.uca.reply.ActionNext;
 import io.zerows.epoch.corpus.container.uca.reply.OAmbit;

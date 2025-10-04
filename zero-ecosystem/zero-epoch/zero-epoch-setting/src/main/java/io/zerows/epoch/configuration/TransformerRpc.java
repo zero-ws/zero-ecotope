@@ -1,7 +1,7 @@
 package io.zerows.epoch.configuration;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.configuration.option.RpcOptions;
+import io.zerows.epoch.basicore.option.RpcOptions;
 
 import java.util.Objects;
 

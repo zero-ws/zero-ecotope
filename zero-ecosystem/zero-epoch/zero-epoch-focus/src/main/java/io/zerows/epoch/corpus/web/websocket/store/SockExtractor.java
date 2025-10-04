@@ -4,11 +4,11 @@ import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.assembly.ExtractToolMethod;
 import io.zerows.epoch.assembly.ExtractToolVerifier;
 import io.zerows.epoch.assembly.Extractor;
-import io.zerows.epoch.constant.DefaultClass;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.corpus.web.websocket.annotations.Subscribe;
 import io.zerows.epoch.corpus.web.websocket.atom.Remind;
 import io.zerows.epoch.corpus.web.websocket.eon.em.RemindType;
+import io.zerows.epoch.metadata.KEmptyInstance;
 import io.zerows.platform.constant.VString;
 import io.zerows.support.Ut;
 
@@ -73,7 +73,7 @@ public class SockExtractor implements Extractor<Set<Remind>> {
         if (Ut.isNotNil(inputAddress)) {
             remind.setAddress(inputAddress);
             final Class<?> inputCls = Ut.invoke(annotation, "input");
-            if (DefaultClass.class != inputCls) {
+            if (KEmptyInstance.class != inputCls) {
                 remind.setInput(inputCls);
             }
         }

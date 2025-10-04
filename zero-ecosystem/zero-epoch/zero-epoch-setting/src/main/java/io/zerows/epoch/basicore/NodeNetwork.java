@@ -1,6 +1,6 @@
-package io.zerows.epoch.configuration;
+package io.zerows.epoch.basicore;
 
-import io.zerows.epoch.configuration.option.ClusterOptions;
+import io.zerows.epoch.basicore.option.ClusterOptions;
 import io.zerows.platform.enums.app.ServerType;
 import io.zerows.specification.configuration.HSetting;
 

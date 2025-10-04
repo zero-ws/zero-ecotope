@@ -1,7 +1,7 @@
 package io.zerows.epoch.management;
 
-import io.zerows.epoch.configuration.NodeNetwork;
-import io.zerows.epoch.configuration.NodeVertx;
+import io.zerows.epoch.basicore.NodeNetwork;
+import io.zerows.epoch.basicore.NodeVertx;
 import io.zerows.sdk.management.AbstractAmbiguity;
 import org.osgi.framework.Bundle;
 

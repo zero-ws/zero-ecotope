@@ -1,6 +1,7 @@
 package io.zerows.epoch.jigsaw;
 
 import io.vertx.core.json.JsonArray;
+import io.zerows.epoch.basicore.MDConnect;
 import io.zerows.support.Ut;
 import org.osgi.framework.Bundle;
 

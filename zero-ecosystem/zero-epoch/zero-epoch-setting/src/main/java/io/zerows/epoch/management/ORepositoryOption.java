@@ -1,6 +1,6 @@
 package io.zerows.epoch.management;
 
-import io.zerows.epoch.configuration.NodeNetwork;
+import io.zerows.epoch.basicore.NodeNetwork;
 import io.zerows.epoch.configuration.Processor;
 import io.zerows.epoch.configuration.ProcessorCommon;
 import io.zerows.sdk.management.AbstractAmbiguity;

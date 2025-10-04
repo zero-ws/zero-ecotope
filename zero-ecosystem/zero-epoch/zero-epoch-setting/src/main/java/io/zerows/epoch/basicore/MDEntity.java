@@ -1,4 +1,4 @@
-package io.zerows.epoch.jigsaw;
+package io.zerows.epoch.basicore;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;

@@ -6,7 +6,7 @@ import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.eventbus.EventBus;
 import io.zerows.component.log.OLog;
-import io.zerows.epoch.configuration.NodeNetwork;
+import io.zerows.epoch.basicore.NodeNetwork;
 import io.zerows.epoch.corpus.web.scheduler.atom.Mission;
 import io.zerows.epoch.corpus.web.scheduler.eon.MessageOfJob;
 import io.zerows.epoch.corpus.web.scheduler.zdk.JobOutcome;

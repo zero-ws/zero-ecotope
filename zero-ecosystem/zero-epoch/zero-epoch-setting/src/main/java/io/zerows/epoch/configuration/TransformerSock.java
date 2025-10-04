@@ -2,7 +2,7 @@ package io.zerows.epoch.configuration;
 
 import io.vertx.core.http.HttpServerOptions;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.configuration.option.SockOptions;
+import io.zerows.epoch.basicore.option.SockOptions;
 import io.zerows.epoch.constant.KName;
 import io.zerows.support.Ut;
 

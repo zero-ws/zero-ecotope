@@ -1,7 +1,7 @@
 package io.zerows.epoch.configuration;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.configuration.option.ClusterOptions;
+import io.zerows.epoch.basicore.option.ClusterOptions;
 
 import java.util.Objects;
 
