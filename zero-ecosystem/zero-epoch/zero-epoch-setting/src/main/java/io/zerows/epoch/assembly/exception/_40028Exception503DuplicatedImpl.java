@@ -1,4 +1,4 @@
-package io.zerows.epoch.exception;
+package io.zerows.epoch.assembly.exception;
 
 import io.r2mo.vertx.common.exception.VertxBootException;
 

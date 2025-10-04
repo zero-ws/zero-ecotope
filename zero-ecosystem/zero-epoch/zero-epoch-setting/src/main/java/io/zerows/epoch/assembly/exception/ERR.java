@@ -21,4 +21,5 @@ public interface ERR {
     VertxE _40048 = VertxE.of(-40048).state(HttpResponseStatus.INTERNAL_SERVER_ERROR);
     VertxE _40052 = VertxE.of(-40052).state(HttpResponseStatus.INTERNAL_SERVER_ERROR);
     VertxE _40053 = VertxE.of(-40053).state(HttpResponseStatus.INTERNAL_SERVER_ERROR);
+    VertxE _40028 = VertxE.of(-40028).state(HttpResponseStatus.SERVICE_UNAVAILABLE);
 }

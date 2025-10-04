@@ -5,7 +5,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.zerows.management.OCacheClass;
+import io.zerows.epoch.management.OCacheClass;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.PATCH;
@@ -24,7 +24,9 @@ public class SwaggerAnnotationScanner {
         final Set<Class<?>> interfaces = new HashSet<>();
 
         for (final Class<?> cls : allClasses) {
-            if (!cls.isInterface()) continue;
+            if (!cls.isInterface()) {
+                continue;
+            }
 
             final boolean hasPath = cls.isAnnotationPresent(Path.class);
             boolean hasOperation = false;

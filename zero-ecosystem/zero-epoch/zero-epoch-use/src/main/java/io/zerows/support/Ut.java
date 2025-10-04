@@ -80,10 +80,6 @@ public final class Ut extends _Visit {
         return Instance.plugin(options, pluginKey, interfaceCls);
     }
 
-    public static Class<?> child(final Class<?> clazz) {
-        return Instance.child(clazz);
-    }
-
     public static Field[] fields(final Class<?> clazz) {
         return Instance.fields(clazz);
     }

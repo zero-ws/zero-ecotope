@@ -2,15 +2,23 @@ package io.zerows.epoch.assembly;
 
 import com.google.inject.Injector;
 import io.r2mo.typed.cc.Cc;
+import io.r2mo.vertx.common.exception.VertxBootException;
 import io.zerows.component.log.OLog;
+import io.zerows.epoch.assembly.exception._40028Exception503DuplicatedImpl;
+import io.zerows.epoch.management.OCacheClass;
+import io.zerows.platform.constant.VValue;
 import io.zerows.support.Ut;
 import jakarta.inject.Named;
+import lombok.extern.slf4j.Slf4j;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @SuppressWarnings("all")
+@Slf4j
 public class DiPlugin {
 
     private static final Cc<Class<?>, DiPlugin> CC_DI = Cc.open();
@@ -62,7 +70,7 @@ public class DiPlugin {
         final Injector di = DiFactory.singleton().build();
         final Object instance;
         if (clazz.isInterface()) {
-            final Class<?> implClass = Ut.child(clazz);
+            final Class<?> implClass = uniqueChild(clazz);
             if (null != implClass) {
                 // Interface + Impl
                 instance = di.getInstance(clazz); // Ut.singleton(implClass);
@@ -83,5 +91,23 @@ public class DiPlugin {
             }
         }
         return this.infix.wrapInfix(instance);
+    }
+
+    private Class<?> uniqueChild(final Class<?> interfaceCls) {
+        final Set<Class<?>> classes = OCacheClass.entireValue();
+        final List<Class<?>> filtered = classes.stream()
+            .filter(item -> interfaceCls.isAssignableFrom(item)
+                && item != interfaceCls)
+            .toList();
+        final int size = filtered.size();
+        // Non-Unique throw error out.
+        if (VValue.ONE < size) {
+            // final BootingException error = new BootDuplicatedImplException(Instance.class, interfaceCls);
+            final VertxBootException error = new _40028Exception503DuplicatedImpl(interfaceCls);
+            log.error("[ ZERO ] 异常发生 {}", error.getMessage());
+            throw error;
+        }
+        // Null means direct interface only.
+        return VValue.ONE == size ? filtered.get(VValue.IDX) : null;
     }
 }

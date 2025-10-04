@@ -1,13 +1,10 @@
 package io.zerows.support;
 
 import io.r2mo.function.Fn;
-import io.r2mo.vertx.common.exception.VertxBootException;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Contract;
-import io.zerows.epoch.exception._40028Exception503DuplicatedImpl;
 import io.zerows.epoch.exception._60040Exception412ContractField;
 import io.zerows.platform.constant.VValue;
-import io.zerows.management.OCacheClass;
 import io.zerows.support.base.UtBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +13,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -82,28 +78,6 @@ final class Instance {
             }
         }
     }
-
-    /**
-     * Find the unique implementation for interfaceCls
-     */
-    static Class<?> child(final Class<?> interfaceCls) {
-        final Set<Class<?>> classes = OCacheClass.entireValue();
-        final List<Class<?>> filtered = classes.stream()
-            .filter(item -> interfaceCls.isAssignableFrom(item)
-                && item != interfaceCls)
-            .toList();
-        final int size = filtered.size();
-        // Non-Unique throw error out.
-        if (VValue.ONE < size) {
-            // final BootingException error = new BootDuplicatedImplException(Instance.class, interfaceCls);
-            final VertxBootException error = new _40028Exception503DuplicatedImpl(interfaceCls);
-            LOGGER.error("[Tool] Error occurs {}", error.getMessage());
-            throw error;
-        }
-        // Null means direct interface only.
-        return VValue.ONE == size ? filtered.get(VValue.IDX) : null;
-    }
-
 
     static Field[] fieldAll(final Object instance, final Class<?> fieldType) {
         final Function<Class<?>, Set<Field>> lookupFun = clazz -> lookUp(clazz, fieldType)

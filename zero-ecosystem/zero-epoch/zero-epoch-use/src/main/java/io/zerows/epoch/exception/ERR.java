@@ -11,7 +11,6 @@ interface ERR {
     VertxE _15000 = VertxE.of(-15000).state(HttpResponseStatus.INTERNAL_SERVER_ERROR);
     VertxE _15002 = VertxE.of(-15002).state(HttpResponseStatus.INTERNAL_SERVER_ERROR);
     VertxE _40020 = VertxE.of(-40020).state(HttpResponseStatus.INTERNAL_SERVER_ERROR);
-    VertxE _40028 = VertxE.of(-40028).state(HttpResponseStatus.SERVICE_UNAVAILABLE);
     VertxE _40049 = VertxE.of(-40049).state(HttpResponseStatus.INTERNAL_SERVER_ERROR);
     VertxE _60004 = VertxE.of(-60004).state(HttpResponseStatus.BAD_REQUEST);
     VertxE _60021 = VertxE.of(-60021).state(HttpResponseStatus.BAD_REQUEST);

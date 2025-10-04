@@ -3,7 +3,6 @@ package io.zerows.epoch.management;
 import io.github.jklingsporn.vertx.jooq.shared.internal.AbstractVertxDAO;
 import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.epoch.configuration.MDMeta;
-import io.zerows.management.OCacheClass;
 import io.zerows.sdk.osgi.AbstractAmbiguity;
 import io.zerows.support.Ut;
 import org.osgi.framework.Bundle;

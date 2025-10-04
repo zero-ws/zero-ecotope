@@ -1,23 +1,23 @@
-package io.zerows.management;
+package io.zerows.epoch.management;
 
-import io.zerows.epoch.annotations.Agent;
-import io.zerows.epoch.annotations.EndPoint;
-import io.zerows.epoch.annotations.Infusion;
-import io.zerows.epoch.annotations.Queue;
-import io.zerows.epoch.annotations.Worker;
-import io.zerows.platform.metadata.KRunner;
 import io.zerows.component.scanner.InquirerEndPoint;
 import io.zerows.component.scanner.InquirerIpc;
 import io.zerows.component.scanner.InquirerMAgent;
 import io.zerows.component.scanner.InquirerMWorker;
 import io.zerows.component.scanner.InquirerPlugin;
 import io.zerows.component.scanner.InquirerQueue;
+import io.zerows.epoch.annotations.Agent;
+import io.zerows.epoch.annotations.EndPoint;
+import io.zerows.epoch.annotations.Infusion;
+import io.zerows.epoch.annotations.Queue;
+import io.zerows.epoch.annotations.Worker;
 import io.zerows.platform.enums.VertxComponent;
-import io.zerows.support.Ut;
-import io.zerows.sdk.osgi.AbstractAmbiguity;
-import io.zerows.sdk.management.ORepository;
+import io.zerows.platform.metadata.KRunner;
 import io.zerows.sdk.environment.Inquirer;
+import io.zerows.sdk.management.ORepository;
+import io.zerows.sdk.osgi.AbstractAmbiguity;
 import io.zerows.specification.configuration.HSetting;
+import io.zerows.support.Ut;
 import org.osgi.framework.Bundle;
 
 import java.util.Set;
