@@ -1,4 +1,4 @@
-package io.zerows.component.setup;
+package io.zerows.epoch.configuration;
 
 import io.zerows.platform.enums.app.ServerType;
 

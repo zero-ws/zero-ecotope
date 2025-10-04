@@ -1,20 +1,16 @@
-package io.zerows.component.setup;
+package io.zerows.epoch.configuration;
 
 import io.vertx.core.VertxOptions;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.application.YmlCore;
-import io.zerows.epoch.constant.KName;
-import io.zerows.component.transformer.TransformerCluster;
-import io.zerows.component.transformer.TransformerVertx;
-import io.zerows.epoch.configuration.NodeNetwork;
-import io.zerows.epoch.configuration.NodeVertx;
 import io.zerows.epoch.configuration.option.ClusterOptions;
-import io.zerows.support.Ut;
+import io.zerows.epoch.constant.KName;
 import io.zerows.sdk.environment.Processor;
 import io.zerows.sdk.environment.Transformer;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HSetting;
+import io.zerows.support.Ut;
 
 /**
  * 新版 VertxOptions 和 ClusterOptions 的构造流程

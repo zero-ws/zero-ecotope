@@ -1,4 +1,4 @@
-package io.zerows.component.transformer;
+package io.zerows.epoch.configuration;
 
 interface TransformerMessage {
 

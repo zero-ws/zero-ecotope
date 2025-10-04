@@ -1,4 +1,4 @@
-package io.zerows.management;
+package io.zerows.epoch.management;
 
 import io.zerows.epoch.configuration.NodeNetwork;
 import io.zerows.epoch.configuration.NodeVertx;

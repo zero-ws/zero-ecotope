@@ -1,4 +1,4 @@
-package io.zerows.component.setup;
+package io.zerows.epoch.configuration;
 
 /**
  * @author lang : 2024-04-20

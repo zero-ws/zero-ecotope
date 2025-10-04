@@ -6,7 +6,7 @@ import io.zerows.epoch.corpus.web.security.store.ORepositorySecurity;
 import io.zerows.epoch.corpus.web.websocket.store.ORepositorySock;
 import io.zerows.epoch.management.ORepositoryClass;
 import io.zerows.epoch.management.ORepositoryMeta;
-import io.zerows.management.ORepositoryOption;
+import io.zerows.epoch.management.ORepositoryOption;
 import io.zerows.platform.metadata.KRunner;
 import io.zerows.sdk.management.ORepository;
 import io.zerows.specification.configuration.HConfig;

@@ -1,4 +1,4 @@
-package io.zerows.component.transformer;
+package io.zerows.epoch.configuration;
 
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.ThreadingModel;
@@ -6,8 +6,8 @@ import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.configuration.option.ActorOptions;
 import io.zerows.platform.enums.EmDeploy;
-import io.zerows.support.Ut;
 import io.zerows.sdk.environment.Transformer;
+import io.zerows.support.Ut;
 
 /**
  * 原始数据转换器，此数据转换器会带上对应的默认值执行智能化判断和相关操作

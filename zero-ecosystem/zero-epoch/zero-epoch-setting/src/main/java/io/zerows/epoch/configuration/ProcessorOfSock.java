@@ -1,10 +1,8 @@
-package io.zerows.component.setup;
+package io.zerows.epoch.configuration;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.environment.MatureOn;
-import io.zerows.component.transformer.TransformerSock;
-import io.zerows.epoch.configuration.NodeVertx;
 import io.zerows.epoch.configuration.option.SockOptions;
 import io.zerows.epoch.constant.KName;
 import io.zerows.platform.enums.app.ServerType;

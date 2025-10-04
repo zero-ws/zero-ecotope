@@ -6,9 +6,9 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.json.JsonObject;
-import io.zerows.platform.enums.EmDeploy;
 import io.zerows.integrated.jackson.JsonObjectDeserializer;
 import io.zerows.integrated.jackson.JsonObjectSerializer;
+import io.zerows.platform.enums.EmDeploy;
 
 import java.io.Serializable;
 import java.util.concurrent.ConcurrentHashMap;
