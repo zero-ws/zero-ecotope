@@ -14,7 +14,6 @@ import io.zerows.epoch.assembly.InquirerClassWorker;
 import io.zerows.epoch.configuration.Inquirer;
 import io.zerows.platform.enums.VertxComponent;
 import io.zerows.platform.metadata.KRunner;
-import io.zerows.sdk.management.AbstractAmbiguity;
 import io.zerows.specification.configuration.HSetting;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;

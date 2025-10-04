@@ -8,9 +8,6 @@ import io.zerows.epoch.annotations.Codex;
 import io.zerows.epoch.annotations.EndPoint;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
-import io.zerows.epoch.corpus.io.annotations.BodyParam;
-import io.zerows.epoch.corpus.io.annotations.PointParam;
-import io.zerows.epoch.corpus.io.annotations.StreamParam;
 import io.zerows.epoch.metadata.KView;
 import io.zerows.extension.runtime.crud.eon.Addr;
 import io.zerows.extension.runtime.crud.eon.IxMsg;
@@ -22,6 +19,9 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.extension.BodyParam;
+import jakarta.ws.rs.extension.PointParam;
+import jakarta.ws.rs.extension.StreamParam;
 
 import static io.zerows.extension.runtime.crud.util.Ix.LOG;
 

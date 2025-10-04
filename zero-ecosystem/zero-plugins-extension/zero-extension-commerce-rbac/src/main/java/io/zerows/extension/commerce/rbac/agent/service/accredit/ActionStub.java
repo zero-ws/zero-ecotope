@@ -3,7 +3,7 @@ package io.zerows.extension.commerce.rbac.agent.service.accredit;
 import io.vertx.core.Future;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.json.JsonArray;
-import io.zerows.corpus.management.uri.UriMeta;
+import io.zerows.cortex.management.uri.UriMeta;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SAction;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SPermission;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SResource;

@@ -2,7 +2,7 @@ package io.zerows.extension.mbse.modulat.uca.notify;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.corpus.annotations.Subscribe;
+import io.zerows.epoch.annotations.Subscribe;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.extension.mbse.modulat.eon.Addr;
 

@@ -5,7 +5,7 @@ import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.mbse.metadata.KModule;
+import io.zerows.mbse.metadata.KModule;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.epoch.metadata.KTransform;
 import io.zerows.epoch.spi.Dictionary;

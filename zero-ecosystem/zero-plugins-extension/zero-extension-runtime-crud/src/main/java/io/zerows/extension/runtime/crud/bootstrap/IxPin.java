@@ -1,9 +1,9 @@
 package io.zerows.extension.runtime.crud.bootstrap;
 
 import io.vertx.core.Vertx;
-import io.zerows.epoch.mbse.HOne;
-import io.zerows.epoch.mbse.metadata.KModule;
-import io.zerows.epoch.corpus.model.Rule;
+import io.zerows.mbse.HOne;
+import io.zerows.mbse.metadata.KModule;
+import io.zerows.cortex.metadata.WebRule;
 import io.zerows.epoch.database.jooq.operation.UxJoin;
 import io.zerows.epoch.database.jooq.operation.UxJooq;
 import io.zerows.epoch.web.Envelop;
@@ -69,7 +69,7 @@ public class IxPin implements HRegistry.Mod<Vertx> {
         return IxConfiguration.getUris();
     }
 
-    public static ConcurrentMap<String, List<Rule>> getRules(final String actor) {
+    public static ConcurrentMap<String, List<WebRule>> getRules(final String actor) {
         return IxValidator.getRules(actor);
     }
 

@@ -9,7 +9,7 @@ import io.zerows.component.environment.DevEnv;
 import io.zerows.component.log.Annal;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
-import io.zerows.corpus.plugins.cache.Rapid;
+import io.zerows.cosmic.plugins.cache.Rapid;
 import io.zerows.extension.commerce.rbac.eon.AuthKey;
 import io.zerows.platform.metadata.KRef;
 import io.zerows.program.Ux;

@@ -6,12 +6,12 @@ import io.zerows.epoch.annotations.Adjust;
 import io.zerows.epoch.annotations.EndPoint;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
-import io.zerows.epoch.corpus.io.annotations.BodyParam;
 import io.zerows.extension.runtime.crud.eon.Addr;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.QueryParam;
+import jakarta.ws.rs.extension.BodyParam;
 
 /*
  * Http Method: DELETE

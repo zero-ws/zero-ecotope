@@ -4,7 +4,7 @@ import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.OLog;
-import io.zerows.corpus.plugins.cache.Rapid;
+import io.zerows.cosmic.plugins.cache.Rapid;
 import io.zerows.support.Ut;
 import io.zerows.extension.commerce.rbac.atom.ScToken;
 

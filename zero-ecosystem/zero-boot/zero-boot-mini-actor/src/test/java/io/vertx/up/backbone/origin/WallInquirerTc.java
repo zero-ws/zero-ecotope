@@ -1,7 +1,7 @@
 package io.vertx.up.backbone.origin;
 
 import io.vertx.quiz.example.WallKeeper2;
-import io.zerows.corpus.plugins.security.InquirerWall;
+import io.zerows.cosmic.plugins.security.InquirerWall;
 import io.zerows.epoch.configuration.Inquirer;
 import io.zerows.epoch.management.OCacheClass;
 import io.zerows.epoch.metadata.security.Aegis;

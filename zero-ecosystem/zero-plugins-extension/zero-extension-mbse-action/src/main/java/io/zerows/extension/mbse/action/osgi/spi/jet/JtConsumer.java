@@ -2,7 +2,7 @@ package io.zerows.extension.mbse.action.osgi.spi.jet;
 
 import io.vertx.core.Future;
 import io.zerows.epoch.web.Envelop;
-import io.zerows.epoch.sdk.modeling.Commercial;
+import io.zerows.mbse.sdk.Commercial;
 
 /*
  * Consumer interface

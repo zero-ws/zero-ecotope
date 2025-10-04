@@ -1,6 +1,6 @@
 package io.zerows.epoch.bootplus.extension.scaffold.component;
 
-import io.zerows.corpus.plugins.job.metadata.Mission;
+import io.zerows.cosmic.plugins.job.metadata.Mission;
 import io.zerows.epoch.annotations.Contract;
 
 /**

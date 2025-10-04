@@ -4,13 +4,13 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Codex;
 import io.zerows.epoch.annotations.EndPoint;
-import io.zerows.epoch.corpus.io.annotations.BodyParam;
 import io.zerows.extension.commerce.rbac.eon.Addr;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.extension.BodyParam;
 
 /*
  * Login Api

@@ -2,7 +2,7 @@ package io.zerows.extension.runtime.integration.bootstrap;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.basicore.MDConfiguration;
-import io.zerows.epoch.corpus.extension.HExtension;
+import io.zerows.cortex.extension.HExtension;
 import io.zerows.extension.runtime.integration.atom.IsConfig;
 import io.zerows.extension.runtime.integration.eon.IsConstant;
 import io.zerows.extension.runtime.skeleton.eon.KeMsg;

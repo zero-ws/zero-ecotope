@@ -5,7 +5,7 @@ import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonArray;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
-import io.zerows.corpus.plugins.cache.Rapid;
+import io.zerows.cosmic.plugins.cache.Rapid;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XCategoryDao;
 import io.zerows.platform.metadata.KDictSource;
 import io.zerows.program.Ux;

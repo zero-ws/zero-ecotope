@@ -4,12 +4,12 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.EndPoint;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.corpus.io.annotations.BodyParam;
 import io.zerows.extension.commerce.finance.eon.Addr;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.extension.BodyParam;
 
 /**
  * @author lang : 2024-02-20

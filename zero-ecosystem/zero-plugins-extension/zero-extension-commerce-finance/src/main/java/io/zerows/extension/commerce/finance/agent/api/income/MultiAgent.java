@@ -3,10 +3,10 @@ package io.zerows.extension.commerce.finance.agent.api.income;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.EndPoint;
-import io.zerows.epoch.corpus.io.annotations.BodyParam;
 import io.zerows.extension.commerce.finance.eon.Addr;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.extension.BodyParam;
 
 /**
  * 单 - 多 入账接口，这种入账模式下

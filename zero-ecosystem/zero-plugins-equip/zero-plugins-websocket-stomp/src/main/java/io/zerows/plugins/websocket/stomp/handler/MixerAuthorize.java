@@ -4,8 +4,8 @@ import io.vertx.core.Vertx;
 import io.vertx.ext.auth.authentication.AuthenticationProvider;
 import io.vertx.ext.stomp.StompServerHandler;
 import io.vertx.ext.stomp.StompServerOptions;
-import io.zerows.corpus.plugins.security.Bolt;
-import io.zerows.corpus.plugins.security.management.OCacheSecurity;
+import io.zerows.cosmic.plugins.security.Bolt;
+import io.zerows.cosmic.plugins.security.management.OCacheSecurity;
 import io.zerows.epoch.metadata.security.Aegis;
 import io.zerows.support.Ut;
 

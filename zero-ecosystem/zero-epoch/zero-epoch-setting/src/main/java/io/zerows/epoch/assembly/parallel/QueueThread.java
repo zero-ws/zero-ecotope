@@ -3,7 +3,7 @@ package io.zerows.epoch.assembly.parallel;
 import io.zerows.component.log.Annal;
 import io.zerows.epoch.assembly.Extractor;
 import io.zerows.epoch.assembly.ExtractorReceipt;
-import io.zerows.epoch.basicore.ActorReceipt;
+import io.zerows.epoch.basicore.WebReceipt;
 import io.zerows.support.Ut;
 
 import java.util.HashSet;
@@ -15,9 +15,9 @@ public class QueueThread extends Thread {
         "will be mounted to event bus.";
     private static final Annal LOGGER = Annal.get(QueueThread.class);
 
-    private final Set<ActorReceipt> receipts = new HashSet<>();
+    private final Set<WebReceipt> receipts = new HashSet<>();
 
-    private final transient Extractor<Set<ActorReceipt>> extractor =
+    private final transient Extractor<Set<WebReceipt>> extractor =
         Ut.instance(ExtractorReceipt.class);
 
     private final transient Class<?> reference;
@@ -36,7 +36,7 @@ public class QueueThread extends Thread {
         }
     }
 
-    public Set<ActorReceipt> getReceipts() {
+    public Set<WebReceipt> getReceipts() {
         return this.receipts;
     }
 }

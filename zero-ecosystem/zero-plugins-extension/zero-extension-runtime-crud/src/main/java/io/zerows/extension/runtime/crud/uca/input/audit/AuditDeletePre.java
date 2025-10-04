@@ -2,7 +2,7 @@ package io.zerows.extension.runtime.crud.uca.input.audit;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
-import io.zerows.epoch.mbse.metadata.KModule;
+import io.zerows.mbse.metadata.KModule;
 import io.zerows.epoch.metadata.KField;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 import io.zerows.extension.runtime.skeleton.osgi.spi.business.ExUser;

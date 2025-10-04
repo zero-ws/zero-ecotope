@@ -1,9 +1,8 @@
 package io.zerows.epoch.management;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.epoch.basicore.ActorComponent;
-import io.zerows.epoch.basicore.ActorEvent;
-import io.zerows.sdk.management.OCache;
+import io.zerows.epoch.basicore.WebActor;
+import io.zerows.epoch.basicore.WebEvent;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
 
@@ -13,7 +12,7 @@ import java.util.Set;
 /**
  * @author lang : 2024-04-21
  */
-public interface OCacheActor extends OCache<ActorComponent> {
+public interface OCacheActor extends OCache<WebActor> {
     Cc<String, OCacheActor> CC_SKELETON = Cc.open();
 
     static OCacheActor of(final HBundle bundle) {
@@ -25,13 +24,13 @@ public interface OCacheActor extends OCache<ActorComponent> {
         return of(null);
     }
 
-    static ActorComponent entireValue() {
+    static WebActor entireValue() {
         return OCacheActorAmbiguity.ENTIRE_ACTOR;
     }
 
     interface Tool {
 
-        static void addTo(final Set<ActorEvent> events) {
+        static void addTo(final Set<WebEvent> events) {
             events.stream().filter(Objects::nonNull)
                 /* Only Uri Pattern will be extracted to URI_PATHS */
                 .filter(item -> 0 < item.getPath().indexOf(":"))

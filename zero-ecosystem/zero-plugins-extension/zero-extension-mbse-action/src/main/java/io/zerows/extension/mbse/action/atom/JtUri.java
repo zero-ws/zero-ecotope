@@ -3,13 +3,13 @@ package io.zerows.extension.mbse.action.atom;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KWeb;
-import io.zerows.support.Ut;
-import io.zerows.epoch.sdk.modeling.Api;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IApi;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IService;
 import io.zerows.extension.mbse.action.eon.JtKey;
 import io.zerows.extension.mbse.action.eon.em.ParamMode;
 import io.zerows.extension.mbse.action.util.Jt;
+import io.zerows.mbse.sdk.Api;
+import io.zerows.support.Ut;
 import jakarta.ws.rs.core.MediaType;
 
 import java.util.Objects;

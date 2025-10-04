@@ -1,7 +1,7 @@
 package io.zerows.epoch;
 
 import io.vertx.core.Vertx;
-import io.zerows.corpus.container.StubLinear;
+import io.zerows.cosmic.bootstrap.StubLinear;
 import io.zerows.epoch.boot.Electy;
 import io.zerows.epoch.boot.ZeroLauncher;
 import io.zerows.platform.enums.VertxComponent;

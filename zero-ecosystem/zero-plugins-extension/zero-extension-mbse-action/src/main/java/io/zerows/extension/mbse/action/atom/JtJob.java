@@ -1,8 +1,8 @@
 package io.zerows.extension.mbse.action.atom;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.corpus.plugins.job.metadata.KScheduler;
-import io.zerows.corpus.plugins.job.metadata.Mission;
+import io.zerows.cosmic.plugins.job.metadata.KScheduler;
+import io.zerows.cosmic.plugins.job.metadata.Mission;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IJob;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IService;
 import io.zerows.extension.mbse.action.eon.JtKey;

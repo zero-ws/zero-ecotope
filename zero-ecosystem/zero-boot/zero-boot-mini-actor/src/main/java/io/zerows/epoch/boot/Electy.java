@@ -1,9 +1,9 @@
 package io.zerows.epoch.boot;
 
 import io.vertx.core.Vertx;
-import io.zerows.corpus.plugins.job.management.ORepositoryJob;
-import io.zerows.corpus.plugins.security.management.ORepositorySecurity;
-import io.zerows.corpus.plugins.websocket.management.ORepositorySock;
+import io.zerows.cosmic.plugins.job.management.ORepositoryJob;
+import io.zerows.cosmic.plugins.security.management.ORepositorySecurity;
+import io.zerows.cosmic.plugins.websocket.management.ORepositorySock;
 import io.zerows.epoch.management.ORepository;
 import io.zerows.epoch.management.ORepositoryClass;
 import io.zerows.epoch.management.ORepositoryMeta;

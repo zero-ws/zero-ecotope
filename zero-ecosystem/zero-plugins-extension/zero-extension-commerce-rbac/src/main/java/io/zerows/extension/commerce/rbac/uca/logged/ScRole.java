@@ -5,7 +5,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.zerows.component.environment.DevEnv;
 import io.zerows.component.log.Annal;
-import io.zerows.corpus.plugins.cache.Rapid;
+import io.zerows.cosmic.plugins.cache.Rapid;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.RRolePermDao;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.RRolePerm;
 import io.zerows.extension.commerce.rbac.eon.AuthKey;

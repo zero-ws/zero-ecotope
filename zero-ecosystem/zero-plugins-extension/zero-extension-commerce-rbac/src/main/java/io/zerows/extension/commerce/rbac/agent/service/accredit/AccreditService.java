@@ -10,7 +10,7 @@ import io.zerows.component.log.Annal;
 import io.zerows.platform.metadata.KRef;
 import io.zerows.program.Ux;
 import io.zerows.epoch.metadata.security.DataBound;
-import io.zerows.corpus.plugins.cache.Rapid;
+import io.zerows.cosmic.plugins.cache.Rapid;
 import io.zerows.support.Ut;
 import io.zerows.extension.commerce.rbac.atom.ScOwner;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SAction;

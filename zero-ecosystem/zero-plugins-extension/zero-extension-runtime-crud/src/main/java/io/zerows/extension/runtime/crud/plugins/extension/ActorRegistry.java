@@ -1,6 +1,6 @@
 package io.zerows.extension.runtime.crud.plugins.extension;
 
-import io.zerows.epoch.corpus.io.plugins.extension.PlugRegistry;
+import io.zerows.cortex.extension.PlugRegistry;
 import io.zerows.extension.runtime.crud.bootstrap.IxPin;
 
 import java.util.Set;

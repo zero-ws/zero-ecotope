@@ -1,7 +1,7 @@
 package io.zerows.extension.mbse.action.uca.micro;
 
-import io.zerows.corpus.plugins.job.JobStore;
-import io.zerows.corpus.plugins.job.metadata.Mission;
+import io.zerows.cosmic.plugins.job.JobStore;
+import io.zerows.cosmic.plugins.job.metadata.Mission;
 import io.zerows.extension.mbse.action.atom.JtJob;
 import io.zerows.extension.mbse.action.bootstrap.JtPin;
 import io.zerows.extension.mbse.action.bootstrap.ServiceEnvironment;

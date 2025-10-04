@@ -7,7 +7,7 @@ import io.vertx.core.shareddata.ClusterSerializable;
 import io.vertx.ext.auth.User;
 import io.zerows.epoch.basicore.MDConnect;
 import io.zerows.epoch.constant.KName;
-import io.zerows.corpus.plugins.cache.UxPool;
+import io.zerows.cosmic.plugins.cache.UxPool;
 import io.zerows.epoch.database.cp.DataPool;
 import io.zerows.epoch.database.jooq.operation.UxJoin;
 import io.zerows.epoch.database.jooq.operation.UxJooq;

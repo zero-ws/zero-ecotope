@@ -3,7 +3,7 @@ package io.zerows.extension.mbse.modulat.agent.service;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.corpus.plugins.cache.Rapid;
+import io.zerows.cosmic.plugins.cache.Rapid;
 import io.zerows.epoch.database.jooq.operation.UxJooq;
 import io.zerows.extension.mbse.modulat.atom.PowerApp;
 import io.zerows.extension.mbse.modulat.domain.tables.daos.BBagDao;

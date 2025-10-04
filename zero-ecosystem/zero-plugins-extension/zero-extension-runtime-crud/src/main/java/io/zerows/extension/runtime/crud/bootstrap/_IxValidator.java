@@ -4,7 +4,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.constant.VPath;
 import io.zerows.platform.constant.VString;
-import io.zerows.epoch.corpus.model.Rule;
+import io.zerows.cortex.metadata.WebRule;
 import io.zerows.support.Ut;
 import io.zerows.extension.runtime.crud.eon.IxFolder;
 
@@ -28,7 +28,7 @@ class IxValidator {
      * uri -> field1 = List<Rule>
      *        field2 = List<Rule>
      */
-    private static final ConcurrentMap<String, ConcurrentMap<String, List<Rule>>> RULE_MAP =
+    private static final ConcurrentMap<String, ConcurrentMap<String, List<WebRule>>> RULE_MAP =
         new ConcurrentHashMap<>();
 
     static void init() {
@@ -38,7 +38,7 @@ class IxValidator {
             final String path = IxFolder.VALIDATOR + file;
             /* 2. JsonArray process */
             final JsonObject rules = Ut.ioYaml(path);
-            final ConcurrentMap<String, List<Rule>> ruleMap = new ConcurrentHashMap<>();
+            final ConcurrentMap<String, List<WebRule>> ruleMap = new ConcurrentHashMap<>();
             rules.fieldNames().forEach(field -> {
                 /* 3. Rule List */
                 final JsonArray ruleArray = rules.getJsonArray(field);
@@ -54,17 +54,17 @@ class IxValidator {
         LOG.Init.info(IxValidator.class, "IxValidator Finished ! Size = {0}", RULE_MAP.size());
     }
 
-    private static List<Rule> getRules(final JsonArray ruleArray) {
-        final List<Rule> ruleList = new ArrayList<>();
+    private static List<WebRule> getRules(final JsonArray ruleArray) {
+        final List<WebRule> ruleList = new ArrayList<>();
         Ut.itJArray(ruleArray, (item, index) -> {
-            final Rule rule = Rule.create(item);
+            final WebRule rule = WebRule.create(item);
             ruleList.add(rule);
         });
         return ruleList;
     }
 
-    static ConcurrentMap<String, List<Rule>> getRules(final String actor) {
-        ConcurrentMap<String, List<Rule>> rules = RULE_MAP.get(actor);
+    static ConcurrentMap<String, List<WebRule>> getRules(final String actor) {
+        ConcurrentMap<String, List<WebRule>> rules = RULE_MAP.get(actor);
         if (null == rules) {
             rules = new ConcurrentHashMap<>();
         }

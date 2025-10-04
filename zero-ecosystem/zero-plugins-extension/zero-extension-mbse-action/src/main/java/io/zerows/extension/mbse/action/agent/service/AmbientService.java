@@ -2,9 +2,9 @@ package io.zerows.extension.mbse.action.agent.service;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.corpus.plugins.job.client.JobClient;
-import io.zerows.corpus.plugins.job.client.JobInfix;
-import io.zerows.corpus.plugins.job.metadata.Mission;
+import io.zerows.cosmic.plugins.job.client.JobClient;
+import io.zerows.cosmic.plugins.job.client.JobInfix;
+import io.zerows.cosmic.plugins.job.metadata.Mission;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.mbse.action.atom.JtJob;
 import io.zerows.extension.mbse.action.atom.JtUri;

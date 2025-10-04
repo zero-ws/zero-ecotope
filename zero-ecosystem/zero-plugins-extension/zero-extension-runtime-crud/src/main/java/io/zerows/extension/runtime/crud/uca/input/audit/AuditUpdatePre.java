@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
-import io.zerows.epoch.mbse.metadata.KModule;
+import io.zerows.mbse.metadata.KModule;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.epoch.metadata.KField;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;

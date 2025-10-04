@@ -2,7 +2,7 @@ package io.zerows.epoch.assembly;
 
 import io.r2mo.function.Fn;
 import io.zerows.epoch.assembly.parallel.EndPointThread;
-import io.zerows.epoch.basicore.ActorEvent;
+import io.zerows.epoch.basicore.WebEvent;
 import io.zerows.epoch.configuration.Inquirer;
 
 import java.util.ArrayList;
@@ -13,11 +13,11 @@ import java.util.Set;
 /**
  *
  */
-public class InquirerForEvent implements Inquirer<Set<ActorEvent>> {
+public class InquirerForEvent implements Inquirer<Set<WebEvent>> {
 
 
     @Override
-    public Set<ActorEvent> scan(final Set<Class<?>> endpoints) {
+    public Set<WebEvent> scan(final Set<Class<?>> endpoints) {
         final List<EndPointThread> threadReference = new ArrayList<>();
         /* 2.1.Build Api metadata **/
         for (final Class<?> endpoint : endpoints) {
@@ -33,7 +33,7 @@ public class InquirerForEvent implements Inquirer<Set<ActorEvent>> {
             }
         });
         /* 3.3. Finally **/
-        final Set<ActorEvent> events = new HashSet<>();
+        final Set<WebEvent> events = new HashSet<>();
         Fn.jvmAt(() -> {
             for (final EndPointThread item : threadReference) {
                 events.addAll(item.getEvents());

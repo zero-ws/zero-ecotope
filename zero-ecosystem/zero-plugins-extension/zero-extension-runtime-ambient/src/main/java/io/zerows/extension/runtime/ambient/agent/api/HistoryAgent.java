@@ -5,12 +5,12 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.EndPoint;
-import io.zerows.epoch.corpus.io.annotations.BodyParam;
 import io.zerows.extension.runtime.ambient.eon.Addr;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.extension.BodyParam;
 
 /**
  * # Zero History Api Definition

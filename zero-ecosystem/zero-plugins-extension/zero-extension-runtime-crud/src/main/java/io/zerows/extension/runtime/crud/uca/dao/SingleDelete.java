@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.destine.Conflate;
 import io.zerows.component.destine.Hymn;
-import io.zerows.epoch.mbse.metadata.KModule;
+import io.zerows.mbse.metadata.KModule;
 import io.zerows.epoch.database.jooq.operation.UxJooq;
 import io.zerows.epoch.metadata.KJoin;
 import io.zerows.epoch.metadata.KPoint;

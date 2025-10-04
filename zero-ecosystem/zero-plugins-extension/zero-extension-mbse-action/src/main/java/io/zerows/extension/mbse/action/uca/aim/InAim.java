@@ -2,7 +2,7 @@ package io.zerows.extension.mbse.action.uca.aim;
 
 import io.vertx.core.Handler;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.corpus.container.AimAnswer;
+import io.zerows.cosmic.bootstrap.AimAnswer;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.mbse.action.atom.JtUri;
 import io.zerows.extension.mbse.action.uca.valve.JtIn;

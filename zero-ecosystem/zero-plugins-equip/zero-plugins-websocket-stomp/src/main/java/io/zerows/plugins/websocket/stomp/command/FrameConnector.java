@@ -9,7 +9,7 @@ import io.vertx.ext.stomp.Frame;
 import io.vertx.ext.stomp.ServerFrame;
 import io.vertx.ext.stomp.StompServerConnection;
 import io.vertx.ext.stomp.StompServerHandler;
-import io.zerows.corpus.plugins.security.Bolt;
+import io.zerows.cosmic.plugins.security.Bolt;
 import io.zerows.epoch.constant.KName;
 import io.zerows.plugins.websocket.stomp.socket.ServerWsHandler;
 import io.zerows.sdk.security.Lee;

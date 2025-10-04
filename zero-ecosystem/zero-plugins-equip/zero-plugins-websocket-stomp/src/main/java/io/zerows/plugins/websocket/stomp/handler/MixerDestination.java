@@ -5,8 +5,8 @@ import io.vertx.ext.stomp.Destination;
 import io.vertx.ext.stomp.StompServerHandler;
 import io.vertx.ext.stomp.StompServerOptions;
 import io.vertx.ext.stomp.impl.RemindDestination;
-import io.zerows.corpus.plugins.websocket.RemindType;
-import io.zerows.corpus.plugins.websocket.SockGrid;
+import io.zerows.platform.enums.RemindType;
+import io.zerows.cosmic.plugins.websocket.SockGrid;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentMap;

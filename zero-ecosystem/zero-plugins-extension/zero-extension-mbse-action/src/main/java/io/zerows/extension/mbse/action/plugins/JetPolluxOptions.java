@@ -2,8 +2,8 @@ package io.zerows.extension.mbse.action.plugins;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.OLog;
+import io.zerows.cortex.sdk.Axis;
 import io.zerows.epoch.application.YmlCore;
-import io.zerows.epoch.corpus.io.uca.routing.OAxis;
 import io.zerows.extension.mbse.action.atom.JtUri;
 import io.zerows.extension.mbse.action.bootstrap.JtPin;
 import io.zerows.extension.mbse.action.bootstrap.ServiceEnvironment;
@@ -61,8 +61,8 @@ class JetPolluxOptions {
     }
 
     @SuppressWarnings("unchecked")
-    Class<OAxis> inComponent() {
-        return (Class<OAxis>) OZeroStore.classInject(YmlCore.router.__KEY);
+    Class<Axis> inComponent() {
+        return (Class<Axis>) OZeroStore.classInject(YmlCore.router.__KEY);
     }
 
     Set<JtUri> inUri() {
@@ -96,7 +96,7 @@ class JetPolluxOptions {
          * 提取 vertx-inject.yml 中的配置检查是否符合 OAxis 路由扩展相关信息
          */
         final Class<?> clazz = OZeroStore.classInject(YmlCore.router.__KEY);
-        if (Objects.isNull(clazz) || !Ut.isImplement(clazz, OAxis.class)) {
+        if (Objects.isNull(clazz) || !Ut.isImplement(clazz, Axis.class)) {
 
 
             if (VValue.ONE == LOG_OPTION.getAndIncrement()) {

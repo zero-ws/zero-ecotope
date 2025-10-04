@@ -5,11 +5,11 @@ import io.vertx.ext.web.FileUpload;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Codex;
 import io.zerows.epoch.annotations.EndPoint;
-import io.zerows.epoch.corpus.io.annotations.StreamParam;
 import io.zerows.extension.commerce.rbac.eon.Addr;
 import io.zerows.program.Ux;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.extension.StreamParam;
 
 import static io.zerows.extension.commerce.rbac.util.Sc.LOG;
 

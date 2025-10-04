@@ -1,6 +1,6 @@
 package io.zerows.extension.commerce.erp.bootstrap;
 
-import io.zerows.epoch.corpus.extension.AbstractBoot;
+import io.zerows.cortex.extension.AbstractBoot;
 import io.zerows.extension.commerce.erp.eon.ErpConstant;
 
 /**

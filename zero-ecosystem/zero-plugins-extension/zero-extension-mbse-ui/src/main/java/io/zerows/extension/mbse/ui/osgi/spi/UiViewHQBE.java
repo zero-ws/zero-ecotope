@@ -2,10 +2,10 @@ package io.zerows.extension.mbse.ui.osgi.spi;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
+import io.zerows.cortex.sdk.HQBE;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.corpus.io.zdk.qbe.HQBE;
-import io.zerows.epoch.web.Envelop;
 import io.zerows.epoch.metadata.XHeader;
+import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.mbse.ui.domain.tables.daos.UiViewDao;
 import io.zerows.extension.mbse.ui.domain.tables.pojos.UiView;
 import io.zerows.extension.mbse.ui.uca.qbe.QBECache;

@@ -3,7 +3,7 @@ package io.zerows.epoch.bootplus.extension.spi.component;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.bootplus.extension.scaffold.stdn.AbstractHOne;
-import io.zerows.epoch.mbse.metadata.ActIn;
+import io.zerows.mbse.metadata.ActIn;
 import io.zerows.epoch.metadata.Apt;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 

@@ -1,7 +1,7 @@
 package io.zerows.epoch.assembly;
 
 import io.zerows.epoch.annotations.Address;
-import io.zerows.epoch.basicore.ActorReceipt;
+import io.zerows.epoch.basicore.WebReceipt;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -11,15 +11,15 @@ import java.util.Set;
 /**
  * Scanned @Queue clazz to build Receipt metadata
  */
-public class ExtractorReceipt implements Extractor<Set<ActorReceipt>> {
+public class ExtractorReceipt implements Extractor<Set<WebReceipt>> {
 
     @Override
-    public Set<ActorReceipt> extract(final Class<?> clazz) {
+    public Set<WebReceipt> extract(final Class<?> clazz) {
         // 1. Class verify
         ExtractToolVerifier.noArg(clazz);
         ExtractToolVerifier.modifier(clazz);
         // 2. Scan method to find @Address
-        final Set<ActorReceipt> receipts = new HashSet<>();
+        final Set<WebReceipt> receipts = new HashSet<>();
         final Method[] methods = clazz.getDeclaredMethods();
         Arrays.stream(methods)
             .filter(ExtractToolMethod::isValid)

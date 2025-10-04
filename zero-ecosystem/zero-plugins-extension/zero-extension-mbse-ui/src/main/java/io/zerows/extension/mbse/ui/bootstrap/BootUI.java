@@ -1,6 +1,6 @@
 package io.zerows.extension.mbse.ui.bootstrap;
 
-import io.zerows.epoch.corpus.extension.AbstractBoot;
+import io.zerows.cortex.extension.AbstractBoot;
 import io.zerows.extension.mbse.ui.eon.UiConstant;
 
 /**

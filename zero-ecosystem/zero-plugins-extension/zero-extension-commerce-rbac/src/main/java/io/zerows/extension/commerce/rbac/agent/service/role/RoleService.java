@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 import io.zerows.epoch.basicore.MDConfiguration;
-import io.zerows.epoch.corpus.extension.HExtension;
+import io.zerows.cortex.extension.HExtension;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.RRolePermDao;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.SPermissionDao;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.SRoleDao;

@@ -6,7 +6,7 @@ import io.r2mo.typed.webflow.WebState;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.destine.Conflate;
-import io.zerows.epoch.mbse.metadata.KModule;
+import io.zerows.mbse.metadata.KModule;
 import io.zerows.epoch.metadata.KJoin;
 import io.zerows.epoch.metadata.KPoint;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;

@@ -3,10 +3,10 @@ package io.zerows.extension.mbse.action.agent.api;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.EndPoint;
-import io.zerows.epoch.corpus.io.annotations.BodyParam;
 import io.zerows.extension.mbse.action.eon.JtAddr;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.extension.BodyParam;
 
 /**
  * Critical routing management

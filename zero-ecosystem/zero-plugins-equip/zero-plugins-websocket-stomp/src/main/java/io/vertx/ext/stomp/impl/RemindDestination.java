@@ -17,7 +17,7 @@ import io.vertx.ext.stomp.Frames;
 import io.vertx.ext.stomp.StompServerConnection;
 import io.vertx.ext.stomp.utils.Headers;
 import io.zerows.component.log.Annal;
-import io.zerows.corpus.plugins.websocket.SockGrid;
+import io.zerows.cosmic.plugins.websocket.SockGrid;
 import io.zerows.plugins.websocket.stomp.handler.StompBridgeOptions;
 import io.zerows.support.Ut;
 

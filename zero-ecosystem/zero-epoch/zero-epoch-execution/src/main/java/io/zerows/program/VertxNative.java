@@ -6,7 +6,7 @@ import io.vertx.core.Vertx;
 import io.vertx.core.VertxException;
 import io.vertx.core.WorkerExecutor;
 import io.vertx.core.eventbus.EventBus;
-import io.zerows.component.codec.EnvelopCodec;
+import io.zerows.cortex.extension.CodecEnvelop;
 import io.zerows.epoch.configuration.TransformerVertx;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.support.Ut;
@@ -23,7 +23,7 @@ class VertxNative {
             if (Objects.isNull(VERTX_NATIVE)) {
                 VERTX_NATIVE = Vertx.vertx(TransformerVertx.nativeOption());
                 final EventBus eventBus = VERTX_NATIVE.eventBus();
-                eventBus.registerDefaultCodec(Envelop.class, Ut.singleton(EnvelopCodec.class));
+                eventBus.registerDefaultCodec(Envelop.class, Ut.singleton(CodecEnvelop.class));
             }
             return VERTX_NATIVE;
         }

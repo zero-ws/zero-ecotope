@@ -1,6 +1,6 @@
 package io.zerows.extension.commerce.lbs.bootstrap;
 
-import io.zerows.epoch.corpus.extension.AbstractBoot;
+import io.zerows.cortex.extension.AbstractBoot;
 import io.zerows.extension.commerce.lbs.eon.LbsConstant;
 
 /**

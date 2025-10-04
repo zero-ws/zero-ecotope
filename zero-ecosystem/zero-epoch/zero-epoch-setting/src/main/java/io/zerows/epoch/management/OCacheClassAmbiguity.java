@@ -3,7 +3,6 @@ package io.zerows.epoch.management;
 import io.zerows.epoch.assembly.ClassScanner;
 import io.zerows.epoch.configuration.Inquirer;
 import io.zerows.platform.enums.VertxComponent;
-import io.zerows.sdk.management.AbstractAmbiguity;
 import io.zerows.specification.development.compiled.HBundle;
 
 import java.util.HashSet;

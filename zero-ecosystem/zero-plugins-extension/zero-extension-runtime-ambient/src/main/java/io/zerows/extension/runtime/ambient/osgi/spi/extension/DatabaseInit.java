@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.Annal;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
-import io.zerows.corpus.plugins.cache.Rapid;
+import io.zerows.cosmic.plugins.cache.Rapid;
 import io.zerows.epoch.database.Database;
 import io.zerows.extension.runtime.ambient.eon.AtMsg;
 import io.zerows.extension.runtime.skeleton.osgi.spi.extension.Init;

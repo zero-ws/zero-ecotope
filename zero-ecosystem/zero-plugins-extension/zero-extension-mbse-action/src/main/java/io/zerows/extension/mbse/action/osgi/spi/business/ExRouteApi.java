@@ -2,7 +2,7 @@ package io.zerows.extension.mbse.action.osgi.spi.business;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.corpus.management.uri.UriMeta;
+import io.zerows.cortex.management.uri.UriMeta;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.mbse.action.domain.tables.daos.IApiDao;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IApi;

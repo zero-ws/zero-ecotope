@@ -1,7 +1,7 @@
 package io.zerows.extension.runtime.ambient.store;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.sdk.management.OCache;
+import io.zerows.epoch.management.OCache;
 import io.zerows.specification.access.app.HApp;
 import io.zerows.specification.access.app.HArk;
 import io.zerows.specification.development.compiled.HBundle;

@@ -3,9 +3,9 @@ package io.zerows.extension.runtime.crud.uca.input;
 import io.r2mo.typed.exception.WebException;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.corpus.plugins.validation.Rigor;
-import io.zerows.epoch.corpus.model.Rule;
-import io.zerows.epoch.mbse.metadata.KModule;
+import io.zerows.cosmic.plugins.validation.Rigor;
+import io.zerows.cortex.metadata.WebRule;
+import io.zerows.mbse.metadata.KModule;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.runtime.crud.bootstrap.IxPin;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
@@ -30,7 +30,7 @@ class CodexPre implements Pre {
 
         LOG.Verify.info(this.getClass(), "---> Rule: {0}", key);
 
-        final ConcurrentMap<String, List<Rule>> rules = IxPin.getRules(key);
+        final ConcurrentMap<String, List<WebRule>> rules = IxPin.getRules(key);
         if (!rules.isEmpty()) {
             /*
              * 2. Validate JsonObject

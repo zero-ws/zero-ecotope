@@ -7,7 +7,7 @@ import io.vertx.core.http.HttpServerResponse;
 import io.zerows.epoch.annotations.Ordered;
 import io.zerows.epoch.assembly.exception._40052Exception500FilterSpecification;
 import io.zerows.epoch.assembly.exception._40053Exception500FilterOrder;
-import io.zerows.epoch.basicore.ActorEvent;
+import io.zerows.epoch.basicore.WebEvent;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.web.Filter;
 import io.zerows.platform.constant.VValue;
@@ -28,12 +28,12 @@ import java.util.concurrent.ConcurrentMap;
  * Filter processing
  * path = Event Chain
  */
-public class InquirerForFilter implements Inquirer<ConcurrentMap<String, Set<ActorEvent>>> {
+public class InquirerForFilter implements Inquirer<ConcurrentMap<String, Set<WebEvent>>> {
 
     @Override
-    public ConcurrentMap<String, Set<ActorEvent>> scan(final Set<Class<?>> clazzes) {
+    public ConcurrentMap<String, Set<WebEvent>> scan(final Set<Class<?>> clazzes) {
         // Scan all classess that are annotated with @WebFilter
-        final ConcurrentMap<String, Set<ActorEvent>> filters = new ConcurrentHashMap<>();
+        final ConcurrentMap<String, Set<WebEvent>> filters = new ConcurrentHashMap<>();
         Observable.fromIterable(clazzes)
             .filter(item -> item.isAnnotationPresent(WebFilter.class))
             .map(this::ensure)
@@ -47,15 +47,15 @@ public class InquirerForFilter implements Inquirer<ConcurrentMap<String, Set<Act
         return clazz;
     }
 
-    private void extract(final ConcurrentMap<String, Set<ActorEvent>> map,
+    private void extract(final ConcurrentMap<String, Set<WebEvent>> map,
                          final Class<?> clazz) {
         final Annotation annotation = clazz.getAnnotation(WebFilter.class);
         final String[] pathes = Ut.invoke(annotation, "value");
         // Multi pathes supported
         for (final String path : pathes) {
-            final ActorEvent event = this.extract(path, clazz);
+            final WebEvent event = this.extract(path, clazz);
             // Set<Event> initialized.
-            Set<ActorEvent> events = map.get(path);
+            Set<WebEvent> events = map.get(path);
             if (null == events) {
                 events = new HashSet<>();
             }
@@ -65,8 +65,8 @@ public class InquirerForFilter implements Inquirer<ConcurrentMap<String, Set<Act
         }
     }
 
-    private ActorEvent extract(final String path, final Class<?> clazz) {
-        final ActorEvent event = new ActorEvent();
+    private WebEvent extract(final String path, final Class<?> clazz) {
+        final WebEvent event = new WebEvent();
         event.setPath(path);
         final Annotation annotation = clazz.getAnnotation(Ordered.class);
         int order = KWeb.ORDER.FILTER;

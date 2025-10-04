@@ -4,12 +4,12 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.EndPoint;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.corpus.io.annotations.BodyParam;
 import io.zerows.extension.runtime.tpl.eon.Addr;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.extension.BodyParam;
 
 /**
  * 保存当前设置，包括个人设置 / 以及角色设置

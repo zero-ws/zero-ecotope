@@ -2,8 +2,8 @@ package io.zerows.plugins.websocket.stomp.handler;
 
 import io.vertx.ext.bridge.PermittedOptions;
 import io.vertx.ext.stomp.BridgeOptions;
-import io.zerows.corpus.plugins.websocket.Remind;
-import io.zerows.corpus.plugins.websocket.SockGrid;
+import io.zerows.cosmic.plugins.websocket.Remind;
+import io.zerows.cosmic.plugins.websocket.SockGrid;
 import io.zerows.support.Ut;
 
 import java.util.Set;

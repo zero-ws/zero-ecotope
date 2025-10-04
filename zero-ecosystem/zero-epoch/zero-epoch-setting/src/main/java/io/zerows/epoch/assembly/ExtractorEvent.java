@@ -8,7 +8,7 @@ import io.zerows.epoch.annotations.Codex;
 import io.zerows.epoch.annotations.EndPoint;
 import io.zerows.epoch.assembly.exception._40005Exception500EventSource;
 import io.zerows.epoch.assembly.exception._40036Exception500CodexMore;
-import io.zerows.epoch.basicore.ActorEvent;
+import io.zerows.epoch.basicore.WebEvent;
 import io.zerows.epoch.constant.KName;
 import io.zerows.support.Ut;
 import jakarta.ws.rs.Path;
@@ -26,17 +26,17 @@ import java.util.stream.Collectors;
  * Scanned @EndPoint clazz to build Event metadata
  */
 @Slf4j
-public class ExtractorEvent implements Extractor<Set<ActorEvent>> {
+public class ExtractorEvent implements Extractor<Set<WebEvent>> {
 
     @Override
-    public Set<ActorEvent> extract(final Class<?> clazz) {
+    public Set<WebEvent> extract(final Class<?> clazz) {
         if (Objects.isNull(clazz)) {
             return new HashSet<>();
         }
         // 1. Class verify
         this.verify(clazz);
         // 2. Check whether clazz annotated with @PATH
-        final Set<ActorEvent> result = new HashSet<>();
+        final Set<WebEvent> result = new HashSet<>();
         if (clazz.isAnnotationPresent(Path.class)) {
             // 3.1. Append Root Path
             final Path path = this.path(clazz);
@@ -63,8 +63,8 @@ public class ExtractorEvent implements Extractor<Set<ActorEvent>> {
     }
 
     @SuppressWarnings("all")
-    private Set<ActorEvent> extract(final Class<?> clazz, final String root) {
-        final Set<ActorEvent> events = new HashSet<>();
+    private Set<WebEvent> extract(final Class<?> clazz, final String root) {
+        final Set<WebEvent> events = new HashSet<>();
         // 0.Preparing
         final Method[] methods = clazz.getDeclaredMethods();
         // 1.Validate Codex annotation appears
@@ -93,9 +93,9 @@ public class ExtractorEvent implements Extractor<Set<ActorEvent>> {
      *
      * @return Standard Event object
      */
-    private ActorEvent extract(final Method method, final String root) {
+    private WebEvent extract(final Method method, final String root) {
         // 1.Method path
-        final ActorEvent event = new ActorEvent();
+        final WebEvent event = new WebEvent();
         // 2.Method resolve
         final HttpMethod httpMethod = ExtractToolMethod.resolve(method);
         if (null == httpMethod) {

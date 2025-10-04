@@ -2,8 +2,8 @@ package io.zerows.epoch.bootplus.extension.scaffold.component;
 
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
-import io.zerows.corpus.plugins.job.JobOutcome;
-import io.zerows.corpus.plugins.job.metadata.Mission;
+import io.zerows.cosmic.plugins.job.JobOutcome;
+import io.zerows.cosmic.plugins.job.metadata.Mission;
 import io.zerows.epoch.annotations.Contract;
 import io.zerows.epoch.bootplus.extension.refine.Ox;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IService;

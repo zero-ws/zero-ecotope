@@ -4,11 +4,11 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.EndPoint;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.corpus.io.annotations.BodyParam;
 import io.zerows.extension.commerce.finance.eon.Addr;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.extension.BodyParam;
 
 /**
  * 撤销入账明细的专用方法，根据不同的类型执行相关撤销

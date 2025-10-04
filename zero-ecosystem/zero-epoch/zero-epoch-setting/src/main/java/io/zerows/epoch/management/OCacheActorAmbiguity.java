@@ -1,8 +1,6 @@
 package io.zerows.epoch.management;
 
-import io.zerows.epoch.basicore.ActorComponent;
-import io.zerows.sdk.management.AbstractAmbiguity;
-import io.zerows.sdk.management.OCache;
+import io.zerows.epoch.basicore.WebActor;
 import io.zerows.specification.development.compiled.HBundle;
 
 /**
@@ -10,9 +8,9 @@ import io.zerows.specification.development.compiled.HBundle;
  */
 class OCacheActorAmbiguity extends AbstractAmbiguity implements OCacheActor {
 
-    final static ActorComponent ENTIRE_ACTOR = new ActorComponent();
+    final static WebActor ENTIRE_ACTOR = new WebActor();
 
-    private final ActorComponent actor = new ActorComponent();
+    private final WebActor actor = new WebActor();
 
     OCacheActorAmbiguity(final HBundle bundle) {
         super(bundle);
@@ -20,12 +18,12 @@ class OCacheActorAmbiguity extends AbstractAmbiguity implements OCacheActor {
 
 
     @Override
-    public ActorComponent value() {
+    public WebActor value() {
         return this.actor;
     }
 
     @Override
-    public OCache<ActorComponent> add(final ActorComponent actor) {
+    public OCache<WebActor> add(final WebActor actor) {
         this.actor.add(actor);
 
         ENTIRE_ACTOR.add(actor);
@@ -33,7 +31,7 @@ class OCacheActorAmbiguity extends AbstractAmbiguity implements OCacheActor {
     }
 
     @Override
-    public OCache<ActorComponent> remove(final ActorComponent actor) {
+    public OCache<WebActor> remove(final WebActor actor) {
         this.actor.remove(actor);
 
         ENTIRE_ACTOR.remove(actor);

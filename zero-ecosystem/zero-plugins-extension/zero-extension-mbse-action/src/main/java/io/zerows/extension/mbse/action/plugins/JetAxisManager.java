@@ -1,7 +1,7 @@
 package io.zerows.extension.mbse.action.plugins;
 
-import io.zerows.epoch.corpus.io.management.AxisDynamicFactory;
-import io.zerows.epoch.corpus.io.uca.routing.OAxis;
+import io.zerows.cortex.AxisDynamicFactory;
+import io.zerows.cortex.sdk.Axis;
 import io.zerows.specification.development.compiled.HBundle;
 
 import java.util.Objects;
@@ -19,10 +19,10 @@ public class JetAxisManager implements AxisDynamicFactory {
 
     @Override
     @SuppressWarnings("unchecked")
-    public OAxis getAxis() {
-        final Class<OAxis> axisCls = this.options.inComponent();
-        final Class<OAxis> axisDefault = (Class<OAxis>) JetPollux.class.asSubclass(OAxis.class);
-        return OAxis.ofOr(Objects.isNull(axisCls) ? axisDefault : axisCls);
+    public Axis getAxis() {
+        final Class<Axis> axisCls = this.options.inComponent();
+        final Class<Axis> axisDefault = (Class<Axis>) JetPollux.class.asSubclass(Axis.class);
+        return Axis.ofOr(Objects.isNull(axisCls) ? axisDefault : axisCls);
     }
 
     @Override

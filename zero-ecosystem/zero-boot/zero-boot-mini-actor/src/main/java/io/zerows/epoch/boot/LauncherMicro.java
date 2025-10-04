@@ -2,8 +2,8 @@ package io.zerows.epoch.boot;
 
 import io.r2mo.function.Fn;
 import io.vertx.core.Vertx;
-import io.zerows.component.uddi.UddiRegistry;
-import io.zerows.corpus.exception._40037Exception500RpcEnvironment;
+import io.zerows.cosmic.exception._40037Exception500RpcEnvironment;
+import io.zerows.cortex.plugins.uddi.UddiRegistry;
 import io.zerows.specification.configuration.HBoot;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HLauncher;

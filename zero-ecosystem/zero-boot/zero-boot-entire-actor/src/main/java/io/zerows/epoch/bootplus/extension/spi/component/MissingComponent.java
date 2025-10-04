@@ -4,8 +4,8 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.qr.Criteria;
 import io.zerows.epoch.bootplus.extension.scaffold.component.AbstractAdaptor;
-import io.zerows.epoch.mbse.metadata.ActIn;
-import io.zerows.epoch.mbse.metadata.ActOut;
+import io.zerows.mbse.metadata.ActIn;
+import io.zerows.mbse.metadata.ActOut;
 
 /**
  * ## 「Channel」丢失检查通道
