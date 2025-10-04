@@ -1,6 +1,6 @@
 package io.zerows.epoch.configuration;
 
-import io.zerows.platform.metadata.KLauncher;
+import io.zerows.epoch.boot.ZeroLauncher;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HSetting;
 import io.zerows.specification.storage.HStore;
@@ -20,7 +20,7 @@ import java.util.concurrent.ConcurrentMap;
  * <pre><code>
  *     1. {@link HConfig}，组件配置接口
  *     2. {@link ZeroEnergy} 启动配置接口
- *     3. {@link KLauncher} 启动器接口
+ *     3. {@link ZeroLauncher} 启动器接口
  *     4. {@link BootIo} 启动选择器 / 组件加载器
  * </code></pre>
  * 此部分底层还可以走一个特殊的 {@link HStore}，然后从 HStore

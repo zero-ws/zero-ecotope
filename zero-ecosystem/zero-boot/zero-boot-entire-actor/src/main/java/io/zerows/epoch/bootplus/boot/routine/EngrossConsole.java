@@ -3,7 +3,7 @@ package io.zerows.epoch.bootplus.boot.routine;
 import io.vertx.core.Vertx;
 import io.zerows.epoch.VertxApplication;
 import io.zerows.epoch.boot.Electy;
-import io.zerows.platform.metadata.KLauncher;
+import io.zerows.epoch.boot.ZeroLauncher;
 import io.zerows.plugins.common.shell.ConsoleFramework;
 
 /**
@@ -14,7 +14,7 @@ public class EngrossConsole {
     public static void run(final Class<?> clazz, final String[] args) {
 
         // 构造启动器（构造命令启动器）
-        final KLauncher<Vertx> container = KLauncher.create(clazz, args);
+        final ZeroLauncher<Vertx> container = ZeroLauncher.create(clazz, args);
         container.start(Electy.whenContainer((vertx, config) ->
             ConsoleFramework.start(vertx)
                 .bind(command -> VertxApplication.runInternal(vertx, config))

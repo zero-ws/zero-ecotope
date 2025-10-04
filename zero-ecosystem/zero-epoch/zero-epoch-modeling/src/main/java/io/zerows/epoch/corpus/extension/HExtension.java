@@ -4,13 +4,13 @@ package io.zerows.epoch.corpus.extension;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.normalize.EquipAt;
-import io.zerows.epoch.configuration.MDConfiguration;
-import io.zerows.epoch.configuration.MDConnect;
-import io.zerows.platform.constant.VBoot;
+import io.zerows.epoch.jigsaw.EquipAt;
+import io.zerows.epoch.jigsaw.MDConfiguration;
+import io.zerows.epoch.jigsaw.MDConnect;
 import io.zerows.management.OZeroStore;
-import io.zerows.support.Ut;
+import io.zerows.platform.constant.VBoot;
 import io.zerows.specification.configuration.HSetting;
+import io.zerows.support.Ut;
 import org.osgi.framework.Bundle;
 
 import java.util.HashSet;

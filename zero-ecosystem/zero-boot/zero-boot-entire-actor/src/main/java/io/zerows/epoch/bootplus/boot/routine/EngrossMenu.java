@@ -1,13 +1,13 @@
 package io.zerows.epoch.bootplus.boot.routine;
 
+import io.vertx.core.Vertx;
+import io.zerows.epoch.boot.Electy;
+import io.zerows.epoch.boot.ZeroLauncher;
 import io.zerows.epoch.bootplus.boot.argument.ArgMenu;
 import io.zerows.epoch.bootplus.exploit.atom.QSiteMap;
-import io.vertx.core.Vertx;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.boot.Electy;
-import io.zerows.platform.metadata.KLauncher;
-import io.zerows.support.Ut;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
+import io.zerows.support.Ut;
 
 /**
  * 「单应用」目前版本
@@ -18,7 +18,7 @@ public class EngrossMenu {
     public static void run(final Class<?> clazz, final String[] args) {
 
         // 构造启动器（构造命令启动器）
-        final KLauncher<Vertx> container = KLauncher.create(clazz, args);
+        final ZeroLauncher<Vertx> container = ZeroLauncher.create(clazz, args);
         container.start(Electy.whenInstruction((vertx, config) -> {
             /*
              * 不做任何输入限制，都带有默认值处理

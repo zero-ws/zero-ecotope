@@ -1,13 +1,13 @@
 package io.zerows.extension.mbse.basement.bootstrap;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.configuration.MDConfiguration;
 import io.zerows.epoch.corpus.extension.HExtension;
-import io.zerows.support.Ut;
+import io.zerows.epoch.jigsaw.MDConfiguration;
 import io.zerows.extension.mbse.basement.atom.config.AoConfig;
 import io.zerows.extension.mbse.basement.eon.AoConstant;
 import io.zerows.extension.runtime.skeleton.eon.KeMsg;
 import io.zerows.specification.access.app.HAmbient;
+import io.zerows.support.Ut;
 
 import java.util.Objects;
 

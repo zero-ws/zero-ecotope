@@ -1,7 +1,7 @@
 package io.zerows.extension.runtime.workflow.uca.deployment;
 
 import io.vertx.core.Future;
-import io.zerows.epoch.configuration.MDWorkflow;
+import io.zerows.epoch.jigsaw.MDWorkflow;
 import io.zerows.extension.runtime.workflow.eon.WfPool;
 
 /**

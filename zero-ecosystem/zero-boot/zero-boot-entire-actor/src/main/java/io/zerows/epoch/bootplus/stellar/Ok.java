@@ -12,11 +12,11 @@ import io.zerows.epoch.bootplus.stellar.owner.MockitoA;
 import io.zerows.epoch.bootplus.stellar.owner.OkA;
 import io.zerows.epoch.bootplus.stellar.owner.ProductionA;
 import io.zerows.epoch.bootplus.stellar.vendor.OkB;
+import io.zerows.epoch.configuration.ZeroConfigurer;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.exception._80517Exception404DataAtomNull;
 import io.zerows.platform.enums.Environment;
 import io.zerows.platform.exception._11010Exception500BootIoMissing;
-import io.zerows.platform.metadata.KConfigurer;
 import io.zerows.platform.metadata.KEnvironment;
 import io.zerows.platform.metadata.KFabric;
 import io.zerows.program.Ux;
@@ -59,7 +59,7 @@ public class Ok {
     }
 
     private static Future<OkA> of(final Vertx vertx, final Supplier<OkA> supplier) {
-        final KConfigurer<Vertx> configurer = configurer();
+        final ZeroConfigurer<Vertx> configurer = configurer();
         final Promise<OkA> promise = Promise.promise();
         // 触发 Pre
         final HConfig config = configurer.onConfig();
@@ -72,7 +72,7 @@ public class Ok {
         return promise.future();
     }
 
-    private static KConfigurer<Vertx> configurer() {
+    private static ZeroConfigurer<Vertx> configurer() {
         /*  提取SPI部分，严格模式  */
 
         final BootIo io = SPI.findOne(BootIo.class);
@@ -88,6 +88,6 @@ public class Ok {
          **/
         KEnvironment.initialize();
 
-        return KConfigurer.of(energy);
+        return ZeroConfigurer.of(energy);
     }
 }

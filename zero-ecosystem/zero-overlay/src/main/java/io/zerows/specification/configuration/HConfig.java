@@ -1,7 +1,6 @@
 package io.zerows.specification.configuration;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.platform.metadata.KConfig;
 import io.zerows.specification.atomic.HCommand;
 
 /**
@@ -11,16 +10,6 @@ import io.zerows.specification.atomic.HCommand;
  * @author lang : 2023-05-30
  */
 public interface HConfig {
-    /**
-     * 默认配置
-     *
-     * @param options 配置信息
-     *
-     * @return {@link HConfig}
-     */
-    static HConfig of(final JsonObject options) {
-        return new KConfig().options(options);
-    }
 
     default JsonObject options() {
         return new JsonObject();

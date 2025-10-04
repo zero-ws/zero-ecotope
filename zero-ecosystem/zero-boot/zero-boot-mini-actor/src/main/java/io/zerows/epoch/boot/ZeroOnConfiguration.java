@@ -1,7 +1,7 @@
 package io.zerows.epoch.boot;
 
-import io.zerows.platform.metadata.KConfig;
-import io.zerows.specification.configuration.boot.HMature;
+import io.zerows.epoch.configuration.ZeroConfig;
+import io.zerows.specification.configuration.HMature;
 
 /**
  * 标准容器中的 {@link HMature.HPre} 处理器
@@ -15,5 +15,5 @@ import io.zerows.specification.configuration.boot.HMature;
  *
  * @author lang : 2023-05-31
  */
-public class ZeroOnConfiguration extends KConfig {
+public class ZeroOnConfiguration extends ZeroConfig {
 }

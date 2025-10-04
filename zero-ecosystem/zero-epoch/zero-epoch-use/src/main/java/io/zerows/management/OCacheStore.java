@@ -2,7 +2,6 @@ package io.zerows.management;
 
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.OLog;
 import io.zerows.epoch.metadata.security.KPermit;
 import io.zerows.epoch.metadata.security.KSemi;
 import io.zerows.platform.annotations.Memory;
@@ -19,7 +18,6 @@ public interface OCacheStore {
      */
     @Memory(JsonObject.class)
     Cc<String, JsonObject> CC_CODEX = Cc.open();
-    Cc<String, OLog> CC_LOG = Cc.open();
     /*
      * 「界面级别处理」
      */

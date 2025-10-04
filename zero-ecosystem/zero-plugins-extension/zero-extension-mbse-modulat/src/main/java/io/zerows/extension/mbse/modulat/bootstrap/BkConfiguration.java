@@ -3,11 +3,11 @@ package io.zerows.extension.mbse.modulat.bootstrap;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.application.YmlCore;
-import io.zerows.epoch.configuration.MDConfiguration;
 import io.zerows.epoch.corpus.extension.HExtension;
+import io.zerows.epoch.jigsaw.MDConfiguration;
+import io.zerows.extension.mbse.modulat.eon.BkConstant;
 import io.zerows.management.OZeroStore;
 import io.zerows.support.Ut;
-import io.zerows.extension.mbse.modulat.eon.BkConstant;
 
 import java.util.HashSet;
 import java.util.Set;

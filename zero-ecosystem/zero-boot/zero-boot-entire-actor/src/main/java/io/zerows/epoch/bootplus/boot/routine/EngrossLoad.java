@@ -1,11 +1,11 @@
 package io.zerows.epoch.bootplus.boot.routine;
 
-import io.zerows.epoch.bootplus.boot.argument.ArgLoad;
 import io.vertx.core.Vertx;
+import io.zerows.epoch.boot.ZeroLauncher;
+import io.zerows.epoch.bootplus.boot.argument.ArgLoad;
 import io.zerows.epoch.constant.KName;
-import io.zerows.platform.metadata.KLauncher;
-import io.zerows.support.Ut;
 import io.zerows.extension.runtime.skeleton.boot.supply.DataImport;
+import io.zerows.support.Ut;
 
 import static io.zerows.extension.runtime.skeleton.refine.Ke.LOG;
 
@@ -43,7 +43,7 @@ public class EngrossLoad {
         );
 
         // 构造启动器（构造命令启动器）
-        final KLauncher<Vertx> container = KLauncher.create(clazz, args);
+        final ZeroLauncher<Vertx> container = ZeroLauncher.create(clazz, args);
         container.start((vertx, config) -> {
             // 构造数据导入器
             final DataImport importer = DataImport.of(vertx);

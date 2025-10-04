@@ -12,7 +12,7 @@ import io.zerows.program.Ux;
 import io.zerows.specification.access.app.HAmbient;
 import io.zerows.specification.access.app.HApp;
 import io.zerows.specification.access.app.HArk;
-import io.zerows.specification.configuration.boot.HRegistry;
+import io.zerows.specification.configuration.HRegistry;
 import io.zerows.support.Ut;
 
 import static io.zerows.extension.runtime.ambient.util.At.LOG;

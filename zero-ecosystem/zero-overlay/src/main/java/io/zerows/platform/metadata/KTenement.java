@@ -1,12 +1,12 @@
 package io.zerows.platform.metadata;
 
 import io.zerows.platform.exception._40102Exception500CombineOwner;
-import io.zerows.support.base.UtBase;
 import io.zerows.specification.access.app.HApp;
 import io.zerows.specification.access.cloud.HTenant;
-import io.zerows.specification.configuration.boot.HRegistry;
+import io.zerows.specification.configuration.HRegistry;
 import io.zerows.specification.security.identity.HOwner;
 import io.zerows.specification.vital.HOI;
+import io.zerows.support.base.UtBase;
 
 import java.util.Objects;
 import java.util.Optional;

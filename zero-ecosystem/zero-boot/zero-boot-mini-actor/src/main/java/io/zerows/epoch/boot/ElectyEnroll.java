@@ -11,13 +11,12 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.application.YmlCore;
 import io.zerows.epoch.metadata.environment.LogCloud;
 import io.zerows.management.OZeroStore;
-import io.zerows.platform.metadata.KLauncher;
 import io.zerows.platform.metadata.KPivot;
 import io.zerows.specification.access.app.HAmbient;
 import io.zerows.specification.access.app.HArk;
 import io.zerows.specification.configuration.HConfig;
-import io.zerows.specification.configuration.boot.HMature;
-import io.zerows.specification.configuration.boot.HRegistry;
+import io.zerows.specification.configuration.HMature;
+import io.zerows.specification.configuration.HRegistry;
 import io.zerows.spi.BootIo;
 import io.zerows.support.Ut;
 import io.zerows.support.base.FnBase;
@@ -34,7 +33,7 @@ import java.util.function.Supplier;
  * Arcane:神秘的，秘密的（被替换的原始类名）
  * Zero新版启动器，新的初始化流程发生了变动，直接更改成了如下流程
  * <pre><code>
- *     1. {@link KLauncher} 构造
+ *     1. {@link ZeroLauncher} 构造
  *        内部流程：
  *        - {@link BootIo} SPI 连接
  *        - 初始化环境变量

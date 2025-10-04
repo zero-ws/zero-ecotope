@@ -1,8 +1,6 @@
 package io.zerows.platform.metadata;
 
 import io.vertx.core.Future;
-import io.zerows.support.base.FnBase;
-import io.zerows.support.base.UtBase;
 import io.zerows.specification.access.HBelong;
 import io.zerows.specification.access.app.HAmbient;
 import io.zerows.specification.access.app.HApp;
@@ -11,7 +9,9 @@ import io.zerows.specification.access.cloud.HFrontier;
 import io.zerows.specification.access.cloud.HGalaxy;
 import io.zerows.specification.access.cloud.HSpace;
 import io.zerows.specification.configuration.HConfig;
-import io.zerows.specification.configuration.boot.HRegistry;
+import io.zerows.specification.configuration.HRegistry;
+import io.zerows.support.base.FnBase;
+import io.zerows.support.base.UtBase;
 
 import java.util.HashSet;
 import java.util.Objects;

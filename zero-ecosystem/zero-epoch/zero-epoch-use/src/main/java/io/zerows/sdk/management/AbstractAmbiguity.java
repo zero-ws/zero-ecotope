@@ -1,11 +1,6 @@
 package io.zerows.sdk.management;
 
-import io.zerows.support.Ut;
 import org.osgi.framework.Bundle;
-
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
 
 /**
  * 带有二义性的新组件，用于支持二选一的环境处理，其中包括
@@ -23,17 +18,6 @@ public abstract class AbstractAmbiguity {
 
     protected AbstractAmbiguity(final Bundle bundle) {
         this.bundle = bundle;
-        if (Objects.nonNull(bundle)) {
-            // OSGI 环境专用
-            final String cacheKey = Ut.Bnd.keyCache(bundle);
-            final Set<Class<?>> selfSet = OCache.REGISTRY
-                .getOrDefault(cacheKey, new HashSet<>());
-            // 必须是 OCache
-            if (OCache.class.isAssignableFrom(this.getClass())) {
-                selfSet.add(this.getClass());
-                OCache.REGISTRY.put(cacheKey, selfSet);
-            }
-        }
     }
 
     public Bundle caller() {

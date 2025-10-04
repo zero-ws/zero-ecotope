@@ -2,11 +2,11 @@ package io.zerows.epoch.boot;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.application.YmlCore;
+import io.zerows.epoch.configuration.ZeroConfig;
 import io.zerows.epoch.configuration.ZeroSetting;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KPlugin;
 import io.zerows.platform.constant.VBoot;
-import io.zerows.platform.constant.VPath;
 import io.zerows.platform.constant.VString;
 import io.zerows.sdk.management.AbstractAmbiguity;
 import io.zerows.specification.configuration.HConfig;
@@ -52,14 +52,14 @@ public class ZeroEquip extends AbstractAmbiguity implements HEquip {
          * scanned:
          *
          */
-        final JsonObject configuration = Ut.Bnd.ioCombineJ(this.nameZero(null), this.caller()); // ZeroIo.read(null, true);
+        final JsonObject configuration = new JsonObject(); // Ut.Bnd.ioCombineJ(this.nameZero(null), this.caller()); // ZeroIo.read(null, true);
         final HSetting setting = ZeroSetting.of();
         final JsonObject configZero = Ut.valueJObject(configuration, KName.Internal.ZERO);
-        setting.container(HConfig.of(configZero));
+        setting.container(this.createConfig(configZero));
         final String extension = Ut.valueString(configZero, YmlCore.LIME);
 
         final JsonObject configBoot = Ut.valueJObject(configuration, VBoot.__KEY);
-        setting.launcher(HConfig.of(configBoot));
+        setting.launcher(this.createConfig(configBoot));
 
         /*
          * zero:
@@ -74,7 +74,7 @@ public class ZeroEquip extends AbstractAmbiguity implements HEquip {
             // - vertx-key1.yml
             // - vertx-key2.yml
             // - vertx-key3.yml
-            final JsonObject fileData = Ut.Bnd.ioConfigureJ(this.nameZero(field), this.caller()); // ZeroIo.read(field, false);
+            final JsonObject fileData = new JsonObject(); // Ut.Bnd.ioConfigureJ(this.nameZero(field), this.caller()); // ZeroIo.read(field, false);
             configExtension.mergeIn(fileData, true);
         });
         /*
@@ -82,7 +82,7 @@ public class ZeroEquip extends AbstractAmbiguity implements HEquip {
          */
         Ut.<JsonObject>itJObject(configExtension).forEach(entry -> {
             final String key = entry.getKey();
-            setting.infix(key, HConfig.of(entry.getValue()));
+            setting.infix(key, this.createConfig(entry.getValue()));
         });
         /*
          * <Internal>
@@ -92,15 +92,13 @@ public class ZeroEquip extends AbstractAmbiguity implements HEquip {
          * resolver = {}
          */
         Arrays.stream(KPlugin.FILE_KEY).forEach(field -> {
-            final JsonObject fileData = Ut.Bnd.ioCombineJ(this.nameZero(field), this.caller()); // ZeroIo.read(field, true);
-            setting.infix(field, HConfig.of(fileData));
+            final JsonObject fileData = new JsonObject(); // Ut.Bnd.ioCombineJ(this.nameZero(field), this.caller()); // ZeroIo.read(field, true);
+            setting.infix(field, this.createConfig(fileData));
         });
         return setting;
     }
 
-    private String nameZero(final String key) {
-        return Objects.isNull(key) ?
-            "vertx" + VString.DOT + VPath.SUFFIX.YML :
-            "vertx" + VString.DASH + key + VString.DOT + VPath.SUFFIX.YML;
+    private HConfig createConfig(final JsonObject options) {
+        return new ZeroConfig().options(options);
     }
 }

@@ -2,12 +2,12 @@ package io.zerows.plugins.office.excel.uca.initialize;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.normalize.EquipAt;
-import io.zerows.component.normalize.Replacer;
-import io.zerows.epoch.configuration.MDConfiguration;
-import io.zerows.epoch.configuration.MDConnect;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.corpus.extension.HExtension;
+import io.zerows.epoch.jigsaw.EquipAt;
+import io.zerows.epoch.jigsaw.MDConfiguration;
+import io.zerows.epoch.jigsaw.MDConnect;
+import io.zerows.epoch.jigsaw.Replacer;
 import io.zerows.epoch.management.OCacheConfiguration;
 import io.zerows.support.Ut;
 

@@ -3,8 +3,8 @@ package io.zerows.component.environment;
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.metadata.KVar;
 import io.zerows.platform.metadata.KVarSet;
+import io.zerows.specification.configuration.HMature;
 import io.zerows.support.Ut;
-import io.zerows.specification.configuration.boot.HMature;
 
 import java.util.Objects;
 import java.util.Set;

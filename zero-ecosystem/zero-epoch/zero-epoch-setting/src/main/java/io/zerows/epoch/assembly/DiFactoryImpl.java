@@ -2,11 +2,9 @@ package io.zerows.epoch.assembly;
 
 import com.google.inject.Injector;
 import io.r2mo.typed.cc.Cc;
-import io.zerows.epoch.management.OCacheClass;
 import io.zerows.epoch.configuration.Inquirer;
+import io.zerows.epoch.management.OCacheClass;
 import io.zerows.support.Ut;
-import org.osgi.framework.Bundle;
-import org.osgi.framework.FrameworkUtil;
 
 import java.util.Objects;
 import java.util.Set;
@@ -30,7 +28,7 @@ class DiFactoryImpl implements DiFactory {
 
     @Override
     public Injector build() {
-        final String cacheKey = this.ambiguityKey();
+        final String cacheKey = DiFactoryImpl.class.getName();
         final Inquirer<Injector> inquirer = CC_GUICE
             .pick(InquirerForGuice::new, cacheKey);
         // 不论哪个环境都会直接访问到 OCacheClass 中的核心数据结构
@@ -40,7 +38,7 @@ class DiFactoryImpl implements DiFactory {
 
     @Override
     public Injector refresh() {
-        final String cacheKey = this.ambiguityKey();
+        final String cacheKey = DiFactoryImpl.class.getName();
         final Inquirer<Injector> inquirer = CC_GUICE
             .pick(InquirerForGuice::new, cacheKey);
 
@@ -60,16 +58,5 @@ class DiFactoryImpl implements DiFactory {
         Ut.Log.boot(this.getClass()).info(" {}ms / Zero DI Environment {}.... Size= {}",
             String.valueOf(duration), flag, String.valueOf(storedClass.size()));
         return injector;
-    }
-
-    private String ambiguityKey() {
-        final Bundle bundle = FrameworkUtil.getBundle(this.getClass());
-        if (Objects.isNull(bundle)) {
-            // 单机环境
-            return DiFactoryImpl.class.getName();
-        } else {
-            // OSGI 环境
-            return Ut.Bnd.keyCache(bundle);
-        }
     }
 }

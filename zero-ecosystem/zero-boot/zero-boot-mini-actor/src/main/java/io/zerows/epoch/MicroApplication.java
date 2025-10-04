@@ -1,10 +1,10 @@
 package io.zerows.epoch;
 
 import io.vertx.core.Vertx;
-import io.zerows.platform.enums.VertxComponent;
 import io.zerows.epoch.boot.Electy;
+import io.zerows.epoch.boot.ZeroLauncher;
 import io.zerows.epoch.corpus.container.uca.store.StubLinear;
-import io.zerows.platform.metadata.KLauncher;
+import io.zerows.platform.enums.VertxComponent;
 import io.zerows.platform.metadata.KRunner;
 import io.zerows.specification.configuration.HConfig;
 
@@ -16,7 +16,7 @@ public class MicroApplication {
 
     public static void run(final Class<?> clazz, final String... args) {
         // 构造启动器容器
-        final KLauncher<Vertx> container = KLauncher.create(clazz, args);
+        final ZeroLauncher<Vertx> container = ZeroLauncher.create(clazz, args);
         container.start(Electy.whenContainer(MicroApplication::runComponent));
     }
 

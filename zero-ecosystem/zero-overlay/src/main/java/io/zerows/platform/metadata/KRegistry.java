@@ -5,7 +5,7 @@ import io.zerows.platform.enums.EmApp;
 import io.zerows.specification.access.app.HApp;
 import io.zerows.specification.access.app.HArk;
 import io.zerows.specification.configuration.HConfig;
-import io.zerows.specification.configuration.boot.HRegistry;
+import io.zerows.specification.configuration.HRegistry;
 import io.zerows.specification.development.ncloud.HCube;
 import io.zerows.specification.development.program.HProject;
 import io.zerows.specification.security.identity.HOwner;
