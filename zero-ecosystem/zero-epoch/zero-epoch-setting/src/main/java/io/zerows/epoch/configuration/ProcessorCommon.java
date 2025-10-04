@@ -1,7 +1,6 @@
 package io.zerows.epoch.configuration;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.sdk.environment.Processor;
 import io.zerows.specification.configuration.HSetting;
 
 /**

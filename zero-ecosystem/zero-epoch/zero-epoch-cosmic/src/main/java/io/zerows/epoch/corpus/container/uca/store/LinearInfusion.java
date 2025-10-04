@@ -7,7 +7,7 @@ import io.zerows.epoch.constant.KPlugin;
 import io.zerows.epoch.corpus.container.exception._40016Exception500PluginInitialize;
 import io.zerows.epoch.corpus.model.running.RunVertx;
 import io.zerows.management.OZeroStore;
-import io.zerows.sdk.osgi.AbstractAmbiguity;
+import io.zerows.sdk.management.AbstractAmbiguity;
 import org.osgi.framework.Bundle;
 
 import java.lang.reflect.Method;

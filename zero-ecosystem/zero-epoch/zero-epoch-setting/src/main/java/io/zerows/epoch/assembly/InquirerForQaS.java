@@ -3,7 +3,7 @@ package io.zerows.epoch.assembly;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.QaS;
 import io.zerows.platform.metadata.KRunner;
-import io.zerows.sdk.environment.Inquirer;
+import io.zerows.epoch.configuration.Inquirer;
 import io.zerows.support.Ut;
 
 import java.lang.annotation.Annotation;

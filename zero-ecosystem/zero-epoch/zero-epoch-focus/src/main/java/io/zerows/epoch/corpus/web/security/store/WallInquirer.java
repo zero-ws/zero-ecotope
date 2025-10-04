@@ -15,7 +15,7 @@ import io.zerows.epoch.corpus.web.exception._40075Exception400WallTypeWrong;
 import io.zerows.epoch.metadata.security.Aegis;
 import io.zerows.epoch.metadata.security.AegisItem;
 import io.zerows.platform.enums.EmSecure;
-import io.zerows.sdk.environment.Inquirer;
+import io.zerows.epoch.configuration.Inquirer;
 import io.zerows.support.Ut;
 
 import java.lang.annotation.Annotation;

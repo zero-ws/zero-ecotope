@@ -1,7 +1,7 @@
 package io.zerows.epoch.corpus.web.security.osgi.service;
 
 import io.zerows.epoch.corpus.web.security.store.ORepositorySecurity;
-import io.zerows.sdk.management.ORepository;
+import io.zerows.epoch.management.ORepository;
 import org.osgi.framework.Bundle;
 
 /**

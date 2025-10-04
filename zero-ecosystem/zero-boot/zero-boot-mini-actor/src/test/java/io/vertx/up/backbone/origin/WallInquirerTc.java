@@ -4,7 +4,7 @@ import io.vertx.quiz.example.WallKeeper2;
 import io.zerows.epoch.corpus.web.security.store.WallInquirer;
 import io.zerows.epoch.management.OCacheClass;
 import io.zerows.epoch.metadata.security.Aegis;
-import io.zerows.sdk.environment.Inquirer;
+import io.zerows.epoch.configuration.Inquirer;
 import io.zerows.support.Ut;
 
 import java.util.Set;

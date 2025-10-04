@@ -2,8 +2,6 @@ package io.zerows.sdk.osgi;
 
 import io.r2mo.typed.cc.Cc;
 import io.zerows.epoch.constant.KName;
-import io.zerows.osgi.metadata.dependency.CallbackOfBase;
-import io.zerows.osgi.metadata.service.EnergyFailure;
 import org.apache.felix.dm.Component;
 import org.apache.felix.dm.DependencyManager;
 import org.apache.felix.dm.ServiceDependency;

@@ -3,7 +3,7 @@ package io.zerows.epoch.assembly;
 import com.google.inject.Injector;
 import io.r2mo.typed.cc.Cc;
 import io.zerows.epoch.management.OCacheClass;
-import io.zerows.sdk.environment.Inquirer;
+import io.zerows.epoch.configuration.Inquirer;
 import io.zerows.support.Ut;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;

@@ -8,7 +8,7 @@ import io.zerows.epoch.constant.KPlugin;
 import io.zerows.platform.constant.VBoot;
 import io.zerows.platform.constant.VPath;
 import io.zerows.platform.constant.VString;
-import io.zerows.sdk.osgi.AbstractAmbiguity;
+import io.zerows.sdk.management.AbstractAmbiguity;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HSetting;
 import io.zerows.spi.HEquip;

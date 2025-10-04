@@ -1,7 +1,7 @@
 package io.zerows.epoch.metadata.environment;
 
 import io.zerows.epoch.configuration.MDConfiguration;
-import io.zerows.osgi.metadata.service.EnergyConfiguration;
+import io.zerows.sdk.osgi.EnergyConfiguration;
 import io.zerows.platform.enums.EmService;
 import io.zerows.sdk.osgi.ServiceContext;
 import io.zerows.support.Ut;

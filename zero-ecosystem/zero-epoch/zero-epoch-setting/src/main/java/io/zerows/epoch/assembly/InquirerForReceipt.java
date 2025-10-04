@@ -4,7 +4,7 @@ import io.r2mo.function.Fn;
 import io.zerows.component.log.Annal;
 import io.zerows.epoch.assembly.parallel.QueueThread;
 import io.zerows.epoch.basicore.ActorReceipt;
-import io.zerows.sdk.environment.Inquirer;
+import io.zerows.epoch.configuration.Inquirer;
 
 import java.util.ArrayList;
 import java.util.HashSet;

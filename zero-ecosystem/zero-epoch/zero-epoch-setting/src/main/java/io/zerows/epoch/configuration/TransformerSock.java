@@ -4,7 +4,6 @@ import io.vertx.core.http.HttpServerOptions;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.configuration.option.SockOptions;
 import io.zerows.epoch.constant.KName;
-import io.zerows.sdk.environment.Transformer;
 import io.zerows.support.Ut;
 
 import java.util.Objects;

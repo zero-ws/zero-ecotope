@@ -4,7 +4,6 @@ import io.vertx.core.http.HttpServerOptions;
 import io.zerows.epoch.configuration.option.RpcOptions;
 import io.zerows.epoch.configuration.option.SockOptions;
 import io.zerows.platform.enums.app.ServerType;
-import io.zerows.sdk.environment.OptionOfServer;
 
 /**
  * @author lang : 2024-04-20

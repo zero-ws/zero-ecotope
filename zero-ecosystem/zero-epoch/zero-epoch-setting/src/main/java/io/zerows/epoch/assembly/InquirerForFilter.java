@@ -11,7 +11,7 @@ import io.zerows.epoch.basicore.ActorEvent;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.web.Filter;
 import io.zerows.platform.constant.VValue;
-import io.zerows.sdk.environment.Inquirer;
+import io.zerows.epoch.configuration.Inquirer;
 import io.zerows.support.Ut;
 
 import javax.servlet.annotation.WebFilter;

@@ -3,7 +3,7 @@ package io.zerows.epoch.assembly;
 import io.r2mo.function.Fn;
 import io.zerows.epoch.assembly.parallel.EndPointThread;
 import io.zerows.epoch.basicore.ActorEvent;
-import io.zerows.sdk.environment.Inquirer;
+import io.zerows.epoch.configuration.Inquirer;
 
 import java.util.ArrayList;
 import java.util.HashSet;

@@ -5,7 +5,7 @@ import io.zerows.epoch.metadata.MultiKeyMap;
 import io.zerows.epoch.corpus.model.running.RunVertx;
 import io.zerows.platform.exception._60050Exception501NotSupport;
 import io.zerows.support.Ut;
-import io.zerows.sdk.osgi.AbstractAmbiguity;
+import io.zerows.sdk.management.AbstractAmbiguity;
 import org.osgi.framework.Bundle;
 
 import java.util.Objects;

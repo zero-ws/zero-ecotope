@@ -1,7 +1,7 @@
 package io.zerows.component.execution;
 
 import io.vertx.core.AsyncResult;
-import io.zerows.osgi.metadata.service.EnergyService;
+import io.zerows.sdk.osgi.EnergyService;
 import io.zerows.support.Ut;
 import io.zerows.sdk.osgi.ServiceContext;
 import io.zerows.sdk.osgi.ServiceInvocation;

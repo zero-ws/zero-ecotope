@@ -3,8 +3,6 @@ package io.zerows.epoch.configuration;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.application.YmlCore;
 import io.zerows.epoch.configuration.option.ActorOptions;
-import io.zerows.sdk.environment.Processor;
-import io.zerows.sdk.environment.Transformer;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HSetting;
 import io.zerows.support.Ut;

@@ -1,7 +1,7 @@
 package io.zerows.epoch.management;
 
 import io.vertx.core.http.HttpMethod;
-import io.zerows.sdk.osgi.AbstractAmbiguity;
+import io.zerows.sdk.management.AbstractAmbiguity;
 import org.osgi.framework.Bundle;
 
 import java.util.HashSet;

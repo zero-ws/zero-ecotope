@@ -4,7 +4,7 @@ import io.vertx.core.DeploymentOptions;
 import io.vertx.core.ThreadingModel;
 import io.zerows.epoch.configuration.NodeVertx;
 import io.zerows.epoch.corpus.model.running.RunVertx;
-import io.zerows.sdk.osgi.AbstractAmbiguity;
+import io.zerows.sdk.management.AbstractAmbiguity;
 import org.osgi.framework.Bundle;
 
 import java.util.Objects;

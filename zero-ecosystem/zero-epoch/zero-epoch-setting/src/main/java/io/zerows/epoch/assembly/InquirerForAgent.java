@@ -2,7 +2,7 @@ package io.zerows.epoch.assembly;
 
 import io.zerows.epoch.annotations.Agent;
 import io.zerows.platform.enums.app.ServerType;
-import io.zerows.sdk.environment.Inquirer;
+import io.zerows.epoch.configuration.Inquirer;
 import io.zerows.support.Ut;
 
 import java.util.List;

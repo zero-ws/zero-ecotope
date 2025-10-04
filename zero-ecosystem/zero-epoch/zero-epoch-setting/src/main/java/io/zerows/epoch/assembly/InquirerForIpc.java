@@ -10,7 +10,7 @@ import io.zerows.epoch.assembly.exception._40045Exception500IpcDirection;
 import io.zerows.epoch.assembly.exception._40046Exception500IpcArgument;
 import io.zerows.epoch.assembly.exception._40048Exception500RpcAgentAbsence;
 import io.zerows.epoch.web.Envelop;
-import io.zerows.sdk.environment.Inquirer;
+import io.zerows.epoch.configuration.Inquirer;
 import io.zerows.support.Ut;
 
 import java.lang.annotation.Annotation;

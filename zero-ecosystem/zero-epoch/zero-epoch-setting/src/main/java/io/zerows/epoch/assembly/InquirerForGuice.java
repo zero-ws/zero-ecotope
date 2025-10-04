@@ -2,7 +2,7 @@ package io.zerows.epoch.assembly;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import io.zerows.sdk.environment.Inquirer;
+import io.zerows.epoch.configuration.Inquirer;
 import io.zerows.support.Ut;
 
 import java.lang.reflect.Modifier;

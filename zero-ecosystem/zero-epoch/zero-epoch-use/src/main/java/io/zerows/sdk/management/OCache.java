@@ -3,7 +3,6 @@ package io.zerows.sdk.management;
 import io.zerows.component.log.OLog;
 import io.zerows.platform.exception._60050Exception501NotSupport;
 import io.zerows.support.Ut;
-import io.zerows.sdk.osgi.AbstractAmbiguity;
 import org.osgi.framework.Bundle;
 
 import java.util.Set;

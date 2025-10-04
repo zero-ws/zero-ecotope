@@ -1,11 +1,9 @@
 package io.zerows.epoch.management;
 
 import io.zerows.epoch.configuration.NodeNetwork;
+import io.zerows.epoch.configuration.Processor;
 import io.zerows.epoch.configuration.ProcessorCommon;
-import io.zerows.management.OZeroStore;
-import io.zerows.sdk.environment.Processor;
-import io.zerows.sdk.management.ORepository;
-import io.zerows.sdk.osgi.AbstractAmbiguity;
+import io.zerows.sdk.management.AbstractAmbiguity;
 import io.zerows.specification.configuration.HSetting;
 import io.zerows.support.Ut;
 import org.osgi.framework.Bundle;
@@ -24,7 +22,7 @@ public class ORepositoryOption extends AbstractAmbiguity implements ORepository 
     /**
      * 单机版和非单机版统一调用此流程实现配置的基本管理，直接根据传入的 {@link HSetting} 来执行配置的初始化流程
      * <pre><code>
-     *     1. 单机版：{@link OZeroStore#setting()}
+     *     1. 单机版
      *     2. OSGI版：执行其他流程
      * </code></pre>
      *

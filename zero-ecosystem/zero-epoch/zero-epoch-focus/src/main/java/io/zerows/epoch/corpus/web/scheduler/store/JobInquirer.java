@@ -3,7 +3,7 @@ package io.zerows.epoch.corpus.web.scheduler.store;
 import io.zerows.epoch.annotations.Job;
 import io.zerows.epoch.assembly.Extractor;
 import io.zerows.epoch.corpus.web.scheduler.atom.Mission;
-import io.zerows.sdk.environment.Inquirer;
+import io.zerows.epoch.configuration.Inquirer;
 import io.zerows.support.Ut;
 
 import java.util.Objects;

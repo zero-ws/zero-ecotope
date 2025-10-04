@@ -5,7 +5,7 @@ import io.vertx.core.eventbus.Message;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.exception._40049Exception500WorkerConflict;
-import io.zerows.sdk.environment.Inquirer;
+import io.zerows.epoch.configuration.Inquirer;
 
 import java.util.Arrays;
 import java.util.Set;

@@ -2,7 +2,7 @@ package io.zerows.epoch.management;
 
 import io.zerows.epoch.basicore.ActorComponent;
 import io.zerows.sdk.management.OCache;
-import io.zerows.sdk.osgi.AbstractAmbiguity;
+import io.zerows.sdk.management.AbstractAmbiguity;
 import org.osgi.framework.Bundle;
 
 /**

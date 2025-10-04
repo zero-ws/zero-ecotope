@@ -2,8 +2,6 @@ package io.zerows.sdk.osgi;
 
 import io.zerows.component.log.OLog;
 import io.zerows.component.execution.ServiceRunner;
-import io.zerows.osgi.metadata.dependency.CallbackOfBase;
-import io.zerows.osgi.metadata.dependency.CallbackOfService;
 import io.zerows.support.Ut;
 import org.apache.felix.dm.DependencyActivatorBase;
 import org.apache.felix.dm.DependencyManager;
