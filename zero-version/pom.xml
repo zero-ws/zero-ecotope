@@ -54,11 +54,6 @@
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-epoch-modeling</artifactId>
-                <version>${zero.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.zerows</groupId>
                 <artifactId>zero-epoch-focus</artifactId>
                 <version>${zero.version}</version>
             </dependency>

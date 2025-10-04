@@ -22,7 +22,6 @@
         -->
         <module>zero-epoch-setting</module>
         <module>zero-epoch-store</module>
-        <module>zero-epoch-modeling</module>
         <module>zero-epoch-focus</module>
         <!-- 工具层 -->
         <module>zero-epoch-execution</module>
