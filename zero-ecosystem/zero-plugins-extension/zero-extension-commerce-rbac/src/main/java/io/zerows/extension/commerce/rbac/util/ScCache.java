@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.component.environment.DevEnv;
-import io.zerows.epoch.corpus.web.cache.Rapid;
+import io.zerows.corpus.plugins.cache.Rapid;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SPath;
 import io.zerows.extension.commerce.rbac.eon.ScConstant;
 import io.zerows.extension.commerce.rbac.uca.logged.ScUser;

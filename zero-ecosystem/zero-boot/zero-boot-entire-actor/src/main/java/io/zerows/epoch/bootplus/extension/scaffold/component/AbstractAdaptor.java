@@ -9,7 +9,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Contract;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.corpus.mbse.metadata.ActIn;
+import io.zerows.epoch.mbse.metadata.ActIn;
 import io.zerows.epoch.database.Database;
 import io.zerows.epoch.metadata.XHeader;
 import io.zerows.extension.mbse.action.uca.business.AbstractComponent;

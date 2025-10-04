@@ -1,7 +1,7 @@
 package io.zerows.epoch.bootplus.extension.scaffold.component;
 
+import io.zerows.corpus.plugins.job.metadata.Mission;
 import io.zerows.epoch.annotations.Contract;
-import io.zerows.epoch.corpus.web.scheduler.atom.Mission;
 
 /**
  * ## 「Actor」顶层调度器

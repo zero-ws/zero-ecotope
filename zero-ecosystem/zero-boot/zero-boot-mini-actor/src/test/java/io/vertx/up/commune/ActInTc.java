@@ -1,7 +1,7 @@
 package io.vertx.up.commune;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.corpus.mbse.metadata.ActIn;
+import io.zerows.epoch.mbse.metadata.ActIn;
 import io.zerows.epoch.testsuite.EpicBase;
 import io.zerows.epoch.web.Envelop;
 import org.junit.Test;

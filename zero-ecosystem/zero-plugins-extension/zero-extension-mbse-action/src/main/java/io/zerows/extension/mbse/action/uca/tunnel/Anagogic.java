@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.web.Envelop;
-import io.zerows.epoch.corpus.web.cache.Rapid;
+import io.zerows.corpus.plugins.cache.Rapid;
 import io.zerows.epoch.database.Database;
 import io.zerows.epoch.metadata.XHeader;
 import io.zerows.epoch.sdk.modeling.Commercial;

@@ -3,8 +3,8 @@ package io.zerows.program;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.OLog;
-import io.zerows.epoch.corpus.web.scheduler.plugins.JobClient;
-import io.zerows.epoch.corpus.web.scheduler.plugins.JobInfix;
+import io.zerows.corpus.plugins.job.client.JobClient;
+import io.zerows.corpus.plugins.job.client.JobInfix;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
 

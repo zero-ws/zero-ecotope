@@ -2,7 +2,7 @@ package io.zerows.extension.runtime.skeleton.boot.lighter;
 
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.corpus.web.cache.shared.MapInfix;
+import io.zerows.corpus.plugins.cache.MapInfix;
 import io.zerows.epoch.database.jooq.JooqInfix;
 import io.zerows.platform.metadata.KEnvironment;
 import io.zerows.plugins.office.excel.ExcelInfix;

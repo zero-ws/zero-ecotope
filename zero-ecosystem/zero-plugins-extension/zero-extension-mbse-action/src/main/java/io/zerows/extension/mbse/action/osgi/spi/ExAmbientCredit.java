@@ -3,7 +3,7 @@ package io.zerows.extension.mbse.action.osgi.spi;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.corpus.mbse.metadata.KCredential;
+import io.zerows.epoch.mbse.metadata.KCredential;
 import io.zerows.extension.runtime.skeleton.osgi.spi.web.Credential;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
 import io.zerows.program.Ux;

@@ -3,7 +3,7 @@ package io.zerows.extension.runtime.crud.uca.input.qr;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.corpus.mbse.metadata.KModule;
+import io.zerows.epoch.mbse.metadata.KModule;
 import io.zerows.epoch.metadata.KJoin;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 import io.zerows.extension.runtime.crud.uca.input.Pre;

@@ -1,7 +1,7 @@
 package io.zerows.extension.mbse.basement.atom.data;
 
 import io.zerows.epoch.annotations.Contract;
-import io.zerows.epoch.corpus.mbse.metadata.ActiveRecord;
+import io.zerows.epoch.mbse.metadata.ActiveRecord;
 import io.zerows.extension.mbse.basement.atom.Model;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.atom.element.DataKey;

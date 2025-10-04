@@ -5,7 +5,7 @@ import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.support.Ut;
-import io.zerows.epoch.corpus.mbse.metadata.KModule;
+import io.zerows.epoch.mbse.metadata.KModule;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 

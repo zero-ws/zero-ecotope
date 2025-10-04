@@ -7,7 +7,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.component.aop.Aspect;
 import io.zerows.component.log.Log;
 import io.zerows.component.log.LogModule;
-import io.zerows.epoch.corpus.mbse.metadata.KModule;
+import io.zerows.epoch.mbse.metadata.KModule;
 import io.zerows.epoch.metadata.KField;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 import io.zerows.platform.metadata.Kv;

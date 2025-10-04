@@ -1,14 +1,14 @@
 package io.zerows.epoch.boot;
 
 import io.vertx.core.Vertx;
-import io.zerows.epoch.corpus.web.scheduler.store.ORepositoryJob;
-import io.zerows.epoch.corpus.web.security.store.ORepositorySecurity;
-import io.zerows.epoch.corpus.web.websocket.store.ORepositorySock;
+import io.zerows.corpus.plugins.job.management.ORepositoryJob;
+import io.zerows.corpus.plugins.security.management.ORepositorySecurity;
+import io.zerows.corpus.plugins.websocket.management.ORepositorySock;
+import io.zerows.epoch.management.ORepository;
 import io.zerows.epoch.management.ORepositoryClass;
 import io.zerows.epoch.management.ORepositoryMeta;
 import io.zerows.epoch.management.ORepositoryOption;
 import io.zerows.platform.metadata.KRunner;
-import io.zerows.epoch.management.ORepository;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.support.Ut;
 

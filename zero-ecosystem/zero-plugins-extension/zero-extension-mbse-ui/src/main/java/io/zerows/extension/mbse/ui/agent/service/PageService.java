@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.environment.DevEnv;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.corpus.web.cache.Rapid;
+import io.zerows.corpus.plugins.cache.Rapid;
 import io.zerows.extension.mbse.ui.domain.tables.daos.UiLayoutDao;
 import io.zerows.extension.mbse.ui.domain.tables.daos.UiPageDao;
 import io.zerows.extension.mbse.ui.domain.tables.pojos.UiPage;

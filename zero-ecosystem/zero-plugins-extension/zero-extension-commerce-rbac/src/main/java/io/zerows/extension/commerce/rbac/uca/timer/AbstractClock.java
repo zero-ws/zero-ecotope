@@ -1,7 +1,7 @@
 package io.zerows.extension.commerce.rbac.uca.timer;
 
 import io.vertx.core.Future;
-import io.zerows.epoch.corpus.web.cache.Rapid;
+import io.zerows.corpus.plugins.cache.Rapid;
 import io.zerows.program.Ux;
 import io.zerows.sdk.management.AbstractAmbiguity;
 import io.zerows.specification.development.compiled.HBundle;

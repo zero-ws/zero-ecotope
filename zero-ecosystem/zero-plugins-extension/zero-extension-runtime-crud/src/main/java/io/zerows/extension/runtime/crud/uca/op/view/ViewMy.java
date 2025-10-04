@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KWeb;
-import io.zerows.epoch.corpus.web.cache.Rapid;
+import io.zerows.corpus.plugins.cache.Rapid;
 import io.zerows.epoch.database.jooq.operation.UxJooq;
 import io.zerows.extension.runtime.crud.bootstrap.IxPin;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;

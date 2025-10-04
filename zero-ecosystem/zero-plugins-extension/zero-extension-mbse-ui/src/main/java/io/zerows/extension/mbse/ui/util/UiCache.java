@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.Annal;
 import io.zerows.support.Ut;
-import io.zerows.epoch.corpus.web.cache.Rapid;
+import io.zerows.corpus.plugins.cache.Rapid;
 import io.zerows.extension.mbse.ui.bootstrap.UiPin;
 
 import java.util.function.Supplier;

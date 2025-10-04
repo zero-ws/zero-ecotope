@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.component.compare.Vs;
 import io.zerows.component.expression.Playbook;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.corpus.mbse.HLoadSmart;
+import io.zerows.epoch.mbse.HLoadSmart;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XActivity;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XActivityRule;
 import io.zerows.extension.runtime.skeleton.refine.Ke;

@@ -1,8 +1,8 @@
 package io.zerows.extension.runtime.crud.bootstrap;
 
 import io.vertx.core.Vertx;
-import io.zerows.epoch.corpus.mbse.HOne;
-import io.zerows.epoch.corpus.mbse.metadata.KModule;
+import io.zerows.epoch.mbse.HOne;
+import io.zerows.epoch.mbse.metadata.KModule;
 import io.zerows.epoch.corpus.model.Rule;
 import io.zerows.epoch.database.jooq.operation.UxJoin;
 import io.zerows.epoch.database.jooq.operation.UxJooq;

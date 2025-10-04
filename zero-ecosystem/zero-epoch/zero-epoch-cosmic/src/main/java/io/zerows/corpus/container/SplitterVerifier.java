@@ -2,7 +2,6 @@ package io.zerows.corpus.container;
 
 import io.vertx.core.Handler;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.corpus.handler.AimBase;
 import io.zerows.epoch.corpus.io.atom.WrapRequest;
 import io.zerows.epoch.corpus.io.zdk.Sentry;
 import io.zerows.epoch.corpus.model.Rule;

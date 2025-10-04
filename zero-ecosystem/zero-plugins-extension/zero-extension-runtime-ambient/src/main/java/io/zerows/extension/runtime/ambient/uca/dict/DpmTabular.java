@@ -7,7 +7,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.platform.metadata.KDictSource;
 import io.zerows.program.Ux;
-import io.zerows.epoch.corpus.web.cache.Rapid;
+import io.zerows.corpus.plugins.cache.Rapid;
 import io.zerows.support.Ut;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XTabularDao;
 

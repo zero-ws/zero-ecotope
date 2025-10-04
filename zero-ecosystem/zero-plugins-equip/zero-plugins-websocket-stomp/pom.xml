@@ -13,7 +13,7 @@
     <dependencies>
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-epoch-focus</artifactId>
+            <artifactId>zero-epoch-cosmic</artifactId>
         </dependency>
         <dependency>
             <groupId>io.vertx</groupId>

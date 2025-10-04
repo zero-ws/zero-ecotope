@@ -2,10 +2,10 @@ package io.zerows.epoch.bootplus.extension.scaffold.component;
 
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
+import io.zerows.corpus.plugins.job.JobOutcome;
+import io.zerows.corpus.plugins.job.metadata.Mission;
 import io.zerows.epoch.annotations.Contract;
 import io.zerows.epoch.bootplus.extension.refine.Ox;
-import io.zerows.epoch.corpus.web.scheduler.atom.Mission;
-import io.zerows.epoch.corpus.web.scheduler.zdk.JobOutcome;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IService;
 import io.zerows.extension.mbse.action.uca.business.AbstractJob;
 import io.zerows.extension.mbse.action.util.Jt;

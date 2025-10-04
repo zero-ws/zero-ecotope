@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.zerows.epoch.bootplus.extension.refine.Ox;
 import io.zerows.epoch.bootplus.extension.scaffold.stdn.AbstractHFile;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.corpus.mbse.metadata.ActIn;
+import io.zerows.epoch.mbse.metadata.ActIn;
 import io.zerows.epoch.metadata.Apt;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
