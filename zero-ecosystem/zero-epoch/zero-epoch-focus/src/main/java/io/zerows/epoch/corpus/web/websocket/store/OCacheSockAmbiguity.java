@@ -2,7 +2,7 @@ package io.zerows.epoch.corpus.web.websocket.store;
 
 import io.zerows.epoch.corpus.web.websocket.atom.Remind;
 import io.zerows.sdk.management.AbstractAmbiguity;
-import org.osgi.framework.Bundle;
+import io.zerows.specification.development.compiled.HBundle;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,7 +13,7 @@ import java.util.Set;
 class OCacheSockAmbiguity extends AbstractAmbiguity implements OCacheSock {
     private final Set<Remind> socks = new HashSet<>();
 
-    OCacheSockAmbiguity(final Bundle bundle) {
+    OCacheSockAmbiguity(final HBundle bundle) {
         super(bundle);
     }
 

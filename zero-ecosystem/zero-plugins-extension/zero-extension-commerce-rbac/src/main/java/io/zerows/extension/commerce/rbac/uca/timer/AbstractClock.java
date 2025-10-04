@@ -4,8 +4,8 @@ import io.vertx.core.Future;
 import io.zerows.epoch.corpus.web.cache.Rapid;
 import io.zerows.program.Ux;
 import io.zerows.sdk.management.AbstractAmbiguity;
+import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.base.FnBase;
-import org.osgi.framework.Bundle;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,7 +21,7 @@ abstract class AbstractClock<T> extends AbstractAmbiguity implements ScClock<T> 
 
     private final String poolName;
 
-    AbstractClock(final Bundle bundle, final String poolName) {
+    AbstractClock(final HBundle bundle, final String poolName) {
         super(bundle);
         Objects.requireNonNull(poolName);
         this.poolName = poolName;

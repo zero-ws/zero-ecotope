@@ -6,8 +6,8 @@ import io.zerows.epoch.basicore.MDConnect;
 import io.zerows.epoch.basicore.MDEntity;
 import io.zerows.epoch.constant.KName;
 import io.zerows.platform.annotations.ChatGPT;
+import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
-import org.osgi.framework.Bundle;
 
 import java.util.List;
 import java.util.Objects;
@@ -19,7 +19,8 @@ import java.util.concurrent.ConcurrentMap;
  */
 class MakerEntity implements MakerIo<MDEntity> {
     @Override
-    public ConcurrentMap<String, MDEntity> build(final String modelDir, final Bundle owner,
+    public ConcurrentMap<String, MDEntity> build(final String modelDir,
+                                                 final HBundle bundle,
                                                  final Object... args) {
         Objects.requireNonNull(args[0]);        // args[0] = Map ( table = MDConnect )
         // 遍历 modelDir 目录提取当前环境中所有定义的实体信息
@@ -33,7 +34,7 @@ class MakerEntity implements MakerIo<MDEntity> {
 
         Objects.requireNonNull(pathes);
         pathes.stream()
-            .map(path -> this.buildOne(path, owner, args))
+            .map(path -> this.buildOne(path, bundle, args))
             .forEach(entity -> entityMap.put(entity.identifier(), entity));
         return entityMap;
     }
@@ -49,15 +50,14 @@ class MakerEntity implements MakerIo<MDEntity> {
      *     2. 若表名存在则直接修改 entityJ 中的 daoCls 字段
      * </code></pre>
      *
-     * @param dir   子目录名称
-     * @param owner Bundle
-     * @param args  参数
+     * @param dir  子目录名称
+     * @param args 参数
      *
      * @return {@link MDEntity}
      */
     @Override
     @SuppressWarnings("unchecked")
-    public MDEntity buildOne(final String dir, final Bundle owner, final Object... args) {
+    public MDEntity buildOne(final String dir, final HBundle bundle, final Object... args) {
 
         final String idOfDir = this.buildId(dir);
         // model/<identifier>/entity.json / 一旦定义了实体，此处必须包含 entity.json 文件

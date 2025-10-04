@@ -2,6 +2,7 @@ package io.zerows.epoch.jigsaw;
 
 import io.r2mo.typed.cc.Cc;
 import io.zerows.platform.exception._60050Exception501NotSupport;
+import io.zerows.specification.development.compiled.HBundle;
 import org.osgi.framework.Bundle;
 
 import java.util.concurrent.ConcurrentMap;
@@ -30,9 +31,9 @@ interface MakerIo<T> {
         return (MakerIo<T>) CC_MAKER.pick(MakerEntity::new, MakerEntity.class.getName());
     }
 
-    ConcurrentMap<String, T> build(String filename, Bundle owner, Object... args);
+    ConcurrentMap<String, T> build(String filename, HBundle bundle, Object... args);
 
-    default T buildOne(final String filename, final Bundle owner, final Object... args) {
+    default T buildOne(final String filename, final HBundle bundle, final Object... args) {
         throw new _60050Exception501NotSupport(this.getClass());
     }
 }

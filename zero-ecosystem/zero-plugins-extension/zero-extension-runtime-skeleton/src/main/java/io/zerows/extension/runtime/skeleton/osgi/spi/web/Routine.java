@@ -1,7 +1,7 @@
 package io.zerows.extension.runtime.skeleton.osgi.spi.web;
 
 import io.vertx.core.Future;
-import io.zerows.epoch.corpus.container.store.uri.UriMeta;
+import io.zerows.corpus.management.uri.UriMeta;
 
 import java.util.List;
 

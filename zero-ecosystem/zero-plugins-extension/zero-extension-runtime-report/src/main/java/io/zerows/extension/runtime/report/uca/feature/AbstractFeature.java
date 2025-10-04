@@ -1,11 +1,11 @@
 package io.zerows.extension.runtime.report.uca.feature;
 
-import io.zerows.platform.constant.VString;
-import io.zerows.support.Ut;
 import io.zerows.extension.runtime.report.domain.tables.pojos.KpFeature;
 import io.zerows.extension.runtime.report.eon.em.EmReport;
-import org.osgi.framework.Bundle;
-import org.osgi.framework.FrameworkUtil;
+import io.zerows.platform.constant.VString;
+import io.zerows.specification.development.compiled.HBundle;
+import io.zerows.spi.HPI;
+import io.zerows.support.Ut;
 
 import java.util.Objects;
 
@@ -16,18 +16,18 @@ public abstract class AbstractFeature implements RFeature {
 
     protected final EmReport.FeatureType type;
     protected final KpFeature feature;
-    protected final Bundle owner;
+    protected final HBundle owner;
 
     protected AbstractFeature(final KpFeature feature) {
         Objects.requireNonNull(feature);
         this.feature = feature;
-        this.owner = FrameworkUtil.getBundle(this.getClass());
+        this.owner = HPI.findBundle(this.getClass());
         this.type = Ut.toEnum(feature::getType, EmReport.FeatureType.class, EmReport.FeatureType.NONE);
     }
 
-    static RFeature of(final KpFeature feature, final Class<?> implCls, final Bundle owner) {
+    static RFeature of(final KpFeature feature, final Class<?> implCls, final HBundle owner) {
         Objects.requireNonNull(feature);
-        final String keyCache = Ut.Bnd.keyCache(owner, implCls) + VString.SLASH + feature.getKey();
+        final String keyCache = HBundle.id(owner, implCls) + VString.SLASH + feature.getKey();
         return CC_SKELETON.pick(() -> Ut.instance(implCls, feature), keyCache);
     }
 

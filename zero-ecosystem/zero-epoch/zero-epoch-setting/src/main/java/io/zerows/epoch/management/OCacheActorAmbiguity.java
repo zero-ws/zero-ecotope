@@ -1,9 +1,9 @@
 package io.zerows.epoch.management;
 
 import io.zerows.epoch.basicore.ActorComponent;
-import io.zerows.sdk.management.OCache;
 import io.zerows.sdk.management.AbstractAmbiguity;
-import org.osgi.framework.Bundle;
+import io.zerows.sdk.management.OCache;
+import io.zerows.specification.development.compiled.HBundle;
 
 /**
  * @author lang : 2024-04-21
@@ -14,7 +14,7 @@ class OCacheActorAmbiguity extends AbstractAmbiguity implements OCacheActor {
 
     private final ActorComponent actor = new ActorComponent();
 
-    OCacheActorAmbiguity(final Bundle bundle) {
+    OCacheActorAmbiguity(final HBundle bundle) {
         super(bundle);
     }
 

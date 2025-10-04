@@ -1,13 +1,13 @@
 package io.zerows.epoch.corpus.web.scheduler.store;
 
+import io.zerows.epoch.configuration.Inquirer;
 import io.zerows.epoch.corpus.web.scheduler.atom.Mission;
 import io.zerows.epoch.management.OCacheClass;
-import io.zerows.epoch.configuration.Inquirer;
 import io.zerows.epoch.management.ORepository;
 import io.zerows.sdk.management.AbstractAmbiguity;
 import io.zerows.specification.configuration.HSetting;
+import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
-import org.osgi.framework.Bundle;
 
 import java.util.Set;
 
@@ -16,7 +16,7 @@ import java.util.Set;
  */
 public class ORepositoryJob extends AbstractAmbiguity implements ORepository {
 
-    protected ORepositoryJob(final Bundle bundle) {
+    protected ORepositoryJob(final HBundle bundle) {
         super(bundle);
     }
 

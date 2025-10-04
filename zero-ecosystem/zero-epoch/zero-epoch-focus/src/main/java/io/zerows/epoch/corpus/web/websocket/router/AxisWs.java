@@ -5,8 +5,8 @@ import io.zerows.component.log.OLog;
 import io.zerows.epoch.basicore.option.SockOptions;
 import io.zerows.epoch.corpus.io.uca.routing.OAxis;
 import io.zerows.epoch.corpus.model.running.RunServer;
+import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
-import org.osgi.framework.Bundle;
 
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -33,7 +33,7 @@ public class AxisWs implements OAxis {
      */
     @Override
     @SuppressWarnings("all")
-    public void mount(final RunServer server, final Bundle owner) {
+    public void mount(final RunServer server, final HBundle owner) {
         // 提取配置
         final SockOptions sockOptions = server.configSock().options();
         if (Objects.isNull(sockOptions)) {

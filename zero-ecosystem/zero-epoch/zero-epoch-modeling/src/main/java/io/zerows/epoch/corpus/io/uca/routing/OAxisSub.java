@@ -3,8 +3,8 @@ package io.zerows.epoch.corpus.io.uca.routing;
 import io.r2mo.typed.cc.Cc;
 import io.zerows.epoch.corpus.model.running.RunRoute;
 import io.zerows.specification.configuration.HAxis;
+import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
-import org.osgi.framework.Bundle;
 
 import java.util.Objects;
 
@@ -24,5 +24,5 @@ public interface OAxisSub extends HAxis<RunRoute> {
         this.mount(route, null);
     }
 
-    void mount(RunRoute route, Bundle bundle);
+    void mount(RunRoute route, HBundle bundle);
 }

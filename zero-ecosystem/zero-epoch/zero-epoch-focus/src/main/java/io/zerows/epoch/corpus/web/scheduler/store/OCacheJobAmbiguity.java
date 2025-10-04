@@ -2,7 +2,7 @@ package io.zerows.epoch.corpus.web.scheduler.store;
 
 import io.zerows.epoch.corpus.web.scheduler.atom.Mission;
 import io.zerows.sdk.management.AbstractAmbiguity;
-import org.osgi.framework.Bundle;
+import io.zerows.specification.development.compiled.HBundle;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,7 +13,7 @@ import java.util.Set;
 class OCacheJobAmbiguity extends AbstractAmbiguity implements OCacheJob {
     private final Set<Mission> jobs = new HashSet<>();
 
-    OCacheJobAmbiguity(final Bundle bundle) {
+    OCacheJobAmbiguity(final HBundle bundle) {
         super(bundle);
     }
 

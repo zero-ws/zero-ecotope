@@ -1,0 +1,28 @@
+package io.zerows.epoch.configuration;
+
+import io.zerows.specification.development.compiled.HBundle;
+
+import java.util.Objects;
+
+/**
+ * @author lang : 2025-10-04
+ */
+public class ZeroBundle implements HBundle {
+    private String name;
+
+    @Override
+    public String id(final Class<?> clazz) {
+        return Objects.requireNonNull(clazz).getName();
+    }
+
+    @Override
+    public String name() {
+        return this.name;
+    }
+
+    @Override
+    public HBundle name(final String name) {
+        this.name = name;
+        return this;
+    }
+}

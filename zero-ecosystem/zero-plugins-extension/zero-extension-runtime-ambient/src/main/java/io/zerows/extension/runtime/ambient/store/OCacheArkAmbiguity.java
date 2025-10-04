@@ -4,7 +4,7 @@ import io.zerows.epoch.metadata.MultiKeyMap;
 import io.zerows.sdk.management.AbstractAmbiguity;
 import io.zerows.specification.access.app.HApp;
 import io.zerows.specification.access.app.HArk;
-import org.osgi.framework.Bundle;
+import io.zerows.specification.development.compiled.HBundle;
 
 import java.util.Objects;
 import java.util.Set;
@@ -16,7 +16,7 @@ class OCacheArkAmbiguity extends AbstractAmbiguity implements OCacheArk {
 
     private static final MultiKeyMap<HArk> STORED = new MultiKeyMap<>();
 
-    OCacheArkAmbiguity(final Bundle bundle) {
+    OCacheArkAmbiguity(final HBundle bundle) {
         super(bundle);
     }
 

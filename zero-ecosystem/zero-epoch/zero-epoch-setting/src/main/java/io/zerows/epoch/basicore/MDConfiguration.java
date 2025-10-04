@@ -2,7 +2,7 @@ package io.zerows.epoch.basicore;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.metadata.MultiKeyMap;
-import org.osgi.framework.Bundle;
+import io.zerows.specification.development.compiled.HBundle;
 
 import java.util.HashSet;
 import java.util.List;
@@ -66,7 +66,7 @@ public class MDConfiguration {
     private final MDId id;
     private String name;
 
-    public MDConfiguration(final Bundle owner) {
+    public MDConfiguration(final HBundle owner) {
         this.id = MDId.of(owner);
     }
 

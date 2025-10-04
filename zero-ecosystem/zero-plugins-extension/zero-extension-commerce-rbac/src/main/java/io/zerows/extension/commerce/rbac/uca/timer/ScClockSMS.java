@@ -3,15 +3,15 @@ package io.zerows.extension.commerce.rbac.uca.timer;
 import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.program.Ux;
-import io.zerows.platform.exception._60050Exception501NotSupport;
-import io.zerows.support.Ut;
 import io.zerows.extension.commerce.rbac.atom.ScConfig;
 import io.zerows.extension.commerce.rbac.bootstrap.ScPin;
 import io.zerows.extension.commerce.rbac.eon.ScConstant;
 import io.zerows.extension.commerce.rbac.exception._80229Exception401SmsCodeWrong;
 import io.zerows.extension.commerce.rbac.exception._80230Exception409SmsCodeExpired;
-import org.osgi.framework.Bundle;
+import io.zerows.platform.exception._60050Exception501NotSupport;
+import io.zerows.program.Ux;
+import io.zerows.specification.development.compiled.HBundle;
+import io.zerows.support.Ut;
 
 import java.util.Objects;
 
@@ -29,7 +29,7 @@ import java.util.Objects;
 class ScClockSMS extends AbstractClock<String> {
     private static final ScConfig CONFIG = ScPin.getConfig();
 
-    ScClockSMS(final Bundle bundle) {
+    ScClockSMS(final HBundle bundle) {
         super(bundle, ScConstant.POOL_CODE_SMS);
     }
 

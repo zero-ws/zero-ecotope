@@ -3,8 +3,7 @@ package io.zerows.epoch.management;
 import io.r2mo.typed.cc.Cc;
 import io.zerows.platform.enums.VertxComponent;
 import io.zerows.sdk.management.OCache;
-import io.zerows.support.Ut;
-import org.osgi.framework.Bundle;
+import io.zerows.specification.development.compiled.HBundle;
 
 import java.util.Objects;
 import java.util.Set;
@@ -22,8 +21,8 @@ public interface OCacheClass extends OCache<Set<Class<?>>> {
         return of(null);
     }
 
-    static OCacheClass of(final Bundle bundle) {
-        final String cacheKey = Ut.Bnd.keyCache(bundle, OCacheClassAmbiguity.class);
+    static OCacheClass of(final HBundle bundle) {
+        final String cacheKey = HBundle.id(bundle, OCacheClassAmbiguity.class);
         return CC_SKELETON.pick(() -> new OCacheClassAmbiguity(bundle), cacheKey);
     }
 

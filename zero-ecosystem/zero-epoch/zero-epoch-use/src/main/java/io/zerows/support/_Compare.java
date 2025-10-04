@@ -3,9 +3,9 @@ package io.zerows.support;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.constant.KName;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.enums.typed.ChangeFlag;
-import io.zerows.epoch.constant.KName;
 import io.zerows.specification.modeling.HRecord;
 
 import java.util.Arrays;
@@ -18,7 +18,7 @@ import java.util.function.Function;
 /**
  * @author lang : 2024-04-19
  */
-class _Compare extends _Bundle {
+class _Compare extends _Ai {
     public static <T, R> ConcurrentMap<ChangeFlag, List<T>> compare(final List<T> original, final List<T> current, final Function<T, R> fnValue, final String pojoFile) {
         return Compare.T.compare(original, current, fnValue, pojoFile);
     }

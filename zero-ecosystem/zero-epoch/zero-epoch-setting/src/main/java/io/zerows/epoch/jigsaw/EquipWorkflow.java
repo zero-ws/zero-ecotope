@@ -4,8 +4,8 @@ import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.epoch.basicore.MDId;
 import io.zerows.epoch.basicore.MDWorkflow;
 import io.zerows.platform.constant.VPath;
+import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
-import org.osgi.framework.Bundle;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ class EquipWorkflow implements EquipAt {
 
         // workflow/RUNNING/
         final MDId id = configuration.id();
-        final Bundle owner = id.owner();
+        final HBundle owner = id.owner();
 
         final String workflowDir = id.path() + "/workflow/RUNNING";
         final List<String> workflowList = Ut.ioDirectories(workflowDir);
@@ -36,7 +36,7 @@ class EquipWorkflow implements EquipAt {
 
     private MDWorkflow buildWorkflow(final String workflowDir, final MDId id) {
         final MDWorkflow workflow = new MDWorkflow(id);
-        final Bundle owner = id.owner();
+        final HBundle owner = id.owner();
         workflow.configure(workflowDir.trim());
         // *.form
         final List<String> formFiles = Ut.ioFiles(workflowDir, VPath.SUFFIX.BPMN_FORM);

@@ -2,7 +2,7 @@ package io.zerows.extension.mbse.action.plugins;
 
 import io.zerows.epoch.corpus.io.management.AxisDynamicFactory;
 import io.zerows.epoch.corpus.io.uca.routing.OAxis;
-import org.osgi.framework.Bundle;
+import io.zerows.specification.development.compiled.HBundle;
 
 import java.util.Objects;
 
@@ -26,7 +26,7 @@ public class JetAxisManager implements AxisDynamicFactory {
     }
 
     @Override
-    public boolean isEnabled(final Bundle owner) {
+    public boolean isEnabled(final HBundle owner) {
         // 唯一的配置信息，单件模式获取
         final JetPolluxOptions options = JetPolluxOptions.singleton();
 

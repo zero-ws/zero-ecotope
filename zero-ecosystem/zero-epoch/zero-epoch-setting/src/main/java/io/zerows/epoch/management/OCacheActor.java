@@ -4,8 +4,8 @@ import io.r2mo.typed.cc.Cc;
 import io.zerows.epoch.basicore.ActorComponent;
 import io.zerows.epoch.basicore.ActorEvent;
 import io.zerows.sdk.management.OCache;
+import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
-import org.osgi.framework.Bundle;
 
 import java.util.Objects;
 import java.util.Set;
@@ -16,8 +16,8 @@ import java.util.Set;
 public interface OCacheActor extends OCache<ActorComponent> {
     Cc<String, OCacheActor> CC_SKELETON = Cc.open();
 
-    static OCacheActor of(final Bundle bundle) {
-        final String cacheKey = Ut.Bnd.keyCache(bundle, OCacheActorAmbiguity.class);
+    static OCacheActor of(final HBundle bundle) {
+        final String cacheKey = HBundle.id(bundle, OCacheActorAmbiguity.class);
         return CC_SKELETON.pick(() -> new OCacheActorAmbiguity(bundle), cacheKey);
     }
 

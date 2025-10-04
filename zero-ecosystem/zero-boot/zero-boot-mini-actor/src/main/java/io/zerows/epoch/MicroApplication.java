@@ -1,9 +1,9 @@
 package io.zerows.epoch;
 
 import io.vertx.core.Vertx;
+import io.zerows.corpus.container.StubLinear;
 import io.zerows.epoch.boot.Electy;
 import io.zerows.epoch.boot.ZeroLauncher;
-import io.zerows.epoch.corpus.container.uca.store.StubLinear;
 import io.zerows.platform.enums.VertxComponent;
 import io.zerows.platform.metadata.KRunner;
 import io.zerows.specification.configuration.HConfig;

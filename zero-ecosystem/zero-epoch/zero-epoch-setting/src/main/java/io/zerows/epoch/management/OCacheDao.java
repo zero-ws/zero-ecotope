@@ -3,8 +3,8 @@ package io.zerows.epoch.management;
 import io.r2mo.typed.cc.Cc;
 import io.zerows.epoch.basicore.MDMeta;
 import io.zerows.sdk.management.OCache;
+import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
-import org.osgi.framework.Bundle;
 
 import java.util.Objects;
 import java.util.Set;
@@ -18,9 +18,9 @@ import java.util.stream.Collectors;
 public interface OCacheDao extends OCache<MDMeta> {
     Cc<String, OCacheDao> CC_SKELETON = Cc.open();
 
-    static OCacheDao of(final Bundle bundle) {
+    static OCacheDao of(final HBundle bundle) {
         return CC_SKELETON.pick(() -> new OCacheDaoAmbiguity(bundle),
-            Ut.Bnd.keyCache(bundle, OCacheDaoAmbiguity.class));
+            HBundle.id(bundle, OCacheDaoAmbiguity.class));
     }
 
     static OCacheDao of() {

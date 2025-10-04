@@ -16,10 +16,10 @@ import io.zerows.extension.runtime.report.exception._80703Exception400ReportDimT
 import io.zerows.extension.runtime.report.uca.feature.RQueryComponent;
 import io.zerows.extension.runtime.report.uca.pull.DataSet;
 import io.zerows.program.Ux;
+import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
 import io.zerows.support.base.FnBase;
 import io.zerows.support.fn.Fx;
-import org.osgi.framework.Bundle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,14 +37,14 @@ class DimProcImpl extends AbstractDimProc {
 
     private static final Cc<String, RQueryComponent> CC_OUT = Cc.openThread();
 
-    private static final ConcurrentMap<EmDim.Type, Function<Bundle, DimProc>> SUPPLIER = new ConcurrentHashMap<>() {
+    private static final ConcurrentMap<EmDim.Type, Function<HBundle, DimProc>> SUPPLIER = new ConcurrentHashMap<>() {
         {
             this.put(EmDim.Type.TREE, (owner) -> AbstractDimProc.of(owner, DimProcTree.class));
             this.put(EmDim.Type.LINE, (owner) -> AbstractDimProc.of(owner, DimProcLine.class));
         }
     };
 
-    DimProcImpl(final Bundle owner) {
+    DimProcImpl(final HBundle owner) {
         super(owner);
     }
 

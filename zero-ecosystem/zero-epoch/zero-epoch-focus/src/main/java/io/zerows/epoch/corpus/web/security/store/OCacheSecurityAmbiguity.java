@@ -2,7 +2,7 @@ package io.zerows.epoch.corpus.web.security.store;
 
 import io.zerows.epoch.metadata.security.Aegis;
 import io.zerows.sdk.management.AbstractAmbiguity;
-import org.osgi.framework.Bundle;
+import io.zerows.specification.development.compiled.HBundle;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -16,7 +16,7 @@ class OCacheSecurityAmbiguity extends AbstractAmbiguity implements OCacheSecurit
     private final Set<Aegis> walls = new HashSet<>();
     private final ConcurrentMap<String, Set<Aegis>> wallMap = new ConcurrentHashMap<>();
 
-    OCacheSecurityAmbiguity(final Bundle bundle) {
+    OCacheSecurityAmbiguity(final HBundle bundle) {
         super(bundle);
     }
 

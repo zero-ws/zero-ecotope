@@ -2,9 +2,8 @@ package io.zerows.epoch.corpus.web.websocket.store;
 
 import io.r2mo.typed.cc.Cc;
 import io.zerows.epoch.corpus.web.websocket.atom.Remind;
-import io.zerows.support.Ut;
 import io.zerows.sdk.management.OCache;
-import org.osgi.framework.Bundle;
+import io.zerows.specification.development.compiled.HBundle;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -21,8 +20,8 @@ public interface OCacheSock extends OCache<Set<Remind>> {
         return of(null);
     }
 
-    static OCacheSock of(final Bundle bundle) {
-        final String cacheKey = Ut.Bnd.keyCache(bundle, OCacheSockAmbiguity.class);
+    static OCacheSock of(final HBundle bundle) {
+        final String cacheKey = HBundle.id(bundle, OCacheSockAmbiguity.class);
         return CC_SKELETON.pick(() -> new OCacheSockAmbiguity(bundle), cacheKey);
     }
 

@@ -11,9 +11,9 @@ import io.zerows.platform.constant.VString;
 import io.zerows.sdk.management.AbstractAmbiguity;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HSetting;
+import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.spi.HEquip;
 import io.zerows.support.Ut;
-import org.osgi.framework.Bundle;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -29,11 +29,11 @@ public class ZeroEquip extends AbstractAmbiguity implements HEquip {
         super(null);
     }
 
-    private ZeroEquip(final Bundle bundle) {
+    private ZeroEquip(final HBundle bundle) {
         super(bundle);
     }
 
-    public static ZeroEquip of(final Bundle bundle) {
+    public static ZeroEquip of(final HBundle bundle) {
         return Objects.isNull(bundle) ? new ZeroEquip() : new ZeroEquip(bundle);
     }
 

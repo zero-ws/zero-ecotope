@@ -1,10 +1,10 @@
 package io.zerows.extension.mbse.modulat.store;
 
 import io.zerows.epoch.metadata.MultiKeyMap;
-import io.zerows.support.Ut;
 import io.zerows.sdk.management.AbstractAmbiguity;
 import io.zerows.specification.access.app.HMod;
-import org.osgi.framework.Bundle;
+import io.zerows.specification.development.compiled.HBundle;
+import io.zerows.support.Ut;
 
 import java.util.Objects;
 import java.util.Set;
@@ -15,7 +15,7 @@ import java.util.Set;
 class OCacheModAmbiguity extends AbstractAmbiguity implements OCacheMod {
     private final MultiKeyMap<HMod> STORED = new MultiKeyMap<>();
 
-    OCacheModAmbiguity(final Bundle bundle) {
+    OCacheModAmbiguity(final HBundle bundle) {
         super(bundle);
     }
 

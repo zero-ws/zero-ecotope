@@ -6,7 +6,7 @@ import io.zerows.epoch.basicore.MDConnect;
 import io.zerows.epoch.basicore.MDPage;
 import io.zerows.sdk.management.OCache;
 import io.zerows.specification.configuration.HSetting;
-import io.zerows.support.Ut;
+import io.zerows.specification.development.compiled.HBundle;
 import org.osgi.framework.Bundle;
 
 import java.util.Objects;
@@ -33,9 +33,9 @@ public interface OCacheConfiguration extends OCache<MDConfiguration> {
     Cc<String, OCacheConfiguration> CC_SKELETON = Cc.open();
 
 
-    static OCacheConfiguration of(final Bundle bundle) {
+    static OCacheConfiguration of(final HBundle bundle) {
         return CC_SKELETON.pick(() -> new OCacheConfigurationAmbiguity(bundle),
-            Ut.Bnd.keyCache(bundle, OCacheConfigurationAmbiguity.class));
+            HBundle.id(bundle, OCacheConfigurationAmbiguity.class));
     }
 
     static OCacheConfiguration of() {

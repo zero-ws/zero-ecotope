@@ -2,7 +2,7 @@ package io.zerows.epoch.management;
 
 import io.vertx.core.http.HttpMethod;
 import io.zerows.sdk.management.AbstractAmbiguity;
-import org.osgi.framework.Bundle;
+import io.zerows.specification.development.compiled.HBundle;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -29,7 +29,7 @@ class OCacheUriAmbiguity extends AbstractAmbiguity implements OCacheUri {
 
     private final ConcurrentMap<HttpMethod, Set<String>> uri = new ConcurrentHashMap<>();
 
-    OCacheUriAmbiguity(final Bundle bundle) {
+    OCacheUriAmbiguity(final HBundle bundle) {
         super(bundle);
         {
             this.uri.put(HttpMethod.GET, new HashSet<>());

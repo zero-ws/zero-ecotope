@@ -1,12 +1,11 @@
 package io.zerows.extension.runtime.ambient.store;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.support.Ut;
 import io.zerows.sdk.management.OCache;
 import io.zerows.specification.access.app.HApp;
 import io.zerows.specification.access.app.HArk;
-import org.osgi.framework.Bundle;
-import org.osgi.framework.FrameworkUtil;
+import io.zerows.specification.development.compiled.HBundle;
+import io.zerows.spi.HPI;
 
 import java.util.Objects;
 import java.util.Set;
@@ -24,13 +23,13 @@ public interface OCacheArk extends OCache<HArk> {
 
     Cc<String, OCacheArk> CC_SKELETON = Cc.open();
 
-    static OCacheArk of(final Bundle owner) {
-        final String cacheKey = Ut.Bnd.keyCache(owner, OCacheArkAmbiguity.class);
+    static OCacheArk of(final HBundle owner) {
+        final String cacheKey = HBundle.id(owner, OCacheArkAmbiguity.class);
         return CC_SKELETON.pick(() -> new OCacheArkAmbiguity(owner), cacheKey);
     }
 
     static OCacheArk of() {
-        final Bundle owner = FrameworkUtil.getBundle(OCacheArk.class);
+        final HBundle owner = HPI.findBundle(OCacheArk.class);
         return of(owner);
     }
 

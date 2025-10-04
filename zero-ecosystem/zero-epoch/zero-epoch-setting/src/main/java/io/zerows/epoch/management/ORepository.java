@@ -1,14 +1,14 @@
 package io.zerows.epoch.management;
 
 import io.r2mo.typed.cc.Cc;
+import io.zerows.management.OZeroStore;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.exception._60050Exception501NotSupport;
-import io.zerows.management.OZeroStore;
 import io.zerows.sdk.management.OCache;
-import io.zerows.support.Ut;
 import io.zerows.specification.configuration.HSetting;
-import org.osgi.framework.Bundle;
-import org.osgi.framework.FrameworkUtil;
+import io.zerows.specification.development.compiled.HBundle;
+import io.zerows.spi.HPI;
+import io.zerows.support.Ut;
 
 import java.util.Objects;
 
@@ -38,13 +38,13 @@ public interface ORepository {
 
     static <T extends ORepository> ORepository ofOr(final Class<T> clazz) {
         Objects.requireNonNull(clazz);
-        final Bundle bundle = FrameworkUtil.getBundle(clazz);
+        final HBundle bundle = HPI.findBundle(clazz);
         return ofOr(clazz, bundle);
     }
 
-    static <T extends ORepository> ORepository ofOr(final Class<T> clazz, final Bundle bundle) {
+    static <T extends ORepository> ORepository ofOr(final Class<T> clazz, final HBundle bundle) {
         Objects.requireNonNull(clazz);
-        final String cacheKey = clazz.getName() + VString.SLASH + Ut.Bnd.keyCache(bundle, clazz);
+        final String cacheKey = clazz.getName() + VString.SLASH + HBundle.id(bundle, clazz);
         return CC_SKELETON.pick(() -> Ut.instance(clazz, bundle), cacheKey);
     }
 
@@ -65,5 +65,5 @@ public interface ORepository {
         throw new _60050Exception501NotSupport(this.getClass());
     }
 
-    Bundle caller();
+    HBundle caller();
 }

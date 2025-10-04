@@ -10,8 +10,8 @@ import io.zerows.epoch.jigsaw.EquipAt;
 import io.zerows.management.OZeroStore;
 import io.zerows.platform.constant.VBoot;
 import io.zerows.specification.configuration.HSetting;
+import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
-import org.osgi.framework.Bundle;
 
 import java.util.HashSet;
 import java.util.List;
@@ -61,8 +61,8 @@ public interface HExtension {
         });
     }
 
-    static MDConfiguration getOrCreate(final Bundle owner) {
-        return AbstractBoot.CONFIGURATION_MAP.computeIfAbsent(owner.getSymbolicName(), (moduleValue) -> {
+    static MDConfiguration getOrCreate(final HBundle owner) {
+        return AbstractBoot.CONFIGURATION_MAP.computeIfAbsent(owner.name(), (moduleValue) -> {
             // 创建一个新的 MDConfiguration
             final MDConfiguration configuration = new MDConfiguration(owner);
             // 对新的 MDConfiguration 执行初始化 -> 会写入到 MDConfiguration 缓存中

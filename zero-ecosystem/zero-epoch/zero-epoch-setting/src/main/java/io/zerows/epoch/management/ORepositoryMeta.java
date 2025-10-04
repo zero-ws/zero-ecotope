@@ -12,17 +12,17 @@ import io.zerows.epoch.basicore.ActorComponent;
 import io.zerows.epoch.basicore.ActorEvent;
 import io.zerows.epoch.basicore.ActorReceipt;
 import io.zerows.epoch.basicore.JointAction;
+import io.zerows.epoch.configuration.Inquirer;
 import io.zerows.epoch.metadata.environment.KSwitcher;
 import io.zerows.platform.enums.EmAction;
 import io.zerows.platform.enums.VertxComponent;
 import io.zerows.platform.enums.app.ServerType;
 import io.zerows.platform.metadata.KRunner;
-import io.zerows.epoch.configuration.Inquirer;
 import io.zerows.sdk.management.AbstractAmbiguity;
 import io.zerows.specification.configuration.HSetting;
+import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.specification.development.ncloud.HAeon;
 import io.zerows.support.Ut;
-import org.osgi.framework.Bundle;
 
 import java.lang.reflect.Method;
 import java.util.List;
@@ -35,7 +35,7 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class ORepositoryMeta extends AbstractAmbiguity implements ORepository {
 
-    public ORepositoryMeta(final Bundle bundle) {
+    public ORepositoryMeta(final HBundle bundle) {
         super(bundle);
     }
 

@@ -2,9 +2,8 @@ package io.zerows.epoch.corpus.web.security.store;
 
 import io.r2mo.typed.cc.Cc;
 import io.zerows.epoch.metadata.security.Aegis;
-import io.zerows.support.Ut;
 import io.zerows.sdk.management.OCache;
-import org.osgi.framework.Bundle;
+import io.zerows.specification.development.compiled.HBundle;
 
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -20,8 +19,8 @@ public interface OCacheSecurity extends OCache<Set<Aegis>> {
         return of(null);
     }
 
-    static OCacheSecurity of(final Bundle bundle) {
-        final String cacheKey = Ut.Bnd.keyCache(bundle, OCacheSecurityAmbiguity.class);
+    static OCacheSecurity of(final HBundle bundle) {
+        final String cacheKey = HBundle.id(bundle, OCacheSecurityAmbiguity.class);
         return CC_SKELETON.pick(() -> new OCacheSecurityAmbiguity(bundle), cacheKey);
     }
 

@@ -1,17 +1,17 @@
 package io.zerows.extension.mbse.action.plugins;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.application.YmlCore;
 import io.zerows.component.log.OLog;
-import io.zerows.platform.constant.VValue;
+import io.zerows.epoch.application.YmlCore;
 import io.zerows.epoch.corpus.io.uca.routing.OAxis;
-import io.zerows.management.OZeroStore;
-import io.zerows.support.Ut;
 import io.zerows.extension.mbse.action.atom.JtUri;
 import io.zerows.extension.mbse.action.bootstrap.JtPin;
 import io.zerows.extension.mbse.action.bootstrap.ServiceEnvironment;
 import io.zerows.extension.mbse.action.uca.monitor.JtMonitor;
-import org.osgi.framework.Bundle;
+import io.zerows.management.OZeroStore;
+import io.zerows.platform.constant.VValue;
+import io.zerows.specification.development.compiled.HBundle;
+import io.zerows.support.Ut;
 
 import java.util.Objects;
 import java.util.Set;
@@ -83,7 +83,7 @@ class JetPolluxOptions {
      *
      * @return 满足 true
      */
-    boolean isReady(final Bundle owner) {
+    boolean isReady(final HBundle owner) {
         final OLog logger = Ut.Log.configure(this.getClass());
         final String classSelf = this.getClass().getSimpleName();
         if (VValue.ZERO == LOG_OPTION.getAndIncrement()) {

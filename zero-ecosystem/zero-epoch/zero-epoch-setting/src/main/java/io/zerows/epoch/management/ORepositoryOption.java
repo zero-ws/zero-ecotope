@@ -5,6 +5,7 @@ import io.zerows.epoch.configuration.Processor;
 import io.zerows.epoch.configuration.ProcessorCommon;
 import io.zerows.sdk.management.AbstractAmbiguity;
 import io.zerows.specification.configuration.HSetting;
+import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
 import org.osgi.framework.Bundle;
 
@@ -15,7 +16,7 @@ import java.util.Objects;
  */
 public class ORepositoryOption extends AbstractAmbiguity implements ORepository {
 
-    public ORepositoryOption(final Bundle bundle) {
+    public ORepositoryOption(final HBundle bundle) {
         super(bundle);
     }
 
@@ -56,7 +57,7 @@ public class ORepositoryOption extends AbstractAmbiguity implements ORepository 
             processor.makeup(network, setting);
             Ut.Log.energy(this.getClass()).info(
                 "Initialization --> ...Prepare configuration for Bundle = {}",
-                this.caller().getSymbolicName()
+                this.caller().name()
             );
         }
     }

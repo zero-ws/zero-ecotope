@@ -3,7 +3,7 @@ package io.zerows.epoch.management;
 import io.zerows.epoch.basicore.JointAction;
 import io.zerows.epoch.basicore.JointMap;
 import io.zerows.sdk.management.AbstractAmbiguity;
-import org.osgi.framework.Bundle;
+import io.zerows.specification.development.compiled.HBundle;
 
 /**
  * @author lang : 2024-04-21
@@ -12,7 +12,7 @@ class OCacheJointAmbiguity extends AbstractAmbiguity implements OCacheJoint {
 
     final JointMap joint = new JointMap();
 
-    OCacheJointAmbiguity(final Bundle bundle) {
+    OCacheJointAmbiguity(final HBundle bundle) {
         super(bundle);
     }
 

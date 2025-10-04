@@ -3,7 +3,7 @@ package io.zerows.epoch.management;
 import io.zerows.epoch.basicore.NodeNetwork;
 import io.zerows.epoch.basicore.NodeVertx;
 import io.zerows.sdk.management.AbstractAmbiguity;
-import org.osgi.framework.Bundle;
+import io.zerows.specification.development.compiled.HBundle;
 
 /**
  * @author lang : 2024-04-20
@@ -12,7 +12,7 @@ class OCacheNodeAmbiguity extends AbstractAmbiguity implements OCacheNode {
 
     private static final NodeNetwork NETWORK = new NodeNetwork();
 
-    OCacheNodeAmbiguity(final Bundle bundle) {
+    OCacheNodeAmbiguity(final HBundle bundle) {
         super(bundle);
     }
 

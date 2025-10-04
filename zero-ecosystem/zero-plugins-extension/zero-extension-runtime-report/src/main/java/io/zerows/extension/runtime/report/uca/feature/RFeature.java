@@ -4,7 +4,7 @@ import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.extension.runtime.report.domain.tables.pojos.KpFeature;
-import org.osgi.framework.Bundle;
+import io.zerows.specification.development.compiled.HBundle;
 
 /**
  * 特征执行器，用于执行不同的特征相关信息
@@ -14,7 +14,7 @@ import org.osgi.framework.Bundle;
 public interface RFeature {
     Cc<String, RFeature> CC_SKELETON = Cc.openThread();
 
-    static RFeature of(final KpFeature feature, final Bundle owner) {
+    static RFeature of(final KpFeature feature, final HBundle owner) {
         return AbstractFeature.of(feature, RFeatureImpl.class, owner);
     }
 

@@ -4,8 +4,8 @@ import io.github.jklingsporn.vertx.jooq.shared.internal.AbstractVertxDAO;
 import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.epoch.basicore.MDMeta;
 import io.zerows.sdk.management.AbstractAmbiguity;
+import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
-import org.osgi.framework.Bundle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,7 @@ class OCacheDaoAmbiguity extends AbstractAmbiguity implements OCacheDao {
      */
     private final ConcurrentMap<String, MDMeta> storedMeta = new ConcurrentHashMap<>();
 
-    OCacheDaoAmbiguity(final Bundle bundle) {
+    OCacheDaoAmbiguity(final HBundle bundle) {
         super(bundle);
     }
 
@@ -111,7 +111,7 @@ class OCacheDaoAmbiguity extends AbstractAmbiguity implements OCacheDao {
                 this.storedMeta.size(), Ut.fromJoin(lines, "\n"));
         } else {
             this.logger().info("Scanned \"{}\" table with Dao configuration in OSGI environment. Bundle = {}, \n{}",
-                this.storedMeta.size(), this.caller().getSymbolicName(), Ut.fromJoin(lines, "\n"));
+                this.storedMeta.size(), this.caller().name(), Ut.fromJoin(lines, "\n"));
         }
 
         // 打印结果

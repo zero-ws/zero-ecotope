@@ -1,10 +1,10 @@
 package io.zerows.epoch.management;
 
 import io.zerows.epoch.assembly.ClassScanner;
-import io.zerows.platform.enums.VertxComponent;
 import io.zerows.epoch.configuration.Inquirer;
+import io.zerows.platform.enums.VertxComponent;
 import io.zerows.sdk.management.AbstractAmbiguity;
-import org.osgi.framework.Bundle;
+import io.zerows.specification.development.compiled.HBundle;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -37,7 +37,7 @@ class OCacheClassAmbiguity extends AbstractAmbiguity implements OCacheClass {
      */
     private final OClassCacheInternal meta;
 
-    OCacheClassAmbiguity(final Bundle bundle) {
+    OCacheClassAmbiguity(final HBundle bundle) {
         super(bundle);
         this.meta = OClassCacheInternal.of();
         // Scanner
@@ -110,7 +110,7 @@ class OCacheClassAmbiguity extends AbstractAmbiguity implements OCacheClass {
         } else {
 
             this.logger().info("Scanned \"{}\" of typed classes from current bundle. owner = {}",
-                type.name(), this.caller().getSymbolicName());
+                type.name(), this.caller().name());
         }
         this.meta.compile(type, compiler);
         return this;

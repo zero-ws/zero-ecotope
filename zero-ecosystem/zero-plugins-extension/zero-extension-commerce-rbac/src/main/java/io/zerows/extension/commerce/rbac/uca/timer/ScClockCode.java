@@ -10,8 +10,8 @@ import io.zerows.extension.commerce.rbac.exception._80200Exception401CodeWrong;
 import io.zerows.extension.commerce.rbac.exception._80201Exception401CodeExpired;
 import io.zerows.platform.exception._60050Exception501NotSupport;
 import io.zerows.program.Ux;
+import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
-import org.osgi.framework.Bundle;
 
 import java.util.Objects;
 
@@ -29,7 +29,7 @@ import java.util.Objects;
 class ScClockCode extends AbstractClock<String> {
     private static final ScConfig CONFIG = ScPin.getConfig();
 
-    ScClockCode(final Bundle bundle) {
+    ScClockCode(final HBundle bundle) {
         super(bundle, ScConstant.POOL_CODE);
     }
 

@@ -2,8 +2,8 @@ package io.zerows.epoch.jigsaw;
 
 import io.vertx.core.json.JsonArray;
 import io.zerows.epoch.basicore.MDConnect;
+import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
-import org.osgi.framework.Bundle;
 
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
@@ -20,7 +20,8 @@ import java.util.concurrent.ConcurrentMap;
  */
 class MakerConnect implements MakerIo<MDConnect> {
     @Override
-    public ConcurrentMap<String, MDConnect> build(final String filename, final Bundle owner,
+    public ConcurrentMap<String, MDConnect> build(final String filename,
+                                                  final HBundle bundle,
                                                   final Object... args) {
         // 部分模块没有 /model/connect.yml 文件，如 CRUD
         final JsonArray connectA = Ut.ioExist(filename) ? Ut.ioYaml(filename) : new JsonArray();

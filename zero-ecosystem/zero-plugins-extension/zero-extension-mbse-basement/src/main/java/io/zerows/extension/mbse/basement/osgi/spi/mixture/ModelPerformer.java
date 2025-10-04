@@ -5,7 +5,7 @@ import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.corpus.container.exception._80510Exception404ModelNotFound;
+import io.zerows.corpus.exception._80510Exception404ModelNotFound;
 import io.zerows.extension.mbse.basement.atom.Model;
 import io.zerows.extension.mbse.basement.domain.tables.daos.MModelDao;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MModel;

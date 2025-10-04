@@ -1,6 +1,7 @@
 package io.zerows.epoch.basicore;
 
-import org.osgi.framework.Bundle;
+import io.zerows.specification.development.compiled.HBundle;
+import io.zerows.spi.HPI;
 
 import java.io.Serializable;
 import java.net.URL;
@@ -23,24 +24,24 @@ public class MDId implements Serializable {
     private final String value;
     private final String path;
     private final URL url;
-    private final Bundle owner;
+    private final HBundle owner;
 
     // 非 OSGI 环境
     private MDId(final String value) {
         this.value = value;
-        this.owner = null;
+        this.owner = HPI.findBundle(this.getClass());
         // 目录计算
         this.path = "plugins/" + value;
         this.url = Thread.currentThread().getContextClassLoader().getResource(this.path);
     }
 
     // OSGI 环境
-    private MDId(final Bundle owner) {
-        this.value = owner.getSymbolicName();
+    private MDId(final HBundle owner) {
+        this.value = owner.name();
         this.owner = owner;
         // 目录计算
         this.path = "plugins/" + this.value;
-        this.url = owner.getResource(this.path);
+        this.url = owner.resource(this.path);
     }
 
     public static MDId of(final String id) {
@@ -48,7 +49,7 @@ public class MDId implements Serializable {
         return new MDId(id);
     }
 
-    public static MDId of(final Bundle owner) {
+    public static MDId of(final HBundle owner) {
         Objects.requireNonNull(owner);
         return new MDId(owner);
     }
@@ -65,7 +66,7 @@ public class MDId implements Serializable {
         return this.url;
     }
 
-    public Bundle owner() {
+    public HBundle owner() {
         return this.owner;
     }
 

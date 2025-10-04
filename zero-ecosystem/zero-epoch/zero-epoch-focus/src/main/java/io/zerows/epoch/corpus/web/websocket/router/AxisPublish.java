@@ -11,7 +11,7 @@ import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.corpus.io.uca.routing.OAxis;
 import io.zerows.epoch.corpus.model.running.RunServer;
 import io.zerows.epoch.corpus.web.websocket.atom.Remind;
-import org.osgi.framework.Bundle;
+import io.zerows.specification.development.compiled.HBundle;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -31,7 +31,7 @@ public class AxisPublish implements OAxis {
     }
 
     @Override
-    public void mount(final RunServer server, final Bundle bundle) {
+    public void mount(final RunServer server, final HBundle bundle) {
         final Router router = server.refRouter();
         final Vertx vertx = server.refVertx();
         Objects.requireNonNull(router);

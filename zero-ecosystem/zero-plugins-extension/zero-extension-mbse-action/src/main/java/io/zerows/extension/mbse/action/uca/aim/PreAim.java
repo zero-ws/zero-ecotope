@@ -2,7 +2,7 @@ package io.zerows.extension.mbse.action.uca.aim;
 
 import io.vertx.core.Handler;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.epoch.corpus.container.uca.mode.Answer;
+import io.zerows.corpus.handler.AimAnswer;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.mbse.action.atom.JtUri;
 import io.zerows.extension.mbse.action.osgi.spi.jet.JtIngest;
@@ -22,7 +22,7 @@ public class PreAim implements JtAim {
             /* Extract parameters */
             final Envelop envelop = ingest.in(context, uri);
             /* Last step for next */
-            Answer.next(context, envelop);
+            AimAnswer.next(context, envelop);
         };
     }
 }

@@ -1,10 +1,10 @@
 package io.zerows.extension.mbse.basement.osgi.spi.mixture;
 
-import io.zerows.platform.metadata.KPivot;
-import io.zerows.epoch.corpus.container.exception._80510Exception404ModelNotFound;
+import io.zerows.corpus.exception._80510Exception404ModelNotFound;
 import io.zerows.extension.mbse.basement.atom.Model;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.eon.AoCache;
+import io.zerows.platform.metadata.KPivot;
 import io.zerows.specification.access.app.HAmbient;
 import io.zerows.specification.access.app.HArk;
 import io.zerows.specification.modeling.HAtom;

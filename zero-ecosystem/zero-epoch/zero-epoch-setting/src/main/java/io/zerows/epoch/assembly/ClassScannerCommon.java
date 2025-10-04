@@ -3,8 +3,8 @@ package io.zerows.epoch.assembly;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.reflect.ClassPath;
 import io.r2mo.function.Fn;
+import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
-import org.osgi.framework.Bundle;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 class ClassScannerCommon implements ClassScanner {
 
     @Override
-    public Set<Class<?>> scan(final Bundle bundle) {
+    public Set<Class<?>> scan(final HBundle bundle) {
         assert bundle == null;
         final ClassLoader loader = Thread.currentThread().getContextClassLoader();
         // 保证线程安全

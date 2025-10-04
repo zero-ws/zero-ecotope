@@ -6,7 +6,7 @@ import io.zerows.epoch.basicore.MDConnect;
 import io.zerows.epoch.basicore.MDEntity;
 import io.zerows.epoch.basicore.MDId;
 import io.zerows.epoch.management.OCacheConfiguration;
-import org.osgi.framework.Bundle;
+import io.zerows.specification.development.compiled.HBundle;
 
 import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
@@ -23,7 +23,7 @@ class EquipModel implements EquipAt {
 
         // model/connect.yml 文件提取
         final MDId id = configuration.id();
-        final Bundle owner = id.owner();
+        final HBundle owner = id.owner();
 
         final String connectFile = id.path() + "/model/connect.yml";
 

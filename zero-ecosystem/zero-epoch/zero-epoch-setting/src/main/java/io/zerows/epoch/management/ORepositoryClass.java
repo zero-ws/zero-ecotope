@@ -11,13 +11,13 @@ import io.zerows.epoch.assembly.InquirerClassIpc;
 import io.zerows.epoch.assembly.InquirerClassPlugin;
 import io.zerows.epoch.assembly.InquirerClassQueue;
 import io.zerows.epoch.assembly.InquirerClassWorker;
+import io.zerows.epoch.configuration.Inquirer;
 import io.zerows.platform.enums.VertxComponent;
 import io.zerows.platform.metadata.KRunner;
-import io.zerows.epoch.configuration.Inquirer;
 import io.zerows.sdk.management.AbstractAmbiguity;
 import io.zerows.specification.configuration.HSetting;
+import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
-import org.osgi.framework.Bundle;
 
 import java.util.Set;
 
@@ -32,7 +32,7 @@ import java.util.Set;
  */
 public class ORepositoryClass extends AbstractAmbiguity implements ORepository {
 
-    public ORepositoryClass(final Bundle bundle) {
+    public ORepositoryClass(final HBundle bundle) {
         super(bundle);
     }
 
@@ -96,7 +96,7 @@ public class ORepositoryClass extends AbstractAmbiguity implements ORepository {
         );
         final long end = System.currentTimeMillis();
         Ut.Log.boot(ORepositoryClass.class).info(" {0}ms / Zero Timer: Meditate Class Scanned! key = {1}",
-            end - start, Ut.Bnd.keyCache(this.caller(), ORepositoryClass.class));
+            end - start, HBundle.id(this.caller(), ORepositoryClass.class));
     }
 
     @Override

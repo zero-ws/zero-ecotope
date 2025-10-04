@@ -1,16 +1,15 @@
 package io.zerows.extension.mbse.modulat.store;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.platform.metadata.KDS;
 import io.zerows.platform.constant.VString;
-import io.zerows.support.Ut;
+import io.zerows.platform.metadata.KDS;
 import io.zerows.sdk.management.OCache;
 import io.zerows.specification.access.app.HApp;
 import io.zerows.specification.access.app.HArk;
 import io.zerows.specification.access.app.HMod;
+import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.specification.vital.HOI;
-import org.osgi.framework.Bundle;
-import org.osgi.framework.FrameworkUtil;
+import io.zerows.spi.HPI;
 
 /**
  * 新版针对底层配置做出调整，配置接口实现完整的模块化管理流程，以兼容 OSGI 环境，每个 App 会包含一个 Modulat 的相关配置，新版完整架构
@@ -30,13 +29,13 @@ import org.osgi.framework.FrameworkUtil;
 public interface OCacheMod extends OCache<HMod> {
     Cc<String, OCacheMod> CC_SKELETON = Cc.open();
 
-    static OCacheMod of(final String appId, final Bundle owner) {
-        final String cacheKey = Ut.Bnd.keyCache(owner, OCacheModAmbiguity.class) + VString.SLASH + appId;
+    static OCacheMod of(final String appId, final HBundle owner) {
+        final String cacheKey = HBundle.id(owner, OCacheModAmbiguity.class) + VString.SLASH + appId;
         return CC_SKELETON.pick(() -> new OCacheModAmbiguity(owner), cacheKey);
     }
 
     static OCacheMod of(final String appId) {
-        final Bundle owner = FrameworkUtil.getBundle(OCacheMod.class);
+        final HBundle owner = HPI.findBundle(OCacheMod.class);
         return of(appId, owner);
     }
 }

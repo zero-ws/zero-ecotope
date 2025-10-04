@@ -2,11 +2,11 @@ package io.zerows.extension.commerce.rbac.uca.timer;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.support.Ut;
 import io.zerows.extension.commerce.rbac.atom.ScConfig;
 import io.zerows.extension.commerce.rbac.bootstrap.ScPin;
 import io.zerows.extension.commerce.rbac.eon.ScConstant;
-import org.osgi.framework.Bundle;
+import io.zerows.specification.development.compiled.HBundle;
+import io.zerows.support.Ut;
 
 /**
  * @author lang : 2024-09-16
@@ -14,7 +14,7 @@ import org.osgi.framework.Bundle;
 class ScClockImage extends AbstractClock<String> {
     private static final ScConfig CONFIG = ScPin.getConfig();
 
-    ScClockImage(final Bundle bundle) {
+    ScClockImage(final HBundle bundle) {
         super(bundle, ScConstant.POOL_CODE_IMAGE);
     }
 

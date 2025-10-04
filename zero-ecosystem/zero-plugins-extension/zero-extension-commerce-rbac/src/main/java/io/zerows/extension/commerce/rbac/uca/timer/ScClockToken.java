@@ -14,8 +14,8 @@ import io.zerows.extension.commerce.rbac.exception._80207Exception401TokenInvali
 import io.zerows.extension.commerce.rbac.exception._80208Exception401TokenExpired;
 import io.zerows.platform.constant.VValue;
 import io.zerows.program.Ux;
+import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
-import org.osgi.framework.Bundle;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -42,7 +42,7 @@ class ScClockToken extends AbstractClock<ScToken> {
     private static final ScConfig CONFIG = ScPin.getConfig();
     private static final ConcurrentMap<String, String> POINTER = new ConcurrentHashMap<>();
 
-    ScClockToken(final Bundle bundle) {
+    ScClockToken(final HBundle bundle) {
         super(bundle, ScConstant.POOL_TOKEN);
     }
 

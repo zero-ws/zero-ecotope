@@ -6,14 +6,16 @@ import io.zerows.epoch.basicore.MDId;
 import io.zerows.epoch.constant.KName;
 import io.zerows.platform.constant.VPath;
 import io.zerows.platform.constant.VString;
+import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
-import org.osgi.framework.Bundle;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
 
 /**
  * @author lang : 2024-05-09
  */
+@Slf4j
 class EquipShape implements EquipAt {
     @Override
     public void initialize(final MDConfiguration configuration) {
@@ -28,9 +30,9 @@ class EquipShape implements EquipAt {
 
         // plugins/<id>/configuration.json
         final String fileConfiguration = baseDir + VString.SLASH + "configuration.json";
-        final Bundle owner = id.owner();
+        final HBundle owner = id.owner();
         if (Objects.isNull(owner)) {
-            this.logger().info("Norm environment, configuration loading: {}", filename);
+            log.info("[ ZERO ] 正常环境的配置加载: {}", filename);
         }
         final JsonObject metadata = Ut.ioYaml(filename);
         final JsonObject shapeJ = Ut.valueJObject(metadata, KName.SHAPE);

@@ -1,13 +1,15 @@
 package io.zerows.epoch.boot;
 
 import io.vertx.core.Vertx;
+import io.zerows.corpus.EnergyVertx;
+import io.zerows.corpus.EnergyVertxService;
+import io.zerows.corpus.management.StoreVertx;
 import io.zerows.epoch.basicore.NodeNetwork;
-import io.zerows.epoch.corpus.container.osgi.service.EnergyVertx;
-import io.zerows.epoch.corpus.container.osgi.service.EnergyVertxService;
-import io.zerows.epoch.corpus.container.store.under.StoreVertx;
 import io.zerows.epoch.management.OCacheNode;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HLauncher;
+import io.zerows.specification.development.compiled.HBundle;
+import io.zerows.spi.HPI;
 import io.zerows.support.Ut;
 
 import java.util.Objects;
@@ -40,7 +42,8 @@ public class LauncherZero implements HLauncher<Vertx> {
     public <T extends HConfig> void start(final HConfig.HOn<T> on, final Consumer<Vertx> server) {
         final NodeNetwork network = OCacheNode.of().network();
 
-        SERVICE.startAsync(network).onComplete(cached -> {
+        final HBundle found = HPI.findBundle(this.getClass());
+        SERVICE.startAsync(found, network).onComplete(cached -> {
             if (cached.failed()) {
                 Ut.Log.boot(this.getClass()).fatal(cached.cause());
                 return;

@@ -4,8 +4,8 @@ import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.Route;
 import io.vertx.ext.web.Router;
+import io.zerows.corpus.handler.EndurerCommon;
 import io.zerows.epoch.constant.KWeb;
-import io.zerows.epoch.corpus.container.handler.CommonEndurer;
 import io.zerows.epoch.corpus.io.uca.routing.OAxis;
 import io.zerows.epoch.corpus.model.running.RunServer;
 import io.zerows.epoch.management.OCacheUri;
@@ -19,8 +19,8 @@ import io.zerows.extension.mbse.action.uca.aim.JtAim;
 import io.zerows.extension.mbse.action.uca.aim.PreAim;
 import io.zerows.extension.mbse.action.uca.aim.SendAim;
 import io.zerows.extension.mbse.action.uca.monitor.JtMonitor;
+import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
-import org.osgi.framework.Bundle;
 
 import java.util.Objects;
 import java.util.Set;
@@ -50,7 +50,7 @@ public class JetPollux implements OAxis {
 
     @Override
     @SuppressWarnings("all")
-    public void mount(final RunServer server, final Bundle owner) {
+    public void mount(final RunServer server, final HBundle owner) {
         /*
          * 先提取配置，由于上层会直接调用 JetAxisManager 来对配置部分做启用 / 禁用的拦截，所以代码执行到这里已经是
          * 整体流程上 configuration 的配置部分过了自检流程，且 ServiceEnvironment 也已经过了检查流程，相关应用
@@ -162,7 +162,7 @@ public class JetPollux implements OAxis {
             /*
              * Failure Handler when error occurs
              */
-            .failureHandler(CommonEndurer.create());
+            .failureHandler(EndurerCommon.create());
         return uri;
     }
 }

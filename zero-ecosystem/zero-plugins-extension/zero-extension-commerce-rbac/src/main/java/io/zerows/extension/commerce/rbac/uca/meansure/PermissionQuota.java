@@ -3,13 +3,13 @@ package io.zerows.extension.commerce.rbac.uca.meansure;
 import io.vertx.core.Promise;
 import io.vertx.core.Vertx;
 import io.vertx.ext.healthchecks.Status;
-import io.zerows.epoch.corpus.monitor.meansure.AbstractQuota;
+import io.zerows.corpus.plugins.QuotaBase;
 import io.zerows.extension.commerce.rbac.eon.ScConstant;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
-public class PermissionQuota extends AbstractQuota {
+public class PermissionQuota extends QuotaBase {
     public PermissionQuota(final Vertx vertx) {
         super(vertx);
     }

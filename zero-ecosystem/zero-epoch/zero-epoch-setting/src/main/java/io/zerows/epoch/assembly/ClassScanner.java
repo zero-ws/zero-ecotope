@@ -2,9 +2,9 @@ package io.zerows.epoch.assembly;
 
 import io.r2mo.typed.cc.Cc;
 import io.zerows.component.log.OLog;
+import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
 import org.junit.runner.RunWith;
-import org.osgi.framework.Bundle;
 
 import java.lang.reflect.Modifier;
 import java.util.Set;
@@ -20,7 +20,7 @@ public interface ClassScanner {
         return CCT_SCANNER.pick(ClassScannerBridge::new, ClassScannerBridge.class.getName());
     }
 
-    Set<Class<?>> scan(Bundle bundle);
+    Set<Class<?>> scan(HBundle bundle);
 
     default OLog logger() {
         return Ut.Log.metadata(this.getClass());

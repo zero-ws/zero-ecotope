@@ -11,8 +11,8 @@ import io.zerows.epoch.corpus.io.uca.routing.OAxis;
 import io.zerows.epoch.corpus.model.running.RunServer;
 import io.zerows.epoch.metadata.security.Aegis;
 import io.zerows.plugins.websocket.stomp.socket.ServerWsHandler;
+import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
-import org.osgi.framework.Bundle;
 
 import java.util.Objects;
 
@@ -21,7 +21,7 @@ import java.util.Objects;
  */
 public class AxisStomp implements OAxis {
     @Override
-    public void mount(final RunServer server, final Bundle bundle) {
+    public void mount(final RunServer server, final HBundle bundle) {
         // 配置扩展
         this.mountOption(server);
 

@@ -2,6 +2,7 @@ package io.zerows.spi;
 
 import io.r2mo.spi.SPI;
 import io.zerows.platform.exception._11000Exception404SPINotFound;
+import io.zerows.specification.development.compiled.HBundle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,9 +19,22 @@ public interface HPI extends SPI {
 
     static <T> T findOverwrite(final Class<T> clazz) {
         final List<T> found = SPI.findMany(clazz);
+        return findOverwrite(found, clazz);
+    }
+
+    static <T> T findOverwrite(final Class<T> clazz, final Class<?> classLoader) {
+        final List<T> found = SPI.findMany(clazz, classLoader);
+        return findOverwrite(found, clazz);
+    }
+
+    static HBundle findBundle(final Class<?> clazzLoader) {
+        return findOverwrite(HBundle.class, clazzLoader);
+    }
+
+    private static <T> T findOverwrite(final List<T> found, final Class<T> clazzCls) {
         if (2 < found.size()) {
             log.error("[ ZERO ] 此方法要求 SPI 只能有一个或两个实现类。");
-            throw new _11000Exception404SPINotFound(clazz);
+            throw new _11000Exception404SPINotFound(clazzCls);
         }
         // 只找到唯一的一个实现
         if (1 == found.size()) {
@@ -30,6 +44,6 @@ public interface HPI extends SPI {
         return found.stream()
             .filter(it -> !it.getClass().getPackageName().startsWith("io.zerows"))
             .findFirst()
-            .orElseThrow(() -> new _11000Exception404SPINotFound(clazz));
+            .orElseThrow(() -> new _11000Exception404SPINotFound(clazzCls));
     }
 }

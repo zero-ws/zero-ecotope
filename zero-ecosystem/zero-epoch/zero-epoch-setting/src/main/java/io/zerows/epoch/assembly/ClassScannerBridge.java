@@ -1,6 +1,6 @@
 package io.zerows.epoch.assembly;
 
-import org.osgi.framework.Bundle;
+import io.zerows.specification.development.compiled.HBundle;
 
 import java.util.Objects;
 import java.util.Set;
@@ -12,7 +12,7 @@ import java.util.Set;
 class ClassScannerBridge implements ClassScanner {
 
     @Override
-    public Set<Class<?>> scan(final Bundle bundle) {
+    public Set<Class<?>> scan(final HBundle bundle) {
         final ClassScanner scanner;
         if (Objects.isNull(bundle)) {
             scanner = CCT_SCANNER.pick(ClassScannerCommon::new,

@@ -7,10 +7,10 @@ import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
+import io.zerows.corpus.container.ActionNext;
+import io.zerows.corpus.container.Ambit;
+import io.zerows.corpus.handler.AimAnswer;
 import io.zerows.epoch.basicore.NodeNetwork;
-import io.zerows.epoch.corpus.container.uca.mode.Answer;
-import io.zerows.epoch.corpus.container.uca.reply.ActionNext;
-import io.zerows.epoch.corpus.container.uca.reply.OAmbit;
 import io.zerows.epoch.management.OCacheNode;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.mbse.action.atom.JtUri;
@@ -32,7 +32,7 @@ public class SendAim implements JtAim {
             /*
              * 「Request LifeCycle Cycle」
              */
-            final Envelop request = Answer.previous(context);
+            final Envelop request = AimAnswer.previous(context);
             /*
              * Set id here, consumer will extract api data in worker
              */
@@ -40,7 +40,7 @@ public class SendAim implements JtAim {
             /*
              * Mount the same extension / plug-in in web request
              */
-            OAmbit.of(ActionNext.class).then(context, request).onComplete(res -> {
+            Ambit.of(ActionNext.class).then(context, request).onComplete(res -> {
                 if (res.succeeded()) {
                     final Envelop normalized = res.result();
                     final JsonObject data = normalized.data();
@@ -61,13 +61,13 @@ public class SendAim implements JtAim {
                              * 「Success」
                              */
                             final Message<Envelop> result = handler.result();
-                            Answer.reply(context, result.body(), uri::producesMime);
+                            AimAnswer.reply(context, result.body(), uri::producesMime);
                         } else {
                             /*
                              * 「Failure」
                              */
                             final Envelop error = Envelop.failure(handler.cause());
-                            Answer.reply(context, error);
+                            AimAnswer.reply(context, error);
                         }
                     });
                 } else {

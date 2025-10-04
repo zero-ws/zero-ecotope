@@ -1,11 +1,11 @@
 package io.zerows.epoch.corpus.mbse.uca.mixture;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.platform.metadata.KPivot;
-import io.zerows.epoch.corpus.container.exception._80510Exception404ModelNotFound;
-import io.zerows.epoch.corpus.container.exception._80547Exception409IdentifierConflict;
+import io.zerows.corpus.exception._80510Exception404ModelNotFound;
+import io.zerows.corpus.exception._80547Exception409IdentifierConflict;
 import io.zerows.epoch.corpus.mbse.atom.internal.NormAtom;
 import io.zerows.epoch.corpus.mbse.atom.internal.NormModel;
+import io.zerows.platform.metadata.KPivot;
 import io.zerows.specification.access.app.HAmbient;
 import io.zerows.specification.access.app.HArk;
 import io.zerows.specification.modeling.HAtom;

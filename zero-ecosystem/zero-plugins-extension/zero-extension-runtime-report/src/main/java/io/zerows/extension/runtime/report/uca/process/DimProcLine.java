@@ -5,14 +5,14 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.extension.runtime.report.atom.RDimension;
 import io.zerows.extension.runtime.report.domain.tables.pojos.KpDimension;
-import org.osgi.framework.Bundle;
+import io.zerows.specification.development.compiled.HBundle;
 
 /**
  * @author lang : 2024-10-29
  */
 class DimProcLine extends AbstractDimProc {
 
-    DimProcLine(final Bundle owner) {
+    DimProcLine(final HBundle owner) {
         super(owner);
     }
 

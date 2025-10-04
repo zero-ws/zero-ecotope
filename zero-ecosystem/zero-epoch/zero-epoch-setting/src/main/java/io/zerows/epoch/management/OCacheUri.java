@@ -3,8 +3,8 @@ package io.zerows.epoch.management;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.http.HttpMethod;
 import io.zerows.sdk.management.OCache;
+import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
-import org.osgi.framework.Bundle;
 
 import java.util.Objects;
 import java.util.Set;
@@ -17,8 +17,8 @@ import java.util.stream.Collectors;
 public interface OCacheUri extends OCache<ConcurrentMap<HttpMethod, Set<String>>> {
     Cc<String, OCacheUri> CC_SKELETON = Cc.open();
 
-    static OCacheUri of(final Bundle bundle) {
-        final String cacheKey = Ut.Bnd.keyCache(bundle, OCacheUriAmbiguity.class);
+    static OCacheUri of(final HBundle bundle) {
+        final String cacheKey = HBundle.id(bundle, OCacheUriAmbiguity.class);
         return CC_SKELETON.pick(() -> new OCacheUriAmbiguity(bundle), cacheKey);
     }
 
