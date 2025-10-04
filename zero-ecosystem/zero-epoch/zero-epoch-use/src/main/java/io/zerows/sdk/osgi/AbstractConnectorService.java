@@ -1,11 +1,7 @@
 package io.zerows.sdk.osgi;
 
 import io.zerows.epoch.configuration.MDConfiguration;
-import io.zerows.epoch.metadata.environment.CallbackParameter;
-import io.zerows.epoch.metadata.environment.ContextOfApp;
-import io.zerows.epoch.metadata.environment.ContextOfPlugin;
 import io.zerows.specification.configuration.HSetting;
-import io.zerows.support.Ut;
 import org.apache.felix.dm.Component;
 import org.apache.felix.dm.DependencyManager;
 import org.apache.felix.dm.ServiceDependency;
@@ -54,7 +50,7 @@ public abstract class AbstractConnectorService extends AbstractConnectorBase {
         // 构造 Callback 组件
         final CallbackOfService callbackComponent = this.withComponent(parameter);
         final Component callback = supplier.get().setImplementation(callbackComponent);
-        dm.add(Ut.Bnd.addDependency(callback, dependency, this.buildDependency()));
+        // dm.add(Ut.Bnd.addDependency(callback, dependency, this.buildDependency()));
     }
 
     protected Class<?>[] buildDependency() {

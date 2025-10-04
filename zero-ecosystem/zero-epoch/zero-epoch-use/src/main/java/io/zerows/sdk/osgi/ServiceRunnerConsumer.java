@@ -1,8 +1,6 @@
-package io.zerows.component.execution;
+package io.zerows.sdk.osgi;
 
 import io.vertx.core.Future;
-import io.zerows.epoch.metadata.environment.CallbackParameter;
-import io.zerows.sdk.osgi.ServiceInvocation;
 import io.zerows.support.base.FnBase;
 import org.osgi.framework.Bundle;
 

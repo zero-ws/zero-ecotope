@@ -1,4 +1,4 @@
-package io.zerows.component.execution;
+package io.zerows.sdk.osgi;
 
 import io.r2mo.typed.cc.Cc;
 import org.osgi.framework.Bundle;

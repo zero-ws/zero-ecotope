@@ -26,6 +26,10 @@ class StubVertxService extends AbstractAmbiguity implements StubVertx {
         super(bundle);
     }
 
+    StubVertxService() {
+        super(null);
+    }
+
     @Override
     public synchronized Future<RunVertx> createAsync(final NodeVertx nodeVertx, final boolean clustered) {
         Objects.requireNonNull(nodeVertx);

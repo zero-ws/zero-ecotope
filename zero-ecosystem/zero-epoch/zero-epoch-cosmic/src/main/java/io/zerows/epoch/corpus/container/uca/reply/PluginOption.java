@@ -3,11 +3,10 @@ package io.zerows.epoch.corpus.container.uca.reply;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.application.YmlCore;
-import io.zerows.platform.constant.VName;
 import io.zerows.epoch.metadata.JComponent;
 import io.zerows.management.OZeroStore;
+import io.zerows.platform.constant.VName;
 import io.zerows.support.Ut;
-import org.osgi.framework.Bundle;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
@@ -32,7 +31,7 @@ public class PluginOption {
     private final ConcurrentMap<String, JComponent> configMap = new ConcurrentHashMap<>();
     private final boolean isEnabled;
 
-    private PluginOption(final Bundle owner) {
+    private PluginOption() {
         // 是否配置了 extension 节点
         this.isEnabled = OZeroStore.is(YmlCore.extension.__KEY);
         if (!this.isEnabled) {
@@ -52,9 +51,8 @@ public class PluginOption {
         });
     }
 
-    public static PluginOption of(final Bundle owner) {
-        final String cacheKey = Ut.Bnd.keyCache(owner, PluginOption.class);
-        return CC_SKELETON.pick(() -> new PluginOption(owner), cacheKey);
+    public static PluginOption of() {
+        return CC_SKELETON.pick(PluginOption::new, PluginOption.class.getName());
     }
 
     public boolean isEnabled() {

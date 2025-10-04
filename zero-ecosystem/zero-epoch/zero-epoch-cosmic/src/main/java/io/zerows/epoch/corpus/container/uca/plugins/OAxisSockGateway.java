@@ -1,8 +1,8 @@
 package io.zerows.epoch.corpus.container.uca.plugins;
 
-import io.zerows.support.Ut;
 import io.zerows.epoch.corpus.io.management.AxisSockFactory;
 import io.zerows.epoch.corpus.io.uca.routing.OAxis;
+import io.zerows.spi.HPI;
 import org.osgi.framework.Bundle;
 
 import java.util.Objects;
@@ -16,7 +16,7 @@ public class OAxisSockGateway implements OAxisGateway {
 
     @Override
     public OAxis getAxis(final Bundle owner) {
-        final AxisSockFactory factory = Ut.Bnd.serviceOr(AxisSockFactory.class, owner);
+        final AxisSockFactory factory = HPI.findOverwrite(AxisSockFactory.class);
         if (Objects.isNull(factory)) {
             // 没有部署，无法找到工厂类
             if (IS_LOG.getAndSet(Boolean.FALSE)) {

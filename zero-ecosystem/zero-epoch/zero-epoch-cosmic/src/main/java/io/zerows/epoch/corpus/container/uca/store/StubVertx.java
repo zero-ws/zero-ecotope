@@ -7,7 +7,6 @@ import io.zerows.component.log.OLog;
 import io.zerows.epoch.configuration.NodeVertx;
 import io.zerows.epoch.corpus.model.running.RunVertx;
 import io.zerows.support.Ut;
-import org.osgi.framework.Bundle;
 
 /**
  * Vertx实例管理器，有可能跨越多个集群而存在，所以此处用来执行 Vertx 实例的整体管理流程，可同时支持两种环境
@@ -34,13 +33,8 @@ public interface StubVertx {
 
     Cc<String, StubVertx> CC_SKELETON = Cc.open();
 
-    static StubVertx of(final Bundle bundle) {
-        final String cacheKey = Ut.Bnd.keyCache(bundle, StubVertxService.class);
-        return CC_SKELETON.pick(() -> new StubVertxService(bundle), cacheKey);
-    }
-
     static StubVertx of() {
-        return of(null);
+        return CC_SKELETON.pick(StubVertxService::new, StubVertxService.class.getName());
     }
 
     // --------------------- 行为专用 ---------------------

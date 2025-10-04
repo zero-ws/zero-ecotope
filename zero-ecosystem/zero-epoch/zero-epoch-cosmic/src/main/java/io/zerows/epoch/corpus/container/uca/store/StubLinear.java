@@ -9,7 +9,6 @@ import io.zerows.epoch.corpus.container.verticle.ZeroHttpAgent;
 import io.zerows.epoch.corpus.container.verticle.ZeroHttpWorker;
 import io.zerows.epoch.corpus.model.running.RunVertx;
 import io.zerows.epoch.management.OCacheClass;
-import io.zerows.platform.constant.VString;
 import io.zerows.platform.enums.VertxComponent;
 import io.zerows.platform.exception._60050Exception501NotSupport;
 import io.zerows.support.Ut;
@@ -47,18 +46,12 @@ public interface StubLinear {
     };
 
     static StubLinear of(final VertxComponent type) {
-        return of(null, type);
-    }
-
-    static StubLinear of(final Bundle bundle, final VertxComponent type) {
-        final String cacheKey = Ut.Bnd.keyCache(bundle, StubLinear.class);
-        final String cacheLinear = type.name() + VString.SLASH + cacheKey;
         return StubLinear.CC_SKELETON.pick(() -> {
-            Ut.Log.vertx(StubLinear.class).info("StubLinear will be initialized by type/key = {}/{}", type, cacheKey);
+            Ut.Log.vertx(StubLinear.class).info("StubLinear will be initialized by type = {}", type);
             final Function<Bundle, StubLinear> constructorFn = RUNNER.get(type);
             Objects.requireNonNull(constructorFn);
-            return constructorFn.apply(bundle);
-        }, cacheLinear);
+            return constructorFn.apply(null);
+        }, type.name());
     }
 
     // --------------------- 启动执行 ---------------------

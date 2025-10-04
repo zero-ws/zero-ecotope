@@ -1,4 +1,4 @@
-package io.zerows.epoch.metadata.environment;
+package io.zerows.sdk.osgi;
 
 import io.zerows.platform.enums.EmService;
 import io.zerows.specification.configuration.HBoot;

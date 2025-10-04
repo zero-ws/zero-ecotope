@@ -40,7 +40,7 @@ public class LauncherZero implements HLauncher<Vertx> {
     public <T extends HConfig> void start(final HConfig.HOn<T> on, final Consumer<Vertx> server) {
         final NodeNetwork network = OCacheNode.of().network();
 
-        SERVICE.startAsync(null, network).onComplete(cached -> {
+        SERVICE.startAsync(network).onComplete(cached -> {
             if (cached.failed()) {
                 Ut.Log.boot(this.getClass()).fatal(cached.cause());
                 return;

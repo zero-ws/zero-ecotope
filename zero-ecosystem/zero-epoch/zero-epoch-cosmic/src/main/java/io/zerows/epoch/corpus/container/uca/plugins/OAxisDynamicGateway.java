@@ -1,8 +1,8 @@
 package io.zerows.epoch.corpus.container.uca.plugins;
 
-import io.zerows.support.Ut;
 import io.zerows.epoch.corpus.io.management.AxisDynamicFactory;
 import io.zerows.epoch.corpus.io.uca.routing.OAxis;
+import io.zerows.spi.HPI;
 import org.osgi.framework.Bundle;
 
 import java.util.Objects;
@@ -13,7 +13,7 @@ import java.util.Objects;
 public class OAxisDynamicGateway implements OAxisGateway {
     @Override
     public OAxis getAxis(final Bundle owner) {
-        final AxisDynamicFactory factory = Ut.Bnd.serviceOr(AxisDynamicFactory.class, owner);
+        final AxisDynamicFactory factory = HPI.findOverwrite(AxisDynamicFactory.class);
         if (Objects.isNull(factory)) {
             // 没有部署，无法找到工厂类
             return null;

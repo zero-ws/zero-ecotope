@@ -11,7 +11,6 @@ import io.zerows.epoch.corpus.container.uca.store.StubVertx;
 import io.zerows.epoch.corpus.model.running.RunVertx;
 import io.zerows.platform.enums.VertxComponent;
 import io.zerows.support.Ut;
-import org.osgi.framework.Bundle;
 
 /**
  * @author lang : 2024-04-30
@@ -29,14 +28,12 @@ public interface EnergyVertx {
      * </code></pre>
      * 但是此处的 {@link StubVertx} 不对外，仅用于 Bundle 内部管理，外部只能通过当前服务获取对应的 {@link StubVertx} 引用
      *
-     * @param bundle 安装的 Bundle
-     *
      * @return {@link StubVertx}
      */
-    StubVertx ofVertx(Bundle bundle);
+    StubVertx ofVertx();
 
 
-    StubLinear ofLinear(Bundle bundle, VertxComponent type);
+    StubLinear ofLinear(VertxComponent type);
 
     /**
      * 网络启动专用，用于启动如下基础结构（特殊方法，通常这个接口不带此方法）
@@ -57,12 +54,11 @@ public interface EnergyVertx {
      * </code></pre>
      * 此处传入的配置实例是 {@link NodeNetwork}，所以启动的最终 {@link Vertx} 实例是多个 x N，所以此处
      *
-     * @param bundle  档案安装的 Bundle
      * @param network {@link NodeNetwork}
      *
      * @return {@link StoreVertx}
      */
-    Future<StoreVertx> startAsync(Bundle bundle, NodeNetwork network);
+    Future<StoreVertx> startAsync(NodeNetwork network);
 
     default OLog logger() {
         return Ut.Log.vertx(this.getClass());

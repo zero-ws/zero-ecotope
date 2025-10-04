@@ -9,9 +9,7 @@ import io.zerows.epoch.corpus.container.uca.store.StubLinear;
 import io.zerows.epoch.corpus.container.uca.store.StubVertx;
 import io.zerows.epoch.corpus.model.running.RunVertx;
 import io.zerows.platform.enums.VertxComponent;
-import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
-import org.osgi.framework.Bundle;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -22,19 +20,17 @@ import java.util.concurrent.ConcurrentMap;
 public class EnergyVertxService implements EnergyVertx {
 
     @Override
-    public synchronized StubVertx ofVertx(final Bundle bundle) {
-        final String cacheKey = Ut.Bnd.keyCache(bundle, EnergyVertxService.class);
-        this.logger().info("StubVertx service fetched by key = {}", cacheKey);
-        return StubVertx.of(bundle);
+    public synchronized StubVertx ofVertx() {
+        return StubVertx.of();
     }
 
     @Override
-    public synchronized StubLinear ofLinear(final Bundle bundle, final VertxComponent type) {
-        return StubLinear.of(bundle, type);
+    public synchronized StubLinear ofLinear(final VertxComponent type) {
+        return StubLinear.of(type);
     }
 
     @Override
-    public Future<StoreVertx> startAsync(final Bundle bundle, final NodeNetwork network) {
+    public Future<StoreVertx> startAsync(final NodeNetwork network) {
         // 外层传入 NodeNetwork
         final ClusterOptions clusterOptions = network.cluster();
         final ConcurrentMap<String, NodeVertx> vertxOptions = network.vertxOptions();
@@ -45,11 +41,11 @@ public class EnergyVertxService implements EnergyVertx {
          * name-02 = VertxInstance
          */
         final ConcurrentMap<String, Future<RunVertx>> futureMap = new ConcurrentHashMap<>();
-        final StubVertx service = this.ofVertx(bundle);
+        final StubVertx service = this.ofVertx();
         vertxOptions.forEach((name, nodeVertx) ->
             futureMap.put(name, service.createAsync(nodeVertx, clusterOptions.isEnabled())));
         return Fx.combineM(futureMap)
             // 此处返回谁都可以，只是单纯为了其他位置可重用
-            .compose(nil -> Future.succeededFuture(StoreVertx.of(bundle)));
+            .compose(nil -> Future.succeededFuture(StoreVertx.of()));
     }
 }

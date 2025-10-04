@@ -1,6 +1,5 @@
-package io.zerows.component.execution;
+package io.zerows.sdk.osgi;
 
-import io.zerows.epoch.metadata.environment.CallbackParameter;
 import org.osgi.framework.Bundle;
 
 /**

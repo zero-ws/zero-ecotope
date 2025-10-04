@@ -1,6 +1,5 @@
-package io.zerows.epoch.metadata.environment;
+package io.zerows.sdk.osgi;
 
-import io.zerows.sdk.osgi.ServiceContext;
 import org.osgi.framework.Bundle;
 
 import java.util.Objects;

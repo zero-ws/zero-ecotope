@@ -8,8 +8,6 @@ import io.zerows.epoch.corpus.io.plugins.extension.PlugRegion;
 import io.zerows.epoch.metadata.JComponent;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.support.Ut;
-import org.osgi.framework.Bundle;
-import org.osgi.framework.FrameworkUtil;
 
 import java.util.Objects;
 
@@ -21,8 +19,7 @@ public class AmbitRegionAfter implements OAmbit {
     private final PluginOption option;
 
     public AmbitRegionAfter() {
-        final Bundle owner = FrameworkUtil.getBundle(this.getClass());
-        this.option = PluginOption.of(owner);
+        this.option = PluginOption.of();
     }
 
     @Override

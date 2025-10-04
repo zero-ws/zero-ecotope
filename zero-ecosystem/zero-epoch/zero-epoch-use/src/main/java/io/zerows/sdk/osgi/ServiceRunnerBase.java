@@ -1,10 +1,7 @@
-package io.zerows.component.execution;
+package io.zerows.sdk.osgi;
 
 import io.vertx.core.AsyncResult;
-import io.zerows.sdk.osgi.EnergyService;
 import io.zerows.support.Ut;
-import io.zerows.sdk.osgi.ServiceContext;
-import io.zerows.sdk.osgi.ServiceInvocation;
 import org.osgi.framework.Bundle;
 
 import java.util.HashSet;
