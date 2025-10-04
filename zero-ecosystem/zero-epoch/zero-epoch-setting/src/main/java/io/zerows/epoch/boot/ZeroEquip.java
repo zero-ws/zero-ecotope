@@ -1,18 +1,18 @@
-package io.zerows.management;
+package io.zerows.epoch.boot;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.application.YmlCore;
+import io.zerows.epoch.configuration.ZeroSetting;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KPlugin;
-import io.zerows.support.Ut;
-import io.zerows.sdk.osgi.AbstractAmbiguity;
 import io.zerows.platform.constant.VBoot;
 import io.zerows.platform.constant.VPath;
 import io.zerows.platform.constant.VString;
-import io.zerows.platform.metadata.KSetting;
+import io.zerows.sdk.osgi.AbstractAmbiguity;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HSetting;
 import io.zerows.spi.HEquip;
+import io.zerows.support.Ut;
 import org.osgi.framework.Bundle;
 
 import java.util.Arrays;
@@ -23,22 +23,22 @@ import java.util.stream.Collectors;
 /**
  * @author lang : 2023-05-30
  */
-public class OZeroEquip extends AbstractAmbiguity implements HEquip {
+public class ZeroEquip extends AbstractAmbiguity implements HEquip {
 
-    private OZeroEquip() {
+    private ZeroEquip() {
         super(null);
     }
 
-    private OZeroEquip(final Bundle bundle) {
+    private ZeroEquip(final Bundle bundle) {
         super(bundle);
     }
 
-    public static OZeroEquip of(final Bundle bundle) {
-        return Objects.isNull(bundle) ? new OZeroEquip() : new OZeroEquip(bundle);
+    public static ZeroEquip of(final Bundle bundle) {
+        return Objects.isNull(bundle) ? new ZeroEquip() : new ZeroEquip(bundle);
     }
 
     /**
-     * @return {@link KSetting}
+     * @return {@link ZeroSetting}
      */
     @Override
     public HSetting initialize() {
@@ -53,7 +53,7 @@ public class OZeroEquip extends AbstractAmbiguity implements HEquip {
          *
          */
         final JsonObject configuration = Ut.Bnd.ioCombineJ(this.nameZero(null), this.caller()); // ZeroIo.read(null, true);
-        final HSetting setting = KSetting.of();
+        final HSetting setting = ZeroSetting.of();
         final JsonObject configZero = Ut.valueJObject(configuration, KName.Internal.ZERO);
         setting.container(HConfig.of(configZero));
         final String extension = Ut.valueString(configZero, YmlCore.LIME);

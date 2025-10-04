@@ -8,7 +8,7 @@ import io.vertx.ext.web.RoutingContext;
 import io.zerows.component.log.Annal;
 import io.zerows.epoch.annotations.Codex;
 import io.zerows.epoch.assembly.DiProxyInstance;
-import io.zerows.epoch.basicore.Event;
+import io.zerows.epoch.basicore.ActorEvent;
 import io.zerows.epoch.corpus.container.exception._60052Exception411ContentLength;
 import io.zerows.epoch.corpus.container.uca.reply.ActionNext;
 import io.zerows.epoch.corpus.container.uca.reply.OAmbit;
@@ -43,7 +43,7 @@ class Flower {
 
     static void replyError(final RoutingContext context,
                            final WebException error,
-                           final Event event) {
+                           final ActorEvent event) {
         final Envelop envelop = Envelop.failure(error);
         Answer.reply(context, envelop, event);
     }
@@ -115,7 +115,7 @@ class Flower {
         final ValidatorEntry verifier,
         final WrapRequest wrapRequest,
         final Object[] args) {
-        final Event event = wrapRequest.getEvent();
+        final ActorEvent event = wrapRequest.getEvent();
         final Object proxy = event.getProxy();
         final Method method = event.getAction();
         WebException error = null;

@@ -1,6 +1,6 @@
 package io.zerows.epoch.corpus.io.atom;
 
-import io.zerows.epoch.basicore.Event;
+import io.zerows.epoch.basicore.ActorEvent;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.corpus.io.uca.request.argument.Filler;
 import io.zerows.support.Ut;
@@ -19,12 +19,12 @@ import java.util.concurrent.ConcurrentMap;
 public class WrapRequest implements Serializable {
 
     private final List<String> paramNames = new ArrayList<>();
-    private final Event event;
+    private final ActorEvent event;
     private final List<Class<? extends Annotation>> paramAnnos = new ArrayList<>();
     private List<Class<?>> paramTypes = new ArrayList<>();
     private List<Object> paramValues = new ArrayList<>();
 
-    private WrapRequest(final Event event) {
+    private WrapRequest(final ActorEvent event) {
         // 1. Extract types for parameters
         this.initTypes(event.getAction());
         // 2. Extract annotation for parameters
@@ -33,7 +33,7 @@ public class WrapRequest implements Serializable {
         this.event = event;
     }
 
-    public static WrapRequest create(final Event event) {
+    public static WrapRequest create(final ActorEvent event) {
         return new WrapRequest(event);
     }
 
@@ -92,7 +92,7 @@ public class WrapRequest implements Serializable {
         this.paramValues = Arrays.asList(parameters);
     }
 
-    public Event getEvent() {
+    public ActorEvent getEvent() {
         return this.event;
     }
 }

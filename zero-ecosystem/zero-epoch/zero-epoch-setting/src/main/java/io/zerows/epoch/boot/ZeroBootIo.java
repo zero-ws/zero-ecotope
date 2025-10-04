@@ -11,7 +11,7 @@ import java.util.Objects;
 /**
  * @author lang : 2023-05-30
  */
-public class BootIoVertx implements BootIo {
+public class ZeroBootIo implements BootIo {
 
     @Override
     @SuppressWarnings("unchecked")
@@ -21,7 +21,7 @@ public class BootIoVertx implements BootIo {
          * 1. Micro：微服务模式
          * 2. Zero：单机模式
          */
-        final BootStore store = BootStore.singleton();
+        final ZeroStation store = ZeroStation.singleton();
         final Class<?> launcher = store.boot().launcher();
         Objects.requireNonNull(launcher);
         return (HLauncher<T>) SourceReflect.singleton(launcher);
@@ -30,7 +30,7 @@ public class BootIoVertx implements BootIo {
     @Override
     public HEnergy energy(final Class<?> target, final String[] args) {
         // 内置实现配置，Vertx直接从本身实现中处理
-        final BootStore store = BootStore.singleton(target, args);
+        final ZeroStation store = ZeroStation.singleton(target, args);
         // 内置绑定
         final HBoot boot = store.boot();
         return boot.energy();

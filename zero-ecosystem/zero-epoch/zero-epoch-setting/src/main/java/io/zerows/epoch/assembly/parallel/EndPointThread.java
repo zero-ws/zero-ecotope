@@ -3,7 +3,7 @@ package io.zerows.epoch.assembly.parallel;
 import io.zerows.component.log.Annal;
 import io.zerows.epoch.assembly.Extractor;
 import io.zerows.epoch.assembly.ExtractorEvent;
-import io.zerows.epoch.basicore.Event;
+import io.zerows.epoch.basicore.ActorEvent;
 import io.zerows.support.Ut;
 
 import java.util.HashSet;
@@ -15,9 +15,9 @@ public class EndPointThread extends Thread {
         "will be mounted to routing system.";
     private static final Annal LOGGER = Annal.get(EndPointThread.class);
 
-    private final Set<Event> events = new HashSet<>();
+    private final Set<ActorEvent> events = new HashSet<>();
 
-    private final transient Extractor<Set<Event>> extractor =
+    private final transient Extractor<Set<ActorEvent>> extractor =
         Ut.instance(ExtractorEvent.class);
 
     private final transient Class<?> reference;
@@ -36,7 +36,7 @@ public class EndPointThread extends Thread {
         }
     }
 
-    public Set<Event> getEvents() {
+    public Set<ActorEvent> getEvents() {
         return this.events;
     }
 }

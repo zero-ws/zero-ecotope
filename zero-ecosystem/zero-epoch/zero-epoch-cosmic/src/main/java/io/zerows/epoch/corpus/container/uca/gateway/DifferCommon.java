@@ -1,7 +1,7 @@
 package io.zerows.epoch.corpus.container.uca.gateway;
 
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.epoch.basicore.Event;
+import io.zerows.epoch.basicore.ActorEvent;
 import io.zerows.epoch.corpus.container.uca.mode.AimPing;
 import io.zerows.epoch.corpus.container.uca.mode.AimSync;
 import io.zerows.epoch.corpus.io.zdk.Aim;
@@ -24,7 +24,7 @@ class DifferCommon implements Differ<RoutingContext> {
     }
 
     @Override
-    public Aim<RoutingContext> build(final Event event) {
+    public Aim<RoutingContext> build(final ActorEvent event) {
         final Method method = event.getAction();
         final Class<?> returnType = method.getReturnType();
         Aim<RoutingContext> aim = null;

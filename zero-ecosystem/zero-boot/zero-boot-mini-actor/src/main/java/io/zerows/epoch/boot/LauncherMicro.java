@@ -17,7 +17,7 @@ import java.util.function.Consumer;
  * @author lang : 2023-05-30
  */
 public class LauncherMicro implements HLauncher<Vertx> {
-    private static final BootStore STORE = BootStore.singleton();
+    private static final ZeroStation STORE = ZeroStation.singleton();
 
     private transient final HLauncher<Vertx> zero;
 

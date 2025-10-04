@@ -5,8 +5,8 @@ import io.reactivex.rxjava3.core.Observable;
 import io.zerows.component.log.Annal;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.assembly.exception._40012Exception500AddressWrong;
+import io.zerows.epoch.basicore.ActorReceipt;
 import io.zerows.epoch.basicore.JointAction;
-import io.zerows.epoch.basicore.Receipt;
 import io.zerows.epoch.boot.Anno;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.management.OCacheClass;
@@ -57,7 +57,7 @@ public class BridgeForAeon {
      * Aeon / Zero @Address 处理
      * 1. Method 转换成 Receipt 对象
      */
-    public static Receipt receipt(final Method method) {
+    public static ActorReceipt receipt(final Method method) {
         // 1. Scan whole Endpoints
         final Class<?> clazz = method.getDeclaringClass();
         final Annotation annotation = method.getDeclaredAnnotation(Address.class);
@@ -71,7 +71,7 @@ public class BridgeForAeon {
         final Method replaced = action.get(address);
 
 
-        final Receipt receipt = new Receipt();
+        final ActorReceipt receipt = new ActorReceipt();
         receipt.setAddress(address);
         if (Objects.isNull(replaced)) {
             // Zero Workflow

@@ -2,8 +2,8 @@ package io.zerows.epoch.corpus.container.store.uri;
 
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.basicore.ActorComponent;
-import io.zerows.epoch.basicore.Event;
-import io.zerows.epoch.basicore.Receipt;
+import io.zerows.epoch.basicore.ActorEvent;
+import io.zerows.epoch.basicore.ActorReceipt;
 import io.zerows.epoch.management.OCacheActor;
 import io.zerows.support.Ut;
 
@@ -30,13 +30,13 @@ class UriStore {
          * Initialize data here.
          */
         final ActorComponent actor = OCacheActor.entireValue();
-        final Set<Receipt> receipts = actor.getReceipts();
-        final ConcurrentMap<String, Receipt> receiptMap = Ut.elementMap(new ArrayList<>(receipts), Receipt::getAddress);
-        final Set<Event> events = actor.getEvents();
+        final Set<ActorReceipt> receipts = actor.getReceipts();
+        final ConcurrentMap<String, ActorReceipt> receiptMap = Ut.elementMap(new ArrayList<>(receipts), ActorReceipt::getAddress);
+        final Set<ActorEvent> events = actor.getEvents();
         /*
          * UriMeta building
          */
-        for (final Event event : events) {
+        for (final ActorEvent event : events) {
             /*
              * Uri Meta
              */
@@ -63,7 +63,7 @@ class UriStore {
                     /*
                      * Worker Build
                      */
-                    final Receipt receipt = receiptMap.get(address);
+                    final ActorReceipt receipt = receiptMap.get(address);
                     uriMeta.setAddress(address);
                     uriMeta.setWorkerMethod(receipt.getMethod());
                 }

@@ -9,9 +9,9 @@ import io.zerows.epoch.assembly.InquirerForIpc;
 import io.zerows.epoch.assembly.InquirerForQaS;
 import io.zerows.epoch.assembly.InquirerForReceipt;
 import io.zerows.epoch.basicore.ActorComponent;
-import io.zerows.epoch.basicore.Event;
+import io.zerows.epoch.basicore.ActorEvent;
+import io.zerows.epoch.basicore.ActorReceipt;
 import io.zerows.epoch.basicore.JointAction;
-import io.zerows.epoch.basicore.Receipt;
 import io.zerows.epoch.metadata.environment.KSwitcher;
 import io.zerows.platform.enums.EmAction;
 import io.zerows.platform.enums.VertxComponent;
@@ -90,8 +90,8 @@ public class ORepositoryMeta extends AbstractAmbiguity implements ORepository {
             // @EndPoint -> Event
             () -> {
                 if (!classesEndpoint.isEmpty()) {
-                    final Inquirer<Set<Event>> event = Ut.singleton(InquirerForEvent.class);
-                    final Set<Event> events = event.scan(classesEndpoint);
+                    final Inquirer<Set<ActorEvent>> event = Ut.singleton(InquirerForEvent.class);
+                    final Set<ActorEvent> events = event.scan(classesEndpoint);
                     actorComponent.addEvents(events);
 
 
@@ -101,13 +101,13 @@ public class ORepositoryMeta extends AbstractAmbiguity implements ORepository {
             },
             // @WebFilter -> JSR340
             () -> {
-                final Inquirer<ConcurrentMap<String, Set<Event>>> filters = Ut.singleton(InquirerForFilter.class);
+                final Inquirer<ConcurrentMap<String, Set<ActorEvent>>> filters = Ut.singleton(InquirerForFilter.class);
                 actorComponent.addFilters(filters.scan(classAll));
             },
             // @Queue/@QaS -> Receipt
             () -> {
                 if (!classQueue.isEmpty()) {
-                    final Inquirer<Set<Receipt>> receipt = Ut.singleton(InquirerForReceipt.class);
+                    final Inquirer<Set<ActorReceipt>> receipt = Ut.singleton(InquirerForReceipt.class);
                     actorComponent.addReceipts(receipt.scan(classQueue));
                 }
             },

@@ -1,16 +1,16 @@
-package io.zerows.platform.metadata;
+package io.zerows.epoch.configuration;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.constant.VBoot;
 import io.zerows.platform.enums.EmApp;
-import io.zerows.support.base.UtBase;
 import io.zerows.specification.configuration.HBoot;
 import io.zerows.specification.configuration.HEnergy;
+import io.zerows.support.base.UtBase;
 
 /**
  * @author lang : 2023-05-31
  */
-public class KBoot implements HBoot {
+public class ZeroBoot implements HBoot {
     private final HEnergy energy;
     private final Class<?> launcherCls;
     private Class<?> mainClass;
@@ -18,13 +18,13 @@ public class KBoot implements HBoot {
 
     private EmApp.Type type;
 
-    private KBoot(final JsonObject bootJ) {
+    private ZeroBoot(final JsonObject bootJ) {
         this.launcherCls = UtBase.valueC(bootJ, VBoot.LAUNCHER);
-        this.energy = KEnergy.of(bootJ);
+        this.energy = ZeroEnergy.of(bootJ);
     }
 
     public static HBoot of(final JsonObject bootJ) {
-        return new KBoot(bootJ);
+        return new ZeroBoot(bootJ);
     }
 
     @Override

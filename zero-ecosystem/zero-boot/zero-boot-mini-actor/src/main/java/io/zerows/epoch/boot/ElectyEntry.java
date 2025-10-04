@@ -68,7 +68,7 @@ class ElectyEntry {
          * 2. (PlugIn）初始化之前
          *    执行模块初始化
          */
-        final BootStore store = BootStore.singleton();
+        final ZeroStation store = ZeroStation.singleton();
         if (!store.isInit()) {
             LogCloud.LOG.Env.info(ElectyEnroll.class, MSG_EXT_CONFIGURATION, config);
             return Future.succeededFuture(Boolean.TRUE);

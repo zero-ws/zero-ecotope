@@ -2,7 +2,7 @@ package io.zerows.epoch.corpus.model.running;
 
 import io.vertx.ext.web.Route;
 import io.vertx.ext.web.Router;
-import io.zerows.epoch.basicore.Event;
+import io.zerows.epoch.basicore.ActorEvent;
 import io.zerows.platform.constant.VString;
 
 import java.io.Serializable;
@@ -20,7 +20,7 @@ public class RunRoute implements Serializable {
     private final RunServer server;
     private final RunThread thread;
     private final Route route;
-    private Event event;
+    private ActorEvent event;
     private String key;
 
     public RunRoute(final RunServer server) {
@@ -32,7 +32,7 @@ public class RunRoute implements Serializable {
         this.route = router.route();
     }
 
-    public RunRoute refEvent(final Event event) {
+    public RunRoute refEvent(final ActorEvent event) {
         Objects.requireNonNull(event);
         this.event = event;
         this.key = event.getMethod().name() + VString.SLASH + event.getPath();
@@ -47,7 +47,7 @@ public class RunRoute implements Serializable {
         return this.key;
     }
 
-    public Event refEvent() {
+    public ActorEvent refEvent() {
         return this.event;
     }
 

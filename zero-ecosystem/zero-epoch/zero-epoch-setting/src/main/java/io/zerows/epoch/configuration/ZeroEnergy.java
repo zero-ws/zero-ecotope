@@ -1,12 +1,12 @@
-package io.zerows.platform.metadata;
+package io.zerows.epoch.configuration;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.constant.VBoot;
 import io.zerows.platform.enums.EmApp;
 import io.zerows.platform.enums.EmBoot;
-import io.zerows.support.base.UtBase;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HEnergy;
+import io.zerows.support.base.UtBase;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
@@ -17,13 +17,13 @@ import java.util.concurrent.ConcurrentMap;
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
-public class KEnergy implements HEnergy {
+public class ZeroEnergy implements HEnergy {
     private final ConcurrentMap<EmBoot.LifeCycle, Class<?>> component = new ConcurrentHashMap<>();
     private final ConcurrentMap<Class<?>, HConfig> config = new ConcurrentHashMap<>();
     private final ConcurrentMap<EmApp.Mode, Class<?>> connect = new ConcurrentHashMap<>();
     private Class<?> rad;
 
-    private KEnergy() {
+    private ZeroEnergy() {
     }
 
     /**
@@ -46,7 +46,7 @@ public class KEnergy implements HEnergy {
      * @return {@link HEnergy} 能量配置
      */
     public static HEnergy of(final JsonObject config) {
-        final KEnergy energy = new KEnergy();
+        final ZeroEnergy energy = new ZeroEnergy();
         final JsonObject component = UtBase.valueJObject(config, VBoot.COMPONENT);
         final JsonObject configJ = UtBase.valueJObject(config, VBoot.CONFIG);
         /*

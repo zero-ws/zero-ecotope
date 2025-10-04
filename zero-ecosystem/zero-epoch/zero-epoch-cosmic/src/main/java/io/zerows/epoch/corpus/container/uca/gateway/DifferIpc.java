@@ -2,7 +2,7 @@ package io.zerows.epoch.corpus.container.uca.gateway;
 
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.component.log.Annal;
-import io.zerows.epoch.basicore.Event;
+import io.zerows.epoch.basicore.ActorEvent;
 import io.zerows.epoch.corpus.container.exception._40013Exception500ReturnType;
 import io.zerows.epoch.corpus.container.uca.mode.AimIpc;
 import io.zerows.epoch.corpus.io.zdk.Aim;
@@ -22,7 +22,7 @@ class DifferIpc implements Differ<RoutingContext> {
     }
 
     @Override
-    public Aim<RoutingContext> build(final Event event) {
+    public Aim<RoutingContext> build(final ActorEvent event) {
         final Method method = event.getAction();
         final Class<?> returnType = method.getReturnType();
         // Rpc Mode only

@@ -3,7 +3,7 @@ package io.zerows.epoch.corpus.web.validation;
 import io.reactivex.rxjava3.core.Observable;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.basicore.Event;
+import io.zerows.epoch.basicore.ActorEvent;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.corpus.io.annotations.BodyParam;
 import io.zerows.epoch.corpus.io.atom.WrapRequest;
@@ -130,7 +130,7 @@ public class ValidatorEntry {
         return rulers;
     }
 
-    private String buildKey(final Event event) {
+    private String buildKey(final ActorEvent event) {
         String prefix = event.getPath().trim().substring(1);
         prefix = prefix.replace(VString.SLASH, VString.DOT);
         prefix = prefix.replace(VString.COLON, VString.DOLLAR);

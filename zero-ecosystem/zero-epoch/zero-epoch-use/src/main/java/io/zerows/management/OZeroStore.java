@@ -3,10 +3,9 @@ package io.zerows.management;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.Log4JAnnal;
 import io.zerows.epoch.application.YmlCore;
-import io.zerows.support.Ut;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HSetting;
-import io.zerows.spi.HEquip;
+import io.zerows.support.Ut;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
@@ -17,18 +16,10 @@ import java.util.function.Supplier;
  * @author lang : 2023-05-30
  */
 public class OZeroStore {
-    private static final HSetting SETTING;
+    private static HSetting SETTING;
     private static final ConcurrentMap<String, Class<?>> INJECTION = new ConcurrentHashMap<>();
 
     static {
-        {
-            // 设置读取
-            final HEquip equip = OZeroEquip.of(null);
-            SETTING = equip.initialize();
-
-            final OCacheFailure failure = OCacheFailure.of(null);
-            failure.configure(SETTING);
-        }
         /*
          * vertx-inject.yml
          */

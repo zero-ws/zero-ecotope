@@ -2,7 +2,7 @@ package io.zerows.epoch.corpus.container.uca.routing;
 
 import io.r2mo.function.Fn;
 import io.zerows.component.log.Annal;
-import io.zerows.epoch.basicore.Event;
+import io.zerows.epoch.basicore.ActorEvent;
 import io.zerows.epoch.corpus.container.exception._40008Exception500EventActionNone;
 import io.zerows.epoch.corpus.container.exception._40029Exception500AnnotationRepeat;
 import io.zerows.epoch.corpus.container.exception._40030Exception500ParamAnnotation;
@@ -24,7 +24,7 @@ public class Verifier {
     private static final Annal LOGGER = Annal.get(Verifier.class);
 
     @SuppressWarnings("all")
-    public static void verify(final Event event) {
+    public static void verify(final ActorEvent event) {
         final Method method = event.getAction();
         Fn.jvmKo(Objects.isNull(method), _40008Exception500EventActionNone.class, event);
         /* Specification **/

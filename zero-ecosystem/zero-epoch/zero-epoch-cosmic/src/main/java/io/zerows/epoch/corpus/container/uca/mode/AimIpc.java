@@ -5,14 +5,14 @@ import io.vertx.core.Handler;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.component.uddi.Uddi;
 import io.zerows.component.uddi.UddiClient;
-import io.zerows.epoch.basicore.Event;
+import io.zerows.epoch.basicore.ActorEvent;
 import io.zerows.epoch.corpus.io.zdk.Aim;
 import io.zerows.epoch.web.Envelop;
 
 public class AimIpc extends AbstractAim implements Aim<RoutingContext> {
 
     @Override
-    public Handler<RoutingContext> attack(final Event event) {
+    public Handler<RoutingContext> attack(final ActorEvent event) {
         return (context) -> this.exec(() -> {
             /*
              * Build TypedArgument by java reflection metadata definition

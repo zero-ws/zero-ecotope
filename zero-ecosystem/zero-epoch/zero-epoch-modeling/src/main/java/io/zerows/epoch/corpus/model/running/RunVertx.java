@@ -2,7 +2,7 @@ package io.zerows.epoch.corpus.model.running;
 
 import io.vertx.core.Vertx;
 import io.vertx.ext.web.Route;
-import io.zerows.epoch.basicore.Event;
+import io.zerows.epoch.basicore.ActorEvent;
 import io.zerows.epoch.configuration.NodeVertx;
 import io.zerows.epoch.sdk.modeling.running.RunInstance;
 import io.zerows.specification.configuration.HSetting;
@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
  *        - router     =                            DoRouter          x 1
  *          - path     =                                              x N
  *            - route  =                            {@link Route}     x ( HTTP Method counter )
- *              event  =                            {@link Event}
+ *              event  =                            {@link ActorEvent}
  *      - Vertx-02
  * </code></pre>
  *

@@ -3,7 +3,7 @@ package io.zerows.epoch.assembly;
 import io.r2mo.function.Fn;
 import io.zerows.component.log.Annal;
 import io.zerows.epoch.assembly.parallel.QueueThread;
-import io.zerows.epoch.basicore.Receipt;
+import io.zerows.epoch.basicore.ActorReceipt;
 import io.zerows.sdk.environment.Inquirer;
 
 import java.util.ArrayList;
@@ -15,12 +15,12 @@ import java.util.Set;
  * Receipt annotation scan
  * This thread is for Receipt extraction
  */
-public class InquirerForReceipt implements Inquirer<Set<Receipt>> {
+public class InquirerForReceipt implements Inquirer<Set<ActorReceipt>> {
 
     private static final Annal LOGGER = Annal.get(InquirerForReceipt.class);
 
     @Override
-    public Set<Receipt> scan(final Set<Class<?>> queues) {
+    public Set<ActorReceipt> scan(final Set<Class<?>> queues) {
         final List<QueueThread> threadReference = new ArrayList<>();
         /* 3.1. Build KMetadata **/
         for (final Class<?> queue : queues) {
@@ -36,7 +36,7 @@ public class InquirerForReceipt implements Inquirer<Set<Receipt>> {
             }
         });
         /* 3.3. Return **/
-        final Set<Receipt> receipts = new HashSet<>();
+        final Set<ActorReceipt> receipts = new HashSet<>();
         Fn.jvmAt(() -> threadReference.stream()
             .map(QueueThread::getReceipts)
             .forEach(receipts::addAll));

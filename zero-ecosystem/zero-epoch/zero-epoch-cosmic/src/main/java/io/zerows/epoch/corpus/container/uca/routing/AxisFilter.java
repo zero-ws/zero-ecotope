@@ -3,7 +3,7 @@ package io.zerows.epoch.corpus.container.uca.routing;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.http.HttpServerResponse;
 import io.vertx.ext.web.Route;
-import io.zerows.epoch.basicore.Event;
+import io.zerows.epoch.basicore.ActorEvent;
 import io.zerows.epoch.corpus.io.uca.routing.OAxis;
 import io.zerows.epoch.corpus.io.uca.routing.OAxisSub;
 import io.zerows.epoch.corpus.model.running.RunRoute;
@@ -26,7 +26,7 @@ public class AxisFilter implements OAxis {
     public void mount(final RunServer server, final Bundle bundle) {
         final OCacheActor actor = OCacheActor.of(bundle);
 
-        final ConcurrentMap<String, Set<Event>> filters = actor.value().getFilters();
+        final ConcurrentMap<String, Set<ActorEvent>> filters = actor.value().getFilters();
 
         filters.forEach((path, eventSet) -> eventSet.stream().filter(Objects::nonNull).forEach(event -> {
             /* 构造 RunRoute 新对象 */
@@ -47,7 +47,7 @@ public class AxisFilter implements OAxis {
     private void mountHandler(final RunRoute runRoute) {
         final Route route = runRoute.instance();
         route.handler(context -> {
-            final Event event = runRoute.refEvent();
+            final ActorEvent event = runRoute.refEvent();
 
             final Method method = event.getAction();
             final Object proxy = event.getProxy();

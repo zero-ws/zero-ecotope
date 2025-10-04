@@ -4,13 +4,13 @@ import io.r2mo.typed.cc.Cc;
 import io.r2mo.typed.exception.WebException;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.component.log.Annal;
-import io.zerows.weaver.ZeroType;
-import io.zerows.epoch.basicore.Event;
+import io.zerows.epoch.basicore.ActorEvent;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.corpus.io.uca.request.argument.Filler;
 import io.zerows.epoch.corpus.model.Epsilon;
 import io.zerows.platform.constant.VValue;
 import io.zerows.support.Ut;
+import io.zerows.weaver.ZeroType;
 import jakarta.ws.rs.DefaultValue;
 
 import java.lang.annotation.Annotation;
@@ -30,7 +30,7 @@ public class EpsilonIncome implements Income<List<Epsilon<Object>>> {
 
     @Override
     public List<Epsilon<Object>> in(final RoutingContext context,
-                                    final Event event)
+                                    final ActorEvent event)
         throws WebException {
         final Method method = event.getAction();
         final Class<?>[] paramTypes = method.getParameterTypes();

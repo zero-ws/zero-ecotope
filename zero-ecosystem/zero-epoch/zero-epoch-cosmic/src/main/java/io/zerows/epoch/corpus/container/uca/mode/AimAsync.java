@@ -8,7 +8,7 @@ import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.epoch.assembly.DiProxyInstance;
-import io.zerows.epoch.basicore.Event;
+import io.zerows.epoch.basicore.ActorEvent;
 import io.zerows.epoch.configuration.NodeNetwork;
 import io.zerows.epoch.corpus.io.zdk.Aim;
 import io.zerows.epoch.web.Envelop;
@@ -20,7 +20,7 @@ import java.util.Objects;
 public class AimAsync extends AbstractAim implements Aim<RoutingContext> {
 
     @Override
-    public Handler<RoutingContext> attack(final Event event) {
+    public Handler<RoutingContext> attack(final ActorEvent event) {
         return (context) -> this.exec(() -> {
             /*
              * Build future ( data handler )
@@ -82,7 +82,7 @@ public class AimAsync extends AbstractAim implements Aim<RoutingContext> {
     }
 
     private Future<Envelop> invoke(final RoutingContext context,
-                                   final Event event) {
+                                   final ActorEvent event) {
         final Object proxy = event.getProxy();
         /*
          * Method arguments building here.

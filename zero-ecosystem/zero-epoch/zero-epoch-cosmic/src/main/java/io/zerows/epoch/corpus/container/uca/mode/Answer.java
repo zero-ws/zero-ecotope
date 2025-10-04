@@ -5,7 +5,7 @@ import io.r2mo.typed.webflow.WebState;
 import io.vertx.core.Future;
 import io.vertx.core.http.HttpServerResponse;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.epoch.basicore.Event;
+import io.zerows.epoch.basicore.ActorEvent;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.corpus.container.uca.reply.ActionReply;
 import io.zerows.epoch.corpus.container.uca.reply.OAmbit;
@@ -71,7 +71,7 @@ public final class Answer {
         reply(context, envelop, produces);
     }
 
-    public static void reply(final RoutingContext context, final Envelop envelop, final Event event) {
+    public static void reply(final RoutingContext context, final Envelop envelop, final ActorEvent event) {
         Set<MediaType> produces;
         if (Objects.isNull(event)) {
             produces = new HashSet<>();

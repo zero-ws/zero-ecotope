@@ -12,9 +12,9 @@ import java.util.Objects;
  * Scanned address ( KMetadata ) for Queue.
  */
 @Data
-public class Receipt implements Serializable {
+public class ActorReceipt implements Serializable {
 
-    private static final DiPlugin PLUGIN = DiPlugin.create(Receipt.class);
+    private static final DiPlugin PLUGIN = DiPlugin.create(ActorReceipt.class);
     private final Cc<String, Object> cctProxy = Cc.openThread();
     /**
      * Event bus address.
@@ -52,7 +52,7 @@ public class Receipt implements Serializable {
         if (o == null || this.getClass() != o.getClass()) {
             return false;
         }
-        final Receipt receipt = (Receipt) o;
+        final ActorReceipt receipt = (ActorReceipt) o;
         return this.address.equals(receipt.address);
     }
 

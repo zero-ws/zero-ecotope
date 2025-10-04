@@ -1,9 +1,10 @@
-package io.zerows.platform.metadata;
+package io.zerows.epoch.configuration;
 
-import io.zerows.spi.BootIo;
+import io.zerows.platform.metadata.KLauncher;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HSetting;
 import io.zerows.specification.storage.HStore;
+import io.zerows.spi.BootIo;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -18,7 +19,7 @@ import java.util.concurrent.ConcurrentMap;
  * 高阶部分的核心接口
  * <pre><code>
  *     1. {@link HConfig}，组件配置接口
- *     2. {@link KEnergy} 启动配置接口
+ *     2. {@link ZeroEnergy} 启动配置接口
  *     3. {@link KLauncher} 启动器接口
  *     4. {@link BootIo} 启动选择器 / 组件加载器
  * </code></pre>
@@ -34,7 +35,7 @@ import java.util.concurrent.ConcurrentMap;
  *
  * @author lang : 2023-05-30
  */
-public class KSetting implements HSetting {
+public class ZeroSetting implements HSetting {
     /** 扩展配置部分 **/
     private final ConcurrentMap<String, HConfig> extension =
         new ConcurrentHashMap<>();
@@ -46,12 +47,12 @@ public class KSetting implements HSetting {
     /** 启动器配置 **/
     private HConfig launcher;
 
-    private KSetting() {
+    private ZeroSetting() {
 
     }
 
     public static HSetting of() {
-        return new KSetting();
+        return new ZeroSetting();
     }
 
     @Override

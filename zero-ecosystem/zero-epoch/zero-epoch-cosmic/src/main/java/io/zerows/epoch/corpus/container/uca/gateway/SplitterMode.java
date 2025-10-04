@@ -5,7 +5,7 @@ import io.vertx.ext.web.RoutingContext;
 import io.zerows.component.log.Annal;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Ipc;
-import io.zerows.epoch.basicore.Event;
+import io.zerows.epoch.basicore.ActorEvent;
 import io.zerows.epoch.corpus.container.exception._40042Exception500ChannelMulti;
 import io.zerows.epoch.corpus.io.zdk.Aim;
 
@@ -33,7 +33,7 @@ public class SplitterMode {
 
     private static final Annal LOGGER = Annal.get(SplitterMode.class);
 
-    public Aim<RoutingContext> distribute(final Event event) {
+    public Aim<RoutingContext> distribute(final ActorEvent event) {
         // 1. Scan method to check @Address
         final Method method = event.getAction();
         final boolean annotated = method.isAnnotationPresent(Address.class);

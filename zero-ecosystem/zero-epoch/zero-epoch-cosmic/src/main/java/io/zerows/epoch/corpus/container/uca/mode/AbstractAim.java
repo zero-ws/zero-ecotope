@@ -12,7 +12,7 @@ import io.vertx.ext.web.Session;
 import io.zerows.component.log.Annal;
 import io.zerows.component.runner.InvokerUtil;
 import io.zerows.epoch.annotations.Address;
-import io.zerows.epoch.basicore.Event;
+import io.zerows.epoch.basicore.ActorEvent;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.corpus.container.exception._60002Exception500DeliveryError;
 import io.zerows.epoch.corpus.container.exception._60003Exception500EntityCast;
@@ -20,8 +20,8 @@ import io.zerows.epoch.corpus.io.atom.WrapRequest;
 import io.zerows.epoch.corpus.io.uca.request.mime.Analyzer;
 import io.zerows.epoch.corpus.io.uca.request.mime.MediaAnalyzer;
 import io.zerows.epoch.corpus.model.Rule;
-import io.zerows.epoch.web.Envelop;
 import io.zerows.epoch.corpus.web.validation.ValidatorEntry;
+import io.zerows.epoch.web.Envelop;
 import io.zerows.platform.constant.VValue;
 import io.zerows.support.Ut;
 
@@ -52,7 +52,7 @@ public abstract class AbstractAim {
      * @return TypedArgument ( Object[] )
      */
     protected Object[] buildArgs(final RoutingContext context,
-                                 final Event event) {
+                                 final ActorEvent event) {
         Object[] cached = context.get(KWeb.ARGS.REQUEST_CACHED);
         if (null == cached) {
             cached = this.analyzer.in(context, event);
@@ -70,7 +70,7 @@ public abstract class AbstractAim {
      *
      * @return Get event bus address
      */
-    protected String address(final Event event) {
+    protected String address(final ActorEvent event) {
         final Method method = event.getAction();
         final Annotation annotation = method.getDeclaredAnnotation(Address.class);
         return Ut.invoke(annotation, "value");
@@ -82,7 +82,7 @@ public abstract class AbstractAim {
      *
      * @return Return invoked result
      */
-    protected Object invoke(final Event event, final Object[] args) {
+    protected Object invoke(final ActorEvent event, final Object[] args) {
         final Method method = event.getAction();
         this.getLogger().info("Class = {2}, Method = {0}, Args = {1}",
             method.getName(), Ut.fromJoin(args), method.getDeclaringClass().getName());
@@ -146,7 +146,7 @@ public abstract class AbstractAim {
 
     protected void exec(final Actuator consumer,
                         final RoutingContext context,
-                        final Event event) {
+                        final ActorEvent event) {
         try {
             // Monitor
             this.getLogger().debug("Web flow started: {0}", event.getAction());

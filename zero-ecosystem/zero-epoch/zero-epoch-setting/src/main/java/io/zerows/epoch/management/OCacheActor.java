@@ -2,7 +2,7 @@ package io.zerows.epoch.management;
 
 import io.r2mo.typed.cc.Cc;
 import io.zerows.epoch.basicore.ActorComponent;
-import io.zerows.epoch.basicore.Event;
+import io.zerows.epoch.basicore.ActorEvent;
 import io.zerows.sdk.management.OCache;
 import io.zerows.support.Ut;
 import org.osgi.framework.Bundle;
@@ -31,7 +31,7 @@ public interface OCacheActor extends OCache<ActorComponent> {
 
     interface Tool {
 
-        static void addTo(final Set<Event> events) {
+        static void addTo(final Set<ActorEvent> events) {
             events.stream().filter(Objects::nonNull)
                 /* Only Uri Pattern will be extracted to URI_PATHS */
                 .filter(item -> 0 < item.getPath().indexOf(":"))

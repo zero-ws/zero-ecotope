@@ -2,7 +2,7 @@ package io.zerows.epoch.corpus.container.uca.routing;
 
 import io.reactivex.rxjava3.core.Observable;
 import io.vertx.ext.web.Route;
-import io.zerows.epoch.basicore.Event;
+import io.zerows.epoch.basicore.ActorEvent;
 import io.zerows.epoch.corpus.io.uca.routing.OAxisSub;
 import io.zerows.epoch.corpus.model.running.RunRoute;
 import io.zerows.platform.constant.VString;
@@ -17,7 +17,7 @@ import java.util.Set;
 public class SubAxisMime implements OAxisSub {
     @Override
     public void mount(final RunRoute runRoute, final Bundle bundle) {
-        final Event event = runRoute.refEvent();
+        final ActorEvent event = runRoute.refEvent();
         final Route route = runRoute.instance();
         // produces
         final Set<MediaType> produces = event.getProduces();

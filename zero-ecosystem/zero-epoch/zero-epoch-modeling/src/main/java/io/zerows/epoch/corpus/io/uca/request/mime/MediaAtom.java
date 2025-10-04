@@ -2,7 +2,7 @@ package io.zerows.epoch.corpus.io.uca.request.mime;
 
 import io.r2mo.function.Fn;
 import io.r2mo.typed.exception.WebException;
-import io.zerows.epoch.basicore.Event;
+import io.zerows.epoch.basicore.ActorEvent;
 import io.zerows.epoch.corpus.exception._60006Exception415MediaNotSupport;
 import jakarta.ws.rs.core.MediaType;
 
@@ -11,7 +11,7 @@ import java.util.Set;
 final class MediaAtom {
 
 
-    static void accept(final Event event,
+    static void accept(final ActorEvent event,
                        final MediaType type) throws WebException {
         final Set<MediaType> medias = event.getConsumes();
         if (!medias.contains(MediaType.WILDCARD_TYPE)) {

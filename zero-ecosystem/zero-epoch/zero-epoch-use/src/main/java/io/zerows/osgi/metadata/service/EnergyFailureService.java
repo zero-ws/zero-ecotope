@@ -3,10 +3,9 @@ package io.zerows.osgi.metadata.service;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.application.YmlCore;
 import io.zerows.management.OCacheFailure;
-import io.zerows.management.OZeroEquip;
-import io.zerows.spi.HEquip;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HSetting;
+import io.zerows.spi.HEquip;
 import org.osgi.framework.Bundle;
 
 import java.util.Objects;
@@ -38,7 +37,7 @@ public class EnergyFailureService implements EnergyFailure {
     }
 
     private JsonObject ofError(final Bundle bundle) {
-        final HEquip equip = OZeroEquip.of(bundle);
+        final HEquip equip = null;
         final HSetting setting = equip.initialize();
         final HConfig error = setting.infix(YmlCore.error.__KEY);
         return error.options();

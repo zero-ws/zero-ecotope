@@ -8,9 +8,9 @@ import io.zerows.component.runner.InvokerUtil;
 import io.zerows.component.runner.JetSelector;
 import io.zerows.epoch.annotations.Ipc;
 import io.zerows.epoch.annotations.Worker;
-import io.zerows.epoch.basicore.Receipt;
-import io.zerows.epoch.web.Envelop;
+import io.zerows.epoch.basicore.ActorReceipt;
 import io.zerows.epoch.management.OCacheActor;
+import io.zerows.epoch.web.Envelop;
 import io.zerows.platform.constant.VValue;
 import io.zerows.support.Ut;
 import org.osgi.framework.Bundle;
@@ -44,11 +44,11 @@ public class ZeroHttpWorker extends AbstractVerticle {
     @Override
     public void start() {
 
-        final Set<Receipt> receipts = OCacheActor.of(this.bundle).value().getReceipts();
+        final Set<ActorReceipt> receipts = OCacheActor.of(this.bundle).value().getReceipts();
         // 1. Get event bus
         final EventBus bus = this.vertx.eventBus();
         // 2. Consume address
-        for (final Receipt receipt : receipts) {
+        for (final ActorReceipt receipt : receipts) {
             // 3. Deploy for each type
             final String address = receipt.getAddress();
 

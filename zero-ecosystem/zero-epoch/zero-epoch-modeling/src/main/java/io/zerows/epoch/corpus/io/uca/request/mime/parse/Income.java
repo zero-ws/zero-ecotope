@@ -1,7 +1,7 @@
 package io.zerows.epoch.corpus.io.uca.request.mime.parse;
 
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.epoch.basicore.Event;
+import io.zerows.epoch.basicore.ActorEvent;
 
 /**
  * # 「Co」Zero Framework for MIME parsing
@@ -19,5 +19,5 @@ public interface Income<T> {
      *
      * @return Extract `Tool` processing
      */
-    T in(RoutingContext context, Event event);
+    T in(RoutingContext context, ActorEvent event);
 }

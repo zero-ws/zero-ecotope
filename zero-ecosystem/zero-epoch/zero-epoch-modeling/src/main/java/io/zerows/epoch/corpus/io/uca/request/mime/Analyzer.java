@@ -1,7 +1,7 @@
 package io.zerows.epoch.corpus.io.uca.request.mime;
 
 import io.r2mo.typed.exception.WebException;
-import io.zerows.epoch.basicore.Event;
+import io.zerows.epoch.basicore.ActorEvent;
 import io.zerows.epoch.corpus.io.uca.request.mime.parse.Income;
 import io.zerows.epoch.web.Envelop;
 
@@ -29,6 +29,6 @@ public interface Analyzer extends Income<Object[]> {
      * @return Normalized Request
      * @throws WebException Common exception
      */
-    Envelop out(Envelop envelop, Event event)
+    Envelop out(Envelop envelop, ActorEvent event)
         throws WebException;
 }

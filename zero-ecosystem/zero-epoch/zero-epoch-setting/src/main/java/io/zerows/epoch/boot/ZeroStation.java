@@ -8,10 +8,10 @@ import io.zerows.epoch.application.YmlCore;
 import io.zerows.epoch.boot.exception._40001Exception500UpClassArgs;
 import io.zerows.epoch.boot.exception._40002Exception500UpClassInvalid;
 import io.zerows.epoch.boot.internal.FeatureMark;
+import io.zerows.epoch.configuration.ZeroBoot;
 import io.zerows.epoch.metadata.environment.LogCloud;
 import io.zerows.management.OZeroStore;
 import io.zerows.platform.enums.EmApp;
-import io.zerows.platform.metadata.KBoot;
 import io.zerows.specification.configuration.HBoot;
 import io.zerows.specification.configuration.HSetting;
 import io.zerows.specification.configuration.HStation;
@@ -24,28 +24,28 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * @author lang : 2023-05-30
  */
-public class BootStore implements HStation {
+public class ZeroStation implements HStation {
     /**
      * 针对 Annotation 部分的创建
      */
     private static final ConcurrentMap<String, Annotation> STORE_ANNO = new ConcurrentHashMap<>();
-    private static volatile BootStore STORE;
+    private static volatile ZeroStation STORE;
     private final ConcurrentMap<FeatureMark, Boolean> features = new ConcurrentHashMap<>();
 
     private final HBoot boot;
 
 
-    private BootStore() {
+    private ZeroStation() {
         final HSetting setting = OZeroStore.setting();
         final JsonObject launcherJ = setting.launcher().options();
-        this.boot = KBoot.of(launcherJ);
+        this.boot = ZeroBoot.of(launcherJ);
     }
 
-    public static BootStore singleton() {
+    public static ZeroStation singleton() {
         if (Objects.isNull(STORE)) {
-            synchronized (BootStore.class) {
+            synchronized (ZeroStation.class) {
                 if (Objects.isNull(STORE)) {
-                    STORE = new BootStore();
+                    STORE = new ZeroStation();
                 }
             }
         }
@@ -64,7 +64,7 @@ public class BootStore implements HStation {
         return STORE;
     }
 
-    public static BootStore singleton(final Class<?> bootingCls, final String... arguments) {
+    public static ZeroStation singleton(final Class<?> bootingCls, final String... arguments) {
         // 启动检查
         ensure(bootingCls);
 
@@ -83,13 +83,13 @@ public class BootStore implements HStation {
         STORE_ANNO.putAll(Anno.get(clazz));
         if (!STORE_ANNO.containsKey(Up.class.getName())) {
             final VertxBootException warning = new _40002Exception500UpClassInvalid(clazz);
-            LogCloud.LOG.Env.info(BootStore.class, warning.getMessage());
+            LogCloud.LOG.Env.info(ZeroStation.class, warning.getMessage());
         }
     }
 
     // ------------------- Reference --------------------
     @Override
-    public BootStore bind(final Class<?> mainClass, final String[] arguments) {
+    public ZeroStation bind(final Class<?> mainClass, final String[] arguments) {
         this.boot.bind(mainClass, arguments);
         return this;
     }
@@ -101,7 +101,7 @@ public class BootStore implements HStation {
 
     // ------------------- Feature --------------------
 
-    public BootStore feature(final FeatureMark mark, final Boolean enabled) {
+    public ZeroStation feature(final FeatureMark mark, final Boolean enabled) {
         this.features.put(mark, enabled);
         return this;
     }

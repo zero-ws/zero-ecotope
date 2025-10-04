@@ -3,7 +3,7 @@ package io.zerows.epoch.corpus.container.uca.routing;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.ext.web.Route;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.epoch.basicore.Event;
+import io.zerows.epoch.basicore.ActorEvent;
 import io.zerows.epoch.corpus.container.handler.CommonEndurer;
 import io.zerows.epoch.corpus.container.store.under.StoreRouter;
 import io.zerows.epoch.corpus.container.uca.gateway.SplitterMode;
@@ -36,7 +36,7 @@ public class AxisEvent implements OAxis {
     public void mount(final RunServer server, final Bundle bundle) {
 
         final OCacheActor actor = OCacheActor.of(bundle);
-        final Set<Event> events = actor.value().getEvents();
+        final Set<ActorEvent> events = actor.value().getEvents();
 
         events.stream().filter(Objects::nonNull).forEach(event -> {
             /* 验证 */

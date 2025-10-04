@@ -14,9 +14,9 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * 核心组件集，主要针对如下
  * <pre><code>
- *     - Agent 组件专用 {@link Event}
+ *     - Agent 组件专用 {@link ActorEvent}
  *       以及和服务器类型相关的 Agent 元数据定义表
- *     - Worker 组件专用 {@link Receipt}
+ *     - Worker 组件专用 {@link ActorReceipt}
  *       Worker 专用表
  *     - JSR340 专用的 Filter 组件表
  * </code></pre>
@@ -31,41 +31,41 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class ActorComponent implements Serializable {
 
-    private final Set<Event> events = new HashSet<>();
-    private final Set<Receipt> receipts = new HashSet<>();
+    private final Set<ActorEvent> events = new HashSet<>();
+    private final Set<ActorReceipt> receipts = new HashSet<>();
 
-    private final ConcurrentMap<String, Set<Event>> filters = new ConcurrentHashMap<>();
+    private final ConcurrentMap<String, Set<ActorEvent>> filters = new ConcurrentHashMap<>();
     private final ConcurrentMap<ServerType, List<Class<?>>> agents = new ConcurrentHashMap<>();
 
-    public void addEvents(final Set<Event> events) {
+    public void addEvents(final Set<ActorEvent> events) {
         // 追加扫描结果集
         this.events.addAll(events);
     }
 
-    public Set<Event> getEvents() {
+    public Set<ActorEvent> getEvents() {
         return this.events;
     }
 
-    public void addReceipts(final Set<Receipt> receipts) {
+    public void addReceipts(final Set<ActorReceipt> receipts) {
         // 追加扫描结果集
         this.receipts.addAll(receipts);
     }
 
-    public Set<Receipt> getReceipts() {
+    public Set<ActorReceipt> getReceipts() {
         return this.receipts;
     }
 
-    public void addFilters(final ConcurrentMap<String, Set<Event>> filters) {
+    public void addFilters(final ConcurrentMap<String, Set<ActorEvent>> filters) {
         filters.forEach((path, filter) -> {
             if (Objects.nonNull(filter) && !filter.isEmpty()) {
-                final Set<Event> stored = this.filters.getOrDefault(path, new HashSet<>());
+                final Set<ActorEvent> stored = this.filters.getOrDefault(path, new HashSet<>());
                 stored.addAll(filter);
                 this.filters.put(path, stored);
             }
         });
     }
 
-    public ConcurrentMap<String, Set<Event>> getFilters() {
+    public ConcurrentMap<String, Set<ActorEvent>> getFilters() {
         return this.filters;
     }
 
@@ -89,10 +89,10 @@ public class ActorComponent implements Serializable {
         });
     }
 
-    public void removeFilters(final ConcurrentMap<String, Set<Event>> filters) {
+    public void removeFilters(final ConcurrentMap<String, Set<ActorEvent>> filters) {
         filters.forEach((path, filter) -> {
             if (Objects.nonNull(filter) && !filter.isEmpty()) {
-                final Set<Event> stored = this.filters.getOrDefault(path, new HashSet<>());
+                final Set<ActorEvent> stored = this.filters.getOrDefault(path, new HashSet<>());
                 stored.removeAll(filter);
                 this.filters.put(path, stored);
             }

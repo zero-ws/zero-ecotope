@@ -1,6 +1,5 @@
 package io.zerows.epoch.metadata.environment;
 
-import io.zerows.management.OZeroEquip;
 import io.zerows.platform.enums.EmService;
 import io.zerows.specification.configuration.HBoot;
 import io.zerows.specification.configuration.HConfig;
@@ -38,8 +37,8 @@ public class ContextOfApp extends ContextOfModule {
 
     public ContextOfApp(final Bundle owner) {
         super(owner);
-        final HEquip equip = OZeroEquip.of(owner);
-        this.setting = equip.initialize();
+        // final HEquip equip = OZeroEquip.of(owner);
+        this.setting = null; // equip.initialize();
     }
 
     @Override

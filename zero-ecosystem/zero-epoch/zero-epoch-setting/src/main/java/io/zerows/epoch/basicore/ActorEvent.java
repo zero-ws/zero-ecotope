@@ -17,9 +17,9 @@ import java.util.Set;
  * Scanned Uri Event ( KMetadata ) for each Endpoint.
  */
 @Data
-public class Event implements Serializable {
+public class ActorEvent implements Serializable {
 
-    private static final DiPlugin PLUGIN = DiPlugin.create(Event.class);
+    private static final DiPlugin PLUGIN = DiPlugin.create(ActorEvent.class);
     private final Cc<String, Object> cctProxy = Cc.openThread();
     /**
      * The uri address for current route
@@ -73,7 +73,7 @@ public class Event implements Serializable {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof final Event event)) {
+        if (!(o instanceof final ActorEvent event)) {
             return false;
         }
         return this.order == event.order &&

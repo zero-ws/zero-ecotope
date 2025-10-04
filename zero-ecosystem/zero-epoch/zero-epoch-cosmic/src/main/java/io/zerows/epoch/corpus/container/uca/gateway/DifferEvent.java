@@ -5,8 +5,8 @@ import io.vertx.core.eventbus.Message;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.component.log.Annal;
 import io.zerows.epoch.annotations.Address;
-import io.zerows.epoch.basicore.Event;
-import io.zerows.epoch.basicore.Receipt;
+import io.zerows.epoch.basicore.ActorEvent;
+import io.zerows.epoch.basicore.ActorReceipt;
 import io.zerows.epoch.corpus.container.exception._40013Exception500ReturnType;
 import io.zerows.epoch.corpus.container.exception._40014Exception500WorkerMissing;
 import io.zerows.epoch.corpus.container.uca.mode.AimAsync;
@@ -31,7 +31,7 @@ class DifferEvent implements Differ<RoutingContext> {
 
     private static final Annal LOGGER = Annal.get(DifferEvent.class);
 
-    private static final Set<Receipt> RECEIPTS = OCacheActor.entireValue().getReceipts();
+    private static final Set<ActorReceipt> RECEIPTS = OCacheActor.entireValue().getReceipts();
 
     private DifferEvent() {
     }
@@ -41,7 +41,7 @@ class DifferEvent implements Differ<RoutingContext> {
     }
 
     @Override
-    public Aim<RoutingContext> build(final Event event) {
+    public Aim<RoutingContext> build(final ActorEvent event) {
         Aim<RoutingContext> aim = null;
         final Method replier = this.findReplier(event);
         final Method method = event.getAction();
@@ -85,11 +85,11 @@ class DifferEvent implements Differ<RoutingContext> {
     }
 
     @SuppressWarnings("all")
-    private Method findReplier(final Event event) {
+    private Method findReplier(final ActorEvent event) {
         final Annotation annotation = event.getAction().getDeclaredAnnotation(Address.class);
         final String address = Ut.invoke(annotation, "value");
         // Here address mustn't be null or empty
-        final Receipt found = RECEIPTS.stream()
+        final ActorReceipt found = RECEIPTS.stream()
             .filter(item -> address.equals(item.getAddress()))
             .findFirst().orElse(null);
 

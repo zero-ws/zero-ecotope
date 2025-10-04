@@ -3,7 +3,7 @@ package io.zerows.epoch.corpus.io.uca.request.mime;
 import io.r2mo.typed.cc.Cc;
 import io.r2mo.typed.exception.WebException;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.epoch.basicore.Event;
+import io.zerows.epoch.basicore.ActorEvent;
 import io.zerows.epoch.corpus.io.uca.request.mime.parse.EpsilonIncome;
 import io.zerows.epoch.corpus.io.uca.request.mime.parse.Income;
 import io.zerows.epoch.corpus.model.Epsilon;
@@ -20,7 +20,7 @@ public class MediaAnalyzer implements Analyzer {
 
     @Override
     public Object[] in(final RoutingContext context,
-                       final Event event)
+                       final ActorEvent event)
         throws WebException {
         /* Consume mime type matching **/
         final MediaType requestMedia = this.getMedia(context);
@@ -37,7 +37,7 @@ public class MediaAnalyzer implements Analyzer {
 
     @Override
     public Envelop out(final Envelop envelop,
-                       final Event event) throws WebException {
+                       final ActorEvent event) throws WebException {
         // TODO: Replier
         return null;
     }

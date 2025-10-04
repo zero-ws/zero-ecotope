@@ -2,7 +2,7 @@ package io.zerows.epoch.corpus.container.uca.mode;
 
 import io.vertx.core.Handler;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.epoch.basicore.Event;
+import io.zerows.epoch.basicore.ActorEvent;
 import io.zerows.epoch.corpus.io.zdk.Aim;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.support.Ut;
@@ -13,7 +13,7 @@ import io.zerows.support.Ut;
 public class AimPing extends AbstractAim implements Aim<RoutingContext> {
 
     @Override
-    public Handler<RoutingContext> attack(final Event event) {
+    public Handler<RoutingContext> attack(final ActorEvent event) {
         return (context) -> this.exec(() -> {
             // 1. Build TypedArgument
             final Object[] arguments = this.buildArgs(context, event);
