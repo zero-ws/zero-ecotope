@@ -7,19 +7,21 @@ import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.spi.cluster.ClusterManager;
 import io.zerows.cortex.extension.CodecEnvelop;
 import io.zerows.cortex.management.StoreVertx;
+import io.zerows.cortex.metadata.RunVertx;
 import io.zerows.epoch.basicore.NodeNetwork;
 import io.zerows.epoch.basicore.NodeVertx;
-import io.zerows.cortex.metadata.RunVertx;
-import io.zerows.epoch.web.Envelop;
 import io.zerows.epoch.management.AbstractAmbiguity;
+import io.zerows.epoch.web.Envelop;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
 
 /**
  * @author lang : 2024-04-30
  */
+@Slf4j
 class StubVertxService extends AbstractAmbiguity implements StubVertx {
 
     StubVertxService(final HBundle bundle) {
@@ -37,8 +39,8 @@ class StubVertxService extends AbstractAmbiguity implements StubVertx {
         if (clustered) {
             // 集群模式创建
             final NodeNetwork network = nodeVertx.belongTo();
-            final ClusterManager manager = network.cluster().getManager();
-            this.logger().info("Current app is running in cluster mode, manager = {0} on node {1} with isActive = {2}.",
+            final ClusterManager manager = network.cluster().getClusterManager();
+            log.info("当前应用程序正在集群模式下运行，管理器 = {}，节点为 {}，isActive = {}。",
                 manager.getClass().getName(), manager.getNodeId(), manager.isActive());
             return builder
                 .withClusterManager(manager)

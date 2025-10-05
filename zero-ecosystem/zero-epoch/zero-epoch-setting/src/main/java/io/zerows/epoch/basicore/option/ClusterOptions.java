@@ -1,5 +1,9 @@
 package io.zerows.epoch.basicore.option;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.r2mo.typed.json.jackson.ClassDeserializer;
+import io.r2mo.typed.json.jackson.ClassSerializer;
 import io.vertx.codegen.annotations.Fluent;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.spi.cluster.ClusterManager;
@@ -79,7 +83,11 @@ public class ClusterOptions implements Serializable {
      * 引用。对于开发人员来说，直接获取 ClusterManager 更加智能， 👨‍💻
      * 可以忽略实例构建代码流程。 ⚡
      */
-    private ClusterManager manager;
+    private ClusterManager clusterManager;
+
+    @JsonSerialize(using = ClassSerializer.class)
+    @JsonDeserialize(using = ClassDeserializer.class)
+    private Class<?> manager;
     /**
      * -- GETTER -- 📥
      */
@@ -90,7 +98,7 @@ public class ClusterOptions implements Serializable {
      */
     public ClusterOptions() {
         this.enabled = ENABLED;
-        this.manager = MANAGER;
+        this.clusterManager = MANAGER;
         this.options = OPTIONS;
     }
 
@@ -101,7 +109,7 @@ public class ClusterOptions implements Serializable {
      */
     public ClusterOptions(final ClusterOptions other) {
         this.enabled = other.isEnabled();
-        this.manager = other.getManager();
+        this.clusterManager = other.getClusterManager();
         this.options = other.getOptions();
     }
 
@@ -138,8 +146,8 @@ public class ClusterOptions implements Serializable {
      * @return 此实例的引用。 🔄
      */
     @Fluent
-    public ClusterOptions setManager(final ClusterManager manager) {
-        this.manager = manager;
+    public ClusterOptions setManager(final ClusterManager clusterManager) {
+        this.clusterManager = clusterManager;
         return this;
     }
 
@@ -162,7 +170,7 @@ public class ClusterOptions implements Serializable {
     public String toString() {
         return "ClusterOptions{enabled=" + this.enabled
             + ", manager=" +
-            ((null == this.manager) ? "null" : this.manager.getClass().getName())
+            ((null == this.clusterManager) ? "null" : this.clusterManager.getClass().getName())
             + ", options="
             + this.options.encode() + '}';
     }
