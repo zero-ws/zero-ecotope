@@ -2,6 +2,7 @@ package io.zerows.epoch.boot;
 
 import io.r2mo.spi.SPI;
 import io.vertx.core.json.JsonArray;
+import io.zerows.epoch.application.YmlCore;
 import io.zerows.epoch.configuration.ZeroConfigurer;
 import io.zerows.platform.exception._11010Exception500BootIoMissing;
 import io.zerows.specification.configuration.HConfig;
@@ -98,6 +99,7 @@ public class ZeroLauncher<T> {
      *    - 启动器：{@link BootIo} / {@link ZeroBootIo}
      *    - 配置器：{@link ZeroConfigurer}
      * </pre>
+     * 数据配置规范参考 {@link YmlCore}
      *
      * @param bootCls 启动入口类（通常为 Main/Boot 类） 📌
      * @param args    命令行参数（将作为 {@code "arguments"} 注入 {@link HConfig}） 🧵
@@ -116,7 +118,11 @@ public class ZeroLauncher<T> {
 
 
 
-        /*  配置部分：从 BootIo 取能量上下文，交给 ZeroConfigurer 绑定  */
+        /*
+         * 🟤BOOT-002: 构造 HEnergy 对象，并创建 ZeroConfigurer 进行绑定，绑定过程中会根据配置类型对文件检查
+         *   此处检查则考虑是否调用 HFS 的模式 -> 内置调用 HStore 从某个固定目录中提取配置信息，如果没有配置则考
+         *   虑从 classpath 中提取配置。
+         */
         final HEnergy energy = io.energy(bootCls, args);
         this.configurer = ZeroConfigurer.of(energy).bind(args);
 

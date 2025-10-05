@@ -41,17 +41,6 @@ public class DevEnv {
     private DevEnv() {
     }
 
-    // ------------------------------ 缓存
-    // Z_CACHE_UI
-    public static boolean cacheUi() {
-        return OPTION.getCacheUi();
-    }
-
-    // Z_CACHE_ADMIT
-    public static boolean cacheAdmit() {
-        return OPTION.getCacheAdmit();
-    }
-
     // ------------------------------ 开发
 
     // Z_DEV_AUTHORIZED

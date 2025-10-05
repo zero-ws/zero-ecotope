@@ -1,8 +1,8 @@
 package io.zerows.extension.mbse.basement.bootstrap;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.cortex.extension.HExtension;
+import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.extension.mbse.basement.atom.config.AoConfig;
 import io.zerows.extension.mbse.basement.eon.AoConstant;
 import io.zerows.extension.runtime.skeleton.eon.KeMsg;

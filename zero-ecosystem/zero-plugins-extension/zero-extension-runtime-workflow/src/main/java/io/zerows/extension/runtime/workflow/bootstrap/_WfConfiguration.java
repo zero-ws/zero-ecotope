@@ -95,7 +95,7 @@ final class WfConfiguration {
                 .setIdGenerator(new StrongUuidGenerator())                 // uuid for task
                 .setProcessEngineName(CONFIG.getName())
                 .setDatabaseSchemaUpdate(ProcessEngineConfiguration.DB_SCHEMA_UPDATE_FALSE)
-                .setJdbcUrl(database.getJdbcUrl())
+                .setJdbcUrl(database.getUrl())
                 .setJdbcDriver(database.getDriverClassName())
                 .setJdbcUsername(database.getUsername())
                 .setJdbcPassword(database.getSmartPassword())

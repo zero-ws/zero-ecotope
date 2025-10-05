@@ -10,17 +10,11 @@ import io.zerows.platform.enums.EmSecure;
 import io.zerows.support.base.UtBase;
 
 /**
- * 重新规划配置部分专用，针对文件部分形成梯度配置键值，完成类似 YAML 结构的配置文件
- * 集，并可以在 interface 之间形成继承模式，变量定义变得更加完善
- * 缩写含义：High Level Yaml Configuration，基础规范重新修订：
- * <pre><code>
- *     1. 最终的值采用全大写，表示常量（叶节点）
- *     2. 文件名则采用 _ 前缀，然后走二级目录
- *     3. 节点中若带有子节点，则节点采用小写
- * </code></pre>
+ * 新版 Yaml 文件格式的大面积改动，此处以格式为主格式，参考 vertx.yml 中的格式配置
  *
  * @author lang : 2023/4/24
  */
+@Deprecated
 public interface YmlCore {
     // -------------------------- 此处为文件名部分的基础配置 ----------------------------
     /*

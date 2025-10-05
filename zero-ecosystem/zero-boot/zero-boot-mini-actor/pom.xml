@@ -79,5 +79,10 @@
             <scope>import</scope>
             <type>pom</type>
         </dependency>
+        <!-- 底层实现追加 -->
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>r2mo-typed-vertx</artifactId>
+        </dependency>
     </dependencies>
 </project>

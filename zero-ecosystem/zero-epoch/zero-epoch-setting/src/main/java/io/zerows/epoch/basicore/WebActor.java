@@ -1,6 +1,7 @@
 package io.zerows.epoch.basicore;
 
 import io.zerows.platform.enums.app.ServerType;
+import lombok.Getter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ import java.util.concurrent.ConcurrentMap;
  *
  * @author lang : 2024-04-21
  */
+@Getter
 public class WebActor implements Serializable {
 
     private final Set<WebEvent> events = new HashSet<>();
@@ -42,17 +44,9 @@ public class WebActor implements Serializable {
         this.events.addAll(events);
     }
 
-    public Set<WebEvent> getEvents() {
-        return this.events;
-    }
-
     public void addReceipts(final Set<WebReceipt> receipts) {
         // 追加扫描结果集
         this.receipts.addAll(receipts);
-    }
-
-    public Set<WebReceipt> getReceipts() {
-        return this.receipts;
     }
 
     public void addFilters(final ConcurrentMap<String, Set<WebEvent>> filters) {
@@ -63,10 +57,6 @@ public class WebActor implements Serializable {
                 this.filters.put(path, stored);
             }
         });
-    }
-
-    public ConcurrentMap<String, Set<WebEvent>> getFilters() {
-        return this.filters;
     }
 
     public void addAgents(final ConcurrentMap<ServerType, List<Class<?>>> agents) {
@@ -97,10 +87,6 @@ public class WebActor implements Serializable {
                 this.filters.put(path, stored);
             }
         });
-    }
-
-    public ConcurrentMap<ServerType, List<Class<?>>> getAgents() {
-        return this.agents;
     }
 
     public void add(final WebActor actor) {

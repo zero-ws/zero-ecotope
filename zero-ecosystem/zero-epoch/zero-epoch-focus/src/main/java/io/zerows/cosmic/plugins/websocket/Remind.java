@@ -3,10 +3,10 @@ package io.zerows.cosmic.plugins.websocket;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.r2mo.typed.cc.Cc;
-import io.zerows.platform.enums.RemindType;
+import io.r2mo.typed.json.jackson.ClassDeserializer;
+import io.r2mo.typed.json.jackson.ClassSerializer;
 import io.zerows.epoch.assembly.DiPlugin;
-import io.zerows.integrated.jackson.ClassDeserializer;
-import io.zerows.integrated.jackson.ClassSerializer;
+import io.zerows.platform.enums.RemindType;
 
 import java.io.Serializable;
 import java.lang.reflect.Method;

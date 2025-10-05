@@ -2,15 +2,18 @@ package io.zerows.extension.mbse.basement.uca.jdbc;
 
 import io.r2mo.function.Fn;
 import io.r2mo.typed.cc.Cc;
-import io.zerows.platform.constant.VValue;
-import io.zerows.platform.metadata.KDatabase;
-import io.zerows.epoch.database.cp.DataPool;
 import io.zerows.component.log.Annal;
-import io.zerows.support.Ut;
+import io.zerows.epoch.database.cp.DataPool;
 import io.zerows.extension.mbse.basement.exception._80502Exception500EmptySQL;
 import io.zerows.extension.mbse.basement.uca.sql.SqlOutput;
-import org.jooq.*;
+import io.zerows.platform.constant.VValue;
+import io.zerows.platform.metadata.KDatabase;
+import io.zerows.support.Ut;
+import org.jooq.DSLContext;
+import org.jooq.Query;
 import org.jooq.Record;
+import org.jooq.Result;
+import org.jooq.ResultQuery;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -29,8 +32,8 @@ public class DataConnection implements AoConnection {
         synchronized (getClass()) {
             this.database = database;
             // 初始化dbPool连接池，每一个Jdbc Url保证一个连接池
-            this.dbPool = CC_DS.pick(() -> DataPool.create(database), database.getJdbcUrl());
-            // Fn.po?l(Pool.POOL, database.getJdbcUrl(), () -> DataPool.create(database));
+            this.dbPool = CC_DS.pick(() -> DataPool.create(database), database.getUrl());
+            // Fn.po?l(Pool.POOL, database.getUrl(), () -> DataPool.create(database));
         }
     }
 

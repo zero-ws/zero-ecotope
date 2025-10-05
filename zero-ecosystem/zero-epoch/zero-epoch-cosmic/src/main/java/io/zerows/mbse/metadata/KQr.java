@@ -2,9 +2,9 @@ package io.zerows.mbse.metadata;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.r2mo.typed.json.jackson.ClassDeserializer;
+import io.r2mo.typed.json.jackson.ClassSerializer;
 import io.vertx.core.json.JsonObject;
-import io.zerows.integrated.jackson.ClassDeserializer;
-import io.zerows.integrated.jackson.ClassSerializer;
 import io.zerows.support.Ut;
 
 import java.io.Serializable;

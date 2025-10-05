@@ -1,17 +1,20 @@
 package io.zerows.platform.metadata;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.Annal;
 import io.zerows.integrated.jackson.JsonObjectDeserializer;
 import io.zerows.integrated.jackson.JsonObjectSerializer;
-import io.zerows.platform.HEnvironmentVariable;
+import io.zerows.platform.EnvironmentVariable;
+import io.zerows.platform.annotations.ClassYml;
 import io.zerows.platform.constant.VOption;
 import io.zerows.platform.enums.EmDS;
 import io.zerows.specification.atomic.HCopier;
 import io.zerows.specification.atomic.HJson;
 import io.zerows.support.base.UtBase;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.sql.DriverManager;
@@ -25,6 +28,8 @@ import java.util.Objects;
  *
  * @author lang : 2023/5/2
  */
+@Data
+@ClassYml
 public class KDatabase implements Serializable, HCopier<KDatabase>, HJson {
     /*
      * Get current jooq configuration for EmApp / Source
@@ -42,18 +47,19 @@ public class KDatabase implements Serializable, HCopier<KDatabase>, HJson {
     /* Database category */
     private EmDS.Category category;
     /* JDBC connection string */
-    private String jdbcUrl;
+    private String url;
     /* Database username */
     private String username;
     /* Database password */
     private String password;
     /* Database driver class */
+    @JsonProperty("driver-class-name")      // 升级新版
     private String driverClassName;
 
     /* Database Connection Testing */
     public static boolean test(final KDatabase database) {
         try {
-            DriverManager.getConnection(database.getJdbcUrl(), database.getUsername(), database.getSmartPassword());
+            DriverManager.getConnection(database.getUrl(), database.getUsername(), database.getSmartPassword());
             return true;
         } catch (final SQLException ex) {
             // Debug for database connection
@@ -75,64 +81,8 @@ public class KDatabase implements Serializable, HCopier<KDatabase>, HJson {
         return KDatabase.test(this);
     }
 
-    public String getHostname() {
-        return this.hostname;
-    }
-
-    public void setHostname(final String hostname) {
-        this.hostname = hostname;
-    }
-
-    public String getInstance() {
-        return this.instance;
-    }
-
-    public void setInstance(final String instance) {
-        this.instance = instance;
-    }
-
-    public Integer getPort() {
-        return this.port;
-    }
-
-    public void setPort(final Integer port) {
-        this.port = port;
-    }
-
-    public EmDS.Category getCategory() {
-        return this.category;
-    }
-
-    public void setCategory(final EmDS.Category category) {
-        this.category = category;
-    }
-
-    public String getJdbcUrl() {
-        return this.jdbcUrl;
-    }
-
-    public void setJdbcUrl(final String jdbcUrl) {
-        this.jdbcUrl = jdbcUrl;
-    }
-
-    public String getUsername() {
-        return this.username;
-    }
-
-    public void setUsername(final String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return this.password;
-    }
-
-    public void setPassword(final String password) {
-        this.password = password;
-    }
-
     public String getSmartPassword() {
-        final Boolean enabled = UtBase.envWith(HEnvironmentVariable.HED_ENABLED, false, Boolean.class);
+        final Boolean enabled = UtBase.envWith(EnvironmentVariable.HED_ENABLED, false, Boolean.class);
         this.logger().info("[ HED ] Encrypt of HED enabled: {0}", enabled);
         if (enabled) {
             // HED_ENABLED=true
@@ -140,14 +90,6 @@ public class KDatabase implements Serializable, HCopier<KDatabase>, HJson {
         } else {
             return this.password;
         }
-    }
-
-    public String getDriverClassName() {
-        return this.driverClassName;
-    }
-
-    public void setDriverClassName(final String driverClassName) {
-        this.driverClassName = driverClassName;
     }
 
     @SuppressWarnings("unchecked")
@@ -192,7 +134,7 @@ public class KDatabase implements Serializable, HCopier<KDatabase>, HJson {
         databaseJ.put(VOption.database.HOSTNAME, this.hostname);
         databaseJ.put(VOption.database.PORT, this.port);
         databaseJ.put(VOption.database.INSTANCE, this.instance);
-        databaseJ.put(VOption.database.JDBC_URL, this.jdbcUrl);
+        databaseJ.put(VOption.database.JDBC_URL, this.url);
         databaseJ.put(VOption.database.USERNAME, this.username);
         databaseJ.put(VOption.database.PASSWORD, this.password);
         databaseJ.put(VOption.database.DRIVER_CLASS_NAME, this.driverClassName);
@@ -211,7 +153,7 @@ public class KDatabase implements Serializable, HCopier<KDatabase>, HJson {
             this.port = data.getInteger(VOption.database.PORT);
             // instance
             this.instance = data.getString(VOption.database.INSTANCE);
-            this.jdbcUrl = data.getString(VOption.database.JDBC_URL);
+            this.url = data.getString(VOption.database.JDBC_URL);
             // username
             this.username = data.getString(VOption.database.USERNAME);
             // password
@@ -248,12 +190,12 @@ public class KDatabase implements Serializable, HCopier<KDatabase>, HJson {
             return false;
         }
         final KDatabase kDatabase = (KDatabase) o;
-        return Objects.equals(this.jdbcUrl, kDatabase.jdbcUrl);
+        return Objects.equals(this.url, kDatabase.url);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.jdbcUrl);
+        return Objects.hash(this.url);
     }
 
     @Override
@@ -263,7 +205,7 @@ public class KDatabase implements Serializable, HCopier<KDatabase>, HJson {
             ", instance='" + this.instance + '\'' +
             ", port=" + this.port +
             ", category=" + this.category +
-            ", jdbcUrl='" + this.jdbcUrl + '\'' +
+            ", jdbcUrl='" + this.url + '\'' +
             ", username='" + this.username + '\'' +
             ", password='" + this.password + '\'' +
             ", driverClassName='" + this.driverClassName + '\'' +

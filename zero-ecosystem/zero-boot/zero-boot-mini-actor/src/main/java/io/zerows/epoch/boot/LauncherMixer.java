@@ -25,7 +25,7 @@ public class LauncherMixer implements HLauncher<Vertx> {
     @Override
     public <T extends HConfig> void start(final HConfig.HOn<T> on, final Consumer<Vertx> server) {
         // 环境变量处理提前
-        ZeroEnvironment.initialize();
+        ZeroEnvironmentLegacy.initialize();
 
         final HBoot boot = STORE.boot();
         if (EmApp.Type.APPLICATION == boot.app()) {

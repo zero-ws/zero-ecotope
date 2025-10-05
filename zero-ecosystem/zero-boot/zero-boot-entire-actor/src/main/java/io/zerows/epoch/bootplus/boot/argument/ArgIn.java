@@ -1,9 +1,9 @@
 package io.zerows.epoch.bootplus.boot.argument;
 
-import io.zerows.support.Ut;
-import io.zerows.platform.HEnvironmentVariable;
+import io.zerows.platform.EnvironmentVariable;
 import io.zerows.platform.constant.VValue;
 import io.zerows.platform.enums.Environment;
+import io.zerows.support.Ut;
 
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
@@ -46,7 +46,7 @@ public abstract class ArgIn {
         }
         {
             // 环境变量计算
-            final String envValue = Ut.envWith(HEnvironmentVariable.ZERO_ENV, Environment.Production.name());
+            final String envValue = Ut.envWith(EnvironmentVariable.Z_ENV, Environment.Production.name());
             this.environment = Ut.toEnum(envValue, Environment.class);
         }
     }

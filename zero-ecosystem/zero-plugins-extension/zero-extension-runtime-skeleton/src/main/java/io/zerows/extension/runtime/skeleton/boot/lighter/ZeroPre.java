@@ -3,7 +3,7 @@ package io.zerows.extension.runtime.skeleton.boot.lighter;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.zerows.cosmic.plugins.cache.MapInfix;
-import io.zerows.epoch.boot.ZeroEnvironment;
+import io.zerows.epoch.boot.ZeroEnvironmentLegacy;
 import io.zerows.epoch.database.jooq.JooqInfix;
 import io.zerows.plugins.office.excel.ExcelInfix;
 import io.zerows.specification.configuration.HMature;
@@ -42,7 +42,7 @@ public class ZeroPre implements HMature.HPre<Vertx> {
         ExcelInfix.init(vertx);
 
         // 环境变量准备执行
-        ZeroEnvironment.initialize();
+        ZeroEnvironmentLegacy.initialize();
 
         return Boolean.TRUE;
     }

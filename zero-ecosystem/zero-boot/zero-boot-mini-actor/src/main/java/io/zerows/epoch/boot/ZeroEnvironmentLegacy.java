@@ -3,7 +3,7 @@ package io.zerows.epoch.boot;
 import io.r2mo.base.io.HStore;
 import io.r2mo.spi.SPI;
 import io.zerows.component.log.LogAs;
-import io.zerows.platform.HEnvironmentVariable;
+import io.zerows.platform.EnvironmentVariable;
 import io.zerows.platform.constant.VBoot;
 import io.zerows.platform.constant.VMessage;
 import io.zerows.platform.enums.Environment;
@@ -25,13 +25,12 @@ import java.util.concurrent.ConcurrentMap;
  *        {@link Environment#Development}
  *     2. 但为了在开发环境中可直接使用生产环境 / 模拟环境相关环境变量，会在文件存在时检查 `ZERO_ENV` 的值，若不存在该值则不考虑环境变量的切换，若存在此环境变量则直接将环境变量强制转换成对应的值
  *     3. 生产环境中不会将 .dev.development 打包，且不会命中此文件开启开发模式
- *
  * </code></pre>
  *
  * @author lang : 2023-05-30
  */
 @Slf4j
-public class ZeroEnvironment {
+public class ZeroEnvironmentLegacy {
     private final static HStore STORE = SPI.V_STORE;
 
     /**
@@ -59,8 +58,8 @@ public class ZeroEnvironment {
             log.info("[ Zero ] 操作系统：OS = {},  `{}` 文件存在，当前强制切换为开发环境", os.name(), VBoot._ENV_DEVELOPMENT);
             final Properties properties = Ut.ioProperties(VBoot._ENV_DEVELOPMENT);
             // 1.1. 环境变量注入
-            if (!properties.containsKey(HEnvironmentVariable.ZERO_ENV)) {
-                properties.put(HEnvironmentVariable.ZERO_ENV, Environment.Development.name());
+            if (!properties.containsKey(EnvironmentVariable.Z_ENV)) {
+                properties.put(EnvironmentVariable.Z_ENV, Environment.Development.name());
             }
             /*
              * 开发环境需要带上启动参数，否则会报错，这里是为了解决 JDK 9 以上版本的问题
@@ -71,7 +70,7 @@ public class ZeroEnvironment {
 
             // 2. 环境变量打印
             final String environments = UtBase.envString(written);
-            LogAs.Boot.info(ZeroEnvironment.class, VMessage.KEnvironment.ENV, environments);
+            LogAs.Boot.info(ZeroEnvironmentLegacy.class, VMessage.KEnvironment.ENV, environments);
         }
     }
 }

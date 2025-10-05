@@ -3,8 +3,8 @@ package io.zerows.epoch.database.cp;
 import com.zaxxer.hikari.HikariDataSource;
 import io.r2mo.typed.cc.Cc;
 import io.zerows.component.log.OLog;
-import io.zerows.platform.metadata.KDatabase;
 import io.zerows.epoch.database.Database;
+import io.zerows.platform.metadata.KDatabase;
 import io.zerows.support.Ut;
 import org.jooq.Configuration;
 import org.jooq.DSLContext;
@@ -121,7 +121,7 @@ public class HikariDataPool implements DataPool {
             final OLog logger = Ut.Log.database(this.getClass());
             logger.info("[ DP ] Data Pool Hash : {0}", ds.hashCode());
             return ds;
-        }, this.database.getJdbcUrl());
+        }, this.database.getUrl());
     }
 
     @Override
@@ -180,7 +180,7 @@ public class HikariDataPool implements DataPool {
              * Ignore driverClass after jdbc4
              * But jdbc4 may caused issue of 'no suitable driver' when deployment.
              */
-            this.dataSource.setJdbcUrl(this.database.getJdbcUrl());
+            this.dataSource.setJdbcUrl(this.database.getUrl());
             this.dataSource.setUsername(this.database.getUsername());
             this.dataSource.setPassword(this.database.getSmartPassword());
             /*

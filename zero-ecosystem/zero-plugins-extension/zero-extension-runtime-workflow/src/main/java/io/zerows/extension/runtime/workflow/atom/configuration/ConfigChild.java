@@ -2,9 +2,9 @@ package io.zerows.extension.runtime.workflow.atom.configuration;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.r2mo.typed.json.jackson.ClassDeserializer;
+import io.r2mo.typed.json.jackson.ClassSerializer;
 import io.vertx.core.json.JsonArray;
-import io.zerows.integrated.jackson.ClassDeserializer;
-import io.zerows.integrated.jackson.ClassSerializer;
 import io.zerows.integrated.jackson.JsonArrayDeserializer;
 import io.zerows.integrated.jackson.JsonArraySerializer;
 

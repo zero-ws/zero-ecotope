@@ -1,4 +1,4 @@
-package io.zerows.cosmic.plugins.security;
+package io.zerows.epoch.basicore.option;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -13,12 +13,14 @@ import io.zerows.epoch.constant.KWeb;
 import io.zerows.integrated.jackson.JsonArrayDeserializer;
 import io.zerows.integrated.jackson.JsonArraySerializer;
 import io.zerows.management.OZeroStore;
+import io.zerows.platform.annotations.ClassYml;
 import io.zerows.platform.exception._60050Exception501NotSupport;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HSetting;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.spi.HPI;
 import io.zerows.support.Ut;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -30,9 +32,11 @@ import java.util.stream.Collectors;
  * Cors configuration here.
  * The data came from `secure -> cors`
  */
-public class CorsConfig implements Serializable {
+@Data
+@ClassYml
+public class CorsOptions implements Serializable {
     private static final AtomicBoolean IS_OUT = new AtomicBoolean(Boolean.TRUE);
-    private static CorsConfig INSTANCE;
+    private static CorsOptions INSTANCE;
     private Boolean credentials = Boolean.FALSE;
     @JsonSerialize(using = JsonArraySerializer.class)
     @JsonDeserialize(using = JsonArrayDeserializer.class)
@@ -48,21 +52,21 @@ public class CorsConfig implements Serializable {
     @JsonDeserialize(using = JsonArrayDeserializer.class)
     private JsonArray origin = new JsonArray();
 
-    public static CorsConfig get() {
+    public static CorsOptions get() {
         if (Objects.nonNull(INSTANCE)) {
             return INSTANCE;
         }
-        final HBundle bundle = HPI.findBundle(CorsConfig.class);
+        final HBundle bundle = HPI.findBundle(CorsOptions.class);
         if (Objects.nonNull(bundle)) {
-            Ut.Log.configure(CorsConfig.class).info("This api is not supported in OSGI environment.");
-            throw new _60050Exception501NotSupport(CorsConfig.class);
+            Ut.Log.configure(CorsOptions.class).info("This api is not supported in OSGI environment.");
+            throw new _60050Exception501NotSupport(CorsOptions.class);
         }
         final HSetting setting = OZeroStore.setting();
         INSTANCE = get(setting);
         return INSTANCE;
     }
 
-    public static CorsConfig get(final HSetting setting) {
+    public static CorsOptions get(final HSetting setting) {
         Objects.requireNonNull(setting);
         final HConfig config = setting.infix(YmlCore.cors.__KEY);
         if (Objects.isNull(config)) {
@@ -72,7 +76,7 @@ public class CorsConfig implements Serializable {
 
 
         final JsonObject options = config.options();
-        final CorsConfig instance = Ut.deserialize(options, CorsConfig.class, false);
+        final CorsOptions instance = Ut.deserialize(options, CorsOptions.class, false);
         if (Objects.isNull(instance)) {
             // 序列化失败
             return null;
@@ -82,17 +86,9 @@ public class CorsConfig implements Serializable {
         final JsonArray origins = MatureOn.envDomain(instance.getOrigin());
         instance.setOrigin(origins);
         if (IS_OUT.getAndSet(Boolean.FALSE)) {
-            Ut.Log.configure(CorsConfig.class).info("[ CORS ] Origin Configured = {0}", instance.getOrigin());
+            Ut.Log.configure(CorsOptions.class).info("[ CORS ] Origin Configured = {0}", instance.getOrigin());
         }
         return instance;
-    }
-
-    public Boolean getCredentials() {
-        return this.credentials;
-    }
-
-    public void setCredentials(final Boolean credentials) {
-        this.credentials = credentials;
     }
 
     public JsonArray getMethods() {
@@ -106,10 +102,6 @@ public class CorsConfig implements Serializable {
         } else {
             return this.methods;
         }
-    }
-
-    public void setMethods(final JsonArray methods) {
-        this.methods = methods;
     }
 
     public JsonArray getHeaders() {
@@ -128,27 +120,6 @@ public class CorsConfig implements Serializable {
         } else {
             return this.headers;
         }
-    }
-
-    public void setHeaders(final JsonArray headers) {
-        this.headers = headers;
-    }
-
-    /*
-     * This issue came from frontend:
-     * Access to fetch at 'http://xxx:xxx/app/name/xxx?name=xxx'
-     * from origin 'http://xxx:xxx' has been blocked by CORS policy:
-     * Response to preflight request doesn't pass access control check:
-     * No 'Access-Control-Allow-Origin' header is present on the requested resource.
-     * If an opaque response serves your needs,
-     * set the request's mode to 'no-cors' to fetch the resource with CORS disabled.
-     */
-    public JsonArray getOrigin() {
-        return this.origin;
-    }
-
-    public void setOrigin(final JsonArray origin) {
-        this.origin = origin;
     }
 
     // 非序列化快速方法

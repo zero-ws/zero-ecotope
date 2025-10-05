@@ -9,12 +9,12 @@ import io.vertx.ext.web.handler.SessionHandler;
 import io.vertx.ext.web.sstore.ClusteredSessionStore;
 import io.vertx.ext.web.sstore.LocalSessionStore;
 import io.vertx.ext.web.sstore.SessionStore;
-import io.zerows.cosmic.plugins.security.CorsConfig;
-import io.zerows.cosmic.plugins.session.SessionClient;
-import io.zerows.cosmic.plugins.session.SessionInfix;
 import io.zerows.cortex.metadata.RunServer;
 import io.zerows.cortex.sdk.Axis;
+import io.zerows.cosmic.plugins.session.SessionClient;
+import io.zerows.cosmic.plugins.session.SessionInfix;
 import io.zerows.epoch.application.YmlCore;
+import io.zerows.epoch.basicore.option.CorsOptions;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HSetting;
@@ -52,7 +52,7 @@ public class AxisCommon implements Axis {
     private void mountCors(final RunServer server, final HBundle bundle) {
         final HSetting setting = server.setting();
         final Router router = server.refRouter();
-        final CorsConfig config = CorsConfig.get(setting);
+        final CorsOptions config = CorsOptions.get(setting);
         if (Objects.isNull(config)) {
             return;
         }

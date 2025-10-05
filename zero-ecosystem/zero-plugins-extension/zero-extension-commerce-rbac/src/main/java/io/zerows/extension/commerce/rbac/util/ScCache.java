@@ -3,7 +3,6 @@ package io.zerows.extension.commerce.rbac.util;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.component.environment.DevEnv;
 import io.zerows.cosmic.plugins.cache.Rapid;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SPath;
 import io.zerows.extension.commerce.rbac.eon.ScConstant;
@@ -19,16 +18,12 @@ import java.util.function.Function;
 class ScCache {
 
     static <R> Future<R> admitPath(final SPath path, final Function<SPath, Future<R>> executor, final String suffix) {
-        if (DevEnv.cacheAdmit()) {
-            // Cache Enabled for Default
-            final String admitPool = ScConstant.POOL_ADMIN;
-            // Each sigma has been mapped to single pool
-            final String poolName = admitPool + VString.SLASH + path.getSigma() + VString.SLASH + suffix;
-            final Rapid<String, R> rapid = Rapid.object(poolName, 3600);
-            return rapid.cached(path.getKey(), () -> executor.apply(path));
-        } else {
-            return executor.apply(path);
-        }
+        // Cache Enabled for Default
+        final String admitPool = ScConstant.POOL_ADMIN;
+        // Each sigma has been mapped to single pool
+        final String poolName = admitPool + VString.SLASH + path.getSigma() + VString.SLASH + suffix;
+        final Rapid<String, R> rapid = Rapid.object(poolName, 3600);
+        return rapid.cached(path.getKey(), () -> executor.apply(path));
     }
 
     static Future<JsonObject> view(final RoutingContext context, final String habitus) {

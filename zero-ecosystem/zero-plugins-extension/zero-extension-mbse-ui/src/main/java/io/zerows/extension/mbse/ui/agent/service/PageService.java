@@ -2,9 +2,8 @@ package io.zerows.extension.mbse.ui.agent.service;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.environment.DevEnv;
-import io.zerows.epoch.constant.KName;
 import io.zerows.cosmic.plugins.cache.Rapid;
+import io.zerows.epoch.constant.KName;
 import io.zerows.extension.mbse.ui.domain.tables.daos.UiLayoutDao;
 import io.zerows.extension.mbse.ui.domain.tables.daos.UiPageDao;
 import io.zerows.extension.mbse.ui.domain.tables.pojos.UiPage;
@@ -34,14 +33,9 @@ public class PageService implements PageStub {
                  * Configuration converted to InJson
                  */
                 .compose(Fx.ofJObject(KName.Ui.CONFIG));
-        if (DevEnv.cacheUi()) {
-            // Ui Cache Enabled
-            return Rapid.<String, JsonObject>object(UiConstant.POOL_LAYOUT)
-                .cached(layoutId, () -> executor.apply(layoutId));
-        } else {
-            // Ui Cache Disabled ( Development Mode )
-            return executor.apply(layoutId);
-        }
+        // Ui Cache Enabled
+        return Rapid.<String, JsonObject>object(UiConstant.POOL_LAYOUT)
+            .cached(layoutId, () -> executor.apply(layoutId));
     }
 
     @Override

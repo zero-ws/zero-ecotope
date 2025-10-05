@@ -1,7 +1,7 @@
 package io.zerows.support.base;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.platform.HEnvironmentVariable;
+import io.zerows.platform.EnvironmentVariable;
 import io.zerows.platform.constant.VName;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.constant.VValue;
@@ -32,7 +32,7 @@ class MContext {
     }
 
     static String keyOwner(final String id) {
-        String valueOwner = UtBase.envWith(HEnvironmentVariable.Z_TENANT, id);
+        String valueOwner = UtBase.envWith(EnvironmentVariable.Z_TENANT, id);
         if (UtBase.isNil(valueOwner)) {
             valueOwner = VValue.DEFAULT;
         }

@@ -1,8 +1,8 @@
 package io.zerows.platform.metadata;
 
 import io.vertx.core.json.JsonObject;
+import io.zerows.platform.EnvironmentVariable;
 import io.zerows.platform.exception._40101Exception500CombineApp;
-import io.zerows.platform.HEnvironmentVariable;
 import io.zerows.specification.access.app.HApp;
 import io.zerows.support.base.UtBase;
 
@@ -18,7 +18,7 @@ public class KApp implements HApp {
     private final String ns;
 
     public KApp(final String name) {
-        final String nameApp = UtBase.envWith(HEnvironmentVariable.Z_APP, name);
+        final String nameApp = UtBase.envWith(EnvironmentVariable.Z_APP, name);
         // 应用名称
         this.name = nameApp;
         // 名空间

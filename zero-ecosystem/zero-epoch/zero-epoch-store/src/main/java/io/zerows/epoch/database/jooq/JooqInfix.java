@@ -2,14 +2,14 @@ package io.zerows.epoch.database.jooq;
 
 import io.r2mo.function.Fn;
 import io.vertx.core.Vertx;
+import io.zerows.component.log.OLog;
 import io.zerows.epoch.annotations.Infusion;
 import io.zerows.epoch.application.YmlCore;
-import io.zerows.component.log.OLog;
-import io.zerows.platform.metadata.KDatabase;
 import io.zerows.epoch.database.cp.DataPool;
 import io.zerows.epoch.database.exception._40065Exception500JooqConfiguration;
-import io.zerows.support.Ut;
+import io.zerows.platform.metadata.KDatabase;
 import io.zerows.sdk.plugins.Infix;
+import io.zerows.support.Ut;
 import org.jooq.Configuration;
 import org.jooq.DSLContext;
 
@@ -46,7 +46,7 @@ public class JooqInfix implements Infix {
 
     private static Configuration configDelay(final DataPool pool) {
         final KDatabase database = pool.getDatabase();
-        final String configurationKey = Objects.requireNonNull(database).getJdbcUrl();
+        final String configurationKey = Objects.requireNonNull(database).getUrl();
         if (CONFIGURATION.containsKey(configurationKey)) {
             return configSafe(configurationKey);
         } else {

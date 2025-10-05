@@ -1,8 +1,8 @@
 package io.zerows.component.environment;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.zerows.platform.EnvironmentVariable;
 import io.zerows.support.Ut;
-import io.zerows.platform.HEnvironmentVariable;
 
 import java.io.Serializable;
 
@@ -23,57 +23,31 @@ import java.io.Serializable;
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
-public class DiagnosisOption implements Serializable, HEnvironmentVariable {
-    // ------------- cache ----------------
-    // 是否开启UI缓存，默认true，开启
-    @JsonProperty(HEnvironmentVariable.CACHE_UI)
-    private Boolean cacheUi = Boolean.TRUE;
-
-    // 是否打开授权缓存，默认true，开启
-    @JsonProperty(HEnvironmentVariable.CACHE_ADMIT)
-    private Boolean cacheAdmit = Boolean.TRUE;
+public class DiagnosisOption implements Serializable, EnvironmentVariable {
     // ------------- dev -------------------
     // 是否显示URI路由检测状况，默认 false，不检测
-    @JsonProperty(HEnvironmentVariable.DEV_WEB_URI)
+    @JsonProperty(EnvironmentVariable.DEV_WEB_URI)
     private Boolean devWebUri = Boolean.FALSE;
-    @JsonProperty(HEnvironmentVariable.DEV_JVM_STACK)
+    @JsonProperty(EnvironmentVariable.DEV_JVM_STACK)
     private Boolean devJvmStack = Boolean.FALSE;
-    @JsonProperty(HEnvironmentVariable.DEV_JOB_BOOT)
+    @JsonProperty(EnvironmentVariable.DEV_JOB_BOOT)
     private Boolean devJobBoot = Boolean.FALSE;
-    @JsonProperty(HEnvironmentVariable.DEV_EXCEL_RANGE)
+    @JsonProperty(EnvironmentVariable.DEV_EXCEL_RANGE)
     private Boolean devExcelRange = Boolean.FALSE;
-    @JsonProperty(HEnvironmentVariable.DEV_JOOQ_COND)
+    @JsonProperty(EnvironmentVariable.DEV_JOOQ_COND)
     private Boolean devJooqCond = Boolean.FALSE;
-    @JsonProperty(HEnvironmentVariable.DEV_EXPR_BIND)
+    @JsonProperty(EnvironmentVariable.DEV_EXPR_BIND)
     private Boolean devExprBind = Boolean.FALSE;
-    @JsonProperty(HEnvironmentVariable.DEV_DAO_BIND)
+    @JsonProperty(EnvironmentVariable.DEV_DAO_BIND)
     private Boolean devDaoBind = Boolean.TRUE;
 
     // 是否开启认证日志，默认false，关闭（5个地方调用）
-    @JsonProperty(HEnvironmentVariable.DEV_AUTHORIZED)
+    @JsonProperty(EnvironmentVariable.DEV_AUTHORIZED)
     private Boolean devAuthorized = Boolean.FALSE;
-
-    // Z_CACHE_UI
-    public Boolean getCacheUi() {
-        return Ut.envWith(HEnvironmentVariable.CACHE_UI, this.cacheUi, Boolean.class);
-    }
-
-    public void setCacheUi(final Boolean cacheUi) {
-        this.cacheUi = cacheUi;
-    }
-
-    // Z_CACHE_ADMIT
-    public Boolean getCacheAdmit() {
-        return Ut.envWith(HEnvironmentVariable.CACHE_ADMIT, this.cacheAdmit, Boolean.class);
-    }
-
-    public void setCacheAdmit(final Boolean cacheAdmit) {
-        this.cacheAdmit = cacheAdmit;
-    }
 
     // Z_DEV_AUTHORIZED
     public Boolean getDevAuthorized() {
-        return Ut.envWith(HEnvironmentVariable.DEV_AUTHORIZED, this.devAuthorized, Boolean.class);
+        return Ut.envWith(EnvironmentVariable.DEV_AUTHORIZED, this.devAuthorized, Boolean.class);
     }
 
     public void setDevAuthorized(final Boolean devAuthorized) {
@@ -82,7 +56,7 @@ public class DiagnosisOption implements Serializable, HEnvironmentVariable {
 
     // Z_DEV_WEB_URI
     public Boolean getDevWebUri() {
-        return Ut.envWith(HEnvironmentVariable.DEV_WEB_URI, this.devWebUri, Boolean.class);
+        return Ut.envWith(EnvironmentVariable.DEV_WEB_URI, this.devWebUri, Boolean.class);
     }
 
     public void setDevWebUri(final Boolean devWebUri) {
@@ -91,7 +65,7 @@ public class DiagnosisOption implements Serializable, HEnvironmentVariable {
 
     // Z_DEV_JVM_STACK
     public Boolean getDevJvmStack() {
-        return Ut.envWith(HEnvironmentVariable.DEV_JVM_STACK, this.devJvmStack, Boolean.class);
+        return Ut.envWith(EnvironmentVariable.DEV_JVM_STACK, this.devJvmStack, Boolean.class);
     }
 
     public void setDevJvmStack(final Boolean devJvmStack) {
@@ -100,7 +74,7 @@ public class DiagnosisOption implements Serializable, HEnvironmentVariable {
 
     // Z_DEV_JOB_BOOT
     public Boolean getDevJobBoot() {
-        return Ut.envWith(HEnvironmentVariable.DEV_JOB_BOOT, this.devJobBoot, Boolean.class);
+        return Ut.envWith(EnvironmentVariable.DEV_JOB_BOOT, this.devJobBoot, Boolean.class);
     }
 
     public void setDevJobBoot(final Boolean devJobBoot) {
@@ -109,7 +83,7 @@ public class DiagnosisOption implements Serializable, HEnvironmentVariable {
 
     // Z_DEV_EXCEL_RANGE
     public Boolean getDevExcelRange() {
-        return Ut.envWith(HEnvironmentVariable.DEV_EXCEL_RANGE, this.devExcelRange, Boolean.class);
+        return Ut.envWith(EnvironmentVariable.DEV_EXCEL_RANGE, this.devExcelRange, Boolean.class);
     }
 
     public void setDevExcelRange(final Boolean devExcelRange) {
@@ -118,7 +92,7 @@ public class DiagnosisOption implements Serializable, HEnvironmentVariable {
 
     // Z_DEV_JOOQ_COND
     public Boolean getDevJooqCond() {
-        return Ut.envWith(HEnvironmentVariable.DEV_JOOQ_COND, this.devJooqCond, Boolean.class);
+        return Ut.envWith(EnvironmentVariable.DEV_JOOQ_COND, this.devJooqCond, Boolean.class);
     }
 
     public void setDevJooqCond(final Boolean devJooqCond) {
@@ -127,7 +101,7 @@ public class DiagnosisOption implements Serializable, HEnvironmentVariable {
 
     // Z_DEV_EXPR_BIND
     public Boolean getDevExprBind() {
-        return Ut.envWith(HEnvironmentVariable.DEV_EXPR_BIND, this.devExprBind, Boolean.class);
+        return Ut.envWith(EnvironmentVariable.DEV_EXPR_BIND, this.devExprBind, Boolean.class);
     }
 
     public void setDevExprBind(final Boolean devExprBind) {
@@ -136,7 +110,7 @@ public class DiagnosisOption implements Serializable, HEnvironmentVariable {
 
     // Z_DEV_DAO_BIND
     public Boolean getDevDaoBind() {
-        return Ut.envWith(HEnvironmentVariable.DEV_DAO_BIND, this.devDaoBind, Boolean.class);
+        return Ut.envWith(EnvironmentVariable.DEV_DAO_BIND, this.devDaoBind, Boolean.class);
     }
 
     public void setDevDaoBind(final Boolean devDaoBind) {

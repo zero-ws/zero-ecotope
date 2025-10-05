@@ -1,13 +1,13 @@
 package io.zerows.epoch.database;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.platform.annotations.Legacy;
-import io.zerows.epoch.application.YmlCore;
-import io.zerows.component.log.OLog;
-import io.zerows.platform.metadata.KDatabase;
 import io.zerows.component.environment.MatureOn;
-import io.zerows.platform.enums.EmDS;
+import io.zerows.component.log.OLog;
+import io.zerows.epoch.application.YmlCore;
 import io.zerows.management.OZeroStore;
+import io.zerows.platform.annotations.Legacy;
+import io.zerows.platform.enums.EmDS;
+import io.zerows.platform.metadata.KDatabase;
 import io.zerows.support.Ut;
 
 import java.sql.DriverManager;
@@ -46,7 +46,7 @@ public class Database extends KDatabase {
     /* Database Connection Testing */
     public static boolean test(final Database database) {
         try {
-            DriverManager.getConnection(database.getJdbcUrl(), database.getUsername(), database.getSmartPassword());
+            DriverManager.getConnection(database.getUrl(), database.getUsername(), database.getSmartPassword());
             return true;
         } catch (final SQLException ex) {
             // Debug for database connection

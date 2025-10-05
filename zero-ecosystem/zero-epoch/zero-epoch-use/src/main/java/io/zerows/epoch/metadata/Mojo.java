@@ -4,11 +4,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.r2mo.typed.json.jackson.ClassDeserializer;
+import io.r2mo.typed.json.jackson.ClassSerializer;
 import io.zerows.component.log.OLog;
 import io.zerows.epoch.constant.KName;
 import io.zerows.support.Ut;
-import io.zerows.integrated.jackson.ClassDeserializer;
-import io.zerows.integrated.jackson.ClassSerializer;
 
 import java.io.Serializable;
 import java.util.Objects;

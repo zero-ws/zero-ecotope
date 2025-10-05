@@ -2,8 +2,8 @@ package io.zerows.epoch.database.cp;
 
 import io.r2mo.typed.cc.Cc;
 import io.zerows.component.log.OLog;
-import io.zerows.platform.metadata.KDatabase;
 import io.zerows.epoch.database.Database;
+import io.zerows.platform.metadata.KDatabase;
 import io.zerows.support.Ut;
 import org.jooq.Configuration;
 import org.jooq.ConnectionProvider;
@@ -34,9 +34,9 @@ public interface DataPool {
             final OLog logger = Ut.Log.database(DataPool.class);
             final DataPool ds = new HikariDataPool(database);
             logger.info("[ DP ] Data Pool Hash : {0}, URL: {1}",
-                String.valueOf(ds.hashCode()), database.getJdbcUrl());
+                String.valueOf(ds.hashCode()), database.getUrl());
             return ds;
-        }, database.getJdbcUrl());
+        }, database.getUrl());
     }
 
     static DataPool createAuto(final KDatabase database) {

@@ -1,8 +1,8 @@
 package io.zerows.extension.commerce.rbac.bootstrap;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.cortex.extension.HExtension;
+import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.extension.commerce.rbac.atom.ScConfig;
 import io.zerows.extension.commerce.rbac.eon.ScConstant;
 import io.zerows.extension.runtime.skeleton.eon.KeMsg;

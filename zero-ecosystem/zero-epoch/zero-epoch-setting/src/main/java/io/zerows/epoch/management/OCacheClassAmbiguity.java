@@ -4,6 +4,7 @@ import io.zerows.epoch.assembly.ClassScanner;
 import io.zerows.epoch.configuration.Inquirer;
 import io.zerows.platform.enums.VertxComponent;
 import io.zerows.specification.development.compiled.HBundle;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -25,6 +26,7 @@ import java.util.stream.Collectors;
  *
  * @author lang : 2024-04-17
  */
+@Slf4j
 class OCacheClassAmbiguity extends AbstractAmbiguity implements OCacheClass {
     /**
      * 每个 Bundle x 1，此处证明 Set<Class<?>> 是按 Bundle 执行过分组的，即
@@ -42,8 +44,7 @@ class OCacheClassAmbiguity extends AbstractAmbiguity implements OCacheClass {
         // Scanner
         final ClassScanner scanner = ClassScanner.of();
         final Set<Class<?>> scanned = scanner.scan(bundle);
-        this.logger().info("Zero system scanned `{0}` classes in total. MetaTree = {1}",
-            String.valueOf(scanned.size()), String.valueOf(this.meta.hashCode()));
+        log.info("[ Zero ] Zero 系统总共扫描了 {} 类信息，构造的 MetaTree 哈希值为 {}", scanned.size(), this.meta.hashCode());
         this.meta.add(scanned);
     }
 
@@ -80,7 +81,7 @@ class OCacheClassAmbiguity extends AbstractAmbiguity implements OCacheClass {
     public VertxComponent valueType(final Class<?> clazz) {
         VertxComponent type = this.meta.getType(clazz);
         if (Objects.isNull(type)) {
-            this.logger().info("Could not extract type from bundle, try to parse from Global Data. class = \"{}\"",
+            log.info("[ Zero ] 无法从bundle中提取类型，尝试从全局数据中解析。class = \"{}\"",
                 clazz.getName());
             type = OCacheClass.entireType(clazz);
         }
@@ -90,25 +91,23 @@ class OCacheClassAmbiguity extends AbstractAmbiguity implements OCacheClass {
     @Override
     public OCacheClass add(final Set<Class<?>> classes) {
         this.meta.add(classes);
-        this.logger().info("Added \"{}\" classes into current bundle.", String.valueOf(classes.size()));
+        log.info("[ Zero ] 向当前bundle中添加了 \"{}\" 个类。", String.valueOf(classes.size()));
         return this;
     }
 
     @Override
     public OCacheClass remove(final Set<Class<?>> classes) {
         this.meta.remove(classes);
-        this.logger().info("Removed \"{}\" classes from current bundle.", String.valueOf(classes.size()));
+        log.info("[ Zero ] 从当前bundle中移除了 \"{}\" 个类。", String.valueOf(classes.size()));
         return this;
     }
 
     @Override
     public OCacheClass compile(final VertxComponent type, final Function<Set<Class<?>>, Set<Class<?>>> compiler) {
         if (Objects.isNull(this.caller())) {
-            this.logger().info("Scanned \"{}\" of typed classes from current environment.",
-                type.name());
+            log.info("[ Zero ] 从当前环境中扫描了 \"{}\" 类型的类。", type.name());
         } else {
-
-            this.logger().info("Scanned \"{}\" of typed classes from current bundle. owner = {}",
+            log.info("[ Zero ] 从当前bundle中扫描了 \"{}\" 类型的类。拥有者 = {}",
                 type.name(), this.caller().name());
         }
         this.meta.compile(type, compiler);

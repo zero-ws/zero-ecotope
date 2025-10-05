@@ -9,11 +9,13 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.integrated.jackson.JsonObjectDeserializer;
 import io.zerows.integrated.jackson.JsonObjectSerializer;
 import io.zerows.platform.enums.EmDeploy;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
+@Data
 public class ActorOptions implements Serializable {
     @JsonIgnore
     private final ConcurrentMap<String, DeploymentOptions> deploymentMap = new ConcurrentHashMap<>();
@@ -29,30 +31,6 @@ public class ActorOptions implements Serializable {
     @JsonSerialize(using = JsonObjectSerializer.class)
     @JsonDeserialize(using = JsonObjectDeserializer.class)
     private JsonObject delivery = new JsonObject();
-
-    public EmDeploy.Mode getMode() {
-        return this.mode;
-    }
-
-    public void setMode(final EmDeploy.Mode mode) {
-        this.mode = mode;
-    }
-
-    public JsonObject getOptions() {
-        return this.options;
-    }
-
-    public void setOptions(final JsonObject options) {
-        this.options = options;
-    }
-
-    public JsonObject getDelivery() {
-        return this.delivery;
-    }
-
-    public void setDelivery(final JsonObject delivery) {
-        this.delivery = delivery;
-    }
 
     public ConcurrentMap<String, DeploymentOptions> optionDeploy() {
         return this.deploymentMap;

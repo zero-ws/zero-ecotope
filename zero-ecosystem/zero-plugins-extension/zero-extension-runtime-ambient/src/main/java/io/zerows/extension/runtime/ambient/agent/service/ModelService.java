@@ -3,7 +3,6 @@ package io.zerows.extension.runtime.ambient.agent.service;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.environment.DevEnv;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XModuleDao;
 import io.zerows.extension.runtime.skeleton.osgi.spi.environment.Modeling;
@@ -56,25 +55,17 @@ public class ModelService implements ModelStub {
             return Ux.futureJ();
         } else {
             final String cacheKey = appId + ":" + entry;
-            /*
-             * Ui Cache Enabled for this processing
-             */
-            if (DevEnv.cacheUi()) {
-                // Cache enabled
-                final JsonObject cachedData = CACHE_MODULE.getOrDefault(cacheKey, null);
-                if (Objects.isNull(cachedData)) {
-                    return executor.get().compose(dataData -> {
-                        if (Objects.nonNull(dataData)) {
-                            CACHE_MODULE.put(cacheKey, dataData);
-                        }
-                        return Ux.future(dataData);
-                    });
-                } else {
-                    return Ux.future(cachedData);
-                }
+            // Cache enabled
+            final JsonObject cachedData = CACHE_MODULE.getOrDefault(cacheKey, null);
+            if (Objects.isNull(cachedData)) {
+                return executor.get().compose(dataData -> {
+                    if (Objects.nonNull(dataData)) {
+                        CACHE_MODULE.put(cacheKey, dataData);
+                    }
+                    return Ux.future(dataData);
+                });
             } else {
-                // Cache disabled
-                return executor.get();
+                return Ux.future(cachedData);
             }
         }
     }

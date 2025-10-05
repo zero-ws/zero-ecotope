@@ -1,6 +1,6 @@
 package io.zerows.component.log;
 
-import io.zerows.platform.HEnvironmentVariable;
+import io.zerows.platform.EnvironmentVariable;
 import io.zerows.support.base.UtBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +21,7 @@ public class LogUtil {
 
     public void io(final String pattern, final Object... args) {
         /* 底层防止循环调用，此处不走 DiagnosisOption */
-        final String value = System.getenv(HEnvironmentVariable.DEV_IO);
+        final String value = System.getenv(EnvironmentVariable.DEV_IO);
         if (UtBase.isBoolean(value)) {
             final boolean ioDebug = Boolean.parseBoolean(value);
             if (ioDebug) {

@@ -1,7 +1,7 @@
 package io.zerows.component.log;
 
 import io.r2mo.typed.exception.AbstractException;
-import io.zerows.platform.HEnvironmentVariable;
+import io.zerows.platform.EnvironmentVariable;
 import io.zerows.platform.constant.VString;
 import io.zerows.support.base.UtBase;
 import org.slf4j.Logger;
@@ -38,7 +38,7 @@ public class Log4JAnnal implements Annal {
         } else {
             this.logger.error(message);
         }
-        final Boolean isDebug = UtBase.envWith(HEnvironmentVariable.DEV_JVM_STACK, Boolean.FALSE, Boolean.class);
+        final Boolean isDebug = UtBase.envWith(EnvironmentVariable.DEV_JVM_STACK, Boolean.FALSE, Boolean.class);
         if (isDebug) {
             /*
              * 堆栈信息打印条件

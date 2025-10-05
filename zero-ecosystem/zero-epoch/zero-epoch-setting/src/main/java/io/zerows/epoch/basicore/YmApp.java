@@ -1,0 +1,28 @@
+package io.zerows.epoch.basicore;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.vertx.core.json.JsonObject;
+import io.zerows.integrated.jackson.JsonObjectDeserializer;
+import io.zerows.integrated.jackson.JsonObjectSerializer;
+import lombok.Data;
+
+import java.io.Serializable;
+
+/**
+ * @author lang : 2025-10-06
+ */
+@Data
+public class YmApp implements Serializable {
+    private String id;
+    private String tenant;
+
+    @JsonSerialize(using = JsonObjectSerializer.class)
+    @JsonDeserialize(using = JsonObjectDeserializer.class)
+    private JsonObject data;
+
+
+    @JsonSerialize(using = JsonObjectSerializer.class)
+    @JsonDeserialize(using = JsonObjectDeserializer.class)
+    private JsonObject config;
+}
