@@ -34,7 +34,6 @@ public class ZeroStation implements HStation {
 
     private final HBoot boot;
 
-
     private ZeroStation() {
         final HSetting setting = OZeroStore.setting();
         final JsonObject launcherJ = setting.launcher().options();
@@ -101,21 +100,23 @@ public class ZeroStation implements HStation {
 
     // ------------------- Feature --------------------
 
+    @Deprecated
     public ZeroStation feature(final FeatureMark mark, final Boolean enabled) {
         this.features.put(mark, enabled);
         return this;
     }
 
+    @Deprecated
     public boolean isEtcd() {
-        return this.features
-            .getOrDefault(FeatureMark.ETCD, Boolean.FALSE);
+        return false;
     }
 
+    @Deprecated
     public boolean isInit() {
-        return this.features
-            .getOrDefault(FeatureMark.INIT, Boolean.FALSE);
+        return false;
     }
 
+    @Deprecated
     public boolean isSession() {
         return this.features
             .getOrDefault(FeatureMark.SESSION, Boolean.FALSE);

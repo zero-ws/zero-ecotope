@@ -1,7 +1,9 @@
 package io.zerows.epoch.basicore.option;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.r2mo.SourceReflect;
 import io.r2mo.typed.json.jackson.ClassDeserializer;
 import io.r2mo.typed.json.jackson.ClassSerializer;
 import io.vertx.codegen.annotations.Fluent;
@@ -11,9 +13,13 @@ import io.vertx.spi.cluster.hazelcast.HazelcastClusterManager;
 import io.zerows.epoch.constant.KName;
 import io.zerows.platform.annotations.ClassYml;
 import io.zerows.support.Ut;
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * # 「Co」Vert.x 扩展 🚀
@@ -83,6 +89,9 @@ public class ClusterOptions implements Serializable {
      * 引用。对于开发人员来说，直接获取 ClusterManager 更加智能， 👨‍💻
      * 可以忽略实例构建代码流程。 ⚡
      */
+    @JsonIgnore
+    @Getter(AccessLevel.NONE)
+    @Setter(AccessLevel.NONE)
     private ClusterManager clusterManager;
 
     @JsonSerialize(using = ClassSerializer.class)
@@ -99,6 +108,7 @@ public class ClusterOptions implements Serializable {
     public ClusterOptions() {
         this.enabled = ENABLED;
         this.clusterManager = MANAGER;
+        this.manager = MANAGER.getClass();
         this.options = OPTIONS;
     }
 
@@ -107,9 +117,10 @@ public class ClusterOptions implements Serializable {
      *
      * @param other 创建此实例时要复制的其他 {@code ClusterOptions} 📄
      */
+    @SuppressWarnings("all")
     public ClusterOptions(final ClusterOptions other) {
         this.enabled = other.isEnabled();
-        this.clusterManager = other.getClusterManager();
+        this.manager = other.getManager();
         this.options = other.getOptions();
     }
 
@@ -141,14 +152,22 @@ public class ClusterOptions implements Serializable {
      * 「Fluent」 ⚡
      * 在选项中设置集群管理器以替换默认的 `ClusterManager`。 🎯
      *
-     * @param manager 来自外部的另一个 `ClusterManager` 引用 📌
+     * @param clusterManager 来自外部的另一个 `ClusterManager` 引用 📌
      *
      * @return 此实例的引用。 🔄
      */
     @Fluent
-    public ClusterOptions setManager(final ClusterManager clusterManager) {
+    @SuppressWarnings("all")
+    public ClusterOptions setClusterManager(final ClusterManager clusterManager) {
         this.clusterManager = clusterManager;
         return this;
+    }
+
+    public ClusterManager getClusterManager() {
+        if (Objects.isNull(this.clusterManager)) {
+            this.clusterManager = (ClusterManager) SourceReflect.instance(this.manager);
+        }
+        return this.clusterManager;
     }
 
     /**
@@ -211,7 +230,7 @@ public class ClusterOptions implements Serializable {
             final Class<?> clazz = Ut.clazz(managerObj.toString());
             // 如果为 null，保持默认值 ⚙️
             final ClusterManager manager = Ut.instance(clazz);
-            obj.setManager(manager);
+            obj.setClusterManager(manager);
         }
     }
 }
