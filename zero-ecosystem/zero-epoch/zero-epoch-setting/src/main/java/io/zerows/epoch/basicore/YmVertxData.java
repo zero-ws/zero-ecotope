@@ -9,5 +9,5 @@ import java.io.Serializable;
  */
 @Data
 public class YmVertxData implements Serializable {
-    private YmRedis redis;
+    private YmRedis redis = new YmRedis();
 }

@@ -19,10 +19,10 @@ public class YmApp implements Serializable {
 
     @JsonSerialize(using = JsonObjectSerializer.class)
     @JsonDeserialize(using = JsonObjectDeserializer.class)
-    private JsonObject data;
+    private JsonObject data = new JsonObject();
 
 
     @JsonSerialize(using = JsonObjectSerializer.class)
     @JsonDeserialize(using = JsonObjectDeserializer.class)
-    private JsonObject config;
+    private JsonObject config = new JsonObject();
 }

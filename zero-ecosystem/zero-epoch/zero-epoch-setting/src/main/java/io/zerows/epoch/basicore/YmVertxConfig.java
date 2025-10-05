@@ -3,7 +3,6 @@ package io.zerows.epoch.basicore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.tracing.TracingPolicy;
@@ -16,6 +15,7 @@ import io.zerows.platform.annotations.ClassYml;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,13 +28,13 @@ public class YmVertxConfig implements Serializable {
     @JsonProperty(KEY_IMPORT)
     @JsonSerialize(using = JsonArraySerializer.class)
     @JsonDeserialize(using = JsonArrayDeserializer.class)
-    private JsonArray imports;
+    private JsonArray imports = new JsonArray();
 
-    private List<Instance> instance;
+    private List<Instance> instance = new ArrayList<>();
 
-    private Delivery delivery;
+    private Delivery delivery = new Delivery();
 
-    private Deployment deployment;
+    private Deployment deployment = new Deployment();
 
     /**
      * @author lang : 2025-10-05
@@ -43,7 +43,9 @@ public class YmVertxConfig implements Serializable {
     public static class Delivery implements Serializable {
         private long timeout = 30000L;
         private String codecName;
-        private MultiMap headers;
+        @JsonSerialize(using = JsonObjectSerializer.class)
+        @JsonDeserialize(using = JsonObjectDeserializer.class)
+        private JsonObject headers = new JsonObject();
         private boolean localOnly = false;
         private TracingPolicy tracingPolicy;
     }
@@ -54,7 +56,7 @@ public class YmVertxConfig implements Serializable {
     @Data
     public static class Deployment implements Serializable {
 
-        private Instance.Counter instances;
+        private Instance.Counter instances = new Instance.Counter();
 
         /*
          * 特殊情况相关配置，如果存在则
@@ -62,7 +64,7 @@ public class YmVertxConfig implements Serializable {
          **/
         @JsonSerialize(using = JsonObjectSerializer.class)
         @JsonDeserialize(using = JsonObjectDeserializer.class)
-        private JsonObject options;
+        private JsonObject options = new JsonObject();
     }
 
     /**
@@ -74,7 +76,7 @@ public class YmVertxConfig implements Serializable {
 
         @JsonSerialize(using = JsonObjectSerializer.class)
         @JsonDeserialize(using = JsonObjectDeserializer.class)
-        private JsonObject options;
+        private JsonObject options = new JsonObject();
 
         @Data
         public static class Counter implements Serializable {
@@ -89,6 +91,6 @@ public class YmVertxConfig implements Serializable {
     @Data
     public static class Application implements Serializable {
         private String name;
-        private CorsOptions cors;
+        private CorsOptions cors = new CorsOptions();
     }
 }

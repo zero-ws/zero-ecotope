@@ -15,6 +15,6 @@ import java.io.Serializable;
 public class YmServer implements Serializable {
     private int port;
     private String address;
-    private JsonObject options;
-    private YmWebSocket websocket;
+    private JsonObject options = new JsonObject();
+    private YmWebSocket websocket = new YmWebSocket();
 }

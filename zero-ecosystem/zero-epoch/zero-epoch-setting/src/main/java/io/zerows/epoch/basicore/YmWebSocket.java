@@ -27,7 +27,7 @@ public class YmWebSocket implements Serializable {
 
     @JsonSerialize(using = JsonObjectSerializer.class)
     @JsonDeserialize(using = JsonObjectDeserializer.class)
-    private JsonObject config;
+    private JsonObject config = new JsonObject();
 
     /**
      * {@link VertxYml.server.websocket.config.stomp}

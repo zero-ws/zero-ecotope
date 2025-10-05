@@ -19,15 +19,15 @@ public class YmDubbo implements Serializable {
     private static final String KEY_SERIALIZE_CHECK_STATUS = "serialize-check-status";
     private static final String KEY_SERIALIZATION_SECURITY_CHECK = "serialization-security-check";
 
-    private Application application;
+    private Application application = new Application();
 
-    private Registry registry;
+    private Registry registry = new Registry();
 
-    private Protocol protocol;
+    private Protocol protocol = new Protocol();
 
-    private ServiceConfig provider;
+    private ServiceConfig provider = new ServiceConfig();
 
-    private ServiceConfig consumer;
+    private ServiceConfig consumer = new ServiceConfig();
 
     @Data
     public static class Application implements Serializable {
@@ -42,7 +42,7 @@ public class YmDubbo implements Serializable {
         private String address;
         @JsonSerialize(using = JsonObjectSerializer.class)
         @JsonDeserialize(using = JsonObjectDeserializer.class)
-        private JsonObject parameters;
+        private JsonObject parameters = new JsonObject();
     }
 
     @Data

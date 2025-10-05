@@ -20,23 +20,23 @@ import java.io.Serializable;
  */
 @Data
 public class YmConfiguration implements Serializable {
-    private YmBoot boot;
-    private YmServer server;
-    private YmVertx vertx;
-    private YmDubbo dubbo;
-    private YmApp app;
-    private YmStorage storage;
-    private YmExcel excel;
+    private YmBoot boot = new YmBoot();
+    private YmServer server = new YmServer();
+    private YmVertx vertx = new YmVertx();
+    private YmDubbo dubbo = new YmDubbo();
+    private YmApp app = new YmApp();
+    private YmStorage storage = new YmStorage();
+    private YmExcel excel = new YmExcel();
 
     @JsonSerialize(using = JsonObjectSerializer.class)
     @JsonDeserialize(using = JsonObjectDeserializer.class)
-    private JsonObject plugins;
+    private JsonObject plugins = new JsonObject();
 
     @JsonSerialize(using = JsonObjectSerializer.class)
     @JsonDeserialize(using = JsonObjectDeserializer.class)
-    private JsonObject flyway;
+    private JsonObject flyway = new JsonObject();
 
     @JsonSerialize(using = JsonObjectSerializer.class)
     @JsonDeserialize(using = JsonObjectDeserializer.class)
-    private JsonObject sms;
+    private JsonObject sms = new JsonObject();
 }

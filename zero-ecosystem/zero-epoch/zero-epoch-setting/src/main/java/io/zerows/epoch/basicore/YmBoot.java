@@ -12,7 +12,7 @@ import java.io.Serializable;
  */
 @Data
 public class YmBoot implements Serializable {
-    private UnitComponent pre;
-    private UnitComponent on;
-    private UnitComponent off;
+    private UnitComponent pre = new UnitComponent();
+    private UnitComponent on = new UnitComponent();
+    private UnitComponent off = new UnitComponent();
 }

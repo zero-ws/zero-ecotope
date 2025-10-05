@@ -13,11 +13,11 @@ import java.io.Serializable;
  */
 @Data
 public class YmVertx implements Serializable {
-    private YmVertxConfig config;
-    private YmCloud cloud;
-    private YmVertxConfig.Application application;
-    private ClusterOptions cluster;
-    private YmDataSource datasource;
-    private YmSecurity security;
-    private YmVertxData data;
+    private YmVertxConfig config = new YmVertxConfig();
+    private YmCloud cloud = new YmCloud();
+    private YmVertxConfig.Application application = new YmVertxConfig.Application();
+    private ClusterOptions cluster = new ClusterOptions();
+    private YmDataSource datasource = new YmDataSource();
+    private YmSecurity security = new YmSecurity();
+    private YmVertxData data = new YmVertxData();
 }

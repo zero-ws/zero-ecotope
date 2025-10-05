@@ -11,6 +11,7 @@ import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author lang : 2025-10-05
@@ -19,16 +20,16 @@ import java.util.Map;
 @EqualsAndHashCode(callSuper = true)
 public class YmDataSource extends KDatabase implements Serializable {
 
-    private Dynamic dynamic;
+    private Dynamic dynamic = new Dynamic();
 
     @JsonSerialize(using = JsonObjectSerializer.class)
     @JsonDeserialize(using = JsonObjectDeserializer.class)
-    private JsonObject hikari;
+    private JsonObject hikari = new JsonObject();
 
     @Data
     public static class Dynamic implements Serializable {
         private String primary;
         private boolean strict;
-        private Map<String, KDatabase> datasource;
+        private Map<String, KDatabase> datasource = new ConcurrentHashMap<>();
     }
 }
