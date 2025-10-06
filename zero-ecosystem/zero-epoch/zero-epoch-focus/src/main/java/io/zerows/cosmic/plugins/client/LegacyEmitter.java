@@ -5,7 +5,6 @@ import io.vertx.core.MultiMap;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.metadata.KIntegration;
-import io.zerows.platform.metadata.KIntegrationApi;
 import io.zerows.support.Ut;
 import jakarta.ws.rs.core.MediaType;
 import org.apache.http.HttpHeaders;
@@ -43,7 +42,7 @@ class LegacyEmitter extends AbstractEmitter {
         /*
          * Read KIntegrationApi object
          */
-        final KIntegrationApi request = this.integration().createRequest(apiKey);
+        final KIntegration.Api request = this.integration().createRequest(apiKey);
         /*
          * Encrypt content with public key of RSA
          * Replace the method `getPublicKeyFile` with `getPublicKey` for content extracting

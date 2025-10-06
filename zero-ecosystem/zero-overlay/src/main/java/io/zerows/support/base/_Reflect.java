@@ -1,11 +1,12 @@
 package io.zerows.support.base;
 
+import io.r2mo.SourceReflect;
 import io.vertx.core.Future;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.function.Supplier;
+import java.util.Objects;
 
 /**
  * @author lang : 2023/4/28
@@ -71,7 +72,7 @@ class _Reflect extends _Random {
      * @return 是否实现
      */
     public static boolean isImplement(final Class<?> implCls, final Class<?> interfaceCls) {
-        return UInstance.isImplement(implCls, interfaceCls);
+        return SourceReflect.isImplement(implCls, interfaceCls);
     }
 
     /**
@@ -106,7 +107,7 @@ class _Reflect extends _Random {
      */
     public static Class<?> clazzBy(final String className, final Class<?> instanceCls,
                                    final ClassLoader loader) {
-        return UInstance.clazz(className, instanceCls, loader);
+        return SourceReflect.clazz(className, instanceCls, loader);
     }
 
 
@@ -131,7 +132,7 @@ class _Reflect extends _Random {
      * @return Class<?> 对象
      */
     public static Class<?> clazzBy(final String className, final ClassLoader loader) {
-        return UInstance.clazz(className, null, loader);
+        return SourceReflect.clazz(className, null, loader);
     }
 
     /**
@@ -153,7 +154,7 @@ class _Reflect extends _Random {
      * @return Class<?> 对象
      */
     public static Class<?> clazz(final String className, final Class<?> instanceCls) {
-        return UInstance.clazz(className, instanceCls, null);
+        return SourceReflect.clazz(className, instanceCls);
     }
 
     /**
@@ -174,7 +175,7 @@ class _Reflect extends _Random {
      * @return Class<?> 对象
      */
     public static Class<?> clazz(final String className) {
-        return UInstance.clazz(className, null, null);
+        return SourceReflect.clazz(className);
     }
 
     /**
@@ -187,7 +188,7 @@ class _Reflect extends _Random {
      * @return T
      */
     public static <T> T instance(final Class<?> clazz, final Object... params) {
-        return UInstance.instance(clazz, params);
+        return SourceReflect.instance(clazz, params);
     }
 
     /**
@@ -200,7 +201,7 @@ class _Reflect extends _Random {
      * @return T
      */
     public static <T> T instance(final String className, final Object... params) {
-        return UInstance.instance(clazz(className), params);
+        return SourceReflect.instance(clazz(className), params);
     }
 
     /**
@@ -213,7 +214,7 @@ class _Reflect extends _Random {
      * @return T
      */
     public static <T> T singleton(final String className, final Object... params) {
-        return UInstance.singleton(clazz(className), params);
+        return SourceReflect.singleton(clazz(className), params);
     }
 
     /**
@@ -226,35 +227,7 @@ class _Reflect extends _Random {
      * @return T
      */
     public static <T> T singleton(final Class<?> clazz, final Object... params) {
-        return UInstance.singleton(clazz, params);
-    }
-
-    /**
-     * （单例模式变种）根据类名在系统中反射查找该类，并构造该类对应的实例，转换成T，外置传入构造逻辑
-     *
-     * @param clazz    类名
-     * @param supplier 构造逻辑
-     * @param <T>      T
-     *
-     * @return T
-     */
-    public static <T> T singleton(final Class<?> clazz, final Supplier<T> supplier) {
-        return UInstance.singleton(clazz, (nil) -> supplier.get(), null);
-    }
-
-    /**
-     * （单例模式变种）根据类名在系统中反射查找该类，并构造该类对应的实例，转换成T，外置传入构造逻辑
-     * 此函数支持外置传入 key 构造池化的底层单件
-     *
-     * @param clazz    类名
-     * @param supplier 构造逻辑
-     * @param key      池化的维度专用键值
-     * @param <T>      T
-     *
-     * @return T
-     */
-    public static <T> T singleton(final Class<?> clazz, final Supplier<T> supplier, final String key) {
-        return UInstance.singleton(clazz, (nil) -> supplier.get(), key);
+        return SourceReflect.singleton(clazz, params);
     }
 
     /**
@@ -290,7 +263,7 @@ class _Reflect extends _Random {
      * @param <T>      属性值类型
      */
     public static <T> void field(final Object instance, final String name, final T value) {
-        UInstance.set(instance, name, value);
+        SourceReflect.value(instance, name, value);
     }
 
     /**
@@ -301,7 +274,7 @@ class _Reflect extends _Random {
      * @param <T>      属性值类型
      */
     public static <T> void field(final Object instance, final Field field, final T value) {
-        UInstance.set(instance, field, value);
+        SourceReflect.value(instance, field, value);
     }
 
     /**
@@ -314,7 +287,8 @@ class _Reflect extends _Random {
      * @return 属性值
      */
     public static <T> T field(final Object instance, final String name) {
-        return UInstance.get(instance, name);
+        Objects.requireNonNull(instance);
+        return SourceReflect.value(instance, name);
     }
 
     /**
@@ -329,7 +303,7 @@ class _Reflect extends _Random {
      * @return 常量值
      */
     public static <T> T field(final Class<?> interfaceCls, final String name) {
-        return UInstance.getStatic(interfaceCls, name);
+        return SourceReflect.value(interfaceCls, name);
     }
 
     /**

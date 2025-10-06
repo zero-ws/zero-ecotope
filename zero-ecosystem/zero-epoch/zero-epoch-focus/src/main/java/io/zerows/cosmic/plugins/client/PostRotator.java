@@ -2,7 +2,6 @@ package io.zerows.cosmic.plugins.client;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.metadata.KIntegration;
-import io.zerows.platform.metadata.KIntegrationApi;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 
@@ -13,7 +12,7 @@ public class PostRotator extends AbstractRotator {
     }
 
     @Override
-    public String request(final KIntegrationApi request, final JsonObject params) {
+    public String request(final KIntegration.Api request, final JsonObject params) {
         /*
          * HttpPost
          * */

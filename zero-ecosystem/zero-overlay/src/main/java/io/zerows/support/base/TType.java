@@ -1,5 +1,6 @@
 package io.zerows.support.base;
 
+import io.r2mo.SourceReflect;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
@@ -70,7 +71,8 @@ final class TType {
         if (Objects.isNull(clazz)) {
             return false;
         }
-        return Objects.nonNull(UInstance.clazz(clazz.toString(), null, null));
+        final Class<?> checkCls = SourceReflect.clazz(clazz.toString());
+        return Objects.nonNull(checkCls);
     }
 
     static boolean isJArray(final Class<?> clazz) {

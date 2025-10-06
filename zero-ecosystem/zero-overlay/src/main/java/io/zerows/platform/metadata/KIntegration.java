@@ -3,18 +3,21 @@ package io.zerows.platform.metadata;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.vertx.core.http.HttpMethod;
 import io.vertx.core.json.JsonObject;
-import io.zerows.platform.constant.VString;
 import io.zerows.integrated.jackson.JsonObjectDeserializer;
 import io.zerows.integrated.jackson.JsonObjectSerializer;
+import io.zerows.platform.constant.VString;
 import io.zerows.specification.atomic.HCopier;
 import io.zerows.specification.atomic.HJson;
 import io.zerows.support.base.UtBase;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.function.Function;
 
 /*
  * DTO for third part integration basic configuration instead of other
@@ -42,9 +45,10 @@ import java.util.concurrent.ConcurrentMap;
  *      }
  * }
  */
+@Data
 public class KIntegration implements HJson, Serializable, HCopier<KIntegration> {
 
-    private final ConcurrentMap<String, KIntegrationApi> apis
+    private final ConcurrentMap<String, Api> apis
         = new ConcurrentHashMap<>();
     /*
      * Restful / Web Service information ( such as jdbcUrl )
@@ -76,103 +80,11 @@ public class KIntegration implements HJson, Serializable, HCopier<KIntegration> 
     @JsonIgnore
     private String vendor;
 
-    public String getVendorConfig() {
-        return this.vendorConfig;
-    }
-
-    public void setVendorConfig(final String vendorConfig) {
-        this.vendorConfig = vendorConfig;
-    }
-
-    public String getVendor() {
-        return this.vendor;
-    }
-
-    public void setVendor(final String vendor) {
-        this.vendor = vendor;
-    }
-
-    public ConcurrentMap<String, KDictUse> getEpsilon() {
-        return this.epsilon;
-    }
-
-    public void setEpsilon(final ConcurrentMap<String, KDictUse> epsilon) {
-        this.epsilon = epsilon;
-    }
-
-    public ConcurrentMap<String, KIntegrationApi> getApis() {
-        return this.apis;
-    }
-
-    public String getEndpoint() {
-        return this.endpoint;
-    }
-
-    public void setEndpoint(final String endpoint) {
-        this.endpoint = endpoint;
-    }
-
-    public Integer getPort() {
-        return this.port;
-    }
-
-    public void setPort(final Integer port) {
-        this.port = port;
-    }
-
-    public String getProtocol() {
-        return this.protocol;
-    }
-
-    public void setProtocol(final String protocol) {
-        this.protocol = protocol;
-    }
-
-    public String getUsername() {
-        return this.username;
-    }
-
-    public void setUsername(final String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return this.password;
-    }
-
-    public void setPassword(final String password) {
-        this.password = password;
-    }
-
-    public String getHostname() {
-        return this.hostname;
-    }
-
-    public void setHostname(final String hostname) {
-        this.hostname = hostname;
-    }
-
-    public String getPublicKeyFile() {
-        return this.publicKeyFile;
-    }
-
-    public void setPublicKeyFile(final String publicKeyFile) {
-        this.publicKeyFile = publicKeyFile;
-    }
-
     public String getPublicKey() {
         if (UtBase.isNil(this.publicKeyFile)) {
             return VString.EMPTY;
         }
         return UtBase.ioString(this.publicKeyFile);
-    }
-
-    public JsonObject getOptions() {
-        return this.options;
-    }
-
-    public void setOptions(final JsonObject options) {
-        this.options = options;
     }
 
     @SuppressWarnings("unchecked")
@@ -227,7 +139,7 @@ public class KIntegration implements HJson, Serializable, HCopier<KIntegration> 
         final JsonObject apis = data.getJsonObject("apis");
         if (UtBase.isNotNil(apis)) {
             UtBase.<JsonObject>itJObject(apis, (json, field) -> {
-                final KIntegrationApi request = UtBase.deserialize(json, KIntegrationApi.class);
+                final Api request = UtBase.deserialize(json, Api.class);
                 this.apis.put(field, request);
             });
         }
@@ -237,9 +149,9 @@ public class KIntegration implements HJson, Serializable, HCopier<KIntegration> 
         }
     }
 
-    public KIntegrationApi createRequest(final String key) {
-        final KIntegrationApi request = new KIntegrationApi();
-        final KIntegrationApi original = this.apis.get(key);
+    public Api createRequest(final String key) {
+        final Api request = new Api();
+        final Api original = this.apis.get(key);
         request.setHeaders(original.getHeaders().copy());
         request.setMethod(original.getMethod());
         if (0 <= original.getPath().indexOf('`')) {
@@ -261,10 +173,9 @@ public class KIntegration implements HJson, Serializable, HCopier<KIntegration> 
         if (this == o) {
             return true;
         }
-        if (!(o instanceof KIntegration)) {
+        if (!(o instanceof final KIntegration that)) {
             return false;
         }
-        final KIntegration that = (KIntegration) o;
         return this.endpoint.equals(that.endpoint) &&
             this.port.equals(that.port) &&
             this.protocol.equals(that.protocol) &&
@@ -291,5 +202,77 @@ public class KIntegration implements HJson, Serializable, HCopier<KIntegration> 
             ", hostname='" + this.hostname + '\'' +
             ", publicKeyFile='" + this.publicKeyFile + '\'' +
             '}';
+    }
+
+    /*
+     * KIntegrationApi for api description
+     */
+    @Data
+    public static class Api implements Serializable {
+        /*
+         * Http uri definition here.
+         */
+        private String path;
+        /*
+         * Http method
+         */
+        private HttpMethod method;
+        /*
+         * Some specific situation that required headers
+         */
+        @JsonSerialize(using = JsonObjectSerializer.class)
+        @JsonDeserialize(using = JsonObjectDeserializer.class)
+        private JsonObject headers = new JsonObject();
+
+        @JsonIgnore
+        private Function<JsonObject, String> executor;
+
+        public String getPath(final JsonObject params) {
+            if (Objects.nonNull(this.executor)) {
+                final String delayPath = this.executor.apply(params);
+                this.path = delayPath;
+                return delayPath;
+            } else {
+                return null;
+            }
+        }
+
+        public void setExecutor(final String endpoint, final String expr) {
+            this.executor = params -> {
+                final JsonObject normalized = UtBase.valueJObject(params);
+                final String result = UtBase.fromExpression(expr, normalized);
+                return endpoint + result;
+            };
+        }
+
+        public boolean isExpr() {
+            return Objects.nonNull(this.executor);
+        }
+
+        @Override
+        public boolean equals(final Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (!(o instanceof final Api request)) {
+                return false;
+            }
+            return this.path.equals(request.path) &&
+                this.method == request.method;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(this.path, this.method);
+        }
+
+        @Override
+        public String toString() {
+            return "KIntegrationApi{" +
+                "path='" + this.path + '\'' +
+                ", method=" + this.method +
+                ", headers=" + this.headers +
+                '}';
+        }
     }
 }

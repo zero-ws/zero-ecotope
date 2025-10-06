@@ -2,7 +2,6 @@ package io.zerows.cosmic.plugins.client;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.metadata.KIntegration;
-import io.zerows.platform.metadata.KIntegrationApi;
 import org.apache.http.client.methods.HttpGet;
 
 public class GetRotator extends AbstractRotator {
@@ -12,7 +11,7 @@ public class GetRotator extends AbstractRotator {
     }
 
     @Override
-    public String request(final KIntegrationApi request, final JsonObject params) {
+    public String request(final KIntegration.Api request, final JsonObject params) {
         /*
          * Turn On atom workflow when integration is `debug`
          */

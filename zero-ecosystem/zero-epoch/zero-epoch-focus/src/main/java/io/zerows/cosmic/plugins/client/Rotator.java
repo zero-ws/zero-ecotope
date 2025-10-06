@@ -5,7 +5,6 @@ import io.vertx.core.http.HttpMethod;
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.annotations.Memory;
 import io.zerows.platform.metadata.KIntegration;
-import io.zerows.platform.metadata.KIntegrationApi;
 import org.apache.http.impl.client.CloseableHttpClient;
 
 import java.util.concurrent.ConcurrentHashMap;
@@ -41,5 +40,5 @@ public interface Rotator {
     /*
      * Request data with `InJson` parameters, get string response
      */
-    String request(KIntegrationApi request, JsonObject params);
+    String request(KIntegration.Api request, JsonObject params);
 }

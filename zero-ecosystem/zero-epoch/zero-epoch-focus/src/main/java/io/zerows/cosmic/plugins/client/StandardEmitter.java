@@ -5,7 +5,6 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.platform.constant.VPath;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.metadata.KIntegration;
-import io.zerows.platform.metadata.KIntegrationApi;
 import io.zerows.support.Ut;
 import org.apache.http.config.Registry;
 import org.apache.http.config.RegistryBuilder;
@@ -56,7 +55,7 @@ class StandardEmitter extends AbstractEmitter {
         /*
          * Read KIntegrationApi object
          */
-        final KIntegrationApi request = this.integration().createRequest(apiKey);
+        final KIntegration.Api request = this.integration().createRequest(apiKey);
         if (Objects.nonNull(headers)) {
             request.setHeaders(Ut.toJObject(headers));
         }

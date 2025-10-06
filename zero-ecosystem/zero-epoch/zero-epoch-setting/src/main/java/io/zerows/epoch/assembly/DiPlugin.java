@@ -20,7 +20,7 @@ import java.util.Set;
 @SuppressWarnings("all")
 @Slf4j
 public class DiPlugin {
-
+    private static final Cc<String, Object> CC_SINGLETON = Cc.open();
     private static final Cc<Class<?>, DiPlugin> CC_DI = Cc.open();
     private transient final Class<?> clazz;
     private transient final DiInfix infix;
@@ -49,9 +49,8 @@ public class DiPlugin {
          * Add @Named Support
          */
         String extensionKey = this.named(clazz);
-        return Ut.singleton(clazz,
-            () -> (T) this.infix.wrapInfix(di.getInstance(clazz)),
-            extensionKey);
+        return (T) CC_SINGLETON.pick(
+            () -> this.infix.wrapInfix(di.getInstance(clazz)), extensionKey);
     }
 
     public String named(final Class<?> clazz) {

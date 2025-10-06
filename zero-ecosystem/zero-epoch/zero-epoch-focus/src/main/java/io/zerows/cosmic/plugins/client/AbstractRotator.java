@@ -2,14 +2,13 @@ package io.zerows.cosmic.plugins.client;
 
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.constant.KWeb;
-import io.zerows.epoch.exception._15002Exception500JexlExpression;
 import io.zerows.component.log.OLog;
-import io.zerows.platform.metadata.KIntegration;
-import io.zerows.platform.metadata.KIntegrationApi;
-import io.zerows.platform.constant.VString;
 import io.zerows.cosmic.plugins.client.exception._60046Exception500RequestConfig;
 import io.zerows.cosmic.plugins.client.exception._60047Exception501HttpClientNull;
+import io.zerows.epoch.constant.KWeb;
+import io.zerows.epoch.exception._15002Exception500JexlExpression;
+import io.zerows.platform.constant.VString;
+import io.zerows.platform.metadata.KIntegration;
 import io.zerows.support.Ut;
 import jakarta.ws.rs.core.MediaType;
 import org.apache.http.HttpEntity;
@@ -60,7 +59,7 @@ public abstract class AbstractRotator implements Rotator {
             .build();
     }
 
-    protected String configPath(final KIntegrationApi request, final JsonObject params) {
+    protected String configPath(final KIntegration.Api request, final JsonObject params) {
         final String exprPath = request.getPath();
         if (request.isExpr()) {
             /*

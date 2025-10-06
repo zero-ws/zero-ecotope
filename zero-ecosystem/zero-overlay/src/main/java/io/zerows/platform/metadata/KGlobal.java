@@ -5,13 +5,14 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.platform.constant.VName;
 import io.zerows.integrated.jackson.JsonArrayDeserializer;
 import io.zerows.integrated.jackson.JsonArraySerializer;
 import io.zerows.integrated.jackson.JsonObjectDeserializer;
 import io.zerows.integrated.jackson.JsonObjectSerializer;
+import io.zerows.platform.constant.VName;
 import io.zerows.specification.atomic.HCopier;
 import io.zerows.support.base.UtBase;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -22,6 +23,7 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Data
 public class KGlobal implements Serializable, HCopier<KGlobal> {
     @JsonIgnore
     private final ConcurrentMap<String, KIntegration> integrationMap = new ConcurrentHashMap<>();
@@ -45,26 +47,6 @@ public class KGlobal implements Serializable, HCopier<KGlobal> {
     private ConcurrentMap<String, JsonObject> forbidden = new ConcurrentHashMap<>();
 
     private ConcurrentMap<String, JsonObject> dictionary = new ConcurrentHashMap<>();
-
-    public ConcurrentMap<String, JsonObject> getDictionary() {
-        return this.dictionary;
-    }
-
-    public void setDictionary(final ConcurrentMap<String, JsonObject> dictionary) {
-        this.dictionary = dictionary;
-    }
-
-    public ConcurrentMap<String, JsonObject> getForbidden() {
-        return this.forbidden;
-    }
-
-    public void setForbidden(final ConcurrentMap<String, JsonObject> forbidden) {
-        this.forbidden = forbidden;
-    }
-
-    public JsonObject getIntegration() {
-        return this.integration;
-    }
 
     public void setIntegration(final JsonObject integration) {
         this.integration = integration;
@@ -97,26 +79,6 @@ public class KGlobal implements Serializable, HCopier<KGlobal> {
         return Objects.isNull(this.global) ? new JsonObject() : this.global.copy();
     }
 
-    public void setGlobal(final JsonObject global) {
-        this.global = global;
-    }
-
-    public JsonArray getSource() {
-        return this.source;
-    }
-
-    public void setSource(final JsonArray source) {
-        this.source = source;
-    }
-
-    public ConcurrentMap<String, JsonObject> getMapping() {
-        return this.mapping;
-    }
-
-    public void setMapping(final ConcurrentMap<String, JsonObject> mapping) {
-        this.mapping = mapping;
-    }
-
     public JsonObject getApplication() {
         final JsonObject application = Objects.isNull(this.application) ? new JsonObject() : this.application.copy();
         if (Objects.isNull(this.global)) {
@@ -126,10 +88,6 @@ public class KGlobal implements Serializable, HCopier<KGlobal> {
                 VName.APP_ID, VName.SIGMA, VName.APP_KEY
             );
         }
-    }
-
-    public void setApplication(final JsonObject application) {
-        this.application = application;
     }
 
     public String appId() {

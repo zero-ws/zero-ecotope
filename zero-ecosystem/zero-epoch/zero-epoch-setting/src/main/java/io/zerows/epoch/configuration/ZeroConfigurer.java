@@ -1,13 +1,12 @@
 package io.zerows.epoch.configuration;
 
 import io.r2mo.typed.exception.AbstractException;
-import io.zerows.component.log.LogAs;
 import io.zerows.epoch.boot.ZeroLauncher;
-import io.zerows.platform.constant.VMessage;
 import io.zerows.platform.enums.EmBoot;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HEnergy;
 import io.zerows.specification.configuration.HMature;
+import io.zerows.support.Ut;
 import io.zerows.support.base.UtBase;
 import lombok.extern.slf4j.Slf4j;
 
@@ -45,7 +44,7 @@ public class ZeroConfigurer<T> {
 
     public ZeroConfigurer<T> bind(final String[] args) {
         this.arguments = args;
-        LogAs.Boot.info(this.getClass(), VMessage.HOn.COMPONENT_ARGS, args.length, UtBase.fromJoin(args));
+        log.info("参数信息 = {}, 参数长度 = {}", Ut.fromJoin(args), args.length);
         return this;
     }
 

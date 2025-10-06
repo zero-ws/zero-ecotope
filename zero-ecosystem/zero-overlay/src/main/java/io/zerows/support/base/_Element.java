@@ -1,5 +1,6 @@
 package io.zerows.support.base;
 
+import io.r2mo.SourceReflect;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.constant.VName;
@@ -80,7 +81,7 @@ class _Element extends _EDS {
      * @return List<T>
      */
     public static <T> List<T> elementSave(final List<T> list, final T entity, final String field) {
-        return CSave.save(list, entity, item -> UInstance.get(item, field));
+        return CSave.save(list, entity, item -> SourceReflect.value(item, field));
     }
 
     /**
@@ -651,7 +652,7 @@ class _Element extends _EDS {
      * @return 移除后的列表
      */
     public static <T> List<T> elementRemove(final List<T> list, final T entity, final String field) {
-        return CRemove.remove(list, entity, item -> UInstance.get(item, field));
+        return CRemove.remove(list, entity, item -> SourceReflect.value(item, field));
     }
 
     /**
