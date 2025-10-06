@@ -113,7 +113,7 @@ public class MyApp implements VertxPojo, IMyApp {
     }
 
     /**
-     * Getter for <code>ZDB.MY_APP.APP_ID</code>. 「appId」- 个人应用关联ID
+     * Getter for <code>ZDB.MY_APP.APP_ID</code>. 「id」- 个人应用关联ID
      */
     @Override
     public String getAppId() {
@@ -121,7 +121,7 @@ public class MyApp implements VertxPojo, IMyApp {
     }
 
     /**
-     * Setter for <code>ZDB.MY_APP.APP_ID</code>. 「appId」- 个人应用关联ID
+     * Setter for <code>ZDB.MY_APP.APP_ID</code>. 「id」- 个人应用关联ID
      */
     @Override
     public MyApp setAppId(String appId) {

@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS X_TAG
     `UI_CONFIG`   LONGTEXT COMMENT '「uiConfig」- 标签的其他配置',
 
     -- 所属应用
-    `APP_ID`      VARCHAR(255) COMMENT '「appId」- 关联的应用程序ID',
+    `APP_ID`      VARCHAR(255) COMMENT '「id」- 关联的应用程序ID',
 
     -- 特殊字段
     `ACTIVE`      BIT         DEFAULT NULL COMMENT '「active」- 是否启用',

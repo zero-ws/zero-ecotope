@@ -45,14 +45,14 @@ public interface AppStub {
     Future<JsonObject> fetchByName(String name);
 
     /*
-     * Get application by: appId = {xxx}
+     * Get application by: id = {xxx}
      */
     Future<JsonObject> fetchById(String appId);
 
     Future<JsonArray> fetchByTenant(String tenantId);
 
     /*
-     * Get data source by: appId = {xxx}
+     * Get data source by: id = {xxx}
      * Unique for each app
      */
     Future<JsonObject> fetchSource(String appId);

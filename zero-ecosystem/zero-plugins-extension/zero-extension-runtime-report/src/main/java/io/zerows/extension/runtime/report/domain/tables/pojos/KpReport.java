@@ -301,7 +301,7 @@ public class KpReport implements VertxPojo, IKpReport {
     }
 
     /**
-     * Getter for <code>ZDB.KP_REPORT.APP_ID</code>. 「appId」- 应用数据
+     * Getter for <code>ZDB.KP_REPORT.APP_ID</code>. 「id」- 应用数据
      */
     @Override
     public String getAppId() {
@@ -309,7 +309,7 @@ public class KpReport implements VertxPojo, IKpReport {
     }
 
     /**
-     * Setter for <code>ZDB.KP_REPORT.APP_ID</code>. 「appId」- 应用数据
+     * Setter for <code>ZDB.KP_REPORT.APP_ID</code>. 「id」- 应用数据
      */
     @Override
     public KpReport setAppId(String appId) {

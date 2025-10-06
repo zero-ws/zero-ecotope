@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS MY_NOTIFY
     `CONFIG_SMS`      LONGTEXT COMMENT '「configSms」- 短信配置',
 
     -- 特殊属性
-    `APP_ID`          VARCHAR(36) COMMENT '「appId」- 所属应用ID',
+    `APP_ID`          VARCHAR(36) COMMENT '「id」- 所属应用ID',
 
     -- 特殊字段
     `ACTIVE`          BIT         DEFAULT NULL COMMENT '「active」- 是否启用',

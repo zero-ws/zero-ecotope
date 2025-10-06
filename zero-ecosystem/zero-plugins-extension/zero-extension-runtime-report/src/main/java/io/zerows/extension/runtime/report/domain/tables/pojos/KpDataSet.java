@@ -328,7 +328,7 @@ public class KpDataSet implements VertxPojo, IKpDataSet {
     }
 
     /**
-     * Getter for <code>ZDB.KP_DATA_SET.APP_ID</code>. 「appId」- 应用数据
+     * Getter for <code>ZDB.KP_DATA_SET.APP_ID</code>. 「id」- 应用数据
      */
     @Override
     public String getAppId() {
@@ -336,7 +336,7 @@ public class KpDataSet implements VertxPojo, IKpDataSet {
     }
 
     /**
-     * Setter for <code>ZDB.KP_DATA_SET.APP_ID</code>. 「appId」- 应用数据
+     * Setter for <code>ZDB.KP_DATA_SET.APP_ID</code>. 「id」- 应用数据
      */
     @Override
     public KpDataSet setAppId(String appId) {

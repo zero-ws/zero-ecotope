@@ -8,6 +8,7 @@ import io.zerows.platform.constant.VValue;
 import io.zerows.platform.enums.EmApp;
 import io.zerows.specification.access.app.HApp;
 import io.zerows.specification.access.app.HArk;
+import io.zerows.specification.modeling.HAtom;
 import io.zerows.specification.vital.HOI;
 
 import java.util.Objects;
@@ -44,7 +45,7 @@ class MContext {
 
         final HApp app = ark.app();
         if (Objects.nonNull(app)) {
-            condition.put(VName.APP_ID, app.appId());
+            condition.put(VName.APP_ID, app.id());
             condition.put(VName.APP_KEY, app.option(VName.APP_KEY));
         }
 
@@ -74,5 +75,11 @@ class MContext {
         condition.put(VName.SIGMA, ark.sigma());
         condition.put(VName.LANGUAGE, ark.language());
         return condition;
+    }
+
+    static String keyAtom(final HAtom atom, final JsonObject options) {
+        Objects.requireNonNull(atom);
+        final String hashCode = UtBase.isNil(options) ? VString.EMPTY : String.valueOf(options.hashCode());
+        return atom.identifier() + "-" + hashCode;
     }
 }

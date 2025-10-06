@@ -195,7 +195,7 @@ public abstract class JtCommercial implements Commercial {
         data.put(JtKey.Delivery.SERVICE, serviceJson);
         data.put(JtKey.Delivery.CONFIG, (JsonObject) Ut.serializeJson(this.config));
 
-        /* appId */
+        /* id */
         final HApp app = this.ark.app();
         data.put(JtKey.Delivery.APP_ID, app.option(KName.APP_ID));
         /* Reflection */

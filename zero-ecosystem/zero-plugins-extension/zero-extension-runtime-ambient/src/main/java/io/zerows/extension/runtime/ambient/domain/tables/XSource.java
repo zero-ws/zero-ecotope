@@ -103,9 +103,9 @@ public class XSource extends TableImpl<XSourceRecord> {
     public final TableField<XSourceRecord, String> PASSWORD = createField(DSL.name("PASSWORD"), SQLDataType.VARCHAR(255), this, "「password」- 密码");
 
     /**
-     * The column <code>ZDB.X_SOURCE.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * The column <code>ZDB.X_SOURCE.APP_ID</code>. 「id」- 关联的应用程序ID
      */
-    public final TableField<XSourceRecord, String> APP_ID = createField(DSL.name("APP_ID"), SQLDataType.VARCHAR(255), this, "「appId」- 关联的应用程序ID");
+    public final TableField<XSourceRecord, String> APP_ID = createField(DSL.name("APP_ID"), SQLDataType.VARCHAR(255), this, "「id」- 关联的应用程序ID");
 
     /**
      * The column <code>ZDB.X_SOURCE.ACTIVE</code>. 「active」- 是否启用

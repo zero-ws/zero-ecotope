@@ -92,9 +92,9 @@ public class XCategory extends TableImpl<XCategoryRecord> {
     public final TableField<XCategoryRecord, String> COMMENT = createField(DSL.name("COMMENT"), SQLDataType.CLOB, this, "「comment」- 备注信息");
 
     /**
-     * The column <code>ZDB.X_CATEGORY.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * The column <code>ZDB.X_CATEGORY.APP_ID</code>. 「id」- 关联的应用程序ID
      */
-    public final TableField<XCategoryRecord, String> APP_ID = createField(DSL.name("APP_ID"), SQLDataType.VARCHAR(255), this, "「appId」- 关联的应用程序ID");
+    public final TableField<XCategoryRecord, String> APP_ID = createField(DSL.name("APP_ID"), SQLDataType.VARCHAR(255), this, "「id」- 关联的应用程序ID");
 
     /**
      * The column <code>ZDB.X_CATEGORY.TREE_COMPONENT</code>. 「treeComponent」-

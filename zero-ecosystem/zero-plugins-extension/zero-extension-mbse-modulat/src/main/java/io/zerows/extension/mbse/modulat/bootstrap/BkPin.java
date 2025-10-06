@@ -26,7 +26,7 @@ public class BkPin implements HRegistry.Mod<Vertx> {
     public Future<Boolean> initializeAsync(final Vertx container, final HArk ark) {
 
         final HApp app = ark.app();
-        final String appKey = app.appId(); // Ut.valueString(appJ, KName.KEY);
+        final String appKey = app.id(); // Ut.valueString(appJ, KName.KEY);
         if (Objects.isNull(appKey)) {
             Bk.LOG.Init.warn(this.getClass(), "App Id = null, ignored initialized!!");
             return Ux.futureF();

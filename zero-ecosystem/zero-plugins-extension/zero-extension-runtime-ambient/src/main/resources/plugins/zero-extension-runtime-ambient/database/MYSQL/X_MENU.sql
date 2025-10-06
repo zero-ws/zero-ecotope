@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS X_MENU
     `LEVEL`      BIGINT COMMENT '「level」- 菜单层级',
 
     `PARENT_ID`  VARCHAR(36) COMMENT '「parentId」- 菜单父ID',
-    `APP_ID`     VARCHAR(36) COMMENT '「appId」- 应用程序ID',
+    `APP_ID`     VARCHAR(36) COMMENT '「id」- 应用程序ID',
 
     -- 特殊字段
     `ACTIVE`     BIT         DEFAULT NULL COMMENT '「active」- 是否启用',

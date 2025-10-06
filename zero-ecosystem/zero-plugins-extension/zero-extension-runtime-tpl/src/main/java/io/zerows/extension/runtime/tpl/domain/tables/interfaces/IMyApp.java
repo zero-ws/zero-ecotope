@@ -27,12 +27,12 @@ public interface IMyApp extends VertxPojo, Serializable {
     public String getKey();
 
     /**
-     * Setter for <code>ZDB.MY_APP.APP_ID</code>. 「appId」- 个人应用关联ID
+     * Setter for <code>ZDB.MY_APP.APP_ID</code>. 「id」- 个人应用关联ID
      */
     public IMyApp setAppId(String value);
 
     /**
-     * Getter for <code>ZDB.MY_APP.APP_ID</code>. 「appId」- 个人应用关联ID
+     * Getter for <code>ZDB.MY_APP.APP_ID</code>. 「id」- 个人应用关联ID
      */
     public String getAppId();
 

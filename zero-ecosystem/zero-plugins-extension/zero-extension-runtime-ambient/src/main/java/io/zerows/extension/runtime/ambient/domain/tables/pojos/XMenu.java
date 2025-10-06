@@ -257,7 +257,7 @@ public class XMenu implements VertxPojo, IXMenu {
     }
 
     /**
-     * Getter for <code>ZDB.X_MENU.APP_ID</code>. 「appId」- 应用程序ID
+     * Getter for <code>ZDB.X_MENU.APP_ID</code>. 「id」- 应用程序ID
      */
     @Override
     public String getAppId() {
@@ -265,7 +265,7 @@ public class XMenu implements VertxPojo, IXMenu {
     }
 
     /**
-     * Setter for <code>ZDB.X_MENU.APP_ID</code>. 「appId」- 应用程序ID
+     * Setter for <code>ZDB.X_MENU.APP_ID</code>. 「id」- 应用程序ID
      */
     @Override
     public XMenu setAppId(String appId) {

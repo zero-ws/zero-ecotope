@@ -20,7 +20,7 @@ class HeadPre implements Pre {
      *
      * {
      *      "sigma": "X-Sigma",
-     *      "appId": "X-App-Id",
+     *      "id": "X-App-Id",
      *      "appKey": "X-App-Key"
      * }
      *

@@ -235,7 +235,7 @@ public class KpDataSetRecord extends UpdatableRecordImpl<KpDataSetRecord> implem
     }
 
     /**
-     * Setter for <code>ZDB.KP_DATA_SET.APP_ID</code>. 「appId」- 应用数据
+     * Setter for <code>ZDB.KP_DATA_SET.APP_ID</code>. 「id」- 应用数据
      */
     @Override
     public KpDataSetRecord setAppId(String value) {
@@ -244,7 +244,7 @@ public class KpDataSetRecord extends UpdatableRecordImpl<KpDataSetRecord> implem
     }
 
     /**
-     * Getter for <code>ZDB.KP_DATA_SET.APP_ID</code>. 「appId」- 应用数据
+     * Getter for <code>ZDB.KP_DATA_SET.APP_ID</code>. 「id」- 应用数据
      */
     @Override
     public String getAppId() {

@@ -55,9 +55,9 @@ public class AtPin implements HRegistry.Mod<Vertx> {
         }
         // 此处提前调用 initialize 方法，此方法保证无副作用的多次调用即可
         final DocBStub docStub = PLUGIN.createSingleton(DocBuilder.class);
-        // Here mapApp function extract `appId`
+        // Here mapApp function extract `id`
         final HApp app = ark.app();
-        final String appId = app.appId(); // Ut.valueString(appJ, KName.KEY);
+        final String appId = app.id(); // Ut.valueString(appJ, KName.KEY);
         return docStub.initialize(appId, config.getFileIntegration()).compose(initialized -> {
             LOG.Init.info(this.getClass(), "AppId = {0}, Directory Size = {1}", appId, String.valueOf(initialized.size()));
             return Ux.futureT();

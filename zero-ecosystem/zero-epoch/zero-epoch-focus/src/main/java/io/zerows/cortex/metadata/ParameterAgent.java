@@ -43,7 +43,7 @@ class ParameterAgent implements ParameterBuilder<RoutingContext> {
             /*
              * XHeader for
              * - sigma
-             * - appId
+             * - id
              * - appKey
              * - lang
              */

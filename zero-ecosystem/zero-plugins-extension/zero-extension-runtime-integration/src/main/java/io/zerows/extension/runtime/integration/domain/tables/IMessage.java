@@ -75,9 +75,9 @@ public class IMessage extends TableImpl<IMessageRecord> {
      */
     public final TableField<IMessageRecord, String> SEND_AT = createField(DSL.name("SEND_AT"), SQLDataType.VARCHAR(36), this, "「sendAt」- 发送时间");
     /**
-     * The column <code>ZDB.I_MESSAGE.APP_ID</code>. 「appId」- 所属应用ID
+     * The column <code>ZDB.I_MESSAGE.APP_ID</code>. 「id」- 所属应用ID
      */
-    public final TableField<IMessageRecord, String> APP_ID = createField(DSL.name("APP_ID"), SQLDataType.VARCHAR(36), this, "「appId」- 所属应用ID");
+    public final TableField<IMessageRecord, String> APP_ID = createField(DSL.name("APP_ID"), SQLDataType.VARCHAR(36), this, "「id」- 所属应用ID");
     /**
      * The column <code>ZDB.I_MESSAGE.ACTIVE</code>. 「active」- 是否启用
      */

@@ -296,7 +296,7 @@ public class XCategory implements VertxPojo, IXCategory {
     }
 
     /**
-     * Getter for <code>ZDB.X_CATEGORY.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * Getter for <code>ZDB.X_CATEGORY.APP_ID</code>. 「id」- 关联的应用程序ID
      */
     @Override
     public String getAppId() {
@@ -304,7 +304,7 @@ public class XCategory implements VertxPojo, IXCategory {
     }
 
     /**
-     * Setter for <code>ZDB.X_CATEGORY.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * Setter for <code>ZDB.X_CATEGORY.APP_ID</code>. 「id」- 关联的应用程序ID
      */
     @Override
     public XCategory setAppId(String appId) {

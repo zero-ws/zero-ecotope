@@ -67,12 +67,12 @@ public interface IXModule extends VertxPojo, Serializable {
     public String getBlockCode();
 
     /**
-     * Setter for <code>ZDB.X_MODULE.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * Setter for <code>ZDB.X_MODULE.APP_ID</code>. 「id」- 关联的应用程序ID
      */
     public IXModule setAppId(String value);
 
     /**
-     * Getter for <code>ZDB.X_MODULE.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * Getter for <code>ZDB.X_MODULE.APP_ID</code>. 「id」- 关联的应用程序ID
      */
     public String getAppId();
 

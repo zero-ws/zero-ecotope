@@ -24,23 +24,9 @@ class _App {
         return MModeler.toJArray(records);
     }
 
-    // 名空间计算
-    public static String nsApp(final String appName) {
-        return MAtom.namespace(appName, null);
-    }
-
-    public static String nsAtom(final String appName, final String identifier) {
-        return MAtom.namespace(appName, identifier);
-    }
-
     // 键计算
     public static String keyAtom(final HAtom atom, final JsonObject options) {
-        return MAtom.keyAtom(atom, options);
-    }
-
-    public static String keyApp(final String name, final String owner) {
-        final String ns = MAtom.namespace(name, null);
-        return MContext.keyApp(name, ns, owner);
+        return MContext.keyAtom(atom, options);
     }
 
     public static String keyApp(final HArk ark) {

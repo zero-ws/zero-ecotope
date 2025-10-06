@@ -140,7 +140,7 @@ public class Ao {
     /*
      * 构造 DataAtom 数据
      * 1）传入的是 IService，直接反序列化构造 DataAtom
-     * 2）传入 key 和 identifier，反序列化构造 DataAtom，key 可以是 appId 也可以是 sigma
+     * 2）传入 key 和 identifier，反序列化构造 DataAtom，key 可以是 id 也可以是 sigma
      * 3）传入 options，只支持直接构造
      * {
      *     "name": "应用名称",
@@ -153,7 +153,7 @@ public class Ao {
      * 3）构造纯的 AoDao（不和任何 DataAtom绑定）
      *
      * 这里有一点需说明：
-     * 1. 复杂参数内置了 appId 或 sigma，所以可直接通过对象级获取
+     * 1. 复杂参数内置了 id 或 sigma，所以可直接通过对象级获取
      * 2. 简单参数 String 通常只传入 identifier
      */
     public static DataAtom toAtom(final JsonObject options) {

@@ -309,7 +309,7 @@ public class BBag implements VertxPojo, IBBag {
     }
 
     /**
-     * Getter for <code>ZDB.B_BAG.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * Getter for <code>ZDB.B_BAG.APP_ID</code>. 「id」- 关联的应用程序ID
      */
     @Override
     public String getAppId() {
@@ -317,7 +317,7 @@ public class BBag implements VertxPojo, IBBag {
     }
 
     /**
-     * Setter for <code>ZDB.B_BAG.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * Setter for <code>ZDB.B_BAG.APP_ID</code>. 「id」- 关联的应用程序ID
      */
     @Override
     public BBag setAppId(String appId) {

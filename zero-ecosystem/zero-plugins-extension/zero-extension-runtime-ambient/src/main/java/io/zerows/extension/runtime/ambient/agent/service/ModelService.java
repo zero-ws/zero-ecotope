@@ -27,7 +27,7 @@ public class ModelService implements ModelStub {
         final JsonObject filters = new JsonObject()
             .put("", Boolean.TRUE)
             .put("entry", entry)
-            .put("appId", appId);
+            .put("id", appId);
         /* Cache Module for future usage */
         return this.fetchModule(filters, () -> Ux.Jooq.on(XModuleDao.class)
             .fetchOneAsync(filters)
@@ -49,7 +49,7 @@ public class ModelService implements ModelStub {
     }
 
     private Future<JsonObject> fetchModule(final JsonObject condition, final Supplier<Future<JsonObject>> executor) {
-        final String appId = condition.getString("appId");
+        final String appId = condition.getString("id");
         final String entry = condition.getString("entry");
         if (Ut.isNil(appId, entry)) {
             return Ux.futureJ();

@@ -79,9 +79,9 @@ public class TplMessage extends TableImpl<TplMessageRecord> {
     public final TableField<TplMessageRecord, String> EXPR_COMPONENT = createField(DSL.name("EXPR_COMPONENT"), SQLDataType.VARCHAR(255), this, "「exprComponent」- 模板扩展处理程序，Java类名");
 
     /**
-     * The column <code>ZDB.TPL_MESSAGE.APP_ID</code>. 「appId」- 所属应用ID
+     * The column <code>ZDB.TPL_MESSAGE.APP_ID</code>. 「id」- 所属应用ID
      */
-    public final TableField<TplMessageRecord, String> APP_ID = createField(DSL.name("APP_ID"), SQLDataType.VARCHAR(36), this, "「appId」- 所属应用ID");
+    public final TableField<TplMessageRecord, String> APP_ID = createField(DSL.name("APP_ID"), SQLDataType.VARCHAR(36), this, "「id」- 所属应用ID");
 
     /**
      * The column <code>ZDB.TPL_MESSAGE.ACTIVE</code>. 「active」- 是否启用

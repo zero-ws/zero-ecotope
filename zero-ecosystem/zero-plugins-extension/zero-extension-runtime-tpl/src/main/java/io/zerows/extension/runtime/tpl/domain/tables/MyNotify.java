@@ -72,9 +72,9 @@ public class MyNotify extends TableImpl<MyNotifyRecord> {
     public final TableField<MyNotifyRecord, String> CONFIG_SMS = createField(DSL.name("CONFIG_SMS"), SQLDataType.CLOB, this, "「configSms」- 短信配置");
 
     /**
-     * The column <code>ZDB.MY_NOTIFY.APP_ID</code>. 「appId」- 所属应用ID
+     * The column <code>ZDB.MY_NOTIFY.APP_ID</code>. 「id」- 所属应用ID
      */
-    public final TableField<MyNotifyRecord, String> APP_ID = createField(DSL.name("APP_ID"), SQLDataType.VARCHAR(36), this, "「appId」- 所属应用ID");
+    public final TableField<MyNotifyRecord, String> APP_ID = createField(DSL.name("APP_ID"), SQLDataType.VARCHAR(36), this, "「id」- 所属应用ID");
 
     /**
      * The column <code>ZDB.MY_NOTIFY.ACTIVE</code>. 「active」- 是否启用

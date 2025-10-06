@@ -73,7 +73,7 @@ class Assist implements Serializable {
                 || field.startsWith(KWeb.HEADER.PREFIX.toLowerCase(Locale.getDefault())))
             /*
              * Data for header
-             * X-App-Id -> appId
+             * X-App-Id -> id
              * X-App-Key -> appKey
              * X-Sigma -> sigma
              */

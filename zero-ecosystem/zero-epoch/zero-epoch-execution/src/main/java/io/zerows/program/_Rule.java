@@ -4,7 +4,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.metadata.Apt;
 import io.zerows.platform.enums.typed.ChangeFlag;
-import io.zerows.platform.metadata.KRuleTerm;
+import io.zerows.platform.metadata.KRule;
 import io.zerows.support.Ut;
 
 import java.util.Collection;
@@ -23,35 +23,35 @@ class _Rule extends _Plugin {
      * 2. double checking
      * 3. array checking
      */
-    public static JsonObject ruleAll(final Collection<KRuleTerm> rules, final JsonObject input) {
+    public static JsonObject ruleAll(final Collection<KRule.Item> rules, final JsonObject input) {
         return Unique.ruleAll(rules, input);
     }
 
-    public static ConcurrentMap<Boolean, JsonArray> ruleAll(final Collection<KRuleTerm> rules, final JsonArray input) {
+    public static ConcurrentMap<Boolean, JsonArray> ruleAll(final Collection<KRule.Item> rules, final JsonArray input) {
         return Unique.ruleAll(rules, input);
     }
 
-    public static JsonObject ruleAll(final Collection<KRuleTerm> rules, final JsonObject recordO, final JsonObject recordN) {
+    public static JsonObject ruleAll(final Collection<KRule.Item> rules, final JsonObject recordO, final JsonObject recordN) {
         return Unique.ruleAll(rules, recordO, recordN);
     }
 
-    public static JsonObject ruleAll(final Collection<KRuleTerm> rules, final JsonArray source, final JsonObject record) {
+    public static JsonObject ruleAll(final Collection<KRule.Item> rules, final JsonArray source, final JsonObject record) {
         return Unique.ruleAll(rules, source, record);
     }
 
-    public static JsonObject ruleAny(final Collection<KRuleTerm> rules, final JsonObject input) {
+    public static JsonObject ruleAny(final Collection<KRule.Item> rules, final JsonObject input) {
         return Unique.ruleAny(rules, input);
     }
 
-    public static JsonObject ruleAny(final Collection<KRuleTerm> rules, final JsonObject record0, final JsonObject recordN) {
+    public static JsonObject ruleAny(final Collection<KRule.Item> rules, final JsonObject record0, final JsonObject recordN) {
         return Unique.ruleAny(rules, record0, recordN);
     }
 
-    public static JsonObject ruleAny(final Collection<KRuleTerm> rules, final JsonArray source, final JsonObject record) {
+    public static JsonObject ruleAny(final Collection<KRule.Item> rules, final JsonArray source, final JsonObject record) {
         return Unique.ruleAny(rules, source, record);
     }
 
-    public static ConcurrentMap<Boolean, JsonArray> ruleAny(final Collection<KRuleTerm> rules, final JsonArray input) {
+    public static ConcurrentMap<Boolean, JsonArray> ruleAny(final Collection<KRule.Item> rules, final JsonArray input) {
         return Unique.ruleAny(rules, input);
     }
 

@@ -8,9 +8,9 @@ import io.vertx.core.json.JsonArray;
  */
 public interface DocBStub {
     /*
-     * Start Document Engine by `appId`
+     * Start Document Engine by `id`
      *
-     * 1. Fetch `X_CATEGORY` by `appId` where type equal `zero.directory`, the default should be
+     * 1. Fetch `X_CATEGORY` by `id` where type equal `zero.directory`, the default should be
      * -- document
      * -- department
      * -- workflow

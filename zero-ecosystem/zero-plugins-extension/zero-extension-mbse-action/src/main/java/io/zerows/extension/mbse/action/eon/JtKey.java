@@ -9,6 +9,6 @@ public interface JtKey {
         String API = "api";
         String JOB = "job";
         String KEY = "key";
-        String APP_ID = "appId";
+        String APP_ID = "id";
     }
 }

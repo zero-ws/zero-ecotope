@@ -69,13 +69,13 @@ public class AppService implements AppStub {
             /* Modulat Processing */
             .compose(appJ -> Ux.channel(Modulat.class, () -> appJ, stub -> stub.extension(appJ, false)));
         /* Document Platform Initialized */
-        // .compose(appJ -> AtPin.?nitDocument(appId).compose(nil -> Ux.future(appJ)));
+        // .compose(appJ -> AtPin.?nitDocument(id).compose(nil -> Ux.future(appJ)));
     }
 
     @Override
     public Future<JsonObject> fetchSource(final String appId) {
         return Ux.Jooq.on(XSourceDao.class)
-            /* Fetch One by appId */
+            /* Fetch One by id */
             .fetchOneAsync(KName.APP_ID, appId)
             /* Get Result */
             .compose(Ux::futureJ)

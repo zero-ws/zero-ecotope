@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.Apt;
 import io.zerows.platform.enums.typed.ChangeFlag;
-import io.zerows.platform.metadata.KRuleTerm;
+import io.zerows.platform.metadata.KRule;
 import io.zerows.support.Ut;
 
 import java.util.Collection;
@@ -22,41 +22,41 @@ class Unique {
     private Unique() {
     }
 
-    static JsonObject ruleAll(final Collection<KRuleTerm> rules, final JsonObject input) {
+    static JsonObject ruleAll(final Collection<KRule.Item> rules, final JsonObject input) {
         final boolean isMatch = rules.stream().allMatch(term -> Objects.nonNull(term.dataMatch(input)));
         return isMatch ? input : null;
     }
 
-    static JsonObject ruleAll(final Collection<KRuleTerm> rules, final JsonObject recordO, final JsonObject recordN) {
+    static JsonObject ruleAll(final Collection<KRule.Item> rules, final JsonObject recordO, final JsonObject recordN) {
         final boolean isMatch = rules.stream().allMatch(rule -> ruleMatch(rule, recordO, recordN));
         return isMatch ? ruleTwins(recordO, recordN) : null;
     }
 
-    static JsonObject ruleAll(final Collection<KRuleTerm> rules, final JsonArray source, final JsonObject record) {
+    static JsonObject ruleAll(final Collection<KRule.Item> rules, final JsonArray source, final JsonObject record) {
         return Ut.itJArray(source).map(recordR -> ruleAll(rules, record, recordR))
             .filter(Objects::nonNull).findFirst().orElse(null);
     }
 
-    static JsonObject ruleAny(final Collection<KRuleTerm> rules, final JsonObject input) {
+    static JsonObject ruleAny(final Collection<KRule.Item> rules, final JsonObject input) {
         final boolean isMatch = rules.stream().anyMatch(term -> Objects.nonNull(term.dataMatch(input)));
         return isMatch ? input : null;
     }
 
-    static JsonObject ruleAny(final Collection<KRuleTerm> rules, final JsonObject recordO, final JsonObject recordN) {
+    static JsonObject ruleAny(final Collection<KRule.Item> rules, final JsonObject recordO, final JsonObject recordN) {
         final boolean isMatch = rules.stream().anyMatch(rule -> ruleMatch(rule, recordO, recordN));
         return isMatch ? ruleTwins(recordO, recordN) : null;
     }
 
-    static JsonObject ruleAny(final Collection<KRuleTerm> rules, final JsonArray source, final JsonObject record) {
+    static JsonObject ruleAny(final Collection<KRule.Item> rules, final JsonArray source, final JsonObject record) {
         return Ut.itJArray(source).map(recordR -> ruleAny(rules, record, recordR))
             .filter(Objects::nonNull).findFirst().orElse(null);
     }
 
-    static ConcurrentMap<Boolean, JsonArray> ruleAll(final Collection<KRuleTerm> rules, final JsonArray input) {
+    static ConcurrentMap<Boolean, JsonArray> ruleAll(final Collection<KRule.Item> rules, final JsonArray input) {
         return ruleSplit(rules, input, Unique::ruleAll);
     }
 
-    static ConcurrentMap<Boolean, JsonArray> ruleAny(final Collection<KRuleTerm> rules, final JsonArray input) {
+    static ConcurrentMap<Boolean, JsonArray> ruleAny(final Collection<KRule.Item> rules, final JsonArray input) {
         return ruleSplit(rules, input, Unique::ruleAny);
     }
 
@@ -144,7 +144,7 @@ class Unique {
         return normalized;
     }
 
-    private static boolean ruleMatch(final KRuleTerm rule, final JsonObject recordL, final JsonObject recordR) {
+    private static boolean ruleMatch(final KRule.Item rule, final JsonObject recordL, final JsonObject recordR) {
         if (Objects.isNull(rule)) {
             /* Compare record directly */
             return recordL.equals(recordR);
@@ -161,8 +161,8 @@ class Unique {
         }
     }
 
-    private static ConcurrentMap<Boolean, JsonArray> ruleSplit(final Collection<KRuleTerm> rules, final JsonArray input,
-                                                               final BiFunction<Collection<KRuleTerm>, JsonObject, JsonObject> eachFn) {
+    private static ConcurrentMap<Boolean, JsonArray> ruleSplit(final Collection<KRule.Item> rules, final JsonArray input,
+                                                               final BiFunction<Collection<KRule.Item>, JsonObject, JsonObject> eachFn) {
         final JsonArray valid = new JsonArray();
         final JsonArray inValid = new JsonArray();
         Ut.itJArray(input).forEach(item -> {

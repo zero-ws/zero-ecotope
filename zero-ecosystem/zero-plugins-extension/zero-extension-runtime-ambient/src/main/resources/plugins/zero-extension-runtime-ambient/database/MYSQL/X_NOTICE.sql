@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS X_NOTICE
     `EXPIRED_AT` DATETIME COMMENT '「createdAt」- 公告到期时间',
 
     -- 特殊属性
-    `APP_ID`     VARCHAR(36) COMMENT '「appId」- 所属应用ID',
+    `APP_ID`     VARCHAR(36) COMMENT '「id」- 所属应用ID',
 
     -- 特殊字段
     `ACTIVE`     BIT         DEFAULT NULL COMMENT '「active」- 是否启用',

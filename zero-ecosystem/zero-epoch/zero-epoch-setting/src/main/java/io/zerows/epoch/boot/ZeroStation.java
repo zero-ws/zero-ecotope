@@ -9,12 +9,12 @@ import io.zerows.epoch.boot.exception._40001Exception500UpClassArgs;
 import io.zerows.epoch.boot.exception._40002Exception500UpClassInvalid;
 import io.zerows.epoch.boot.internal.FeatureMark;
 import io.zerows.epoch.configuration.ZeroBoot;
-import io.zerows.epoch.metadata.environment.LogCloud;
 import io.zerows.management.OZeroStore;
 import io.zerows.platform.enums.EmApp;
 import io.zerows.specification.configuration.HBoot;
 import io.zerows.specification.configuration.HSetting;
 import io.zerows.specification.configuration.HStation;
+import lombok.extern.slf4j.Slf4j;
 
 import java.lang.annotation.Annotation;
 import java.util.Objects;
@@ -24,6 +24,7 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * @author lang : 2023-05-30
  */
+@Slf4j
 public class ZeroStation implements HStation {
     /**
      * 针对 Annotation 部分的创建
@@ -82,7 +83,7 @@ public class ZeroStation implements HStation {
         STORE_ANNO.putAll(Anno.get(clazz));
         if (!STORE_ANNO.containsKey(Up.class.getName())) {
             final VertxBootException warning = new _40002Exception500UpClassInvalid(clazz);
-            LogCloud.LOG.Env.info(ZeroStation.class, warning.getMessage());
+            log.warn(warning.getMessage());
         }
     }
 

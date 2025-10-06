@@ -25,10 +25,10 @@ public interface HPath {
      *     2. {@link HChunk}
      * </code></pre>
      *
-     * @return {@link HStore}
+     * @return {@link HStoreLegacy}
      */
     @One2One
-    HStore reference();
+    HStoreLegacy reference();
 
     /**
      * 文件路径详细描述（绝对路径）

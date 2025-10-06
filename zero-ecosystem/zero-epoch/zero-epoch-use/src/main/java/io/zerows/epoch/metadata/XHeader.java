@@ -3,12 +3,14 @@ package io.zerows.epoch.metadata;
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KWeb;
-import io.zerows.support.Ut;
 import io.zerows.specification.atomic.HJson;
+import io.zerows.support.Ut;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Objects;
 
+@Data
 public class XHeader implements Serializable, HJson {
 
     private String sigma;
@@ -19,48 +21,8 @@ public class XHeader implements Serializable, HJson {
     private String tenantId;
     private String session;
 
-    public String getLanguage() {
-        return this.language;
-    }
-
-    public void setLanguage(final String language) {
-        this.language = language;
-    }
-
-    public String getSigma() {
-        return this.sigma;
-    }
-
-    public void setSigma(final String sigma) {
-        this.sigma = sigma;
-    }
-
-    public String getAppId() {
-        return this.appId;
-    }
-
-    public void setAppId(final String appId) {
-        this.appId = appId;
-    }
-
-    public String getAppKey() {
-        return this.appKey;
-    }
-
-    public void setAppKey(final String appKey) {
-        this.appKey = appKey;
-    }
-
     public String session() {
         return this.session;
-    }
-
-    public String getTenantId() {
-        return this.tenantId;
-    }
-
-    public void setTenantId(final String tenantId) {
-        this.tenantId = tenantId;
     }
 
     @Override

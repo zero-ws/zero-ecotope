@@ -4,7 +4,7 @@ import io.zerows.platform.annotations.One2One;
 import io.zerows.specification.atomic.HContract;
 import io.zerows.specification.development.program.HBranch;
 import io.zerows.specification.development.program.HResource;
-import io.zerows.specification.storage.HStore;
+import io.zerows.specification.storage.HStoreLegacy;
 
 import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
@@ -22,7 +22,7 @@ import java.util.concurrent.ConcurrentMap;
  *     3. 对接云资源时会关联两部分：
  *        - （云）物理区域资源 {@link HPlot}
  *           - 底层关联到抽象资源空间 {@link HResource}
- *           - 物理层关联到抽象物理区域 {@link HStore}
+ *           - 物理层关联到抽象物理区域 {@link HStoreLegacy}
  *        - （云）云容器空间，K8S连接 {@link HPlot.HPod}
  *     4. 配合发布计划可直接处理三种不同环境中的相关信息
  * </code></pre>

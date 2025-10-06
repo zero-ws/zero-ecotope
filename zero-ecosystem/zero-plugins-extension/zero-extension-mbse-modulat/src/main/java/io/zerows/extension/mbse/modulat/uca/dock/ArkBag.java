@@ -19,13 +19,13 @@ class ArkBag extends AbstractArk {
                                                   final EmModel.By by) {
         // R2MO 有问题
         //        return ASYNC_BAG_DATA.pick(() -> {
-        //            final JsonObject condition = this.buildQr(appId, by);
+        //            final JsonObject condition = this.buildQr(id, by);
         //            condition.put(KName.ENTRY, Boolean.TRUE);
         //            LOG.Spi.info(this.getClass(), "Modulat condition = {0}", condition.encode());
         //            return Ux.Jooq.on(BBagDao.class).<BBag>fetchAsync(condition)
         //                // JsonArray -> ClusterSerializable
         //                .compose(Ux::futureA);
-        //        }, appId).compose(Ux::future);
+        //        }, id).compose(Ux::future);
         return null;
     }
 }

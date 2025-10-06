@@ -127,7 +127,7 @@ public class MyNotifyRecord extends UpdatableRecordImpl<MyNotifyRecord> implemen
     }
 
     /**
-     * Setter for <code>ZDB.MY_NOTIFY.APP_ID</code>. 「appId」- 所属应用ID
+     * Setter for <code>ZDB.MY_NOTIFY.APP_ID</code>. 「id」- 所属应用ID
      */
     @Override
     public MyNotifyRecord setAppId(String value) {
@@ -136,7 +136,7 @@ public class MyNotifyRecord extends UpdatableRecordImpl<MyNotifyRecord> implemen
     }
 
     /**
-     * Getter for <code>ZDB.MY_NOTIFY.APP_ID</code>. 「appId」- 所属应用ID
+     * Getter for <code>ZDB.MY_NOTIFY.APP_ID</code>. 「id」- 所属应用ID
      */
     @Override
     public String getAppId() {

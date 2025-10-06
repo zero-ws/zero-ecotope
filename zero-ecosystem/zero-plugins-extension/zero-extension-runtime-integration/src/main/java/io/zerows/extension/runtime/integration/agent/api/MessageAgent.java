@@ -50,7 +50,7 @@ public interface MessageAgent {
      *         "sendTo": "用户ID，前端传入",
      *         "sendBy": "应用ID",
      *         "sendAt": "发送时间",
-     *         "appId": "应用ID"
+     *         "id": "应用ID"
      *     }
      * </code></pre>
      *

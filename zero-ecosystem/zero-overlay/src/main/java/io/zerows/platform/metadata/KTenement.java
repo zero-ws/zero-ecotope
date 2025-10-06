@@ -19,7 +19,7 @@ import java.util.concurrent.ConcurrentMap;
  * <pre><code>
  *     - sigma: 统一标识
  *     - language：语言信息
- *     - appKey / appId / appName （内置包含 {@link HApp}
+ *     - appKey / id / appName （内置包含 {@link HApp}
  *     拥有者ID，特殊维度（云环境专用，处理核心维度）
  * </code></pre>
  * oi = Owner ID（持有者标识）
@@ -39,7 +39,7 @@ import java.util.concurrent.ConcurrentMap;
  *                             HArk ( running ) -----------> key ---------> KOI
  *                               |
  *                               |
- *         connect:        sigma / appId / appKey / name / code / tenantId
+ *         connect:        sigma / id / appKey / name / code / tenantId
  *
  *     充当了上下文环境的应用/租户 请求信息，和 HArk 不同的点在于，当前静态中，可执行全局化调用，
  *     且请求产生时执行初始化，依赖 XHeader 中数据

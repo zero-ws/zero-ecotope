@@ -47,7 +47,7 @@ public interface HMod {
      * 当前模块的唯一标识，此标识的计算规则
      * <pre><code>
      *    1. app = null,  {@see * /name}
-     *    2. app != null, {@see appId/name}
+     *    2. app != null, {@see id/name}
      * </code></pre>
      *
      * @return 返回标识值

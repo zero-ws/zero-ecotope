@@ -132,12 +132,12 @@ public interface IBBag extends VertxPojo, Serializable {
     public IBBag setEntryId(String value);
 
     /**
-     * Getter for <code>ZDB.B_BAG.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * Getter for <code>ZDB.B_BAG.APP_ID</code>. 「id」- 关联的应用程序ID
      */
     public String getAppId();
 
     /**
-     * Setter for <code>ZDB.B_BAG.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * Setter for <code>ZDB.B_BAG.APP_ID</code>. 「id」- 关联的应用程序ID
      */
     public IBBag setAppId(String value);
 

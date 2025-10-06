@@ -2,7 +2,7 @@ package io.zerows.specification.modeling.element;
 
 import io.zerows.platform.annotations.One2One;
 import io.zerows.specification.modeling.norm.HNs;
-import io.zerows.specification.storage.HStore;
+import io.zerows.specification.storage.HStoreLegacy;
 
 /**
  * 「工程部署」Descriptor
@@ -25,7 +25,7 @@ public interface HDescriptor extends HNs {
     String identifier();
 
     /**
-     * 部署描述符消费的存储基础，关联到 {@link HStore} 中的
+     * 部署描述符消费的存储基础，关联到 {@link HStoreLegacy} 中的
      * 基本顶层存储信息，部署描述符和存储之间只会存在一对一的关系，不运行出现一对多的情况
      *
      * @return {@link String}

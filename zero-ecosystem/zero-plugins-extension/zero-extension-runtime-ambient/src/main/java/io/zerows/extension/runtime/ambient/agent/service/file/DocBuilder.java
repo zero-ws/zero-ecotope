@@ -30,7 +30,7 @@ public class DocBuilder implements DocBStub {
     // ------------------------- Document Management Tree -------------------------
     /*
      * Here the parameters are mapped to
-     * -- appId: X_APP -> KEY
+     * -- id: X_APP -> KEY
      * -- type:  X_CATEGORY -> TYPE
      */
     @Override

@@ -1,13 +1,14 @@
 package io.zerows.extension.mbse.basement.util;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.platform.constant.VPath;
-import io.zerows.platform.constant.VString;
-import io.zerows.platform.exception._11002Exception500EmptyIo;
-import io.zerows.support.Ut;
 import io.zerows.extension.mbse.basement.atom.builtin.DataModel;
 import io.zerows.extension.mbse.basement.atom.builtin.DataSchema;
 import io.zerows.extension.mbse.basement.bootstrap.AoPin;
+import io.zerows.platform.constant.VPath;
+import io.zerows.platform.constant.VString;
+import io.zerows.platform.exception._11002Exception500EmptyIo;
+import io.zerows.specification.access.app.HApp;
+import io.zerows.support.Ut;
 
 import java.util.Objects;
 
@@ -23,7 +24,7 @@ class AoStore {
         final String prefix = AoPin.getConfig().getNamespace();
         if (Ut.isNil(prefix)) {
             // Default namespace
-            return Ut.nsApp(appName);
+            return HApp.nsOf(appName);
         } else {
             // Configured namespace
             return Ut.fromMessage(prefix, appName);

@@ -3,6 +3,7 @@ package io.zerows.epoch.basicore;
 import io.zerows.epoch.application.VertxYml;
 import io.zerows.epoch.basicore.option.ClusterOptions;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 
@@ -12,9 +13,9 @@ import java.io.Serializable;
  * @author lang : 2025-10-05
  */
 @Data
-public class YmVertx implements Serializable {
+@EqualsAndHashCode(callSuper = true)
+public class YmVertx extends YmEntrance implements Serializable {
     private YmVertxConfig config = new YmVertxConfig();
-    private YmCloud cloud = new YmCloud();
     private YmVertxConfig.Application application = new YmVertxConfig.Application();
     private ClusterOptions cluster = new ClusterOptions();
     private YmDataSource datasource = new YmDataSource();

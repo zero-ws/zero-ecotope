@@ -43,7 +43,7 @@ public class JtThanatos extends AbstractMission {
      *          "active" : true
      *     },
      *     "config" : null,
-     *     "appId" : "86db806c-97a0-4173-9a6d-632cb1a82ac7",
+     *     "id" : "86db806c-97a0-4173-9a6d-632cb1a82ac7",
      *     "_class" : "io.vertx.mod.jet.io.vertx.up.argument.JtJob",
      *     "job" : {
      *          "key" : "f723d571-39c8-4823-b0d6-82e15e463906",

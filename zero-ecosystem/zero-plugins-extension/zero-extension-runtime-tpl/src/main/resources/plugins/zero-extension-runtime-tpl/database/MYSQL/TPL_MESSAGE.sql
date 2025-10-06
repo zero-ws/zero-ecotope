@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS TPL_MESSAGE
     `EXPR_COMPONENT` VARCHAR(255) COMMENT '「exprComponent」- 模板扩展处理程序，Java类名',
 
     -- 特殊属性
-    `APP_ID`         VARCHAR(36) COMMENT '「appId」- 所属应用ID',
+    `APP_ID`         VARCHAR(36) COMMENT '「id」- 所属应用ID',
 
     -- 特殊字段
     `ACTIVE`         BIT         DEFAULT NULL COMMENT '「active」- 是否启用',

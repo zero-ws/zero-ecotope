@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS X_TABULAR
     `ICON`          VARCHAR(255) COMMENT '「icon」- 列表图标',
     `SORT`          INTEGER COMMENT '「sort」- 排序信息',
     `COMMENT`       TEXT COMMENT '「comment」- 备注信息',
-    `APP_ID`        VARCHAR(255) COMMENT '「appId」- 关联的应用程序ID',
+    `APP_ID`        VARCHAR(255) COMMENT '「id」- 关联的应用程序ID',
 
     `RUN_COMPONENT` TEXT COMMENT '「runComponent」- 执行组件',
     -- 特殊字段

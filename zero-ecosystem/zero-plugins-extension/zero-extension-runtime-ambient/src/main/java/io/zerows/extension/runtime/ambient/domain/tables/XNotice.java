@@ -76,9 +76,9 @@ public class XNotice extends TableImpl<XNoticeRecord> {
     public final TableField<XNoticeRecord, LocalDateTime> EXPIRED_AT = createField(DSL.name("EXPIRED_AT"), SQLDataType.LOCALDATETIME(0), this, "「createdAt」- 公告到期时间");
 
     /**
-     * The column <code>ZDB.X_NOTICE.APP_ID</code>. 「appId」- 所属应用ID
+     * The column <code>ZDB.X_NOTICE.APP_ID</code>. 「id」- 所属应用ID
      */
-    public final TableField<XNoticeRecord, String> APP_ID = createField(DSL.name("APP_ID"), SQLDataType.VARCHAR(36), this, "「appId」- 所属应用ID");
+    public final TableField<XNoticeRecord, String> APP_ID = createField(DSL.name("APP_ID"), SQLDataType.VARCHAR(36), this, "「id」- 所属应用ID");
 
     /**
      * The column <code>ZDB.X_NOTICE.ACTIVE</code>. 「active」- 是否启用

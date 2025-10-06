@@ -196,7 +196,7 @@ public class MyNotify implements VertxPojo, IMyNotify {
     }
 
     /**
-     * Getter for <code>ZDB.MY_NOTIFY.APP_ID</code>. 「appId」- 所属应用ID
+     * Getter for <code>ZDB.MY_NOTIFY.APP_ID</code>. 「id」- 所属应用ID
      */
     @Override
     public String getAppId() {
@@ -204,7 +204,7 @@ public class MyNotify implements VertxPojo, IMyNotify {
     }
 
     /**
-     * Setter for <code>ZDB.MY_NOTIFY.APP_ID</code>. 「appId」- 所属应用ID
+     * Setter for <code>ZDB.MY_NOTIFY.APP_ID</code>. 「id」- 所属应用ID
      */
     @Override
     public MyNotify setAppId(String appId) {

@@ -25,7 +25,7 @@ CREATE TABLE `X_NUMBER`
     `STEP`          INT(11)     NOT NULL COMMENT '「step」编号的步进系数，每次按照step进行变化,step,I_STEP',
     `DECREMENT`     BIT         NOT NULL COMMENT '「decrement」递增/递减？如果为true则递减，为false则是递增,decrement,IS_DECREMENT',
 
-    `APP_ID`        VARCHAR(255) COMMENT '「appId」- 关联的应用程序ID',
+    `APP_ID`        VARCHAR(255) COMMENT '「id」- 关联的应用程序ID',
     `RUN_COMPONENT` TEXT COMMENT '「runComponent」- 发号器执行组件，雪花算法所需',
 
     -- 特殊字段

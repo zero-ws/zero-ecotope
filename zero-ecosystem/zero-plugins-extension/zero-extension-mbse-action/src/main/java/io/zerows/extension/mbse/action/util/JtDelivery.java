@@ -22,7 +22,7 @@ class JtDelivery {
      *              },
      *              "config":{
      *              },
-     *              "appId": "EmApp Key"
+     *              "id": "EmApp Key"
      *          }
      *      }
      * }
@@ -55,7 +55,7 @@ class JtDelivery {
      *                  },
      *                  "config":{
      *                  },
-     *                  "appId": "EmApp Key"
+     *                  "id": "EmApp Key"
      *              }
      *          }
      *      }

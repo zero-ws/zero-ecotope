@@ -77,9 +77,9 @@ public class BBag extends TableImpl<BBagRecord> {
      */
     public final TableField<BBagRecord, String> ENTRY_ID = createField(DSL.name("ENTRY_ID"), SQLDataType.VARCHAR(36), this, "「entryId」- 入口专用ID，关联 X_MENU 中的ID，其余的直接使用链接");
     /**
-     * The column <code>ZDB.B_BAG.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * The column <code>ZDB.B_BAG.APP_ID</code>. 「id」- 关联的应用程序ID
      */
-    public final TableField<BBagRecord, String> APP_ID = createField(DSL.name("APP_ID"), SQLDataType.VARCHAR(36), this, "「appId」- 关联的应用程序ID");
+    public final TableField<BBagRecord, String> APP_ID = createField(DSL.name("APP_ID"), SQLDataType.VARCHAR(36), this, "「id」- 关联的应用程序ID");
     /**
      * The column <code>ZDB.B_BAG.PARENT_ID</code>. 「parentId」- 父包ID
      */

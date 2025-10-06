@@ -5,24 +5,28 @@ import io.zerows.platform.EnvironmentVariable;
 import io.zerows.platform.exception._40101Exception500CombineApp;
 import io.zerows.specification.access.app.HApp;
 import io.zerows.support.base.UtBase;
+import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.util.Objects;
 
 /**
  * @author lang : 2023-06-06
  */
+@Data
+@Accessors(chain = true)
 public class KApp implements HApp {
 
-    private final String name;
+    private String name;
     private final JsonObject configuration = new JsonObject();
-    private final String ns;
+    private String ns;
 
     public KApp(final String name) {
         final String nameApp = UtBase.envWith(EnvironmentVariable.Z_APP, name);
         // 应用名称
         this.name = nameApp;
         // 名空间
-        this.ns = UtBase.nsApp(nameApp);
+        this.ns = HApp.nsOf(nameApp);
     }
 
     @Override
@@ -53,16 +57,6 @@ public class KApp implements HApp {
     }
 
     @Override
-    public String name() {
-        return this.name;
-    }
-
-    @Override
-    public String ns() {
-        return this.ns;
-    }
-
-    @Override
     public HApp apply(final HApp target) {
         if (Objects.isNull(target)) {
             return this;
@@ -73,6 +67,28 @@ public class KApp implements HApp {
         } else {
             throw new _40101Exception500CombineApp(this.ns, this.name);
         }
+    }
+
+    @Override
+    public String name() {
+        return this.name;
+    }
+
+    @Override
+    public HApp name(final String name) {
+        this.name = name;
+        return this;
+    }
+
+    @Override
+    public String ns() {
+        return this.ns;
+    }
+
+    @Override
+    public HApp ns(final String ns) {
+        this.ns = ns;
+        return this;
     }
 
     @Override

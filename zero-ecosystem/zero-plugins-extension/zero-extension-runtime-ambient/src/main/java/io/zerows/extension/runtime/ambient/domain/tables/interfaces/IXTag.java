@@ -117,12 +117,12 @@ public interface IXTag extends VertxPojo, Serializable {
     public String getUiConfig();
 
     /**
-     * Setter for <code>ZDB.X_TAG.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * Setter for <code>ZDB.X_TAG.APP_ID</code>. 「id」- 关联的应用程序ID
      */
     public IXTag setAppId(String value);
 
     /**
-     * Getter for <code>ZDB.X_TAG.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * Getter for <code>ZDB.X_TAG.APP_ID</code>. 「id」- 关联的应用程序ID
      */
     public String getAppId();
 

@@ -115,9 +115,9 @@ public class IIntegration extends TableImpl<IIntegrationRecord> {
      */
     public final TableField<IIntegrationRecord, String> OPTIONS = createField(DSL.name("OPTIONS"), SQLDataType.CLOB, this, "「options」- 集成相关配置");
     /**
-     * The column <code>ZDB.I_INTEGRATION.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * The column <code>ZDB.I_INTEGRATION.APP_ID</code>. 「id」- 关联的应用程序ID
      */
-    public final TableField<IIntegrationRecord, String> APP_ID = createField(DSL.name("APP_ID"), SQLDataType.VARCHAR(255), this, "「appId」- 关联的应用程序ID");
+    public final TableField<IIntegrationRecord, String> APP_ID = createField(DSL.name("APP_ID"), SQLDataType.VARCHAR(255), this, "「id」- 关联的应用程序ID");
     /**
      * The column <code>ZDB.I_INTEGRATION.ACTIVE</code>. 「active」- 是否启用
      */

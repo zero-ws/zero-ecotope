@@ -15,7 +15,7 @@ import java.util.Objects;
 /**
  * 新版去掉原来繁琐的流程，构造新流程处理
  * <pre><code>
- *     1. 根据 appId 从环境中提取 {@link OCacheMod} 的缓存信息
+ *     1. 根据 id 从环境中提取 {@link OCacheMod} 的缓存信息
  *     2. 每个缓存信息中都会包含 mName = {@link HMod} 的基本信息
  * </code></pre>
  *

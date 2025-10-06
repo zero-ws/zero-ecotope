@@ -91,9 +91,9 @@ public class XTag extends TableImpl<XTagRecord> {
     public final TableField<XTagRecord, String> UI_CONFIG = createField(DSL.name("UI_CONFIG"), SQLDataType.CLOB, this, "「uiConfig」- 标签的其他配置");
 
     /**
-     * The column <code>ZDB.X_TAG.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * The column <code>ZDB.X_TAG.APP_ID</code>. 「id」- 关联的应用程序ID
      */
-    public final TableField<XTagRecord, String> APP_ID = createField(DSL.name("APP_ID"), SQLDataType.VARCHAR(255), this, "「appId」- 关联的应用程序ID");
+    public final TableField<XTagRecord, String> APP_ID = createField(DSL.name("APP_ID"), SQLDataType.VARCHAR(255), this, "「id」- 关联的应用程序ID");
 
     /**
      * The column <code>ZDB.X_TAG.ACTIVE</code>. 「active」- 是否启用

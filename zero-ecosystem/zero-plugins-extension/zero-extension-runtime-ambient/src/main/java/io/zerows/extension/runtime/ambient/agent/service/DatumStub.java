@@ -17,7 +17,7 @@ public interface DatumStub {
      *    ( N ) SIGMA = ? AND TYPE = ?
      *    ( 1 ) SIGMA = ? AND TYPE = ? AND CODE = ?
      */
-    // -- appId
+    // -- id
     Future<JsonArray> dictApp(String appId, JsonArray types);
 
     Future<JsonArray> dictApp(String appId, String type);
@@ -42,7 +42,7 @@ public interface DatumStub {
      *    ( N ) SIGMA = ? AND TYPE = ? AND LEAF = ? ( Yes/No )
      *    ( N ) SIGMA = ? AND TYPE = ?
      */
-    // -- appId
+    // -- id
     Future<JsonArray> treeApp(String appId, JsonArray types);
 
     default Future<JsonArray> treeApp(final String appId, final String type) {

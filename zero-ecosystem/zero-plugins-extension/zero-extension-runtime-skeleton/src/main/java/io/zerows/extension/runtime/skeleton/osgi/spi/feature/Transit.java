@@ -13,7 +13,7 @@ public interface Transit {
      * 根据参数构造消息相关信息，此处的消息必须包含
      * {
      *     "sigma": "统一标识",
-     *     "appId": "应用标识",
+     *     "id": "应用标识",
      *     "data": {},
      *     "message": "TPL_MESSAGE 中的 code"
      * }

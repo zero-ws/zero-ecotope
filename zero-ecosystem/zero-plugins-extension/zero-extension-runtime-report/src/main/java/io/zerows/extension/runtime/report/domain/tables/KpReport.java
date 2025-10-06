@@ -97,9 +97,9 @@ public class KpReport extends TableImpl<KpReportRecord> {
     public final TableField<KpReportRecord, String> DATA_TPL_ID = createField(DSL.name("DATA_TPL_ID"), SQLDataType.VARCHAR(36), this, "「dataTplId」- 关联报表模板");
 
     /**
-     * The column <code>ZDB.KP_REPORT.APP_ID</code>. 「appId」- 应用数据
+     * The column <code>ZDB.KP_REPORT.APP_ID</code>. 「id」- 应用数据
      */
-    public final TableField<KpReportRecord, String> APP_ID = createField(DSL.name("APP_ID"), SQLDataType.VARCHAR(36), this, "「appId」- 应用数据");
+    public final TableField<KpReportRecord, String> APP_ID = createField(DSL.name("APP_ID"), SQLDataType.VARCHAR(36), this, "「id」- 应用数据");
 
     /**
      * The column <code>ZDB.KP_REPORT.ACTIVE</code>. 「active」- 是否启用

@@ -37,7 +37,7 @@ class ParameterWorker implements ParameterBuilder<Envelop> {
             /*
              * XHeader for
              * - sigma
-             * - appId
+             * - id
              * - appKey
              * - lang
              */

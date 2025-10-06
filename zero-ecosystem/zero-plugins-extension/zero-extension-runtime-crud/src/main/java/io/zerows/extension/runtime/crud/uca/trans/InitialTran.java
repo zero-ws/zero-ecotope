@@ -16,7 +16,7 @@ import io.zerows.extension.runtime.crud.util.Ix;
  * 1. module
  * 2. sigma
  * 3. language
- * 4. appId
+ * 4. id
  *
  * Other variable should use fixed value instead of expression
  *

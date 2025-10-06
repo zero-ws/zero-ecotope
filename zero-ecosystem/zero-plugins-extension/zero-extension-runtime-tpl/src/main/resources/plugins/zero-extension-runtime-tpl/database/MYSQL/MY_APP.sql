@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS MY_APP
      * 关联 Apps 只能处理 AppId 以及入口问题，不可以处理其他问题，比如使用 AppId 直接读取
      * 字典相关数据，不包含在 Apps 的个人设置中，所以此处主要针对 AppId 以及 BagId 进行关联设置
      */
-    `APP_ID`     VARCHAR(36) COMMENT '「appId」- 个人应用关联ID',
+    `APP_ID`     VARCHAR(36) COMMENT '「id」- 个人应用关联ID',
     `BAG_ID`     VARCHAR(36) COMMENT '「bagId」- 个人应用绑定的 BAG ID',
 
     `OWNER`      VARCHAR(36) COMMENT '「owner」- 拥有者ID，我的 / 角色级',

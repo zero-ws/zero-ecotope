@@ -62,7 +62,7 @@ class SyntaxAop {
          *    language   = view -> language
          *    viewId     = view -> key
          * 3）从 header 中提取 header 相关数据
-         *    appId      = X-App-Id
+         *    id      = X-App-Id
          *    appKey     = X-App-Key
          *    sigma      = X-Sigma
          *    language   = X-Lang

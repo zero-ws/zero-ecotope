@@ -23,7 +23,7 @@ public interface Pre {
     // ------------------- Utility Pre -------------------
     /*
      * 1) Codex for validation
-     * 2) Head values: sigma, appId, appKey, language
+     * 2) Head values: sigma, id, appKey, language
      * 3) Uri calculation: uri, method
      * 4) Primary Key calculation
      * 5) Excel file calculation

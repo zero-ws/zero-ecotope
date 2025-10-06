@@ -221,7 +221,7 @@ public class TplMessage implements VertxPojo, ITplMessage {
     }
 
     /**
-     * Getter for <code>ZDB.TPL_MESSAGE.APP_ID</code>. 「appId」- 所属应用ID
+     * Getter for <code>ZDB.TPL_MESSAGE.APP_ID</code>. 「id」- 所属应用ID
      */
     @Override
     public String getAppId() {
@@ -229,7 +229,7 @@ public class TplMessage implements VertxPojo, ITplMessage {
     }
 
     /**
-     * Setter for <code>ZDB.TPL_MESSAGE.APP_ID</code>. 「appId」- 所属应用ID
+     * Setter for <code>ZDB.TPL_MESSAGE.APP_ID</code>. 「id」- 所属应用ID
      */
     @Override
     public TplMessage setAppId(String appId) {

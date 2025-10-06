@@ -219,7 +219,7 @@ public class XTabular implements VertxPojo, IXTabular {
     }
 
     /**
-     * Getter for <code>ZDB.X_TABULAR.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * Getter for <code>ZDB.X_TABULAR.APP_ID</code>. 「id」- 关联的应用程序ID
      */
     @Override
     public String getAppId() {
@@ -227,7 +227,7 @@ public class XTabular implements VertxPojo, IXTabular {
     }
 
     /**
-     * Setter for <code>ZDB.X_TABULAR.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * Setter for <code>ZDB.X_TABULAR.APP_ID</code>. 「id」- 关联的应用程序ID
      */
     @Override
     public XTabular setAppId(String appId) {

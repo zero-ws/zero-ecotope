@@ -92,7 +92,7 @@ public class PowerMod implements HMod {
         if (Objects.isNull(this.app)) {
             return "*" + VString.SLASH + this.name;
         } else {
-            return this.app.appId() + VString.SLASH + this.name;
+            return this.app.id() + VString.SLASH + this.name;
         }
     }
 

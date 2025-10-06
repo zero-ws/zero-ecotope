@@ -87,9 +87,9 @@ public class XMenu extends TableImpl<XMenuRecord> {
     public final TableField<XMenuRecord, String> PARENT_ID = createField(DSL.name("PARENT_ID"), SQLDataType.VARCHAR(36), this, "「parentId」- 菜单父ID");
 
     /**
-     * The column <code>ZDB.X_MENU.APP_ID</code>. 「appId」- 应用程序ID
+     * The column <code>ZDB.X_MENU.APP_ID</code>. 「id」- 应用程序ID
      */
-    public final TableField<XMenuRecord, String> APP_ID = createField(DSL.name("APP_ID"), SQLDataType.VARCHAR(36), this, "「appId」- 应用程序ID");
+    public final TableField<XMenuRecord, String> APP_ID = createField(DSL.name("APP_ID"), SQLDataType.VARCHAR(36), this, "「id」- 应用程序ID");
 
     /**
      * The column <code>ZDB.X_MENU.ACTIVE</code>. 「active」- 是否启用

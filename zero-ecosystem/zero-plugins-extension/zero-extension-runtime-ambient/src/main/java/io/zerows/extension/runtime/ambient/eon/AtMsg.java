@@ -2,7 +2,7 @@ package io.zerows.extension.runtime.ambient.eon;
 
 public interface AtMsg {
 
-    String SOURCE = "Get data source from appId = {0}";
+    String SOURCE = "Get data source from id = {0}";
 
     String INIT_APP = "XApp initializing with: {0}";
 

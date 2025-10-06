@@ -21,7 +21,7 @@ public interface Ark {
     }
 
     /*
-     * Fetch data from the system by `appId`
+     * Fetch data from the system by `id`
      * instead of other modulat.
      */
     default Future<ClusterSerializable> modularize(final String appId, final boolean open) {

@@ -77,9 +77,9 @@ public class XTabular extends TableImpl<XTabularRecord> {
     public final TableField<XTabularRecord, String> COMMENT = createField(DSL.name("COMMENT"), SQLDataType.CLOB, this, "「comment」- 备注信息");
 
     /**
-     * The column <code>ZDB.X_TABULAR.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * The column <code>ZDB.X_TABULAR.APP_ID</code>. 「id」- 关联的应用程序ID
      */
-    public final TableField<XTabularRecord, String> APP_ID = createField(DSL.name("APP_ID"), SQLDataType.VARCHAR(255), this, "「appId」- 关联的应用程序ID");
+    public final TableField<XTabularRecord, String> APP_ID = createField(DSL.name("APP_ID"), SQLDataType.VARCHAR(255), this, "「id」- 关联的应用程序ID");
 
     /**
      * The column <code>ZDB.X_TABULAR.RUN_COMPONENT</code>. 「runComponent」- 执行组件

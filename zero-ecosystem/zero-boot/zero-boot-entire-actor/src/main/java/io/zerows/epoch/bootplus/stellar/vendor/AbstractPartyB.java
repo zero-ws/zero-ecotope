@@ -67,7 +67,7 @@ public abstract class AbstractPartyB implements OkB {
      * {
      *     "identifier": "模型标识符",
      *     "sigma": "统一标识符",
-     *     "appId": "应用主键，对应X_APP中的key值"
+     *     "id": "应用主键，对应X_APP中的key值"
      * }
      * // </code></pre>
      * ```

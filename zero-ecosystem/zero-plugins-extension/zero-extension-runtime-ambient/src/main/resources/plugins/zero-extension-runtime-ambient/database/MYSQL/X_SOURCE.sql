@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS X_SOURCE
     `PASSWORD`          VARCHAR(255) COMMENT '「password」- 密码',
 
     -- 特殊属性
-    `APP_ID`            VARCHAR(255) COMMENT '「appId」- 关联的应用程序ID',
+    `APP_ID`            VARCHAR(255) COMMENT '「id」- 关联的应用程序ID',
 
     -- 特殊字段
     `ACTIVE`            BIT         DEFAULT NULL COMMENT '「active」- 是否启用',

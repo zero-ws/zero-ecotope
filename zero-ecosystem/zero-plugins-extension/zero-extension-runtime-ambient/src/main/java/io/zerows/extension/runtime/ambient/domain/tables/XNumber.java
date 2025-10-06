@@ -110,9 +110,9 @@ public class XNumber extends TableImpl<XNumberRecord> {
     public final TableField<XNumberRecord, Boolean> DECREMENT = createField(DSL.name("DECREMENT"), SQLDataType.BIT.nullable(false), this, "「decrement」递增/递减？如果为true则递减，为false则是递增,decrement,IS_DECREMENT");
 
     /**
-     * The column <code>ZDB.X_NUMBER.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * The column <code>ZDB.X_NUMBER.APP_ID</code>. 「id」- 关联的应用程序ID
      */
-    public final TableField<XNumberRecord, String> APP_ID = createField(DSL.name("APP_ID"), SQLDataType.VARCHAR(255), this, "「appId」- 关联的应用程序ID");
+    public final TableField<XNumberRecord, String> APP_ID = createField(DSL.name("APP_ID"), SQLDataType.VARCHAR(255), this, "「id」- 关联的应用程序ID");
 
     /**
      * The column <code>ZDB.X_NUMBER.RUN_COMPONENT</code>. 「runComponent」-

@@ -54,7 +54,7 @@ public class AtomSwitcher implements Switcher {
                  *      "options": {},
                  *      "data": ...
                  * }
-                 * header -> sigma / appId / appKey / lang
+                 * header -> sigma / id / appKey / lang
                  * options -> serviceConfig
                  * data -> JsonObject / JsonArray
                  */

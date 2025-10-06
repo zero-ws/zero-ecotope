@@ -24,7 +24,7 @@ import java.util.Set;
  *                   HOI              HApp
  *     name           x                o
  *     code           x                o
- *     appId          x                o
+ *     id          x                o
  *     appKey         x                o
  *     sigma          o                o       ( mode = CUBE )
  *     tenant         o                x
@@ -33,7 +33,7 @@ import java.util.Set;
  * <pre><code>
  *     1. tenant / language 是固定维度，通常在容器这一级就指定好了
  *     2. 上层维度：tenant
- *        下层维度：appId ( appKey )，业务部分可使用 name, code
+ *        下层维度：id ( appKey )，业务部分可使用 name, code
  *     3. sigma 可以在上下层切换，主要用于标识 sigma 是租户概念还是非租户概念
  * </code></pre>
  * 根据当前启动之后注册的应用类型，可区分基础维度 sigma 是哪种
@@ -56,7 +56,7 @@ import java.util.Set;
  *        2）进入平台账号对应的开发中心 {@link HRAD}
  *        3）在开发中心创建项目基础信息 {@link HProject}
  *        4）执行发布流程，进入用户管理端创建部署计划
- *        5）提供租户标识 tenantId / sigma 和应用标识 appId / appKey 创建容器
+ *        5）提供租户标识 tenantId / sigma 和应用标识 id / appKey 创建容器
  *           - 底层容器 {@link HCube}
  *           - 配置容器 {@link HArk}
  *     2) 非平台应用直接在启动时访问 {@link KPivot} 执行现阶段初始化注册阶段，将当前环境中的信息

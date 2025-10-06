@@ -34,7 +34,7 @@ class ReplacerConnect implements Replacer<MDConnect> {
      *     2. 新版格式
      *     - dao: X_SOURCE   # X_SOURCE
      *       unique:
-     *       - appId
+     *       - id
      * </code></pre>
      *
      * @param configJ 核心格式

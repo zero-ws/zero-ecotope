@@ -436,7 +436,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
     }
 
     /**
-     * Getter for <code>ZDB.B_BLOCK.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * Getter for <code>ZDB.B_BLOCK.APP_ID</code>. 「id」- 关联的应用程序ID
      */
     @Override
     public String getAppId() {
@@ -444,7 +444,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
     }
 
     /**
-     * Setter for <code>ZDB.B_BLOCK.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * Setter for <code>ZDB.B_BLOCK.APP_ID</code>. 「id」- 关联的应用程序ID
      */
     @Override
     public BBlockRecord setAppId(String value) {

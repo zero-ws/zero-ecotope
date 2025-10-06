@@ -690,7 +690,7 @@ public final class Ox {
     /**
      * 根据<strong>应用标识</strong>和<strong>模型标识</strong>构造数据库访问器`Dao`对象。
      *
-     * @param key        {@link String} 应用标识，可以是`appId`、也可以是`sigma`
+     * @param key        {@link String} 应用标识，可以是`id`、也可以是`sigma`
      * @param identifier {@link String} 模型统一标识符
      *
      * @return {@link HDao} 数据库访问对象
@@ -706,7 +706,7 @@ public final class Ox {
     /**
      * 根据<strong>应用标识</strong>和<strong>模型标识</strong>构造模型定义对象。
      *
-     * @param key        {@link String} 应用标识，可以是`appId`、也可以是`sigma`
+     * @param key        {@link String} 应用标识，可以是`id`、也可以是`sigma`
      * @param identifier {@link String} 模型统一标识符
      *
      * @return {@link DataAtom} 模型定义

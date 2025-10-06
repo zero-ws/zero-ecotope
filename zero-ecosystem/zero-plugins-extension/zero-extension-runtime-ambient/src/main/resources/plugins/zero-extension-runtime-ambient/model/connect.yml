@@ -2,27 +2,27 @@
   unique:
     - code
     - type
-    - appId
+    - id
 - dao: X_ACTIVITY         # X_ACTIVITY
   unique:
     - key
 - dao: X_MODULE           # X_MODULE
   unique:
     - entry
-    - appId
+    - id
 - dao: X_CATEGORY         # X_CATEGORY
   unique:
     - code
     - type
-    - appId
+    - id
 - dao: X_NOTICE           # X_NOTICE
   unique:
-    - appId
+    - id
     - code
 - dao: X_MENU             # X_MENU
   unique:
     - name
-    - appId
+    - id
 - dao: X_LINKAGE          # X_LINKAGE
   unique:
     - name
@@ -33,14 +33,14 @@
 - dao: X_NUMBER           # X_NUMBER
   unique:
     - code
-    - appId
+    - id
 - dao: X_TAG              # X_TAG
   unique:
     - name
-    - appId
+    - id
 - dao: X_SOURCE           # X_SOURCE
   unique:
-    - appId
+    - id
 - dao: X_LOG              # X_LOG
   unique:
     - key

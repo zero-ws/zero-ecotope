@@ -116,7 +116,7 @@ class IxInitializer {
      * <pre><code>
      *     sigma,           X-Sigma     统一标识符
      *     language,        X-Lang      语言信息
-     *     appId,          X-App-Id    应用程序标识符
+     *     id,          X-App-Id    应用程序标识符
      *     appKey,         X-App-Key   应用程序密钥
      *     tenantId,        X-Tenant-Id 租户标识符
      * </code></pre>
@@ -127,7 +127,7 @@ class IxInitializer {
      *         "header": {
      *             "sigma": "X-Sigma",
      *             "language": "X-Lang",
-     *             "appId": "X-App-Id",
+     *             "id": "X-App-Id",
      *             "appKey": "X-App-Key",
      *             "tenantId": "X-Tenant-Id"
      *         }

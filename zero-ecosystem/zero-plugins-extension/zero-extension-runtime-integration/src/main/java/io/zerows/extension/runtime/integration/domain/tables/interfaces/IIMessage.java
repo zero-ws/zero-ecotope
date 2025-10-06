@@ -128,12 +128,12 @@ public interface IIMessage extends VertxPojo, Serializable {
     public IIMessage setSendAt(String value);
 
     /**
-     * Getter for <code>ZDB.I_MESSAGE.APP_ID</code>. 「appId」- 所属应用ID
+     * Getter for <code>ZDB.I_MESSAGE.APP_ID</code>. 「id」- 所属应用ID
      */
     public String getAppId();
 
     /**
-     * Setter for <code>ZDB.I_MESSAGE.APP_ID</code>. 「appId」- 所属应用ID
+     * Setter for <code>ZDB.I_MESSAGE.APP_ID</code>. 「id」- 所属应用ID
      */
     public IIMessage setAppId(String value);
 

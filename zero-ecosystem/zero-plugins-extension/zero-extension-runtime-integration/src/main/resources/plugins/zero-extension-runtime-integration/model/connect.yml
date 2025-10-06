@@ -1,6 +1,6 @@
 - dao: I_INTEGRATION   # I_INTEGRATION
   unique:
-    - appId
+    - id
     - path
     - endpoint
 - dao: I_DIRECTORY   # I_DIRECTORY

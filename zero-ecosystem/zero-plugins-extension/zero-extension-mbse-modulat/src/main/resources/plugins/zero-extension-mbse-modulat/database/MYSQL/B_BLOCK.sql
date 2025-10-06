@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS B_BLOCK
     `LIC_MENU`       LONGTEXT COMMENT '「licMenu」- 该Block包含的菜单',
 
     -- 关联信息
-    `APP_ID`         VARCHAR(36) COMMENT '「appId」- 关联的应用程序ID',
+    `APP_ID`         VARCHAR(36) COMMENT '「id」- 关联的应用程序ID',
     `BAG_ID`         VARCHAR(36) COMMENT '「bagId」- 所属包ID',
 
     -- 特殊字段

@@ -119,12 +119,12 @@ public interface IXCategory extends VertxPojo, Serializable {
     public String getComment();
 
     /**
-     * Setter for <code>ZDB.X_CATEGORY.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * Setter for <code>ZDB.X_CATEGORY.APP_ID</code>. 「id」- 关联的应用程序ID
      */
     public IXCategory setAppId(String value);
 
     /**
-     * Getter for <code>ZDB.X_CATEGORY.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * Getter for <code>ZDB.X_CATEGORY.APP_ID</code>. 「id」- 关联的应用程序ID
      */
     public String getAppId();
 

@@ -107,12 +107,12 @@ public interface IXMenu extends VertxPojo, Serializable {
     public String getParentId();
 
     /**
-     * Setter for <code>ZDB.X_MENU.APP_ID</code>. 「appId」- 应用程序ID
+     * Setter for <code>ZDB.X_MENU.APP_ID</code>. 「id」- 应用程序ID
      */
     public IXMenu setAppId(String value);
 
     /**
-     * Getter for <code>ZDB.X_MENU.APP_ID</code>. 「appId」- 应用程序ID
+     * Getter for <code>ZDB.X_MENU.APP_ID</code>. 「id」- 应用程序ID
      */
     public String getAppId();
 

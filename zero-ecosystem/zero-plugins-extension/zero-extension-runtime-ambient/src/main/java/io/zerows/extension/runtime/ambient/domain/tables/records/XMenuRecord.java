@@ -176,7 +176,7 @@ public class XMenuRecord extends UpdatableRecordImpl<XMenuRecord> implements Ver
     }
 
     /**
-     * Setter for <code>ZDB.X_MENU.APP_ID</code>. 「appId」- 应用程序ID
+     * Setter for <code>ZDB.X_MENU.APP_ID</code>. 「id」- 应用程序ID
      */
     @Override
     public XMenuRecord setAppId(String value) {
@@ -185,7 +185,7 @@ public class XMenuRecord extends UpdatableRecordImpl<XMenuRecord> implements Ver
     }
 
     /**
-     * Getter for <code>ZDB.X_MENU.APP_ID</code>. 「appId」- 应用程序ID
+     * Getter for <code>ZDB.X_MENU.APP_ID</code>. 「id」- 应用程序ID
      */
     @Override
     public String getAppId() {

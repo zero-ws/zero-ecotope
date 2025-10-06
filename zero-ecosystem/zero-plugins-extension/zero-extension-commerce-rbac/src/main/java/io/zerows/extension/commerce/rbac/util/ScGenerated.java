@@ -75,7 +75,7 @@ class ScGenerated {
         }
         /*
          * Credential 通道读取，主要读取 KCredential 对象，属性如：
-         * - appId
+         * - id
          * - sigma
          * - language
          * - realm

@@ -2,7 +2,6 @@ package io.zerows.specification.modeling;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.metadata.KRule;
-import io.zerows.platform.metadata.KRuleTerm;
 import io.zerows.support.base.UtBase;
 
 import java.io.Serializable;
@@ -45,35 +44,35 @@ public interface HRule extends Serializable {
      *
      * @return 集成规则集
      */
-    Set<KRuleTerm> rulePull();
+    Set<KRule.Item> rulePull();
 
     /**
      * 提取带有优先级的标识规则（标准规则）
      *
      * @return 优先级规则集
      */
-    List<KRuleTerm> rulePure();
+    List<KRule.Item> rulePure();
 
     /**
      * 提取推送规则、落库规则
      *
      * @return 推送规则集
      */
-    List<KRuleTerm> rulePush();
+    List<KRule.Item> rulePush();
 
     /**
      * （标识规则更新）提取内部强连接规则
      *
      * @return 强连接规则集
      */
-    Set<KRuleTerm> ruleStrong();
+    Set<KRule.Item> ruleStrong();
 
     /**
      * （标识规则更新）提取内部弱连接规则
      *
      * @return 强连接规则集
      */
-    Set<KRuleTerm> ruleWeak();
+    Set<KRule.Item> ruleWeak();
 
     // ------------------ 其他约束 --------------------
 }

@@ -177,7 +177,7 @@ public class XModule implements VertxPojo, IXModule {
     }
 
     /**
-     * Getter for <code>ZDB.X_MODULE.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * Getter for <code>ZDB.X_MODULE.APP_ID</code>. 「id」- 关联的应用程序ID
      */
     @Override
     public String getAppId() {
@@ -185,7 +185,7 @@ public class XModule implements VertxPojo, IXModule {
     }
 
     /**
-     * Setter for <code>ZDB.X_MODULE.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * Setter for <code>ZDB.X_MODULE.APP_ID</code>. 「id」- 关联的应用程序ID
      */
     @Override
     public XModule setAppId(String appId) {

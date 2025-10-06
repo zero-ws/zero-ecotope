@@ -41,9 +41,9 @@ public class RegistryExtension implements HRegistry<Vertx> {
     @Override
     public Future<Set<HArk>> registryAsync(final Vertx container, final HConfig config) {
         return FnBase.combineT(
-            // appId = XApp
+            // id = XApp
             () -> Cabinet.<XApp>of(CabinetApp::new).loadAsync(container),
-            // appId = XSource
+            // id = XSource
             () -> Cabinet.<List<XSource>>of(CabinetSource::new).loadAsync(container),
             // 1 XApp + N XSource
             (app, sources) -> Ux.future(

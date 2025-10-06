@@ -47,8 +47,7 @@ public class VertxApplication {
      *     1. {@link EnvironmentVariable#R2MO_NS_APP} -> nacos 中已经配置好的 APP 专用名空间
      *     2. {@link EnvironmentVariable#R2MO_NS_CLOUD} -> nacos 中已经配置好的 CLOUD 专用名空间
      *     Nacos 相关变量
-     *     - {@link EnvironmentVariable#R2MO_NACOS_ADDR} -> nacos 服务器地址
-     *     - {@link EnvironmentVariable#R2MO_NACOS_PORT} -> nacos 服务器端口
+     *     - {@link EnvironmentVariable#R2MO_NACOS_ADDR} -> nacos 端地址
      *     - {@link EnvironmentVariable#R2MO_NACOS_USERNAME} -> nacos 登录用户名
      *     - {@link EnvironmentVariable#R2MO_NACOS_PASSWORD} -> nacos 登录密码
      * </pre>

@@ -79,12 +79,12 @@ public interface IMyNotify extends VertxPojo, Serializable {
     public String getConfigSms();
 
     /**
-     * Setter for <code>ZDB.MY_NOTIFY.APP_ID</code>. 「appId」- 所属应用ID
+     * Setter for <code>ZDB.MY_NOTIFY.APP_ID</code>. 「id」- 所属应用ID
      */
     public IMyNotify setAppId(String value);
 
     /**
-     * Getter for <code>ZDB.MY_NOTIFY.APP_ID</code>. 「appId」- 所属应用ID
+     * Getter for <code>ZDB.MY_NOTIFY.APP_ID</code>. 「id」- 所属应用ID
      */
     public String getAppId();
 

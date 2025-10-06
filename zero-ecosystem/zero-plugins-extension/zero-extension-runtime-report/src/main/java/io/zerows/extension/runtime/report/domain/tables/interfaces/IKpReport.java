@@ -129,12 +129,12 @@ public interface IKpReport extends VertxPojo, Serializable {
     public String getDataTplId();
 
     /**
-     * Setter for <code>ZDB.KP_REPORT.APP_ID</code>. 「appId」- 应用数据
+     * Setter for <code>ZDB.KP_REPORT.APP_ID</code>. 「id」- 应用数据
      */
     public IKpReport setAppId(String value);
 
     /**
-     * Getter for <code>ZDB.KP_REPORT.APP_ID</code>. 「appId」- 应用数据
+     * Getter for <code>ZDB.KP_REPORT.APP_ID</code>. 「id」- 应用数据
      */
     public String getAppId();
 

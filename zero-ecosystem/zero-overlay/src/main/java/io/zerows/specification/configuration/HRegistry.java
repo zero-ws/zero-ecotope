@@ -65,7 +65,7 @@ import java.util.Set;
  *        3.1. 名称转换
  *          sigma        = app name
  *          code         = app name
- *          appId        = app name
+ *          id        = app name
  *          appKey       = app name
  *          tenantId     = app name
  *          ns           = app name

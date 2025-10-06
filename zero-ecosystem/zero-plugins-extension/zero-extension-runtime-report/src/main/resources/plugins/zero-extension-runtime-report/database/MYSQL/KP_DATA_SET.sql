@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS KP_DATA_SET
     `SOURCE_ID`      VARCHAR(36) COMMENT '「sourceId」- 额外数据源',
     `SOURCE_CONFIG`  LONGTEXT COMMENT '「sourceConfig」- 数据源相关配置',
 
-    `APP_ID`         VARCHAR(36) COMMENT '「appId」- 应用数据',
+    `APP_ID`         VARCHAR(36) COMMENT '「id」- 应用数据',
 
     -- 特殊字段
     `ACTIVE`         BIT         DEFAULT NULL COMMENT '「active」- 是否启用',

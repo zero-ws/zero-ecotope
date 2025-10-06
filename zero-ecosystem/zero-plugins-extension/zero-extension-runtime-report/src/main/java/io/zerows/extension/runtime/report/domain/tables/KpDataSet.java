@@ -103,9 +103,9 @@ public class KpDataSet extends TableImpl<KpDataSetRecord> {
     public final TableField<KpDataSetRecord, String> SOURCE_CONFIG = createField(DSL.name("SOURCE_CONFIG"), SQLDataType.CLOB, this, "「sourceConfig」- 数据源相关配置");
 
     /**
-     * The column <code>ZDB.KP_DATA_SET.APP_ID</code>. 「appId」- 应用数据
+     * The column <code>ZDB.KP_DATA_SET.APP_ID</code>. 「id」- 应用数据
      */
-    public final TableField<KpDataSetRecord, String> APP_ID = createField(DSL.name("APP_ID"), SQLDataType.VARCHAR(36), this, "「appId」- 应用数据");
+    public final TableField<KpDataSetRecord, String> APP_ID = createField(DSL.name("APP_ID"), SQLDataType.VARCHAR(36), this, "「id」- 应用数据");
 
     /**
      * The column <code>ZDB.KP_DATA_SET.ACTIVE</code>. 「active」- 是否启用

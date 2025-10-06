@@ -1,10 +1,20 @@
 package io.zerows.platform.metadata;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
+import io.zerows.integrated.jackson.RuleTermDeserializer;
+import io.zerows.integrated.jackson.RuleTermSerializer;
 import io.zerows.specification.modeling.HRule;
+import lombok.Data;
+import lombok.Getter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -63,6 +73,7 @@ import java.util.concurrent.ConcurrentMap;
  *
  * - 3.6） v v v | v x v - 非正常匹配
  */
+@Data
 public class KRule implements HRule {
     /**
      * 子规则
@@ -94,7 +105,7 @@ public class KRule implements HRule {
      * 合法规则，无优先级，只要满足则可入库，不满足规则则不可入库
      * 带优先级，在游离态创建连接需要根据优先级创建
      */
-    private List<KRuleTerm> record = new ArrayList<>();
+    private List<Item> record = new ArrayList<>();
     /*
      * （无优先级）可接受规则：
      * 1）集成可入记录规则，从 UCMDB 中读取数据专用
@@ -102,86 +113,42 @@ public class KRule implements HRule {
      * ---
      * 读取 UCMDB 中数据的专用规则，可以没有 code
      */
-    private Set<KRuleTerm> integration = new HashSet<>();
+    private Set<Item> integration = new HashSet<>();
     /*
      * 带优先级的标识规则，识别专用
      */
-    private List<KRuleTerm> priority = new ArrayList<>();
+    private List<Item> priority = new ArrayList<>();
     /*
      * 强连接
      */
-    private Set<KRuleTerm> strong = new HashSet<>();
+    private Set<Item> strong = new HashSet<>();
     /*
      * 弱连接
      */
-    private Set<KRuleTerm> weak = new HashSet<>();
-
-    public ConcurrentMap<String, KRule> getChildren() {
-        return this.children;
-    }
-
-    public List<KRuleTerm> getRecord() {
-        return this.record;
-    }
-
-    public void setRecord(final List<KRuleTerm> record) {
-        this.record = record;
-    }
-
-    public Set<KRuleTerm> getIntegration() {
-        return this.integration;
-    }
-
-    public void setIntegration(final Set<KRuleTerm> integration) {
-        this.integration = integration;
-    }
-
-    public List<KRuleTerm> getPriority() {
-        return this.priority;
-    }
-
-    public void setPriority(final List<KRuleTerm> priority) {
-        this.priority = priority;
-    }
-
-    public Set<KRuleTerm> getStrong() {
-        return this.strong;
-    }
-
-    public void setStrong(final Set<KRuleTerm> strong) {
-        this.strong = strong;
-    }
-
-    public Set<KRuleTerm> getWeak() {
-        return this.weak;
-    }
-
-    public void setWeak(final Set<KRuleTerm> weak) {
-        this.weak = weak;
-    }
+    private Set<Item> weak = new HashSet<>();
 
     @Override
-    public Set<KRuleTerm> ruleWeak() {
+    public Set<Item> ruleWeak() {
         return this.getWeak();
     }
 
     @Override
-    public Set<KRuleTerm> ruleStrong() {
+    public Set<Item> ruleStrong() {
         return this.getStrong();
     }
 
     @Override
-    public Set<KRuleTerm> rulePull() {
+    public Set<Item> rulePull() {
         return this.integration;
     }
 
     @Override
-    public List<KRuleTerm> rulePure() {
+    public List<Item> rulePure() {
         return this.priority;
     }
 
     @Override
-    public List<KRuleTerm> rulePush() {
+    public List<Item> rulePush() {
         return this.record;
     }
 
@@ -206,5 +173,100 @@ public class KRule implements HRule {
             ",\n\tstrong=" + this.strong +
             ",\n\tweak=" + this.weak +
             "\n}";
+    }
+
+    /*
+     * 其中一条表示规则的相关信息
+     * 支持两种格式
+     * 1）单一格式：字符串
+     * 2）复杂格式：JsonArray
+     */
+    @JsonSerialize(using = RuleTermSerializer.class)
+    @JsonDeserialize(using = RuleTermDeserializer.class)
+    @Getter
+    public static class Item implements Serializable {
+
+        private final Set<String> fields = new HashSet<>();
+
+        /**
+         * 无参构造函数
+         */
+        public Item() {
+
+        }
+
+        public Item(final String rule) {
+            this.fields.add(rule);
+        }
+
+        public Item(final JsonArray rules) {
+            rules.stream()
+                /* 过滤空 */
+                .filter(Objects::nonNull)
+                /* 只要String */
+                .filter(item -> item instanceof String)
+                .map(item -> (String) item)
+                .forEach(this.fields::add);
+        }
+
+        public JsonObject dataRule(final JsonObject input) {
+            final JsonObject cond = new JsonObject();
+            this.fields.stream().filter(input::containsKey)
+                .forEach(field -> cond.put(field, input.getValue(field)));
+            return cond;
+        }
+
+        /*
+         * 内置逻辑
+         * 使用当前的 RuleTerm 检查输入数据是否符合当前标识规则
+         */
+        public JsonObject dataMatch(final JsonObject input) {
+            if (Objects.isNull(input)) {
+                return null;
+            } else {
+                final JsonObject compress = new JsonObject();
+                input.fieldNames().stream()
+                    .filter(field -> Objects.nonNull(input.getValue(field)))
+                    .forEach(field -> compress.put(field, input.getValue(field)));
+                /* 传入数据本身的 fields */
+                final Set<String> dataFields = compress.fieldNames();
+                final long counter = this.fields.stream()
+                    .filter(dataFields::contains)
+                    .count();
+                /* 相等证明 fields 中所有的字段都包含在了 dataFields 中 */
+                if (counter == this.fields.size()) {
+                    return compress.copy();
+                } else {
+                    return null;
+                }
+            }
+        }
+
+        /*
+         * 每个 Rule Term 按照字段集合进行相等性匹配
+         */
+        @Override
+        public boolean equals(final Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || this.getClass() != o.getClass()) {
+                return false;
+            }
+            final Item item = (Item) o;
+            return Objects.equals(this.fields, item.fields);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(this.fields);
+        }
+
+        @Override
+        public String toString() {
+            return "RuleTerm{" +
+                "fields=" + this.fields +
+                '}';
+        }
     }
 }

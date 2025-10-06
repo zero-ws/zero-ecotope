@@ -13,7 +13,7 @@ import io.vertx.core.json.JsonObject;
  * 此处的结构会直接挂载到 X_APP 的读取中，此处 extension 的响应数据结构如：
  * <pre><code>
  *     {
- *         "key": "appId，应用程序ID",
+ *         "key": "id，应用程序ID",
  *         "mHotel": {
  *             "comment": "模块为 mHotel 的参数集"
  *         },
@@ -30,7 +30,7 @@ public interface Modulat {
      * 输入结构
      * <pre><code>
      *     {
-     *         "key": "appId"
+     *         "key": "id"
      *     }
      * </code></pre>
      *
@@ -45,7 +45,7 @@ public interface Modulat {
     Future<JsonObject> extension(JsonObject appJson, boolean open);
 
     /**
-     * 直接输入 appId
+     * 直接输入 id
      *
      * @param appId 应用ID
      *

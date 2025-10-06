@@ -59,7 +59,7 @@ class AtFsDir {
 
         /*
          * 步骤二：
-         * 1 - 直接从参数中提取 `sigma` 信息，在单应用模式下，`sigma` 和 `appId` 是等价概念。
+         * 1 - 直接从参数中提取 `sigma` 信息，在单应用模式下，`sigma` 和 `id` 是等价概念。
          * 2 - 根据查询条件读取目录信息，此处会访问 I_DIRECTORY 中读取整棵树的结构。
          * 此处的查询条件
          * -- storePath：传入的是 `List<String>` 的梯度路径格式，抽取最短的路径执行 `startWith` 模式的提取
@@ -143,7 +143,7 @@ class AtFsDir {
         final DocBStub builder = PLUGIN.createSingleton(DocBuilder.class);
 
 
-        // 提取 appId / type 两个参数
+        // 提取 id / type 两个参数
         final String appId = params.getString(KName.APP_ID);
         final String type = BizInternal.TypeEntity.Directory.value();
 
@@ -155,7 +155,7 @@ class AtFsDir {
         String name = storePath.replace(rootPath, VString.EMPTY);
         name = Ut.ioPathRoot(name);
         LOG.File.info(LOGGER, "Zero will re-initialize directory try to process {0}", storePath);
-        LOG.File.info(LOGGER, "The builder parameters: name = {0}, type = {1}, appId = {2}",
+        LOG.File.info(LOGGER, "The builder parameters: name = {0}, type = {1}, id = {2}",
             name, type, appId);
         return builder.initialize(appId, type, name);
     }

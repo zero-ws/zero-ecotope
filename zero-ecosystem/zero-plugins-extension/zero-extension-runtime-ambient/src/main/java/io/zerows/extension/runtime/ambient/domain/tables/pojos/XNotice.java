@@ -215,7 +215,7 @@ public class XNotice implements VertxPojo, IXNotice {
     }
 
     /**
-     * Getter for <code>ZDB.X_NOTICE.APP_ID</code>. 「appId」- 所属应用ID
+     * Getter for <code>ZDB.X_NOTICE.APP_ID</code>. 「id」- 所属应用ID
      */
     @Override
     public String getAppId() {
@@ -223,7 +223,7 @@ public class XNotice implements VertxPojo, IXNotice {
     }
 
     /**
-     * Setter for <code>ZDB.X_NOTICE.APP_ID</code>. 「appId」- 所属应用ID
+     * Setter for <code>ZDB.X_NOTICE.APP_ID</code>. 「id」- 所属应用ID
      */
     @Override
     public XNotice setAppId(String appId) {

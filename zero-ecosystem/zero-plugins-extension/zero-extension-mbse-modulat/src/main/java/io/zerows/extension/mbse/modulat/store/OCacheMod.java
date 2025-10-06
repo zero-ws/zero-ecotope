@@ -18,7 +18,7 @@ import io.zerows.spi.HPI;
  *     - {@link HOI} Owner ID，当前应用所属租户信息
  *     - {@link KDS} Database Service，当前应用所拥有的数据库清单 x 5
  *     - {@link HApp} 应用：X_APP 对应配置
- *       - 软关联：appId = OCacheMod = modId-01 = {@link HMod}
+ *       - 软关联：id = OCacheMod = modId-01 = {@link HMod}
  *                                  = modId-02 = HMod
  *                                  = modId-03 = HMod
  *     这个结构替换掉原始的 PowerApp / PowerBlock 结构

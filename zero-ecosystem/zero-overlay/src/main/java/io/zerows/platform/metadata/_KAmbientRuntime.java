@@ -24,7 +24,7 @@ class _KAmbientRuntime {
      *     构造向量表
      *     name
      *     ns           = cacheKey
-     *     appId
+     *     id
      *     appKey       = cacheKey
      *     tenantId     = cacheKey
      *     sigma        = cacheKey
@@ -44,7 +44,7 @@ class _KAmbientRuntime {
         final String name = app.name();
         VECTOR.put(name, key);
 
-        // 2. 扩展规范：code / appKey / appId
+        // 2. 扩展规范：code / appKey / id
         final String code = app.option(VName.CODE);
         Optional.ofNullable(code).ifPresent(each -> VECTOR.put(each, key));
         final String appId = app.option(VName.APP_ID);

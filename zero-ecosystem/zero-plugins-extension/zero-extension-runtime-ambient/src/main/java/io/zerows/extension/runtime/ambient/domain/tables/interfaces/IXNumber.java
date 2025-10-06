@@ -158,12 +158,12 @@ public interface IXNumber extends VertxPojo, Serializable {
     public Boolean getDecrement();
 
     /**
-     * Setter for <code>ZDB.X_NUMBER.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * Setter for <code>ZDB.X_NUMBER.APP_ID</code>. 「id」- 关联的应用程序ID
      */
     public IXNumber setAppId(String value);
 
     /**
-     * Getter for <code>ZDB.X_NUMBER.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * Getter for <code>ZDB.X_NUMBER.APP_ID</code>. 「id」- 关联的应用程序ID
      */
     public String getAppId();
 

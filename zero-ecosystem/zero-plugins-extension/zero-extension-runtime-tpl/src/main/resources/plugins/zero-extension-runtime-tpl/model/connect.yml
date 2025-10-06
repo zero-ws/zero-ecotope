@@ -7,7 +7,7 @@
     - uiMenu
 - dao: TPL_MESSAGE # 消息模板 TPL_MESSAGE
   unique:
-    - appId
+    - id
     - code
 - dao: TPL_MODEL   # 模型模板 TPL_MODEL
   unique:

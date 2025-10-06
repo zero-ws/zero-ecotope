@@ -1,18 +1,15 @@
 package io.zerows.epoch.basicore;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.tracing.TracingPolicy;
 import io.zerows.epoch.basicore.option.CorsOptions;
-import io.zerows.integrated.jackson.JsonArrayDeserializer;
-import io.zerows.integrated.jackson.JsonArraySerializer;
 import io.zerows.integrated.jackson.JsonObjectDeserializer;
 import io.zerows.integrated.jackson.JsonObjectSerializer;
 import io.zerows.platform.annotations.ClassYml;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -22,13 +19,8 @@ import java.util.List;
  * @author lang : 2025-10-05
  */
 @Data
-public class YmVertxConfig implements Serializable {
-    private static final String KEY_IMPORT = "import";
-
-    @JsonProperty(KEY_IMPORT)
-    @JsonSerialize(using = JsonArraySerializer.class)
-    @JsonDeserialize(using = JsonArrayDeserializer.class)
-    private JsonArray imports = new JsonArray();
+@EqualsAndHashCode(callSuper = true)
+public class YmVertxConfig extends YmEntrance.Config implements Serializable {
 
     private List<Instance> instance = new ArrayList<>();
 

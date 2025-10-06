@@ -350,7 +350,7 @@ public class XNumber implements VertxPojo, IXNumber {
     }
 
     /**
-     * Getter for <code>ZDB.X_NUMBER.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * Getter for <code>ZDB.X_NUMBER.APP_ID</code>. 「id」- 关联的应用程序ID
      */
     @Override
     public String getAppId() {
@@ -358,7 +358,7 @@ public class XNumber implements VertxPojo, IXNumber {
     }
 
     /**
-     * Setter for <code>ZDB.X_NUMBER.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * Setter for <code>ZDB.X_NUMBER.APP_ID</code>. 「id」- 关联的应用程序ID
      */
     @Override
     public XNumber setAppId(String appId) {

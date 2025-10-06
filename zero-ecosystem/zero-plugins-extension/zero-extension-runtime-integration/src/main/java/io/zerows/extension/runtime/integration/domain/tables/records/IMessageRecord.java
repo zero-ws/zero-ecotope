@@ -283,7 +283,7 @@ public class IMessageRecord extends UpdatableRecordImpl<IMessageRecord> implemen
     }
 
     /**
-     * Getter for <code>ZDB.I_MESSAGE.APP_ID</code>. 「appId」- 所属应用ID
+     * Getter for <code>ZDB.I_MESSAGE.APP_ID</code>. 「id」- 所属应用ID
      */
     @Override
     public String getAppId() {
@@ -291,7 +291,7 @@ public class IMessageRecord extends UpdatableRecordImpl<IMessageRecord> implemen
     }
 
     /**
-     * Setter for <code>ZDB.I_MESSAGE.APP_ID</code>. 「appId」- 所属应用ID
+     * Setter for <code>ZDB.I_MESSAGE.APP_ID</code>. 「id」- 所属应用ID
      */
     @Override
     public IMessageRecord setAppId(String value) {

@@ -54,7 +54,7 @@ public interface HLife extends Serializable, HJson {
      * 一起，而动态模型则使用独立的数据库实现模型操作，是否分库取决于最终需求。
      * 最终部署形态可以按此规则分为如下几种：
      * <pre><code>
-     *     项目类型：        | tenantId       | appId/appKey     | sigma
+     *     项目类型：        | tenantId       | id/appKey     | sigma
      *     -------------------------------------------------------------
      *     单体项目             1                1                  1
      *     单体容器项目         1                1                  1
@@ -67,15 +67,15 @@ public interface HLife extends Serializable, HJson {
      * 关于 sigma 值的基本原则如下：
      * <ul>
      *     <li>Tenant租户标识是基于 sigma 而存在的，在单租户多应用项目中例外</li>
-     *     <li>应用表示分两部分：appId 负责应用所属，appKey 负责私有、敏感、安全数据的应用标识（随机字符串）</li>
-     *     <li>如果是多租户项目，那么一个 sigma 中可能包含多个 appId，如：App1, App2, App3</li>
+     *     <li>应用表示分两部分：id 负责应用所属，appKey 负责私有、敏感、安全数据的应用标识（随机字符串）</li>
+     *     <li>如果是多租户项目，那么一个 sigma 中可能包含多个 id，如：App1, App2, App3</li>
      * </ul>
      *
      * 此处的 namespace 名空间就是和应用直接绑定的，它控制了如下几种资源
      * <pre><code>
      *                             Zero Extension Module 中的表对应关系                标识字段
-     *     1. 菜单资源                 X_MENU                                          appId
-     *     2. 字典资源                 X_TABULAR / X_CATEGORY                          appId / sigma
+     *     1. 菜单资源                 X_MENU                                          id
+     *     2. 字典资源                 X_TABULAR / X_CATEGORY                          id / sigma
      *     3. 活动规则                 X_ACTIVITY_RULE                                 namespace
      *     4. 模型定义                 M_MODEL                                         namespace
      *     5. 接口/任务/服务组件        I_API / I_JOB / I_SERVICE                       namespace

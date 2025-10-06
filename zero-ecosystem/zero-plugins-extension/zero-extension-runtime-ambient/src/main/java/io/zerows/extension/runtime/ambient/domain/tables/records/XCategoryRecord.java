@@ -192,7 +192,7 @@ public class XCategoryRecord extends UpdatableRecordImpl<XCategoryRecord> implem
     }
 
     /**
-     * Setter for <code>ZDB.X_CATEGORY.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * Setter for <code>ZDB.X_CATEGORY.APP_ID</code>. 「id」- 关联的应用程序ID
      */
     @Override
     public XCategoryRecord setAppId(String value) {
@@ -201,7 +201,7 @@ public class XCategoryRecord extends UpdatableRecordImpl<XCategoryRecord> implem
     }
 
     /**
-     * Getter for <code>ZDB.X_CATEGORY.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * Getter for <code>ZDB.X_CATEGORY.APP_ID</code>. 「id」- 关联的应用程序ID
      */
     @Override
     public String getAppId() {

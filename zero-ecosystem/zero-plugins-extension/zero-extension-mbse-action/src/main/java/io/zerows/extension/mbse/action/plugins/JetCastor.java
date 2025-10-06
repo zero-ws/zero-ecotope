@@ -77,7 +77,7 @@ public class JetCastor {
                  *                  },
                  *                  "config":{
                  *                  },
-                 *                  "appId": "EmApp Key"
+                 *                  "id": "EmApp Key"
                  *              }
                  *          }
                  *      }

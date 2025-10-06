@@ -166,7 +166,7 @@ public interface KWeb {
 
         String X_SESSION_ID = "X-Session-Id";
         /*
-         * appId
+         * id
          * appKey
          * tenantId
          * sigma

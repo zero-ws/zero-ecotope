@@ -66,9 +66,9 @@ public class XModule extends TableImpl<XModuleRecord> {
     public final TableField<XModuleRecord, String> BLOCK_CODE = createField(DSL.name("BLOCK_CODE"), SQLDataType.VARCHAR(255), this, "「blockCode」— 所属模块系统编码");
 
     /**
-     * The column <code>ZDB.X_MODULE.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * The column <code>ZDB.X_MODULE.APP_ID</code>. 「id」- 关联的应用程序ID
      */
-    public final TableField<XModuleRecord, String> APP_ID = createField(DSL.name("APP_ID"), SQLDataType.VARCHAR(255), this, "「appId」- 关联的应用程序ID");
+    public final TableField<XModuleRecord, String> APP_ID = createField(DSL.name("APP_ID"), SQLDataType.VARCHAR(255), this, "「id」- 关联的应用程序ID");
 
     /**
      * The column <code>ZDB.X_MODULE.MODEL_ID</code>. 「modelId」- 当前模块关联的主模型ID

@@ -212,7 +212,7 @@ public class KpReportRecord extends UpdatableRecordImpl<KpReportRecord> implemen
     }
 
     /**
-     * Setter for <code>ZDB.KP_REPORT.APP_ID</code>. 「appId」- 应用数据
+     * Setter for <code>ZDB.KP_REPORT.APP_ID</code>. 「id」- 应用数据
      */
     @Override
     public KpReportRecord setAppId(String value) {
@@ -221,7 +221,7 @@ public class KpReportRecord extends UpdatableRecordImpl<KpReportRecord> implemen
     }
 
     /**
-     * Getter for <code>ZDB.KP_REPORT.APP_ID</code>. 「appId」- 应用数据
+     * Getter for <code>ZDB.KP_REPORT.APP_ID</code>. 「id」- 应用数据
      */
     @Override
     public String getAppId() {

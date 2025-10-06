@@ -93,7 +93,7 @@ public interface VName {
 
     String APP_KEY = "appKey";                   /* XHeader for X-App-Key */
     String APP_SECRET = "appSecret";             /* Application Secret */
-    String APP_ID = "appId";                     /* XHeader for X-App-Id */
+    String APP_ID = "id";                     /* XHeader for X-App-Id */
     String SIGMA = "sigma";                      /* XHeader for X-Sigma */
     String CATALOG = "catalog";                  /* catalog */
 

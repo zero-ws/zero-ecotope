@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS I_INTEGRATION
     `OPTIONS`         TEXT COMMENT '「options」- 集成相关配置',
 
     -- 特殊属性
-    `APP_ID`          VARCHAR(255) COMMENT '「appId」- 关联的应用程序ID',
+    `APP_ID`          VARCHAR(255) COMMENT '「id」- 关联的应用程序ID',
 
     -- 特殊字段
     `ACTIVE`          BIT         DEFAULT NULL COMMENT '「active」- 是否启用',

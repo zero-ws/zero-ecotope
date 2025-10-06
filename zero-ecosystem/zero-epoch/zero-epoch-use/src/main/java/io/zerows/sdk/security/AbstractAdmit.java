@@ -108,7 +108,7 @@ public abstract class AbstractAdmit implements HAdmit {
         /*
          * {
          *     "sigma": "xxx",
-         *     "appId": "xxx",
+         *     "id": "xxx",
          *     "tenantId": "xxx",
          *     "language": "xxx"
          * }

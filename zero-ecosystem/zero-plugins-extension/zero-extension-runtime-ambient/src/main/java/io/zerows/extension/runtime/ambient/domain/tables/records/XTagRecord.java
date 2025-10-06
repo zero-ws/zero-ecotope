@@ -193,7 +193,7 @@ public class XTagRecord extends UpdatableRecordImpl<XTagRecord> implements Vertx
     }
 
     /**
-     * Setter for <code>ZDB.X_TAG.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * Setter for <code>ZDB.X_TAG.APP_ID</code>. 「id」- 关联的应用程序ID
      */
     @Override
     public XTagRecord setAppId(String value) {
@@ -202,7 +202,7 @@ public class XTagRecord extends UpdatableRecordImpl<XTagRecord> implements Vertx
     }
 
     /**
-     * Getter for <code>ZDB.X_TAG.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * Getter for <code>ZDB.X_TAG.APP_ID</code>. 「id」- 关联的应用程序ID
      */
     @Override
     public String getAppId() {

@@ -107,9 +107,9 @@ public class BBlock extends TableImpl<BBlockRecord> {
      */
     public final TableField<BBlockRecord, String> LIC_MENU = createField(DSL.name("LIC_MENU"), SQLDataType.CLOB, this, "「licMenu」- 该Block包含的菜单");
     /**
-     * The column <code>ZDB.B_BLOCK.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * The column <code>ZDB.B_BLOCK.APP_ID</code>. 「id」- 关联的应用程序ID
      */
-    public final TableField<BBlockRecord, String> APP_ID = createField(DSL.name("APP_ID"), SQLDataType.VARCHAR(36), this, "「appId」- 关联的应用程序ID");
+    public final TableField<BBlockRecord, String> APP_ID = createField(DSL.name("APP_ID"), SQLDataType.VARCHAR(36), this, "「id」- 关联的应用程序ID");
     /**
      * The column <code>ZDB.B_BLOCK.BAG_ID</code>. 「bagId」- 所属包ID
      */

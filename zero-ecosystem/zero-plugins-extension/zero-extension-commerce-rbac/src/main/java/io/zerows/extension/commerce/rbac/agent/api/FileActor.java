@@ -73,7 +73,7 @@ public class FileActor {
                  * Default value injection
                  * 1）App Env:
                  * -- "sigma": "X-Sigma"
-                 * -- "appId": "X-Id"
+                 * -- "id": "X-Id"
                  * -- "appKey": "X-Key"
                  */
                 record.mergeIn(headers, true);

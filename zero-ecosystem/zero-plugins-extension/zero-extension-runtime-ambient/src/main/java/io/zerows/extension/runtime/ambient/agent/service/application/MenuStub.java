@@ -9,7 +9,7 @@ import io.vertx.core.json.JsonArray;
 public interface MenuStub {
     /*
      * Fetch menu by id
-     * Get menus by : appId = {xxx}
+     * Get menus by : id = {xxx}
      */
     Future<JsonArray> fetchByApp(String appId);
 }

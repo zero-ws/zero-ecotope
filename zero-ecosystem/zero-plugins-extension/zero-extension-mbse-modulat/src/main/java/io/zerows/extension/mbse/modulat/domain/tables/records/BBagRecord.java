@@ -289,7 +289,7 @@ public class BBagRecord extends UpdatableRecordImpl<BBagRecord> implements Vertx
     }
 
     /**
-     * Getter for <code>ZDB.B_BAG.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * Getter for <code>ZDB.B_BAG.APP_ID</code>. 「id」- 关联的应用程序ID
      */
     @Override
     public String getAppId() {
@@ -297,7 +297,7 @@ public class BBagRecord extends UpdatableRecordImpl<BBagRecord> implements Vertx
     }
 
     /**
-     * Setter for <code>ZDB.B_BAG.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * Setter for <code>ZDB.B_BAG.APP_ID</code>. 「id」- 关联的应用程序ID
      */
     @Override
     public BBagRecord setAppId(String value) {

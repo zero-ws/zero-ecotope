@@ -43,7 +43,7 @@ public abstract class AbstractComponent implements JtComponent, Service {
      * Could be used by sub-class directly ( XHeader contains )
      * X-Sigma      -> sigma
      * X-Lang       -> language
-     * X-App-Id     -> appId
+     * X-App-Id     -> id
      * X-App-Key    -> appKey
      */
     @Contract

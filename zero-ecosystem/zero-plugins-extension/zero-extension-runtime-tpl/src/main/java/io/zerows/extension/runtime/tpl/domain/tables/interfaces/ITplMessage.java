@@ -93,12 +93,12 @@ public interface ITplMessage extends VertxPojo, Serializable {
     public String getExprComponent();
 
     /**
-     * Setter for <code>ZDB.TPL_MESSAGE.APP_ID</code>. 「appId」- 所属应用ID
+     * Setter for <code>ZDB.TPL_MESSAGE.APP_ID</code>. 「id」- 所属应用ID
      */
     public ITplMessage setAppId(String value);
 
     /**
-     * Getter for <code>ZDB.TPL_MESSAGE.APP_ID</code>. 「appId」- 所属应用ID
+     * Getter for <code>ZDB.TPL_MESSAGE.APP_ID</code>. 「id」- 所属应用ID
      */
     public String getAppId();
 

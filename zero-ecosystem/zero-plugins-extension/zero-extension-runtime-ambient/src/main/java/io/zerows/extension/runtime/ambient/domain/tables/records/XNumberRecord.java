@@ -245,7 +245,7 @@ public class XNumberRecord extends UpdatableRecordImpl<XNumberRecord> implements
     }
 
     /**
-     * Setter for <code>ZDB.X_NUMBER.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * Setter for <code>ZDB.X_NUMBER.APP_ID</code>. 「id」- 关联的应用程序ID
      */
     @Override
     public XNumberRecord setAppId(String value) {
@@ -254,7 +254,7 @@ public class XNumberRecord extends UpdatableRecordImpl<XNumberRecord> implements
     }
 
     /**
-     * Getter for <code>ZDB.X_NUMBER.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * Getter for <code>ZDB.X_NUMBER.APP_ID</code>. 「id」- 关联的应用程序ID
      */
     @Override
     public String getAppId() {

@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS I_MESSAGE
     `SEND_AT`    VARCHAR(36) COMMENT '「sendAt」- 发送时间',
 
     -- 特殊属性
-    `APP_ID`     VARCHAR(36) COMMENT '「appId」- 所属应用ID',
+    `APP_ID`     VARCHAR(36) COMMENT '「id」- 所属应用ID',
 
     -- 特殊字段
     `ACTIVE`     BIT         DEFAULT NULL COMMENT '「active」- 是否启用',

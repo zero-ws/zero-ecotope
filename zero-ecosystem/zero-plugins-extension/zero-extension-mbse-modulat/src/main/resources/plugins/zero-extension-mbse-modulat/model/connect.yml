@@ -13,9 +13,9 @@
 - dao: B_BAG # B_BAG
   unique:
     - name
-    - appId
+    - id
 - dao: B_BLOCK # B_BLOCK
   unique:
     - name
-    - appId
+    - id
     - bagId

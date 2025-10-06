@@ -18,19 +18,19 @@ public class DatumService implements DatumStub {
     // ------------------------ Dict Operation Api
     @Override
     public Future<JsonArray> dictApp(final String appId, final String type) {
-        final Aide aide = CC_AIDE.pick(AideApp::new, appId); // FnZero.po?l(POOL_AIDE, appId, AideApp::new);
+        final Aide aide = CC_AIDE.pick(AideApp::new, appId); // FnZero.po?l(POOL_AIDE, id, AideApp::new);
         return aide.fetch(appId, new JsonArray().add(type));
     }
 
     @Override
     public Future<JsonArray> dictApp(final String appId, final JsonArray types) {
-        final Aide aide = CC_AIDE.pick(AideApp::new, appId); // FnZero.po?l(POOL_AIDE, appId, AideApp::new);
+        final Aide aide = CC_AIDE.pick(AideApp::new, appId); // FnZero.po?l(POOL_AIDE, id, AideApp::new);
         return aide.fetch(appId, types);
     }
 
     @Override
     public Future<JsonObject> dictApp(final String appId, final String type, final String code) {
-        final Aide aide = CC_AIDE.pick(AideApp::new, appId); // FnZero.po?l(POOL_AIDE, appId, AideApp::new);
+        final Aide aide = CC_AIDE.pick(AideApp::new, appId); // FnZero.po?l(POOL_AIDE, id, AideApp::new);
         return aide.fetch(appId, type, code);
     }
 
@@ -55,20 +55,20 @@ public class DatumService implements DatumStub {
     // ------------------------ Tree Operation Api
     @Override
     public Future<JsonArray> treeApp(final String appId, final String type, final Boolean leaf) {
-        final Tree tree = CC_TREE.pick(TreeApp::new, appId); // FnZero.po?l(POOL_TREE, appId, TreeApp::new);
+        final Tree tree = CC_TREE.pick(TreeApp::new, appId); // FnZero.po?l(POOL_TREE, id, TreeApp::new);
         return tree.fetch(appId, type, leaf);
     }
 
     @Override
     public Future<JsonArray> treeApp(final String appId, final JsonArray types) {
-        final Tree tree = CC_TREE.pick(TreeApp::new, appId); // FnZero.po?l(POOL_TREE, appId, TreeApp::new);
+        final Tree tree = CC_TREE.pick(TreeApp::new, appId); // FnZero.po?l(POOL_TREE, id, TreeApp::new);
         return tree.fetch(appId, types);
     }
 
 
     @Override
     public Future<JsonObject> treeApp(final String appId, final String type, final String code) {
-        final Tree tree = CC_TREE.pick(TreeApp::new, appId); // FnZero.po?l(POOL_TREE, appId, TreeApp::new);
+        final Tree tree = CC_TREE.pick(TreeApp::new, appId); // FnZero.po?l(POOL_TREE, id, TreeApp::new);
         return tree.fetch(appId, type, code);
     }
 
@@ -93,24 +93,24 @@ public class DatumService implements DatumStub {
     // ------------------------ Number Generation
     @Override
     public Future<JsonArray> numberApp(final String appId, final String code, final Integer count) {
-        LOG.Flow.info(this.getClass(), "Serial Gen: appId = {0}, code = {1}, count = {2}", appId, code, count);
+        LOG.Flow.info(this.getClass(), "Serial Gen: id = {0}, code = {1}, count = {2}", appId, code, count);
         // APP_ID = ? AND CODE = ?
         final JsonObject condition = new JsonObject();
         condition.put(KName.APP_ID, appId).put(KName.CODE, code);
 
-        final Serial serial = CC_SERIAL.pick(SerialGen::new, appId); // FnZero.po?l(POOL_SERIAL, appId, SerialGen::new);
+        final Serial serial = CC_SERIAL.pick(SerialGen::new, appId); // FnZero.po?l(POOL_SERIAL, id, SerialGen::new);
         return serial.generate(condition, count);
     }
 
 
     @Override
     public Future<JsonArray> numberAppI(final String appId, final String identifier, final Integer count) {
-        LOG.Flow.info(this.getClass(), "Serial Gen: appId = {0}, identifier = {1}, count = {2}", appId, identifier, count);
+        LOG.Flow.info(this.getClass(), "Serial Gen: id = {0}, identifier = {1}, count = {2}", appId, identifier, count);
         // APP_ID = ? AND IDENTIFIER = ?
         final JsonObject condition = new JsonObject();
         condition.put(KName.APP_ID, appId).put(KName.IDENTIFIER, identifier);
 
-        final Serial serial = CC_SERIAL.pick(SerialGen::new, appId); // FnZero.po?l(POOL_SERIAL, appId, SerialGen::new);
+        final Serial serial = CC_SERIAL.pick(SerialGen::new, appId); // FnZero.po?l(POOL_SERIAL, id, SerialGen::new);
         return serial.generate(condition, count);
     }
 
@@ -138,12 +138,12 @@ public class DatumService implements DatumStub {
 
     @Override
     public Future<Boolean> numberAppR(final String appId, final String code, final Long defaultValue) {
-        LOG.Flow.info(this.getClass(), "Serial Reset: appId = {0}, code = {1}, default = {2}", appId, code, String.valueOf(defaultValue));
+        LOG.Flow.info(this.getClass(), "Serial Reset: id = {0}, code = {1}, default = {2}", appId, code, String.valueOf(defaultValue));
 
         final JsonObject condition = new JsonObject();
         condition.put(KName.APP_ID, appId).put(KName.CODE, code);
 
-        final Serial serial = CC_SERIAL.pick(SerialGen::new, appId); // FnZero.po?l(POOL_SERIAL, appId, SerialGen::new);
+        final Serial serial = CC_SERIAL.pick(SerialGen::new, appId); // FnZero.po?l(POOL_SERIAL, id, SerialGen::new);
         return serial.reset(condition, defaultValue);
     }
 

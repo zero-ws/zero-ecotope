@@ -46,9 +46,9 @@ public class MyApp extends TableImpl<MyAppRecord> {
     public final TableField<MyAppRecord, String> KEY = createField(DSL.name("KEY"), SQLDataType.VARCHAR(36).nullable(false), this, "「key」- 个人应用主键");
 
     /**
-     * The column <code>ZDB.MY_APP.APP_ID</code>. 「appId」- 个人应用关联ID
+     * The column <code>ZDB.MY_APP.APP_ID</code>. 「id」- 个人应用关联ID
      */
-    public final TableField<MyAppRecord, String> APP_ID = createField(DSL.name("APP_ID"), SQLDataType.VARCHAR(36), this, "「appId」- 个人应用关联ID");
+    public final TableField<MyAppRecord, String> APP_ID = createField(DSL.name("APP_ID"), SQLDataType.VARCHAR(36), this, "「id」- 个人应用关联ID");
 
     /**
      * The column <code>ZDB.MY_APP.BAG_ID</code>. 「bagId」- 个人应用绑定的 BAG ID

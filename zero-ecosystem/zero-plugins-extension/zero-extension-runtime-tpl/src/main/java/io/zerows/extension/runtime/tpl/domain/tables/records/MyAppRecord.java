@@ -40,7 +40,7 @@ public class MyAppRecord extends UpdatableRecordImpl<MyAppRecord> implements Ver
     }
 
     /**
-     * Setter for <code>ZDB.MY_APP.APP_ID</code>. 「appId」- 个人应用关联ID
+     * Setter for <code>ZDB.MY_APP.APP_ID</code>. 「id」- 个人应用关联ID
      */
     @Override
     public MyAppRecord setAppId(String value) {
@@ -49,7 +49,7 @@ public class MyAppRecord extends UpdatableRecordImpl<MyAppRecord> implements Ver
     }
 
     /**
-     * Getter for <code>ZDB.MY_APP.APP_ID</code>. 「appId」- 个人应用关联ID
+     * Getter for <code>ZDB.MY_APP.APP_ID</code>. 「id」- 个人应用关联ID
      */
     @Override
     public String getAppId() {

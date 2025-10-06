@@ -89,9 +89,9 @@ public class IPortfolio extends TableImpl<IPortfolioRecord> {
      */
     public final TableField<IPortfolioRecord, String> DATA_INTEGRATION = createField(DSL.name("DATA_INTEGRATION"), SQLDataType.CLOB, this, "「dataIntegration」- 绑定好过后，导入/导出数据专用配置");
     /**
-     * The column <code>ZDB.I_PORTFOLIO.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * The column <code>ZDB.I_PORTFOLIO.APP_ID</code>. 「id」- 关联的应用程序ID
      */
-    public final TableField<IPortfolioRecord, String> APP_ID = createField(DSL.name("APP_ID"), SQLDataType.VARCHAR(36), this, "「appId」- 关联的应用程序ID");
+    public final TableField<IPortfolioRecord, String> APP_ID = createField(DSL.name("APP_ID"), SQLDataType.VARCHAR(36), this, "「id」- 关联的应用程序ID");
     /**
      * The column <code>ZDB.I_PORTFOLIO.ACTIVE</code>. 「active」- 是否启用
      */

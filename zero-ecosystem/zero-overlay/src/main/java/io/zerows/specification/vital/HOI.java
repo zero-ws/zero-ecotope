@@ -17,7 +17,7 @@ import java.util.function.Function;
  *       扩展规范
  *       - language:        应用使用的语言信息（非浏览器）
  *     > 中层环境基础信息，开放更多系统级字段
- *       - appId:           应用系统主键，对应 X_APP 中的 key
+ *       - id:           应用系统主键，对应 X_APP 中的 key
  *       - appKey:          应用系统敏感主键，对应 X_APP 中的 appKey
  *       - code:            应用编码，对应 X_APP 中的 code（保留）
  *     > {@link HOI} 是开放 Aeon 系统之后的系统级信息，包含了不同的租户环境

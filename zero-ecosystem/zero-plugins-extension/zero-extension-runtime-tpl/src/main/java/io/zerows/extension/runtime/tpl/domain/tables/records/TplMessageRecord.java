@@ -148,7 +148,7 @@ public class TplMessageRecord extends UpdatableRecordImpl<TplMessageRecord> impl
     }
 
     /**
-     * Setter for <code>ZDB.TPL_MESSAGE.APP_ID</code>. 「appId」- 所属应用ID
+     * Setter for <code>ZDB.TPL_MESSAGE.APP_ID</code>. 「id」- 所属应用ID
      */
     @Override
     public TplMessageRecord setAppId(String value) {
@@ -157,7 +157,7 @@ public class TplMessageRecord extends UpdatableRecordImpl<TplMessageRecord> impl
     }
 
     /**
-     * Getter for <code>ZDB.TPL_MESSAGE.APP_ID</code>. 「appId」- 所属应用ID
+     * Getter for <code>ZDB.TPL_MESSAGE.APP_ID</code>. 「id」- 所属应用ID
      */
     @Override
     public String getAppId() {

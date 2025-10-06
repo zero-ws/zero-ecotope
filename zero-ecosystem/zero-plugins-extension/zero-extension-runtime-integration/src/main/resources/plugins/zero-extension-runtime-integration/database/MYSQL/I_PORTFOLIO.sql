@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS I_PORTFOLIO
     `DATA_INTEGRATION` LONGTEXT COMMENT '「dataIntegration」- 绑定好过后，导入/导出数据专用配置',
 
     -- 特殊属性
-    `APP_ID`           VARCHAR(36) COMMENT '「appId」- 关联的应用程序ID',
+    `APP_ID`           VARCHAR(36) COMMENT '「id」- 关联的应用程序ID',
 
     -- 特殊字段
     `ACTIVE`           BIT         DEFAULT NULL COMMENT '「active」- 是否启用',

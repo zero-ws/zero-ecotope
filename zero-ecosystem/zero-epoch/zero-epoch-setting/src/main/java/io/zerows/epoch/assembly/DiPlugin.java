@@ -42,6 +42,16 @@ public class DiPlugin {
         return (T) createProxy(clazz, null);
     }
 
+    /**
+     * 特殊单件模式处理，一方面要求 DI 的功能被开启，另外一方面为了保证不同的 {@link Named} 注解可实现唯一单件模式，
+     * 这种情况用于一个 interface 中包含多个实现的单件模式处理，简单说单件不可用于接口判断，而是 impl 实现类判断，
+     * 这样就可以保证 JSR 330 能够在 DI 部分更加灵活。
+     *
+     * @param clazz 类
+     * @param <T>   类型
+     *
+     * @return 单例对象
+     */
     // 直接创建一个单例
     public <T> T createSingleton(final Class<?> clazz) {
         final Injector di = DiFactory.singleton().build(); // ORepositoryClass.ofDI();

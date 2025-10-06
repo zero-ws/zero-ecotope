@@ -31,7 +31,7 @@ public class SourceInit implements Init {
 
             return Ux.Jooq.on(XSourceDao.class)
                 /*
-                 * Init second step: appId as condition, save X_APP
+                 * Init second step: id as condition, save X_APP
                  */
                 .upsertAsync(this.whereUnique(appJson), source)
                 .compose(Ux::futureJ)

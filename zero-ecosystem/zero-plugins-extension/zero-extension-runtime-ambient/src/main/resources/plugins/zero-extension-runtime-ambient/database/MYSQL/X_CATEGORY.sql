@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS X_CATEGORY
     `IDENTIFIER`     VARCHAR(255) COMMENT '「identifier」- 当前类型描述的Model的标识',
     `COMMENT`        TEXT COMMENT '「comment」- 备注信息',
 
-    `APP_ID`         VARCHAR(255) COMMENT '「appId」- 关联的应用程序ID',
+    `APP_ID`         VARCHAR(255) COMMENT '「id」- 关联的应用程序ID',
     /*
      * 树构造组件
      * 1. treeComponent/treeConfig 用于构造树的显示专用（目前使用的就是文档管理中的目录树）

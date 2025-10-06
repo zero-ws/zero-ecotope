@@ -3,7 +3,7 @@ package io.zerows.integrated.jackson;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import io.zerows.platform.metadata.KRuleTerm;
+import io.zerows.platform.metadata.KRule;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,10 +11,10 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-public class RuleTermSerializer extends JsonSerializer<KRuleTerm> {
+public class RuleTermSerializer extends JsonSerializer<KRule.Item> {
 
     @Override
-    public void serialize(final KRuleTerm ruleTerm,
+    public void serialize(final KRule.Item ruleTerm,
                           final JsonGenerator jgen,
                           final SerializerProvider serializerProvider) throws IOException {
         if (Objects.nonNull(ruleTerm)) {

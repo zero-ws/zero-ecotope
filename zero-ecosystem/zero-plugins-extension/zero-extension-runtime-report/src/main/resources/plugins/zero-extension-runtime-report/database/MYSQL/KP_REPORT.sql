@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS KP_REPORT
     `DATA_TPL_ID`   VARCHAR(36) COMMENT '「dataTplId」- 关联报表模板',
 
     -- 报表归属（反向广义关联）
-    `APP_ID`        VARCHAR(36) COMMENT '「appId」- 应用数据',
+    `APP_ID`        VARCHAR(36) COMMENT '「id」- 应用数据',
 
     -- 特殊字段
     `ACTIVE`        BIT         DEFAULT NULL COMMENT '「active」- 是否启用',

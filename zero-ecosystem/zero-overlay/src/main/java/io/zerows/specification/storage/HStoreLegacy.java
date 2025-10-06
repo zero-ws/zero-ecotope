@@ -1,9 +1,9 @@
 package io.zerows.specification.storage;
 
 import io.zerows.platform.annotations.One2One;
-import io.zerows.platform.metadata.KDatabase;
 import io.zerows.platform.enums.EmDS;
 import io.zerows.platform.enums.typed.EmType;
+import io.zerows.platform.metadata.KDatabase;
 import io.zerows.specification.atomic.HContract;
 import io.zerows.specification.atomic.HExecutor;
 import io.zerows.specification.development.ncloud.HPlot;
@@ -31,7 +31,7 @@ import java.util.concurrent.ConcurrentMap;
  *
  * @author lang : 2023-05-21
  */
-public interface HStore extends HContract {
+public interface HStoreLegacy extends HContract {
     /**
      * 执行器集合，针对不同语义的执行器定义
      *
@@ -46,7 +46,7 @@ public interface HStore extends HContract {
      *
      * @return {@link ConcurrentMap}
      */
-    default ConcurrentMap<EmType.Store, HStore> store() {
+    default ConcurrentMap<EmType.Store, HStoreLegacy> store() {
         return new ConcurrentHashMap<>();
     }
 
@@ -61,7 +61,7 @@ public interface HStore extends HContract {
      *
      * @author lang : 2023-05-21
      */
-    interface HBlock extends HStore {
+    interface HBlock extends HStoreLegacy {
         /**
          * 块是有序的，所以直接使用 List 类型布局
          *
@@ -104,7 +104,7 @@ public interface HStore extends HContract {
      *
      * @author lang : 2023-05-21
      */
-    interface HDatabase extends HStore {
+    interface HDatabase extends HStoreLegacy {
         /**
          * 数据库类型
          * <pre><code>

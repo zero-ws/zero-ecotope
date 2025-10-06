@@ -52,7 +52,7 @@ public class UiViewHQBE implements HQBE {
     private JsonObject beforeArgs(final Envelop envelop) {
         final JsonObject args = new JsonObject();
         /*
-         * appId
+         * id
          * appKey
          * sigma
          * language

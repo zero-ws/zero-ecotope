@@ -100,10 +100,10 @@ public class ScConfig implements Serializable {
      * 是否支持多应用模型，多应用模型和多租户模型区别
      * <pre><code>
      *     1. 多应用模型
-     *        sigma, appId，相同概念
+     *        sigma, id，相同概念
      *     2. 多租户模型
      *        sigma, tenantId，相同概念
-     *        一个 sigma 会包含多个 appId
+     *        一个 sigma 会包含多个 id
      * </code></pre>
      */
     private Boolean supportMultiApp = Boolean.TRUE;

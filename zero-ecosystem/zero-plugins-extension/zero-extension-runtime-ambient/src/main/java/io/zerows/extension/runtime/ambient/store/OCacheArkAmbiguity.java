@@ -37,8 +37,8 @@ class OCacheArkAmbiguity extends AbstractAmbiguity implements OCacheArk {
         }
         final HApp app = ark.app();
         if (Objects.nonNull(app)) {
-            // appId, name
-            STORED.put(app.appId(), ark, app.name());
+            // id, name
+            STORED.put(app.id(), ark, app.name());
         }
         return this;
     }
@@ -50,8 +50,8 @@ class OCacheArkAmbiguity extends AbstractAmbiguity implements OCacheArk {
         }
         final HApp app = ark.app();
         if (Objects.nonNull(app)) {
-            // appId, name
-            STORED.remove(app.appId());
+            // id, name
+            STORED.remove(app.id());
         }
         return this;
     }
