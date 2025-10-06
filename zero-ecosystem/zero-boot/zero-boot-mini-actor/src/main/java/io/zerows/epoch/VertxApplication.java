@@ -13,6 +13,7 @@ import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HEnergy;
 import io.zerows.specification.configuration.HLauncher;
 import io.zerows.spi.BootIo;
+import io.zerows.spi.HPI;
 
 /**
  * 标准启动器，直接启动 Vertx 实例处理 Zero 相关的业务逻辑
@@ -31,11 +32,11 @@ public class VertxApplication {
      *       / 单例对象
      *     - {@see ZeroLauncher#launcher}
      *       / 从 {@link BootIo} 中提取的 {@link HLauncher} 对象
-     *     - {@see ZeroLauncher#configurer}
+     *     - {@see ZeroLauncher#configure}
      *       / 通过 {@link BootIo} 中提取的 {@link HEnergy} 来构造的内置对象
      * </pre>
-     * 此处的 configurer 是一个调和类，用于协调 HEnergy 与 HLauncher 之间的关系，HEnergy 本身并非直接参与启动
-     * 流程，而是通过 configurer 来间接影响启动过程。启动模式如下:
+     * 此处的 configure 是一个调和类，用于协调 HEnergy 与 HLauncher 之间的关系，HEnergy 本身并非直接参与启动
+     * 流程，而是通过 configure 来间接影响启动过程。启动模式如下:
      * <pre>
      *     - App 独立应用启动
      *     - Service 微服务启动
@@ -60,8 +61,17 @@ public class VertxApplication {
          * MOMO-001: 环境变量初始化，并给出最终打印结果（打印只考虑当前应用支持的环境变量）
          */
         ZeroEnvironment.of().whenStart(clazz);
+
+
         /*
-         * MOMO-002: 主流程
+         * MOMO-002：SPI 监控
+         */
+        HPI.monitorOf();
+
+
+
+        /*
+         * MOMO-003: 主流程
          * - 001 / 构造 ZeroLauncher 对象（启动器）
          *   - 001-1 / 通过 SPI 查找 BootIo 实现类
          *   - 001-2 / 通过实现类构造 HEnergy 对象

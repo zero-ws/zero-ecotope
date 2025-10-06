@@ -20,6 +20,7 @@ public class KApp implements HApp {
     private String name;
     private final JsonObject configuration = new JsonObject();
     private String ns;
+    private String tenant;
 
     public KApp(final String name) {
         final String nameApp = UtBase.envWith(EnvironmentVariable.Z_APP, name);
@@ -89,6 +90,17 @@ public class KApp implements HApp {
     public HApp ns(final String ns) {
         this.ns = ns;
         return this;
+    }
+
+    @Override
+    public HApp tenant(final String tenant) {
+        this.tenant = tenant;
+        return this;
+    }
+
+    @Override
+    public String tenant() {
+        return this.tenant;
     }
 
     @Override

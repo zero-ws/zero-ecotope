@@ -1,12 +1,16 @@
 package io.zerows.spi;
 
 import io.r2mo.spi.SPI;
+import io.zerows.platform.constant.VString;
 import io.zerows.platform.exception._11000Exception404SPINotFound;
 import io.zerows.specification.development.compiled.HBundle;
+import io.zerows.spi.modeler.AtomNs;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 直接从 SPI 继承接口，对 SPI 功能进行扩展，主要追加功能支持：是否覆盖默认的 SPI 单独执行器
@@ -45,5 +49,22 @@ public interface HPI extends SPI {
             .filter(it -> !it.getClass().getPackageName().startsWith("io.zerows"))
             .findFirst()
             .orElseThrow(() -> new _11000Exception404SPINotFound(clazzCls));
+    }
+
+    static void monitorOf() {
+        final List<Class<?>> spiSet = new ArrayList<>();
+        spiSet.add(AtomNs.class);
+
+        log.info("[ ZERO ] SPI 监控详情：");
+        for (final Class<?> spiClass : spiSet) {
+            final List<?> implementations = SPI.findMany(spiClass);
+            final String implNames = implementations.isEmpty()
+                ? VString.EMPTY
+                : implementations.stream()
+                .map(impl -> impl.getClass().getName())
+                .distinct()
+                .collect(Collectors.joining(", "));
+            log.info("[ ZERO ]    / {} = [{}]", spiClass.getName(), implNames);
+        }
     }
 }

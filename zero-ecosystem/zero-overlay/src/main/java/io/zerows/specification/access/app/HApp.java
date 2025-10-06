@@ -12,6 +12,7 @@ import io.zerows.specification.access.cloud.HSpace;
 import io.zerows.spi.modeler.AtomNs;
 import io.zerows.support.base.UtBase;
 
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -141,6 +142,10 @@ public interface HApp extends HBoundary<String>,
 
     HApp ns(String ns);
 
+    String tenant();
+
+    HApp tenant(String tenant);
+
     /**
      * 🗝️ 当前应用的主键 🔑，用于从系统中提取应用主键专用，系统内置的应用主键
      * <pre><code>
@@ -172,6 +177,9 @@ public interface HApp extends HBoundary<String>,
     static String nsOf(final String appName, final String identifier) {
         // 查找合法的 SPI
         final AtomNs atomNs = SPI.findOne(AtomNs.class);
+        if (Objects.isNull(appName)) {
+            return null;
+        }
         if (UtBase.isNil(identifier)) {
             return atomNs.ns(appName);
         } else {
