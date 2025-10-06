@@ -1,6 +1,7 @@
 package io.zerows.epoch.boot;
 
 import io.r2mo.base.io.HStore;
+import io.r2mo.typed.cc.Cc;
 import io.zerows.epoch.basicore.YmConfiguration;
 import io.zerows.specification.configuration.HEnvironment;
 import io.zerows.specification.configuration.HSetting;
@@ -39,6 +40,12 @@ import io.zerows.specification.configuration.HSetting;
  * @author lang : 2025-10-06
  */
 public interface ZeroPower {
+
+    Cc<String, ZeroPower> CC_SKELETON = Cc.openThread();
+
+    static ZeroPower of() {
+        return CC_SKELETON.pick(ZeroPowerBridge::new, ZeroPowerBridge.class.getName());
+    }
 
     HSetting compile();
 

@@ -36,7 +36,7 @@ public class ZeroStation implements HStation {
     private final HBoot boot;
 
     private ZeroStation() {
-        final HSetting setting = OZeroStore.setting();
+        final HSetting setting = ZeroPower.of().compile();
         final JsonObject launcherJ = setting.launcher().options();
         this.boot = ZeroBoot.of(launcherJ);
     }

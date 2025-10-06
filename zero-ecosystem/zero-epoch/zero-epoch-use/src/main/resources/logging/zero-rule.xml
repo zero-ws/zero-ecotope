@@ -6,7 +6,7 @@
     </appender>
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_FOLDER}/zero-epic-fabric.log</fileNamePattern>
+            <fileNamePattern>${LOG_FOLDER}/zero-epoch.log</fileNamePattern>
             <maxHistory>${LOG_MAX_HISTORY}</maxHistory>
         </rollingPolicy>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
@@ -18,23 +18,19 @@
     </appender>
     <!--
         ASYNC_STDOUT -> STDOUT
-        ASYNC_FILE -> FILE ( zero-epic-fabric.log )
+        ASYNC_FILE -> FILE ( zero-epoch.log )
     -->
     <appender name="ASYNC_STDOUT" class="ch.qos.logback.classic.AsyncAppender">
-        <filter class="ch.qos.logback.classic.filter.LevelFilter">
-            <level>DEBUG</level>
-            <onMatch>DENY</onMatch>
-            <onMismatch>ACCEPT</onMismatch>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>  <!-- 允许 DEBUG 及以上级别 -->
         </filter>
         <discardingThreshold>0</discardingThreshold>
         <queueSize>8192</queueSize>
         <appender-ref ref="STDOUT"/>
     </appender>
     <appender name="ASYNC_FILE" class="ch.qos.logback.classic.AsyncAppender">
-        <filter class="ch.qos.logback.classic.filter.LevelFilter">
-            <level>DEBUG</level>
-            <onMatch>DENY</onMatch>
-            <onMismatch>ACCEPT</onMismatch>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>  <!-- 允许 DEBUG 及以上级别 -->
         </filter>
         <discardingThreshold>0</discardingThreshold>
         <queueSize>8192</queueSize>

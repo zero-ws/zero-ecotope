@@ -20,7 +20,7 @@ import java.util.List;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class YmVertxConfig extends YmEntrance.Config implements Serializable {
+public class YmVertxConfig extends InPreVertx.Config implements Serializable {
 
     private List<Instance> instance = new ArrayList<>();
 

@@ -14,7 +14,6 @@ import java.util.Objects;
 public class ZeroBootIo implements BootIo {
 
     @Override
-    @SuppressWarnings("unchecked")
     public <T> HLauncher<T> launcher() {
         /*
          * 混合启动器，可开启两种启动模式
@@ -24,7 +23,7 @@ public class ZeroBootIo implements BootIo {
         final ZeroStation store = ZeroStation.singleton();
         final Class<?> launcher = store.boot().launcher();
         Objects.requireNonNull(launcher);
-        return (HLauncher<T>) SourceReflect.singleton(launcher);
+        return SourceReflect.singleton(launcher);
     }
 
     @Override

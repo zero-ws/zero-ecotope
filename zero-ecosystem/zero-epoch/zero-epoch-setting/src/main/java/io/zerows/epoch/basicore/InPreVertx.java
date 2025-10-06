@@ -19,8 +19,10 @@ import java.io.Serializable;
  * @author lang : 2025-10-06
  */
 @Data
-public class YmEntrance implements Serializable {
+public class InPreVertx implements Serializable {
     private YmCloud cloud;
+    private Config config;
+    private YmVertxConfig.Application application = new YmVertxConfig.Application();
 
     @Data
     public static class Config implements Serializable {

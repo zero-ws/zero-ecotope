@@ -14,9 +14,8 @@ import java.io.Serializable;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class YmVertx extends YmEntrance implements Serializable {
+public class YmVertx extends InPreVertx implements Serializable {
     private YmVertxConfig config = new YmVertxConfig();
-    private YmVertxConfig.Application application = new YmVertxConfig.Application();
     private ClusterOptions cluster = new ClusterOptions();
     private YmDataSource datasource = new YmDataSource();
     private YmSecurity security = new YmSecurity();

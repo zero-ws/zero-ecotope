@@ -27,6 +27,7 @@ public class YmConfiguration implements Serializable {
     private YmApp app = new YmApp();
     private YmStorage storage = new YmStorage();
     private YmExcel excel = new YmExcel();
+    private YmLogging logging = new YmLogging();
 
     @JsonSerialize(using = JsonObjectSerializer.class)
     @JsonDeserialize(using = JsonObjectDeserializer.class)

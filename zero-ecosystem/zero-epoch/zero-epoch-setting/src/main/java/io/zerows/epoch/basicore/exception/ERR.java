@@ -9,4 +9,5 @@ import io.r2mo.vertx.common.exception.VertxE;
 public interface ERR {
     VertxE _40032 = VertxE.of(-40032).state(HttpResponseStatus.INTERNAL_SERVER_ERROR);
     VertxE _60049 = VertxE.of(-60049).state(HttpResponseStatus.INTERNAL_SERVER_ERROR);
+    VertxE _41001 = VertxE.of(-41001).state(HttpResponseStatus.INTERNAL_SERVER_ERROR);
 }

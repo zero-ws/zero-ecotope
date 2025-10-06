@@ -18,7 +18,6 @@
     <!--
         Properties definition in current environment
     -->
-
     <property name="CONSOLE_LOG_PATTERN"
               value="%boldMagenta(%date{HH:mm:ss.SSS}) | %highlight(%.-1level) | %boldYellow(%-30thread) | %msg | %boldGreen(%logger) %n"/>
     <property name="LOG_FOLDER" value="logs/%d{yyyy-MM-dd}/"/>
@@ -30,42 +29,56 @@
     <!--
     Third part logger here for different usage
     -->
+    <!-- Java related -->
     <logger name="javax.activation" level="WARN"/>
     <logger name="javax.mail" level="WARN"/>
     <logger name="javax.management.remote" level="WARN"/>
     <logger name="javax.xml.bind" level="WARN"/>
+    <logger name="sun.rmi" level="WARN"/>
+    <logger name="sun.net.www" level="INFO"/>
+    <logger name="sun.rmi.transport" level="WARN"/>
+
+    <!-- Apache related -->
+    <logger name="org.apache" level="WARN"/>
+    <logger name="org.apache.catalina.startup.DigesterFactory" level="OFF"/>
+
+    <!-- Spring related -->
+    <logger name="org.springframework" level="WARN"/>
+    <logger name="org.springframework.web" level="WARN"/>
+    <logger name="org.springframework.security" level="WARN"/>
+    <logger name="org.springframework.cache" level="WARN"/>
+
+    <!-- Database related -->
+    <logger name="org.hibernate" level="WARN"/>
+    <logger name="org.hibernate.validator" level="WARN"/>
+    <logger name="org.hibernate.ejb.HibernatePersistence" level="OFF"/>
+    <logger name="org.bson" level="WARN"/>
+    <logger name="liquibase" level="WARN"/>
+    <logger name="LiquibaseSchemaResolver" level="INFO"/>
+    <logger name="com.zaxxer" level="WARN"/>
+
+    <!-- Web related -->
+    <logger name="io.undertow" level="WARN"/>
+    <logger name="io.undertow.websockets.jsr" level="ERROR"/>
+    <logger name="org.thymeleaf" level="WARN"/>
+    <logger name="org.xnio" level="WARN"/>
+
+    <!-- Framework related -->
     <logger name="com.codahale.metrics" level="WARN"/>
     <logger name="com.hazelcast" level="INFO"/>
     <logger name="com.netflix" level="WARN"/>
     <logger name="com.netflix.discovery" level="INFO"/>
     <logger name="com.ryantenney" level="WARN"/>
     <logger name="com.sun" level="WARN"/>
-    <logger name="com.zaxxer" level="WARN"/>
-    <logger name="io.undertow" level="WARN"/>
-    <logger name="io.undertow.websockets.jsr" level="ERROR"/>
-    <logger name="org.apache" level="WARN"/>
-    <logger name="org.apache.catalina.startup.DigesterFactory" level="OFF"/>
-    <logger name="org.bson" level="WARN"/>
-    <logger name="org.hibernate.validator" level="WARN"/>
-    <logger name="org.hibernate" level="WARN"/>
-    <logger name="org.hibernate.ejb.HibernatePersistence" level="OFF"/>
-    <logger name="org.springframework" level="WARN"/>
-    <logger name="org.springframework.web" level="WARN"/>
-    <logger name="org.springframework.security" level="WARN"/>
-    <logger name="org.springframework.cache" level="WARN"/>
-    <logger name="org.thymeleaf" level="WARN"/>
-    <logger name="org.xnio" level="WARN"/>
     <logger name="springfox" level="WARN"/>
-    <logger name="sun.rmi" level="WARN"/>
-    <logger name="liquibase" level="WARN"/>
-    <logger name="LiquibaseSchemaResolver" level="INFO"/>
-    <logger name="sun.net.www" level="INFO"/>
-    <logger name="sun.rmi.transport" level="WARN"/>
-    <!-- Disable Jooq -->
-    <logger name="org.jooq.Constants" level="OFF"/>
-    <!-- Logback -->
+    <logger name="org.reflections" level="WARN"/>
     <logger name="ch.qos.logback" level="WARN"/>
     <logger name="cn.justfly.training.logging" level="WARN"/>
-    <logger name="org.reflections" level="WARN"/>
+
+    <!-- Vert.x related -->
+    <logger name="io.vertx.core.internal.logging" level="WARN"/>
+
+    <!-- Other -->
+    <logger name="org.jooq.Constants" level="OFF"/>
     <logger name="org.camunda" level="INFO"/>
 </included>
