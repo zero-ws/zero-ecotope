@@ -89,8 +89,8 @@ public interface EnvironmentVariable {
      *        xxx:  xxx -> 其他配置信息
      */
     String Z_NS = "Z_NS";
-    String Z_TENANT = "Z_TENANT";
     String Z_APP = "Z_APP";
+    String Z_TENANT = "Z_TENANT";
     String Z_SIGMA = "Z_SIGMA";
     String Z_LANG = "Z_LANG";
 

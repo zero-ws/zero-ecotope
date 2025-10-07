@@ -47,7 +47,7 @@ public class ENV implements HEnvironment {
             }
         }
         // 打印环境变量
-        log.info("[ ZERO ] 运行环境：{}", reportOfEnvironment());
+        log.info("[ ZERO ] 运行环境：{}", vLog());
     }
 
     // ========== Loaders (Public entry) ==========
@@ -204,7 +204,7 @@ public class ENV implements HEnvironment {
     // ========== Reporter ==========
 
     // 环境变量打印专用
-    private static String reportOfEnvironment() {
+    private static String vLog() {
         final StringBuilder content = new StringBuilder();
         content.append("\n======= Zero Framework 环境变量 =======\n");
 

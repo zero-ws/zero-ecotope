@@ -3,11 +3,13 @@ package io.zerows.platform.metadata;
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.ENV;
 import io.zerows.platform.EnvironmentVariable;
+import io.zerows.platform.constant.VName;
 import io.zerows.platform.exception._40101Exception500CombineApp;
 import io.zerows.specification.app.HApp;
 import io.zerows.support.base.UtBase;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
 
@@ -16,23 +18,98 @@ import java.util.Objects;
  */
 @Data
 @Accessors(chain = true)
+@Slf4j
 public class KApp implements HApp {
 
+    private String id;
     private String name;
     private final JsonObject configuration = new JsonObject();
     private String ns;
     private String tenant;
 
+    /**
+     * 🎲 随机应用构造函数 - 临时开发场景
+     * <pre>
+     * 使用场景：适用于开发、测试、学习等临时性场景
+     * 环境变量：
+     * - 🌷 Z_APP: 应用名称环境变量（可选）
+     * - 🌷 Z_TENANT: 租户环境变量（可选）
+     * </pre>
+     * 功能：自动生成16位随机字符串作为应用名，租户为null
+     * 限制：不适用于生产环境，因为应用名是随机的，无法持久化，这种模式下每次启动时候应用会被分配一个随机应用，不适合做应用管理，同样不适合做应用商店
+     * <pre>
+     *     ⚡️ 随机数的作用：在学习环境和实验环境
+     *     - 实验环境：用于快速验证功能、概念验证、原型开发
+     *     - 学习环境：用于教学演示、个人练习、代码测试
+     *     - 实验环境之后：可以快速清理和重新开始，无需担心数据持久化问题
+     *
+     *     🎯 设计理念：
+     *     - 无状态：每次启动都是全新的应用实例
+     *     - 临时性：适合快速迭代和频繁重启
+     *     - 隔离性：避免与正式应用产生冲突
+     *     - 易清理：无需担心数据残留问题
+     *
+     *     ⚠️ 注意事项：
+     *     - 不能用于生产环境
+     *     - 不支持应用数据持久化
+     *     - 不支持应用状态管理
+     *     - 不适合团队协作开发
+     *
+     *     🎨 适用场景：
+     *     - 单元测试和集成测试
+     *     - 功能演示和原型验证
+     *     - 个人学习和实验
+     *     - CI/CD 流水线测试
+     * </pre>
+     */
     public KApp() {
-        this(null);
+        this(UtBase.randomString(16));
     }
 
+    /**
+     * 🏷️ 应用名称构造函数 - 本地单体场景
+     * <pre>
+     * 使用场景：本地开发、单体应用、已知应用名的场景
+     * 环境变量：
+     * - 🌷 Z_APP: 应用名称环境变量（优先级高于参数 name）
+     * - 🌷 Z_TENANT: 租户环境变量（可选）
+     * </pre>
+     * 功能：使用指定的应用名，租户从环境变量获取或为null
+     * 优先级：环境变量 Z_APP > 参数 name
+     *
+     * @param name 应用名称
+     */
     public KApp(final String name) {
+        this(name, null);
+    }
+
+    /**
+     * 🏘️ 多租户构造函数 - 生产云环境场景
+     * <pre>
+     * 使用场景：生产环境、云环境、多租户场景
+     * 环境变量：
+     * - 🌷 Z_APP: 应用名称环境变量（优先级高于参数 name）
+     * - 🌷 Z_TENANT: 租户环境变量（优先级高于参数 tenant）
+     * </pre>
+     * 功能：同时指定应用名和租户，支持完整的多租户架构
+     * 优先级：环境变量 Z_APP > 参数 name，环境变量 Z_TENANT > 参数 tenant
+     *
+     * @param name   应用名称
+     * @param tenant 租户标识
+     */
+    public KApp(final String name, final String tenant) {
         final String nameApp = ENV.of().get(EnvironmentVariable.Z_APP, name);
+        final String nameTenant = ENV.of().get(EnvironmentVariable.Z_TENANT, tenant);
+        this.initialize(nameApp, nameTenant);
+    }
+
+    private void initialize(final String name, final String tenant) {
         // 应用名称
-        this.name = nameApp;
+        this.name = name;
         // 名空间
-        this.ns = HApp.nsOf(nameApp);
+        this.ns = HApp.nsOf(name);
+        // 租户信息
+        this.tenant = tenant;
     }
 
     @Override
@@ -109,6 +186,23 @@ public class KApp implements HApp {
     }
 
     @Override
+    public String id() {
+        if (UtBase.isNil(this.id)) {
+            this.id = this.option(VName.APP_ID);
+            if (UtBase.isNil(this.id)) {
+                this.id = this.option(VName.KEY);
+            }
+        }
+        return this.id;
+    }
+
+    @Override
+    public HApp id(final String id) {
+        this.id = id;
+        return this;
+    }
+
+    @Override
     public boolean equals(final Object o) {
         if (this == o) {
             return true;
@@ -123,5 +217,16 @@ public class KApp implements HApp {
     @Override
     public int hashCode() {
         return Objects.hash(this.name, this.ns);
+    }
+
+    @Override
+    public HApp vLog() {
+        final String content = """
+            [ ZERO ] APP 应用信息:
+            \t\uD83C\uDF38 应用名: {}, 🧩 应用ID: {}, \uD83E\uDDCA 租户: {}
+            \t🏷️ 命名空间: {}
+            """;
+        log.info(content, this.name, this.id, this.tenant, this.ns);
+        return this;
     }
 }

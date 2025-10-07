@@ -13,8 +13,8 @@ import java.io.Serializable;
  */
 @Data
 public class YmServer implements Serializable {
-    private int port;
-    private String address;
+    private int port = 6083;
+    private String address = "0.0.0.0";
     private JsonObject options = new JsonObject();
     private YmWebSocket websocket = new YmWebSocket();
 }

@@ -40,4 +40,9 @@ public class YmConfiguration implements Serializable {
     @JsonSerialize(using = JsonObjectSerializer.class)
     @JsonDeserialize(using = JsonObjectDeserializer.class)
     private JsonObject sms = new JsonObject();
+
+
+    public static YmConfiguration createDefault() {
+        return new YmConfiguration();
+    }
 }

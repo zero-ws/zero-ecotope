@@ -5,7 +5,6 @@ import io.zerows.platform.EnvironmentVariable;
 import io.zerows.spi.modeler.AtomNs;
 import io.zerows.support.Ut;
 import io.zerows.support.base.UtBase;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * 🔄 Zero框架内部专用名空间，也是默认名空间，默认名空间使用：
@@ -27,7 +26,6 @@ import lombok.extern.slf4j.Slf4j;
  *
  * @author lang : 2023-05-08
  */
-@Slf4j
 public class AtomNsZero implements AtomNs {
     private static final String NS_APP = "io.zerows.app.{0}";
     private static final String NS_DEFAULT = "io.zerows.r2mo";
@@ -56,8 +54,6 @@ public class AtomNsZero implements AtomNs {
         final String prefix = ENV.of().get(EnvironmentVariable.Z_NS, NS_APP);
         // 🔁 再计算名空间
         final String namespace = Ut.isNil(appName) ? NS_DEFAULT : UtBase.fromMessage(prefix, appName);
-        log.debug("🏷️ 名空间: {}, 前缀：{}", namespace, prefix);
-        log.debug("🏢 应用名：{}", appName);
         return namespace;
     }
 }
