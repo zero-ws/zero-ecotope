@@ -5,7 +5,7 @@ import io.zerows.epoch.metadata.JSix;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
 import io.zerows.platform.ENV;
 import io.zerows.platform.EnvironmentVariable;
-import io.zerows.platform.constant.VWeb;
+import io.zerows.platform.constant.VClassPath;
 import io.zerows.platform.enums.Environment;
 import io.zerows.platform.enums.typed.ChangeFlag;
 import io.zerows.specification.app.HAmbient;
@@ -49,7 +49,7 @@ public class ArgoStore {
     static {
         final String envValue = ENV.of().get(EnvironmentVariable.Z_ENV);
         final Environment environment = Ut.toEnum(envValue, Environment.class, Environment.Production);
-        final String vPath = Ut.ioPath(VWeb.runtime.CONFIGURATION_JSON, environment);
+        final String vPath = Ut.ioPath(VClassPath.runtime.CONFIGURATION_JSON, environment);
         Ke.LOG.Ok.info(ArgoStore.class, "Environment On = {0}, Path = {1}", environment, vPath);
         // 加载基础配置，目录规范中 running/configuration.json 路径
         final JsonObject configuration = Ut.ioJObject(vPath);
@@ -57,11 +57,11 @@ public class ArgoStore {
         // 六维数据专用
         HEX = JSix.create(CONFIGURATION);
         // stellar 专用数据
-        final String stellarIo = Ut.valueString(CONFIGURATION, VWeb.runtime.configuration.STELLAR);
+        final String stellarIo = Ut.valueString(CONFIGURATION, VClassPath.runtime.configuration.STELLAR);
         final JsonObject stellar = Ut.ioJObject(stellarIo);
         STELLAR.mergeIn(stellar, true);
         // options 专用数据
-        final JsonObject options = Ut.valueJObject(CONFIGURATION, VWeb.runtime.configuration.OPTIONS);
+        final JsonObject options = Ut.valueJObject(CONFIGURATION, VClassPath.runtime.configuration.OPTIONS);
         OPTIONS.mergeIn(options, true);
     }
 

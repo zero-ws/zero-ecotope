@@ -2,9 +2,9 @@ package io.zerows.epoch.bootplus.stellar.owner;
 
 import io.zerows.epoch.bootplus.stellar.Party;
 import io.zerows.epoch.bootplus.stellar.vendor.OkB;
-import io.zerows.platform.metadata.KGlobal;
-import io.zerows.platform.constant.VWeb;
+import io.zerows.platform.constant.VClassPath;
 import io.zerows.platform.enums.Environment;
+import io.zerows.platform.metadata.KGlobal;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
@@ -20,7 +20,7 @@ public interface OkA extends Party {
     }
 
     /**
-     * 对应文件目录 {@link VWeb.runtime#CONFIGURATION_JSON}
+     * 对应文件目录 {@link VClassPath.runtime#CONFIGURATION_JSON}
      *
      * @return {@link KGlobal}
      */

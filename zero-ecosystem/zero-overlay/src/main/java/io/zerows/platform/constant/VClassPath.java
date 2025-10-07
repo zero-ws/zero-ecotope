@@ -67,7 +67,7 @@ import java.util.Objects;
  * </code></pre>
  * </p>
  */
-public interface VWeb {
+public interface VClassPath {
     String CONFIGURATION = "configuration";
     String INIT = "init";
     String RUNTIME = "running";
@@ -207,7 +207,7 @@ public interface VWeb {
             String INTEGRATION = OOB + "/integration";
             /**
              * 模块化专用目录：init/oob/modulat
-             * 模块化目录会关联到模块部分 {@link VExtension} 的完整目录结构，并带上模块名称
+             * 模块化目录会关联到模块部分 {@see VExtension} 的完整目录结构，并带上模块名称
              */
             String MODULAT = OOB + "/modulat";
             /**

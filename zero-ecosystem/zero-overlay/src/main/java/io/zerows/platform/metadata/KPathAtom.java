@@ -1,7 +1,7 @@
 package io.zerows.platform.metadata;
 
+import io.zerows.platform.constant.VClassPath;
 import io.zerows.platform.constant.VString;
-import io.zerows.platform.constant.VWeb;
 import io.zerows.platform.enums.Environment;
 import io.zerows.support.base.UtBase;
 
@@ -22,9 +22,9 @@ public class KPathAtom {
 
     private KPathAtom(final String name) {
         this.name = name;
-        this.path = VWeb.init.OOB + VString.SLASH + name;
-        this.input = VWeb.atom.of(name);
-        this.output = VWeb.atom.TARGET;
+        this.path = VClassPath.init.OOB + VString.SLASH + name;
+        this.input = VClassPath.atom.of(name);
+        this.output = VClassPath.atom.TARGET;
     }
 
     public static KPathAtom of(final String name) {
@@ -65,10 +65,10 @@ public class KPathAtom {
     }
 
     public String ui(final String identifier) {
-        return VWeb.init.OOB + VString.SLASH + this.name + VString.SLASH + identifier + VString.SLASH;
+        return VClassPath.init.OOB + VString.SLASH + this.name + VString.SLASH + identifier + VString.SLASH;
     }
 
     public String atomUi() {
-        return VWeb.init.OOB + VString.SLASH + this.name + VString.SLASH + this.identifier + VString.SLASH;
+        return VClassPath.init.OOB + VString.SLASH + this.name + VString.SLASH + this.identifier + VString.SLASH;
     }
 }

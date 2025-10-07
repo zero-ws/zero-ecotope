@@ -2,7 +2,6 @@ package io.zerows.support.base;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.platform.constant.VEnv;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -220,7 +219,7 @@ class _Is extends _Io {
      * @return 是否基本类型
      */
     public static boolean isPrimary(final Class<?> clazz) {
-        return VEnv.SPEC.TYPES.containsValue(clazz);
+        return TTo.isPrimary(clazz);
     }
 
     /**

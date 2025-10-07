@@ -2,8 +2,8 @@ package io.zerows.epoch.bootplus.stellar.owner;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.bootplus.stellar.vendor.OkB;
-import io.zerows.platform.constant.VWeb;
 import io.zerows.epoch.database.Database;
+import io.zerows.platform.constant.VClassPath;
 import io.zerows.platform.enums.Environment;
 import io.zerows.support.Ut;
 
@@ -23,7 +23,7 @@ public class MockitoA extends AbstractPartyA {
     @Override
     public Database configDatabase() {
         final Database database = new Database();
-        final String path = VWeb.runtime.environment.ofDatabase(this.environment());
+        final String path = VClassPath.runtime.environment.ofDatabase(this.environment());
         final JsonObject item = Ut.ioJObject(path);
         if (Ut.isNotNil(item)) {
             database.fromJson(item);
@@ -37,7 +37,7 @@ public class MockitoA extends AbstractPartyA {
     @Override
     public OkB partyB(final String name) {
         final OkB okB = super.partyB(name);
-        final String path = VWeb.runtime.environment.ofIntegration(this.environment());
+        final String path = VClassPath.runtime.environment.ofIntegration(this.environment());
         final JsonObject item = Ut.ioJObject(path + name + ".json");
         if (Ut.isNotNil(item)) {
             okB.configIntegration().fromJson(item);

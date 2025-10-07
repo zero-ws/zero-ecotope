@@ -64,7 +64,7 @@ public interface HPI extends SPI {
                 .map(impl -> impl.getClass().getName())
                 .distinct()
                 .collect(Collectors.joining(", "));
-            log.info("[ ZERO ]    / {} = [{}]", spiClass.getName(), implNames);
+            log.info("[ ZERO ]    \uD83D\uDCCC {} = [{}]", spiClass.getName(), implNames);
         }
     }
 }

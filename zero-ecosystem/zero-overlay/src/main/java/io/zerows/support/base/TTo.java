@@ -2,23 +2,41 @@ package io.zerows.support.base;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.platform.constant.VEnv;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 /**
  * @author lang : 2023/4/27
  */
 final class TTo {
+    private static final ConcurrentMap<Class<?>, Class<?>> TYPES = new ConcurrentHashMap<Class<?>, Class<?>>() {
+        {
+            this.put(Integer.class, int.class);
+            this.put(Long.class, long.class);
+            this.put(Short.class, short.class);
+            this.put(Boolean.class, boolean.class);
+            this.put(Character.class, char.class);
+            this.put(Double.class, double.class);
+            this.put(Float.class, float.class);
+            this.put(Byte.class, byte.class);
+        }
+    };
+
+    static boolean isPrimary(final Class<?> clazz) {
+        return TYPES.containsValue(clazz);
+    }
+
     private TTo() {
     }
 
     static Class<?> toPrimary(final Class<?> source) {
-        return VEnv.SPEC.TYPES.getOrDefault(source, source);
+        return TYPES.getOrDefault(source, source);
     }
 
     static <T extends Enum<T>> T toEnum(final String literal, final Class<T> clazz, final T defaultEnum) {

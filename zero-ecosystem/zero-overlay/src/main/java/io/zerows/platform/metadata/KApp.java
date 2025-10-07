@@ -23,6 +23,10 @@ public class KApp implements HApp {
     private String ns;
     private String tenant;
 
+    public KApp() {
+        this(null);
+    }
+
     public KApp(final String name) {
         final String nameApp = ENV.of().get(EnvironmentVariable.Z_APP, name);
         // 应用名称
