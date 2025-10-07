@@ -7,7 +7,6 @@ import io.vertx.core.Promise;
 import io.vertx.core.Vertx;
 import io.zerows.epoch.annotations.Up;
 import io.zerows.epoch.boot.Electy;
-import io.zerows.epoch.boot.ZeroEnvironmentLegacy;
 import io.zerows.epoch.bootplus.stellar.owner.DevelopmentA;
 import io.zerows.epoch.bootplus.stellar.owner.MockitoA;
 import io.zerows.epoch.bootplus.stellar.owner.OkA;
@@ -80,13 +79,6 @@ public class Ok {
             throw new _11010Exception500BootIoMissing(Ok.class);
         }
         final HEnergy energy = io.energy(Ok.class, new String[]{});
-
-
-        /*
-         * 环境提取，此处环境变量提取为非容器启动环境，而是单纯的模拟环境处理，这样的处理模式之下
-         * 环境变量为测试 Mock 提供了第一模拟环境，来完成环境变量基础注入流程
-         **/
-        ZeroEnvironmentLegacy.initialize();
 
         return ZeroConfigurer.of(energy);
     }

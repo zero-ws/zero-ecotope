@@ -44,7 +44,7 @@ interface VsSame {
     boolean is(Object valueOld, Object valueNew);
 
     /**
-     * Check value is ok
+     * Check get is ok
      *
      * @param value {@link Object}
      *

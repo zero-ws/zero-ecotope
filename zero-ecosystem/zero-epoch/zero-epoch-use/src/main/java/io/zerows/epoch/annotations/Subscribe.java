@@ -1,6 +1,6 @@
 package io.zerows.epoch.annotations;
 
-import io.zerows.epoch.metadata.KEmptyInstance;
+import io.zerows.epoch.metadata.XEmptyInstance;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.enums.RemindType;
 
@@ -36,11 +36,11 @@ public @interface Subscribe {
      *
      * 1. The job will action and send the message to `address`,
      *    the `address` will be bind to EventBus
-     * 2. The critical `address` is stored into `value` for Router mounting
+     * 2. The critical `address` is stored into `get` for Router mounting
      */
     String name() default VString.EMPTY;
 
-    Class<?> input() default KEmptyInstance.class;
+    Class<?> input() default XEmptyInstance.class;
 
     String value();
 

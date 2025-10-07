@@ -83,13 +83,13 @@ public interface IUiPage extends VertxPojo, Serializable {
 
     /**
      * Getter for <code>ZDB.UI_PAGE.PARAM_MAP</code>. 「paramMap」-
-     * URL地址中的配置key=value
+     * URL地址中的配置key=get
      */
     public String getParamMap();
 
     /**
      * Setter for <code>ZDB.UI_PAGE.PARAM_MAP</code>. 「paramMap」-
-     * URL地址中的配置key=value
+     * URL地址中的配置key=get
      */
     public IUiPage setParamMap(String value);
 

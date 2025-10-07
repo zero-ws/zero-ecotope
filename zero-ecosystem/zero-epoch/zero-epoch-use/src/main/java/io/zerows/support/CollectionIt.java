@@ -25,7 +25,7 @@ final class CollectionIt {
      * @param map      Iterated hash map
      * @param consumer kv consumer
      * @param <K>      key type
-     * @param <V>      value type
+     * @param <V>      get type
      */
     static <K, V> void exec(final ConcurrentMap<K, V> map, final BiConsumer<K, V> consumer) {
         map.forEach((key, value) -> {
@@ -38,7 +38,7 @@ final class CollectionIt {
     /**
      * @param list     Iterated list
      * @param consumer element index consumer
-     * @param <V>      value type
+     * @param <V>      get type
      */
     static <V> void exec(final List<V> list, final BiConsumer<V, Integer> consumer) {
         final int size = list.size();
@@ -53,7 +53,7 @@ final class CollectionIt {
     /**
      * @param matrix   Iterated matrix
      * @param consumer item consumer
-     * @param <V>      value type
+     * @param <V>      get type
      */
     static <V> void exec(final V[][] matrix, final Consumer<V> consumer) {
         for (final V[] arr : matrix) {

@@ -3,7 +3,7 @@ package io.zerows.support.base;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.enums.EmApp;
-import io.zerows.specification.access.app.HArk;
+import io.zerows.specification.app.HArk;
 import io.zerows.specification.modeling.HAtom;
 import io.zerows.specification.modeling.HRecord;
 

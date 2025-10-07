@@ -105,7 +105,7 @@ class AtSerial {
 
     private static String getSeed(final XNumber number, final Long current) {
         /*
-         * Read next step value based on current number definition
+         * Read next step get based on current number definition
          */
         final Long seed = getNext(number, current);
         // TODO: The range that may be done in future

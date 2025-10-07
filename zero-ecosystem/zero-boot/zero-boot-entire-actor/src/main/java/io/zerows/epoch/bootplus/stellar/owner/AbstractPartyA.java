@@ -13,9 +13,9 @@ import io.zerows.platform.enums.Environment;
 import io.zerows.platform.exception._40103Exception500ConnectAmbient;
 import io.zerows.support.Ut;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
-import io.zerows.specification.access.app.HAmbient;
-import io.zerows.specification.access.app.HApp;
-import io.zerows.specification.access.app.HArk;
+import io.zerows.specification.app.HAmbient;
+import io.zerows.specification.app.HApp;
+import io.zerows.specification.app.HArk;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;

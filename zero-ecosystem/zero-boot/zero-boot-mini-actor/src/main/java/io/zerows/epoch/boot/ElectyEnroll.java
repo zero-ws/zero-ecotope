@@ -12,10 +12,10 @@ import io.zerows.epoch.application.YmlCore;
 import io.zerows.epoch.metadata.environment.LogCloud;
 import io.zerows.management.OZeroStore;
 import io.zerows.platform.metadata.KPivot;
-import io.zerows.specification.access.app.HAmbient;
-import io.zerows.specification.access.app.HArk;
+import io.zerows.specification.app.HAmbient;
+import io.zerows.specification.app.HArk;
 import io.zerows.specification.configuration.HConfig;
-import io.zerows.specification.configuration.HMature;
+import io.zerows.specification.configuration.HLauncher;
 import io.zerows.specification.configuration.HRegistry;
 import io.zerows.spi.BootIo;
 import io.zerows.support.Ut;
@@ -124,12 +124,12 @@ class ElectyEnroll {
 
     private static Future<Boolean> registryAsync(
         final HConfig config,
-        final Function<HMature.HPre<Vertx>, Future<Boolean>> runnerPre, final Supplier<Future<Boolean>> runner) {
+        final Function<HLauncher.Wait<Vertx>, Future<Boolean>> runnerPre, final Supplier<Future<Boolean>> runner) {
         final Class<?> implCls = config.pre();
         if (Objects.isNull(implCls)) {
             return runner.get();
         }
-        final HMature.HPre<Vertx> pre = Ut.singleton(implCls);
+        final HLauncher.Wait<Vertx> pre = Ut.singleton(implCls);
         if (Objects.isNull(pre)) {
             return runner.get();
         }

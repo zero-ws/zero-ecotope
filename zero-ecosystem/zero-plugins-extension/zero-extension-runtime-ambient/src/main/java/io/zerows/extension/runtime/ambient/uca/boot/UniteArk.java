@@ -2,7 +2,7 @@ package io.zerows.extension.runtime.ambient.uca.boot;
 
 import io.r2mo.typed.cc.Cc;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XApp;
-import io.zerows.specification.access.app.HArk;
+import io.zerows.specification.app.HArk;
 
 import java.util.LinkedHashSet;
 import java.util.Set;

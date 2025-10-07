@@ -48,7 +48,7 @@ public class InquirerForIpc implements Inquirer<ConcurrentMap<String, Method>> {
             .map(method -> this.ensureAgent(method, classes))
             .subscribe(method -> {
                 final Annotation annotation = method.getAnnotation(Ipc.class);
-                final String address = Ut.invoke(annotation, "value");
+                final String address = Ut.invoke(annotation, "get");
                 addresses.put(address, method);
             })
             .dispose();
@@ -66,7 +66,7 @@ public class InquirerForIpc implements Inquirer<ConcurrentMap<String, Method>> {
     private Method ensureSpec(final Method method) {
         Fn.jvmKo(Ut.isVoid(method.getReturnType()), _40044Exception500IpcReturn.class, method);
         final Annotation annotation = method.getAnnotation(Ipc.class);
-        final String value = Ut.invoke(annotation, "value");
+        final String value = Ut.invoke(annotation, "get");
         if (!Ut.isNil(value)) {
             // TypedArgument specification: Non Start Node
             // This specification is only for continue node
@@ -110,8 +110,8 @@ public class InquirerForIpc implements Inquirer<ConcurrentMap<String, Method>> {
         final String to = Ut.invoke(annotation, "to");
         final String name = Ut.invoke(annotation, "name");
         if (Ut.isNil(to) && Ut.isNil(name)) {
-            // If ( to is null and name is null, value must be required, or the system do not know the direction
-            final String from = Ut.invoke(annotation, "value");
+            // If ( to is null and name is null, get must be required, or the system do not know the direction
+            final String from = Ut.invoke(annotation, "get");
             Fn.jvmKo(Ut.isNil(from), _40045Exception500IpcDirection.class, method);
             // Passed validation.
             return method;

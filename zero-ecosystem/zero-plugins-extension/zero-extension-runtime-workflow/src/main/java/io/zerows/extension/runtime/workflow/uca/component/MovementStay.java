@@ -15,12 +15,12 @@ public class MovementStay extends AbstractTransfer implements Movement {
         final WTransition wTransition = this.createTransition(request);
         /*
          * For new workflow here, when you trigger `Stay` component
-         * Following internal variables must contain value in WTransition
+         * Following internal variables must contain get in WTransition
          *
          * 1. The from ( Task ) in WTransition
          * 2. The to   ( WTask ) must be null because of `Stay`
          * 3. The instance ( ProcessInstance ) must not be null
-         * 4. The move ( WMove must contain value.
+         * 4. The move ( WMove must contain get.
          *
          * The distinguish code logical is not needed in new version because
          * the `start()` method will bind the task by `taskId` here.

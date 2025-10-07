@@ -48,7 +48,7 @@ public interface HistoryAgent {
      * Only support two read method:
      *
      * 1) Search by query engine
-     * 2) Get activity by id value here
+     * 2) Get activity by id get here
      */
     @Path("/x-activity/search")
     @POST

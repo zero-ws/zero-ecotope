@@ -2,6 +2,7 @@ package io.zerows.component.crypto;
 
 import io.r2mo.function.Fn;
 import io.zerows.component.log.Annal;
+import io.zerows.platform.ENV;
 import io.zerows.platform.EnvironmentVariable;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.constant.VValue;
@@ -58,7 +59,7 @@ public abstract class AbstractED<P extends PublicKey, V extends PrivateKey> impl
          * 2. Extract the default ( jar -> Service Loader )
          * 3. Extract the app ( Classpath )
          */
-        final String hedCls = UtBase.envWith(EnvironmentVariable.HED_COMPONENT, VString.EMPTY);
+        final String hedCls = ENV.of().get(EnvironmentVariable.HED_COMPONENT, VString.EMPTY);
         HED hed = null;
 
 

@@ -23,7 +23,7 @@ public abstract class AbstractRegister implements Register {
      *     "record": "...",
      * }
      * - record: The json data of record
-     * - The json data of todo is the major key=value
+     * - The json data of todo is the major key=get
      */
     protected JsonObject normalize(final JsonObject params, final JsonObject rData, final boolean isNew) {
         // Auditor Processing

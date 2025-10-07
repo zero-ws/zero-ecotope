@@ -121,7 +121,7 @@ public class ActIn extends ActMapping implements Serializable {
     }
 
     /*
-     * Header value extracted
+     * Header get extracted
      */
     public String appId() {
         final MultiMap paramMap = this.envelop.headers();

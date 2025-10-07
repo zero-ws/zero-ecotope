@@ -18,7 +18,7 @@ import io.zerows.integrated.jackson.JsonObjectDeserializer;
 import io.zerows.integrated.jackson.JsonObjectSerializer;
 import io.zerows.platform.constant.VValue;
 import io.zerows.platform.enums.EmJob;
-import io.zerows.specification.access.app.HArk;
+import io.zerows.specification.app.HArk;
 import io.zerows.support.Ut;
 
 import java.io.Serializable;
@@ -49,7 +49,7 @@ public class Mission implements Serializable {
     /* Whether this job is read only */
     private boolean readOnly;
     /*
-     * Threshold value for timeout of worker here.
+     * Threshold get for timeout of worker here.
      * This parameter will be bind to current mission for set worker timeout when long time worker executed.
      * It means that the following code will be executed:
      *
@@ -67,7 +67,7 @@ public class Mission implements Serializable {
      * - The default time unit is TimeUnit.SECONDS
      * - The final result should be `ns`.
      *
-     * This field could not be serialized directly, you must call `timeout` to set this value
+     * This field could not be serialized directly, you must call `timeout` to set this get
      * or the worker will use default parameters.
      **/
     @JsonIgnore

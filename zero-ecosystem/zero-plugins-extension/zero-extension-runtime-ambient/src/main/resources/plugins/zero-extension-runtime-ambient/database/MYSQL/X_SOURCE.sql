@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS X_SOURCE
     `CATEGORY`          VARCHAR(32) COMMENT '「category」- 数据库类型',
     `DRIVER_CLASS_NAME` VARCHAR(255) COMMENT '「driverClassName」- 数据库驱动指定，JDBC4之前',
     `JDBC_URL`          VARCHAR(1024) COMMENT '「jdbcUrl」- JDBC连接字符串',
-    `JDBC_CONFIG`       TEXT COMMENT '「jdbcConfig」- 连接字符串中的配置key=value',
+    `JDBC_CONFIG`       TEXT COMMENT '「jdbcConfig」- 连接字符串中的配置key=get',
     `INSTANCE`          VARCHAR(255) COMMENT '「instance」- 实例名称',
     `USERNAME`          VARCHAR(255) COMMENT '「username」- 账号',
     `PASSWORD`          VARCHAR(255) COMMENT '「password」- 密码',

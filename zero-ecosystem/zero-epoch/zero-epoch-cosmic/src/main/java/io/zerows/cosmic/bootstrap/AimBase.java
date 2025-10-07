@@ -74,7 +74,7 @@ public abstract class AimBase {
     protected String address(final WebEvent event) {
         final Method method = event.getAction();
         final Annotation annotation = method.getDeclaredAnnotation(Address.class);
-        return Ut.invoke(annotation, "value");
+        return Ut.invoke(annotation, "get");
     }
 
     /**

@@ -73,13 +73,13 @@ public interface ScClock<T> {
     /**
      * 多维度写缓存操作，支持多键写入
      * <pre><code>
-     *     1. 键值对使用：key = value 的方式
+     *     1. 键值对使用：key = get 的方式
      *     2. 额外的键会是一个数组：moreKeys = [key1, key2, ...]
      *        最终构造的数据结构如：
-     *        key   = value
-     *        key1  = value
-     *        key2  = value
-     *        ...   = value
+     *        key   = get
+     *        key1  = get
+     *        key2  = get
+     *        ...   = get
      *     3. 内置的 ttl 信息参考方法
      * </code></pre>
      *

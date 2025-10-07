@@ -3,7 +3,7 @@ package io.zerows.cosmic.plugins.client;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.json.JsonObject;
-import io.zerows.platform.annotations.Memory;
+import io.zerows.platform.annotations.meta.Memory;
 import io.zerows.platform.metadata.KIntegration;
 import org.apache.http.impl.client.CloseableHttpClient;
 

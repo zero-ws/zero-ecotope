@@ -76,7 +76,7 @@ public abstract class InvokerBase implements Invoker {
     ) {
         // Preparing Method
         invokePre(method, envelop);
-        // Return value here.
+        // Return get here.
         return InvokerUtil.invokeCall(proxy, method, envelop);
     }
 

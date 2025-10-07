@@ -2,10 +2,18 @@ package io.zerows.extension.commerce.finance.uca.replica;
 
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonObject;
-import io.zerows.platform.exception._80413Exception501NotImplement;
-import io.zerows.platform.annotations.Memory;
-import io.zerows.extension.commerce.finance.domain.tables.pojos.*;
+import io.zerows.extension.commerce.finance.domain.tables.pojos.FBill;
+import io.zerows.extension.commerce.finance.domain.tables.pojos.FBillItem;
+import io.zerows.extension.commerce.finance.domain.tables.pojos.FBook;
+import io.zerows.extension.commerce.finance.domain.tables.pojos.FDebt;
+import io.zerows.extension.commerce.finance.domain.tables.pojos.FPreAuthorize;
+import io.zerows.extension.commerce.finance.domain.tables.pojos.FSettlement;
+import io.zerows.extension.commerce.finance.domain.tables.pojos.FSettlementItem;
+import io.zerows.extension.commerce.finance.domain.tables.pojos.FTrans;
+import io.zerows.extension.commerce.finance.domain.tables.pojos.FTransItem;
 import io.zerows.extension.commerce.finance.eon.FmConstant;
+import io.zerows.platform.annotations.meta.Memory;
+import io.zerows.platform.exception._80413Exception501NotImplement;
 
 import java.util.List;
 

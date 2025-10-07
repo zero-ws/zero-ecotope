@@ -4,14 +4,14 @@ import io.r2mo.function.Fn;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.OLog;
-import io.zerows.platform.constant.VString;
-import io.zerows.platform.constant.VValue;
 import io.zerows.epoch.database.exception._40057Exception500JooqCombine;
 import io.zerows.epoch.database.exception._40059Exception500JooqFieldMissing;
 import io.zerows.epoch.database.jooq.JooqDsl;
 import io.zerows.epoch.database.jooq.condition.JooqCond;
-import io.zerows.epoch.metadata.Mirror;
-import io.zerows.epoch.metadata.Mojo;
+import io.zerows.epoch.metadata.MMPojo;
+import io.zerows.epoch.metadata.MMPojoMapping;
+import io.zerows.platform.constant.VString;
+import io.zerows.platform.constant.VValue;
 import io.zerows.support.Ut;
 import org.jooq.Condition;
 import org.jooq.Field;
@@ -50,7 +50,7 @@ public class JqAnalyzer {
     private transient final ConcurrentMap<String, String> revert =
         new ConcurrentHashMap<>();
 
-    private transient Mojo pojo;
+    private transient MMPojo pojo;
     private transient Table<?> table;
     /*
      *  sigma -> zSigma -> Z_SIGMA
@@ -129,7 +129,7 @@ public class JqAnalyzer {
     }
 
     /*
-     * Primary key value collect
+     * Primary key get collect
      * 1) Object
      * 2) List<Object>
      */
@@ -204,7 +204,7 @@ public class JqAnalyzer {
                  *
                  * Situation 1:
                  * Input `field` is column field name directly, it means that the
-                 * mapping contains `field` in value. hit target column directly here, in this kind of
+                 * mapping contains `field` in get. hit target column directly here, in this kind of
                  * situation, the `field` is COLUMN
                  *
                  * COLUMN is `Jooq` needed
@@ -212,7 +212,7 @@ public class JqAnalyzer {
                 targetField = field;
             } else {
                 /*
-                 * The field is not in `COLUMN` value set
+                 * The field is not in `COLUMN` get set
                  *
                  * it means that `field` is field, not column here,
                  * Situation 2:
@@ -228,8 +228,8 @@ public class JqAnalyzer {
              * key = input field
              * This key is before `pojo file` here, it could let you convert field
              *
-             * value = pojo actual field here
-             * This value is after `pojo file` here, it could let you get actula pojo field
+             * get = pojo actual field here
+             * This get is after `pojo file` here, it could let you get actula pojo field
              */
             final ConcurrentMap<String, String> inColumnMapping = this.pojo.getInColumn();
             final ConcurrentMap<String, String> inMapping = this.pojo.getIn();
@@ -349,7 +349,7 @@ public class JqAnalyzer {
             this.pojo = null;
         } else {
             LOGGER.debug(INFO.JOOQ_BIND, pojo, clazz);
-            this.pojo = Mirror.create(getClass()).mount(pojo)
+            this.pojo = MMPojoMapping.create(getClass()).mount(pojo)
                 .mojo().bindColumn(this.mapping);
             // When bind pojo, the system will analyze columns
             LOGGER.debug(INFO.JOOQ_MOJO, this.pojo.getIn(), this.pojo.getInColumn());
@@ -405,7 +405,7 @@ public class JqAnalyzer {
         }
     }
 
-    public Mojo pojo() {
+    public MMPojo pojo() {
         return this.pojo;
     }
 

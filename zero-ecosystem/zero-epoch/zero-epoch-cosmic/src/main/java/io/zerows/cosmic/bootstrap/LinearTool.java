@@ -2,7 +2,7 @@ package io.zerows.cosmic.bootstrap;
 
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Vertx;
-import io.zerows.component.environment.DevOps;
+import io.zerows.component.environment.DevMonitor;
 import io.zerows.cortex.metadata.RunVertx;
 import io.zerows.support.Ut;
 
@@ -31,7 +31,7 @@ class LinearTool {
 
 
                 // DevOps
-                DevOps.on(vertx).add(verticleCls, options, deploymentId);
+                DevMonitor.on(vertx).add(verticleCls, options, deploymentId);
 
 
                 runVertx.deploymentAdd(deploymentId, verticleCls);
@@ -62,7 +62,7 @@ class LinearTool {
 
 
                 // DevOps
-                DevOps.on(vertx).remove(verticleCls, options);
+                DevMonitor.on(vertx).remove(verticleCls, options);
 
 
                 runVertx.deploymentRemove(id);

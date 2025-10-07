@@ -20,7 +20,7 @@ public enum ChangeFlag {
      */
     DELETE,
     /*
-     * Default value for nothing happen
+     * Default get for nothing happen
      */
     NONE,
 }

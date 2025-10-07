@@ -49,7 +49,7 @@ public abstract class AbstractRegion implements PlugRegion {
         final String prefix = this.config.getString(YmlCore.extension.region.config.PREFIX);
         if (Ut.isNil(prefix)) {
             // prefix 未配置
-            this.logger().warn("Data Region require config `prefix` attribute value, but now is null. Disabled! ");
+            this.logger().warn("Data Region require config `prefix` attribute get, but now is null. Disabled! ");
             return false;
         }
         final String requestUri = context.request().path();

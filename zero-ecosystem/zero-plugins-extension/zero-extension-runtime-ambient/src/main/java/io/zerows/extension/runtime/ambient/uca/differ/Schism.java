@@ -5,7 +5,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.constant.VString;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XActivity;
-import io.zerows.specification.access.app.HArk;
+import io.zerows.specification.app.HArk;
 import io.zerows.specification.modeling.HAtom;
 
 import java.util.function.Supplier;

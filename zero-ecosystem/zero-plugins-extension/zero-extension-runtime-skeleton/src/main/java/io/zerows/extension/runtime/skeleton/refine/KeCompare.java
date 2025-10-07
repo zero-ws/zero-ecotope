@@ -259,14 +259,14 @@ class KeCompare {
         final JsonObject itemString = new JsonObject();
         itemString.put("rows", row);
         itemString.put("cols", 0);
-        itemString.put("value", item);
+        itemString.put("get", item);
         return itemString;
     }
 
     private static JsonObject itemColumn(final Object item, final int column) {
         final JsonObject itemString = new JsonObject();
         itemString.put("cols", column);
-        itemString.put("value", item);
+        itemString.put("get", item);
         itemString.put("rows", 0);
         return itemString;
     }
@@ -280,7 +280,7 @@ class KeCompare {
                 // Place holder
                 row.addNull();
             } else {
-                // Child value here
+                // Child get here
                 final String childField = shapeItem.name();
                 final Object childValue = value.getValue(childField);
                 row.add(childValue);

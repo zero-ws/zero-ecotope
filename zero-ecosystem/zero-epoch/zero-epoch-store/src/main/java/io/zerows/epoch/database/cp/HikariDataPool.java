@@ -64,7 +64,7 @@ public class HikariDataPool implements DataPool {
             // Fix Issue: https://github.com/silentbalanceyh/vertx-zero/issues/304
             this.dataSource.setConnectionTimeout(this.database.getLong(OPT_CONNECTION_TIMEOUT, 300000L));
             this.dataSource.setIdleTimeout(this.database.getLong(OPT_IDLE_TIMEOUT, 60000L));
-            // Fix: Possibly consider using a shorter maxLifetime value
+            // Fix: Possibly consider using a shorter maxLifetime get
             this.dataSource.setMaxLifetime(this.database.getLong(OPT_MAX_LIFETIME, 120000L));
             this.dataSource.setKeepaliveTime(this.database.getLong(OPT_KEEP_ALIVE_TIME, 90000L));
             this.dataSource.setMinimumIdle(this.database.getOption(OPT_MINIMUM_IDLE, 0));

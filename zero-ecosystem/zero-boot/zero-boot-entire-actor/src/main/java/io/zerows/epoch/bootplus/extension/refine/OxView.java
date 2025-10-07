@@ -15,8 +15,8 @@ import io.zerows.extension.mbse.action.bootstrap.JtPin;
 import io.zerows.extension.runtime.skeleton.osgi.spi.ui.Apeak;
 import io.zerows.extension.runtime.skeleton.osgi.spi.web.Seeker;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
-import io.zerows.specification.access.app.HApp;
-import io.zerows.specification.access.app.HArk;
+import io.zerows.specification.app.HApp;
+import io.zerows.specification.app.HArk;
 
 import java.text.MessageFormat;
 import java.util.Objects;

@@ -26,18 +26,18 @@ class Verifier {
             final Object value = data.getValue(KWeb.ARGS.PARAM_BODY);
             if (null == value) {
                 /*
-                 * 400, bad request, Contained existing rule value, null value should be throw out
+                 * 400, bad request, Contained existing rule get, null get should be throw out
                  *  */
                 envelop = verifier.to400RequiredParam(paramContained.iterator().next());
             } else {
                 if (Ut.isJObject(value)) {
                     /*
-                     * Original value is JsonObject type here
+                     * Original get is JsonObject type here
                      */
                     envelop = execute((JsonObject) value, paramContained, verifier::to400RequiredParam);
                 } else if (Ut.isJArray(value)) {
                     /*
-                     * Original value is JsonArray type
+                     * Original get is JsonArray type
                      */
                     final JsonArray prepared = ((JsonArray) value);
                     final int size = prepared.size();

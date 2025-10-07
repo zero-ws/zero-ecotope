@@ -2,8 +2,8 @@ package io.zerows.epoch.bootplus.extension.uca.graphic;
 
 import io.zerows.epoch.bootplus.extension.refine.Ox;
 import io.zerows.epoch.constant.KName;
-import io.zerows.specification.access.app.HApp;
-import io.zerows.specification.access.app.HArk;
+import io.zerows.specification.app.HApp;
+import io.zerows.specification.app.HArk;
 import io.zerows.specification.modeling.operation.HDao;
 
 public abstract class AbstractPlotter implements Plotter {

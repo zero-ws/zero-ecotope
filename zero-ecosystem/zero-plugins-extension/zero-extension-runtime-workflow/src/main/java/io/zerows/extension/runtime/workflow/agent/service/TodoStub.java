@@ -12,7 +12,7 @@ import java.util.Set;
 public interface TodoStub {
     /*
      * data: the data that will be input
-     * type + params: the default value came from type.json under
+     * type + params: the default get came from type.json under
      * plugin/ambient/to do/folder
      */
     Future<JsonObject> createTodo(String type, JsonObject data);

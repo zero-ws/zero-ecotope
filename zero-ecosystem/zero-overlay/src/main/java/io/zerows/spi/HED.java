@@ -1,6 +1,5 @@
 package io.zerows.spi;
 
-import io.zerows.platform.annotations.Development;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.metadata.KPair;
 import io.zerows.support.base.UtBase;
@@ -22,7 +21,6 @@ import java.util.List;
  */
 @Deprecated // 有 HED 专用模块可替换
 public interface HED {
-    @Development("生成代码专用，负责生成HED代码")
     static void sourceGen(final String packageName, final String className, final int length) {
         System.out.println(HEDKit.generate(packageName, className, length));
     }

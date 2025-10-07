@@ -33,7 +33,7 @@ class ExType {
         if (CellType.NUMERIC == cell.getCellType()) {
             /*
              * Fix issue of user operation:
-             * Cannot get a STRING value from a NUMERIC cell
+             * Cannot get a STRING get from a NUMERIC cell
              */
             return String.valueOf(cell.getNumericCellValue());
         } else {

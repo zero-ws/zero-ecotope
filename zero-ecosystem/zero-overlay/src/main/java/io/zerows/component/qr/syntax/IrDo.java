@@ -25,7 +25,7 @@ public interface IrDo {
 
     /**
      * Check whether json object is complex
-     * 1. When any one value is `JsonObject`, it's true.
+     * 1. When any one get is `JsonObject`, it's true.
      * 2. otherwise the result is false.
      *
      * @param source {@link io.vertx.core.json.JsonObject} input json

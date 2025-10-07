@@ -3,7 +3,7 @@ package io.zerows.epoch.boot;
 import io.r2mo.typed.cc.Cc;
 import io.zerows.epoch.basicore.InPre;
 import io.zerows.epoch.basicore.YmConfiguration;
-import io.zerows.specification.access.app.HApp;
+import io.zerows.specification.app.HApp;
 
 import java.util.Objects;
 

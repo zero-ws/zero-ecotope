@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.qr.syntax.Ir;
-import io.zerows.epoch.metadata.Mojo;
+import io.zerows.epoch.metadata.MMPojo;
 import io.zerows.support.Ut;
 
 import java.util.Set;
@@ -72,7 +72,7 @@ class JoinEngine {
     /*
      * Pagination Searching
      */
-    Future<JsonObject> searchAsync(final Ir qr, final Mojo mojo) {
+    Future<JsonObject> searchAsync(final Ir qr, final MMPojo mojo) {
         final JsonObject response = new JsonObject();
         final JsonArray data = this.search.searchA(qr, mojo);
 
@@ -82,7 +82,7 @@ class JoinEngine {
         return Ut.future(response);
     }
 
-    JsonArray searchArray(final Ir qr, final Mojo mojo) {
+    JsonArray searchArray(final Ir qr, final MMPojo mojo) {
         return this.search.searchA(qr, mojo);
     }
 

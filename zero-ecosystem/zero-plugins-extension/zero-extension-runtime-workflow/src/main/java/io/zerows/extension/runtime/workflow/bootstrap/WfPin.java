@@ -12,7 +12,7 @@ import io.zerows.extension.runtime.workflow.domain.tables.pojos.WFlow;
 import io.zerows.extension.runtime.workflow.uca.deployment.DeployOn;
 import io.zerows.management.OZeroStore;
 import io.zerows.platform.metadata.KPivot;
-import io.zerows.specification.access.app.HAmbient;
+import io.zerows.specification.app.HAmbient;
 import io.zerows.specification.configuration.HRegistry;
 import io.zerows.support.base.FnBase;
 import org.camunda.bpm.engine.FormService;

@@ -8,7 +8,7 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.function.Supplier;
 
 /*
- * Cell Processing for value
+ * Cell Processing for get
  */
 @FunctionalInterface
 public interface ExValue {

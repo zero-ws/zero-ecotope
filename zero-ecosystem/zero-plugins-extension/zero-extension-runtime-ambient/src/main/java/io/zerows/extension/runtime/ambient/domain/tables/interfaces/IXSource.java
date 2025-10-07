@@ -100,13 +100,13 @@ public interface IXSource extends VertxPojo, Serializable {
 
     /**
      * Setter for <code>ZDB.X_SOURCE.JDBC_CONFIG</code>. 「jdbcConfig」-
-     * 连接字符串中的配置key=value
+     * 连接字符串中的配置key=get
      */
     public IXSource setJdbcConfig(String value);
 
     /**
      * Getter for <code>ZDB.X_SOURCE.JDBC_CONFIG</code>. 「jdbcConfig」-
-     * 连接字符串中的配置key=value
+     * 连接字符串中的配置key=get
      */
     public String getJdbcConfig();
 

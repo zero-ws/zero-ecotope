@@ -19,7 +19,7 @@ public interface VPC {
      */
     interface HPCAop extends HPCAopComponent {
         /**
-         * <value>plugin.fork</value>，新追加分流器配置，针对请求数据执行分流规则，让抽象表可支持多分流模式的AOP基本规则，AOP实现模式：
+         * <get>plugin.fork</get>，新追加分流器配置，针对请求数据执行分流规则，让抽象表可支持多分流模式的AOP基本规则，AOP实现模式：
          * <pre><code>
          *     1. 不带分流器规则
          *     2. 带分流器规则：
@@ -29,7 +29,7 @@ public interface VPC {
          */
         String PLUGIN_FORK = "plugin.fork";
         /**
-         * <value>plugin.config</value>, 和 Before/After 相关的组件静态配置，数据类型为 {@link io.vertx.core.json.JsonObject}
+         * <get>plugin.config</get>, 和 Before/After 相关的组件静态配置，数据类型为 {@link io.vertx.core.json.JsonObject}
          *
          * 该组件配置为`name = InJson`的核心结构，Json中存储了和组件相关的配置数据，配置如下：
          *
@@ -88,7 +88,7 @@ public interface VPC {
 
     interface HPCAopComponent {
         /**
-         * <value>plugin.component.before</value>，AOP配置中的前置插件，数据类型为 {@link JsonArray}
+         * <get>plugin.component.before</get>，AOP配置中的前置插件，数据类型为 {@link JsonArray}
          * 配置如下：
          * <pre><code>
          *     {
@@ -108,7 +108,7 @@ public interface VPC {
          */
         String PLUGIN_COMPONENT_BEFORE = "plugin.component.before";
         /**
-         * <value>plugin.component.after</value>，AOP配置中的后置插件，数据类型为 {@link JsonArray}
+         * <get>plugin.component.after</get>，AOP配置中的后置插件，数据类型为 {@link JsonArray}
          * 配置如下：
          * <pre><code>
          *     {
@@ -128,7 +128,7 @@ public interface VPC {
          */
         String PLUGIN_COMPONENT_AFTER = "plugin.component.after";
         /**
-         * <value>plugin.component.job</value>, AOP配置中的后置异步回调插件，在 after 之后，{@link JsonArray}
+         * <get>plugin.component.job</get>, AOP配置中的后置异步回调插件，在 after 之后，{@link JsonArray}
          * 配置如下：
          * <pre><code>
          *     {

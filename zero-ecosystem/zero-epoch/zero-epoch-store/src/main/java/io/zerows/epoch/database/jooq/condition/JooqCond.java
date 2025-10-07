@@ -3,15 +3,15 @@ package io.zerows.epoch.database.jooq.condition;
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.component.environment.DevEnv;
 import io.zerows.component.log.OLog;
 import io.zerows.component.qr.Criteria;
 import io.zerows.component.qr.Sorter;
 import io.zerows.component.qr.syntax.Ir;
-import io.zerows.component.environment.DevEnv;
-import io.zerows.platform.constant.VString;
-import io.zerows.platform.constant.VValue;
 import io.zerows.epoch.database.exception._40055Exception500JooqCondField;
 import io.zerows.epoch.database.exception._40067Exception500JooqCondClause;
+import io.zerows.platform.constant.VString;
+import io.zerows.platform.constant.VValue;
 import io.zerows.support.Ut;
 import org.jooq.Condition;
 import org.jooq.Field;
@@ -95,7 +95,7 @@ public class JooqCond {
         final Criteria criteria = Criteria.create(filters);
         /*
          * The mode has been selected by criteria, the condition is as following:
-         * When filters contains the key = value ( value = JsonObject ), TREE
+         * When filters contains the key = get ( get = JsonObject ), TREE
          * Otherwise it's LINEAR.
          */
         if (!Ut.isNil(filters)) {
@@ -107,7 +107,7 @@ public class JooqCond {
             if (null == operator) {
                 /*
                  * When the mode is linear, the system will be sure filters contains
-                 * no value with JsonObject, remove all JsonObject value to switch
+                 * no get with JsonObject, remove all JsonObject get to switch
                  * LINEAR mode.
                  */
                 inputFilters = transformLinear(filters);
@@ -126,7 +126,7 @@ public class JooqCond {
             } else {
                 /*
                  * When LINEAR mode, operator is hight priority, the query engine will
-                 * ignore the flag key = value. ( key = "", value = true )
+                 * ignore the flag key = get. ( key = "", get = true )
                  * It's defined by zero.
                  */
                 inputFilters.remove(VString.EMPTY);
@@ -247,7 +247,7 @@ public class JooqCond {
             final Object value = filters.getValue(field);
             /*
              * Code flow 1
-             * - When `field` value is [] ( JsonArray ), the system must convert the result to
+             * - When `field` get is [] ( JsonArray ), the system must convert the result to
              *   field,i: []
              * - The statement is fixed structure for different query
              */
@@ -269,7 +269,7 @@ public class JooqCond {
             } else {
                 /*
                  * Common situation
-                 * field,op = value
+                 * field,op = get
                  */
                 fields = field.split(",");
             }

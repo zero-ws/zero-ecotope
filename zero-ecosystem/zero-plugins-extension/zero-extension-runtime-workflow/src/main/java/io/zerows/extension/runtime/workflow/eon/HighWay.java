@@ -4,7 +4,7 @@ import io.zerows.extension.runtime.skeleton.eon.KeIpc;
 
 /**
  * To avoid duplicated with Addr class, here provide new class named 'HighWay'
- * for address value on event bus, the same usage objective for 'Addr'
+ * for address get on event bus, the same usage objective for 'Addr'
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */

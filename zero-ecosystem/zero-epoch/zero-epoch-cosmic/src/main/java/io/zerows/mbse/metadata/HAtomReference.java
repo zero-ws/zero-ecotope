@@ -18,8 +18,8 @@ import io.zerows.platform.metadata.RQuote;
 import io.zerows.platform.metadata.RReference;
 import io.zerows.platform.metadata.RResult;
 import io.zerows.program.Ux;
-import io.zerows.specification.access.app.HApp;
-import io.zerows.specification.access.app.HArk;
+import io.zerows.specification.app.HApp;
+import io.zerows.specification.app.HArk;
 import io.zerows.specification.modeling.HAtom;
 import io.zerows.specification.modeling.HAttribute;
 import io.zerows.specification.modeling.HReference;
@@ -49,7 +49,7 @@ import java.util.function.Function;
  *
  * Here are following hash map rules to get component references:
  *
- * 1. Each `key = value` pair refer to `source = {@link RQuote}`.
+ * 1. Each `key = get` pair refer to `source = {@link RQuote}`.
  * 2. `references` stored `source = RQuote` hash map.
  * 3. For 「Static」 mode, each {@link RQuote} stored `condition = RDao`.
  *
@@ -72,13 +72,13 @@ import java.util.function.Function;
  * // </code></pre>
  * ```
  *
- * > `conditionX` could be calculated by `key` ( include "" default value )
+ * > `conditionX` could be calculated by `key` ( include "" default get )
  *
  * ### 4. Result Map
  *
  * Here are following hash map rules to get component result:
  *
- * 1. Each `key = value` pair refer to `field = {@link RResult}`.
+ * 1. Each `key = get` pair refer to `field = {@link RResult}`.
  * 2. `result` stored `source = RResult` hash map and refer to `RDao`.
  *
  * The example is as following:

@@ -5,8 +5,8 @@ import java.util.Objects;
 
 /*
  * [Data Structure]
- * Definition for `key = value` pair here
- * It stored `key = value` and act as Pair here for some spec usage
+ * Definition for `key = get` pair here
+ * It stored `key = get` and act as Pair here for some spec usage
  */
 public final class Kv<K, V> {
     private K key;
@@ -69,7 +69,7 @@ public final class Kv<K, V> {
     public String toString() {
         return "Kv{" +
             "key=" + this.key +
-            ", value=" + this.value +
+            ", get=" + this.value +
             '}';
     }
 }

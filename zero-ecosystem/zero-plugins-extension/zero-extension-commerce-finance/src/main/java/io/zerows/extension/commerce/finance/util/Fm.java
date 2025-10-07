@@ -3,7 +3,7 @@ package io.zerows.extension.commerce.finance.util;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.Log;
 import io.zerows.component.log.LogModule;
-import io.zerows.epoch.metadata.KNaming;
+import io.zerows.epoch.metadata.MMName;
 import io.zerows.extension.commerce.finance.atom.TranData;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FBook;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FPreAuthorize;
@@ -41,15 +41,15 @@ public final class Fm {
         return FmAmount.calcAmount(start, adjust, income, FmConstant.Status.VALID);
     }
 
-    public static JsonObject qrBook(final KNaming spec) {
+    public static JsonObject qrBook(final MMName spec) {
         return FmBook.qrBook(spec);
     }
 
-    public static FBook umBook(final KNaming spec) {
+    public static FBook umBook(final MMName spec) {
         return FmBook.umBook(spec);
     }
 
-    public static List<FBook> umBook(final KNaming spec, final List<FBook> books) {
+    public static List<FBook> umBook(final MMName spec, final List<FBook> books) {
         return FmBook.umBook(spec, books);
     }
 

@@ -3,7 +3,7 @@ package io.zerows.epoch.database.jooq.util;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.metadata.Mojo;
+import io.zerows.epoch.metadata.MMPojo;
 import io.zerows.support.Ut;
 import org.jooq.Field;
 import org.jooq.Record;
@@ -34,7 +34,7 @@ public class JqOut {
         /*
          * convert projection to field
          */
-        final Mojo mojo = analyzer.pojo();
+        final MMPojo mojo = analyzer.pojo();
         final Set<String> projections = Ut.toSet(projectionArray); // getProjections(projectionArray, mojo);
         return toResult(list, projections, analyzer.type());
     }
@@ -43,7 +43,7 @@ public class JqOut {
         final List<Record> records,
         final JsonArray projection,
         final ConcurrentMap<String, Set<String>> fields,
-        final Mojo mojo) {
+        final MMPojo mojo) {
         final JsonArray joinResult = new JsonArray();
         records.forEach(record -> {
             final int size = record.size();
@@ -71,7 +71,7 @@ public class JqOut {
         return toResult(joinResult, projections);
     }
 
-    private static void putField(final JsonObject data, final Mojo mojo,
+    private static void putField(final JsonObject data, final MMPojo mojo,
                                  final String field, final Object value) {
         /*
          * 「主表优先策略」
@@ -166,7 +166,7 @@ public class JqOut {
         return data;
     }
 
-    private static Set<String> getProjections(final JsonArray projection, final Mojo mojo) {
+    private static Set<String> getProjections(final JsonArray projection, final MMPojo mojo) {
         final Set<String> filters = new HashSet<>();
         if (Objects.nonNull(mojo)) {
             /* Pojo file bind */

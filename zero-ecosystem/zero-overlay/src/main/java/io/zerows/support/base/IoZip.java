@@ -2,7 +2,6 @@ package io.zerows.support.base;
 
 import io.r2mo.function.Fn;
 import io.vertx.core.buffer.Buffer;
-import io.zerows.platform.annotations.ChatGPT;
 import io.zerows.platform.constant.VValue;
 import io.zerows.platform.enums.typed.CompressLevel;
 
@@ -31,7 +30,6 @@ class IoZip {
         });
     }
 
-    @ChatGPT
     private static void ioZip(final ZipOutputStream zos, final byte[] buffers, final String filename) {
         Fn.jvmAt(() -> {
             final File file = new File(filename);

@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.metadata.KNaming;
+import io.zerows.epoch.metadata.MMName;
 import io.zerows.extension.commerce.finance.domain.tables.daos.FBillDao;
 import io.zerows.extension.commerce.finance.domain.tables.daos.FBillItemDao;
 import io.zerows.extension.commerce.finance.domain.tables.daos.FBookDao;
@@ -52,7 +52,7 @@ public class BookService implements BookStub {
     }
 
     @Override
-    public Future<List<FBook>> createAsync(final List<FBook> books, final KNaming spec) {
+    public Future<List<FBook>> createAsync(final List<FBook> books, final MMName spec) {
         final List<FBook> subBooks = Fm.umBook(spec, books);
         return Ux.Jooq.on(FBookDao.class).insertAsync(subBooks);
     }

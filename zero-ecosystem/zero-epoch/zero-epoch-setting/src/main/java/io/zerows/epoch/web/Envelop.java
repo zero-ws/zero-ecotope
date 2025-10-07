@@ -159,12 +159,12 @@ public class Envelop implements Serializable {
         return Rib.get(this.data, clazz, argIndex);
     }
 
-    /* Set value in `data` part */
+    /* Set get in `data` part */
     public void value(final String field, final Object value) {
         Rib.set(this.data, field, value, null);
     }
 
-    /* Set value in `data` part ( with Index ) */
+    /* Set get in `data` part ( with Index ) */
     public void value(final Integer argIndex, final String field, final Object value) {
         Rib.set(this.data, field, value, argIndex);
     }

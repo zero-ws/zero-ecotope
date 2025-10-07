@@ -11,7 +11,7 @@ import io.zerows.epoch.database.Database;
 import io.zerows.platform.metadata.KDictConfig;
 import io.zerows.platform.metadata.KFabric;
 import io.zerows.program.Ux;
-import io.zerows.specification.access.app.HArk;
+import io.zerows.specification.app.HArk;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>

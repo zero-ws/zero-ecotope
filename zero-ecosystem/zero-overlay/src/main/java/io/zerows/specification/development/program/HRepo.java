@@ -1,8 +1,8 @@
 package io.zerows.specification.development.program;
 
-import io.zerows.platform.annotations.One2One;
-import io.zerows.platform.metadata.KRepo;
+import io.zerows.platform.annotations.meta.One2One;
 import io.zerows.platform.constant.VValue;
+import io.zerows.platform.metadata.KRepo;
 import io.zerows.specification.development.compiled.HTrash;
 
 import java.util.Set;

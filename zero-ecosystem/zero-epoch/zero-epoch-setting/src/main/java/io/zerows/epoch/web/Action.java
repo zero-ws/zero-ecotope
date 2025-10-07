@@ -36,7 +36,7 @@ class Action {
         if (EmValue.Bool.IGNORE != active) {
             envelopRef.value(KName.ACTIVE, EmValue.Bool.TRUE == active ? Boolean.TRUE : Boolean.FALSE);
         }
-        // this.value(KName.ACTIVE, active);
+        // this.get(KName.ACTIVE, active);
         if (headerX.containsKey(KName.LANGUAGE)) {
             envelopRef.value(KName.LANGUAGE, headerX.getValue(KName.LANGUAGE));
         }

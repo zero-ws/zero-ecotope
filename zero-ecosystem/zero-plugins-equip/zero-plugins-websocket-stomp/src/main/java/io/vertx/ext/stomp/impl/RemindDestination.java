@@ -91,7 +91,7 @@ public class RemindDestination extends Topic {
                     SockGrid.wsInvoke(address, msg.body(), (returned) -> {
                         final Object resultData = returned.result();
                         if (Objects.isNull(resultData)) {
-                            LOGGER.warn("[ Warning ] The invoker returned value is null, the message will be ignored.");
+                            LOGGER.warn("[ Warning ] The invoker returned get is null, the message will be ignored.");
                             return;
                         }
                         final Object invoked = returned.result();

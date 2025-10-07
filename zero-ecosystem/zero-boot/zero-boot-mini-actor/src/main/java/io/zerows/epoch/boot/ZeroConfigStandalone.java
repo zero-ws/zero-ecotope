@@ -1,10 +1,10 @@
 package io.zerows.epoch.boot;
 
 import io.zerows.epoch.configuration.ZeroConfig;
-import io.zerows.specification.configuration.HMature;
+import io.zerows.specification.configuration.HLauncher;
 
 /**
- * 标准容器中的 {@link HMature.HPre} 处理器
+ * 标准容器中的 {@link HLauncher.Wait} 处理器
  * 针对框架中的插件执行双重处理：
  * <pre><code>
  *     Vertx容器已执行完实例化

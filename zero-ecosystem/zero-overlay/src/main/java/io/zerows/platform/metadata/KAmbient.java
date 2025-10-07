@@ -3,8 +3,8 @@ package io.zerows.platform.metadata;
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.enums.EmApp;
 import io.zerows.platform.exception._60050Exception501NotSupport;
-import io.zerows.specification.access.app.HAmbient;
-import io.zerows.specification.access.app.HArk;
+import io.zerows.specification.app.HAmbient;
+import io.zerows.specification.app.HArk;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;

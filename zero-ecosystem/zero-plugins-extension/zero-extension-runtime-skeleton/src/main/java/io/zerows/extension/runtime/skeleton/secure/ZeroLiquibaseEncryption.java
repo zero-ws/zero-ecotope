@@ -1,7 +1,8 @@
 package io.zerows.extension.runtime.skeleton.secure;
 
-import io.zerows.platform.metadata.KPair;
 import io.zerows.epoch.constant.KName;
+import io.zerows.platform.ENV;
+import io.zerows.platform.metadata.KPair;
 import io.zerows.spi.HED;
 import io.zerows.support.Ut;
 
@@ -46,7 +47,7 @@ public class ZeroLiquibaseEncryption extends Properties {
         if (matcher.find()) {
             // 使用了环境变量
             final String envKey = matcher.group(1);
-            final String password = Ut.envWith(envKey, null);
+            final String password = ENV.of().get(envKey, (String) null);
             if (Ut.isNil(password)) {
                 return null;
             }

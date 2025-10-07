@@ -95,7 +95,7 @@ public class AptArray implements Serializable {
                     this.add.add(element);
                 }
             } else {
-                // If the critical field value is null, marked as add
+                // If the critical field get is null, marked as add
                 this.add.add(element);
             }
         });

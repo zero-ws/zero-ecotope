@@ -14,7 +14,7 @@ import io.zerows.extension.mbse.basement.domain.tables.pojos.MJoin;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MModel;
 import io.zerows.extension.mbse.basement.uca.apply.AoDefault;
 import io.zerows.platform.enums.modeling.EmModel;
-import io.zerows.specification.access.app.HArk;
+import io.zerows.specification.app.HArk;
 import io.zerows.specification.modeling.HAttribute;
 import io.zerows.specification.modeling.HReference;
 import io.zerows.specification.modeling.HRule;

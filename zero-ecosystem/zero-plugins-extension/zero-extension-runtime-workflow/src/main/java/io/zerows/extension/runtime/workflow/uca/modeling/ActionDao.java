@@ -32,7 +32,7 @@ class ActionDao implements ActionOn {
     public <T> Future<JsonObject> updateAsync(final String key, final JsonObject params, final MetaInstance metadata) {
         final UxJooq jooq = metadata.recordDao();
         return jooq.<T>fetchByIdAsync(key).compose(query -> {
-            // Fix Bug: Cannot deserialize value of type `java.lang.String` from Object value (token `JsonToken.START_OBJECT`)
+            // Fix Bug: Cannot deserialize get of type `java.lang.String` from Object get (token `JsonToken.START_OBJECT`)
             final JsonObject original = Ux.toJson(query);
             Ut.valueToString(params, KName.METADATA);
             final T entity = Ux.updateT(query, params);

@@ -1,13 +1,13 @@
 package io.zerows.platform.metadata;
 
 import io.vertx.core.Future;
-import io.zerows.specification.access.HBelong;
-import io.zerows.specification.access.app.HAmbient;
-import io.zerows.specification.access.app.HApp;
-import io.zerows.specification.access.app.HArk;
-import io.zerows.specification.access.cloud.HFrontier;
-import io.zerows.specification.access.cloud.HGalaxy;
-import io.zerows.specification.access.cloud.HSpace;
+import io.zerows.specification.atomic.HBelong;
+import io.zerows.specification.app.HAmbient;
+import io.zerows.specification.app.HApp;
+import io.zerows.specification.app.HArk;
+import io.zerows.specification.cloud.HFrontier;
+import io.zerows.specification.cloud.HGalaxy;
+import io.zerows.specification.cloud.HSpace;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HRegistry;
 import io.zerows.support.base.FnBase;

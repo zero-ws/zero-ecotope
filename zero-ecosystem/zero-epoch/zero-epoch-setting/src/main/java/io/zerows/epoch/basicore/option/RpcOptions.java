@@ -60,7 +60,7 @@ public class RpcOptions implements Serializable {
 
     /**
      * Default `host`, 0.0.0.0
-     * This attribute is for client usage, the default value means no limitation.
+     * This attribute is for client usage, the default get means no limitation.
      */
     private static final String DEFAULT_HOST = "0.0.0.0";
 

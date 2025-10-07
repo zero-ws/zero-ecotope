@@ -25,7 +25,7 @@ class _Combine extends _Atomic {
      * This arrange part will replace `thenCombine?` method. Here are detail readme information:
      *
      * 1. Flag
-     *    Here the flag identified the return value of internal ( Generic Tool )
+     *    Here the flag identified the return get of internal ( Generic Tool )
      * -  A:        JsonArray
      * -  J:        JsonObject
      * -  Tool:        Generice <Tool>

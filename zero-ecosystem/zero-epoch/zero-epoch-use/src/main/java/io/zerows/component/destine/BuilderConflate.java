@@ -3,9 +3,9 @@ package io.zerows.component.destine;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.platform.annotations.Memory;
-import io.zerows.platform.constant.VString;
 import io.zerows.epoch.metadata.KJoin;
+import io.zerows.platform.annotations.meta.Memory;
+import io.zerows.platform.constant.VString;
 
 /**
  * 针对组件 {@link Conflate} 的专用内部构造接口，此接口可根据不同输入信息构造对应的条件

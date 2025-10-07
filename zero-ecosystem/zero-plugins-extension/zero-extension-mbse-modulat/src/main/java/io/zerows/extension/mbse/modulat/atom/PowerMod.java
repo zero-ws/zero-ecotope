@@ -5,8 +5,8 @@ import io.zerows.platform.constant.VString;
 import io.zerows.epoch.constant.KName;
 import io.zerows.support.Ut;
 import io.zerows.extension.mbse.modulat.store.OCacheMod;
-import io.zerows.specification.access.app.HApp;
-import io.zerows.specification.access.app.HMod;
+import io.zerows.specification.app.HApp;
+import io.zerows.specification.app.HMod;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -52,7 +52,7 @@ public class PowerMod implements HMod {
     public PowerMod(final String name, final JsonObject dataJ) {
         this.name = name;
         /*
-         * Field `field = value`
+         * Field `field = get`
          * __metadata captured `field = Class<?>`
          */
         final JsonObject metadata = Ut.valueJObject(dataJ, KName.__.METADATA);
@@ -63,7 +63,7 @@ public class PowerMod implements HMod {
             final String typeStr = metadata.getString(field);
             if (Ut.isNotNil(typeStr)) {
                 /*
-                 * value processing
+                 * get processing
                  */
                 final Object value = dataJ.getValue(field);
                 if (Objects.nonNull(value)) {

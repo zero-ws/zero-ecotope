@@ -5,12 +5,12 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
+import io.zerows.epoch.metadata.MMVariable;
+import io.zerows.platform.ENV;
 import io.zerows.platform.EnvironmentVariable;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.constant.VValue;
 import io.zerows.platform.enums.EmDS;
-import io.zerows.platform.metadata.KVarSet;
-import io.zerows.specification.configuration.HMature;
 import io.zerows.support.Ut;
 
 import java.util.Arrays;
@@ -23,36 +23,36 @@ import java.util.Objects;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 public class MatureOn implements EnvironmentVariable {
-    private static final Cc<String, HMature> CC_MATURE = Cc.openThread();
+    private static final Cc<String, Mature> CC_MATURE = Cc.openThread();
 
     // Cloud Connected
     public static JsonObject envPlot(final JsonObject plot) {
-        final KVarSet set = KVarSet.of()                                 // AEON_APP
+        final MMVariable.Set set = MMVariable.Set.of()                                 // AEON_APP
             .save(KName.NAME, EnvironmentVariable.Z_APP)                                        // Z_APP
             .save(KName.NAMESPACE, EnvironmentVariable.Z_NS)                                    // Z_NS
             .saveWith(KName.LANGUAGE, EnvironmentVariable.Z_LANG, KWeb.ARGS.V_LANGUAGE)   // Z_LANG
             .save(KName.SIGMA, EnvironmentVariable.Z_SIGMA);                                    // Z_SIGMA
         // 创建拷贝
         final JsonObject plotJ = Ut.valueJObject(plot, true);
-        final HMature mature = CC_MATURE.pick(MatureEnv::new, MatureEnv.class.getName());
+        final Mature mature = CC_MATURE.pick(MatureEnv::new, MatureEnv.class.getName());
         return mature.configure(plotJ, set);
     }
 
     // Restful Connected ( Multi Support )
     public static JsonObject envApi(final JsonObject api, final Integer index) {
-        final KVarSet set = envServer(EnvironmentVariable.API_HOST, EnvironmentVariable.API_PORT, index);
+        final MMVariable.Set set = envServer(EnvironmentVariable.API_HOST, EnvironmentVariable.API_PORT, index);
         // 创建拷贝
         final JsonObject apiJ = Ut.valueJObject(api, true);
-        final HMature mature = CC_MATURE.pick(MatureEnv::new, MatureEnv.class.getName());
+        final Mature mature = CC_MATURE.pick(MatureEnv::new, MatureEnv.class.getName());
         return mature.configure(apiJ, set);
     }
 
     // Socket Connected ( Multi Support )
     public static JsonObject envSock(final JsonObject sock, final Integer index) {
-        final KVarSet set = envServer(EnvironmentVariable.SOCK_HOST, EnvironmentVariable.SOCK_PORT, index);
+        final MMVariable.Set set = envServer(EnvironmentVariable.SOCK_HOST, EnvironmentVariable.SOCK_PORT, index);
         // 创建拷贝
         final JsonObject sockJ = Ut.valueJObject(sock, true);
-        final HMature mature = CC_MATURE.pick(MatureEnv::new, MatureEnv.class.getName());
+        final Mature mature = CC_MATURE.pick(MatureEnv::new, MatureEnv.class.getName());
         // 重写规则Z_API_PORTX 重写 Z_SOCK_PORTX
         final JsonObject normJ = mature.configure(sockJ, set);
         final JsonObject apiJ = envApi(new JsonObject(), index);
@@ -64,7 +64,7 @@ public class MatureOn implements EnvironmentVariable {
 
     // Database Connected ( Multi Support )
     public static JsonObject envDatabase(final JsonObject database, final EmDS.Stored mode) {
-        final KVarSet set;
+        final MMVariable.Set set;
         if (EmDS.Stored.WORKFLOW == mode) {
             // Workflow
             set = envDatabase(EnvironmentVariable.DBW_HOST, EnvironmentVariable.DBW_PORT, EnvironmentVariable.DBW_INSTANCE);
@@ -77,7 +77,7 @@ public class MatureOn implements EnvironmentVariable {
         }
         // 创建拷贝
         final JsonObject databaseJ = Ut.valueJObject(database, true);
-        final HMature mature = CC_MATURE.pick(MatureEnv::new, MatureEnv.class.getName());
+        final Mature mature = CC_MATURE.pick(MatureEnv::new, MatureEnv.class.getName());
         final JsonObject normJ = mature.configure(databaseJ, set);
         // JdbcUrl
         final String jdbcUrl = Ut.valueString(normJ, "jdbcUrl");
@@ -94,7 +94,7 @@ public class MatureOn implements EnvironmentVariable {
 
     // Domain Connected
     public static JsonArray envDomain(final JsonArray domainA) {
-        final String domain = Ut.env(EnvironmentVariable.CORS_DOMAIN);
+        final String domain = ENV.of().get(EnvironmentVariable.CORS_DOMAIN);
         if (Ut.isNil(domain)) {
             return domainA;
         }
@@ -108,14 +108,14 @@ public class MatureOn implements EnvironmentVariable {
         return replaced;
     }
 
-    private static KVarSet envDatabase(final String host, final String port, final String instance) {
-        return KVarSet.of()
+    private static MMVariable.Set envDatabase(final String host, final String port, final String instance) {
+        return MMVariable.Set.of()
             .save(KName.HOSTNAME, host)
             .save(KName.PORT, port, Integer.class)
             .save(KName.INSTANCE, instance);
     }
 
-    private static KVarSet envServer(final String host, final String port, final Integer index) {
+    private static MMVariable.Set envServer(final String host, final String port, final Integer index) {
         final String envHost;
         final String envPort;
         if (Objects.isNull(index) || VValue.IDX == index) {
@@ -127,7 +127,7 @@ public class MatureOn implements EnvironmentVariable {
             envHost = EnvironmentVariable.API_HOST + index;
             envPort = EnvironmentVariable.API_PORT + index;
         }
-        return KVarSet.of()
+        return MMVariable.Set.of()
             .saveWith(KName.HOST, envHost, KWeb.DEPLOY.HOST)       // Z_API_HOSTX
             .save(KName.PORT, envPort, Integer.class);                     // Z_API_PORTX
     }

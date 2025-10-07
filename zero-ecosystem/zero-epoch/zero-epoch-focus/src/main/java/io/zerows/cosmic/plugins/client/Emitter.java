@@ -5,7 +5,7 @@ import io.vertx.core.Future;
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.platform.annotations.Memory;
+import io.zerows.platform.annotations.meta.Memory;
 import io.zerows.platform.metadata.KIntegration;
 import io.zerows.support.Ut;
 

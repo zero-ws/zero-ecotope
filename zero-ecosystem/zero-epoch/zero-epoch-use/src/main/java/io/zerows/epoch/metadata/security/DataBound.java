@@ -142,7 +142,7 @@ public class DataBound implements Serializable {
         final JsonObject criteriaJson = Ut.toJObject(criteria);
         if (!criteriaJson.isEmpty()) {
             /*
-             * Contains value here.
+             * Contains get here.
              */
             if (this.criteria.isEmpty()) {
                 /*

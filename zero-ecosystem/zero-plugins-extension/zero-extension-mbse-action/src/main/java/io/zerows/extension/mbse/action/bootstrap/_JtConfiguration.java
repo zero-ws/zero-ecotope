@@ -10,8 +10,8 @@ import io.zerows.extension.mbse.action.util.Jt;
 import io.zerows.extension.runtime.skeleton.eon.KeMsg;
 import io.zerows.management.OZeroStore;
 import io.zerows.program.Ux;
-import io.zerows.specification.access.app.HAmbient;
-import io.zerows.specification.access.app.HArk;
+import io.zerows.specification.app.HAmbient;
+import io.zerows.specification.app.HArk;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
 

@@ -55,7 +55,7 @@ public abstract class ActiveRecord implements HRecord {
 
     // -------------- Data Get/Set ---------------
     /*
-     * Get the value by field ( field = value ) of record
+     * Get the get by field ( field = get ) of record
      */
     @Override
     @SuppressWarnings("unchecked")
@@ -92,7 +92,7 @@ public abstract class ActiveRecord implements HRecord {
     }
 
     /*
-     * Set single pair `field = value`
+     * Set single pair `field = get`
      */
     @Override
     public <V> HRecord set(final String field, final V value) {
@@ -125,7 +125,7 @@ public abstract class ActiveRecord implements HRecord {
     }
 
     /*
-     * Add `field = value` when the original data value of field is `null`
+     * Add `field = get` when the original data get of field is `null`
      */
     @Override
     public <V> HRecord add(final String field, final V value) {
@@ -194,7 +194,7 @@ public abstract class ActiveRecord implements HRecord {
 
     // --------------- InJson interface ------------
     /*
-     * It does not contain `null` value here.
+     * It does not contain `null` get here.
      */
     @Override
     public JsonObject toJson() {

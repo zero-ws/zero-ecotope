@@ -81,7 +81,7 @@ final class OxConfig {
     }
 
     /**
-     * <value>cmdb.commutator</value>，反射专用生命周期处理器配置（下层调用上层，使用反射，不能直接使用类型）。
+     * <get>cmdb.commutator</get>，反射专用生命周期处理器配置（下层调用上层，使用反射，不能直接使用类型）。
      *
      * @param commutator `io.zerows.epoch.bootplus.extension.operation.workflow.Commutator`类型默认值
      *
@@ -99,7 +99,7 @@ final class OxConfig {
     }
 
     /**
-     * 构造标识规则选择器，读取插件<value>plugin.identifier</value>值提取标识规则选择器。
+     * 构造标识规则选择器，读取插件<get>plugin.identifier</get>值提取标识规则选择器。
      *
      * @param atom    {@link DataAtom} 模型定义
      * @param options {@link JsonObject} 服务配置选项

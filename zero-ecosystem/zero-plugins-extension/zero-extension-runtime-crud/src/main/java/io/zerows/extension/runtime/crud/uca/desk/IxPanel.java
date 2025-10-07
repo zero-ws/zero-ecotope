@@ -34,8 +34,8 @@ public class IxPanel {
         this.active = request.active();
         this.standBy = request.standBy();
         /*
-         * module = value
-         * The value is the same as active module, it means that there is not needed
+         * module = get
+         * The get is the same as active module, it means that there is not needed
          * standBy ( Secondary Module )
          *
          * Here are condition for secondary module
@@ -191,7 +191,7 @@ public class IxPanel {
             return activeFuture.compose(a -> standFn.apply((I) a)
                 .compose(s -> {
                     /*
-                     * Check whether outputFn has value
+                     * Check whether outputFn has get
                      */
                     if (Objects.nonNull(outputFn)) {
                         return outputFn.apply((A) a, (S) s);

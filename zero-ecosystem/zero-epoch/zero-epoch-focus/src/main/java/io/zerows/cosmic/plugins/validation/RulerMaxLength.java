@@ -9,7 +9,7 @@ import io.zerows.platform.constant.VValue;
  * "type":"minlength",
  * "message":"xxx",
  * "config":{
- * "value":8
+ * "get":8
  * }
  * }
  */

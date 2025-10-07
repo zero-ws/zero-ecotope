@@ -14,7 +14,7 @@ interface DB_I_SERVICE {
     interface SERVICE_CONFIG extends VPC.aop {
         /**
          * 「动态建模专用」
-         * <value>configuration.operation</value>, ServiceConfig中用于配置操作类型的专用常量
+         * <get>configuration.operation</get>, ServiceConfig中用于配置操作类型的专用常量
          * 操作类型对应到 {@link ChangeFlag}
          * <pre><code>
          *     - ADD: 添加
@@ -26,13 +26,13 @@ interface DB_I_SERVICE {
 
         /**
          * 「动态建模专用」
-         * <value>plugin.plugin</value>，ServiceConfig中配置的标识选择插件，实现接口
+         * <get>plugin.plugin</get>，ServiceConfig中配置的标识选择插件，实现接口
          * {@link Identifier}
          */
         String PLUGIN_IDENTIFIER = "plugin.identifier";
         /**
          * 「动态建模专用」
-         * <value>plugin.component</value>, ServiceConfig中标准插件，通道可配置的触发主插件
+         * <get>plugin.component</get>, ServiceConfig中标准插件，通道可配置的触发主插件
          * 配置如下
          * <pre><code>
          *     {
@@ -48,7 +48,7 @@ interface DB_I_SERVICE {
         String PLUGIN_COMPONENT = "plugin.component";
         /**
          * 「动态建模专用」
-         * <value>plugin.activity</value>, ServiceConfig中配置变更历史插件，对应 X_ACTIVITY 表
+         * <get>plugin.activity</get>, ServiceConfig中配置变更历史插件，对应 X_ACTIVITY 表
          * 配置如下
          * <pre><code>
          *     {
@@ -59,7 +59,7 @@ interface DB_I_SERVICE {
         String PLUGIN_ACTIVITY = "plugin.activity";
         /**
          * 「动态建模专用」
-         * <value>*</value>，ServiceConfig中配置待办插件，对应 `X_TODO` 表，由于TODO是标签所以此处不写todo部分
+         * <get>*</get>，ServiceConfig中配置待办插件，对应 `X_TODO` 表，由于TODO是标签所以此处不写todo部分
          * 配置如下
          * <pre><code>
          *     {
@@ -70,7 +70,7 @@ interface DB_I_SERVICE {
         String PLUGIN_TODO = "plugin.todo";
         /**
          * 「动态建模专用」
-         * <value>plugin.ticket</value>，ServiceConfig中配置待确认单插件，对应新表 `B_TICKET` 和 `X_TODO` 实现跨数据库Join
+         * <get>plugin.ticket</get>，ServiceConfig中配置待确认单插件，对应新表 `B_TICKET` 和 `X_TODO` 实现跨数据库Join
          * 以及二次更新流程
          * <pre><code>
          *     {

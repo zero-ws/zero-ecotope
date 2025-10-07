@@ -92,7 +92,7 @@ public class WebEpsilon<T> implements Serializable {
             ", argType=" + this.argType +
             ", defaultValue=" + this.defaultValue +
             ", annotation=" + this.annotation +
-            ", value=" + this.value +
+            ", get=" + this.value +
             '}';
     }
 }

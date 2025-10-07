@@ -2,9 +2,8 @@ package io.zerows.support.base;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.platform.annotations.HighOrder;
 import io.zerows.platform.enums.EmApp;
-import io.zerows.specification.access.app.HArk;
+import io.zerows.specification.app.HArk;
 import io.zerows.specification.modeling.HAtom;
 import io.zerows.specification.modeling.HRecord;
 
@@ -22,7 +21,7 @@ class _Modeler extends _It {
      *
      * @return JsonObject
      */
-    @HighOrder(_App.class)
+
     public static JsonArray toJArray(final HRecord[] records) {
         return _App.toJArray(records);
     }
@@ -39,7 +38,7 @@ class _Modeler extends _It {
      *
      * @return 缓存键
      */
-    @HighOrder(_App.class)
+
     public static String keyAtom(final HAtom atom, final JsonObject options) {
         return _App.keyAtom(atom, options);
     }
@@ -51,7 +50,7 @@ class _Modeler extends _It {
      *
      * @return 缓存键
      */
-    @HighOrder(_App.class)
+
     public static String keyApp(final HArk ark) {
         return _App.keyApp(ark);
     }
@@ -68,7 +67,7 @@ class _Modeler extends _It {
      *
      * @return 租户ID
      */
-    @HighOrder(_App.class)
+
     public static String keyOwner(final String id) {
         return _App.keyOwner(id);
     }
@@ -88,7 +87,7 @@ class _Modeler extends _It {
      *
      * @return 缓存键
      */
-    @HighOrder(_App.class)
+
     public static JsonObject qrApp(final HArk ark) {
         return _App.qrApp(ark, null);
     }
@@ -110,7 +109,7 @@ class _Modeler extends _It {
      *
      * @return 缓存键
      */
-    @HighOrder(_App.class)
+
     public static JsonObject qrApp(final HArk ark, final EmApp.Mode mode) {
         return _App.qrApp(ark, mode);
     }
@@ -131,7 +130,7 @@ class _Modeler extends _It {
      *
      * @return 缓存键
      */
-    @HighOrder(_App.class)
+
     public static JsonObject qrService(final HArk ark) {
         return _App.qrService(ark, null);
     }
@@ -153,7 +152,7 @@ class _Modeler extends _It {
      *
      * @return 缓存键
      */
-    @HighOrder(_App.class)
+
     public static JsonObject qrService(final HArk ark, final EmApp.Mode mode) {
         return _App.qrService(ark, mode);
     }

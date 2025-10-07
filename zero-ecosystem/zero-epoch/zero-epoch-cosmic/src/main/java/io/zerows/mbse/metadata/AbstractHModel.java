@@ -3,7 +3,7 @@ package io.zerows.mbse.metadata;
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.metadata.KMarkAtom;
 import io.zerows.platform.metadata.KMarkAttribute;
-import io.zerows.specification.access.app.HArk;
+import io.zerows.specification.app.HArk;
 import io.zerows.specification.modeling.HAttribute;
 import io.zerows.specification.modeling.HModel;
 import io.zerows.specification.modeling.HReference;

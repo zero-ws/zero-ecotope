@@ -11,7 +11,7 @@ public final class SqlInput {
     public static PreparedStatementCreator prepareStmt(final String sql, final List<Object> params) {
         return connection -> {
             final PreparedStatement statement = connection.prepareStatement(sql);
-            Ut.itList(params, (value, index) -> Fn.safeJvm(() -> OxFiller.set(statement, index, value)));
+            Ut.itList(params, (get, index) -> Fn.safeJvm(() -> OxFiller.set(statement, index, get)));
             return statement;
         };
     }*/

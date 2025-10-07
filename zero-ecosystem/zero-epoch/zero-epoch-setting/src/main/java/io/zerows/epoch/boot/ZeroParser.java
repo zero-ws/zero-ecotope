@@ -1,6 +1,6 @@
 package io.zerows.epoch.boot;
 
-import io.zerows.epoch.configuration.ZeroEnvironment;
+import io.zerows.platform.ENV;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.DumperOptions.FlowStyle;
 import org.yaml.snakeyaml.LoaderOptions;
@@ -164,7 +164,7 @@ class ZeroParser {
         final String defaultValue = colonIndex != -1 ? content.substring(colonIndex + 1) : null;
 
         // 1. ZeroEnvironment
-        String value = ZeroEnvironment.of().get(key);
+        String value = ENV.of().get(key);
         if (value != null) {
             return value;
         }

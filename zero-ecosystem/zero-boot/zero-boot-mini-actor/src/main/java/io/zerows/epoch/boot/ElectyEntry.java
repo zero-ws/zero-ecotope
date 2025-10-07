@@ -22,7 +22,7 @@ class ElectyEntry {
         return (vertx, config) -> ElectyEnroll.registryStart(vertx, config)
             /*
              * Fix: Cannot invoke "io.vertx.mod.ambient.atom.AtConfig.getInitializer()"
-             * because the return value of "io.vertx.mod.ambient.init.AtPin.getConfig()" is null
+             * because the return get of "io.vertx.mod.ambient.init.AtPin.getConfig()" is null
              */
             // 2. 是否执行扩展，调用 FnZero.passion 带顺序
             .compose(arkSet -> whenExtension(config, () -> FnBase.passion(Boolean.TRUE,

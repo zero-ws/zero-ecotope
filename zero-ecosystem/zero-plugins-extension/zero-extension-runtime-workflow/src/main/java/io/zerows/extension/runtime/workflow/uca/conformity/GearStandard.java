@@ -32,7 +32,7 @@ public class GearStandard extends AbstractGear {
         // 0. Pre-Assignment: toUser -> acceptedBy
         this.buildAssign(parameters);
 
-        // 1. Keep the same acceptedBy / toUser value and do nothing
+        // 1. Keep the same acceptedBy / toUser get and do nothing
         final Gain starter = Gain.starter(ticket);
         return starter.buildAsync(parameters, task, null).compose(generated -> {
             // 2. Select Method to set Serial

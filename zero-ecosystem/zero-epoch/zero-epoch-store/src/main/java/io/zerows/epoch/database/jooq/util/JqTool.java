@@ -6,9 +6,9 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.OLog;
 import io.zerows.component.qr.syntax.Ir;
+import io.zerows.epoch.metadata.MMPojo;
+import io.zerows.epoch.metadata.MMPojoMapping;
 import io.zerows.platform.constant.VString;
-import io.zerows.epoch.metadata.Mirror;
-import io.zerows.epoch.metadata.Mojo;
 import io.zerows.support.Ut;
 
 import java.util.HashSet;
@@ -40,16 +40,16 @@ public class JqTool {
             return Ir.create(data);
         } else {
             // Projection Process
-            final Mojo mojo = Mirror.create(JqTool.class).mount(pojo).mojo();
+            final MMPojo mojo = MMPojoMapping.create(JqTool.class).mount(pojo).mojo();
             return qr(data, mojo);
         }
     }
 
-    public static Ir qr(final JsonObject data, final Mojo mojo) {
+    public static Ir qr(final JsonObject data, final MMPojo mojo) {
         return qr(data, mojo, new HashSet<>());
     }
 
-    public static Ir qr(final JsonObject data, final Mojo mojo, final Set<String> ignoreSet) {
+    public static Ir qr(final JsonObject data, final MMPojo mojo, final Set<String> ignoreSet) {
         if (data.containsKey("projection")) {
             data.put("projection", projection(data.getJsonArray("projection"), mojo, ignoreSet));
         }
@@ -68,12 +68,12 @@ public class JqTool {
         return Objects.isNull(qr.getCriteria()) ? new JsonObject() : qr.getCriteria().toJson();
     }
 
-    public static JsonObject criteria(final JsonObject criteria, final Mojo mojo) {
+    public static JsonObject criteria(final JsonObject criteria, final MMPojo mojo) {
         return criteria(criteria, mojo, new HashSet<>());
     }
 
 
-    public static JsonObject criteria(final JsonObject criteria, final Mojo mojo, final Set<String> ignoreSet) {
+    public static JsonObject criteria(final JsonObject criteria, final MMPojo mojo, final Set<String> ignoreSet) {
         final JsonObject condition = new JsonObject();
         final ConcurrentMap<String, String> mapping = joinMapping(mojo, ignoreSet);
         for (final String field : criteria.fieldNames()) {
@@ -106,7 +106,7 @@ public class JqTool {
         return condition;
     }
 
-    private static JsonArray projection(final JsonArray projections, final Mojo mojo, final Set<String> ignoreSet) {
+    private static JsonArray projection(final JsonArray projections, final MMPojo mojo, final Set<String> ignoreSet) {
         final JsonArray result = new JsonArray();
         final ConcurrentMap<String, String> mapping = joinMapping(mojo, ignoreSet);
         Ut.itJArray(projections, String.class, (item, index) ->
@@ -114,7 +114,7 @@ public class JqTool {
         return result;
     }
 
-    private static JsonArray sorter(final JsonArray sorter, final Mojo mojo, final Set<String> ignoreSet) {
+    private static JsonArray sorter(final JsonArray sorter, final MMPojo mojo, final Set<String> ignoreSet) {
         final JsonArray sorters = new JsonArray();
         final ConcurrentMap<String, String> mapping = joinMapping(mojo, ignoreSet);
         Ut.itJArray(sorter, String.class, (item, index) -> {
@@ -133,7 +133,7 @@ public class JqTool {
         return sorters;
     }
 
-    private static ConcurrentMap<String, String> joinMapping(final Mojo mojo, final Set<String> ignoreSet) {
+    private static ConcurrentMap<String, String> joinMapping(final MMPojo mojo, final Set<String> ignoreSet) {
         // The new mapping that should be transfer
         // sigma -> zSigma
         final ConcurrentMap<String, String> mapping = mojo.getIn();

@@ -1,9 +1,8 @@
 package io.zerows.component.environment;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.platform.metadata.KVar;
-import io.zerows.platform.metadata.KVarSet;
-import io.zerows.specification.configuration.HMature;
+import io.zerows.epoch.metadata.MMVariable;
+import io.zerows.platform.ENV;
 import io.zerows.support.Ut;
 
 import java.util.Objects;
@@ -14,18 +13,18 @@ import java.util.Set;
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
-class MatureEnv implements HMature {
+class MatureEnv implements Mature {
     /*
      * vector 数据结构：
      *   field1 = ENV_NAME1
      *   field2 = ENV_NAME2
      */
     @Override
-    public JsonObject configure(final JsonObject configJ, final KVarSet set) {
+    public JsonObject configure(final JsonObject configJ, final MMVariable.Set set) {
         final Set<String> names = set.names();
         names.stream().filter(field -> {
             // 过滤 envName 为空的情况
-            final KVar attribute = set.attribute(field);
+            final MMVariable attribute = set.attribute(field);
             final String envName = attribute.alias();
             return Ut.isNotNil(envName);
         }).forEach(field -> {
@@ -35,14 +34,14 @@ class MatureEnv implements HMature {
              * 1）先从环境变量中提取 ENV_NAME 的值
              * 2）值不存在考虑默认值
              */
-            final KVar attribute = set.attribute(field);
+            final MMVariable attribute = set.attribute(field);
             this.normalizeValue(configJ, attribute, field);
         });
         return configJ;
     }
 
     private void normalizeValue(final JsonObject configJ,
-                                final KVar attribute, final String field) {
+                                final MMVariable attribute, final String field) {
         final String envName = attribute.alias();
 
         // Default String.class
@@ -54,7 +53,7 @@ class MatureEnv implements HMature {
          * 「P3」valueD：默认值（编程）
          */
         final Object valueC = configJ.getValue(field);
-        final Object valueE = Ut.env(envName, envType);
+        final Object valueE = ENV.of().get(envName, envType);
 
         if (Objects.nonNull(valueE)) {
             // P1

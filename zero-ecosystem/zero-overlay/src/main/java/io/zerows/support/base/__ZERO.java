@@ -1,7 +1,7 @@
 package io.zerows.support.base;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.platform.annotations.Memory;
+import io.zerows.platform.annotations.meta.Memory;
 
 @SuppressWarnings("all")
 interface CACHE {

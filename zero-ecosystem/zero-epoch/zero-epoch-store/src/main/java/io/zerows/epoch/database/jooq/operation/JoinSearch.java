@@ -1,15 +1,15 @@
 package io.zerows.epoch.database.jooq.operation;
 
 import io.vertx.core.json.JsonArray;
+import io.zerows.component.environment.DevEnv;
 import io.zerows.component.log.OLog;
 import io.zerows.component.qr.Pager;
 import io.zerows.component.qr.syntax.Ir;
-import io.zerows.component.environment.DevEnv;
 import io.zerows.epoch.database.jooq.JooqDsl;
 import io.zerows.epoch.database.jooq.condition.JooqCond;
 import io.zerows.epoch.database.jooq.util.JqAnalyzer;
 import io.zerows.epoch.database.jooq.util.JqOut;
-import io.zerows.epoch.metadata.Mojo;
+import io.zerows.epoch.metadata.MMPojo;
 import io.zerows.support.Ut;
 import org.jooq.Condition;
 import org.jooq.DSLContext;
@@ -67,7 +67,7 @@ class JoinSearch {
         return Long.valueOf(context.fetchCount(started));
     }
 
-    JsonArray searchA(final Ir qr, final Mojo mojo) {
+    JsonArray searchA(final Ir qr, final MMPojo mojo) {
         /*
          * DSLContext
          */

@@ -44,7 +44,7 @@ public class InquirerForQaS implements Inquirer<ConcurrentMap<String, Method>> {
             .filter(method -> method.isAnnotationPresent(Address.class))
             .forEach(method -> {
                 final Annotation address = method.getAnnotation(Address.class);
-                final String value = Ut.invoke(address, "value");
+                final String value = Ut.invoke(address, "get");
                 result.put(value, method);
             });
         return result;

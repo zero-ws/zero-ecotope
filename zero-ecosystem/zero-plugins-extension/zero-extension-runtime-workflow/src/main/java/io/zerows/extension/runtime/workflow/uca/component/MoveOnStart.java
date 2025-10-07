@@ -27,7 +27,7 @@ public class MoveOnStart extends AbstractMoveOn {
              * Input `taskId` is null, in this kind of situation the workflow has not been
              * started, the `WMove` is based on `StartEvent`
              *
-             * After start() calling, the `move` has the configured value but
+             * After start() calling, the `move` has the configured get but
              * `ProcessInstance/Task` are both null.
              *
              * Following code should locate the correct `WRule` for parameters, the collection

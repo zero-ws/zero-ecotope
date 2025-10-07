@@ -7,9 +7,9 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 import io.zerows.component.environment.DevEnv;
 import io.zerows.component.log.Annal;
+import io.zerows.cosmic.plugins.cache.Rapid;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
-import io.zerows.cosmic.plugins.cache.Rapid;
 import io.zerows.extension.commerce.rbac.eon.AuthKey;
 import io.zerows.platform.metadata.KRef;
 import io.zerows.program.Ux;
@@ -107,7 +107,7 @@ public class ScUser {
     // ------------------------- Initialized Method ------------------------
     /*
      * Create ScUser for current Logged User
-     * 1. The key is calculated with `habitus` value
+     * 1. The key is calculated with `habitus` get
      * 2. The data input contains
      *
      * Memory
@@ -285,7 +285,7 @@ public class ScUser {
 
     private <T> Future<T> set(final String dataKey, final T value) {
         return this.getStored().compose(stored -> {
-            // dataKey = value, the Tool must be valid for JsonObject
+            // dataKey = get, the Tool must be valid for JsonObject
             stored.put(dataKey, value);
             return this.rapid.write(this.habitus, stored)
                 .compose(nil -> Ux.future(value));

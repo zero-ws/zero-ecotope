@@ -3,11 +3,11 @@ package io.zerows.epoch.database.jooq.operation;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.constant.KName;
 import io.zerows.component.qr.syntax.Ir;
+import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.database.jooq.util.JqTool;
-import io.zerows.epoch.metadata.Mirror;
-import io.zerows.epoch.metadata.Mojo;
+import io.zerows.epoch.metadata.MMPojo;
+import io.zerows.epoch.metadata.MMPojoMapping;
 import io.zerows.support.Ut;
 
 import java.util.Objects;
@@ -22,7 +22,7 @@ public final class UxJoin {
 
     private transient final ConcurrentMap<Class<?>, String> pojoMap
         = new ConcurrentHashMap<>();
-    private transient Mojo merged = null;
+    private transient MMPojo merged = null;
 
     private UxJoin(final String file) {
         if (Ut.isNotNil(file)) {
@@ -94,10 +94,10 @@ public final class UxJoin {
             // 此处直接返回，由于传入了非法的 pojo
             return this;
         }
-        final Mojo created = Mirror.create(UxJoin.class).mount(pojo).mojo();
+        final MMPojo created = MMPojoMapping.create(UxJoin.class).mount(pojo).mojo();
         this.pojoMap.put(daoCls, pojo);
         if (Objects.isNull(this.merged)) {
-            this.merged = new Mojo();
+            this.merged = new MMPojo();
         }
         this.merged.bind(created).bindColumn(created.getInColumn());
         this.pojoMap.forEach(this.joinder::pojo);
@@ -221,7 +221,7 @@ public final class UxJoin {
         if (Ut.isNil(pojoFile)) {
             return field;
         } else {
-            final Mojo mojo = Mirror.create(UxJoin.class).mount(pojoFile).mojo();
+            final MMPojo mojo = MMPojoMapping.create(UxJoin.class).mount(pojoFile).mojo();
             if (Objects.isNull(mojo)) {
                 return field;
             } else {

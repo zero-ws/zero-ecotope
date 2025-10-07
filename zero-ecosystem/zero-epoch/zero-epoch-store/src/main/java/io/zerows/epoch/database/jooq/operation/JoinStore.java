@@ -1,12 +1,12 @@
 package io.zerows.epoch.database.jooq.operation;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.platform.metadata.Kv;
 import io.zerows.epoch.database.jooq.JooqDsl;
 import io.zerows.epoch.database.jooq.JooqInfix;
 import io.zerows.epoch.database.jooq.util.JqAnalyzer;
-import io.zerows.epoch.metadata.Mojo;
+import io.zerows.epoch.metadata.MMPojo;
 import io.zerows.platform.exception._60050Exception501NotSupport;
+import io.zerows.platform.metadata.Kv;
 import org.jooq.Field;
 import org.jooq.Table;
 import org.jooq.impl.DSL;
@@ -116,7 +116,7 @@ class JoinStore {
         if (Objects.nonNull(tableName)) {
             final JqAnalyzer analyzer = this.daoAnalyzer.get(daoCls);
             String fieldFound;
-            final Mojo mojo = analyzer.pojo();
+            final MMPojo mojo = analyzer.pojo();
             if (Objects.isNull(mojo)) {
                 // Keep
                 fieldFound = field;
@@ -251,7 +251,7 @@ class JoinStore {
 
     /*
      * The record is `firstAnalyzer` data record
-     * 1) Extract primary key value ( Joined )
+     * 1) Extract primary key get ( Joined )
      */
     JsonObject dataJoin(final JsonObject record) {
         Objects.requireNonNull(record);

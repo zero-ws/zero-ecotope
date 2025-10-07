@@ -128,11 +128,11 @@ class ExData {
              * {
              *      "cols": "xx",
              *      "rows": "xxx",
-             *      "value": ""
+             *      "get": ""
              * }
              */
             final JsonObject define = (JsonObject) value;
-            final Object input = define.getValue("value");
+            final Object input = define.getValue("get");
             /*
              * Processing `cols`, `rows`
              */

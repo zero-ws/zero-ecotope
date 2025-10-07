@@ -1,6 +1,6 @@
 package io.zerows.specification.vital;
 
-import io.zerows.specification.access.app.HMod;
+import io.zerows.specification.app.HMod;
 import io.zerows.specification.atomic.HExecutor;
 
 /**

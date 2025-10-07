@@ -78,7 +78,7 @@ public class KMarkAtom {
             if (Objects.nonNull(tag)) {
                 final Boolean result = function.apply(tag);
                 if (Objects.nonNull(result) && defaultV.booleanValue() == result.booleanValue()) {
-                    // Skip all NULL value
+                    // Skip all NULL get
                     set.add(field);
                 }
             }

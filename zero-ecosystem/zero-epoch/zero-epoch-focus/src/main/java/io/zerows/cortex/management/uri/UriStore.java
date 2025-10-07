@@ -58,7 +58,7 @@ class UriStore {
                 /*
                  * Worker Address Injection
                  */
-                final String address = Ut.invoke(annotation, "value");
+                final String address = Ut.invoke(annotation, "get");
                 if (Objects.nonNull(address) && receiptMap.containsKey(address)) {
                     /*
                      * Worker Build

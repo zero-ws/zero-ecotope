@@ -44,7 +44,7 @@ public interface Ruler {
      * Verify each field for @BodyParam
      *
      * @param field Input field of the data structure
-     * @param value The input field reflect value literal
+     * @param value The input field reflect get literal
      * @param rule  The rule that has been defined.
      *
      * @return WebException that the validated error here.

@@ -3,7 +3,7 @@ package io.zerows.mbse.metadata;
 import io.r2mo.typed.cc.Cc;
 import io.zerows.component.compare.Vs;
 import io.zerows.platform.metadata.KMarkAtom;
-import io.zerows.specification.access.app.HArk;
+import io.zerows.specification.app.HArk;
 import io.zerows.specification.modeling.HAtom;
 import io.zerows.specification.modeling.HAttribute;
 import io.zerows.specification.modeling.HModel;

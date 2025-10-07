@@ -2,8 +2,8 @@ package io.zerows.platform.metadata;
 
 import io.vertx.core.Future;
 import io.zerows.platform.enums.EmApp;
-import io.zerows.specification.access.app.HApp;
-import io.zerows.specification.access.app.HArk;
+import io.zerows.specification.app.HApp;
+import io.zerows.specification.app.HArk;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HRegistry;
 import io.zerows.specification.development.ncloud.HCube;

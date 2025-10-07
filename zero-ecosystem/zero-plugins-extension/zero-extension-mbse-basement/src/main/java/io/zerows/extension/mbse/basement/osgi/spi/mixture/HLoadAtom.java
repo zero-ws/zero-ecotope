@@ -5,8 +5,8 @@ import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.eon.AoCache;
 import io.zerows.mbse.exception._80510Exception404ModelNotFound;
 import io.zerows.platform.metadata.KPivot;
-import io.zerows.specification.access.app.HAmbient;
-import io.zerows.specification.access.app.HArk;
+import io.zerows.specification.app.HAmbient;
+import io.zerows.specification.app.HArk;
 import io.zerows.specification.modeling.HAtom;
 import io.zerows.specification.modeling.operation.HLoad;
 

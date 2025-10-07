@@ -67,7 +67,7 @@ public class DiPlugin {
         String name;
         if (clazz.isAnnotationPresent(Named.class)) {
             final Annotation annotation = clazz.getAnnotation(Named.class);
-            name = Ut.invoke(annotation, "value");
+            name = Ut.invoke(annotation, "get");
         } else {
             name = null;
         }

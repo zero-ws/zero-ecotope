@@ -28,21 +28,21 @@ public interface RuleStub {
      *         "v": {
      *             "mapping": {},
      *             "config": {},
-     *             "value": ...
+     *             "get": ...
      *         },
      *         "h": {
      *             "mapping": {},
      *             "config": {},
-     *             "value": ...
+     *             "get": ...
      *         },
      *         "q": {
      *             "mapping": {},
      *             "config": {},
-     *             "value": ...
+     *             "get": ...
      *         }
      *     }
      * }
-     * 3) The value of each node must be calculated based on `owner` and stored `resource`
+     * 3) The get of each node must be calculated based on `owner` and stored `resource`
      */
     Future<JsonObject> regionAsync(JsonObject pathData, ScOwner owner);
 

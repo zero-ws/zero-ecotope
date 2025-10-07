@@ -5,7 +5,7 @@ import io.zerows.epoch.boot.ZeroLauncher;
 import io.zerows.platform.enums.EmBoot;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HEnergy;
-import io.zerows.specification.configuration.HMature;
+import io.zerows.specification.configuration.HLauncher;
 import io.zerows.support.Ut;
 import io.zerows.support.base.UtBase;
 import lombok.extern.slf4j.Slf4j;
@@ -55,7 +55,7 @@ public class ZeroConfigurer<T> {
         Optional.ofNullable(preCls).ifPresent(pClass -> {
             // 配置绑定
             configuration.pre(pClass);
-            final HMature.HPre<T> pre = UtBase.singleton(pClass);
+            final HLauncher.Wait<T> pre = UtBase.singleton(pClass);
             pre.beforeStart(started, configuration.options());
         });
     }

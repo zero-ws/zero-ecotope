@@ -13,8 +13,8 @@ import io.zerows.extension.runtime.ambient.agent.service.DatumStub;
 import io.zerows.platform.enums.Environment;
 import io.zerows.platform.metadata.KDS;
 import io.zerows.program.Ux;
-import io.zerows.specification.access.app.HApp;
-import io.zerows.specification.access.app.HArk;
+import io.zerows.specification.app.HApp;
+import io.zerows.specification.app.HArk;
 import io.zerows.specification.modeling.operation.HDao;
 import io.zerows.support.Ut;
 

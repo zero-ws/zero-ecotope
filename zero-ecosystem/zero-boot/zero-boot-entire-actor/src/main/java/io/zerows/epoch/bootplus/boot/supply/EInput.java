@@ -5,8 +5,8 @@ import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.metadata.KGlobal;
 import io.zerows.epoch.constant.KName;
-import io.zerows.specification.access.app.HApp;
-import io.zerows.specification.access.app.HArk;
+import io.zerows.specification.app.HApp;
+import io.zerows.specification.app.HArk;
 
 import java.util.Objects;
 

@@ -1,6 +1,6 @@
 package io.zerows.specification.development.program;
 
-import io.zerows.platform.annotations.One2One;
+import io.zerows.platform.annotations.meta.One2One;
 import io.zerows.specification.development.compiled.HLibrary;
 import io.zerows.specification.security.identity.HOwner;
 

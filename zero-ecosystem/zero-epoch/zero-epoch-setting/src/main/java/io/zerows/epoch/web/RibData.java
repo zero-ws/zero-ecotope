@@ -29,7 +29,7 @@ class RibData {
             final Object value = data.getValue(VName.DATA);
             if (Objects.isNull(value)) {
                 /*
-                 * `data` key value is null.
+                 * `data` key get is null.
                  */
                 return null;
             } else {
@@ -171,7 +171,7 @@ class RibData {
          */
         if (null == argIndex) {
             /*
-             * Find the first value of type JsonObject / JsonArray ( Complex Smart workflow )
+             * Find the first get of type JsonObject / JsonArray ( Complex Smart workflow )
              */
             found = findSmart(itRef);
             if (Objects.isNull(found)) {
@@ -199,14 +199,14 @@ class RibData {
     private static Object findSmart(final JsonObject itPart) {
         /*
          * Find first complex object reference
-         * 1. The first value of JsonObject
-         * 2. The first value of JsonArray
+         * 1. The first get of JsonObject
+         * 2. The first get of JsonArray
          */
         final Object body = itPart.fieldNames().stream()
             .filter(Objects::nonNull)
             .map(itPart::getValue)
             /*
-             * Predicate to mock whether value is JsonObject
+             * Predicate to mock whether get is JsonObject
              * If JsonObject, then find the first JsonObject as body
              */
             .filter(value -> value instanceof JsonObject || value instanceof JsonArray)

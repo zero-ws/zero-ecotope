@@ -5,11 +5,11 @@ import io.zerows.platform.constant.VValue;
 import io.zerows.platform.enums.EmApp;
 import io.zerows.platform.exception._40103Exception500ConnectAmbient;
 import io.zerows.support.base.UtBase;
-import io.zerows.specification.access.HBelong;
-import io.zerows.specification.access.app.HArk;
-import io.zerows.specification.access.cloud.HFrontier;
-import io.zerows.specification.access.cloud.HGalaxy;
-import io.zerows.specification.access.cloud.HSpace;
+import io.zerows.specification.atomic.HBelong;
+import io.zerows.specification.app.HArk;
+import io.zerows.specification.cloud.HFrontier;
+import io.zerows.specification.cloud.HGalaxy;
+import io.zerows.specification.cloud.HSpace;
 
 import java.util.Collection;
 import java.util.Optional;

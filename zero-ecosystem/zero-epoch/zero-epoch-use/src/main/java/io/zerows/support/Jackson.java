@@ -209,7 +209,7 @@ final class Jackson {
                 final String fieldName;
                 if (item.isAnnotationPresent(JsonProperty.class)) {
                     final Annotation annotation = item.getAnnotation(JsonProperty.class);
-                    fieldName = Ut.invoke(annotation, "value");
+                    fieldName = Ut.invoke(annotation, "get");
                 } else {
                     fieldName = item.getName();
                 }

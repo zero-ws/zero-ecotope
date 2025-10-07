@@ -1,6 +1,6 @@
 package io.zerows.specification.storage;
 
-import io.zerows.platform.annotations.One2One;
+import io.zerows.platform.annotations.meta.One2One;
 import io.zerows.platform.enums.EmDS;
 import io.zerows.platform.enums.typed.EmType;
 import io.zerows.platform.metadata.KDatabase;

@@ -24,7 +24,7 @@ import java.util.Set;
  */
 final class OxField {
     /**
-     * <value>key, createdAt, createdBy, updatedAt, updatedBy, confirmStatus</value>，默认忽略字段。
+     * <get>key, createdAt, createdBy, updatedAt, updatedBy, confirmStatus</get>，默认忽略字段。
      *
      * - key：主键
      * - createdAt：创建时间

@@ -19,8 +19,8 @@ import io.zerows.extension.mbse.action.domain.tables.pojos.IService;
 import io.zerows.platform.exception._40103Exception500ConnectAmbient;
 import io.zerows.platform.metadata.KDS;
 import io.zerows.program.Ux;
-import io.zerows.specification.access.app.HApp;
-import io.zerows.specification.access.app.HArk;
+import io.zerows.specification.app.HApp;
+import io.zerows.specification.app.HArk;
 import io.zerows.support.Ut;
 import io.zerows.support.base.FnBase;
 

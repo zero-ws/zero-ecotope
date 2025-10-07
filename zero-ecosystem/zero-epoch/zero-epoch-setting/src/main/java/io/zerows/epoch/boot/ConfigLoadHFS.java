@@ -1,7 +1,7 @@
 package io.zerows.epoch.boot;
 
 import io.zerows.epoch.basicore.YmConfiguration;
-import io.zerows.specification.access.app.HApp;
+import io.zerows.specification.app.HApp;
 
 /**
  * @author lang : 2025-10-06

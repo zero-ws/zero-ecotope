@@ -14,8 +14,8 @@ import io.zerows.platform.metadata.KDictConfig;
 import io.zerows.platform.metadata.KIdentity;
 import io.zerows.platform.metadata.KMap;
 import io.zerows.program.Ux;
-import io.zerows.specification.access.app.HApp;
-import io.zerows.specification.access.app.HArk;
+import io.zerows.specification.app.HApp;
+import io.zerows.specification.app.HArk;
 import io.zerows.support.Ut;
 
 import java.util.Objects;

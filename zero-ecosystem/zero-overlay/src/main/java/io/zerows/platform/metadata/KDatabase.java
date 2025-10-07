@@ -7,6 +7,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.Annal;
 import io.zerows.integrated.jackson.JsonObjectDeserializer;
 import io.zerows.integrated.jackson.JsonObjectSerializer;
+import io.zerows.platform.ENV;
 import io.zerows.platform.EnvironmentVariable;
 import io.zerows.platform.annotations.ClassYml;
 import io.zerows.platform.constant.VOption;
@@ -82,7 +83,7 @@ public class KDatabase implements Serializable, HCopier<KDatabase>, HJson {
     }
 
     public String getSmartPassword() {
-        final Boolean enabled = UtBase.envWith(EnvironmentVariable.HED_ENABLED, false, Boolean.class);
+        final Boolean enabled = ENV.of().get(EnvironmentVariable.HED_ENABLED, false, Boolean.class);
         this.logger().info("[ HED ] Encrypt of HED enabled: {0}", enabled);
         if (enabled) {
             // HED_ENABLED=true

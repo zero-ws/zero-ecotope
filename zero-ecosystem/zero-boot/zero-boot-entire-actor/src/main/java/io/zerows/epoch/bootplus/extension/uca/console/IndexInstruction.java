@@ -15,8 +15,8 @@ import io.zerows.plugins.common.shell.refine.Sl;
 import io.zerows.plugins.store.elasticsearch.ElasticSearchClient;
 import io.zerows.plugins.store.elasticsearch.ElasticSearchInfix;
 import io.zerows.program.Ux;
-import io.zerows.specification.access.app.HApp;
-import io.zerows.specification.access.app.HArk;
+import io.zerows.specification.app.HApp;
+import io.zerows.specification.app.HArk;
 import io.zerows.specification.modeling.HRecord;
 import io.zerows.specification.modeling.operation.HDao;
 

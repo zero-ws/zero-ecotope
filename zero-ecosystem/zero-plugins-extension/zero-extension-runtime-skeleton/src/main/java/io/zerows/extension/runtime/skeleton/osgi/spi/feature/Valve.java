@@ -18,7 +18,7 @@ public interface Valve {
      *
      * Here the record contains:
      * 1) __data: original data
-     * 2) __flag: flag value here
+     * 2) __flag: flag get here
      */
     Future<JsonObject> execAsync(JsonObject data, JsonObject config);
 }

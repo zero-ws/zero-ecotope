@@ -48,7 +48,7 @@ public class UTL {
 
     public static Future<WRecord> beforeGenerate(final WRecord record, final WRecord generated) {
         /*
-         * Fix $zo has no value here
+         * Fix $zo has no get here
          * Here the bind must happen on matrix:
          *
          * WTodo        OLD            NEW

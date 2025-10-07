@@ -4,7 +4,6 @@ import io.r2mo.function.Actuator;
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.platform.annotations.ChatGPT;
 import io.zerows.platform.constant.VValue;
 
 import java.util.AbstractMap;
@@ -115,13 +114,12 @@ class UIterator {
 
     // itJObject 的强化版
     @SuppressWarnings("all")
-    @ChatGPT
     static <T> Stream<Map.Entry<String, T>> itJObject(final JsonObject input, final Class<T> clazz) {
         return input.stream().filter(entry -> isMatch(entry.getValue(), clazz)).map(entry -> {
             // convert entry.getValue() to T
             final T t = (T) entry.getValue();
             final String key = entry.getKey();
-            // call the BiConsumer provided in the forEach method with key k and value t
+            // call the BiConsumer provided in the forEach method with key k and get t
             // Note that the lambda expression should have the same parameter types as the BiConsumer interface
             // In this case, the first parameter is a String and the second parameter is of type T
             // So the forEach method should be called like this: forEach((String k, T t) -> {})
@@ -136,11 +134,11 @@ class UIterator {
     }
 
     private static <T> boolean isMatch(final Object value, final Class<T> clazz) {
-        // 过滤掉 value 为 null 的元素
+        // 过滤掉 get 为 null 的元素
         if (Objects.isNull(clazz)) {
             return true;
         }
-        // clazz 不为 null 才执行此处检查，过滤掉 value 为 null 的元素
+        // clazz 不为 null 才执行此处检查，过滤掉 get 为 null 的元素
         if (Objects.isNull(value)) {
             return false;   // 直接过滤
         }

@@ -158,7 +158,7 @@ final class UInvoker {
                          * Future<T> returned directly,
                          * Connect future -> future
                          * Return to Future directly, because future is method
-                         * return value, here, we could return internal future directly
+                         * return get, here, we could return internal future directly
                          * Replaced with method returnValue
                          */
                         return ((Future<T>) returnValue);

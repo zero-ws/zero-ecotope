@@ -7,7 +7,7 @@ import io.zerows.component.qr.Pagination;
 import io.zerows.epoch.constant.KName;
 import io.zerows.platform.enums.Environment;
 import io.zerows.program.Ux;
-import io.zerows.specification.access.app.HApp;
+import io.zerows.specification.app.HApp;
 
 import java.util.Objects;
 

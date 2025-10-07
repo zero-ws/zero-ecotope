@@ -196,7 +196,7 @@ public class KCatena implements Serializable {
      *     "ui":            "ui -> webComponent，主组件配置处理",
      *     "key":           "input -> 输入主键，对应 S_PATH",
      *     "label":         "input -> 输入名称，对应 S_PATH",
-     *     "value":         "input -> 输入编码，对应 S_PATH",
+     *     "get":         "input -> 输入编码，对应 S_PATH",
      *     "datum":         {
      *          // "S_PATH对象本身数据"
      *     }
@@ -234,7 +234,7 @@ public class KCatena implements Serializable {
          * webComponent     ->      ui
          * key              ->      key
          * name             ->      label
-         * code             ->      value
+         * code             ->      get
          * datum            ->      {} get
          */
         normalized.put(KName.Rbac.UI, Ut.valueString(uiSurface, KName.Component.WEB_COMPONENT));

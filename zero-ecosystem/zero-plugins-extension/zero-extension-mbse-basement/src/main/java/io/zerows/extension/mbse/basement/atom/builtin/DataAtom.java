@@ -5,7 +5,7 @@ import io.zerows.mbse.metadata.AbstractHAtom;
 import io.zerows.extension.mbse.basement.atom.Model;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MModel;
 import io.zerows.extension.mbse.basement.util.Ao;
-import io.zerows.specification.access.app.HApp;
+import io.zerows.specification.app.HApp;
 
 /**
  * 内部使用的元数据分析工具，提供

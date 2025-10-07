@@ -1,5 +1,8 @@
 package io.zerows.specification.configuration;
 
+import io.zerows.support.base.UtBase;
+
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -23,7 +26,25 @@ public interface HEnvironment {
      */
     String get(String key);
 
-    Integer getInt(String key);
+    default String get(final String name, final String defaultValue) {
+        return this.get(name, defaultValue, String.class);
+    }
+
+    default <T> T get(final String name, final T defaultValue, final Class<?> type) {
+        final String envValue = this.get(name);
+        if (UtBase.isNil(envValue)) {
+            return defaultValue;
+        }
+        final T value = UtBase.valueT(envValue, type);
+        if (Objects.isNull(value)) {
+            return defaultValue;
+        }
+        return value;
+    }
+
+    default <T> T get(final String name, final Class<T> type) {
+        return this.get(name, null, type);
+    }
 
     /**
      * 获取所有环境变量的键集合

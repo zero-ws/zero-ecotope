@@ -19,7 +19,7 @@ public class ConfineKind implements Confine {
      *     "phase": "AFTER / BEFORE",
      *     "kind": "维度字段名，一般用于分类"
      *     "data": {
-     *          "value": "seekKey"
+     *          "get": "seekKey"
      *     }
      * }
      * 该组件的 data 节点只会计算一个 seekKey，在 S_VISITANT 中 seekKey 是一个唯一键，

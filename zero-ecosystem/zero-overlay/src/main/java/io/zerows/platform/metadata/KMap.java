@@ -4,6 +4,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.enums.EmAop;
 import io.zerows.support.base.UtBase;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -42,6 +43,7 @@ import java.util.concurrent.ConcurrentMap;
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Data
 public class KMap implements Serializable {
     /** 根节点 {@link KMapping} */
     private final KMapping root = new KMapping();
@@ -88,7 +90,7 @@ public class KMap implements Serializable {
              * Content mapping `Map` here
              */
             input.fieldNames().stream()
-                /* Only stored JsonObject value here */
+                /* Only stored JsonObject get here */
                 .filter(field -> input.getValue(field) instanceof JsonObject)
                 .forEach(field -> {
                     final JsonObject fieldValue = input.getJsonObject(field);
@@ -101,20 +103,6 @@ public class KMap implements Serializable {
                 });
         }
         return this;
-    }
-
-    /*
-     * 1) MappingMode
-     * 2) Class<?>
-     * 3) DualMapping ( Bind Life Cycle )
-     * 4) valid() -> boolean Check whether the mapping is enabled.
-     */
-    public EmAop.Effect getMode() {
-        return this.mode;
-    }
-
-    public Class<?> getComponent() {
-        return this.component;
     }
 
     public KMap bind(final EmAop.Effect mode) {
@@ -169,7 +157,7 @@ public class KMap implements Serializable {
     }
 
     /*
-     * Get value by from key, get to value
+     * Get get by from key, get to get
      */
     public String to(final String from) {
         return this.root.to(from);

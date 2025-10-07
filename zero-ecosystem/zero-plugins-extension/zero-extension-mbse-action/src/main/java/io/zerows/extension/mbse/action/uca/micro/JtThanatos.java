@@ -19,7 +19,7 @@ import io.zerows.platform.metadata.KRef;
  * - CodeStore -> @Job
  * - ExtensionStore -> JtHypnos ( Database stored ) -> ( Job + Service )
  */
-// @Job(value = JobType.CONTAINER)
+// @Job(get = JobType.CONTAINER)
 public class JtThanatos extends AbstractMission {
     private transient final JtMonitor monitor = JtMonitor.create(this.getClass());
 

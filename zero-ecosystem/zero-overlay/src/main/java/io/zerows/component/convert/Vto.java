@@ -1,7 +1,7 @@
 package io.zerows.component.convert;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.platform.annotations.Memory;
+import io.zerows.platform.annotations.meta.Memory;
 
 /*
  * Vto date here

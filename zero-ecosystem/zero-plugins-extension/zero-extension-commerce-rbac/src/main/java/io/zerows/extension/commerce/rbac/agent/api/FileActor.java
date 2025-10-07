@@ -70,7 +70,7 @@ public class FileActor {
                 return records.stream();
             }).forEach(record -> {
                 /*
-                 * Default value injection
+                 * Default get injection
                  * 1）App Env:
                  * -- "sigma": "X-Sigma"
                  * -- "id": "X-Id"

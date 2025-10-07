@@ -1,14 +1,14 @@
 package io.zerows.cosmic.plugins.websocket;
 
-import io.zerows.platform.enums.RemindType;
-import io.zerows.epoch.annotations.Subscribe;
 import io.zerows.epoch.annotations.Address;
+import io.zerows.epoch.annotations.Subscribe;
 import io.zerows.epoch.assembly.ExtractToolMethod;
 import io.zerows.epoch.assembly.ExtractToolVerifier;
 import io.zerows.epoch.assembly.Extractor;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.metadata.KEmptyInstance;
+import io.zerows.epoch.metadata.XEmptyInstance;
 import io.zerows.platform.constant.VString;
+import io.zerows.platform.enums.RemindType;
 import io.zerows.support.Ut;
 
 import java.lang.annotation.Annotation;
@@ -46,7 +46,7 @@ public class SockExtractor implements Extractor<Set<Remind>> {
         final Annotation annotation = method.getDeclaredAnnotation(Subscribe.class);
         String address = Ut.invoke(annotation, KName.VALUE);
         /*
-         * If the address is not start with "/", the system convert the address value
+         * If the address is not start with "/", the system convert the address get
          * from direct address to the normalized path.
          *
          * For example:
@@ -74,7 +74,7 @@ public class SockExtractor implements Extractor<Set<Remind>> {
         if (Ut.isNotNil(inputAddress)) {
             remind.setAddress(inputAddress);
             final Class<?> inputCls = Ut.invoke(annotation, "input");
-            if (KEmptyInstance.class != inputCls) {
+            if (XEmptyInstance.class != inputCls) {
                 remind.setInput(inputCls);
             }
         }

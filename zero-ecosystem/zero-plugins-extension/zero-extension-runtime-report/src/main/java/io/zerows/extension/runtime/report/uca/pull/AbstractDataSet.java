@@ -82,7 +82,7 @@ public abstract class AbstractDataSet implements DataSet {
             /*
              * {
              *     "field": {
-             *         "value": {
+             *         "get": {
              *         }
              *     }
              * }

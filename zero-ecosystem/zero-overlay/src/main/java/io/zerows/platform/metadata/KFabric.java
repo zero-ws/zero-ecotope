@@ -304,7 +304,7 @@ public class KFabric {
     }
 
     /*
-     * Check whether there existing the `keyField` = value
+     * Check whether there existing the `keyField` = get
      * record in fixed dictName of our DictFabric
      */
     public boolean itemExist(final String dictName, final String value) {

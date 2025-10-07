@@ -3,9 +3,9 @@ package io.zerows.component.destine;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.platform.annotations.Memory;
 import io.zerows.epoch.metadata.KJoin;
 import io.zerows.epoch.metadata.KPoint;
+import io.zerows.platform.annotations.meta.Memory;
 
 /**
  * 「Hyphen翻译」练字符 -，此处表示「配置连接点」

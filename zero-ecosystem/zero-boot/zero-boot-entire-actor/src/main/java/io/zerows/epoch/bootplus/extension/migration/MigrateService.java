@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.bootplus.extension.refine.Ox;
 import io.zerows.platform.enums.Environment;
 import io.zerows.program.Ux;
-import io.zerows.specification.access.app.HArk;
+import io.zerows.specification.app.HArk;
 
 public class MigrateService implements Migrate {
     private transient Environment environment;

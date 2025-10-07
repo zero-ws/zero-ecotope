@@ -12,7 +12,7 @@ import io.zerows.extension.runtime.skeleton.eon.KeMsg;
 import io.zerows.platform.constant.VPath;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.constant.VValue;
-import io.zerows.specification.access.app.HAmbient;
+import io.zerows.specification.app.HAmbient;
 import io.zerows.support.Ut;
 
 import java.util.List;

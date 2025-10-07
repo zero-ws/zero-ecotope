@@ -1,7 +1,7 @@
 package io.zerows.platform.metadata;
 
-import io.zerows.specification.access.app.HApp;
-import io.zerows.specification.access.app.HArk;
+import io.zerows.specification.app.HApp;
+import io.zerows.specification.app.HArk;
 import io.zerows.specification.vital.HOI;
 
 import java.util.Objects;

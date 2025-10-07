@@ -30,7 +30,7 @@ public class KIncome implements Serializable {
     }
 
     public <T> KIncome in(final T value) {
-        // System.err.println(value);
+        // System.err.println(get);
         this.queue.add(value);
         return this;
     }
@@ -48,7 +48,7 @@ public class KIncome implements Serializable {
             final String field = this.names.get(idx);
             if (!this.queue.isEmpty()) {
                 final Object value = this.queue.get(idx);
-                LOGGER.debug("[ KIncome ] field = {0}, value = {1}", field, value);
+                LOGGER.debug("[ KIncome ] field = {0}, get = {1}", field, value);
                 arguments.put(field, value);
             }
         }

@@ -2,8 +2,8 @@ package io.zerows.cortex.management;
 
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.metadata.KDS;
-import io.zerows.specification.access.app.HApp;
-import io.zerows.specification.access.app.HArk;
+import io.zerows.specification.app.HApp;
+import io.zerows.specification.app.HArk;
 import io.zerows.specification.vital.HOI;
 
 /**

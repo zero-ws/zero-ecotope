@@ -1,13 +1,14 @@
 package io.zerows.support.base;
 
 import io.vertx.core.json.JsonObject;
+import io.zerows.platform.ENV;
 import io.zerows.platform.EnvironmentVariable;
 import io.zerows.platform.constant.VName;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.constant.VValue;
 import io.zerows.platform.enums.EmApp;
-import io.zerows.specification.access.app.HApp;
-import io.zerows.specification.access.app.HArk;
+import io.zerows.specification.app.HApp;
+import io.zerows.specification.app.HArk;
 import io.zerows.specification.modeling.HAtom;
 import io.zerows.specification.vital.HOI;
 
@@ -33,7 +34,7 @@ class MContext {
     }
 
     static String keyOwner(final String id) {
-        String valueOwner = UtBase.envWith(EnvironmentVariable.Z_TENANT, id);
+        String valueOwner = ENV.of().get(EnvironmentVariable.Z_TENANT, id);
         if (UtBase.isNil(valueOwner)) {
             valueOwner = VValue.DEFAULT;
         }

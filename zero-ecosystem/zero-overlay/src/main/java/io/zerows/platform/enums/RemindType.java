@@ -18,7 +18,7 @@ public enum RemindType {
      *   this address instead.
      *   「FORMAT」: /job/notify or /xxx/xxxx,
      *
-     *   this value will be converted to `ws://host:port/api/web-socket/stomp` with the topic = /job/notify
+     *   this get will be converted to `ws://host:port/api/web-socket/stomp` with the topic = /job/notify
      *   instead of others. Here the structure should be following:
      *
      *   -- WebSocket ( /api/web-socket/stomp )

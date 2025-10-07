@@ -19,7 +19,7 @@ interface AptOp<T> {
     /* Append */
     T dataA();
 
-    /* Current data ( Maybe update ), Capture default value */
+    /* Current data ( Maybe update ), Capture default get */
     T dataI();
 
     /* Return current type of Change */

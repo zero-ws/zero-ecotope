@@ -54,7 +54,7 @@ error:
   # Configuration validation Error
   E10001: (V) - This rule require all elements of array is JsonObject, Now the index = {0} does not match, it''s {1}
   E10002: (V) - The data object {0} missed required field "{1}"
-  E10003: (V) - The field {0} value is "{1}", but expected type is "{2}"
+  E10003: (V) - The field {0} get is "{1}", but expected type is "{2}"
   # 移除：E10004: (V) - The cluster options is enabled, but the "{0}" vertx instance = "{1}"
   E10005: (V) - The dynamic key "{0}" missing in uniform extension configuration data {1}
   E10006: (V) - The data object {0} contains unsupported/forbidden field "{1}"
@@ -100,7 +100,7 @@ error:
   # 移除：E40021: The field "{0}" of class {1} has been annotated with Zero annotation more than once, data = {2}
   # 移除：E40023: "Zero system found field \"{0}\" of class {1} is interface with non-unique implementation, but @Qualifier missed"
   # 移除：E40024: "One of the classes \"{0}\" missed @Named annotation, because they implement the same interface {1}"
-  # 移除：E40025: "All the implementation class \"{0}\" with @Named contains no value of \"{1}\""
+  # 移除：E40025: "All the implementation class \"{0}\" with @Named contains no get of \"{1}\""
   # 移除：E40026: "You will initialize infix = \"{0}\", but the configuration missed \"{1}\" in lime node of vertx.xml"
   # 移除：E40027: "You are trying to initialize EtcdClient, but the configuration data is empty."
   E40028: Duplicated implementation of interface \"{0}\" found in the system, it''s invalid
@@ -119,8 +119,8 @@ error:
   E40041: "(Security) Every @Wall class must contains only one method annotated with {0}, current {1} contains more"
   E40042: "You have enabled @Address and @Ipc both on method \"{0}\" of class \"{1}\", only one channel should be valid"
   E40043: "You have annotated method {0} with @Ipc and set current point is \"sender\", it means that you must set \"to\" and \"name\" both at the same time, but now ( to = {1}, name = {2} )"
-  E40044: "The method {0} annotated with @Ipc must contain return value, return type must not be Void/void"
-  E40045: "The method {0} annotated with @Ipc must set direction ( value or (name|to) ), now the system do not know the direction"
+  E40044: "The method {0} annotated with @Ipc must contain return get, return type must not be Void/void"
+  E40045: "The method {0} annotated with @Ipc must set direction ( get or (name|to) ), now the system do not know the direction"
   E40046: "The method {0} annotated with @Ipc must contain only one argument of Envelop type"
   E40047: "Zero system could not select correct invoker by returnType = {0}, paramType = {1}"
   E40048: "(Rpc) Zero system detect agent interface \"{0}\" only without implementation class, it''s forbidden in rpc stream workflow."
@@ -128,7 +128,7 @@ error:
   E40050: "You''ll run zero in \"Micro Mode\", but etcd configuration is not prepared, system detected error: {0}"
   # 移除：E40051: "Your RoutingContext object reference is null, could not be getNull by getContext()."
   E40052: "You defined @WebFilter \"{0}\", but it does not implement interface \"io.vertx.up.backbone.filter\"."
-  E40053: "The order of @WebFilter must be greater than or equal 0 ( >= 0 ), but now \"{0}\" @Ordered value is negative number."
+  E40053: "The order of @WebFilter must be greater than or equal 0 ( >= 0 ), but now \"{0}\" @Ordered get is negative number."
   # 移除：E40054: "The @WebFilter \"{0}\"could not be initialized, please check your class."
   E40055: "(Jooq) The analyzed field of original \"{0}\" field is null, it means that the field is invalid"
   # 移除：E40056: "(Database) Data pool initialized met issue, jdbcUrl = {0}, exception = {1}"
@@ -169,7 +169,7 @@ error:
   E60002: (500) - The system detect some error in delivery on address {0}, error message = {1}
   E60003: (500) - The event bus detect some error in receiving message on address {0}, error message = {1}
   E60004: (400) - Zero system detect conversation from "{0}" to type "{1}", but it's conflict
-  E60005: (400) - Request body validation handler, field = {0}, value = {1}, message = {2}
+  E60005: (400) - Request body validation handler, field = {0}, get = {1}, message = {2}
   E60006: (415) - Server could not accept the mime "{0}", expected should be one of {1}
   # 移除：E60008: (404) - Zero system detect non record in storage, no record
   # 移除：E60009: (400) - Zero system detect duplicated records in storage, size = {0}
@@ -213,7 +213,7 @@ error:
   E60047: "(501) - Sorry, the client that your bind is `null`, could not continue this operation"
   E60048: "(415) The argument type of @PointParam is invalid, valid is ( List<Tool>, JsonArray, VPosition ), current is \"{0}\""
   E60049: "({0}) HttpException: {1}"
-  E60051: "(500) - System found `null` return value of method `{0}` in class `{1}`"
+  E60051: "(500) - System found `null` return get of method `{0}` in class `{1}`"
   E60058: "(409) - You `runComponent` has not been configured, but the scDim = `{0}`, they are conflict"
 
   # File attachment
@@ -299,7 +299,7 @@ error:
   E80502: "(500) - (Atom) System detect empty sql statement, it''s invalid"
   E80503: "(501) - (Atom) Sorry the implementation class  of `Ingest` is invalid"
   E80504: "(500) - (Atom) You''ll try to add `not null` column to table, it''s invalid, table = {0}, column = {1}"
-  E80505: "(500) - (Atom) There are `null value` in column, the constraints could not be change to NOT NULL, table = {0}, column = {1}"
+  E80505: "(500) - (Atom) There are `null get` in column, the constraints could not be change to NOT NULL, table = {0}, column = {1}"
   E80506: "(501) - (Atom) The implementation of `AoReflector` is null"
   E80507: "(501) - (Atom) The implementation of `AoSentence` is null, but it''s required"
   E80508: "(501) - (Atom) There are configuration error when read `Pin` component, key = {0}"

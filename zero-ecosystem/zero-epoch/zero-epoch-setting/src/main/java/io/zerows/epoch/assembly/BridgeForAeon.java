@@ -43,7 +43,7 @@ public class BridgeForAeon {
             .map(queue -> Anno.query(queue, Address.class))
             // 3. Scan annotations
             .subscribe(annotations -> Observable.fromArray(annotations)
-                .map(addressAnno -> Ut.invoke(addressAnno, "value"))
+                .map(addressAnno -> Ut.invoke(addressAnno, "get"))
                 // 4. Hit address
                 .subscribe(address -> ADDRESS.add(address.toString()))
                 .dispose())

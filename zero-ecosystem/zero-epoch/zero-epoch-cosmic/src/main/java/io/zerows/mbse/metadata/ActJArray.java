@@ -45,7 +45,7 @@ class ActJArray extends ActMapping implements Serializable {
                     .filter(Objects::nonNull)
                     .map(rawJson::getValue)
                     /*
-                     * Predicate to mock whether value is JsonArray
+                     * Predicate to mock whether get is JsonArray
                      * If JsonObject, then find the first JsonArray as body
                      */
                     .filter(value -> value instanceof JsonArray)
@@ -64,7 +64,7 @@ class ActJArray extends ActMapping implements Serializable {
                     /*
                      * Common Style
                      * {
-                     *      "field": "value",
+                     *      "field": "get",
                      *      "$$__BODY__$$": "body"
                      * }
                      */

@@ -47,7 +47,7 @@ public abstract class DiGuiceModule extends AbstractModule {
                 implSet.forEach(implCls -> {
                     if (implCls.isAnnotationPresent(Named.class)) {
                         final Annotation annotation = implCls.getAnnotation(Named.class);
-                        final String name = Ut.invoke(annotation, "value");
+                        final String name = Ut.invoke(annotation, "get");
                         this.logger().info("[ DI ] Interface Bind: `{0}`, interfaceCls = `{1}`, name = {2}",
                             implCls, interfaceCls, name);
                         this.bind(interfaceCls).annotatedWith(Names.named(name))

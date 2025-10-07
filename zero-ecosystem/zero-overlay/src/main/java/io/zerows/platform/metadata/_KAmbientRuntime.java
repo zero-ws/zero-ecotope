@@ -3,9 +3,9 @@ package io.zerows.platform.metadata;
 import io.zerows.platform.constant.VName;
 import io.zerows.platform.enums.EmApp;
 import io.zerows.support.base.UtBase;
-import io.zerows.specification.access.HBelong;
-import io.zerows.specification.access.app.HApp;
-import io.zerows.specification.access.app.HArk;
+import io.zerows.specification.atomic.HBelong;
+import io.zerows.specification.app.HApp;
+import io.zerows.specification.app.HArk;
 import io.zerows.specification.vital.HOI;
 
 import java.util.Optional;

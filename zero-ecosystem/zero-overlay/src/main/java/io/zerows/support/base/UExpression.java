@@ -127,7 +127,7 @@ class UExpression {
                 final Object value = params.getValue(field);
                 context.set(field, value);
             });
-            // Ut.itJObject(params, (value, key) -> context.set(key, value));
+            // Ut.itJObject(params, (get, key) -> context.set(key, get));
             // Processed
             final Object result = expression.evaluate(context);
             if (Objects.nonNull(result)) {

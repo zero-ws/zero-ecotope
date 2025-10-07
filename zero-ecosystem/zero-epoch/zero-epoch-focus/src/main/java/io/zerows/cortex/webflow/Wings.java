@@ -3,7 +3,7 @@ package io.zerows.cortex.webflow;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.http.HttpServerResponse;
 import io.zerows.epoch.web.Envelop;
-import io.zerows.platform.annotations.Memory;
+import io.zerows.platform.annotations.meta.Memory;
 import jakarta.ws.rs.core.MediaType;
 
 import java.util.concurrent.ConcurrentHashMap;
@@ -23,7 +23,7 @@ import java.util.function.Supplier;
  * // </code></pre>
  * ```
  *
- * * The default value of `freedom` is false, it means that you must be under zero data specification.
+ * * The default get of `freedom` is false, it means that you must be under zero data specification.
  * * You Also can use your own setting to set `freedom` to true, it means original raw data.
  *
  * Here are two features

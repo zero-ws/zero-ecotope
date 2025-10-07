@@ -9,9 +9,9 @@ import io.zerows.extension.runtime.skeleton.osgi.spi.extension.Init;
 import io.zerows.extension.runtime.skeleton.osgi.spi.extension.Prerequisite;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
 import io.zerows.program.Ux;
-import io.zerows.specification.access.app.HAmbient;
-import io.zerows.specification.access.app.HApp;
-import io.zerows.specification.access.app.HArk;
+import io.zerows.specification.app.HAmbient;
+import io.zerows.specification.app.HApp;
+import io.zerows.specification.app.HArk;
 import io.zerows.specification.configuration.HRegistry;
 import io.zerows.support.Ut;
 

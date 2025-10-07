@@ -255,7 +255,7 @@ public class XSource implements VertxPojo, IXSource {
 
     /**
      * Getter for <code>ZDB.X_SOURCE.JDBC_CONFIG</code>. 「jdbcConfig」-
-     * 连接字符串中的配置key=value
+     * 连接字符串中的配置key=get
      */
     @Override
     public String getJdbcConfig() {
@@ -264,7 +264,7 @@ public class XSource implements VertxPojo, IXSource {
 
     /**
      * Setter for <code>ZDB.X_SOURCE.JDBC_CONFIG</code>. 「jdbcConfig」-
-     * 连接字符串中的配置key=value
+     * 连接字符串中的配置key=get
      */
     @Override
     public XSource setJdbcConfig(String jdbcConfig) {

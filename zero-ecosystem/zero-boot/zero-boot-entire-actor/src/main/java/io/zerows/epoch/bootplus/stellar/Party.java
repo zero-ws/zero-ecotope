@@ -3,7 +3,7 @@ package io.zerows.epoch.bootplus.stellar;
 import io.zerows.platform.metadata.KDS;
 import io.zerows.platform.metadata.KGlobal;
 import io.zerows.epoch.database.Database;
-import io.zerows.specification.access.app.HArk;
+import io.zerows.specification.app.HArk;
 
 /**
  * 合同术语中，Party A 代表甲方，Party B 代表乙方，所以此处的 Party 接口代表甲乙双方相关信息。

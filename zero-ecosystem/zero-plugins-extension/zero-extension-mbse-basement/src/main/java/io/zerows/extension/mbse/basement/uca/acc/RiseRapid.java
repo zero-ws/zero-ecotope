@@ -13,7 +13,7 @@ import io.zerows.extension.mbse.basement.util.Ao;
 import io.zerows.platform.enums.modeling.EmAttribute;
 import io.zerows.platform.enums.typed.ChangeFlag;
 import io.zerows.program.Ux;
-import io.zerows.specification.access.app.HArk;
+import io.zerows.specification.app.HArk;
 import io.zerows.specification.modeling.operation.HDao;
 import io.zerows.support.Ut;
 import io.zerows.support.base.FnBase;

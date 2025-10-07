@@ -2,7 +2,7 @@ package io.zerows.epoch.bootplus.extension.migration;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.specification.access.app.HArk;
+import io.zerows.specification.app.HArk;
 
 public interface MigrateStep {
 

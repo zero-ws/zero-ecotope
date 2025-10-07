@@ -9,7 +9,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.component.log.Log;
 import io.zerows.component.log.LogModule;
 import io.zerows.epoch.metadata.Apt;
-import io.zerows.specification.access.app.HArk;
+import io.zerows.specification.app.HArk;
 import io.zerows.specification.modeling.metadata.HMetaAtom;
 import org.jooq.Configuration;
 

@@ -53,7 +53,7 @@ class JQPre {
         reference.refQr().forEach((field, query) -> criteria.match(field, (qr, json) -> {
             /*
              * There exist Elementary field based on RQuote, and the condition contains
-             * value here.
+             * get here.
              * The enhancement version should contain `op` input from criteria condition
              *
              * The old version contains `=` and `i` only, the latest version:

@@ -2,11 +2,11 @@ package io.zerows.specification.configuration;
 
 import io.vertx.core.Future;
 import io.zerows.platform.metadata.KTenement;
-import io.zerows.specification.access.app.HAmbient;
-import io.zerows.specification.access.app.HApp;
-import io.zerows.specification.access.app.HArk;
-import io.zerows.specification.access.app.HMod;
-import io.zerows.specification.access.cloud.HTenant;
+import io.zerows.specification.app.HAmbient;
+import io.zerows.specification.app.HApp;
+import io.zerows.specification.app.HArk;
+import io.zerows.specification.app.HMod;
+import io.zerows.specification.cloud.HTenant;
 import io.zerows.specification.security.identity.HOwner;
 import io.zerows.specification.vital.HOI;
 

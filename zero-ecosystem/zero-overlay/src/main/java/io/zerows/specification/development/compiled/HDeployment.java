@@ -1,9 +1,9 @@
 package io.zerows.specification.development.compiled;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.platform.annotations.One2One;
-import io.zerows.specification.access.app.HArk;
-import io.zerows.specification.access.app.HBackend;
+import io.zerows.platform.annotations.meta.One2One;
+import io.zerows.specification.app.HArk;
+import io.zerows.specification.app.HBackend;
 import io.zerows.specification.modeling.element.HDescriptor;
 
 import java.util.List;

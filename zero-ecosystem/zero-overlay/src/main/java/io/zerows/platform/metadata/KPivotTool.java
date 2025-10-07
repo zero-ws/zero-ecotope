@@ -3,8 +3,8 @@ package io.zerows.platform.metadata;
 import io.vertx.core.Future;
 import io.zerows.platform.exception._40104Exception409RegistryDuplicated;
 import io.zerows.support.base.UtBase;
-import io.zerows.specification.access.app.HAmbient;
-import io.zerows.specification.access.app.HArk;
+import io.zerows.specification.app.HAmbient;
+import io.zerows.specification.app.HArk;
 import io.zerows.specification.vital.HOI;
 
 import java.util.Collections;

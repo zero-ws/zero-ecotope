@@ -75,7 +75,7 @@ class KDictData {
 
     JsonObject itemFind(final String dictName, final String value, final String keyField) {
         final JsonArray dictData = this.item(dictName);
-        // Find the `keyField` = value as condition
+        // Find the `keyField` = get as condition
         return UtBase.elementFind(dictData, keyField, value);
     }
 }

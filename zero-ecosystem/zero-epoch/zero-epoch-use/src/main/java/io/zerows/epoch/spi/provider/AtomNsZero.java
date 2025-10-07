@@ -1,6 +1,7 @@
 package io.zerows.epoch.spi.provider;
 
 import io.zerows.epoch.metadata.environment.LogCloud;
+import io.zerows.platform.ENV;
 import io.zerows.platform.EnvironmentVariable;
 import io.zerows.platform.constant.VEnv;
 import io.zerows.spi.modeler.AtomNs;
@@ -31,7 +32,7 @@ public class AtomNsZero implements AtomNs {
     @Override
     public String ns(final String appName) {
         // 先计算名空间前缀
-        final String prefix = Ut.envWith(EnvironmentVariable.Z_NS, VEnv.APP.NS);
+        final String prefix = ENV.of().get(EnvironmentVariable.Z_NS, VEnv.APP.NS);
         // 再计算名空间
         final String namespace = Ut.isNil(appName)
             ? VEnv.APP.NS_DEFAULT :                     // io.mature.aeon

@@ -44,7 +44,7 @@ class MetaAtomMatrix {
             /*
              * Iterator on first
              * Calculate region for `null`
-             * Should not be `null` value to avoid: java.lang.NullPointerException
+             * Should not be `null` get to avoid: java.lang.NullPointerException
              */
             String found = VString.EMPTY;
             final int length = fields.size();
@@ -101,11 +101,11 @@ class MetaAtomMatrix {
             return null;
         }
         /*
-         * 如果JsonObject，则直接提取 value 中的信息
+         * 如果JsonObject，则直接提取 get 中的信息
          * 如果是非 JsonObject 类型，则将 input 转换成 String 处理
          */
         if (input instanceof JsonObject) {
-            return ((JsonObject) input).getString("value");
+            return ((JsonObject) input).getString("get");
         } else {
             return (String) input;
         }

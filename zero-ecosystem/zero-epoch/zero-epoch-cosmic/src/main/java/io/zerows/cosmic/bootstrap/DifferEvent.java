@@ -85,7 +85,7 @@ class DifferEvent implements Differ<RoutingContext> {
     @SuppressWarnings("all")
     private Method findReplier(final WebEvent event) {
         final Annotation annotation = event.getAction().getDeclaredAnnotation(Address.class);
-        final String address = Ut.invoke(annotation, "value");
+        final String address = Ut.invoke(annotation, "get");
         // Here address mustn't be null or empty
         final WebReceipt found = RECEIPTS.stream()
             .filter(item -> address.equals(item.getAddress()))

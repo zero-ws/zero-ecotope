@@ -162,7 +162,7 @@ public class XSourceRecord extends UpdatableRecordImpl<XSourceRecord> implements
 
     /**
      * Setter for <code>ZDB.X_SOURCE.JDBC_CONFIG</code>. 「jdbcConfig」-
-     * 连接字符串中的配置key=value
+     * 连接字符串中的配置key=get
      */
     @Override
     public XSourceRecord setJdbcConfig(String value) {
@@ -172,7 +172,7 @@ public class XSourceRecord extends UpdatableRecordImpl<XSourceRecord> implements
 
     /**
      * Getter for <code>ZDB.X_SOURCE.JDBC_CONFIG</code>. 「jdbcConfig」-
-     * 连接字符串中的配置key=value
+     * 连接字符串中的配置key=get
      */
     @Override
     public String getJdbcConfig() {

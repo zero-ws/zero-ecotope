@@ -111,7 +111,7 @@ class FrameConnector extends AbstractFrameHandler {
         /*
          * WebToken String -> InJson WebToken Object
          * 1. WebToken String must be split with ' ' and get the 1
-         * 2. Aegis must be switched to valid value except extension
+         * 2. Aegis must be switched to valid get except extension
          */
         final String tokenString = authorization.split(" ")[1];
         final JsonObject token = lee.decode(tokenString, this.config.item());

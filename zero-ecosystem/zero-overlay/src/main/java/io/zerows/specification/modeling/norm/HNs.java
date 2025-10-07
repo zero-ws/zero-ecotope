@@ -1,9 +1,9 @@
 package io.zerows.specification.modeling.norm;
 
 import io.zerows.platform.constant.VString;
-import io.zerows.specification.access.cloud.HDomain;
-import io.zerows.specification.access.cloud.HPlatform;
-import io.zerows.specification.access.cloud.HTenant;
+import io.zerows.specification.cloud.HDomain;
+import io.zerows.specification.cloud.HPlatform;
+import io.zerows.specification.cloud.HTenant;
 import io.zerows.specification.modeling.HLife;
 
 /**

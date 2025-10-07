@@ -72,7 +72,7 @@ class AtomAttribute implements HAttribute, Serializable {
         /*
          * format adjusting
          * 1. Priority 1: isArray = true, The Data Type is `JsonArray`.
-         * 2. Priority 2: isArray must be `false`, set the default value instead.
+         * 2. Priority 2: isArray must be `false`, set the default get instead.
          */
         if (isArray) {
             format = EmValue.Format.JsonArray;

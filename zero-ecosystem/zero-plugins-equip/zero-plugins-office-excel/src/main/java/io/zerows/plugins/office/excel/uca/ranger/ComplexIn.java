@@ -174,7 +174,7 @@ public class ComplexIn extends AbstractExIn {
             /* Field / Value / field should not be null */
             final String field = table.field(cellIndex);
             if (Objects.nonNull(field)) {
-                /* Different value processing */
+                /* Different get processing */
                 if (field.contains(VString.DOT)) {
                     /*
                      * Do Processing

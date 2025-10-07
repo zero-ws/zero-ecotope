@@ -87,14 +87,14 @@ public class EmployeeService implements EmployeeStub {
                     return this.updateEmployee(key, data);
                 } else if (Ut.isNil(userId) && Ut.isNotNil(current)) {
                     /*
-                     * Old null, new <value>
+                     * Old null, new <get>
                      * Create relation with new
                      */
                     return this.updateEmployee(key, data)
                         .compose(response -> this.updateReference(current, response));
                 } else if (Ut.isNotNil(userId) && Ut.isNil(current)) {
                     /*
-                     * Old <value>, new <null>
+                     * Old <get>, new <null>
                      * Clear relation with old
                      */
                     return this.updateEmployee(key, data)
@@ -103,7 +103,7 @@ public class EmployeeService implements EmployeeStub {
                         );
                 } else {
                     /*
-                     * Old <value>, new <value>
+                     * Old <get>, new <get>
                      */
                     if (userId.equals(current)) {
                         /*

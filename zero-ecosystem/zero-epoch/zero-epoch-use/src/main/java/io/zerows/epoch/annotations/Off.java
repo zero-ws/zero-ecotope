@@ -1,6 +1,6 @@
 package io.zerows.epoch.annotations;
 
-import io.zerows.epoch.metadata.KEmptyInstance;
+import io.zerows.epoch.metadata.XEmptyInstance;
 import io.zerows.platform.constant.VString;
 
 import java.lang.annotation.Documented;
@@ -17,7 +17,7 @@ import java.lang.annotation.Target;
 public @interface Off {
     /*
      * Start job for the job input definition
-     * - value: EventBus address
+     * - get: EventBus address
      * - outcome: income Implement class defined by `JobOutcome`
      * Message -> address
      */
@@ -34,5 +34,5 @@ public @interface Off {
     String[] addresses() default {};
 
 
-    Class<?> outcome() default KEmptyInstance.class;
+    Class<?> outcome() default XEmptyInstance.class;
 }

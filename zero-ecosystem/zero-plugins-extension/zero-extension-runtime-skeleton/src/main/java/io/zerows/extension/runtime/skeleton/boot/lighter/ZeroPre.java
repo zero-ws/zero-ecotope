@@ -3,15 +3,14 @@ package io.zerows.extension.runtime.skeleton.boot.lighter;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.zerows.cosmic.plugins.cache.MapInfix;
-import io.zerows.epoch.boot.ZeroEnvironmentLegacy;
 import io.zerows.epoch.database.jooq.JooqInfix;
 import io.zerows.plugins.office.excel.ExcelInfix;
-import io.zerows.specification.configuration.HMature;
+import io.zerows.specification.configuration.HLauncher;
 
 /**
  * @author lang : 2023-06-10
  */
-public class ZeroPre implements HMature.HPre<Vertx> {
+public class ZeroPre implements HLauncher.Wait<Vertx> {
     /**
      * 「Vertx启动后」（同步）扩展流程一
      * <p>
@@ -40,9 +39,6 @@ public class ZeroPre implements HMature.HPre<Vertx> {
          */
         JooqInfix.init(vertx);
         ExcelInfix.init(vertx);
-
-        // 环境变量准备执行
-        ZeroEnvironmentLegacy.initialize();
 
         return Boolean.TRUE;
     }

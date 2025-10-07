@@ -61,7 +61,7 @@ public class ExAmbientDictionary implements Dictionary {
                 report.append("[ PT ] Dictionary Total：").append(dict.size());
                 dict.forEach((key, array) -> report
                     .append("\n\tkey = ").append(key)
-                    .append(", value size = ").append(array.size()));
+                    .append(", get size = ").append(array.size()));
                 LOG.Flow.info(this.getClass(), report.toString());
                 return Ux.future(dict);
             });

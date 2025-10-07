@@ -6,7 +6,7 @@ import org.jooq.Field;
 /*
  * Expression analyzing for
  * 1) Field -> Antlr
- * 2) Antlr -> Condition ( by op & value )
+ * 2) Antlr -> Condition ( by op & get )
  * 3) Result should be condition
  */
 @SuppressWarnings("all")

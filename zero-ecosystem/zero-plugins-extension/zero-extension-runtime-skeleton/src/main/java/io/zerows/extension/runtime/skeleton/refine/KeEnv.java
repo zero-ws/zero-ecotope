@@ -7,8 +7,8 @@ import io.vertx.ext.auth.User;
 import io.zerows.component.qr.syntax.Ir;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.database.jooq.operation.UxJooq;
-import io.zerows.epoch.metadata.Mirror;
-import io.zerows.epoch.metadata.Mojo;
+import io.zerows.epoch.metadata.MMPojo;
+import io.zerows.epoch.metadata.MMPojoMapping;
 import io.zerows.epoch.metadata.UArray;
 import io.zerows.program.Ux;
 import io.zerows.spi.modeler.Indent;
@@ -98,7 +98,7 @@ class KeEnv {
         if (Ut.isNil(filename)) {
             FIELDS.forEach(each -> vector.put(each, each));
         } else {
-            final Mojo outMojo = Mirror.create(KeEnv.class).mount(filename).mojo();
+            final MMPojo outMojo = MMPojoMapping.create(KeEnv.class).mount(filename).mojo();
             outMojo.getIn().forEach((in, out) -> {
                 if (FIELDS.contains(in)) {
                     vector.put(in, out);

@@ -8,7 +8,7 @@ import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.extension.mbse.modulat.store.OCacheMod;
 import io.zerows.extension.runtime.skeleton.osgi.spi.modeler.Modulat;
-import io.zerows.specification.access.app.HMod;
+import io.zerows.specification.app.HMod;
 
 import java.util.Objects;
 

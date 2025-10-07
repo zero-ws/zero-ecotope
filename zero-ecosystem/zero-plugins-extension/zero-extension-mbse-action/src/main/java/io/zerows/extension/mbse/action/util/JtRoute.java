@@ -7,8 +7,8 @@ import io.zerows.platform.constant.VString;
 import io.zerows.management.OZeroStore;
 import io.zerows.support.Ut;
 import io.zerows.extension.mbse.action.atom.JtConfig;
-import io.zerows.specification.access.app.HApp;
-import io.zerows.specification.access.app.HArk;
+import io.zerows.specification.app.HApp;
+import io.zerows.specification.app.HArk;
 import jakarta.ws.rs.core.MediaType;
 
 import java.util.HashSet;

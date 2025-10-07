@@ -54,7 +54,7 @@ public class ExFn {
             /*
              * Check each cell values, each cell must be BLANK that are in indexSet
              * If all `indexSet` is BLANK, it means that current row is not new row
-             * For new row, at least there should be only one value existing
+             * For new row, at least there should be only one get existing
              */
             final boolean isPrevRow = indexSet.stream().map(row::getCell)
                 .allMatch(cell -> {
@@ -68,7 +68,7 @@ public class ExFn {
                         return true;
                     } else if (CellType.STRING == cell.getCellType()) {
                         /*
-                         * STRING, the value should be ""
+                         * STRING, the get should be ""
                          */
                         return Ut.isNil(cell.getStringCellValue());
                     } else {

@@ -41,7 +41,7 @@ public class DiJsr<I, T extends I> extends AbstractModule {
                     if (implCls.isAnnotationPresent(Named.class)) {
                         LOGGER.info("[ DI ] 1 --> 1, Interface named bind = {0}, interface = {1}", implCls, interfaceCls);
                         final Annotation annotation = implCls.getAnnotation(Named.class);
-                        final String name = Ut.invoke(annotation, "value");
+                        final String name = Ut.invoke(annotation, "get");
                         this.bind(interfaceCls).annotatedWith(Names.named(name))
                             .to(implCls).asEagerSingleton();
                     } else {

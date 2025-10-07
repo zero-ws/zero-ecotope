@@ -5,7 +5,7 @@ import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.HName;
 import io.zerows.management.OCacheStore;
-import io.zerows.platform.annotations.Memory;
+import io.zerows.platform.annotations.meta.Memory;
 import io.zerows.specification.atomic.HCommand;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.development.ncloud.HNovae;

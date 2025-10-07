@@ -16,8 +16,8 @@ import io.zerows.extension.mbse.action.domain.tables.pojos.IService;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
 import io.zerows.platform.enums.EmJob;
 import io.zerows.program.Ux;
-import io.zerows.specification.access.app.HApp;
-import io.zerows.specification.access.app.HArk;
+import io.zerows.specification.app.HApp;
+import io.zerows.specification.app.HArk;
 
 import java.util.Objects;
 

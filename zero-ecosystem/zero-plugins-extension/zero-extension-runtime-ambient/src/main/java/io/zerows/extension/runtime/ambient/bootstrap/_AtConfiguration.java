@@ -10,7 +10,7 @@ import io.zerows.extension.runtime.ambient.exception._80303Exception500Prerequis
 import io.zerows.extension.runtime.skeleton.eon.KeMsg;
 import io.zerows.extension.runtime.skeleton.osgi.spi.extension.Init;
 import io.zerows.extension.runtime.skeleton.osgi.spi.extension.Prerequisite;
-import io.zerows.specification.access.app.HAmbient;
+import io.zerows.specification.app.HAmbient;
 import io.zerows.support.Ut;
 
 import java.util.Objects;

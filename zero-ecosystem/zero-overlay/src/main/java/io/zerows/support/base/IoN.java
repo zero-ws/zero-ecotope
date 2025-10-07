@@ -1,7 +1,6 @@
 package io.zerows.support.base;
 
 import io.r2mo.function.Fn;
-import io.zerows.platform.annotations.ChatGPT;
 import io.zerows.component.log.LogUtil;
 import io.zerows.platform.constant.VValue;
 
@@ -20,7 +19,6 @@ import java.util.Objects;
  *
  * @author lang : 2023-05-26
  */
-@ChatGPT
 class IoN {
     private static final LogUtil LOG = LogUtil.from(IoN.class);
 

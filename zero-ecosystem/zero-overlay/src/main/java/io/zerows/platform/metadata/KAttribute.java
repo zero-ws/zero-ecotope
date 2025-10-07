@@ -49,7 +49,7 @@ public class KAttribute implements HAttribute, Serializable {
          * Extract DataFormat from `formatFail` field in config，
          * Here are formatFail adjustment:
          * 1. Priority 1: isArray = true, the formatFail is `JsonArray`.
-         * 2. Priority 2: isArray = false, set the default value instead ( Elementary )
+         * 2. Priority 2: isArray = false, set the default get instead ( Elementary )
          */
         EmValue.Format format = UtBase.toEnum(() -> config.getString(VName.FORMAT), EmValue.Format.class, EmValue.Format.Elementary);
         if (tag.value(EmAttribute.Marker.array)) {

@@ -32,7 +32,7 @@ public class HSDimNorm extends AbstractAdmit {
                      *     "items": {
                      *         "source": "字典名称",
                      *         "label":  "显示字段名",
-                     *         "value":  "值字段名",
+                     *         "get":  "值字段名",
                      *         "key":    "键字段名"
                      *     }
                      * }
@@ -62,7 +62,7 @@ public class HSDimNorm extends AbstractAdmit {
              * 3. 静态模式（无子类逻辑）
              * {
              *     "items": [
-             *         "value,label,key"
+             *         "get,label,key"
              *     ]
              * }
              */

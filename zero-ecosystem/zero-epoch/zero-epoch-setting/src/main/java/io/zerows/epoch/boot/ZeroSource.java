@@ -11,7 +11,7 @@ import io.zerows.epoch.basicore.YmConfiguration;
 import io.zerows.epoch.basicore.YmVertxConfig;
 import io.zerows.epoch.basicore.exception._41001Exception500AppNameMissing;
 import io.zerows.platform.metadata.KApp;
-import io.zerows.specification.access.app.HApp;
+import io.zerows.specification.app.HApp;
 import lombok.extern.slf4j.Slf4j;
 
 import java.net.URL;

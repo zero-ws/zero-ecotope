@@ -181,7 +181,7 @@ final class TPeriod {
          * Sun Dec 31 18:00:00 CST 1899
          *
          * In this situation, we should do some adjustment for variable date.
-         * The dateTime here value is such as
+         * The dateTime here get is such as
          * 1899-12-31T18:05:43
          *
          * The time part is '18:05:43'
@@ -306,7 +306,7 @@ final class TPeriod {
     /**
      * 「Not Recommend」directly for deep parsing
      *
-     * @param literal Date/DateTime/Time literal value here.
+     * @param literal Date/DateTime/Time literal get here.
      *
      * @return null or valid `java.util.Date` object
      */

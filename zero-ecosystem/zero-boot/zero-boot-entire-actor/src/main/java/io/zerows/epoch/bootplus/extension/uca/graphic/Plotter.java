@@ -2,7 +2,7 @@ package io.zerows.epoch.bootplus.extension.uca.graphic;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.specification.access.app.HArk;
+import io.zerows.specification.app.HArk;
 
 import java.util.Set;
 

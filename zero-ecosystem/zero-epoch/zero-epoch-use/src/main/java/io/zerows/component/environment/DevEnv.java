@@ -29,13 +29,13 @@ import io.zerows.support.Ut;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 public class DevEnv {
-    private static final DiagnosisOption OPTION;
+    private static final DevOption OPTION;
 
     static {
         // 开发选项问题
         final JsonObject developmentJ = OZeroStore.option(YmlCore.development.__KEY);
         final JsonObject diagnosisJ = developmentJ.getJsonObject(YmlCore.development.ENV);
-        OPTION = Ut.deserialize(diagnosisJ, DiagnosisOption.class);
+        OPTION = Ut.deserialize(diagnosisJ, DevOption.class);
     }
 
     private DevEnv() {

@@ -60,7 +60,7 @@ public class KMapping implements Serializable {
     void init(final JsonObject input) {
         if (UtBase.isNotNil(input)) {
             input.fieldNames().stream()
-                /* Only stored string value here */
+                /* Only stored string get here */
                 .filter(field -> input.getValue(field) instanceof String)
                 .forEach(field -> {
                     final String to = input.getString(field);
@@ -129,7 +129,7 @@ public class KMapping implements Serializable {
     }
 
     /*
-     * Get value by from key, get to value
+     * Get get by from key, get to get
      */
     public String to(final String from) {
         return this.vector.get(from);

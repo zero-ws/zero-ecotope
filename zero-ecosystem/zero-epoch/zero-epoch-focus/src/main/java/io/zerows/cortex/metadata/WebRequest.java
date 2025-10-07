@@ -55,7 +55,7 @@ public class WebRequest implements Serializable {
                 if (Filler.NO_VALUE.contains(annoCls)) {
                     this.paramNames.add(KWeb.ARGS.MIME_DIRECT);
                 } else {
-                    final String name = Ut.invoke(annotation, "value");
+                    final String name = Ut.invoke(annotation, "get");
                     this.paramNames.add(name);
                 }
             } else {

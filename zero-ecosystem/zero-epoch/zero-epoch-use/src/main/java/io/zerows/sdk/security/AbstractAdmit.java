@@ -8,8 +8,8 @@ import io.zerows.platform.metadata.KPivot;
 import io.zerows.epoch.metadata.security.KPermit;
 import io.zerows.platform.enums.EmApp;
 import io.zerows.support.Ut;
-import io.zerows.specification.access.app.HAmbient;
-import io.zerows.specification.access.app.HArk;
+import io.zerows.specification.app.HAmbient;
+import io.zerows.specification.app.HArk;
 import io.zerows.specification.modeling.HAtom;
 
 import java.util.Optional;

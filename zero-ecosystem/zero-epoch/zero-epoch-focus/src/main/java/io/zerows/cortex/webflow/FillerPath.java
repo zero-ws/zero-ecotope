@@ -10,7 +10,7 @@ import io.zerows.weaver.ZeroType;
  *
  * ```shell
  * // <pre><code>
- *    name = value
+ *    name = get
  * // </code></pre>
  * ```
  *

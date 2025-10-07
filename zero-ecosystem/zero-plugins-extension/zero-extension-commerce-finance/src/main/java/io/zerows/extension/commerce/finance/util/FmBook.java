@@ -2,12 +2,12 @@ package io.zerows.extension.commerce.finance.util;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.platform.constant.VString;
-import io.zerows.epoch.metadata.KNaming;
-import io.zerows.support.Ut;
+import io.zerows.epoch.metadata.MMName;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FBook;
 import io.zerows.extension.commerce.finance.eon.FmConstant;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
+import io.zerows.platform.constant.VString;
+import io.zerows.support.Ut;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ import static io.zerows.extension.commerce.finance.util.Fm.LOG;
  */
 class FmBook {
 
-    static List<FBook> umBook(final KNaming spec, final List<FBook> books) {
+    static List<FBook> umBook(final MMName spec, final List<FBook> books) {
         Objects.requireNonNull(books);
         // Read the major book
         final FBook found = books.stream().filter(FBook::getMajor).findFirst().orElse(null);
@@ -81,7 +81,7 @@ class FmBook {
         return created;
     }
 
-    static FBook umBook(final KNaming spec) {
+    static FBook umBook(final MMName spec) {
         final FBook created = new FBook();
         Ke.umCreated(created, spec);
         /*
@@ -106,7 +106,7 @@ class FmBook {
         return created;
     }
 
-    static JsonObject qrBook(final KNaming spec) {
+    static JsonObject qrBook(final MMName spec) {
         final JsonObject condition = new JsonObject();
         condition.put(KName.TYPE, spec.getType());
         condition.put(KName.MODEL_ID, spec.getIdentifier());

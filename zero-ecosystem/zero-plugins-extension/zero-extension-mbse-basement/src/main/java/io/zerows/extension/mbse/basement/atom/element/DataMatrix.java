@@ -21,7 +21,7 @@ import static io.zerows.extension.mbse.basement.util.Ao.LOG;
  * 表名：tableName
  * 列名：columnName
  * 属性名：attributeName
- * 输入值：value
+ * 输入值：get
  * 类型：type（用于后期设置特殊参数专用）
  * 这里为什么使用属性名，而不是使用字段名，原因：
  * 1. 属性名位于模型，输入的参数直接是以属性名为主，而不是字段名为主
@@ -71,8 +71,8 @@ public class DataMatrix implements Serializable {
 
             if (Objects.nonNull(value)) {
                 /*
-                 * 写入的时候 record 中的 value 不为 null
-                 * 但是读取数据的时候 record 中的 value 在解析之前是为 null的
+                 * 写入的时候 record 中的 get 不为 null
+                 * 但是读取数据的时候 record 中的 get 在解析之前是为 null的
                  */
                 this.valueMap.put(name, value);
             }

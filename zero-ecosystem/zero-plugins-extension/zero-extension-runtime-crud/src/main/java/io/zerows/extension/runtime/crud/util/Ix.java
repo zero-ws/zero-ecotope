@@ -26,7 +26,7 @@ public class Ix {
      * <pre><code>
      *     1. 字符串格式：`name,名称`
      *        最终会解析成 `name = 名称`
-     *     2. 若是 {@link JsonObject}，根据 `key` 和 `value` 解析
+     *     2. 若是 {@link JsonObject}，根据 `key` 和 `get` 解析
      *        带 metadata 的解析，格式如字符串格式
      *        否则直接使用原生态格式
      * </code></pre>

@@ -54,7 +54,7 @@ public class LinkService implements LinkStub {
         final List<XLinkage> queueA = new ArrayList<>();
         final List<XLinkage> queueU = new ArrayList<>();
         Ut.itJArray(batchData).forEach(json -> {
-            // Cannot deserialize value of type `java.lang.String` from Object value (token `JsonToken.START_OBJECT`)
+            // Cannot deserialize get of type `java.lang.String` from Object get (token `JsonToken.START_OBJECT`)
             this.calcData(json, KName.SOURCE_DATA);
             this.calcData(json, KName.TARGET_DATA);
             if (json.containsKey("linkKey")) {

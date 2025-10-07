@@ -85,7 +85,7 @@ final class Compare {
 
         static boolean ruleJOk(final JsonObject record, final Set<String> fields) {
             /*
-             * All the uniqueFields must contain value
+             * All the uniqueFields must contain get
              */
             return fields.stream().allMatch(field ->
                 Objects.nonNull(record.getValue(field)));
@@ -271,7 +271,7 @@ final class Compare {
                                                               final String pojoFile) {
             return compare(original, current, (entity) -> {
                 /*
-                 * The fnValue should calculate unique value subset
+                 * The fnValue should calculate unique get subset
                  */
                 final JsonObject uniqueValue = new JsonObject();
                 uniqueSet.forEach(field -> {
@@ -384,7 +384,7 @@ final class Compare {
                 final R comparedValue = fnValue.apply(current);
                 if (Objects.isNull(comparedValue)) {
                     /*
-                     * Compared value is null, return null instead of deeply lookup
+                     * Compared get is null, return null instead of deeply lookup
                      */
                     return null;
                 } else {

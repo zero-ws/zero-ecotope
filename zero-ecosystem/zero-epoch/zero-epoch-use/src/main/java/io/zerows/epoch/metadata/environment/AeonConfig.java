@@ -6,7 +6,7 @@ import io.zerows.component.environment.MatureOn;
 import io.zerows.epoch.constant.HName;
 import io.zerows.epoch.constant.HPath;
 import io.zerows.epoch.constant.KName;
-import io.zerows.platform.annotations.Memory;
+import io.zerows.platform.annotations.meta.Memory;
 import io.zerows.platform.enums.EmCloud;
 import io.zerows.platform.metadata.KPlot;
 import io.zerows.platform.metadata.KRepo;

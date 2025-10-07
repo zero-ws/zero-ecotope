@@ -13,8 +13,8 @@ import io.zerows.extension.mbse.action.domain.tables.pojos.IService;
 import io.zerows.extension.mbse.action.eon.JtConstant;
 import io.zerows.extension.mbse.action.eon.em.WorkerType;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
-import io.zerows.specification.access.app.HApp;
-import io.zerows.specification.access.app.HArk;
+import io.zerows.specification.app.HApp;
+import io.zerows.specification.app.HArk;
 import io.zerows.specification.modeling.HRule;
 
 import java.util.Objects;
@@ -111,7 +111,7 @@ class JtDataObject {
 
     static void initApi(final IApi api) {
         /*
-         * Set default value in I_API related to worker
+         * Set default get in I_API related to worker
          * workerType
          * workerAddress
          * workerConsumer

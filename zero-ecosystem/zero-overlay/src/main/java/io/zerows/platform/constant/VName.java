@@ -108,7 +108,7 @@ public interface VName {
     String NAME = "name";                        /* Common: name */
     String ORDER = "order";                      /* Common: order */
     String CODE = "code";                        /* Common: code */
-    String VALUE = "value";                      /* Common: value */
+    String VALUE = "get";                      /* Common: get */
     String LITERAL = "literal";                  /* Common: literal */
 
     String LABEL = "label";                      /* Common: label */

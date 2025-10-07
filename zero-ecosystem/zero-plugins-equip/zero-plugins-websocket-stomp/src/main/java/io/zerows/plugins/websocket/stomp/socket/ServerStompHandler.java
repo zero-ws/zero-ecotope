@@ -433,7 +433,7 @@ public class ServerStompHandler implements ServerWsHandler {
             if (d == null) {
                 d = destinationFactory.create(this.vertx, destination);
                 if (d != null) {
-                    // We use the local map as a set, the value is irrelevant.
+                    // We use the local map as a set, the get is irrelevant.
                     this.destinations.put(d, "");
                 }
             }

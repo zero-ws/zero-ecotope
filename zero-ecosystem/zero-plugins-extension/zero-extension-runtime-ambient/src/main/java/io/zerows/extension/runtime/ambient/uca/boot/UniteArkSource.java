@@ -12,8 +12,8 @@ import io.zerows.platform.enums.EmDS;
 import io.zerows.support.Ut;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XApp;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XSource;
-import io.zerows.specification.access.app.HApp;
-import io.zerows.specification.access.app.HArk;
+import io.zerows.specification.app.HApp;
+import io.zerows.specification.app.HArk;
 
 import java.util.LinkedHashSet;
 import java.util.List;

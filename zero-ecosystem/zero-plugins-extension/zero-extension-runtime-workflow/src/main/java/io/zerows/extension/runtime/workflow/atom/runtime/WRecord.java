@@ -46,8 +46,8 @@ public class WRecord implements Serializable {
     /*
      * This variable stored prev record when do different operation
      * 1) ADD:          prev = null
-     * 2) UPDATE:       prev = value
-     * 3) DELETE:       prev = value
+     * 2) UPDATE:       prev = get
+     * 3) DELETE:       prev = get
      *
      * When current record data() called, the original record stored in
      * __data node and write __flag node for normalization

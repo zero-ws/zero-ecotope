@@ -2,6 +2,7 @@ package io.zerows.plugins.store.liquibase;
 
 import io.zerows.component.log.OLog;
 import io.zerows.epoch.constant.KName;
+import io.zerows.platform.ENV;
 import io.zerows.platform.EnvironmentVariable;
 import io.zerows.support.Ut;
 
@@ -19,7 +20,7 @@ public class LiquibaseEncryption extends Properties {
 
     @Override
     public synchronized Object put(final Object paramK, final Object paramV) {
-        final Boolean enabled = Ut.envWith(EnvironmentVariable.HED_ENABLED, false, Boolean.class);
+        final Boolean enabled = ENV.of().get(EnvironmentVariable.HED_ENABLED, false, Boolean.class);
         LOGGER.info("[ HED ] Encrypt of HED enabled: {0}", enabled);
         if (KName.PASSWORD.equals(paramK) && enabled) {
             // HED_ENABLED=true

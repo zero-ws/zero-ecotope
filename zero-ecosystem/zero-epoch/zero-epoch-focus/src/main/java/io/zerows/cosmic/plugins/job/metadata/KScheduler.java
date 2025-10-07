@@ -28,7 +28,7 @@ public class KScheduler implements Serializable {
      * Job1 | ------------ duration -------------| Job2 | ------------- duration -------------
      */
     private TimeUnit durationUnit = TimeUnit.SECONDS;
-    /* Default value should be 5 min, here the threshold means seconds */
+    /* Default get should be 5 min, here the threshold means seconds */
     private long duration = VValue.RANGE;
     private KPlan formula;
 

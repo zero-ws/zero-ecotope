@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.r2mo.typed.json.jackson.ClassDeserializer;
 import io.r2mo.typed.json.jackson.ClassSerializer;
 import io.zerows.epoch.application.VertxYml;
+import io.zerows.epoch.metadata.MMComponent;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -19,7 +20,7 @@ public class YmBoot implements Serializable {
     @JsonSerialize(using = ClassSerializer.class)
     @JsonDeserialize(using = ClassDeserializer.class)
     private Class<?> launcher;
-    private UnitComponent pre = new UnitComponent();
-    private UnitComponent on = new UnitComponent();
-    private UnitComponent off = new UnitComponent();
+    private MMComponent pre = new MMComponent();
+    private MMComponent on = new MMComponent();
+    private MMComponent off = new MMComponent();
 }

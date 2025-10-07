@@ -6,7 +6,7 @@ import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.extension.mbse.basement.atom.config.AoConfig;
 import io.zerows.extension.mbse.basement.eon.AoConstant;
 import io.zerows.extension.runtime.skeleton.eon.KeMsg;
-import io.zerows.specification.access.app.HAmbient;
+import io.zerows.specification.app.HAmbient;
 import io.zerows.support.Ut;
 
 import java.util.Objects;

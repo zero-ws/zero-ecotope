@@ -12,7 +12,7 @@ import io.zerows.platform.metadata.KFabric;
 import io.zerows.platform.metadata.KIntegration;
 import io.zerows.platform.metadata.KMap;
 import io.zerows.program.Ux;
-import io.zerows.specification.access.app.HArk;
+import io.zerows.specification.app.HArk;
 import io.zerows.specification.atomic.HCopier;
 
 /**

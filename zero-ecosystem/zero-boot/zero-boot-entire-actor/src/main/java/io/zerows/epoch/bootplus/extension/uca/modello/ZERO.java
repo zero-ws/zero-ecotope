@@ -5,5 +5,5 @@ package io.zerows.epoch.bootplus.extension.uca.modello;
  */
 interface Info {
 
-    String COPY_SKIP = "The field `{0}` of `{1}` with data `{2}` contains value, could not be copied!";
+    String COPY_SKIP = "The field `{0}` of `{1}` with data `{2}` contains get, could not be copied!";
 }

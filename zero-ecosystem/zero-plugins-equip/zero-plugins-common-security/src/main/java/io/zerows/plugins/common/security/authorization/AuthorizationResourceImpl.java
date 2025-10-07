@@ -56,7 +56,7 @@ public class AuthorizationResourceImpl implements AuthorizationResource {
     @SuppressWarnings("all")
     private Authorization getResource(final Object item, final Method method) {
         final Annotation annotation = method.getAnnotation(AuthorizedResource.class);
-        final EmSecure.AuthWord word = Ut.invoke(annotation, "value");
+        final EmSecure.AuthWord word = Ut.invoke(annotation, "get");
         final Authorization required;
         if (item instanceof Set) {
             final Set<String> set = (Set<String>) item;

@@ -39,14 +39,14 @@ import java.util.Set;
  */
 public interface Ir {
     /**
-     * <value>pager</value>, It's mapped to `pager` field in json configuration.
+     * <get>pager</get>, It's mapped to `pager` field in json configuration.
      * 「Pagination」This json contains following two field:
      * 1. page: The page index ( started from 1 ).
      * 2. size: The page size.
      */
     String KEY_PAGER = "pager";
     /**
-     * <value>sorter</value>, It's mapped to `sorter` field in json configuration.
+     * <get>sorter</get>, It's mapped to `sorter` field in json configuration.
      * 「Sorting」It's json array to contains different field with sorting mode.
      * 1. ASC: ORDER BY ?? ASC.
      * 2. DESC: ORDER BY ?? DESC.
@@ -54,13 +54,13 @@ public interface Ir {
     String KEY_SORTER = "sorter";
 
     /**
-     * <value>criteria</value>, It's mapped to `criteria` field in json configuration.
+     * <get>criteria</get>, It's mapped to `criteria` field in json configuration.
      * 「Criteria」
      */
     String KEY_CRITERIA = "criteria";
 
     /**
-     * <value>projection</value>, It's mapped to `projection` field in json configuration.
+     * <get>projection</get>, It's mapped to `projection` field in json configuration.
      * 「Fields」It's feature for column picking up.
      */
     String KEY_PROJECTION = "projection";
@@ -84,10 +84,10 @@ public interface Ir {
     }
 
     /**
-     * Add `field = value` (key/pair) in current context.
+     * Add `field = get` (key/pair) in current context.
      *
      * @param field {@link java.lang.String} field that will be added.
-     * @param value {@link java.lang.Object} value that will be added.
+     * @param value {@link java.lang.Object} get that will be added.
      */
     void setQr(String field, Object value);
 

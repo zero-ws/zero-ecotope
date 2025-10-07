@@ -4,7 +4,7 @@ import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.metadata.security.KPermit;
 import io.zerows.epoch.metadata.security.KSemi;
-import io.zerows.platform.annotations.Memory;
+import io.zerows.platform.annotations.meta.Memory;
 import io.zerows.specification.atomic.HCombiner;
 import io.zerows.specification.atomic.HCommand;
 

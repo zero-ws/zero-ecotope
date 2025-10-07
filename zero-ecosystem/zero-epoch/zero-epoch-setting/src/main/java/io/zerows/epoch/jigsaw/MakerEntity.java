@@ -5,7 +5,6 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.basicore.MDConnect;
 import io.zerows.epoch.basicore.MDEntity;
 import io.zerows.epoch.constant.KName;
-import io.zerows.platform.annotations.ChatGPT;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
 
@@ -112,7 +111,6 @@ class MakerEntity implements MakerIo<MDEntity> {
         return entity.bind(entityJ).bind(found);
     }
 
-    @ChatGPT
     private String buildId(final String path) {
         // 确保路径不为空
         if (path == null || path.isEmpty()) {

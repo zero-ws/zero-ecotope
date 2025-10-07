@@ -59,9 +59,9 @@ public class UiPage extends TableImpl<UiPageRecord> {
     public final TableField<UiPageRecord, Boolean> SECURE = createField(DSL.name("SECURE"), SQLDataType.BIT, this, "「secure」- 是否执行安全检查（安全检查才会被权限系统捕捉）");
     /**
      * The column <code>ZDB.UI_PAGE.PARAM_MAP</code>. 「paramMap」-
-     * URL地址中的配置key=value
+     * URL地址中的配置key=get
      */
-    public final TableField<UiPageRecord, String> PARAM_MAP = createField(DSL.name("PARAM_MAP"), SQLDataType.CLOB, this, "「paramMap」- URL地址中的配置key=value");
+    public final TableField<UiPageRecord, String> PARAM_MAP = createField(DSL.name("PARAM_MAP"), SQLDataType.CLOB, this, "「paramMap」- URL地址中的配置key=get");
     /**
      * The column <code>ZDB.UI_PAGE.CONTAINER_NAME</code>. 「containerName」-
      * 当前页面是否存在容器，如果有容器，那么设置容器名称

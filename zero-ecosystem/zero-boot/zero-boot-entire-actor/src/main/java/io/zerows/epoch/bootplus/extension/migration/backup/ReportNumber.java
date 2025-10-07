@@ -10,7 +10,7 @@ import io.zerows.extension.runtime.ambient.domain.tables.pojos.XNumber;
 import io.zerows.platform.constant.VValue;
 import io.zerows.platform.enums.Environment;
 import io.zerows.program.Ux;
-import io.zerows.specification.access.app.HApp;
+import io.zerows.specification.app.HApp;
 import io.zerows.specification.modeling.operation.HDao;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;

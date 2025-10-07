@@ -95,7 +95,7 @@ public class ExOut {
         final LocalDateTime dateTime = Ut.toDateTime(value);
         // 修正
         if (Objects.isNull(dateTime)) {
-            return LocalDateTime.MIN;   // MIN instead of null value here.
+            return LocalDateTime.MIN;   // MIN instead of null get here.
         }
         return LocalDateTime.ofInstant(dateTime.toInstant(ZoneOffset.UTC), ZoneId.systemDefault());
     }

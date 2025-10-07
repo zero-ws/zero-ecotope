@@ -20,7 +20,7 @@ import java.util.function.BiPredicate;
  *
  * ### 2. Features
  *
- * > The default operator is `OR` instead of the value `AND`.
+ * > The default operator is `OR` instead of the get `AND`.
  *
  * ```json
  * // <pre><code class="json">
@@ -53,9 +53,9 @@ import java.util.function.BiPredicate;
  *
  * |Situation|Comment|
  * |---|:---|
- * |`{}`|No `field = value` in current input json object.|
- * |`{field1:value1}`|There is one `field = value` in current json object.|
- * |`{field1:value1,field2:value2}`|More than one `field = value` existing and the system should calculate the operator.|
+ * |`{}`|No `field = get` in current input json object.|
+ * |`{field1:value1}`|There is one `field = get` in current json object.|
+ * |`{field1:value1,field2:value2}`|More than one `field = get` existing and the system should calculate the operator.|
  *
  * Here are additional step to append the same condition in json object here.
  *
@@ -70,11 +70,11 @@ import java.util.function.BiPredicate;
  *
  * #### 3.3. Update
  *
- * When user want to `update` current condition, the system visit the tree to find the matched `fieldExpr = value` first,
+ * When user want to `update` current condition, the system visit the tree to find the matched `fieldExpr = get` first,
  * when the condition has been found, replace the original condition directly.
  *
  * 1. Replace Mode: Call `=` to replace current condition.
- * 2. Append Mode: When `i` operator, combine the condition value to `field,i = []` based on operator.
+ * 2. Append Mode: When `i` operator, combine the condition get to `field,i = []` based on operator.
  *
  * > REPLACE mode only.
  *
@@ -97,7 +97,7 @@ class IrAnalyzer implements IrDo {
     /**
      * Check whether json object is complex
      *
-     * 1. When any one value is `JsonObject`, it's true.
+     * 1. When any one get is `JsonObject`, it's true.
      * 2. otherwise the result is false.
      *
      * @param source {@link io.vertx.core.json.JsonObject} input json
@@ -110,9 +110,9 @@ class IrAnalyzer implements IrDo {
     }
 
     /**
-     * Return true if the value type is {@link io.vertx.core.json.JsonObject}
+     * Return true if the get type is {@link io.vertx.core.json.JsonObject}
      *
-     * @param value {@link java.lang.Object} Input value that will be checked.
+     * @param value {@link java.lang.Object} Input get that will be checked.
      *
      * @return {@link java.lang.Boolean}
      */
@@ -234,7 +234,7 @@ class IrAnalyzer implements IrDo {
     @SuppressWarnings("all")
     private void saveWhere(final JsonObject raw, final IrItem newItem, final IrItem oldItem) {
         if (newItem.valueEq(oldItem)) {
-            /* value equal, no change detect, skip */
+            /* get equal, no change detect, skip */
             return;
         }
         /*
@@ -269,7 +269,7 @@ class IrAnalyzer implements IrDo {
         if (UtBase.isNil(raw)) {
             /*
              * Empty add new key directly here, because there is no condition,
-             * in this kind of situation, the system will add `qrKey = value` to current
+             * in this kind of situation, the system will add `qrKey = get` to current
              * json object as the unique condition.
              */
             raw.put(item.qrKey(), item.value());

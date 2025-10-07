@@ -1,8 +1,9 @@
 package io.zerows.platform.metadata;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.zerows.platform.ENV;
 import io.zerows.platform.enums.EmCloud;
-import io.zerows.support.base.UtBase;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -10,6 +11,7 @@ import java.util.Objects;
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Data
 public class KRepo implements Serializable {
     /*
      * Github 远程地址 / 本地地址
@@ -41,14 +43,6 @@ public class KRepo implements Serializable {
     @JsonIgnore
     private String workspace;
 
-    public String getUri() {
-        return this.uri;
-    }
-
-    public void setUri(final String uri) {
-        this.uri = uri;
-    }
-
     public String getPath() {
         // 内部逻辑
         /*
@@ -57,35 +51,11 @@ public class KRepo implements Serializable {
          * 3. 如果环境变量无法提取，则直接使用 path 作为目录，此处解耦使用常量字符串
          *    后期若有其他需求再执行相关变更，此对象应该放到底层做云端对接
          */
-        return UtBase.envWith("AEON_APP", this.path);
-    }
-
-    public void setPath(final String path) {
-        this.path = path;
-    }
-
-    public EmCloud.Repo getType() {
-        return this.type;
-    }
-
-    public void setType(final EmCloud.Repo type) {
-        this.type = type;
-    }
-
-    public String getAccount() {
-        return this.account;
-    }
-
-    public void setAccount(final String account) {
-        this.account = account;
+        return ENV.of().get("AEON_APP", this.path);
     }
 
     public String getSecret() {
-        return UtBase.env(this.secret);
-    }
-
-    public void setSecret(final String secret) {
-        this.secret = secret;
+        return ENV.of().get(this.secret);
     }
 
     // ------------------------- 提取配置专用

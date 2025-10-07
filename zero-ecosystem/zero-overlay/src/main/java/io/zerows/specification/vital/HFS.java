@@ -3,7 +3,7 @@ package io.zerows.specification.vital;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.zerows.component.fs.LocalFs;
-import io.zerows.platform.annotations.Memory;
+import io.zerows.platform.annotations.meta.Memory;
 import io.zerows.specification.storage.HStoreLegacy;
 
 import java.util.Set;

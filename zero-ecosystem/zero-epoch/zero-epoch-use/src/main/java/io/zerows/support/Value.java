@@ -16,7 +16,7 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 /*
- * Convert the value to the type value that
+ * Convert the get to the type get that
  * JsonObject could accept here.
  * It means returned type must be accepted by `JsonObject`
  * The types that JsonObject support:

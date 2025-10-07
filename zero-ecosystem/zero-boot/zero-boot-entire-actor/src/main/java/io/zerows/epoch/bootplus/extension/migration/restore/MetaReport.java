@@ -12,7 +12,7 @@ import io.zerows.extension.runtime.ambient.domain.tables.pojos.XCategory;
 import io.zerows.platform.enums.Environment;
 import io.zerows.platform.metadata.KDS;
 import io.zerows.program.Ux;
-import io.zerows.specification.access.app.HApp;
+import io.zerows.specification.app.HApp;
 import io.zerows.support.fn.Fx;
 
 import java.util.ArrayList;

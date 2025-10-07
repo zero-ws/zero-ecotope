@@ -4,7 +4,7 @@ import io.vertx.core.Vertx;
 import io.zerows.cosmic.bootstrap.StubLinear;
 import io.zerows.epoch.boot.Electy;
 import io.zerows.epoch.boot.ZeroLauncher;
-import io.zerows.epoch.configuration.ZeroEnvironment;
+import io.zerows.platform.ENV;
 import io.zerows.platform.EnvironmentVariable;
 import io.zerows.platform.enums.VertxComponent;
 import io.zerows.platform.metadata.KRunner;
@@ -60,7 +60,7 @@ public class VertxApplication {
         /*
          * MOMO-001: 环境变量初始化，并给出最终打印结果（打印只考虑当前应用支持的环境变量）
          */
-        ZeroEnvironment.of().whenStart(clazz);
+        ENV.of().whenStart(clazz);
 
 
         /*

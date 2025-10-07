@@ -2,8 +2,8 @@ package io.zerows.extension.runtime.ambient.store;
 
 import io.zerows.epoch.metadata.MultiKeyMap;
 import io.zerows.epoch.management.AbstractAmbiguity;
-import io.zerows.specification.access.app.HApp;
-import io.zerows.specification.access.app.HArk;
+import io.zerows.specification.app.HApp;
+import io.zerows.specification.app.HArk;
 import io.zerows.specification.development.compiled.HBundle;
 
 import java.util.Objects;

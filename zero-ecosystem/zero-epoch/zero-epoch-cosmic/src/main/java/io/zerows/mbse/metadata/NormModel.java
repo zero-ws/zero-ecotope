@@ -3,7 +3,7 @@ package io.zerows.mbse.metadata;
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.enums.modeling.EmModel;
 import io.zerows.platform.exception._60050Exception501NotSupport;
-import io.zerows.specification.access.app.HArk;
+import io.zerows.specification.app.HArk;
 import io.zerows.specification.modeling.HAttribute;
 import io.zerows.specification.modeling.HRule;
 

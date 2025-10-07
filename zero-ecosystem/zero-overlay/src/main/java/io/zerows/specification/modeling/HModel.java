@@ -2,7 +2,7 @@ package io.zerows.specification.modeling;
 
 import io.zerows.platform.enums.modeling.EmModel;
 import io.zerows.platform.metadata.KMarkAtom;
-import io.zerows.specification.access.app.HArk;
+import io.zerows.specification.app.HArk;
 import io.zerows.specification.modeling.property.IComponent;
 import io.zerows.specification.modeling.property.INormalizer;
 import io.zerows.specification.modeling.property.OComponent;
