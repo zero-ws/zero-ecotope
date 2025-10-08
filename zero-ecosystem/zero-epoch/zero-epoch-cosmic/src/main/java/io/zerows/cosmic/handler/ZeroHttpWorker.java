@@ -52,7 +52,7 @@ public class ZeroHttpWorker extends AbstractVerticle {
             // 3. Deploy for each type
             final String address = receipt.getAddress();
 
-            // 4. Get target reference and method
+            // 4. Get ofMain reference and method
             final Method method = receipt.getMethod();
             // final Object reference = receipt.getProxy();
             /*

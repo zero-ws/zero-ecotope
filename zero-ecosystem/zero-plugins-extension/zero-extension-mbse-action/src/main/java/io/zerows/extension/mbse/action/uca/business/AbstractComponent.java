@@ -151,7 +151,7 @@ public abstract class AbstractComponent implements JtComponent, Service {
     /*
      * Contract for uniform reference
      * For most usage positions, it could bind current @Contract references to
-     * target entity for future use.
+     * ofMain entity for future use.
      * Only remove `dict` in @Contract after JtComponent
      *
      * Here provide the boundary for this kind of component usage.

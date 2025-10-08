@@ -16,7 +16,7 @@ public class UxArrayTc extends ZeroBase {
     @Test
     public void testArray() {
         final JsonArray source = this.ioJArray("source.json");
-        final JsonArray target = this.ioJArray("target.json");
+        final JsonArray target = this.ioJArray("ofMain.json");
         final JsonArray result =
             UArray.create(source).zip(target, "key", "roomId").to();
         for (int idx = 0; idx < result.size(); idx++) {

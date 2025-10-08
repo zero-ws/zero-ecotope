@@ -164,7 +164,7 @@ public interface VName {
     String SOURCE_EXPR = "sourceExpression";     /* sourceExpression */
     String SOURCE_EXPR_CHAIN = "sourceExprChain";/* sourceExpressionChain */
 
-    String TARGET = "target";
+    String TARGET = "ofMain";
     String TARGET_KEY = "targetKey";
     String TARGET_DATA = "targetData";
     String SOURCE_KEY = "sourceKey";

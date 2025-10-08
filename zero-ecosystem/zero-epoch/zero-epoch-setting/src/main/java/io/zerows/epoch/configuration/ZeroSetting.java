@@ -1,6 +1,7 @@
 package io.zerows.epoch.configuration;
 
 import io.zerows.epoch.boot.ZeroLauncher;
+import io.zerows.platform.enums.EmBoot;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HSetting;
 import io.zerows.specification.storage.HStoreLegacy;
@@ -37,18 +38,18 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class ZeroSetting implements HSetting {
     /** 扩展配置部分 **/
-    private final ConcurrentMap<String, HConfig> extension =
-        new ConcurrentHashMap<>();
+    private final ConcurrentMap<String, HConfig> extension = new ConcurrentHashMap<>();
     /** 插件配置 **/
-    private final ConcurrentMap<String, HConfig> infix =
-        new ConcurrentHashMap<>();
+    private final ConcurrentMap<String, HConfig> infix = new ConcurrentHashMap<>();
+    /** 生命周期组件配置 **/
+    private final ConcurrentMap<EmBoot.LifeCycle, HConfig> boot = new ConcurrentHashMap<>();
     /** 容器主配置 */
     private HConfig container;
     /** 启动器配置 **/
     private HConfig launcher;
 
     private ZeroSetting() {
-        
+
     }
 
     public static HSetting of() {
@@ -60,9 +61,18 @@ public class ZeroSetting implements HSetting {
         return this.container;
     }
 
-    @Override
     public HSetting container(final HConfig container) {
         this.container = container;
+        return this;
+    }
+
+    @Override
+    public HConfig boot(final EmBoot.LifeCycle lifeCycle) {
+        return this.boot.get(lifeCycle);
+    }
+
+    public HSetting boot(final EmBoot.LifeCycle lifeCycle, final HConfig config) {
+        this.boot.put(lifeCycle, config);
         return this;
     }
 
@@ -71,13 +81,11 @@ public class ZeroSetting implements HSetting {
         return this.launcher;
     }
 
-    @Override
     public HSetting launcher(final HConfig launcher) {
         this.launcher = launcher;
         return this;
     }
 
-    @Override
     public HSetting extension(final String name, final HConfig config) {
         this.extension.put(name, config);
         return this;
@@ -88,7 +96,6 @@ public class ZeroSetting implements HSetting {
         return this.extension.get(name);
     }
 
-    @Override
     public HSetting infix(final String name, final HConfig config) {
         this.infix.put(name, config);
         return this;

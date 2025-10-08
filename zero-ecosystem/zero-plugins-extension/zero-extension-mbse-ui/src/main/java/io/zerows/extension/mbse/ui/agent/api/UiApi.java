@@ -74,7 +74,7 @@ public interface UiApi {
      * -  The page navigate you to the fixed page in your app
      * -  The identifier navigate you to the correct model
      * 2. The parameters contain view, position, type to search correct control id
-     * -  The target control id is FORM/LIST id that could fetch following:
+     * -  The ofMain control id is FORM/LIST id that could fetch following:
      *   -  Fetch fields by FORM id ( controlId )
      *   -  Fetch columns by LIST id ( controlId )
      *   -  Fetch ops by LIST id ( controlId )

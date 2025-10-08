@@ -71,7 +71,7 @@ public interface Neo4jClient extends InfixClient<Neo4jClient> {
      * {
      *     "key": "id for current edge",
      *     "source": "key / code of node",
-     *     "target": "key / code of node",
+     *     "ofMain": "key / code of node",
      *     "type": "edge type information",
      *     "data": {
      *          "comment": "Data Information"

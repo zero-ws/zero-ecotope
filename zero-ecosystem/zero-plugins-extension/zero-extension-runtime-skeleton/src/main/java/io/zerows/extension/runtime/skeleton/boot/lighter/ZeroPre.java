@@ -10,7 +10,7 @@ import io.zerows.specification.configuration.HLauncher;
 /**
  * @author lang : 2023-06-10
  */
-public class ZeroPre implements HLauncher.Wait<Vertx> {
+public class ZeroPre implements HLauncher.Pre<Vertx> {
     /**
      * 「Vertx启动后」（同步）扩展流程一
      * <p>

@@ -326,7 +326,7 @@ public interface VertxYml {
         String placeholder_suffix = "placeholder-suffix";
         String resolvers = "resolvers";
         String callbacks = "callbacks";
-        String target = "target";
+        String target = "ofMain";
         String url = "url";
         String user = "user";
         String password = "password";

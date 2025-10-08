@@ -7,7 +7,7 @@ error:
   #    E40104 = DuplicateRegistryException
   # New for Booting
   E40101: "(Boot) The two app of HArk could not been combined, the current name = `{1}`, ns = `{0}`"
-  E40102: "(Boot) The two owner of HArk could not been combined, the current id = `{0}`, target = `{1}`"
+  E40102: "(Boot) The two owner of HArk could not been combined, the current id = `{0}`, ofMain = `{1}`"
   E40103: "(Boot) The container try to connect HArk, but `HArk` is null and could not start up"
   E40104: "(Boot) The stored Ambient has already been registry, current stored size = `{0}`"
   # WebException: io.horizon.exception.web
@@ -132,7 +132,7 @@ error:
   # 移除：E40054: "The @WebFilter \"{0}\"could not be initialized, please check your class."
   E40055: "(Jooq) The analyzed field of original \"{0}\" field is null, it means that the field is invalid"
   # 移除：E40056: "(Database) Data pool initialized met issue, jdbcUrl = {0}, exception = {1}"
-  E40057: "(Jooq) The method \"copyEntity(Tool target,Tool updated)\" require second argument updated must not be null. Class = {0}, Data = {1}"
+  E40057: "(Jooq) The method \"copyEntity(Tool ofMain,Tool updated)\" require second argument updated must not be null. Class = {0}, Data = {1}"
   E40058: "(Jooq) The mode required is {0}, but current filters are \"{1}\", they are conflict"
   E40059: "(Jooq) The field = \"{0}\" could not be found in type = \"{1}\""
   E40060: "(Jooq) Infusion Jooq require vertx environment, but now vertx is null"
@@ -203,7 +203,7 @@ error:
   E60037: "(404) - (Excel) The file that you provided ( filename = `{0}` ) is missing or null"
   E60038: "(404) - (Excel) The configuration of ( table = `{0}` ) is missing, please check your excel config"
   E60039: "(500) - (Excel) The exporting met error, detail = {0}"
-  E60040: "(412) - The field of type `{0}` must be declared only once in target `{1}` with annotation @Contract, now it occurs {2} times"
+  E60040: "(412) - The field of type `{0}` must be declared only once in ofMain `{1}` with annotation @Contract, now it occurs {2} times"
   E60041: "(417) - The job `{0}` method parameter definitions are wrong"
   E60042: "(501) - The class `{0}` does not define any method annotated with @On"
   E60043: "(409) - Your session version mismatch between old = {0} and new = {1}"
@@ -336,7 +336,7 @@ error:
   E80539: "(501) - (Web) Current `DictFabric` is null, but it''s required"
   E80540: "(501) - (Web) The model of `DataTpl` is null and could not be found in your environment, Anonymous error"
   E80541: "(409) - (Ref) The model `{0}` defined static references, but found more than one dao in field `{1}`, please check \"sourceReference\" configuration."
-  E80542: "(409) - (Ke) You want to seek `target` configuration in JOIN, but now the fields ( one of `crud, classDao, classDefine` ) is missing."
+  E80542: "(409) - (Ke) You want to seek `ofMain` configuration in JOIN, but now the fields ( one of `crud, classDao, classDefine` ) is missing."
   E80543: "(412) - (Ke) You parsed targetIndent = `{0}` in Join workflow, but now get null. data = `{1}`."
   E80544: "(500) - (Ref) Please bind `DataAtom` first and then you can call `bind(Model)` method for this current model ( identifier = `{0}` ). "
   E80545: "(400) - (Mod) Because both new and old record(s) are null/empty, could not be valid to generate history"

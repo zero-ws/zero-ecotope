@@ -9,8 +9,8 @@ import io.zerows.epoch.bootplus.extension.cv.em.TypeLog;
 import io.zerows.epoch.bootplus.extension.uca.code.Numeration;
 import io.zerows.epoch.bootplus.stellar.ArgoStore;
 import io.zerows.epoch.constant.VDBC;
-import io.zerows.epoch.web.Envelop;
 import io.zerows.epoch.database.cp.DataPool;
+import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.atom.data.DataGroup;
 import io.zerows.extension.mbse.basement.osgi.spi.plugin.AfterPlugin;
@@ -593,7 +593,7 @@ public final class Ox {
      * 格式化细节：
      *
      * - 拷贝`sourceGlobalId`到`source`属性中。
-     * - 拷贝`targetGlobalId`到`target`属性中。
+     * - 拷贝`targetGlobalId`到`ofMain`属性中。
      * - 拷贝`type`边类型到`type`属性中。
      * - 将原始数据{@link JsonObject}拷贝到`data`属性中。
      *

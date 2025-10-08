@@ -45,7 +45,7 @@ public interface LinkAgent {
      * - targetKey
      */
     @GET
-    @Path("/linkage/v/target/:key")
+    @Path("/linkage/v/ofMain/:key")
     @Address(Addr.Linkage.FETCH_SOURCE)
     JsonArray fetchSource(@PathParam(KName.KEY) String key);
 

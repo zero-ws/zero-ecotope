@@ -13,7 +13,7 @@ import io.zerows.platform.annotations.meta.Memory;
  * 此接口主要用于构造 {@link KPoint}，替换原始的 connection 方法。
  * <pre><code>
  *     1. 父从表模式：reference 定义
- *     2. 父主表模式：target 定义
+ *     2. 父主表模式：ofMain 定义
  * </code></pre>
  * 此处组件主要处理事项是根据 {@link KJoin} 中的定义，分不同的模式直接解析出对应的连接点，这些连接点可以帮助后续的 JOIN 操作处理和执行，并实现连接点的分模式、分类解析流程。
  *

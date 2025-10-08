@@ -4,13 +4,11 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.application.VertxYml;
 import io.zerows.epoch.application.YmlCore;
 import io.zerows.epoch.basicore.YmConfiguration;
-import io.zerows.epoch.configuration.ZeroConfig;
 import io.zerows.epoch.configuration.ZeroSetting;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KPlugin;
 import io.zerows.epoch.management.AbstractAmbiguity;
 import io.zerows.platform.constant.VString;
-import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HSetting;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
@@ -55,11 +53,11 @@ public class ZeroEquipLegacy extends AbstractAmbiguity implements Equip {
         final JsonObject configuration = new JsonObject(); // Ut.Bnd.ioCombineJ(this.nameZero(null), this.caller()); // ZeroIo.read(null, true);
         final HSetting setting = ZeroSetting.of();
         final JsonObject configZero = Ut.valueJObject(configuration, KName.Internal.ZERO);
-        setting.container(this.createConfig(configZero));
+        // setting.container(this.createConfig(configZero));
         final String extension = Ut.valueString(configZero, YmlCore.LIME);
 
         final JsonObject configBoot = Ut.valueJObject(configuration, VertxYml.boot.__);
-        setting.launcher(this.createConfig(configBoot));
+        // setting.launcher(this.createConfig(configBoot));
 
         /*
          * zero:
@@ -82,7 +80,7 @@ public class ZeroEquipLegacy extends AbstractAmbiguity implements Equip {
          */
         Ut.<JsonObject>itJObject(configExtension).forEach(entry -> {
             final String key = entry.getKey();
-            setting.infix(key, this.createConfig(entry.getValue()));
+            // setting.infix(key, this.createConfig(entry.getValue()));
         });
         /*
          * <Internal>
@@ -93,12 +91,8 @@ public class ZeroEquipLegacy extends AbstractAmbiguity implements Equip {
          */
         Arrays.stream(KPlugin.FILE_KEY).forEach(field -> {
             final JsonObject fileData = new JsonObject(); // Ut.Bnd.ioCombineJ(this.nameZero(field), this.caller()); // ZeroIo.read(field, true);
-            setting.infix(field, this.createConfig(fileData));
+            // setting.infix(field, this.createConfig(fileData));
         });
         return setting;
-    }
-
-    private HConfig createConfig(final JsonObject options) {
-        return new ZeroConfig().options(options);
     }
 }

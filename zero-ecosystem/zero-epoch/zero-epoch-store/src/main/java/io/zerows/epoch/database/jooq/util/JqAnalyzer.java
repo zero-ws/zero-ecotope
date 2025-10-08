@@ -204,7 +204,7 @@ public class JqAnalyzer {
                  *
                  * Situation 1:
                  * Input `field` is column field name directly, it means that the
-                 * mapping contains `field` in get. hit target column directly here, in this kind of
+                 * mapping contains `field` in get. hit ofMain column directly here, in this kind of
                  * situation, the `field` is COLUMN
                  *
                  * COLUMN is `Jooq` needed

@@ -37,10 +37,10 @@ public class ValidatorEntry {
     /**
      * Validate the method parameters based on javax.validation: Hibernate Validator.
      *
-     * @param proxy  The checked target object.
-     * @param method The checked target method.
-     * @param args   The checked target method's parameters.
-     * @param <T>    The target object type: Generic types.
+     * @param proxy  The checked ofMain object.
+     * @param method The checked ofMain method.
+     * @param args   The checked ofMain method's parameters.
+     * @param <T>    The ofMain object type: Generic types.
      */
     public <T> void verifyMethod(
         final T proxy,

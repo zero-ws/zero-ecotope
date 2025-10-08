@@ -128,7 +128,7 @@ public interface HLauncher<WebContainer> {
      *
      * @param <WebContainer>
      */
-    interface Wait<WebContainer> {
+    interface Pre<WebContainer> {
         /**
          * 第一生命周期：直接在 {@link WebContainer} 启动之后执行
          * <pre><code>
@@ -166,7 +166,7 @@ public interface HLauncher<WebContainer> {
         }
 
         /**
-         * {@link Wait#beforeStart} 的异步版本
+         * {@link Pre#beforeStart} 的异步版本
          *
          * @param container 容器对象
          * @param arkSet    应用配置对象集合
@@ -193,7 +193,7 @@ public interface HLauncher<WebContainer> {
         }
 
         /**
-         * {@link Wait#beforeStart} 的异步版本
+         * {@link Pre#beforeStart} 的异步版本
          *
          * @param container 容器对象
          * @param config    应用配置对象

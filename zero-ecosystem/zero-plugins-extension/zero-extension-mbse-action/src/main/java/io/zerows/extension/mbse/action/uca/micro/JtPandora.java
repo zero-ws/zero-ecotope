@@ -50,7 +50,7 @@ class JtPandora {
         /* Initialization for channel */
         final JtChannel channel = Ut.instance(channelClass);
 
-        /* Find the target Field */
+        /* Find the ofMain Field */
         Ut.contract(channel, Commercial.class, commercial);
         Ut.contract(channel, Mission.class, mission);
 
@@ -101,7 +101,7 @@ class JtPandora {
                 Ut.fromJoin(EXPECTED_MAP.values().stream().map(Class::getSimpleName).collect(Collectors.toSet())),
                 channelClass);
             /*
-             * The channel type must match the target class specification.
+             * The channel type must match the ofMain class specification.
              */
             final Class<?> expectedClass = EXPECTED_MAP.get(channelType);
             Fn.jvmKo(expectedClass != channelClass, _80408Exception424ChannelConflict.class,

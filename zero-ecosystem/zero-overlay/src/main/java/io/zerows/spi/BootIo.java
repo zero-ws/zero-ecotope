@@ -1,7 +1,17 @@
 package io.zerows.spi;
 
+import io.vertx.core.Vertx;
+import io.vertx.core.json.JsonObject;
+import io.zerows.platform.SETTING;
+import io.zerows.platform.enums.EmApp;
+import io.zerows.platform.enums.EmBoot;
+import io.zerows.specification.configuration.HBoot;
+import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HEnergy;
 import io.zerows.specification.configuration.HLauncher;
+import io.zerows.specification.configuration.HSetting;
+
+import java.util.function.Consumer;
 
 /**
  * 「主配置入口规范」BootIo
@@ -9,7 +19,7 @@ import io.zerows.specification.configuration.HLauncher;
  * <p>面向不同平台/产品线（如：Aeon、SMAVE 等）的一致化启动配置抽象。该接口用于：</p>
  * <ul>
  *   <li>🚀 <b>提供启动器</b>：返回底层容器/框架的 {@link HLauncher} 实例，以便完成真正的启动流程；</li>
- *   <li>⚡ <b>解析能量配置</b>：基于启动类与命令行参数组装 {@link HEnergy}（统一的配置/上下文“能量包”）。</li>
+ *   <li>⚡ <b>解析能量配置</b>：基于启动类与命令行参数组装 {@link HEnergy}（统一的配置/上下文"能量包"）。</li>
  * </ul>
  *
  * <h2>🧭 设计背景与目录规范</h2>
@@ -49,26 +59,95 @@ import io.zerows.specification.configuration.HLauncher;
  *   <li>📝 日志：在能量装配、路径解析、配置合并等关键节点输出可定位问题的日志。</li>
  * </ul>
  *
+ * {@link HBoot} 和 {@link HEnergy} 的协同工作原理
+ * <pre>
+ *     ZeroLauncher -> {@link BootIo} -> {@link HBoot} ( 启动组件集 )
+ *                                        - {@link EmBoot.LifeCycle} = Class<?>
+ *                                    -> {@link HEnergy} ( 完整配置集 )
+ *                                        - {@link EmBoot.LifeCycle} = {@link HConfig}
+ *                                                                     -> {@link HSetting} 提供最小单元配置
+ *                                                                          {@link EmBoot.LifeCycle} = {@link HConfig}
+ *                                                                          {@link EmApp.Mode}       = {@link HConfig}
+ *                                                                     -> {@see YmConfiguration} -> {@link HSetting}
+ *                                       其他组件的能量配置集
+ *                                       {@link HEnergy}
+ *                                        - configKey = {@link HConfig}, 此处 configKey 使用唯一计算法则，不同的 configKey 应用不同的配置
+ *                                          {YmConfiguration} 和 {@link HSetting} 的区别在于 {@link HSetting} 会拉平配置，不论深度如何的
+ *                                          Yml 文件都会直接被 {@link HSetting} 拉平（自定义配置除外）
+ *                                                                     -> {@link SETTING} 管理 {@link HSetting}
+ *                                                                        一层：app-name = {@link HSetting}
+ *                                                                             二层：configKey = {@link HConfig}
+ *                 -> 启动流程
+ *                    1. {@link HLauncher#start} 启动 -> 构造 {@link Vertx} 实例
+ *                    2. {@link HBoot#withPre} 启动 -> 预处理阶段，基于 {@link Vertx} 执行
+ *                       {@link HBoot#whenOn}  启动 -> 构造启动配置
+ *                       此时 withPre 和 whenOn 是双设计模型
+ *                       1）withPre -> 负责预处理内置组件、非业务相关组件、所有被依赖的组件
+ *                                     存在多个依赖流程时直接执行链式依赖处理
+ *                       2）whenOn  -> 构造启动配置，为第三步做准备
+ *                    3. {@link HLauncher#start(HConfig.HOn, Consumer)} 中的 {@link Consumer} 被触发，此处 {@link Consumer} 充当了启动
+ *                       回调，开发过程中自定义的部分内容在此处被触发完成
+ *                    4. {@link Consumer} 执行过程中依旧可以访问 {@link SETTING}，通过 configKey 提取 HConfig 配置信息
+ *                       HConfig 的主结构
+ *                        - options = {@link JsonObject} 配置信息
+ *                        - executor = Map ( name = Class ) 的组件信息
+ * </pre>
+ *
  * @author lang
  * @since 2023-05-30
  */
 public interface BootIo {
-    /**
-     * 提供主启动器实例，用于驱动当前容器/框架的启动流程。
-     *
-     * <p>🎯 语义：抽象“如何启动”，屏蔽不同底层实现的差异（如 Vert.x、Netty、自研容器等）。</p>
-     *
-     * @param <T> 启动后返回的核心实例类型（例如：服务器对象、容器句柄等），由具体 {@link HLauncher} 实现决定 🧩
-     *
-     * @return 可用的 {@link HLauncher} 启动器实例（不应为 {@code null}） 🚀
-     */
-    <T> HLauncher<T> launcher();
 
     /**
-     * 基于启动类与命令行参数解析并装配“能量配置” {@link HEnergy}。
+     * 🏗️ 构建启动配置组件
+     * <pre>
+     *     🎯 设计意图：
+     *     - 📌 基于主启动类构建完整的启动配置组件
+     *     - 🏷️ bootCls 即 main 主函数所在的 Class
+     *     - 🔄 提供统一的启动配置访问接口
+     *     - 🚀 支持不同平台的启动配置差异化处理
      *
-     * <p>🔌 语义：抽象“配好再启动”。该方法负责从多渠道（类路径、外部配置、环境变量等）
+     *     🧩 组件构成：
+     *     - 应用类型标识 (app)
+     *     - 启动参数数组 (inArgs)
+     *     - 主启动类 (inMain)
+     *     - 容器启动器 (launcher)
+     *     - 预启动组件 (withPre)
+     *     - 生命周期组件 (whenOn/whenRun/whenOff)
+     * </pre>
+     *
+     * @param bootCls 启动类（通常是包含 main 函数的主类） 📌
+     *
+     * @return 🧩 {@link HBoot} 启动配置组件
+     */
+    HBoot boot(Class<?> bootCls);
+
+    /**
+     * 基于启动类与命令行参数解析并装配"能量配置" {@link HEnergy}。
+     *
+     * <p>🔌 语义：抽象"配好再启动"。该方法负责从多渠道（类路径、外部配置、环境变量等）
      * 汇聚与校验启动所需的<strong>最小必要配置</strong>与<strong>扩展配置</strong>。</p>
+     *
+     * <pre>
+     *     🎯 设计意图：
+     *     - 📌 bootCls 即 main 主函数 Class，作为配置根路径和应用标识
+     *     - 🧩 基于启动类进行配置文件定位和扫描路径计算
+     *     - 🔄 合并多源配置（classpath、外部目录、环境变量、系统属性、命令行参数）
+     *     - 🛡️ 进行配置校验和必填项检查
+     *     - 📊 构建统一的能量配置包用于后续启动流程
+     *
+     *     📁 配置来源优先级：
+     *     1. 🚀 命令行参数 (args) - 最高优先级
+     *     2. 🏠 环境变量 - 高优先级
+     *     3. 📦 系统属性 - 中等优先级
+     *     4. 📄 外部配置文件 - 中等优先级
+     *     5. 📚 classpath 配置文件 - 最低优先级
+     *
+     *     ⚠️ 注意事项：
+     *     - bootCls 用于确定应用归属和配置根路径
+     *     - args 会合并到 HEnergy 中并注入到 HConfig 的 "arguments" 字段
+     *     - 返回的 HEnergy 不应为 null，确保后续流程可用
+     * </pre>
      *
      * @param bootCls 启动类（通常用于定位配置根、计算扫描路径、确定归属应用等） 📌
      * @param args    启动参数（通常会合并进 {@link HEnergy}，并在上层注入到 {@code HConfig} 的 {@code "arguments"} 字段） 🧵

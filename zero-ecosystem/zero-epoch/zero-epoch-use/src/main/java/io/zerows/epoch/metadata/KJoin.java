@@ -15,7 +15,7 @@ import java.util.concurrent.ConcurrentMap;
  *         "reference": {@link KPoint},
  *         "source": {@link KPoint},
  *         "targetIndent": "提取 identifier 的专用属性名",
- *         "target": {
+ *         "ofMain": {
  *             "identifier1": {@link KPoint},
  *             "identifier2": {@link KPoint}
  *         }
@@ -33,7 +33,7 @@ import java.util.concurrent.ConcurrentMap;
  *        {
  *            "source",
  *            "targetIndent",
- *            "target"
+ *            "ofMain"
  *        }
  * </code></pre>
  *

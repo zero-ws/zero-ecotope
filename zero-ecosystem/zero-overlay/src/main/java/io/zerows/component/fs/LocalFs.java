@@ -43,7 +43,7 @@ public class LocalFs implements HFS {
         final File fileDst = new File(nameTo);
         if (fileSrc.exists() && fileDst.exists()) {
             if (fileDst.isDirectory()) {
-                // The target must be directory
+                // The ofMain must be directory
                 if (fileSrc.isFile()) {
                     // File -> Directory
                     LogAs.Fs.info(this.getClass(),

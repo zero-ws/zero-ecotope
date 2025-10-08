@@ -2,8 +2,8 @@ package io.zerows.component.destine;
 
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.exception._80543Exception412IndentParsing;
 import io.zerows.component.log.Log;
+import io.zerows.epoch.exception._80543Exception412IndentParsing;
 import io.zerows.epoch.metadata.KJoin;
 import io.zerows.epoch.metadata.KPoint;
 import io.zerows.support.Ut;
@@ -15,7 +15,7 @@ import java.util.Objects;
  * 从传入数据中根据定义先提取 identifier，然后根据 identifier 来解析连接点，从配置中提取连接点配置，这种结构主要适用于主从表模式，即一个主表对应多个从表，从主表数据中提取从表的 identifier 标识子模型，有了次标识符之后就可以让主表模型和从表模型执行JOIN操作，配置的数据结构依旧如下：
  * <pre><code>
  *     {
- *         "target": {
+ *         "ofMain": {
  *             "identifier1": {@link KPoint},
  *             "identifier2": {@link KPoint}
  *         }

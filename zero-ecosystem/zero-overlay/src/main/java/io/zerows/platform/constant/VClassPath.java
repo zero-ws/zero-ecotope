@@ -81,7 +81,7 @@ public interface VClassPath {
 
     interface atom {
 
-        String TARGET = ATOM + "/target";
+        String TARGET = ATOM + "/ofMain";
 
         static String of(final String name) {
             Objects.requireNonNull(name);

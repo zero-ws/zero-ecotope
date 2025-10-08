@@ -2,17 +2,17 @@ package io.zerows.epoch.bootplus.extension.refine;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.bootplus.extension.cv.OxCv;
-import io.zerows.platform.metadata.KDS;
+import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.database.Database;
-import io.zerows.support.Ut;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.util.Ao;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
+import io.zerows.platform.metadata.KDS;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.app.HArk;
 import io.zerows.specification.modeling.operation.HDao;
+import io.zerows.support.Ut;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -150,7 +150,7 @@ final class OxTo {
      * 格式化细节：
      *
      * - 拷贝`sourceGlobalId`到`source`属性中。
-     * - 拷贝`targetGlobalId`到`target`属性中。
+     * - 拷贝`targetGlobalId`到`ofMain`属性中。
      * - 拷贝`type`边类型到`type`属性中。
      * - 将原始数据{@link JsonObject}拷贝到`data`属性中。
      *

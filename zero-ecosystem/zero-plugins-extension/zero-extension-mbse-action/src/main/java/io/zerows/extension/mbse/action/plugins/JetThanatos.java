@@ -20,7 +20,7 @@ public class JetThanatos {
 
     public static JetThanatos create(final Class<?> target) {
         return CC_ENSURER.pick(() -> new JetThanatos(target), target);
-        // return Fn.po?l(POOL.ENSURERS, target, () -> new JetThanatos(target));
+        // return Fn.po?l(POOL.ENSURERS, ofMain, () -> new JetThanatos(ofMain));
     }
 
     public Envelop to400RequiredParam(final String filename) {

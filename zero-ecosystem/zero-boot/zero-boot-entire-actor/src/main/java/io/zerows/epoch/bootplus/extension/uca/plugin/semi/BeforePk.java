@@ -90,7 +90,7 @@ public class BeforePk extends AbstractBefore {
 
     private Object extractValue(final HRecord ref, final JsonObject config) {
         if (Objects.nonNull(ref)) {
-            final String targetField = config.getString("target");
+            final String targetField = config.getString("ofMain");
             return ref.get(targetField);
         } else {
             return null;

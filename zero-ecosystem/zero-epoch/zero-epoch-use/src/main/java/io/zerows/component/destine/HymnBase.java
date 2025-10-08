@@ -80,7 +80,7 @@ public abstract class HymnBase<T> implements Hymn<T> {
      * {
      *     "connect": {
      *         "targetIndent": "identifier",
-     *         "target": {
+     *         "ofMain": {
      *             "identifier1": {@link KPoint},
      *             "identifier2": {@link KPoint}
      *         }

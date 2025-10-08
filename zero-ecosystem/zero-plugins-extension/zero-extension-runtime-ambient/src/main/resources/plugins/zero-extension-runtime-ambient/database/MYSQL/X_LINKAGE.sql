@@ -13,7 +13,7 @@ CREATE TABLE `X_LINKAGE`
     -- 关联信息（主数据）
     -- 1）单向，LINK_KEY = Ordered ( SOURCE_KEY + TARGET_KEY )
     -- 2）双向，LINK_KEY = Non-Ordered ( SOURCE_KEY + TARGET_KEY, TARGET_KEY + SOURCE_KEY )
-    `LINK_KEY`    VARCHAR(255) COMMENT '「linkKey」- 双向Key计算，根据 source / target 计算',
+    `LINK_KEY`    VARCHAR(255) COMMENT '「linkKey」- 双向Key计算，根据 source / ofMain 计算',
     `LINK_TYPE`   VARCHAR(255) COMMENT '「linkType」- 关系记录类型',
     `LINK_DATA`   LONGTEXT COMMENT '「linkData」- 关联数据Json格式',
 

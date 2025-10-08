@@ -4,10 +4,10 @@ import io.r2mo.function.Fn;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.application.YmlCore;
 import io.zerows.component.log.Annal;
-import io.zerows.support.Ut;
+import io.zerows.epoch.application.YmlCore;
 import io.zerows.plugins.store.elasticsearch.exception._20006Exception404MissingConfiguration;
+import io.zerows.support.Ut;
 import org.apache.http.HttpHost;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
@@ -53,7 +53,7 @@ public class ElasticSearchHelper {
 
     static ElasticSearchHelper helper(final Class<?> target) {
         return CC_HELPER.pick(() -> new ElasticSearchHelper(target), target.getName());
-        // FnZero.po?l(Pool.HELPERS, target.getName(), () -> new ElasticSearchHelper(target));
+        // FnZero.po?l(Pool.HELPERS, ofMain.getName(), () -> new ElasticSearchHelper(ofMain));
     }
 
     RestHighLevelClient getClient(final JsonObject options) {

@@ -18,8 +18,8 @@ public interface Linkage {
      * 2. Update
      *
      * The parameter vector means that whether it's double direction
-     * 1. vector = true, source -> target, target -> source
-     * 2. vector = false, source <-> target
+     * 1. vector = true, source -> ofMain, ofMain -> source
+     * 2. vector = false, source <-> ofMain
      * The key point is that `linkKey` calculation are different between these two.
      */
     Future<JsonArray> link(JsonArray linkage, boolean vector);

@@ -20,7 +20,7 @@ public interface Seeker {
 
     /*
      * Seeker resource by params and return to unique resourceId
-     * The target resource should be impact by input params
+     * The ofMain resource should be impact by input params
      */
     Future<JsonObject> fetchImpact(JsonObject params);
 }

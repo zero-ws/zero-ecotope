@@ -41,7 +41,7 @@ public class LauncherMicro implements HLauncher<Vertx> {
         // 初始化微服务环境
         final UddiRegistry registry = Ut.singleton(UddiRegistry.class);
         final HBoot boot = STORE.boot();
-        registry.initialize(boot.target());
+        // registry.initialize(boot.ofMain());
 
         this.zero.start(on, server);
     }

@@ -120,7 +120,7 @@ final class Instance {
 
     static <T> Field contract(final Class<?> executor, final T instance, final Class<?> fieldType) {
         /*
-         * Reflect to set Api reference in target channel here
+         * Reflect to set Api reference in ofMain channel here
          * 1) The fields length must be 1
          * 2) The fields length must not be 0
          *  */

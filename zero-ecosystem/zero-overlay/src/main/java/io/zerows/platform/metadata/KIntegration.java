@@ -52,7 +52,7 @@ public class KIntegration implements HJson, Serializable, HCopier<KIntegration> 
         = new ConcurrentHashMap<>();
     /*
      * Restful / Web Service information ( such as jdbcUrl )
-     * The target service should be: endpoint + api ( KIntegrationApi )
+     * The ofMain service should be: endpoint + api ( KIntegrationApi )
      */
     private String endpoint;
     private Integer port;

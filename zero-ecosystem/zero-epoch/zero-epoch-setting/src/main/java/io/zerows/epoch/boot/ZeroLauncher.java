@@ -12,7 +12,6 @@ import io.zerows.spi.BootIo;
 import io.zerows.spi.HPI;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Arrays;
 import java.util.Objects;
 import java.util.function.BiConsumer;
 
@@ -79,11 +78,8 @@ public class ZeroLauncher<T> {
     private static ZeroLauncher INSTANCE;
 
     /** 🚀 实际的底层启动器，由 {@link BootIo#launcher()} 提供 */
-    private final HLauncher<T> launcher;
 
     /** 🧱 启动前后配置器，负责绑定参数、生成/提取 {@link HConfig.HOn}、执行预初始化等 */
-    @SuppressWarnings("rawtypes")
-    private final ZeroConfigurer configurer;
 
     /**
      * 🛠️ 构造方法（私有）
@@ -108,7 +104,19 @@ public class ZeroLauncher<T> {
         /*
          * 🟤BOOT-001: 系统中直接查找 BootIo，此处调用了 HPI.findOverwrite 进行查找，查找过程中如果出现自定义
          *   的 BootIo 实现，则直接覆盖 ZeroBootIo 的实现，否则直接使用 ZeroBootIo 的实现作为默认实现处理，默认
-         *   实现可启动一个最小的 Zero App 应用实例
+         *   实现可启动一个最小的 Zero App 应用实例，此处的核心流程
+         *   BootIo -->  HBoot
+         *               -->  包含主启动器               -->  HLauncher ( 内置 @Up 的类信息可扫描 )
+         *               -->  / 预处理启动器
+         *               -->  / start 配置启动器
+         *               -->  / stop 配置启动器
+         *               -->  / restart 配置启动器
+         *          -->  HEnergy
+         *               -->  主启动配置信息（包含输入部分）
+         *               -->  / 预处理启动配置
+         *               -->  / start 启动配置
+         *               -->  / stop 停止配置
+         *               -->  / restart 重启配置
          */
         final BootIo io = HPI.findOverwrite(BootIo.class);
         if (Objects.isNull(io)) {
@@ -116,19 +124,6 @@ public class ZeroLauncher<T> {
         }
 
 
-
-
-        /*
-         * 🟤BOOT-002: 构造 HEnergy 对象，并创建 ZeroConfigurer 进行绑定，绑定过程中会根据配置类型对文件检查
-         *   此处检查则考虑是否调用 HFS 的模式 -> 内置调用 HStore 从某个固定目录中提取配置信息，如果没有配置则考
-         *   虑从 classpath 中提取配置。
-         */
-        final HEnergy energy = io.energy(bootCls, args);
-        this.configurer = ZeroConfigurer.of(energy).bind(args);
-
-        /*  启动器部分：获取底层 HLauncher 并记录其实现类  */
-        this.launcher = io.launcher();
-        log.info("[ ZERO ] 选择启动器: {}", this.launcher.getClass());
     }
 
     /**
@@ -176,7 +171,7 @@ public class ZeroLauncher<T> {
         // KConfigurer.environment();
 
         // 提取自配置的 HOn 组件，执行启动前的初始化（configure 第一周期已经完成）
-        final HConfig.HOn on = this.configurer.onComponent();
+        // final HConfig.HOn on = this.configurer.onComponent();
 
         /*
          * 此处 {@link HOn} 已执行完 configure 的第一个周期
@@ -186,33 +181,33 @@ public class ZeroLauncher<T> {
          *     3. 文件目录已检查
          *     4. 可直接初始化 {@link T} 部分
          */
-        this.launcher.start(on, server -> {
-
-            final CONFIG configuration = Objects.isNull(on) ? null : (CONFIG) on.store();
-
-            /*
-             * 将参数部分传递到配置中，在 configuration 中构造：
-             * arguments = JsonArray 结构
-             */
-            final JsonArray parameter = new JsonArray();
-            final String[] arguments = on.args();
-            Arrays.stream(arguments).forEach(parameter::add);
-
-            // configuration 可能为 null（取决于 HOn 实现），判空后再写入与预执行
-            if (Objects.nonNull(configuration)) {
-                configuration.put("arguments", parameter);
-                // Pre 1：针对容器初始化完成之后的第一步初始化流程
-                this.configurer.preExecute(server, configuration);
-            }
-
-            /**
-             * 此处是穿透效果，直接外层调用
-             *     (server,config) -> {
-             *         server -> 服务器引用（初始化好的框架部分）
-             *         config -> 配置引用（初始化好的配置部分）
-             *     }
-             */
-            consumer.accept(server, configuration);
-        });
+        //        this.launcher.start(on, server -> {
+        //
+        //            final CONFIG configuration = Objects.isNull(on) ? null : (CONFIG) on.store();
+        //
+        //            /*
+        //             * 将参数部分传递到配置中，在 configuration 中构造：
+        //             * arguments = JsonArray 结构
+        //             */
+        //            final JsonArray parameter = new JsonArray();
+        //            final String[] arguments = on.args();
+        //            Arrays.stream(arguments).forEach(parameter::add);
+        //
+        //            // configuration 可能为 null（取决于 HOn 实现），判空后再写入与预执行
+        //            if (Objects.nonNull(configuration)) {
+        //                configuration.put("arguments", parameter);
+        //                // Pre 1：针对容器初始化完成之后的第一步初始化流程
+        //                this.configurer.preExecute(server, configuration);
+        //            }
+        //
+        //            /**
+        //             * 此处是穿透效果，直接外层调用
+        //             *     (server,config) -> {
+        //             *         server -> 服务器引用（初始化好的框架部分）
+        //             *         config -> 配置引用（初始化好的配置部分）
+        //             *     }
+        //             */
+        //            consumer.accept(server, configuration);
+        //        });
     }
 }

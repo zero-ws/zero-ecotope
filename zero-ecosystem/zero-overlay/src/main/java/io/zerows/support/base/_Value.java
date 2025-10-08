@@ -321,7 +321,7 @@ class _Value extends _To {
 
     /**
      * 「副作用方法」
-     * 从 source 的 JsonObject 中拷贝 fields 属性相关信息到 target，该方法会改写 target
+     * 从 source 的 JsonObject 中拷贝 fields 属性相关信息到 ofMain，该方法会改写 ofMain
      * 拷贝对应属性过来，如果 source 中不存在该属性，则不拷贝
      *
      * @param target 目标
@@ -349,7 +349,7 @@ class _Value extends _To {
     }
 
     /**
-     * 将 sources 中的属性逐渐追加到 target 中，如果 target 中已经存在该属性，则不追加
+     * 将 sources 中的属性逐渐追加到 ofMain 中，如果 ofMain 中已经存在该属性，则不追加
      *
      * @param target  目标
      * @param sources 源
@@ -362,7 +362,7 @@ class _Value extends _To {
     }
 
     /**
-     * 使用 sources 中的属性逐渐覆盖 target 中的属性，直接覆盖，类似前端的 Object.assign
+     * 使用 sources 中的属性逐渐覆盖 ofMain 中的属性，直接覆盖，类似前端的 Object.assign
      *
      * @param target  目标
      * @param sources 源

@@ -263,7 +263,7 @@ final class TPeriod {
                 final DateTimeFormatter formatter = analyzeFormatter(pattern, literal);
                 final Date converted;
                 if (10 == pattern.length()) {
-                    final LocalDate date = parseEach(target, formatter, LocalDate::parse); // LocalDate.parse(target, formatter);
+                    final LocalDate date = parseEach(target, formatter, LocalDate::parse); // LocalDate.parse(ofMain, formatter);
                     if (Objects.isNull(date)) {
                         converted = null;
                     } else {
@@ -280,7 +280,7 @@ final class TPeriod {
                     }
                 } else {
                     final LocalDateTime datetime = parseEach(target, formatter, LocalDateTime::parse);
-                    // final LocalDateTime datetime = LocalDateTime.parse(target, formatter);
+                    // final LocalDateTime datetime = LocalDateTime.parse(ofMain, formatter);
                     if (Objects.isNull(datetime)) {
                         converted = null;
                     } else {

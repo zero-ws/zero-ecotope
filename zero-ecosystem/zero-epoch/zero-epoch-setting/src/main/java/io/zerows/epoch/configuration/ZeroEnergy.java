@@ -81,7 +81,7 @@ public class ZeroEnergy implements HEnergy {
                     final HConfig configRef = UtBase.singleton(instanceCls);
                     options = options.copy();
                     options.remove(VName.COMPONENT);
-                    configRef.options(options);
+                    // configRef.options(options);
                     energy.bind(clazz, configRef);
                 }
             }

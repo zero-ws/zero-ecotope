@@ -25,25 +25,9 @@ import io.zerows.specification.atomic.HCommand;
  */
 public interface HConfig {
 
-    /**
-     * 返回组件原始配置
-     *
-     * @return {@link JsonObject}
-     */
-    default JsonObject options() {
-        return new JsonObject();
-    }
+    String DEFAULT_CONFIG_KEY = "DEFAULT_CONFIG";
 
-    /**
-     * 设置组件原始配置
-     *
-     * @param options 配置数据
-     *
-     * @return {@link HConfig}
-     */
-    default HConfig options(final JsonObject options) {
-        return this;
-    }
+    JsonObject options();
 
     /**
      * 设置单个字段值，更改某个配置项相关信息
@@ -53,9 +37,7 @@ public interface HConfig {
      *
      * @return {@link HConfig}
      */
-    default HConfig put(final String field, final Object value) {
-        return this;
-    }
+    HConfig option(String field, Object value);
 
     /**
      * 检查配置中是否存在某个字段
@@ -65,7 +47,32 @@ public interface HConfig {
      *
      * @return 存在返回 true，否则返回 false
      */
-    default <T> T get(final String field) {
+    <T> T option(final String field);
+
+    /**
+     * 设置配制键的反射组件，后期可直接反射得到结果
+     *
+     * @param configKey 配置键
+     * @param clazz     组件类
+     *
+     * @return Fluent 模式的自身引用
+     */
+    default HConfig executor(final String configKey, final Class<?> clazz) {
+        return this;
+    }
+
+    default HConfig executor(final Class<?> clazz) {
+        return this.executor(DEFAULT_CONFIG_KEY, clazz);
+    }
+
+    /**
+     * 根据配置键获取反射组件
+     *
+     * @param configKey 配置键
+     *
+     * @return 组件类
+     */
+    default Class<?> executor(final String configKey) {
         return null;
     }
 

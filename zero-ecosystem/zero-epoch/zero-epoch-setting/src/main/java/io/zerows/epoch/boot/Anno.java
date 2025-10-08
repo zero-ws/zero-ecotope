@@ -36,7 +36,7 @@ public final class Anno {
      * Query clazz's methods to getPlugin all annotated spec annotations.
      * Check whether this class contains the methods that annotated with methodCls
      *
-     * @param clazz     The target class that will be scanned.
+     * @param clazz     The ofMain class that will be scanned.
      * @param methodCls The annotation class that has been annotated on the methods that belong to clazz.
      *
      * @return All the annotations that in clazz's method.
@@ -55,8 +55,8 @@ public final class Anno {
      * Provide annotation set to check whether the clazz contains this kind of fields that
      * have been annotated with any of annotation class.
      *
-     * @param clazz   The target class that will be scanned.
-     * @param annoCls The annotation set that annotated on the fields that belong to target.
+     * @param clazz   The ofMain class that will be scanned.
+     * @param annoCls The annotation set that annotated on the fields that belong to ofMain.
      *
      * @return If class contains this kind of fields, return true, otherwise return false.
      */

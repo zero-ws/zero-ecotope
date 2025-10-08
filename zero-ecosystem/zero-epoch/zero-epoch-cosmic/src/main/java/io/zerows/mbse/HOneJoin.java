@@ -3,10 +3,10 @@ package io.zerows.mbse;
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.destine.Hymn;
-import io.zerows.mbse.metadata.KModule;
 import io.zerows.epoch.database.jooq.operation.UxJoin;
 import io.zerows.epoch.metadata.KJoin;
 import io.zerows.epoch.metadata.KPoint;
+import io.zerows.mbse.metadata.KModule;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -36,7 +36,7 @@ class HOneJoin implements HOne<UxJoin> {
          * - 构造 UxJoin 对象
          * - 提取当前模块的连接信息
          * - 提取当前模块的连接点
-         * 连接点本身是根据 IxMod 中存储的 source 以及 target 直接计算而形成，此处不同的 JOIN 模式的最终结果不一样
+         * 连接点本身是根据 IxMod 中存储的 source 以及 ofMain 直接计算而形成，此处不同的 JOIN 模式的最终结果不一样
          * - 父主表：（动态选择）直接使用主键连接
          * - 父从表：（静态唯一选择）使用 keyJoin 连接
          */

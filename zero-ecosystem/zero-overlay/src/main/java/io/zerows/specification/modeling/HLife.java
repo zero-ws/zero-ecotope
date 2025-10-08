@@ -92,7 +92,7 @@ public interface HLife extends Serializable, HJson {
      * 参考 {@link Environment}，三种不同的目录根目录如下（Gradle的目录结构略有不同）
      * <pre><code>
      *     Development:                 src/main/resources/             开发环境
-     *     Production:                  target/                         生产环境
+     *     Production:                  ofMain/                         生产环境
      *     Mockito:                     src/mock/resources/             测试环境
      * </code></pre>
      *

@@ -19,9 +19,9 @@ class N4JEdge {
     static String add(final String graph, final JsonObject edge) {
         final StringBuilder cql = new StringBuilder();
         cql.append("MATCH (source:").append(graph).append("),");
-        cql.append("(target:").append(graph).append(") ");
+        cql.append("(ofMain:").append(graph).append(") ");
         cql.append("WHERE source.key").append(" = $source");
-        cql.append(" AND target.key").append(" = $target");
+        cql.append(" AND ofMain.key").append(" = $ofMain");
         cql.append(" CREATE (source)-[relation:").append(edge.getValue("type")).append(" ");
         /*
          * Data information of current relation
@@ -29,7 +29,7 @@ class N4JEdge {
         final List<String> kv = new ArrayList<>();
         edge.fieldNames().forEach(key -> kv.add(key + ":$" + key));
         cql.append("{").append(Ut.fromJoin(kv, ",")).append("}");
-        cql.append("]->(target)");
+        cql.append("]->(ofMain)");
         cql.append(" RETURN relation");
         return cql.toString();
     }
@@ -44,7 +44,7 @@ class N4JEdge {
         final StringBuilder cql = new StringBuilder();
         cql.append("MATCH (source:").append(graph).append(" { key:$source })-");
         cql.append("[ r:").append(edge.getValue("type")).append(" ]->");
-        cql.append("(target:").append(graph).append(" { key:$target })");
+        cql.append("(ofMain:").append(graph).append(" { key:$ofMain })");
         return cql.toString();
     }
 

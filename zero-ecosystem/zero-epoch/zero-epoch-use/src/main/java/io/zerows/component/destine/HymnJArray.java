@@ -16,7 +16,7 @@ import java.util.Set;
  * 从一个数据集中批量提取连接点配置
  * <pre><code>
  *     {
- *         "target": {
+ *         "ofMain": {
  *             "identifier1": {@link KPoint},
  *             "identifier2": {@link KPoint}
  *         }

@@ -124,12 +124,12 @@ class ElectyEnroll {
 
     private static Future<Boolean> registryAsync(
         final HConfig config,
-        final Function<HLauncher.Wait<Vertx>, Future<Boolean>> runnerPre, final Supplier<Future<Boolean>> runner) {
+        final Function<HLauncher.Pre<Vertx>, Future<Boolean>> runnerPre, final Supplier<Future<Boolean>> runner) {
         final Class<?> implCls = null; // config.pre();
         if (Objects.isNull(implCls)) {
             return runner.get();
         }
-        final HLauncher.Wait<Vertx> pre = Ut.singleton(implCls);
+        final HLauncher.Pre<Vertx> pre = Ut.singleton(implCls);
         if (Objects.isNull(pre)) {
             return runner.get();
         }

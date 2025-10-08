@@ -12,7 +12,7 @@ import java.util.concurrent.ConcurrentMap;
  * 传入参数数据类型为 String 类型，即根据模型 identifier 来解析连接点，从配置中提取连接点配置，对应配置数据结构如下：
  * <pre><code>
  *     {
- *         "target": {
+ *         "ofMain": {
  *             "identifier1": {@link KPoint},
  *             "identifier2": {@link KPoint}
  *         }

@@ -1,67 +1,68 @@
 package io.zerows.epoch.configuration;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.application.VertxYml;
+import io.zerows.epoch.basicore.YmBoot;
 import io.zerows.platform.enums.EmApp;
 import io.zerows.specification.configuration.HBoot;
-import io.zerows.specification.configuration.HEnergy;
-import io.zerows.support.base.UtBase;
+import io.zerows.specification.configuration.HConfig;
+import io.zerows.specification.configuration.HLauncher;
 
 /**
  * @author lang : 2023-05-31
  */
 public class ZeroBoot implements HBoot {
-    private final HEnergy energy;
-    private final Class<?> launcherCls;
+    private Class<?> launcherCls;
     private Class<?> mainClass;
     private String[] arguments;
 
     private EmApp.Type type;
 
-    private ZeroBoot(final JsonObject bootJ) {
-        this.launcherCls = UtBase.valueC(bootJ, VertxYml.boot.launcher);
-        this.energy = ZeroEnergy.of(bootJ);
+    private ZeroBoot(final YmBoot bootConfiguration) {
+        // this.launcherCls = UtBase.valueC(bootJ, VertxYml.boot.launcher);
+        // this.energy = ZeroEnergy.of(bootJ);
     }
 
     public static HBoot of(final JsonObject bootJ) {
-        return new ZeroBoot(bootJ);
-    }
-
-    @Override
-    public HBoot bind(final Class<?> mainClass, final String... arguments) {
-        this.mainClass = mainClass;
-        this.arguments = arguments;
-        return this;
+        return new ZeroBoot(null);
     }
 
     @Override
     public EmApp.Type app() {
-        return this.type;
+        return null;
     }
 
     @Override
-    public HBoot app(final EmApp.Type app) {
-        this.type = app;
-        return this;
+    public String[] inArgs() {
+        return new String[0];
     }
 
     @Override
-    public Class<?> target() {
-        return this.mainClass;
+    public Class<?> inMain() {
+        return null;
     }
 
     @Override
-    public Class<?> launcher() {
-        return this.launcherCls;
+    public <C> HLauncher<C> launcher() {
+        return null;
     }
 
     @Override
-    public HEnergy energy() {
-        return this.energy;
+    public <C> HLauncher.Pre<C> withPre() {
+        return null;
     }
 
     @Override
-    public String[] args() {
-        return this.arguments;
+    public <T extends HConfig> HConfig.HOn<T> whenOn() {
+        return null;
+    }
+
+    @Override
+    public <T extends HConfig> HConfig.HRun<T> whenRun() {
+        return null;
+    }
+
+    @Override
+    public <T extends HConfig> HConfig.HOff<T> whenOff() {
+        return null;
     }
 }

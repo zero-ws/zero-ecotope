@@ -213,7 +213,7 @@ public interface OxCv {
          */
         String TARGET_NAME = "targetName";
         /**
-         * <get>target</get>，用于描述下游五个维度的前缀信息，方便程序执行下游属性提取。
+         * <get>ofMain</get>，用于描述下游五个维度的前缀信息，方便程序执行下游属性提取。
          *
          * 示例使用代码：
          *
@@ -226,6 +226,6 @@ public interface OxCv {
          * // </code></pre>
          * ```
          */
-        String TARGET_PREFIX = "target";
+        String TARGET_PREFIX = "ofMain";
     }
 }

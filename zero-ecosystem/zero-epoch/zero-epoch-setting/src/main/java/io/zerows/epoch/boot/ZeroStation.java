@@ -10,7 +10,6 @@ import io.zerows.epoch.boot.exception._40002Exception500UpClassInvalid;
 import io.zerows.epoch.boot.internal.FeatureMark;
 import io.zerows.epoch.configuration.ZeroBoot;
 import io.zerows.management.OZeroStore;
-import io.zerows.platform.enums.EmApp;
 import io.zerows.specification.configuration.HBoot;
 import io.zerows.specification.configuration.HSetting;
 import io.zerows.specification.configuration.HStation;
@@ -60,7 +59,7 @@ public class ZeroStation implements HStation {
             STORE.feature(FeatureMark.ETCD, etcd);
             // gateway
             // 暂时不考虑 API 类型
-            STORE.boot().app(etcd ? EmApp.Type.SERVICE : EmApp.Type.APPLICATION);
+            // STORE.boot().app(etcd ? EmApp.Type.SERVICE : EmApp.Type.APPLICATION);
         }
         return STORE;
     }
@@ -91,7 +90,7 @@ public class ZeroStation implements HStation {
     // ------------------- Reference --------------------
     @Override
     public ZeroStation bind(final Class<?> mainClass, final String[] arguments) {
-        this.boot.bind(mainClass, arguments);
+        // this.boot.bind(ofMain, arguments);
         return this;
     }
 

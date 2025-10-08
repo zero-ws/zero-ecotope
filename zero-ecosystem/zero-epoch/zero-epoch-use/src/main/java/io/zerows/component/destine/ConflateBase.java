@@ -2,8 +2,8 @@ package io.zerows.component.destine;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.constant.KName;
 import io.zerows.component.log.Log;
+import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.KJoin;
 import io.zerows.epoch.metadata.KPoint;
 import io.zerows.support.Ut;
@@ -37,7 +37,7 @@ import java.util.function.BiConsumer;
  *
  *     新版追加       ---->
  *                   connect 在解析过程中执行二选一的处理模式
- *                   - 父主表模式，根据 target 动态提取被连接的表结构，然后执行连接完成之后的数据处理（动态）
+ *                   - 父主表模式，根据 ofMain 动态提取被连接的表结构，然后执行连接完成之后的数据处理（动态）
  *                   - 父从表模式，根据 reference 动态提取连接的主表结构（静态）
  *
  *                   * 现阶段版本两种模式只能二选一，不支持同时有父表和子表的情况，后续版本也不推荐这样的做法，主要原因在
@@ -126,7 +126,7 @@ public abstract class ConflateBase<I, O> implements Conflate<I, O> {
         });
     }
 
-    // source.key / target.keyJoin --> qr
+    // source.key / ofMain.keyJoin --> qr
     protected JsonObject procQr(final JsonObject active, final String identifier) {
         final String keySource = this.sourceKey();
         final KPoint target = this.target(identifier);
@@ -145,7 +145,7 @@ public abstract class ConflateBase<I, O> implements Conflate<I, O> {
         return dataJoin;
     }
 
-    // source.key -> target.keyJoin
+    // source.key -> ofMain.keyJoin
     protected JsonObject procInput(final JsonObject active, final String identifier) {
         final String keySource = this.sourceKey();
         final KPoint target = this.target(identifier);
@@ -160,7 +160,7 @@ public abstract class ConflateBase<I, O> implements Conflate<I, O> {
         return dataJoin;
     }
 
-    // target.keyJoin -> source.key
+    // ofMain.keyJoin -> source.key
     protected JsonObject procOutput(final JsonObject active, final String identifier) {
         final String keySource = this.sourceKey();
         final KPoint target = this.target(identifier);

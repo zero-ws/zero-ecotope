@@ -78,6 +78,6 @@ public class OZeroStore {
      * @param config       扩展模块的配置
      */
     public static void register(final String extensionKey, final HConfig config) {
-        SETTING.extension(extensionKey, config);
+        // SETTING.extension(extensionKey, config);
     }
 }

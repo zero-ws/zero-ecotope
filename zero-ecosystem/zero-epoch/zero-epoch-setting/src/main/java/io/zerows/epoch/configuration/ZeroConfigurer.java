@@ -56,7 +56,7 @@ public class ZeroConfigurer<T> {
         Optional.ofNullable(preCls).ifPresent(pClass -> {
             // 配置绑定
             // configuration.pre(pClass);
-            final HLauncher.Wait<T> pre = UtBase.singleton(pClass);
+            final HLauncher.Pre<T> pre = UtBase.singleton(pClass);
             pre.beforeStart(started, configuration.options());
         });
     }

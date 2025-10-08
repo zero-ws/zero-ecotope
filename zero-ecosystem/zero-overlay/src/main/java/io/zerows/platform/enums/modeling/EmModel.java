@@ -16,11 +16,11 @@ public class EmModel {
      */
     public enum Join {
         /**
-         * CRUD, `crud` configured, the system will look up target configuration by `CRUD` standard way.
+         * CRUD, `crud` configured, the system will look up ofMain configuration by `CRUD` standard way.
          */
         CRUD,
         /**
-         * DAO, `classDao` configured, directly to seek target configuration
+         * DAO, `classDao` configured, directly to seek ofMain configuration
          */
         DAO,
         /**

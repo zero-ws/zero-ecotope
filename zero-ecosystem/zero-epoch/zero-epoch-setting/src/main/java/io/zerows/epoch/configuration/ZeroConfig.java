@@ -1,9 +1,13 @@
 package io.zerows.epoch.configuration;
 
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.metadata.MMComponent;
 import io.zerows.specification.configuration.HConfig;
-import lombok.Data;
 import lombok.experimental.Accessors;
+
+import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 /**
  * 「常用配置」KConfig
@@ -12,7 +16,7 @@ import lombok.experimental.Accessors;
  *
  * <h2>🧩 设计要点</h2>
  * <ul>
- *   <li>🔧 <b>预处理器</b>：通过 {@link #pre} 指定一个预处理类（通常是某个配置预处理/校验/转换器的 Class）。</li>
+ *   <li>🔧 <b>预处理器</b>：通过 指定一个预处理类（通常是某个配置预处理/校验/转换器的 Class）。</li>
  *   <li>📦 <b>配置容器</b>：内部使用 Vert.x 的 {@link JsonObject} 存放键值对（见 {@link #options}）。</li>
  *   <li>🔁 <b>链式调用</b>：配合 {@link Accessors#fluent()} 提供流式 API（如：{@code cfg.put("k","v").put("a",1)}）。</li>
  * </ul>
@@ -26,14 +30,14 @@ import lombok.experimental.Accessors;
  * <h2>💡 典型用法</h2>
  * <pre>{@code
  * // 1) 构建配置并设置预处理器
- * KConfig cfg = new KConfig()
- *     .pre(MyPreprocessor.class)
- *     .put("endpoint", "https://api.example.com")
- *     .put("timeoutMs", 3000);
+ * ZeroConfig cfg = new ZeroConfig()
+ *     .executor(MyPreprocessor.class)
+ *     .option("endpoint", "https://api.example.com")
+ *     .option("timeoutMs", 3000);
  *
  * // 2) 读取配置
- * String endpoint = cfg.get("endpoint");
- * Integer timeout = cfg.get("timeoutMs");
+ * String endpoint = cfg.option("endpoint");
+ * Integer timeout = cfg.option("timeoutMs");
  *
  * // 3) 获取底层 JsonObject 以便与 Vert.x 生态对接
  * JsonObject raw = cfg.options();
@@ -43,16 +47,26 @@ import lombok.experimental.Accessors;
  * @see HConfig
  * @since 2023-05-30
  */
-@Data
-@Accessors(fluent = true)
 public class ZeroConfig implements HConfig {
 
+    private final ConcurrentMap<String, Class<?>> executor = new ConcurrentHashMap<>();
     /**
      * 📦 配置项容器。
      * <p>使用 Vert.x 的 {@link JsonObject} 管理键值对，便于与 Vert.x 生态统一。</p>
      * <p><b>注意：</b>默认可变，若需只读可在外层封装快照或拷贝。</p>
      */
     private final JsonObject options = new JsonObject();
+
+    public ZeroConfig(final MMComponent component) {
+        Objects.requireNonNull(component);
+        this.options.mergeIn(component.getConfig(), true);
+        this.executor.put(DEFAULT_CONFIG_KEY, component.getClass());
+    }
+
+    @Override
+    public JsonObject options() {
+        return this.options;
+    }
 
     /**
      * ➕ 写入/覆盖配置项。
@@ -65,9 +79,20 @@ public class ZeroConfig implements HConfig {
      * @return 当前 {@code HConfig} 实例（便于链式调用） 🔗
      */
     @Override
-    public HConfig put(final String field, final Object value) {
+    public HConfig option(final String field, final Object value) {
         this.options.put(field, value);
         return this;
+    }
+
+    @Override
+    public HConfig executor(final String field, final Class<?> clazz) {
+        this.executor.put(field, clazz);
+        return this;
+    }
+
+    @Override
+    public Class<?> executor(final String field) {
+        return this.executor.get(field);
     }
 
     /**
@@ -82,7 +107,7 @@ public class ZeroConfig implements HConfig {
      */
     @Override
     @SuppressWarnings("unchecked")
-    public <T> T get(final String field) {
+    public <T> T option(final String field) {
         return (T) this.options.getValue(field);
     }
 }

@@ -1,10 +1,11 @@
 package io.zerows.epoch.boot;
 
 import io.zerows.epoch.configuration.ZeroConfig;
+import io.zerows.epoch.metadata.MMComponent;
 import io.zerows.specification.configuration.HLauncher;
 
 /**
- * 标准容器中的 {@link HLauncher.Wait} 处理器
+ * 标准容器中的 {@link HLauncher.Pre} 处理器
  * 针对框架中的插件执行双重处理：
  * <pre><code>
  *     Vertx容器已执行完实例化
@@ -16,4 +17,7 @@ import io.zerows.specification.configuration.HLauncher;
  * @author lang : 2023-05-31
  */
 public class ZeroConfigStandalone extends ZeroConfig {
+    public ZeroConfigStandalone(final MMComponent component) {
+        super(component);
+    }
 }
