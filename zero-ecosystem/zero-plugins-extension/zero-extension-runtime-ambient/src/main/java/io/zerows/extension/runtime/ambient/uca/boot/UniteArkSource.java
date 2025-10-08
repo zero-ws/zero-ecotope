@@ -2,18 +2,18 @@ package io.zerows.extension.runtime.ambient.uca.boot;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.application.YmlOption;
 import io.zerows.epoch.constant.KName;
-import io.zerows.platform.metadata.KDS;
-import io.zerows.platform.metadata.KDatabase;
-import io.zerows.platform.metadata.KArk;
-import io.zerows.platform.constant.VOption;
 import io.zerows.epoch.database.Database;
-import io.zerows.platform.enums.EmDS;
-import io.zerows.support.Ut;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XApp;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XSource;
+import io.zerows.platform.enums.EmDS;
+import io.zerows.platform.metadata.KArk;
+import io.zerows.platform.metadata.KDS;
+import io.zerows.platform.metadata.KDatabase;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.app.HArk;
+import io.zerows.support.Ut;
 
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -135,17 +135,17 @@ public class UniteArkSource implements UniteArk<List<XSource>> {
             final Set<KDatabase> databaseSet = new LinkedHashSet<>();
             sources.forEach(source -> {
                 final JsonObject sourceJson = new JsonObject();
-                sourceJson.put(VOption.database.HOSTNAME, source.getHostname());
-                sourceJson.put(VOption.database.INSTANCE, source.getInstance());
-                sourceJson.put(VOption.database.PORT, source.getPort());
-                sourceJson.put(VOption.database.CATEGORY, source.getCategory());
-                sourceJson.put(VOption.database.JDBC_URL, source.getJdbcUrl());
-                sourceJson.put(VOption.database.USERNAME, source.getUsername());
-                sourceJson.put(VOption.database.PASSWORD, source.getPassword());
-                sourceJson.put(VOption.database.DRIVER_CLASS_NAME, source.getDriverClassName());
+                sourceJson.put(YmlOption.database.HOSTNAME, source.getHostname());
+                sourceJson.put(YmlOption.database.INSTANCE, source.getInstance());
+                sourceJson.put(YmlOption.database.PORT, source.getPort());
+                sourceJson.put(YmlOption.database.CATEGORY, source.getCategory());
+                sourceJson.put(YmlOption.database.JDBC_URL, source.getJdbcUrl());
+                sourceJson.put(YmlOption.database.USERNAME, source.getUsername());
+                sourceJson.put(YmlOption.database.PASSWORD, source.getPassword());
+                sourceJson.put(YmlOption.database.DRIVER_CLASS_NAME, source.getDriverClassName());
                 final String jdbcConfig = source.getJdbcConfig();
                 if (Ut.isNotNil(jdbcConfig)) {
-                    sourceJson.put(VOption.database.OPTIONS, Ut.toJObject(jdbcConfig));
+                    sourceJson.put(YmlOption.database.OPTIONS, Ut.toJObject(jdbcConfig));
                 }
                 /*
                  * {

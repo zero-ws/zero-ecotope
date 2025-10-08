@@ -7,8 +7,8 @@ import io.zerows.epoch.annotations.Job;
 import io.zerows.epoch.assembly.Extractor;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
-import io.zerows.platform.constant.VPath;
 import io.zerows.platform.constant.VString;
+import io.zerows.platform.constant.VValue;
 import io.zerows.platform.enums.EmJob;
 import io.zerows.support.Ut;
 
@@ -141,8 +141,8 @@ public class JobExtractor implements Extractor<Mission> {
         } else {
             file.append(VString.SLASH).append(config);
         }
-        if (!config.endsWith(VString.DOT + VPath.SUFFIX.JSON)) {
-            file.append(VString.DOT).append(VPath.SUFFIX.JSON);
+        if (!config.endsWith(VString.DOT + VValue.SUFFIX.JSON)) {
+            file.append(VString.DOT).append(VValue.SUFFIX.JSON);
         }
         return file.toString().replace("//", "/");
     }

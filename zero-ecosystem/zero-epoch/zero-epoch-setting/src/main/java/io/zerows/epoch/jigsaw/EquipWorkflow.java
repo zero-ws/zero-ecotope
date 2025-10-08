@@ -3,7 +3,7 @@ package io.zerows.epoch.jigsaw;
 import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.epoch.basicore.MDId;
 import io.zerows.epoch.basicore.MDWorkflow;
-import io.zerows.platform.constant.VPath;
+import io.zerows.platform.constant.VValue;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
 
@@ -39,9 +39,9 @@ class EquipWorkflow implements EquipAt {
         final HBundle owner = id.owner();
         workflow.configure(workflowDir.trim());
         // *.form
-        final List<String> formFiles = Ut.ioFiles(workflowDir, VPath.SUFFIX.BPMN_FORM);
+        final List<String> formFiles = Ut.ioFiles(workflowDir, VValue.SUFFIX.BPMN_FORM);
         // *.json
-        final List<String> formData = Ut.ioFiles(workflowDir, VPath.SUFFIX.JSON);
+        final List<String> formData = Ut.ioFiles(workflowDir, VValue.SUFFIX.JSON);
         return workflow.configure(formFiles, formData);
     }
 }

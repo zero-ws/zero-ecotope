@@ -1,7 +1,7 @@
 package io.zerows.epoch.configuration;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.platform.constant.VBoot;
+import io.zerows.platform.constant.VName;
 import io.zerows.platform.enums.EmApp;
 import io.zerows.platform.enums.EmBoot;
 import io.zerows.specification.configuration.HConfig;
@@ -47,8 +47,8 @@ public class ZeroEnergy implements HEnergy {
      */
     public static HEnergy of(final JsonObject config) {
         final ZeroEnergy energy = new ZeroEnergy();
-        final JsonObject component = UtBase.valueJObject(config, VBoot.COMPONENT);
-        final JsonObject configJ = UtBase.valueJObject(config, VBoot.CONFIG);
+        final JsonObject component = UtBase.valueJObject(config, VName.COMPONENT);
+        final JsonObject configJ = UtBase.valueJObject(config, VName.CONFIG);
         /*
          * - pre, 针对 on / off / run 的特殊配置
          * - on
@@ -76,11 +76,11 @@ public class ZeroEnergy implements HEnergy {
                 }
             } else if (configV instanceof JsonObject) {
                 JsonObject options = (JsonObject) configV;
-                final Class<?> instanceCls = UtBase.valueC(options, VBoot.COMPONENT, null);
+                final Class<?> instanceCls = UtBase.valueC(options, VName.COMPONENT, null);
                 if (Objects.nonNull(instanceCls)) {
                     final HConfig configRef = UtBase.singleton(instanceCls);
                     options = options.copy();
-                    options.remove(VBoot.COMPONENT);
+                    options.remove(VName.COMPONENT);
                     configRef.options(options);
                     energy.bind(clazz, configRef);
                 }

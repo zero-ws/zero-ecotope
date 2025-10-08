@@ -8,12 +8,12 @@ import io.vertx.core.Handler;
 import io.vertx.core.Promise;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
-import io.zerows.platform.constant.VPath;
 import io.zerows.platform.constant.VString;
-import io.zerows.support.Ut;
+import io.zerows.platform.constant.VValue;
 import io.zerows.plugins.office.excel.exception._60039Exception500ExportingError;
 import io.zerows.plugins.office.excel.util.ExFn;
 import io.zerows.specification.modeling.metadata.HMetaAtom;
+import io.zerows.support.Ut;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -32,6 +32,7 @@ import java.util.UUID;
  * This component is for data exporting only
  */
 class SheetExport {
+    private static final String DEFAULT_FILE_EXPORTED = "file-exported";
     private transient final ExcelHelper helper;
 
     private SheetExport(final ExcelHelper helper) {
@@ -153,9 +154,9 @@ class SheetExport {
             /*
              * This file object refer to created temp file and output to buffer
              */
-            Ut.ioOut(VPath.SERVER.EXPORT);
-            final String filename = VPath.SERVER.EXPORT + "/" + identifier + VString.DOT + UUID.randomUUID() +
-                VString.DOT + VPath.SUFFIX.EXCEL_2007;
+            Ut.ioOut(DEFAULT_FILE_EXPORTED);
+            final String filename = DEFAULT_FILE_EXPORTED + "/" + identifier + VString.DOT + UUID.randomUUID() +
+                VString.DOT + VValue.SUFFIX.EXCEL_2007;
             final OutputStream out = new FileOutputStream(filename);
             workbook.write(out);
             /*

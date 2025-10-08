@@ -1,7 +1,5 @@
 package io.zerows.epoch.application;
 
-import io.zerows.platform.constant.VOption;
-
 /**
  * @author lang : 2023-05-29
  */
@@ -11,7 +9,7 @@ interface YmlCache {
     String L2 = "l2";
     String L3 = "l3";
 
-    interface l1 extends VOption.component {
+    interface l1 extends YmlOption.component {
         String OPTIONS = "options";
         String MATRIX = "matrix";
         String WORKER = "worker";

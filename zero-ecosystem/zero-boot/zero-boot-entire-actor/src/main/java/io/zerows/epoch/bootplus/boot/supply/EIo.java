@@ -1,8 +1,8 @@
 package io.zerows.epoch.bootplus.boot.supply;
 
 import io.zerows.platform.constant.VClassPath;
-import io.zerows.platform.constant.VPath;
 import io.zerows.platform.constant.VString;
+import io.zerows.platform.constant.VValue;
 import io.zerows.platform.metadata.KIntegration;
 
 import java.util.Objects;
@@ -21,6 +21,6 @@ class EIo {
         return VClassPath.RUNTIME + VString.SLASH
             + integration.getVendorConfig() + VString.SLASH
             + hit + VString.SLASH
-            + integration.getVendor() + VString.DOT + VPath.SUFFIX.JSON;
+            + integration.getVendor() + VString.DOT + VValue.SUFFIX.JSON;
     }
 }

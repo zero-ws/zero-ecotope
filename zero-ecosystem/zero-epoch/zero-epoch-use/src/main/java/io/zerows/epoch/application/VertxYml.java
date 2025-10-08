@@ -1,9 +1,11 @@
 package io.zerows.epoch.application;
 
 public interface VertxYml {
-    
+
     interface boot {
         String __ = "boot";
+
+        String launcher = "launcher";
 
         interface pre {
             String __ = "pre";

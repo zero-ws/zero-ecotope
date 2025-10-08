@@ -5,7 +5,7 @@ import io.vertx.core.Future;
 import io.vertx.core.buffer.Buffer;
 import io.zerows.extension.commerce.rbac.atom.ScConfig;
 import io.zerows.extension.commerce.rbac.bootstrap.ScPin;
-import io.zerows.platform.constant.VPath;
+import io.zerows.platform.constant.VValue;
 import io.zerows.program.Ux;
 
 import javax.imageio.ImageIO;
@@ -41,7 +41,7 @@ class ScImage {
         // To InputStream
         return Fn.jvmOr(() -> {
             final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ImageIO.write(image, VPath.SUFFIX.IMG_PNG, baos);
+            ImageIO.write(image, VValue.SUFFIX.IMG_PNG, baos);
             return Buffer.buffer(baos.toByteArray());
         });
     }

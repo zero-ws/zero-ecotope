@@ -1,9 +1,12 @@
-package io.zerows.platform.constant;
+package io.zerows.epoch.application;
+
+import io.zerows.platform.constant.VName;
 
 /**
  * @author lang : 2023-05-29
  */
-public interface VOption {
+@Deprecated
+public interface YmlOption {
     /**
      * <pre><code>
      *     category:

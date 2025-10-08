@@ -9,7 +9,7 @@ import io.zerows.component.log.Annal;
 import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.epoch.basicore.MDConnect;
 import io.zerows.epoch.jigsaw.Oneness;
-import io.zerows.platform.constant.VPath;
+import io.zerows.platform.constant.VValue;
 import io.zerows.plugins.office.excel.atom.ExRecord;
 import io.zerows.plugins.office.excel.atom.ExTable;
 import io.zerows.plugins.office.excel.atom.ExTenant;
@@ -121,7 +121,7 @@ class ExcelHelper {
         final InputStream in = Ut.ioStream(filename, getClass());
         Fn.jvmKo(Objects.isNull(in), _60037Exception404ExcelFileNull.class, filename);
         final Workbook workbook;
-        if (filename.endsWith(VPath.SUFFIX.EXCEL_2003)) {
+        if (filename.endsWith(VValue.SUFFIX.EXCEL_2003)) {
             workbook = CC_WORKBOOK.pick(() -> Fn.jvmOr(() -> new HSSFWorkbook(in)), filename);
             // FnZero.po?l(Pool.WORKBOOKS, filename, () -> FnZero.getJvm(() -> new HSSFWorkbook(in)));
         } else {

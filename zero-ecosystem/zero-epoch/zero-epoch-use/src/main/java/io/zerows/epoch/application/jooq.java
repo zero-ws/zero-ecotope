@@ -1,7 +1,5 @@
 package io.zerows.epoch.application;
 
-import io.zerows.platform.constant.VOption;
-
 /**
  * @author lang : 2023-05-29
  */
@@ -11,15 +9,15 @@ interface YmlJooq {
     String PROVIDER = "provider";   // 正常库
     String WORKFLOW = "workflow";   // 工作流库
 
-    interface orbit extends VOption.database {
+    interface orbit extends YmlOption.database {
 
     }
 
-    interface provider extends VOption.database {
+    interface provider extends YmlOption.database {
 
     }
 
-    interface workflow extends VOption.database {
+    interface workflow extends YmlOption.database {
 
     }
 }

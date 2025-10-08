@@ -3,8 +3,8 @@ package io.zerows.epoch.application;
 import io.zerows.epoch.annotations.Infusion;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KPlugin;
-import io.zerows.platform.constant.VPath;
 import io.zerows.platform.constant.VString;
+import io.zerows.platform.constant.VValue;
 import io.zerows.platform.enums.EmDS;
 import io.zerows.platform.enums.EmSecure;
 import io.zerows.support.base.UtBase;
@@ -40,10 +40,10 @@ public interface YmlCore {
     static String of(final String filename) {
         if (UtBase.isNil(filename)) {
             // vertx.yml
-            return VERTX + VString.DOT + VPath.SUFFIX.YML;
+            return VERTX + VString.DOT + VValue.SUFFIX.YML;
         } else {
             // vertx-{key}.yml
-            return VERTX + VString.DASH + filename + VString.DOT + VPath.SUFFIX.YML;
+            return VERTX + VString.DASH + filename + VString.DOT + VValue.SUFFIX.YML;
         }
     }
 

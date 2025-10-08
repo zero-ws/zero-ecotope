@@ -2,9 +2,9 @@ package io.zerows.support.base;
 
 import io.r2mo.function.Fn;
 import io.vertx.core.buffer.Buffer;
-import io.zerows.component.log.LogUtil;
 import io.zerows.component.fs.LocalDir;
-import io.zerows.platform.constant.VPath;
+import io.zerows.component.log.LogUtil;
+import io.zerows.platform.constant.VValue;
 import io.zerows.platform.exception._11002Exception500EmptyIo;
 
 import java.io.ByteArrayInputStream;
@@ -195,7 +195,7 @@ final class IoStream {
          * Jar reading
          * Firstly, check whether it contains jar flag
          */
-        if (Objects.isNull(in) && filename.contains(VPath.SUFFIX.JAR_DIVIDER)) {
+        if (Objects.isNull(in) && filename.contains(VValue.SUFFIX.JAR_DIVIDER)) {
 
 
             /*
@@ -242,7 +242,7 @@ final class IoStream {
             try {
                 final URL url = new URI(filename).toURL();
                 final String protocol = url.getProtocol();
-                if (VPath.PROTOCOL.JAR.equals(protocol)) {
+                if (VValue.PROTOCOL.JAR.equals(protocol)) {
                     final JarURLConnection jarCon = (JarURLConnection) url.openConnection();
                     return jarCon.getInputStream();
                 } else {

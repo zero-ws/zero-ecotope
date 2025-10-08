@@ -8,7 +8,7 @@ import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.epoch.basicore.MDConnect;
 import io.zerows.epoch.jigsaw.EquipAt;
 import io.zerows.management.OZeroStore;
-import io.zerows.platform.constant.VBoot;
+import io.zerows.platform.constant.VName;
 import io.zerows.specification.configuration.HSetting;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
@@ -38,9 +38,9 @@ public interface HExtension {
         if (data.isEmpty()) {
             final HSetting setting = OZeroStore.setting();
             final JsonObject launcherJ = setting.launcher().options();
-            final JsonArray boots = Ut.valueJArray(launcherJ, VBoot.EXTENSION);
+            final JsonArray boots = Ut.valueJArray(launcherJ, VName.EXTENSION);
             Ut.itJArray(boots).forEach(json -> {
-                final Class<?> bootCls = Ut.clazz(json.getString(VBoot.extension.EXECUTOR), null);
+                final Class<?> bootCls = Ut.clazz(json.getString("executor"), null);
                 if (Objects.nonNull(bootCls)) {
                     CC_BOOT.pick(() -> Ut.instance(bootCls), bootCls);
                 }

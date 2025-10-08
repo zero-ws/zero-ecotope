@@ -1,6 +1,9 @@
 # Zero Ecotope Framework
 
-[![Apache License 2](https://img.shields.io/badge/license-ASF2-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0.txt)
+[![Maven Central](https://img.shields.io/maven-central/v/io.zerows/rachel-momo.svg?label=Rachel%20Momo&style=for-the-badge&color=blue)](https://mvnrepository.com/artifact/io.zerows/rachel-momo)  [![Maven Central](https://img.shields.io/maven-central/v/io.zerows/r2mo-rapid.svg?label=R2MO%20Rapid&style=for-the-badge&color=green)](https://mvnrepository.com/artifact/io.zerows/r2mo-rapid)
+Zero Waiting
+
+> For Rachel Momo
 
 Zero Ecotope Framework 是一个基于 [Vert.x](http://vertx.io) 的中间件容器，它可以帮助软件开发人员在 Vert.x
 中快速开发和实施，集中精力处理项目需求中的业务逻辑而忽略开发过程中的部分细节，项目起源于早期在 Vert.x

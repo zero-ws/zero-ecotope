@@ -1,9 +1,9 @@
 package io.zerows.support.base;
 
 import io.r2mo.function.Fn;
-import io.zerows.component.log.LogUtil;
 import io.zerows.component.fs.LocalDir;
-import io.zerows.platform.constant.VPath;
+import io.zerows.component.log.LogUtil;
+import io.zerows.platform.constant.VValue;
 
 import java.io.File;
 import java.io.IOException;
@@ -87,7 +87,7 @@ final class IoDirectory {
                 /*
                  * Fix jar path issue here.
                  */
-                if (folder.contains(VPath.SUFFIX.JAR_DIVIDER)) {
+                if (folder.contains(VValue.SUFFIX.JAR_DIVIDER)) {
                     url = Fn.jvmOr(() -> new URI(folder).toURL());
                 }
             }
@@ -101,12 +101,12 @@ final class IoDirectory {
                  * Whether it's jar path or common path.
                  */
                 final String protocol = url.getProtocol();
-                if (VPath.PROTOCOL.FILE.equals(protocol)) {
+                if (VValue.PROTOCOL.FILE.equals(protocol)) {
                     /*
                      * Common file
                      */
                     retSet.addAll(getFiles(url, extension, isDirectory));
-                } else if (VPath.PROTOCOL.JAR.equals(protocol)) {
+                } else if (VValue.PROTOCOL.JAR.equals(protocol)) {
                     /*
                      * Jar File
                      */

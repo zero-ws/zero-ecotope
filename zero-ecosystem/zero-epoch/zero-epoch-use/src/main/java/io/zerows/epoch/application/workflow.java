@@ -1,7 +1,5 @@
 package io.zerows.epoch.application;
 
-import io.zerows.platform.constant.VOption;
-
 /**
  * @author lang : 2023-05-29
  */
@@ -13,7 +11,7 @@ interface YmlWorkflow {
     String RESOURCE = "resource";
     String DATABASE = "database";
 
-    interface database extends VOption.database {
+    interface database extends YmlOption.database {
 
     }
 }

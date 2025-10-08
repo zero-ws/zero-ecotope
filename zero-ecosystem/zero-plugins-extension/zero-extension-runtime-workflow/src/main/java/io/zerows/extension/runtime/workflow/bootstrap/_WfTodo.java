@@ -1,8 +1,8 @@
 package io.zerows.extension.runtime.workflow.bootstrap;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.platform.constant.VPath;
 import io.zerows.platform.constant.VString;
+import io.zerows.platform.constant.VValue;
 import io.zerows.support.Ut;
 
 import java.util.List;
@@ -30,12 +30,12 @@ final class WfTodo {
     static void initLegacy() {
         final String FOLDER_TODO = "plugin/wf/todo/";
         if (TODO_DEF.isEmpty()) {
-            final List<String> files = Ut.ioFiles(FOLDER_TODO, VPath.SUFFIX.JSON);
+            final List<String> files = Ut.ioFiles(FOLDER_TODO, VValue.SUFFIX.JSON);
             LOG.Init.info(WfTodo.class, "Wf Todo Files: {0}", files.size());
             files.forEach(file -> {
                 final String path = FOLDER_TODO + file;
                 final JsonObject todoDef = Ut.ioJObject(path);
-                final String key = file.replace(VString.DOT + VPath.SUFFIX.JSON, VString.EMPTY);
+                final String key = file.replace(VString.DOT + VValue.SUFFIX.JSON, VString.EMPTY);
                 TODO_DEF.put(key, todoDef);
             });
         }

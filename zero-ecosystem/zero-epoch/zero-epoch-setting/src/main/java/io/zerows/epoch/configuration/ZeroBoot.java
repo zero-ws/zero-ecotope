@@ -1,7 +1,7 @@
 package io.zerows.epoch.configuration;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.platform.constant.VBoot;
+import io.zerows.epoch.application.VertxYml;
 import io.zerows.platform.enums.EmApp;
 import io.zerows.specification.configuration.HBoot;
 import io.zerows.specification.configuration.HEnergy;
@@ -19,7 +19,7 @@ public class ZeroBoot implements HBoot {
     private EmApp.Type type;
 
     private ZeroBoot(final JsonObject bootJ) {
-        this.launcherCls = UtBase.valueC(bootJ, VBoot.LAUNCHER);
+        this.launcherCls = UtBase.valueC(bootJ, VertxYml.boot.launcher);
         this.energy = ZeroEnergy.of(bootJ);
     }
 

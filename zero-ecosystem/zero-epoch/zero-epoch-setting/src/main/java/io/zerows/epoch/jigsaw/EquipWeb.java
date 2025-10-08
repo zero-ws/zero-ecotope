@@ -3,7 +3,7 @@ package io.zerows.epoch.jigsaw;
 import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.epoch.basicore.MDId;
 import io.zerows.epoch.basicore.MDPage;
-import io.zerows.platform.constant.VPath;
+import io.zerows.platform.constant.VValue;
 import io.zerows.support.Ut;
 
 import java.util.List;
@@ -35,6 +35,6 @@ class EquipWeb implements EquipAt {
     @SuppressWarnings("all")
     private List<String> scanPage(final String pathRoot, final MDId id) {
         final String webDir = id.path() + pathRoot;
-        return Ut.ioFilesN(webDir, VPath.SUFFIX.JSON);
+        return Ut.ioFilesN(webDir, VValue.SUFFIX.JSON);
     }
 }

@@ -2,11 +2,11 @@ package io.zerows.extension.runtime.crud.bootstrap;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.platform.constant.VPath;
-import io.zerows.platform.constant.VString;
 import io.zerows.cortex.metadata.WebRule;
-import io.zerows.support.Ut;
 import io.zerows.extension.runtime.crud.eon.IxFolder;
+import io.zerows.platform.constant.VString;
+import io.zerows.platform.constant.VValue;
+import io.zerows.support.Ut;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +32,7 @@ class IxValidator {
         new ConcurrentHashMap<>();
 
     static void init() {
-        final List<String> files = Ut.ioFiles(IxFolder.VALIDATOR, VPath.SUFFIX.YML);
+        final List<String> files = Ut.ioFiles(IxFolder.VALIDATOR, VValue.SUFFIX.YML);
         files.forEach(file -> {
             /* 1. Validator file under classpath */
             final String path = IxFolder.VALIDATOR + file;
@@ -45,7 +45,7 @@ class IxValidator {
                 ruleMap.put(field, getRules(ruleArray));
             });
             /* 4. Append rules */
-            final String key = file.replace(VString.DOT + VPath.SUFFIX.YML, VString.EMPTY);
+            final String key = file.replace(VString.DOT + VValue.SUFFIX.YML, VString.EMPTY);
 
             /* 4. Logger */
             LOG.Init.info(IxValidator.class, "--- file = {0}, key = {1}", path, key);

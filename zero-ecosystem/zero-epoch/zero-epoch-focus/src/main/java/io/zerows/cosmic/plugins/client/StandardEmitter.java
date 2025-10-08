@@ -2,8 +2,8 @@ package io.zerows.cosmic.plugins.client;
 
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonObject;
-import io.zerows.platform.constant.VPath;
 import io.zerows.platform.constant.VString;
+import io.zerows.platform.constant.VValue;
 import io.zerows.platform.metadata.KIntegration;
 import io.zerows.support.Ut;
 import org.apache.http.config.Registry;
@@ -37,9 +37,9 @@ class StandardEmitter extends AbstractEmitter {
          * RegistryBuilder
          */
         final RegistryBuilder<ConnectionSocketFactory> registry = RegistryBuilder.create();
-        registry.register(VPath.PROTOCOL.HTTP, PlainConnectionSocketFactory.INSTANCE);
+        registry.register(VValue.PROTOCOL.HTTP, PlainConnectionSocketFactory.INSTANCE);
         if (Objects.nonNull(sslcontext)) {
-            registry.register(VPath.PROTOCOL.HTTPS, new SSLConnectionSocketFactory(sslcontext, NoopHostnameVerifier.INSTANCE));
+            registry.register(VValue.PROTOCOL.HTTPS, new SSLConnectionSocketFactory(sslcontext, NoopHostnameVerifier.INSTANCE));
         }
 
         /*

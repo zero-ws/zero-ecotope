@@ -1,14 +1,14 @@
 package io.zerows.epoch.boot;
 
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.application.VertxYml;
 import io.zerows.epoch.application.YmlCore;
 import io.zerows.epoch.configuration.ZeroConfig;
 import io.zerows.epoch.configuration.ZeroSetting;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KPlugin;
-import io.zerows.platform.constant.VBoot;
-import io.zerows.platform.constant.VString;
 import io.zerows.epoch.management.AbstractAmbiguity;
+import io.zerows.platform.constant.VString;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HSetting;
 import io.zerows.specification.development.compiled.HBundle;
@@ -58,7 +58,7 @@ public class ZeroEquip extends AbstractAmbiguity implements HEquip {
         setting.container(this.createConfig(configZero));
         final String extension = Ut.valueString(configZero, YmlCore.LIME);
 
-        final JsonObject configBoot = Ut.valueJObject(configuration, VBoot.__KEY);
+        final JsonObject configBoot = Ut.valueJObject(configuration, VertxYml.boot.__);
         setting.launcher(this.createConfig(configBoot));
 
         /*

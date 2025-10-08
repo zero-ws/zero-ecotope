@@ -4,8 +4,8 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.epoch.basicore.MDId;
 import io.zerows.epoch.constant.KName;
-import io.zerows.platform.constant.VPath;
 import io.zerows.platform.constant.VString;
+import io.zerows.platform.constant.VValue;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +25,7 @@ class EquipShape implements EquipAt {
         // 加载 <id>.xml 配置文件
         // plugins/<id>.yml
         final String baseDir = id.path();
-        final String filename = baseDir + VString.DOT + VPath.SUFFIX.YML;
+        final String filename = baseDir + VString.DOT + VValue.SUFFIX.YML;
 
 
         // plugins/<id>/configuration.json

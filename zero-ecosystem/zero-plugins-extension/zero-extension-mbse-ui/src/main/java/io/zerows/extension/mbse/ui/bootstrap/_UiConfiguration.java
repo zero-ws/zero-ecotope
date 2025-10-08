@@ -9,7 +9,6 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.extension.mbse.ui.atom.UiConfig;
 import io.zerows.extension.mbse.ui.eon.UiConstant;
 import io.zerows.extension.runtime.skeleton.eon.KeMsg;
-import io.zerows.platform.constant.VPath;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.constant.VValue;
 import io.zerows.specification.app.HAmbient;
@@ -93,9 +92,9 @@ class UiConfiguration {
         }
         /* Re-Calculate `mapping` configuration */
         final String configPath = config.getDefinition();
-        final List<String> files = Ut.ioFiles(configPath, VString.DOT + VPath.SUFFIX.JSON);
+        final List<String> files = Ut.ioFiles(configPath, VString.DOT + VValue.SUFFIX.JSON);
         files.forEach(file -> {
-            final String identifier = file.replace(VString.DOT + VPath.SUFFIX.JSON, VString.EMPTY);
+            final String identifier = file.replace(VString.DOT + VValue.SUFFIX.JSON, VString.EMPTY);
             combine.put(identifier, file);
         });
         /* Combine File Processing */

@@ -1,14 +1,13 @@
 package io.zerows.plugins.office.excel.uca.cell;
 
 import io.vertx.core.json.JsonArray;
+import io.zerows.epoch.constant.KName;
 import io.zerows.platform.constant.VName;
-import io.zerows.platform.constant.VPath;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.constant.VValue;
-import io.zerows.epoch.constant.KName;
 import io.zerows.platform.exception._60050Exception501NotSupport;
-import io.zerows.support.Ut;
 import io.zerows.plugins.office.excel.eon.ExConstant;
+import io.zerows.support.Ut;
 
 import java.io.File;
 import java.util.Objects;
@@ -92,6 +91,6 @@ public class ExprValue implements ExValue {
             throw new _60050Exception501NotSupport(this.getClass());
         }
         final String filepath = exprFn.apply(pathRoot, paramMap);
-        return Ut.ioPath(filepath, field) + VString.DOT + VPath.SUFFIX.JSON;
+        return Ut.ioPath(filepath, field) + VString.DOT + VValue.SUFFIX.JSON;
     }
 }

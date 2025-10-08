@@ -1,7 +1,5 @@
 package io.zerows.epoch.application;
 
-import io.zerows.platform.constant.VOption;
-
 /**
  * @author lang : 2023-05-29
  */
@@ -10,11 +8,11 @@ interface YmlInit {
     String CONFIGURE = "configure";
     String COMPILE = "compile";
 
-    interface configure extends VOption.component {
+    interface configure extends YmlOption.component {
         String ORDER = "order";
     }
 
-    interface compile extends VOption.component {
+    interface compile extends YmlOption.component {
         String ORDER = "order";
     }
 }

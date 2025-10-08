@@ -7,8 +7,8 @@ import io.zerows.extension.mbse.basement.atom.Model;
 import io.zerows.extension.mbse.basement.atom.Schema;
 import io.zerows.extension.mbse.basement.uca.file.AoFile;
 import io.zerows.extension.mbse.basement.uca.file.ExcelReader;
-import io.zerows.platform.constant.VPath;
 import io.zerows.platform.constant.VString;
+import io.zerows.platform.constant.VValue;
 import io.zerows.plugins.common.shell.atom.CommandInput;
 import io.zerows.plugins.common.shell.eon.EmCommand;
 import io.zerows.program.Ux;
@@ -76,6 +76,6 @@ public class JsonInstruction extends AbstractInstruction {
 
     private String outPath(final String folder, final String identifier) {
         final String absolutePath = this.inFolder(this.path(folder));
-        return absolutePath + "/" + identifier + VString.DOT + VPath.SUFFIX.JSON;
+        return absolutePath + "/" + identifier + VString.DOT + VValue.SUFFIX.JSON;
     }
 }

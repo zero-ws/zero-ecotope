@@ -4,18 +4,17 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.Annal;
 import io.zerows.integrated.jackson.JsonObjectDeserializer;
 import io.zerows.integrated.jackson.JsonObjectSerializer;
 import io.zerows.platform.ENV;
 import io.zerows.platform.EnvironmentVariable;
 import io.zerows.platform.annotations.ClassYml;
-import io.zerows.platform.constant.VOption;
 import io.zerows.platform.enums.EmDS;
 import io.zerows.specification.atomic.HCopier;
 import io.zerows.specification.atomic.HJson;
 import io.zerows.support.base.UtBase;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
 import java.sql.DriverManager;
@@ -31,7 +30,30 @@ import java.util.Objects;
  */
 @Data
 @ClassYml
+@Slf4j
 public class KDatabase implements Serializable, HCopier<KDatabase>, HJson {
+
+    /**
+     * 📋 数据库配置常量
+     * <pre>
+     *     🎯 功能说明：
+     *     - 定义数据库配置的 JSON 键名常量
+     *     - 提供统一的配置项访问接口
+     *     - 避免硬编码字符串错误
+     * </pre>
+     */
+    public static class Option {
+        public static final String CATEGORY = "category";
+        public static final String HOSTNAME = "hostname";
+        public static final String PORT = "port";
+        public static final String INSTANCE = "instance";
+        public static final String URL = "url";
+        public static final String USERNAME = "username";
+        public static final String PASSWORD = "password";
+        public static final String DRIVER_CLASS_NAME = "driver-class-name";
+        public static final String OPTIONS = "options";
+    }
+
     /*
      * Get current jooq configuration for EmApp / Source
      */
@@ -54,7 +76,7 @@ public class KDatabase implements Serializable, HCopier<KDatabase>, HJson {
     /* Database password */
     private String password;
     /* Database driver class */
-    @JsonProperty("driver-class-name")      // 升级新版
+    @JsonProperty(Option.DRIVER_CLASS_NAME)      // 升级新版
     private String driverClassName;
 
     /* Database Connection Testing */
@@ -84,7 +106,7 @@ public class KDatabase implements Serializable, HCopier<KDatabase>, HJson {
 
     public String getSmartPassword() {
         final Boolean enabled = ENV.of().get(EnvironmentVariable.HED_ENABLED, false, Boolean.class);
-        this.logger().info("[ HED ] Encrypt of HED enabled: {0}", enabled);
+        log.info("[ ZERO ] HED 加解密模块是否启用: {}", enabled);
         if (enabled) {
             // HED_ENABLED=true
             return UtBase.decryptRSAV(this.password);
@@ -119,10 +141,6 @@ public class KDatabase implements Serializable, HCopier<KDatabase>, HJson {
         return Objects.isNull(this.options) ? new JsonObject() : this.options;
     }
 
-    public void setOptions(final JsonObject options) {
-        this.options = options;
-    }
-
     @Override
     public JsonObject toJson() {
         /*
@@ -131,15 +149,15 @@ public class KDatabase implements Serializable, HCopier<KDatabase>, HJson {
          * 子系统会导致序列化结果不一致
          */
         final JsonObject databaseJ = new JsonObject();
-        databaseJ.put(VOption.database.CATEGORY, this.category.name());
-        databaseJ.put(VOption.database.HOSTNAME, this.hostname);
-        databaseJ.put(VOption.database.PORT, this.port);
-        databaseJ.put(VOption.database.INSTANCE, this.instance);
-        databaseJ.put(VOption.database.JDBC_URL, this.url);
-        databaseJ.put(VOption.database.USERNAME, this.username);
-        databaseJ.put(VOption.database.PASSWORD, this.password);
-        databaseJ.put(VOption.database.DRIVER_CLASS_NAME, this.driverClassName);
-        databaseJ.put(VOption.database.OPTIONS, this.options);
+        databaseJ.put(Option.CATEGORY, this.category.name());
+        databaseJ.put(Option.HOSTNAME, this.hostname);
+        databaseJ.put(Option.PORT, this.port);
+        databaseJ.put(Option.INSTANCE, this.instance);
+        databaseJ.put(Option.URL, this.url);
+        databaseJ.put(Option.USERNAME, this.username);
+        databaseJ.put(Option.PASSWORD, this.password);
+        databaseJ.put(Option.DRIVER_CLASS_NAME, this.driverClassName);
+        databaseJ.put(Option.OPTIONS, this.options);
         return databaseJ;
     }
 
@@ -147,30 +165,26 @@ public class KDatabase implements Serializable, HCopier<KDatabase>, HJson {
     public void fromJson(final JsonObject data) {
         if (UtBase.isNotNil(data)) {
             // category
-            this.category = UtBase.toEnum(() -> data.getString(VOption.database.CATEGORY), EmDS.Category.class, EmDS.Category.MYSQL5);
+            this.category = UtBase.toEnum(() -> data.getString(Option.CATEGORY), EmDS.Category.class, EmDS.Category.MYSQL5);
             // hostname
-            this.hostname = data.getString(VOption.database.HOSTNAME);
+            this.hostname = data.getString(Option.HOSTNAME);
             // port
-            this.port = data.getInteger(VOption.database.PORT);
+            this.port = data.getInteger(Option.PORT);
             // instance
-            this.instance = data.getString(VOption.database.INSTANCE);
-            this.url = data.getString(VOption.database.JDBC_URL);
+            this.instance = data.getString(Option.INSTANCE);
+            this.url = data.getString(Option.URL);
             // username
-            this.username = data.getString(VOption.database.USERNAME);
+            this.username = data.getString(Option.USERNAME);
             // password
-            this.password = data.getString(VOption.database.PASSWORD);
-            this.driverClassName = data.getString(VOption.database.DRIVER_CLASS_NAME);
+            this.password = data.getString(Option.PASSWORD);
+            this.driverClassName = data.getString(Option.DRIVER_CLASS_NAME);
             // options
-            final JsonObject options = UtBase.valueJObject(data, VOption.database.OPTIONS);
+            final JsonObject options = UtBase.valueJObject(data, Option.OPTIONS);
             if (UtBase.isNotNil(options)) {
                 this.options.mergeIn(options);
-                this.logger().info("Database Options: {0}", this.options.encode());
+                log.info("[ ZERO ] 数据库配置项：{}", this.options.encode());
             }
         }
-    }
-
-    protected Annal logger() {
-        return Annal.get(this.getClass());
     }
 
     @Override
