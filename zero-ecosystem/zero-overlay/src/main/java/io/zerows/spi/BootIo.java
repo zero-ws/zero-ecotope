@@ -2,7 +2,7 @@ package io.zerows.spi;
 
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
-import io.zerows.platform.SETTING;
+import io.zerows.platform.SettingManager;
 import io.zerows.platform.enums.EmApp;
 import io.zerows.platform.enums.EmBoot;
 import io.zerows.specification.configuration.HBoot;
@@ -74,7 +74,7 @@ import java.util.function.Consumer;
  *                                        - configKey = {@link HConfig}, 此处 configKey 使用唯一计算法则，不同的 configKey 应用不同的配置
  *                                          {YmConfiguration} 和 {@link HSetting} 的区别在于 {@link HSetting} 会拉平配置，不论深度如何的
  *                                          Yml 文件都会直接被 {@link HSetting} 拉平（自定义配置除外）
- *                                                                     -> {@link SETTING} 管理 {@link HSetting}
+ *                                                                     -> {@link SettingManager} 管理 {@link HSetting}
  *                                                                        一层：app-name = {@link HSetting}
  *                                                                             二层：configKey = {@link HConfig}
  *                 -> 启动流程
@@ -87,7 +87,7 @@ import java.util.function.Consumer;
  *                       2）whenOn  -> 构造启动配置，为第三步做准备
  *                    3. {@link HLauncher#start(HConfig.HOn, Consumer)} 中的 {@link Consumer} 被触发，此处 {@link Consumer} 充当了启动
  *                       回调，开发过程中自定义的部分内容在此处被触发完成
- *                    4. {@link Consumer} 执行过程中依旧可以访问 {@link SETTING}，通过 configKey 提取 HConfig 配置信息
+ *                    4. {@link Consumer} 执行过程中依旧可以访问 {@link SettingManager}，通过 configKey 提取 HConfig 配置信息
  *                       HConfig 的主结构
  *                        - options = {@link JsonObject} 配置信息
  *                        - executor = Map ( name = Class ) 的组件信息
