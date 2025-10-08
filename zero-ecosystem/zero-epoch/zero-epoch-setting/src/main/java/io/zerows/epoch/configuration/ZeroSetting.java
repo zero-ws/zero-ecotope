@@ -48,7 +48,7 @@ public class ZeroSetting implements HSetting {
     private HConfig launcher;
 
     private ZeroSetting() {
-
+        
     }
 
     public static HSetting of() {

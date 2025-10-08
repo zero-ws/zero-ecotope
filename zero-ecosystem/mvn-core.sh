@@ -1,0 +1,1 @@
+mvn clean package install -pl zero-overlay,zero-epoch

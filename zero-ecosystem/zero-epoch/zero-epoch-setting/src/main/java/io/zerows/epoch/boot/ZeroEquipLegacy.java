@@ -3,6 +3,7 @@ package io.zerows.epoch.boot;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.application.VertxYml;
 import io.zerows.epoch.application.YmlCore;
+import io.zerows.epoch.basicore.YmConfiguration;
 import io.zerows.epoch.configuration.ZeroConfig;
 import io.zerows.epoch.configuration.ZeroSetting;
 import io.zerows.epoch.constant.KName;
@@ -12,7 +13,6 @@ import io.zerows.platform.constant.VString;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HSetting;
 import io.zerows.specification.development.compiled.HBundle;
-import io.zerows.spi.HEquip;
 import io.zerows.support.Ut;
 
 import java.util.Arrays;
@@ -23,25 +23,25 @@ import java.util.stream.Collectors;
 /**
  * @author lang : 2023-05-30
  */
-public class ZeroEquip extends AbstractAmbiguity implements HEquip {
+public class ZeroEquipLegacy extends AbstractAmbiguity implements Equip {
 
-    private ZeroEquip() {
+    private ZeroEquipLegacy() {
         super(null);
     }
 
-    private ZeroEquip(final HBundle bundle) {
+    private ZeroEquipLegacy(final HBundle bundle) {
         super(bundle);
     }
 
-    public static ZeroEquip of(final HBundle bundle) {
-        return Objects.isNull(bundle) ? new ZeroEquip() : new ZeroEquip(bundle);
+    public static ZeroEquipLegacy of(final HBundle bundle) {
+        return Objects.isNull(bundle) ? new ZeroEquipLegacy() : new ZeroEquipLegacy(bundle);
     }
 
     /**
      * @return {@link ZeroSetting}
      */
     @Override
-    public HSetting initialize() {
+    public HSetting initialize(final YmConfiguration configurationYml) {
         /*
          * 基础装配 vertx.yml 读取
          * - bundle/vertx.yml

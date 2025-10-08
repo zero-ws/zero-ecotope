@@ -70,32 +70,6 @@ public interface HConfig {
     }
 
     /**
-     * 预处理组件配置，预处理组件配置中并不包含任何接口定义，它是一个单纯的类，因此，您可以设计各种不同接口来实现预处理组件的
-     * 统一管理，并且此处使用了“元元”的抽象模式
-     * <pre>
-     *     1. 预处理组件是 Class<?> 类型，您可以定义它的“元类型”
-     *     2. 而组件本身通常会是一个 interface，本身又是基础组件的“元类型”
-     * </pre>
-     * 所以最终结果是预处理组件是基础组件的“元元类型”，这种设计可以让预处理组件拥有更大的灵活性。
-     *
-     * @return 预处理组件类
-     */
-    default Class<?> pre() {
-        return null;
-    }
-
-    /**
-     * 设置预处理组件类
-     *
-     * @param preCls 预处理组件类
-     *
-     * @return 当前引用
-     */
-    default HConfig pre(final Class<?> preCls) {
-        return this;
-    }
-
-    /**
      *
      * @author <a href="http://www.origin-x.cn">Lang</a>
      */

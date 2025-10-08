@@ -1,10 +1,11 @@
-package io.zerows.specification.development.ncloud;
+package io.zerows.specification.configuration;
 
 import io.vertx.core.Vertx;
 
 /**
  * @author lang : 2023-05-20
  */
+@Deprecated
 public interface HStarter {
     /**
      * 启动器泛型构造，构造想要启动的组件实例

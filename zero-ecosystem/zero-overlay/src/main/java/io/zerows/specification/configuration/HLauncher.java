@@ -42,7 +42,7 @@ import java.util.function.Consumer;
  *     1. 主容器种类
  *        - SM模式：OSGI Launcher -> Bundle ( Jetty )
  *        - Zero模式：Zero Launcher -> Vertx
- *        - Aeon模式：Aeon Launcher -> HAeon
+ *        - Cloud模式：Cloud Launcher -> HAeon
  *     2. 辅助组件
  *        生命周期辅助组件为启动新规范，为了让启动器在每个生命周期多一层，且启动组件会
  *        跟随启动器的启动而启动，跟随启动器的停止而停止，所以此处的启动器需要提供一个

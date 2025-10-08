@@ -1,7 +1,7 @@
 package io.zerows.spi;
 
-import io.zerows.specification.configuration.HLauncher;
 import io.zerows.specification.configuration.HEnergy;
+import io.zerows.specification.configuration.HLauncher;
 
 /**
  * 「主配置入口规范」BootIo
@@ -53,7 +53,6 @@ import io.zerows.specification.configuration.HEnergy;
  * @since 2023-05-30
  */
 public interface BootIo {
-
     /**
      * 提供主启动器实例，用于驱动当前容器/框架的启动流程。
      *

@@ -26,6 +26,7 @@ import java.util.Optional;
  *
  * @author lang : 2023-06-13
  */
+@Deprecated
 @Slf4j
 public class ZeroConfigurer<T> {
 
@@ -54,7 +55,7 @@ public class ZeroConfigurer<T> {
         final Class<?> preCls = this.energy.component(EmBoot.LifeCycle.PRE);
         Optional.ofNullable(preCls).ifPresent(pClass -> {
             // 配置绑定
-            configuration.pre(pClass);
+            // configuration.pre(pClass);
             final HLauncher.Wait<T> pre = UtBase.singleton(pClass);
             pre.beforeStart(started, configuration.options());
         });

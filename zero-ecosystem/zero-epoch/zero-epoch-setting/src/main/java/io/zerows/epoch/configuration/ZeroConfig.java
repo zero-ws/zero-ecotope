@@ -55,13 +55,6 @@ public class ZeroConfig implements HConfig {
     private final JsonObject options = new JsonObject();
 
     /**
-     * 🧯 预处理器类型（可选）。
-     * <p>用于在正式使用前进行：参数校验、默认值填充、结构规范化等。</p>
-     * <p>约定：该类通常应为“无参构造 + 可静态调用”的工具类，或实现既定的预处理接口。</p>
-     */
-    private Class<?> pre;
-
-    /**
      * ➕ 写入/覆盖配置项。
      *
      * <p>支持链式调用：{@code config.put("k1", v1).put("k2", v2)}</p>

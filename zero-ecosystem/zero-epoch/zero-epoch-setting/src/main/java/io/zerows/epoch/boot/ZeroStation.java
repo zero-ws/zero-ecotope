@@ -24,6 +24,7 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * @author lang : 2023-05-30
  */
+@Deprecated
 @Slf4j
 public class ZeroStation implements HStation {
     /**

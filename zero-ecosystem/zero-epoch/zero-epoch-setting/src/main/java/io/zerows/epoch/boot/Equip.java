@@ -1,5 +1,6 @@
-package io.zerows.spi;
+package io.zerows.epoch.boot;
 
+import io.zerows.epoch.basicore.YmConfiguration;
 import io.zerows.specification.configuration.HSetting;
 
 /**
@@ -8,11 +9,11 @@ import io.zerows.specification.configuration.HSetting;
  *
  * @author lang : 2023-05-30
  */
-public interface HEquip {
+public interface Equip {
     /**
      * 执行装配器初始化
      *
      * @return {@link HSetting}
      */
-    HSetting initialize();
+    HSetting initialize(YmConfiguration configuration);
 }

@@ -8,8 +8,8 @@ import io.zerows.management.OCacheStore;
 import io.zerows.platform.annotations.meta.Memory;
 import io.zerows.specification.atomic.HCommand;
 import io.zerows.specification.configuration.HConfig;
+import io.zerows.specification.configuration.HStarter;
 import io.zerows.specification.development.ncloud.HNovae;
-import io.zerows.specification.development.ncloud.HStarter;
 import io.zerows.support.Ut;
 
 import java.io.Serializable;
