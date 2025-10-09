@@ -155,4 +155,132 @@ public final class EmApp {
          */
         SERVICE,           // 云端服务应用
     }
+
+    /**
+     * 🔄 应用生命周期枚举 🚀
+     * 🎯 定义组件在不同阶段的状态和行为
+     * <pre>
+     *     📋 生命周期阶段：
+     *     - PRE: 预处理阶段，组件初始化前的特殊处理
+     *     - ON: 启动阶段，包含安装、解析、启动等过程
+     *     - OFF: 停止阶段，包含停止、卸载等过程
+     *     - RUN: 运行阶段，包含运行、更新、刷新等过程
+     * </pre>
+     *
+     * @author lang : 2023-05-30
+     */
+    public enum LifeCycle {
+        /**
+         * 🎯 预处理阶段
+         * 📋 组件初始化前的特殊处理阶段
+         * 🎯 适用于需要在组件正式启动前进行预配置的场景
+         */
+        PRE,    // pre 组件，比较特殊的组件
+
+        /**
+         * 🎯 启动阶段
+         * 📋 包含 install, resolved, start 等启动过程
+         * 🎯 组件从安装到启动的完整生命周期
+         */
+        ON,     // install, resolved, start
+
+        /**
+         * 🎯 停止阶段
+         * 📋 包含 stop, uninstall 等停止过程
+         * 🎯 组件从停止到卸载的完整生命周期
+         */
+        OFF,    // stop, uninstall
+
+        /**
+         * 🎯 运行阶段
+         * 📋 包含 run, update, refresh 等运行过程
+         * 🎯 组件运行时的动态更新和刷新阶段
+         */
+        RUN;    // run, update, refresh
+
+        /**
+         * 🔄 根据名称获取生命周期枚举
+         * 🎯 将字符串名称转换为对应的生命周期枚举值
+         *
+         * @param name 生命周期名称
+         *
+         * @return 对应的生命周期枚举
+         */
+        public static LifeCycle from(final String name) {
+            return LifeCycle.valueOf(name.toUpperCase());
+        }
+    }
+
+    /**
+     * 🔧 内置配置枚举 🚀
+     * 🎯 定义系统内部核心配置组件
+     * <pre>
+     *     📋 内置组件分类：
+     *     - SESSION: 会话管理配置
+     *     - CORS: 跨域资源共享配置
+     *     - SHARED_MAP: 共享映射配置
+     *     - DEPLOYMENT: 部署管理配置
+     *     - DELIVERY: 交付流程配置
+     *     - SERVER: 服务器配置
+     *     - CLUSTER: 集群配置
+     *     - WEBSOCKET: WebSocket配置
+     * </pre>
+     *
+     * @author lang : 2023-05-30
+     */
+    public enum Native {
+        /**
+         * 🔐 会话管理配置
+         * 🎯 负责用户会话状态的管理和维护
+         */
+        SESSION,
+
+        /**
+         * 🌐 跨域资源共享配置
+         * 🎯 处理跨域请求的安全策略配置
+         */
+        CORS,
+
+        /**
+         * 🗂️ 共享映射配置
+         * 🎯 管理共享数据结构和映射关系配置
+         */
+        SHARED,
+
+        /**
+         * 📦 部署管理配置
+         * 🎯 应用部署流程和策略的配置管理
+         */
+        DEPLOYMENT,
+
+        /**
+         * 🚚 交付流程配置
+         * 🎯 应用交付和分发流程的配置管理
+         */
+        DELIVERY,
+
+        /**
+         * 🏢 服务器配置
+         * 🎯 服务器运行时参数和行为的配置
+         */
+        SERVER,
+
+        /**
+         * 🖥️ 集群配置
+         * 🎯 多节点集群环境的配置管理
+         */
+        CLUSTER,
+
+        /**
+         * 🔌 WebSocket配置
+         * 🎯 实时双向通信协议的配置管理
+         */
+        WEBSOCKET,
+
+        /**
+         * 🔒 安全配置
+         * 🎯 应用安全策略和机制的配置管理
+         */
+        SECURITY,
+    }
 }

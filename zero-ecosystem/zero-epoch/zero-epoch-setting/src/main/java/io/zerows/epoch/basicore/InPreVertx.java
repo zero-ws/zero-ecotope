@@ -22,7 +22,7 @@ import java.io.Serializable;
 public class InPreVertx implements Serializable {
     private YmCloud cloud;
     private Config config;
-    private YmVertxConfig.Application application = new YmVertxConfig.Application();
+    private YmApplication application = new YmApplication();
 
     @Data
     public static class Config implements Serializable {

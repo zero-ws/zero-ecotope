@@ -1,5 +1,6 @@
 package io.zerows.epoch.basicore.option;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.vertx.core.http.HttpHeaders;
@@ -37,12 +38,15 @@ import java.util.stream.Collectors;
 public class CorsOptions implements Serializable {
     private static final AtomicBoolean IS_OUT = new AtomicBoolean(Boolean.TRUE);
     private static CorsOptions INSTANCE;
+    @JsonProperty("allow-credentials")
     private Boolean credentials = Boolean.FALSE;
     @JsonSerialize(using = JsonArraySerializer.class)
     @JsonDeserialize(using = JsonArrayDeserializer.class)
+    @JsonProperty("allowed-methods")
     private JsonArray methods = new JsonArray();
     @JsonSerialize(using = JsonArraySerializer.class)
     @JsonDeserialize(using = JsonArrayDeserializer.class)
+    @JsonProperty("allowed-headers")
     private JsonArray headers = new JsonArray();
     /*
      * Modified from 4.3.1, here the origin has been modified
@@ -50,7 +54,11 @@ public class CorsOptions implements Serializable {
      */
     @JsonSerialize(using = JsonArraySerializer.class)
     @JsonDeserialize(using = JsonArrayDeserializer.class)
+    @JsonProperty("allowed-origins")
     private JsonArray origin = new JsonArray();
+
+    @JsonProperty("max-age")
+    private int maxAge;
 
     public static CorsOptions get() {
         if (Objects.nonNull(INSTANCE)) {

@@ -3,7 +3,6 @@ package io.zerows.epoch.configuration;
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.constant.VName;
 import io.zerows.platform.enums.EmApp;
-import io.zerows.platform.enums.EmBoot;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HEnergy;
 import io.zerows.support.base.UtBase;
@@ -18,7 +17,7 @@ import java.util.concurrent.ConcurrentMap;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 public class ZeroEnergy implements HEnergy {
-    private final ConcurrentMap<EmBoot.LifeCycle, Class<?>> component = new ConcurrentHashMap<>();
+    private final ConcurrentMap<EmApp.LifeCycle, Class<?>> component = new ConcurrentHashMap<>();
     private final ConcurrentMap<Class<?>, HConfig> config = new ConcurrentHashMap<>();
     private final ConcurrentMap<EmApp.Mode, Class<?>> connect = new ConcurrentHashMap<>();
     private Class<?> rad;
@@ -56,7 +55,7 @@ public class ZeroEnergy implements HEnergy {
          * - run
          */
         UtBase.<String>itJObject(component).forEach(entry -> {
-            final EmBoot.LifeCycle lifeCycle = EmBoot.LifeCycle.from(entry.getKey());
+            final EmApp.LifeCycle lifeCycle = EmApp.LifeCycle.from(entry.getKey());
             final Class<?> clazz = UtBase.clazz(entry.getValue());
             energy.bind(lifeCycle, clazz);
             /*
@@ -90,7 +89,7 @@ public class ZeroEnergy implements HEnergy {
     }
 
     @Override
-    public HEnergy bind(final EmBoot.LifeCycle lifeCycle, final Class<?> clazz) {
+    public HEnergy bind(final EmApp.LifeCycle lifeCycle, final Class<?> clazz) {
         this.component.put(lifeCycle, clazz);
         return this;
     }
@@ -114,7 +113,7 @@ public class ZeroEnergy implements HEnergy {
     }
 
     @Override
-    public Class<?> component(final EmBoot.LifeCycle lifeCycle) {
+    public Class<?> component(final EmApp.LifeCycle lifeCycle) {
         return this.component.get(lifeCycle);
     }
 

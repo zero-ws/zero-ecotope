@@ -1,7 +1,6 @@
 package io.zerows.specification.configuration;
 
 import io.zerows.platform.enums.EmApp;
-import io.zerows.platform.enums.EmBoot;
 
 /**
  * @author lang : 2023-05-31
@@ -15,7 +14,7 @@ public interface HEnergy {
      *
      * @return 自身
      */
-    HEnergy bind(EmBoot.LifeCycle lifeCycle, Class<?> clazz);
+    HEnergy bind(EmApp.LifeCycle lifeCycle, Class<?> clazz);
 
     /**
      * 配置绑定
@@ -72,5 +71,5 @@ public interface HEnergy {
      *
      * @return 应用组件
      */
-    Class<?> component(EmBoot.LifeCycle lifeCycle);
+    Class<?> component(EmApp.LifeCycle lifeCycle);
 }

@@ -3,7 +3,6 @@ package io.zerows.spi;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.enums.EmApp;
-import io.zerows.platform.enums.EmBoot;
 import io.zerows.platform.management.StoreSetting;
 import io.zerows.specification.configuration.HBoot;
 import io.zerows.specification.configuration.HConfig;
@@ -62,11 +61,11 @@ import java.util.function.Consumer;
  * {@link HBoot} 和 {@link HEnergy} 的协同工作原理
  * <pre>
  *     ZeroLauncher -> {@link BootIo} -> {@link HBoot} ( 启动组件集 )
- *                                        - {@link EmBoot.LifeCycle} = Class<?>
+ *                                        - {@link EmApp.LifeCycle} = Class<?>
  *                                    -> {@link HEnergy} ( 完整配置集 )
- *                                        - {@link EmBoot.LifeCycle} = {@link HConfig}
+ *                                        - {@link EmApp.LifeCycle} = {@link HConfig}
  *                                                                     -> {@link HSetting} 提供最小单元配置
- *                                                                          {@link EmBoot.LifeCycle} = {@link HConfig}
+ *                                                                          {@link EmApp.LifeCycle} = {@link HConfig}
  *                                                                          {@link EmApp.Mode}       = {@link HConfig}
  *                                                                     -> {@see YmConfiguration} -> {@link HSetting}
  *                                       其他组件的能量配置集

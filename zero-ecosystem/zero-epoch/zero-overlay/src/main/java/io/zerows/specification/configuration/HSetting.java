@@ -1,6 +1,6 @@
 package io.zerows.specification.configuration;
 
-import io.zerows.platform.enums.EmBoot;
+import io.zerows.platform.enums.EmApp;
 
 /**
  * 🚀 @author lang : 2023-05-31
@@ -28,7 +28,7 @@ public interface HSetting {
     HConfig launcher();
 
 
-    HConfig boot(EmBoot.LifeCycle lifeCycle);
+    HConfig boot(EmApp.LifeCycle lifeCycle);
 
     // ====================== 🔌 插件配置区域 ======================
 
@@ -41,6 +41,8 @@ public interface HSetting {
      */
     HConfig infix(String name);
 
+
+    HConfig infix(EmApp.Native name);
 
     /**
      * 🔍 检查是否存在插件配置

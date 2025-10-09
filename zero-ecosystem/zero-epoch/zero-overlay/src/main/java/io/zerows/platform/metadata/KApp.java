@@ -6,6 +6,7 @@ import io.zerows.platform.EnvironmentVariable;
 import io.zerows.platform.constant.VName;
 import io.zerows.platform.exception._40101Exception500CombineApp;
 import io.zerows.specification.app.HApp;
+import io.zerows.specification.development.HLog;
 import io.zerows.support.base.UtBase;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -19,7 +20,7 @@ import java.util.Objects;
 @Data
 @Accessors(chain = true)
 @Slf4j
-public class KApp implements HApp {
+public class KApp implements HApp, HLog {
 
     private String id;
     private String name;
@@ -220,6 +221,7 @@ public class KApp implements HApp {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public HApp vLog() {
         final String content = """
             [ ZERO ] APP 应用信息:

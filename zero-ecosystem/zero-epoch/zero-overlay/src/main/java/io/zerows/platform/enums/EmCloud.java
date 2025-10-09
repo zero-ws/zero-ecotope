@@ -41,4 +41,24 @@ public final class EmCloud {
         // SVN
         SVN_PRIVATE,        // 「私库」
     }
+
+    public enum EtcdPath {
+        // EndPoint
+        ENDPOINT,
+        // Ipc,
+        IPC
+    }
+
+    public enum IpcType {
+        CONSUME,
+        PRODUCE,
+        UNITY,
+        DUPLIEX
+    }
+
+    public enum Etat {
+        RUNNING,
+        STOPPED,
+        FAILED
+    }
 }

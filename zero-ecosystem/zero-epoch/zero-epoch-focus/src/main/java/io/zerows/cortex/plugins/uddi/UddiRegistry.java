@@ -1,7 +1,7 @@
 package io.zerows.cortex.plugins.uddi;
 
 import io.vertx.core.http.HttpServerOptions;
-import io.zerows.platform.enums.Etat;
+import io.zerows.platform.enums.EmCloud;
 
 import java.util.Set;
 
@@ -23,5 +23,5 @@ public interface UddiRegistry {
     /*
      * Etat registry
      */
-    void registryHttp(final String service, final HttpServerOptions options, final Etat etat);
+    void registryHttp(final String service, final HttpServerOptions options, final EmCloud.Etat etat);
 }

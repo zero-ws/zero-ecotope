@@ -1,8 +1,13 @@
 package io.zerows.epoch.annotations;
 
-import io.zerows.platform.enums.IpcType;
+import io.zerows.platform.enums.EmCloud;
 
-import java.lang.annotation.*;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * Internal Rpc Channel
@@ -17,7 +22,7 @@ public @interface Ipc {
      *
      * @return different categories of Ipc
      */
-    IpcType type() default IpcType.UNITY;
+    EmCloud.IpcType type() default EmCloud.IpcType.UNITY;
 
     /**
      * Default Rpc Service Name

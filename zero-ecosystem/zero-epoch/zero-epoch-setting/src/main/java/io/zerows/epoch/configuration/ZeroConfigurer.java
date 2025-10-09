@@ -2,7 +2,7 @@ package io.zerows.epoch.configuration;
 
 import io.r2mo.typed.exception.AbstractException;
 import io.zerows.epoch.boot.ZeroLauncher;
-import io.zerows.platform.enums.EmBoot;
+import io.zerows.platform.enums.EmApp;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HEnergy;
 import io.zerows.specification.configuration.HLauncher;
@@ -52,7 +52,7 @@ public class ZeroConfigurer<T> {
     // Pre 执行 ----------------------------------------
 
     public <CONFIG extends HConfig> void preExecute(final T started, final CONFIG configuration) {
-        final Class<?> preCls = this.energy.component(EmBoot.LifeCycle.PRE);
+        final Class<?> preCls = this.energy.component(EmApp.LifeCycle.PRE);
         Optional.ofNullable(preCls).ifPresent(pClass -> {
             // 配置绑定
             // configuration.pre(pClass);
@@ -63,7 +63,7 @@ public class ZeroConfigurer<T> {
 
     // On ----------------------------------------------
     public HConfig onConfig() {
-        final Class<?> implOn = this.energy.component(EmBoot.LifeCycle.ON);
+        final Class<?> implOn = this.energy.component(EmApp.LifeCycle.ON);
         if (Objects.isNull(implOn)) {
             // 未配置组件，直接跳过
             return null;
@@ -86,7 +86,7 @@ public class ZeroConfigurer<T> {
      */
     @SuppressWarnings("all")
     public HConfig.HOn onComponent() {
-        final Class<?> implOn = this.energy.component(EmBoot.LifeCycle.ON);
+        final Class<?> implOn = this.energy.component(EmApp.LifeCycle.ON);
         if (Objects.isNull(implOn)) {
             // 未配置组件，直接跳过
             return null;

@@ -2,7 +2,7 @@ package io.zerows.cortex.metadata;
 
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonObject;
-import io.zerows.platform.enums.IpcType;
+import io.zerows.platform.enums.EmCloud;
 
 import java.io.Serializable;
 
@@ -10,7 +10,7 @@ public class WebIpc implements Serializable {
     /**
      * Default community type
      */
-    private IpcType type = IpcType.UNITY;
+    private EmCloud.IpcType type = EmCloud.IpcType.UNITY;
     /**
      * Community Name
      */
@@ -53,11 +53,11 @@ public class WebIpc implements Serializable {
         this.address = address;
     }
 
-    public IpcType getType() {
+    public EmCloud.IpcType getType() {
         return this.type;
     }
 
-    public void setType(final IpcType type) {
+    public void setType(final EmCloud.IpcType type) {
         this.type = type;
     }
 

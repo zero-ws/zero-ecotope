@@ -2,7 +2,6 @@ package io.zerows.specification.configuration;
 
 import io.r2mo.typed.annotation.SPID;
 import io.zerows.platform.enums.EmApp;
-import io.zerows.platform.enums.EmBoot;
 
 /**
  * 基于启动配置存储专用配置器，内置包含
@@ -14,7 +13,7 @@ import io.zerows.platform.enums.EmBoot;
  *        - {@link String[]} 当前启动时的运行参数
  *     2. {@link HEnergy} 能量配置，系统加载的内容
  *        - {@link EmApp.Mode} 应用模式
- *        - {@link EmBoot.LifeCycle} 生命周期
+ *        - {@link EmApp.LifeCycle} 生命周期
  * </code></pre>
  *
  * @author lang : 2023-05-31

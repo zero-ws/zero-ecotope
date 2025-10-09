@@ -1,7 +1,7 @@
 package io.zerows.cortex.plugins.uddi;
 
 import io.vertx.core.http.HttpServerOptions;
-import io.zerows.platform.enums.Etat;
+import io.zerows.platform.enums.EmCloud;
 
 import java.util.Set;
 
@@ -17,7 +17,7 @@ public class UddiEmpty implements UddiRegistry {
     }
 
     @Override
-    public void registryHttp(final String service, final HttpServerOptions options, final Etat etat) {
+    public void registryHttp(final String service, final HttpServerOptions options, final EmCloud.Etat etat) {
 
     }
 }

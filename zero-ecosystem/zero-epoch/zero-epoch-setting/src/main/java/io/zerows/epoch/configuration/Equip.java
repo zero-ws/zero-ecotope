@@ -23,4 +23,5 @@ public interface Equip {
      * @return {@link HSetting}
      */
     HSetting initialize(YmConfiguration configuration);
+
 }

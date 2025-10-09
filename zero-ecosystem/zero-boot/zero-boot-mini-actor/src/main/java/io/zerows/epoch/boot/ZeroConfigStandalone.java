@@ -1,7 +1,6 @@
 package io.zerows.epoch.boot;
 
-import io.zerows.epoch.configuration.ZeroConfig;
-import io.zerows.epoch.metadata.MMComponent;
+import io.zerows.epoch.configuration.ConfigNorm;
 import io.zerows.specification.configuration.HLauncher;
 
 /**
@@ -16,8 +15,5 @@ import io.zerows.specification.configuration.HLauncher;
  *
  * @author lang : 2023-05-31
  */
-public class ZeroConfigStandalone extends ZeroConfig {
-    public ZeroConfigStandalone(final MMComponent component) {
-        super(component);
-    }
+public class ZeroConfigStandalone extends ConfigNorm {
 }

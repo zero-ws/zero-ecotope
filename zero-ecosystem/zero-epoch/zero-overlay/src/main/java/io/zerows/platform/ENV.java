@@ -4,6 +4,7 @@ import cn.hutool.core.util.StrUtil;
 import io.r2mo.function.Fn;
 import io.zerows.platform.annotations.PropertySource;
 import io.zerows.specification.configuration.HEnvironment;
+import io.zerows.specification.development.HLog;
 import io.zerows.support.base.UtBase;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +25,7 @@ import java.util.function.Supplier;
  * @author lang : 2025-10-05
  */
 @Slf4j
-public class ENV implements HEnvironment {
+public class ENV implements HEnvironment, HLog {
 
     private static final ConcurrentMap<String, String> ENV_VARS = new ConcurrentHashMap<>();
     private static final ENV INSTANCE = new ENV();
@@ -47,7 +48,7 @@ public class ENV implements HEnvironment {
             }
         }
         // 打印环境变量
-        log.info("[ ZERO ] 运行环境：{}", vLog());
+        this.vLog();
     }
 
     // ========== Loaders (Public entry) ==========
@@ -204,7 +205,9 @@ public class ENV implements HEnvironment {
     // ========== Reporter ==========
 
     // 环境变量打印专用
-    private static String vLog() {
+    @Override
+    @SuppressWarnings("unchecked")
+    public ENV vLog() {
         final StringBuilder content = new StringBuilder();
         content.append("\n======= Zero Framework 环境变量 =======\n");
 
@@ -219,6 +222,8 @@ public class ENV implements HEnvironment {
             });
 
         content.append("======================================\n");
-        return content.toString();
+        final String message = content.toString();
+        log.info("[ ZERO ] 运行环境：{}", message);
+        return this;
     }
 }

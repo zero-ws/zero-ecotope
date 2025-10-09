@@ -2,6 +2,7 @@ package io.zerows.epoch.basicore;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.application.VertxYml;
+import io.zerows.epoch.configuration.EquipItem;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -29,9 +30,19 @@ import java.io.Serializable;
  * @author lang : 2025-10-05
  */
 @Data
-public class YmServer implements Serializable {
+public class YmServer implements Serializable, EquipItem {
     private int port = 6083;
     private String address = "0.0.0.0";
     private JsonObject options = new JsonObject();
+    private YmSession session;
     private YmWebSocket websocket = new YmWebSocket();
+
+    @Override
+    public JsonObject combined() {
+        final JsonObject config = this.options.copy();
+        // 此处对接 HttpServerOptions
+        config.put("port", this.port);
+        config.put("host", this.address);
+        return config;
+    }
 }

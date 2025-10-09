@@ -17,7 +17,7 @@ public class InPre implements Serializable {
         return Objects.requireNonNull(this.vertx).getConfig();
     }
 
-    public YmVertxConfig.Application application() {
+    public YmApplication application() {
         return Objects.requireNonNull(this.vertx).getApplication();
     }
 

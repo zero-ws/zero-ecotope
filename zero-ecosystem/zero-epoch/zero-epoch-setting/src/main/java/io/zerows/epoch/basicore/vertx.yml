@@ -45,6 +45,12 @@ server:
 # -----------------------------------------------------------------
 # ⚡ Vertx 主配置
 vertx:
+  session:
+    store-type: none                         # none/redis/jdbc/mongo
+    timeout: 30                              # 分钟
+    cookie:
+      name: ????
+      max-age: 1800
   config:
     import:
       - # 针对 vertx-boot.yml 中的设置
@@ -59,12 +65,14 @@ vertx:
       instances: # 🏗️ 实例数量配置
         worker: 64                           # ⚙️ Worker线程实例数
         agent: 32                            # 🤖 Agent线程实例数
+    # 哪种 shared 配置
+    shared:
   application:
     name:
+  mvc: # 对标 Spring MVC 配置做统一结构化
     cors: # ⛓️ 跨域资源共享配置
       origin: # 🌍 允许的跨域源列表
         - "客户端跨域的地址信息"              # 例如: http://localhost:3000, https://example.com
-
   # 🌐 Vertx 原生集群配置
   cluster: # 🏗️ 集群配置
     manager: 组件配置                         # 🎯 集群管理器组件

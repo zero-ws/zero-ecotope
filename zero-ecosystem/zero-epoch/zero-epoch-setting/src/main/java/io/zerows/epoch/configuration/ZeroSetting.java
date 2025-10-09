@@ -1,12 +1,15 @@
 package io.zerows.epoch.configuration;
 
 import io.zerows.epoch.boot.ZeroLauncher;
-import io.zerows.platform.enums.EmBoot;
+import io.zerows.platform.enums.EmApp;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HSetting;
+import io.zerows.specification.development.HLog;
 import io.zerows.specification.storage.HStoreLegacy;
 import io.zerows.spi.BootIo;
+import lombok.extern.slf4j.Slf4j;
 
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -31,18 +34,20 @@ import java.util.concurrent.ConcurrentMap;
  *     2. launcher：启动器配置
  *     3. extension：Zero Extension扩展模块配置
  *     4. infix：Infix架构下的插件配置
- *     5. registry：注册表，注册表中保存了应该有的配置路径
  * </code></pre>
  *
  * @author lang : 2023-05-30
  */
-public class ZeroSetting implements HSetting {
+@Slf4j
+public class ZeroSetting implements HSetting, HLog {
+    // 扩展配置
     /** 扩展配置部分 **/
     private final ConcurrentMap<String, HConfig> extension = new ConcurrentHashMap<>();
     /** 插件配置 **/
     private final ConcurrentMap<String, HConfig> infix = new ConcurrentHashMap<>();
+    // 基础配置
     /** 生命周期组件配置 **/
-    private final ConcurrentMap<EmBoot.LifeCycle, HConfig> boot = new ConcurrentHashMap<>();
+    private final ConcurrentMap<EmApp.LifeCycle, HConfig> boot = new ConcurrentHashMap<>();
     /** 容器主配置 */
     private HConfig container;
     /** 启动器配置 **/
@@ -78,11 +83,11 @@ public class ZeroSetting implements HSetting {
     }
 
     @Override
-    public HConfig boot(final EmBoot.LifeCycle lifeCycle) {
+    public HConfig boot(final EmApp.LifeCycle lifeCycle) {
         return this.boot.get(lifeCycle);
     }
 
-    public HSetting boot(final EmBoot.LifeCycle lifeCycle, final HConfig config) {
+    public HSetting boot(final EmApp.LifeCycle lifeCycle, final HConfig config) {
         this.boot.put(lifeCycle, config);
         return this;
     }
@@ -107,9 +112,21 @@ public class ZeroSetting implements HSetting {
         return this.extension.get(name);
     }
 
+    public HSetting infix(final EmApp.Native name, final HConfig config) {
+        Objects.requireNonNull(name, "[ ZERO ] 内部插件名称不能为空！");
+        this.infix.put(name.name(), config);
+        return this;
+    }
+
     public HSetting infix(final String name, final HConfig config) {
         this.infix.put(name, config);
         return this;
+    }
+
+    @Override
+    public HConfig infix(final EmApp.Native name) {
+        Objects.requireNonNull(name, "[ ZERO ] 内部插件名称不能为空！");
+        return this.infix.get(name.name());
     }
 
     @Override
@@ -120,5 +137,29 @@ public class ZeroSetting implements HSetting {
     @Override
     public boolean hasInfix(final String name) {
         return this.infix.containsKey(name);
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public ZeroSetting vLog() {
+        log.info("[ ZERO ] 主容器配置：");
+        if (this.container instanceof final ConfigContainer configContainer) {
+            configContainer.vLog();
+        }
+        log.info("[ ZERO ] 插件配置：");
+        this.infix.forEach((field, config) -> {
+            log.info("\t{} = {}", field, config.getClass());
+            if (config instanceof final ConfigNorm configNorm) {
+                configNorm.vLog();
+            }
+        });
+        log.info("[ ZERO ] 扩展配置：");
+        this.extension.forEach((field, config) -> {
+            log.info("\t{} = {}", field, config.getClass());
+            if (config instanceof final ConfigNorm configNorm) {
+                configNorm.vLog();
+            }
+        });
+        return this;
     }
 }

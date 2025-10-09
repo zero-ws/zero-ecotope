@@ -1,5 +1,6 @@
 package io.zerows.specification.configuration;
 
+import io.r2mo.typed.exception.web._501NotSupportException;
 import io.vertx.core.json.JsonObject;
 import io.zerows.specification.atomic.HCommand;
 
@@ -26,9 +27,10 @@ import io.zerows.specification.atomic.HCommand;
  */
 public interface HConfig {
 
-    String DEFAULT_CONFIG_KEY = "DEFAULT_CONFIG";
-
+    // --- 配置项操作
     JsonObject options();
+
+    HConfig putOptions(JsonObject options);
 
     /**
      * 设置单个字段值，更改某个配置项相关信息
@@ -38,7 +40,7 @@ public interface HConfig {
      *
      * @return {@link HConfig}
      */
-    HConfig option(String field, Object value);
+    HConfig putOptions(String field, Object value);
 
     /**
      * 检查配置中是否存在某个字段
@@ -48,7 +50,10 @@ public interface HConfig {
      *
      * @return 存在返回 true，否则返回 false
      */
-    <T> T option(final String field);
+    <T> T options(final String field);
+
+    // ------- Class<?> 反射
+    String DEFAULT_META = "DEFAULT_META";
 
     /**
      * 设置配制键的反射组件，后期可直接反射得到结果
@@ -58,12 +63,12 @@ public interface HConfig {
      *
      * @return Fluent 模式的自身引用
      */
-    default HConfig executor(final String configKey, final Class<?> clazz) {
-        return this;
+    default HConfig putExecutor(final String configKey, final Class<?> clazz) {
+        throw new _501NotSupportException("[ ZERO ] 当前 HConfig 不支持 putExecutor 方法，请检查配置！");
     }
 
-    default HConfig executor(final Class<?> clazz) {
-        return this.executor(DEFAULT_CONFIG_KEY, clazz);
+    default HConfig putExecutor(final Class<?> clazz) {
+        return this.putExecutor(DEFAULT_META, clazz);
     }
 
     /**
@@ -78,7 +83,26 @@ public interface HConfig {
     }
 
     default Class<?> executor() {
-        return this.executor(DEFAULT_CONFIG_KEY);
+        return this.executor(DEFAULT_META);
+    }
+
+    // ----- 对象引用操作
+    String DEFAULT_REFERENCE = "DEFAULT_REFERENCE";
+
+    default <T> HConfig putRef(final String refKey, final T reference) {
+        throw new _501NotSupportException("[ ZERO ] 当前 HConfig 不支持 putRef 方法，请检查配置！");
+    }
+
+    default <T> HConfig putRef(final T reference) {
+        return this.putRef(DEFAULT_REFERENCE, reference);
+    }
+
+    default <T> T ref(final String refKey) {
+        return null;
+    }
+
+    default <T> T ref() {
+        return this.ref(DEFAULT_REFERENCE);
     }
 
     /**
@@ -133,5 +157,4 @@ public interface HConfig {
      */
     interface HRun<T extends HConfig> extends HCommand<T, Boolean> {
     }
-
 }
