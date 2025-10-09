@@ -1,7 +1,7 @@
 package io.zerows.cosmic.plugins.websocket.management;
 
 import io.zerows.cosmic.plugins.websocket.Remind;
-import io.zerows.epoch.management.AbstractAmbiguity;
+import io.zerows.platform.management.AbstractAmbiguity;
 import io.zerows.specification.development.compiled.HBundle;
 
 import java.util.HashSet;

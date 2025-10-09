@@ -7,6 +7,7 @@ import io.zerows.platform.enums.EmBoot;
  */
 public interface HSetting {
 
+    String id();
     // ====================== ⚙️ 容器配置区域 ======================
 
     /**

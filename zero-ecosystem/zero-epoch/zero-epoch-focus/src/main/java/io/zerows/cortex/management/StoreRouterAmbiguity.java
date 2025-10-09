@@ -2,7 +2,7 @@ package io.zerows.cortex.management;
 
 import io.zerows.cortex.metadata.RunRoute;
 import io.zerows.cortex.metadata.RunThread;
-import io.zerows.epoch.management.AbstractAmbiguity;
+import io.zerows.platform.management.AbstractAmbiguity;
 import io.zerows.specification.development.compiled.HBundle;
 
 import java.util.Objects;

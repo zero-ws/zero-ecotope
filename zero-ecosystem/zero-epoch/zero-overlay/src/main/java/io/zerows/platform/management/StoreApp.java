@@ -1,9 +1,11 @@
-package io.zerows.cortex.management;
+package io.zerows.platform.management;
 
+import io.r2mo.typed.cc.Cc;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.metadata.KDS;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.app.HArk;
+import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.specification.vital.HOI;
 
 /**
@@ -18,15 +20,23 @@ import io.zerows.specification.vital.HOI;
  *               - WORKFLOW： 工作流数据库
  *               - DYNAMIC：  动态数据库，底层对接 X_SOURCE 表结构中定义的数据库
  *               - EXTENSION：（保留）自定义扩展数据库
- *     2. 关联下层：{@link StoreServer} 集合 x N
- *                {@link StoreRouter} 集合 x N ( context + router )
+ *     2. 关联下层：{@see StoreServer} 集合 x N
+ *                {@see StoreRouter} 集合 x N ( context + router )
  * </code></pre>
  *
  * @author lang : 2024-05-03
  */
-public interface StoreApp {
-    // 关联应用基础信息
-    HArk runAt();
+public interface StoreApp extends OCache<HApp> {
+    Cc<String, StoreApp> CC_SKELETON = Cc.openThread();
+
+    static StoreApp of(final HBundle bundle) {
+        final String cacheKey = HBundle.id(bundle, StoreAppAmbiguity.class);
+        return CC_SKELETON.pick(() -> new StoreAppAmbiguity(bundle), cacheKey);
+    }
+
+    static StoreApp of() {
+        return of(null);
+    }
 
     // 运行配置中的 Context 上下文环境
     default String context() {

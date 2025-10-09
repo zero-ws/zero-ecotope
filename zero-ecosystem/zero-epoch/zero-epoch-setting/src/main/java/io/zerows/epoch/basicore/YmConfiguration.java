@@ -8,6 +8,7 @@ import io.zerows.integrated.jackson.JsonObjectSerializer;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * 针对 vertx.yml 和 vertx-boot.yml 的配置选择专用类，底层可直接获取，选取序列化模式构造基于当前节点的核心配置信息
@@ -44,5 +45,15 @@ public class YmConfiguration implements Serializable {
 
     public static YmConfiguration createDefault() {
         return new YmConfiguration();
+    }
+
+    public String id() {
+        if (Objects.isNull(this.vertx)) {
+            return null;
+        }
+        if (Objects.isNull(this.vertx.getApplication())) {
+            return null;
+        }
+        return this.vertx.getApplication().getName();
     }
 }

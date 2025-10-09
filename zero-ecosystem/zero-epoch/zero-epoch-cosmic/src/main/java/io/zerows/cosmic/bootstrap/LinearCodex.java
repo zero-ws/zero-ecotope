@@ -1,7 +1,7 @@
 package io.zerows.cosmic.bootstrap;
 
 import io.zerows.cortex.metadata.RunVertx;
-import io.zerows.epoch.management.AbstractAmbiguity;
+import io.zerows.platform.management.AbstractAmbiguity;
 import io.zerows.specification.development.compiled.HBundle;
 
 import java.util.Objects;

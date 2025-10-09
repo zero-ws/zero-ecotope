@@ -3,6 +3,7 @@ package io.zerows.epoch.configuration;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.metadata.MMComponent;
 import io.zerows.specification.configuration.HConfig;
+import io.zerows.support.Ut;
 import lombok.experimental.Accessors;
 
 import java.util.Objects;
@@ -58,9 +59,28 @@ public class ZeroConfig implements HConfig {
     private final JsonObject options = new JsonObject();
 
     public ZeroConfig(final MMComponent component) {
-        Objects.requireNonNull(component);
-        this.options.mergeIn(component.getConfig(), true);
-        this.executor.put(DEFAULT_CONFIG_KEY, component.getClass());
+        this(
+            Objects.requireNonNull(component, "[ ZERO ] 使用 MMComponent 构造配置不可传入 null 引用！")
+                .getConfig(),
+            component.getComponent()
+        );
+    }
+
+    public ZeroConfig(final JsonObject options, final Class<?> executor) {
+        if (Ut.isNotNil(options)) {
+            this.options.mergeIn(options, true);
+        }
+        if (Objects.nonNull(executor)) {
+            this.executor.put(DEFAULT_CONFIG_KEY, executor);
+        }
+    }
+
+    public ZeroConfig(final Class<?> executor) {
+        this(null, executor);
+    }
+
+    public ZeroConfig(final JsonObject options) {
+        this(options, null);
     }
 
     @Override

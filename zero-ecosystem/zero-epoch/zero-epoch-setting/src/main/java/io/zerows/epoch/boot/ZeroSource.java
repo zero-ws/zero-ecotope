@@ -12,6 +12,7 @@ import io.zerows.epoch.basicore.InPre;
 import io.zerows.epoch.basicore.YmConfiguration;
 import io.zerows.epoch.basicore.YmVertxConfig;
 import io.zerows.epoch.basicore.exception._41001Exception500AppNameMissing;
+import io.zerows.platform.management.StoreApp;
 import io.zerows.platform.metadata.KApp;
 import io.zerows.specification.app.HApp;
 import lombok.extern.slf4j.Slf4j;
@@ -58,7 +59,8 @@ class ZeroSource implements ZeroPower.Source {
             final ConfigLoad load = ConfigLoad.ofLocal();
             final HApp app = new KApp().vLog();
 
-
+            StoreApp.of().add(app);
+            
             log.info("[ ZERO ] 本地 -> 加载配置文件…… ⚙️ {}", load.getClass().getName());
             return load.configure(app);
         } else {
@@ -71,6 +73,7 @@ class ZeroSource implements ZeroPower.Source {
             final ConfigLoad load = ConfigLoad.ofCloud(pre);
             final HApp app = new KApp(application.getName()).vLog();
 
+            StoreApp.of().add(app);
 
             log.info("[ ZERO ] 云端 -> 加载配置文件…… ⚙️ {}", load.getClass().getName());
             return load.configure(app);

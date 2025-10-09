@@ -48,11 +48,12 @@ public class ZeroSetting implements HSetting {
     /** 启动器配置 **/
     private HConfig launcher;
 
-    private ZeroSetting() {
+    private String idOrName;
 
+    private ZeroSetting() {
     }
 
-    public static HSetting of() {
+    public static ZeroSetting of() {
         return new ZeroSetting();
     }
 
@@ -64,6 +65,16 @@ public class ZeroSetting implements HSetting {
     public HSetting container(final HConfig container) {
         this.container = container;
         return this;
+    }
+
+    public HSetting id(final String idOrName) {
+        this.idOrName = idOrName;
+        return this;
+    }
+
+    @Override
+    public String id() {
+        return this.idOrName;
     }
 
     @Override

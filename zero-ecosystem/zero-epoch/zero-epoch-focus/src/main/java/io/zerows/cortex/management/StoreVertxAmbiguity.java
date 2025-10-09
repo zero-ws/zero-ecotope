@@ -2,9 +2,9 @@ package io.zerows.cortex.management;
 
 import io.vertx.core.Vertx;
 import io.zerows.cortex.metadata.RunVertx;
-import io.zerows.epoch.metadata.MultiKeyMap;
 import io.zerows.platform.exception._60050Exception501NotSupport;
-import io.zerows.epoch.management.AbstractAmbiguity;
+import io.zerows.platform.management.AbstractAmbiguity;
+import io.zerows.platform.metadata.MultiKeyMap;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
 

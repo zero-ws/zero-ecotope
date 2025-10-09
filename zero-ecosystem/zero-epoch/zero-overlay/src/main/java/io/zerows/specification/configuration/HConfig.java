@@ -7,7 +7,7 @@ import io.zerows.specification.atomic.HCommand;
  * 「配置接口」
  * 针对组件的核心配置接口，重新设计配置层，保证所有组件都可以拥有一套基于某种规范的独立配置信息，此处的 HConfig 就是这种接口，
  * 当组件配置从此处继承时，可用于描述组件的核心 config 配置以实现基础独立配置信息，除开可管理的配置数据本身，还有特殊功能，
- * 即 Pre 组件针对配置的预处理器，Pre 组件可以在配置加载完成之后。
+ * 即 Executor 组件存储功能，存储的组件为 {@link Class} 类型，可直接反射获取。
  * <pre>
  *     此处的双设计模型
  *     1. 原始配置 -> {@see UnitComopnent}，上层绑定到 yml 中的配置，这种配置执行过 lombok 中的 {@link lombok.Data}
@@ -16,8 +16,9 @@ import io.zerows.specification.atomic.HCommand;
  *            "component": "???",
  *            "config": {}
  *        }
- *     2. 当前接口中的实现 -> {@see ZeroConfig}，这是标准的 HConfig 实现，它将 Pre 流程引入配置处理中，最终编排成不同
- *        场景模式下的基础组件配置管理，二者呼应可实现整体结构和流程的统一。
+ *     2. 当前接口中的实现 -> {@see ZeroConfig}，这是标准的 HConfig 实现，此处的 executor() 会在两种场景种使用
+ *        - 静态配置场景：UnitComponent 中的 component 字段会被存储到 executor 中，方便后期反射
+ *        - 动态配置场景：通过代码直接调用 executor 方法保存和获取组件信息
  * </pre>
  * UnitComponent 的职责和 HConfig 不一样，HConfig 负责运行之后的配置最终组合，而 UnitComponent 只是单纯表示基本配置形态。
  *
@@ -74,6 +75,10 @@ public interface HConfig {
      */
     default Class<?> executor(final String configKey) {
         return null;
+    }
+
+    default Class<?> executor() {
+        return this.executor(DEFAULT_CONFIG_KEY);
     }
 
     /**

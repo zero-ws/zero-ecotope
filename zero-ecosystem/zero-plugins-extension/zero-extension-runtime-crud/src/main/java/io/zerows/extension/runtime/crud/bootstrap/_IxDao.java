@@ -5,10 +5,10 @@ import io.zerows.component.environment.DevEnv;
 import io.zerows.cortex.extension.HExtension;
 import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.epoch.basicore.MDEntity;
-import io.zerows.epoch.metadata.MultiKeyMap;
 import io.zerows.extension.runtime.crud.eon.IxConstant;
 import io.zerows.extension.runtime.crud.eon.IxMsg;
 import io.zerows.mbse.metadata.KModule;
+import io.zerows.platform.metadata.MultiKeyMap;
 import io.zerows.support.Ut;
 
 import java.util.Objects;

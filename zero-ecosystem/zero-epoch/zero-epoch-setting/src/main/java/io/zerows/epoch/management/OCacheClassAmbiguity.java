@@ -3,6 +3,7 @@ package io.zerows.epoch.management;
 import io.zerows.epoch.assembly.ClassScanner;
 import io.zerows.epoch.configuration.Inquirer;
 import io.zerows.platform.enums.VertxComponent;
+import io.zerows.platform.management.AbstractAmbiguity;
 import io.zerows.specification.development.compiled.HBundle;
 import lombok.extern.slf4j.Slf4j;
 

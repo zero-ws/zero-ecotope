@@ -20,7 +20,8 @@ public class YmBoot implements Serializable {
     @JsonSerialize(using = ClassSerializer.class)
     @JsonDeserialize(using = ClassDeserializer.class)
     private Class<?> launcher;
-    private MMComponent pre = new MMComponent();
-    private MMComponent on = new MMComponent();
-    private MMComponent off = new MMComponent();
+    private MMComponent pre;
+    private MMComponent on;
+    private MMComponent off;
+    private MMComponent run;
 }

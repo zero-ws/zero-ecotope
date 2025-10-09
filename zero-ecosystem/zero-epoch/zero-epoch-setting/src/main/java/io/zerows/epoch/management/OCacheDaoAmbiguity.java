@@ -3,8 +3,10 @@ package io.zerows.epoch.management;
 import io.github.jklingsporn.vertx.jooq.shared.internal.AbstractVertxDAO;
 import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.epoch.basicore.MDMeta;
+import io.zerows.platform.management.AbstractAmbiguity;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +19,7 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * @author lang : 2024-05-08
  */
+@Slf4j
 class OCacheDaoAmbiguity extends AbstractAmbiguity implements OCacheDao {
     /**
      * Norm 环境中，OCacheDao 内部会维护一个单独的 Map，这个 Map 就是独立的配置信息，此时构造的 OCacheDao 等价于一个单件模式，使用了
@@ -106,11 +109,11 @@ class OCacheDaoAmbiguity extends AbstractAmbiguity implements OCacheDao {
         }
 
         if (Objects.isNull(this.caller())) {
-            this.logger().info("Scanned \"{}\" table with Dao configuration in Norm environment. \n{}",
+            log.info("[ ZERO ] Norm 环境，扫描了 \"{}\" 张表的 Dao 配置. \n{}",
                 this.storedMeta.size(), Ut.fromJoin(lines, "\n"));
         } else {
-            this.logger().info("Scanned \"{}\" table with Dao configuration in OSGI environment. Bundle = {}, \n{}",
-                this.storedMeta.size(), this.caller().name(), Ut.fromJoin(lines, "\n"));
+            log.info("[ ZERO ] OSGI 环境中，扫描了 \"{}\" 张表的 Dao 配置. \n{}",
+                this.storedMeta.size(), Ut.fromJoin(lines, "\n"));
         }
 
         // 打印结果

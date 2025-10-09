@@ -1,4 +1,4 @@
-package io.zerows.epoch.configuration;
+package io.zerows.epoch.boot;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.basicore.YmBoot;

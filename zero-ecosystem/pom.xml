@@ -13,7 +13,6 @@
     <name>(POM) 📚️ - Zero::Ecosystem</name>
     <packaging>pom</packaging>
     <modules>
-        <module>zero-overlay</module>
         <module>zero-epoch</module>
         <module>zero-plugins-equip</module>
         <module>zero-plugins-extension</module>

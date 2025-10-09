@@ -13,6 +13,7 @@
     <name>(POM) 📚️ - Zero::Epoch</name>
     <packaging>pom</packaging>
     <modules>
+        <module>zero-overlay</module>
         <module>zero-epoch-use</module>
         <!--
         - 设置模块，主要提供基础层之上的支持功能，其中包括

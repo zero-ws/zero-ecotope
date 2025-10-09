@@ -1,4 +1,4 @@
-package io.zerows.epoch.metadata;
+package io.zerows.platform.metadata;
 
 import java.util.Arrays;
 import java.util.Objects;

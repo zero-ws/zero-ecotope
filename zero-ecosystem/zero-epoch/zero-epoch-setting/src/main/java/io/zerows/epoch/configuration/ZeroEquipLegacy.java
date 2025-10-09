@@ -1,14 +1,13 @@
-package io.zerows.epoch.boot;
+package io.zerows.epoch.configuration;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.application.VertxYml;
 import io.zerows.epoch.application.YmlCore;
 import io.zerows.epoch.basicore.YmConfiguration;
-import io.zerows.epoch.configuration.ZeroSetting;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KPlugin;
-import io.zerows.epoch.management.AbstractAmbiguity;
 import io.zerows.platform.constant.VString;
+import io.zerows.platform.management.AbstractAmbiguity;
 import io.zerows.specification.configuration.HSetting;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
@@ -21,6 +20,7 @@ import java.util.stream.Collectors;
 /**
  * @author lang : 2023-05-30
  */
+@Deprecated
 public class ZeroEquipLegacy extends AbstractAmbiguity implements Equip {
 
     private ZeroEquipLegacy() {

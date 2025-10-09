@@ -1,9 +1,7 @@
-package io.zerows.epoch.management;
+package io.zerows.platform.management;
 
-import io.zerows.component.log.OLog;
-import io.zerows.platform.exception._60050Exception501NotSupport;
+import io.r2mo.typed.exception.web._501NotSupportException;
 import io.zerows.specification.development.compiled.HBundle;
-import io.zerows.support.Ut;
 
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -60,7 +58,7 @@ public interface OCache<T> {
      * @return 返回当前缓存中的所有键
      */
     default Set<String> keys() {
-        throw new _60050Exception501NotSupport(this.getClass());
+        throw new _501NotSupportException("[ ZERO ] 不支持的API：" + this.getClass());
     }
 
     /**
@@ -69,7 +67,7 @@ public interface OCache<T> {
      * @return 返回当前缓存中的所有值
      */
     default T value() {
-        throw new _60050Exception501NotSupport(this.getClass());
+        throw new _501NotSupportException("[ ZERO ] 不支持的API：" + this.getClass());
     }
 
     /**
@@ -80,15 +78,11 @@ public interface OCache<T> {
      * @return 需筛选的类型
      */
     default T valueGet(final String key) {
-        throw new _60050Exception501NotSupport(this.getClass());
+        throw new _501NotSupportException("[ ZERO ] 不支持的API：" + this.getClass());
     }
 
     // -------------------- 两种模式的追加和移除 --------------------
     OCache<T> add(T t);
 
     OCache<T> remove(T t);
-
-    default OLog logger() {
-        return Ut.Log.cache(this.getClass());
-    }
 }

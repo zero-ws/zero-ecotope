@@ -5,7 +5,7 @@ import io.zerows.cosmic.plugins.job.metadata.Mission;
 import io.zerows.epoch.configuration.Inquirer;
 import io.zerows.epoch.management.OCacheClass;
 import io.zerows.epoch.management.ORepository;
-import io.zerows.epoch.management.AbstractAmbiguity;
+import io.zerows.platform.management.AbstractAmbiguity;
 import io.zerows.specification.configuration.HSetting;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;

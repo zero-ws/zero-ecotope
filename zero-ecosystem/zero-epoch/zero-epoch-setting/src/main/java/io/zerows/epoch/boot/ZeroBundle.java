@@ -1,4 +1,4 @@
-package io.zerows.epoch.configuration;
+package io.zerows.epoch.boot;
 
 import io.zerows.specification.development.compiled.HBundle;
 

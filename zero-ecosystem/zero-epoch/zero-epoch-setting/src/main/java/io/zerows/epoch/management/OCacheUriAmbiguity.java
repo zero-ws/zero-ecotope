@@ -1,6 +1,7 @@
 package io.zerows.epoch.management;
 
 import io.vertx.core.http.HttpMethod;
+import io.zerows.platform.management.AbstractAmbiguity;
 import io.zerows.specification.development.compiled.HBundle;
 
 import java.util.HashSet;

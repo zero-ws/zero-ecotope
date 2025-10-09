@@ -3,7 +3,7 @@ package io.zerows.cortex.management;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Vertx;
 import io.zerows.cortex.metadata.RunVertx;
-import io.zerows.epoch.management.OCache;
+import io.zerows.platform.management.OCache;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.spi.HPI;
 

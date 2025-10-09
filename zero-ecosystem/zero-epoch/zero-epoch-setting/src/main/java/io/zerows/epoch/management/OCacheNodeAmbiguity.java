@@ -2,6 +2,7 @@ package io.zerows.epoch.management;
 
 import io.zerows.epoch.basicore.NodeNetwork;
 import io.zerows.epoch.basicore.NodeVertx;
+import io.zerows.platform.management.AbstractAmbiguity;
 import io.zerows.specification.development.compiled.HBundle;
 
 /**

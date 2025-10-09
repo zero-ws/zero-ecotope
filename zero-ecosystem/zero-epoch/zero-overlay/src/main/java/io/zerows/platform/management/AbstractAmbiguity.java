@@ -1,4 +1,4 @@
-package io.zerows.epoch.management;
+package io.zerows.platform.management;
 
 import io.zerows.specification.development.compiled.HBundle;
 
