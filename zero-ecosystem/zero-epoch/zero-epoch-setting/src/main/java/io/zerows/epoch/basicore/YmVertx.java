@@ -72,9 +72,9 @@ public class YmVertx extends InPreVertx implements Serializable {
             .put("internalBlockingPoolSize", 128)
             .put("preferNativeTransport", true);
 
-        private YmVertxConfig.Delivery delivery = new YmVertxConfig.Delivery();
+        private YmVertxConfig.Delivery delivery;
 
-        private YmVertxConfig.Deployment deployment = new YmVertxConfig.Deployment();
+        private YmVertxConfig.Deployment deployment;
 
         @JsonSerialize(using = JsonObjectSerializer.class)
         @JsonDeserialize(using = JsonObjectDeserializer.class)

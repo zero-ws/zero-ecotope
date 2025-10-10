@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -62,6 +63,10 @@ public class ConfigContainer extends ConfigNorm {
             return this.instances.values().iterator().next();
         }
         throw new IllegalArgumentException("[ ZERO ] 当前实例数量不唯一，无法直接获取。");
+    }
+
+    public Set<String> keyInstance() {
+        return this.instances.keySet();
     }
 
     public void putConfig(final EmApp.Native name, final HConfig config) {

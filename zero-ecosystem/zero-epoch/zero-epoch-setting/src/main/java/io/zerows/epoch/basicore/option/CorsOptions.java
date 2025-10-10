@@ -60,6 +60,12 @@ public class CorsOptions implements Serializable {
     @JsonProperty("max-age")
     private int maxAge;
 
+    public CorsOptions() {
+        this.initMethods(this.methods);
+
+        this.initHeaders(this.headers);
+    }
+
     public static CorsOptions get() {
         if (Objects.nonNull(INSTANCE)) {
             return INSTANCE;
@@ -101,33 +107,40 @@ public class CorsOptions implements Serializable {
 
     public JsonArray getMethods() {
         if (this.methods.isEmpty()) {
-            return new JsonArray()
-                .add(HttpMethod.GET.name())
-                .add(HttpMethod.POST.name())
-                .add(HttpMethod.PUT.name())
-                .add(HttpMethod.DELETE.name())
-                .add(HttpMethod.OPTIONS.name());
-        } else {
-            return this.methods;
+            this.initMethods(this.methods);
         }
+        return this.methods;
+    }
+
+    private void initMethods(final JsonArray methods) {
+        methods.clear();
+        methods.add(HttpMethod.GET.name())
+            .add(HttpMethod.POST.name())
+            .add(HttpMethod.PUT.name())
+            .add(HttpMethod.DELETE.name())
+            .add(HttpMethod.OPTIONS.name());
+    }
+
+    private void initHeaders(final JsonArray headers) {
+        headers.clear();
+        headers.add(HttpHeaders.AUTHORIZATION.toString())
+            .add(HttpHeaders.ACCEPT.toString())
+            .add(HttpHeaders.CONTENT_DISPOSITION.toString())
+            .add(HttpHeaders.CONTENT_ENCODING.toString())
+            .add(HttpHeaders.CONTENT_LENGTH.toString())
+            .add(HttpHeaders.CONTENT_TYPE.toString())
+            /* User defined header */
+            .add(KWeb.HEADER.X_APP_ID)
+            .add(KWeb.HEADER.X_APP_KEY)
+            .add(KWeb.HEADER.X_SIGMA)
+            .add(KWeb.HEADER.X_TENANT_ID);
     }
 
     public JsonArray getHeaders() {
         if (this.headers.isEmpty()) {
-            return new JsonArray()
-                .add(HttpHeaders.AUTHORIZATION.toString())
-                .add(HttpHeaders.ACCEPT.toString())
-                .add(HttpHeaders.CONTENT_DISPOSITION.toString())
-                .add(HttpHeaders.CONTENT_ENCODING.toString())
-                .add(HttpHeaders.CONTENT_LENGTH.toString())
-                .add(HttpHeaders.CONTENT_TYPE.toString())
-                /* User defined header */
-                .add(KWeb.HEADER.X_APP_ID)
-                .add(KWeb.HEADER.X_APP_KEY)
-                .add(KWeb.HEADER.X_SIGMA);
-        } else {
-            return this.headers;
+            this.initHeaders(this.headers);
         }
+        return this.headers;
     }
 
     // 非序列化快速方法

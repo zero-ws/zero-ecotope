@@ -6,6 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.core.tracing.TracingPolicy;
 import io.zerows.integrated.jackson.JsonObjectDeserializer;
 import io.zerows.integrated.jackson.JsonObjectSerializer;
+import io.zerows.support.Ut;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -29,6 +30,15 @@ public class YmVertxConfig extends InPreVertx.Config implements Serializable {
     @JsonSerialize(using = JsonObjectSerializer.class)
     @JsonDeserialize(using = JsonObjectDeserializer.class)
     private JsonObject shared;
+
+    public List<YmVertx.Instance> getInstance() {
+        if (this.instance.isEmpty()) {
+            final YmVertx.Instance instance = new YmVertx.Instance();
+            instance.setName(Ut.randomString(16));
+            this.instance.add(instance);
+        }
+        return this.instance;
+    }
 
     /**
      * 📦 消息投递配置类

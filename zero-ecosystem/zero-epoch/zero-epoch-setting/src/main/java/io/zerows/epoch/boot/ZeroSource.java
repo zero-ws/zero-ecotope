@@ -55,14 +55,14 @@ class ZeroSource implements ZeroPower.Source {
     @Override
     public YmConfiguration load() {
         final InPre pre = this.ioPre();
+        final YmConfiguration configuration;
+        final HApp app;
         if (Objects.isNull(pre)) {
             final ConfigLoad load = ConfigLoad.ofLocal();
-            final HApp app = new KApp().vLog();
-
-            StoreApp.of().add(app);
+            app = new KApp();
 
             log.info("[ ZERO ] 本地 -> 加载配置文件…… ⚙️ {}", load.getClass().getName());
-            return load.configure(app);
+            configuration = load.configure(app);
         } else {
             // -41001 验证
             final YmApplication application = pre.application();
@@ -71,13 +71,13 @@ class ZeroSource implements ZeroPower.Source {
 
 
             final ConfigLoad load = ConfigLoad.ofCloud(pre);
-            final HApp app = new KApp(application.getName()).vLog();
-
-            StoreApp.of().add(app);
+            app = new KApp(application.getName());
 
             log.info("[ ZERO ] 云端 -> 加载配置文件…… ⚙️ {}", load.getClass().getName());
-            return load.configure(app);
+            configuration = load.configure(app);
         }
+        StoreApp.of().add(app.vLog());
+        return configuration;
     }
 
     private InPre ioPre() {

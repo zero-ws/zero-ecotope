@@ -24,9 +24,10 @@ public class KApp implements HApp, HLog {
 
     private String id;
     private String name;
-    private final JsonObject configuration = new JsonObject();
     private String ns;
     private String tenant;
+    private final JsonObject configuration = new JsonObject();
+    private final JsonObject data = new JsonObject();
 
     /**
      * 🎲 随机应用构造函数 - 临时开发场景
@@ -119,14 +120,13 @@ public class KApp implements HApp, HLog {
     }
 
     @Override
-    public void option(final JsonObject configuration, final boolean clear) {
+    public HApp option(final JsonObject configuration) {
         if (UtBase.isNil(configuration)) {
-            return;
+            return this;
         }
-        if (clear) {
-            this.configuration.clear();
-        }
-        this.configuration.mergeIn(UtBase.valueJObject(configuration), true);
+        this.configuration.clear();
+        this.configuration.mergeIn(configuration, true);
+        return this;
     }
 
     @Override
@@ -136,8 +136,23 @@ public class KApp implements HApp, HLog {
     }
 
     @Override
-    public <T> void option(final String key, final T value) {
+    public <T> HApp option(final String key, final T value) {
         this.configuration.put(key, value);
+        return this;
+    }
+
+    public JsonObject data() {
+        return this.data;
+    }
+
+    @Override
+    public HApp data(final JsonObject data) {
+        if (UtBase.isNil(data)) {
+            return this;
+        }
+        this.data.clear();
+        this.data.mergeIn(data, true);
+        return this;
     }
 
     @Override
@@ -161,6 +176,7 @@ public class KApp implements HApp, HLog {
     @Override
     public HApp name(final String name) {
         this.name = name;
+        this.ns = HApp.nsOf(name);
         return this;
     }
 

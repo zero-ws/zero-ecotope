@@ -1,7 +1,11 @@
 package io.zerows.epoch.configuration;
 
+import io.r2mo.typed.exception.web._501NotSupportException;
+import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.basicore.option.ClusterOptions;
 import io.zerows.epoch.boot.ZeroLauncher;
 import io.zerows.platform.enums.EmApp;
+import io.zerows.platform.metadata.KDatabase;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HSetting;
 import io.zerows.specification.development.HLog;
@@ -9,7 +13,10 @@ import io.zerows.specification.storage.HStoreLegacy;
 import io.zerows.spi.BootIo;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -142,24 +149,121 @@ public class ZeroSetting implements HSetting, HLog {
     @Override
     @SuppressWarnings("unchecked")
     public ZeroSetting vLog() {
-        log.info("[ ZERO ] 主容器配置：");
-        if (this.container instanceof final ConfigContainer configContainer) {
-            configContainer.vLog();
+        final StringBuilder content = new StringBuilder();
+        content.append("[ ZERO ] 配置信息：\n\uD83D\uDD11 配置ID = ").append(this.id())
+            .append(" ( 类型 =").append(this.getClass().getName())
+            .append(", hashCode = ").append(this.hashCode()).append(" )\n");
+        if (this.container instanceof final ConfigContainer containerConfig) {
+            final ClusterOptions options = containerConfig.ref();
+            // 集群配置
+            content.append("\uD83C\uDF10 集群配置（默认） = ").append(Objects.nonNull(options) ? options.getOptions() : null).append("\n");
+            // 默认配置
+            this.vLog(content, "\uD83D\uDFE1", new ArrayList<>() {
+                {
+                    this.add(containerConfig.delivery());
+                    this.add(containerConfig.deployment());
+                    this.add(containerConfig.shared());
+                }
+            });
+
+
+            // 实例信息
+            final Set<String> keySet = containerConfig.keyInstance();
+            content.append("\t\uD83E\uDDEC 实例数量 = ").append(keySet.size()).append("\n");
+
+            int index = 0;
+            for (final String key : keySet) {
+                final HConfig instance = containerConfig.instance(key);
+                if (instance instanceof final ConfigInstance instanceConfig) {
+                    content.append("\t\t实例 [").append(index).append("] -- ").append(instanceConfig.name()).append("\n");
+                    final JsonObject vertxOptions = instanceConfig.options();
+                    content.append("\t\t\uD83E\uDDEA Options = ").append(vertxOptions).append("\n");
+                    // 默认配置
+                    this.vLog(content, "\t\uD83D\uDD35", new ArrayList<>() {
+                        {
+                            this.add(instanceConfig.delivery());
+                            this.add(instanceConfig.deployment());
+                            this.add(instanceConfig.shared());
+                        }
+                    });
+                }
+                index++;
+            }
+
+
+            content.append("\t⚙️ 插件配置").append("\n");
+            this.vLog(content, this.infix);
+
+
+            content.append("\t⚙️ 扩展配置").append("\n");
+            this.vLog(content, this.extension);
+
+            content.append("\t\uD83D\uDDC4 数据库配置");
+            this.vLog(content, this.infix.get(EmApp.Native.DATABASE.name()));
+        } else {
+            throw new _501NotSupportException("[ ZERO ] 主容器类型有异常！" + this.container.getClass());
         }
-        log.info("[ ZERO ] 插件配置：");
-        this.infix.forEach((field, config) -> {
-            log.info("\t{} = {}", field, config.getClass());
-            if (config instanceof final ConfigNorm configNorm) {
-                configNorm.vLog();
-            }
-        });
-        log.info("[ ZERO ] 扩展配置：");
-        this.extension.forEach((field, config) -> {
-            log.info("\t{} = {}", field, config.getClass());
-            if (config instanceof final ConfigNorm configNorm) {
-                configNorm.vLog();
-            }
-        });
+        log.info(content.toString());
         return this;
+    }
+
+    private void vLog(final StringBuilder content, final HConfig config) {
+        if (Objects.isNull(config)) {
+            return;
+        }
+        if (!(config instanceof final ConfigDS ds)) {
+            throw new _501NotSupportException("[ ZERO ] 数据库配置类型有异常！" + config.getClass());
+        }
+        final KDatabase database = ds.ref();
+        content.append("( dynamic = ").append(ds.dynamic()).append(", strict = ").append(ds.strict()).append(" )\n");
+        content.append("\t\t\uD83D\uDFE9 主库：").append("key = ").append(ds.master()).append("\n");
+        this.vLog(content, database);
+        final ConcurrentMap<String, HConfig> slaveDatabase = ds.config();
+        slaveDatabase.keySet().stream().filter(field -> !field.equals(ds.master())).forEach(field -> {
+            final HConfig slaveConfig = slaveDatabase.get(field);
+            if (Objects.nonNull(slaveConfig)) {
+                content.append("\t\t\uD83D\uDFE6 从库：").append("key = ").append(field).append("\n");
+                final KDatabase slaveDatabaseRef = slaveConfig.ref();
+                this.vLog(content, slaveDatabaseRef);
+            }
+        });
+    }
+
+    private void vLog(final StringBuilder content, final KDatabase database) {
+        content.append("\t\t\t数据库名：⚡️").append(database.getInstance()).append("\n");
+        content.append("\t\t\t连接字符串：").append(database.getUrl()).append("\n");
+    }
+
+    private void vLog(final StringBuilder content, final ConcurrentMap<String, HConfig> configMap) {
+        for (final String field : configMap.keySet()) {
+            final HConfig config = configMap.get(field);
+            if (IGNORE_SET.contains(field)) {
+                continue;
+            }
+            if (Objects.isNull(config.ref())) {
+                content.append("\t\t").append(field).append(" = ").append(config.options()).append("\n");
+            } else {
+                content.append("\t\t").append(field).append(" = ").append(config.ref().toString()).append("\n");
+            }
+        }
+    }
+
+    private static final Set<String> IGNORE_SET = Set.of(EmApp.Native.DATABASE.name());
+
+    private void vLog(final StringBuilder content, final String prefix,
+                      final List<HConfig> configList) {
+        // 默认配置
+        final HConfig deliveryConfig = configList.get(0);
+        if (Objects.nonNull(deliveryConfig)) {
+            content.append("\t").append(prefix).append(" Delivery = ").append(deliveryConfig.options()).append("\n");
+        }
+        final HConfig deploymentConfig = configList.get(1);
+        if (Objects.nonNull(deploymentConfig)) {
+            content.append("\t").append(prefix).append(" Deployment = ").append(deploymentConfig.options()).append("\n");
+        }
+        final HConfig sharedConfig = configList.get(2);
+        if (Objects.nonNull(sharedConfig)) {
+            content.append("\t").append(prefix).append(" Shared = ").append(sharedConfig.options()).append("\n");
+        }
     }
 }

@@ -68,7 +68,7 @@ public class KDatabase implements Serializable, HCopier<KDatabase>, HJson {
     /* Database port number */
     private Integer port;
     /* Database category */
-    private EmDS.Category category;
+    private EmDS.Category category = EmDS.Category.MYSQL8;
     /* JDBC connection string */
     private String url;
     /* Database username */

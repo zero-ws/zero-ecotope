@@ -122,7 +122,7 @@ public interface HApp extends HBoundary<String>, Function<HApp, HApp> {
     }
 
 
-    // 🚀 配置属性：----------------------------------------------------------
+    // 🚀 配置/数据：----------------------------------------------------------
     /*
      * ⚙️ 配置属性模块 🔧
      * <pre>
@@ -155,8 +155,6 @@ public interface HApp extends HBoundary<String>, Function<HApp, HApp> {
      */
     <T> T option(String key);
 
-    <T> void option(String key, T value);
-
     /**
      * 📤 提取单独应用程序的原始配置（包含了额外的配置信息） 📋
      *
@@ -164,8 +162,13 @@ public interface HApp extends HBoundary<String>, Function<HApp, HApp> {
      */
     JsonObject option();
 
-    void option(JsonObject configurationJ, boolean clear);
+    <T> HApp option(String key, T value);
 
+    HApp option(JsonObject configurationJ);
+
+    JsonObject data();
+
+    HApp data(JsonObject data);
 
     // 🚀 高频属性部分：----------------------------------------------------------
     /*

@@ -35,7 +35,7 @@ public class YmServer implements Serializable, EquipItem {
     private String address = "0.0.0.0";
     private JsonObject options = new JsonObject();
     private YmSession session;
-    private YmWebSocket websocket = new YmWebSocket();
+    private YmWebSocket websocket;
 
     @Override
     public JsonObject combined() {

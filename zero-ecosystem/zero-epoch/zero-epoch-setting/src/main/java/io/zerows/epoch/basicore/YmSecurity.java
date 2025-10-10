@@ -15,7 +15,7 @@ import java.io.Serializable;
 @Data
 public class YmSecurity implements Serializable {
     private String wall;
-    private Jwt jwt = new Jwt();
+    private Jwt jwt;
 
     /**
      * @author lang : 2025-10-05

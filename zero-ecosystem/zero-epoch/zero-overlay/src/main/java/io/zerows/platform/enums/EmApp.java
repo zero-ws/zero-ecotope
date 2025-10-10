@@ -282,5 +282,11 @@ public final class EmApp {
          * 🎯 应用安全策略和机制的配置管理
          */
         SECURITY,
+
+        /**
+         * 🗄️ 数据库配置
+         * 🎯 管理数据库连接和操作的配置
+         */
+        DATABASE,
     }
 }

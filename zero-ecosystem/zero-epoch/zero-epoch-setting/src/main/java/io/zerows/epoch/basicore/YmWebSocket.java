@@ -1,5 +1,6 @@
 package io.zerows.epoch.basicore;
 
+import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.r2mo.typed.json.jackson.ClassDeserializer;
@@ -33,7 +34,9 @@ public class YmWebSocket implements Serializable, EquipItem {
     @Override
     public JsonObject combined() {
         final JsonObject options = this.config.copy();
-        options.put("publish", this.publish);
+        if (StrUtil.isNotBlank(this.publish)) {
+            options.put("publish", this.publish);
+        }
         return options;
     }
 

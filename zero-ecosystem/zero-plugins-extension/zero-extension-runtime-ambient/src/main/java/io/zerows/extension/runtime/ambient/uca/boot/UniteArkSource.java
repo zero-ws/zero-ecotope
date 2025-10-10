@@ -174,7 +174,7 @@ public class UniteArkSource implements UniteArk<List<XSource>> {
         }
         // App InJson
         final HApp appRef = ark.app();
-        appRef.option(normalized, true);
+        appRef.option(normalized);
         return ark;
     }
 }

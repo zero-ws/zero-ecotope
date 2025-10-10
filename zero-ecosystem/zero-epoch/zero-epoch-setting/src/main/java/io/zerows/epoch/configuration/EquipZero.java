@@ -4,6 +4,7 @@ import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.basicore.YmBoot;
 import io.zerows.epoch.basicore.YmConfiguration;
+import io.zerows.epoch.basicore.YmDataSource;
 import io.zerows.epoch.basicore.YmMvc;
 import io.zerows.epoch.basicore.YmServer;
 import io.zerows.epoch.basicore.YmVertx;
@@ -16,6 +17,7 @@ import io.zerows.support.Ut;
 
 import java.util.Objects;
 import java.util.Optional;
+import java.util.concurrent.ConcurrentMap;
 import java.util.function.Supplier;
 
 /**
@@ -40,8 +42,22 @@ class EquipZero implements Equip {
         // 添加 vertx 核心配置
         this.initialize(setting, configuration.getVertx());
 
+        // 扩展配置 extension 核心
+        this.initialize(setting, configuration.extension());
+
         setting.vLog();
         return setting;
+    }
+
+    private void initialize(final ZeroSetting setting, final ConcurrentMap<String, JsonObject> extension) {
+        if (Objects.isNull(extension) || extension.isEmpty()) {
+            return;
+        }
+        extension.forEach((extensionKey, extensionConfig) -> {
+            final HConfig config = new ConfigNorm();
+            config.putOptions(extensionConfig);
+            setting.extension(extensionKey, config);
+        });
     }
 
     /**
@@ -89,9 +105,10 @@ class EquipZero implements Equip {
             // Shared 低优先级配置
             this.initializeJ(setting, EmApp.Native.SHARED, vertxYml::getShared);
 
-            /*
-             * 主容器配置，此配置会绑定到 container 方法中形成特殊配置
-             */
+            // DataSource 数据库配置
+            this.initializeT(setting, vertxYml::getDatasource);
+
+            /* 主容器配置，此配置会绑定到 container 方法中形成特殊配置 */
             final ConfigContainer container = ConfigContainer.of(vertxYml.getCluster(), vertxYml.getConfig());
             setting.container(container);
         });
@@ -144,6 +161,15 @@ class EquipZero implements Equip {
             final ConfigNorm config = new ConfigNorm();
             // DEFAULT_REFERENCE
             setting.infix(name, config.putRef(ref));
+        });
+    }
+
+    private void initializeT(final ZeroSetting setting, final Supplier<YmDataSource> sourceFn) {
+        final YmDataSource source = sourceFn.get();
+        Fn.jvmAt(Objects.nonNull(source), () -> {
+            final HConfig database = ConfigDS.of(source);
+            // 数据源处理
+            setting.infix(EmApp.Native.DATABASE, database);
         });
     }
 
