@@ -47,6 +47,10 @@ public class NodeVertx implements Serializable {
      * 但实例中的配置优先级更高，简单说就是 instance 本身在 yml 文件中可直接定制
      */
     private final ConcurrentMap<String, DeploymentOptions> deploymentOptions = new ConcurrentHashMap<>();
+
+    private DeploymentOptions agentOptions;
+    private DeploymentOptions workerOptions;
+
     private final String name;
     private final NodeNetwork networkRef;
     private EmDeploy.Mode mode = EmDeploy.Mode.CONFIG;
@@ -65,15 +69,30 @@ public class NodeVertx implements Serializable {
 
     public DeploymentOptions deploymentOptions(final Class<?> clazz) {
         Objects.requireNonNull(clazz, "[ ZERO ] 组件发布过程中不可传入空组件！");
-        final DeploymentOptions options = this.deploymentOptions.get(clazz.getName());
+        DeploymentOptions options = this.deploymentOptions.get(clazz.getName());
         if (Objects.isNull(options)) {
-            return null;
+            options = this.findDefault(clazz);
         }
         // 发布项修正
         setupAdjust(options, clazz, this.mode);
         // 反向更新
         this.deploymentOptions.put(clazz.getName(), options);
         return options;
+    }
+
+    public void deploymentOptions(final Class<?> clazz, final DeploymentOptions options) {
+        this.deploymentOptions.put(clazz.getName(), options);
+    }
+
+    private DeploymentOptions findDefault(final Class<?> clazz) {
+        final Agent agent = clazz.getDeclaredAnnotation(Agent.class);
+        if (Objects.isNull(agent)) {
+            // Worker
+            return this.workerOptions;
+        } else {
+            // Agent
+            return this.agentOptions;
+        }
     }
 
     public static void setupAdjust(final DeploymentOptions options, final Class<?> clazz,

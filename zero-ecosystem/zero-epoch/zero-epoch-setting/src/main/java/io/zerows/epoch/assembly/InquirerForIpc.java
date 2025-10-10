@@ -9,11 +9,11 @@ import io.zerows.epoch.assembly.exception._40044Exception500IpcReturn;
 import io.zerows.epoch.assembly.exception._40045Exception500IpcDirection;
 import io.zerows.epoch.assembly.exception._40046Exception500IpcArgument;
 import io.zerows.epoch.assembly.exception._40048Exception500RpcAgentAbsence;
-import io.zerows.epoch.web.Envelop;
 import io.zerows.epoch.configuration.Inquirer;
+import io.zerows.epoch.web.Envelop;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -22,10 +22,10 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * This class is for @Ipc and @Address must be in @Queue class instead of other specification.
  */
+@Slf4j
 public class InquirerForIpc implements Inquirer<ConcurrentMap<String, Method>> {
 
-    public static final String IPC = "( {0} Ipc ) The Zero system has found " +
-        "{1} points of @Ipc.";
+    private static final String MESSAGE = "[ ZERO ] ( {} Ipc ) \uD83E\uDDEC Zero 中扫描到 {} 个 @Ipc 定义点。";
 
     /**
      * @param classes all classes must be annotated with @Queue
@@ -47,12 +47,12 @@ public class InquirerForIpc implements Inquirer<ConcurrentMap<String, Method>> {
             .map(this::ensureSpec)
             .map(method -> this.ensureAgent(method, classes))
             .subscribe(method -> {
-                final Annotation annotation = method.getAnnotation(Ipc.class);
-                final String address = Ut.invoke(annotation, "get");
+                final Ipc annotation = method.getAnnotation(Ipc.class);
+                final String address = annotation.value();
                 addresses.put(address, method);
             })
             .dispose();
-        this.logger().info(IPC, addresses.size(), addresses.keySet());
+        log.info(MESSAGE, addresses.size(), addresses.size());
         return addresses;
     }
 
@@ -65,8 +65,8 @@ public class InquirerForIpc implements Inquirer<ConcurrentMap<String, Method>> {
      */
     private Method ensureSpec(final Method method) {
         Fn.jvmKo(Ut.isVoid(method.getReturnType()), _40044Exception500IpcReturn.class, method);
-        final Annotation annotation = method.getAnnotation(Ipc.class);
-        final String value = Ut.invoke(annotation, "get");
+        final Ipc annotation = method.getAnnotation(Ipc.class);
+        final String value = annotation.value();
         if (!Ut.isNil(value)) {
             // TypedArgument specification: Non Start Node
             // This specification is only for continue node
@@ -106,12 +106,12 @@ public class InquirerForIpc implements Inquirer<ConcurrentMap<String, Method>> {
      * @return valid method reference in the container
      */
     private Method ensureTarget(final Method method) {
-        final Annotation annotation = method.getAnnotation(Ipc.class);
+        final Ipc annotation = method.getAnnotation(Ipc.class);
         final String to = Ut.invoke(annotation, "to");
         final String name = Ut.invoke(annotation, "name");
         if (Ut.isNil(to) && Ut.isNil(name)) {
             // If ( to is null and name is null, get must be required, or the system do not know the direction
-            final String from = Ut.invoke(annotation, "get");
+            final String from = annotation.value();
             Fn.jvmKo(Ut.isNil(from), _40045Exception500IpcDirection.class, method);
             // Passed validation.
             return method;

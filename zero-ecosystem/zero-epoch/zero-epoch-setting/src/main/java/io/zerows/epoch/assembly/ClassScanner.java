@@ -1,9 +1,7 @@
 package io.zerows.epoch.assembly;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.component.log.OLog;
 import io.zerows.specification.development.compiled.HBundle;
-import io.zerows.support.Ut;
 import org.junit.runner.RunWith;
 
 import java.lang.reflect.Modifier;
@@ -17,14 +15,10 @@ public interface ClassScanner {
     Cc<String, ClassScanner> CCT_SCANNER = Cc.openThread();
 
     static ClassScanner of() {
-        return CCT_SCANNER.pick(ClassScannerBridge::new, ClassScannerBridge.class.getName());
+        return CCT_SCANNER.pick(ClassScannerCommon::new, ClassScannerCommon.class.getName());
     }
 
     Set<Class<?>> scan(HBundle bundle);
-
-    default OLog logger() {
-        return Ut.Log.metadata(this.getClass());
-    }
 
     interface Tool {
 

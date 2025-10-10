@@ -5,7 +5,8 @@ import io.zerows.epoch.basicore.WebActor;
 import io.zerows.epoch.basicore.WebEvent;
 import io.zerows.platform.management.OCache;
 import io.zerows.specification.development.compiled.HBundle;
-import io.zerows.support.Ut;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Objects;
 import java.util.Set;
@@ -37,7 +38,8 @@ public interface OCacheActor extends OCache<WebActor> {
                 .filter(item -> 0 < item.getPath().indexOf(":"))
                 .forEach(item -> OCacheUri.Tool.resolve(item.getPath(), item.getMethod()));
             final long size = OCacheUri.entireUri().size();
-            Ut.Log.metadata(OCacheActor.class).info("( Uri ) Pattern Uri Size: {0}", String.valueOf(size));
+            final Logger log = LoggerFactory.getLogger(OCacheActor.class);
+            log.info("[ ZERO ] ( Uri ) 路径模式接口数量: {}", size);
         }
     }
 }

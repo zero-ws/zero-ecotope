@@ -1,20 +1,21 @@
 package io.zerows.epoch.assembly.parallel;
 
-import io.zerows.component.log.Annal;
 import io.zerows.epoch.assembly.Extractor;
 import io.zerows.epoch.assembly.ExtractorReceipt;
 import io.zerows.epoch.basicore.WebReceipt;
 import io.zerows.support.Ut;
+import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashSet;
 import java.util.Set;
 
+@Slf4j
 public class QueueThread extends Thread {
 
-    public static final String SCANNED_RECEIPTS = "( {1} Receipt ) The queue {0} scanned {1} records of Receipt, " +
-        "will be mounted to event bus.";
-    private static final Annal LOGGER = Annal.get(QueueThread.class);
+    public static final String SCANNED_RECEIPTS = "[ ZERO ] ( {} Receipt ) <--- @Queue 队列对象 {} 包含了 {} Receipt 定义！ ";
 
+    @Getter
     private final Set<WebReceipt> receipts = new HashSet<>();
 
     private final transient Extractor<Set<WebReceipt>> extractor =
@@ -23,7 +24,7 @@ public class QueueThread extends Thread {
     private final transient Class<?> reference;
 
     public QueueThread(final Class<?> clazz) {
-        this.setName("zero-queue-scanner-" + this.getId());
+        this.setName("zero-queue-scanner-" + this.threadId());
         this.reference = clazz;
     }
 
@@ -31,12 +32,8 @@ public class QueueThread extends Thread {
     public void run() {
         if (null != this.reference) {
             this.receipts.addAll(this.extractor.extract(this.reference));
-            LOGGER.info(SCANNED_RECEIPTS, this.reference.getName(),
-                this.receipts.size());
+            log.info(SCANNED_RECEIPTS, this.receipts.size(),
+                this.reference.getName(), this.receipts.size());
         }
-    }
-
-    public Set<WebReceipt> getReceipts() {
-        return this.receipts;
     }
 }

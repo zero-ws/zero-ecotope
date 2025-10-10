@@ -97,7 +97,7 @@ public class ORepositoryClass extends AbstractAmbiguity implements ORepository {
             }
         );
         final long end = System.currentTimeMillis();
-        log.info("[ ZERO ] 耗时：{} 毫秒 / 扫描完成！执行器 = {}", end - start, HBundle.id(this.caller(), ORepositoryClass.class));
+        log.info("[ ZERO ] ⏰️ 耗时：{} 毫秒 / 扫描完成！执行器 = {}", end - start, HBundle.id(this.caller(), ORepositoryClass.class));
     }
 
     @Override

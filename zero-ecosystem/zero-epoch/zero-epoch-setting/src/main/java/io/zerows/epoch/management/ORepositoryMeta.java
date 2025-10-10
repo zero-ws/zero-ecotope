@@ -1,6 +1,5 @@
 package io.zerows.epoch.management;
 
-import io.zerows.component.log.OLog;
 import io.zerows.epoch.annotations.QaS;
 import io.zerows.epoch.assembly.InquirerForAgent;
 import io.zerows.epoch.assembly.InquirerForEvent;
@@ -23,6 +22,7 @@ import io.zerows.specification.configuration.HSetting;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.specification.development.ncloud.HAeon;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Method;
 import java.util.List;
@@ -33,6 +33,7 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * @author lang : 2024-04-21
  */
+@Slf4j
 public class ORepositoryMeta extends AbstractAmbiguity implements ORepository {
 
     public ORepositoryMeta(final HBundle bundle) {
@@ -50,7 +51,6 @@ public class ORepositoryMeta extends AbstractAmbiguity implements ORepository {
         // 先读取类信息
         final Set<Class<?>> classAll = OCacheClass.entireValue();
 
-        final OLog logger = Ut.Log.boot(ORepositoryMeta.class);
 
         // 读取全局方法缓存
         final OCacheJoint processor = OCacheJoint.of(this.caller());
@@ -76,8 +76,7 @@ public class ORepositoryMeta extends AbstractAmbiguity implements ORepository {
             }
         );
         long end = System.currentTimeMillis();
-        logger.info(" {0}ms / Zero Timer: Meditate Method Scanned!",
-            end - start);
+        log.info("[ ZERO ] ⏰️ 耗时：{} 毫秒 / ( @QaS, @Ipc ) 执行器 = {}", end - start, this.getClass().getName());
 
 
         start = end;
@@ -122,7 +121,6 @@ public class ORepositoryMeta extends AbstractAmbiguity implements ORepository {
         actor.add(actorComponent);
 
         end = System.currentTimeMillis();
-        logger.info(" {0}ms / Zero Timer: Meditate Core Component Scanned!",
-            end - start);
+        log.info("[ ZERO ] ⏰️ 耗时：{} 毫秒 / ( 核心组件 ) 执行器 = {}", end - start, this.getClass().getName());
     }
 }

@@ -1,5 +1,6 @@
 package io.zerows.cosmic;
 
+import io.r2mo.SourceReflect;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.VertxBuilder;
@@ -40,7 +41,7 @@ class StubVertxService extends AbstractAmbiguity implements StubVertx {
             // 集群模式创建
             final NodeNetwork network = nodeVertx.networkRef();
             final ClusterManager manager = network.cluster().getClusterManager();
-            log.info("当前应用程序正在集群模式下运行，管理器 = {}，节点为 {}，isActive = {}。",
+            log.info("[ ZERO ] 当前应用程序正在集群模式下运行，管理器 = {}，节点为 {}，isActive = {}。",
                 manager.getClass().getName(), manager.getNodeId(), manager.isActive());
             return builder
                 .withClusterManager(manager)
@@ -56,13 +57,13 @@ class StubVertxService extends AbstractAmbiguity implements StubVertx {
     private Future<RunVertx> createFinished(final NodeVertx config, final Vertx vertx) {
         // 完善 Vertx 实例
         final EventBus eventBus = vertx.eventBus();
-        eventBus.registerDefaultCodec(Envelop.class, Ut.singleton(CodecEnvelop.class));
+        eventBus.registerDefaultCodec(Envelop.class, SourceReflect.singleton(CodecEnvelop.class));
 
         // 核心 RunVertx 实例
         final RunVertx runVertx = new RunVertx(config.name());
         this.add(runVertx.name(), runVertx
             .instance(vertx)           // 运行实例
-            .config(config)         // 运行配置
+            .config(config)            // 运行配置
         );
         return Future.succeededFuture(runVertx);
     }

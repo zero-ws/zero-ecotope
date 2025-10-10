@@ -255,6 +255,15 @@ public class NodeNetwork implements Serializable, HLog {
             .append("\t\t 端口: ").append(this.serverOptions.getPort()).append("\n");
         content.append("\t WebSocket 配置：")
             .append(Objects.isNull(this.sockOptions) ? null : this.sockOptions.getConfig()).append("\n");
+        int index = 0;
+        for (final String name : this.vertxOptions.keySet()) {
+            final NodeVertx nodeOptions = this.vertxOptions.get(name);
+            content.append("\t [").append(index).append("] Vertx 实例: \uD83E\uDDEA ").append(name).append("\n");
+            content.append("\t\t Vertx 配置: ").append(nodeOptions.vertxOptions()).append("\n");
+            content.append("\t\t Agent 默认配置: ").append(nodeOptions.agentOptions().toJson()).append("\n");
+            content.append("\t\t Worker 默认配置: ").append(nodeOptions.workerOptions().toJson()).append("\n");
+            index++;
+        }
         log.info(content.toString());
         return this;
     }

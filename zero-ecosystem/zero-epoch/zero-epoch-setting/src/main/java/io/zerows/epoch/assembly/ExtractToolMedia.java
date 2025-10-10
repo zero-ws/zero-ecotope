@@ -54,7 +54,7 @@ class ExtractToolMedia {
         if (Objects.isNull(anno)) {
             return DEFAULTS;
         }
-        final String[] value = Ut.invoke(anno, "get");
+        final String[] value = Ut.invoke(anno, "value");
         final Set<MediaType> result = new HashSet<>();
         // RxJava 2
         Arrays.stream(value)

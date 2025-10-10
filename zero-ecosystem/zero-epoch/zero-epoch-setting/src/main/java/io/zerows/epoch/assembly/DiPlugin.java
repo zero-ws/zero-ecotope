@@ -3,15 +3,12 @@ package io.zerows.epoch.assembly;
 import com.google.inject.Injector;
 import io.r2mo.typed.cc.Cc;
 import io.r2mo.vertx.common.exception.VertxBootException;
-import io.zerows.component.log.OLog;
 import io.zerows.epoch.assembly.exception._40028Exception503DuplicatedImpl;
 import io.zerows.epoch.management.OCacheClass;
 import io.zerows.platform.constant.VValue;
-import io.zerows.support.Ut;
 import jakarta.inject.Named;
 import lombok.extern.slf4j.Slf4j;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Objects;
@@ -24,11 +21,9 @@ public class DiPlugin {
     private static final Cc<Class<?>, DiPlugin> CC_DI = Cc.open();
     private transient final Class<?> clazz;
     private transient final DiInfix infix;
-    private transient final OLog logger;
 
     private DiPlugin(final Class<?> clazz) {
         this.clazz = clazz;
-        this.logger = Ut.Log.metadata(clazz);
         this.infix = new DiInfix(clazz);
     }
 
@@ -66,8 +61,8 @@ public class DiPlugin {
     public String named(final Class<?> clazz) {
         String name;
         if (clazz.isAnnotationPresent(Named.class)) {
-            final Annotation annotation = clazz.getAnnotation(Named.class);
-            name = Ut.invoke(annotation, "get");
+            final Named annotation = clazz.getDeclaredAnnotation(Named.class);
+            name = annotation.value();
         } else {
             name = null;
         }

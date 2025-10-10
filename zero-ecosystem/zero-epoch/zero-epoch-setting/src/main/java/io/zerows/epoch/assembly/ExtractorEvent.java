@@ -9,7 +9,6 @@ import io.zerows.epoch.annotations.EndPoint;
 import io.zerows.epoch.assembly.exception._40005Exception500EventSource;
 import io.zerows.epoch.assembly.exception._40036Exception500CodexMore;
 import io.zerows.epoch.basicore.WebEvent;
-import io.zerows.epoch.constant.KName;
 import io.zerows.support.Ut;
 import jakarta.ws.rs.Path;
 import lombok.extern.slf4j.Slf4j;
@@ -130,14 +129,9 @@ public class ExtractorEvent implements Extractor<Set<WebEvent>> {
         event.setProxy(clazz);
         // 8. Order
         if (method.isAnnotationPresent(Adjust.class)) {
-            final Annotation adjust = method.getDeclaredAnnotation(Adjust.class);
-            final Integer order = Ut.invoke(adjust, KName.VALUE);
-            if (Objects.nonNull(order)) {
-                /*
-                 * Routing order modification.
-                 */
-                event.setOrder(order);
-            }
+            final Adjust adjust = method.getDeclaredAnnotation(Adjust.class);
+            final int order = adjust.value();
+            event.setOrder(order);
         }
         return event;
     }

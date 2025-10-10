@@ -106,9 +106,9 @@ class OCacheClassAmbiguity extends AbstractAmbiguity implements OCacheClass {
     @Override
     public OCacheClass compile(final VertxComponent type, final Function<Set<Class<?>>, Set<Class<?>>> compiler) {
         if (Objects.isNull(this.caller())) {
-            log.info("[ ZERO ] \uD83D\uDCA7 当前环境中扫描了 \"{}\" 类。", type.name());
+            log.info("[ ZERO ] \uD83D\uDCA7 当前环境中扫描 \"{}\" 类。", type.name());
         } else {
-            log.info("[ ZERO ] \uD83D\uDCA7 当前环境中扫描了 \"{}\" 类，For {}", type.name(), this.caller().name());
+            log.info("[ ZERO ] \uD83D\uDCA7 当前环境中扫描 \"{}\" 类，For {}", type.name(), this.caller().name());
         }
         this.meta.compile(type, compiler);
         return this;

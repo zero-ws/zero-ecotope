@@ -2,6 +2,7 @@ package io.zerows.epoch.boot;
 
 import io.zerows.epoch.management.ORepository;
 import io.zerows.epoch.management.ORepositoryClass;
+import io.zerows.epoch.management.ORepositoryMeta;
 import io.zerows.epoch.management.ORepositoryOption;
 import io.zerows.specification.configuration.HLife;
 import io.zerows.specification.configuration.HSetting;
@@ -35,6 +36,12 @@ class ZeroEnergyLife implements HLife {
          */
         ORepository.ofOr(ORepositoryClass.class).whenStart(setting);
 
+
+
+        /*
+         * 🟤BOOT-008: 元数据 Meta 级别的初始化流程
+         */
+        ORepository.ofOr(ORepositoryMeta.class).whenStart(setting);
         log.info("[ ZERO ] ✅️ ============== 环境启动完成！");
     }
 }

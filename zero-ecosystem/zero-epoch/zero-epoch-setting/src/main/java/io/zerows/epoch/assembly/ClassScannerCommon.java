@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.reflect.ClassPath;
 import io.r2mo.function.Fn;
 import io.zerows.specification.development.compiled.HBundle;
-import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -17,12 +17,12 @@ import java.util.stream.Collectors;
 /**
  * @author lang : 2024-04-17
  */
+@Slf4j
 @SuppressWarnings("all")
 class ClassScannerCommon implements ClassScanner {
 
     @Override
     public Set<Class<?>> scan(final HBundle bundle) {
-        assert bundle == null;
         final ClassLoader loader = Thread.currentThread().getContextClassLoader();
         // 保证线程安全
         final Set<Class<?>> classSet = Collections.synchronizedSet(new HashSet<>());
@@ -32,8 +32,7 @@ class ClassScannerCommon implements ClassScanner {
             final ImmutableSet<ClassPath.ClassInfo> set = cp.getTopLevelClasses();
             final ConcurrentMap<String, Set<String>> packageMap = new ConcurrentHashMap<>();
             // 性能提高一倍，并行流处理更合理，暂时没发现明显问题
-            Ut.Log.metadata(getClass()).info("Ignored package size: {0}, please check whether contains yours.",
-                String.valueOf(ClassFilter.SKIP_PACKAGE.length));
+            log.info("[ ZERO ] 忽略的包数量: {}, 检查是否跳过？", String.valueOf(ClassFilter.SKIP_PACKAGE.length));
             set.stream().forEach(cls -> {
                 final String packageName = cls.getPackageName();
                 final boolean skip = Arrays.stream(ClassFilter.SKIP_PACKAGE).anyMatch(packageName::startsWith);

@@ -1,10 +1,5 @@
 package io.zerows.component.environment;
 
-import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.application.YmlCore;
-import io.zerows.management.OZeroStore;
-import io.zerows.support.Ut;
-
 /**
  * # 「Co」Zero Extension for Debugger to process logs
  *
@@ -29,14 +24,7 @@ import io.zerows.support.Ut;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 public class DevEnv {
-    private static final DevOption OPTION;
-
-    static {
-        // 开发选项问题
-        final JsonObject developmentJ = OZeroStore.option(YmlCore.development.__KEY);
-        final JsonObject diagnosisJ = developmentJ.getJsonObject(YmlCore.development.ENV);
-        OPTION = Ut.deserialize(diagnosisJ, DevOption.class);
-    }
+    private static DevOption OPTION;
 
     private DevEnv() {
     }

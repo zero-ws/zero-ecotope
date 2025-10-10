@@ -4,8 +4,9 @@ import io.r2mo.function.Fn;
 import io.vertx.core.eventbus.Message;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
-import io.zerows.epoch.exception._40049Exception500WorkerConflict;
 import io.zerows.epoch.configuration.Inquirer;
+import io.zerows.epoch.exception._40049Exception500WorkerConflict;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Arrays;
 import java.util.Set;
@@ -16,9 +17,10 @@ import java.util.stream.Collectors;
  * It will scan all classes that annotated with @Queue, zero system
  * will extract worker class from this scanned classes.
  */
+@Slf4j
 public class InquirerClassQueue implements Inquirer<Set<Class<?>>> {
 
-    public static final String QUEUE = "( {0} Queue ) The Zero system has found {0} components of @Queue.";
+    public static final String MESSAGE = "[ ZERO ] ( {} Queue ) \uD83E\uDDEC Zero 中扫描到 {} 个 @Queue 组件。";
 
     @Override
     public Set<Class<?>> scan(final Set<Class<?>> classes) {
@@ -26,7 +28,7 @@ public class InquirerClassQueue implements Inquirer<Set<Class<?>>> {
             .filter((item) -> item.isAnnotationPresent(Queue.class))
             .collect(Collectors.toSet());
         if (!queues.isEmpty()) {
-            this.logger().info(QUEUE, queues.size());
+            log.info(MESSAGE, queues.size(), queues.size());
             this.ensure(queues);
         }
         return queues;

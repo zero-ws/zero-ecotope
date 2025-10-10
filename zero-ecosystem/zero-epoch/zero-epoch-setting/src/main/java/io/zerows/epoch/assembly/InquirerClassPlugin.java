@@ -3,14 +3,16 @@ package io.zerows.epoch.assembly;
 import io.reactivex.rxjava3.core.Observable;
 import io.zerows.epoch.annotations.Infusion;
 import io.zerows.epoch.configuration.Inquirer;
+import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Field;
 import java.util.HashSet;
 import java.util.Set;
 
+@Slf4j
 public class InquirerClassPlugin implements Inquirer<Set<Class<?>>> {
 
-    public static final String PLUGIN = "Plugins {} has been scanned with @Infusion. ";
+    public static final String MESSAGE = "[ ZERO ] ( {} Plugins ) \uD83E\uDDEC Zero 中扫描到 {} 个 @Infusion 组件。";
 
     @Override
     public Set<Class<?>> scan(final Set<Class<?>> allClasses) {
@@ -22,7 +24,7 @@ public class InquirerClassPlugin implements Inquirer<Set<Class<?>>> {
             .dispose();
         // Ensure Tp Client
         if (!plugins.isEmpty()) {
-            this.logger().info(PLUGIN, plugins.size());
+            log.info(MESSAGE, plugins.size(), plugins.size());
         }
         return plugins;
     }

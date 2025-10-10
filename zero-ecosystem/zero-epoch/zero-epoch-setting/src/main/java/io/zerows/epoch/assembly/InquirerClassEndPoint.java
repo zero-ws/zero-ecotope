@@ -2,6 +2,7 @@ package io.zerows.epoch.assembly;
 
 import io.zerows.epoch.annotations.EndPoint;
 import io.zerows.epoch.configuration.Inquirer;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -9,9 +10,10 @@ import java.util.stream.Collectors;
 /**
  *
  */
+@Slf4j
 public class InquirerClassEndPoint implements Inquirer<Set<Class<?>>> {
 
-    public static final String ENDPOINT = "( {0} EndPoint ) The Zero system has found {0} components of @EndPoint.";
+    public static final String MESSAGE = "[ ZERO ] ( {} EndPoint ) \uD83E\uDDEC Zero 中扫描到 {} 个 @EndPoint 组件。";
 
     @Override
     public Set<Class<?>> scan(final Set<Class<?>> clazzes) {
@@ -19,7 +21,7 @@ public class InquirerClassEndPoint implements Inquirer<Set<Class<?>>> {
             .filter((item) -> item.isAnnotationPresent(EndPoint.class))
             .collect(Collectors.toSet());
         if (!endpoints.isEmpty()) {
-            this.logger().info(ENDPOINT, endpoints.size());
+            log.info(MESSAGE, endpoints.size(), endpoints.size());
         }
         return endpoints;
     }

@@ -3,6 +3,7 @@ package io.zerows.cosmic;
 import io.vertx.core.Future;
 import io.zerows.cortex.management.StoreVertx;
 import io.zerows.cosmic.bootstrap.Linear;
+import io.zerows.epoch.basicore.option.ClusterOptions;
 import io.zerows.epoch.configuration.NodeNetwork;
 import io.zerows.platform.enums.VertxComponent;
 import io.zerows.specification.development.compiled.HBundle;
@@ -24,6 +25,8 @@ public class EnergyVertxService implements EnergyVertx {
 
     @Override
     public Future<StoreVertx> startAsync(final HBundle bundle, final NodeNetwork network) {
+        final ClusterOptions clusterOptions = network.cluster();
+        
         //        // 外层传入 NodeNetwork
         //        final ClusterOptions clusterOptions = network.cluster();
         //        final ConcurrentMap<String, NodeVertxLegacy> vertxOptions = network.vertxNodes();
