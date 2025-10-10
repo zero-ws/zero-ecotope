@@ -7,6 +7,7 @@ import io.zerows.platform.management.AbstractAmbiguity;
 import io.zerows.platform.metadata.MultiKeyMap;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
 import java.util.Set;
@@ -14,6 +15,7 @@ import java.util.Set;
 /**
  * @author lang : 2024-04-30
  */
+@Slf4j
 class StoreVertxAmbiguity extends AbstractAmbiguity implements StoreVertx {
 
     private static final MultiKeyMap<RunVertx> RUNNING = new MultiKeyMap<>();
@@ -58,6 +60,7 @@ class StoreVertxAmbiguity extends AbstractAmbiguity implements StoreVertx {
         if (runVertx.isOk()) {
             final Vertx vertxRef = runVertx.instance();
             final String id = String.valueOf(vertxRef.hashCode());
+            log.info("[ ZERO ] 添加运行实例：name = {}, hashCode = {}", runVertx.name(), id);
             RUNNING.put(id, runVertx, runVertx.name());
         }
         return this;

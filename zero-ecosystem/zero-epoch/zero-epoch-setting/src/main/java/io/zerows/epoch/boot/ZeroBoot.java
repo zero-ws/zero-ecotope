@@ -53,7 +53,7 @@ class ZeroBoot implements HBoot {
         return launcher;
     }
 
-    static HBoot of(final HSetting setting) {
+    static ZeroBoot of(final HSetting setting) {
         return new ZeroBoot(setting);
     }
 
@@ -106,6 +106,7 @@ class ZeroBoot implements HBoot {
             () -> this.createLifeCycle(EmApp.LifeCycle.OFF), EmApp.LifeCycle.OFF);
     }
 
+    @SuppressWarnings("all")
     private <R> R createLifeCycle(final EmApp.LifeCycle lifeCycle) {
         final HConfig config = this.setting.boot(lifeCycle);
         if (Objects.isNull(config)) {
@@ -115,6 +116,12 @@ class ZeroBoot implements HBoot {
         if (Objects.isNull(componentCls)) {
             return null;
         }
-        return SourceReflect.instance(componentCls);
+        final R ref = SourceReflect.instance(componentCls);
+        if (ref instanceof final HConfig.HOn on) {
+            on.configure(config.options());
+            log.info("[ ZERO ] 配置组件：On = {} / Configuration = {}", on.getClass(), componentCls);
+            log.info("[ ZERO ] 配置参数：\n{}", config.options().encodePrettily());
+        }
+        return ref;
     }
 }

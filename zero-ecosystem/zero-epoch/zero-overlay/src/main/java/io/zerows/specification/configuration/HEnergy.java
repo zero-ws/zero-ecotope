@@ -12,4 +12,6 @@ public interface HEnergy {
     HConfig boot(EmApp.LifeCycle lifeCycle);
 
     String[] args();
+
+    HSetting setting();
 }

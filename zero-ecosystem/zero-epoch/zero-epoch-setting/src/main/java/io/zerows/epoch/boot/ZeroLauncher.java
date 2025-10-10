@@ -1,7 +1,13 @@
 package io.zerows.epoch.boot;
 
+import io.r2mo.function.Fn;
 import io.r2mo.spi.SPI;
+import io.vertx.core.Future;
+import io.vertx.core.Promise;
 import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.annotations.Up;
+import io.zerows.epoch.boot.exception._40002Exception500UpClassInvalid;
 import io.zerows.epoch.configuration.ZeroConfigurer;
 import io.zerows.platform.ENV;
 import io.zerows.platform.exception._11010Exception500BootIoMissing;
@@ -138,6 +144,11 @@ public class ZeroLauncher<T> {
         this.boot = io.boot(bootCls);
 
         this.energy = io.energy(bootCls, args);
+
+
+        // -40002 检查启动类是否被注解
+        final Class<?> mainClass = this.boot.mainClass();
+        Fn.jvmKo(!mainClass.isAnnotationPresent(Up.class), _40002Exception500UpClassInvalid.class, mainClass);
     }
 
     /**
@@ -169,14 +180,49 @@ public class ZeroLauncher<T> {
      * @param consumer 启动完成后的回调
      * @param <CONFIG> 配置类型（必须继承自 {@link HConfig}）
      */
+    @SuppressWarnings("unchecked")
     public <CONFIG extends HConfig> void start(final BiConsumer<T, CONFIG> consumer) {
         /*
          * 🟤BOOT-005: 先执行配置的完整初始化，调用 HEnergy 的 initialize 方法，执行过程中会处理核心环境的初始化
          *   - BOOT-006
          *   - BOOT-007
+         *   - BOOT-008
          */
         this.energy.initialize();
         // 提取自配置的 HOn 组件，执行启动前的初始化（configure 第一周期已经完成）
+
+
+        /*
+         * 🟤BOOT-009: 启动器的提取与启动
+         */
+        final HLauncher<T> launcher = this.boot.launcher();
+        final Promise<T> before = Promise.promise();
+        launcher.start(this.energy, vertx -> {
+            /*
+             * 🟤BOOT-010: 启动完成之后的基础回调，此时 Vertx 实例已创建
+             */
+            final HLauncher.Pre<T> launcherPre = this.boot.withPre();
+            if (Objects.isNull(launcherPre)) {
+                before.handle(Future.succeededFuture(vertx));
+            } else {
+                launcherPre.beforeAsync(vertx, new JsonObject()).onSuccess(res -> {
+                    if (res) {
+                        log.info("[ ZERO ] ( Pre ) 前置组件执行完成！");
+                        before.handle(Future.succeededFuture(vertx));
+                    }
+                });
+            }
+        });
+
+
+        /*
+         * 🟤BOOT-011: 启动完成之后的配置回调
+         */
+        final HConfig.HOn<?> on = this.boot.whenOn();
+        before.future().onSuccess(vertx -> {
+            final CONFIG configuration = Objects.isNull(on) ? null : (CONFIG) on.store();
+            consumer.accept(vertx, configuration);
+        });
         // final HConfig.HOn on = this.configurer.onComponent();
         //        this.launcher.start(on, server -> {
         //

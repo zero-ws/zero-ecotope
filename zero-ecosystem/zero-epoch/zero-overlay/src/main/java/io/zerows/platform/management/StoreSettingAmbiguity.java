@@ -86,8 +86,12 @@ class StoreSettingAmbiguity extends AbstractAmbiguity implements StoreSetting {
     }
 
     @Override
+    @SuppressWarnings("all")
     public <T> T getNetwork(final HSetting setting) {
-        return null;
+        if (Objects.isNull(setting) || Objects.isNull(setting.id())) {
+            return null;
+        }
+        return (T) this.refNetwork().get(setting.id());
     }
 
     @Override

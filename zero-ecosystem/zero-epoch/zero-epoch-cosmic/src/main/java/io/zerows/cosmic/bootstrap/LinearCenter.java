@@ -31,11 +31,11 @@ class LinearCenter {
 
     static Linear of(final VertxComponent type, final HBundle bundle) {
         return Linear.CC_SKELETON.pick(() -> {
-            log.info("Linear将会被初始化，类型：{}", type);
+            log.info("[ ZERO ] Linear将会被初始化，类型：{}", type);
             final Function<HBundle, Linear> constructorFn = CONSTRUCTOR.get(type);
             Objects.requireNonNull(constructorFn);
             return constructorFn.apply(bundle);
-        });
+        }, type.name());
     }
 
     static void startAsync(final Class<?> classVerticle,

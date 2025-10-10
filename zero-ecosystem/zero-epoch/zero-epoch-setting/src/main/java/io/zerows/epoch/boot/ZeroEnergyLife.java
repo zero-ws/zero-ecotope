@@ -42,6 +42,6 @@ class ZeroEnergyLife implements HLife {
          * 🟤BOOT-008: 元数据 Meta 级别的初始化流程
          */
         ORepository.ofOr(ORepositoryMeta.class).whenStart(setting);
-        log.info("[ ZERO ] ✅️ ============== 环境启动完成！");
+        log.info("[ ZERO ] ✅️ ============== （核心）环境启动完成！");
     }
 }

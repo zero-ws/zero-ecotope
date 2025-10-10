@@ -6,12 +6,12 @@ import io.zerows.cortex.management.StoreVertx;
 import io.zerows.cosmic.EnergyVertx;
 import io.zerows.cosmic.EnergyVertxService;
 import io.zerows.epoch.configuration.NodeNetwork;
-import io.zerows.epoch.management.OCacheNode;
+import io.zerows.platform.management.StoreSetting;
 import io.zerows.specification.configuration.HEnergy;
 import io.zerows.specification.configuration.HLauncher;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.spi.HPI;
-import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
 import java.util.Set;
@@ -25,6 +25,7 @@ import java.util.function.Consumer;
  * @author lang : 2023-05-30
  */
 @SPID(priority = 216)
+@Slf4j
 public class LauncherApp implements HLauncher<Vertx> {
 
     private static final EnergyVertx SERVICE = new EnergyVertxService();
@@ -42,12 +43,13 @@ public class LauncherApp implements HLauncher<Vertx> {
 
     @Override
     public void start(final HEnergy energy, final Consumer<Vertx> server) {
-        final NodeNetwork network = OCacheNode.of().network();
 
         final HBundle found = HPI.findBundle(this.getClass());
+        final NodeNetwork network = StoreSetting.of(found).getNetwork(energy.setting());
+
         SERVICE.startAsync(found, network).onComplete(cached -> {
             if (cached.failed()) {
-                Ut.Log.boot(this.getClass()).fatal(cached.cause());
+                log.error("[ ZERO ] 系统启动异常！", cached.cause());
                 return;
             }
 
@@ -55,7 +57,6 @@ public class LauncherApp implements HLauncher<Vertx> {
             // 存储引用专用
             final StoreVertx storeVertx = StoreVertx.of();
             final Set<String> names = storeVertx.keys();
-
             names.forEach(name -> {
                 final Vertx vertx = storeVertx.vertx(name);
                 if (Objects.nonNull(vertx)) {

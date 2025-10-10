@@ -2,11 +2,18 @@ package io.zerows.cosmic;
 
 import io.vertx.core.Future;
 import io.zerows.cortex.management.StoreVertx;
+import io.zerows.cortex.metadata.RunVertx;
 import io.zerows.cosmic.bootstrap.Linear;
 import io.zerows.epoch.basicore.option.ClusterOptions;
 import io.zerows.epoch.configuration.NodeNetwork;
+import io.zerows.epoch.configuration.NodeVertx;
 import io.zerows.platform.enums.VertxComponent;
 import io.zerows.specification.development.compiled.HBundle;
+import io.zerows.support.fn.Fx;
+
+import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 /**
  * @author lang : 2024-04-30
@@ -26,23 +33,21 @@ public class EnergyVertxService implements EnergyVertx {
     @Override
     public Future<StoreVertx> startAsync(final HBundle bundle, final NodeNetwork network) {
         final ClusterOptions clusterOptions = network.cluster();
+        final boolean isClustered = Objects.nonNull(clusterOptions) && clusterOptions.isEnabled();
+
+
+        /*
+         * name-01 = VertxInstance
+         * name-02 = VertxInstance
+         */
+        final ConcurrentMap<String, NodeVertx> vertxInstances = network.vertxNodes();
+
         
-        //        // 外层传入 NodeNetwork
-        //        final ClusterOptions clusterOptions = network.cluster();
-        //        final ConcurrentMap<String, NodeVertxLegacy> vertxOptions = network.vertxNodes();
-        //
-        //
-        //        /*
-        //         * name-01 = VertxInstance
-        //         * name-02 = VertxInstance
-        //         */
-        //        final ConcurrentMap<String, Future<RunVertxLegacy>> futureMap = new ConcurrentHashMap<>();
-        //        final StubVertx service = this.ofVertx(bundle);
-        //        vertxOptions.forEach((name, nodeVertx) ->
-        //            futureMap.put(name, service.createAsync(nodeVertx, clusterOptions.isEnabled())));
-        //        return Fx.combineM(futureMap)
-        //            // 此处返回谁都可以，只是单纯为了其他位置可重用
-        //            .compose(nil -> Future.succeededFuture(StoreVertx.of()));
-        return null;
+        final ConcurrentMap<String, Future<RunVertx>> futureMap = new ConcurrentHashMap<>();
+        vertxInstances.forEach((name, nodeVertx) ->
+            futureMap.put(name, this.ofVertx(bundle).createAsync(nodeVertx, isClustered)));
+        return Fx.combineM(futureMap)
+            // 此处返回谁都可以，只是单纯为了其他位置可重用
+            .compose(nil -> Future.succeededFuture(StoreVertx.of()));
     }
 }

@@ -15,12 +15,14 @@ import io.zerows.specification.configuration.HEnergy;
 import io.zerows.specification.configuration.HLauncher;
 import io.zerows.spi.BootIo;
 import io.zerows.spi.HPI;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Set;
 
 /**
  * 标准启动器，直接启动 Vertx 实例处理 Zero 相关的业务逻辑
  */
+@Slf4j
 public class VertxApplication {
     /**
      * 统一入口，不同对象的职责说明
@@ -89,7 +91,7 @@ public class VertxApplication {
              * - WORKER 启动
              */
             final RunVertx runVertx = StoreVertx.of().valueGet(vertx.hashCode());
-
+            
             runInternal(runVertx, VertxComponent.AGENT);
 
             runInternal(runVertx, VertxComponent.WORKER);

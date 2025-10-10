@@ -33,7 +33,6 @@ import java.util.Objects;
 @Slf4j
 class ZeroEnergy implements HEnergy {
     private static final Cc<String, ZeroEnergy> CC_ENERGY = Cc.open();
-    private NodeNetwork network;
     private final HSetting setting;
     private final HLife engage;
     private String[] args;
@@ -72,6 +71,11 @@ class ZeroEnergy implements HEnergy {
     }
 
     @Override
+    public HSetting setting() {
+        return this.setting;
+    }
+
+    @Override
     public HConfig boot(final EmApp.LifeCycle lifeCycle) {
         if (Objects.isNull(lifeCycle)) {
             log.warn("[ ZERO ] 传入生命周期为 null，必须是 EmApp.LifeCycle 的合法值！");
@@ -79,5 +83,4 @@ class ZeroEnergy implements HEnergy {
         }
         return this.setting.boot(lifeCycle);
     }
-
 }

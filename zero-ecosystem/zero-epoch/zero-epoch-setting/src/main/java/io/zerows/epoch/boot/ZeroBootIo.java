@@ -23,7 +23,7 @@ public class ZeroBootIo implements BootIo {
             throw new _500ServerInternalException("[ ZERO ] 配置数据丢失！");
         }
 
-        return ZeroBoot.of(setting);
+        return ZeroBoot.of(setting).mainClass(bootCls);
     }
 
     private HSetting of(final Class<?> bootCls) {
@@ -40,7 +40,7 @@ public class ZeroBootIo implements BootIo {
         final HSetting setting = this.of(bootCls);
 
         final ZeroEnergy energy = ZeroEnergy.of(setting);
-        
+
         return energy.args(args);
     }
 }
