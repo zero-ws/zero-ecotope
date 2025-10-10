@@ -1,5 +1,7 @@
 package io.zerows.specification.configuration;
 
+import io.vertx.core.Future;
+
 /**
  * 插件启动入口配置，会根据 {@link HSetting} 中配置的插件信息来提取相关配置，以保证整体插件配置的一致性，启动过程属于并行模式，类似
  * <pre>
@@ -17,4 +19,10 @@ package io.zerows.specification.configuration;
  * @author lang : 2025-10-08
  */
 public interface HActor {
+
+    Future<Boolean> startAsync(HConfig config);
+
+    default Future<Boolean> stopAsync(HConfig config) {
+        return Future.succeededFuture(Boolean.FALSE);
+    }
 }

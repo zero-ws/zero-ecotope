@@ -150,7 +150,16 @@ public class ZeroSetting implements HSetting, HLog {
     @SuppressWarnings("unchecked")
     public ZeroSetting vLog() {
         final StringBuilder content = new StringBuilder();
-        content.append("[ ZERO ] 配置信息：\n\uD83D\uDD11 配置ID = ").append(this.id())
+        final HConfig config = this.launcher;
+        final Class<?> launcherCls = config.executor();
+        content.append("[ BOOT ] 核心组件：\n\uD83D\uDD25 主启动器 = ")
+            .append(Objects.isNull(launcherCls) ? null : launcherCls.getName()).append("\n");
+        this.boot.forEach((lifeCycle, bootConfig) -> {
+            final Class<?> executor = bootConfig.executor();
+            content.append("\t 生命周期：").append(lifeCycle).append(", ")
+                .append(Objects.isNull(executor) ? null : executor.getName()).append("\n");
+        });
+        content.append("\uD83D\uDD11 配置ID = ").append(this.id())
             .append(" ( 类型 =").append(this.getClass().getName())
             .append(", hashCode = ").append(this.hashCode()).append(" )\n");
         if (this.container instanceof final ConfigContainer containerConfig) {

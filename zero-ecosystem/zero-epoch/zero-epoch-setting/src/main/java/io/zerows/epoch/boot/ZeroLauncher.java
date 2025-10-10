@@ -2,9 +2,10 @@ package io.zerows.epoch.boot;
 
 import io.r2mo.spi.SPI;
 import io.vertx.core.json.JsonArray;
-import io.zerows.epoch.application.VertxYml;
 import io.zerows.epoch.configuration.ZeroConfigurer;
+import io.zerows.platform.ENV;
 import io.zerows.platform.exception._11010Exception500BootIoMissing;
+import io.zerows.specification.configuration.HBoot;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HEnergy;
 import io.zerows.specification.configuration.HLauncher;
@@ -76,33 +77,32 @@ public class ZeroLauncher<T> {
     /** 🔒 单例实例（无并发保护，外层需确保仅初始化一次） */
     @SuppressWarnings("rawtypes")
     private static ZeroLauncher INSTANCE;
-
-    /** 🚀 实际的底层启动器，由 {@link BootIo#launcher()} 提供 */
-
-    /** 🧱 启动前后配置器，负责绑定参数、生成/提取 {@link HConfig.HOn}、执行预初始化等 */
+    private final HBoot boot;
+    private final HEnergy energy;
 
     /**
-     * 🛠️ 构造方法（私有）
-     *
-     * <p>完成如下工作：</p>
-     * <ol>
-     *   <li>通过 {@link SPI} 严格模式查找 {@link BootIo}；缺失则抛错。</li>
-     *   <li>构造 {@link HEnergy} 并创建 {@link ZeroConfigurer}，绑定命令行参数。</li>
-     *   <li>拉起 {@link HLauncher} 实例并记录日志。</li>
-     * </ol>
-     * 🧬 默认实现类：
-     * <pre>
-     *    - 启动器：{@link BootIo} / {@link ZeroBootIo}
-     *    - 配置器：{@link ZeroConfigurer}
-     * </pre>
-     * 数据配置规范参考 {@link VertxYml}
      *
      * @param bootCls 启动入口类（通常为 Main/Boot 类） 📌
      * @param args    命令行参数（将作为 {@code "arguments"} 注入 {@link HConfig}） 🧵
      */
     private ZeroLauncher(final Class<?> bootCls, final String[] args) {
         /*
-         * 🟤BOOT-001: 系统中直接查找 BootIo，此处调用了 HPI.findOverwrite 进行查找，查找过程中如果出现自定义
+         * 🟤BOOT-001: 环境变量处理，访问 @PropertySource 处理对应的环境变量信息，保证环境变量的基础注入流程，针对
+         *   核心环境变量的设置
+         *   - 开发环境中 / @PropertySource 注解可绑定特定的环境变量辅助开发
+         *   - 生产环境中 / 环境变量优先级高于配置文件，并且直接处理环境变量在 Docker 容器之外的注入流程
+         */
+        ENV.of().whenStart(bootCls);
+
+
+        /*
+         * 🟤BOOT-002: SPI 监控开启，用来监听 SPI 的接口完整信息，所有 SPI 在此处集中打印
+         */
+        HPI.monitorOf();
+
+
+        /*
+         * 🟤BOOT-003: 系统中直接查找 BootIo，此处调用了 HPI.findOverwrite 进行查找，查找过程中如果出现自定义
          *   的 BootIo 实现，则直接覆盖 ZeroBootIo 的实现，否则直接使用 ZeroBootIo 的实现作为默认实现处理，默认
          *   实现可启动一个最小的 Zero App 应用实例，此处的核心流程
          *   BootIo -->  HBoot
@@ -124,6 +124,20 @@ public class ZeroLauncher<T> {
         }
 
 
+        /*
+         * 🟤BOOT-004: 通过 BootIo 构建 HBoot，HBoot 中管理了启动过程的所有生命周期，由于包含了 bootCls，可直接通过
+         *   底层的 StoreSetting 提取到对应的配置 ID，此 ID 作为配置标识符，当前版本中
+         *   - 程序入口        main         x 1
+         *   - 配置数据        Setting      x 1
+         *   - 启动程序        Launcher     x 1
+         *   - 能量配置        Energy       x 1
+         * 其中 Energy 和 Launcher 依赖 BootIo -> 接口提取
+         *   - HBoot
+         *   - HEnergy
+         */
+        this.boot = io.boot(bootCls);
+
+        this.energy = null;
     }
 
     /**
@@ -145,42 +159,10 @@ public class ZeroLauncher<T> {
         return (ZeroLauncher<T>) INSTANCE;
     }
 
-    /**
-     * ▶️ 启动流程入口。
-     *
-     * <p>在内部完成 {@link HConfig.HOn} 的第一周期配置（环境连接、扫描、目录检查等）后，
-     * 交由底层 {@link HLauncher} 启动；启动完成后：</p>
-     *
-     * <ol>
-     *   <li>将命令行参数封装为 {@link JsonArray}，以 {@code "arguments"} 键注入到配置中。</li>
-     *   <li>若存在配置对象，调用 {@link ZeroConfigurer#preExecute(Object, HConfig)} 执行容器就绪后的第一步初始化。</li>
-     *   <li>调用外部 {@code consumer.accept(server, configuration)} 将控制权交还给调用方。</li>
-     * </ol>
-     *
-     * <p><b>关于 {@code consumer}：</b>其语义等价于“启动完成后的穿透回调”，
-     * 可直接拿到已经就绪的 <code>server</code> 与 <code>configuration</code> 进行业务初始化。</p>
-     *
-     * @param consumer 启动完成后的回调，参数依次为：<br/>
-     *                 ・ <b>server</b>：已初始化的服务器实例（T）<br/>
-     *                 ・ <b>configuration</b>：最终配置对象（CONFIG extends HConfig）<br/>
-     * @param <CONFIG> 配置类型上界，必须实现 {@link HConfig}
-     */
-    @SuppressWarnings("unchecked")
     public <CONFIG extends HConfig> void start(final BiConsumer<T, CONFIG> consumer) {
-        // 环境变量连接，执行环境变量初始化（如需在此阶段强制连接，可在 KConfigurer.environment() 中实现）
-        // KConfigurer.environment();
 
         // 提取自配置的 HOn 组件，执行启动前的初始化（configure 第一周期已经完成）
         // final HConfig.HOn on = this.configurer.onComponent();
-
-        /*
-         * 此处 {@link HOn} 已执行完 configure 的第一个周期
-         * 直接使用 HOn 和 Consumer 配合完成启动流程
-         *     1. 环境变量已连接
-         *     2. 启动扫描已完成
-         *     3. 文件目录已检查
-         *     4. 可直接初始化 {@link T} 部分
-         */
         //        this.launcher.start(on, server -> {
         //
         //            final CONFIG configuration = Objects.isNull(on) ? null : (CONFIG) on.store();

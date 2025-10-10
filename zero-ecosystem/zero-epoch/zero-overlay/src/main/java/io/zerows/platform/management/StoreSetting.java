@@ -18,4 +18,11 @@ public interface StoreSetting extends OCache<HSetting> {
     static StoreSetting of() {
         return of(null);
     }
+
+    @Override
+    StoreSetting add(HSetting setting);
+
+    StoreSetting bind(Class<?> bootCls, String id);
+
+    HSetting getBy(Class<?> bootCls);
 }

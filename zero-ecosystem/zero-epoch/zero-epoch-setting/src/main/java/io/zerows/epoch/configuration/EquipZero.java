@@ -108,6 +108,13 @@ class EquipZero implements Equip {
             // DataSource 数据库配置
             this.initializeT(setting, vertxYml::getDatasource);
 
+            // REDIS 配置
+            final YmVertx.Data vertxData = vertxYml.getData();
+            if (Objects.nonNull(vertxData)) {
+                // REDIS
+                this.initializeJ(setting, EmApp.Native.REDIS, vertxData::getRedis);
+            }
+
             /* 主容器配置，此配置会绑定到 container 方法中形成特殊配置 */
             final ConfigContainer container = ConfigContainer.of(vertxYml.getCluster(), vertxYml.getConfig());
             setting.container(container);

@@ -5,12 +5,8 @@ package io.zerows.specification.development;
  */
 public interface HLog {
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("all")
     default <T> T vLog() {
         return (T) this;
-    }
-
-    default String vLog(final int indent) {
-        return "";
     }
 }

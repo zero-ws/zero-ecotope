@@ -3,15 +3,19 @@ package io.zerows.epoch.basicore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.vertx.core.json.JsonObject;
+import io.vertx.core.tracing.TracingPolicy;
 import io.zerows.epoch.application.VertxYml;
 import io.zerows.epoch.basicore.option.ClusterOptions;
 import io.zerows.integrated.jackson.JsonObjectDeserializer;
 import io.zerows.integrated.jackson.JsonObjectSerializer;
 import io.zerows.platform.annotations.ClassYml;
+import io.zerows.support.Ut;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * {@link VertxYml.vertx}
@@ -21,12 +25,12 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class YmVertx extends InPreVertx implements Serializable {
-    private YmVertxConfig config = new YmVertxConfig();
+    private Config config = new Config();
     private YmMvc mvc = new YmMvc();
     private ClusterOptions cluster;
     private YmDataSource datasource;
     private YmSecurity security = new YmSecurity();
-    private YmVertxData data = new YmVertxData();
+    private Data data = new Data();
     private YmSession session;
     @JsonSerialize(using = JsonObjectSerializer.class)
     @JsonDeserialize(using = JsonObjectDeserializer.class)
@@ -58,7 +62,7 @@ public class YmVertx extends InPreVertx implements Serializable {
      * @author lang : 2025-10-05
      */
     @ClassYml
-    @Data
+    @lombok.Data
     public static class Instance implements Serializable {
         private String name;
 
@@ -72,18 +76,107 @@ public class YmVertx extends InPreVertx implements Serializable {
             .put("internalBlockingPoolSize", 128)
             .put("preferNativeTransport", true);
 
-        private YmVertxConfig.Delivery delivery;
+        private Delivery delivery;
 
-        private YmVertxConfig.Deployment deployment;
+        private Deployment deployment;
 
         @JsonSerialize(using = JsonObjectSerializer.class)
         @JsonDeserialize(using = JsonObjectDeserializer.class)
         private JsonObject shared;
 
-        @Data
+        @lombok.Data
         public static class Counter implements Serializable {
             private int worker;
             private int agent;
         }
+    }
+
+    /**
+     * 📦 消息投递配置类
+     * <pre>
+     *     📋 属性默认值表：
+     *     ┌─────────────────────┬──────────────────────────┬──────────────────────────┐
+     *        🏷️ 属性名称               📝 默认值                      🎯 说明
+     *     ├─────────────────────┼──────────────────────────┼──────────────────────────┤
+     *        ⏰ timeout              30000L                       超时时间(毫秒)
+     *        🔧 codecName            null                         编解码器名称
+     *        📨 headers              new JsonObject()             消息头信息
+     *        🏠 localOnly            false                        本地投递限制
+     *        📍 tracingPolicy        TracingPolicy.IGNORE         追踪策略
+     *     └─────────────────────┴──────────────────────────┴──────────────────────────┘
+     * </pre>
+     * <pre>
+     *     🎯 功能说明：
+     *     - 配置消息投递的超时时间（默认 30000L 毫秒）
+     *     - 管理消息头信息（默认 new JsonObject()）
+     *     - 控制投递范围（默认 false，表示可跨节点投递）
+     *     - 指定编解码器名称（默认 null）
+     *     - 设置追踪策略（默认 TracingPolicy.IGNORE）
+     * </pre>
+     *
+     * @author lang : 2025-10-05
+     */
+    @lombok.Data
+    public static class Delivery implements Serializable {
+        private long timeout = 30000L;
+        private String codecName;
+        @JsonSerialize(using = JsonObjectSerializer.class)
+        @JsonDeserialize(using = JsonObjectDeserializer.class)
+        private JsonObject headers = new JsonObject();
+        private boolean localOnly = false;
+        private TracingPolicy tracingPolicy = TracingPolicy.IGNORE;
+    }
+
+    /**
+     * @author lang : 2025-10-05
+     */
+    @lombok.Data
+    public static class Deployment implements Serializable {
+
+        private Instance.Counter instances = new Instance.Counter();
+
+        /*
+         * 特殊情况相关配置，如果存在则
+         * - componentName = JsonObject
+         **/
+        @JsonSerialize(using = JsonObjectSerializer.class)
+        @JsonDeserialize(using = JsonObjectDeserializer.class)
+        private JsonObject options = new JsonObject();
+    }
+
+    /**
+     * @author lang : 2025-10-05
+     */
+    @lombok.Data
+    @EqualsAndHashCode(callSuper = true)
+    public static class Config extends InPreVertx.Config implements Serializable {
+
+        private List<Instance> instance = new ArrayList<>();
+
+        private Delivery delivery = new Delivery();
+
+        private Deployment deployment = new Deployment();
+
+        @JsonSerialize(using = JsonObjectSerializer.class)
+        @JsonDeserialize(using = JsonObjectDeserializer.class)
+        private JsonObject shared;
+
+        public List<Instance> getInstance() {
+            if (this.instance.isEmpty()) {
+                final Instance instance = new Instance();
+                instance.setName(Ut.randomString(16));
+                this.instance.add(instance);
+            }
+            return this.instance;
+        }
+
+    }
+
+    /**
+     * @author lang : 2025-10-06
+     */
+    @lombok.Data
+    public static class Data implements Serializable {
+        private YmRedis redis;
     }
 }

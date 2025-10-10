@@ -47,7 +47,7 @@ public interface ZeroPower {
         return CC_SKELETON.pick(ZeroPowerBridge::new, ZeroPowerBridge.class.getName());
     }
 
-    HSetting compile();
+    HSetting compile(Class<?> bootCls);
 
     interface Source {
 

@@ -1,7 +1,7 @@
 package io.zerows.epoch.configuration;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.basicore.YmVertxConfig;
+import io.zerows.epoch.basicore.YmVertx;
 import io.zerows.platform.enums.EmApp;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.support.Ut;
@@ -23,11 +23,11 @@ final class ConfigTool {
     static void putOptions(final BiConsumer<EmApp.Native, HConfig> consumer,
                            final Object... data) {
         Arrays.stream(data).forEach(each -> {
-            if (each instanceof final YmVertxConfig.Delivery delivery) {
+            if (each instanceof final YmVertx.Delivery delivery) {
                 final ConfigNorm configNorm = new ConfigNorm();
                 consumer.accept(EmApp.Native.DELIVERY, configNorm.putOptions(Ut.serializeJson(delivery)));
             }
-            if (each instanceof final YmVertxConfig.Deployment deployment) {
+            if (each instanceof final YmVertx.Deployment deployment) {
                 final ConfigNorm configNorm = new ConfigNorm();
                 consumer.accept(EmApp.Native.DEPLOYMENT, configNorm.putOptions(Ut.serializeJson(deployment)));
             }

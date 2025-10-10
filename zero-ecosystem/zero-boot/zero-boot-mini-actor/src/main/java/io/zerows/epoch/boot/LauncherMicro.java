@@ -1,11 +1,8 @@
 package io.zerows.epoch.boot;
 
-import io.r2mo.function.Fn;
+import io.r2mo.typed.annotation.SPID;
 import io.vertx.core.Vertx;
 import io.zerows.cortex.plugins.uddi.UddiRegistry;
-import io.zerows.cosmic.exception._40037Exception500RpcEnvironment;
-import io.zerows.epoch.configuration.ZeroStation;
-import io.zerows.specification.configuration.HBoot;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HLauncher;
 import io.zerows.support.Ut;
@@ -17,8 +14,8 @@ import java.util.function.Consumer;
  *
  * @author lang : 2023-05-30
  */
+@SPID(priority = 1000)
 public class LauncherMicro implements HLauncher<Vertx> {
-    private static final ZeroStation STORE = ZeroStation.singleton();
 
     private transient final HLauncher<Vertx> zero;
 
@@ -38,10 +35,10 @@ public class LauncherMicro implements HLauncher<Vertx> {
      */
     @Override
     public <T extends HConfig> void start(final HConfig.HOn<T> on, final Consumer<Vertx> server) {
-        Fn.jvmKo(!STORE.isEtcd(), _40037Exception500RpcEnvironment.class);
+        // Fn.jvmKo(!STORE.isEtcd(), _40037Exception500RpcEnvironment.class);
         // 初始化微服务环境
-        final UddiRegistry registry = Ut.singleton(UddiRegistry.class);
-        final HBoot boot = STORE.boot();
+        // final UddiRegistry registry = Ut.singleton(UddiRegistry.class);
+        // final HBoot boot = STORE.boot();
         // registry.initialize(boot.ofMain());
 
         this.zero.start(on, server);

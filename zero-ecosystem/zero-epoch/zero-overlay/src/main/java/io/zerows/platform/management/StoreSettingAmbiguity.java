@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 /**
@@ -32,6 +33,7 @@ import java.util.concurrent.ConcurrentMap;
 class StoreSettingAmbiguity extends AbstractAmbiguity implements StoreSetting {
 
     private static final Cc<String, HSetting> CC_SETTING = Cc.open();
+    private static final ConcurrentMap<Class<?>, String> CC_BIND = new ConcurrentHashMap<>();
     private final ConcurrentMap<String, HSetting> ref;
 
     protected StoreSettingAmbiguity(final HBundle owner) {
@@ -59,11 +61,29 @@ class StoreSettingAmbiguity extends AbstractAmbiguity implements StoreSetting {
     }
 
     @Override
-    public OCache<HSetting> remove(final HSetting setting) {
+    public StoreSetting remove(final HSetting setting) {
         if (Objects.nonNull(setting) && StrUtil.isNotBlank(setting.id())) {
             log.info("[ ZERO ] 当前配置的 ID 为 {} 已成功移除！", setting.id());
             this.ref.remove(setting.id());
         }
         return this;
+    }
+
+    @Override
+    public StoreSetting bind(final Class<?> bootCls, final String id) {
+        if (Objects.nonNull(bootCls) && StrUtil.isNotBlank(id)) {
+            log.info("[ ZERO ] \t \uD83C\uDF7B Boot 类 {} 成功绑定配置 ID = {} ！", bootCls.getName(), id);
+            CC_BIND.put(bootCls, id);
+        }
+        return this;
+    }
+
+    @Override
+    public HSetting getBy(final Class<?> bootCls) {
+        final String settingId = CC_BIND.getOrDefault(bootCls, null);
+        if (Objects.isNull(settingId)) {
+            return null;
+        }
+        return this.ref.getOrDefault(settingId, null);
     }
 }

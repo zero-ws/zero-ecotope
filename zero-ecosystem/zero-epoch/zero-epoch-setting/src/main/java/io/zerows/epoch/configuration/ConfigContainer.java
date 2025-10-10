@@ -2,7 +2,6 @@ package io.zerows.epoch.configuration;
 
 import io.r2mo.function.Fn;
 import io.zerows.epoch.basicore.YmVertx;
-import io.zerows.epoch.basicore.YmVertxConfig;
 import io.zerows.epoch.basicore.option.ClusterOptions;
 import io.zerows.platform.enums.EmApp;
 import io.zerows.specification.configuration.HConfig;
@@ -25,7 +24,7 @@ public class ConfigContainer extends ConfigNorm {
     private ConfigContainer() {
     }
 
-    static ConfigContainer of(final ClusterOptions options, final YmVertxConfig config) {
+    static ConfigContainer of(final ClusterOptions options, final YmVertx.Config config) {
         final ConfigContainer container = new ConfigContainer();
         Fn.jvmAt(Objects.nonNull(options), () -> container.putRef(options));
 

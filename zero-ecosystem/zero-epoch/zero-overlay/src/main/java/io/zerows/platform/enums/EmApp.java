@@ -288,5 +288,11 @@ public final class EmApp {
          * 🎯 管理数据库连接和操作的配置
          */
         DATABASE,
+
+        /**
+         * 🧩 Redis配置
+         * 🎯 管理Redis缓存和数据存储的配置
+         */
+        REDIS,
     }
 }

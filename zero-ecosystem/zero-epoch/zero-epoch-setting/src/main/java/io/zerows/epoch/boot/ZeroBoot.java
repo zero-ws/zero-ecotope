@@ -1,68 +1,120 @@
 package io.zerows.epoch.boot;
 
-import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.basicore.YmBoot;
+import io.r2mo.SourceReflect;
+import io.r2mo.typed.cc.Cc;
 import io.zerows.platform.enums.EmApp;
 import io.zerows.specification.configuration.HBoot;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HLauncher;
+import io.zerows.specification.configuration.HSetting;
+import io.zerows.spi.HPI;
+import lombok.extern.slf4j.Slf4j;
+
+import java.util.Objects;
 
 /**
+ * 当前类只负责组件，内部保存 setting 的引用，用来构造核心组件
+ *
  * @author lang : 2023-05-31
  */
+@Slf4j
 public class ZeroBoot implements HBoot {
-    private Class<?> launcherCls;
     private Class<?> mainClass;
-    private String[] arguments;
+    private final HLauncher<?> launcher;
+    private final HSetting setting;
+    private final EmApp.Type type;
+    private final Cc<EmApp.LifeCycle, Object> CC_BOOT = Cc.open();
 
-    private EmApp.Type type;
+    private ZeroBoot(final HSetting setting) {
+        this.type = EmApp.Type.APPLICATION;
 
-    private ZeroBoot(final YmBoot bootConfiguration) {
-        // this.launcherCls = UtBase.valueC(bootJ, VertxYml.boot.launcher);
-        // this.energy = ZeroEnergy.of(bootJ);
+        this.launcher = this.createLauncher(setting.launcher());
+
+        log.info("[ ZERO ] 选择启动器：{}", this.launcher.getClass().getName());
+
+        this.setting = setting;
     }
 
-    public static HBoot of(final JsonObject bootJ) {
-        return new ZeroBoot(null);
+    private HLauncher<?> createLauncher(final HConfig config) {
+        HLauncher<?> launcher = null;
+        // 初步查找：自定义的特殊 Launcher
+        if (Objects.nonNull(config)) {
+            final Class<?> launcherCls = config.executor();
+            if (Objects.nonNull(launcherCls)) {
+                launcher = SourceReflect.instance(launcherCls);
+            }
+        }
+        // 二次查找
+        if (Objects.isNull(launcher)) {
+            // 基于 SPI 的优先级模式下的 Launcher
+            launcher = HPI.findOneOf(HLauncher.class);
+        }
+        Objects.requireNonNull(launcher, "[ ZERO ] 系统必须找到一个启动器 HLauncher");
+        return launcher;
+    }
+
+    public static HBoot of(final HSetting setting) {
+        return new ZeroBoot(setting);
     }
 
     @Override
     public EmApp.Type app() {
-        return null;
+        return this.type;
     }
 
     @Override
-    public String[] inArgs() {
-        return new String[0];
+    public Class<?> mainClass() {
+        return this.mainClass;
+    }
+
+    public ZeroBoot mainClass(final Class<?> mainClass) {
+        this.mainClass = mainClass;
+        return this;
     }
 
     @Override
-    public Class<?> inMain() {
-        return null;
-    }
-
-    @Override
+    @SuppressWarnings("unchecked")
     public <C> HLauncher<C> launcher() {
-        return null;
+        return (HLauncher<C>) this.launcher;
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public <C> HLauncher.Pre<C> withPre() {
-        return null;
+        return (HLauncher.Pre<C>) this.CC_BOOT.pick(
+            () -> this.createLifeCycle(EmApp.LifeCycle.PRE), EmApp.LifeCycle.PRE);
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public <T extends HConfig> HConfig.HOn<T> whenOn() {
-        return null;
+        return (HConfig.HOn<T>) this.CC_BOOT.pick(
+            () -> this.createLifeCycle(EmApp.LifeCycle.ON), EmApp.LifeCycle.ON);
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public <T extends HConfig> HConfig.HRun<T> whenRun() {
-        return null;
+        return (HConfig.HRun<T>) this.CC_BOOT.pick(
+            () -> this.createLifeCycle(EmApp.LifeCycle.RUN), EmApp.LifeCycle.RUN);
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public <T extends HConfig> HConfig.HOff<T> whenOff() {
-        return null;
+        return (HConfig.HOff<T>) this.CC_BOOT.pick(
+            () -> this.createLifeCycle(EmApp.LifeCycle.OFF), EmApp.LifeCycle.OFF);
+    }
+
+    private <R> R createLifeCycle(final EmApp.LifeCycle lifeCycle) {
+        final HConfig config = this.setting.boot(lifeCycle);
+        if (Objects.isNull(config)) {
+            return null;
+        }
+        final Class<?> componentCls = config.executor();
+        if (Objects.isNull(componentCls)) {
+            return null;
+        }
+        return SourceReflect.instance(componentCls);
     }
 }

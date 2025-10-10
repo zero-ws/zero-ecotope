@@ -6,7 +6,6 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Up;
 import io.zerows.epoch.application.YmlCore;
 import io.zerows.epoch.boot.Anno;
-import io.zerows.epoch.boot.ZeroBoot;
 import io.zerows.epoch.boot.ZeroPower;
 import io.zerows.epoch.boot.exception._40001Exception500UpClassArgs;
 import io.zerows.epoch.boot.exception._40002Exception500UpClassInvalid;
@@ -35,12 +34,12 @@ public class ZeroStation implements HStation {
     private static volatile ZeroStation STORE;
     private final ConcurrentMap<FeatureMark, Boolean> features = new ConcurrentHashMap<>();
 
-    private final HBoot boot;
+    private HBoot boot;
 
     private ZeroStation() {
-        final HSetting setting = ZeroPower.of().compile();
+        final HSetting setting = ZeroPower.of().compile(null);
         final JsonObject launcherJ = setting.launcher().options();
-        this.boot = ZeroBoot.of(launcherJ);
+        // this.boot = ZeroBoot.of(launcherJ);
     }
 
     public static ZeroStation singleton() {

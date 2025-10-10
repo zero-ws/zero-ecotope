@@ -1,5 +1,6 @@
 package io.zerows.epoch.boot;
 
+import io.r2mo.typed.annotation.SPID;
 import io.vertx.core.Vertx;
 import io.zerows.cortex.management.StoreVertx;
 import io.zerows.cosmic.EnergyVertx;
@@ -23,6 +24,7 @@ import java.util.function.Consumer;
  *
  * @author lang : 2023-05-30
  */
+@SPID(priority = 1017)
 public class LauncherZero implements HLauncher<Vertx> {
 
     private static final EnergyVertx SERVICE = new EnergyVertxService();

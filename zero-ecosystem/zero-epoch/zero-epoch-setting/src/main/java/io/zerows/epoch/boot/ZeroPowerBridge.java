@@ -19,24 +19,24 @@ class ZeroPowerBridge implements ZeroPower {
     private static final Cc<String, ZeroPower.Source> CC_SOURCE = Cc.openThread();
 
     @Override
-    public HSetting compile() {
+    public HSetting compile(final Class<?> bootCls) {
         final ZeroPower.Source source = CC_SOURCE.pick(ZeroSource::new, ZeroSource.class.getName());
 
         final YmConfiguration configuration = source.load();
 
         final HSetting setting = Equip.of().initialize(configuration);
 
-        this.manageSetting(setting);
+        this.manageSetting(bootCls, setting);
 
         return setting;
     }
 
-    private void manageSetting(final HSetting setting) {
+    private void manageSetting(final Class<?> bootCls, final HSetting setting) {
         Objects.requireNonNull(setting, "[ ZERO ] 配置装配器返回的配置不能为空！");
         if (Ut.isNil(setting.id())) {
             log.warn("[ ZERO ] 当前配置的 ID 为空，不会被 SettingManager 管理！");
         } else {
-            StoreSetting.of().add(setting);
+            StoreSetting.of().add(setting).bind(bootCls, setting.id());
         }
     }
 }
