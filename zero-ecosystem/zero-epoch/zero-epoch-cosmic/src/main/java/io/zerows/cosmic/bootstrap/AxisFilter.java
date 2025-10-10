@@ -5,7 +5,7 @@ import io.vertx.core.http.HttpServerResponse;
 import io.vertx.ext.web.Route;
 import io.zerows.cortex.AxisSub;
 import io.zerows.cortex.metadata.RunRoute;
-import io.zerows.cortex.metadata.RunServer;
+import io.zerows.cortex.metadata.RunServerLegacy;
 import io.zerows.cortex.sdk.Axis;
 import io.zerows.epoch.basicore.WebEvent;
 import io.zerows.epoch.management.OCacheActor;
@@ -23,7 +23,7 @@ import java.util.concurrent.ConcurrentMap;
 public class AxisFilter implements Axis {
 
     @Override
-    public void mount(final RunServer server, final HBundle bundle) {
+    public void mount(final RunServerLegacy server, final HBundle bundle) {
         final OCacheActor actor = OCacheActor.of(bundle);
 
         final ConcurrentMap<String, Set<WebEvent>> filters = actor.value().getFilters();

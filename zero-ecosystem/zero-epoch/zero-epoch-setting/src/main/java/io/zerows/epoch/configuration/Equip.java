@@ -1,6 +1,7 @@
 package io.zerows.epoch.configuration;
 
 import io.r2mo.typed.cc.Cc;
+import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.basicore.YmConfiguration;
 import io.zerows.specification.configuration.HSetting;
 
@@ -24,4 +25,17 @@ public interface Equip {
      */
     HSetting initialize(YmConfiguration configuration);
 
+    /**
+     * @author lang : 2025-10-09
+     */
+    interface Item {
+        /**
+         * 融合之后的数据
+         *
+         * @return {@link JsonObject}
+         */
+        default JsonObject combined() {
+            return null;
+        }
+    }
 }

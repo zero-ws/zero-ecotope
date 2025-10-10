@@ -30,7 +30,7 @@ import java.util.concurrent.ConcurrentMap;
  * 高阶部分的核心接口
  * <pre><code>
  *     1. {@link HConfig}，组件配置接口
- *     2. {@link ZeroEnergy} 启动配置接口
+ *     2. {@see ZeroEnergy} 启动配置接口
  *     3. {@link ZeroLauncher} 启动器接口
  *     4. {@link BootIo} 启动选择器 / 组件加载器
  * </code></pre>

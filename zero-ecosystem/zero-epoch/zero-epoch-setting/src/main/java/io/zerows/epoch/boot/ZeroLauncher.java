@@ -137,7 +137,7 @@ public class ZeroLauncher<T> {
          */
         this.boot = io.boot(bootCls);
 
-        this.energy = null;
+        this.energy = io.energy(bootCls, args);
     }
 
     /**
@@ -159,8 +159,23 @@ public class ZeroLauncher<T> {
         return (ZeroLauncher<T>) INSTANCE;
     }
 
+    /**
+     * 按照如下方式启动
+     * <pre>
+     *     1. 启动之前执行 {@link HLauncher.Pre} -> 前序生命周期组件
+     *     2. 启动过程中执行 {@link HLauncher} -> 主容器启动组件
+     * </pre>
+     *
+     * @param consumer 启动完成后的回调
+     * @param <CONFIG> 配置类型（必须继承自 {@link HConfig}）
+     */
     public <CONFIG extends HConfig> void start(final BiConsumer<T, CONFIG> consumer) {
-
+        /*
+         * 🟤BOOT-005: 先执行配置的完整初始化，调用 HEnergy 的 initialize 方法，执行过程中会处理核心环境的初始化
+         *   - BOOT-006
+         *   - BOOT-007
+         */
+        this.energy.initialize();
         // 提取自配置的 HOn 组件，执行启动前的初始化（configure 第一周期已经完成）
         // final HConfig.HOn on = this.configurer.onComponent();
         //        this.launcher.start(on, server -> {

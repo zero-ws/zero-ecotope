@@ -3,12 +3,12 @@ package io.zerows.extension.mbse.basement.uca.jooq;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.platform.constant.VString;
-import io.zerows.platform.constant.VValue;
 import io.zerows.component.qr.Criteria;
 import io.zerows.component.qr.syntax.Ir;
 import io.zerows.component.qr.syntax.IrItem;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
+import io.zerows.platform.constant.VString;
+import io.zerows.platform.constant.VValue;
 import io.zerows.specification.modeling.HReference;
 
 import java.util.HashSet;

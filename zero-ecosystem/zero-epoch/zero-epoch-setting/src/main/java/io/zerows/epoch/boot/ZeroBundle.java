@@ -17,6 +17,9 @@ public class ZeroBundle implements HBundle {
 
     @Override
     public String name() {
+        if (Objects.isNull(this.name)) {
+            this.name = "Rachel Momo";
+        }
         return this.name;
     }
 

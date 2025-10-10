@@ -20,7 +20,6 @@ import io.zerows.platform.exception._11010Exception500BootIoMissing;
 import io.zerows.platform.metadata.KFabric;
 import io.zerows.program.Ux;
 import io.zerows.specification.configuration.HConfig;
-import io.zerows.specification.configuration.HEnergy;
 import io.zerows.spi.BootIo;
 
 import java.util.Objects;
@@ -78,8 +77,8 @@ public class Ok {
         if (Objects.isNull(io)) {
             throw new _11010Exception500BootIoMissing(Ok.class);
         }
-        final HEnergy energy = io.energy(Ok.class, new String[]{});
+        // final HEnergy energy = io.energy(Ok.class, new String[]{});
 
-        return ZeroConfigurer.of(energy);
+        return null; // ZeroConfigurer.of(energy);
     }
 }

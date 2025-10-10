@@ -45,7 +45,7 @@ class OCacheClassAmbiguity extends AbstractAmbiguity implements OCacheClass {
         // Scanner
         final ClassScanner scanner = ClassScanner.of();
         final Set<Class<?>> scanned = scanner.scan(bundle);
-        log.info("[ Zero ] Zero 系统总共扫描了 {} 类信息，构造的 MetaTree 哈希值为 {}", scanned.size(), this.meta.hashCode());
+        log.info("[ ZERO ] Zero 系统总共扫描了 {} 类信息，构造的 MetaTree 哈希值为 {}", scanned.size(), this.meta.hashCode());
         this.meta.add(scanned);
     }
 
@@ -82,7 +82,7 @@ class OCacheClassAmbiguity extends AbstractAmbiguity implements OCacheClass {
     public VertxComponent valueType(final Class<?> clazz) {
         VertxComponent type = this.meta.getType(clazz);
         if (Objects.isNull(type)) {
-            log.info("[ Zero ] 无法从bundle中提取类型，尝试从全局数据中解析。class = \"{}\"",
+            log.info("[ ZERO ] 无法从bundle中提取类型，尝试从全局数据中解析。class = \"{}\"",
                 clazz.getName());
             type = OCacheClass.entireType(clazz);
         }
@@ -92,24 +92,23 @@ class OCacheClassAmbiguity extends AbstractAmbiguity implements OCacheClass {
     @Override
     public OCacheClass add(final Set<Class<?>> classes) {
         this.meta.add(classes);
-        log.info("[ Zero ] 向当前bundle中添加了 \"{}\" 个类。", String.valueOf(classes.size()));
+        log.info("[ ZERO ] 向当前bundle中添加了 \"{}\" 个类。", String.valueOf(classes.size()));
         return this;
     }
 
     @Override
     public OCacheClass remove(final Set<Class<?>> classes) {
         this.meta.remove(classes);
-        log.info("[ Zero ] 从当前bundle中移除了 \"{}\" 个类。", String.valueOf(classes.size()));
+        log.info("[ ZERO ] 从当前bundle中移除了 \"{}\" 个类。", String.valueOf(classes.size()));
         return this;
     }
 
     @Override
     public OCacheClass compile(final VertxComponent type, final Function<Set<Class<?>>, Set<Class<?>>> compiler) {
         if (Objects.isNull(this.caller())) {
-            log.info("[ Zero ] 从当前环境中扫描了 \"{}\" 类型的类。", type.name());
+            log.info("[ ZERO ] \uD83D\uDCA7 当前环境中扫描了 \"{}\" 类。", type.name());
         } else {
-            log.info("[ Zero ] 从当前bundle中扫描了 \"{}\" 类型的类。拥有者 = {}",
-                type.name(), this.caller().name());
+            log.info("[ ZERO ] \uD83D\uDCA7 当前环境中扫描了 \"{}\" 类，For {}", type.name(), this.caller().name());
         }
         this.meta.compile(type, compiler);
         return this;

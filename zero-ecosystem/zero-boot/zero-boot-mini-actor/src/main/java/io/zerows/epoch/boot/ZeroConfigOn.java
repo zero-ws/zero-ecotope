@@ -19,6 +19,7 @@ import java.util.Objects;
  *
  * @author lang : 2023-05-30
  */
+@Deprecated
 public class ZeroConfigOn implements HConfig.HOn<ZeroConfigStandalone> {
 
     private static ZeroConfigStandalone INSTANCE;

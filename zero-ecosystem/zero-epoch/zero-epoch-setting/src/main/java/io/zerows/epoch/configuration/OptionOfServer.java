@@ -11,6 +11,7 @@ import java.io.Serializable;
  *
  * @author lang : 2024-04-20
  */
+@Deprecated
 public interface OptionOfServer<T> extends Serializable {
 
     String key();

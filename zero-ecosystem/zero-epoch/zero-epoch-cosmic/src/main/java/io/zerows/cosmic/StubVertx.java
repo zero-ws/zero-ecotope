@@ -1,11 +1,11 @@
-package io.zerows.cosmic.bootstrap;
+package io.zerows.cosmic;
 
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.zerows.component.log.OLog;
-import io.zerows.epoch.basicore.NodeVertx;
 import io.zerows.cortex.metadata.RunVertx;
+import io.zerows.epoch.configuration.NodeVertx;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
 
@@ -52,7 +52,7 @@ public interface StubVertx {
 
     Vertx get(String name);
 
-    StubVertx add(String name, RunVertx vertx);
+    StubVertx add(String name, RunVertx runVertx);
 
     StubVertx remove(String name);
 

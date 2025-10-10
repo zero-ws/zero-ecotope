@@ -3,69 +3,61 @@ package io.zerows.cosmic.bootstrap;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.ThreadingModel;
 import io.zerows.cortex.metadata.RunVertx;
-import io.zerows.epoch.basicore.NodeVertx;
-import io.zerows.epoch.basicore.option.ActorTool;
-import io.zerows.platform.enums.EmDeploy;
+import io.zerows.epoch.configuration.NodeVertx;
 import io.zerows.platform.management.AbstractAmbiguity;
 import io.zerows.specification.development.compiled.HBundle;
-import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
 
 /**
- * @author lang : 2024-05-03
+ * @author lang : 2025-10-10
  */
-class LinearWorker extends AbstractAmbiguity implements StubLinear {
+@Slf4j
+class LinearWorker extends AbstractAmbiguity implements Linear {
     LinearWorker(final HBundle bundle) {
         super(bundle);
     }
 
     @Override
-    public void runDeploy(final Class<?> clazz, final RunVertx runVertx) {
-        final DeploymentOptions options = this.buildOptions(clazz, runVertx);
+    public void start(final Class<?> clazz, final RunVertx runVertx) {
+        final DeploymentOptions options = this.getOr(clazz, runVertx);
+
 
         if (Objects.isNull(options)) {
             return;
         }
 
-        LinearTool.startAsync(clazz, options, runVertx);
+
+        LinearCenter.startAsync(clazz, options, runVertx);
+
 
         Runtime.getRuntime().addShutdownHook(
-            new Thread(() -> LinearTool.stopAsync(clazz, options, runVertx))
+            new Thread(() -> LinearCenter.stopAsync(clazz, options, runVertx))
         );
     }
 
     @Override
-    public void runUndeploy(final Class<?> clazz, final RunVertx runVertx) {
-        final DeploymentOptions options = this.buildOptions(clazz, runVertx);
+    public void stop(final Class<?> clazz, final RunVertx runVertx) {
+        final DeploymentOptions options = this.getOr(clazz, runVertx);
+
 
         if (Objects.isNull(options)) {
             return;
         }
 
-        LinearTool.stopAsync(clazz, options, runVertx);
+
+        LinearCenter.stopAsync(clazz, options, runVertx);
     }
 
-    private DeploymentOptions buildOptions(final Class<?> clazz, final RunVertx runVertx) {
+    private DeploymentOptions getOr(final Class<?> clazz, final RunVertx runVertx) {
         final NodeVertx nodeVertx = runVertx.config();
-        DeploymentOptions options = nodeVertx.optionDeployment(clazz);
-        if (Objects.isNull(options)) {
-            /*
-             * Fix: Exception in thread "component-worker-218" java.lang.NullPointerException:
-             * Cannot invoke "io.vertx.core.DeploymentOptions.getThreadingModel()" because "options" is null
-             */
-            options = new DeploymentOptions();
-            ActorTool.setupWith(options, clazz, EmDeploy.Mode.CODE);
-            return options;
-        }
-
-        // Verticle Deployment
-        final ThreadingModel threadModel = options.getThreadingModel();
-        if (ThreadingModel.EVENT_LOOP == threadModel) {
-            this.logger().warn(INFO.THREAD_NOT_MATCH, Ut.fromJoin(new String[]{
-                ThreadingModel.WORKER.name(),
-                ThreadingModel.VIRTUAL_THREAD.name()
-            }), threadModel);
+        final DeploymentOptions options = nodeVertx.deploymentOptions(clazz);
+        // 线程不匹配，此处必须是 WORKER
+        final ThreadingModel threadingModel = options.getThreadingModel();
+        if (ThreadingModel.EVENT_LOOP == threadingModel) {
+            log.warn("[ ZERO ] Worker 线程模型不匹配，期望值：{}，实际值：{}",
+                String.join(",", ThreadingModel.WORKER.name(), ThreadingModel.VIRTUAL_THREAD.name()), threadingModel);
             return null;
         }
         return options;

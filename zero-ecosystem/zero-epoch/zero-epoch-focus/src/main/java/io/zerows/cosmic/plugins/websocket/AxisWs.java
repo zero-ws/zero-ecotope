@@ -2,7 +2,7 @@ package io.zerows.cosmic.plugins.websocket;
 
 import io.vertx.core.http.HttpServerOptions;
 import io.zerows.component.log.OLog;
-import io.zerows.cortex.metadata.RunServer;
+import io.zerows.cortex.metadata.RunServerLegacy;
 import io.zerows.cortex.sdk.Axis;
 import io.zerows.epoch.basicore.option.SockOptions;
 import io.zerows.specification.development.compiled.HBundle;
@@ -35,7 +35,7 @@ public class AxisWs implements Axis {
      */
     @Override
     @SuppressWarnings("all")
-    public void mount(final RunServer server, final HBundle owner) {
+    public void mount(final RunServerLegacy server, final HBundle owner) {
         // 提取配置
         final SockOptions sockOptions = server.configSock().options();
         if (Objects.isNull(sockOptions)) {
@@ -59,7 +59,7 @@ public class AxisWs implements Axis {
 
 
         // 默认组件处理，针对配置组件执行 WebSocket 相关功能，Stomp 配置
-        final Class<?> axisCls = Ut.clazz(sockOptions.getComponent(), null);
+        final Class<?> axisCls = sockOptions.getComponent();
         if (Objects.isNull(axisCls)) {
             // 新版组件为 null 直接跳过
             return;

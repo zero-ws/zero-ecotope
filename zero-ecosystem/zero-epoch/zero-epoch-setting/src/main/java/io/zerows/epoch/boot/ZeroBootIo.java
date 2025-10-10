@@ -38,10 +38,9 @@ public class ZeroBootIo implements BootIo {
     public HEnergy energy(final Class<?> bootCls, final String[] args) {
 
         final HSetting setting = this.of(bootCls);
-        // 内置实现配置，Vertx直接从本身实现中处理
-        // final ZeroStation station = ZeroStation.singleton(target, args);
-        // 内置绑定
-        // return Objects.requireNonNull(station.boot()).energy();
-        return null;
+
+        final ZeroEnergy energy = ZeroEnergy.of(setting);
+        
+        return energy.args(args);
     }
 }

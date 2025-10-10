@@ -19,6 +19,7 @@ import java.util.function.BiConsumer;
  *
  * @author lang : 2023-06-11
  */
+@Deprecated
 public class Electy {
 
     // ---------------------- 注册专用
@@ -36,7 +37,6 @@ public class Electy {
          * -- Class<?> Seeking ( EndPoint, Queue, HQueue )
          */
         ORepository.ofOr(ORepositoryClass.class).whenStart();
-
 
         /*
          * Phase 2:

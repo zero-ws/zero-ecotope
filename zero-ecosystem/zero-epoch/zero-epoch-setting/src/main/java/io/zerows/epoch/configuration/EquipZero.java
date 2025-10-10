@@ -142,8 +142,12 @@ class EquipZero implements Equip {
 
             // websocket 核心配置
             final YmWebSocket websocket = serverYml.getWebsocket();
-            Optional.ofNullable(websocket).ifPresent(websocketRef ->
-                this.initializeJ(setting, EmApp.Native.WEBSOCKET, websocketRef::combined));
+            Optional.ofNullable(websocket).ifPresent(websocketRef -> {
+                final JsonObject combined = websocketRef.combined();
+                final ConfigNorm config = new ConfigNorm();
+                setting.infix(EmApp.Native.WEBSOCKET.name(), config
+                    .putOptions(combined).putExecutor(websocketRef.getComponent()));
+            });
         });
     }
 

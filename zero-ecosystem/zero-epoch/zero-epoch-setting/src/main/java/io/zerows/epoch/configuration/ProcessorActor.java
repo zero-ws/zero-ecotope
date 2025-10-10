@@ -2,7 +2,6 @@ package io.zerows.epoch.configuration;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.application.YmlCore;
-import io.zerows.epoch.basicore.NodeVertx;
 import io.zerows.epoch.basicore.option.ActorOptions;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HSetting;
@@ -13,7 +12,7 @@ import java.util.Objects;
 /**
  * @author lang : 2024-04-20
  */
-class ProcessorActor implements Processor<NodeVertx, HSetting> {
+class ProcessorActor implements Processor<NodeVertxLegacy, HSetting> {
     private final transient Transformer<ActorOptions> transformerActor;
 
     ProcessorActor() {
@@ -21,7 +20,7 @@ class ProcessorActor implements Processor<NodeVertx, HSetting> {
     }
 
     @Override
-    public void makeup(final NodeVertx target, final HSetting setting) {
+    public void makeup(final NodeVertxLegacy target, final HSetting setting) {
         if (!setting.hasInfix(YmlCore.deployment.__KEY)) {
             this.logger().info(ProcessorMessage.V_DEPLOYMENT);
             return;
@@ -47,7 +46,7 @@ class ProcessorActor implements Processor<NodeVertx, HSetting> {
          * 2）@Worker，线程池只能是 WORKER 或 VIRTUAL_THREAD，且 VIRTUAL_THREAD 模式下如果 Worker 模式下类型匹配则直接忽略不修改，
          *    即只支持 WORKER -> VIRTUAL_THREAD 的单向修正模式
          */
-        target.mode(actorOptions.getMode());
+        // target.mode(actorOptions.getMode());
         actorOptions.optionDeploy().forEach(target::optionDeployment);
     }
 }

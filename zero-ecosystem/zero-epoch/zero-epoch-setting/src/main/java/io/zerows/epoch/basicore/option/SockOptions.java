@@ -3,6 +3,8 @@ package io.zerows.epoch.basicore.option;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.r2mo.typed.json.jackson.ClassDeserializer;
+import io.r2mo.typed.json.jackson.ClassSerializer;
 import io.vertx.core.http.HttpServerOptions;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
@@ -20,12 +22,23 @@ import java.util.Objects;
 @Data
 public class SockOptions implements Serializable {
 
+    public SockOptions() {
+    }
+
+    public SockOptions(final JsonObject options, final Class<?> executor) {
+        this.publish = Ut.valueString(options, "publish");
+        this.config.mergeIn(options, true);
+        this.component = executor;
+    }
+
     @JsonSerialize(using = JsonObjectSerializer.class)
     @JsonDeserialize(using = JsonObjectDeserializer.class)
     private JsonObject config = new JsonObject();
     private String publish;
 
-    private String component;
+    @JsonSerialize(using = ClassSerializer.class)
+    @JsonDeserialize(using = ClassDeserializer.class)
+    private Class<?> component;
 
     @JsonIgnore
     private HttpServerOptions serverOptions;
@@ -41,6 +54,7 @@ public class SockOptions implements Serializable {
         return Ut.valueJObject(this.config, KName.HANDLER);
     }
 
+    @Deprecated
     public SockOptions options(final HttpServerOptions serverOptions) {
         if (Objects.isNull(this.serverOptions)) {
             // 直接设置
@@ -71,7 +85,12 @@ public class SockOptions implements Serializable {
         return this;
     }
 
+    @Deprecated
     public HttpServerOptions options() {
+        return this.serverOptions;
+    }
+
+    public HttpServerOptions serverOptions() {
         return this.serverOptions;
     }
 }

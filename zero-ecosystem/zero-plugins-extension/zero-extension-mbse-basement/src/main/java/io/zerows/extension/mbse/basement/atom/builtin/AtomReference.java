@@ -1,9 +1,9 @@
 package io.zerows.extension.mbse.basement.atom.builtin;
 
-import io.zerows.mbse.metadata.HAtomReference;
 import io.zerows.extension.mbse.basement.atom.Model;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MAttribute;
 import io.zerows.extension.mbse.basement.util.Ao;
+import io.zerows.mbse.metadata.HAtomReference;
 import io.zerows.platform.enums.modeling.EmAttribute;
 import io.zerows.platform.metadata.RReference;
 import io.zerows.specification.app.HApp;

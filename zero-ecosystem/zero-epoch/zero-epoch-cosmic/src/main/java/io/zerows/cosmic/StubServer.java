@@ -1,8 +1,8 @@
 package io.zerows.cosmic;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.cortex.metadata.RunServer;
-import io.zerows.cortex.metadata.RunVertx;
+import io.zerows.cortex.metadata.RunServerLegacy;
+import io.zerows.cortex.metadata.RunVertxLegacy;
 import io.zerows.specification.development.compiled.HBundle;
 
 import java.util.Set;
@@ -23,5 +23,5 @@ public interface StubServer {
     }
 
     // --------------------- 行为专用 ---------------------
-    Set<RunServer> createAsync(RunVertx runVertx);
+    Set<RunServerLegacy> createAsync(RunVertxLegacy runVertxLegacy);
 }

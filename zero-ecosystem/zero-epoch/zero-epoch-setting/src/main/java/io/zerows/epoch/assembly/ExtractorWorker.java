@@ -2,8 +2,8 @@ package io.zerows.epoch.assembly;
 
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.DeploymentOptions;
-import io.zerows.epoch.basicore.NodeNetwork;
-import io.zerows.epoch.basicore.NodeVertx;
+import io.zerows.epoch.configuration.NodeNetwork;
+import io.zerows.epoch.configuration.NodeVertxLegacy;
 import io.zerows.epoch.management.OCacheNode;
 import lombok.extern.slf4j.Slf4j;
 
@@ -23,9 +23,9 @@ public class ExtractorWorker implements Extractor<DeploymentOptions> {
         log.info(WORKER_HIT, clazz.getName());
 
         final NodeNetwork network = OCacheNode.of().network();
-        final NodeVertx nodeVertx = network.get();
+        final NodeVertxLegacy nodeVertxLegacy = network.get();
 
-        return CC_OPTIONS.pick(() -> nodeVertx.optionDeployment(clazz), clazz);
+        return CC_OPTIONS.pick(() -> nodeVertxLegacy.optionDeployment(clazz), clazz);
         // FnZero.po?l(OPTIONS, clazz, () -> rotate.spinWorker(clazz));
     }
 }

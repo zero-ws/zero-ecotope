@@ -1,15 +1,16 @@
 package io.zerows.epoch.management;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.epoch.basicore.NodeNetwork;
-import io.zerows.epoch.basicore.NodeVertx;
+import io.zerows.epoch.configuration.NodeNetwork;
+import io.zerows.epoch.configuration.NodeVertxLegacy;
 import io.zerows.platform.management.OCache;
 import io.zerows.specification.development.compiled.HBundle;
 
 /**
  * @author lang : 2024-04-20
  */
-public interface OCacheNode extends OCache<NodeVertx> {
+@Deprecated
+public interface OCacheNode extends OCache<NodeVertxLegacy> {
 
     Cc<String, OCacheNode> CC_SKELETON = Cc.open();
 

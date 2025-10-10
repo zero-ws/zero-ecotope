@@ -10,6 +10,7 @@ import io.zerows.specification.configuration.HLauncher;
 /**
  * @author lang : 2023-06-10
  */
+@Deprecated
 public class ZeroPre implements HLauncher.Pre<Vertx> {
     /**
      * 「Vertx启动后」（同步）扩展流程一
@@ -24,7 +25,6 @@ public class ZeroPre implements HLauncher.Pre<Vertx> {
      * @param vertx   Vertx实例
      * @param options 启动配置
      */
-    @Override
     public Boolean beforeStart(final Vertx vertx, final JsonObject options) {
         /*
          * MapInfix作为初始化容器过程中第一个必须要使用的组件，只要系统重启用了它，那么就必须在

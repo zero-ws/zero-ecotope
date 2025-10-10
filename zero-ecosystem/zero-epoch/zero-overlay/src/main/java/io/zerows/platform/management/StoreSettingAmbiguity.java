@@ -33,29 +33,36 @@ import java.util.concurrent.ConcurrentMap;
 class StoreSettingAmbiguity extends AbstractAmbiguity implements StoreSetting {
 
     private static final Cc<String, HSetting> CC_SETTING = Cc.open();
+    private static final Cc<String, Object> CC_NETWORK = Cc.open();
     private static final ConcurrentMap<Class<?>, String> CC_BIND = new ConcurrentHashMap<>();
-    private final ConcurrentMap<String, HSetting> ref;
 
     protected StoreSettingAmbiguity(final HBundle owner) {
         super(owner);
-        this.ref = CC_SETTING.get();
+    }
+
+    private ConcurrentMap<String, HSetting> refSetting() {
+        return CC_SETTING.get();
+    }
+
+    private ConcurrentMap<String, Object> refNetwork() {
+        return CC_NETWORK.get();
     }
 
     @Override
     public Set<String> keys() {
-        return this.ref.keySet();
+        return this.refSetting().keySet();
     }
 
     @Override
     public HSetting valueGet(final String key) {
-        return this.ref.getOrDefault(key, null);
+        return this.refSetting().getOrDefault(key, null);
     }
 
     @Override
     public StoreSetting add(final HSetting setting) {
         if (Objects.nonNull(setting) && StrUtil.isNotBlank(setting.id())) {
             log.info("[ ZERO ] 当前配置的 ID 为 {} 已成功添加！", setting.id());
-            this.ref.put(setting.id(), setting);
+            this.refSetting().put(setting.id(), setting);
         }
         return this;
     }
@@ -64,7 +71,7 @@ class StoreSettingAmbiguity extends AbstractAmbiguity implements StoreSetting {
     public StoreSetting remove(final HSetting setting) {
         if (Objects.nonNull(setting) && StrUtil.isNotBlank(setting.id())) {
             log.info("[ ZERO ] 当前配置的 ID 为 {} 已成功移除！", setting.id());
-            this.ref.remove(setting.id());
+            this.refSetting().remove(setting.id());
         }
         return this;
     }
@@ -72,9 +79,24 @@ class StoreSettingAmbiguity extends AbstractAmbiguity implements StoreSetting {
     @Override
     public StoreSetting bind(final Class<?> bootCls, final String id) {
         if (Objects.nonNull(bootCls) && StrUtil.isNotBlank(id)) {
-            log.info("[ ZERO ] \t \uD83C\uDF7B Boot 类 {} 成功绑定配置 ID = {} ！", bootCls.getName(), id);
+            log.info("[ ZERO ] \t \uD83C\uDF7B ID = {} 被 Boot 类 {} 成功绑定！", id, bootCls.getName());
             CC_BIND.put(bootCls, id);
         }
+        return this;
+    }
+
+    @Override
+    public <T> T getNetwork(final HSetting setting) {
+        return null;
+    }
+
+    @Override
+    public <T> StoreSetting add(final HSetting setting, final T network) {
+        if (Objects.isNull(setting) || Objects.isNull(network)) {
+            return this;
+        }
+        this.refNetwork().put(setting.id(), network);
+        log.info("[ ZERO ] \t \uD83C\uDF7B ID = {} 中添加 {}", setting.id(), network.getClass().getName());
         return this;
     }
 
@@ -84,6 +106,6 @@ class StoreSettingAmbiguity extends AbstractAmbiguity implements StoreSetting {
         if (Objects.isNull(settingId)) {
             return null;
         }
-        return this.ref.getOrDefault(settingId, null);
+        return this.refSetting().getOrDefault(settingId, null);
     }
 }

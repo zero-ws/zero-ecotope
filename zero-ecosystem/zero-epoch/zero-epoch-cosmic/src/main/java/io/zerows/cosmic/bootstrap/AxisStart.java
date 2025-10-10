@@ -6,7 +6,7 @@ import io.vertx.core.http.HttpServerOptions;
 import io.vertx.ext.web.Route;
 import io.vertx.ext.web.Router;
 import io.zerows.component.log.OLog;
-import io.zerows.cortex.metadata.RunServer;
+import io.zerows.cortex.metadata.RunServerLegacy;
 import io.zerows.cortex.sdk.Axis;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
@@ -26,14 +26,14 @@ public class AxisStart implements Axis {
     private static final AtomicBoolean IS_OUT = new AtomicBoolean(Boolean.TRUE);
 
     @Override
-    public void mount(final RunServer runServer, final HBundle bundle) {
-        final HttpServer server = runServer.instance();
+    public void mount(final RunServerLegacy runServerLegacy, final HBundle bundle) {
+        final HttpServer server = runServerLegacy.instance();
         server.listen().onComplete(res -> {
             if (IS_OUT.getAndSet(Boolean.FALSE)) {
                 // 封闭代码，只会运行一次，单线程执行
                 if (res.succeeded()) {
                     final HttpServer running = res.result();
-                    this.outRunning(running, runServer);
+                    this.outRunning(running, runServerLegacy);
                 } else {
                     /*
                      * 此处处理启动过程中启动失败时的异常信息
@@ -47,11 +47,11 @@ public class AxisStart implements Axis {
         });
     }
 
-    private void outRunning(final HttpServer running, final RunServer runServer) {
+    private void outRunning(final HttpServer running, final RunServerLegacy runServerLegacy) {
         final OLog logger = Ut.Log.boot(this.getClass());
 
         // Route 处理
-        final Router router = runServer.refRouter();
+        final Router router = runServerLegacy.refRouter();
         final List<Route> routes = router.getRoutes();
 
         // 标准日志格式化
@@ -74,7 +74,7 @@ public class AxisStart implements Axis {
             final Set<HttpMethod> methods = route.methods();
             methods.forEach(method -> logger.info("  -->  Uri Registry: {} {}", Ut.fromAdjust(method.name(), 8), path));
         });
-        final HttpServerOptions optionOfServer = runServer.config().options();
+        final HttpServerOptions optionOfServer = runServerLegacy.config().options();
         final String prefix = optionOfServer.isSsl() ? "https" : "http";
         logger.info("( Http Server ) {0} Http Server has been started successfully. Endpoint: {3}://{1}:{2}.",
             this.getClass().getSimpleName(), Ut.netIPv4(), String.valueOf(running.actualPort()), prefix);

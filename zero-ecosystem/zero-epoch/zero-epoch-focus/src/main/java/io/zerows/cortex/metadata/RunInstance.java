@@ -13,7 +13,7 @@ public interface RunInstance<INSTANCE> extends Serializable {
 
     INSTANCE instance();
 
-    <T extends RunInstance<INSTANCE>> T instance(INSTANCE instance);
+    <RUN extends RunInstance<INSTANCE>> RUN instance(INSTANCE instance);
 
     <C> C config();
 

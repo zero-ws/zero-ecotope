@@ -2,9 +2,7 @@ package io.zerows.epoch.configuration;
 
 import io.r2mo.typed.exception.AbstractException;
 import io.zerows.epoch.boot.ZeroLauncher;
-import io.zerows.platform.enums.EmApp;
 import io.zerows.specification.configuration.HConfig;
-import io.zerows.specification.configuration.HEnergy;
 import io.zerows.specification.configuration.HLauncher;
 import io.zerows.support.Ut;
 import io.zerows.support.base.UtBase;
@@ -30,16 +28,16 @@ import java.util.Optional;
 @Slf4j
 public class ZeroConfigurer<T> {
 
-    private final HEnergy energy;
+    private final Object energy;
 
     private String[] arguments;
 
-    private ZeroConfigurer(final HEnergy energy) {
+    private ZeroConfigurer(final Object energy) {
         this.energy = energy;
         this.arguments = new String[]{};
     }
 
-    public static <T> ZeroConfigurer<T> of(final HEnergy energy) {
+    public static <T> ZeroConfigurer<T> of(final Object energy) {
         return new ZeroConfigurer<>(energy);
     }
 
@@ -52,23 +50,23 @@ public class ZeroConfigurer<T> {
     // Pre 执行 ----------------------------------------
 
     public <CONFIG extends HConfig> void preExecute(final T started, final CONFIG configuration) {
-        final Class<?> preCls = this.energy.component(EmApp.LifeCycle.PRE);
+        final Class<?> preCls = null; // this.energy.component(EmApp.LifeCycle.PRE);
         Optional.ofNullable(preCls).ifPresent(pClass -> {
             // 配置绑定
             // configuration.pre(pClass);
             final HLauncher.Pre<T> pre = UtBase.singleton(pClass);
-            pre.beforeStart(started, configuration.options());
+            // pre.beforeStart(started, configuration.options());
         });
     }
 
     // On ----------------------------------------------
     public HConfig onConfig() {
-        final Class<?> implOn = this.energy.component(EmApp.LifeCycle.ON);
+        final Class<?> implOn = null; // this.energy.component(EmApp.LifeCycle.ON);
         if (Objects.isNull(implOn)) {
             // 未配置组件，直接跳过
             return null;
         }
-        return this.energy.config(implOn);
+        return null; // this.energy.config(implOn);
     }
 
     /**
@@ -86,7 +84,7 @@ public class ZeroConfigurer<T> {
      */
     @SuppressWarnings("all")
     public HConfig.HOn onComponent() {
-        final Class<?> implOn = this.energy.component(EmApp.LifeCycle.ON);
+        final Class<?> implOn = null; // this.energy.component(EmApp.LifeCycle.ON);
         if (Objects.isNull(implOn)) {
             // 未配置组件，直接跳过
             return null;
@@ -99,7 +97,7 @@ public class ZeroConfigurer<T> {
         // 启动参数提取
         on = on.args(this.arguments);
 
-        final HConfig configuration = this.energy.config(on.getClass());
+        final HConfig configuration = null; // this.energy.config(on.getClass());
 
         // 初始化，返回结果
         try {

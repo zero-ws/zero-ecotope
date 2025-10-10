@@ -18,7 +18,7 @@ import java.util.Objects;
  * @author lang : 2023-05-31
  */
 @Slf4j
-public class ZeroBoot implements HBoot {
+class ZeroBoot implements HBoot {
     private Class<?> mainClass;
     private final HLauncher<?> launcher;
     private final HSetting setting;
@@ -53,7 +53,7 @@ public class ZeroBoot implements HBoot {
         return launcher;
     }
 
-    public static HBoot of(final HSetting setting) {
+    static HBoot of(final HSetting setting) {
         return new ZeroBoot(setting);
     }
 

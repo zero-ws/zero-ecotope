@@ -60,37 +60,37 @@ public interface HLauncher<WebContainer> {
      * 考虑到启动过程中可能存在异步调用所以 void 可以保证通过 callback 的写法处理所有
      * 异步行为而不影响主逻辑，由于此类是入口类，所以此处根据最新的启动器规范进行修订，以保证
      *
-     * @param on     服务器配置消费（容器启动之前）
+     * @param energy 能量配置
      * @param server 服务器消费器（容器启动之后）
      */
-    <WebConfig extends HConfig> void start(HConfig.HOn<WebConfig> on, Consumer<WebContainer> server);
+    void start(HEnergy energy, Consumer<WebContainer> server);
 
     /**
      * 停止服务器，由于此处在实现层会处理内置的配置模型，所以使用回调模式 Consumer 来完
      * 成真正意义的启动，AOP这一层直接放到启动器停止后
      *
-     * @param off    服务器配置消费（容器停止之前）
+     * @param energy 能量配置
      * @param server 服务器消费器（容器停止之后）
      */
-    <WebConfig extends HConfig> void stop(HConfig.HOff<WebConfig> off, Consumer<WebContainer> server);
+    void stop(HEnergy energy, Consumer<WebContainer> server);
 
     /**
      * 重启服务器
      *
-     * @param run    服务器重启准备
+     * @param energy 能量配置
      * @param server 服务器引用
      */
-    default <WebConfig extends HConfig> void restart(final HConfig.HRun<WebConfig> run, final Consumer<WebContainer> server) {
+    default void restart(final HEnergy energy, final Consumer<WebContainer> server) {
         throw new _80413Exception501NotImplement();
     }
 
     /**
      * 刷新服务器（热部署模式）
      *
-     * @param run    服务器刷新准备
+     * @param energy 能量配置
      * @param server 服务器引用
      */
-    default <WebConfig extends HConfig> void refresh(final HConfig.HRun<WebConfig> run, final Consumer<WebContainer> server) {
+    default void refresh(final HEnergy energy, final Consumer<WebContainer> server) {
         throw new _80413Exception501NotImplement();
     }
 
@@ -130,22 +130,10 @@ public interface HLauncher<WebContainer> {
      */
     interface Pre<WebContainer> {
         /**
-         * 第一生命周期：直接在 {@link WebContainer} 启动之后执行
-         * <pre><code>
-         *     1. 全局：所有运行在 {@link WebContainer} 中的扩展都会执行此流程
-         *     2. 参数中不限制应用本身的配置，只有 {@link WebContainer}
-         * </code></pre>
-         *
-         * @param container 容器对象
-         *
-         * @return {@link Boolean}
+         * 前置容器主体运行方法，会在启动之前被触发
          */
-        default Boolean beforeStart(final WebContainer container) {
-            return this.beforeStart(container, new JsonObject());
-        }
-
-        default Boolean beforeStart(final WebContainer container, final JsonObject options) {
-            return Boolean.TRUE;
+        default Future<Boolean> beforeAsync(final WebContainer container, final JsonObject options) {
+            return Future.succeededFuture(Boolean.FALSE);
         }
 
         /**
@@ -166,7 +154,6 @@ public interface HLauncher<WebContainer> {
         }
 
         /**
-         * {@link Pre#beforeStart} 的异步版本
          *
          * @param container 容器对象
          * @param arkSet    应用配置对象集合
@@ -193,7 +180,6 @@ public interface HLauncher<WebContainer> {
         }
 
         /**
-         * {@link Pre#beforeStart} 的异步版本
          *
          * @param container 容器对象
          * @param config    应用配置对象

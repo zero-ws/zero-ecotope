@@ -2,7 +2,6 @@ package io.zerows.epoch.configuration;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.basicore.NodeVertx;
 import io.zerows.epoch.basicore.option.RpcOptions;
 import io.zerows.epoch.constant.KName;
 import io.zerows.platform.enums.app.ServerType;
@@ -11,7 +10,8 @@ import io.zerows.support.Ut;
 /**
  * @author lang : 2024-04-20
  */
-class ProcessorOfIpc implements Processor<NodeVertx, JsonArray> {
+@Deprecated
+class ProcessorOfIpc implements Processor<NodeVertxLegacy, JsonArray> {
     private final transient Transformer<RpcOptions> rpcTransformer;
 
     ProcessorOfIpc() {
@@ -19,7 +19,7 @@ class ProcessorOfIpc implements Processor<NodeVertx, JsonArray> {
     }
 
     @Override
-    public void makeup(final NodeVertx target, final JsonArray setting) {
+    public void makeup(final NodeVertxLegacy target, final JsonArray setting) {
         this.logger().debug(ProcessorMessage.V_BEFORE, KName.SERVER, ServerType.IPC, setting);
 
         Ut.itJArray(setting, (item, index) -> {

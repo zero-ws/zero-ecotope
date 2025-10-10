@@ -24,5 +24,18 @@ public interface StoreSetting extends OCache<HSetting> {
 
     StoreSetting bind(Class<?> bootCls, String id);
 
+    /*
+     * 针对 NodeNetwork 的存储，每个 Setting 中只能拥有一个 NodeNetwork 实例，此处只做管理，替换旧版的 NodeCache
+     * 此处可针对 HSetting 进行统一的 Network 管理，每个 Network 中的基本结构和数量
+     * - HttpServerOptions  x 1
+     * - SockOptions        x 1  -> 插件模式
+     * - JobOptions         x 1  -> 插件模式
+     * - CorsOptions        x 1
+     * - ClusterOptions     x 1
+     */
+    <T> T getNetwork(HSetting setting);
+
+    <T> StoreSetting add(HSetting setting, T network);
+
     HSetting getBy(Class<?> bootCls);
 }

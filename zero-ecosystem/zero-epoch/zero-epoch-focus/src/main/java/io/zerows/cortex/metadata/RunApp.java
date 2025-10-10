@@ -9,17 +9,17 @@ import java.io.Serializable;
  */
 public class RunApp extends KApp implements Serializable {
 
-    private RunServer refServer;
+    private RunServerLegacy refServer;
 
     public RunApp(final String name) {
         super(name);
     }
 
-    public RunServer refServer() {
+    public RunServerLegacy refServer() {
         return this.refServer;
     }
 
-    public RunApp refServer(final RunServer refServer) {
+    public RunApp refServer(final RunServerLegacy refServer) {
         this.refServer = refServer;
         return this;
     }

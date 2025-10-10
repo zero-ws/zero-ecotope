@@ -9,7 +9,7 @@ import io.vertx.ext.web.handler.SessionHandler;
 import io.vertx.ext.web.sstore.ClusteredSessionStore;
 import io.vertx.ext.web.sstore.LocalSessionStore;
 import io.vertx.ext.web.sstore.SessionStore;
-import io.zerows.cortex.metadata.RunServer;
+import io.zerows.cortex.metadata.RunServerLegacy;
 import io.zerows.cortex.sdk.Axis;
 import io.zerows.cosmic.plugins.session.SessionClient;
 import io.zerows.cosmic.plugins.session.SessionInfix;
@@ -28,7 +28,7 @@ import java.util.Objects;
 public class AxisCommon implements Axis {
 
     @Override
-    public void mount(final RunServer server, final HBundle bundle) {
+    public void mount(final RunServerLegacy server, final HBundle bundle) {
         /*
          * CSRF Handler 设置（默认关闭）
          * 根据配置加载 Session 部分，包括不同的 Session 实现
@@ -49,8 +49,8 @@ public class AxisCommon implements Axis {
         this.mountCors(server, bundle);
     }
 
-    private void mountCors(final RunServer server, final HBundle bundle) {
-        final HSetting setting = server.setting();
+    private void mountCors(final RunServerLegacy server, final HBundle bundle) {
+        final HSetting setting = null; // server.setting();
         final Router router = server.refRouter();
         final CorsOptions config = CorsOptions.get(setting);
         if (Objects.isNull(config)) {
@@ -66,7 +66,7 @@ public class AxisCommon implements Axis {
             .handler(handler);
     }
 
-    private void mountBody(final RunServer server, final HBundle bundle) {
+    private void mountBody(final RunServerLegacy server, final HBundle bundle) {
         final Router router = server.refRouter();
         router.route().order(KWeb.ORDER.BODY)
             // 32MB
@@ -75,8 +75,8 @@ public class AxisCommon implements Axis {
             .handler(ResponseContentTypeHandler.create());
     }
 
-    private void mountSession(final RunServer server, final HBundle bundle) {
-        final HSetting setting = server.setting();
+    private void mountSession(final RunServerLegacy server, final HBundle bundle) {
+        final HSetting setting = null; // server.setting();
         final Router router = server.refRouter();
         final Vertx vertx = server.refVertx();
         if (setting.hasInfix(YmlCore.inject.SESSION)) {

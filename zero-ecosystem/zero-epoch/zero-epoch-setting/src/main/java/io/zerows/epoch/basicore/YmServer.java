@@ -2,7 +2,7 @@ package io.zerows.epoch.basicore;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.application.VertxYml;
-import io.zerows.epoch.configuration.EquipItem;
+import io.zerows.epoch.configuration.Equip;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -30,7 +30,7 @@ import java.io.Serializable;
  * @author lang : 2025-10-05
  */
 @Data
-public class YmServer implements Serializable, EquipItem {
+public class YmServer implements Serializable, Equip.Item {
     private int port = 6083;
     private String address = "0.0.0.0";
     private JsonObject options = new JsonObject();

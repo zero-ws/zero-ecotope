@@ -16,6 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 @Data
+@Deprecated
 public class ActorOptions implements Serializable {
     @JsonIgnore
     private final ConcurrentMap<String, DeploymentOptions> deploymentMap = new ConcurrentHashMap<>();

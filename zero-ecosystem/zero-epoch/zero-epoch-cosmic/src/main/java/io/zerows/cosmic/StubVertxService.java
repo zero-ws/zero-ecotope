@@ -1,4 +1,4 @@
-package io.zerows.cosmic.bootstrap;
+package io.zerows.cosmic;
 
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
@@ -8,8 +8,8 @@ import io.vertx.core.spi.cluster.ClusterManager;
 import io.zerows.cortex.extension.CodecEnvelop;
 import io.zerows.cortex.management.StoreVertx;
 import io.zerows.cortex.metadata.RunVertx;
-import io.zerows.epoch.basicore.NodeNetwork;
-import io.zerows.epoch.basicore.NodeVertx;
+import io.zerows.epoch.configuration.NodeNetwork;
+import io.zerows.epoch.configuration.NodeVertx;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.platform.management.AbstractAmbiguity;
 import io.zerows.specification.development.compiled.HBundle;
@@ -38,17 +38,17 @@ class StubVertxService extends AbstractAmbiguity implements StubVertx {
         final VertxBuilder builder = Vertx.builder();
         if (clustered) {
             // 集群模式创建
-            final NodeNetwork network = nodeVertx.belongTo();
+            final NodeNetwork network = nodeVertx.networkRef();
             final ClusterManager manager = network.cluster().getClusterManager();
             log.info("当前应用程序正在集群模式下运行，管理器 = {}，节点为 {}，isActive = {}。",
                 manager.getClass().getName(), manager.getNodeId(), manager.isActive());
             return builder
                 .withClusterManager(manager)
-                .with(nodeVertx.optionVertx()).buildClustered()
+                .with(nodeVertx.vertxOptions()).buildClustered()
                 .compose(vertx -> this.createFinished(nodeVertx, vertx));
         } else {
             // 非集群模式创建
-            return Future.succeededFuture(builder.with(nodeVertx.optionVertx()).build())
+            return Future.succeededFuture(builder.with(nodeVertx.vertxOptions()).build())
                 .compose(vertx -> this.createFinished(nodeVertx, vertx));
         }
     }
@@ -74,11 +74,11 @@ class StubVertxService extends AbstractAmbiguity implements StubVertx {
     }
 
     @Override
-    public StubVertx add(final String name, final RunVertx runVertx) {
-        Objects.requireNonNull(runVertx);
+    public StubVertx add(final String name, final RunVertx runVertxLegacy) {
+        Objects.requireNonNull(runVertxLegacy);
         final StoreVertx doVertx = StoreVertx.of(this.caller());
-        if (runVertx.isOk()) {
-            doVertx.add(runVertx);
+        if (runVertxLegacy.isOk()) {
+            doVertx.add(runVertxLegacy);
         }
         return this;
     }

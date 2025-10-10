@@ -5,9 +5,9 @@ import io.vertx.core.Vertx;
 import io.zerows.cortex.management.StoreVertx;
 import io.zerows.cosmic.EnergyVertx;
 import io.zerows.cosmic.EnergyVertxService;
-import io.zerows.epoch.basicore.NodeNetwork;
+import io.zerows.epoch.configuration.NodeNetwork;
 import io.zerows.epoch.management.OCacheNode;
-import io.zerows.specification.configuration.HConfig;
+import io.zerows.specification.configuration.HEnergy;
 import io.zerows.specification.configuration.HLauncher;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.spi.HPI;
@@ -24,8 +24,8 @@ import java.util.function.Consumer;
  *
  * @author lang : 2023-05-30
  */
-@SPID(priority = 1017)
-public class LauncherZero implements HLauncher<Vertx> {
+@SPID(priority = 216)
+public class LauncherApp implements HLauncher<Vertx> {
 
     private static final EnergyVertx SERVICE = new EnergyVertxService();
     private static final ConcurrentMap<String, Vertx> STORED_DATA = new ConcurrentHashMap<>();
@@ -41,7 +41,7 @@ public class LauncherZero implements HLauncher<Vertx> {
     }
 
     @Override
-    public <T extends HConfig> void start(final HConfig.HOn<T> on, final Consumer<Vertx> server) {
+    public void start(final HEnergy energy, final Consumer<Vertx> server) {
         final NodeNetwork network = OCacheNode.of().network();
 
         final HBundle found = HPI.findBundle(this.getClass());
@@ -53,7 +53,7 @@ public class LauncherZero implements HLauncher<Vertx> {
 
 
             // 存储引用专用
-            final StoreVertx storeVertx = cached.result();
+            final StoreVertx storeVertx = StoreVertx.of();
             final Set<String> names = storeVertx.keys();
 
             names.forEach(name -> {
@@ -66,7 +66,7 @@ public class LauncherZero implements HLauncher<Vertx> {
     }
 
     @Override
-    public <T extends HConfig> void stop(final HConfig.HOff<T> off, final Consumer<Vertx> server) {
+    public void stop(final HEnergy energy, final Consumer<Vertx> server) {
         // 等待实现
     }
 }

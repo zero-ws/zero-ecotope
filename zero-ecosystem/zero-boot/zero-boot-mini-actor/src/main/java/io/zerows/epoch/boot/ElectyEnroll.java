@@ -47,6 +47,7 @@ import java.util.function.Supplier;
  *
  * @author lang : 2023-06-10
  */
+@Deprecated
 class ElectyEnroll {
     private static final String MSG_EXT_COMPONENT = "Extension components initialized {0}";
 

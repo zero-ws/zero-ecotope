@@ -1,10 +1,7 @@
 package io.zerows.cortex.metadata;
 
 import io.vertx.core.Vertx;
-import io.vertx.ext.web.Route;
-import io.zerows.epoch.basicore.NodeVertx;
-import io.zerows.epoch.basicore.WebEvent;
-import io.zerows.specification.configuration.HSetting;
+import io.zerows.epoch.configuration.NodeVertx;
 import io.zerows.support.Ut;
 
 import java.util.Objects;
@@ -14,51 +11,27 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
 
 /**
- * 核心数据结构
- * <pre><code>
- *     Cluster
- *      - Vertx-01 ...                              {@link RunVertx}  x 1
- *        - deploymentId-01-01 = Class<?>           {@link io.vertx.core.Verticle} x N
- *        - deploymentId-01-02 =
- *        - serverName =                            {@link RunServer} x N
- *          - appName  =                            {@link RunApp}    x N
- *        - router     =                            DoRouter          x 1
- *          - path     =                                              x N
- *            - route  =                            {@link Route}     x ( HTTP Method counter )
- *              event  =                            {@link WebEvent}
- *      - Vertx-02
- * </code></pre>
- *
- * @author lang : 2024-05-03
+ * @author lang : 2025-10-10
  */
 public class RunVertx implements RunInstance<Vertx> {
 
     private final String name;
-    private final ConcurrentMap<String, Class<?>> deploymentMap = new ConcurrentHashMap<>();
+    private final ConcurrentMap<String, Class<?>> deployments = new ConcurrentHashMap<>();
     private Vertx vertxRef;
-    private NodeVertx vertxConfig;
+    private NodeVertx vertxStatic;
 
     public RunVertx(final String name) {
         this.name = name;
     }
 
-    public HSetting setting() {
-        return this.vertxConfig.setting();
-    }
-
-    public RunVertx config(final NodeVertx vertxConfig) {
-        this.vertxConfig = vertxConfig;
-        return this;
-    }
-
-    public void deploymentAdd(final String id, final Class<?> clazz) {
+    public void addDeployment(final String id, final Class<?> clazz) {
         if (Objects.nonNull(clazz)) {
-            this.deploymentMap.put(id, clazz);
+            this.deployments.put(id, clazz);
         }
     }
 
-    public Set<String> deploymentFind(final Class<?> clazz) {
-        final Set<String> stored = this.deploymentMap.keySet();
+    public Set<String> findDeployment(final Class<?> clazz) {
+        final Set<String> stored = this.deployments.keySet();
         if (Objects.isNull(this.vertxRef)) {
             return stored;
         }
@@ -67,20 +40,23 @@ public class RunVertx implements RunInstance<Vertx> {
             if (Objects.isNull(clazz)) {
                 return true;
             }
-
-            final Class<?> storedCls = this.deploymentMap.get(id);
+            final Class<?> storedCls = this.deployments.get(id);
             return storedCls == clazz;
         }).collect(Collectors.toSet());
     }
 
-    public void deploymentRemove(final String id) {
-        this.deploymentMap.remove(id);
+    public void removeDeployment(final String id) {
+        this.deployments.remove(id);
     }
 
-    // ---------------- 接口专用方法
     @Override
     public String name() {
         return this.name;
+    }
+
+    @Override
+    public boolean isOk() {
+        return Ut.isNotNil(this.name) && Objects.nonNull(this.vertxRef);
     }
 
     @Override
@@ -98,12 +74,12 @@ public class RunVertx implements RunInstance<Vertx> {
     @Override
     @SuppressWarnings("unchecked")
     public NodeVertx config() {
-        return this.vertxConfig;
+        return this.vertxStatic;
     }
 
-    @Override
-    public boolean isOk() {
-        return Ut.isNotNil(this.name) && Objects.nonNull(this.vertxRef);
+    public RunVertx config(final NodeVertx vertxStatic) {
+        this.vertxStatic = vertxStatic;
+        return this;
     }
 
     @Override

@@ -1,13 +1,14 @@
 package io.zerows.epoch.management;
 
-import io.zerows.epoch.basicore.NodeNetwork;
-import io.zerows.epoch.basicore.NodeVertx;
+import io.zerows.epoch.configuration.NodeNetwork;
+import io.zerows.epoch.configuration.NodeVertxLegacy;
 import io.zerows.platform.management.AbstractAmbiguity;
 import io.zerows.specification.development.compiled.HBundle;
 
 /**
  * @author lang : 2024-04-20
  */
+@Deprecated
 class OCacheNodeAmbiguity extends AbstractAmbiguity implements OCacheNode {
 
     private static final NodeNetwork NETWORK = new NodeNetwork();
@@ -18,8 +19,8 @@ class OCacheNodeAmbiguity extends AbstractAmbiguity implements OCacheNode {
 
     // -------------- 比较特殊，全部为全局方法，唯一的网络节点 -------------------
     @Override
-    public NodeVertx valueGet(final String name) {
-        return NETWORK.get(name);
+    public NodeVertxLegacy valueGet(final String name) {
+        return null; // NETWORK.get(name);
     }
 
     @Override
@@ -28,14 +29,14 @@ class OCacheNodeAmbiguity extends AbstractAmbiguity implements OCacheNode {
     }
 
     @Override
-    public OCacheNode add(final NodeVertx nodeVertx) {
-        NETWORK.add(nodeVertx.name(), nodeVertx);
+    public OCacheNode add(final NodeVertxLegacy nodeVertxLegacy) {
+        // NETWORK.add(nodeVertxLegacy.name(), nodeVertxLegacy);
         return this;
     }
 
     @Override
-    public OCacheNode remove(final NodeVertx nodeVertx) {
-        NETWORK.remove(nodeVertx.name());
+    public OCacheNode remove(final NodeVertxLegacy nodeVertxLegacy) {
+        // NETWORK.remove(nodeVertxLegacy.name());
         return this;
     }
 }

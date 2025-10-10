@@ -21,15 +21,16 @@ import io.vertx.core.json.JsonObject;
  *
  * @author lang : 2024-08-14
  */
+@Deprecated
 public class CloudPre extends ZeroPre {
 
     @Override
     public Boolean beforeStart(final Vertx vertx, final JsonObject options) {
         // 标准插件初始化 Infix
-        final Boolean started = super.beforeStart(vertx, options);
-        if (!started) {
-            return Boolean.FALSE;
-        }
+        //        final Boolean started = super.beforeStart(vertx, options);
+        //        if (!started) {
+        //            return Boolean.FALSE;
+        //        }
 
         return Boolean.TRUE;
     }

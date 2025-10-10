@@ -3,11 +3,11 @@ package io.zerows.cosmic.bootstrap;
 import io.vertx.ext.web.handler.AuthenticationHandler;
 import io.vertx.ext.web.handler.AuthorizationHandler;
 import io.vertx.ext.web.handler.ChainAuthHandler;
+import io.zerows.cortex.metadata.RunServerLegacy;
+import io.zerows.cortex.sdk.Axis;
 import io.zerows.cosmic.handler.EndurerAuthenticate;
 import io.zerows.cosmic.plugins.security.Bolt;
 import io.zerows.cosmic.plugins.security.management.OCacheSecurity;
-import io.zerows.cortex.metadata.RunServer;
-import io.zerows.cortex.sdk.Axis;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.metadata.security.Aegis;
 import io.zerows.platform.constant.VValue;
@@ -36,7 +36,7 @@ public class AxisSecure implements Axis {
     }
 
     @Override
-    public void mount(final RunServer server, final HBundle bundle) {
+    public void mount(final RunServerLegacy server, final HBundle bundle) {
         /*
          * Wall mounting for authorization
          * Here create order set to remove duplicated order and re-generate the get.
@@ -77,7 +77,7 @@ public class AxisSecure implements Axis {
         }
     }
 
-    private void mountAuthenticate(final RunServer server, final String path, final Set<Aegis> aegisSet) {
+    private void mountAuthenticate(final RunServerLegacy server, final String path, final Set<Aegis> aegisSet) {
         final AuthenticationHandler resultHandler;
         if (VValue.ONE == aegisSet.size()) {
             // 1 = handler
@@ -99,7 +99,7 @@ public class AxisSecure implements Axis {
         }
     }
 
-    private void mountAuthorization(final RunServer server, final String path, final Set<Aegis> aegisSet) {
+    private void mountAuthorization(final RunServerLegacy server, final String path, final Set<Aegis> aegisSet) {
         final AuthorizationHandler resultHandler;
         if (VValue.ONE == aegisSet.size()) {
             // 1 = handler

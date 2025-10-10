@@ -1,19 +1,22 @@
 package io.zerows.epoch;
 
 import io.vertx.core.Vertx;
-import io.zerows.cosmic.bootstrap.StubLinear;
-import io.zerows.epoch.boot.Electy;
+import io.zerows.cortex.management.StoreVertx;
+import io.zerows.cortex.metadata.RunVertx;
+import io.zerows.cosmic.bootstrap.Linear;
 import io.zerows.epoch.boot.ZeroLauncher;
+import io.zerows.epoch.management.OCacheClass;
 import io.zerows.platform.ENV;
 import io.zerows.platform.EnvironmentVariable;
 import io.zerows.platform.enums.VertxComponent;
 import io.zerows.platform.metadata.KRunner;
 import io.zerows.specification.configuration.HBoot;
-import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HEnergy;
 import io.zerows.specification.configuration.HLauncher;
 import io.zerows.spi.BootIo;
 import io.zerows.spi.HPI;
+
+import java.util.Set;
 
 /**
  * 标准启动器，直接启动 Vertx 实例处理 Zero 相关的业务逻辑
@@ -79,21 +82,26 @@ public class VertxApplication {
          *   - 001-4 / 从 BootIo 中提取 HLauncher 对象
          */
         final ZeroLauncher<Vertx> container = ZeroLauncher.create(clazz, args);
-        container.start(Electy.whenContainer(VertxApplication::runInternal));
+        container.start((vertx, config) -> {
+            /*
+             * MOMO-004: 启动核心处理流程
+             * - AGENT 启动
+             * - WORKER 启动
+             */
+            final RunVertx runVertx = StoreVertx.of().valueGet(vertx.hashCode());
+
+            runInternal(runVertx, VertxComponent.AGENT);
+
+            runInternal(runVertx, VertxComponent.WORKER);
+        });
     }
 
-    public static void runInternal(final Vertx vertx, final HConfig config) {
-
-        /* Agent 类型处理新流程 */
-        KRunner.run(() -> StubLinear.standalone(vertx, VertxComponent.AGENT), "component-agent");
-
-        /* Worker 类型处理新流程 */
-        KRunner.run(() -> StubLinear.standalone(vertx, VertxComponent.WORKER), "component-worker");
-
-        /* Infusion 插件处理新流程  **/
-        KRunner.run(() -> StubLinear.standalone(vertx, VertxComponent.INFUSION), "component-infix");
-
-        /* Rule 验证规则处理流程 **/
-        KRunner.run(() -> StubLinear.standalone(vertx, VertxComponent.CODEX), "component-codex");
+    private static void runInternal(final RunVertx runVertx, final VertxComponent type) {
+        final Set<Class<?>> scanClass = OCacheClass.entireValue(type);
+        final Linear linear = Linear.of(type);
+        scanClass.forEach(scanned -> KRunner.run(
+            () -> linear.start(scanned, runVertx),                              // 发布逻辑
+            "momo-" + type.name().toLowerCase() + "-" + scanned.getName())      // 线程名称
+        );
     }
 }

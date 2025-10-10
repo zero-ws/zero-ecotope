@@ -1,4 +1,4 @@
-package io.zerows.epoch.basicore;
+package io.zerows.epoch.configuration;
 
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.VertxOptions;
@@ -7,8 +7,6 @@ import io.vertx.core.http.HttpServerOptions;
 import io.zerows.epoch.basicore.option.ActorTool;
 import io.zerows.epoch.basicore.option.RpcOptions;
 import io.zerows.epoch.basicore.option.SockOptions;
-import io.zerows.epoch.configuration.OptionOfBuilder;
-import io.zerows.epoch.configuration.OptionOfServer;
 import io.zerows.platform.enums.EmDeploy;
 import io.zerows.platform.enums.app.ServerType;
 import io.zerows.specification.configuration.HSetting;
@@ -34,7 +32,8 @@ import java.util.concurrent.ConcurrentMap;
  *
  * @author lang : 2024-04-20
  */
-public class NodeVertx implements Serializable {
+@Deprecated
+public class NodeVertxLegacy implements Serializable {
     @SuppressWarnings("all")
     private final ConcurrentMap<String, OptionOfServer> serverOptions = new ConcurrentHashMap<>();
     /**
@@ -42,8 +41,7 @@ public class NodeVertx implements Serializable {
      * 上线之前并没有加载到环境中，所以此处的 {@link DeploymentOptions} 直接使用类名来配置，这样就可以保证配置的延迟性，
      * 使得配置本身不会受到元数据的影响。
      */
-    private final ConcurrentMap<String, DeploymentOptions> deploymentOptions =
-        new ConcurrentHashMap<>();
+    private final ConcurrentMap<String, DeploymentOptions> deploymentOptions = new ConcurrentHashMap<>();
     private final String vertxName;
     private final NodeNetwork vertxNetwork;
 
@@ -51,13 +49,13 @@ public class NodeVertx implements Serializable {
     private VertxOptions vertxOptions;
     private DeliveryOptions deliveryOptions;
 
-    private NodeVertx(final String vertxName, final NodeNetwork networkRef) {
+    private NodeVertxLegacy(final String vertxName, final NodeNetwork networkRef) {
         this.vertxName = vertxName;
         this.vertxNetwork = networkRef;
     }
 
-    public static NodeVertx of(final String vertxName, final NodeNetwork networkRef) {
-        return new NodeVertx(vertxName, networkRef);
+    public static NodeVertxLegacy of(final String vertxName, final NodeNetwork networkRef) {
+        return new NodeVertxLegacy(vertxName, networkRef);
     }
 
     public String name() {
@@ -98,12 +96,19 @@ public class NodeVertx implements Serializable {
      */
     public DeploymentOptions optionDeployment(final Class<?> component) {
         Objects.requireNonNull(component);
-        final DeploymentOptions options = this.deploymentOptions.get(component.getName());
-        if (Objects.nonNull(options)) {
-            ActorTool.setupWith(options, component, this.mode);
-            // 反向更新
-            this.deploymentOptions.put(component.getName(), options);
+        DeploymentOptions options = this.deploymentOptions.get(component.getName());
+
+        if (Objects.isNull(options)) {
+            /*
+             * Fix: Exception in thread "component-worker-218" java.lang.NullPointerException:
+             * Cannot invoke "io.vertx.core.DeploymentOptions.getThreadingModel()" because "options" is null
+             */
+            options = new DeploymentOptions();
         }
+        
+        ActorTool.setupWith(options, component, this.mode);
+        // 反向更新
+        this.deploymentOptions.put(component.getName(), options);
         return options;
     }
 
@@ -149,7 +154,7 @@ public class NodeVertx implements Serializable {
         }
     }
 
-    public NodeVertx build() {
+    public NodeVertxLegacy build() {
         // 最终绑定
         final Set<String> socks = this.optionServers(ServerType.SOCK);
         socks.stream().map(this::<SockOptions>optionServer).forEach(optionOfSock -> {

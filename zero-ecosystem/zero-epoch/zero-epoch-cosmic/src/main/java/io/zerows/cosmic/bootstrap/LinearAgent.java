@@ -3,56 +3,60 @@ package io.zerows.cosmic.bootstrap;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.ThreadingModel;
 import io.zerows.cortex.metadata.RunVertx;
-import io.zerows.epoch.basicore.NodeVertx;
+import io.zerows.epoch.configuration.NodeVertx;
 import io.zerows.platform.management.AbstractAmbiguity;
 import io.zerows.specification.development.compiled.HBundle;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
 
 /**
- * @author lang : 2024-05-03
+ * @author lang : 2025-10-10
  */
-class LinearAgent extends AbstractAmbiguity implements StubLinear {
+@Slf4j
+class LinearAgent extends AbstractAmbiguity implements Linear {
     LinearAgent(final HBundle bundle) {
         super(bundle);
     }
 
     @Override
-    public void runDeploy(final Class<?> clazz, final RunVertx runVertx) {
-        final DeploymentOptions options = this.buildOptions(clazz, runVertx);
+    public void start(final Class<?> clazz, final RunVertx runVertx) {
+        final DeploymentOptions options = this.getOr(clazz, runVertx);
+
 
         if (Objects.isNull(options)) {
             return;
         }
 
-        LinearTool.startAsync(clazz, options, runVertx);
+
+        LinearCenter.startAsync(clazz, options, runVertx);
 
 
         Runtime.getRuntime().addShutdownHook(
-            new Thread(() -> LinearTool.stopAsync(clazz, options, runVertx))
+            new Thread(() -> LinearCenter.stopAsync(clazz, options, runVertx))
         );
     }
 
     @Override
-    public void runUndeploy(final Class<?> clazz, final RunVertx runVertx) {
-        final DeploymentOptions options = this.buildOptions(clazz, runVertx);
+    public void stop(final Class<?> clazz, final RunVertx runVertx) {
+        final DeploymentOptions options = this.getOr(clazz, runVertx);
+
 
         if (Objects.isNull(options)) {
             return;
         }
 
-        LinearTool.stopAsync(clazz, options, runVertx);
+
+        LinearCenter.stopAsync(clazz, options, runVertx);
     }
 
-    private DeploymentOptions buildOptions(final Class<?> clazz, final RunVertx runVertx) {
+    private DeploymentOptions getOr(final Class<?> clazz, final RunVertx runVertx) {
         final NodeVertx nodeVertx = runVertx.config();
-        final DeploymentOptions options = nodeVertx.optionDeployment(clazz);
-
-
-        // Verticle Deployment
-        final ThreadingModel threadModel = options.getThreadingModel();
-        if (ThreadingModel.EVENT_LOOP != threadModel) {
-            this.logger().warn(INFO.THREAD_NOT_MATCH, ThreadingModel.EVENT_LOOP.name(), threadModel);
+        final DeploymentOptions options = nodeVertx.deploymentOptions(clazz);
+        // 线程不匹配，此处必须是 EVENT_LOOP
+        final ThreadingModel threadingModel = options.getThreadingModel();
+        if (ThreadingModel.EVENT_LOOP != threadingModel) {
+            log.warn("[ ZERO ] Agent 线程模型不匹配，期望值：{}，实际值：{}", ThreadingModel.EVENT_LOOP, threadingModel);
             return null;
         }
         return options;

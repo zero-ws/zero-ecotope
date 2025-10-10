@@ -7,7 +7,7 @@ import io.r2mo.typed.json.jackson.ClassDeserializer;
 import io.r2mo.typed.json.jackson.ClassSerializer;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.application.VertxYml;
-import io.zerows.epoch.configuration.EquipItem;
+import io.zerows.epoch.configuration.Equip;
 import io.zerows.integrated.jackson.JsonObjectDeserializer;
 import io.zerows.integrated.jackson.JsonObjectSerializer;
 import lombok.Data;
@@ -20,7 +20,7 @@ import java.io.Serializable;
  * @author lang : 2025-10-05
  */
 @Data
-public class YmWebSocket implements Serializable, EquipItem {
+public class YmWebSocket implements Serializable, Equip.Item {
     private String publish;
 
     @JsonSerialize(using = ClassSerializer.class)

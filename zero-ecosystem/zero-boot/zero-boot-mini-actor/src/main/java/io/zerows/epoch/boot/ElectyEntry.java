@@ -15,6 +15,7 @@ import java.util.function.Supplier;
 /**
  * @author lang : 2023-06-10
  */
+@Deprecated
 class ElectyEntry {
     private static final String MSG_EXT_CONFIGURATION = "Extension configuration missing {0}";
 

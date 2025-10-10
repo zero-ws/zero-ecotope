@@ -3,7 +3,6 @@ package io.zerows.epoch.configuration;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.environment.MatureOn;
-import io.zerows.epoch.basicore.NodeVertx;
 import io.zerows.epoch.basicore.option.SockOptions;
 import io.zerows.epoch.constant.KName;
 import io.zerows.platform.enums.app.ServerType;
@@ -12,7 +11,8 @@ import io.zerows.support.Ut;
 /**
  * @author lang : 2024-04-20
  */
-class ProcessorOfSock implements Processor<NodeVertx, JsonArray> {
+@Deprecated
+class ProcessorOfSock implements Processor<NodeVertxLegacy, JsonArray> {
 
     private transient final Transformer<SockOptions> sockTransformer;
 
@@ -22,7 +22,7 @@ class ProcessorOfSock implements Processor<NodeVertx, JsonArray> {
 
 
     @Override
-    public void makeup(final NodeVertx target, final JsonArray setting) {
+    public void makeup(final NodeVertxLegacy target, final JsonArray setting) {
         this.logger().debug(ProcessorMessage.V_BEFORE, KName.SERVER, ServerType.SOCK, setting);
 
 

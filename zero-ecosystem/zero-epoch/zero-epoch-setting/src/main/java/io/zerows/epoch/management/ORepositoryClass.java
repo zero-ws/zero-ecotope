@@ -18,6 +18,7 @@ import io.zerows.platform.metadata.KRunner;
 import io.zerows.specification.configuration.HSetting;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Set;
 
@@ -30,6 +31,7 @@ import java.util.Set;
  *
  * @author lang : 2024-04-19
  */
+@Slf4j
 public class ORepositoryClass extends AbstractAmbiguity implements ORepository {
 
     public ORepositoryClass(final HBundle bundle) {
@@ -95,8 +97,7 @@ public class ORepositoryClass extends AbstractAmbiguity implements ORepository {
             }
         );
         final long end = System.currentTimeMillis();
-        Ut.Log.boot(ORepositoryClass.class).info(" {0}ms / Zero Timer: Meditate Class Scanned! key = {1}",
-            end - start, HBundle.id(this.caller(), ORepositoryClass.class));
+        log.info("[ ZERO ] 耗时：{} 毫秒 / 扫描完成！执行器 = {}", end - start, HBundle.id(this.caller(), ORepositoryClass.class));
     }
 
     @Override

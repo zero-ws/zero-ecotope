@@ -3,10 +3,10 @@ package io.zerows.cosmic;
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpServer;
 import io.vertx.core.http.HttpServerOptions;
-import io.zerows.cortex.metadata.RunServer;
-import io.zerows.cortex.metadata.RunVertx;
-import io.zerows.epoch.basicore.NodeVertx;
+import io.zerows.cortex.metadata.RunServerLegacy;
+import io.zerows.cortex.metadata.RunVertxLegacy;
 import io.zerows.epoch.basicore.option.SockOptions;
+import io.zerows.epoch.configuration.NodeVertxLegacy;
 import io.zerows.epoch.configuration.OptionOfServer;
 import io.zerows.platform.enums.app.ServerType;
 import io.zerows.platform.management.AbstractAmbiguity;
@@ -25,16 +25,16 @@ class StubServerService extends AbstractAmbiguity implements StubServer {
     }
 
     @Override
-    public Set<RunServer> createAsync(final RunVertx runVertx) {
+    public Set<RunServerLegacy> createAsync(final RunVertxLegacy runVertxLegacy) {
 
-        final Vertx vertxRef = runVertx.instance();
+        final Vertx vertxRef = runVertxLegacy.instance();
         if (Objects.isNull(vertxRef)) {
             return Set.of();
         }
 
-        final NodeVertx config = runVertx.config();
+        final NodeVertxLegacy config = runVertxLegacy.config();
         final Set<String> servers = config.optionServers(ServerType.HTTP);
-        final Set<RunServer> serverSet = new HashSet<>();
+        final Set<RunServerLegacy> serverSet = new HashSet<>();
 
         servers.stream().map(config::<HttpServerOptions>optionServer).forEach(option -> {
             final OptionOfServer<SockOptions> optionOfSock = config.findSock(option);
@@ -42,10 +42,10 @@ class StubServerService extends AbstractAmbiguity implements StubServer {
             final HttpServerOptions optionsHttp = option.options();
             final HttpServer server = vertxRef.createHttpServer(optionsHttp);
             /* 构造 RunServer */
-            serverSet.add(new RunServer(option.name())
+            serverSet.add(new RunServerLegacy(option.name())
                 .config(option)
                 .configSock(optionOfSock)
-                .refRunVertx(runVertx)
+                .refRunVertx(runVertxLegacy)
                 .instance(server).build());
         });
         return serverSet;

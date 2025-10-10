@@ -7,7 +7,7 @@ import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.eventbus.EventBus;
 import io.zerows.component.log.OLog;
 import io.zerows.cosmic.plugins.job.metadata.Mission;
-import io.zerows.epoch.basicore.NodeNetwork;
+import io.zerows.epoch.configuration.NodeNetwork;
 import io.zerows.epoch.management.OCacheNode;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.platform.metadata.KRef;

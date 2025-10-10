@@ -4,7 +4,6 @@ import io.vertx.core.http.HttpServerOptions;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.environment.MatureOn;
-import io.zerows.epoch.basicore.NodeVertx;
 import io.zerows.epoch.constant.KName;
 import io.zerows.platform.enums.app.ServerType;
 import io.zerows.support.Ut;
@@ -12,7 +11,8 @@ import io.zerows.support.Ut;
 /**
  * @author lang : 2024-04-20
  */
-class ProcessorOfHttp implements Processor<NodeVertx, JsonArray> {
+@Deprecated
+class ProcessorOfHttp implements Processor<NodeVertxLegacy, JsonArray> {
     private final transient Transformer<HttpServerOptions> httpTransformer;
 
     ProcessorOfHttp() {
@@ -20,7 +20,7 @@ class ProcessorOfHttp implements Processor<NodeVertx, JsonArray> {
     }
 
     @Override
-    public void makeup(final NodeVertx target, final JsonArray setting) {
+    public void makeup(final NodeVertxLegacy target, final JsonArray setting) {
         // 此处保证所有的配置都为同一种类型的服务器配置
         this.logger().debug(ProcessorMessage.V_BEFORE, KName.SERVER, this.typeOfHttp(), setting);
 

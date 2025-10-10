@@ -6,7 +6,7 @@ import io.vertx.core.http.HttpServerOptions;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.stomp.StompServer;
 import io.vertx.ext.stomp.StompServerOptions;
-import io.zerows.cortex.metadata.RunServer;
+import io.zerows.cortex.metadata.RunServerLegacy;
 import io.zerows.cortex.sdk.Axis;
 import io.zerows.epoch.basicore.option.SockOptions;
 import io.zerows.epoch.metadata.security.Aegis;
@@ -21,7 +21,7 @@ import java.util.Objects;
  */
 public class AxisStomp implements Axis {
     @Override
-    public void mount(final RunServer server, final HBundle bundle) {
+    public void mount(final RunServerLegacy server, final HBundle bundle) {
         // 配置扩展
         this.mountOption(server);
 
@@ -65,7 +65,7 @@ public class AxisStomp implements Axis {
         httpServer.webSocketHandler(stompServer.webSocketHandler());
     }
 
-    private void mountOption(final RunServer server) {
+    private void mountOption(final RunServerLegacy server) {
         // 当前环境的 HttpServerOptions
         final HttpServerOptions serverOptions = server.config().options();
         Objects.requireNonNull(serverOptions);

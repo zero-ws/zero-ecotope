@@ -4,8 +4,6 @@ import io.vertx.core.VertxOptions;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.application.YmlCore;
-import io.zerows.epoch.basicore.NodeNetwork;
-import io.zerows.epoch.basicore.NodeVertx;
 import io.zerows.epoch.basicore.option.ClusterOptions;
 import io.zerows.epoch.constant.KName;
 import io.zerows.specification.configuration.HConfig;
@@ -17,6 +15,7 @@ import io.zerows.support.Ut;
  *
  * @author lang : 2024-04-20
  */
+@Deprecated
 class ProcessorVertx implements Processor<NodeNetwork, HSetting> {
     private final transient Transformer<VertxOptions> transformerVertx;
     private final transient Transformer<ClusterOptions> transformerCluster;
@@ -61,9 +60,9 @@ class ProcessorVertx implements Processor<NodeNetwork, HSetting> {
 
 
             // 更新基础配置
-            final NodeVertx nodeVertx = NodeVertx.of(name, network);
-            nodeVertx.optionVertx(vertxOptions);
-            network.add(name, nodeVertx);
+            final NodeVertxLegacy nodeVertxLegacy = NodeVertxLegacy.of(name, network);
+            nodeVertxLegacy.optionVertx(vertxOptions);
+            // network.add(name, nodeVertxLegacy);
         });
     }
 }

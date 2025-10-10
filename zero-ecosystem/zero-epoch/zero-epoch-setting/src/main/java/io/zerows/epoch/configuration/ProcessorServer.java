@@ -3,7 +3,6 @@ package io.zerows.epoch.configuration;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.application.YmlCore;
-import io.zerows.epoch.basicore.NodeVertx;
 import io.zerows.epoch.constant.KName;
 import io.zerows.platform.enums.app.ServerType;
 import io.zerows.platform.exception._30001Exception500ServerConfig;
@@ -19,9 +18,10 @@ import java.util.function.Supplier;
 /**
  * @author lang : 2024-04-20
  */
-class ProcessorServer implements Processor<NodeVertx, HSetting> {
+@Deprecated
+class ProcessorServer implements Processor<NodeVertxLegacy, HSetting> {
 
-    private static final ConcurrentMap<ServerType, Supplier<Processor<NodeVertx, JsonArray>>> PROCESSOR_MAP = new ConcurrentHashMap<>() {
+    private static final ConcurrentMap<ServerType, Supplier<Processor<NodeVertxLegacy, JsonArray>>> PROCESSOR_MAP = new ConcurrentHashMap<>() {
         {
             // 这三种处理服务器配置流程一模一样
             this.put(ServerType.HTTP, ProcessorOfHttp::new);
@@ -34,7 +34,7 @@ class ProcessorServer implements Processor<NodeVertx, HSetting> {
     };
 
     @Override
-    public void makeup(final NodeVertx target, final HSetting setting) {
+    public void makeup(final NodeVertxLegacy target, final HSetting setting) {
         // 服务器基础配置提取
         final JsonArray serverData = this.verifyConfig(setting);
 
@@ -49,7 +49,7 @@ class ProcessorServer implements Processor<NodeVertx, HSetting> {
 
             // 按类型分组处理，防止多余创建
             final ServerType serverType = ServerType.of(type);
-            final Supplier<Processor<NodeVertx, JsonArray>> supplier = PROCESSOR_MAP
+            final Supplier<Processor<NodeVertxLegacy, JsonArray>> supplier = PROCESSOR_MAP
                 .getOrDefault(serverType, null);
             if (Objects.nonNull(supplier)) {
                 supplier.get().makeup(target, serverA);

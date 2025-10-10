@@ -10,7 +10,7 @@ import io.vertx.ext.web.RoutingContext;
 import io.zerows.cosmic.bootstrap.ActionNext;
 import io.zerows.cosmic.bootstrap.AimAnswer;
 import io.zerows.cosmic.bootstrap.Ambit;
-import io.zerows.epoch.basicore.NodeNetwork;
+import io.zerows.epoch.configuration.NodeNetwork;
 import io.zerows.epoch.management.OCacheNode;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.mbse.action.atom.JtUri;

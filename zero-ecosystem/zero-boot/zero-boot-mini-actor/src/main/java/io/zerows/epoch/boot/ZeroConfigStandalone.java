@@ -15,5 +15,6 @@ import io.zerows.specification.configuration.HLauncher;
  *
  * @author lang : 2023-05-31
  */
+@Deprecated
 public class ZeroConfigStandalone extends ConfigNorm {
 }
