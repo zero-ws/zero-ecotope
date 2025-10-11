@@ -2,7 +2,6 @@ package io.zerows.cosmic.handler;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.eventbus.EventBus;
-import io.zerows.component.log.OLog;
 import io.zerows.cortex.Invoker;
 import io.zerows.cortex.InvokerGateway;
 import io.zerows.cortex.InvokerUtil;
@@ -14,7 +13,7 @@ import io.zerows.epoch.web.Envelop;
 import io.zerows.platform.constant.VValue;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.spi.HPI;
-import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Method;
 import java.util.HashSet;
@@ -28,6 +27,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * Recommend: Do not modify any workers that vertx zero provided.
  */
 @Worker
+@Slf4j
 public class ZeroHttpWorker extends AbstractVerticle {
 
     private static final ConcurrentMap<Integer, Invoker> INVOKER_MAP =
@@ -108,7 +108,6 @@ public class ZeroHttpWorker extends AbstractVerticle {
         }
         // Record all the information;
         if (!LOGGED.getAndSet(Boolean.TRUE)) {
-            final OLog logger = Ut.Log.boot(this.getClass());
             final ConcurrentMap<Class<?>, Set<Integer>> outputMap = new ConcurrentHashMap<>();
             INVOKER_MAP.forEach((key, value) -> {
                 if (outputMap.containsKey(value.getClass())) {
@@ -117,10 +116,9 @@ public class ZeroHttpWorker extends AbstractVerticle {
                     outputMap.put(value.getClass(), new HashSet<>());
                 }
             });
-            outputMap.forEach((key, value) -> logger.info("( Invoker ) Zero system selected {0} as invoker," +
-                    "the metadata receipt hash code = {1}, invoker size = {2}.", key,
-                String.valueOf(key.hashCode()),
-                String.valueOf(value.size()))
+            outputMap.forEach((key, value) ->
+                log.info("[ ZERO ] ( Invoker ) Zero 筛选调用者 {}, 元数据 hashCode = {}, 调用者数量 size = {}.",
+                    key, key.hashCode(), value.size())
             );
         }
     }

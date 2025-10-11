@@ -4,13 +4,13 @@ import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.zerows.component.environment.DevEnv;
-import io.zerows.component.log.OLog;
 import io.zerows.cosmic.plugins.job.metadata.Mission;
 import io.zerows.epoch.annotations.Worker;
 import io.zerows.platform.constant.VValue;
 import io.zerows.platform.enums.EmJob;
 import io.zerows.support.Ut;
 import io.zerows.support.base.FnBase;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,14 +24,14 @@ import java.util.Set;
  * conflicts
  */
 @Worker(instances = VValue.SINGLE)
+@Slf4j
 public class ZeroScheduler extends AbstractVerticle {
 
-    private static final String JOB_EMPTY = "Zero system detect no jobs, the scheduler will be stopped.";
-    private static final String JOB_CONFIG_NULL = "( Ignore ) Because there is no definition in `vertx-job.yml`, Job container is stop....";
-    private static final String JOB_MONITOR = "Zero system detect {0} jobs, the scheduler will begin....";
-    private static final String JOB_AGHA_SELECTED = "[ Job ] Agha = {0} has been selected for job {1} of type {2}";
-    private static final String JOB_STARTED = "[ Job ] All Job schedulers have been started!!!";
-    private static final OLog LOGGER = Ut.Log.vertx(ZeroScheduler.class);
+    private static final String JOB_EMPTY = "[ ZERO ] ( Job ) 系统中没有定义任何 Job，当前 Scheduler 将停止。";
+    private static final String JOB_CONFIG_NULL = "[ ZERO ] ( Job ) 任务系统未配置，任务容器 Container 将停止....";
+    private static final String JOB_MONITOR = "[ ZERO ] ( Job ) ⏳ Zero 检测到 {} 任务 @Job, Scheduler 将启动....";
+    private static final String JOB_AGHA_SELECTED = "[ ZERO ] ( Job ) Agha = {} 任务启动器，分派任务 {}, 类型 {}";
+    private static final String JOB_STARTED = "[ ZERO ] ( Job ) ✅ 所有任务调度器都成功启动!!!";
     private static final JobStore STORE = JobPin.getStore();
 
     public ZeroScheduler() {
@@ -46,16 +46,16 @@ public class ZeroScheduler extends AbstractVerticle {
             final Set<Mission> missions = STORE.fetch();
             /* Whether there exist Mission definition */
             if (missions.isEmpty()) {
-                LOGGER.info(JOB_EMPTY);
+                log.info(JOB_EMPTY);
             } else {
-                LOGGER.info(JOB_MONITOR, missions.size());
+                log.info(JOB_MONITOR, missions.size());
                 /* Start each job here by different types */
                 final List<Future<Void>> futures = new ArrayList<>();
                 missions.forEach(mission -> futures.add(this.start(mission)));
-                FnBase.combineT(futures).onSuccess(nil -> LOGGER.info(JOB_STARTED));
+                FnBase.combineT(futures).onSuccess(nil -> log.info(JOB_STARTED));
             }
         } else {
-            LOGGER.info(JOB_CONFIG_NULL);
+            log.info(JOB_CONFIG_NULL);
         }
     }
 
@@ -84,7 +84,7 @@ public class ZeroScheduler extends AbstractVerticle {
              * Invoke here to provide input
              */
             if (DevEnv.devJobBoot()) {
-                LOGGER.info(JOB_AGHA_SELECTED, agha.getClass(), mission.getCode(), mission.getType());
+                log.info(JOB_AGHA_SELECTED, agha.getClass(), mission.getCode(), mission.getType());
             }
             /*
              * If job type is ONCE, it's not started

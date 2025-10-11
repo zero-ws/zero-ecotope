@@ -30,11 +30,6 @@ class LinearAgent extends AbstractAmbiguity implements Linear {
 
 
         LinearCenter.startAsync(clazz, options, runVertx);
-
-
-        Runtime.getRuntime().addShutdownHook(
-            new Thread(() -> LinearCenter.stopAsync(clazz, options, runVertx))
-        );
     }
 
     @Override

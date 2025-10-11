@@ -1,6 +1,5 @@
 package io.zerows.cosmic.bootstrap;
 
-import io.r2mo.SourceReflect;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Vertx;
 import io.zerows.component.environment.DevMonitor;
@@ -44,7 +43,9 @@ class LinearCenter {
         final Vertx vertx = runVertx.instance();
         Objects.requireNonNull(vertx, "[ ZERO ] 发布模型中的 vertx 实例不可为空！");
 
-        vertx.deployVerticle(() -> SourceReflect.instance(classVerticle), options).onComplete(res -> {
+        log.info("[ ZERO ] ⏳ Verticle 组件 {} 发布中... instances = {}, thread = {}",
+            classVerticle.getName(), options.getInstances(), options.getThreadingModel());
+        vertx.deployVerticle(classVerticle.getName(), options).onComplete(res -> {
             final String deploymentId = res.result();
             if (res.succeeded()) {
                 log.info("[ ZERO ] ✅ Verticle 组件 {} 发布成功！( instances = {}, deploymentId = {}, thread = {} ",

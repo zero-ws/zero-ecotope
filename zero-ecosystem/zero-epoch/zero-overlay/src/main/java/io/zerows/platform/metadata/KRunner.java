@@ -23,7 +23,11 @@ public final class KRunner {
         final Thread thread = new Thread(hooker);
         // Append Thread id
         thread.setName(name + "-" + thread.threadId());
-        thread.start();
+        try {
+            thread.start();
+        } catch (final Exception e) {
+            e.printStackTrace();
+        }
         return thread;
     }
 

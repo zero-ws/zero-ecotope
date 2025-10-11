@@ -91,7 +91,7 @@ public class VertxApplication {
              * - WORKER 启动
              */
             final RunVertx runVertx = StoreVertx.of().valueGet(vertx.hashCode());
-            
+
             runInternal(runVertx, VertxComponent.AGENT);
 
             runInternal(runVertx, VertxComponent.WORKER);
@@ -102,8 +102,8 @@ public class VertxApplication {
         final Set<Class<?>> scanClass = OCacheClass.entireValue(type);
         final Linear linear = Linear.of(type);
         scanClass.forEach(scanned -> KRunner.run(
-            () -> linear.start(scanned, runVertx),                              // 发布逻辑
-            "momo-" + type.name().toLowerCase() + "-" + scanned.getName())      // 线程名称
+            () -> linear.start(scanned, runVertx),                                    // 发布逻辑
+            "momo-" + type.name().toLowerCase() + "-" + scanned.getSimpleName())      // 线程名称
         );
     }
 }

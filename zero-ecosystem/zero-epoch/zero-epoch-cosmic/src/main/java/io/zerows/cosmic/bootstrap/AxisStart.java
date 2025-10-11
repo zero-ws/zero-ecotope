@@ -5,7 +5,6 @@ import io.vertx.core.http.HttpServer;
 import io.vertx.core.http.HttpServerOptions;
 import io.vertx.ext.web.Route;
 import io.vertx.ext.web.Router;
-import io.zerows.component.log.OLog;
 import io.zerows.cortex.metadata.RunServer;
 import io.zerows.cortex.sdk.Axis;
 import io.zerows.specification.development.compiled.HBundle;
@@ -50,7 +49,6 @@ public class AxisStart implements Axis {
     }
 
     private void outRunning(final HttpServer running, final RunServer runServer) {
-        final OLog logger = Ut.Log.boot(this.getClass());
 
         // Route 处理
         final Router router = runServer.refRouter();
@@ -74,7 +72,7 @@ public class AxisStart implements Axis {
         pathSet.forEach(path -> {
             final Route route = pathMap.get(path);
             final Set<HttpMethod> methods = route.methods();
-            methods.forEach(method -> logger.info("  -->  Uri 注册: {} {}", Ut.fromAdjust(method.name(), 8), path));
+            methods.forEach(method -> log.info("  -->  Uri 注册: {} {}", Ut.fromAdjust(method.name(), 8), path));
         });
         final HttpServerOptions optionOfServer = runServer.config();
         final String prefix = optionOfServer.isSsl() ? "https" : "http";

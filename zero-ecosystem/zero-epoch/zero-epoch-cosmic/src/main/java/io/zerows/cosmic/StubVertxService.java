@@ -34,7 +34,7 @@ class StubVertxService extends AbstractAmbiguity implements StubVertx {
     }
 
     @Override
-    public synchronized Future<RunVertx> createAsync(final NodeVertx nodeVertx, final boolean clustered) {
+    public Future<RunVertx> createAsync(final NodeVertx nodeVertx, final boolean clustered) {
         Objects.requireNonNull(nodeVertx);
         final VertxBuilder builder = Vertx.builder();
         if (clustered) {
@@ -59,6 +59,10 @@ class StubVertxService extends AbstractAmbiguity implements StubVertx {
         final EventBus eventBus = vertx.eventBus();
         eventBus.registerDefaultCodec(Envelop.class, SourceReflect.singleton(CodecEnvelop.class));
         log.info("[ ZERO ] 注册编解码器：{}", CodecEnvelop.class.getName());
+
+        vertx.exceptionHandler(error -> {
+            error.printStackTrace();
+        });
 
         // 核心 RunVertx 实例
         final RunVertx runVertx = new RunVertx(config.name());

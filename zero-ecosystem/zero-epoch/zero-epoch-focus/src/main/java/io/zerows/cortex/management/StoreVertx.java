@@ -28,7 +28,7 @@ import java.util.Objects;
  */
 public interface StoreVertx extends OCache<RunVertx> {
     // 工厂部分
-    Cc<String, StoreVertx> CC_SKELETON = Cc.open();
+    Cc<String, StoreVertx> CC_SKELETON = Cc.openThread();
 
     static StoreVertx of() {
         return of(null);

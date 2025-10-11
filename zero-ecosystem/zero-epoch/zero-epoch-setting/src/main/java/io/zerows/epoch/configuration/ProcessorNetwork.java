@@ -71,7 +71,10 @@ public class ProcessorNetwork implements Processor<NodeNetwork, HSetting> {
         final HConfig serverConfig = setting.infix(EmApp.Native.SERVER);
         Objects.requireNonNull(serverConfig, "[ ZERO ] 无法找到服务器配置！");
         final JsonObject options = serverConfig.options();
-        return new HttpServerOptions(options);
+        final HttpServerOptions serverOptions = new HttpServerOptions(options);
+        serverOptions.setReusePort(true);
+        serverOptions.setReuseAddress(true);
+        return serverOptions;
     }
 
     private SockOptions sockOptions(final HSetting setting) {

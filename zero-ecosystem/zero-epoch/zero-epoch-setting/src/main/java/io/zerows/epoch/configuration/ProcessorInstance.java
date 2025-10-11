@@ -70,7 +70,9 @@ public class ProcessorInstance implements Processor<NodeNetwork, ConfigContainer
             } else {
                 agentOptions.setInstances(64);
             }
-            agentOptions.setWorkerPoolSize(128).setHa(true).setThreadingModel(ThreadingModel.EVENT_LOOP);
+            agentOptions
+                .setHa(true)
+                .setThreadingModel(ThreadingModel.EVENT_LOOP);
             vertx.agentOptions(agentOptions);
             log.info("[ ZERO ] ( Deployment ) \uD83D\uDFE4 Agent 配置：instances {}, thread = {}, ha = {}",
                 agentOptions.getInstances(), agentOptions.getThreadingModel(), agentOptions.isHa());
@@ -83,7 +85,11 @@ public class ProcessorInstance implements Processor<NodeNetwork, ConfigContainer
             } else {
                 workerOptions.setInstances(128);
             }
-            workerOptions.setWorkerPoolSize(256).setHa(true).setThreadingModel(ThreadingModel.WORKER);
+            workerOptions
+                .setWorkerPoolName("__RACHEL_MOMO__")
+                .setWorkerPoolSize(256)
+                .setHa(true)
+                .setThreadingModel(ThreadingModel.WORKER);
             vertx.workerOptions(workerOptions);
             log.info("[ ZERO ] ( Deployment ) \uD83D\uDFE4 Worker 配置：instances {}, thread = {}, ha = {}",
                 workerOptions.getInstances(), workerOptions.getThreadingModel(), workerOptions.isHa());
