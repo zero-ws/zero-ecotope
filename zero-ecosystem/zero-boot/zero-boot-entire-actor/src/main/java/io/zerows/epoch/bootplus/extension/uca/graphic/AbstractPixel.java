@@ -3,7 +3,7 @@ package io.zerows.epoch.bootplus.extension.uca.graphic;
 import io.zerows.epoch.bootplus.extension.refine.Ox;
 import io.vertx.core.Future;
 import io.zerows.epoch.constant.KWeb;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.plugins.store.neo4j.Neo4jClient;
 import io.zerows.plugins.store.neo4j.Neo4jInfix;
 
@@ -26,7 +26,7 @@ abstract class AbstractPixel implements Pixel {
         return Ox.runSafe(this.getClass(), input, executor);
     }
 
-    protected Annal logger() {
-        return Annal.get(this.getClass());
+    protected LogOf logger() {
+        return LogOf.get(this.getClass());
     }
 }

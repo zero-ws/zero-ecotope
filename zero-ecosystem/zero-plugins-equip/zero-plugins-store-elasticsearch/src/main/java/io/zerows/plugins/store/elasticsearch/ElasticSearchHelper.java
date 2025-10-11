@@ -4,7 +4,7 @@ import io.r2mo.function.Fn;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.epoch.application.YmlCore;
 import io.zerows.plugins.store.elasticsearch.exception._20006Exception404MissingConfiguration;
 import io.zerows.support.Ut;
@@ -42,7 +42,7 @@ import java.util.concurrent.TimeUnit;
  */
 
 public class ElasticSearchHelper {
-    private static final Annal LOGGER = Annal.get(ElasticSearchHelper.class);
+    private static final LogOf LOGGER = LogOf.get(ElasticSearchHelper.class);
     private static final Cc<String, ElasticSearchHelper> CC_HELPER = Cc.open();
 
     private transient final Class<?> target;

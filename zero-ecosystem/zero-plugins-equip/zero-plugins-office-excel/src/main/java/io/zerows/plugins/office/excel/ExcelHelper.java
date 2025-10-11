@@ -5,7 +5,7 @@ import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.epoch.basicore.MDConnect;
 import io.zerows.epoch.jigsaw.Oneness;
@@ -263,7 +263,7 @@ class ExcelHelper {
         });
         final int ignored = counter.get();
         if (0 < ignored) {
-            final Annal annal = Annal.get(this.target);
+            final LogOf annal = LogOf.get(this.target);
             annal.warn("[ Έξοδος ] Ignore table `{0}` with size `{1}`", table.getName(), ignored);
         }
         // Entity Release

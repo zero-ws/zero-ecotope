@@ -1,7 +1,7 @@
 package io.zerows.extension.mbse.basement.uca.dao.internal;
 
 import io.r2mo.function.Fn;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.component.qr.Criteria;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.atom.data.DataEvent;
@@ -84,7 +84,7 @@ public abstract class AbstractUtil<T extends AoBinder> implements AoBinder<T> {
     }
 
 
-    protected Annal getLogger() {
-        return Annal.get(this.getClass());
+    protected LogOf getLogger() {
+        return LogOf.get(this.getClass());
     }
 }

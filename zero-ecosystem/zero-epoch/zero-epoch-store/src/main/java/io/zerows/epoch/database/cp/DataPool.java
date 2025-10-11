@@ -1,7 +1,7 @@
 package io.zerows.epoch.database.cp;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.epoch.database.Database;
 import io.zerows.platform.metadata.KDatabase;
 import io.zerows.support.Ut;
@@ -31,7 +31,7 @@ public interface DataPool {
 
     static DataPool create(final KDatabase database) {
         return CC_POOL_DYNAMIC.pick(() -> {
-            final OLog logger = Ut.Log.database(DataPool.class);
+            final LogO logger = Ut.Log.database(DataPool.class);
             final DataPool ds = new HikariDataPool(database);
             logger.info("[ DP ] Data Pool Hash : {0}, URL: {1}",
                 String.valueOf(ds.hashCode()), database.getUrl());

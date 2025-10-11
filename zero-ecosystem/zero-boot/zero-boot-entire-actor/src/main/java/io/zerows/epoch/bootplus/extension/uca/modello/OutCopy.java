@@ -4,7 +4,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.metadata.Kv;
 import io.zerows.epoch.constant.KName;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.support.Ut;
 import io.zerows.specification.modeling.HRecord;
 import io.zerows.specification.modeling.property.OComponent;
@@ -18,7 +18,7 @@ import java.util.concurrent.ConcurrentMap;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 public class OutCopy implements OComponent {
-    private static final Annal LOGGER = Annal.get(OutCopy.class);
+    private static final LogOf LOGGER = LogOf.get(OutCopy.class);
 
     @Override
     public Object after(final Kv<String, Object> kv, final HRecord record, final JsonObject combineData) {

@@ -3,7 +3,7 @@ package io.zerows.extension.runtime.crud.uca.input;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
 import io.zerows.mbse.metadata.KModule;
 import io.zerows.epoch.metadata.KField;
@@ -28,7 +28,7 @@ import static io.zerows.extension.runtime.skeleton.refine.Ke.LOG;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 class SerialPre implements Pre {
-    private static final Annal LOGGER = Annal.get(SerialPre.class);
+    private static final LogOf LOGGER = LogOf.get(SerialPre.class);
 
     @Override
     public Future<JsonObject> inJAsync(final JsonObject data, final IxMod in) {

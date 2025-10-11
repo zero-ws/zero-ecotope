@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.platform.constant.VString;
 import io.zerows.integrated.jackson.JsonArrayDeserializer;
 import io.zerows.integrated.jackson.JsonArraySerializer;
@@ -58,7 +58,7 @@ import java.util.stream.Stream;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 public class RRule implements Serializable {
-    private static final Annal LOGGER = Annal.get(RRule.class);
+    private static final LogOf LOGGER = LogOf.get(RRule.class);
     @JsonSerialize(using = JsonObjectSerializer.class)
     @JsonDeserialize(using = JsonObjectDeserializer.class)
     private JsonObject condition;

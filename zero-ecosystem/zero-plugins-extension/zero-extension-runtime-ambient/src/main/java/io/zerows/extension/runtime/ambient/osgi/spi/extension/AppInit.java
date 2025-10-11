@@ -3,7 +3,7 @@ package io.zerows.extension.runtime.ambient.osgi.spi.extension;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XAppDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XApp;
@@ -20,7 +20,7 @@ import static io.zerows.extension.runtime.ambient.util.At.LOG;
  * EmApp Initialization
  */
 public class AppInit implements Init {
-    private static final Annal LOGGER = Annal.get(AppInit.class);
+    private static final LogOf LOGGER = LogOf.get(AppInit.class);
 
     @Override
     public Function<JsonObject, Future<JsonObject>> apply() {

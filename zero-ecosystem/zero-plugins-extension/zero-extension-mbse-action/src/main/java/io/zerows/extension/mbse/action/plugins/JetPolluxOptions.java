@@ -1,7 +1,7 @@
 package io.zerows.extension.mbse.action.plugins;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.cortex.sdk.Axis;
 import io.zerows.epoch.application.YmlCore;
 import io.zerows.extension.mbse.action.atom.JtUri;
@@ -84,7 +84,7 @@ class JetPolluxOptions {
      * @return 满足 true
      */
     boolean isReady(final HBundle owner) {
-        final OLog logger = Ut.Log.configure(this.getClass());
+        final LogO logger = Ut.Log.configure(this.getClass());
         final String classSelf = this.getClass().getSimpleName();
         if (VValue.ZERO == LOG_OPTION.getAndIncrement()) {
             logger.info(INFO.DYNAMIC_DETECT, classSelf);

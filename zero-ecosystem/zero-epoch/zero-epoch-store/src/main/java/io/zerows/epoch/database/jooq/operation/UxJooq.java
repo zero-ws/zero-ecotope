@@ -5,7 +5,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.application.YmlCore;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.component.qr.Sorter;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.constant.VValue;
@@ -31,7 +31,7 @@ import java.util.function.BiPredicate;
 public class UxJooq {
     private static final Cc<String, UxJooq> CC_JOOQ = Cc.openThread();
 
-    private static final OLog LOGGER = Ut.Log.ux(UxJooq.class);
+    private static final LogO LOGGER = Ut.Log.ux(UxJooq.class);
 
     private transient final Class<?> clazz;
     /* Analyzer */

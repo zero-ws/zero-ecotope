@@ -3,7 +3,7 @@ package io.zerows.extension.runtime.ambient.util;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.epoch.assembly.DiPlugin;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.runtime.ambient.agent.service.file.DocBStub;
@@ -24,7 +24,7 @@ import static io.zerows.extension.runtime.ambient.util.At.LOG;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 class AtFsDir {
-    private static final Annal LOGGER = Annal.get(AtFsDir.class);
+    private static final LogOf LOGGER = LogOf.get(AtFsDir.class);
     private static final DiPlugin PLUGIN = DiPlugin.create(AtFs.class);
 
     /**

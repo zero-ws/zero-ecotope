@@ -2,7 +2,7 @@ package io.zerows.epoch.assembly;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.name.Names;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.support.Ut;
 import jakarta.inject.Named;
 
@@ -19,7 +19,7 @@ import java.util.concurrent.ConcurrentMap;
  */
 @Deprecated
 public class DiJsr<I, T extends I> extends AbstractModule {
-    private static final OLog LOGGER = Ut.Log.uca(DiJsr.class);
+    private static final LogO LOGGER = Ut.Log.uca(DiJsr.class);
     private final transient ConcurrentMap<Class<I>, Set<Class<T>>> classes
         = new ConcurrentHashMap<>();
 

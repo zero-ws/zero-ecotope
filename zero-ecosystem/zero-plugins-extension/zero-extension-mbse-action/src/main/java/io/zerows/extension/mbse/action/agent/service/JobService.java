@@ -2,7 +2,7 @@ package io.zerows.extension.mbse.action.agent.service;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.component.qr.syntax.Ir;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.mbse.action.domain.tables.daos.IJobDao;
@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 import static io.zerows.extension.mbse.action.util.Jt.LOG;
 
 public class JobService implements JobStub {
-    private static final Annal LOGGER = Annal.get(JobService.class);
+    private static final LogOf LOGGER = LogOf.get(JobService.class);
     @Inject
     private transient AmbientStub ambient;
 

@@ -1,13 +1,13 @@
 package io.zerows.plugins.office.excel.atom;
 
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import org.apache.poi.ss.util.CellRangeAddress;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 public class ExPos {
-    private static final Annal LOGGER = Annal.get(ExPos.class);
+    private static final LogOf LOGGER = LogOf.get(ExPos.class);
     private final transient int rowIndex;
     private final transient int colIndex;
 

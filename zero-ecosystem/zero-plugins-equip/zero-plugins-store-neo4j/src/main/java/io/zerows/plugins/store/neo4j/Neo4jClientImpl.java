@@ -5,7 +5,7 @@ import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.support.Ut;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.plugins.store.neo4j.refine.N4J;
 import io.zerows.plugins.store.neo4j.sync.GraphicAnalyzer;
 import io.zerows.plugins.store.neo4j.sync.N4JSession;
@@ -15,7 +15,7 @@ import org.neo4j.driver.GraphDatabase;
 import java.util.Objects;
 
 public class Neo4jClientImpl implements Neo4jClient {
-    private static final Annal LOGGER = Annal.get(Neo4jClientImpl.class);
+    private static final LogOf LOGGER = LogOf.get(Neo4jClientImpl.class);
     private transient final Vertx vertx;
 
     /* Configuration */

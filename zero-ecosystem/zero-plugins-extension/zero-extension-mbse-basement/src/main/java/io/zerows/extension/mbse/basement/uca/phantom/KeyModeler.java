@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.extension.mbse.basement.domain.tables.daos.MKeyDao;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MKey;
 import io.zerows.program.Ux;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.function.Function;
 
 class KeyModeler implements AoModeler {
-    private static final Annal LOGGER = Annal.get(FieldModeler.class);
+    private static final LogOf LOGGER = LogOf.get(FieldModeler.class);
 
     @Override
     public Function<JsonObject, Future<JsonObject>> apply() {

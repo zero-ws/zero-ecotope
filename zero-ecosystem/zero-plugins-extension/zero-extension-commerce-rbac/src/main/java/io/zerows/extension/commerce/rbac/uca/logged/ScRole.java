@@ -4,7 +4,7 @@ import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.zerows.component.environment.DevEnv;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.cosmic.plugins.cache.Rapid;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.RRolePermDao;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.RRolePerm;
@@ -29,7 +29,7 @@ import static io.zerows.extension.commerce.rbac.util.Sc.LOG;
  */
 public class ScRole {
     private static final Cc<String, ScRole> CC_ROLE = Cc.open();
-    private static final Annal LOGGER = Annal.get(ScRole.class);
+    private static final LogOf LOGGER = LogOf.get(ScRole.class);
     private final transient Rapid<String, JsonArray> cache;
     private final transient String roleId;
     private final transient Set<String> authorities = new HashSet<>();

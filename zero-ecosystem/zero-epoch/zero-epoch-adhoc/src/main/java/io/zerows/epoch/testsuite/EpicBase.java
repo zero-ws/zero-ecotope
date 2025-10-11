@@ -3,7 +3,7 @@ package io.zerows.epoch.testsuite;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.platform.metadata.KIntegration;
 import io.zerows.component.qr.Criteria;
 import io.zerows.epoch.database.Database;
@@ -78,7 +78,7 @@ public abstract class EpicBase {
         return Ut.ioJArray(this.ioString(filename));
     }
 
-    protected OLog logger() {
+    protected LogO logger() {
         return Ut.Log.test(this.getClass());
     }
 

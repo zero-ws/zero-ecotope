@@ -3,7 +3,7 @@ package io.zerows.epoch.metadata;
 import io.r2mo.typed.cc.Cc;
 import io.reactivex.rxjava3.core.Observable;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.support.Ut;
 
 import java.text.MessageFormat;
@@ -21,7 +21,7 @@ public class MMPojoMapping {
 
     private static final String POJO = "pojo/{0}.yml";
     private static final Cc<String, MMPojo> CC_MOJO = Cc.open();
-    private final OLog logger;
+    private final LogO logger;
     private final JsonObject converted = new JsonObject();
     private MMPojo mojo;
     private JsonObject data = new JsonObject();

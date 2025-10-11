@@ -2,7 +2,7 @@ package io.zerows.extension.runtime.ambient.osgi.spi.extension;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.cosmic.plugins.cache.Rapid;
@@ -17,7 +17,7 @@ import static io.zerows.extension.runtime.ambient.util.At.LOG;
 
 public class DatabaseInit implements Init {
 
-    private static final Annal LOGGER = Annal.get(DatabaseInit.class);
+    private static final LogOf LOGGER = LogOf.get(DatabaseInit.class);
 
     @Override
     public Function<JsonObject, Future<JsonObject>> apply() {

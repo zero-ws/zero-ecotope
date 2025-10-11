@@ -3,7 +3,7 @@ package io.zerows.extension.runtime.skeleton.refine;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.management.OCacheUri;
 import io.zerows.epoch.metadata.KView;
@@ -17,7 +17,7 @@ import io.zerows.program.Ux;
  */
 class KeCache {
 
-    private static final Annal LOGGER = Annal.get(KeCache.class);
+    private static final LogOf LOGGER = LogOf.get(KeCache.class);
     private static final String LOGGER_VIEW = "Input view = {1}, Try cacheKey: \u001b[0;34m{0}\u001b[m, uri = {2}, method = {3}";
 
     static String keyView(final String method, final String uri, final KView view) {

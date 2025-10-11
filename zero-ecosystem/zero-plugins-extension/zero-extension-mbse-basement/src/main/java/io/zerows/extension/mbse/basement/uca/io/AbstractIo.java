@@ -1,6 +1,6 @@
 package io.zerows.extension.mbse.basement.uca.io;
 
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.extension.mbse.basement.atom.element.DataRow;
 import io.zerows.extension.mbse.basement.atom.element.DataTpl;
 
@@ -51,8 +51,8 @@ public abstract class AbstractIo implements AoIo {
         return this;
     }
 
-    protected Annal getLogger() {
-        return Annal.get(this.getClass());
+    protected LogOf getLogger() {
+        return LogOf.get(this.getClass());
     }
 
     DataRow newRow() {

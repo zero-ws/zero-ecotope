@@ -1,6 +1,6 @@
 package io.zerows.cosmic.plugins.job.metadata;
 
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.cosmic.plugins.job.JobMessage;
 import io.zerows.platform.constant.VValue;
 import io.zerows.support.Ut;
@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 public class KScheduler implements Serializable {
-    private static final OLog LOGGER = Ut.Log.metadata(KScheduler.class);
+    private static final LogO LOGGER = Ut.Log.metadata(KScheduler.class);
     private final String unique;
     /*
      * duration information of two Job

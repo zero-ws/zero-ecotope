@@ -1,6 +1,6 @@
 package io.zerows.cosmic.plugins.validation;
 
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.support.Ut;
 import jakarta.validation.MessageInterpolator;
 import jakarta.validation.ValidationException;
@@ -25,7 +25,7 @@ import java.util.regex.Pattern;
 public abstract class ValidatorMessager implements MessageInterpolator {
     public static final String USER_VALIDATION_MESSAGES = "vertx-validation";
     public static final String CONTRIBUTOR_VALIDATION_MESSAGES = "ContributorValidationMessages";
-    private static final OLog LOGGER = Ut.Log.uca(ValidatorMessager.class);
+    private static final LogO LOGGER = Ut.Log.uca(ValidatorMessager.class);
     private static final int DEFAULT_INITIAL_CAPACITY = 100;
     private static final float DEFAULT_LOAD_FACTOR = 0.75F;
     private static final int DEFAULT_CONCURRENCY_LEVEL = 16;

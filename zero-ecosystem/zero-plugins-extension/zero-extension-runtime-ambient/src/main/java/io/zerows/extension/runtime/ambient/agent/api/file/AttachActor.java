@@ -3,7 +3,7 @@ package io.zerows.extension.runtime.ambient.agent.api.file;
 import io.vertx.core.Future;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.constant.KName;
@@ -20,7 +20,7 @@ import static io.zerows.extension.runtime.ambient.util.At.LOG;
 @Queue
 public class AttachActor {
 
-    private static final Annal LOGGER = Annal.get(AttachActor.class);
+    private static final LogOf LOGGER = LogOf.get(AttachActor.class);
 
     @Inject
     private transient DocRStub reader;

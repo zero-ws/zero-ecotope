@@ -5,7 +5,7 @@ import io.vertx.core.Future;
 import io.vertx.core.http.HttpHeaders;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.cortex.metadata.WebRequest;
 import io.zerows.cortex.metadata.WebRule;
 import io.zerows.cosmic.exception._60052Exception411ContentLength;
@@ -25,7 +25,7 @@ import java.util.Map;
 class AimFlower {
 
     public static final String RIGOR_NOT_FOUND = "Zero system could not find Rigor for type = {0}.";
-    private static final Annal LOGGER = Annal.get(AimFlower.class);
+    private static final LogOf LOGGER = LogOf.get(AimFlower.class);
 
     static <T> Future<Envelop> next(final RoutingContext context,
                                     final T entity) {

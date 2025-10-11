@@ -2,14 +2,14 @@ package io.zerows.program;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.cosmic.plugins.job.client.JobClient;
 import io.zerows.cosmic.plugins.job.client.JobInfix;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
 
 public class UxJob {
-    private static final OLog LOGGER = Ut.Log.job(UxJob.class);
+    private static final LogO LOGGER = Ut.Log.job(UxJob.class);
     private transient final JobClient client;
 
     UxJob() {

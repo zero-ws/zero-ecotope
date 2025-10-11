@@ -7,7 +7,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.component.environment.DevEnv;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.cosmic.plugins.cache.Rapid;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
@@ -19,7 +19,7 @@ import java.util.Objects;
  */
 class AuthorizationCache {
 
-    private static final Annal LOGGER = Annal.get(AuthorizationCache.class);
+    private static final LogOf LOGGER = LogOf.get(AuthorizationCache.class);
 
     private static String requestKey(final RoutingContext context) {
         final HttpServerRequest request = context.request();

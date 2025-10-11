@@ -1,7 +1,7 @@
 package io.zerows.extension.mbse.basement.uca.query;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.component.qr.Criteria;
 import io.zerows.component.qr.Sorter;
 import io.zerows.component.qr.syntax.QTree;
@@ -22,7 +22,7 @@ import static io.zerows.extension.mbse.basement.util.Ao.LOG;
 
 class DirectIngest implements Ingest {
 
-    private static final Annal LOGGER = Annal.get(DirectIngest.class);
+    private static final LogOf LOGGER = LogOf.get(DirectIngest.class);
 
     @Override
     public Condition onCondition(final DataTpl tpl,

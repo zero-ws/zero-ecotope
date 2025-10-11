@@ -2,7 +2,7 @@ package io.zerows.program;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.epoch.application.YmlCore;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.management.OZeroStore;
@@ -21,7 +21,7 @@ import java.util.function.Supplier;
  */
 class Plugin {
     private static final JsonObject PLUGIN_CONFIG = new JsonObject();
-    private static final OLog LOGGER = Ut.Log.ux(Plugin.class);
+    private static final LogO LOGGER = Ut.Log.ux(Plugin.class);
 
     /*
      * I/O read for config loading.

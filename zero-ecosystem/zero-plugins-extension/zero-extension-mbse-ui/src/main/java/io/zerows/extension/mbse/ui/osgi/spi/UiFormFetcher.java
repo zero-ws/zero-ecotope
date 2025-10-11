@@ -2,7 +2,7 @@ package io.zerows.extension.mbse.ui.osgi.spi;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.mbse.ui.agent.service.FieldService;
 import io.zerows.extension.mbse.ui.agent.service.FormService;
@@ -17,7 +17,7 @@ import static io.zerows.extension.mbse.ui.util.Ui.LOG;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 public class UiFormFetcher implements Form {
-    private final static Annal LOGGER = Annal.get(UiFormFetcher.class);
+    private final static LogOf LOGGER = LogOf.get(UiFormFetcher.class);
 
     @Override
     public Future<JsonObject> fetchUi(final JsonObject params) {

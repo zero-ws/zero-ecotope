@@ -4,7 +4,7 @@ import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.support.Ut;
 import io.zerows.extension.runtime.report.atom.RGeneration;
 import io.zerows.extension.runtime.report.domain.tables.pojos.KpReportInstance;
@@ -22,7 +22,7 @@ public interface StepGenerator {
 
     Future<KpReportInstance> build(KpReportInstance instance, JsonObject request, JsonArray sourceData);
 
-    default OLog logger() {
+    default LogO logger() {
         return Ut.Log.data(this.getClass());
     }
 }

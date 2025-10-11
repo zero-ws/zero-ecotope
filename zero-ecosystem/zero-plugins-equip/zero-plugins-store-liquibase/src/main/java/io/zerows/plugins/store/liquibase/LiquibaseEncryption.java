@@ -1,6 +1,6 @@
 package io.zerows.plugins.store.liquibase;
 
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.epoch.constant.KName;
 import io.zerows.platform.ENV;
 import io.zerows.platform.EnvironmentVariable;
@@ -12,7 +12,7 @@ import java.util.Properties;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 public class LiquibaseEncryption extends Properties {
-    private static final OLog LOGGER = Ut.Log.plugin(LiquibaseEncryption.class);
+    private static final LogO LOGGER = Ut.Log.plugin(LiquibaseEncryption.class);
 
     public LiquibaseEncryption() {
         super.defaults = new Properties();

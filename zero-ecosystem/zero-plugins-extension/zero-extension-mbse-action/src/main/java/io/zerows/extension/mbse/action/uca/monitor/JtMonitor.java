@@ -3,7 +3,7 @@ package io.zerows.extension.mbse.action.uca.monitor;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.support.Ut;
 import io.zerows.extension.mbse.action.atom.JtUri;
 import io.zerows.extension.mbse.action.eon.JtMsg;
@@ -16,13 +16,13 @@ import static io.zerows.extension.mbse.action.util.Jt.LOG;
 public class JtMonitor {
 
     private static final Cc<Class<?>, JtMonitor> CC_MONITOR = Cc.open();
-    private transient final Annal logger;
+    private transient final LogOf logger;
     private transient final String name;
     private transient final JtAtomic atomic = new JtAtomic();
 
     private JtMonitor(final Class<?> clazz) {
         this.name = clazz.getName();
-        this.logger = Annal.get(clazz);
+        this.logger = LogOf.get(clazz);
     }
 
     public static JtMonitor create(final Class<?> clazz) {

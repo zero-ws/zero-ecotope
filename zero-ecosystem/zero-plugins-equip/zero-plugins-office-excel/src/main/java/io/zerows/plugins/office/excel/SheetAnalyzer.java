@@ -1,7 +1,7 @@
 package io.zerows.plugins.office.excel;
 
 import io.zerows.component.environment.DevEnv;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.epoch.basicore.MDConnect;
 import io.zerows.epoch.management.OCacheConfiguration;
 import io.zerows.platform.constant.VValue;
@@ -35,7 +35,7 @@ import java.util.concurrent.ConcurrentMap;
  * web ExTable here.
  */
 public class SheetAnalyzer implements Serializable {
-    private static final OLog LOGGER = Ut.Log.plugin(SheetAnalyzer.class);
+    private static final LogO LOGGER = Ut.Log.plugin(SheetAnalyzer.class);
     private final transient Sheet sheet;
     private transient FormulaEvaluator evaluator;
     private transient ExIn scanner;

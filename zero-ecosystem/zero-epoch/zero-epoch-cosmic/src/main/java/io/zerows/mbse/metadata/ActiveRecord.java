@@ -1,7 +1,7 @@
 package io.zerows.mbse.metadata;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.specification.modeling.HRecord;
 import io.zerows.support.Ut;
 
@@ -22,7 +22,7 @@ public abstract class ActiveRecord implements HRecord {
      */
     private final transient JsonObject data = new JsonObject();
 
-    protected OLog logger() {
+    protected LogO logger() {
         return Ut.Log.data(this.getClass());
     }
 

@@ -1,7 +1,7 @@
 package io.zerows.extension.runtime.skeleton.osgi.spi.ui;
 
 import io.zerows.epoch.database.jooq.operation.UxJooq;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 
 /*
  * All sub-class for extension of Jooq type
@@ -23,7 +23,7 @@ public abstract class Anchoret<T> {
         return this.jooq;
     }
 
-    protected Annal getLogger() {
-        return Annal.get(this.getClass());
+    protected LogOf getLogger() {
+        return LogOf.get(this.getClass());
     }
 }

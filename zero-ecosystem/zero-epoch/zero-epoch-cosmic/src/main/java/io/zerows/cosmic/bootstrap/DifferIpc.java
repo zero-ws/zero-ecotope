@@ -1,7 +1,7 @@
 package io.zerows.cosmic.bootstrap;
 
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.cortex.sdk.Aim;
 import io.zerows.cosmic.exception._40013Exception500ReturnType;
 import io.zerows.epoch.basicore.WebEvent;
@@ -11,7 +11,7 @@ import java.lang.reflect.Method;
 
 class DifferIpc implements Differ<RoutingContext> {
 
-    private static final Annal LOGGER = Annal.get(DifferIpc.class);
+    private static final LogOf LOGGER = LogOf.get(DifferIpc.class);
 
     private DifferIpc() {
     }

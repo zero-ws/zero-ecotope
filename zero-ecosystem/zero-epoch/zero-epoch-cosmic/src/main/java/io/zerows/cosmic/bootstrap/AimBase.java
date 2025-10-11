@@ -9,7 +9,7 @@ import io.vertx.core.eventbus.Message;
 import io.vertx.core.http.Cookie;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.Session;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.cortex.InvokerUtil;
 import io.zerows.cortex.metadata.WebRequest;
 import io.zerows.cortex.metadata.WebRule;
@@ -125,8 +125,8 @@ public abstract class AimBase {
         return this.verifier;
     }
 
-    protected Annal getLogger() {
-        return Annal.get(this.getClass());
+    protected LogOf getLogger() {
+        return LogOf.get(this.getClass());
     }
 
     protected void executeRequest(final RoutingContext context,

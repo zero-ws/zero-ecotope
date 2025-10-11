@@ -4,7 +4,7 @@ import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.constant.VString;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.extension.mbse.basement.atom.element.DataMatrix;
 import io.zerows.extension.mbse.basement.exception._80524Exception500TableCounter;
 import org.jooq.*;
@@ -25,7 +25,7 @@ import static io.zerows.extension.mbse.basement.util.Ao.LOG;
 @SuppressWarnings("all")
 class Meta {
 
-    private static final Annal LOGGER = Annal.get(Meta.class);
+    private static final LogOf LOGGER = LogOf.get(Meta.class);
 
     static Table<Record> table(final String name) {
         return DSL.table(DSL.name(name));

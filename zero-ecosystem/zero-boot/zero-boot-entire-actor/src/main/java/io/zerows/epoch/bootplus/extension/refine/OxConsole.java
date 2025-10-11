@@ -2,7 +2,7 @@ package io.zerows.epoch.bootplus.extension.refine;
 
 import io.vertx.core.Future;
 import io.zerows.component.environment.DevEnv;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.plugins.common.shell.refine.Sl;
 import io.zerows.plugins.store.elasticsearch.ElasticSearchClient;
@@ -29,7 +29,7 @@ final class OxConsole {
     /**
      * Zero专用日志器
      */
-    private static final Annal LOGGER = Annal.get(OxConsole.class);
+    private static final LogOf LOGGER = LogOf.get(OxConsole.class);
 
     /*
      * 私有构造函数（工具类转换）

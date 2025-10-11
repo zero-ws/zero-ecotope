@@ -13,7 +13,7 @@ import io.vertx.ext.web.handler.AuthenticationHandler;
 import io.vertx.ext.web.handler.AuthorizationHandler;
 import io.vertx.ext.web.handler.impl.AuthenticationHandlerImpl;
 import io.vertx.ext.web.handler.impl.HTTPAuthorizationHandler;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.epoch.metadata.security.Aegis;
 import io.zerows.epoch.metadata.security.AegisItem;
 import io.zerows.platform.enums.EmSecure;
@@ -112,7 +112,7 @@ public abstract class AbstractLee implements LeeBuiltIn {
         return (T) item.options().getValue(key, null);
     }
 
-    protected Annal logger() {
-        return Annal.get(this.getClass());
+    protected LogOf logger() {
+        return LogOf.get(this.getClass());
     }
 }

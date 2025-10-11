@@ -19,38 +19,38 @@ public final class Log {
      * 4. Class<?> 传入 -> BridgeAnnal(Class<?>) -> Log4JAnnal(Class<?>)
      */
     public static <I> void fatal(final I input, final Throwable ex) {
-        final Annal annal = logger(input);
+        final LogOf annal = logger(input);
         annal.fatal(ex);
     }
 
     public static <I> void info(final I input, final String message, final Object... args) {
-        final Annal annal = logger(input);
+        final LogOf annal = logger(input);
         annal.info(message, args);
     }
 
     public static <I> void warn(final I input, final String message, final Object... args) {
-        final Annal annal = logger(input);
+        final LogOf annal = logger(input);
         annal.warn(message, args);
     }
 
     public static <I> void error(final I input, final String message, final Object... args) {
-        final Annal annal = logger(input);
+        final LogOf annal = logger(input);
         annal.error(message, args);
     }
 
     public static <I> void debug(final I input, final String message, final Object... args) {
-        final Annal annal = logger(input);
+        final LogOf annal = logger(input);
         annal.debug(message, args);
     }
 
-    static <I> Annal logger(final I input) {
+    static <I> LogOf logger(final I input) {
         if (input instanceof Logger) {
             Objects.requireNonNull(input);
             // 确保不重复创建
-            return Annal.CC_LOGGER_EXTENSION.pick(() -> new Log4JAnnal((Logger) input), input.hashCode());
+            return LogOf.CC_LOGGER_EXTENSION.pick(() -> new Log4JAnnal((Logger) input), input.hashCode());
         } else {
             // 内部方法自带缓存
-            return Annal.get((Class<?>) input);
+            return LogOf.get((Class<?>) input);
         }
     }
 }

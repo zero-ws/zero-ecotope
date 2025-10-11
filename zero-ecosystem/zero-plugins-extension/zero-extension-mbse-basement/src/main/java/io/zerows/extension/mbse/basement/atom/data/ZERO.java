@@ -1,7 +1,7 @@
 package io.zerows.extension.mbse.basement.atom.data;
 
 import io.r2mo.function.Fn;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.support.Ut;
 import io.zerows.extension.mbse.basement.atom.Model;
 import io.zerows.extension.mbse.basement.atom.Schema;
@@ -130,7 +130,7 @@ class Bridge {
 
 class Debug {
 
-    private static final Annal LOGGER = Annal.get(Debug.class);
+    private static final LogOf LOGGER = LogOf.get(Debug.class);
 
     public static void tpl(final DataTpl tpl) {
         /* DataAtom 处理 */

@@ -3,7 +3,7 @@ package io.zerows.epoch.database.jooq.util;
 import io.r2mo.function.Fn;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.epoch.database.exception._40057Exception500JooqCombine;
 import io.zerows.epoch.database.exception._40059Exception500JooqFieldMissing;
 import io.zerows.epoch.database.jooq.JooqDsl;
@@ -36,7 +36,7 @@ import static org.jooq.impl.DSL.row;
 @SuppressWarnings("all")
 public class JqAnalyzer {
 
-    private static final OLog LOGGER = Ut.Log.database(JqAnalyzer.class);
+    private static final LogO LOGGER = Ut.Log.database(JqAnalyzer.class);
     private static final ConcurrentMap<Integer, JooqDsl> DAO_POOL =
         new ConcurrentHashMap<>();
 

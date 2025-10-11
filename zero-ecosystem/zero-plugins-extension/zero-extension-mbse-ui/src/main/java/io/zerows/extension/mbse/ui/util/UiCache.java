@@ -3,7 +3,7 @@ package io.zerows.extension.mbse.ui.util;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.support.Ut;
 import io.zerows.cosmic.plugins.cache.Rapid;
 import io.zerows.extension.mbse.ui.bootstrap.UiPin;
@@ -17,7 +17,7 @@ import static io.zerows.extension.mbse.ui.util.Ui.LOG;
  */
 class UiCache {
 
-    private static final Annal LOGGER = Annal.get(UiCache.class);
+    private static final LogOf LOGGER = LogOf.get(UiCache.class);
 
     public static Future<JsonObject> cacheControl(final JsonObject body,
                                                   final Supplier<Future<JsonObject>> executor) {

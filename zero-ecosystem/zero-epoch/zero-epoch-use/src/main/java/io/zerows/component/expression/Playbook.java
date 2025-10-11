@@ -2,7 +2,7 @@ package io.zerows.component.expression;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.support.Ut;
 import org.apache.commons.jexl3.JexlBuilder;
 import org.apache.commons.jexl3.JexlContext;
@@ -52,7 +52,7 @@ import java.io.Serializable;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 public class Playbook implements Serializable {
-    private static final OLog LOGGER = Ut.Log.plugin(Playbook.class);
+    private static final LogO LOGGER = Ut.Log.plugin(Playbook.class);
     private static final JexlEngine EXPR = new JexlBuilder().cache(4096).silent(false).create();
 
     private final String expression;

@@ -2,7 +2,7 @@ package io.zerows.platform.metadata;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.support.base.UtBase;
 
 import java.util.Objects;
@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 class KDictData {
-    private static final Annal LOGGER = Annal.get(KDictData.class);
+    private static final LogOf LOGGER = LogOf.get(KDictData.class);
     private final ConcurrentMap<String, JsonArray> dictData
         = new ConcurrentHashMap<>();
 

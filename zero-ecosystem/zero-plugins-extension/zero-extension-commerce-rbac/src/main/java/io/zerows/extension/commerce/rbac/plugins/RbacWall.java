@@ -8,7 +8,7 @@ import io.zerows.epoch.annotations.security.Authorized;
 import io.zerows.epoch.annotations.security.AuthorizedResource;
 import io.zerows.epoch.annotations.security.Wall;
 import io.zerows.epoch.constant.KName;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.extension.commerce.rbac.agent.service.accredit.AccreditStub;
 import io.zerows.extension.commerce.rbac.agent.service.login.jwt.JwtStub;
 import io.zerows.extension.commerce.rbac.eon.AuthMsg;
@@ -21,7 +21,7 @@ import static io.zerows.extension.commerce.rbac.util.Sc.LOG;
  */
 @Wall(value = "extension", path = "/api/*")
 public class RbacWall {
-    private static final Annal LOGGER = Annal.get(RbacWall.class);
+    private static final LogOf LOGGER = LogOf.get(RbacWall.class);
     @Inject
     private transient JwtStub jwtStub;
     @Inject

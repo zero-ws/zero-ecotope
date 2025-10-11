@@ -4,7 +4,7 @@ import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.environment.DevEnv;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.component.qr.Criteria;
 import io.zerows.component.qr.Sorter;
 import io.zerows.component.qr.syntax.Ir;
@@ -43,7 +43,7 @@ public class JooqCond {
             this.add("TO");
         }
     };
-    private static final OLog LOGGER = Ut.Log.database(JooqCond.class);
+    private static final LogO LOGGER = Ut.Log.database(JooqCond.class);
 
     private static String applyField(final String field,
                                      final Function<String, String> fnTable) {

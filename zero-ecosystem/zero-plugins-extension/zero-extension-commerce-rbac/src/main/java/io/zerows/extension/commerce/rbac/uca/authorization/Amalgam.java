@@ -1,6 +1,6 @@
 package io.zerows.extension.commerce.rbac.uca.authorization;
 
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.support.Ut;
 import io.zerows.extension.commerce.rbac.uca.logged.ProfileGroup;
 import io.zerows.extension.commerce.rbac.uca.logged.ProfileRole;
@@ -18,7 +18,7 @@ public class Amalgam {
 
     public static void logGroup(final Class<?> clazz,
                                 final List<ProfileRole> roles) {
-        final Annal LOGGER = Annal.get(clazz);
+        final LogOf LOGGER = LogOf.get(clazz);
         LOG.Auth.debug(LOGGER, "Group Selected: {0}, Size: {1}",
             Ut.fromJoin(getGroups(roles)), String.valueOf(roles.size()));
     }

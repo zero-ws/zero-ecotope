@@ -3,7 +3,7 @@ package io.zerows.cosmic.plugins.cache;
 import io.r2mo.typed.cc.Cc;
 import io.r2mo.typed.exception.WebException;
 import io.vertx.core.Future;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.cosmic.plugins.cache.exception._60035Exception500PoolInternal;
 import io.zerows.platform.metadata.Kv;
 import io.zerows.support.Ut;
@@ -23,7 +23,7 @@ public class UxPool {
 
     private transient final String name;
     private transient final SharedClient client;
-    private transient OLog LOGGER = Ut.Log.ux(getClass());
+    private transient LogO LOGGER = Ut.Log.ux(getClass());
 
     private UxPool(final String name) {
         this.name = name;

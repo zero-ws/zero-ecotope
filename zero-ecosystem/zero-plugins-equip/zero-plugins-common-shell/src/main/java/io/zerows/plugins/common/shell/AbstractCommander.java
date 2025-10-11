@@ -2,7 +2,7 @@ package io.zerows.plugins.common.shell;
 
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.weaver.ZeroType;
 import io.zerows.platform.enums.Environment;
 import io.zerows.support.Ut;
@@ -54,8 +54,8 @@ public abstract class AbstractCommander implements Commander {
         return EmCommand.TermStatus.SUCCESS;
     }
 
-    protected Annal logger() {
-        return Annal.get(this.getClass());
+    protected LogOf logger() {
+        return LogOf.get(this.getClass());
     }
 
     /*

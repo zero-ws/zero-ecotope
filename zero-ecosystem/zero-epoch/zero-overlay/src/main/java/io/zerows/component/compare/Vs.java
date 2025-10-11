@@ -2,7 +2,7 @@ package io.zerows.component.compare;
 
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.platform.constant.VName;
 import io.zerows.platform.constant.VString;
 import io.zerows.support.base.UtBase;
@@ -27,7 +27,7 @@ import java.util.function.Supplier;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 public class Vs implements Serializable {
-    private static final Annal LOGGER = Annal.get(Vs.class);
+    private static final LogOf LOGGER = LogOf.get(Vs.class);
     private static final Cc<String, Vs> CC_VS = Cc.open();
 
     /**

@@ -2,7 +2,7 @@ package io.zerows.cosmic.plugins.job;
 
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.cosmic.plugins.job.metadata.KScheduler;
 import io.zerows.epoch.annotations.Contract;
 import io.zerows.support.Ut;
@@ -12,7 +12,7 @@ import java.util.Objects;
 import java.util.function.Consumer;
 
 public class IntervalVertx implements Interval {
-    private static final OLog LOGGER = Ut.Log.uca(IntervalVertx.class);
+    private static final LogO LOGGER = Ut.Log.uca(IntervalVertx.class);
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("MM-dd HH:mm.ss.SSS");
     /*
      * Fix issue of delay < 1ms, the default should be 1

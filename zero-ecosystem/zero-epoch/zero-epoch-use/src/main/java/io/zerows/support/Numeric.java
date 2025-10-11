@@ -2,7 +2,7 @@ package io.zerows.support;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 
 import java.math.BigDecimal;
 
@@ -10,7 +10,7 @@ import java.math.BigDecimal;
  * Number checking
  */
 final class Numeric {
-    private static final OLog LOGGER = _Log.Log.ux(Numeric.class);
+    private static final LogO LOGGER = _Log.Log.ux(Numeric.class);
 
     private Numeric() {
     }

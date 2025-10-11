@@ -2,7 +2,7 @@ package io.zerows.epoch.database.jooq;
 
 import io.r2mo.function.Fn;
 import io.vertx.core.Vertx;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.epoch.annotations.Infusion;
 import io.zerows.epoch.application.YmlCore;
 import io.zerows.epoch.database.cp.DataPool;
@@ -21,7 +21,7 @@ import java.util.concurrent.ConcurrentMap;
 @SuppressWarnings("unchecked")
 public class JooqInfix implements Infix {
 
-    private static final OLog LOGGER = Ut.Log.database(JooqInfix.class);
+    private static final LogO LOGGER = Ut.Log.database(JooqInfix.class);
 
     private static final ConcurrentMap<String, Configuration> CONFIGURATION
         = new ConcurrentHashMap<>();

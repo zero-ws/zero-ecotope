@@ -3,7 +3,7 @@ package io.zerows.extension.runtime.graphic.agent.api;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.constant.KName;
@@ -20,7 +20,7 @@ import io.zerows.support.Ut;
 @Queue
 public class GraphActor {
 
-    private static final Annal LOGGER = Annal.get(GraphActor.class);
+    private static final LogOf LOGGER = LogOf.get(GraphActor.class);
 
     @Address(Addr.GRAPH_ANALYZE)
     public Future<JsonObject> analyze(final String key, final String graph, final Integer level) {

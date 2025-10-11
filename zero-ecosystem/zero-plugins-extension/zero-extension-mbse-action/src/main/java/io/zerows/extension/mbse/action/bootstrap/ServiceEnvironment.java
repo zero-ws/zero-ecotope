@@ -4,7 +4,7 @@ import io.r2mo.function.Fn;
 import io.vertx.codegen.annotations.Fluent;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.database.Database;
 import io.zerows.epoch.database.cp.DataPool;
@@ -42,7 +42,7 @@ import static io.zerows.extension.mbse.action.util.Jt.LOG;
  */
 public class ServiceEnvironment {
 
-    private static final Annal LOGGER = Annal.get(ServiceEnvironment.class);
+    private static final LogOf LOGGER = LogOf.get(ServiceEnvironment.class);
     /* Pool of Jobs, it will be consumed by each application */
     private final transient ConcurrentMap<String, JtJob> jobs
         = new ConcurrentHashMap<>();

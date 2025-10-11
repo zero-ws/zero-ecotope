@@ -2,7 +2,7 @@ package io.zerows.platform.metadata;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.platform.constant.VName;
 import io.zerows.platform.enums.EmDict;
 import io.zerows.support.base.UtBase;
@@ -41,7 +41,7 @@ import java.util.Set;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 public class KDictSource implements Serializable, HCopier<KDictSource> {
-    private static final Annal LOGGER = Annal.get(KDictSource.class);
+    private static final LogOf LOGGER = LogOf.get(KDictSource.class);
 
 
     /** 类型，一般用于 CATEGORY | TABULAR 两类字典从系统中企图数据专用，可同时读取多种类型 */

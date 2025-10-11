@@ -3,7 +3,7 @@ package io.zerows.extension.runtime.ambient.osgi.spi.extension;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XSourceDao;
@@ -19,7 +19,7 @@ import static io.zerows.extension.runtime.ambient.util.At.LOG;
 
 public class SourceInit implements Init {
 
-    private static final Annal LOGGER = Annal.get(SourceInit.class);
+    private static final LogOf LOGGER = LogOf.get(SourceInit.class);
 
     @Override
     public Function<JsonObject, Future<JsonObject>> apply() {

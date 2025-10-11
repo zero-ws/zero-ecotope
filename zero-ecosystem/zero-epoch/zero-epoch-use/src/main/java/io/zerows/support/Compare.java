@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.platform.enums.typed.ChangeFlag;
 import io.zerows.support.fn.Fx;
 import io.zerows.specification.modeling.HRecord;
@@ -25,7 +25,7 @@ import java.util.function.Supplier;
  */
 @SuppressWarnings("all")
 final class Compare {
-    private static final OLog LOGGER = _Log.Log.ux(Compare.class);
+    private static final LogO LOGGER = _Log.Log.ux(Compare.class);
 
     private Compare() {
     }
@@ -57,7 +57,7 @@ final class Compare {
      * @author lang : 2024-04-19
      */
     static class J {
-        private static final OLog LOG = _Log.Log.ux(J.class);
+        private static final LogO LOG = _Log.Log.ux(J.class);
 
         // ------------------------- Compare InJson ------------------------
         static JsonArray ruleJReduce(final JsonArray records, final JsonArray matrix) {

@@ -1,6 +1,6 @@
 package io.zerows.epoch.configuration;
 
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.support.Ut;
 
 /**
@@ -12,7 +12,7 @@ public interface Processor<T, C> {
 
     void makeup(T target, C setting);
 
-    default OLog logger() {
+    default LogO logger() {
         return Ut.Log.configure(this.getClass());
     }
 }

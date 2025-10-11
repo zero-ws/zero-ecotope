@@ -13,9 +13,9 @@ import io.zerows.specification.atomic.HLogger;
  * 假设底层已提供实现 Logger logger = LoggerFactory.getLogger，所以就不考虑线程安全
  * 问题，现阶段获取日志器会引起很大的线程安全问题，此处不能如此执行，特别针对全局模式下的操作尤其需要小心
  */
-public interface Annal extends HLogger {
-    @Memory(Annal.class)
-    Cc<Class<?>, Annal> CC_LOGGER_COMMON = Cc.open();
+public interface LogOf extends HLogger {
+    @Memory(LogOf.class)
+    Cc<Class<?>, LogOf> CC_LOGGER_COMMON = Cc.open();
     /**
      * 按类分配的日志缓存池
      * 内部使用的按 hasCode 分配的日志缓存池
@@ -25,17 +25,17 @@ public interface Annal extends HLogger {
      * Cc<Class < ?>, Annal> CC_ANNAL_EXTENSION = Cc.open();
      * </code></pre>
      */
-    @Memory(Annal.class)
-    Cc<Integer, Annal> CC_LOGGER_EXTENSION = Cc.open();
+    @Memory(LogOf.class)
+    Cc<Integer, LogOf> CC_LOGGER_EXTENSION = Cc.open();
 
     /**
      * 常用的日志处理模式
      *
      * @param clazz 普通类
      *
-     * @return {@link Annal}
+     * @return {@link LogOf}
      */
-    static Annal get(final Class<?> clazz) {
+    static LogOf get(final Class<?> clazz) {
         return CC_LOGGER_COMMON.pick(() -> new Log4JAnnal(clazz), clazz);
     }
 }

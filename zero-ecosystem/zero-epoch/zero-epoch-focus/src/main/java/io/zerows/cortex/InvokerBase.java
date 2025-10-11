@@ -7,7 +7,7 @@ import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.Message;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.cortex.plugins.uddi.Uddi;
 import io.zerows.cortex.plugins.uddi.UddiClient;
 import io.zerows.epoch.annotations.Me;
@@ -27,7 +27,7 @@ import java.util.function.Function;
 @SuppressWarnings("all")
 public abstract class InvokerBase implements Invoker {
 
-    protected OLog logger() {
+    protected LogO logger() {
         return Ut.Log.uca(this.getClass());
     }
 

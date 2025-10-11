@@ -1,6 +1,6 @@
 package io.zerows.cosmic.plugins.validation;
 
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.support.Ut;
 import jakarta.el.ELManager;
 import jakarta.el.ExpressionFactory;
@@ -15,7 +15,7 @@ import java.util.Locale;
 
 @SuppressWarnings("all")
 public class ValidatorInterpolator extends ValidatorMessager {
-    private static final OLog LOGGER = Ut.Log.uca(ValidatorInterpolator.class);
+    private static final LogO LOGGER = Ut.Log.uca(ValidatorInterpolator.class);
     private final ExpressionFactory expressionFactory;
 
     public ValidatorInterpolator() {

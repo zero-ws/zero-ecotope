@@ -2,12 +2,12 @@ package io.zerows.weaver;
 
 import io.r2mo.function.Fn;
 import io.zerows.epoch.exception._60004Exception400ParamFromString;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.support.Ut;
 
 public abstract class SaberBase implements Saber {
 
-    protected OLog logger() {
+    protected LogO logger() {
         return Ut.Log.uca(this.getClass());
     }
 

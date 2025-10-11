@@ -2,7 +2,7 @@ package io.zerows.epoch.database.jooq.operation;
 
 import io.vertx.core.json.JsonArray;
 import io.zerows.component.environment.DevEnv;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.component.qr.Pager;
 import io.zerows.component.qr.syntax.Ir;
 import io.zerows.epoch.database.jooq.JooqDsl;
@@ -30,7 +30,7 @@ import java.util.Set;
  */
 @SuppressWarnings("all")
 class JoinSearch {
-    private static final OLog LOGGER = Ut.Log.database(JoinSearch.class);
+    private static final LogO LOGGER = Ut.Log.database(JoinSearch.class);
     private final transient JoinStore store;
 
     JoinSearch(final JoinStore store) {

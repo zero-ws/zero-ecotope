@@ -1,6 +1,6 @@
 package io.zerows.cosmic.plugins.websocket;
 
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.epoch.assembly.Extractor;
 import io.zerows.support.Ut;
 
@@ -13,7 +13,7 @@ import java.util.Set;
 public class SockThread extends Thread {
     public static final String SCANNED_SOCKS = "( {1} WebSocket ) The endpoint {0} scanned {1} websockets of Event, " +
         "will be mounted to event bus.";
-    private static final OLog LOGGER = Ut.Log.uca(SockThread.class);
+    private static final LogO LOGGER = Ut.Log.uca(SockThread.class);
     private final Set<Remind> reminds = new HashSet<>();
 
 

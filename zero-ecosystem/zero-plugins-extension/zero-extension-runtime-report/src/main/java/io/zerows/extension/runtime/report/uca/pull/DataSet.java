@@ -5,7 +5,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.exception._60050Exception501NotSupport;
 import io.zerows.support.Ut;
@@ -72,7 +72,7 @@ public interface DataSet {
         return this.loadAsync(params, null);
     }
 
-    default OLog logger() {
+    default LogO logger() {
         return Ut.Log.database(this.getClass());
     }
 

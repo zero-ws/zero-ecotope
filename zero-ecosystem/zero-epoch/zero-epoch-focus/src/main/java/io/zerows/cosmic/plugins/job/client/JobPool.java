@@ -1,7 +1,7 @@
 package io.zerows.cosmic.plugins.job.client;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.cosmic.plugins.job.metadata.Mission;
 import io.zerows.epoch.constant.KName;
 import io.zerows.platform.enums.EmJob;
@@ -25,7 +25,7 @@ class JobPool {
     public static final String IS_ERROR = "( Job ) The job {0} met error last time, please contact administrator and try to resume.";
     public static final String IS_STOPPED = "( Job ) The timeId {0} does not exist in RUNNING pool of jobs.";
     public static final String NOT_RUNNING = "( Job ) The job {0} is not running, the status is = {1}";
-    private static final OLog LOGGER = Ut.Log.cache(JobPool.class);
+    private static final LogO LOGGER = Ut.Log.cache(JobPool.class);
 
     private static final ConcurrentMap<String, Mission> JOBS = new ConcurrentHashMap<>();
     /* RUNNING Reference */

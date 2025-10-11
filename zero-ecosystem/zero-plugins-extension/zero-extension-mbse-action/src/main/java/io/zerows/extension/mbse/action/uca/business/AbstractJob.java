@@ -2,7 +2,7 @@ package io.zerows.extension.mbse.action.uca.business;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.cosmic.plugins.job.metadata.Mission;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
@@ -132,7 +132,7 @@ public abstract class AbstractJob implements Service {
     }
 
     // ----------- Logger component --------------
-    protected Annal logger() {
-        return Annal.get(this.getClass());
+    protected LogOf logger() {
+        return LogOf.get(this.getClass());
     }
 }

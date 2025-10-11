@@ -1,7 +1,7 @@
 package io.zerows.component.expression;
 
 import io.zerows.component.environment.DevEnv;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.support.Ut;
 
 /**
@@ -25,7 +25,7 @@ public abstract class InletBase implements Inlet {
 
     protected void console(final String message, final Object... args) {
         if (DevEnv.devExprBind()) {
-            final OLog logger = Ut.Log.plugin(this.getClass());
+            final LogO logger = Ut.Log.plugin(this.getClass());
             logger.info(message, args);
         }
     }

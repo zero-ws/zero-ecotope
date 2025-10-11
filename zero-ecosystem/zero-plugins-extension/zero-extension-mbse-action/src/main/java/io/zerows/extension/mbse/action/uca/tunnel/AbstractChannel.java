@@ -3,7 +3,7 @@ package io.zerows.extension.mbse.action.uca.tunnel;
 import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.cosmic.plugins.job.metadata.Mission;
 import io.zerows.epoch.annotations.Contract;
 import io.zerows.epoch.constant.KWeb;
@@ -175,8 +175,8 @@ public abstract class AbstractChannel implements JtChannel {
      */
     public abstract Future<Boolean> initAsync(JtComponent component, ActIn request);
 
-    protected Annal getLogger() {
-        return Annal.get(this.getClass());
+    protected LogOf getLogger() {
+        return LogOf.get(this.getClass());
     }
 
     // ------------- Rename configuration object -------------

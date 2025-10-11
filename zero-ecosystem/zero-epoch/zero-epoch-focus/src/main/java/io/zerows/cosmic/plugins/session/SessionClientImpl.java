@@ -10,7 +10,7 @@ import io.vertx.ext.web.handler.SessionHandler;
 import io.vertx.ext.web.sstore.ClusteredSessionStore;
 import io.vertx.ext.web.sstore.LocalSessionStore;
 import io.vertx.ext.web.sstore.SessionStore;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.cosmic.plugins.session.exception._20005Exception500SessionClientInit;
 import io.zerows.epoch.application.YmlCore;
 import io.zerows.support.Ut;
@@ -21,7 +21,7 @@ public class SessionClientImpl implements SessionClient {
 
     public static final String SESSION_MODE = "( Session ) System will selected mode = \"{0}\" of session.";
     public static final String SESSION_STORE = "( Session ) SessionStore clazz selected: {0}";
-    private static final OLog LOGGER = Ut.Log.plugin(SessionClientImpl.class);
+    private static final LogO LOGGER = Ut.Log.plugin(SessionClientImpl.class);
     private static final AtomicBoolean LOG_MSG = new AtomicBoolean(true);
     private static SessionStore STORE;
     private final transient Vertx vertx;

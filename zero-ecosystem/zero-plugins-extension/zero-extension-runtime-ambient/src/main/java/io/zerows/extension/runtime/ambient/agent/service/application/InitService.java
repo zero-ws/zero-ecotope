@@ -2,7 +2,7 @@ package io.zerows.extension.runtime.ambient.agent.service.application;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.UObject;
 import io.zerows.extension.runtime.ambient.bootstrap.AtPin;
@@ -28,9 +28,9 @@ import static io.zerows.extension.runtime.ambient.util.At.LOG;
  */
 public class InitService implements InitStub {
     /**
-     * Zero standard logger of {@link Annal} instance.
+     * Zero standard logger of {@link LogOf} instance.
      */
-    private static final Annal LOGGER = Annal.get(InitService.class);
+    private static final LogOf LOGGER = LogOf.get(InitService.class);
     /**
      * Injection for {@link AppStub}
      */

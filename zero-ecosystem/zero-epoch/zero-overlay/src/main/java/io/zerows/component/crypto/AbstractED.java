@@ -1,7 +1,7 @@
 package io.zerows.component.crypto;
 
 import io.r2mo.function.Fn;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.platform.ENV;
 import io.zerows.platform.EnvironmentVariable;
 import io.zerows.platform.constant.VString;
@@ -73,7 +73,7 @@ public abstract class AbstractED<P extends PublicKey, V extends PrivateKey> impl
         if (Objects.isNull(hed)) {
             hed = UtBase.service(HED.class);
         }
-        final Annal logger = Annal.get(this.getClass());
+        final LogOf logger = LogOf.get(this.getClass());
         if (Objects.isNull(hed)) {
             logger.warn("[ HED ] Missed `HED` component in service loader: META-INF/services/{0}", HED.class.getName());
             return source;

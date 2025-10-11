@@ -2,7 +2,7 @@ package io.zerows.mbse.metadata;
 
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.KPoint;
 import io.zerows.mbse.HOne;
@@ -151,7 +151,7 @@ public class KClass implements Serializable {
      * @author <a href="http://www.origin-x.cn">Lang</a>
      */
     private static class KClassInternal {
-        private static final OLog LOGGER = Ut.Log.metadata(KClassInternal.class);
+        private static final LogO LOGGER = Ut.Log.metadata(KClassInternal.class);
 
         static JsonObject loadHybrid(final JsonObject hybridJ, final KClass clazz) {
             // 1. Attribute Processing

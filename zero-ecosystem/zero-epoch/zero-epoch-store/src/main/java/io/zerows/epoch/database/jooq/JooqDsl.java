@@ -7,7 +7,7 @@ import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.core.Promise;
 import io.vertx.core.Vertx;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.epoch.database.exception._40060Exception500JooqVertxNull;
 import io.zerows.epoch.database.exception._40066Exception500JooqClassInvalid;
 import io.zerows.support.Ut;
@@ -32,7 +32,7 @@ import java.util.concurrent.Callable;
  */
 @SuppressWarnings("all")
 public class JooqDsl {
-    private static final OLog LOGGER = Ut.Log.database(JooqDsl.class);
+    private static final LogO LOGGER = Ut.Log.database(JooqDsl.class);
 
     private static final Cc<String, JooqDsl> CC_DSL = Cc.open();
     private transient Vertx vertxRef;

@@ -3,7 +3,7 @@ package io.zerows.cortex.extension;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.component.qr.syntax.Ir;
 import io.zerows.epoch.application.YmlCore;
 import io.zerows.epoch.constant.KName;
@@ -28,7 +28,7 @@ public abstract class AbstractRegion implements PlugRegion {
         return this.config;
     }
 
-    protected OLog logger() {
+    protected LogO logger() {
         return Ut.Log.security(this.getClass());
     }
 

@@ -3,7 +3,7 @@ package io.zerows.extension.runtime.report.uca.pull;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.extension.runtime.report.domain.tables.pojos.KpFeature;
 import io.zerows.platform.metadata.Kv;
 import io.zerows.specification.development.compiled.HBundle;
@@ -36,7 +36,7 @@ public interface DataInput {
 
     Future<Kv<String, Object>> prepare(JsonObject params, JsonObject configureJ, KpFeature feature);
 
-    default OLog logger() {
+    default LogO logger() {
         return Ut.Log.data(this.getClass());
     }
 }

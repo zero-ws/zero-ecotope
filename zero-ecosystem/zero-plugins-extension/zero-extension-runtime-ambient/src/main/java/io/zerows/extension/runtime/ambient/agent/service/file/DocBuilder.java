@@ -4,7 +4,7 @@ import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.runtime.ambient.bootstrap.AtConfig;
 import io.zerows.extension.runtime.ambient.bootstrap.AtPin;
@@ -25,7 +25,7 @@ import static io.zerows.extension.runtime.ambient.util.At.LOG;
  */
 public class DocBuilder implements DocBStub {
     private static final Cc<String, Arbor> CC_ARBOR = Cc.openThread();
-    private static final Annal LOGGER = Annal.get(DocReader.class);
+    private static final LogOf LOGGER = LogOf.get(DocReader.class);
 
     // ------------------------- Document Management Tree -------------------------
     /*

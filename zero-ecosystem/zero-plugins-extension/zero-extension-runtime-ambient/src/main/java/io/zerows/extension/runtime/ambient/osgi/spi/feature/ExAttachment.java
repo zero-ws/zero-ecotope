@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.database.jooq.operation.UxJooq;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XAttachmentDao;
@@ -28,7 +28,7 @@ import static io.zerows.extension.runtime.ambient.util.At.LOG;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 public class ExAttachment implements Attachment {
-    private static final Annal LOGGER = Annal.get(ExAttachment.class);
+    private static final LogOf LOGGER = LogOf.get(ExAttachment.class);
 
 
     @Override

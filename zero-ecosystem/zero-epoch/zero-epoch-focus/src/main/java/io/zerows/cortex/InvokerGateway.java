@@ -4,7 +4,7 @@ import io.r2mo.function.Fn;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.eventbus.Message;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.cortex.exception._40047Exception500InvokerNull;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.support.Ut;
@@ -18,7 +18,7 @@ public class InvokerGateway {
 
     // Invoker Cache for Multi Thread
     public static final Cc<String, Invoker> CCT_INVOKER = Cc.openThread();
-    private static final OLog LOGGER = Ut.Log.uca(InvokerGateway.class);
+    private static final LogO LOGGER = Ut.Log.uca(InvokerGateway.class);
 
     public static Invoker invoker(final Class<?> returnType,
                                   final Class<?> paramCls) {

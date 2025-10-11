@@ -3,7 +3,7 @@ package io.zerows.extension.mbse.ui.agent.service;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.mbse.ui.bootstrap.UiPin;
 import io.zerows.extension.mbse.ui.domain.tables.daos.UiOpDao;
@@ -18,7 +18,7 @@ import static io.zerows.extension.mbse.ui.util.Ui.LOG;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 public class DoService implements DoStub {
-    private static final Annal LOGGER = Annal.get(DoService.class);
+    private static final LogOf LOGGER = LogOf.get(DoService.class);
 
     // type = null, 旧的兼容流程
     @Override

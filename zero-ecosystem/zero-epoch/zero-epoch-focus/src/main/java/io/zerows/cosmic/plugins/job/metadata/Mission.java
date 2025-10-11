@@ -8,7 +8,7 @@ import io.r2mo.typed.json.jackson.ClassDeserializer;
 import io.r2mo.typed.json.jackson.ClassSerializer;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.environment.DevEnv;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.cosmic.plugins.job.JobMessage;
 import io.zerows.cosmic.plugins.job.exception._60042Exception501JobOnMissing;
 import io.zerows.cosmic.plugins.job.exception._60054Exception409JobFormulaError;
@@ -35,7 +35,7 @@ import java.util.function.Supplier;
  * 2) The definition came from JobStore interface ( the job definition may be stored into database or other
  */
 public class Mission implements Serializable {
-    private static final OLog LOGGER = Ut.Log.metadata(Mission.class);
+    private static final LogO LOGGER = Ut.Log.metadata(Mission.class);
     /* Job status, default job is 'starting' */
     private EmJob.Status status = EmJob.Status.STARTING;
     /* Job name */

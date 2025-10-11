@@ -1,7 +1,7 @@
 package io.zerows.epoch.assembly;
 
 import io.r2mo.function.Fn;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.epoch.assembly.parallel.QueueThread;
 import io.zerows.epoch.basicore.WebReceipt;
 import io.zerows.epoch.configuration.Inquirer;
@@ -17,7 +17,7 @@ import java.util.Set;
  */
 public class InquirerForReceipt implements Inquirer<Set<WebReceipt>> {
 
-    private static final Annal LOGGER = Annal.get(InquirerForReceipt.class);
+    private static final LogOf LOGGER = LogOf.get(InquirerForReceipt.class);
 
     @Override
     public Set<WebReceipt> scan(final Set<Class<?>> queues) {

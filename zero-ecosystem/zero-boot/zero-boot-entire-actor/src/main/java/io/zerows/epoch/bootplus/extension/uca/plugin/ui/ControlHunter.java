@@ -2,7 +2,7 @@ package io.zerows.epoch.bootplus.extension.uca.plugin.ui;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.epoch.bootplus.extension.uca.plugin.indent.KeyIndent;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.UData;
@@ -21,7 +21,7 @@ import static io.zerows.extension.mbse.ui.util.Ui.LOG;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 public class ControlHunter implements UiHunter {
-    private static final Annal LOGGER = Annal.get(ControlHunter.class);
+    private static final LogOf LOGGER = LogOf.get(ControlHunter.class);
     private transient final Identifier indent = new KeyIndent();
 
     @Override

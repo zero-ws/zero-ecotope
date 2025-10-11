@@ -2,7 +2,7 @@ package io.zerows.extension.mbse.ui.bootstrap;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.cortex.extension.HExtension;
 import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.epoch.constant.KName;
@@ -28,7 +28,7 @@ import static io.zerows.extension.mbse.ui.util.Ui.LOG;
  *
  */
 class UiConfiguration {
-    private static final Annal LOGGER = Annal.get(UiConfiguration.class);
+    private static final LogOf LOGGER = LogOf.get(UiConfiguration.class);
     /*
      * Static configuration mapping for column, it could not be modified
      * once configured into the column mapping

@@ -5,7 +5,7 @@ import io.zerows.platform.constant.VString;
 import io.zerows.platform.constant.VValue;
 import io.zerows.platform.enums.modeling.EmKey;
 import io.zerows.platform.metadata.KDatabase;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.support.Ut;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MField;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MKey;
@@ -164,7 +164,7 @@ public abstract class AbstractSentence implements AoSentence, SqlStatement {
         return segment.toString();
     }
 
-    protected Annal getLogger() {
-        return Annal.get(this.getClass());
+    protected LogOf getLogger() {
+        return LogOf.get(this.getClass());
     }
 }

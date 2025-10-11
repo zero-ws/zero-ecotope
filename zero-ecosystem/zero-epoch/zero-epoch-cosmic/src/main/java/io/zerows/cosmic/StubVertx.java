@@ -3,7 +3,7 @@ package io.zerows.cosmic;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.cortex.metadata.RunVertx;
 import io.zerows.epoch.configuration.NodeVertx;
 import io.zerows.specification.development.compiled.HBundle;
@@ -56,7 +56,7 @@ public interface StubVertx {
 
     StubVertx remove(String name);
 
-    default OLog logger() {
+    default LogO logger() {
         return Ut.Log.vertx(this.getClass());
     }
 }

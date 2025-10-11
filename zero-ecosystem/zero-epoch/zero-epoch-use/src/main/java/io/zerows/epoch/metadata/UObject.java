@@ -3,7 +3,7 @@ package io.zerows.epoch.metadata;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.support.Ut;
 
 import java.util.concurrent.ConcurrentHashMap;
@@ -15,7 +15,7 @@ import java.util.function.Function;
  */
 public class UObject {
 
-    private static final OLog LOGGER = Ut.Log.data(UObject.class);
+    private static final LogO LOGGER = Ut.Log.data(UObject.class);
 
     private final JsonObject objectReference;
 

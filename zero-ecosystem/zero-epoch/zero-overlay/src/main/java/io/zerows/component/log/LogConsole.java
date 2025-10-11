@@ -3,7 +3,7 @@ package io.zerows.component.log;
 /**
  * @author lang : 2024-04-17
  */
-class LogConsole implements OLog {
+class LogConsole implements LogO {
     private static final String MODULE = "Zero";
 
     private final transient LogModule internalLogger;

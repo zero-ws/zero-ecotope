@@ -16,7 +16,7 @@ import io.vertx.ext.stomp.Frame;
 import io.vertx.ext.stomp.Frames;
 import io.vertx.ext.stomp.StompServerConnection;
 import io.vertx.ext.stomp.utils.Headers;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.cosmic.plugins.websocket.SockGrid;
 import io.zerows.plugins.websocket.stomp.handler.StompBridgeOptions;
 import io.zerows.support.Ut;
@@ -41,7 +41,7 @@ import java.util.regex.Pattern;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 public class RemindDestination extends Topic {
-    private static final Annal LOGGER = Annal.get(RemindDestination.class);
+    private static final LogOf LOGGER = LogOf.get(RemindDestination.class);
 
     private final BridgeOptions options;
 

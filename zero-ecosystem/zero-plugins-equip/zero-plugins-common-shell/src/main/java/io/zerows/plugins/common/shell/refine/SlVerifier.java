@@ -2,7 +2,7 @@ package io.zerows.plugins.common.shell.refine;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.application.YmlCore;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.support.Ut;
 
 import java.util.Objects;
@@ -13,7 +13,7 @@ import java.util.Set;
  */
 class SlVerifier {
 
-    private static final Annal LOGGER = Annal.get(SlVerifier.class);
+    private static final LogOf LOGGER = LogOf.get(SlVerifier.class);
 
     static boolean validate(final String[] args) {
         final JsonObject input = Ut.valueJObject(SlConfig.validate().getJsonObject(YmlCore.shell.validate.INPUT));

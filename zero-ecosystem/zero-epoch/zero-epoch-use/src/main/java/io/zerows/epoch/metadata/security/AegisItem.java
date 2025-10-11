@@ -2,7 +2,7 @@ package io.zerows.epoch.metadata.security;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.application.YmlCore;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.platform.enums.EmSecure;
 import io.zerows.management.OZeroStore;
 import io.zerows.support.Ut;
@@ -17,7 +17,7 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class AegisItem implements Serializable {
     private static final ConcurrentMap<String, AegisItem> SECURE = new ConcurrentHashMap<>();
-    private static final OLog LOGGER = Ut.Log.security(AegisItem.class);
+    private static final LogO LOGGER = Ut.Log.security(AegisItem.class);
 
     static {
         //    final JsonObject configuration = Ut.valueJObject(config.getJsonObject(YmlCore.inject.SECURE));

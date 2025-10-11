@@ -2,7 +2,7 @@ package io.zerows.cosmic;
 
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.cortex.management.StoreVertx;
 import io.zerows.cortex.metadata.RunVertx;
 import io.zerows.cosmic.bootstrap.Linear;
@@ -60,7 +60,7 @@ public interface EnergyVertx {
      */
     Future<StoreVertx> startAsync(HBundle bundle, NodeNetwork network);
 
-    default OLog logger() {
+    default LogO logger() {
         return Ut.Log.vertx(this.getClass());
     }
 }

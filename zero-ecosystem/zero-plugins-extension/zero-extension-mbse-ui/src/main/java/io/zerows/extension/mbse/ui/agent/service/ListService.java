@@ -3,7 +3,7 @@ package io.zerows.extension.mbse.ui.agent.service;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.component.qr.Sorter;
 import io.zerows.component.qr.syntax.Ir;
 import io.zerows.epoch.constant.KName;
@@ -22,7 +22,7 @@ import java.util.Objects;
 import static io.zerows.extension.mbse.ui.util.Ui.LOG;
 
 public class ListService implements ListStub {
-    private static final Annal LOGGER = Annal.get(ListService.class);
+    private static final LogOf LOGGER = LogOf.get(ListService.class);
     @Inject
     private transient OptionStub optionStub;
 

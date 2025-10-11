@@ -7,7 +7,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.exception._15000Exception500AptParameter;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.platform.enums.typed.ChangeFlag;
 import io.zerows.support.Ut;
 
@@ -36,7 +36,7 @@ import java.util.function.Supplier;
  */
 @SuppressWarnings("unchecked")
 public class Apt {
-    private final static OLog LOGGER = Ut.Log.data(Apt.class);
+    private final static LogO LOGGER = Ut.Log.data(Apt.class);
 
     private final static String MSG_APT_BATCH = "Current api does not support `isBatch = false`. Method = {0}";
 

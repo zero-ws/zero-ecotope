@@ -3,7 +3,7 @@ package io.zerows.epoch.bootplus.extension.uca.elasticsearch;
 import io.zerows.epoch.bootplus.extension.refine.Ox;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.plugins.store.elasticsearch.ElasticSearchClient;
 import io.zerows.plugins.store.elasticsearch.ElasticSearchInfix;
 
@@ -31,7 +31,7 @@ abstract class AbstractEsIndex implements EsIndex {
         });
     }
 
-    protected Annal logger() {
-        return Annal.get(this.getClass());
+    protected LogOf logger() {
+        return LogOf.get(this.getClass());
     }
 }

@@ -1,6 +1,6 @@
 package io.zerows.epoch.metadata.security;
 
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.platform.constant.VValue;
 import io.zerows.platform.enums.EmSecure;
 import io.zerows.support.Ut;
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
  * Scanned ( KMetadata ) for each @Wall.
  */
 public class Aegis implements Serializable, Comparable<Aegis>, HCopier<Aegis> {
-    private static final OLog LOGGER = Ut.Log.security(Aegis.class);
+    private static final LogO LOGGER = Ut.Log.security(Aegis.class);
     /**
      * defined = false
      * Standard Authorization

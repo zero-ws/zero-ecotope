@@ -2,7 +2,7 @@ package io.zerows.plugins.store.neo4j.refine;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.support.Ut;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import org.neo4j.driver.Record;
 import org.neo4j.driver.Result;
 import org.neo4j.driver.exceptions.NoSuchRecordException;
@@ -12,7 +12,7 @@ import org.neo4j.driver.internal.InternalRelationship;
 import java.util.Map;
 
 class N4JOutput {
-    private static final Annal LOGGER = Annal.get(N4JOutput.class);
+    private static final LogOf LOGGER = LogOf.get(N4JOutput.class);
 
     static JsonObject toJson(final Result result) {
         try {

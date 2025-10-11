@@ -3,7 +3,7 @@ package io.zerows.platform.metadata;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.support.base.UtBase;
 
 import java.util.Objects;
@@ -23,7 +23,7 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class KFabric {
 
-    private static final Annal LOGGER = Annal.get(KFabric.class);
+    private static final LogOf LOGGER = LogOf.get(KFabric.class);
     private final ConcurrentMap<String, KDictUse> epsilonMap
         = new ConcurrentHashMap<>();
     /*

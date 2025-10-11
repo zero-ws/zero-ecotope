@@ -6,7 +6,7 @@ import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.VertxException;
 import io.vertx.core.WorkerExecutor;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.cosmic.plugins.job.metadata.Mission;
 import io.zerows.epoch.annotations.Contract;
 import io.zerows.epoch.web.Envelop;
@@ -287,7 +287,7 @@ public abstract class AghaAbstract implements Agha {
         }
     }
 
-    protected OLog logger() {
+    protected LogO logger() {
         return Ut.Log.uca(this.getClass());
     }
 }

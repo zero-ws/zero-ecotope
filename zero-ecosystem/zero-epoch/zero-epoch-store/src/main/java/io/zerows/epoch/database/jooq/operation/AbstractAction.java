@@ -3,7 +3,7 @@ package io.zerows.epoch.database.jooq.operation;
 import io.github.jklingsporn.vertx.jooq.classic.VertxDAO;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.environment.DevEnv;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.epoch.database.jooq.JooqDsl;
 import io.zerows.epoch.database.jooq.condition.JooqCond;
 import io.zerows.epoch.database.jooq.util.JqAnalyzer;
@@ -58,14 +58,14 @@ public abstract class AbstractAction {
     }
 
     protected void logging(final String pattern, final Object... args) {
-        final OLog logger = Ut.Log.database(getClass());
+        final LogO logger = Ut.Log.database(getClass());
         if (DevEnv.devJooqCond()) {
             logger.info(pattern, args);
         }
     }
 
     protected void warning(final String pattern, final Object... args) {
-        final OLog logger = Ut.Log.database(getClass());
+        final LogO logger = Ut.Log.database(getClass());
         logger.warn(pattern, args);
     }
 

@@ -2,7 +2,7 @@ package io.zerows.epoch.bootplus.extension.scaffold.plugin;
 
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.VDBC;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
@@ -30,8 +30,8 @@ public abstract class AbstractPlugin<T> {
         return (T) this;
     }
 
-    protected Annal logger() {
-        return Annal.get(this.getClass());
+    protected LogOf logger() {
+        return LogOf.get(this.getClass());
     }
 
     protected ChangeFlag operation(final JsonObject options) {

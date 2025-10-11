@@ -3,7 +3,7 @@ package io.zerows.cortex;
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Session;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.cortex.exception._40017Exception500WorkerArgument;
 import io.zerows.cortex.exception._40018Exception500AsyncSignature;
 import io.zerows.cortex.metadata.ParameterBuilder;
@@ -25,7 +25,7 @@ public class InvokerUtil {
     public static final String MSG_DIRECT = "( Invoker ) Invoker = {0}, ReturnType = {1}, Method = {2}, Class = {3}.";
     public static final String MSG_RPC = "( Invoker Rpc ) Invoker = {0}, ReturnType = {1}, Method = {2}, Class = {3}.";
     public static final String MSG_HANDLE = "( Invoker Handle ) Invoker = {0}, ReturnType = {1}, Method = {2}, Class = {3}.";
-    private static final OLog LOGGER = Ut.Log.uca(InvokerUtil.class);
+    private static final LogO LOGGER = Ut.Log.uca(InvokerUtil.class);
 
     public static Object invokeCall(
         final Object proxy,
@@ -90,7 +90,7 @@ public class InvokerUtil {
 
         // 1. Ensure method length
         final Class<?>[] params = method.getParameterTypes();
-        final OLog logger = Ut.Log.uca(target);
+        final LogO logger = Ut.Log.uca(target);
         // 2. The parameters
         Fn.jvmKo(VValue.ZERO == params.length, _40017Exception500WorkerArgument.class, method);
     }

@@ -3,7 +3,7 @@ package io.zerows.plugins.store.elasticsearch;
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.plugins.store.elasticsearch.exception._20007Exception404MissingIndexName;
 import io.zerows.plugins.store.elasticsearch.exception._20008Exception404MissingSearchText;
 import org.elasticsearch.action.search.SearchRequest;
@@ -21,7 +21,7 @@ import java.util.concurrent.ConcurrentMap;
 
 class ElasticQr {
 
-    private static final Annal LOGGER = Annal.get(ElasticQr.class);
+    private static final LogOf LOGGER = LogOf.get(ElasticQr.class);
 
     private final transient ElasticSearchHelper helper = ElasticSearchHelper.helper(this.getClass());
     private final transient JsonObject options = new JsonObject();

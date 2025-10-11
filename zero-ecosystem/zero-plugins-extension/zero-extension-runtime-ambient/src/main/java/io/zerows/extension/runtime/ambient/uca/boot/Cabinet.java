@@ -3,7 +3,7 @@ package io.zerows.extension.runtime.ambient.uca.boot;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.support.Ut;
 
 import java.util.concurrent.ConcurrentMap;
@@ -24,7 +24,7 @@ public interface Cabinet<T> {
 
     Future<ConcurrentMap<String, T>> loadAsync(final Vertx container);
 
-    default OLog logger() {
+    default LogO logger() {
         return Ut.Log.boot(this.getClass());
     }
 }

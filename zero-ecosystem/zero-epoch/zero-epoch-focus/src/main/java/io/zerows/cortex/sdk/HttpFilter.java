@@ -6,7 +6,7 @@ import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.http.HttpServerResponse;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.Session;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.cortex.exception._40051Exception500FilterContext;
 import io.zerows.epoch.web.Filter;
 
@@ -52,8 +52,8 @@ public abstract class HttpFilter implements Filter {
             .collect(Collectors.toMap(Cookie::getName, cookie -> cookie));
     }
 
-    protected Annal getLogger() {
-        return Annal.get(this.getClass());
+    protected LogOf getLogger() {
+        return LogOf.get(this.getClass());
     }
 
     public void init() {

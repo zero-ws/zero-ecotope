@@ -5,7 +5,7 @@ import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -33,7 +33,7 @@ import static io.zerows.extension.runtime.ambient.util.At.LOG;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 class AtFs {
-    private static final Annal LOGGER = Annal.get(AtFs.class);
+    private static final LogOf LOGGER = LogOf.get(AtFs.class);
 
     static Future<JsonObject> fileMeta(final JsonObject appJ) {
         final AtConfig config = AtPin.getConfig();

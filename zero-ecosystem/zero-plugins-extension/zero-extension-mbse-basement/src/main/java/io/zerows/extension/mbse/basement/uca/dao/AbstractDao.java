@@ -2,7 +2,7 @@ package io.zerows.extension.mbse.basement.uca.dao;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.component.qr.Criteria;
 import io.zerows.extension.mbse.basement.uca.dao.internal.UAggr;
 import io.zerows.extension.mbse.basement.uca.dao.internal.UFlush;
@@ -427,8 +427,8 @@ public abstract class AbstractDao implements HDao {
     }
 
     // Logger
-    protected Annal logger() {
-        return Annal.get(this.getClass());
+    protected LogOf logger() {
+        return LogOf.get(this.getClass());
     }
 
     /* 行语句构造器 */

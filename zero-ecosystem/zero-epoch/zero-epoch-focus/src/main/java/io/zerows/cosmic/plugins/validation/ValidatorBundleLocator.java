@@ -1,6 +1,6 @@
 package io.zerows.cosmic.plugins.validation;
 
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.support.Ut;
 import org.hibernate.validator.internal.util.CollectionHelper;
 import org.hibernate.validator.internal.util.Contracts;
@@ -26,7 +26,7 @@ import java.util.Set;
 public class ValidatorBundleLocator implements ResourceBundleLocator {
     public static final String BUNDLE_NOT_FOUND = "{0} not found.";
     public static final String BUNDLE_FOUND = "{0} found.";
-    private static final OLog LOGGER = Ut.Log.uca(ValidatorBundleLocator.class);
+    private static final LogO LOGGER = Ut.Log.uca(ValidatorBundleLocator.class);
     private static final boolean RESOURCE_BUNDLE_CONTROL_INSTANTIABLE = determineAvailabilityOfResourceBundleControl();
     private final String bundleName;
     private final ClassLoader classLoader;

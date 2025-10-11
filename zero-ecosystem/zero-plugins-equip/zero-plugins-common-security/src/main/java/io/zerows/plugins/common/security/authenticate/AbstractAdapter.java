@@ -2,7 +2,7 @@ package io.zerows.plugins.common.security.authenticate;
 
 import io.vertx.ext.auth.authentication.AuthenticationProvider;
 import io.zerows.epoch.application.YmlCore;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.epoch.metadata.security.Aegis;
 import io.zerows.epoch.metadata.security.AegisItem;
 import io.zerows.platform.enums.EmSecure;
@@ -33,7 +33,7 @@ public abstract class AbstractAdapter implements AdapterProvider {
         return provider;
     }
 
-    private Annal logger() {
-        return Annal.get(this.getClass());
+    private LogOf logger() {
+        return LogOf.get(this.getClass());
     }
 }

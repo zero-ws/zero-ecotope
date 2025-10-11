@@ -2,7 +2,7 @@ package io.zerows.epoch.assembly;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.name.Names;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.support.Ut;
 import jakarta.inject.Named;
 import jakarta.inject.Singleton;
@@ -63,7 +63,7 @@ public abstract class DiGuiceModule extends AbstractModule {
         }
     }
 
-    protected OLog logger() {
+    protected LogO logger() {
         return Ut.Log.metadata(this.getClass());
     }
 }

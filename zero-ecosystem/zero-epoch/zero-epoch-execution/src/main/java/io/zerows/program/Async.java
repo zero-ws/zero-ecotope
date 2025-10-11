@@ -2,7 +2,7 @@ package io.zerows.program;
 
 import io.vertx.core.Future;
 import io.vertx.core.Promise;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.epoch.spi.channel.Pocket;
 import io.zerows.platform.constant.VValue;
 import io.zerows.platform.metadata.KRef;
@@ -19,7 +19,7 @@ import java.util.function.Supplier;
 
 class Async {
 
-    private static final OLog LOGGER = Ut.Log.ux(Async.class);
+    private static final LogO LOGGER = Ut.Log.ux(Async.class);
 
     static <T> Future<T> fromAsync(final CompletionStage<T> state) {
         final Promise<T> promise = Promise.promise();

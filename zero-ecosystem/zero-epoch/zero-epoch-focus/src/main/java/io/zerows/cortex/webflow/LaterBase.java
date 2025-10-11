@@ -5,7 +5,7 @@ import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.Session;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 
 /**
  * @author lang : 2024-04-04
@@ -29,7 +29,7 @@ public abstract class LaterBase<T> implements Later<T> {
         return this.context.session();
     }
 
-    protected Annal logger() {
-        return Annal.get(this.getClass());
+    protected LogOf logger() {
+        return LogOf.get(this.getClass());
     }
 }

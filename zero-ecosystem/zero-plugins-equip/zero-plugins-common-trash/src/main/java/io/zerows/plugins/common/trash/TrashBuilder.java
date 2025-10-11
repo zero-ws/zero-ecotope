@@ -5,7 +5,7 @@ import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.database.jooq.JooqInfix;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.support.Ut;
 import org.jooq.*;
 import org.jooq.impl.DSL;
@@ -28,7 +28,7 @@ import java.util.concurrent.ConcurrentMap;
 @SuppressWarnings("all")
 class TrashBuilder {
 
-    private static final Annal LOGGER = Annal.get(TrashBuilder.class);
+    private static final LogOf LOGGER = LogOf.get(TrashBuilder.class);
     private static ConcurrentMap<String, Field> FIELD_MAP = new ConcurrentHashMap<String, Field>() {
         {
             put("key", DSL.field(DSL.name("KEY"), String.class));

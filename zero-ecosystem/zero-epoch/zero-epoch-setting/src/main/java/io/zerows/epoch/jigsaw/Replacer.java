@@ -3,7 +3,7 @@ package io.zerows.epoch.jigsaw;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.epoch.basicore.MDConnect;
 import io.zerows.support.Ut;
 
@@ -44,7 +44,7 @@ public interface Replacer<T> {
 
     T build(JsonObject configJ);
 
-    default OLog logger() {
+    default LogO logger() {
         return Ut.Log.uca(this.getClass());
     }
 }

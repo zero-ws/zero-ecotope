@@ -1,7 +1,7 @@
 package io.zerows.epoch.database.jooq.condition;
 
 import io.vertx.core.json.JsonArray;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.support.Ut;
 import org.jooq.Condition;
 import org.jooq.Field;
@@ -18,7 +18,7 @@ public class ClauseString implements Clause {
         return term.where(columnName, fieldName, value);
     }
 
-    protected OLog logger() {
+    protected LogO logger() {
         return Ut.Log.database(getClass());
     }
 

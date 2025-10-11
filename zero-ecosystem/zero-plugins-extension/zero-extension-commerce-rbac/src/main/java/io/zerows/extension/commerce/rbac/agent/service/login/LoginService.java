@@ -3,7 +3,7 @@ package io.zerows.extension.commerce.rbac.agent.service.login;
 import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.extension.commerce.rbac.agent.service.business.UserStub;
 import io.zerows.extension.commerce.rbac.atom.ScToken;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.SUserDao;
@@ -25,7 +25,7 @@ import java.util.Objects;
 
 public class LoginService implements LoginStub {
 
-    private static final OLog LOGGER = Ut.Log.security(LoginService.class);
+    private static final LogO LOGGER = Ut.Log.security(LoginService.class);
     private final ScClock<ScToken> cache;
     @Inject
     private transient UserStub userStub;

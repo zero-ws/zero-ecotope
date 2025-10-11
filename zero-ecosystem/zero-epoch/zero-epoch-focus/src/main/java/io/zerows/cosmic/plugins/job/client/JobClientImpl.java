@@ -5,7 +5,7 @@ import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.cosmic.plugins.job.Agha;
 import io.zerows.cosmic.plugins.job.metadata.Mission;
 import io.zerows.support.Ut;
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 public class JobClientImpl implements JobClient {
 
-    private static final OLog LOGGER = Ut.Log.plugin(JobClientImpl.class);
+    private static final LogO LOGGER = Ut.Log.plugin(JobClientImpl.class);
     private transient final Vertx vertx;
     private transient final JsonObject config;
 

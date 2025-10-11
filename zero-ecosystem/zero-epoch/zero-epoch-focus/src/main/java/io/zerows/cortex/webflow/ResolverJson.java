@@ -1,7 +1,7 @@
 package io.zerows.cortex.webflow;
 
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.cortex.metadata.WebEpsilon;
 import io.zerows.support.Ut;
 import io.zerows.weaver.ZeroType;
@@ -14,7 +14,7 @@ import io.zerows.weaver.ZeroType;
 @SuppressWarnings("unchecked")
 public class ResolverJson<T> implements Resolver<T> {
 
-    private static final Annal LOGGER = Annal.get(ResolverJson.class);
+    private static final LogOf LOGGER = LogOf.get(ResolverJson.class);
 
     @Override
     public WebEpsilon<T> resolve(final RoutingContext context,

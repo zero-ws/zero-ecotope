@@ -6,7 +6,7 @@ import io.vertx.core.Future;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.platform.metadata.KMap;
 import io.zerows.platform.metadata.KMapping;
@@ -19,7 +19,7 @@ import java.util.Objects;
 
 public class ActOut extends ActMapping implements Serializable {
 
-    private static final OLog LOGGER = Ut.Log.data(ActOut.class);
+    private static final LogO LOGGER = Ut.Log.data(ActOut.class);
     private transient final Envelop envelop;
     private transient String identifier;
 

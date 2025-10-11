@@ -4,7 +4,7 @@ import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.application.YmlCore;
 import io.zerows.epoch.constant.KName;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.component.environment.MatureOn;
 import io.zerows.epoch.database.Database;
 import io.zerows.epoch.database.cp.DataPool;
@@ -20,7 +20,7 @@ import java.util.concurrent.ConcurrentMap;
 
 public class JooqPin {
 
-    private static final OLog LOGGER = Ut.Log.database(JooqPin.class);
+    private static final LogO LOGGER = Ut.Log.database(JooqPin.class);
 
     public static String initTable(final Class<?> clazz) {
         final JooqDsl dsl = JooqInfix.getDao(clazz);

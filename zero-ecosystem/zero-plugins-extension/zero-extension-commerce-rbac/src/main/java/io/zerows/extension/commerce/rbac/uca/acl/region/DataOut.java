@@ -2,7 +2,7 @@ package io.zerows.extension.commerce.rbac.uca.acl.region;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.component.qr.syntax.Ir;
 import io.zerows.platform.constant.VValue;
 import io.zerows.epoch.web.Envelop;
@@ -23,7 +23,7 @@ import static io.zerows.extension.commerce.rbac.util.Sc.LOG;
 
 class DataOut {
 
-    private static final Annal LOGGER = Annal.get(DataOut.class);
+    private static final LogOf LOGGER = LogOf.get(DataOut.class);
 
     /*
      * projection on result

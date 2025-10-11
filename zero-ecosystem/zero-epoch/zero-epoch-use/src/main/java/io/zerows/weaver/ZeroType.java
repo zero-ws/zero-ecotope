@@ -4,7 +4,7 @@ import io.r2mo.typed.cc.Cc;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.epoch.metadata.KView;
 import io.zerows.support.Ut;
 
@@ -32,7 +32,7 @@ import java.util.function.Supplier;
  */
 public class ZeroType {
 
-    private static final OLog LOGGER = Ut.Log.ux(ZeroType.class);
+    private static final LogO LOGGER = Ut.Log.ux(ZeroType.class);
     private static final Cc<String, Saber> CC_SABER = Cc.openThread();
     private static final ConcurrentMap<Class<?>, Supplier<Saber>> SABERS =
         new ConcurrentHashMap<>() {

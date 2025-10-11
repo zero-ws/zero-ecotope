@@ -3,7 +3,7 @@ package io.zerows.extension.mbse.ui.agent.service;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.mbse.ui.domain.tables.daos.UiFieldDao;
 import io.zerows.extension.mbse.ui.domain.tables.pojos.UiField;
@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 import static io.zerows.extension.mbse.ui.util.Ui.LOG;
 
 public class FieldService implements FieldStub {
-    private static final Annal LOGGER = Annal.get(FieldService.class);
+    private static final LogOf LOGGER = LogOf.get(FieldService.class);
 
     @Override
     public Future<JsonArray> fetchUi(final String formId) {

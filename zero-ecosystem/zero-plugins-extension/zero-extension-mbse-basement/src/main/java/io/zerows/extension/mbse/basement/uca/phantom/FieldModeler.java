@@ -3,7 +3,7 @@ package io.zerows.extension.mbse.basement.uca.phantom;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.mbse.basement.domain.tables.daos.MFieldDao;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MField;
@@ -14,7 +14,7 @@ import java.util.function.Function;
 
 class FieldModeler implements AoModeler {
 
-    private static final Annal LOGGER = Annal.get(FieldModeler.class);
+    private static final LogOf LOGGER = LogOf.get(FieldModeler.class);
 
     @Override
     public Function<JsonObject, Future<JsonObject>> apply() {

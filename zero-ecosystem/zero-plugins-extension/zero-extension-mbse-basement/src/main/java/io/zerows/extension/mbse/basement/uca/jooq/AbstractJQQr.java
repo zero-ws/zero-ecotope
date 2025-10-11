@@ -3,7 +3,7 @@ package io.zerows.extension.mbse.basement.uca.jooq;
 import io.r2mo.function.Fn;
 import io.zerows.platform.constant.VValue;
 import io.zerows.platform.enums.modeling.EmModel;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.atom.data.DataEvent;
 import io.zerows.extension.mbse.basement.atom.element.DataMatrix;
@@ -123,7 +123,7 @@ abstract class AbstractJQQr {
         return rows;
     }
 
-    private Annal logger() {
-        return Annal.get(this.getClass());
+    private LogOf logger() {
+        return LogOf.get(this.getClass());
     }
 }

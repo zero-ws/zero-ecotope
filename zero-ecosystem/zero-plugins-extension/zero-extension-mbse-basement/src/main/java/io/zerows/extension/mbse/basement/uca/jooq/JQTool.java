@@ -1,7 +1,7 @@
 package io.zerows.extension.mbse.basement.uca.jooq;
 
 import io.zerows.platform.constant.VValue;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.component.qr.Pager;
 import io.zerows.component.qr.Sorter;
 import io.zerows.extension.mbse.basement.atom.data.DataEvent;
@@ -144,7 +144,7 @@ class JQTerm {
 
 @SuppressWarnings("all")
 class JQToolkit {
-    private static final Annal LOGGER = Annal.get(JQToolkit.class);
+    private static final LogOf LOGGER = LogOf.get(JQToolkit.class);
 
     static Condition getCondition(final DataEvent event,
                                   final Ingest ingest,

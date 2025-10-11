@@ -3,7 +3,7 @@ package io.zerows.extension.runtime.skeleton.refine;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.Apt;
 import io.zerows.platform.constant.VValue;
@@ -67,7 +67,7 @@ class KeCompare {
             final JsonArray inserted = compared.comparedA();
             final JsonArray updated = compared.comparedU();
 
-            final Annal LOGGER = Annal.get(clazz);
+            final LogOf LOGGER = LogOf.get(clazz);
             LOG.Ke.info(LOGGER, "Result of calculated, Insert = {0}, Update = {1}",
                 String.valueOf(inserted.size()),
                 String.valueOf(updated.size()));

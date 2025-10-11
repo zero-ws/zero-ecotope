@@ -2,7 +2,7 @@ package io.zerows.cosmic.plugins.job;
 
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.cosmic.plugins.job.exception._60041Exception417JobMethod;
 import io.zerows.cosmic.plugins.job.metadata.Mission;
 import io.zerows.cortex.metadata.ParameterBuilder;
@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Objects;
 
 class PhaseRunOn {
-    private static final OLog LOGGER = Ut.Log.uca(PhaseRunOn.class);
+    private static final LogO LOGGER = Ut.Log.uca(PhaseRunOn.class);
     private transient final Vertx vertx;
     private transient final KRef underway = new KRef();
 

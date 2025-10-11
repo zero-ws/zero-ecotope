@@ -2,7 +2,7 @@ package io.zerows.extension.runtime.crud.util;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
 import io.zerows.mbse.metadata.KModule;
 import io.zerows.epoch.metadata.KField;
@@ -17,7 +17,7 @@ import static io.zerows.extension.runtime.crud.util.Ix.LOG;
 
 class IxSerialize {
 
-    private static final Annal LOGGER = Annal.get(IxSerialize.class);
+    private static final LogOf LOGGER = LogOf.get(IxSerialize.class);
 
     private static void serializeInternal(final JsonObject data, final KModule config) {
         /*

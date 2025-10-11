@@ -3,7 +3,7 @@ package io.zerows.extension.mbse.ui.agent.service;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.mbse.ui.domain.tables.daos.UiFormDao;
 import io.zerows.extension.mbse.ui.domain.tables.pojos.UiForm;
@@ -17,7 +17,7 @@ import java.util.Objects;
 import static io.zerows.extension.mbse.ui.util.Ui.LOG;
 
 public class FormService implements FormStub {
-    private static final Annal LOGGER = Annal.get(FormService.class);
+    private static final LogOf LOGGER = LogOf.get(FormService.class);
 
     @Inject
     private transient FieldStub fieldStub;

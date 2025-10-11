@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 import io.zerows.epoch.constant.KName;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.support.Ut;
 import io.zerows.support.base.FnBase;
 
@@ -33,7 +33,7 @@ public class AbstractRapid<K, T> implements Rapid<K, T> {
         this.pool = UxPool.of(poolName);
     }
 
-    protected OLog logger() {
+    protected LogO logger() {
         return Ut.Log.cache(this.getClass());
     }
 

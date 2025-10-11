@@ -1,6 +1,6 @@
 package io.zerows.cortex.webflow;
 
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import jakarta.ws.rs.core.MediaType;
 
 import java.util.Objects;
@@ -12,7 +12,7 @@ import java.util.function.Supplier;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 public class WingSelector {
-    private static final Annal LOGGER = Annal.get(WingSelector.class);
+    private static final LogOf LOGGER = LogOf.get(WingSelector.class);
 
     public static Wings end(final String contentType, final Set<MediaType> produces) {
         /*

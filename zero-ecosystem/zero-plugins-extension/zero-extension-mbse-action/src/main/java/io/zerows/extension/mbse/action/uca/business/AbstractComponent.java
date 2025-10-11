@@ -3,7 +3,7 @@ package io.zerows.extension.mbse.action.uca.business;
 import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.epoch.annotations.Contract;
 import io.zerows.epoch.metadata.XHeader;
 import io.zerows.extension.mbse.action.osgi.spi.jet.JtComponent;
@@ -194,7 +194,7 @@ public abstract class AbstractComponent implements JtComponent, Service {
     /*
      * The logger of Annal here
      */
-    protected Annal logger() {
-        return Annal.get(this.getClass());
+    protected LogOf logger() {
+        return LogOf.get(this.getClass());
     }
 }

@@ -3,7 +3,7 @@ package io.zerows.extension.mbse.ui.agent.api;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.extension.mbse.ui.agent.service.FieldStub;
@@ -18,7 +18,7 @@ import static io.zerows.extension.mbse.ui.util.Ui.LOG;
 @Queue
 public class FormActor {
 
-    private static final Annal LOGGER = Annal.get(FormActor.class);
+    private static final LogOf LOGGER = LogOf.get(FormActor.class);
     final private String FIELD_FIELDS = "fields";
     final private String FIELD_OPS = "ops";
     @Inject

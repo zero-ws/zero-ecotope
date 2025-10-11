@@ -1,7 +1,7 @@
 package io.zerows.cosmic.plugins;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.cosmic.bootstrap.AxisExtension;
 import io.zerows.cortex.sdk.Axis;
 import io.zerows.specification.development.compiled.HBundle;
@@ -31,7 +31,7 @@ public interface OAxisGateway {
 
     Axis getAxis(HBundle owner);
 
-    default OLog logger() {
+    default LogO logger() {
         return Ut.Log.websocket(this.getClass());
     }
 }

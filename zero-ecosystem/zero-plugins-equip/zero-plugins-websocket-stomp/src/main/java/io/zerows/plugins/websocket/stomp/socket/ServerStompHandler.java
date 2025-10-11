@@ -9,7 +9,7 @@ import io.vertx.ext.auth.User;
 import io.vertx.ext.auth.authentication.AuthenticationProvider;
 import io.vertx.ext.stomp.*;
 import io.vertx.ext.stomp.impl.*;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +21,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class ServerStompHandler implements ServerWsHandler {
 
-    private static final Annal LOGGER = Annal.get(ServerStompHandler.class);
+    private static final LogOf LOGGER = LogOf.get(ServerStompHandler.class);
     private final Vertx vertx;
     private final Context context;
     private final LocalMap<Destination, String> destinations;

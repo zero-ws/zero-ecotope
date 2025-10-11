@@ -7,7 +7,7 @@ import io.vertx.core.Handler;
 import io.vertx.core.Promise;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.sdk.plugins.InfixClient;
 
 /**
@@ -48,7 +48,7 @@ public interface SmsClient extends InfixClient<SmsClient> {
         return response.future();
     }
 
-    default OLog logger() {
-        return OLog.of(this.getClass(), "SMS/Ali");
+    default LogO logger() {
+        return LogO.of(this.getClass(), "SMS/Ali");
     }
 }

@@ -6,7 +6,7 @@ import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.epoch.basicore.MDConnect;
 import io.zerows.epoch.database.jooq.operation.UxJooq;
 import io.zerows.epoch.jigsaw.Oneness;
@@ -29,7 +29,7 @@ import java.util.concurrent.ConcurrentMap;
  */
 @SuppressWarnings("unchecked")
 class SheetImport {
-    private static final Annal LOGGER = Annal.get(ExcelClientImpl.class);
+    private static final LogOf LOGGER = LogOf.get(ExcelClientImpl.class);
     private transient final ExcelHelper helper;
 
     private SheetImport(final ExcelHelper helper) {

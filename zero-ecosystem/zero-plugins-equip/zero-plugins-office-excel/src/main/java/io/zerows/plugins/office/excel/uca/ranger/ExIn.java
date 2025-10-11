@@ -1,6 +1,6 @@
 package io.zerows.plugins.office.excel.uca.ranger;
 
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.support.Ut;
 import io.zerows.plugins.office.excel.atom.ExTable;
 import io.zerows.specification.modeling.metadata.HMetaAtom;
@@ -21,7 +21,7 @@ public interface ExIn {
 
     ExTable applyData(ExTable table, ExBound dataRange, Cell cell, HMetaAtom metaAtom);
 
-    default OLog logger() {
+    default LogO logger() {
         return Ut.Log.plugin(this.getClass());
     }
 }

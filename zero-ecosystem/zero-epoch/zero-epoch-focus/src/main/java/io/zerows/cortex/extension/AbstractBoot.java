@@ -2,7 +2,7 @@ package io.zerows.cortex.extension;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.epoch.basicore.MDConnect;
 import io.zerows.epoch.basicore.MDEntity;
@@ -41,7 +41,7 @@ public abstract class AbstractBoot implements HExtension {
         this.logger().info("Bundle: id = {} loaded files {}", module, this.configuration.inFiles().size());
     }
 
-    protected OLog logger() {
+    protected LogO logger() {
         return Ut.Log.boot(this.getClass());
     }
 

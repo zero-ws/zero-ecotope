@@ -1,7 +1,7 @@
 package io.zerows.epoch.spi.channel;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.support.Ut;
 
 import java.io.Serializable;
@@ -14,7 +14,7 @@ import java.util.Vector;
  * Stack of fluent api here to get parameters
  */
 public class KIncome implements Serializable {
-    private static final OLog LOGGER = Ut.Log.service(KIncome.class);
+    private static final LogO LOGGER = Ut.Log.service(KIncome.class);
     private final transient Vector<Object> queue = new Vector<>();
     private final transient List<String> names = new ArrayList<>();
 

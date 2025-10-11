@@ -15,7 +15,7 @@ import io.vertx.ext.auth.authorization.AuthorizationProvider;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.AuthorizationHandler;
 import io.zerows.epoch.constant.KName;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.epoch.metadata.security.Aegis;
 
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ import java.util.function.BiConsumer;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 public class AuthorizationBuiltInHandler implements AuthorizationHandler {
-    private static final Annal LOGGER = Annal.get(AuthorizationBuiltInHandler.class);
+    private static final LogOf LOGGER = LogOf.get(AuthorizationBuiltInHandler.class);
     private final transient Collection<AuthorizationProvider> providers;
     private final transient AuthorizationResource resource;
     private BiConsumer<RoutingContext, AuthorizationContext> consumer;

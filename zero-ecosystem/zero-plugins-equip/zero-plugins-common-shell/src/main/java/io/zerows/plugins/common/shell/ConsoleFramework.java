@@ -3,7 +3,7 @@ package io.zerows.plugins.common.shell;
 import io.vertx.core.Vertx;
 import io.zerows.platform.enums.Environment;
 import io.zerows.epoch.application.YmlCore;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.plugins.common.shell.exception._40070Exception500InternalConflict;
 import io.zerows.plugins.common.shell.refine.Sl;
 
@@ -16,7 +16,7 @@ import java.util.function.Consumer;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 public class ConsoleFramework {
-    private static final Annal LOGGER = Annal.get(ConsoleFramework.class);
+    private static final LogOf LOGGER = LogOf.get(ConsoleFramework.class);
     private static final ConcurrentMap<String, Consumer<String>> INTERNAL =
         new ConcurrentHashMap<>();
 

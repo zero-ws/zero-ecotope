@@ -1,7 +1,7 @@
 package io.zerows.cosmic.plugins.validation;
 
 import io.r2mo.typed.exception.WebException;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.cortex.metadata.WebRule;
 import io.zerows.cosmic.plugins.validation.exception._60005Exception400ValidationRule;
 import io.zerows.support.Ut;
@@ -16,7 +16,7 @@ public abstract class RulerBase implements Ruler {
         return new _60005Exception400ValidationRule(field, value, message);
     }
 
-    protected OLog logger() {
+    protected LogO logger() {
         return Ut.Log.uca(this.getClass());
     }
 }

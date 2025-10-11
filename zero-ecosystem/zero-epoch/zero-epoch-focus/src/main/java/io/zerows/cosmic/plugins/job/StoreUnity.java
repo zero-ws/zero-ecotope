@@ -1,6 +1,6 @@
 package io.zerows.cosmic.plugins.job;
 
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.cosmic.plugins.job.client.JobClient;
 import io.zerows.cosmic.plugins.job.client.JobInfix;
 import io.zerows.cosmic.plugins.job.metadata.Mission;
@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
  */
 class StoreUnity implements JobStore {
 
-    private static final OLog LOGGER = Ut.Log.cache(StoreUnity.class);
+    private static final LogO LOGGER = Ut.Log.cache(StoreUnity.class);
     /*
      * Code in programming here ( Could not modify, read-only )
      */

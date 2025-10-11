@@ -9,7 +9,7 @@ import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.environment.DevEnv;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.cosmic.plugins.cache.Rapid;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
@@ -25,7 +25,7 @@ import java.util.Objects;
  */
 public class AuthenticateGateway {
 
-    private static final Annal LOGGER = Annal.get(AuthenticateGateway.class);
+    private static final LogOf LOGGER = LogOf.get(AuthenticateGateway.class);
 
     public static void userCached(final JsonObject credentials, final Actuator actuator, final Actuator fnCache) {
         final String habitus = credentials.getString(KName.HABITUS);

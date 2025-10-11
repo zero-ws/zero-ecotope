@@ -42,66 +42,66 @@ public class LogModule {
     }
 
     public void info(final Class<?> clazz, final String pattern, final Object... args) {
-        Annal.get(clazz).info(this.format(pattern), args);
+        LogOf.get(clazz).info(this.format(pattern), args);
     }
 
     public void info(final boolean condition, final Class<?> clazz, final String pattern, final Object... args) {
-        Annal.get(clazz).info(condition, this.format(pattern), args);
+        LogOf.get(clazz).info(condition, this.format(pattern), args);
     }
 
     public void debug(final Class<?> clazz, final String pattern, final Object... args) {
-        Annal.get(clazz).debug(this.format(pattern), args);
+        LogOf.get(clazz).debug(this.format(pattern), args);
     }
 
     public void warn(final Class<?> clazz, final String pattern, final Object... args) {
-        Annal.get(clazz).warn(this.format(pattern), args);
+        LogOf.get(clazz).warn(this.format(pattern), args);
     }
 
     public void error(final Class<?> clazz, final String pattern, final Object... args) {
-        Annal.get(clazz).error(this.format(pattern), args);
+        LogOf.get(clazz).error(this.format(pattern), args);
     }
 
     public void fatal(final Class<?> clazz, final Throwable ex) {
-        Annal.get(clazz).fatal(ex);
+        LogOf.get(clazz).fatal(ex);
     }
 
     public void fatal(final Class<?> clazz, final Throwable ex, final String prefix) {
-        Annal.get(clazz).fatal(ex, prefix);
+        LogOf.get(clazz).fatal(ex, prefix);
     }
 
     // ---------------------- 外层构造 ------------------
-    public void info(final Annal logger, final String pattern, final Object... args) {
-        final Annal annal = Log.logger(logger);
+    public void info(final LogOf logger, final String pattern, final Object... args) {
+        final LogOf annal = Log.logger(logger);
         annal.info(this.format(pattern), args);
     }
 
-    public void info(final boolean condition, final Annal logger, final String pattern, final Object... args) {
-        final Annal annal = Log.logger(logger);
+    public void info(final boolean condition, final LogOf logger, final String pattern, final Object... args) {
+        final LogOf annal = Log.logger(logger);
         annal.info(condition, this.format(pattern), args);
     }
 
-    public void debug(final Annal logger, final String pattern, final Object... args) {
-        final Annal annal = Log.logger(logger);
+    public void debug(final LogOf logger, final String pattern, final Object... args) {
+        final LogOf annal = Log.logger(logger);
         annal.debug(this.format(pattern), args);
     }
 
-    public void warn(final Annal logger, final String pattern, final Object... args) {
-        final Annal annal = Log.logger(logger);
+    public void warn(final LogOf logger, final String pattern, final Object... args) {
+        final LogOf annal = Log.logger(logger);
         annal.warn(this.format(pattern), args);
     }
 
-    public void error(final Annal logger, final String pattern, final Object... args) {
-        final Annal annal = Log.logger(logger);
+    public void error(final LogOf logger, final String pattern, final Object... args) {
+        final LogOf annal = Log.logger(logger);
         annal.error(this.format(pattern), args);
     }
 
-    public void fatal(final Annal logger, final Throwable ex) {
-        final Annal annal = Log.logger(logger);
+    public void fatal(final LogOf logger, final Throwable ex) {
+        final LogOf annal = Log.logger(logger);
         annal.fatal(ex);
     }
 
-    public void fatal(final Annal logger, final Throwable ex, final String prefix) {
-        final Annal annal = Log.logger(logger);
+    public void fatal(final LogOf logger, final Throwable ex, final String prefix) {
+        final LogOf annal = Log.logger(logger);
         annal.fatal(ex, prefix);
     }
 }

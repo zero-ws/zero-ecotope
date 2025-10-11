@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.extension.commerce.erp.agent.service.CompanyStub;
 import io.zerows.extension.commerce.erp.eon.Addr;
 import io.zerows.extension.commerce.erp.eon.ErpMsg;
@@ -15,7 +15,7 @@ import static io.zerows.extension.commerce.erp.util.Er.LOG;
 @Queue
 public class CompanyActor {
 
-    private static final Annal LOGGER = Annal.get(CompanyActor.class);
+    private static final LogOf LOGGER = LogOf.get(CompanyActor.class);
 
     @Inject
     private transient CompanyStub stub;

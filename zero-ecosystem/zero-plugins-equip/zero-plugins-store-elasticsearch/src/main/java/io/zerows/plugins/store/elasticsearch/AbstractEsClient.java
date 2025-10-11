@@ -2,7 +2,7 @@ package io.zerows.plugins.store.elasticsearch;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.support.Ut;
 import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.bulk.BulkResponse;
@@ -39,8 +39,8 @@ public abstract class AbstractEsClient {
         return this.options.getString(field);
     }
 
-    protected Annal logger() {
-        return Annal.get(this.getClass());
+    protected LogOf logger() {
+        return LogOf.get(this.getClass());
     }
 
     protected Boolean doBatch(final JsonArray documents, final String idField,

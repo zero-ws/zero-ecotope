@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.component.qr.syntax.Ir;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Infusion;
@@ -33,7 +33,7 @@ import java.util.List;
 @SuppressWarnings("all")
 public class FileActor {
 
-    private static final Annal LOGGER = Annal.get(FileActor.class);
+    private static final LogOf LOGGER = LogOf.get(FileActor.class);
 
     @Infusion
     private transient ExcelClient client;

@@ -10,7 +10,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 import io.vertx.ext.auth.authentication.AuthenticationProvider;
 import io.vertx.ext.auth.authentication.Credentials;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.epoch.metadata.security.Aegis;
 
 import java.lang.reflect.Method;
@@ -22,7 +22,7 @@ import java.util.function.Function;
  */
 public class AuthenticateBuiltInProvider implements AuthenticationProvider {
 
-    private final static Annal LOGGER = Annal.get(AuthenticateBuiltInProvider.class);
+    private final static LogOf LOGGER = LogOf.get(AuthenticateBuiltInProvider.class);
     private final transient Aegis aegis;
     private transient Function<JsonObject, Future<User>> userFn;
 

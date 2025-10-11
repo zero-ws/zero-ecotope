@@ -4,7 +4,7 @@ import io.r2mo.typed.cc.Cc;
 import io.r2mo.typed.exception.WebException;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.cortex.metadata.WebEpsilon;
 import io.zerows.epoch.application.YmlCore;
 import io.zerows.management.OZeroStore;
@@ -32,7 +32,7 @@ public class AtomicMime<T> implements Atomic<T> {
         "for Content-Type = null when request to {1}";
     public static final String RESOLVER_CONFIG = "( Resolver ) Select resolver from " +
         "annotation config \"{0}\" for Content-Type {1}";
-    private static final Annal LOGGER = Annal.get(AtomicMime.class);
+    private static final LogOf LOGGER = LogOf.get(AtomicMime.class);
 
     private static final ConcurrentMap<String, Atomic> POOL_ATOMIC = new ConcurrentHashMap<>();
     private static final Cc<String, Atomic> CC_ATOMIC = Cc.openThread();

@@ -2,7 +2,7 @@ package io.zerows.extension.commerce.rbac.uca.acl.rapid;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.support.Ut;
 import io.zerows.extension.commerce.rbac.eon.AuthMsg;
 
@@ -16,7 +16,7 @@ import static io.zerows.extension.commerce.rbac.util.Sc.LOG;
  */
 class SiftRow {
 
-    private static final Annal LOGGER = Annal.get(SiftRow.class);
+    private static final LogOf LOGGER = LogOf.get(SiftRow.class);
 
     static JsonObject onAcl(final JsonObject rows, final Set<String> visible) {
         final JsonObject result = new JsonObject();

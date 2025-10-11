@@ -3,7 +3,6 @@ package io.zerows.specification.atomic;
 /**
  * @author lang : 2023/4/28
  */
-@Deprecated
 public interface HLogger {
 
     // -------------- 异常专用日志方法

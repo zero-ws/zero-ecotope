@@ -5,7 +5,7 @@ import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.enums.typed.ChangeFlag;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.support.Ut;
 import org.elasticsearch.action.get.GetRequest;
 import org.elasticsearch.action.get.GetResponse;
@@ -22,7 +22,7 @@ import java.util.concurrent.ConcurrentMap;
  */
 
 public class ElasticSearchClientImpl implements ElasticSearchClient {
-    private static final Annal LOGGER = Annal.get(ElasticSearchClientImpl.class);
+    private static final LogOf LOGGER = LogOf.get(ElasticSearchClientImpl.class);
 
     private final transient Vertx vertx;
     private final transient JsonObject options = new JsonObject();

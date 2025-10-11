@@ -1,7 +1,7 @@
 package io.zerows.support.fn;
 
 import io.vertx.core.Future;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.support.Ut;
 
 import java.util.Objects;
@@ -12,7 +12,7 @@ import java.util.function.Supplier;
  * @author lang : 2023/4/28
  */
 class Monad {
-    private static final OLog LOGGER = Ut.Log.ux(Monad.class);
+    private static final LogO LOGGER = Ut.Log.ux(Monad.class);
 
     private Monad() {
 

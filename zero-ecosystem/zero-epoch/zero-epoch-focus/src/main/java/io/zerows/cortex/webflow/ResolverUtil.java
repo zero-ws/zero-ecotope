@@ -2,7 +2,7 @@ package io.zerows.cortex.webflow;
 
 import io.vertx.core.buffer.Buffer;
 import io.vertx.ext.web.FileUpload;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.weaver.ZeroType;
 
 import java.io.File;
@@ -26,7 +26,7 @@ import java.util.stream.Stream;
  */
 @SuppressWarnings("all")
 class ResolverUtil {
-    private static final Annal LOGGER = Annal.get(ResolverUtil.class);
+    private static final LogOf LOGGER = LogOf.get(ResolverUtil.class);
 
     public static <T> T toFile(final Set<FileUpload> fileUploads, final Class<?> expected, final Function<String, Buffer> consumer) {
         /*

@@ -2,7 +2,7 @@ package io.zerows.extension.runtime.ambient.osgi.spi.extension;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.UObject;
 import io.zerows.extension.runtime.ambient.bootstrap.AtConfig;
@@ -24,7 +24,7 @@ import static io.zerows.extension.runtime.ambient.util.At.LOG;
 
 public class DatumInit implements Init {
 
-    private static final Annal LOGGER = Annal.get(DatumInit.class);
+    private static final LogOf LOGGER = LogOf.get(DatumInit.class);
     private static final AtConfig CONFIG = AtPin.getConfig();
 
     @Override

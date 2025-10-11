@@ -3,7 +3,7 @@ package io.zerows.cosmic.bootstrap;
 import io.r2mo.function.Fn;
 import io.vertx.core.eventbus.Message;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.cortex.sdk.Aim;
 import io.zerows.cosmic.exception._40013Exception500ReturnType;
 import io.zerows.cosmic.exception._40014Exception500WorkerMissing;
@@ -25,7 +25,7 @@ import java.util.Set;
  */
 class DifferEvent implements Differ<RoutingContext> {
 
-    private static final Annal LOGGER = Annal.get(DifferEvent.class);
+    private static final LogOf LOGGER = LogOf.get(DifferEvent.class);
 
     private static final Set<WebReceipt> RECEIPTS = OCacheActor.entireValue().getReceipts();
 

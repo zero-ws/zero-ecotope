@@ -2,7 +2,7 @@ package io.zerows.component.qr;
 
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.component.qr.syntax.Ir;
 import io.zerows.component.qr.syntax.IrDo;
 import io.zerows.component.qr.syntax.IrItem;
@@ -25,7 +25,7 @@ public class Criteria implements Serializable {
     /**
      * Zero standard logger in current
      */
-    private static final Annal LOGGER = Annal.get(Criteria.class);
+    private static final LogOf LOGGER = LogOf.get(Criteria.class);
     /**
      * The mode of current criteria condition.
      *

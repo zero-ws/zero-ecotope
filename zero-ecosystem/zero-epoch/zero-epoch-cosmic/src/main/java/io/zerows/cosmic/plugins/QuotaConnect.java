@@ -3,7 +3,7 @@ package io.zerows.cosmic.plugins;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.management.OZeroStore;
 import io.zerows.support.Ut;
@@ -19,7 +19,7 @@ import java.util.function.Function;
  */
 public class QuotaConnect {
     private static final boolean IS_MONITOR;
-    private static final OLog LOGGER = Ut.Log.uca(QuotaConnect.class);
+    private static final LogO LOGGER = Ut.Log.uca(QuotaConnect.class);
     /*
      * Default Quota that will be mounted to health monitor
      *

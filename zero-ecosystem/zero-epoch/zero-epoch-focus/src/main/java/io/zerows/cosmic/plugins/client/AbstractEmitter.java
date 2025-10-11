@@ -3,7 +3,7 @@ package io.zerows.cosmic.plugins.client;
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.platform.metadata.KIntegration;
 import io.zerows.platform.enums.app.EmTraffic;
 import io.zerows.support.Ut;
@@ -54,7 +54,7 @@ public abstract class AbstractEmitter implements Emitter {
         }
     }
 
-    protected OLog logger() {
+    protected LogO logger() {
         return Ut.Log.uca(this.getClass());
     }
 

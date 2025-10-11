@@ -2,7 +2,7 @@ package io.zerows.cosmic.plugins.client;
 
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.cosmic.plugins.client.exception._60046Exception500RequestConfig;
 import io.zerows.cosmic.plugins.client.exception._60047Exception501HttpClientNull;
 import io.zerows.epoch.constant.KWeb;
@@ -183,7 +183,7 @@ public abstract class AbstractRotator implements Rotator {
         });
     }
 
-    protected OLog logger() {
+    protected LogO logger() {
         return Ut.Log.uca(this.getClass());
     }
 }

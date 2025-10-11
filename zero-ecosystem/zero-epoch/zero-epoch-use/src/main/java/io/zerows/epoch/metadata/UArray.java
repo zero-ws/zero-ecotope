@@ -3,7 +3,7 @@ package io.zerows.epoch.metadata;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.support.Ut;
 
 import java.util.Objects;
@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
  * Stream tool for JsonArray
  */
 public class UArray {
-    private static final OLog LOGGER = Ut.Log.data(UArray.class);
+    private static final LogO LOGGER = Ut.Log.data(UArray.class);
 
     private final JsonArray arrayReference;
 

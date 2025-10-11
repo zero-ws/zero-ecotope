@@ -4,7 +4,7 @@ import io.vertx.core.CompositeFuture;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.component.qr.syntax.Ir;
 import io.zerows.epoch.metadata.MMPojo;
 import io.zerows.epoch.metadata.MMPojoMapping;
@@ -20,7 +20,7 @@ import java.util.concurrent.ConcurrentMap;
 
 public class JqTool {
 
-    private static final OLog LOGGER = Ut.Log.database(JqTool.class);
+    private static final LogO LOGGER = Ut.Log.database(JqTool.class);
 
     public static <T> CompositeFuture joinAsync(final JsonObject criteria, final JsonObject data, final JqFlow flow) {
         final Future<JsonObject> criteriaFuture = flow.inputQrJAsync(criteria);

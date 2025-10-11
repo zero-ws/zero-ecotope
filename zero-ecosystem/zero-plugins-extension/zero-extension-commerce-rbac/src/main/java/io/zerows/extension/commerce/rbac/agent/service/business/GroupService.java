@@ -2,7 +2,7 @@ package io.zerows.extension.commerce.rbac.agent.service.business;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.database.jooq.operation.UxJooq;
 import io.zerows.epoch.metadata.UArray;
@@ -22,7 +22,7 @@ import static io.zerows.extension.commerce.rbac.util.Sc.LOG;
 
 public class GroupService implements GroupStub {
 
-    private static final Annal LOGGER = Annal.get(GroupService.class);
+    private static final LogOf LOGGER = LogOf.get(GroupService.class);
 
     @Override
     public Future<JsonArray> fetchRoleIdsAsync(final String groupKey) {

@@ -2,7 +2,7 @@ package io.zerows.cortex.webflow;
 
 import io.r2mo.typed.exception.web._500ServerInternalException;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.cortex.metadata.WebEpsilon;
 import io.zerows.epoch.annotations.Contract;
 
@@ -10,7 +10,7 @@ import java.util.Objects;
 
 public class SolveResolver<T> implements Resolver<T> {
 
-    private static final Annal LOGGER = Annal.get(SolveResolver.class);
+    private static final LogOf LOGGER = LogOf.get(SolveResolver.class);
     @Contract
     private transient Solve<T> internalResolver;
 

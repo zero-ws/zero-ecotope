@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 import io.zerows.component.environment.DevEnv;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.cosmic.plugins.cache.Rapid;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
@@ -29,7 +29,7 @@ import static io.zerows.extension.commerce.rbac.util.Sc.LOG;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 public class ScUser {
-    private static final Annal LOGGER = Annal.get(ScUser.class);
+    private static final LogOf LOGGER = LogOf.get(ScUser.class);
     private static final Cc<String, ScUser> CC_USER = Cc.open();
     private final transient Rapid<String, JsonObject> rapid;
     private final transient String habitus;

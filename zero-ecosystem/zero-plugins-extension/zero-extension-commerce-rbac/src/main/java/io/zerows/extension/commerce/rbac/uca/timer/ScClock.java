@@ -3,7 +3,7 @@ package io.zerows.extension.commerce.rbac.uca.timer;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.cosmic.plugins.cache.Rapid;
 import io.zerows.support.Ut;
 import io.zerows.extension.commerce.rbac.atom.ScToken;
@@ -111,7 +111,7 @@ public interface ScClock<T> {
 
     Rapid<String, T> ofCache();
 
-    default OLog logger() {
+    default LogO logger() {
         return Ut.Log.security(this.getClass());
     }
 }

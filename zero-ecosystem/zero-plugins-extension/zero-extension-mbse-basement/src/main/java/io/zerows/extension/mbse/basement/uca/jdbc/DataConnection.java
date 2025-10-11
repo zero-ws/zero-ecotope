@@ -2,7 +2,7 @@ package io.zerows.extension.mbse.basement.uca.jdbc;
 
 import io.r2mo.function.Fn;
 import io.r2mo.typed.cc.Cc;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.epoch.database.cp.DataPool;
 import io.zerows.extension.mbse.basement.exception._80502Exception500EmptySQL;
 import io.zerows.extension.mbse.basement.uca.sql.SqlOutput;
@@ -95,7 +95,7 @@ public class DataConnection implements AoConnection {
         return record.getValue(0, Long.class);
     }
 
-    protected Annal getLogger() {
-        return Annal.get(this.getClass());
+    protected LogOf getLogger() {
+        return LogOf.get(this.getClass());
     }
 }

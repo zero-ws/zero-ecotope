@@ -1,7 +1,7 @@
 package io.zerows.plugins.websocket.stomp.handler;
 
 import io.vertx.core.Vertx;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.support.Ut;
 
 import java.util.Objects;
@@ -17,7 +17,7 @@ abstract class AbstractMixer implements Mixer {
         this.vertx = vertx;
     }
 
-    protected OLog logger() {
+    protected LogO logger() {
         return Ut.Log.websocket(this.getClass());
     }
 

@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 import io.zerows.epoch.constant.KName;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.platform.metadata.KRef;
 import io.zerows.program.Ux;
 import io.zerows.epoch.metadata.security.DataBound;
@@ -32,7 +32,7 @@ import java.util.Objects;
 import static io.zerows.extension.commerce.rbac.util.Sc.LOG;
 
 public class AccreditService implements AccreditStub {
-    private final static Annal LOGGER = Annal.get(AccreditService.class);
+    private final static LogOf LOGGER = LogOf.get(AccreditService.class);
 
     @Inject
     private transient ActionStub stub;

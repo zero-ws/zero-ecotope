@@ -1,7 +1,7 @@
 package io.zerows.epoch.jigsaw;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.epoch.basicore.MDId;
 import io.zerows.support.Ut;
@@ -54,7 +54,7 @@ public interface EquipAt {
      *
      * @return 模块化日志实例 📰
      */
-    default OLog logger() {
+    default LogO logger() {
         return Ut.Log.boot(this.getClass());
     }
 }

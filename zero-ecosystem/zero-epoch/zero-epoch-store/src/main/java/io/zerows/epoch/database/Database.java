@@ -2,7 +2,7 @@ package io.zerows.epoch.database;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.environment.MatureOn;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.epoch.application.YmlCore;
 import io.zerows.management.OZeroStore;
 import io.zerows.platform.enums.EmDS;
@@ -35,7 +35,7 @@ import java.util.Objects;
  *    database:         // WORKFLOW
  */
 public class Database extends KDatabase {
-    private static final OLog LOGGER = Ut.Log.database(Database.class);
+    private static final LogO LOGGER = Ut.Log.database(Database.class);
     private static Database DATABASE;
 
     /* Database Connection Testing */

@@ -1,7 +1,7 @@
 package io.zerows.extension.mbse.basement.uca.jooq.internal;
 
 import io.zerows.platform.constant.VValue;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.extension.mbse.basement.atom.element.DataMatrix;
 import io.zerows.extension.mbse.basement.atom.element.DataRow;
 import org.jooq.*;
@@ -20,7 +20,7 @@ import java.util.function.Supplier;
  */
 @SuppressWarnings("all")
 public class Jq {
-    private static final Annal LOGGER = Annal.get(Jq.class);
+    private static final LogOf LOGGER = LogOf.get(Jq.class);
 
     // 数据库元数据：to前缀
     /* 构造字段 */

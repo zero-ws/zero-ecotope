@@ -9,7 +9,7 @@ import io.vertx.core.Vertx;
 import io.vertx.core.shareddata.AsyncMap;
 import io.vertx.core.shareddata.LocalMap;
 import io.vertx.core.shareddata.SharedData;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.platform.metadata.Kv;
 import io.zerows.cosmic.plugins.cache.exception._60034Exception500SharedDataMode;
 import io.zerows.support.Ut;
@@ -20,7 +20,7 @@ import java.util.Set;
 @SuppressWarnings("all")
 public class SharedClientImpl<K, V> implements SharedClient<K, V> {
 
-    private static final OLog LOGGER = Ut.Log.plugin(SharedClientImpl.class);
+    private static final LogO LOGGER = Ut.Log.plugin(SharedClientImpl.class);
 
     private static final Cc<String, SharedClient> CC_CLIENTS = Cc.open();
 

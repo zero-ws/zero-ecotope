@@ -3,7 +3,7 @@ package io.zerows.plugins.store.neo4j;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.application.YmlCore;
 import io.zerows.support.Ut;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import org.neo4j.driver.AuthToken;
 import org.neo4j.driver.AuthTokens;
 import org.neo4j.driver.Config;
@@ -13,7 +13,7 @@ import java.text.MessageFormat;
 
 public class Neo4jConfig implements Serializable {
 
-    private static final Annal LOGGER = Annal.get(Neo4jConfig.class);
+    private static final LogOf LOGGER = LogOf.get(Neo4jConfig.class);
 
     private final transient String username;
     private final transient String hostname;

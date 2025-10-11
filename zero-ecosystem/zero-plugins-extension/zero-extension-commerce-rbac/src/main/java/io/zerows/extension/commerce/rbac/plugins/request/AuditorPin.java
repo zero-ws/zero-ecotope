@@ -6,7 +6,7 @@ import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.cortex.extension.PlugAuditor;
 import io.zerows.epoch.application.YmlCore;
 import io.zerows.epoch.constant.KName;
@@ -21,7 +21,7 @@ import java.util.Objects;
 import static io.zerows.extension.commerce.rbac.util.Sc.LOG;
 
 public class AuditorPin implements PlugAuditor {
-    private final static Annal LOGGER = Annal.get(AuditorPin.class);
+    private final static LogOf LOGGER = LogOf.get(AuditorPin.class);
     private final transient JsonObject config = new JsonObject();
 
     @Override

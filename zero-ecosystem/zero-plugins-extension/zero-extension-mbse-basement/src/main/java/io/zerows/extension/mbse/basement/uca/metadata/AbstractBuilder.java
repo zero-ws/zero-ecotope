@@ -4,7 +4,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.constant.VValue;
 import io.zerows.epoch.constant.KName;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.support.Ut;
 import io.zerows.extension.mbse.basement.atom.Schema;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MField;
@@ -138,7 +138,7 @@ public abstract class AbstractBuilder implements AoBuilder, SqlStatement {
         return false;
     }
 
-    private Annal getLogger() {
-        return Annal.get(this.getClass());
+    private LogOf getLogger() {
+        return LogOf.get(this.getClass());
     }
 }

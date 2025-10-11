@@ -4,7 +4,7 @@ package io.zerows.support;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KWeb;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.platform.metadata.Kv;
 import io.zerows.component.qr.syntax.Ir;
 import io.zerows.platform.constant.VString;
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
  * 2. irH: 合并 criteria
  */
 final class QrIr {
-    private static final OLog LOGGER = _Log.Log.ux(QrIr.class);
+    private static final LogO LOGGER = _Log.Log.ux(QrIr.class);
 
     /*
      * Move `RibIr` code to current method, complex algorithm to combine qr parts directly

@@ -1,7 +1,7 @@
 package io.zerows.cortex.webflow;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.epoch.application.YmlCore;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.management.OZeroStore;
@@ -35,7 +35,7 @@ public abstract class WingsBase implements Wings {
         }
     }
 
-    protected Annal logger() {
-        return Annal.get(this.getClass());
+    protected LogOf logger() {
+        return LogOf.get(this.getClass());
     }
 }

@@ -1,7 +1,7 @@
 package io.zerows.plugins.office.excel.uca.cell;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.support.Ut;
 
 import java.util.concurrent.ConcurrentMap;
@@ -29,7 +29,7 @@ public interface ExValue {
      */
     Object to(Object value, ConcurrentMap<String, String> paramMap);
 
-    default OLog logger() {
+    default LogO logger() {
         return Ut.Log.plugin(this.getClass());
     }
 }

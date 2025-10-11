@@ -6,7 +6,7 @@ import io.vertx.core.Vertx;
 import io.vertx.ext.auth.authentication.AuthenticationProvider;
 import io.vertx.ext.web.handler.AuthenticationHandler;
 import io.vertx.ext.web.handler.AuthorizationHandler;
-import io.zerows.component.log.OLog;
+import io.zerows.component.log.LogO;
 import io.zerows.cosmic.plugins.security.exception._40076Exception400WallSize;
 import io.zerows.cosmic.plugins.security.exception._40077Exception400WallProviderConflict;
 import io.zerows.epoch.metadata.security.Aegis;
@@ -26,7 +26,7 @@ class BoltWhich implements Bolt {
     public static final String AUTH_401_METHOD = "[ Auth ] Your `@Wall` class missed @Authenticate method ! {0}";
     public static final String AUTH_401_SERVICE = "[ Auth ] Your `Lee` in service-loader /META-INF/services/ is missing....";
     public static final String AUTH_401_HANDLER = "[ Auth ] You have configured secure, but the authenticate handler is null! type = {0}";
-    private static final OLog LOGGER = Ut.Log.security(BoltWhich.class);
+    private static final LogO LOGGER = Ut.Log.security(BoltWhich.class);
     // LOGGER Control
     private static final AtomicBoolean[] LOG_LEE = new AtomicBoolean[]{
         new AtomicBoolean(Boolean.TRUE),

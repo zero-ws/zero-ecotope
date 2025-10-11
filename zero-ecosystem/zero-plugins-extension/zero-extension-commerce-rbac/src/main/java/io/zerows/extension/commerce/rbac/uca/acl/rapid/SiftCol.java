@@ -2,7 +2,7 @@ package io.zerows.extension.commerce.rbac.uca.acl.rapid;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.Annal;
+import io.zerows.component.log.LogOf;
 import io.zerows.extension.commerce.rbac.eon.AuthMsg;
 
 import java.util.HashSet;
@@ -12,7 +12,7 @@ import java.util.Set;
 import static io.zerows.extension.commerce.rbac.util.Sc.LOG;
 
 class SiftCol {
-    private static final Annal LOGGER = Annal.get(SiftCol.class);
+    private static final LogOf LOGGER = LogOf.get(SiftCol.class);
 
     /*
      * projection -> JsonObject
