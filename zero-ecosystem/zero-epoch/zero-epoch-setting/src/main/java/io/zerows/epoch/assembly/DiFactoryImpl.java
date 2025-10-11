@@ -4,7 +4,7 @@ import com.google.inject.Injector;
 import io.r2mo.typed.cc.Cc;
 import io.zerows.epoch.configuration.Inquirer;
 import io.zerows.epoch.management.OCacheClass;
-import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
 import java.util.Set;
@@ -12,6 +12,7 @@ import java.util.Set;
 /**
  * @author lang : 2024-05-01
  */
+@Slf4j
 class DiFactoryImpl implements DiFactory {
     private static final Cc<String, Inquirer<Injector>> CC_GUICE = Cc.open();
     private static DiFactory INSTANCE;
@@ -55,8 +56,8 @@ class DiFactoryImpl implements DiFactory {
         final Injector injector = inquirer.scan(storedClass);
         final long end = System.currentTimeMillis();
         final long duration = end - start;
-        Ut.Log.boot(this.getClass()).info(" {}ms / Zero DI Environment {}.... Size= {}",
-            String.valueOf(duration), flag, String.valueOf(storedClass.size()));
+        log.info("[ ZERO ] ( DI ) \uD83E\uDEBC {}毫秒 / DI 环境 {} 构建完成！Size = {}",
+            duration, flag, storedClass.size());
         return injector;
     }
 }

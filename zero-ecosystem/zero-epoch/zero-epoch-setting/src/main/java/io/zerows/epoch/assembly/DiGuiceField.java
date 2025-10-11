@@ -3,6 +3,7 @@ package io.zerows.epoch.assembly;
 import com.google.inject.AbstractModule;
 import io.zerows.support.Ut;
 import jakarta.inject.Inject;
+import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -15,6 +16,7 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
 public class DiGuiceField<T extends I, I> implements DiGuice<T, I> {
     private final transient Set<Class<?>> pointers = new HashSet<>();
 
@@ -43,7 +45,7 @@ public class DiGuiceField<T extends I, I> implements DiGuice<T, I> {
             @Override
             protected void configure() {
                 if (!classes.isEmpty()) {
-                    logger().info("[ DI ] Field Scanner booting...");
+                    log.info("[ ZERO ] ( DI ) \uD83E\uDEBC DI 依赖注入扫描启动...");
                     final Set<String> ignoreSet = new HashSet<>();
                     classes.forEach(clazz -> {
                         if (flat.contains(clazz)) {
@@ -64,9 +66,9 @@ public class DiGuiceField<T extends I, I> implements DiGuice<T, I> {
                         }
                     });
                     if (ignoreSet.isEmpty()) {
-                        logger().info("[ DI ] Field Scanned Successfully !!!");
+                        log.info("[ ZERO ] ( DI ) \uD83E\uDEBC 字段扫描完成 Successfully !!!");
                     } else {
-                        logger().info("[ DI ] Field Scanned Successfully with ignored: {0} !!!", Ut.fromJoin(ignoreSet));
+                        log.info("[ ZERO ] ( DI ) \uD83E\uDEBC 字段扫描完成 Successfully, 忽略项: {0} !!!", Ut.fromJoin(ignoreSet));
                     }
                 }
             }

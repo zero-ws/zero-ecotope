@@ -1,5 +1,6 @@
 package io.zerows.epoch.boot;
 
+import io.zerows.epoch.assembly.DiFactory;
 import io.zerows.epoch.management.ORepository;
 import io.zerows.epoch.management.ORepositoryClass;
 import io.zerows.epoch.management.ORepositoryMeta;
@@ -42,6 +43,12 @@ class ZeroEnergyLife implements HLife {
          * 🟤BOOT-008: 元数据 Meta 级别的初始化流程
          */
         ORepository.ofOr(ORepositoryMeta.class).whenStart(setting);
+
+
+        /*
+         * 🟤BOOT-009：DI 环境单独启动
+         */
+        DiFactory.singleton().build();
         log.info("[ ZERO ] ✅️ ============== （核心）环境启动完成！");
     }
 }

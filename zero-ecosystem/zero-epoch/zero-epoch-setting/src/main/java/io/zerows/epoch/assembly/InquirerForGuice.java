@@ -4,6 +4,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import io.zerows.epoch.configuration.Inquirer;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Modifier;
 import java.util.Arrays;
@@ -18,6 +19,7 @@ import java.util.function.Consumer;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 @SuppressWarnings("all")
+@Slf4j
 public class InquirerForGuice implements Inquirer<Injector> {
     private static final DiGuice jsrField = Ut.singleton(DiGuiceField.class);
     private static final DiGuice jsrMethod = Ut.singleton(DiGuiceMethod.class);
@@ -26,7 +28,7 @@ public class InquirerForGuice implements Inquirer<Injector> {
     @Override
     @SuppressWarnings("all")
     public Injector scan(final Set<Class<?>> clazzes) {
-        this.logger().info("[ DI ] The DI environment will be initialized! Total = `{0}`", String.valueOf(clazzes.size()));
+        log.info("[ ZERO ] ( DI ) \uD83E\uDEBC DI 环境即将初始化, Total = `{0}`", String.valueOf(clazzes.size()));
         /*
          * Scan start points, the condition is as following:
          * - 1. Contains member that annotated with @Inject
@@ -53,7 +55,7 @@ public class InquirerForGuice implements Inquirer<Injector> {
                 }
             }
         });
-        this.logger().info("[ DI ] 1st scanned, field = {0}, method = {1}, constructor = {2}",
+        log.info("[ ZERO ] ( DI ) \uD83E\uDEBC 扫描信息 / field = {0}, method = {1}, constructor = {2}",
             String.valueOf(queueField.size()), String.valueOf(queueMethod.size()), String.valueOf(queueCon.size()));
 
         // Implementation = Interface

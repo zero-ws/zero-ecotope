@@ -56,7 +56,6 @@ interface ClassFilter {
         "io.perfmark",
         "io.reactivex",
         "io.r2dbc",
-        "io.r2mo",
         "io.swagger",
         "io.termd",
         "io.vertx",

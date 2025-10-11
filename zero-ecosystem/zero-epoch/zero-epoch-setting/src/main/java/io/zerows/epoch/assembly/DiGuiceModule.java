@@ -2,10 +2,10 @@ package io.zerows.epoch.assembly;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.name.Names;
-import io.zerows.component.log.LogO;
 import io.zerows.support.Ut;
 import jakarta.inject.Named;
 import jakarta.inject.Singleton;
+import lombok.extern.slf4j.Slf4j;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
@@ -15,6 +15,7 @@ import java.util.Set;
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
 public abstract class DiGuiceModule extends AbstractModule {
 
     protected <T> String bindConstructor(final Class<T> clazz) {
@@ -26,7 +27,7 @@ public abstract class DiGuiceModule extends AbstractModule {
             } else {
                 this.bind(clazz).toConstructor(constructor);
             }
-            this.logger().info("[ DI ] Constructor Bind: `{0}`", clazz);
+            log.info("[ ZERO ] ( DI ) 构造函数: `{}`", clazz);
             return null;
         } else {
             return clazz.getName();
@@ -40,7 +41,7 @@ public abstract class DiGuiceModule extends AbstractModule {
             if (1 == implSet.size()) {
                 final Class<T> clazz = implSet.iterator().next();
                 this.bind(interfaceCls).to(clazz);
-                this.logger().info("[ DI ] Interface Bind: `{0}`, interfaceCls = `{1}`", clazz, interfaceCls);
+                log.info("[ ZERO ] ( DI ) 实现类: `{}`, 接口 = `{}`", clazz, interfaceCls);
                 // clazzSet.add(clazz.getName());
             } else {
                 // interface with multi classed injection
@@ -48,7 +49,7 @@ public abstract class DiGuiceModule extends AbstractModule {
                     if (implCls.isAnnotationPresent(Named.class)) {
                         final Annotation annotation = implCls.getAnnotation(Named.class);
                         final String name = Ut.invoke(annotation, "get");
-                        this.logger().info("[ DI ] Interface Bind: `{0}`, interfaceCls = `{1}`, name = {2}",
+                        log.info("[ ZERO ] ( DI ) 实现类: `{}`, 接口 = `{}`, 标识 = {}",
                             implCls, interfaceCls, name);
                         this.bind(interfaceCls).annotatedWith(Names.named(name))
                             .to(implCls);
@@ -61,9 +62,5 @@ public abstract class DiGuiceModule extends AbstractModule {
         } else {
             return null;
         }
-    }
-
-    protected LogO logger() {
-        return Ut.Log.metadata(this.getClass());
     }
 }

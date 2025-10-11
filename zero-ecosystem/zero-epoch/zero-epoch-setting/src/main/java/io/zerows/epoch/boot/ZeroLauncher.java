@@ -187,19 +187,20 @@ public class ZeroLauncher<T> {
          *   - BOOT-006
          *   - BOOT-007
          *   - BOOT-008
+         *   - BOOT-009
          */
         this.energy.initialize();
         // 提取自配置的 HOn 组件，执行启动前的初始化（configure 第一周期已经完成）
 
 
         /*
-         * 🟤BOOT-009: 启动器的提取与启动
+         * 🟤BOOT-010: 启动器的提取与启动
          */
         final HLauncher<T> launcher = this.boot.launcher();
         final Promise<T> before = Promise.promise();
         launcher.start(this.energy, vertx -> {
             /*
-             * 🟤BOOT-010: 启动完成之后的基础回调，此时 Vertx 实例已创建
+             * 🟤BOOT-011: 启动完成之后的基础回调，此时 Vertx 实例已创建
              */
             final HLauncher.Pre<T> launcherPre = this.boot.withPre();
             if (Objects.isNull(launcherPre)) {
@@ -216,7 +217,7 @@ public class ZeroLauncher<T> {
 
 
         /*
-         * 🟤BOOT-011: 启动完成之后的配置回调
+         * 🟤BOOT-012: 启动完成之后的配置回调
          */
         final HConfig.HOn<?> on = this.boot.whenOn();
         before.future().onSuccess(vertx -> {
