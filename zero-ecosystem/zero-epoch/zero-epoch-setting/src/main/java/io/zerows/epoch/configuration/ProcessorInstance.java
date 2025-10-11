@@ -42,6 +42,7 @@ public class ProcessorInstance implements Processor<NodeNetwork, ConfigContainer
             // 构造 VertxOptions
             final JsonObject optionJ = configInstance.options();
             final VertxOptions vertxOptions = new VertxOptions(optionJ);
+            vertxOptions.setPreferNativeTransport(true);
             nodeVertx.vertxOptions(vertxOptions);
             network.add(vertxName, nodeVertx);
         });
@@ -86,7 +87,7 @@ public class ProcessorInstance implements Processor<NodeNetwork, ConfigContainer
                 workerOptions.setInstances(128);
             }
             workerOptions
-                .setWorkerPoolName("__RACHEL_MOMO__")
+                .setWorkerPoolName("zero-rachel-momo")
                 .setWorkerPoolSize(256)
                 .setHa(true)
                 .setThreadingModel(ThreadingModel.WORKER);

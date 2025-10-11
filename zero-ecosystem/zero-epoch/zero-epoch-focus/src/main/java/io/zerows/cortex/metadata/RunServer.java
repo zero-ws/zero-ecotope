@@ -77,35 +77,19 @@ public class RunServer implements RunInstance<HttpServer> {
     }
 
     public RunServer build() {
-        // A: 进去就打
-        System.err.println("[BUILD] enter, server=" + (this.server != null));
-
         if (Objects.isNull(this.server.requestHandler())) {
-            // A1: 先只检查，不要调用 refVertx()
-            System.err.println("[BUILD] handler is null");
-
-            // B: refVertx() 前后各打一条（它最可疑）
-            System.err.println("[BUILD] before refVertx()");
+            // 构造路由
             final Vertx vertx = this.refVertx();
-            System.err.println("[BUILD] after refVertx() -> " + vertx);
-
-            // C: 构 Router 前后也打一条
-            System.err.println("[BUILD] before Router.router()");
             final Router router = Router.router(vertx);
-            System.err.println("[BUILD] after Router.router()");
 
             final HttpServerOptions option = this.serverOptions;
             if (LOCKED.getAndSet(Boolean.FALSE)) {
                 log.info("[ ZERO ] 系统为服务器：host = {}, port = {}, websocket = {} 构造路由",
-                    option.getHost(), option.getPort(), Objects.nonNull(this.sockOptions));
+                    option.getHost(), option.getPort(), Objects.nonNull(this.sockOptions)
+                );
             }
-
-            // D: 设置 handler 前后
-            System.err.println("[BUILD] before requestHandler(router)");
             this.server.requestHandler(router);
-            System.err.println("[BUILD] after requestHandler(router)");
         }
-        System.err.println("[BUILD] exit");
         return this;
     }
 

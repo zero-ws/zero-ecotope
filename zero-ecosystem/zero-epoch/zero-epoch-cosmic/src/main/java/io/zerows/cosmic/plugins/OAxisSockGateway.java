@@ -22,7 +22,7 @@ public class OAxisSockGateway implements OAxisGateway {
         if (Objects.isNull(factory)) {
             // 没有部署，无法找到工厂类
             if (IS_LOG.getAndSet(Boolean.FALSE)) {
-                log.info("[ ZERO ] ( WebSocket ) SPI 组件 AxisSockFactory 为 null，WebSocket 功能禁用！");
+                log.info("[ ZERO ] ( WebSocket ) ⚠️ SPI 组件 AxisSockFactory 为 null，WebSocket 功能禁用！");
             }
             return null;
         }

@@ -27,7 +27,7 @@ import java.util.Set;
 @Slf4j
 public class ZeroScheduler extends AbstractVerticle {
 
-    private static final String JOB_EMPTY = "[ ZERO ] ( Job ) 系统中没有定义任何 Job，当前 Scheduler 将停止。";
+    private static final String JOB_EMPTY = "[ ZERO ] ( Job ) ⚠️ 系统中没有定义任何 Job，当前 Scheduler 将停止。";
     private static final String JOB_CONFIG_NULL = "[ ZERO ] ( Job ) 任务系统未配置，任务容器 Container 将停止....";
     private static final String JOB_MONITOR = "[ ZERO ] ( Job ) ⏳ Zero 检测到 {} 任务 @Job, Scheduler 将启动....";
     private static final String JOB_AGHA_SELECTED = "[ ZERO ] ( Job ) Agha = {} 任务启动器，分派任务 {}, 类型 {}";

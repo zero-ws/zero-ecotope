@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.Consumer;
@@ -18,17 +19,32 @@ import java.util.function.Consumer;
 public final class KRunner {
 
     // Execute single thread
-    public static Thread run(final Runnable hooker,
-                             final String name) {
-        final Thread thread = new Thread(hooker);
-        // Append Thread id
-        thread.setName(name + "-" + thread.threadId());
-        try {
-            thread.start();
-        } catch (final Exception e) {
-            e.printStackTrace();
-        }
-        return thread;
+    public static Thread run(final Runnable hooker, final String name) {
+        Objects.requireNonNull(hooker, "hooker cannot be null");
+
+        // 1) 先创建未启动的虚拟线程
+        final Thread vThread = Thread.ofVirtual().name(name).unstarted(hooker);
+
+        // 2) 再创建一个“keeper”平台线程去启动并等待虚拟线程结束
+        //    平台线程是非守护线程，能像你之前的实现一样撑住 JVM 生命周期
+        final Thread keeper = new Thread(() -> {
+            try {
+                vThread.start();
+                vThread.join();
+            } catch (final InterruptedException ie) {
+                Thread.currentThread().interrupt();
+                log.warn("[KRunner] keeper 被中断: {}", name);
+            } catch (final Throwable t) {
+                log.error("[KRunner] 任务异常: {}", name, t);
+            }
+        }, name + "-keeper");
+
+        // 显式确保是非守护线程（默认如此，这里再次强调）
+        keeper.setDaemon(false);
+        keeper.start();
+
+        // 返回 keeper，保持与旧版返回“可 join 的线程”一致的用法
+        return keeper;
     }
 
     // Execute multi thread

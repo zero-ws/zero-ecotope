@@ -32,7 +32,7 @@ public class DevMonitor {
             instance.put("poolName", options.getWorkerPoolName());
             instance.put("poolSize", options.getWorkerPoolSize());
             data.put(name, instance).onSuccess(nil ->
-                log.info("[ Meansure ] The {} has been added. ( instances = {} ), TM = {}",
+                log.info("[ Monitor ] The {} has been added. ( instances = {} ), TM = {}",
                     name, options.getInstances(), options.getThreadingModel()));
         });
     }
@@ -40,7 +40,7 @@ public class DevMonitor {
     private static void remove(final Vertx vertx, final String name, final DeploymentOptions options) {
         vertx.sharedData().<String, Object>getAsyncMap(KWeb.SHARED.DEPLOYMENT).onSuccess(data -> {
             data.remove(name).onSuccess(nil ->
-                log.info("[ Meansure ] The {} has been removed. ( instances = {} )",
+                log.info("[ Monitor ] The {} has been removed. ( instances = {} )",
                     name, options.getInstances()));
         });
     }

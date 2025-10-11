@@ -12,9 +12,7 @@ import io.zerows.epoch.basicore.WebEvent;
 import io.zerows.epoch.basicore.WebReceipt;
 import io.zerows.epoch.management.OCacheActor;
 import io.zerows.platform.constant.VValue;
-import io.zerows.support.Ut;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.Objects;
 import java.util.Set;
@@ -84,8 +82,8 @@ class DifferEvent implements Differ<RoutingContext> {
 
     @SuppressWarnings("all")
     private Method findReplier(final WebEvent event) {
-        final Annotation annotation = event.getAction().getDeclaredAnnotation(Address.class);
-        final String address = Ut.invoke(annotation, "get");
+        final Address annotation = event.getAction().getDeclaredAnnotation(Address.class);
+        final String address = annotation.value();
         // Here address mustn't be null or empty
         final WebReceipt found = RECEIPTS.stream()
             .filter(item -> address.equals(item.getAddress()))

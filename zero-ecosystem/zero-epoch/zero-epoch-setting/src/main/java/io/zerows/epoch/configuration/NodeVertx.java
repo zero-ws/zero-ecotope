@@ -6,6 +6,7 @@ import io.vertx.core.VertxOptions;
 import io.vertx.core.eventbus.DeliveryOptions;
 import io.zerows.epoch.annotations.Agent;
 import io.zerows.epoch.annotations.Worker;
+import io.zerows.epoch.constant.KWeb;
 import io.zerows.platform.enums.EmDeploy;
 import io.zerows.specification.configuration.HSetting;
 import lombok.Data;
@@ -107,6 +108,9 @@ public class NodeVertx implements Serializable {
             if (ThreadingModel.VIRTUAL_THREAD != options.getThreadingModel()) {
                 options.setThreadingModel(ThreadingModel.WORKER);
             }
+            if (0 < worker.instances() && KWeb.DEPLOY.INSTANCES != worker.instances()) {
+                options.setInstances(worker.instances());
+            }
         }
 
         final Agent agent = clazz.getDeclaredAnnotation(Agent.class);
@@ -115,6 +119,9 @@ public class NodeVertx implements Serializable {
              * 如果是 Agent 模式，则必须是 EVENT_LOOP
              */
             options.setThreadingModel(ThreadingModel.EVENT_LOOP);
+            if (0 < agent.instances() && KWeb.DEPLOY.INSTANCES != agent.instances()) {
+                options.setInstances(agent.instances());
+            }
         }
 
         if (EmDeploy.Mode.CODE == mode) {

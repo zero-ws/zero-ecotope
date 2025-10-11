@@ -72,8 +72,8 @@ public class ProcessorNetwork implements Processor<NodeNetwork, HSetting> {
         Objects.requireNonNull(serverConfig, "[ ZERO ] 无法找到服务器配置！");
         final JsonObject options = serverConfig.options();
         final HttpServerOptions serverOptions = new HttpServerOptions(options);
-        serverOptions.setReusePort(true);
         serverOptions.setReuseAddress(true);
+        serverOptions.setReusePort(true);
         return serverOptions;
     }
 
