@@ -1,6 +1,8 @@
 package io.zerows.cortex.metadata;
 
 import io.vertx.core.Vertx;
+import io.vertx.ext.web.Route;
+import io.zerows.epoch.basicore.WebEvent;
 import io.zerows.epoch.configuration.NodeVertx;
 import io.zerows.support.Ut;
 
@@ -11,6 +13,21 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
 
 /**
+ *
+ * <pre><code>
+ *   Cluster
+ *     - serverName =                               {@link RunServer}  x 1
+ *       - Vertx-01 ...                              {@link RunVertx}  x 1
+ *         - deploymentId-01-01 = Class<?>           {@link io.vertx.core.Verticle} x N
+ *         - deploymentId-01-02 =
+ *           - appName  =                            {@link RunApp}    x N
+ *         - router     =                            DoRouter          x 1
+ *           - path     =                                              x N
+ *             - route  =                            {@link Route}     x ( HTTP Method counter )
+ *               event  =                            {@link WebEvent}
+ *       - Vertx-02
+ * </code></pre>
+ *
  * @author lang : 2025-10-10
  */
 public class RunVertx implements RunInstance<Vertx> {

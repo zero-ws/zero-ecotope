@@ -4,10 +4,10 @@ import io.vertx.core.Handler;
 import io.vertx.core.Promise;
 import io.vertx.core.Vertx;
 import io.vertx.core.VertxException;
+import io.vertx.core.VertxOptions;
 import io.vertx.core.WorkerExecutor;
 import io.vertx.core.eventbus.EventBus;
 import io.zerows.cortex.extension.CodecEnvelop;
-import io.zerows.epoch.configuration.TransformerVertx;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.support.Ut;
 
@@ -21,7 +21,12 @@ class VertxNative {
     private static synchronized Vertx nativeRef() {
         synchronized (VertxNative.class) {
             if (Objects.isNull(VERTX_NATIVE)) {
-                VERTX_NATIVE = Vertx.vertx(TransformerVertx.nativeOption());
+                final VertxOptions options = new VertxOptions();
+                options.setMaxEventLoopExecuteTime(3000_000_000_000L);
+                options.setMaxWorkerExecuteTime(3000_000_000_000L);
+                options.setBlockedThreadCheckInterval(10000);
+                options.setPreferNativeTransport(true);
+                VERTX_NATIVE = Vertx.vertx(options);
                 final EventBus eventBus = VERTX_NATIVE.eventBus();
                 eventBus.registerDefaultCodec(Envelop.class, Ut.singleton(CodecEnvelop.class));
             }

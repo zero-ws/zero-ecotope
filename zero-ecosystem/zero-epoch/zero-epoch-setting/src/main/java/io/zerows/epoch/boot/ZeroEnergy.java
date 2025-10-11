@@ -2,7 +2,6 @@ package io.zerows.epoch.boot;
 
 import io.r2mo.typed.cc.Cc;
 import io.zerows.epoch.configuration.NodeNetwork;
-import io.zerows.epoch.configuration.NodeVertxLegacy;
 import io.zerows.platform.enums.EmApp;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HEnergy;
