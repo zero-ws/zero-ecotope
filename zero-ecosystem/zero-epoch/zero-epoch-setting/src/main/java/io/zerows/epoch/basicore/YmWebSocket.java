@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.r2mo.typed.json.jackson.ClassDeserializer;
 import io.r2mo.typed.json.jackson.ClassSerializer;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.application.VertxYml;
 import io.zerows.epoch.configuration.Equip;
 import io.zerows.integrated.jackson.JsonObjectDeserializer;
 import io.zerows.integrated.jackson.JsonObjectSerializer;
@@ -15,7 +14,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * {@link VertxYml.server.websocket}
+ * {@link YmSpec.server.websocket}
  *
  * @author lang : 2025-10-05
  */
@@ -41,7 +40,7 @@ public class YmWebSocket implements Serializable, Equip.Item {
     }
 
     /**
-     * {@link VertxYml.server.websocket.config.stomp}
+     * {@link YmSpec.server.websocket.config.stomp}
      */
     @Data
     public static class Stomp implements Serializable {

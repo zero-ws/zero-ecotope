@@ -1,6 +1,6 @@
 package io.zerows.cosmic.plugins.job;
 
-import io.zerows.epoch.metadata.JComponent;
+import io.zerows.epoch.metadata.MMComponent;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -9,7 +9,7 @@ import java.util.Optional;
 /*
  * Job configuration in `vertx-job.yml`, the job node
  * job:
- * - get:
+ * - store:
  *   - component:
  *   - config:
  * - interval:
@@ -20,35 +20,35 @@ import java.util.Optional;
  */
 public class JobConfig implements Serializable {
 
-    private transient JComponent store;
-    private transient JComponent interval;
-    private transient JComponent client;
+    private transient MMComponent store;
+    private transient MMComponent interval;
+    private transient MMComponent client;
 
-    public JComponent getStore() {
-        return Optional.ofNullable(this.store).orElse(new JComponent());
+    public MMComponent getStore() {
+        return Optional.ofNullable(this.store).orElse(new MMComponent());
     }
 
-    public void setStore(final JComponent store) {
+    public void setStore(final MMComponent store) {
         this.store = store;
     }
 
-    public JComponent getInterval() {
-        final JComponent componentOption = Optional.ofNullable(this.interval).orElse(new JComponent());
+    public MMComponent getInterval() {
+        final MMComponent componentOption = Optional.ofNullable(this.interval).orElse(new MMComponent());
         if (Objects.isNull(componentOption.getComponent())) {
             componentOption.setComponent(IntervalVertx.class);
         }
         return componentOption;
     }
 
-    public void setInterval(final JComponent interval) {
+    public void setInterval(final MMComponent interval) {
         this.interval = interval;
     }
 
-    public JComponent getClient() {
-        return Optional.ofNullable(this.client).orElse(new JComponent());
+    public MMComponent getClient() {
+        return Optional.ofNullable(this.client).orElse(new MMComponent());
     }
 
-    public void setClient(final JComponent client) {
+    public void setClient(final MMComponent client) {
         this.client = client;
     }
 

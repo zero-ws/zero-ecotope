@@ -10,4 +10,6 @@ import java.io.Serializable;
 @Data
 public class YmApplication implements Serializable {
     private String name;
+    private YmElasticSearch elasticsearch;
+    private YmNeo4j neo4j;
 }

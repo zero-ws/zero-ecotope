@@ -10,5 +10,6 @@ import java.io.Serializable;
  */
 @Data
 public class YmMvc implements Serializable {
+    private boolean freedom = false;
     private CorsOptions cors = new CorsOptions();
 }

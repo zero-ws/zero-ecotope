@@ -6,20 +6,7 @@ import io.vertx.core.json.JsonObject;
 
 import java.util.Objects;
 
-/**
- * ## 「Pojo」Uniform Data Object Container
- *
- * ### 1. Intro
- *
- * Uniform for batch / single calculation
- * 1) single - {@link io.vertx.core.json.JsonObject}
- * 2) batch - {@link io.vertx.core.json.JsonArray}
- *
- * Difference situation will use this one, this object contains Ambiguity here
- *
- * @author <a href="http://www.origin-x.cn">Lang</a>
- */
-public class JAmb {
+public class MMAmb {
     /**
      * The data reference of {@link io.vertx.core.json.JsonObject} or {@link io.vertx.core.json.JsonArray}
      */
@@ -54,7 +41,7 @@ public class JAmb {
      * @return Reference of this
      */
     @Fluent
-    public JAmb data(final JsonObject data) {
+    public MMAmb data(final JsonObject data) {
         this.data = data;
         this.single = Boolean.TRUE;
         return this;
@@ -68,7 +55,7 @@ public class JAmb {
      * @return Reference of this
      */
     @Fluent
-    public JAmb data(final JsonArray data) {
+    public MMAmb data(final JsonArray data) {
         this.data = data;
         this.single = Boolean.FALSE;
         return this;
@@ -82,7 +69,7 @@ public class JAmb {
      * @return Reference of this
      */
     @Fluent
-    public JAmb add(final JsonObject item) {
+    public MMAmb add(final JsonObject item) {
         if (!this.single) {
             ((JsonArray) this.data).add(item);
         }

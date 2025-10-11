@@ -16,6 +16,7 @@ import java.io.Serializable;
 public class YmApp implements Serializable {
     private String id;
     private String tenant;
+    private String ns;
 
     @JsonSerialize(using = JsonObjectSerializer.class)
     @JsonDeserialize(using = JsonObjectDeserializer.class)

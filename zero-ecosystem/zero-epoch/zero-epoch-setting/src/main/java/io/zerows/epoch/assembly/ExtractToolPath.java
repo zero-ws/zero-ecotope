@@ -101,7 +101,7 @@ class ExtractToolPath {
         final String processed = uri;
         final String finalUri = processed.startsWith(VString.SLASH) ? processed : VString.SLASH + processed;
         if (!path.equals(finalUri)) {
-            log.warn("[ ZERO ] \uD83E\uDDE8 原始地址 `{}`, 推荐的 uri `{}`.", path, finalUri);
+            log.info("[ ZERO ] \uD83E\uDEA1 地址转换 `{}` ---> `{}`.", path, finalUri);
         }
         return finalUri;
     }

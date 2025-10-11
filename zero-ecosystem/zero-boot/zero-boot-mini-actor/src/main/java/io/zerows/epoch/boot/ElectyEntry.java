@@ -3,8 +3,6 @@ package io.zerows.epoch.boot;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.zerows.epoch.application.YmlCore;
-import io.zerows.epoch.configuration.ZeroStation;
-import io.zerows.epoch.metadata.environment.LogCloud;
 import io.zerows.management.OZeroStore;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.support.base.FnBase;
@@ -70,11 +68,11 @@ class ElectyEntry {
          * 2. (PlugIn）初始化之前
          *    执行模块初始化
          */
-        final ZeroStation store = ZeroStation.singleton();
-        if (!store.isInit()) {
-            LogCloud.LOG.Env.info(ElectyEnroll.class, MSG_EXT_CONFIGURATION, config);
-            return Future.succeededFuture(Boolean.TRUE);
-        }
+        //        final ZeroStation store = ZeroStation.singleton();
+        //        if (!store.isInit()) {
+        //            LogCloud.LOG.Env.info(ElectyEnroll.class, MSG_EXT_CONFIGURATION, config);
+        //            return Future.succeededFuture(Boolean.TRUE);
+        //        }
         if (!OZeroStore.is(YmlCore.init.__KEY)) {
             return Future.succeededFuture(Boolean.TRUE);
         }

@@ -6,7 +6,7 @@ import io.vertx.ext.web.RoutingContext;
 import io.zerows.cortex.extension.PlugRegion;
 import io.zerows.epoch.application.YmlCore;
 import io.zerows.epoch.basicore.option.PluginOptions;
-import io.zerows.epoch.metadata.JComponent;
+import io.zerows.epoch.metadata.MMComponent;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.support.Ut;
 
@@ -26,7 +26,7 @@ public class AmbitRegionAfter implements Ambit {
     @Override
     public Future<Envelop> then(final RoutingContext context, final Envelop envelop) {
         // 提取 region 部分的 JComponent
-        final JComponent component = this.option.getComponent(YmlCore.extension.REGION);
+        final MMComponent component = this.option.getComponent(YmlCore.extension.REGION);
         if (Objects.isNull(component)) {
             return Future.succeededFuture(envelop);
         }

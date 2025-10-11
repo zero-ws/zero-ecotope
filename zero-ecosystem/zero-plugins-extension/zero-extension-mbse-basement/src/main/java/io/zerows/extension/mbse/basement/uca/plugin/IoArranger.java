@@ -2,14 +2,12 @@ package io.zerows.extension.mbse.basement.uca.plugin;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.platform.metadata.Kv;
-import io.zerows.epoch.metadata.JComponent;
-import io.zerows.support.Ut;
-import io.zerows.support.fn.TiConsumer;
+import io.zerows.epoch.metadata.MMComponent;
 import io.zerows.extension.mbse.basement.atom.Model;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.atom.element.DataTpl;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MAttribute;
+import io.zerows.platform.metadata.Kv;
 import io.zerows.specification.modeling.HAttribute;
 import io.zerows.specification.modeling.HRecord;
 import io.zerows.specification.modeling.property.IComponent;
@@ -17,6 +15,8 @@ import io.zerows.specification.modeling.property.INormalizer;
 import io.zerows.specification.modeling.property.IoSource;
 import io.zerows.specification.modeling.property.OComponent;
 import io.zerows.specification.modeling.property.OExpression;
+import io.zerows.support.Ut;
+import io.zerows.support.fn.TiConsumer;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -40,7 +40,7 @@ class IoArranger {
      *
      * @return {@link java.util.concurrent.ConcurrentMap} The JComponent map for each field.
      */
-    static ConcurrentMap<String, JComponent> pluginIn(final DataTpl tpl) {
+    static ConcurrentMap<String, MMComponent> pluginIn(final DataTpl tpl) {
         return extractPlugin(tpl, MAttribute::getInComponent, IoArranger::notAop, IComponent.class);
     }
 
@@ -51,7 +51,7 @@ class IoArranger {
      *
      * @return {@link java.util.concurrent.ConcurrentMap} The JComponent map for each field.
      */
-    static ConcurrentMap<String, JComponent> pluginInBefore(final DataTpl tpl) {
+    static ConcurrentMap<String, MMComponent> pluginInBefore(final DataTpl tpl) {
         return extractPlugin(tpl, MAttribute::getInComponent, IoArranger::isAopBefore, IComponent.class);
     }
 
@@ -62,7 +62,7 @@ class IoArranger {
      *
      * @return {@link java.util.concurrent.ConcurrentMap} The JComponent map for each field.
      */
-    static ConcurrentMap<String, JComponent> pluginInAfter(final DataTpl tpl) {
+    static ConcurrentMap<String, MMComponent> pluginInAfter(final DataTpl tpl) {
         return extractPlugin(tpl, MAttribute::getInComponent, IoArranger::isAopAfter, IComponent.class);
     }
 
@@ -73,7 +73,7 @@ class IoArranger {
      *
      * @return {@link java.util.concurrent.ConcurrentMap} The JComponent map for each field.
      */
-    static ConcurrentMap<String, JComponent> pluginOut(final DataTpl tpl) {
+    static ConcurrentMap<String, MMComponent> pluginOut(final DataTpl tpl) {
         return extractPlugin(tpl, MAttribute::getOutComponent, IoArranger::notAop, OComponent.class);
     }
 
@@ -84,7 +84,7 @@ class IoArranger {
      *
      * @return {@link java.util.concurrent.ConcurrentMap} The JComponent map for each field.
      */
-    static ConcurrentMap<String, JComponent> pluginOutBefore(final DataTpl tpl) {
+    static ConcurrentMap<String, MMComponent> pluginOutBefore(final DataTpl tpl) {
         return extractPlugin(tpl, MAttribute::getOutComponent, IoArranger::isAopBefore, OComponent.class);
     }
 
@@ -95,7 +95,7 @@ class IoArranger {
      *
      * @return {@link java.util.concurrent.ConcurrentMap} The JComponent map for each field.
      */
-    static ConcurrentMap<String, JComponent> pluginOutAfter(final DataTpl tpl) {
+    static ConcurrentMap<String, MMComponent> pluginOutAfter(final DataTpl tpl) {
         return extractPlugin(tpl, MAttribute::getOutComponent, IoArranger::isAopAfter, OComponent.class);
     }
 
@@ -106,7 +106,7 @@ class IoArranger {
      *
      * @return {@link java.util.concurrent.ConcurrentMap} The JComponent map for each field.
      */
-    static ConcurrentMap<String, JComponent> pluginNormalize(final DataTpl tpl) {
+    static ConcurrentMap<String, MMComponent> pluginNormalize(final DataTpl tpl) {
         return extractPlugin(tpl, MAttribute::getNormalize, IoArranger::notAop, INormalizer.class);
     }
 
@@ -117,7 +117,7 @@ class IoArranger {
      *
      * @return {@link java.util.concurrent.ConcurrentMap} The JComponent map for each field.
      */
-    static ConcurrentMap<String, JComponent> pluginExpression(final DataTpl tpl) {
+    static ConcurrentMap<String, MMComponent> pluginExpression(final DataTpl tpl) {
         return extractPlugin(tpl, MAttribute::getExpression, IoArranger::notAop, OExpression.class);
     }
 
@@ -176,14 +176,14 @@ class IoArranger {
      *
      * @return {@link java.util.concurrent.ConcurrentMap} The JComponent map for each field.
      */
-    private static ConcurrentMap<String, JComponent> extractPlugin(
+    private static ConcurrentMap<String, MMComponent> extractPlugin(
         final DataTpl tpl, final Function<MAttribute, String> fnComponent,
         final Function<MAttribute, Boolean> fnFilter, final Class<?> interfaceCls) {
         /*
          * 1. Iterate tpl attributes.
          */
         final Model model = tpl.atom().model();
-        final ConcurrentMap<String, JComponent> pluginMap = new ConcurrentHashMap<>();
+        final ConcurrentMap<String, MMComponent> pluginMap = new ConcurrentHashMap<>();
         final Function<MAttribute, Boolean> fnSelect = Objects.isNull(fnFilter) ? attribute -> Boolean.TRUE : fnFilter;
         model.dbAttributes().stream().filter(fnSelect::apply).forEach(attribute -> {
             /*
@@ -195,7 +195,7 @@ class IoArranger {
                 /*
                  * 3. SourceConfig
                  */
-                final JComponent component = JComponent.create(attribute.getName(), componentCls);
+                final MMComponent component = MMComponent.create(attribute.getName(), componentCls);
                 if (component.isImplement(interfaceCls)) {
                     final JsonObject config = componentConfig(attribute, tpl.atom(), componentCls);
                     pluginMap.put(attribute.getName(), component.bind(config));
@@ -265,12 +265,12 @@ class IoArranger {
     }
 
     // --------------------------- Execute The Workflow ------------------------
-    private static <T extends IoSource> JsonObject sourceData(final ConcurrentMap<String, JComponent> inMap,
+    private static <T extends IoSource> JsonObject sourceData(final ConcurrentMap<String, MMComponent> inMap,
                                                               final Class<?> interfaceCls) {
         /*
          * Source Data Convert
          */
-        final ConcurrentMap<String, JComponent> componentMap = new ConcurrentHashMap<>();
+        final ConcurrentMap<String, MMComponent> componentMap = new ConcurrentHashMap<>();
         inMap.values().forEach(component -> componentMap.put(component.keyUnique(), component));
         /*
          * Source Data Process
@@ -290,56 +290,56 @@ class IoArranger {
         return sourceData;
     }
 
-    static void runNorm(final HRecord[] records, final ConcurrentMap<String, JComponent> inMap) {
+    static void runNorm(final HRecord[] records, final ConcurrentMap<String, MMComponent> inMap) {
         run(records, inMap, null, (processed, component, config) -> {
             final INormalizer reference = component.instance(INormalizer.class);
             Arrays.stream(records).forEach(record -> run(record, component, reference::before));
         });
     }
 
-    static void runNorm(final HRecord record, final ConcurrentMap<String, JComponent> normalizeMap) {
+    static void runNorm(final HRecord record, final ConcurrentMap<String, MMComponent> normalizeMap) {
         run(record, normalizeMap, null, (processed, component, config) -> {
             final INormalizer reference = component.instance(INormalizer.class);
             run(record, component, reference::before);
         });
     }
 
-    static void runExpr(final HRecord[] records, final ConcurrentMap<String, JComponent> inMap) {
+    static void runExpr(final HRecord[] records, final ConcurrentMap<String, MMComponent> inMap) {
         run(records, inMap, null, (processed, component, config) -> {
             final OExpression reference = component.instance(OExpression.class);
             Arrays.stream(records).forEach(record -> run(record, component, reference::after));
         });
     }
 
-    static void runExpr(final HRecord record, final ConcurrentMap<String, JComponent> normalizeMap) {
+    static void runExpr(final HRecord record, final ConcurrentMap<String, MMComponent> normalizeMap) {
         run(record, normalizeMap, null, (processed, component, config) -> {
             final OExpression reference = component.instance(OExpression.class);
             run(record, component, reference::after);
         });
     }
 
-    static void runIn(final HRecord record, final ConcurrentMap<String, JComponent> inMap) {
+    static void runIn(final HRecord record, final ConcurrentMap<String, MMComponent> inMap) {
         run(record, inMap, IComponent.class, (processed, component, config) -> {
             final IComponent reference = component.instance(IComponent.class);
             run(record, component, kv -> reference.before(kv, record, config));
         });
     }
 
-    static void runIn(final HRecord[] records, final ConcurrentMap<String, JComponent> inMap) {
+    static void runIn(final HRecord[] records, final ConcurrentMap<String, MMComponent> inMap) {
         run(records, inMap, IComponent.class, (processed, component, config) -> {
             final IComponent reference = component.instance(IComponent.class);
             Arrays.stream(records).forEach(record -> run(record, component, kv -> reference.before(kv, record, config)));
         });
     }
 
-    static void runOut(final HRecord record, final ConcurrentMap<String, JComponent> inMap) {
+    static void runOut(final HRecord record, final ConcurrentMap<String, MMComponent> inMap) {
         run(record, inMap, OComponent.class, (processed, component, config) -> {
             final OComponent reference = component.instance(OComponent.class);
             run(record, component, kv -> reference.after(kv, record, config));
         });
     }
 
-    static void runOut(final HRecord[] records, final ConcurrentMap<String, JComponent> inMap) {
+    static void runOut(final HRecord[] records, final ConcurrentMap<String, MMComponent> inMap) {
         run(records, inMap, OComponent.class, (processed, component, config) -> {
             final OComponent reference = component.instance(OComponent.class);
             Arrays.stream(records).forEach(record -> run(record, component, kv -> reference.after(kv, record, config)));
@@ -347,7 +347,7 @@ class IoArranger {
     }
 
     /* Post Run */
-    private static void run(final HRecord record, final JComponent component,
+    private static void run(final HRecord record, final MMComponent component,
                             final Function<Kv<String, Object>, Object> executor) {
         final String field = component.key();
         final Kv<String, Object> kv = Kv.create(field, record.get(field));
@@ -363,9 +363,9 @@ class IoArranger {
     }
 
     /* Top Run */
-    private static <T> void run(final T input, final ConcurrentMap<String, JComponent> inMap,
+    private static <T> void run(final T input, final ConcurrentMap<String, MMComponent> inMap,
                                 final Class<?> interfaceCls,
-                                final TiConsumer<T, JComponent, JsonObject> consumer) {
+                                final TiConsumer<T, MMComponent, JsonObject> consumer) {
         if (!inMap.isEmpty()) {
             final JsonObject dataMap = sourceData(inMap, interfaceCls);
             inMap.forEach((field, component) -> {

@@ -14,4 +14,5 @@ public class YmRedis implements Serializable {
     private int timeout;
     private String password;
     private String database;
+    private String endpoint;
 }

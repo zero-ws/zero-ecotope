@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.tracing.TracingPolicy;
-import io.zerows.epoch.application.VertxYml;
 import io.zerows.epoch.basicore.option.ClusterOptions;
 import io.zerows.integrated.jackson.JsonObjectDeserializer;
 import io.zerows.integrated.jackson.JsonObjectSerializer;
@@ -18,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * {@link VertxYml.vertx}
+ * {@link YmSpec.vertx}
  *
  * @author lang : 2025-10-05
  */

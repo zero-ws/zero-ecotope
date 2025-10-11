@@ -3,7 +3,7 @@ package io.zerows.epoch.basicore.option;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.application.YmlCore;
-import io.zerows.epoch.metadata.JComponent;
+import io.zerows.epoch.metadata.MMComponent;
 import io.zerows.management.OZeroStore;
 import io.zerows.platform.constant.VName;
 import io.zerows.support.Ut;
@@ -28,7 +28,7 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class PluginOptions {
     private static final Cc<String, PluginOptions> CC_SKELETON = Cc.open();
-    private final ConcurrentMap<String, JComponent> configMap = new ConcurrentHashMap<>();
+    private final ConcurrentMap<String, MMComponent> configMap = new ConcurrentHashMap<>();
     private final boolean isEnabled;
 
     private PluginOptions() {
@@ -45,7 +45,7 @@ public class PluginOptions {
             if (Objects.nonNull(componentCls)) {
                 final String key = configEntry.getKey();
                 final JsonObject config = Ut.valueJObject(configEntry.getValue(), VName.CONFIG);
-                final JComponent componentRef = JComponent.create(key, componentCls).bind(config);
+                final MMComponent componentRef = MMComponent.create(key, componentCls).bind(config);
                 this.configMap.put(key, componentRef);
             }
         });
@@ -59,7 +59,7 @@ public class PluginOptions {
         return this.isEnabled;
     }
 
-    public JComponent getComponent(final String key) {
+    public MMComponent getComponent(final String key) {
         return this.configMap.getOrDefault(key, null);
     }
 }

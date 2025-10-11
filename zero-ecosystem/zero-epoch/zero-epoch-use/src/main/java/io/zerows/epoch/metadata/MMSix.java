@@ -51,11 +51,11 @@ import java.io.Serializable;
  * -- after：后置插件（队列）
  * 其他节点为配置
  */
-public class JSix implements Serializable {
+public class MMSix implements Serializable {
 
     private final JsonObject rawData = new JsonObject();
 
-    private JSix(final JsonObject options) {
+    private MMSix(final JsonObject options) {
         final JsonObject configuration = Ut.valueJObject(options);
         final JsonObject pluginComponent = configuration.getJsonObject("components");
         if (Ut.isNotNil(pluginComponent)) {
@@ -63,8 +63,8 @@ public class JSix implements Serializable {
         }
     }
 
-    public static JSix create(final JsonObject options) {
-        return new JSix(options);
+    public static MMSix create(final JsonObject options) {
+        return new MMSix(options);
     }
 
     public JsonObject batch(final ChangeFlag flag) {

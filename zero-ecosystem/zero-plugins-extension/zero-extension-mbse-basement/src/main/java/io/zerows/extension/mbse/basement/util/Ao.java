@@ -6,8 +6,7 @@ import io.zerows.component.log.Log;
 import io.zerows.component.log.LogModule;
 import io.zerows.epoch.database.Database;
 import io.zerows.epoch.metadata.Apt;
-import io.zerows.epoch.metadata.JBag;
-import io.zerows.support.Ut;
+import io.zerows.epoch.metadata.MMBag;
 import io.zerows.extension.mbse.basement.atom.Model;
 import io.zerows.extension.mbse.basement.atom.Schema;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
@@ -19,6 +18,7 @@ import io.zerows.plugins.office.excel.atom.ExTable;
 import io.zerows.specification.modeling.HAtom;
 import io.zerows.specification.modeling.HRecord;
 import io.zerows.specification.modeling.operation.HDao;
+import io.zerows.support.Ut;
 import org.jooq.Converter;
 
 import java.util.ArrayList;
@@ -250,7 +250,7 @@ public class Ao {
         return AoData.converter(type);
     }
 
-    public static List<JBag> split(final JBag bag, final Integer size) {
+    public static List<MMBag> split(final MMBag bag, final Integer size) {
         return AoData.bagSplit(bag, size);
     }
 

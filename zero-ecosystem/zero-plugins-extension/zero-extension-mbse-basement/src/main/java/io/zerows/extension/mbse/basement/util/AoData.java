@@ -2,8 +2,7 @@ package io.zerows.extension.mbse.basement.util;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.metadata.JBag;
-import io.zerows.support.Ut;
+import io.zerows.epoch.metadata.MMBag;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.atom.data.DataRecord;
 import io.zerows.extension.mbse.basement.atom.element.DataMatrix;
@@ -12,6 +11,7 @@ import io.zerows.extension.mbse.basement.uca.jooq.convert.JsonObjectSider;
 import io.zerows.plugins.office.excel.atom.ExRecord;
 import io.zerows.plugins.office.excel.atom.ExTable;
 import io.zerows.specification.modeling.HRecord;
+import io.zerows.support.Ut;
 import org.jooq.Converter;
 
 import java.util.ArrayList;
@@ -115,11 +115,11 @@ class AoData {
         return CONVERT_MAP.getOrDefault(type, null);
     }
 
-    static List<JBag> bagSplit(final JBag pbData, final Integer size) {
+    static List<MMBag> bagSplit(final MMBag pbData, final Integer size) {
         final List<JsonArray> dataList = Ut.elementGroup(pbData.getData(), size);
-        final List<JBag> dataPbList = new ArrayList<>();
+        final List<MMBag> dataPbList = new ArrayList<>();
         dataList.forEach(each -> {
-            final JBag data = new JBag();
+            final MMBag data = new MMBag();
             data.setIdentifier(pbData.getIdentifier());
             data.setData(each);
             data.setSize(each.size());

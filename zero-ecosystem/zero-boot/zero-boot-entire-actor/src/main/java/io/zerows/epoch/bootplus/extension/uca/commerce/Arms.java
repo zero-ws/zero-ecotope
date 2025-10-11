@@ -8,7 +8,7 @@ import io.zerows.epoch.bootplus.extension.refine.Ox;
 import io.zerows.epoch.bootplus.extension.scaffold.plugin.AspectSwitcher;
 import io.zerows.epoch.bootplus.extension.uca.log.TrackIo;
 import io.zerows.epoch.metadata.Apt;
-import io.zerows.epoch.metadata.JSix;
+import io.zerows.epoch.metadata.MMSix;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.util.Ao;
 import io.zerows.platform.enums.typed.ChangeFlag;
@@ -108,7 +108,7 @@ public class Arms {
          *     }
          * }
          */
-        final JSix hex = JSix.create(options);
+        final MMSix hex = MMSix.create(options);
         /*
          * 第一步：清洗数据
          * 1）检查数据合法性

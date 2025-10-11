@@ -1,7 +1,6 @@
 package io.zerows.epoch.basicore;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.application.VertxYml;
 import io.zerows.epoch.configuration.Equip;
 import lombok.Data;
 
@@ -9,7 +8,7 @@ import java.io.Serializable;
 
 /**
  * 🌐 服务器配置类
- * {@link VertxYml.server}
+ * {@link YmSpec.server}
  * <pre>
  *     📋 服务器属性默认值表：
  *     ┌─────────────────────┬─────────────────────┬─────────────────────┐

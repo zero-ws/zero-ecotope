@@ -41,7 +41,7 @@ public abstract class DiGuiceModule extends AbstractModule {
             if (1 == implSet.size()) {
                 final Class<T> clazz = implSet.iterator().next();
                 this.bind(interfaceCls).to(clazz);
-                log.info("[ ZERO ] ( DI ) 实现类: `{}`, 接口 = `{}`", clazz, interfaceCls);
+                log.info("[ ZERO ] ( DI ) 实现类: `{}`, 接口 = `{}`", clazz.getName(), interfaceCls.getName());
                 // clazzSet.add(clazz.getName());
             } else {
                 // interface with multi classed injection
@@ -50,7 +50,7 @@ public abstract class DiGuiceModule extends AbstractModule {
                         final Annotation annotation = implCls.getAnnotation(Named.class);
                         final String name = Ut.invoke(annotation, "get");
                         log.info("[ ZERO ] ( DI ) 实现类: `{}`, 接口 = `{}`, 标识 = {}",
-                            implCls, interfaceCls, name);
+                            implCls.getName(), interfaceCls.getName(), name);
                         this.bind(interfaceCls).annotatedWith(Names.named(name))
                             .to(implCls);
                     } else {

@@ -3,12 +3,12 @@ package io.zerows.extension.mbse.basement.uca.reference;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.metadata.MMAmb;
+import io.zerows.platform.enums.modeling.EmValue;
 import io.zerows.platform.metadata.Kv;
 import io.zerows.platform.metadata.RResult;
-import io.zerows.epoch.metadata.JAmb;
-import io.zerows.platform.enums.modeling.EmValue;
-import io.zerows.support.Ut;
 import io.zerows.specification.modeling.HRecord;
+import io.zerows.support.Ut;
 
 import java.util.Arrays;
 import java.util.List;
@@ -41,7 +41,7 @@ class RayResult {
         compressData(joinData, joinResult).forEach((field, processed) -> {
             final RResult result = joinResult.get(field);
             /* JAmb */
-            final ConcurrentMap<String, JAmb> grouped = groupData(processed, result);
+            final ConcurrentMap<String, MMAmb> grouped = groupData(processed, result);
             /* Combine */
             combine(record, field, grouped, result);
         });
@@ -63,18 +63,18 @@ class RayResult {
         compressData(joinData, joinResult).forEach((field, processed) -> {
             final RResult result = joinResult.get(field);
             /* JAmb */
-            final ConcurrentMap<String, JAmb> grouped = groupData(processed, result);
+            final ConcurrentMap<String, MMAmb> grouped = groupData(processed, result);
             /* Iterator for each record */
             Arrays.stream(records).forEach(record -> combine(record, field, grouped, result));
         });
         return records;
     }
 
-    private static void combine(final HRecord record, final String field, final ConcurrentMap<String, JAmb> groupData, final RResult result) {
+    private static void combine(final HRecord record, final String field, final ConcurrentMap<String, MMAmb> groupData, final RResult result) {
         /* Key */
         final String keyRecord = keyRecord(record, result.joined());
         /* Combined */
-        final JAmb amb = groupData.get(keyRecord);
+        final MMAmb amb = groupData.get(keyRecord);
         if (Objects.isNull(amb)) {
             /*
              * Apply Default Value
@@ -95,7 +95,7 @@ class RayResult {
         }
     }
 
-    private static void combine(final HRecord record, final String field, final JAmb amb, final RResult result) {
+    private static void combine(final HRecord record, final String field, final MMAmb amb, final RResult result) {
         /* Amb */
         final EmValue.Format format = result.format();
         if (EmValue.Format.JsonArray == format) {
@@ -133,11 +133,11 @@ class RayResult {
      *
      * @return {@link java.util.concurrent.ConcurrentMap}
      */
-    private static ConcurrentMap<String, JAmb> groupData(final JsonArray data, final RResult result) {
+    private static ConcurrentMap<String, MMAmb> groupData(final JsonArray data, final RResult result) {
         /*
          * Result type came from `result`.
          */
-        final ConcurrentMap<String, JAmb> groupedData = new ConcurrentHashMap<>();
+        final ConcurrentMap<String, MMAmb> groupedData = new ConcurrentHashMap<>();
         final Class<?> type = result.typeData();
         if (JsonArray.class == type) {
             /*
@@ -146,7 +146,7 @@ class RayResult {
             Ut.itJArray(data).forEach(json -> {
                 final String key = keyReference(json, result.joined());
                 if (Ut.isNotNil(key)) {
-                    Cc.pool(groupedData, key, () -> new JAmb().data(new JsonArray())).add(json);
+                    Cc.pool(groupedData, key, () -> new MMAmb().data(new JsonArray())).add(json);
                 }
             });
         } else {
@@ -156,7 +156,7 @@ class RayResult {
             Ut.itJArray(data).forEach(json -> {
                 final String key = keyReference(json, result.joined());
                 if (Ut.isNotNil(key)) {
-                    groupedData.put(key, new JAmb().data(json));
+                    groupedData.put(key, new MMAmb().data(json));
                 }
             });
         }

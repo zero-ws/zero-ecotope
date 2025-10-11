@@ -1,13 +1,12 @@
 package io.zerows.epoch.basicore;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.zerows.epoch.application.VertxYml;
 import lombok.Data;
 
 import java.io.Serializable;
 
 /**
- * {@link VertxYml.vertx.cloud.nacos}
+ * {@link YmSpec.vertx.cloud.nacos}
  *
  * @author lang : 2025-10-05
  */

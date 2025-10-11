@@ -1,18 +1,34 @@
 package io.zerows.epoch;
 
+import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Vertx;
+import io.vertx.core.VertxOptions;
+import io.vertx.core.eventbus.DeliveryOptions;
+import io.vertx.core.eventbus.EventBusOptions;
+import io.vertx.core.http.HttpServerOptions;
 import io.zerows.cortex.management.StoreVertx;
+import io.zerows.cortex.metadata.RunRoute;
+import io.zerows.cortex.metadata.RunServer;
 import io.zerows.cortex.metadata.RunVertx;
 import io.zerows.cosmic.bootstrap.Linear;
+import io.zerows.epoch.basicore.YmSpec;
+import io.zerows.epoch.basicore.option.ClusterOptions;
+import io.zerows.epoch.basicore.option.RpcOptions;
+import io.zerows.epoch.basicore.option.SockOptions;
 import io.zerows.epoch.boot.ZeroLauncher;
+import io.zerows.epoch.configuration.NodeNetwork;
+import io.zerows.epoch.configuration.NodeVertx;
 import io.zerows.epoch.management.OCacheClass;
 import io.zerows.platform.ENV;
 import io.zerows.platform.EnvironmentVariable;
 import io.zerows.platform.enums.VertxComponent;
 import io.zerows.platform.metadata.KRunner;
+import io.zerows.specification.app.HApp;
+import io.zerows.specification.app.HArk;
 import io.zerows.specification.configuration.HBoot;
 import io.zerows.specification.configuration.HEnergy;
 import io.zerows.specification.configuration.HLauncher;
+import io.zerows.specification.configuration.HSetting;
 import io.zerows.spi.BootIo;
 import io.zerows.spi.HPI;
 import lombok.extern.slf4j.Slf4j;
@@ -56,6 +72,29 @@ public class VertxApplication {
      *     - {@link EnvironmentVariable#R2MO_NACOS_ADDR} -> nacos 端地址
      *     - {@link EnvironmentVariable#R2MO_NACOS_USERNAME} -> nacos 登录用户名
      *     - {@link EnvironmentVariable#R2MO_NACOS_PASSWORD} -> nacos 登录密码
+     * </pre>
+     * 对象数量汇总
+     * <pre>
+     *     vertx.yml / vertx-boot.yml 参考 {@link YmSpec}
+     *     1. {@link HBoot}                         x 1                 核心启动配置
+     *     2. {@link HSetting}                      x 1                 配置对象（静态）
+     *        {@link HEnergy}                       x 1                 配置对象（动态）
+     *     3. {@link NodeNetwork}                   x 1                 集群、网络、环境（静态）
+     *            {@link HttpServerOptions}         x 1
+     *            {@link ClusterOptions}            x 1
+     *            {@link SockOptions}               x 1
+     *            {@link RpcOptions}                x 1                 （保留）
+     *        {@link NodeVertx}                     x N                 Vert.x 实例（静态）
+     *            {@link DeploymentOptions}         x N
+     *            {@link VertxOptions}              x 1
+     *            {@link DeliveryOptions}           x 1
+     *            {@link EventBusOptions}           x 1                 = {@link VertxOptions#getEventBusOptions()}
+     *     4. {@link RunServer}                     x 1                 服务器信息
+     *        {@link RunVertx}                      x N                 Vert.x 实例（动态）
+     *        {@link RunRoute}                      x N                 路由管理器 -> server handler
+     *     5. {@link HApp}                          x N                 应用对象（内层）
+     *        {@link HArk}                          x N                 应用对象（外层）
+     *        *: 正常应用启动器只有一个 {@link HApp} 对象
      * </pre>
      *
      * @param clazz 启动主类

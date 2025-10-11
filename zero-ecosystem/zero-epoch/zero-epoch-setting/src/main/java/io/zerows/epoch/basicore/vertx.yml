@@ -1,3 +1,4 @@
+# 类 YmBoot
 # -----------------------------------------------------------------
 # 🚀 启动专用配置
 boot:
@@ -71,7 +72,7 @@ vertx:
     name:
   mvc: # 对标 Spring MVC 配置做统一结构化
     cors: # ⛓️ 跨域资源共享配置
-      origin: # 🌍 允许的跨域源列表
+      allowed-origins: # 🌍 允许的跨域源列表
         - "客户端跨域的地址信息"              # 例如: http://localhost:3000, https://example.com
   # 🌐 Vertx 原生集群配置
   cluster: # 🏗️ 集群配置

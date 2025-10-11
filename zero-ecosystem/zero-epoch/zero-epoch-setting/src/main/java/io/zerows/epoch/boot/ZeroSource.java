@@ -7,10 +7,10 @@ import io.r2mo.spi.SPI;
 import io.r2mo.typed.json.JObject;
 import io.r2mo.typed.json.JUtil;
 import io.vertx.core.json.JsonArray;
-import io.zerows.epoch.application.VertxYml;
 import io.zerows.epoch.basicore.InPre;
 import io.zerows.epoch.basicore.YmApplication;
 import io.zerows.epoch.basicore.YmConfiguration;
+import io.zerows.epoch.basicore.YmSpec;
 import io.zerows.epoch.basicore.exception._41001Exception500AppNameMissing;
 import io.zerows.platform.management.StoreApp;
 import io.zerows.platform.metadata.KApp;
@@ -45,10 +45,10 @@ class ZeroSource implements ZeroPower.Source {
      *              项，这种情况多半是 Cloud 中的某个小应用、微服务等，非单体。
      *              --------------------- {@link ConfigLoadCloud} 负责 -------------------------------
      *              注：远程模式下目前版本访问的是 Nacos 配置中心，所以要支持合并配置 vertx-boot.yml + vertx.yml + 共享 yml
-     *              配置，共享配置位于 {@link VertxYml.vertx.config#import_} 中 {@link JsonArray} 进行设置
+     *              配置，共享配置位于 {@link YmSpec.vertx.config#import_} 中 {@link JsonArray} 进行设置
      *
      * </pre>
-     * 配置信息的路径地址：{@link VertxYml.vertx.application#name}，对应在 vertx.yml 和 vertx-boot.yml 中定义的路径也如此
+     * 配置信息的路径地址：{@link YmSpec.vertx.application#name}，对应在 vertx.yml 和 vertx-boot.yml 中定义的路径也如此
      *
      * @return 配置对象
      */
