@@ -93,10 +93,6 @@
             <groupId>io.zerows</groupId>
             <artifactId>zero-plugins-websocket-stomp</artifactId>
         </dependency>
-        <dependency>
-            <groupId>io.zerows</groupId>
-            <artifactId>zero-plugins-swagger</artifactId>
-        </dependency>
 
         <!-- ================= 动态插件 ================== -->
         <dependency>

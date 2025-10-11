@@ -50,14 +50,6 @@
             <artifactId>javassist</artifactId>
         </dependency>
 
-
-        <!-- io_uring -->
-        <dependency>
-            <groupId>io.vertx</groupId>
-            <artifactId>vertx-io_uring-incubator</artifactId>
-        </dependency>
-
-
         <!-- 请求错误：无法访问目标地址，检查对口是否可被正常访问 -->
         <dependency>
             <groupId>io.netty</groupId>
