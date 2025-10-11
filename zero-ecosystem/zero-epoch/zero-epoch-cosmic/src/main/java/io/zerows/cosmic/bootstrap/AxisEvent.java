@@ -6,7 +6,7 @@ import io.vertx.ext.web.RoutingContext;
 import io.zerows.cortex.AxisSub;
 import io.zerows.cortex.management.StoreRouter;
 import io.zerows.cortex.metadata.RunRoute;
-import io.zerows.cortex.metadata.RunServerLegacy;
+import io.zerows.cortex.metadata.RunServer;
 import io.zerows.cortex.metadata.WebRequest;
 import io.zerows.cortex.sdk.Aim;
 import io.zerows.cortex.sdk.Axis;
@@ -30,7 +30,7 @@ public class AxisEvent implements Axis {
     private final Sentry<RoutingContext> verifier = CC_VERIFIER.pick(SentryVerifier::new);
 
     @Override
-    public void mount(final RunServerLegacy server, final HBundle bundle) {
+    public void mount(final RunServer server, final HBundle bundle) {
 
         final OCacheActor actor = OCacheActor.of(bundle);
         final Set<WebEvent> events = actor.value().getEvents();

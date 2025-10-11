@@ -1,12 +1,12 @@
 package io.zerows.cosmic.plugins.websocket;
 
 import io.vertx.core.http.HttpServerOptions;
-import io.zerows.component.log.OLog;
-import io.zerows.cortex.metadata.RunServerLegacy;
+import io.zerows.cortex.metadata.RunServer;
 import io.zerows.cortex.sdk.Axis;
 import io.zerows.epoch.basicore.option.SockOptions;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -14,9 +14,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 /**
  * @author lang : 2024-06-26
  */
+@Slf4j
 public class AxisWs implements Axis {
-    public static final String WS_COMPONENT = "[ Sock ] The WebSocket component has been selected: {0}";
-    public static final String WS_PUBLISH = "[ Sock ] The WebSocket publish channel has been opened: http://{1}:{0}{2}";
     private static final AtomicBoolean LOG_PUBLISH = new AtomicBoolean(Boolean.TRUE);
     private static final AtomicBoolean LOG_COMPONENT = new AtomicBoolean(Boolean.TRUE);
 
@@ -35,23 +34,23 @@ public class AxisWs implements Axis {
      */
     @Override
     @SuppressWarnings("all")
-    public void mount(final RunServerLegacy server, final HBundle owner) {
+    public void mount(final RunServer server, final HBundle owner) {
         // 提取配置
-        final SockOptions sockOptions = server.configSock().options();
+        final SockOptions sockOptions = server.configSock();
         if (Objects.isNull(sockOptions)) {
             return;
         }
 
 
-        final HttpServerOptions serverOptions = server.config().options();
+        final HttpServerOptions serverOptions = server.config();
 
 
         // 是否启用了 `publish` 功能，如果启动此功能则开启广播模式
         final String publish = sockOptions.getPublish();
         if (Ut.isNotNil(publish)) {
             if (LOG_PUBLISH.getAndSet(Boolean.FALSE)) {
-                this.logger().info(WS_PUBLISH, String.valueOf(serverOptions.getPort()),
-                    serverOptions.getHost(), publish);
+                log.info("[ ZERO ] ( WebSocket ) 发布通道已打开：ws://{}:{}{}",
+                    serverOptions.getHost(), String.valueOf(serverOptions.getPort()), publish);
             }
             final Axis axisPublish = Axis.ofOr(AxisPublish.class);
             axisPublish.mount(server, owner);
@@ -67,13 +66,9 @@ public class AxisWs implements Axis {
 
 
         if (LOG_COMPONENT.getAndSet(Boolean.FALSE)) {
-            this.logger().info(WS_COMPONENT, axisCls);
+            log.info("[ ZERO ] ( WebSocket ) Axis 执行组件选择：{}", axisCls);
         }
         final Axis axisComponent = Axis.ofOr((Class<Axis>) axisCls);
         axisComponent.mount(server, owner);
-    }
-
-    private OLog logger() {
-        return Ut.Log.websocket(this.getClass());
     }
 }

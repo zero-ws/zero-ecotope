@@ -1,20 +1,19 @@
 package io.zerows.cosmic;
 
+import io.r2mo.typed.exception.web._404NotFoundException;
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpServer;
 import io.vertx.core.http.HttpServerOptions;
-import io.zerows.cortex.metadata.RunServerLegacy;
-import io.zerows.cortex.metadata.RunVertxLegacy;
+import io.zerows.cortex.management.StoreServer;
+import io.zerows.cortex.metadata.RunServer;
+import io.zerows.cortex.metadata.RunVertx;
 import io.zerows.epoch.basicore.option.SockOptions;
-import io.zerows.epoch.configuration.NodeVertxLegacy;
-import io.zerows.epoch.configuration.OptionOfServer;
-import io.zerows.platform.enums.app.ServerType;
+import io.zerows.epoch.configuration.NodeNetwork;
+import io.zerows.epoch.configuration.NodeVertx;
 import io.zerows.platform.management.AbstractAmbiguity;
 import io.zerows.specification.development.compiled.HBundle;
 
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 /**
  * @author lang : 2024-05-04
@@ -25,29 +24,43 @@ class StubServerService extends AbstractAmbiguity implements StubServer {
     }
 
     @Override
-    public Set<RunServerLegacy> createAsync(final RunVertxLegacy runVertxLegacy) {
+    public RunServer createAsync(final RunVertx runVertx) {
 
-        final Vertx vertxRef = runVertxLegacy.instance();
+        final Vertx vertxRef = runVertx.instance();
         if (Objects.isNull(vertxRef)) {
-            return Set.of();
+            throw new _404NotFoundException("[ ZERO ] Vertx 实例未找到，无法创建 HttpServer");
         }
 
-        final NodeVertxLegacy config = runVertxLegacy.config();
-        final Set<String> servers = config.optionServers(ServerType.HTTP);
-        final Set<RunServerLegacy> serverSet = new HashSet<>();
 
-        servers.stream().map(config::<HttpServerOptions>optionServer).forEach(option -> {
-            final OptionOfServer<SockOptions> optionOfSock = config.findSock(option);
-            /* 提取 HTTP 服务器配置 */
-            final HttpServerOptions optionsHttp = option.options();
-            final HttpServer server = vertxRef.createHttpServer(optionsHttp);
-            /* 构造 RunServer */
-            serverSet.add(new RunServerLegacy(option.name())
-                .config(option)
-                .configSock(optionOfSock)
-                .refRunVertx(runVertxLegacy)
-                .instance(server).build());
-        });
-        return serverSet;
+        /*
+         * 一对一绑定，Vertx 的名称用来处理 Server 名称，对应到
+         * vertx:
+         *     application:
+         *         name: demo-vertx
+         * 微服务模式下为服务名
+         */
+        final NodeVertx config = runVertx.config();
+        final NodeNetwork network = config.networkRef();
+
+
+        final HttpServerOptions serverOptions = network.server();
+        final HttpServer server = vertxRef.createHttpServer(serverOptions);
+
+
+
+        /* 构造 RunServer 实例 */
+        final String serverName = serverOptions.getHost() + ":" + serverOptions.getPort();
+        final RunServer runServer = new RunServer(serverName);
+        final SockOptions sockOptions = network.sock();
+        runServer
+            .config(sockOptions)
+            .config(serverOptions)
+            .refRunVertx(runVertx)
+            .instance(server)
+            .build();
+
+
+        StoreServer.of().add(runServer);
+        return runServer;
     }
 }

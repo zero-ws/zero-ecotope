@@ -6,7 +6,7 @@ import io.vertx.ext.web.Route;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.sockjs.SockJSHandler;
 import io.vertx.ext.web.handler.sockjs.SockJSHandlerOptions;
-import io.zerows.cortex.metadata.RunServerLegacy;
+import io.zerows.cortex.metadata.RunServer;
 import io.zerows.cortex.sdk.Axis;
 import io.zerows.epoch.basicore.option.SockOptions;
 import io.zerows.epoch.constant.KWeb;
@@ -30,12 +30,12 @@ public class AxisPublish implements Axis {
     }
 
     @Override
-    public void mount(final RunServerLegacy server, final HBundle bundle) {
+    public void mount(final RunServer server, final HBundle bundle) {
         final Router router = server.refRouter();
         final Vertx vertx = server.refVertx();
         Objects.requireNonNull(router);
 
-        final SockOptions options = server.configSock().options();
+        final SockOptions options = server.configSock();
         final JsonObject sockJsOptionJ = options.configSockJs();
         this.sockOk.forEach(sock -> {
             /* 此处已经做过过滤，所以 Remind 对象中的 secure = false，框架底层使用如下方式定义这种类型的 WebSocket */

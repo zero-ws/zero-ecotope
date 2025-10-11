@@ -7,8 +7,7 @@ import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.eventbus.EventBus;
 import io.zerows.component.log.OLog;
 import io.zerows.cosmic.plugins.job.metadata.Mission;
-import io.zerows.epoch.configuration.NodeNetwork;
-import io.zerows.epoch.management.OCacheNode;
+import io.zerows.epoch.configuration.NodeStore;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.platform.metadata.KRef;
 import io.zerows.support.Ut;
@@ -67,7 +66,7 @@ class PhaseOutPut {
         }
     }
 
-    Future<Envelop> outputAsync(final Envelop envelop, final Mission mission) {
+    Future<Envelop> outputAsync(final Envelop envelop, final Mission mission, final Vertx vertx) {
         if (envelop.valid()) {
             /*
              * Get outcome address
@@ -89,8 +88,7 @@ class PhaseOutPut {
                 PhaseElement.onceLog(mission,
                     () -> LOGGER.info(JobMessage.PHASE.PHASE_5TH_JOB_ASYNC, mission.getCode(), address));
 
-                final NodeNetwork network = OCacheNode.of().network();
-                final DeliveryOptions deliveryOptions = network.get().optionDelivery();
+                final DeliveryOptions deliveryOptions = NodeStore.ofDelivery(vertx);
                 eventBus.publish(address, envelop, deliveryOptions);
                 return Future.succeededFuture(envelop);
             }

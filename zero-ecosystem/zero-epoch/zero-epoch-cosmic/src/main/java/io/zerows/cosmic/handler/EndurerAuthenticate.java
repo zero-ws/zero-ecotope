@@ -3,17 +3,16 @@ package io.zerows.cosmic.handler;
 import io.r2mo.typed.exception.WebException;
 import io.vertx.core.Handler;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.component.log.Annal;
 import io.zerows.cosmic.bootstrap.AimAnswer;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.program.Ux;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Common handler to handle handler
  */
+@Slf4j
 public class EndurerAuthenticate implements Handler<RoutingContext> {
-
-    private static final Annal LOGGER = Annal.get(EndurerAuthenticate.class);
 
     private EndurerAuthenticate() {
     }
@@ -27,7 +26,7 @@ public class EndurerAuthenticate implements Handler<RoutingContext> {
         if (event.failed()) {
             final Throwable ex = event.failure();
             if (ex instanceof final WebException error) {
-                LOGGER.info("Web Exception: {0} = {1}", ex.getClass().getName(), ex.getMessage());
+                log.info("[ ZERO ] Web Exception: {} = {}", ex.getClass().getName(), ex.getMessage());
                 /*
                  * XHeader bind
                  */
@@ -35,7 +34,7 @@ public class EndurerAuthenticate implements Handler<RoutingContext> {
                 AimAnswer.reply(event, Envelop.failure(error));
             } else {
                 // Other exception found
-                LOGGER.info("Exception: {0} = {1}", ex.getClass().getName(), ex.getMessage());
+                log.info("[ ZERO ] Exception: {} = {}", ex.getClass().getName(), ex.getMessage());
                 ex.printStackTrace();
                 AimAnswer.reply(event, Envelop.failure(ex));
             }

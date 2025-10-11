@@ -1,9 +1,7 @@
 package io.zerows.cortex;
 
-import io.zerows.component.log.OLog;
 import io.zerows.cortex.sdk.Axis;
 import io.zerows.specification.development.compiled.HBundle;
-import io.zerows.support.Ut;
 
 /**
  * WebSocket 路由管理器工厂，用于提取路由管理器专用，不同环境的设计如下：
@@ -32,8 +30,4 @@ public interface AxisSockFactory {
      * @return 如果启用了则直接返回 true
      */
     boolean isEnabled(HBundle owner);
-
-    default OLog logger() {
-        return Ut.Log.websocket(this.getClass());
-    }
 }

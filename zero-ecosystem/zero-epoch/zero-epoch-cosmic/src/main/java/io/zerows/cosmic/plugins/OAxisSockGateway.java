@@ -4,6 +4,7 @@ import io.zerows.cortex.AxisSockFactory;
 import io.zerows.cortex.sdk.Axis;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.spi.HPI;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -11,6 +12,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 /**
  * @author lang : 2024-06-27
  */
+@Slf4j
 public class OAxisSockGateway implements OAxisGateway {
     private static final AtomicBoolean IS_LOG = new AtomicBoolean(Boolean.TRUE);
 
@@ -20,7 +22,7 @@ public class OAxisSockGateway implements OAxisGateway {
         if (Objects.isNull(factory)) {
             // 没有部署，无法找到工厂类
             if (IS_LOG.getAndSet(Boolean.FALSE)) {
-                this.logger().info("The AxisSockFactory is null and websocket feature will be disabled.");
+                log.info("[ ZERO ] ( WebSocket ) SPI 组件 AxisSockFactory 为 null，WebSocket 功能禁用！");
             }
             return null;
         }
@@ -28,7 +30,7 @@ public class OAxisSockGateway implements OAxisGateway {
         if (!factory.isEnabled(owner)) {
             // 没有启用
             if (IS_LOG.getAndSet(Boolean.FALSE)) {
-                this.logger().info("The websocket feature is disabled by configuration, please contact administrator.");
+                log.warn("[ ZERO ] ( WebSocket ) 功能被配置禁用，请检查配置或联系管理员！");
             }
             return null;
         }

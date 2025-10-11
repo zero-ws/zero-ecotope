@@ -49,7 +49,10 @@ class StoreServerAmbiguity extends AbstractAmbiguity implements StoreServer {
 
     @Override
     public StoreServer remove(final RunServer runServer) {
-        return null;
+        if (Objects.nonNull(runServer)) {
+            return this.remove(runServer.name());
+        }
+        return this;
     }
 
 

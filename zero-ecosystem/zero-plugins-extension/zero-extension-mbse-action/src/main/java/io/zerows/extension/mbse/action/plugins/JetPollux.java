@@ -4,7 +4,7 @@ import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.Route;
 import io.vertx.ext.web.Router;
-import io.zerows.cortex.metadata.RunServerLegacy;
+import io.zerows.cortex.metadata.RunServer;
 import io.zerows.cortex.sdk.Axis;
 import io.zerows.cosmic.handler.EndurerCommon;
 import io.zerows.epoch.constant.KWeb;
@@ -50,7 +50,7 @@ public class JetPollux implements Axis {
 
     @Override
     @SuppressWarnings("all")
-    public void mount(final RunServerLegacy server, final HBundle owner) {
+    public void mount(final RunServer server, final HBundle owner) {
         /*
          * 先提取配置，由于上层会直接调用 JetAxisManager 来对配置部分做启用 / 禁用的拦截，所以代码执行到这里已经是
          * 整体流程上 configuration 的配置部分过了自检流程，且 ServiceEnvironment 也已经过了检查流程，相关应用
@@ -140,7 +140,6 @@ public class JetPollux implements Axis {
          *      3.3) Let worker consume component
          */
         final JtAim pre = POOL.CC_AIM.pick(() -> Ut.instance(PreAim.class), PreAim.class.getName());
-        // Fn.po?lThread(POOL.AIM_PRE_HUBS, () -> Ut.instance(PreAim.class));
         final JtAim in = POOL.CC_AIM.pick(() -> Ut.instance(InAim.class), InAim.class.getName());
         final JtAim engine = POOL.CC_AIM.pick(() -> Ut.instance(EngineAim.class), EngineAim.class.getName());
         final JtAim send = POOL.CC_AIM.pick(() -> Ut.instance(SendAim.class), SendAim.class.getName());

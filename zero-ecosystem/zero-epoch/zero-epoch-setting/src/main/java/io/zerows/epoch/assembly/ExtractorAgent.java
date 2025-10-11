@@ -2,9 +2,7 @@ package io.zerows.epoch.assembly;
 
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.DeploymentOptions;
-import io.zerows.epoch.configuration.NodeNetwork;
-import io.zerows.epoch.configuration.NodeVertxLegacy;
-import io.zerows.epoch.management.OCacheNode;
+import io.zerows.epoch.configuration.NodeStore;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -21,10 +19,6 @@ public class ExtractorAgent implements Extractor<DeploymentOptions> {
     public DeploymentOptions extract(final Class<?> clazz) {
         log.info(AGENT_HIT, clazz.getName());
 
-        final NodeNetwork network = OCacheNode.of().network();
-        final NodeVertxLegacy nodeVertxLegacy = network.get();
-
-        return CC_OPTIONS.pick(() -> nodeVertxLegacy.optionDeployment(clazz), clazz);
-        // FnZero.po?l(OPTIONS, clazz, () -> rotate.spinAgent(clazz));
+        return CC_OPTIONS.pick(() -> NodeStore.ofDeployment(clazz), clazz);
     }
 }

@@ -10,8 +10,7 @@ import io.vertx.ext.web.RoutingContext;
 import io.zerows.cosmic.bootstrap.ActionNext;
 import io.zerows.cosmic.bootstrap.AimAnswer;
 import io.zerows.cosmic.bootstrap.Ambit;
-import io.zerows.epoch.configuration.NodeNetwork;
-import io.zerows.epoch.management.OCacheNode;
+import io.zerows.epoch.configuration.NodeStore;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.mbse.action.atom.JtUri;
 import io.zerows.extension.mbse.action.uca.monitor.JtMonitor;
@@ -53,8 +52,7 @@ public class SendAim implements JtAim {
                     final Vertx vertx = context.vertx();
                     final EventBus event = vertx.eventBus();
 
-                    final NodeNetwork network = OCacheNode.of().network();
-                    final DeliveryOptions deliveryOptions = network.get().optionDelivery();
+                    final DeliveryOptions deliveryOptions = NodeStore.ofDelivery(vertx);
                     event.<Envelop>request(address, normalized, deliveryOptions).onComplete(handler -> {
                         if (handler.succeeded()) {
                             /*

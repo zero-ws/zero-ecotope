@@ -29,7 +29,6 @@ public class DiPlugin {
 
     public static DiPlugin create(final Class<?> clazz) {
         return CC_DI.pick(() -> new DiPlugin(clazz), clazz);
-        // return FnZero.po?l(Pool.PLUGINS, clazz, () -> new DiPlugin(clazz));
     }
 
     // 直接创建一个新类

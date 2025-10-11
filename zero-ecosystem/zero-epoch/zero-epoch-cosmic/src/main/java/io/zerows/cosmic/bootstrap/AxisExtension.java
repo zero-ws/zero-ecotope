@@ -1,6 +1,6 @@
 package io.zerows.cosmic.bootstrap;
 
-import io.zerows.cortex.metadata.RunServerLegacy;
+import io.zerows.cortex.metadata.RunServer;
 import io.zerows.cortex.sdk.Axis;
 import io.zerows.cosmic.plugins.OAxisDynamicGateway;
 import io.zerows.cosmic.plugins.OAxisGateway;
@@ -26,7 +26,7 @@ import java.util.Objects;
 public class AxisExtension implements Axis {
 
     @Override
-    public void mount(final RunServerLegacy server, final HBundle bundle) {
+    public void mount(final RunServer server, final HBundle bundle) {
         // Websocket 功能
         final OAxisGateway sockGateway = OAxisGateway.of(OAxisSockGateway.class);
         final Axis sockAxis = sockGateway.getAxis(bundle);

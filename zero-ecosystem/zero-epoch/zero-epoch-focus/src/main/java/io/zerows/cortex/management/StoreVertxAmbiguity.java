@@ -2,6 +2,8 @@ package io.zerows.cortex.management;
 
 import io.vertx.core.Vertx;
 import io.zerows.cortex.metadata.RunVertx;
+import io.zerows.epoch.configuration.NodeStore;
+import io.zerows.epoch.configuration.NodeVertx;
 import io.zerows.platform.exception._60050Exception501NotSupport;
 import io.zerows.platform.management.AbstractAmbiguity;
 import io.zerows.platform.metadata.MultiKeyMap;
@@ -62,6 +64,10 @@ class StoreVertxAmbiguity extends AbstractAmbiguity implements StoreVertx {
             final String id = String.valueOf(vertxRef.hashCode());
             log.info("[ ZERO ] 添加运行实例：name = {}, hashCode = {}", runVertx.name(), id);
             RUNNING.put(id, runVertx, runVertx.name());
+
+            // 底层添加
+            final NodeVertx nodeVertx = runVertx.config();
+            NodeStore.add(id, nodeVertx);
         }
         return this;
     }
@@ -79,6 +85,9 @@ class StoreVertxAmbiguity extends AbstractAmbiguity implements StoreVertx {
     public StoreVertx remove(final String name) {
         if (Ut.isNotNil(name)) {
             RUNNING.remove(name);
+
+            // 底层移除
+            NodeStore.remove(name);
         }
         return this;
     }

@@ -17,13 +17,13 @@ import java.util.Objects;
  */
 public class RunRoute implements Serializable {
 
-    private final RunServerLegacy server;
+    private final RunServer server;
     private final RunThread thread;
     private final Route route;
     private WebEvent event;
     private String key;
 
-    public RunRoute(final RunServerLegacy server) {
+    public RunRoute(final RunServer server) {
         this.server = server;
         this.thread = RunThread.one();                      // 线程相关信息
 

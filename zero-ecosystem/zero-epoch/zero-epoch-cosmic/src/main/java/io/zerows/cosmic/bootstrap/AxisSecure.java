@@ -3,7 +3,7 @@ package io.zerows.cosmic.bootstrap;
 import io.vertx.ext.web.handler.AuthenticationHandler;
 import io.vertx.ext.web.handler.AuthorizationHandler;
 import io.vertx.ext.web.handler.ChainAuthHandler;
-import io.zerows.cortex.metadata.RunServerLegacy;
+import io.zerows.cortex.metadata.RunServer;
 import io.zerows.cortex.sdk.Axis;
 import io.zerows.cosmic.handler.EndurerAuthenticate;
 import io.zerows.cosmic.plugins.security.Bolt;
@@ -12,7 +12,7 @@ import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.metadata.security.Aegis;
 import io.zerows.platform.constant.VValue;
 import io.zerows.specification.development.compiled.HBundle;
-import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Comparator;
 import java.util.Objects;
@@ -26,6 +26,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  *
  * @author lang : 2024-05-04
  */
+@Slf4j
 public class AxisSecure implements Axis {
     private static final AtomicBoolean IS_OUT = new AtomicBoolean(Boolean.TRUE);
     private static final AtomicBoolean IS_DISABLED = new AtomicBoolean(Boolean.TRUE);
@@ -36,7 +37,7 @@ public class AxisSecure implements Axis {
     }
 
     @Override
-    public void mount(final RunServerLegacy server, final HBundle bundle) {
+    public void mount(final RunServer server, final HBundle bundle) {
         /*
          * Wall mounting for authorization
          * Here create order set to remove duplicated order and re-generate the get.
@@ -73,11 +74,11 @@ public class AxisSecure implements Axis {
             }
         });
         if (store.isEmpty() && IS_DISABLED.getAndSet(Boolean.FALSE)) {
-            Ut.Log.security(this.getClass()).info("Security Disabled: bolt = {}", this.bolt.getClass());
+            log.info("[ ZERO ] ⚠️ 安全机制禁用：bolt = {}", this.bolt.getClass());
         }
     }
 
-    private void mountAuthenticate(final RunServerLegacy server, final String path, final Set<Aegis> aegisSet) {
+    private void mountAuthenticate(final RunServer server, final String path, final Set<Aegis> aegisSet) {
         final AuthenticationHandler resultHandler;
         if (VValue.ONE == aegisSet.size()) {
             // 1 = handler
@@ -99,7 +100,7 @@ public class AxisSecure implements Axis {
         }
     }
 
-    private void mountAuthorization(final RunServerLegacy server, final String path, final Set<Aegis> aegisSet) {
+    private void mountAuthorization(final RunServer server, final String path, final Set<Aegis> aegisSet) {
         final AuthorizationHandler resultHandler;
         if (VValue.ONE == aegisSet.size()) {
             // 1 = handler
@@ -108,14 +109,13 @@ public class AxisSecure implements Axis {
             resultHandler = this.bolt.authorization(server.refVertx(), aegis);
         } else {
             // 1 = handler ( sorted )
-            final Aegis aegis = new TreeSet<>(Comparator.comparingInt(Aegis::getOrder))
-                .iterator().next();
+            final Aegis aegis = new TreeSet<>(Comparator.comparingInt(Aegis::getOrder)).getFirst();
             resultHandler = this.bolt.authorization(server.refVertx(), aegis);
         }
         if (IS_OUT.getAndSet(Boolean.FALSE)) {
-            Ut.Log.security(this.getClass()).info("Security Selected: handler = {}, bolt = {}",
+            log.info("[ ZERO ] \uD83D\uDD11 安全处理选择：handler = {}, bolt = {}",
                 Objects.isNull(resultHandler) ? null : resultHandler.getClass(),
-                Objects.isNull(this.bolt) ? null : this.bolt.getClass());
+                this.bolt.getClass());
         }
         if (Objects.nonNull(resultHandler)) {
             server.refRouter().route(path).order(KWeb.ORDER.SECURE_AUTHORIZATION)

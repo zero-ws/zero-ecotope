@@ -10,8 +10,7 @@ import io.vertx.ext.web.RoutingContext;
 import io.zerows.cortex.sdk.Aim;
 import io.zerows.epoch.assembly.DiProxyInstance;
 import io.zerows.epoch.basicore.WebEvent;
-import io.zerows.epoch.configuration.NodeNetwork;
-import io.zerows.epoch.management.OCacheNode;
+import io.zerows.epoch.configuration.NodeStore;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.program.Ux;
 
@@ -54,8 +53,7 @@ public class AimAsync extends AimBase implements Aim<RoutingContext> {
                      */
                     final Envelop request = dataRes.result();
 
-                    final NodeNetwork network = OCacheNode.of().network();
-                    final DeliveryOptions deliveryOptions = network.get().optionDelivery();
+                    final DeliveryOptions deliveryOptions = NodeStore.ofDelivery(vertx);
                     bus.<Envelop>request(address, request, deliveryOptions).onComplete(handler -> {
                         final Envelop response;
                         if (handler.succeeded()) {

@@ -6,20 +6,11 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.vertx.core.http.HttpHeaders;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.json.JsonArray;
-import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.impl.Origin;
-import io.zerows.component.environment.MatureOn;
-import io.zerows.epoch.application.YmlCore;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.integrated.jackson.JsonArrayDeserializer;
 import io.zerows.integrated.jackson.JsonArraySerializer;
-import io.zerows.management.OZeroStore;
 import io.zerows.platform.annotations.ClassYml;
-import io.zerows.platform.exception._60050Exception501NotSupport;
-import io.zerows.specification.configuration.HConfig;
-import io.zerows.specification.configuration.HSetting;
-import io.zerows.specification.development.compiled.HBundle;
-import io.zerows.spi.HPI;
 import io.zerows.support.Ut;
 import lombok.Data;
 
@@ -64,45 +55,6 @@ public class CorsOptions implements Serializable {
         this.initMethods(this.methods);
 
         this.initHeaders(this.headers);
-    }
-
-    public static CorsOptions get() {
-        if (Objects.nonNull(INSTANCE)) {
-            return INSTANCE;
-        }
-        final HBundle bundle = HPI.findBundle(CorsOptions.class);
-        if (Objects.nonNull(bundle)) {
-            Ut.Log.configure(CorsOptions.class).info("This api is not supported in OSGI environment.");
-            throw new _60050Exception501NotSupport(CorsOptions.class);
-        }
-        final HSetting setting = OZeroStore.setting();
-        INSTANCE = get(setting);
-        return INSTANCE;
-    }
-
-    public static CorsOptions get(final HSetting setting) {
-        Objects.requireNonNull(setting);
-        final HConfig config = setting.infix(YmlCore.cors.__KEY);
-        if (Objects.isNull(config)) {
-            // 未配置
-            return null;
-        }
-
-
-        final JsonObject options = config.options();
-        final CorsOptions instance = Ut.deserialize(options, CorsOptions.class, false);
-        if (Objects.isNull(instance)) {
-            // 序列化失败
-            return null;
-        }
-
-
-        final JsonArray origins = MatureOn.envDomain(instance.getOrigin());
-        instance.setOrigin(origins);
-        if (IS_OUT.getAndSet(Boolean.FALSE)) {
-            Ut.Log.configure(CorsOptions.class).info("[ CORS ] Origin Configured = {0}", instance.getOrigin());
-        }
-        return instance;
     }
 
     public JsonArray getMethods() {

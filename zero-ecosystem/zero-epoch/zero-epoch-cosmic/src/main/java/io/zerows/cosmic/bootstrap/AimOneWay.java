@@ -8,8 +8,7 @@ import io.vertx.core.eventbus.EventBus;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.cortex.sdk.Aim;
 import io.zerows.epoch.basicore.WebEvent;
-import io.zerows.epoch.configuration.NodeNetwork;
-import io.zerows.epoch.management.OCacheNode;
+import io.zerows.epoch.configuration.NodeStore;
 import io.zerows.epoch.web.Envelop;
 
 /**
@@ -57,8 +56,7 @@ public class AimOneWay extends AimBase implements Aim<RoutingContext> {
                  * SUCCESS
                  */
                 if (dataRes.succeeded()) {
-                    final NodeNetwork network = OCacheNode.of().network();
-                    final DeliveryOptions deliveryOptions = network.get().optionDelivery();
+                    final DeliveryOptions deliveryOptions = NodeStore.ofDelivery(vertx);
                     bus.<Envelop>request(address, dataRes.result(), deliveryOptions).onComplete(handler -> {
                         final Envelop response;
                         if (handler.succeeded()) {

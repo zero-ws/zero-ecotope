@@ -1,6 +1,5 @@
 package io.zerows.epoch.configuration;
 
-import io.r2mo.typed.exception.web._500ServerInternalException;
 import io.vertx.core.http.HttpServerOptions;
 import io.zerows.epoch.basicore.option.ClusterOptions;
 import io.zerows.epoch.basicore.option.SockOptions;
@@ -197,26 +196,6 @@ public class NodeNetwork implements Serializable, HLog {
 
     public boolean isOk() {
         return !this.vertxOptions.isEmpty();
-    }
-
-
-    /**
-     * 🎯 获取单一 Vertx 配置（线程安全）
-     * 当网络节点只包含一个 Vertx 实例时，直接获取该实例
-     * 如果包含多个实例，则抛出异常，需要使用指定名称的方法
-     *
-     * @return 单一的 Vertx 配置对象
-     * @throws _500ServerInternalException 当存在多个 Vertx 实例时抛出异常
-     */
-    public synchronized NodeVertxLegacy get() {
-        //        if (this.vertxOptions.isEmpty()) {
-        //            return null;
-        //        }
-        //        if (1 == this.vertxOptions.size()) {
-        //            return this.vertxOptions.values().iterator().next();
-        //        }
-        //        throw new _500ServerInternalException("[ ZERO ] 当前 NodeNetwork 存在多个 Vertx 实例，请使用 get(String name) 方法获取！");
-        return null;
     }
 
     // ============ ⚙️ 系统配置引用区域 ============

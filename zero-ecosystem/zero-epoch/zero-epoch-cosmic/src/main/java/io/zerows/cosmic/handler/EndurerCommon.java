@@ -3,13 +3,6 @@ package io.zerows.cosmic.handler;
 import io.vertx.core.Handler;
 import io.vertx.ext.web.RoutingContext;
 
-/**
- * # 「Co」Zero Critical internal handler handler
- *
- * Common handler to handle handler
- *
- * @author <a href="http://www.origin-x.cn">Lang</a>
- */
 public class EndurerCommon implements Handler<RoutingContext> {
 
     private EndurerCommon() {

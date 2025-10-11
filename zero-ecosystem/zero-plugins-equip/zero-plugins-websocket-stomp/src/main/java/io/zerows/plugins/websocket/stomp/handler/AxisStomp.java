@@ -2,11 +2,10 @@ package io.zerows.plugins.websocket.stomp.handler;
 
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpServer;
-import io.vertx.core.http.HttpServerOptions;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.stomp.StompServer;
 import io.vertx.ext.stomp.StompServerOptions;
-import io.zerows.cortex.metadata.RunServerLegacy;
+import io.zerows.cortex.metadata.RunServer;
 import io.zerows.cortex.sdk.Axis;
 import io.zerows.epoch.basicore.option.SockOptions;
 import io.zerows.epoch.metadata.security.Aegis;
@@ -21,12 +20,10 @@ import java.util.Objects;
  */
 public class AxisStomp implements Axis {
     @Override
-    public void mount(final RunServerLegacy server, final HBundle bundle) {
-        // 配置扩展
-        this.mountOption(server);
+    public void mount(final RunServer server, final HBundle bundle) {
 
         // 挂载 AxisStomp 相关内容
-        final SockOptions sockOptions = server.configSock().options();
+        final SockOptions sockOptions = server.configSock();
         Objects.requireNonNull(sockOptions);
         final JsonObject stompJ = Ut.valueJObject(sockOptions.getConfig(), "stomp");
         final StompServerOptions stompOptions = new StompServerOptions(stompJ);
@@ -63,25 +60,5 @@ public class AxisStomp implements Axis {
         stompServer.handler(handler);
         final HttpServer httpServer = server.instance();
         httpServer.webSocketHandler(stompServer.webSocketHandler());
-    }
-
-    private void mountOption(final RunServerLegacy server) {
-        // 当前环境的 HttpServerOptions
-        final HttpServerOptions serverOptions = server.config().options();
-        Objects.requireNonNull(serverOptions);
-        final SockOptions sockOptions = server.configSock().options();
-        Objects.requireNonNull(sockOptions);
-
-        // 是否执行配置扩展
-        final HttpServerOptions configured = sockOptions.options();
-        if (Objects.isNull(configured)) {
-            return;
-        }
-
-        if (serverOptions == configured) {
-            // 已经桥接
-            return;
-        }
-        sockOptions.options(serverOptions);
     }
 }

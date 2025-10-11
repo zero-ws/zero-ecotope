@@ -5,12 +5,13 @@ import io.vertx.core.http.HttpServerResponse;
 import io.vertx.ext.web.Route;
 import io.zerows.cortex.AxisSub;
 import io.zerows.cortex.metadata.RunRoute;
-import io.zerows.cortex.metadata.RunServerLegacy;
+import io.zerows.cortex.metadata.RunServer;
 import io.zerows.cortex.sdk.Axis;
 import io.zerows.epoch.basicore.WebEvent;
 import io.zerows.epoch.management.OCacheActor;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Method;
 import java.util.Objects;
@@ -20,10 +21,11 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * @author lang : 2024-05-04
  */
+@Slf4j
 public class AxisFilter implements Axis {
 
     @Override
-    public void mount(final RunServerLegacy server, final HBundle bundle) {
+    public void mount(final RunServer server, final HBundle bundle) {
         final OCacheActor actor = OCacheActor.of(bundle);
 
         final ConcurrentMap<String, Set<WebEvent>> filters = actor.value().getFilters();
@@ -65,7 +67,7 @@ public class AxisFilter implements Axis {
                     context.next();
                 }
             } catch (final Throwable ex) {
-                Ut.Log.invoke(this.getClass()).fatal(ex);
+                log.error("[ ZERO ] JSR-340 机制异常", ex);
             }
         });
     }

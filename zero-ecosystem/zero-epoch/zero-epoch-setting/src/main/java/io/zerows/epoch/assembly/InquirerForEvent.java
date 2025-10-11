@@ -21,8 +21,7 @@ public class InquirerForEvent implements Inquirer<Set<WebEvent>> {
         final List<EndPointThread> threadReference = new ArrayList<>();
         /* 2.1.Build Api metadata **/
         for (final Class<?> endpoint : endpoints) {
-            final EndPointThread thread =
-                new EndPointThread(endpoint);
+            final EndPointThread thread = new EndPointThread(endpoint);
             threadReference.add(thread);
             thread.start();
         }
