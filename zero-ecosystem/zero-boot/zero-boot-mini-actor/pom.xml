@@ -71,10 +71,23 @@
             <scope>import</scope>
             <type>pom</type>
         </dependency>
-        <!-- 底层实现追加 -->
+        <!--
+        底层默认实现追加
+        1. 存储：本地存储
+        2. 类型：Vert.x
+        3. 测试：Vert.x JUnit5
+        -->
         <dependency>
             <groupId>io.zerows</groupId>
             <artifactId>r2mo-typed-vertx</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>r2mo-io-local</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>r2mo-vertx-junit5</artifactId>
         </dependency>
     </dependencies>
 </project>

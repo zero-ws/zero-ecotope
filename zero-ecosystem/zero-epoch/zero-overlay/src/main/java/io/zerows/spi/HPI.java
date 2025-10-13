@@ -22,7 +22,7 @@ public final class HPI extends SPI {
         return SPI.findOverwrite(HBundle.class, clazzLoader);
     }
 
-    public static void monitorOf() {
+    public static void vLog() {
         final List<Class<?>> spiSet = new ArrayList<>();
         spiSet.add(AtomNs.class);
 

@@ -1,9 +1,11 @@
 package io.zerows.epoch.configuration;
 
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.ThreadingModel;
 import io.vertx.core.VertxOptions;
 import io.vertx.core.eventbus.DeliveryOptions;
+import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Agent;
 import io.zerows.epoch.annotations.Worker;
 import io.zerows.epoch.constant.KWeb;
@@ -66,6 +68,36 @@ public class NodeVertx implements Serializable {
 
     public static NodeVertx of(final String name, final NodeNetwork networkRef) {
         return new NodeVertx(name, networkRef);
+    }
+
+    @CanIgnoreReturnValue
+    public NodeVertx agentOptions(final DeploymentOptions agentOptions, final boolean isAppend) {
+        if (isAppend) {
+            this.agentOptions = this.deploymentOptions(this.agentOptions, agentOptions);
+        } else {
+            this.agentOptions = agentOptions;
+        }
+        return this;
+    }
+
+    @CanIgnoreReturnValue
+    public NodeVertx workerOptions(final DeploymentOptions workerOptions, final boolean isAppend) {
+        if (isAppend) {
+            this.workerOptions = this.deploymentOptions(this.workerOptions, workerOptions);
+        } else {
+            this.workerOptions = workerOptions;
+        }
+        return this;
+    }
+
+    public DeploymentOptions deploymentOptions(final DeploymentOptions storeOptions,
+                                               final DeploymentOptions secondOptions) {
+        if (Objects.isNull(storeOptions)) {
+            return secondOptions;
+        }
+        final JsonObject storeJ = storeOptions.toJson();
+        storeJ.mergeIn(secondOptions.toJson(), true);
+        return new DeploymentOptions(storeJ);
     }
 
     public DeploymentOptions deploymentOptions(final Class<?> clazz) {

@@ -7,12 +7,12 @@ import io.vertx.core.ThreadingModel;
 import io.vertx.core.VertxOptions;
 import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.constant.KName;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
+import java.util.function.Function;
 
 /**
  * @author lang : 2025-10-10
@@ -58,55 +58,92 @@ public class ProcessorInstance implements Processor<NodeNetwork, ConfigContainer
         }
     }
 
+    /**
+     * 新版特殊流程，此处的 HConfig 格式为
+     * <pre>
+     *     - worker
+     *     - agent
+     *     - workerOf
+     *     - agentOf
+     * </pre>
+     * 刚好上边的结构对应
+     * <pre>
+     *     - {@link NodeVertx} 中的
+     *       - workerOptions / {@link DeploymentOptions}
+     *       - agentOptions  / {@link DeploymentOptions}
+     *       - name = {@link DeploymentOptions}
+     * </pre>
+     * 如果实例中有定义则以实例中的为准，默认场景是替换模式，位于 {@link NodeVertx} 内部完成，此处使用的是第二参 true，则是合并模式
+     * <pre>
+     *     - 1. 默认配置 - 追加模式
+     *     - 2. 特殊配置 - 替换模式（针对每一个类）
+     * </pre>
+     */
     private void makeupDeployment(final NodeVertx vertx, final HConfig deployment) {
         if (Objects.nonNull(deployment)) {
             final JsonObject deploymentJ = deployment.options();
-            final JsonObject instances = Ut.valueJObject(deploymentJ, "instances");
 
             // 默认 Agent 选项
-            final DeploymentOptions agentOptions = new DeploymentOptions();
-            final int agent = Ut.valueInt(instances, "agent");
-            if (agent > 0) {
-                agentOptions.setInstances(agent);
-            } else {
-                agentOptions.setInstances(64);
-            }
-            agentOptions
-                .setHa(true)
-                .setThreadingModel(ThreadingModel.EVENT_LOOP);
-            vertx.agentOptions(agentOptions);
-            log.info("[ ZERO ] ( Deployment ) \uD83D\uDFE4 Agent 配置：instances {}, thread = {}, ha = {}",
-                agentOptions.getInstances(), agentOptions.getThreadingModel(), agentOptions.isHa());
+            final DeploymentOptions agentOptions = this.makeupAgent(Ut.valueJObject(deploymentJ, "agent"));
+            vertx.agentOptions(agentOptions, true);
 
             // 默认 Worker 选项
-            final DeploymentOptions workerOptions = new DeploymentOptions();
-            final int worker = Ut.valueInt(instances, "worker");
-            if (worker > 0) {
-                workerOptions.setInstances(worker);
-            } else {
-                workerOptions.setInstances(128);
-            }
-            workerOptions
-                .setWorkerPoolName("zero-rachel-momo")
-                .setWorkerPoolSize(256)
-                .setHa(true)
-                .setThreadingModel(ThreadingModel.WORKER);
-            vertx.workerOptions(workerOptions);
-            log.info("[ ZERO ] ( Deployment ) \uD83D\uDFE4 Worker 配置：instances {}, thread = {}, ha = {}",
-                workerOptions.getInstances(), workerOptions.getThreadingModel(), workerOptions.isHa());
+            final DeploymentOptions workerOptions = this.makeupWorker(Ut.valueJObject(deploymentJ, "worker"));
+            vertx.workerOptions(workerOptions, true);
 
-            // 特殊配置处理
-            final JsonObject options = Ut.valueJObject(deploymentJ, KName.OPTIONS);
-            options.fieldNames().forEach(clazzName -> {
-                final JsonObject optionJ = options.getJsonObject(clazzName);
-                final Class<?> deploymentCls = SourceReflect.clazz(clazzName);
-                if (Objects.nonNull(deploymentCls)) {
-                    final DeploymentOptions clazzOptions = new DeploymentOptions(optionJ);
-                    vertx.deploymentOptions(deploymentCls, clazzOptions);
-                    log.info("[ ZERO ] \t特殊配置：{} -> instances {}, thread = {}, ha = {}", clazzName,
-                        clazzOptions.getInstances(), clazzOptions.getThreadingModel(), clazzOptions.isHa());
-                }
-            });
+            // 特殊配置 agentOf / workerOf
+            final JsonObject agentOf = Ut.valueJObject(deploymentJ, "agentOf");
+            this.makeupDeploymentFor(vertx, agentOf, this::makeupAgent);
+
+            final JsonObject workerOf = Ut.valueJObject(deploymentJ, "workerOf");
+            this.makeupDeploymentFor(vertx, workerOf, this::makeupWorker);
         }
+    }
+
+    private void makeupDeploymentFor(final NodeVertx vertx, final JsonObject config, final Function<JsonObject, DeploymentOptions> buildFn) {
+        config.fieldNames().forEach(clazzName -> {
+            final Class<?> deploymentCls = SourceReflect.clazz(clazzName);
+            if (Objects.nonNull(deploymentCls)) {
+                final DeploymentOptions clazzOptions = buildFn.apply(config.getJsonObject(clazzName));
+                vertx.deploymentOptions(deploymentCls, clazzOptions);
+                log.info("[ ZERO ] \t特殊配置：{} -> instances {}, thread = {}, ha = {}", clazzName,
+                    clazzOptions.getInstances(), clazzOptions.getThreadingModel(), clazzOptions.isHa());
+            }
+        });
+    }
+
+    private DeploymentOptions makeupAgent(final JsonObject optionJ) {
+        // 默认 Agent 选项
+        final DeploymentOptions agentOptions = new DeploymentOptions(optionJ);
+        final int agent = Ut.valueInt(optionJ, "instances");
+        if (agent > 0) {
+            agentOptions.setInstances(agent);
+        } else {
+            agentOptions.setInstances(64);
+        }
+        agentOptions
+            .setHa(true)
+            .setThreadingModel(ThreadingModel.EVENT_LOOP);
+        log.info("[ ZERO ] ( Deployment ) \uD83D\uDFE4 Agent 配置：instances {}, thread = {}, ha = {}",
+            agentOptions.getInstances(), agentOptions.getThreadingModel(), agentOptions.isHa());
+        return agentOptions;
+    }
+
+    private DeploymentOptions makeupWorker(final JsonObject optionJ) {
+        final DeploymentOptions workerOptions = new DeploymentOptions(optionJ);
+        final int worker = Ut.valueInt(optionJ, "instances");
+        if (worker > 0) {
+            workerOptions.setInstances(worker);
+        } else {
+            workerOptions.setInstances(128);
+        }
+        workerOptions
+            .setWorkerPoolName("zero-rachel-momo")
+            .setWorkerPoolSize(256)
+            .setHa(true)
+            .setThreadingModel(ThreadingModel.WORKER);
+        log.info("[ ZERO ] ( Deployment ) \uD83D\uDFE4 Worker 配置：instances {}, thread = {}, ha = {}",
+            workerOptions.getInstances(), workerOptions.getThreadingModel(), workerOptions.isHa());
+        return workerOptions;
     }
 }

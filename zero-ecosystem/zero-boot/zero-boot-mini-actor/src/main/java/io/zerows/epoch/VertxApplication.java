@@ -19,7 +19,6 @@ import io.zerows.epoch.boot.ZeroLauncher;
 import io.zerows.epoch.configuration.NodeNetwork;
 import io.zerows.epoch.configuration.NodeVertx;
 import io.zerows.epoch.management.OCacheClass;
-import io.zerows.platform.ENV;
 import io.zerows.platform.EnvironmentVariable;
 import io.zerows.platform.enums.VertxComponent;
 import io.zerows.platform.metadata.KRunner;
@@ -30,7 +29,6 @@ import io.zerows.specification.configuration.HEnergy;
 import io.zerows.specification.configuration.HLauncher;
 import io.zerows.specification.configuration.HSetting;
 import io.zerows.spi.BootIo;
-import io.zerows.spi.HPI;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Set;
@@ -102,20 +100,7 @@ public class VertxApplication {
      */
     public static void run(final Class<?> clazz, final String... args) {
         /*
-         * MOMO-001: 环境变量初始化，并给出最终打印结果（打印只考虑当前应用支持的环境变量）
-         */
-        ENV.of().whenStart(clazz);
-
-
-        /*
-         * MOMO-002：SPI 监控
-         */
-        HPI.monitorOf();
-
-
-
-        /*
-         * MOMO-003: 主流程
+         * MOMO-001: 主流程
          * - 001 / 构造 ZeroLauncher 对象（启动器）
          *   - 001-1 / 通过 SPI 查找 BootIo 实现类
          *   - 001-2 / 通过实现类构造 HEnergy 对象
@@ -125,7 +110,7 @@ public class VertxApplication {
         final ZeroLauncher<Vertx> container = ZeroLauncher.create(clazz, args);
         container.start((vertx, config) -> {
             /*
-             * MOMO-004: 启动核心处理流程
+             * MOMO-002: 启动核心处理流程
              * - AGENT 启动
              * - WORKER 启动
              */

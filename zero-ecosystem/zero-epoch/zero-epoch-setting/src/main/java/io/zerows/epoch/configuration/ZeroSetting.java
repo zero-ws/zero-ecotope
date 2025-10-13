@@ -11,6 +11,7 @@ import io.zerows.specification.configuration.HSetting;
 import io.zerows.specification.development.HLog;
 import io.zerows.specification.storage.HStoreLegacy;
 import io.zerows.spi.BootIo;
+import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -268,7 +269,21 @@ public class ZeroSetting implements HSetting, HLog {
         }
         final HConfig deploymentConfig = configList.get(1);
         if (Objects.nonNull(deploymentConfig)) {
-            content.append("\t").append(prefix).append(" Deployment = ").append(deploymentConfig.options()).append("\n");
+            /*
+             * 此处必须是特殊打印效果，要打印提供的默认配置项相关信息
+             */
+            content.append("\t").append(prefix).append(" Deployment = \n");
+            final JsonObject deploymentJ = deploymentConfig.options();
+
+            final JsonObject agentJ = Ut.valueJObject(deploymentJ, "agent");
+            content.append("\t\t").append(" Agent ( Default ) = ").append(agentJ).append("\n");
+            final JsonObject agentJOf = Ut.valueJObject(deploymentJ, "agentOf");
+            agentJOf.fieldNames().forEach(field -> content.append("\t\t\t- ").append(field).append("\n"));
+
+            final JsonObject workerJ = Ut.valueJObject(deploymentJ, "worker");
+            content.append("\t\t").append(" Worker ( Default ) = ").append(workerJ).append("\n");
+            final JsonObject workerOf = Ut.valueJObject(deploymentJ, "workerOf");
+            workerOf.fieldNames().forEach(field -> content.append("\t\t\t- ").append(field).append("\n"));
         }
         final HConfig sharedConfig = configList.get(2);
         if (Objects.nonNull(sharedConfig)) {

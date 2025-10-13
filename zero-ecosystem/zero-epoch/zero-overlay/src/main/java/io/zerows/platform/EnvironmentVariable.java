@@ -165,8 +165,25 @@ public interface EnvironmentVariable {
     String R2MO_NACOS_ADDR = "R2MO_NACOS_ADDR";                 // Nacos 主机
     String R2MO_NACOS_USERNAME = "R2MO_NACOS_USERNAME";         // Nacos 用户名
     String R2MO_NACOS_PASSWORD = "R2MO_NACOS_PASSWORD";         // Nacos 密码
+
+
+    /*
+     * NACOS 名空间处理
+     * - R2MO_NS_CLOUD -> 云端名空间
+     * - R2MO_NS_APP   -> 应用名空间
+     */
     String R2MO_NS_CLOUD = "R2MO_NS_CLOUD";
     String R2MO_NS_APP = "R2MO_NS_APP";
+
+
+    /*
+     * Redis 专用环境变量
+     */
+    String R2MO_REDIS_HOST = "R2MO_REDIS_HOST";                 // Redis 主机
+    String R2MO_REDIS_PORT = "R2MO_REDIS_PORT";                 // Redis 端口
+    String R2MO_REDIS_PASSWORD = "R2MO_REDIS_PASSWORD";         // Redis 密码
+    String R2MO_REDIS_DATABASE = "R2MO_REDIS_DATABASE";         // Redis 数据库
+
 
     String[] NAMES = new String[]{
         // 通用配置变量

@@ -48,7 +48,7 @@ public class YmWebSocket implements Serializable, Equip.Item {
         private boolean secured;
         private boolean websocketBridge;
         private String websocketPath;
-        private String stomp;
+        private String endpoint;
         private String bridge;
 
         @JsonSerialize(using = ClassSerializer.class)

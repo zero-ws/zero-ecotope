@@ -72,8 +72,7 @@ public class YmVertx extends InPreVertx implements Serializable {
             .put("maxWorkerExecuteTime", 1200_000_000_000L)
             .put("eventLoopPoolSize", 128)
             .put("workerPoolSize", 256)
-            .put("internalBlockingPoolSize", 128)
-            .put("preferNativeTransport", true);
+            .put("internalBlockingPoolSize", 128);
 
         private Delivery delivery;
 
@@ -82,12 +81,6 @@ public class YmVertx extends InPreVertx implements Serializable {
         @JsonSerialize(using = JsonObjectSerializer.class)
         @JsonDeserialize(using = JsonObjectDeserializer.class)
         private JsonObject shared;
-
-        @lombok.Data
-        public static class Counter implements Serializable {
-            private int worker;
-            private int agent;
-        }
     }
 
     /**
@@ -131,16 +124,21 @@ public class YmVertx extends InPreVertx implements Serializable {
      */
     @lombok.Data
     public static class Deployment implements Serializable {
-
-        private Instance.Counter instances = new Instance.Counter();
-
-        /*
-         * 特殊情况相关配置，如果存在则
-         * - componentName = JsonObject
-         **/
         @JsonSerialize(using = JsonObjectSerializer.class)
         @JsonDeserialize(using = JsonObjectDeserializer.class)
-        private JsonObject options = new JsonObject();
+        private JsonObject worker = new JsonObject();
+
+        @JsonSerialize(using = JsonObjectSerializer.class)
+        @JsonDeserialize(using = JsonObjectDeserializer.class)
+        private JsonObject workerOf = new JsonObject();
+
+        @JsonSerialize(using = JsonObjectSerializer.class)
+        @JsonDeserialize(using = JsonObjectDeserializer.class)
+        private JsonObject agent = new JsonObject();
+
+        @JsonSerialize(using = JsonObjectSerializer.class)
+        @JsonDeserialize(using = JsonObjectDeserializer.class)
+        private JsonObject agentOf = new JsonObject();
     }
 
     /**

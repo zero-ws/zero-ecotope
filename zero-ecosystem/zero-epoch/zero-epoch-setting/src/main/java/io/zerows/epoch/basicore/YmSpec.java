@@ -16,6 +16,7 @@ import io.vertx.ext.bridge.PermittedOptions;
 import io.vertx.ext.web.sstore.SessionStore;
 import io.zerows.epoch.basicore.option.ClusterOptions;
 import io.zerows.epoch.basicore.option.CorsOptions;
+import io.zerows.epoch.basicore.option.PluginOptions;
 import io.zerows.epoch.metadata.MMComponent;
 import io.zerows.platform.enums.EmDS;
 import io.zerows.platform.enums.EmSecure;
@@ -114,7 +115,7 @@ import java.lang.reflect.Method;
  *         secured:                                                         # 启用安全提供程序
  *         websocketBridge:                                                 # 启用 WebSocket 桥接
  *         websocketPath:                                                   # WebSocket 路径
- *         stomp:                                                           # STOMP 端点
+ *         endpoint:                                                        # STOMP 端点
  *         bridge:                                                          # 桥接配置 🌷 {@link PermittedOptions}
  *         handler:                                                         # 🔸 STOMP 处理器
  *
@@ -157,11 +158,17 @@ import java.lang.reflect.Method;
  *       localOnly:                                                         # 本地发送
  *       tracingPolicy:                                                     # 🌷 {@link TracingPolicy}
  *     deployment: 🔵                                                       # {@link YmVertx.Deployment}
- *       instances:                                                         # {@link YmVertx.Instance.Counter}
- *         worker: 1                                                        # 工作线程数量
- *         agent: 1                                                         # 代理线程数量
- *       options:                                                           # 🌷 {@link DeploymentOptions}
- *       shared: 🔵                                                         # {@link Vertx#sharedData()}
+ *       worker:                                                            # Worker 默认 / 🌷 {@link DeploymentOptions}
+ *       workerOf:                                                          # Worker 特殊，每一个 class 对应一个 🌷 {@link DeploymentOptions}
+ *         class-01:
+ *         class-02:
+ *         ...
+ *       agent:                                                             # Agent 默认 / 🌷 {@link DeploymentOptions}
+ *       agentOf:                                                           # Agent 特殊，每一个 class 对应一个 🌷 {@link DeploymentOptions}
+ *         class-01:
+ *         class-02:
+ *         ...
+ *     shared: 🔵                                                           # {@link Vertx#sharedData()}
  *   mvc:                                                                   # {@link YmMvc}
  *     freedom:                                                             # 是否自由格式，ZERO 标准是 data: ??? 的响应格式
  *     cors:                                                                # {@link CorsOptions}
@@ -228,7 +235,7 @@ import java.lang.reflect.Method;
  *       host:                                                              # ---> 💻️ R2MO_REDIS_HOST, Redis 主机
  *       port:                                                              # ---> 💻️ R2MO_REDIS_PORT, Redis 端口
  *       password:                                                          # ---> 💻️ R2MO_REDIS_PASSWORD, Redis 密码
- *       database:                                                          # Redis 数据库编号
+ *       database:                                                          # ---> 💻️ R2MO_REDIS_DATABASE, Redis 数据库编号
  *       timeout:                                                           # 3000 连接超时时间（毫秒）
  *       endpoint:                                                          # 自动计算
  *   security:                                                              # {@link YmSecurity}
@@ -293,7 +300,7 @@ import java.lang.reflect.Method;
  *   options:                                                               # 存储配置
  *
  * # ====> 🧩 Request / Response 执行专用插件配置（插件用于当前应用）
- * plugins:
+ * plugins:                                                                 # {@link PluginOptions}
  *   [class1]:
  *     options1-1:
  *     options1-2:
@@ -346,6 +353,13 @@ import java.lang.reflect.Method;
  *     component:                                                           # 🔸 调度组件
  *     config:
  *
+ * # 📌 =====> 动态建模
+ * mbse:
+ *   router:
+ *     point: /api
+ *     deployment:
+ *       agent: 32
+ *       worker: 64
  * </pre>
  */
 public interface YmSpec {
@@ -422,6 +436,7 @@ public interface YmSpec {
                     String __ = "stomp";
                     String port = "port";
                     String secured = "secured";
+                    String endpoint = "endpoint";
                     String websocketBridge = "websocketBridge";
                     String websocketPath = "websocketPath";
                 }
@@ -489,11 +504,18 @@ public interface YmSpec {
 
             interface deployment {
                 String __ = "deployment";
+                String workerOf = "workerOf";
 
-                interface instances {
-                    String __ = "instances";
-                    String worker = "worker";
-                    String agent = "agent";
+                interface worker {
+                    String __ = "worker";
+                    String instances = "instances";
+                }
+
+                String agentOf = "agentOf";
+
+                interface agent {
+                    String __ = "agent";
+                    String instances = "instances";
                 }
             }
         }
@@ -508,8 +530,8 @@ public interface YmSpec {
             String freedom = "freedom";
 
             interface cors {
-                String allowed_origins = "allowed-origins";
                 String allow_credentials = "allow-credentials";
+                String allowed_origins = "allowed-origins";
                 String allowed_methods = "allowed-methods";
                 String allowed_headers = "allowed-headers";
                 String max_age = "max-age";

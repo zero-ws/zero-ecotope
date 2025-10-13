@@ -104,7 +104,7 @@ public class ZeroLauncher<T> {
         /*
          * 🟤BOOT-002: SPI 监控开启，用来监听 SPI 的接口完整信息，所有 SPI 在此处集中打印
          */
-        HPI.monitorOf();
+        HPI.vLog();
 
 
         /*

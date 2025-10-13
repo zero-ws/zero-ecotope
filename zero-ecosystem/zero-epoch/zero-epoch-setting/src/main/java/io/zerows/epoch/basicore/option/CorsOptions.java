@@ -85,7 +85,9 @@ public class CorsOptions implements Serializable {
             .add(KWeb.HEADER.X_APP_ID)
             .add(KWeb.HEADER.X_APP_KEY)
             .add(KWeb.HEADER.X_SIGMA)
-            .add(KWeb.HEADER.X_TENANT_ID);
+            .add(KWeb.HEADER.X_LANG)
+            .add(KWeb.HEADER.X_TENANT_ID)
+            .add(KWeb.HEADER.X_SESSION_ID);
     }
 
     public JsonArray getHeaders() {
