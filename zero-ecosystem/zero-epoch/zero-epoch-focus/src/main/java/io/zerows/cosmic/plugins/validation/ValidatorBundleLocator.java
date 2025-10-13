@@ -1,7 +1,6 @@
 package io.zerows.cosmic.plugins.validation;
 
-import io.zerows.component.log.LogO;
-import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.validator.internal.util.CollectionHelper;
 import org.hibernate.validator.internal.util.Contracts;
 import org.hibernate.validator.internal.util.logging.Messages;
@@ -23,10 +22,8 @@ import java.util.ResourceBundle;
 import java.util.Set;
 
 @SuppressWarnings("all")
+@Slf4j
 public class ValidatorBundleLocator implements ResourceBundleLocator {
-    public static final String BUNDLE_NOT_FOUND = "{0} not found.";
-    public static final String BUNDLE_FOUND = "{0} found.";
-    private static final LogO LOGGER = Ut.Log.uca(ValidatorBundleLocator.class);
     private static final boolean RESOURCE_BUNDLE_CONTROL_INSTANTIABLE = determineAvailabilityOfResourceBundleControl();
     private final String bundleName;
     private final ClassLoader classLoader;
@@ -70,7 +67,7 @@ public class ValidatorBundleLocator implements ResourceBundleLocator {
                 }
             }
         } catch (final Throwable var5) {
-            LOGGER.info(Messages.MESSAGES.unableToUseResourceBundleAggregation());
+            log.info("[ ZERO ] " + Messages.MESSAGES.unableToUseResourceBundleAggregation());
             return false;
         }
     }
@@ -96,9 +93,9 @@ public class ValidatorBundleLocator implements ResourceBundleLocator {
         }
 
         if (rb != null) {
-            LOGGER.debug(BUNDLE_FOUND, this.bundleName);
+            log.info("[ ZERO ] 找到 {}", this.bundleName);
         } else {
-            LOGGER.debug(BUNDLE_NOT_FOUND, this.bundleName);
+            log.info("[ ZERO ] 未找到 {}", this.bundleName);
         }
 
         return rb;
@@ -114,7 +111,7 @@ public class ValidatorBundleLocator implements ResourceBundleLocator {
                 rb = ResourceBundle.getBundle(this.bundleName, locale, classLoader);
             }
         } catch (final MissingResourceException var6) {
-            LOGGER.debug(var6.getMessage());
+            log.debug(var6.getMessage());
         }
         return rb;
     }

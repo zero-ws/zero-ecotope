@@ -50,7 +50,7 @@ public interface HCube {
     String identifier();
 
     /**
-     * 保存了整个应用区域中所有 {@link HContract.HPort} 的引用
+     * 保存了整个应用区域中所有 {@link HContract.Port} 的引用
      * <pre><code>
      *     - name = instance 1
      *            = instance 2
@@ -60,5 +60,5 @@ public interface HCube {
      *
      * @return {@link ConcurrentMap}
      */
-    ConcurrentMap<Class<?>, Set<HContract.HPort>> port();
+    ConcurrentMap<Class<?>, Set<HContract.Port>> port();
 }

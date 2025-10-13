@@ -26,9 +26,9 @@ import java.util.concurrent.ConcurrentMap;
  *     1. 研发中心专用组件，隶属于 {@link HRAD}
  *        - （类）研发中心组件为库中组件，实现子类接口 {@link HToolkit}
  *     2. 运行端专用组件，关联到 {@link HCube}
- *        - （实例）运行端组件为实例中组件，实现子类接口 {@link HPort}
+ *        - （实例）运行端组件为实例中组件，实现子类接口 {@link Port}
  *     3. 模块化插件，关联到 {@link HMod}
- *        - （实例）运行插件中组件，实现子类接口 {@link HComponent}
+ *        - （实例）运行插件中组件，实现子类接口 {@link Component}
  * </code></pre>
  *
  * @author lang : 2023-05-21
@@ -64,7 +64,7 @@ public interface HContract {
      *
      * @author lang : 2023-05-21
      */
-    interface HComponent extends HContract {
+    interface Component extends HContract {
         /**
          * 组件的名称，用于描述组件的名称
          *
@@ -96,7 +96,7 @@ public interface HContract {
      *
      * @author lang : 2023-05-21
      */
-    interface HPort extends HContract {
+    interface Port extends HContract {
         /**
          * 端的入口地址，该地址主要应用于前端界面的访问
          *

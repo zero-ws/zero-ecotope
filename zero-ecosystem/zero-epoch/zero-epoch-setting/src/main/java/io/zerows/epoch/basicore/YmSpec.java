@@ -16,7 +16,7 @@ import io.vertx.ext.bridge.PermittedOptions;
 import io.vertx.ext.web.sstore.SessionStore;
 import io.zerows.epoch.basicore.option.ClusterOptions;
 import io.zerows.epoch.basicore.option.CorsOptions;
-import io.zerows.epoch.basicore.option.PluginOptions;
+import io.zerows.epoch.configuration.ZeroPlugins;
 import io.zerows.epoch.metadata.MMComponent;
 import io.zerows.platform.enums.EmDS;
 import io.zerows.platform.enums.EmSecure;
@@ -300,7 +300,7 @@ import java.lang.reflect.Method;
  *   options:                                                               # 存储配置
  *
  * # ====> 🧩 Request / Response 执行专用插件配置（插件用于当前应用）
- * plugins:                                                                 # {@link PluginOptions}
+ * plugins:                                                                 # {@link ZeroPlugins}
  *   [class1]:
  *     options1-1:
  *     options1-2:

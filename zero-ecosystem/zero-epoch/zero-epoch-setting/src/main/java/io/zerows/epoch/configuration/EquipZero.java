@@ -45,8 +45,19 @@ class EquipZero implements Equip {
         // 扩展配置 extension 核心
         this.initialize(setting, configuration.extension());
 
+        // 特殊扩展配置 plugins
+        this.initialize(setting, configuration.getPlugins());
+
         setting.vLog();
         return setting;
+    }
+
+    private void initialize(final ZeroSetting setting, final JsonObject plugins) {
+        if (Ut.isNil(plugins)) {
+            return;
+        }
+        final HConfig pluginConfig = new ConfigPlugins().plugin(plugins);
+        setting.extension("plugins", pluginConfig);
     }
 
     private void initialize(final ZeroSetting setting, final ConcurrentMap<String, JsonObject> extension) {

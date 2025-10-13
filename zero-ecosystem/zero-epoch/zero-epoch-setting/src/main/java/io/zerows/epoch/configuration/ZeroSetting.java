@@ -9,7 +9,6 @@ import io.zerows.platform.metadata.KDatabase;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HSetting;
 import io.zerows.specification.development.HLog;
-import io.zerows.specification.storage.HStoreLegacy;
 import io.zerows.spi.BootIo;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
@@ -35,7 +34,7 @@ import java.util.concurrent.ConcurrentMap;
  *     3. {@link ZeroLauncher} 启动器接口
  *     4. {@link BootIo} 启动选择器 / 组件加载器
  * </code></pre>
- * 此部分底层还可以走一个特殊的 {@link HStoreLegacy}，然后从 HStore
+ * 此部分底层还可以走一个特殊的 {@see HStoreLegacy}，然后从 HStore
  * 中提取配置数据部分，这样可以实现配置数据的存储，而不是直接存储在内存中。完整的结构如：
  * <pre><code>
  *     1. stored：容器配置
@@ -248,6 +247,13 @@ public class ZeroSetting implements HSetting, HLog {
         for (final String field : configMap.keySet()) {
             final HConfig config = configMap.get(field);
             if (IGNORE_SET.contains(field)) {
+                continue;
+            }
+            if (config instanceof final ConfigPlugins plugins) {
+                content.append("\t\t").append(field).append(":\n");
+                plugins.plugin().forEach(plugin -> content.append("\t\t\t\uD83E\uDDE9 ")
+                    .append(plugin.executor().getName())
+                    .append(" = ").append(plugin.options()).append("\n"));
                 continue;
             }
             if (Objects.isNull(config.ref())) {

@@ -9,7 +9,6 @@ import io.vertx.core.eventbus.Message;
 import io.vertx.core.http.Cookie;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.Session;
-import io.zerows.component.log.LogOf;
 import io.zerows.cortex.InvokerUtil;
 import io.zerows.cortex.metadata.WebRequest;
 import io.zerows.cortex.metadata.WebRule;
@@ -24,6 +23,8 @@ import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.platform.constant.VValue;
 import io.zerows.support.Ut;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -35,7 +36,6 @@ import java.util.Objects;
  * Base class to provide template method
  */
 public abstract class AimBase {
-    public static final String SESSION_ID = "( Session ) Path = {0}, Session Id = {1}, Client Cookie Value {2}";
     private static final Cc<String, Analyzer> CC_ANALYZER = Cc.openThread();
     private static final Cc<String, ValidatorEntry> CC_VALIDATOR = Cc.openThread();
 
@@ -85,7 +85,7 @@ public abstract class AimBase {
      */
     protected Object invoke(final WebEvent event, final Object[] args) {
         final Method method = event.getAction();
-        this.getLogger().info("Class = {2}, Method = {0}, Args = {1}",
+        this.logger().info("[ ZERO ] Class = {}, Method = {}, Args = {}",
             method.getName(), Ut.fromJoin(args), method.getDeclaringClass().getName());
         return InvokerUtil.invoke(event.getProxy(), method, args);
     }
@@ -125,8 +125,8 @@ public abstract class AimBase {
         return this.verifier;
     }
 
-    protected LogOf getLogger() {
-        return LogOf.get(this.getClass());
+    protected Logger logger() {
+        return LoggerFactory.getLogger(this.getClass());
     }
 
     protected void executeRequest(final RoutingContext context,
@@ -150,13 +150,14 @@ public abstract class AimBase {
                         final WebEvent event) {
         try {
             // Monitor
-            this.getLogger().debug("Web flow started: {0}", event.getAction());
+            this.logger().debug("[ ZERO ] Web flow 执行器: {}", event.getAction());
             {
                 final Session session = context.session();
                 if (Objects.nonNull(session)) {
                     // Fix: 3.9.1 cookie error of null dot
                     final Cookie cookie = context.request().getCookie(VValue.DEFAULT_SESSION);
-                    this.getLogger().debug(SESSION_ID, context.request().path(),
+                    this.logger().debug("[ ZERO ] ( Session ) Path = {}, Session Id = {}, Cookie {}",
+                        context.request().path(),
                         session.id(), Objects.isNull(cookie) ? null : cookie.getValue());
                 }
             }

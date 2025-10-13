@@ -16,7 +16,7 @@ import io.zerows.specification.atomic.HContract;
  *
  * @author lang : 2023-05-21
  */
-public interface HCRI extends HContract.HComponent {
+public interface HCRI extends HContract.Component {
     /**
      * 容器运行的 Pod 关联信息
      *

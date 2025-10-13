@@ -12,7 +12,7 @@ import java.util.concurrent.ConcurrentMap;
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
-public interface HPlot extends HContract.HPort {
+public interface HPlot extends HContract.Port {
     /**
      * 直接对应到 {@link HCube} 中的 identifier 信息，执行软关联
      *
@@ -42,7 +42,7 @@ public interface HPlot extends HContract.HPort {
      *
      * @author <a href="http://www.origin-x.cn">Lang</a>
      */
-    interface HPod extends HPort {
+    interface HPod extends Port {
         /**
          * 直接对应到 {@link HCube} 中的 identifier 信息，执行软关联
          *

@@ -1,7 +1,7 @@
 package io.zerows.specification.development.ncloud;
 
-import io.zerows.platform.metadata.KRepo;
 import io.zerows.platform.enums.EmCloud;
+import io.zerows.platform.metadata.KRepo;
 import io.zerows.specification.atomic.HCommand;
 import io.zerows.specification.atomic.HContract;
 
@@ -17,7 +17,7 @@ import java.util.concurrent.ConcurrentMap;
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
-public interface HNovae extends HContract.HPort, HCommand.Async<HAeon, Boolean> {
+public interface HNovae extends HContract.Port, HCommand.Async<HAeon, Boolean> {
     /**
      * 直接对应到 {@link HCube} 引用，所属应用区域
      *
@@ -38,7 +38,7 @@ public interface HNovae extends HContract.HPort, HCommand.Async<HAeon, Boolean> 
      *
      * @author <a href="http://www.origin-x.cn">Lang</a>
      */
-    interface HNebula extends HPort {
+    interface HNebula extends Port {
         /**
          * 直接对应到 {@link HCube} 引用，所属应用区域
          *
@@ -59,7 +59,7 @@ public interface HNovae extends HContract.HPort, HCommand.Async<HAeon, Boolean> 
      *
      * @author <a href="http://www.origin-x.cn">Lang</a>
      */
-    interface HOne extends HPort, Async<ConcurrentMap<EmCloud.Runtime, KRepo>, Boolean> {
+    interface HOne extends Port, Async<ConcurrentMap<EmCloud.Runtime, KRepo>, Boolean> {
         /**
          * 直接对应到 {@link HCube} 引用，所属应用区域
          *

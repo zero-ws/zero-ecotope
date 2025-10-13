@@ -4,6 +4,8 @@ import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.DeliveryOptions;
 import io.zerows.platform.metadata.MultiKeyMap;
+import io.zerows.specification.configuration.HConfig;
+import io.zerows.specification.configuration.HSetting;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
@@ -37,7 +39,7 @@ public class NodeStore {
      *
      */
     public static void add(final String hashCode, final NodeVertx nodeVertx) {
-        if (Objects.isNull(hashCode) || Objects.isNull(nodeVertx)) {
+        if (Objects.isNull(hashCode) || Objects.isNull(nodeVertx) || Objects.isNull(nodeVertx.networkRef())) {
             log.warn("[ ZERO ] 配置实例添加失败，有传入数据为 null.");
             return;
         }
@@ -73,5 +75,27 @@ public class NodeStore {
 
     public static NodeNetwork ofNetwork() {
         return defaultNetwork;
+    }
+
+    public static HConfig ofPlugin(final Vertx vertxRef,
+                                   final Class<?> interfaceCls) {
+        Objects.requireNonNull(vertxRef, "[ ZERO ] Vertx 引用不能为空！");
+        final NodeVertx nodeVertx = RUNNING.get(String.valueOf(vertxRef.hashCode()));
+        if (Objects.isNull(nodeVertx)) {
+            log.warn("[ ZERO ] 无法通过 {} 获取到对应的 NodeVertx 配置！", vertxRef.hashCode());
+            return null;
+        }
+        final NodeNetwork network = nodeVertx.networkRef();
+        final HSetting setting = network.setting();
+        final HConfig plugins = setting.extension("plugins");
+        if (Objects.isNull(plugins)) {
+            return null;
+        }
+        if (plugins instanceof final ConfigPlugins configPlugins) {
+            return configPlugins.plugin(interfaceCls);
+        } else {
+            log.warn("[ ZERO ] 插件配置类型错误，无法转换为 ConfigPlugins 类型！");
+            return null;
+        }
     }
 }

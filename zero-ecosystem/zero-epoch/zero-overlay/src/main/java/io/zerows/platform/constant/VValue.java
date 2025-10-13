@@ -12,7 +12,7 @@ public interface VValue {
     String DEFAULT_BRANCH_MASTER = "master";       // 默认分支名
     String DEFAULT_SESSION = "vertx-web.session";
 
-    String DEFAULT_VERSION = "1.0.0.PRE.RELEASE";              // 默认版本号
+    String DEFAULT_VERSION = "1.0.0";              // 默认版本号
 
     // ================= 数值常量
     // --- Number

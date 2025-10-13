@@ -6,22 +6,21 @@ import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.component.log.LogOf;
 import io.zerows.cortex.extension.PlugAuditor;
-import io.zerows.epoch.application.YmlCore;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.management.OCacheUri;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.runtime.skeleton.eon.KeIpc;
 import io.zerows.program.Ux;
+import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
 import java.util.Objects;
 
-import static io.zerows.extension.commerce.rbac.util.Sc.LOG;
-
+@Slf4j
 public class AuditorPin implements PlugAuditor {
-    private final static LogOf LOGGER = LogOf.get(AuditorPin.class);
+    private final static String INCLUDE = "include";
+    private final static String EXCLUDE = "exclude";
     private final transient JsonObject config = new JsonObject();
 
     @Override
@@ -35,17 +34,13 @@ public class AuditorPin implements PlugAuditor {
         /*
          * Configured for empty config
          */
-        final JsonArray include = auditor.getJsonArray(
-            YmlCore.extension.auditor.config.INCLUDE, new JsonArray());
+        final JsonArray include = auditor.getJsonArray(INCLUDE, new JsonArray());
         include.addAll(KeIpc.Audit.INCLUDE);
-        auditor.put(
-            YmlCore.extension.auditor.config.INCLUDE, include);
+        auditor.put(INCLUDE, include);
 
-        final JsonArray exclude = auditor.getJsonArray(
-            YmlCore.extension.auditor.config.EXCLUDE, new JsonArray());
+        final JsonArray exclude = auditor.getJsonArray(EXCLUDE, new JsonArray());
         exclude.addAll(KeIpc.Audit.EXCLUDE);
-        auditor.put(
-            YmlCore.extension.auditor.config.EXCLUDE, exclude);
+        auditor.put(EXCLUDE, exclude);
         this.config.mergeIn(auditor);
         return this;
     }
@@ -73,7 +68,7 @@ public class AuditorPin implements PlugAuditor {
                 envelop.value(KName.CREATED_AT, instant);
                 envelop.value(KName.UPDATED_BY, userId);
                 envelop.value(KName.UPDATED_AT, instant);
-                LOG.Audit.info(LOGGER, "Full auditing: userId = `{0}`, at = `{1}`", userId, instant.toString());
+                log.info("[ ZERO ] 添加：userId = `{}`, at = `{}`", userId, instant.toString());
             } else {
                 /*
                  * /api/xxx
@@ -82,16 +77,16 @@ public class AuditorPin implements PlugAuditor {
                  */
                 envelop.value(KName.UPDATED_BY, userId);
                 envelop.value(KName.UPDATED_AT, instant);
-                LOG.Audit.info(LOGGER, "Update auditing: userId = `{0}`, at = `{1}`", userId, instant.toString());
+                log.info("[ ZERO ] 更新：userId = `{}`, at = `{}`", userId, instant.toString());
             }
         } else {
-            LOG.Auth.debug(LOGGER, "Do not match: {0}", request.path());
+            log.debug("[ ZERO ] 路径不满足: {}", request.path());
         }
         return Ux.future(envelop);
     }
 
     private boolean isValid(final HttpServerRequest request) {
-        final JsonArray include = this.config.getJsonArray("include");
+        final JsonArray include = this.config.getJsonArray(INCLUDE);
         if (Objects.isNull(include) || include.isEmpty()) {
             /*
              * Must set `include` and `exclude`
@@ -110,7 +105,7 @@ public class AuditorPin implements PlugAuditor {
             .map(item -> (String) item)
             .filter(path::startsWith)
             .count();
-        final JsonArray exclude = this.config.getJsonArray("exclude");
+        final JsonArray exclude = this.config.getJsonArray(EXCLUDE);
         final String recovery = OCacheUri.Tool.recovery(request.path(), request.method());
         if (Objects.isNull(exclude) || exclude.isEmpty()) {
             /*

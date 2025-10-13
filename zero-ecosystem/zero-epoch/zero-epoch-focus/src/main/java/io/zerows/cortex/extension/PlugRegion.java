@@ -1,9 +1,9 @@
 package io.zerows.cortex.extension;
 
 import io.vertx.core.Future;
-import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.epoch.web.Envelop;
+import io.zerows.specification.atomic.HPlug;
 
 /**
  * 「Extension」
@@ -14,12 +14,7 @@ import io.zerows.epoch.web.Envelop;
  * 2) After Response replying from agent.
  * This plugin exist in agent only and could not be used in worker, standard
  */
-public interface PlugRegion {
-    /*
-     * DataRegion bind for plug
-     */
-    PlugRegion bind(JsonObject config);
-
+public interface PlugRegion extends HPlug {
     /*
      * Request processing
      */

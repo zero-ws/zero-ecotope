@@ -1,9 +1,9 @@
 package io.zerows.cortex.extension;
 
 import io.vertx.core.Future;
-import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.epoch.web.Envelop;
+import io.zerows.specification.atomic.HPlug;
 
 /**
  * 「Extension」:
@@ -13,13 +13,7 @@ import io.zerows.epoch.web.Envelop;
  * It's configured in vertx-tp.yml file and will be triggered before
  * any worker method invoking.
  */
-public interface PlugAuditor {
-    /*
-     * DataRegion bind for plug
-     */
-    default PlugAuditor bind(final JsonObject config) {
-        return this;
-    }
+public interface PlugAuditor extends HPlug {
 
     /*
      * The object envelop should be modified in current method,
