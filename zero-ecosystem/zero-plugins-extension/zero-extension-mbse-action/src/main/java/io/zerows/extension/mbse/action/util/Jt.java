@@ -13,7 +13,7 @@ import io.zerows.extension.mbse.action.domain.tables.pojos.IApi;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IJob;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IService;
 import io.zerows.platform.constant.VString;
-import io.zerows.platform.enums.app.EmTraffic;
+import io.zerows.platform.enums.EmWeb;
 import io.zerows.platform.metadata.KDictConfig;
 import io.zerows.platform.metadata.KIdentity;
 import io.zerows.platform.metadata.KIntegration;
@@ -92,7 +92,7 @@ public class Jt {
         return JtType.toWorker(api);
     }
 
-    public static Class<?> toChannel(final Supplier<String> supplier, final EmTraffic.Channel type) {
+    public static Class<?> toChannel(final Supplier<String> supplier, final EmWeb.Channel type) {
         return JtType.toChannel(supplier, type);
     }
 

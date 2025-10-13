@@ -7,6 +7,7 @@ import io.zerows.management.OZeroStore;
 
 import java.util.function.Function;
 
+@Deprecated
 public interface Infix {
     static <R> R init(final String key,
                       final Function<JsonObject, R> executor,

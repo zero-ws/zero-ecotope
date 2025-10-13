@@ -17,7 +17,7 @@ import io.zerows.epoch.annotations.On;
 import io.zerows.integrated.jackson.JsonObjectDeserializer;
 import io.zerows.integrated.jackson.JsonObjectSerializer;
 import io.zerows.platform.constant.VValue;
-import io.zerows.platform.enums.EmJob;
+import io.zerows.platform.enums.EmService;
 import io.zerows.specification.app.HArk;
 import io.zerows.support.Ut;
 
@@ -37,11 +37,11 @@ import java.util.function.Supplier;
 public class Mission implements Serializable {
     private static final LogO LOGGER = Ut.Log.metadata(Mission.class);
     /* Job status, default job is 'starting' */
-    private EmJob.Status status = EmJob.Status.STARTING;
+    private EmService.JobStatus status = EmService.JobStatus.STARTING;
     /* Job name */
     private String name;
     /* Job type */
-    private EmJob.JobType type;
+    private EmService.JobType type;
     /* Job code */
     private String code;
     /* Job description */
@@ -123,11 +123,11 @@ public class Mission implements Serializable {
     @JsonIgnore
     private KScheduler timer;
 
-    public EmJob.Status getStatus() {
+    public EmService.JobStatus getStatus() {
         return this.status;
     }
 
-    public void setStatus(final EmJob.Status status) {
+    public void setStatus(final EmService.JobStatus status) {
         this.status = status;
     }
 
@@ -147,11 +147,11 @@ public class Mission implements Serializable {
         this.name = name;
     }
 
-    public EmJob.JobType getType() {
+    public EmService.JobType getType() {
         return this.type;
     }
 
-    public void setType(final EmJob.JobType type) {
+    public void setType(final EmService.JobType type) {
         this.type = type;
     }
 
@@ -360,7 +360,7 @@ public class Mission implements Serializable {
 
     // ========================== Ensure the correct configuration =======================
     public void detectPre(final String formula) {
-        if (EmJob.JobType.FORMULA == this.type) {
+        if (EmService.JobType.FORMULA == this.type) {
             Fn.jvmKo(Ut.isNil(formula), _60054Exception409JobFormulaError.class, formula);
         }
     }

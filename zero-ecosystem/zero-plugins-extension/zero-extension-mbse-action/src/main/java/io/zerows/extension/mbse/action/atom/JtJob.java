@@ -8,7 +8,7 @@ import io.zerows.extension.mbse.action.domain.tables.pojos.IService;
 import io.zerows.extension.mbse.action.eon.JtKey;
 import io.zerows.extension.mbse.action.util.Jt;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
-import io.zerows.platform.enums.EmJob;
+import io.zerows.platform.enums.EmService;
 import io.zerows.specification.app.HArk;
 import io.zerows.support.Ut;
 
@@ -81,7 +81,7 @@ public class JtJob extends JtCommercial {
          * - 4.2) All the extension job ( stored into database ) should be `EDITABLE` ( dynamic )
          */
         mission.setName(this.job.getName());
-        mission.setType(Ut.toEnum(this.job::getType, EmJob.JobType.class, EmJob.JobType.ONCE));
+        mission.setType(Ut.toEnum(this.job::getType, EmService.JobType.class, EmService.JobType.ONCE));
         mission.setCode(Jt.jobCode(this.job));
         mission.setReadOnly(Boolean.FALSE);
         /* Basic information */
@@ -128,8 +128,8 @@ public class JtJob extends JtCommercial {
         final String runFormula = this.job.getRunFormula();
         // Error-60054 Detect
         mission.detectPre(runFormula);
-        final EmJob.JobType type = mission.getType();
-        if (EmJob.JobType.ONCE != type) {
+        final EmService.JobType type = mission.getType();
+        if (EmService.JobType.ONCE != type) {
             timer.configure(runFormula, this.job.getRunAt());
             if (Objects.nonNull(this.job.getDuration())) {
                 timer.configure(this.job.getDuration(), TimeUnit.MINUTES);

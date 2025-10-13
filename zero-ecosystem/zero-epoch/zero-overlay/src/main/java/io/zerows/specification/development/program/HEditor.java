@@ -1,12 +1,12 @@
 package io.zerows.specification.development.program;
 
 import io.vertx.core.buffer.Buffer;
-import io.zerows.platform.enums.EmLib;
+import io.zerows.platform.enums.EmResearch;
 import io.zerows.specification.atomic.HContract;
 
 /**
  * 「编辑器」Editor
- * 核心工具专用，分成不同的类型，类型参考 {@link EmLib.EditorType}
+ * 核心工具专用，分成不同的类型，类型参考 {@link EmResearch.EditorType}
  *
  * <pre><code>
  *     1. {@link HContract}
@@ -28,9 +28,9 @@ public interface HEditor extends HToolkit {
     /**
      * 当前编辑器的类型
      *
-     * @return {@link EmLib.EditorType}
+     * @return {@link EmResearch.EditorType}
      */
-    EmLib.EditorType type();
+    EmResearch.EditorType type();
 
     /**
      * 当前编辑器的工程文件内容

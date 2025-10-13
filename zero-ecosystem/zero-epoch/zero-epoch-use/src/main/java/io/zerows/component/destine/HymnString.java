@@ -2,7 +2,7 @@ package io.zerows.component.destine;
 
 import io.zerows.epoch.metadata.KJoin;
 import io.zerows.epoch.metadata.KPoint;
-import io.zerows.platform.enums.EmPRI;
+import io.zerows.platform.enums.EmDS;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentMap;
@@ -33,7 +33,7 @@ class HymnString extends HymnBase<String> {
             // 输入为 null，直接返回 null 连接点
             return null;
         }
-        if (EmPRI.Connect.PARENT_STANDBY == this.joinRef.refer()) {
+        if (EmDS.Connect.PARENT_STANDBY == this.joinRef.refer()) {
             // 父从表模式
             return this.pointRefer(identifier);
         } else {

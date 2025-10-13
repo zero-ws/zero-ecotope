@@ -8,8 +8,8 @@ import io.zerows.extension.mbse.action.eon.JtKey;
 import io.zerows.extension.mbse.action.util.Jt;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
 import io.zerows.mbse.sdk.Commercial;
+import io.zerows.platform.enums.EmWeb;
 import io.zerows.platform.enums.Environment;
-import io.zerows.platform.enums.app.EmTraffic;
 import io.zerows.platform.metadata.KDictConfig;
 import io.zerows.platform.metadata.KIdentity;
 import io.zerows.platform.metadata.KIntegration;
@@ -86,8 +86,8 @@ public abstract class JtCommercial implements Commercial {
     public abstract String key();
 
     @Override
-    public EmTraffic.Channel channelType() {
-        return Ut.toEnum(this.service::getChannelType, EmTraffic.Channel.class, EmTraffic.Channel.ADAPTOR);
+    public EmWeb.Channel channelType() {
+        return Ut.toEnum(this.service::getChannelType, EmWeb.Channel.class, EmWeb.Channel.ADAPTOR);
     }
 
     @Override

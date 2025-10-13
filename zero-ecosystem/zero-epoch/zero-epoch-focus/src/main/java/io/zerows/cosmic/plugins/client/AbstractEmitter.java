@@ -4,8 +4,8 @@ import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.LogO;
+import io.zerows.platform.enums.EmWeb;
 import io.zerows.platform.metadata.KIntegration;
-import io.zerows.platform.enums.app.EmTraffic;
 import io.zerows.support.Ut;
 
 import javax.net.ssl.SSLContext;
@@ -42,8 +42,8 @@ public abstract class AbstractEmitter implements Emitter {
          *     "https": "TLS"
          * }
          */
-        final String sslMode = this.integration.getOption("https", EmTraffic.Https.TLS.name());
-        final EmTraffic.Https type = Ut.toEnum(() -> sslMode, EmTraffic.Https.class, EmTraffic.Https.TLS);
+        final String sslMode = this.integration.getOption("https", EmWeb.Https.TLS.name());
+        final EmWeb.Https type = Ut.toEnum(() -> sslMode, EmWeb.Https.class, EmWeb.Https.TLS);
         try {
             final SSLContext context = SSLContext.getInstance(type.name());
             context.init(null, trustCerts, new SecureRandom());

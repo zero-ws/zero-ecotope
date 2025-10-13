@@ -4,7 +4,7 @@ import io.r2mo.function.Actuator;
 import io.r2mo.function.Fn;
 import io.r2mo.typed.cc.Cc;
 import io.zerows.cosmic.plugins.job.metadata.Mission;
-import io.zerows.platform.enums.EmJob;
+import io.zerows.platform.enums.EmService;
 import io.zerows.platform.metadata.KRunner;
 import io.zerows.support.Ut;
 
@@ -39,7 +39,7 @@ class PhaseElement {
     }
 
     static void onceLog(final Mission mission, final Actuator actuator) {
-        if (EmJob.JobType.ONCE == mission.getType()) {
+        if (EmService.JobType.ONCE == mission.getType()) {
             KRunner.run(() -> Fn.jvmAt(actuator), "once-logger-debug");
         }
     }

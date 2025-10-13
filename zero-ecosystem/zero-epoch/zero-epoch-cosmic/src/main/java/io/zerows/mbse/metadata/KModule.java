@@ -36,7 +36,7 @@ import java.util.Objects;
  * {
  *     "name": "模型名称，此名称会作为 /api/:actor 中的 actor 参数",
  *     "pojo": "（一般转换成遗留系统）当模型启用 Pojo 映射时专用",
- *     "mode": "数据库存储位置，{@link EmDS.Stored} 枚举值，有五种",
+ *     "mode": "数据库存储位置，{@link EmDS.DB} 枚举值，有五种",
  *     "modeKey": "当 mode = EXTENSION 时，此值必须，用于存储在 Extension 中的 key 值",
  *     "field": "{@link KField}",
  *     "column": "{@link KColumn}"
@@ -59,7 +59,7 @@ public class KModule implements Serializable {
 
 
     /**
-     * 和数据源相关的模式选择，通常会有五种核心模式，位于 {@link EmDS.Stored} 枚举变量中，现阶段支持的值如：
+     * 和数据源相关的模式选择，通常会有五种核心模式，位于 {@link EmDS.DB} 枚举变量中，现阶段支持的值如：
      * <pre><code>
      *     - PRIMARY：主数据库，配置在 vertx-jooq.yml 中的数据库
      *     - HISTORY：历史数据库，启用了 Trash 功能之后的数据库
@@ -253,17 +253,17 @@ public class KModule implements Serializable {
         return hymn.pointer(identifier); // this.connect.point(identifier);
     }
 
-    public EmDS.Stored getMode() {
+    public EmDS.DB getMode() {
         if (Objects.isNull(this.mode)) {
-            return EmDS.Stored.PRIMARY;
+            return EmDS.DB.PRIMARY;
         } else {
-            return Ut.toEnum(() -> this.mode, EmDS.Stored.class, EmDS.Stored.PRIMARY);
+            return Ut.toEnum(() -> this.mode, EmDS.DB.class, EmDS.DB.PRIMARY);
         }
     }
 
-    public void setMode(final EmDS.Stored mode) {
+    public void setMode(final EmDS.DB mode) {
         if (Objects.isNull(mode)) {
-            this.mode = EmDS.Stored.PRIMARY.name();
+            this.mode = EmDS.DB.PRIMARY.name();
         } else {
             this.mode = mode.name();
         }

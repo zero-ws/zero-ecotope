@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.Promise;
 import io.zerows.cosmic.plugins.job.metadata.KScheduler;
 import io.zerows.cosmic.plugins.job.metadata.Mission;
-import io.zerows.platform.enums.EmJob;
+import io.zerows.platform.enums.EmService;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
@@ -24,7 +24,7 @@ public class AghaFormula extends AghaAbstract {
         final KScheduler timer = mission.timer();
         interval.restartAt((timeId) -> {
             // STOPPED -> READY
-            if (EmJob.Status.STOPPED == mission.getStatus()) {
+            if (EmService.JobStatus.STOPPED == mission.getStatus()) {
                 this.moveOn(mission, true);
             }
             this.working(mission, () -> {

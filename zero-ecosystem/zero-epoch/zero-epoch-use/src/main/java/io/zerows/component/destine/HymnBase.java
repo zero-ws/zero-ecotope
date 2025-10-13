@@ -4,7 +4,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.Log;
 import io.zerows.epoch.metadata.KJoin;
 import io.zerows.epoch.metadata.KPoint;
-import io.zerows.platform.enums.EmPRI;
+import io.zerows.platform.enums.EmDS;
 import io.zerows.support.Ut;
 
 import java.util.Objects;
@@ -45,7 +45,7 @@ public abstract class HymnBase<T> implements Hymn<T> {
      * @return {@link String} 解析出来的 identifier
      */
     protected String id(final JsonObject dataJ) {
-        if (EmPRI.Connect.PARENT_STANDBY == this.joinRef.refer()) {
+        if (EmDS.Connect.PARENT_STANDBY == this.joinRef.refer()) {
             // 父从表模式
             return this.idRefer();
         } else {

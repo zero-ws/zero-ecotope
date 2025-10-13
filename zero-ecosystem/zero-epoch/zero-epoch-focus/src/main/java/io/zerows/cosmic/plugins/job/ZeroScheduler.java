@@ -7,7 +7,7 @@ import io.zerows.component.environment.DevEnv;
 import io.zerows.cosmic.plugins.job.metadata.Mission;
 import io.zerows.epoch.annotations.Worker;
 import io.zerows.platform.constant.VValue;
-import io.zerows.platform.enums.EmJob;
+import io.zerows.platform.enums.EmService;
 import io.zerows.support.Ut;
 import io.zerows.support.base.FnBase;
 import lombok.extern.slf4j.Slf4j;
@@ -89,7 +89,7 @@ public class ZeroScheduler extends AbstractVerticle {
             /*
              * If job type is ONCE, it's not started
              */
-            if (EmJob.JobType.ONCE != mission.getType()) {
+            if (EmService.JobType.ONCE != mission.getType()) {
                 agha.begin(mission);
             }
         }

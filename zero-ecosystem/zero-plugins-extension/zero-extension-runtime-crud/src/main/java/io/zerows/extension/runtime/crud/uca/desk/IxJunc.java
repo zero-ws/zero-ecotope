@@ -4,12 +4,12 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.destine.Hymn;
 import io.zerows.epoch.constant.KName;
-import io.zerows.mbse.metadata.KModule;
 import io.zerows.epoch.metadata.KJoin;
 import io.zerows.epoch.metadata.KPoint;
 import io.zerows.extension.runtime.crud.eon.Pooled;
 import io.zerows.extension.runtime.crud.uca.destine.Probe;
-import io.zerows.platform.enums.EmPRI;
+import io.zerows.mbse.metadata.KModule;
+import io.zerows.platform.enums.EmDS;
 
 import java.util.Objects;
 
@@ -49,7 +49,7 @@ public class IxJunc {
         }
 
 
-        if (EmPRI.Connect.PARENT_STANDBY == connect.refer()) {
+        if (EmDS.Connect.PARENT_STANDBY == connect.refer()) {
             // 父从表：引用模型，引用模型不依赖输入信息
             return this.connectRefer(connect);
         } else {

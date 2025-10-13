@@ -63,12 +63,12 @@ public class MatureOn implements EnvironmentVariable {
     }
 
     // Database Connected ( Multi Support )
-    public static JsonObject envDatabase(final JsonObject database, final EmDS.Stored mode) {
+    public static JsonObject envDatabase(final JsonObject database, final EmDS.DB mode) {
         final MMVariable.Set set;
-        if (EmDS.Stored.WORKFLOW == mode) {
+        if (EmDS.DB.WORKFLOW == mode) {
             // Workflow
             set = envDatabase(EnvironmentVariable.DB_HOST, EnvironmentVariable.DB_PORT, EnvironmentVariable.DBW_INSTANCE);
-        } else if (EmDS.Stored.HISTORY == mode) {
+        } else if (EmDS.DB.HISTORY == mode) {
             // History
             set = envDatabase(EnvironmentVariable.DB_HOST, EnvironmentVariable.DB_PORT, EnvironmentVariable.DBH_INSTANCE);
         } else {

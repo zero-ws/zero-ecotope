@@ -126,9 +126,9 @@ public class UniteArkSource implements UniteArk<List<XSource>> {
         // Database
         final KDS<KDatabase> kds = ark.database();
         {
-            kds.registry(EmDS.Stored.PRIMARY, Database.getCurrent());
-            kds.registry(EmDS.Stored.WORKFLOW, Database.getCamunda());
-            kds.registry(EmDS.Stored.HISTORY, Database.getHistory());
+            kds.registry(EmDS.DB.PRIMARY, Database.getCurrent());
+            kds.registry(EmDS.DB.WORKFLOW, Database.getCamunda());
+            kds.registry(EmDS.DB.HISTORY, Database.getHistory());
         }
         if (Objects.nonNull(sources) && !sources.isEmpty()) {
             final JsonArray sourceArray = new JsonArray();

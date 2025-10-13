@@ -68,7 +68,7 @@ public class KDatabase implements Serializable, HCopier<KDatabase>, HJson {
     /* Database port number */
     private Integer port;
     /* Database category */
-    private EmDS.Category category = EmDS.Category.MYSQL8;
+    private EmDS.Database category = EmDS.Database.MYSQL8;
     /* JDBC connection string */
     private String url;
     /* Database username */
@@ -165,7 +165,7 @@ public class KDatabase implements Serializable, HCopier<KDatabase>, HJson {
     public void fromJson(final JsonObject data) {
         if (UtBase.isNotNil(data)) {
             // category
-            this.category = UtBase.toEnum(() -> data.getString(Option.CATEGORY), EmDS.Category.class, EmDS.Category.MYSQL5);
+            this.category = UtBase.toEnum(() -> data.getString(Option.CATEGORY), EmDS.Database.class, EmDS.Database.MYSQL5);
             // hostname
             this.hostname = data.getString(Option.HOSTNAME);
             // port

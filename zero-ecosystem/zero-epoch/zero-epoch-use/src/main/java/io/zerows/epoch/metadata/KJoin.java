@@ -1,6 +1,6 @@
 package io.zerows.epoch.metadata;
 
-import io.zerows.platform.enums.EmPRI;
+import io.zerows.platform.enums.EmDS;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -84,13 +84,13 @@ public class KJoin implements Serializable {
         this.target = target;
     }
 
-    public EmPRI.Connect refer() {
+    public EmDS.Connect refer() {
         if (Objects.isNull(this.reference)) {
             // 父主表模式
-            return EmPRI.Connect.PARENT_ACTIVE;
+            return EmDS.Connect.PARENT_ACTIVE;
         } else {
             // 父从表模式
-            return EmPRI.Connect.PARENT_STANDBY;
+            return EmDS.Connect.PARENT_STANDBY;
         }
     }
 }

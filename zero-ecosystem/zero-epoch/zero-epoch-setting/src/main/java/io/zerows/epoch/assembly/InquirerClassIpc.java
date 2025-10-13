@@ -2,8 +2,8 @@ package io.zerows.epoch.assembly;
 
 
 import io.zerows.epoch.annotations.Agent;
-import io.zerows.platform.enums.app.ServerType;
 import io.zerows.epoch.configuration.Inquirer;
+import io.zerows.platform.enums.EmWeb;
 
 import java.util.Objects;
 import java.util.Set;
@@ -24,8 +24,8 @@ public class InquirerClassIpc implements Inquirer<Set<Class<?>>> {
                 if (Objects.isNull(anno)) {
                     return false;
                 }
-                final ServerType serverType = anno.type();
-                return ServerType.IPC == serverType;
+                final EmWeb.ServerType serverType = anno.type();
+                return EmWeb.ServerType.IPC == serverType;
             })
             .collect(Collectors.toSet());
         if (!agents.isEmpty()) {

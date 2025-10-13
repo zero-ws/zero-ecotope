@@ -4,9 +4,9 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.LogOf;
 import io.zerows.platform.constant.VName;
-import io.zerows.platform.enums.EmDict;
-import io.zerows.support.base.UtBase;
+import io.zerows.platform.enums.EmDS;
 import io.zerows.specification.atomic.HCopier;
+import io.zerows.support.base.UtBase;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -53,7 +53,7 @@ public class KDictSource implements Serializable, HCopier<KDictSource> {
 
 
     /** 字典类型，指明当前字典的类型信息 */
-    private EmDict.Type source;
+    private EmDS.Dictionary source;
 
 
     /** 当前字典名字，消费者专用 {@link KDictUse} 此名字执行消费 **/
@@ -68,8 +68,8 @@ public class KDictSource implements Serializable, HCopier<KDictSource> {
          * Source normalize for `source type`
          */
         final String source = definition.getString(VName.SOURCE);
-        this.source = UtBase.toEnum(() -> source, EmDict.Type.class, EmDict.Type.NONE);
-        if (EmDict.Type.CATEGORY == this.source || EmDict.Type.TABULAR == this.source) {
+        this.source = UtBase.toEnum(() -> source, EmDS.Dictionary.class, EmDS.Dictionary.NONE);
+        if (EmDS.Dictionary.CATEGORY == this.source || EmDS.Dictionary.TABULAR == this.source) {
             /*
              * Different definition for
              * 1) CATEGORY / TABULAR
@@ -80,7 +80,7 @@ public class KDictSource implements Serializable, HCopier<KDictSource> {
                     .map(item -> (String) item)
                     .forEach(this.types::add);
             }
-        } else if (EmDict.Type.ASSIST == this.source) {
+        } else if (EmDS.Dictionary.ASSIST == this.source) {
             /*
              * Different definition for
              * ASSIST
@@ -103,7 +103,7 @@ public class KDictSource implements Serializable, HCopier<KDictSource> {
     private KDictSource() {
     }
 
-    public EmDict.Type getSourceType() {
+    public EmDS.Dictionary getSourceType() {
         return this.source;
     }
 

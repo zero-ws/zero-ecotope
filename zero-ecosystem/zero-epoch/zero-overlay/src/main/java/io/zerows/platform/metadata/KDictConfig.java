@@ -1,7 +1,7 @@
 package io.zerows.platform.metadata;
 
 import io.vertx.core.json.JsonArray;
-import io.zerows.platform.enums.EmDict;
+import io.zerows.platform.enums.EmDS;
 import io.zerows.support.base.UtBase;
 
 import java.io.Serializable;
@@ -12,7 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 /**
- * 「字典定义」（批量）完整字典配置专用对象，此对象存储了 Zero Extension 中常用的几种字典的基础配置信息 {@link EmDict.Type}
+ * 「字典定义」（批量）完整字典配置专用对象，此对象存储了 Zero Extension 中常用的几种字典的基础配置信息 {@link EmDS.Dictionary}
  * <pre><code>
  *     1. CATEGORY：对应系统中 X_CATEGORY 表中的基础数据信息（树型字典）
  *     2. TABULAR：对应系统中 X_TABULAR 表中的基础信息（列表字典）

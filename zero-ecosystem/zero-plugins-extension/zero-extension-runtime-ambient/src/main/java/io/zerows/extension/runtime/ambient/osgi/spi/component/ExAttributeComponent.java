@@ -3,12 +3,12 @@ package io.zerows.extension.runtime.ambient.osgi.spi.component;
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.platform.enums.EmDict;
+import io.zerows.epoch.constant.KName;
+import io.zerows.extension.runtime.ambient.uca.dict.Dpm;
+import io.zerows.platform.enums.EmDS;
 import io.zerows.platform.metadata.KDictSource;
 import io.zerows.platform.metadata.KDictUse;
-import io.zerows.epoch.constant.KName;
 import io.zerows.support.Ut;
-import io.zerows.extension.runtime.ambient.uca.dict.Dpm;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
@@ -56,7 +56,7 @@ public abstract class ExAttributeComponent {
             /*
              * Dpm
              */
-            final EmDict.Type type = sourceDict.getSourceType();
+            final EmDS.Dictionary type = sourceDict.getSourceType();
             final Dpm dpm = Dpm.get(type);
             if (Objects.nonNull(dpm)) {
                 /*

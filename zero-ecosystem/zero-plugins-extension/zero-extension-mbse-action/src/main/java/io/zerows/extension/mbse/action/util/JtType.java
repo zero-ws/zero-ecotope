@@ -2,8 +2,6 @@ package io.zerows.extension.mbse.action.util;
 
 import io.r2mo.function.Fn;
 import io.vertx.core.AbstractVerticle;
-import io.zerows.platform.enums.app.EmTraffic;
-import io.zerows.support.Ut;
 import io.zerows.extension.mbse.action.atom.JtWorker;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IApi;
 import io.zerows.extension.mbse.action.eon.JtConstant;
@@ -12,6 +10,8 @@ import io.zerows.extension.mbse.action.exception._80404Exception500WorkerSpec;
 import io.zerows.extension.mbse.action.exception._80405Exception500ConsumerSpec;
 import io.zerows.extension.mbse.action.osgi.spi.jet.JtConsumer;
 import io.zerows.extension.mbse.action.uca.tunnel.AdaptorChannel;
+import io.zerows.platform.enums.EmWeb;
+import io.zerows.support.Ut;
 
 import java.util.function.Supplier;
 
@@ -46,9 +46,9 @@ class JtType {
         return worker;
     }
 
-    static Class<?> toChannel(final Supplier<String> supplier, final EmTraffic.Channel type) {
+    static Class<?> toChannel(final Supplier<String> supplier, final EmWeb.Channel type) {
         final Class<?> clazz;
-        if (EmTraffic.Channel.DEFINE == type) {
+        if (EmWeb.Channel.DEFINE == type) {
             /*
              * User defined channel class
              *  */
@@ -57,7 +57,7 @@ class JtType {
                 /*
                  * Adaptor as default channel
                  *  */
-                clazz = Pool.CHANNELS.get(EmTraffic.Channel.ADAPTOR);
+                clazz = Pool.CHANNELS.get(EmWeb.Channel.ADAPTOR);
             } else {
                 /*
                  * User defined channel as selected channel

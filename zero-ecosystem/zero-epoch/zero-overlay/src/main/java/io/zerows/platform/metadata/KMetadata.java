@@ -2,7 +2,7 @@ package io.zerows.platform.metadata;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.metadata.MetaAt;
-import io.zerows.platform.enums.EmMeta;
+import io.zerows.platform.enums.EmDS;
 import io.zerows.support.base.UtBase;
 
 import java.io.Serializable;
@@ -27,8 +27,8 @@ public class KMetadata implements Serializable {
             /*
              * Source parsed here.
              */
-            final EmMeta.Source source =
-                UtBase.toEnum(input.getString(KEY_TYPE), EmMeta.Source.class);
+            final EmDS.Source source =
+                UtBase.toEnum(input.getString(KEY_TYPE), EmDS.Source.class);
             final JsonObject content = input.getJsonObject(KEY_CONTENT);
             final MetaAt metaAt = MetaAt.of(source);
             this.content.mergeIn(metaAt.loadContent(content));

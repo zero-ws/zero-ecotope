@@ -1,7 +1,7 @@
 package io.zerows.specification.atomic;
 
 import io.zerows.platform.constant.VValue;
-import io.zerows.platform.enums.EmUca;
+import io.zerows.platform.enums.EmModule;
 import io.zerows.specification.app.HMod;
 import io.zerows.specification.development.ncloud.HCube;
 import io.zerows.specification.development.ncloud.HNovae;
@@ -75,9 +75,9 @@ public interface HContract {
         /**
          * 当前组件的状态
          *
-         * @return {@link EmUca.Status}
+         * @return {@link EmModule.Status}
          */
-        EmUca.Status status();
+        EmModule.Status status();
     }
 
     /**
@@ -121,7 +121,7 @@ public interface HContract {
          *
          * @return {@link ConcurrentMap}
          */
-        default ConcurrentMap<String, EmUca.Status> running() {
+        default ConcurrentMap<String, EmModule.Status> running() {
             return new ConcurrentHashMap<>();
         }
     }

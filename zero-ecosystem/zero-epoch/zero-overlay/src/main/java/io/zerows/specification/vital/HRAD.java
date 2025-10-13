@@ -1,6 +1,6 @@
 package io.zerows.specification.vital;
 
-import io.zerows.platform.enums.EmLib;
+import io.zerows.platform.enums.EmResearch;
 import io.zerows.specification.development.compiled.HLibrary;
 import io.zerows.specification.development.program.HEditor;
 
@@ -35,12 +35,12 @@ public interface HRAD {
      *
      * @return 系统库集合
      */
-    ConcurrentMap<EmLib.LibraryType, Set<HLibrary>> libraries();
+    ConcurrentMap<EmResearch.LibraryType, Set<HLibrary>> libraries();
 
     /**
      * 研发中心定义的编辑器信息（工具，每种工具只能有一个引用）
      *
      * @return 编辑器集合
      */
-    ConcurrentMap<EmLib.EditorType, HEditor> editors();
+    ConcurrentMap<EmResearch.EditorType, HEditor> editors();
 }

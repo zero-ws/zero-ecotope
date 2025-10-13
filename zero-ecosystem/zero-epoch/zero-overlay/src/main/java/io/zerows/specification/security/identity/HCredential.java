@@ -1,6 +1,6 @@
 package io.zerows.specification.security.identity;
 
-import io.zerows.platform.enums.app.SecurityLevel;
+import io.zerows.platform.enums.EmSecure;
 
 /**
  * 「安全凭证」
@@ -39,7 +39,7 @@ public interface HCredential {
      * 账号级别，用于描述账号本身的等级关系，后期会使用此等级来进行账号的权限控制
      * 除开级别描述以外，也可以代表账号的类型，所以此处使用 kind 关键字
      *
-     * @return {@link SecurityLevel}
+     * @return {@link EmSecure.SecurityLevel}
      */
-    SecurityLevel kind();
+    EmSecure.SecurityLevel kind();
 }

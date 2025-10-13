@@ -92,7 +92,7 @@ public interface YmlCore {
      *     orbit:
      *         hostname:
      *         instance:
-     *         category: {@link EmDS.Category}
+     *         category: {@link EmDS.Database}
      *         jdbcUrl:
      *         username:
      *         password:
@@ -101,7 +101,7 @@ public interface YmlCore {
      *     provider:
      *         hostname:
      *         instance:
-     *         category: {@link EmDS.Category}
+     *         category: {@link EmDS.Database}
      *         jdbcUrl:
      *         username:
      *         password:

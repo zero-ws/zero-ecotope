@@ -6,12 +6,12 @@ import io.r2mo.typed.webflow.WebState;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.destine.Conflate;
-import io.zerows.mbse.metadata.KModule;
 import io.zerows.epoch.metadata.KJoin;
 import io.zerows.epoch.metadata.KPoint;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 import io.zerows.extension.runtime.crud.uca.desk.IxReply;
-import io.zerows.platform.enums.EmPRI;
+import io.zerows.mbse.metadata.KModule;
+import io.zerows.platform.enums.EmDS;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -143,7 +143,7 @@ class NtJData implements Co<JsonObject, JsonObject, JsonObject, JsonObject> {
 
         final KModule module = this.in.module();
         final KJoin join = module.getConnect();
-        if (EmPRI.Connect.PARENT_STANDBY == join.refer()) {
+        if (EmDS.Connect.PARENT_STANDBY == join.refer()) {
             final KModule connect = this.in.connected();
             Objects.requireNonNull(connect);
             final String keyField = connect.getField().getKey();

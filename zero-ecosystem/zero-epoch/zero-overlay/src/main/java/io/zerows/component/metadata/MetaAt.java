@@ -1,7 +1,7 @@
 package io.zerows.component.metadata;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.platform.enums.EmMeta;
+import io.zerows.platform.enums.EmDS;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
@@ -19,14 +19,14 @@ import java.util.function.Supplier;
  */
 public interface MetaAt {
 
-    ConcurrentMap<EmMeta.Source, Supplier<MetaAt>> SUPPLIER = new ConcurrentHashMap<>() {
+    ConcurrentMap<EmDS.Source, Supplier<MetaAt>> SUPPLIER = new ConcurrentHashMap<>() {
         {
-            put(EmMeta.Source.FILE, MetaAtFile::new);
-            put(EmMeta.Source.PAGE, MetaAtPage::new);
+            this.put(EmDS.Source.FILE, MetaAtFile::new);
+            this.put(EmDS.Source.PAGE, MetaAtPage::new);
         }
     };
 
-    static MetaAt of(final EmMeta.Source source) {
+    static MetaAt of(final EmDS.Source source) {
         final Supplier<MetaAt> supplier = SUPPLIER.getOrDefault(source, null);
         Objects.requireNonNull(supplier);
         return supplier.get();

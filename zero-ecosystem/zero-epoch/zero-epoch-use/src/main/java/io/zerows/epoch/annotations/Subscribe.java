@@ -2,7 +2,7 @@ package io.zerows.epoch.annotations;
 
 import io.zerows.epoch.metadata.XEmptyInstance;
 import io.zerows.platform.constant.VString;
-import io.zerows.platform.enums.RemindType;
+import io.zerows.platform.enums.EmService;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -46,5 +46,5 @@ public @interface Subscribe {
 
     boolean secure() default true;
 
-    RemindType type() default RemindType.REMIND;
+    EmService.NotifyType type() default EmService.NotifyType.REMIND;
 }

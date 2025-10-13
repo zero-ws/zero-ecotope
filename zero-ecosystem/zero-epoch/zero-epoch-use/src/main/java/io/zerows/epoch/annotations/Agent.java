@@ -1,7 +1,7 @@
 package io.zerows.epoch.annotations;
 
 import io.zerows.epoch.constant.KWeb;
-import io.zerows.platform.enums.app.ServerType;
+import io.zerows.platform.enums.EmWeb;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -51,5 +51,5 @@ public @interface Agent {
      *
      * @return The agent type for different servers.
      */
-    ServerType type() default ServerType.HTTP;
+    EmWeb.ServerType type() default EmWeb.ServerType.HTTP;
 }

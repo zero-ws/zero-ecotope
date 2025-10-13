@@ -1,6 +1,6 @@
 package io.zerows.epoch.basicore;
 
-import io.zerows.platform.enums.EmAction;
+import io.zerows.platform.enums.EmDeploy;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -17,15 +17,15 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class JointMap implements Serializable {
 
-    private final ConcurrentMap<EmAction.JoinPoint, JointAction> jointMap = new ConcurrentHashMap<>() {
+    private final ConcurrentMap<EmDeploy.JoinPoint, JointAction> jointMap = new ConcurrentHashMap<>() {
         {
             // FIX Issue: Cannot invoke "io.zerows.core.web.model.action.atom.OJointAction.get(String)" because "action" is null
-            this.put(EmAction.JoinPoint.IPC, JointAction.of(EmAction.JoinPoint.IPC));
-            this.put(EmAction.JoinPoint.QAS, JointAction.of(EmAction.JoinPoint.QAS));
+            this.put(EmDeploy.JoinPoint.IPC, JointAction.of(EmDeploy.JoinPoint.IPC));
+            this.put(EmDeploy.JoinPoint.QAS, JointAction.of(EmDeploy.JoinPoint.QAS));
         }
     };
 
-    public void put(final EmAction.JoinPoint joinPoint, final JointAction jointAction) {
+    public void put(final EmDeploy.JoinPoint joinPoint, final JointAction jointAction) {
         this.jointMap.put(joinPoint, jointAction);
     }
 
@@ -40,7 +40,7 @@ public class JointMap implements Serializable {
     }
 
     public void remove(final JointAction jointAction) {
-        final EmAction.JoinPoint type = jointAction.type();
+        final EmDeploy.JoinPoint type = jointAction.type();
         final JointAction stored = this.jointMap.get(type);
         if (Objects.nonNull(stored)) {
             stored.remove(jointAction);
@@ -55,11 +55,11 @@ public class JointMap implements Serializable {
         return this;
     }
 
-    public void remove(final EmAction.JoinPoint joinPoint) {
+    public void remove(final EmDeploy.JoinPoint joinPoint) {
         this.jointMap.remove(joinPoint);
     }
 
-    public JointAction get(final EmAction.JoinPoint joinPoint) {
+    public JointAction get(final EmDeploy.JoinPoint joinPoint) {
         return this.jointMap.get(joinPoint);
     }
 }

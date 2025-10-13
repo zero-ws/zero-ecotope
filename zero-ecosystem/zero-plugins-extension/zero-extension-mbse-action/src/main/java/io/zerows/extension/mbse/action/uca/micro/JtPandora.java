@@ -15,7 +15,7 @@ import io.zerows.extension.mbse.action.uca.tunnel.AdaptorChannel;
 import io.zerows.extension.mbse.action.uca.tunnel.ConnectorChannel;
 import io.zerows.extension.mbse.action.uca.tunnel.DirectorChannel;
 import io.zerows.mbse.sdk.Commercial;
-import io.zerows.platform.enums.app.EmTraffic;
+import io.zerows.platform.enums.EmWeb;
 import io.zerows.platform.metadata.KRef;
 import io.zerows.support.Ut;
 
@@ -29,13 +29,13 @@ import java.util.stream.Collectors;
  */
 class JtPandora {
 
-    private static final ConcurrentMap<EmTraffic.Channel, Class<?>> EXPECTED_MAP =
-        new ConcurrentHashMap<EmTraffic.Channel, Class<?>>() {
+    private static final ConcurrentMap<EmWeb.Channel, Class<?>> EXPECTED_MAP =
+        new ConcurrentHashMap<EmWeb.Channel, Class<?>>() {
             {
-                this.put(EmTraffic.Channel.ADAPTOR, AdaptorChannel.class);
-                this.put(EmTraffic.Channel.CONNECTOR, ConnectorChannel.class);
-                this.put(EmTraffic.Channel.DIRECTOR, DirectorChannel.class);
-                this.put(EmTraffic.Channel.ACTOR, ActorChannel.class);
+                this.put(EmWeb.Channel.ADAPTOR, AdaptorChannel.class);
+                this.put(EmWeb.Channel.CONNECTOR, ConnectorChannel.class);
+                this.put(EmWeb.Channel.DIRECTOR, DirectorChannel.class);
+                this.put(EmWeb.Channel.ACTOR, ActorChannel.class);
             }
         };
 
@@ -87,11 +87,11 @@ class JtPandora {
          * Channel class for current consumer thread
          */
         final Class<?> channelClass = commercial.channelComponent();
-        final EmTraffic.Channel channelType = commercial.channelType();
+        final EmWeb.Channel channelType = commercial.channelType();
         /*
          * Super class definitions
          */
-        if (EmTraffic.Channel.DEFINE == channelType) {
+        if (EmWeb.Channel.DEFINE == channelType) {
             Fn.jvmKo(!Ut.isImplement(channelClass, JtChannel.class), _80410Exception424ChannelInterface.class, channelClass.getName());
         } else {
             /*

@@ -9,35 +9,35 @@ import java.util.concurrent.ConcurrentMap;
 public interface DSMeta {
 
     @SuppressWarnings("all")
-    ConcurrentMap<EmDS.Category, SQLDialect> DIALECT = new ConcurrentHashMap<>() {
+    ConcurrentMap<EmDS.Database, SQLDialect> DIALECT = new ConcurrentHashMap<>() {
         {
             // Jooq Supported Default
             // MySQL
-            this.put(EmDS.Category.MYSQL8, SQLDialect.MYSQL);
-            this.put(EmDS.Category.MYSQL5, SQLDialect.MYSQL);
-            this.put(EmDS.Category.TIDB, SQLDialect.MYSQL);
+            this.put(EmDS.Database.MYSQL8, SQLDialect.MYSQL);
+            this.put(EmDS.Database.MYSQL5, SQLDialect.MYSQL);
+            this.put(EmDS.Database.TIDB, SQLDialect.MYSQL);
 
             // PgSQL
-            this.put(EmDS.Category.POSTGRES, SQLDialect.POSTGRES);
-            this.put(EmDS.Category.COCKROACHDB, SQLDialect.POSTGRES);
+            this.put(EmDS.Database.POSTGRES, SQLDialect.POSTGRES);
+            this.put(EmDS.Database.COCKROACHDB, SQLDialect.POSTGRES);
 
             // Other
-            this.put(EmDS.Category.MARIADB, SQLDialect.MARIADB);
-            this.put(EmDS.Category.SQLLITE, SQLDialect.SQLITE);
-            this.put(EmDS.Category.TRINO, SQLDialect.TRINO);
-            this.put(EmDS.Category.YUGABYTEDB, SQLDialect.YUGABYTEDB);
-            this.put(EmDS.Category.DERBY, SQLDialect.DERBY);
-            this.put(EmDS.Category.FIREBIRD, SQLDialect.FIREBIRD);
-            this.put(EmDS.Category.H2, SQLDialect.H2);
-            this.put(EmDS.Category.HSQLDB, SQLDialect.HSQLDB);
+            this.put(EmDS.Database.MARIADB, SQLDialect.MARIADB);
+            this.put(EmDS.Database.SQLLITE, SQLDialect.SQLITE);
+            this.put(EmDS.Database.TRINO, SQLDialect.TRINO);
+            this.put(EmDS.Database.YUGABYTEDB, SQLDialect.YUGABYTEDB);
+            this.put(EmDS.Database.DERBY, SQLDialect.DERBY);
+            this.put(EmDS.Database.FIREBIRD, SQLDialect.FIREBIRD);
+            this.put(EmDS.Database.H2, SQLDialect.H2);
+            this.put(EmDS.Database.HSQLDB, SQLDialect.HSQLDB);
 
             // Experimental / Deprecated
-            this.put(EmDS.Category.DUCKDB, SQLDialect.DUCKDB);
-            this.put(EmDS.Category.CUBRID, SQLDialect.CUBRID);
-            this.put(EmDS.Category.IGNITE, SQLDialect.IGNITE);
+            this.put(EmDS.Database.DUCKDB, SQLDialect.DUCKDB);
+            this.put(EmDS.Database.CUBRID, SQLDialect.CUBRID);
+            this.put(EmDS.Database.IGNITE, SQLDialect.IGNITE);
 
             // Other will use DEFAULT instead for future
-            for (EmDS.Category category : EmDS.Category.values()) {
+            for (EmDS.Database category : EmDS.Database.values()) {
                 if (!this.containsKey(category)) {
                     this.put(category, SQLDialect.DEFAULT);
                 }

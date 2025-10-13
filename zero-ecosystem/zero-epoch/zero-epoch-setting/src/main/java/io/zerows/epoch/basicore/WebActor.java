@@ -1,6 +1,6 @@
 package io.zerows.epoch.basicore;
 
-import io.zerows.platform.enums.app.ServerType;
+import io.zerows.platform.enums.EmWeb;
 import lombok.Getter;
 
 import java.io.Serializable;
@@ -37,7 +37,7 @@ public class WebActor implements Serializable {
     private final Set<WebReceipt> receipts = new HashSet<>();
 
     private final ConcurrentMap<String, Set<WebEvent>> filters = new ConcurrentHashMap<>();
-    private final ConcurrentMap<ServerType, List<Class<?>>> agents = new ConcurrentHashMap<>();
+    private final ConcurrentMap<EmWeb.ServerType, List<Class<?>>> agents = new ConcurrentHashMap<>();
 
     public void addEvents(final Set<WebEvent> events) {
         // 追加扫描结果集
@@ -59,7 +59,7 @@ public class WebActor implements Serializable {
         });
     }
 
-    public void addAgents(final ConcurrentMap<ServerType, List<Class<?>>> agents) {
+    public void addAgents(final ConcurrentMap<EmWeb.ServerType, List<Class<?>>> agents) {
         agents.forEach((type, agent) -> {
             if (Objects.nonNull(agent) && !agent.isEmpty()) {
                 final List<Class<?>> stored = this.agents.getOrDefault(type, new ArrayList<>());
@@ -69,7 +69,7 @@ public class WebActor implements Serializable {
         });
     }
 
-    public void removeAgents(final ConcurrentMap<ServerType, List<Class<?>>> agents) {
+    public void removeAgents(final ConcurrentMap<EmWeb.ServerType, List<Class<?>>> agents) {
         agents.forEach((type, agent) -> {
             if (Objects.nonNull(agent) && !agent.isEmpty()) {
                 final List<Class<?>> stored = this.agents.getOrDefault(type, new ArrayList<>());

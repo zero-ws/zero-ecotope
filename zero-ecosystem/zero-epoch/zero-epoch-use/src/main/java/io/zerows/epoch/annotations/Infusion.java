@@ -1,6 +1,11 @@
 package io.zerows.epoch.annotations;
 
-import java.lang.annotation.*;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * 旧版本不成熟设计中的Infix架构，此处需重新处理一部分，原版系统流程
@@ -19,5 +24,6 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited
+@Deprecated
 public @interface Infusion {
 }

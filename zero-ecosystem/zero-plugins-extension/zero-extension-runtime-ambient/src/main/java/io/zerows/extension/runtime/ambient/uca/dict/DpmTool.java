@@ -2,9 +2,9 @@ package io.zerows.extension.runtime.ambient.uca.dict;
 
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonObject;
-import io.zerows.platform.constant.VString;
-import io.zerows.platform.enums.EmDict;
 import io.zerows.epoch.constant.KName;
+import io.zerows.platform.constant.VString;
+import io.zerows.platform.enums.EmDS;
 import io.zerows.support.Ut;
 
 import java.util.Set;
@@ -16,12 +16,12 @@ import java.util.concurrent.ConcurrentMap;
  */
 class DpmTool {
 
-    static final ConcurrentMap<EmDict.Type, Dpm> POOL_DPM = new ConcurrentHashMap<EmDict.Type, Dpm>() {
+    static final ConcurrentMap<EmDS.Dictionary, Dpm> POOL_DPM = new ConcurrentHashMap<EmDS.Dictionary, Dpm>() {
         {
-            this.put(EmDict.Type.ASSIST, Ut.instance(DpmAssist.class));
-            this.put(EmDict.Type.CATEGORY, Ut.instance(DpmCategory.class));
-            this.put(EmDict.Type.TABULAR, Ut.instance(DpmTabular.class));
-            this.put(EmDict.Type.DAO, Ut.instance(DpmDao.class));
+            this.put(EmDS.Dictionary.ASSIST, Ut.instance(DpmAssist.class));
+            this.put(EmDS.Dictionary.CATEGORY, Ut.instance(DpmCategory.class));
+            this.put(EmDS.Dictionary.TABULAR, Ut.instance(DpmTabular.class));
+            this.put(EmDS.Dictionary.DAO, Ut.instance(DpmDao.class));
         }
     };
 

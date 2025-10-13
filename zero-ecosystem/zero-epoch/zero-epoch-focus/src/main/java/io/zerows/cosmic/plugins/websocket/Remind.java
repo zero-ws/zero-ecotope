@@ -6,7 +6,7 @@ import io.r2mo.typed.cc.Cc;
 import io.r2mo.typed.json.jackson.ClassDeserializer;
 import io.r2mo.typed.json.jackson.ClassSerializer;
 import io.zerows.epoch.assembly.DiPlugin;
-import io.zerows.platform.enums.RemindType;
+import io.zerows.platform.enums.EmService;
 
 import java.io.Serializable;
 import java.lang.reflect.Method;
@@ -24,7 +24,7 @@ public class Remind implements Serializable {
     private final Cc<String, Object> cctProxy = Cc.openThread();
     private String name;
 
-    private RemindType type;
+    private EmService.NotifyType type;
 
     private String subscribe;
 
@@ -48,11 +48,11 @@ public class Remind implements Serializable {
         this.name = name;
     }
 
-    public RemindType getType() {
+    public EmService.NotifyType getType() {
         return this.type;
     }
 
-    public void setType(final RemindType type) {
+    public void setType(final EmService.NotifyType type) {
         this.type = type;
     }
 

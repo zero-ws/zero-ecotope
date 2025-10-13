@@ -3,13 +3,13 @@ package io.zerows.extension.runtime.crud.uca.input.id;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.mbse.metadata.KModule;
 import io.zerows.epoch.metadata.KField;
 import io.zerows.epoch.metadata.KJoin;
 import io.zerows.epoch.metadata.KPoint;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 import io.zerows.extension.runtime.crud.uca.input.Pre;
-import io.zerows.platform.enums.EmPRI;
+import io.zerows.mbse.metadata.KModule;
+import io.zerows.platform.enums.EmDS;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -35,7 +35,7 @@ class RefPre implements Pre {
     private void generateReference(final JsonObject data, final KModule module) {
         final KJoin join = module.getConnect();
         /* 限定必须是 reference 类型 */
-        if (Objects.isNull(join) || EmPRI.Connect.PARENT_ACTIVE == join.refer()) {
+        if (Objects.isNull(join) || EmDS.Connect.PARENT_ACTIVE == join.refer()) {
             return;
         }
 

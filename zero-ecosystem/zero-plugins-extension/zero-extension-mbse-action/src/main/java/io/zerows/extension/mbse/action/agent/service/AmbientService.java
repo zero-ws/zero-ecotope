@@ -14,7 +14,7 @@ import io.zerows.extension.mbse.action.domain.tables.pojos.IApi;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IJob;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IService;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
-import io.zerows.platform.enums.EmJob;
+import io.zerows.platform.enums.EmService;
 import io.zerows.program.Ux;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.app.HArk;
@@ -53,7 +53,7 @@ public class AmbientService implements AmbientStub {
         /*
          * Reset `Status`
          */
-        mission.setStatus(EmJob.Status.STOPPED);
+        mission.setStatus(EmService.JobStatus.STOPPED);
         final JobClient client = JobInfix.getClient();
         client.save(mission);
         return Ux.future(JobKit.toJson(mission));

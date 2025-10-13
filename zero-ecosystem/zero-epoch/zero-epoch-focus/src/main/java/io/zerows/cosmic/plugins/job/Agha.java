@@ -2,7 +2,7 @@ package io.zerows.cosmic.plugins.job;
 
 import io.vertx.core.Future;
 import io.zerows.cosmic.plugins.job.metadata.Mission;
-import io.zerows.platform.enums.EmJob;
+import io.zerows.platform.enums.EmService;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -12,15 +12,15 @@ import java.util.concurrent.ConcurrentMap;
  */
 public interface Agha {
 
-    ConcurrentMap<EmJob.JobType, Agha> AGHAS = new ConcurrentHashMap<>() {
+    ConcurrentMap<EmService.JobType, Agha> AGHAS = new ConcurrentHashMap<>() {
         {
-            this.put(EmJob.JobType.FIXED, new AghaFixed());
-            this.put(EmJob.JobType.ONCE, new AghaOnce());
-            this.put(EmJob.JobType.FORMULA, new AghaFormula());
+            this.put(EmService.JobType.FIXED, new AghaFixed());
+            this.put(EmService.JobType.ONCE, new AghaOnce());
+            this.put(EmService.JobType.FORMULA, new AghaFormula());
         }
     };
 
-    static Agha get(final EmJob.JobType type) {
+    static Agha get(final EmService.JobType type) {
         return AGHAS.getOrDefault(type, new AghaOnce());
     }
 

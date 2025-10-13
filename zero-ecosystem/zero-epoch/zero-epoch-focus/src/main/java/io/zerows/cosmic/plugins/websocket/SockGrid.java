@@ -3,11 +3,11 @@ package io.zerows.cosmic.plugins.websocket;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
-import io.zerows.cosmic.plugins.websocket.management.OCacheSock;
 import io.zerows.cortex.Invoker;
 import io.zerows.cortex.InvokerGateway;
+import io.zerows.cosmic.plugins.websocket.management.OCacheSock;
 import io.zerows.platform.constant.VValue;
-import io.zerows.platform.enums.RemindType;
+import io.zerows.platform.enums.EmService;
 import io.zerows.support.Ut;
 
 import java.lang.reflect.Method;
@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 public class SockGrid {
 
     private static final Set<Remind> SOCKS = OCacheSock.entireValue();
-    private static final ConcurrentMap<String, RemindType> TOPIC_MAP = new ConcurrentHashMap<>();
+    private static final ConcurrentMap<String, EmService.NotifyType> TOPIC_MAP = new ConcurrentHashMap<>();
     private static final ConcurrentMap<String, String> W2E = new ConcurrentHashMap<>();
     private static final ConcurrentMap<String, String> E2W = new ConcurrentHashMap<>();
 
@@ -63,12 +63,12 @@ public class SockGrid {
         }
     }
 
-    public synchronized static ConcurrentMap<String, RemindType> configTopic() {
+    public synchronized static ConcurrentMap<String, EmService.NotifyType> configTopic() {
         if (TOPIC_MAP.isEmpty()) {
             SOCKS.forEach(remind -> {
                 final String subscribe = remind.getSubscribe();
                 if (Ut.isNotNil(subscribe)) {
-                    TOPIC_MAP.put(subscribe, Objects.isNull(remind.getType()) ? RemindType.TOPIC : remind.getType());
+                    TOPIC_MAP.put(subscribe, Objects.isNull(remind.getType()) ? EmService.NotifyType.TOPIC : remind.getType());
                 }
             });
         }

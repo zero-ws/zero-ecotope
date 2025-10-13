@@ -1,7 +1,8 @@
 package io.zerows.cortex.metadata;
 
 import io.zerows.epoch.constant.KWeb;
-import io.zerows.platform.enums.EmMime;
+import io.zerows.platform.enums.EmWeb;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.lang.annotation.Annotation;
@@ -10,45 +11,26 @@ import java.lang.annotation.Annotation;
  * get container to getNull parameters
  */
 @SuppressWarnings("unchecked")
+@Data
 public class WebEpsilon<T> implements Serializable {
 
     private Object defaultValue;
     private String name;
-    private EmMime.Flow mime;
+    private EmWeb.MimeParser mime;
     private Class<?> argType;
     private Annotation annotation;
 
     private T value;
 
-    public String getName() {
-        return this.name;
-    }
-
     public void setName(final String name) {
         if (KWeb.ARGS.MIME_DIRECT.equals(name)) {
-            this.mime = EmMime.Flow.RESOLVER;
+            this.mime = EmWeb.MimeParser.RESOLVER;
         } else if (KWeb.ARGS.MIME_IGNORE.equals(name)) {
-            this.mime = EmMime.Flow.TYPED;
+            this.mime = EmWeb.MimeParser.TYPED;
         } else {
-            this.mime = EmMime.Flow.STANDARD;
+            this.mime = EmWeb.MimeParser.STANDARD;
         }
         this.name = name;
-    }
-
-    public Annotation getAnnotation() {
-        return this.annotation;
-    }
-
-    public void setAnnotation(final Annotation annotation) {
-        this.annotation = annotation;
-    }
-
-    public Class<?> getArgType() {
-        return this.argType;
-    }
-
-    public void setArgType(final Class<?> argType) {
-        this.argType = argType;
     }
 
     public T getValue() {
@@ -66,22 +48,6 @@ public class WebEpsilon<T> implements Serializable {
     public WebEpsilon<T> setValue(final T value) {
         this.value = value;
         return this;
-    }
-
-    public Object getDefaultValue() {
-        return this.defaultValue;
-    }
-
-    public void setDefaultValue(final Object defaultValue) {
-        this.defaultValue = defaultValue;
-    }
-
-    public EmMime.Flow getMime() {
-        return this.mime;
-    }
-
-    public void setMime(final EmMime.Flow mime) {
-        this.mime = mime;
     }
 
     @Override

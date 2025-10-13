@@ -3,8 +3,8 @@ package io.zerows.platform.enums;
 /**
  * @author lang : 2023-05-31
  */
-public final class EmUca {
-    private EmUca() {
+public final class EmModule {
+    private EmModule() {
     }
 
     /**
@@ -21,5 +21,9 @@ public final class EmUca {
         ERROR,      // 错误（错误状态）
 
         UNINSTALLED // 已卸载（卸载完成）
+    }
+
+    public enum ActorType {
+        
     }
 }

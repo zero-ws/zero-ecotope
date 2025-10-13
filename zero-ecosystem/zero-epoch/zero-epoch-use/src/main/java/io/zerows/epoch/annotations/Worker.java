@@ -1,9 +1,14 @@
 package io.zerows.epoch.annotations;
 
-import io.zerows.platform.enums.app.EmTraffic;
 import io.zerows.epoch.constant.KWeb;
+import io.zerows.platform.enums.EmWeb;
 
-import java.lang.annotation.*;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * Worker will consume event bus data by address
@@ -21,7 +26,7 @@ public @interface Worker {
      *
      * @return One of three supported message model that belong to vertx.
      */
-    EmTraffic.Exchange value() default EmTraffic.Exchange.REQUEST_RESPONSE;
+    EmWeb.Exchange value() default EmWeb.Exchange.REQUEST_RESPONSE;
 
     /**
      * Worker Instance Number

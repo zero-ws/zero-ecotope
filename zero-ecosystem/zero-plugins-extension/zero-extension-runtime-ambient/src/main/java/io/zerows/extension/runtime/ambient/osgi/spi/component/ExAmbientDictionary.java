@@ -8,7 +8,7 @@ import io.zerows.epoch.spi.Dictionary;
 import io.zerows.extension.runtime.ambient.agent.service.DatumService;
 import io.zerows.extension.runtime.ambient.agent.service.DatumStub;
 import io.zerows.extension.runtime.ambient.uca.dict.Dpm;
-import io.zerows.platform.enums.EmDict;
+import io.zerows.platform.enums.EmDS;
 import io.zerows.platform.metadata.KDictSource;
 import io.zerows.program.Ux;
 import io.zerows.support.fn.Fx;
@@ -44,7 +44,7 @@ public class ExAmbientDictionary implements Dictionary {
              */
             final List<Future<ConcurrentMap<String, JsonArray>>> futures = new ArrayList<>();
             sources.forEach(source -> {
-                final EmDict.Type type = source.getSourceType();
+                final EmDS.Dictionary type = source.getSourceType();
                 final Dpm dpm = Dpm.get(type);
                 if (Objects.nonNull(dpm)) {
                     futures.add(dpm.fetchAsync(source, paramMap));

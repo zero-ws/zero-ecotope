@@ -1,6 +1,6 @@
 package io.zerows.epoch.basicore;
 
-import io.zerows.platform.enums.EmAction;
+import io.zerows.platform.enums.EmDeploy;
 
 import java.io.Serializable;
 import java.lang.reflect.Method;
@@ -17,19 +17,19 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class JointAction implements Serializable {
 
-    private final EmAction.JoinPoint type;
+    private final EmDeploy.JoinPoint type;
 
     private final ConcurrentMap<String, Method> method = new ConcurrentHashMap<>();
 
-    private JointAction(final EmAction.JoinPoint type) {
+    private JointAction(final EmDeploy.JoinPoint type) {
         this.type = type;
     }
 
-    public static JointAction of(final EmAction.JoinPoint type) {
+    public static JointAction of(final EmDeploy.JoinPoint type) {
         return new JointAction(type);
     }
 
-    public EmAction.JoinPoint type() {
+    public EmDeploy.JoinPoint type() {
         return this.type;
     }
     // ----------------- IPC Connect --------------------

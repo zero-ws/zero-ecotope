@@ -4,7 +4,7 @@ import io.zerows.component.log.LogO;
 import io.zerows.cosmic.plugins.job.client.JobClient;
 import io.zerows.cosmic.plugins.job.client.JobInfix;
 import io.zerows.cosmic.plugins.job.metadata.Mission;
-import io.zerows.platform.enums.EmJob;
+import io.zerows.platform.enums.EmService;
 import io.zerows.support.Ut;
 
 import java.util.HashSet;
@@ -56,14 +56,14 @@ class StoreUnity implements JobStore {
          * Status Modification for ONCE
          * */
         result.stream()
-            .filter(mission -> EmJob.JobType.ONCE == mission.getType())
+            .filter(mission -> EmService.JobType.ONCE == mission.getType())
             /*
              * Once work is in `STARTING`, because it won't start
              * We must convert `STARTING` to `STOPPED` to stop the job
              * at that time here.
              */
-            .filter(mission -> EmJob.Status.STARTING == mission.getStatus())
-            .forEach(mission -> mission.setStatus(EmJob.Status.STOPPED));
+            .filter(mission -> EmService.JobStatus.STARTING == mission.getStatus())
+            .forEach(mission -> mission.setStatus(EmService.JobStatus.STOPPED));
 
         /* Job Pool Sync */
         JobClient.Pre.save(result);

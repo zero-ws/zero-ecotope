@@ -1,14 +1,11 @@
 package io.zerows.epoch.boot;
 
 import io.r2mo.function.Fn;
-import io.r2mo.spi.SPI;
 import io.vertx.core.Future;
 import io.vertx.core.Promise;
-import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Up;
 import io.zerows.epoch.boot.exception._40002Exception500UpClassInvalid;
-import io.zerows.epoch.configuration.ZeroConfigurer;
 import io.zerows.platform.ENV;
 import io.zerows.platform.exception._11010Exception500BootIoMissing;
 import io.zerows.specification.configuration.HBoot;
@@ -22,62 +19,6 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.Objects;
 import java.util.function.BiConsumer;
 
-/**
- * 「启动管理器」KLauncher
- *
- * <p>一个开箱即用的轻量级启动封装：通过 {@link SPI} 自动发现 {@link BootIo}，
- * 构造 {@link HEnergy} 能量/配置上下文，完成预配置与启动过程，并在启动完成后以
- * {@link BiConsumer BiConsumer&lt;T, CONFIG&gt;} 的形式将“已初始化的服务器实例”和“配置对象”传递给调用方。</p>
- *
- * <h2>🚀 功能概览</h2>
- * <ul>
- *   <li>🧭 <b>SPI 驱动</b>：运行时通过 {@code SPI.findOne(BootIo.class)} 查找启动 I/O 组件。</li>
- *   <li>🔌 <b>零配置启动</b>：主函数可直接使用 {@link #create(Class, String[])} + {@link #start(BiConsumer)} 完成启动。</li>
- *   <li>🧱 <b>预配置阶段</b>：通过 {@link ZeroConfigurer} 绑定 {@link HEnergy} 与命令行参数，抽取 {@link HConfig.HOn}（启动前置 On 组件）。</li>
- *   <li>🧰 <b>可插拔生命周期</b>：调用 {@link ZeroConfigurer#preExecute(Object, HConfig)} 在容器就绪后执行第一步初始化。</li>
- *   <li>🧩 <b>类型安全泛型</b>：启动完成回调中可得到 <code>T</code>（服务端实例）与 <code>CONFIG extends HConfig</code>（配置）。</li>
- * </ul>
- *
- * <h2>🧠 生命周期（简述）</h2>
- * <ol>
- *   <li>🔍 SPI 查找 {@link BootIo}；若缺失抛出 {@link _11010Exception500BootIoMissing}。</li>
- *   <li>⚡ 从 {@link BootIo#energy(Class, String[])} 构建 {@link HEnergy}；创建并配置 {@link ZeroConfigurer}。</li>
- *   <li>🧪 提取 {@link HConfig.HOn}（启动扫描、文件目录检查、环境变量等工作已在 <i>configure 第一周期</i>完成）。</li>
- *   <li>🟢 通过 {@link BootIo#launcher()} 获取 {@link HLauncher} 并执行 {@link HLauncher#start(HConfig.HOn, java.util.function.Consumer)}。</li>
- *   <li>📦 构造启动参数 {@link JsonArray} 注入到 {@link HConfig}：键名为 {@code "arguments"}。</li>
- *   <li>🛠️ 执行 {@link ZeroConfigurer#preExecute(Object, HConfig)} 进行容器就绪后的首轮初始化。</li>
- *   <li>🤝 回调外部 {@link BiConsumer}，交付 <code>T server</code> 与 <code>CONFIG configuration</code>。</li>
- * </ol>
- *
- * <h2>🧷 单例与并发</h2>
- * <ul>
- *   <li>♻️ <b>单例</b>：内部使用静态 {@code INSTANCE} 保存启动器，仅在首次 {@link #create(Class, String[])} 时创建。</li>
- *   <li>🧵 <b>线程安全</b>：未做并发保护；如需多启动器并存或并发启动，请在外层保证串行化或改造单例策略。</li>
- * </ul>
- *
- * <h2>💡 使用示例</h2>
- * <pre>{@code
- * public static void main(String[] args) {
- *     KLauncher<MyServer> launcher = KLauncher.create(MyBoot.class, args);
- *     launcher.start((server, config) -> {
- *         // server: 已初始化好的服务器实例（T）
- *         // config: 已就绪的配置对象（CONFIG extends HConfig）
- *         // TODO: 你的业务启动逻辑
- *     });
- * }
- * }</pre>
- *
- * <h2>⚠️ 异常与日志</h2>
- * <ul>
- *   <li>❌ 未发现 {@link BootIo} 时会抛出 {@link _11010Exception500BootIoMissing}。</li>
- *   <li>📝 通过 {@see log} 输出启动组件相关日志（如发现的 {@link HLauncher} 实现类）。</li>
- * </ul>
- *
- * @param <T> 服务器/框架的核心实例类型（由底层 {@link HLauncher} 决定）
- *
- * @author lang
- * @since 2023-05-30
- */
 @Slf4j
 public class ZeroLauncher<T> {
     /** 🔒 单例实例（无并发保护，外层需确保仅初始化一次） */
@@ -224,34 +165,5 @@ public class ZeroLauncher<T> {
             final CONFIG configuration = Objects.isNull(on) ? null : (CONFIG) on.store();
             consumer.accept(vertx, configuration);
         });
-        // final HConfig.HOn on = this.configurer.onComponent();
-        //        this.launcher.start(on, server -> {
-        //
-        //            final CONFIG configuration = Objects.isNull(on) ? null : (CONFIG) on.store();
-        //
-        //            /*
-        //             * 将参数部分传递到配置中，在 configuration 中构造：
-        //             * arguments = JsonArray 结构
-        //             */
-        //            final JsonArray parameter = new JsonArray();
-        //            final String[] arguments = on.args();
-        //            Arrays.stream(arguments).forEach(parameter::add);
-        //
-        //            // configuration 可能为 null（取决于 HOn 实现），判空后再写入与预执行
-        //            if (Objects.nonNull(configuration)) {
-        //                configuration.put("arguments", parameter);
-        //                // Pre 1：针对容器初始化完成之后的第一步初始化流程
-        //                this.configurer.preExecute(server, configuration);
-        //            }
-        //
-        //            /**
-        //             * 此处是穿透效果，直接外层调用
-        //             *     (server,config) -> {
-        //             *         server -> 服务器引用（初始化好的框架部分）
-        //             *         config -> 配置引用（初始化好的配置部分）
-        //             *     }
-        //             */
-        //            consumer.accept(server, configuration);
-        //        });
     }
 }

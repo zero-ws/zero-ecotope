@@ -9,7 +9,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.constant.VValue;
-import io.zerows.platform.enums.EmJob;
+import io.zerows.platform.enums.EmService;
 import io.zerows.support.Ut;
 
 import java.lang.annotation.Annotation;
@@ -37,7 +37,7 @@ public class JobExtractor implements Extractor<Mission> {
             return null;
         }
         /* Default type */
-        final EmJob.JobType type = Ut.invoke(annotation, KName.VALUE);
+        final EmService.JobType type = Ut.invoke(annotation, KName.VALUE);
 
         /* Default name -> class name */
         String name = Ut.invoke(annotation, KName.NAME);
@@ -62,7 +62,7 @@ public class JobExtractor implements Extractor<Mission> {
         }
 
         /* The first status of each Job */
-        mission.setStatus(EmJob.Status.STARTING);
+        mission.setStatus(EmService.JobStatus.STARTING);
 
         {
             /* threshold / thresholdUnit */

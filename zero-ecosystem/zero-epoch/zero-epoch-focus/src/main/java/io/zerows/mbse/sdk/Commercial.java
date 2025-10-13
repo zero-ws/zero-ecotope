@@ -1,7 +1,7 @@
 package io.zerows.mbse.sdk;
 
 import io.zerows.epoch.database.Database;
-import io.zerows.platform.enums.app.EmTraffic;
+import io.zerows.platform.enums.EmWeb;
 import io.zerows.platform.metadata.KIntegration;
 import io.zerows.specification.atomic.HJson;
 import io.zerows.specification.modeling.HRule;
@@ -20,7 +20,7 @@ public interface Commercial extends Application, ServiceDefinition, HJson {
      * Get channel type of definition ( 1 of 4 )
      * The channel class is fixed in current version, mapped to channel type.
      */
-    EmTraffic.Channel channelType();
+    EmWeb.Channel channelType();
 
     /*
      * Get channel class here, it will be initialized by other positions

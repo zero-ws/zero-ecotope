@@ -3,7 +3,7 @@ package io.zerows.extension.runtime.ambient.uca.dict;
 import io.vertx.core.Future;
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonArray;
-import io.zerows.platform.enums.EmDict;
+import io.zerows.platform.enums.EmDS;
 import io.zerows.platform.metadata.KDictSource;
 
 import java.util.concurrent.ConcurrentMap;
@@ -27,7 +27,7 @@ import java.util.concurrent.ConcurrentMap;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 public interface Dpm {
-    static Dpm get(final EmDict.Type type) {
+    static Dpm get(final EmDS.Dictionary type) {
         return DpmTool.POOL_DPM.getOrDefault(type, null);
     }
 

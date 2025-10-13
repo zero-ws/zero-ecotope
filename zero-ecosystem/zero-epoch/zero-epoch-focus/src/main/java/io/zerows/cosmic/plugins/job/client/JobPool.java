@@ -4,7 +4,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.LogO;
 import io.zerows.cosmic.plugins.job.metadata.Mission;
 import io.zerows.epoch.constant.KName;
-import io.zerows.platform.enums.EmJob;
+import io.zerows.platform.enums.EmService;
 import io.zerows.support.Ut;
 
 import java.util.List;
@@ -62,31 +62,31 @@ class JobPool {
      */
     static void start(final Long timeId, final String code) {
         uniform(code, mission -> {
-            final EmJob.Status status = mission.getStatus();
-            if (EmJob.Status.RUNNING == status) {
+            final EmService.JobStatus status = mission.getStatus();
+            if (EmService.JobStatus.RUNNING == status) {
                 /*
                  * If `RUNNING`
                  * Do not started here because it's running now
                  */
                 LOGGER.info(IS_RUNNING, code);
-            } else if (EmJob.Status.ERROR == status) {
+            } else if (EmService.JobStatus.ERROR == status) {
                 /*
                  * If `ERROR`
                  * Could not started here
                  */
                 LOGGER.warn(IS_ERROR, code);
-            } else if (EmJob.Status.STARTING == status) {
+            } else if (EmService.JobStatus.STARTING == status) {
                 /*
                  * If `STARTING`
                  * Could not started here
                  */
                 LOGGER.warn(IS_STARTING, code);
             } else {
-                if (EmJob.Status.STOPPED == status) {
+                if (EmService.JobStatus.STOPPED == status) {
                     /*
                      * STOPPED -> READY
                      */
-                    JOBS.get(code).setStatus(EmJob.Status.READY);
+                    JOBS.get(code).setStatus(EmService.JobStatus.READY);
                 }
                 RUNNING.put(timeId, code);
 
@@ -97,15 +97,15 @@ class JobPool {
     /* Stop job --> Package Range */
     static void stop(final Long timeId) {
         uniform(timeId, mission -> {
-            final EmJob.Status status = mission.getStatus();
-            if (EmJob.Status.RUNNING == status || EmJob.Status.READY == status) {
+            final EmService.JobStatus status = mission.getStatus();
+            if (EmService.JobStatus.RUNNING == status || EmService.JobStatus.READY == status) {
                 /*
                  * If `RUNNING`
                  * stop will trigger from
                  * RUNNING -> STOPPED
                  */
                 RUNNING.remove(timeId);
-                mission.setStatus(EmJob.Status.STOPPED);
+                mission.setStatus(EmService.JobStatus.STOPPED);
             } else {
                 /*
                  * Other status is invalid
@@ -118,15 +118,15 @@ class JobPool {
     /* Package Range */
     static void resume(final Long timeId) {
         uniform(timeId, mission -> {
-            final EmJob.Status status = mission.getStatus();
-            if (EmJob.Status.ERROR == status) {
+            final EmService.JobStatus status = mission.getStatus();
+            if (EmService.JobStatus.ERROR == status) {
                 /*
                  * If `ERROR`
                  * resume will be triggered
                  * ERROR -> READY
                  */
                 RUNNING.put(timeId, mission.getCode());
-                mission.setStatus(EmJob.Status.READY);
+                mission.setStatus(EmService.JobStatus.READY);
             }
         });
     }

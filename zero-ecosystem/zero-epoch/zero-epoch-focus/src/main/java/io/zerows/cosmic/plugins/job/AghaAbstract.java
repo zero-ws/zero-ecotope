@@ -10,7 +10,7 @@ import io.zerows.component.log.LogO;
 import io.zerows.cosmic.plugins.job.metadata.Mission;
 import io.zerows.epoch.annotations.Contract;
 import io.zerows.epoch.web.Envelop;
-import io.zerows.platform.enums.EmJob;
+import io.zerows.platform.enums.EmService;
 import io.zerows.support.Ut;
 
 import java.util.Objects;
@@ -56,22 +56,22 @@ public abstract class AghaAbstract implements Agha {
      *     |------- ERROR
      *
      */
-    private static final ConcurrentMap<EmJob.Status, EmJob.Status> VM = new ConcurrentHashMap<>() {
+    private static final ConcurrentMap<EmService.JobStatus, EmService.JobStatus> VM = new ConcurrentHashMap<>() {
         {
             /* STARTING -> READY */
-            this.put(EmJob.Status.STARTING, EmJob.Status.READY);
+            this.put(EmService.JobStatus.STARTING, EmService.JobStatus.READY);
 
             /* READY -> RUNNING ( Automatically ) */
-            this.put(EmJob.Status.READY, EmJob.Status.RUNNING);
+            this.put(EmService.JobStatus.READY, EmService.JobStatus.RUNNING);
 
             /* RUNNING -> STOPPED ( Automatically ) */
-            this.put(EmJob.Status.RUNNING, EmJob.Status.STOPPED);
+            this.put(EmService.JobStatus.RUNNING, EmService.JobStatus.STOPPED);
 
             /* STOPPED -> READY */
-            this.put(EmJob.Status.STOPPED, EmJob.Status.READY);
+            this.put(EmService.JobStatus.STOPPED, EmService.JobStatus.READY);
 
             /* ERROR -> READY */
-            this.put(EmJob.Status.ERROR, EmJob.Status.READY);
+            this.put(EmService.JobStatus.ERROR, EmService.JobStatus.READY);
         }
     };
     @Contract
@@ -145,7 +145,7 @@ public abstract class AghaAbstract implements Agha {
     }
 
     void working(final Mission mission, final Actuator actuator) {
-        if (EmJob.Status.READY == mission.getStatus()) {
+        if (EmService.JobStatus.READY == mission.getStatus()) {
             /*
              * READY -> RUNNING
              */
@@ -266,8 +266,8 @@ public abstract class AghaAbstract implements Agha {
                 /*
                  * Next Status
                  */
-                final EmJob.Status moved = VM.get(mission.getStatus());
-                final EmJob.Status original = mission.getStatus();
+                final EmService.JobStatus moved = VM.get(mission.getStatus());
+                final EmService.JobStatus original = mission.getStatus();
                 mission.setStatus(moved);
                 /*
                  * Log and update cache
@@ -279,8 +279,8 @@ public abstract class AghaAbstract implements Agha {
             /*
              * Terminal job here
              */
-            if (EmJob.Status.RUNNING == mission.getStatus()) {
-                mission.setStatus(EmJob.Status.ERROR);
+            if (EmService.JobStatus.RUNNING == mission.getStatus()) {
+                mission.setStatus(EmService.JobStatus.ERROR);
                 this.logger().info(JobMessage.AGHA.TERMINAL, mission.getType(), mission.getCode());
                 this.store().update(mission);
             }

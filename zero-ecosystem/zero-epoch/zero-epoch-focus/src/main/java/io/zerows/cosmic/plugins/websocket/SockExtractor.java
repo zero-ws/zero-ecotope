@@ -8,7 +8,7 @@ import io.zerows.epoch.assembly.Extractor;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.XEmptyInstance;
 import io.zerows.platform.constant.VString;
-import io.zerows.platform.enums.RemindType;
+import io.zerows.platform.enums.EmService;
 import io.zerows.support.Ut;
 
 import java.lang.annotation.Annotation;
@@ -56,7 +56,7 @@ public class SockExtractor implements Extractor<Set<Remind>> {
         if (!address.startsWith(VString.SLASH)) {
             address = VString.SLASH + address;
         }
-        final RemindType type = Ut.invoke(annotation, KName.TYPE);
+        final EmService.NotifyType type = Ut.invoke(annotation, KName.TYPE);
         // 2. Build Remind
         final Remind remind = new Remind();
         remind.setMethod(method);

@@ -13,9 +13,9 @@ import io.zerows.epoch.basicore.WebEvent;
 import io.zerows.epoch.basicore.WebReceipt;
 import io.zerows.epoch.configuration.Inquirer;
 import io.zerows.epoch.metadata.environment.KSwitcher;
-import io.zerows.platform.enums.EmAction;
+import io.zerows.platform.enums.EmDeploy;
+import io.zerows.platform.enums.EmWeb;
 import io.zerows.platform.enums.VertxComponent;
-import io.zerows.platform.enums.app.ServerType;
 import io.zerows.platform.management.AbstractAmbiguity;
 import io.zerows.platform.metadata.KRunner;
 import io.zerows.specification.configuration.HSetting;
@@ -62,7 +62,7 @@ public class ORepositoryMeta extends AbstractAmbiguity implements ORepository {
                 if (Objects.nonNull(aeon)) {
                     /* Aeon System Enabled */
                     final Inquirer<ConcurrentMap<String, Method>> inquirer = Ut.singleton(InquirerForQaS.class);
-                    final JointAction action = JointAction.of(EmAction.JoinPoint.QAS);
+                    final JointAction action = JointAction.of(EmDeploy.JoinPoint.QAS);
                     action.put(inquirer.scan(classAll));
                     processor.add(action);
                 }
@@ -70,7 +70,7 @@ public class ORepositoryMeta extends AbstractAmbiguity implements ORepository {
             // @Ipc
             () -> {
                 final Inquirer<ConcurrentMap<String, Method>> inquirer = Ut.singleton(InquirerForIpc.class);
-                final JointAction action = JointAction.of(EmAction.JoinPoint.IPC);
+                final JointAction action = JointAction.of(EmDeploy.JoinPoint.IPC);
                 action.put(inquirer.scan(classAll));
                 processor.add(action);
             }
@@ -111,7 +111,7 @@ public class ORepositoryMeta extends AbstractAmbiguity implements ORepository {
             },
             // Agent Component
             () -> {
-                final Inquirer<ConcurrentMap<ServerType, List<Class<?>>>> agent = Ut.singleton(InquirerForAgent.class);
+                final Inquirer<ConcurrentMap<EmWeb.ServerType, List<Class<?>>>> agent = Ut.singleton(InquirerForAgent.class);
                 actorComponent.addAgents(agent.scan(classAll));
             }
         );

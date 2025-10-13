@@ -5,8 +5,8 @@ import io.vertx.ext.stomp.Destination;
 import io.vertx.ext.stomp.StompServerHandler;
 import io.vertx.ext.stomp.StompServerOptions;
 import io.vertx.ext.stomp.impl.RemindDestination;
-import io.zerows.platform.enums.RemindType;
 import io.zerows.cosmic.plugins.websocket.SockGrid;
+import io.zerows.platform.enums.EmService;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentMap;
@@ -26,10 +26,10 @@ public class MixerDestination extends AbstractMixer {
          * Build Map of address = type
          * Here are two types
          */
-        final ConcurrentMap<String, RemindType> topicMap = SockGrid.configTopic();
+        final ConcurrentMap<String, EmService.NotifyType> topicMap = SockGrid.configTopic();
         // Destination Building
         handler.destinationFactory((v, name) -> {
-            final RemindType type = topicMap.getOrDefault(name, null);
+            final EmService.NotifyType type = topicMap.getOrDefault(name, null);
             if (Objects.isNull(type)) {
                 // No Definition of Address
                 this.logger().info(Info.SUBSCRIBE_NULL, name);
@@ -42,18 +42,18 @@ public class MixerDestination extends AbstractMixer {
     }
 
     private Destination destination(final Vertx vertx, final String name,
-                                    final RemindType type) {
-        if (RemindType.REMIND == type) {
+                                    final EmService.NotifyType type) {
+        if (EmService.NotifyType.REMIND == type) {
             // Remind
             this.logger().info(Info.SUBSCRIBE_REMIND, name);
             return new RemindDestination(vertx);
         }
-        if (RemindType.QUEUE == type) {
+        if (EmService.NotifyType.QUEUE == type) {
             // Queue
             this.logger().info(Info.SUBSCRIBE_QUEUE, name);
             return Destination.queue(vertx, name);
         }
-        if (RemindType.BRIDGE == type) {
+        if (EmService.NotifyType.BRIDGE == type) {
             // Modify Bridge
             this.logger().info(Info.SUBSCRIBE_BRIDGE, name);
             return Destination.bridge(vertx, StompBridgeOptions.wsOptionBridge());

@@ -17,7 +17,7 @@ public final class EmDS {
      * Created based on org.jooq.SQLDialect
      */
     @SuppressWarnings("all")
-    public enum Category {
+    public enum Database {
         // --------------------- Jooq supported
 
         MARIADB,    // MariaDB
@@ -68,7 +68,7 @@ public final class EmDS {
         AZURE_SA,   // Azure Synapse Analytics 12.2.0
     }
 
-    public enum Stored {
+    public enum DB {
         // Default Value ( Major Database configured by 'provider' )
         PRIMARY,
         // History Value ( configured by 'orbit' )
@@ -79,5 +79,23 @@ public final class EmDS {
         DYNAMIC,
         // Extension Value ( configured by '<key>' that provided )
         EXTENSION,
+    }
+
+    public enum Connect {
+        PARENT_ACTIVE,      // 父表是主表
+        PARENT_STANDBY,     // 附表是从表
+    }
+
+    public enum Dictionary {
+        CATEGORY, // The category data ( tree ) definition,
+        TABULAR,  // The tabular data ( list ) definition,
+        ASSIST,   // The adminicle data ( dynamic ) came from definition
+        DAO,      // The standard Dao Dict for capture
+        NONE,     // None for source define
+    }
+
+    public enum Source {
+        FILE,
+        PAGE,
     }
 }

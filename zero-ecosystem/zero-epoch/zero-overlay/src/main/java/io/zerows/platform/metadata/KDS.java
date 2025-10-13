@@ -16,25 +16,25 @@ import java.util.function.Function;
  */
 public class KDS<T extends KDatabase> implements Function<KDS<T>, KDS<T>> {
 
-    private final ConcurrentMap<EmDS.Stored, T> database = new ConcurrentHashMap<>();
+    private final ConcurrentMap<EmDS.DB, T> database = new ConcurrentHashMap<>();
     private final Set<T> databaseDynamics = new LinkedHashSet<>();
 
     public T database() {
-        return this.database.getOrDefault(EmDS.Stored.PRIMARY, null);
+        return this.database.getOrDefault(EmDS.DB.PRIMARY, null);
     }
 
     public T history() {
-        return this.database.getOrDefault(EmDS.Stored.HISTORY, null);
+        return this.database.getOrDefault(EmDS.DB.HISTORY, null);
     }
 
     public T workflow() {
-        return this.database.getOrDefault(EmDS.Stored.WORKFLOW, null);
+        return this.database.getOrDefault(EmDS.DB.WORKFLOW, null);
     }
 
-    public KDS<T> registry(final EmDS.Stored store, final T database) {
+    public KDS<T> registry(final EmDS.DB store, final T database) {
         if (Objects.nonNull(database)) {
             this.database.put(store, database);
-            if (EmDS.Stored.DYNAMIC == store) {
+            if (EmDS.DB.DYNAMIC == store) {
                 this.databaseDynamics.add(database);
             }
         }
@@ -46,7 +46,7 @@ public class KDS<T extends KDatabase> implements Function<KDS<T>, KDS<T>> {
         this.databaseDynamics.addAll(databases);
         if (VValue.ONE == databases.size()) {
             databases.stream().findFirst()
-                .ifPresent(dynamic -> this.database.put(EmDS.Stored.DYNAMIC, dynamic));
+                .ifPresent(dynamic -> this.database.put(EmDS.DB.DYNAMIC, dynamic));
         }
         return this;
     }
@@ -56,7 +56,7 @@ public class KDS<T extends KDatabase> implements Function<KDS<T>, KDS<T>> {
     }
 
     public T dynamic() {
-        return this.database.getOrDefault(EmDS.Stored.DYNAMIC, null);
+        return this.database.getOrDefault(EmDS.DB.DYNAMIC, null);
     }
 
     @Override

@@ -13,6 +13,7 @@ import java.io.Serializable;
  * endpoint: Major endpoint
  * config: Configuration Data of third part.
  */
+@Deprecated
 public class InfixConfig implements Serializable {
 
     private static final Cc<String, InfixConfig> CC_CACHE = Cc.open();

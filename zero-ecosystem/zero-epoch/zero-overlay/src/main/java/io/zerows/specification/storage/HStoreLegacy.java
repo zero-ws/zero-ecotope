@@ -113,9 +113,9 @@ public interface HStoreLegacy extends HContract {
          *     3. PgSQL
          * </code></pre>
          *
-         * @return {@link EmDS.Category}
+         * @return {@link EmDS.Database}
          */
-        EmDS.Category category();
+        EmDS.Database category();
 
         /**
          * 数据库实例

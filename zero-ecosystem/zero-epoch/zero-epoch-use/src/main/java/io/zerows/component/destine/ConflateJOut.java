@@ -3,7 +3,7 @@ package io.zerows.component.destine;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.metadata.KJoin;
 import io.zerows.epoch.metadata.KPoint;
-import io.zerows.platform.enums.EmPRI;
+import io.zerows.platform.enums.EmDS;
 import io.zerows.support.Ut;
 
 import java.util.Objects;
@@ -45,7 +45,7 @@ class ConflateJOut extends ConflateBase<JsonObject, JsonObject> {
 
         // 连接点数据
         final JsonObject combine = standJ.mergeIn(active, true);
-        if (EmPRI.Connect.PARENT_ACTIVE == this.joinRef.refer()) {
+        if (EmDS.Connect.PARENT_ACTIVE == this.joinRef.refer()) {
             // 这个代码只在父主表模式生效
             final JsonObject connected = this.procOutput(combine, identifier);
             combine.mergeIn(connected, true);

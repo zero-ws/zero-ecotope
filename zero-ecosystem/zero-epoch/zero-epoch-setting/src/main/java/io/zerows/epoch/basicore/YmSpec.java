@@ -198,7 +198,7 @@ import java.lang.reflect.Method;
  *           password:                                                      # 数据库连接密码
  *           instance:                                                      # ---> 💻️ Z_DBS_INSTANCE
  *           driver-class-name:                                             # 数据库驱动
- *           category:                                                      # 数据库类型 {@link EmDS.Category}, 默认 MYSQL
+ *           category:                                                      # 数据库类型 {@link EmDS.Database}, 默认 MYSQL
  *           hostname:                                                      # ---> 💻️ Z_DBS_HOST
  *           port:                                                          # ---> 💻️ Z_DBS_PORT
  *           options:                                                       # 其他特殊选项，如自动提交、事务配置等
@@ -208,7 +208,7 @@ import java.lang.reflect.Method;
  *           password:                                                      # 数据库连接密码
  *           instance:                                                      # ---> 💻️ Z_DBH_INSTANCE
  *           driver-class-name:                                             # 数据库驱动
- *           category:                                                      # 数据库类型 {@link EmDS.Category}, 默认 MYSQL
+ *           category:                                                      # 数据库类型 {@link EmDS.Database}, 默认 MYSQL
  *           hostname:                                                      # ---> 💻️ Z_DBH_HOST
  *           port:                                                          # ---> 💻️ Z_DBH_PORT
  *           options:                                                       # 其他特殊选项，如自动提交、事务配置等
@@ -218,7 +218,7 @@ import java.lang.reflect.Method;
  *           password:                                                      # 数据库连接密码
  *           instance:                                                      # ---> 💻️ Z_DBW_INSTANCE
  *           driver-class-name:                                             # 数据库驱动
- *           category:                                                      # 数据库类型 {@link EmDS.Category}, 默认 MYSQL
+ *           category:                                                      # 数据库类型 {@link EmDS.Database}, 默认 MYSQL
  *           hostname:                                                      # ---> 💻️ Z_DBW_HOST
  *           port:                                                          # ---> 💻️ Z_DBW_PORT
  *           options:                                                       # 其他特殊选项，如自动提交、事务配置等

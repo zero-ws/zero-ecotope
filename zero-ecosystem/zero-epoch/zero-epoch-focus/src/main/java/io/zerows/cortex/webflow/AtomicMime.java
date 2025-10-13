@@ -8,7 +8,7 @@ import io.zerows.component.log.LogOf;
 import io.zerows.cortex.metadata.WebEpsilon;
 import io.zerows.epoch.application.YmlCore;
 import io.zerows.management.OZeroStore;
-import io.zerows.platform.enums.EmMime;
+import io.zerows.platform.enums.EmWeb;
 import io.zerows.support.Ut;
 import jakarta.ws.rs.core.HttpHeaders;
 import jakarta.ws.rs.core.MediaType;
@@ -44,12 +44,12 @@ public class AtomicMime<T> implements Atomic<T> {
                                 final WebEpsilon<T> income)
         throws WebException {
         final WebEpsilon<T> epsilon;
-        if (EmMime.Flow.TYPED == income.getMime()) {
+        if (EmWeb.MimeParser.TYPED == income.getMime()) {
             /* Resolver **/
             final Atomic<T> atomic = CC_ATOMIC.pick(AtomicTyped::new, AtomicTyped.class.getName());
             // FnZero.po?lThread(POOL_ATOMIC, TypedAtomic::new, TypedAtomic.class.getName());
             epsilon = atomic.ingest(context, income);
-        } else if (EmMime.Flow.STANDARD == income.getMime()) {
+        } else if (EmWeb.MimeParser.STANDARD == income.getMime()) {
             /* System standard filler **/
             final Atomic<T> atomic = CC_ATOMIC.pick(AtomicStandard::new, AtomicStandard.class.getName());
             // FnZero.po?lThread(POOL_ATOMIC, StandardAtomic::new, StandardAtomic.class.getName());

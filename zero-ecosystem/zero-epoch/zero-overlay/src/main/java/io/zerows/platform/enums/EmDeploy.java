@@ -17,4 +17,9 @@ public final class EmDeploy {
         WORKER,         // Worker
         SCHEDULER,      // Scheduler
     }
+
+    public enum JoinPoint {
+        IPC,
+        QAS
+    }
 }

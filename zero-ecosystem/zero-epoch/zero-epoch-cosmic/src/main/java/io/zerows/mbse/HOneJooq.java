@@ -1,9 +1,9 @@
 package io.zerows.mbse;
 
 import io.vertx.core.MultiMap;
-import io.zerows.mbse.metadata.KModule;
 import io.zerows.epoch.database.cp.DS;
 import io.zerows.epoch.database.jooq.operation.UxJooq;
+import io.zerows.mbse.metadata.KModule;
 import io.zerows.platform.enums.EmDS;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
@@ -49,16 +49,16 @@ class HOneJooq implements HOne<UxJooq> {
 
 
         final UxJooq dao;
-        final EmDS.Stored mode = module.getMode();
-        if (EmDS.Stored.DYNAMIC == mode) {
+        final EmDS.DB mode = module.getMode();
+        if (EmDS.DB.DYNAMIC == mode) {
             dao = Ux.channelS(DS.class,
                 /* ---->「默认」`provider` 配置的标准数据源（Jooq专用）*/ () -> Ux.Jooq.on(daoCls),
                 /* 动态数据源定义，X_SOURCE，开启动态建模专用 */ ds -> Ux.Jooq.on(daoCls, ds.switchDs(headers))
             );
-        } else if (EmDS.Stored.HISTORY == mode) {
+        } else if (EmDS.DB.HISTORY == mode) {
             /* `orbit` 配置的历史数据源专用处理 */
             dao = Ux.Jooq.ons(daoCls);
-        } else if (EmDS.Stored.EXTENSION == mode) {
+        } else if (EmDS.DB.EXTENSION == mode) {
             /* 扩展数据源专用 */
             final String modeKey = module.getModeKey();
             if (Ut.isNil(modeKey)) {

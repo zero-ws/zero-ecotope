@@ -3,12 +3,12 @@ package io.zerows.extension.runtime.crud.uca.desk;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.web.Envelop;
-import io.zerows.epoch.metadata.KView;
 import io.zerows.epoch.metadata.KJoin;
 import io.zerows.epoch.metadata.KPoint;
+import io.zerows.epoch.metadata.KView;
+import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.runtime.crud.eon.em.ApiSpec;
-import io.zerows.platform.enums.EmPRI;
+import io.zerows.platform.enums.EmDS;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -122,7 +122,7 @@ public class IxRequest {
 
         // 第二优先级
         final KJoin join = this.active.connect();
-        if (Objects.nonNull(join) && EmPRI.Connect.PARENT_STANDBY == join.refer()) {
+        if (Objects.nonNull(join) && EmDS.Connect.PARENT_STANDBY == join.refer()) {
             // reference 的解析
             final KPoint point = join.getReference();
             module = Objects.isNull(point) ? null : point.indent();

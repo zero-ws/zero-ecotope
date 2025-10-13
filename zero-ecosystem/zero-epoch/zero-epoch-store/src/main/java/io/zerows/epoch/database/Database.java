@@ -63,7 +63,7 @@ public class Database extends KDatabase {
         if (Objects.isNull(DATABASE)) {
             final JsonObject configJ = OZeroStore.option(YmlCore.jooq.__KEY); // Database.VISITOR.read();
             final JsonObject jooq = Ut.valueJObject(configJ, YmlCore.jooq.PROVIDER);
-            DATABASE = configure(MatureOn.envDatabase(jooq, EmDS.Stored.PRIMARY));
+            DATABASE = configure(MatureOn.envDatabase(jooq, EmDS.DB.PRIMARY));
         }
         return DATABASE.copy();
     }
@@ -80,7 +80,7 @@ public class Database extends KDatabase {
     public static Database getHistory() {
         final JsonObject configJ = OZeroStore.option(YmlCore.jooq.__KEY); // Database.VISITOR.read();
         final JsonObject jooq = Ut.valueJObject(configJ, YmlCore.jooq.ORBIT);
-        return configure(MatureOn.envDatabase(jooq, EmDS.Stored.HISTORY));
+        return configure(MatureOn.envDatabase(jooq, EmDS.DB.HISTORY));
     }
 
     /**
@@ -94,7 +94,7 @@ public class Database extends KDatabase {
     public static Database getCamunda() {
         final JsonObject configJ = OZeroStore.option(YmlCore.jooq.__KEY);
         final JsonObject jooq = Ut.valueJObject(configJ, YmlCore.jooq.WORKFLOW);
-        return configure(MatureOn.envDatabase(jooq, EmDS.Stored.WORKFLOW));
+        return configure(MatureOn.envDatabase(jooq, EmDS.DB.WORKFLOW));
     }
 
     public static Database configure(final JsonObject databaseJ) {

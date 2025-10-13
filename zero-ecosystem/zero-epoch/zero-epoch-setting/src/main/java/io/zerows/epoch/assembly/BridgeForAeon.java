@@ -3,13 +3,15 @@ package io.zerows.epoch.assembly;
 import io.r2mo.function.Fn;
 import io.reactivex.rxjava3.core.Observable;
 import io.zerows.epoch.annotations.Address;
+import io.zerows.epoch.annotations.QaS;
+import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.assembly.exception._40012Exception500AddressWrong;
 import io.zerows.epoch.basicore.JointAction;
 import io.zerows.epoch.basicore.WebReceipt;
 import io.zerows.epoch.boot.Anno;
 import io.zerows.epoch.management.OCacheClass;
 import io.zerows.epoch.management.OCacheJoint;
-import io.zerows.platform.enums.EmAction;
+import io.zerows.platform.enums.EmDeploy;
 import io.zerows.platform.enums.VertxComponent;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
@@ -20,16 +22,18 @@ import java.util.Set;
 import java.util.TreeSet;
 
 /**
- * Aeon 桥，用于桥接 Zero / Aeon 容器
+ * Aeon 桥，用于桥接 Zero / Aeon 容器，可直接使用不同注解处理
+ * <pre>
+ *     1. {@link Queue}  -> Zero Container Worker
+ *     2. {@link QaS} -> Aeon Container Worker
+ *     3. @Address 注解扫描
+ * </pre>
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 @Slf4j
 public class BridgeForAeon {
 
-    private static final String ADDRESS_IN = "Vert.x zero has found {0} " +
-        "incoming address from the system. Incoming address list as below: ";
-    private static final String ADDRESS_ITEM = "       Addr : {0}";
     private static final Set<String> ADDRESS = new TreeSet<>();
 
     static {
@@ -65,7 +69,7 @@ public class BridgeForAeon {
 
 
         // 访问已扫描缓存
-        final JointAction action = OCacheJoint.entireJoint().get(EmAction.JoinPoint.QAS);
+        final JointAction action = OCacheJoint.entireJoint().get(EmDeploy.JoinPoint.QAS);
         final Method replaced = action.get(address);
 
 
@@ -74,12 +78,10 @@ public class BridgeForAeon {
         if (Objects.isNull(replaced)) {
             // Zero Workflow
             receipt.setMethod(method);
-            //            final Object proxy = PLUGIN.createComponent(clazz);
             receipt.setProxy(clazz);
         } else {
             // Aeon Workflow
             receipt.setMethod(replaced);
-            //            final Object proxy = PLUGIN.createComponent(replaced.getDeclaringClass());
             receipt.setProxy(replaced.getDeclaringClass());
         }
         return receipt;
