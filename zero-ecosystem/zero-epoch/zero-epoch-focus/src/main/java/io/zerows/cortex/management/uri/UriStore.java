@@ -7,7 +7,6 @@ import io.zerows.epoch.basicore.WebReceipt;
 import io.zerows.epoch.management.OCacheActor;
 import io.zerows.support.Ut;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -53,12 +52,12 @@ class UriStore {
              * Get Address
              */
             final Method method = event.getAction();
-            final Annotation annotation = method.getDeclaredAnnotation(Address.class);
+            final Address annotation = method.getDeclaredAnnotation(Address.class);
             if (Objects.nonNull(annotation)) {
                 /*
                  * Worker Address Injection
                  */
-                final String address = Ut.invoke(annotation, "get");
+                final String address = annotation.value();
                 if (Objects.nonNull(address) && receiptMap.containsKey(address)) {
                     /*
                      * Worker Build

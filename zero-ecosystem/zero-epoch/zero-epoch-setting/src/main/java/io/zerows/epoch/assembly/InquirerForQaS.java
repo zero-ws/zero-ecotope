@@ -2,11 +2,9 @@ package io.zerows.epoch.assembly;
 
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.QaS;
-import io.zerows.platform.metadata.KRunner;
 import io.zerows.epoch.configuration.Inquirer;
-import io.zerows.support.Ut;
+import io.zerows.platform.metadata.KRunner;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Arrays;
@@ -43,8 +41,8 @@ public class InquirerForQaS implements Inquirer<ConcurrentMap<String, Method>> {
             .filter(this::isValid)
             .filter(method -> method.isAnnotationPresent(Address.class))
             .forEach(method -> {
-                final Annotation address = method.getAnnotation(Address.class);
-                final String value = Ut.invoke(address, "get");
+                final Address address = method.getAnnotation(Address.class);
+                final String value = address.value();
                 result.put(value, method);
             });
         return result;

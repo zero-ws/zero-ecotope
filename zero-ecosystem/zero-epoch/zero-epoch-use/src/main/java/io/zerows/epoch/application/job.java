@@ -5,7 +5,7 @@ package io.zerows.epoch.application;
  */
 interface YmlJob {
     String __KEY = "job";
-    String STORE = "get";
+    String STORE = "store";
     String CLIENT = "client";
     String INTERVAL = "interval";
 

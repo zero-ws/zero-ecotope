@@ -12,8 +12,8 @@ import io.vertx.ext.web.RoutingContext;
 import io.zerows.epoch.annotations.security.AuthorizedResource;
 import io.zerows.epoch.metadata.security.Aegis;
 import io.zerows.platform.enums.EmSecure;
-import io.zerows.support.Ut;
 import io.zerows.plugins.common.security.profile.PermissionAuthorization;
+import io.zerows.support.Ut;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -56,7 +56,7 @@ public class AuthorizationResourceImpl implements AuthorizationResource {
     @SuppressWarnings("all")
     private Authorization getResource(final Object item, final Method method) {
         final Annotation annotation = method.getAnnotation(AuthorizedResource.class);
-        final EmSecure.AuthWord word = Ut.invoke(annotation, "get");
+        final EmSecure.AuthWord word = Ut.invoke(annotation, "value");
         final Authorization required;
         if (item instanceof Set) {
             final Set<String> set = (Set<String>) item;

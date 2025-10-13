@@ -70,7 +70,7 @@ public class InquirerWall implements Inquirer<Set<Aegis>> {
         this.verifyProxy(clazz, aegis);
 
         final Annotation annotation = clazz.getAnnotation(Wall.class);
-        final String typeKey = Ut.invoke(annotation, "get");
+        final String typeKey = Ut.invoke(annotation, "value");
         this.verifyConfig(clazz, aegis, typeKey);
         aegis.setPath(Ut.invoke(annotation, "path"));
 

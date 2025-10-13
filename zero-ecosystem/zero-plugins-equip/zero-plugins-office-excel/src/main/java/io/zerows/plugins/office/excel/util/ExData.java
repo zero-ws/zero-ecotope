@@ -5,10 +5,10 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.constant.VValue;
-import io.zerows.support.Ut;
 import io.zerows.plugins.office.excel.atom.ExKey;
 import io.zerows.plugins.office.excel.atom.ExPos;
 import io.zerows.specification.modeling.metadata.HMetaAtom;
+import io.zerows.support.Ut;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
@@ -128,11 +128,11 @@ class ExData {
              * {
              *      "cols": "xx",
              *      "rows": "xxx",
-             *      "get": ""
+             *      "value": ""
              * }
              */
             final JsonObject define = (JsonObject) value;
-            final Object input = define.getValue("get");
+            final Object input = define.getValue("value");
             /*
              * Processing `cols`, `rows`
              */

@@ -217,7 +217,7 @@ class UJson {
             if (Map.class.isAssignableFrom(value.getClass())) {
                 /*
                  * Map 类型直接转换成 Map来处理，包括 ConcurrentMap，不这样处理出来的最终结果
-                 * 可能导致 JsonObject 为 {} 而不是 { "key": "get" }
+                 * 可能导致 JsonObject 为 {} 而不是 { "key": "value" }
                  */
                 result.mergeIn(toJObject((Map<String, Object>) value), true);
             } else if (isJObject(value)) {

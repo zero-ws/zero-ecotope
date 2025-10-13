@@ -25,7 +25,7 @@ class ArkConfigure extends AbstractArk {
      * 该方法会提取应用存储专用的配置信息，该配置信息会被存储到 B_BLOCK 表中，开发中心可修订
      * 配置程序，如：
      * {
-     *     "get": "mXXX"
+     *     "value": "mXXX"
      * }
      * 格式，最终使用时用
      * mXXX = configuration

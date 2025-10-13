@@ -5,13 +5,15 @@ import io.zerows.cortex.metadata.WebRule;
 import io.zerows.platform.constant.VValue;
 
 /**
- * {
- * "type":"minlength",
- * "message":"xxx",
- * "config":{
- * "get":8
- * }
- * }
+ * <pre>
+ *  {
+ *      "type":"minlength",
+ *      "message":"xxx",
+ *      "config":{
+ *          "value":8
+ *      }
+ *  }
+ * </pre>
  */
 class RulerMinLength extends RulerBase {
 

@@ -64,7 +64,7 @@ class ActJArray extends ActMapping implements Serializable {
                     /*
                      * Common Style
                      * {
-                     *      "field": "get",
+                     *      "field": "value",
                      *      "$$__BODY__$$": "body"
                      * }
                      */

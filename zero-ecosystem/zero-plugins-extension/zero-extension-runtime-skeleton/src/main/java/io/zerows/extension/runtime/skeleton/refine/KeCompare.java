@@ -259,14 +259,14 @@ class KeCompare {
         final JsonObject itemString = new JsonObject();
         itemString.put("rows", row);
         itemString.put("cols", 0);
-        itemString.put("get", item);
+        itemString.put("value", item);
         return itemString;
     }
 
     private static JsonObject itemColumn(final Object item, final int column) {
         final JsonObject itemString = new JsonObject();
         itemString.put("cols", column);
-        itemString.put("get", item);
+        itemString.put("value", item);
         itemString.put("rows", 0);
         return itemString;
     }

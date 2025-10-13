@@ -3,9 +3,9 @@ package io.zerows.extension.runtime.workflow.atom.runtime;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.vertx.core.json.JsonObject;
-import io.zerows.platform.constant.VString;
 import io.zerows.integrated.jackson.JsonObjectDeserializer;
 import io.zerows.integrated.jackson.JsonObjectSerializer;
+import io.zerows.platform.constant.VString;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -14,7 +14,7 @@ import java.util.Objects;
  * <pre><code>
  *     {
  *         "field": "xxx",
- *         "get": xxx,
+ *         "value": xxx,
  *         "record": {
  *             "field1": "value1",
  *             "field2": "value2"

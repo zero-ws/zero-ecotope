@@ -50,7 +50,7 @@ public class InquirerForFilter implements Inquirer<ConcurrentMap<String, Set<Web
     private void extract(final ConcurrentMap<String, Set<WebEvent>> map,
                          final Class<?> clazz) {
         final Annotation annotation = clazz.getAnnotation(WebFilter.class);
-        final String[] pathes = Ut.invoke(annotation, "get");
+        final String[] pathes = Ut.invoke(annotation, "value");
         // Multi pathes supported
         for (final String path : pathes) {
             final WebEvent event = this.extract(path, clazz);
@@ -71,7 +71,7 @@ public class InquirerForFilter implements Inquirer<ConcurrentMap<String, Set<Web
         final Annotation annotation = clazz.getAnnotation(Ordered.class);
         int order = KWeb.ORDER.FILTER;
         if (null != annotation) {
-            final Integer setted = Ut.invoke(annotation, "get");
+            final Integer setted = Ut.invoke(annotation, "value");
             // Order specification
             Fn.jvmKo(setted < 0, _40053Exception500FilterOrder.class, clazz);
             order = order + setted;

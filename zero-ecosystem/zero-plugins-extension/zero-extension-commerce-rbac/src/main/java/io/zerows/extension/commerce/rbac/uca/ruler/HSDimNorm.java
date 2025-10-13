@@ -4,12 +4,12 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.metadata.security.KPermit;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.constant.VValue;
-import io.zerows.epoch.metadata.security.KPermit;
+import io.zerows.sdk.security.AbstractAdmit;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
-import io.zerows.sdk.security.AbstractAdmit;
 
 import java.util.Objects;
 
@@ -32,7 +32,7 @@ public class HSDimNorm extends AbstractAdmit {
                      *     "items": {
                      *         "source": "字典名称",
                      *         "label":  "显示字段名",
-                     *         "get":  "值字段名",
+                     *         "value":  "值字段名",
                      *         "key":    "键字段名"
                      *     }
                      * }

@@ -54,7 +54,7 @@ public class AdmitValve extends AbstractValve {
      *          "ui":  "ui -> webComponent",
      *          "key":   "input -> key",
      *          "label": "input -> name",
-     *          "get": "input -> code",
+     *          "value": "input -> code",
      *          "datum":  "input"
      *     }
      * }

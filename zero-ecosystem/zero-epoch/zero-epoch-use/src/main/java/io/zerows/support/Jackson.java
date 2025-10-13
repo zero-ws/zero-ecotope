@@ -3,8 +3,8 @@ package io.zerows.support;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.constant.KName;
 import io.zerows.component.log.LogO;
+import io.zerows.epoch.constant.KName;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.constant.VValue;
 import io.zerows.platform.enums.typed.ChangeFlag;
@@ -209,7 +209,7 @@ final class Jackson {
                 final String fieldName;
                 if (item.isAnnotationPresent(JsonProperty.class)) {
                     final Annotation annotation = item.getAnnotation(JsonProperty.class);
-                    fieldName = Ut.invoke(annotation, "get");
+                    fieldName = Ut.invoke(annotation, "value");
                 } else {
                     fieldName = item.getName();
                 }

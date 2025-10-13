@@ -99,7 +99,7 @@ public class DocBuilder implements DocBStub {
         /*
          * The configuration data came from `treeConfig`, combine the configuration information attached into
          * {
-         *      "get": {
+         *      "value": {
          *          "storePath": "",
          *          "runComponent": "Default `Fs` interface component that will be stored into I_DIRECTORY",
          *          "initialize": {

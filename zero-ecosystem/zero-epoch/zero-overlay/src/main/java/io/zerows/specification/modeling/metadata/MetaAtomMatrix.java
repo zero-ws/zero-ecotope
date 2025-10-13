@@ -105,7 +105,7 @@ class MetaAtomMatrix {
          * 如果是非 JsonObject 类型，则将 input 转换成 String 处理
          */
         if (input instanceof JsonObject) {
-            return ((JsonObject) input).getString("get");
+            return ((JsonObject) input).getString("value");
         } else {
             return (String) input;
         }

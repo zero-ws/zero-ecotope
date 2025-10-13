@@ -34,25 +34,6 @@ class DiInfix {
             return proxy;
         }
         final Class<?> type = proxy.getClass();
-        //        Observable.fromArray(type.getDeclaredFields())
-        //            .filter(field -> field.isAnnotationPresent(Infusion.class))
-        //            .subscribe(field -> {
-        //                final Class<?> fieldType = field.getType();
-        //                final Class<?> infixCls = INFUSION.get(fieldType);
-        //                if (null != infixCls) {
-        //                    if (Ut.isImplement(infixCls, Infix.class)) {
-        //                        final Infix reference = Ut.singleton(infixCls);
-        //                        final Object tpRef = Ut.invoke(reference, "get");
-        //                        final String fieldName = field.getName();
-        //                        Ut.field(proxy, fieldName, tpRef);
-        //                    } else {
-        //                        this.logger.warn(IMPL_WRONG, infixCls.getName(), Infix.class.getName());
-        //                    }
-        //                } else {
-        //                    this.logger.warn(IMPL_NULL, field.getType().getName(), field.getName(), type.getName());
-        //                }
-        //            })
-        //            .dispose();
         return proxy;
     }
 }

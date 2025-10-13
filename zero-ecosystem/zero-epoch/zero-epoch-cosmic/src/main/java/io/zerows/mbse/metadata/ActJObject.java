@@ -73,7 +73,7 @@ class ActJObject extends ActMapping implements Serializable {
                     /*
                      * Common style
                      * {
-                     *      "field": "get",
+                     *      "field": "value",
                      *      "$$__BODY__$$": "body"
                      * }
                      */

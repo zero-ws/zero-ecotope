@@ -62,7 +62,7 @@ public class IncomeEpsilon implements Income<List<WebEpsilon<Object>>> {
         if (Filler.NO_VALUE.contains(annotation.annotationType())) {
             return KWeb.ARGS.MIME_DIRECT;
         }
-        return Ut.invoke(annotation, "get");
+        return Ut.invoke(annotation, "value");
     }
 
     private Annotation getAnnotation(final Annotation[] annotations) {
@@ -82,6 +82,6 @@ public class IncomeEpsilon implements Income<List<WebEpsilon<Object>>> {
         }
         final Annotation annotation = annotationList.get(VValue.IDX);
         return ZeroType.value(paramType,
-            Ut.invoke(annotation, "get"));
+            Ut.invoke(annotation, "value"));
     }
 }
