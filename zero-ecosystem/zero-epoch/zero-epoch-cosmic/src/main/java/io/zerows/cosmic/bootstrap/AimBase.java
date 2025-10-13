@@ -26,7 +26,6 @@ import io.zerows.support.Ut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Map;
@@ -40,9 +39,7 @@ public abstract class AimBase {
     private static final Cc<String, ValidatorEntry> CC_VALIDATOR = Cc.openThread();
 
     private transient final Analyzer analyzer = CC_ANALYZER.pick(AnalyzerMedia::new, AnalyzerMedia.class.getName());
-    // FnZero.po?lThread(POOL_ANALYZER, MediaAnalyzer::new, MediaAnalyzer.class.getName());
     private transient final ValidatorEntry verifier = CC_VALIDATOR.pick(ValidatorEntry::new);
-    // FnZero.po?lThread(POOL_VALIDATOR, Validator::new);
 
     /**
      * Template method
@@ -59,7 +56,6 @@ public abstract class AimBase {
             cached = this.analyzer.in(context, event);
             context.put(KWeb.ARGS.REQUEST_CACHED, cached);
         }
-        // Validation handler has been getNull the parameters.
         return cached;
     }
 
@@ -73,8 +69,8 @@ public abstract class AimBase {
      */
     protected String address(final WebEvent event) {
         final Method method = event.getAction();
-        final Annotation annotation = method.getDeclaredAnnotation(Address.class);
-        return Ut.invoke(annotation, "get");
+        final Address annotation = method.getDeclaredAnnotation(Address.class);
+        return annotation.value();
     }
 
     /**
@@ -85,8 +81,8 @@ public abstract class AimBase {
      */
     protected Object invoke(final WebEvent event, final Object[] args) {
         final Method method = event.getAction();
-        this.logger().info("[ ZERO ] Class = {}, Method = {}, Args = {}",
-            method.getName(), Ut.fromJoin(args), method.getDeclaringClass().getName());
+        this.logger().info("[ ZERO ] 方法 = {}, 类 = {}, 参数 = {}",
+            method.getName(), method.getDeclaringClass().getName(), Ut.fromJoin(args));
         return InvokerUtil.invoke(event.getProxy(), method, args);
     }
 

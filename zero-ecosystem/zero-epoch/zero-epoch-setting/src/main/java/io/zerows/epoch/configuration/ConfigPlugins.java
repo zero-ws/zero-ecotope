@@ -40,4 +40,12 @@ public class ConfigPlugins extends ConfigNorm {
     public Set<HConfig> plugin() {
         return new ConcurrentHashSet<>(this.pluginMap.values());
     }
+
+    public HConfig pluginOne(final Class<?> interfaceCls) {
+        return this.pluginMap.keySet().stream()
+            .filter(interfaceCls::isAssignableFrom)
+            .map(this.pluginMap::get)
+            .filter(Objects::nonNull)
+            .findAny().orElse(null);
+    }
 }

@@ -67,7 +67,7 @@ public class ValidatorBundleLocator implements ResourceBundleLocator {
                 }
             }
         } catch (final Throwable var5) {
-            log.info("[ ZERO ] " + Messages.MESSAGES.unableToUseResourceBundleAggregation());
+            log.info("[ ZERO ] Validator 异常：" + Messages.MESSAGES.unableToUseResourceBundleAggregation());
             return false;
         }
     }

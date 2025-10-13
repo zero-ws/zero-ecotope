@@ -46,7 +46,7 @@ public class ZeroPlugins {
             + options.hashCode();                                       // 配置维度
         return (T) CC_PLUGIN.pick(() -> {
             final T instance = SourceReflect.instance(implCls);
-            return (T) instance.bind(options);
+            return instance.bind(options);
         }, cacheKey);
     }
 }

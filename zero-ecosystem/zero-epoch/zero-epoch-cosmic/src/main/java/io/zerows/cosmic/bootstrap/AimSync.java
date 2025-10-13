@@ -6,10 +6,12 @@ import io.vertx.ext.web.RoutingContext;
 import io.zerows.cortex.sdk.Aim;
 import io.zerows.epoch.basicore.WebEvent;
 import io.zerows.epoch.web.Envelop;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * SyncAim: Non-Event Bus: Request-Response
  */
+@Slf4j
 public class AimSync extends AimBase implements Aim<RoutingContext> {
     @Override
     public Handler<RoutingContext> attack(final WebEvent event) {
@@ -41,6 +43,12 @@ public class AimSync extends AimBase implements Aim<RoutingContext> {
                          * Reply future result directly here.
                          */
                         AckFlow.reply(context, dataRes.result(), event);
+                    } else {
+                        /*
+                         * Reply error here
+                         */
+                        log.error("[ ZERO ] 调用异常：", dataRes.cause());
+                        AckFlow.reply(context, Envelop.failure(dataRes.cause()));
                     }
                 });
             } catch (final Throwable ex) {

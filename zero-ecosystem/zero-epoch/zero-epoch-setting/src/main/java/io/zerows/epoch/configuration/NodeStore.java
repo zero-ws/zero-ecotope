@@ -7,7 +7,6 @@ import io.zerows.platform.enums.EmApp;
 import io.zerows.platform.metadata.MultiKeyMap;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HSetting;
-import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
@@ -119,15 +118,7 @@ public class NodeStore {
             .map(setting -> setting.extension("plugins"))
             .filter(plugins -> plugins instanceof ConfigPlugins)
             .map(plugins -> (ConfigPlugins) plugins)
-            .filter(configPlugins -> {
-                if (Ut.isImplement(configPlugins.executor(), interfaceCls)) {
-                    return true;
-                } else {
-                    log.warn("[ ZERO ] 无法找到实现了接口 {} 的插件实现类！", interfaceCls.getName());
-                    return false;
-                }
-            })
-            .map(configPlugins -> configPlugins.plugin(interfaceCls))
+            .map(plugins -> plugins.pluginOne(interfaceCls))
             .orElse(null);
     }
 }
