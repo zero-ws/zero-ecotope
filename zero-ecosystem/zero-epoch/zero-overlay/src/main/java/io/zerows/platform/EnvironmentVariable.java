@@ -129,20 +129,16 @@ public interface EnvironmentVariable {
     String SOCK_SSL = "Z_SOCK_SSL";
 
     // 数据库端口号/主机
-    String DBS_PORT = "Z_DBS_PORT";
-    String DBS_HOST = "Z_DBS_HOST";
     String DBS_INSTANCE = "Z_DBS_INSTANCE";
 
     // 工作流数据库端口号/主机
-    String DBW_PORT = "Z_DBW_PORT";
-    String DBW_HOST = "Z_DBW_HOST";
     String DBW_INSTANCE = "Z_DBW_INSTANCE";
 
     // 历史数据库端口号/主机
-    String DBH_PORT = "Z_DBH_PORT";
-    String DBH_HOST = "Z_DBH_HOST";
     String DBH_INSTANCE = "Z_DBH_INSTANCE";
 
+    String DB_HOST = "Z_DB_HOST";               // 统一数据库主机
+    String DB_PORT = "Z_DB_PORT";               // 统一数据库端口
     String DB_USERNAME = "Z_DB_USERNAME";
     String DB_PASSWORD = "Z_DB_PASSWORD";
     // 数据库在三个库中的账号和密码必须相同，此处三个库并非 App 的数据库，而是 Cloud 专用的三库
@@ -189,16 +185,15 @@ public interface EnvironmentVariable {
         // 通用配置变量
         R2MO_HOME, R2MO_NS_CLOUD, R2MO_NS_APP,
         R2MO_NACOS_ADDR, R2MO_NACOS_USERNAME, R2MO_NACOS_PASSWORD,
-        Z_TENANT, Z_APP, Z_ENV, Z_SIGMA,
-        Z_NS, Z_LANG,
+        R2MO_REDIS_HOST, R2MO_REDIS_PORT, R2MO_REDIS_DATABASE, R2MO_REDIS_PASSWORD,
+        // 应用一阶变量
+        Z_NS, Z_APP, Z_TENANT, Z_LANG, Z_SIGMA,
         // 文档服务器变量
         Z_DOC_SECRET, Z_DOC_HOST, Z_DOC_PORT,
         // 集成存储变量
         SIS_STORE, SIS_SCHEME, SIS_HOST, SIS_PORT, SIS_USERNAME, SIS_PASSWORD,
         // 云端变量
         AEON_CLOUD, AEON_APP,
-        // 应用一阶变量
-        Z_NS, Z_APP, Z_LANG, Z_SIGMA,
         // 跨域
         CORS_DOMAIN,
         // RESTful
@@ -206,11 +201,7 @@ public interface EnvironmentVariable {
         // Sock
         SOCK_HOST, SOCK_PORT, SOCK_SSL,
         // DB Service
-        DBS_HOST, DBS_PORT, DBS_INSTANCE,
-        // DB Workflow
-        DBW_HOST, DBW_PORT, DBW_INSTANCE,
-        // DB History
-        DBH_HOST, DBH_PORT, DBH_INSTANCE,
+        DBS_INSTANCE, DBW_INSTANCE, DBH_INSTANCE,
         // 数据库账号密码
         DB_USERNAME, DB_PASSWORD
     };

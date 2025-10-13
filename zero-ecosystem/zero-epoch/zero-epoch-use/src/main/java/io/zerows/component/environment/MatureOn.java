@@ -67,13 +67,13 @@ public class MatureOn implements EnvironmentVariable {
         final MMVariable.Set set;
         if (EmDS.Stored.WORKFLOW == mode) {
             // Workflow
-            set = envDatabase(EnvironmentVariable.DBW_HOST, EnvironmentVariable.DBW_PORT, EnvironmentVariable.DBW_INSTANCE);
+            set = envDatabase(EnvironmentVariable.DB_HOST, EnvironmentVariable.DB_PORT, EnvironmentVariable.DBW_INSTANCE);
         } else if (EmDS.Stored.HISTORY == mode) {
             // History
-            set = envDatabase(EnvironmentVariable.DBH_HOST, EnvironmentVariable.DBH_PORT, EnvironmentVariable.DBH_INSTANCE);
+            set = envDatabase(EnvironmentVariable.DB_HOST, EnvironmentVariable.DB_PORT, EnvironmentVariable.DBH_INSTANCE);
         } else {
             // Database
-            set = envDatabase(EnvironmentVariable.DBS_HOST, EnvironmentVariable.DBS_PORT, EnvironmentVariable.DBS_INSTANCE);
+            set = envDatabase(EnvironmentVariable.DB_HOST, EnvironmentVariable.DB_PORT, EnvironmentVariable.DBS_INSTANCE);
         }
         // 创建拷贝
         final JsonObject databaseJ = Ut.valueJObject(database, true);
