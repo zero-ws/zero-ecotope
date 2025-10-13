@@ -3,7 +3,7 @@ package io.zerows.extension.mbse.action.uca.aim;
 import io.vertx.core.Handler;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.cosmic.bootstrap.AimAnswer;
+import io.zerows.cosmic.bootstrap.AckFlow;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.mbse.action.atom.JtUri;
 import io.zerows.extension.mbse.action.uca.monitor.JtMonitor;
@@ -20,14 +20,14 @@ public class EngineAim implements JtAim {
             /*
              * Async log information in this step
              */
-            final Envelop request = AimAnswer.previous(context);
+            final Envelop request = AckFlow.previous(context);
             final JsonObject data = request.data();
             this.monitor.aimEngine(uri.method(), uri.path(), data);
             /*
              * Next step
              * Resolution for next step data stored into envelop
              */
-            AimAnswer.next(context, request);
+            AckFlow.next(context, request);
         };
     }
 }

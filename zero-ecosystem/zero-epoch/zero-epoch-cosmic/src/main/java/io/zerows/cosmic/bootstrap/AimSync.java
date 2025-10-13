@@ -30,7 +30,7 @@ public class AimSync extends AimBase implements Aim<RoutingContext> {
                 /*
                  * Data handler to process Flower next result here.
                  */
-                final Future<Envelop> future = AimFlower.next(context, result);
+                final Future<Envelop> future = AckThen.next(context, result);
                 future.onComplete(dataRes -> {
                     /*
                      * To avoid null dot result when the handler triggered result here
@@ -40,7 +40,7 @@ public class AimSync extends AimBase implements Aim<RoutingContext> {
                         /*
                          * Reply future result directly here.
                          */
-                        AimAnswer.reply(context, dataRes.result(), event);
+                        AckFlow.reply(context, dataRes.result(), event);
                     }
                 });
             } catch (final Throwable ex) {
@@ -48,7 +48,7 @@ public class AimSync extends AimBase implements Aim<RoutingContext> {
                  * Reply error here
                  */
                 final Envelop envelop = Envelop.failure(ex);
-                AimAnswer.reply(context, envelop);
+                AckFlow.reply(context, envelop);
             }
 
         }, context, event);

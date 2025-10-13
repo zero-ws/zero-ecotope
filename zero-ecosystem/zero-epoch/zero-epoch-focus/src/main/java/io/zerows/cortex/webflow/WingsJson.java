@@ -1,16 +1,24 @@
 package io.zerows.cortex.webflow;
 
+import io.r2mo.spi.SPI;
+import io.r2mo.typed.webflow.WebState;
+import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpServerResponse;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.platform.constant.VString;
-import io.zerows.platform.enums.app.HttpStatusCode;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
-public class WingsJson extends WingsBase {
+@Slf4j
+class WingsJson extends WingsBase {
+    WingsJson(final Vertx vertxRef) {
+        super(vertxRef);
+    }
+
     @Override
     public void output(final HttpServerResponse response, final Envelop envelop) {
         if (this.isFreedom()) {
@@ -19,14 +27,16 @@ public class WingsJson extends WingsBase {
                 /*
                  * No Content automatic
                  */
-                response.setStatusCode(HttpStatusCode.NO_CONTENT.code());
-                response.setStatusMessage(HttpStatusCode.NO_CONTENT.message());
+                final WebState state = SPI.V_STATUS.ok204();
+                response.setStatusCode(state.state());
+                response.setStatusMessage(state.name());
+                response.end(VString.EMPTY);
                 response.end(VString.EMPTY);
             } else {
                 /*
                  * Freedom successful
                  */
-                this.logger().info("Freedom mode enabled successfully.");
+                log.info("[ ZERO ] Freedom 模式已启用 successfully.");
                 response.end(content);
             }
         } else {

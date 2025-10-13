@@ -27,13 +27,7 @@ public class ConfigPlugins extends ConfigNorm {
             final Class<?> pluginCls = SourceReflect.clazz(name);
             if (Objects.nonNull(pluginCls)) {
                 final JsonObject options = Ut.valueJObject(pluginsJ, name);
-                final Class<?>[] interfaceCls = pluginCls.getInterfaces();
-                if (1 < interfaceCls.length) {
-                    log.warn("[ ZERO ] 插件 {} 的定义有误，跳过！", name);
-                }
-                if (1 == interfaceCls.length) {
-                    this.pluginMap.put(interfaceCls[0], new ConfigNorm().putOptions(options).putExecutor(pluginCls));
-                }
+                this.pluginMap.put(pluginCls, new ConfigNorm().putOptions(options).putExecutor(pluginCls));
             }
         });
         return this;

@@ -3,7 +3,7 @@ package io.zerows.cosmic.handler;
 import io.r2mo.typed.exception.WebException;
 import io.vertx.core.Handler;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.cosmic.bootstrap.AimAnswer;
+import io.zerows.cosmic.bootstrap.AckFlow;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.program.Ux;
 import lombok.extern.slf4j.Slf4j;
@@ -31,12 +31,12 @@ public class EndurerAuthenticate implements Handler<RoutingContext> {
                  * XHeader bind
                  */
                 Ux.debug(error, () -> error);
-                AimAnswer.reply(event, Envelop.failure(error));
+                AckFlow.reply(event, Envelop.failure(error));
             } else {
                 // Other exception found
                 log.info("[ ZERO ] Exception: {} = {}", ex.getClass().getName(), ex.getMessage());
                 ex.printStackTrace();
-                AimAnswer.reply(event, Envelop.failure(ex));
+                AckFlow.reply(event, Envelop.failure(ex));
             }
         } else {
             // Success, do not throw, continue to request

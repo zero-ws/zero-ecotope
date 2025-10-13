@@ -7,9 +7,9 @@ import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.cosmic.bootstrap.ActionNext;
-import io.zerows.cosmic.bootstrap.AimAnswer;
+import io.zerows.cosmic.bootstrap.AckFlow;
 import io.zerows.cosmic.bootstrap.Ambit;
+import io.zerows.cosmic.bootstrap.AmbitNext;
 import io.zerows.epoch.configuration.NodeStore;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.mbse.action.atom.JtUri;
@@ -31,7 +31,7 @@ public class SendAim implements JtAim {
             /*
              * 「Request LifeCycle Cycle」
              */
-            final Envelop request = AimAnswer.previous(context);
+            final Envelop request = AckFlow.previous(context);
             /*
              * Set id here, consumer will extract api data in worker
              */
@@ -39,7 +39,7 @@ public class SendAim implements JtAim {
             /*
              * Mount the same extension / plug-in in web request
              */
-            Ambit.of(ActionNext.class).then(context, request).onComplete(res -> {
+            Ambit.of(AmbitNext.class).then(context, request).onComplete(res -> {
                 if (res.succeeded()) {
                     final Envelop normalized = res.result();
                     final JsonObject data = normalized.data();
@@ -59,13 +59,13 @@ public class SendAim implements JtAim {
                              * 「Success」
                              */
                             final Message<Envelop> result = handler.result();
-                            AimAnswer.reply(context, result.body(), uri::producesMime);
+                            AckFlow.reply(context, result.body(), uri::producesMime);
                         } else {
                             /*
                              * 「Failure」
                              */
                             final Envelop error = Envelop.failure(handler.cause());
-                            AimAnswer.reply(context, error);
+                            AckFlow.reply(context, error);
                         }
                     });
                 } else {

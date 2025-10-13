@@ -35,7 +35,7 @@ public class ZeroPlugins {
 
     @SuppressWarnings("unchecked")
     public <T extends HPlug> T createPlugin(final Class<?> interfaceCls) {
-        final HConfig config = NodeStore.ofPlugin(this.vertxRef, interfaceCls);
+        final HConfig config = NodeStore.findPlugin(this.vertxRef, interfaceCls);
         if (Objects.isNull(config)) {
             return null;
         }

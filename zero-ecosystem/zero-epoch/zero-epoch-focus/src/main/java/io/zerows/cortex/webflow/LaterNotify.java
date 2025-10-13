@@ -5,6 +5,7 @@ import io.vertx.ext.web.RoutingContext;
 import io.zerows.epoch.annotations.Off;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -16,6 +17,7 @@ import java.util.Set;
 /**
  * @author lang : 2024-04-04
  */
+@Slf4j
 final class LaterNotify extends LaterBase<Envelop> {
 
     LaterNotify(final RoutingContext context) {
@@ -46,7 +48,7 @@ final class LaterNotify extends LaterBase<Envelop> {
 
         final EventBus eventBus = this.eventbus();
         addrList.forEach(addr -> {
-            this.logger().info("[ Zero ] Broadcasting to address = {0} by method {1}", addr, hooker.getName());
+            log.info("[ ZERO ] \uD83D\uDCE3 广播消息 -> address = {} by method {}", addr, hooker.getName());
             eventBus.publish(addr, message);
         });
     }

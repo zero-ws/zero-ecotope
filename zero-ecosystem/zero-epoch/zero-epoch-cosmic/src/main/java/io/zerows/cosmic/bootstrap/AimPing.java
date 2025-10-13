@@ -28,7 +28,7 @@ public class AimPing extends AimBase implements Aim<RoutingContext> {
                 data = Envelop.success(Boolean.TRUE);
             }
             // 4. Process modal
-            AimAnswer.reply(context, data, event);
+            AckFlow.reply(context, data, event);
         }, context, event);
     }
 }

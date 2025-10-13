@@ -1,11 +1,12 @@
 package io.zerows.cortex.webflow;
 
+import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.LogOf;
-import io.zerows.epoch.application.YmlCore;
+import io.zerows.epoch.basicore.YmSpec;
+import io.zerows.epoch.configuration.NodeStore;
 import io.zerows.epoch.web.Envelop;
-import io.zerows.management.OZeroStore;
-import io.zerows.specification.configuration.HSetting;
+import io.zerows.platform.enums.EmApp;
+import io.zerows.specification.configuration.HConfig;
 import io.zerows.support.Ut;
 
 import java.util.Objects;
@@ -15,10 +16,26 @@ import java.util.Objects;
  */
 public abstract class WingsBase implements Wings {
 
+    private final Vertx vertxRef;
+    private HConfig mvcConfig;
+
+    WingsBase(final Vertx vertxRef) {
+        this.vertxRef = vertxRef;
+    }
+
+    protected HConfig mvcConfig() {
+        if (Objects.isNull(this.mvcConfig)) {
+            this.mvcConfig = NodeStore.findInfix(this.vertxRef, EmApp.Native.MVC);
+        }
+        return this.mvcConfig;
+    }
+
     protected boolean isFreedom() {
-        final HSetting setting = OZeroStore.setting();
-        final JsonObject launcher = setting.launcher().options();
-        return launcher.getBoolean(YmlCore.FREEDOM, Boolean.FALSE);
+        final JsonObject options = this.mvcConfig().options();
+        if (Ut.isNil(options)) {
+            return false;
+        }
+        return options.getBoolean(YmSpec.vertx.mvc.freedom, Boolean.FALSE);
     }
 
     protected String toFreedom(final Envelop envelop) {
@@ -33,9 +50,5 @@ public abstract class WingsBase implements Wings {
                 return input.encode();
             }
         }
-    }
-
-    protected LogOf logger() {
-        return LogOf.get(this.getClass());
     }
 }

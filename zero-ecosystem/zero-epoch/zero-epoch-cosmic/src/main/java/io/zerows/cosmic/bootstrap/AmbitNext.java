@@ -7,7 +7,7 @@ import io.zerows.epoch.web.Envelop;
 /**
  * @author lang : 2024-06-27
  */
-public class ActionNext implements Ambit {
+public class AmbitNext implements Ambit {
 
     @Override
     public Future<Envelop> then(final RoutingContext context, final Envelop envelop) {
@@ -23,7 +23,7 @@ public class ActionNext implements Ambit {
              * 1. 创建：createdAt, createdBy
              * 2. 更新：updatedAt, updatedBy
              */
-            .compose(processed -> Ambit.of(AmbitAuditor.class).then(context, processed))
+            .compose(processed -> Ambit.of(AmbitPAudit_.class).then(context, processed))
 
 
             /*
@@ -42,6 +42,6 @@ public class ActionNext implements Ambit {
              * 3. criteria / projection 可能被更改
              * 4. 结果会被修正
              */
-            .compose(processed -> Ambit.of(AmbitRegionBefore.class).then(context, processed));
+            .compose(processed -> Ambit.of(AmbitPRegion_.class).then(context, processed));
     }
 }

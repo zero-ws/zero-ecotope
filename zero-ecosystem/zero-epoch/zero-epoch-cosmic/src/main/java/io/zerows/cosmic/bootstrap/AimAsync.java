@@ -64,7 +64,7 @@ public class AimAsync extends AimBase implements Aim<RoutingContext> {
                         }
                         // Request -> Response
                         response.from(request);
-                        AimAnswer.reply(context, response, event);
+                        AckFlow.reply(context, response, event);
                     });
                 } else {
                     if (Objects.nonNull(dataRes.cause())) {
@@ -73,7 +73,7 @@ public class AimAsync extends AimBase implements Aim<RoutingContext> {
                     /*
                      * Error Replying
                      */
-                    AimAnswer.reply(context, Envelop.failure(dataRes.cause()));
+                    AckFlow.reply(context, Envelop.failure(dataRes.cause()));
                 }
             });
         }, context, event);
@@ -98,13 +98,13 @@ public class AimAsync extends AimBase implements Aim<RoutingContext> {
             /*
              * Interface mode
              */
-            invoked = AimFlower.next(context, message);
+            invoked = AckThen.next(context, message);
         } else {
             /*
              * Agent mode
              */
             final Object returnValue = this.invoke(event, arguments);
-            invoked = AimFlower.next(context, returnValue);
+            invoked = AckThen.next(context, returnValue);
         }
 
         return invoked.compose(response -> {

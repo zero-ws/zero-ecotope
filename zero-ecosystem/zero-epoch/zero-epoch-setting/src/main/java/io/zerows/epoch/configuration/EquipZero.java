@@ -104,8 +104,12 @@ class EquipZero implements Equip {
         Optional.ofNullable(vertx).ifPresent(vertxYml -> {
             // Cors
             final YmMvc mvc = vertxYml.getMvc();
-            Optional.ofNullable(mvc)
-                .ifPresent(mvcRef -> this.initializeT(setting, EmApp.Native.CORS, mvcRef::getCors));
+            Optional.ofNullable(mvc).ifPresent(mvcRef -> {
+                // Cors 配置
+                this.initializeT(setting, EmApp.Native.CORS, mvcRef::getCors);
+                // Mvc 基本配置
+                this.initializeJ(setting, EmApp.Native.MVC, mvcRef::combined);
+            });
 
             // Security
             this.initializeJ(setting, EmApp.Native.SECURITY, vertxYml::getSecurity);

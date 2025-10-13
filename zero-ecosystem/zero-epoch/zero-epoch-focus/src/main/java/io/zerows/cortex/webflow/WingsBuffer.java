@@ -1,12 +1,17 @@
 package io.zerows.cortex.webflow;
 
+import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpServerResponse;
 import io.zerows.epoch.web.Envelop;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
-public class WingsBuffer extends WingsBase {
+class WingsBuffer extends WingsBase {
+    WingsBuffer(final Vertx vertxRef) {
+        super(vertxRef);
+    }
+
     @Override
     public void output(final HttpServerResponse response, final Envelop envelop) {
         /*

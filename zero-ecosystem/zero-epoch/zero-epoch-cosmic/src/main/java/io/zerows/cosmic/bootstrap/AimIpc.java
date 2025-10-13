@@ -27,7 +27,7 @@ public class AimIpc extends AimBase implements Aim<RoutingContext> {
              * Call Flower next method to get future
              */
             // final Envelop data = Flower.continuous(context, result);
-            final Future<Envelop> future = AimFlower.next(context, result);
+            final Future<Envelop> future = AckThen.next(context, result);
 
             /*
              * Set handler to wait for future result instead of other
@@ -58,7 +58,7 @@ public class AimIpc extends AimBase implements Aim<RoutingContext> {
                          * SUCCESS
                          */
                         if (res.succeeded()) {
-                            AimAnswer.reply(context, res.result());
+                            AckFlow.reply(context, res.result());
                         }
                     });
                 }

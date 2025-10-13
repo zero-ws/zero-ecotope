@@ -2,7 +2,7 @@ package io.zerows.extension.mbse.action.uca.aim;
 
 import io.vertx.core.Handler;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.cosmic.bootstrap.AimAnswer;
+import io.zerows.cosmic.bootstrap.AckFlow;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.mbse.action.atom.JtUri;
 import io.zerows.extension.mbse.action.uca.valve.JtIn;
@@ -40,21 +40,21 @@ public class InAim implements JtAim {
          * 4. IN_SCRIPT Specification
          */
         return context -> {
-            Envelop request = AimAnswer.previous(context);
+            Envelop request = AckFlow.previous(context);
             // IN_RULE
             request = JtIn.rule().execute(request, uri);
             if (!request.valid()) {
-                AimAnswer.reply(context, request);
+                AckFlow.reply(context, request);
             }
             // IN_MAPPING
             request = JtIn.mapping().execute(request, uri);
             if (!request.valid()) {
-                AimAnswer.reply(context, request);
+                AckFlow.reply(context, request);
             }
             // IN_PLUG
             request = JtIn.plug().execute(request, uri);
             if (!request.valid()) {
-                AimAnswer.reply(context, request);
+                AckFlow.reply(context, request);
             }
             // IN_SCRIPT
             request = JtIn.script().execute(request, uri);
@@ -62,7 +62,7 @@ public class InAim implements JtAim {
              * Here should not resume directly because the data must be bind to Envelop
              * All the data should be stored into Envelop
              */
-            AimAnswer.normalize(context, request);
+            AckFlow.normalize(context, request);
         };
     }
 }

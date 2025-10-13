@@ -5,7 +5,8 @@ import io.vertx.core.Future;
 import io.vertx.core.http.HttpHeaders;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.component.log.LogOf;
+import io.zerows.cortex.extension.PlugAuditor;
+import io.zerows.cortex.extension.PlugRegion;
 import io.zerows.cortex.metadata.WebRequest;
 import io.zerows.cortex.metadata.WebRule;
 import io.zerows.cosmic.exception._60052Exception411ContentLength;
@@ -16,35 +17,42 @@ import io.zerows.epoch.assembly.DiProxyInstance;
 import io.zerows.epoch.basicore.WebEvent;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.platform.metadata.Kv;
+import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.List;
 import java.util.Map;
 
-class AimFlower {
+@Slf4j
+class AckThen {
 
-    public static final String RIGOR_NOT_FOUND = "Zero system could not find Rigor for type = {0}.";
-    private static final LogOf LOGGER = LogOf.get(AimFlower.class);
-
+    /**
+     *
+     * Extension System of:
+     * 1) {@link PlugAuditor}
+     * 2) {@link PlugRegion}
+     *
+     * @param context RoutingContext
+     * @param entity  Entity
+     * @param <T>     Entity Type
+     *
+     * @return Future of Envelop
+     */
     static <T> Future<Envelop> next(final RoutingContext context,
                                     final T entity) {
         final Envelop envelop = Envelop
             .success(entity)
             .bind(context);     // Bind Data Here.
-        /*
-         * Extension System of:
-         * 1) PlugAuditor
-         * 2) PlugRegion
-         */
-        return Ambit.of(ActionNext.class).then(context, envelop);
+
+        return Ambit.of(AmbitNext.class).then(context, envelop);
     }
 
     static void replyError(final RoutingContext context,
                            final WebException error,
                            final WebEvent event) {
         final Envelop envelop = Envelop.failure(error);
-        AimAnswer.reply(context, envelop, event);
+        AckFlow.reply(context, envelop, event);
     }
 
     static void executeRequest(final RoutingContext context,
@@ -96,7 +104,7 @@ class AimFlower {
                                     final Object value) {
         final Rigor rigor = Rigor.get(type);
         if (null == rigor) {
-            LOGGER.warn(RIGOR_NOT_FOUND, type);
+            log.warn("[ ZERO ] Zero 无法找到符合类型 type = {} 的 Rigor 组件！", type);
             context.next();
         } else {
             final WebException error = rigor.verify(rulers, value);

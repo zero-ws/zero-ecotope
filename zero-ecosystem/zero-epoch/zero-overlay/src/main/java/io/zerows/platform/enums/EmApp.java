@@ -294,5 +294,11 @@ public final class EmApp {
          * 🎯 管理Redis缓存和数据存储的配置
          */
         REDIS,
+
+        /**
+         * 🎬 Mvc配置
+         * 🎯 管理模型-视图-控制器架构的配置
+         */
+        MVC,
     }
 }

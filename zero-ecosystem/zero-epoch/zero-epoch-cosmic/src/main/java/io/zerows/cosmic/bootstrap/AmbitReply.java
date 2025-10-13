@@ -9,7 +9,7 @@ import io.zerows.epoch.web.Envelop;
 /**
  * @author lang : 2024-06-27
  */
-public class ActionReply implements Ambit {
+public class AmbitReply implements Ambit {
 
     @Override
     public Future<Envelop> then(final RoutingContext context, final Envelop envelop) {
@@ -26,6 +26,6 @@ public class ActionReply implements Ambit {
             return Future.succeededFuture(envelop);
         }
         // 非直接返回，OK 的场景才生效
-        return Ambit.of(AmbitRegionAfter.class).then(context, envelop);
+        return Ambit.of(AmbitP_Region.class).then(context, envelop);
     }
 }

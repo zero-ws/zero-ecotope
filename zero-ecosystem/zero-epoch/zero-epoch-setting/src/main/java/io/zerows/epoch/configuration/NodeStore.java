@@ -3,12 +3,15 @@ package io.zerows.epoch.configuration;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.DeliveryOptions;
+import io.zerows.platform.enums.EmApp;
 import io.zerows.platform.metadata.MultiKeyMap;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HSetting;
+import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * 由于上下层的严格区分，此处提供第三存储
@@ -77,8 +80,11 @@ public class NodeStore {
         return defaultNetwork;
     }
 
-    public static HConfig ofPlugin(final Vertx vertxRef,
-                                   final Class<?> interfaceCls) {
+    public static NodeVertx ofVertx() {
+        return defaultVertx;
+    }
+
+    public static HSetting ofSetting(final Vertx vertxRef) {
         Objects.requireNonNull(vertxRef, "[ ZERO ] Vertx 引用不能为空！");
         final NodeVertx nodeVertx = RUNNING.get(String.valueOf(vertxRef.hashCode()));
         if (Objects.isNull(nodeVertx)) {
@@ -86,16 +92,42 @@ public class NodeStore {
             return null;
         }
         final NodeNetwork network = nodeVertx.networkRef();
-        final HSetting setting = network.setting();
-        final HConfig plugins = setting.extension("plugins");
-        if (Objects.isNull(plugins)) {
+        return network.setting();
+    }
+
+    public static HConfig findExtension(final Vertx vertxRef, final String name) {
+        return Optional.ofNullable(ofSetting(vertxRef))
+            .map(setting -> setting.extension(name))
+            .orElse(null);
+    }
+
+    public static HConfig findInfix(final Vertx vertxRef, final EmApp.Native name) {
+        if (Objects.isNull(name)) {
             return null;
         }
-        if (plugins instanceof final ConfigPlugins configPlugins) {
-            return configPlugins.plugin(interfaceCls);
-        } else {
-            log.warn("[ ZERO ] 插件配置类型错误，无法转换为 ConfigPlugins 类型！");
-            return null;
-        }
+        return Optional.ofNullable(ofSetting(vertxRef))
+            .map(setting -> setting.infix(name))
+            .orElse(null);
+    }
+
+    /**
+     * 此处只针对 plugins 的特殊操作
+     */
+    public static HConfig findPlugin(final Vertx vertxRef,
+                                     final Class<?> interfaceCls) {
+        return Optional.ofNullable(ofSetting(vertxRef))
+            .map(setting -> setting.extension("plugins"))
+            .filter(plugins -> plugins instanceof ConfigPlugins)
+            .map(plugins -> (ConfigPlugins) plugins)
+            .filter(configPlugins -> {
+                if (Ut.isImplement(configPlugins.executor(), interfaceCls)) {
+                    return true;
+                } else {
+                    log.warn("[ ZERO ] 无法找到实现了接口 {} 的插件实现类！", interfaceCls.getName());
+                    return false;
+                }
+            })
+            .map(configPlugins -> configPlugins.plugin(interfaceCls))
+            .orElse(null);
     }
 }
