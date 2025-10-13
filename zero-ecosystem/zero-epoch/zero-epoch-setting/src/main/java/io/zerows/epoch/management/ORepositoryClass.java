@@ -1,14 +1,14 @@
 package io.zerows.epoch.management;
 
+import io.zerows.epoch.annotations.Actor;
 import io.zerows.epoch.annotations.Agent;
 import io.zerows.epoch.annotations.EndPoint;
-import io.zerows.epoch.annotations.Infusion;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.annotations.Worker;
+import io.zerows.epoch.assembly.InquirerClassActor;
 import io.zerows.epoch.assembly.InquirerClassAgent;
 import io.zerows.epoch.assembly.InquirerClassEndPoint;
 import io.zerows.epoch.assembly.InquirerClassIpc;
-import io.zerows.epoch.assembly.InquirerClassPlugin;
 import io.zerows.epoch.assembly.InquirerClassQueue;
 import io.zerows.epoch.assembly.InquirerClassWorker;
 import io.zerows.epoch.configuration.Inquirer;
@@ -41,7 +41,7 @@ public class ORepositoryClass extends AbstractAmbiguity implements ORepository {
     /**
      * 全局环境专用方法
      * <pre><code>
-     *     1. {@link Infusion} - {@link InquirerClassPlugin}
+     *     1. {@link Actor} - {@link InquirerClassActor}
      *     2. {@link Queue} - {@link InquirerClassQueue}
      *     3. {@link EndPoint} - {@link InquirerClassEndPoint}
      *     4. {@link Worker} - {@link InquirerClassWorker}
@@ -67,8 +67,8 @@ public class ORepositoryClass extends AbstractAmbiguity implements ORepository {
         KRunner.run("meditate-class",
             // @Infusion
             () -> {
-                final Inquirer<Set<Class<?>>> plugins = Ut.singleton(InquirerClassPlugin.class);
-                processor.compile(VertxComponent.INFUSION, plugins::scan);
+                final Inquirer<Set<Class<?>>> actors = Ut.singleton(InquirerClassActor.class);
+                processor.compile(VertxComponent.ACTOR, actors::scan);
             },
             // @Queue
             () -> {

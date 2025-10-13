@@ -1,12 +1,14 @@
 package io.zerows.epoch.boot;
 
 import io.r2mo.function.Fn;
+import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.Promise;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Up;
 import io.zerows.epoch.boot.exception._40002Exception500UpClassInvalid;
 import io.zerows.platform.ENV;
+import io.zerows.platform.enums.EmApp;
 import io.zerows.platform.exception._11010Exception500BootIoMissing;
 import io.zerows.specification.configuration.HBoot;
 import io.zerows.specification.configuration.HConfig;
@@ -24,6 +26,7 @@ public class ZeroLauncher<T> {
     /** 🔒 单例实例（无并发保护，外层需确保仅初始化一次） */
     @SuppressWarnings("rawtypes")
     private static ZeroLauncher INSTANCE;
+    private static final Cc<String, Pre<?>> CC_PRE = Cc.openThread();
     private final HBoot boot;
     private final HEnergy energy;
 
@@ -139,31 +142,55 @@ public class ZeroLauncher<T> {
          */
         final HLauncher<T> launcher = this.boot.launcher();
         final Promise<T> before = Promise.promise();
-        launcher.start(this.energy, vertx -> {
+        launcher.start(this.energy,
             /*
              * 🟤BOOT-011: 启动完成之后的基础回调，此时 Vertx 实例已创建
+             *   - BOOT-012:
              */
-            final HLauncher.Pre<T> launcherPre = this.boot.withPre();
-            if (Objects.isNull(launcherPre)) {
-                before.handle(Future.succeededFuture(vertx));
-            } else {
-                launcherPre.beforeAsync(vertx, new JsonObject()).onSuccess(res -> {
-                    if (res) {
-                        log.info("[ ZERO ] ( Pre ) 前置组件执行完成！");
-                        before.handle(Future.succeededFuture(vertx));
-                    }
-                });
-            }
-        });
+            vertx -> this.beforeAsync(vertx).onSuccess(done -> {
+                if (done) {
+                    log.info("[ ZERO ] ( Pre ) 前置组件执行完成！");
+                    before.complete(vertx);
+                }
+            })
+        );
 
 
         /*
-         * 🟤BOOT-012: 启动完成之后的配置回调
+         * 🟤BOOT-013: 启动完成之后的配置回调
          */
         final HConfig.HOn<?> on = this.boot.whenOn();
         before.future().onSuccess(vertx -> {
             final CONFIG configuration = Objects.isNull(on) ? null : (CONFIG) on.store();
             consumer.accept(vertx, configuration);
         });
+    }
+
+    @SuppressWarnings("unchecked")
+    private Future<Boolean> beforeAsync(final T container) {
+        Objects.requireNonNull(container, "[ ZERO ] 启动容器不可以为 null.");
+        HLauncher.Pre<T> launcherPre = this.boot.withPre();
+        if (Objects.isNull(launcherPre)) {
+            final String cacheKey = container.hashCode() + "@" + ZeroLauncher.class.getName();
+            launcherPre = (HLauncher.Pre<T>) CC_PRE.pick(Pre::new, cacheKey);
+        }
+        final HConfig configurationPre = this.energy.boot(EmApp.LifeCycle.PRE);
+        final JsonObject options = Objects.isNull(configurationPre) ? new JsonObject() : configurationPre.options();
+        return launcherPre.beforeAsync(container, options);
+    }
+
+    /**
+     * @author lang : 2025-10-13
+     */
+    private static class Pre<T> implements HLauncher.Pre<T> {
+        @Override
+        public Future<Boolean> beforeAsync(final T container, final JsonObject options) {
+            return Future.succeededFuture(container)
+                /*
+                 * 🟤BOOT-011 执行 HActor 的基础前置处理
+                 *   执行 < 0 的默认内置 HActor 组件
+                 */
+                .compose(containerWeb -> ZeroModule.of(container).startActor(sequence -> sequence < 0));
+        }
     }
 }

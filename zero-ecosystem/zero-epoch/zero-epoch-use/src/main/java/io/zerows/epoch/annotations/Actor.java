@@ -38,7 +38,7 @@ public @interface Actor {
      *     > 0: 业务 Actor，最后启动
      * </pre>
      *
-     * @return 顺序，默认 0，负数优先级高于正数
+     * @return 顺序，默认 -1，负数优先级高于正数
      */
-    int sequence() default 0;
+    int sequence() default -1;
 }

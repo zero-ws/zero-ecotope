@@ -7,7 +7,6 @@ import jakarta.inject.Named;
 import jakarta.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.util.HashSet;
 import java.util.Set;
@@ -47,8 +46,8 @@ public abstract class DiGuiceModule extends AbstractModule {
                 // interface with multi classed injection
                 implSet.forEach(implCls -> {
                     if (implCls.isAnnotationPresent(Named.class)) {
-                        final Annotation annotation = implCls.getAnnotation(Named.class);
-                        final String name = Ut.invoke(annotation, "get");
+                        final Named annotation = implCls.getAnnotation(Named.class);
+                        final String name = annotation.value();
                         log.info("[ ZERO ] ( DI ) 实现类: `{}`, 接口 = `{}`, 标识 = {}",
                             implCls.getName(), interfaceCls.getName(), name);
                         this.bind(interfaceCls).annotatedWith(Names.named(name))

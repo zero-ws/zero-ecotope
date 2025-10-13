@@ -104,6 +104,17 @@ public class NodeStore {
         if (Objects.isNull(name)) {
             return null;
         }
+        return findInfix(vertxRef, name.name());
+    }
+
+    public static <T> HConfig findInfix(final T containerRef, final String name) {
+        if (Objects.isNull(name)) {
+            return null;
+        }
+        if (!(containerRef instanceof final Vertx vertxRef)) {
+            log.warn("[ ZERO ] 传入的引用不是 Vertx 实例，无法获取配置 = {}", name);
+            return null;
+        }
         return Optional.ofNullable(ofSetting(vertxRef))
             .map(setting -> setting.infix(name))
             .orElse(null);

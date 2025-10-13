@@ -5,7 +5,10 @@ package io.zerows.platform.enums;
  */
 public enum VertxComponent {
     //             扫描         启动
+    @Deprecated
     INFUSION,   //  o            o         @Infusion    自定义 Plugins 插件
+
+    ACTOR,      //  o            o         @Actor       自定义 Actor  插件
     QUEUE,      //  o            x         @Queue       自定义 Worker 内置
     ENDPOINT,   //  o            x         @EndPoint    自定义 Agent  内置
     WORKER,     //  o            o         @Worker      Verticle Worker
