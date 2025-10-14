@@ -6,9 +6,9 @@ import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
-import io.zerows.epoch.application.YmlCore;
-import io.zerows.cosmic.plugins.cache.MapInfix;
+import io.zerows.cosmic.plugins.cache.SharedAddOn;
 import io.zerows.cosmic.plugins.cache.SharedClient;
+import io.zerows.epoch.application.YmlCore;
 import io.zerows.epoch.database.jooq.JooqInfix;
 import io.zerows.extension.runtime.skeleton.exception._80214Exception417LoadingNotReady;
 import io.zerows.platform.metadata.KTimer;
@@ -72,7 +72,7 @@ public class DataImport {
         final ExcelClient excel = ExcelInfix.getClient();
         Fn.jvmKo(Objects.isNull(excel), _80214Exception417LoadingNotReady.class, "excel");
         // 检查三：Map导入环境是否准备
-        final SharedClient<String, Object> shared = MapInfix.getClient();
+        final SharedClient shared = SharedAddOn.of().createSingleton();
         Fn.jvmKo(Objects.isNull(shared), _80214Exception417LoadingNotReady.class, "shared");
     }
 

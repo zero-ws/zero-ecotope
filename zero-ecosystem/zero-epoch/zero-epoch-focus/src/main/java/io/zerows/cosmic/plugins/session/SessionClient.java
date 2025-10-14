@@ -15,7 +15,7 @@ public interface SessionClient {
     /*
      * Create local session get bind data
      */
-    static SessionClient createShared(final Vertx vertx, final HConfig config) {
+    static SessionClient createClient(final Vertx vertx, final HConfig config) {
         return SessionClientImpl.create(vertx, config);
     }
 

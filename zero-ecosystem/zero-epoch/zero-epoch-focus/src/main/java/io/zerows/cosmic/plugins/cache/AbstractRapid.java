@@ -3,8 +3,8 @@ package io.zerows.cosmic.plugins.cache;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
-import io.zerows.epoch.constant.KName;
 import io.zerows.component.log.LogO;
+import io.zerows.epoch.constant.KName;
 import io.zerows.support.Ut;
 import io.zerows.support.base.FnBase;
 
@@ -17,11 +17,11 @@ import java.util.Set;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 public class AbstractRapid<K, T> implements Rapid<K, T> {
-    protected final transient UxPool pool;
+    protected final transient POL pool;
     protected final transient int expired;
 
     protected AbstractRapid(final String poolName, final int expired) {
-        this.pool = UxPool.of(poolName);
+        this.pool = POL.of(poolName);
         this.expired = expired;
     }
 
@@ -30,7 +30,7 @@ public class AbstractRapid<K, T> implements Rapid<K, T> {
         this.expired = -1;
         final JsonObject credit = Ut.valueJObject(user.principal());
         final String poolName = credit.getString(KName.HABITUS);
-        this.pool = UxPool.of(poolName);
+        this.pool = POL.of(poolName);
     }
 
     protected LogO logger() {

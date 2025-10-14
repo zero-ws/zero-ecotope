@@ -2,7 +2,6 @@ package io.zerows.extension.runtime.skeleton.boot.lighter;
 
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
-import io.zerows.cosmic.plugins.cache.MapInfix;
 import io.zerows.epoch.database.jooq.JooqInfix;
 import io.zerows.plugins.office.excel.ExcelInfix;
 import io.zerows.specification.configuration.HLauncher;
@@ -33,7 +32,7 @@ public class ZeroPre implements HLauncher.Pre<Vertx> {
          * 2. 扩展模块初始化中
          * 所有 Infix 不惧怕多次重复加载，本身具有幂等性操作。
          */
-        MapInfix.init(vertx);
+        // MapInfix.init(vertx);
         /*
          * 内置插件顺序先 Jooq 再 Excel
          */

@@ -15,13 +15,13 @@ import java.util.concurrent.ConcurrentMap;
 public class YmMvc implements Serializable, Equip.Item {
     private boolean freedom = false;
     private CorsOptions cors = new CorsOptions();
-    private ConcurrentMap<String, String> resolvers;
+    private ConcurrentMap<String, String> resolver;
 
     @Override
     public JsonObject combined() {
         final JsonObject mvcJ = new JsonObject();
         mvcJ.put("freedom", this.freedom);
-        mvcJ.put("resolvers", this.resolvers);
+        mvcJ.put("resolver", this.resolver);
         return mvcJ;
     }
 }

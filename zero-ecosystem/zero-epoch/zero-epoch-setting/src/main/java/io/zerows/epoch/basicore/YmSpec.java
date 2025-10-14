@@ -181,7 +181,8 @@ import java.lang.reflect.Method;
  *         - POST
  *       allowed-headers:                                                   # 允许的请求头
  *       max-age:                                                           # 预检请求缓存时间（秒）
- *     resolvers:                                                           # 已内置 application/json, ( WildCard ) 以及 application/octet=stream
+ *     resolver:                                                            # 已内置 application/json, ( WildCard ) 以及 application/octet=stream
+ *       default:                                                           # 默认解析器
  *       application/xml:                                                   # 扩展 MIME 解析器 application/xml
  *       multipart/form-data:                                               # 扩展 MIME 解析器 multipart/form-data
  *   cluster:                                                               # {@link ClusterOptions}
@@ -541,8 +542,8 @@ public interface YmSpec {
                 String max_age = "max-age";
             }
 
-            interface resolvers {
-                String __ = "resolvers";
+            interface resolver {
+                String __ = "resolver";
             }
         }
 

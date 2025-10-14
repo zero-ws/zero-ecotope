@@ -8,9 +8,9 @@ import io.zerows.epoch.annotations.Contract;
 
 import java.util.Objects;
 
-public class SolveResolver<T> implements Resolver<T> {
+public class ResolverForSolve<T> implements Resolver<T> {
 
-    private static final LogOf LOGGER = LogOf.get(SolveResolver.class);
+    private static final LogOf LOGGER = LogOf.get(ResolverForSolve.class);
     @Contract
     private transient Solve<T> internalResolver;
 

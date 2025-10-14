@@ -4,8 +4,6 @@ import io.r2mo.typed.cc.Cc;
 import io.zerows.specification.modeling.HAtom;
 import io.zerows.specification.modeling.operation.HLoad;
 
-import java.util.Objects;
-
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
@@ -30,11 +28,6 @@ public class HLoadSmart implements HLoad {
          */
         // Default Situation
         // Static
-        HAtom atom = this.loader.atom(appName, identifier);
-        if (Objects.isNull(atom)) {
-            // Dynamic
-            atom = PluginLoad.atom(appName, identifier);
-        }
-        return atom;
+        return this.loader.atom(appName, identifier);
     }
 }

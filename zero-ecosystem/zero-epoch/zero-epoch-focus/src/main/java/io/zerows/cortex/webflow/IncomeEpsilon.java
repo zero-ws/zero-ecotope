@@ -3,7 +3,6 @@ package io.zerows.cortex.webflow;
 import io.r2mo.typed.cc.Cc;
 import io.r2mo.typed.exception.WebException;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.component.log.LogOf;
 import io.zerows.cortex.metadata.WebEpsilon;
 import io.zerows.epoch.basicore.WebEvent;
 import io.zerows.epoch.constant.KWeb;
@@ -24,7 +23,6 @@ import java.util.Objects;
  */
 public class IncomeEpsilon implements Income<List<WebEpsilon<Object>>> {
 
-    private static final LogOf LOGGER = LogOf.get(IncomeEpsilon.class);
     private static final Cc<String, Atomic<Object>> CC_ATOMIC = Cc.openThread();
 
     @Override

@@ -6,6 +6,8 @@ import io.vertx.core.VertxOptions;
 import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.eventbus.EventBusOptions;
 import io.vertx.core.http.HttpServerOptions;
+import io.zerows.cortex.AxisDynamicFactory;
+import io.zerows.cortex.AxisSockFactory;
 import io.zerows.cortex.management.StoreVertx;
 import io.zerows.cortex.metadata.RunRoute;
 import io.zerows.cortex.metadata.RunServer;
@@ -29,6 +31,7 @@ import io.zerows.specification.configuration.HEnergy;
 import io.zerows.specification.configuration.HLauncher;
 import io.zerows.specification.configuration.HSetting;
 import io.zerows.spi.BootIo;
+import io.zerows.spi.HPI;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Set;
@@ -100,7 +103,16 @@ public class VertxApplication {
      */
     public static void run(final Class<?> clazz, final String... args) {
         /*
-         * MOMO-001: 主流程
+         * MOMO-001: SPI 监控注册
+         */
+        HPI.registry(
+            AxisSockFactory.class,      // WebSocket
+            AxisDynamicFactory.class    // 动态路由
+        );
+
+
+        /*
+         * MOMO-002: 主流程
          * - 001 / 构造 ZeroLauncher 对象（启动器）
          *   - 001-1 / 通过 SPI 查找 BootIo 实现类
          *   - 001-2 / 通过实现类构造 HEnergy 对象
@@ -110,7 +122,7 @@ public class VertxApplication {
         final ZeroLauncher<Vertx> container = ZeroLauncher.create(clazz, args);
         container.start((vertx, config) -> {
             /*
-             * MOMO-002: 启动核心处理流程
+             * MOMO-003: 启动核心处理流程
              * - AGENT 启动
              * - WORKER 启动
              */

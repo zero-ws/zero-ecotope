@@ -15,7 +15,7 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * @author lang : 2023-06-11
  */
-class _Rule extends _Plugin {
+class _Rule extends _Offline {
 
     /*
      * Rule Match

@@ -5,7 +5,6 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.shareddata.ClusterSerializable;
 import io.vertx.ext.auth.User;
-import io.zerows.cosmic.plugins.cache.UxPool;
 import io.zerows.epoch.basicore.MDConnect;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.database.cp.DataPool;
@@ -476,17 +475,6 @@ public final class Ux extends _Where {
 
         public static UxJoin on(final Class<?> daoCls) {
             return UxJoin.of(null).add(daoCls);
-        }
-    }
-
-    public static class Pool {
-
-        public static UxPool on(final String name) {
-            return UxPool.of(name);
-        }
-
-        public static UxPool on() {
-            return UxPool.of(null);
         }
     }
 

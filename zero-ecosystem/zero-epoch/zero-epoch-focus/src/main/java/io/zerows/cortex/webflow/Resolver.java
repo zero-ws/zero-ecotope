@@ -6,9 +6,7 @@ import io.zerows.cortex.metadata.WebEpsilon;
 
 /**
  * # 「Co」Zero Resolver
- *
  * The interface that zero provide for request content resolving for
- *
  * 1. Data Format Conversation
  * 2. Default Value Setting
  *
@@ -28,4 +26,24 @@ public interface Resolver<T> {
      */
     WebEpsilon<T> resolve(RoutingContext context,
                           WebEpsilon<T> income);
+
+    /**
+     * # 「Co」Zero Solve
+     * This component will be called by specific `Resolver` internally.
+     *
+     * @param <T> Generic class
+     *
+     * @author <a href="http://www.origin-x.cn">Lang</a>
+     */
+    interface Solve<T> {
+        /**
+         * Resolving workflow in `Resolver`
+         *
+         * @param content The body content of Class formatFail
+         *
+         * @return The deserialization generic pojo class here
+         * @throws WebException exception of Web request
+         */
+        T resolve(String content);
+    }
 }

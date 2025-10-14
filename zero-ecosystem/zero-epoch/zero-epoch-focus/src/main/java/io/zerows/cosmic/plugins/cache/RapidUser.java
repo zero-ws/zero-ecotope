@@ -4,6 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
 import java.util.function.Supplier;
@@ -11,6 +12,7 @@ import java.util.function.Supplier;
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
 public class RapidUser<T> extends AbstractRapid<String, T> {
     private final transient String rootKey;
 
@@ -28,8 +30,8 @@ public class RapidUser<T> extends AbstractRapid<String, T> {
                 cached = new JsonObject();
             }
             if (cached.containsKey(key)) {
-                this.logger().info("[ Cache ] \u001b[0;37mK = `{2}`, R = `{1}`, P = `{0}`\u001b[m",
-                    this.pool.name(), this.rootKey, key);
+                log.info("[ ZERO ] ( Pool ) \u001b[0;37mK = `{}`, R = `{}`, P = `{}`\u001b[m",
+                    key, this.rootKey, this.pool.name());
                 return Ut.future((T) cached.getValue(key));
             } else {
                 final JsonObject stored = cached;

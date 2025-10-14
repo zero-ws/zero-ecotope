@@ -1,5 +1,6 @@
 package io.zerows.cosmic.plugins.session;
 
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Vertx;
 import io.vertx.ext.web.handler.SessionHandler;
@@ -35,6 +36,7 @@ class SessionManager {
         return INSTANCE;
     }
 
+    @CanIgnoreReturnValue
     public SessionManager putClient(final String name, final SessionClient client) {
         CC_INSTANCE.put(name, client);
         return this;

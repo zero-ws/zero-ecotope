@@ -10,7 +10,7 @@
     <packaging>pom</packaging>
     <name>(POM) 📚️ - Zero ${zero.version} / Momo ${momo.version} / R2mo ${r2mo.version}</name>
     <properties>
-        <r2mo.version>1.0-M21</r2mo.version>
+        <r2mo.version>1.0-M22</r2mo.version>
         <momo.version>1.0.7</momo.version>
         <zero.version>1.0.0</zero.version>
     </properties>

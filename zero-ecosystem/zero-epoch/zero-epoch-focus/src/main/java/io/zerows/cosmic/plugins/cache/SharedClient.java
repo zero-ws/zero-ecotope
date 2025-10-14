@@ -11,56 +11,54 @@ import java.util.Set;
 /**
  * Shared client for shared data in vert.x
  */
-public interface SharedClient<K, V> {
+public interface SharedClient {
     /**
      * Create local map from shared data
      */
-    static <K, V> SharedClient createShared(final Vertx vertx, final String name) {
-        return SharedClientImpl.<K, V>create(vertx, name);
+    static SharedClient createClient(final Vertx vertx, final String name) {
+        return SharedClientImpl.create(vertx, name);
     }
 
-    SharedClient<K, V> switchClient(final String name);
+    <K, V> Kv<K, V> put(K key, V value);
 
-    Kv<K, V> put(K key, V value);
+    <K, V> Kv<K, V> put(K key, V value, int expiredSecs);
 
-    Kv<K, V> put(K key, V value, int expiredSecs);
+    <K, V> Kv<K, V> remove(K key);
 
-    Kv<K, V> remove(K key);
+    <K, V> V get(K key);
 
-    V get(K key);
-
-    V get(K key, boolean once);
+    <K, V> V get(K key, boolean once);
 
     boolean clear();
 
     int size();
 
-    Set<K> keys();
+    <K, V> Set<K> keys();
 
     @Fluent
-    SharedClient<K, V> put(K key, V value, Handler<AsyncResult<Kv<K, V>>> handler);
+    <K, V> SharedClient put(K key, V value, Handler<AsyncResult<Kv<K, V>>> handler);
 
     @Fluent
-    SharedClient<K, V> put(K key, V value, int expiredSecs, Handler<AsyncResult<Kv<K, V>>> handler);
+    <K, V> SharedClient put(K key, V value, int expiredSecs, Handler<AsyncResult<Kv<K, V>>> handler);
 
     @Fluent
-    SharedClient<K, V> remove(K key, Handler<AsyncResult<Kv<K, V>>> handler);
+    <K, V> SharedClient remove(K key, Handler<AsyncResult<Kv<K, V>>> handler);
 
     @Fluent
-    SharedClient<K, V> get(K key, Handler<AsyncResult<V>> handler);
+    <K, V> SharedClient get(K key, Handler<AsyncResult<V>> handler);
 
     @Fluent
-    SharedClient<K, V> get(K key, boolean once, Handler<AsyncResult<V>> handler);
+    <K, V> SharedClient get(K key, boolean once, Handler<AsyncResult<V>> handler);
 
     @Fluent
-    SharedClient<K, V> clear(Handler<AsyncResult<Boolean>> handler);
+    SharedClient clear(Handler<AsyncResult<Boolean>> handler);
 
     /*
      * Map count for usage
      */
     @Fluent
-    SharedClient<K, V> size(Handler<AsyncResult<Integer>> handler);
+    SharedClient size(Handler<AsyncResult<Integer>> handler);
 
     @Fluent
-    SharedClient<K, V> keys(Handler<AsyncResult<Set<K>>> handler);
+    <K, V> SharedClient keys(Handler<AsyncResult<Set<K>>> handler);
 }

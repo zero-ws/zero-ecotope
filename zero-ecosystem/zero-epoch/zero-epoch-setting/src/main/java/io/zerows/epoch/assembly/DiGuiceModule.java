@@ -50,12 +50,9 @@ public abstract class DiGuiceModule extends AbstractModule {
 
         Set<String> clazzSet = new HashSet<>();
         // AddOn 先执行
-        clazzSet = this.bindInterface(implSet, (implCls, name) -> this.bindAddOn(interfaceCls, implCls, name));
-        if (!clazzSet.isEmpty()) {
-            return clazzSet;
-        }
+        clazzSet.addAll(this.bindInterface(implSet, (implCls, name) -> this.bindAddOn(interfaceCls, implCls, name)));
 
-        clazzSet = this.bindInterface(implSet, (implCls, name) -> this.bindDefault(interfaceCls, implCls, name));
+        clazzSet.addAll(this.bindInterface(implSet, (implCls, name) -> this.bindDefault(interfaceCls, implCls, name)));
         return clazzSet;
     }
 

@@ -1,6 +1,5 @@
 package io.zerows.cosmic.plugins.session;
 
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.inject.Key;
 import io.vertx.core.Vertx;
 import io.zerows.sdk.plugins.AddOn;
@@ -14,7 +13,7 @@ import java.util.Objects;
 public class SessionAddOn implements AddOn<SessionClient> {
     private final Vertx vertx;
     private final HConfig config;
-    private static final String NAME = "SESSION_SINGLETON";
+    private static final String NAME = "ADDON_SINGLETON_SESSION";
     private final SessionManager manager = SessionManager.of();
 
     static SessionAddOn INSTANCE;
@@ -29,7 +28,6 @@ public class SessionAddOn implements AddOn<SessionClient> {
         return Key.get(SessionClient.class);
     }
 
-    @CanIgnoreReturnValue
     static SessionAddOn of(final Vertx vertx, final HConfig config) {
         if (Objects.isNull(INSTANCE)) {
             INSTANCE = new SessionAddOn(vertx, config);
@@ -44,7 +42,7 @@ public class SessionAddOn implements AddOn<SessionClient> {
 
     @Override
     public SessionClient createInstance(final String name) {
-        final SessionClient client = SessionClientImpl.create(this.vertx, this.config);
+        final SessionClient client = SessionClient.createClient(this.vertx, this.config);
         this.manager.putClient(name, client);
         return client;
     }

@@ -4,107 +4,124 @@ import io.r2mo.typed.cc.Cc;
 import io.r2mo.typed.exception.WebException;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.component.log.LogOf;
 import io.zerows.cortex.metadata.WebEpsilon;
-import io.zerows.epoch.application.YmlCore;
-import io.zerows.management.OZeroStore;
+import io.zerows.epoch.basicore.YmSpec;
+import io.zerows.epoch.configuration.NodeStore;
+import io.zerows.platform.enums.EmApp;
 import io.zerows.platform.enums.EmWeb;
+import io.zerows.specification.configuration.HConfig;
 import io.zerows.support.Ut;
 import jakarta.ws.rs.core.HttpHeaders;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.extension.BodyParam;
+import jakarta.ws.rs.extension.StreamParam;
+import lombok.extern.slf4j.Slf4j;
 
 import java.lang.annotation.Annotation;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
+import java.util.Objects;
 
-/**
- * # 「Co」Zero Mime Processing here
- *
- * This component will process the request data before your code occurs
- *
- * @param <T> generic definition
- */
-@SuppressWarnings("all")
+@Slf4j
 public class AtomicMime<T> implements Atomic<T> {
-    public static final String RESOLVER = "( Resolver ) Select resolver {0} " +
-        "for Content-Type {1} when request to {2}";
-    public static final String RESOLVER_DEFAULT = "( Resolver ) Select resolver {0} as [DEFAULT] " +
-        "for Content-Type = null when request to {1}";
-    public static final String RESOLVER_CONFIG = "( Resolver ) Select resolver from " +
-        "annotation config \"{0}\" for Content-Type {1}";
-    private static final LogOf LOGGER = LogOf.get(AtomicMime.class);
 
-    private static final ConcurrentMap<String, Atomic> POOL_ATOMIC = new ConcurrentHashMap<>();
-    private static final Cc<String, Atomic> CC_ATOMIC = Cc.openThread();
-    private static final Cc<String, Resolver> CC_RESOLVER = Cc.openThread();
-    private static final Cc<String, Solve> CC_SOLVE = Cc.openThread();
+    private static final Cc<String, Atomic<?>> CC_ATOMIC = Cc.openThread();
+    private static final Cc<String, Resolver<?>> CC_RESOLVER = Cc.openThread();
+    private static final Cc<String, Resolver.Solve<?>> CC_SOLVE = Cc.openThread();
 
     @Override
+    @SuppressWarnings("unchecked")
     public WebEpsilon<T> ingest(final RoutingContext context,
                                 final WebEpsilon<T> income)
         throws WebException {
         final WebEpsilon<T> epsilon;
         if (EmWeb.MimeParser.TYPED == income.getMime()) {
-            /* Resolver **/
-            final Atomic<T> atomic = CC_ATOMIC.pick(AtomicTyped::new, AtomicTyped.class.getName());
-            // FnZero.po?lThread(POOL_ATOMIC, TypedAtomic::new, TypedAtomic.class.getName());
+            /* 按类型提取响应解析器 **/
+            final Atomic<T> atomic = (Atomic<T>) CC_ATOMIC.pick(AtomicTyped::new, AtomicTyped.class.getName());
             epsilon = atomic.ingest(context, income);
         } else if (EmWeb.MimeParser.STANDARD == income.getMime()) {
-            /* System standard filler **/
-            final Atomic<T> atomic = CC_ATOMIC.pick(AtomicStandard::new, AtomicStandard.class.getName());
-            // FnZero.po?lThread(POOL_ATOMIC, StandardAtomic::new, StandardAtomic.class.getName());
+            /* 系统标准的响应解析器 **/
+            final Atomic<T> atomic = (Atomic<T>) CC_ATOMIC.pick(AtomicStandard::new, AtomicStandard.class.getName());
             epsilon = atomic.ingest(context, income);
         } else {
-            /* Resolver **/
+            /* 自定义响应解析器 **/
             final Resolver<T> resolver = this.getResolver(context, income);
             epsilon = resolver.resolve(context, income);
         }
         return epsilon;
     }
 
+    /**
+     * <pre>
+     * vertx:
+     *   mvc:
+     *     resolver:
+     *       default:
+     *       application/xml:
+     * </pre>
+     * 包含解析器的注解：{@link BodyParam} 和 {@link StreamParam}
+     *
+     * @param context RoutingContext 路由对象
+     * @param income  Zero 定义的 {@link WebEpsilon} 对象
+     *
+     * @return 解析器
+     */
+    @SuppressWarnings("unchecked")
     private Resolver<T> getResolver(final RoutingContext context,
                                     final WebEpsilon<T> income) {
-        /* 1.Read the resolver first **/
+        /* 1. 先提取 Resolver 组件 **/
         final Annotation annotation = income.getAnnotation();
-        final Class<?> resolverCls = Ut.invoke(annotation, YmlCore.resolver.__KEY);
+        final Class<?> resolverCls = Ut.invoke(annotation, YmSpec.vertx.mvc.resolver.__);
         final String header = context.request().getHeader(HttpHeaders.CONTENT_TYPE);
-        /* 2.Check configured in default **/
+
+
+        /* 2. 查看是否是默认定制，若是 ResolverUnset.class 证明未定义 **/
         if (ResolverUnset.class == resolverCls) {
-            /* 3. Old path **/
-            final JsonObject content = OZeroStore.option(YmlCore.resolver.__KEY);
+
+
+            /*
+             * 新配置处理
+             * 1. 如果配置 = null，直接使用默认解析器
+             * 2. 根据 Content-Type 选择解析器
+             *    - Content-Type = null，直接提取 default 解析器
+             *    - 其他 Content-Type，根据配置选择
+             */
+            final HConfig config = NodeStore.findInfix(context.vertx(), EmApp.Native.MVC);
+            if (Objects.isNull(config)) {
+                // ❌️ 此处可能出现类型不兼容的转型错误，由于并非自定义，所以默认只能使用 ResolverJson
+                final Resolver<T> resolver = (Resolver<T>) CC_RESOLVER.pick(ResolverJson::new, ResolverJson.class.getName());
+                log.info("[ ZERO ] ( Resolver ) 选择（不兼容）解析器 {} / Content-Type = {}, 请求地址：{}",
+                    resolver, header, context.request().absoluteURI());
+                return resolver;
+            }
+
+
+            final JsonObject resolvers = config.options(YmSpec.vertx.mvc.resolver.__);
             final String resolver;
             if (null == header) {
-                resolver = content.getString("default");
-                LOGGER.info(RESOLVER_DEFAULT, resolver, context.request().absoluteURI());
+                resolver = resolvers.getString("default");
+                log.info("( Resolver ) 选择 [DEFAULT] 默认解析器 {} / Content-Type = null , 请求地址：{}",
+                    resolver, context.request().absoluteURI());
             } else {
                 final MediaType type = MediaType.valueOf(header);
-                final JsonObject resolverMap = content.getJsonObject(type.getType());
-                resolver = resolverMap.getString(type.getSubtype());
-                LOGGER.info(RESOLVER, resolver, header, context.request().absoluteURI());
+                final String key = type.getType() + "/" + type.getSubtype();
+                resolver = resolvers.getString(key);
+                log.info("[ ZERO ] ( Resolver ) 选择解析器 {} / Content-Type = {}, 请求地址：{}",
+                    resolver, header, context.request().absoluteURI());
             }
-            return CC_RESOLVER.pick(() -> Ut.instance(resolver), resolver);
-            // FnZero.po?lThread(POOL_RESOLVER, () -> Ut.instance(resolver), resolver);
+            return (Resolver<T>) CC_RESOLVER.pick(() -> Ut.instance(resolver), resolver);
         } else {
-            LOGGER.info(RESOLVER_CONFIG, resolverCls, header);
-            /*
-             * Split workflow
-             * Resolver or Solve
-             */
+            log.info("[ ZERO ] ( Resolver ) 从注解配置中选择解析器 \"{}\" / Content-Type = {}", resolverCls, header);
             if (Ut.isImplement(resolverCls, Resolver.class)) {
                 /*
-                 * Resolver Directly
+                 * 如果 resolverCls 实现了 Resolver 接口，直接返回实例
                  */
-                return CC_RESOLVER.pick(() -> Ut.instance(resolverCls), resolverCls.getName());
-                // FnZero.po?lThread(POOL_RESOLVER, () -> Ut.instance(resolverCls), resolverCls.getName());
+                return (Resolver<T>) CC_RESOLVER.pick(() -> Ut.instance(resolverCls), resolverCls.getName());
             } else {
                 /*
-                 * Solve component, contract to set Solve<Tool> here.
+                 * 细粒度解析器，这种模式下会将更加细粒度的内容处理到 Resolver 中，核心逻辑在于解析 String 类型的响应内容
                  */
-                final Resolver<T> resolver = CC_RESOLVER.pick(() -> Ut.instance(SolveResolver.class), SolveResolver.class.getName());
-                // FnZero.po?lThread(POOL_RESOLVER, () -> Ut.instance(SolveResolver.class), SolveResolver.class.getName());
-                final Solve solve = CC_SOLVE.pick(() -> Ut.instance(resolverCls), resolverCls.getName());
-                // FnZero.po?lThread(POOL_SOLVE, () -> Ut.instance(resolverCls), resolverCls.getName());
-                Ut.contract(resolver, Solve.class, solve);
+                final Resolver<T> resolver = (Resolver<T>) CC_RESOLVER.pick(() -> Ut.instance(ResolverForSolve.class), ResolverForSolve.class.getName());
+                final Resolver.Solve<T> solve = (Resolver.Solve<T>) CC_SOLVE.pick(() -> Ut.instance(resolverCls), resolverCls.getName());
+                Ut.contract(resolver, Resolver.Solve.class, solve);
                 return resolver;
             }
         }

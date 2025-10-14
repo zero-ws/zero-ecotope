@@ -9,24 +9,22 @@ import io.vertx.core.Vertx;
 import io.vertx.core.shareddata.AsyncMap;
 import io.vertx.core.shareddata.LocalMap;
 import io.vertx.core.shareddata.SharedData;
-import io.zerows.component.log.LogO;
-import io.zerows.platform.metadata.Kv;
 import io.zerows.cosmic.plugins.cache.exception._60034Exception500SharedDataMode;
-import io.zerows.support.Ut;
+import io.zerows.epoch.annotations.Defer;
+import io.zerows.platform.metadata.Kv;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
 import java.util.Set;
 
 @SuppressWarnings("all")
-public class SharedClientImpl<K, V> implements SharedClient<K, V> {
-
-    private static final LogO LOGGER = Ut.Log.plugin(SharedClientImpl.class);
+@Defer
+@Slf4j
+public class SharedClientImpl implements SharedClient {
 
     private static final Cc<String, SharedClient> CC_CLIENTS = Cc.open();
 
     private final transient Vertx vertx;
-    private transient LocalMap<K, V> syncMap;
-    private transient AsyncMap<K, V> asyncMap;
     private transient String poolName;
 
     SharedClientImpl(final Vertx vertx, final String name) {
@@ -34,49 +32,38 @@ public class SharedClientImpl<K, V> implements SharedClient<K, V> {
         this.poolName = name;
     }
 
-    public static <K, V> SharedClient<K, V> create(final Vertx vertx, final String name) {
+    public static SharedClient create(final Vertx vertx, final String name) {
         return CC_CLIENTS.pick(() -> new SharedClientImpl(vertx, name), name);
-        // return FnZero.po?l(CLIENTS, name, () -> new SharedClientImpl(vertx, name));
     }
 
-    private void async(final Handler<AsyncResult<AsyncMap<K, V>>> handler) {
-        if (Objects.isNull(this.asyncMap)) {
-            final SharedData sd = this.vertx.sharedData();
-            // Async map created
-            LOGGER.info(INFO.INFO_ASYNC_START);
-            sd.<K, V>getAsyncMap(this.poolName).onComplete(res -> {
-                if (res.succeeded()) {
-                    this.asyncMap = res.result();
-                    LOGGER.info(INFO.INFO_ASYNC_END, String.valueOf(this.asyncMap.hashCode()), this.poolName);
-                    handler.handle(Future.succeededFuture(res.result()));
-                } else {
-                    final WebException error = new _60034Exception500SharedDataMode(res.cause());
-                    handler.handle(Future.failedFuture(error));
-                }
-            });
-        } else {
-            handler.handle(Future.succeededFuture(this.asyncMap));
-        }
+    private <K, V> void async(final Handler<AsyncResult<AsyncMap<K, V>>> handler) {
+        final SharedData sd = this.vertx.sharedData();
+        // Async map created
+        log.info("[ ZERO ] ( Async ) 你正在使用异步模式创建 AsyncMap，开始单例化.");
+        sd.<K, V>getAsyncMap(this.poolName).onComplete(res -> {
+            if (res.succeeded()) {
+                log.info("[ ZERO ] ( Async ) AsyncMap 初始化完成，{} = {}.",
+                    this.poolName, String.valueOf(res.result().hashCode()));
+                handler.handle(Future.succeededFuture(res.result()));
+            } else {
+                final WebException error = new _60034Exception500SharedDataMode(res.cause());
+                handler.handle(Future.failedFuture(error));
+            }
+        });
     }
 
-    private LocalMap<K, V> sync() {
-        if (Objects.isNull(this.syncMap)) {
-            final SharedData sd = this.vertx.sharedData();
-            // Sync map created
-            this.syncMap = sd.getLocalMap(this.poolName);
-            LOGGER.info(INFO.INFO_SYNC, String.valueOf(this.syncMap.hashCode()), this.poolName);
-        }
-        return this.syncMap;
+    private <K, V> LocalMap<K, V> sync() {
+        final SharedData sd = this.vertx.sharedData();
+        // Sync map created
+        final LocalMap<K, V> localMap = sd.getLocalMap(this.poolName);
+        log.info("[ ZERO ] ( Sync ) 你正在使用同步模式创建 LocalMap, {} = {}.",
+            this.poolName, String.valueOf(localMap.hashCode()));
+        return localMap;
     }
 
     @Override
-    public SharedClient<K, V> switchClient(final String name) {
-        return SharedClientImpl.create(this.vertx, name);
-    }
-
-    @Override
-    public Kv<K, V> put(final K key, final V value) {
-        final V reference = this.sync().get(key);
+    public <K, V> Kv<K, V> put(final K key, final V value) {
+        final V reference = this.<K, V>sync().get(key);
         // Add & Replace
         if (Objects.isNull(reference)) {
             this.sync().put(key, value);
@@ -87,25 +74,25 @@ public class SharedClientImpl<K, V> implements SharedClient<K, V> {
     }
 
     @Override
-    public Kv<K, V> put(final K key, final V value, final int seconds) {
+    public <K, V> Kv<K, V> put(final K key, final V value, final int seconds) {
         Kv<K, V> result = this.put(key, value);
-        LOGGER.info(INFO.INFO_TIMER_PUT, String.valueOf(key), String.valueOf(seconds));
+        log.info("[ ZERO ] ( Timer ) {} = {} 已添加到 LocalMap, 持续 {} 秒.", key, value, String.valueOf(seconds));
         this.vertx.setTimer(seconds * 1000, id -> {
             final V existing = this.get(key);
             if (Objects.nonNull(existing)) {
-                LOGGER.info(INFO.INFO_TIMER_EXPIRE, String.valueOf(key));
+                log.info("[ ZERO ] ( Timer ) LocalMap, key = {} 已过期，数据已移除.", key);
                 this.remove(key);
             } else {
-                LOGGER.info(INFO.INFO_TIMER_REMOVED, String.valueOf(key));
+                log.info("[ ZERO ] ( Timer ) LocalMap, key = {} 已被移除.", key);
             }
         });
         return result;
     }
 
     @Override
-    public SharedClient<K, V> put(final K key, final V value,
-                                  final Handler<AsyncResult<Kv<K, V>>> handler) {
-        this.async(map -> map.result().get(key).onComplete(res -> {
+    public <K, V> SharedClient put(final K key, final V value,
+                                   final Handler<AsyncResult<Kv<K, V>>> handler) {
+        this.<K, V>async(map -> map.result().get(key).onComplete(res -> {
             if (res.succeeded()) {
                 final V reference = res.result();
                 if (Objects.isNull(reference)) {
@@ -124,11 +111,11 @@ public class SharedClientImpl<K, V> implements SharedClient<K, V> {
     }
 
     @Override
-    public SharedClient<K, V> put(final K key, final V value, final int seconds,
-                                  final Handler<AsyncResult<Kv<K, V>>> handler) {
-        LOGGER.info(INFO.INFO_TIMER_PUT, String.valueOf(key), String.valueOf(seconds));
+    public <K, V> SharedClient put(final K key, final V value, final int seconds,
+                                   final Handler<AsyncResult<Kv<K, V>>> handler) {
+        log.info("[ ZERO ] ( Timer ) {} = {} 已添加到 AsyncMap, 持续 {} 秒.", key, value, String.valueOf(seconds));
         final Integer ms = seconds * 1000;
-        this.async(map -> map.result().get(key).onComplete(res -> {
+        this.<K, V>async(map -> map.result().get(key).onComplete(res -> {
             if (res.succeeded()) {
                 final V reference = res.result();
                 if (Objects.isNull(reference)) {
@@ -149,7 +136,7 @@ public class SharedClientImpl<K, V> implements SharedClient<K, V> {
     private <K, V> void putHandler(final AsyncResult done, final K key, final V value,
                                    final Handler<AsyncResult<Kv<K, V>>> handler) {
         if (done.succeeded()) {
-            LOGGER.info(INFO.INFO_TIMER_EXPIRE, key);
+            log.info("[ ZERO ] ( Timer ) AsyncMap, key = {} 已过期，数据已移除.", key);
             handler.handle(Future.succeededFuture(Kv.create(key, value)));
         } else {
             final WebException error = new _60034Exception500SharedDataMode(done.cause());
@@ -158,14 +145,14 @@ public class SharedClientImpl<K, V> implements SharedClient<K, V> {
     }
 
     @Override
-    public Kv<K, V> remove(final K key) {
-        final V removed = this.sync().remove(key);
+    public <K, V> Kv<K, V> remove(final K key) {
+        final V removed = this.<K, V>sync().remove(key);
         return Kv.create(key, removed);
     }
 
     @Override
-    public V get(final K key) {
-        return this.sync().get(key);
+    public <K, V> V get(final K key) {
+        return this.<K, V>sync().get(key);
     }
 
     @Override
@@ -175,7 +162,7 @@ public class SharedClientImpl<K, V> implements SharedClient<K, V> {
     }
 
     @Override
-    public V get(final K key, final boolean once) {
+    public <K, V> V get(final K key, final boolean once) {
         final V value = this.get(key);
         if (once) {
             this.remove(key);
@@ -184,9 +171,9 @@ public class SharedClientImpl<K, V> implements SharedClient<K, V> {
     }
 
     @Override
-    public SharedClient<K, V> remove(final K key,
-                                     final Handler<AsyncResult<Kv<K, V>>> handler) {
-        this.async(map -> map.result().remove(key).onComplete(res -> {
+    public <K, V> SharedClient remove(final K key,
+                                      final Handler<AsyncResult<Kv<K, V>>> handler) {
+        this.<K, V>async(map -> map.result().remove(key).onComplete(res -> {
             if (res.succeeded()) {
                 final V reference = res.result();
                 handler.handle(Future.succeededFuture(Kv.create(key, reference)));
@@ -199,24 +186,24 @@ public class SharedClientImpl<K, V> implements SharedClient<K, V> {
     }
 
     @Override
-    public SharedClient<K, V> get(final K key,
-                                  final Handler<AsyncResult<V>> handler) {
-        this.async(map -> map.result().get(key).onComplete(handler));
+    public <K, V> SharedClient get(final K key,
+                                   final Handler<AsyncResult<V>> handler) {
+        this.<K, V>async(map -> map.result().get(key).onComplete(handler));
         return this;
     }
 
     @Override
-    public SharedClient<K, V> get(K key, boolean once,
-                                  Handler<AsyncResult<V>> handler) {
-        final SharedClient<K, V> reference = this.get(key, handler);
+    public <K, V> SharedClient get(K key, boolean once,
+                                   Handler<AsyncResult<V>> handler) {
+        final SharedClient reference = this.get(key, handler);
         if (once) {
-            this.async(map -> map.result().remove(key).onComplete(handler));
+            this.<K, V>async(map -> map.result().remove(key).onComplete(handler));
         }
         return reference;
     }
 
     @Override
-    public SharedClient<K, V> clear(Handler<AsyncResult<Boolean>> handler) {
+    public SharedClient clear(Handler<AsyncResult<Boolean>> handler) {
         this.async(map -> map.result().clear().onComplete(result -> handler.handle(Future.succeededFuture(Boolean.TRUE))));
         return this;
     }
@@ -229,14 +216,14 @@ public class SharedClientImpl<K, V> implements SharedClient<K, V> {
      * 3) Login/Logout Management
      */
     @Override
-    public SharedClient<K, V> size(Handler<AsyncResult<Integer>> handler) {
+    public SharedClient size(Handler<AsyncResult<Integer>> handler) {
         this.async(map -> map.result().size().onComplete(handler));
         return this;
     }
 
     @Override
-    public SharedClient<K, V> keys(Handler<AsyncResult<Set<K>>> handler) {
-        this.async(map -> map.result().keys().onComplete(handler));
+    public <K, V> SharedClient keys(Handler<AsyncResult<Set<K>>> handler) {
+        this.<K, V>async(map -> map.result().keys().onComplete(handler));
         return this;
     }
 
@@ -246,7 +233,7 @@ public class SharedClientImpl<K, V> implements SharedClient<K, V> {
     }
 
     @Override
-    public Set<K> keys() {
-        return this.sync().keySet();
+    public <K, V> Set<K> keys() {
+        return this.<K, V>sync().keySet();
     }
 }

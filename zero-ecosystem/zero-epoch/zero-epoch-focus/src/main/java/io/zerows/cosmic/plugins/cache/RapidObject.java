@@ -2,6 +2,7 @@ package io.zerows.cosmic.plugins.cache;
 
 import io.vertx.core.Future;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
 import java.util.function.Supplier;
@@ -11,6 +12,7 @@ import java.util.function.Supplier;
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
 class RapidObject<T> extends AbstractRapid<String, T> {
 
     RapidObject(final String cacheKey, final int expired) {
@@ -23,18 +25,18 @@ class RapidObject<T> extends AbstractRapid<String, T> {
         return this.pool.<String, T>get(key).compose(queried -> {
             if (Objects.isNull(queried)) {
                 return executor.get()
-                        .compose(actual -> {
-                            if (Objects.isNull(actual)) {
-                                return Ut.future();
-                            } else {
-                                return 0 < this.expired ?
-                                        this.pool.put(key, actual, this.expired) :
-                                        this.pool.put(key, actual);
-                            }
-                        })
-                        .compose(kv -> Ut.future(Objects.nonNull(kv) ? kv.value() : null));
+                    .compose(actual -> {
+                        if (Objects.isNull(actual)) {
+                            return Ut.future();
+                        } else {
+                            return 0 < this.expired ?
+                                this.pool.put(key, actual, this.expired) :
+                                this.pool.put(key, actual);
+                        }
+                    })
+                    .compose(kv -> Ut.future(Objects.nonNull(kv) ? kv.value() : null));
             } else {
-                this.logger().info("[ Cache ] \u001b[0;37mK = `{1}`, P = `{0}`\u001b[m", this.pool.name(), key);
+                log.info("[ ZERO ] ( POOL ) \u001b[0;37mK = `{}`, P = `{}`\u001b[m", key, this.pool.name());
                 return Ut.future(queried);
             }
         });
