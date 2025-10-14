@@ -6,7 +6,6 @@ import io.vertx.ext.web.Router;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.ConcurrentMap;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
@@ -38,10 +37,9 @@ public class UriAeon {
      */
     public static void mountRoute(final JsonObject config) {
         /*
-         * Create new routing on `original` route object
+         * 为原始 Route 对象构造新路由，此处每个线程中的 value 都会执行此操作
          */
-        final ConcurrentMap<String, UriNeuro> store = CC_NEURO.get();
-        store.values().forEach(neuro -> neuro.addRoute(config));
+        CC_NEURO.values().forEach(neuro -> neuro.addRoute(config));
     }
 
     /*

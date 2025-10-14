@@ -24,7 +24,7 @@ public interface OCacheJob extends OCache<Set<Mission>> {
     }
 
     static Set<Mission> entireValue() {
-        return CC_SKELETON.get().values().stream()
+        return CC_SKELETON.values().stream()
             .flatMap(cache -> cache.value().stream())
             .collect(Collectors.toSet());
     }

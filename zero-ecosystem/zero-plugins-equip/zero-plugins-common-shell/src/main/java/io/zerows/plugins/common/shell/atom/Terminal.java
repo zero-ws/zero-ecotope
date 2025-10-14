@@ -7,14 +7,13 @@ import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
-import io.zerows.support.Ut;
 import io.zerows.plugins.common.shell.exception._40072Exception500CommandMissing;
+import io.zerows.support.Ut;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import java.util.concurrent.ConcurrentMap;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
@@ -58,8 +57,7 @@ public class Terminal {
                  * handler.handle(Future.failedFuture(ERROR_ARG_MISSING));
                  * When click terminal operation here
                  */
-                final ConcurrentMap<Integer, Scanner> cdScanner = CC_SCANNER.get();
-                cdScanner.values().forEach(scanner -> Fn.jvmAt(scanner::close));
+                CC_SCANNER.values().forEach(scanner -> Fn.jvmAt(scanner::close));
                 System.exit(0);
                 // handler.handle(Future.failedFuture(ERROR_ARG_MISSING));
             }

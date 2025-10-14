@@ -4,6 +4,7 @@ import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.QaS;
 import io.zerows.epoch.configuration.Inquirer;
 import io.zerows.platform.metadata.KRunner;
+import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -16,10 +17,10 @@ import java.util.stream.Collectors;
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
 public class InquirerForQaS implements Inquirer<ConcurrentMap<String, Method>> {
 
-    public static final String HQAS = "( {0} QaS ) The Zero system has found " +
-        "{1} points of @QaS.";
+    public static final String HQAS = "[ ZERO ] ( QaS ) 系统查找到 {} 个 QaS 组件，包含 {} 接入端！";
 
     @Override
     public ConcurrentMap<String, Method> scan(final Set<Class<?>> clazzes) {
@@ -29,7 +30,7 @@ public class InquirerForQaS implements Inquirer<ConcurrentMap<String, Method>> {
         // address = Method
         final ConcurrentMap<String, Method> result = new ConcurrentHashMap<>();
         KRunner.run(qas, clazz -> result.putAll(this.scan(clazz)));
-        this.logger().info(HQAS, qas.size(), result.keySet());
+        log.info(HQAS, qas.size(), result.keySet());
         return result;
     }
 

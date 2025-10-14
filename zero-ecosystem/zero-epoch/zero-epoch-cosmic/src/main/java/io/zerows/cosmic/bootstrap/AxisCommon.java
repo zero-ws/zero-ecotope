@@ -1,19 +1,14 @@
 package io.zerows.cosmic.bootstrap;
 
 import io.vertx.core.Vertx;
-import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.BodyHandler;
 import io.vertx.ext.web.handler.CorsHandler;
 import io.vertx.ext.web.handler.ResponseContentTypeHandler;
 import io.vertx.ext.web.handler.SessionHandler;
-import io.vertx.ext.web.sstore.ClusteredSessionStore;
-import io.vertx.ext.web.sstore.LocalSessionStore;
-import io.vertx.ext.web.sstore.SessionStore;
 import io.zerows.cortex.metadata.RunServer;
 import io.zerows.cortex.sdk.Axis;
-import io.zerows.cosmic.plugins.session.SessionClient;
-import io.zerows.cosmic.plugins.session.SessionInfix;
+import io.zerows.cosmic.plugins.session.SessionActor;
 import io.zerows.epoch.basicore.option.CorsOptions;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.specification.development.compiled.HBundle;
@@ -75,27 +70,9 @@ public class AxisCommon implements Axis {
     private void mountSession(final RunServer server, final HBundle bundle) {
         final Router router = server.refRouter();
         final Vertx vertx = server.refVertx();
-        if (server.enabledSession()) {
-            /*
-             * 由于配置了 Session，为了全局安全性，替换掉旧模式下的
-             * SessionClient 初始化流程，可支持 Redis 类型的 Session
-             */
-            final JsonObject options = server.configSession();
-            final SessionClient client = SessionInfix.getOrCreate(vertx, options);
-            router.route().order(KWeb.ORDER.SESSION)
-                .handler(client.getHandler());
-        } else {
-            /*
-             * 默认场景，使用 Vertx 自带的 SessionStore
-             */
-            final SessionStore store;
-            if (vertx.isClustered()) {
-                store = ClusteredSessionStore.create(vertx);
-            } else {
-                store = LocalSessionStore.create(vertx);
-            }
-            router.route().order(KWeb.ORDER.SESSION)
-                .handler(SessionHandler.create(store));
-        }
+        // 新版 HActor 的实现类中直接构造，内部可如此使用
+        final SessionHandler handler = SessionActor.ofHandler(vertx);
+        router.route().order(KWeb.ORDER.SESSION)
+            .handler(handler);
     }
 }

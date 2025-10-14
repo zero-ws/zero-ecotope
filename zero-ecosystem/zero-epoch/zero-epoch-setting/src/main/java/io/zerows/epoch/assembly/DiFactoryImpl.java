@@ -45,7 +45,7 @@ class DiFactoryImpl implements DiFactory {
 
         final Injector replaced = this.build(inquirer, "Refreshing");
 
-        DiFactoryImpl.CC_SKELETON.get().put(cacheKey, replaced);
+        DiFactoryImpl.CC_SKELETON.put(cacheKey, replaced);
         return replaced;
     }
 

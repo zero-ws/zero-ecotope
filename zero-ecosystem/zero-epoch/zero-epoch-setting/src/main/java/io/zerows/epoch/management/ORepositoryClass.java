@@ -6,6 +6,7 @@ import io.zerows.epoch.annotations.EndPoint;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.annotations.Worker;
 import io.zerows.epoch.assembly.InquirerClassActor;
+import io.zerows.epoch.assembly.InquirerClassAddOn;
 import io.zerows.epoch.assembly.InquirerClassAgent;
 import io.zerows.epoch.assembly.InquirerClassEndPoint;
 import io.zerows.epoch.assembly.InquirerClassIpc;
@@ -65,7 +66,12 @@ public class ORepositoryClass extends AbstractAmbiguity implements ORepository {
         final OCacheClass processor = OCacheClass.of(this.caller());
         final long start = System.currentTimeMillis();
         KRunner.run("meditate-class",
-            // @Infusion
+            // AddOn
+            () -> {
+                final Inquirer<Set<Class<?>>> addOns = Ut.singleton(InquirerClassAddOn.class);
+                processor.compile(VertxComponent.ADDON, addOns::scan);
+            },
+            // @Actor
             () -> {
                 final Inquirer<Set<Class<?>>> actors = Ut.singleton(InquirerClassActor.class);
                 processor.compile(VertxComponent.ACTOR, actors::scan);

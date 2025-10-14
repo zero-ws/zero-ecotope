@@ -16,8 +16,8 @@ public class ExtractorReceipt implements Extractor<Set<WebReceipt>> {
     @Override
     public Set<WebReceipt> extract(final Class<?> clazz) {
         // 1. Class verify
-        ExtractToolVerifier.noArg(clazz);
-        ExtractToolVerifier.modifier(clazz);
+        ExtractTool.verifyNoArgConstructor(clazz);
+        ExtractTool.verifyIfPublic(clazz);
         // 2. Scan method to find @Address
         final Set<WebReceipt> receipts = new HashSet<>();
         final Method[] methods = clazz.getDeclaredMethods();

@@ -68,7 +68,7 @@ public class DiGuiceField<T extends I, I> implements DiGuice<T, I> {
                     if (ignoreSet.isEmpty()) {
                         log.info("[ ZERO ] ( DI ) \uD83E\uDEBC 字段扫描完成 Successfully !!!");
                     } else {
-                        log.info("[ ZERO ] ( DI ) \uD83E\uDEBC 字段扫描完成 Successfully, 忽略项: {0} !!!", Ut.fromJoin(ignoreSet));
+                        log.info("[ ZERO ] ( DI ) \uD83E\uDEBC 字段扫描完成 Successfully, 忽略项: {} !!!", Ut.fromJoin(ignoreSet));
                     }
                 }
             }

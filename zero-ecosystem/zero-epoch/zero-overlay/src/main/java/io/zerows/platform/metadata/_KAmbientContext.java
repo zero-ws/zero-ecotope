@@ -4,12 +4,12 @@ import io.r2mo.typed.cc.Cc;
 import io.zerows.platform.constant.VValue;
 import io.zerows.platform.enums.EmApp;
 import io.zerows.platform.exception._40103Exception500ConnectAmbient;
-import io.zerows.support.base.UtBase;
-import io.zerows.specification.atomic.HBelong;
 import io.zerows.specification.app.HArk;
+import io.zerows.specification.atomic.HBelong;
 import io.zerows.specification.cloud.HFrontier;
 import io.zerows.specification.cloud.HGalaxy;
 import io.zerows.specification.cloud.HSpace;
+import io.zerows.support.base.UtBase;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -25,7 +25,7 @@ class _KAmbientContext {
     }
 
     HArk running() {
-        final Collection<HArk> arks = CC_ARK.get().values();
+        final Collection<HArk> arks = CC_ARK.values();
         if (VValue.ONE == arks.size()) {
             return arks.iterator().next();
         }
@@ -34,7 +34,7 @@ class _KAmbientContext {
 
     HArk running(final String cacheKey) {
         return Optional.ofNullable(cacheKey)
-            .map(CC_ARK.get()::get)
+            .map(CC_ARK::get)
             .orElse(null);
     }
 
@@ -44,7 +44,7 @@ class _KAmbientContext {
 
     EmApp.Mode registry(final HArk ark) {
         final String cacheKey = UtBase.keyApp(ark);
-        CC_ARK.get().put(cacheKey, ark);
+        CC_ARK.put(cacheKey, ark);
         // 注册结束后编织应用的上下文
         // 环境中应用程序超过 1 个时才执行其他判断
         final ConcurrentMap<String, HArk> store = CC_ARK.get();

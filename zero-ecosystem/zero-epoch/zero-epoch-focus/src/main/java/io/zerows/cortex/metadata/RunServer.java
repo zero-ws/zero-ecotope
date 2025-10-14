@@ -3,11 +3,10 @@ package io.zerows.cortex.metadata;
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpServer;
 import io.vertx.core.http.HttpServerOptions;
-import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Router;
 import io.zerows.epoch.basicore.option.CorsOptions;
 import io.zerows.epoch.basicore.option.SockOptions;
-import io.zerows.epoch.configuration.NodeVertx;
+import io.zerows.epoch.configuration.NodeStore;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,7 +24,6 @@ public class RunServer implements RunInstance<HttpServer> {
     private SockOptions sockOptions;
     private HttpServerOptions serverOptions;
     private HttpServer server;
-    private RunSetting setting;
 
     public RunServer(final String name) {
         this.name = name;
@@ -45,9 +43,6 @@ public class RunServer implements RunInstance<HttpServer> {
 
     public RunServer refRunVertx(final RunVertx vertx) {
         this.refRunVertx = vertx;
-        // 只有此处被设置的时候才会开启 this.enabled 的操作
-        final NodeVertx nodeVertx = vertx.config();
-        this.setting = new RunSetting(nodeVertx);
         return this;
     }
 
@@ -112,11 +107,7 @@ public class RunServer implements RunInstance<HttpServer> {
     }
 
     public CorsOptions configCors() {
-        return this.setting.optionsCors();
-    }
-
-    public JsonObject configSession() {
-        return this.setting.optionsSession();
+        return NodeStore.ofCors(this.refRunVertx.config());
     }
 
     @Override
@@ -125,9 +116,5 @@ public class RunServer implements RunInstance<HttpServer> {
             return false;
         }
         return this.server.hashCode() == hashCode;
-    }
-
-    public boolean enabledSession() {
-        return Objects.nonNull(this.setting) && this.setting.session();
     }
 }

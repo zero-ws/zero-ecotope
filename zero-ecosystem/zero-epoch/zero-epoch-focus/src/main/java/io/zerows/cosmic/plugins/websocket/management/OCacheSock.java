@@ -26,7 +26,7 @@ public interface OCacheSock extends OCache<Set<Remind>> {
     }
 
     static Set<Remind> entireValue() {
-        return CC_SKELETON.get().values().stream()
+        return CC_SKELETON.values().stream()
             .flatMap(sock -> sock.value().stream())
             .collect(Collectors.toSet());
     }

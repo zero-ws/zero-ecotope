@@ -52,9 +52,9 @@ public class ExtractorEvent implements Extractor<Set<WebEvent>> {
         // Check basic specification: No Arg Constructor
         if (!clazz.isInterface()) {
             // Class direct.
-            ExtractToolVerifier.noArg(clazz);
+            ExtractTool.verifyNoArgConstructor(clazz);
         }
-        ExtractToolVerifier.modifier(clazz);
+        ExtractTool.verifyIfPublic(clazz);
         // Event Source Checking
         if (!clazz.isAnnotationPresent(EndPoint.class)) {
             throw new _40005Exception500EventSource(clazz);

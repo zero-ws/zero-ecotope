@@ -2,8 +2,8 @@ package io.zerows.cosmic.plugins.websocket;
 
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Subscribe;
+import io.zerows.epoch.assembly.ExtractTool;
 import io.zerows.epoch.assembly.ExtractToolMethod;
-import io.zerows.epoch.assembly.ExtractToolVerifier;
 import io.zerows.epoch.assembly.Extractor;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.XEmptyInstance;
@@ -27,8 +27,8 @@ public class SockExtractor implements Extractor<Set<Remind>> {
     @Override
     public Set<Remind> extract(final Class<?> clazz) {
         // 1. Class verify
-        ExtractToolVerifier.noArg(clazz);
-        ExtractToolVerifier.modifier(clazz);
+        ExtractTool.verifyNoArgConstructor(clazz);
+        ExtractTool.verifyIfPublic(clazz);
         // 2. Scan method to find @WebSocket
         final Set<Remind> websockets = new HashSet<>();
         final Method[] methods = clazz.getDeclaredMethods();

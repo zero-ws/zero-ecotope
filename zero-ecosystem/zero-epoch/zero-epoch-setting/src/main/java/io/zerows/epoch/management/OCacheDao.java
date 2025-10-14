@@ -28,20 +28,20 @@ public interface OCacheDao extends OCache<MDMeta> {
     }
 
     static Set<String> entireKeys() {
-        return CC_SKELETON.get().values().stream()
+        return CC_SKELETON.values().stream()
             .flatMap(item -> item.keys().stream())
             .collect(Collectors.toSet());
     }
 
     static MDMeta entireMeta(final String table) {
-        return CC_SKELETON.get().values().stream()
+        return CC_SKELETON.values().stream()
             .map(item -> item.valueGet(table))
             .filter(Objects::nonNull)
             .findFirst().orElse(null);
     }
 
     static MDMeta entireMeta(final Class<?> daoCls) {
-        return CC_SKELETON.get().values().stream()
+        return CC_SKELETON.values().stream()
             .map(item -> item.keyGet(daoCls))
             .filter(Objects::nonNull)
             .findFirst().orElse(null);

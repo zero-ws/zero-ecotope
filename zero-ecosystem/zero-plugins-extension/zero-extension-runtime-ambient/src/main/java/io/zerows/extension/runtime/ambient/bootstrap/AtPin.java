@@ -2,7 +2,7 @@ package io.zerows.extension.runtime.ambient.bootstrap;
 
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
-import io.zerows.epoch.assembly.DiPlugin;
+import io.zerows.epoch.assembly.DI;
 import io.zerows.extension.runtime.ambient.agent.service.file.DocBStub;
 import io.zerows.extension.runtime.ambient.agent.service.file.DocBuilder;
 import io.zerows.extension.runtime.skeleton.osgi.spi.extension.Init;
@@ -18,7 +18,7 @@ import io.zerows.support.Ut;
 import static io.zerows.extension.runtime.ambient.util.At.LOG;
 
 public class AtPin implements HRegistry.Mod<Vertx> {
-    private static final DiPlugin PLUGIN = DiPlugin.create(AtPin.class);
+    private static final DI PLUGIN = DI.create(AtPin.class);
 
     public static AtConfig getConfig() {
         return AtConfiguration.getConfig();

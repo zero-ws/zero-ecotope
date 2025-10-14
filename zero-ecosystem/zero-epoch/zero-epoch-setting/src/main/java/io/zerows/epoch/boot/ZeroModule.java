@@ -87,16 +87,16 @@ public class ZeroModule<T> {
              */
             final Set<HActor> actorSet = ACTOR_MATRIX.get(sequence);
             if (Objects.isNull(actorSet) || actorSet.isEmpty()) {
-                future = Future.succeededFuture(Boolean.TRUE);
+                future = future.compose(nil -> Future.succeededFuture(Boolean.TRUE));
             } else {
-                log.info("[ ZERO ] \t \uD83E\uDDCA ---> 执行 sequence = {} 的 Actor 集合，共 {} 个组件", sequence, actorSet.size());
-                future = Fx.combineB(actorSet.stream().map(actor -> {
+                log.info("[ ZMOD ] \t \uD83E\uDDCA ---> 执行 sequence = {} 的 Actor 集合，共 {} 个组件", sequence, actorSet.size());
+                future = future.compose(nil -> Fx.combineB(actorSet.stream().map(actor -> {
                     final HConfig config = this.findConfig(actor);
                     return executorFn.apply(config, actor);
                 }).filter(Objects::nonNull).collect(Collectors.toSet())).otherwise(error -> {
-                    log.error("[ ZERO ] 执行异常 --> ", error);
+                    log.error("[ ZMOD ] 执行异常 --> ", error);
                     return Boolean.FALSE;
-                });
+                }));
             }
         }
         return future;

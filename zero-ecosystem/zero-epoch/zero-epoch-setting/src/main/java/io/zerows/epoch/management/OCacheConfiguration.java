@@ -87,13 +87,13 @@ public interface OCacheConfiguration extends OCache<MDConfiguration> {
      * @return 是否已经初始化
      */
     static boolean initialized(final String id) {
-        return CC_SKELETON.get().values().stream()
+        return CC_SKELETON.values().stream()
             .anyMatch(meta -> Objects.nonNull(meta.valueGet(id)));
     }
 
     // ----------------- 全局方法，用于提取全局扫描的所有 MDConnect
     static MDConnect entireConnect(final String tableOr) {
-        return CC_SKELETON.get().values().stream()
+        return CC_SKELETON.values().stream()
             .flatMap(meta -> meta.valueSet().stream())
             .map(meta -> meta.inConnect(tableOr))
             .filter(Objects::nonNull)
@@ -101,7 +101,7 @@ public interface OCacheConfiguration extends OCache<MDConfiguration> {
     }
 
     static Set<MDConnect> entireConnect() {
-        return CC_SKELETON.get().values().stream()
+        return CC_SKELETON.values().stream()
             .flatMap(meta -> meta.valueSet().stream())
             .flatMap(meta -> meta.inConnect().stream())
             .filter(Objects::nonNull)
@@ -109,7 +109,7 @@ public interface OCacheConfiguration extends OCache<MDConfiguration> {
     }
 
     static ConcurrentMap<String, MDPage> entireWeb() {
-        return CC_SKELETON.get().values().stream()
+        return CC_SKELETON.values().stream()
             .flatMap(meta -> meta.valueSet().stream())
             .flatMap(meta -> meta.inWeb().stream())
             .filter(Objects::nonNull)

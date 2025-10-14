@@ -88,7 +88,7 @@ public interface HExtension {
         if (Ut.isNil(table)) {
             return null;
         }
-        return CC_BOOT.get().values().stream()
+        return CC_BOOT.values().stream()
             .flatMap(extension -> extension.connect().values().stream())
             .filter(connect -> table.equals(connect.getTable()))
             .findAny().orElse(null);

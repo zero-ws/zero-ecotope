@@ -3,6 +3,7 @@ package io.zerows.epoch.configuration;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.DeliveryOptions;
+import io.zerows.epoch.basicore.option.CorsOptions;
 import io.zerows.platform.enums.EmApp;
 import io.zerows.platform.metadata.MultiKeyMap;
 import io.zerows.specification.configuration.HConfig;
@@ -75,6 +76,13 @@ public class NodeStore {
         return defaultVertx.deploymentOptions(clazz);
     }
 
+    public static CorsOptions ofCors(final NodeVertx nodeVertx) {
+        final HSetting setting = ofSetting(nodeVertx);
+        return Optional.ofNullable(setting)
+            .map(settingOf -> settingOf.infix(EmApp.Native.CORS))
+            .map(config -> (CorsOptions) config.ref()).orElse(null);
+    }
+
     public static NodeNetwork ofNetwork() {
         return defaultNetwork;
     }
@@ -83,15 +91,31 @@ public class NodeStore {
         return defaultVertx;
     }
 
-    public static HSetting ofSetting(final Vertx vertxRef) {
-        Objects.requireNonNull(vertxRef, "[ ZERO ] Vertx 引用不能为空！");
-        final NodeVertx nodeVertx = RUNNING.get(String.valueOf(vertxRef.hashCode()));
+    public static HSetting ofSetting(final NodeVertx nodeVertx) {
         if (Objects.isNull(nodeVertx)) {
-            log.warn("[ ZERO ] 无法通过 {} 获取到对应的 NodeVertx 配置！", vertxRef.hashCode());
+            log.warn("[ ZERO ] 无法通过获取到对应的 NodeVertx 配置！");
             return null;
         }
         final NodeNetwork network = nodeVertx.networkRef();
         return network.setting();
+    }
+
+    public static HConfig ofSession(final Vertx vertx) {
+        final NodeVertx nodeVertx = RUNNING.get(String.valueOf(vertx.hashCode()));
+        return ofSession(nodeVertx);
+    }
+
+    public static HConfig ofSession(final NodeVertx nodeVertx) {
+        final HSetting setting = ofSetting(nodeVertx);
+        return Optional.ofNullable(setting)
+            .map(settingOf -> settingOf.infix(EmApp.Native.SESSION))
+            .orElse(null);
+    }
+
+    public static HSetting ofSetting(final Vertx vertxRef) {
+        Objects.requireNonNull(vertxRef, "[ ZERO ] Vertx 引用不能为空！");
+        final NodeVertx nodeVertx = RUNNING.get(String.valueOf(vertxRef.hashCode()));
+        return ofSetting(nodeVertx);
     }
 
     public static HConfig findExtension(final Vertx vertxRef, final String name) {

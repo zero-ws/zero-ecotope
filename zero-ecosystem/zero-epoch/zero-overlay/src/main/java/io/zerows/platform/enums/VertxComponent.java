@@ -9,6 +9,7 @@ public enum VertxComponent {
     INFUSION,   //  o            o         @Infusion    自定义 Plugins 插件
 
     ACTOR,      //  o            o         @Actor       自定义 Actor  插件
+    ADDON,      //  o            o         @AddOn       自定义 AddOn  插件
     QUEUE,      //  o            x         @Queue       自定义 Worker 内置
     ENDPOINT,   //  o            x         @EndPoint    自定义 Agent  内置
     WORKER,     //  o            o         @Worker      Verticle Worker

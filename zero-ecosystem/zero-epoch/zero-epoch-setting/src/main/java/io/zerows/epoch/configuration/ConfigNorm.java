@@ -60,6 +60,12 @@ public class ConfigNorm implements HConfig, HLog {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
+    public <T> T options(final String field, final T defaultValue) {
+        return (T) this.options.getValue(field, defaultValue);
+    }
+
+    @Override
     public HConfig putOptions(final JsonObject options) {
         if (Ut.isNotNil(options)) {
             this.options.mergeIn(options, true);

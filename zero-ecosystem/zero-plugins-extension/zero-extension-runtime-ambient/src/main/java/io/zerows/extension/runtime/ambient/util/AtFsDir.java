@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.LogOf;
-import io.zerows.epoch.assembly.DiPlugin;
+import io.zerows.epoch.assembly.DI;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.runtime.ambient.agent.service.file.DocBStub;
 import io.zerows.extension.runtime.ambient.agent.service.file.DocBuilder;
@@ -25,7 +25,7 @@ import static io.zerows.extension.runtime.ambient.util.At.LOG;
  */
 class AtFsDir {
     private static final LogOf LOGGER = LogOf.get(AtFsDir.class);
-    private static final DiPlugin PLUGIN = DiPlugin.create(AtFs.class);
+    private static final DI PLUGIN = DI.create(AtFs.class);
 
     /**
      * 此处必须详细备注，在整个 Debug 过程中算是被折腾哭了的一个方法，此方法的完整步骤：

@@ -567,7 +567,7 @@ public interface YmSpec {
         interface session {
             String store_type = "store-type";
             String store_component = "store-component";
-            String timeout = "timeout";
+            String timeout = "timeout";             // 分钟
 
             interface cookie {
                 String name = "name";

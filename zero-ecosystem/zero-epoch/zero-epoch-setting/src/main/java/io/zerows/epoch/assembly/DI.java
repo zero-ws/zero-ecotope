@@ -16,19 +16,17 @@ import java.util.Set;
 
 @SuppressWarnings("all")
 @Slf4j
-public class DiPlugin {
+public class DI {
     private static final Cc<String, Object> CC_SINGLETON = Cc.open();
-    private static final Cc<Class<?>, DiPlugin> CC_DI = Cc.open();
+    private static final Cc<Class<?>, DI> CC_DI = Cc.open();
     private transient final Class<?> clazz;
-    private transient final DiInfix infix;
 
-    private DiPlugin(final Class<?> clazz) {
+    private DI(final Class<?> clazz) {
         this.clazz = clazz;
-        this.infix = new DiInfix(clazz);
     }
 
-    public static DiPlugin create(final Class<?> clazz) {
-        return CC_DI.pick(() -> new DiPlugin(clazz), clazz);
+    public static DI create(final Class<?> clazz) {
+        return CC_DI.pick(() -> new DI(clazz), clazz);
     }
 
     // 直接创建一个新类
@@ -53,8 +51,7 @@ public class DiPlugin {
          * Add @Named Support
          */
         String extensionKey = this.named(clazz);
-        return (T) CC_SINGLETON.pick(
-            () -> this.infix.wrapInfix(di.getInstance(clazz)), extensionKey);
+        return (T) CC_SINGLETON.pick(() -> di.getInstance(clazz), extensionKey);
     }
 
     public String named(final Class<?> clazz) {
@@ -93,7 +90,7 @@ public class DiPlugin {
                 instance = di.getInstance(action.getDeclaringClass());
             }
         }
-        return this.infix.wrapInfix(instance);
+        return instance;
     }
 
     private Class<?> uniqueChild(final Class<?> interfaceCls) {
@@ -105,7 +102,6 @@ public class DiPlugin {
         final int size = filtered.size();
         // Non-Unique throw error out.
         if (VValue.ONE < size) {
-            // final BootingException error = new BootDuplicatedImplException(Instance.class, interfaceCls);
             final VertxBootException error = new _40028Exception503DuplicatedImpl(interfaceCls);
             log.error("[ ZERO ] 异常发生 {}", error.getMessage());
             throw error;

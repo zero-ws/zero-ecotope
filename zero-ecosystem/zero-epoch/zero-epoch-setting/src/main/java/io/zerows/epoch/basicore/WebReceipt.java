@@ -1,7 +1,7 @@
 package io.zerows.epoch.basicore;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.epoch.assembly.DiPlugin;
+import io.zerows.epoch.assembly.DI;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -14,7 +14,7 @@ import java.util.Objects;
 @Data
 public class WebReceipt implements Serializable {
 
-    private static final DiPlugin PLUGIN = DiPlugin.create(WebReceipt.class);
+    private static final DI PLUGIN = DI.create(WebReceipt.class);
     private final Cc<String, Object> cctProxy = Cc.openThread();
     /**
      * Event bus address.

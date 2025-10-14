@@ -1,89 +1,38 @@
 package io.zerows.cosmic.plugins.session;
 
-import io.r2mo.function.Fn;
 import io.vertx.core.Future;
 import io.vertx.core.Promise;
 import io.vertx.core.Vertx;
-import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Session;
-import io.vertx.ext.web.handler.SessionHandler;
-import io.vertx.ext.web.sstore.ClusteredSessionStore;
-import io.vertx.ext.web.sstore.LocalSessionStore;
 import io.vertx.ext.web.sstore.SessionStore;
-import io.zerows.component.log.LogO;
-import io.zerows.cosmic.plugins.session.exception._20005Exception500SessionClientInit;
-import io.zerows.epoch.application.YmlCore;
-import io.zerows.support.Ut;
+import io.zerows.epoch.annotations.Defer;
+import io.zerows.epoch.basicore.YmSpec;
+import io.zerows.specification.configuration.HConfig;
+import lombok.extern.slf4j.Slf4j;
 
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.TimeUnit;
 
+@Slf4j
+@Defer
 public class SessionClientImpl implements SessionClient {
 
-    public static final String SESSION_MODE = "( Session ) System will selected mode = \"{0}\" of session.";
-    public static final String SESSION_STORE = "( Session ) SessionStore clazz selected: {0}";
-    private static final LogO LOGGER = Ut.Log.plugin(SessionClientImpl.class);
-    private static final AtomicBoolean LOG_MSG = new AtomicBoolean(true);
-    private static SessionStore STORE;
-    private final transient Vertx vertx;
+    private static final SessionManager MANAGER = SessionManager.of();
+    private final SessionStore store;
+    private final HConfig config;
 
-    private SessionClientImpl(final Vertx vertx, final JsonObject config, final SessionType type) {
-        this.vertx = vertx;
-        if (null == STORE) {
-            if (LOG_MSG.getAndSet(Boolean.FALSE)) {
-                LOGGER.info(SESSION_MODE, type);
-            }
-            /* Whether existing get */
-            if (SessionType.LOCAL == type) {
-                STORE = LocalSessionStore.create(vertx);
-            } else if (SessionType.CLUSTER == type) {
-                STORE = ClusteredSessionStore.create(this.vertx);
-            } else {
-                final String store = config.getString(YmlCore.session.config.STORE);
-                Fn.jvmKo(Ut.isNil(store), _20005Exception500SessionClientInit.class);
-                LOGGER.info(SESSION_STORE, store);
-                /*
-                 * SessionStore -> Defined here
-                 * The session get could not be singleton because each session get must not
-                 * be shared and located by each thread here.
-                 */
-                final SessionStore defined = Ut.singleton(store);
-                JsonObject opts = config.getJsonObject(YmlCore.session.config.OPTIONS);
-                if (Ut.isNil(opts)) {
-                    opts = new JsonObject();
-                }
-                STORE = defined.init(vertx, opts);
-            }
-        }
+    private SessionClientImpl(final Vertx vertx, final HConfig config) {
+        this.config = config;
+        this.store = MANAGER.getStore(vertx, () -> SessionUtil.createStore(vertx, config));
     }
 
-    static SessionClientImpl create(final Vertx vertx, final JsonObject config) {
-        final String type = config.getString(YmlCore.session.config.CATEGORY);
-        if (SessionType.CLUSTER.name().equals(type)) {
-            /* CLUSTER */
-            return new SessionClientImpl(vertx, config, SessionType.CLUSTER);
-        } else if (SessionType.DEFINED.name().equals(type)) {
-            /* DEFINED */
-            return new SessionClientImpl(vertx, config, SessionType.DEFINED);
-        } else {
-            /* LOCAL ( Default ) */
-            return new SessionClientImpl(vertx, config, SessionType.LOCAL);
-        }
+    static SessionClientImpl create(final Vertx vertx, final HConfig config) {
+        return new SessionClientImpl(vertx, config);
     }
 
     @Override
-    public SessionHandler getHandler() {
-        return SessionHandler.create(STORE)
-            /*
-             * KRef: https://vertx.io/blog/writing-secure-vert-x-web-apps/
-             * */
-            // .setCookieSecureFlag(true)
-            .setCookieHttpOnlyFlag(true);
-    }
-
-    @Override
-    public Future<Session> get(final String id) {
+    public Future<Session> getAsync(final String id) {
         final Promise<Session> promise = Promise.promise();
-        STORE.get(id).onComplete(result -> {
+        this.store.get(id).onComplete(result -> {
             if (result.succeeded()) {
                 promise.complete(result.result());
             } else {
@@ -94,7 +43,9 @@ public class SessionClientImpl implements SessionClient {
     }
 
     @Override
-    public Future<Session> open(final String sessionId) {
-        return Future.succeededFuture(STORE.createSession(2000));
+    public Future<Session> createAsync(final String sessionId) {
+        final Integer timeout = this.config.options(YmSpec.vertx.session.timeout, 120);
+        final long ms = TimeUnit.MINUTES.toMillis(timeout);
+        return Future.succeededFuture(this.store.createSession(ms));
     }
 }

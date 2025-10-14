@@ -10,7 +10,7 @@ import io.zerows.epoch.annotations.security.Authenticate;
 import io.zerows.epoch.annotations.security.Authorized;
 import io.zerows.epoch.annotations.security.AuthorizedResource;
 import io.zerows.epoch.annotations.security.Wall;
-import io.zerows.epoch.assembly.DiPlugin;
+import io.zerows.epoch.assembly.DI;
 import io.zerows.epoch.assembly.ExtractorEvent;
 import io.zerows.epoch.configuration.Inquirer;
 import io.zerows.epoch.metadata.security.Aegis;
@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
  */
 public class InquirerWall implements Inquirer<Set<Aegis>> {
 
-    private static final DiPlugin PLUGIN = DiPlugin.create(ExtractorEvent.class);
+    private static final DI PLUGIN = DI.create(ExtractorEvent.class);
 
     @Override
     public Set<Aegis> scan(final Set<Class<?>> walls) {

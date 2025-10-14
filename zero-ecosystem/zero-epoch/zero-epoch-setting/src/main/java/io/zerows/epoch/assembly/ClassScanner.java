@@ -39,8 +39,7 @@ public interface ClassScanner {
             return !type.isAnonymousClass()                             // Ko Anonymous
                 && !type.isAnnotation()                                 // Ko Annotation
                 && !type.isEnum()                                       // Ko Enum
-                && Modifier.isPublic(type.getModifiers())               // Ko non-public
-                // Ko abstract class, because interface is abstract, single condition is invalid
+                && !Modifier.isPrivate(type.getModifiers())             // Ko No Private，新版开放 default 域，只有私有类无法被扫描
                 && !(Modifier.isAbstract(type.getModifiers()) && !type.isInterface())
                 && !Modifier.isStatic(type.getModifiers())              // Ko Static
                 && !Throwable.class.isAssignableFrom(type)              // Ko Exception

@@ -15,12 +15,11 @@ public class DiProxyInstance {
 
     public static DiProxyInstance create(final Class<?> interfaceCls) {
         return CC_V_INSTANCE.pick(() -> new DiProxyInstance(interfaceCls), interfaceCls);
-        // return FnZero.po?l(V_POOL, interfaceCls, () -> new OProxyInstance(interfaceCls));
     }
 
     @SuppressWarnings("unchecked")
     public <T> T proxy() {
         final Class<?>[] interfaces = new Class<?>[]{this.interfaceCls};
-        return (T) Proxy.newProxyInstance(this.interfaceCls.getClassLoader(), interfaces, new DiInvocationHandler());
+        return (T) Proxy.newProxyInstance(this.interfaceCls.getClassLoader(), interfaces, new DiProxyInvoker());
     }
 }

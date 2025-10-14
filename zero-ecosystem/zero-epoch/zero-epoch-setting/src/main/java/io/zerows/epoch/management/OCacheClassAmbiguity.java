@@ -51,7 +51,7 @@ class OCacheClassAmbiguity extends AbstractAmbiguity implements OCacheClass {
 
     static Set<OClassCacheInternal> META() {
         final Set<OClassCacheInternal> metaSet = new HashSet<>();
-        OCacheClass.CC_SKELETON.get().values().forEach(self -> {
+        OCacheClass.CC_SKELETON.values().forEach(self -> {
             if (self instanceof final OCacheClassAmbiguity cache) {
                 metaSet.add(cache.meta);
             }

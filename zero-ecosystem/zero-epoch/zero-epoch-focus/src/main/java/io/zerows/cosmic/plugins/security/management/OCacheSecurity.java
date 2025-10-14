@@ -26,7 +26,7 @@ public interface OCacheSecurity extends OCache<Set<Aegis>> {
 
     static ConcurrentMap<String, Set<Aegis>> entireWall() {
         final ConcurrentMap<String, Set<Aegis>> walls = new ConcurrentHashMap<>();
-        CC_SKELETON.get().values().forEach(self -> walls.putAll(self.valueWall()));
+        CC_SKELETON.values().forEach(self -> walls.putAll(self.valueWall()));
         return walls;
     }
 

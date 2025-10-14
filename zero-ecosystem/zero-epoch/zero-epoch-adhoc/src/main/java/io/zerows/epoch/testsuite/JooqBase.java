@@ -1,6 +1,6 @@
 package io.zerows.epoch.testsuite;
 
-import io.zerows.epoch.assembly.DiPlugin;
+import io.zerows.epoch.assembly.DI;
 import io.zerows.epoch.database.jooq.JooqInfix;
 
 /**
@@ -12,7 +12,7 @@ public abstract class JooqBase extends ZeroBase {
     }
 
     protected <T> T component(final Class<?> clazz) {
-        final DiPlugin plugin = DiPlugin.create(this.getClass());
+        final DI plugin = DI.create(this.getClass());
         return plugin.createSingleton(clazz);
     }
 }

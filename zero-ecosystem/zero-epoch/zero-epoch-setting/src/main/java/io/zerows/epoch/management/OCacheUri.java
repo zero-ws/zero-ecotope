@@ -27,7 +27,7 @@ public interface OCacheUri extends OCache<ConcurrentMap<HttpMethod, Set<String>>
     }
 
     static Set<String> entireUri(final HttpMethod method) {
-        return CC_SKELETON.get().values().stream()
+        return CC_SKELETON.values().stream()
             .flatMap(uri -> {
                 if (Objects.isNull(method)) {
                     return uri.value().values().stream().flatMap(Set::stream);

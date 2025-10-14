@@ -123,19 +123,16 @@ public class HAtomReference implements HReference {
     // ======================= Overwrite Api ==========================
     @Override
     public ConcurrentMap<String, RQuote> refInput() {
-        //        final ConcurrentMap<String, RQuote> get = this.ccReference.get();
         return this.ccReference.get();
     }
 
     @Override
     public ConcurrentMap<String, RQuery> refQr() {
-        //        final Cd<String, RQuery> get = this.ccQuery.get();
         return this.ccQuery.get();
     }
 
     @Override
     public ConcurrentMap<String, RResult> refOutput() {
-        //        final Cd<String, RResult> get = this.ccResult.get();
         return this.ccResult.get();
     }
 
@@ -156,7 +153,6 @@ public class HAtomReference implements HReference {
              */
             final HApp app = this.ark.app();
             final RQuote quote = this.ccReference.pick(() -> RQuote.create(app.name()), source);
-            // FnZero.po?l(this.references, source, () -> RQuote.create(appName));
             final JsonObject referenceConfig = reference.sourceReference();
             quote.add(hAttribute, referenceConfig, dao);
             /*

@@ -50,7 +50,9 @@ public interface HConfig {
      *
      * @return 存在返回 true，否则返回 false
      */
-    <T> T options(final String field);
+    <T> T options(String field);
+
+    <T> T options(String field, T defaultValue);
 
     // ------- Class<?> 反射
     String DEFAULT_META = "DEFAULT_META";

@@ -5,8 +5,9 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.r2mo.typed.cc.Cc;
 import io.r2mo.typed.json.jackson.ClassDeserializer;
 import io.r2mo.typed.json.jackson.ClassSerializer;
-import io.zerows.epoch.assembly.DiPlugin;
+import io.zerows.epoch.assembly.DI;
 import io.zerows.platform.enums.EmService;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.lang.reflect.Method;
@@ -18,9 +19,10 @@ import java.util.Objects;
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Data
 public class Remind implements Serializable {
 
-    private static final DiPlugin PLUGIN = DiPlugin.create(Remind.class);
+    private static final DI PLUGIN = DI.create(Remind.class);
     private final Cc<String, Object> cctProxy = Cc.openThread();
     private String name;
 
@@ -40,68 +42,8 @@ public class Remind implements Serializable {
 
     private boolean secure = Boolean.FALSE;
 
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(final String name) {
-        this.name = name;
-    }
-
-    public EmService.NotifyType getType() {
-        return this.type;
-    }
-
-    public void setType(final EmService.NotifyType type) {
-        this.type = type;
-    }
-
-    public String getSubscribe() {
-        return this.subscribe;
-    }
-
-    public void setSubscribe(final String subscribe) {
-        this.subscribe = subscribe;
-    }
-
-    public String getAddress() {
-        return this.address;
-    }
-
-    public void setAddress(final String address) {
-        this.address = address;
-    }
-
-    public Class<?> getInput() {
-        return this.input;
-    }
-
-    public void setInput(final Class<?> input) {
-        this.input = input;
-    }
-
     public Object getProxy() {
         return this.cctProxy.pick(() -> PLUGIN.createProxy(this.proxy, this.method));
-    }
-
-    public void setProxy(final Class<?> proxy) {
-        this.proxy = proxy;
-    }
-
-    public Method getMethod() {
-        return this.method;
-    }
-
-    public void setMethod(final Method method) {
-        this.method = method;
-    }
-
-    public boolean isSecure() {
-        return this.secure;
-    }
-
-    public void setSecure(final boolean secure) {
-        this.secure = secure;
     }
 
     @Override

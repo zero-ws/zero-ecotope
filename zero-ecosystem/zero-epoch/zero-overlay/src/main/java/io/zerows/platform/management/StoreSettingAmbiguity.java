@@ -40,29 +40,21 @@ class StoreSettingAmbiguity extends AbstractAmbiguity implements StoreSetting {
         super(owner);
     }
 
-    private ConcurrentMap<String, HSetting> refSetting() {
-        return CC_SETTING.get();
-    }
-
-    private ConcurrentMap<String, Object> refNetwork() {
-        return CC_NETWORK.get();
-    }
-
     @Override
     public Set<String> keys() {
-        return this.refSetting().keySet();
+        return CC_SETTING.keySet();
     }
 
     @Override
     public HSetting valueGet(final String key) {
-        return this.refSetting().getOrDefault(key, null);
+        return CC_SETTING.getOrDefault(key, null);
     }
 
     @Override
     public StoreSetting add(final HSetting setting) {
         if (Objects.nonNull(setting) && StrUtil.isNotBlank(setting.id())) {
             log.info("[ ZERO ] 当前配置的 ID 为 {} 已成功添加！", setting.id());
-            this.refSetting().put(setting.id(), setting);
+            CC_SETTING.put(setting.id(), setting);
         }
         return this;
     }
@@ -71,7 +63,7 @@ class StoreSettingAmbiguity extends AbstractAmbiguity implements StoreSetting {
     public StoreSetting remove(final HSetting setting) {
         if (Objects.nonNull(setting) && StrUtil.isNotBlank(setting.id())) {
             log.info("[ ZERO ] 当前配置的 ID 为 {} 已成功移除！", setting.id());
-            this.refSetting().remove(setting.id());
+            CC_SETTING.remove(setting.id());
         }
         return this;
     }
@@ -91,7 +83,7 @@ class StoreSettingAmbiguity extends AbstractAmbiguity implements StoreSetting {
         if (Objects.isNull(setting) || Objects.isNull(setting.id())) {
             return null;
         }
-        return (T) this.refNetwork().get(setting.id());
+        return (T) this.CC_NETWORK.get(setting.id());
     }
 
     @Override
@@ -99,7 +91,7 @@ class StoreSettingAmbiguity extends AbstractAmbiguity implements StoreSetting {
         if (Objects.isNull(setting) || Objects.isNull(network)) {
             return this;
         }
-        this.refNetwork().put(setting.id(), network);
+        CC_NETWORK.put(setting.id(), network);
         log.info("[ ZERO ] \t \uD83C\uDF7B ID = {} 中添加 {}", setting.id(), network.getClass().getName());
         return this;
     }
@@ -110,6 +102,6 @@ class StoreSettingAmbiguity extends AbstractAmbiguity implements StoreSetting {
         if (Objects.isNull(settingId)) {
             return null;
         }
-        return this.refSetting().getOrDefault(settingId, null);
+        return CC_SETTING.getOrDefault(settingId, null);
     }
 }

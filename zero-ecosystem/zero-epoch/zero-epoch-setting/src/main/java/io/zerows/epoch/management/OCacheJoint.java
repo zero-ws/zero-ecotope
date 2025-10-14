@@ -23,7 +23,7 @@ public interface OCacheJoint extends OCache<JointAction> {
 
     static JointMap entireJoint() {
         final JointMap jointMap = new JointMap();
-        CC_SKELETON.get().values().forEach(each -> {
+        CC_SKELETON.values().forEach(each -> {
             final JointMap eachMap = each.joint();
             jointMap.add(eachMap);
         });
