@@ -17,11 +17,11 @@ import java.util.Set;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 public class AbstractRapid<K, T> implements Rapid<K, T> {
-    protected final transient POL pool;
+    protected final transient HPO pool;
     protected final transient int expired;
 
     protected AbstractRapid(final String poolName, final int expired) {
-        this.pool = POL.of(poolName);
+        this.pool = HPO.of(poolName);
         this.expired = expired;
     }
 
@@ -30,7 +30,7 @@ public class AbstractRapid<K, T> implements Rapid<K, T> {
         this.expired = -1;
         final JsonObject credit = Ut.valueJObject(user.principal());
         final String poolName = credit.getString(KName.HABITUS);
-        this.pool = POL.of(poolName);
+        this.pool = HPO.of(poolName);
     }
 
     protected LogO logger() {

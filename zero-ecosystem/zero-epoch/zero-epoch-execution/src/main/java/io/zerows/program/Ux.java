@@ -13,7 +13,6 @@ import io.zerows.epoch.database.jooq.operation.UxJooq;
 import io.zerows.epoch.metadata.security.TokenJwt;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.constant.VValue;
-import io.zerows.platform.metadata.KIntegration;
 import io.zerows.platform.metadata.Kv;
 import io.zerows.specification.modeling.HRecord;
 import io.zerows.support.Ut;
@@ -481,12 +480,6 @@ public final class Ux extends _Where {
     public static class Job {
         public static UxJob on() {
             return new UxJob();
-        }
-    }
-
-    public static class Ldap {
-        public static UxLdap on(final KIntegration integration) {
-            return CACHE.CC_LDAP.pick(() -> new UxLdap(integration), String.valueOf(integration.hashCode()));
         }
     }
 

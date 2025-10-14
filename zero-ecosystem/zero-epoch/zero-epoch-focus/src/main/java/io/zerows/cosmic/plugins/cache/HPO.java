@@ -18,14 +18,14 @@ import java.util.concurrent.ConcurrentMap;
  */
 @Slf4j
 @SuppressWarnings("all")
-public class POL {
+public class HPO {
 
-    private static final Cc<String, POL> CC_UX_POOL = Cc.open();
+    private static final Cc<String, HPO> CC_UX_POOL = Cc.open();
 
     private transient final String name;
     private transient final SharedClient client;
 
-    private POL(final String name) {
+    private HPO(final String name) {
         this.name = name;
         if (Ut.isNil(name)) {
             this.client = SharedAddOn.INSTANCE.createInstance();
@@ -34,9 +34,9 @@ public class POL {
         }
     }
 
-    public static POL of(final String name) {
+    public static HPO of(final String name) {
         final String nameP = Ut.isNil(name) ? SharedAddOn.NAME : name;
-        return CC_UX_POOL.pick(() -> new POL(nameP), nameP);
+        return CC_UX_POOL.pick(() -> new HPO(nameP), nameP);
     }
 
     public String name() {
