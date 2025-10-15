@@ -23,7 +23,6 @@
         <!-- Integration -->
         <!--        <module>zero-plugins-integration-feign</module>-->
         <!--        <module>zero-plugins-integration-git</module>-->
-        <module>zero-plugins-integration-feign</module>
         <module>zero-plugins-integration-sms</module>
         <module>zero-plugins-integration-wechat</module>
 
