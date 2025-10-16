@@ -14,9 +14,6 @@ import java.util.Set;
  */
 @AddOn.Name("DEFAULT_SHARED_CLIENT")
 public interface SharedClient {
-
-    String DEFAULT_NAME = "DEFAULT_SHARED_CLIENT";
-
     /**
      * Create local map from shared data
      */
