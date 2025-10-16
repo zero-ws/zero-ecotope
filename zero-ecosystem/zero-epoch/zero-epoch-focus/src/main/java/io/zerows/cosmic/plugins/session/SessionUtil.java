@@ -39,7 +39,7 @@ class SessionUtil {
 
     static String keyOf(final Vertx vertx, final HConfig config) {
         if (Objects.isNull(config) || Ut.isNil(config.options())) {
-            return keyOf(vertx);
+            return "SESSION-STORE-" + vertx.hashCode();
         } else {
             return "SESSION-STORE-" + vertx.hashCode() + "@" + config.hashCode();
         }

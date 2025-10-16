@@ -41,7 +41,7 @@ public class AxisStart implements Axis {
                      */
                     final Throwable errorException = res.cause();
                     if (Objects.nonNull(errorException)) {
-                        Ut.Log.boot(this.getClass()).fatal(errorException);
+                        log.error("[ ZERO ] ❌ 服务器启动失败，异常信息如下：", errorException);
                     }
                 }
             }

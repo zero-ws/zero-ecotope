@@ -16,8 +16,10 @@ import io.zerows.cosmic.bootstrap.AxisStart;
 import io.zerows.epoch.annotations.Agent;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.spi.HPI;
+import lombok.extern.slf4j.Slf4j;
 
 @Agent
+@Slf4j
 public class ZeroHttpAgent extends AbstractVerticle {
 
     @Override
@@ -29,8 +31,12 @@ public class ZeroHttpAgent extends AbstractVerticle {
 
         /* 构造运行服务器 */
         final StubServer stubServer = StubServer.of(bundle);
-
-        stubServer.createAsync(runVertx).onSuccess(runServer -> {
+        // === 看门狗保护（默认 5s 超时；失败自动打印线程转储；可重试 2 次）===
+        ZeroWatchDog.watchAsyncRetry(
+            this.vertx,
+            () -> stubServer.createAsync(runVertx),
+            ZeroHttpAgent.class.getName()
+        ).onSuccess(runServer -> {
 
             /*
              * 01：基础路由加载
@@ -40,14 +46,12 @@ public class ZeroHttpAgent extends AbstractVerticle {
              */
             Axis.ofOr(AxisCommon.class).mount(runServer, bundle);
 
-
             /*
              * 02. 安全
              *     - 401 Authentication
              *     - 403 Authorization
              */
             Axis.ofOr(AxisSecure.class).mount(runServer, bundle);
-
 
             /*
              * 03. 监控
@@ -57,7 +61,6 @@ public class ZeroHttpAgent extends AbstractVerticle {
              */
             Axis.ofOr(AxisMeasure.class).mount(runServer, bundle);
 
-
             /*
              * 04. JSR-340
              *     - Filter
@@ -65,18 +68,15 @@ public class ZeroHttpAgent extends AbstractVerticle {
              */
             Axis.ofOr(AxisFilter.class).mount(runServer, bundle);
 
-
             /*
              * 05. 主流程
              */
             Axis.ofOr(AxisEvent.class).mount(runServer, bundle);
 
-
             /*
              * 06. Extension 扩展路由
              */
             Axis.ofOr(AxisExtension.class).mount(runServer, bundle);
-
 
             /*
              * 07. 启动完成监听
@@ -84,8 +84,10 @@ public class ZeroHttpAgent extends AbstractVerticle {
             Axis.ofOr(AxisStart.class).mount(runServer, bundle);
 
             startPromise.complete();
+
         }).onFailure(error -> {
-            error.printStackTrace();
+            log.error("[ ZERO ] RunServer 初始化失败：{}", error.toString());
+            log.debug("[ ZERO ] 失败堆栈：", error);
             startPromise.fail(error);
         });
     }
