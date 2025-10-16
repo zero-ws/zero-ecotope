@@ -5,13 +5,18 @@ import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.zerows.platform.metadata.Kv;
+import io.zerows.sdk.plugins.AddOn;
 
 import java.util.Set;
 
 /**
  * Shared client for shared data in vert.x
  */
+@AddOn.Name("DEFAULT_SHARED_CLIENT")
 public interface SharedClient {
+
+    String DEFAULT_NAME = "DEFAULT_SHARED_CLIENT";
+
     /**
      * Create local map from shared data
      */

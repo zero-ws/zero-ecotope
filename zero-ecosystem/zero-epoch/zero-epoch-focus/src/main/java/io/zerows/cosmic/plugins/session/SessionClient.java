@@ -3,6 +3,7 @@ package io.zerows.cosmic.plugins.session;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.ext.web.Session;
+import io.zerows.sdk.plugins.AddOn;
 import io.zerows.specification.configuration.HConfig;
 
 /*
@@ -11,6 +12,7 @@ import io.zerows.specification.configuration.HConfig;
  *
  * Keep only one session get.
  */
+@AddOn.Name("DEFAULT_SESSION_CLIENT")
 public interface SessionClient {
     /*
      * Create local session get bind data

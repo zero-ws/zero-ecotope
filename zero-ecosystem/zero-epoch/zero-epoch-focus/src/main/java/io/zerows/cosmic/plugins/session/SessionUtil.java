@@ -33,6 +33,18 @@ class SessionUtil {
         return createStore(vertx, sessionConfig);
     }
 
+    static String keyOf(final Vertx vertx) {
+        return keyOf(vertx, null);
+    }
+
+    static String keyOf(final Vertx vertx, final HConfig config) {
+        if (Objects.isNull(config) || Ut.isNil(config.options())) {
+            return keyOf(vertx);
+        } else {
+            return "SESSION-STORE-" + vertx.hashCode() + "@" + config.hashCode();
+        }
+    }
+
     /**
      * 根据 {@link HConfig} 中的 options 直接构造，这种状况之下配置优先
      *

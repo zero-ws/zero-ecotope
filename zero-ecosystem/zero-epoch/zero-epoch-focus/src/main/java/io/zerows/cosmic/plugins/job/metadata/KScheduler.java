@@ -1,9 +1,8 @@
 package io.zerows.cosmic.plugins.job.metadata;
 
-import io.zerows.component.log.LogO;
-import io.zerows.cosmic.plugins.job.JobMessage;
 import io.zerows.platform.constant.VValue;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
 import java.time.Instant;
@@ -20,8 +19,8 @@ import java.util.concurrent.TimeUnit;
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
 public class KScheduler implements Serializable {
-    private static final LogO LOGGER = Ut.Log.metadata(KScheduler.class);
     private final String unique;
     /*
      * duration information of two Job
@@ -113,7 +112,8 @@ public class KScheduler implements Serializable {
                 final DateTimeFormatter formatter = this.formula.formatter();
                 if (Objects.nonNull(formatter)) {
                     final LocalDateTime datetime = Ut.toDuration(delay);
-                    LOGGER.info(JobMessage.TIMER.DELAY, this.unique, formatter.format(datetime));
+                    log.info("[ ZERO ] 任务 \"{}\" 将在 `{}` 之后运行……",
+                        this.unique, formatter.format(datetime));
                 }
             }
             return delay < 0 ? 1L : delay;

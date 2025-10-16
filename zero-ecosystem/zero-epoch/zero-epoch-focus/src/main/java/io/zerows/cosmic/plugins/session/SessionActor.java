@@ -44,18 +44,19 @@ public class SessionActor extends AbstractHActor {
 
     public static SessionStore ofStore(final Vertx vertx) {
         Objects.requireNonNull(vertx);
-        return MANAGER.getStore(vertx, () -> SessionUtil.createStore(vertx));
+        final String key = SessionUtil.keyOf(vertx);
+        return MANAGER.STORE().get(key, (ignored) -> SessionUtil.createStore(vertx));
     }
 
     @Override
     protected Future<Boolean> startAsync(final HConfig config, final Vertx vertxRef) {
         final AddOn<SessionClient> addOn = SessionAddOn.of(vertxRef, config);
-        this.vLog("SessionActor 初始化完成，配置：{}", config);
+        this.vLog("[ Session ] SessionActor 初始化完成，配置：{}", config);
 
 
         final Provider<SessionClient> provider = new SessionProvider(addOn);
         DiRegistry.of().put(addOn.getKey(), provider);
-        this.vLog("DI 提供者 Provider 注册：provider = {}, key = {}", provider, addOn.getKey());
+        this.vLog("[ Session ] DI 提供者 Provider 注册：provider = {}, key = {}", provider, addOn.getKey());
         return Future.succeededFuture(Boolean.TRUE);
     }
 }

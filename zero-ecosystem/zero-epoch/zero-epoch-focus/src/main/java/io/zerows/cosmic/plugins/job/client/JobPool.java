@@ -1,11 +1,11 @@
 package io.zerows.cosmic.plugins.job.client;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.LogO;
 import io.zerows.cosmic.plugins.job.metadata.Mission;
 import io.zerows.epoch.constant.KName;
 import io.zerows.platform.enums.EmService;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.Objects;
@@ -18,14 +18,14 @@ import java.util.stream.Collectors;
  * Job Pool in memory or storage
  * Static pool for sync here.
  */
+@Slf4j
 class JobPool {
 
-    public static final String IS_RUNNING = "( Job ) The job {0} has already been running !!!";
-    public static final String IS_STARTING = "( Job ) The job {0} is booting, please preparing for READY";
-    public static final String IS_ERROR = "( Job ) The job {0} met error last time, please contact administrator and try to resume.";
-    public static final String IS_STOPPED = "( Job ) The timeId {0} does not exist in RUNNING pool of jobs.";
-    public static final String NOT_RUNNING = "( Job ) The job {0} is not running, the status is = {1}";
-    private static final LogO LOGGER = Ut.Log.cache(JobPool.class);
+    public static final String IS_RUNNING = "[ ZERO ] ( Job ) 任务 {} 已经运行 !!!";
+    public static final String IS_STARTING = "[ ZERO ] ( Job ) 任务 {} 正在启动，请等待它就绪 --> READY";
+    public static final String IS_ERROR = "[ ZERO ] ( Job ) 任务 {} 上次运行遇到了问题，请联系管理员检查状态。";
+    public static final String IS_STOPPED = "[ ZERO ] ( Job ) 任务的 timeId {} 没有存在于 RUNNING 任务表中.";
+    public static final String NOT_RUNNING = "[ ZERO ] ( Job ) 任务 {} 没有运行，它的状态是 {}";
 
     private static final ConcurrentMap<String, Mission> JOBS = new ConcurrentHashMap<>();
     /* RUNNING Reference */
@@ -68,19 +68,19 @@ class JobPool {
                  * If `RUNNING`
                  * Do not started here because it's running now
                  */
-                LOGGER.info(IS_RUNNING, code);
+                log.info(IS_RUNNING, code);
             } else if (EmService.JobStatus.ERROR == status) {
                 /*
                  * If `ERROR`
                  * Could not started here
                  */
-                LOGGER.warn(IS_ERROR, code);
+                log.warn(IS_ERROR, code);
             } else if (EmService.JobStatus.STARTING == status) {
                 /*
                  * If `STARTING`
                  * Could not started here
                  */
-                LOGGER.warn(IS_STARTING, code);
+                log.warn(IS_STARTING, code);
             } else {
                 if (EmService.JobStatus.STOPPED == status) {
                     /*
@@ -110,7 +110,7 @@ class JobPool {
                 /*
                  * Other status is invalid
                  */
-                LOGGER.info(NOT_RUNNING, mission.getCode(), status);
+                log.info(NOT_RUNNING, mission.getCode(), status);
             }
         });
     }
@@ -169,7 +169,7 @@ class JobPool {
     private static void uniform(final Long timeId, final Consumer<Mission> consumer) {
         final String code = RUNNING.get(timeId);
         if (Ut.isNil(code)) {
-            LOGGER.info(IS_STOPPED, timeId);
+            log.info(IS_STOPPED, timeId);
         } else {
             uniform(code, consumer);
         }

@@ -11,6 +11,7 @@ import io.zerows.platform.constant.VString;
 import io.zerows.platform.constant.VValue;
 import io.zerows.platform.enums.EmService;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.lang.annotation.Annotation;
 import java.util.Objects;
@@ -19,10 +20,11 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
 public class JobExtractor implements Extractor<Mission> {
 
 
-    public static final String JOB_IGNORE = "[ Job ] The class {0} annotated with @Job will be ignored because there is no @On method defined.";
+    public static final String JOB_IGNORE = "[ ZERO ] ( Job ) 类 {} 使用了 @Job 注解，但没有定义 @On 的方法，将会被忽略。";
 
     @Override
     public Mission extract(final Class<?> clazz) {
@@ -81,7 +83,7 @@ public class JobExtractor implements Extractor<Mission> {
         mission.connect(clazz);
         /* on method must existing */
         if (Objects.isNull(mission.getOn())) {
-            this.logger().warn(JOB_IGNORE, clazz.getName());
+            log.warn(JOB_IGNORE, clazz.getName());
             return null;
         }
         return mission;

@@ -5,10 +5,10 @@ import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.LogO;
 import io.zerows.cosmic.plugins.job.Agha;
 import io.zerows.cosmic.plugins.job.metadata.Mission;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,9 +16,9 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Slf4j
 public class JobClientImpl implements JobClient {
 
-    private static final LogO LOGGER = Ut.Log.plugin(JobClientImpl.class);
     private transient final Vertx vertx;
     private transient final JsonObject config;
 
@@ -45,7 +45,7 @@ public class JobClientImpl implements JobClient {
              * */
             return agha.begin(mission);
         } else {
-            LOGGER.info("( JobClient ) The pool could not find job of code = `{0}`", code);
+            log.warn("[ ZERO ] ( JobClient ) 无法从任务池中找到 code = `{}` 的任务！", code);
             return Ut.future(-1L);
         }
     }

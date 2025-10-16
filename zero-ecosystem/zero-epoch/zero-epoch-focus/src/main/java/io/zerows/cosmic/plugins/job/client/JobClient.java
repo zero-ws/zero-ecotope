@@ -22,10 +22,6 @@ public interface JobClient {
         return new JobClientImpl(vertx, config);
     }
 
-    static JobClient createShared(final Vertx vertx) {
-        return new JobClientImpl(vertx, new JsonObject());
-    }
-
     static void bind(final Long timerId, final String code) {
         JobPool.bind(timerId, code);
     }

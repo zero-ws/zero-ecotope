@@ -5,6 +5,8 @@ import io.zerows.platform.constant.VString;
 import io.zerows.platform.exception._60050Exception501NotSupport;
 import io.zerows.platform.metadata.Kv;
 import io.zerows.support.Ut;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -55,7 +57,8 @@ public abstract class JobAtBase implements JobAt {
                     }
                 }
             } else {
-                this.logger().warn("The formula could not be parsed: {0}", formula);
+                final Logger log = LoggerFactory.getLogger(this.getClass());
+                log.warn("[ ZERO ] 任务表达式无法解析: {}", formula);
             }
         });
         // Instant from `past -> now -> future`

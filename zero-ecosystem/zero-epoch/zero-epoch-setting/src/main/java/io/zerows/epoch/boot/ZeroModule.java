@@ -4,9 +4,10 @@ import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.zerows.epoch.annotations.Actor;
 import io.zerows.epoch.configuration.NodeStore;
+import io.zerows.epoch.management.OCacheClass;
 import io.zerows.specification.configuration.HActor;
 import io.zerows.specification.configuration.HConfig;
-import io.zerows.spi.HPI;
+import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
 import lombok.extern.slf4j.Slf4j;
 
@@ -37,16 +38,21 @@ public class ZeroModule<T> {
         this.initMatrix();
     }
 
+    private List<HActor> findActors() {
+        final Set<Class<?>> clazzSet = OCacheClass.entireValue();
+        return clazzSet.stream()
+            .filter(each -> Ut.isImplement(each, HActor.class))
+            .filter(each -> each.isAnnotationPresent(Actor.class))
+            .map(each -> (HActor) Ut.singleton(each))
+            .collect(Collectors.toList());
+    }
+
     private void initMatrix() {
         if (ACTOR_MATRIX.isEmpty()) {
-            final List<HActor> actors = HPI.findMany(HActor.class);
+            final List<HActor> actors = this.findActors();
+
             for (final HActor actor : actors) {
                 final Actor annotation = actor.getClass().getDeclaredAnnotation(Actor.class);
-                if (Objects.isNull(annotation)) {
-                    log.warn("[ ZERO ] ( Actor ) 类 {} 未配置 @Actor 注解，无法纳入 Actor 矩阵中！",
-                        actor.getClass().getName());
-                    continue;
-                }
                 final int sequence = annotation.sequence();
                 ACTOR_MATRIX.computeIfAbsent(sequence, k -> ConcurrentHashMap.newKeySet()).add(actor);
             }

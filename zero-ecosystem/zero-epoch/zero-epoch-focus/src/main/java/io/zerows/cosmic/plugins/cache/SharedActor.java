@@ -21,11 +21,11 @@ public class SharedActor extends AbstractHActor {
     @SuppressWarnings("all")
     protected Future<Boolean> startAsync(final HConfig config, final Vertx vertxRef) {
         final AddOn<SharedClient> addOn = SharedAddOn.of(vertxRef, config);
-        this.vLog("SharedActor 初始化完成，忽略配置");
+        this.vLog("[ Shared ] SharedActor 初始化完成，忽略配置");
 
         final Provider<SharedClient> provider = new SharedProvider(addOn);
         DiRegistry.of().put(addOn.getKey(), provider);
-        this.vLog("DI 提供者 Provider 注册：provider = {}, key = {}", provider, addOn.getKey());
+        this.vLog("[ Shared ] DI 提供者 Provider 注册：provider = {}, key = {}", provider, addOn.getKey());
         return Future.succeededFuture(Boolean.TRUE);
     }
 }

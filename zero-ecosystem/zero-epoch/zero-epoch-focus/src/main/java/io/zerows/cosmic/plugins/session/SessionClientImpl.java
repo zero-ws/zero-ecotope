@@ -22,7 +22,8 @@ public class SessionClientImpl implements SessionClient {
 
     private SessionClientImpl(final Vertx vertx, final HConfig config) {
         this.config = config;
-        this.store = MANAGER.getStore(vertx, () -> SessionUtil.createStore(vertx, config));
+        final String key = SessionUtil.keyOf(vertx, config);
+        this.store = MANAGER.STORE().get(key, (ignored) -> SessionUtil.createStore(vertx, config));
     }
 
     static SessionClientImpl create(final Vertx vertx, final HConfig config) {

@@ -7,9 +7,6 @@ import io.r2mo.function.Fn;
 import io.r2mo.typed.json.jackson.ClassDeserializer;
 import io.r2mo.typed.json.jackson.ClassSerializer;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.environment.DevEnv;
-import io.zerows.component.log.LogO;
-import io.zerows.cosmic.plugins.job.JobMessage;
 import io.zerows.cosmic.plugins.job.exception._60042Exception501JobOnMissing;
 import io.zerows.cosmic.plugins.job.exception._60054Exception409JobFormulaError;
 import io.zerows.epoch.annotations.Off;
@@ -20,6 +17,8 @@ import io.zerows.platform.constant.VValue;
 import io.zerows.platform.enums.EmService;
 import io.zerows.specification.app.HArk;
 import io.zerows.support.Ut;
+import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
 import java.lang.annotation.Annotation;
@@ -34,8 +33,9 @@ import java.util.function.Supplier;
  * 1) The definition came from scanned @Job annotation class ( each class should has one Mission )
  * 2) The definition came from JobStore interface ( the job definition may be stored into database or other
  */
+@Data
+@Slf4j
 public class Mission implements Serializable {
-    private static final LogO LOGGER = Ut.Log.metadata(Mission.class);
     /* Job status, default job is 'starting' */
     private EmService.JobStatus status = EmService.JobStatus.STARTING;
     /* Job name */
@@ -123,126 +123,6 @@ public class Mission implements Serializable {
     @JsonIgnore
     private KScheduler timer;
 
-    public EmService.JobStatus getStatus() {
-        return this.status;
-    }
-
-    public void setStatus(final EmService.JobStatus status) {
-        this.status = status;
-    }
-
-    public boolean isReadOnly() {
-        return this.readOnly;
-    }
-
-    public void setReadOnly(final boolean readOnly) {
-        this.readOnly = readOnly;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(final String name) {
-        this.name = name;
-    }
-
-    public EmService.JobType getType() {
-        return this.type;
-    }
-
-    public void setType(final EmService.JobType type) {
-        this.type = type;
-    }
-
-    public String getCode() {
-        return this.code;
-    }
-
-    public void setCode(final String code) {
-        this.code = code;
-    }
-
-    public String getComment() {
-        return this.comment;
-    }
-
-    public void setComment(final String comment) {
-        this.comment = comment;
-    }
-
-    public JsonObject getMetadata() {
-        return this.metadata;
-    }
-
-    public void setMetadata(final JsonObject metadata) {
-        this.metadata = metadata;
-    }
-
-    public JsonObject getAdditional() {
-        return this.additional;
-    }
-
-    public void setAdditional(final JsonObject additional) {
-        this.additional = additional;
-    }
-
-    public Object getProxy() {
-        return this.proxy;
-    }
-
-    public void setProxy(final Object proxy) {
-        this.proxy = proxy;
-    }
-
-    public Method getOn() {
-        return this.on;
-    }
-
-    public void setOn(final Method on) {
-        this.on = on;
-    }
-
-    public Method getOff() {
-        return this.off;
-    }
-
-    public void setOff(final Method off) {
-        this.off = off;
-    }
-
-    public Class<?> getIncome() {
-        return this.income;
-    }
-
-    public void setIncome(final Class<?> income) {
-        this.income = income;
-    }
-
-    public String getIncomeAddress() {
-        return this.incomeAddress;
-    }
-
-    public void setIncomeAddress(final String incomeAddress) {
-        this.incomeAddress = incomeAddress;
-    }
-
-    public Class<?> getOutcome() {
-        return this.outcome;
-    }
-
-    public void setOutcome(final Class<?> outcome) {
-        this.outcome = outcome;
-    }
-
-    public String getOutcomeAddress() {
-        return this.outcomeAddress;
-    }
-
-    public void setOutcomeAddress(final String outcomeAddress) {
-        this.outcomeAddress = outcomeAddress;
-    }
-
     public Mission connect(final Class<?> clazz) {
         /*
          * Here the system should connect clazz to set:
@@ -298,9 +178,7 @@ public class Mission implements Serializable {
                     this.outcomeAddress = null;
                 }
             }
-            if (DevEnv.devJobBoot()) {
-                LOGGER.info(JobMessage.MISSION.JOB_OFF, this.getCode());
-            }
+            log.debug("[ ZERO ] ( Job ) 当前任务 `{}` 定义了 @Off 方法.", this.getCode());
         }
         return this;
     }

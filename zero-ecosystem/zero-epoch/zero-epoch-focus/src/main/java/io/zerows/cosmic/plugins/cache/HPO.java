@@ -28,14 +28,14 @@ public class HPO {
     private HPO(final String name) {
         this.name = name;
         if (Ut.isNil(name)) {
-            this.client = SharedAddOn.INSTANCE.createInstance();
+            this.client = SharedAddOn.of().createInstance();
         } else {
-            this.client = SharedAddOn.INSTANCE.createInstance(name);
+            this.client = SharedAddOn.of().createInstance(name);
         }
     }
 
     public static HPO of(final String name) {
-        final String nameP = Ut.isNil(name) ? SharedAddOn.NAME : name;
+        final String nameP = Ut.isNil(name) ? HPO.class.getName() : name;
         return CC_UX_POOL.pick(() -> new HPO(nameP), nameP);
     }
 
