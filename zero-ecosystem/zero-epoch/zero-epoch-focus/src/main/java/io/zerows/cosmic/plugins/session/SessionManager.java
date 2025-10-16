@@ -14,7 +14,7 @@ import io.zerows.sdk.plugins.AddOnManager;
  * @author lang : 2025-10-14
  */
 class SessionManager extends AddOnManager<SessionClient> {
-    private static final Cc<String, SessionClient> CC_INSTANCE = Cc.open();
+    private static final Cc<String, SessionClient> CC_STORED = Cc.open();
 
     private static final SessionManager INSTANCE = new SessionManager();
     private final SessionStoreManager storeManager;
@@ -29,7 +29,7 @@ class SessionManager extends AddOnManager<SessionClient> {
 
     @Override
     protected Cc<String, SessionClient> stored() {
-        return CC_INSTANCE;
+        return CC_STORED;
     }
 
     // --------------------------------------------------------------------------------

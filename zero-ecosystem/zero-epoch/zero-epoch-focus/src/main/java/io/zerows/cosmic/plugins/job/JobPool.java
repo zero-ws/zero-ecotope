@@ -1,4 +1,4 @@
-package io.zerows.cosmic.plugins.job.client;
+package io.zerows.cosmic.plugins.job;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.cosmic.plugins.job.metadata.Mission;

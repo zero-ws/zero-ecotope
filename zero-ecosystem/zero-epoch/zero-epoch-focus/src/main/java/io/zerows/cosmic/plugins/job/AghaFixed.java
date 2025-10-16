@@ -2,7 +2,6 @@ package io.zerows.cosmic.plugins.job;
 
 import io.vertx.core.Future;
 import io.vertx.core.Promise;
-import io.zerows.cosmic.plugins.job.client.JobClient;
 import io.zerows.cosmic.plugins.job.metadata.Mission;
 import io.zerows.support.Ut;
 

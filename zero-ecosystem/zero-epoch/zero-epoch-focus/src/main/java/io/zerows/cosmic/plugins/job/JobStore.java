@@ -2,12 +2,24 @@ package io.zerows.cosmic.plugins.job;
 
 import io.zerows.cosmic.plugins.job.metadata.Mission;
 
+import java.util.Set;
+
 /**
  * JobStore bridge for Set<Mission> get
  * 1) @Job annotation class here
  * 2) Database job get here that configured in vertx-job.yml
  */
-public interface JobStore extends JobReader {
+public interface JobStore {
+
+    /*
+     * Get all job definition from zero framework
+     */
+    Set<Mission> fetch();
+
+    /*
+     * Find job by code.
+     */
+    Mission fetch(String code);
 
     /*
      * Remove mission from get

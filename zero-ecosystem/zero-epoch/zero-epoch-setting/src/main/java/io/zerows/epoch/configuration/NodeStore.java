@@ -118,8 +118,13 @@ public class NodeStore {
         return ofSetting(nodeVertx);
     }
 
-    public static HConfig findExtension(final Vertx vertxRef, final String name) {
-        return Optional.ofNullable(ofSetting(vertxRef))
+    public static <T> HConfig findExtension(final T containerRef, final String name) {
+        if (Objects.isNull(name)) {
+            return null;
+        }
+        return Optional.of(containerRef)
+            .map(container -> (Vertx) container)
+            .map(NodeStore::ofSetting)
             .map(setting -> setting.extension(name))
             .orElse(null);
     }
@@ -135,11 +140,9 @@ public class NodeStore {
         if (Objects.isNull(name)) {
             return null;
         }
-        if (!(containerRef instanceof final Vertx vertxRef)) {
-            log.warn("[ ZERO ] 传入的引用不是 Vertx 实例，无法获取配置 = {}", name);
-            return null;
-        }
-        return Optional.ofNullable(ofSetting(vertxRef))
+        return Optional.of(containerRef)
+            .map(container -> (Vertx) container)
+            .map(NodeStore::ofSetting)
             .map(setting -> setting.infix(name))
             .orElse(null);
     }

@@ -20,11 +20,11 @@ public interface JobAt {
     Cc<String, JobAt> CC_JOB_AT = Cc.openThread();
     ConcurrentMap<PerMode, Supplier<JobAt>> AT_MAP = new ConcurrentHashMap<>() {
         {
-            this.put(PerMode.D, JobDaily::new);
-            this.put(PerMode.W, JobWeekly::new);
-            this.put(PerMode.M, JobMonthly::new);
-            this.put(PerMode.Q, JobQuarterly::new);
-            this.put(PerMode.Y, JobYearly::new);
+            this.put(PerMode.D, JobAtDaily::new);
+            this.put(PerMode.W, JobAtWeekly::new);
+            this.put(PerMode.M, JobAtMonthly::new);
+            this.put(PerMode.Q, JobAtQuarterly::new);
+            this.put(PerMode.Y, JobAtYearly::new);
         }
     };
 

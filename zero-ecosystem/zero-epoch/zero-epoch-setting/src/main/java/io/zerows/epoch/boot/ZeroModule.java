@@ -95,14 +95,17 @@ public class ZeroModule<T> {
             if (Objects.isNull(actorSet) || actorSet.isEmpty()) {
                 future = future.compose(nil -> Future.succeededFuture(Boolean.TRUE));
             } else {
-                log.info("[ ZMOD ] \t \uD83E\uDDCA ---> 执行 sequence = {} 的 Actor 集合，共 {} 个组件", sequence, actorSet.size());
-                future = future.compose(nil -> Fx.combineB(actorSet.stream().map(actor -> {
-                    final HConfig config = this.findConfig(actor);
-                    return executorFn.apply(config, actor);
-                }).filter(Objects::nonNull).collect(Collectors.toSet())).otherwise(error -> {
-                    log.error("[ ZMOD ] 执行异常 --> ", error);
-                    return Boolean.FALSE;
-                }));
+                future = future.compose(nil -> {
+                    // 将日志挪到 future.compose 里面执行，保证顺序正确
+                    log.info("[ ZMOD ] \t \uD83E\uDDCA ---> 执行 sequence = {} 的 Actor 集合，共 {} 个组件", sequence, actorSet.size());
+                    return Fx.combineB(actorSet.parallelStream().map(actor -> {
+                        final HConfig config = this.findConfig(actor);
+                        return executorFn.apply(config, actor);
+                    }).filter(Objects::nonNull).collect(Collectors.toSet())).otherwise(error -> {
+                        log.error("[ ZMOD ] 执行异常 --> ", error);
+                        return Boolean.FALSE;
+                    });
+                });
             }
         }
         return future;
@@ -111,6 +114,10 @@ public class ZeroModule<T> {
     private HConfig findConfig(final HActor actor) {
         final Actor annotation = actor.getClass().getDeclaredAnnotation(Actor.class);
         final String configKey = annotation.value();
-        return NodeStore.findInfix(this.container, configKey);
+        HConfig config = NodeStore.findInfix(this.container, configKey);
+        if (Objects.isNull(config)) {
+            config = NodeStore.findExtension(this.container, configKey);
+        }
+        return config;
     }
 }

@@ -8,7 +8,7 @@ import java.time.temporal.TemporalAdjusters;
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
-class JobYearly extends JobAtBase {
+class JobAtYearly extends JobAtBase {
     @Override
     protected LocalDateTime analyze(final LocalDateTime startAt, final LocalTime time, final String segment) {
         final LocalDate startDate = startAt.toLocalDate();

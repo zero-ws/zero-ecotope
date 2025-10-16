@@ -8,7 +8,7 @@ import java.time.temporal.TemporalAdjusters;
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
-class JobQuarterly extends JobAtBase {
+class JobAtQuarterly extends JobAtBase {
 
 
     @Override

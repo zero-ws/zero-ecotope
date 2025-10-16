@@ -17,7 +17,7 @@ import jakarta.ws.rs.extension.BodyParam;
 
 @Path("/api")
 @EndPoint
-public interface JobApi {
+public interface TaskApi {
     @Path("/job/start/{code}")
     @PUT
     @Address(JtAddr.Job.START)

@@ -1,4 +1,4 @@
-package io.zerows.cosmic.plugins.job.client;
+package io.zerows.cosmic.plugins.job;
 
 import io.vertx.codegen.annotations.Fluent;
 import io.vertx.core.AsyncResult;
@@ -9,16 +9,19 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.cosmic.plugins.job.metadata.Mission;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.platform.constant.VString;
+import io.zerows.sdk.plugins.AddOn;
+import io.zerows.specification.configuration.HConfig;
 
 import java.util.List;
 import java.util.Set;
 
 @SuppressWarnings("all")
+@AddOn.Name("DEFAULT_JOB_CLIENT")
 public interface JobClient {
     /*
      * Create local session get bind data
      */
-    static JobClient createShared(final Vertx vertx, final JsonObject config) {
+    static JobClient createClient(final Vertx vertx, final HConfig config) {
         return new JobClientImpl(vertx, config);
     }
 

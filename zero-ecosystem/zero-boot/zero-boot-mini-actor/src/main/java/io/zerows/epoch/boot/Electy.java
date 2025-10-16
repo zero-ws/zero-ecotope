@@ -1,7 +1,6 @@
 package io.zerows.epoch.boot;
 
 import io.vertx.core.Vertx;
-import io.zerows.cosmic.plugins.job.management.ORepositoryJob;
 import io.zerows.cosmic.plugins.security.management.ORepositorySecurity;
 import io.zerows.cosmic.plugins.websocket.management.ORepositorySock;
 import io.zerows.epoch.management.ORepository;
@@ -65,9 +64,9 @@ public class Electy {
             // @Wall -> Authenticate, Authorize
             ORepository.ofOr(ORepositorySecurity.class)::whenStart,
             // @WebSock
-            ORepository.ofOr(ORepositorySock.class)::whenStart,
+            ORepository.ofOr(ORepositorySock.class)::whenStart
             // @Job
-            ORepository.ofOr(ORepositoryJob.class)::whenStart
+            // ORepository.ofOr(ORepositoryJob.class)::whenStart
         );
         final long end = System.currentTimeMillis();
         Ut.Log.boot(Electy.class)

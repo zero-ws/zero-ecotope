@@ -5,15 +5,17 @@ import io.zerows.epoch.annotations.Job;
 import io.zerows.epoch.assembly.Extractor;
 import io.zerows.epoch.configuration.Inquirer;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Slf4j
 public class JobInquirer implements Inquirer<Set<Mission>> {
 
-    public static final String JOB = "( {0} Job ) The Zero system has found " +
-        "{0} components of @Job.";
+    public static final String JOB = "[ ZERO ] \t\t\t \uD83D\uDCA4 ---> ( {} Job ) \uD83E\uDDEC Zero 系统扫描到 {} 个 @Job 组件.";
+
     private final transient Extractor<Mission> extractor = Ut.singleton(JobExtractor.class);
 
     @Override
@@ -22,7 +24,7 @@ public class JobInquirer implements Inquirer<Set<Mission>> {
             .filter(item -> item.isAnnotationPresent(Job.class))
             .collect(Collectors.toSet());
         /* All classes of jobs here */
-        this.logger().info(JOB, jobs.size());
+        log.info(JOB, jobs.size(), jobs.size());
         return jobs.stream().map(this.extractor::extract)
             .filter(Objects::nonNull)
             .collect(Collectors.toSet());

@@ -15,7 +15,7 @@ public class JobPin {
          */
         synchronized (JobStore.class) {
             if (null == STORE) {
-                STORE = new StoreUnity();
+                STORE = new JobStoreUnity();
             }
             return STORE;
         }

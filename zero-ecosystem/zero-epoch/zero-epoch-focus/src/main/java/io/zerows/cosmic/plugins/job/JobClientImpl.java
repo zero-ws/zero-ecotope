@@ -1,12 +1,12 @@
-package io.zerows.cosmic.plugins.job.client;
+package io.zerows.cosmic.plugins.job;
 
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
-import io.zerows.cosmic.plugins.job.Agha;
 import io.zerows.cosmic.plugins.job.metadata.Mission;
+import io.zerows.specification.configuration.HConfig;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
 
@@ -20,9 +20,9 @@ import java.util.stream.Collectors;
 public class JobClientImpl implements JobClient {
 
     private transient final Vertx vertx;
-    private transient final JsonObject config;
+    private transient final HConfig config;
 
-    JobClientImpl(final Vertx vertx, final JsonObject config) {
+    JobClientImpl(final Vertx vertx, final HConfig config) {
         this.vertx = vertx;
         this.config = config;
     }

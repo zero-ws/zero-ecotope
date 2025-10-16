@@ -12,12 +12,12 @@ import java.util.function.Supplier;
 /**
  * Bridge for different JobStore
  */
-class StoreExtension implements JobStore {
+class JobStoreExtension implements JobStore {
     private static final JobConfig CONFIG = JobPin.getConfig();
     private transient JobStore reference;
     private transient boolean isExtension;
 
-    StoreExtension() {
+    JobStoreExtension() {
         if (Objects.nonNull(CONFIG)) {
             final Class<?> storeCls = CONFIG.getStore().getComponent();
             Optional.ofNullable(storeCls).ifPresent(clazz -> {

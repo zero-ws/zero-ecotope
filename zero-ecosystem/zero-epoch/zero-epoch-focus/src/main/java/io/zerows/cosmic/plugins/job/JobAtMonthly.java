@@ -8,7 +8,7 @@ import java.time.temporal.TemporalAdjusters;
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
-class JobMonthly extends JobAtBase {
+class JobAtMonthly extends JobAtBase {
 
     /*
      * The time formatFail should be:

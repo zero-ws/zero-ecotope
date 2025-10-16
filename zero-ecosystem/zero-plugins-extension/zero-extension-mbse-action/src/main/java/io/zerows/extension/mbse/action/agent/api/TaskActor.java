@@ -10,7 +10,7 @@ import io.zerows.program.Ux;
 import jakarta.inject.Inject;
 
 @Queue
-public class JobActor {
+public class TaskActor {
 
     @Inject
     private transient JobStub stub;

@@ -4,7 +4,6 @@ import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Vertx;
 import io.zerows.component.environment.DevMonitor;
 import io.zerows.cortex.metadata.RunVertx;
-import io.zerows.cosmic.handler.ZeroWatchDog;
 import io.zerows.platform.enums.VertxComponent;
 import io.zerows.specification.development.compiled.HBundle;
 import lombok.extern.slf4j.Slf4j;
@@ -46,7 +45,7 @@ class LinearCenter {
 
         log.info("[ ZERO ] ⏳ Verticle 组件 {} 发布中... instances = {}, thread = {}",
             classVerticle.getName(), options.getInstances(), options.getThreadingModel());
-        ZeroWatchDog.watchAsync(vertx, vertx.deployVerticle(classVerticle.getName(), options).onComplete(res -> {
+        vertx.deployVerticle(classVerticle.getName(), options).onComplete(res -> {
             final String deploymentId = res.result();
             if (res.succeeded()) {
                 log.info("[ ZERO ] ✅ Verticle 组件 {} 发布成功！( instances = {}, deploymentId = {}, thread = {} ",
@@ -68,7 +67,7 @@ class LinearCenter {
                     classVerticle.getName(), options.getInstances(), deploymentId,
                     options.getThreadingModel(), Objects.isNull(ex) ? "未知错误" : ex.getMessage());
             }
-        }), LinearCenter.class.getName());
+        });
     }
 
     static void stopAsync(final Class<?> verticleCls,

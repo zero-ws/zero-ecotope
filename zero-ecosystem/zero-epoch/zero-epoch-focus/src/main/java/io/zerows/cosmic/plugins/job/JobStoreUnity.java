@@ -1,11 +1,8 @@
 package io.zerows.cosmic.plugins.job;
 
-import io.zerows.component.log.LogO;
-import io.zerows.cosmic.plugins.job.client.JobClient;
-import io.zerows.cosmic.plugins.job.client.JobInfix;
 import io.zerows.cosmic.plugins.job.metadata.Mission;
 import io.zerows.platform.enums.EmService;
-import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -15,17 +12,16 @@ import java.util.stream.Collectors;
 /**
  * Bridge for different JobStore
  */
-class StoreUnity implements JobStore {
-
-    private static final LogO LOGGER = Ut.Log.cache(StoreUnity.class);
+@Slf4j
+class JobStoreUnity implements JobStore {
     /*
      * Code in programming here ( Could not modify, read-only )
      */
-    private final transient JobReader reader = new StoreCode();
+    private final transient JobStore reader = new JobStoreCode();
     /*
      * Storage for job definition ( Could be modified )
      */
-    private final transient JobStore store = new StoreExtension();
+    private final transient JobStore store = new JobStoreExtension();
 
     @Override
     public Set<Mission> fetch() {
@@ -39,13 +35,13 @@ class StoreUnity implements JobStore {
             .stream()
             .filter(Mission::isReadOnly)
             .collect(Collectors.toSet());
-        LOGGER.info(JobMessage.STORE.SCANNED, missions.size(), "Programming");
+        log.info("[ ZERO ] 系统正在扫描 {} 类型的任务，共 {} 个", "Programming", missions.size());
 
         final Set<Mission> storage = this.store.fetch()
             .stream()
             .filter(mission -> !mission.isReadOnly())
             .collect(Collectors.toSet());
-        LOGGER.info(JobMessage.STORE.SCANNED, storage.size(), "Dynamic/Stored");
+        log.info("[ ZERO ] 系统正在扫描 {} 类型的任务，共 {} 个", "Dynamic/Stored", storage.size());
 
         /* Merged */
         final Set<Mission> result = new HashSet<>();
@@ -78,7 +74,7 @@ class StoreUnity implements JobStore {
 
     @Override
     public Mission fetch(final String code) {
-        final JobClient client = JobInfix.getClient();
+        final JobClient client = JobClientAddOn.of().createSingleton();
         Mission mission = client.fetch(code);
         if (Objects.isNull(mission)) {
             mission = this.reader.fetch(code);
@@ -91,7 +87,7 @@ class StoreUnity implements JobStore {
 
     @Override
     public JobStore remove(final Mission mission) {
-        final JobClient client = JobInfix.getClient();
+        final JobClient client = JobClientAddOn.of().createSingleton();
         client.remove(mission.getCode());
         return this.store.remove(mission);
     }
