@@ -8,8 +8,8 @@ import io.zerows.sdk.plugins.AddOnProvider;
  *
  * @author lang : 2025-10-14
  */
-public class SessionProvider extends AddOnProvider<SessionClient> {
-    public SessionProvider(final AddOn<SessionClient> addOn) {
+class SessionProvider extends AddOnProvider<SessionClient> {
+    SessionProvider(final AddOn<SessionClient> addOn) {
         super(addOn);
     }
 }

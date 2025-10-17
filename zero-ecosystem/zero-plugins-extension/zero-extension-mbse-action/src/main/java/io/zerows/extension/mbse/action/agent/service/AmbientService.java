@@ -3,7 +3,7 @@ package io.zerows.extension.mbse.action.agent.service;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.cosmic.plugins.job.JobClient;
-import io.zerows.cosmic.plugins.job.JobClientAddOn;
+import io.zerows.cosmic.plugins.job.JobClientActor;
 import io.zerows.cosmic.plugins.job.metadata.Mission;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.mbse.action.atom.JtJob;
@@ -54,7 +54,7 @@ public class AmbientService implements AmbientStub {
          * Reset `Status`
          */
         mission.setStatus(EmService.JobStatus.STOPPED);
-        final JobClient client = JobClientAddOn.of().createSingleton();
+        final JobClient client = JobClientActor.ofDefault(); // JobClientAddOn.of().createSingleton();
         client.save(mission);
         return Ux.future(JobKit.toJson(mission));
     }

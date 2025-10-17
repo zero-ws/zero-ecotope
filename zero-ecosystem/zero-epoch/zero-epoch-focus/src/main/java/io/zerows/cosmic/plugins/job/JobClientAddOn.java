@@ -8,7 +8,7 @@ import io.zerows.specification.configuration.HConfig;
 /**
  * @author lang : 2025-10-16
  */
-public class JobClientAddOn extends AddOnBase<JobClient> {
+class JobClientAddOn extends AddOnBase<JobClient> {
     private static JobClientAddOn INSTANCE;
 
     private JobClientAddOn(final Vertx vertx, final HConfig config) {

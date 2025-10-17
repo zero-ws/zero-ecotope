@@ -8,8 +8,8 @@ import io.zerows.sdk.plugins.AddOnProvider;
  *
  * @author lang : 2025-10-14
  */
-public class SharedProvider extends AddOnProvider<SharedClient> {
-    public SharedProvider(final AddOn<SharedClient> addOn) {
+class SharedProvider extends AddOnProvider<SharedClient> {
+    SharedProvider(final AddOn<SharedClient> addOn) {
         super(addOn);
     }
 }

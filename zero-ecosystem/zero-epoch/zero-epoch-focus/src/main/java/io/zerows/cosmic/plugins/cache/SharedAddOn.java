@@ -8,7 +8,7 @@ import io.zerows.specification.configuration.HConfig;
 /**
  * @author lang : 2025-10-15
  */
-public class SharedAddOn extends AddOnBase<SharedClient> {
+class SharedAddOn extends AddOnBase<SharedClient> {
 
     private static SharedAddOn INSTANCE;
 

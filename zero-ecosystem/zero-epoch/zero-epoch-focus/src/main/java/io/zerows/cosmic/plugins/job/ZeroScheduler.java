@@ -38,12 +38,12 @@ public class ZeroScheduler extends AbstractVerticle {
 
     @Override
     public void start() {
-        final JobClientManager manager = JobClientManager.of();
         /* Whether contains JobConfig? */
-        final JobConfig config = manager.getConfiguration();
+        final JobConfig config = JobActor.ofConfig();
         if (Objects.nonNull(config)) {
             /* Pick Up all Mission definition from system */
-            final Set<Mission> missions = manager.getStore().fetch();
+            final JobStore store = JobActor.ofStore();
+            final Set<Mission> missions = store.fetch();
             /* Whether there exist Mission definition */
             if (missions.isEmpty()) {
                 log.info(JOB_EMPTY);

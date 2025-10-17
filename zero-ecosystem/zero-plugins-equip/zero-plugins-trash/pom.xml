@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>zero-plugins-common-trash</artifactId>
+    <artifactId>zero-plugins-trash</artifactId>
     <!-- Higher dependency -->
     <name>Zero::Plugins::🧩 - Common Trash</name>
     <dependencies>

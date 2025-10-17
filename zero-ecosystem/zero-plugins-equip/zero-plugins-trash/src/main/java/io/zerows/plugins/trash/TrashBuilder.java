@@ -1,13 +1,18 @@
-package io.zerows.plugins.common.trash;
+package io.zerows.plugins.trash;
 
+import io.r2mo.typed.cc.Cc;
 import io.vertx.codegen.annotations.Fluent;
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.database.jooq.JooqInfix;
-import io.zerows.component.log.LogOf;
 import io.zerows.support.Ut;
-import org.jooq.*;
+import lombok.extern.slf4j.Slf4j;
+import org.jooq.Batch;
+import org.jooq.DSLContext;
+import org.jooq.Field;
+import org.jooq.InsertSetMoreStep;
+import org.jooq.Query;
 import org.jooq.impl.DSL;
 import org.jooq.impl.SQLDataType;
 
@@ -25,10 +30,10 @@ import java.util.concurrent.ConcurrentMap;
  * 2) Double check whether the TABLE EXISTING
  * 3) Build Data into TABLE_NAME
  */
+@Slf4j
 @SuppressWarnings("all")
 class TrashBuilder {
 
-    private static final LogOf LOGGER = LogOf.get(TrashBuilder.class);
     private static ConcurrentMap<String, Field> FIELD_MAP = new ConcurrentHashMap<String, Field>() {
         {
             put("key", DSL.field(DSL.name("KEY"), String.class));
@@ -44,8 +49,15 @@ class TrashBuilder {
     private final transient DSLContext context;
     private final transient String identifier;
     private final transient String tableName;
+    private static Cc<String, TrashBuilder> CC_BUILDER = Cc.open();
 
-    TrashBuilder(final String identifier) {
+    static TrashBuilder of(final String identifier, final JsonObject options) {
+        final String cacheKey = Ut.isNil(options) ? identifier : identifier + "@" + options.hashCode();
+        return CC_BUILDER.pick(() -> new TrashBuilder(identifier).init(options), cacheKey);
+    }
+
+
+    private TrashBuilder(final String identifier) {
         this.identifier = identifier;
         final String tableName = this.identifier.toUpperCase()
             /*
@@ -60,7 +72,7 @@ class TrashBuilder {
     }
 
     @Fluent
-    public TrashBuilder init() {
+    public TrashBuilder init(final JsonObject options) {
         this.context.createTableIfNotExists(DSL.name(this.tableName))
             /* Primary Key */
             .column("KEY", SQLDataType.VARCHAR(36).nullable(false))
@@ -76,7 +88,7 @@ class TrashBuilder {
             /* PRIMARY KEY */
             .constraint(DSL.constraint("PK_" + this.tableName).primaryKey(DSL.name("KEY")))
             .execute();
-        LOGGER.info("[ ZERO-HIS ] The table `{0}` has been created successfully!", this.tableName);
+        log.info("[ ZERO ] ( His ) 数据表 `{}` 已创建！", this.tableName);
         return this;
     }
 

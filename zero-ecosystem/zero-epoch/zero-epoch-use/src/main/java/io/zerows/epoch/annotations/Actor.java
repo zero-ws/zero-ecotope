@@ -41,4 +41,11 @@ public @interface Actor {
      * @return 顺序，默认 -1，负数优先级高于正数
      */
     int sequence() default -1;
+
+    /**
+     * 此处表示 Actor 必须要包含 value() 的配置项才会启动，否则不会启动
+     *
+     * @return 是否配置
+     */
+    boolean configured() default false;
 }

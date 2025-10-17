@@ -17,7 +17,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Slf4j
-public class JobClientImpl implements JobClient {
+class JobClientImpl implements JobClient {
 
     private transient final Vertx vertx;
     private transient final HConfig config;

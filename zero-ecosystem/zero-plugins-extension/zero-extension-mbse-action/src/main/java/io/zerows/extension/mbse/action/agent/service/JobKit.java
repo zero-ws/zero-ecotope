@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.cosmic.plugins.job.JobClient;
-import io.zerows.cosmic.plugins.job.JobClientAddOn;
+import io.zerows.cosmic.plugins.job.JobClientActor;
 import io.zerows.cosmic.plugins.job.metadata.Mission;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IService;
@@ -18,7 +18,7 @@ import java.util.Set;
  *  Job kit here for configuration
  */
 public class JobKit {
-    private static final JobClient CLIENT = JobClientAddOn.of().createSingleton();
+    private static final JobClient CLIENT = JobClientActor.ofDefault();
 
     /*
      * Could not use old code here

@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Defer
-public class SessionClientImpl implements SessionClient {
+class SessionClientImpl implements SessionClient {
 
     private static final SessionManager MANAGER = SessionManager.of();
     private final SessionStore store;

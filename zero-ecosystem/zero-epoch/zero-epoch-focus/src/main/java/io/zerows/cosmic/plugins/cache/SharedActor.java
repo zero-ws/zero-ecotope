@@ -28,4 +28,8 @@ public class SharedActor extends AbstractHActor {
         this.vLog("[ Shared ] DI 提供者 Provider 注册：provider = {}, key = {}", provider, addOn.getKey());
         return Future.succeededFuture(Boolean.TRUE);
     }
+
+    public static SharedClient ofDefault() {
+        return SharedAddOn.of().createSingleton();
+    }
 }

@@ -5,29 +5,37 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.sdk.plugins.AddOnManager;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.support.Ut;
-import lombok.Getter;
 
 import java.util.Objects;
 
 /**
  * @author lang : 2025-10-17
  */
-public class JobClientManager extends AddOnManager<JobClient> {
+class JobClientManager extends AddOnManager<JobClient> {
     private static final Cc<String, JobClient> CC_STORED = Cc.open();
 
     private static final JobClientManager INSTANCE = new JobClientManager();
 
-    @Getter
     private JobConfig configuration;
-    @Getter
     private JobStore store;
-    @Getter
     private Interval interval;
+
+    JobConfig refConfiguration() {
+        return this.configuration;
+    }
+
+    Interval refInterval() {
+        return this.interval;
+    }
+
+    JobStore refStore() {
+        return this.store;
+    }
 
     private JobClientManager() {
     }
 
-    static JobClientManager of() {
+    public static JobClientManager of() {
         return INSTANCE;
     }
 

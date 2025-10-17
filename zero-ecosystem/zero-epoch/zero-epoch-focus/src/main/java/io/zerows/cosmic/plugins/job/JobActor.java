@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * @author lang : 2025-10-17
  */
-@Actor(value = "job", sequence = -2)
+@Actor(value = "job", sequence = -216)
 @Slf4j
 public class JobActor extends AbstractHActor {
     @Override
@@ -31,5 +31,17 @@ public class JobActor extends AbstractHActor {
         this.vLog("[ Job ] JobActor 任务配置完成！config = {}", config);
 
         return Future.succeededFuture(Boolean.TRUE);
+    }
+
+    public static Interval ofInterval() {
+        return JobClientManager.of().refInterval();
+    }
+
+    public static JobStore ofStore() {
+        return JobClientManager.of().refStore();
+    }
+
+    public static JobConfig ofConfig() {
+        return JobClientManager.of().refConfiguration();
     }
 }

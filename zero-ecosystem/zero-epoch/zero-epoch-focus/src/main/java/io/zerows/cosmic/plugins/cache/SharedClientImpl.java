@@ -20,7 +20,7 @@ import java.util.Set;
 @SuppressWarnings("all")
 @Defer
 @Slf4j
-public class SharedClientImpl implements SharedClient {
+class SharedClientImpl implements SharedClient {
 
     private static final Cc<String, SharedClient> CC_CLIENTS = Cc.open();
 

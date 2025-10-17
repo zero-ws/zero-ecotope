@@ -15,7 +15,7 @@ class JobStoreExtension implements JobStore {
     private transient boolean isExtension;
 
     JobStoreExtension() {
-        this.reference = JobClientManager.of().getStore();
+        this.reference = JobActor.ofStore();
         if (Objects.nonNull(this.reference)) {
             this.isExtension = true;
         }

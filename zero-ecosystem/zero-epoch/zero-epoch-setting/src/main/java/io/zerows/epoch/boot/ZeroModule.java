@@ -96,10 +96,17 @@ public class ZeroModule<T> {
                 future = future.compose(nil -> Future.succeededFuture(Boolean.TRUE));
             } else {
                 future = future.compose(nil -> {
-                    // 将日志挪到 future.compose 里面执行，保证顺序正确
-                    log.info("[ ZMOD ] \t \uD83E\uDDCA ---> 执行 sequence = {} 的 Actor 集合，共 {} 个组件", sequence, actorSet.size());
+                    log.info("[ ZMOD ] \t \uD83E\uDDCA ---> 启动 sequence = `{}` 的 Actor 集合，共 {} 个组件",
+                        String.format("%6d", sequence), actorSet.size());
                     return Fx.combineB(actorSet.parallelStream().map(actor -> {
                         final HConfig config = this.findConfig(actor);
+                        final Actor actorAnnotation = actor.getClass().getDeclaredAnnotation(Actor.class);
+                        final boolean mustConfigured = actorAnnotation.configured();
+                        if (mustConfigured && Objects.isNull(config)) {
+                            log.warn("[ ZMOD ] \t\t⚠️ ---> 跳过 Actor = `{}`, 检查配置项：`{}`",
+                                actor.getClass().getName(), actorAnnotation.value());
+                            return null;
+                        }
                         return executorFn.apply(config, actor);
                     }).filter(Objects::nonNull).collect(Collectors.toSet())).otherwise(error -> {
                         log.error("[ ZMOD ] 执行异常 --> ", error);

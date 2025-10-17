@@ -89,7 +89,7 @@
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-plugins-common-trash</artifactId>
+                <artifactId>zero-plugins-trash</artifactId>
                 <version>${zero.version}</version>
             </dependency>
 

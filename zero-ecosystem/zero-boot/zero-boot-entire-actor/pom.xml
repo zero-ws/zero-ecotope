@@ -63,7 +63,7 @@
         </dependency>
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-plugins-common-trash</artifactId>
+            <artifactId>zero-plugins-trash</artifactId>
         </dependency>
         <dependency>
             <groupId>io.zerows</groupId>

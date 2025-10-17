@@ -4,7 +4,7 @@ import io.vertx.core.Vertx;
 import io.zerows.epoch.annotations.Contract;
 
 public abstract class AbstractMission {
-    private final transient JobStore store = JobClientManager.of().getStore();
+    private final transient JobStore store = JobActor.ofStore();
     @Contract
     private transient Vertx vertx;
 

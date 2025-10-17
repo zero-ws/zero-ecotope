@@ -17,7 +17,7 @@
         <!--        <module>zero-plugins-common-security</module>-->
         <module>zero-plugins-common-security</module>
         <module>zero-plugins-common-shell</module>
-        <module>zero-plugins-common-trash</module>
+        <module>zero-plugins-trash</module>
         <module>zero-plugins-swagger</module>
 
         <!-- Integration -->

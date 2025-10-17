@@ -9,7 +9,7 @@ import java.util.Objects;
 /**
  * @author lang : 2025-10-14
  */
-public class SessionAddOn extends AddOnBase<SessionClient> {
+class SessionAddOn extends AddOnBase<SessionClient> {
 
     private SessionAddOn(final Vertx vertx, final HConfig config) {
         super(vertx, config);
