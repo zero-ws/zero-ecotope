@@ -1,7 +1,6 @@
 package io.zerows.component.destine;
 
 import io.zerows.epoch.metadata.KJoin;
-import io.zerows.epoch.metadata.KPoint;
 import io.zerows.platform.enums.EmDS;
 
 import java.util.Objects;
@@ -13,8 +12,8 @@ import java.util.concurrent.ConcurrentMap;
  * <pre><code>
  *     {
  *         "ofMain": {
- *             "identifier1": {@link KPoint},
- *             "identifier2": {@link KPoint}
+ *             "identifier1": {@link KJoin.Point},
+ *             "identifier2": {@link KJoin.Point}
  *         }
  *     }
  * </code></pre>
@@ -28,7 +27,7 @@ class HymnString extends HymnBase<String> {
     }
 
     @Override
-    public KPoint pointer(final String identifier) {
+    public KJoin.Point pointer(final String identifier) {
         if (Objects.isNull(identifier)) {
             // 输入为 null，直接返回 null 连接点
             return null;
@@ -42,9 +41,9 @@ class HymnString extends HymnBase<String> {
         }
     }
 
-    private KPoint pointTarget(final String identifier) {
-        final ConcurrentMap<String, KPoint> targetMap = this.joinRef.getTarget();
-        final KPoint point = targetMap.getOrDefault(identifier, null);
+    private KJoin.Point pointTarget(final String identifier) {
+        final ConcurrentMap<String, KJoin.Point> targetMap = this.joinRef.getTarget();
+        final KJoin.Point point = targetMap.getOrDefault(identifier, null);
         if (Objects.isNull(point)) {
             // 目标连接点为 null，直接返回
             return null;
@@ -60,8 +59,8 @@ class HymnString extends HymnBase<String> {
         return point.indent(identifier);
     }
 
-    private KPoint pointRefer(final String identifier) {
-        final KPoint point = this.joinRef.getReference();
+    private KJoin.Point pointRefer(final String identifier) {
+        final KJoin.Point point = this.joinRef.getReference();
         if (Objects.isNull(point)) {
             // 目标连接点为 null，直接返回
             return null;

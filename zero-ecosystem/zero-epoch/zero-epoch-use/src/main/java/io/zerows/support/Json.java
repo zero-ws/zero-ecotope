@@ -2,7 +2,7 @@ package io.zerows.support;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.metadata.MMPojoMapping;
+import io.zerows.epoch.metadata.MMAdapt;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,13 +20,9 @@ class Json {
         }
         if (Ut.isNil(pojo)) {
             return Ut.serializeJson(entity, true);
-        } else {
-            return MMPojoMapping.create(Json.class)
-                .mount(pojo)
-                .connect(Ut.serializeJson(entity, true))
-                .to()
-                .result();
         }
+        final JsonObject serialized = Ut.serializeJson(entity, true);
+        return MMAdapt.of(pojo).mapTo(serialized);
     }
 
     static <T> JsonArray toJArray(
@@ -49,12 +45,8 @@ class Json {
         if (Ut.isNil(pojo)) {
             return Ut.deserialize(data, clazz, true);
         }
-        return MMPojoMapping.create(Json.class)
-            .mount(pojo)
-            .connect(data)
-            .type(clazz)
-            .from()
-            .get();
+
+        return MMAdapt.of(pojo).ofType(clazz).mapByT(data);
     }
 
     @SuppressWarnings("all")

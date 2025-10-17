@@ -1,5 +1,6 @@
 package io.zerows.cosmic.bootstrap;
 
+import io.r2mo.typed.common.Kv;
 import io.r2mo.typed.exception.WebException;
 import io.vertx.core.Future;
 import io.vertx.core.http.HttpHeaders;
@@ -16,7 +17,6 @@ import io.zerows.epoch.annotations.Codex;
 import io.zerows.epoch.assembly.DiProxyInstance;
 import io.zerows.epoch.basicore.WebEvent;
 import io.zerows.epoch.web.Envelop;
-import io.zerows.platform.metadata.Kv;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Method;

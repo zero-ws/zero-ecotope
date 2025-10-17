@@ -9,7 +9,7 @@ import io.zerows.extension.runtime.ambient.agent.service.DatumService;
 import io.zerows.extension.runtime.ambient.agent.service.DatumStub;
 import io.zerows.extension.runtime.ambient.uca.dict.Dpm;
 import io.zerows.platform.enums.EmDS;
-import io.zerows.platform.metadata.KDictSource;
+import io.zerows.platform.metadata.KDictConfig;
 import io.zerows.program.Ux;
 import io.zerows.support.fn.Fx;
 
@@ -29,7 +29,7 @@ public class ExAmbientDictionary implements Dictionary {
 
     @Override
     public Future<ConcurrentMap<String, JsonArray>> fetchAsync(final MultiMap paramMap,
-                                                               final List<KDictSource> sources) {
+                                                               final List<KDictConfig.Source> sources) {
         /*
          * Whether sources is empty
          */

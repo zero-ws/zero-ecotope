@@ -1,10 +1,10 @@
 package io.zerows.cosmic.plugins.cache;
 
+import io.r2mo.typed.common.Kv;
 import io.vertx.codegen.annotations.Fluent;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
-import io.zerows.platform.metadata.Kv;
 import io.zerows.sdk.plugins.AddOn;
 
 import java.util.Set;

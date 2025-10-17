@@ -3,8 +3,7 @@ package io.zerows.epoch.jigsaw;
 import io.vertx.core.json.JsonArray;
 import io.zerows.epoch.basicore.MDConnect;
 import io.zerows.epoch.basicore.MDMeta;
-import io.zerows.epoch.metadata.MMPojo;
-import io.zerows.epoch.metadata.MMPojoMapping;
+import io.zerows.epoch.metadata.MMAdapt;
 import io.zerows.support.Ut;
 
 import java.util.HashSet;
@@ -42,10 +41,8 @@ class OnenessConnect implements Oneness<MDConnect> {
             return connect.getKey();
         } else {
             // 带有 pojoFile 映射的主键
-            final MMPojo mojo = MMPojoMapping.create(connect.getClass())
-                .mount(pojoFile)
-                .type(connect.getDao()).mojo();
-            return mojo.getIn(connect.getKey());
+            final MMAdapt adapt = MMAdapt.of(pojoFile).ofType(connect.getDao());
+            return adapt.mapBy(connect.getKey());
         }
     }
 
@@ -63,11 +60,9 @@ class OnenessConnect implements Oneness<MDConnect> {
             return Ut.toSet(unique);
         } else {
             final Set<String> uniqueSet = new HashSet<>();
-            final MMPojo mojo = MMPojoMapping.create(this.getClass())
-                .mount(pojoFile)
-                .type(connect.getDao()).mojo();
+            final MMAdapt adapt = MMAdapt.of(pojoFile).ofType(connect.getDao());
             Ut.itJArray(unique, String.class, (field, index) -> {
-                final String converted = mojo.getIn(field);
+                final String converted = adapt.mapBy(field);
                 if (Objects.isNull(converted)) {
                     uniqueSet.add(field);
                 } else {

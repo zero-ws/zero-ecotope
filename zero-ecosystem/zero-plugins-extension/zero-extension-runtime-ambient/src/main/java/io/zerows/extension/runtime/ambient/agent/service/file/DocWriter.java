@@ -1,5 +1,6 @@
 package io.zerows.extension.runtime.ambient.agent.service.file;
 
+import io.r2mo.typed.common.Kv;
 import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
@@ -12,7 +13,6 @@ import io.zerows.extension.runtime.ambient.domain.tables.pojos.XAttachment;
 import io.zerows.extension.runtime.skeleton.exception._81002Exception400FilenameInvalid;
 import io.zerows.extension.runtime.skeleton.osgi.spi.business.ExIo;
 import io.zerows.extension.runtime.skeleton.osgi.spi.feature.Attachment;
-import io.zerows.platform.metadata.Kv;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import jakarta.inject.Inject;

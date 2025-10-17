@@ -7,7 +7,6 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.destine.Conflate;
 import io.zerows.epoch.metadata.KJoin;
-import io.zerows.epoch.metadata.KPoint;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 import io.zerows.extension.runtime.crud.uca.desk.IxReply;
 import io.zerows.mbse.metadata.KModule;
@@ -54,7 +53,7 @@ class NtJData implements Co<JsonObject, JsonObject, JsonObject, JsonObject> {
     }
 
     /**
-     * 特殊步骤说明，这种模式下，连接点不可以为空 {@link KPoint}
+     * 特殊步骤说明，这种模式下，连接点不可以为空 {@link KJoin.Point}
      * <pre><code>
      *     父主表 / 父从表模式统一处理
      *     1. 首先是源不可以为空（源为空不可做任何连接），必定会存在连接点信息
@@ -73,7 +72,7 @@ class NtJData implements Co<JsonObject, JsonObject, JsonObject, JsonObject> {
         final KJoin join = module.getConnect();
         Objects.requireNonNull(join);
         final String keyField = module.getField().getKey();
-        final KPoint source = join.getSource();
+        final KJoin.Point source = join.getSource();
 
         // 默认异常行为
         this.referenceSource(dataSt);
@@ -158,7 +157,7 @@ class NtJData implements Co<JsonObject, JsonObject, JsonObject, JsonObject> {
         final KJoin join = module.getConnect();
         Objects.requireNonNull(join);
         final String keyField = module.getField().getKey();
-        final KPoint source = join.getSource();
+        final KJoin.Point source = join.getSource();
         if (Objects.isNull(source)) {
             // 未定义，使用默认值
             inputJ.remove(keyField);

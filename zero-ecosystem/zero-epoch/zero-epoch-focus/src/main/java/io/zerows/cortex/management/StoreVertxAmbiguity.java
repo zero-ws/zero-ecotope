@@ -1,12 +1,12 @@
 package io.zerows.cortex.management;
 
+import io.r2mo.typed.common.MultiKeyMap;
 import io.vertx.core.Vertx;
 import io.zerows.cortex.metadata.RunVertx;
 import io.zerows.epoch.configuration.NodeStore;
 import io.zerows.epoch.configuration.NodeVertx;
 import io.zerows.platform.exception._60050Exception501NotSupport;
 import io.zerows.platform.management.AbstractAmbiguity;
-import io.zerows.platform.metadata.MultiKeyMap;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;

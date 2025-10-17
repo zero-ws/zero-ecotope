@@ -1,5 +1,6 @@
 package io.zerows.extension.mbse.basement.uca.plugin;
 
+import io.r2mo.typed.common.Kv;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.MMComponent;
@@ -7,7 +8,6 @@ import io.zerows.extension.mbse.basement.atom.Model;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.atom.element.DataTpl;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MAttribute;
-import io.zerows.platform.metadata.Kv;
 import io.zerows.specification.modeling.HAttribute;
 import io.zerows.specification.modeling.HRecord;
 import io.zerows.specification.modeling.property.IComponent;

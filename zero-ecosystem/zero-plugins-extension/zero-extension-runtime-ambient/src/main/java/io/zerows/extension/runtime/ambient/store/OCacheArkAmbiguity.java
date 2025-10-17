@@ -1,7 +1,7 @@
 package io.zerows.extension.runtime.ambient.store;
 
+import io.r2mo.typed.common.MultiKeyMap;
 import io.zerows.platform.management.AbstractAmbiguity;
-import io.zerows.platform.metadata.MultiKeyMap;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.app.HArk;
 import io.zerows.specification.development.compiled.HBundle;

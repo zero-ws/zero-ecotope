@@ -1,5 +1,6 @@
 package io.zerows.extension.runtime.integration.uca.command;
 
+import io.r2mo.typed.common.Kv;
 import io.vertx.core.Future;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
@@ -10,7 +11,6 @@ import io.zerows.extension.runtime.integration.bootstrap.IsPin;
 import io.zerows.extension.runtime.integration.domain.tables.pojos.IDirectory;
 import io.zerows.extension.runtime.integration.eon.IsConstant;
 import io.zerows.extension.runtime.integration.eon.em.EmDirectory;
-import io.zerows.platform.metadata.Kv;
 import io.zerows.program.Ux;
 import io.zerows.specification.vital.HFS;
 import io.zerows.support.Ut;

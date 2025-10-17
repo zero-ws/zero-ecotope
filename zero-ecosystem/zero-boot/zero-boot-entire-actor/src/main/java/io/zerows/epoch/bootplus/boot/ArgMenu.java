@@ -1,39 +1,26 @@
 package io.zerows.epoch.bootplus.boot;
 
+import io.r2mo.base.program.R2VarSet;
 import io.zerows.epoch.constant.KName;
 
 import java.util.List;
-import java.util.Objects;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 /**
  * @author lang : 2023-06-12
  */
 public class ArgMenu extends ArgIn {
-    private final ConcurrentMap<String, ArgVar> stored = new ConcurrentHashMap<>();
+    private final R2VarSet stored = R2VarSet.of();
 
     private ArgMenu(final String[] args) {
         {
             // 0 = path
-            this.stored.put(KName.PATH, ArgVar
-                .of(KName.PATH)
-                .valueDefault("init/map/menu.yml"));
+            this.stored.add(KName.PATH, "init/map/menu.yml");
         }
         this.initialize(args);
     }
 
     public static ArgMenu of(final String[] args) {
         return new ArgMenu(args);
-    }
-
-    @Override
-    public <T> T value(final String name) {
-        final ArgVar var = this.stored.getOrDefault(name, null);
-        if (Objects.isNull(var)) {
-            return null;
-        }
-        return var.value();
     }
 
     @Override
@@ -44,7 +31,7 @@ public class ArgMenu extends ArgIn {
     }
 
     @Override
-    protected ConcurrentMap<String, ArgVar> definition() {
+    protected R2VarSet varSet() {
         return this.stored;
     }
 }

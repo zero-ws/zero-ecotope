@@ -1,5 +1,6 @@
 package io.zerows.extension.runtime.workflow.uca.conformity;
 
+import io.r2mo.typed.common.Kv;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.extension.runtime.workflow.atom.runtime.WTask;
@@ -10,7 +11,6 @@ import io.zerows.extension.runtime.workflow.uca.camunda.Io;
 import io.zerows.extension.runtime.workflow.util.Wf;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.constant.VValue;
-import io.zerows.platform.metadata.Kv;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import org.camunda.bpm.engine.runtime.ProcessInstance;

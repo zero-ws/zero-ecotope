@@ -1,7 +1,7 @@
 package io.zerows.program.feature;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.platform.metadata.KMapping;
+import io.zerows.platform.metadata.KMap;
 import io.zerows.support.Ut;
 
 public class FieldMapper implements Mapper {
@@ -17,12 +17,12 @@ public class FieldMapper implements Mapper {
     }
 
     @Override
-    public JsonObject in(final JsonObject in, final KMapping mapping) {
+    public JsonObject in(final JsonObject in, final KMap.Node mapping) {
         return Ut.aiIn(in, mapping, this.keepNil);
     }
 
     @Override
-    public JsonObject out(final JsonObject out, final KMapping mapping) {
+    public JsonObject out(final JsonObject out, final KMap.Node mapping) {
         return Ut.aiOut(out, mapping, this.keepNil);
     }
 }

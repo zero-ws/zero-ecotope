@@ -4,11 +4,11 @@ import io.vertx.core.Future;
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.cosmic.plugins.cache.Rapid;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
-import io.zerows.cosmic.plugins.cache.Rapid;
 import io.zerows.epoch.database.jooq.operation.UxJooq;
-import io.zerows.platform.metadata.KDictSource;
+import io.zerows.platform.metadata.KDictConfig;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -21,7 +21,7 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class DpmDao implements Dpm {
     @Override
-    public Future<ConcurrentMap<String, JsonArray>> fetchAsync(final KDictSource source, final MultiMap params) {
+    public Future<ConcurrentMap<String, JsonArray>> fetchAsync(final KDictConfig.Source source, final MultiMap params) {
         final UxJooq jooq = this.dao(source);
         if (Objects.isNull(jooq) || Ut.isNil(source.getKey())) {
             return Ux.future(new ConcurrentHashMap<>());
@@ -37,7 +37,7 @@ public class DpmDao implements Dpm {
     }
 
     @Override
-    public ConcurrentMap<String, JsonArray> fetch(final KDictSource source, final MultiMap params) {
+    public ConcurrentMap<String, JsonArray> fetch(final KDictConfig.Source source, final MultiMap params) {
         final UxJooq jooq = this.dao(source);
         if (Objects.isNull(jooq) || Ut.isNil(source.getKey())) {
             return new ConcurrentHashMap<>();
@@ -54,7 +54,7 @@ public class DpmDao implements Dpm {
         return condition;
     }
 
-    private UxJooq dao(final KDictSource source) {
+    private UxJooq dao(final KDictConfig.Source source) {
         final ConcurrentMap<String, JsonArray> uniqueMap = new ConcurrentHashMap<>();
         final Class<?> daoCls = source.getComponent();
         if (Objects.isNull(daoCls) || Ut.isNil(source.getKey())) {

@@ -1,7 +1,8 @@
 package io.zerows.component.environment;
 
+import io.r2mo.base.program.R2Var;
+import io.r2mo.base.program.R2VarSet;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.metadata.MMVariable;
 import io.zerows.platform.ENV;
 import io.zerows.support.Ut;
 
@@ -20,12 +21,12 @@ class MatureEnv implements Mature {
      *   field2 = ENV_NAME2
      */
     @Override
-    public JsonObject configure(final JsonObject configJ, final MMVariable.Set set) {
+    public JsonObject configure(final JsonObject configJ, final R2VarSet set) {
         final Set<String> names = set.names();
         names.stream().filter(field -> {
             // 过滤 envName 为空的情况
-            final MMVariable attribute = set.attribute(field);
-            final String envName = attribute.alias();
+            final R2Var variable = set.get(field);
+            final String envName = variable.alias();
             return Ut.isNotNil(envName);
         }).forEach(field -> {
             /*
@@ -34,14 +35,14 @@ class MatureEnv implements Mature {
              * 1）先从环境变量中提取 ENV_NAME 的值
              * 2）值不存在考虑默认值
              */
-            final MMVariable attribute = set.attribute(field);
-            this.normalizeValue(configJ, attribute, field);
+            final R2Var variable = set.get(field);
+            this.normalizeValue(configJ, variable, field);
         });
         return configJ;
     }
 
     private void normalizeValue(final JsonObject configJ,
-                                final MMVariable attribute, final String field) {
+                                final R2Var attribute, final String field) {
         final String envName = attribute.alias();
 
         // Default String.class

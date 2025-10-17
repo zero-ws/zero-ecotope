@@ -1,5 +1,6 @@
 package io.zerows.extension.runtime.crud.uca.input.qr;
 
+import io.r2mo.typed.common.Kv;
 import io.vertx.core.Future;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.json.JsonObject;
@@ -10,7 +11,6 @@ import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 import io.zerows.extension.runtime.crud.uca.input.Pre;
 import io.zerows.extension.runtime.crud.util.Ix;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
-import io.zerows.platform.metadata.Kv;
 import io.zerows.program.Ux;
 
 import static io.zerows.extension.runtime.crud.util.Ix.LOG;

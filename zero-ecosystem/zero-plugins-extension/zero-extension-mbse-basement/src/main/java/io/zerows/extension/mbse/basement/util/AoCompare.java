@@ -1,5 +1,6 @@
 package io.zerows.extension.mbse.basement.util;
 
+import io.r2mo.typed.common.Kv;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.compare.Vs;
@@ -8,7 +9,6 @@ import io.zerows.epoch.metadata.Apt;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.platform.constant.VValue;
 import io.zerows.platform.enums.typed.ChangeFlag;
-import io.zerows.platform.metadata.Kv;
 import io.zerows.program.Ux;
 import io.zerows.specification.modeling.HRule;
 import io.zerows.support.Ut;

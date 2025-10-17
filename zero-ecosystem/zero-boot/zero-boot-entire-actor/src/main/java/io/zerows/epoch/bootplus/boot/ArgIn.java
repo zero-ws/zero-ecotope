@@ -1,5 +1,7 @@
 package io.zerows.epoch.bootplus.boot;
 
+import io.r2mo.base.program.R2Var;
+import io.r2mo.base.program.R2VarSet;
 import io.zerows.platform.ENV;
 import io.zerows.platform.EnvironmentVariable;
 import io.zerows.platform.constant.VValue;
@@ -7,8 +9,8 @@ import io.zerows.platform.enums.Environment;
 import io.zerows.support.Ut;
 
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * 参数提取，数据加载类参数，该类为抽象类，用于加载参数列表，并解析成对应的数据类型
@@ -27,7 +29,7 @@ public abstract class ArgIn {
      * <pre><code>
      *     1. {@link ArgIn#names()}
      *        定义了参数名称和相关顺序
-     *     2. {@link ArgIn#definition()}
+     *     2. {@link ArgIn#varSet()}
      *        定义了参数的基本规范
      * </code></pre>
      */
@@ -41,8 +43,10 @@ public abstract class ArgIn {
             if (idx < args.length) {
                 final String name = names.get(idx);
                 final String value = args[idx];
-                final ArgVar var = this.definition().get(name);
-                var.value(this.value(var, value));
+                final R2Var variable = this.varSet().get(name);
+                Objects.requireNonNull(variable, "[ ZERO ] 未找到指定的变量定义：" + name);
+                final Object valueFor = this.getValue(variable, value);
+                variable.value(valueFor);
             }
         }
         {
@@ -52,11 +56,11 @@ public abstract class ArgIn {
         }
     }
 
-    @SuppressWarnings("unchecked")
-    private <T> T value(final ArgVar var, final String value) {
-        final Class<?> type = var.type();
-        if (Environment.class == type) {
-            return (T) Ut.toEnum(value, Environment.class);
+    @SuppressWarnings("all")
+    private <T> T getValue(final R2Var variable, final String value) {
+        final Class<?> type = variable.type();
+        if (type.isEnum()) {
+            return (T) Ut.toEnum(value, (Class<Enum>) type);
         } else {
             return Ut.valueT(value, type);
         }
@@ -76,18 +80,8 @@ public abstract class ArgIn {
         return List.of();
     }
 
-    /**
-     * 对应的参数基础规范，规范中会包含如下：
-     * <pre><code>
-     *     1. name - 参数名
-     *     2. type - 参数类型
-     *     3. get - 参数值（可以根据默认值计算）
-     * </code></pre>
-     *
-     * @return {@link java.util.concurrent.ConcurrentMap}
-     */
-    protected ConcurrentMap<String, ArgVar> definition() {
-        return new ConcurrentHashMap<>();
+    protected R2VarSet varSet() {
+        return R2VarSet.of();
     }
 
     /**
@@ -98,7 +92,12 @@ public abstract class ArgIn {
      *
      * @return {@link T}
      */
-    public abstract <T> T value(final String name);
+    public <T> T value(final String name) {
+        return Optional.ofNullable(this.varSet())
+            .map(set -> set.get(name))
+            .map(R2Var::<T>value)
+            .orElse(null);
+    }
 
     public ArgIn environment(final Environment environment) {
         this.environment = environment;

@@ -2,15 +2,15 @@ package io.zerows.platform.metadata;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.LogOf;
 import io.zerows.support.base.UtBase;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
+@Slf4j
 class KDictData {
-    private static final LogOf LOGGER = LogOf.get(KDictData.class);
     private final ConcurrentMap<String, JsonArray> dictData
         = new ConcurrentHashMap<>();
 
@@ -29,7 +29,7 @@ class KDictData {
             this.dictData.clear();                          /* Clear Queue */
             this.dictData.putAll(dictData);
         } else {
-            LOGGER.debug("DictFabric got empty dictData ( ConcurrentMap<String, JsonArray> ) !");
+            log.debug("[ ZERO ] 字典翻译器收到了空的字典数据！");
         }
     }
 

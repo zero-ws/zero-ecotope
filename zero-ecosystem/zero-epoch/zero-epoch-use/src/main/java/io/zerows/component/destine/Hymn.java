@@ -4,13 +4,12 @@ import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.metadata.KJoin;
-import io.zerows.epoch.metadata.KPoint;
 import io.zerows.platform.annotations.meta.Memory;
 
 /**
  * 「Hyphen翻译」练字符 -，此处表示「配置连接点」
- * 新方法，执行新版的链接点筛选专用 {@link KPoint}，目前的 zero-crud 版本只支持双表模式，所以 父从表和父主表只能选择一种模式进行关联（二选一），后期可拓展成多表链接同时支持两种模式，但目前版本支持两种模式即可以解决核心问题了。
- * 此接口主要用于构造 {@link KPoint}，替换原始的 connection 方法。
+ * 新方法，执行新版的链接点筛选专用 {@link KJoin.Point}，目前的 zero-crud 版本只支持双表模式，所以 父从表和父主表只能选择一种模式进行关联（二选一），后期可拓展成多表链接同时支持两种模式，但目前版本支持两种模式即可以解决核心问题了。
+ * 此接口主要用于构造 {@link KJoin.Point}，替换原始的 connection 方法。
  * <pre><code>
  *     1. 父从表模式：reference 定义
  *     2. 父主表模式：ofMain 定义
@@ -42,7 +41,7 @@ public interface Hymn<T> {
      *
      * @param input 输入数据
      *
-     * @return {@link KPoint} 连接点
+     * @return {@link KJoin.Point} 连接点
      */
-    KPoint pointer(T input);
+    KJoin.Point pointer(T input);
 }

@@ -1,4 +1,4 @@
-package io.zerows.epoch.metadata;
+package io.zerows.epoch.bootplus.extension.uca.commerce;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.constant.VString;
@@ -51,11 +51,11 @@ import java.io.Serializable;
  * -- after：后置插件（队列）
  * 其他节点为配置
  */
-public class MMSix implements Serializable {
+public class ArmsSix implements Serializable {
 
     private final JsonObject rawData = new JsonObject();
 
-    private MMSix(final JsonObject options) {
+    private ArmsSix(final JsonObject options) {
         final JsonObject configuration = Ut.valueJObject(options);
         final JsonObject pluginComponent = configuration.getJsonObject("components");
         if (Ut.isNotNil(pluginComponent)) {
@@ -63,8 +63,8 @@ public class MMSix implements Serializable {
         }
     }
 
-    public static MMSix create(final JsonObject options) {
-        return new MMSix(options);
+    public static ArmsSix create(final JsonObject options) {
+        return new ArmsSix(options);
     }
 
     public JsonObject batch(final ChangeFlag flag) {

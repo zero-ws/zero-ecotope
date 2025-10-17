@@ -5,7 +5,6 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.component.destine.Hymn;
 import io.zerows.epoch.database.jooq.operation.UxJoin;
 import io.zerows.epoch.metadata.KJoin;
-import io.zerows.epoch.metadata.KPoint;
 import io.zerows.mbse.metadata.KModule;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
@@ -42,7 +41,7 @@ class HOneJoin implements HOne<UxJoin> {
          */
         final UxJoin dao = Ux.Join.on();
         final KJoin join = module.getConnect();
-        final KPoint source = join.getSource();
+        final KJoin.Point source = join.getSource();
 
 
         /*
@@ -73,7 +72,7 @@ class HOneJoin implements HOne<UxJoin> {
          * 且两种连接点模式都支持 pojo 的绑定。
          */
         final Hymn<String> hymn = Hymn.ofString(join);
-        final KPoint target = hymn.pointer(connect.identifier());
+        final KJoin.Point target = hymn.pointer(connect.identifier());
         Objects.requireNonNull(target);
         final Class<?> daoCls = connect.getDaoCls();
         dao.join(daoCls, target.getKeyJoin());

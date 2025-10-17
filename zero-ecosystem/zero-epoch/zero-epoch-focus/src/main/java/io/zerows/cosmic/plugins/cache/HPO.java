@@ -1,10 +1,10 @@
 package io.zerows.cosmic.plugins.cache;
 
 import io.r2mo.typed.cc.Cc;
+import io.r2mo.typed.common.Kv;
 import io.r2mo.typed.exception.WebException;
 import io.vertx.core.Future;
 import io.zerows.cosmic.plugins.cache.exception._60035Exception500PoolInternal;
-import io.zerows.platform.metadata.Kv;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
 import lombok.extern.slf4j.Slf4j;

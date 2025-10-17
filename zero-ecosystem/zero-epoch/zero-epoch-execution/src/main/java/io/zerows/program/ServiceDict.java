@@ -10,7 +10,6 @@ import io.zerows.platform.metadata.KDictConfig;
 import io.zerows.platform.metadata.KDictUse;
 import io.zerows.platform.metadata.KFabric;
 import io.zerows.platform.metadata.KMap;
-import io.zerows.platform.metadata.KMapping;
 import io.zerows.program.feature.FieldMapper;
 import io.zerows.support.Ut;
 
@@ -82,7 +81,7 @@ class ServiceDict {
     static Future<KFabric> dictAtom(final KDictConfig dict, final MultiMap params,
                                     final KMap mapping, final String identifier) {
         return Ux.dictData(dict, params).compose(dictData -> {
-            final KMapping mappingItem = mapping.child(identifier);
+            final KMap.Node mappingItem = mapping.child(identifier);
             final KFabric fabric = KFabric.create(mappingItem)
                 .epsilon(dict.configUse())
                 .dictionary(dictData);

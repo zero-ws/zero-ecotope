@@ -1,5 +1,6 @@
 package io.zerows.extension.runtime.integration.osgi.spi;
 
+import io.r2mo.typed.common.Kv;
 import io.vertx.core.Future;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
@@ -11,7 +12,6 @@ import io.zerows.extension.runtime.integration.domain.tables.pojos.IDirectory;
 import io.zerows.extension.runtime.integration.uca.command.Fs;
 import io.zerows.extension.runtime.integration.util.Is;
 import io.zerows.extension.runtime.skeleton.osgi.spi.business.ExIo;
-import io.zerows.platform.metadata.Kv;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.base.FnBase;

@@ -29,6 +29,7 @@ import java.util.concurrent.ConcurrentMap;
  */
 @Slf4j
 @Data
+@Deprecated
 public class MMPojo implements Serializable {
 
     @JsonIgnore

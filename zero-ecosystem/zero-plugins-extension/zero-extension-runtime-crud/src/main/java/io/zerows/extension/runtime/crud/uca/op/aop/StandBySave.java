@@ -5,15 +5,14 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.destine.Conflate;
 import io.zerows.component.destine.Hymn;
-import io.zerows.mbse.metadata.KModule;
 import io.zerows.epoch.database.jooq.operation.UxJooq;
 import io.zerows.epoch.metadata.KJoin;
-import io.zerows.epoch.metadata.KPoint;
 import io.zerows.extension.runtime.crud.bootstrap.IxPin;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 import io.zerows.extension.runtime.crud.uca.input.Pre;
 import io.zerows.extension.runtime.crud.uca.op.Agonic;
 import io.zerows.extension.runtime.crud.util.Ix;
+import io.zerows.mbse.metadata.KModule;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -104,7 +103,7 @@ class StandBySave implements Agonic {
                 return Ux.future(input);
             }
             final Hymn<String> hymn = Hymn.ofString(join);
-            final KPoint point = hymn.pointer(this.module.connectId());
+            final KJoin.Point point = hymn.pointer(this.module.connectId());
             if (Objects.isNull(point)) {
                 // 连接点无法解析和计算，截断返回
                 return Ux.future(input);

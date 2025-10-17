@@ -1,4 +1,4 @@
-package io.zerows.epoch.metadata;
+package io.zerows.extension.mbse.basement.uca.reference;
 
 import io.vertx.codegen.annotations.Fluent;
 import io.vertx.core.json.JsonArray;
@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 
 import java.util.Objects;
 
-public class MMAmb {
+public class RayAmb {
     /**
      * The data reference of {@link io.vertx.core.json.JsonObject} or {@link io.vertx.core.json.JsonArray}
      */
@@ -41,7 +41,7 @@ public class MMAmb {
      * @return Reference of this
      */
     @Fluent
-    public MMAmb data(final JsonObject data) {
+    public RayAmb data(final JsonObject data) {
         this.data = data;
         this.single = Boolean.TRUE;
         return this;
@@ -55,7 +55,7 @@ public class MMAmb {
      * @return Reference of this
      */
     @Fluent
-    public MMAmb data(final JsonArray data) {
+    public RayAmb data(final JsonArray data) {
         this.data = data;
         this.single = Boolean.FALSE;
         return this;
@@ -69,7 +69,7 @@ public class MMAmb {
      * @return Reference of this
      */
     @Fluent
-    public MMAmb add(final JsonObject item) {
+    public RayAmb add(final JsonObject item) {
         if (!this.single) {
             ((JsonArray) this.data).add(item);
         }

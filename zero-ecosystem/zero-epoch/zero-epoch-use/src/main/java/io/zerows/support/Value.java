@@ -2,8 +2,8 @@ package io.zerows.support;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.platform.metadata.KMapping;
 import io.zerows.component.convert.V;
+import io.zerows.platform.metadata.KMap;
 
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -268,7 +268,7 @@ class Value {
         return null;
     }
 
-    static JsonObject aiIn(final JsonObject in, final KMapping mapping, final boolean keepNil) {
+    static JsonObject aiIn(final JsonObject in, final KMap.Node mapping, final boolean keepNil) {
         if (Objects.isNull(mapping)) {
             /*
              * No mapping
@@ -297,7 +297,7 @@ class Value {
         }
     }
 
-    static JsonObject aiOut(final JsonObject out, final KMapping mapping, final boolean keepNil) {
+    static JsonObject aiOut(final JsonObject out, final KMap.Node mapping, final boolean keepNil) {
         if (Objects.isNull(mapping)) {
             /*
              * No mapping

@@ -2,12 +2,11 @@ package io.zerows.mbse;
 
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonObject;
-import io.zerows.mbse.metadata.KClass;
-import io.zerows.mbse.metadata.KModule;
 import io.zerows.epoch.database.jooq.operation.UxJooq;
 import io.zerows.epoch.database.jooq.util.JqAnalyzer;
 import io.zerows.epoch.metadata.KJoin;
-import io.zerows.epoch.metadata.KPoint;
+import io.zerows.mbse.metadata.KClass;
+import io.zerows.mbse.metadata.KModule;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -40,7 +39,7 @@ class HOneType implements HOne<ConcurrentMap<String, Class<?>>> {
              * 注意 synonym 部分的配置只有在 connect 不为空的时候才会生效，否则不生效
              */
             ConcurrentMap<String, Class<?>> connectMap = this.typeModule(connect);
-            final KPoint target = module.getConnect(connect.identifier());
+            final KJoin.Point target = module.getConnect(connect.identifier());
             if (Objects.nonNull(target)) {
                 connectMap = this.typeSynonym(connectMap, target);
             }
@@ -60,7 +59,7 @@ class HOneType implements HOne<ConcurrentMap<String, Class<?>>> {
      * @return 解析结果
      */
     private ConcurrentMap<String, Class<?>> typeSynonym(
-        final ConcurrentMap<String, Class<?>> typedMap, final KPoint point) {
+        final ConcurrentMap<String, Class<?>> typedMap, final KJoin.Point point) {
         final ConcurrentMap<String, Class<?>> typedResult = new ConcurrentHashMap<>();
         if (Objects.isNull(point) || Ut.isNil(point.getSynonym())) {
             // 连接点为 null / synonym 配置为空

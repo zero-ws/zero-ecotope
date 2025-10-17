@@ -1,6 +1,6 @@
 package io.zerows.extension.runtime.crud.uca.destine;
 
-import io.zerows.epoch.metadata.KPoint;
+import io.zerows.epoch.metadata.KJoin;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 
@@ -10,7 +10,7 @@ import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 class ProbeCrud implements Probe {
 
     @Override
-    public IxMod create(final KPoint point, final IxMod active) {
+    public IxMod create(final KJoin.Point point, final IxMod active) {
         // 数据提取
         final Envelop envelop = active.envelop();
         // 创建新的模型

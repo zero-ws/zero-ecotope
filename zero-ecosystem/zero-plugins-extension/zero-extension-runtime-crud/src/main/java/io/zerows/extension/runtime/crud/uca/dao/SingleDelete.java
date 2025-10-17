@@ -5,12 +5,11 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.destine.Conflate;
 import io.zerows.component.destine.Hymn;
-import io.zerows.mbse.metadata.KModule;
 import io.zerows.epoch.database.jooq.operation.UxJooq;
 import io.zerows.epoch.metadata.KJoin;
-import io.zerows.epoch.metadata.KPoint;
 import io.zerows.extension.runtime.crud.bootstrap.IxPin;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
+import io.zerows.mbse.metadata.KModule;
 import io.zerows.program.Ux;
 
 import java.util.Objects;
@@ -49,7 +48,7 @@ class SingleDelete implements Operate<Object, Boolean> {
     private UxJooq jooq(final Object inputJ, final IxMod in) {
         final KModule module = in.module();
         final KJoin join = module.getConnect();
-        final KPoint point;
+        final KJoin.Point point;
         if (inputJ instanceof final JsonObject objectJ) {
             final Hymn<JsonObject> hymn = Hymn.ofJObject(join);
             point = hymn.pointer(objectJ);

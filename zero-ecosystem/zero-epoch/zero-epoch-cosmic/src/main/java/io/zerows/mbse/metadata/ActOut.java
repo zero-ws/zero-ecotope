@@ -9,7 +9,6 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.LogO;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.platform.metadata.KMap;
-import io.zerows.platform.metadata.KMapping;
 import io.zerows.program.Ux;
 import io.zerows.specification.modeling.HRecord;
 import io.zerows.support.Ut;
@@ -114,13 +113,13 @@ public class ActOut extends ActMapping implements Serializable {
         final Object response = this.envelop.data();
         if (response instanceof JsonObject || response instanceof JsonArray) {
             if (this.isAfter(mapping)) {
-                final KMapping kMapping;
+                final KMap.Node node;
                 if (Objects.isNull(this.identifier)) {
-                    kMapping = mapping.child();
+                    node = mapping.child();
                 } else {
-                    kMapping = mapping.child(this.identifier);
-                    if (!kMapping.isEmpty()) {
-                        LOGGER.info("identifier `{0}`, extract child mapping. {1}", this.identifier, kMapping.toString());
+                    node = mapping.child(this.identifier);
+                    if (!node.isEmpty()) {
+                        LOGGER.info("identifier `{0}`, extract child mapping. {1}", this.identifier, node.toString());
                     }
                 }
                 final WebState status = this.envelop.status();
@@ -128,14 +127,14 @@ public class ActOut extends ActMapping implements Serializable {
                     /*
                      * JsonObject here for mapping
                      */
-                    final JsonObject normalized = this.mapper().out(((JsonObject) response), kMapping);
+                    final JsonObject normalized = this.mapper().out(((JsonObject) response), node);
                     return Envelop.success(normalized, status).from(this.envelop);
                 } else {
                     /*
                      * JsonArray here for mapping
                      */
                     final JsonArray normalized = new JsonArray();
-                    Ut.itJArray((JsonArray) response).map(item -> this.mapper().out(item, kMapping))
+                    Ut.itJArray((JsonArray) response).map(item -> this.mapper().out(item, node))
                         .forEach(normalized::add);
                     return Envelop.success(normalized, status).from(this.envelop);
                 }

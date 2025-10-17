@@ -1,8 +1,8 @@
 package io.zerows.cosmic.plugins.job;
 
+import io.r2mo.typed.common.Kv;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.exception._60050Exception501NotSupport;
-import io.zerows.platform.metadata.Kv;
 import io.zerows.support.Ut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

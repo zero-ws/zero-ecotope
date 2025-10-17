@@ -3,11 +3,11 @@ package io.zerows.extension.runtime.ambient.uca.dict;
 import io.vertx.core.Future;
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonArray;
+import io.zerows.cosmic.plugins.cache.Rapid;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
-import io.zerows.cosmic.plugins.cache.Rapid;
 import io.zerows.epoch.spi.DictionaryPlugin;
-import io.zerows.platform.metadata.KDictSource;
+import io.zerows.platform.metadata.KDictConfig;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -22,7 +22,7 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class DpmAssist implements Dpm {
     @Override
-    public Future<ConcurrentMap<String, JsonArray>> fetchAsync(final KDictSource source, final MultiMap params) {
+    public Future<ConcurrentMap<String, JsonArray>> fetchAsync(final KDictConfig.Source source, final MultiMap params) {
         final ConcurrentMap<String, JsonArray> uniqueMap = new ConcurrentHashMap<>();
         final DictionaryPlugin plugin = source.getPlugin();
         if (Objects.isNull(plugin) || Ut.isNil(source.getKey())) {
@@ -40,7 +40,7 @@ public class DpmAssist implements Dpm {
     }
 
     @Override
-    public ConcurrentMap<String, JsonArray> fetch(final KDictSource source, final MultiMap params) {
+    public ConcurrentMap<String, JsonArray> fetch(final KDictConfig.Source source, final MultiMap params) {
         final ConcurrentMap<String, JsonArray> uniqueMap = new ConcurrentHashMap<>();
         final DictionaryPlugin plugin = source.getPlugin();
         if (Objects.isNull(plugin) || Ut.isNil(source.getKey())) {

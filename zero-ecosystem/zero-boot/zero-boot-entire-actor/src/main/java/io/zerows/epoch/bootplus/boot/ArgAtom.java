@@ -1,43 +1,30 @@
 package io.zerows.epoch.bootplus.boot;
 
+import io.r2mo.base.program.R2VarSet;
 import io.zerows.epoch.constant.KName;
 import io.zerows.platform.constant.VString;
 
 import java.util.List;
-import java.util.Objects;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 /**
  * @author lang : 2023-06-12
  */
 public class ArgAtom extends ArgIn {
-    private final ConcurrentMap<String, ArgVar> stored = new ConcurrentHashMap<>();
+
+    private final R2VarSet stored = R2VarSet.of();
 
     private ArgAtom(final String[] args) {
         {
             // 0 = module
-            this.stored.put(KName.MODULE, ArgVar
-                .of(KName.MODULE)
-                .valueDefault(VString.EMPTY));
+            this.stored.add(KName.MODULE, VString.EMPTY);
             // 1 = path
-            this.stored.put(KName.PATH, ArgVar
-                .of(KName.PATH));
+            this.stored.add(KName.PATH, VString.EMPTY);
         }
         this.initialize(args);
     }
 
     public static ArgAtom of(final String[] args) {
         return new ArgAtom(args);
-    }
-
-    @Override
-    public <T> T value(final String name) {
-        final ArgVar var = this.stored.getOrDefault(name, null);
-        if (Objects.isNull(var)) {
-            return null;
-        }
-        return var.value();
     }
 
     @Override
@@ -49,7 +36,7 @@ public class ArgAtom extends ArgIn {
     }
 
     @Override
-    protected ConcurrentMap<String, ArgVar> definition() {
+    protected R2VarSet varSet() {
         return this.stored;
     }
 }

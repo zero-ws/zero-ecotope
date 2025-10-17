@@ -1,11 +1,10 @@
 package io.zerows.extension.mbse.basement.uca.reference;
 
 import io.r2mo.typed.cc.Cc;
+import io.r2mo.typed.common.Kv;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.metadata.MMAmb;
 import io.zerows.platform.enums.modeling.EmValue;
-import io.zerows.platform.metadata.Kv;
 import io.zerows.platform.metadata.RResult;
 import io.zerows.specification.modeling.HRecord;
 import io.zerows.support.Ut;
@@ -41,7 +40,7 @@ class RayResult {
         compressData(joinData, joinResult).forEach((field, processed) -> {
             final RResult result = joinResult.get(field);
             /* JAmb */
-            final ConcurrentMap<String, MMAmb> grouped = groupData(processed, result);
+            final ConcurrentMap<String, RayAmb> grouped = groupData(processed, result);
             /* Combine */
             combine(record, field, grouped, result);
         });
@@ -63,18 +62,18 @@ class RayResult {
         compressData(joinData, joinResult).forEach((field, processed) -> {
             final RResult result = joinResult.get(field);
             /* JAmb */
-            final ConcurrentMap<String, MMAmb> grouped = groupData(processed, result);
+            final ConcurrentMap<String, RayAmb> grouped = groupData(processed, result);
             /* Iterator for each record */
             Arrays.stream(records).forEach(record -> combine(record, field, grouped, result));
         });
         return records;
     }
 
-    private static void combine(final HRecord record, final String field, final ConcurrentMap<String, MMAmb> groupData, final RResult result) {
+    private static void combine(final HRecord record, final String field, final ConcurrentMap<String, RayAmb> groupData, final RResult result) {
         /* Key */
         final String keyRecord = keyRecord(record, result.joined());
         /* Combined */
-        final MMAmb amb = groupData.get(keyRecord);
+        final RayAmb amb = groupData.get(keyRecord);
         if (Objects.isNull(amb)) {
             /*
              * Apply Default Value
@@ -95,7 +94,7 @@ class RayResult {
         }
     }
 
-    private static void combine(final HRecord record, final String field, final MMAmb amb, final RResult result) {
+    private static void combine(final HRecord record, final String field, final RayAmb amb, final RResult result) {
         /* Amb */
         final EmValue.Format format = result.format();
         if (EmValue.Format.JsonArray == format) {
@@ -133,11 +132,11 @@ class RayResult {
      *
      * @return {@link java.util.concurrent.ConcurrentMap}
      */
-    private static ConcurrentMap<String, MMAmb> groupData(final JsonArray data, final RResult result) {
+    private static ConcurrentMap<String, RayAmb> groupData(final JsonArray data, final RResult result) {
         /*
          * Result type came from `result`.
          */
-        final ConcurrentMap<String, MMAmb> groupedData = new ConcurrentHashMap<>();
+        final ConcurrentMap<String, RayAmb> groupedData = new ConcurrentHashMap<>();
         final Class<?> type = result.typeData();
         if (JsonArray.class == type) {
             /*
@@ -146,7 +145,7 @@ class RayResult {
             Ut.itJArray(data).forEach(json -> {
                 final String key = keyReference(json, result.joined());
                 if (Ut.isNotNil(key)) {
-                    Cc.pool(groupedData, key, () -> new MMAmb().data(new JsonArray())).add(json);
+                    Cc.pool(groupedData, key, () -> new RayAmb().data(new JsonArray())).add(json);
                 }
             });
         } else {
@@ -156,7 +155,7 @@ class RayResult {
             Ut.itJArray(data).forEach(json -> {
                 final String key = keyReference(json, result.joined());
                 if (Ut.isNotNil(key)) {
-                    groupedData.put(key, new MMAmb().data(json));
+                    groupedData.put(key, new RayAmb().data(json));
                 }
             });
         }

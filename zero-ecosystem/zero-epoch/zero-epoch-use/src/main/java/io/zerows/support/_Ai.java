@@ -2,8 +2,8 @@ package io.zerows.support;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.enums.typed.ChangeFlag;
+import io.zerows.platform.metadata.KMap;
 import io.zerows.support.base.UtBase;
-import io.zerows.platform.metadata.KMapping;
 
 /**
  * @author lang : 2023-06-19
@@ -51,19 +51,19 @@ class _Ai extends UtBase {
         return Jackson.aiJArray(literal);
     }
 
-    public static JsonObject aiIn(final JsonObject in, final KMapping mapping, final boolean keepNil) {
+    public static JsonObject aiIn(final JsonObject in, final KMap.Node mapping, final boolean keepNil) {
         return Value.aiIn(in, mapping, keepNil);
     }
 
-    public static JsonObject aiIn(final JsonObject in, final KMapping mapping) {
+    public static JsonObject aiIn(final JsonObject in, final KMap.Node mapping) {
         return Value.aiIn(in, mapping, true);
     }
 
-    public static JsonObject aiOut(final JsonObject out, final KMapping mapping, final boolean keepNil) {
+    public static JsonObject aiOut(final JsonObject out, final KMap.Node mapping, final boolean keepNil) {
         return Value.aiOut(out, mapping, keepNil);
     }
 
-    public static JsonObject aiOut(final JsonObject out, final KMapping mapping) {
+    public static JsonObject aiOut(final JsonObject out, final KMap.Node mapping) {
         return Value.aiOut(out, mapping, true);
     }
 }

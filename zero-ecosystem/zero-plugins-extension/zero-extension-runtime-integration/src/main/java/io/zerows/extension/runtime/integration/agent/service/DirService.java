@@ -1,6 +1,7 @@
 package io.zerows.extension.runtime.integration.agent.service;
 
 import io.r2mo.typed.cc.Cc;
+import io.r2mo.typed.common.Kv;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
@@ -12,7 +13,6 @@ import io.zerows.extension.runtime.integration.uca.updater.StoreMigration;
 import io.zerows.extension.runtime.integration.uca.updater.StoreRename;
 import io.zerows.extension.runtime.integration.uca.updater.StoreUp;
 import io.zerows.extension.runtime.integration.util.Is;
-import io.zerows.platform.metadata.Kv;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 

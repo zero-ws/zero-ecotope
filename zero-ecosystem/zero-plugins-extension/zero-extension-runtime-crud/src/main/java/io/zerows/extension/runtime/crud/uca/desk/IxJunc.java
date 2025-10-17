@@ -5,7 +5,6 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.component.destine.Hymn;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.KJoin;
-import io.zerows.epoch.metadata.KPoint;
 import io.zerows.extension.runtime.crud.eon.Pooled;
 import io.zerows.extension.runtime.crud.uca.destine.Probe;
 import io.zerows.mbse.metadata.KModule;
@@ -59,7 +58,7 @@ public class IxJunc {
     }
 
     private IxMod connectRefer(final KJoin connect) {
-        final KPoint target = connect.getReference();
+        final KJoin.Point target = connect.getReference();
         if (Objects.isNull(target)) {
             return null;
         }
@@ -89,7 +88,7 @@ public class IxJunc {
          *    2.1. P1：同上 P2
          *    2.2. P2：同上 P3
          */
-        KPoint target = null;
+        KJoin.Point target = null;
         if (input instanceof final String inputS) {
             /*
              * Connected by `module` parameters

@@ -3,8 +3,8 @@ package io.zerows.platform.metadata;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.LogOf;
 import io.zerows.support.base.UtBase;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
@@ -21,9 +21,9 @@ import java.util.concurrent.ConcurrentMap;
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
 public class KFabric {
-
-    private static final LogOf LOGGER = LogOf.get(KFabric.class);
+    
     private final ConcurrentMap<String, KDictUse> epsilonMap
         = new ConcurrentHashMap<>();
     /*
@@ -33,17 +33,17 @@ public class KFabric {
     /*
      *  The mapping in dictionary
      */
-    private final KMapping mapping;
+    private final KMap.Node mapping;
 
     /*
      * Data here for dictionary
      */
-    private final ConcurrentMap<String, KMapping> fromData
+    private final ConcurrentMap<String, KMap.Node> fromData
         = new ConcurrentHashMap<>();
-    private final ConcurrentMap<String, KMapping> toData
+    private final ConcurrentMap<String, KMap.Node> toData
         = new ConcurrentHashMap<>();
 
-    private KFabric(final KMapping mapping) {
+    private KFabric(final KMap.Node mapping) {
         this.mapping = mapping;
     }
 
@@ -51,7 +51,7 @@ public class KFabric {
      * Here are the creation method for `DictFabric`
      * Each api will create new `DictFabric` object
      */
-    public static KFabric create(final KMapping mapping) {
+    public static KFabric create(final KMap.Node mapping) {
         return new KFabric(mapping);
     }
 
@@ -63,7 +63,7 @@ public class KFabric {
         return this.copy(null);
     }
 
-    public KFabric copy(final KMapping mapping) {
+    public KFabric copy(final KMap.Node mapping) {
         /*
          * Here are two mapping for copy
          * 1. When `mapping` is null, check whether there exist mapping
@@ -72,7 +72,7 @@ public class KFabric {
          * Fix issue of : java.lang.NullPointerException
          * when you call `createCopy()` directly.
          */
-        final KMapping calculated = Objects.isNull(mapping) ? this.mapping : mapping;
+        final KMap.Node calculated = Objects.isNull(mapping) ? this.mapping : mapping;
         final KFabric created = create(calculated);
         created.dictionary(this.store.data());
         created.epsilon(this.epsilonMap);
@@ -95,7 +95,7 @@ public class KFabric {
                 }
             });
         } else {
-            LOGGER.debug("DictFabric got empty epsilonMap ( ConcurrentMap<String, DictEpsilon> ) !");
+            log.debug("[ ZERO ] 字典翻译器收到了空的 epsilonMap ( ConcurrentMap<String, DictEpsilon> ) ！");
         }
         this.init();
         return this;
@@ -111,7 +111,7 @@ public class KFabric {
     /*
      * The stored data that related to configuration defined here
      */
-    public KMapping mapping() {
+    public KMap.Node mapping() {
         return this.mapping;
     }
 
@@ -160,7 +160,7 @@ public class KFabric {
                     /*
                      * From Data Map processing
                      */
-                    final KMapping item = new KMapping(dataItem);
+                    final KMap.Node item = new KMap.Node(dataItem);
                     this.fromData.put(fromField, item);
 
                     /*
@@ -197,7 +197,7 @@ public class KFabric {
      * 3) The output structure are Ox field
      */
     public JsonObject inToS(final JsonObject input) {
-        return KDictTool.process(this.fromData, input, KMapping::from);
+        return KDictTool.process(this.fromData, input, KMap.Node::from);
     }
 
     public JsonArray inToS(final JsonArray input) {
@@ -219,7 +219,7 @@ public class KFabric {
      * 3) The output structure are Ox field
      */
     public JsonObject inFromS(final JsonObject input) {
-        return KDictTool.process(this.fromData, input, KMapping::to);
+        return KDictTool.process(this.fromData, input, KMap.Node::to);
     }
 
     public JsonArray inFromS(final JsonArray input) {
@@ -241,7 +241,7 @@ public class KFabric {
      * 3) The output structure are Tp field
      */
     public JsonObject outToS(final JsonObject output) {
-        return KDictTool.process(this.toData, output, KMapping::from);
+        return KDictTool.process(this.toData, output, KMap.Node::from);
     }
 
     public JsonArray outToS(final JsonArray output) {
@@ -263,7 +263,7 @@ public class KFabric {
      * 3) The output structure are Tp field
      */
     public JsonObject outFromS(final JsonObject output) {
-        return KDictTool.process(this.toData, output, KMapping::to);
+        return KDictTool.process(this.toData, output, KMap.Node::to);
     }
 
     public JsonArray outFromS(final JsonArray output) {

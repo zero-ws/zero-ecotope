@@ -2,7 +2,6 @@ package io.zerows.component.destine;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.metadata.KJoin;
-import io.zerows.epoch.metadata.KPoint;
 import io.zerows.support.Ut;
 
 import java.util.Objects;
@@ -44,7 +43,7 @@ class ConflateJIn extends ConflateBase<JsonObject, JsonObject> {
 
 
         // 同义词（Synonym）
-        final KPoint point = this.target(identifier);
+        final KJoin.Point point = this.target(identifier);
         if (Objects.nonNull(point)) {
             final JsonObject synonymJ = Ut.aiIn(inputJ, point.synonym(), false);
             inputJ.mergeIn(synonymJ, true);

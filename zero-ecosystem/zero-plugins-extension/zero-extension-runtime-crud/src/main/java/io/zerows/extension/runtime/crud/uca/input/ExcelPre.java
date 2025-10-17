@@ -1,16 +1,16 @@
 package io.zerows.extension.runtime.crud.uca.input;
 
 import io.r2mo.function.Fn;
+import io.r2mo.typed.common.Kv;
 import io.r2mo.typed.exception.web._500ServerInternalException;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.mbse.metadata.KModule;
 import io.zerows.extension.runtime.crud.exception._80102Exception409MultiModule;
 import io.zerows.extension.runtime.crud.exception._80103Exception409ModuleConflict;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
-import io.zerows.platform.metadata.Kv;
+import io.zerows.mbse.metadata.KModule;
 import io.zerows.plugins.office.excel.ExcelClient;
 import io.zerows.plugins.office.excel.atom.ExTable;
 import io.zerows.program.Ux;

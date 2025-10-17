@@ -5,14 +5,13 @@ import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.mbse.metadata.KModule;
-import io.zerows.epoch.web.Envelop;
 import io.zerows.epoch.metadata.KTransform;
 import io.zerows.epoch.spi.Dictionary;
 import io.zerows.epoch.spi.channel.Pocket;
+import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
+import io.zerows.mbse.metadata.KModule;
 import io.zerows.platform.metadata.KDictConfig;
-import io.zerows.platform.metadata.KDictSource;
 import io.zerows.platform.metadata.KDictUse;
 import io.zerows.platform.metadata.KFabric;
 import io.zerows.program.Ux;
@@ -111,7 +110,7 @@ class FabricTran implements Tran {
             return Ux.future(new ConcurrentHashMap<>());
         }
         // Calculation
-        final List<KDictSource> sources = dict.configSource();
+        final List<KDictConfig.Source> sources = dict.configSource();
         final MultiMap paramMap = MultiMap.caseInsensitiveMultiMap();
         final JsonObject headers = envelop.headersX();
         paramMap.add(KName.SIGMA, headers.getString(KName.SIGMA));

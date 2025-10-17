@@ -1,5 +1,6 @@
 package io.zerows.extension.runtime.crud.bootstrap;
 
+import io.r2mo.typed.common.MultiKeyMap;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.environment.DevEnv;
 import io.zerows.cortex.extension.HExtension;
@@ -8,7 +9,6 @@ import io.zerows.epoch.basicore.MDEntity;
 import io.zerows.extension.runtime.crud.eon.IxConstant;
 import io.zerows.extension.runtime.crud.eon.IxMsg;
 import io.zerows.mbse.metadata.KModule;
-import io.zerows.platform.metadata.MultiKeyMap;
 import io.zerows.support.Ut;
 
 import java.util.Objects;

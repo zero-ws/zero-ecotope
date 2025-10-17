@@ -9,7 +9,6 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Contract;
 import io.zerows.epoch.constant.KName;
-import io.zerows.mbse.metadata.ActIn;
 import io.zerows.epoch.database.Database;
 import io.zerows.epoch.metadata.XHeader;
 import io.zerows.extension.mbse.action.uca.business.AbstractComponent;
@@ -17,9 +16,10 @@ import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.exception._80527Exception400KeyLength;
 import io.zerows.extension.mbse.basement.osgi.spi.robin.Switcher;
 import io.zerows.extension.mbse.basement.util.Ao;
+import io.zerows.mbse.metadata.ActIn;
 import io.zerows.platform.metadata.KFabric;
 import io.zerows.platform.metadata.KIdentity;
-import io.zerows.platform.metadata.KMapping;
+import io.zerows.platform.metadata.KMap;
 import io.zerows.program.Ux;
 import io.zerows.program.feature.FieldMapper;
 import io.zerows.specification.modeling.HRecord;
@@ -362,7 +362,7 @@ public abstract class AbstractAdaptor extends AbstractComponent {
      * @return {@link KFabric} 字典翻译器
      */
     public KFabric fabric(final DataAtom atom) {
-        final KMapping mapping = this.mapping().child(atom.identifier());
+        final KMap.Node mapping = this.mapping().child(atom.identifier());
         if (Objects.nonNull(mapping)) {
             mapping.bind(atom.type());
         }

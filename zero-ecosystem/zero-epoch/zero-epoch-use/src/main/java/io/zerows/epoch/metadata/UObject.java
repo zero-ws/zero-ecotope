@@ -3,8 +3,8 @@ package io.zerows.epoch.metadata;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.LogO;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
@@ -13,15 +13,14 @@ import java.util.function.Function;
  * @author lang
  * Stream tool for JsonObject
  */
+@Slf4j
 public class UObject {
-
-    private static final LogO LOGGER = Ut.Log.data(UObject.class);
 
     private final JsonObject objectReference;
 
     private UObject(final JsonObject json) {
         this.objectReference = json;
-        LOGGER.debug(StreamInfo.STREAM_START, String.valueOf(this.hashCode()), json);
+        log.debug("[ ZERO ] UObject 正在初始化: {}, 内容: {}", this.hashCode(), json.encode());
     }
 
     public static UObject create(final String field, final Object value) {
@@ -103,7 +102,7 @@ public class UObject {
     }
 
     public JsonObject to() {
-        LOGGER.debug(StreamInfo.STREAM_END, String.valueOf(this.hashCode()), this.objectReference);
+        log.debug("[ ZERO ] UObject 转换完成: {}, 内容: {}", this.hashCode(), this.objectReference.encode());
         return this.objectReference;
     }
 

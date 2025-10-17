@@ -1,14 +1,14 @@
 package io.zerows.extension.runtime.crud.uca.input.view;
 
+import io.r2mo.typed.common.Kv;
 import io.vertx.core.Future;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.mbse.metadata.KColumn;
-import io.zerows.mbse.metadata.KModule;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 import io.zerows.extension.runtime.crud.util.Ix;
-import io.zerows.platform.metadata.Kv;
+import io.zerows.mbse.metadata.KColumn;
+import io.zerows.mbse.metadata.KModule;
 import io.zerows.program.Ux;
 
 /**

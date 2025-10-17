@@ -7,6 +7,7 @@ import io.vertx.core.json.JsonArray;
 import io.zerows.epoch.constant.KName;
 import io.zerows.integrated.jackson.JsonArrayDeserializer;
 import io.zerows.integrated.jackson.JsonArraySerializer;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -15,6 +16,7 @@ import java.util.Objects;
  * Connect configuration data to
  * Dao / Pojo class
  */
+@Data
 public class MDConnect implements Serializable {
 
     @JsonIgnore // 新版不执行 dao 的序列化，构造过程中单独处理
@@ -69,38 +71,6 @@ public class MDConnect implements Serializable {
     public Class<?> getPojo() {
         Objects.requireNonNull(this.meta);
         return this.meta.pojo();
-    }
-
-    public Class<?> getDao() {
-        return this.dao;
-    }
-
-    public void setDao(final Class<?> dao) {
-        this.dao = dao;
-    }
-
-    public String getPojoFile() {
-        return this.pojoFile;
-    }
-
-    public void setPojoFile(final String pojoFile) {
-        this.pojoFile = pojoFile;
-    }
-
-    public JsonArray getUnique() {
-        return this.unique;
-    }
-
-    public void setUnique(final JsonArray unique) {
-        this.unique = unique;
-    }
-
-    public String getKey() {
-        return this.key;
-    }
-
-    public void setKey(final String key) {
-        this.key = key;
     }
 
     @Override

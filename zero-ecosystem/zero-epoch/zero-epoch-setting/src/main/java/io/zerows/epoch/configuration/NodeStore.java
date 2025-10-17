@@ -1,11 +1,11 @@
 package io.zerows.epoch.configuration;
 
+import io.r2mo.typed.common.MultiKeyMap;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.DeliveryOptions;
 import io.zerows.epoch.basicore.option.CorsOptions;
 import io.zerows.platform.enums.EmApp;
-import io.zerows.platform.metadata.MultiKeyMap;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HSetting;
 import lombok.extern.slf4j.Slf4j;

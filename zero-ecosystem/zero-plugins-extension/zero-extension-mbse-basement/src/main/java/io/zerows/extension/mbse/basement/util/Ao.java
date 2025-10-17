@@ -6,7 +6,6 @@ import io.zerows.component.log.Log;
 import io.zerows.component.log.LogModule;
 import io.zerows.epoch.database.Database;
 import io.zerows.epoch.metadata.Apt;
-import io.zerows.epoch.metadata.MMBag;
 import io.zerows.extension.mbse.basement.atom.Model;
 import io.zerows.extension.mbse.basement.atom.Schema;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
@@ -250,7 +249,7 @@ public class Ao {
         return AoData.converter(type);
     }
 
-    public static List<MMBag> split(final MMBag bag, final Integer size) {
+    public static List<AoBag> split(final AoBag bag, final Integer size) {
         return AoData.bagSplit(bag, size);
     }
 

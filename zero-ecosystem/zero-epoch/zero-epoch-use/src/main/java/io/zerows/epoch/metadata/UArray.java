@@ -3,8 +3,7 @@ package io.zerows.epoch.metadata;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.LogO;
-import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
@@ -16,8 +15,8 @@ import java.util.stream.Collectors;
  * @author lang
  * Stream tool for JsonArray
  */
+@Slf4j
 public class UArray {
-    private static final LogO LOGGER = Ut.Log.data(UArray.class);
 
     private final JsonArray arrayReference;
 
@@ -25,7 +24,7 @@ public class UArray {
         this.arrayReference = new JsonArray(jsonArray.stream().filter(Objects::nonNull)
             .map(item -> (JsonObject) item)
             .collect(Collectors.toList()));
-        LOGGER.debug(StreamInfo.STREAM_START, String.valueOf(this.hashCode()), jsonArray);
+        log.debug("[ ZERO ] UArray 正在初始化: {}, 内容: {}", this.hashCode(), jsonArray.encode());
     }
 
     public static UArray create(final JsonArray item) {
@@ -108,7 +107,7 @@ public class UArray {
     }
 
     public JsonArray to() {
-        LOGGER.debug(StreamInfo.STREAM_END, String.valueOf(this.hashCode()), this.arrayReference);
+        log.debug("[ ZERO ] UArray 转换完成: {}, 内容: {}", this.hashCode(), this.arrayReference.encode());
         return this.arrayReference;
     }
 

@@ -2,7 +2,6 @@ package io.zerows.extension.mbse.basement.util;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.metadata.MMBag;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.atom.data.DataRecord;
 import io.zerows.extension.mbse.basement.atom.element.DataMatrix;
@@ -83,8 +82,7 @@ class AoData {
             /*
              * 构造记录集
              */
-            final HRecord record = new DataRecord();
-            Ut.contract(record, DataAtom.class, atom);
+            final HRecord record = record(atom);
             /*
              * 记录数据
              */
@@ -104,8 +102,7 @@ class AoData {
     }
 
     static HRecord record(final JsonObject data, final DataAtom atom) {
-        final HRecord record = new DataRecord();
-        Ut.contract(record, DataAtom.class, atom);
+        final HRecord record = record(atom);
         record.fromJson(data);
         return record;
     }
@@ -115,11 +112,11 @@ class AoData {
         return CONVERT_MAP.getOrDefault(type, null);
     }
 
-    static List<MMBag> bagSplit(final MMBag pbData, final Integer size) {
+    static List<AoBag> bagSplit(final AoBag pbData, final Integer size) {
         final List<JsonArray> dataList = Ut.elementGroup(pbData.getData(), size);
-        final List<MMBag> dataPbList = new ArrayList<>();
+        final List<AoBag> dataPbList = new ArrayList<>();
         dataList.forEach(each -> {
-            final MMBag data = new MMBag();
+            final AoBag data = new AoBag();
             data.setIdentifier(pbData.getIdentifier());
             data.setData(each);
             data.setSize(each.size());

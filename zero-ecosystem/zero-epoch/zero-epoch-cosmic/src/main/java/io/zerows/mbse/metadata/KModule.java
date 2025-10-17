@@ -11,7 +11,6 @@ import io.zerows.component.destine.Hymn;
 import io.zerows.epoch.database.jooq.JooqPin;
 import io.zerows.epoch.metadata.KField;
 import io.zerows.epoch.metadata.KJoin;
-import io.zerows.epoch.metadata.KPoint;
 import io.zerows.epoch.metadata.KTransform;
 import io.zerows.integrated.jackson.JsonObjectDeserializer;
 import io.zerows.integrated.jackson.JsonObjectSerializer;
@@ -245,7 +244,7 @@ public class KModule implements Serializable {
         this.connect = connect;
     }
 
-    public KPoint getConnect(final String identifier) {
+    public KJoin.Point getConnect(final String identifier) {
         if (Objects.isNull(this.connect)) {
             return null;
         }

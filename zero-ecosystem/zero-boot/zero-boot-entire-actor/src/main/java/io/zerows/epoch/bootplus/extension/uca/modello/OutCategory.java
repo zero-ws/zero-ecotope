@@ -1,12 +1,12 @@
 package io.zerows.epoch.bootplus.extension.uca.modello;
 
+import io.r2mo.typed.common.Kv;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.platform.metadata.Kv;
 import io.zerows.epoch.constant.KName;
-import io.zerows.support.Ut;
 import io.zerows.specification.modeling.HRecord;
 import io.zerows.specification.modeling.property.OComponent;
+import io.zerows.support.Ut;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;

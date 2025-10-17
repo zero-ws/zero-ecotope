@@ -1,10 +1,9 @@
 package io.zerows.extension.mbse.basement.uca.reference;
 
 import io.r2mo.typed.cc.Cc;
+import io.r2mo.typed.common.Kv;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.metadata.MMAmb;
-import io.zerows.platform.metadata.Kv;
 import io.zerows.specification.modeling.HRecord;
 import io.zerows.support.Ut;
 
@@ -24,9 +23,9 @@ import java.util.concurrent.ConcurrentMap;
  */
 class RayRuler {
 
-    static ConcurrentMap<String, MMAmb> group(final JsonArray source, final List<Kv<String, String>> joined,
-                                              final Class<?> type) {
-        final ConcurrentMap<String, MMAmb> grouped = new ConcurrentHashMap<>();
+    static ConcurrentMap<String, RayAmb> group(final JsonArray source, final List<Kv<String, String>> joined,
+                                               final Class<?> type) {
+        final ConcurrentMap<String, RayAmb> grouped = new ConcurrentHashMap<>();
         if (JsonObject.class == type) {
             /*
              * 单记录
@@ -34,7 +33,7 @@ class RayRuler {
             Ut.itJArray(source).forEach(json -> {
                 final String key = joinedKey(json, joined);
                 if (Ut.isNotNil(key)) {
-                    grouped.put(key, new MMAmb().data(json));
+                    grouped.put(key, new RayAmb().data(json));
                 }
             });
         } else {
@@ -50,7 +49,7 @@ class RayRuler {
                 }
             });
             groupedArray.forEach((key, data) -> {
-                final MMAmb amb = new MMAmb().data(data);
+                final RayAmb amb = new RayAmb().data(data);
                 grouped.put(key, amb);
             });
         }

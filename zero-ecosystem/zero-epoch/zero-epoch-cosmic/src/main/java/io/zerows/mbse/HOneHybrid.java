@@ -2,9 +2,8 @@ package io.zerows.mbse;
 
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonObject;
-import io.zerows.mbse.metadata.KModule;
 import io.zerows.epoch.metadata.KJoin;
-import io.zerows.epoch.metadata.KPoint;
+import io.zerows.mbse.metadata.KModule;
 import io.zerows.support.Ut;
 
 import java.util.Objects;
@@ -23,7 +22,7 @@ public class HOneHybrid implements HOne<BiFunction<JsonObject, JsonObject, JsonO
             if (Ut.isNotNil(connectV)) {
                 connectV = this.loadAttribute(connectV, connect);
                 // Point Target Process for synonym
-                final KPoint target = module.getConnect(connect.identifier());
+                final KJoin.Point target = module.getConnect(connect.identifier());
                 if (Objects.nonNull(target)) {
                     connectV = this.synonym(connectV, target);
                 }
@@ -37,7 +36,7 @@ public class HOneHybrid implements HOne<BiFunction<JsonObject, JsonObject, JsonO
         };
     }
 
-    private JsonObject synonym(final JsonObject data, final KPoint point) {
+    private JsonObject synonym(final JsonObject data, final KJoin.Point point) {
         if (Objects.isNull(point) || Ut.isNil(point.getSynonym())) {
             // point is null ( Or ) synonym is null
             return data;

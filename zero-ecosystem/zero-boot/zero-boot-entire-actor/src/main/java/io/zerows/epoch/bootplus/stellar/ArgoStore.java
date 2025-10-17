@@ -1,7 +1,7 @@
 package io.zerows.epoch.bootplus.stellar;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.metadata.MMSix;
+import io.zerows.epoch.bootplus.extension.uca.commerce.ArmsSix;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
 import io.zerows.platform.ENV;
 import io.zerows.platform.EnvironmentVariable;
@@ -44,7 +44,7 @@ public class ArgoStore {
     private static final JsonObject OPTIONS = new JsonObject();
     private static final JsonObject STELLAR = new JsonObject();
 
-    private static final MMSix HEX;
+    private static final ArmsSix HEX;
 
     static {
         final String envValue = ENV.of().get(EnvironmentVariable.Z_ENV);
@@ -55,7 +55,7 @@ public class ArgoStore {
         final JsonObject configuration = Ut.ioJObject(vPath);
         CONFIGURATION.mergeIn(configuration, true);
         // 六维数据专用
-        HEX = MMSix.create(CONFIGURATION);
+        HEX = ArmsSix.create(CONFIGURATION);
         // stellar 专用数据
         final String stellarIo = Ut.valueString(CONFIGURATION, VClassPath.runtime.configuration.STELLAR);
         final JsonObject stellar = Ut.ioJObject(stellarIo);
@@ -132,9 +132,9 @@ public class ArgoStore {
      *     - DELETE.false：单记录删除
      * </code></pre>
      *
-     * @return {@link MMSix}
+     * @return {@link ArmsSix}
      */
-    public static MMSix six() {
+    public static ArmsSix six() {
         return HEX;
     }
 

@@ -1,49 +1,31 @@
 package io.zerows.epoch.bootplus.boot;
 
+import io.r2mo.base.program.R2VarSet;
 import io.zerows.epoch.constant.KName;
 import io.zerows.platform.constant.VString;
 
 import java.util.List;
-import java.util.Objects;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 /**
  * @author lang : 2023-06-11
  */
 public class ArgLoad extends ArgIn {
-    private final ConcurrentMap<String, ArgVar> stored = new ConcurrentHashMap<>();
+    private final R2VarSet stored = R2VarSet.of();
 
     private ArgLoad(final String[] args) {
         {
             // 0 = path
-            this.stored.put(KName.PATH, ArgVar
-                .of(KName.PATH)
-                .valueDefault("init/oob"));
+            this.stored.add(KName.PATH, "init/oob");
             // 1 = oob
-            this.stored.put("oob", ArgVar
-                .of("oob")
-                .valueDefault(Boolean.TRUE)
-                .bind(Boolean.class));
+            this.stored.add("oob", Boolean.TRUE, Boolean.class);
             // 2 = prefix
-            this.stored.put(KName.PREFIX, ArgVar
-                .of(KName.PREFIX)
-                .valueDefault(VString.EMPTY));
+            this.stored.add(KName.PREFIX, VString.EMPTY);
         }
         this.initialize(args);
     }
 
     public static ArgLoad of(final String[] args) {
         return new ArgLoad(args);
-    }
-
-    @Override
-    public <T> T value(final String name) {
-        final ArgVar var = this.stored.getOrDefault(name, null);
-        if (Objects.isNull(var)) {
-            return null;
-        }
-        return var.value();
     }
 
     @Override
@@ -56,7 +38,7 @@ public class ArgLoad extends ArgIn {
     }
 
     @Override
-    protected ConcurrentMap<String, ArgVar> definition() {
+    protected R2VarSet varSet() {
         return this.stored;
     }
 }

@@ -1,12 +1,12 @@
 package io.zerows.epoch.database.jooq.operation;
 
+import io.r2mo.typed.common.Kv;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.database.jooq.JooqDsl;
 import io.zerows.epoch.database.jooq.JooqInfix;
 import io.zerows.epoch.database.jooq.util.JqAnalyzer;
 import io.zerows.epoch.metadata.MMPojo;
 import io.zerows.platform.exception._60050Exception501NotSupport;
-import io.zerows.platform.metadata.Kv;
 import org.jooq.Field;
 import org.jooq.Table;
 import org.jooq.impl.DSL;

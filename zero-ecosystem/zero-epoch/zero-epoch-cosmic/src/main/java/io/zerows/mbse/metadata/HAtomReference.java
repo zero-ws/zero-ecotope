@@ -9,7 +9,6 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.database.jooq.operation.UxJoin;
 import io.zerows.epoch.database.jooq.operation.UxJooq;
 import io.zerows.epoch.metadata.KJoin;
-import io.zerows.epoch.metadata.KPoint;
 import io.zerows.platform.enums.modeling.EmValue;
 import io.zerows.platform.exception._60050Exception501NotSupport;
 import io.zerows.platform.metadata.RDao;
@@ -223,9 +222,9 @@ public class HAtomReference implements HReference {
             }
             if (Objects.isNull(atom)) {
                 Objects.requireNonNull(join);
-                final KPoint source = join.getSource();
+                final KJoin.Point source = join.getSource();
                 final Hymn<JsonObject> hymn = Hymn.ofJObject(join);
-                final KPoint target = hymn.pointer(condition); // join.point(condition);
+                final KJoin.Point target = hymn.pointer(condition); // join.point(condition);
                 // Static
                 if (Objects.isNull(target)) {
                     // Jooq
@@ -252,9 +251,9 @@ public class HAtomReference implements HReference {
             }
             if (Objects.isNull(atom)) {
                 Objects.requireNonNull(join);
-                final KPoint source = join.getSource();
+                final KJoin.Point source = join.getSource();
                 final Hymn<JsonObject> hymn = Hymn.ofJObject(join);
-                final KPoint target = hymn.pointer(condition); // join.point(condition);
+                final KJoin.Point target = hymn.pointer(condition); // join.point(condition);
                 // Static
                 if (Objects.isNull(target)) {
                     // Jooq

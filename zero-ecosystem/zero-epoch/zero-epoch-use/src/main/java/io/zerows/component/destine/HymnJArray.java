@@ -4,7 +4,6 @@ import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonArray;
 import io.zerows.epoch.exception._80548Exception412IndentUnknown;
 import io.zerows.epoch.metadata.KJoin;
-import io.zerows.epoch.metadata.KPoint;
 import io.zerows.support.Ut;
 
 import java.util.HashSet;
@@ -17,8 +16,8 @@ import java.util.Set;
  * <pre><code>
  *     {
  *         "ofMain": {
- *             "identifier1": {@link KPoint},
- *             "identifier2": {@link KPoint}
+ *             "identifier1": {@link KJoin.Point},
+ *             "identifier2": {@link KJoin.Point}
  *         }
  *     }
  * </code></pre>
@@ -34,7 +33,7 @@ class HymnJArray extends HymnBase<JsonArray> {
     }
 
     @Override
-    public KPoint pointer(final JsonArray dataA) {
+    public KJoin.Point pointer(final JsonArray dataA) {
         // 先从数据节点解析 identifier
         final Set<String> idSet = new HashSet<>();
         Ut.itJArray(dataA).map(this::id)

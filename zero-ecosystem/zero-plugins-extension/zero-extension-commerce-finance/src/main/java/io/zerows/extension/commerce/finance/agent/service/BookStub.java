@@ -2,7 +2,7 @@ package io.zerows.extension.commerce.finance.agent.service;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.metadata.MMName;
+import io.zerows.epoch.metadata.MMShared;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FBook;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FPreAuthorize;
 
@@ -22,7 +22,7 @@ public interface BookStub {
     Future<List<FPreAuthorize>> fetchAuthorize(List<FBook> books);
 
     // Create Main
-    Future<List<FBook>> createAsync(List<FBook> books, MMName spec);
+    Future<List<FBook>> createAsync(List<FBook> books, MMShared spec);
 
     // Fetch Book with income and items
     Future<JsonObject> fetchByKey(String key);

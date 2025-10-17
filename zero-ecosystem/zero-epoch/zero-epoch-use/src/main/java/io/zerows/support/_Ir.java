@@ -1,8 +1,8 @@
 package io.zerows.support;
 
+import io.r2mo.typed.common.Kv;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.platform.metadata.Kv;
 
 import java.util.Objects;
 

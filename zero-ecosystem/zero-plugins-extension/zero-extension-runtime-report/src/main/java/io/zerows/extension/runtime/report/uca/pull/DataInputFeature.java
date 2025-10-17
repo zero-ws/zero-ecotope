@@ -1,14 +1,14 @@
 package io.zerows.extension.runtime.report.uca.pull;
 
 import io.r2mo.typed.cc.Cc;
+import io.r2mo.typed.common.Kv;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.platform.metadata.Kv;
 import io.zerows.epoch.constant.KName;
-import io.zerows.support.Ut;
 import io.zerows.extension.runtime.report.domain.tables.pojos.KpFeature;
 import io.zerows.extension.runtime.report.uca.feature.RInComponent;
 import io.zerows.extension.runtime.report.uca.pull.io.InValueComponent;
+import io.zerows.support.Ut;
 
 import java.util.Objects;
 

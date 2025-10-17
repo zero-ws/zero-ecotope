@@ -3,12 +3,11 @@ package io.zerows.component.destine;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.metadata.KJoin;
-import io.zerows.epoch.metadata.KPoint;
 import io.zerows.platform.exception._60050Exception501NotSupport;
 
 /**
  * 包域，不对外
- * 根据 {@link KPoint} 计算对应的组件，处理三个生命周期
+ * 根据 {@link KJoin.Point} 计算对应的组件，处理三个生命周期
  * <pre><code>
  *     1. 输入数据处理
  *     2. 输出数据处理

@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.runtime.ambient.uca.dict.Dpm;
 import io.zerows.platform.enums.EmDS;
-import io.zerows.platform.metadata.KDictSource;
+import io.zerows.platform.metadata.KDictConfig;
 import io.zerows.platform.metadata.KDictUse;
 import io.zerows.support.Ut;
 
@@ -52,7 +52,7 @@ public abstract class ExAttributeComponent {
             /*
              * Parameters
              */
-            final KDictSource sourceDict = new KDictSource(sourceDictJson);
+            final KDictConfig.Source sourceDict = new KDictConfig.Source(sourceDictJson);
             /*
              * Dpm
              */

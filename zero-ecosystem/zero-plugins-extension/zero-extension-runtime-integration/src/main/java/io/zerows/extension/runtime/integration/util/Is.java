@@ -1,12 +1,12 @@
 package io.zerows.extension.runtime.integration.util;
 
+import io.r2mo.typed.common.Kv;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.platform.metadata.Kv;
-import io.zerows.epoch.constant.KName;
 import io.zerows.component.log.Log;
 import io.zerows.component.log.LogModule;
+import io.zerows.epoch.constant.KName;
 import io.zerows.extension.runtime.integration.domain.tables.pojos.IDirectory;
 import io.zerows.extension.runtime.integration.uca.command.Fs;
 

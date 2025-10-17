@@ -1,9 +1,10 @@
 package io.zerows.platform.metadata;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.support.base.UtBase;
 import io.zerows.specification.atomic.HCopier;
 import io.zerows.specification.atomic.HJson;
+import io.zerows.support.base.UtBase;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.concurrent.ConcurrentHashMap;
@@ -18,9 +19,10 @@ import java.util.concurrent.ConcurrentMap;
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Data
 public class KDictUse implements Serializable, HJson, HCopier<KDictUse> {
 
-    /** 消费的字典名，{@link KDictSource} 中的 key 定义 */
+    /** 消费的字典名，{@link KDictConfig.Source} 中的 key 定义 */
     private String source;
 
     /** 显示端属性名 */
@@ -45,38 +47,6 @@ public class KDictUse implements Serializable, HJson, HCopier<KDictUse> {
                 });
         }
         return epsilonMap;
-    }
-
-    public String getSource() {
-        return this.source;
-    }
-
-    public void setSource(final String source) {
-        this.source = source;
-    }
-
-    public String getIn() {
-        return this.in;
-    }
-
-    public void setIn(final String in) {
-        this.in = in;
-    }
-
-    public String getOut() {
-        return this.out;
-    }
-
-    public void setOut(final String out) {
-        this.out = out;
-    }
-
-    public boolean getParent() {
-        return this.parent;
-    }
-
-    public void setParent(final boolean parent) {
-        this.parent = parent;
     }
 
     @Override

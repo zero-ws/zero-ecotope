@@ -17,6 +17,7 @@ import java.util.function.Function;
  * field -> column here.
  * It must be used with Mojo.
  */
+@Deprecated
 public class MMPojoMapping {
 
     private static final String POJO = "pojo/{0}.yml";

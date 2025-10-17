@@ -1,5 +1,6 @@
 package io.zerows.extension.runtime.report.uca.process;
 
+import io.r2mo.typed.common.Kv;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
@@ -9,7 +10,6 @@ import io.zerows.extension.runtime.report.atom.RDimension;
 import io.zerows.extension.runtime.report.domain.tables.pojos.KpDimension;
 import io.zerows.extension.runtime.report.eon.RpConstant;
 import io.zerows.extension.runtime.report.eon.em.EmDim;
-import io.zerows.platform.metadata.Kv;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
 

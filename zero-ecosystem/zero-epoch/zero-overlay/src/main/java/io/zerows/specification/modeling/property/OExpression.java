@@ -1,6 +1,6 @@
 package io.zerows.specification.modeling.property;
 
-import io.zerows.platform.metadata.Kv;
+import io.r2mo.typed.common.Kv;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>

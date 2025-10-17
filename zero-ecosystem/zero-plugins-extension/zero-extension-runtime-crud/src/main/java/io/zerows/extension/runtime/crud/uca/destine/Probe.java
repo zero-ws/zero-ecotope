@@ -1,9 +1,9 @@
 package io.zerows.extension.runtime.crud.uca.destine;
 
-import io.zerows.mbse.metadata.KModule;
-import io.zerows.epoch.metadata.KPoint;
-import io.zerows.platform.enums.modeling.EmModel;
+import io.zerows.epoch.metadata.KJoin;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
+import io.zerows.mbse.metadata.KModule;
+import io.zerows.platform.enums.modeling.EmModel;
 
 import java.util.Objects;
 import java.util.function.Supplier;
@@ -39,5 +39,5 @@ public interface Probe {
         return POOL.CCT_PROBE.pick(supplier, join.name());
     }
 
-    IxMod create(KPoint point, IxMod active);
+    IxMod create(KJoin.Point point, IxMod active);
 }

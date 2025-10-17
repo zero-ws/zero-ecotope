@@ -37,7 +37,7 @@ import java.util.Set;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 @Data
-public class MMName implements Serializable {
+public class MMShared implements Serializable {
     // 🔍 查询条件专用
     private final Set<String> qrKeys = new HashSet<>();
     // 📋 系统业务字段

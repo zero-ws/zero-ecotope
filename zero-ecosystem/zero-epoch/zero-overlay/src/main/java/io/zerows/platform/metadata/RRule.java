@@ -5,14 +5,15 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.LogOf;
-import io.zerows.platform.constant.VString;
 import io.zerows.integrated.jackson.JsonArrayDeserializer;
 import io.zerows.integrated.jackson.JsonArraySerializer;
 import io.zerows.integrated.jackson.JsonObjectDeserializer;
 import io.zerows.integrated.jackson.JsonObjectSerializer;
+import io.zerows.platform.constant.VString;
 import io.zerows.specification.modeling.HRecord;
 import io.zerows.support.base.UtBase;
+import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
 import java.util.Arrays;
@@ -57,8 +58,9 @@ import java.util.stream.Stream;
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
+@Data
 public class RRule implements Serializable {
-    private static final LogOf LOGGER = LogOf.get(RRule.class);
     @JsonSerialize(using = JsonObjectSerializer.class)
     @JsonDeserialize(using = JsonObjectDeserializer.class)
     private JsonObject condition;
@@ -94,44 +96,12 @@ public class RRule implements Serializable {
         }
     }
 
-    public void setUnique(final JsonArray unique) {
-        this.unique = unique;
-    }
-
-    public JsonObject getCondition() {
-        return this.condition;
-    }
-
-    public void setCondition(final JsonObject condition) {
-        this.condition = condition;
-    }
-
-    public JsonObject getConditions() {
-        return this.conditions;
-    }
-
-    public void setConditions(final JsonObject conditions) {
-        this.conditions = conditions;
-    }
-
     public Set<String> getRequired() {
         if (UtBase.isNotNil(this.required)) {
             return UtBase.toSet(this.required);
         } else {
             return new HashSet<>();
         }
-    }
-
-    public void setRequired(final JsonArray required) {
-        this.required = required;
-    }
-
-    public JsonArray getDiff() {
-        return this.diff;
-    }
-
-    public void setDiff(final JsonArray diff) {
-        this.diff = diff;
     }
 
     public Class<?> type() {
@@ -180,7 +150,7 @@ public class RRule implements Serializable {
             }
         });
         if (UtBase.isNotNil(tpl)) {
-            LOGGER.info("[ EMF ] Reference condition building: {0}", tpl.encode());
+            log.info("[ ZERO ] ( EMF ) 引用条件构造：{}", tpl.encode());
         }
         // If null of "", the AND operator will be set.
         tpl.put(VString.EMPTY, this.condition.getBoolean(VString.EMPTY, Boolean.TRUE));

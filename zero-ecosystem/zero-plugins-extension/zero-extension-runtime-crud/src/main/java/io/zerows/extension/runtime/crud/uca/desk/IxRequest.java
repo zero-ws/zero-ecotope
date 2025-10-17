@@ -4,7 +4,6 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.KJoin;
-import io.zerows.epoch.metadata.KPoint;
 import io.zerows.epoch.metadata.KView;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.runtime.crud.eon.em.ApiSpec;
@@ -124,7 +123,7 @@ public class IxRequest {
         final KJoin join = this.active.connect();
         if (Objects.nonNull(join) && EmDS.Connect.PARENT_STANDBY == join.refer()) {
             // reference 的解析
-            final KPoint point = join.getReference();
+            final KJoin.Point point = join.getReference();
             module = Objects.isNull(point) ? null : point.indent();
         }
         return module;

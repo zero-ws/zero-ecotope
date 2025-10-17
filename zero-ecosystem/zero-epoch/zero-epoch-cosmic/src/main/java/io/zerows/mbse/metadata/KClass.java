@@ -4,7 +4,7 @@ import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.LogO;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.metadata.KPoint;
+import io.zerows.epoch.metadata.KJoin;
 import io.zerows.mbse.HOne;
 import io.zerows.mbse.exception._80510Exception404ModelNotFound;
 import io.zerows.mbse.exception._80547Exception409IdentifierConflict;
@@ -129,7 +129,7 @@ public class KClass implements Serializable {
         linkageSet.remove(module.identifier());
 
         linkageSet.forEach(identifier -> {
-            final KPoint point = module.getConnect(identifier);
+            final KJoin.Point point = module.getConnect(identifier);
             // 3. Check the identifier in linkageSet could be connected.
             if (Objects.nonNull(point)) {
                 linkageSet.add(identifier);

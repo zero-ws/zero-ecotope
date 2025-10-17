@@ -5,7 +5,6 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.metadata.KField;
 import io.zerows.epoch.metadata.KJoin;
-import io.zerows.epoch.metadata.KPoint;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 import io.zerows.extension.runtime.crud.uca.input.Pre;
 import io.zerows.mbse.metadata.KModule;
@@ -46,7 +45,7 @@ class RefPre implements Pre {
             return;
         }
 
-        final KPoint source = join.getSource();
+        final KJoin.Point source = join.getSource();
         final String keyJoin = source.getKeyJoin();
         if (Ut.isNil(keyJoin) || keyField.equals(keyJoin)) {
             return;

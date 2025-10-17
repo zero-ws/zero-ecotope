@@ -1,7 +1,7 @@
 package io.zerows.component.environment;
 
+import io.r2mo.base.program.R2VarSet;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.metadata.MMVariable;
 
 /**
  * 成熟度，处理环境变量专用的处理模型
@@ -13,5 +13,5 @@ import io.zerows.epoch.metadata.MMVariable;
  */
 interface Mature {
     /* 环境变量加载，根据环境变量修订核心配置点，实现配置本身的处理 */
-    JsonObject configure(JsonObject configJ, MMVariable.Set set);
+    JsonObject configure(JsonObject configJ, R2VarSet set);
 }

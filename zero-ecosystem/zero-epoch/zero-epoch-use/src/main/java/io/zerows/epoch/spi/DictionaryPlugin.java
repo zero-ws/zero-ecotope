@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.platform.metadata.KDictSource;
+import io.zerows.platform.metadata.KDictConfig;
 
 public interface DictionaryPlugin {
 
@@ -12,9 +12,9 @@ public interface DictionaryPlugin {
         return this;
     }
 
-    Future<JsonArray> fetchAsync(KDictSource source, MultiMap paramMap);
+    Future<JsonArray> fetchAsync(KDictConfig.Source source, MultiMap paramMap);
 
-    default JsonArray fetch(final KDictSource source, final MultiMap paramMap) {
+    default JsonArray fetch(final KDictConfig.Source source, final MultiMap paramMap) {
         return new JsonArray();
     }
 }

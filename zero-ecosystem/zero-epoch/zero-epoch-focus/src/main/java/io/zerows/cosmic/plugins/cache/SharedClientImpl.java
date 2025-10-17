@@ -1,6 +1,7 @@
 package io.zerows.cosmic.plugins.cache;
 
 import io.r2mo.typed.cc.Cc;
+import io.r2mo.typed.common.Kv;
 import io.r2mo.typed.exception.WebException;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
@@ -11,7 +12,6 @@ import io.vertx.core.shareddata.LocalMap;
 import io.vertx.core.shareddata.SharedData;
 import io.zerows.cosmic.plugins.cache.exception._60034Exception500SharedDataMode;
 import io.zerows.epoch.annotations.Defer;
-import io.zerows.platform.metadata.Kv;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;

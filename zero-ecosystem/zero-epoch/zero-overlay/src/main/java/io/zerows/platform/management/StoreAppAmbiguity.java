@@ -1,6 +1,6 @@
 package io.zerows.platform.management;
 
-import io.zerows.platform.metadata.MultiKeyMap;
+import io.r2mo.typed.common.MultiKeyMap;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.development.compiled.HBundle;
 import lombok.extern.slf4j.Slf4j;

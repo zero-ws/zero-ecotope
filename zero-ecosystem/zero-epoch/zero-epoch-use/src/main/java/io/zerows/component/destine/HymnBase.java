@@ -3,7 +3,6 @@ package io.zerows.component.destine;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.Log;
 import io.zerows.epoch.metadata.KJoin;
-import io.zerows.epoch.metadata.KPoint;
 import io.zerows.platform.enums.EmDS;
 import io.zerows.support.Ut;
 
@@ -67,7 +66,7 @@ public abstract class HymnBase<T> implements Hymn<T> {
      * @return {@link String} 解析出来的 identifier
      */
     private String idRefer() {
-        final KPoint point = this.joinRef.getReference();
+        final KJoin.Point point = this.joinRef.getReference();
         if (Objects.isNull(point)) {
             return null;
         }
@@ -81,8 +80,8 @@ public abstract class HymnBase<T> implements Hymn<T> {
      *     "connect": {
      *         "targetIndent": "identifier",
      *         "ofMain": {
-     *             "identifier1": {@link KPoint},
-     *             "identifier2": {@link KPoint}
+     *             "identifier1": {@link KJoin.Point},
+     *             "identifier2": {@link KJoin.Point}
      *         }
      *     }
      * }

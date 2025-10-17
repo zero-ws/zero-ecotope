@@ -5,7 +5,6 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.Log;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.KJoin;
-import io.zerows.epoch.metadata.KPoint;
 import io.zerows.support.Ut;
 
 import java.util.Objects;
@@ -14,8 +13,8 @@ import java.util.function.BiConsumer;
 /**
  * 针对原始系统中的 dataIn / dataOut / dataCond 执行强替换，每一种替换使用一个子类来处理，这里是抽象类，不可直接使用，需要使用子类来实现，和 {@link Hymn} 不同的点在于：
  * <pre><code>
- *     1. {@link Hymn} 主要负责连接点的解析，解析的结果为一个 {@link KPoint}，主要作用点在于 {@link KJoin} 的连接定义部分。
- *     2. {@link Conflate} 则负责数据的处理，作用点在于 {@link KPoint} 部分的数据处理。
+ *     1. {@link Hymn} 主要负责连接点的解析，解析的结果为一个 {@link KJoin.Point}，主要作用点在于 {@link KJoin} 的连接定义部分。
+ *     2. {@link Conflate} 则负责数据的处理，作用点在于 {@link KJoin.Point} 部分的数据处理。
  * </code></pre>
  * 通常在解析流程的拓扑主要如下：
  * <pre><code>
@@ -56,12 +55,12 @@ public abstract class ConflateBase<I, O> implements Conflate<I, O> {
     }
 
     /**
-     * 当前模块的基础配置，这个配置为 {@link KPoint}，此配置不能为空
+     * 当前模块的基础配置，这个配置为 {@link KJoin.Point}，此配置不能为空
      *
-     * @return {@link KPoint} 配置
+     * @return {@link KJoin.Point} 配置
      */
-    protected KPoint source() {
-        final KPoint source = this.joinRef.getSource();
+    protected KJoin.Point source() {
+        final KJoin.Point source = this.joinRef.getSource();
         Objects.requireNonNull(source);
         return source;
     }
@@ -72,7 +71,7 @@ public abstract class ConflateBase<I, O> implements Conflate<I, O> {
             return KName.KEY;
         }
         // 连接点提取
-        final KPoint source = this.joinRef.getSource();
+        final KJoin.Point source = this.joinRef.getSource();
         if (Objects.isNull(source)) {
             return KName.KEY;
         }
@@ -82,26 +81,26 @@ public abstract class ConflateBase<I, O> implements Conflate<I, O> {
 
     /**
      * 「动态连接」
-     * 当前模块的连接目标配置，次配置同样为 {@link KPoint}结构，有可能为空，由于是动态连接模式，所以
+     * 当前模块的连接目标配置，次配置同样为 {@link KJoin.Point}结构，有可能为空，由于是动态连接模式，所以
      * 此处的连接点可以为空，根据传入的 identifier 模型标识符动态构造连接点，执行流程
      * <pre><code>
      *     1. 根据当前模块 module 的 getConnect() 计算连接点
-     *     2. 获取连接点配置，{@link KPoint}
+     *     2. 获取连接点配置，{@link KJoin.Point}
      * </code></pre>
      *
      * @param identifier 连接点的标识符
      *
-     * @return {@link KPoint} 配置
+     * @return {@link KJoin.Point} 配置
      */
-    protected KPoint target(final String identifier) {
+    protected KJoin.Point target(final String identifier) {
         final Hymn<String> hymn = Hymn.ofString(this.joinRef);
-        final KPoint point = hymn.pointer(identifier);
+        final KJoin.Point point = hymn.pointer(identifier);
         Log.info(this.getClass(), "Point = {0}, To = {1}", point, identifier);
         return point;
     }
 
     protected String targetKey(final String identifier) {
-        final KPoint target = this.target(identifier);
+        final KJoin.Point target = this.target(identifier);
         return Objects.isNull(target) ? KName.KEY : target.getKeyJoin();
     }
 
@@ -129,7 +128,7 @@ public abstract class ConflateBase<I, O> implements Conflate<I, O> {
     // source.key / ofMain.keyJoin --> qr
     protected JsonObject procQr(final JsonObject active, final String identifier) {
         final String keySource = this.sourceKey();
-        final KPoint target = this.target(identifier);
+        final KJoin.Point target = this.target(identifier);
         final JsonObject dataJoin = new JsonObject();
         if (Objects.nonNull(target)) {
             // 若连接点存在，则执行连接点部分的数据
@@ -148,7 +147,7 @@ public abstract class ConflateBase<I, O> implements Conflate<I, O> {
     // source.key -> ofMain.keyJoin
     protected JsonObject procInput(final JsonObject active, final String identifier) {
         final String keySource = this.sourceKey();
-        final KPoint target = this.target(identifier);
+        final KJoin.Point target = this.target(identifier);
         final JsonObject dataJoin = new JsonObject();
         if (Objects.nonNull(target)) {
             // 若连接点存在，则执行连接点部分的数据
@@ -163,7 +162,7 @@ public abstract class ConflateBase<I, O> implements Conflate<I, O> {
     // ofMain.keyJoin -> source.key
     protected JsonObject procOutput(final JsonObject active, final String identifier) {
         final String keySource = this.sourceKey();
-        final KPoint target = this.target(identifier);
+        final KJoin.Point target = this.target(identifier);
         final JsonObject dataJoin = new JsonObject();
         if (Objects.nonNull(target)) {
             // 若连接点存在，则执行连接点部分的数据

@@ -21,9 +21,9 @@ class KDictTool {
         return normalized;
     }
 
-    static JsonObject process(final ConcurrentMap<String, KMapping> dataMap,
+    static JsonObject process(final ConcurrentMap<String, KMap.Node> dataMap,
                               final JsonObject input,
-                              final BiFunction<KMapping, String, String> applier) {
+                              final BiFunction<KMap.Node, String, String> applier) {
         final JsonObject normalized = Objects.isNull(input) ? new JsonObject() : input.copy();
         dataMap.forEach((field, item) -> {
             final Object fromValue = input.getValue(field);

@@ -1,7 +1,7 @@
 package io.zerows.epoch.bootplus.extension.uca.modello;
 
+import io.r2mo.typed.common.Kv;
 import io.vertx.core.json.JsonObject;
-import io.zerows.platform.metadata.Kv;
 import io.zerows.extension.runtime.ambient.osgi.spi.component.ExAttributeComponent;
 import io.zerows.specification.modeling.HRecord;
 import io.zerows.specification.modeling.property.OComponent;

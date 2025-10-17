@@ -5,7 +5,6 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.Log;
 import io.zerows.epoch.exception._80543Exception412IndentParsing;
 import io.zerows.epoch.metadata.KJoin;
-import io.zerows.epoch.metadata.KPoint;
 import io.zerows.support.Ut;
 
 import java.util.Objects;
@@ -16,8 +15,8 @@ import java.util.Objects;
  * <pre><code>
  *     {
  *         "ofMain": {
- *             "identifier1": {@link KPoint},
- *             "identifier2": {@link KPoint}
+ *             "identifier1": {@link KJoin.Point},
+ *             "identifier2": {@link KJoin.Point}
  *         }
  *     }
  * </code></pre>
@@ -33,7 +32,7 @@ class HymnJObject extends HymnBase<JsonObject> {
     }
 
     @Override
-    public KPoint pointer(final JsonObject dataJ) {
+    public KJoin.Point pointer(final JsonObject dataJ) {
         // 先从数据节点解析 identifier
         final String identifier = this.id(dataJ);
         Fn.jvmKo(Ut.isNil(identifier), _80543Exception412IndentParsing.class,
@@ -41,7 +40,7 @@ class HymnJObject extends HymnBase<JsonObject> {
 
 
         // 根据解析到的 identifier 提取连接点
-        final KPoint pointer = this.hymnStr.pointer(identifier);
+        final KJoin.Point pointer = this.hymnStr.pointer(identifier);
         if (Objects.isNull(pointer)) {
             Log.warn(this.getClass(), "System could not find configuration for `{0}` with data = {1}",
                 identifier, dataJ.encode());

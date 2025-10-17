@@ -1,7 +1,7 @@
 package io.zerows.epoch.basicore;
 
+import io.r2mo.typed.common.MultiKeyMap;
 import io.vertx.core.json.JsonObject;
-import io.zerows.platform.metadata.MultiKeyMap;
 import io.zerows.specification.development.compiled.HBundle;
 
 import java.util.HashSet;

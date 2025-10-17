@@ -2,9 +2,9 @@ package io.zerows.support;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.platform.constant.VString;
-import io.zerows.platform.metadata.KMapping;
 import io.zerows.epoch.constant.KName;
+import io.zerows.platform.constant.VString;
+import io.zerows.platform.metadata.KMap;
 
 import java.util.Objects;
 import java.util.function.BinaryOperator;
@@ -26,7 +26,7 @@ class Mapping {
      * 1. bMapping.keys() -> froms
      * 2. bMapping.to(String) -> from -> to
      */
-    static JsonObject vTo(final JsonObject input, final KMapping mapping) {
+    static JsonObject vTo(final JsonObject input, final KMap.Node mapping) {
         final JsonObject outputJ = new JsonObject();
         if (Objects.isNull(input)) {
             return outputJ;
@@ -39,15 +39,15 @@ class Mapping {
         return outputJ;
     }
 
-    static JsonArray vTo(final JsonArray input, final KMapping mapping) {
+    static JsonArray vTo(final JsonArray input, final KMap.Node mapping) {
         final JsonArray outputA = new JsonArray();
         Ut.itJArray(input).forEach(json -> outputA.add(vTo(json, mapping)));
         return outputA;
     }
 
     static JsonObject vTo(final JsonObject input, final JsonObject mapping, final boolean smart) {
-        final KMapping kMapping = bMapping(mapping, smart);
-        return vTo(input, kMapping);
+        final KMap.Node node = bMapping(mapping, smart);
+        return vTo(input, node);
     }
 
     static JsonArray vTo(final JsonArray input, final JsonObject mapping, final boolean smart) {
@@ -56,10 +56,10 @@ class Mapping {
 
     static JsonArray vTo(final JsonArray input, final JsonObject mapping, final boolean smart,
                          final BinaryOperator<JsonObject> itFn) {
-        final KMapping kMapping = bMapping(mapping, smart);
+        final KMap.Node node = bMapping(mapping, smart);
         final JsonArray outputA = new JsonArray();
         Ut.itJArray(input).forEach(json -> {
-            final JsonObject convert = vTo(json, kMapping);
+            final JsonObject convert = vTo(json, node);
             if (Objects.isNull(itFn)) {
                 outputA.add(convert);
             } else {
@@ -70,8 +70,8 @@ class Mapping {
     }
 
     static JsonObject vFrom(final JsonObject input, final JsonObject mapping, final boolean smart) {
-        final KMapping kMapping = bMapping(mapping, smart);
-        return vFrom(input, kMapping);
+        final KMap.Node node = bMapping(mapping, smart);
+        return vFrom(input, node);
     }
 
     static JsonArray vFrom(final JsonArray input, final JsonObject mapping, final boolean smart) {
@@ -80,10 +80,10 @@ class Mapping {
 
     static JsonArray vFrom(final JsonArray input, final JsonObject mapping, final boolean smart,
                            final BinaryOperator<JsonObject> itFn) {
-        final KMapping kMapping = bMapping(mapping, smart);
+        final KMap.Node node = bMapping(mapping, smart);
         final JsonArray outputA = new JsonArray();
         Ut.itJArray(input).forEach(json -> {
-            final JsonObject convert = vFrom(json, kMapping);
+            final JsonObject convert = vFrom(json, node);
             if (Objects.isNull(itFn)) {
                 outputA.add(convert);
             } else {
@@ -93,7 +93,7 @@ class Mapping {
         return outputA;
     }
 
-    private static JsonObject vFrom(final JsonObject input, final KMapping mapping) {
+    private static JsonObject vFrom(final JsonObject input, final KMap.Node mapping) {
         final JsonObject outputJ = new JsonObject();
         if (Objects.isNull(input)) {
             return outputJ;
@@ -106,24 +106,24 @@ class Mapping {
         return outputJ;
     }
 
-    private static JsonArray vFrom(final JsonArray input, final KMapping mapping) {
+    private static JsonArray vFrom(final JsonArray input, final KMap.Node mapping) {
         final JsonArray outputA = new JsonArray();
         Ut.itJArray(input).forEach(json -> outputA.add(vFrom(json, mapping)));
         return outputA;
     }
 
-    private static KMapping bMapping(final JsonObject mapping, final boolean smart) {
-        final KMapping kMapping;
+    private static KMap.Node bMapping(final JsonObject mapping, final boolean smart) {
+        final KMap.Node node;
         if (smart) {
             final Object value = mapping.getValue(KName.MAPPING);
             if (value instanceof final JsonObject stored) {
-                kMapping = new KMapping(stored);
+                node = new KMap.Node(stored);
             } else {
-                kMapping = new KMapping(mapping);
+                node = new KMap.Node(mapping);
             }
         } else {
-            kMapping = new KMapping(mapping);
+            node = new KMap.Node(mapping);
         }
-        return kMapping;
+        return node;
     }
 }

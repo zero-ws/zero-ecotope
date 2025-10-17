@@ -1,5 +1,6 @@
 package io.zerows.epoch.database.jooq.operation;
 
+import io.r2mo.base.program.R2Vector;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
@@ -23,6 +24,7 @@ public final class UxJoin {
     private transient final ConcurrentMap<Class<?>, String> pojoMap
         = new ConcurrentHashMap<>();
     private transient MMPojo merged = null;
+    private transient R2Vector vector;
 
     private UxJoin(final String file) {
         if (Ut.isNotNil(file)) {
