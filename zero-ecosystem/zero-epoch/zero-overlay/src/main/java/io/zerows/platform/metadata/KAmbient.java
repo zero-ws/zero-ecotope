@@ -1,12 +1,25 @@
 package io.zerows.platform.metadata;
 
+import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonObject;
+import io.zerows.platform.constant.VName;
+import io.zerows.platform.constant.VValue;
 import io.zerows.platform.enums.EmApp;
+import io.zerows.platform.exception._40103Exception500ConnectAmbient;
 import io.zerows.platform.exception._60050Exception501NotSupport;
 import io.zerows.specification.app.HAmbient;
+import io.zerows.specification.app.HApp;
 import io.zerows.specification.app.HArk;
+import io.zerows.specification.atomic.HBelong;
+import io.zerows.specification.cloud.HFrontier;
+import io.zerows.specification.cloud.HGalaxy;
+import io.zerows.specification.cloud.HSpace;
+import io.zerows.specification.vital.HOI;
+import io.zerows.support.base.UtBase;
 
+import java.util.Collection;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -22,8 +35,8 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class KAmbient implements HAmbient {
     private final ConcurrentMap<String, JsonObject> configuration = new ConcurrentHashMap<>();
-    private final _KAmbientContext context = new _KAmbientContext();
-    private final _KAmbientRuntime vector = new _KAmbientRuntime();
+    private final Context context = new Context();
+    private final Runtime vector = new Runtime();
     private EmApp.Mode mode;
 
     private KAmbient() {
@@ -82,5 +95,108 @@ public class KAmbient implements HAmbient {
         // 2. 运行时绑定
         this.vector.registry(ark, this.mode);
         return this;
+    }
+
+    /**
+     * @author lang : 2023-06-07
+     */
+    static class Runtime {
+        private static final ConcurrentMap<String, String> VECTOR = new ConcurrentHashMap<>();
+
+        /**
+         * 替换原始的 HES / HET / HOI 专用
+         * <pre><code>
+         *     构造向量表
+         *     name
+         *     ns           = cacheKey
+         *     id
+         *     appKey       = cacheKey
+         *     tenantId     = cacheKey
+         *     sigma        = cacheKey
+         * </code></pre>
+         *
+         * @param ark  HArk 应用配置容器
+         * @param mode EmApp.Mode 应用模式
+         */
+        void registry(final HArk ark, final EmApp.Mode mode) {
+            // 提取缓存键和应用程序引用
+            final String key = UtBase.keyApp(ark);
+            final HApp app = ark.app();
+
+            // 1. 基础规范：name / ns
+            final String ns = app.ns();
+            VECTOR.put(ns, key);
+            final String name = app.name();
+            VECTOR.put(name, key);
+
+            // 2. 扩展规范：code / appKey / id
+            final String code = app.option(VName.CODE);
+            Optional.ofNullable(code).ifPresent(each -> VECTOR.put(each, key));
+            final String appId = app.option(VName.APP_ID);
+            Optional.ofNullable(appId).ifPresent(each -> VECTOR.put(each, key));
+            final String appKey = app.option(VName.APP_KEY);
+            Optional.ofNullable(appKey).ifPresent(each -> VECTOR.put(each, key));
+
+            // 3. 选择规范：sigma / tenantId
+            if (EmApp.Mode.CUBE == mode) {
+                // 单租户 / 单应用，tenantId / sigma 可表示缓存键（唯一的情况）
+                final HOI hoi = ark.owner();
+                Optional.ofNullable(hoi).map(HBelong::owner).ifPresent(each -> VECTOR.put(each, key));
+                final String sigma = app.option(VName.SIGMA);
+                Optional.ofNullable(sigma).ifPresent(each -> VECTOR.put(each, key));
+            }
+        }
+
+        String keyFind(final String key) {
+            return VECTOR.getOrDefault(key, null);
+        }
+    }
+
+    /**
+     * @author lang : 2023-06-06
+     */
+    static class Context {
+        private static final Cc<String, HArk> CC_ARK = Cc.open();
+
+        Context() {
+        }
+
+        HArk running() {
+            final Collection<HArk> arks = CC_ARK.values();
+            if (VValue.ONE == arks.size()) {
+                return arks.iterator().next();
+            }
+            throw new _40103Exception500ConnectAmbient();
+        }
+
+        HArk running(final String cacheKey) {
+            return Optional.ofNullable(cacheKey)
+                .map(CC_ARK::get)
+                .orElse(null);
+        }
+
+        ConcurrentMap<String, HArk> app() {
+            return CC_ARK.get();
+        }
+
+        EmApp.Mode registry(final HArk ark) {
+            final String cacheKey = UtBase.keyApp(ark);
+            CC_ARK.put(cacheKey, ark);
+            // 注册结束后编织应用的上下文
+            // 环境中应用程序超过 1 个时才执行其他判断
+            final ConcurrentMap<String, HArk> store = CC_ARK.get();
+            final HBelong belong = ark.owner();
+            EmApp.Mode mode = EmApp.Mode.CUBE;
+            if (VValue.ONE < store.size()) {
+                if (belong instanceof HFrontier) {
+                    mode = EmApp.Mode.FRONTIER;        // Frontier
+                } else if (belong instanceof HGalaxy) {
+                    mode = EmApp.Mode.GALAXY;          // Galaxy
+                } else if (belong instanceof HSpace) {
+                    mode = EmApp.Mode.SPACE;           // Space
+                }
+            }
+            return mode;
+        }
     }
 }

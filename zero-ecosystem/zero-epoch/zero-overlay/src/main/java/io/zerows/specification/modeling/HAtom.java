@@ -1,7 +1,6 @@
 package io.zerows.specification.modeling;
 
 import io.zerows.platform.metadata.KMarkAtom;
-import io.zerows.platform.metadata.KMarkAttribute;
 import io.zerows.specification.app.HArk;
 import io.zerows.specification.modeling.metadata.HMetaAtom;
 import io.zerows.specification.modeling.operation.HDiff;
@@ -108,7 +107,7 @@ interface HAtomIo {
      * 直接引用模型级的属性标记类，记录了当前模型两级配置
      * <pre><code>
      *     1. 模型是否可追踪
-     *     2. 在可追踪和不可追踪模式下的属性标记信息（每个属性中会包含 {@link KMarkAttribute}）
+     *     2. 在可追踪和不可追踪模式下的属性标记信息（每个属性中会包含 {@link KMarkAtom.Attribute}）
      * </code></pre>
      *
      * @return {@link KMarkAtom}

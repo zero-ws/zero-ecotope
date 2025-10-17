@@ -1,8 +1,8 @@
 package io.zerows.epoch.bootplus.stellar;
 
-import io.zerows.platform.metadata.KDS;
-import io.zerows.platform.metadata.KGlobal;
 import io.zerows.epoch.database.Database;
+import io.zerows.platform.metadata.KGlobal;
+import io.zerows.platform.metadata.OldKDS;
 import io.zerows.specification.app.HArk;
 
 /**
@@ -22,8 +22,8 @@ public interface Party {
      * @return {@link Database}
      */
     default Database configDatabase() {
-        final KDS<Database> kds = this.configArk().database();
-        return kds.dynamic();
+        final OldKDS<Database> oldKds = this.configArk().database();
+        return oldKds.dynamic();
     }
 
     /**

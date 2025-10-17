@@ -17,7 +17,7 @@ import io.zerows.extension.mbse.action.domain.tables.pojos.IApi;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IJob;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IService;
 import io.zerows.platform.exception._40103Exception500ConnectAmbient;
-import io.zerows.platform.metadata.KDS;
+import io.zerows.platform.metadata.OldKDS;
 import io.zerows.program.Ux;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.app.HArk;
@@ -79,11 +79,11 @@ public class ServiceEnvironment {
         // 是否配置了动态数据源
         // 1. 动态数据库         dynamic
         // 2. 静态元数据库       database
-        final KDS<Database> kds = ark.database();
-        if (Objects.nonNull(kds.dynamic())) {
-            this.pool = DataPool.create(kds.dynamic());
+        final OldKDS<Database> oldKds = ark.database();
+        if (Objects.nonNull(oldKds.dynamic())) {
+            this.pool = DataPool.create(oldKds.dynamic());
         }
-        this.poolMeta = DataPool.create(kds.database());
+        this.poolMeta = DataPool.create(oldKds.database());
     }
 
     @Fluent

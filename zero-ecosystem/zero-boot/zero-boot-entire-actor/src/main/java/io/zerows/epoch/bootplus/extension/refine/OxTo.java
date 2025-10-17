@@ -8,7 +8,7 @@ import io.zerows.epoch.database.Database;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.util.Ao;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
-import io.zerows.platform.metadata.KDS;
+import io.zerows.platform.metadata.OldKDS;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.app.HArk;
 import io.zerows.specification.modeling.operation.HDao;
@@ -62,7 +62,7 @@ final class OxTo {
      */
     static HDao toDao(final String key, final String identifier) {
         final HArk ark = Ke.ark(key);
-        final KDS<Database> ds = ark.database();
+        final OldKDS<Database> ds = ark.database();
         //        final JtApp app = AmbientOld.getApp(key);
         final Database database = ds.dynamic(); // Objects.isNull(app) ? null : app.getSource();
         return Ao.toDao(toAtom(key, identifier), database);

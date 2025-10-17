@@ -34,6 +34,7 @@ import java.util.Objects;
  * workflow:
  *    database:         // WORKFLOW
  */
+@Deprecated
 public class Database extends KDatabase {
     private static final LogO LOGGER = Ut.Log.database(Database.class);
     private static Database DATABASE;

@@ -2,7 +2,6 @@ package io.zerows.mbse.metadata;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.metadata.KMarkAtom;
-import io.zerows.platform.metadata.KMarkAttribute;
 import io.zerows.specification.app.HArk;
 import io.zerows.specification.modeling.HAttribute;
 import io.zerows.specification.modeling.HModel;
@@ -129,7 +128,7 @@ public abstract class AbstractHModel implements HModel {
         this.attribute().forEach(name -> {
             final HAttribute attribute = this.attribute(name);
             if (Objects.nonNull(attribute)) {
-                final KMarkAttribute tag = attribute.marker();
+                final KMarkAtom.Attribute tag = attribute.marker();
                 marker.put(name, tag);
             }
         });

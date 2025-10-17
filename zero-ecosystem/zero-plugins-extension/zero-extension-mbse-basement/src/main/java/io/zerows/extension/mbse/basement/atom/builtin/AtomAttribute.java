@@ -3,17 +3,17 @@ package io.zerows.extension.mbse.basement.atom.builtin;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.support.Ut;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MAttribute;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MField;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.enums.modeling.EmAttribute;
 import io.zerows.platform.enums.modeling.EmValue;
 import io.zerows.platform.metadata.KAttribute;
-import io.zerows.platform.metadata.KMarkAttribute;
+import io.zerows.platform.metadata.KMarkAtom;
 import io.zerows.platform.metadata.RRule;
 import io.zerows.specification.modeling.HAttribute;
 import io.zerows.specification.modeling.metadata.HMetaField;
+import io.zerows.support.Ut;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -147,11 +147,11 @@ class AtomAttribute implements HAttribute, Serializable {
         /*
          * KMatrix Building
          */
-        final KMarkAttribute matrix = this.initializeMatrix(attribute);
+        final KMarkAtom.Attribute matrix = this.initializeMatrix(attribute);
         this.attribute = new KAttribute(attributeJ, matrix);
     }
 
-    private KMarkAttribute initializeMatrix(final MAttribute attribute) {
+    private KMarkAtom.Attribute initializeMatrix(final MAttribute attribute) {
         final StringBuilder literal = new StringBuilder();
         // Boolean -> 0, 1
         final List<Boolean> values = new ArrayList<>();
@@ -174,7 +174,7 @@ class AtomAttribute implements HAttribute, Serializable {
                 literal.append(VString.COMMA);
             }
         }
-        return KMarkAttribute.of(literal.toString());
+        return KMarkAtom.Attribute.of(literal.toString());
     }
 
     @Override
@@ -188,7 +188,7 @@ class AtomAttribute implements HAttribute, Serializable {
     }
 
     @Override
-    public KMarkAttribute marker() {
+    public KMarkAtom.Attribute marker() {
         return this.attribute.marker();
     }
 

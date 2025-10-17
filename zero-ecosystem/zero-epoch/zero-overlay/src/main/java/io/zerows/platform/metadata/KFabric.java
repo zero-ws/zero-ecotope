@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 
 /**
  * 「完整字典对象」此对象定义了完整的字典对象，其中包括
@@ -23,7 +25,7 @@ import java.util.concurrent.ConcurrentMap;
  */
 @Slf4j
 public class KFabric {
-    
+
     private final ConcurrentMap<String, KDictUse> epsilonMap
         = new ConcurrentHashMap<>();
     /*
@@ -57,6 +59,27 @@ public class KFabric {
 
     public static KFabric create() {
         return new KFabric(null);
+    }
+
+    private static JsonArray process(final JsonArray process,
+                                     final Function<JsonObject, JsonObject> function) {
+        final JsonArray normalized = new JsonArray();
+        UtBase.itJArray(process).map(function).forEach(normalized::add);
+        return normalized;
+    }
+
+    private static JsonObject process(final ConcurrentMap<String, KMap.Node> dataMap,
+                                      final JsonObject input,
+                                      final BiFunction<KMap.Node, String, String> applier) {
+        final JsonObject normalized = Objects.isNull(input) ? new JsonObject() : input.copy();
+        dataMap.forEach((field, item) -> {
+            final Object fromValue = input.getValue(field);
+            if (Objects.nonNull(fromValue) && fromValue instanceof String) {
+                final String toValue = applier.apply(item, fromValue.toString());
+                normalized.put(field, toValue);
+            }
+        });
+        return normalized;
     }
 
     public KFabric copy() {
@@ -197,11 +220,11 @@ public class KFabric {
      * 3) The output structure are Ox field
      */
     public JsonObject inToS(final JsonObject input) {
-        return KDictTool.process(this.fromData, input, KMap.Node::from);
+        return process(this.fromData, input, KMap.Node::from);
     }
 
     public JsonArray inToS(final JsonArray input) {
-        return KDictTool.process(input, this::inToS);
+        return process(input, this::inToS);
     }
 
     public Future<JsonObject> inTo(final JsonObject input) {
@@ -219,11 +242,11 @@ public class KFabric {
      * 3) The output structure are Ox field
      */
     public JsonObject inFromS(final JsonObject input) {
-        return KDictTool.process(this.fromData, input, KMap.Node::to);
+        return process(this.fromData, input, KMap.Node::to);
     }
 
     public JsonArray inFromS(final JsonArray input) {
-        return KDictTool.process(input, this::inFromS);
+        return process(input, this::inFromS);
     }
 
     public Future<JsonObject> inFrom(final JsonObject input) {
@@ -241,11 +264,11 @@ public class KFabric {
      * 3) The output structure are Tp field
      */
     public JsonObject outToS(final JsonObject output) {
-        return KDictTool.process(this.toData, output, KMap.Node::from);
+        return process(this.toData, output, KMap.Node::from);
     }
 
     public JsonArray outToS(final JsonArray output) {
-        return KDictTool.process(output, this::outToS);
+        return process(output, this::outToS);
     }
 
     public Future<JsonObject> outTo(final JsonObject input) {
@@ -263,11 +286,11 @@ public class KFabric {
      * 3) The output structure are Tp field
      */
     public JsonObject outFromS(final JsonObject output) {
-        return KDictTool.process(this.toData, output, KMap.Node::to);
+        return process(this.toData, output, KMap.Node::to);
     }
 
     public JsonArray outFromS(final JsonArray output) {
-        return KDictTool.process(output, this::outFromS);
+        return process(output, this::outFromS);
     }
 
     public Future<JsonObject> outFrom(final JsonObject input) {

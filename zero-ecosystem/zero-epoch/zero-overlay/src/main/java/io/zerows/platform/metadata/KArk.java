@@ -12,14 +12,14 @@ import java.util.Objects;
  * @author lang : 2023-06-06
  */
 public class KArk implements HArk {
-    private KDS<KDatabase> ds;
+    private OldKDS<KDatabase> ds;
     private HOI owner;
     private HApp app;
 
     private KArk(final String name) {
         this.app = new KApp(name);
         this.owner = new KTenement();
-        this.ds = new KDS<>();
+        this.ds = new OldKDS<>();
     }
 
     public static HArk of(final String name) {
@@ -37,8 +37,8 @@ public class KArk implements HArk {
 
     @Override
     @SuppressWarnings("unchecked")
-    public <T extends KDatabase> KDS<T> database() {
-        return (KDS<T>) this.ds;
+    public <T extends KDatabase> OldKDS<T> database() {
+        return (OldKDS<T>) this.ds;
     }
 
     @Override

@@ -5,7 +5,6 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.platform.metadata.KAttribute;
 import io.zerows.platform.metadata.KMarkAtom;
-import io.zerows.platform.metadata.KMarkAttribute;
 import io.zerows.platform.metadata.RReference;
 import io.zerows.specification.modeling.HAttribute;
 import io.zerows.specification.modeling.HRule;
@@ -76,7 +75,7 @@ public class KHybrid implements Serializable {
         }).forEach(field -> {
             final JsonObject config = new JsonObject();
             // Matrix
-            final KMarkAttribute matrix = this.marker.get(field);
+            final KMarkAtom.Attribute matrix = this.marker.get(field);
             // Reference
             final RReference reference = this.referenceMap.get(field);
 

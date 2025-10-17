@@ -1,9 +1,12 @@
 package io.zerows.support.base;
 
+import io.r2mo.function.Fn;
+import io.r2mo.typed.exception.web._500ServerInternalException;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.shareddata.ClusterSerializable;
-import io.zerows.platform.metadata.KMetadata;
+import io.zerows.component.metadata.MetaAt;
+import io.zerows.platform.enums.EmDS;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -169,8 +172,34 @@ class TValue {
     private static JsonObject valueToMetadata(final JsonObject metadata) {
         assert Objects.nonNull(metadata) : "Here input metadata should not be null";
         /*
-         * Structure that will be parsed here.
+         * 元数据字段解析器，此处不再提供对象来处理，直接针对 inputJ 进行解析
+         * {
+         *     "__type__": "FILE",
+         *     "__content__": { ... }
+         * }
          */
-        return new KMetadata(metadata).toJson();
+        if (!metadata.containsKey(KEY_TYPE)) {
+            return metadata;
+        }
+
+
+        final JsonObject content = UtBase.valueJObject(metadata, KEY_CONTENT);
+        if (UtBase.isNil(content)) {
+            return new JsonObject();    // 空数据
+        }
+        /*
+         * 包含的情况，则进行元数据的加载
+         */
+        final String sourceValue = UtBase.valueString(metadata, KEY_TYPE);
+        final EmDS.Source source = UtBase.toEnum(sourceValue, EmDS.Source.class);
+        if (Objects.isNull(source)) {
+            throw new _500ServerInternalException("[ ZERO ] 元数据类型解析失败，无法识别的元数据类型：" + sourceValue);
+        }
+
+        return Fn.jvmOr(() -> MetaAt.of(source).loadContent(content));
     }
+
+
+    private static final String KEY_TYPE = "__type__";
+    private static final String KEY_CONTENT = "__content__";
 }

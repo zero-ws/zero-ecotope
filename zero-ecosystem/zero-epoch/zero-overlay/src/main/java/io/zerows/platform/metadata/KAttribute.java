@@ -5,9 +5,9 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.platform.constant.VName;
 import io.zerows.platform.enums.modeling.EmAttribute;
 import io.zerows.platform.enums.modeling.EmValue;
-import io.zerows.support.base.UtBase;
 import io.zerows.specification.modeling.HAttribute;
 import io.zerows.specification.modeling.metadata.HMetaField;
+import io.zerows.support.base.UtBase;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class KAttribute implements HAttribute, Serializable {
     private final List<HMetaField> shapes = new ArrayList<>();
 
     private final HMetaField type;
-    private final KMarkAttribute tag;
+    private final KMarkAtom.Attribute tag;
     private RRule rule;
 
     /*
@@ -43,7 +43,7 @@ public class KAttribute implements HAttribute, Serializable {
      *     }
      * }
      */
-    public KAttribute(final JsonObject config, final KMarkAttribute tag) {
+    public KAttribute(final JsonObject config, final KMarkAtom.Attribute tag) {
         this.tag = tag;
         /*
          * Extract DataFormat from `formatFail` field in config，
@@ -102,7 +102,7 @@ public class KAttribute implements HAttribute, Serializable {
     }
 
     @Override
-    public KMarkAttribute marker() {
+    public KMarkAtom.Attribute marker() {
         return this.tag;
     }
 

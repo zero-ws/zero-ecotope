@@ -14,9 +14,9 @@ import io.zerows.extension.mbse.basement.osgi.spi.mixture.HLoadAtom;
 import io.zerows.extension.mbse.basement.osgi.spi.robin.Switcher;
 import io.zerows.extension.mbse.basement.uca.jdbc.Pin;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
-import io.zerows.platform.metadata.KDS;
 import io.zerows.platform.metadata.KDatabase;
 import io.zerows.platform.metadata.KIdentity;
+import io.zerows.platform.metadata.OldKDS;
 import io.zerows.program.Ux;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.app.HArk;
@@ -169,7 +169,7 @@ class AoImpl {
             atom = null;
         }
         if (Objects.nonNull(atom)) {
-            final KDS<Database> ds = ark.database();
+            final OldKDS<Database> ds = ark.database();
             return toDao(() -> atom, ds.dynamic());
         } else {
             return null;

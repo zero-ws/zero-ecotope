@@ -3,7 +3,7 @@ package io.zerows.extension.mbse.modulat.store;
 import io.r2mo.typed.cc.Cc;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.management.OCache;
-import io.zerows.platform.metadata.KDS;
+import io.zerows.platform.metadata.OldKDS;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.app.HArk;
 import io.zerows.specification.app.HMod;
@@ -16,7 +16,7 @@ import io.zerows.spi.HPI;
  * <pre><code>
  *     {@link HArk} 方舟：应用容器
  *     - {@link HOI} Owner ID，当前应用所属租户信息
- *     - {@link KDS} Database Service，当前应用所拥有的数据库清单 x 5
+ *     - {@link OldKDS} Database Service，当前应用所拥有的数据库清单 x 5
  *     - {@link HApp} 应用：X_APP 对应配置
  *       - 软关联：id = OCacheMod = modId-01 = {@link HMod}
  *                                  = modId-02 = HMod

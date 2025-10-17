@@ -10,7 +10,7 @@ import io.zerows.extension.mbse.basement.uca.metadata.AoBuilder;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XCategoryDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XCategory;
 import io.zerows.platform.enums.Environment;
-import io.zerows.platform.metadata.KDS;
+import io.zerows.platform.metadata.OldKDS;
 import io.zerows.program.Ux;
 import io.zerows.specification.app.HApp;
 import io.zerows.support.fn.Fx;
@@ -28,7 +28,7 @@ public class MetaReport extends AbstractStep {
 
     private AoBuilder getBuilder() {
         if (null == this.builder) {
-            final KDS<Database> ds = this.ark.database();
+            final OldKDS<Database> ds = this.ark.database();
             this.builder = Pin.getInstance().getBuilder(ds.dynamic());
         }
         return this.builder;

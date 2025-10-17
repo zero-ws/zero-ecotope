@@ -1,7 +1,7 @@
 package io.zerows.specification.modeling;
 
 import io.zerows.platform.enums.modeling.EmValue;
-import io.zerows.platform.metadata.KMarkAttribute;
+import io.zerows.platform.metadata.KMarkAtom;
 import io.zerows.platform.metadata.RRule;
 import io.zerows.specification.modeling.metadata.HMetaField;
 
@@ -63,9 +63,9 @@ public interface HAttribute {
     /**
      * 返回当前属性的属性标记
      *
-     * @return {@link KMarkAttribute}
+     * @return {@link KMarkAtom.Attribute}
      */
-    KMarkAttribute marker();
+    KMarkAtom.Attribute marker();
 
     /**
      * 提取当前属性的格式信息，解释一下为什么要提到格式信息，格式主要是用于逆向解析，

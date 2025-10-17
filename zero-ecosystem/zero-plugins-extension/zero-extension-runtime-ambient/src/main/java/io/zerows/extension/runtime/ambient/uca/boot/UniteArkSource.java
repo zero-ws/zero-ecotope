@@ -9,8 +9,8 @@ import io.zerows.extension.runtime.ambient.domain.tables.pojos.XApp;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XSource;
 import io.zerows.platform.enums.EmDS;
 import io.zerows.platform.metadata.KArk;
-import io.zerows.platform.metadata.KDS;
 import io.zerows.platform.metadata.KDatabase;
+import io.zerows.platform.metadata.OldKDS;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.app.HArk;
 import io.zerows.support.Ut;
@@ -124,11 +124,11 @@ public class UniteArkSource implements UniteArk<List<XSource>> {
             normalized.put("auditor", auditor);
         }
         // Database
-        final KDS<KDatabase> kds = ark.database();
+        final OldKDS<KDatabase> oldKds = ark.database();
         {
-            kds.registry(EmDS.DB.PRIMARY, Database.getCurrent());
-            kds.registry(EmDS.DB.WORKFLOW, Database.getCamunda());
-            kds.registry(EmDS.DB.HISTORY, Database.getHistory());
+            oldKds.registry(EmDS.DB.PRIMARY, Database.getCurrent());
+            oldKds.registry(EmDS.DB.WORKFLOW, Database.getCamunda());
+            oldKds.registry(EmDS.DB.HISTORY, Database.getHistory());
         }
         if (Objects.nonNull(sources) && !sources.isEmpty()) {
             final JsonArray sourceArray = new JsonArray();
@@ -170,7 +170,7 @@ public class UniteArkSource implements UniteArk<List<XSource>> {
                 database.fromJson(sourceJson);
                 databaseSet.add(database);
             });
-            kds.registry(databaseSet);
+            oldKds.registry(databaseSet);
         }
         // App InJson
         final HApp appRef = ark.app();

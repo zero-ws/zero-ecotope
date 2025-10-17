@@ -9,9 +9,9 @@ import io.zerows.extension.mbse.action.domain.tables.pojos.IService;
 import io.zerows.extension.mbse.action.eon.JtConstant;
 import io.zerows.extension.mbse.action.eon.em.WorkerType;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
-import io.zerows.platform.metadata.KDS;
 import io.zerows.platform.metadata.KDictConfig;
 import io.zerows.platform.metadata.KIntegration;
+import io.zerows.platform.metadata.OldKDS;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.app.HArk;
 import io.zerows.specification.modeling.HRule;
@@ -60,7 +60,7 @@ class JtDataObject {
 
     static Database toDatabase(final IService service) {
         final HArk ark = Ke.ark(service.getSigma());
-        final KDS<Database> ds = ark.database();
+        final OldKDS<Database> ds = ark.database();
         final JsonObject databaseJ = Ut.toJObject(service.getConfigDatabase());
         // 通道中未配置数据库
         if (Ut.isNil(databaseJ)) {

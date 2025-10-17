@@ -11,7 +11,7 @@ import io.zerows.extension.mbse.basement.util.Ao;
 import io.zerows.extension.runtime.ambient.agent.service.DatumService;
 import io.zerows.extension.runtime.ambient.agent.service.DatumStub;
 import io.zerows.platform.enums.Environment;
-import io.zerows.platform.metadata.KDS;
+import io.zerows.platform.metadata.OldKDS;
 import io.zerows.program.Ux;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.app.HArk;
@@ -49,7 +49,7 @@ public abstract class AbstractStep implements MigrateStep {
     protected HDao ioDao(final String identifier) {
         final HApp app = this.ark.app();
         final DataAtom atom = Ox.toAtom(app.option(KName.APP_ID), identifier);
-        final KDS<Database> ds = this.ark.database();
+        final OldKDS<Database> ds = this.ark.database();
         return Ao.toDao(atom, ds.dynamic());
     }
 
