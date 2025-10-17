@@ -13,7 +13,7 @@ import java.util.Objects;
 /*
  * Assist class to help Agha object to process income / outcome extraction
  */
-class PhaseElement {
+class PhaseHelper {
 
     private static final Cc<String, JobIncome> CC_INCOME = Cc.open();
     private static final Cc<String, JobOutcome> CC_OUTCOME = Cc.open();
@@ -38,9 +38,9 @@ class PhaseElement {
         return outcome;
     }
 
-    static void onceLog(final Mission mission, final Actuator actuator) {
+    static void logOnce(final Mission mission, final Actuator actuator) {
         if (EmService.JobType.ONCE == mission.getType()) {
-            KRunner.run(() -> Fn.jvmAt(actuator), "once-logger-debug");
+            KRunner.run(() -> Fn.jvmAt(actuator), "momo-logger-once");
         }
     }
 }

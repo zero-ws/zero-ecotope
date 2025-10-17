@@ -32,18 +32,18 @@ public class ZeroScheduler extends AbstractVerticle {
     private static final String JOB_MONITOR = "[ ZERO ] ( Job ) ⏳ Zero 检测到 {} 任务 @Job, Scheduler 将启动....";
     private static final String JOB_AGHA_SELECTED = "[ ZERO ] ( Job ) Agha = {} 任务启动器，分派任务 {}, 类型 {}";
     private static final String JOB_STARTED = "[ ZERO ] ( Job ) ✅ 所有任务调度器都成功启动!!!";
-    private static final JobStore STORE = JobPin.getStore();
 
     public ZeroScheduler() {
     }
 
     @Override
     public void start() {
+        final JobClientManager manager = JobClientManager.of();
         /* Whether contains JobConfig? */
-        final JobConfig config = JobPin.getConfig();
+        final JobConfig config = manager.getConfiguration();
         if (Objects.nonNull(config)) {
             /* Pick Up all Mission definition from system */
-            final Set<Mission> missions = STORE.fetch();
+            final Set<Mission> missions = manager.getStore().fetch();
             /* Whether there exist Mission definition */
             if (missions.isEmpty()) {
                 log.info(JOB_EMPTY);

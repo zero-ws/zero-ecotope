@@ -62,13 +62,13 @@ class JobStoreUnity implements JobStore {
             .forEach(mission -> mission.setStatus(EmService.JobStatus.STOPPED));
 
         /* Job Pool Sync */
-        JobClient.Pre.save(result);
+        JobPool.save(result);
         return result;
     }
 
     @Override
     public JobStore add(final Mission mission) {
-        JobClient.Pre.save(mission);
+        JobPool.save(mission);
         return this.store.add(mission);
     }
 
@@ -94,7 +94,7 @@ class JobStoreUnity implements JobStore {
 
     @Override
     public JobStore update(final Mission mission) {
-        JobClient.Pre.save(mission);
+        JobPool.save(mission);
         return this.store.update(mission);
     }
 }

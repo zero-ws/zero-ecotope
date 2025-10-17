@@ -8,7 +8,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 /**
- * Job manager to manage each job here.
+ * 任务管理器
  */
 public interface Agha {
 

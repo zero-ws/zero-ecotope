@@ -3,18 +3,20 @@ package io.zerows.cosmic.plugins.job;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.zerows.component.log.LogO;
+import io.zerows.cortex.metadata.ParameterBuilder;
 import io.zerows.cosmic.plugins.job.exception._60041Exception417JobMethod;
 import io.zerows.cosmic.plugins.job.metadata.Mission;
-import io.zerows.cortex.metadata.ParameterBuilder;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.platform.metadata.KRef;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Slf4j
 class PhaseRunOn {
     private static final LogO LOGGER = Ut.Log.uca(PhaseRunOn.class);
     private transient final Vertx vertx;
@@ -34,7 +36,8 @@ class PhaseRunOn {
     Future<Envelop> invoke(final Envelop envelop, final Mission mission) {
         final Method method = mission.getOn();
         if (Objects.nonNull(method)) {
-            PhaseElement.onceLog(mission, () -> LOGGER.info(JobMessage.PHASE.PHASE_3RD_JOB_RUN, mission.getCode(), method.getName()));
+            PhaseHelper.logOnce(mission, () ->
+                log.info("[ ZERO ] ( Job {} ) 3. --> 注解 @On 的方法调用：{} 。", mission.getCode(), method.getName()));
             return this.execute(envelop, method, mission);
         } else {
             return Ut.future(envelop);
@@ -44,7 +47,8 @@ class PhaseRunOn {
     Future<Envelop> callback(final Envelop envelop, final Mission mission) {
         final Method method = mission.getOff();
         if (Objects.nonNull(method)) {
-            PhaseElement.onceLog(mission, () -> LOGGER.info(JobMessage.PHASE.PHASE_6TH_JOB_CALLBACK, mission.getCode(), method.getName()));
+            PhaseHelper.logOnce(mission, () ->
+                log.info("[ ZERO ] ( Job {} ) 6. <-- 注解 @Off 的方法调用：{} 。", mission.getCode(), method.getName()));
             return this.execute(envelop, method, mission);
         } else {
             return Ut.future(envelop);
@@ -65,7 +69,8 @@ class PhaseRunOn {
                 return Future.failedFuture(ex);
             }
         } else {
-            PhaseElement.onceLog(mission, () -> LOGGER.info(JobMessage.PHASE.ERROR_TERMINAL, mission.getCode(), envelop.error().getClass().getName()));
+            PhaseHelper.logOnce(mission, () ->
+                log.info("[ ZERO ] ( Job {} ) 任务出错终止，出错组件：{}", mission.getCode(), envelop.error().getClass().getName()));
             return Ut.future(envelop);
         }
     }

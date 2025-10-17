@@ -1,5 +1,6 @@
 package io.zerows.cosmic.plugins.job;
 
+import io.vertx.core.json.JsonObject;
 import io.zerows.cosmic.plugins.job.metadata.Mission;
 
 import java.util.Set;
@@ -10,6 +11,10 @@ import java.util.Set;
  * 2) Database job get here that configured in vertx-job.yml
  */
 public interface JobStore {
+
+    default void configure(final JsonObject options) {
+
+    }
 
     /*
      * Get all job definition from zero framework

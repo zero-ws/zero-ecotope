@@ -1,6 +1,7 @@
 package io.zerows.sdk.plugins;
 
 import io.r2mo.typed.cc.Cc;
+import io.zerows.specification.configuration.HConfig;
 
 import java.util.function.Function;
 
@@ -34,5 +35,9 @@ public abstract class AddOnManager<DI> {
 
     public DI get(final String name, final Function<String, DI> constructorFn) {
         return this.stored().pick(() -> constructorFn.apply(name), name);
+    }
+
+    public void configure(final HConfig config) {
+        // 特殊配置流程（启动时执行）
     }
 }

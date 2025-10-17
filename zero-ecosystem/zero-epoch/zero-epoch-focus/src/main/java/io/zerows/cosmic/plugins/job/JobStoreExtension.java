@@ -1,11 +1,9 @@
 package io.zerows.cosmic.plugins.job;
 
 import io.zerows.cosmic.plugins.job.metadata.Mission;
-import io.zerows.support.Ut;
 
 import java.util.HashSet;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.Set;
 import java.util.function.Supplier;
 
@@ -13,25 +11,19 @@ import java.util.function.Supplier;
  * Bridge for different JobStore
  */
 class JobStoreExtension implements JobStore {
-    private static final JobConfig CONFIG = JobPin.getConfig();
-    private transient JobStore reference;
+    private final transient JobStore reference;
     private transient boolean isExtension;
 
     JobStoreExtension() {
-        if (Objects.nonNull(CONFIG)) {
-            final Class<?> storeCls = CONFIG.getStore().getComponent();
-            Optional.ofNullable(storeCls).ifPresent(clazz -> {
-                this.reference = Ut.instance(clazz);
-                if (Objects.nonNull(this.reference)) {
-                    this.isExtension = true;
-                }
-            });
+        this.reference = JobClientManager.of().getStore();
+        if (Objects.nonNull(this.reference)) {
+            this.isExtension = true;
         }
     }
 
     @Override
     public Set<Mission> fetch() {
-        return this.extensionCall(HashSet::new, () -> this.reference.fetch());
+        return this.extensionCall(HashSet::new, this.reference::fetch);
     }
 
     @Override

@@ -9,9 +9,11 @@ import io.zerows.cosmic.plugins.job.metadata.Mission;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.platform.metadata.KRef;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
 
+@Slf4j
 class PhaseInput {
 
     private static final LogO LOGGER = Ut.Log.uca(PhaseInput.class);
@@ -39,19 +41,21 @@ class PhaseInput {
             /*
              * Event bus did not provide any input here
              */
-            PhaseElement.onceLog(mission, () -> LOGGER.info(JobMessage.PHASE.PHASE_1ST_JOB, mission.getCode()));
+            PhaseHelper.logOnce(mission, () ->
+                log.info("[ ZERO ] ( Job {} ) 1. 输入 JsonObject 类型的数据。", mission.getCode()));
 
             return Future.succeededFuture(Envelop.okJson());
         } else {
             /*
              * Event bus provide input and then it will pass to @On
              */
-            LOGGER.info(JobMessage.PHASE.UCA_EVENT_BUS, "KIncome", address);
+            log.info("[ ZERO ] ( Job ) inputAsync 事件总线 EventBus 启用，地址：{}", address);
             final Promise<Envelop> input = Promise.promise();
             final EventBus eventBus = this.vertx.eventBus();
             eventBus.<Envelop>consumer(address, handler -> {
 
-                PhaseElement.onceLog(mission, () -> LOGGER.info(JobMessage.PHASE.PHASE_1ST_JOB_ASYNC, mission.getCode(), address));
+                PhaseHelper.logOnce(mission, () ->
+                    log.info("[ ZERO ] ( Job {} ) 1. 从事件总线地址 {} 上接收到输入数据。", mission.getCode(), address));
 
                 final Envelop envelop = handler.body();
                 if (Objects.isNull(envelop)) {
@@ -82,23 +86,24 @@ class PhaseInput {
     }
 
     Future<Envelop> incomeAsync(final Envelop envelop, final Mission mission) {
+        /*
+         * Get JobIncome
+         */
+        final JobIncome income = PhaseHelper.income(mission);
         if (envelop.valid()) {
-            /*
-             * Get JobIncome
-             */
-            final JobIncome income = PhaseElement.income(mission);
             if (Objects.isNull(income)) {
                 /*
                  * Directly
                  */
-                PhaseElement.onceLog(mission, () -> LOGGER.info(JobMessage.PHASE.PHASE_2ND_JOB, mission.getCode()));
+                PhaseHelper.logOnce(mission, () ->
+                    log.info("[ ZERO ] ( Job {} ) 2. 无需 JobIncome 定义，直接跳过。", mission.getCode()));
                 return Future.succeededFuture(envelop);
             } else {
                 /*
                  * JobIncome processing here
                  * Contract for vertx/mission
                  */
-                LOGGER.info(JobMessage.PHASE.UCA_COMPONENT, "JobIncome", income.getClass().getName());
+                log.info("[ ZERO ] ( Job {} ) 2. 启用 JobIncome 组件 {} 。", mission.getCode(), income.getClass().getName());
                 /*
                  * JobIncome must define
                  * - Vertx reference
@@ -109,7 +114,8 @@ class PhaseInput {
                 /*
                  * Here we could calculate directory
                  */
-                PhaseElement.onceLog(mission, () -> LOGGER.info(JobMessage.PHASE.PHASE_2ND_JOB_ASYNC, mission.getCode(), income.getClass().getName()));
+                PhaseHelper.logOnce(mission, () ->
+                    log.info("[ ZERO ] ( Job {} ) 2. 开始执行 JobIncome 组件 {} 。", mission.getCode(), income.getClass().getName()));
 
                 return income.underway().compose(refer -> {
                     /*
@@ -129,7 +135,8 @@ class PhaseInput {
                 });
             }
         } else {
-            PhaseElement.onceLog(mission, () -> LOGGER.info(JobMessage.PHASE.ERROR_TERMINAL, mission.getCode(), envelop.error().getClass().getName()));
+            PhaseHelper.logOnce(mission, () ->
+                log.info("[ ZERO ] ( Job {} ) 任务出错终止，出错组件：{}", mission.getCode(), income.getClass().getName()));
             return Ut.future(envelop);
         }
     }

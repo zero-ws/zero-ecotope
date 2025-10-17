@@ -1,6 +1,7 @@
 package io.zerows.cosmic.plugins.job;
 
 import io.vertx.core.Handler;
+import io.vertx.core.json.JsonObject;
 import io.zerows.cosmic.plugins.job.metadata.KScheduler;
 
 import java.util.function.Consumer;
@@ -11,6 +12,10 @@ import java.util.function.Consumer;
 public interface Interval {
 
     Interval bind(Consumer<Long> controlFn);
+
+    default void configure(final JsonObject config) {
+        
+    }
     /*
      * New design for job extension interval scheduler management the schedule instead of
      * original three:
@@ -34,7 +39,6 @@ public interface Interval {
 
     /**
      * --- No Wait ------ >>> ------- End
-     *
      * 「Development」
      * This method call directly and it's for development often, after the server get
      * the commend from front-end user interface, the Job start right now. it means that when

@@ -6,12 +6,13 @@ import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.VertxException;
 import io.vertx.core.WorkerExecutor;
-import io.zerows.component.log.LogO;
 import io.zerows.cosmic.plugins.job.metadata.Mission;
 import io.zerows.epoch.annotations.Contract;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.platform.enums.EmService;
 import io.zerows.support.Ut;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
@@ -32,9 +33,9 @@ import java.util.function.Consumer;
  *    - If `outcomeAddress`, the data came from Event Bus
  *    - Otherwise, the data came from `outcomeComponent`.
  */
+@SuppressWarnings("all")
 public abstract class AghaAbstract implements Agha {
 
-    private static final JobConfig CONFIG = JobPin.getConfig();
     private static final AtomicBoolean SELECTED = new AtomicBoolean(Boolean.TRUE);
     /*
      * STARTING ------|
@@ -78,13 +79,16 @@ public abstract class AghaAbstract implements Agha {
     private transient Vertx vertx;
 
     Interval interval(final Consumer<Long> consumer) {
-        final Class<?> intervalCls = CONFIG.getInterval().getComponent();
-        final Interval interval = Ut.singleton(intervalCls);
+        final Interval interval = JobClientManager.of().getInterval();
+        if (Objects.isNull(interval)) {
+            this.log().error("[ ZERO ] ( Job ) 任务调度组件未正确配置，无法执行任务调度，请检查配置！");
+            return null;
+        }
         Ut.contract(interval, Vertx.class, this.vertx);
 
         if (SELECTED.getAndSet(Boolean.FALSE)) {
             /* Be sure the log only provide once */
-            this.logger().info(JobMessage.PHASE.UCA_COMPONENT, "Interval", interval.getClass().getName());
+            this.log().info("[ ZERO ] ( Job ) 任务选择了定时组件 {}", interval.getClass().getName());
         }
         if (Objects.nonNull(consumer)) {
             interval.bind(consumer);
@@ -97,7 +101,7 @@ public abstract class AghaAbstract implements Agha {
     }
 
     JobStore store() {
-        return JobPin.getStore();
+        return JobClientManager.of().getStore();
     }
 
     /*
@@ -167,49 +171,8 @@ public abstract class AghaAbstract implements Agha {
             final String code = mission.getCode();
             final WorkerExecutor executor =
                 this.vertx.createSharedWorkerExecutor(code, 1, threshold);
-            this.logger().info(JobMessage.AGHA.WORKER_START, code, String.valueOf(TimeUnit.NANOSECONDS.toSeconds(threshold)));
-            /*
-             * The executor start to process the workers here.
-             */
-            //            executor.<Envelop>executeBlocking(promise -> promise.handle(this.workingAsync(mission)
-            //                .compose(result -> {
-            //                    /*
-            //                     * The job is executing successfully and then stopped
-            //                     */
-            //                    actuator.execute();
-            //                    this.logger().info(MessageOfJob.AGHA.WORKER_END, code);
-            //                    return Future.succeededFuture(result);
-            //                })
-            //                .otherwise(error -> {
-            //                    /*
-            //                     * The job exception
-            //                     */
-            //                    if (!(error instanceof NoStackTraceThrowable)) {
-            //                        error.printStackTrace();
-            //                        this.moveOn(mission, false);
-            //                    }
-            //                    return Envelop.failure(error);
-            //                })), handler -> {
-            //                /*
-            //                 * Async result here to check whether it's ended
-            //                 */
-            //                if (handler.succeeded()) {
-            //                    /*
-            //                     * Successful, close worker executor
-            //                     */
-            //                    executor.close();
-            //                } else {
-            //                    if (Objects.nonNull(handler.cause())) {
-            //                        /*
-            //                         * Failure, print stack instead of other exception here.
-            //                         */
-            //                        final Throwable error = handler.cause();
-            //                        if (!(error instanceof NoStackTraceThrowable)) {
-            //                            error.printStackTrace();
-            //                        }
-            //                    }
-            //                }
-            //            });
+            this.log().info("[ ZERO ] ( Job ) 任务执行器 {} 已创建，最大执行时间 {} 秒",
+                code, TimeUnit.NANOSECONDS.toSeconds(threshold));
             executor.<Envelop>executeBlocking(() -> {
                 // 在 executeBlocking 的 Callable 中，直接执行阻塞逻辑
                 return this.workingAsync(mission)
@@ -218,7 +181,7 @@ public abstract class AghaAbstract implements Agha {
                          * 任务执行成功，执行后置逻辑
                          */
                         Fn.jvmAt(actuator);
-                        this.logger().info(JobMessage.AGHA.WORKER_END, code);
+                        this.log().info("[ ZERO ] ( Job ) 任务执行器 {} 执行完成，准备关闭！", code);
                         return Future.succeededFuture(result);
                     })
                     .otherwise(error -> {
@@ -253,6 +216,9 @@ public abstract class AghaAbstract implements Agha {
                         }
                     }
                 }
+            }).otherwise(error -> {
+                error.printStackTrace();
+                return null;
             });
         }
     }
@@ -272,7 +238,8 @@ public abstract class AghaAbstract implements Agha {
                 /*
                  * Log and update cache
                  */
-                this.logger().info(JobMessage.AGHA.MOVED, mission.getType(), mission.getCode(), original, moved);
+                this.log().info("[ ZERO ] ( Job ) 任务状态变更：{} -> {}，任务类型：{}，任务编码：{}",
+                    original, moved, mission.getType(), mission.getCode());
                 this.store().update(mission);
             }
         } else {
@@ -281,13 +248,14 @@ public abstract class AghaAbstract implements Agha {
              */
             if (EmService.JobStatus.RUNNING == mission.getStatus()) {
                 mission.setStatus(EmService.JobStatus.ERROR);
-                this.logger().info(JobMessage.AGHA.TERMINAL, mission.getType(), mission.getCode());
+                this.log().error("[ ZERO ] ( Job ) 任务状态变更：RUNNING -> ERROR，任务类型：{}，任务编码：{}",
+                    mission.getType(), mission.getCode());
                 this.store().update(mission);
             }
         }
     }
 
-    protected LogO logger() {
-        return Ut.Log.uca(this.getClass());
+    protected Logger log() {
+        return LoggerFactory.getLogger(this.getClass());
     }
 }

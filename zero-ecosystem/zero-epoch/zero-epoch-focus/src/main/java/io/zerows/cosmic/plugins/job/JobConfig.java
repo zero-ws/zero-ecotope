@@ -29,7 +29,7 @@ public class JobConfig implements Serializable {
     public MMComponent getStore() {
         return Optional.ofNullable(this.store).orElse(new MMComponent());
     }
-    
+
     public MMComponent getInterval() {
         final MMComponent componentOption = Optional.ofNullable(this.interval).orElse(new MMComponent());
         if (Objects.isNull(componentOption.getComponent())) {
@@ -40,6 +40,28 @@ public class JobConfig implements Serializable {
 
     public MMComponent getClient() {
         return Optional.ofNullable(this.client).orElse(new MMComponent());
+    }
+
+    public JobStore createStore(final Object... args) {
+        // 初始化存储器
+        return Optional.ofNullable(this.getStore()).map(component -> {
+            final JobStore created = component.instance(args);
+            if (Objects.nonNull(created)) {
+                created.configure(component.getConfig());
+            }
+            return created;
+        }).orElse(null);
+    }
+
+    public Interval createInterval(final Object... args) {
+        // 初始化间隔器
+        return Optional.ofNullable(this.getInterval()).map(component -> {
+            final Interval created = component.instance(args);
+            if (Objects.nonNull(created)) {
+                created.configure(component.getConfig());
+            }
+            return created;
+        }).orElse(null);
     }
 
     @Override

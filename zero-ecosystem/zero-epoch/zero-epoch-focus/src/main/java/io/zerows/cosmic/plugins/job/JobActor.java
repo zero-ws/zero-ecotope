@@ -27,6 +27,9 @@ public class JobActor extends AbstractHActor {
 
         this.vLog("[ Job ] ✅ JobActor 已成功扫描完成！！");
 
+        JobClientManager.of().configure(config);
+        this.vLog("[ Job ] JobActor 任务配置完成！config = {}", config);
+
         return Future.succeededFuture(Boolean.TRUE);
     }
 }

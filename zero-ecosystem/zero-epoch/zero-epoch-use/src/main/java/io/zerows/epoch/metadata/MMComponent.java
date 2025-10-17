@@ -3,6 +3,7 @@ package io.zerows.epoch.metadata;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.r2mo.SourceReflect;
 import io.r2mo.typed.json.jackson.ClassDeserializer;
 import io.r2mo.typed.json.jackson.ClassSerializer;
 import io.vertx.core.json.JsonObject;
@@ -39,6 +40,12 @@ public class MMComponent implements Serializable {
         return instance;
     }
 
+    public <T> T instance(final Object... args) {
+        if (Objects.isNull(this.component)) {
+            return null;
+        }
+        return SourceReflect.instance(this.component, args);
+    }
 
     // ---------------- Fluent绑定方法 -------------------
     public MMComponent bind(final JsonObject config) {

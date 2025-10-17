@@ -2,17 +2,17 @@ package io.zerows.cosmic.plugins.job;
 
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
-import io.zerows.component.log.LogO;
 import io.zerows.cosmic.plugins.job.metadata.KScheduler;
 import io.zerows.epoch.annotations.Contract;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.function.Consumer;
 
+@Slf4j
 public class IntervalVertx implements Interval {
-    private static final LogO LOGGER = Ut.Log.uca(IntervalVertx.class);
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("MM-dd HH:mm.ss.SSS");
     /*
      * Fix issue of delay < 1ms, the default should be 1
@@ -52,7 +52,7 @@ public class IntervalVertx implements Interval {
              * In this kind of situation
              * call vertx.setTimer only, the smallest is 1ms ( Right Now )
              */
-            LOGGER.info(JobMessage.INTERVAL.START);
+            log.info("[ ZERO ] ( Job ) Timer = null 未设置，任务将立即启动！");
             this.vertx.setTimer(START_UP_MS, actuator);
         } else {
             /*
@@ -70,7 +70,7 @@ public class IntervalVertx implements Interval {
 
             if (delay <= 0) {
                 // 当前时间 >= 设定时间，立即执行一次
-                LOGGER.info("[Trigger] Immediate execution as current time >= scheduled start time.");
+                log.info("[ ZERO ] ( Job ) 当前时间 >= 设定时间，任务将立即启动！");
                 actuator.handle(null); // 立即执行
 
                 // 设置周期任务
@@ -82,21 +82,23 @@ public class IntervalVertx implements Interval {
                  * To cancel a periodic timer, call cancelTimer specifying the timer id. For example:
                  * vertx.cancelTimer(timerID);
                  */
-                LOGGER.info(JobMessage.INTERVAL.SCHEDULED, String.valueOf(timerId), timer.name(), duration);
+                log.info("[ ZERO ] ( Job ) 计时器 {}, `{}` 将每隔 {} 调度运行一次！",
+                    timerId, timer.name(), duration);
                 if (Objects.nonNull(this.controlFn)) {
                     this.controlFn.accept(timerId);
                 }
             } else {
                 // 当前时间 < 设定时间，延迟 delay 毫秒后开始第一次任务
-                LOGGER.info(JobMessage.INTERVAL.DELAY_START, timer.name(), FORMATTER.format(Ut.toDuration(delay)));
+                log.info("[ ZERO ] ( Job ) 调度器 {} 将在 {} 后启动！", timer.name(), FORMATTER.format(Ut.toDuration(delay)));
 
                 this.vertx.setTimer(delay + START_UP_MS, ignored -> {
-                    LOGGER.info("[Trigger] First execution of actuator at scheduled time.");
+                    log.info("[ ZERO ] ( Job ) 触发器在预定时间首次执行任务！");
                     actuator.handle(null); // 第一次执行
 
                     // 设置周期任务
                     final long timerId = this.vertx.setPeriodic(duration, actuator);
-                    LOGGER.info(JobMessage.INTERVAL.SCHEDULED, String.valueOf(timerId), timer.name(), duration);
+                    log.info("[ ZERO ] ( Job ) 计时器 {} 首次触发, `{}` 将每隔 {} 调度运行一次！",
+                        timerId, timer.name(), duration);
                     if (Objects.nonNull(this.controlFn)) {
                         this.controlFn.accept(timerId);
                     }
@@ -109,13 +111,14 @@ public class IntervalVertx implements Interval {
     @Override
     public void restartAt(final Handler<Long> actuator, final KScheduler timer) {
         if (Objects.isNull(timer)) {
-            LOGGER.info(JobMessage.INTERVAL.RESTART);
+            log.info("[ ZERO ] ( Job ) Timer = null 未设置，任务将立即重启！");
             this.vertx.setTimer(START_UP_MS, actuator);
         } else {
             final long waitSec = timer.waitUntil();
             final long delay = waitSec + START_UP_MS;
             this.vertx.setTimer(delay, actuator);
-            LOGGER.info(JobMessage.INTERVAL.DELAY_RESTART, timer.name(), FORMATTER.format(Ut.toDuration(waitSec)));
+            log.info("[ ZERO ] ( Job ) 计时器 {}, `{}` 将在 {} 后重启！",
+                timer.name(), timer.name(), FORMATTER.format(Ut.toDuration(waitSec)));
         }
     }
 }

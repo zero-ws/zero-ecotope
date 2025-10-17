@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.Consumer;
@@ -39,6 +40,13 @@ class JobPool {
         if (Objects.nonNull(mission)) {
             JOBS.put(mission.getCode(), mission);
         }
+    }
+
+    static void save(final Set<Mission> missions) {
+        if (Objects.isNull(missions)) {
+            return;
+        }
+        missions.forEach(JobPool::save);
     }
 
     static void bind(final Long timeId, final String code) {

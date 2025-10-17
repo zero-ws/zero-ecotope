@@ -105,19 +105,4 @@ public interface JobClient {
 
     @Fluent
     JobClient statusAsync(String namespace, Handler<AsyncResult<JsonObject>> handler);
-
-    /*
-     * Because the JobStore started before JobClient initialized,
-     * In this kind of situation, the class `Pre` could control
-     * JobPool here
-     */
-    static final class Pre {
-        public static void save(final Set<Mission> missions) {
-            missions.forEach(JobPool::save);
-        }
-
-        public static void save(final Mission mission) {
-            JobPool.save(mission);
-        }
-    }
 }

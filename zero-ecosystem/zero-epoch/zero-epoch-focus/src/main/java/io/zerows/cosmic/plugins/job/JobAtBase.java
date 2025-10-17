@@ -1,6 +1,5 @@
 package io.zerows.cosmic.plugins.job;
 
-import io.zerows.component.log.LogO;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.exception._60050Exception501NotSupport;
 import io.zerows.platform.metadata.Kv;
@@ -83,8 +82,8 @@ public abstract class JobAtBase implements JobAt {
         throw new _60050Exception501NotSupport(this.getClass());
     }
 
-    protected LogO logger() {
-        return Ut.Log.uca(this.getClass());
+    protected Logger log() {
+        return LoggerFactory.getLogger(this.getClass());
     }
 
     private Kv<Integer, Integer> parseSegment(final String segment) {
