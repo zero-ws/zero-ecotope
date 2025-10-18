@@ -8,6 +8,7 @@ import io.zerows.epoch.database.jooq.operation.DBJooq;
 import io.zerows.extension.runtime.workflow.atom.runtime.WRecord;
 import io.zerows.extension.runtime.workflow.eon.em.RecordMode;
 import io.zerows.extension.runtime.workflow.uca.modeling.Respect;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -107,7 +108,7 @@ public class MetaInstance {
     public DBJooq recordDao() {
         Objects.requireNonNull(this.todo);
         // Null Pointer Maybe when the clazz is not here with warning message.
-        return Ux.Jooq.on(this.todo.dao());
+        return DB.on(this.todo.dao());
     }
 
     public String recordIndent() {
@@ -179,7 +180,7 @@ public class MetaInstance {
         if (Objects.isNull(this.children.getDao())) {
             return null;
         }
-        return Ux.Jooq.on(this.children.getDao());
+        return DB.on(this.children.getDao());
     }
 
     public JsonObject childIn(final JsonObject params) {

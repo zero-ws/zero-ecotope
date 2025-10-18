@@ -11,6 +11,7 @@ import io.zerows.extension.mbse.basement.domain.tables.pojos.MModel;
 import io.zerows.extension.mbse.basement.uca.phantom.AoModeler;
 import io.zerows.extension.mbse.basement.util.Ao;
 import io.zerows.mbse.exception._80510Exception404ModelNotFound;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -33,7 +34,7 @@ public class ModelPerformer implements AoPerformer {
 
     @Override
     public Future<Model> fetchAsync(final String identifier) {
-        return Ux.Jooq.on(MModelDao.class)
+        return DB.on(MModelDao.class)
             // 从系统中选取唯一的 MModel
             .<MModel>fetchOneAsync(this.tool.onCriteria(identifier))
             // 先转换
@@ -45,7 +46,7 @@ public class ModelPerformer implements AoPerformer {
 
     @Override
     public Model fetch(final String identifier) {
-        final MModel model = Ux.Jooq.on(MModelDao.class)
+        final MModel model = DB.on(MModelDao.class)
             .fetchOne(this.tool.onCriteria(identifier));
         final String namespace = Ao.toNS(this.appName);
         Fn.jvmKo(Objects.isNull(model), _80510Exception404ModelNotFound.class, namespace, identifier);
@@ -67,7 +68,7 @@ public class ModelPerformer implements AoPerformer {
     @Override
     public Future<Set<Model>> fetchAsync() {
         final String namespace = Ao.toNS(this.appName);
-        return Ux.Jooq.on(MModelDao.class)
+        return DB.on(MModelDao.class)
             .<MModel>fetchAsync("namespace", namespace)
             .compose(this.tool::startList)
             .compose(this.tool::combine);

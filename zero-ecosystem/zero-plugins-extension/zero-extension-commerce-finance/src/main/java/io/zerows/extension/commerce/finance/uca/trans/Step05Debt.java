@@ -5,6 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.platform.metadata.KRef;
 import io.zerows.platform.constant.VValue;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.extension.commerce.finance.domain.tables.daos.FDebtDao;
@@ -72,13 +73,13 @@ class Step05Debt implements Trade<List<FSettlement>, FDebt> {
                 entity.setAmount(new BigDecimal(string));
                 entity.setAmountBalance(new BigDecimal(string));
                 entity.setKey(null);
-                return Ux.Jooq.on(FDebtDao.class).insertAsync(entity);
+                return DB.on(FDebtDao.class).insertAsync(entity);
             })
             .compose(inserted -> {
                 // 更新 items
                 final List<FSettlementItem> items = ref.get();
                 items.forEach(item -> item.setDebtId(inserted.getKey()));
-                return Ux.Jooq.on(FSettlementItemDao.class).updateAsync(items)
+                return DB.on(FSettlementItemDao.class).updateAsync(items)
                     .compose(nil -> Ux.future(inserted));
             });
     }
@@ -97,7 +98,7 @@ class Step05Debt implements Trade<List<FSettlement>, FDebt> {
         final JsonObject condition = Ux.whereAnd();
         condition.put(KName.SIGMA, sigma);
         condition.put(KName.Finance.SETTLEMENT_ID + ",i", Ut.toJArray(ids));
-        return Ux.Jooq.on(FSettlementItemDao.class).<FSettlementItem>fetchAndAsync(condition).compose(items -> {
+        return DB.on(FSettlementItemDao.class).<FSettlementItem>fetchAndAsync(condition).compose(items -> {
             // 如果没有选择模式，则直接返回所有的结算单明细，否则返回选择的结算单明细
             if (Objects.isNull(keySelected) || keySelected.isEmpty()) {
                 return Ux.future(items);

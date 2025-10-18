@@ -8,6 +8,7 @@ import io.zerows.epoch.metadata.KView;
 import io.zerows.extension.mbse.ui.domain.tables.daos.UiColumnDao;
 import io.zerows.extension.mbse.ui.domain.tables.pojos.UiColumn;
 import io.zerows.platform.constant.VString;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -32,7 +33,7 @@ class StoreValve implements UiValve {
         filters.put("controlId", controlId);
         filters.put(KName.SIGMA, sigma);
         LOG.Ui.info(this.getClass(), "The condition for column fetching: {0}", filters.encode());
-        return Ux.Jooq.on(UiColumnDao.class)
+        return DB.on(UiColumnDao.class)
             .<UiColumn>fetchAsync(filters)
             .compose(list -> Ux.future(list.stream()
                 /*

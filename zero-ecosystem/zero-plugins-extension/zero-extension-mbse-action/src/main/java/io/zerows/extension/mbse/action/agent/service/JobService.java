@@ -10,6 +10,7 @@ import io.zerows.extension.mbse.action.domain.tables.daos.IServiceDao;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IJob;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IService;
 import io.zerows.extension.mbse.action.util.Jt;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -33,7 +34,7 @@ public class JobService implements JobStub {
         qr.getCriteria().save("sigma", sigma);
         final JsonObject condition = qr.toJson();
         LOGGER.info("Job condition: {0}", condition);
-        return Ux.Jooq.on(IJobDao.class)
+        return DB.on(IJobDao.class)
             .searchAsync(condition)
             .compose(jobs -> {
                 /*
@@ -56,7 +57,7 @@ public class JobService implements JobStub {
                      * */
                     if (grouped) {
                         final JsonObject criteria = qr.getCriteria().toJson();
-                        return Ux.Jooq.on(IJobDao.class).countByAsync(criteria, "group")
+                        return DB.on(IJobDao.class).countByAsync(criteria, "group")
                             .compose(aggregation -> {
                                 final JsonObject aggregationJson = new JsonObject();
                                 aggregation.forEach(aggregationJson::put);
@@ -72,7 +73,7 @@ public class JobService implements JobStub {
 
     @Override
     public Future<JsonObject> fetchByKey(final String key) {
-        return Ux.Jooq.on(IJobDao.class)
+        return DB.on(IJobDao.class)
             .<IJob>fetchByIdAsync(key)
             /*
              * 1) Supplier here for `JsonObject` generated
@@ -98,12 +99,12 @@ public class JobService implements JobStub {
          */
         final IJob job = Ux.fromJson(data, IJob.class);
         final IService service = JobKit.fromJson(serviceJson);
-        return Ux.Jooq.on(IJobDao.class)
+        return DB.on(IJobDao.class)
             /*
              * 3. Upsert by Key for Service instance
              */
             .upsertAsync(job.getKey(), job)
-            .compose(updatedJob -> Ux.Jooq.on(IServiceDao.class)
+            .compose(updatedJob -> DB.on(IServiceDao.class)
                 .upsertAsync(service.getKey(), service)
                 /*
                  * 4. Merge updatedJob / updatedService

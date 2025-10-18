@@ -4,6 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.fn.Fx;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XCategoryDao;
@@ -19,7 +20,7 @@ public class TreeSigma extends AbstractTree {
 
     @Override
     public Future<JsonObject> fetch(final String field, final String type, final String code) {
-        return Ux.Jooq.on(XCategoryDao.class)
+        return DB.on(XCategoryDao.class)
             .fetchOneAsync(this.condSigma(field, type, code))
             .compose(Ux::futureJ).compose(Fx.ofJObject(KName.METADATA));
     }

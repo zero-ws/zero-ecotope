@@ -2,6 +2,7 @@ package io.zerows.extension.commerce.finance.uca.enter;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.extension.commerce.finance.domain.tables.daos.FBillItemDao;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FBillItem;
@@ -27,7 +28,7 @@ class UpdaterBillItem implements Maker<String, FBillItem> {
      */
     @Override
     public Future<FBillItem> buildAsync(final JsonObject data, final String key) {
-        return Ux.Jooq.on(FBillItemDao.class).fetchJByIdAsync(key)
+        return DB.on(FBillItemDao.class).fetchJByIdAsync(key)
             // 将传入的 data 数据更新到原始数据中构造新的对象
             .compose(queried -> {
                 final JsonObject normalized = queried.copy().mergeIn(data);

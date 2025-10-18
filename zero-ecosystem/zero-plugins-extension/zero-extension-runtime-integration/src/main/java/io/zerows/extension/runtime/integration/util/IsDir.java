@@ -12,6 +12,7 @@ import io.zerows.extension.runtime.integration.eon.IsConstant;
 import io.zerows.extension.runtime.integration.uca.command.FsDefault;
 import io.zerows.extension.runtime.integration.uca.command.FsReadOnly;
 import io.zerows.platform.constant.VString;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -111,7 +112,7 @@ class IsDir {
     }
 
     static Future<List<IDirectory>> query(final JsonObject condition) {
-        return Ux.Jooq.on(IDirectoryDao.class).fetchAsync(condition);
+        return DB.on(IDirectoryDao.class).fetchAsync(condition);
     }
 
     static Future<List<IDirectory>> query(final IDirectory directory) {
@@ -121,7 +122,7 @@ class IsDir {
             final JsonObject condition = Ux.whereAnd();
             condition.put(KName.SIGMA, directory.getSigma());
             condition.put(KName.STORE_PATH + ",s", directory.getStorePath());
-            return Ux.Jooq.on(IDirectoryDao.class).fetchAsync(condition);
+            return DB.on(IDirectoryDao.class).fetchAsync(condition);
         }
     }
 
@@ -158,7 +159,7 @@ class IsDir {
                 condition.put(KName.STORE_PATH + ",s", found);
             }
         }
-        return Ux.Jooq.on(IDirectoryDao.class).fetchAsync(condition);
+        return DB.on(IDirectoryDao.class).fetchAsync(condition);
     }
 
     /*
@@ -177,7 +178,7 @@ class IsDir {
      * 6) Trash Directory
      */
     static Future<IDirectory> updateBranch(final String key, final String updatedBy) {
-        final DBJooq jq = Ux.Jooq.on(IDirectoryDao.class);
+        final DBJooq jq = DB.on(IDirectoryDao.class);
         return jq.<IDirectory>fetchByIdAsync(key).compose(queried -> {
             if (Objects.isNull(queried)) {
                 return Ux.future();
@@ -263,7 +264,7 @@ class IsDir {
     private static Future<IDirectory> createChild(final Future<IDirectory> futureParent,
                                                   final IDirectory child,
                                                   final JsonObject params) {
-        final DBJooq jq = Ux.Jooq.on(IDirectoryDao.class);
+        final DBJooq jq = DB.on(IDirectoryDao.class);
         final String updatedBy = params.getString(KName.UPDATED_BY);
         if (Objects.isNull(child)) {
             return futureParent.compose(parent -> {

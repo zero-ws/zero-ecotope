@@ -9,6 +9,7 @@ import io.zerows.extension.commerce.rbac.domain.tables.pojos.RUserRole;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SRole;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SUser;
 import io.zerows.extension.commerce.rbac.eon.AuthKey;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -67,7 +68,7 @@ public class BinderRole extends AbstractBind<SRole> {
                 });
                 return Ux.future(relationList);
             })
-            .compose(Ux.Jooq.on(RUserRoleDao.class)::insertAsync)
+            .compose(DB.on(RUserRoleDao.class)::insertAsync)
             .compose(nil -> Ux.futureA(users));
     }
 

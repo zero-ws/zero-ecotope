@@ -13,6 +13,7 @@ import io.zerows.extension.commerce.finance.domain.tables.pojos.FSettlementItem;
 import io.zerows.extension.commerce.finance.eon.em.EmDebt;
 import io.zerows.extension.commerce.finance.eon.em.EmTran;
 import io.zerows.extension.commerce.finance.util.Fm;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import jakarta.inject.Inject;
@@ -59,7 +60,7 @@ public class SettleRService implements SettleRStub {
     @Override
     public Future<JsonObject> fetchSettlement(final JsonArray keys) {
         final JsonObject response = new JsonObject();
-        return Ux.Jooq.on(FSettlementDao.class).<FSettlement>fetchInAsync(KName.KEY, keys)
+        return DB.on(FSettlementDao.class).<FSettlement>fetchInAsync(KName.KEY, keys)
             .compose(this::statusSettlement)
             .compose(settlementA -> {
                 /* settlements */
@@ -70,7 +71,7 @@ public class SettleRService implements SettleRStub {
                 /* items */
                 response.put(KName.ITEMS, Ux.toJson(items));
                 final JsonArray debtIds = Ut.toJArray(Ut.valueSetString(items, FSettlementItem::getDebtId));
-                return Ux.Jooq.on(FDebtDao.class).fetchInAsync(KName.KEY, debtIds);
+                return DB.on(FDebtDao.class).fetchInAsync(KName.KEY, debtIds);
             })
             .compose(debts -> {
                 /* debts */
@@ -204,7 +205,7 @@ public class SettleRService implements SettleRStub {
                 .map(FSettlementItem::getDebtId)
                 .filter(Ut::isNotNil)
                 .collect(Collectors.toSet());
-            return Ux.Jooq.on(FDebtDao.class).<FDebt>fetchInAsync(KName.KEY, debtIds).compose(debts -> {
+            return DB.on(FDebtDao.class).<FDebt>fetchInAsync(KName.KEY, debtIds).compose(debts -> {
                 final ConcurrentMap<String, List<FSettlementItem>> mapItem = Ut.elementGroup(items, FSettlementItem::getDebtId);
                 debts.forEach(debt -> {
                     final String debtId = debt.getKey();
@@ -231,6 +232,6 @@ public class SettleRService implements SettleRStub {
     // ---------------- Private -----------------
 
     private Future<List<FSettlementItem>> fetchInternalItems(final JsonArray settlementIds) {
-        return Ux.Jooq.on(FSettlementItemDao.class).fetchInAsync(KName.Finance.SETTLEMENT_ID, settlementIds);
+        return DB.on(FSettlementItemDao.class).fetchInAsync(KName.Finance.SETTLEMENT_ID, settlementIds);
     }
 }

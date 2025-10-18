@@ -14,6 +14,7 @@ import io.zerows.extension.commerce.finance.domain.tables.pojos.FBillItem;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FBook;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FPreAuthorize;
 import io.zerows.extension.commerce.finance.util.Fm;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -35,12 +36,12 @@ public class BookService implements BookStub {
             .collect(Collectors.toSet());
         final JsonObject condition = new JsonObject();
         condition.put("bookId,i", Ut.toJArray(bookIds));
-        return Ux.Jooq.on(FPreAuthorizeDao.class).fetchAsync(condition);
+        return DB.on(FPreAuthorizeDao.class).fetchAsync(condition);
     }
 
     @Override
     public Future<List<FBook>> fetchAsync(final JsonObject criteria) {
-        return Ux.Jooq.on(FBookDao.class).fetchAsync(criteria);
+        return DB.on(FBookDao.class).fetchAsync(criteria);
     }
 
     @Override
@@ -54,21 +55,21 @@ public class BookService implements BookStub {
     @Override
     public Future<List<FBook>> createAsync(final List<FBook> books, final MMShared spec) {
         final List<FBook> subBooks = Fm.umBook(spec, books);
-        return Ux.Jooq.on(FBookDao.class).insertAsync(subBooks);
+        return DB.on(FBookDao.class).insertAsync(subBooks);
     }
 
     @Override
     public Future<JsonObject> fetchByKey(final String key) {
-        return Ux.Jooq.on(FBookDao.class).<FBook>fetchByIdAsync(key).compose(book -> {
+        return DB.on(FBookDao.class).<FBook>fetchByIdAsync(key).compose(book -> {
             // Fetch all bills in current book
-            return Ux.Jooq.on(FBillDao.class).<FBill>fetchAsync("bookId", key).compose(bills -> {
+            return DB.on(FBillDao.class).<FBill>fetchAsync("bookId", key).compose(bills -> {
                 // Bills to fetch items
                 final Set<String> billIds = bills.stream()
                     .map(FBill::getKey)
                     .filter(Ut::isNotNil)
                     .collect(Collectors.toSet());
                 // Bill items
-                return Ux.Jooq.on(FBillItemDao.class).<FBillItem>fetchInAsync("billId", Ut.toJArray(billIds)).compose(items -> {
+                return DB.on(FBillItemDao.class).<FBillItem>fetchInAsync("billId", Ut.toJArray(billIds)).compose(items -> {
                     // Grouped Items
                     final ConcurrentMap<String, List<FBillItem>> itemMap
                         = Ut.elementGroup(items, FBillItem::getBillId, item -> item);

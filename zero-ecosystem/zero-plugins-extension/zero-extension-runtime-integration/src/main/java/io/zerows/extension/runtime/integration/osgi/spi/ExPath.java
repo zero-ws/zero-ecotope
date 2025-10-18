@@ -12,6 +12,7 @@ import io.zerows.extension.runtime.integration.domain.tables.pojos.IDirectory;
 import io.zerows.extension.runtime.integration.uca.command.Fs;
 import io.zerows.extension.runtime.integration.util.Is;
 import io.zerows.extension.runtime.skeleton.osgi.spi.business.ExIo;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.base.FnBase;
@@ -72,7 +73,7 @@ public class ExPath implements ExIo {
         final JsonObject condition = Ux.whereAnd();
         condition.put(KName.SIGMA, sigma);
         condition.put(KName.CODE, directory);
-        return Ux.Jooq.on(IDirectoryDao.class).fetchJOneAsync(condition)
+        return DB.on(IDirectoryDao.class).fetchJOneAsync(condition)
             .compose(Is::dataOut);
     }
 
@@ -80,7 +81,7 @@ public class ExPath implements ExIo {
     public Future<ConcurrentMap<String, JsonObject>> dirBy(final Set<String> keys) {
         final JsonObject condition = Ux.whereAnd();
         condition.put(KName.KEY + ",i", Ut.toJArray(keys));
-        return Ux.Jooq.on(IDirectoryDao.class).fetchJAsync(condition)
+        return DB.on(IDirectoryDao.class).fetchJAsync(condition)
             .compose(Is::dataOut)
             .compose(directories -> {
                 final ConcurrentMap<String, JsonObject> map
@@ -177,7 +178,7 @@ public class ExPath implements ExIo {
     @Override
     public Future<Boolean> rename(final JsonObject directoryJ, final Kv<String, String> renameKv) {
         final String directoryId = directoryJ.getString(KName.KEY);
-        final DBJooq jq = Ux.Jooq.on(IDirectoryDao.class);
+        final DBJooq jq = DB.on(IDirectoryDao.class);
         final String updatedBy = directoryJ.getString(KName.UPDATED_BY);
         return jq.<IDirectory>fetchByIdAsync(directoryId)
             .compose(directory -> {
@@ -195,7 +196,7 @@ public class ExPath implements ExIo {
         final JsonObject condition = Ux.whereAnd();
         condition.put(KName.STORE_PATH + ",i", Ut.toJArray(paths));
         condition.put(KName.SIGMA, sigma);
-        final DBJooq jq = Ux.Jooq.on(IDirectoryDao.class);
+        final DBJooq jq = DB.on(IDirectoryDao.class);
         return jq.fetchJAsync(condition);
     }
 
@@ -260,7 +261,7 @@ public class ExPath implements ExIo {
         /*
          * Remove
          */
-        return Ux.Jooq.on(IDirectoryDao.class).deleteByAsync(criteria).compose(removed -> {
+        return DB.on(IDirectoryDao.class).deleteByAsync(criteria).compose(removed -> {
             // Grouped directory by runComponent
             final ConcurrentMap<String, JsonArray> grouped =
                 Ut.elementGroup(directoryD, KName.Component.RUN_COMPONENT);
@@ -287,7 +288,7 @@ public class ExPath implements ExIo {
             json.put(KName.UPDATED_AT, Instant.now());
         });
         final List<IDirectory> directories = Ux.fromJson(normalized, IDirectory.class);
-        return Ux.Jooq.on(IDirectoryDao.class).updateAsync(directories)
+        return DB.on(IDirectoryDao.class).updateAsync(directories)
             .compose(updated -> {
                 final ConcurrentMap<String, List<String>> grouped =
                     Ut.elementGroup(updated, IDirectory::getRunComponent, IDirectory::getStorePath);

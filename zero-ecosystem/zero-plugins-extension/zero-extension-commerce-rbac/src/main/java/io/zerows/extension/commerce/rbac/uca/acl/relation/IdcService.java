@@ -11,6 +11,7 @@ import io.zerows.extension.commerce.rbac.domain.tables.pojos.SUser;
 import io.zerows.extension.commerce.rbac.util.Sc;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
 import io.zerows.platform.metadata.KRef;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.base.FnBase;
@@ -75,7 +76,7 @@ class IdcService extends AbstractIdc {
         condition.put(KName.USERNAME + ",i", Ut.toJArray(Ut.valueSetString(compress, KName.USERNAME)));
         condition.put(KName.SIGMA, this.sigma);
         LOG.Web.info(this.getClass(), "Unique filters: {0}", condition.encode());
-        return Ux.Jooq.on(SUserDao.class).fetchJAsync(condition);
+        return DB.on(SUserDao.class).fetchJAsync(condition);
     }
 
     private Future<JsonArray> compress(final JsonArray inputData) {
@@ -97,16 +98,16 @@ class IdcService extends AbstractIdc {
         final KRef refer = new KRef();
         return this.model(userJson)
             .compose(processed -> Sc.valueAuth(processed, this.sigma))
-            .compose(Ux.Jooq.on(SUserDao.class)::insertAsync)
+            .compose(DB.on(SUserDao.class)::insertAsync)
             .compose(refer::future)
             .compose(Sc::valueAuth)
-            .compose(Ux.Jooq.on(OUserDao.class)::insertAsync)
+            .compose(DB.on(OUserDao.class)::insertAsync)
             .compose(ou -> Ux.future(refer.get()));
     }
 
     private Future<List<SUser>> updateAsync(final JsonArray userJson) {
         final List<SUser> users = Ux.fromJson(userJson, SUser.class);
         users.forEach(user -> user.setActive(Boolean.TRUE));
-        return Ux.Jooq.on(SUserDao.class).updateAsync(users);
+        return DB.on(SUserDao.class).updateAsync(users);
     }
 }

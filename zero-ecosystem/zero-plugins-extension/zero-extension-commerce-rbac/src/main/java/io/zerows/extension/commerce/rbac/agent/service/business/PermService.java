@@ -17,6 +17,7 @@ import io.zerows.extension.commerce.rbac.domain.tables.pojos.SPermSet;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SPermission;
 import io.zerows.extension.commerce.rbac.uca.logged.ScRole;
 import io.zerows.platform.constant.VString;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.base.FnBase;
@@ -43,7 +44,7 @@ public class PermService implements PermStub {
          * Update all the action permissionId = null by key
          */
         final List<Future<SAction>> entities = new ArrayList<>();
-        final DBJooq jooq = Ux.Jooq.on(SActionDao.class);
+        final DBJooq jooq = DB.on(SActionDao.class);
         Ut.itJString(removed).map(key -> jooq.<SAction>fetchByIdAsync(key)
 
             /*
@@ -94,7 +95,7 @@ public class PermService implements PermStub {
          * Delete all the relations that belong to roleId
          * that the user provided here
          * */
-        final DBJooq dao = Ux.Jooq.on(RRolePermDao.class);
+        final DBJooq dao = DB.on(RRolePermDao.class);
         return dao.deleteByAsync(condition).compose(processed -> {
             /*
              * Build new relations that belong to the role
@@ -121,7 +122,7 @@ public class PermService implements PermStub {
         /*
          * Result for searching join S_PERMISSIONS
          */
-        return Ux.Jooq.on(SPermSetDao.class).<SPermSet>fetchAsync(KName.SIGMA, sigma).compose(setList -> {
+        return DB.on(SPermSetDao.class).<SPermSet>fetchAsync(KName.SIGMA, sigma).compose(setList -> {
             /*
              * Extract perm codes to set
              */
@@ -150,7 +151,7 @@ public class PermService implements PermStub {
             /*
              * Replace for criteria
              */
-            return Ux.Jooq.on(SPermissionDao.class).searchAsync(query);
+            return DB.on(SPermissionDao.class).searchAsync(query);
         });
     }
 
@@ -158,7 +159,7 @@ public class PermService implements PermStub {
     public Future<JsonObject> fetchAsync(final String key) {
 
         /* Read permission and actions */
-        return Ux.Jooq.on(SPermissionDao.class).<SPermission>fetchByIdAsync(key)
+        return DB.on(SPermissionDao.class).<SPermission>fetchByIdAsync(key)
 
             /* Secondary Fetching, Fetch action here */
             .compose(permission -> this.actionStub.fetchAction(permission.getKey())
@@ -172,7 +173,7 @@ public class PermService implements PermStub {
     public Future<JsonObject> createAsync(final JsonObject body) {
         final JsonArray actions = body.getJsonArray(KName.ACTIONS);
         body.remove(KName.ACTIONS);
-        return Ux.Jooq.on(SPermissionDao.class).<SPermission>insertAsync(body)
+        return DB.on(SPermissionDao.class).<SPermission>insertAsync(body)
 
             /* Synced Action */
             .compose(permission -> this.actionStub.saveAction(permission, actions)
@@ -186,7 +187,7 @@ public class PermService implements PermStub {
     public Future<JsonObject> updateAsync(final String key, final JsonObject body) {
         final JsonArray actions = body.getJsonArray(KName.ACTIONS);
         body.remove(KName.ACTIONS);
-        return Ux.Jooq.on(SPermissionDao.class).<SPermission, String>updateAsync(key, body)
+        return DB.on(SPermissionDao.class).<SPermission, String>updateAsync(key, body)
 
             /* Synced Action */
             .compose(permission -> this.actionStub.saveAction(permission, actions)
@@ -198,7 +199,7 @@ public class PermService implements PermStub {
 
     @Override
     public Future<Boolean> deleteAsync(final String key, final String userKey) {
-        return Ux.Jooq.on(SPermissionDao.class).deleteByIdAsync(key)
+        return DB.on(SPermissionDao.class).deleteByIdAsync(key)
             .compose(nil -> this.actionStub.removeAction(key, userKey));
     }
 }

@@ -21,6 +21,7 @@ import io.zerows.extension.runtime.report.exception._80702Exception404ReportData
 import io.zerows.extension.runtime.report.uca.process.DimProc;
 import io.zerows.extension.runtime.report.uca.pull.DataSet;
 import io.zerows.platform.metadata.KRef;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -47,12 +48,12 @@ public class ReportService implements ReportStub {
         final JsonObject qr = Ux.whereAnd();
         qr.put(KName.APP_ID, appId);
         qr.put(KName.ACTIVE, Boolean.TRUE);
-        return Ux.Jooq.on(KpReportDao.class).fetchJAndAsync(qr);
+        return DB.on(KpReportDao.class).fetchJAndAsync(qr);
     }
 
     @Override
     public Future<JsonObject> buildInstance(final String reportId, final JsonObject params) {
-        return Ux.Jooq.on(KpReportDao.class).<KpReport>fetchByIdAsync(reportId)
+        return DB.on(KpReportDao.class).<KpReport>fetchByIdAsync(reportId)
             .compose(report -> {
                 if (Objects.isNull(report)) {
                     // ERR-80701
@@ -91,7 +92,7 @@ public class ReportService implements ReportStub {
             // ERR-80702
             return FnVertx.failOut(_80702Exception404ReportDataSet.class, reportId);
         }
-        return Ux.Jooq.on(KpDataSetDao.class).<KpDataSet>fetchByIdAsync(dsId).compose(dataSet -> {
+        return DB.on(KpDataSetDao.class).<KpDataSet>fetchByIdAsync(dsId).compose(dataSet -> {
             if (Objects.isNull(dataSet)) {
                 // ERR-80702
                 return FnVertx.failOut(_80702Exception404ReportDataSet.class, reportId);
@@ -144,7 +145,7 @@ public class ReportService implements ReportStub {
     private Future<List<KpFeature>> featureOfAll(final KpReport report) {
         final JsonObject whereJ = Ux.whereAnd();
         whereJ.put("reportId", report.getKey());
-        return Ux.Jooq.on(KpFeatureDao.class).fetchAsync(whereJ);
+        return DB.on(KpFeatureDao.class).fetchAsync(whereJ);
     }
 
     private Future<List<KpFeature>> featureOfDim(final KpReport report, final List<KpFeature> featureList) {
@@ -174,7 +175,7 @@ public class ReportService implements ReportStub {
     private Future<ConcurrentMap<String, RDimension>> reportOfDim(final KpReport report, final JsonObject params) {
         final JsonObject whereJ = Ux.whereAnd();
         whereJ.put("reportId", report.getKey());
-        return Ux.Jooq.on(KpDimensionDao.class).<KpDimension>fetchAsync(whereJ).compose(dimensions -> {
+        return DB.on(KpDimensionDao.class).<KpDimension>fetchAsync(whereJ).compose(dimensions -> {
             final DimProc processor = DimProc.of();
             return processor.dimAsync(params, dimensions);
         }).compose(dimensions -> {

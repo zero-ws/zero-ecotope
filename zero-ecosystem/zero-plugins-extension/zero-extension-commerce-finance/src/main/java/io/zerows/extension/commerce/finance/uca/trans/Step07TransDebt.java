@@ -6,6 +6,7 @@ import io.zerows.extension.commerce.finance.domain.tables.daos.FTransDao;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FDebt;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FTrans;
 import io.zerows.extension.commerce.finance.uca.enter.Maker;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -34,6 +35,6 @@ class Step07TransDebt implements Trade<List<FDebt>, FTrans> {
                 // 此处构造完成
                 return Ux.future(trans);
             })
-            .compose(Ux.Jooq.on(FTransDao.class)::insertAsync);
+            .compose(DB.on(FTransDao.class)::insertAsync);
     }
 }

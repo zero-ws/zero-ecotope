@@ -10,6 +10,7 @@ import io.zerows.extension.runtime.ambient.domain.tables.pojos.XNumber;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.constant.VValue;
 import io.zerows.platform.enums.Environment;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.specification.app.HApp;
 import io.zerows.support.Ut;
@@ -59,10 +60,10 @@ public class AdjustNumber extends AbstractStep {
         filters.put(KName.SIGMA, sigma);
         filters.put(KName.IDENTIFIER, item.getString(KName.IDENTIFIER));
         filters.put(VString.EMPTY, Boolean.TRUE);
-        return Ux.Jooq.on(XNumberDao.class).<XNumber>fetchOneAsync(filters).compose(number -> {
+        return DB.on(XNumberDao.class).<XNumber>fetchOneAsync(filters).compose(number -> {
             final int adjust = item.getInteger(ADJUST);
             number.setCurrent((long) adjust);
-            return Ux.Jooq.on(XNumberDao.class).updateAsync(number)
+            return DB.on(XNumberDao.class).updateAsync(number)
                 .compose(Ux::futureJ);
         }).otherwise(error -> {
             if (Objects.nonNull(error)) {

@@ -11,6 +11,7 @@ import io.zerows.extension.runtime.ambient.domain.tables.daos.XCategoryDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XCategory;
 import io.zerows.platform.enums.Environment;
 import io.zerows.platform.metadata.OldKDS;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.specification.app.HApp;
 import io.zerows.support.fn.Fx;
@@ -39,7 +40,7 @@ public class MetaReport extends AbstractStep {
         this.banner("002.3-1. 字段修改部分信息");
         this.builder = this.getBuilder();
         final HApp app = this.ark.app();
-        return Ux.Jooq.on(XCategoryDao.class).<XCategory>fetchAsync(KName.SIGMA, app.option(KName.SIGMA))
+        return DB.on(XCategoryDao.class).<XCategory>fetchAsync(KName.SIGMA, app.option(KName.SIGMA))
             .compose(categories -> {
                 /*
                  * 元素结构：JsonObject

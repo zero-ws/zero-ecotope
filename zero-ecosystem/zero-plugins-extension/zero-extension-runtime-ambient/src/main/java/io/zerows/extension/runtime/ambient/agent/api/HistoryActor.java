@@ -10,6 +10,7 @@ import io.zerows.extension.runtime.ambient.agent.service.ActivityStub;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XActivityDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XActivity;
 import io.zerows.extension.runtime.ambient.eon.Addr;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import jakarta.inject.Inject;
@@ -47,12 +48,12 @@ public class HistoryActor {
 
     @Address(Addr.History.ACTIVITY_SEARCH)
     public Future<JsonObject> searchActivities(final JsonObject body) {
-        return Ux.Jooq.on(XActivityDao.class).searchAsync(body);
+        return DB.on(XActivityDao.class).searchAsync(body);
     }
 
     @Address(Addr.History.ACTIVITY_GET)
     public Future<JsonObject> fetchActivity(final String key) {
-        return Ux.Jooq.on(XActivityDao.class).<XActivity>fetchByIdAsync(key).compose(activity -> {
+        return DB.on(XActivityDao.class).<XActivity>fetchByIdAsync(key).compose(activity -> {
             if (Objects.isNull(activity)) {
                 return Ux.futureJ();
             } else {

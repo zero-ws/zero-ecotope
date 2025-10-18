@@ -16,6 +16,7 @@ import io.zerows.plugins.common.shell.AbstractCommander;
 import io.zerows.plugins.common.shell.atom.CommandInput;
 import io.zerows.plugins.common.shell.eon.EmCommand;
 import io.zerows.plugins.common.shell.refine.Sl;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.app.HArk;
@@ -87,7 +88,7 @@ public abstract class AbstractInstruction extends AbstractCommander {
 
     protected Future<Set<String>> identifiers(final JsonObject condition, final Set<String> ignores) {
         final Set<String> ignored = Objects.isNull(ignores) ? new HashSet<>() : ignores;
-        return Ux.Jooq.on(XCategoryDao.class).<XCategory>fetchAndAsync(condition)
+        return DB.on(XCategoryDao.class).<XCategory>fetchAndAsync(condition)
             /* Calculation for identifiers */
             .compose(categories -> Ux.future(categories.stream()
                 .filter(Objects::nonNull).map(XCategory::getIdentifier)

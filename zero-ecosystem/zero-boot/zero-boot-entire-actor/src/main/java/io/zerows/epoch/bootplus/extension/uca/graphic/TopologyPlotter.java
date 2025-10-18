@@ -7,6 +7,7 @@ import io.zerows.extension.runtime.ambient.domain.tables.daos.XCategoryDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XCategory;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.metadata.KRef;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.specification.app.HApp;
 import io.zerows.support.Ut;
@@ -45,7 +46,7 @@ public class TopologyPlotter extends AbstractPlotter {
             condition.put("identifier,i", Ut.toJArray(ignores));
             condition.put(KName.SIGMA, sigma);
             condition.put(VString.EMPTY, Boolean.TRUE);
-            return Ux.Jooq.on(XCategoryDao.class).<XCategory>fetchAndAsync(condition).compose(categories -> {
+            return DB.on(XCategoryDao.class).<XCategory>fetchAndAsync(condition).compose(categories -> {
                 /* 读取不为 key 的 */
                 final Set<String> keys = categories.stream().map(XCategory::getKey).collect(Collectors.toSet());
                 final JsonObject criteria = new JsonObject();

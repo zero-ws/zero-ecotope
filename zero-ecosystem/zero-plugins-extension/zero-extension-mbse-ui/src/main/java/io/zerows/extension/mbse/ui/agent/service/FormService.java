@@ -7,6 +7,7 @@ import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.mbse.ui.domain.tables.daos.UiFormDao;
 import io.zerows.extension.mbse.ui.domain.tables.pojos.UiForm;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -24,7 +25,7 @@ public class FormService implements FormStub {
 
     @Override
     public Future<JsonObject> fetchById(final String formId) {
-        return Ux.Jooq.on(UiFormDao.class).<UiForm>fetchByIdAsync(formId)
+        return DB.on(UiFormDao.class).<UiForm>fetchByIdAsync(formId)
             .compose(form -> {
                 if (Objects.isNull(form)) {
                     LOG.Ui.warn(LOGGER, " Form not found, id = {0}", formId);
@@ -44,7 +45,7 @@ public class FormService implements FormStub {
         final JsonObject condition = new JsonObject();
         condition.put(KName.IDENTIFIER, identifier);
         condition.put(KName.SIGMA, sigma);
-        return Ux.Jooq.on(UiFormDao.class).<UiForm>fetchAndAsync(condition)
+        return DB.on(UiFormDao.class).<UiForm>fetchAndAsync(condition)
             /* List<UiForm> */
             .compose(Ux::futureA)
             .compose(Fx.ofJArray(
@@ -66,7 +67,7 @@ public class FormService implements FormStub {
         filters.put(KName.CODE, code);
         filters.put(KName.SIGMA, sigma);
         filters.put("", Boolean.TRUE);
-        return Ux.Jooq.on(UiFormDao.class)
+        return DB.on(UiFormDao.class)
             .<UiForm>fetchOneAsync(filters)
             .compose(form -> {
                 if (Objects.isNull(form)) {
@@ -96,7 +97,7 @@ public class FormService implements FormStub {
         );
         final UiForm uiForm = Ux.fromJson(form, UiForm.class);
         // 2. save ui-form record
-        return Ux.Jooq.on(UiFormDao.class)
+        return DB.on(UiFormDao.class)
             .updateAsync(key, uiForm)
             .compose(Ux::futureJ)
             // 3. mountOut
@@ -109,7 +110,7 @@ public class FormService implements FormStub {
 
     @Override
     public Future<Boolean> delete(final String key) {
-        return Ux.Jooq.on(UiFormDao.class)
+        return DB.on(UiFormDao.class)
             .deleteByIdAsync(key);
     }
 

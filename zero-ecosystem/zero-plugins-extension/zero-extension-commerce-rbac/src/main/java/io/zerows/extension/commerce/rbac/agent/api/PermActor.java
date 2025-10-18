@@ -13,6 +13,7 @@ import io.zerows.extension.commerce.rbac.agent.service.business.RightsStub;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.RRolePermDao;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SPermSet;
 import io.zerows.extension.commerce.rbac.eon.Addr;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import jakarta.inject.Inject;
@@ -120,7 +121,7 @@ public class PermActor {
 
     @Address(Addr.Authority.PERMISSION_BY_ROLE)
     public Future<JsonArray> fetchAsync(final String roleId) {
-        return Ux.Jooq.on(RRolePermDao.class)
+        return DB.on(RRolePermDao.class)
             .fetchAsync(KName.Rbac.ROLE_ID, roleId)
             .compose(Ux::futureA);
     }

@@ -4,6 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -33,7 +34,7 @@ public class EmployeeService implements EmployeeStub {
     }
 
     private Future<JsonObject> insertAsync(final EEmployee employee, final JsonObject data) {
-        return Ux.Jooq.on(EEmployeeDao.class).insertAsync(employee)
+        return DB.on(EEmployeeDao.class).insertAsync(employee)
             .compose(Ux::futureJ)
             .compose(inserted -> {
                 /*
@@ -54,21 +55,21 @@ public class EmployeeService implements EmployeeStub {
 
     @Override
     public Future<JsonObject> fetchAsync(final String key) {
-        return Ux.Jooq.on(EEmployeeDao.class).fetchByIdAsync(key)
+        return DB.on(EEmployeeDao.class).fetchByIdAsync(key)
             .compose(Ux::futureJ)
             .compose(this::fetchRef);
     }
 
     @Override
     public Future<JsonArray> fetchAsync(final Set<String> keys) {
-        return Ux.Jooq.on(EEmployeeDao.class).fetchInAsync(KName.KEY, Ut.toJArray(keys))
+        return DB.on(EEmployeeDao.class).fetchInAsync(KName.KEY, Ut.toJArray(keys))
             .compose(Ux::futureA)
             .compose(this::fetchRef);
     }
 
     @Override
     public Future<JsonArray> fetchAsync(final JsonObject condition) {
-        return Ux.Jooq.on(EEmployeeDao.class).fetchAsync(condition)
+        return DB.on(EEmployeeDao.class).fetchAsync(condition)
             .compose(Ux::futureA)
             .compose(this::fetchRef);
     }
@@ -130,7 +131,7 @@ public class EmployeeService implements EmployeeStub {
         final JsonObject uniques = new JsonObject();
         uniques.put(KName.KEY, key);
         final EEmployee employee = Ut.deserialize(data, EEmployee.class);
-        return Ux.Jooq.on(EEmployeeDao.class)
+        return DB.on(EEmployeeDao.class)
             .upsertAsync(uniques, employee)
             .compose(Ux::futureJ);
     }
@@ -147,7 +148,7 @@ public class EmployeeService implements EmployeeStub {
     private Future<Boolean> deleteAsync(final String key, final JsonObject item) {
         final String userId = item.getString(KName.USER_ID);
         return this.updateReference(userId, new JsonObject())
-            .compose(nil -> Ux.Jooq.on(EEmployeeDao.class)
+            .compose(nil -> DB.on(EEmployeeDao.class)
                 .deleteByIdAsync(key));
     }
 

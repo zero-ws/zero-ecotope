@@ -14,6 +14,7 @@ import io.zerows.extension.commerce.finance.domain.tables.pojos.FBook;
 import io.zerows.extension.commerce.finance.eon.Addr;
 import io.zerows.extension.commerce.finance.uca.enter.Maker;
 import io.zerows.extension.commerce.finance.uca.replica.IkWay;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import jakarta.inject.Inject;
 
@@ -56,7 +57,7 @@ public class VarietyActor {
     @Me
     @Address(Addr.Bill.UP_TRANSFER)
     public Future<JsonObject> upTransfer(final String bookId, final JsonObject data) {
-        return Ux.Jooq.on(FBookDao.class).<FBook>fetchByIdAsync(bookId).compose(book -> {
+        return DB.on(FBookDao.class).<FBook>fetchByIdAsync(bookId).compose(book -> {
             if (Objects.isNull(book)) {
                 return Ux.future();
             }

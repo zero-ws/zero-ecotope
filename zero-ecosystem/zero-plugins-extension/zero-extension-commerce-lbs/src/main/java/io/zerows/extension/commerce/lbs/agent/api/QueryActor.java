@@ -16,6 +16,7 @@ import io.zerows.extension.commerce.lbs.domain.tables.pojos.LCity;
 import io.zerows.extension.commerce.lbs.domain.tables.pojos.LRegion;
 import io.zerows.extension.commerce.lbs.domain.tables.pojos.LState;
 import io.zerows.extension.commerce.lbs.eon.Addr;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -25,42 +26,42 @@ import java.util.function.Supplier;
 public class QueryActor {
     @Address(Addr.PickUp.COUNTRIES)
     public Future<JsonArray> queryCountries(final Envelop request) {
-        return Ux.Jooq.on(LCountryDao.class)
+        return DB.on(LCountryDao.class)
             .fetchAllAsync()
             .compose(Ux::futureA);
     }
 
     @Address(Addr.PickUp.STATE_BY_COUNTRY)
     public Future<JsonArray> queryStates(final String countryId) {
-        return Ux.Jooq.on(LStateDao.class)
+        return DB.on(LStateDao.class)
             .fetchAsync("countryId", countryId)
             .compose(Ux::futureA);
     }
 
     @Address(Addr.PickUp.CITY_BY_STATE)
     public Future<JsonArray> queryCities(final String stateId) {
-        return Ux.Jooq.on(LCityDao.class)
+        return DB.on(LCityDao.class)
             .fetchAsync("stateId", stateId)
             .compose(Ux::futureA);
     }
 
     @Address(Addr.PickUp.REGION_BY_CITY)
     public Future<JsonArray> queryRegions(final String cityId) {
-        return Ux.Jooq.on(LRegionDao.class)
+        return DB.on(LRegionDao.class)
             .fetchAsync("cityId", cityId)
             .compose(Ux::futureA);
     }
 
     @Address(Addr.PickUp.TENT_BY_SIGMA)
     public Future<JsonArray> getTents(final String sigma) {
-        return Ux.Jooq.on(LTentDao.class)
+        return DB.on(LTentDao.class)
             .fetchAsync("sigma", sigma)
             .compose(Ux::futureA);
     }
 
     @Address(Addr.PickUp.FLOOR_BY_SIGMA)
     public Future<JsonArray> getFloors(final String sigma) {
-        return Ux.Jooq.on(LFloorDao.class)
+        return DB.on(LFloorDao.class)
             .fetchAsync("sigma", sigma)
             .compose(Ux::futureA);
     }
@@ -77,7 +78,7 @@ public class QueryActor {
              */
             .compose(regionId -> this.combine(response, "regionId",
                 () -> regionId))
-            .compose(regionId -> Ux.Jooq.on(LRegionDao.class)
+            .compose(regionId -> DB.on(LRegionDao.class)
                 .<LRegion>fetchByIdAsync(regionId)
             )
             /*
@@ -85,7 +86,7 @@ public class QueryActor {
              */
             .compose(region -> this.combine(response, "cityId",
                 region::getCityId))
-            .compose(cityId -> Ux.Jooq.on(LCityDao.class)
+            .compose(cityId -> DB.on(LCityDao.class)
                 .<LCity>fetchByIdAsync(cityId)
             )
             /*
@@ -93,7 +94,7 @@ public class QueryActor {
              */
             .compose(city -> this.combine(response, "stateId",
                 city::getStateId))
-            .compose(stateId -> Ux.Jooq.on(LStateDao.class)
+            .compose(stateId -> DB.on(LStateDao.class)
                 .<LState>fetchByIdAsync(stateId)
             )
             /*

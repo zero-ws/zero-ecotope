@@ -11,6 +11,7 @@ import io.zerows.extension.commerce.rbac.domain.tables.pojos.RUserGroup;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.RUserRole;
 import io.zerows.extension.commerce.rbac.eon.AuthKey;
 import io.zerows.mbse.metadata.KQr;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -81,7 +82,7 @@ class TwineQr {
         if (criteriaJ.containsKey(fieldId)
             || criteriaJ.containsKey(fieldV)) {
             final JsonArray value = valueBy(criteriaJ, fieldId, fieldV);
-            return Ux.Jooq.on(RUserGroupDao.class).<RUserGroup>fetchInAsync(AuthKey.F_GROUP_ID, value)
+            return DB.on(RUserGroupDao.class).<RUserGroup>fetchInAsync(AuthKey.F_GROUP_ID, value)
                 .compose(relation -> {
                     final Set<String> keySet = (relation.stream().map(RUserGroup::getUserId).collect(Collectors.toSet()));
                     // Replace field groupId,i / groups,i with key,i
@@ -99,7 +100,7 @@ class TwineQr {
         if (criteriaJ.containsKey(fieldId)
             || criteriaJ.containsKey(fieldV)) {
             final JsonArray value = valueBy(criteriaJ, fieldId, fieldV);
-            return Ux.Jooq.on(RUserRoleDao.class).<RUserRole>fetchInAsync(AuthKey.F_ROLE_ID, value)
+            return DB.on(RUserRoleDao.class).<RUserRole>fetchInAsync(AuthKey.F_ROLE_ID, value)
                 .compose(relation -> {
                     final Set<String> keySet = (relation.stream().map(RUserRole::getUserId).collect(Collectors.toSet()));
                     // Replace field roleId,i / roles,i with key,i

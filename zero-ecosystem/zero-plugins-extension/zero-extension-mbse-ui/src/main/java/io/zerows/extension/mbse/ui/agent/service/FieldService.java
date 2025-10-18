@@ -8,6 +8,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.extension.mbse.ui.domain.tables.daos.UiFieldDao;
 import io.zerows.extension.mbse.ui.domain.tables.pojos.UiField;
 import io.zerows.extension.mbse.ui.eon.em.RowType;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -27,7 +28,7 @@ public class FieldService implements FieldStub {
 
     @Override
     public Future<JsonArray> fetchUi(final String formId) {
-        return Ux.Jooq.on(UiFieldDao.class)
+        return DB.on(UiFieldDao.class)
             .<UiField>fetchAsync(KName.Ui.CONTROL_ID, formId)
             .compose(ui -> {
                 if (Objects.isNull(ui) || ui.isEmpty()) {
@@ -60,7 +61,7 @@ public class FieldService implements FieldStub {
             .collect(Collectors.toList());
         // 2. delete old ones and insert new ones
         return this.deleteByControlId(controlId)
-            .compose(result -> Ux.Jooq.on(UiFieldDao.class)
+            .compose(result -> DB.on(UiFieldDao.class)
                 .insertAsync(fields)
                 .compose(Ux::futureA)
                 // 3. mountOut
@@ -75,7 +76,7 @@ public class FieldService implements FieldStub {
 
     @Override
     public Future<Boolean> deleteByControlId(final String controlId) {
-        return Ux.Jooq.on(UiFieldDao.class)
+        return DB.on(UiFieldDao.class)
             .deleteByAsync(new JsonObject().put(KName.Ui.CONTROL_ID, controlId));
     }
 

@@ -7,6 +7,7 @@ import io.zerows.epoch.bootplus.extension.cv.OxCv;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XCategoryDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XCategory;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.spi.modeler.Identifier;
 import io.zerows.support.Ut;
@@ -32,7 +33,7 @@ public class KeyIndent implements Identifier {
                 data.encode(), config.encode());
             return Ux.future(null);
         } else {
-            return Ux.Jooq.on(XCategoryDao.class).<XCategory>fetchByIdAsync(hitKey).compose(category -> {
+            return DB.on(XCategoryDao.class).<XCategory>fetchByIdAsync(hitKey).compose(category -> {
                 final String identifier = this.identifier(category);
                 LOG.Plugin.info(this.getClass(), "标识选择：key = `{0}`, identifier = `{1}`, data = `{2}`",
                     hitKey, identifier, data.encode());
@@ -51,7 +52,7 @@ public class KeyIndent implements Identifier {
             final ConcurrentMap<String, JsonArray> sourceMap = Ut.elementGroup(dataArray, (json) -> this.key(json, config));
             // `key` field collect into array
             final JsonArray values = Ut.toJArray(sourceMap.keySet());
-            return Ux.Jooq.on(XCategoryDao.class).<XCategory>fetchInAsync(KName.KEY, values)
+            return DB.on(XCategoryDao.class).<XCategory>fetchInAsync(KName.KEY, values)
                 // `build` the result grouped values here.
                 .compose(categories -> Ux.future(this.map(identifier, categories, sourceMap)));
         }

@@ -12,6 +12,7 @@ import io.zerows.extension.runtime.workflow.domain.tables.daos.WTodoDao;
 import io.zerows.extension.runtime.workflow.domain.tables.pojos.WTicket;
 import io.zerows.extension.runtime.workflow.domain.tables.pojos.WTodo;
 import io.zerows.extension.runtime.workflow.uca.toolkit.ULinkage;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -31,7 +32,7 @@ public class TaskService implements TaskStub {
     @Override
     public Future<JsonObject> fetchQueue(final JsonObject condition) {
         final JsonObject combine = Ut.irAndQH(condition, KName.Flow.FLOW_END, Boolean.FALSE);
-        return Ux.Jooq.join()
+        return DB.join()
 
             // Join WTodo Here
             .add(WTodoDao.class, KName.Flow.TRACE_ID)
@@ -49,7 +50,7 @@ public class TaskService implements TaskStub {
     @Override
     public Future<JsonObject> fetchHistory(final JsonObject condition) {
         final JsonObject combine = Ut.irAndQH(condition, KName.Flow.FLOW_END, Boolean.TRUE);
-        return Ux.Jooq.on(WTicketDao.class).searchAsync(combine);
+        return DB.on(WTicketDao.class).searchAsync(combine);
     }
 
     // ====================== Single Record
@@ -93,12 +94,12 @@ public class TaskService implements TaskStub {
     }
 
     private Future<WRecord> readTodo(final String key, final WRecord response) {
-        return Ux.Jooq.on(WTodoDao.class).<WTodo>fetchByIdAsync(key)
+        return DB.on(WTodoDao.class).<WTodo>fetchByIdAsync(key)
             .compose(Fx.ifNil(response::bind, todo -> Ux.future(response.task(todo))));
     }
 
     private Future<WRecord> readTicket(final String key, final WRecord response) {
-        return Ux.Jooq.on(WTicketDao.class).<WTicket>fetchByIdAsync(key)
+        return DB.on(WTicketDao.class).<WTicket>fetchByIdAsync(key)
             .compose(Fx.ifNil(response::bind, ticket -> Ux.future(response.ticket(ticket))));
     }
 

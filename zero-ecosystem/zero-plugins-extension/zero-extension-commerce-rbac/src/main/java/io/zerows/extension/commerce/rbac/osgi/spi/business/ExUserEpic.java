@@ -5,6 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.platform.metadata.KRef;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.SUserDao;
@@ -89,7 +90,7 @@ public class ExUserEpic implements ExUser {
     public Future<JsonArray> searchUser(final String keyword) {
         final JsonObject condition = new JsonObject();
         condition.put(KName.REAL_NAME + ",c", keyword);
-        return Ux.Jooq.on(SUserDao.class).<SUser>fetchAsync(condition).compose(users -> {
+        return DB.on(SUserDao.class).<SUser>fetchAsync(condition).compose(users -> {
             final List<String> keys = users.stream().map(SUser::getKey).collect(Collectors.toList());
             return Ux.future(Ut.toJArray(keys));
         });
@@ -123,7 +124,7 @@ public class ExUserEpic implements ExUser {
     private Future<List<SUser>> fetchList(final Set<String> keys) {
         final JsonObject condition = new JsonObject();
         condition.put(KName.KEY + ",i", Ut.toJArray(keys));
-        return Ux.Jooq.on(SUserDao.class).fetchAsync(condition);
+        return DB.on(SUserDao.class).fetchAsync(condition);
     }
 
 }

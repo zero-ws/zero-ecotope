@@ -7,6 +7,7 @@ import io.zerows.extension.runtime.ambient.domain.tables.daos.RTagObjectDao;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XTagDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.RTagObject;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XTag;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -25,14 +26,14 @@ public class TagService implements TagStub {
         final JsonObject qr = Ux.whereAnd();
         qr.put(KName.NAME, name);
         qr.put(KName.SIGMA, Ut.valueString(body, KName.SIGMA));
-        return Ux.Jooq.on(XTagDao.class).<XTag>fetchOneAsync(qr)
+        return DB.on(XTagDao.class).<XTag>fetchOneAsync(qr)
             .compose(entity -> {
                 if (Objects.isNull(entity)) {
                     final XTag inserted = Ux.fromJson(body, XTag.class);
-                    return Ux.Jooq.on(XTagDao.class).insertAsync(inserted);
+                    return DB.on(XTagDao.class).insertAsync(inserted);
                 } else {
                     final XTag updated = Ux.updateT(entity, body);
-                    return Ux.Jooq.on(XTagDao.class).updateAsync(updated);
+                    return DB.on(XTagDao.class).updateAsync(updated);
                 }
             })
             .compose(synced -> {
@@ -51,13 +52,13 @@ public class TagService implements TagStub {
         qr.put("entityType", entityType);
         qr.put("entityId", entityId);
         qr.put("tagId", tagId);
-        return Ux.Jooq.on(RTagObjectDao.class).<RTagObject>fetchOneAsync(qr).compose(entity -> {
+        return DB.on(RTagObjectDao.class).<RTagObject>fetchOneAsync(qr).compose(entity -> {
             if (Objects.isNull(entity)) {
                 final RTagObject rTagObject = new RTagObject();
                 rTagObject.setEntityType(entityType);
                 rTagObject.setEntityId(entityId);
                 rTagObject.setTagId(tagId);
-                return Ux.Jooq.on(RTagObjectDao.class).insertAsync(rTagObject);
+                return DB.on(RTagObjectDao.class).insertAsync(rTagObject);
             } else {
                 return Ux.future();
             }
@@ -70,8 +71,8 @@ public class TagService implements TagStub {
         // 删除和当前 Tag 相关的所有 TagObject
         final JsonObject qr = Ux.whereAnd();
         qr.put("tagId", key);
-        return Ux.Jooq.on(RTagObjectDao.class).deleteByAsync(qr)
-            .compose(nil -> Ux.Jooq.on(XTagDao.class).deleteByIdAsync(key));
+        return DB.on(RTagObjectDao.class).deleteByAsync(qr)
+            .compose(nil -> DB.on(XTagDao.class).deleteByIdAsync(key));
     }
 
     @Override
@@ -79,6 +80,6 @@ public class TagService implements TagStub {
         final JsonObject qr = Ux.whereAnd();
         qr.put("entityType", modelId);
         qr.put("entityId", modelKey);
-        return Ux.Jooq.on(RTagObjectDao.class).fetchAsync(qr);
+        return DB.on(RTagObjectDao.class).fetchAsync(qr);
     }
 }

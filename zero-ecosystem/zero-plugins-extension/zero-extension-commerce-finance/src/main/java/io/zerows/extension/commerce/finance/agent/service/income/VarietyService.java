@@ -13,6 +13,7 @@ import io.zerows.extension.commerce.finance.uca.account.Book;
 import io.zerows.extension.commerce.finance.uca.enter.Maker;
 import io.zerows.extension.commerce.finance.uca.replica.IkWay;
 import io.zerows.platform.constant.VString;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -29,7 +30,7 @@ public class VarietyService implements VarietyStub {
         // UCA
         IkWay.ofBIS().transfer(item, items);
 
-        final DBJooq jooq = Ux.Jooq.on(FBillItemDao.class);
+        final DBJooq jooq = DB.on(FBillItemDao.class);
         return jooq.updateAsync(item)
             .compose(nil -> jooq.insertAsync(items))
             .compose(nil -> Ux.futureJ(item));
@@ -40,10 +41,10 @@ public class VarietyService implements VarietyStub {
         // UCA
         IkWay.ofBIR().transfer(item, to);
 
-        final DBJooq jooq = Ux.Jooq.on(FBillItemDao.class);
+        final DBJooq jooq = DB.on(FBillItemDao.class);
         return jooq.updateAsync(item)
             .compose(nil -> jooq.insertAsync(to))
-            .compose(nil -> Ux.Jooq.on(FBillDao.class).<FBill>fetchByIdAsync(to.getBillId()))
+            .compose(nil -> DB.on(FBillDao.class).<FBill>fetchByIdAsync(to.getBillId()))
             .compose(bill -> Book.of().income(bill, to))
             .compose(nil -> Ux.futureJ(item));
     }
@@ -62,7 +63,7 @@ public class VarietyService implements VarietyStub {
             IkWay.ofBKT().transfer(book, preBill);
 
             preBill.setComment(comment);
-            return Ux.Jooq.on(FBillDao.class).insertAsync(preBill).compose(bill -> {
+            return DB.on(FBillDao.class).insertAsync(preBill).compose(bill -> {
                     // FBillItem New Adding
                     final List<FBillItem> newItem = fromTo.get(Boolean.TRUE);
                     newItem.forEach(each -> {
@@ -70,7 +71,7 @@ public class VarietyService implements VarietyStub {
 
                         each.setComment(VString.ARROW_RIGHT + comment);
                     });
-                    return Ux.Jooq.on(FBillItemDao.class).insertAsync(newItem)
+                    return DB.on(FBillItemDao.class).insertAsync(newItem)
                         .compose(items -> Book.of().income(bill, items));
                 }).compose(added -> {
                     // FBillItem Previous Updating
@@ -84,7 +85,7 @@ public class VarietyService implements VarietyStub {
                             each.setComment(previous + VString.ARROW_RIGHT + comment);
                         }
                     });
-                    return Ux.Jooq.on(FBillItemDao.class).updateAsync(oldItem);
+                    return DB.on(FBillItemDao.class).updateAsync(oldItem);
                 }).compose(Book.of()::income)
                 .compose(nil -> Ux.futureJ(preBill));
         });

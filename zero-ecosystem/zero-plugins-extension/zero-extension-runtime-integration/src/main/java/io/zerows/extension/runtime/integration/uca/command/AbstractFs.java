@@ -7,7 +7,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.extension.runtime.integration.domain.tables.daos.IDirectoryDao;
 import io.zerows.extension.runtime.integration.domain.tables.pojos.IDirectory;
 import io.zerows.extension.runtime.integration.util.Is;
-import io.zerows.program.Ux;
+import io.zerows.epoch.database.DB;
 import io.zerows.support.Ut;
 
 import java.time.Instant;
@@ -82,7 +82,7 @@ public abstract class AbstractFs implements Fs {
                     inserted.add(normalized);
                 });
             });
-            return Ux.Jooq.on(IDirectoryDao.class).insertJAsync(inserted);
+            return DB.on(IDirectoryDao.class).insertJAsync(inserted);
         });
     }
 

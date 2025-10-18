@@ -8,6 +8,7 @@ import io.zerows.extension.runtime.skeleton.eon.em.OwnerType;
 import io.zerows.extension.runtime.skeleton.osgi.spi.business.ExUser;
 import io.zerows.extension.runtime.tpl.domain.tables.daos.MyNotifyDao;
 import io.zerows.extension.runtime.tpl.domain.tables.pojos.MyNotify;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 
 import java.util.Objects;
@@ -33,7 +34,7 @@ public class NotifyService implements NotifyStub {
                 final JsonObject condition = Ux.whereAnd();
                 condition.put(KName.OWNER_TYPE, OwnerType.ROLE.name());
                 condition.put(KName.OWNER_ID + ",i", roleIds);
-                return Ux.Jooq.on(MyNotifyDao.class).<MyNotify>fetchAsync(condition);
+                return DB.on(MyNotifyDao.class).<MyNotify>fetchAsync(condition);
             })
             .compose(roles -> {
                 if (Objects.isNull(roles) || roles.isEmpty()) {
@@ -49,7 +50,7 @@ public class NotifyService implements NotifyStub {
         final JsonObject condition = Ux.whereAnd();
         condition.put(KName.OWNER_TYPE, ownerType.name());
         condition.put(KName.OWNER_ID, owner);
-        return Ux.Jooq.on(MyNotifyDao.class).fetchOneAsync(condition);
+        return DB.on(MyNotifyDao.class).fetchOneAsync(condition);
     }
 
     @Override
@@ -60,10 +61,10 @@ public class NotifyService implements NotifyStub {
                 data.put(KName.OWNER_TYPE, ownerType.name());
                 data.put(KName.OWNER_ID, owner);
                 processed = Ux.fromJson(data, MyNotify.class);
-                return Ux.Jooq.on(MyNotifyDao.class).insertAsync(processed);
+                return DB.on(MyNotifyDao.class).insertAsync(processed);
             } else {
                 processed = Ux.updateT(notify, data);
-                return Ux.Jooq.on(MyNotifyDao.class).updateAsync(processed);
+                return DB.on(MyNotifyDao.class).updateAsync(processed);
             }
         });
     }

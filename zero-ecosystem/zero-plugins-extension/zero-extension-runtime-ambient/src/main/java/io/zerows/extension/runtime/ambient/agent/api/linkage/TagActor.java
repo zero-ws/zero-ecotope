@@ -13,6 +13,7 @@ import io.zerows.extension.runtime.ambient.domain.tables.daos.RTagObjectDao;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XTagDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.RTagObject;
 import io.zerows.extension.runtime.ambient.eon.Addr;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import jakarta.inject.Inject;
@@ -48,7 +49,7 @@ public class TagActor {
                 final Set<String> keys = Ut.valueSetString(tagObjects, RTagObject::getTagId);
                 return Ux.future(Ut.toJArray(keys));
             })
-            .compose(keySet -> Ux.Jooq.on(XTagDao.class).fetchInAsync(KName.KEY, keySet))
+            .compose(keySet -> DB.on(XTagDao.class).fetchInAsync(KName.KEY, keySet))
             .compose(Ux::futureA);
     }
 
@@ -56,7 +57,7 @@ public class TagActor {
     public Future<JsonArray> linkAsync(final String modelId,
                                        final String modelKey,
                                        final JsonArray body) {
-        final DBJooq jq = Ux.Jooq.on(RTagObjectDao.class);
+        final DBJooq jq = DB.on(RTagObjectDao.class);
         // 先删除
         final JsonObject qr = Ux.whereAnd();
         qr.put("entityType", modelId);
@@ -86,6 +87,6 @@ public class TagActor {
         qr.put("entityType", modelId);
         qr.put(KName.ENTITY_ID, modelKey);
         qr.put("tagId", tagId);
-        return Ux.Jooq.on(RTagObjectDao.class).deleteByAsync(qr);
+        return DB.on(RTagObjectDao.class).deleteByAsync(qr);
     }
 }

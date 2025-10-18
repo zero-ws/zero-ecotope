@@ -9,6 +9,7 @@ import io.zerows.extension.runtime.ambient.domain.tables.daos.XAppDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XApp;
 import io.zerows.extension.runtime.ambient.eon.AtMsg;
 import io.zerows.extension.runtime.skeleton.osgi.spi.extension.Init;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -28,7 +29,7 @@ public class AppInit implements Init {
             LOG.App.info(LOGGER, AtMsg.INIT_APP, appJson.encode());
             /* Deserialization */
             final XApp app = this.init(appJson);
-            return Ux.Jooq.on(XAppDao.class)
+            return DB.on(XAppDao.class)
                 /*
                  * Init first step: UPSERT ( Insert / Update )
                  */

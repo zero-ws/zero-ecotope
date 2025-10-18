@@ -4,7 +4,7 @@ import io.netty.handler.logging.LogLevel;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.program.Ux;
+import io.zerows.epoch.database.DB;
 import io.zerows.extension.mbse.basement.atom.Model;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XLogDao;
@@ -43,19 +43,19 @@ public class KoTool {
     }
 
     static XLog log(final XLog log) {
-        return Ux.Jooq.on(XLogDao.class).insert(log);
+        return DB.on(XLogDao.class).insert(log);
     }
 
     static List<XLog> log(final List<XLog> logs) {
-        return Ux.Jooq.on(XLogDao.class).insert(logs);
+        return DB.on(XLogDao.class).insert(logs);
     }
 
     static Future<XLog> logAsync(final XLog log) {
-        return Ux.Jooq.on(XLogDao.class).insertAsync(log);
+        return DB.on(XLogDao.class).insertAsync(log);
     }
 
     static Future<List<XLog>> logAsync(final List<XLog> logs) {
-        return Ux.Jooq.on(XLogDao.class).insertAsync(logs);
+        return DB.on(XLogDao.class).insertAsync(logs);
     }
 
     private static XLog create(final Class<?> clazz, final DataAtom atom) {

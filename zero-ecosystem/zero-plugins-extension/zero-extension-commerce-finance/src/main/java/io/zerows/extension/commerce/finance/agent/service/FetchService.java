@@ -11,6 +11,7 @@ import io.zerows.extension.commerce.finance.domain.tables.pojos.FBill;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FBillItem;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FSettlement;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FSettlementItem;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -29,7 +30,7 @@ public class FetchService implements FetchStub {
     public Future<List<FBill>> fetchByOrder(final String orderId) {
         final JsonObject condBill = Ux.whereAnd();
         condBill.put(KName.Finance.ORDER_ID, orderId);
-        return Ux.Jooq.on(FBillDao.class).fetchAsync(condBill);
+        return DB.on(FBillDao.class).fetchAsync(condBill);
     }
 
     @Override
@@ -44,7 +45,7 @@ public class FetchService implements FetchStub {
                 .filter(Objects::nonNull)
                 .collect(Collectors.toSet()))
         );
-        return Ux.Jooq.on(FBillItemDao.class).fetchAsync(condition);
+        return DB.on(FBillItemDao.class).fetchAsync(condition);
     }
 
     @Override
@@ -60,7 +61,7 @@ public class FetchService implements FetchStub {
             .filter(Ut::isNotNil)
             .collect(Collectors.toSet())
         ));
-        return Ux.Jooq.on(FSettlementDao.class).fetchAsync(condition);
+        return DB.on(FSettlementDao.class).fetchAsync(condition);
     }
 
     @Override
@@ -68,6 +69,6 @@ public class FetchService implements FetchStub {
         final Set<String> settlementIds = Ut.valueSetString(settlements, FSettlement::getKey);
         final JsonObject condition = Ux.whereAnd();
         condition.put(KName.Finance.SETTLEMENT_ID + ",i", Ut.toJArray(settlementIds));
-        return Ux.Jooq.on(FSettlementItemDao.class).fetchAsync(condition);
+        return DB.on(FSettlementItemDao.class).fetchAsync(condition);
     }
 }

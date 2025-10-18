@@ -13,6 +13,7 @@ import io.zerows.extension.runtime.workflow.domain.tables.pojos.WTicket;
 import io.zerows.extension.runtime.workflow.domain.tables.pojos.WTodo;
 import io.zerows.extension.runtime.workflow.uca.ticket.Sync;
 import io.zerows.platform.metadata.KRef;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 
@@ -35,7 +36,7 @@ public class UTicket {
         final WRecord generatedNew = UTL.recordU(wTransition);
 
         // AOP/Before
-        return UTL.beforeGenerate(record, generatedNew).compose(generated -> Ux.Jooq.on(WTicketDao.class).<WTicket>fetchByIdAsync(ticket.getKey())
+        return UTL.beforeGenerate(record, generatedNew).compose(generated -> DB.on(WTicketDao.class).<WTicket>fetchByIdAsync(ticket.getKey())
 
             // Sync Ticket
             .compose(processed -> Sync.ticket(this.metadata).treatAsync(requestJ, generated, processed))
@@ -58,7 +59,7 @@ public class UTicket {
                 todoJ.mergeIn(requestJ, true);
                 return wTransition.end(todoJ, generated.ticket(), todo);
             })
-            .compose(Ux.Jooq.on(WTodoDao.class)::insertAsync)
+            .compose(DB.on(WTodoDao.class)::insertAsync)
 
             // AOP/After
             .compose(tasks -> UTL.afterUpdate(tasks, generated))
@@ -72,7 +73,7 @@ public class UTicket {
             final WTicket inserted = record.ticket();
             final JsonObject gearInput = params.copy();
             return wTransition.end(gearInput, inserted)
-                .compose(Ux.Jooq.on(WTodoDao.class)::insertAsync)
+                .compose(DB.on(WTodoDao.class)::insertAsync)
 
                 // AOP/After
                 .compose(tasks -> UTL.afterUpdate(tasks, record));
@@ -102,7 +103,7 @@ public class UTicket {
          */
         final JsonObject ticketJson = params.copy();
         final String tKey = ticketJson.getString(KName.Flow.TRACE_ID);
-        final DBJooq tJq = Ux.Jooq.on(WTicketDao.class);
+        final DBJooq tJq = DB.on(WTicketDao.class);
         return tJq.<WTicket>fetchByIdAsync(tKey).compose(ticket -> {
             if (Objects.isNull(ticket)) {
                 return this.insertAsync(params, wTransition);
@@ -135,7 +136,7 @@ public class UTicket {
          * 2. Extension
          * 3. WTodo
          */
-        return Ux.Jooq.on(WTicketDao.class).<WTicket>fetchByIdAsync(tKey)
+        return DB.on(WTicketDao.class).<WTicket>fetchByIdAsync(tKey)
 
             // Sync Ticket
             .compose(processed -> Sync.ticket(this.metadata).treatAsync(params, record, processed))
@@ -185,7 +186,7 @@ public class UTicket {
                 ticket.setFlowEnd(Boolean.FALSE);
                 final ProcessInstance instance = wTransition.instance();
                 ticket.setFlowInstanceId(instance.getId());
-                return Ux.Jooq.on(WTicketDao.class).insertAsync(ticket);
+                return DB.on(WTicketDao.class).insertAsync(ticket);
             })
 
             // AOP/After

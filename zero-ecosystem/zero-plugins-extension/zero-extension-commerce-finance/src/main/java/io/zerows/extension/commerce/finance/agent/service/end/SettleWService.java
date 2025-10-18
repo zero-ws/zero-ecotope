@@ -12,6 +12,7 @@ import io.zerows.extension.commerce.finance.eon.FmConstant;
 import io.zerows.extension.commerce.finance.eon.em.EmPay;
 import io.zerows.extension.commerce.finance.uca.trans.Trade;
 import io.zerows.platform.metadata.KRef;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -113,7 +114,7 @@ public class SettleWService implements SettleWStub {
 
 
         /* 读取系统中对应的所有结算明细执行计算 */
-        return Ux.Jooq.on(FSettlementItemDao.class).<FSettlementItem>fetchInAsync(FmConstant.ID.SETTLEMENT_ID, settlementIds)
+        return DB.on(FSettlementItemDao.class).<FSettlementItem>fetchInAsync(FmConstant.ID.SETTLEMENT_ID, settlementIds)
             .compose(items -> {
                 /* 输入的结算明细ID合集 */
                 final JsonArray itemsIn = Ut.valueJArray(body, KName.ITEMS);

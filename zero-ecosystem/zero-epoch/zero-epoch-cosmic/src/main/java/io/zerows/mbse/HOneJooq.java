@@ -5,6 +5,7 @@ import io.zerows.epoch.database.cp.DS;
 import io.zerows.epoch.database.jooq.operation.DBJooq;
 import io.zerows.mbse.metadata.KModule;
 import io.zerows.platform.enums.EmDS;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -52,28 +53,28 @@ class HOneJooq implements HOne<DBJooq> {
         final EmDS.DB mode = module.getMode();
         if (EmDS.DB.DYNAMIC == mode) {
             dao = Ux.channelS(DS.class,
-                /* ---->「默认」`provider` 配置的标准数据源（Jooq专用）*/ () -> Ux.Jooq.on(daoCls),
-                /* 动态数据源定义，X_SOURCE，开启动态建模专用 */ ds -> Ux.Jooq.on(daoCls, ds.switchDs(headers))
+                /* ---->「默认」`provider` 配置的标准数据源（Jooq专用）*/ () -> DB.on(daoCls),
+                /* 动态数据源定义，X_SOURCE，开启动态建模专用 */ ds -> DB.on(daoCls, ds.switchDs(headers))
             );
         } else if (EmDS.DB.HISTORY == mode) {
             /* `orbit` 配置的历史数据源专用处理 */
-            dao = Ux.Jooq.history(daoCls);
+            dao = DB.history(daoCls);
         } else if (EmDS.DB.EXTENSION == mode) {
             /* 扩展数据源专用 */
             final String modeKey = module.getModeKey();
             if (Ut.isNil(modeKey)) {
                 /* ---->「默认」`provider` 配置的标准数据源（Jooq专用）*/
-                dao = Ux.Jooq.on(daoCls);
+                dao = DB.on(daoCls);
             } else {
                 /*
                  * 扩展数据源直接在配置文件中开新配置来完成相关定制，此处新配置主要为 vertx-jooq.yml
                  * 中的扩展部分，使用此处的 key 可直接实现数据源的切换，同时也可以实现数据源的扩展。
                  * */
-                dao = Ux.Jooq.on(daoCls, modeKey);
+                dao = DB.on(daoCls, modeKey);
             }
         } else {
             /* ---->「默认」`provider` 配置的标准数据源（Jooq专用）*/
-            dao = Ux.Jooq.on(daoCls);
+            dao = DB.on(daoCls);
         }
 
         /* 「遗留系统」根据当前模块中的配置查看是否包含了 pojo 配置，若包含pojo配置需要执行绑定 */

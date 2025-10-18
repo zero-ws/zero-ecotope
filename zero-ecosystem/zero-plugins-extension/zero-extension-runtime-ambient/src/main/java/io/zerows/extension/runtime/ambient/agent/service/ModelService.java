@@ -6,6 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XModuleDao;
 import io.zerows.extension.runtime.skeleton.osgi.spi.environment.Modeling;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -29,7 +30,7 @@ public class ModelService implements ModelStub {
             .put("entry", entry)
             .put("id", appId);
         /* Cache Module for future usage */
-        return this.fetchModule(filters, () -> Ux.Jooq.on(XModuleDao.class)
+        return this.fetchModule(filters, () -> DB.on(XModuleDao.class)
             .fetchOneAsync(filters)
             .compose(Ux::futureJ)
             /* KMetadata Field Usage */

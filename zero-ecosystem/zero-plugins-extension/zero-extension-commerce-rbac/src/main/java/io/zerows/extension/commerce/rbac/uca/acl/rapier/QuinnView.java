@@ -9,6 +9,7 @@ import io.zerows.extension.commerce.rbac.atom.ScOwner;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.SViewDao;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SView;
 import io.zerows.extension.commerce.rbac.eon.AuthMsg;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -30,9 +31,9 @@ public class QuinnView implements Quinn {
             final SView myView = this.initialize(queried, resourceId, owner, viewData);
             this.updateData(myView, viewData);
             if (Objects.isNull(queried)) {
-                return Ux.Jooq.on(SViewDao.class).insertAsync(myView);
+                return DB.on(SViewDao.class).insertAsync(myView);
             } else {
-                return Ux.Jooq.on(SViewDao.class).updateAsync(myView);
+                return DB.on(SViewDao.class).updateAsync(myView);
             }
         }).compose(view -> Ux.future((T) view));
     }
@@ -104,6 +105,6 @@ public class QuinnView implements Quinn {
         if (DevEnv.devAuthorized()) {
             LOG.Resource.info(this.getClass(), AuthMsg.VIEW_PROCESS, "fetchAsync", condition.encode());
         }
-        return Ux.Jooq.on(SViewDao.class).fetchOneAsync(condition);
+        return DB.on(SViewDao.class).fetchOneAsync(condition);
     }
 }

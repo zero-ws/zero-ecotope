@@ -9,6 +9,7 @@ import io.zerows.epoch.metadata.UData;
 import io.zerows.extension.mbse.ui.domain.tables.daos.UiVisitorDao;
 import io.zerows.extension.mbse.ui.domain.tables.pojos.UiVisitor;
 import io.zerows.extension.mbse.ui.osgi.spi.ui.UiHunter;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.spi.modeler.Identifier;
 import io.zerows.support.Ut;
@@ -61,7 +62,7 @@ public class ControlHunter implements UiHunter {
             criteria.put(KName.Ui.PAGE, visitor.getPage());
 
             LOG.Ui.info(LOGGER, "Dynamic Control,  condition = `{0}`", criteria.encode());
-            return Ux.Jooq.on(UiVisitorDao.class).<UiVisitor>fetchOneAsync(criteria);
+            return DB.on(UiVisitorDao.class).<UiVisitor>fetchOneAsync(criteria);
         }).compose(searched -> {
             if (Objects.isNull(searched) || Ut.isNil(searched.getControlId())) {
                 /*

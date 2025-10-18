@@ -13,6 +13,7 @@ import io.zerows.extension.runtime.ambient.domain.tables.pojos.XAttachment;
 import io.zerows.extension.runtime.skeleton.exception._81002Exception400FilenameInvalid;
 import io.zerows.extension.runtime.skeleton.osgi.spi.business.ExIo;
 import io.zerows.extension.runtime.skeleton.osgi.spi.feature.Attachment;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import jakarta.inject.Inject;
@@ -55,7 +56,7 @@ public class DocWriter implements DocWStub {
             return FnVertx.failOut(_81002Exception400FilenameInvalid.class);
         }
         final String key = documentJ.getString(KName.KEY);
-        final DBJooq jq = Ux.Jooq.on(XAttachmentDao.class);
+        final DBJooq jq = DB.on(XAttachmentDao.class);
         return jq.<XAttachment>fetchByIdAsync(key).compose(attachment -> {
             final String from = attachment.getStorePath();
             final JsonObject documentData = documentJ.copy();
@@ -136,7 +137,7 @@ public class DocWriter implements DocWStub {
                 children.put("$" + json.getString(KName.CODE) + "$", child);
             }
         });
-        return Ux.Jooq.on(XAttachmentDao.class).deleteByAsync(children)
+        return DB.on(XAttachmentDao.class).deleteByAsync(children)
             .compose(nil -> Ux.future(directory));
     }
 

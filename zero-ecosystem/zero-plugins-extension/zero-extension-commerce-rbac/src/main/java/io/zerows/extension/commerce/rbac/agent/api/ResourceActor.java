@@ -8,7 +8,7 @@ import io.zerows.extension.commerce.rbac.agent.service.business.ResourceStub;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.SActionDao;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.SResourceDao;
 import io.zerows.extension.commerce.rbac.eon.Addr;
-import io.zerows.program.Ux;
+import io.zerows.epoch.database.DB;
 import jakarta.inject.Inject;
 
 import static io.zerows.extension.commerce.rbac.util.Sc.LOG;
@@ -33,7 +33,7 @@ public class ResourceActor {
          */
         LOG.Web.info(this.getClass(),
             "The criteria of input parameters: {0}", query.encode());
-        return Ux.Jooq.join()
+        return DB.join()
             /*
              * Join in jooq here:
              *

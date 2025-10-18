@@ -9,6 +9,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.database.jooq.operation.DBJooq;
 import io.zerows.platform.metadata.KDictConfig;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -61,7 +62,7 @@ public class DpmDao implements Dpm {
             return null;
         } else {
             final JsonObject config = source.getPluginConfig();
-            final DBJooq jooq = Ux.Jooq.on(daoCls);
+            final DBJooq jooq = DB.on(daoCls);
             if (config.containsKey("pojo")) {
                 jooq.on(config.getString("pojo"));
             }

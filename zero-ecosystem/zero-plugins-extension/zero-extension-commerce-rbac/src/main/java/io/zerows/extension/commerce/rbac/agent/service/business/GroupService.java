@@ -13,6 +13,7 @@ import io.zerows.extension.commerce.rbac.domain.tables.pojos.SGroup;
 import io.zerows.extension.commerce.rbac.eon.AuthKey;
 import io.zerows.extension.commerce.rbac.eon.AuthMsg;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ public class GroupService implements GroupStub {
     @Override
     public JsonArray fetchRoleIds(final String groupKey) {
         LOG.Auth.info(LOGGER, AuthMsg.RELATION_GROUP_ROLE, groupKey, "Sync");
-        final List<RGroupRole> relations = Ux.Jooq.on(RGroupRoleDao.class)
+        final List<RGroupRole> relations = DB.on(RGroupRoleDao.class)
             .fetch(AuthKey.F_GROUP_ID, groupKey);
         return UArray.create(Ux.toJson(relations))
             .remove(AuthKey.F_GROUP_ID).to();
@@ -41,7 +42,7 @@ public class GroupService implements GroupStub {
 
     @Override
     public SGroup fetchParent(final String groupKey) {
-        final DBJooq dao = Ux.Jooq.on(SGroupDao.class);
+        final DBJooq dao = DB.on(SGroupDao.class);
         if (null == dao) {
             return null;
         }
@@ -52,7 +53,7 @@ public class GroupService implements GroupStub {
 
     @Override
     public List<SGroup> fetchChildren(final String groupKey) {
-        final DBJooq dao = Ux.Jooq.on(SGroupDao.class);
+        final DBJooq dao = DB.on(SGroupDao.class);
         if (null == dao) {
             return new ArrayList<>();
         }
@@ -61,7 +62,7 @@ public class GroupService implements GroupStub {
 
     @Override
     public Future<JsonArray> fetchGroups(final String sigma) {
-        return Ux.Jooq.on(SGroupDao.class)
+        return DB.on(SGroupDao.class)
             /* Fetch by sigma */
             .<SGroup>fetchAsync(KName.SIGMA, sigma)
             /* Get Result */

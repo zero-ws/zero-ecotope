@@ -4,6 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
 public class OptionService implements OptionStub {
     @Override
     public Future<JsonObject> fetchQuery(final String id) {
-        return Ux.Jooq.on(VQueryDao.class)
+        return DB.on(VQueryDao.class)
             .<VQuery>fetchByIdAsync(id)
             .compose(Ux::futureJ)
             .compose(Fx.ofJObject(
@@ -30,7 +31,7 @@ public class OptionService implements OptionStub {
 
     @Override
     public Future<JsonObject> fetchSearch(final String id) {
-        return Ux.Jooq.on(VSearchDao.class)
+        return DB.on(VSearchDao.class)
             .<VSearch>fetchByIdAsync(id)
             .compose(Ux::futureJ)
             .compose(Fx.ofJObject(
@@ -42,7 +43,7 @@ public class OptionService implements OptionStub {
 
     @Override
     public Future<JsonObject> fetchFragment(final String id) {
-        return Ux.Jooq.on(VFragmentDao.class)
+        return DB.on(VFragmentDao.class)
             .<VFragment>fetchByIdAsync(id)
             .compose(Ux::futureJ)
             .compose(Fx.ofJObject(
@@ -55,7 +56,7 @@ public class OptionService implements OptionStub {
 
     @Override
     public Future<JsonObject> fetchTable(final String id) {
-        return Ux.Jooq.on(VTableDao.class)
+        return DB.on(VTableDao.class)
             .<VTable>fetchByIdAsync(id)
             .compose(Ux::futureJ)
             .compose(Fx.ofJObject(
@@ -80,7 +81,7 @@ public class OptionService implements OptionStub {
             .collect(Collectors.toList());
         // 2. delete old ones and insert new ones
         return this.deleteByControlId(controlId)
-            .compose(result -> Ux.Jooq.on(UiOpDao.class)
+            .compose(result -> DB.on(UiOpDao.class)
                 .insertAsync(ops)
                 .compose(Ux::futureA)
                 // 3. mountOut
@@ -93,7 +94,7 @@ public class OptionService implements OptionStub {
 
     @Override
     public Future<Boolean> deleteByControlId(final String controlId) {
-        return Ux.Jooq.on(UiOpDao.class)
+        return DB.on(UiOpDao.class)
             .deleteByAsync(new JsonObject().put(KName.Ui.CONTROL_ID, controlId));
     }
 }

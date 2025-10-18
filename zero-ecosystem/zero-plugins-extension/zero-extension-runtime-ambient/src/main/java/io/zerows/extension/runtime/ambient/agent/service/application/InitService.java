@@ -10,6 +10,7 @@ import io.zerows.extension.runtime.ambient.domain.tables.daos.XAppDao;
 import io.zerows.extension.runtime.ambient.util.At;
 import io.zerows.extension.runtime.skeleton.osgi.spi.extension.Init;
 import io.zerows.extension.runtime.skeleton.osgi.spi.extension.Prerequisite;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -121,7 +122,7 @@ public class InitService implements InitStub {
     @Override
     public Future<JsonObject> initModeling(final String appName, final String outPath) {
         /* Fetch App */
-        return Ux.Jooq.on(XAppDao.class)
+        return DB.on(XAppDao.class)
             /* X_APP Fetching */
             .fetchOneAsync(KName.NAME, appName)
             .compose(Ux::futureJ)

@@ -68,12 +68,6 @@ public class DBSActor extends AbstractHActor {
         return ofDBS(database).getDs();
     }
 
-    public static DSLContext ofDSL(final Database database) {
-        if (database instanceof final JooqDatabase jooqDatabase) {
-            return jooqDatabase.getContext();
-        }
-        throw new _501NotSupportException("[ ZERO ] 此方法只能在 JooqDatabase 下使用！");
-    }
 
     // -------------- 下边全是返回默认的 ---------------
     public static DBS ofDBS() {
@@ -86,6 +80,14 @@ public class DBSActor extends AbstractHActor {
 
     public static DataSource ofDataSource() {
         return ofDBS().getDs();
+    }
+
+    // -------------- Legacy模式下返回 Jooq 的操作 ---------------
+    public static DSLContext ofDSL(final Database database) {
+        if (database instanceof final JooqDatabase jooqDatabase) {
+            return jooqDatabase.getContext();
+        }
+        throw new _501NotSupportException("[ ZERO ] 此方法只能在 JooqDatabase 下使用！");
     }
 
     public static DSLContext ofDSL() {

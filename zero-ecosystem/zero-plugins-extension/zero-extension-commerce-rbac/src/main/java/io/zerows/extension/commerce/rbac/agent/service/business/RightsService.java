@@ -14,6 +14,7 @@ import io.zerows.extension.commerce.rbac.domain.tables.pojos.SPermission;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.enums.typed.ChangeFlag;
 import io.zerows.platform.metadata.KRef;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -40,7 +41,7 @@ public class RightsService implements RightsStub {
             .collect(Collectors.toList());
         // 2. delete old ones and insert new ones
         return this.removeRoles(roleId)
-            .compose(result -> Ux.Jooq.on(RRolePermDao.class)
+            .compose(result -> DB.on(RRolePermDao.class)
                 .insertAsync(rolePerms)
                 .compose(Ux::futureA)
             );
@@ -48,7 +49,7 @@ public class RightsService implements RightsStub {
 
     @Override
     public Future<Boolean> removeRoles(final String roleId) {
-        return Ux.Jooq.on(RRolePermDao.class)
+        return DB.on(RRolePermDao.class)
             .deleteByAsync(new JsonObject().put(KName.Rbac.ROLE_ID, roleId));
     }
 
@@ -66,7 +67,7 @@ public class RightsService implements RightsStub {
          * return Ux.Jooq.join(SPermissionDao.class).countByAsync(condition, "group", "identifier");
          * New version: S_PERM_SET processing
          */
-        return Ux.Jooq.on(SPermSetDao.class).fetchJAsync(condition);
+        return DB.on(SPermSetDao.class).fetchJAsync(condition);
     }
 
     /*
@@ -91,7 +92,7 @@ public class RightsService implements RightsStub {
              * ADD / UPDATE ( Processing )
              */
             final List<Future<List<SPermission>>> combined = new ArrayList<>();
-            final DBJooq jooq = Ux.Jooq.on(SPermissionDao.class);
+            final DBJooq jooq = DB.on(SPermissionDao.class);
 
             /*
 
@@ -113,7 +114,7 @@ public class RightsService implements RightsStub {
             final JsonObject criteria = new JsonObject();
             criteria.put(KName.SIGMA, sigma);
             criteria.put(KName.NAME, permSet.getName());
-            return Ux.Jooq.on(SPermSetDao.class).<SPermSet>fetchAndAsync(criteria);
+            return DB.on(SPermSetDao.class).<SPermSet>fetchAndAsync(criteria);
         }).compose(originalSet -> {
             /*
              * 3) Processing for ( ADD, UPDATE ) records of Perm Set
@@ -150,7 +151,7 @@ public class RightsService implements RightsStub {
             permissions.stream().map(SPermission::getCode).collect(Collectors.toSet())
         ));
         criteria.put(VString.EMPTY, Boolean.TRUE);
-        return Ux.Jooq.on(SPermSetDao.class).deleteByAsync(criteria).compose(nil -> Ux.future(new ArrayList<>()));
+        return DB.on(SPermSetDao.class).deleteByAsync(criteria).compose(nil -> Ux.future(new ArrayList<>()));
     }
 
     private Future<List<SPermSet>> updatePerm(final SPermSet permSet, final List<SPermSet> permSetList,
@@ -159,7 +160,7 @@ public class RightsService implements RightsStub {
             each.setUpdatedBy(permSet.getUpdatedBy());
             each.setUpdatedAt(permSet.getUpdatedAt());
         });
-        return Ux.Jooq.on(SPermSetDao.class).updateAsync(permSetList.stream()
+        return DB.on(SPermSetDao.class).updateAsync(permSetList.stream()
             .filter(item -> codes.contains(item.getCode()))
             .collect(Collectors.toList())
         );
@@ -183,7 +184,7 @@ public class RightsService implements RightsStub {
             inserted.setCreatedBy(permSet.getUpdatedBy());
             list.add(inserted);
         });
-        return Ux.Jooq.on(SPermSetDao.class).insertAsync(list);
+        return DB.on(SPermSetDao.class).insertAsync(list);
     }
 
     /*
@@ -199,7 +200,7 @@ public class RightsService implements RightsStub {
         final JsonObject criteria = new JsonObject();
         criteria.put(KName.SIGMA, sigma);
         criteria.put("code,i", Ut.toJArray(permCodes));
-        return Ux.Jooq.on(SPermissionDao.class).<SPermission>fetchAndAsync(criteria).compose(original -> {
+        return DB.on(SPermissionDao.class).<SPermission>fetchAndAsync(criteria).compose(original -> {
             final List<SPermission> current = Ux.fromJson(permissions, SPermission.class);
             /*
              * Compared for three types

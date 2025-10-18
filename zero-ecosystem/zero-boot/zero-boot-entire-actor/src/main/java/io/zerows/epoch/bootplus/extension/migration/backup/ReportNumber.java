@@ -9,6 +9,7 @@ import io.zerows.extension.runtime.ambient.domain.tables.daos.XNumberDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XNumber;
 import io.zerows.platform.constant.VValue;
 import io.zerows.platform.enums.Environment;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.modeling.operation.HDao;
@@ -37,7 +38,7 @@ public class ReportNumber extends AbstractStep {
             return Ux.future(config);
         } else {
             final HApp app = this.ark.app();
-            return Ux.Jooq.on(XNumberDao.class).<XNumber>fetchAsync(KName.SIGMA, app.option(KName.SIGMA))
+            return DB.on(XNumberDao.class).<XNumber>fetchAsync(KName.SIGMA, app.option(KName.SIGMA))
                 .compose(numbers -> {
                     /*
                      * numbers 的使用场景

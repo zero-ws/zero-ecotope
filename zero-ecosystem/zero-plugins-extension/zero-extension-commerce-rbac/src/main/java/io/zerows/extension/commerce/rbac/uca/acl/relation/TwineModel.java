@@ -7,6 +7,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.SUserDao;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SUser;
 import io.zerows.extension.runtime.skeleton.secure.Twine;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -33,12 +34,12 @@ class TwineModel implements Twine<String> {
         Ut.valueCopy(conditionJ, condition,
             KName.SIGMA
         );
-        return Ux.Jooq.on(SUserDao.class).fetchJOneAsync(conditionJ);
+        return DB.on(SUserDao.class).fetchJOneAsync(conditionJ);
     }
 
     @Override
     public Future<JsonObject> identAsync(final String key) {
-        return Ux.Jooq.on(SUserDao.class).fetchJByIdAsync(key);
+        return DB.on(SUserDao.class).fetchJByIdAsync(key);
     }
 
     @Override
@@ -52,7 +53,7 @@ class TwineModel implements Twine<String> {
                 final JsonObject updatedJ = this.mappedJ(updatedData);
                 original.mergeIn(updatedJ);
                 final SUser user = Ux.fromJson(original, SUser.class);
-                return Ux.Jooq.on(SUserDao.class).updateAsync(user)
+                return DB.on(SUserDao.class).updateAsync(user)
                     .compose(Ux::futureJ);
             } else {
                 return Ux.futureJ();
@@ -63,7 +64,7 @@ class TwineModel implements Twine<String> {
     @Override
     public Future<JsonArray> identAsync(final Collection<String> keys) {
         final JsonArray keysA = Ut.toJArray(keys);
-        return Ux.Jooq.on(SUserDao.class).fetchJInAsync(KName.MODEL_KEY, keysA);
+        return DB.on(SUserDao.class).fetchJInAsync(KName.MODEL_KEY, keysA);
     }
 
     /*

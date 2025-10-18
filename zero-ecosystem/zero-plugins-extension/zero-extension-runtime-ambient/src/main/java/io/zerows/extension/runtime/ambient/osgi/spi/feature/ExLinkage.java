@@ -8,7 +8,7 @@ import io.zerows.extension.runtime.ambient.agent.service.linkage.LinkService;
 import io.zerows.extension.runtime.ambient.agent.service.linkage.LinkStub;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XLinkageDao;
 import io.zerows.extension.runtime.skeleton.osgi.spi.feature.Linkage;
-import io.zerows.program.Ux;
+import io.zerows.epoch.database.DB;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
 
@@ -24,12 +24,12 @@ public class ExLinkage implements Linkage {
 
     @Override
     public Future<Boolean> unlink(final JsonObject criteria) {
-        return Ux.Jooq.on(XLinkageDao.class).deleteByAsync(criteria);
+        return DB.on(XLinkageDao.class).deleteByAsync(criteria);
     }
 
     @Override
     public Future<JsonArray> fetch(final JsonObject criteria) {
-        return Ux.Jooq.on(XLinkageDao.class).fetchJAsync(criteria).compose(Fx.ofJArray(
+        return DB.on(XLinkageDao.class).fetchJAsync(criteria).compose(Fx.ofJArray(
             KName.SOURCE_DATA,
             KName.TARGET_DATA
         ));

@@ -13,6 +13,7 @@ import io.zerows.extension.runtime.skeleton.osgi.spi.business.ExApp;
 import io.zerows.extension.runtime.skeleton.osgi.spi.feature.Attachment;
 import io.zerows.extension.runtime.skeleton.osgi.spi.modeler.Modulat;
 import io.zerows.platform.constant.VString;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -21,14 +22,14 @@ public class AppService implements AppStub {
 
     @Override
     public Future<JsonArray> fetchByTenant(final String tenantId) {
-        return Ux.Jooq.on(XAppDao.class)
+        return DB.on(XAppDao.class)
             .<XApp>fetchAsync(KName.TENANT_ID, tenantId)
             .compose(Ux::futureA);
     }
 
     @Override
     public Future<JsonObject> fetchByName(final String name) {
-        return Ux.Jooq.on(XAppDao.class)
+        return DB.on(XAppDao.class)
             /* Fetch By Name */
             .<XApp>fetchOneAsync(KName.NAME, name)
             /* Convert to InJson */
@@ -53,7 +54,7 @@ public class AppService implements AppStub {
 
     @Override
     public Future<JsonObject> fetchById(final String appId) {
-        return Ux.Jooq.on(XAppDao.class)
+        return DB.on(XAppDao.class)
             /* Fetch By Id */
             .<XApp>fetchByIdAsync(appId)
             /* Convert to InJson */
@@ -74,7 +75,7 @@ public class AppService implements AppStub {
 
     @Override
     public Future<JsonObject> fetchSource(final String appId) {
-        return Ux.Jooq.on(XSourceDao.class)
+        return DB.on(XSourceDao.class)
             /* Fetch One by id */
             .fetchOneAsync(KName.APP_ID, appId)
             /* Get Result */
@@ -86,7 +87,7 @@ public class AppService implements AppStub {
     @Override
     public Future<JsonObject> updateBy(final String appId, final JsonObject data) {
         return this.updateLogo(appId, data)
-            .compose(updated -> Ux.Jooq.on(XAppDao.class).updateJAsync(appId, updated)
+            .compose(updated -> DB.on(XAppDao.class).updateJAsync(appId, updated)
                 /* Image field: logo */
                 .compose(Fx.ofJObject(KName.App.LOGO)));
     }

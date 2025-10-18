@@ -6,7 +6,7 @@ import io.zerows.component.destine.Hymn;
 import io.zerows.epoch.database.jooq.operation.DBJoin;
 import io.zerows.epoch.metadata.KJoin;
 import io.zerows.mbse.metadata.KModule;
-import io.zerows.program.Ux;
+import io.zerows.epoch.database.DB;
 import io.zerows.support.Ut;
 
 import java.util.Objects;
@@ -39,7 +39,7 @@ class HOneJoin implements HOne<DBJoin> {
          * - 父主表：（动态选择）直接使用主键连接
          * - 父从表：（静态唯一选择）使用 keyJoin 连接
          */
-        final DBJoin dao = Ux.Jooq.join();
+        final DBJoin dao = DB.join();
         final KJoin join = module.getConnect();
         final KJoin.Point source = join.getSource();
 

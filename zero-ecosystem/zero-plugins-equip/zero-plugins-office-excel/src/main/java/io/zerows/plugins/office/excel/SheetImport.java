@@ -13,6 +13,7 @@ import io.zerows.epoch.jigsaw.Oneness;
 import io.zerows.platform.enums.typed.ChangeFlag;
 import io.zerows.plugins.office.excel.atom.ExTable;
 import io.zerows.plugins.office.excel.exception._60039Exception500ExportingError;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.base.FnBase;
@@ -221,7 +222,7 @@ class SheetImport {
 
     private DBJooq jooq(final ExTable table) {
         final MDConnect connect = table.getConnect();
-        final DBJooq jooq = Ux.Jooq.on(connect.getDao());
+        final DBJooq jooq = DB.on(connect.getDao());
         if (null != jooq) {
             final String pojoFile = connect.getPojoFile();
             if (Ut.isNotNil(pojoFile)) {

@@ -7,6 +7,7 @@ import io.zerows.epoch.database.jooq.operation.DBJooq;
 import io.zerows.extension.runtime.tpl.domain.tables.daos.MyMenuDao;
 import io.zerows.extension.runtime.tpl.domain.tables.pojos.MyMenu;
 import io.zerows.platform.constant.VString;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public class MenuService implements MenuStub {
     public Future<JsonArray> fetchMy(final JsonObject condition) {
         condition.put(VString.EMPTY, Boolean.TRUE);
         LOG.Qr.info(this.getClass(), "My menu condition: {0}", condition.encode());
-        return Ux.Jooq.on(MyMenuDao.class).fetchJAsync(condition);
+        return DB.on(MyMenuDao.class).fetchJAsync(condition);
     }
 
     /*
@@ -39,7 +40,7 @@ public class MenuService implements MenuStub {
     public Future<JsonArray> saveMy(final JsonObject condition, final JsonArray data) {
         LOG.Qr.info(this.getClass(), "My menu saving: {0}, data = {1}",
             condition.encode(), data.encode());
-        final DBJooq jooq = Ux.Jooq.on(MyMenuDao.class);
+        final DBJooq jooq = DB.on(MyMenuDao.class);
         return jooq.deleteByAsync(condition).compose(removed -> {
             final List<MyMenu> menus = Ux.fromJson(data, MyMenu.class);
             return jooq.insertJAsync(menus);

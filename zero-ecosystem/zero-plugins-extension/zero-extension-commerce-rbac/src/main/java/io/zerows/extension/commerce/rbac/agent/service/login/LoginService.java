@@ -17,6 +17,7 @@ import io.zerows.extension.commerce.rbac.uca.logged.ScUser;
 import io.zerows.extension.commerce.rbac.uca.timer.ClockFactory;
 import io.zerows.extension.commerce.rbac.uca.timer.ScClock;
 import io.zerows.extension.commerce.rbac.util.Sc;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import jakarta.inject.Inject;
@@ -38,7 +39,7 @@ public class LoginService implements LoginStub {
     @SuppressWarnings("all")
     public Future<JsonObject> execute(final String username, final String password) {
         /* Find the user record with username */
-        return Sc.lockVerify(username, () -> Ux.Jooq.on(SUserDao.class).<SUser>fetchOneAsync(AuthKey.USER_NAME, username).compose(fetched -> {
+        return Sc.lockVerify(username, () -> DB.on(SUserDao.class).<SUser>fetchOneAsync(AuthKey.USER_NAME, username).compose(fetched -> {
             /* Not Found */
             if (Objects.isNull(fetched)) {
                 LOGGER.warn(AuthMsg.LOGIN_USER, username);

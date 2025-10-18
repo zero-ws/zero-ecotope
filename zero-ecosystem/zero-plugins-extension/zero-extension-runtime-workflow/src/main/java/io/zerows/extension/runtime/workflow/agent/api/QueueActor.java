@@ -15,6 +15,7 @@ import io.zerows.extension.runtime.workflow.eon.HighWay;
 import io.zerows.extension.runtime.workflow.exception._80600Exception404ProcessMissing;
 import io.zerows.extension.runtime.workflow.uca.camunda.Io;
 import io.zerows.extension.runtime.workflow.uca.transition.Vm;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import jakarta.inject.Inject;
@@ -188,6 +189,6 @@ public class QueueActor {
 
     @Address(HighWay.Queue.TICKET_LINKAGE)
     public Future<JsonObject> searchTicket(final JsonObject query) {
-        return Ux.Jooq.on(WTicketDao.class).searchAsync(query);
+        return DB.on(WTicketDao.class).searchAsync(query);
     }
 }

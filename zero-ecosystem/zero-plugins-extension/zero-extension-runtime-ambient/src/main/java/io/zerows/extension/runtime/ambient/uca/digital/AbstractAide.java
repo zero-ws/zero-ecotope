@@ -5,6 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.platform.constant.VValue;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -21,7 +22,7 @@ public abstract class AbstractAide implements Aide {
 
     /* X_TABULAR */
     protected Future<JsonArray> fetchDict(final JsonObject criteria) {
-        return Ux.Jooq.on(XTabularDao.class).fetchAsync(criteria)
+        return DB.on(XTabularDao.class).fetchAsync(criteria)
             .compose(Ux::futureA)
             .compose(Fx.ofJArray(KName.METADATA));
     }

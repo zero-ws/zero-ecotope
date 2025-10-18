@@ -4,6 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.support.Ut;
@@ -61,7 +62,7 @@ class QuestAcl implements Quest {
             .put(KName.CODE + ",i", Ut.toJArray(restCodes));
 
 
-        return Ux.Jooq.on(SResourceDao.class).<SResource>fetchAsync(condition).compose(resources -> {
+        return DB.on(SResourceDao.class).<SResource>fetchAsync(condition).compose(resources -> {
             // 根据资源记录读取所需视图集
             final ConcurrentMap<String, SResource> resourceMap =
                 Ut.elementMap(resources, SResource::getCode);
@@ -88,7 +89,7 @@ class QuestAcl implements Quest {
             final JsonObject condition = Ux.whereAnd();
             condition.put(KName.CODE, code);
             condition.put(KName.SIGMA, Ut.valueString(resourceData, KName.SIGMA));
-            futureM.put(code, Ux.Jooq.on(SResourceDao.class).<SResource>fetchOneAsync(condition).compose(resource -> {
+            futureM.put(code, DB.on(SResourceDao.class).<SResource>fetchOneAsync(condition).compose(resource -> {
                 if (Objects.isNull(resource)) {
                     LOG.View.info(this.getClass(), "Zero system could not find the resource: {0}", code);
                     return Ux.future();

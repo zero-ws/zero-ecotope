@@ -14,6 +14,7 @@ import io.zerows.extension.commerce.rbac.eon.AuthKey;
 import io.zerows.extension.commerce.rbac.uca.acl.relation.Junc;
 import io.zerows.extension.commerce.rbac.util.Sc;
 import io.zerows.platform.metadata.KRef;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -37,7 +38,7 @@ public class UserService implements UserStub {
      */
     @Override
     public Future<JsonObject> fetchInformation(final String userId) {
-        return Ux.Jooq.on(SUserDao.class)
+        return DB.on(SUserDao.class)
             /* User Information */
             .<SUser>fetchByIdAsync(userId)
             /* Employee Information */
@@ -52,7 +53,7 @@ public class UserService implements UserStub {
 
     @Override
     public Future<JsonObject> fetchAuthorized(final SUser query) {
-        return Ux.Jooq.on(OUserDao.class).fetchOneAsync(AuthKey.F_CLIENT_ID, query.getKey())
+        return DB.on(OUserDao.class).fetchOneAsync(AuthKey.F_CLIENT_ID, query.getKey())
             .compose(Ux::futureJ)
             .compose(ouserJson -> {
                 final JsonObject userJson = Ut.serializeJson(query);
@@ -84,7 +85,7 @@ public class UserService implements UserStub {
     public Future<JsonObject> updateInformation(final String userId, final JsonObject params) {
         final SUser user = Ux.fromJson(params, SUser.class);
         user.setKey(userId);
-        return Ux.Jooq.on(SUserDao.class).updateAsync(userId, user)
+        return DB.on(SUserDao.class).updateAsync(userId, user)
             .compose(userInfo -> Junc.refExtension().identAsync(userInfo, params));
     }
 
@@ -99,22 +100,22 @@ public class UserService implements UserStub {
             user.setPassword(Sc.valuePassword());
         }
         final KRef refer = new KRef();
-        return Ux.Jooq.on(SUserDao.class).insertAsync(user)
+        return DB.on(SUserDao.class).insertAsync(user)
             .compose(refer::future)
             // 创建认证信息
             .compose(inserted -> Sc.valueAuth(inserted, params))
             // Insert new OUser Record
-            .compose(oUser -> Ux.Jooq.on(OUserDao.class).insertAsync(oUser))
+            .compose(oUser -> DB.on(OUserDao.class).insertAsync(oUser))
             // delete attribute: password from user information To avoid update to EMPTY string
             .compose(entity -> Ux.futureJ(refer.<SUser>get().setPassword(null)));
     }
 
     @Override
     public Future<Boolean> deleteUser(final String userKey) {
-        final DBJooq sUserDao = Ux.Jooq.on(SUserDao.class);
-        final DBJooq oUserDao = Ux.Jooq.on(OUserDao.class);
-        final DBJooq rUserRoleDao = Ux.Jooq.on(RUserRoleDao.class);
-        final DBJooq rUserGroupDao = Ux.Jooq.on(RUserGroupDao.class);
+        final DBJooq sUserDao = DB.on(SUserDao.class);
+        final DBJooq oUserDao = DB.on(OUserDao.class);
+        final DBJooq rUserRoleDao = DB.on(RUserRoleDao.class);
+        final DBJooq rUserGroupDao = DB.on(RUserGroupDao.class);
 
         return oUserDao.fetchOneAsync(new JsonObject().put(KName.CLIENT_ID, userKey))
             /* delete OUser record */

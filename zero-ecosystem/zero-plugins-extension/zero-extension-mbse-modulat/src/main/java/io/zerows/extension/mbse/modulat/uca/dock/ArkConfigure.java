@@ -8,6 +8,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.extension.mbse.modulat.domain.tables.daos.BBagDao;
 import io.zerows.extension.mbse.modulat.domain.tables.pojos.BBag;
 import io.zerows.platform.enums.modeling.EmModel;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -63,7 +64,7 @@ class ArkConfigure extends AbstractArk {
          */
         condition.put(KName.PARENT_ID + ",n", null);
         LOG.Spi.info(this.getClass(), "Modulat condition = {0}", condition.encode());
-        return Ux.Jooq.on(BBagDao.class).<BBag>fetchAsync(condition)
+        return DB.on(BBagDao.class).<BBag>fetchAsync(condition)
             .compose(bags -> this.configureOut(bags, open));
     }
 

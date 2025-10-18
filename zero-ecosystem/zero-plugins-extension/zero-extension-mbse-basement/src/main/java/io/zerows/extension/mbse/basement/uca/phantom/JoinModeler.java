@@ -7,6 +7,7 @@ import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.mbse.basement.domain.tables.daos.MJoinDao;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MJoin;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -24,7 +25,7 @@ class JoinModeler implements AoModeler {
             LOGGER.debug("[ Ox ] 3. AoModeler.join() ：{0}", modelJson.encode());
             final JsonObject model = modelJson.getJsonObject(KName.MODEL);
             // 查询 join
-            return Ux.Jooq.on(MJoinDao.class)
+            return DB.on(MJoinDao.class)
                 .<MJoin>fetchAndAsync(this.onCriteria(model))
                 .compose(nexuses -> Ux.future(this.onResult(modelJson, nexuses)))
                 .compose(nexuses -> Ux.future(this.onNext(modelJson, nexuses)));
@@ -36,7 +37,7 @@ class JoinModeler implements AoModeler {
         LOGGER.debug("[ Ox ] (Sync) 3. AoModeler.join() ：{0}", modelJson.encode());
         final JsonObject model = modelJson.getJsonObject(KName.MODEL);
         // List
-        final List<MJoin> joins = Ux.Jooq.on(MJoinDao.class)
+        final List<MJoin> joins = DB.on(MJoinDao.class)
             .fetchAnd(this.onCriteria(model));
         // JsonArray
         this.onResult(modelJson, joins);

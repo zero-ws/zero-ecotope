@@ -8,6 +8,7 @@ import io.zerows.extension.commerce.erp.domain.tables.daos.ECompanyDao;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XTenantDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XTenant;
 import io.zerows.extension.runtime.skeleton.osgi.spi.business.ExOwner;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 
 import java.util.Objects;
@@ -19,14 +20,14 @@ import java.util.Objects;
 public class ExOwnerEpic implements ExOwner {
     @Override
     public Future<JsonObject> fetchCompany(final String id) {
-        return Ux.Jooq.on(ECompanyDao.class)
+        return DB.on(ECompanyDao.class)
             .fetchByIdAsync(id)
             .compose(Ux::futureJ);
     }
 
     @Override
     public Future<JsonObject> fetchTenant(final String idOr) {
-        final DBJooq jq = Ux.Jooq.on(XTenantDao.class);
+        final DBJooq jq = DB.on(XTenantDao.class);
         return jq.<XTenant>fetchByIdAsync(idOr)
             .compose(tenant -> {
                 if (Objects.nonNull(tenant)) {

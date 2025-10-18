@@ -8,7 +8,7 @@ import io.zerows.extension.runtime.ambient.domain.tables.daos.XAppDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XApp;
 import io.zerows.extension.runtime.ambient.exception._80300Exception500AmbientError;
 import io.zerows.extension.runtime.ambient.exception._80301Exception500ApplicationInit;
-import io.zerows.program.Ux;
+import io.zerows.epoch.database.DB;
 import org.jooq.DSLContext;
 
 import java.util.Objects;
@@ -27,7 +27,7 @@ public class AtApp {
     private transient XAppDao dao;
 
     private AtApp(final String name) {
-        final DBJooq jooq = Ux.Jooq.on(XAppDao.class);
+        final DBJooq jooq = DB.on(XAppDao.class);
         Fn.jvmKo(Objects.isNull(jooq), _80300Exception500AmbientError.class);
         /* Current */
         this.app = jooq.fetchOne(KName.NAME, name);

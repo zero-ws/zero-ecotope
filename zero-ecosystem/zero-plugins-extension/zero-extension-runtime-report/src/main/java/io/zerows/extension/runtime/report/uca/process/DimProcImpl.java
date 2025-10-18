@@ -15,7 +15,7 @@ import io.zerows.extension.runtime.report.eon.em.EmReport;
 import io.zerows.extension.runtime.report.exception._80703Exception400ReportDimType;
 import io.zerows.extension.runtime.report.uca.feature.RQueryComponent;
 import io.zerows.extension.runtime.report.uca.pull.DataSet;
-import io.zerows.program.Ux;
+import io.zerows.epoch.database.DB;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
 import io.zerows.support.base.FnBase;
@@ -67,7 +67,7 @@ class DimProcImpl extends AbstractDimProc {
     private Future<ConcurrentMap<String, JsonArray>> dimSource(final JsonObject params, final List<KpDimension> dimensions) {
         // 归并数据源提取
         final Set<String> dataSet = dimensions.stream().map(KpDimension::getDataSetId).collect(Collectors.toSet());
-        return Ux.Jooq.on(KpDataSetDao.class).<KpDataSet, String>fetchInAsync(KName.KEY, dataSet).compose(dataSets -> {
+        return DB.on(KpDataSetDao.class).<KpDataSet, String>fetchInAsync(KName.KEY, dataSet).compose(dataSets -> {
             final ConcurrentMap<String, Future<JsonArray>> resultMap = new ConcurrentHashMap<>();
             if (dataSets.size() > 0) {
                 final KpDataSet kpDataSet = dataSets.get(0);

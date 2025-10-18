@@ -14,6 +14,7 @@ import io.zerows.extension.mbse.basement.domain.tables.pojos.MEntity;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MField;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MModel;
 import io.zerows.platform.enums.Environment;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.specification.app.HApp;
 import io.zerows.support.Ut;
@@ -89,7 +90,7 @@ public class MetaLimit extends AbstractStep {
                                                final Function<List<T>, ConcurrentMap<String, String>> keyFn) {
         final HApp app = this.ark.app();
         final String sigma = app.option(KName.SIGMA);
-        return Ux.Jooq.on(daoCls).<T>fetchAsync(KName.SIGMA, sigma)
+        return DB.on(daoCls).<T>fetchAsync(KName.SIGMA, sigma)
             .compose(entities -> {
                 final ConcurrentMap<String, String> keyMap = keyFn.apply(entities);
                 final Revision revision = Revision.get(daoCls);
@@ -109,7 +110,7 @@ public class MetaLimit extends AbstractStep {
                         final String metadata = data.encode();
                         Ut.field(entity, KName.METADATA, metadata);
                     });
-                    return Ux.Jooq.on(daoCls).updateAsync(entities)
+                    return DB.on(daoCls).updateAsync(entities)
                         .compose(nil -> Ux.future(new JsonObject()));
                 });
             })

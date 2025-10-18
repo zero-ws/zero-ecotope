@@ -14,6 +14,7 @@ import io.zerows.extension.commerce.rbac.uca.timer.ClockFactory;
 import io.zerows.extension.commerce.rbac.uca.timer.ScClock;
 import io.zerows.platform.constant.VValue;
 import io.zerows.plugins.integration.sms.SmsInfix;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import jakarta.inject.Inject;
@@ -52,7 +53,7 @@ public class SmsService implements SmsStub {
     }
 
     private Future<SUser> fetchUser(final String mobile) {
-        return Ux.Jooq.on(SUserDao.class).<SUser>fetchAsync(KName.MOBILE, mobile).compose(queryList -> {
+        return DB.on(SUserDao.class).<SUser>fetchAsync(KName.MOBILE, mobile).compose(queryList -> {
             if (Objects.isNull(queryList) || queryList.isEmpty()) {
                 return Ux.future();
             }

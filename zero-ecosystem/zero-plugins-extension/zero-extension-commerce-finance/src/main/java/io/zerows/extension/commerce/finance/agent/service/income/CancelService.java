@@ -11,6 +11,7 @@ import io.zerows.extension.commerce.finance.eon.FmConstant;
 import io.zerows.extension.commerce.finance.uca.account.Book;
 import io.zerows.extension.commerce.finance.uca.enter.Maker;
 import io.zerows.extension.commerce.finance.uca.replica.IkWay;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 
 /**
@@ -22,7 +23,7 @@ public class CancelService implements CancelStub {
     public Future<Boolean> cancelAsync(final JsonArray keys, final JsonObject params) {
         final JsonObject condition = Ux.whereAnd();
         condition.put("key,i", keys);
-        final DBJooq jq = Ux.Jooq.on(FBillItemDao.class);
+        final DBJooq jq = DB.on(FBillItemDao.class);
         return jq.<FBillItem>fetchAsync(condition).compose(queried -> {
             queried.forEach(each -> IkWay.ofBIC().transfer(each, params));
             return jq.updateAsync(queried).compose(Book.of()::income);
@@ -38,9 +39,9 @@ public class CancelService implements CancelStub {
         updated.put(KName.UPDATED_BY, params.getValue(KName.UPDATED_BY));
         updated.put(KName.ACTIVE, Boolean.TRUE);
         updated.put(KName.STATUS, FmConstant.Status.PENDING);
-        return Ux.Jooq.on(FBillItemDao.class).deleteByAsync(condition)
+        return DB.on(FBillItemDao.class).deleteByAsync(condition)
             .compose(nil -> Maker.upBI().buildAsync(updated, key))
-            .compose(Ux.Jooq.on(FBillItemDao.class)::updateAsync)
+            .compose(DB.on(FBillItemDao.class)::updateAsync)
             .compose(nil -> Ux.futureT());
     }
 }

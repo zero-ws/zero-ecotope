@@ -3,6 +3,7 @@ package io.zerows.extension.commerce.rbac.uca.acl.rapier;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.extension.commerce.rbac.atom.ScOwner;
@@ -28,7 +29,7 @@ public class QuinnViews implements Quinn {
         // OWNER = ?, OWNER_TYPE = ? --- ownerType 固定
         condition.put(KName.OWNER + ",i", Ut.toJArray(roles));
         condition.put(KName.OWNER_TYPE, OwnerType.ROLE.name());
-        return Ux.Jooq.on(SViewDao.class).fetchAsync(condition)
+        return DB.on(SViewDao.class).fetchAsync(condition)
             .compose(list -> Ux.future((T) list));
     }
 }

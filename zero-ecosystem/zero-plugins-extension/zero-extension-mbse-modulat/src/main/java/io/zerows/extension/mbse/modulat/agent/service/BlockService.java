@@ -7,6 +7,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.extension.mbse.modulat.domain.tables.daos.BBlockDao;
 import io.zerows.extension.mbse.modulat.domain.tables.pojos.BBlock;
 import io.zerows.extension.mbse.modulat.eon.BkConstant;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -58,12 +59,12 @@ public class BlockService implements BlockStub {
             block.setUpdatedAt(LocalDateTime.now());
             block.setUpdatedBy(data.getString(KName.UPDATED_BY));
         });
-        return Ux.Jooq.on(BBlockDao.class).updateAsync(blocks).compose(nil -> Ux.future(data));
+        return DB.on(BBlockDao.class).updateAsync(blocks).compose(nil -> Ux.future(data));
     }
 
     private Future<JsonArray> fetchBlock(final JsonObject condition) {
         // Block Processing
-        return Ux.Jooq.on(BBlockDao.class).fetchJAsync(condition).compose(Fx.ofJArray(
+        return DB.on(BBlockDao.class).fetchJAsync(condition).compose(Fx.ofJArray(
             KName.Flow.UI_STYLE,
             KName.Flow.UI_CONFIG,
             BkConstant.License.LIC_IDENTIFIER,

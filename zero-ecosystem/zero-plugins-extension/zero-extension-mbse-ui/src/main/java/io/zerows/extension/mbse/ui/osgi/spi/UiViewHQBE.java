@@ -9,6 +9,7 @@ import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.mbse.ui.domain.tables.daos.UiViewDao;
 import io.zerows.extension.mbse.ui.domain.tables.pojos.UiView;
 import io.zerows.extension.mbse.ui.uca.qbe.QBECache;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.specification.vital.HQR;
 import io.zerows.support.Ut;
@@ -29,7 +30,7 @@ public class UiViewHQBE implements HQBE {
         final JsonObject condition = qbeJ.copy();
         condition.put(KName.SIGMA, header.getSigma());
         // From cached to fetch the list qr object ( reference )
-        return QBECache.cached(condition, () -> Ux.Jooq.on(UiViewDao.class).fetchOneAsync(condition))
+        return QBECache.cached(condition, () -> DB.on(UiViewDao.class).fetchOneAsync(condition))
             // Processing the `criteria` modification
             .compose(listQr -> this.before(listQr, envelop));
     }

@@ -10,6 +10,7 @@ import io.zerows.extension.commerce.rbac.domain.tables.daos.SUserDao;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SUser;
 import io.zerows.extension.commerce.rbac.eon.AuthKey;
 import io.zerows.extension.runtime.skeleton.secure.Twine;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -35,7 +36,7 @@ public class TwineRights implements Twine<String> {
 
     @Override
     public Future<JsonObject> identAsync(final String key) {
-        return Ux.Jooq.on(SUserDao.class).fetchJByIdAsync(key)
+        return DB.on(SUserDao.class).fetchJByIdAsync(key)
             .compose(userJ -> {
                 /* delete attribute: password from user information */
                 userJ.remove(KName.PASSWORD);
@@ -72,12 +73,12 @@ public class TwineRights implements Twine<String> {
      */
     @Override
     public Future<JsonArray> identAsync(final Collection<String> keys) {
-        return Ux.Jooq.on(RUserGroupDao.class).fetchJInAsync(AuthKey.F_USER_ID, keys);
+        return DB.on(RUserGroupDao.class).fetchJInAsync(AuthKey.F_USER_ID, keys);
     }
 
     private Future<JsonObject> updateAsync(final String userKey, final JsonObject params) {
         /* Merge original here */
-        final DBJooq jq = Ux.Jooq.on(SUserDao.class);
+        final DBJooq jq = DB.on(SUserDao.class);
         return jq.<SUser>fetchByIdAsync(userKey).compose(queried -> {
             if (Objects.isNull(queried)) {
                 return Ux.futureJ();

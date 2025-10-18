@@ -12,6 +12,7 @@ import io.zerows.extension.mbse.ui.domain.tables.pojos.UiControl;
 import io.zerows.extension.mbse.ui.domain.tables.pojos.UiVisitor;
 import io.zerows.extension.mbse.ui.eon.em.ControlType;
 import io.zerows.extension.mbse.ui.osgi.spi.ui.UiHunter;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -26,7 +27,7 @@ public class ControlService implements ControlStub {
 
     @Override
     public Future<JsonArray> fetchControls(final String pageId) {
-        return Ux.Jooq.on(UiControlDao.class)
+        return DB.on(UiControlDao.class)
             .<UiControl>fetchAsync("pageId", pageId)
             .compose(Ux::futureA)
             .compose(list -> {
@@ -49,7 +50,7 @@ public class ControlService implements ControlStub {
 
     @Override
     public Future<JsonObject> fetchById(final String control) {
-        return Ux.Jooq.on(UiControlDao.class)
+        return DB.on(UiControlDao.class)
             .<UiControl>fetchByIdAsync(control)
             .compose(Ux::futureJ)
             .compose(Fx.ofJObject(
@@ -81,7 +82,7 @@ public class ControlService implements ControlStub {
             KName.App.CONTEXT
         );
         LOG.Ui.info(LOGGER, "Control ( type = {0} ) with parameters = `{1}`", controlType, criteria.encode());
-        return Ux.Jooq.on(UiVisitorDao.class).<UiVisitor>fetchOneAsync(criteria).compose(visitor -> {
+        return DB.on(UiVisitorDao.class).<UiVisitor>fetchOneAsync(criteria).compose(visitor -> {
             if (Objects.isNull(visitor)) {
                 /* 「空」无任何记录，直接返回空结果 */
                 return Ux.futureJ();

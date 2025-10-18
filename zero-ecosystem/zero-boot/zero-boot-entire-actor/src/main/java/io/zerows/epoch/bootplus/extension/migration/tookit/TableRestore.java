@@ -5,6 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.platform.enums.Environment;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -56,7 +57,7 @@ public class TableRestore extends AbstractStatic {
 
     private Future<JsonObject> upsertAsync(final JsonObject data) {
         final String key = data.getString(KName.KEY);
-        return Ux.Jooq.on(this.dao()).upsertAsync(key, Ux.fromJson(data, this.ioType()))
+        return DB.on(this.dao()).upsertAsync(key, Ux.fromJson(data, this.ioType()))
             .compose(Ux::futureJ);
     }
 }

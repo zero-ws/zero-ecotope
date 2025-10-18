@@ -19,6 +19,7 @@ import io.zerows.extension.mbse.basement.uca.metadata.AoBuilder;
 import io.zerows.extension.mbse.basement.util.Ao;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.enums.typed.ChangeFlag;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -104,7 +105,7 @@ class SchemaRefine implements AoRefine {
 
     private Future<JsonObject> saveSchema(final Schema schema) {
         final MEntity updated = schema.getEntity();
-        return Ux.Jooq.on(MEntityDao.class)
+        return DB.on(MEntityDao.class)
             .upsertAsync(this.criteria(updated), updated)
             .compose(entity -> {
                 // 设置关系信息重建
@@ -129,7 +130,7 @@ class SchemaRefine implements AoRefine {
             final MKey field = keys[idx];
             condition.put("$" + idx, this.criteria(field.getName(), entity));
         }
-        final DBJooq jq = Ux.Jooq.on(MKeyDao.class);
+        final DBJooq jq = DB.on(MKeyDao.class);
         return jq.<MKey>fetchAsync(condition).compose(queried -> {
             final List<MKey> fieldList = Arrays.asList(keys);
             final ConcurrentMap<ChangeFlag, List<MKey>> compared = Ux.compare(queried, fieldList, this.uniqueSet());
@@ -145,7 +146,7 @@ class SchemaRefine implements AoRefine {
             final MField field = fields[idx];
             condition.put("$" + idx, this.criteria(field.getName(), entity));
         }
-        final DBJooq jq = Ux.Jooq.on(MFieldDao.class);
+        final DBJooq jq = DB.on(MFieldDao.class);
         return jq.<MField>fetchAsync(condition).compose(queried -> {
             final List<MField> fieldList = Arrays.asList(fields);
             final ConcurrentMap<ChangeFlag, List<MField>> compared = Ux.compare(queried, fieldList, this.uniqueSet());

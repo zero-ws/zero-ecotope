@@ -9,6 +9,7 @@ import io.zerows.epoch.database.jooq.operation.DBJooq;
 import io.zerows.extension.runtime.integration.domain.tables.daos.IMessageDao;
 import io.zerows.extension.runtime.integration.domain.tables.pojos.IMessage;
 import io.zerows.extension.runtime.skeleton.eon.em.EmMessage;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -24,13 +25,13 @@ public class MessageService implements MessageStub {
     @Override
     public Future<List<IMessage>> fetchTyped(final EmMessage.Type type, final JsonObject condition) {
         condition.put(KName.TYPE, type.name());
-        return Ux.Jooq.on(IMessageDao.class).fetchAsync(condition,
+        return DB.on(IMessageDao.class).fetchAsync(condition,
             Sorter.create(KName.CREATED_AT, Boolean.FALSE));
     }
 
     @Override
     public Future<List<IMessage>> updateStatus(final JsonArray keys, final EmMessage.Status status, final String user) {
-        final DBJooq jq = Ux.Jooq.on(IMessageDao.class);
+        final DBJooq jq = DB.on(IMessageDao.class);
         return jq.<IMessage>fetchInAsync(KName.KEY, keys).compose(messageList -> {
             messageList.forEach(message -> {
                 message.setStatus(status.name());
@@ -50,7 +51,7 @@ public class MessageService implements MessageStub {
             condition.put(KName.SUBJECT, Ut.valueString(body, KName.SUBJECT));
             condition.put(KName.APP_ID, Ut.valueString(body, KName.APP_ID));
         }
-        final DBJooq jq = Ux.Jooq.on(IMessageDao.class);
+        final DBJooq jq = DB.on(IMessageDao.class);
         return jq.<IMessage>fetchOneAsync(condition).compose(message -> {
             if (Objects.nonNull(message)) {
                 return Ux.future(message);
@@ -72,6 +73,6 @@ public class MessageService implements MessageStub {
     public Future<Boolean> deleteMessage(final JsonArray keys) {
         final JsonObject condition = Ux.whereAnd();
         condition.put(KName.KEY + ",i", keys);
-        return Ux.Jooq.on(IMessageDao.class).deleteByAsync(condition);
+        return DB.on(IMessageDao.class).deleteByAsync(condition);
     }
 }

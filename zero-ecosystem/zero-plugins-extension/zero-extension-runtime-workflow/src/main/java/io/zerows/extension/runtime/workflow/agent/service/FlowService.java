@@ -7,6 +7,7 @@ import io.zerows.extension.runtime.skeleton.osgi.spi.ui.Form;
 import io.zerows.extension.runtime.workflow.domain.tables.daos.WFlowDao;
 import io.zerows.extension.runtime.workflow.uca.camunda.Io;
 import io.zerows.extension.runtime.workflow.util.Wf;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import org.camunda.bpm.engine.history.HistoricProcessInstance;
@@ -117,7 +118,7 @@ public class FlowService implements FlowStub {
         final JsonObject condition = Ux.whereAnd();
         condition.put(KName.CODE, definitionKey);
         condition.put(KName.SIGMA, sigma);
-        return Ux.Jooq.on(WFlowDao.class).fetchJOneAsync(condition);
+        return DB.on(WFlowDao.class).fetchJOneAsync(condition);
     }
 
     private Future<JsonObject> formInternal(final JsonObject formInput, final String sigma) {

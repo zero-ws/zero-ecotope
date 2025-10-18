@@ -11,6 +11,7 @@ import io.zerows.extension.commerce.rbac.domain.tables.daos.SVisitantDao;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SResource;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SView;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SVisitant;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.base.FnBase;
@@ -76,7 +77,7 @@ public class QuinnVisit implements Quinn {
     private Future<List<SVisitant>> saveVisitant(final SView viewInput, final JsonArray visitData) {
         // 同一个SView中的 ADD / SAVE
         final ConcurrentMap<String, JsonObject> seekMap = Ut.elementMap(visitData, KName.Rbac.SEEK_KEY);
-        final DBJooq jq = Ux.Jooq.on(SVisitantDao.class);
+        final DBJooq jq = DB.on(SVisitantDao.class);
         return jq.<SVisitant>fetchAsync(KName.VIEW_ID, viewInput.getKey()).compose(visitors -> {
             // If existing seekKey
             final ConcurrentMap<String, SVisitant> visitorM = Ut.elementMap(visitors, SVisitant::getSeekKey);
@@ -121,11 +122,11 @@ public class QuinnVisit implements Quinn {
     @Override
     @SuppressWarnings("unchecked")
     public <T> Future<T> fetchAsync(final String viewId, final ScOwner owner) {
-        return Ux.Jooq.on(SViewDao.class).<SView>fetchByIdAsync(viewId).compose(view -> {
+        return DB.on(SViewDao.class).<SView>fetchByIdAsync(viewId).compose(view -> {
             if (Objects.isNull(view)) {
                 return Ux.futureJ();
             }
-            return Ux.Jooq.on(SVisitantDao.class).<SVisitant>fetchAsync(KName.VIEW_ID, view.getKey())
+            return DB.on(SVisitantDao.class).<SVisitant>fetchAsync(KName.VIEW_ID, view.getKey())
                 .compose(visitants -> this.syntaxRegion.regionJ(view, visitants));
         }).compose(json -> Ux.future((T) json));
     }

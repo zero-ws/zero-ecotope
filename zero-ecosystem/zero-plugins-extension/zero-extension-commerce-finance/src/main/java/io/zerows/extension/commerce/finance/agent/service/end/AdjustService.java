@@ -9,6 +9,7 @@ import io.zerows.extension.commerce.finance.domain.tables.daos.FSettlementItemDa
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FSettlement;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FSettlementItem;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FTrans;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 
 import java.time.LocalDateTime;
@@ -23,7 +24,7 @@ public class AdjustService implements AdjustStub {
         final JsonObject condition = Ux.whereAnd();
         condition.put(KName.Finance.SETTLEMENT_ID, settlement.getKey());
 
-        final DBJooq jq = Ux.Jooq.on(FSettlementItemDao.class);
+        final DBJooq jq = DB.on(FSettlementItemDao.class);
         return jq.<FSettlementItem>fetchAsync(condition)
             .compose(items -> jq.updateAsync(this.buildData(trans, items)))
             .compose(nil -> Ux.future(trans));
@@ -32,7 +33,7 @@ public class AdjustService implements AdjustStub {
     @Override
     public Future<FTrans> adjustAsync(final FTrans trans, final JsonArray items) {
         final List<FSettlementItem> itemList = Ux.fromJson(items, FSettlementItem.class);
-        return Ux.Jooq.on(FSettlementItemDao.class)
+        return DB.on(FSettlementItemDao.class)
             .updateAsync(this.buildData(trans, itemList))
             .compose(nil -> Ux.future(trans));
     }

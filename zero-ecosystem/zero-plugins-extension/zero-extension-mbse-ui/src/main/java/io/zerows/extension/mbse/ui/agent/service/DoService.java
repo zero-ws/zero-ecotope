@@ -8,6 +8,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.extension.mbse.ui.bootstrap.UiPin;
 import io.zerows.extension.mbse.ui.domain.tables.daos.UiOpDao;
 import io.zerows.extension.mbse.ui.domain.tables.pojos.UiOp;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -34,7 +35,7 @@ public class DoService implements DoStub {
     @Override
     public Future<JsonArray> fetchAtom(final JsonObject params) {
         final String control = Ut.valueString(params, KName.Ui.CONTROL);
-        return Ux.Jooq.on(UiOpDao.class)
+        return DB.on(UiOpDao.class)
             .<UiOp>fetchAsync(KName.Ui.CONTROL_ID, control)
             .compose(Ux::futureA)
             .compose(Fx.ofJArray(KName.Ui.CONFIG));
@@ -55,7 +56,7 @@ public class DoService implements DoStub {
         condition.put(KName.Ui.CONTROL_ID, workflow);
         condition.put(KName.EVENT, task);
         LOG.Ui.info(LOGGER, "The workflow condition = `{0}`", condition.encode());
-        return Ux.Jooq.on(UiOpDao.class)
+        return DB.on(UiOpDao.class)
             .<UiOp>fetchAsync(condition)
             .compose(Ux::futureA)
             .compose(Fx.ofJArray(KName.Ui.CONFIG));

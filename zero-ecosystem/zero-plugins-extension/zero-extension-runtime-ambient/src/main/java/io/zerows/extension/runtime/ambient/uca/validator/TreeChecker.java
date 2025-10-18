@@ -8,6 +8,7 @@ import io.zerows.cortex.sdk.HocTrue;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XCategoryDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XCategory;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.specification.atomic.HReturn;
 
@@ -30,6 +31,6 @@ public class TreeChecker extends HocTrue<XCategory> {
     @Override
     public Future<Boolean> executeJAsync(final ClusterSerializable json, final JsonObject config) {
         final JsonObject condition = Ux.whereAmb(json, KName.PARENT_ID);
-        return Ux.Jooq.on(XCategoryDao.class).existAsync(condition);
+        return DB.on(XCategoryDao.class).existAsync(condition);
     }
 }

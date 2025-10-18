@@ -7,6 +7,7 @@ import io.zerows.epoch.database.jooq.operation.DBJooq;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XNumberDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XNumber;
 import io.zerows.extension.runtime.ambient.util.At;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 
 import java.util.Objects;
@@ -19,7 +20,7 @@ public class SerialGen implements Serial {
     @Override
     public synchronized Future<JsonArray> generate(final JsonObject condition, final Integer count) {
         /* XNumber Processing */
-        final DBJooq jq = Ux.Jooq.on(XNumberDao.class);
+        final DBJooq jq = DB.on(XNumberDao.class);
         synchronized (jq) {
             return jq.<XNumber>fetchOneAsync(condition).compose(number -> {
                 if (Objects.isNull(number)) {
@@ -43,7 +44,7 @@ public class SerialGen implements Serial {
 
     @Override
     public synchronized Future<Boolean> reset(final JsonObject condition, final Long defaultValue) {
-        final DBJooq jq = Ux.Jooq.on(XNumberDao.class);
+        final DBJooq jq = DB.on(XNumberDao.class);
         synchronized (jq) {
             return jq.<XNumber>fetchOneAsync(condition).compose(number -> {
                 if (Objects.isNull(number)) {

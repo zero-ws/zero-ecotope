@@ -6,6 +6,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.extension.runtime.skeleton.eon.em.OwnerType;
 import io.zerows.extension.runtime.skeleton.osgi.spi.business.ExSetting;
 import io.zerows.extension.runtime.tpl.domain.tables.daos.MyNotifyDao;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 
 /**
@@ -26,6 +27,6 @@ public class ExSettingOfUser implements ExSetting {
         params.put(KName.OWNER_ID, user);
         params.put(KName.SIGMA, dimKey);
         params.put(KName.OWNER_TYPE, OwnerType.USER);
-        return Ux.Jooq.on(MyNotifyDao.class).fetchJOneAsync(params);
+        return DB.on(MyNotifyDao.class).fetchJOneAsync(params);
     }
 }

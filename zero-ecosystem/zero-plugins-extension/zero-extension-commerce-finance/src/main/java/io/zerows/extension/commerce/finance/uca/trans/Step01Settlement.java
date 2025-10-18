@@ -8,6 +8,7 @@ import io.zerows.extension.commerce.finance.domain.tables.daos.FSettlementDao;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FSettlement;
 import io.zerows.extension.commerce.finance.eon.em.EmPay;
 import io.zerows.extension.commerce.finance.uca.enter.Maker;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -51,7 +52,7 @@ class Step01Settlement implements Trade<EmPay.Type, FSettlement> {
              * 将构造好的 FSettlement 对象直接插入到数据库中，并且以
              * FSettlement 的方式返回上层
              */
-            .compose(Ux.Jooq.on(FSettlementDao.class)::insertAsync);
+            .compose(DB.on(FSettlementDao.class)::insertAsync);
     }
 
     // type -> List<FSettlement>
@@ -67,7 +68,7 @@ class Step01Settlement implements Trade<EmPay.Type, FSettlement> {
                 generatedList.forEach(generated -> this.executeFinished(generated, assist));
                 return Ux.future(generatedList);
             })
-            .compose(Ux.Jooq.on(FSettlementDao.class)::insertAsync);
+            .compose(DB.on(FSettlementDao.class)::insertAsync);
     }
 
     // ---------------- 私有方法 -----------------

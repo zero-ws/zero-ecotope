@@ -11,6 +11,7 @@ import io.zerows.extension.runtime.ambient.domain.tables.pojos.XActivityChange;
 import io.zerows.extension.runtime.ambient.eon.em.ActivityStatus;
 import io.zerows.extension.runtime.ambient.osgi.spi.business.ExActivityTracker;
 import io.zerows.extension.runtime.skeleton.osgi.spi.business.ExActivity;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -47,7 +48,7 @@ public class ActivityService implements ActivityStub {
 
     @Override
     public Future<JsonArray> saveChanges(final String id, final ActivityStatus status) {
-        final DBJooq jq = Ux.Jooq.on(XActivityChangeDao.class);
+        final DBJooq jq = DB.on(XActivityChangeDao.class);
         return jq.<XActivityChange>fetchAsync(KName.ACTIVITY_ID, id).compose(changes -> {
             final List<XActivityChange> original = new ArrayList<>(changes);
             Ut.itList(original, (change, index) -> {

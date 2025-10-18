@@ -7,6 +7,7 @@ import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.mbse.basement.domain.tables.daos.MFieldDao;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MField;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 
 import java.util.List;
@@ -22,7 +23,7 @@ class FieldModeler implements AoModeler {
             LOGGER.debug("[ Ox ] 6.1. AoModeler.field() ：{0}", schemaJson.encode());
             // 读取所有的Fields
             final JsonObject entityJson = AoModeler.getEntity(schemaJson);
-            return Ux.Jooq.on(MFieldDao.class)
+            return DB.on(MFieldDao.class)
                 .<MField>fetchAndAsync(this.onCriteria(entityJson))
                 .compose(Ux::futureA)
                 .compose(fields -> Ux.future(this.onResult(schemaJson, fields)));
@@ -34,7 +35,7 @@ class FieldModeler implements AoModeler {
         LOGGER.debug("[ Ox ] (Sync) 6.1. AoModeler.field() ：{0}", schemaJson.encode());
         final JsonObject entityJson = AoModeler.getEntity(schemaJson);
         // List
-        final List<MField> fields = Ux.Jooq.on(MFieldDao.class)
+        final List<MField> fields = DB.on(MFieldDao.class)
             .fetchAnd(this.onCriteria(entityJson));
         // JsonArray
         final JsonArray fieldArr = Ux.toJson(fields);

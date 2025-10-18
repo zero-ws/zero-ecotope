@@ -10,6 +10,7 @@ import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.constant.KName;
 import io.zerows.component.qr.Sorter;
 import io.zerows.platform.constant.VString;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.epoch.metadata.KView;
 import io.zerows.epoch.metadata.XHeader;
@@ -38,14 +39,14 @@ public class RuleActor {
             .put(KName.SIGMA, header.getSigma())
             .put(KName.PARENT_ID + ",n", VString.EMPTY);
 
-        return Ux.Jooq.on(SPathDao.class)
+        return DB.on(SPathDao.class)
             .<SPath>fetchAsync(condition, Sorter.create(KName.UI_SORT, true))
             .compose(Ux::futureA);
     }
 
     @Address(Addr.Rule.FETCH_REGION_DEFINE)
     public Future<JsonObject> fetchRegion(final String key) {
-        return Ux.Jooq.on(SPathDao.class)
+        return DB.on(SPathDao.class)
             .<SPath>fetchByIdAsync(key)
             .compose(this.stub::regionAsync);
     }

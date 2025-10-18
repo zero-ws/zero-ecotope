@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XMenuDao;
-import io.zerows.program.Ux;
+import io.zerows.epoch.database.DB;
 import io.zerows.support.fn.Fx;
 
 /**
@@ -14,7 +14,7 @@ public class MenuService implements MenuStub {
 
     @Override
     public Future<JsonArray> fetchByApp(final String appId) {
-        return Ux.Jooq.on(XMenuDao.class)
+        return DB.on(XMenuDao.class)
             .fetchJAsync(KName.APP_ID, appId)
             // metadata field extraction
             .compose(Fx.ofJArray(KName.METADATA));

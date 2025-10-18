@@ -15,6 +15,7 @@ import io.zerows.extension.commerce.rbac.domain.tables.daos.SViewDao;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SAction;
 import io.zerows.extension.commerce.rbac.eon.Addr;
 import io.zerows.extension.runtime.skeleton.eon.em.OwnerType;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -93,7 +94,7 @@ public class ViewMyActor {
                 criteria.remove(KName.METHOD);
                 criteria.put("owner", userId);
                 criteria.put("ownerType", OwnerType.USER.name());
-                return Ux.Jooq.on(SViewDao.class).existAsync(criteria);
+                return DB.on(SViewDao.class).existAsync(criteria);
             }
         });
     }

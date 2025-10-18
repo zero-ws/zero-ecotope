@@ -15,6 +15,7 @@ import io.zerows.extension.commerce.finance.eon.FmConstant;
 import io.zerows.extension.commerce.finance.eon.em.EmTran;
 import io.zerows.extension.commerce.finance.uca.trans.Trade;
 import io.zerows.extension.commerce.finance.util.Fm;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import jakarta.inject.Inject;
@@ -70,17 +71,17 @@ public class DebtService implements DebtStub {
     @Override
     public Future<JsonObject> fetchDebt(final JsonArray keys) {
         final JsonObject response = new JsonObject();
-        return Ux.Jooq.on(FSettlementItemDao.class).<FSettlementItem>fetchInAsync(FmConstant.ID.DEBT_ID, keys)
+        return DB.on(FSettlementItemDao.class).<FSettlementItem>fetchInAsync(FmConstant.ID.DEBT_ID, keys)
             .compose(items -> {
                 /* items */
                 response.put(KName.ITEMS, Ux.toJson(items));
                 final Set<String> settlementIds = Ut.valueSetString(items, FSettlementItem::getSettlementId);
-                return Ux.Jooq.on(FSettlementDao.class).fetchJInAsync(KName.KEY, settlementIds);
+                return DB.on(FSettlementDao.class).fetchJInAsync(KName.KEY, settlementIds);
             })
             .compose(settlementA -> {
                 /* settlements */
                 response.put(KName.Finance.SETTLEMENTS, settlementA);
-                return Ux.Jooq.on(FDebtDao.class).fetchInAsync(KName.KEY, keys);
+                return DB.on(FDebtDao.class).fetchInAsync(KName.KEY, keys);
             })
             .compose(debts -> {
                 /* debts */

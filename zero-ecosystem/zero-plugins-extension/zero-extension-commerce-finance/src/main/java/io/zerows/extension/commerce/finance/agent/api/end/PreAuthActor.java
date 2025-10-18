@@ -10,6 +10,7 @@ import io.zerows.extension.commerce.finance.domain.tables.daos.FPreAuthorizeDao;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FPreAuthorize;
 import io.zerows.extension.commerce.finance.eon.Addr;
 import io.zerows.extension.commerce.finance.eon.FmConstant;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -32,6 +33,6 @@ public class PreAuthActor {
             json.put(KName.STATUS, FmConstant.Status.FINISHED);
         });
         final List<FPreAuthorize> authorizeList = Ux.fromJson(authorized, FPreAuthorize.class);
-        return Ux.Jooq.on(FPreAuthorizeDao.class).updateAsync(authorizeList).compose(Ux::futureA);
+        return DB.on(FPreAuthorizeDao.class).updateAsync(authorizeList).compose(Ux::futureA);
     }
 }

@@ -13,6 +13,7 @@ import io.zerows.extension.runtime.report.domain.tables.pojos.KpReport;
 import io.zerows.extension.runtime.report.domain.tables.pojos.KpReportInstance;
 import io.zerows.extension.runtime.report.uca.combiner.StepGenerator;
 import io.zerows.extension.runtime.report.uca.pull.DataInput;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.base.FnBase;
@@ -30,7 +31,7 @@ import java.util.concurrent.ConcurrentMap;
 public class ReportInstanceService implements ReportInstanceStub {
     @Override
     public Future<JsonObject> searchPaged(final JsonObject query) {
-        return Ux.Jooq.on(KpReportInstanceDao.class)
+        return DB.on(KpReportInstanceDao.class)
             .searchAsync(query);
     }
 
@@ -44,19 +45,19 @@ public class ReportInstanceService implements ReportInstanceStub {
         final JsonObject condition = Ux.whereAnd();
         condition.put(KName.NAME, Ut.valueString(data, KName.NAME));
         condition.put(KName.SIGMA, Ut.valueString(data, KName.SIGMA));
-        return Ux.Jooq.on(KpReportInstanceDao.class)
+        return DB.on(KpReportInstanceDao.class)
             .upsertJAsync(condition, data);
     }
 
     @Override
     public Future<Boolean> deleteInstance(final String key) {
-        return Ux.Jooq.on(KpReportInstanceDao.class)
+        return DB.on(KpReportInstanceDao.class)
             .deleteByIdAsync(key);
     }
 
     @Override
     public Future<JsonObject> fetchInstance(final String key) {
-        return Ux.Jooq.on(KpReportInstanceDao.class)
+        return DB.on(KpReportInstanceDao.class)
             .fetchByIdAsync(key)
             .compose(Ux::futureJ).compose(Fx.ofJObject(
                 "reportContent",

@@ -14,6 +14,7 @@ import io.zerows.extension.commerce.rbac.uca.acl.rapier.Quest;
 import io.zerows.extension.commerce.rbac.uca.ruler.AdmitValve;
 import io.zerows.extension.commerce.rbac.util.Sc;
 import io.zerows.platform.constant.VString;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.sdk.security.HValve;
 import io.zerows.support.Ut;
@@ -36,7 +37,7 @@ public class RuleService implements RuleStub {
          * 2. `parentId` is null
          * 3. Sort By `uiSort`
          */
-        return Sc.cachePath(input, path -> Ux.Jooq.on(SPathDao.class).fetchJAsync(KName.PARENT_ID, path.getKey())
+        return Sc.cachePath(input, path -> DB.on(SPathDao.class).fetchJAsync(KName.PARENT_ID, path.getKey())
             .compose(children -> {
                 /*
                  * Extract `runComponent` to web `HValve` and then run it based join configured
@@ -93,7 +94,7 @@ public class RuleService implements RuleStub {
         if (Objects.isNull(input)) {
             return Ux.futureL();
         }
-        return Sc.cachePocket(input, path -> Ux.Jooq.on(SPathDao.class).<SPath>fetchAsync(KName.PARENT_ID, path.getKey())
+        return Sc.cachePocket(input, path -> DB.on(SPathDao.class).<SPath>fetchAsync(KName.PARENT_ID, path.getKey())
             .compose(children -> {
                 // CODE IN (?, ?, ?) AND SIGMA = ?
                 final JsonObject condition = Ux.whereAnd()
@@ -102,13 +103,13 @@ public class RuleService implements RuleStub {
                 children.forEach(child -> codes.add(child.getCode()));
                 condition.put(KName.CODE + ",i", codes);
                 // SPath -> SPacket
-                return Ux.Jooq.on(SPacketDao.class).fetchAsync(condition);
+                return DB.on(SPacketDao.class).fetchAsync(condition);
             }));
     }
 
     @Override
     public Future<JsonObject> regionAsync(final JsonObject condition, final JsonObject viewData) {
-        return Ux.Jooq.on(SPathDao.class).<SPath>fetchOneAsync(condition)
+        return DB.on(SPathDao.class).<SPath>fetchOneAsync(condition)
             .compose(this::packetAsync)
             .compose(packets -> {
                 final Set<String> resources = Ut.elementSet(packets, SPacket::getResource);

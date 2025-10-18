@@ -8,6 +8,7 @@ import io.zerows.extension.mbse.ui.domain.tables.daos.UiLayoutDao;
 import io.zerows.extension.mbse.ui.domain.tables.daos.UiPageDao;
 import io.zerows.extension.mbse.ui.domain.tables.pojos.UiPage;
 import io.zerows.extension.mbse.ui.eon.UiConstant;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -26,7 +27,7 @@ public class PageService implements PageStub {
          * Enable Cache for Layout
          */
         final Function<String, Future<JsonObject>> executor = (layout) ->
-            Ux.Jooq.on(UiLayoutDao.class)
+            DB.on(UiLayoutDao.class)
                 .fetchByIdAsync(layout)
                 .compose(Ux::futureJ)
                 /*
@@ -44,7 +45,7 @@ public class PageService implements PageStub {
         final JsonObject filters = params.copy();
         filters.put(KName.SIGMA, sigma);
         filters.put("", Boolean.TRUE);
-        return Ux.Jooq.on(UiPageDao.class)
+        return DB.on(UiPageDao.class)
             .<UiPage>fetchOneAsync(filters)
             .compose(page -> {
                 if (Objects.nonNull(page)) {

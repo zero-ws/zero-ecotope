@@ -15,6 +15,7 @@ import io.zerows.extension.commerce.rbac.uca.acl.rapid.DmxRow;
 import io.zerows.extension.runtime.skeleton.osgi.spi.modeler.Confine;
 import io.zerows.platform.constant.VValue;
 import io.zerows.platform.enums.EmSecure;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.sdk.security.Acl;
 import io.zerows.support.Ut;
@@ -125,7 +126,7 @@ class SyntaxAop {
         if (Ut.isNil(condition)) {
             return Ux.future();
         }
-        return Ux.Jooq.on(SVisitantDao.class).<SVisitant>fetchOneAsync(condition)
+        return DB.on(SVisitantDao.class).<SVisitant>fetchOneAsync(condition)
             .compose(visitant -> this.normOutput(visitant, matrixJ));
     }
 

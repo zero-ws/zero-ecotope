@@ -16,6 +16,7 @@ import io.zerows.platform.metadata.RQuery;
 import io.zerows.platform.metadata.RQuote;
 import io.zerows.platform.metadata.RReference;
 import io.zerows.platform.metadata.RResult;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.app.HArk;
@@ -257,10 +258,10 @@ public class HAtomReference implements HReference {
                 // Static
                 if (Objects.isNull(target)) {
                     // Jooq
-                    return Ux.Jooq.on(source.getClassDao()).fetchJ(condition);
+                    return DB.on(source.getClassDao()).fetchJ(condition);
                 } else {
                     // Join
-                    return Ux.Jooq.join()
+                    return DB.join()
                         .add(source.getClassDao(), source.getKeyJoin())
                         .join(target.getClassDao(), target.getKeyJoin())
                         .fetch(condition);

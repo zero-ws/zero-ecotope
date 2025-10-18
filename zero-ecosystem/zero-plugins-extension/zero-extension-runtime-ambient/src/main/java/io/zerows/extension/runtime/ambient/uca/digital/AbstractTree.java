@@ -5,6 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XCategoryDao;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.fn.Fx;
 
@@ -18,7 +19,7 @@ public abstract class AbstractTree extends AbstractAide implements Tree {
     // --------------- fetchArray method ------------------
     /* X_CATEGORY */
     protected Future<JsonArray> fetchTree(final JsonObject criteria) {
-        return Ux.Jooq.on(XCategoryDao.class).fetchAsync(criteria)
+        return DB.on(XCategoryDao.class).fetchAsync(criteria)
             .compose(Ux::futureA)
             .compose(Fx.ofJArray(
                 KName.METADATA,

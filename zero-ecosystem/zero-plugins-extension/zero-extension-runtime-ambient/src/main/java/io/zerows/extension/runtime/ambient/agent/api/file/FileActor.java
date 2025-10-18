@@ -9,6 +9,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XAttachmentDao;
 import io.zerows.extension.runtime.ambient.eon.Addr;
 import io.zerows.extension.runtime.skeleton.eon.em.FileStatus;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -28,11 +29,11 @@ public class FileActor {
         qrDefault.put(KName.ACTIVE, Boolean.TRUE);
         qrDefault.put(KName.CREATED_BY, Ux.keyUser(user));
         final JsonObject qrCombine = Ut.irAndQH(query, "$DFT$", qrDefault);
-        return Ux.Jooq.on(XAttachmentDao.class).searchAsync(qrCombine);
+        return DB.on(XAttachmentDao.class).searchAsync(qrCombine);
     }
 
     @Address(Addr.File.BY_KEY)
     public Future<JsonObject> fileByKey(final String key) {
-        return Ux.Jooq.on(XAttachmentDao.class).fetchJByIdAsync(key);
+        return DB.on(XAttachmentDao.class).fetchJByIdAsync(key);
     }
 }

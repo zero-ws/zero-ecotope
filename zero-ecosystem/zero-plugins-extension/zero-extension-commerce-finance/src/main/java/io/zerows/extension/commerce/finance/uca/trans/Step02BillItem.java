@@ -9,6 +9,7 @@ import io.zerows.extension.commerce.finance.domain.tables.pojos.FBillItem;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FSettlement;
 import io.zerows.extension.commerce.finance.uca.enter.Maker;
 import io.zerows.extension.commerce.finance.uca.replica.IkWay;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.base.FnBase;
@@ -44,7 +45,7 @@ class Step02BillItem implements Trade<FSettlement, FBillItem> {
     public Future<List<FBillItem>> scatter(final JsonObject data, final FSettlement inserted) {
         final JsonArray items = Ut.valueJArray(data, KName.ITEMS);
         return this.buildItems(items, inserted)
-            .compose(Ux.Jooq.on(FBillItemDao.class)::updateAsync);
+            .compose(DB.on(FBillItemDao.class)::updateAsync);
     }
 
     // List<FSettlement> -> List<FBillItem>
@@ -79,7 +80,7 @@ class Step02BillItem implements Trade<FSettlement, FBillItem> {
             final List<FBillItem> items = new ArrayList<>();
             combined.forEach(items::addAll);
             return Ux.future(items);
-        }).compose(Ux.Jooq.on(FBillItemDao.class)::updateAsync);
+        }).compose(DB.on(FBillItemDao.class)::updateAsync);
     }
 
     private Future<List<FBillItem>> buildItems(final JsonArray data, final FSettlement inserted) {

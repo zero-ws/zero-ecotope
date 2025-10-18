@@ -11,6 +11,7 @@ import io.zerows.extension.runtime.workflow.domain.tables.daos.WTodoDao;
 import io.zerows.extension.runtime.workflow.domain.tables.pojos.WTodo;
 import io.zerows.extension.runtime.workflow.eon.WfMsg;
 import io.zerows.extension.runtime.workflow.eon.em.TodoStatus;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -46,7 +47,7 @@ public class TodoService implements TodoStub {
             inputData.put("todoUrl", url);
         }
         final WTodo todo = Ut.deserialize(inputData, WTodo.class);
-        return Ux.Jooq.on(WTodoDao.class)
+        return DB.on(WTodoDao.class)
             .insertAsync(todo)
             .compose(Ux::futureJ);
     }
@@ -59,20 +60,20 @@ public class TodoService implements TodoStub {
             filters.put("type", type);
         }
         filters.put("status,i", statues);
-        return Ux.Jooq.on(WTodoDao.class).fetchAndAsync(filters).compose(Ux::futureA);
+        return DB.on(WTodoDao.class).fetchAndAsync(filters).compose(Ux::futureA);
     }
 
     @Override
     public Future<JsonArray> fetchTodos(final String sigma, final JsonArray types, final JsonArray statues) {
         final JsonObject filters = this.toFilters(sigma, types, statues);
-        return Ux.Jooq.on(WTodoDao.class).fetchAndAsync(filters).compose(Ux::futureA);
+        return DB.on(WTodoDao.class).fetchAndAsync(filters).compose(Ux::futureA);
     }
 
     @Override
     public Future<JsonArray> fetchTodos(final String sigma, final JsonArray types, final JsonArray statues, final JsonArray codes) {
         final JsonObject filters = this.toFilters(sigma, types, statues);
         filters.put("code,i", codes);
-        return Ux.Jooq.on(WTodoDao.class).fetchAndAsync(filters).compose(Ux::futureA);
+        return DB.on(WTodoDao.class).fetchAndAsync(filters).compose(Ux::futureA);
     }
 
     private JsonObject toFilters(final String sigma, final JsonArray types, final JsonArray statues) {
@@ -87,7 +88,7 @@ public class TodoService implements TodoStub {
 
     @Override
     public Future<JsonArray> updateStatus(final Set<String> keys, final JsonObject params) {
-        return Ux.Jooq.on(WTodoDao.class)
+        return DB.on(WTodoDao.class)
             .<WTodo>fetchInAsync(KName.KEY, Ut.toJArray(keys))
             .compose(Ux::futureA)
             .compose(Fx.ofJArray((todoArray) -> {
@@ -103,7 +104,7 @@ public class TodoService implements TodoStub {
                     todoList = todoList.stream().map(todo -> this.combineTodo(todo, params))
                         .collect(Collectors.toList());
                 }
-                return Ux.Jooq.on(WTodoDao.class)
+                return DB.on(WTodoDao.class)
                     .updateAsync(todoList)
                     .compose(Ux::futureA);
             }));
@@ -111,7 +112,7 @@ public class TodoService implements TodoStub {
 
     @Override
     public Future<JsonObject> updateStatus(final String key, final JsonObject params) {
-        return Ux.Jooq.on(WTodoDao.class)
+        return DB.on(WTodoDao.class)
             .<WTodo>fetchByIdAsync(key)
             .compose(Ux::futureJ)
             .compose(Fx.ofJObject((todoJson) -> {
@@ -122,7 +123,7 @@ public class TodoService implements TodoStub {
                 {
                     todo = this.combineTodo(todo, params);
                 }
-                return Ux.Jooq.on(WTodoDao.class)
+                return DB.on(WTodoDao.class)
                     .updateAsync(todo)
                     .compose(Ux::futureJ);
             }));
@@ -165,7 +166,7 @@ public class TodoService implements TodoStub {
 
     @Override
     public Future<JsonObject> fetchTodo(final String key) {
-        return Ux.Jooq.on(WTodoDao.class)
+        return DB.on(WTodoDao.class)
             .<WTodo>fetchByIdAsync(key)
             .compose(Ux::futureJ)
             .compose(Fx.ofJObject((todo) -> Ux.channel(Todo.class, () -> todo, channel -> {

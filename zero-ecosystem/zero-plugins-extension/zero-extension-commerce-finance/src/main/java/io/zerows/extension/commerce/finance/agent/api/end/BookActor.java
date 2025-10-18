@@ -6,6 +6,7 @@ import io.vertx.ext.auth.User;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.extension.commerce.finance.domain.tables.daos.FBookDao;
@@ -30,6 +31,6 @@ public class BookActor {
             json.put(KName.UPDATED_BY, userKey);
         });
         final List<FBook> bookList = Ux.fromJson(books, FBook.class);
-        return Ux.Jooq.on(FBookDao.class).updateAsync(bookList).compose(Ux::futureA);
+        return DB.on(FBookDao.class).updateAsync(bookList).compose(Ux::futureA);
     }
 }

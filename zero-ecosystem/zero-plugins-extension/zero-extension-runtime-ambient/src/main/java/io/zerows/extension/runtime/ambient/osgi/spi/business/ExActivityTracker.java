@@ -8,6 +8,7 @@ import io.zerows.extension.runtime.ambient.domain.tables.daos.XActivityChangeDao
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XActivityDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XActivity;
 import io.zerows.extension.runtime.skeleton.osgi.spi.business.ExActivity;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -30,12 +31,12 @@ public class ExActivityTracker implements ExActivity {
 
     @Override
     public Future<JsonArray> activities(final JsonObject condition) {
-        return Ux.Jooq.on(XActivityDao.class).fetchAsync(condition).compose(Ux::futureA);
+        return DB.on(XActivityDao.class).fetchAsync(condition).compose(Ux::futureA);
     }
 
     @Override
     public Future<JsonObject> activity(final String activityId) {
-        return Ux.Jooq.on(XActivityDao.class).<XActivity>fetchByIdAsync(activityId).compose(activity -> {
+        return DB.on(XActivityDao.class).<XActivity>fetchByIdAsync(activityId).compose(activity -> {
             if (Objects.isNull(activity)) {
                 return Ux.futureJ();
             } else {
@@ -61,7 +62,7 @@ public class ExActivityTracker implements ExActivity {
          * Created By should be synced from system
          * Read all valid activities
          */
-        return Ux.Jooq.on(XActivityDao.class).fetchAndAsync(criteria);
+        return DB.on(XActivityDao.class).fetchAndAsync(criteria);
     }
 
     @Override
@@ -74,13 +75,13 @@ public class ExActivityTracker implements ExActivity {
             final JsonObject criteria = new JsonObject();
             criteria.put("activityId,i", Ut.toJArray(activityIds));
             criteria.put("fieldName", field);
-            return Ux.Jooq.on(XActivityChangeDao.class).fetchAndAsync(criteria).compose(Ux::futureA);
+            return DB.on(XActivityChangeDao.class).fetchAndAsync(criteria).compose(Ux::futureA);
         });
     }
 
     @Override
     public Future<JsonArray> changes(final String activityId) {
-        return Ux.Jooq.on(XActivityChangeDao.class)
+        return DB.on(XActivityChangeDao.class)
             .fetchAsync(KName.ACTIVITY_ID, activityId)
             .compose(Ux::futureA);
     }

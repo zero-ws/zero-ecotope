@@ -10,6 +10,7 @@ import io.zerows.extension.runtime.ambient.bootstrap.AtConfig;
 import io.zerows.extension.runtime.ambient.bootstrap.AtPin;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XCategoryDao;
 import io.zerows.extension.runtime.skeleton.osgi.spi.feature.Arbor;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -36,7 +37,7 @@ public class DocBuilder implements DocBStub {
     @Override
     public Future<JsonArray> initialize(final String appId, final String type) {
         final JsonObject condition = this.qrCond(appId, type, null);
-        return Ux.Jooq.on(XCategoryDao.class).fetchJAsync(condition)
+        return DB.on(XCategoryDao.class).fetchJAsync(condition)
             .compose(Fx.ofJArray(
                 KName.METADATA,
                 KName.Component.TREE_CONFIG,
@@ -52,7 +53,7 @@ public class DocBuilder implements DocBStub {
     @Override
     public Future<JsonArray> initialize(final String appId, final String type, final String name) {
         final JsonObject condition = this.qrCond(appId, type, name);
-        return Ux.Jooq.on(XCategoryDao.class).fetchJOneAsync(condition)
+        return DB.on(XCategoryDao.class).fetchJOneAsync(condition)
             .compose(Fx.ofJObject(
                 KName.METADATA,
                 KName.Component.TREE_CONFIG,

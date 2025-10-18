@@ -8,6 +8,7 @@ import io.zerows.extension.commerce.finance.domain.tables.pojos.FBill;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FBillItem;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FBook;
 import io.zerows.extension.commerce.finance.util.Fm;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -45,7 +46,7 @@ class BookAction {
             .collect(Collectors.toSet());
         final JsonObject condition = new JsonObject();
         condition.put("key,i", Ut.toJArray(billKeys));
-        return Ux.Jooq.on(FBillDao.class).<FBill>fetchAsync(condition).compose(bills -> {
+        return DB.on(FBillDao.class).<FBill>fetchAsync(condition).compose(bills -> {
             if (bills.isEmpty()) {
                 return Ux.future(new ConcurrentHashMap<>());
             }
@@ -56,7 +57,7 @@ class BookAction {
     static Future<ConcurrentMap<String, FBook>> mapBook(final Set<String> billKeys) {
         final JsonObject criteria = new JsonObject();
         criteria.put("key,i", Ut.toJArray(billKeys));
-        return Ux.Jooq.on(FBookDao.class).<FBook>fetchAsync(criteria).compose(books -> {
+        return DB.on(FBookDao.class).<FBook>fetchAsync(criteria).compose(books -> {
             if (books.isEmpty()) {
                 return Ux.future(new ConcurrentHashMap<>());
             }

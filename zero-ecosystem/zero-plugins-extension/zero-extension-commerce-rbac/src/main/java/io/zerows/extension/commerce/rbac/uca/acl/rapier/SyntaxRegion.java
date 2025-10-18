@@ -14,6 +14,7 @@ import io.zerows.extension.commerce.rbac.domain.tables.pojos.SView;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SVisitant;
 import io.zerows.extension.commerce.rbac.eon.em.PackType;
 import io.zerows.extension.commerce.rbac.uca.ruler.element.HEyelet;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -72,7 +73,7 @@ class SyntaxRegion {
             // .put(KName.NAME, owner.view())
             // .put(KName.POSITION, owner.position())
             .put(KName.RESOURCE_ID, resource.getKey());
-        return Ux.Jooq.on(SViewDao.class).<SView>fetchAsync(viewQr).compose(views -> {
+        return DB.on(SViewDao.class).<SView>fetchAsync(viewQr).compose(views -> {
             // metadata
             final JsonObject response = new JsonObject();
             response.put(KName.METADATA, this.regionMeta(packet));
@@ -120,7 +121,7 @@ class SyntaxRegion {
         }).compose(responseJ -> {
             final Boolean virtual = Objects.isNull(resource.getVirtual()) ? Boolean.FALSE : resource.getVirtual();
             if (virtual) {
-                return Ux.Jooq.on(SVisitantDao.class).<SVisitant>fetchAsync(KName.VIEW_ID, view.getKey())
+                return DB.on(SVisitantDao.class).<SVisitant>fetchAsync(KName.VIEW_ID, view.getKey())
                     .compose(visitants -> {
                         final JsonObject visitantJ = new JsonObject();
                         visitants.forEach(visitant -> visitantJ.put(visitant.getSeekKey(), Ux.toJson(visitant)));

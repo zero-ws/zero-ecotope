@@ -13,6 +13,7 @@ import io.zerows.extension.runtime.integration.uca.updater.StoreMigration;
 import io.zerows.extension.runtime.integration.uca.updater.StoreRename;
 import io.zerows.extension.runtime.integration.uca.updater.StoreUp;
 import io.zerows.extension.runtime.integration.util.Is;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -37,7 +38,7 @@ public class DirService implements DirStub {
             // IDirectory Building
             final IDirectory directory = fs.initTree(inputJ);
             // Insert into database
-            return Ux.Jooq.on(IDirectoryDao.class).insertJAsync(directory)
+            return DB.on(IDirectoryDao.class).insertJAsync(directory)
                 // JsonArray Deserialization
                 .compose(Is::dataOut)
                 // Actual Directory Processing
@@ -57,7 +58,7 @@ public class DirService implements DirStub {
      */
     @Override
     public Future<Boolean> remove(final String key) {
-        final DBJooq jq = Ux.Jooq.on(IDirectoryDao.class);
+        final DBJooq jq = DB.on(IDirectoryDao.class);
         return jq.<IDirectory>fetchByIdAsync(key)
             .compose(directory -> Is.directoryQr(directory).compose(queried -> {
                 final List<IDirectory> directories = new ArrayList<>();
@@ -70,7 +71,7 @@ public class DirService implements DirStub {
                 return Ux.future(directories);
             }))
             // Delete Records
-            .compose(Ux.Jooq.on(IDirectoryDao.class)::deleteJAsync)
+            .compose(DB.on(IDirectoryDao.class)::deleteJAsync)
             // Helper action `rm` command to remove folders
             .compose(removed -> Is.fsRun(removed, Fs::rm))
             .compose(nil -> Ux.futureT());
@@ -84,7 +85,7 @@ public class DirService implements DirStub {
      */
     @Override
     public Future<Boolean> remove(final String key, final String userId) {
-        final DBJooq jq = Ux.Jooq.on(IDirectoryDao.class);
+        final DBJooq jq = DB.on(IDirectoryDao.class);
         return jq.<IDirectory>fetchByIdAsync(key).compose(directory -> Is.directoryQr(directory).compose(queried -> {
             final List<IDirectory> directories = new ArrayList<>();
             // Current Folder
@@ -132,7 +133,7 @@ public class DirService implements DirStub {
          * 1. integrationId changing
          * 2. storePath changing
          */
-        final DBJooq jq = Ux.Jooq.on(IDirectoryDao.class);
+        final DBJooq jq = DB.on(IDirectoryDao.class);
         return jq.<IDirectory>fetchByIdAsync(key).compose(directory -> {
             // Query Null directory
             if (Objects.isNull(directory)) {

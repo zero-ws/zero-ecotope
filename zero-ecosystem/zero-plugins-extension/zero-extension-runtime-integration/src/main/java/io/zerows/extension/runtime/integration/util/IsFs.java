@@ -8,6 +8,7 @@ import io.zerows.extension.runtime.integration.domain.tables.daos.IDirectoryDao;
 import io.zerows.extension.runtime.integration.domain.tables.pojos.IDirectory;
 import io.zerows.extension.runtime.integration.uca.command.Fs;
 import io.zerows.extension.runtime.integration.uca.command.FsDefault;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -136,7 +137,7 @@ class IsFs {
         if (Objects.isNull(directoryId)) {
             return Ux.future(fsDft);
         }
-        return Ux.Jooq.on(IDirectoryDao.class).<IDirectory>fetchByIdAsync(directoryId).compose(directory -> {
+        return DB.on(IDirectoryDao.class).<IDirectory>fetchByIdAsync(directoryId).compose(directory -> {
             if (Objects.isNull(directory)) {
                 return Ux.future(fsDft);
             }

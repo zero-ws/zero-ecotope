@@ -7,6 +7,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.component.log.LogOf;
 import io.zerows.extension.mbse.basement.domain.tables.daos.MKeyDao;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MKey;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 
 import java.util.List;
@@ -21,7 +22,7 @@ class KeyModeler implements AoModeler {
             LOGGER.debug("[ Ox ] 6.2. AoModeler.key() ：{0}", schemaJson.encode());
             final JsonObject entityJson = AoModeler.getEntity(schemaJson);
             // 读取所有的Keys
-            return Ux.Jooq.on(MKeyDao.class)
+            return DB.on(MKeyDao.class)
                 .<MKey>fetchAndAsync(this.onCriteria(entityJson))
                 .compose(Ux::futureA)
                 .compose(keys -> Ux.future(this.onResult(schemaJson, keys)));
@@ -33,7 +34,7 @@ class KeyModeler implements AoModeler {
         LOGGER.debug("[ Ox ] (Sync) 6.2. AoModeler.key() ：{0}", schemaJson.encode());
         final JsonObject entityJson = AoModeler.getEntity(schemaJson);
         // List
-        final List<MKey> keyList = Ux.Jooq.on(MKeyDao.class)
+        final List<MKey> keyList = DB.on(MKeyDao.class)
             .fetchAnd(this.onCriteria(entityJson));
         // Array
         final JsonArray keys = Ux.toJson(keyList);

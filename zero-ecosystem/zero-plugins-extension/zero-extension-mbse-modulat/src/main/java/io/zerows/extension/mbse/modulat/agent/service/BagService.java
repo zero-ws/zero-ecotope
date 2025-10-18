@@ -6,6 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.mbse.modulat.domain.tables.daos.BBagDao;
 import io.zerows.platform.metadata.KRef;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -35,7 +36,7 @@ public class BagService implements BagStub {
     }
 
     private Future<JsonArray> fetchBag(final JsonObject condition) {
-        return Ux.Jooq.on(BBagDao.class).fetchJAsync(condition).compose(Fx.ofJArray(
+        return DB.on(BBagDao.class).fetchJAsync(condition).compose(Fx.ofJArray(
             KName.Flow.UI_STYLE,
             KName.Flow.UI_CONFIG
         ));

@@ -6,6 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SUser;
 import io.zerows.platform.constant.VString;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -31,7 +32,7 @@ public abstract class AbstractBind<T> implements IdcBinder<T> {
 
     protected Future<ConcurrentMap<String, List<T>>> mapAsync(final JsonArray inputData, final Class<?> daoCls, final String field) {
         // inputData 必须有数据
-        return Ux.Jooq.on(daoCls).<T>fetchAsync(KName.SIGMA, this.sigma).compose(tList -> {
+        return DB.on(daoCls).<T>fetchAsync(KName.SIGMA, this.sigma).compose(tList -> {
             // 根据用户输入数据执行分组
             final ConcurrentMap<String, String> vector = Ut.elementMap(tList, this.valueFn(), this.keyFn());
             /*
@@ -66,7 +67,7 @@ public abstract class AbstractBind<T> implements IdcBinder<T> {
          * Remove old relation ship between ( role - user )
          */
         condition.put(field + ",i", Ut.toJArray(userKeys));
-        return Ux.Jooq.on(daoCls).deleteByAsync(condition);
+        return DB.on(daoCls).deleteByAsync(condition);
     }
 
     protected abstract Function<T, String> keyFn();

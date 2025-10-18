@@ -10,6 +10,7 @@ import io.zerows.extension.runtime.workflow.domain.tables.daos.WTicketDao;
 import io.zerows.extension.runtime.workflow.domain.tables.pojos.WTicket;
 import io.zerows.extension.runtime.workflow.uca.toolkit.URequest;
 import io.zerows.extension.runtime.workflow.uca.toolkit.UTL;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 
 class SyncTicket extends AbstractSync {
@@ -27,7 +28,7 @@ class SyncTicket extends AbstractSync {
 
             // Sync
             .compose(recordRef -> {
-                final DBJooq tJq = Ux.Jooq.on(WTicketDao.class);
+                final DBJooq tJq = DB.on(WTicketDao.class);
                 final JsonObject ticketJ = requestJ.copy();
                 /*
                  * Key Point for attachment linkage here, the linkage must contain

@@ -22,6 +22,7 @@ import io.zerows.extension.commerce.finance.domain.tables.pojos.FSettlement;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FTrans;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FTransItem;
 import io.zerows.extension.commerce.finance.eon.Addr;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -73,7 +74,7 @@ public class FetchActor {
             /*
              * 查询预授权信息
              */
-            .compose(dataSouse -> Ux.Jooq.on(FPreAuthorizeDao.class).<FPreAuthorize>fetchAsync("orderId", orderId).compose(item -> {
+            .compose(dataSouse -> DB.on(FPreAuthorizeDao.class).<FPreAuthorize>fetchAsync("orderId", orderId).compose(item -> {
                 dataSouse.put("preAuthorize", item.isEmpty() ? new JsonArray() : Ux.toJson(item));
                 return Ux.future(dataSouse);
             }));
@@ -83,10 +84,10 @@ public class FetchActor {
     @Address(Addr.Bill.FETCH_BILLS)
     public Future<JsonObject> fetchBills(final JsonObject query) {
         // Search Bills by Pagination ( Qr Engine )
-        return Ux.Jooq.on(FBillDao.class).searchAsync(query).compose(response -> {
+        return DB.on(FBillDao.class).searchAsync(query).compose(response -> {
             final JsonArray bill = Ut.valueJArray(response, KName.LIST);
             final Set<String> bills = Ut.valueSetString(bill, KName.KEY);
-            return Ux.Jooq.on(FBillItemDao.class).fetchJInAsync("billId", Ut.toJArray(bills))
+            return DB.on(FBillItemDao.class).fetchJInAsync("billId", Ut.toJArray(bills))
                 .compose(items -> {
                     final ConcurrentMap<String, JsonArray> grouped = Ut.elementGroup(items, "billId");
                     Ut.itJArray(bill).forEach(json -> {
@@ -114,7 +115,7 @@ public class FetchActor {
          * }
          */
         final JsonObject response = new JsonObject();
-        return Ux.Jooq.on(FBillDao.class).<FBill>fetchByIdAsync(key).compose(bill -> {
+        return DB.on(FBillDao.class).<FBill>fetchByIdAsync(key).compose(bill -> {
             if (Objects.isNull(bill)) {
                 return Ux.futureJ();
             }
@@ -129,13 +130,13 @@ public class FetchActor {
                 for (final FSettlement item : settlements) {
                     serial = Set.of("ST:" + item.getSerial());
                 }
-                return Ux.Jooq.on(FTransDao.class).<FTrans>fetchAsync("NAME", serial)
+                return DB.on(FTransDao.class).<FTrans>fetchAsync("NAME", serial)
                     .compose(fTrans -> {
                         Set<String> seria = null;
                         for (final FTrans item : fTrans) {
                             seria = Set.of(item.getKey());
                         }
-                        return Ux.Jooq.on(FTransItemDao.class).<FTransItem>fetchAsync("TRANSACTION_ID", seria);
+                        return DB.on(FTransItemDao.class).<FTransItem>fetchAsync("TRANSACTION_ID", seria);
                     }).compose(fTransItems -> {
                         final JsonArray settlementJ = Ux.toJson(settlements);
                         final JsonArray newSettlements = new JsonArray();

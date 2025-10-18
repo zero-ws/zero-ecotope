@@ -16,6 +16,7 @@ import io.zerows.extension.runtime.ambient.domain.tables.pojos.XActivityChange;
 import io.zerows.extension.runtime.ambient.eon.em.ActivityStatus;
 import io.zerows.platform.enums.modeling.EmAttribute;
 import io.zerows.platform.enums.typed.ChangeFlag;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.specification.modeling.HAttribute;
 import io.zerows.support.Ut;
@@ -126,7 +127,7 @@ class AtRunner {
             if (Objects.isNull(activity.getUpdatedAt())) {
                 activity.setUpdatedAt(LocalDateTime.now());
             }
-            return Ux.Jooq.on(XActivityDao.class).insertAsync(activity)
+            return DB.on(XActivityDao.class).insertAsync(activity)
                 .compose(inserted -> {
                     /*
                      * 关联设置和初始化状态信息
@@ -159,7 +160,7 @@ class AtRunner {
                      * 计算当前 activity 是否生成待确认，放到最终的 JsonObject 中，用于判断待确认流程
                      * 默认 isConfirm 为 TRUE
                      */
-                    return Ux.Jooq.on(XActivityChangeDao.class)
+                    return DB.on(XActivityChangeDao.class)
                         .insertAsync(changeList)
                         .compose(nil -> Ux.future(inserted))
                         .compose(Ux::futureJ)

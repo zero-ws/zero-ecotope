@@ -8,6 +8,7 @@ import io.zerows.extension.runtime.skeleton.osgi.spi.feature.Transit;
 import io.zerows.extension.runtime.tpl.domain.tables.daos.TplMessageDao;
 import io.zerows.extension.runtime.tpl.domain.tables.pojos.TplMessage;
 import io.zerows.extension.runtime.tpl.util.Tl;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -30,7 +31,7 @@ public class TransitMessage implements Transit {
         final JsonObject condition = Ux.whereAnd();
         condition.put(KName.APP_ID, Ut.valueString(input, KName.APP_ID));
         condition.put(KName.CODE, message);
-        return Ux.Jooq.on(TplMessageDao.class).<TplMessage>fetchOneAsync(condition).compose(tpl -> {
+        return DB.on(TplMessageDao.class).<TplMessage>fetchOneAsync(condition).compose(tpl -> {
             if (Objects.isNull(tpl)) {
                 return Ux.futureJ();
             }

@@ -15,6 +15,7 @@ import io.zerows.extension.commerce.rbac.domain.tables.pojos.SRole;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SView;
 import io.zerows.extension.commerce.rbac.eon.AuthKey;
 import io.zerows.extension.commerce.rbac.eon.ScConstant;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -38,7 +39,7 @@ public class RoleService implements RoleStub {
         // 3. 转换数据模型
         final SRole sRole = Ut.fromJson(data, SRole.class);
 
-        return Ux.Jooq.on(SRoleDao.class).insertAsync(sRole)
+        return DB.on(SRoleDao.class).insertAsync(sRole)
             .compose(role -> this.savePermissions(role.getKey(), queryCondition))
             .compose(nil -> this.saveDefaultView(sRole, user, initializePermissions))
             .map(role -> (Ux.toJson(sRole)));
@@ -48,7 +49,7 @@ public class RoleService implements RoleStub {
      * 保存角色与权限的关联关系
      */
     private Future<JsonObject> savePermissions(final String roleId, final JsonObject queryCondition) {
-        return Ux.Jooq.on(SPermissionDao.class).<SPermission>fetchAsync(queryCondition)
+        return DB.on(SPermissionDao.class).<SPermission>fetchAsync(queryCondition)
             .compose(permissions -> {
                 final JsonArray relations = new JsonArray();
                 for (final SPermission permission : permissions) {
@@ -56,7 +57,7 @@ public class RoleService implements RoleStub {
                         .put(AuthKey.F_ROLE_ID, roleId)
                         .put(AuthKey.F_PERM_ID, permission.getKey()));
                 }
-                return Ux.Jooq.on(RRolePermDao.class).insertAsync(relations);
+                return DB.on(RRolePermDao.class).insertAsync(relations);
             }).compose(niv -> Ux.future());
     }
 
@@ -81,6 +82,6 @@ public class RoleService implements RoleStub {
         view.setCreatedAt(LocalDateTime.now());
         view.setCreatedBy(Ux.keyUser(user));
 
-        return Ux.Jooq.on(SViewDao.class).insertAsync(view).mapEmpty();
+        return DB.on(SViewDao.class).insertAsync(view).mapEmpty();
     }
 }

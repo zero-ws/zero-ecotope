@@ -8,6 +8,7 @@ import io.zerows.epoch.database.jooq.operation.DBJooq;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XLinkageDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XLinkage;
 import io.zerows.platform.constant.VString;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -30,7 +31,7 @@ public class LinkService implements LinkStub {
         if (Ut.isNotNil(type)) {
             criteria.put(KName.TYPE, type);
         }
-        return Ux.Jooq.on(XLinkageDao.class).fetchJAsync(criteria);
+        return DB.on(XLinkageDao.class).fetchJAsync(criteria);
     }
 
     @Override
@@ -45,7 +46,7 @@ public class LinkService implements LinkStub {
             if (Ut.isNotNil(targetKey)) {
                 criteria.put(KName.TARGET_KEY, targetKey);
             }
-            return Ux.Jooq.on(XLinkageDao.class).fetchJAsync(criteria);
+            return DB.on(XLinkageDao.class).fetchJAsync(criteria);
         }
     }
 
@@ -67,7 +68,7 @@ public class LinkService implements LinkStub {
                 queueA.add(Ux.fromJson(json, XLinkage.class));
             }
         });
-        final DBJooq jooq = Ux.Jooq.on(XLinkageDao.class);
+        final DBJooq jooq = DB.on(XLinkageDao.class);
         final List<Future<List<XLinkage>>> futures = new ArrayList<>();
         futures.add(jooq.insertAsync(queueA));
         futures.add(jooq.updateAsync(queueU));
@@ -81,7 +82,7 @@ public class LinkService implements LinkStub {
         // Deleting
         final JsonObject condition = new JsonObject();
         condition.put("key,i", removed);
-        return Ux.Jooq.on(XLinkageDao.class).deleteByAsync(condition)
+        return DB.on(XLinkageDao.class).deleteByAsync(condition)
             // Saving
             .compose(deleted -> this.saving(data, false));
     }
@@ -89,7 +90,7 @@ public class LinkService implements LinkStub {
     @Override
     public Future<JsonObject> create(final JsonObject data, final boolean vector) {
         this.calcKey(data, vector);
-        return Ux.Jooq.on(XLinkageDao.class).insertJAsync(data);
+        return DB.on(XLinkageDao.class).insertJAsync(data);
     }
 
     private void calcData(final JsonObject json, final String field) {

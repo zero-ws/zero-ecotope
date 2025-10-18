@@ -21,6 +21,7 @@ import io.zerows.platform.metadata.KRef;
 import io.zerows.plugins.common.shell.atom.CommandInput;
 import io.zerows.plugins.common.shell.eon.EmCommand;
 import io.zerows.plugins.common.shell.refine.Sl;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.app.HArk;
@@ -173,7 +174,7 @@ public class AdjustUiInstruction extends AbstractInstruction {
 
     private Future<JsonArray> uiList(final String identifier, final String sigma) {
         final JsonObject condition = this.uiCond(identifier, sigma);
-        return Ux.Jooq.on(UiListDao.class).<UiList>fetchAndAsync(condition)
+        return DB.on(UiListDao.class).<UiList>fetchAndAsync(condition)
             .compose(lists -> FnBase.combineT(lists, this::uiListField))
             .compose(Ux::futureA);
     }
@@ -184,7 +185,7 @@ public class AdjustUiInstruction extends AbstractInstruction {
         condition.put(KName.SIGMA, list.getSigma());
         condition.put("controlId", controlId);
         final JsonObject listJson = Ux.toJson(list);
-        return Ux.Jooq.on(UiColumnDao.class).<UiColumn>fetchAndAsync(condition)
+        return DB.on(UiColumnDao.class).<UiColumn>fetchAndAsync(condition)
             .compose(fields -> {
                 listJson.put(KName.Ui.COLUMNS, Ux.toJson(fields));
                 return Ux.future(listJson);
@@ -193,7 +194,7 @@ public class AdjustUiInstruction extends AbstractInstruction {
 
     private Future<JsonArray> uiForm(final String identifier, final String sigma) {
         final JsonObject condition = this.uiCond(identifier, sigma);
-        return Ux.Jooq.on(UiFormDao.class).<UiForm>fetchAndAsync(condition)
+        return DB.on(UiFormDao.class).<UiForm>fetchAndAsync(condition)
             .compose(forms -> FnBase.combineT(forms, this::uiFormField))
             .compose(Ux::futureA);
     }
@@ -203,7 +204,7 @@ public class AdjustUiInstruction extends AbstractInstruction {
         condition.put(KName.SIGMA, form.getSigma());
         condition.put("controlId", form.getKey());
         final JsonObject formJson = Ux.toJson(form);
-        return Ux.Jooq.on(UiFieldDao.class).<UiField>fetchAndAsync(condition)
+        return DB.on(UiFieldDao.class).<UiField>fetchAndAsync(condition)
             .compose(fields -> {
                 formJson.put(KName.Modeling.FIELDS, Ux.toJson(fields));
                 return Ux.future(formJson);

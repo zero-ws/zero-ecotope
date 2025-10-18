@@ -11,6 +11,7 @@ import io.zerows.extension.commerce.rbac.eon.AuthKey;
 import io.zerows.extension.commerce.rbac.eon.AuthMsg;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
 import io.zerows.extension.runtime.skeleton.secure.Tie;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -52,7 +53,7 @@ public class TieGroup implements Tie<String, JsonArray> {
         final JsonObject conditionJ = new JsonObject()
             .put(AuthKey.F_USER_ID, userKey);
         /* Remove & Insert */
-        final DBJooq jq = Ux.Jooq.on(RUserGroupDao.class);
+        final DBJooq jq = DB.on(RUserGroupDao.class);
         /* Delete Related Groups */
         return jq.deleteByAsync(conditionJ).compose(nil -> {
             /* Insert Related Groups */

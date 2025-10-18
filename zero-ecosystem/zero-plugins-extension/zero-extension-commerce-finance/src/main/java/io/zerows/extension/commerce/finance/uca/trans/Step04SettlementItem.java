@@ -7,6 +7,7 @@ import io.zerows.extension.commerce.finance.domain.tables.daos.FSettlementItemDa
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FSettlement;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FSettlementItem;
 import io.zerows.extension.commerce.finance.uca.enter.Maker;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.base.FnBase;
@@ -29,7 +30,7 @@ class Step04SettlementItem implements Trade<FSettlement, FSettlementItem> {
          * 保存起来。
          */
         return Maker.upSTI().buildAsync(data, inserted)
-            .compose(Ux.Jooq.on(FSettlementItemDao.class)::insertAsync);
+            .compose(DB.on(FSettlementItemDao.class)::insertAsync);
     }
 
     @Override
@@ -48,6 +49,6 @@ class Step04SettlementItem implements Trade<FSettlement, FSettlementItem> {
                 final List<FSettlementItem> inserted = new ArrayList<>();
                 result.forEach(inserted::addAll);
                 return Ux.future(inserted);
-            }).compose(Ux.Jooq.on(FSettlementItemDao.class)::insertAsync);
+            }).compose(DB.on(FSettlementItemDao.class)::insertAsync);
     }
 }

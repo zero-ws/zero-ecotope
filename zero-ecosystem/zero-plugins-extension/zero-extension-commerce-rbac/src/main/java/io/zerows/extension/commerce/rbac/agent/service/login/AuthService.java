@@ -10,7 +10,7 @@ import io.zerows.extension.commerce.rbac.domain.tables.pojos.OUser;
 import io.zerows.extension.commerce.rbac.eon.AuthKey;
 import io.zerows.extension.commerce.rbac.eon.AuthMsg;
 import io.zerows.extension.commerce.rbac.exception._80202Exception401CodeGeneration;
-import io.zerows.program.Ux;
+import io.zerows.epoch.database.DB;
 import jakarta.inject.Inject;
 
 import java.util.Objects;
@@ -28,7 +28,7 @@ public class AuthService implements AuthStub {
     @SuppressWarnings("all")
     public Future<JsonObject> authorize(final JsonObject filters) {
         this.logger().info(AuthMsg.CODE_FILTER, filters.encode());
-        return Ux.Jooq.on(OUserDao.class).<OUser>fetchOneAsync(filters).compose(item -> {
+        return DB.on(OUserDao.class).<OUser>fetchOneAsync(filters).compose(item -> {
             if (Objects.isNull(item)) {
                 // Could not identify OUser record, error throw.
                 final String clientId = filters.getString(AuthKey.F_CLIENT_ID);

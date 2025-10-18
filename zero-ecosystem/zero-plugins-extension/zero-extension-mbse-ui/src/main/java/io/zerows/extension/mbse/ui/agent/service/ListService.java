@@ -12,6 +12,7 @@ import io.zerows.extension.mbse.ui.domain.tables.daos.UiViewDao;
 import io.zerows.extension.mbse.ui.domain.tables.pojos.UiList;
 import io.zerows.extension.mbse.ui.domain.tables.pojos.UiView;
 import io.zerows.extension.mbse.ui.uca.qbe.QBECache;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -31,7 +32,7 @@ public class ListService implements ListStub {
         /*
          * Read list configuration for configuration
          */
-        return Ux.Jooq.on(UiListDao.class).<UiList>fetchByIdAsync(listId).compose(list -> {
+        return DB.on(UiListDao.class).<UiList>fetchByIdAsync(listId).compose(list -> {
             if (Objects.isNull(list)) {
                 LOG.Ui.warn(LOGGER, " Form not found, id = {0}", listId);
                 return Ux.future(new JsonObject());
@@ -51,7 +52,7 @@ public class ListService implements ListStub {
         final JsonObject condition = new JsonObject();
         condition.put(KName.IDENTIFIER, identifier);
         condition.put(KName.SIGMA, sigma);
-        return Ux.Jooq.on(UiListDao.class).<UiList>fetchAndAsync(condition)
+        return DB.on(UiListDao.class).<UiList>fetchAndAsync(condition)
             /* List<UiList> */
             .compose(Ux::futureA);
     }
@@ -61,7 +62,7 @@ public class ListService implements ListStub {
 
         final Sorter sorter = Sorter.create(KName.SORT, true);
 
-        return Ux.Jooq.on(UiViewDao.class).<UiView>fetchAsync(condition, sorter)
+        return DB.on(UiViewDao.class).<UiView>fetchAsync(condition, sorter)
             // Cached Data for future usage
             .compose(QBECache::cached)
             .compose(Ux::futureA)

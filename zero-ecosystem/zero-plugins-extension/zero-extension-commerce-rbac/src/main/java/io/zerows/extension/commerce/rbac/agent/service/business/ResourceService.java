@@ -3,6 +3,7 @@ package io.zerows.extension.commerce.rbac.agent.service.business;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.SActionDao;
@@ -17,10 +18,10 @@ public class ResourceService implements ResourceStub {
 
     @Override
     public Future<JsonObject> fetchResource(final String resourceId) {
-        return Ux.Jooq.on(SResourceDao.class)
+        return DB.on(SResourceDao.class)
             .fetchByIdAsync(resourceId)
             .compose(Ux::futureJ)
-            .compose(resource -> Ux.Jooq.on(SActionDao.class)
+            .compose(resource -> DB.on(SActionDao.class)
                 .fetchOneAsync(KName.RESOURCE_ID, resourceId)
                 .compose(Ux::futureJ)
                 .compose(action -> Ux.future(resource.put("action", action))));
@@ -30,7 +31,7 @@ public class ResourceService implements ResourceStub {
     public Future<JsonObject> createResource(final JsonObject params) {
         final SResource sResource = Ux.fromJson(params, SResource.class);
 
-        return Ux.Jooq.on(SResourceDao.class)
+        return DB.on(SResourceDao.class)
             .insertAsync(sResource)
             .compose(Ux::futureJ)
             .compose(resource -> {
@@ -44,7 +45,7 @@ public class ResourceService implements ResourceStub {
                         .setLevel(Optional.ofNullable(sAction.getLevel()).orElse(resource.getInteger("level")))
                         .setSigma(Optional.ofNullable(sAction.getSigma()).orElse(resource.getString(KName.SIGMA)))
                         .setLanguage(Optional.ofNullable(sAction.getLanguage()).orElse(resource.getString(KName.LANGUAGE)));
-                    return Ux.Jooq.on(SActionDao.class)
+                    return DB.on(SActionDao.class)
                         .insertAsync(sAction)
                         .compose(Ux::futureJ)
                         .compose(action -> Ux.future(resource.put("action", action)));
@@ -58,14 +59,14 @@ public class ResourceService implements ResourceStub {
     public Future<JsonObject> updateResource(final String resourceId, final JsonObject params) {
         final SResource sResource = Ux.fromJson(params, SResource.class);
 
-        return Ux.Jooq.on(SResourceDao.class)
+        return DB.on(SResourceDao.class)
             .upsertAsync(resourceId, sResource)
             .compose(Ux::futureJ)
             .compose(resource -> {
                 // handle action node if present
                 if (params.containsKey("action") && Ut.isNotNil(params.getJsonObject("action"))) {
                     final SAction sAction = Ux.fromJson(params.getJsonObject("action"), SAction.class);
-                    return Ux.Jooq.on(SActionDao.class)
+                    return DB.on(SActionDao.class)
                         .upsertAsync(new JsonObject().put(KName.RESOURCE_ID, resourceId), sAction)
                         .compose(Ux::futureJ)
                         .compose(action -> Ux.future(resource.put("action", action)));
@@ -77,9 +78,9 @@ public class ResourceService implements ResourceStub {
 
     @Override
     public Future<Boolean> deleteResource(final String resourceId) {
-        return Ux.Jooq.on(SActionDao.class)
+        return DB.on(SActionDao.class)
             .deleteByAsync(new JsonObject().put(KName.RESOURCE_ID, resourceId))
-            .compose(result -> Ux.Jooq.on(SResourceDao.class)
+            .compose(result -> DB.on(SResourceDao.class)
                 .deleteByIdAsync(resourceId));
     }
 }

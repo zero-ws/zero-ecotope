@@ -12,6 +12,7 @@ import io.zerows.platform.enums.modeling.EmAttribute;
 import io.zerows.platform.exception._60050Exception501NotSupport;
 import io.zerows.platform.metadata.KMarkAtom;
 import io.zerows.platform.metadata.KRef;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.specification.modeling.HAtom;
 
@@ -61,9 +62,9 @@ public abstract class AbstractSchism implements Schism {
 
     protected Future<JsonObject> createActivity(final XActivity activity, final List<XActivityChange> changes) {
         final KRef responseJ = new KRef();
-        return Ux.Jooq.on(XActivityDao.class).insertJAsync(activity)
+        return DB.on(XActivityDao.class).insertJAsync(activity)
             .compose(responseJ::future)
-            .compose(nil -> Ux.Jooq.on(XActivityChangeDao.class).insertAsync(changes))
+            .compose(nil -> DB.on(XActivityChangeDao.class).insertAsync(changes))
             .compose(nil -> Ux.future(responseJ.get()));
     }
     // ---------------------- Provide the default operation to throw 501 ---------------------

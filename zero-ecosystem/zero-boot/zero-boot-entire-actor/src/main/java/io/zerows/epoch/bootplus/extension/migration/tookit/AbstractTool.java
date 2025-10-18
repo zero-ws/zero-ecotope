@@ -9,6 +9,7 @@ import io.zerows.epoch.database.cp.DataPool;
 import io.zerows.epoch.database.jooq.JooqDsl;
 import io.zerows.epoch.database.jooq.JooqInfix;
 import io.zerows.platform.enums.Environment;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import org.jooq.DSLContext;
@@ -101,7 +102,7 @@ public abstract class AbstractTool extends AbstractStep {
         if (Objects.isNull(type)) {
             return Ux.future(new JsonArray());
         }
-        return Ux.Jooq.on(this.dao())
+        return DB.on(this.dao())
             .insertAsync(Ux.fromJson(data, type))
             .compose(Ux::futureA);
     }

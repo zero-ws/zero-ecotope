@@ -7,6 +7,7 @@ import io.zerows.epoch.bootplus.extension.cv.OxCv;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XCategoryDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XCategory;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.spi.modeler.Identifier;
 import io.zerows.support.Ut;
@@ -51,7 +52,7 @@ public class NameIndent implements Identifier {
     private Future<ConcurrentMap<String, String>> sourceMap() {
         final JsonObject condition = new JsonObject();
         condition.put(KName.TYPE, "ci.type");
-        return Ux.Jooq.on(XCategoryDao.class).<XCategory>fetchAndAsync(condition)
+        return DB.on(XCategoryDao.class).<XCategory>fetchAndAsync(condition)
             .compose(categories -> Ux.future(Ut.elementMap(categories, XCategory::getName, XCategory::getKey)));
     }
 

@@ -13,6 +13,7 @@ import io.zerows.extension.runtime.ambient.util.At;
 import io.zerows.extension.runtime.skeleton.osgi.spi.business.ExIo;
 import io.zerows.extension.runtime.skeleton.osgi.spi.feature.Attachment;
 import io.zerows.platform.enums.typed.ChangeFlag;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -44,7 +45,7 @@ public class ExAttachment implements Attachment {
     @Override
     public Future<JsonArray> saveAsync(final JsonObject condition, final JsonArray data, final JsonObject params) {
 
-        final DBJooq jq = Ux.Jooq.on(XAttachmentDao.class);
+        final DBJooq jq = DB.on(XAttachmentDao.class);
         return jq.fetchJAsync(condition).compose(original -> {
             // 计算的三通道
             final ConcurrentMap<ChangeFlag, JsonArray> compared =
@@ -100,7 +101,7 @@ public class ExAttachment implements Attachment {
             // Cannot deserialize get of type `java.lang.String` from Object get (token `JsonToken.START_OBJECT`)
             Ut.valueToString(normalized, KName.METADATA);
             final List<XAttachment> attachments = Ux.fromJson(normalized, XAttachment.class);
-            return Ux.Jooq.on(XAttachmentDao.class).insertJAsync(attachments)
+            return DB.on(XAttachmentDao.class).insertJAsync(attachments)
 
                 // ExIo -> Call ExIo to impact actual file system ( Store )
                 .compose(At::fileUpload)
@@ -116,13 +117,13 @@ public class ExAttachment implements Attachment {
             attachment.put(KName.ACTIVE, active);
         });
         final List<XAttachment> attachments = Ux.fromJson(attachmentJ, XAttachment.class);
-        return Ux.Jooq.on(XAttachmentDao.class).updateAsyncJ(attachments)
+        return DB.on(XAttachmentDao.class).updateAsyncJ(attachments)
             .compose(Fx.ofJArray(KName.METADATA));
     }
 
     @Override
     public Future<JsonArray> removeAsync(final JsonObject condition) {
-        return Ux.Jooq.on(XAttachmentDao.class).fetchJAsync(condition)
+        return DB.on(XAttachmentDao.class).fetchJAsync(condition)
             .compose(attachments -> this.removeAsyncInternal(condition, attachments));
     }
 
@@ -137,7 +138,7 @@ public class ExAttachment implements Attachment {
     @Override
     public Future<JsonArray> fetchAsync(final JsonObject condition) {
         LOG.File.info(LOGGER, "Fetch Operation, condition: {0}", condition);
-        return Ux.Jooq.on(XAttachmentDao.class)
+        return DB.on(XAttachmentDao.class)
             .fetchJAsync(condition)
             .compose(this::outAsync);
     }
@@ -167,7 +168,7 @@ public class ExAttachment implements Attachment {
             condition.put(KName.FILE_KEY, key);
         }
         LOG.File.info(LOGGER, "Fetch Operation, condition: {0}", condition);
-        return Ux.Jooq.on(XAttachmentDao.class).fetchJOneAsync(condition)
+        return DB.on(XAttachmentDao.class).fetchJOneAsync(condition)
 
             // ExIo -> Call ExIo to impact actual file system ( Store )
             .compose(At::fileDownload);
@@ -215,7 +216,7 @@ public class ExAttachment implements Attachment {
 
     private Future<JsonArray> removeAsyncInternal(final JsonObject condition, final JsonArray attachments) {
         LOG.File.info(LOGGER, "Remove Operation, condition: {0}", condition);
-        return Ux.Jooq.on(XAttachmentDao.class).deleteByAsync(condition)
+        return DB.on(XAttachmentDao.class).deleteByAsync(condition)
 
             // ExIo -> Call ExIo to impact actual file system ( Store )
             .compose(removed -> At.fileRemove(attachments))

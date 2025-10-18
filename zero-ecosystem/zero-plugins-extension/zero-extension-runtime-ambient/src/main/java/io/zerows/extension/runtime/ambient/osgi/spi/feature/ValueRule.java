@@ -14,6 +14,7 @@ import io.zerows.extension.runtime.ambient.uca.darkly.Tube;
 import io.zerows.extension.runtime.skeleton.osgi.spi.feature.Valve;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
 import io.zerows.platform.metadata.KRef;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.spi.modeler.Indent;
 import io.zerows.support.Ut;
@@ -51,7 +52,7 @@ public class ValueRule implements Valve {
             .compose(inputRef::future)
 
             /* Build Regulation ( Formula ) */
-            .compose(normalized -> Ux.Jooq.on(XActivityRuleDao.class).<XActivityRule>fetchAsync(criteria))
+            .compose(normalized -> DB.on(XActivityRuleDao.class).<XActivityRule>fetchAsync(criteria))
             .compose(ruleRef::future)
 
             /* Build Serial Ready */

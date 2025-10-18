@@ -10,6 +10,7 @@ import io.zerows.extension.commerce.rbac.domain.tables.daos.RRolePermDao;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.RRolePerm;
 import io.zerows.extension.commerce.rbac.eon.AuthKey;
 import io.zerows.extension.commerce.rbac.eon.ScConstant;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -92,7 +93,7 @@ public class ScRole {
      * 2) Extract data to JsonArray ( permission Ids )
      */
     public Future<JsonArray> fetch() {
-        return Ux.Jooq.on(RRolePermDao.class)
+        return DB.on(RRolePermDao.class)
             /* Fetch permission ids based join roleId */
             .<RRolePerm>fetchAsync(AuthKey.F_ROLE_ID, this.roleId)
             /*
@@ -106,7 +107,7 @@ public class ScRole {
 
     public void refresh() {
         /* Fetch permission ( Without Cache in Sync mode ) */
-        final List<RRolePerm> queried = Ux.Jooq.on(RRolePermDao.class)
+        final List<RRolePerm> queried = DB.on(RRolePermDao.class)
             .fetch(AuthKey.F_ROLE_ID, this.roleId);
         this.authorities(queried);
     }

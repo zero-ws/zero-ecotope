@@ -7,6 +7,7 @@ import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.mbse.basement.domain.tables.daos.MIndexDao;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MIndex;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 
 import java.util.List;
@@ -21,7 +22,7 @@ class IndexModeler implements AoModeler {
             LOGGER.debug("[ Ox ] 6.3. AoModeler.index() ：{0}", schemaJson.encode());
             final JsonObject entityJson = AoModeler.getEntity(schemaJson);
             // 读取所有的indexes
-            return Ux.Jooq.on(MIndexDao.class)
+            return DB.on(MIndexDao.class)
                 .<MIndex>fetchAndAsync(this.onCriteria(entityJson))
                 .compose(Ux::futureA)
                 .compose(indexes -> Ux.future(this.onResult(schemaJson, indexes)));
@@ -33,7 +34,7 @@ class IndexModeler implements AoModeler {
         LOGGER.debug("[ Ox ] (Sync) 6.3. AoModeler.index() ：{0}", schemaJson.encode());
         final JsonObject entityJson = AoModeler.getEntity(schemaJson);
         // List
-        final List<MIndex> indexList = Ux.Jooq.on(MIndexDao.class)
+        final List<MIndex> indexList = DB.on(MIndexDao.class)
             .fetchAnd(this.onCriteria(entityJson));
         // Array
         final JsonArray indexes = Ux.toJson(indexList);

@@ -7,6 +7,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.spi.DictionaryPlugin;
 import io.zerows.extension.runtime.workflow.domain.tables.daos.WTicketDao;
 import io.zerows.platform.metadata.KDictConfig;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -20,7 +21,7 @@ public class TicketDict implements DictionaryPlugin {
                                         final MultiMap paramMap) {
         final String sigma = paramMap.get(KName.SIGMA);
         if (Ut.isNotNil(sigma)) {
-            return Ux.Jooq.on(WTicketDao.class)
+            return DB.on(WTicketDao.class)
                 .fetchAsync(KName.SIGMA, sigma)
                 .compose(Ux::futureA);
         } else {

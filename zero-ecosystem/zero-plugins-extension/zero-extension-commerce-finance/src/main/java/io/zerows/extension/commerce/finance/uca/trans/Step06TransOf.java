@@ -6,7 +6,7 @@ import io.zerows.extension.commerce.finance.domain.tables.daos.FTransOfDao;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FTrans;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FTransOf;
 import io.zerows.extension.commerce.finance.uca.enter.Maker;
-import io.zerows.program.Ux;
+import io.zerows.epoch.database.DB;
 
 import java.util.List;
 
@@ -24,6 +24,6 @@ class Step06TransOf implements Trade<FTrans, FTransOf> {
          * }
          */
         return Maker.ofTO().buildAsync(data, trans)
-            .compose(Ux.Jooq.on(FTransOfDao.class)::insertAsync);
+            .compose(DB.on(FTransOfDao.class)::insertAsync);
     }
 }

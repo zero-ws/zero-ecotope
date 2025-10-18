@@ -8,6 +8,7 @@ import io.zerows.extension.commerce.rbac.domain.tables.daos.SViewDao;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SView;
 import io.zerows.extension.runtime.skeleton.eon.em.OwnerType;
 import io.zerows.platform.constant.VValue;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -28,7 +29,7 @@ public class PersonalService implements PersonalStub {
         criteria.put("owner", ownerId);
         criteria.put(KName.RESOURCE_ID, resourceId);
         criteria.put(KName.POSITION, Objects.isNull(position) ? VValue.DFT.V_POSITION : position);
-        return Ux.Jooq.on(SViewDao.class).fetchAsync(criteria);
+        return DB.on(SViewDao.class).fetchAsync(criteria);
     }
 
     @Override
@@ -43,23 +44,23 @@ public class PersonalService implements PersonalStub {
         view.setUpdatedAt(LocalDateTime.now());
         view.setKey(UUID.randomUUID().toString());
         view.setActive(Boolean.TRUE);
-        return Ux.Jooq.on(SViewDao.class).insertAsync(view);
+        return DB.on(SViewDao.class).insertAsync(view);
     }
 
     @Override
     public Future<Boolean> delete(final Set<String> keys) {
         if (1 == keys.size()) {
             final String key = keys.iterator().next();
-            return Ux.Jooq.on(SViewDao.class).deleteByIdAsync(key);
+            return DB.on(SViewDao.class).deleteByIdAsync(key);
         } else {
             final JsonObject criteria = Ux.whereKeys(keys);
-            return Ux.Jooq.on(SViewDao.class).deleteByAsync(criteria);
+            return DB.on(SViewDao.class).deleteByAsync(criteria);
         }
     }
 
     @Override
     public Future<SView> byId(final String key) {
-        return Ux.Jooq.on(SViewDao.class).fetchByIdAsync(key);
+        return DB.on(SViewDao.class).fetchByIdAsync(key);
     }
 
     @Override
@@ -75,7 +76,7 @@ public class PersonalService implements PersonalStub {
                     view.setUpdatedAt(LocalDateTime.now());
                 }
                 serialized.mergeIn(data, true);
-                return Ux.Jooq.on(SViewDao.class).updateAsync(serialized);
+                return DB.on(SViewDao.class).updateAsync(serialized);
             }
         });
     }

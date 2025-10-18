@@ -7,6 +7,7 @@ import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.mbse.basement.domain.tables.daos.MEntityDao;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MEntity;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -21,7 +22,7 @@ class EntityModeler implements AoModeler {
         return modelJson -> {
             LOGGER.debug("[ Ox ] 4. AoModeler.entity() ：{0}", modelJson.encode());
             final JsonObject filters = modelJson.getJsonObject("entityFilters");
-            return Ux.Jooq.on(MEntityDao.class)
+            return DB.on(MEntityDao.class)
                 .<MEntity>fetchAndAsync(filters)
                 .compose(Ux::futureA)
                 .compose(list -> Ux.future(this.onResult(modelJson, list)));
@@ -33,7 +34,7 @@ class EntityModeler implements AoModeler {
         LOGGER.debug("[ Ox ] (Sync) 4. AoModeler.entity() ：{0}", modelJson.encode());
         final JsonObject filters = modelJson.getJsonObject("entityFilters");
         // List
-        final List<MEntity> entities = Ux.Jooq.on(MEntityDao.class)
+        final List<MEntity> entities = DB.on(MEntityDao.class)
             .fetchAnd(filters);
         // Array
         final JsonArray entityArr = Ux.toJson(entities);

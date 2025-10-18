@@ -9,6 +9,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.database.jooq.operation.DBJooq;
 import io.zerows.epoch.metadata.MMAdapt;
 import io.zerows.epoch.metadata.UArray;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.spi.modeler.Indent;
 import io.zerows.support.Ut;
@@ -168,14 +169,14 @@ class KeEnv {
     }
 
     static <T> Future<JsonArray> daoR(final String field, final String key, final Class<?> daoCls) {
-        return Ux.Jooq.on(daoCls).<T>fetchAsync(field, key)
+        return DB.on(daoCls).<T>fetchAsync(field, key)
             .compose(Ux::futureA)
             .compose(relation -> UArray.create(relation)
                 .remove(field).toFuture());
     }
 
     static <T> Future<List<T>> daoR(final String field, final String key, final Class<?> daoCls, final Function<T, Integer> priorityFn) {
-        return Ux.Jooq.on(daoCls).<T>fetchAsync(field, key)
+        return DB.on(daoCls).<T>fetchAsync(field, key)
             .compose(result -> {
                 result.sort(Comparator.comparing(priorityFn));
                 return Ux.future(result);
@@ -221,7 +222,7 @@ class KeEnv {
             // clazz could not be found, default workflow
             return Ux.future(supplier.get());
         }
-        final DBJooq jq = Ux.Jooq.on(daoCls);
+        final DBJooq jq = DB.on(daoCls);
         final String pojo = safeJ.getString("pojo", null);
         if (Ut.isNotNil(pojo)) {
             jq.on(pojo);

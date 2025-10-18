@@ -11,6 +11,7 @@ import io.zerows.extension.commerce.finance.domain.tables.pojos.FBillItem;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FPreAuthorize;
 import io.zerows.extension.commerce.finance.uca.account.Book;
 import io.zerows.extension.commerce.finance.uca.replica.IkWay;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.fn.Fx;
 
@@ -30,16 +31,16 @@ public class BillService implements BillStub {
             bill.setAmount(BigDecimal.ZERO);
             billItem.setAmount(BigDecimal.ZERO);
         }
-        return Ux.Jooq.on(FBillDao.class).insertAsync(bill).compose(inserted -> {
+        return DB.on(FBillDao.class).insertAsync(bill).compose(inserted -> {
             // UCA
             IkWay.ofB2BI().transfer(bill, billItem);
 
             final List<Future<JsonObject>> futures = new ArrayList<>();
-            futures.add(Ux.Jooq.on(FBillItemDao.class).insertJAsync(billItem));
+            futures.add(DB.on(FBillItemDao.class).insertJAsync(billItem));
             if (Objects.nonNull(authorize)) {
                 // UCA
                 IkWay.ofB2A().transfer(bill, authorize);
-                futures.add(Ux.Jooq.on(FPreAuthorizeDao.class).insertJAsync(authorize));
+                futures.add(DB.on(FPreAuthorizeDao.class).insertJAsync(authorize));
             }
             final List<FBillItem> itemList = new ArrayList<>();
             itemList.add(billItem);
@@ -58,11 +59,11 @@ public class BillService implements BillStub {
          */
         items.forEach(item -> item.setKey(null));
 
-        return Ux.Jooq.on(FBillDao.class).insertAsync(bill).compose(inserted -> {
+        return DB.on(FBillDao.class).insertAsync(bill).compose(inserted -> {
             // UCA
             IkWay.ofB2BI().transfer(bill, items);
 
-            return Ux.Jooq.on(FBillItemDao.class).insertJAsync(items)
+            return DB.on(FBillItemDao.class).insertJAsync(items)
                 .compose(nil -> Book.of().income(bill, items))
                 .compose(nil -> this.billAsync(bill, items));
         });

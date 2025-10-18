@@ -12,6 +12,7 @@ import io.zerows.extension.mbse.basement.domain.tables.pojos.MAcc;
 import io.zerows.extension.mbse.basement.util.Ao;
 import io.zerows.platform.enums.modeling.EmAttribute;
 import io.zerows.platform.enums.typed.ChangeFlag;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.specification.app.HArk;
 import io.zerows.specification.modeling.operation.HDao;
@@ -75,12 +76,12 @@ class RiseRapid implements Rise {
 
                 acc.setCreatedAt(LocalDateTime.now());
                 acc.setUpdatedAt(LocalDateTime.now());
-                return Ux.Jooq.on(MAccDao.class).insertAsync(acc);
+                return DB.on(MAccDao.class).insertAsync(acc);
             } else {
                 // Update
                 queried.setRecordJson(data.encode());
                 queried.setUpdatedAt(LocalDateTime.now());
-                return Ux.Jooq.on(MAccDao.class).updateAsync(queried);
+                return DB.on(MAccDao.class).updateAsync(queried);
             }
         }).compose(nil -> Ux.future(Boolean.TRUE));
     }
@@ -102,6 +103,6 @@ class RiseRapid implements Rise {
         condition.put(KName.MODEL_KEY, modelKey);
         final HArk ark = atom.ark();
         condition.put(KName.SIGMA, ark.sigma());
-        return Ux.Jooq.on(MAccDao.class).fetchOneAsync(condition);
+        return DB.on(MAccDao.class).fetchOneAsync(condition);
     }
 }

@@ -22,6 +22,7 @@ import io.zerows.extension.commerce.finance.eon.em.EmTran;
 import io.zerows.extension.commerce.finance.uca.replica.IkWay;
 import io.zerows.extension.commerce.finance.uca.trans.Trade;
 import io.zerows.platform.metadata.KRef;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -95,7 +96,7 @@ public class TransService implements TransStub {
                 // 防重复创建：Duplicate entry 'Cash' for key 'name_UNIQUE'
                 payments.forEach(payment -> payment.setKey(null));
 
-                return Ux.Jooq.on(FTransItemDao.class).insertAsync(payments);
+                return DB.on(FTransItemDao.class).insertAsync(payments);
             })
             .compose(nil -> Ux.future(trans));
     }
@@ -130,7 +131,7 @@ public class TransService implements TransStub {
         ));
         condition.put("objectId,i", Ut.toJArray(keys));
         // WHERE OBJECT_TYPE = ? AND OBJECT_ID = ?
-        return Ux.Jooq.on(FTransOfDao.class).<FTransOf>fetchAsync(condition)
+        return DB.on(FTransOfDao.class).<FTransOf>fetchAsync(condition)
             .compose(transOf -> {
                 tranMap.putAll(Ut.elementGroup(transOf, FTransOf::getTransId));
                 /*
@@ -141,10 +142,10 @@ public class TransService implements TransStub {
                 // 跳过选择，直接查询 FTransItem
                 final JsonObject condTrans = Ux.whereAnd();
                 condTrans.put("transactionId,i", Ut.toJArray(transId));
-                return Ux.Jooq.on(FTransItemDao.class).<FTransItem>fetchAsync(condTrans);
+                return DB.on(FTransItemDao.class).<FTransItem>fetchAsync(condTrans);
             })
             .compose(itemRef::future)
-            .compose(items -> Ux.Jooq.on(FTransDao.class).<FTrans>fetchInAsync(KName.KEY, Ut.toJArray(transId)))
+            .compose(items -> DB.on(FTransDao.class).<FTrans>fetchInAsync(KName.KEY, Ut.toJArray(transId)))
             .compose(transList -> {
                 final List<FTransItem> items = itemRef.get();
                 final ConcurrentMap<String, List<FTransItem>> grouped = Ut.elementGroup(items, FTransItem::getTransactionId);
@@ -163,19 +164,19 @@ public class TransService implements TransStub {
     public Future<JsonObject> fetchAsync(final String key) {
         // 单条交易记录
         final JsonObject response = new JsonObject();
-        return Ux.Jooq.on(FTransDao.class).<FTrans>fetchByIdAsync(key)
+        return DB.on(FTransDao.class).<FTrans>fetchByIdAsync(key)
             .compose(trans -> {
                 response.mergeIn(Ux.toJson(trans));
                 return this.fetchRelated(key);
             })
             .compose(relatedMap -> {
                 relatedMap.forEach(response::put);                  // debts, settlements
-                return Ux.Jooq.on(FSettlementItemDao.class)
+                return DB.on(FSettlementItemDao.class)
                     .<FSettlementItem>fetchAsync("finishedId", key);
             })
             .compose(items -> {
                 response.put(KName.ITEMS, Ux.toJson(items));        // items
-                return Ux.Jooq.on(FTransItemDao.class)
+                return DB.on(FTransItemDao.class)
                     .<FTransItem>fetchAsync("transactionId", key);
             })
             .compose(payment -> {
@@ -188,7 +189,7 @@ public class TransService implements TransStub {
      * 抓取 debts, settlements
      */
     private Future<ConcurrentMap<String, JsonArray>> fetchRelated(final String key) {
-        return Ux.Jooq.on(FTransOfDao.class).<FTransOf>fetchAsync("transId", key).compose(transOfs -> {
+        return DB.on(FTransOfDao.class).<FTransOf>fetchAsync("transId", key).compose(transOfs -> {
             final ConcurrentMap<String, Future<JsonArray>> futureMap = new ConcurrentHashMap<>();
             final Set<String> keySettle = new HashSet<>();
             final Set<String> keyDebt = new HashSet<>();
@@ -212,10 +213,10 @@ public class TransService implements TransStub {
              * debts = JsonArray
              * settlements = JsonArray
              */
-            futureMap.put(KName.Finance.SETTLEMENTS, Ux.Jooq.on(FSettlementDao.class)
+            futureMap.put(KName.Finance.SETTLEMENTS, DB.on(FSettlementDao.class)
                 .fetchJInAsync(KName.KEY, Ut.toJArray(keySettle))
             );
-            futureMap.put(KName.Finance.DEBTS, Ux.Jooq.on(FDebtDao.class)
+            futureMap.put(KName.Finance.DEBTS, DB.on(FDebtDao.class)
                 .fetchJInAsync(KName.KEY, Ut.toJArray(keyDebt))
             );
             return Fx.combineM(futureMap);

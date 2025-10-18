@@ -14,6 +14,7 @@ import io.zerows.extension.commerce.rbac.domain.tables.pojos.SPermission;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SResource;
 import io.zerows.extension.runtime.skeleton.osgi.spi.web.Routine;
 import io.zerows.platform.constant.VString;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -33,7 +34,7 @@ public class ActionService implements ActionStub {
 
     @Override
     public Future<List<SAction>> fetchAction(final String permissionId) {
-        return Ux.Jooq.on(SActionDao.class).fetchAsync(KName.PERMISSION_ID, permissionId);
+        return DB.on(SActionDao.class).fetchAsync(KName.PERMISSION_ID, permissionId);
     }
 
     @Override
@@ -47,13 +48,13 @@ public class ActionService implements ActionStub {
             actionFilters.put(KName.SIGMA, sigma);
         }
         actionFilters.put(KName.METHOD, method.name());
-        return Ux.Jooq.on(SActionDao.class)
+        return DB.on(SActionDao.class)
             .fetchOneAsync(actionFilters);
     }
 
     @Override
     public Future<SResource> fetchResource(final String key) {
-        return Ux.Jooq.on(SResourceDao.class)
+        return DB.on(SResourceDao.class)
             .fetchByIdAsync(key);
     }
 
@@ -82,7 +83,7 @@ public class ActionService implements ActionStub {
             criteria.put(KName.CODE + ",c", keyword);
             criteria.put(KName.URI + ",c", keyword);
             condition.put("$0", criteria);
-            return Ux.Jooq.on(SActionDao.class).fetchAndAsync(condition);
+            return DB.on(SActionDao.class).fetchAndAsync(condition);
         }
     }
 
@@ -114,7 +115,7 @@ public class ActionService implements ActionStub {
         /*
          * Read action list of original
          */
-        return Ux.Jooq.on(SActionDao.class).<SAction>fetchAsync(KName.PERMISSION_ID, permission.getKey())
+        return DB.on(SActionDao.class).<SAction>fetchAsync(KName.PERMISSION_ID, permission.getKey())
             .compose(oldList -> {
                 /*
                  * Get actions of input
@@ -145,7 +146,7 @@ public class ActionService implements ActionStub {
                     this.setAction(action, permission, permission.getKey());
                     updated.add(action);
                 });
-                return Ux.Jooq.on(SActionDao.class).updateAsync(updated);
+                return DB.on(SActionDao.class).updateAsync(updated);
             });
     }
 
@@ -160,7 +161,7 @@ public class ActionService implements ActionStub {
 
     @Override
     public Future<Boolean> removeAction(final String permissionId, final String userKey) {
-        return Ux.Jooq.on(SActionDao.class).<SAction>fetchAsync(KName.PERMISSION_ID, permissionId)
+        return DB.on(SActionDao.class).<SAction>fetchAsync(KName.PERMISSION_ID, permissionId)
             .compose(actions -> {
                 /*
                  * actions modification, no createdBy processing here
@@ -170,7 +171,7 @@ public class ActionService implements ActionStub {
                     action.setUpdatedAt(LocalDateTime.now());
                     action.setUpdatedBy(userKey);
                 });
-                return Ux.Jooq.on(SActionDao.class).updateAsync(actions);
+                return DB.on(SActionDao.class).updateAsync(actions);
             })
             .compose(nil -> Ux.future(Boolean.TRUE));
     }

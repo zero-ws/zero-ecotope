@@ -2,6 +2,7 @@ package io.zerows.extension.commerce.finance.uca.trans;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.extension.commerce.finance.domain.tables.daos.FTransDao;
@@ -40,6 +41,6 @@ class Step06TransSettle implements Trade<List<FSettlement>, FTrans> {
                 // 此处构造完成
                 return Ux.future(trans);
             })
-            .compose(Ux.Jooq.on(FTransDao.class)::insertAsync);
+            .compose(DB.on(FTransDao.class)::insertAsync);
     }
 }

@@ -11,6 +11,7 @@ import io.zerows.extension.mbse.modulat.domain.tables.daos.BBlockDao;
 import io.zerows.extension.mbse.modulat.domain.tables.pojos.BBag;
 import io.zerows.extension.mbse.modulat.domain.tables.pojos.BBlock;
 import io.zerows.extension.mbse.modulat.uca.configure.Combiner;
+import io.zerows.epoch.database.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -35,7 +36,7 @@ public class BagArgService implements BagArgStub {
     public Future<JsonObject> fetchBagConfig(final String bagAbbr) {
         Objects.requireNonNull(bagAbbr);
         final JsonObject condition = Ux.whereAnd("nameAbbr", bagAbbr);
-        final DBJooq jq = Ux.Jooq.on(BBagDao.class);
+        final DBJooq jq = DB.on(BBagDao.class);
         return jq.<BBag>fetchOneAsync(condition).compose(bag -> {
             /* Check if root by parentId */
             if (Objects.isNull(bag)) {
@@ -64,7 +65,7 @@ public class BagArgService implements BagArgStub {
     public Future<JsonObject> fetchBag(final String bagAbbr) {
         Objects.requireNonNull(bagAbbr);
         final JsonObject condition = Ux.whereAnd("nameAbbr", bagAbbr);
-        return Ux.Jooq.on(BBagDao.class).<BBag>fetchOneAsync(condition).compose(bag -> {
+        return DB.on(BBagDao.class).<BBag>fetchOneAsync(condition).compose(bag -> {
             if (Objects.isNull(bag)) {
                 return Ux.futureJ();
             }
@@ -79,7 +80,7 @@ public class BagArgService implements BagArgStub {
     @Override
     public Future<JsonObject> saveBag(final String bagId, final JsonObject data) {
         Objects.requireNonNull(bagId);
-        return Ux.Jooq.on(BBagDao.class).<BBag>fetchByIdAsync(bagId)
+        return DB.on(BBagDao.class).<BBag>fetchByIdAsync(bagId)
             // Cache Processing
             .compose(Fx.ofJObject(bag -> this.saveConfigure(bag, data)));
     }
@@ -87,7 +88,7 @@ public class BagArgService implements BagArgStub {
     @Override
     public Future<JsonObject> saveBagBy(String nameAbbr, JsonObject data) {
         Objects.requireNonNull(nameAbbr);
-        return Ux.Jooq.on(BBagDao.class).<BBag>fetchOneAsync("nameAbbr", nameAbbr)
+        return DB.on(BBagDao.class).<BBag>fetchOneAsync("nameAbbr", nameAbbr)
             // Cache Processing
             .compose(Fx.ofJObject(bag -> this.saveConfigure(bag, data)));
     }
@@ -111,7 +112,7 @@ public class BagArgService implements BagArgStub {
                 final JsonObject criteria = Ux.whereAnd();
                 criteria.put(KName.PARENT_ID, bag.getKey());
                 criteria.put(KName.ACTIVE, Boolean.TRUE);
-                return Ux.Jooq.on(BBagDao.class).<BBag>fetchAsync(criteria).compose(bags -> {
+                return DB.on(BBagDao.class).<BBag>fetchAsync(criteria).compose(bags -> {
                     final Set<String> keys = Ut.elementSet(bags, BBag::getKey);
                     condition.put(KName.App.BAG_ID + ",i", Ut.toJArray(keys));
                     return Ux.future(condition);
@@ -124,7 +125,7 @@ public class BagArgService implements BagArgStub {
             if (Objects.isNull(condition)) {
                 return Ux.futureL();
             } else {
-                return Ux.Jooq.on(BBlockDao.class).fetchAsync(condition);
+                return DB.on(BBlockDao.class).fetchAsync(condition);
             }
         });
     }
