@@ -1,17 +1,16 @@
 package io.zerows.extension.runtime.skeleton.refine;
 
+import io.r2mo.base.dbe.Database;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.application.YmlCore;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.OldDatabase;
-import io.zerows.epoch.database.cp.DataPool;
-import io.zerows.management.OZeroStore;
+import io.zerows.epoch.store.DBSActor;
 import io.zerows.platform.constant.VString;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
+import lombok.extern.slf4j.Slf4j;
 import org.jooq.Configuration;
 
 import java.util.Objects;
@@ -19,22 +18,21 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.BiFunction;
 
+@Slf4j
 class KeTool {
 
     private static String DATABASE;
 
     static String getCatalog() {
         if (Ut.isNil(DATABASE)) {
-            final JsonObject config = OZeroStore.option(YmlCore.jooq.__KEY);
-            DATABASE = Ut.visitString(config, "provider", "catalog");
+            final Database database = DBSActor.ofDatabase();
+            DATABASE = database.getInstance();
         }
         return DATABASE;
     }
 
     static Configuration getConfiguration() {
-        final OldDatabase oldDatabase = OldDatabase.getCurrent();
-        final DataPool pool = DataPool.create(oldDatabase);
-        return pool.getExecutor().configuration();
+        return DBSActor.ofDSL().configuration();
     }
 
     static Future<JsonObject> map(final JsonObject data, final String field,
@@ -64,7 +62,7 @@ class KeTool {
                 /*
                  * Log
                  */
-                Ke.LOG.Turnel.warn(KeTool.class, "Criteria must be not empty");
+                log.warn("[ ExZERO ] 查询条件不可为空！");
             }
         });
         return Fx.combineM(futures).compose(mapData -> {

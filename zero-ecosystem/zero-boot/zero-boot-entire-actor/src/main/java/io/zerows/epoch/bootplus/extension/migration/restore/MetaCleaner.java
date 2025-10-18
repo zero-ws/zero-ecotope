@@ -1,11 +1,12 @@
 package io.zerows.epoch.bootplus.extension.migration.restore;
 
+import io.r2mo.base.dbe.Database;
 import io.r2mo.function.Fn;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.bootplus.extension.migration.tookit.AbstractStatic;
-import io.zerows.epoch.database.OldDatabase;
 import io.zerows.epoch.database.cp.DataPool;
+import io.zerows.epoch.store.DBSActor;
 import io.zerows.platform.enums.Environment;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
@@ -52,8 +53,8 @@ public class MetaCleaner extends AbstractStatic {
 
     private Set<String> toTables(final Connection connection) throws SQLException {
         final String tpl = "SELECT TABLE_NAME FROM information_schema.tables WHERE TABLE_SCHEMA = ''{0}'';";
-        final OldDatabase oldDatabase = OldDatabase.getCurrent();
-        final String sql = MessageFormat.format(tpl, oldDatabase.getInstance());
+        final Database database = DBSActor.ofDatabase();
+        final String sql = MessageFormat.format(tpl, database.getInstance());
 
         final Statement statement = connection.createStatement();
         final ResultSet res = statement.executeQuery(sql);

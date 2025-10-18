@@ -1,12 +1,14 @@
 package io.zerows.epoch.bootplus.extension.migration.tookit;
 
+import io.r2mo.base.dbe.Database;
 import io.r2mo.function.Fn;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.database.OldDatabase;
+import io.zerows.epoch.store.DBSActor;
 import io.zerows.platform.enums.Environment;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.io.OutputStream;
@@ -15,6 +17,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 
 import static io.zerows.epoch.bootplus.extension.refine.Ox.LOG;
 
+@Slf4j
 public class TableHugeRestore extends AbstractStatic {
     public TableHugeRestore(final Environment environment) {
         super(environment);
@@ -39,21 +42,20 @@ public class TableHugeRestore extends AbstractStatic {
 
     private boolean restoreTo(final String file) {
         final StringBuilder cmd = new StringBuilder();
-        final OldDatabase oldDatabase = OldDatabase.getCurrent();
+        final Database database = DBSActor.ofDatabase();
         cmd.append("mysql")
-            .append(" -h").append(oldDatabase.getHostname())
-            .append(" -u").append(oldDatabase.getUsername())
-            .append(" -p").append(oldDatabase.getPasswordDecrypted())
+            .append(" -h").append(database.getHostname())
+            .append(" -u").append(database.getUsername())
+            .append(" -p").append(database.getPasswordDecrypted())
             .append(" --default-character-set=utf8 ")
-            .append(" ").append(oldDatabase.getInstance());
+            .append(" ").append(database.getInstance());
         return Fn.jvmOr(() -> {
             final File fileObj = Ut.ioFile(file);
             final BasicFileAttributes fileAttributes = Files.readAttributes(fileObj.toPath(), BasicFileAttributes.class);
             if (fileObj.exists() && fileAttributes.isRegularFile()) {
-                LOG.Shell.info(this.getClass(), "文件名：{2}，执行命令：{0}，" +
-                        "文件长度：{1} MB",
-                    cmd.toString(), String.valueOf(fileAttributes.size() / 1024 / 1024), file);
-                final Process process = Runtime.getRuntime().exec(cmd.toString());
+                log.info("[ ZERO ] ( MGN ) 文件名：{}，执行命令：{}，文件长度：{} MB", file, cmd, fileAttributes.size());
+
+                final Process process = new ProcessBuilder().command(cmd.toString()).start();
                 /*
                  * 开始时间
                  */
@@ -64,11 +66,10 @@ public class TableHugeRestore extends AbstractStatic {
                 final long end = System.nanoTime();
                 /* 纳秒 -> 毫秒 */
                 final long spend = (end - start) / 1000 / 1000;
-                LOG.Shell.info(this.getClass(), "执行完成，耗时 {0} ms！ Successfully",
-                    String.valueOf(spend));
+                log.info("[ ZERO ] ( MGN ) 执行完成，耗时 {} ms！ Successfully", spend);
                 return true;
             } else {
-                LOG.Shell.info(this.getClass(), "文件不存在！file = {0}", file);
+                log.warn("[ ZERO ] ( MGN ) 文件不存在！file = {}", file);
                 return false;
             }
         });
