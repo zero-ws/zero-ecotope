@@ -1,12 +1,14 @@
 package io.zerows.epoch.database.jooq.operation;
 
 import io.r2mo.base.dbe.DBS;
+import io.r2mo.base.program.R2Vector;
 import io.r2mo.typed.cc.Cc;
-import io.r2mo.vertx.jooq.JooqMeta;
+import io.r2mo.vertx.jooq.DBEx;
+import io.r2mo.vertx.jooq.JooqContext;
 import io.vertx.core.Future;
+import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.LogO;
 import io.zerows.component.qr.Sorter;
 import io.zerows.epoch.database.cp.DataPool;
 import io.zerows.epoch.database.jooq.JooqDsl;
@@ -15,10 +17,10 @@ import io.zerows.epoch.database.jooq.util.JqAnalyzer;
 import io.zerows.epoch.database.jooq.util.JqCond;
 import io.zerows.epoch.database.jooq.util.JqFlow;
 import io.zerows.epoch.database.jooq.util.JqTool;
+import io.zerows.epoch.metadata.MMAdapt;
 import io.zerows.epoch.store.DBSActor;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.constant.VValue;
-import io.zerows.platform.enums.EmDS;
 import io.zerows.support.Ut;
 
 import java.math.BigDecimal;
@@ -29,13 +31,68 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.BiPredicate;
 
-@SuppressWarnings("all")
 public class DBJooq {
     private static final Cc<String, DBJooq> CC_JOOQ = Cc.openThread();
 
-    private static final LogO LOGGER = Ut.Log.ux(DBJooq.class);
+    private final DBEx dbe;
 
-    private transient Class<?> clazz;
+    /**
+     * 直接新版访问 {@link DBEx} 的入口，之后的内容不再访问
+     */
+    protected <T> DBJooq(final Class<T> daoCls, final DBS dbs) {
+        this.dbe = DBEx.of(daoCls, dbs);
+    }
+
+
+    // -------------------- DBJooq --------------------
+    public static DBJooq of(final Class<?> clazz) {
+        final DBS dbs = DBSActor.ofDBS();
+        return of(clazz, dbs);
+    }
+
+    public static DBJooq of(final Class<?> clazz, final String name) {
+        final DBS dbs = DBSActor.ofDBS(name);
+        return of(clazz, dbs);
+    }
+
+    public static DBJooq of(final Class<?> clazz, final DBS dbs) {
+        final String cached = JooqContext.cached(clazz, dbs);
+        return CC_JOOQ.pick(() -> new DBJooq(clazz, dbs), cached);
+    }
+
+    // -------------------- Pojo File --------------------
+
+    /**
+     * 新版引入 {@link MMAdapt} 构造 {@link R2Vector} 实现完整的数据交换映射信息，因此有了此处的 pojoFile 之后，流程
+     * 如
+     * <pre>
+     *     绑定 {@link DBEx} 实例
+     *        - {@link R2Vector}
+     *           -> 可随时绑定也可换绑，在执行过程中也可随时更换
+     *        - {@link DBS} 数据源实例
+     *        - {@link Class} DAO 类
+     *        - {@link Vertx} 引用
+     * </pre>
+     *
+     * @param pojo {@link String}
+     *
+     * @return {@link DBJooq}
+     */
+    public DBJooq on(final String pojo) {
+        if (Ut.isNil(pojo)) {
+            // 如果没有 pojo 文件和它绑定，则直接取消
+            return this;
+        }
+        this.dbe.vector(MMAdapt.of(pojo).vector());
+        return this;
+    }
+
+    @Deprecated
+    public static DBJooq of(final Class<?> clazz, final DataPool pool) {
+        final JooqDsl dsl = JooqInfix.getDao(clazz, pool);
+        return CC_JOOQ.pick(() -> new DBJooq(clazz, dsl), dsl.poolKey());
+    }
+
     /* Analyzer */
     private transient JqAnalyzer analyzer;
     /* Aggre */
@@ -48,19 +105,12 @@ public class DBJooq {
      * New Structure for usage
      */
     private transient JqFlow workflow;
-    private transient EmDS.Format format = EmDS.Format.JSON;
-
-    /**
-     * 直接新版访问 {@link DBEx} 的入口，之后的内容不再访问
-     */
-    protected <T> DBJooq(final Class<T> clazz, final JooqMeta meta) {
-
-    }
 
     @Deprecated
     protected <T> DBJooq(final Class<T> clazz, final JooqDsl dsl) {
+        this.dbe = null;
         /* New exception to avoid programming missing */
-        this.clazz = clazz;
+        // this.daoCls = clazz;
 
         /* Analyzing column for Jooq */
         this.analyzer = JqAnalyzer.create(dsl);
@@ -76,71 +126,11 @@ public class DBJooq {
         this.workflow = JqFlow.create(this.analyzer);
     }
 
-    // -------------------- UxJooq --------------------
-    public static DBJooq of(final Class<?> clazz) {
-        final DBS dbs = DBSActor.ofDBS();
-        return of(clazz, dbs);
-    }
-
-    public static DBJooq of(final Class<?> clazz, final String name) {
-        final DBS dbs = DBSActor.ofDBS(name);
-        return of(clazz, dbs);
-    }
-
-    public static DBJooq of(final Class<?> clazz, final DBS dbs) {
-        final JooqMeta meta = JooqMeta.of(clazz, dbs);
-        return CC_JOOQ.pick(() -> new DBJooq(clazz, meta), meta.cached());
-    }
-
-    @Deprecated
-    public static DBJooq of(final Class<?> clazz, final DataPool pool) {
-        final JooqDsl dsl = JooqInfix.getDao(clazz, pool);
-        return CC_JOOQ.pick(() -> new DBJooq(clazz, dsl), dsl.poolKey());
-    }
-
-    // -------------------- Bind Config --------------------
-
-
-    /**
-     * 「遗留系统」
-     * 此处方法是为了遗留系统量身打造，您可以绑定所需的Pojo映射文件实现配置本身的转换，
-     * 如果传入的映射文件为空，则不执行任何操作，不为空就实现绑定。
-     *
-     * @param pojo {@link String}
-     *
-     * @return {@link DBJooq}
-     */
-    public DBJooq on(final String pojo) {
-        if (Ut.isNil(pojo)) {
-            // 如果没有 pojo 文件和它绑定，则直接取消
-            return this;
-        }
-
-        // 否则走后续绑定流程
-        {
-            // this.analyzer.on(pojo, this.clazz);
-            /*
-             * 此处 analyzer 对象内置会发生变化，相反会影响到 workflow 的创建，当前方法主要是应用于
-             * 旧系统的连接：
-             * 1）旧系统中的实体是正确的，没有问题
-             * 2）旧系统中存在 pojo 文件，用于数据转换
-             * 3）pojo 文件会影响到所有包含 pojo 参数的接口 API
-             */
-            // this.workflow.on(this.analyzer);
-        }
-        return this;
-    }
-
     /**
      * 条件压缩器
      */
     public JsonObject compress(final JsonObject criteria) {
         return JqCond.compress(criteria);
-    }
-
-    public DBJooq on(final EmDS.Format format) {
-        this.format = format;
-        return this;
     }
 
     public JqAnalyzer analyzer() {
@@ -1439,19 +1429,19 @@ public class DBJooq {
      */
     /* (Async / Sync) Delete by Filters */
     public Future<Boolean> deleteByAsync(final JsonObject criteria) {                                                 // Unique Forced
-        return this.workflow.inputQrJAsync(andOr(criteria)).compose(this.writer::deleteByAsync);
+        return this.workflow.inputQrJAsync(this.andOr(criteria)).compose(this.writer::deleteByAsync);
     }
 
     public Future<Boolean> deleteByAsync(final JsonObject criteria, final String pojo) {
-        return JqFlow.create(this.analyzer, pojo).inputQrJAsync(andOr(criteria)).compose(this.writer::deleteByAsync);
+        return JqFlow.create(this.analyzer, pojo).inputQrJAsync(this.andOr(criteria)).compose(this.writer::deleteByAsync);
     }
 
     public Boolean deleteBy(final JsonObject criteria) {                                          // Unique Forced
-        return this.writer.deleteBy(this.workflow.inputQrJ(andOr(criteria)));
+        return this.writer.deleteBy(this.workflow.inputQrJ(this.andOr(criteria)));
     }
 
     public Boolean deleteBy(final JsonObject criteria, final String pojo) {
-        return this.writer.deleteBy(JqFlow.create(this.analyzer, pojo).inputQrJ(andOr(criteria)));
+        return this.writer.deleteBy(JqFlow.create(this.analyzer, pojo).inputQrJ(this.andOr(criteria)));
     }
 
     // -------------------- Exist Operation --------------------

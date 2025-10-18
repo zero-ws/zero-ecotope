@@ -1,10 +1,10 @@
 package io.zerows.support.base;
 
+import io.r2mo.base.util.R2MO;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.constant.VValue;
 
-import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -24,7 +24,7 @@ class _Value extends _To {
      * @return Date
      */
     public static Date valueNow() {
-        return TPeriod.parse(LocalDateTime.now());
+        return R2MO.valueNow();
     }
 
     /**

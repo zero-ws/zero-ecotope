@@ -1,5 +1,6 @@
 package io.zerows.support;
 
+import io.r2mo.SourceReflect;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 
@@ -81,7 +82,7 @@ public final class Ut extends _Visit {
     }
 
     public static Field[] fields(final Class<?> clazz) {
-        return Instance.fields(clazz);
+        return SourceReflect.fields(clazz);
     }
 
     public static <T, V> void contract(final T instance, final Class<?> fieldType, final V value) {

@@ -1,5 +1,6 @@
 package io.zerows.support;
 
+import io.r2mo.SourceReflect;
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Contract;
@@ -10,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Objects;
@@ -98,18 +98,10 @@ final class Instance {
         return fieldSet;
     }
 
-    static Field[] fields(final Class<?> clazz) {
-        final Field[] fields = clazz.getDeclaredFields();
-        return Arrays.stream(fields)
-            .filter(item -> !Modifier.isStatic(item.getModifiers()))
-            .filter(item -> !Modifier.isAbstract(item.getModifiers()))
-            .toArray(Field[]::new);
-    }
-
     private static Stream<Field> lookUp(final Class<?> clazz, final Class<?> fieldType) {
         return Fn.jvmOr(() -> {
             /* Lookup field */
-            final Field[] fields = fields(clazz);
+            final Field[] fields = SourceReflect.fields(clazz);
             /* Direct match */
             return Arrays.stream(fields)
                 .filter(field -> fieldType == field.getType() ||          // Direct match

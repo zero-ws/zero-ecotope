@@ -1,12 +1,12 @@
 package io.zerows.support.base;
 
-import io.zerows.platform.metadata.KPair;
 import io.zerows.component.crypto.ED;
+import io.zerows.platform.metadata.KPair;
 
 /**
  * @author lang : 2023/4/28
  */
-class _Random extends _Parse {
+class _Random extends _Net {
     protected _Random() {
     }
 

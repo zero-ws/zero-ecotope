@@ -3,7 +3,6 @@ package io.zerows.support.base;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
-import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -242,19 +241,6 @@ class _Is extends _Io {
      */
     public static boolean isArray(final Object value) {
         return TType.isArray(value);
-    }
-
-    /**
-     * 检查传入类型是否时间类型
-     * 1. < 1.8 使用 Date.class 检查
-     * 2. > 1.8 使用 Temporal.class 检查
-     *
-     * @param clazz 类型
-     *
-     * @return 是否时间类型
-     */
-    public static boolean isDate(final Class<?> clazz) {
-        return TType.isDate(clazz);
     }
 
 
@@ -613,29 +599,6 @@ class _Is extends _Io {
         return TIs.isFileName(filename);
     }
 
-    /**
-     * 检查对象是否是一个合法时间格式，或可转换成时间的格式
-     *
-     * @param value 对象
-     *
-     * @return 是否是一个合法时间格式
-     */
-    public static boolean isDate(final Object value) {
-        return TIs.isDate(value);
-    }
-
-    /**
-     * 检查字符串是否是否位于某个区间内，从开始时间到结束时间
-     *
-     * @param current 当前时间
-     * @param start   开始时间
-     * @param end     结束时间
-     *
-     * @return 是否位于某个区间内
-     */
-    public static boolean isDuration(final LocalDateTime current, final LocalDateTime start, final LocalDateTime end) {
-        return TPeriod.isDuration(current, start, end);
-    }
 
     // --------------------------- 范围函数 ---------------------------
 

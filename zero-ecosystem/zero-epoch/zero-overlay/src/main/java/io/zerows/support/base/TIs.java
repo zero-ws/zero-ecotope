@@ -87,16 +87,4 @@ class TIs {
         return Objects.nonNull(literal)
             && isMatch(literal, VString.REGEX.FILENAME);
     }
-
-    static boolean isDate(final Object value) {
-        if (Objects.isNull(value)) {
-            return false;
-        }
-
-        if (value instanceof Class<?>) {
-            return TType.isDate((Class<?>) value);
-        } else {
-            return TPeriod.isValid(value.toString());
-        }
-    }
 }

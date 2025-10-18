@@ -6,7 +6,7 @@ import io.zerows.component.crypto.ED;
 /**
  * @author lang : 2023/4/28
  */
-class _EDS extends _Compare {
+class _EDS extends _Date {
     protected _EDS() {
     }
 

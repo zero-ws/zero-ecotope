@@ -1,5 +1,6 @@
 package io.zerows.support.base;
 
+import io.r2mo.base.util.R2MO;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
@@ -23,7 +24,7 @@ class _Compare extends _Color {
      * @return 是否相等
      */
     public static boolean isSame(final Date left, final Date right) {
-        return TPeriod.isSame(left, right);
+        return R2MO.isSame(left, right);
     }
 
     /**

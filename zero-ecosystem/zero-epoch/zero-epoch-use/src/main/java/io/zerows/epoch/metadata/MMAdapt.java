@@ -38,6 +38,10 @@ public class MMAdapt {
         }, filename);
     }
 
+    public R2Vector vector() {
+        return vector;
+    }
+
     public static MMAdapt of(final String filename) {
         Objects.requireNonNull(filename, "[ ZERO ] 传入文件名不可为 null.");
         return CC_REF.pick(() -> new MMAdapt(filename), filename);

@@ -4,15 +4,10 @@ import io.r2mo.function.Actuator;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
@@ -22,77 +17,6 @@ import java.util.stream.Stream;
  */
 class _It extends _Is {
     protected _It() {
-    }
-
-    /**
-     * 按天遍历日期区间
-     *
-     * @param from  开始日期
-     * @param to    结束日期
-     * @param dayFn 每一天的执行函数
-     */
-    public static void itDay(final String from, final String to, final Consumer<Date> dayFn) {
-        final LocalDateTime begin = TPeriod.toDateTime(Objects.requireNonNull(TPeriod.parseFull(from)));
-        final LocalDateTime end = TPeriod.toDateTime(Objects.requireNonNull(TPeriod.parseFull(to)));
-        TPeriod.itDay(begin.toLocalDate(), end.toLocalDate(), dayFn);
-    }
-
-    /**
-     * 按天遍历日期区间
-     *
-     * @param from  开始日期
-     * @param to    结束日期
-     * @param dayFn 每一天的执行函数
-     */
-    public static void itDay(final LocalDateTime from, final LocalDateTime to, final Consumer<Date> dayFn) {
-        TPeriod.itDay(from.toLocalDate(), to.toLocalDate(), dayFn);
-    }
-
-
-    /**
-     * 按天遍历日期区间
-     *
-     * @param from  开始日期
-     * @param to    结束日期
-     * @param dayFn 每一天的执行函数
-     */
-    public static void itDay(final LocalDate from, final LocalDate to, final Consumer<Date> dayFn) {
-        TPeriod.itDay(from, to, dayFn);
-    }
-
-    /**
-     * 按周遍历日期区间
-     *
-     * @param from  开始日期
-     * @param to    结束日期
-     * @param dayFn 每一天的执行函数
-     */
-    public static void itWeek(final LocalDateTime from, final LocalDateTime to, final Consumer<Date> dayFn) {
-        TPeriod.itWeek(from.toLocalDate(), to.toLocalDate(), dayFn);
-    }
-
-    /**
-     * 按周遍历日期区间
-     *
-     * @param from  开始日期
-     * @param to    结束日期
-     * @param dayFn 每一天的执行函数
-     */
-    public static void itWeek(final LocalDate from, final LocalDate to, final Consumer<Date> dayFn) {
-        TPeriod.itWeek(from, to, dayFn);
-    }
-
-    /**
-     * 按周遍历日期区间
-     *
-     * @param from  开始日期
-     * @param to    结束日期
-     * @param dayFn 每一天的执行函数
-     */
-    public static void itWeek(final String from, final String to, final Consumer<Date> dayFn) {
-        final LocalDate begin = TPeriod.toDate(TPeriod.parseFull(from));
-        final LocalDate end = TPeriod.toDate(TPeriod.parseFull(to));
-        TPeriod.itWeek(begin, end, dayFn);
     }
 
     /**

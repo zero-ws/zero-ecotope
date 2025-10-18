@@ -6,8 +6,6 @@ import io.vertx.core.json.JsonObject;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.time.temporal.Temporal;
-import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Objects;
 
@@ -16,14 +14,6 @@ import java.util.Objects;
  */
 final class TType {
     private TType() {
-    }
-
-    // （反射专用）Type类型处理部分
-    static boolean isDate(final Class<?> clazz) {
-        // < 1.8
-        return Date.class.isAssignableFrom(clazz)
-            // > 1.8
-            || Temporal.class.isAssignableFrom(clazz);
     }
 
     static boolean isBoolean(final Class<?> clazz) {
