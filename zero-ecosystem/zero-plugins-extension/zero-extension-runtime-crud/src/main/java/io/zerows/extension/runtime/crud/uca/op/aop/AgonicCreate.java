@@ -3,9 +3,7 @@ package io.zerows.extension.runtime.crud.uca.op.aop;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.database.jooq.operation.UxJooq;
-import io.zerows.support.Ut;
-import io.zerows.mbse.metadata.KModule;
+import io.zerows.epoch.database.jooq.operation.DBJooq;
 import io.zerows.extension.runtime.crud.bootstrap.IxPin;
 import io.zerows.extension.runtime.crud.eon.em.QrType;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
@@ -14,6 +12,8 @@ import io.zerows.extension.runtime.crud.uca.input.Pre;
 import io.zerows.extension.runtime.crud.uca.op.Agonic;
 import io.zerows.extension.runtime.crud.uca.trans.Tran;
 import io.zerows.extension.runtime.crud.util.Ix;
+import io.zerows.mbse.metadata.KModule;
+import io.zerows.support.Ut;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
@@ -60,7 +60,7 @@ class AgonicCreate implements Agonic {
      * @return {@link Future} 异步记录结果集
      */
     private Future<JsonObject> uniqueJAsync(final JsonObject input, final IxMod in) {
-        final UxJooq jooq = IxPin.jooq(in);
+        final DBJooq jooq = IxPin.jooq(in);
         return Pre.qr(QrType.BY_UK).inJAsync(input, in)
             .compose(jooq::fetchJOneAsync);
     }

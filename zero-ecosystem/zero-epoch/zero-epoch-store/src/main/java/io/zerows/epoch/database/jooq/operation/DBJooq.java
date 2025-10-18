@@ -4,11 +4,9 @@ import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.application.YmlCore;
 import io.zerows.component.log.LogO;
 import io.zerows.component.qr.Sorter;
-import io.zerows.platform.constant.VString;
-import io.zerows.platform.constant.VValue;
+import io.zerows.epoch.application.YmlCore;
 import io.zerows.epoch.database.cp.DataPool;
 import io.zerows.epoch.database.jooq.JooqDsl;
 import io.zerows.epoch.database.jooq.JooqInfix;
@@ -16,6 +14,8 @@ import io.zerows.epoch.database.jooq.util.JqAnalyzer;
 import io.zerows.epoch.database.jooq.util.JqCond;
 import io.zerows.epoch.database.jooq.util.JqFlow;
 import io.zerows.epoch.database.jooq.util.JqTool;
+import io.zerows.platform.constant.VString;
+import io.zerows.platform.constant.VValue;
 import io.zerows.platform.enums.EmDS;
 import io.zerows.support.Ut;
 
@@ -28,10 +28,10 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.function.BiPredicate;
 
 @SuppressWarnings("all")
-public class UxJooq {
-    private static final Cc<String, UxJooq> CC_JOOQ = Cc.openThread();
+public class DBJooq {
+    private static final Cc<String, DBJooq> CC_JOOQ = Cc.openThread();
 
-    private static final LogO LOGGER = Ut.Log.ux(UxJooq.class);
+    private static final LogO LOGGER = Ut.Log.ux(DBJooq.class);
 
     private transient final Class<?> clazz;
     /* Analyzer */
@@ -48,7 +48,7 @@ public class UxJooq {
     private transient final JqFlow workflow;
     private transient EmDS.Format format = EmDS.Format.JSON;
 
-    protected <T> UxJooq(final Class<T> clazz, final JooqDsl dsl) {
+    protected <T> DBJooq(final Class<T> clazz, final JooqDsl dsl) {
         /* New exception to avoid programming missing */
         this.clazz = clazz;
 
@@ -67,24 +67,24 @@ public class UxJooq {
     }
 
     // -------------------- UxJooq --------------------
-    public static UxJooq of(final Class<?> clazz) {
+    public static DBJooq of(final Class<?> clazz) {
         final JooqDsl dsl = JooqInfix.getDao(clazz);
-        return CC_JOOQ.pick(() -> new UxJooq(clazz, dsl), dsl.poolKey());
+        return CC_JOOQ.pick(() -> new DBJooq(clazz, dsl), dsl.poolKey());
     }
 
-    public static UxJooq of(final Class<?> clazz, final DataPool pool) {
+    public static DBJooq of(final Class<?> clazz, final DataPool pool) {
         final JooqDsl dsl = JooqInfix.getDao(clazz, pool);
-        return CC_JOOQ.pick(() -> new UxJooq(clazz, dsl), dsl.poolKey());
+        return CC_JOOQ.pick(() -> new DBJooq(clazz, dsl), dsl.poolKey());
     }
 
-    public static UxJooq of(final Class<?> clazz, final String key) {
+    public static DBJooq of(final Class<?> clazz, final String key) {
         final JooqDsl dsl = JooqInfix.getDao(clazz, key);
-        return CC_JOOQ.pick(() -> new UxJooq(clazz, dsl), dsl.poolKey());
+        return CC_JOOQ.pick(() -> new DBJooq(clazz, dsl), dsl.poolKey());
     }
 
-    public static UxJooq ofHistory(final Class<?> clazz) {
+    public static DBJooq ofHistory(final Class<?> clazz) {
         final JooqDsl dsl = JooqInfix.getDao(clazz, YmlCore.jooq.ORBIT);
-        return CC_JOOQ.pick(() -> new UxJooq(clazz, dsl), "HIS-" + dsl.poolKey());
+        return CC_JOOQ.pick(() -> new DBJooq(clazz, dsl), "HIS-" + dsl.poolKey());
     }
 
     // -------------------- Bind Config --------------------
@@ -97,9 +97,9 @@ public class UxJooq {
      *
      * @param pojo {@link String}
      *
-     * @return {@link UxJooq}
+     * @return {@link DBJooq}
      */
-    public UxJooq on(final String pojo) {
+    public DBJooq on(final String pojo) {
         if (Ut.isNil(pojo)) {
             // 此处直接返回，由于传入了非法的 pojo
             return this;
@@ -127,7 +127,7 @@ public class UxJooq {
         return JqCond.compress(criteria);
     }
 
-    public UxJooq on(final EmDS.Format format) {
+    public DBJooq on(final EmDS.Format format) {
         this.format = format;
         return this;
     }

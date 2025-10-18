@@ -7,7 +7,7 @@ import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Me;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.UxJooq;
+import io.zerows.epoch.database.jooq.operation.DBJooq;
 import io.zerows.epoch.metadata.XHeader;
 import io.zerows.extension.runtime.ambient.agent.service.linkage.LinkStub;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XLinkageDao;
@@ -101,7 +101,7 @@ public class LinkActor {
     @Address(Addr.Linkage.REMOVE_BY_REGION)
     public Future<Boolean> removeKey(final String key, final XHeader header) {
         // Remove by `key` or `region`
-        final UxJooq jooq = Ux.Jooq.on(XLinkageDao.class);
+        final DBJooq jooq = Ux.Jooq.on(XLinkageDao.class);
         final JsonObject criteria = Ux.whereAnd();
         criteria.put("region", key);
         criteria.put(KName.SIGMA, header.getSigma());

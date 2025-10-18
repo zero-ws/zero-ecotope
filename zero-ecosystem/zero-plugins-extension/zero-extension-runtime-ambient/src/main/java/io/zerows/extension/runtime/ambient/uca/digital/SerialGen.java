@@ -3,7 +3,7 @@ package io.zerows.extension.runtime.ambient.uca.digital;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.database.jooq.operation.UxJooq;
+import io.zerows.epoch.database.jooq.operation.DBJooq;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XNumberDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XNumber;
 import io.zerows.extension.runtime.ambient.util.At;
@@ -19,7 +19,7 @@ public class SerialGen implements Serial {
     @Override
     public synchronized Future<JsonArray> generate(final JsonObject condition, final Integer count) {
         /* XNumber Processing */
-        final UxJooq jq = Ux.Jooq.on(XNumberDao.class);
+        final DBJooq jq = Ux.Jooq.on(XNumberDao.class);
         synchronized (jq) {
             return jq.<XNumber>fetchOneAsync(condition).compose(number -> {
                 if (Objects.isNull(number)) {
@@ -43,7 +43,7 @@ public class SerialGen implements Serial {
 
     @Override
     public synchronized Future<Boolean> reset(final JsonObject condition, final Long defaultValue) {
-        final UxJooq jq = Ux.Jooq.on(XNumberDao.class);
+        final DBJooq jq = Ux.Jooq.on(XNumberDao.class);
         synchronized (jq) {
             return jq.<XNumber>fetchOneAsync(condition).compose(number -> {
                 if (Objects.isNull(number)) {

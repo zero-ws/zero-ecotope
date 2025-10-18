@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.UxJooq;
+import io.zerows.epoch.database.jooq.operation.DBJooq;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.RRolePermDao;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.SPermSetDao;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.SPermissionDao;
@@ -91,7 +91,7 @@ public class RightsService implements RightsStub {
              * ADD / UPDATE ( Processing )
              */
             final List<Future<List<SPermission>>> combined = new ArrayList<>();
-            final UxJooq jooq = Ux.Jooq.on(SPermissionDao.class);
+            final DBJooq jooq = Ux.Jooq.on(SPermissionDao.class);
 
             /*
 

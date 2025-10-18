@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 import io.zerows.component.qr.syntax.Ir;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.UxJooq;
+import io.zerows.epoch.database.jooq.operation.DBJooq;
 import io.zerows.epoch.metadata.MMAdapt;
 import io.zerows.epoch.metadata.UArray;
 import io.zerows.program.Ux;
@@ -209,7 +209,7 @@ class KeEnv {
 
     private static <T> Future<T> daoT(final JsonObject config,
                                       final Supplier<T> supplier,
-                                      final Function<UxJooq, Future<T>> executor) {
+                                      final Function<DBJooq, Future<T>> executor) {
         final JsonObject safeJ = Ut.valueJObject(config);
         final String clazz = safeJ.getString(KName.DAO, null);
         if (Ut.isNil(clazz)) {
@@ -221,7 +221,7 @@ class KeEnv {
             // clazz could not be found, default workflow
             return Ux.future(supplier.get());
         }
-        final UxJooq jq = Ux.Jooq.on(daoCls);
+        final DBJooq jq = Ux.Jooq.on(daoCls);
         final String pojo = safeJ.getString("pojo", null);
         if (Ut.isNotNil(pojo)) {
             jq.on(pojo);

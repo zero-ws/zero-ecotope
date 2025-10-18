@@ -7,7 +7,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.UxJooq;
+import io.zerows.epoch.database.jooq.operation.DBJooq;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XAttachmentDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XAttachment;
 import io.zerows.extension.runtime.skeleton.exception._81002Exception400FilenameInvalid;
@@ -55,7 +55,7 @@ public class DocWriter implements DocWStub {
             return FnVertx.failOut(_81002Exception400FilenameInvalid.class);
         }
         final String key = documentJ.getString(KName.KEY);
-        final UxJooq jq = Ux.Jooq.on(XAttachmentDao.class);
+        final DBJooq jq = Ux.Jooq.on(XAttachmentDao.class);
         return jq.<XAttachment>fetchByIdAsync(key).compose(attachment -> {
             final String from = attachment.getStorePath();
             final JsonObject documentData = documentJ.copy();

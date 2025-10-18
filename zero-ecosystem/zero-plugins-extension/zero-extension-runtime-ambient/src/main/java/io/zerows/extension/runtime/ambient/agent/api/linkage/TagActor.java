@@ -7,7 +7,7 @@ import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Me;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.UxJooq;
+import io.zerows.epoch.database.jooq.operation.DBJooq;
 import io.zerows.extension.runtime.ambient.agent.service.linkage.TagStub;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.RTagObjectDao;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XTagDao;
@@ -56,7 +56,7 @@ public class TagActor {
     public Future<JsonArray> linkAsync(final String modelId,
                                        final String modelKey,
                                        final JsonArray body) {
-        final UxJooq jq = Ux.Jooq.on(RTagObjectDao.class);
+        final DBJooq jq = Ux.Jooq.on(RTagObjectDao.class);
         // 先删除
         final JsonObject qr = Ux.whereAnd();
         qr.put("entityType", modelId);

@@ -3,7 +3,7 @@ package io.zerows.extension.runtime.workflow.uca.ticket;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.UxJooq;
+import io.zerows.epoch.database.jooq.operation.DBJooq;
 import io.zerows.extension.runtime.workflow.atom.configuration.MetaInstance;
 import io.zerows.extension.runtime.workflow.atom.runtime.WRecord;
 import io.zerows.extension.runtime.workflow.domain.tables.pojos.WTicket;
@@ -38,7 +38,7 @@ class SyncExtension extends AbstractSync {
          * 1. When the extension Dao has not been configured, ignore this step
          * 2. The configuration is as above
          */
-        final UxJooq tJq = this.metadata.childDao();
+        final DBJooq tJq = this.metadata.childDao();
         if (Objects.isNull(tJq)) {
             return Ux.future(recordRef);
         }

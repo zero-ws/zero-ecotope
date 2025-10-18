@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.destine.Conflate;
 import io.zerows.component.destine.Hymn;
-import io.zerows.epoch.database.jooq.operation.UxJooq;
+import io.zerows.epoch.database.jooq.operation.DBJooq;
 import io.zerows.epoch.metadata.KJoin;
 import io.zerows.extension.runtime.crud.bootstrap.IxPin;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
@@ -30,7 +30,7 @@ class SingleDelete implements Operate<Object, Boolean> {
             }
 
             // 构造删除专用的查询条件（动态模式）
-            final UxJooq jooq = this.jooq(input, in);
+            final DBJooq jooq = this.jooq(input, in);
 
             // 构造查询条件
             final JsonObject condition;
@@ -45,7 +45,7 @@ class SingleDelete implements Operate<Object, Boolean> {
         };
     }
 
-    private UxJooq jooq(final Object inputJ, final IxMod in) {
+    private DBJooq jooq(final Object inputJ, final IxMod in) {
         final KModule module = in.module();
         final KJoin join = module.getConnect();
         final KJoin.Point point;
@@ -60,7 +60,7 @@ class SingleDelete implements Operate<Object, Boolean> {
         Objects.requireNonNull(point);
 
         final KModule switched = IxPin.getActor(point.getCrud());
-        final UxJooq switchedJq = IxPin.jooq(switched, in.envelop());
+        final DBJooq switchedJq = IxPin.jooq(switched, in.envelop());
         // 绑定 pojo
         switchedJq.on(switched.getPojo());
         return switchedJq;

@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.UxJooq;
+import io.zerows.epoch.database.jooq.operation.DBJooq;
 import io.zerows.extension.runtime.workflow.atom.configuration.MetaInstance;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
@@ -20,7 +20,7 @@ import java.util.Set;
 class ActionDao implements ActionOn {
     @Override
     public <T> Future<JsonObject> createAsync(final JsonObject params, final MetaInstance metadata) {
-        final UxJooq jooq = metadata.recordDao();
+        final DBJooq jooq = metadata.recordDao();
         Ut.valueToString(params, KName.METADATA);
         return jooq.insertJAsync(params).compose(Fx.ofJObject(KName.METADATA))
             // Normalize Data
@@ -30,7 +30,7 @@ class ActionDao implements ActionOn {
     @Override
     @SuppressWarnings("all")
     public <T> Future<JsonObject> updateAsync(final String key, final JsonObject params, final MetaInstance metadata) {
-        final UxJooq jooq = metadata.recordDao();
+        final DBJooq jooq = metadata.recordDao();
         return jooq.<T>fetchByIdAsync(key).compose(query -> {
             // Fix Bug: Cannot deserialize get of type `java.lang.String` from Object get (token `JsonToken.START_OBJECT`)
             final JsonObject original = Ux.toJson(query);
@@ -44,7 +44,7 @@ class ActionDao implements ActionOn {
 
     @Override
     public <T> Future<JsonObject> fetchAsync(final String key, final String identifier, final MetaInstance metadata) {
-        final UxJooq jooq = metadata.recordDao();
+        final DBJooq jooq = metadata.recordDao();
         return jooq.fetchByIdAsync(key)
             .compose(Ux::futureJ)
             .compose(Fx.ofJObject(KName.METADATA));
@@ -52,7 +52,7 @@ class ActionDao implements ActionOn {
 
     @Override
     public <T> Future<JsonArray> createAsync(JsonArray params, MetaInstance metadata) {
-        final UxJooq jooq = metadata.recordDao();
+        final DBJooq jooq = metadata.recordDao();
         Ut.itJArray(params).forEach(json -> Ut.valueToString(json, KName.METADATA));
         return jooq.insertJAsync(params).compose(Fx.ofJArray(KName.METADATA))
             // Normalize Data
@@ -61,7 +61,7 @@ class ActionDao implements ActionOn {
 
     @Override
     public <T> Future<JsonArray> updateAsync(final Set<String> keys, final JsonArray params, final MetaInstance metadata) {
-        final UxJooq jooq = metadata.recordDao();
+        final DBJooq jooq = metadata.recordDao();
         final JsonObject condition = new JsonObject();
         condition.put(KName.KEY + ",i", Ut.toJArray(keys));
         return jooq.<T>fetchAsync(condition).compose(query -> {
@@ -75,7 +75,7 @@ class ActionDao implements ActionOn {
 
     @Override
     public <T> Future<JsonArray> fetchAsync(final Set<String> keys, final String identifier, final MetaInstance metadata) {
-        final UxJooq jooq = metadata.recordDao();
+        final DBJooq jooq = metadata.recordDao();
         final JsonObject condition = new JsonObject();
         condition.put(KName.KEY + ",i", Ut.toJArray(keys));
         return jooq.<T>fetchAsync(condition)

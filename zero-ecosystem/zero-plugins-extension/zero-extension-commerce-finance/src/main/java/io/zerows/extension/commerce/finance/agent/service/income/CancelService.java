@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.UxJooq;
+import io.zerows.epoch.database.jooq.operation.DBJooq;
 import io.zerows.extension.commerce.finance.domain.tables.daos.FBillItemDao;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FBillItem;
 import io.zerows.extension.commerce.finance.eon.FmConstant;
@@ -22,7 +22,7 @@ public class CancelService implements CancelStub {
     public Future<Boolean> cancelAsync(final JsonArray keys, final JsonObject params) {
         final JsonObject condition = Ux.whereAnd();
         condition.put("key,i", keys);
-        final UxJooq jq = Ux.Jooq.on(FBillItemDao.class);
+        final DBJooq jq = Ux.Jooq.on(FBillItemDao.class);
         return jq.<FBillItem>fetchAsync(condition).compose(queried -> {
             queried.forEach(each -> IkWay.ofBIC().transfer(each, params));
             return jq.updateAsync(queried).compose(Book.of()::income);

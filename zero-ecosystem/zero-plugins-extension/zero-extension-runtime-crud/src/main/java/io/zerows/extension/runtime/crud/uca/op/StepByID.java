@@ -2,8 +2,7 @@ package io.zerows.extension.runtime.crud.uca.op;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.mbse.metadata.KModule;
-import io.zerows.epoch.database.jooq.operation.UxJooq;
+import io.zerows.epoch.database.jooq.operation.DBJooq;
 import io.zerows.extension.runtime.crud.bootstrap.IxPin;
 import io.zerows.extension.runtime.crud.uca.desk.IxJunc;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
@@ -11,6 +10,7 @@ import io.zerows.extension.runtime.crud.uca.desk.IxReply;
 import io.zerows.extension.runtime.crud.uca.input.Pre;
 import io.zerows.extension.runtime.crud.uca.next.Co;
 import io.zerows.extension.runtime.crud.util.Ix;
+import io.zerows.mbse.metadata.KModule;
 import io.zerows.program.Ux;
 
 import java.util.Objects;
@@ -97,7 +97,7 @@ class StepByID implements Agonic {
      * @return {@link Future}<{@link JsonObject}>
      */
     private Future<JsonObject> fetchAsync(final JsonObject criteria, final IxMod in) {
-        final UxJooq jooq = IxPin.jooq(in);
+        final DBJooq jooq = IxPin.jooq(in);
         return jooq.fetchOneAsync(criteria).compose(queried -> {
             if (Objects.isNull(queried)) {
                 // null 返回，上层会转换成 204

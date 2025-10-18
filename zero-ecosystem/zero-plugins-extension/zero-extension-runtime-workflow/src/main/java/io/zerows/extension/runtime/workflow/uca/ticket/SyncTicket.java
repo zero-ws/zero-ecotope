@@ -3,7 +3,7 @@ package io.zerows.extension.runtime.workflow.uca.ticket;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.UxJooq;
+import io.zerows.epoch.database.jooq.operation.DBJooq;
 import io.zerows.extension.runtime.workflow.atom.configuration.MetaInstance;
 import io.zerows.extension.runtime.workflow.atom.runtime.WRecord;
 import io.zerows.extension.runtime.workflow.domain.tables.daos.WTicketDao;
@@ -27,7 +27,7 @@ class SyncTicket extends AbstractSync {
 
             // Sync
             .compose(recordRef -> {
-                final UxJooq tJq = Ux.Jooq.on(WTicketDao.class);
+                final DBJooq tJq = Ux.Jooq.on(WTicketDao.class);
                 final JsonObject ticketJ = requestJ.copy();
                 /*
                  * Key Point for attachment linkage here, the linkage must contain

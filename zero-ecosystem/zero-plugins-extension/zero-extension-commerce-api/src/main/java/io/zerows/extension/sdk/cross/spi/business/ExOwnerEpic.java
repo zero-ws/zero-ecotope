@@ -3,7 +3,7 @@ package io.zerows.extension.sdk.cross.spi.business;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.UxJooq;
+import io.zerows.epoch.database.jooq.operation.DBJooq;
 import io.zerows.extension.commerce.erp.domain.tables.daos.ECompanyDao;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XTenantDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XTenant;
@@ -26,7 +26,7 @@ public class ExOwnerEpic implements ExOwner {
 
     @Override
     public Future<JsonObject> fetchTenant(final String idOr) {
-        final UxJooq jq = Ux.Jooq.on(XTenantDao.class);
+        final DBJooq jq = Ux.Jooq.on(XTenantDao.class);
         return jq.<XTenant>fetchByIdAsync(idOr)
             .compose(tenant -> {
                 if (Objects.nonNull(tenant)) {

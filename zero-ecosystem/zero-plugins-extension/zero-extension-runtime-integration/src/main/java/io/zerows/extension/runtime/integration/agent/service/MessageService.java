@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.qr.Sorter;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.UxJooq;
+import io.zerows.epoch.database.jooq.operation.DBJooq;
 import io.zerows.extension.runtime.integration.domain.tables.daos.IMessageDao;
 import io.zerows.extension.runtime.integration.domain.tables.pojos.IMessage;
 import io.zerows.extension.runtime.skeleton.eon.em.EmMessage;
@@ -30,7 +30,7 @@ public class MessageService implements MessageStub {
 
     @Override
     public Future<List<IMessage>> updateStatus(final JsonArray keys, final EmMessage.Status status, final String user) {
-        final UxJooq jq = Ux.Jooq.on(IMessageDao.class);
+        final DBJooq jq = Ux.Jooq.on(IMessageDao.class);
         return jq.<IMessage>fetchInAsync(KName.KEY, keys).compose(messageList -> {
             messageList.forEach(message -> {
                 message.setStatus(status.name());
@@ -50,7 +50,7 @@ public class MessageService implements MessageStub {
             condition.put(KName.SUBJECT, Ut.valueString(body, KName.SUBJECT));
             condition.put(KName.APP_ID, Ut.valueString(body, KName.APP_ID));
         }
-        final UxJooq jq = Ux.Jooq.on(IMessageDao.class);
+        final DBJooq jq = Ux.Jooq.on(IMessageDao.class);
         return jq.<IMessage>fetchOneAsync(condition).compose(message -> {
             if (Objects.nonNull(message)) {
                 return Ux.future(message);

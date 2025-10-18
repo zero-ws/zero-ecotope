@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.UxJooq;
+import io.zerows.epoch.database.jooq.operation.DBJooq;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.RUserGroupDao;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.SUserDao;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SUser;
@@ -77,7 +77,7 @@ public class TwineRights implements Twine<String> {
 
     private Future<JsonObject> updateAsync(final String userKey, final JsonObject params) {
         /* Merge original here */
-        final UxJooq jq = Ux.Jooq.on(SUserDao.class);
+        final DBJooq jq = Ux.Jooq.on(SUserDao.class);
         return jq.<SUser>fetchByIdAsync(userKey).compose(queried -> {
             if (Objects.isNull(queried)) {
                 return Ux.futureJ();

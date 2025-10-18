@@ -1,14 +1,14 @@
 package io.zerows.extension.runtime.crud.bootstrap;
 
 import io.vertx.core.Vertx;
-import io.zerows.mbse.HOne;
-import io.zerows.mbse.metadata.KModule;
 import io.zerows.cortex.metadata.WebRule;
-import io.zerows.epoch.database.jooq.operation.UxJoin;
-import io.zerows.epoch.database.jooq.operation.UxJooq;
+import io.zerows.epoch.database.jooq.operation.DBJoin;
+import io.zerows.epoch.database.jooq.operation.DBJooq;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
+import io.zerows.mbse.HOne;
+import io.zerows.mbse.metadata.KModule;
 import io.zerows.specification.app.HAmbient;
 import io.zerows.specification.configuration.HRegistry;
 
@@ -23,40 +23,40 @@ import static io.zerows.extension.runtime.crud.util.Ix.LOG;
  */
 public class IxPin implements HRegistry.Mod<Vertx> {
     /**
-     * 返回单表操作的 {@link UxJooq} 对象，针对主模块的构造操作
+     * 返回单表操作的 {@link DBJooq} 对象，针对主模块的构造操作
      *
      * @param in {@link IxMod} 模块输入参数
      *
-     * @return {@link UxJooq} 操作对象
+     * @return {@link DBJooq} 操作对象
      */
-    public static UxJooq jooq(final IxMod in) {
+    public static DBJooq jooq(final IxMod in) {
         final Envelop envelop = in.envelop();
         return jooq(in.module(), envelop);
     }
 
     /**
-     * 返回单表操作的 {@link UxJooq} 对象，针对主模块的构造操作
+     * 返回单表操作的 {@link DBJooq} 对象，针对主模块的构造操作
      *
      * @param module  {@link KModule} 模块输入参数
      * @param envelop {@link Envelop} 请求的统一资源模型
      *
-     * @return {@link UxJooq} 操作对象
+     * @return {@link DBJooq} 操作对象
      */
-    public static UxJooq jooq(final KModule module, final Envelop envelop) {
-        final HOne<UxJooq> jq = HOne.jooq();
+    public static DBJooq jooq(final KModule module, final Envelop envelop) {
+        final HOne<DBJooq> jq = HOne.jooq();
         return jq.combine(module, envelop.headers());
     }
 
     /**
-     * 返回多表操作的 {@link UxJoin} 对象，针对双模块的专用操作
+     * 返回多表操作的 {@link DBJoin} 对象，针对双模块的专用操作
      *
      * @param in      {@link IxMod} 模块输入参数
      * @param connect {@link KModule} 连接模块
      *
-     * @return {@link UxJoin} 操作对象
+     * @return {@link DBJoin} 操作对象
      */
-    public static UxJoin join(final IxMod in, final KModule connect) {
-        final HOne<UxJoin> jq = HOne.join();
+    public static DBJoin join(final IxMod in, final KModule connect) {
+        final HOne<DBJoin> jq = HOne.join();
         return jq.combine(in.module(), connect);
     }
 

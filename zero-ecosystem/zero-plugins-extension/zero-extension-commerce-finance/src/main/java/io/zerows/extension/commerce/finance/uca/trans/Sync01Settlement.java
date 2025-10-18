@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.UxJooq;
+import io.zerows.epoch.database.jooq.operation.DBJooq;
 import io.zerows.extension.commerce.finance.domain.tables.daos.FSettlementDao;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FSettlement;
 import io.zerows.program.Ux;
@@ -37,7 +37,7 @@ class Sync01Settlement implements Trade<User, FSettlement> {
     public Future<FSettlement> flatter(final JsonObject data, final User user) {
         final String key = Ut.valueString(data, KName.KEY);
         Objects.requireNonNull(key);
-        final UxJooq jq = Ux.Jooq.on(FSettlementDao.class);
+        final DBJooq jq = Ux.Jooq.on(FSettlementDao.class);
         return jq.<FSettlement>fetchByIdAsync(key)
             // 更新 Settlement
             .compose(settlement -> {
@@ -48,7 +48,7 @@ class Sync01Settlement implements Trade<User, FSettlement> {
 
     @Override
     public Future<List<FSettlement>> scatter(final JsonArray data, final User assist) {
-        final UxJooq jq = Ux.Jooq.on(FSettlementDao.class);
+        final DBJooq jq = Ux.Jooq.on(FSettlementDao.class);
         final Set<String> keys = Ut.valueSetString(data, KName.KEY);
         return jq.<FSettlement>fetchInAsync(KName.KEY, Ut.toJArray(keys))
             // 更新 Settlement

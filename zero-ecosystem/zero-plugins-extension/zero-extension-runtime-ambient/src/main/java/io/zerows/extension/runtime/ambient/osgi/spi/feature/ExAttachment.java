@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.UxJooq;
+import io.zerows.epoch.database.jooq.operation.DBJooq;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XAttachmentDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XAttachment;
 import io.zerows.extension.runtime.ambient.util.At;
@@ -44,7 +44,7 @@ public class ExAttachment implements Attachment {
     @Override
     public Future<JsonArray> saveAsync(final JsonObject condition, final JsonArray data, final JsonObject params) {
 
-        final UxJooq jq = Ux.Jooq.on(XAttachmentDao.class);
+        final DBJooq jq = Ux.Jooq.on(XAttachmentDao.class);
         return jq.fetchJAsync(condition).compose(original -> {
             // 计算的三通道
             final ConcurrentMap<ChangeFlag, JsonArray> compared =

@@ -7,7 +7,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.cortex.extension.HExtension;
 import io.zerows.epoch.basicore.MDConnect;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.UxJoin;
+import io.zerows.epoch.database.jooq.operation.DBJoin;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -49,7 +49,7 @@ class DataSetJoin2 extends AbstractDataSet {
         this.logger().info("Report processing for Active = {}, StandBy = {}, Cond: {}",
             this.active.getTable(), this.standBy.getTable(), parameters.encode());
         // 提取 UxJoin
-        final UxJoin jq = Ux.Jooq.bridge(this.active, this.standBy, this.kvJoin, this.aliasJ);
+        final DBJoin jq = Ux.Jooq.bridge(this.active, this.standBy, this.kvJoin, this.aliasJ);
 
         return jq.fetchAsync(parameters).compose(data -> this.loadChildren(data, this.children));
     }

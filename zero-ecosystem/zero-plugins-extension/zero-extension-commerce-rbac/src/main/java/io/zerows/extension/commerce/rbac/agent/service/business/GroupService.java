@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.UxJooq;
+import io.zerows.epoch.database.jooq.operation.DBJooq;
 import io.zerows.epoch.metadata.UArray;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.RGroupRoleDao;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.SGroupDao;
@@ -41,7 +41,7 @@ public class GroupService implements GroupStub {
 
     @Override
     public SGroup fetchParent(final String groupKey) {
-        final UxJooq dao = Ux.Jooq.on(SGroupDao.class);
+        final DBJooq dao = Ux.Jooq.on(SGroupDao.class);
         if (null == dao) {
             return null;
         }
@@ -52,7 +52,7 @@ public class GroupService implements GroupStub {
 
     @Override
     public List<SGroup> fetchChildren(final String groupKey) {
-        final UxJooq dao = Ux.Jooq.on(SGroupDao.class);
+        final DBJooq dao = Ux.Jooq.on(SGroupDao.class);
         if (null == dao) {
             return new ArrayList<>();
         }

@@ -3,8 +3,7 @@ package io.zerows.extension.runtime.crud.uca.op.aop;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.mbse.metadata.KModule;
-import io.zerows.epoch.database.jooq.operation.UxJooq;
+import io.zerows.epoch.database.jooq.operation.DBJooq;
 import io.zerows.extension.runtime.crud.bootstrap.IxPin;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 import io.zerows.extension.runtime.crud.uca.desk.IxReply;
@@ -12,6 +11,7 @@ import io.zerows.extension.runtime.crud.uca.input.Pre;
 import io.zerows.extension.runtime.crud.uca.op.Agonic;
 import io.zerows.extension.runtime.crud.util.Ix;
 import io.zerows.extension.runtime.skeleton.osgi.spi.feature.Trash;
+import io.zerows.mbse.metadata.KModule;
 import io.zerows.program.Ux;
 
 import java.util.Objects;
@@ -22,7 +22,7 @@ import java.util.Objects;
 class AgonicDelete implements Agonic {
     @Override
     public Future<JsonObject> runJAsync(final JsonObject criteria, final IxMod in) {
-        final UxJooq jooq = IxPin.jooq(in);
+        final DBJooq jooq = IxPin.jooq(in);
         return jooq.fetchOneAsync(criteria).compose(queried -> {
             if (Objects.isNull(queried)) {
                 /*
@@ -52,7 +52,7 @@ class AgonicDelete implements Agonic {
 
     @Override
     public Future<JsonArray> runJAAsync(final JsonObject criteria, final IxMod in) {
-        final UxJooq jooq = IxPin.jooq(in);
+        final DBJooq jooq = IxPin.jooq(in);
         return jooq.fetchAsync(criteria).compose(queried -> {
             if (Objects.isNull(queried) || queried.isEmpty()) {
                 return Ux.futureA();

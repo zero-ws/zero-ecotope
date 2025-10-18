@@ -3,7 +3,7 @@ package io.zerows.mbse;
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.destine.Hymn;
-import io.zerows.epoch.database.jooq.operation.UxJoin;
+import io.zerows.epoch.database.jooq.operation.DBJoin;
 import io.zerows.epoch.metadata.KJoin;
 import io.zerows.mbse.metadata.KModule;
 import io.zerows.program.Ux;
@@ -13,15 +13,15 @@ import java.util.Objects;
 
 /**
  * 「连接访问器」
- * Join专用的构造函数，构造符合最终条件的 {@link UxJoin} 对象，此对象可以帮助开发人员完成跨表的CRUD操作，并根据实际情况
+ * Join专用的构造函数，构造符合最终条件的 {@link DBJoin} 对象，此对象可以帮助开发人员完成跨表的CRUD操作，并根据实际情况
  * 对当前 {@link KModule} 和关联模块 {@link KModule} 执行详细计算，计算结果会作用于函数内层，使得最终数据库跨表操作生
  * 效。当前包名为 mixture，含义为混合。
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
-class HOneJoin implements HOne<UxJoin> {
+class HOneJoin implements HOne<DBJoin> {
     @Override
-    public UxJoin combine(final KModule module, final KModule connect, final MultiMap headers) {
+    public DBJoin combine(final KModule module, final KModule connect, final MultiMap headers) {
         /*
          * 两个基础参数不可以为空，此处为连接基础，由于此处做的是双表 Join，传入的 connect 必须不能为空，否则直接抛出
          * 对应异常，此处不使用自定义异常，而是直接使用JVM级别的异常完成参数基本操作。
@@ -39,7 +39,7 @@ class HOneJoin implements HOne<UxJoin> {
          * - 父主表：（动态选择）直接使用主键连接
          * - 父从表：（静态唯一选择）使用 keyJoin 连接
          */
-        final UxJoin dao = Ux.Jooq.join();
+        final DBJoin dao = Ux.Jooq.join();
         final KJoin join = module.getConnect();
         final KJoin.Point source = join.getSource();
 

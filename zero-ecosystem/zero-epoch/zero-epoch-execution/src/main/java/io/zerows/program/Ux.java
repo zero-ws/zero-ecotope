@@ -9,8 +9,8 @@ import io.vertx.ext.auth.User;
 import io.zerows.epoch.basicore.MDConnect;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.database.cp.DataPool;
-import io.zerows.epoch.database.jooq.operation.UxJoin;
-import io.zerows.epoch.database.jooq.operation.UxJooq;
+import io.zerows.epoch.database.jooq.operation.DBJoin;
+import io.zerows.epoch.database.jooq.operation.DBJooq;
 import io.zerows.epoch.metadata.security.TokenJwt;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.constant.VValue;
@@ -310,7 +310,7 @@ public final class Ux extends _Where {
          *
          * @return 返回引用对象
          */
-        public static UxJooq bridge(final MDConnect connect) {
+        public static DBJooq bridge(final MDConnect connect) {
             final Class<?> daoCls = connect.getDao();
             Objects.requireNonNull(daoCls);
             // Pojo with
@@ -341,8 +341,8 @@ public final class Ux extends _Where {
          *
          * @return UxJooq reference that has been initialized
          */
-        public static UxJooq history(final Class<?> clazz) {
-            return UxJooq.ofHistory(clazz);
+        public static DBJooq history(final Class<?> clazz) {
+            return DBJooq.ofHistory(clazz);
         }
 
         /**
@@ -361,8 +361,8 @@ public final class Ux extends _Where {
          *
          * @return UxJooq reference that has been initialized
          */
-        public static UxJooq on(final Class<?> clazz) {
-            return UxJooq.of(clazz);
+        public static DBJooq on(final Class<?> clazz) {
+            return DBJooq.of(clazz);
         }
 
         /**
@@ -373,8 +373,8 @@ public final class Ux extends _Where {
          *
          * @return UxJooq reference that has been initialized
          */
-        public static UxJooq on(final Class<?> clazz, final DataPool pool) {
-            return UxJooq.of(clazz, pool);
+        public static DBJooq on(final Class<?> clazz, final DataPool pool) {
+            return DBJooq.of(clazz, pool);
         }
 
         /**
@@ -385,13 +385,13 @@ public final class Ux extends _Where {
          *
          * @return UxJooq reference that has been initialized
          */
-        public static UxJooq on(final Class<?> clazz, final String key) {
-            return UxJooq.of(clazz, key);
+        public static DBJooq on(final Class<?> clazz, final String key) {
+            return DBJooq.of(clazz, key);
         }
 
-        public static UxJoin bridge(final MDConnect active, final MDConnect standBy,
+        public static DBJoin bridge(final MDConnect active, final MDConnect standBy,
                                     final Kv<String, String> fieldJoin, final JsonObject aliasJ) {
-            final UxJoin join = UxJoin.of(null);
+            final DBJoin join = DBJoin.of(null);
             final String pojoActive = active.getPojoFile();
             if (Ut.isNotNil(pojoActive)) {
                 join.pojo(active.getDao(), pojoActive);
@@ -408,7 +408,7 @@ public final class Ux extends _Where {
             return bridgeAlias(join, active, standBy, aliasJ);
         }
 
-        public static UxJoin bridge(final MDConnect active, final MDConnect standBy,
+        public static DBJoin bridge(final MDConnect active, final MDConnect standBy,
                                     final Kv<String, String> fieldJoin) {
             return bridge(active, standBy, fieldJoin, null);
         }
@@ -433,7 +433,7 @@ public final class Ux extends _Where {
          * @param standBy
          * @param aliasJ
          */
-        public static UxJoin bridgeAlias(final UxJoin join, final MDConnect active, final MDConnect standBy, final JsonObject aliasJ) {
+        public static DBJoin bridgeAlias(final DBJoin join, final MDConnect active, final MDConnect standBy, final JsonObject aliasJ) {
             if (Ut.isNil(aliasJ)) {
                 return join;
             }
@@ -447,29 +447,29 @@ public final class Ux extends _Where {
                     } else if (tableName.equals(standBy.getTable())) {
                         daoCls = standBy.getDao();
                     } else {
-                        Ut.Log.database(UxJoin.class).error("( Join ) Please check your table name: {}", tableName);
+                        Ut.Log.database(DBJoin.class).error("( Join ) Please check your table name: {}", tableName);
                         daoCls = null;
                     }
                     final String fieldKey = fields.getString(VValue.IDX);
                     final String fieldJoin = fields.getString(VValue.ONE);
                     join.alias(daoCls, fieldKey, fieldJoin);
                 } else {
-                    Ut.Log.database(UxJoin.class).error("( Join ) Please check your alias configuration: {}", fields);
+                    Ut.Log.database(DBJoin.class).error("( Join ) Please check your alias configuration: {}", fields);
                 }
             });
             return join;
         }
 
-        public static UxJoin join(final String configFile) {
-            return UxJoin.of(configFile);
+        public static DBJoin join(final String configFile) {
+            return DBJoin.of(configFile);
         }
 
-        public static UxJoin join() {
-            return UxJoin.of(null);
+        public static DBJoin join() {
+            return DBJoin.of(null);
         }
 
-        public static UxJoin join(final Class<?> daoCls) {
-            return UxJoin.of(null).add(daoCls);
+        public static DBJoin join(final Class<?> daoCls) {
+            return DBJoin.of(null).add(daoCls);
         }
     }
 

@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.destine.Conflate;
 import io.zerows.component.destine.Hymn;
-import io.zerows.epoch.database.jooq.operation.UxJooq;
+import io.zerows.epoch.database.jooq.operation.DBJooq;
 import io.zerows.epoch.metadata.KJoin;
 import io.zerows.extension.runtime.crud.bootstrap.IxPin;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
@@ -84,7 +84,7 @@ class StandBySave implements Agonic {
 
 
         // 此处读取 StandBy 相关记录
-        final UxJooq jooq = IxPin.jooq(in);
+        final DBJooq jooq = IxPin.jooq(in);
         return jooq.fetchJOneAsync(condition);
     }
 
@@ -130,7 +130,7 @@ class StandBySave implements Agonic {
         final JsonObject condition = conflate.treat(inputA, this.module.connectId());
 
         LOG.Filter.info(this.getClass(), "( Batch ) By Joined: identifier: {0}, condition: {1}", in.module().identifier(), condition);
-        final UxJooq jooq = IxPin.jooq(in);
+        final DBJooq jooq = IxPin.jooq(in);
         return jooq.fetchJAsync(condition);
     }
 }

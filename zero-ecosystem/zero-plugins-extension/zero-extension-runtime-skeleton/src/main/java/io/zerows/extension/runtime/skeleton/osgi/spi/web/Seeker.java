@@ -3,7 +3,7 @@ package io.zerows.extension.runtime.skeleton.osgi.spi.web;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.UxJooq;
+import io.zerows.epoch.database.jooq.operation.DBJooq;
 
 /*
  * View seeking interface
@@ -16,7 +16,7 @@ public interface Seeker {
     String ARG1 = KName.METHOD;
     String ARG2 = KName.SIGMA;
 
-    Seeker on(UxJooq jooq);
+    Seeker on(DBJooq jooq);
 
     /*
      * Seeker resource by params and return to unique resourceId

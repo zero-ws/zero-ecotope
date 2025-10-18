@@ -6,7 +6,7 @@ import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.UxJooq;
+import io.zerows.epoch.database.jooq.operation.DBJooq;
 import io.zerows.extension.runtime.integration.domain.tables.daos.IDirectoryDao;
 import io.zerows.extension.runtime.integration.domain.tables.pojos.IDirectory;
 import io.zerows.extension.runtime.integration.uca.command.Fs;
@@ -177,7 +177,7 @@ public class ExPath implements ExIo {
     @Override
     public Future<Boolean> rename(final JsonObject directoryJ, final Kv<String, String> renameKv) {
         final String directoryId = directoryJ.getString(KName.KEY);
-        final UxJooq jq = Ux.Jooq.on(IDirectoryDao.class);
+        final DBJooq jq = Ux.Jooq.on(IDirectoryDao.class);
         final String updatedBy = directoryJ.getString(KName.UPDATED_BY);
         return jq.<IDirectory>fetchByIdAsync(directoryId)
             .compose(directory -> {
@@ -195,7 +195,7 @@ public class ExPath implements ExIo {
         final JsonObject condition = Ux.whereAnd();
         condition.put(KName.STORE_PATH + ",i", Ut.toJArray(paths));
         condition.put(KName.SIGMA, sigma);
-        final UxJooq jq = Ux.Jooq.on(IDirectoryDao.class);
+        final DBJooq jq = Ux.Jooq.on(IDirectoryDao.class);
         return jq.fetchJAsync(condition);
     }
 

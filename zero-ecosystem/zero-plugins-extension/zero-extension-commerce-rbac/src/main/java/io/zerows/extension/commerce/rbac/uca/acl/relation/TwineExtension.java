@@ -4,8 +4,8 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.UxJoin;
-import io.zerows.epoch.database.jooq.operation.UxJooq;
+import io.zerows.epoch.database.jooq.operation.DBJoin;
+import io.zerows.epoch.database.jooq.operation.DBJooq;
 import io.zerows.epoch.metadata.UObject;
 import io.zerows.extension.commerce.rbac.atom.ScConfig;
 import io.zerows.extension.commerce.rbac.bootstrap.ScPin;
@@ -76,7 +76,7 @@ class TwineExtension implements Twine<SUser> {
             return Ux.Jooq.on(SUserDao.class).fetchJOneAsync(query);
         }
         return TwineQr.normalize(qr, query).compose(queryJ -> {
-            final UxJoin searcher = Ux.Jooq.join();
+            final DBJoin searcher = Ux.Jooq.join();
             /*
              * S_USER ( modelKey )
              *    JOIN
@@ -109,7 +109,7 @@ class TwineExtension implements Twine<SUser> {
     public Future<JsonObject> identAsync(final SUser user) {
         final KRef ref = new KRef();
         return this.runSingle(user, qr -> {
-                final UxJooq jq = Ux.Jooq.on(qr.getClassDao());
+                final DBJooq jq = Ux.Jooq.on(qr.getClassDao());
                 Objects.requireNonNull(jq);
                 return jq.fetchJByIdAsync(user.getModelKey());
             })
@@ -136,7 +136,7 @@ class TwineExtension implements Twine<SUser> {
         /* User model key */
         return this.runSingle(key, qr -> {
             /* Read Extension information */
-            final UxJooq jq = Ux.Jooq.on(qr.getClassDao());
+            final DBJooq jq = Ux.Jooq.on(qr.getClassDao());
             Objects.requireNonNull(jq);
             return jq.updateJAsync(key.getModelKey(), updatedData);
         });
@@ -183,7 +183,7 @@ class TwineExtension implements Twine<SUser> {
         if (keys.isEmpty()) {
             return Ux.futureA();
         } else {
-            final UxJooq jq = Ux.Jooq.on(qr.getClassDao());
+            final DBJooq jq = Ux.Jooq.on(qr.getClassDao());
             Objects.requireNonNull(jq);
             final JsonObject condition = new JsonObject();
             condition.put(KName.KEY + ",i", Ut.toJArray(keys));

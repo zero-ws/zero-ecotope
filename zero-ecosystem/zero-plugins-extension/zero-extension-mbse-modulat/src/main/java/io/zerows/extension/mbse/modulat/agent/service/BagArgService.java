@@ -2,9 +2,9 @@ package io.zerows.extension.mbse.modulat.agent.service;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.constant.KName;
 import io.zerows.cosmic.plugins.cache.Rapid;
-import io.zerows.epoch.database.jooq.operation.UxJooq;
+import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.database.jooq.operation.DBJooq;
 import io.zerows.extension.mbse.modulat.atom.PowerApp;
 import io.zerows.extension.mbse.modulat.domain.tables.daos.BBagDao;
 import io.zerows.extension.mbse.modulat.domain.tables.daos.BBlockDao;
@@ -35,7 +35,7 @@ public class BagArgService implements BagArgStub {
     public Future<JsonObject> fetchBagConfig(final String bagAbbr) {
         Objects.requireNonNull(bagAbbr);
         final JsonObject condition = Ux.whereAnd("nameAbbr", bagAbbr);
-        final UxJooq jq = Ux.Jooq.on(BBagDao.class);
+        final DBJooq jq = Ux.Jooq.on(BBagDao.class);
         return jq.<BBag>fetchOneAsync(condition).compose(bag -> {
             /* Check if root by parentId */
             if (Objects.isNull(bag)) {

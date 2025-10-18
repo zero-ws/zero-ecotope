@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.qr.syntax.Ir;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.UxJooq;
+import io.zerows.epoch.database.jooq.operation.DBJooq;
 import io.zerows.extension.commerce.rbac.agent.service.accredit.ActionStub;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.RRolePermDao;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.SActionDao;
@@ -43,7 +43,7 @@ public class PermService implements PermStub {
          * Update all the action permissionId = null by key
          */
         final List<Future<SAction>> entities = new ArrayList<>();
-        final UxJooq jooq = Ux.Jooq.on(SActionDao.class);
+        final DBJooq jooq = Ux.Jooq.on(SActionDao.class);
         Ut.itJString(removed).map(key -> jooq.<SAction>fetchByIdAsync(key)
 
             /*
@@ -94,7 +94,7 @@ public class PermService implements PermStub {
          * Delete all the relations that belong to roleId
          * that the user provided here
          * */
-        final UxJooq dao = Ux.Jooq.on(RRolePermDao.class);
+        final DBJooq dao = Ux.Jooq.on(RRolePermDao.class);
         return dao.deleteByAsync(condition).compose(processed -> {
             /*
              * Build new relations that belong to the role

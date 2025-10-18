@@ -5,7 +5,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.UxJooq;
+import io.zerows.epoch.database.jooq.operation.DBJooq;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XActivityChangeDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XActivityChange;
 import io.zerows.extension.runtime.ambient.eon.em.ActivityStatus;
@@ -47,7 +47,7 @@ public class ActivityService implements ActivityStub {
 
     @Override
     public Future<JsonArray> saveChanges(final String id, final ActivityStatus status) {
-        final UxJooq jq = Ux.Jooq.on(XActivityChangeDao.class);
+        final DBJooq jq = Ux.Jooq.on(XActivityChangeDao.class);
         return jq.<XActivityChange>fetchAsync(KName.ACTIVITY_ID, id).compose(changes -> {
             final List<XActivityChange> original = new ArrayList<>(changes);
             Ut.itList(original, (change, index) -> {

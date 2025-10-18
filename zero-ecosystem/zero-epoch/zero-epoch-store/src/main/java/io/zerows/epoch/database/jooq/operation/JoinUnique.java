@@ -19,7 +19,7 @@ class JoinUnique {
 
     // Unique
     Future<JsonObject> fetchById(final String key, final boolean isASub, final String field) {
-        final UxJooq jooq = this.store.jooq();
+        final DBJooq jooq = this.store.jooq();
         return jooq.fetchJByIdAsync(key).compose(response -> {
             if (isASub) {
                 return this.fetchA(response).compose(data -> {
@@ -36,7 +36,7 @@ class JoinUnique {
     }
 
     private Future<JsonArray> fetchA(final JsonObject response) {
-        final UxJooq childJq = this.store.childJooq();
+        final DBJooq childJq = this.store.childJooq();
         if (Objects.nonNull(childJq)) {
             final JsonObject joined = this.store.dataJoin(response);
             return childJq.fetchJAsync(joined);
@@ -46,7 +46,7 @@ class JoinUnique {
     }
 
     private Future<JsonObject> fetchJ(final JsonObject response) {
-        final UxJooq childJq = this.store.childJooq();
+        final DBJooq childJq = this.store.childJooq();
         if (Objects.nonNull(childJq)) {
             final JsonObject joined = this.store.dataJoin(response);
             return childJq.fetchJOneAsync(joined);

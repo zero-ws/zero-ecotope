@@ -5,7 +5,7 @@ import io.r2mo.typed.common.Kv;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.UxJooq;
+import io.zerows.epoch.database.jooq.operation.DBJooq;
 import io.zerows.extension.runtime.integration.domain.tables.daos.IDirectoryDao;
 import io.zerows.extension.runtime.integration.domain.tables.pojos.IDirectory;
 import io.zerows.extension.runtime.integration.uca.command.Fs;
@@ -57,7 +57,7 @@ public class DirService implements DirStub {
      */
     @Override
     public Future<Boolean> remove(final String key) {
-        final UxJooq jq = Ux.Jooq.on(IDirectoryDao.class);
+        final DBJooq jq = Ux.Jooq.on(IDirectoryDao.class);
         return jq.<IDirectory>fetchByIdAsync(key)
             .compose(directory -> Is.directoryQr(directory).compose(queried -> {
                 final List<IDirectory> directories = new ArrayList<>();
@@ -84,7 +84,7 @@ public class DirService implements DirStub {
      */
     @Override
     public Future<Boolean> remove(final String key, final String userId) {
-        final UxJooq jq = Ux.Jooq.on(IDirectoryDao.class);
+        final DBJooq jq = Ux.Jooq.on(IDirectoryDao.class);
         return jq.<IDirectory>fetchByIdAsync(key).compose(directory -> Is.directoryQr(directory).compose(queried -> {
             final List<IDirectory> directories = new ArrayList<>();
             // Current Folder
@@ -132,7 +132,7 @@ public class DirService implements DirStub {
          * 1. integrationId changing
          * 2. storePath changing
          */
-        final UxJooq jq = Ux.Jooq.on(IDirectoryDao.class);
+        final DBJooq jq = Ux.Jooq.on(IDirectoryDao.class);
         return jq.<IDirectory>fetchByIdAsync(key).compose(directory -> {
             // Query Null directory
             if (Objects.isNull(directory)) {

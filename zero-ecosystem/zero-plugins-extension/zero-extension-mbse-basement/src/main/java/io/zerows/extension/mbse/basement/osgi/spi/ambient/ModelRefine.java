@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.UxJooq;
+import io.zerows.epoch.database.jooq.operation.DBJooq;
 import io.zerows.extension.mbse.basement.atom.Model;
 import io.zerows.extension.mbse.basement.domain.tables.daos.MAttributeDao;
 import io.zerows.extension.mbse.basement.domain.tables.daos.MJoinDao;
@@ -90,7 +90,7 @@ class ModelRefine implements AoRefine {
             .forEach(each -> criteria.put("$" + each.hashCode(), each));
         criteria.put(VString.EMPTY, Boolean.FALSE);
         // 2. 从数据库中读取原始属性
-        final UxJooq jooqAttr = Ux.Jooq.on(MAttributeDao.class);
+        final DBJooq jooqAttr = Ux.Jooq.on(MAttributeDao.class);
         return jooqAttr.<MAttribute>fetchAsync(criteria).compose(original -> {
             // 3. 唯一业务属性
             final Set<String> uniqueSet = new HashSet<>();
@@ -118,7 +118,7 @@ class ModelRefine implements AoRefine {
         model.dbJoins().stream().map(fnQuery)
             .forEach(each -> criteria.put("$" + each.hashCode(), each));
         // 2. 从数据库中读取初始属性
-        final UxJooq jooqJoin = Ux.Jooq.on(MJoinDao.class);
+        final DBJooq jooqJoin = Ux.Jooq.on(MJoinDao.class);
         return jooqJoin.<MJoin>fetchAsync(criteria).compose(original -> {
             // 3. 唯一性业务
             final Set<String> uniqueSet = new HashSet<>();

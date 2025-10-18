@@ -3,7 +3,7 @@ package io.zerows.extension.commerce.rbac.agent.service.business;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.UxJooq;
+import io.zerows.epoch.database.jooq.operation.DBJooq;
 import io.zerows.epoch.metadata.UObject;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.OUserDao;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.RUserGroupDao;
@@ -111,10 +111,10 @@ public class UserService implements UserStub {
 
     @Override
     public Future<Boolean> deleteUser(final String userKey) {
-        final UxJooq sUserDao = Ux.Jooq.on(SUserDao.class);
-        final UxJooq oUserDao = Ux.Jooq.on(OUserDao.class);
-        final UxJooq rUserRoleDao = Ux.Jooq.on(RUserRoleDao.class);
-        final UxJooq rUserGroupDao = Ux.Jooq.on(RUserGroupDao.class);
+        final DBJooq sUserDao = Ux.Jooq.on(SUserDao.class);
+        final DBJooq oUserDao = Ux.Jooq.on(OUserDao.class);
+        final DBJooq rUserRoleDao = Ux.Jooq.on(RUserRoleDao.class);
+        final DBJooq rUserGroupDao = Ux.Jooq.on(RUserGroupDao.class);
 
         return oUserDao.fetchOneAsync(new JsonObject().put(KName.CLIENT_ID, userKey))
             /* delete OUser record */

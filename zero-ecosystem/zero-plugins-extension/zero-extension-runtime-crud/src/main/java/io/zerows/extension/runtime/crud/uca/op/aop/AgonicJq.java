@@ -4,13 +4,13 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.aop.Aspect;
-import io.zerows.mbse.metadata.KModule;
-import io.zerows.epoch.database.jooq.operation.UxJooq;
+import io.zerows.epoch.database.jooq.operation.DBJooq;
 import io.zerows.extension.runtime.crud.bootstrap.IxPin;
 import io.zerows.extension.runtime.crud.uca.dao.Operate;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 import io.zerows.extension.runtime.crud.uca.desk.IxReply;
 import io.zerows.extension.runtime.crud.util.Ix;
+import io.zerows.mbse.metadata.KModule;
 import io.zerows.program.Ux;
 
 import java.util.function.Function;
@@ -22,7 +22,7 @@ class AgonicJq {
     // 添加
     static Function<JsonObject, Future<JsonObject>> createFnJ(final IxMod in) {
         final KModule module = in.module();
-        final UxJooq jooq = IxPin.jooq(in);
+        final DBJooq jooq = IxPin.jooq(in);
         return Ix.aop(module, Aspect::wrapJCreate,
             // AOP中的核心函数
             aopJ -> Ix.deserializeT(aopJ, module)
@@ -33,7 +33,7 @@ class AgonicJq {
 
     static Function<JsonArray, Future<JsonArray>> createFnA(final IxMod in) {
         final KModule module = in.module();
-        final UxJooq jooq = IxPin.jooq(in);
+        final DBJooq jooq = IxPin.jooq(in);
         return Ix.aop(module, Aspect::wrapACreate,
             // AOP中的核心函数
             aopA -> Ix.deserializeT(aopA, module)
@@ -46,7 +46,7 @@ class AgonicJq {
     static Function<JsonObject, Future<JsonObject>> deleteFnJ(
         final JsonObject criteria, final IxMod in) {
         final KModule module = in.module();
-        final UxJooq jooq = IxPin.jooq(in);
+        final DBJooq jooq = IxPin.jooq(in);
         return Ix.aop(module, Aspect::wrapJDelete,
             // AOP中的核心逻辑函数
             aopJ -> {
@@ -61,7 +61,7 @@ class AgonicJq {
     static Function<JsonArray, Future<JsonArray>> deleteFnA(
         final JsonObject criteria, final IxMod in) {
         final KModule module = in.module();
-        final UxJooq jooq = IxPin.jooq(in);
+        final DBJooq jooq = IxPin.jooq(in);
         return Ix.aop(module, Aspect::wrapADelete,
             // AOP中的核心逻辑函数
             aopJ -> {
@@ -76,7 +76,7 @@ class AgonicJq {
     // 更新
     static Function<JsonObject, Future<JsonObject>> updateFnJ(final IxMod in) {
         final KModule module = in.module();
-        final UxJooq jooq = IxPin.jooq(in);
+        final DBJooq jooq = IxPin.jooq(in);
         return Ix.aop(module, Aspect::wrapJUpdate,
             // AOP中的核心逻辑函数
             aopJ -> Ix.deserializeT(aopJ, module)
@@ -86,7 +86,7 @@ class AgonicJq {
     }
 
     static Function<JsonArray, Future<JsonArray>> updateFnA(final IxMod in) {
-        final UxJooq jooq = IxPin.jooq(in);
+        final DBJooq jooq = IxPin.jooq(in);
         return Ix.aop(in.module(), Aspect::wrapAUpdate,
             // AOP中的核心逻辑函数
             aopA -> Ix.deserializeT(aopA, in.module())

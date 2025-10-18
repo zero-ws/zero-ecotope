@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.bootplus.extension.refine.Ox;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.database.cp.DataPool;
-import io.zerows.epoch.database.jooq.operation.UxJooq;
+import io.zerows.epoch.database.jooq.operation.DBJooq;
 import io.zerows.platform.enums.Environment;
 import io.zerows.program.Ux;
 import io.zerows.specification.app.HApp;
@@ -69,9 +69,9 @@ public class Around {
             return Ux.future();
         } else {
             return this.captureAsync(config).compose(ds -> {
-                final UxJooq jooq = Ux.Jooq.on(daoCls, ds);
+                final DBJooq jooq = Ux.Jooq.on(daoCls, ds);
                 final MigrateStep step = Ut.instance(clazz, this.environment);
-                Ut.contract(step, UxJooq.class, jooq);
+                Ut.contract(step, DBJooq.class, jooq);
                 Ut.contract(step, Class.class, daoCls);
                 Ut.contract(step, String.class, config.getString("folder"));
                 step.bind(this.ark);        // 绑定 App
