@@ -76,10 +76,19 @@
         1. 存储：本地存储
         2. 类型：Vert.x
         3. 测试：Vert.x JUnit5
+        4. 数据库：Jooq / Hikari
         -->
         <dependency>
             <groupId>io.zerows</groupId>
             <artifactId>r2mo-typed-vertx</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>r2mo-dbe-jooq</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>r2mo-dbcp-hikari</artifactId>
         </dependency>
         <dependency>
             <groupId>io.zerows</groupId>

@@ -3,11 +3,12 @@ package io.zerows.platform.metadata;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.r2mo.base.dbe.DBCrypto;
+import io.r2mo.spi.SPI;
+import io.r2mo.typed.annotation.SPID;
 import io.vertx.core.json.JsonObject;
 import io.zerows.integrated.jackson.JsonObjectDeserializer;
 import io.zerows.integrated.jackson.JsonObjectSerializer;
-import io.zerows.platform.ENV;
-import io.zerows.platform.EnvironmentVariable;
 import io.zerows.platform.annotations.ClassYml;
 import io.zerows.platform.enums.EmDS;
 import io.zerows.specification.atomic.HCopier;
@@ -19,6 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.Serializable;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -31,6 +33,7 @@ import java.util.Objects;
 @Data
 @ClassYml
 @Slf4j
+@Deprecated
 public class KDatabase implements Serializable, HCopier<KDatabase>, HJson {
 
     /**
@@ -68,7 +71,7 @@ public class KDatabase implements Serializable, HCopier<KDatabase>, HJson {
     /* Database port number */
     private Integer port;
     /* Database category */
-    private EmDS.Database category = EmDS.Database.MYSQL8;
+    private EmDS.Database category = EmDS.Database.MYSQL_8;
     /* JDBC connection string */
     private String url;
     /* Database username */
@@ -82,7 +85,7 @@ public class KDatabase implements Serializable, HCopier<KDatabase>, HJson {
     /* Database Connection Testing */
     public static boolean test(final KDatabase database) {
         try {
-            DriverManager.getConnection(database.getUrl(), database.getUsername(), database.getSmartPassword());
+            DriverManager.getConnection(database.getUrl(), database.getUsername(), database.getPasswordDecrypted());
             return true;
         } catch (final SQLException ex) {
             // Debug for database connection
@@ -104,15 +107,27 @@ public class KDatabase implements Serializable, HCopier<KDatabase>, HJson {
         return KDatabase.test(this);
     }
 
-    public String getSmartPassword() {
-        final Boolean enabled = ENV.of().get(EnvironmentVariable.HED_ENABLED, false, Boolean.class);
-        log.info("[ ZERO ] HED 加解密模块是否启用: {}", enabled);
-        if (enabled) {
-            // HED_ENABLED=true
-            return UtBase.decryptRSAV(this.password);
-        } else {
+    public String getPasswordDecrypted() {
+        /*
+         * 不在考虑使用与否，只是单纯用组件处理，屏蔽环境变量
+         */
+        final List<DBCrypto> cryptoList = SPI.findMany(DBCrypto.class);
+        if (cryptoList.isEmpty()) {
             return this.password;
         }
+        final DBCrypto crypto = cryptoList.stream().filter(item -> {
+            final SPID spid = item.getClass().getDeclaredAnnotation(SPID.class);
+            if (Objects.isNull(spid)) {
+                return false;
+            }
+            return DBCrypto.FOR_DATABASE.equals(spid.value());
+        }).findAny().orElse(null);
+        if (Objects.isNull(crypto)) {
+            return this.password;
+        }
+
+        log.info("[ ZERO ] 数据库加解密模块启用，实现类 = {}", crypto.getClass().getName());
+        return crypto.decrypt(this.password);
     }
 
     @SuppressWarnings("unchecked")
@@ -165,7 +180,7 @@ public class KDatabase implements Serializable, HCopier<KDatabase>, HJson {
     public void fromJson(final JsonObject data) {
         if (UtBase.isNotNil(data)) {
             // category
-            this.category = UtBase.toEnum(() -> data.getString(Option.CATEGORY), EmDS.Database.class, EmDS.Database.MYSQL5);
+            this.category = UtBase.toEnum(() -> data.getString(Option.CATEGORY), EmDS.Database.class, EmDS.Database.MYSQL_5);
             // hostname
             this.hostname = data.getString(Option.HOSTNAME);
             // port

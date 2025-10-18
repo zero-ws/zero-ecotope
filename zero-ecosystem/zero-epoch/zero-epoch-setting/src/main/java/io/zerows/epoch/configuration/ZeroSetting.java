@@ -1,11 +1,11 @@
 package io.zerows.epoch.configuration;
 
+import io.r2mo.base.dbe.Database;
 import io.r2mo.typed.exception.web._501NotSupportException;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.basicore.option.ClusterOptions;
 import io.zerows.epoch.boot.ZeroLauncher;
 import io.zerows.platform.enums.EmApp;
-import io.zerows.platform.metadata.KDatabase;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HSetting;
 import io.zerows.specification.development.HLog;
@@ -223,7 +223,7 @@ public class ZeroSetting implements HSetting, HLog {
         if (!(config instanceof final ConfigDS ds)) {
             throw new _501NotSupportException("[ ZERO ] 数据库配置类型有异常！" + config.getClass());
         }
-        final KDatabase database = ds.ref();
+        final Database database = ds.ref();
         content.append("( dynamic = ").append(ds.dynamic()).append(", strict = ").append(ds.strict()).append(" )\n");
         content.append("\t\t\uD83D\uDFE9 主库：").append("key = ").append(ds.master()).append("\n");
         this.vLog(content, database);
@@ -232,13 +232,13 @@ public class ZeroSetting implements HSetting, HLog {
             final HConfig slaveConfig = slaveDatabase.get(field);
             if (Objects.nonNull(slaveConfig)) {
                 content.append("\t\t\uD83D\uDFE6 从库：").append("key = ").append(field).append("\n");
-                final KDatabase slaveDatabaseRef = slaveConfig.ref();
+                final Database slaveDatabaseRef = slaveConfig.ref();
                 this.vLog(content, slaveDatabaseRef);
             }
         });
     }
 
-    private void vLog(final StringBuilder content, final KDatabase database) {
+    private void vLog(final StringBuilder content, final Database database) {
         content.append("\t\t\t数据库名：⚡️").append(database.getInstance()).append("\n");
         content.append("\t\t\t连接字符串：").append(database.getUrl()).append("\n");
     }

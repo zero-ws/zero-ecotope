@@ -16,13 +16,14 @@ public final class EmDS {
     /**
      * Created based on org.jooq.SQLDialect
      */
+    @Deprecated
     @SuppressWarnings("all")
     public enum Database {
         // --------------------- Jooq supported
 
         MARIADB,    // MariaDB
 
-        SQLLITE,    // SQLite
+        SQLLITE_3,    // SQLite
         TRINO,      // Trino
         YUGABYTEDB, // YugabyteDB
 
@@ -39,12 +40,13 @@ public final class EmDS {
         IGNITE,     // Ignite
 
         // MySQL
-        MYSQL5,     // MySQL 5.x
-        MYSQL8,     // MySQL 8.x
+        MYSQL_5,     // MySQL 5.x
+        MYSQL_8,     // MySQL 8.x
+        MYSQL_9,     // MySQL 9.x
         TIDB,       // MySQL
 
         // PgSQL
-        POSTGRES,   // PgSQL
+        PGSQL,   // PgSQL
         COCKROACHDB,// CockroachDB 42.6.0
 
         // --------------------- Jooq exclude

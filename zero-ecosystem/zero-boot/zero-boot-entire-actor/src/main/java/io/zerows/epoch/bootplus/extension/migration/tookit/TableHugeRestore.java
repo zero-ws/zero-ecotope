@@ -43,7 +43,7 @@ public class TableHugeRestore extends AbstractStatic {
         cmd.append("mysql")
             .append(" -h").append(database.getHostname())
             .append(" -u").append(database.getUsername())
-            .append(" -p").append(database.getSmartPassword())
+            .append(" -p").append(database.getPasswordDecrypted())
             .append(" --default-character-set=utf8 ")
             .append(" ").append(database.getInstance());
         return Fn.jvmOr(() -> {

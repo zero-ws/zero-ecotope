@@ -182,7 +182,7 @@ public class HikariDataPool implements DataPool {
              */
             this.dataSource.setJdbcUrl(this.database.getUrl());
             this.dataSource.setUsername(this.database.getUsername());
-            this.dataSource.setPassword(this.database.getSmartPassword());
+            this.dataSource.setPassword(this.database.getPasswordDecrypted());
             /*
              * Fix bug for 'no suitable driver'
              */

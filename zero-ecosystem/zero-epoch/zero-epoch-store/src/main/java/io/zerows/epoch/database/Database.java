@@ -42,7 +42,7 @@ public class Database extends KDatabase {
     /* Database Connection Testing */
     public static boolean test(final Database database) {
         try {
-            DriverManager.getConnection(database.getUrl(), database.getUsername(), database.getSmartPassword());
+            DriverManager.getConnection(database.getUrl(), database.getUsername(), database.getPasswordDecrypted());
             return true;
         } catch (final SQLException ex) {
             // Debug for database connection

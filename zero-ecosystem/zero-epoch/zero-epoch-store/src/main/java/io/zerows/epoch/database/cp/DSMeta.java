@@ -13,17 +13,17 @@ public interface DSMeta {
         {
             // Jooq Supported Default
             // MySQL
-            this.put(EmDS.Database.MYSQL8, SQLDialect.MYSQL);
-            this.put(EmDS.Database.MYSQL5, SQLDialect.MYSQL);
+            this.put(EmDS.Database.MYSQL_8, SQLDialect.MYSQL);
+            this.put(EmDS.Database.MYSQL_5, SQLDialect.MYSQL);
             this.put(EmDS.Database.TIDB, SQLDialect.MYSQL);
 
             // PgSQL
-            this.put(EmDS.Database.POSTGRES, SQLDialect.POSTGRES);
+            this.put(EmDS.Database.PGSQL, SQLDialect.POSTGRES);
             this.put(EmDS.Database.COCKROACHDB, SQLDialect.POSTGRES);
 
             // Other
             this.put(EmDS.Database.MARIADB, SQLDialect.MARIADB);
-            this.put(EmDS.Database.SQLLITE, SQLDialect.SQLITE);
+            this.put(EmDS.Database.SQLLITE_3, SQLDialect.SQLITE);
             this.put(EmDS.Database.TRINO, SQLDialect.TRINO);
             this.put(EmDS.Database.YUGABYTEDB, SQLDialect.YUGABYTEDB);
             this.put(EmDS.Database.DERBY, SQLDialect.DERBY);

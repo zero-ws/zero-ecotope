@@ -29,7 +29,6 @@ class SessionAddOn extends AddOnBase<SessionClient> {
     }
 
     @Override
-    @SuppressWarnings("all")
     protected SessionManager manager() {
         return SessionManager.of();
     }

@@ -1,5 +1,6 @@
 package io.zerows.spi;
 
+import io.r2mo.base.dbe.DBS;
 import io.r2mo.spi.FactoryDBAction;
 import io.r2mo.spi.FactoryIo;
 import io.r2mo.spi.FactoryObject;
@@ -32,6 +33,7 @@ public final class HPI extends SPI {
             this.add(FactoryIo.class);
             this.add(FactoryDBAction.class);
             this.add(FactoryWeb.class);
+            this.add(DBS.CPFactory.class);
             // 应用部分
             this.add(AtomNs.class);
             this.add(BootIo.class);
