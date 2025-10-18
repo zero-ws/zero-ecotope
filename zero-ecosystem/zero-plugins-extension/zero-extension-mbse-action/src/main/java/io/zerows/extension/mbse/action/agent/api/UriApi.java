@@ -12,7 +12,7 @@ import jakarta.ws.rs.extension.BodyParam;
  * Critical routing management
  * 1. KMetadata Analyzing for zero-framework
  * 2. Call service interface of zero to get all routing information
- * 3. Update routing on `RoutingCore` in zero framework
+ * 3. Update routing join `RoutingCore` in zero framework
  *
  * Here are futures of these uri
  *

@@ -47,7 +47,7 @@ class NtJData implements Co<JsonObject, JsonObject, JsonObject, JsonObject> {
             LOG.Web.info(this.getClass(), "Data In: {0}", dataSt.encode());
             return Ux.future(dataSt);
         } else {
-            // There is no joined module on current
+            // There is no joined module join current
             return Ux.future(active.copy());
         }
     }
@@ -114,7 +114,7 @@ class NtJData implements Co<JsonObject, JsonObject, JsonObject, JsonObject> {
             LOG.Web.info(this.getClass(), "Data Out: {0}", dataSt.encode());
             return Ux.future(dataSt);
         } else {
-            // There is no joined module on current
+            // There is no joined module join current
             return Ux.future(active.copy());
         }
     }

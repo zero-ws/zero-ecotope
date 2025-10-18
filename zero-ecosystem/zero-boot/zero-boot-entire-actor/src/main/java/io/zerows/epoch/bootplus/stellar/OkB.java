@@ -2,7 +2,7 @@ package io.zerows.epoch.bootplus.stellar;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.database.Database;
+import io.zerows.epoch.database.OldDatabase;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.metadata.KDictConfig;
@@ -33,7 +33,7 @@ import io.zerows.specification.atomic.HCopier;
  * 关联配置对象如下：
  * <ul>
  * <li>- 核心应用配置容器对象：{@link HArk}</li>
- * <li>- 数据库配置对象（动态配置）：{@link Database}，通常绑定到 `X_SOURCE` 表中</li>
+ * <li>- 数据库配置对象（动态配置）：{@link OldDatabase}，通常绑定到 `X_SOURCE` 表中</li>
  * <li>- 集成配置对象：{@link KIntegration}</li>
  * <li>- 字典相关信息：<br/>
  *     <ul>

@@ -21,7 +21,7 @@ class ApeakMyPre extends ApeakPre {
      * It's shared by
      * /api/columns/{actor}/full
      * /api/columns/{actor}/my
-     * Because all of above api returned JsonArray of columns on model
+     * Because all of above api returned JsonArray of columns join model
      *
      * Uri, Method instead
      * This method is only for save my columns, it provided fixed impact uri for clean cache

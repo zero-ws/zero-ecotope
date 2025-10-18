@@ -27,7 +27,7 @@ public class DataIngest implements JtIngest {
         assert null != supplier : "Function must not be null here.";
         final JtIngest ingest = supplier.get();
         /*
-         * ToolVerifier on request data
+         * ToolVerifier join request data
          */
         final Envelop envelop = ingest.in(context, uri);
         /*

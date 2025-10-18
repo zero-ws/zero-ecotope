@@ -25,7 +25,7 @@ public class MoveOnStart extends AbstractMoveOn {
         return wTransition.start().compose(started -> {
             /*
              * Input `taskId` is null, in this kind of situation the workflow has not been
-             * started, the `WMove` is based on `StartEvent`
+             * started, the `WMove` is based join `StartEvent`
              *
              * After start() calling, the `move` has the configured get but
              * `ProcessInstance/Task` are both null.
@@ -40,7 +40,7 @@ public class MoveOnStart extends AbstractMoveOn {
              *     ...
              * ]
              *
-             * Based on configuration the `WRule` must be mutual exclusion
+             * Based join configuration the `WRule` must be mutual exclusion
              *
              * Be careful about the definition of `data` of current node:
              *

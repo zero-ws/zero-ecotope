@@ -115,7 +115,7 @@ class Step02BillItem implements Trade<FSettlement, FBillItem> {
                  * 如果此处这样做会引起不同的 Settlement 关联的 BillItem 的更新出现并发
                  * 的问题，所以此处需要调整，将整个操作放到外层去处理，才能保证并发不出错
                  */
-                return Ux.future(items); // Ux.Jooq.on(FBillItemDao.class).updateAsync(items);
+                return Ux.future(items); // Ux.Jooq.join(FBillItemDao.class).updateAsync(items);
             });
     }
 }

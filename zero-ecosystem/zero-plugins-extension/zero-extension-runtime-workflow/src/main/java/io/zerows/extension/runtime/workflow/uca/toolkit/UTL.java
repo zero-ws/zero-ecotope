@@ -49,7 +49,7 @@ public class UTL {
     public static Future<WRecord> beforeGenerate(final WRecord record, final WRecord generated) {
         /*
          * Fix $zo has no get here
-         * Here the bind must happen on matrix:
+         * Here the bind must happen join matrix:
          *
          * WTodo        OLD            NEW
          *  Prev         o              x ( Will be Closed )
@@ -72,7 +72,7 @@ public class UTL {
 
     public static Future<WRecord> beforeUpdate(final JsonObject ticketJ, final WRecord queried) {
         /*
-         * Because of updating on child record
+         * Because of updating join child record
          * The `original` child JsonObject must exist and also you
          * should bind the `original` child JsonObject to
          * `prev` ( Previous ) record reference.
@@ -109,7 +109,7 @@ public class UTL {
         final WRecord prev = queried.prev();
         if (Objects.isNull(prev.ticket())) {
             /*
-             * Here add the checking on recordRef ( previous )
+             * Here add the checking join recordRef ( previous )
              * Any way, when the previous recordRef has been bind to existing ticket ( not null ),
              * it means that some binding code logical happened before current position, in this kind of
              * situation, you can consider the previous record keep original ticket data.

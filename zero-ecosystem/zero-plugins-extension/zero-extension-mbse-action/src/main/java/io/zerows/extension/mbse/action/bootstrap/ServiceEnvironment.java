@@ -6,7 +6,7 @@ import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.Database;
+import io.zerows.epoch.database.OldDatabase;
 import io.zerows.epoch.database.cp.DataPool;
 import io.zerows.extension.mbse.action.atom.JtJob;
 import io.zerows.extension.mbse.action.atom.JtUri;
@@ -79,7 +79,7 @@ public class ServiceEnvironment {
         // 是否配置了动态数据源
         // 1. 动态数据库         dynamic
         // 2. 静态元数据库       database
-        final OldKDS<Database> oldKds = ark.database();
+        final OldKDS<OldDatabase> oldKds = ark.database();
         if (Objects.nonNull(oldKds.dynamic())) {
             this.pool = DataPool.create(oldKds.dynamic());
         }

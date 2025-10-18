@@ -70,7 +70,7 @@ public interface UiApi {
      * }
      *
      * The most frequency situation is
-     * 1. identifier, page, processing based on model and page
+     * 1. identifier, page, processing based join model and page
      * -  The page navigate you to the fixed page in your app
      * -  The identifier navigate you to the correct model
      * 2. The parameters contain view, position, type to search correct control id

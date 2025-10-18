@@ -147,7 +147,7 @@ public class RemindDestination extends Topic {
     private void unsubscribe(final Subscription s) {
         final Optional<Subscription> any = this.subscriptions.stream().filter(s2 -> s2.destination.equals(s.destination))
             .findAny();
-        // We unregister the event bus consumer if there are no subscription on this address anymore.
+        // We unregister the event bus consumer if there are no subscription join this address anymore.
         if (any.isEmpty()) {
             final MessageConsumer<?> consumer = this.registry.remove(s.destination);
             if (consumer != null) {
@@ -263,7 +263,7 @@ public class RemindDestination extends Topic {
             return true;
         }
 
-        // Can send message other than JSON too - in which case we can't do deep matching on structure of message
+        // Can send message other than JSON too - in which case we can't do deep matching join structure of message
 
         try {
             final JsonObject object;

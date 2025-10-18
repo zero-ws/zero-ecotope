@@ -4,7 +4,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.Log;
 import io.zerows.component.log.LogModule;
-import io.zerows.epoch.database.Database;
+import io.zerows.epoch.database.OldDatabase;
 import io.zerows.epoch.metadata.Apt;
 import io.zerows.extension.mbse.basement.atom.Model;
 import io.zerows.extension.mbse.basement.atom.Schema;
@@ -171,8 +171,8 @@ public class Ao {
         return AoImpl.toDao(atom);
     }
 
-    public static HDao toDao(final HAtom atom, final Database database) {
-        return AoImpl.toDao(() -> atom, database);
+    public static HDao toDao(final HAtom atom, final OldDatabase oldDatabase) {
+        return AoImpl.toDao(() -> atom, oldDatabase);
     }
 
     public static HDao toDao(final String identifier) {

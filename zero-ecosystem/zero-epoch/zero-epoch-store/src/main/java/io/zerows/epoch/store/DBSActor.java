@@ -1,6 +1,7 @@
 package io.zerows.epoch.store;
 
 import io.r2mo.base.dbe.DBMany;
+import io.r2mo.base.dbe.DBS;
 import io.r2mo.base.dbe.Database;
 import io.r2mo.typed.exception.web._501NotSupportException;
 import io.vertx.core.Future;
@@ -10,6 +11,8 @@ import io.zerows.epoch.annotations.Actor;
 import io.zerows.epoch.configuration.ConfigDS;
 import io.zerows.specification.configuration.HConfig;
 import lombok.extern.slf4j.Slf4j;
+
+import javax.sql.DataSource;
 
 /**
  * @author lang : 2025-10-17
@@ -49,5 +52,17 @@ public class DBSActor extends AbstractHActor {
         } catch (final Throwable ex) {
             log.error(ex.getMessage(), ex);
         }
+    }
+
+    public static DBS ofDBS() {
+        return DBMany.of().get();
+    }
+
+    public static Database ofDatabase() {
+        return ofDBS().getDatabase();
+    }
+
+    public static DataSource ofDataSource() {
+        return ofDBS().getDs();
     }
 }

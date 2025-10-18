@@ -4,9 +4,9 @@ import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.LogO;
-import io.zerows.platform.metadata.KIntegration;
 import io.zerows.component.qr.Criteria;
-import io.zerows.epoch.database.Database;
+import io.zerows.epoch.database.OldDatabase;
+import io.zerows.platform.metadata.KIntegration;
 import io.zerows.support.Ut;
 
 /**
@@ -56,11 +56,11 @@ public abstract class EpicBase {
         return Ut.ioJObject(this.ioString(filename));
     }
 
-    protected Database ioDatabase(final String filename) {
+    protected OldDatabase ioDatabase(final String filename) {
         final JsonObject fileJson = this.ioJObject(filename);
-        final Database database = new Database();
-        database.fromJson(fileJson);
-        return database;
+        final OldDatabase oldDatabase = new OldDatabase();
+        oldDatabase.fromJson(fileJson);
+        return oldDatabase;
     }
 
     protected KIntegration ioIntegration(final String filename) {

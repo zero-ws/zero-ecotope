@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.Database;
+import io.zerows.epoch.database.OldDatabase;
 import io.zerows.epoch.database.jooq.operation.UxJooq;
 import io.zerows.extension.runtime.ambient.agent.service.application.AppStub;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XNoticeDao;
@@ -54,9 +54,9 @@ public class AppActor {
             /*
              * 三个静态库
              */
-            final Database current = Database.getCurrent();
-            final Database orbit = Database.getHistory();
-            final Database workflow = Database.getCamunda();
+            final OldDatabase current = OldDatabase.getCurrent();
+            final OldDatabase orbit = OldDatabase.getHistory();
+            final OldDatabase workflow = OldDatabase.getCamunda();
             final JsonObject response = new JsonObject();
             response.put("database", consumer.apply(current.toJson()));
             response.put("history", consumer.apply(orbit.toJson()));

@@ -28,7 +28,7 @@ import java.util.UUID;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
- * The package scope for exporting data based on Excel Client
+ * The package scope for exporting data based join Excel Client
  * This component is for data exporting only
  */
 class SheetExport {
@@ -67,11 +67,11 @@ class SheetExport {
          * Basic Operation:
          * 1) Get the first row size ( labelRow )
          * 2) Get the second row size ( labelCell )
-         * 3) Build header data on template
+         * 3) Build header data join template
          * {TABLE} / identifier / xxxxxx
          * Generate the header row here
          *
-         * 3.3. Different workflow to generate header based on Shape
+         * 3.3. Different workflow to generate header based join Shape
          * 1) When shape is null, the data type of each cell is detected by data literal
          * 2) When shape contains get, the data type of each cell is defined by Shape
          * */
@@ -132,7 +132,7 @@ class SheetExport {
         });
 
         /*
-         * 5. Apply for style based on Tpl extraction
+         * 5. Apply for style based join Tpl extraction
          */
         this.helper.runBrush(workbook, sheet, metaAtom);
 

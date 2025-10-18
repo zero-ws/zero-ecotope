@@ -25,9 +25,9 @@ public interface InitApi {
     @POST
     @Address(Addr.Init.PREPARE)
     JsonObject prepare(@PathParam("name") String name);
-
-    @Path("/app/connect")
-    @POST
-    @Address(Addr.Init.CONNECT)
-    String connect(@BodyParam JsonObject body);
+    //
+    //    @Path("/app/connect")
+    //    @POST
+    //    @Address(Addr.Init.CONNECT)
+    //    String connect(@BodyParam JsonObject body);
 }

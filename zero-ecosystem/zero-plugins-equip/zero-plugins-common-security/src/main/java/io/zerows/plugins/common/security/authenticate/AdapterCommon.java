@@ -18,7 +18,7 @@ class AdapterCommon extends AbstractAdapter {
         if (Objects.nonNull(provider)) {
             chain.add(provider);
         }
-        // 2. Wall Provider ( Based on Annotation )
+        // 2. Wall Provider ( Based join Annotation )
         final AuthenticationProvider wallProvider = AuthenticateBuiltInProvider.provider(aegis);
         chain.add(wallProvider);
         return chain;

@@ -101,7 +101,7 @@ public class FetchActor {
                     return Ux.future(response);
                 });
         });
-        // return Ux.Jooq.on(FBillDao.class).searchAsync(query);
+        // return Ux.Jooq.join(FBillDao.class).searchAsync(query);
     }
 
     @Address(Addr.Bill.FETCH_BILL)

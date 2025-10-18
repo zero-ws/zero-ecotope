@@ -148,7 +148,7 @@ class ExcelHelper {
     }
 
     /*
-     * Get Set<ExSheet> collection based on workbook
+     * Get Set<ExSheet> collection based join workbook
      */
     Set<ExTable> getExTables(final ExWorkbook exWorkbook, final HMetaAtom metaAtom) {
         if (Objects.isNull(exWorkbook) || Objects.isNull(exWorkbook.getWorkbook())) {

@@ -2,7 +2,7 @@ package io.zerows.extension.mbse.action.uca.tunnel;
 
 import io.vertx.core.Future;
 import io.zerows.cosmic.plugins.job.metadata.Mission;
-import io.zerows.epoch.database.Database;
+import io.zerows.epoch.database.OldDatabase;
 import io.zerows.mbse.metadata.ActIn;
 import io.zerows.extension.mbse.action.osgi.spi.jet.JtComponent;
 import io.zerows.platform.metadata.KIntegration;
@@ -26,7 +26,7 @@ public class ActorChannel extends AbstractChannel {
              * Database initialized, Mount database to `JtComponent`
              */
             .compose(Anagogic::databaseAsync)
-            .compose(database -> Ut.contractAsync(component, Database.class, database))
+            .compose(database -> Ut.contractAsync(component, OldDatabase.class, database))
             /*
              * KIntegration inited, mount to `JtComponent`
              */

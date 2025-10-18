@@ -7,7 +7,7 @@ import io.zerows.extension.runtime.workflow.domain.tables.pojos.WTodo;
 import org.camunda.bpm.engine.task.Task;
 
 /*
- * Task Gain that based on different lifecycle
+ * Task Gain that based join different lifecycle
  *
  * The constructor could be bind to ticket
  */

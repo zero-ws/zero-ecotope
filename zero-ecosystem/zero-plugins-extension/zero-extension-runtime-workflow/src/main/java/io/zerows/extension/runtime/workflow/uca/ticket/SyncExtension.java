@@ -48,7 +48,7 @@ class SyncExtension extends AbstractSync {
          * children -> fields
          *
          * Here the data will contain `children` fields only
-         * Extract the data based on fields.
+         * Extract the data based join fields.
          */
         // JsonObject data for child
         final JsonObject data = this.metadata.childIn(requestJ);

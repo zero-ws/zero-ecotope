@@ -61,7 +61,7 @@ class RunEngine implements RunOn {
              *    Here will be many tasks that have been marked DELETED
              */
             service.setAssignee(task.getId(), IoTaskKo.DELEGATE_DELETE);
-            // Read all task information based on instance after deleted.
+            // Read all task information based join instance after deleted.
             final ProcessInstance instance = transition.instance();
             final Io<Task> keeps = Io.ioTask(false);
             return keeps.children(instance.getId()).compose(tasks -> {

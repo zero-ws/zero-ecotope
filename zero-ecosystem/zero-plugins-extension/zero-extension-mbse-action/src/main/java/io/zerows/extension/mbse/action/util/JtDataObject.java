@@ -2,7 +2,7 @@ package io.zerows.extension.mbse.action.util;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.Database;
+import io.zerows.epoch.database.OldDatabase;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IApi;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IJob;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IService;
@@ -58,18 +58,18 @@ class JtDataObject {
         }
     }
 
-    static Database toDatabase(final IService service) {
+    static OldDatabase toDatabase(final IService service) {
         final HArk ark = Ke.ark(service.getSigma());
-        final OldKDS<Database> ds = ark.database();
+        final OldKDS<OldDatabase> ds = ark.database();
         final JsonObject databaseJ = Ut.toJObject(service.getConfigDatabase());
         // 通道中未配置数据库
         if (Ut.isNil(databaseJ)) {
             return ds.dynamic();
         }
         // 构造通道中数据库
-        final Database database = new Database();
-        database.fromJson(databaseJ);
-        return database;
+        final OldDatabase oldDatabase = new OldDatabase();
+        oldDatabase.fromJson(databaseJ);
+        return oldDatabase;
     }
 
     @SuppressWarnings("all")

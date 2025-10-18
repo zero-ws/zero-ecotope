@@ -9,7 +9,7 @@ import io.zerows.specification.modeling.HRecord;
  *
  * ### 1. Intro
  *
- * The field of `reference` calculation components, after all the data have been read, these components could process `reference` field based on the records.
+ * The field of `reference` calculation components, after all the data have been read, these components could process `reference` field based join the records.
  *
  * Here are three categories of attribute's type:
  *
@@ -31,7 +31,7 @@ import io.zerows.specification.modeling.HRecord;
  * This kind of attribute support following features:
  *
  * - It should be mapped to `X_ENTITY` fields instead of storing in other place.
- * - The data type must be based on database column type.
+ * - The data type must be based join database column type.
  * - `X_ENTITY` column type has been defined in abstract virtual layer to support <strong>Type Mapping</strong>.
  *
  * #### 3.2. REFERENCE

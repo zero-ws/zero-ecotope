@@ -60,7 +60,7 @@ class UiOption {
          */
         final JsonObject row = UiJson.create(table)
             .pickupWith("row")
-            .replaceWith("row", "on")
+            .replaceWith("row", "join")
             .to();
         tableJson.put("row", row);
         /*

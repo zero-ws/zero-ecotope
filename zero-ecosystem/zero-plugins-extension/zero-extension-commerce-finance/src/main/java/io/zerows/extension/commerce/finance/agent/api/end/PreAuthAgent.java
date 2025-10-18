@@ -19,7 +19,7 @@ import jakarta.ws.rs.extension.BodyParam;
 public interface PreAuthAgent {
 
     /*
-     * Unlock Authorize when settlement on `status`
+     * Unlock Authorize when settlement join `status`
      * From `Pending` to `Finished`
      */
     @PUT

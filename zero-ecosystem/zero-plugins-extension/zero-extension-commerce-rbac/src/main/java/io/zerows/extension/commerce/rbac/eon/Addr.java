@@ -15,7 +15,7 @@ public interface Addr {
         /*
          * 「New Version」
          * 1. Fetch for KPermit of new structure
-         * 2. Save View based on Configuration
+         * 2. Save View based join Configuration
          */
         String FETCH_REGION = Prefix._EVENT + "X-RULE/FETCH/REGION";
         String FETCH_REGION_VALUES = Prefix._EVENT + "X-RULE/FETCH/REGION-VALUES";

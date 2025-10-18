@@ -35,19 +35,19 @@ import java.util.Objects;
  *    database:         // WORKFLOW
  */
 @Deprecated
-public class Database extends KDatabase {
-    private static final LogO LOGGER = Ut.Log.database(Database.class);
-    private static Database DATABASE;
+public class OldDatabase extends KDatabase {
+    private static final LogO LOGGER = Ut.Log.database(OldDatabase.class);
+    private static OldDatabase OldDATABASE;
 
     /* Database Connection Testing */
-    public static boolean test(final Database database) {
+    public static boolean test(final OldDatabase oldDatabase) {
         try {
-            DriverManager.getConnection(database.getUrl(), database.getUsername(), database.getPasswordDecrypted());
+            DriverManager.getConnection(oldDatabase.getUrl(), oldDatabase.getUsername(), oldDatabase.getPasswordDecrypted());
             return true;
         } catch (final SQLException ex) {
             // Debug for database connection
             ex.printStackTrace();
-            Database.LOGGER.fatal(ex);
+            OldDatabase.LOGGER.fatal(ex);
             return false;
         }
     }
@@ -58,15 +58,15 @@ public class Database extends KDatabase {
      *     provider:
      * </code></pre>
      *
-     * @return {@link Database}
+     * @return {@link OldDatabase}
      */
-    public static Database getCurrent() {
-        if (Objects.isNull(DATABASE)) {
+    public static OldDatabase getCurrent() {
+        if (Objects.isNull(OldDATABASE)) {
             final JsonObject configJ = OZeroStore.option(YmlCore.jooq.__KEY); // Database.VISITOR.read();
             final JsonObject jooq = Ut.valueJObject(configJ, YmlCore.jooq.PROVIDER);
-            DATABASE = configure(MatureOn.envDatabase(jooq, EmDS.DB.PRIMARY));
+            OldDATABASE = configure(MatureOn.envDatabase(jooq, EmDS.DB.PRIMARY));
         }
-        return DATABASE.copy();
+        return OldDATABASE.copy();
     }
 
 
@@ -76,9 +76,9 @@ public class Database extends KDatabase {
      *     orbit:
      * </code></pre>
      *
-     * @return {@link Database}
+     * @return {@link OldDatabase}
      */
-    public static Database getHistory() {
+    public static OldDatabase getHistory() {
         final JsonObject configJ = OZeroStore.option(YmlCore.jooq.__KEY); // Database.VISITOR.read();
         final JsonObject jooq = Ut.valueJObject(configJ, YmlCore.jooq.ORBIT);
         return configure(MatureOn.envDatabase(jooq, EmDS.DB.HISTORY));
@@ -90,27 +90,27 @@ public class Database extends KDatabase {
      *     workflow:
      * </code></pre>
      *
-     * @return {@link Database}
+     * @return {@link OldDatabase}
      */
-    public static Database getCamunda() {
+    public static OldDatabase getCamunda() {
         final JsonObject configJ = OZeroStore.option(YmlCore.jooq.__KEY);
         final JsonObject jooq = Ut.valueJObject(configJ, YmlCore.jooq.WORKFLOW);
         return configure(MatureOn.envDatabase(jooq, EmDS.DB.WORKFLOW));
     }
 
-    public static Database configure(final JsonObject databaseJ) {
+    public static OldDatabase configure(final JsonObject databaseJ) {
         final JsonObject jooq = Ut.valueJObject(databaseJ);
-        final Database database = new Database();
-        database.fromJson(jooq);
-        return database;
+        final OldDatabase oldDatabase = new OldDatabase();
+        oldDatabase.fromJson(jooq);
+        return oldDatabase;
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public Database copy() {
+    public OldDatabase copy() {
         final JsonObject json = this.toJson().copy();
-        final Database database = new Database();
-        database.fromJson(json);
-        return database;
+        final OldDatabase oldDatabase = new OldDatabase();
+        oldDatabase.fromJson(json);
+        return oldDatabase;
     }
 }

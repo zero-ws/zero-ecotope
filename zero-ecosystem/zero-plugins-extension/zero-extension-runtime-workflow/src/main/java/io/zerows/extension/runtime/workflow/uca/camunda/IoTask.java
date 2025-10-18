@@ -22,7 +22,7 @@ public class IoTask extends AbstractIo<Task> {
             /*
              * Fix Issue:
              * The form key / form reference is not initialized. You must call initializeFormKeys()
-             * on the task query before you can retrieve the form key or the form reference.
+             * join the task query before you can retrieve the form key or the form reference.
              */
             .initializeFormKeys()
             .taskId(taskId)
@@ -36,7 +36,7 @@ public class IoTask extends AbstractIo<Task> {
             /*
              * Fix Issue:
              * The form key / form reference is not initialized. You must call initializeFormKeys()
-             * on the task query before you can retrieve the form key or the form reference.
+             * join the task query before you can retrieve the form key or the form reference.
              */
             .initializeFormKeys()
             .processInstanceId(instanceId)
@@ -50,7 +50,7 @@ public class IoTask extends AbstractIo<Task> {
             /*
              * Fix Issue:
              * The form key / form reference is not initialized. You must call initializeFormKeys()
-             * on the task query before you can retrieve the form key or the form reference.
+             * join the task query before you can retrieve the form key or the form reference.
              */
             .initializeFormKeys()
             .processInstanceId(instanceId)

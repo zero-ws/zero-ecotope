@@ -6,7 +6,7 @@ import io.zerows.component.environment.MatureOn;
 import io.zerows.component.log.LogO;
 import io.zerows.epoch.application.YmlCore;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.Database;
+import io.zerows.epoch.database.OldDatabase;
 import io.zerows.epoch.database.cp.DataPool;
 import io.zerows.epoch.database.exception._40065Exception500JooqConfiguration;
 import io.zerows.platform.enums.EmDS;
@@ -67,7 +67,7 @@ public class JooqPin {
                     } else {
                         databaseJ = MatureOn.envDatabase(options, EmDS.DB.PRIMARY);
                     }
-                    final DataPool pool = DataPool.create(Database.configure(databaseJ));
+                    final DataPool pool = DataPool.create(OldDatabase.configure(databaseJ));
                     final Configuration configuration = pool.configuration();
                     configurationMap.put(key, configuration);
                     final JsonObject populated = databaseJ.copy();

@@ -181,7 +181,7 @@ class WfFlow {
     }
 
     /*
-     * The method is recursion calling on BPMN, here are some situations
+     * The method is recursion calling join BPMN, here are some situations
      * 1. The objective will be: Find the next all UserTask
      * 2. When the system met gateway node, continue to find the task here
      */

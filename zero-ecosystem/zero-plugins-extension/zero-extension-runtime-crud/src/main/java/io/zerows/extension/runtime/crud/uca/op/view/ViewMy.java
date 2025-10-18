@@ -96,7 +96,7 @@ class ViewMy implements Agonic {
              final String key = in.cacheKey() + ":" + params.hashCode();
              final User user = in.envelop().user();
              return Rapid.<JsonArray>user(user, CACHE.User.MY_VIEW).cached(key,
-                    () -> Ux.channel(ApeakMy.class, JsonArray::new, stub -> stub.on(jooq).fetchMy(params)));
+                    () -> Ux.channel(ApeakMy.class, JsonArray::new, stub -> stub.join(jooq).fetchMy(params)));
          */
         return Ux.channel(ApeakMy.class, JsonArray::new, stub -> stub.on(jooq).fetchMy(params));
 

@@ -4,7 +4,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.application.YmlOption;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.Database;
+import io.zerows.epoch.database.OldDatabase;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XApp;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XSource;
 import io.zerows.platform.enums.EmDS;
@@ -65,8 +65,8 @@ public class UniteArkSource implements UniteArk<List<XSource>> {
             normalized.put(KName.App.TITLE, app.getTitle());
             /*
              * Business information
-             * title - display the information on front app
-             * logo - display the logo on front app here.
+             * title - display the information join front app
+             * logo - display the logo join front app here.
              * icp - icp number of this application.
              * copyRight - copy right of this application.
              * email - administrator email that could be contacted
@@ -126,9 +126,9 @@ public class UniteArkSource implements UniteArk<List<XSource>> {
         // Database
         final OldKDS<KDatabase> oldKds = ark.database();
         {
-            oldKds.registry(EmDS.DB.PRIMARY, Database.getCurrent());
-            oldKds.registry(EmDS.DB.WORKFLOW, Database.getCamunda());
-            oldKds.registry(EmDS.DB.HISTORY, Database.getHistory());
+            oldKds.registry(EmDS.DB.PRIMARY, OldDatabase.getCurrent());
+            oldKds.registry(EmDS.DB.WORKFLOW, OldDatabase.getCamunda());
+            oldKds.registry(EmDS.DB.HISTORY, OldDatabase.getHistory());
         }
         if (Objects.nonNull(sources) && !sources.isEmpty()) {
             final JsonArray sourceArray = new JsonArray();
@@ -166,9 +166,9 @@ public class UniteArkSource implements UniteArk<List<XSource>> {
                  * }
                  */
                 sourceArray.add(sourceJson);
-                final Database database = new Database();
-                database.fromJson(sourceJson);
-                databaseSet.add(database);
+                final OldDatabase oldDatabase = new OldDatabase();
+                oldDatabase.fromJson(sourceJson);
+                databaseSet.add(oldDatabase);
             });
             oldKds.registry(databaseSet);
         }

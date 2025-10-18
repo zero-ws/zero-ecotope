@@ -128,7 +128,7 @@ public class PermActor {
     @Address(Addr.Authority.PERMISSION_SAVE)
     public Future<JsonArray> savePerm(final String roleId, final JsonArray permissions) {
         /*
-         * Sync operation on permissions
+         * Sync operation join permissions
          */
         return this.stub.syncAsync(permissions, roleId);
     }

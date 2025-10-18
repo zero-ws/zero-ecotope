@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.Database;
+import io.zerows.epoch.database.OldDatabase;
 import io.zerows.epoch.database.jooq.operation.UxJooq;
 import io.zerows.extension.mbse.basement.atom.Model;
 import io.zerows.extension.mbse.basement.atom.Schema;
@@ -59,11 +59,11 @@ class SchemaRefine implements AoRefine {
     }
 
     private void syncDatabase(final JsonObject source, final Set<Schema> schemata) {
-        final Database database = new Database();
-        database.fromJson(source);
-        LOG.Uca.info(this.getClass(), "Database Extraction: {0}", database.toJson());
+        final OldDatabase oldDatabase = new OldDatabase();
+        oldDatabase.fromJson(source);
+        LOG.Uca.info(this.getClass(), "Database Extraction: {0}", oldDatabase.toJson());
         final Pin pin = Pin.getInstance();
-        final AoBuilder builder = pin.getBuilder(database);
+        final AoBuilder builder = pin.getBuilder(oldDatabase);
 
         schemata.forEach(builder::synchron);
     }

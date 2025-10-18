@@ -93,7 +93,7 @@ public class ScRole {
      */
     public Future<JsonArray> fetch() {
         return Ux.Jooq.on(RRolePermDao.class)
-            /* Fetch permission ids based on roleId */
+            /* Fetch permission ids based join roleId */
             .<RRolePerm>fetchAsync(AuthKey.F_ROLE_ID, this.roleId)
             /*
              * Extract the latest relations: role - permissions

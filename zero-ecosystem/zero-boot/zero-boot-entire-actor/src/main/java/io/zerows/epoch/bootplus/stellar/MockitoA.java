@@ -1,7 +1,7 @@
 package io.zerows.epoch.bootplus.stellar;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.database.Database;
+import io.zerows.epoch.database.OldDatabase;
 import io.zerows.platform.constant.VClassPath;
 import io.zerows.platform.enums.Environment;
 import io.zerows.support.Ut;
@@ -20,14 +20,14 @@ public class MockitoA extends AbstractPartyA {
      * @return 数据库配置信息
      */
     @Override
-    public Database configDatabase() {
-        final Database database = new Database();
+    public OldDatabase configDatabase() {
+        final OldDatabase oldDatabase = new OldDatabase();
         final String path = VClassPath.runtime.environment.ofDatabase(this.environment());
         final JsonObject item = Ut.ioJObject(path);
         if (Ut.isNotNil(item)) {
-            database.fromJson(item);
+            oldDatabase.fromJson(item);
         }
-        return database;
+        return oldDatabase;
     }
 
     /**

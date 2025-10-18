@@ -4,7 +4,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.bootplus.extension.cv.OxCv;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.Database;
+import io.zerows.epoch.database.OldDatabase;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.util.Ao;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
@@ -62,10 +62,10 @@ final class OxTo {
      */
     static HDao toDao(final String key, final String identifier) {
         final HArk ark = Ke.ark(key);
-        final OldKDS<Database> ds = ark.database();
+        final OldKDS<OldDatabase> ds = ark.database();
         //        final JtApp app = AmbientOld.getApp(key);
-        final Database database = ds.dynamic(); // Objects.isNull(app) ? null : app.getSource();
-        return Ao.toDao(toAtom(key, identifier), database);
+        final OldDatabase oldDatabase = ds.dynamic(); // Objects.isNull(app) ? null : app.getSource();
+        return Ao.toDao(toAtom(key, identifier), oldDatabase);
     }
 
     /**

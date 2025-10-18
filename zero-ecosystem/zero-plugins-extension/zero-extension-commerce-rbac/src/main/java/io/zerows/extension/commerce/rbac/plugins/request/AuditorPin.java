@@ -96,7 +96,7 @@ public class AuditorPin implements PlugAuditor {
         final HttpMethod method = request.method();
         if (HttpMethod.PUT != method && HttpMethod.POST != method) {
             /*
-             * Must be impact on `PUT` or `POST`
+             * Must be impact join `PUT` or `POST`
              */
             return false;
         }

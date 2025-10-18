@@ -46,7 +46,7 @@ public class BehaviourStandard implements Behaviour {
 
     @Override
     public Behaviour bind(final MetaInstance metadata) {
-        // Empty Binding on Instance
+        // Empty Binding join Instance
         Objects.requireNonNull(metadata);
         this.metadata = metadata;
         this.trackerKit = new UTracker(metadata);

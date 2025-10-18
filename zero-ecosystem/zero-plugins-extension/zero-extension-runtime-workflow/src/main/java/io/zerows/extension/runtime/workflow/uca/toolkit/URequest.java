@@ -50,10 +50,10 @@ public class URequest {
          * 3) JsonArray
          *
          * Because the 2 and 3 are calculated by `MoveOn` component before updating, it means that
-         * all these kind of fields will not be updated on `WTodo` record, here provide the situations:
+         * all these kind of fields will not be updated join `WTodo` record, here provide the situations:
          *
          * 1) When the user click `Saving` button instead of `Submit`
-         * -- 1.1) Based on configuration these kind of situation, the `toUser` could not be JsonObject / JsonArray
+         * -- 1.1) Based join configuration these kind of situation, the `toUser` could not be JsonObject / JsonArray
          * -- 1.2) When the `toUser` is String formatFail, it also could be updated in code logical
          * 2) When the user click `Submit` button
          * -- In this kind of situation, this field is not needed to be updated here because the `toUser` stored the
@@ -136,7 +136,7 @@ public class URequest {
      *      "status": "FINISHED",
      *      "finishedAt": "",
      *      "finishedBy": "",
-     *      "flowEnd": "Depend on instance",
+     *      "flowEnd": "Depend join instance",
      *      "active": true
      * }
      */

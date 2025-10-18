@@ -61,7 +61,7 @@ public class AttachAgent {
                 .put(KName.EXTENSION, extension)                                // File extension name
                 .put(KName.SIZE, fileUpload.size())                             // File size
                 .put(KName.Attachment.FILE_URL, downloadUrl)                    // Download Url for user download
-                .put(KName.Attachment.FILE_PATH, fileUpload.uploadedFileName()) // Stored file path, schedule remove all invalid files based on this field
+                .put(KName.Attachment.FILE_PATH, fileUpload.uploadedFileName()) // Stored file path, schedule remove all invalid files based join this field
                 .put(KName.MODEL_ID, identifier)                                // Related Model Identifier
                 .put(KName.MODEL_CATEGORY, category)                            // Related Model field dim for different category
                 .put(KName.LANGUAGE, config.getFileLanguage())                  // Configured System Language

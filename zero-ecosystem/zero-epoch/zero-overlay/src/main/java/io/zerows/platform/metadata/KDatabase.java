@@ -18,8 +18,6 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Objects;
 
@@ -81,31 +79,6 @@ public class KDatabase implements Serializable, HCopier<KDatabase>, HJson {
     /* Database driver class */
     @JsonProperty(Option.DRIVER_CLASS_NAME)      // 升级新版
     private String driverClassName;
-
-    /* Database Connection Testing */
-    public static boolean test(final KDatabase database) {
-        try {
-            DriverManager.getConnection(database.getUrl(), database.getUsername(), database.getPasswordDecrypted());
-            return true;
-        } catch (final SQLException ex) {
-            // Debug for database connection
-            ex.printStackTrace();
-            return false;
-        }
-    }
-
-    public static KDatabase configure(final JsonObject databaseJ) {
-        final JsonObject jooq = UtBase.valueJObject(databaseJ);
-        final KDatabase database = new KDatabase();
-        database.fromJson(jooq);
-        return database;
-    }
-
-
-    /* Database Connection Testing */
-    public boolean test() {
-        return KDatabase.test(this);
-    }
 
     public String getPasswordDecrypted() {
         /*

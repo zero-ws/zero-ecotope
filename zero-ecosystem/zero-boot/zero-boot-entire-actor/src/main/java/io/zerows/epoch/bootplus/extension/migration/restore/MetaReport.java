@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.bootplus.extension.migration.AbstractStep;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.Database;
+import io.zerows.epoch.database.OldDatabase;
 import io.zerows.extension.mbse.basement.uca.jdbc.Pin;
 import io.zerows.extension.mbse.basement.uca.metadata.AoBuilder;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XCategoryDao;
@@ -28,7 +28,7 @@ public class MetaReport extends AbstractStep {
 
     private AoBuilder getBuilder() {
         if (null == this.builder) {
-            final OldKDS<Database> ds = this.ark.database();
+            final OldKDS<OldDatabase> ds = this.ark.database();
             this.builder = Pin.getInstance().getBuilder(ds.dynamic());
         }
         return this.builder;

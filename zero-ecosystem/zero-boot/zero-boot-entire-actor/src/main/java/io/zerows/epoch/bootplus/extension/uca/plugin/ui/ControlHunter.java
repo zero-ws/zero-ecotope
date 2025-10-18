@@ -47,7 +47,7 @@ public class ControlHunter implements UiHunter {
              *      "path": "三部分组成，前端自动计算的 view / position，配置中的 __ALIAS__ -> alias"
              * }
              *
-             * identifier will be re-calculated based on resolution here
+             * identifier will be re-calculated based join resolution here
              */
             if (Ut.isNil(identifier)) {
                 // null controlId returned

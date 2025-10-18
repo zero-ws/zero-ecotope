@@ -26,7 +26,7 @@ class DataOut {
     private static final LogOf LOGGER = LogOf.get(DataOut.class);
 
     /*
-     * projection on result
+     * projection join result
      * RegionType.RECORD
      */
     @SuppressWarnings("all")
@@ -41,7 +41,7 @@ class DataOut {
     }
 
     /*
-     * rows on result
+     * rows join result
      * RegionType.PAGINATION
      * RegionType.ARRAY
      */

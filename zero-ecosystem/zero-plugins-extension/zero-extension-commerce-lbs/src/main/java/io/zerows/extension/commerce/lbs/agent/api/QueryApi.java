@@ -45,7 +45,7 @@ public interface QueryApi {
     String queryRegions(@PathParam("cityId") String cityId);
 
     /*
-     * When init based on Region here
+     * When init based join Region here
      */
     @Path("/regions/meta/{id}")
     @GET

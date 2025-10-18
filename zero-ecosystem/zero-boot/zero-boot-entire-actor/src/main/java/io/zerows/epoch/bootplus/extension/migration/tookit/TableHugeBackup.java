@@ -1,14 +1,15 @@
 package io.zerows.epoch.bootplus.extension.migration.tookit;
 
+import io.r2mo.base.dbe.Database;
 import io.r2mo.function.Fn;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.database.Database;
+import io.zerows.epoch.store.DBSActor;
 import io.zerows.platform.enums.Environment;
 import io.zerows.program.Ux;
+import lombok.extern.slf4j.Slf4j;
 
-import static io.zerows.epoch.bootplus.extension.refine.Ox.LOG;
-
+@Slf4j
 public class TableHugeBackup extends AbstractStatic {
 
     public TableHugeBackup(final Environment environment) {
@@ -26,8 +27,7 @@ public class TableHugeBackup extends AbstractStatic {
          */
         final String file = targetFolder + "/" + this.jooq.table() + ".sql";
         final boolean done = this.backupTo(file, this.jooq.table());
-        LOG.Shell.info(this.getClass(), "备份数据位置：{0}，执行结果：{1}",
-            file, done);
+        log.info("[ ZERO ] ( MGN ) 备份数据位置：{}，执行结果：{}", file, done);
         return Ux.future(config);
     }
 
@@ -43,7 +43,7 @@ public class TableHugeBackup extends AbstractStatic {
          * --default-character-set=utf8
          */
         final StringBuilder cmd = new StringBuilder();
-        final Database database = Database.getCurrent();
+        final Database database = DBSActor.ofDatabase();
         cmd.append("mysqldump").append(" --opt")
             .append(" --host=").append(database.getHostname())
             .append(" --databases ").append(database.getInstance())
@@ -54,8 +54,8 @@ public class TableHugeBackup extends AbstractStatic {
             .append(" --skip-comments")
             .append(" --default-character-set=utf8 ");
         return Fn.jvmOr(() -> {
-            LOG.Shell.info(this.getClass(), "执行命令：{0}", cmd.toString());
-            final Process process = Runtime.getRuntime().exec(cmd.toString());
+            log.info("[ ZERO ] ( MGN ) 执行数据备份命令：{}", cmd);
+            final Process process = new ProcessBuilder().command(cmd.toString()).start();
             return process.waitFor() == 0;
         });
     }

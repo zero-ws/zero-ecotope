@@ -57,7 +57,7 @@ class HOneJooq implements HOne<UxJooq> {
             );
         } else if (EmDS.DB.HISTORY == mode) {
             /* `orbit` 配置的历史数据源专用处理 */
-            dao = Ux.Jooq.ons(daoCls);
+            dao = Ux.Jooq.history(daoCls);
         } else if (EmDS.DB.EXTENSION == mode) {
             /* 扩展数据源专用 */
             final String modeKey = module.getModeKey();

@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.Log;
 import io.zerows.component.log.LogModule;
-import io.zerows.epoch.database.Database;
+import io.zerows.epoch.database.OldDatabase;
 import io.zerows.extension.mbse.action.atom.JtConfig;
 import io.zerows.extension.mbse.action.atom.JtUri;
 import io.zerows.extension.mbse.action.atom.JtWorker;
@@ -139,7 +139,7 @@ public class Jt {
      *
      * @return 选择的数据库
      */
-    public static Database toDatabase(final IService service) {
+    public static OldDatabase toDatabase(final IService service) {
         return JtDataObject.toDatabase(service);
     }
 

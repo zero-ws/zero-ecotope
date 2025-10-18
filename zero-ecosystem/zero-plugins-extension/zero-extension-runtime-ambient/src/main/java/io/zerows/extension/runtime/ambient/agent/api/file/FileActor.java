@@ -22,7 +22,7 @@ public class FileActor {
     @Address(Addr.File.MY_QUEUE)
     public Future<JsonObject> searchMy(final JsonObject query,
                                        final User user) {
-        // JsonObject on `my queue` criteria
+        // JsonObject join `my queue` criteria
         final JsonObject qrDefault = Ux.whereAnd();
         qrDefault.put(KName.STATUS, FileStatus.DONE.name());
         qrDefault.put(KName.ACTIVE, Boolean.TRUE);

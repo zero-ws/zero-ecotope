@@ -77,7 +77,7 @@ class IxSerialize {
         {
             /*
              * JsonObject / JsonArray must be converted to string
-             * New feature for serialization on
+             * New feature for serialization join
              * `array, object` fields for future usage
              */
             Ut.valueToString(data, KName.METADATA);

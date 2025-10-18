@@ -23,7 +23,7 @@ public class WTask {
      * 1) taskKey = TaskMap
      * 2) TaskMap = taskId: Task
      *
-     * It's based on gateway type and checking for task specification
+     * It's based join gateway type and checking for task specification
      * 1. Standard -- size = 1 ( size = 1 )
      * 2. Fork     -- size = N ( size = 1 )
      * 3. Multi    -- size = 1 ( size = N )

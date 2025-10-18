@@ -7,7 +7,7 @@ import io.zerows.epoch.metadata.KView;
 
 /*
  * Apeak choice for different usage,
- * valve means small door to do selection on mode
+ * valve means small door to do selection join mode
  */
 public interface UiValve {
 

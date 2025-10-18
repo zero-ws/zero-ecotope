@@ -12,7 +12,7 @@ import static io.zerows.extension.commerce.rbac.util.Sc.LOG;
 
 /*
  * Role Calculation
- * -- The calculation will based on group parameter.
+ * -- The calculation will based join group parameter.
  */
 public class Amalgam {
 

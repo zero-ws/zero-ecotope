@@ -39,7 +39,7 @@ class HOneJoin implements HOne<UxJoin> {
          * - 父主表：（动态选择）直接使用主键连接
          * - 父从表：（静态唯一选择）使用 keyJoin 连接
          */
-        final UxJoin dao = Ux.Join.on();
+        final UxJoin dao = Ux.Jooq.join();
         final KJoin join = module.getConnect();
         final KJoin.Point source = join.getSource();
 

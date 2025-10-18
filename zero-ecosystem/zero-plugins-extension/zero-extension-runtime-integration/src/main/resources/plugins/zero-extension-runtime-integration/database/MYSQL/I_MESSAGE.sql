@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS I_MESSAGE
      * -- status:
      *    PENDING -> SENT ( FAILED )
      * 1) Email, Sms etc. ( Reflect to field type )
-     * 2) Capture the tpl based on `type` at the same time
+     * 2) Capture the tpl based join `type` at the same time
      * -- status
      * - PENDING    等待发送
      * - SENT       已发送

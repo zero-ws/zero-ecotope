@@ -107,7 +107,7 @@ class Meta {
                 final Table<Record> tableJoin = table(join, aliasMap.get(join));
                 final String nextName = tableJoin.getName();
                 /*
-                 * Joined Join T3, but on use
+                 * Joined Join T3, but join use
                  * T1.FIELD = T3.FIELD always
                  */
                 conditionStep = conditionStep.join(tableJoin)
@@ -124,7 +124,7 @@ private static TableOnConditionStep<Record> joinCondition(
         final ConcurrentMap<String, String> joined) {
         final String fromTable = from.getName();
         final String toTable = to.getName();
-        return from.leftJoin(to).on(joinCondition(
+        return from.leftJoin(to).join(joinCondition(
             fromTable, joined.get(fromTable),
             toTable, joined.get(toTable)));
     }*/

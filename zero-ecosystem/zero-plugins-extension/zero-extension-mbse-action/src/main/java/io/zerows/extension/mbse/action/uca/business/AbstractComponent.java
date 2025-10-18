@@ -57,7 +57,7 @@ public abstract class AbstractComponent implements JtComponent, Service {
      * - dictEpsilon
      *
      * The situation for dict is complex because all the sub-classes could not use
-     * `Dict` directly, instead they all used `fabric` api to get `DictFabric` based on
+     * `Dict` directly, instead they all used `fabric` api to get `DictFabric` based join
      * dictData and dictEpsilon here.
      *
      * `DictFabric` is new structure but it could support
@@ -183,7 +183,7 @@ public abstract class AbstractComponent implements JtComponent, Service {
      *
      * For `DictFabric` usage
      * - If the component use standard fabric, it could reference `protected` member directly.
-     * - If the component use new fabric, it could created based on `fabric` with new `DictEpsilon` here.
+     * - If the component use new fabric, it could created based join `fabric` with new `DictEpsilon` here.
      */
     protected KFabric fabric(final JsonObject configured) {
         final ConcurrentMap<String, KDictUse> compiled = Ux.dictUse(configured);

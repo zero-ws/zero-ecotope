@@ -25,11 +25,11 @@ public class SeekCosmo implements Cosmo {
      * Here are two critical concept for
      * 1) AclTime: When to fetch acl information from database ?
      *    This workflow is in `DataAcl.visitAcl` method.
-     *      BEFORE: before(Envelop, matrix) will call BEFORE time here, it means fetch acl before do action on
+     *      BEFORE: before(Envelop, matrix) will call BEFORE time here, it means fetch acl before do action join
      *        database and the acl could be picked up from database if it's ok
      *        When the parameters are match `syntax` such as provide all parameters, this workflow is
      *        ok because all the required condition will be matched.
-     *      AFTER: after(Envelop, matrix) will call AFTER time here, it means fetch acl after do action on
+     *      AFTER: after(Envelop, matrix) will call AFTER time here, it means fetch acl after do action join
      *        database and the acl could be picked up from database if it's ok
      *        When the parameters are often `key` only, after database that you could get all record here
      *

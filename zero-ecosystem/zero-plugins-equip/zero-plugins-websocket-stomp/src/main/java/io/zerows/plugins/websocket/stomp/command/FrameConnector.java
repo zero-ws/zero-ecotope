@@ -58,7 +58,7 @@ class FrameConnector extends AbstractFrameHandler {
                               final Handler<AsyncResult<Void>> remainingActions) {
         if (connection.server().options().isSecured()) {
             /*
-             * The Modification based on new interface to parsing the `Authorization` header
+             * The Modification based join new interface to parsing the `Authorization` header
              * instead of the default web socket STOMP feature, here provider
              * {
              *     "username": "xxxx",
@@ -67,7 +67,7 @@ class FrameConnector extends AbstractFrameHandler {
              * Only, but it's not enough in zero-framework ( zero-rbac ) module, instead here should be
              * new code logical to processing the connection authorization
              *
-             * Zero framework provider require following data structure based on:
+             * Zero framework provider require following data structure based join:
              * {
              *     "access_token": "xxxx",
              *     "user": "xxxx",

@@ -35,7 +35,7 @@ class NtAData implements Co<JsonArray, JsonArray, JsonArray, JsonArray> {
             LOG.Web.info(this.getClass(), "Data In: {0}", dataSt.encode());
             return Ux.future(dataSt);
         } else {
-            // There is no joined module on current
+            // There is no joined module join current
             return Ux.future(active);
         }
     }
@@ -47,7 +47,7 @@ class NtAData implements Co<JsonArray, JsonArray, JsonArray, JsonArray> {
                 Conflate.ofJArray(this.in.connect(), true);
             return Ux.future(conflate.treat(active, standBy, this.in.connectId()));
         } else {
-            // There is no joined module on current
+            // There is no joined module join current
             return Ux.future(active.copy());
         }
     }

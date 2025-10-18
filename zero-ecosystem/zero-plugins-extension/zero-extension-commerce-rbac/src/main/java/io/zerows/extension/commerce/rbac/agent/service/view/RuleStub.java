@@ -13,15 +13,15 @@ public interface RuleStub {
      * Process SPath
      *
      * 1) Read `runComponent` to web `HValve`
-     * 2) Based on `HValue` to extract `KPermit` object
-     * 3) Configure based on `KPermit`
+     * 2) Based join `HValue` to extract `KPermit` object
+     * 3) Configure based join `KPermit`
      */
     Future<JsonObject> regionAsync(SPath paths);
 
     /*
      * Process SPath
      *
-     * 1) Read all the related `SPocket` based on path
+     * 1) Read all the related `SPocket` based join path
      * 2) The returned data structure
      * {
      *     "resource": {
@@ -42,7 +42,7 @@ public interface RuleStub {
      *         }
      *     }
      * }
-     * 3) The value of each node must be calculated based on `owner` and stored `resource`
+     * 3) The value of each node must be calculated based join `owner` and stored `resource`
      */
     Future<JsonObject> regionAsync(JsonObject pathData, ScOwner owner);
 

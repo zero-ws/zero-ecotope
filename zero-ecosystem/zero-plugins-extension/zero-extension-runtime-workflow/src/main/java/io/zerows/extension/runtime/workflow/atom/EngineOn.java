@@ -166,10 +166,10 @@ public class EngineOn {
     private <C extends Behaviour> C component(final Class<?> clazz, final String componentValue) {
         final String keyComponent = this.metadata.recordComponentKey(clazz, componentValue);
         /*
-         * Here are component pool based on keyComponent, the formatFail is as following:
+         * Here are component pool based join keyComponent, the formatFail is as following:
          * className + ConfigRecord ( hashCode ) + componentValue ( hashCode Optional )
          * - authorizedComponent
-         *   authorized on user to check who could do actions
+         *   authorized join user to check who could do actions
          *
          * - generateComponent
          *   close previous todo record / open new todo record

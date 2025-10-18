@@ -17,14 +17,14 @@ import java.util.function.Supplier;
 
 class Complex {
     /**
-     * This function executed on input reference
+     * This function executed join input reference
      * 1) If predicate = true, return executor(Tool) -> Future<Tool>
      * 2) If predicate = false, return Future<Tool>
      * return Tool in other situations.
      *
      * @param input     input Tool reference
      * @param predicate Check whether the Tool reference is ok for `executor`
-     * @param executor  The continue executor on Tool
+     * @param executor  The continue executor join Tool
      * @param <T>       The entity object, now it support JsonObject/JsonArray
      *
      * @return Future<Tool> for result
@@ -54,7 +54,7 @@ class Complex {
      * 1 - Pagination `first` will be consumed by `pageConsumer` first,
      * 2 - Get the first response by `responseBuilder` function to get first result.
      * 3 - Generate `total` by `totalConsumer` function to get the total records number.
-     * 4 - Based on Pagination ( include total ), generate Set pagination.
+     * 4 - Based join Pagination ( include total ), generate Set pagination.
      * 5 - Each group call `pageConsumer` again ( exclude first )
      * 6 - Get List<R> result, call fnReduce to generate new R
      *
@@ -74,7 +74,7 @@ class Complex {
                                     final Function<T, Future<R>> responseBuilder,
                                     final BinaryOperator<R> fnReduce) {
         /*
-         * First response to get based on `pageConsumer`
+         * First response to get based join `pageConsumer`
          */
         final KRef firstResult = new KRef();
         return pageConsumer.apply(first)

@@ -32,7 +32,7 @@ package io.zerows.extension.commerce.rbac.eon.em;
  *
  * For Group, it's the same as each user instead,
  * The role searching process is the same between User / Group, you can refer
- * role looking up based on user as group entity.
+ * role looking up based join user as group entity.
  */
 public enum SeekRole {
     /*

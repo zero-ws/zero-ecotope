@@ -66,9 +66,9 @@ public class ExColumnApeakMy extends Anchoret<ApeakMy> implements ApeakMy {
         /* Save View */
         return Quinn.vivid().<JsonObject>saveAsync(resourceId, owner, viewData)
             /*
-             * Flush cache of session on impacted uri
+             * Flush cache of session join impacted uri
              * This method is for projection refresh here
-             * /api/columns/{actor}/my -> save projection on
+             * /api/columns/{actor}/my -> save projection join
              * /api/{actor}/search
              * This impact will be in time when this method called.
              * The method is used in this class only and could not be shared.

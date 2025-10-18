@@ -6,7 +6,7 @@ import io.zerows.component.log.LogOf;
 import io.zerows.cosmic.plugins.job.metadata.Mission;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
-import io.zerows.epoch.database.Database;
+import io.zerows.epoch.database.OldDatabase;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IService;
 import io.zerows.extension.mbse.action.util.Jt;
 import io.zerows.mbse.sdk.Service;
@@ -104,7 +104,7 @@ public abstract class AbstractJob implements Service {
      * 2. Get dao reference ( OxDao )
      * 3. Get data argument reference ( DataAtom )
      */
-    protected Database database() {
+    protected OldDatabase database() {
         return Jt.toDatabase(this.service());
     }
 
@@ -113,7 +113,7 @@ public abstract class AbstractJob implements Service {
     }
 
     /*
-     * Under way processing based on `identifier`
+     * Under way processing based join `identifier`
      */
     protected Future<KRef> underway(final String identifier) {
         /*

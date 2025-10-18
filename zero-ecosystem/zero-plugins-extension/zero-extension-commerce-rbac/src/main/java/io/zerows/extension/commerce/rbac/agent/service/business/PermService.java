@@ -119,7 +119,7 @@ public class PermService implements PermStub {
     @Override
     public Future<JsonObject> searchAsync(final JsonObject query, final String sigma) {
         /*
-         * Result for searching on S_PERMISSIONS
+         * Result for searching join S_PERMISSIONS
          */
         return Ux.Jooq.on(SPermSetDao.class).<SPermSet>fetchAsync(KName.SIGMA, sigma).compose(setList -> {
             /*

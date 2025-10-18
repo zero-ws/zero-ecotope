@@ -34,15 +34,15 @@ import java.util.function.Function;
  *
  * ### 1. Intro
  *
- * Reference Calculation based on configuration in each attribute, `serviceReference` field.
+ * Reference Calculation based join configuration in each attribute, `serviceReference` field.
  *
  * ### 2. Dao Mode
  *
  * Here are three dao mode in MetaReference
  *
- * 1. Dynamic Dao: {@link HDao}, based on `M_MODEL` definition.
+ * 1. Dynamic Dao: {@link HDao}, based join `M_MODEL` definition.
  * 2. Static Dao: directly mapped to single table.
- * 3. Static Dao with Join: mapped to more than on table.
+ * 3. Static Dao with Join: mapped to more than join table.
  *
  * ### 3. Dao Map
  *
@@ -157,7 +157,7 @@ public class HAtomReference implements HReference {
             /*
              *  Hash Map `result` calculation
              *      - field = RResult
-             *  Based on DataAtom reference to create
+             *  Based join DataAtom reference to create
              */
             final String field = reference.name();
             final String referenceField = reference.sourceField();
@@ -260,7 +260,7 @@ public class HAtomReference implements HReference {
                     return Ux.Jooq.on(source.getClassDao()).fetchJ(condition);
                 } else {
                     // Join
-                    return Ux.Join.on()
+                    return Ux.Jooq.join()
                         .add(source.getClassDao(), source.getKeyJoin())
                         .join(target.getClassDao(), target.getKeyJoin())
                         .fetch(condition);

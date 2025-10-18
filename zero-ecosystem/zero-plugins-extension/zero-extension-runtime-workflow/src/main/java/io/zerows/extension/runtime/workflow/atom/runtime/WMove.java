@@ -137,7 +137,7 @@ public class WMove implements Serializable {
 
     /*
      * parameters for two components
-     * 1. Movement Internal call `RunOn`, based on WRequest request
+     * 1. Movement Internal call `RunOn`, based join WRequest request
      * 2. Transfer will select `WRule` for process execution
      */
     JsonObject inputMovement(final JsonObject requestJ) {

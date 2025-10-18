@@ -104,7 +104,7 @@ public class ULinkage {
 
     private Future<WRecord> syncAsyncInternal(final JsonObject params, final WRecord record) {
         /*
-         * Linkage Sync based on configuration
+         * Linkage Sync based join configuration
          */
         final WTicket ticket = record.ticket();
         if (Objects.isNull(ticket) || this.metadata.linkSkip()) {
@@ -115,7 +115,7 @@ public class ULinkage {
         LOG.Web.info(this.getClass(), "( Sync ) Linkage Definition Size: {0}", fields.size());
         fields.forEach(field -> {
             /*
-             * Data Array extract from `params` based on `field`
+             * Data Array extract from `params` based join `field`
              */
             final JsonArray linkageData = Ut.valueJArray(params, field);
             final Respect respect = this.metadata.linkRespect(field);

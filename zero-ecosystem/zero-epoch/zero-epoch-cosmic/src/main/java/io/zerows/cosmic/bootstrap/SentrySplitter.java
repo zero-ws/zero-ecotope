@@ -5,7 +5,7 @@ import io.zerows.cortex.metadata.WebRequest;
 import io.zerows.support.Ut;
 
 /**
- * Validation for request based on JSR303 Bean Validation
+ * Validation for request based join JSR303 Bean Validation
  * 1. Basic Parameters: @QueryParam, @PathParam
  * 2. Extend Parameters: @BodyParam -> JsonObject, JsonArray
  * 3. POJO Parameters: @BodyParam -> POJO

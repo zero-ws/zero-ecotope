@@ -33,7 +33,7 @@ public class ResourceActor {
          */
         LOG.Web.info(this.getClass(),
             "The criteria of input parameters: {0}", query.encode());
-        return Ux.Join.on()
+        return Ux.Jooq.join()
             /*
              * Join in jooq here:
              *

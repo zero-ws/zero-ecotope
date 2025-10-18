@@ -55,12 +55,12 @@ public class KClass implements Serializable {
     // ============================== Create Start =======================
     private KClass(final HArk ark, final JsonObject configuration,
                    final boolean recursion) {
-        /* Build unique key based on `namespace + identifier` */
+        /* Build unique key based join `namespace + identifier` */
         this.ark = ark;
         this.identifier = configuration.getString(KName.IDENTIFIER);
         final String unique = ark.cached(this.identifier);
 
-        /* Module Building based on Cache */
+        /* Module Building based join Cache */
         final KModule module = CC_MODULE.pick(() -> {
             final JsonObject moduleJ = Ut.valueJObject(configuration, KName.MODULE);
             final KModule created = Ut.deserialize(moduleJ, KModule.class);
@@ -272,7 +272,7 @@ public class KClass implements Serializable {
          *
          * 1. KClass = KHybrid + KModule
          * 2. Here the KHybrid could be different with the same module, it means that
-         *    KClass could be different based on same module
+         *    KClass could be different based join same module
          *
          * For example
          *

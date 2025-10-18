@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 
 /*
- * Uniform interface for authorization workflow on restful api.
+ * Uniform interface for authorization workflow join restful api.
  * InJson Data:
  * {
  *      "access_token" : "<WebToken Value>",

@@ -1,6 +1,6 @@
 package io.zerows.epoch.bootplus.stellar;
 
-import io.zerows.epoch.database.Database;
+import io.zerows.epoch.database.OldDatabase;
 import io.zerows.platform.metadata.KGlobal;
 import io.zerows.platform.metadata.OldKDS;
 import io.zerows.specification.app.HArk;
@@ -19,10 +19,10 @@ public interface Party {
     /**
      * 数据库配置对象读取方法，测试专用库加载，可直接通过 {@link HArk} 中提取，且此处是服务于测试，所以在提取数据库时只提取动态数据库，不考虑静态数据库，静态数据库有额外的方式再次提取，也只有动态库在测试时依赖加载的基本环境需要基于部分初始化流程在框架中执行相关流程，不过此处数据库等相关信息可以直接被重写。
      *
-     * @return {@link Database}
+     * @return {@link OldDatabase}
      */
-    default Database configDatabase() {
-        final OldKDS<Database> oldKds = this.configArk().database();
+    default OldDatabase configDatabase() {
+        final OldKDS<OldDatabase> oldKds = this.configArk().database();
         return oldKds.dynamic();
     }
 

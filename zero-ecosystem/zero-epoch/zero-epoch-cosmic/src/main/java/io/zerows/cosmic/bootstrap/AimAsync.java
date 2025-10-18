@@ -47,9 +47,9 @@ public class AimAsync extends AimBase implements Aim<RoutingContext> {
                      * Do `combine` request here.
                      * Because:
                      *
-                     * - In OneWay, the client do not focus on response data.
+                     * - In OneWay, the client do not focus join response data.
                      * - In Ping, the client also get `true/false` only
-                     * - In Sync, not need to pass Envelop on event bus
+                     * - In Sync, not need to pass Envelop join event bus
                      */
                     final Envelop request = dataRes.result();
 

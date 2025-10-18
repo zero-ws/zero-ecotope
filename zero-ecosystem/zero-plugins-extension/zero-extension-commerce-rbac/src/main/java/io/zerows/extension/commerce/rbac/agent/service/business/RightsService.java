@@ -63,7 +63,7 @@ public class RightsService implements RightsStub {
          * Permission Groups processing
          *「Upgrade」
          * Old method because `GROUP` is in S_PERMISSION
-         * return Ux.Jooq.on(SPermissionDao.class).countByAsync(condition, "group", "identifier");
+         * return Ux.Jooq.join(SPermissionDao.class).countByAsync(condition, "group", "identifier");
          * New version: S_PERM_SET processing
          */
         return Ux.Jooq.on(SPermSetDao.class).fetchJAsync(condition);
@@ -82,7 +82,7 @@ public class RightsService implements RightsStub {
 
         /*
          * 1) Permission Compared ( Update / Add )
-         * -- Combined for final on PERM_SET
+         * -- Combined for final join PERM_SET
          */
         final KRef permSetRef = new KRef();
         final KRef mapRef = new KRef();

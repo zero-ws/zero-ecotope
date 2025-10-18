@@ -4,9 +4,6 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
-import io.zerows.epoch.database.Database;
-import io.zerows.support.Ut;
-import io.zerows.support.fn.Fx;
 import io.zerows.extension.runtime.ambient.agent.service.application.InitStub;
 import io.zerows.extension.runtime.ambient.eon.Addr;
 import jakarta.inject.Inject;
@@ -26,10 +23,11 @@ public class InitActor {
     public Future<JsonObject> prepare(final String appName) {
         return this.stub.prerequisite(appName);
     }
-
-    @Address(Addr.Init.CONNECT)
-    public Future<JsonObject> connect(final JsonObject data) {
-        final Database database = Ut.deserialize(data, Database.class);
-        return Fx.ifBool(database.test());
-    }
+    //
+    //    @Address(Addr.Init.CONNECT)
+    //    public Future<JsonObject> connect(final JsonObject data) {
+    //        final JObject database = SPI.V_UTIL.deserializeJson()
+    //        final Database database = Ut.deserialize(data, Database.class);
+    //        return Fx.ifBool(database.test());
+    //    }
 }

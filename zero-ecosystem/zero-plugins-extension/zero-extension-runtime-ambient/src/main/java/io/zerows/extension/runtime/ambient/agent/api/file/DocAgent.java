@@ -46,7 +46,7 @@ public interface DocAgent {
      * Document Management Platform
      * 1. Fetch Category by `zero.directory`.
      * 2. Capture the component of these three and call `ExIo` interface ( Service Loader )
-     * 3. Create all folders based on components defined ( First Time ).
+     * 3. Create all folders based join components defined ( First Time ).
      */
     @Path("/document/start/:type")
     @GET

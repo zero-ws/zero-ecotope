@@ -4,7 +4,6 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.mbse.metadata.KQr;
 import io.zerows.epoch.database.jooq.operation.UxJoin;
 import io.zerows.epoch.database.jooq.operation.UxJooq;
 import io.zerows.epoch.metadata.UObject;
@@ -16,6 +15,7 @@ import io.zerows.extension.commerce.rbac.eon.AuthKey;
 import io.zerows.extension.commerce.rbac.eon.AuthMsg;
 import io.zerows.extension.runtime.skeleton.osgi.spi.business.ExOwner;
 import io.zerows.extension.runtime.skeleton.secure.Twine;
+import io.zerows.mbse.metadata.KQr;
 import io.zerows.platform.metadata.KRef;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
@@ -76,7 +76,7 @@ class TwineExtension implements Twine<SUser> {
             return Ux.Jooq.on(SUserDao.class).fetchJOneAsync(query);
         }
         return TwineQr.normalize(qr, query).compose(queryJ -> {
-            final UxJoin searcher = Ux.Join.on();
+            final UxJoin searcher = Ux.Jooq.join();
             /*
              * S_USER ( modelKey )
              *    JOIN

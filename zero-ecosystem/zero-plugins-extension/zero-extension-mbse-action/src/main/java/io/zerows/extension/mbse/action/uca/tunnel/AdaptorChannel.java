@@ -2,7 +2,7 @@ package io.zerows.extension.mbse.action.uca.tunnel;
 
 import io.vertx.core.Future;
 import io.zerows.mbse.metadata.ActIn;
-import io.zerows.epoch.database.Database;
+import io.zerows.epoch.database.OldDatabase;
 import io.zerows.extension.mbse.action.osgi.spi.jet.JtComponent;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
@@ -23,6 +23,6 @@ public class AdaptorChannel extends AbstractChannel {
              * Database initialized
              */
             .compose(Anagogic::databaseAsync)
-            .compose(database -> Ut.contractAsync(component, Database.class, database));
+            .compose(database -> Ut.contractAsync(component, OldDatabase.class, database));
     }
 }

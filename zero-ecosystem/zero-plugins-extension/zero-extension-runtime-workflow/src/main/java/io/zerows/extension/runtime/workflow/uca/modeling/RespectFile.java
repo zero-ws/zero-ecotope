@@ -22,7 +22,7 @@ public class RespectFile extends AbstractRespect {
     public Future<JsonArray> syncAsync(final JsonArray data, final JsonObject params, final WRecord record) {
         final JsonArray dataArray = this.syncPre(data, params, record);
         /*
-         * Build condition based on
+         * Build condition based join
          * DEFAULT
          * - modelKey = key
          *

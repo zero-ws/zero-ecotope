@@ -34,7 +34,7 @@ public class ExPos {
 
     public CellRangeAddress region(final int rows, final int cols) {
         /*
-         * Build new region based on current position
+         * Build new region based join current position
          */
         final int rowStart = this.rowIndex;
         final int colStart = this.colIndex;

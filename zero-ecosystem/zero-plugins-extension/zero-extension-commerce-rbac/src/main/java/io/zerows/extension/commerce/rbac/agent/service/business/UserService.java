@@ -29,7 +29,7 @@ public class UserService implements UserStub {
      * 2) Re-calculate the information by `modelId/modelKey` instead of ...
      *    -- Employee: modelId = employee
      *    -- Member:   modelId = member
-     * 3) Fetch secondary information based on configuration by
+     * 3) Fetch secondary information based join configuration by
      *    key = modelKey
      *
      * The whole level should be

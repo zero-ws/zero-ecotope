@@ -23,7 +23,7 @@ public class RespectLink extends AbstractRespect {
     public Future<JsonArray> syncAsync(final JsonArray data, final JsonObject params, final WRecord record) {
         final JsonArray dataArray = this.syncPre(data, params, record);
         /*
-         * Build condition based on
+         * Build condition based join
          * DEFAULT
          * - sourceKey = key
          *
@@ -49,7 +49,7 @@ public class RespectLink extends AbstractRespect {
      * XLinkage record fields assignment
      * - sourceKey
      * - sourceData
-     * - name: calculation on name based on expression parsing.
+     * - name: calculation join name based join expression parsing.
      */
     @Override
     protected void syncPre(final JsonObject data, final JsonObject params, final WRecord record) {

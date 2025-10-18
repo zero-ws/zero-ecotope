@@ -119,7 +119,7 @@ class TreeTran implements Tran {
                     final String value = record.getString(field);
                     final String to = map.get(value);
                     /*
-                     * When you do mass updating on records, sometimes the `parentId` is null
+                     * When you do mass updating join records, sometimes the `parentId` is null
                      * The transform rules is as following:
                      * 1) When parentId is null, skip processing.
                      * 2) When parentId is not null, transform here

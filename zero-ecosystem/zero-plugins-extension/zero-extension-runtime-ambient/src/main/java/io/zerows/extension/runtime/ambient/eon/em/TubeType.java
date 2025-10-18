@@ -2,7 +2,7 @@ package io.zerows.extension.runtime.ambient.eon.em;
 
 /**
  * Here are two critical fields:
- * - RULE_TPL: parameters are based on Tpl ( tpl, input ) -> parameters
+ * - RULE_TPL: parameters are based join Tpl ( tpl, input ) -> parameters
  * - RULE_CONFIG: configuration information of each rule here.
  * - RULE_MESSAGE: message template of current rule for logging.
  *

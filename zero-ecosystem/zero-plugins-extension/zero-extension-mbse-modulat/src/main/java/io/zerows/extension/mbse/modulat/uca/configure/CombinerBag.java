@@ -26,7 +26,7 @@ class CombinerBag implements Combiner<BBag, ConcurrentMap<String, BBag>> {
             return Ux.future(uiConfig);
         }
 
-        // ui calculation on children
+        // ui calculation join children
         final ConcurrentMap<String, JsonArray> mapJ = new ConcurrentHashMap<>();
         map.forEach((code, itemBag) -> {
             final JsonObject itemJ = Ut.toJObject(itemBag.getUiConfig());

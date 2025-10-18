@@ -67,7 +67,7 @@ public class IoNerve implements IoHub {
         this.runOut(record, tpl);
         /* reference */
         final AoRay<HRecord> ray = CC_RAY.pick(() -> new RaySingle().on(tpl), tpl.identifier());
-        // Fn.po?l(POOL_RAY, tpl.identifier(), () -> new RaySingle().on(tpl));
+        // Fn.po?l(POOL_RAY, tpl.identifier(), () -> new RaySingle().join(tpl));
         return ray.doRay(record);
     }
 
@@ -76,7 +76,7 @@ public class IoNerve implements IoHub {
         this.runOut(records, tpl);
         /* reference */
         final AoRay<HRecord[]> ray = CC_RAY_BATCH.pick(() -> new RayBatch().on(tpl), tpl.identifier());
-        // Fn.po?l(this.POOL_RAY_BATCH, tpl.identifier(), () -> new RayBatch().on(tpl));
+        // Fn.po?l(this.POOL_RAY_BATCH, tpl.identifier(), () -> new RayBatch().join(tpl));
         return ray.doRay(records);
     }
 
@@ -88,7 +88,7 @@ public class IoNerve implements IoHub {
         this.runOut(record, tpl);
         /* reference */
         final AoRay<HRecord> ray = CC_RAY_ASYNC.pick(() -> new RaySingle().on(tpl), tpl.identifier());
-        // Fn.po?l(POOL_RAY_ASYNC, tpl.identifier(), () -> new RaySingle().on(tpl));
+        // Fn.po?l(POOL_RAY_ASYNC, tpl.identifier(), () -> new RaySingle().join(tpl));
         return ray.doRayAsync(record);
     }
 
@@ -97,7 +97,7 @@ public class IoNerve implements IoHub {
         this.runOut(records, tpl);
         /* reference */
         final AoRay<HRecord[]> ray = CC_RAY_BATCH_ASYNC.pick(() -> new RayBatch().on(tpl), tpl.identifier());
-        // Fn.po?l(this.POOL_RAY_BATCH_ASYNC, tpl.identifier(), () -> new RayBatch().on(tpl));
+        // Fn.po?l(this.POOL_RAY_BATCH_ASYNC, tpl.identifier(), () -> new RayBatch().join(tpl));
         return ray.doRayAsync(records);
     }
 

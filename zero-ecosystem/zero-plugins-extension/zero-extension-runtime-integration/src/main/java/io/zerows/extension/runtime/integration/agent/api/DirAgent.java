@@ -13,10 +13,10 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.extension.BodyParam;
 
 /**
- * Here the directory support `CRUD` on single record only, it means that
+ * Here the directory support `CRUD` join single record only, it means that
  *
  * 1. No Batch deleting processing
- * 2. But when you do modification/deleting on a directory that contains sub-dir, the system should
+ * 2. But when you do modification/deleting join a directory that contains sub-dir, the system should
  * update `storePath` and rename instead
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>

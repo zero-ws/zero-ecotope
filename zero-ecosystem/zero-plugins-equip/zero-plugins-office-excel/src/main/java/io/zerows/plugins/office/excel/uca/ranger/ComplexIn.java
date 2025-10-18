@@ -72,7 +72,7 @@ public class ComplexIn extends AbstractExIn {
     @Override
     public ExTable applyData(final ExTable table, final ExBound dataRange, final Cell cell, final HMetaAtom metaAtom) {
         /*
-         * Build data column range based on current cell and table
+         * Build data column range based join current cell and table
          * 1) table means ExTable for range
          * 2) cell is the first row
          */

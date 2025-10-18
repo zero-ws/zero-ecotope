@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.Database;
+import io.zerows.epoch.database.OldDatabase;
 import io.zerows.epoch.metadata.Apt;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.domain.tables.daos.MAccDao;
@@ -27,11 +27,11 @@ import java.util.concurrent.ConcurrentMap;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 class RiseRapid implements Rise {
-    private transient Database database;
+    private transient OldDatabase oldDatabase;
 
     @Override
-    public Rise bind(final Database database) {
-        this.database = database;
+    public Rise bind(final OldDatabase oldDatabase) {
+        this.oldDatabase = oldDatabase;
         return this;
     }
 
@@ -51,7 +51,7 @@ class RiseRapid implements Rise {
     }
 
     private Future<JsonArray> inputData(final JsonObject criteria, final DataAtom atom) {
-        final HDao dao = Ao.toDao(atom, this.database);
+        final HDao dao = Ao.toDao(atom, this.oldDatabase);
         return dao.fetchAsync(criteria)
             .compose(records -> Ux.future(Ut.toJArray(records)));
     }

@@ -140,7 +140,7 @@ public class UiActor {
          * {
          *      "page": xxx,
          *      "identifier": xxx,
-         *      "path": based on view/position,
+         *      "path": based join view/position,
          *      "type": calculate the parameter from params,
          *      "sigma": extract from params,
          *      "alias": The name that you can define here.
@@ -152,7 +152,7 @@ public class UiActor {
             return Ux.futureJ();
         } else {
             /*
-             * calculate the `path` based on `view` and `position`
+             * calculate the `path` based join `view` and `position`
              */
             final String view = params.getString(KName.VIEW, VValue.DFT.V_VIEW);
             final String alias = params.getString(KName.ALIAS, VValue.DFT.V_VIEW);

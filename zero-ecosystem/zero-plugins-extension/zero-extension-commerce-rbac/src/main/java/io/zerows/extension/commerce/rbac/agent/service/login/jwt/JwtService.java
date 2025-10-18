@@ -11,7 +11,7 @@ import io.zerows.program.Ux;
 /*
  * Jwt WebToken Service for:
  * 1) Stored token information into jwt token
- * 2) Verify token based on stored access_token in database.
+ * 2) Verify token based join stored access_token in database.
  */
 public class JwtService implements JwtStub {
     private final ScClock<ScToken> cache;

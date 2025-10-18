@@ -3,7 +3,7 @@ package io.zerows.epoch.bootplus.extension.migration.tookit;
 import io.r2mo.function.Fn;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.database.Database;
+import io.zerows.epoch.database.OldDatabase;
 import io.zerows.platform.enums.Environment;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
@@ -39,13 +39,13 @@ public class TableHugeRestore extends AbstractStatic {
 
     private boolean restoreTo(final String file) {
         final StringBuilder cmd = new StringBuilder();
-        final Database database = Database.getCurrent();
+        final OldDatabase oldDatabase = OldDatabase.getCurrent();
         cmd.append("mysql")
-            .append(" -h").append(database.getHostname())
-            .append(" -u").append(database.getUsername())
-            .append(" -p").append(database.getPasswordDecrypted())
+            .append(" -h").append(oldDatabase.getHostname())
+            .append(" -u").append(oldDatabase.getUsername())
+            .append(" -p").append(oldDatabase.getPasswordDecrypted())
             .append(" --default-character-set=utf8 ")
-            .append(" ").append(database.getInstance());
+            .append(" ").append(oldDatabase.getInstance());
         return Fn.jvmOr(() -> {
             final File fileObj = Ut.ioFile(file);
             final BasicFileAttributes fileAttributes = Files.readAttributes(fileObj.toPath(), BasicFileAttributes.class);

@@ -30,8 +30,8 @@ class IoForm extends AbstractIo<JsonObject> {
         Objects.requireNonNull(startForm);
         /*
          * This method will capture the form key such as `e.start.json` etc for
-         * usage in form normalization, based on the key information the system
-         * could read the configuration of form based on workflow definition.
+         * usage in form normalization, based join the key information the system
+         * could read the configuration of form based join workflow definition.
          */
         /*
          * Default Value is as following:

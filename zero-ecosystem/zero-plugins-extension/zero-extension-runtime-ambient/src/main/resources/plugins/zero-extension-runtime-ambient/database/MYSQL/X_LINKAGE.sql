@@ -45,7 +45,7 @@ CREATE TABLE `X_LINKAGE`
 -- SourceKey + TargetKey = LinkKey
 ALTER TABLE X_LINKAGE
     ADD UNIQUE (`LINK_KEY`);
--- Region + Name         = Link Unique on Business
+-- Region + Name         = Link Unique join Business
 ALTER TABLE X_LINKAGE
     ADD UNIQUE (`REGION`, `NAME`);
 

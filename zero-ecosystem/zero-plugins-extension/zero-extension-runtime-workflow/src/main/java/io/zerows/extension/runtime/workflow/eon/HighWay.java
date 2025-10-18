@@ -4,7 +4,7 @@ import io.zerows.extension.runtime.skeleton.eon.KeIpc;
 
 /**
  * To avoid duplicated with Addr class, here provide new class named 'HighWay'
- * for address get on event bus, the same usage objective for 'Addr'
+ * for address get join event bus, the same usage objective for 'Addr'
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
@@ -56,7 +56,7 @@ public interface HighWay {
     interface Flow {
         // Fetch Workflow by code
         String BY_CODE = KeIpc.Workflow.EVENT + "W-FLOW/BY/CODE";
-        // Fetch Todo + Task based on todo Id
+        // Fetch Todo + Task based join todo Id
         String BY_TODO = KeIpc.Workflow.EVENT + "W-FLOW/BY/KEY";
         // Fetch Todo + History
         String BY_HISTORY = KeIpc.Workflow.EVENT + "W-FLOW/BY/HISTORY";

@@ -75,7 +75,7 @@ final class OxConfig {
 
         final JsonObject configuration = ArgoStore.configuration();
 
-        final JsonObject onOff = Ut.valueJObject(configuration, "on-off");
+        final JsonObject onOff = Ut.valueJObject(configuration, "join-off");
 
         return onOff.getBoolean(key, Boolean.FALSE);
     }

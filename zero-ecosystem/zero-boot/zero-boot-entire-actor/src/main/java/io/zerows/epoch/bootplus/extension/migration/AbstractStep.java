@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.bootplus.extension.refine.Ox;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.Database;
+import io.zerows.epoch.database.OldDatabase;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.util.Ao;
 import io.zerows.extension.runtime.ambient.agent.service.DatumService;
@@ -41,7 +41,7 @@ public abstract class AbstractStep implements MigrateStep {
         /*
          * 数据库切换隔离操作
          */
-        // this.app = DatabaseSwitcher.on(app);
+        // this.app = DatabaseSwitcher.join(app);
         this.ark = app;
         return this;
     }
@@ -49,7 +49,7 @@ public abstract class AbstractStep implements MigrateStep {
     protected HDao ioDao(final String identifier) {
         final HApp app = this.ark.app();
         final DataAtom atom = Ox.toAtom(app.option(KName.APP_ID), identifier);
-        final OldKDS<Database> ds = this.ark.database();
+        final OldKDS<OldDatabase> ds = this.ark.database();
         return Ao.toDao(atom, ds.dynamic());
     }
 

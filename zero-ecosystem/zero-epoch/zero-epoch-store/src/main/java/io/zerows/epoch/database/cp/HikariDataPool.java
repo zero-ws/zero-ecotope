@@ -3,7 +3,7 @@ package io.zerows.epoch.database.cp;
 import com.zaxxer.hikari.HikariDataSource;
 import io.r2mo.typed.cc.Cc;
 import io.zerows.component.log.LogO;
-import io.zerows.epoch.database.Database;
+import io.zerows.epoch.database.OldDatabase;
 import io.zerows.platform.metadata.KDatabase;
 import io.zerows.support.Ut;
 import org.jooq.Configuration;
@@ -111,13 +111,13 @@ public class HikariDataPool implements DataPool {
     @Override
     public DataPool switchTo() {
         return CC_POOL_SWITCH.pick(() -> {
-            final Database database = new Database();
-            database.fromJson(this.database.toJson());
+            final OldDatabase oldDatabase = new OldDatabase();
+            oldDatabase.fromJson(this.database.toJson());
             /*
              * Tun-Off auto commit to switch auto
              */
-            database.getOptions().remove(OPT_AUTO_COMMIT);
-            final DataPool ds = new HikariDataPool(database);
+            oldDatabase.getOptions().remove(OPT_AUTO_COMMIT);
+            final DataPool ds = new HikariDataPool(oldDatabase);
             final LogO logger = Ut.Log.database(this.getClass());
             logger.info("[ DP ] Data Pool Hash : {0}", ds.hashCode());
             return ds;

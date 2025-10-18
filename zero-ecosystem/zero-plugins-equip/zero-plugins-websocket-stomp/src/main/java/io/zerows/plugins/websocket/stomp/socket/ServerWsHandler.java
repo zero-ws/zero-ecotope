@@ -21,7 +21,7 @@ public interface ServerWsHandler extends StompServerHandler {
     /*
      * 「Extension」
      * This method is designed by zero framework for authorization that connect to `zero-rbac` for websocket
-     * validation on user data structure, the json part is as following:
+     * validation join user data structure, the json part is as following:
      * {
      *     "access_token": "xxxx",
      *     "user": "xxxx",

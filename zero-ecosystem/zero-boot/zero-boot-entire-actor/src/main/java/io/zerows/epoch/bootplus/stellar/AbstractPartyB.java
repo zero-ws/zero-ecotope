@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.bootplus.boot.EAnvoy;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
-import io.zerows.epoch.database.Database;
+import io.zerows.epoch.database.OldDatabase;
 import io.zerows.platform.metadata.KDictConfig;
 import io.zerows.platform.metadata.KFabric;
 import io.zerows.program.Ux;
@@ -26,10 +26,10 @@ public abstract class AbstractPartyB implements OkB {
      * 获取数据库对象默认实现
      * > 「RD」桥梁模式扩展。
      *
-     * @return {@link Database}
+     * @return {@link OldDatabase}
      */
     @Override
-    public Database configDatabase() {
+    public OldDatabase configDatabase() {
         return this.partyA.configDatabase();
     }
 

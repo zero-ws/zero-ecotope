@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.application.YmlCore;
-import io.zerows.epoch.database.Database;
+import io.zerows.epoch.database.OldDatabase;
 import io.zerows.extension.runtime.skeleton.eon.KeMsg;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
 import io.zerows.extension.runtime.workflow.atom.configuration.MetaWorkflow;
@@ -79,8 +79,8 @@ final class WfConfiguration {
     static ProcessEngine camunda() {
         Objects.requireNonNull(CONFIG);
         if (Objects.isNull(ENGINE)) {
-            final Database database = CONFIG.camundaDatabase();
-            Objects.requireNonNull(database);
+            final OldDatabase oldDatabase = CONFIG.camundaDatabase();
+            Objects.requireNonNull(oldDatabase);
             final ProcessEngineConfigurationImpl configuration = new StandaloneProcessEngineConfiguration()
                 // Fix Issue:
                 // org.camunda.bpm.engine.ProcessEngineException: historyLevel mismatch: configuration says HistoryLevelAudit(name=audit, id=2) and database says HistoryLevelFull(name=full, id=3)
@@ -95,10 +95,10 @@ final class WfConfiguration {
                 .setIdGenerator(new StrongUuidGenerator())                 // uuid for task
                 .setProcessEngineName(CONFIG.getName())
                 .setDatabaseSchemaUpdate(ProcessEngineConfiguration.DB_SCHEMA_UPDATE_FALSE)
-                .setJdbcUrl(database.getUrl())
-                .setJdbcDriver(database.getDriverClassName())
-                .setJdbcUsername(database.getUsername())
-                .setJdbcPassword(database.getPasswordDecrypted())
+                .setJdbcUrl(oldDatabase.getUrl())
+                .setJdbcDriver(oldDatabase.getDriverClassName())
+                .setJdbcUsername(oldDatabase.getUsername())
+                .setJdbcPassword(oldDatabase.getPasswordDecrypted())
                 .setJobExecutorActivate(true);
             // Default Handler for History
             HANDLER = configuration.getHistoryEventHandler();

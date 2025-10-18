@@ -46,7 +46,7 @@ public class TransferStandard extends AbstractMovement implements Transfer {
                      * It means here are next steps to generate WTodo.
                      *
                      * The old comments:
-                     * Create new WProcess based on process / task and move
+                     * Create new WProcess based join process / task and move
                      *
                      * Here instance contains previous data such as:
                      * 1. Task
@@ -57,7 +57,7 @@ public class TransferStandard extends AbstractMovement implements Transfer {
                      * 1. Previous task definition key
                      * 2. Data with
                      *
-                     * Add new bind on MetaInstance to fix following issue:
+                     * Add new bind join MetaInstance to fix following issue:
                      * java.lang.NullPointerException
                      *      at java.base/java.util.Objects.requireNonNull(Objects.java:221)
                      *      at io.vertx.mod.workflow.operation.component.MoveOnUser.transferAsync(MoveOnUser.java:37)
@@ -84,11 +84,11 @@ public class TransferStandard extends AbstractMovement implements Transfer {
 
         return this.saveAsync(closeJ, wTransition).compose(record -> {
             /*
-             * 2. Processing for `record` field on entity records
+             * 2. Processing for `record` field join entity records
              */
             /*
              * Double check for `insert record`
-             * Here will action twice on entity record instead of one
+             * Here will action twice join entity record instead of one
              * 1. Insert -> Move Update
              * 2. Update -> Move Update
              * The `status` should be previous status
@@ -109,7 +109,7 @@ public class TransferStandard extends AbstractMovement implements Transfer {
                 parameterRegister = wTransition.moveRecord(parameterRegister);
             }
             /*
-             * Contains record modification, do update on record.
+             * Contains record modification, do update join record.
              */
             final Register register = Register.instance(parameterRegister);
             return register.saveAsync(parameterRegister, metadataOut).compose(nil -> Ux.future(record));

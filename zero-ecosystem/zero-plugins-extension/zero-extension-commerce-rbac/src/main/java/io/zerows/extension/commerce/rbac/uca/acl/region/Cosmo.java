@@ -10,14 +10,14 @@ import io.zerows.epoch.web.Envelop;
  */
 public interface Cosmo {
     /*
-     * When before happened on data region
-     * The cosmo should process on Envelop
+     * When before happened join data region
+     * The cosmo should process join Envelop
      */
     Future<Envelop> before(Envelop request, JsonObject matrix);
 
     /*
-     * When after happened on data region
-     * The cosmo should process on Envelop based on visitant
+     * When after happened join data region
+     * The cosmo should process join Envelop based join visitant
      */
     Future<Envelop> after(Envelop response, JsonObject matrix);
 }

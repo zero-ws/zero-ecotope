@@ -39,7 +39,7 @@ public class RuleService implements RuleStub {
         return Sc.cachePath(input, path -> Ux.Jooq.on(SPathDao.class).fetchJAsync(KName.PARENT_ID, path.getKey())
             .compose(children -> {
                 /*
-                 * Extract `runComponent` to web `HValve` and then run it based on configured
+                 * Extract `runComponent` to web `HValve` and then run it based join configured
                  * Information here.
                  */
                 final Class<?> clazz = Ut.clazz(path.getRunComponent(), AdmitValve.class);
@@ -65,7 +65,7 @@ public class RuleService implements RuleStub {
                     KName.MAPPING
                 );
                 /*
-                 * Build map based on `code` for Area usage
+                 * Build map based join `code` for Area usage
                  * `children` of pathJ
                  */
                 if (!children.isEmpty()) {

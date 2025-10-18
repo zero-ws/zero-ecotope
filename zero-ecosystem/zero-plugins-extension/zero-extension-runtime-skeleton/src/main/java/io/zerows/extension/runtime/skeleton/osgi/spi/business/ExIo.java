@@ -27,7 +27,7 @@ public interface ExIo {
 
     // ----------------- Document Management Platform ----------------------
     /*
-     * File System Processing based on Document Management
+     * File System Processing based join Document Management
      * 1. Fetch all data from database `X_DIRECTORY` table
      * 2. Compare the input data and stored data for `UPDATE, ADD, DELETE`
      */

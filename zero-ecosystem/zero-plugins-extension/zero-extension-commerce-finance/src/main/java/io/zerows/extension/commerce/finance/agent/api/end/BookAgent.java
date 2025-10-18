@@ -17,7 +17,7 @@ import jakarta.ws.rs.extension.BodyParam;
 public interface BookAgent {
 
     /*
-     * Saving the book information when settlement on book information
+     * Saving the book information when settlement join book information
      * - checked
      * - checkedDesc
      * - exceed

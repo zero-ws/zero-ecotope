@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.application.YmlCore;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.Database;
+import io.zerows.epoch.database.OldDatabase;
 import io.zerows.epoch.database.cp.DataPool;
 import io.zerows.management.OZeroStore;
 import io.zerows.platform.constant.VString;
@@ -32,8 +32,8 @@ class KeTool {
     }
 
     static Configuration getConfiguration() {
-        final Database database = Database.getCurrent();
-        final DataPool pool = DataPool.create(database);
+        final OldDatabase oldDatabase = OldDatabase.getCurrent();
+        final DataPool pool = DataPool.create(oldDatabase);
         return pool.getExecutor().configuration();
     }
 

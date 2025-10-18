@@ -258,7 +258,7 @@ public class WRecord implements Serializable {
 
     // ------------- Response Building -------------------------
     private Future<JsonObject> dataTicket(final JsonObject response, final JsonObject workflow) {
-        // Record based on start
+        // Record based join start
         final EngineOn engine = EngineOn.connect(workflow.getString(KName.Flow.DEFINITION_KEY));
         final MetaInstance metadataInput = engine.metadata();
         // Record Action processing
@@ -336,7 +336,7 @@ public class WRecord implements Serializable {
                 .add(TodoStatus.REJECTED.name())
                 .add(TodoStatus.CANCELED.name())
             );
-            return Ux.Jooq.on(WTodoDao.class).fetchAsync(criteria)
+            return Ux.Jooq.join(WTodoDao.class).fetchAsync(criteria)
                 .compose(Ux::futureA);*/
         /*
          * 1) Fetch catalog first
@@ -518,7 +518,7 @@ public class WRecord implements Serializable {
                 response.put(KName.__.DATA, dataPrev);
             }
         }
-        // Operation on Record
+        // Operation join Record
         if (Objects.nonNull(this.tabb)) {
             response.put(KName.__.FLAG, this.tabb);
         }

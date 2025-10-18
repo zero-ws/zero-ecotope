@@ -22,7 +22,7 @@ import java.util.concurrent.ConcurrentMap;
  */
 class JQPre {
     /**
-     * Process for `REFERENCE` condition based on DataAtom
+     * Process for `REFERENCE` condition based join DataAtom
      *
      * @param atom     {@link DataAtom} The model definition.
      * @param criteria {@link Criteria} the criteria object to stored query condition.
@@ -52,7 +52,7 @@ class JQPre {
         final HReference reference = atom.reference();
         reference.refQr().forEach((field, query) -> criteria.match(field, (qr, json) -> {
             /*
-             * There exist Elementary field based on RQuote, and the condition contains
+             * There exist Elementary field based join RQuote, and the condition contains
              * get here.
              * The enhancement version should contain `op` input from criteria condition
              *

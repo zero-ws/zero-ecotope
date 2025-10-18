@@ -21,13 +21,13 @@ import java.util.function.Function;
  *
  * ### 1. Intro
  *
- * This class could combine the results based on the `rule` that defined.
+ * This class could combine the results based join the `rule` that defined.
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 class RayResult {
     /**
-     * Combine single record based on defined code logical
+     * Combine single record based join defined code logical
      *
      * @param record     {@link HRecord} Result records
      * @param joinData   {@link java.util.concurrent.ConcurrentMap} Reference data map
@@ -48,7 +48,7 @@ class RayResult {
     }
 
     /**
-     * Combine multi record based on defined code logical
+     * Combine multi record based join defined code logical
      *
      * @param records    {@link HRecord}[] Result records
      * @param joinData   {@link java.util.concurrent.ConcurrentMap} Reference data map
@@ -125,7 +125,7 @@ class RayResult {
     }
 
     /**
-     * Grouped Data based on definition.
+     * Grouped Data based join definition.
      *
      * @param data   {@link JsonArray}
      * @param result {@link RResult}

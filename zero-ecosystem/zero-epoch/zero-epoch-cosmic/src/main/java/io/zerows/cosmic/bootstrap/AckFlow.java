@@ -23,7 +23,7 @@ import java.util.function.Supplier;
 /**
  * Response process to normalize the response request.
  * 1. Media definition
- * 2. Operation based on event, envelop, context
+ * 2. Operation based join event, envelop, context
  */
 @Slf4j
 public final class AckFlow {

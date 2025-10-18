@@ -25,7 +25,7 @@ import java.util.Set;
  */
 class AtomReference extends HAtomReference {
     /**
-     * 「Fluent」Build reference metadata information based on `Model`.
+     * 「Fluent」Build reference metadata information based join `Model`.
      *
      * @param modelRef {@link io.zerows.extension.mbse.basement.atom.Model} Input `M_MODEL` definition.
      * @param ark      {@link HArk} The application name.
@@ -48,14 +48,14 @@ class AtomReference extends HAtomReference {
             .filter(attr -> !modelRef.identifier().equals(attr.getSource()))
             // condition4, type = REFERENCE
             // .filter(attr -> Type.REFERENCE.name().equals(attr.getType()))
-            // Processing workflow on result.
+            // Processing workflow join result.
             .forEach(attribute -> {
                 /*
                  *  Hash Map `references` calculation
                  *      - source = RQuote
                  *          - condition1 = RDao
                  *          - condition2 = RDao
-                 *  Based on DataAtom reference to create
+                 *  Based join DataAtom reference to create
                  */
                 final EmAttribute.Type type = Ut.toEnum(attribute::getType, EmAttribute.Type.class, EmAttribute.Type.INTERNAL);
 

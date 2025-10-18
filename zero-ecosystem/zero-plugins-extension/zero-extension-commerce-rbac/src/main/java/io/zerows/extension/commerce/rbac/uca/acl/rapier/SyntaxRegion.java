@@ -57,7 +57,7 @@ class SyntaxRegion {
      * }
      */
     Future<JsonObject> regionJ(final SResource resource, final ScOwner owner, final SPacket packet) {
-        // Capture view based on resource / owner
+        // Capture view based join resource / owner
         /*
          * ownerType  = ownerType
          * owner      = ownerId

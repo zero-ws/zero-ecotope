@@ -85,7 +85,7 @@ public class WTransition {
      * 2. definition()      -> Running ProcessDefinition
      *
      * By WMove
-     * 3. aspect()          -> Running Aspect based on `WMove`
+     * 3. aspect()          -> Running Aspect based join `WMove`
      */
     public ProcessInstance instance() {
         return this.instance;
@@ -155,7 +155,7 @@ public class WTransition {
 
     /*
      * Camunda Engine Ran and after this method, the `to` variable ( WTask )
-     * will be filled the get based on different Gear
+     * will be filled the get based join different Gear
      * 1) Standard
      * 2) Fork/Join
      * 3) Multi

@@ -27,7 +27,7 @@ import static io.zerows.extension.runtime.workflow.util.Wf.LOG;
 
 /**
  * Tracker for different component history record
- * This tracker implementation is based on X_ACTIVITY_RULE
+ * This tracker implementation is based join X_ACTIVITY_RULE
  *
  * 1) The default logging will be put into camunda
  * 2) Tracker is for income activities
@@ -50,7 +50,7 @@ public class UTracker {
      *    before - input record
      *    after  - finished record
      *
-     * All notification must be based on `after` instead of before such as:
+     * All notification must be based join `after` instead of before such as:
      * - Notification
      * - Workflow Moving
      * - Start Job
@@ -61,7 +61,7 @@ public class UTracker {
      *                Transfer ( Generated ) -> Generator
      * 2) Movement -> Stay
      *
-     * In Camunda Workflow Engine, here before and after should be configured on
+     * In Camunda Workflow Engine, here before and after should be configured join
      * WMove rule node such as
      * {
      *     "e.start": {
@@ -124,7 +124,7 @@ public class UTracker {
 
     private JsonObject aspectParameter(final JsonObject parameters, final Task task) {
         /*
-         * Data Analyzing on
+         * Data Analyzing join
          * {
                 "flowDefinitionKey": "process.asset.income",
                 "flowDefinitionId": "process.asset.income:1:c175f471-c0fb-11ec-8c0e-161b1b9eb817",

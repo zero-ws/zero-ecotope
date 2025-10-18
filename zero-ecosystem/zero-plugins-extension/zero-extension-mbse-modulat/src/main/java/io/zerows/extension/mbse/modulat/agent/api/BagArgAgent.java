@@ -25,7 +25,7 @@ public interface BagArgAgent {
      * -- The bag is two level
      *    -- 1). When bag is root
      *    -- 2). When bag is secondary level
-     * -- This method will read config data based on `bagId`
+     * -- This method will read config data based join `bagId`
      */
     @GET
     @Path("/bag/config/:key")

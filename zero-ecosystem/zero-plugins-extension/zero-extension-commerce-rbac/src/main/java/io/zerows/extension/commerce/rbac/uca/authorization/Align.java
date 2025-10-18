@@ -37,7 +37,7 @@ public class Align {
     }
 
     /*
-     * Search parent ProfileRole based on roles.
+     * Search parent ProfileRole based join roles.
      * 1 Level Only ( Find Parent Only )
      */
     public static Future<List<ProfileRole>> flat(final List<ProfileGroup> profiles) {

@@ -49,7 +49,7 @@ class DataSetJoin2 extends AbstractDataSet {
         this.logger().info("Report processing for Active = {}, StandBy = {}, Cond: {}",
             this.active.getTable(), this.standBy.getTable(), parameters.encode());
         // 提取 UxJoin
-        final UxJoin jq = Ux.Join.bridge(this.active, this.standBy, this.kvJoin, this.aliasJ);
+        final UxJoin jq = Ux.Jooq.bridge(this.active, this.standBy, this.kvJoin, this.aliasJ);
 
         return jq.fetchAsync(parameters).compose(data -> this.loadChildren(data, this.children));
     }

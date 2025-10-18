@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
 /**
- * Fetch `Activity` based on `different condition`
+ * Fetch `Activity` based join `different condition`
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */

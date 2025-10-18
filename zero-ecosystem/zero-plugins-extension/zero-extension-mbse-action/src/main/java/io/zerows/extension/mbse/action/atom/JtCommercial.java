@@ -2,7 +2,7 @@ package io.zerows.extension.mbse.action.atom;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.Database;
+import io.zerows.epoch.database.OldDatabase;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IService;
 import io.zerows.extension.mbse.action.eon.JtKey;
 import io.zerows.extension.mbse.action.util.Jt;
@@ -106,7 +106,7 @@ public abstract class JtCommercial implements Commercial {
     }
 
     @Override
-    public Database database() {
+    public OldDatabase database() {
         return Jt.toDatabase(this.service);
     }
 
@@ -122,7 +122,7 @@ public abstract class JtCommercial implements Commercial {
             /*
              * When pre-release here, the integration should be connected to actual
              * environment, in this kind of situation, you can call atom JtJob `mockOn`
-             * to turn on `debug` options in integration, but it require the environment
+             * to turn join `debug` options in integration, but it require the environment
              * to be `Mockito` instead of others.
              * Involve environment concept to split deployment/testing/production
              */

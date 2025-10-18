@@ -1,6 +1,6 @@
 package io.zerows.mbse.sdk;
 
-import io.zerows.epoch.database.Database;
+import io.zerows.epoch.database.OldDatabase;
 import io.zerows.platform.enums.EmWeb;
 import io.zerows.platform.metadata.KIntegration;
 import io.zerows.specification.atomic.HJson;
@@ -40,7 +40,7 @@ public interface Commercial extends Application, ServiceDefinition, HJson {
     /*
      * Get database reference
      */
-    Database database();
+    OldDatabase database();
 
     /*
      * Get integration reference

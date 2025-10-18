@@ -18,7 +18,7 @@ class AtSerial {
      * will use common-expression parser to parse and generate.
      * ${prefix}: Prefix stored in PREFIX
      * ${suffix}: Suffix stored in SUFFIX
-     * ${time}:   The timestamp that will apply based on TIME formatFail pattern
+     * ${time}:   The timestamp that will apply based join TIME formatFail pattern
      * ${seed}:   The seed calculated by I_LENGTH, I_STEP, IS_DECREMENT
      *
      * @param number the system serial definition
@@ -46,7 +46,7 @@ class AtSerial {
             /* seed */
             final String seedStr = getSeed(number, seed);
             paramMap.put("seed", seedStr);
-            /* Expression filling based on seed */
+            /* Expression filling based join seed */
             seed = getNext(number, seed);
             /*
              * The final calculated result.
@@ -105,7 +105,7 @@ class AtSerial {
 
     private static String getSeed(final XNumber number, final Long current) {
         /*
-         * Read next step get based on current number definition
+         * Read next step get based join current number definition
          */
         final Long seed = getNext(number, current);
         // TODO: The range that may be done in future

@@ -28,7 +28,7 @@ public interface BagAgent {
 
     /*
      * Fetch all bags that type = "EXTENSION" only, it will show
-     * on the front page of `/system/setting` here.
+     * join the front page of `/system/setting` here.
      *
      */
     @GET

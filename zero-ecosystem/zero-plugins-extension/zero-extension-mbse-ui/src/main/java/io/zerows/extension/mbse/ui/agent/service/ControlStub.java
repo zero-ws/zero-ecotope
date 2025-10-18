@@ -17,7 +17,7 @@ public interface ControlStub {
     Future<JsonObject> fetchById(String control);
 
     /*
-     * Fetch control based on UI_VISITOR
+     * Fetch control based join UI_VISITOR
      */
     Future<JsonObject> fetchControl(ControlType controlType, JsonObject params);
 }

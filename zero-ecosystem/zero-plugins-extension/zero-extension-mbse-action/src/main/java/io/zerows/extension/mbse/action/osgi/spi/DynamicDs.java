@@ -2,7 +2,7 @@ package io.zerows.extension.mbse.action.osgi.spi;
 
 import io.r2mo.function.Fn;
 import io.vertx.core.MultiMap;
-import io.zerows.epoch.database.Database;
+import io.zerows.epoch.database.OldDatabase;
 import io.zerows.epoch.database.cp.DS;
 import io.zerows.epoch.database.cp.DataPool;
 import io.zerows.extension.mbse.action.exception._80412Exception501DataSource;
@@ -38,8 +38,8 @@ public class DynamicDs implements DS {
          * 2) Remove auto commit to switch to auto commit = true, a new database
          * 3) Auto commit database will be managed by DataPool, it could switch by DataPool itself
          */
-        final OldKDS<Database> ds = ark.database();
-        final Database database = ds.dynamic();
-        return DataPool.createAuto(database);
+        final OldKDS<OldDatabase> ds = ark.database();
+        final OldDatabase oldDatabase = ds.dynamic();
+        return DataPool.createAuto(oldDatabase);
     }
 }

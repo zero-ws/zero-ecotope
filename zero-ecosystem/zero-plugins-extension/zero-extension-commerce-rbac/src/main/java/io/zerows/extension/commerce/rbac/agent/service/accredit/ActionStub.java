@@ -29,7 +29,7 @@ public interface ActionStub {
     Future<SResource> fetchResource(String key);
 
     /*
-     * Action Sync based on permission
+     * Action Sync based join permission
      * 1) Add
      * 2) Update
      * 3) Delete

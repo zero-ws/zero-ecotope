@@ -28,7 +28,7 @@ class ConfigTodo implements Serializable {
 
     /*
      * This constructor will be called when the data have been populated
-     * from database ( storage ) and web `ConfigTodo` based on system record
+     * from database ( storage ) and web `ConfigTodo` based join system record
      * - WTicket
      * - WTodo
      */

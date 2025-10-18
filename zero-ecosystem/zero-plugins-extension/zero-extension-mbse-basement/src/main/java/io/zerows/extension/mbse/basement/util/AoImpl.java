@@ -3,7 +3,7 @@ package io.zerows.extension.mbse.basement.util;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.Database;
+import io.zerows.epoch.database.OldDatabase;
 import io.zerows.epoch.database.cp.DS;
 import io.zerows.epoch.database.cp.DataPool;
 import io.zerows.extension.mbse.basement.atom.Model;
@@ -169,7 +169,7 @@ class AoImpl {
             atom = null;
         }
         if (Objects.nonNull(atom)) {
-            final OldKDS<Database> ds = ark.database();
+            final OldKDS<OldDatabase> ds = ark.database();
             return toDao(() -> atom, ds.dynamic());
         } else {
             return null;

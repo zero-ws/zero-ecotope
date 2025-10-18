@@ -32,7 +32,7 @@ import io.zerows.sdk.security.Acl;
  * 2. rows of S_VIEW is high priority and it should be kept;
  * 3. Returned:
  * ---- There is no combine for `acl` information in this kind because there are only two
- *      situations on
+ *      situations join
  *          BEFORE: projection is ok
  *          AFTER:  rows is ok
  * 4. In future, we could expand the `rows` calculation from here for complex usage
