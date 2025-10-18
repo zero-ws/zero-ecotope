@@ -1,46 +1,40 @@
 package io.zerows.extension.mbse.basement.uca.jdbc;
 
+import io.r2mo.base.dbe.Database;
 import io.r2mo.function.Fn;
-import io.r2mo.typed.cc.Cc;
-import io.zerows.component.log.LogOf;
-import io.zerows.epoch.database.cp.DataPool;
+import io.zerows.epoch.store.DBSActor;
 import io.zerows.extension.mbse.basement.exception._80502Exception500EmptySQL;
 import io.zerows.extension.mbse.basement.uca.sql.SqlOutput;
 import io.zerows.platform.constant.VValue;
-import io.zerows.platform.metadata.KDatabase;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 import org.jooq.DSLContext;
 import org.jooq.Query;
 import org.jooq.Record;
 import org.jooq.Result;
 import org.jooq.ResultQuery;
 
-import javax.sql.DataSource;
 import java.sql.Connection;
 import java.util.List;
 import java.util.concurrent.ConcurrentMap;
 
 @SuppressWarnings("all")
+@Slf4j
 public class DataConnection implements AoConnection {
-    private static final Cc<String, DataPool> CC_DS = Cc.open();
-    private final transient DataPool dbPool;
-    private final transient KDatabase database;
+    private final Database database;
 
     /* 一旦调用connect方法证明连接切换到对应的数据库中 */
     @SuppressWarnings("all")
-    public DataConnection(final KDatabase database) {
+    public DataConnection(final Database database) {
         synchronized (getClass()) {
             this.database = database;
-            // 初始化dbPool连接池，每一个Jdbc Url保证一个连接池
-            this.dbPool = CC_DS.pick(() -> DataPool.create(database), database.getUrl());
-            // Fn.po?l(Pool.POOL, database.getUrl(), () -> DataPool.create(database));
         }
     }
 
     @Override
     public int execute(final String sql) {
         Fn.jvmKo(Ut.isNil(sql), _80502Exception500EmptySQL.class);
-        this.getLogger().debug("[DB] 执行SQL：{0}", sql);
+        log.debug("[ ExZERO ] 执行 SQL 语句：{}", sql);
         final DSLContext context = this.getDSL();
         final Query query = context.query(sql);
         final int ret = query.execute();
@@ -48,19 +42,18 @@ public class DataConnection implements AoConnection {
     }
 
     @Override
-    public KDatabase getDatabase() {
+    public Database getDatabase() {
         return this.database;
     }
 
     @Override
     public Connection getConnection() {
-        final DataSource dataSource = this.dbPool.getDataSource();
-        return Fn.jvmOr(dataSource::getConnection);
+        return DBSActor.ofDBS(this.database).getConnection();
     }
 
     @Override
     public DSLContext getDSL() {
-        return this.dbPool.getExecutor();
+        return DBSActor.ofDSL(this.database);
     }
 
     @Override
@@ -79,7 +72,7 @@ public class DataConnection implements AoConnection {
 
     private Result fetch(final String sql) {
         Fn.jvmKo(Ut.isNil(sql), _80502Exception500EmptySQL.class);
-        this.getLogger().debug("[DB] 执行SQL select：{0}", sql);
+        log.debug("[ ExZERO ] 执行 SQL Select 语句：{}", sql);
         final DSLContext context = this.getDSL();
         final ResultQuery<Record> query = context.resultQuery(sql);
         return query.fetch();
@@ -88,14 +81,10 @@ public class DataConnection implements AoConnection {
     @Override
     public Long count(final String sql) {
         Fn.jvmKo(Ut.isNil(sql), _80502Exception500EmptySQL.class);
-        this.getLogger().debug("[DB] 执行SQL count：{0}", sql);
+        log.debug("[ ExZERO ] 执行 SQL Count 语句：{}", sql);
         final DSLContext context = this.getDSL();
         final ResultQuery<Record> query = context.resultQuery(sql);
         final Record record = query.fetchOne();
         return record.getValue(0, Long.class);
-    }
-
-    protected LogOf getLogger() {
-        return LogOf.get(this.getClass());
     }
 }

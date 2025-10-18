@@ -1,6 +1,6 @@
 package io.zerows.extension.mbse.basement.uca.jdbc;
 
-import io.zerows.platform.metadata.KDatabase;
+import io.r2mo.base.dbe.Database;
 import org.jooq.DSLContext;
 
 import java.sql.Connection;
@@ -19,7 +19,7 @@ import java.util.concurrent.ConcurrentMap;
 public interface AoConnection {
 
     /* 返回数据库实例 */
-    KDatabase getDatabase();
+    Database getDatabase();
 
     /* 返回Sql连接引用 */
     Connection getConnection();

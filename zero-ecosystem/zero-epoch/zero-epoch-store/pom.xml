@@ -16,6 +16,15 @@
             <groupId>io.zerows</groupId>
             <artifactId>zero-epoch-setting</artifactId>
         </dependency>
+        <!-- 必须依赖的底层 DBE（同步异步两种模式）-->
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>r2mo-dbe-jooq</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>r2mo-vertx-jooq</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.reactivestreams</groupId>

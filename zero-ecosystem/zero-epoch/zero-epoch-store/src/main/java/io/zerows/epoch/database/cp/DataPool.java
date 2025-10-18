@@ -21,6 +21,7 @@ import java.util.Objects;
  * 1) Basic JDBC configuration
  * 2) Additional configuration
  */
+@Deprecated
 public interface DataPool {
 
     Cc<String, DataPool> CC_POOL_DYNAMIC = Cc.open();
