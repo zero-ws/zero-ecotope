@@ -11,7 +11,7 @@ import io.zerows.extension.commerce.rbac.domain.tables.pojos.SUser;
 import io.zerows.extension.commerce.rbac.util.Sc;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
 import io.zerows.platform.metadata.KRef;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.base.FnBase;

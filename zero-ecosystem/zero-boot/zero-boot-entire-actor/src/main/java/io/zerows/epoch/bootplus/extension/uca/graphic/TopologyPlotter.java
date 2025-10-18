@@ -7,7 +7,7 @@ import io.zerows.extension.runtime.ambient.domain.tables.daos.XCategoryDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XCategory;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.metadata.KRef;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.specification.app.HApp;
 import io.zerows.support.Ut;

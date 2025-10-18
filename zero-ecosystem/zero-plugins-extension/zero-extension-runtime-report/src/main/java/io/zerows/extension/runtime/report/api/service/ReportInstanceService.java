@@ -13,7 +13,7 @@ import io.zerows.extension.runtime.report.domain.tables.pojos.KpReport;
 import io.zerows.extension.runtime.report.domain.tables.pojos.KpReportInstance;
 import io.zerows.extension.runtime.report.uca.combiner.StepGenerator;
 import io.zerows.extension.runtime.report.uca.pull.DataInput;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.base.FnBase;

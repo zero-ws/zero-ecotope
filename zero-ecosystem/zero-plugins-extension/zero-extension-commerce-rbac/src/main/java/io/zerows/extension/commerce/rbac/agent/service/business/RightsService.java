@@ -14,7 +14,7 @@ import io.zerows.extension.commerce.rbac.domain.tables.pojos.SPermission;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.enums.typed.ChangeFlag;
 import io.zerows.platform.metadata.KRef;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;

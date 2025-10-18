@@ -56,7 +56,7 @@ public class UserActor {
              * 4. Permission Pool / Auth Pool Clean
              */
             final RoutingContext context = envelop.context();
-            // context.clearUser();
+            // configure.clearUser();
 
             final Session session = context.session();
             if (Objects.nonNull(session) && !session.isDestroyed()) {

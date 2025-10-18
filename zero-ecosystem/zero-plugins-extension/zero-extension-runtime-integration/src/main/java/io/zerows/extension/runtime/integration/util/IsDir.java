@@ -12,7 +12,7 @@ import io.zerows.extension.runtime.integration.eon.IsConstant;
 import io.zerows.extension.runtime.integration.uca.command.FsDefault;
 import io.zerows.extension.runtime.integration.uca.command.FsReadOnly;
 import io.zerows.platform.constant.VString;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;

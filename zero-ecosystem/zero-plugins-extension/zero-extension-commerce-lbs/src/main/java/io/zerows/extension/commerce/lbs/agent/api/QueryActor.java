@@ -16,7 +16,7 @@ import io.zerows.extension.commerce.lbs.domain.tables.pojos.LCity;
 import io.zerows.extension.commerce.lbs.domain.tables.pojos.LRegion;
 import io.zerows.extension.commerce.lbs.domain.tables.pojos.LState;
 import io.zerows.extension.commerce.lbs.eon.Addr;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 

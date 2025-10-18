@@ -7,7 +7,7 @@ import io.zerows.epoch.bootplus.extension.cv.OxCv;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XCategoryDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XCategory;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.spi.modeler.Identifier;
 import io.zerows.support.Ut;

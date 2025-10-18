@@ -8,7 +8,7 @@ import io.zerows.extension.runtime.ambient.agent.service.linkage.LinkService;
 import io.zerows.extension.runtime.ambient.agent.service.linkage.LinkStub;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XLinkageDao;
 import io.zerows.extension.runtime.skeleton.osgi.spi.feature.Linkage;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
 

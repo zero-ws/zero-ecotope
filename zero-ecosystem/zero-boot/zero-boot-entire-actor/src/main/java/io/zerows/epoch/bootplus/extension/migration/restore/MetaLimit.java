@@ -14,7 +14,7 @@ import io.zerows.extension.mbse.basement.domain.tables.pojos.MEntity;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MField;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MModel;
 import io.zerows.platform.enums.Environment;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.specification.app.HApp;
 import io.zerows.support.Ut;

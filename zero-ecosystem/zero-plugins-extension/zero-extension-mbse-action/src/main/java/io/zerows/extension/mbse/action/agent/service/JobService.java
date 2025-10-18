@@ -10,7 +10,7 @@ import io.zerows.extension.mbse.action.domain.tables.daos.IServiceDao;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IJob;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IService;
 import io.zerows.extension.mbse.action.util.Jt;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;

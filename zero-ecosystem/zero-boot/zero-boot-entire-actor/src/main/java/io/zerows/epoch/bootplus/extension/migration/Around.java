@@ -7,7 +7,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.database.cp.DataPool;
 import io.zerows.epoch.database.jooq.operation.DBJooq;
 import io.zerows.platform.enums.Environment;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.app.HArk;

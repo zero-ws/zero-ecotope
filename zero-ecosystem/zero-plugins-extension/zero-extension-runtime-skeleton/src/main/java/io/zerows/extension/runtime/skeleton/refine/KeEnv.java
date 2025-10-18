@@ -9,7 +9,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.database.jooq.operation.DBJooq;
 import io.zerows.epoch.metadata.MMAdapt;
 import io.zerows.epoch.metadata.UArray;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.spi.modeler.Indent;
 import io.zerows.support.Ut;

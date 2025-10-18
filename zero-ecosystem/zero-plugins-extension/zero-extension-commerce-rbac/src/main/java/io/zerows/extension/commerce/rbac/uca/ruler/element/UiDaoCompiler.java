@@ -7,7 +7,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.management.OCacheDao;
 import io.zerows.extension.commerce.rbac.exception._80226Exception404AdmitDaoNull;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.support.Ut;
 
 import java.util.Objects;

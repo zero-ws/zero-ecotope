@@ -7,7 +7,7 @@ import io.zerows.epoch.database.jooq.operation.DBJooq;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XNumberDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XNumber;
 import io.zerows.extension.runtime.ambient.util.At;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 
 import java.util.Objects;

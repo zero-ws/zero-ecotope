@@ -8,7 +8,7 @@ import io.zerows.extension.runtime.ambient.domain.tables.daos.XAppDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XApp;
 import io.zerows.extension.runtime.ambient.exception._80300Exception500AmbientError;
 import io.zerows.extension.runtime.ambient.exception._80301Exception500ApplicationInit;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import org.jooq.DSLContext;
 
 import java.util.Objects;

@@ -6,7 +6,7 @@ import io.zerows.extension.commerce.finance.domain.tables.daos.FTransOfDao;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FTrans;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FTransOf;
 import io.zerows.extension.commerce.finance.uca.enter.Maker;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 
 import java.util.List;
 

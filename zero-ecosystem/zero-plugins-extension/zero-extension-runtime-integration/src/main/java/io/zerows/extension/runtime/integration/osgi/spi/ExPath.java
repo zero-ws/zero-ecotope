@@ -12,7 +12,7 @@ import io.zerows.extension.runtime.integration.domain.tables.pojos.IDirectory;
 import io.zerows.extension.runtime.integration.uca.command.Fs;
 import io.zerows.extension.runtime.integration.util.Is;
 import io.zerows.extension.runtime.skeleton.osgi.spi.business.ExIo;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.base.FnBase;

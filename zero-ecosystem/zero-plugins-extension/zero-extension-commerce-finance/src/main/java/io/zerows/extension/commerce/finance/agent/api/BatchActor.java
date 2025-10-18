@@ -10,7 +10,7 @@ import io.zerows.extension.commerce.finance.agent.service.end.DebtStub;
 import io.zerows.extension.commerce.finance.agent.service.end.SettleRStub;
 import io.zerows.extension.commerce.finance.domain.tables.daos.FSettlementDao;
 import io.zerows.extension.commerce.finance.eon.Addr;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;

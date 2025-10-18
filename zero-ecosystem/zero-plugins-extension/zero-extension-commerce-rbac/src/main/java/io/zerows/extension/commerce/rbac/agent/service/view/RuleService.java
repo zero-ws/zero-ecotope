@@ -14,7 +14,7 @@ import io.zerows.extension.commerce.rbac.uca.acl.rapier.Quest;
 import io.zerows.extension.commerce.rbac.uca.ruler.AdmitValve;
 import io.zerows.extension.commerce.rbac.util.Sc;
 import io.zerows.platform.constant.VString;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.sdk.security.HValve;
 import io.zerows.support.Ut;

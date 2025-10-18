@@ -12,6 +12,7 @@ import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
 import lombok.extern.slf4j.Slf4j;
 import org.jooq.Configuration;
+import org.jooq.DSLContext;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
@@ -32,7 +33,7 @@ class KeTool {
     }
 
     static Configuration getConfiguration() {
-        return DBSActor.ofDSL().configuration();
+        return ((DSLContext) DBSActor.ofContext()).configuration();
     }
 
     static Future<JsonObject> map(final JsonObject data, final String field,

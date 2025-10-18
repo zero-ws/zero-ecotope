@@ -1,12 +1,13 @@
 package io.zerows.epoch.database.jooq.operation;
 
+import io.r2mo.base.dbe.DBS;
 import io.r2mo.typed.cc.Cc;
+import io.r2mo.vertx.jooq.JooqMeta;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.LogO;
 import io.zerows.component.qr.Sorter;
-import io.zerows.epoch.application.YmlCore;
 import io.zerows.epoch.database.cp.DataPool;
 import io.zerows.epoch.database.jooq.JooqDsl;
 import io.zerows.epoch.database.jooq.JooqInfix;
@@ -14,6 +15,7 @@ import io.zerows.epoch.database.jooq.util.JqAnalyzer;
 import io.zerows.epoch.database.jooq.util.JqCond;
 import io.zerows.epoch.database.jooq.util.JqFlow;
 import io.zerows.epoch.database.jooq.util.JqTool;
+import io.zerows.epoch.store.DBSActor;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.constant.VValue;
 import io.zerows.platform.enums.EmDS;
@@ -33,21 +35,29 @@ public class DBJooq {
 
     private static final LogO LOGGER = Ut.Log.ux(DBJooq.class);
 
-    private transient final Class<?> clazz;
+    private transient Class<?> clazz;
     /* Analyzer */
-    private transient final JqAnalyzer analyzer;
+    private transient JqAnalyzer analyzer;
     /* Aggre */
-    private transient final JqAggregator aggregator;
+    private transient JqAggregator aggregator;
     /* Writer */
-    private transient final JqWriter writer;
+    private transient JqWriter writer;
     /* Reader */
-    private transient final JqReader reader;
+    private transient JqReader reader;
     /*
      * New Structure for usage
      */
-    private transient final JqFlow workflow;
+    private transient JqFlow workflow;
     private transient EmDS.Format format = EmDS.Format.JSON;
 
+    /**
+     * 直接新版访问 {@link DBEx} 的入口，之后的内容不再访问
+     */
+    protected <T> DBJooq(final Class<T> clazz, final JooqMeta meta) {
+
+    }
+
+    @Deprecated
     protected <T> DBJooq(final Class<T> clazz, final JooqDsl dsl) {
         /* New exception to avoid programming missing */
         this.clazz = clazz;
@@ -68,23 +78,24 @@ public class DBJooq {
 
     // -------------------- UxJooq --------------------
     public static DBJooq of(final Class<?> clazz) {
-        final JooqDsl dsl = JooqInfix.getDao(clazz);
-        return CC_JOOQ.pick(() -> new DBJooq(clazz, dsl), dsl.poolKey());
+        final DBS dbs = DBSActor.ofDBS();
+        return of(clazz, dbs);
     }
 
+    public static DBJooq of(final Class<?> clazz, final String name) {
+        final DBS dbs = DBSActor.ofDBS(name);
+        return of(clazz, dbs);
+    }
+
+    public static DBJooq of(final Class<?> clazz, final DBS dbs) {
+        final JooqMeta meta = JooqMeta.of(clazz, dbs);
+        return CC_JOOQ.pick(() -> new DBJooq(clazz, meta), meta.cached());
+    }
+
+    @Deprecated
     public static DBJooq of(final Class<?> clazz, final DataPool pool) {
         final JooqDsl dsl = JooqInfix.getDao(clazz, pool);
         return CC_JOOQ.pick(() -> new DBJooq(clazz, dsl), dsl.poolKey());
-    }
-
-    public static DBJooq of(final Class<?> clazz, final String key) {
-        final JooqDsl dsl = JooqInfix.getDao(clazz, key);
-        return CC_JOOQ.pick(() -> new DBJooq(clazz, dsl), dsl.poolKey());
-    }
-
-    public static DBJooq ofHistory(final Class<?> clazz) {
-        final JooqDsl dsl = JooqInfix.getDao(clazz, YmlCore.jooq.ORBIT);
-        return CC_JOOQ.pick(() -> new DBJooq(clazz, dsl), "HIS-" + dsl.poolKey());
     }
 
     // -------------------- Bind Config --------------------
@@ -101,13 +112,13 @@ public class DBJooq {
      */
     public DBJooq on(final String pojo) {
         if (Ut.isNil(pojo)) {
-            // 此处直接返回，由于传入了非法的 pojo
+            // 如果没有 pojo 文件和它绑定，则直接取消
             return this;
         }
 
         // 否则走后续绑定流程
         {
-            this.analyzer.on(pojo, this.clazz);
+            // this.analyzer.on(pojo, this.clazz);
             /*
              * 此处 analyzer 对象内置会发生变化，相反会影响到 workflow 的创建，当前方法主要是应用于
              * 旧系统的连接：
@@ -115,7 +126,7 @@ public class DBJooq {
              * 2）旧系统中存在 pojo 文件，用于数据转换
              * 3）pojo 文件会影响到所有包含 pojo 参数的接口 API
              */
-            this.workflow.on(this.analyzer);
+            // this.workflow.on(this.analyzer);
         }
         return this;
     }

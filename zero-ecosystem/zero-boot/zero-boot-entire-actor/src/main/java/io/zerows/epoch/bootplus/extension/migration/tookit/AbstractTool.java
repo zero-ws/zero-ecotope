@@ -9,7 +9,7 @@ import io.zerows.epoch.database.cp.DataPool;
 import io.zerows.epoch.database.jooq.JooqDsl;
 import io.zerows.epoch.database.jooq.JooqInfix;
 import io.zerows.platform.enums.Environment;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import org.jooq.DSLContext;

@@ -17,7 +17,7 @@ import io.zerows.extension.commerce.rbac.uca.logged.ScUser;
 import io.zerows.extension.commerce.rbac.uca.timer.ClockFactory;
 import io.zerows.extension.commerce.rbac.uca.timer.ScClock;
 import io.zerows.extension.commerce.rbac.util.Sc;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import jakarta.inject.Inject;

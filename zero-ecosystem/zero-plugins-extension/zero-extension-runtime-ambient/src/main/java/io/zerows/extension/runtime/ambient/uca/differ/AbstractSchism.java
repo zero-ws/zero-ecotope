@@ -12,7 +12,7 @@ import io.zerows.platform.enums.modeling.EmAttribute;
 import io.zerows.platform.exception._60050Exception501NotSupport;
 import io.zerows.platform.metadata.KMarkAtom;
 import io.zerows.platform.metadata.KRef;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.specification.modeling.HAtom;
 

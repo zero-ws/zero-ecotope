@@ -148,7 +148,7 @@ class Assist implements Serializable {
     public String toString() {
         return "Assist{" +
             // Stack Overflow here
-            // "context=" + this.context +
+            // "configure=" + this.configure +
             ", headers=" + this.headers +
             ", user=" + this.user +
             ", uri='" + this.uri + '\'' +

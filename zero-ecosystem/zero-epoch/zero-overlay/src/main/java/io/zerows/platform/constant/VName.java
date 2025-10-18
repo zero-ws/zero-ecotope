@@ -310,7 +310,7 @@ public interface VName {
 
     String ACL = "acl";
 
-    String CONTEXT = "context";
+    String CONTEXT = "configure";
     String VERSION = "version";
 
     /**

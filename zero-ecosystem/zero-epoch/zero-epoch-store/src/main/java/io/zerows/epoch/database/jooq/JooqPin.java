@@ -18,6 +18,8 @@ import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
+@SuppressWarnings("all")
+@Deprecated
 public class JooqPin {
 
     private static final LogO LOGGER = Ut.Log.database(JooqPin.class);

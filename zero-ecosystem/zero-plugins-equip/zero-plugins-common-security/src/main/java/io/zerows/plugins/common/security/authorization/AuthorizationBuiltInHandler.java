@@ -14,8 +14,8 @@ import io.vertx.ext.auth.authorization.AuthorizationContext;
 import io.vertx.ext.auth.authorization.AuthorizationProvider;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.AuthorizationHandler;
-import io.zerows.epoch.constant.KName;
 import io.zerows.component.log.LogOf;
+import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.security.Aegis;
 
 import java.util.ArrayList;
@@ -81,7 +81,7 @@ public class AuthorizationBuiltInHandler implements AuthorizationHandler {
                  */
                 try {
                     // Context Creation ( Async )
-                    // create the authorization context
+                    // create the authorization configure
                     final AuthorizationContext authorizationContext = this.getAuthorizationContext(event);
                     // check or fetch authorizations
                     this.resource.requestResource(event, res -> {
@@ -154,7 +154,7 @@ public class AuthorizationBuiltInHandler implements AuthorizationHandler {
             /*
              * we haven't fetched authorization from this provider yet,
              * in this situation, continue to next provider to validate, after validated successfully
-             * you can call next() method of routing context to pass
+             * you can call next() method of routing configure to pass
              */
             //            if (!routingContext.user().authorizations().getProviderIds().contains(provider.getId())) {
             //                final User user = routingContext.user();
@@ -192,7 +192,7 @@ public class AuthorizationBuiltInHandler implements AuthorizationHandler {
      *             if (this.pending != null) {
      *                 this.pending.pause();
      *             } else {
-     *                 this.pending = InboundBuffer.createPaused(this.context, 8L, this.pendingDrainHandler(), this.pendingHandler());
+     *                 this.pending = InboundBuffer.createPaused(this.configure, 8L, this.pendingDrainHandler(), this.pendingHandler());
      *             }
      *
      *             return this;

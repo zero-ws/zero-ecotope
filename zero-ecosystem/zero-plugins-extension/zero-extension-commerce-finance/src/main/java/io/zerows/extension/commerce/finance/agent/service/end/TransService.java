@@ -22,7 +22,7 @@ import io.zerows.extension.commerce.finance.eon.em.EmTran;
 import io.zerows.extension.commerce.finance.uca.replica.IkWay;
 import io.zerows.extension.commerce.finance.uca.trans.Trade;
 import io.zerows.platform.metadata.KRef;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;

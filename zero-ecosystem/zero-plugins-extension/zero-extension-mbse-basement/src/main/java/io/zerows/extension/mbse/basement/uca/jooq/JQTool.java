@@ -1,6 +1,5 @@
 package io.zerows.extension.mbse.basement.uca.jooq;
 
-import io.zerows.platform.constant.VValue;
 import io.zerows.component.log.LogOf;
 import io.zerows.component.qr.Pager;
 import io.zerows.component.qr.Sorter;
@@ -8,10 +7,19 @@ import io.zerows.extension.mbse.basement.atom.data.DataEvent;
 import io.zerows.extension.mbse.basement.atom.element.DataTpl;
 import io.zerows.extension.mbse.basement.uca.metadata.AoSentence;
 import io.zerows.extension.mbse.basement.uca.query.Ingest;
-import org.jooq.*;
+import io.zerows.platform.constant.VValue;
+import org.jooq.Condition;
+import org.jooq.DSLContext;
+import org.jooq.OrderField;
 import org.jooq.Record;
+import org.jooq.SelectWhereStep;
+import org.jooq.Table;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.Function;
@@ -64,7 +72,7 @@ class JQTerm {
                                     final Set<String> tables,
                                     final Ingest ingest) {
         final ConcurrentMap<String, String> tableMap = JQToolkit.getMap(tables);
-        final DeleteWhereStep step = this.getSelectAll(event, tables, ingest, tableMap, this.context::deleteFrom);
+        final DeleteWhereStep step = this.getSelectAll(event, tables, ingest, tableMap, this.configure::deleteFrom);
         final Condition condition = JQToolkit.getCondition(event, ingest, tableMap);
         step.where(condition);
         return step;
@@ -79,7 +87,7 @@ class JQTerm {
     DeleteWhereStep getDeleteAll(final DataEvent event,
                                  final Set<String> tables,
                                  final Ingest ingest) {
-        return this.getSelectAll(event, tables, ingest, null, this.context::deleteFrom);
+        return this.getSelectAll(event, tables, ingest, null, this.configure::deleteFrom);
     }*/
 
 

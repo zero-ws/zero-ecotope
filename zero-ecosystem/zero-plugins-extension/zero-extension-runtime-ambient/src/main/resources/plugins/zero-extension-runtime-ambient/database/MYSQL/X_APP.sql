@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS X_APP
      */
     `DOMAIN`     VARCHAR(255) COMMENT '「domain」- 应用程序所在域',
     `PORT`       INTEGER COMMENT '「port」- 应用程序端口号，和SOURCE的端口号区别开',
-    `CONTEXT`    VARCHAR(255) COMMENT '「context」- 应用程序路径',
+    `CONTEXT`    VARCHAR(255) COMMENT '「configure」- 应用程序路径',
     `URL_LOGIN`  VARCHAR(255) COMMENT '「urlLogin」— 应用程序入口页面（登录页）',
     `URL_ADMIN`  VARCHAR(255) COMMENT '「urlAdmin」- 应用程序内置主页（带安全）',
 

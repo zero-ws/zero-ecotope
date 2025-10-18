@@ -9,7 +9,7 @@ import io.zerows.extension.commerce.finance.domain.tables.daos.FSettlementItemDa
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FSettlement;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FSettlementItem;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FTrans;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 
 import java.time.LocalDateTime;

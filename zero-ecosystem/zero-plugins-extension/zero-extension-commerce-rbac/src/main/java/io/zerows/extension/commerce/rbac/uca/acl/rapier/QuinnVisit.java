@@ -11,7 +11,7 @@ import io.zerows.extension.commerce.rbac.domain.tables.daos.SVisitantDao;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SResource;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SView;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SVisitant;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.base.FnBase;

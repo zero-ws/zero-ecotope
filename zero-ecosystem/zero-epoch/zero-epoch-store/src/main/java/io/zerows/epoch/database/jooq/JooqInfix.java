@@ -18,7 +18,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 @Infusion
-@SuppressWarnings("unchecked")
+@Deprecated
 public class JooqInfix implements Infix {
 
     private static final LogO LOGGER = Ut.Log.database(JooqInfix.class);

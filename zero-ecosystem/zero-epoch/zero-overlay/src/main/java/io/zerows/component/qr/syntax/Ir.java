@@ -84,7 +84,7 @@ public interface Ir {
     }
 
     /**
-     * Add `field = get` (key/pair) in current context.
+     * Add `field = get` (key/pair) in current configure.
      *
      * @param field {@link java.lang.String} field that will be added.
      * @param value {@link java.lang.Object} get that will be added.

@@ -12,7 +12,7 @@ import io.zerows.extension.mbse.basement.domain.tables.pojos.MAcc;
 import io.zerows.extension.mbse.basement.util.Ao;
 import io.zerows.platform.enums.modeling.EmAttribute;
 import io.zerows.platform.enums.typed.ChangeFlag;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.specification.app.HArk;
 import io.zerows.specification.modeling.operation.HDao;

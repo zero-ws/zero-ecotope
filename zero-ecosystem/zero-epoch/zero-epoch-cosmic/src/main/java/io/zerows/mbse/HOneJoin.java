@@ -6,7 +6,7 @@ import io.zerows.component.destine.Hymn;
 import io.zerows.epoch.database.jooq.operation.DBJoin;
 import io.zerows.epoch.metadata.KJoin;
 import io.zerows.mbse.metadata.KModule;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.support.Ut;
 
 import java.util.Objects;

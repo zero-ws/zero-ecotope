@@ -9,7 +9,7 @@ import io.zerows.extension.commerce.rbac.domain.tables.pojos.RUserGroup;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SGroup;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SUser;
 import io.zerows.extension.commerce.rbac.eon.AuthKey;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 

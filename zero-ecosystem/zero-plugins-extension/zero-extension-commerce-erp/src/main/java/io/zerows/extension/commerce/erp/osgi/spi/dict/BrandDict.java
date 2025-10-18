@@ -7,7 +7,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.spi.DictionaryPlugin;
 import io.zerows.extension.commerce.erp.domain.tables.daos.EBrandDao;
 import io.zerows.platform.metadata.KDictConfig;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 

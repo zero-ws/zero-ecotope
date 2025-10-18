@@ -10,7 +10,7 @@ import io.zerows.extension.runtime.workflow.domain.tables.daos.WTicketDao;
 import io.zerows.extension.runtime.workflow.domain.tables.pojos.WTicket;
 import io.zerows.extension.runtime.workflow.uca.toolkit.URequest;
 import io.zerows.extension.runtime.workflow.uca.toolkit.UTL;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 
 class SyncTicket extends AbstractSync {

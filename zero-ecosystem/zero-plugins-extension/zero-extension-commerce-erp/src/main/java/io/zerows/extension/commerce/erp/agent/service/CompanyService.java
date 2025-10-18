@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.extension.commerce.erp.domain.tables.daos.ECompanyDao;
 import io.zerows.extension.commerce.erp.domain.tables.daos.EEmployeeDao;
 import io.zerows.extension.commerce.erp.domain.tables.pojos.EEmployee;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 
 import java.util.Objects;

@@ -8,7 +8,7 @@ import io.zerows.extension.runtime.skeleton.osgi.spi.feature.Transit;
 import io.zerows.extension.runtime.tpl.domain.tables.daos.TplMessageDao;
 import io.zerows.extension.runtime.tpl.domain.tables.pojos.TplMessage;
 import io.zerows.extension.runtime.tpl.util.Tl;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 

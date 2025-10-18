@@ -19,7 +19,7 @@ public class ResolverForSolve<T> implements Resolver<T> {
         if (Objects.isNull(this.internalResolver)) {
             throw new _500ServerInternalException("[ R2MO ] Solve 实例为空");
         } else {
-            // Default content from `context`
+            // Default content from `configure`
             final String content = context.body().asString();
             LOGGER.info("( Resolver ) Solve Type: {0}, Content = {1}",
                 this.internalResolver.getClass(), content);

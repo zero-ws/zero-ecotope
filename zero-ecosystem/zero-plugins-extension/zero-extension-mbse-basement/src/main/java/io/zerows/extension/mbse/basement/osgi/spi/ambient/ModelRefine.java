@@ -15,7 +15,7 @@ import io.zerows.extension.mbse.basement.domain.tables.pojos.MModel;
 import io.zerows.extension.mbse.basement.util.Ao;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.enums.typed.ChangeFlag;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;

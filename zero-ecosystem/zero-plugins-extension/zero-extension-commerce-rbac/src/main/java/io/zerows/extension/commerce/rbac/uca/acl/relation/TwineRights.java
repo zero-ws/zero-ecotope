@@ -10,7 +10,7 @@ import io.zerows.extension.commerce.rbac.domain.tables.daos.SUserDao;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SUser;
 import io.zerows.extension.commerce.rbac.eon.AuthKey;
 import io.zerows.extension.runtime.skeleton.secure.Twine;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 

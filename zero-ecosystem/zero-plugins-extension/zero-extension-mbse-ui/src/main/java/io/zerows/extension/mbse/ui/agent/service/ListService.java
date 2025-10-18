@@ -12,7 +12,7 @@ import io.zerows.extension.mbse.ui.domain.tables.daos.UiViewDao;
 import io.zerows.extension.mbse.ui.domain.tables.pojos.UiList;
 import io.zerows.extension.mbse.ui.domain.tables.pojos.UiView;
 import io.zerows.extension.mbse.ui.uca.qbe.QBECache;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;

@@ -15,7 +15,7 @@ import io.zerows.extension.runtime.report.eon.em.EmReport;
 import io.zerows.extension.runtime.report.exception._80703Exception400ReportDimType;
 import io.zerows.extension.runtime.report.uca.feature.RQueryComponent;
 import io.zerows.extension.runtime.report.uca.pull.DataSet;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
 import io.zerows.support.base.FnBase;

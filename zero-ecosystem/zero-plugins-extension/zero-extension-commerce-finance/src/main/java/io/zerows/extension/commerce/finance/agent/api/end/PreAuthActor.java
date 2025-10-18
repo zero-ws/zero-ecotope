@@ -10,7 +10,7 @@ import io.zerows.extension.commerce.finance.domain.tables.daos.FPreAuthorizeDao;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FPreAuthorize;
 import io.zerows.extension.commerce.finance.eon.Addr;
 import io.zerows.extension.commerce.finance.eon.FmConstant;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 

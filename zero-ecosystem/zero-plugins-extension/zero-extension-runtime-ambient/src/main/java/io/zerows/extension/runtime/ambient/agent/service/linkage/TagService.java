@@ -7,7 +7,7 @@ import io.zerows.extension.runtime.ambient.domain.tables.daos.RTagObjectDao;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XTagDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.RTagObject;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XTag;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 

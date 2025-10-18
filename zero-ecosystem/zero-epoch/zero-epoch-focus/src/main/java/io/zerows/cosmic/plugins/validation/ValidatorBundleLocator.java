@@ -83,7 +83,7 @@ public class ValidatorBundleLocator implements ResourceBundleLocator {
         if (rb == null) {
             classLoader = (ClassLoader) run(GetClassLoader.fromContext());
             if (classLoader != null) {
-                rb = this.loadBundle(classLoader, locale, this.bundleName + " not found by thread context classloader");
+                rb = this.loadBundle(classLoader, locale, this.bundleName + " not found by thread configure classloader");
             }
         }
 

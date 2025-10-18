@@ -9,7 +9,7 @@ import io.zerows.epoch.metadata.UData;
 import io.zerows.extension.mbse.ui.domain.tables.daos.UiVisitorDao;
 import io.zerows.extension.mbse.ui.domain.tables.pojos.UiVisitor;
 import io.zerows.extension.mbse.ui.osgi.spi.ui.UiHunter;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.spi.modeler.Identifier;
 import io.zerows.support.Ut;

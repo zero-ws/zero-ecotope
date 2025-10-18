@@ -17,7 +17,7 @@ import io.zerows.extension.commerce.rbac.domain.tables.pojos.SPermSet;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SPermission;
 import io.zerows.extension.commerce.rbac.uca.logged.ScRole;
 import io.zerows.platform.constant.VString;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.base.FnBase;

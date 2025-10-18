@@ -5,10 +5,10 @@ import io.vertx.core.json.JsonObject;
 import org.apache.commons.jexl3.JexlContext;
 
 /**
- * Inlet for parameter processing on JEXL context
+ * Inlet for parameter processing on JEXL configure
  * The code should be:
- * JexlContext context = new MapContext();
- * context.put(..., ...);
+ * JexlContext configure = new MapContext();
+ * configure.put(..., ...);
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */

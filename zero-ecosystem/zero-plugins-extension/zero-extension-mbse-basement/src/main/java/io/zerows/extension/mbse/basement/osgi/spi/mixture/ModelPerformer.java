@@ -11,7 +11,7 @@ import io.zerows.extension.mbse.basement.domain.tables.pojos.MModel;
 import io.zerows.extension.mbse.basement.uca.phantom.AoModeler;
 import io.zerows.extension.mbse.basement.util.Ao;
 import io.zerows.mbse.exception._80510Exception404ModelNotFound;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;

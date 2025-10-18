@@ -11,7 +11,7 @@ import io.zerows.extension.mbse.modulat.domain.tables.daos.BBlockDao;
 import io.zerows.extension.mbse.modulat.domain.tables.pojos.BBag;
 import io.zerows.extension.mbse.modulat.domain.tables.pojos.BBlock;
 import io.zerows.extension.mbse.modulat.uca.configure.Combiner;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;

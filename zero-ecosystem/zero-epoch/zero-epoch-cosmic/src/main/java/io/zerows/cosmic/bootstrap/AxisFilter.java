@@ -55,7 +55,7 @@ public class AxisFilter implements Axis {
             final Object proxy = event.getProxy();
 
             try {
-                // Init context;
+                // Init configure;
                 Ut.invoke(proxy, "init", context);
                 // Extract Request/Response
                 final HttpServerRequest request = context.request();

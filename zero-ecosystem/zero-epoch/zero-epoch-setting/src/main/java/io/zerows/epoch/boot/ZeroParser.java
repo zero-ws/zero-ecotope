@@ -174,7 +174,7 @@ class ZeroParser {
             return defaultValue;
         }
 
-        // 3. 如果不是 safeOnly 模式，且提供了 context，则查 context
+        // 3. 如果不是 safeOnly 模式，且提供了 configure，则查 configure
         if (!safeOnly && context != null) {
             value = context.get(key);
             if (value != null) {

@@ -8,7 +8,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.extension.mbse.ui.domain.tables.daos.UiFieldDao;
 import io.zerows.extension.mbse.ui.domain.tables.pojos.UiField;
 import io.zerows.extension.mbse.ui.eon.em.RowType;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;

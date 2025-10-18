@@ -13,7 +13,7 @@ import io.zerows.extension.runtime.ambient.domain.tables.pojos.XAttachment;
 import io.zerows.extension.runtime.skeleton.exception._81002Exception400FilenameInvalid;
 import io.zerows.extension.runtime.skeleton.osgi.spi.business.ExIo;
 import io.zerows.extension.runtime.skeleton.osgi.spi.feature.Attachment;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import jakarta.inject.Inject;

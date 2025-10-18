@@ -7,7 +7,7 @@ import io.zerows.epoch.database.jooq.util.JqAnalyzer;
 import io.zerows.epoch.metadata.KJoin;
 import io.zerows.mbse.metadata.KClass;
 import io.zerows.mbse.metadata.KModule;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.support.Ut;
 
 import java.util.Objects;

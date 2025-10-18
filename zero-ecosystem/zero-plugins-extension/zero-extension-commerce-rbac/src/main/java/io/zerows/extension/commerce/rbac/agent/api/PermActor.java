@@ -13,7 +13,7 @@ import io.zerows.extension.commerce.rbac.agent.service.business.RightsStub;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.RRolePermDao;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SPermSet;
 import io.zerows.extension.commerce.rbac.eon.Addr;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import jakarta.inject.Inject;

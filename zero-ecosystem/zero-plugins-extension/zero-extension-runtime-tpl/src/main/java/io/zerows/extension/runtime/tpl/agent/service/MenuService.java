@@ -7,7 +7,7 @@ import io.zerows.epoch.database.jooq.operation.DBJooq;
 import io.zerows.extension.runtime.tpl.domain.tables.daos.MyMenuDao;
 import io.zerows.extension.runtime.tpl.domain.tables.pojos.MyMenu;
 import io.zerows.platform.constant.VString;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 
 import java.util.List;

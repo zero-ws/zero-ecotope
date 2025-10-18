@@ -10,7 +10,7 @@ import io.zerows.extension.runtime.ambient.bootstrap.AtConfig;
 import io.zerows.extension.runtime.ambient.bootstrap.AtPin;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XCategoryDao;
 import io.zerows.extension.runtime.skeleton.osgi.spi.feature.Arbor;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;

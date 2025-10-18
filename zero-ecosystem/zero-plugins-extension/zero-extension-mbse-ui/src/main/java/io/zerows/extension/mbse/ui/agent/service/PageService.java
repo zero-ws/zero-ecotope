@@ -8,7 +8,7 @@ import io.zerows.extension.mbse.ui.domain.tables.daos.UiLayoutDao;
 import io.zerows.extension.mbse.ui.domain.tables.daos.UiPageDao;
 import io.zerows.extension.mbse.ui.domain.tables.pojos.UiPage;
 import io.zerows.extension.mbse.ui.eon.UiConstant;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;

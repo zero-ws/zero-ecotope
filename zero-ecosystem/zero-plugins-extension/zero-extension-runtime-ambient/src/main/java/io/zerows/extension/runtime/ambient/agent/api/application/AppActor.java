@@ -12,7 +12,7 @@ import io.zerows.extension.runtime.ambient.agent.service.application.AppStub;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XNoticeDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XNotice;
 import io.zerows.extension.runtime.ambient.eon.Addr;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import jakarta.inject.Inject;
 

@@ -37,7 +37,7 @@ public class JQEngine {
 
     public static JQEngine create(final DSLContext context) {
         return CC_ENGINE.pick(() -> new JQEngine(context), String.valueOf(context.hashCode()));
-        // return Fn.po?lThread(AoCache.POOL_ENGINES, () -> new JQEngine(context), String.valueOf(context.hashCode()));
+        // return Fn.po?lThread(AoCache.POOL_ENGINES, () -> new JQEngine(configure), String.valueOf(configure.hashCode()));
     }
 
     public JQEngine bind(final AoSentence sentence) {

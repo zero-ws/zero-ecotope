@@ -13,7 +13,7 @@ import io.zerows.extension.runtime.integration.uca.updater.StoreMigration;
 import io.zerows.extension.runtime.integration.uca.updater.StoreRename;
 import io.zerows.extension.runtime.integration.uca.updater.StoreUp;
 import io.zerows.extension.runtime.integration.util.Is;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 

@@ -10,7 +10,7 @@ import io.zerows.extension.runtime.ambient.domain.tables.daos.XAppDao;
 import io.zerows.extension.runtime.ambient.util.At;
 import io.zerows.extension.runtime.skeleton.osgi.spi.extension.Init;
 import io.zerows.extension.runtime.skeleton.osgi.spi.extension.Prerequisite;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;

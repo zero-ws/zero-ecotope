@@ -28,7 +28,7 @@ public class AimSync extends AimBase implements Aim<RoutingContext> {
                 final Object result = this.invoke(event, arguments);
 
                 // 3. Resource model building
-                // final Envelop data = Flower.continuous(context, result);
+                // final Envelop data = Flower.continuous(configure, result);
                 /*
                  * Data handler to process Flower next result here.
                  */

@@ -21,7 +21,7 @@ import io.zerows.specification.vital.HOI;
  *               - DYNAMIC：  动态数据库，底层对接 X_SOURCE 表结构中定义的数据库
  *               - EXTENSION：（保留）自定义扩展数据库
  *     2. 关联下层：{@see StoreServer} 集合 x N
- *                {@see StoreRouter} 集合 x N ( context + router )
+ *                {@see StoreRouter} 集合 x N ( configure + router )
  * </code></pre>
  *
  * @author lang : 2024-05-03

@@ -13,7 +13,7 @@ import io.zerows.extension.runtime.workflow.domain.tables.pojos.WTicket;
 import io.zerows.extension.runtime.workflow.domain.tables.pojos.WTodo;
 import io.zerows.extension.runtime.workflow.uca.ticket.Sync;
 import io.zerows.platform.metadata.KRef;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 

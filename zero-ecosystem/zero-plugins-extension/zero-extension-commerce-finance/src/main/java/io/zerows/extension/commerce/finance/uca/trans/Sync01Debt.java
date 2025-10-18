@@ -8,7 +8,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.database.jooq.operation.DBJooq;
 import io.zerows.extension.commerce.finance.domain.tables.daos.FDebtDao;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FDebt;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 

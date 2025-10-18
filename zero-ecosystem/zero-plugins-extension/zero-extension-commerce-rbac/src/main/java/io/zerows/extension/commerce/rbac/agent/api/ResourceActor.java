@@ -8,7 +8,7 @@ import io.zerows.extension.commerce.rbac.agent.service.business.ResourceStub;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.SActionDao;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.SResourceDao;
 import io.zerows.extension.commerce.rbac.eon.Addr;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import jakarta.inject.Inject;
 
 import static io.zerows.extension.commerce.rbac.util.Sc.LOG;

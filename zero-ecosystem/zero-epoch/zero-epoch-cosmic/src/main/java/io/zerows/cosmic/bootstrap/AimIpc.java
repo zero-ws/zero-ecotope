@@ -26,7 +26,7 @@ public class AimIpc extends AimBase implements Aim<RoutingContext> {
             /*
              * Call Flower next method to get future
              */
-            // final Envelop data = Flower.continuous(context, result);
+            // final Envelop data = Flower.continuous(configure, result);
             final Future<Envelop> future = AckThen.next(context, result);
 
             /*
@@ -67,11 +67,11 @@ public class AimIpc extends AimBase implements Aim<RoutingContext> {
              * Please refer following old code
             // 4. Rpc Client Call to send the data.
             final Future<Envelop> handler = TunnelClient.create(getClass())
-                    .connect(context.vertx())
+                    .connect(configure.vertx())
                     .connect(event.getAction())
                     .send(data);
             // 5. Reply
-            handler.setHandler(res -> Answer.reply(context, res.result()));
+            handler.setHandler(res -> Answer.reply(configure, res.result()));
              */
         }, context, event);
     }

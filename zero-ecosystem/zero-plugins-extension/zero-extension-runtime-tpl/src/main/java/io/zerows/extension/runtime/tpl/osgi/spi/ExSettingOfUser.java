@@ -6,7 +6,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.extension.runtime.skeleton.eon.em.OwnerType;
 import io.zerows.extension.runtime.skeleton.osgi.spi.business.ExSetting;
 import io.zerows.extension.runtime.tpl.domain.tables.daos.MyNotifyDao;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 
 /**

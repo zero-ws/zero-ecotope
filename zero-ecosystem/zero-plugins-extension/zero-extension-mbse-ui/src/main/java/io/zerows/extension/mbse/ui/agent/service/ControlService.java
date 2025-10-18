@@ -12,7 +12,7 @@ import io.zerows.extension.mbse.ui.domain.tables.pojos.UiControl;
 import io.zerows.extension.mbse.ui.domain.tables.pojos.UiVisitor;
 import io.zerows.extension.mbse.ui.eon.em.ControlType;
 import io.zerows.extension.mbse.ui.osgi.spi.ui.UiHunter;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;

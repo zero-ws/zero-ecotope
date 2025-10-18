@@ -17,7 +17,7 @@ import io.zerows.extension.runtime.skeleton.osgi.spi.business.ExOwner;
 import io.zerows.extension.runtime.skeleton.secure.Twine;
 import io.zerows.mbse.metadata.KQr;
 import io.zerows.platform.metadata.KRef;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;

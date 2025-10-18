@@ -2,7 +2,7 @@ package io.zerows.extension.commerce.finance.uca.trans;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.extension.commerce.finance.domain.tables.daos.FTransDao;

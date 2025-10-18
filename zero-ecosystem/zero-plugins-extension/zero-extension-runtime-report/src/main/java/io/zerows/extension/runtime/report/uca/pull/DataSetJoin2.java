@@ -8,7 +8,7 @@ import io.zerows.cortex.extension.HExtension;
 import io.zerows.epoch.basicore.MDConnect;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.database.jooq.operation.DBJoin;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 

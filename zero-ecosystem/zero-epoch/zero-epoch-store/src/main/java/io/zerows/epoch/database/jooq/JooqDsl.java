@@ -25,12 +25,13 @@ import java.util.concurrent.Callable;
  * The instance counter is as following:
  *
  * 1. 1 vertx instance
- * 2. 1 configuration instance ( 1 context instance )
+ * 2. 1 configuration instance ( 1 configure instance )
  * 3. n clazz = Dao instances
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 @SuppressWarnings("all")
+@Deprecated
 public class JooqDsl {
     private static final LogO LOGGER = Ut.Log.database(JooqDsl.class);
 

@@ -16,7 +16,7 @@ import io.zerows.extension.runtime.ambient.domain.tables.pojos.XActivityChange;
 import io.zerows.extension.runtime.ambient.eon.em.ActivityStatus;
 import io.zerows.platform.enums.modeling.EmAttribute;
 import io.zerows.platform.enums.typed.ChangeFlag;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.specification.modeling.HAttribute;
 import io.zerows.support.Ut;

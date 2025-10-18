@@ -53,7 +53,7 @@ public class DataConnection implements AoConnection {
 
     @Override
     public DSLContext getDSL() {
-        return DBSActor.ofDSL(this.database);
+        return DBSActor.ofContext(this.database);
     }
 
     @Override

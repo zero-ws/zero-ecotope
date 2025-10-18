@@ -1,14 +1,40 @@
 package io.zerows.plugins.websocket.stomp.socket;
 
-import io.vertx.core.*;
+import io.vertx.core.AsyncResult;
+import io.vertx.core.Context;
+import io.vertx.core.Future;
+import io.vertx.core.Handler;
+import io.vertx.core.Vertx;
 import io.vertx.core.internal.ContextInternal;
 import io.vertx.core.internal.PromiseInternal;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.shareddata.LocalMap;
 import io.vertx.ext.auth.User;
 import io.vertx.ext.auth.authentication.AuthenticationProvider;
-import io.vertx.ext.stomp.*;
-import io.vertx.ext.stomp.impl.*;
+import io.vertx.ext.stomp.Acknowledgement;
+import io.vertx.ext.stomp.BridgeOptions;
+import io.vertx.ext.stomp.DefaultAbortHandler;
+import io.vertx.ext.stomp.DefaultAckHandler;
+import io.vertx.ext.stomp.DefaultBeginHandler;
+import io.vertx.ext.stomp.DefaultCommitHandler;
+import io.vertx.ext.stomp.DefaultConnectHandler;
+import io.vertx.ext.stomp.DefaultNackHandler;
+import io.vertx.ext.stomp.DefaultSendHandler;
+import io.vertx.ext.stomp.DefaultSubscribeHandler;
+import io.vertx.ext.stomp.DefaultUnsubscribeHandler;
+import io.vertx.ext.stomp.Destination;
+import io.vertx.ext.stomp.DestinationFactory;
+import io.vertx.ext.stomp.Frame;
+import io.vertx.ext.stomp.Frames;
+import io.vertx.ext.stomp.ServerFrame;
+import io.vertx.ext.stomp.StompServer;
+import io.vertx.ext.stomp.StompServerConnection;
+import io.vertx.ext.stomp.StompServerHandler;
+import io.vertx.ext.stomp.impl.AcknowledgementImpl;
+import io.vertx.ext.stomp.impl.DefaultStompHandler;
+import io.vertx.ext.stomp.impl.RemindDestination;
+import io.vertx.ext.stomp.impl.ServerFrameImpl;
+import io.vertx.ext.stomp.impl.Transactions;
 import io.zerows.component.log.LogOf;
 
 import java.util.ArrayList;
@@ -381,7 +407,7 @@ public class ServerStompHandler implements ServerWsHandler {
         }
 
 
-        //        this.context.runOnContext(v -> auth.authenticate(
+        //        this.configure.runOnContext(v -> auth.authenticate(
         //            new JsonObject().put("username", login).put("password", passcode),
         //            this.onAuthenticationOut(connection, handler))
         //        );
@@ -539,7 +565,7 @@ public class ServerStompHandler implements ServerWsHandler {
             this.context.runOnContext(v -> handler.handle(Future.succeededFuture(false)));
         }
 
-        //        this.context.runOnContext(v -> this.authProvider.authenticate(
+        //        this.configure.runOnContext(v -> this.authProvider.authenticate(
         //            principal,
         //            this.onAuthenticationOut(connection, handler)
         //        ));

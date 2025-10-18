@@ -13,7 +13,7 @@ import io.zerows.extension.runtime.ambient.util.At;
 import io.zerows.extension.runtime.skeleton.osgi.spi.business.ExIo;
 import io.zerows.extension.runtime.skeleton.osgi.spi.feature.Attachment;
 import io.zerows.platform.enums.typed.ChangeFlag;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;

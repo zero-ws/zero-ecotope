@@ -16,7 +16,7 @@ import io.zerows.platform.metadata.RQuery;
 import io.zerows.platform.metadata.RQuote;
 import io.zerows.platform.metadata.RReference;
 import io.zerows.platform.metadata.RResult;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.app.HArk;

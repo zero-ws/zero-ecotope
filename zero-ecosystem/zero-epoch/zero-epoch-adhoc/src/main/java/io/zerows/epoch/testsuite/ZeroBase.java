@@ -46,7 +46,7 @@ public abstract class ZeroBase extends EpicBase {
     protected final static Vertx VERTX = Vertx.vertx(OPTIONS);
 
     /**
-     * Default testing context in `vertx-unit` with `RunTestOnContext` here.
+     * Default testing configure in `vertx-unit` with `RunTestOnContext` here.
      */
     @Rule
     public final RunTestOnContext rule = new RunTestOnContext(OPTIONS);

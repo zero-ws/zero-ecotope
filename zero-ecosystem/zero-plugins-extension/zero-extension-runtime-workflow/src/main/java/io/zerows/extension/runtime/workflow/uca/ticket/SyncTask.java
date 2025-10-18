@@ -11,7 +11,7 @@ import io.zerows.extension.runtime.workflow.domain.tables.pojos.WTicket;
 import io.zerows.extension.runtime.workflow.domain.tables.pojos.WTodo;
 import io.zerows.extension.runtime.workflow.uca.toolkit.URequest;
 import io.zerows.extension.runtime.workflow.uca.toolkit.UTL;
-import io.zerows.epoch.database.DB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 
 public class SyncTask extends AbstractSync {
