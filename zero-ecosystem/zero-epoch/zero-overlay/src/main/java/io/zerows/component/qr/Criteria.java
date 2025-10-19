@@ -23,9 +23,7 @@ import java.util.function.BiConsumer;
 public class Criteria implements Serializable {
     /**
      * The mode of current criteria condition.
-     *
      * Here are two modes:
-     *
      * 1. LINEAR - The linear condition.
      * 2. TREE - The tree condition ( Complex query tree data structure ).
      */
