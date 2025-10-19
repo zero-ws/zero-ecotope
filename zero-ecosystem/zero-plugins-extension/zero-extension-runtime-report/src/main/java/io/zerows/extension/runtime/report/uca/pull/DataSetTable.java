@@ -6,9 +6,9 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.cortex.extension.HExtension;
 import io.zerows.epoch.basicore.MDConnect;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.DBJooq;
-import io.zerows.extension.runtime.report.domain.tables.pojos.KpDataSet;
+import io.zerows.epoch.database.jooq.operation.ADB;
 import io.zerows.epoch.store.jooq.DB;
+import io.zerows.extension.runtime.report.domain.tables.pojos.KpDataSet;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -56,7 +56,7 @@ class DataSetTable extends AbstractDataSet {
         this.logger().info("Report processing for table = {}, Cond: {}",
             this.connect.getTable(), parameters.encode());
         // 提取 UxJooq
-        final DBJooq jq = DB.bridge(this.connect);
+        final ADB jq = DB.bridge(this.connect);
         if (parameters.getBoolean("") != null) {
             if (!parameters.getBoolean("")) {
                 return jq.fetchJOrAsync(parameters).compose(data -> this.loadChildren(data, this.children));

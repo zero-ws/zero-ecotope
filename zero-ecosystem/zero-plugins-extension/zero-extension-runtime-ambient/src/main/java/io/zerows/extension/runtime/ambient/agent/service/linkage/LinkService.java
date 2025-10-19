@@ -4,11 +4,11 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.DBJooq;
+import io.zerows.epoch.database.jooq.operation.ADB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XLinkageDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XLinkage;
 import io.zerows.platform.constant.VString;
-import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -68,7 +68,7 @@ public class LinkService implements LinkStub {
                 queueA.add(Ux.fromJson(json, XLinkage.class));
             }
         });
-        final DBJooq jooq = DB.on(XLinkageDao.class);
+        final ADB jooq = DB.on(XLinkageDao.class);
         final List<Future<List<XLinkage>>> futures = new ArrayList<>();
         futures.add(jooq.insertAsync(queueA));
         futures.add(jooq.updateAsync(queueU));

@@ -4,7 +4,7 @@ import io.r2mo.typed.common.Kv;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.database.jooq.operation.DBJooq;
+import io.zerows.epoch.database.jooq.operation.ADB;
 import io.zerows.epoch.metadata.KTransform;
 import io.zerows.epoch.metadata.KTree;
 import io.zerows.extension.runtime.crud.bootstrap.IxPin;
@@ -92,7 +92,7 @@ class TreeTran implements Tran {
         criteria.put(keyField + ",i", values);
         criteria.put(VString.EMPTY, Boolean.TRUE);
         LOG.Web.info(this.getClass(), "Tree Transform Condition: {0}", criteria.encode());
-        final DBJooq jooq = IxPin.jooq(in);
+        final ADB jooq = IxPin.jooq(in);
         return jooq.fetchJAsync(criteria).compose(source -> Ux.future(this.tree(source, keyValue)));
     }
 

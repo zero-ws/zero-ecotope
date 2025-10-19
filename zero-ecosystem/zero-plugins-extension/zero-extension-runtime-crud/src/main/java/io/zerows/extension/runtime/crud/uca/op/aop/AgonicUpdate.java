@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.DBJooq;
+import io.zerows.epoch.database.jooq.operation.ADB;
 import io.zerows.epoch.metadata.KField;
 import io.zerows.extension.runtime.crud.bootstrap.IxPin;
 import io.zerows.extension.runtime.crud.eon.em.QrType;
@@ -69,7 +69,7 @@ class AgonicUpdate implements Agonic {
      * @return {@link Future} 异步记录结果
      */
     private Future<JsonObject> uniqueJAsync(final JsonObject inputJ, final IxMod in) {
-        final DBJooq jooq = IxPin.jooq(in);
+        final ADB jooq = IxPin.jooq(in);
         /*
          * 此处特殊方法调用，peekJ 会执行优先方法调用，第一个方法返回 null 则继续执行，
          * 若是 JsonObject，则执行 Ut.isNil 的持续判断，否则直接返回第一个方法的结果。
@@ -109,7 +109,7 @@ class AgonicUpdate implements Agonic {
      *     2. 根据主键读取单记录
      *     3. 根据唯一键读取单记录
      * </code></pre>
-     * 方法内置调用的是 {@link DBJooq#fetchJAsync}，返回值内置类型为 {@link JsonArray}
+     * 方法内置调用的是 {@link ADB#fetchJAsync}，返回值内置类型为 {@link JsonArray}
      *
      * @param inputJ 输入的数据信息（包含查询条件）
      * @param in     {@link IxMod} 模型信息
@@ -119,7 +119,7 @@ class AgonicUpdate implements Agonic {
     private Future<JsonArray> uniqueAAsync(final JsonObject inputJ, final IxMod in) {
         final JsonObject query = inputJ.getJsonObject(VName.KEY_CRITERIA);
         LOG.Filter.info(this.getClass(), "( Mass Update ) Condition: {0}", query);
-        final DBJooq jooq = IxPin.jooq(in);
+        final ADB jooq = IxPin.jooq(in);
         return jooq.fetchJAsync(query);
     }
 

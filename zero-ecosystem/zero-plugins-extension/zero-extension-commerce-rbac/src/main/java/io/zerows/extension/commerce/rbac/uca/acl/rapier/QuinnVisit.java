@@ -4,14 +4,14 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.DBJooq;
+import io.zerows.epoch.database.jooq.operation.ADB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.commerce.rbac.atom.ScOwner;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.SViewDao;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.SVisitantDao;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SResource;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SView;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SVisitant;
-import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.base.FnBase;
@@ -77,7 +77,7 @@ public class QuinnVisit implements Quinn {
     private Future<List<SVisitant>> saveVisitant(final SView viewInput, final JsonArray visitData) {
         // 同一个SView中的 ADD / SAVE
         final ConcurrentMap<String, JsonObject> seekMap = Ut.elementMap(visitData, KName.Rbac.SEEK_KEY);
-        final DBJooq jq = DB.on(SVisitantDao.class);
+        final ADB jq = DB.on(SVisitantDao.class);
         return jq.<SVisitant>fetchAsync(KName.VIEW_ID, viewInput.getKey()).compose(visitors -> {
             // If existing seekKey
             final ConcurrentMap<String, SVisitant> visitorM = Ut.elementMap(visitors, SVisitant::getSeekKey);

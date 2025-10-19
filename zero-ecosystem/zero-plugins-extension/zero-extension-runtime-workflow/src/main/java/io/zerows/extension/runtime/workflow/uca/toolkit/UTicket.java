@@ -3,7 +3,8 @@ package io.zerows.extension.runtime.workflow.uca.toolkit;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.DBJooq;
+import io.zerows.epoch.database.jooq.operation.ADB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.runtime.workflow.atom.configuration.MetaInstance;
 import io.zerows.extension.runtime.workflow.atom.runtime.WRecord;
 import io.zerows.extension.runtime.workflow.atom.runtime.WTransition;
@@ -13,7 +14,6 @@ import io.zerows.extension.runtime.workflow.domain.tables.pojos.WTicket;
 import io.zerows.extension.runtime.workflow.domain.tables.pojos.WTodo;
 import io.zerows.extension.runtime.workflow.uca.ticket.Sync;
 import io.zerows.platform.metadata.KRef;
-import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 
@@ -103,7 +103,7 @@ public class UTicket {
          */
         final JsonObject ticketJson = params.copy();
         final String tKey = ticketJson.getString(KName.Flow.TRACE_ID);
-        final DBJooq tJq = DB.on(WTicketDao.class);
+        final ADB tJq = DB.on(WTicketDao.class);
         return tJq.<WTicket>fetchByIdAsync(tKey).compose(ticket -> {
             if (Objects.isNull(ticket)) {
                 return this.insertAsync(params, wTransition);

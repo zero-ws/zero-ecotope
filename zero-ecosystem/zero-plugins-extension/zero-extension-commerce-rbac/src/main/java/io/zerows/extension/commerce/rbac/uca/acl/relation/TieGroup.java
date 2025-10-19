@@ -4,14 +4,14 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.DBJooq;
+import io.zerows.epoch.database.jooq.operation.ADB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.RUserGroupDao;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.RUserGroup;
 import io.zerows.extension.commerce.rbac.eon.AuthKey;
 import io.zerows.extension.commerce.rbac.eon.AuthMsg;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
 import io.zerows.extension.runtime.skeleton.secure.Tie;
-import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -53,7 +53,7 @@ public class TieGroup implements Tie<String, JsonArray> {
         final JsonObject conditionJ = new JsonObject()
             .put(AuthKey.F_USER_ID, userKey);
         /* Remove & Insert */
-        final DBJooq jq = DB.on(RUserGroupDao.class);
+        final ADB jq = DB.on(RUserGroupDao.class);
         /* Delete Related Groups */
         return jq.deleteByAsync(conditionJ).compose(nil -> {
             /* Insert Related Groups */

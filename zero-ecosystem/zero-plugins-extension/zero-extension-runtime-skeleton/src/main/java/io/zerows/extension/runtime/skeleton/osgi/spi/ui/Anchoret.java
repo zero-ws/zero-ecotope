@@ -1,25 +1,25 @@
 package io.zerows.extension.runtime.skeleton.osgi.spi.ui;
 
 import io.zerows.component.log.LogOf;
-import io.zerows.epoch.database.jooq.operation.DBJooq;
+import io.zerows.epoch.database.jooq.operation.ADB;
 
 /*
  * All sub-class for extension of Jooq type
  */
 public abstract class Anchoret<T> {
 
-    private transient DBJooq jooq;
+    private transient ADB jooq;
 
     /*
      * This method is for sub-class only
      */
     @SuppressWarnings("unchecked")
-    public T on(final DBJooq jooq) {
+    public T on(final ADB jooq) {
         this.jooq = jooq;
         return (T) this;
     }
 
-    protected DBJooq dao() {
+    protected ADB dao() {
         return this.jooq;
     }
 

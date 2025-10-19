@@ -7,9 +7,9 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.cosmic.plugins.cache.Rapid;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
-import io.zerows.epoch.database.jooq.operation.DBJooq;
-import io.zerows.platform.metadata.KDictConfig;
+import io.zerows.epoch.database.jooq.operation.ADB;
 import io.zerows.epoch.store.jooq.DB;
+import io.zerows.platform.metadata.KDictConfig;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -23,7 +23,7 @@ import java.util.concurrent.ConcurrentMap;
 public class DpmDao implements Dpm {
     @Override
     public Future<ConcurrentMap<String, JsonArray>> fetchAsync(final KDictConfig.Source source, final MultiMap params) {
-        final DBJooq jooq = this.dao(source);
+        final ADB jooq = this.dao(source);
         if (Objects.isNull(jooq) || Ut.isNil(source.getKey())) {
             return Ux.future(new ConcurrentHashMap<>());
         } else {
@@ -39,7 +39,7 @@ public class DpmDao implements Dpm {
 
     @Override
     public ConcurrentMap<String, JsonArray> fetch(final KDictConfig.Source source, final MultiMap params) {
-        final DBJooq jooq = this.dao(source);
+        final ADB jooq = this.dao(source);
         if (Objects.isNull(jooq) || Ut.isNil(source.getKey())) {
             return new ConcurrentHashMap<>();
         }
@@ -55,14 +55,14 @@ public class DpmDao implements Dpm {
         return condition;
     }
 
-    private DBJooq dao(final KDictConfig.Source source) {
+    private ADB dao(final KDictConfig.Source source) {
         final ConcurrentMap<String, JsonArray> uniqueMap = new ConcurrentHashMap<>();
         final Class<?> daoCls = source.getComponent();
         if (Objects.isNull(daoCls) || Ut.isNil(source.getKey())) {
             return null;
         } else {
             final JsonObject config = source.getPluginConfig();
-            final DBJooq jooq = DB.on(daoCls);
+            final ADB jooq = DB.on(daoCls);
             if (config.containsKey("pojo")) {
                 jooq.on(config.getString("pojo"));
             }

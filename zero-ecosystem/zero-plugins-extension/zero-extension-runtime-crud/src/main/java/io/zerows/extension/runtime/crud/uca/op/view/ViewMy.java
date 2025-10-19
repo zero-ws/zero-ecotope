@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.cosmic.plugins.cache.Rapid;
 import io.zerows.epoch.constant.KWeb;
-import io.zerows.epoch.database.jooq.operation.DBJooq;
+import io.zerows.epoch.database.jooq.operation.ADB;
 import io.zerows.extension.runtime.crud.bootstrap.IxPin;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 import io.zerows.extension.runtime.crud.uca.input.Pre;
@@ -35,7 +35,7 @@ class ViewMy implements Agonic {
 
     @Override
     public Future<JsonArray> runJAAsync(final JsonObject input, final IxMod in) {
-        final DBJooq jooq = IxPin.jooq(in);
+        final ADB jooq = IxPin.jooq(in);
         return this.fetchResources(input, jooq, in)
             /* view has get, ignored, */
             /*
@@ -74,7 +74,7 @@ class ViewMy implements Agonic {
      *
      * @return {@link Future}
      */
-    private Future<JsonObject> fetchResources(final JsonObject input, final DBJooq jooq, final IxMod in) {
+    private Future<JsonObject> fetchResources(final JsonObject input, final ADB jooq, final IxMod in) {
         final String key = in.cached() + ":" + input.hashCode();
         return Rapid.<String, JsonObject>object(KWeb.CACHE.RESOURCE, Agonic.EXPIRED).cached(key,
             () -> Ux.channel(Seeker.class, JsonObject::new, seeker -> seeker.on(jooq).fetchImpact(input)));
@@ -90,7 +90,7 @@ class ViewMy implements Agonic {
      *
      * @return {@link Future}
      */
-    private Future<JsonArray> fetchViews(final JsonObject params, final DBJooq jooq, final IxMod in) {
+    private Future<JsonArray> fetchViews(final JsonObject params, final ADB jooq, final IxMod in) {
         /*
          * 旧代码：
              final String key = in.cacheKey() + ":" + params.hashCode();

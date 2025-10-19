@@ -6,20 +6,20 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.basicore.MDConnect;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.database.cp.DataPool;
-import io.zerows.epoch.database.jooq.operation.DBJoin;
-import io.zerows.epoch.database.jooq.operation.DBJooq;
+import io.zerows.epoch.database.jooq.operation.ADB;
+import io.zerows.epoch.database.jooq.operation.ADJ;
 import io.zerows.platform.constant.VValue;
 import io.zerows.support.Ut;
 
 import java.util.Objects;
 
 public class DB {
-    public static DBJooq on(final Class<?> clazz) {
-        return DBJooq.of(clazz);
+    public static ADB on(final Class<?> clazz) {
+        return ADB.of(clazz);
     }
 
-    public static DBJooq on(final Class<?> clazz, final String name) {
-        return DBJooq.of(clazz, name);
+    public static ADB on(final Class<?> clazz, final String name) {
+        return ADB.of(clazz, name);
     }
 
     /**
@@ -29,10 +29,10 @@ public class DB {
      *
      * @return 返回引用对象
      */
-    public static DBJooq bridge(final MDConnect connect) {
+    public static ADB bridge(final MDConnect connect) {
         final Class<?> daoCls = connect.getDao();
         Objects.requireNonNull(daoCls);
-        return DBJooq.of(daoCls).on(connect.getPojoFile());
+        return ADB.of(daoCls).on(connect.getPojoFile());
     }
 
     // ------------------------ 下边是 Join 部分 -------------------------
@@ -46,14 +46,14 @@ public class DB {
      * @return UxJooq reference that has been initialized
      */
     @Deprecated
-    public static DBJooq on(final Class<?> clazz, final DataPool pool) {
-        return DBJooq.of(clazz, pool);
+    public static ADB on(final Class<?> clazz, final DataPool pool) {
+        return ADB.of(clazz, pool);
     }
 
 
-    public static DBJoin bridge(final MDConnect active, final MDConnect standBy,
-                                final Kv<String, String> fieldJoin, final JsonObject aliasJ) {
-        final DBJoin join = DBJoin.of(null);
+    public static ADJ bridge(final MDConnect active, final MDConnect standBy,
+                             final Kv<String, String> fieldJoin, final JsonObject aliasJ) {
+        final ADJ join = ADJ.of(null);
         final String pojoActive = active.getPojoFile();
         if (Ut.isNotNil(pojoActive)) {
             join.pojo(active.getDao(), pojoActive);
@@ -70,8 +70,8 @@ public class DB {
         return bridgeAlias(join, active, standBy, aliasJ);
     }
 
-    public static DBJoin bridge(final MDConnect active, final MDConnect standBy,
-                                final Kv<String, String> fieldJoin) {
+    public static ADJ bridge(final MDConnect active, final MDConnect standBy,
+                             final Kv<String, String> fieldJoin) {
         return bridge(active, standBy, fieldJoin, null);
     }
 
@@ -95,7 +95,7 @@ public class DB {
      * @param standBy
      * @param aliasJ
      */
-    public static DBJoin bridgeAlias(final DBJoin join, final MDConnect active, final MDConnect standBy, final JsonObject aliasJ) {
+    public static ADJ bridgeAlias(final ADJ join, final MDConnect active, final MDConnect standBy, final JsonObject aliasJ) {
         if (Ut.isNil(aliasJ)) {
             return join;
         }
@@ -109,28 +109,28 @@ public class DB {
                 } else if (tableName.equals(standBy.getTable())) {
                     daoCls = standBy.getDao();
                 } else {
-                    Ut.Log.database(DBJoin.class).error("( Join ) Please check your table name: {}", tableName);
+                    Ut.Log.database(ADJ.class).error("( Join ) Please check your table name: {}", tableName);
                     daoCls = null;
                 }
                 final String fieldKey = fields.getString(VValue.IDX);
                 final String fieldJoin = fields.getString(VValue.ONE);
                 join.alias(daoCls, fieldKey, fieldJoin);
             } else {
-                Ut.Log.database(DBJoin.class).error("( Join ) Please check your alias configuration: {}", fields);
+                Ut.Log.database(ADJ.class).error("( Join ) Please check your alias configuration: {}", fields);
             }
         });
         return join;
     }
 
-    public static DBJoin join(final String configFile) {
-        return DBJoin.of(configFile);
+    public static ADJ join(final String configFile) {
+        return ADJ.of(configFile);
     }
 
-    public static DBJoin join() {
-        return DBJoin.of(null);
+    public static ADJ join() {
+        return ADJ.of(null);
     }
 
-    public static DBJoin join(final Class<?> daoCls) {
-        return DBJoin.of(null).add(daoCls);
+    public static ADJ join(final Class<?> daoCls) {
+        return ADJ.of(null).add(daoCls);
     }
 }

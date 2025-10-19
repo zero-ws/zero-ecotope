@@ -2,12 +2,12 @@ package io.zerows.mbse;
 
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.database.jooq.operation.DBJooq;
+import io.zerows.epoch.database.jooq.operation.ADB;
 import io.zerows.epoch.database.jooq.util.JqAnalyzer;
 import io.zerows.epoch.metadata.KJoin;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.mbse.metadata.KClass;
 import io.zerows.mbse.metadata.KModule;
-import io.zerows.epoch.store.jooq.DB;
 import io.zerows.support.Ut;
 
 import java.util.Objects;
@@ -114,7 +114,7 @@ class HOneType implements HOne<ConcurrentMap<String, Class<?>>> {
      * @return 分析结果，哈希表存储了属性和类型
      */
     private ConcurrentMap<String, Class<?>> typeDao(final Class<?> daoCls) {
-        final DBJooq jq = DB.on(daoCls);
+        final ADB jq = DB.on(daoCls);
         final JqAnalyzer analyzer = jq.analyzer();
         return analyzer.types();
     }

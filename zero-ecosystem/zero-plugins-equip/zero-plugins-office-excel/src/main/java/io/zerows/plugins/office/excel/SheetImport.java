@@ -8,12 +8,12 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.LogOf;
 import io.zerows.epoch.basicore.MDConnect;
-import io.zerows.epoch.database.jooq.operation.DBJooq;
+import io.zerows.epoch.database.jooq.operation.ADB;
 import io.zerows.epoch.jigsaw.Oneness;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.platform.enums.typed.ChangeFlag;
 import io.zerows.plugins.office.excel.atom.ExTable;
 import io.zerows.plugins.office.excel.exception._60039Exception500ExportingError;
-import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.base.FnBase;
@@ -56,7 +56,7 @@ class SheetImport {
                 final JsonObject filters = table.whereAncient(data);
                 LOGGER.debug("[ Έξοδος ]  Table: {1}, Filters: {0}", filters.encode(), table.getName());
                 final List<T> entities = Ux.fromJson(data, classPojo, connect.getPojoFile());
-                final DBJooq jooq = this.jooq(table);
+                final ADB jooq = this.jooq(table);
                 assert null != jooq;
                 final List<T> queried = jooq.fetch(filters);
 
@@ -130,7 +130,7 @@ class SheetImport {
             final JsonObject filters = table.whereUnique(data);
             LOGGER.debug("[ Έξοδος ]  Table: {1}, Filters: {0}", filters.encode(), table.getName());
             final T entity = Ux.fromJson(data, classPojo, connect.getPojoFile());
-            final DBJooq jooq = this.jooq(table);
+            final ADB jooq = this.jooq(table);
             assert null != jooq;
             /*
              * Unique filter to fetch single record database here.
@@ -220,9 +220,9 @@ class SheetImport {
         }
     }
 
-    private DBJooq jooq(final ExTable table) {
+    private ADB jooq(final ExTable table) {
         final MDConnect connect = table.getConnect();
-        final DBJooq jooq = DB.on(connect.getDao());
+        final ADB jooq = DB.on(connect.getDao());
         if (null != jooq) {
             final String pojoFile = connect.getPojoFile();
             if (Ut.isNotNil(pojoFile)) {

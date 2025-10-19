@@ -4,9 +4,10 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.DBJoin;
-import io.zerows.epoch.database.jooq.operation.DBJooq;
+import io.zerows.epoch.database.jooq.operation.ADB;
+import io.zerows.epoch.database.jooq.operation.ADJ;
 import io.zerows.epoch.metadata.UObject;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.commerce.rbac.atom.ScConfig;
 import io.zerows.extension.commerce.rbac.bootstrap.ScPin;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.SUserDao;
@@ -17,7 +18,6 @@ import io.zerows.extension.runtime.skeleton.osgi.spi.business.ExOwner;
 import io.zerows.extension.runtime.skeleton.secure.Twine;
 import io.zerows.mbse.metadata.KQr;
 import io.zerows.platform.metadata.KRef;
-import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -77,7 +77,7 @@ class TwineExtension implements Twine<SUser> {
             return DB.on(SUserDao.class).fetchJOneAsync(query);
         }
         return TwineQr.normalize(qr, query).compose(queryJ -> {
-            final DBJoin searcher = DB.join();
+            final ADJ searcher = DB.join();
             /*
              * S_USER ( modelKey )
              *    JOIN
@@ -110,7 +110,7 @@ class TwineExtension implements Twine<SUser> {
     public Future<JsonObject> identAsync(final SUser user) {
         final KRef ref = new KRef();
         return this.runSingle(user, qr -> {
-                final DBJooq jq = DB.on(qr.getClassDao());
+                final ADB jq = DB.on(qr.getClassDao());
                 Objects.requireNonNull(jq);
                 return jq.fetchJByIdAsync(user.getModelKey());
             })
@@ -137,7 +137,7 @@ class TwineExtension implements Twine<SUser> {
         /* User model key */
         return this.runSingle(key, qr -> {
             /* Read Extension information */
-            final DBJooq jq = DB.on(qr.getClassDao());
+            final ADB jq = DB.on(qr.getClassDao());
             Objects.requireNonNull(jq);
             return jq.updateJAsync(key.getModelKey(), updatedData);
         });
@@ -184,7 +184,7 @@ class TwineExtension implements Twine<SUser> {
         if (keys.isEmpty()) {
             return Ux.futureA();
         } else {
-            final DBJooq jq = DB.on(qr.getClassDao());
+            final ADB jq = DB.on(qr.getClassDao());
             Objects.requireNonNull(jq);
             final JsonObject condition = new JsonObject();
             condition.put(KName.KEY + ",i", Ut.toJArray(keys));

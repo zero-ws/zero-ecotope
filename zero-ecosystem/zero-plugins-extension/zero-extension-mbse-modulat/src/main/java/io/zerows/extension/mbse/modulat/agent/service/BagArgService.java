@@ -4,14 +4,14 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.cosmic.plugins.cache.Rapid;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.DBJooq;
+import io.zerows.epoch.database.jooq.operation.ADB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.mbse.modulat.atom.PowerApp;
 import io.zerows.extension.mbse.modulat.domain.tables.daos.BBagDao;
 import io.zerows.extension.mbse.modulat.domain.tables.daos.BBlockDao;
 import io.zerows.extension.mbse.modulat.domain.tables.pojos.BBag;
 import io.zerows.extension.mbse.modulat.domain.tables.pojos.BBlock;
 import io.zerows.extension.mbse.modulat.uca.configure.Combiner;
-import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -36,7 +36,7 @@ public class BagArgService implements BagArgStub {
     public Future<JsonObject> fetchBagConfig(final String bagAbbr) {
         Objects.requireNonNull(bagAbbr);
         final JsonObject condition = Ux.whereAnd("nameAbbr", bagAbbr);
-        final DBJooq jq = DB.on(BBagDao.class);
+        final ADB jq = DB.on(BBagDao.class);
         return jq.<BBag>fetchOneAsync(condition).compose(bag -> {
             /* Check if root by parentId */
             if (Objects.isNull(bag)) {

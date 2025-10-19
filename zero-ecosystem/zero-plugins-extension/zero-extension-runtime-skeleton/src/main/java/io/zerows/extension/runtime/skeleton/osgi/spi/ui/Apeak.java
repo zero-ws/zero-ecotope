@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.DBJooq;
+import io.zerows.epoch.database.jooq.operation.ADB;
 
 /*
  * Apeak implementation by some specific definition
@@ -18,7 +18,7 @@ public interface Apeak {
     String ARG2 = KName.SIGMA;
     String ARG3 = KName.VIEW;
 
-    Apeak on(DBJooq jooq);
+    Apeak on(ADB jooq);
 
     /*
      * Read full columns with filters here.

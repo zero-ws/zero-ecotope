@@ -3,12 +3,12 @@ package io.zerows.extension.runtime.ambient.bootstrap;
 import io.r2mo.function.Fn;
 import io.r2mo.typed.cc.Cc;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.DBJooq;
+import io.zerows.epoch.database.jooq.operation.ADB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XAppDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XApp;
 import io.zerows.extension.runtime.ambient.exception._80300Exception500AmbientError;
 import io.zerows.extension.runtime.ambient.exception._80301Exception500ApplicationInit;
-import io.zerows.epoch.store.jooq.DB;
 import org.jooq.DSLContext;
 
 import java.util.Objects;
@@ -27,7 +27,7 @@ public class AtApp {
     private transient XAppDao dao;
 
     private AtApp(final String name) {
-        final DBJooq jooq = DB.on(XAppDao.class);
+        final ADB jooq = DB.on(XAppDao.class);
         Fn.jvmKo(Objects.isNull(jooq), _80300Exception500AmbientError.class);
         /* Current */
         this.app = jooq.fetchOne(KName.NAME, name);

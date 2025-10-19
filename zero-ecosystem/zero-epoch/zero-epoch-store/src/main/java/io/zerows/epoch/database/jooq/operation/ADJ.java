@@ -17,7 +17,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 @SuppressWarnings("all")
-public final class DBJoin {
+public final class ADJ {
 
     private transient final JsonObject configuration = new JsonObject();
     private transient final JoinEngine joinder = new JoinEngine();
@@ -27,7 +27,7 @@ public final class DBJoin {
     private transient MMPojo merged = null;
     private transient R2Vector vector;
 
-    private DBJoin(final String file) {
+    private ADJ(final String file) {
         if (Ut.isNotNil(file)) {
             final JsonObject config = Ut.ioJObject(file);
             if (Ut.isNotNil(config)) {
@@ -40,8 +40,8 @@ public final class DBJoin {
         }
     }
 
-    public static DBJoin of(final String file) {
-        return new DBJoin(file);
+    public static ADJ of(final String file) {
+        return new ADJ(file);
     }
 
     /*
@@ -50,12 +50,12 @@ public final class DBJoin {
      * 1. Dao Cls, default joined field primary key is `key`
      * 2. Dao Cls, you can set the primary key is `field`
      */
-    public <T> DBJoin add(final Class<?> daoCls) {
+    public <T> ADJ add(final Class<?> daoCls) {
         this.joinder.add(daoCls, this.translate(daoCls, "key"));
         return this;
     }
 
-    public <T> DBJoin add(final Class<?> daoCls, final String field) {
+    public <T> ADJ add(final Class<?> daoCls, final String field) {
         this.joinder.add(daoCls, this.translate(daoCls, field));
         return this;
     }
@@ -75,12 +75,12 @@ public final class DBJoin {
      *      "nameT2": "Value2"
      * }
      */
-    public <T> DBJoin alias(final Class<?> daoCls, final String field, final String alias) {
+    public <T> ADJ alias(final Class<?> daoCls, final String field, final String alias) {
         this.joinder.alias(daoCls, field, alias);
         return this;
     }
 
-    public <T> DBJoin alias(final Class<?> daoCls, final JsonObject fieldMap) {
+    public <T> ADJ alias(final Class<?> daoCls, final JsonObject fieldMap) {
         Ut.<String>itJObject(fieldMap,
             (alias, field) -> this.alias(daoCls, field, alias));
         return this;
@@ -92,12 +92,12 @@ public final class DBJoin {
      * 1) pojo/ is the default configuration folder
      * 2) pojo.yml is the parameter of current method `pojo`
      */
-    public <T> DBJoin pojo(final Class<?> daoCls, final String pojo) {
+    public <T> ADJ pojo(final Class<?> daoCls, final String pojo) {
         if (Ut.isNil(pojo)) {
             // 此处直接返回，由于传入了非法的 pojo
             return this;
         }
-        final MMPojo created = MMPojoMapping.create(DBJoin.class).mount(pojo).mojo();
+        final MMPojo created = MMPojoMapping.create(ADJ.class).mount(pojo).mojo();
         this.pojoMap.put(daoCls, pojo);
         if (Objects.isNull(this.merged)) {
             this.merged = new MMPojo();
@@ -115,12 +115,12 @@ public final class DBJoin {
      * 2. Common Join
      *    T1 ( primary key ) Join T2 on ( ... T2.field )
      */
-    public <T> DBJoin join(final Class<?> daoCls) {
+    public <T> ADJ join(final Class<?> daoCls) {
         this.joinder.join(daoCls, this.translate(daoCls, KName.KEY));
         return this;
     }
 
-    public <T> DBJoin join(final Class<?> daoCls, final String field) {
+    public <T> ADJ join(final Class<?> daoCls, final String field) {
         this.joinder.join(daoCls, this.translate(daoCls, field));
         return this;
     }
@@ -224,7 +224,7 @@ public final class DBJoin {
         if (Ut.isNil(pojoFile)) {
             return field;
         } else {
-            final MMPojo mojo = MMPojoMapping.create(DBJoin.class).mount(pojoFile).mojo();
+            final MMPojo mojo = MMPojoMapping.create(ADJ.class).mount(pojoFile).mojo();
             if (Objects.isNull(mojo)) {
                 return field;
             } else {

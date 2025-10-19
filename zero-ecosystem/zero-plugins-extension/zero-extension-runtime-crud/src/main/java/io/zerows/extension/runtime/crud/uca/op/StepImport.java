@@ -2,7 +2,7 @@ package io.zerows.extension.runtime.crud.uca.op;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
-import io.zerows.epoch.database.jooq.operation.DBJooq;
+import io.zerows.epoch.database.jooq.operation.ADB;
 import io.zerows.epoch.metadata.KField;
 import io.zerows.extension.runtime.crud.bootstrap.IxPin;
 import io.zerows.extension.runtime.crud.eon.em.QrType;
@@ -28,7 +28,7 @@ class StepImport implements Agonic {
         /*
          * Header And Compress
          */
-        final DBJooq jooq = IxPin.jooq(in);
+        final ADB jooq = IxPin.jooq(in);
         return Ix.pass(input, in,
             Pre.head()::inAAsync,        /* Header Value */
             Pre.serial()::inAAsync,      /* Serial/Number */

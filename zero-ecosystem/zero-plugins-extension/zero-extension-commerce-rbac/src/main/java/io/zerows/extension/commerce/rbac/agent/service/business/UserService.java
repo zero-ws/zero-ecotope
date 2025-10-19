@@ -3,8 +3,9 @@ package io.zerows.extension.commerce.rbac.agent.service.business;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.DBJooq;
+import io.zerows.epoch.database.jooq.operation.ADB;
 import io.zerows.epoch.metadata.UObject;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.OUserDao;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.RUserGroupDao;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.RUserRoleDao;
@@ -14,7 +15,6 @@ import io.zerows.extension.commerce.rbac.eon.AuthKey;
 import io.zerows.extension.commerce.rbac.uca.acl.relation.Junc;
 import io.zerows.extension.commerce.rbac.util.Sc;
 import io.zerows.platform.metadata.KRef;
-import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -112,10 +112,10 @@ public class UserService implements UserStub {
 
     @Override
     public Future<Boolean> deleteUser(final String userKey) {
-        final DBJooq sUserDao = DB.on(SUserDao.class);
-        final DBJooq oUserDao = DB.on(OUserDao.class);
-        final DBJooq rUserRoleDao = DB.on(RUserRoleDao.class);
-        final DBJooq rUserGroupDao = DB.on(RUserGroupDao.class);
+        final ADB sUserDao = DB.on(SUserDao.class);
+        final ADB oUserDao = DB.on(OUserDao.class);
+        final ADB rUserRoleDao = DB.on(RUserRoleDao.class);
+        final ADB rUserGroupDao = DB.on(RUserGroupDao.class);
 
         return oUserDao.fetchOneAsync(new JsonObject().put(KName.CLIENT_ID, userKey))
             /* delete OUser record */

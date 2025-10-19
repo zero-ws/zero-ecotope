@@ -2,8 +2,8 @@ package io.zerows.extension.runtime.crud.uca.dao;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.database.jooq.operation.DBJoin;
-import io.zerows.epoch.database.jooq.operation.DBJooq;
+import io.zerows.epoch.database.jooq.operation.ADB;
+import io.zerows.epoch.database.jooq.operation.ADJ;
 import io.zerows.extension.runtime.crud.bootstrap.IxPin;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 import io.zerows.mbse.metadata.KModule;
@@ -29,13 +29,13 @@ class OperateCount implements Operate<JsonObject, Long> {
 
                 // Join 模式，这种情况下 in.connected() 不可能为 null
                 final KModule connect = in.connected();
-                final DBJoin join = IxPin.join(in, connect);
+                final ADJ join = IxPin.join(in, connect);
                 return join.countAsync(condition);
             } else {
 
 
                 // Direct 模式
-                final DBJooq jooq = IxPin.jooq(in);
+                final ADB jooq = IxPin.jooq(in);
                 return jooq.countAsync(condition);
             }
         };

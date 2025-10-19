@@ -3,7 +3,8 @@ package io.zerows.extension.commerce.finance.agent.service.income;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.DBJooq;
+import io.zerows.epoch.database.jooq.operation.ADB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.commerce.finance.domain.tables.daos.FBillDao;
 import io.zerows.extension.commerce.finance.domain.tables.daos.FBillItemDao;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FBill;
@@ -13,7 +14,6 @@ import io.zerows.extension.commerce.finance.uca.account.Book;
 import io.zerows.extension.commerce.finance.uca.enter.Maker;
 import io.zerows.extension.commerce.finance.uca.replica.IkWay;
 import io.zerows.platform.constant.VString;
-import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -30,7 +30,7 @@ public class VarietyService implements VarietyStub {
         // UCA
         IkWay.ofBIS().transfer(item, items);
 
-        final DBJooq jooq = DB.on(FBillItemDao.class);
+        final ADB jooq = DB.on(FBillItemDao.class);
         return jooq.updateAsync(item)
             .compose(nil -> jooq.insertAsync(items))
             .compose(nil -> Ux.futureJ(item));
@@ -41,7 +41,7 @@ public class VarietyService implements VarietyStub {
         // UCA
         IkWay.ofBIR().transfer(item, to);
 
-        final DBJooq jooq = DB.on(FBillItemDao.class);
+        final ADB jooq = DB.on(FBillItemDao.class);
         return jooq.updateAsync(item)
             .compose(nil -> jooq.insertAsync(to))
             .compose(nil -> DB.on(FBillDao.class).<FBill>fetchByIdAsync(to.getBillId()))

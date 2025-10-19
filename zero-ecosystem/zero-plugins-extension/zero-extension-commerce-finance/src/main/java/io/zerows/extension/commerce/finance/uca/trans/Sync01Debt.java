@@ -5,10 +5,10 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.DBJooq;
+import io.zerows.epoch.database.jooq.operation.ADB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.commerce.finance.domain.tables.daos.FDebtDao;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FDebt;
-import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -27,7 +27,7 @@ class Sync01Debt implements Trade<User, FDebt> {
     public Future<FDebt> flatter(final JsonObject data, final User user) {
         final String key = Ut.valueString(data, KName.KEY);
         Objects.requireNonNull(key);
-        final DBJooq jq = DB.on(FDebtDao.class);
+        final ADB jq = DB.on(FDebtDao.class);
         return jq.<FDebt>fetchByIdAsync(key)
             // 更新 Debt
             .compose(debt -> {
@@ -38,7 +38,7 @@ class Sync01Debt implements Trade<User, FDebt> {
 
     @Override
     public Future<List<FDebt>> scatter(final JsonArray data, final User user) {
-        final DBJooq jq = DB.on(FDebtDao.class);
+        final ADB jq = DB.on(FDebtDao.class);
         final Set<String> keys = Ut.valueSetString(data, KName.KEY);
         return jq.<FDebt>fetchInAsync(KName.KEY, Ut.toJArray(keys))
             // 更新 Debt

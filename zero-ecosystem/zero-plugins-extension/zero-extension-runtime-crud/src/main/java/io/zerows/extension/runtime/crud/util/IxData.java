@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
-import io.zerows.epoch.database.jooq.operation.DBJooq;
+import io.zerows.epoch.database.jooq.operation.ADB;
 import io.zerows.epoch.database.jooq.util.JqAnalyzer;
 import io.zerows.epoch.metadata.KField;
 import io.zerows.epoch.web.Envelop;
@@ -129,7 +129,7 @@ class IxData {
 
     private static List<HMetaField> column(final KModule module, final Envelop envelop,
                                            final ConcurrentMap<String, String> headerMap) {
-        final DBJooq jooq = IxPin.jooq(module, envelop);
+        final ADB jooq = IxPin.jooq(module, envelop);
         final JqAnalyzer analyzer = jooq.analyzer();
         final ConcurrentMap<String, Class<?>> typeMap = analyzer.types();
         /*

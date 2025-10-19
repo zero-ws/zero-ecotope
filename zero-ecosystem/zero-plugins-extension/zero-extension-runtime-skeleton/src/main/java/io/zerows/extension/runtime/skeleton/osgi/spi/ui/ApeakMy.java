@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.DBJooq;
+import io.zerows.epoch.database.jooq.operation.ADB;
 
 /*
  * Apeak implementation by some specific definition
@@ -19,7 +19,7 @@ public interface ApeakMy {
     String ARG3 = KName.HABITUS;
     String ARG4 = KName.DATA_KEY;
 
-    ApeakMy on(DBJooq jooq);
+    ApeakMy on(ADB jooq);
 
     /*
      * Read my columns with filters here.

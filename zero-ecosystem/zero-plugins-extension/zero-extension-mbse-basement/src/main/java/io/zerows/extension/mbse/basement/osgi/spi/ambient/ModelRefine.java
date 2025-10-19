@@ -4,7 +4,8 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.DBJooq;
+import io.zerows.epoch.database.jooq.operation.ADB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.mbse.basement.atom.Model;
 import io.zerows.extension.mbse.basement.domain.tables.daos.MAttributeDao;
 import io.zerows.extension.mbse.basement.domain.tables.daos.MJoinDao;
@@ -15,7 +16,6 @@ import io.zerows.extension.mbse.basement.domain.tables.pojos.MModel;
 import io.zerows.extension.mbse.basement.util.Ao;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.enums.typed.ChangeFlag;
-import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -91,7 +91,7 @@ class ModelRefine implements AoRefine {
             .forEach(each -> criteria.put("$" + each.hashCode(), each));
         criteria.put(VString.EMPTY, Boolean.FALSE);
         // 2. 从数据库中读取原始属性
-        final DBJooq jooqAttr = DB.on(MAttributeDao.class);
+        final ADB jooqAttr = DB.on(MAttributeDao.class);
         return jooqAttr.<MAttribute>fetchAsync(criteria).compose(original -> {
             // 3. 唯一业务属性
             final Set<String> uniqueSet = new HashSet<>();
@@ -119,7 +119,7 @@ class ModelRefine implements AoRefine {
         model.dbJoins().stream().map(fnQuery)
             .forEach(each -> criteria.put("$" + each.hashCode(), each));
         // 2. 从数据库中读取初始属性
-        final DBJooq jooqJoin = DB.on(MJoinDao.class);
+        final ADB jooqJoin = DB.on(MJoinDao.class);
         return jooqJoin.<MJoin>fetchAsync(criteria).compose(original -> {
             // 3. 唯一性业务
             final Set<String> uniqueSet = new HashSet<>();

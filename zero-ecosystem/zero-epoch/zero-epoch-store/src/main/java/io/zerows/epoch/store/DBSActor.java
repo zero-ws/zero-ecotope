@@ -5,6 +5,7 @@ import io.r2mo.base.dbe.DBS;
 import io.r2mo.base.dbe.Database;
 import io.r2mo.dbe.jooq.DBE;
 import io.r2mo.dbe.jooq.core.domain.JooqDatabase;
+import io.r2mo.typed.cc.Cc;
 import io.r2mo.typed.exception.web._501NotSupportException;
 import io.r2mo.vertx.dbe.DBContext;
 import io.r2mo.vertx.jooq.DBEx;
@@ -24,9 +25,11 @@ import javax.sql.DataSource;
 /**
  * @author lang : 2025-10-17
  */
-@Actor(value = "DATABASE", sequence = -1017)
+@Actor(value = "DATABASE", sequence = -1017, configured = true)
 @Slf4j
 public class DBSActor extends AbstractHActor {
+
+    private static final Cc<String, DBContext> CC_CONTEXT = Cc.open();
 
     @Override
     protected Future<Boolean> startAsync(final HConfig config, final Vertx vertxRef) {
@@ -124,14 +127,15 @@ public class DBSActor extends AbstractHActor {
      *              - 异步模式的实现在 r2mo-vertx-jooq 模块中，它依赖 {@link Vertx} 实例
      */
     private void configure(final DBS dbs, final Vertx vertx) {
-        this.vLog("[ DBS ] 初始化 DBEx 同步/异步数据库引擎：{}，懒加载模式。", dbs.hashCode());
+        this.vLog("[ DBS ] 初始化 DBEx 数据库引擎：`{}`，懒加载。", dbs.getDatabase().getInstance());
         context().configure(dbs, vertx);
     }
 
     private static DBContext context() {
         // TODO: DBE-EXTENSION / 未来可扩展更多数据库类型
         //       目前仅支持 JooqDatabase 类型
-        return HPI.findOne(DBContext.class, DBContext.DEFAULT_CONTEXT_SPID);
+        return CC_CONTEXT.pick(() -> HPI.findOne(DBContext.class, DBContext.DEFAULT_CONTEXT_SPID),
+            DBContext.DEFAULT_CONTEXT_SPID);
     }
 
     public static <T> T ofContext(final Database database) {

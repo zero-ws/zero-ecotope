@@ -24,14 +24,14 @@ class JoinWriter {
     }
 
     Future<Boolean> deleteById(final String key) {
-        final DBJooq jooq = this.store.jooq();
+        final ADB jooq = this.store.jooq();
         return jooq.fetchJByIdAsync(key)
             .compose(response -> this.deleteChild(response)
                 .compose(nil -> jooq.deleteByIdAsync(key)));
     }
 
     Future<JsonObject> insert(final JsonObject data, final String field) {
-        final DBJooq jooq = this.store.jooq();
+        final ADB jooq = this.store.jooq();
         return jooq.insertJAsync(data).compose(response -> {
             // Joined Data
             final JsonArray record = this.valueNorm(data, field);
@@ -43,7 +43,7 @@ class JoinWriter {
     }
 
     Future<JsonObject> update(final String key, final JsonObject data, final String field) {
-        final DBJooq jooq = this.store.jooq();
+        final ADB jooq = this.store.jooq();
         return jooq.updateJAsync(key, data).compose(response -> {
             // Joined Data
             final JsonArray record = this.valueNorm(data, field);
@@ -55,7 +55,7 @@ class JoinWriter {
     }
 
     private Future<Boolean> deleteChild(final JsonObject response) {
-        final DBJooq childJq = this.store.childJooq();
+        final ADB childJq = this.store.childJooq();
         if (Objects.nonNull(childJq)) {
             final JsonObject joined = this.store.dataJoin(response);
             return childJq.deleteByAsync(joined).compose(nil -> Ut.futureT());
@@ -65,7 +65,7 @@ class JoinWriter {
     }
 
     private Future<JsonArray> upsertChild(final JsonObject response, final JsonArray current) {
-        final DBJooq childJq = this.store.childJooq();
+        final ADB childJq = this.store.childJooq();
         if (Objects.nonNull(childJq)) {
             final JsonObject joined = this.store.dataJoin(response);
             // Compared

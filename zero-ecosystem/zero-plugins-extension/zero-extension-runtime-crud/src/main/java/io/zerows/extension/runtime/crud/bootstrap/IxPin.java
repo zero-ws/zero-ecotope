@@ -2,8 +2,8 @@ package io.zerows.extension.runtime.crud.bootstrap;
 
 import io.vertx.core.Vertx;
 import io.zerows.cortex.metadata.WebRule;
-import io.zerows.epoch.database.jooq.operation.DBJoin;
-import io.zerows.epoch.database.jooq.operation.DBJooq;
+import io.zerows.epoch.database.jooq.operation.ADB;
+import io.zerows.epoch.database.jooq.operation.ADJ;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
@@ -23,40 +23,40 @@ import static io.zerows.extension.runtime.crud.util.Ix.LOG;
  */
 public class IxPin implements HRegistry.Mod<Vertx> {
     /**
-     * 返回单表操作的 {@link DBJooq} 对象，针对主模块的构造操作
+     * 返回单表操作的 {@link ADB} 对象，针对主模块的构造操作
      *
      * @param in {@link IxMod} 模块输入参数
      *
-     * @return {@link DBJooq} 操作对象
+     * @return {@link ADB} 操作对象
      */
-    public static DBJooq jooq(final IxMod in) {
+    public static ADB jooq(final IxMod in) {
         final Envelop envelop = in.envelop();
         return jooq(in.module(), envelop);
     }
 
     /**
-     * 返回单表操作的 {@link DBJooq} 对象，针对主模块的构造操作
+     * 返回单表操作的 {@link ADB} 对象，针对主模块的构造操作
      *
      * @param module  {@link KModule} 模块输入参数
      * @param envelop {@link Envelop} 请求的统一资源模型
      *
-     * @return {@link DBJooq} 操作对象
+     * @return {@link ADB} 操作对象
      */
-    public static DBJooq jooq(final KModule module, final Envelop envelop) {
-        final HOne<DBJooq> jq = HOne.jooq();
+    public static ADB jooq(final KModule module, final Envelop envelop) {
+        final HOne<ADB> jq = HOne.jooq();
         return jq.combine(module, envelop.headers());
     }
 
     /**
-     * 返回多表操作的 {@link DBJoin} 对象，针对双模块的专用操作
+     * 返回多表操作的 {@link ADJ} 对象，针对双模块的专用操作
      *
      * @param in      {@link IxMod} 模块输入参数
      * @param connect {@link KModule} 连接模块
      *
-     * @return {@link DBJoin} 操作对象
+     * @return {@link ADJ} 操作对象
      */
-    public static DBJoin join(final IxMod in, final KModule connect) {
-        final HOne<DBJoin> jq = HOne.join();
+    public static ADJ join(final IxMod in, final KModule connect) {
+        final HOne<ADJ> jq = HOne.join();
         return jq.combine(in.module(), connect);
     }
 

@@ -6,14 +6,14 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.DBJooq;
+import io.zerows.epoch.database.jooq.operation.ADB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XAttachmentDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XAttachment;
 import io.zerows.extension.runtime.ambient.util.At;
 import io.zerows.extension.runtime.skeleton.osgi.spi.business.ExIo;
 import io.zerows.extension.runtime.skeleton.osgi.spi.feature.Attachment;
 import io.zerows.platform.enums.typed.ChangeFlag;
-import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -45,7 +45,7 @@ public class ExAttachment implements Attachment {
     @Override
     public Future<JsonArray> saveAsync(final JsonObject condition, final JsonArray data, final JsonObject params) {
 
-        final DBJooq jq = DB.on(XAttachmentDao.class);
+        final ADB jq = DB.on(XAttachmentDao.class);
         return jq.fetchJAsync(condition).compose(original -> {
             // 计算的三通道
             final ConcurrentMap<ChangeFlag, JsonArray> compared =

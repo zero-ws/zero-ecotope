@@ -183,17 +183,17 @@ class JoinStore {
         return this.daoAnalyzer.get(daoCls);
     }
 
-    DBJooq jooq() {
-        return DBJooq.of(this.firstDao);
+    ADB jooq() {
+        return ADB.of(this.firstDao);
     }
 
-    DBJooq childJooq() {
+    ADB childJooq() {
         final Set<Class<?>> analyzers = this.daoAnalyzer.keySet()
             .stream().filter(item -> !item.equals(this.firstDao))
             .collect(Collectors.toSet());
         if (1 == analyzers.size()) {
             final Class<?> daoCls = analyzers.iterator().next();
-            return DBJooq.of(daoCls);
+            return ADB.of(daoCls);
         } else {
             throw new _60050Exception501NotSupport(this.getClass());
         }

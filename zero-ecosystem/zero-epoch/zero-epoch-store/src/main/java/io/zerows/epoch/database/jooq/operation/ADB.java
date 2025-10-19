@@ -1,6 +1,7 @@
 package io.zerows.epoch.database.jooq.operation;
 
 import io.r2mo.base.dbe.DBS;
+import io.r2mo.base.program.R2Mapping;
 import io.r2mo.base.program.R2Vector;
 import io.r2mo.typed.cc.Cc;
 import io.r2mo.vertx.jooq.DBEx;
@@ -14,7 +15,6 @@ import io.zerows.epoch.database.cp.DataPool;
 import io.zerows.epoch.database.jooq.JooqDsl;
 import io.zerows.epoch.database.jooq.JooqInfix;
 import io.zerows.epoch.database.jooq.util.JqAnalyzer;
-import io.zerows.epoch.database.jooq.util.JqCond;
 import io.zerows.epoch.database.jooq.util.JqFlow;
 import io.zerows.epoch.database.jooq.util.JqTool;
 import io.zerows.epoch.metadata.MMAdapt;
@@ -31,36 +31,70 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.BiPredicate;
 
-public class DBJooq {
-    private static final Cc<String, DBJooq> CC_JOOQ = Cc.openThread();
+public class ADB {
 
+    private static final Cc<String, ADB> CC_JOOQ = Cc.openThread();
+
+    // region 基本变量定义和构造函数
     private final DBEx<?> dbe;
+    private final ADMap<?> mapped;
 
     /**
      * 直接新版访问 {@link DBEx} 的入口，之后的内容不再访问
      */
-    protected <T> DBJooq(final Class<T> daoCls, final DBS dbs) {
+    protected <T> ADB(final Class<T> daoCls, final DBS dbs) {
         this.dbe = DBEx.of(daoCls, dbs);
+        this.mapped = ADMap.of(this.dbe);
     }
+    // endregion
 
+    // region 静态构造方法，只能使用这三种方式构造，且带有绑定额外数据源的功能
 
-    // -------------------- DBJooq --------------------
-    public static DBJooq of(final Class<?> clazz) {
+    /**
+     * 使用默认数据源
+     * <pre>
+     *     1. master                 -> 默认主数据源
+     * </pre>
+     *
+     * @param daoCls {@link Class}
+     *
+     * @return {@link ADB}
+     */
+    public static ADB of(final Class<?> daoCls) {
         final DBS dbs = DBSActor.ofDBS();
-        return of(clazz, dbs);
+        return of(daoCls, dbs);
     }
 
-    public static DBJooq of(final Class<?> clazz, final String name) {
+    /**
+     * 使用指定名称数据源
+     * <pre>
+     *     1. master-history        -> history 数据源
+     *     2. master-workflow       -> workflow 数据源
+     * </pre>
+     *
+     * @param daoCls {@link Class}
+     * @param name   数据源名称
+     *
+     * @return {@link ADB}
+     */
+    public static ADB of(final Class<?> daoCls, final String name) {
         final DBS dbs = DBSActor.ofDBS(name);
-        return of(clazz, dbs);
+        return of(daoCls, dbs);
     }
 
-    public static DBJooq of(final Class<?> clazz, final DBS dbs) {
-        final String cached = JooqContext.cached(clazz, dbs);
-        return CC_JOOQ.pick(() -> new DBJooq(clazz, dbs), cached);
+    /**
+     * 直接使用构造的动态数据源（动态建模中会使用）
+     *
+     * @param daoCls {@link Class}
+     * @param dbs    {@link DBS}
+     *
+     * @return {@link ADB}
+     */
+    public static ADB of(final Class<?> daoCls, final DBS dbs) {
+        final String cached = JooqContext.cached(daoCls, dbs);
+        return CC_JOOQ.pick(() -> new ADB(daoCls, dbs), cached);
     }
 
-    // -------------------- Pojo File --------------------
 
     /**
      * 新版引入 {@link MMAdapt} 构造 {@link R2Vector} 实现完整的数据交换映射信息，因此有了此处的 pojoFile 之后，流程
@@ -73,12 +107,17 @@ public class DBJooq {
      *        - {@link Class} DAO 类
      *        - {@link Vertx} 引用
      * </pre>
+     * 新版映射模型会直接采用新架构 {@link R2Vector} 来实现映射转换，它内置两个映射表
+     * <pre>
+     *     1. field ( Class ) -> field ( Json ), 数据类型 {@link R2Mapping}
+     *     2. field ( Class ) -> column ( DB ), 数据类型 {@link R2Mapping}
+     * </pre>
      *
      * @param pojo {@link String}
      *
-     * @return {@link DBJooq}
+     * @return {@link ADB}
      */
-    public DBJooq on(final String pojo) {
+    public ADB on(final String pojo) {
         if (Ut.isNil(pojo)) {
             // 如果没有 pojo 文件和它绑定，则直接取消
             return this;
@@ -87,10 +126,43 @@ public class DBJooq {
         return this;
     }
 
+    // endregion
+
+    @SuppressWarnings("all")
+    private <R> DBEx<R> dbe() {
+        return (DBEx<R>) this.dbe;
+    }
+
+    @SuppressWarnings("all")
+    private <E> ADMap<E> mapped() {
+        return (ADMap<E>) this.mapped;
+    }
+
+    // region fetchAll??? / 查询所有数据
+    public <T> List<T> fetchAll() {
+        return this.<T>dbe().findAll();
+    }
+
+    public JsonArray fetchJAll() {
+        return this.mapped().outMany(this.fetchAll());
+    }
+
+    public <T> Future<List<T>> fetchAllAsync() {
+        return this.reader.fetchAllAsync();
+    }
+
+    public Future<JsonArray> fetchJAllAsync() {
+        return this.mapped().outMany(this.fetchAllAsync());
+    }
+
+    // endregion
+
+    // -------------------- Pojo File --------------------
+    // region 旧版 Jooq 操作，逐步迁移中
     @Deprecated
-    public static DBJooq of(final Class<?> clazz, final DataPool pool) {
+    public static ADB of(final Class<?> clazz, final DataPool pool) {
         final JooqDsl dsl = JooqInfix.getDao(clazz, pool);
-        return CC_JOOQ.pick(() -> new DBJooq(clazz, dsl), dsl.poolKey());
+        return CC_JOOQ.pick(() -> new ADB(clazz, dsl), dsl.poolKey());
     }
 
     /* Analyzer */
@@ -107,8 +179,9 @@ public class DBJooq {
     private transient JqFlow workflow;
 
     @Deprecated
-    protected <T> DBJooq(final Class<T> clazz, final JooqDsl dsl) {
+    protected <T> ADB(final Class<T> clazz, final JooqDsl dsl) {
         this.dbe = null;
+        this.mapped = null;
         /* New exception to avoid programming missing */
         // this.daoCls = clazz;
 
@@ -126,25 +199,22 @@ public class DBJooq {
         this.workflow = JqFlow.create(this.analyzer);
     }
 
-    /**
-     * 条件压缩器
-     */
-    public JsonObject compress(final JsonObject criteria) {
-        return JqCond.compress(criteria);
-    }
-
+    @Deprecated
     public JqAnalyzer analyzer() {
         return this.analyzer;
     }
 
+    @Deprecated
     public Set<String> columns() {
         return this.analyzer.columns().keySet();
     }
 
+    @Deprecated
     public String table() {
         return this.analyzer.table().getName();
     }
 
+    @Deprecated
     private JsonObject andOr(final JsonObject criteria) {
         if (!criteria.containsKey(VString.EMPTY)) {
             criteria.put(VString.EMPTY, Boolean.TRUE);
@@ -374,30 +444,6 @@ public class DBJooq {
      *      <-- fetchJOr(JsonObject, pojo)
      */
     /* fetchAllAsync() */
-    public <T> Future<List<T>> fetchAllAsync() {
-        return this.reader.fetchAllAsync();
-    }
-
-    public Future<JsonArray> fetchJAllAsync() {
-        return this.fetchAllAsync().compose(this.workflow::outputAsync);
-    }
-
-    public Future<JsonArray> fetchJAllAsync(final String pojo) {
-        return this.fetchAllAsync().compose(JqFlow.create(this.analyzer, pojo)::outputAsync);
-    }
-
-    /* fetchAll() */
-    public <T> List<T> fetchAll() {
-        return this.reader.fetchAll();
-    }
-
-    public JsonArray fetchJAll() {
-        return this.workflow.output(this.fetchAll());
-    }
-
-    public JsonArray fetchJAll(final String pojo) {
-        return JqFlow.create(this.analyzer, pojo).output(this.fetchAll());
-    }
 
     /* fetchAsync(String, Object) */
     public <T> Future<List<T>> fetchAsync(final String field, final Object value) {
@@ -1946,4 +1992,6 @@ public class DBJooq {
     public Future<JsonArray> avgByAsync(final String field, final String... groupFields) {
         return Future.succeededFuture(this.avgBy(field, new JsonObject(), groupFields));
     }
+
+    // endregion
 }

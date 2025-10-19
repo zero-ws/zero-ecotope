@@ -3,8 +3,8 @@ package io.zerows.mbse;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.database.jooq.operation.DBJoin;
-import io.zerows.epoch.database.jooq.operation.DBJooq;
+import io.zerows.epoch.database.jooq.operation.ADB;
+import io.zerows.epoch.database.jooq.operation.ADJ;
 import io.zerows.mbse.metadata.KModule;
 
 import java.util.concurrent.ConcurrentMap;
@@ -17,11 +17,11 @@ import java.util.function.BiFunction;
 public interface HOne<T> {
     Cc<String, HOne> CC_JOOQ = Cc.openThread();
 
-    static HOne<DBJooq> jooq() {
+    static HOne<ADB> jooq() {
         return CC_JOOQ.pick(HOneJooq::new, HOneJooq.class.getName());
     }
 
-    static HOne<DBJoin> join() {
+    static HOne<ADJ> join() {
         return CC_JOOQ.pick(HOneJoin::new, HOneJoin.class.getName());
     }
 

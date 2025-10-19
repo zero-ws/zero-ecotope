@@ -4,8 +4,9 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.DBJooq;
+import io.zerows.epoch.database.jooq.operation.ADB;
 import io.zerows.epoch.metadata.UArray;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.RGroupRoleDao;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.SGroupDao;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.RGroupRole;
@@ -13,7 +14,6 @@ import io.zerows.extension.commerce.rbac.domain.tables.pojos.SGroup;
 import io.zerows.extension.commerce.rbac.eon.AuthKey;
 import io.zerows.extension.commerce.rbac.eon.AuthMsg;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
-import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 
 import java.util.ArrayList;
@@ -42,7 +42,7 @@ public class GroupService implements GroupStub {
 
     @Override
     public SGroup fetchParent(final String groupKey) {
-        final DBJooq dao = DB.on(SGroupDao.class);
+        final ADB dao = DB.on(SGroupDao.class);
         if (null == dao) {
             return null;
         }
@@ -53,7 +53,7 @@ public class GroupService implements GroupStub {
 
     @Override
     public List<SGroup> fetchChildren(final String groupKey) {
-        final DBJooq dao = DB.on(SGroupDao.class);
+        final ADB dao = DB.on(SGroupDao.class);
         if (null == dao) {
             return new ArrayList<>();
         }

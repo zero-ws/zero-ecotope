@@ -5,14 +5,14 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.DBJooq;
+import io.zerows.epoch.database.jooq.operation.ADB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.runtime.integration.domain.tables.daos.IDirectoryDao;
 import io.zerows.extension.runtime.integration.domain.tables.pojos.IDirectory;
 import io.zerows.extension.runtime.integration.eon.IsConstant;
 import io.zerows.extension.runtime.integration.uca.command.FsDefault;
 import io.zerows.extension.runtime.integration.uca.command.FsReadOnly;
 import io.zerows.platform.constant.VString;
-import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -178,7 +178,7 @@ class IsDir {
      * 6) Trash Directory
      */
     static Future<IDirectory> updateBranch(final String key, final String updatedBy) {
-        final DBJooq jq = DB.on(IDirectoryDao.class);
+        final ADB jq = DB.on(IDirectoryDao.class);
         return jq.<IDirectory>fetchByIdAsync(key).compose(queried -> {
             if (Objects.isNull(queried)) {
                 return Ux.future();
@@ -264,7 +264,7 @@ class IsDir {
     private static Future<IDirectory> createChild(final Future<IDirectory> futureParent,
                                                   final IDirectory child,
                                                   final JsonObject params) {
-        final DBJooq jq = DB.on(IDirectoryDao.class);
+        final ADB jq = DB.on(IDirectoryDao.class);
         final String updatedBy = params.getString(KName.UPDATED_BY);
         if (Objects.isNull(child)) {
             return futureParent.compose(parent -> {

@@ -5,7 +5,8 @@ import io.r2mo.typed.common.Kv;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.DBJooq;
+import io.zerows.epoch.database.jooq.operation.ADB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.runtime.integration.domain.tables.daos.IDirectoryDao;
 import io.zerows.extension.runtime.integration.domain.tables.pojos.IDirectory;
 import io.zerows.extension.runtime.integration.uca.command.Fs;
@@ -13,7 +14,6 @@ import io.zerows.extension.runtime.integration.uca.updater.StoreMigration;
 import io.zerows.extension.runtime.integration.uca.updater.StoreRename;
 import io.zerows.extension.runtime.integration.uca.updater.StoreUp;
 import io.zerows.extension.runtime.integration.util.Is;
-import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -58,7 +58,7 @@ public class DirService implements DirStub {
      */
     @Override
     public Future<Boolean> remove(final String key) {
-        final DBJooq jq = DB.on(IDirectoryDao.class);
+        final ADB jq = DB.on(IDirectoryDao.class);
         return jq.<IDirectory>fetchByIdAsync(key)
             .compose(directory -> Is.directoryQr(directory).compose(queried -> {
                 final List<IDirectory> directories = new ArrayList<>();
@@ -85,7 +85,7 @@ public class DirService implements DirStub {
      */
     @Override
     public Future<Boolean> remove(final String key, final String userId) {
-        final DBJooq jq = DB.on(IDirectoryDao.class);
+        final ADB jq = DB.on(IDirectoryDao.class);
         return jq.<IDirectory>fetchByIdAsync(key).compose(directory -> Is.directoryQr(directory).compose(queried -> {
             final List<IDirectory> directories = new ArrayList<>();
             // Current Folder
@@ -133,7 +133,7 @@ public class DirService implements DirStub {
          * 1. integrationId changing
          * 2. storePath changing
          */
-        final DBJooq jq = DB.on(IDirectoryDao.class);
+        final ADB jq = DB.on(IDirectoryDao.class);
         return jq.<IDirectory>fetchByIdAsync(key).compose(directory -> {
             // Query Null directory
             if (Objects.isNull(directory)) {

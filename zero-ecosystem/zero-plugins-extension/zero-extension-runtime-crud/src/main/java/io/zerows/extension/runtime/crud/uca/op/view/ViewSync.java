@@ -3,7 +3,7 @@ package io.zerows.extension.runtime.crud.uca.op.view;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.DBJooq;
+import io.zerows.epoch.database.jooq.operation.ADB;
 import io.zerows.extension.runtime.crud.bootstrap.IxPin;
 import io.zerows.extension.runtime.crud.eon.em.QrType;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
@@ -29,7 +29,7 @@ class ViewSync implements Agonic {
 
     @Override
     public Future<JsonObject> runJAsync(final JsonObject input, final IxMod in) {
-        final DBJooq jooq = IxPin.jooq(in);
+        final ADB jooq = IxPin.jooq(in);
         return Ux.channel(Seeker.class, JsonObject::new, seeker -> seeker.on(jooq).fetchImpact(input))
             /* view has get, ignored, */
             /*

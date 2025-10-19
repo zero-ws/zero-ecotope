@@ -7,12 +7,12 @@ import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.database.OldDatabase;
-import io.zerows.epoch.database.jooq.operation.DBJooq;
+import io.zerows.epoch.database.jooq.operation.ADB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.runtime.ambient.agent.service.application.AppStub;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XNoticeDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XNotice;
 import io.zerows.extension.runtime.ambient.eon.Addr;
-import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import jakarta.inject.Inject;
 
@@ -76,7 +76,7 @@ public class AppActor {
         final JsonObject expiredQr = Ux.whereAnd();
         expiredQr.put("expiredAt,<", Instant.now());
         expiredQr.put(KName.APP_ID, appId);
-        final DBJooq jq = DB.on(XNoticeDao.class);
+        final ADB jq = DB.on(XNoticeDao.class);
         return jq.<XNotice>fetchAsync(expiredQr).compose(notices -> {
             // Turn Off the expired notices
             notices.forEach(notice -> notice.setStatus("FINISHED"));

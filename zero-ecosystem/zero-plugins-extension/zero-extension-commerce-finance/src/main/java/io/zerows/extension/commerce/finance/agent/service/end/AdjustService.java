@@ -4,12 +4,12 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.DBJooq;
+import io.zerows.epoch.database.jooq.operation.ADB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.commerce.finance.domain.tables.daos.FSettlementItemDao;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FSettlement;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FSettlementItem;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FTrans;
-import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 
 import java.time.LocalDateTime;
@@ -24,7 +24,7 @@ public class AdjustService implements AdjustStub {
         final JsonObject condition = Ux.whereAnd();
         condition.put(KName.Finance.SETTLEMENT_ID, settlement.getKey());
 
-        final DBJooq jq = DB.on(FSettlementItemDao.class);
+        final ADB jq = DB.on(FSettlementItemDao.class);
         return jq.<FSettlementItem>fetchAsync(condition)
             .compose(items -> jq.updateAsync(this.buildData(trans, items)))
             .compose(nil -> Ux.future(trans));

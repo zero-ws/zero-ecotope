@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * @author lang : 2025-10-16
  */
-@Actor(value = "job")
+@Actor(value = "job", configured = true)
 @Slf4j
 public class JobClientActor extends AbstractHActor {
     @Override

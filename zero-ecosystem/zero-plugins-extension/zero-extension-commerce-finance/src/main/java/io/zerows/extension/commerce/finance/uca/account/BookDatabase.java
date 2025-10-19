@@ -2,7 +2,8 @@ package io.zerows.extension.commerce.finance.uca.account;
 
 import io.vertx.core.Future;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.DBJooq;
+import io.zerows.epoch.database.jooq.operation.ADB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.commerce.finance.domain.tables.daos.FBookDao;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FBill;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FBillItem;
@@ -10,7 +11,6 @@ import io.zerows.extension.commerce.finance.domain.tables.pojos.FBook;
 import io.zerows.extension.commerce.finance.eon.FmConstant;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
 import io.zerows.platform.metadata.KRef;
-import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -26,7 +26,7 @@ import java.util.concurrent.ConcurrentMap;
 class BookDatabase implements Book {
     @Override
     public Future<Boolean> income(final FBill bill, final List<FBillItem> items) {
-        final DBJooq jq = DB.on(FBookDao.class);
+        final ADB jq = DB.on(FBookDao.class);
         return jq.<FBook>fetchByIdAsync(bill.getBookId())
             .compose(book -> Ux.future(BookAction.doAmount(book, bill, items)))
             .compose(jq::updateAsync)
@@ -54,7 +54,7 @@ class BookDatabase implements Book {
                 final FBillItem item = items.iterator().next();
 
 
-                final DBJooq bookJq = DB.on(FBookDao.class);
+                final ADB bookJq = DB.on(FBookDao.class);
 
                 mapBooks.forEach((key, book) -> {
                     final List<FBill> billEach = mapBill.get(key);

@@ -1,21 +1,21 @@
 package io.zerows.mbse;
 
 import io.vertx.core.MultiMap;
-import io.zerows.epoch.database.jooq.operation.DBJooq;
+import io.zerows.epoch.database.jooq.operation.ADB;
 import io.zerows.mbse.metadata.KModule;
 
 /**
  * 「直接访问器」
- * Jooq专用的构造函数，构造符合最终条件的 {@link DBJooq} 对象，此对象可以帮助开发人员完成单模块的CRUD操作，并根据实际
+ * Jooq专用的构造函数，构造符合最终条件的 {@link ADB} 对象，此对象可以帮助开发人员完成单模块的CRUD操作，并根据实际
  * 情况对当前 {@link KModule} 进行详细计算，计算结果会作用于函数内层，使得最终的数据库跨表操作生效。当前包名为
  * mixture，含义为混合。
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
-class HOneJooq implements HOne<DBJooq> {
+class HOneJooq implements HOne<ADB> {
 
     @Override
-    public DBJooq combine(final KModule module, final KModule connect, final MultiMap headers) {
+    public ADB combine(final KModule module, final KModule connect, final MultiMap headers) {
         //        /*
         //         * 两个基础参数不可以为空，此处必须保证基础参数的合法性，但是传入的 connect 必须为空，由于此处方法是单纯的 Jooq 方法
         //         * 而且是单表连接专用方法，所以 connect 必须为空，否则也直接抛出对应异常以确认请求本身的合法性，只是此处不使用自定义

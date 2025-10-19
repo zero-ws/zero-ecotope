@@ -8,7 +8,7 @@ import io.zerows.epoch.annotations.Contract;
 import io.zerows.epoch.bootplus.extension.migration.MigrateStep;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.database.cp.DataPool;
-import io.zerows.epoch.database.jooq.operation.DBJooq;
+import io.zerows.epoch.database.jooq.operation.ADB;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.platform.constant.VName;
 import io.zerows.platform.enums.Environment;
@@ -18,7 +18,7 @@ import java.util.function.Supplier;
 
 public abstract class AbstractStatic extends AbstractTool {
     @Contract
-    protected transient DBJooq jooq;
+    protected transient ADB jooq;
     @Contract
     protected transient Class<?> daoCls;
 
@@ -63,9 +63,9 @@ public abstract class AbstractStatic extends AbstractTool {
         /*
          * 调用 pool() 处理
          */
-        final DBJooq jooq = DB.on(daoCls, this.pool());
+        final ADB jooq = DB.on(daoCls, this.pool());
         final MigrateStep step = supplier.get().bind(this.ark);
-        Ut.contract(step, DBJooq.class, jooq);
+        Ut.contract(step, ADB.class, jooq);
         Ut.contract(step, Class.class, daoCls);
         Ut.contract(step, String.class, folder);
         return step;

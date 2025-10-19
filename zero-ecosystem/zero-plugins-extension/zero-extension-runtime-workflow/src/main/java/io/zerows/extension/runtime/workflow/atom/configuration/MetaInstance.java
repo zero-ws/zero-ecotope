@@ -4,11 +4,11 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.DBJooq;
+import io.zerows.epoch.database.jooq.operation.ADB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.runtime.workflow.atom.runtime.WRecord;
 import io.zerows.extension.runtime.workflow.eon.em.RecordMode;
 import io.zerows.extension.runtime.workflow.uca.modeling.Respect;
-import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -105,7 +105,7 @@ public class MetaInstance {
      * It means that the function name is for record but the actual dao class stored into `todo`
      * instead of directly processing.
      */
-    public DBJooq recordDao() {
+    public ADB recordDao() {
         Objects.requireNonNull(this.todo);
         // Null Pointer Maybe when the clazz is not here with warning message.
         return DB.on(this.todo.dao());
@@ -173,7 +173,7 @@ public class MetaInstance {
     }
 
     // -------------------- Child Part --------------------
-    public DBJooq childDao() {
+    public ADB childDao() {
         if (Objects.isNull(this.children)) {
             return null;
         }
