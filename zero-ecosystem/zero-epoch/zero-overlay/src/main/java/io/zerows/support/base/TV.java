@@ -1,5 +1,6 @@
 package io.zerows.support.base;
 
+import io.r2mo.base.util.R2MO;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
@@ -80,7 +81,7 @@ class TV {
 
     static Integer vInt(final JsonObject json, final String field, final Integer defaultInt) {
         final String literal = vString(json, field, String.valueOf(defaultInt));
-        if (Objects.isNull(literal) || !TNumeric.isInteger(literal)) {
+        if (Objects.isNull(literal) || !R2MO.isInteger(literal)) {
             return defaultInt;
         }
         return Integer.valueOf(literal);

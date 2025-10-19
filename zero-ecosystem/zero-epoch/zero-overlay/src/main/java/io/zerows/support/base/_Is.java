@@ -1,5 +1,6 @@
 package io.zerows.support.base;
 
+import io.r2mo.base.util.R2MO;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
@@ -165,8 +166,7 @@ class _Is extends _Io {
      * @return 是否全部是正整数
      */
     public static boolean isPositive(final int... numbers) {
-        return Arrays.stream(numbers)
-            .allMatch(TNumeric::isPositive);
+        return R2MO.isPositive(numbers);
     }
 
     /**
@@ -178,8 +178,7 @@ class _Is extends _Io {
      * @return 是否全部是正整数
      */
     public static boolean isPositive(final Integer... numbers) {
-        return Arrays.stream(numbers)
-            .allMatch(item -> Objects.nonNull(item) && TNumeric.isPositive(item));
+        return R2MO.isPositive(numbers);
     }
 
 
@@ -375,8 +374,7 @@ class _Is extends _Io {
      * @return 是否合法Boolean值
      */
     public static boolean isBoolean(final Object input) {
-        return Objects.nonNull(input)
-            && isBoolean(input.toString().trim().intern());
+        return R2MO.isBoolean(input);
     }
 
     /**
@@ -387,7 +385,7 @@ class _Is extends _Io {
      * @return 是否合法Boolean值
      */
     public static boolean isBoolean(final String literal) {
-        return TIs.isBoolean(literal, false);
+        return R2MO.isBoolean(literal, false);
     }
 
     /**
@@ -401,7 +399,7 @@ class _Is extends _Io {
      * @return 是否合法Boolean值
      */
     public static boolean isBoolean(final String literal, final boolean widely) {
-        return TIs.isBoolean(literal, widely);
+        return R2MO.isBoolean(literal, widely);
     }
 
     /**
@@ -412,7 +410,7 @@ class _Is extends _Io {
      * @return 是否正整数
      */
     public static boolean isPositive(final String literal) {
-        return TNumeric.isPositive(literal);
+        return R2MO.isPositive(literal);
     }
 
     /**
@@ -423,7 +421,7 @@ class _Is extends _Io {
      * @return 是否正整数
      */
     public static boolean isPositive(final int number) {
-        return TNumeric.isPositive(number);
+        return R2MO.isPositive(number);
     }
 
     /**
@@ -434,8 +432,7 @@ class _Is extends _Io {
      * @return 是否正整数
      */
     public static boolean isPositive(final Object input) {
-        return Objects.nonNull(input)
-            && TNumeric.isPositive(input.toString().trim().intern());
+        return R2MO.isPositive(input);
     }
 
     /**
@@ -446,7 +443,7 @@ class _Is extends _Io {
      * @return 是否负整数
      */
     public static boolean isNegative(final String literal) {
-        return TNumeric.isNegative(literal);
+        return R2MO.isNegative(literal);
     }
 
     /**
@@ -457,7 +454,7 @@ class _Is extends _Io {
      * @return 是否负整数
      */
     public static boolean isNegative(final int number) {
-        return TNumeric.isNegative(number);
+        return R2MO.isNegative(number);
     }
 
     /**
@@ -468,8 +465,7 @@ class _Is extends _Io {
      * @return 是否负整数
      */
     public static boolean isNegative(final Object input) {
-        return Objects.nonNull(input)
-            && TNumeric.isNegative(input.toString().trim().intern());
+        return R2MO.isNegative(input);
     }
 
     /**
@@ -480,7 +476,7 @@ class _Is extends _Io {
      * @return 是否整数
      */
     public static boolean isInteger(final String literal) {
-        return TNumeric.isInteger(literal);
+        return R2MO.isInteger(literal);
     }
 
     /**
@@ -491,8 +487,7 @@ class _Is extends _Io {
      * @return 是否整数
      */
     public static boolean isInteger(final Object input) {
-        return Objects.nonNull(input)
-            && TNumeric.isInteger(input.toString().trim().intern());
+        return R2MO.isInteger(input);
     }
 
 
@@ -504,7 +499,7 @@ class _Is extends _Io {
      * @return 是否数值
      */
     public static boolean isReal(final String literal) {
-        return TNumeric.isReal(literal);
+        return R2MO.isReal(literal);
     }
 
     /**
@@ -515,8 +510,7 @@ class _Is extends _Io {
      * @return 是否数值
      */
     public static boolean isReal(final Object input) {
-        return Objects.nonNull(input)
-            && TNumeric.isReal(input.toString().trim().intern());
+        return R2MO.isReal(input);
     }
 
     /**
@@ -527,7 +521,7 @@ class _Is extends _Io {
      * @return 是否浮点数
      */
     public static boolean isDecimal(final String literal) {
-        return TNumeric.isDecimal(literal);
+        return R2MO.isDecimal(literal);
     }
 
     /**
@@ -538,8 +532,7 @@ class _Is extends _Io {
      * @return 是否浮点数
      */
     public static boolean isDecimal(final Object input) {
-        return Objects.nonNull(input)
-            && TNumeric.isDecimal(input.toString().trim().intern());
+        return R2MO.isDecimal(input);
     }
 
     /**
@@ -550,7 +543,7 @@ class _Is extends _Io {
      * @return 是否正浮点数
      */
     public static boolean isDecimalPositive(final String literal) {
-        return TNumeric.isDecimalPositive(literal);
+        return R2MO.isDecimalPositive(literal);
     }
 
     /**
@@ -561,8 +554,7 @@ class _Is extends _Io {
      * @return 是否正浮点数
      */
     public static boolean isDecimalPositive(final Object input) {
-        return Objects.nonNull(input)
-            && TNumeric.isDecimalPositive(input.toString().trim().intern());
+        return R2MO.isDecimalPositive(input);
     }
 
     /**
@@ -573,7 +565,7 @@ class _Is extends _Io {
      * @return 是否负浮点数
      */
     public static boolean isDecimalNegative(final String literal) {
-        return TNumeric.isDecimalNegative(literal);
+        return R2MO.isDecimalNegative(literal);
     }
 
     /**
@@ -584,8 +576,7 @@ class _Is extends _Io {
      * @return 是否负浮点数
      */
     public static boolean isDecimalNegative(final Object input) {
-        return Objects.nonNull(input)
-            && TNumeric.isDecimalNegative(input.toString().trim().intern());
+        return R2MO.isDecimalNegative(input);
     }
 
     /**
@@ -612,7 +603,7 @@ class _Is extends _Io {
      * @return 是否位于 min 和 max 之间的闭区间
      */
     public static boolean isIn(final Integer value, final Integer min, final Integer max) {
-        return TNumeric.isIn(value, min, max);
+        return R2MO.isIn(value, min, max);
     }
 
     /**

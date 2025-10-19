@@ -6,7 +6,6 @@ import org.jooq.Field;
 
 import java.util.Objects;
 
-@SuppressWarnings("all")
 public class ClauseInstant extends ClauseString {
     @Override
     public Condition where(final Field columnName, final String fieldName, final String op, final Object value) {

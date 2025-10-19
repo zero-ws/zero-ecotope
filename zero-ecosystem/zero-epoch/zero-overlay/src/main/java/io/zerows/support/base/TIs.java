@@ -3,7 +3,6 @@ package io.zerows.support.base;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.constant.VString;
-import io.zerows.platform.constant.VValue;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -43,36 +42,7 @@ class TIs {
             return Objects.nonNull(left) && Objects.nonNull(right) && left.equals(right);
         }
     }
-
-
-    static boolean isBoolean(final String literal, final boolean widely) {
-        if (Objects.isNull(literal)) {
-            return false;
-        } else {
-            final String lower = literal.toLowerCase().trim();
-            if (widely) {
-                /*
-                 * 匹配对
-                 * yes / no
-                 * true / false
-                 * y / n
-                 * 1 / 0
-                 */
-                return VValue.TRUE.equals(lower)
-                    || VValue.FALSE.equals(lower)
-                    || "yes".equals(lower)
-                    || "no".equals(lower)
-                    || "y".equals(lower)
-                    || "n".equals(lower)
-                    || "1".equals(lower)
-                    || "0".equals(lower);
-            } else {
-                return VValue.TRUE.equals(lower)
-                    || VValue.FALSE.equals(lower);
-            }
-        }
-    }
-
+    
     static boolean isMatch(final String value, final String regex) {
         if (isNil(value) || isNil(regex)) {
             return false;
