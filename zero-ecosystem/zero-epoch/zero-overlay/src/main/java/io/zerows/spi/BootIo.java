@@ -29,7 +29,7 @@ import java.util.function.Consumer;
  *
  * <h2>🧩 使用约定</h2>
  * <ul>
- *   <li>🔎 <b>发现机制</b>：推荐通过 SPI（如：{@code java.util.ServiceLoader} 或项目内 {@code SPI.findOne}）发现 {@code BootIo} 实现；</li>
+ *   <li>🔎 <b>发现机制</b>：推荐通过 SPI（如：{@code java.util.ServiceLoader} 或项目内 {@code SPI.findOneAsync}）发现 {@code BootIo} 实现；</li>
  *   <li>🧱 <b>无状态实现</b>：建议实现类保持无状态或仅持有只读元信息，以便被重复复用；</li>
  *   <li>🧵 <b>线程模型</b>：接口本身不做并发保证；若实现类内部存在状态，请自行保证线程安全；</li>
  *   <li>📂 <b>配置来源</b>：实现可从类路径、外部目录、环境变量、系统属性、命令行参数等多源合并为 {@link HEnergy}；</li>
@@ -39,7 +39,7 @@ import java.util.function.Consumer;
  * <h2>💡 典型调用示例</h2>
  * <pre>{@code
  * // 通过 SPI 查找 BootIo 实现
- * BootIo bootIo = SPI.findOne(BootIo.class);
+ * BootIo bootIo = SPI.findOneAsync(BootIo.class);
  *
  * // 1) 解析能量配置（基于启动类与 args）
  * HEnergy energy = bootIo.energy(MyBoot.class, args);

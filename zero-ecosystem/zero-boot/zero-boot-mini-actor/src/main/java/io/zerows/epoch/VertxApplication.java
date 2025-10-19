@@ -1,5 +1,6 @@
 package io.zerows.epoch;
 
+import io.r2mo.vertx.dbe.FactoryDBAsync;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Vertx;
 import io.vertx.core.VertxOptions;
@@ -106,6 +107,7 @@ public class VertxApplication {
          * MOMO-001: SPI 监控注册
          */
         HPI.registry(
+            FactoryDBAsync.class,       // 异步DBE
             AxisSockFactory.class,      // WebSocket
             AxisDynamicFactory.class    // 动态路由
         );

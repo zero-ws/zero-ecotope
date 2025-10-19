@@ -34,7 +34,7 @@ import java.util.function.BiPredicate;
 public class DBJooq {
     private static final Cc<String, DBJooq> CC_JOOQ = Cc.openThread();
 
-    private final DBEx dbe;
+    private final DBEx<?> dbe;
 
     /**
      * 直接新版访问 {@link DBEx} 的入口，之后的内容不再访问
