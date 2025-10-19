@@ -3,15 +3,15 @@ package io.zerows.extension.commerce.rbac.uca.acl.region;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.LogOf;
-import io.zerows.component.qr.syntax.Ir;
-import io.zerows.platform.constant.VValue;
 import io.zerows.epoch.web.Envelop;
-import io.zerows.support.Ut;
-import io.zerows.sdk.security.Acl;
 import io.zerows.extension.commerce.rbac.eon.AuthMsg;
 import io.zerows.extension.commerce.rbac.eon.em.RegionType;
 import io.zerows.extension.commerce.rbac.uca.acl.rapid.Dwarf;
 import io.zerows.extension.commerce.rbac.util.Sc;
+import io.zerows.platform.constant.VName;
+import io.zerows.platform.constant.VValue;
+import io.zerows.sdk.security.Acl;
+import io.zerows.support.Ut;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -32,7 +32,7 @@ class DataOut {
     @SuppressWarnings("all")
     static void dwarfRecord(final Envelop envelop, final JsonObject matrix) {
         final Acl acl = envelop.acl();
-        final JsonArray projection = Sc.aclOn(matrix.getJsonArray(Ir.KEY_PROJECTION), acl);
+        final JsonArray projection = Sc.aclOn(matrix.getJsonArray(VName.KEY_PROJECTION), acl);
         dwarfUniform(envelop, projection, new HashSet<RegionType>() {
             {
                 this.add(RegionType.RECORD);
@@ -58,7 +58,7 @@ class DataOut {
 
     @SuppressWarnings("all")
     static void dwarfCollection(final Envelop envelop, final JsonObject matrix) {
-        final JsonArray prjection = Sc.aclOn(matrix.getJsonArray(Ir.KEY_PROJECTION), envelop.acl());
+        final JsonArray prjection = Sc.aclOn(matrix.getJsonArray(VName.KEY_PROJECTION), envelop.acl());
         dwarfUniform(envelop, prjection, new HashSet<RegionType>() {
             {
                 this.add(RegionType.ARRAY);

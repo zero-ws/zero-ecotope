@@ -3,15 +3,15 @@ package io.zerows.epoch.bootplus.extension.spi.component;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.qr.syntax.Ir;
 import io.zerows.epoch.bootplus.extension.refine.Ox;
 import io.zerows.epoch.bootplus.extension.scaffold.component.AbstractAdaptor;
 import io.zerows.epoch.bootplus.extension.scaffold.plugin.AspectSwitcher;
-import io.zerows.mbse.metadata.ActIn;
-import io.zerows.mbse.metadata.ActOut;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
+import io.zerows.mbse.metadata.ActIn;
+import io.zerows.mbse.metadata.ActOut;
+import io.zerows.platform.constant.VName;
 import io.zerows.plugins.office.excel.ExcelClient;
 import io.zerows.plugins.office.excel.ExcelInfix;
 import io.zerows.program.Ux;
@@ -171,17 +171,17 @@ public class ExportComponent extends AbstractAdaptor {
              * */
             .compose(projection -> {
                 /* 查询条件 */
-                final JsonObject criteria = body.getJsonObject(Ir.KEY_CRITERIA);
+                final JsonObject criteria = body.getJsonObject(VName.KEY_CRITERIA);
 
                 /* 基本查询，当前 sigma */
                 final JsonObject query = new JsonObject();
                 if (Objects.isNull(criteria)) {
-                    query.put(Ir.KEY_CRITERIA, new JsonObject());
+                    query.put(VName.KEY_CRITERIA, new JsonObject());
                 } else {
-                    query.put(Ir.KEY_CRITERIA, criteria);
+                    query.put(VName.KEY_CRITERIA, criteria);
                 }
 
-                query.put(Ir.KEY_PROJECTION, projection);
+                query.put(VName.KEY_PROJECTION, projection);
                 return Ux.future(query);
             })
             .compose(query -> this.dao().searchAsync(query))

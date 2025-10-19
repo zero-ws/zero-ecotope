@@ -2,11 +2,11 @@ package io.zerows.extension.commerce.rbac.uca.acl.region;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.qr.syntax.Ir;
 import io.zerows.epoch.web.Envelop;
+import io.zerows.extension.commerce.rbac.util.Sc;
+import io.zerows.platform.constant.VName;
 import io.zerows.platform.enums.EmSecure;
 import io.zerows.sdk.security.Acl;
-import io.zerows.extension.commerce.rbac.util.Sc;
 
 import java.util.Objects;
 
@@ -20,7 +20,7 @@ class DataIn {
      * It means that you must get data based join ACL property
      */
     static void visitProjection(final Envelop envelop, final JsonObject matrix) {
-        JsonArray projection = matrix.getJsonArray(Ir.KEY_PROJECTION);
+        JsonArray projection = matrix.getJsonArray(VName.KEY_PROJECTION);
         /*
          * Execute when phase = EAGER
          */
@@ -45,7 +45,7 @@ class DataIn {
      */
     static void visitCriteria(final Envelop envelop, final JsonObject matrix) {
         /* Criteria Modification */
-        final JsonObject criteria = matrix.getJsonObject(Ir.KEY_CRITERIA);
+        final JsonObject criteria = matrix.getJsonObject(VName.KEY_CRITERIA);
         /* ACL do not control criteria */
         if (Objects.nonNull(criteria) && !criteria.isEmpty()) {
             envelop.onH(criteria);

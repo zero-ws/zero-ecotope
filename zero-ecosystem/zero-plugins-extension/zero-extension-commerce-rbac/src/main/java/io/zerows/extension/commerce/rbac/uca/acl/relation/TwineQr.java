@@ -3,15 +3,15 @@ package io.zerows.extension.commerce.rbac.uca.acl.relation;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.qr.syntax.Ir;
 import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.RUserGroupDao;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.RUserRoleDao;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.RUserGroup;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.RUserRole;
 import io.zerows.extension.commerce.rbac.eon.AuthKey;
 import io.zerows.mbse.metadata.KQr;
-import io.zerows.epoch.store.jooq.DB;
+import io.zerows.platform.constant.VName;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -27,7 +27,7 @@ class TwineQr {
     static Future<JsonObject> normalize(final KQr qr, final JsonObject query) {
         // The original `criteria` from query part, fix Null Pointer Issue
         final JsonObject queryJ = query.copy();
-        final JsonObject criteria = Ut.valueJObject(queryJ, Ir.KEY_CRITERIA);
+        final JsonObject criteria = Ut.valueJObject(queryJ, VName.KEY_CRITERIA);
         return normalize(criteria).compose(normalizeJ -> {
             // Qr InJson
             final JsonObject condition;
@@ -38,7 +38,7 @@ class TwineQr {
                 // Sub Query Tree Must not be EMPTY
                 condition.put("$KQR$", normalizeJ);
             }
-            queryJ.put(Ir.KEY_CRITERIA, condition);
+            queryJ.put(VName.KEY_CRITERIA, condition);
             return Ux.future(queryJ);
         });
     }

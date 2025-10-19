@@ -4,10 +4,10 @@ import io.vertx.core.Future;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.qr.syntax.Ir;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.commerce.rbac.agent.service.accredit.ActionStub;
 import io.zerows.extension.commerce.rbac.agent.service.view.PersonalStub;
@@ -15,7 +15,7 @@ import io.zerows.extension.commerce.rbac.domain.tables.daos.SViewDao;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SAction;
 import io.zerows.extension.commerce.rbac.eon.Addr;
 import io.zerows.extension.runtime.skeleton.eon.em.OwnerType;
-import io.zerows.epoch.store.jooq.DB;
+import io.zerows.platform.constant.VName;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -72,7 +72,7 @@ public class ViewMyActor {
                 return this.personalStub.byUser(action.getResourceId(), userId,
                         data.getString(KName.POSITION))
                     .compose(Ux::futureA)
-                    .compose(Fx.ofJArray(Ir.KEY_CRITERIA, Ir.KEY_PROJECTION, KName.Rbac.ROWS));
+                    .compose(Fx.ofJArray(VName.KEY_CRITERIA, VName.KEY_PROJECTION, KName.Rbac.ROWS));
             }
         });
     }
@@ -114,7 +114,7 @@ public class ViewMyActor {
     public Future<JsonObject> pViewById(final String key) {
         return this.personalStub.byId(key)
             .compose(Ux::futureJ)
-            .compose(Fx.ofJObject(Ir.KEY_CRITERIA, Ir.KEY_PROJECTION, "rows"));
+            .compose(Fx.ofJObject(VName.KEY_CRITERIA, VName.KEY_PROJECTION, "rows"));
     }
 
     @Address(Addr.View.VIEW_P_UPDATE)
@@ -128,7 +128,7 @@ public class ViewMyActor {
         data.put(KName.USER, userId);
         return this.personalStub.update(key, data)
             .compose(Ux::futureJ)
-            .compose(Fx.ofJObject(Ir.KEY_CRITERIA, Ir.KEY_PROJECTION, "rows"));
+            .compose(Fx.ofJObject(VName.KEY_CRITERIA, VName.KEY_PROJECTION, "rows"));
     }
 
 

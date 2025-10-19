@@ -7,6 +7,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.LogO;
 import io.zerows.component.qr.syntax.Ir;
 import io.zerows.epoch.constant.KWeb;
+import io.zerows.platform.constant.VName;
 import io.zerows.platform.constant.VString;
 
 import java.util.Objects;
@@ -30,8 +31,8 @@ final class QrIr {
 
     static JsonObject irQH(final JsonObject query, final String field, final Object value) {
         Objects.requireNonNull(query);
-        final JsonObject original = Ut.valueJObject(query, Ir.KEY_CRITERIA);
-        query.put(Ir.KEY_CRITERIA, irH(original, field, value));
+        final JsonObject original = Ut.valueJObject(query, VName.KEY_CRITERIA);
+        query.put(VName.KEY_CRITERIA, irH(original, field, value));
         return query;
     }
 
@@ -79,11 +80,11 @@ final class QrIr {
         Objects.requireNonNull(query);
         if (clear) {
             /* Overwrite Mode */
-            query.put(Ir.KEY_CRITERIA, criteria);
+            query.put(VName.KEY_CRITERIA, criteria);
         } else {
             /* Combine Mode */
-            final JsonObject originalJ = Ut.valueJObject(query, Ir.KEY_CRITERIA);
-            query.put(Ir.KEY_CRITERIA, irH(originalJ, criteria));
+            final JsonObject originalJ = Ut.valueJObject(query, VName.KEY_CRITERIA);
+            query.put(VName.KEY_CRITERIA, irH(originalJ, criteria));
         }
         LOGGER.info("[Qr] Criteria: \n{0}", query.encodePrettily());
         return query;
@@ -135,11 +136,11 @@ final class QrIr {
         Objects.requireNonNull(query);
         if (clear) {
             /* Overwrite Mode */
-            query.put(Ir.KEY_PROJECTION, projection.copy());
+            query.put(VName.KEY_PROJECTION, projection.copy());
         } else {
             /* Combine */
-            final JsonArray original = Ut.valueJArray(query, Ir.KEY_PROJECTION);
-            query.put(Ir.KEY_PROJECTION, irV(original, projection));
+            final JsonArray original = Ut.valueJArray(query, VName.KEY_PROJECTION);
+            query.put(VName.KEY_PROJECTION, irV(original, projection));
         }
         LOGGER.info("[Qr] Projection: \n{0}", query.encodePrettily());
         return query;

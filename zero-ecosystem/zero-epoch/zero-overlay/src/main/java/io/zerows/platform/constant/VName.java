@@ -312,6 +312,30 @@ public interface VName {
 
     String CONTEXT = "configure";
     String VERSION = "version";
+    /**
+     * <get>pager</get>, It's mapped to `pager` field in json configuration.
+     * 「Pagination」This json contains following two field:
+     * 1. page: The page index ( started from 1 ).
+     * 2. size: The page size.
+     */
+    String KEY_PAGER = "pager";
+    /**
+     * <get>sorter</get>, It's mapped to `sorter` field in json configuration.
+     * 「Sorting」It's json array to contains different field with sorting mode.
+     * 1. ASC: ORDER BY ?? ASC.
+     * 2. DESC: ORDER BY ?? DESC.
+     */
+    String KEY_SORTER = "sorter";
+    /**
+     * <get>criteria</get>, It's mapped to `criteria` field in json configuration.
+     * 「Criteria」
+     */
+    String KEY_CRITERIA = "criteria";
+    /**
+     * <get>projection</get>, It's mapped to `projection` field in json configuration.
+     * 「Fields」It's feature for column picking up.
+     */
+    String KEY_PROJECTION = "projection";
 
     /**
      * 特殊属性，用于系统做比对专用

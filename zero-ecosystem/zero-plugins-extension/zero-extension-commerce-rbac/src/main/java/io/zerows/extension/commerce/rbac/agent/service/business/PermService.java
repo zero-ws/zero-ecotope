@@ -3,9 +3,9 @@ package io.zerows.extension.commerce.rbac.agent.service.business;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.qr.syntax.Ir;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.database.jooq.operation.DBJooq;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.commerce.rbac.agent.service.accredit.ActionStub;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.RRolePermDao;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.SActionDao;
@@ -16,8 +16,8 @@ import io.zerows.extension.commerce.rbac.domain.tables.pojos.SAction;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SPermSet;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SPermission;
 import io.zerows.extension.commerce.rbac.uca.logged.ScRole;
+import io.zerows.platform.constant.VName;
 import io.zerows.platform.constant.VString;
-import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.base.FnBase;
@@ -131,7 +131,7 @@ public class PermService implements PermStub {
             /*
              * Search permissions that related current
              */
-            final JsonObject criteriaRef = query.getJsonObject(Ir.KEY_CRITERIA);
+            final JsonObject criteriaRef = query.getJsonObject(VName.KEY_CRITERIA);
             /*
              * Combine condition here
              */
@@ -146,7 +146,7 @@ public class PermService implements PermStub {
              * criteria ->
              * SIGMA = ??? AND CODE NOT IN (???)
              * */
-            query.put(Ir.KEY_CRITERIA, criteria);
+            query.put(VName.KEY_CRITERIA, criteria);
 
             /*
              * Replace for criteria

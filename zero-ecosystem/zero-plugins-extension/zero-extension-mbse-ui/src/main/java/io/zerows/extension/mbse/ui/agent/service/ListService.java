@@ -5,14 +5,14 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.LogOf;
 import io.zerows.component.qr.Sorter;
-import io.zerows.component.qr.syntax.Ir;
 import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.mbse.ui.domain.tables.daos.UiListDao;
 import io.zerows.extension.mbse.ui.domain.tables.daos.UiViewDao;
 import io.zerows.extension.mbse.ui.domain.tables.pojos.UiList;
 import io.zerows.extension.mbse.ui.domain.tables.pojos.UiView;
 import io.zerows.extension.mbse.ui.uca.qbe.QBECache;
-import io.zerows.epoch.store.jooq.DB;
+import io.zerows.platform.constant.VName;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -76,7 +76,7 @@ public class ListService implements ListStub {
                  * 当前Qr的名称, Qr存储的名字使用标准的 position / view 的模式，传入时
                  * 执行 Base64 加密，后端可直接解密操作
                  */
-                Ir.KEY_CRITERIA, Ir.KEY_PROJECTION, KName.Rbac.ROWS,
+                VName.KEY_CRITERIA, VName.KEY_PROJECTION, KName.Rbac.ROWS,
                 KName.Component.QR_COMPONENT, KName.Component.QR_CONFIG,
                 KName.VIEW, KName.POSITION
             ));

@@ -4,8 +4,8 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.expression.Formula;
 import io.zerows.component.expression.Regulation;
-import io.zerows.component.qr.syntax.Ir;
 import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XActivityRuleDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XActivityRule;
 import io.zerows.extension.runtime.ambient.eon.em.TubeType;
@@ -13,8 +13,8 @@ import io.zerows.extension.runtime.ambient.exception._80305Exception500IndentMis
 import io.zerows.extension.runtime.ambient.uca.darkly.Tube;
 import io.zerows.extension.runtime.skeleton.osgi.spi.feature.Valve;
 import io.zerows.extension.runtime.skeleton.refine.Ke;
+import io.zerows.platform.constant.VName;
 import io.zerows.platform.metadata.KRef;
-import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.spi.modeler.Indent;
 import io.zerows.support.Ut;
@@ -39,7 +39,7 @@ public class ValueRule implements Valve {
     @Override
     public Future<JsonObject> execAsync(final JsonObject data, final JsonObject config) {
         /* If criteria is empty, return the input data directly */
-        final JsonObject criteria = Ut.valueJObject(data, Ir.KEY_CRITERIA);
+        final JsonObject criteria = Ut.valueJObject(data, VName.KEY_CRITERIA);
         if (Ut.irNil(criteria)) {
             return Ux.future(data);
         }

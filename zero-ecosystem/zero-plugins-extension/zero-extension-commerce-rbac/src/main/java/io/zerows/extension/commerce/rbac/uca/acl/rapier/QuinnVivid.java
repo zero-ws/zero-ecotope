@@ -2,13 +2,13 @@ package io.zerows.extension.commerce.rbac.uca.acl.rapier;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.qr.syntax.Ir;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.security.DataBound;
 import io.zerows.extension.commerce.rbac.atom.ScOwner;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SResource;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SView;
 import io.zerows.extension.runtime.skeleton.eon.em.OwnerType;
+import io.zerows.platform.constant.VName;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -26,8 +26,8 @@ public class QuinnVivid implements Quinn {
         return Quinn.view().<SView>saveAsync(resourceId, owner, viewData).compose(upsert -> {
             /* Response Building */
             final JsonObject cached = new JsonObject();
-            cached.put(Ir.KEY_PROJECTION, Ut.toJArray(upsert.getProjection()));
-            cached.put(Ir.KEY_CRITERIA, Ut.toJObject(upsert.getCriteria()));
+            cached.put(VName.KEY_PROJECTION, Ut.toJArray(upsert.getProjection()));
+            cached.put(VName.KEY_CRITERIA, Ut.toJObject(upsert.getCriteria()));
             cached.put(KName.Rbac.ROWS, Ut.toJObject(upsert.getRows()));
             return Ux.future((T) cached);
         });

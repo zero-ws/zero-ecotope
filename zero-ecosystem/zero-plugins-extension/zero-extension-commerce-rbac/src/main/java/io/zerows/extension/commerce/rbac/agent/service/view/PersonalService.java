@@ -2,13 +2,13 @@ package io.zerows.extension.commerce.rbac.agent.service.view;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.qr.syntax.Ir;
 import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.SViewDao;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SView;
 import io.zerows.extension.runtime.skeleton.eon.em.OwnerType;
+import io.zerows.platform.constant.VName;
 import io.zerows.platform.constant.VValue;
-import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -34,7 +34,7 @@ public class PersonalService implements PersonalStub {
 
     @Override
     public Future<SView> create(final JsonObject data) {
-        Ut.valueToString(data, Ir.KEY_CRITERIA, Ir.KEY_PROJECTION, "rows");
+        Ut.valueToString(data, VName.KEY_CRITERIA, VName.KEY_PROJECTION, "rows");
         final SView view = Ut.deserialize(data, SView.class);
         if (data.containsKey(KName.USER)) {
             view.setCreatedBy(data.getString(KName.USER));
@@ -70,7 +70,7 @@ public class PersonalService implements PersonalStub {
                 return Ux.future();
             } else {
                 final JsonObject serialized = Ut.serializeJson(view);
-                Ut.valueToString(data, Ir.KEY_CRITERIA, Ir.KEY_PROJECTION, "rows");
+                Ut.valueToString(data, VName.KEY_CRITERIA, VName.KEY_PROJECTION, "rows");
                 if (data.containsKey(KName.USER)) {
                     view.setUpdatedBy(data.getString(KName.USER));
                     view.setUpdatedAt(LocalDateTime.now());

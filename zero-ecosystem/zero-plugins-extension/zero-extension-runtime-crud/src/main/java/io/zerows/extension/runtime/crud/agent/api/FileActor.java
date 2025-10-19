@@ -5,12 +5,10 @@ import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.LogOf;
-import io.zerows.component.qr.syntax.Ir;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Infusion;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.constant.KName;
-import io.zerows.mbse.metadata.KModule;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.runtime.crud.eon.Addr;
 import io.zerows.extension.runtime.crud.eon.em.ApiSpec;
@@ -22,6 +20,8 @@ import io.zerows.extension.runtime.crud.uca.next.Co;
 import io.zerows.extension.runtime.crud.uca.op.Agonic;
 import io.zerows.extension.runtime.crud.uca.trans.Tran;
 import io.zerows.extension.runtime.crud.util.Ix;
+import io.zerows.mbse.metadata.KModule;
+import io.zerows.platform.constant.VName;
 import io.zerows.plugins.office.excel.ExcelClient;
 import io.zerows.program.Ux;
 import io.zerows.specification.modeling.metadata.HMetaAtom;
@@ -74,7 +74,7 @@ public class FileActor {
          * Here extract query by `criteria` node, it will be synced with
          * dynamic exporting here.
          **/
-        JsonObject criteria = Ut.valueJObject(condition.getJsonObject(Ir.KEY_CRITERIA));
+        JsonObject criteria = Ut.valueJObject(condition.getJsonObject(VName.KEY_CRITERIA));
         final IxPanel panel = IxPanel.on(request);
         final IxMod mod = request.active();
         return T.fetchFull(request).runJ(request.dataV())

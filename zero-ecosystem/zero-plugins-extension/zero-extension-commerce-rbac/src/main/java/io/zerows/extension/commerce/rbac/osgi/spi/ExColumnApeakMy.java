@@ -3,7 +3,6 @@ package io.zerows.extension.commerce.rbac.osgi.spi;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.qr.syntax.Ir;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.KView;
 import io.zerows.epoch.metadata.security.DataBound;
@@ -14,6 +13,7 @@ import io.zerows.extension.commerce.rbac.uca.logged.ScUser;
 import io.zerows.extension.runtime.skeleton.eon.em.OwnerType;
 import io.zerows.extension.runtime.skeleton.osgi.spi.ui.Anchoret;
 import io.zerows.extension.runtime.skeleton.osgi.spi.ui.ApeakMy;
+import io.zerows.platform.constant.VName;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -58,8 +58,8 @@ public class ExColumnApeakMy extends Anchoret<ApeakMy> implements ApeakMy {
         owner.bind(vis);
         /* Two Params: projection, criteria, rows */
         Ut.valueCopy(viewData, viewInput,
-            Ir.KEY_PROJECTION,
-            Ir.KEY_CRITERIA,
+            VName.KEY_PROJECTION,
+            VName.KEY_CRITERIA,
             KName.Rbac.ROWS
         );
         viewData.put(KName.UPDATED_BY, userId);     // updatedBy = userId
@@ -99,8 +99,8 @@ public class ExColumnApeakMy extends Anchoret<ApeakMy> implements ApeakMy {
          * projection / criteria only
          */
         final JsonObject updatedData = new JsonObject();
-        updatedData.put(Ir.KEY_PROJECTION, updated.getJsonArray(Ir.KEY_PROJECTION));
-        updatedData.put(Ir.KEY_CRITERIA, updated.getJsonObject(Ir.KEY_CRITERIA));
+        updatedData.put(VName.KEY_PROJECTION, updated.getJsonArray(VName.KEY_PROJECTION));
+        updatedData.put(VName.KEY_CRITERIA, updated.getJsonObject(VName.KEY_CRITERIA));
         return user.view(dataKey, updatedData).compose(nil -> {
             LOG.Auth.info(this.getLogger(), AuthMsg.REGION_FLUSH, habitus, dataKey,
                 nil.getJsonObject(dataKey, new JsonObject()).encodePrettily());

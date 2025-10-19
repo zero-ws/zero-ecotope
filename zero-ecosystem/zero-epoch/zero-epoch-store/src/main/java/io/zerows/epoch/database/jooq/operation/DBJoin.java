@@ -9,6 +9,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.database.jooq.util.JqTool;
 import io.zerows.epoch.metadata.MMPojo;
 import io.zerows.epoch.metadata.MMPojoMapping;
+import io.zerows.platform.constant.VName;
 import io.zerows.support.Ut;
 
 import java.util.Objects;
@@ -163,7 +164,7 @@ public final class DBJoin {
     }
 
     public JsonArray fetch(final JsonObject params) {
-        return this.fetch(toQr(new JsonObject().put(Ir.KEY_CRITERIA, params)));
+        return this.fetch(toQr(new JsonObject().put(VName.KEY_CRITERIA, params)));
     }
 
     public Future<JsonArray> fetchAsync(final Ir qr) {
@@ -171,7 +172,7 @@ public final class DBJoin {
     }
 
     public Future<JsonArray> fetchAsync(final JsonObject params) {
-        return fetchAsync(toQr(new JsonObject().put(Ir.KEY_CRITERIA, params)));
+        return fetchAsync(toQr(new JsonObject().put(VName.KEY_CRITERIA, params)));
     }
 
     // -------------------- Crud Operation -----------

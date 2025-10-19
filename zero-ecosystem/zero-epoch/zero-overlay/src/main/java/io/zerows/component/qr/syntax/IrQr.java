@@ -5,6 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.component.qr.Criteria;
 import io.zerows.component.qr.Pager;
 import io.zerows.component.qr.Sorter;
+import io.zerows.platform.constant.VName;
 import io.zerows.support.base.UtBase;
 
 import java.util.HashSet;
@@ -24,10 +25,10 @@ class IrQr implements Ir {
 
     @SuppressWarnings("unchecked")
     private void init(final JsonObject input) {
-        this.pager = Pager.create(input.getJsonObject(KEY_PAGER));
-        this.sorter = Sorter.create(input.getJsonArray(KEY_SORTER));
-        this.projection = new HashSet<String>(input.getJsonArray(KEY_PROJECTION).getList());
-        this.criteria = Criteria.create(input.getJsonObject(KEY_CRITERIA));
+        this.pager = Pager.create(input.getJsonObject(VName.KEY_PAGER));
+        this.sorter = Sorter.create(input.getJsonArray(VName.KEY_SORTER));
+        this.projection = new HashSet<String>(input.getJsonArray(VName.KEY_PROJECTION).getList());
+        this.criteria = Criteria.create(input.getJsonObject(VName.KEY_CRITERIA));
     }
 
     @Override
@@ -61,7 +62,7 @@ class IrQr implements Ir {
     @Override
     public JsonObject toJson() {
         final JsonObject result = new JsonObject();
-        result.put(KEY_PAGER, this.pager.toJson());
+        result.put(VName.KEY_PAGER, this.pager.toJson());
         final JsonObject sorters = this.sorter.toJson();
         final JsonArray array = new JsonArray();
         UtBase.itJObject(sorters, Boolean.class).forEach(entry -> {
@@ -69,8 +70,8 @@ class IrQr implements Ir {
             final String key = entry.getKey();
             array.add(key + "," + (value ? "ASC" : "DESC"));
         });
-        result.put(KEY_PROJECTION, UtBase.toJArray(this.projection));
-        result.put(KEY_CRITERIA, this.criteria.toJson());
+        result.put(VName.KEY_PROJECTION, UtBase.toJArray(this.projection));
+        result.put(VName.KEY_CRITERIA, this.criteria.toJson());
         return result;
     }
 }

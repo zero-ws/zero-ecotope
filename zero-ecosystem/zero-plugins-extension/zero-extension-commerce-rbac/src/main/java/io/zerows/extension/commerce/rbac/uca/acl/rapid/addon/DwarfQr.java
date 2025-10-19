@@ -2,10 +2,10 @@ package io.zerows.extension.commerce.rbac.uca.acl.rapid.addon;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.component.qr.syntax.Ir;
-import io.zerows.support.Ut;
-import io.zerows.sdk.security.Acl;
 import io.zerows.extension.commerce.rbac.uca.acl.rapid.Dwarf;
+import io.zerows.platform.constant.VName;
+import io.zerows.sdk.security.Acl;
+import io.zerows.support.Ut;
 
 public class DwarfQr implements Dwarf {
     /*
@@ -48,7 +48,7 @@ public class DwarfQr implements Dwarf {
         if (dataReference.containsKey(KName.__.QR)) {
             return;
         }
-        final JsonObject query = matrix.getJsonObject(Ir.KEY_CRITERIA);
+        final JsonObject query = matrix.getJsonObject(VName.KEY_CRITERIA);
         if (Ut.isNotNil(query)) {
             dataReference.put(KName.__.QR, query);
         }

@@ -4,9 +4,9 @@ import io.vertx.core.http.HttpMethod;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.component.log.LogO;
-import io.zerows.component.qr.syntax.Ir;
 import io.zerows.epoch.application.YmlCore;
 import io.zerows.epoch.constant.KName;
+import io.zerows.platform.constant.VName;
 import io.zerows.support.Ut;
 
 import java.util.Objects;
@@ -69,7 +69,7 @@ public abstract class AbstractRegion implements PlugRegion {
         if (Objects.isNull(matrix)) {
             return false;               // 禁用视图流程
         }
-        boolean isEnabled = Ut.isNotNil(Ut.valueJArray(matrix, Ir.KEY_PROJECTION));
+        boolean isEnabled = Ut.isNotNil(Ut.valueJArray(matrix, VName.KEY_PROJECTION));
         if (isEnabled) {
             return true;                // 启用流程 projection 有值
         }
@@ -81,7 +81,7 @@ public abstract class AbstractRegion implements PlugRegion {
         if (isEnabled) {
             return true;                // 启用流程 rows 有值
         }
-        isEnabled = Ut.isNotNil(Ut.valueJObject(matrix, Ir.KEY_CRITERIA));
+        isEnabled = Ut.isNotNil(Ut.valueJObject(matrix, VName.KEY_CRITERIA));
         if (isEnabled) {
             return true;                // 启用流程 criteria
         }

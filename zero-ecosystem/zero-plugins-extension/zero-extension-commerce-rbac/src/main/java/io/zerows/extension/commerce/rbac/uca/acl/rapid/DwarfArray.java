@@ -2,10 +2,10 @@ package io.zerows.extension.commerce.rbac.uca.acl.rapid;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.qr.syntax.Ir;
-import io.zerows.support.Ut;
-import io.zerows.sdk.security.Acl;
 import io.zerows.extension.commerce.rbac.util.Sc;
+import io.zerows.platform.constant.VName;
+import io.zerows.sdk.security.Acl;
+import io.zerows.support.Ut;
 
 import java.util.Objects;
 
@@ -54,12 +54,12 @@ class DwarfArray implements Dwarf {
 
                 /* projection: for After Get only */
                 updated = SiftCol.onProjection(updated,
-                    Sc.aclOn(matrix.getJsonArray(Ir.KEY_PROJECTION), acl));
+                    Sc.aclOn(matrix.getJsonArray(VName.KEY_PROJECTION), acl));
             } else {
 
                 /* pick up projection in S_VIEW only */
                 updated = SiftCol.onProjection(updated,
-                    matrix.getJsonArray(Ir.KEY_PROJECTION));
+                    matrix.getJsonArray(VName.KEY_PROJECTION));
 
                 /*
                  * Produce rows configuration

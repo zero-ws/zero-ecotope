@@ -4,12 +4,12 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
-import io.zerows.component.qr.syntax.Ir;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.database.jooq.operation.DBJooq;
 import io.zerows.epoch.metadata.MMAdapt;
 import io.zerows.epoch.metadata.UArray;
 import io.zerows.epoch.store.jooq.DB;
+import io.zerows.platform.constant.VName;
 import io.zerows.program.Ux;
 import io.zerows.spi.modeler.Indent;
 import io.zerows.support.Ut;
@@ -194,7 +194,7 @@ class KeEnv {
      */
     static Future<JsonObject> daoJ(final JsonObject config, final JsonObject params) {
         return daoT(config, JsonObject::new, jq -> {
-            final JsonObject exprTpl = Ut.valueJObject(config, Ir.KEY_CRITERIA);
+            final JsonObject exprTpl = Ut.valueJObject(config, VName.KEY_CRITERIA);
             final JsonObject condition = Ut.fromExpression(exprTpl, params);
             return jq.fetchJOneAsync(condition);
         });
@@ -202,7 +202,7 @@ class KeEnv {
 
     static Future<JsonArray> daoA(final JsonObject config, final JsonObject params) {
         return daoT(config, JsonArray::new, jq -> {
-            final JsonObject exprTpl = Ut.valueJObject(config, Ir.KEY_CRITERIA);
+            final JsonObject exprTpl = Ut.valueJObject(config, VName.KEY_CRITERIA);
             final JsonObject condition = Ut.fromExpression(exprTpl, params);
             return jq.fetchJAsync(condition);
         });

@@ -3,7 +3,7 @@ package io.zerows.epoch.metadata.security;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.component.qr.syntax.Ir;
+import io.zerows.platform.constant.VName;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.constant.VValue;
 import io.zerows.support.Ut;
@@ -60,8 +60,8 @@ public class DataBound implements Serializable {
      */
     public JsonObject toJson() {
         final JsonObject json = new JsonObject();
-        json.put(Ir.KEY_PROJECTION, Ut.toJArray(this.projection));
-        json.put(Ir.KEY_CRITERIA, this.criteria);
+        json.put(VName.KEY_PROJECTION, Ut.toJArray(this.projection));
+        json.put(VName.KEY_CRITERIA, this.criteria);
 
 
         /* Rows */

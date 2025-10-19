@@ -1,9 +1,9 @@
 package io.zerows.extension.commerce.rbac.uca.acl.rapid;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.qr.syntax.Ir;
-import io.zerows.sdk.security.Acl;
 import io.zerows.extension.commerce.rbac.util.Sc;
+import io.zerows.platform.constant.VName;
+import io.zerows.sdk.security.Acl;
 
 /*
  * Here are the record filter `Dwarf`
@@ -42,7 +42,7 @@ class DwarfRecord implements Dwarf {
 
         /* projection only */
         final JsonObject updated = SiftCol.onProjection(record,
-            Sc.aclOn(matrix.getJsonArray(Ir.KEY_PROJECTION), acl));
+            Sc.aclOn(matrix.getJsonArray(VName.KEY_PROJECTION), acl));
 
         /* Updated */
         dataReference.put("data", updated);

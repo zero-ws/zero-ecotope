@@ -8,6 +8,7 @@ import io.zerows.component.log.LogO;
 import io.zerows.component.qr.syntax.Ir;
 import io.zerows.epoch.metadata.MMPojo;
 import io.zerows.epoch.metadata.MMPojoMapping;
+import io.zerows.platform.constant.VName;
 import io.zerows.platform.constant.VString;
 import io.zerows.support.Ut;
 
@@ -64,7 +65,7 @@ public class JqTool {
     }
 
     public static JsonObject criteria(final JsonObject criteria, final String pojo) {
-        final Ir qr = qr(new JsonObject().put(Ir.KEY_CRITERIA, criteria), pojo);
+        final Ir qr = qr(new JsonObject().put(VName.KEY_CRITERIA, criteria), pojo);
         return Objects.isNull(qr.getCriteria()) ? new JsonObject() : qr.getCriteria().toJson();
     }
 

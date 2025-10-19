@@ -4,6 +4,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.component.qr.Criteria;
 import io.zerows.component.qr.Pager;
 import io.zerows.component.qr.Sorter;
+import io.zerows.platform.constant.VName;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -38,38 +39,12 @@ import java.util.Set;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 public interface Ir {
-    /**
-     * <get>pager</get>, It's mapped to `pager` field in json configuration.
-     * 「Pagination」This json contains following two field:
-     * 1. page: The page index ( started from 1 ).
-     * 2. size: The page size.
-     */
-    String KEY_PAGER = "pager";
-    /**
-     * <get>sorter</get>, It's mapped to `sorter` field in json configuration.
-     * 「Sorting」It's json array to contains different field with sorting mode.
-     * 1. ASC: ORDER BY ?? ASC.
-     * 2. DESC: ORDER BY ?? DESC.
-     */
-    String KEY_SORTER = "sorter";
-
-    /**
-     * <get>criteria</get>, It's mapped to `criteria` field in json configuration.
-     * 「Criteria」
-     */
-    String KEY_CRITERIA = "criteria";
-
-    /**
-     * <get>projection</get>, It's mapped to `projection` field in json configuration.
-     * 「Fields」It's feature for column picking up.
-     */
-    String KEY_PROJECTION = "projection";
 
     /**
      * It's specification for fields to be sure the request data.
      * The system should detect the request whether it's Qr parameters ( request ).
      */
-    String[] KEY_QUERY = new String[]{KEY_CRITERIA, KEY_PAGER, KEY_PROJECTION, KEY_SORTER};
+    String[] KEY_QUERY = new String[]{VName.KEY_CRITERIA, VName.KEY_PAGER, VName.KEY_PROJECTION, VName.KEY_SORTER};
 
     /**
      * Create Qr instance ( The default implementation class is {@link IrQr} )

@@ -4,6 +4,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.component.qr.syntax.Ir;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.web.Envelop;
+import io.zerows.platform.constant.VName;
 import io.zerows.platform.metadata.KMap;
 import io.zerows.specification.modeling.HRecord;
 import io.zerows.support.Ut;
@@ -106,7 +107,7 @@ class ActJObject extends ActMapping implements Serializable {
              * isQuery ? criteria
              * Until now the system has calculated the body data here, the condition should be enhancement
              */
-            if (body.containsKey(Ir.KEY_CRITERIA) || body.containsKey(Ir.KEY_PROJECTION)) {
+            if (body.containsKey(VName.KEY_CRITERIA) || body.containsKey(VName.KEY_PROJECTION)) {
                 /*
                  * JqTool part
                  */
@@ -126,8 +127,8 @@ class ActJObject extends ActMapping implements Serializable {
                     });
             }
             // fill criteria field when query is not empty
-            if (Ut.isNotNil(this.query) && !this.query.containsKey(Ir.KEY_CRITERIA)) {
-                this.query.put(Ir.KEY_CRITERIA, new JsonObject());
+            if (Ut.isNotNil(this.query) && !this.query.containsKey(VName.KEY_CRITERIA)) {
+                this.query.put(VName.KEY_CRITERIA, new JsonObject());
             }
             if (Ut.isNotNil(body)) {
                 /*

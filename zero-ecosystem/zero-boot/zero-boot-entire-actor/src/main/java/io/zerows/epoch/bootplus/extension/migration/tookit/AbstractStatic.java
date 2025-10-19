@@ -4,14 +4,14 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.qr.Pager;
 import io.zerows.component.qr.Sorter;
-import io.zerows.component.qr.syntax.Ir;
 import io.zerows.epoch.annotations.Contract;
 import io.zerows.epoch.bootplus.extension.migration.MigrateStep;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.database.cp.DataPool;
 import io.zerows.epoch.database.jooq.operation.DBJooq;
-import io.zerows.platform.enums.Environment;
 import io.zerows.epoch.store.jooq.DB;
+import io.zerows.platform.constant.VName;
+import io.zerows.platform.enums.Environment;
 import io.zerows.support.Ut;
 
 import java.util.function.Supplier;
@@ -28,9 +28,9 @@ public abstract class AbstractStatic extends AbstractTool {
 
     protected JsonObject toCondition(final Pager pager, final JsonObject filters) {
         final JsonObject condition = new JsonObject();
-        condition.put(Ir.KEY_PAGER, pager.toJson());
-        condition.put(Ir.KEY_CRITERIA, filters);
-        condition.put(Ir.KEY_SORTER, new JsonArray()
+        condition.put(VName.KEY_PAGER, pager.toJson());
+        condition.put(VName.KEY_CRITERIA, filters);
+        condition.put(VName.KEY_SORTER, new JsonArray()
             .add(Sorter.create(KName.CREATED_AT, false).toJson()));
         return condition;
     }

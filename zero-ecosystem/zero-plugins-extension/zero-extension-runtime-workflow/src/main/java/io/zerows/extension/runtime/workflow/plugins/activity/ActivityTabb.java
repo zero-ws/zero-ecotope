@@ -5,10 +5,10 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.aop.After;
 import io.zerows.component.aop.Around;
-import io.zerows.component.qr.syntax.Ir;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.runtime.skeleton.osgi.spi.feature.Valve;
 import io.zerows.extension.runtime.workflow.uca.camunda.Io;
+import io.zerows.platform.constant.VName;
 import io.zerows.platform.enums.typed.ChangeFlag;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
@@ -33,7 +33,7 @@ public class ActivityTabb implements After {
         return this.dataCond(normalized)
             .compose(criteria -> {
                 // Criteria
-                normalized.put(Ir.KEY_CRITERIA, criteria);
+                normalized.put(VName.KEY_CRITERIA, criteria);
                 return Ux.future(normalized);
             })
             .compose(this::dataFlow).compose(workflow -> {

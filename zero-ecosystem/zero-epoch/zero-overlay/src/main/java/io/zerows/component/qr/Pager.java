@@ -2,7 +2,6 @@ package io.zerows.component.qr;
 
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.LogOf;
 import io.zerows.platform.exception._60023Exception400QrPageInvalid;
 import io.zerows.platform.exception._60024Exception500QueryMetaNull;
 import io.zerows.platform.exception._60025Exception400QrPageIndex;
@@ -12,7 +11,6 @@ import java.util.Objects;
 
 public class Pager implements Serializable {
 
-    private static final LogOf LOGGER = LogOf.get(Pager.class);
     private static final String PAGE = "page";
     private static final String SIZE = "size";
     /**

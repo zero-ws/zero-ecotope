@@ -1,8 +1,8 @@
 package io.zerows.epoch.database.jooq.util;
 
 import io.vertx.core.json.JsonObject;
+import io.zerows.platform.constant.VName;
 import io.zerows.platform.constant.VString;
-import io.zerows.component.qr.syntax.Ir;
 
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -25,8 +25,8 @@ public class JqCond {
      * }
      */
     public static JsonObject compress(final JsonObject queryOr) {
-        if (queryOr.containsKey(Ir.KEY_CRITERIA)) {
-            queryOr.put(Ir.KEY_CRITERIA, compress(queryOr.getJsonObject(Ir.KEY_CRITERIA)));
+        if (queryOr.containsKey(VName.KEY_CRITERIA)) {
+            queryOr.put(VName.KEY_CRITERIA, compress(queryOr.getJsonObject(VName.KEY_CRITERIA)));
             return queryOr;
         } else {
             final Boolean isAnd = queryOr.getBoolean(VString.EMPTY, Boolean.FALSE);

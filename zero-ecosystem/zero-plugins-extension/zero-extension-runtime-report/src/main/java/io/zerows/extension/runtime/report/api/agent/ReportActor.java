@@ -6,7 +6,6 @@ import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
-import io.zerows.component.qr.syntax.Ir;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.constant.KName;
@@ -16,6 +15,7 @@ import io.zerows.extension.runtime.report.eon.Addr;
 import io.zerows.extension.runtime.report.eon.em.EmReport;
 import io.zerows.extension.runtime.report.exception._80700Exception400QueryParameter;
 import io.zerows.extension.runtime.report.exception._80701Exception404ReportMissing;
+import io.zerows.platform.constant.VName;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import jakarta.inject.Inject;
@@ -76,7 +76,7 @@ public class ReportActor {
 
     @Address(Addr.Report.QUERY_PAGE)
     public Future<JsonObject> instancePaged(final JsonObject query) {
-        final JsonObject criteriaJ = Ut.valueJObject(query, Ir.KEY_CRITERIA);
+        final JsonObject criteriaJ = Ut.valueJObject(query, VName.KEY_CRITERIA);
         if (Ut.isNil(criteriaJ)) {
             // ERR-80700
             return FnVertx.failOut(_80700Exception400QueryParameter.class, query.encode());

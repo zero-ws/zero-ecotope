@@ -3,7 +3,6 @@ package io.zerows.extension.runtime.crud.uca.op.aop;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.qr.syntax.Ir;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.database.jooq.operation.DBJooq;
 import io.zerows.epoch.metadata.KField;
@@ -14,6 +13,7 @@ import io.zerows.extension.runtime.crud.uca.desk.IxReply;
 import io.zerows.extension.runtime.crud.uca.input.Pre;
 import io.zerows.extension.runtime.crud.uca.op.Agonic;
 import io.zerows.extension.runtime.crud.util.Ix;
+import io.zerows.platform.constant.VName;
 import io.zerows.platform.enums.typed.ChangeFlag;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
@@ -117,7 +117,7 @@ class AgonicUpdate implements Agonic {
      * @return {@link Future} 异步记录结果
      */
     private Future<JsonArray> uniqueAAsync(final JsonObject inputJ, final IxMod in) {
-        final JsonObject query = inputJ.getJsonObject(Ir.KEY_CRITERIA);
+        final JsonObject query = inputJ.getJsonObject(VName.KEY_CRITERIA);
         LOG.Filter.info(this.getClass(), "( Mass Update ) Condition: {0}", query);
         final DBJooq jooq = IxPin.jooq(in);
         return jooq.fetchJAsync(query);

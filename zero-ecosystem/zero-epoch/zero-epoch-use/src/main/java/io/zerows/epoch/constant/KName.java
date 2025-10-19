@@ -1,7 +1,6 @@
 package io.zerows.epoch.constant;
 
 import io.zerows.platform.constant.VName;
-import io.zerows.component.qr.syntax.Ir;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -159,8 +158,8 @@ public interface KName extends VName {
         String PERM_ID = "permId";
 
         // view related
-        String PROJECTION = Ir.KEY_PROJECTION;
-        String CRITERIA = Ir.KEY_CRITERIA;
+        String PROJECTION = VName.KEY_PROJECTION;
+        String CRITERIA = VName.KEY_CRITERIA;
         String CREDIT = "credit";
 
         String ROWS = "rows";

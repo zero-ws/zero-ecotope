@@ -3,13 +3,13 @@ package io.zerows.extension.commerce.rbac.uca.acl.rapier;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.environment.DevEnv;
-import io.zerows.component.qr.syntax.Ir;
 import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.commerce.rbac.atom.ScOwner;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.SViewDao;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SView;
 import io.zerows.extension.commerce.rbac.eon.AuthMsg;
-import io.zerows.epoch.store.jooq.DB;
+import io.zerows.platform.constant.VName;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -64,16 +64,16 @@ public class QuinnView implements Quinn {
 
     private void updateData(final SView view, final JsonObject viewData) {
         // projection
-        if (viewData.containsKey(Ir.KEY_PROJECTION)) {
-            view.setProjection(Ut.valueJArray(viewData, Ir.KEY_PROJECTION).encode());
+        if (viewData.containsKey(VName.KEY_PROJECTION)) {
+            view.setProjection(Ut.valueJArray(viewData, VName.KEY_PROJECTION).encode());
         }
         // rows
         if (viewData.containsKey(KName.Rbac.ROWS)) {
             view.setRows(Ut.valueJObject(viewData, KName.Rbac.ROWS).encode());
         }
         // criteria
-        if (viewData.containsKey(Ir.KEY_CRITERIA)) {
-            view.setCriteria(Ut.valueJObject(viewData, Ir.KEY_CRITERIA).encode());
+        if (viewData.containsKey(VName.KEY_CRITERIA)) {
+            view.setCriteria(Ut.valueJObject(viewData, VName.KEY_CRITERIA).encode());
         } else {
             // 只有查询条件存在清空
             view.setCriteria(new JsonObject().encode());
