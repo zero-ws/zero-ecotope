@@ -32,14 +32,14 @@ public class MMAdapt {
 
     private MMAdapt(final String filename) {
         this.vector = CC_VECTOR.pick(() -> {
-            log.info("[ ZERO ] 从文件加载 MMVector: {}", filename);
             final String filepath = MessageFormat.format(DEFAULT_YML, filename);
+            log.info("[ ZERO ] 从文件加载 MMVector: {}", filepath);
             return R2Vector.of(filepath);
         }, filename);
     }
 
     public R2Vector vector() {
-        return vector;
+        return this.vector;
     }
 
     public static MMAdapt of(final String filename) {

@@ -230,6 +230,7 @@
                 <version>${zero.version}</version>
             </dependency>
 
+            <!-- R2MO 相关依赖 -->
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>r2mo-boot-vertx</artifactId>
@@ -242,17 +243,7 @@
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>r2mo-vertx-jooq</artifactId>
-                <version>${r2mo.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.zerows</groupId>
                 <artifactId>r2mo-io-local</artifactId>
-                <version>${r2mo.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.zerows</groupId>
-                <artifactId>r2mo-dbe-mybatisplus</artifactId>
                 <version>${r2mo.version}</version>
             </dependency>
             <dependency>
@@ -262,17 +253,33 @@
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
+                <artifactId>r2mo-typed-vertx</artifactId>
+                <version>${r2mo.version}</version>
+            </dependency>
+            <!-- Jooq 部分 -->
+            <dependency>
+                <groupId>io.zerows</groupId>
                 <artifactId>r2mo-dbe-jooq</artifactId>
                 <version>${r2mo.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>r2mo-typed-vertx</artifactId>
+                <artifactId>r2mo-vertx-jooq-shared</artifactId>
                 <version>${r2mo.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>r2mo-typed-hutool</artifactId>
+                <artifactId>r2mo-vertx-jooq-jdbc</artifactId>
+                <version>${r2mo.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>r2mo-vertx-jooq-generate</artifactId>
+                <version>${r2mo.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>r2mo-vertx-jooq</artifactId>
                 <version>${r2mo.version}</version>
             </dependency>
         </dependencies>

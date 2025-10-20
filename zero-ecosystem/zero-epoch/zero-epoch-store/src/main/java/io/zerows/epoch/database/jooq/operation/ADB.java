@@ -37,14 +37,12 @@ public class ADB {
 
     // region 基本变量定义和构造函数
     private final DBEx<?> dbe;
-    private final ADMap<?> mapped;
 
     /**
      * 直接新版访问 {@link DBEx} 的入口，之后的内容不再访问
      */
     protected <T> ADB(final Class<T> daoCls, final DBS dbs) {
         this.dbe = DBEx.of(daoCls, dbs);
-        this.mapped = ADMap.of(this.dbe);
     }
     // endregion
 
@@ -133,26 +131,21 @@ public class ADB {
         return (DBEx<R>) this.dbe;
     }
 
-    @SuppressWarnings("all")
-    private <E> ADMap<E> mapped() {
-        return (ADMap<E>) this.mapped;
-    }
-
     // region fetchAll??? / 查询所有数据
     public <T> List<T> fetchAll() {
         return this.<T>dbe().findAll();
     }
 
     public JsonArray fetchJAll() {
-        return this.mapped().outMany(this.fetchAll());
+        return this.dbe().findAllJ();
     }
 
     public <T> Future<List<T>> fetchAllAsync() {
-        return this.reader.fetchAllAsync();
+        return this.<T>dbe().findAllAsync();
     }
 
     public Future<JsonArray> fetchJAllAsync() {
-        return this.mapped().outMany(this.fetchAllAsync());
+        return this.dbe().findAllJAsync();
     }
 
     // endregion
@@ -181,7 +174,7 @@ public class ADB {
     @Deprecated
     protected <T> ADB(final Class<T> clazz, final JooqDsl dsl) {
         this.dbe = null;
-        this.mapped = null;
+        // this.mapped = null;
         /* New exception to avoid programming missing */
         // this.daoCls = clazz;
 

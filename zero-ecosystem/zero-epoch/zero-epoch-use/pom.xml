@@ -26,9 +26,16 @@
             <groupId>io.vertx</groupId>
             <artifactId>vertx-codegen</artifactId>
         </dependency>
+        <!--
+        替换旧版 / 移除掉 jklingsporn 版，自行托管维护
         <dependency>
             <groupId>io.github.jklingsporn</groupId>
             <artifactId>vertx-jooq-classic-jdbc</artifactId>
+        </dependency>
+        -->
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>r2mo-vertx-jooq-jdbc</artifactId>
         </dependency>
 
         <!-- Google -->
