@@ -14,15 +14,22 @@
     <packaging>pom</packaging>
     <dependencyManagement>
         <dependencies>
+            <!-- 核心底层 -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-extension-skeleton</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <!-- ERP -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-extension-erp-api</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
             <!-- ===================== 商业接口部分 ==================== -->
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-extension-commerce-api</artifactId>
-                <version>${zero.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.zerows</groupId>
-                <artifactId>zero-extension-commerce-erp</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>
@@ -80,11 +87,6 @@
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-extension-runtime-report</artifactId>
-                <version>${zero.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.zerows</groupId>
-                <artifactId>zero-extension-skeleton</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>

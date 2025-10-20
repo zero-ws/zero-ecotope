@@ -16,22 +16,11 @@
             <artifactId>zero-epoch-adhoc</artifactId>
             <scope>test</scope>
         </dependency>
-        <!-- New -->
-        <dependency>
-            <groupId>io.zerows</groupId>
-            <artifactId>zero-epoch-use</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.zerows</groupId>
-            <artifactId>zero-epoch-execution</artifactId>
-        </dependency>
         <!-- Zero Web Container -->
         <dependency>
             <groupId>io.zerows</groupId>
             <artifactId>zero-epoch-cosmic</artifactId>
         </dependency>
-
-
         <!-- Reflection -->
         <dependency>
             <groupId>cglib</groupId>

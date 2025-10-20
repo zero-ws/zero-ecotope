@@ -8,7 +8,7 @@
         <version>1.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>zero-boot-entire-import</artifactId>
+    <artifactId>zero-boot-import</artifactId>
     <packaging>pom</packaging>
     <name>(POM) 🫆 - Zero::Boot::App Import</name>
     <properties>
@@ -41,7 +41,7 @@
             <!-- Business Scaffold -->
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-boot-entire-actor</artifactId>
+                <artifactId>zero-boot-full-actor</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>

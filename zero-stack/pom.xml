@@ -8,7 +8,7 @@
     <artifactId>zero-stack</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
-    <name>(POM) 📚️ - Zero ${zero.version} / Momo ${momo.version} / R2mo ${r2mo.version}</name>
+    <name>(POM) 📚️ - Zero Stack ${zero.version} / Momo ${momo.version}</name>
     <properties>
         <momo.version>1.0.7</momo.version>
         <zero.version>1.0.0</zero.version>

@@ -16,8 +16,8 @@
         <!-- 核心模块启动器 -->
         <module>zero-boot-mini-actor</module>
         <!-- 扩展模块启动器 -->
-        <module>zero-boot-entire-actor</module>
+        <module>zero-boot-full-actor</module>
         <!-- 扩展模块启动（继承模式）-->
-        <module>zero-boot-entire-import</module>
+        <module>zero-boot-import</module>
     </modules>
 </project>
