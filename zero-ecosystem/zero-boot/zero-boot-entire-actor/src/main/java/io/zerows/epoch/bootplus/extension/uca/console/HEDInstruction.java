@@ -1,5 +1,6 @@
 package io.zerows.epoch.bootplus.extension.uca.console;
 
+import io.r2mo.jce.common.HED;
 import io.vertx.core.Future;
 import io.zerows.epoch.bootplus.extension.scaffold.console.AbstractInstruction;
 import io.zerows.plugins.common.shell.atom.CommandInput;
@@ -21,10 +22,10 @@ public class HEDInstruction extends AbstractInstruction {
         final String path = this.inString(input, "p");
         final String console;
         if (Ut.isNil(path)) {
-            console = Ut.encryptRSAP(waitFor);
+            throw new RuntimeException("[ HED ] 公钥文件路径不能为空！");
         } else {
             final String publicKey = Ut.ioString(path);
-            console = Ut.encryptRSAP(waitFor, publicKey);
+            console = HED.encryptRSAPublic(waitFor, publicKey);
         }
         System.out.println("加密前：" + waitFor);
         System.out.println("加密后：" + console);

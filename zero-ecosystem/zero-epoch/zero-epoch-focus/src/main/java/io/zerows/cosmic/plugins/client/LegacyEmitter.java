@@ -1,6 +1,7 @@
 package io.zerows.cosmic.plugins.client;
 
 import io.r2mo.function.Fn;
+import io.r2mo.jce.common.HED;
 import io.vertx.core.MultiMap;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.json.JsonObject;
@@ -47,7 +48,7 @@ class LegacyEmitter extends AbstractEmitter {
          * Encrypt content with public key of RSA
          * Replace the method `getPublicKeyFile` with `getPublicKey` for content extracting
          */
-        final String content = Ut.encryptRSAP(params.encode(), this.integration().getPublicKey());
+        final String content = HED.encryptRSAPublic(params.encode(), this.integration().getPublicKey());
         /*
          * Send request to read String response here.
          */

@@ -1,8 +1,5 @@
 package io.zerows.support.base;
 
-import io.zerows.component.crypto.ED;
-import io.zerows.platform.metadata.KPair;
-
 /**
  * @author lang : 2023/4/28
  */
@@ -52,16 +49,5 @@ class _Random extends _Net {
      */
     public static String randomLetter(final int length) {
         return URandom.randomLetter(length);
-    }
-
-    /**
-     * 密钥生成专用，生成公私钥对
-     *
-     * @param length 公私钥对算法长度
-     *
-     * @return 公私钥对
-     */
-    public static KPair randomRsa(final int length) {
-        return ED.rsa(true).generate(length);
     }
 }

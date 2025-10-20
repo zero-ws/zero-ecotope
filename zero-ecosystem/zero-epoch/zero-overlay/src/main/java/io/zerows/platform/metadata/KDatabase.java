@@ -3,7 +3,7 @@ package io.zerows.platform.metadata;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.r2mo.base.dbe.DBCrypto;
+import io.r2mo.base.secure.EDCrypto;
 import io.r2mo.spi.SPI;
 import io.r2mo.typed.annotation.SPID;
 import io.vertx.core.json.JsonObject;
@@ -84,16 +84,16 @@ public class KDatabase implements Serializable, HCopier<KDatabase>, HJson {
         /*
          * 不在考虑使用与否，只是单纯用组件处理，屏蔽环境变量
          */
-        final List<DBCrypto> cryptoList = SPI.findMany(DBCrypto.class);
+        final List<EDCrypto> cryptoList = SPI.findMany(EDCrypto.class);
         if (cryptoList.isEmpty()) {
             return this.password;
         }
-        final DBCrypto crypto = cryptoList.stream().filter(item -> {
+        final EDCrypto crypto = cryptoList.stream().filter(item -> {
             final SPID spid = item.getClass().getDeclaredAnnotation(SPID.class);
             if (Objects.isNull(spid)) {
                 return false;
             }
-            return DBCrypto.FOR_DATABASE.equals(spid.value());
+            return EDCrypto.FOR_DATABASE.equals(spid.value());
         }).findAny().orElse(null);
         if (Objects.isNull(crypto)) {
             return this.password;

@@ -16,6 +16,7 @@
         <!-- 扩展模块骨架 -->
         <module>zero-extension-skeleton</module>
         <module>zero-extension-runtime-crud</module>                 <!-- CRUD 引擎 -->
+        <module>zero-extension-erp</module>
 
 
         <!-- 系统核心模块 -->
@@ -42,8 +43,5 @@
 
         <!-- 上层开发库 -->
         <module>zero-extension-commerce-api</module>
-
-        <!-- 独立运行程序 -->
-        <module>zero-runner-toolkit-hed</module>
     </modules>
 </project>
