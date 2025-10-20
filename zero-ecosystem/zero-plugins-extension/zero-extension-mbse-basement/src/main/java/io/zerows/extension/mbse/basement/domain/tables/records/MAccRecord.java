@@ -4,7 +4,7 @@
 package io.zerows.extension.mbse.basement.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.mbse.basement.domain.tables.MAcc;
 import io.zerows.extension.mbse.basement.domain.tables.interfaces.IMAcc;
 import org.jooq.Field;

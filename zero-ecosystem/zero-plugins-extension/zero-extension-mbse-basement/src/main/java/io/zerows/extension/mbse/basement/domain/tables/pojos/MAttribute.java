@@ -4,7 +4,7 @@
 package io.zerows.extension.mbse.basement.domain.tables.pojos;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.mbse.basement.domain.tables.interfaces.IMAttribute;
 
 import java.time.LocalDateTime;
@@ -51,7 +51,7 @@ public class MAttribute implements VertxPojo, IMAttribute {
     public MAttribute() {
     }
 
-    public MAttribute(IMAttribute value) {
+    public MAttribute(final IMAttribute value) {
         this.key = value.getKey();
         this.name = value.getName();
         this.alias = value.getAlias();
@@ -85,36 +85,36 @@ public class MAttribute implements VertxPojo, IMAttribute {
     }
 
     public MAttribute(
-        String key,
-        String name,
-        String alias,
-        String type,
-        String expression,
-        String normalize,
-        String inComponent,
-        String outComponent,
-        String modelId,
-        String comments,
-        String source,
-        String sourceField,
-        String sourceConfig,
-        String sourceReference,
-        String sourceExternal,
-        Boolean isArray,
-        Boolean isRefer,
-        Boolean isSyncIn,
-        Boolean isSyncOut,
-        Boolean isLock,
-        Boolean isTrack,
-        Boolean isConfirm,
-        String sigma,
-        String language,
-        Boolean active,
-        String metadata,
-        LocalDateTime createdAt,
-        String createdBy,
-        LocalDateTime updatedAt,
-        String updatedBy
+        final String key,
+        final String name,
+        final String alias,
+        final String type,
+        final String expression,
+        final String normalize,
+        final String inComponent,
+        final String outComponent,
+        final String modelId,
+        final String comments,
+        final String source,
+        final String sourceField,
+        final String sourceConfig,
+        final String sourceReference,
+        final String sourceExternal,
+        final Boolean isArray,
+        final Boolean isRefer,
+        final Boolean isSyncIn,
+        final Boolean isSyncOut,
+        final Boolean isLock,
+        final Boolean isTrack,
+        final Boolean isConfirm,
+        final String sigma,
+        final String language,
+        final Boolean active,
+        final String metadata,
+        final LocalDateTime createdAt,
+        final String createdBy,
+        final LocalDateTime updatedAt,
+        final String updatedBy
     ) {
         this.key = key;
         this.name = name;
@@ -148,7 +148,7 @@ public class MAttribute implements VertxPojo, IMAttribute {
         this.updatedBy = updatedBy;
     }
 
-    public MAttribute(io.vertx.core.json.JsonObject json) {
+    public MAttribute(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -165,7 +165,7 @@ public class MAttribute implements VertxPojo, IMAttribute {
      * Setter for <code>ZDB.M_ATTRIBUTE.KEY</code>. 「key」- 属性ID
      */
     @Override
-    public MAttribute setKey(String key) {
+    public MAttribute setKey(final String key) {
         this.key = key;
         return this;
     }
@@ -182,7 +182,7 @@ public class MAttribute implements VertxPojo, IMAttribute {
      * Setter for <code>ZDB.M_ATTRIBUTE.NAME</code>. 「name」- 属性名称
      */
     @Override
-    public MAttribute setName(String name) {
+    public MAttribute setName(final String name) {
         this.name = name;
         return this;
     }
@@ -199,7 +199,7 @@ public class MAttribute implements VertxPojo, IMAttribute {
      * Setter for <code>ZDB.M_ATTRIBUTE.ALIAS</code>. 「alias」- 属性别名（业务名）
      */
     @Override
-    public MAttribute setAlias(String alias) {
+    public MAttribute setAlias(final String alias) {
         this.alias = alias;
         return this;
     }
@@ -218,7 +218,7 @@ public class MAttribute implements VertxPojo, IMAttribute {
      * INTERNAL/EXTERNAL/REFERENCE属性
      */
     @Override
-    public MAttribute setType(String type) {
+    public MAttribute setType(final String type) {
         this.type = type;
         return this;
     }
@@ -235,7 +235,7 @@ public class MAttribute implements VertxPojo, IMAttribute {
      * Setter for <code>ZDB.M_ATTRIBUTE.EXPRESSION</code>. 「expression」- 表达式
      */
     @Override
-    public MAttribute setExpression(String expression) {
+    public MAttribute setExpression(final String expression) {
         this.expression = expression;
         return this;
     }
@@ -252,7 +252,7 @@ public class MAttribute implements VertxPojo, IMAttribute {
      * Setter for <code>ZDB.M_ATTRIBUTE.NORMALIZE</code>. 「normalize」- 表达式
      */
     @Override
-    public MAttribute setNormalize(String normalize) {
+    public MAttribute setNormalize(final String normalize) {
         this.normalize = normalize;
         return this;
     }
@@ -269,7 +269,7 @@ public class MAttribute implements VertxPojo, IMAttribute {
      * Setter for <code>ZDB.M_ATTRIBUTE.IN_COMPONENT</code>. 「inComponent」- 写入插件
      */
     @Override
-    public MAttribute setInComponent(String inComponent) {
+    public MAttribute setInComponent(final String inComponent) {
         this.inComponent = inComponent;
         return this;
     }
@@ -288,7 +288,7 @@ public class MAttribute implements VertxPojo, IMAttribute {
      * 读取插件
      */
     @Override
-    public MAttribute setOutComponent(String outComponent) {
+    public MAttribute setOutComponent(final String outComponent) {
         this.outComponent = outComponent;
         return this;
     }
@@ -305,7 +305,7 @@ public class MAttribute implements VertxPojo, IMAttribute {
      * Setter for <code>ZDB.M_ATTRIBUTE.MODEL_ID</code>. 「modelId」- 关联的模型ID
      */
     @Override
-    public MAttribute setModelId(String modelId) {
+    public MAttribute setModelId(final String modelId) {
         this.modelId = modelId;
         return this;
     }
@@ -322,7 +322,7 @@ public class MAttribute implements VertxPojo, IMAttribute {
      * Setter for <code>ZDB.M_ATTRIBUTE.COMMENTS</code>. 「comments」- 当前属性的描述信息
      */
     @Override
-    public MAttribute setComments(String comments) {
+    public MAttribute setComments(final String comments) {
         this.comments = comments;
         return this;
     }
@@ -339,7 +339,7 @@ public class MAttribute implements VertxPojo, IMAttribute {
      * Setter for <code>ZDB.M_ATTRIBUTE.SOURCE</code>. 「source」- 关联实体ID
      */
     @Override
-    public MAttribute setSource(String source) {
+    public MAttribute setSource(final String source) {
         this.source = source;
         return this;
     }
@@ -358,7 +358,7 @@ public class MAttribute implements VertxPojo, IMAttribute {
      * 可选，如果不设置则以name为主
      */
     @Override
-    public MAttribute setSourceField(String sourceField) {
+    public MAttribute setSourceField(final String sourceField) {
         this.sourceField = sourceField;
         return this;
     }
@@ -377,7 +377,7 @@ public class MAttribute implements VertxPojo, IMAttribute {
      * 数据集配置（区分 Array 和 Object）
      */
     @Override
-    public MAttribute setSourceConfig(String sourceConfig) {
+    public MAttribute setSourceConfig(final String sourceConfig) {
         this.sourceConfig = sourceConfig;
         return this;
     }
@@ -396,7 +396,7 @@ public class MAttribute implements VertxPojo, IMAttribute {
      * 「sourceReference」- 引用配置信息（ type = REFERENCE）
      */
     @Override
-    public MAttribute setSourceReference(String sourceReference) {
+    public MAttribute setSourceReference(final String sourceReference) {
         this.sourceReference = sourceReference;
         return this;
     }
@@ -415,7 +415,7 @@ public class MAttribute implements VertxPojo, IMAttribute {
      * 「sourceExternal」- 外部配置信息（ type = EXTERNAL ）
      */
     @Override
-    public MAttribute setSourceExternal(String sourceExternal) {
+    public MAttribute setSourceExternal(final String sourceExternal) {
         this.sourceExternal = sourceExternal;
         return this;
     }
@@ -434,7 +434,7 @@ public class MAttribute implements VertxPojo, IMAttribute {
      * 是否集合属性，集合属性在导入导出时可用（保留）
      */
     @Override
-    public MAttribute setIsArray(Boolean isArray) {
+    public MAttribute setIsArray(final Boolean isArray) {
         this.isArray = isArray;
         return this;
     }
@@ -453,7 +453,7 @@ public class MAttribute implements VertxPojo, IMAttribute {
      * 是否引用属性的主属性，主属性才可拥有 sourceReference 配置，根据 source 有区别
      */
     @Override
-    public MAttribute setIsRefer(Boolean isRefer) {
+    public MAttribute setIsRefer(final Boolean isRefer) {
         this.isRefer = isRefer;
         return this;
     }
@@ -470,7 +470,7 @@ public class MAttribute implements VertxPojo, IMAttribute {
      * Setter for <code>ZDB.M_ATTRIBUTE.IS_SYNC_IN</code>. 「isSyncIn」- 是否同步读
      */
     @Override
-    public MAttribute setIsSyncIn(Boolean isSyncIn) {
+    public MAttribute setIsSyncIn(final Boolean isSyncIn) {
         this.isSyncIn = isSyncIn;
         return this;
     }
@@ -487,7 +487,7 @@ public class MAttribute implements VertxPojo, IMAttribute {
      * Setter for <code>ZDB.M_ATTRIBUTE.IS_SYNC_OUT</code>. 「isSyncOut」- 是否同步写
      */
     @Override
-    public MAttribute setIsSyncOut(Boolean isSyncOut) {
+    public MAttribute setIsSyncOut(final Boolean isSyncOut) {
         this.isSyncOut = isSyncOut;
         return this;
     }
@@ -504,7 +504,7 @@ public class MAttribute implements VertxPojo, IMAttribute {
      * Setter for <code>ZDB.M_ATTRIBUTE.IS_LOCK</code>. 「isLock」- 是否锁定，锁定属性不可删除
      */
     @Override
-    public MAttribute setIsLock(Boolean isLock) {
+    public MAttribute setIsLock(final Boolean isLock) {
         this.isLock = isLock;
         return this;
     }
@@ -523,7 +523,7 @@ public class MAttribute implements VertxPojo, IMAttribute {
      * isTrack 那么启用 ACTIVITY 的变更记录，对应 ITEM
      */
     @Override
-    public MAttribute setIsTrack(Boolean isTrack) {
+    public MAttribute setIsTrack(final Boolean isTrack) {
         this.isTrack = isTrack;
         return this;
     }
@@ -542,7 +542,7 @@ public class MAttribute implements VertxPojo, IMAttribute {
      * 是否生成待确认变更，只有放在待确认变更中的数据需要生成待确认变更
      */
     @Override
-    public MAttribute setIsConfirm(Boolean isConfirm) {
+    public MAttribute setIsConfirm(final Boolean isConfirm) {
         this.isConfirm = isConfirm;
         return this;
     }
@@ -559,7 +559,7 @@ public class MAttribute implements VertxPojo, IMAttribute {
      * Setter for <code>ZDB.M_ATTRIBUTE.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public MAttribute setSigma(String sigma) {
+    public MAttribute setSigma(final String sigma) {
         this.sigma = sigma;
         return this;
     }
@@ -576,7 +576,7 @@ public class MAttribute implements VertxPojo, IMAttribute {
      * Setter for <code>ZDB.M_ATTRIBUTE.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public MAttribute setLanguage(String language) {
+    public MAttribute setLanguage(final String language) {
         this.language = language;
         return this;
     }
@@ -593,7 +593,7 @@ public class MAttribute implements VertxPojo, IMAttribute {
      * Setter for <code>ZDB.M_ATTRIBUTE.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public MAttribute setActive(Boolean active) {
+    public MAttribute setActive(final Boolean active) {
         this.active = active;
         return this;
     }
@@ -610,7 +610,7 @@ public class MAttribute implements VertxPojo, IMAttribute {
      * Setter for <code>ZDB.M_ATTRIBUTE.METADATA</code>. 「metadata」- 附加配置数据
      */
     @Override
-    public MAttribute setMetadata(String metadata) {
+    public MAttribute setMetadata(final String metadata) {
         this.metadata = metadata;
         return this;
     }
@@ -627,7 +627,7 @@ public class MAttribute implements VertxPojo, IMAttribute {
      * Setter for <code>ZDB.M_ATTRIBUTE.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public MAttribute setCreatedAt(LocalDateTime createdAt) {
+    public MAttribute setCreatedAt(final LocalDateTime createdAt) {
         this.createdAt = createdAt;
         return this;
     }
@@ -644,7 +644,7 @@ public class MAttribute implements VertxPojo, IMAttribute {
      * Setter for <code>ZDB.M_ATTRIBUTE.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public MAttribute setCreatedBy(String createdBy) {
+    public MAttribute setCreatedBy(final String createdBy) {
         this.createdBy = createdBy;
         return this;
     }
@@ -661,7 +661,7 @@ public class MAttribute implements VertxPojo, IMAttribute {
      * Setter for <code>ZDB.M_ATTRIBUTE.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public MAttribute setUpdatedAt(LocalDateTime updatedAt) {
+    public MAttribute setUpdatedAt(final LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
         return this;
     }
@@ -678,13 +678,13 @@ public class MAttribute implements VertxPojo, IMAttribute {
      * Setter for <code>ZDB.M_ATTRIBUTE.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public MAttribute setUpdatedBy(String updatedBy) {
+    public MAttribute setUpdatedBy(final String updatedBy) {
         this.updatedBy = updatedBy;
         return this;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
@@ -884,7 +884,7 @@ public class MAttribute implements VertxPojo, IMAttribute {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("MAttribute (");
+        final StringBuilder sb = new StringBuilder("MAttribute (");
 
         sb.append(key);
         sb.append(", ").append(name);
@@ -926,7 +926,7 @@ public class MAttribute implements VertxPojo, IMAttribute {
     // -------------------------------------------------------------------------
 
     @Override
-    public void from(IMAttribute from) {
+    public void from(final IMAttribute from) {
         setKey(from.getKey());
         setName(from.getName());
         setAlias(from.getAlias());
@@ -960,7 +960,7 @@ public class MAttribute implements VertxPojo, IMAttribute {
     }
 
     @Override
-    public <E extends IMAttribute> E into(E into) {
+    public <E extends IMAttribute> E into(final E into) {
         into.from(this);
         return into;
     }

@@ -4,7 +4,7 @@
 package io.zerows.extension.commerce.erp.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.commerce.erp.domain.tables.TVendorHour;
 import io.zerows.extension.commerce.erp.domain.tables.interfaces.ITVendorHour;
 import org.jooq.Field;
@@ -33,7 +33,7 @@ public class TVendorHourRecord extends UpdatableRecordImpl<TVendorHourRecord> im
     /**
      * Create a detached, initialised TVendorHourRecord
      */
-    public TVendorHourRecord(String key, String commentExtension, String classification, LocalDateTime startAt, LocalDateTime endAt, Integer days, String requestType, String fromType, LocalDateTime fromAt, String toType, LocalDateTime toAt) {
+    public TVendorHourRecord(final String key, final String commentExtension, final String classification, final LocalDateTime startAt, final LocalDateTime endAt, final Integer days, final String requestType, final String fromType, final LocalDateTime fromAt, final String toType, final LocalDateTime toAt) {
         super(TVendorHour.T_VENDOR_HOUR);
 
         setKey(key);
@@ -53,7 +53,7 @@ public class TVendorHourRecord extends UpdatableRecordImpl<TVendorHourRecord> im
     /**
      * Create a detached, initialised TVendorHourRecord
      */
-    public TVendorHourRecord(io.zerows.extension.commerce.erp.domain.tables.pojos.TVendorHour value) {
+    public TVendorHourRecord(final io.zerows.extension.commerce.erp.domain.tables.pojos.TVendorHour value) {
         super(TVendorHour.T_VENDOR_HOUR);
 
         if (value != null) {
@@ -72,7 +72,7 @@ public class TVendorHourRecord extends UpdatableRecordImpl<TVendorHourRecord> im
         }
     }
 
-    public TVendorHourRecord(io.vertx.core.json.JsonObject json) {
+    public TVendorHourRecord(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -89,7 +89,7 @@ public class TVendorHourRecord extends UpdatableRecordImpl<TVendorHourRecord> im
      * Setter for <code>ZDB.T_VENDOR_HOUR.KEY</code>. 「key」- Ticket Primary Key
      */
     @Override
-    public TVendorHourRecord setKey(String value) {
+    public TVendorHourRecord setKey(final String value) {
         set(0, value);
         return this;
     }
@@ -108,7 +108,7 @@ public class TVendorHourRecord extends UpdatableRecordImpl<TVendorHourRecord> im
      * 「commentExtension」- Extension Comment
      */
     @Override
-    public TVendorHourRecord setCommentExtension(String value) {
+    public TVendorHourRecord setCommentExtension(final String value) {
         set(1, value);
         return this;
     }
@@ -127,7 +127,7 @@ public class TVendorHourRecord extends UpdatableRecordImpl<TVendorHourRecord> im
      * 「classification」- The ticket related income type
      */
     @Override
-    public TVendorHourRecord setClassification(String value) {
+    public TVendorHourRecord setClassification(final String value) {
         set(2, value);
         return this;
     }
@@ -144,7 +144,7 @@ public class TVendorHourRecord extends UpdatableRecordImpl<TVendorHourRecord> im
      * Setter for <code>ZDB.T_VENDOR_HOUR.START_AT</code>. 「startAt」- From
      */
     @Override
-    public TVendorHourRecord setStartAt(LocalDateTime value) {
+    public TVendorHourRecord setStartAt(final LocalDateTime value) {
         set(3, value);
         return this;
     }
@@ -161,7 +161,7 @@ public class TVendorHourRecord extends UpdatableRecordImpl<TVendorHourRecord> im
      * Setter for <code>ZDB.T_VENDOR_HOUR.END_AT</code>. 「endAt」- To
      */
     @Override
-    public TVendorHourRecord setEndAt(LocalDateTime value) {
+    public TVendorHourRecord setEndAt(final LocalDateTime value) {
         set(4, value);
         return this;
     }
@@ -178,7 +178,7 @@ public class TVendorHourRecord extends UpdatableRecordImpl<TVendorHourRecord> im
      * Setter for <code>ZDB.T_VENDOR_HOUR.DAYS</code>. 「days」- Duration
      */
     @Override
-    public TVendorHourRecord setDays(Integer value) {
+    public TVendorHourRecord setDays(final Integer value) {
         set(5, value);
         return this;
     }
@@ -197,7 +197,7 @@ public class TVendorHourRecord extends UpdatableRecordImpl<TVendorHourRecord> im
      * Request type of hour
      */
     @Override
-    public TVendorHourRecord setRequestType(String value) {
+    public TVendorHourRecord setRequestType(final String value) {
         set(6, value);
         return this;
     }
@@ -214,7 +214,7 @@ public class TVendorHourRecord extends UpdatableRecordImpl<TVendorHourRecord> im
      * Setter for <code>ZDB.T_VENDOR_HOUR.FROM_TYPE</code>. 「fromType」
      */
     @Override
-    public TVendorHourRecord setFromType(String value) {
+    public TVendorHourRecord setFromType(final String value) {
         set(7, value);
         return this;
     }
@@ -231,7 +231,7 @@ public class TVendorHourRecord extends UpdatableRecordImpl<TVendorHourRecord> im
      * Setter for <code>ZDB.T_VENDOR_HOUR.FROM_AT</code>. 「fromAt」
      */
     @Override
-    public TVendorHourRecord setFromAt(LocalDateTime value) {
+    public TVendorHourRecord setFromAt(final LocalDateTime value) {
         set(8, value);
         return this;
     }
@@ -256,7 +256,7 @@ public class TVendorHourRecord extends UpdatableRecordImpl<TVendorHourRecord> im
      * Setter for <code>ZDB.T_VENDOR_HOUR.TO_TYPE</code>. 「toType」
      */
     @Override
-    public TVendorHourRecord setToType(String value) {
+    public TVendorHourRecord setToType(final String value) {
         set(9, value);
         return this;
     }
@@ -273,7 +273,7 @@ public class TVendorHourRecord extends UpdatableRecordImpl<TVendorHourRecord> im
      * Setter for <code>ZDB.T_VENDOR_HOUR.TO_AT</code>. 「toAt」
      */
     @Override
-    public TVendorHourRecord setToAt(LocalDateTime value) {
+    public TVendorHourRecord setToAt(final LocalDateTime value) {
         set(10, value);
         return this;
     }
@@ -459,49 +459,49 @@ public class TVendorHourRecord extends UpdatableRecordImpl<TVendorHourRecord> im
     }
 
     @Override
-    public TVendorHourRecord value1(String value) {
+    public TVendorHourRecord value1(final String value) {
         setKey(value);
         return this;
     }
 
     @Override
-    public TVendorHourRecord value2(String value) {
+    public TVendorHourRecord value2(final String value) {
         setCommentExtension(value);
         return this;
     }
 
     @Override
-    public TVendorHourRecord value3(String value) {
+    public TVendorHourRecord value3(final String value) {
         setClassification(value);
         return this;
     }
 
     @Override
-    public TVendorHourRecord value4(LocalDateTime value) {
+    public TVendorHourRecord value4(final LocalDateTime value) {
         setStartAt(value);
         return this;
     }
 
     @Override
-    public TVendorHourRecord value5(LocalDateTime value) {
+    public TVendorHourRecord value5(final LocalDateTime value) {
         setEndAt(value);
         return this;
     }
 
     @Override
-    public TVendorHourRecord value6(Integer value) {
+    public TVendorHourRecord value6(final Integer value) {
         setDays(value);
         return this;
     }
 
     @Override
-    public TVendorHourRecord value7(String value) {
+    public TVendorHourRecord value7(final String value) {
         setRequestType(value);
         return this;
     }
 
     @Override
-    public TVendorHourRecord value8(String value) {
+    public TVendorHourRecord value8(final String value) {
         setFromType(value);
         return this;
     }
@@ -511,13 +511,13 @@ public class TVendorHourRecord extends UpdatableRecordImpl<TVendorHourRecord> im
     // -------------------------------------------------------------------------
 
     @Override
-    public TVendorHourRecord value9(LocalDateTime value) {
+    public TVendorHourRecord value9(final LocalDateTime value) {
         setFromAt(value);
         return this;
     }
 
     @Override
-    public TVendorHourRecord value10(String value) {
+    public TVendorHourRecord value10(final String value) {
         setToType(value);
         return this;
     }
@@ -527,13 +527,13 @@ public class TVendorHourRecord extends UpdatableRecordImpl<TVendorHourRecord> im
     // -------------------------------------------------------------------------
 
     @Override
-    public TVendorHourRecord value11(LocalDateTime value) {
+    public TVendorHourRecord value11(final LocalDateTime value) {
         setToAt(value);
         return this;
     }
 
     @Override
-    public TVendorHourRecord values(String value1, String value2, String value3, LocalDateTime value4, LocalDateTime value5, Integer value6, String value7, String value8, LocalDateTime value9, String value10, LocalDateTime value11) {
+    public TVendorHourRecord values(final String value1, final String value2, final String value3, final LocalDateTime value4, final LocalDateTime value5, final Integer value6, final String value7, final String value8, final LocalDateTime value9, final String value10, final LocalDateTime value11) {
         value1(value1);
         value2(value2);
         value3(value3);
@@ -549,7 +549,7 @@ public class TVendorHourRecord extends UpdatableRecordImpl<TVendorHourRecord> im
     }
 
     @Override
-    public void from(ITVendorHour from) {
+    public void from(final ITVendorHour from) {
         setKey(from.getKey());
         setCommentExtension(from.getCommentExtension());
         setClassification(from.getClassification());
@@ -565,7 +565,7 @@ public class TVendorHourRecord extends UpdatableRecordImpl<TVendorHourRecord> im
     }
 
     @Override
-    public <E extends ITVendorHour> E into(E into) {
+    public <E extends ITVendorHour> E into(final E into) {
         into.from(this);
         return into;
     }

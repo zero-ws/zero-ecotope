@@ -107,9 +107,9 @@ public class ConfigDS extends ConfigNorm {
         if (StrUtil.isEmpty(configured)) {
             // 默认 hikari
             database.putExtension("hikari", new JsonObject());
-            log.info("[ ZERO ] 切换到默认数据源：hikari 连接池！");
+            log.debug("[ ZERO ] 切换到默认数据源：hikari 连接池！database = `{}`", database.getInstance());
         } else {
-            log.info("[ ZERO ] 选择数据源连接池：{}！", configured);
+            log.debug("[ ZERO ] 选择数据源连接池：{}！/ database = `{}`", configured, database.getInstance());
         }
     }
 }

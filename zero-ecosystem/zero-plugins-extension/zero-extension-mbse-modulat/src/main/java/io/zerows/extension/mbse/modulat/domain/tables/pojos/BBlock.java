@@ -4,7 +4,7 @@
 package io.zerows.extension.mbse.modulat.domain.tables.pojos;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.mbse.modulat.domain.tables.interfaces.IBBlock;
 
 import java.time.LocalDateTime;
@@ -50,7 +50,7 @@ public class BBlock implements VertxPojo, IBBlock {
     public BBlock() {
     }
 
-    public BBlock(IBBlock value) {
+    public BBlock(final IBBlock value) {
         this.key = value.getKey();
         this.code = value.getCode();
         this.name = value.getName();
@@ -83,35 +83,35 @@ public class BBlock implements VertxPojo, IBBlock {
     }
 
     public BBlock(
-        String key,
-        String code,
-        String name,
-        String version,
-        Boolean authorized,
-        String uiIcon,
-        String uiStyle,
-        Long uiSort,
-        String uiConfig,
-        String uiContent,
-        String signIssuer,
-        String signName,
-        LocalDateTime signAt,
-        String signSecret,
-        String signLic,
-        LocalDateTime signEnd,
-        LocalDateTime signStart,
-        String licIdentifier,
-        String licMenu,
-        String appId,
-        String bagId,
-        Boolean active,
-        String sigma,
-        String metadata,
-        String language,
-        LocalDateTime createdAt,
-        String createdBy,
-        LocalDateTime updatedAt,
-        String updatedBy
+        final String key,
+        final String code,
+        final String name,
+        final String version,
+        final Boolean authorized,
+        final String uiIcon,
+        final String uiStyle,
+        final Long uiSort,
+        final String uiConfig,
+        final String uiContent,
+        final String signIssuer,
+        final String signName,
+        final LocalDateTime signAt,
+        final String signSecret,
+        final String signLic,
+        final LocalDateTime signEnd,
+        final LocalDateTime signStart,
+        final String licIdentifier,
+        final String licMenu,
+        final String appId,
+        final String bagId,
+        final Boolean active,
+        final String sigma,
+        final String metadata,
+        final String language,
+        final LocalDateTime createdAt,
+        final String createdBy,
+        final LocalDateTime updatedAt,
+        final String updatedBy
     ) {
         this.key = key;
         this.code = code;
@@ -144,7 +144,7 @@ public class BBlock implements VertxPojo, IBBlock {
         this.updatedBy = updatedBy;
     }
 
-    public BBlock(io.vertx.core.json.JsonObject json) {
+    public BBlock(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -161,7 +161,7 @@ public class BBlock implements VertxPojo, IBBlock {
      * Setter for <code>ZDB.B_BLOCK.KEY</code>. 「key」- 模块主键
      */
     @Override
-    public BBlock setKey(String key) {
+    public BBlock setKey(final String key) {
         this.key = key;
         return this;
     }
@@ -178,7 +178,7 @@ public class BBlock implements VertxPojo, IBBlock {
      * Setter for <code>ZDB.B_BLOCK.CODE</code>. 「code」- 子模块编码
      */
     @Override
-    public BBlock setCode(String code) {
+    public BBlock setCode(final String code) {
         this.code = code;
         return this;
     }
@@ -195,7 +195,7 @@ public class BBlock implements VertxPojo, IBBlock {
      * Setter for <code>ZDB.B_BLOCK.NAME</code>. 「name」- 子模块名称
      */
     @Override
-    public BBlock setName(String name) {
+    public BBlock setName(final String name) {
         this.name = name;
         return this;
     }
@@ -212,7 +212,7 @@ public class BBlock implements VertxPojo, IBBlock {
      * Setter for <code>ZDB.B_BLOCK.VERSION</code>. 「version」- 子模块版本
      */
     @Override
-    public BBlock setVersion(String version) {
+    public BBlock setVersion(final String version) {
         this.version = version;
         return this;
     }
@@ -229,7 +229,7 @@ public class BBlock implements VertxPojo, IBBlock {
      * Setter for <code>ZDB.B_BLOCK.AUTHORIZED</code>. 「authorized」- 是否授权
      */
     @Override
-    public BBlock setAuthorized(Boolean authorized) {
+    public BBlock setAuthorized(final Boolean authorized) {
         this.authorized = authorized;
         return this;
     }
@@ -246,7 +246,7 @@ public class BBlock implements VertxPojo, IBBlock {
      * Setter for <code>ZDB.B_BLOCK.UI_ICON</code>. 「uiIcon」- 子模块图标
      */
     @Override
-    public BBlock setUiIcon(String uiIcon) {
+    public BBlock setUiIcon(final String uiIcon) {
         this.uiIcon = uiIcon;
         return this;
     }
@@ -263,7 +263,7 @@ public class BBlock implements VertxPojo, IBBlock {
      * Setter for <code>ZDB.B_BLOCK.UI_STYLE</code>. 「uiStyle」- 子模块风格
      */
     @Override
-    public BBlock setUiStyle(String uiStyle) {
+    public BBlock setUiStyle(final String uiStyle) {
         this.uiStyle = uiStyle;
         return this;
     }
@@ -280,7 +280,7 @@ public class BBlock implements VertxPojo, IBBlock {
      * Setter for <code>ZDB.B_BLOCK.UI_SORT</code>. 「uiSort」- 子模块排序
      */
     @Override
-    public BBlock setUiSort(Long uiSort) {
+    public BBlock setUiSort(final Long uiSort) {
         this.uiSort = uiSort;
         return this;
     }
@@ -297,7 +297,7 @@ public class BBlock implements VertxPojo, IBBlock {
      * Setter for <code>ZDB.B_BLOCK.UI_CONFIG</code>. 「uiConfig」- 子模块核心配置
      */
     @Override
-    public BBlock setUiConfig(String uiConfig) {
+    public BBlock setUiConfig(final String uiConfig) {
         this.uiConfig = uiConfig;
         return this;
     }
@@ -314,7 +314,7 @@ public class BBlock implements VertxPojo, IBBlock {
      * Setter for <code>ZDB.B_BLOCK.UI_CONTENT</code>. 「uiContent」- 配置数据
      */
     @Override
-    public BBlock setUiContent(String uiContent) {
+    public BBlock setUiContent(final String uiContent) {
         this.uiContent = uiContent;
         return this;
     }
@@ -331,7 +331,7 @@ public class BBlock implements VertxPojo, IBBlock {
      * Setter for <code>ZDB.B_BLOCK.SIGN_ISSUER</code>. 「signIssuer」- 许可证发证机构
      */
     @Override
-    public BBlock setSignIssuer(String signIssuer) {
+    public BBlock setSignIssuer(final String signIssuer) {
         this.signIssuer = signIssuer;
         return this;
     }
@@ -348,7 +348,7 @@ public class BBlock implements VertxPojo, IBBlock {
      * Setter for <code>ZDB.B_BLOCK.SIGN_NAME</code>. 「signName」- 许可证名称
      */
     @Override
-    public BBlock setSignName(String signName) {
+    public BBlock setSignName(final String signName) {
         this.signName = signName;
         return this;
     }
@@ -365,7 +365,7 @@ public class BBlock implements VertxPojo, IBBlock {
      * Setter for <code>ZDB.B_BLOCK.SIGN_AT</code>. 「signAt」- 发证时间
      */
     @Override
-    public BBlock setSignAt(LocalDateTime signAt) {
+    public BBlock setSignAt(final LocalDateTime signAt) {
         this.signAt = signAt;
         return this;
     }
@@ -382,7 +382,7 @@ public class BBlock implements VertxPojo, IBBlock {
      * Setter for <code>ZDB.B_BLOCK.SIGN_SECRET</code>. 「signSecret」- 证书专用密钥
      */
     @Override
-    public BBlock setSignSecret(String signSecret) {
+    public BBlock setSignSecret(final String signSecret) {
         this.signSecret = signSecret;
         return this;
     }
@@ -399,7 +399,7 @@ public class BBlock implements VertxPojo, IBBlock {
      * Setter for <code>ZDB.B_BLOCK.SIGN_LIC</code>. 「signLic」- 许可证内容
      */
     @Override
-    public BBlock setSignLic(String signLic) {
+    public BBlock setSignLic(final String signLic) {
         this.signLic = signLic;
         return this;
     }
@@ -416,7 +416,7 @@ public class BBlock implements VertxPojo, IBBlock {
      * Setter for <code>ZDB.B_BLOCK.SIGN_END</code>. 「signEnd」- 证书过期时间
      */
     @Override
-    public BBlock setSignEnd(LocalDateTime signEnd) {
+    public BBlock setSignEnd(final LocalDateTime signEnd) {
         this.signEnd = signEnd;
         return this;
     }
@@ -433,7 +433,7 @@ public class BBlock implements VertxPojo, IBBlock {
      * Setter for <code>ZDB.B_BLOCK.SIGN_START</code>. 「signStart」- 证书过期时间
      */
     @Override
-    public BBlock setSignStart(LocalDateTime signStart) {
+    public BBlock setSignStart(final LocalDateTime signStart) {
         this.signStart = signStart;
         return this;
     }
@@ -452,7 +452,7 @@ public class BBlock implements VertxPojo, IBBlock {
      * 允许的模型标识
      */
     @Override
-    public BBlock setLicIdentifier(String licIdentifier) {
+    public BBlock setLicIdentifier(final String licIdentifier) {
         this.licIdentifier = licIdentifier;
         return this;
     }
@@ -469,7 +469,7 @@ public class BBlock implements VertxPojo, IBBlock {
      * Setter for <code>ZDB.B_BLOCK.LIC_MENU</code>. 「licMenu」- 该Block包含的菜单
      */
     @Override
-    public BBlock setLicMenu(String licMenu) {
+    public BBlock setLicMenu(final String licMenu) {
         this.licMenu = licMenu;
         return this;
     }
@@ -486,7 +486,7 @@ public class BBlock implements VertxPojo, IBBlock {
      * Setter for <code>ZDB.B_BLOCK.APP_ID</code>. 「id」- 关联的应用程序ID
      */
     @Override
-    public BBlock setAppId(String appId) {
+    public BBlock setAppId(final String appId) {
         this.appId = appId;
         return this;
     }
@@ -503,7 +503,7 @@ public class BBlock implements VertxPojo, IBBlock {
      * Setter for <code>ZDB.B_BLOCK.BAG_ID</code>. 「bagId」- 所属包ID
      */
     @Override
-    public BBlock setBagId(String bagId) {
+    public BBlock setBagId(final String bagId) {
         this.bagId = bagId;
         return this;
     }
@@ -520,7 +520,7 @@ public class BBlock implements VertxPojo, IBBlock {
      * Setter for <code>ZDB.B_BLOCK.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public BBlock setActive(Boolean active) {
+    public BBlock setActive(final Boolean active) {
         this.active = active;
         return this;
     }
@@ -537,7 +537,7 @@ public class BBlock implements VertxPojo, IBBlock {
      * Setter for <code>ZDB.B_BLOCK.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public BBlock setSigma(String sigma) {
+    public BBlock setSigma(final String sigma) {
         this.sigma = sigma;
         return this;
     }
@@ -554,7 +554,7 @@ public class BBlock implements VertxPojo, IBBlock {
      * Setter for <code>ZDB.B_BLOCK.METADATA</code>. 「metadata」- 附加配置
      */
     @Override
-    public BBlock setMetadata(String metadata) {
+    public BBlock setMetadata(final String metadata) {
         this.metadata = metadata;
         return this;
     }
@@ -571,7 +571,7 @@ public class BBlock implements VertxPojo, IBBlock {
      * Setter for <code>ZDB.B_BLOCK.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public BBlock setLanguage(String language) {
+    public BBlock setLanguage(final String language) {
         this.language = language;
         return this;
     }
@@ -588,7 +588,7 @@ public class BBlock implements VertxPojo, IBBlock {
      * Setter for <code>ZDB.B_BLOCK.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public BBlock setCreatedAt(LocalDateTime createdAt) {
+    public BBlock setCreatedAt(final LocalDateTime createdAt) {
         this.createdAt = createdAt;
         return this;
     }
@@ -605,7 +605,7 @@ public class BBlock implements VertxPojo, IBBlock {
      * Setter for <code>ZDB.B_BLOCK.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public BBlock setCreatedBy(String createdBy) {
+    public BBlock setCreatedBy(final String createdBy) {
         this.createdBy = createdBy;
         return this;
     }
@@ -622,7 +622,7 @@ public class BBlock implements VertxPojo, IBBlock {
      * Setter for <code>ZDB.B_BLOCK.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public BBlock setUpdatedAt(LocalDateTime updatedAt) {
+    public BBlock setUpdatedAt(final LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
         return this;
     }
@@ -639,13 +639,13 @@ public class BBlock implements VertxPojo, IBBlock {
      * Setter for <code>ZDB.B_BLOCK.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public BBlock setUpdatedBy(String updatedBy) {
+    public BBlock setUpdatedBy(final String updatedBy) {
         this.updatedBy = updatedBy;
         return this;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
@@ -839,7 +839,7 @@ public class BBlock implements VertxPojo, IBBlock {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("BBlock (");
+        final StringBuilder sb = new StringBuilder("BBlock (");
 
         sb.append(key);
         sb.append(", ").append(code);
@@ -880,7 +880,7 @@ public class BBlock implements VertxPojo, IBBlock {
     // -------------------------------------------------------------------------
 
     @Override
-    public void from(IBBlock from) {
+    public void from(final IBBlock from) {
         setKey(from.getKey());
         setCode(from.getCode());
         setName(from.getName());
@@ -913,7 +913,7 @@ public class BBlock implements VertxPojo, IBBlock {
     }
 
     @Override
-    public <E extends IBBlock> E into(E into) {
+    public <E extends IBBlock> E into(final E into) {
         into.from(this);
         return into;
     }

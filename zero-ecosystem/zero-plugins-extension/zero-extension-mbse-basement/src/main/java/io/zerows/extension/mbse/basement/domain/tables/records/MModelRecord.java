@@ -4,7 +4,7 @@
 package io.zerows.extension.mbse.basement.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.mbse.basement.domain.tables.MModel;
 import io.zerows.extension.mbse.basement.domain.tables.interfaces.IMModel;
 import org.jooq.Field;
@@ -33,7 +33,7 @@ public class MModelRecord extends UpdatableRecordImpl<MModelRecord> implements V
     /**
      * Create a detached, initialised MModelRecord
      */
-    public MModelRecord(String key, String identifier, String namespace, String name, String alias, String type, String comments, String categoryTree, String categoryId, String ruleUnique, Boolean isTrack, String spider, String spiderComponent, String sigma, String language, Boolean active, String metadata, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public MModelRecord(final String key, final String identifier, final String namespace, final String name, final String alias, final String type, final String comments, final String categoryTree, final String categoryId, final String ruleUnique, final Boolean isTrack, final String spider, final String spiderComponent, final String sigma, final String language, final Boolean active, final String metadata, final LocalDateTime createdAt, final String createdBy, final LocalDateTime updatedAt, final String updatedBy) {
         super(MModel.M_MODEL);
 
         setKey(key);
@@ -63,7 +63,7 @@ public class MModelRecord extends UpdatableRecordImpl<MModelRecord> implements V
     /**
      * Create a detached, initialised MModelRecord
      */
-    public MModelRecord(io.zerows.extension.mbse.basement.domain.tables.pojos.MModel value) {
+    public MModelRecord(final io.zerows.extension.mbse.basement.domain.tables.pojos.MModel value) {
         super(MModel.M_MODEL);
 
         if (value != null) {
@@ -92,7 +92,7 @@ public class MModelRecord extends UpdatableRecordImpl<MModelRecord> implements V
         }
     }
 
-    public MModelRecord(io.vertx.core.json.JsonObject json) {
+    public MModelRecord(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -109,7 +109,7 @@ public class MModelRecord extends UpdatableRecordImpl<MModelRecord> implements V
      * Setter for <code>ZDB.M_MODEL.KEY</code>. 「key」- 模型ID
      */
     @Override
-    public MModelRecord setKey(String value) {
+    public MModelRecord setKey(final String value) {
         set(0, value);
         return this;
     }
@@ -126,7 +126,7 @@ public class MModelRecord extends UpdatableRecordImpl<MModelRecord> implements V
      * Setter for <code>ZDB.M_MODEL.IDENTIFIER</code>. 「identifier」- 当前模型全局唯一ID
      */
     @Override
-    public MModelRecord setIdentifier(String value) {
+    public MModelRecord setIdentifier(final String value) {
         set(1, value);
         return this;
     }
@@ -143,7 +143,7 @@ public class MModelRecord extends UpdatableRecordImpl<MModelRecord> implements V
      * Setter for <code>ZDB.M_MODEL.NAMESPACE</code>. 「namespace」- 当前模型使用的名空间
      */
     @Override
-    public MModelRecord setNamespace(String value) {
+    public MModelRecord setNamespace(final String value) {
         set(2, value);
         return this;
     }
@@ -160,7 +160,7 @@ public class MModelRecord extends UpdatableRecordImpl<MModelRecord> implements V
      * Setter for <code>ZDB.M_MODEL.NAME</code>. 「name」- 当前模型的名称
      */
     @Override
-    public MModelRecord setName(String value) {
+    public MModelRecord setName(final String value) {
         set(3, value);
         return this;
     }
@@ -177,7 +177,7 @@ public class MModelRecord extends UpdatableRecordImpl<MModelRecord> implements V
      * Setter for <code>ZDB.M_MODEL.ALIAS</code>. 「alias」- 模型别名（业务名）
      */
     @Override
-    public MModelRecord setAlias(String value) {
+    public MModelRecord setAlias(final String value) {
         set(4, value);
         return this;
     }
@@ -194,7 +194,7 @@ public class MModelRecord extends UpdatableRecordImpl<MModelRecord> implements V
      * Setter for <code>ZDB.M_MODEL.TYPE</code>. 「type」- 当前模型的类型信息
      */
     @Override
-    public MModelRecord setType(String value) {
+    public MModelRecord setType(final String value) {
         set(5, value);
         return this;
     }
@@ -211,7 +211,7 @@ public class MModelRecord extends UpdatableRecordImpl<MModelRecord> implements V
      * Setter for <code>ZDB.M_MODEL.COMMENTS</code>. 「comments」- 当前模型的描述信息
      */
     @Override
-    public MModelRecord setComments(String value) {
+    public MModelRecord setComments(final String value) {
         set(6, value);
         return this;
     }
@@ -230,7 +230,7 @@ public class MModelRecord extends UpdatableRecordImpl<MModelRecord> implements V
      * 当前模型所属的类型树
      */
     @Override
-    public MModelRecord setCategoryTree(String value) {
+    public MModelRecord setCategoryTree(final String value) {
         set(7, value);
         return this;
     }
@@ -247,7 +247,7 @@ public class MModelRecord extends UpdatableRecordImpl<MModelRecord> implements V
      * Setter for <code>ZDB.M_MODEL.CATEGORY_ID</code>. 「categoryId」- 关联的类型的ID
      */
     @Override
-    public MModelRecord setCategoryId(String value) {
+    public MModelRecord setCategoryId(final String value) {
         set(8, value);
         return this;
     }
@@ -264,7 +264,7 @@ public class MModelRecord extends UpdatableRecordImpl<MModelRecord> implements V
      * Setter for <code>ZDB.M_MODEL.RULE_UNIQUE</code>. 「ruleUnique」- 当前模型的标识规则
      */
     @Override
-    public MModelRecord setRuleUnique(String value) {
+    public MModelRecord setRuleUnique(final String value) {
         set(9, value);
         return this;
     }
@@ -283,7 +283,7 @@ public class MModelRecord extends UpdatableRecordImpl<MModelRecord> implements V
      * ACTIVITY 的变更监控功能（生成变更历史）
      */
     @Override
-    public MModelRecord setIsTrack(Boolean value) {
+    public MModelRecord setIsTrack(final Boolean value) {
         set(10, value);
         return this;
     }
@@ -302,7 +302,7 @@ public class MModelRecord extends UpdatableRecordImpl<MModelRecord> implements V
      * 主图格式，存储当前模型为起点的图层Json数据，每个模型只有一张
      */
     @Override
-    public MModelRecord setSpider(String value) {
+    public MModelRecord setSpider(final String value) {
         set(11, value);
         return this;
     }
@@ -321,7 +321,7 @@ public class MModelRecord extends UpdatableRecordImpl<MModelRecord> implements V
      * 在主图格式上存在的插件信息，用于处理主图格式的内容
      */
     @Override
-    public MModelRecord setSpiderComponent(String value) {
+    public MModelRecord setSpiderComponent(final String value) {
         set(12, value);
         return this;
     }
@@ -338,7 +338,7 @@ public class MModelRecord extends UpdatableRecordImpl<MModelRecord> implements V
      * Setter for <code>ZDB.M_MODEL.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public MModelRecord setSigma(String value) {
+    public MModelRecord setSigma(final String value) {
         set(13, value);
         return this;
     }
@@ -355,7 +355,7 @@ public class MModelRecord extends UpdatableRecordImpl<MModelRecord> implements V
      * Setter for <code>ZDB.M_MODEL.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public MModelRecord setLanguage(String value) {
+    public MModelRecord setLanguage(final String value) {
         set(14, value);
         return this;
     }
@@ -372,7 +372,7 @@ public class MModelRecord extends UpdatableRecordImpl<MModelRecord> implements V
      * Setter for <code>ZDB.M_MODEL.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public MModelRecord setActive(Boolean value) {
+    public MModelRecord setActive(final Boolean value) {
         set(15, value);
         return this;
     }
@@ -389,7 +389,7 @@ public class MModelRecord extends UpdatableRecordImpl<MModelRecord> implements V
      * Setter for <code>ZDB.M_MODEL.METADATA</code>. 「metadata」- 附加配置数据
      */
     @Override
-    public MModelRecord setMetadata(String value) {
+    public MModelRecord setMetadata(final String value) {
         set(16, value);
         return this;
     }
@@ -406,7 +406,7 @@ public class MModelRecord extends UpdatableRecordImpl<MModelRecord> implements V
      * Setter for <code>ZDB.M_MODEL.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public MModelRecord setCreatedAt(LocalDateTime value) {
+    public MModelRecord setCreatedAt(final LocalDateTime value) {
         set(17, value);
         return this;
     }
@@ -423,7 +423,7 @@ public class MModelRecord extends UpdatableRecordImpl<MModelRecord> implements V
      * Setter for <code>ZDB.M_MODEL.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public MModelRecord setCreatedBy(String value) {
+    public MModelRecord setCreatedBy(final String value) {
         set(18, value);
         return this;
     }
@@ -448,7 +448,7 @@ public class MModelRecord extends UpdatableRecordImpl<MModelRecord> implements V
      * Setter for <code>ZDB.M_MODEL.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public MModelRecord setUpdatedAt(LocalDateTime value) {
+    public MModelRecord setUpdatedAt(final LocalDateTime value) {
         set(19, value);
         return this;
     }
@@ -465,7 +465,7 @@ public class MModelRecord extends UpdatableRecordImpl<MModelRecord> implements V
      * Setter for <code>ZDB.M_MODEL.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public MModelRecord setUpdatedBy(String value) {
+    public MModelRecord setUpdatedBy(final String value) {
         set(20, value);
         return this;
     }
@@ -801,109 +801,109 @@ public class MModelRecord extends UpdatableRecordImpl<MModelRecord> implements V
     }
 
     @Override
-    public MModelRecord value1(String value) {
+    public MModelRecord value1(final String value) {
         setKey(value);
         return this;
     }
 
     @Override
-    public MModelRecord value2(String value) {
+    public MModelRecord value2(final String value) {
         setIdentifier(value);
         return this;
     }
 
     @Override
-    public MModelRecord value3(String value) {
+    public MModelRecord value3(final String value) {
         setNamespace(value);
         return this;
     }
 
     @Override
-    public MModelRecord value4(String value) {
+    public MModelRecord value4(final String value) {
         setName(value);
         return this;
     }
 
     @Override
-    public MModelRecord value5(String value) {
+    public MModelRecord value5(final String value) {
         setAlias(value);
         return this;
     }
 
     @Override
-    public MModelRecord value6(String value) {
+    public MModelRecord value6(final String value) {
         setType(value);
         return this;
     }
 
     @Override
-    public MModelRecord value7(String value) {
+    public MModelRecord value7(final String value) {
         setComments(value);
         return this;
     }
 
     @Override
-    public MModelRecord value8(String value) {
+    public MModelRecord value8(final String value) {
         setCategoryTree(value);
         return this;
     }
 
     @Override
-    public MModelRecord value9(String value) {
+    public MModelRecord value9(final String value) {
         setCategoryId(value);
         return this;
     }
 
     @Override
-    public MModelRecord value10(String value) {
+    public MModelRecord value10(final String value) {
         setRuleUnique(value);
         return this;
     }
 
     @Override
-    public MModelRecord value11(Boolean value) {
+    public MModelRecord value11(final Boolean value) {
         setIsTrack(value);
         return this;
     }
 
     @Override
-    public MModelRecord value12(String value) {
+    public MModelRecord value12(final String value) {
         setSpider(value);
         return this;
     }
 
     @Override
-    public MModelRecord value13(String value) {
+    public MModelRecord value13(final String value) {
         setSpiderComponent(value);
         return this;
     }
 
     @Override
-    public MModelRecord value14(String value) {
+    public MModelRecord value14(final String value) {
         setSigma(value);
         return this;
     }
 
     @Override
-    public MModelRecord value15(String value) {
+    public MModelRecord value15(final String value) {
         setLanguage(value);
         return this;
     }
 
     @Override
-    public MModelRecord value16(Boolean value) {
+    public MModelRecord value16(final Boolean value) {
         setActive(value);
         return this;
     }
 
     @Override
-    public MModelRecord value17(String value) {
+    public MModelRecord value17(final String value) {
         setMetadata(value);
         return this;
     }
 
     @Override
-    public MModelRecord value18(LocalDateTime value) {
+    public MModelRecord value18(final LocalDateTime value) {
         setCreatedAt(value);
         return this;
     }
@@ -913,13 +913,13 @@ public class MModelRecord extends UpdatableRecordImpl<MModelRecord> implements V
     // -------------------------------------------------------------------------
 
     @Override
-    public MModelRecord value19(String value) {
+    public MModelRecord value19(final String value) {
         setCreatedBy(value);
         return this;
     }
 
     @Override
-    public MModelRecord value20(LocalDateTime value) {
+    public MModelRecord value20(final LocalDateTime value) {
         setUpdatedAt(value);
         return this;
     }
@@ -929,13 +929,13 @@ public class MModelRecord extends UpdatableRecordImpl<MModelRecord> implements V
     // -------------------------------------------------------------------------
 
     @Override
-    public MModelRecord value21(String value) {
+    public MModelRecord value21(final String value) {
         setUpdatedBy(value);
         return this;
     }
 
     @Override
-    public MModelRecord values(String value1, String value2, String value3, String value4, String value5, String value6, String value7, String value8, String value9, String value10, Boolean value11, String value12, String value13, String value14, String value15, Boolean value16, String value17, LocalDateTime value18, String value19, LocalDateTime value20, String value21) {
+    public MModelRecord values(final String value1, final String value2, final String value3, final String value4, final String value5, final String value6, final String value7, final String value8, final String value9, final String value10, final Boolean value11, final String value12, final String value13, final String value14, final String value15, final Boolean value16, final String value17, final LocalDateTime value18, final String value19, final LocalDateTime value20, final String value21) {
         value1(value1);
         value2(value2);
         value3(value3);
@@ -961,7 +961,7 @@ public class MModelRecord extends UpdatableRecordImpl<MModelRecord> implements V
     }
 
     @Override
-    public void from(IMModel from) {
+    public void from(final IMModel from) {
         setKey(from.getKey());
         setIdentifier(from.getIdentifier());
         setNamespace(from.getNamespace());
@@ -987,7 +987,7 @@ public class MModelRecord extends UpdatableRecordImpl<MModelRecord> implements V
     }
 
     @Override
-    public <E extends IMModel> E into(E into) {
+    public <E extends IMModel> E into(final E into) {
         into.from(this);
         return into;
     }

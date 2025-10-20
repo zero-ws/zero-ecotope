@@ -14,7 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-extension-runtime-skeleton</artifactId>
+            <artifactId>zero-extension-skeleton</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

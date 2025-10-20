@@ -4,7 +4,7 @@
 package io.zerows.extension.runtime.integration.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.runtime.integration.domain.tables.IMessage;
 import io.zerows.extension.runtime.integration.domain.tables.interfaces.IIMessage;
 import org.jooq.Field;
@@ -33,7 +33,7 @@ public class IMessageRecord extends UpdatableRecordImpl<IMessageRecord> implemen
     /**
      * Create a detached, initialised IMessageRecord
      */
-    public IMessageRecord(String key, String name, String code, String type, String status, String subject, String content, String sendFrom, String sendTo, String sendBy, String sendAt, String appId, Boolean active, String sigma, String metadata, String language, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public IMessageRecord(final String key, final String name, final String code, final String type, final String status, final String subject, final String content, final String sendFrom, final String sendTo, final String sendBy, final String sendAt, final String appId, final Boolean active, final String sigma, final String metadata, final String language, final LocalDateTime createdAt, final String createdBy, final LocalDateTime updatedAt, final String updatedBy) {
         super(IMessage.I_MESSAGE);
 
         setKey(key);
@@ -62,7 +62,7 @@ public class IMessageRecord extends UpdatableRecordImpl<IMessageRecord> implemen
     /**
      * Create a detached, initialised IMessageRecord
      */
-    public IMessageRecord(io.zerows.extension.runtime.integration.domain.tables.pojos.IMessage value) {
+    public IMessageRecord(final io.zerows.extension.runtime.integration.domain.tables.pojos.IMessage value) {
         super(IMessage.I_MESSAGE);
 
         if (value != null) {
@@ -90,7 +90,7 @@ public class IMessageRecord extends UpdatableRecordImpl<IMessageRecord> implemen
         }
     }
 
-    public IMessageRecord(io.vertx.core.json.JsonObject json) {
+    public IMessageRecord(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -107,7 +107,7 @@ public class IMessageRecord extends UpdatableRecordImpl<IMessageRecord> implemen
      * Setter for <code>ZDB.I_MESSAGE.KEY</code>. 「key」- 消息主键
      */
     @Override
-    public IMessageRecord setKey(String value) {
+    public IMessageRecord setKey(final String value) {
         set(0, value);
         return this;
     }
@@ -124,7 +124,7 @@ public class IMessageRecord extends UpdatableRecordImpl<IMessageRecord> implemen
      * Setter for <code>ZDB.I_MESSAGE.NAME</code>. 「name」- 消息名称
      */
     @Override
-    public IMessageRecord setName(String value) {
+    public IMessageRecord setName(final String value) {
         set(1, value);
         return this;
     }
@@ -141,7 +141,7 @@ public class IMessageRecord extends UpdatableRecordImpl<IMessageRecord> implemen
      * Setter for <code>ZDB.I_MESSAGE.CODE</code>. 「code」- 消息编码
      */
     @Override
-    public IMessageRecord setCode(String value) {
+    public IMessageRecord setCode(final String value) {
         set(2, value);
         return this;
     }
@@ -158,7 +158,7 @@ public class IMessageRecord extends UpdatableRecordImpl<IMessageRecord> implemen
      * Setter for <code>ZDB.I_MESSAGE.TYPE</code>. 「type」- 消息类型
      */
     @Override
-    public IMessageRecord setType(String value) {
+    public IMessageRecord setType(final String value) {
         set(3, value);
         return this;
     }
@@ -175,7 +175,7 @@ public class IMessageRecord extends UpdatableRecordImpl<IMessageRecord> implemen
      * Setter for <code>ZDB.I_MESSAGE.STATUS</code>. 「status」- 消息状态
      */
     @Override
-    public IMessageRecord setStatus(String value) {
+    public IMessageRecord setStatus(final String value) {
         set(4, value);
         return this;
     }
@@ -192,7 +192,7 @@ public class IMessageRecord extends UpdatableRecordImpl<IMessageRecord> implemen
      * Setter for <code>ZDB.I_MESSAGE.SUBJECT</code>. 「subject」- 消息标题
      */
     @Override
-    public IMessageRecord setSubject(String value) {
+    public IMessageRecord setSubject(final String value) {
         set(5, value);
         return this;
     }
@@ -209,7 +209,7 @@ public class IMessageRecord extends UpdatableRecordImpl<IMessageRecord> implemen
      * Setter for <code>ZDB.I_MESSAGE.CONTENT</code>. 「content」- 消息内容
      */
     @Override
-    public IMessageRecord setContent(String value) {
+    public IMessageRecord setContent(final String value) {
         set(6, value);
         return this;
     }
@@ -226,7 +226,7 @@ public class IMessageRecord extends UpdatableRecordImpl<IMessageRecord> implemen
      * Setter for <code>ZDB.I_MESSAGE.SEND_FROM</code>. 「from」- 消息发送方
      */
     @Override
-    public IMessageRecord setSendFrom(String value) {
+    public IMessageRecord setSendFrom(final String value) {
         set(7, value);
         return this;
     }
@@ -243,7 +243,7 @@ public class IMessageRecord extends UpdatableRecordImpl<IMessageRecord> implemen
      * Setter for <code>ZDB.I_MESSAGE.SEND_TO</code>. 「to」- 消息接收方
      */
     @Override
-    public IMessageRecord setSendTo(String value) {
+    public IMessageRecord setSendTo(final String value) {
         set(8, value);
         return this;
     }
@@ -260,7 +260,7 @@ public class IMessageRecord extends UpdatableRecordImpl<IMessageRecord> implemen
      * Setter for <code>ZDB.I_MESSAGE.SEND_BY</code>. 「sendBy」- 发送者
      */
     @Override
-    public IMessageRecord setSendBy(String value) {
+    public IMessageRecord setSendBy(final String value) {
         set(9, value);
         return this;
     }
@@ -277,7 +277,7 @@ public class IMessageRecord extends UpdatableRecordImpl<IMessageRecord> implemen
      * Setter for <code>ZDB.I_MESSAGE.SEND_AT</code>. 「sendAt」- 发送时间
      */
     @Override
-    public IMessageRecord setSendAt(String value) {
+    public IMessageRecord setSendAt(final String value) {
         set(10, value);
         return this;
     }
@@ -294,7 +294,7 @@ public class IMessageRecord extends UpdatableRecordImpl<IMessageRecord> implemen
      * Setter for <code>ZDB.I_MESSAGE.APP_ID</code>. 「id」- 所属应用ID
      */
     @Override
-    public IMessageRecord setAppId(String value) {
+    public IMessageRecord setAppId(final String value) {
         set(11, value);
         return this;
     }
@@ -311,7 +311,7 @@ public class IMessageRecord extends UpdatableRecordImpl<IMessageRecord> implemen
      * Setter for <code>ZDB.I_MESSAGE.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public IMessageRecord setActive(Boolean value) {
+    public IMessageRecord setActive(final Boolean value) {
         set(12, value);
         return this;
     }
@@ -328,7 +328,7 @@ public class IMessageRecord extends UpdatableRecordImpl<IMessageRecord> implemen
      * Setter for <code>ZDB.I_MESSAGE.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public IMessageRecord setSigma(String value) {
+    public IMessageRecord setSigma(final String value) {
         set(13, value);
         return this;
     }
@@ -345,7 +345,7 @@ public class IMessageRecord extends UpdatableRecordImpl<IMessageRecord> implemen
      * Setter for <code>ZDB.I_MESSAGE.METADATA</code>. 「metadata」- 附加配置
      */
     @Override
-    public IMessageRecord setMetadata(String value) {
+    public IMessageRecord setMetadata(final String value) {
         set(14, value);
         return this;
     }
@@ -362,7 +362,7 @@ public class IMessageRecord extends UpdatableRecordImpl<IMessageRecord> implemen
      * Setter for <code>ZDB.I_MESSAGE.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public IMessageRecord setLanguage(String value) {
+    public IMessageRecord setLanguage(final String value) {
         set(15, value);
         return this;
     }
@@ -379,7 +379,7 @@ public class IMessageRecord extends UpdatableRecordImpl<IMessageRecord> implemen
      * Setter for <code>ZDB.I_MESSAGE.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public IMessageRecord setCreatedAt(LocalDateTime value) {
+    public IMessageRecord setCreatedAt(final LocalDateTime value) {
         set(16, value);
         return this;
     }
@@ -396,7 +396,7 @@ public class IMessageRecord extends UpdatableRecordImpl<IMessageRecord> implemen
      * Setter for <code>ZDB.I_MESSAGE.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public IMessageRecord setCreatedBy(String value) {
+    public IMessageRecord setCreatedBy(final String value) {
         set(17, value);
         return this;
     }
@@ -421,7 +421,7 @@ public class IMessageRecord extends UpdatableRecordImpl<IMessageRecord> implemen
      * Setter for <code>ZDB.I_MESSAGE.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public IMessageRecord setUpdatedAt(LocalDateTime value) {
+    public IMessageRecord setUpdatedAt(final LocalDateTime value) {
         set(18, value);
         return this;
     }
@@ -438,7 +438,7 @@ public class IMessageRecord extends UpdatableRecordImpl<IMessageRecord> implemen
      * Setter for <code>ZDB.I_MESSAGE.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public IMessageRecord setUpdatedBy(String value) {
+    public IMessageRecord setUpdatedBy(final String value) {
         set(19, value);
         return this;
     }
@@ -759,103 +759,103 @@ public class IMessageRecord extends UpdatableRecordImpl<IMessageRecord> implemen
     }
 
     @Override
-    public IMessageRecord value1(String value) {
+    public IMessageRecord value1(final String value) {
         setKey(value);
         return this;
     }
 
     @Override
-    public IMessageRecord value2(String value) {
+    public IMessageRecord value2(final String value) {
         setName(value);
         return this;
     }
 
     @Override
-    public IMessageRecord value3(String value) {
+    public IMessageRecord value3(final String value) {
         setCode(value);
         return this;
     }
 
     @Override
-    public IMessageRecord value4(String value) {
+    public IMessageRecord value4(final String value) {
         setType(value);
         return this;
     }
 
     @Override
-    public IMessageRecord value5(String value) {
+    public IMessageRecord value5(final String value) {
         setStatus(value);
         return this;
     }
 
     @Override
-    public IMessageRecord value6(String value) {
+    public IMessageRecord value6(final String value) {
         setSubject(value);
         return this;
     }
 
     @Override
-    public IMessageRecord value7(String value) {
+    public IMessageRecord value7(final String value) {
         setContent(value);
         return this;
     }
 
     @Override
-    public IMessageRecord value8(String value) {
+    public IMessageRecord value8(final String value) {
         setSendFrom(value);
         return this;
     }
 
     @Override
-    public IMessageRecord value9(String value) {
+    public IMessageRecord value9(final String value) {
         setSendTo(value);
         return this;
     }
 
     @Override
-    public IMessageRecord value10(String value) {
+    public IMessageRecord value10(final String value) {
         setSendBy(value);
         return this;
     }
 
     @Override
-    public IMessageRecord value11(String value) {
+    public IMessageRecord value11(final String value) {
         setSendAt(value);
         return this;
     }
 
     @Override
-    public IMessageRecord value12(String value) {
+    public IMessageRecord value12(final String value) {
         setAppId(value);
         return this;
     }
 
     @Override
-    public IMessageRecord value13(Boolean value) {
+    public IMessageRecord value13(final Boolean value) {
         setActive(value);
         return this;
     }
 
     @Override
-    public IMessageRecord value14(String value) {
+    public IMessageRecord value14(final String value) {
         setSigma(value);
         return this;
     }
 
     @Override
-    public IMessageRecord value15(String value) {
+    public IMessageRecord value15(final String value) {
         setMetadata(value);
         return this;
     }
 
     @Override
-    public IMessageRecord value16(String value) {
+    public IMessageRecord value16(final String value) {
         setLanguage(value);
         return this;
     }
 
     @Override
-    public IMessageRecord value17(LocalDateTime value) {
+    public IMessageRecord value17(final LocalDateTime value) {
         setCreatedAt(value);
         return this;
     }
@@ -865,13 +865,13 @@ public class IMessageRecord extends UpdatableRecordImpl<IMessageRecord> implemen
     // -------------------------------------------------------------------------
 
     @Override
-    public IMessageRecord value18(String value) {
+    public IMessageRecord value18(final String value) {
         setCreatedBy(value);
         return this;
     }
 
     @Override
-    public IMessageRecord value19(LocalDateTime value) {
+    public IMessageRecord value19(final LocalDateTime value) {
         setUpdatedAt(value);
         return this;
     }
@@ -881,13 +881,13 @@ public class IMessageRecord extends UpdatableRecordImpl<IMessageRecord> implemen
     // -------------------------------------------------------------------------
 
     @Override
-    public IMessageRecord value20(String value) {
+    public IMessageRecord value20(final String value) {
         setUpdatedBy(value);
         return this;
     }
 
     @Override
-    public IMessageRecord values(String value1, String value2, String value3, String value4, String value5, String value6, String value7, String value8, String value9, String value10, String value11, String value12, Boolean value13, String value14, String value15, String value16, LocalDateTime value17, String value18, LocalDateTime value19, String value20) {
+    public IMessageRecord values(final String value1, final String value2, final String value3, final String value4, final String value5, final String value6, final String value7, final String value8, final String value9, final String value10, final String value11, final String value12, final Boolean value13, final String value14, final String value15, final String value16, final LocalDateTime value17, final String value18, final LocalDateTime value19, final String value20) {
         value1(value1);
         value2(value2);
         value3(value3);
@@ -912,7 +912,7 @@ public class IMessageRecord extends UpdatableRecordImpl<IMessageRecord> implemen
     }
 
     @Override
-    public void from(IIMessage from) {
+    public void from(final IIMessage from) {
         setKey(from.getKey());
         setName(from.getName());
         setCode(from.getCode());
@@ -937,7 +937,7 @@ public class IMessageRecord extends UpdatableRecordImpl<IMessageRecord> implemen
     }
 
     @Override
-    public <E extends IIMessage> E into(E into) {
+    public <E extends IIMessage> E into(final E into) {
         into.from(this);
         return into;
     }

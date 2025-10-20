@@ -4,7 +4,7 @@
 package io.zerows.extension.commerce.erp.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.commerce.erp.domain.tables.TVendorCheckOut;
 import io.zerows.extension.commerce.erp.domain.tables.interfaces.ITVendorCheckOut;
 import org.jooq.Field;
@@ -33,7 +33,7 @@ public class TVendorCheckOutRecord extends UpdatableRecordImpl<TVendorCheckOutRe
     /**
      * Create a detached, initialised TVendorCheckOutRecord
      */
-    public TVendorCheckOutRecord(String key, String commentExtension, String classification, LocalDateTime startAt, LocalDateTime endAt, Integer days, LocalDateTime leaveAt, String reason) {
+    public TVendorCheckOutRecord(final String key, final String commentExtension, final String classification, final LocalDateTime startAt, final LocalDateTime endAt, final Integer days, final LocalDateTime leaveAt, final String reason) {
         super(TVendorCheckOut.T_VENDOR_CHECK_OUT);
 
         setKey(key);
@@ -50,7 +50,7 @@ public class TVendorCheckOutRecord extends UpdatableRecordImpl<TVendorCheckOutRe
     /**
      * Create a detached, initialised TVendorCheckOutRecord
      */
-    public TVendorCheckOutRecord(io.zerows.extension.commerce.erp.domain.tables.pojos.TVendorCheckOut value) {
+    public TVendorCheckOutRecord(final io.zerows.extension.commerce.erp.domain.tables.pojos.TVendorCheckOut value) {
         super(TVendorCheckOut.T_VENDOR_CHECK_OUT);
 
         if (value != null) {
@@ -66,7 +66,7 @@ public class TVendorCheckOutRecord extends UpdatableRecordImpl<TVendorCheckOutRe
         }
     }
 
-    public TVendorCheckOutRecord(io.vertx.core.json.JsonObject json) {
+    public TVendorCheckOutRecord(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -85,7 +85,7 @@ public class TVendorCheckOutRecord extends UpdatableRecordImpl<TVendorCheckOutRe
      * Key
      */
     @Override
-    public TVendorCheckOutRecord setKey(String value) {
+    public TVendorCheckOutRecord setKey(final String value) {
         set(0, value);
         return this;
     }
@@ -104,7 +104,7 @@ public class TVendorCheckOutRecord extends UpdatableRecordImpl<TVendorCheckOutRe
      * 「commentExtension」- Extension Comment
      */
     @Override
-    public TVendorCheckOutRecord setCommentExtension(String value) {
+    public TVendorCheckOutRecord setCommentExtension(final String value) {
         set(1, value);
         return this;
     }
@@ -123,7 +123,7 @@ public class TVendorCheckOutRecord extends UpdatableRecordImpl<TVendorCheckOutRe
      * 「classification」- The ticket related income type
      */
     @Override
-    public TVendorCheckOutRecord setClassification(String value) {
+    public TVendorCheckOutRecord setClassification(final String value) {
         set(2, value);
         return this;
     }
@@ -140,7 +140,7 @@ public class TVendorCheckOutRecord extends UpdatableRecordImpl<TVendorCheckOutRe
      * Setter for <code>ZDB.T_VENDOR_CHECK_OUT.START_AT</code>. 「startAt」- From
      */
     @Override
-    public TVendorCheckOutRecord setStartAt(LocalDateTime value) {
+    public TVendorCheckOutRecord setStartAt(final LocalDateTime value) {
         set(3, value);
         return this;
     }
@@ -157,7 +157,7 @@ public class TVendorCheckOutRecord extends UpdatableRecordImpl<TVendorCheckOutRe
      * Setter for <code>ZDB.T_VENDOR_CHECK_OUT.END_AT</code>. 「endAt」- To
      */
     @Override
-    public TVendorCheckOutRecord setEndAt(LocalDateTime value) {
+    public TVendorCheckOutRecord setEndAt(final LocalDateTime value) {
         set(4, value);
         return this;
     }
@@ -174,7 +174,7 @@ public class TVendorCheckOutRecord extends UpdatableRecordImpl<TVendorCheckOutRe
      * Setter for <code>ZDB.T_VENDOR_CHECK_OUT.DAYS</code>. 「days」- Duration
      */
     @Override
-    public TVendorCheckOutRecord setDays(Integer value) {
+    public TVendorCheckOutRecord setDays(final Integer value) {
         set(5, value);
         return this;
     }
@@ -199,7 +199,7 @@ public class TVendorCheckOutRecord extends UpdatableRecordImpl<TVendorCheckOutRe
      * Setter for <code>ZDB.T_VENDOR_CHECK_OUT.LEAVE_AT</code>. 「leaveAt」- To
      */
     @Override
-    public TVendorCheckOutRecord setLeaveAt(LocalDateTime value) {
+    public TVendorCheckOutRecord setLeaveAt(final LocalDateTime value) {
         set(6, value);
         return this;
     }
@@ -218,7 +218,7 @@ public class TVendorCheckOutRecord extends UpdatableRecordImpl<TVendorCheckOutRe
      * reason to be done
      */
     @Override
-    public TVendorCheckOutRecord setReason(String value) {
+    public TVendorCheckOutRecord setReason(final String value) {
         set(7, value);
         return this;
     }
@@ -359,31 +359,31 @@ public class TVendorCheckOutRecord extends UpdatableRecordImpl<TVendorCheckOutRe
     }
 
     @Override
-    public TVendorCheckOutRecord value1(String value) {
+    public TVendorCheckOutRecord value1(final String value) {
         setKey(value);
         return this;
     }
 
     @Override
-    public TVendorCheckOutRecord value2(String value) {
+    public TVendorCheckOutRecord value2(final String value) {
         setCommentExtension(value);
         return this;
     }
 
     @Override
-    public TVendorCheckOutRecord value3(String value) {
+    public TVendorCheckOutRecord value3(final String value) {
         setClassification(value);
         return this;
     }
 
     @Override
-    public TVendorCheckOutRecord value4(LocalDateTime value) {
+    public TVendorCheckOutRecord value4(final LocalDateTime value) {
         setStartAt(value);
         return this;
     }
 
     @Override
-    public TVendorCheckOutRecord value5(LocalDateTime value) {
+    public TVendorCheckOutRecord value5(final LocalDateTime value) {
         setEndAt(value);
         return this;
     }
@@ -393,13 +393,13 @@ public class TVendorCheckOutRecord extends UpdatableRecordImpl<TVendorCheckOutRe
     // -------------------------------------------------------------------------
 
     @Override
-    public TVendorCheckOutRecord value6(Integer value) {
+    public TVendorCheckOutRecord value6(final Integer value) {
         setDays(value);
         return this;
     }
 
     @Override
-    public TVendorCheckOutRecord value7(LocalDateTime value) {
+    public TVendorCheckOutRecord value7(final LocalDateTime value) {
         setLeaveAt(value);
         return this;
     }
@@ -409,13 +409,13 @@ public class TVendorCheckOutRecord extends UpdatableRecordImpl<TVendorCheckOutRe
     // -------------------------------------------------------------------------
 
     @Override
-    public TVendorCheckOutRecord value8(String value) {
+    public TVendorCheckOutRecord value8(final String value) {
         setReason(value);
         return this;
     }
 
     @Override
-    public TVendorCheckOutRecord values(String value1, String value2, String value3, LocalDateTime value4, LocalDateTime value5, Integer value6, LocalDateTime value7, String value8) {
+    public TVendorCheckOutRecord values(final String value1, final String value2, final String value3, final LocalDateTime value4, final LocalDateTime value5, final Integer value6, final LocalDateTime value7, final String value8) {
         value1(value1);
         value2(value2);
         value3(value3);
@@ -428,7 +428,7 @@ public class TVendorCheckOutRecord extends UpdatableRecordImpl<TVendorCheckOutRe
     }
 
     @Override
-    public void from(ITVendorCheckOut from) {
+    public void from(final ITVendorCheckOut from) {
         setKey(from.getKey());
         setCommentExtension(from.getCommentExtension());
         setClassification(from.getClassification());
@@ -441,7 +441,7 @@ public class TVendorCheckOutRecord extends UpdatableRecordImpl<TVendorCheckOutRe
     }
 
     @Override
-    public <E extends ITVendorCheckOut> E into(E into) {
+    public <E extends ITVendorCheckOut> E into(final E into) {
         into.from(this);
         return into;
     }

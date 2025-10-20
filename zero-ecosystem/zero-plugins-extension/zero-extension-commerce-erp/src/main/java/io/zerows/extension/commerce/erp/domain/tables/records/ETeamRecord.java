@@ -4,7 +4,7 @@
 package io.zerows.extension.commerce.erp.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.commerce.erp.domain.tables.ETeam;
 import io.zerows.extension.commerce.erp.domain.tables.interfaces.IETeam;
 import org.jooq.Field;

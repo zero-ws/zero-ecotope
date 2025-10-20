@@ -4,7 +4,7 @@
 package io.zerows.extension.commerce.lbs.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.commerce.lbs.domain.tables.LFloor;
 import io.zerows.extension.commerce.lbs.domain.tables.interfaces.ILFloor;
 import org.jooq.Field;

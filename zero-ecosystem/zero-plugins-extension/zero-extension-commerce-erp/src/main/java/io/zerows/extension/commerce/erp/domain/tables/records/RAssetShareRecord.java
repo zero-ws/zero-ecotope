@@ -4,7 +4,7 @@
 package io.zerows.extension.commerce.erp.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.commerce.erp.domain.tables.RAssetShare;
 import io.zerows.extension.commerce.erp.domain.tables.interfaces.IRAssetShare;
 import org.jooq.Field;
@@ -31,7 +31,7 @@ public class RAssetShareRecord extends UpdatableRecordImpl<RAssetShareRecord> im
     /**
      * Create a detached, initialised RAssetShareRecord
      */
-    public RAssetShareRecord(String assetId, String entityType, String entityId, String linkComponent, String comment) {
+    public RAssetShareRecord(final String assetId, final String entityType, final String entityId, final String linkComponent, final String comment) {
         super(RAssetShare.R_ASSET_SHARE);
 
         setAssetId(assetId);
@@ -45,7 +45,7 @@ public class RAssetShareRecord extends UpdatableRecordImpl<RAssetShareRecord> im
     /**
      * Create a detached, initialised RAssetShareRecord
      */
-    public RAssetShareRecord(io.zerows.extension.commerce.erp.domain.tables.pojos.RAssetShare value) {
+    public RAssetShareRecord(final io.zerows.extension.commerce.erp.domain.tables.pojos.RAssetShare value) {
         super(RAssetShare.R_ASSET_SHARE);
 
         if (value != null) {
@@ -58,7 +58,7 @@ public class RAssetShareRecord extends UpdatableRecordImpl<RAssetShareRecord> im
         }
     }
 
-    public RAssetShareRecord(io.vertx.core.json.JsonObject json) {
+    public RAssetShareRecord(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -75,7 +75,7 @@ public class RAssetShareRecord extends UpdatableRecordImpl<RAssetShareRecord> im
      * Setter for <code>ZDB.R_ASSET_SHARE.ASSET_ID</code>. 「assetId」- 资产ID
      */
     @Override
-    public RAssetShareRecord setAssetId(String value) {
+    public RAssetShareRecord setAssetId(final String value) {
         set(0, value);
         return this;
     }
@@ -92,7 +92,7 @@ public class RAssetShareRecord extends UpdatableRecordImpl<RAssetShareRecord> im
      * Setter for <code>ZDB.R_ASSET_SHARE.ENTITY_TYPE</code>. 「entityType」- 关联类型
      */
     @Override
-    public RAssetShareRecord setEntityType(String value) {
+    public RAssetShareRecord setEntityType(final String value) {
         set(1, value);
         return this;
     }
@@ -109,7 +109,7 @@ public class RAssetShareRecord extends UpdatableRecordImpl<RAssetShareRecord> im
      * Setter for <code>ZDB.R_ASSET_SHARE.ENTITY_ID</code>. 「entityId」- 关联实体ID
      */
     @Override
-    public RAssetShareRecord setEntityId(String value) {
+    public RAssetShareRecord setEntityId(final String value) {
         set(2, value);
         return this;
     }
@@ -136,7 +136,7 @@ public class RAssetShareRecord extends UpdatableRecordImpl<RAssetShareRecord> im
      * 「linkComponent」- 关联执行组件（扩展用）
      */
     @Override
-    public RAssetShareRecord setLinkComponent(String value) {
+    public RAssetShareRecord setLinkComponent(final String value) {
         set(3, value);
         return this;
     }
@@ -153,7 +153,7 @@ public class RAssetShareRecord extends UpdatableRecordImpl<RAssetShareRecord> im
      * Setter for <code>ZDB.R_ASSET_SHARE.COMMENT</code>. 「comment」- 关系备注
      */
     @Override
-    public RAssetShareRecord setComment(String value) {
+    public RAssetShareRecord setComment(final String value) {
         set(4, value);
         return this;
     }
@@ -249,13 +249,13 @@ public class RAssetShareRecord extends UpdatableRecordImpl<RAssetShareRecord> im
     }
 
     @Override
-    public RAssetShareRecord value1(String value) {
+    public RAssetShareRecord value1(final String value) {
         setAssetId(value);
         return this;
     }
 
     @Override
-    public RAssetShareRecord value2(String value) {
+    public RAssetShareRecord value2(final String value) {
         setEntityType(value);
         return this;
     }
@@ -265,13 +265,13 @@ public class RAssetShareRecord extends UpdatableRecordImpl<RAssetShareRecord> im
     // -------------------------------------------------------------------------
 
     @Override
-    public RAssetShareRecord value3(String value) {
+    public RAssetShareRecord value3(final String value) {
         setEntityId(value);
         return this;
     }
 
     @Override
-    public RAssetShareRecord value4(String value) {
+    public RAssetShareRecord value4(final String value) {
         setLinkComponent(value);
         return this;
     }
@@ -281,13 +281,13 @@ public class RAssetShareRecord extends UpdatableRecordImpl<RAssetShareRecord> im
     // -------------------------------------------------------------------------
 
     @Override
-    public RAssetShareRecord value5(String value) {
+    public RAssetShareRecord value5(final String value) {
         setComment(value);
         return this;
     }
 
     @Override
-    public RAssetShareRecord values(String value1, String value2, String value3, String value4, String value5) {
+    public RAssetShareRecord values(final String value1, final String value2, final String value3, final String value4, final String value5) {
         value1(value1);
         value2(value2);
         value3(value3);
@@ -297,7 +297,7 @@ public class RAssetShareRecord extends UpdatableRecordImpl<RAssetShareRecord> im
     }
 
     @Override
-    public void from(IRAssetShare from) {
+    public void from(final IRAssetShare from) {
         setAssetId(from.getAssetId());
         setEntityType(from.getEntityType());
         setEntityId(from.getEntityId());
@@ -307,7 +307,7 @@ public class RAssetShareRecord extends UpdatableRecordImpl<RAssetShareRecord> im
     }
 
     @Override
-    public <E extends IRAssetShare> E into(E into) {
+    public <E extends IRAssetShare> E into(final E into) {
         into.from(this);
         return into;
     }

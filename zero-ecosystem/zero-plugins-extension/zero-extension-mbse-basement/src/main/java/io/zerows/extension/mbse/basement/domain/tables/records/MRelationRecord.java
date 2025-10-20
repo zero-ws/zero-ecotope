@@ -4,7 +4,7 @@
 package io.zerows.extension.mbse.basement.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.mbse.basement.domain.tables.MRelation;
 import io.zerows.extension.mbse.basement.domain.tables.interfaces.IMRelation;
 import org.jooq.Field;
@@ -33,7 +33,7 @@ public class MRelationRecord extends UpdatableRecordImpl<MRelationRecord> implem
     /**
      * Create a detached, initialised MRelationRecord
      */
-    public MRelationRecord(String key, String type, String upstream, String downstream, String comments, String sigma, String language, Boolean active, String metadata, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public MRelationRecord(final String key, final String type, final String upstream, final String downstream, final String comments, final String sigma, final String language, final Boolean active, final String metadata, final LocalDateTime createdAt, final String createdBy, final LocalDateTime updatedAt, final String updatedBy) {
         super(MRelation.M_RELATION);
 
         setKey(key);
@@ -55,7 +55,7 @@ public class MRelationRecord extends UpdatableRecordImpl<MRelationRecord> implem
     /**
      * Create a detached, initialised MRelationRecord
      */
-    public MRelationRecord(io.zerows.extension.mbse.basement.domain.tables.pojos.MRelation value) {
+    public MRelationRecord(final io.zerows.extension.mbse.basement.domain.tables.pojos.MRelation value) {
         super(MRelation.M_RELATION);
 
         if (value != null) {
@@ -76,7 +76,7 @@ public class MRelationRecord extends UpdatableRecordImpl<MRelationRecord> implem
         }
     }
 
-    public MRelationRecord(io.vertx.core.json.JsonObject json) {
+    public MRelationRecord(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -93,7 +93,7 @@ public class MRelationRecord extends UpdatableRecordImpl<MRelationRecord> implem
      * Setter for <code>ZDB.M_RELATION.KEY</code>. 「key」- 关系定义的主键
      */
     @Override
-    public MRelationRecord setKey(String value) {
+    public MRelationRecord setKey(final String value) {
         set(0, value);
         return this;
     }
@@ -110,7 +110,7 @@ public class MRelationRecord extends UpdatableRecordImpl<MRelationRecord> implem
      * Setter for <code>ZDB.M_RELATION.TYPE</code>. 「type」- 关系类型 - 来自（字典）
      */
     @Override
-    public MRelationRecord setType(String value) {
+    public MRelationRecord setType(final String value) {
         set(1, value);
         return this;
     }
@@ -129,7 +129,7 @@ public class MRelationRecord extends UpdatableRecordImpl<MRelationRecord> implem
      * upstream，表示上级
      */
     @Override
-    public MRelationRecord setUpstream(String value) {
+    public MRelationRecord setUpstream(final String value) {
         set(2, value);
         return this;
     }
@@ -148,7 +148,7 @@ public class MRelationRecord extends UpdatableRecordImpl<MRelationRecord> implem
      * downstream，表示下级
      */
     @Override
-    public MRelationRecord setDownstream(String value) {
+    public MRelationRecord setDownstream(final String value) {
         set(3, value);
         return this;
     }
@@ -165,7 +165,7 @@ public class MRelationRecord extends UpdatableRecordImpl<MRelationRecord> implem
      * Setter for <code>ZDB.M_RELATION.COMMENTS</code>. 「comments」- 关系定义的描述信息
      */
     @Override
-    public MRelationRecord setComments(String value) {
+    public MRelationRecord setComments(final String value) {
         set(4, value);
         return this;
     }
@@ -182,7 +182,7 @@ public class MRelationRecord extends UpdatableRecordImpl<MRelationRecord> implem
      * Setter for <code>ZDB.M_RELATION.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public MRelationRecord setSigma(String value) {
+    public MRelationRecord setSigma(final String value) {
         set(5, value);
         return this;
     }
@@ -199,7 +199,7 @@ public class MRelationRecord extends UpdatableRecordImpl<MRelationRecord> implem
      * Setter for <code>ZDB.M_RELATION.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public MRelationRecord setLanguage(String value) {
+    public MRelationRecord setLanguage(final String value) {
         set(6, value);
         return this;
     }
@@ -216,7 +216,7 @@ public class MRelationRecord extends UpdatableRecordImpl<MRelationRecord> implem
      * Setter for <code>ZDB.M_RELATION.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public MRelationRecord setActive(Boolean value) {
+    public MRelationRecord setActive(final Boolean value) {
         set(7, value);
         return this;
     }
@@ -233,7 +233,7 @@ public class MRelationRecord extends UpdatableRecordImpl<MRelationRecord> implem
      * Setter for <code>ZDB.M_RELATION.METADATA</code>. 「metadata」- 附加配置数据
      */
     @Override
-    public MRelationRecord setMetadata(String value) {
+    public MRelationRecord setMetadata(final String value) {
         set(8, value);
         return this;
     }
@@ -250,7 +250,7 @@ public class MRelationRecord extends UpdatableRecordImpl<MRelationRecord> implem
      * Setter for <code>ZDB.M_RELATION.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public MRelationRecord setCreatedAt(LocalDateTime value) {
+    public MRelationRecord setCreatedAt(final LocalDateTime value) {
         set(9, value);
         return this;
     }
@@ -267,7 +267,7 @@ public class MRelationRecord extends UpdatableRecordImpl<MRelationRecord> implem
      * Setter for <code>ZDB.M_RELATION.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public MRelationRecord setCreatedBy(String value) {
+    public MRelationRecord setCreatedBy(final String value) {
         set(10, value);
         return this;
     }
@@ -292,7 +292,7 @@ public class MRelationRecord extends UpdatableRecordImpl<MRelationRecord> implem
      * Setter for <code>ZDB.M_RELATION.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public MRelationRecord setUpdatedAt(LocalDateTime value) {
+    public MRelationRecord setUpdatedAt(final LocalDateTime value) {
         set(11, value);
         return this;
     }
@@ -309,7 +309,7 @@ public class MRelationRecord extends UpdatableRecordImpl<MRelationRecord> implem
      * Setter for <code>ZDB.M_RELATION.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public MRelationRecord setUpdatedBy(String value) {
+    public MRelationRecord setUpdatedBy(final String value) {
         set(12, value);
         return this;
     }
@@ -525,61 +525,61 @@ public class MRelationRecord extends UpdatableRecordImpl<MRelationRecord> implem
     }
 
     @Override
-    public MRelationRecord value1(String value) {
+    public MRelationRecord value1(final String value) {
         setKey(value);
         return this;
     }
 
     @Override
-    public MRelationRecord value2(String value) {
+    public MRelationRecord value2(final String value) {
         setType(value);
         return this;
     }
 
     @Override
-    public MRelationRecord value3(String value) {
+    public MRelationRecord value3(final String value) {
         setUpstream(value);
         return this;
     }
 
     @Override
-    public MRelationRecord value4(String value) {
+    public MRelationRecord value4(final String value) {
         setDownstream(value);
         return this;
     }
 
     @Override
-    public MRelationRecord value5(String value) {
+    public MRelationRecord value5(final String value) {
         setComments(value);
         return this;
     }
 
     @Override
-    public MRelationRecord value6(String value) {
+    public MRelationRecord value6(final String value) {
         setSigma(value);
         return this;
     }
 
     @Override
-    public MRelationRecord value7(String value) {
+    public MRelationRecord value7(final String value) {
         setLanguage(value);
         return this;
     }
 
     @Override
-    public MRelationRecord value8(Boolean value) {
+    public MRelationRecord value8(final Boolean value) {
         setActive(value);
         return this;
     }
 
     @Override
-    public MRelationRecord value9(String value) {
+    public MRelationRecord value9(final String value) {
         setMetadata(value);
         return this;
     }
 
     @Override
-    public MRelationRecord value10(LocalDateTime value) {
+    public MRelationRecord value10(final LocalDateTime value) {
         setCreatedAt(value);
         return this;
     }
@@ -589,13 +589,13 @@ public class MRelationRecord extends UpdatableRecordImpl<MRelationRecord> implem
     // -------------------------------------------------------------------------
 
     @Override
-    public MRelationRecord value11(String value) {
+    public MRelationRecord value11(final String value) {
         setCreatedBy(value);
         return this;
     }
 
     @Override
-    public MRelationRecord value12(LocalDateTime value) {
+    public MRelationRecord value12(final LocalDateTime value) {
         setUpdatedAt(value);
         return this;
     }
@@ -605,13 +605,13 @@ public class MRelationRecord extends UpdatableRecordImpl<MRelationRecord> implem
     // -------------------------------------------------------------------------
 
     @Override
-    public MRelationRecord value13(String value) {
+    public MRelationRecord value13(final String value) {
         setUpdatedBy(value);
         return this;
     }
 
     @Override
-    public MRelationRecord values(String value1, String value2, String value3, String value4, String value5, String value6, String value7, Boolean value8, String value9, LocalDateTime value10, String value11, LocalDateTime value12, String value13) {
+    public MRelationRecord values(final String value1, final String value2, final String value3, final String value4, final String value5, final String value6, final String value7, final Boolean value8, final String value9, final LocalDateTime value10, final String value11, final LocalDateTime value12, final String value13) {
         value1(value1);
         value2(value2);
         value3(value3);
@@ -629,7 +629,7 @@ public class MRelationRecord extends UpdatableRecordImpl<MRelationRecord> implem
     }
 
     @Override
-    public void from(IMRelation from) {
+    public void from(final IMRelation from) {
         setKey(from.getKey());
         setType(from.getType());
         setUpstream(from.getUpstream());
@@ -647,7 +647,7 @@ public class MRelationRecord extends UpdatableRecordImpl<MRelationRecord> implem
     }
 
     @Override
-    public <E extends IMRelation> E into(E into) {
+    public <E extends IMRelation> E into(final E into) {
         into.from(this);
         return into;
     }

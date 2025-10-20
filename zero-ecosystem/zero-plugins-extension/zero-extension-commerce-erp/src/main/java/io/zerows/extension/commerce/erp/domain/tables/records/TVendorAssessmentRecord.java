@@ -4,7 +4,7 @@
 package io.zerows.extension.commerce.erp.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.commerce.erp.domain.tables.TVendorAssessment;
 import io.zerows.extension.commerce.erp.domain.tables.interfaces.ITVendorAssessment;
 import org.jooq.Field;
@@ -33,7 +33,7 @@ public class TVendorAssessmentRecord extends UpdatableRecordImpl<TVendorAssessme
     /**
      * Create a detached, initialised TVendorAssessmentRecord
      */
-    public TVendorAssessmentRecord(String key, String commentExtension, String classification, LocalDateTime startAt, LocalDateTime endAt, Integer days, String assessOn, Integer assessScore, String commentDept, String commentAssess, String commentLeader) {
+    public TVendorAssessmentRecord(final String key, final String commentExtension, final String classification, final LocalDateTime startAt, final LocalDateTime endAt, final Integer days, final String assessOn, final Integer assessScore, final String commentDept, final String commentAssess, final String commentLeader) {
         super(TVendorAssessment.T_VENDOR_ASSESSMENT);
 
         setKey(key);
@@ -53,7 +53,7 @@ public class TVendorAssessmentRecord extends UpdatableRecordImpl<TVendorAssessme
     /**
      * Create a detached, initialised TVendorAssessmentRecord
      */
-    public TVendorAssessmentRecord(io.zerows.extension.commerce.erp.domain.tables.pojos.TVendorAssessment value) {
+    public TVendorAssessmentRecord(final io.zerows.extension.commerce.erp.domain.tables.pojos.TVendorAssessment value) {
         super(TVendorAssessment.T_VENDOR_ASSESSMENT);
 
         if (value != null) {
@@ -72,7 +72,7 @@ public class TVendorAssessmentRecord extends UpdatableRecordImpl<TVendorAssessme
         }
     }
 
-    public TVendorAssessmentRecord(io.vertx.core.json.JsonObject json) {
+    public TVendorAssessmentRecord(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -91,7 +91,7 @@ public class TVendorAssessmentRecord extends UpdatableRecordImpl<TVendorAssessme
      * Primary Key
      */
     @Override
-    public TVendorAssessmentRecord setKey(String value) {
+    public TVendorAssessmentRecord setKey(final String value) {
         set(0, value);
         return this;
     }
@@ -110,7 +110,7 @@ public class TVendorAssessmentRecord extends UpdatableRecordImpl<TVendorAssessme
      * 「commentExtension」- Extension Comment
      */
     @Override
-    public TVendorAssessmentRecord setCommentExtension(String value) {
+    public TVendorAssessmentRecord setCommentExtension(final String value) {
         set(1, value);
         return this;
     }
@@ -129,7 +129,7 @@ public class TVendorAssessmentRecord extends UpdatableRecordImpl<TVendorAssessme
      * 「classification」- The ticket related income type
      */
     @Override
-    public TVendorAssessmentRecord setClassification(String value) {
+    public TVendorAssessmentRecord setClassification(final String value) {
         set(2, value);
         return this;
     }
@@ -146,7 +146,7 @@ public class TVendorAssessmentRecord extends UpdatableRecordImpl<TVendorAssessme
      * Setter for <code>ZDB.T_VENDOR_ASSESSMENT.START_AT</code>. 「startAt」- From
      */
     @Override
-    public TVendorAssessmentRecord setStartAt(LocalDateTime value) {
+    public TVendorAssessmentRecord setStartAt(final LocalDateTime value) {
         set(3, value);
         return this;
     }
@@ -163,7 +163,7 @@ public class TVendorAssessmentRecord extends UpdatableRecordImpl<TVendorAssessme
      * Setter for <code>ZDB.T_VENDOR_ASSESSMENT.END_AT</code>. 「endAt」- To
      */
     @Override
-    public TVendorAssessmentRecord setEndAt(LocalDateTime value) {
+    public TVendorAssessmentRecord setEndAt(final LocalDateTime value) {
         set(4, value);
         return this;
     }
@@ -180,7 +180,7 @@ public class TVendorAssessmentRecord extends UpdatableRecordImpl<TVendorAssessme
      * Setter for <code>ZDB.T_VENDOR_ASSESSMENT.DAYS</code>. 「days」- Duration
      */
     @Override
-    public TVendorAssessmentRecord setDays(Integer value) {
+    public TVendorAssessmentRecord setDays(final Integer value) {
         set(5, value);
         return this;
     }
@@ -199,7 +199,7 @@ public class TVendorAssessmentRecord extends UpdatableRecordImpl<TVendorAssessme
      * The user that will be assessed
      */
     @Override
-    public TVendorAssessmentRecord setAssessOn(String value) {
+    public TVendorAssessmentRecord setAssessOn(final String value) {
         set(6, value);
         return this;
     }
@@ -218,7 +218,7 @@ public class TVendorAssessmentRecord extends UpdatableRecordImpl<TVendorAssessme
      * 「assessScore」- The score of the user
      */
     @Override
-    public TVendorAssessmentRecord setAssessScore(Integer value) {
+    public TVendorAssessmentRecord setAssessScore(final Integer value) {
         set(7, value);
         return this;
     }
@@ -237,7 +237,7 @@ public class TVendorAssessmentRecord extends UpdatableRecordImpl<TVendorAssessme
      * 「commentDept」- from department
      */
     @Override
-    public TVendorAssessmentRecord setCommentDept(String value) {
+    public TVendorAssessmentRecord setCommentDept(final String value) {
         set(8, value);
         return this;
     }
@@ -264,7 +264,7 @@ public class TVendorAssessmentRecord extends UpdatableRecordImpl<TVendorAssessme
      * 「commentAssess」- from assess
      */
     @Override
-    public TVendorAssessmentRecord setCommentAssess(String value) {
+    public TVendorAssessmentRecord setCommentAssess(final String value) {
         set(9, value);
         return this;
     }
@@ -283,7 +283,7 @@ public class TVendorAssessmentRecord extends UpdatableRecordImpl<TVendorAssessme
      * 「commentLeader」- from leader of project
      */
     @Override
-    public TVendorAssessmentRecord setCommentLeader(String value) {
+    public TVendorAssessmentRecord setCommentLeader(final String value) {
         set(10, value);
         return this;
     }
@@ -469,49 +469,49 @@ public class TVendorAssessmentRecord extends UpdatableRecordImpl<TVendorAssessme
     }
 
     @Override
-    public TVendorAssessmentRecord value1(String value) {
+    public TVendorAssessmentRecord value1(final String value) {
         setKey(value);
         return this;
     }
 
     @Override
-    public TVendorAssessmentRecord value2(String value) {
+    public TVendorAssessmentRecord value2(final String value) {
         setCommentExtension(value);
         return this;
     }
 
     @Override
-    public TVendorAssessmentRecord value3(String value) {
+    public TVendorAssessmentRecord value3(final String value) {
         setClassification(value);
         return this;
     }
 
     @Override
-    public TVendorAssessmentRecord value4(LocalDateTime value) {
+    public TVendorAssessmentRecord value4(final LocalDateTime value) {
         setStartAt(value);
         return this;
     }
 
     @Override
-    public TVendorAssessmentRecord value5(LocalDateTime value) {
+    public TVendorAssessmentRecord value5(final LocalDateTime value) {
         setEndAt(value);
         return this;
     }
 
     @Override
-    public TVendorAssessmentRecord value6(Integer value) {
+    public TVendorAssessmentRecord value6(final Integer value) {
         setDays(value);
         return this;
     }
 
     @Override
-    public TVendorAssessmentRecord value7(String value) {
+    public TVendorAssessmentRecord value7(final String value) {
         setAssessOn(value);
         return this;
     }
 
     @Override
-    public TVendorAssessmentRecord value8(Integer value) {
+    public TVendorAssessmentRecord value8(final Integer value) {
         setAssessScore(value);
         return this;
     }
@@ -521,13 +521,13 @@ public class TVendorAssessmentRecord extends UpdatableRecordImpl<TVendorAssessme
     // -------------------------------------------------------------------------
 
     @Override
-    public TVendorAssessmentRecord value9(String value) {
+    public TVendorAssessmentRecord value9(final String value) {
         setCommentDept(value);
         return this;
     }
 
     @Override
-    public TVendorAssessmentRecord value10(String value) {
+    public TVendorAssessmentRecord value10(final String value) {
         setCommentAssess(value);
         return this;
     }
@@ -537,13 +537,13 @@ public class TVendorAssessmentRecord extends UpdatableRecordImpl<TVendorAssessme
     // -------------------------------------------------------------------------
 
     @Override
-    public TVendorAssessmentRecord value11(String value) {
+    public TVendorAssessmentRecord value11(final String value) {
         setCommentLeader(value);
         return this;
     }
 
     @Override
-    public TVendorAssessmentRecord values(String value1, String value2, String value3, LocalDateTime value4, LocalDateTime value5, Integer value6, String value7, Integer value8, String value9, String value10, String value11) {
+    public TVendorAssessmentRecord values(final String value1, final String value2, final String value3, final LocalDateTime value4, final LocalDateTime value5, final Integer value6, final String value7, final Integer value8, final String value9, final String value10, final String value11) {
         value1(value1);
         value2(value2);
         value3(value3);
@@ -559,7 +559,7 @@ public class TVendorAssessmentRecord extends UpdatableRecordImpl<TVendorAssessme
     }
 
     @Override
-    public void from(ITVendorAssessment from) {
+    public void from(final ITVendorAssessment from) {
         setKey(from.getKey());
         setCommentExtension(from.getCommentExtension());
         setClassification(from.getClassification());
@@ -575,7 +575,7 @@ public class TVendorAssessmentRecord extends UpdatableRecordImpl<TVendorAssessme
     }
 
     @Override
-    public <E extends ITVendorAssessment> E into(E into) {
+    public <E extends ITVendorAssessment> E into(final E into) {
         into.from(this);
         return into;
     }

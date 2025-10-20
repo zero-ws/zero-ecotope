@@ -4,7 +4,7 @@
 package io.zerows.extension.mbse.ui.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.mbse.ui.domain.tables.UiLayout;
 import io.zerows.extension.mbse.ui.domain.tables.interfaces.IUiLayout;
 import org.jooq.Field;
@@ -33,7 +33,7 @@ public class UiLayoutRecord extends UpdatableRecordImpl<UiLayoutRecord> implemen
     /**
      * Create a detached, initialised UiLayoutRecord
      */
-    public UiLayoutRecord(String key, String name, String config, Boolean active, String sigma, String metadata, String language, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public UiLayoutRecord(final String key, final String name, final String config, final Boolean active, final String sigma, final String metadata, final String language, final LocalDateTime createdAt, final String createdBy, final LocalDateTime updatedAt, final String updatedBy) {
         super(UiLayout.UI_LAYOUT);
 
         setKey(key);
@@ -53,7 +53,7 @@ public class UiLayoutRecord extends UpdatableRecordImpl<UiLayoutRecord> implemen
     /**
      * Create a detached, initialised UiLayoutRecord
      */
-    public UiLayoutRecord(io.zerows.extension.mbse.ui.domain.tables.pojos.UiLayout value) {
+    public UiLayoutRecord(final io.zerows.extension.mbse.ui.domain.tables.pojos.UiLayout value) {
         super(UiLayout.UI_LAYOUT);
 
         if (value != null) {
@@ -72,7 +72,7 @@ public class UiLayoutRecord extends UpdatableRecordImpl<UiLayoutRecord> implemen
         }
     }
 
-    public UiLayoutRecord(io.vertx.core.json.JsonObject json) {
+    public UiLayoutRecord(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -89,7 +89,7 @@ public class UiLayoutRecord extends UpdatableRecordImpl<UiLayoutRecord> implemen
      * Setter for <code>ZDB.UI_LAYOUT.KEY</code>. 「key」- Tpl模板唯一主键
      */
     @Override
-    public UiLayoutRecord setKey(String value) {
+    public UiLayoutRecord setKey(final String value) {
         set(0, value);
         return this;
     }
@@ -106,7 +106,7 @@ public class UiLayoutRecord extends UpdatableRecordImpl<UiLayoutRecord> implemen
      * Setter for <code>ZDB.UI_LAYOUT.NAME</code>. 「name」- Tpl模板名称
      */
     @Override
-    public UiLayoutRecord setName(String value) {
+    public UiLayoutRecord setName(final String value) {
         set(1, value);
         return this;
     }
@@ -123,7 +123,7 @@ public class UiLayoutRecord extends UpdatableRecordImpl<UiLayoutRecord> implemen
      * Setter for <code>ZDB.UI_LAYOUT.CONFIG</code>. 「config」- 主配置
      */
     @Override
-    public UiLayoutRecord setConfig(String value) {
+    public UiLayoutRecord setConfig(final String value) {
         set(2, value);
         return this;
     }
@@ -140,7 +140,7 @@ public class UiLayoutRecord extends UpdatableRecordImpl<UiLayoutRecord> implemen
      * Setter for <code>ZDB.UI_LAYOUT.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public UiLayoutRecord setActive(Boolean value) {
+    public UiLayoutRecord setActive(final Boolean value) {
         set(3, value);
         return this;
     }
@@ -157,7 +157,7 @@ public class UiLayoutRecord extends UpdatableRecordImpl<UiLayoutRecord> implemen
      * Setter for <code>ZDB.UI_LAYOUT.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public UiLayoutRecord setSigma(String value) {
+    public UiLayoutRecord setSigma(final String value) {
         set(4, value);
         return this;
     }
@@ -174,7 +174,7 @@ public class UiLayoutRecord extends UpdatableRecordImpl<UiLayoutRecord> implemen
      * Setter for <code>ZDB.UI_LAYOUT.METADATA</code>. 「metadata」- 附加配置
      */
     @Override
-    public UiLayoutRecord setMetadata(String value) {
+    public UiLayoutRecord setMetadata(final String value) {
         set(5, value);
         return this;
     }
@@ -191,7 +191,7 @@ public class UiLayoutRecord extends UpdatableRecordImpl<UiLayoutRecord> implemen
      * Setter for <code>ZDB.UI_LAYOUT.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public UiLayoutRecord setLanguage(String value) {
+    public UiLayoutRecord setLanguage(final String value) {
         set(6, value);
         return this;
     }
@@ -208,7 +208,7 @@ public class UiLayoutRecord extends UpdatableRecordImpl<UiLayoutRecord> implemen
      * Setter for <code>ZDB.UI_LAYOUT.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public UiLayoutRecord setCreatedAt(LocalDateTime value) {
+    public UiLayoutRecord setCreatedAt(final LocalDateTime value) {
         set(7, value);
         return this;
     }
@@ -225,7 +225,7 @@ public class UiLayoutRecord extends UpdatableRecordImpl<UiLayoutRecord> implemen
      * Setter for <code>ZDB.UI_LAYOUT.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public UiLayoutRecord setCreatedBy(String value) {
+    public UiLayoutRecord setCreatedBy(final String value) {
         set(8, value);
         return this;
     }
@@ -250,7 +250,7 @@ public class UiLayoutRecord extends UpdatableRecordImpl<UiLayoutRecord> implemen
      * Setter for <code>ZDB.UI_LAYOUT.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public UiLayoutRecord setUpdatedAt(LocalDateTime value) {
+    public UiLayoutRecord setUpdatedAt(final LocalDateTime value) {
         set(9, value);
         return this;
     }
@@ -267,7 +267,7 @@ public class UiLayoutRecord extends UpdatableRecordImpl<UiLayoutRecord> implemen
      * Setter for <code>ZDB.UI_LAYOUT.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public UiLayoutRecord setUpdatedBy(String value) {
+    public UiLayoutRecord setUpdatedBy(final String value) {
         set(10, value);
         return this;
     }
@@ -453,49 +453,49 @@ public class UiLayoutRecord extends UpdatableRecordImpl<UiLayoutRecord> implemen
     }
 
     @Override
-    public UiLayoutRecord value1(String value) {
+    public UiLayoutRecord value1(final String value) {
         setKey(value);
         return this;
     }
 
     @Override
-    public UiLayoutRecord value2(String value) {
+    public UiLayoutRecord value2(final String value) {
         setName(value);
         return this;
     }
 
     @Override
-    public UiLayoutRecord value3(String value) {
+    public UiLayoutRecord value3(final String value) {
         setConfig(value);
         return this;
     }
 
     @Override
-    public UiLayoutRecord value4(Boolean value) {
+    public UiLayoutRecord value4(final Boolean value) {
         setActive(value);
         return this;
     }
 
     @Override
-    public UiLayoutRecord value5(String value) {
+    public UiLayoutRecord value5(final String value) {
         setSigma(value);
         return this;
     }
 
     @Override
-    public UiLayoutRecord value6(String value) {
+    public UiLayoutRecord value6(final String value) {
         setMetadata(value);
         return this;
     }
 
     @Override
-    public UiLayoutRecord value7(String value) {
+    public UiLayoutRecord value7(final String value) {
         setLanguage(value);
         return this;
     }
 
     @Override
-    public UiLayoutRecord value8(LocalDateTime value) {
+    public UiLayoutRecord value8(final LocalDateTime value) {
         setCreatedAt(value);
         return this;
     }
@@ -505,13 +505,13 @@ public class UiLayoutRecord extends UpdatableRecordImpl<UiLayoutRecord> implemen
     // -------------------------------------------------------------------------
 
     @Override
-    public UiLayoutRecord value9(String value) {
+    public UiLayoutRecord value9(final String value) {
         setCreatedBy(value);
         return this;
     }
 
     @Override
-    public UiLayoutRecord value10(LocalDateTime value) {
+    public UiLayoutRecord value10(final LocalDateTime value) {
         setUpdatedAt(value);
         return this;
     }
@@ -521,13 +521,13 @@ public class UiLayoutRecord extends UpdatableRecordImpl<UiLayoutRecord> implemen
     // -------------------------------------------------------------------------
 
     @Override
-    public UiLayoutRecord value11(String value) {
+    public UiLayoutRecord value11(final String value) {
         setUpdatedBy(value);
         return this;
     }
 
     @Override
-    public UiLayoutRecord values(String value1, String value2, String value3, Boolean value4, String value5, String value6, String value7, LocalDateTime value8, String value9, LocalDateTime value10, String value11) {
+    public UiLayoutRecord values(final String value1, final String value2, final String value3, final Boolean value4, final String value5, final String value6, final String value7, final LocalDateTime value8, final String value9, final LocalDateTime value10, final String value11) {
         value1(value1);
         value2(value2);
         value3(value3);
@@ -543,7 +543,7 @@ public class UiLayoutRecord extends UpdatableRecordImpl<UiLayoutRecord> implemen
     }
 
     @Override
-    public void from(IUiLayout from) {
+    public void from(final IUiLayout from) {
         setKey(from.getKey());
         setName(from.getName());
         setConfig(from.getConfig());
@@ -559,7 +559,7 @@ public class UiLayoutRecord extends UpdatableRecordImpl<UiLayoutRecord> implemen
     }
 
     @Override
-    public <E extends IUiLayout> E into(E into) {
+    public <E extends IUiLayout> E into(final E into) {
         into.from(this);
         return into;
     }

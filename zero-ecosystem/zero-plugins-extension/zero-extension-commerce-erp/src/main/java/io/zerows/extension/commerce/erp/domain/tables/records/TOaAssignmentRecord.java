@@ -4,7 +4,7 @@
 package io.zerows.extension.commerce.erp.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.commerce.erp.domain.tables.TOaAssignment;
 import io.zerows.extension.commerce.erp.domain.tables.interfaces.ITOaAssignment;
 import org.jooq.Field;
@@ -33,7 +33,7 @@ public class TOaAssignmentRecord extends UpdatableRecordImpl<TOaAssignmentRecord
     /**
      * Create a detached, initialised TOaAssignmentRecord
      */
-    public TOaAssignmentRecord(String key, String commentExtension, String requestBy, LocalDateTime startAt, LocalDateTime endAt, Integer days, String reason, String workContent) {
+    public TOaAssignmentRecord(final String key, final String commentExtension, final String requestBy, final LocalDateTime startAt, final LocalDateTime endAt, final Integer days, final String reason, final String workContent) {
         super(TOaAssignment.T_OA_ASSIGNMENT);
 
         setKey(key);
@@ -50,7 +50,7 @@ public class TOaAssignmentRecord extends UpdatableRecordImpl<TOaAssignmentRecord
     /**
      * Create a detached, initialised TOaAssignmentRecord
      */
-    public TOaAssignmentRecord(io.zerows.extension.commerce.erp.domain.tables.pojos.TOaAssignment value) {
+    public TOaAssignmentRecord(final io.zerows.extension.commerce.erp.domain.tables.pojos.TOaAssignment value) {
         super(TOaAssignment.T_OA_ASSIGNMENT);
 
         if (value != null) {
@@ -66,7 +66,7 @@ public class TOaAssignmentRecord extends UpdatableRecordImpl<TOaAssignmentRecord
         }
     }
 
-    public TOaAssignmentRecord(io.vertx.core.json.JsonObject json) {
+    public TOaAssignmentRecord(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -85,7 +85,7 @@ public class TOaAssignmentRecord extends UpdatableRecordImpl<TOaAssignmentRecord
      * Key
      */
     @Override
-    public TOaAssignmentRecord setKey(String value) {
+    public TOaAssignmentRecord setKey(final String value) {
         set(0, value);
         return this;
     }
@@ -104,7 +104,7 @@ public class TOaAssignmentRecord extends UpdatableRecordImpl<TOaAssignmentRecord
      * 「commentExtension」- Extension Comment
      */
     @Override
-    public TOaAssignmentRecord setCommentExtension(String value) {
+    public TOaAssignmentRecord setCommentExtension(final String value) {
         set(1, value);
         return this;
     }
@@ -123,7 +123,7 @@ public class TOaAssignmentRecord extends UpdatableRecordImpl<TOaAssignmentRecord
      * Request User
      */
     @Override
-    public TOaAssignmentRecord setRequestBy(String value) {
+    public TOaAssignmentRecord setRequestBy(final String value) {
         set(2, value);
         return this;
     }
@@ -140,7 +140,7 @@ public class TOaAssignmentRecord extends UpdatableRecordImpl<TOaAssignmentRecord
      * Setter for <code>ZDB.T_OA_ASSIGNMENT.START_AT</code>. 「startAt」- From
      */
     @Override
-    public TOaAssignmentRecord setStartAt(LocalDateTime value) {
+    public TOaAssignmentRecord setStartAt(final LocalDateTime value) {
         set(3, value);
         return this;
     }
@@ -157,7 +157,7 @@ public class TOaAssignmentRecord extends UpdatableRecordImpl<TOaAssignmentRecord
      * Setter for <code>ZDB.T_OA_ASSIGNMENT.END_AT</code>. 「endAt」- To
      */
     @Override
-    public TOaAssignmentRecord setEndAt(LocalDateTime value) {
+    public TOaAssignmentRecord setEndAt(final LocalDateTime value) {
         set(4, value);
         return this;
     }
@@ -174,7 +174,7 @@ public class TOaAssignmentRecord extends UpdatableRecordImpl<TOaAssignmentRecord
      * Setter for <code>ZDB.T_OA_ASSIGNMENT.DAYS</code>. 「days」- Duration
      */
     @Override
-    public TOaAssignmentRecord setDays(Integer value) {
+    public TOaAssignmentRecord setDays(final Integer value) {
         set(5, value);
         return this;
     }
@@ -201,7 +201,7 @@ public class TOaAssignmentRecord extends UpdatableRecordImpl<TOaAssignmentRecord
      * to be done
      */
     @Override
-    public TOaAssignmentRecord setReason(String value) {
+    public TOaAssignmentRecord setReason(final String value) {
         set(6, value);
         return this;
     }
@@ -220,7 +220,7 @@ public class TOaAssignmentRecord extends UpdatableRecordImpl<TOaAssignmentRecord
      * Working Assignment Content
      */
     @Override
-    public TOaAssignmentRecord setWorkContent(String value) {
+    public TOaAssignmentRecord setWorkContent(final String value) {
         set(7, value);
         return this;
     }
@@ -361,31 +361,31 @@ public class TOaAssignmentRecord extends UpdatableRecordImpl<TOaAssignmentRecord
     }
 
     @Override
-    public TOaAssignmentRecord value1(String value) {
+    public TOaAssignmentRecord value1(final String value) {
         setKey(value);
         return this;
     }
 
     @Override
-    public TOaAssignmentRecord value2(String value) {
+    public TOaAssignmentRecord value2(final String value) {
         setCommentExtension(value);
         return this;
     }
 
     @Override
-    public TOaAssignmentRecord value3(String value) {
+    public TOaAssignmentRecord value3(final String value) {
         setRequestBy(value);
         return this;
     }
 
     @Override
-    public TOaAssignmentRecord value4(LocalDateTime value) {
+    public TOaAssignmentRecord value4(final LocalDateTime value) {
         setStartAt(value);
         return this;
     }
 
     @Override
-    public TOaAssignmentRecord value5(LocalDateTime value) {
+    public TOaAssignmentRecord value5(final LocalDateTime value) {
         setEndAt(value);
         return this;
     }
@@ -395,13 +395,13 @@ public class TOaAssignmentRecord extends UpdatableRecordImpl<TOaAssignmentRecord
     // -------------------------------------------------------------------------
 
     @Override
-    public TOaAssignmentRecord value6(Integer value) {
+    public TOaAssignmentRecord value6(final Integer value) {
         setDays(value);
         return this;
     }
 
     @Override
-    public TOaAssignmentRecord value7(String value) {
+    public TOaAssignmentRecord value7(final String value) {
         setReason(value);
         return this;
     }
@@ -411,13 +411,13 @@ public class TOaAssignmentRecord extends UpdatableRecordImpl<TOaAssignmentRecord
     // -------------------------------------------------------------------------
 
     @Override
-    public TOaAssignmentRecord value8(String value) {
+    public TOaAssignmentRecord value8(final String value) {
         setWorkContent(value);
         return this;
     }
 
     @Override
-    public TOaAssignmentRecord values(String value1, String value2, String value3, LocalDateTime value4, LocalDateTime value5, Integer value6, String value7, String value8) {
+    public TOaAssignmentRecord values(final String value1, final String value2, final String value3, final LocalDateTime value4, final LocalDateTime value5, final Integer value6, final String value7, final String value8) {
         value1(value1);
         value2(value2);
         value3(value3);
@@ -430,7 +430,7 @@ public class TOaAssignmentRecord extends UpdatableRecordImpl<TOaAssignmentRecord
     }
 
     @Override
-    public void from(ITOaAssignment from) {
+    public void from(final ITOaAssignment from) {
         setKey(from.getKey());
         setCommentExtension(from.getCommentExtension());
         setRequestBy(from.getRequestBy());
@@ -443,7 +443,7 @@ public class TOaAssignmentRecord extends UpdatableRecordImpl<TOaAssignmentRecord
     }
 
     @Override
-    public <E extends ITOaAssignment> E into(E into) {
+    public <E extends ITOaAssignment> E into(final E into) {
         into.from(this);
         return into;
     }

@@ -1,6 +1,6 @@
 package io.zerows.epoch.basicore;
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
 import io.zerows.support.Ut;
 
 import java.io.Serializable;

@@ -4,7 +4,7 @@
 package io.zerows.extension.runtime.ambient.domain.tables.pojos;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.runtime.ambient.domain.tables.interfaces.IXLinkage;
 
 import java.time.LocalDateTime;
@@ -43,7 +43,7 @@ public class XLinkage implements VertxPojo, IXLinkage {
     public XLinkage() {
     }
 
-    public XLinkage(IXLinkage value) {
+    public XLinkage(final IXLinkage value) {
         this.key = value.getKey();
         this.name = value.getName();
         this.type = value.getType();
@@ -69,28 +69,28 @@ public class XLinkage implements VertxPojo, IXLinkage {
     }
 
     public XLinkage(
-        String key,
-        String name,
-        String type,
-        String alias,
-        String region,
-        String linkKey,
-        String linkType,
-        String linkData,
-        String sourceKey,
-        String sourceType,
-        String sourceData,
-        String targetKey,
-        String targetType,
-        String targetData,
-        String sigma,
-        String language,
-        Boolean active,
-        String metadata,
-        LocalDateTime createdAt,
-        String createdBy,
-        LocalDateTime updatedAt,
-        String updatedBy
+        final String key,
+        final String name,
+        final String type,
+        final String alias,
+        final String region,
+        final String linkKey,
+        final String linkType,
+        final String linkData,
+        final String sourceKey,
+        final String sourceType,
+        final String sourceData,
+        final String targetKey,
+        final String targetType,
+        final String targetData,
+        final String sigma,
+        final String language,
+        final Boolean active,
+        final String metadata,
+        final LocalDateTime createdAt,
+        final String createdBy,
+        final LocalDateTime updatedAt,
+        final String updatedBy
     ) {
         this.key = key;
         this.name = name;
@@ -116,7 +116,7 @@ public class XLinkage implements VertxPojo, IXLinkage {
         this.updatedBy = updatedBy;
     }
 
-    public XLinkage(io.vertx.core.json.JsonObject json) {
+    public XLinkage(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -133,7 +133,7 @@ public class XLinkage implements VertxPojo, IXLinkage {
      * Setter for <code>ZDB.X_LINKAGE.KEY</code>. 「key」- 连接主键
      */
     @Override
-    public XLinkage setKey(String key) {
+    public XLinkage setKey(final String key) {
         this.key = key;
         return this;
     }
@@ -150,7 +150,7 @@ public class XLinkage implements VertxPojo, IXLinkage {
      * Setter for <code>ZDB.X_LINKAGE.NAME</code>. 「name」- 名称
      */
     @Override
-    public XLinkage setName(String name) {
+    public XLinkage setName(final String name) {
         this.name = name;
         return this;
     }
@@ -167,7 +167,7 @@ public class XLinkage implements VertxPojo, IXLinkage {
      * Setter for <code>ZDB.X_LINKAGE.TYPE</code>. 「type」- 连接类型
      */
     @Override
-    public XLinkage setType(String type) {
+    public XLinkage setType(final String type) {
         this.type = type;
         return this;
     }
@@ -184,7 +184,7 @@ public class XLinkage implements VertxPojo, IXLinkage {
      * Setter for <code>ZDB.X_LINKAGE.ALIAS</code>. 「alias」- 别称
      */
     @Override
-    public XLinkage setAlias(String alias) {
+    public XLinkage setAlias(final String alias) {
         this.alias = alias;
         return this;
     }
@@ -203,7 +203,7 @@ public class XLinkage implements VertxPojo, IXLinkage {
      * 连接区域标识，同一个区域算一个连接（批次）
      */
     @Override
-    public XLinkage setRegion(String region) {
+    public XLinkage setRegion(final String region) {
         this.region = region;
         return this;
     }
@@ -222,7 +222,7 @@ public class XLinkage implements VertxPojo, IXLinkage {
      * source / ofMain 计算
      */
     @Override
-    public XLinkage setLinkKey(String linkKey) {
+    public XLinkage setLinkKey(final String linkKey) {
         this.linkKey = linkKey;
         return this;
     }
@@ -239,7 +239,7 @@ public class XLinkage implements VertxPojo, IXLinkage {
      * Setter for <code>ZDB.X_LINKAGE.LINK_TYPE</code>. 「linkType」- 关系记录类型
      */
     @Override
-    public XLinkage setLinkType(String linkType) {
+    public XLinkage setLinkType(final String linkType) {
         this.linkType = linkType;
         return this;
     }
@@ -256,7 +256,7 @@ public class XLinkage implements VertxPojo, IXLinkage {
      * Setter for <code>ZDB.X_LINKAGE.LINK_DATA</code>. 「linkData」- 关联数据Json格式
      */
     @Override
-    public XLinkage setLinkData(String linkData) {
+    public XLinkage setLinkData(final String linkData) {
         this.linkData = linkData;
         return this;
     }
@@ -273,7 +273,7 @@ public class XLinkage implements VertxPojo, IXLinkage {
      * Setter for <code>ZDB.X_LINKAGE.SOURCE_KEY</code>. 「sourceKey」- 源实体
      */
     @Override
-    public XLinkage setSourceKey(String sourceKey) {
+    public XLinkage setSourceKey(final String sourceKey) {
         this.sourceKey = sourceKey;
         return this;
     }
@@ -290,7 +290,7 @@ public class XLinkage implements VertxPojo, IXLinkage {
      * Setter for <code>ZDB.X_LINKAGE.SOURCE_TYPE</code>. 「sourceType」- 源实体类型
      */
     @Override
-    public XLinkage setSourceType(String sourceType) {
+    public XLinkage setSourceType(final String sourceType) {
         this.sourceType = sourceType;
         return this;
     }
@@ -309,7 +309,7 @@ public class XLinkage implements VertxPojo, IXLinkage {
      * 源记录Json格式
      */
     @Override
-    public XLinkage setSourceData(String sourceData) {
+    public XLinkage setSourceData(final String sourceData) {
         this.sourceData = sourceData;
         return this;
     }
@@ -326,7 +326,7 @@ public class XLinkage implements VertxPojo, IXLinkage {
      * Setter for <code>ZDB.X_LINKAGE.TARGET_KEY</code>. 「targetKey」- 目标实体
      */
     @Override
-    public XLinkage setTargetKey(String targetKey) {
+    public XLinkage setTargetKey(final String targetKey) {
         this.targetKey = targetKey;
         return this;
     }
@@ -343,7 +343,7 @@ public class XLinkage implements VertxPojo, IXLinkage {
      * Setter for <code>ZDB.X_LINKAGE.TARGET_TYPE</code>. 「targetType」- 目标实体类型
      */
     @Override
-    public XLinkage setTargetType(String targetType) {
+    public XLinkage setTargetType(final String targetType) {
         this.targetType = targetType;
         return this;
     }
@@ -362,7 +362,7 @@ public class XLinkage implements VertxPojo, IXLinkage {
      * 目标记录Json格式
      */
     @Override
-    public XLinkage setTargetData(String targetData) {
+    public XLinkage setTargetData(final String targetData) {
         this.targetData = targetData;
         return this;
     }
@@ -379,7 +379,7 @@ public class XLinkage implements VertxPojo, IXLinkage {
      * Setter for <code>ZDB.X_LINKAGE.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public XLinkage setSigma(String sigma) {
+    public XLinkage setSigma(final String sigma) {
         this.sigma = sigma;
         return this;
     }
@@ -396,7 +396,7 @@ public class XLinkage implements VertxPojo, IXLinkage {
      * Setter for <code>ZDB.X_LINKAGE.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public XLinkage setLanguage(String language) {
+    public XLinkage setLanguage(final String language) {
         this.language = language;
         return this;
     }
@@ -413,7 +413,7 @@ public class XLinkage implements VertxPojo, IXLinkage {
      * Setter for <code>ZDB.X_LINKAGE.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public XLinkage setActive(Boolean active) {
+    public XLinkage setActive(final Boolean active) {
         this.active = active;
         return this;
     }
@@ -430,7 +430,7 @@ public class XLinkage implements VertxPojo, IXLinkage {
      * Setter for <code>ZDB.X_LINKAGE.METADATA</code>. 「metadata」- 附加配置数据
      */
     @Override
-    public XLinkage setMetadata(String metadata) {
+    public XLinkage setMetadata(final String metadata) {
         this.metadata = metadata;
         return this;
     }
@@ -447,7 +447,7 @@ public class XLinkage implements VertxPojo, IXLinkage {
      * Setter for <code>ZDB.X_LINKAGE.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public XLinkage setCreatedAt(LocalDateTime createdAt) {
+    public XLinkage setCreatedAt(final LocalDateTime createdAt) {
         this.createdAt = createdAt;
         return this;
     }
@@ -464,7 +464,7 @@ public class XLinkage implements VertxPojo, IXLinkage {
      * Setter for <code>ZDB.X_LINKAGE.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public XLinkage setCreatedBy(String createdBy) {
+    public XLinkage setCreatedBy(final String createdBy) {
         this.createdBy = createdBy;
         return this;
     }
@@ -481,7 +481,7 @@ public class XLinkage implements VertxPojo, IXLinkage {
      * Setter for <code>ZDB.X_LINKAGE.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public XLinkage setUpdatedAt(LocalDateTime updatedAt) {
+    public XLinkage setUpdatedAt(final LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
         return this;
     }
@@ -498,13 +498,13 @@ public class XLinkage implements VertxPojo, IXLinkage {
      * Setter for <code>ZDB.X_LINKAGE.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public XLinkage setUpdatedBy(String updatedBy) {
+    public XLinkage setUpdatedBy(final String updatedBy) {
         this.updatedBy = updatedBy;
         return this;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
@@ -656,7 +656,7 @@ public class XLinkage implements VertxPojo, IXLinkage {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("XLinkage (");
+        final StringBuilder sb = new StringBuilder("XLinkage (");
 
         sb.append(key);
         sb.append(", ").append(name);
@@ -690,7 +690,7 @@ public class XLinkage implements VertxPojo, IXLinkage {
     // -------------------------------------------------------------------------
 
     @Override
-    public void from(IXLinkage from) {
+    public void from(final IXLinkage from) {
         setKey(from.getKey());
         setName(from.getName());
         setType(from.getType());
@@ -716,7 +716,7 @@ public class XLinkage implements VertxPojo, IXLinkage {
     }
 
     @Override
-    public <E extends IXLinkage> E into(E into) {
+    public <E extends IXLinkage> E into(final E into) {
         into.from(this);
         return into;
     }

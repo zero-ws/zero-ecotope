@@ -4,7 +4,7 @@
 package io.zerows.extension.mbse.ui.domain.tables.pojos;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.mbse.ui.domain.tables.interfaces.IUiLayout;
 
 import java.time.LocalDateTime;
@@ -32,7 +32,7 @@ public class UiLayout implements VertxPojo, IUiLayout {
     public UiLayout() {
     }
 
-    public UiLayout(IUiLayout value) {
+    public UiLayout(final IUiLayout value) {
         this.key = value.getKey();
         this.name = value.getName();
         this.config = value.getConfig();
@@ -47,17 +47,17 @@ public class UiLayout implements VertxPojo, IUiLayout {
     }
 
     public UiLayout(
-        String key,
-        String name,
-        String config,
-        Boolean active,
-        String sigma,
-        String metadata,
-        String language,
-        LocalDateTime createdAt,
-        String createdBy,
-        LocalDateTime updatedAt,
-        String updatedBy
+        final String key,
+        final String name,
+        final String config,
+        final Boolean active,
+        final String sigma,
+        final String metadata,
+        final String language,
+        final LocalDateTime createdAt,
+        final String createdBy,
+        final LocalDateTime updatedAt,
+        final String updatedBy
     ) {
         this.key = key;
         this.name = name;
@@ -72,7 +72,7 @@ public class UiLayout implements VertxPojo, IUiLayout {
         this.updatedBy = updatedBy;
     }
 
-    public UiLayout(io.vertx.core.json.JsonObject json) {
+    public UiLayout(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -89,7 +89,7 @@ public class UiLayout implements VertxPojo, IUiLayout {
      * Setter for <code>ZDB.UI_LAYOUT.KEY</code>. 「key」- Tpl模板唯一主键
      */
     @Override
-    public UiLayout setKey(String key) {
+    public UiLayout setKey(final String key) {
         this.key = key;
         return this;
     }
@@ -106,7 +106,7 @@ public class UiLayout implements VertxPojo, IUiLayout {
      * Setter for <code>ZDB.UI_LAYOUT.NAME</code>. 「name」- Tpl模板名称
      */
     @Override
-    public UiLayout setName(String name) {
+    public UiLayout setName(final String name) {
         this.name = name;
         return this;
     }
@@ -123,7 +123,7 @@ public class UiLayout implements VertxPojo, IUiLayout {
      * Setter for <code>ZDB.UI_LAYOUT.CONFIG</code>. 「config」- 主配置
      */
     @Override
-    public UiLayout setConfig(String config) {
+    public UiLayout setConfig(final String config) {
         this.config = config;
         return this;
     }
@@ -140,7 +140,7 @@ public class UiLayout implements VertxPojo, IUiLayout {
      * Setter for <code>ZDB.UI_LAYOUT.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public UiLayout setActive(Boolean active) {
+    public UiLayout setActive(final Boolean active) {
         this.active = active;
         return this;
     }
@@ -157,7 +157,7 @@ public class UiLayout implements VertxPojo, IUiLayout {
      * Setter for <code>ZDB.UI_LAYOUT.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public UiLayout setSigma(String sigma) {
+    public UiLayout setSigma(final String sigma) {
         this.sigma = sigma;
         return this;
     }
@@ -174,7 +174,7 @@ public class UiLayout implements VertxPojo, IUiLayout {
      * Setter for <code>ZDB.UI_LAYOUT.METADATA</code>. 「metadata」- 附加配置
      */
     @Override
-    public UiLayout setMetadata(String metadata) {
+    public UiLayout setMetadata(final String metadata) {
         this.metadata = metadata;
         return this;
     }
@@ -191,7 +191,7 @@ public class UiLayout implements VertxPojo, IUiLayout {
      * Setter for <code>ZDB.UI_LAYOUT.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public UiLayout setLanguage(String language) {
+    public UiLayout setLanguage(final String language) {
         this.language = language;
         return this;
     }
@@ -208,7 +208,7 @@ public class UiLayout implements VertxPojo, IUiLayout {
      * Setter for <code>ZDB.UI_LAYOUT.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public UiLayout setCreatedAt(LocalDateTime createdAt) {
+    public UiLayout setCreatedAt(final LocalDateTime createdAt) {
         this.createdAt = createdAt;
         return this;
     }
@@ -225,7 +225,7 @@ public class UiLayout implements VertxPojo, IUiLayout {
      * Setter for <code>ZDB.UI_LAYOUT.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public UiLayout setCreatedBy(String createdBy) {
+    public UiLayout setCreatedBy(final String createdBy) {
         this.createdBy = createdBy;
         return this;
     }
@@ -242,7 +242,7 @@ public class UiLayout implements VertxPojo, IUiLayout {
      * Setter for <code>ZDB.UI_LAYOUT.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public UiLayout setUpdatedAt(LocalDateTime updatedAt) {
+    public UiLayout setUpdatedAt(final LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
         return this;
     }
@@ -259,13 +259,13 @@ public class UiLayout implements VertxPojo, IUiLayout {
      * Setter for <code>ZDB.UI_LAYOUT.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public UiLayout setUpdatedBy(String updatedBy) {
+    public UiLayout setUpdatedBy(final String updatedBy) {
         this.updatedBy = updatedBy;
         return this;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
@@ -351,7 +351,7 @@ public class UiLayout implements VertxPojo, IUiLayout {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("UiLayout (");
+        final StringBuilder sb = new StringBuilder("UiLayout (");
 
         sb.append(key);
         sb.append(", ").append(name);
@@ -374,7 +374,7 @@ public class UiLayout implements VertxPojo, IUiLayout {
     // -------------------------------------------------------------------------
 
     @Override
-    public void from(IUiLayout from) {
+    public void from(final IUiLayout from) {
         setKey(from.getKey());
         setName(from.getName());
         setConfig(from.getConfig());
@@ -389,7 +389,7 @@ public class UiLayout implements VertxPojo, IUiLayout {
     }
 
     @Override
-    public <E extends IUiLayout> E into(E into) {
+    public <E extends IUiLayout> E into(final E into) {
         into.from(this);
         return into;
     }

@@ -4,7 +4,7 @@
 package io.zerows.extension.mbse.action.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.mbse.action.domain.tables.IJob;
 import io.zerows.extension.mbse.action.domain.tables.interfaces.IIJob;
 import org.jooq.Record1;
@@ -31,7 +31,7 @@ public class IJobRecord extends UpdatableRecordImpl<IJobRecord> implements Vertx
     /**
      * Create a detached, initialised IJobRecord
      */
-    public IJobRecord(String key, String namespace, String name, String code, String group, String comment, String additional, String proxy, Integer threshold, String type, LocalTime runAt, String runFormula, Long duration, String durationComponent, String durationConfig, String incomeComponent, String incomeAddress, String outcomeComponent, String outcomeAddress, String serviceId, String sigma, String language, Boolean active, String metadata, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public IJobRecord(final String key, final String namespace, final String name, final String code, final String group, final String comment, final String additional, final String proxy, final Integer threshold, final String type, final LocalTime runAt, final String runFormula, final Long duration, final String durationComponent, final String durationConfig, final String incomeComponent, final String incomeAddress, final String outcomeComponent, final String outcomeAddress, final String serviceId, final String sigma, final String language, final Boolean active, final String metadata, final LocalDateTime createdAt, final String createdBy, final LocalDateTime updatedAt, final String updatedBy) {
         super(IJob.I_JOB);
 
         setKey(key);
@@ -68,7 +68,7 @@ public class IJobRecord extends UpdatableRecordImpl<IJobRecord> implements Vertx
     /**
      * Create a detached, initialised IJobRecord
      */
-    public IJobRecord(io.zerows.extension.mbse.action.domain.tables.pojos.IJob value) {
+    public IJobRecord(final io.zerows.extension.mbse.action.domain.tables.pojos.IJob value) {
         super(IJob.I_JOB);
 
         if (value != null) {
@@ -104,7 +104,7 @@ public class IJobRecord extends UpdatableRecordImpl<IJobRecord> implements Vertx
         }
     }
 
-    public IJobRecord(io.vertx.core.json.JsonObject json) {
+    public IJobRecord(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -121,7 +121,7 @@ public class IJobRecord extends UpdatableRecordImpl<IJobRecord> implements Vertx
      * Setter for <code>ZDB.I_JOB.KEY</code>. 「key」- 任务ID
      */
     @Override
-    public IJobRecord setKey(String value) {
+    public IJobRecord setKey(final String value) {
         set(0, value);
         return this;
     }
@@ -138,7 +138,7 @@ public class IJobRecord extends UpdatableRecordImpl<IJobRecord> implements Vertx
      * Setter for <code>ZDB.I_JOB.NAMESPACE</code>. 「namespace」- 任务所在名空间
      */
     @Override
-    public IJobRecord setNamespace(String value) {
+    public IJobRecord setNamespace(final String value) {
         set(1, value);
         return this;
     }
@@ -155,7 +155,7 @@ public class IJobRecord extends UpdatableRecordImpl<IJobRecord> implements Vertx
      * Setter for <code>ZDB.I_JOB.NAME</code>. 「name」- 任务名称
      */
     @Override
-    public IJobRecord setName(String value) {
+    public IJobRecord setName(final String value) {
         set(2, value);
         return this;
     }
@@ -172,7 +172,7 @@ public class IJobRecord extends UpdatableRecordImpl<IJobRecord> implements Vertx
      * Setter for <code>ZDB.I_JOB.CODE</code>. 「comment」- 任务编码
      */
     @Override
-    public IJobRecord setCode(String value) {
+    public IJobRecord setCode(final String value) {
         set(3, value);
         return this;
     }
@@ -189,7 +189,7 @@ public class IJobRecord extends UpdatableRecordImpl<IJobRecord> implements Vertx
      * Setter for <code>ZDB.I_JOB.GROUP</code>. 「group」- 任务组（按组查询），自由字符串
      */
     @Override
-    public IJobRecord setGroup(String value) {
+    public IJobRecord setGroup(final String value) {
         set(4, value);
         return this;
     }
@@ -206,7 +206,7 @@ public class IJobRecord extends UpdatableRecordImpl<IJobRecord> implements Vertx
      * Setter for <code>ZDB.I_JOB.COMMENT</code>. 「comment」- 备注信息
      */
     @Override
-    public IJobRecord setComment(String value) {
+    public IJobRecord setComment(final String value) {
         set(5, value);
         return this;
     }
@@ -223,7 +223,7 @@ public class IJobRecord extends UpdatableRecordImpl<IJobRecord> implements Vertx
      * Setter for <code>ZDB.I_JOB.ADDITIONAL</code>. 「additional」- 额外配置信息
      */
     @Override
-    public IJobRecord setAdditional(String value) {
+    public IJobRecord setAdditional(final String value) {
         set(6, value);
         return this;
     }
@@ -240,7 +240,7 @@ public class IJobRecord extends UpdatableRecordImpl<IJobRecord> implements Vertx
      * Setter for <code>ZDB.I_JOB.PROXY</code>. 「proxy」- 代理类，带有@On/@Off
      */
     @Override
-    public IJobRecord setProxy(String value) {
+    public IJobRecord setProxy(final String value) {
         set(7, value);
         return this;
     }
@@ -259,7 +259,7 @@ public class IJobRecord extends UpdatableRecordImpl<IJobRecord> implements Vertx
      * s，（秒为单位）
      */
     @Override
-    public IJobRecord setThreshold(Integer value) {
+    public IJobRecord setThreshold(final Integer value) {
         set(8, value);
         return this;
     }
@@ -276,7 +276,7 @@ public class IJobRecord extends UpdatableRecordImpl<IJobRecord> implements Vertx
      * Setter for <code>ZDB.I_JOB.TYPE</code>. 「type」- 任务类型
      */
     @Override
-    public IJobRecord setType(String value) {
+    public IJobRecord setType(final String value) {
         set(9, value);
         return this;
     }
@@ -293,7 +293,7 @@ public class IJobRecord extends UpdatableRecordImpl<IJobRecord> implements Vertx
      * Setter for <code>ZDB.I_JOB.RUN_AT</code>. 「runAt」- 定时任务中的JOB时间
      */
     @Override
-    public IJobRecord setRunAt(LocalTime value) {
+    public IJobRecord setRunAt(final LocalTime value) {
         set(10, value);
         return this;
     }
@@ -310,7 +310,7 @@ public class IJobRecord extends UpdatableRecordImpl<IJobRecord> implements Vertx
      * Setter for <code>ZDB.I_JOB.RUN_FORMULA</code>. 「runFormula」- 运行周期专用的表达式
      */
     @Override
-    public IJobRecord setRunFormula(String value) {
+    public IJobRecord setRunFormula(final String value) {
         set(11, value);
         return this;
     }
@@ -327,7 +327,7 @@ public class IJobRecord extends UpdatableRecordImpl<IJobRecord> implements Vertx
      * Setter for <code>ZDB.I_JOB.DURATION</code>. 「duration」- JOB的间隔时间，（秒为单位）
      */
     @Override
-    public IJobRecord setDuration(Long value) {
+    public IJobRecord setDuration(final Long value) {
         set(12, value);
         return this;
     }
@@ -346,7 +346,7 @@ public class IJobRecord extends UpdatableRecordImpl<IJobRecord> implements Vertx
      * 「durationComponent」对应复杂调度问题
      */
     @Override
-    public IJobRecord setDurationComponent(String value) {
+    public IJobRecord setDurationComponent(final String value) {
         set(13, value);
         return this;
     }
@@ -363,7 +363,7 @@ public class IJobRecord extends UpdatableRecordImpl<IJobRecord> implements Vertx
      * Setter for <code>ZDB.I_JOB.DURATION_CONFIG</code>. 「durationConfig」复杂调度配置
      */
     @Override
-    public IJobRecord setDurationConfig(String value) {
+    public IJobRecord setDurationConfig(final String value) {
         set(14, value);
         return this;
     }
@@ -382,7 +382,7 @@ public class IJobRecord extends UpdatableRecordImpl<IJobRecord> implements Vertx
      * 「incomeComponent」对应income，必须是JobIncome，@On -&gt; input
      */
     @Override
-    public IJobRecord setIncomeComponent(String value) {
+    public IJobRecord setIncomeComponent(final String value) {
         set(15, value);
         return this;
     }
@@ -401,7 +401,7 @@ public class IJobRecord extends UpdatableRecordImpl<IJobRecord> implements Vertx
      * 「incomeAddress」对应incomeAddress，字符串，@On -&gt; address
      */
     @Override
-    public IJobRecord setIncomeAddress(String value) {
+    public IJobRecord setIncomeAddress(final String value) {
         set(16, value);
         return this;
     }
@@ -420,7 +420,7 @@ public class IJobRecord extends UpdatableRecordImpl<IJobRecord> implements Vertx
      * 「outcomeComponent」对应outcome，必须是JobOutcome，@Off -&gt; outcome
      */
     @Override
-    public IJobRecord setOutcomeComponent(String value) {
+    public IJobRecord setOutcomeComponent(final String value) {
         set(17, value);
         return this;
     }
@@ -439,7 +439,7 @@ public class IJobRecord extends UpdatableRecordImpl<IJobRecord> implements Vertx
      * 「outcomeAddress」对应outcomeAddress，字符串，@Off -&gt; address
      */
     @Override
-    public IJobRecord setOutcomeAddress(String value) {
+    public IJobRecord setOutcomeAddress(final String value) {
         set(18, value);
         return this;
     }
@@ -456,7 +456,7 @@ public class IJobRecord extends UpdatableRecordImpl<IJobRecord> implements Vertx
      * Setter for <code>ZDB.I_JOB.SERVICE_ID</code>. 「serviceId」- 关联的服务ID
      */
     @Override
-    public IJobRecord setServiceId(String value) {
+    public IJobRecord setServiceId(final String value) {
         set(19, value);
         return this;
     }
@@ -473,7 +473,7 @@ public class IJobRecord extends UpdatableRecordImpl<IJobRecord> implements Vertx
      * Setter for <code>ZDB.I_JOB.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public IJobRecord setSigma(String value) {
+    public IJobRecord setSigma(final String value) {
         set(20, value);
         return this;
     }
@@ -490,7 +490,7 @@ public class IJobRecord extends UpdatableRecordImpl<IJobRecord> implements Vertx
      * Setter for <code>ZDB.I_JOB.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public IJobRecord setLanguage(String value) {
+    public IJobRecord setLanguage(final String value) {
         set(21, value);
         return this;
     }
@@ -507,7 +507,7 @@ public class IJobRecord extends UpdatableRecordImpl<IJobRecord> implements Vertx
      * Setter for <code>ZDB.I_JOB.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public IJobRecord setActive(Boolean value) {
+    public IJobRecord setActive(final Boolean value) {
         set(22, value);
         return this;
     }
@@ -524,7 +524,7 @@ public class IJobRecord extends UpdatableRecordImpl<IJobRecord> implements Vertx
      * Setter for <code>ZDB.I_JOB.METADATA</code>. 「metadata」- 附加配置数据
      */
     @Override
-    public IJobRecord setMetadata(String value) {
+    public IJobRecord setMetadata(final String value) {
         set(23, value);
         return this;
     }
@@ -541,7 +541,7 @@ public class IJobRecord extends UpdatableRecordImpl<IJobRecord> implements Vertx
      * Setter for <code>ZDB.I_JOB.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public IJobRecord setCreatedAt(LocalDateTime value) {
+    public IJobRecord setCreatedAt(final LocalDateTime value) {
         set(24, value);
         return this;
     }
@@ -558,7 +558,7 @@ public class IJobRecord extends UpdatableRecordImpl<IJobRecord> implements Vertx
      * Setter for <code>ZDB.I_JOB.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public IJobRecord setCreatedBy(String value) {
+    public IJobRecord setCreatedBy(final String value) {
         set(25, value);
         return this;
     }
@@ -583,7 +583,7 @@ public class IJobRecord extends UpdatableRecordImpl<IJobRecord> implements Vertx
      * Setter for <code>ZDB.I_JOB.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public IJobRecord setUpdatedAt(LocalDateTime value) {
+    public IJobRecord setUpdatedAt(final LocalDateTime value) {
         set(26, value);
         return this;
     }
@@ -604,7 +604,7 @@ public class IJobRecord extends UpdatableRecordImpl<IJobRecord> implements Vertx
      * Setter for <code>ZDB.I_JOB.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public IJobRecord setUpdatedBy(String value) {
+    public IJobRecord setUpdatedBy(final String value) {
         set(27, value);
         return this;
     }
@@ -615,7 +615,7 @@ public class IJobRecord extends UpdatableRecordImpl<IJobRecord> implements Vertx
     }
 
     @Override
-    public void from(IIJob from) {
+    public void from(final IIJob from) {
         setKey(from.getKey());
         setNamespace(from.getNamespace());
         setName(from.getName());
@@ -648,7 +648,7 @@ public class IJobRecord extends UpdatableRecordImpl<IJobRecord> implements Vertx
     }
 
     @Override
-    public <E extends IIJob> E into(E into) {
+    public <E extends IIJob> E into(final E into) {
         into.from(this);
         return into;
     }

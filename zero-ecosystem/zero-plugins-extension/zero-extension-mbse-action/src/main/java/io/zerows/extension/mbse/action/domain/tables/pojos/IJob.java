@@ -4,7 +4,7 @@
 package io.zerows.extension.mbse.action.domain.tables.pojos;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.mbse.action.domain.tables.interfaces.IIJob;
 
 import java.time.LocalDateTime;
@@ -50,7 +50,7 @@ public class IJob implements VertxPojo, IIJob {
     public IJob() {
     }
 
-    public IJob(IIJob value) {
+    public IJob(final IIJob value) {
         this.key = value.getKey();
         this.namespace = value.getNamespace();
         this.name = value.getName();
@@ -82,34 +82,34 @@ public class IJob implements VertxPojo, IIJob {
     }
 
     public IJob(
-        String key,
-        String namespace,
-        String name,
-        String code,
-        String group,
-        String comment,
-        String additional,
-        String proxy,
-        Integer threshold,
-        String type,
-        LocalTime runAt,
-        String runFormula,
-        Long duration,
-        String durationComponent,
-        String durationConfig,
-        String incomeComponent,
-        String incomeAddress,
-        String outcomeComponent,
-        String outcomeAddress,
-        String serviceId,
-        String sigma,
-        String language,
-        Boolean active,
-        String metadata,
-        LocalDateTime createdAt,
-        String createdBy,
-        LocalDateTime updatedAt,
-        String updatedBy
+        final String key,
+        final String namespace,
+        final String name,
+        final String code,
+        final String group,
+        final String comment,
+        final String additional,
+        final String proxy,
+        final Integer threshold,
+        final String type,
+        final LocalTime runAt,
+        final String runFormula,
+        final Long duration,
+        final String durationComponent,
+        final String durationConfig,
+        final String incomeComponent,
+        final String incomeAddress,
+        final String outcomeComponent,
+        final String outcomeAddress,
+        final String serviceId,
+        final String sigma,
+        final String language,
+        final Boolean active,
+        final String metadata,
+        final LocalDateTime createdAt,
+        final String createdBy,
+        final LocalDateTime updatedAt,
+        final String updatedBy
     ) {
         this.key = key;
         this.namespace = namespace;
@@ -141,7 +141,7 @@ public class IJob implements VertxPojo, IIJob {
         this.updatedBy = updatedBy;
     }
 
-    public IJob(io.vertx.core.json.JsonObject json) {
+    public IJob(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -158,7 +158,7 @@ public class IJob implements VertxPojo, IIJob {
      * Setter for <code>ZDB.I_JOB.KEY</code>. 「key」- 任务ID
      */
     @Override
-    public IJob setKey(String key) {
+    public IJob setKey(final String key) {
         this.key = key;
         return this;
     }
@@ -175,7 +175,7 @@ public class IJob implements VertxPojo, IIJob {
      * Setter for <code>ZDB.I_JOB.NAMESPACE</code>. 「namespace」- 任务所在名空间
      */
     @Override
-    public IJob setNamespace(String namespace) {
+    public IJob setNamespace(final String namespace) {
         this.namespace = namespace;
         return this;
     }
@@ -192,7 +192,7 @@ public class IJob implements VertxPojo, IIJob {
      * Setter for <code>ZDB.I_JOB.NAME</code>. 「name」- 任务名称
      */
     @Override
-    public IJob setName(String name) {
+    public IJob setName(final String name) {
         this.name = name;
         return this;
     }
@@ -209,7 +209,7 @@ public class IJob implements VertxPojo, IIJob {
      * Setter for <code>ZDB.I_JOB.CODE</code>. 「comment」- 任务编码
      */
     @Override
-    public IJob setCode(String code) {
+    public IJob setCode(final String code) {
         this.code = code;
         return this;
     }
@@ -226,7 +226,7 @@ public class IJob implements VertxPojo, IIJob {
      * Setter for <code>ZDB.I_JOB.GROUP</code>. 「group」- 任务组（按组查询），自由字符串
      */
     @Override
-    public IJob setGroup(String group) {
+    public IJob setGroup(final String group) {
         this.group = group;
         return this;
     }
@@ -243,7 +243,7 @@ public class IJob implements VertxPojo, IIJob {
      * Setter for <code>ZDB.I_JOB.COMMENT</code>. 「comment」- 备注信息
      */
     @Override
-    public IJob setComment(String comment) {
+    public IJob setComment(final String comment) {
         this.comment = comment;
         return this;
     }
@@ -260,7 +260,7 @@ public class IJob implements VertxPojo, IIJob {
      * Setter for <code>ZDB.I_JOB.ADDITIONAL</code>. 「additional」- 额外配置信息
      */
     @Override
-    public IJob setAdditional(String additional) {
+    public IJob setAdditional(final String additional) {
         this.additional = additional;
         return this;
     }
@@ -277,7 +277,7 @@ public class IJob implements VertxPojo, IIJob {
      * Setter for <code>ZDB.I_JOB.PROXY</code>. 「proxy」- 代理类，带有@On/@Off
      */
     @Override
-    public IJob setProxy(String proxy) {
+    public IJob setProxy(final String proxy) {
         this.proxy = proxy;
         return this;
     }
@@ -296,7 +296,7 @@ public class IJob implements VertxPojo, IIJob {
      * s，（秒为单位）
      */
     @Override
-    public IJob setThreshold(Integer threshold) {
+    public IJob setThreshold(final Integer threshold) {
         this.threshold = threshold;
         return this;
     }
@@ -313,7 +313,7 @@ public class IJob implements VertxPojo, IIJob {
      * Setter for <code>ZDB.I_JOB.TYPE</code>. 「type」- 任务类型
      */
     @Override
-    public IJob setType(String type) {
+    public IJob setType(final String type) {
         this.type = type;
         return this;
     }
@@ -330,7 +330,7 @@ public class IJob implements VertxPojo, IIJob {
      * Setter for <code>ZDB.I_JOB.RUN_AT</code>. 「runAt」- 定时任务中的JOB时间
      */
     @Override
-    public IJob setRunAt(LocalTime runAt) {
+    public IJob setRunAt(final LocalTime runAt) {
         this.runAt = runAt;
         return this;
     }
@@ -347,7 +347,7 @@ public class IJob implements VertxPojo, IIJob {
      * Setter for <code>ZDB.I_JOB.RUN_FORMULA</code>. 「runFormula」- 运行周期专用的表达式
      */
     @Override
-    public IJob setRunFormula(String runFormula) {
+    public IJob setRunFormula(final String runFormula) {
         this.runFormula = runFormula;
         return this;
     }
@@ -364,7 +364,7 @@ public class IJob implements VertxPojo, IIJob {
      * Setter for <code>ZDB.I_JOB.DURATION</code>. 「duration」- JOB的间隔时间，（秒为单位）
      */
     @Override
-    public IJob setDuration(Long duration) {
+    public IJob setDuration(final Long duration) {
         this.duration = duration;
         return this;
     }
@@ -383,7 +383,7 @@ public class IJob implements VertxPojo, IIJob {
      * 「durationComponent」对应复杂调度问题
      */
     @Override
-    public IJob setDurationComponent(String durationComponent) {
+    public IJob setDurationComponent(final String durationComponent) {
         this.durationComponent = durationComponent;
         return this;
     }
@@ -400,7 +400,7 @@ public class IJob implements VertxPojo, IIJob {
      * Setter for <code>ZDB.I_JOB.DURATION_CONFIG</code>. 「durationConfig」复杂调度配置
      */
     @Override
-    public IJob setDurationConfig(String durationConfig) {
+    public IJob setDurationConfig(final String durationConfig) {
         this.durationConfig = durationConfig;
         return this;
     }
@@ -419,7 +419,7 @@ public class IJob implements VertxPojo, IIJob {
      * 「incomeComponent」对应income，必须是JobIncome，@On -&gt; input
      */
     @Override
-    public IJob setIncomeComponent(String incomeComponent) {
+    public IJob setIncomeComponent(final String incomeComponent) {
         this.incomeComponent = incomeComponent;
         return this;
     }
@@ -438,7 +438,7 @@ public class IJob implements VertxPojo, IIJob {
      * 「incomeAddress」对应incomeAddress，字符串，@On -&gt; address
      */
     @Override
-    public IJob setIncomeAddress(String incomeAddress) {
+    public IJob setIncomeAddress(final String incomeAddress) {
         this.incomeAddress = incomeAddress;
         return this;
     }
@@ -457,7 +457,7 @@ public class IJob implements VertxPojo, IIJob {
      * 「outcomeComponent」对应outcome，必须是JobOutcome，@Off -&gt; outcome
      */
     @Override
-    public IJob setOutcomeComponent(String outcomeComponent) {
+    public IJob setOutcomeComponent(final String outcomeComponent) {
         this.outcomeComponent = outcomeComponent;
         return this;
     }
@@ -476,7 +476,7 @@ public class IJob implements VertxPojo, IIJob {
      * 「outcomeAddress」对应outcomeAddress，字符串，@Off -&gt; address
      */
     @Override
-    public IJob setOutcomeAddress(String outcomeAddress) {
+    public IJob setOutcomeAddress(final String outcomeAddress) {
         this.outcomeAddress = outcomeAddress;
         return this;
     }
@@ -493,7 +493,7 @@ public class IJob implements VertxPojo, IIJob {
      * Setter for <code>ZDB.I_JOB.SERVICE_ID</code>. 「serviceId」- 关联的服务ID
      */
     @Override
-    public IJob setServiceId(String serviceId) {
+    public IJob setServiceId(final String serviceId) {
         this.serviceId = serviceId;
         return this;
     }
@@ -510,7 +510,7 @@ public class IJob implements VertxPojo, IIJob {
      * Setter for <code>ZDB.I_JOB.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public IJob setSigma(String sigma) {
+    public IJob setSigma(final String sigma) {
         this.sigma = sigma;
         return this;
     }
@@ -527,7 +527,7 @@ public class IJob implements VertxPojo, IIJob {
      * Setter for <code>ZDB.I_JOB.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public IJob setLanguage(String language) {
+    public IJob setLanguage(final String language) {
         this.language = language;
         return this;
     }
@@ -544,7 +544,7 @@ public class IJob implements VertxPojo, IIJob {
      * Setter for <code>ZDB.I_JOB.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public IJob setActive(Boolean active) {
+    public IJob setActive(final Boolean active) {
         this.active = active;
         return this;
     }
@@ -561,7 +561,7 @@ public class IJob implements VertxPojo, IIJob {
      * Setter for <code>ZDB.I_JOB.METADATA</code>. 「metadata」- 附加配置数据
      */
     @Override
-    public IJob setMetadata(String metadata) {
+    public IJob setMetadata(final String metadata) {
         this.metadata = metadata;
         return this;
     }
@@ -578,7 +578,7 @@ public class IJob implements VertxPojo, IIJob {
      * Setter for <code>ZDB.I_JOB.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public IJob setCreatedAt(LocalDateTime createdAt) {
+    public IJob setCreatedAt(final LocalDateTime createdAt) {
         this.createdAt = createdAt;
         return this;
     }
@@ -595,7 +595,7 @@ public class IJob implements VertxPojo, IIJob {
      * Setter for <code>ZDB.I_JOB.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public IJob setCreatedBy(String createdBy) {
+    public IJob setCreatedBy(final String createdBy) {
         this.createdBy = createdBy;
         return this;
     }
@@ -612,7 +612,7 @@ public class IJob implements VertxPojo, IIJob {
      * Setter for <code>ZDB.I_JOB.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public IJob setUpdatedAt(LocalDateTime updatedAt) {
+    public IJob setUpdatedAt(final LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
         return this;
     }
@@ -629,13 +629,13 @@ public class IJob implements VertxPojo, IIJob {
      * Setter for <code>ZDB.I_JOB.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public IJob setUpdatedBy(String updatedBy) {
+    public IJob setUpdatedBy(final String updatedBy) {
         this.updatedBy = updatedBy;
         return this;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
@@ -823,7 +823,7 @@ public class IJob implements VertxPojo, IIJob {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("IJob (");
+        final StringBuilder sb = new StringBuilder("IJob (");
 
         sb.append(key);
         sb.append(", ").append(namespace);
@@ -863,7 +863,7 @@ public class IJob implements VertxPojo, IIJob {
     // -------------------------------------------------------------------------
 
     @Override
-    public void from(IIJob from) {
+    public void from(final IIJob from) {
         setKey(from.getKey());
         setNamespace(from.getNamespace());
         setName(from.getName());
@@ -895,7 +895,7 @@ public class IJob implements VertxPojo, IIJob {
     }
 
     @Override
-    public <E extends IIJob> E into(E into) {
+    public <E extends IIJob> E into(final E into) {
         into.from(this);
         return into;
     }

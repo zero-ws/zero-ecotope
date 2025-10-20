@@ -4,7 +4,7 @@
 package io.zerows.extension.commerce.erp.domain.tables.pojos;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.commerce.erp.domain.tables.interfaces.IRAssetShare;
 
 /**
@@ -24,7 +24,7 @@ public class RAssetShare implements VertxPojo, IRAssetShare {
     public RAssetShare() {
     }
 
-    public RAssetShare(IRAssetShare value) {
+    public RAssetShare(final IRAssetShare value) {
         this.assetId = value.getAssetId();
         this.entityType = value.getEntityType();
         this.entityId = value.getEntityId();
@@ -33,11 +33,11 @@ public class RAssetShare implements VertxPojo, IRAssetShare {
     }
 
     public RAssetShare(
-        String assetId,
-        String entityType,
-        String entityId,
-        String linkComponent,
-        String comment
+        final String assetId,
+        final String entityType,
+        final String entityId,
+        final String linkComponent,
+        final String comment
     ) {
         this.assetId = assetId;
         this.entityType = entityType;
@@ -46,7 +46,7 @@ public class RAssetShare implements VertxPojo, IRAssetShare {
         this.comment = comment;
     }
 
-    public RAssetShare(io.vertx.core.json.JsonObject json) {
+    public RAssetShare(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -63,7 +63,7 @@ public class RAssetShare implements VertxPojo, IRAssetShare {
      * Setter for <code>ZDB.R_ASSET_SHARE.ASSET_ID</code>. 「assetId」- 资产ID
      */
     @Override
-    public RAssetShare setAssetId(String assetId) {
+    public RAssetShare setAssetId(final String assetId) {
         this.assetId = assetId;
         return this;
     }
@@ -80,7 +80,7 @@ public class RAssetShare implements VertxPojo, IRAssetShare {
      * Setter for <code>ZDB.R_ASSET_SHARE.ENTITY_TYPE</code>. 「entityType」- 关联类型
      */
     @Override
-    public RAssetShare setEntityType(String entityType) {
+    public RAssetShare setEntityType(final String entityType) {
         this.entityType = entityType;
         return this;
     }
@@ -97,7 +97,7 @@ public class RAssetShare implements VertxPojo, IRAssetShare {
      * Setter for <code>ZDB.R_ASSET_SHARE.ENTITY_ID</code>. 「entityId」- 关联实体ID
      */
     @Override
-    public RAssetShare setEntityId(String entityId) {
+    public RAssetShare setEntityId(final String entityId) {
         this.entityId = entityId;
         return this;
     }
@@ -116,7 +116,7 @@ public class RAssetShare implements VertxPojo, IRAssetShare {
      * 「linkComponent」- 关联执行组件（扩展用）
      */
     @Override
-    public RAssetShare setLinkComponent(String linkComponent) {
+    public RAssetShare setLinkComponent(final String linkComponent) {
         this.linkComponent = linkComponent;
         return this;
     }
@@ -133,13 +133,13 @@ public class RAssetShare implements VertxPojo, IRAssetShare {
      * Setter for <code>ZDB.R_ASSET_SHARE.COMMENT</code>. 「comment」- 关系备注
      */
     @Override
-    public RAssetShare setComment(String comment) {
+    public RAssetShare setComment(final String comment) {
         this.comment = comment;
         return this;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
@@ -189,7 +189,7 @@ public class RAssetShare implements VertxPojo, IRAssetShare {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("RAssetShare (");
+        final StringBuilder sb = new StringBuilder("RAssetShare (");
 
         sb.append(assetId);
         sb.append(", ").append(entityType);
@@ -206,7 +206,7 @@ public class RAssetShare implements VertxPojo, IRAssetShare {
     // -------------------------------------------------------------------------
 
     @Override
-    public void from(IRAssetShare from) {
+    public void from(final IRAssetShare from) {
         setAssetId(from.getAssetId());
         setEntityType(from.getEntityType());
         setEntityId(from.getEntityId());
@@ -215,7 +215,7 @@ public class RAssetShare implements VertxPojo, IRAssetShare {
     }
 
     @Override
-    public <E extends IRAssetShare> E into(E into) {
+    public <E extends IRAssetShare> E into(final E into) {
         into.from(this);
         return into;
     }

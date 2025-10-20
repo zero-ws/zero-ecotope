@@ -4,7 +4,7 @@
 package io.zerows.extension.mbse.basement.domain.tables.pojos;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.mbse.basement.domain.tables.interfaces.IMIndex;
 
 import java.time.LocalDateTime;
@@ -36,7 +36,7 @@ public class MIndex implements VertxPojo, IMIndex {
     public MIndex() {
     }
 
-    public MIndex(IMIndex value) {
+    public MIndex(final IMIndex value) {
         this.key = value.getKey();
         this.name = value.getName();
         this.type = value.getType();
@@ -55,21 +55,21 @@ public class MIndex implements VertxPojo, IMIndex {
     }
 
     public MIndex(
-        String key,
-        String name,
-        String type,
-        Boolean clustered,
-        String columns,
-        String entityId,
-        String comments,
-        String sigma,
-        String language,
-        Boolean active,
-        String metadata,
-        LocalDateTime createdAt,
-        String createdBy,
-        LocalDateTime updatedAt,
-        String updatedBy
+        final String key,
+        final String name,
+        final String type,
+        final Boolean clustered,
+        final String columns,
+        final String entityId,
+        final String comments,
+        final String sigma,
+        final String language,
+        final Boolean active,
+        final String metadata,
+        final LocalDateTime createdAt,
+        final String createdBy,
+        final LocalDateTime updatedAt,
+        final String updatedBy
     ) {
         this.key = key;
         this.name = name;
@@ -88,7 +88,7 @@ public class MIndex implements VertxPojo, IMIndex {
         this.updatedBy = updatedBy;
     }
 
-    public MIndex(io.vertx.core.json.JsonObject json) {
+    public MIndex(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -105,7 +105,7 @@ public class MIndex implements VertxPojo, IMIndex {
      * Setter for <code>ZDB.M_INDEX.KEY</code>. 「key」- 索引ID
      */
     @Override
-    public MIndex setKey(String key) {
+    public MIndex setKey(final String key) {
         this.key = key;
         return this;
     }
@@ -122,7 +122,7 @@ public class MIndex implements VertxPojo, IMIndex {
      * Setter for <code>ZDB.M_INDEX.NAME</code>. 「name」- 索引名称
      */
     @Override
-    public MIndex setName(String name) {
+    public MIndex setName(final String name) {
         this.name = name;
         return this;
     }
@@ -139,7 +139,7 @@ public class MIndex implements VertxPojo, IMIndex {
      * Setter for <code>ZDB.M_INDEX.TYPE</code>. 「type」- 索引类型
      */
     @Override
-    public MIndex setType(String type) {
+    public MIndex setType(final String type) {
         this.type = type;
         return this;
     }
@@ -156,7 +156,7 @@ public class MIndex implements VertxPojo, IMIndex {
      * Setter for <code>ZDB.M_INDEX.CLUSTERED</code>. 「clustered」- 是否聚集索引
      */
     @Override
-    public MIndex setClustered(Boolean clustered) {
+    public MIndex setClustered(final Boolean clustered) {
         this.clustered = clustered;
         return this;
     }
@@ -175,7 +175,7 @@ public class MIndex implements VertxPojo, IMIndex {
      * JsonArray格式，索引覆盖的列集合
      */
     @Override
-    public MIndex setColumns(String columns) {
+    public MIndex setColumns(final String columns) {
         this.columns = columns;
         return this;
     }
@@ -192,7 +192,7 @@ public class MIndex implements VertxPojo, IMIndex {
      * Setter for <code>ZDB.M_INDEX.ENTITY_ID</code>. 「entityId」- 关联的实体ID
      */
     @Override
-    public MIndex setEntityId(String entityId) {
+    public MIndex setEntityId(final String entityId) {
         this.entityId = entityId;
         return this;
     }
@@ -209,7 +209,7 @@ public class MIndex implements VertxPojo, IMIndex {
      * Setter for <code>ZDB.M_INDEX.COMMENTS</code>. 「comments」- 当前索引的描述信息
      */
     @Override
-    public MIndex setComments(String comments) {
+    public MIndex setComments(final String comments) {
         this.comments = comments;
         return this;
     }
@@ -226,7 +226,7 @@ public class MIndex implements VertxPojo, IMIndex {
      * Setter for <code>ZDB.M_INDEX.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public MIndex setSigma(String sigma) {
+    public MIndex setSigma(final String sigma) {
         this.sigma = sigma;
         return this;
     }
@@ -243,7 +243,7 @@ public class MIndex implements VertxPojo, IMIndex {
      * Setter for <code>ZDB.M_INDEX.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public MIndex setLanguage(String language) {
+    public MIndex setLanguage(final String language) {
         this.language = language;
         return this;
     }
@@ -260,7 +260,7 @@ public class MIndex implements VertxPojo, IMIndex {
      * Setter for <code>ZDB.M_INDEX.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public MIndex setActive(Boolean active) {
+    public MIndex setActive(final Boolean active) {
         this.active = active;
         return this;
     }
@@ -277,7 +277,7 @@ public class MIndex implements VertxPojo, IMIndex {
      * Setter for <code>ZDB.M_INDEX.METADATA</code>. 「metadata」- 附加配置数据
      */
     @Override
-    public MIndex setMetadata(String metadata) {
+    public MIndex setMetadata(final String metadata) {
         this.metadata = metadata;
         return this;
     }
@@ -294,7 +294,7 @@ public class MIndex implements VertxPojo, IMIndex {
      * Setter for <code>ZDB.M_INDEX.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public MIndex setCreatedAt(LocalDateTime createdAt) {
+    public MIndex setCreatedAt(final LocalDateTime createdAt) {
         this.createdAt = createdAt;
         return this;
     }
@@ -311,7 +311,7 @@ public class MIndex implements VertxPojo, IMIndex {
      * Setter for <code>ZDB.M_INDEX.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public MIndex setCreatedBy(String createdBy) {
+    public MIndex setCreatedBy(final String createdBy) {
         this.createdBy = createdBy;
         return this;
     }
@@ -328,7 +328,7 @@ public class MIndex implements VertxPojo, IMIndex {
      * Setter for <code>ZDB.M_INDEX.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public MIndex setUpdatedAt(LocalDateTime updatedAt) {
+    public MIndex setUpdatedAt(final LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
         return this;
     }
@@ -345,13 +345,13 @@ public class MIndex implements VertxPojo, IMIndex {
      * Setter for <code>ZDB.M_INDEX.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public MIndex setUpdatedBy(String updatedBy) {
+    public MIndex setUpdatedBy(final String updatedBy) {
         this.updatedBy = updatedBy;
         return this;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
@@ -461,7 +461,7 @@ public class MIndex implements VertxPojo, IMIndex {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("MIndex (");
+        final StringBuilder sb = new StringBuilder("MIndex (");
 
         sb.append(key);
         sb.append(", ").append(name);
@@ -488,7 +488,7 @@ public class MIndex implements VertxPojo, IMIndex {
     // -------------------------------------------------------------------------
 
     @Override
-    public void from(IMIndex from) {
+    public void from(final IMIndex from) {
         setKey(from.getKey());
         setName(from.getName());
         setType(from.getType());
@@ -507,7 +507,7 @@ public class MIndex implements VertxPojo, IMIndex {
     }
 
     @Override
-    public <E extends IMIndex> E into(E into) {
+    public <E extends IMIndex> E into(final E into) {
         into.from(this);
         return into;
     }

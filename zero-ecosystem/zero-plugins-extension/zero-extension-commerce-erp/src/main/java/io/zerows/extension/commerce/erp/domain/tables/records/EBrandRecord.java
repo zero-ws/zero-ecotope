@@ -4,7 +4,7 @@
 package io.zerows.extension.commerce.erp.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.commerce.erp.domain.tables.EBrand;
 import io.zerows.extension.commerce.erp.domain.tables.interfaces.IEBrand;
 import org.jooq.Field;
@@ -33,7 +33,7 @@ public class EBrandRecord extends UpdatableRecordImpl<EBrandRecord> implements V
     /**
      * Create a detached, initialised EBrandRecord
      */
-    public EBrandRecord(String key, String code, String name, String alias, String companyName, String categoryCode, String categoryName, String area, String areaName, String areaCategory, String metadata, Boolean active, String sigma, String language, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public EBrandRecord(final String key, final String code, final String name, final String alias, final String companyName, final String categoryCode, final String categoryName, final String area, final String areaName, final String areaCategory, final String metadata, final Boolean active, final String sigma, final String language, final LocalDateTime createdAt, final String createdBy, final LocalDateTime updatedAt, final String updatedBy) {
         super(EBrand.E_BRAND);
 
         setKey(key);
@@ -60,7 +60,7 @@ public class EBrandRecord extends UpdatableRecordImpl<EBrandRecord> implements V
     /**
      * Create a detached, initialised EBrandRecord
      */
-    public EBrandRecord(io.zerows.extension.commerce.erp.domain.tables.pojos.EBrand value) {
+    public EBrandRecord(final io.zerows.extension.commerce.erp.domain.tables.pojos.EBrand value) {
         super(EBrand.E_BRAND);
 
         if (value != null) {
@@ -86,7 +86,7 @@ public class EBrandRecord extends UpdatableRecordImpl<EBrandRecord> implements V
         }
     }
 
-    public EBrandRecord(io.vertx.core.json.JsonObject json) {
+    public EBrandRecord(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -103,7 +103,7 @@ public class EBrandRecord extends UpdatableRecordImpl<EBrandRecord> implements V
      * Setter for <code>ZDB.E_BRAND.KEY</code>. 「key」- 品牌ID
      */
     @Override
-    public EBrandRecord setKey(String value) {
+    public EBrandRecord setKey(final String value) {
         set(0, value);
         return this;
     }
@@ -120,7 +120,7 @@ public class EBrandRecord extends UpdatableRecordImpl<EBrandRecord> implements V
      * Setter for <code>ZDB.E_BRAND.CODE</code>. 「code」- 品牌编码
      */
     @Override
-    public EBrandRecord setCode(String value) {
+    public EBrandRecord setCode(final String value) {
         set(1, value);
         return this;
     }
@@ -137,7 +137,7 @@ public class EBrandRecord extends UpdatableRecordImpl<EBrandRecord> implements V
      * Setter for <code>ZDB.E_BRAND.NAME</code>. 「name」- 品牌名称
      */
     @Override
-    public EBrandRecord setName(String value) {
+    public EBrandRecord setName(final String value) {
         set(2, value);
         return this;
     }
@@ -154,7 +154,7 @@ public class EBrandRecord extends UpdatableRecordImpl<EBrandRecord> implements V
      * Setter for <code>ZDB.E_BRAND.ALIAS</code>. 「alias」- 品牌别名
      */
     @Override
-    public EBrandRecord setAlias(String value) {
+    public EBrandRecord setAlias(final String value) {
         set(3, value);
         return this;
     }
@@ -171,7 +171,7 @@ public class EBrandRecord extends UpdatableRecordImpl<EBrandRecord> implements V
      * Setter for <code>ZDB.E_BRAND.COMPANY_NAME</code>. 「companyName」- 品牌公司名
      */
     @Override
-    public EBrandRecord setCompanyName(String value) {
+    public EBrandRecord setCompanyName(final String value) {
         set(4, value);
         return this;
     }
@@ -188,7 +188,7 @@ public class EBrandRecord extends UpdatableRecordImpl<EBrandRecord> implements V
      * Setter for <code>ZDB.E_BRAND.CATEGORY_CODE</code>. 「categoryCode」- 类别代码
      */
     @Override
-    public EBrandRecord setCategoryCode(String value) {
+    public EBrandRecord setCategoryCode(final String value) {
         set(5, value);
         return this;
     }
@@ -205,7 +205,7 @@ public class EBrandRecord extends UpdatableRecordImpl<EBrandRecord> implements V
      * Setter for <code>ZDB.E_BRAND.CATEGORY_NAME</code>. 「categoryName」- 类别名称
      */
     @Override
-    public EBrandRecord setCategoryName(String value) {
+    public EBrandRecord setCategoryName(final String value) {
         set(6, value);
         return this;
     }
@@ -222,7 +222,7 @@ public class EBrandRecord extends UpdatableRecordImpl<EBrandRecord> implements V
      * Setter for <code>ZDB.E_BRAND.AREA</code>. 「area」- 区域码，如：GB/T2659-2000国际标准
      */
     @Override
-    public EBrandRecord setArea(String value) {
+    public EBrandRecord setArea(final String value) {
         set(7, value);
         return this;
     }
@@ -239,7 +239,7 @@ public class EBrandRecord extends UpdatableRecordImpl<EBrandRecord> implements V
      * Setter for <code>ZDB.E_BRAND.AREA_NAME</code>. 「areaName」- 区域名称
      */
     @Override
-    public EBrandRecord setAreaName(String value) {
+    public EBrandRecord setAreaName(final String value) {
         set(8, value);
         return this;
     }
@@ -256,7 +256,7 @@ public class EBrandRecord extends UpdatableRecordImpl<EBrandRecord> implements V
      * Setter for <code>ZDB.E_BRAND.AREA_CATEGORY</code>. 「areaCategory」- 区域类别码
      */
     @Override
-    public EBrandRecord setAreaCategory(String value) {
+    public EBrandRecord setAreaCategory(final String value) {
         set(9, value);
         return this;
     }
@@ -273,7 +273,7 @@ public class EBrandRecord extends UpdatableRecordImpl<EBrandRecord> implements V
      * Setter for <code>ZDB.E_BRAND.METADATA</code>. 「metadata」- 附加配置
      */
     @Override
-    public EBrandRecord setMetadata(String value) {
+    public EBrandRecord setMetadata(final String value) {
         set(10, value);
         return this;
     }
@@ -290,7 +290,7 @@ public class EBrandRecord extends UpdatableRecordImpl<EBrandRecord> implements V
      * Setter for <code>ZDB.E_BRAND.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public EBrandRecord setActive(Boolean value) {
+    public EBrandRecord setActive(final Boolean value) {
         set(11, value);
         return this;
     }
@@ -307,7 +307,7 @@ public class EBrandRecord extends UpdatableRecordImpl<EBrandRecord> implements V
      * Setter for <code>ZDB.E_BRAND.SIGMA</code>. 「sigma」- 统一标识（公司所属应用）
      */
     @Override
-    public EBrandRecord setSigma(String value) {
+    public EBrandRecord setSigma(final String value) {
         set(12, value);
         return this;
     }
@@ -324,7 +324,7 @@ public class EBrandRecord extends UpdatableRecordImpl<EBrandRecord> implements V
      * Setter for <code>ZDB.E_BRAND.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public EBrandRecord setLanguage(String value) {
+    public EBrandRecord setLanguage(final String value) {
         set(13, value);
         return this;
     }
@@ -341,7 +341,7 @@ public class EBrandRecord extends UpdatableRecordImpl<EBrandRecord> implements V
      * Setter for <code>ZDB.E_BRAND.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public EBrandRecord setCreatedAt(LocalDateTime value) {
+    public EBrandRecord setCreatedAt(final LocalDateTime value) {
         set(14, value);
         return this;
     }
@@ -358,7 +358,7 @@ public class EBrandRecord extends UpdatableRecordImpl<EBrandRecord> implements V
      * Setter for <code>ZDB.E_BRAND.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public EBrandRecord setCreatedBy(String value) {
+    public EBrandRecord setCreatedBy(final String value) {
         set(15, value);
         return this;
     }
@@ -383,7 +383,7 @@ public class EBrandRecord extends UpdatableRecordImpl<EBrandRecord> implements V
      * Setter for <code>ZDB.E_BRAND.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public EBrandRecord setUpdatedAt(LocalDateTime value) {
+    public EBrandRecord setUpdatedAt(final LocalDateTime value) {
         set(16, value);
         return this;
     }
@@ -400,7 +400,7 @@ public class EBrandRecord extends UpdatableRecordImpl<EBrandRecord> implements V
      * Setter for <code>ZDB.E_BRAND.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public EBrandRecord setUpdatedBy(String value) {
+    public EBrandRecord setUpdatedBy(final String value) {
         set(17, value);
         return this;
     }
@@ -691,91 +691,91 @@ public class EBrandRecord extends UpdatableRecordImpl<EBrandRecord> implements V
     }
 
     @Override
-    public EBrandRecord value1(String value) {
+    public EBrandRecord value1(final String value) {
         setKey(value);
         return this;
     }
 
     @Override
-    public EBrandRecord value2(String value) {
+    public EBrandRecord value2(final String value) {
         setCode(value);
         return this;
     }
 
     @Override
-    public EBrandRecord value3(String value) {
+    public EBrandRecord value3(final String value) {
         setName(value);
         return this;
     }
 
     @Override
-    public EBrandRecord value4(String value) {
+    public EBrandRecord value4(final String value) {
         setAlias(value);
         return this;
     }
 
     @Override
-    public EBrandRecord value5(String value) {
+    public EBrandRecord value5(final String value) {
         setCompanyName(value);
         return this;
     }
 
     @Override
-    public EBrandRecord value6(String value) {
+    public EBrandRecord value6(final String value) {
         setCategoryCode(value);
         return this;
     }
 
     @Override
-    public EBrandRecord value7(String value) {
+    public EBrandRecord value7(final String value) {
         setCategoryName(value);
         return this;
     }
 
     @Override
-    public EBrandRecord value8(String value) {
+    public EBrandRecord value8(final String value) {
         setArea(value);
         return this;
     }
 
     @Override
-    public EBrandRecord value9(String value) {
+    public EBrandRecord value9(final String value) {
         setAreaName(value);
         return this;
     }
 
     @Override
-    public EBrandRecord value10(String value) {
+    public EBrandRecord value10(final String value) {
         setAreaCategory(value);
         return this;
     }
 
     @Override
-    public EBrandRecord value11(String value) {
+    public EBrandRecord value11(final String value) {
         setMetadata(value);
         return this;
     }
 
     @Override
-    public EBrandRecord value12(Boolean value) {
+    public EBrandRecord value12(final Boolean value) {
         setActive(value);
         return this;
     }
 
     @Override
-    public EBrandRecord value13(String value) {
+    public EBrandRecord value13(final String value) {
         setSigma(value);
         return this;
     }
 
     @Override
-    public EBrandRecord value14(String value) {
+    public EBrandRecord value14(final String value) {
         setLanguage(value);
         return this;
     }
 
     @Override
-    public EBrandRecord value15(LocalDateTime value) {
+    public EBrandRecord value15(final LocalDateTime value) {
         setCreatedAt(value);
         return this;
     }
@@ -785,13 +785,13 @@ public class EBrandRecord extends UpdatableRecordImpl<EBrandRecord> implements V
     // -------------------------------------------------------------------------
 
     @Override
-    public EBrandRecord value16(String value) {
+    public EBrandRecord value16(final String value) {
         setCreatedBy(value);
         return this;
     }
 
     @Override
-    public EBrandRecord value17(LocalDateTime value) {
+    public EBrandRecord value17(final LocalDateTime value) {
         setUpdatedAt(value);
         return this;
     }
@@ -801,13 +801,13 @@ public class EBrandRecord extends UpdatableRecordImpl<EBrandRecord> implements V
     // -------------------------------------------------------------------------
 
     @Override
-    public EBrandRecord value18(String value) {
+    public EBrandRecord value18(final String value) {
         setUpdatedBy(value);
         return this;
     }
 
     @Override
-    public EBrandRecord values(String value1, String value2, String value3, String value4, String value5, String value6, String value7, String value8, String value9, String value10, String value11, Boolean value12, String value13, String value14, LocalDateTime value15, String value16, LocalDateTime value17, String value18) {
+    public EBrandRecord values(final String value1, final String value2, final String value3, final String value4, final String value5, final String value6, final String value7, final String value8, final String value9, final String value10, final String value11, final Boolean value12, final String value13, final String value14, final LocalDateTime value15, final String value16, final LocalDateTime value17, final String value18) {
         value1(value1);
         value2(value2);
         value3(value3);
@@ -830,7 +830,7 @@ public class EBrandRecord extends UpdatableRecordImpl<EBrandRecord> implements V
     }
 
     @Override
-    public void from(IEBrand from) {
+    public void from(final IEBrand from) {
         setKey(from.getKey());
         setCode(from.getCode());
         setName(from.getName());
@@ -853,7 +853,7 @@ public class EBrandRecord extends UpdatableRecordImpl<EBrandRecord> implements V
     }
 
     @Override
-    public <E extends IEBrand> E into(E into) {
+    public <E extends IEBrand> E into(final E into) {
         into.from(this);
         return into;
     }

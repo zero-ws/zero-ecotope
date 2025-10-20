@@ -4,7 +4,7 @@
 package io.zerows.extension.mbse.ui.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.mbse.ui.domain.tables.UiView;
 import io.zerows.extension.mbse.ui.domain.tables.interfaces.IUiView;
 import org.jooq.Record1;
@@ -30,7 +30,7 @@ public class UiViewRecord extends UpdatableRecordImpl<UiViewRecord> implements V
     /**
      * Create a detached, initialised UiViewRecord
      */
-    public UiViewRecord(String key, String name, String code, Integer sort, String identifier, String workflow, String view, String position, String title, String projection, String criteria, String rows, String uiConfig, String qrComponent, String qrConfig, String sigma, String language, Boolean active, String metadata, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public UiViewRecord(final String key, final String name, final String code, final Integer sort, final String identifier, final String workflow, final String view, final String position, final String title, final String projection, final String criteria, final String rows, final String uiConfig, final String qrComponent, final String qrConfig, final String sigma, final String language, final Boolean active, final String metadata, final LocalDateTime createdAt, final String createdBy, final LocalDateTime updatedAt, final String updatedBy) {
         super(UiView.UI_VIEW);
 
         setKey(key);
@@ -62,7 +62,7 @@ public class UiViewRecord extends UpdatableRecordImpl<UiViewRecord> implements V
     /**
      * Create a detached, initialised UiViewRecord
      */
-    public UiViewRecord(io.zerows.extension.mbse.ui.domain.tables.pojos.UiView value) {
+    public UiViewRecord(final io.zerows.extension.mbse.ui.domain.tables.pojos.UiView value) {
         super(UiView.UI_VIEW);
 
         if (value != null) {
@@ -93,7 +93,7 @@ public class UiViewRecord extends UpdatableRecordImpl<UiViewRecord> implements V
         }
     }
 
-    public UiViewRecord(io.vertx.core.json.JsonObject json) {
+    public UiViewRecord(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -110,7 +110,7 @@ public class UiViewRecord extends UpdatableRecordImpl<UiViewRecord> implements V
      * Setter for <code>ZDB.UI_VIEW.KEY</code>. 「key」- 查询记录ID
      */
     @Override
-    public UiViewRecord setKey(String value) {
+    public UiViewRecord setKey(final String value) {
         set(0, value);
         return this;
     }
@@ -127,7 +127,7 @@ public class UiViewRecord extends UpdatableRecordImpl<UiViewRecord> implements V
      * Setter for <code>ZDB.UI_VIEW.NAME</code>. 「name」- 视图名称，每个 MATRIX 对应一个视图
      */
     @Override
-    public UiViewRecord setName(String value) {
+    public UiViewRecord setName(final String value) {
         set(1, value);
         return this;
     }
@@ -144,7 +144,7 @@ public class UiViewRecord extends UpdatableRecordImpl<UiViewRecord> implements V
      * Setter for <code>ZDB.UI_VIEW.CODE</code>. 「code」- 系统编码
      */
     @Override
-    public UiViewRecord setCode(String value) {
+    public UiViewRecord setCode(final String value) {
         set(2, value);
         return this;
     }
@@ -161,7 +161,7 @@ public class UiViewRecord extends UpdatableRecordImpl<UiViewRecord> implements V
      * Setter for <code>ZDB.UI_VIEW.SORT</code>. 「sort」- QR的顺序
      */
     @Override
-    public UiViewRecord setSort(Integer value) {
+    public UiViewRecord setSort(final Integer value) {
         set(3, value);
         return this;
     }
@@ -178,7 +178,7 @@ public class UiViewRecord extends UpdatableRecordImpl<UiViewRecord> implements V
      * Setter for <code>ZDB.UI_VIEW.IDENTIFIER</code>. 「identifier」- 模型标识符
      */
     @Override
-    public UiViewRecord setIdentifier(String value) {
+    public UiViewRecord setIdentifier(final String value) {
         set(4, value);
         return this;
     }
@@ -195,7 +195,7 @@ public class UiViewRecord extends UpdatableRecordImpl<UiViewRecord> implements V
      * Setter for <code>ZDB.UI_VIEW.WORKFLOW</code>. 「workflow」- 工作流名称
      */
     @Override
-    public UiViewRecord setWorkflow(String value) {
+    public UiViewRecord setWorkflow(final String value) {
         set(5, value);
         return this;
     }
@@ -212,7 +212,7 @@ public class UiViewRecord extends UpdatableRecordImpl<UiViewRecord> implements V
      * Setter for <code>ZDB.UI_VIEW.VIEW</code>. 「view」- 视图名
      */
     @Override
-    public UiViewRecord setView(String value) {
+    public UiViewRecord setView(final String value) {
         set(6, value);
         return this;
     }
@@ -231,7 +231,7 @@ public class UiViewRecord extends UpdatableRecordImpl<UiViewRecord> implements V
      * 当前视图的模块位置，比页面低一个维度
      */
     @Override
-    public UiViewRecord setPosition(String value) {
+    public UiViewRecord setPosition(final String value) {
         set(7, value);
         return this;
     }
@@ -248,7 +248,7 @@ public class UiViewRecord extends UpdatableRecordImpl<UiViewRecord> implements V
      * Setter for <code>ZDB.UI_VIEW.TITLE</code>. 「title」- 视图标题，用户输入，可选择
      */
     @Override
-    public UiViewRecord setTitle(String value) {
+    public UiViewRecord setTitle(final String value) {
         set(8, value);
         return this;
     }
@@ -265,7 +265,7 @@ public class UiViewRecord extends UpdatableRecordImpl<UiViewRecord> implements V
      * Setter for <code>ZDB.UI_VIEW.PROJECTION</code>. 「projection」- 该资源的列定义
      */
     @Override
-    public UiViewRecord setProjection(String value) {
+    public UiViewRecord setProjection(final String value) {
         set(9, value);
         return this;
     }
@@ -282,7 +282,7 @@ public class UiViewRecord extends UpdatableRecordImpl<UiViewRecord> implements V
      * Setter for <code>ZDB.UI_VIEW.CRITERIA</code>. 「criteria」- 该资源的行查询
      */
     @Override
-    public UiViewRecord setCriteria(String value) {
+    public UiViewRecord setCriteria(final String value) {
         set(10, value);
         return this;
     }
@@ -299,7 +299,7 @@ public class UiViewRecord extends UpdatableRecordImpl<UiViewRecord> implements V
      * Setter for <code>ZDB.UI_VIEW.ROWS</code>. 「rows」- 该资源针对保存的行进行过滤
      */
     @Override
-    public UiViewRecord setRows(String value) {
+    public UiViewRecord setRows(final String value) {
         set(11, value);
         return this;
     }
@@ -316,7 +316,7 @@ public class UiViewRecord extends UpdatableRecordImpl<UiViewRecord> implements V
      * Setter for <code>ZDB.UI_VIEW.UI_CONFIG</code>. 「uiConfig」- 界面配置
      */
     @Override
-    public UiViewRecord setUiConfig(String value) {
+    public UiViewRecord setUiConfig(final String value) {
         set(12, value);
         return this;
     }
@@ -333,7 +333,7 @@ public class UiViewRecord extends UpdatableRecordImpl<UiViewRecord> implements V
      * Setter for <code>ZDB.UI_VIEW.QR_COMPONENT</code>. 「qrComponent」- 查询条件专用组件
      */
     @Override
-    public UiViewRecord setQrComponent(String value) {
+    public UiViewRecord setQrComponent(final String value) {
         set(13, value);
         return this;
     }
@@ -350,7 +350,7 @@ public class UiViewRecord extends UpdatableRecordImpl<UiViewRecord> implements V
      * Setter for <code>ZDB.UI_VIEW.QR_CONFIG</code>. 「qrConfig」- 查询组件专用配置
      */
     @Override
-    public UiViewRecord setQrConfig(String value) {
+    public UiViewRecord setQrConfig(final String value) {
         set(14, value);
         return this;
     }
@@ -367,7 +367,7 @@ public class UiViewRecord extends UpdatableRecordImpl<UiViewRecord> implements V
      * Setter for <code>ZDB.UI_VIEW.SIGMA</code>. 「sigma」- 用户组绑定的统一标识
      */
     @Override
-    public UiViewRecord setSigma(String value) {
+    public UiViewRecord setSigma(final String value) {
         set(15, value);
         return this;
     }
@@ -384,7 +384,7 @@ public class UiViewRecord extends UpdatableRecordImpl<UiViewRecord> implements V
      * Setter for <code>ZDB.UI_VIEW.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public UiViewRecord setLanguage(String value) {
+    public UiViewRecord setLanguage(final String value) {
         set(16, value);
         return this;
     }
@@ -401,7 +401,7 @@ public class UiViewRecord extends UpdatableRecordImpl<UiViewRecord> implements V
      * Setter for <code>ZDB.UI_VIEW.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public UiViewRecord setActive(Boolean value) {
+    public UiViewRecord setActive(final Boolean value) {
         set(17, value);
         return this;
     }
@@ -418,7 +418,7 @@ public class UiViewRecord extends UpdatableRecordImpl<UiViewRecord> implements V
      * Setter for <code>ZDB.UI_VIEW.METADATA</code>. 「metadata」- 附加配置数据
      */
     @Override
-    public UiViewRecord setMetadata(String value) {
+    public UiViewRecord setMetadata(final String value) {
         set(18, value);
         return this;
     }
@@ -435,7 +435,7 @@ public class UiViewRecord extends UpdatableRecordImpl<UiViewRecord> implements V
      * Setter for <code>ZDB.UI_VIEW.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public UiViewRecord setCreatedAt(LocalDateTime value) {
+    public UiViewRecord setCreatedAt(final LocalDateTime value) {
         set(19, value);
         return this;
     }
@@ -452,7 +452,7 @@ public class UiViewRecord extends UpdatableRecordImpl<UiViewRecord> implements V
      * Setter for <code>ZDB.UI_VIEW.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public UiViewRecord setCreatedBy(String value) {
+    public UiViewRecord setCreatedBy(final String value) {
         set(20, value);
         return this;
     }
@@ -477,7 +477,7 @@ public class UiViewRecord extends UpdatableRecordImpl<UiViewRecord> implements V
      * Setter for <code>ZDB.UI_VIEW.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public UiViewRecord setUpdatedAt(LocalDateTime value) {
+    public UiViewRecord setUpdatedAt(final LocalDateTime value) {
         set(21, value);
         return this;
     }
@@ -498,7 +498,7 @@ public class UiViewRecord extends UpdatableRecordImpl<UiViewRecord> implements V
      * Setter for <code>ZDB.UI_VIEW.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public UiViewRecord setUpdatedBy(String value) {
+    public UiViewRecord setUpdatedBy(final String value) {
         set(22, value);
         return this;
     }
@@ -509,7 +509,7 @@ public class UiViewRecord extends UpdatableRecordImpl<UiViewRecord> implements V
     }
 
     @Override
-    public void from(IUiView from) {
+    public void from(final IUiView from) {
         setKey(from.getKey());
         setName(from.getName());
         setCode(from.getCode());
@@ -537,7 +537,7 @@ public class UiViewRecord extends UpdatableRecordImpl<UiViewRecord> implements V
     }
 
     @Override
-    public <E extends IUiView> E into(E into) {
+    public <E extends IUiView> E into(final E into) {
         into.from(this);
         return into;
     }

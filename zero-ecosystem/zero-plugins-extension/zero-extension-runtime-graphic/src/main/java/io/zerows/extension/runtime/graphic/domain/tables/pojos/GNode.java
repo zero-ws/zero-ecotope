@@ -4,7 +4,7 @@
 package io.zerows.extension.runtime.graphic.domain.tables.pojos;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.runtime.graphic.domain.tables.interfaces.IGNode;
 
 import java.math.BigDecimal;
@@ -40,7 +40,7 @@ public class GNode implements VertxPojo, IGNode {
     public GNode() {
     }
 
-    public GNode(IGNode value) {
+    public GNode(final IGNode value) {
         this.key = value.getKey();
         this.name = value.getName();
         this.x = value.getX();
@@ -62,24 +62,24 @@ public class GNode implements VertxPojo, IGNode {
     }
 
     public GNode(
-        String key,
-        String name,
-        BigDecimal x,
-        BigDecimal y,
-        String ui,
-        String graphicId,
-        String recordData,
-        String recordKey,
-        String recordComponent,
-        String recordClass,
-        String sigma,
-        String language,
-        Boolean active,
-        String metadata,
-        LocalDateTime createdAt,
-        String createdBy,
-        LocalDateTime updatedAt,
-        String updatedBy
+        final String key,
+        final String name,
+        final BigDecimal x,
+        final BigDecimal y,
+        final String ui,
+        final String graphicId,
+        final String recordData,
+        final String recordKey,
+        final String recordComponent,
+        final String recordClass,
+        final String sigma,
+        final String language,
+        final Boolean active,
+        final String metadata,
+        final LocalDateTime createdAt,
+        final String createdBy,
+        final LocalDateTime updatedAt,
+        final String updatedBy
     ) {
         this.key = key;
         this.name = name;
@@ -101,7 +101,7 @@ public class GNode implements VertxPojo, IGNode {
         this.updatedBy = updatedBy;
     }
 
-    public GNode(io.vertx.core.json.JsonObject json) {
+    public GNode(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -118,7 +118,7 @@ public class GNode implements VertxPojo, IGNode {
      * Setter for <code>ZDB.G_NODE.KEY</code>. 「key」- 节点ID
      */
     @Override
-    public GNode setKey(String key) {
+    public GNode setKey(final String key) {
         this.key = key;
         return this;
     }
@@ -135,7 +135,7 @@ public class GNode implements VertxPojo, IGNode {
      * Setter for <code>ZDB.G_NODE.NAME</code>. 「name」- 节点呈现名称
      */
     @Override
-    public GNode setName(String name) {
+    public GNode setName(final String name) {
         this.name = name;
         return this;
     }
@@ -152,7 +152,7 @@ public class GNode implements VertxPojo, IGNode {
      * Setter for <code>ZDB.G_NODE.X</code>. 「x」- 当前节点在图上的x坐标
      */
     @Override
-    public GNode setX(BigDecimal x) {
+    public GNode setX(final BigDecimal x) {
         this.x = x;
         return this;
     }
@@ -169,7 +169,7 @@ public class GNode implements VertxPojo, IGNode {
      * Setter for <code>ZDB.G_NODE.Y</code>. 「y」- 当前节点在图上的y坐标
      */
     @Override
-    public GNode setY(BigDecimal y) {
+    public GNode setY(final BigDecimal y) {
         this.y = y;
         return this;
     }
@@ -186,7 +186,7 @@ public class GNode implements VertxPojo, IGNode {
      * Setter for <code>ZDB.G_NODE.UI</code>. 「ui」- ui配置专用
      */
     @Override
-    public GNode setUi(String ui) {
+    public GNode setUi(final String ui) {
         this.ui = ui;
         return this;
     }
@@ -203,7 +203,7 @@ public class GNode implements VertxPojo, IGNode {
      * Setter for <code>ZDB.G_NODE.GRAPHIC_ID</code>. 「graphicId」- 它所关联的图实例ID
      */
     @Override
-    public GNode setGraphicId(String graphicId) {
+    public GNode setGraphicId(final String graphicId) {
         this.graphicId = graphicId;
         return this;
     }
@@ -220,7 +220,7 @@ public class GNode implements VertxPojo, IGNode {
      * Setter for <code>ZDB.G_NODE.RECORD_DATA</code>. 「recordData」- 该节点存储的数据信息
      */
     @Override
-    public GNode setRecordData(String recordData) {
+    public GNode setRecordData(final String recordData) {
         this.recordData = recordData;
         return this;
     }
@@ -237,7 +237,7 @@ public class GNode implements VertxPojo, IGNode {
      * Setter for <code>ZDB.G_NODE.RECORD_KEY</code>. 「recordKey」- 记录主键
      */
     @Override
-    public GNode setRecordKey(String recordKey) {
+    public GNode setRecordKey(final String recordKey) {
         this.recordKey = recordKey;
         return this;
     }
@@ -256,7 +256,7 @@ public class GNode implements VertxPojo, IGNode {
      * 记录处理组件
      */
     @Override
-    public GNode setRecordComponent(String recordComponent) {
+    public GNode setRecordComponent(final String recordComponent) {
         this.recordComponent = recordComponent;
         return this;
     }
@@ -275,7 +275,7 @@ public class GNode implements VertxPojo, IGNode {
      * 记录绑定Pojo类型
      */
     @Override
-    public GNode setRecordClass(String recordClass) {
+    public GNode setRecordClass(final String recordClass) {
         this.recordClass = recordClass;
         return this;
     }
@@ -292,7 +292,7 @@ public class GNode implements VertxPojo, IGNode {
      * Setter for <code>ZDB.G_NODE.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public GNode setSigma(String sigma) {
+    public GNode setSigma(final String sigma) {
         this.sigma = sigma;
         return this;
     }
@@ -309,7 +309,7 @@ public class GNode implements VertxPojo, IGNode {
      * Setter for <code>ZDB.G_NODE.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public GNode setLanguage(String language) {
+    public GNode setLanguage(final String language) {
         this.language = language;
         return this;
     }
@@ -326,7 +326,7 @@ public class GNode implements VertxPojo, IGNode {
      * Setter for <code>ZDB.G_NODE.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public GNode setActive(Boolean active) {
+    public GNode setActive(final Boolean active) {
         this.active = active;
         return this;
     }
@@ -343,7 +343,7 @@ public class GNode implements VertxPojo, IGNode {
      * Setter for <code>ZDB.G_NODE.METADATA</code>. 「metadata」- 附加配置数据
      */
     @Override
-    public GNode setMetadata(String metadata) {
+    public GNode setMetadata(final String metadata) {
         this.metadata = metadata;
         return this;
     }
@@ -360,7 +360,7 @@ public class GNode implements VertxPojo, IGNode {
      * Setter for <code>ZDB.G_NODE.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public GNode setCreatedAt(LocalDateTime createdAt) {
+    public GNode setCreatedAt(final LocalDateTime createdAt) {
         this.createdAt = createdAt;
         return this;
     }
@@ -377,7 +377,7 @@ public class GNode implements VertxPojo, IGNode {
      * Setter for <code>ZDB.G_NODE.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public GNode setCreatedBy(String createdBy) {
+    public GNode setCreatedBy(final String createdBy) {
         this.createdBy = createdBy;
         return this;
     }
@@ -394,7 +394,7 @@ public class GNode implements VertxPojo, IGNode {
      * Setter for <code>ZDB.G_NODE.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public GNode setUpdatedAt(LocalDateTime updatedAt) {
+    public GNode setUpdatedAt(final LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
         return this;
     }
@@ -411,13 +411,13 @@ public class GNode implements VertxPojo, IGNode {
      * Setter for <code>ZDB.G_NODE.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public GNode setUpdatedBy(String updatedBy) {
+    public GNode setUpdatedBy(final String updatedBy) {
         this.updatedBy = updatedBy;
         return this;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
@@ -545,7 +545,7 @@ public class GNode implements VertxPojo, IGNode {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("GNode (");
+        final StringBuilder sb = new StringBuilder("GNode (");
 
         sb.append(key);
         sb.append(", ").append(name);
@@ -575,7 +575,7 @@ public class GNode implements VertxPojo, IGNode {
     // -------------------------------------------------------------------------
 
     @Override
-    public void from(IGNode from) {
+    public void from(final IGNode from) {
         setKey(from.getKey());
         setName(from.getName());
         setX(from.getX());
@@ -597,7 +597,7 @@ public class GNode implements VertxPojo, IGNode {
     }
 
     @Override
-    public <E extends IGNode> E into(E into) {
+    public <E extends IGNode> E into(final E into) {
         into.from(this);
         return into;
     }

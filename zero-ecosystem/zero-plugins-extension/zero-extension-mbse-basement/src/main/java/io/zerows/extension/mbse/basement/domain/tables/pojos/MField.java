@@ -4,7 +4,7 @@
 package io.zerows.extension.mbse.basement.domain.tables.pojos;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.mbse.basement.domain.tables.interfaces.IMField;
 
 import java.time.LocalDateTime;
@@ -43,7 +43,7 @@ public class MField implements VertxPojo, IMField {
     public MField() {
     }
 
-    public MField(IMField value) {
+    public MField(final IMField value) {
         this.key = value.getKey();
         this.name = value.getName();
         this.type = value.getType();
@@ -69,9 +69,9 @@ public class MField implements VertxPojo, IMField {
     }
 
     public MField(
-        String key,
+        final String key,
         String name,
-        String type,
+        final String type,
         String columnName,
         String columnType,
         Boolean isPrimary,
@@ -84,10 +84,10 @@ public class MField implements VertxPojo, IMField {
         String entityId,
         String comments,
         String sigma,
-        String language,
-        Boolean active,
+        final String language,
+        final Boolean active,
         String metadata,
-        LocalDateTime createdAt,
+        final LocalDateTime createdAt,
         String createdBy,
         LocalDateTime updatedAt,
         String updatedBy

@@ -4,7 +4,7 @@
 package io.zerows.extension.runtime.workflow.domain.tables.pojos;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.runtime.workflow.domain.tables.interfaces.IWTicket;
 
 import java.time.LocalDateTime;
@@ -62,7 +62,7 @@ public class WTicket implements VertxPojo, IWTicket {
     public WTicket() {
     }
 
-    public WTicket(IWTicket value) {
+    public WTicket(final IWTicket value) {
         this.key = value.getKey();
         this.serial = value.getSerial();
         this.name = value.getName();
@@ -107,47 +107,47 @@ public class WTicket implements VertxPojo, IWTicket {
     }
 
     public WTicket(
-        String key,
-        String serial,
-        String name,
-        String code,
-        String type,
-        String phase,
-        String modelId,
-        String modelKey,
-        String modelCategory,
-        String modelComponent,
-        String modelChild,
-        Integer quantity,
-        String flowDefinitionKey,
-        String flowDefinitionId,
-        String flowInstanceId,
-        Boolean flowEnd,
-        String title,
-        String description,
-        String catalog,
-        String category,
-        String categorySub,
-        String owner,
-        String supervisor,
-        String openBy,
-        String openGroup,
-        LocalDateTime openAt,
-        String cancelBy,
-        LocalDateTime cancelAt,
-        String closeBy,
-        LocalDateTime closeAt,
-        String closeSolution,
-        String closeCode,
-        String closeKb,
-        Boolean active,
-        String sigma,
-        String metadata,
-        String language,
-        LocalDateTime createdAt,
-        String createdBy,
-        LocalDateTime updatedAt,
-        String updatedBy
+        final String key,
+        final String serial,
+        final String name,
+        final String code,
+        final String type,
+        final String phase,
+        final String modelId,
+        final String modelKey,
+        final String modelCategory,
+        final String modelComponent,
+        final String modelChild,
+        final Integer quantity,
+        final String flowDefinitionKey,
+        final String flowDefinitionId,
+        final String flowInstanceId,
+        final Boolean flowEnd,
+        final String title,
+        final String description,
+        final String catalog,
+        final String category,
+        final String categorySub,
+        final String owner,
+        final String supervisor,
+        final String openBy,
+        final String openGroup,
+        final LocalDateTime openAt,
+        final String cancelBy,
+        final LocalDateTime cancelAt,
+        final String closeBy,
+        final LocalDateTime closeAt,
+        final String closeSolution,
+        final String closeCode,
+        final String closeKb,
+        final Boolean active,
+        final String sigma,
+        final String metadata,
+        final String language,
+        final LocalDateTime createdAt,
+        final String createdBy,
+        final LocalDateTime updatedAt,
+        final String updatedBy
     ) {
         this.key = key;
         this.serial = serial;
@@ -192,7 +192,7 @@ public class WTicket implements VertxPojo, IWTicket {
         this.updatedBy = updatedBy;
     }
 
-    public WTicket(io.vertx.core.json.JsonObject json) {
+    public WTicket(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -209,7 +209,7 @@ public class WTicket implements VertxPojo, IWTicket {
      * Setter for <code>ZDB.W_TICKET.KEY</code>. 「key」- 单据主键
      */
     @Override
-    public WTicket setKey(String key) {
+    public WTicket setKey(final String key) {
         this.key = key;
         return this;
     }
@@ -228,7 +228,7 @@ public class WTicket implements VertxPojo, IWTicket {
      * 生成
      */
     @Override
-    public WTicket setSerial(String serial) {
+    public WTicket setSerial(final String serial) {
         this.serial = serial;
         return this;
     }
@@ -245,7 +245,7 @@ public class WTicket implements VertxPojo, IWTicket {
      * Setter for <code>ZDB.W_TICKET.NAME</code>. 「name」- 单据标题
      */
     @Override
-    public WTicket setName(String name) {
+    public WTicket setName(final String name) {
         this.name = name;
         return this;
     }
@@ -262,7 +262,7 @@ public class WTicket implements VertxPojo, IWTicket {
      * Setter for <code>ZDB.W_TICKET.CODE</code>. 「code」- 单据系统编号（内码）
      */
     @Override
-    public WTicket setCode(String code) {
+    public WTicket setCode(final String code) {
         this.code = code;
         return this;
     }
@@ -279,7 +279,7 @@ public class WTicket implements VertxPojo, IWTicket {
      * Setter for <code>ZDB.W_TICKET.TYPE</code>. 「type」- 主单类型类型
      */
     @Override
-    public WTicket setType(String type) {
+    public WTicket setType(final String type) {
         this.type = type;
         return this;
     }
@@ -298,7 +298,7 @@ public class WTicket implements VertxPojo, IWTicket {
      * 主单据所属阶段（状态描述，由于挂TODO，所以不使用status）
      */
     @Override
-    public WTicket setPhase(String phase) {
+    public WTicket setPhase(final String phase) {
         this.phase = phase;
         return this;
     }
@@ -317,7 +317,7 @@ public class WTicket implements VertxPojo, IWTicket {
      * 关联的模型identifier，用于描述
      */
     @Override
-    public WTicket setModelId(String modelId) {
+    public WTicket setModelId(final String modelId) {
         this.modelId = modelId;
         return this;
     }
@@ -336,7 +336,7 @@ public class WTicket implements VertxPojo, IWTicket {
      * 关联的模型记录ID，用于描述哪一个Model中的记录
      */
     @Override
-    public WTicket setModelKey(String modelKey) {
+    public WTicket setModelKey(final String modelKey) {
         this.modelKey = modelKey;
         return this;
     }
@@ -355,7 +355,7 @@ public class WTicket implements VertxPojo, IWTicket {
      * 关联的category记录，只包含叶节点
      */
     @Override
-    public WTicket setModelCategory(String modelCategory) {
+    public WTicket setModelCategory(final String modelCategory) {
         this.modelCategory = modelCategory;
         return this;
     }
@@ -374,7 +374,7 @@ public class WTicket implements VertxPojo, IWTicket {
      * 关联的待办组件记录
      */
     @Override
-    public WTicket setModelComponent(String modelComponent) {
+    public WTicket setModelComponent(final String modelComponent) {
         this.modelComponent = modelComponent;
         return this;
     }
@@ -393,7 +393,7 @@ public class WTicket implements VertxPojo, IWTicket {
      * 关联多个模型的记录ID，JsonArray格式
      */
     @Override
-    public WTicket setModelChild(String modelChild) {
+    public WTicket setModelChild(final String modelChild) {
         this.modelChild = modelChild;
         return this;
     }
@@ -412,7 +412,7 @@ public class WTicket implements VertxPojo, IWTicket {
      * 数量信息，多个模型记录时统计模型总数
      */
     @Override
-    public WTicket setQuantity(Integer quantity) {
+    public WTicket setQuantity(final Integer quantity) {
         this.quantity = quantity;
         return this;
     }
@@ -431,7 +431,7 @@ public class WTicket implements VertxPojo, IWTicket {
      * 「flowDefinitionKey」- 流程定义的KEY, getProcessDefinitionKey
      */
     @Override
-    public WTicket setFlowDefinitionKey(String flowDefinitionKey) {
+    public WTicket setFlowDefinitionKey(final String flowDefinitionKey) {
         this.flowDefinitionKey = flowDefinitionKey;
         return this;
     }
@@ -450,7 +450,7 @@ public class WTicket implements VertxPojo, IWTicket {
      * 「flowDefinitionId」- 流程定义的ID，getProcessDefinitionKey
      */
     @Override
-    public WTicket setFlowDefinitionId(String flowDefinitionId) {
+    public WTicket setFlowDefinitionId(final String flowDefinitionId) {
         this.flowDefinitionId = flowDefinitionId;
         return this;
     }
@@ -469,7 +469,7 @@ public class WTicket implements VertxPojo, IWTicket {
      * 流程定义的ID，getProcessId
      */
     @Override
-    public WTicket setFlowInstanceId(String flowInstanceId) {
+    public WTicket setFlowInstanceId(final String flowInstanceId) {
         this.flowInstanceId = flowInstanceId;
         return this;
     }
@@ -486,7 +486,7 @@ public class WTicket implements VertxPojo, IWTicket {
      * Setter for <code>ZDB.W_TICKET.FLOW_END</code>. 「flowEnd」- 主单是否执行完成
      */
     @Override
-    public WTicket setFlowEnd(Boolean flowEnd) {
+    public WTicket setFlowEnd(final Boolean flowEnd) {
         this.flowEnd = flowEnd;
         return this;
     }
@@ -503,7 +503,7 @@ public class WTicket implements VertxPojo, IWTicket {
      * Setter for <code>ZDB.W_TICKET.TITLE</code>. 「title」- 主单业务标题
      */
     @Override
-    public WTicket setTitle(String title) {
+    public WTicket setTitle(final String title) {
         this.title = title;
         return this;
     }
@@ -520,7 +520,7 @@ public class WTicket implements VertxPojo, IWTicket {
      * Setter for <code>ZDB.W_TICKET.DESCRIPTION</code>. 「description」- 主单描述内容
      */
     @Override
-    public WTicket setDescription(String description) {
+    public WTicket setDescription(final String description) {
         this.description = description;
         return this;
     }
@@ -537,7 +537,7 @@ public class WTicket implements VertxPojo, IWTicket {
      * Setter for <code>ZDB.W_TICKET.CATALOG</code>. 「catalog」- 关联服务目录
      */
     @Override
-    public WTicket setCatalog(String catalog) {
+    public WTicket setCatalog(final String catalog) {
         this.catalog = catalog;
         return this;
     }
@@ -554,7 +554,7 @@ public class WTicket implements VertxPojo, IWTicket {
      * Setter for <code>ZDB.W_TICKET.CATEGORY</code>. 「category」- 业务类别
      */
     @Override
-    public WTicket setCategory(String category) {
+    public WTicket setCategory(final String category) {
         this.category = category;
         return this;
     }
@@ -571,7 +571,7 @@ public class WTicket implements VertxPojo, IWTicket {
      * Setter for <code>ZDB.W_TICKET.CATEGORY_SUB</code>. 「categorySub」- 子类别
      */
     @Override
-    public WTicket setCategorySub(String categorySub) {
+    public WTicket setCategorySub(final String categorySub) {
         this.categorySub = categorySub;
         return this;
     }
@@ -588,7 +588,7 @@ public class WTicket implements VertxPojo, IWTicket {
      * Setter for <code>ZDB.W_TICKET.OWNER</code>. 「owner」- 制单人/拥有者
      */
     @Override
-    public WTicket setOwner(String owner) {
+    public WTicket setOwner(final String owner) {
         this.owner = owner;
         return this;
     }
@@ -605,7 +605,7 @@ public class WTicket implements VertxPojo, IWTicket {
      * Setter for <code>ZDB.W_TICKET.SUPERVISOR</code>. 「supervisor」- 监督人
      */
     @Override
-    public WTicket setSupervisor(String supervisor) {
+    public WTicket setSupervisor(final String supervisor) {
         this.supervisor = supervisor;
         return this;
     }
@@ -622,7 +622,7 @@ public class WTicket implements VertxPojo, IWTicket {
      * Setter for <code>ZDB.W_TICKET.OPEN_BY</code>. 「openBy」- 开单人
      */
     @Override
-    public WTicket setOpenBy(String openBy) {
+    public WTicket setOpenBy(final String openBy) {
         this.openBy = openBy;
         return this;
     }
@@ -639,7 +639,7 @@ public class WTicket implements VertxPojo, IWTicket {
      * Setter for <code>ZDB.W_TICKET.OPEN_GROUP</code>. 「openGroup」- 开单组
      */
     @Override
-    public WTicket setOpenGroup(String openGroup) {
+    public WTicket setOpenGroup(final String openGroup) {
         this.openGroup = openGroup;
         return this;
     }
@@ -656,7 +656,7 @@ public class WTicket implements VertxPojo, IWTicket {
      * Setter for <code>ZDB.W_TICKET.OPEN_AT</code>. 「openAt」- 开单时间
      */
     @Override
-    public WTicket setOpenAt(LocalDateTime openAt) {
+    public WTicket setOpenAt(final LocalDateTime openAt) {
         this.openAt = openAt;
         return this;
     }
@@ -673,7 +673,7 @@ public class WTicket implements VertxPojo, IWTicket {
      * Setter for <code>ZDB.W_TICKET.CANCEL_BY</code>. 「cancelBy」- 中断人
      */
     @Override
-    public WTicket setCancelBy(String cancelBy) {
+    public WTicket setCancelBy(final String cancelBy) {
         this.cancelBy = cancelBy;
         return this;
     }
@@ -690,7 +690,7 @@ public class WTicket implements VertxPojo, IWTicket {
      * Setter for <code>ZDB.W_TICKET.CANCEL_AT</code>. 「cancelAt」- 中断时间
      */
     @Override
-    public WTicket setCancelAt(LocalDateTime cancelAt) {
+    public WTicket setCancelAt(final LocalDateTime cancelAt) {
         this.cancelAt = cancelAt;
         return this;
     }
@@ -707,7 +707,7 @@ public class WTicket implements VertxPojo, IWTicket {
      * Setter for <code>ZDB.W_TICKET.CLOSE_BY</code>. 「closeBy」- 关闭人
      */
     @Override
-    public WTicket setCloseBy(String closeBy) {
+    public WTicket setCloseBy(final String closeBy) {
         this.closeBy = closeBy;
         return this;
     }
@@ -724,7 +724,7 @@ public class WTicket implements VertxPojo, IWTicket {
      * Setter for <code>ZDB.W_TICKET.CLOSE_AT</code>. 「closeAt」- 关闭时间
      */
     @Override
-    public WTicket setCloseAt(LocalDateTime closeAt) {
+    public WTicket setCloseAt(final LocalDateTime closeAt) {
         this.closeAt = closeAt;
         return this;
     }
@@ -743,7 +743,7 @@ public class WTicket implements VertxPojo, IWTicket {
      * 关闭解决方案
      */
     @Override
-    public WTicket setCloseSolution(String closeSolution) {
+    public WTicket setCloseSolution(final String closeSolution) {
         this.closeSolution = closeSolution;
         return this;
     }
@@ -760,7 +760,7 @@ public class WTicket implements VertxPojo, IWTicket {
      * Setter for <code>ZDB.W_TICKET.CLOSE_CODE</code>. 「closeCode」- 关闭代码
      */
     @Override
-    public WTicket setCloseCode(String closeCode) {
+    public WTicket setCloseCode(final String closeCode) {
         this.closeCode = closeCode;
         return this;
     }
@@ -777,7 +777,7 @@ public class WTicket implements VertxPojo, IWTicket {
      * Setter for <code>ZDB.W_TICKET.CLOSE_KB</code>. 「closeKb」- 关闭时KB链接地址
      */
     @Override
-    public WTicket setCloseKb(String closeKb) {
+    public WTicket setCloseKb(final String closeKb) {
         this.closeKb = closeKb;
         return this;
     }
@@ -794,7 +794,7 @@ public class WTicket implements VertxPojo, IWTicket {
      * Setter for <code>ZDB.W_TICKET.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public WTicket setActive(Boolean active) {
+    public WTicket setActive(final Boolean active) {
         this.active = active;
         return this;
     }
@@ -811,7 +811,7 @@ public class WTicket implements VertxPojo, IWTicket {
      * Setter for <code>ZDB.W_TICKET.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public WTicket setSigma(String sigma) {
+    public WTicket setSigma(final String sigma) {
         this.sigma = sigma;
         return this;
     }
@@ -828,7 +828,7 @@ public class WTicket implements VertxPojo, IWTicket {
      * Setter for <code>ZDB.W_TICKET.METADATA</code>. 「metadata」- 附加配置
      */
     @Override
-    public WTicket setMetadata(String metadata) {
+    public WTicket setMetadata(final String metadata) {
         this.metadata = metadata;
         return this;
     }
@@ -845,7 +845,7 @@ public class WTicket implements VertxPojo, IWTicket {
      * Setter for <code>ZDB.W_TICKET.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public WTicket setLanguage(String language) {
+    public WTicket setLanguage(final String language) {
         this.language = language;
         return this;
     }
@@ -862,7 +862,7 @@ public class WTicket implements VertxPojo, IWTicket {
      * Setter for <code>ZDB.W_TICKET.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public WTicket setCreatedAt(LocalDateTime createdAt) {
+    public WTicket setCreatedAt(final LocalDateTime createdAt) {
         this.createdAt = createdAt;
         return this;
     }
@@ -879,7 +879,7 @@ public class WTicket implements VertxPojo, IWTicket {
      * Setter for <code>ZDB.W_TICKET.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public WTicket setCreatedBy(String createdBy) {
+    public WTicket setCreatedBy(final String createdBy) {
         this.createdBy = createdBy;
         return this;
     }
@@ -896,7 +896,7 @@ public class WTicket implements VertxPojo, IWTicket {
      * Setter for <code>ZDB.W_TICKET.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public WTicket setUpdatedAt(LocalDateTime updatedAt) {
+    public WTicket setUpdatedAt(final LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
         return this;
     }
@@ -913,13 +913,13 @@ public class WTicket implements VertxPojo, IWTicket {
      * Setter for <code>ZDB.W_TICKET.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public WTicket setUpdatedBy(String updatedBy) {
+    public WTicket setUpdatedBy(final String updatedBy) {
         this.updatedBy = updatedBy;
         return this;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
@@ -1185,7 +1185,7 @@ public class WTicket implements VertxPojo, IWTicket {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("WTicket (");
+        final StringBuilder sb = new StringBuilder("WTicket (");
 
         sb.append(key);
         sb.append(", ").append(serial);
@@ -1238,7 +1238,7 @@ public class WTicket implements VertxPojo, IWTicket {
     // -------------------------------------------------------------------------
 
     @Override
-    public void from(IWTicket from) {
+    public void from(final IWTicket from) {
         setKey(from.getKey());
         setSerial(from.getSerial());
         setName(from.getName());
@@ -1283,7 +1283,7 @@ public class WTicket implements VertxPojo, IWTicket {
     }
 
     @Override
-    public <E extends IWTicket> E into(E into) {
+    public <E extends IWTicket> E into(final E into) {
         into.from(this);
         return into;
     }

@@ -4,7 +4,7 @@
 package io.zerows.extension.mbse.basement.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.mbse.basement.domain.tables.MIndex;
 import io.zerows.extension.mbse.basement.domain.tables.interfaces.IMIndex;
 import org.jooq.Field;
@@ -33,7 +33,7 @@ public class MIndexRecord extends UpdatableRecordImpl<MIndexRecord> implements V
     /**
      * Create a detached, initialised MIndexRecord
      */
-    public MIndexRecord(String key, String name, String type, Boolean clustered, String columns, String entityId, String comments, String sigma, String language, Boolean active, String metadata, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public MIndexRecord(final String key, final String name, final String type, final Boolean clustered, final String columns, final String entityId, final String comments, final String sigma, final String language, final Boolean active, final String metadata, final LocalDateTime createdAt, final String createdBy, final LocalDateTime updatedAt, final String updatedBy) {
         super(MIndex.M_INDEX);
 
         setKey(key);
@@ -57,7 +57,7 @@ public class MIndexRecord extends UpdatableRecordImpl<MIndexRecord> implements V
     /**
      * Create a detached, initialised MIndexRecord
      */
-    public MIndexRecord(io.zerows.extension.mbse.basement.domain.tables.pojos.MIndex value) {
+    public MIndexRecord(final io.zerows.extension.mbse.basement.domain.tables.pojos.MIndex value) {
         super(MIndex.M_INDEX);
 
         if (value != null) {
@@ -80,7 +80,7 @@ public class MIndexRecord extends UpdatableRecordImpl<MIndexRecord> implements V
         }
     }
 
-    public MIndexRecord(io.vertx.core.json.JsonObject json) {
+    public MIndexRecord(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -97,7 +97,7 @@ public class MIndexRecord extends UpdatableRecordImpl<MIndexRecord> implements V
      * Setter for <code>ZDB.M_INDEX.KEY</code>. 「key」- 索引ID
      */
     @Override
-    public MIndexRecord setKey(String value) {
+    public MIndexRecord setKey(final String value) {
         set(0, value);
         return this;
     }
@@ -114,7 +114,7 @@ public class MIndexRecord extends UpdatableRecordImpl<MIndexRecord> implements V
      * Setter for <code>ZDB.M_INDEX.NAME</code>. 「name」- 索引名称
      */
     @Override
-    public MIndexRecord setName(String value) {
+    public MIndexRecord setName(final String value) {
         set(1, value);
         return this;
     }
@@ -131,7 +131,7 @@ public class MIndexRecord extends UpdatableRecordImpl<MIndexRecord> implements V
      * Setter for <code>ZDB.M_INDEX.TYPE</code>. 「type」- 索引类型
      */
     @Override
-    public MIndexRecord setType(String value) {
+    public MIndexRecord setType(final String value) {
         set(2, value);
         return this;
     }
@@ -148,7 +148,7 @@ public class MIndexRecord extends UpdatableRecordImpl<MIndexRecord> implements V
      * Setter for <code>ZDB.M_INDEX.CLUSTERED</code>. 「clustered」- 是否聚集索引
      */
     @Override
-    public MIndexRecord setClustered(Boolean value) {
+    public MIndexRecord setClustered(final Boolean value) {
         set(3, value);
         return this;
     }
@@ -167,7 +167,7 @@ public class MIndexRecord extends UpdatableRecordImpl<MIndexRecord> implements V
      * JsonArray格式，索引覆盖的列集合
      */
     @Override
-    public MIndexRecord setColumns(String value) {
+    public MIndexRecord setColumns(final String value) {
         set(4, value);
         return this;
     }
@@ -184,7 +184,7 @@ public class MIndexRecord extends UpdatableRecordImpl<MIndexRecord> implements V
      * Setter for <code>ZDB.M_INDEX.ENTITY_ID</code>. 「entityId」- 关联的实体ID
      */
     @Override
-    public MIndexRecord setEntityId(String value) {
+    public MIndexRecord setEntityId(final String value) {
         set(5, value);
         return this;
     }
@@ -201,7 +201,7 @@ public class MIndexRecord extends UpdatableRecordImpl<MIndexRecord> implements V
      * Setter for <code>ZDB.M_INDEX.COMMENTS</code>. 「comments」- 当前索引的描述信息
      */
     @Override
-    public MIndexRecord setComments(String value) {
+    public MIndexRecord setComments(final String value) {
         set(6, value);
         return this;
     }
@@ -218,7 +218,7 @@ public class MIndexRecord extends UpdatableRecordImpl<MIndexRecord> implements V
      * Setter for <code>ZDB.M_INDEX.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public MIndexRecord setSigma(String value) {
+    public MIndexRecord setSigma(final String value) {
         set(7, value);
         return this;
     }
@@ -235,7 +235,7 @@ public class MIndexRecord extends UpdatableRecordImpl<MIndexRecord> implements V
      * Setter for <code>ZDB.M_INDEX.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public MIndexRecord setLanguage(String value) {
+    public MIndexRecord setLanguage(final String value) {
         set(8, value);
         return this;
     }
@@ -252,7 +252,7 @@ public class MIndexRecord extends UpdatableRecordImpl<MIndexRecord> implements V
      * Setter for <code>ZDB.M_INDEX.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public MIndexRecord setActive(Boolean value) {
+    public MIndexRecord setActive(final Boolean value) {
         set(9, value);
         return this;
     }
@@ -269,7 +269,7 @@ public class MIndexRecord extends UpdatableRecordImpl<MIndexRecord> implements V
      * Setter for <code>ZDB.M_INDEX.METADATA</code>. 「metadata」- 附加配置数据
      */
     @Override
-    public MIndexRecord setMetadata(String value) {
+    public MIndexRecord setMetadata(final String value) {
         set(10, value);
         return this;
     }
@@ -286,7 +286,7 @@ public class MIndexRecord extends UpdatableRecordImpl<MIndexRecord> implements V
      * Setter for <code>ZDB.M_INDEX.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public MIndexRecord setCreatedAt(LocalDateTime value) {
+    public MIndexRecord setCreatedAt(final LocalDateTime value) {
         set(11, value);
         return this;
     }
@@ -303,7 +303,7 @@ public class MIndexRecord extends UpdatableRecordImpl<MIndexRecord> implements V
      * Setter for <code>ZDB.M_INDEX.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public MIndexRecord setCreatedBy(String value) {
+    public MIndexRecord setCreatedBy(final String value) {
         set(12, value);
         return this;
     }
@@ -328,7 +328,7 @@ public class MIndexRecord extends UpdatableRecordImpl<MIndexRecord> implements V
      * Setter for <code>ZDB.M_INDEX.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public MIndexRecord setUpdatedAt(LocalDateTime value) {
+    public MIndexRecord setUpdatedAt(final LocalDateTime value) {
         set(13, value);
         return this;
     }
@@ -345,7 +345,7 @@ public class MIndexRecord extends UpdatableRecordImpl<MIndexRecord> implements V
      * Setter for <code>ZDB.M_INDEX.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public MIndexRecord setUpdatedBy(String value) {
+    public MIndexRecord setUpdatedBy(final String value) {
         set(14, value);
         return this;
     }
@@ -591,73 +591,73 @@ public class MIndexRecord extends UpdatableRecordImpl<MIndexRecord> implements V
     }
 
     @Override
-    public MIndexRecord value1(String value) {
+    public MIndexRecord value1(final String value) {
         setKey(value);
         return this;
     }
 
     @Override
-    public MIndexRecord value2(String value) {
+    public MIndexRecord value2(final String value) {
         setName(value);
         return this;
     }
 
     @Override
-    public MIndexRecord value3(String value) {
+    public MIndexRecord value3(final String value) {
         setType(value);
         return this;
     }
 
     @Override
-    public MIndexRecord value4(Boolean value) {
+    public MIndexRecord value4(final Boolean value) {
         setClustered(value);
         return this;
     }
 
     @Override
-    public MIndexRecord value5(String value) {
+    public MIndexRecord value5(final String value) {
         setColumns(value);
         return this;
     }
 
     @Override
-    public MIndexRecord value6(String value) {
+    public MIndexRecord value6(final String value) {
         setEntityId(value);
         return this;
     }
 
     @Override
-    public MIndexRecord value7(String value) {
+    public MIndexRecord value7(final String value) {
         setComments(value);
         return this;
     }
 
     @Override
-    public MIndexRecord value8(String value) {
+    public MIndexRecord value8(final String value) {
         setSigma(value);
         return this;
     }
 
     @Override
-    public MIndexRecord value9(String value) {
+    public MIndexRecord value9(final String value) {
         setLanguage(value);
         return this;
     }
 
     @Override
-    public MIndexRecord value10(Boolean value) {
+    public MIndexRecord value10(final Boolean value) {
         setActive(value);
         return this;
     }
 
     @Override
-    public MIndexRecord value11(String value) {
+    public MIndexRecord value11(final String value) {
         setMetadata(value);
         return this;
     }
 
     @Override
-    public MIndexRecord value12(LocalDateTime value) {
+    public MIndexRecord value12(final LocalDateTime value) {
         setCreatedAt(value);
         return this;
     }
@@ -667,13 +667,13 @@ public class MIndexRecord extends UpdatableRecordImpl<MIndexRecord> implements V
     // -------------------------------------------------------------------------
 
     @Override
-    public MIndexRecord value13(String value) {
+    public MIndexRecord value13(final String value) {
         setCreatedBy(value);
         return this;
     }
 
     @Override
-    public MIndexRecord value14(LocalDateTime value) {
+    public MIndexRecord value14(final LocalDateTime value) {
         setUpdatedAt(value);
         return this;
     }
@@ -683,13 +683,13 @@ public class MIndexRecord extends UpdatableRecordImpl<MIndexRecord> implements V
     // -------------------------------------------------------------------------
 
     @Override
-    public MIndexRecord value15(String value) {
+    public MIndexRecord value15(final String value) {
         setUpdatedBy(value);
         return this;
     }
 
     @Override
-    public MIndexRecord values(String value1, String value2, String value3, Boolean value4, String value5, String value6, String value7, String value8, String value9, Boolean value10, String value11, LocalDateTime value12, String value13, LocalDateTime value14, String value15) {
+    public MIndexRecord values(final String value1, final String value2, final String value3, final Boolean value4, final String value5, final String value6, final String value7, final String value8, final String value9, final Boolean value10, final String value11, final LocalDateTime value12, final String value13, final LocalDateTime value14, final String value15) {
         value1(value1);
         value2(value2);
         value3(value3);
@@ -709,7 +709,7 @@ public class MIndexRecord extends UpdatableRecordImpl<MIndexRecord> implements V
     }
 
     @Override
-    public void from(IMIndex from) {
+    public void from(final IMIndex from) {
         setKey(from.getKey());
         setName(from.getName());
         setType(from.getType());
@@ -729,7 +729,7 @@ public class MIndexRecord extends UpdatableRecordImpl<MIndexRecord> implements V
     }
 
     @Override
-    public <E extends IMIndex> E into(E into) {
+    public <E extends IMIndex> E into(final E into) {
         into.from(this);
         return into;
     }

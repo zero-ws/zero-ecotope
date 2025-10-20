@@ -4,7 +4,7 @@
 package io.zerows.extension.commerce.erp.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.commerce.erp.domain.tables.TVendorCheckIn;
 import io.zerows.extension.commerce.erp.domain.tables.interfaces.ITVendorCheckIn;
 import org.jooq.Field;
@@ -33,7 +33,7 @@ public class TVendorCheckInRecord extends UpdatableRecordImpl<TVendorCheckInReco
     /**
      * Create a detached, initialised TVendorCheckInRecord
      */
-    public TVendorCheckInRecord(String key, String commentExtension, String classification, LocalDateTime startAt, LocalDateTime endAt, Integer days, LocalDateTime onboardAt) {
+    public TVendorCheckInRecord(final String key, final String commentExtension, final String classification, final LocalDateTime startAt, final LocalDateTime endAt, final Integer days, final LocalDateTime onboardAt) {
         super(TVendorCheckIn.T_VENDOR_CHECK_IN);
 
         setKey(key);
@@ -49,7 +49,7 @@ public class TVendorCheckInRecord extends UpdatableRecordImpl<TVendorCheckInReco
     /**
      * Create a detached, initialised TVendorCheckInRecord
      */
-    public TVendorCheckInRecord(io.zerows.extension.commerce.erp.domain.tables.pojos.TVendorCheckIn value) {
+    public TVendorCheckInRecord(final io.zerows.extension.commerce.erp.domain.tables.pojos.TVendorCheckIn value) {
         super(TVendorCheckIn.T_VENDOR_CHECK_IN);
 
         if (value != null) {
@@ -64,7 +64,7 @@ public class TVendorCheckInRecord extends UpdatableRecordImpl<TVendorCheckInReco
         }
     }
 
-    public TVendorCheckInRecord(io.vertx.core.json.JsonObject json) {
+    public TVendorCheckInRecord(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -83,7 +83,7 @@ public class TVendorCheckInRecord extends UpdatableRecordImpl<TVendorCheckInReco
      * Key
      */
     @Override
-    public TVendorCheckInRecord setKey(String value) {
+    public TVendorCheckInRecord setKey(final String value) {
         set(0, value);
         return this;
     }
@@ -102,7 +102,7 @@ public class TVendorCheckInRecord extends UpdatableRecordImpl<TVendorCheckInReco
      * 「commentExtension」- Extension Comment
      */
     @Override
-    public TVendorCheckInRecord setCommentExtension(String value) {
+    public TVendorCheckInRecord setCommentExtension(final String value) {
         set(1, value);
         return this;
     }
@@ -121,7 +121,7 @@ public class TVendorCheckInRecord extends UpdatableRecordImpl<TVendorCheckInReco
      * 「classification」- The ticket related income type
      */
     @Override
-    public TVendorCheckInRecord setClassification(String value) {
+    public TVendorCheckInRecord setClassification(final String value) {
         set(2, value);
         return this;
     }
@@ -138,7 +138,7 @@ public class TVendorCheckInRecord extends UpdatableRecordImpl<TVendorCheckInReco
      * Setter for <code>ZDB.T_VENDOR_CHECK_IN.START_AT</code>. 「startAt」- From
      */
     @Override
-    public TVendorCheckInRecord setStartAt(LocalDateTime value) {
+    public TVendorCheckInRecord setStartAt(final LocalDateTime value) {
         set(3, value);
         return this;
     }
@@ -155,7 +155,7 @@ public class TVendorCheckInRecord extends UpdatableRecordImpl<TVendorCheckInReco
      * Setter for <code>ZDB.T_VENDOR_CHECK_IN.END_AT</code>. 「endAt」- To
      */
     @Override
-    public TVendorCheckInRecord setEndAt(LocalDateTime value) {
+    public TVendorCheckInRecord setEndAt(final LocalDateTime value) {
         set(4, value);
         return this;
     }
@@ -180,7 +180,7 @@ public class TVendorCheckInRecord extends UpdatableRecordImpl<TVendorCheckInReco
      * Setter for <code>ZDB.T_VENDOR_CHECK_IN.DAYS</code>. 「days」- Duration
      */
     @Override
-    public TVendorCheckInRecord setDays(Integer value) {
+    public TVendorCheckInRecord setDays(final Integer value) {
         set(5, value);
         return this;
     }
@@ -197,7 +197,7 @@ public class TVendorCheckInRecord extends UpdatableRecordImpl<TVendorCheckInReco
      * Setter for <code>ZDB.T_VENDOR_CHECK_IN.ONBOARD_AT</code>. 「onboardAt」- To
      */
     @Override
-    public TVendorCheckInRecord setOnboardAt(LocalDateTime value) {
+    public TVendorCheckInRecord setOnboardAt(final LocalDateTime value) {
         set(6, value);
         return this;
     }
@@ -323,25 +323,25 @@ public class TVendorCheckInRecord extends UpdatableRecordImpl<TVendorCheckInReco
     }
 
     @Override
-    public TVendorCheckInRecord value1(String value) {
+    public TVendorCheckInRecord value1(final String value) {
         setKey(value);
         return this;
     }
 
     @Override
-    public TVendorCheckInRecord value2(String value) {
+    public TVendorCheckInRecord value2(final String value) {
         setCommentExtension(value);
         return this;
     }
 
     @Override
-    public TVendorCheckInRecord value3(String value) {
+    public TVendorCheckInRecord value3(final String value) {
         setClassification(value);
         return this;
     }
 
     @Override
-    public TVendorCheckInRecord value4(LocalDateTime value) {
+    public TVendorCheckInRecord value4(final LocalDateTime value) {
         setStartAt(value);
         return this;
     }
@@ -351,13 +351,13 @@ public class TVendorCheckInRecord extends UpdatableRecordImpl<TVendorCheckInReco
     // -------------------------------------------------------------------------
 
     @Override
-    public TVendorCheckInRecord value5(LocalDateTime value) {
+    public TVendorCheckInRecord value5(final LocalDateTime value) {
         setEndAt(value);
         return this;
     }
 
     @Override
-    public TVendorCheckInRecord value6(Integer value) {
+    public TVendorCheckInRecord value6(final Integer value) {
         setDays(value);
         return this;
     }
@@ -367,13 +367,13 @@ public class TVendorCheckInRecord extends UpdatableRecordImpl<TVendorCheckInReco
     // -------------------------------------------------------------------------
 
     @Override
-    public TVendorCheckInRecord value7(LocalDateTime value) {
+    public TVendorCheckInRecord value7(final LocalDateTime value) {
         setOnboardAt(value);
         return this;
     }
 
     @Override
-    public TVendorCheckInRecord values(String value1, String value2, String value3, LocalDateTime value4, LocalDateTime value5, Integer value6, LocalDateTime value7) {
+    public TVendorCheckInRecord values(final String value1, final String value2, final String value3, final LocalDateTime value4, final LocalDateTime value5, final Integer value6, final LocalDateTime value7) {
         value1(value1);
         value2(value2);
         value3(value3);
@@ -385,7 +385,7 @@ public class TVendorCheckInRecord extends UpdatableRecordImpl<TVendorCheckInReco
     }
 
     @Override
-    public void from(ITVendorCheckIn from) {
+    public void from(final ITVendorCheckIn from) {
         setKey(from.getKey());
         setCommentExtension(from.getCommentExtension());
         setClassification(from.getClassification());
@@ -397,7 +397,7 @@ public class TVendorCheckInRecord extends UpdatableRecordImpl<TVendorCheckInReco
     }
 
     @Override
-    public <E extends ITVendorCheckIn> E into(E into) {
+    public <E extends ITVendorCheckIn> E into(final E into) {
         into.from(this);
         return into;
     }

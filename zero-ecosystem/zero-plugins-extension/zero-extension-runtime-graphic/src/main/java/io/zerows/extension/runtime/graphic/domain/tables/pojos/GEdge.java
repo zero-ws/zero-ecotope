@@ -4,7 +4,7 @@
 package io.zerows.extension.runtime.graphic.domain.tables.pojos;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.runtime.graphic.domain.tables.interfaces.IGEdge;
 
 import java.time.LocalDateTime;
@@ -38,7 +38,7 @@ public class GEdge implements VertxPojo, IGEdge {
     public GEdge() {
     }
 
-    public GEdge(IGEdge value) {
+    public GEdge(final IGEdge value) {
         this.key = value.getKey();
         this.name = value.getName();
         this.type = value.getType();
@@ -59,23 +59,23 @@ public class GEdge implements VertxPojo, IGEdge {
     }
 
     public GEdge(
-        String key,
-        String name,
-        String type,
-        String sourceKey,
-        String targetKey,
-        String graphicId,
-        String ui,
-        String recordKey,
-        String recordData,
-        String sigma,
-        String language,
-        Boolean active,
-        String metadata,
-        LocalDateTime createdAt,
-        String createdBy,
-        LocalDateTime updatedAt,
-        String updatedBy
+        final String key,
+        final String name,
+        final String type,
+        final String sourceKey,
+        final String targetKey,
+        final String graphicId,
+        final String ui,
+        final String recordKey,
+        final String recordData,
+        final String sigma,
+        final String language,
+        final Boolean active,
+        final String metadata,
+        final LocalDateTime createdAt,
+        final String createdBy,
+        final LocalDateTime updatedAt,
+        final String updatedBy
     ) {
         this.key = key;
         this.name = name;
@@ -96,7 +96,7 @@ public class GEdge implements VertxPojo, IGEdge {
         this.updatedBy = updatedBy;
     }
 
-    public GEdge(io.vertx.core.json.JsonObject json) {
+    public GEdge(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -113,7 +113,7 @@ public class GEdge implements VertxPojo, IGEdge {
      * Setter for <code>ZDB.G_EDGE.KEY</code>. 「key」- 拓扑图边的ID
      */
     @Override
-    public GEdge setKey(String key) {
+    public GEdge setKey(final String key) {
         this.key = key;
         return this;
     }
@@ -130,7 +130,7 @@ public class GEdge implements VertxPojo, IGEdge {
      * Setter for <code>ZDB.G_EDGE.NAME</code>. 「name」- 边的名称
      */
     @Override
-    public GEdge setName(String name) {
+    public GEdge setName(final String name) {
         this.name = name;
         return this;
     }
@@ -147,7 +147,7 @@ public class GEdge implements VertxPojo, IGEdge {
      * Setter for <code>ZDB.G_EDGE.TYPE</code>. 「type」- 拓扑图边的类型，描述关系本质
      */
     @Override
-    public GEdge setType(String type) {
+    public GEdge setType(final String type) {
         this.type = type;
         return this;
     }
@@ -164,7 +164,7 @@ public class GEdge implements VertxPojo, IGEdge {
      * Setter for <code>ZDB.G_EDGE.SOURCE_KEY</code>. 「sourceKey」- 拓扑图开始节点
      */
     @Override
-    public GEdge setSourceKey(String sourceKey) {
+    public GEdge setSourceKey(final String sourceKey) {
         this.sourceKey = sourceKey;
         return this;
     }
@@ -181,7 +181,7 @@ public class GEdge implements VertxPojo, IGEdge {
      * Setter for <code>ZDB.G_EDGE.TARGET_KEY</code>. 「targetKey」- 拓扑图结束节点
      */
     @Override
-    public GEdge setTargetKey(String targetKey) {
+    public GEdge setTargetKey(final String targetKey) {
         this.targetKey = targetKey;
         return this;
     }
@@ -198,7 +198,7 @@ public class GEdge implements VertxPojo, IGEdge {
      * Setter for <code>ZDB.G_EDGE.GRAPHIC_ID</code>. 「graphicId」- 当前关联拓扑图ID
      */
     @Override
-    public GEdge setGraphicId(String graphicId) {
+    public GEdge setGraphicId(final String graphicId) {
         this.graphicId = graphicId;
         return this;
     }
@@ -215,7 +215,7 @@ public class GEdge implements VertxPojo, IGEdge {
      * Setter for <code>ZDB.G_EDGE.UI</code>. 「ui」- ui配置专用
      */
     @Override
-    public GEdge setUi(String ui) {
+    public GEdge setUi(final String ui) {
         this.ui = ui;
         return this;
     }
@@ -232,7 +232,7 @@ public class GEdge implements VertxPojo, IGEdge {
      * Setter for <code>ZDB.G_EDGE.RECORD_KEY</code>. 「recordKey」- 记录主键
      */
     @Override
-    public GEdge setRecordKey(String recordKey) {
+    public GEdge setRecordKey(final String recordKey) {
         this.recordKey = recordKey;
         return this;
     }
@@ -249,7 +249,7 @@ public class GEdge implements VertxPojo, IGEdge {
      * Setter for <code>ZDB.G_EDGE.RECORD_DATA</code>. 「recordData」- 组中存储的数据信息
      */
     @Override
-    public GEdge setRecordData(String recordData) {
+    public GEdge setRecordData(final String recordData) {
         this.recordData = recordData;
         return this;
     }
@@ -266,7 +266,7 @@ public class GEdge implements VertxPojo, IGEdge {
      * Setter for <code>ZDB.G_EDGE.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public GEdge setSigma(String sigma) {
+    public GEdge setSigma(final String sigma) {
         this.sigma = sigma;
         return this;
     }
@@ -283,7 +283,7 @@ public class GEdge implements VertxPojo, IGEdge {
      * Setter for <code>ZDB.G_EDGE.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public GEdge setLanguage(String language) {
+    public GEdge setLanguage(final String language) {
         this.language = language;
         return this;
     }
@@ -300,7 +300,7 @@ public class GEdge implements VertxPojo, IGEdge {
      * Setter for <code>ZDB.G_EDGE.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public GEdge setActive(Boolean active) {
+    public GEdge setActive(final Boolean active) {
         this.active = active;
         return this;
     }
@@ -317,7 +317,7 @@ public class GEdge implements VertxPojo, IGEdge {
      * Setter for <code>ZDB.G_EDGE.METADATA</code>. 「metadata」- 附加配置数据
      */
     @Override
-    public GEdge setMetadata(String metadata) {
+    public GEdge setMetadata(final String metadata) {
         this.metadata = metadata;
         return this;
     }
@@ -334,7 +334,7 @@ public class GEdge implements VertxPojo, IGEdge {
      * Setter for <code>ZDB.G_EDGE.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public GEdge setCreatedAt(LocalDateTime createdAt) {
+    public GEdge setCreatedAt(final LocalDateTime createdAt) {
         this.createdAt = createdAt;
         return this;
     }
@@ -351,7 +351,7 @@ public class GEdge implements VertxPojo, IGEdge {
      * Setter for <code>ZDB.G_EDGE.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public GEdge setCreatedBy(String createdBy) {
+    public GEdge setCreatedBy(final String createdBy) {
         this.createdBy = createdBy;
         return this;
     }
@@ -368,7 +368,7 @@ public class GEdge implements VertxPojo, IGEdge {
      * Setter for <code>ZDB.G_EDGE.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public GEdge setUpdatedAt(LocalDateTime updatedAt) {
+    public GEdge setUpdatedAt(final LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
         return this;
     }
@@ -385,13 +385,13 @@ public class GEdge implements VertxPojo, IGEdge {
      * Setter for <code>ZDB.G_EDGE.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public GEdge setUpdatedBy(String updatedBy) {
+    public GEdge setUpdatedBy(final String updatedBy) {
         this.updatedBy = updatedBy;
         return this;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
@@ -513,7 +513,7 @@ public class GEdge implements VertxPojo, IGEdge {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("GEdge (");
+        final StringBuilder sb = new StringBuilder("GEdge (");
 
         sb.append(key);
         sb.append(", ").append(name);
@@ -542,7 +542,7 @@ public class GEdge implements VertxPojo, IGEdge {
     // -------------------------------------------------------------------------
 
     @Override
-    public void from(IGEdge from) {
+    public void from(final IGEdge from) {
         setKey(from.getKey());
         setName(from.getName());
         setType(from.getType());
@@ -563,7 +563,7 @@ public class GEdge implements VertxPojo, IGEdge {
     }
 
     @Override
-    public <E extends IGEdge> E into(E into) {
+    public <E extends IGEdge> E into(final E into) {
         into.from(this);
         return into;
     }

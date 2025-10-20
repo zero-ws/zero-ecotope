@@ -4,7 +4,7 @@
 package io.zerows.extension.mbse.ui.domain.tables.pojos;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.mbse.ui.domain.tables.interfaces.IUiView;
 
 import java.time.LocalDateTime;
@@ -44,7 +44,7 @@ public class UiView implements VertxPojo, IUiView {
     public UiView() {
     }
 
-    public UiView(IUiView value) {
+    public UiView(final IUiView value) {
         this.key = value.getKey();
         this.name = value.getName();
         this.code = value.getCode();
@@ -71,29 +71,29 @@ public class UiView implements VertxPojo, IUiView {
     }
 
     public UiView(
-        String key,
-        String name,
-        String code,
-        Integer sort,
-        String identifier,
-        String workflow,
-        String view,
-        String position,
-        String title,
-        String projection,
-        String criteria,
-        String rows,
-        String uiConfig,
-        String qrComponent,
-        String qrConfig,
-        String sigma,
-        String language,
-        Boolean active,
-        String metadata,
-        LocalDateTime createdAt,
-        String createdBy,
-        LocalDateTime updatedAt,
-        String updatedBy
+        final String key,
+        final String name,
+        final String code,
+        final Integer sort,
+        final String identifier,
+        final String workflow,
+        final String view,
+        final String position,
+        final String title,
+        final String projection,
+        final String criteria,
+        final String rows,
+        final String uiConfig,
+        final String qrComponent,
+        final String qrConfig,
+        final String sigma,
+        final String language,
+        final Boolean active,
+        final String metadata,
+        final LocalDateTime createdAt,
+        final String createdBy,
+        final LocalDateTime updatedAt,
+        final String updatedBy
     ) {
         this.key = key;
         this.name = name;
@@ -120,7 +120,7 @@ public class UiView implements VertxPojo, IUiView {
         this.updatedBy = updatedBy;
     }
 
-    public UiView(io.vertx.core.json.JsonObject json) {
+    public UiView(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -137,7 +137,7 @@ public class UiView implements VertxPojo, IUiView {
      * Setter for <code>ZDB.UI_VIEW.KEY</code>. 「key」- 查询记录ID
      */
     @Override
-    public UiView setKey(String key) {
+    public UiView setKey(final String key) {
         this.key = key;
         return this;
     }
@@ -154,7 +154,7 @@ public class UiView implements VertxPojo, IUiView {
      * Setter for <code>ZDB.UI_VIEW.NAME</code>. 「name」- 视图名称，每个 MATRIX 对应一个视图
      */
     @Override
-    public UiView setName(String name) {
+    public UiView setName(final String name) {
         this.name = name;
         return this;
     }
@@ -171,7 +171,7 @@ public class UiView implements VertxPojo, IUiView {
      * Setter for <code>ZDB.UI_VIEW.CODE</code>. 「code」- 系统编码
      */
     @Override
-    public UiView setCode(String code) {
+    public UiView setCode(final String code) {
         this.code = code;
         return this;
     }
@@ -188,7 +188,7 @@ public class UiView implements VertxPojo, IUiView {
      * Setter for <code>ZDB.UI_VIEW.SORT</code>. 「sort」- QR的顺序
      */
     @Override
-    public UiView setSort(Integer sort) {
+    public UiView setSort(final Integer sort) {
         this.sort = sort;
         return this;
     }
@@ -205,7 +205,7 @@ public class UiView implements VertxPojo, IUiView {
      * Setter for <code>ZDB.UI_VIEW.IDENTIFIER</code>. 「identifier」- 模型标识符
      */
     @Override
-    public UiView setIdentifier(String identifier) {
+    public UiView setIdentifier(final String identifier) {
         this.identifier = identifier;
         return this;
     }
@@ -222,7 +222,7 @@ public class UiView implements VertxPojo, IUiView {
      * Setter for <code>ZDB.UI_VIEW.WORKFLOW</code>. 「workflow」- 工作流名称
      */
     @Override
-    public UiView setWorkflow(String workflow) {
+    public UiView setWorkflow(final String workflow) {
         this.workflow = workflow;
         return this;
     }
@@ -239,7 +239,7 @@ public class UiView implements VertxPojo, IUiView {
      * Setter for <code>ZDB.UI_VIEW.VIEW</code>. 「view」- 视图名
      */
     @Override
-    public UiView setView(String view) {
+    public UiView setView(final String view) {
         this.view = view;
         return this;
     }
@@ -258,7 +258,7 @@ public class UiView implements VertxPojo, IUiView {
      * 当前视图的模块位置，比页面低一个维度
      */
     @Override
-    public UiView setPosition(String position) {
+    public UiView setPosition(final String position) {
         this.position = position;
         return this;
     }
@@ -275,7 +275,7 @@ public class UiView implements VertxPojo, IUiView {
      * Setter for <code>ZDB.UI_VIEW.TITLE</code>. 「title」- 视图标题，用户输入，可选择
      */
     @Override
-    public UiView setTitle(String title) {
+    public UiView setTitle(final String title) {
         this.title = title;
         return this;
     }
@@ -292,7 +292,7 @@ public class UiView implements VertxPojo, IUiView {
      * Setter for <code>ZDB.UI_VIEW.PROJECTION</code>. 「projection」- 该资源的列定义
      */
     @Override
-    public UiView setProjection(String projection) {
+    public UiView setProjection(final String projection) {
         this.projection = projection;
         return this;
     }
@@ -309,7 +309,7 @@ public class UiView implements VertxPojo, IUiView {
      * Setter for <code>ZDB.UI_VIEW.CRITERIA</code>. 「criteria」- 该资源的行查询
      */
     @Override
-    public UiView setCriteria(String criteria) {
+    public UiView setCriteria(final String criteria) {
         this.criteria = criteria;
         return this;
     }
@@ -326,7 +326,7 @@ public class UiView implements VertxPojo, IUiView {
      * Setter for <code>ZDB.UI_VIEW.ROWS</code>. 「rows」- 该资源针对保存的行进行过滤
      */
     @Override
-    public UiView setRows(String rows) {
+    public UiView setRows(final String rows) {
         this.rows = rows;
         return this;
     }
@@ -343,7 +343,7 @@ public class UiView implements VertxPojo, IUiView {
      * Setter for <code>ZDB.UI_VIEW.UI_CONFIG</code>. 「uiConfig」- 界面配置
      */
     @Override
-    public UiView setUiConfig(String uiConfig) {
+    public UiView setUiConfig(final String uiConfig) {
         this.uiConfig = uiConfig;
         return this;
     }
@@ -360,7 +360,7 @@ public class UiView implements VertxPojo, IUiView {
      * Setter for <code>ZDB.UI_VIEW.QR_COMPONENT</code>. 「qrComponent」- 查询条件专用组件
      */
     @Override
-    public UiView setQrComponent(String qrComponent) {
+    public UiView setQrComponent(final String qrComponent) {
         this.qrComponent = qrComponent;
         return this;
     }
@@ -377,7 +377,7 @@ public class UiView implements VertxPojo, IUiView {
      * Setter for <code>ZDB.UI_VIEW.QR_CONFIG</code>. 「qrConfig」- 查询组件专用配置
      */
     @Override
-    public UiView setQrConfig(String qrConfig) {
+    public UiView setQrConfig(final String qrConfig) {
         this.qrConfig = qrConfig;
         return this;
     }
@@ -394,7 +394,7 @@ public class UiView implements VertxPojo, IUiView {
      * Setter for <code>ZDB.UI_VIEW.SIGMA</code>. 「sigma」- 用户组绑定的统一标识
      */
     @Override
-    public UiView setSigma(String sigma) {
+    public UiView setSigma(final String sigma) {
         this.sigma = sigma;
         return this;
     }
@@ -411,7 +411,7 @@ public class UiView implements VertxPojo, IUiView {
      * Setter for <code>ZDB.UI_VIEW.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public UiView setLanguage(String language) {
+    public UiView setLanguage(final String language) {
         this.language = language;
         return this;
     }
@@ -428,7 +428,7 @@ public class UiView implements VertxPojo, IUiView {
      * Setter for <code>ZDB.UI_VIEW.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public UiView setActive(Boolean active) {
+    public UiView setActive(final Boolean active) {
         this.active = active;
         return this;
     }
@@ -445,7 +445,7 @@ public class UiView implements VertxPojo, IUiView {
      * Setter for <code>ZDB.UI_VIEW.METADATA</code>. 「metadata」- 附加配置数据
      */
     @Override
-    public UiView setMetadata(String metadata) {
+    public UiView setMetadata(final String metadata) {
         this.metadata = metadata;
         return this;
     }
@@ -462,7 +462,7 @@ public class UiView implements VertxPojo, IUiView {
      * Setter for <code>ZDB.UI_VIEW.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public UiView setCreatedAt(LocalDateTime createdAt) {
+    public UiView setCreatedAt(final LocalDateTime createdAt) {
         this.createdAt = createdAt;
         return this;
     }
@@ -479,7 +479,7 @@ public class UiView implements VertxPojo, IUiView {
      * Setter for <code>ZDB.UI_VIEW.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public UiView setCreatedBy(String createdBy) {
+    public UiView setCreatedBy(final String createdBy) {
         this.createdBy = createdBy;
         return this;
     }
@@ -496,7 +496,7 @@ public class UiView implements VertxPojo, IUiView {
      * Setter for <code>ZDB.UI_VIEW.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public UiView setUpdatedAt(LocalDateTime updatedAt) {
+    public UiView setUpdatedAt(final LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
         return this;
     }
@@ -513,13 +513,13 @@ public class UiView implements VertxPojo, IUiView {
      * Setter for <code>ZDB.UI_VIEW.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public UiView setUpdatedBy(String updatedBy) {
+    public UiView setUpdatedBy(final String updatedBy) {
         this.updatedBy = updatedBy;
         return this;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
@@ -677,7 +677,7 @@ public class UiView implements VertxPojo, IUiView {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("UiView (");
+        final StringBuilder sb = new StringBuilder("UiView (");
 
         sb.append(key);
         sb.append(", ").append(name);
@@ -712,7 +712,7 @@ public class UiView implements VertxPojo, IUiView {
     // -------------------------------------------------------------------------
 
     @Override
-    public void from(IUiView from) {
+    public void from(final IUiView from) {
         setKey(from.getKey());
         setName(from.getName());
         setCode(from.getCode());
@@ -739,7 +739,7 @@ public class UiView implements VertxPojo, IUiView {
     }
 
     @Override
-    public <E extends IUiView> E into(E into) {
+    public <E extends IUiView> E into(final E into) {
         into.from(this);
         return into;
     }

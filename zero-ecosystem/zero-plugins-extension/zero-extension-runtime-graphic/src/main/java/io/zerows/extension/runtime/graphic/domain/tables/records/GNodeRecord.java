@@ -4,7 +4,7 @@
 package io.zerows.extension.runtime.graphic.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.runtime.graphic.domain.tables.GNode;
 import io.zerows.extension.runtime.graphic.domain.tables.interfaces.IGNode;
 import org.jooq.Field;

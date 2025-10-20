@@ -4,7 +4,7 @@
 package io.zerows.extension.mbse.ui.domain.tables.pojos;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.mbse.ui.domain.tables.interfaces.IUiPage;
 
 import java.time.LocalDateTime;
@@ -41,7 +41,7 @@ public class UiPage implements VertxPojo, IUiPage {
     public UiPage() {
     }
 
-    public UiPage(IUiPage value) {
+    public UiPage(final IUiPage value) {
         this.key = value.getKey();
         this.app = value.getApp();
         this.module = value.getModule();
@@ -65,26 +65,26 @@ public class UiPage implements VertxPojo, IUiPage {
     }
 
     public UiPage(
-        String key,
-        String app,
-        String module,
-        String page,
-        String layoutId,
-        Boolean secure,
-        String paramMap,
-        String containerName,
-        String containerConfig,
-        String state,
-        String grid,
-        String assist,
-        Boolean active,
-        String sigma,
-        String metadata,
-        String language,
-        LocalDateTime createdAt,
-        String createdBy,
-        LocalDateTime updatedAt,
-        String updatedBy
+        final String key,
+        final String app,
+        final String module,
+        final String page,
+        final String layoutId,
+        final Boolean secure,
+        final String paramMap,
+        final String containerName,
+        final String containerConfig,
+        final String state,
+        final String grid,
+        final String assist,
+        final Boolean active,
+        final String sigma,
+        final String metadata,
+        final String language,
+        final LocalDateTime createdAt,
+        final String createdBy,
+        final LocalDateTime updatedAt,
+        final String updatedBy
     ) {
         this.key = key;
         this.app = app;
@@ -108,7 +108,7 @@ public class UiPage implements VertxPojo, IUiPage {
         this.updatedBy = updatedBy;
     }
 
-    public UiPage(io.vertx.core.json.JsonObject json) {
+    public UiPage(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -125,7 +125,7 @@ public class UiPage implements VertxPojo, IUiPage {
      * Setter for <code>ZDB.UI_PAGE.KEY</code>. 「key」- 页面唯一主键
      */
     @Override
-    public UiPage setKey(String key) {
+    public UiPage setKey(final String key) {
         this.key = key;
         return this;
     }
@@ -142,7 +142,7 @@ public class UiPage implements VertxPojo, IUiPage {
      * Setter for <code>ZDB.UI_PAGE.APP</code>. 「app」- 入口APP名称，APP中的path
      */
     @Override
-    public UiPage setApp(String app) {
+    public UiPage setApp(final String app) {
         this.app = app;
         return this;
     }
@@ -159,7 +159,7 @@ public class UiPage implements VertxPojo, IUiPage {
      * Setter for <code>ZDB.UI_PAGE.MODULE</code>. 「module」- 模块相关信息
      */
     @Override
-    public UiPage setModule(String module) {
+    public UiPage setModule(final String module) {
         this.module = module;
         return this;
     }
@@ -176,7 +176,7 @@ public class UiPage implements VertxPojo, IUiPage {
      * Setter for <code>ZDB.UI_PAGE.PAGE</code>. 「page」- 页面路径信息
      */
     @Override
-    public UiPage setPage(String page) {
+    public UiPage setPage(final String page) {
         this.page = page;
         return this;
     }
@@ -195,7 +195,7 @@ public class UiPage implements VertxPojo, IUiPage {
      * layout 顶层节点数据
      */
     @Override
-    public UiPage setLayoutId(String layoutId) {
+    public UiPage setLayoutId(final String layoutId) {
         this.layoutId = layoutId;
         return this;
     }
@@ -214,7 +214,7 @@ public class UiPage implements VertxPojo, IUiPage {
      * 是否执行安全检查（安全检查才会被权限系统捕捉）
      */
     @Override
-    public UiPage setSecure(Boolean secure) {
+    public UiPage setSecure(final Boolean secure) {
         this.secure = secure;
         return this;
     }
@@ -233,7 +233,7 @@ public class UiPage implements VertxPojo, IUiPage {
      * URL地址中的配置key=get
      */
     @Override
-    public UiPage setParamMap(String paramMap) {
+    public UiPage setParamMap(final String paramMap) {
         this.paramMap = paramMap;
         return this;
     }
@@ -252,7 +252,7 @@ public class UiPage implements VertxPojo, IUiPage {
      * 当前页面是否存在容器，如果有容器，那么设置容器名称
      */
     @Override
-    public UiPage setContainerName(String containerName) {
+    public UiPage setContainerName(final String containerName) {
         this.containerName = containerName;
         return this;
     }
@@ -271,7 +271,7 @@ public class UiPage implements VertxPojo, IUiPage {
      * 当前页面容器相关配置
      */
     @Override
-    public UiPage setContainerConfig(String containerConfig) {
+    public UiPage setContainerConfig(final String containerConfig) {
         this.containerConfig = containerConfig;
         return this;
     }
@@ -288,7 +288,7 @@ public class UiPage implements VertxPojo, IUiPage {
      * Setter for <code>ZDB.UI_PAGE.STATE</code>. 「state」- 当前页面的初始化状态信息
      */
     @Override
-    public UiPage setState(String state) {
+    public UiPage setState(final String state) {
         this.state = state;
         return this;
     }
@@ -305,7 +305,7 @@ public class UiPage implements VertxPojo, IUiPage {
      * Setter for <code>ZDB.UI_PAGE.GRID</code>. 「grid」- 当前页面的布局信息，Grid布局格式
      */
     @Override
-    public UiPage setGrid(String grid) {
+    public UiPage setGrid(final String grid) {
         this.grid = grid;
         return this;
     }
@@ -322,7 +322,7 @@ public class UiPage implements VertxPojo, IUiPage {
      * Setter for <code>ZDB.UI_PAGE.ASSIST</code>. 「assist」- 当前页面的辅助数据Ajax配置
      */
     @Override
-    public UiPage setAssist(String assist) {
+    public UiPage setAssist(final String assist) {
         this.assist = assist;
         return this;
     }
@@ -339,7 +339,7 @@ public class UiPage implements VertxPojo, IUiPage {
      * Setter for <code>ZDB.UI_PAGE.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public UiPage setActive(Boolean active) {
+    public UiPage setActive(final Boolean active) {
         this.active = active;
         return this;
     }
@@ -356,7 +356,7 @@ public class UiPage implements VertxPojo, IUiPage {
      * Setter for <code>ZDB.UI_PAGE.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public UiPage setSigma(String sigma) {
+    public UiPage setSigma(final String sigma) {
         this.sigma = sigma;
         return this;
     }
@@ -373,7 +373,7 @@ public class UiPage implements VertxPojo, IUiPage {
      * Setter for <code>ZDB.UI_PAGE.METADATA</code>. 「metadata」- 附加配置
      */
     @Override
-    public UiPage setMetadata(String metadata) {
+    public UiPage setMetadata(final String metadata) {
         this.metadata = metadata;
         return this;
     }
@@ -390,7 +390,7 @@ public class UiPage implements VertxPojo, IUiPage {
      * Setter for <code>ZDB.UI_PAGE.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public UiPage setLanguage(String language) {
+    public UiPage setLanguage(final String language) {
         this.language = language;
         return this;
     }
@@ -407,7 +407,7 @@ public class UiPage implements VertxPojo, IUiPage {
      * Setter for <code>ZDB.UI_PAGE.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public UiPage setCreatedAt(LocalDateTime createdAt) {
+    public UiPage setCreatedAt(final LocalDateTime createdAt) {
         this.createdAt = createdAt;
         return this;
     }
@@ -424,7 +424,7 @@ public class UiPage implements VertxPojo, IUiPage {
      * Setter for <code>ZDB.UI_PAGE.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public UiPage setCreatedBy(String createdBy) {
+    public UiPage setCreatedBy(final String createdBy) {
         this.createdBy = createdBy;
         return this;
     }
@@ -441,7 +441,7 @@ public class UiPage implements VertxPojo, IUiPage {
      * Setter for <code>ZDB.UI_PAGE.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public UiPage setUpdatedAt(LocalDateTime updatedAt) {
+    public UiPage setUpdatedAt(final LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
         return this;
     }
@@ -458,13 +458,13 @@ public class UiPage implements VertxPojo, IUiPage {
      * Setter for <code>ZDB.UI_PAGE.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public UiPage setUpdatedBy(String updatedBy) {
+    public UiPage setUpdatedBy(final String updatedBy) {
         this.updatedBy = updatedBy;
         return this;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
@@ -604,7 +604,7 @@ public class UiPage implements VertxPojo, IUiPage {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("UiPage (");
+        final StringBuilder sb = new StringBuilder("UiPage (");
 
         sb.append(key);
         sb.append(", ").append(app);
@@ -636,7 +636,7 @@ public class UiPage implements VertxPojo, IUiPage {
     // -------------------------------------------------------------------------
 
     @Override
-    public void from(IUiPage from) {
+    public void from(final IUiPage from) {
         setKey(from.getKey());
         setApp(from.getApp());
         setModule(from.getModule());
@@ -660,7 +660,7 @@ public class UiPage implements VertxPojo, IUiPage {
     }
 
     @Override
-    public <E extends IUiPage> E into(E into) {
+    public <E extends IUiPage> E into(final E into) {
         into.from(this);
         return into;
     }

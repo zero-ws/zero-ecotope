@@ -4,7 +4,7 @@
 package io.zerows.extension.mbse.modulat.domain.tables.pojos;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.mbse.modulat.domain.tables.interfaces.IBWeb;
 
 /**
@@ -31,7 +31,7 @@ public class BWeb implements VertxPojo, IBWeb {
     public BWeb() {
     }
 
-    public BWeb(IBWeb value) {
+    public BWeb(final IBWeb value) {
         this.key = value.getKey();
         this.code = value.getCode();
         this.blockId = value.getBlockId();
@@ -47,18 +47,18 @@ public class BWeb implements VertxPojo, IBWeb {
     }
 
     public BWeb(
-        String key,
-        String code,
-        String blockId,
-        String type,
-        String licContent,
-        String licOp,
-        String licModule,
-        String licTpl,
-        Boolean active,
-        String sigma,
-        String metadata,
-        String language
+        final String key,
+        final String code,
+        final String blockId,
+        final String type,
+        final String licContent,
+        final String licOp,
+        final String licModule,
+        final String licTpl,
+        final Boolean active,
+        final String sigma,
+        final String metadata,
+        final String language
     ) {
         this.key = key;
         this.code = code;
@@ -74,7 +74,7 @@ public class BWeb implements VertxPojo, IBWeb {
         this.language = language;
     }
 
-    public BWeb(io.vertx.core.json.JsonObject json) {
+    public BWeb(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -91,7 +91,7 @@ public class BWeb implements VertxPojo, IBWeb {
      * Setter for <code>ZDB.B_WEB.KEY</code>. 「key」- 主键
      */
     @Override
-    public BWeb setKey(String key) {
+    public BWeb setKey(final String key) {
         this.key = key;
         return this;
     }
@@ -108,7 +108,7 @@ public class BWeb implements VertxPojo, IBWeb {
      * Setter for <code>ZDB.B_WEB.CODE</code>. 「code」- 系统内部编码
      */
     @Override
-    public BWeb setCode(String code) {
+    public BWeb setCode(final String code) {
         this.code = code;
         return this;
     }
@@ -125,7 +125,7 @@ public class BWeb implements VertxPojo, IBWeb {
      * Setter for <code>ZDB.B_WEB.BLOCK_ID</code>. 「blockId」- 所属模块ID
      */
     @Override
-    public BWeb setBlockId(String blockId) {
+    public BWeb setBlockId(final String blockId) {
         this.blockId = blockId;
         return this;
     }
@@ -142,7 +142,7 @@ public class BWeb implements VertxPojo, IBWeb {
      * Setter for <code>ZDB.B_WEB.TYPE</code>. 「type」- 类型保留，单独区分
      */
     @Override
-    public BWeb setType(String type) {
+    public BWeb setType(final String type) {
         this.type = type;
         return this;
     }
@@ -159,7 +159,7 @@ public class BWeb implements VertxPojo, IBWeb {
      * Setter for <code>ZDB.B_WEB.LIC_CONTENT</code>. 「licContent」- 内容编码
      */
     @Override
-    public BWeb setLicContent(String licContent) {
+    public BWeb setLicContent(final String licContent) {
         this.licContent = licContent;
         return this;
     }
@@ -176,7 +176,7 @@ public class BWeb implements VertxPojo, IBWeb {
      * Setter for <code>ZDB.B_WEB.LIC_OP</code>. 「licOp」- 界面操作
      */
     @Override
-    public BWeb setLicOp(String licOp) {
+    public BWeb setLicOp(final String licOp) {
         this.licOp = licOp;
         return this;
     }
@@ -195,7 +195,7 @@ public class BWeb implements VertxPojo, IBWeb {
      * 中的记录
      */
     @Override
-    public BWeb setLicModule(String licModule) {
+    public BWeb setLicModule(final String licModule) {
         this.licModule = licModule;
         return this;
     }
@@ -214,7 +214,7 @@ public class BWeb implements VertxPojo, IBWeb {
      * CONTROL 等记录
      */
     @Override
-    public BWeb setLicTpl(String licTpl) {
+    public BWeb setLicTpl(final String licTpl) {
         this.licTpl = licTpl;
         return this;
     }
@@ -231,7 +231,7 @@ public class BWeb implements VertxPojo, IBWeb {
      * Setter for <code>ZDB.B_WEB.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public BWeb setActive(Boolean active) {
+    public BWeb setActive(final Boolean active) {
         this.active = active;
         return this;
     }
@@ -248,7 +248,7 @@ public class BWeb implements VertxPojo, IBWeb {
      * Setter for <code>ZDB.B_WEB.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public BWeb setSigma(String sigma) {
+    public BWeb setSigma(final String sigma) {
         this.sigma = sigma;
         return this;
     }
@@ -265,7 +265,7 @@ public class BWeb implements VertxPojo, IBWeb {
      * Setter for <code>ZDB.B_WEB.METADATA</code>. 「metadata」- 附加配置
      */
     @Override
-    public BWeb setMetadata(String metadata) {
+    public BWeb setMetadata(final String metadata) {
         this.metadata = metadata;
         return this;
     }
@@ -282,13 +282,13 @@ public class BWeb implements VertxPojo, IBWeb {
      * Setter for <code>ZDB.B_WEB.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public BWeb setLanguage(String language) {
+    public BWeb setLanguage(final String language) {
         this.language = language;
         return this;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
@@ -380,7 +380,7 @@ public class BWeb implements VertxPojo, IBWeb {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("BWeb (");
+        final StringBuilder sb = new StringBuilder("BWeb (");
 
         sb.append(key);
         sb.append(", ").append(code);
@@ -404,7 +404,7 @@ public class BWeb implements VertxPojo, IBWeb {
     // -------------------------------------------------------------------------
 
     @Override
-    public void from(IBWeb from) {
+    public void from(final IBWeb from) {
         setKey(from.getKey());
         setCode(from.getCode());
         setBlockId(from.getBlockId());
@@ -420,7 +420,7 @@ public class BWeb implements VertxPojo, IBWeb {
     }
 
     @Override
-    public <E extends IBWeb> E into(E into) {
+    public <E extends IBWeb> E into(final E into) {
         into.from(this);
         return into;
     }

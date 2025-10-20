@@ -163,7 +163,7 @@
         </dependency>
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-extension-runtime-skeleton</artifactId>
+            <artifactId>zero-extension-skeleton</artifactId>
         </dependency>
         <dependency>
             <groupId>io.zerows</groupId>

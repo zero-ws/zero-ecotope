@@ -4,7 +4,7 @@
 package io.zerows.extension.mbse.basement.domain.tables.pojos;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.mbse.basement.domain.tables.interfaces.IMJoin;
 
 /**
@@ -24,7 +24,7 @@ public class MJoin implements VertxPojo, IMJoin {
     public MJoin() {
     }
 
-    public MJoin(IMJoin value) {
+    public MJoin(final IMJoin value) {
         this.model = value.getModel();
         this.entity = value.getEntity();
         this.entityKey = value.getEntityKey();
@@ -33,11 +33,11 @@ public class MJoin implements VertxPojo, IMJoin {
     }
 
     public MJoin(
-        String model,
-        String entity,
-        String entityKey,
-        Integer priority,
-        String namespace
+        final String model,
+        final String entity,
+        final String entityKey,
+        final Integer priority,
+        final String namespace
     ) {
         this.model = model;
         this.entity = entity;
@@ -46,7 +46,7 @@ public class MJoin implements VertxPojo, IMJoin {
         this.namespace = namespace;
     }
 
-    public MJoin(io.vertx.core.json.JsonObject json) {
+    public MJoin(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -63,7 +63,7 @@ public class MJoin implements VertxPojo, IMJoin {
      * Setter for <code>ZDB.M_JOIN.MODEL</code>. 「model」- 模型identifier
      */
     @Override
-    public MJoin setModel(String model) {
+    public MJoin setModel(final String model) {
         this.model = model;
         return this;
     }
@@ -80,7 +80,7 @@ public class MJoin implements VertxPojo, IMJoin {
      * Setter for <code>ZDB.M_JOIN.ENTITY</code>. 「entity」- 实体identifier
      */
     @Override
-    public MJoin setEntity(String entity) {
+    public MJoin setEntity(final String entity) {
         this.entity = entity;
         return this;
     }
@@ -97,7 +97,7 @@ public class MJoin implements VertxPojo, IMJoin {
      * Setter for <code>ZDB.M_JOIN.ENTITY_KEY</code>. 「entityKey」- 实体主键字段名
      */
     @Override
-    public MJoin setEntityKey(String entityKey) {
+    public MJoin setEntityKey(final String entityKey) {
         this.entityKey = entityKey;
         return this;
     }
@@ -114,7 +114,7 @@ public class MJoin implements VertxPojo, IMJoin {
      * Setter for <code>ZDB.M_JOIN.PRIORITY</code>. 「priority」- 优先级
      */
     @Override
-    public MJoin setPriority(Integer priority) {
+    public MJoin setPriority(final Integer priority) {
         this.priority = priority;
         return this;
     }
@@ -131,13 +131,13 @@ public class MJoin implements VertxPojo, IMJoin {
      * Setter for <code>ZDB.M_JOIN.NAMESPACE</code>. 「namespace」- 名空间（和App绑定的）
      */
     @Override
-    public MJoin setNamespace(String namespace) {
+    public MJoin setNamespace(final String namespace) {
         this.namespace = namespace;
         return this;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
@@ -187,7 +187,7 @@ public class MJoin implements VertxPojo, IMJoin {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("MJoin (");
+        final StringBuilder sb = new StringBuilder("MJoin (");
 
         sb.append(model);
         sb.append(", ").append(entity);
@@ -204,7 +204,7 @@ public class MJoin implements VertxPojo, IMJoin {
     // -------------------------------------------------------------------------
 
     @Override
-    public void from(IMJoin from) {
+    public void from(final IMJoin from) {
         setModel(from.getModel());
         setEntity(from.getEntity());
         setEntityKey(from.getEntityKey());
@@ -213,7 +213,7 @@ public class MJoin implements VertxPojo, IMJoin {
     }
 
     @Override
-    public <E extends IMJoin> E into(E into) {
+    public <E extends IMJoin> E into(final E into) {
         into.from(this);
         return into;
     }

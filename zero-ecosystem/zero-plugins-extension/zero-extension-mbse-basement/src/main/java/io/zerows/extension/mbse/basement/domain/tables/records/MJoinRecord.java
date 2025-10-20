@@ -4,7 +4,7 @@
 package io.zerows.extension.mbse.basement.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.mbse.basement.domain.tables.MJoin;
 import io.zerows.extension.mbse.basement.domain.tables.interfaces.IMJoin;
 import org.jooq.Field;
@@ -31,7 +31,7 @@ public class MJoinRecord extends UpdatableRecordImpl<MJoinRecord> implements Ver
     /**
      * Create a detached, initialised MJoinRecord
      */
-    public MJoinRecord(String model, String entity, String entityKey, Integer priority, String namespace) {
+    public MJoinRecord(final String model, final String entity, final String entityKey, final Integer priority, final String namespace) {
         super(MJoin.M_JOIN);
 
         setModel(model);
@@ -45,7 +45,7 @@ public class MJoinRecord extends UpdatableRecordImpl<MJoinRecord> implements Ver
     /**
      * Create a detached, initialised MJoinRecord
      */
-    public MJoinRecord(io.zerows.extension.mbse.basement.domain.tables.pojos.MJoin value) {
+    public MJoinRecord(final io.zerows.extension.mbse.basement.domain.tables.pojos.MJoin value) {
         super(MJoin.M_JOIN);
 
         if (value != null) {
@@ -58,7 +58,7 @@ public class MJoinRecord extends UpdatableRecordImpl<MJoinRecord> implements Ver
         }
     }
 
-    public MJoinRecord(io.vertx.core.json.JsonObject json) {
+    public MJoinRecord(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -75,7 +75,7 @@ public class MJoinRecord extends UpdatableRecordImpl<MJoinRecord> implements Ver
      * Setter for <code>ZDB.M_JOIN.MODEL</code>. 「model」- 模型identifier
      */
     @Override
-    public MJoinRecord setModel(String value) {
+    public MJoinRecord setModel(final String value) {
         set(0, value);
         return this;
     }
@@ -92,7 +92,7 @@ public class MJoinRecord extends UpdatableRecordImpl<MJoinRecord> implements Ver
      * Setter for <code>ZDB.M_JOIN.ENTITY</code>. 「entity」- 实体identifier
      */
     @Override
-    public MJoinRecord setEntity(String value) {
+    public MJoinRecord setEntity(final String value) {
         set(1, value);
         return this;
     }
@@ -109,7 +109,7 @@ public class MJoinRecord extends UpdatableRecordImpl<MJoinRecord> implements Ver
      * Setter for <code>ZDB.M_JOIN.ENTITY_KEY</code>. 「entityKey」- 实体主键字段名
      */
     @Override
-    public MJoinRecord setEntityKey(String value) {
+    public MJoinRecord setEntityKey(final String value) {
         set(2, value);
         return this;
     }
@@ -134,7 +134,7 @@ public class MJoinRecord extends UpdatableRecordImpl<MJoinRecord> implements Ver
      * Setter for <code>ZDB.M_JOIN.PRIORITY</code>. 「priority」- 优先级
      */
     @Override
-    public MJoinRecord setPriority(Integer value) {
+    public MJoinRecord setPriority(final Integer value) {
         set(3, value);
         return this;
     }
@@ -151,7 +151,7 @@ public class MJoinRecord extends UpdatableRecordImpl<MJoinRecord> implements Ver
      * Setter for <code>ZDB.M_JOIN.NAMESPACE</code>. 「namespace」- 名空间（和App绑定的）
      */
     @Override
-    public MJoinRecord setNamespace(String value) {
+    public MJoinRecord setNamespace(final String value) {
         set(4, value);
         return this;
     }
@@ -247,13 +247,13 @@ public class MJoinRecord extends UpdatableRecordImpl<MJoinRecord> implements Ver
     }
 
     @Override
-    public MJoinRecord value1(String value) {
+    public MJoinRecord value1(final String value) {
         setModel(value);
         return this;
     }
 
     @Override
-    public MJoinRecord value2(String value) {
+    public MJoinRecord value2(final String value) {
         setEntity(value);
         return this;
     }
@@ -263,13 +263,13 @@ public class MJoinRecord extends UpdatableRecordImpl<MJoinRecord> implements Ver
     // -------------------------------------------------------------------------
 
     @Override
-    public MJoinRecord value3(String value) {
+    public MJoinRecord value3(final String value) {
         setEntityKey(value);
         return this;
     }
 
     @Override
-    public MJoinRecord value4(Integer value) {
+    public MJoinRecord value4(final Integer value) {
         setPriority(value);
         return this;
     }
@@ -279,13 +279,13 @@ public class MJoinRecord extends UpdatableRecordImpl<MJoinRecord> implements Ver
     // -------------------------------------------------------------------------
 
     @Override
-    public MJoinRecord value5(String value) {
+    public MJoinRecord value5(final String value) {
         setNamespace(value);
         return this;
     }
 
     @Override
-    public MJoinRecord values(String value1, String value2, String value3, Integer value4, String value5) {
+    public MJoinRecord values(final String value1, final String value2, final String value3, final Integer value4, final String value5) {
         value1(value1);
         value2(value2);
         value3(value3);
@@ -295,7 +295,7 @@ public class MJoinRecord extends UpdatableRecordImpl<MJoinRecord> implements Ver
     }
 
     @Override
-    public void from(IMJoin from) {
+    public void from(final IMJoin from) {
         setModel(from.getModel());
         setEntity(from.getEntity());
         setEntityKey(from.getEntityKey());
@@ -305,7 +305,7 @@ public class MJoinRecord extends UpdatableRecordImpl<MJoinRecord> implements Ver
     }
 
     @Override
-    public <E extends IMJoin> E into(E into) {
+    public <E extends IMJoin> E into(final E into) {
         into.from(this);
         return into;
     }

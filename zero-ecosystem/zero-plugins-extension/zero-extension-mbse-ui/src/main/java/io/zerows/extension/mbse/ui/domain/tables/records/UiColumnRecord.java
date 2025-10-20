@@ -4,7 +4,7 @@
 package io.zerows.extension.mbse.ui.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.mbse.ui.domain.tables.UiColumn;
 import io.zerows.extension.mbse.ui.domain.tables.interfaces.IUiColumn;
 import org.jooq.Record1;
@@ -30,7 +30,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
     /**
      * Create a detached, initialised UiColumnRecord
      */
-    public UiColumnRecord(String key, String title, String dataIndex, Integer position, String render, Integer width, Boolean fixed, String className, Boolean sorter, String filterType, String filterConfig, String empty, String mapping, String config, String option, String format, String datum, String controlId, Boolean active, String sigma, String metadata, String language, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public UiColumnRecord(final String key, final String title, final String dataIndex, final Integer position, final String render, final Integer width, final Boolean fixed, final String className, final Boolean sorter, final String filterType, final String filterConfig, final String empty, final String mapping, final String config, final String option, final String format, final String datum, final String controlId, final Boolean active, final String sigma, final String metadata, final String language, final LocalDateTime createdAt, final String createdBy, final LocalDateTime updatedAt, final String updatedBy) {
         super(UiColumn.UI_COLUMN);
 
         setKey(key);
@@ -65,7 +65,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
     /**
      * Create a detached, initialised UiColumnRecord
      */
-    public UiColumnRecord(io.zerows.extension.mbse.ui.domain.tables.pojos.UiColumn value) {
+    public UiColumnRecord(final io.zerows.extension.mbse.ui.domain.tables.pojos.UiColumn value) {
         super(UiColumn.UI_COLUMN);
 
         if (value != null) {
@@ -99,7 +99,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
         }
     }
 
-    public UiColumnRecord(io.vertx.core.json.JsonObject json) {
+    public UiColumnRecord(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -116,7 +116,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
      * Setter for <code>ZDB.UI_COLUMN.KEY</code>. 「key」- 列主键
      */
     @Override
-    public UiColumnRecord setKey(String value) {
+    public UiColumnRecord setKey(final String value) {
         set(0, value);
         return this;
     }
@@ -133,7 +133,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
      * Setter for <code>ZDB.UI_COLUMN.TITLE</code>. 「title」- 列标题
      */
     @Override
-    public UiColumnRecord setTitle(String value) {
+    public UiColumnRecord setTitle(final String value) {
         set(1, value);
         return this;
     }
@@ -150,7 +150,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
      * Setter for <code>ZDB.UI_COLUMN.DATA_INDEX</code>. 「dataIndex」- 列名
      */
     @Override
-    public UiColumnRecord setDataIndex(String value) {
+    public UiColumnRecord setDataIndex(final String value) {
         set(2, value);
         return this;
     }
@@ -167,7 +167,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
      * Setter for <code>ZDB.UI_COLUMN.POSITION</code>. 「position」- 当前列的位置
      */
     @Override
-    public UiColumnRecord setPosition(Integer value) {
+    public UiColumnRecord setPosition(final Integer value) {
         set(3, value);
         return this;
     }
@@ -184,7 +184,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
      * Setter for <code>ZDB.UI_COLUMN.RENDER</code>. 「render」- 使用的Render函数
      */
     @Override
-    public UiColumnRecord setRender(String value) {
+    public UiColumnRecord setRender(final String value) {
         set(4, value);
         return this;
     }
@@ -201,7 +201,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
      * Setter for <code>ZDB.UI_COLUMN.WIDTH</code>. 「width」- 当前列的宽度
      */
     @Override
-    public UiColumnRecord setWidth(Integer value) {
+    public UiColumnRecord setWidth(final Integer value) {
         set(5, value);
         return this;
     }
@@ -218,7 +218,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
      * Setter for <code>ZDB.UI_COLUMN.FIXED</code>. 「fixed」- 当前列是否固定
      */
     @Override
-    public UiColumnRecord setFixed(Boolean value) {
+    public UiColumnRecord setFixed(final Boolean value) {
         set(6, value);
         return this;
     }
@@ -235,7 +235,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
      * Setter for <code>ZDB.UI_COLUMN.CLASS_NAME</code>. 「className」- 当前列的特殊CSS类
      */
     @Override
-    public UiColumnRecord setClassName(String value) {
+    public UiColumnRecord setClassName(final String value) {
         set(7, value);
         return this;
     }
@@ -252,7 +252,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
      * Setter for <code>ZDB.UI_COLUMN.SORTER</code>. 「sorter」- 当前列是否支持排序
      */
     @Override
-    public UiColumnRecord setSorter(Boolean value) {
+    public UiColumnRecord setSorter(final Boolean value) {
         set(8, value);
         return this;
     }
@@ -271,7 +271,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
      * $filter.type 支持列搜索时的搜索类型
      */
     @Override
-    public UiColumnRecord setFilterType(String value) {
+    public UiColumnRecord setFilterType(final String value) {
         set(9, value);
         return this;
     }
@@ -290,7 +290,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
      * $filter.config 列搜索支持时的搜索配置
      */
     @Override
-    public UiColumnRecord setFilterConfig(String value) {
+    public UiColumnRecord setFilterConfig(final String value) {
         set(10, value);
         return this;
     }
@@ -307,7 +307,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
      * Setter for <code>ZDB.UI_COLUMN.EMPTY</code>. 「empty」- $empty 专用
      */
     @Override
-    public UiColumnRecord setEmpty(String value) {
+    public UiColumnRecord setEmpty(final String value) {
         set(11, value);
         return this;
     }
@@ -324,7 +324,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
      * Setter for <code>ZDB.UI_COLUMN.MAPPING</code>. 「mapping」- $mapping专用
      */
     @Override
-    public UiColumnRecord setMapping(String value) {
+    public UiColumnRecord setMapping(final String value) {
         set(12, value);
         return this;
     }
@@ -341,7 +341,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
      * Setter for <code>ZDB.UI_COLUMN.CONFIG</code>. 「config」- $config专用
      */
     @Override
-    public UiColumnRecord setConfig(String value) {
+    public UiColumnRecord setConfig(final String value) {
         set(13, value);
         return this;
     }
@@ -360,7 +360,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
      * $option专用，executor时
      */
     @Override
-    public UiColumnRecord setOption(String value) {
+    public UiColumnRecord setOption(final String value) {
         set(14, value);
         return this;
     }
@@ -377,7 +377,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
      * Setter for <code>ZDB.UI_COLUMN.FORMAT</code>. 「formatFail」- $format时间格式专用
      */
     @Override
-    public UiColumnRecord setFormat(String value) {
+    public UiColumnRecord setFormat(final String value) {
         set(15, value);
         return this;
     }
@@ -394,7 +394,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
      * Setter for <code>ZDB.UI_COLUMN.DATUM</code>. 「datum」- $datum专用
      */
     @Override
-    public UiColumnRecord setDatum(String value) {
+    public UiColumnRecord setDatum(final String value) {
         set(16, value);
         return this;
     }
@@ -411,7 +411,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
      * Setter for <code>ZDB.UI_COLUMN.CONTROL_ID</code>. 「controlId」- 关联的控件ID
      */
     @Override
-    public UiColumnRecord setControlId(String value) {
+    public UiColumnRecord setControlId(final String value) {
         set(17, value);
         return this;
     }
@@ -428,7 +428,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
      * Setter for <code>ZDB.UI_COLUMN.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public UiColumnRecord setActive(Boolean value) {
+    public UiColumnRecord setActive(final Boolean value) {
         set(18, value);
         return this;
     }
@@ -445,7 +445,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
      * Setter for <code>ZDB.UI_COLUMN.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public UiColumnRecord setSigma(String value) {
+    public UiColumnRecord setSigma(final String value) {
         set(19, value);
         return this;
     }
@@ -462,7 +462,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
      * Setter for <code>ZDB.UI_COLUMN.METADATA</code>. 「metadata」- 附加配置
      */
     @Override
-    public UiColumnRecord setMetadata(String value) {
+    public UiColumnRecord setMetadata(final String value) {
         set(20, value);
         return this;
     }
@@ -479,7 +479,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
      * Setter for <code>ZDB.UI_COLUMN.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public UiColumnRecord setLanguage(String value) {
+    public UiColumnRecord setLanguage(final String value) {
         set(21, value);
         return this;
     }
@@ -496,7 +496,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
      * Setter for <code>ZDB.UI_COLUMN.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public UiColumnRecord setCreatedAt(LocalDateTime value) {
+    public UiColumnRecord setCreatedAt(final LocalDateTime value) {
         set(22, value);
         return this;
     }
@@ -513,7 +513,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
      * Setter for <code>ZDB.UI_COLUMN.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public UiColumnRecord setCreatedBy(String value) {
+    public UiColumnRecord setCreatedBy(final String value) {
         set(23, value);
         return this;
     }
@@ -538,7 +538,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
      * Setter for <code>ZDB.UI_COLUMN.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public UiColumnRecord setUpdatedAt(LocalDateTime value) {
+    public UiColumnRecord setUpdatedAt(final LocalDateTime value) {
         set(24, value);
         return this;
     }
@@ -559,7 +559,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
      * Setter for <code>ZDB.UI_COLUMN.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public UiColumnRecord setUpdatedBy(String value) {
+    public UiColumnRecord setUpdatedBy(final String value) {
         set(25, value);
         return this;
     }
@@ -570,7 +570,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
     }
 
     @Override
-    public void from(IUiColumn from) {
+    public void from(final IUiColumn from) {
         setKey(from.getKey());
         setTitle(from.getTitle());
         setDataIndex(from.getDataIndex());
@@ -601,7 +601,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
     }
 
     @Override
-    public <E extends IUiColumn> E into(E into) {
+    public <E extends IUiColumn> E into(final E into) {
         into.from(this);
         return into;
     }

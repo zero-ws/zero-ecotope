@@ -4,7 +4,7 @@
 package io.zerows.extension.runtime.ambient.domain.tables.pojos;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.runtime.ambient.domain.tables.interfaces.IXModule;
 
 import java.time.LocalDateTime;

@@ -4,7 +4,7 @@
 package io.zerows.extension.mbse.basement.domain.tables.pojos;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.mbse.basement.domain.tables.interfaces.IMKey;
 
 import java.time.LocalDateTime;
@@ -35,7 +35,7 @@ public class MKey implements VertxPojo, IMKey {
     public MKey() {
     }
 
-    public MKey(IMKey value) {
+    public MKey(final IMKey value) {
         this.key = value.getKey();
         this.name = value.getName();
         this.type = value.getType();
@@ -53,20 +53,20 @@ public class MKey implements VertxPojo, IMKey {
     }
 
     public MKey(
-        String key,
-        String name,
-        String type,
-        String columns,
-        String entityId,
-        String comments,
-        String sigma,
-        String language,
-        Boolean active,
-        String metadata,
-        LocalDateTime createdAt,
-        String createdBy,
-        LocalDateTime updatedAt,
-        String updatedBy
+        final String key,
+        final String name,
+        final String type,
+        final String columns,
+        final String entityId,
+        final String comments,
+        final String sigma,
+        final String language,
+        final Boolean active,
+        final String metadata,
+        final LocalDateTime createdAt,
+        final String createdBy,
+        final LocalDateTime updatedAt,
+        final String updatedBy
     ) {
         this.key = key;
         this.name = name;
@@ -84,7 +84,7 @@ public class MKey implements VertxPojo, IMKey {
         this.updatedBy = updatedBy;
     }
 
-    public MKey(io.vertx.core.json.JsonObject json) {
+    public MKey(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -101,7 +101,7 @@ public class MKey implements VertxPojo, IMKey {
      * Setter for <code>ZDB.M_KEY.KEY</code>. 「key」- 键ID
      */
     @Override
-    public MKey setKey(String key) {
+    public MKey setKey(final String key) {
         this.key = key;
         return this;
     }
@@ -118,7 +118,7 @@ public class MKey implements VertxPojo, IMKey {
      * Setter for <code>ZDB.M_KEY.NAME</code>. 「name」- 键名称
      */
     @Override
-    public MKey setName(String name) {
+    public MKey setName(final String name) {
         this.name = name;
         return this;
     }
@@ -135,7 +135,7 @@ public class MKey implements VertxPojo, IMKey {
      * Setter for <code>ZDB.M_KEY.TYPE</code>. 「type」- 键类型
      */
     @Override
-    public MKey setType(String type) {
+    public MKey setType(final String type) {
         this.type = type;
         return this;
     }
@@ -152,7 +152,7 @@ public class MKey implements VertxPojo, IMKey {
      * Setter for <code>ZDB.M_KEY.COLUMNS</code>. 「columns」- JsonArray格式，键覆盖的列集合
      */
     @Override
-    public MKey setColumns(String columns) {
+    public MKey setColumns(final String columns) {
         this.columns = columns;
         return this;
     }
@@ -169,7 +169,7 @@ public class MKey implements VertxPojo, IMKey {
      * Setter for <code>ZDB.M_KEY.ENTITY_ID</code>. 「entityId」- 关联的实体ID
      */
     @Override
-    public MKey setEntityId(String entityId) {
+    public MKey setEntityId(final String entityId) {
         this.entityId = entityId;
         return this;
     }
@@ -186,7 +186,7 @@ public class MKey implements VertxPojo, IMKey {
      * Setter for <code>ZDB.M_KEY.COMMENTS</code>. 「comments」- 当前属性的描述信息
      */
     @Override
-    public MKey setComments(String comments) {
+    public MKey setComments(final String comments) {
         this.comments = comments;
         return this;
     }
@@ -203,7 +203,7 @@ public class MKey implements VertxPojo, IMKey {
      * Setter for <code>ZDB.M_KEY.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public MKey setSigma(String sigma) {
+    public MKey setSigma(final String sigma) {
         this.sigma = sigma;
         return this;
     }
@@ -220,7 +220,7 @@ public class MKey implements VertxPojo, IMKey {
      * Setter for <code>ZDB.M_KEY.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public MKey setLanguage(String language) {
+    public MKey setLanguage(final String language) {
         this.language = language;
         return this;
     }
@@ -237,7 +237,7 @@ public class MKey implements VertxPojo, IMKey {
      * Setter for <code>ZDB.M_KEY.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public MKey setActive(Boolean active) {
+    public MKey setActive(final Boolean active) {
         this.active = active;
         return this;
     }
@@ -254,7 +254,7 @@ public class MKey implements VertxPojo, IMKey {
      * Setter for <code>ZDB.M_KEY.METADATA</code>. 「metadata」- 附加配置数据
      */
     @Override
-    public MKey setMetadata(String metadata) {
+    public MKey setMetadata(final String metadata) {
         this.metadata = metadata;
         return this;
     }
@@ -271,7 +271,7 @@ public class MKey implements VertxPojo, IMKey {
      * Setter for <code>ZDB.M_KEY.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public MKey setCreatedAt(LocalDateTime createdAt) {
+    public MKey setCreatedAt(final LocalDateTime createdAt) {
         this.createdAt = createdAt;
         return this;
     }
@@ -288,7 +288,7 @@ public class MKey implements VertxPojo, IMKey {
      * Setter for <code>ZDB.M_KEY.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public MKey setCreatedBy(String createdBy) {
+    public MKey setCreatedBy(final String createdBy) {
         this.createdBy = createdBy;
         return this;
     }
@@ -305,7 +305,7 @@ public class MKey implements VertxPojo, IMKey {
      * Setter for <code>ZDB.M_KEY.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public MKey setUpdatedAt(LocalDateTime updatedAt) {
+    public MKey setUpdatedAt(final LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
         return this;
     }
@@ -322,13 +322,13 @@ public class MKey implements VertxPojo, IMKey {
      * Setter for <code>ZDB.M_KEY.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public MKey setUpdatedBy(String updatedBy) {
+    public MKey setUpdatedBy(final String updatedBy) {
         this.updatedBy = updatedBy;
         return this;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
@@ -432,7 +432,7 @@ public class MKey implements VertxPojo, IMKey {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("MKey (");
+        final StringBuilder sb = new StringBuilder("MKey (");
 
         sb.append(key);
         sb.append(", ").append(name);
@@ -458,7 +458,7 @@ public class MKey implements VertxPojo, IMKey {
     // -------------------------------------------------------------------------
 
     @Override
-    public void from(IMKey from) {
+    public void from(final IMKey from) {
         setKey(from.getKey());
         setName(from.getName());
         setType(from.getType());
@@ -476,7 +476,7 @@ public class MKey implements VertxPojo, IMKey {
     }
 
     @Override
-    public <E extends IMKey> E into(E into) {
+    public <E extends IMKey> E into(final E into) {
         into.from(this);
         return into;
     }

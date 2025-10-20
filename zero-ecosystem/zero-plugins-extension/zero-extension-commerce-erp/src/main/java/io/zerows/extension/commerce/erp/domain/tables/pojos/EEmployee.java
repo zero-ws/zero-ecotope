@@ -4,7 +4,7 @@
 package io.zerows.extension.commerce.erp.domain.tables.pojos;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.commerce.erp.domain.tables.interfaces.IEEmployee;
 
 import java.time.LocalDateTime;
@@ -47,7 +47,7 @@ public class EEmployee implements VertxPojo, IEEmployee {
     public EEmployee() {
     }
 
-    public EEmployee(IEEmployee value) {
+    public EEmployee(final IEEmployee value) {
         this.key = value.getKey();
         this.companyId = value.getCompanyId();
         this.deptId = value.getDeptId();
@@ -77,32 +77,32 @@ public class EEmployee implements VertxPojo, IEEmployee {
     }
 
     public EEmployee(
-        String key,
-        String companyId,
-        String deptId,
-        String teamId,
-        String identityId,
-        String viceName,
-        String viceEmail,
-        String viceMobile,
-        String workNumber,
-        String workTitle,
-        String workLocation,
-        String workPhone,
-        String workExtension,
-        LocalDateTime workHireAt,
-        String bankId,
-        String bankCard,
-        String type,
-        String status,
-        String metadata,
-        Boolean active,
-        String sigma,
-        String language,
-        LocalDateTime createdAt,
-        String createdBy,
-        LocalDateTime updatedAt,
-        String updatedBy
+        final String key,
+        final String companyId,
+        final String deptId,
+        final String teamId,
+        final String identityId,
+        final String viceName,
+        final String viceEmail,
+        final String viceMobile,
+        final String workNumber,
+        final String workTitle,
+        final String workLocation,
+        final String workPhone,
+        final String workExtension,
+        final LocalDateTime workHireAt,
+        final String bankId,
+        final String bankCard,
+        final String type,
+        final String status,
+        final String metadata,
+        final Boolean active,
+        final String sigma,
+        final String language,
+        final LocalDateTime createdAt,
+        final String createdBy,
+        final LocalDateTime updatedAt,
+        final String updatedBy
     ) {
         this.key = key;
         this.companyId = companyId;
@@ -132,7 +132,7 @@ public class EEmployee implements VertxPojo, IEEmployee {
         this.updatedBy = updatedBy;
     }
 
-    public EEmployee(io.vertx.core.json.JsonObject json) {
+    public EEmployee(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -149,7 +149,7 @@ public class EEmployee implements VertxPojo, IEEmployee {
      * Setter for <code>ZDB.E_EMPLOYEE.KEY</code>. 「key」- 员工主键
      */
     @Override
-    public EEmployee setKey(String key) {
+    public EEmployee setKey(final String key) {
         this.key = key;
         return this;
     }
@@ -166,7 +166,7 @@ public class EEmployee implements VertxPojo, IEEmployee {
      * Setter for <code>ZDB.E_EMPLOYEE.COMPANY_ID</code>. 「companyId」- 所属公司
      */
     @Override
-    public EEmployee setCompanyId(String companyId) {
+    public EEmployee setCompanyId(final String companyId) {
         this.companyId = companyId;
         return this;
     }
@@ -183,7 +183,7 @@ public class EEmployee implements VertxPojo, IEEmployee {
      * Setter for <code>ZDB.E_EMPLOYEE.DEPT_ID</code>. 「deptId」- 所属部门
      */
     @Override
-    public EEmployee setDeptId(String deptId) {
+    public EEmployee setDeptId(final String deptId) {
         this.deptId = deptId;
         return this;
     }
@@ -200,7 +200,7 @@ public class EEmployee implements VertxPojo, IEEmployee {
      * Setter for <code>ZDB.E_EMPLOYEE.TEAM_ID</code>. 「teamId」- 所属组
      */
     @Override
-    public EEmployee setTeamId(String teamId) {
+    public EEmployee setTeamId(final String teamId) {
         this.teamId = teamId;
         return this;
     }
@@ -217,7 +217,7 @@ public class EEmployee implements VertxPojo, IEEmployee {
      * Setter for <code>ZDB.E_EMPLOYEE.IDENTITY_ID</code>. 「identityId」- 关联档案
      */
     @Override
-    public EEmployee setIdentityId(String identityId) {
+    public EEmployee setIdentityId(final String identityId) {
         this.identityId = identityId;
         return this;
     }
@@ -234,7 +234,7 @@ public class EEmployee implements VertxPojo, IEEmployee {
      * Setter for <code>ZDB.E_EMPLOYEE.VICE_NAME</code>. 「viceName」- 员工姓名
      */
     @Override
-    public EEmployee setViceName(String viceName) {
+    public EEmployee setViceName(final String viceName) {
         this.viceName = viceName;
         return this;
     }
@@ -251,7 +251,7 @@ public class EEmployee implements VertxPojo, IEEmployee {
      * Setter for <code>ZDB.E_EMPLOYEE.VICE_EMAIL</code>. 「viceEmail」- 员工邮箱
      */
     @Override
-    public EEmployee setViceEmail(String viceEmail) {
+    public EEmployee setViceEmail(final String viceEmail) {
         this.viceEmail = viceEmail;
         return this;
     }
@@ -268,7 +268,7 @@ public class EEmployee implements VertxPojo, IEEmployee {
      * Setter for <code>ZDB.E_EMPLOYEE.VICE_MOBILE</code>. 「viceMobile」- 员工手机
      */
     @Override
-    public EEmployee setViceMobile(String viceMobile) {
+    public EEmployee setViceMobile(final String viceMobile) {
         this.viceMobile = viceMobile;
         return this;
     }
@@ -285,7 +285,7 @@ public class EEmployee implements VertxPojo, IEEmployee {
      * Setter for <code>ZDB.E_EMPLOYEE.WORK_NUMBER</code>. 「workNumber」- 工号
      */
     @Override
-    public EEmployee setWorkNumber(String workNumber) {
+    public EEmployee setWorkNumber(final String workNumber) {
         this.workNumber = workNumber;
         return this;
     }
@@ -302,7 +302,7 @@ public class EEmployee implements VertxPojo, IEEmployee {
      * Setter for <code>ZDB.E_EMPLOYEE.WORK_TITLE</code>. 「workTitle」- 头衔
      */
     @Override
-    public EEmployee setWorkTitle(String workTitle) {
+    public EEmployee setWorkTitle(final String workTitle) {
         this.workTitle = workTitle;
         return this;
     }
@@ -321,7 +321,7 @@ public class EEmployee implements VertxPojo, IEEmployee {
      * 办公地点
      */
     @Override
-    public EEmployee setWorkLocation(String workLocation) {
+    public EEmployee setWorkLocation(final String workLocation) {
         this.workLocation = workLocation;
         return this;
     }
@@ -338,7 +338,7 @@ public class EEmployee implements VertxPojo, IEEmployee {
      * Setter for <code>ZDB.E_EMPLOYEE.WORK_PHONE</code>. 「workPhone」- 办公电话
      */
     @Override
-    public EEmployee setWorkPhone(String workPhone) {
+    public EEmployee setWorkPhone(final String workPhone) {
         this.workPhone = workPhone;
         return this;
     }
@@ -357,7 +357,7 @@ public class EEmployee implements VertxPojo, IEEmployee {
      * 分机号
      */
     @Override
-    public EEmployee setWorkExtension(String workExtension) {
+    public EEmployee setWorkExtension(final String workExtension) {
         this.workExtension = workExtension;
         return this;
     }
@@ -374,7 +374,7 @@ public class EEmployee implements VertxPojo, IEEmployee {
      * Setter for <code>ZDB.E_EMPLOYEE.WORK_HIRE_AT</code>. 「workHireAt」- 入职时间
      */
     @Override
-    public EEmployee setWorkHireAt(LocalDateTime workHireAt) {
+    public EEmployee setWorkHireAt(final LocalDateTime workHireAt) {
         this.workHireAt = workHireAt;
         return this;
     }
@@ -391,7 +391,7 @@ public class EEmployee implements VertxPojo, IEEmployee {
      * Setter for <code>ZDB.E_EMPLOYEE.BANK_ID</code>. 「bankId」- 开户行
      */
     @Override
-    public EEmployee setBankId(String bankId) {
+    public EEmployee setBankId(final String bankId) {
         this.bankId = bankId;
         return this;
     }
@@ -408,7 +408,7 @@ public class EEmployee implements VertxPojo, IEEmployee {
      * Setter for <code>ZDB.E_EMPLOYEE.BANK_CARD</code>. 「bankCard」- 开户行账号
      */
     @Override
-    public EEmployee setBankCard(String bankCard) {
+    public EEmployee setBankCard(final String bankCard) {
         this.bankCard = bankCard;
         return this;
     }
@@ -425,7 +425,7 @@ public class EEmployee implements VertxPojo, IEEmployee {
      * Setter for <code>ZDB.E_EMPLOYEE.TYPE</code>. 「type」- 员工分类
      */
     @Override
-    public EEmployee setType(String type) {
+    public EEmployee setType(final String type) {
         this.type = type;
         return this;
     }
@@ -442,7 +442,7 @@ public class EEmployee implements VertxPojo, IEEmployee {
      * Setter for <code>ZDB.E_EMPLOYEE.STATUS</code>. 「status」- 员工状态
      */
     @Override
-    public EEmployee setStatus(String status) {
+    public EEmployee setStatus(final String status) {
         this.status = status;
         return this;
     }
@@ -459,7 +459,7 @@ public class EEmployee implements VertxPojo, IEEmployee {
      * Setter for <code>ZDB.E_EMPLOYEE.METADATA</code>. 「metadata」- 附加配置
      */
     @Override
-    public EEmployee setMetadata(String metadata) {
+    public EEmployee setMetadata(final String metadata) {
         this.metadata = metadata;
         return this;
     }
@@ -476,7 +476,7 @@ public class EEmployee implements VertxPojo, IEEmployee {
      * Setter for <code>ZDB.E_EMPLOYEE.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public EEmployee setActive(Boolean active) {
+    public EEmployee setActive(final Boolean active) {
         this.active = active;
         return this;
     }
@@ -493,7 +493,7 @@ public class EEmployee implements VertxPojo, IEEmployee {
      * Setter for <code>ZDB.E_EMPLOYEE.SIGMA</code>. 「sigma」- 统一标识（公司所属应用）
      */
     @Override
-    public EEmployee setSigma(String sigma) {
+    public EEmployee setSigma(final String sigma) {
         this.sigma = sigma;
         return this;
     }
@@ -510,7 +510,7 @@ public class EEmployee implements VertxPojo, IEEmployee {
      * Setter for <code>ZDB.E_EMPLOYEE.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public EEmployee setLanguage(String language) {
+    public EEmployee setLanguage(final String language) {
         this.language = language;
         return this;
     }
@@ -527,7 +527,7 @@ public class EEmployee implements VertxPojo, IEEmployee {
      * Setter for <code>ZDB.E_EMPLOYEE.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public EEmployee setCreatedAt(LocalDateTime createdAt) {
+    public EEmployee setCreatedAt(final LocalDateTime createdAt) {
         this.createdAt = createdAt;
         return this;
     }
@@ -544,7 +544,7 @@ public class EEmployee implements VertxPojo, IEEmployee {
      * Setter for <code>ZDB.E_EMPLOYEE.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public EEmployee setCreatedBy(String createdBy) {
+    public EEmployee setCreatedBy(final String createdBy) {
         this.createdBy = createdBy;
         return this;
     }
@@ -561,7 +561,7 @@ public class EEmployee implements VertxPojo, IEEmployee {
      * Setter for <code>ZDB.E_EMPLOYEE.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public EEmployee setUpdatedAt(LocalDateTime updatedAt) {
+    public EEmployee setUpdatedAt(final LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
         return this;
     }
@@ -578,13 +578,13 @@ public class EEmployee implements VertxPojo, IEEmployee {
      * Setter for <code>ZDB.E_EMPLOYEE.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public EEmployee setUpdatedBy(String updatedBy) {
+    public EEmployee setUpdatedBy(final String updatedBy) {
         this.updatedBy = updatedBy;
         return this;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
@@ -760,7 +760,7 @@ public class EEmployee implements VertxPojo, IEEmployee {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("EEmployee (");
+        final StringBuilder sb = new StringBuilder("EEmployee (");
 
         sb.append(key);
         sb.append(", ").append(companyId);
@@ -798,7 +798,7 @@ public class EEmployee implements VertxPojo, IEEmployee {
     // -------------------------------------------------------------------------
 
     @Override
-    public void from(IEEmployee from) {
+    public void from(final IEEmployee from) {
         setKey(from.getKey());
         setCompanyId(from.getCompanyId());
         setDeptId(from.getDeptId());
@@ -828,7 +828,7 @@ public class EEmployee implements VertxPojo, IEEmployee {
     }
 
     @Override
-    public <E extends IEEmployee> E into(E into) {
+    public <E extends IEEmployee> E into(final E into) {
         into.from(this);
         return into;
     }

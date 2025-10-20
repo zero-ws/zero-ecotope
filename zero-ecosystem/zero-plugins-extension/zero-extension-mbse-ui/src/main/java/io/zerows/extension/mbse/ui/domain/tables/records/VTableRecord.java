@@ -4,7 +4,7 @@
 package io.zerows.extension.mbse.ui.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.mbse.ui.domain.tables.VTable;
 import io.zerows.extension.mbse.ui.domain.tables.interfaces.IVTable;
 import org.jooq.Field;
@@ -31,7 +31,7 @@ public class VTableRecord extends UpdatableRecordImpl<VTableRecord> implements V
     /**
      * Create a detached, initialised VTableRecord
      */
-    public VTableRecord(String key, Boolean bordered, String size, String className, String totalReport, String totalSelected, String rowDoubleClick, String rowClick, String rowContextMenu, String rowMouseEnter, String rowMouseLeave, String opTitle, String opDataIndex, Boolean opFixed, String opConfig) {
+    public VTableRecord(final String key, final Boolean bordered, final String size, final String className, final String totalReport, final String totalSelected, final String rowDoubleClick, final String rowClick, final String rowContextMenu, final String rowMouseEnter, final String rowMouseLeave, final String opTitle, final String opDataIndex, final Boolean opFixed, final String opConfig) {
         super(VTable.V_TABLE);
 
         setKey(key);
@@ -55,7 +55,7 @@ public class VTableRecord extends UpdatableRecordImpl<VTableRecord> implements V
     /**
      * Create a detached, initialised VTableRecord
      */
-    public VTableRecord(io.zerows.extension.mbse.ui.domain.tables.pojos.VTable value) {
+    public VTableRecord(final io.zerows.extension.mbse.ui.domain.tables.pojos.VTable value) {
         super(VTable.V_TABLE);
 
         if (value != null) {
@@ -78,7 +78,7 @@ public class VTableRecord extends UpdatableRecordImpl<VTableRecord> implements V
         }
     }
 
-    public VTableRecord(io.vertx.core.json.JsonObject json) {
+    public VTableRecord(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -95,7 +95,7 @@ public class VTableRecord extends UpdatableRecordImpl<VTableRecord> implements V
      * Setter for <code>ZDB.V_TABLE.KEY</code>. 「key」- 表选项主键
      */
     @Override
-    public VTableRecord setKey(String value) {
+    public VTableRecord setKey(final String value) {
         set(0, value);
         return this;
     }
@@ -112,7 +112,7 @@ public class VTableRecord extends UpdatableRecordImpl<VTableRecord> implements V
      * Setter for <code>ZDB.V_TABLE.BORDERED</code>. 「bordered」- 是否带表框
      */
     @Override
-    public VTableRecord setBordered(Boolean value) {
+    public VTableRecord setBordered(final Boolean value) {
         set(1, value);
         return this;
     }
@@ -129,7 +129,7 @@ public class VTableRecord extends UpdatableRecordImpl<VTableRecord> implements V
      * Setter for <code>ZDB.V_TABLE.SIZE</code>. 「size」- 表格尺寸
      */
     @Override
-    public VTableRecord setSize(String value) {
+    public VTableRecord setSize(final String value) {
         set(2, value);
         return this;
     }
@@ -146,7 +146,7 @@ public class VTableRecord extends UpdatableRecordImpl<VTableRecord> implements V
      * Setter for <code>ZDB.V_TABLE.CLASS_NAME</code>. 「className」- CSS属性
      */
     @Override
-    public VTableRecord setClassName(String value) {
+    public VTableRecord setClassName(final String value) {
         set(3, value);
         return this;
     }
@@ -165,7 +165,7 @@ public class VTableRecord extends UpdatableRecordImpl<VTableRecord> implements V
      * total.report - 文字: 总共多少条统计
      */
     @Override
-    public VTableRecord setTotalReport(String value) {
+    public VTableRecord setTotalReport(final String value) {
         set(4, value);
         return this;
     }
@@ -184,7 +184,7 @@ public class VTableRecord extends UpdatableRecordImpl<VTableRecord> implements V
      * total.selected - 文字: 选择了多少条
      */
     @Override
-    public VTableRecord setTotalSelected(String value) {
+    public VTableRecord setTotalSelected(final String value) {
         set(5, value);
         return this;
     }
@@ -203,7 +203,7 @@ public class VTableRecord extends UpdatableRecordImpl<VTableRecord> implements V
      * row.onDoubleClick - 双击事件名
      */
     @Override
-    public VTableRecord setRowDoubleClick(String value) {
+    public VTableRecord setRowDoubleClick(final String value) {
         set(6, value);
         return this;
     }
@@ -222,7 +222,7 @@ public class VTableRecord extends UpdatableRecordImpl<VTableRecord> implements V
      * 单击事件名
      */
     @Override
-    public VTableRecord setRowClick(String value) {
+    public VTableRecord setRowClick(final String value) {
         set(7, value);
         return this;
     }
@@ -241,7 +241,7 @@ public class VTableRecord extends UpdatableRecordImpl<VTableRecord> implements V
      * row.onContextMenu - 右键菜单事件名
      */
     @Override
-    public VTableRecord setRowContextMenu(String value) {
+    public VTableRecord setRowContextMenu(final String value) {
         set(8, value);
         return this;
     }
@@ -260,7 +260,7 @@ public class VTableRecord extends UpdatableRecordImpl<VTableRecord> implements V
      * row.onMouseEnter - 鼠标左键事件名
      */
     @Override
-    public VTableRecord setRowMouseEnter(String value) {
+    public VTableRecord setRowMouseEnter(final String value) {
         set(9, value);
         return this;
     }
@@ -279,7 +279,7 @@ public class VTableRecord extends UpdatableRecordImpl<VTableRecord> implements V
      * row.onMouseLeave - 鼠标移开事件名
      */
     @Override
-    public VTableRecord setRowMouseLeave(String value) {
+    public VTableRecord setRowMouseLeave(final String value) {
         set(10, value);
         return this;
     }
@@ -298,7 +298,7 @@ public class VTableRecord extends UpdatableRecordImpl<VTableRecord> implements V
      * columns/[0]/title, 执行列标题
      */
     @Override
-    public VTableRecord setOpTitle(String value) {
+    public VTableRecord setOpTitle(final String value) {
         set(11, value);
         return this;
     }
@@ -317,7 +317,7 @@ public class VTableRecord extends UpdatableRecordImpl<VTableRecord> implements V
      * columns/[0]/dataIndex, 执行列标题
      */
     @Override
-    public VTableRecord setOpDataIndex(String value) {
+    public VTableRecord setOpDataIndex(final String value) {
         set(12, value);
         return this;
     }
@@ -344,7 +344,7 @@ public class VTableRecord extends UpdatableRecordImpl<VTableRecord> implements V
      * columns/[0]/fixed，执行列左还是右
      */
     @Override
-    public VTableRecord setOpFixed(Boolean value) {
+    public VTableRecord setOpFixed(final Boolean value) {
         set(13, value);
         return this;
     }
@@ -363,7 +363,7 @@ public class VTableRecord extends UpdatableRecordImpl<VTableRecord> implements V
      * columns/[0]/$option, 执行类对应配置，配置按钮
      */
     @Override
-    public VTableRecord setOpConfig(String value) {
+    public VTableRecord setOpConfig(final String value) {
         set(14, value);
         return this;
     }
@@ -609,73 +609,73 @@ public class VTableRecord extends UpdatableRecordImpl<VTableRecord> implements V
     }
 
     @Override
-    public VTableRecord value1(String value) {
+    public VTableRecord value1(final String value) {
         setKey(value);
         return this;
     }
 
     @Override
-    public VTableRecord value2(Boolean value) {
+    public VTableRecord value2(final Boolean value) {
         setBordered(value);
         return this;
     }
 
     @Override
-    public VTableRecord value3(String value) {
+    public VTableRecord value3(final String value) {
         setSize(value);
         return this;
     }
 
     @Override
-    public VTableRecord value4(String value) {
+    public VTableRecord value4(final String value) {
         setClassName(value);
         return this;
     }
 
     @Override
-    public VTableRecord value5(String value) {
+    public VTableRecord value5(final String value) {
         setTotalReport(value);
         return this;
     }
 
     @Override
-    public VTableRecord value6(String value) {
+    public VTableRecord value6(final String value) {
         setTotalSelected(value);
         return this;
     }
 
     @Override
-    public VTableRecord value7(String value) {
+    public VTableRecord value7(final String value) {
         setRowDoubleClick(value);
         return this;
     }
 
     @Override
-    public VTableRecord value8(String value) {
+    public VTableRecord value8(final String value) {
         setRowClick(value);
         return this;
     }
 
     @Override
-    public VTableRecord value9(String value) {
+    public VTableRecord value9(final String value) {
         setRowContextMenu(value);
         return this;
     }
 
     @Override
-    public VTableRecord value10(String value) {
+    public VTableRecord value10(final String value) {
         setRowMouseEnter(value);
         return this;
     }
 
     @Override
-    public VTableRecord value11(String value) {
+    public VTableRecord value11(final String value) {
         setRowMouseLeave(value);
         return this;
     }
 
     @Override
-    public VTableRecord value12(String value) {
+    public VTableRecord value12(final String value) {
         setOpTitle(value);
         return this;
     }
@@ -685,13 +685,13 @@ public class VTableRecord extends UpdatableRecordImpl<VTableRecord> implements V
     // -------------------------------------------------------------------------
 
     @Override
-    public VTableRecord value13(String value) {
+    public VTableRecord value13(final String value) {
         setOpDataIndex(value);
         return this;
     }
 
     @Override
-    public VTableRecord value14(Boolean value) {
+    public VTableRecord value14(final Boolean value) {
         setOpFixed(value);
         return this;
     }
@@ -701,13 +701,13 @@ public class VTableRecord extends UpdatableRecordImpl<VTableRecord> implements V
     // -------------------------------------------------------------------------
 
     @Override
-    public VTableRecord value15(String value) {
+    public VTableRecord value15(final String value) {
         setOpConfig(value);
         return this;
     }
 
     @Override
-    public VTableRecord values(String value1, Boolean value2, String value3, String value4, String value5, String value6, String value7, String value8, String value9, String value10, String value11, String value12, String value13, Boolean value14, String value15) {
+    public VTableRecord values(final String value1, final Boolean value2, final String value3, final String value4, final String value5, final String value6, final String value7, final String value8, final String value9, final String value10, final String value11, final String value12, final String value13, final Boolean value14, final String value15) {
         value1(value1);
         value2(value2);
         value3(value3);
@@ -727,7 +727,7 @@ public class VTableRecord extends UpdatableRecordImpl<VTableRecord> implements V
     }
 
     @Override
-    public void from(IVTable from) {
+    public void from(final IVTable from) {
         setKey(from.getKey());
         setBordered(from.getBordered());
         setSize(from.getSize());
@@ -747,7 +747,7 @@ public class VTableRecord extends UpdatableRecordImpl<VTableRecord> implements V
     }
 
     @Override
-    public <E extends IVTable> E into(E into) {
+    public <E extends IVTable> E into(final E into) {
         into.from(this);
         return into;
     }

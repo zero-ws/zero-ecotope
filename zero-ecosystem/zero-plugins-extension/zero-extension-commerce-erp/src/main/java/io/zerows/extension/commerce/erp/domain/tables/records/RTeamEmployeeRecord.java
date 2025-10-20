@@ -4,7 +4,7 @@
 package io.zerows.extension.commerce.erp.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.commerce.erp.domain.tables.RTeamEmployee;
 import io.zerows.extension.commerce.erp.domain.tables.interfaces.IRTeamEmployee;
 import org.jooq.Field;
@@ -31,7 +31,7 @@ public class RTeamEmployeeRecord extends UpdatableRecordImpl<RTeamEmployeeRecord
     /**
      * Create a detached, initialised RTeamEmployeeRecord
      */
-    public RTeamEmployeeRecord(String teamId, String employeeId, String linkComponent, String comment) {
+    public RTeamEmployeeRecord(final String teamId, final String employeeId, final String linkComponent, final String comment) {
         super(RTeamEmployee.R_TEAM_EMPLOYEE);
 
         setTeamId(teamId);
@@ -44,7 +44,7 @@ public class RTeamEmployeeRecord extends UpdatableRecordImpl<RTeamEmployeeRecord
     /**
      * Create a detached, initialised RTeamEmployeeRecord
      */
-    public RTeamEmployeeRecord(io.zerows.extension.commerce.erp.domain.tables.pojos.RTeamEmployee value) {
+    public RTeamEmployeeRecord(final io.zerows.extension.commerce.erp.domain.tables.pojos.RTeamEmployee value) {
         super(RTeamEmployee.R_TEAM_EMPLOYEE);
 
         if (value != null) {
@@ -56,7 +56,7 @@ public class RTeamEmployeeRecord extends UpdatableRecordImpl<RTeamEmployeeRecord
         }
     }
 
-    public RTeamEmployeeRecord(io.vertx.core.json.JsonObject json) {
+    public RTeamEmployeeRecord(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -73,7 +73,7 @@ public class RTeamEmployeeRecord extends UpdatableRecordImpl<RTeamEmployeeRecord
      * Setter for <code>ZDB.R_TEAM_EMPLOYEE.TEAM_ID</code>. 「teamId」- 组的ID
      */
     @Override
-    public RTeamEmployeeRecord setTeamId(String value) {
+    public RTeamEmployeeRecord setTeamId(final String value) {
         set(0, value);
         return this;
     }
@@ -92,7 +92,7 @@ public class RTeamEmployeeRecord extends UpdatableRecordImpl<RTeamEmployeeRecord
      * 员工ID
      */
     @Override
-    public RTeamEmployeeRecord setEmployeeId(String value) {
+    public RTeamEmployeeRecord setEmployeeId(final String value) {
         set(1, value);
         return this;
     }
@@ -119,7 +119,7 @@ public class RTeamEmployeeRecord extends UpdatableRecordImpl<RTeamEmployeeRecord
      * 「linkComponent」- 关联执行组件（扩展用）
      */
     @Override
-    public RTeamEmployeeRecord setLinkComponent(String value) {
+    public RTeamEmployeeRecord setLinkComponent(final String value) {
         set(2, value);
         return this;
     }
@@ -136,7 +136,7 @@ public class RTeamEmployeeRecord extends UpdatableRecordImpl<RTeamEmployeeRecord
      * Setter for <code>ZDB.R_TEAM_EMPLOYEE.COMMENT</code>. 「comment」- 关系备注
      */
     @Override
-    public RTeamEmployeeRecord setComment(String value) {
+    public RTeamEmployeeRecord setComment(final String value) {
         set(3, value);
         return this;
     }
@@ -217,7 +217,7 @@ public class RTeamEmployeeRecord extends UpdatableRecordImpl<RTeamEmployeeRecord
     }
 
     @Override
-    public RTeamEmployeeRecord value1(String value) {
+    public RTeamEmployeeRecord value1(final String value) {
         setTeamId(value);
         return this;
     }
@@ -227,13 +227,13 @@ public class RTeamEmployeeRecord extends UpdatableRecordImpl<RTeamEmployeeRecord
     // -------------------------------------------------------------------------
 
     @Override
-    public RTeamEmployeeRecord value2(String value) {
+    public RTeamEmployeeRecord value2(final String value) {
         setEmployeeId(value);
         return this;
     }
 
     @Override
-    public RTeamEmployeeRecord value3(String value) {
+    public RTeamEmployeeRecord value3(final String value) {
         setLinkComponent(value);
         return this;
     }
@@ -243,13 +243,13 @@ public class RTeamEmployeeRecord extends UpdatableRecordImpl<RTeamEmployeeRecord
     // -------------------------------------------------------------------------
 
     @Override
-    public RTeamEmployeeRecord value4(String value) {
+    public RTeamEmployeeRecord value4(final String value) {
         setComment(value);
         return this;
     }
 
     @Override
-    public RTeamEmployeeRecord values(String value1, String value2, String value3, String value4) {
+    public RTeamEmployeeRecord values(final String value1, final String value2, final String value3, final String value4) {
         value1(value1);
         value2(value2);
         value3(value3);
@@ -258,7 +258,7 @@ public class RTeamEmployeeRecord extends UpdatableRecordImpl<RTeamEmployeeRecord
     }
 
     @Override
-    public void from(IRTeamEmployee from) {
+    public void from(final IRTeamEmployee from) {
         setTeamId(from.getTeamId());
         setEmployeeId(from.getEmployeeId());
         setLinkComponent(from.getLinkComponent());
@@ -267,7 +267,7 @@ public class RTeamEmployeeRecord extends UpdatableRecordImpl<RTeamEmployeeRecord
     }
 
     @Override
-    public <E extends IRTeamEmployee> E into(E into) {
+    public <E extends IRTeamEmployee> E into(final E into) {
         into.from(this);
         return into;
     }

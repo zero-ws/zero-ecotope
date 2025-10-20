@@ -4,7 +4,7 @@
 package io.zerows.extension.mbse.ui.domain.tables.pojos;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.mbse.ui.domain.tables.interfaces.IUiColumn;
 
 import java.time.LocalDateTime;
@@ -47,7 +47,7 @@ public class UiColumn implements VertxPojo, IUiColumn {
     public UiColumn() {
     }
 
-    public UiColumn(IUiColumn value) {
+    public UiColumn(final IUiColumn value) {
         this.key = value.getKey();
         this.title = value.getTitle();
         this.dataIndex = value.getDataIndex();
@@ -77,32 +77,32 @@ public class UiColumn implements VertxPojo, IUiColumn {
     }
 
     public UiColumn(
-        String key,
-        String title,
-        String dataIndex,
-        Integer position,
-        String render,
-        Integer width,
-        Boolean fixed,
-        String className,
-        Boolean sorter,
-        String filterType,
-        String filterConfig,
-        String empty,
-        String mapping,
-        String config,
-        String option,
-        String format,
-        String datum,
-        String controlId,
-        Boolean active,
-        String sigma,
-        String metadata,
-        String language,
-        LocalDateTime createdAt,
-        String createdBy,
-        LocalDateTime updatedAt,
-        String updatedBy
+        final String key,
+        final String title,
+        final String dataIndex,
+        final Integer position,
+        final String render,
+        final Integer width,
+        final Boolean fixed,
+        final String className,
+        final Boolean sorter,
+        final String filterType,
+        final String filterConfig,
+        final String empty,
+        final String mapping,
+        final String config,
+        final String option,
+        final String format,
+        final String datum,
+        final String controlId,
+        final Boolean active,
+        final String sigma,
+        final String metadata,
+        final String language,
+        final LocalDateTime createdAt,
+        final String createdBy,
+        final LocalDateTime updatedAt,
+        final String updatedBy
     ) {
         this.key = key;
         this.title = title;
@@ -132,7 +132,7 @@ public class UiColumn implements VertxPojo, IUiColumn {
         this.updatedBy = updatedBy;
     }
 
-    public UiColumn(io.vertx.core.json.JsonObject json) {
+    public UiColumn(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -149,7 +149,7 @@ public class UiColumn implements VertxPojo, IUiColumn {
      * Setter for <code>ZDB.UI_COLUMN.KEY</code>. 「key」- 列主键
      */
     @Override
-    public UiColumn setKey(String key) {
+    public UiColumn setKey(final String key) {
         this.key = key;
         return this;
     }
@@ -166,7 +166,7 @@ public class UiColumn implements VertxPojo, IUiColumn {
      * Setter for <code>ZDB.UI_COLUMN.TITLE</code>. 「title」- 列标题
      */
     @Override
-    public UiColumn setTitle(String title) {
+    public UiColumn setTitle(final String title) {
         this.title = title;
         return this;
     }
@@ -183,7 +183,7 @@ public class UiColumn implements VertxPojo, IUiColumn {
      * Setter for <code>ZDB.UI_COLUMN.DATA_INDEX</code>. 「dataIndex」- 列名
      */
     @Override
-    public UiColumn setDataIndex(String dataIndex) {
+    public UiColumn setDataIndex(final String dataIndex) {
         this.dataIndex = dataIndex;
         return this;
     }
@@ -200,7 +200,7 @@ public class UiColumn implements VertxPojo, IUiColumn {
      * Setter for <code>ZDB.UI_COLUMN.POSITION</code>. 「position」- 当前列的位置
      */
     @Override
-    public UiColumn setPosition(Integer position) {
+    public UiColumn setPosition(final Integer position) {
         this.position = position;
         return this;
     }
@@ -217,7 +217,7 @@ public class UiColumn implements VertxPojo, IUiColumn {
      * Setter for <code>ZDB.UI_COLUMN.RENDER</code>. 「render」- 使用的Render函数
      */
     @Override
-    public UiColumn setRender(String render) {
+    public UiColumn setRender(final String render) {
         this.render = render;
         return this;
     }
@@ -234,7 +234,7 @@ public class UiColumn implements VertxPojo, IUiColumn {
      * Setter for <code>ZDB.UI_COLUMN.WIDTH</code>. 「width」- 当前列的宽度
      */
     @Override
-    public UiColumn setWidth(Integer width) {
+    public UiColumn setWidth(final Integer width) {
         this.width = width;
         return this;
     }
@@ -251,7 +251,7 @@ public class UiColumn implements VertxPojo, IUiColumn {
      * Setter for <code>ZDB.UI_COLUMN.FIXED</code>. 「fixed」- 当前列是否固定
      */
     @Override
-    public UiColumn setFixed(Boolean fixed) {
+    public UiColumn setFixed(final Boolean fixed) {
         this.fixed = fixed;
         return this;
     }
@@ -268,7 +268,7 @@ public class UiColumn implements VertxPojo, IUiColumn {
      * Setter for <code>ZDB.UI_COLUMN.CLASS_NAME</code>. 「className」- 当前列的特殊CSS类
      */
     @Override
-    public UiColumn setClassName(String className) {
+    public UiColumn setClassName(final String className) {
         this.className = className;
         return this;
     }
@@ -285,7 +285,7 @@ public class UiColumn implements VertxPojo, IUiColumn {
      * Setter for <code>ZDB.UI_COLUMN.SORTER</code>. 「sorter」- 当前列是否支持排序
      */
     @Override
-    public UiColumn setSorter(Boolean sorter) {
+    public UiColumn setSorter(final Boolean sorter) {
         this.sorter = sorter;
         return this;
     }
@@ -304,7 +304,7 @@ public class UiColumn implements VertxPojo, IUiColumn {
      * $filter.type 支持列搜索时的搜索类型
      */
     @Override
-    public UiColumn setFilterType(String filterType) {
+    public UiColumn setFilterType(final String filterType) {
         this.filterType = filterType;
         return this;
     }
@@ -323,7 +323,7 @@ public class UiColumn implements VertxPojo, IUiColumn {
      * $filter.config 列搜索支持时的搜索配置
      */
     @Override
-    public UiColumn setFilterConfig(String filterConfig) {
+    public UiColumn setFilterConfig(final String filterConfig) {
         this.filterConfig = filterConfig;
         return this;
     }
@@ -340,7 +340,7 @@ public class UiColumn implements VertxPojo, IUiColumn {
      * Setter for <code>ZDB.UI_COLUMN.EMPTY</code>. 「empty」- $empty 专用
      */
     @Override
-    public UiColumn setEmpty(String empty) {
+    public UiColumn setEmpty(final String empty) {
         this.empty = empty;
         return this;
     }
@@ -357,7 +357,7 @@ public class UiColumn implements VertxPojo, IUiColumn {
      * Setter for <code>ZDB.UI_COLUMN.MAPPING</code>. 「mapping」- $mapping专用
      */
     @Override
-    public UiColumn setMapping(String mapping) {
+    public UiColumn setMapping(final String mapping) {
         this.mapping = mapping;
         return this;
     }
@@ -374,7 +374,7 @@ public class UiColumn implements VertxPojo, IUiColumn {
      * Setter for <code>ZDB.UI_COLUMN.CONFIG</code>. 「config」- $config专用
      */
     @Override
-    public UiColumn setConfig(String config) {
+    public UiColumn setConfig(final String config) {
         this.config = config;
         return this;
     }
@@ -393,7 +393,7 @@ public class UiColumn implements VertxPojo, IUiColumn {
      * $option专用，executor时
      */
     @Override
-    public UiColumn setOption(String option) {
+    public UiColumn setOption(final String option) {
         this.option = option;
         return this;
     }
@@ -410,7 +410,7 @@ public class UiColumn implements VertxPojo, IUiColumn {
      * Setter for <code>ZDB.UI_COLUMN.FORMAT</code>. 「formatFail」- $format时间格式专用
      */
     @Override
-    public UiColumn setFormat(String format) {
+    public UiColumn setFormat(final String format) {
         this.format = format;
         return this;
     }
@@ -427,7 +427,7 @@ public class UiColumn implements VertxPojo, IUiColumn {
      * Setter for <code>ZDB.UI_COLUMN.DATUM</code>. 「datum」- $datum专用
      */
     @Override
-    public UiColumn setDatum(String datum) {
+    public UiColumn setDatum(final String datum) {
         this.datum = datum;
         return this;
     }
@@ -444,7 +444,7 @@ public class UiColumn implements VertxPojo, IUiColumn {
      * Setter for <code>ZDB.UI_COLUMN.CONTROL_ID</code>. 「controlId」- 关联的控件ID
      */
     @Override
-    public UiColumn setControlId(String controlId) {
+    public UiColumn setControlId(final String controlId) {
         this.controlId = controlId;
         return this;
     }
@@ -461,7 +461,7 @@ public class UiColumn implements VertxPojo, IUiColumn {
      * Setter for <code>ZDB.UI_COLUMN.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public UiColumn setActive(Boolean active) {
+    public UiColumn setActive(final Boolean active) {
         this.active = active;
         return this;
     }
@@ -478,7 +478,7 @@ public class UiColumn implements VertxPojo, IUiColumn {
      * Setter for <code>ZDB.UI_COLUMN.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public UiColumn setSigma(String sigma) {
+    public UiColumn setSigma(final String sigma) {
         this.sigma = sigma;
         return this;
     }
@@ -495,7 +495,7 @@ public class UiColumn implements VertxPojo, IUiColumn {
      * Setter for <code>ZDB.UI_COLUMN.METADATA</code>. 「metadata」- 附加配置
      */
     @Override
-    public UiColumn setMetadata(String metadata) {
+    public UiColumn setMetadata(final String metadata) {
         this.metadata = metadata;
         return this;
     }
@@ -512,7 +512,7 @@ public class UiColumn implements VertxPojo, IUiColumn {
      * Setter for <code>ZDB.UI_COLUMN.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public UiColumn setLanguage(String language) {
+    public UiColumn setLanguage(final String language) {
         this.language = language;
         return this;
     }
@@ -529,7 +529,7 @@ public class UiColumn implements VertxPojo, IUiColumn {
      * Setter for <code>ZDB.UI_COLUMN.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public UiColumn setCreatedAt(LocalDateTime createdAt) {
+    public UiColumn setCreatedAt(final LocalDateTime createdAt) {
         this.createdAt = createdAt;
         return this;
     }
@@ -546,7 +546,7 @@ public class UiColumn implements VertxPojo, IUiColumn {
      * Setter for <code>ZDB.UI_COLUMN.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public UiColumn setCreatedBy(String createdBy) {
+    public UiColumn setCreatedBy(final String createdBy) {
         this.createdBy = createdBy;
         return this;
     }
@@ -563,7 +563,7 @@ public class UiColumn implements VertxPojo, IUiColumn {
      * Setter for <code>ZDB.UI_COLUMN.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public UiColumn setUpdatedAt(LocalDateTime updatedAt) {
+    public UiColumn setUpdatedAt(final LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
         return this;
     }
@@ -580,13 +580,13 @@ public class UiColumn implements VertxPojo, IUiColumn {
      * Setter for <code>ZDB.UI_COLUMN.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public UiColumn setUpdatedBy(String updatedBy) {
+    public UiColumn setUpdatedBy(final String updatedBy) {
         this.updatedBy = updatedBy;
         return this;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
@@ -762,7 +762,7 @@ public class UiColumn implements VertxPojo, IUiColumn {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("UiColumn (");
+        final StringBuilder sb = new StringBuilder("UiColumn (");
 
         sb.append(key);
         sb.append(", ").append(title);
@@ -800,7 +800,7 @@ public class UiColumn implements VertxPojo, IUiColumn {
     // -------------------------------------------------------------------------
 
     @Override
-    public void from(IUiColumn from) {
+    public void from(final IUiColumn from) {
         setKey(from.getKey());
         setTitle(from.getTitle());
         setDataIndex(from.getDataIndex());
@@ -830,7 +830,7 @@ public class UiColumn implements VertxPojo, IUiColumn {
     }
 
     @Override
-    public <E extends IUiColumn> E into(E into) {
+    public <E extends IUiColumn> E into(final E into) {
         into.from(this);
         return into;
     }

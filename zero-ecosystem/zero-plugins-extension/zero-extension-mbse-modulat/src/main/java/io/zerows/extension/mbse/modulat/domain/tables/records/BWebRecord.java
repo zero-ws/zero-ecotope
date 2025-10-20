@@ -4,7 +4,7 @@
 package io.zerows.extension.mbse.modulat.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.mbse.modulat.domain.tables.BWeb;
 import io.zerows.extension.mbse.modulat.domain.tables.interfaces.IBWeb;
 import org.jooq.Field;
@@ -31,7 +31,7 @@ public class BWebRecord extends UpdatableRecordImpl<BWebRecord> implements Vertx
     /**
      * Create a detached, initialised BWebRecord
      */
-    public BWebRecord(String key, String code, String blockId, String type, String licContent, String licOp, String licModule, String licTpl, Boolean active, String sigma, String metadata, String language) {
+    public BWebRecord(final String key, final String code, final String blockId, final String type, final String licContent, final String licOp, final String licModule, final String licTpl, final Boolean active, final String sigma, final String metadata, final String language) {
         super(BWeb.B_WEB);
 
         setKey(key);
@@ -52,7 +52,7 @@ public class BWebRecord extends UpdatableRecordImpl<BWebRecord> implements Vertx
     /**
      * Create a detached, initialised BWebRecord
      */
-    public BWebRecord(io.zerows.extension.mbse.modulat.domain.tables.pojos.BWeb value) {
+    public BWebRecord(final io.zerows.extension.mbse.modulat.domain.tables.pojos.BWeb value) {
         super(BWeb.B_WEB);
 
         if (value != null) {
@@ -72,7 +72,7 @@ public class BWebRecord extends UpdatableRecordImpl<BWebRecord> implements Vertx
         }
     }
 
-    public BWebRecord(io.vertx.core.json.JsonObject json) {
+    public BWebRecord(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -89,7 +89,7 @@ public class BWebRecord extends UpdatableRecordImpl<BWebRecord> implements Vertx
      * Setter for <code>ZDB.B_WEB.KEY</code>. 「key」- 主键
      */
     @Override
-    public BWebRecord setKey(String value) {
+    public BWebRecord setKey(final String value) {
         set(0, value);
         return this;
     }
@@ -106,7 +106,7 @@ public class BWebRecord extends UpdatableRecordImpl<BWebRecord> implements Vertx
      * Setter for <code>ZDB.B_WEB.CODE</code>. 「code」- 系统内部编码
      */
     @Override
-    public BWebRecord setCode(String value) {
+    public BWebRecord setCode(final String value) {
         set(1, value);
         return this;
     }
@@ -123,7 +123,7 @@ public class BWebRecord extends UpdatableRecordImpl<BWebRecord> implements Vertx
      * Setter for <code>ZDB.B_WEB.BLOCK_ID</code>. 「blockId」- 所属模块ID
      */
     @Override
-    public BWebRecord setBlockId(String value) {
+    public BWebRecord setBlockId(final String value) {
         set(2, value);
         return this;
     }
@@ -140,7 +140,7 @@ public class BWebRecord extends UpdatableRecordImpl<BWebRecord> implements Vertx
      * Setter for <code>ZDB.B_WEB.TYPE</code>. 「type」- 类型保留，单独区分
      */
     @Override
-    public BWebRecord setType(String value) {
+    public BWebRecord setType(final String value) {
         set(3, value);
         return this;
     }
@@ -157,7 +157,7 @@ public class BWebRecord extends UpdatableRecordImpl<BWebRecord> implements Vertx
      * Setter for <code>ZDB.B_WEB.LIC_CONTENT</code>. 「licContent」- 内容编码
      */
     @Override
-    public BWebRecord setLicContent(String value) {
+    public BWebRecord setLicContent(final String value) {
         set(4, value);
         return this;
     }
@@ -174,7 +174,7 @@ public class BWebRecord extends UpdatableRecordImpl<BWebRecord> implements Vertx
      * Setter for <code>ZDB.B_WEB.LIC_OP</code>. 「licOp」- 界面操作
      */
     @Override
-    public BWebRecord setLicOp(String value) {
+    public BWebRecord setLicOp(final String value) {
         set(5, value);
         return this;
     }
@@ -193,7 +193,7 @@ public class BWebRecord extends UpdatableRecordImpl<BWebRecord> implements Vertx
      * 中的记录
      */
     @Override
-    public BWebRecord setLicModule(String value) {
+    public BWebRecord setLicModule(final String value) {
         set(6, value);
         return this;
     }
@@ -212,7 +212,7 @@ public class BWebRecord extends UpdatableRecordImpl<BWebRecord> implements Vertx
      * CONTROL 等记录
      */
     @Override
-    public BWebRecord setLicTpl(String value) {
+    public BWebRecord setLicTpl(final String value) {
         set(7, value);
         return this;
     }
@@ -229,7 +229,7 @@ public class BWebRecord extends UpdatableRecordImpl<BWebRecord> implements Vertx
      * Setter for <code>ZDB.B_WEB.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public BWebRecord setActive(Boolean value) {
+    public BWebRecord setActive(final Boolean value) {
         set(8, value);
         return this;
     }
@@ -246,7 +246,7 @@ public class BWebRecord extends UpdatableRecordImpl<BWebRecord> implements Vertx
      * Setter for <code>ZDB.B_WEB.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public BWebRecord setSigma(String value) {
+    public BWebRecord setSigma(final String value) {
         set(9, value);
         return this;
     }
@@ -271,7 +271,7 @@ public class BWebRecord extends UpdatableRecordImpl<BWebRecord> implements Vertx
      * Setter for <code>ZDB.B_WEB.METADATA</code>. 「metadata」- 附加配置
      */
     @Override
-    public BWebRecord setMetadata(String value) {
+    public BWebRecord setMetadata(final String value) {
         set(10, value);
         return this;
     }
@@ -288,7 +288,7 @@ public class BWebRecord extends UpdatableRecordImpl<BWebRecord> implements Vertx
      * Setter for <code>ZDB.B_WEB.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public BWebRecord setLanguage(String value) {
+    public BWebRecord setLanguage(final String value) {
         set(11, value);
         return this;
     }
@@ -489,55 +489,55 @@ public class BWebRecord extends UpdatableRecordImpl<BWebRecord> implements Vertx
     }
 
     @Override
-    public BWebRecord value1(String value) {
+    public BWebRecord value1(final String value) {
         setKey(value);
         return this;
     }
 
     @Override
-    public BWebRecord value2(String value) {
+    public BWebRecord value2(final String value) {
         setCode(value);
         return this;
     }
 
     @Override
-    public BWebRecord value3(String value) {
+    public BWebRecord value3(final String value) {
         setBlockId(value);
         return this;
     }
 
     @Override
-    public BWebRecord value4(String value) {
+    public BWebRecord value4(final String value) {
         setType(value);
         return this;
     }
 
     @Override
-    public BWebRecord value5(String value) {
+    public BWebRecord value5(final String value) {
         setLicContent(value);
         return this;
     }
 
     @Override
-    public BWebRecord value6(String value) {
+    public BWebRecord value6(final String value) {
         setLicOp(value);
         return this;
     }
 
     @Override
-    public BWebRecord value7(String value) {
+    public BWebRecord value7(final String value) {
         setLicModule(value);
         return this;
     }
 
     @Override
-    public BWebRecord value8(String value) {
+    public BWebRecord value8(final String value) {
         setLicTpl(value);
         return this;
     }
 
     @Override
-    public BWebRecord value9(Boolean value) {
+    public BWebRecord value9(final Boolean value) {
         setActive(value);
         return this;
     }
@@ -547,13 +547,13 @@ public class BWebRecord extends UpdatableRecordImpl<BWebRecord> implements Vertx
     // -------------------------------------------------------------------------
 
     @Override
-    public BWebRecord value10(String value) {
+    public BWebRecord value10(final String value) {
         setSigma(value);
         return this;
     }
 
     @Override
-    public BWebRecord value11(String value) {
+    public BWebRecord value11(final String value) {
         setMetadata(value);
         return this;
     }
@@ -563,13 +563,13 @@ public class BWebRecord extends UpdatableRecordImpl<BWebRecord> implements Vertx
     // -------------------------------------------------------------------------
 
     @Override
-    public BWebRecord value12(String value) {
+    public BWebRecord value12(final String value) {
         setLanguage(value);
         return this;
     }
 
     @Override
-    public BWebRecord values(String value1, String value2, String value3, String value4, String value5, String value6, String value7, String value8, Boolean value9, String value10, String value11, String value12) {
+    public BWebRecord values(final String value1, final String value2, final String value3, final String value4, final String value5, final String value6, final String value7, final String value8, final Boolean value9, final String value10, final String value11, final String value12) {
         value1(value1);
         value2(value2);
         value3(value3);
@@ -586,7 +586,7 @@ public class BWebRecord extends UpdatableRecordImpl<BWebRecord> implements Vertx
     }
 
     @Override
-    public void from(IBWeb from) {
+    public void from(final IBWeb from) {
         setKey(from.getKey());
         setCode(from.getCode());
         setBlockId(from.getBlockId());
@@ -603,7 +603,7 @@ public class BWebRecord extends UpdatableRecordImpl<BWebRecord> implements Vertx
     }
 
     @Override
-    public <E extends IBWeb> E into(E into) {
+    public <E extends IBWeb> E into(final E into) {
         into.from(this);
         return into;
     }

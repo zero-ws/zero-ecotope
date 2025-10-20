@@ -4,7 +4,7 @@
 package io.zerows.extension.mbse.ui.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.mbse.ui.domain.tables.VFragment;
 import io.zerows.extension.mbse.ui.domain.tables.interfaces.IVFragment;
 import org.jooq.Field;
@@ -31,7 +31,7 @@ public class VFragmentRecord extends UpdatableRecordImpl<VFragmentRecord> implem
     /**
      * Create a detached, initialised VFragmentRecord
      */
-    public VFragmentRecord(String key, String container, String notice, String buttonConnect, String buttonGroup, String modal, Integer grid, String config) {
+    public VFragmentRecord(final String key, final String container, final String notice, final String buttonConnect, final String buttonGroup, final String modal, final Integer grid, final String config) {
         super(VFragment.V_FRAGMENT);
 
         setKey(key);
@@ -48,7 +48,7 @@ public class VFragmentRecord extends UpdatableRecordImpl<VFragmentRecord> implem
     /**
      * Create a detached, initialised VFragmentRecord
      */
-    public VFragmentRecord(io.zerows.extension.mbse.ui.domain.tables.pojos.VFragment value) {
+    public VFragmentRecord(final io.zerows.extension.mbse.ui.domain.tables.pojos.VFragment value) {
         super(VFragment.V_FRAGMENT);
 
         if (value != null) {
@@ -64,7 +64,7 @@ public class VFragmentRecord extends UpdatableRecordImpl<VFragmentRecord> implem
         }
     }
 
-    public VFragmentRecord(io.vertx.core.json.JsonObject json) {
+    public VFragmentRecord(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -81,7 +81,7 @@ public class VFragmentRecord extends UpdatableRecordImpl<VFragmentRecord> implem
      * Setter for <code>ZDB.V_FRAGMENT.KEY</code>. 「key」- 选项主键
      */
     @Override
-    public VFragmentRecord setKey(String value) {
+    public VFragmentRecord setKey(final String value) {
         set(0, value);
         return this;
     }
@@ -98,7 +98,7 @@ public class VFragmentRecord extends UpdatableRecordImpl<VFragmentRecord> implem
      * Setter for <code>ZDB.V_FRAGMENT.CONTAINER</code>. 「container」- 容器专用格式
      */
     @Override
-    public VFragmentRecord setContainer(String value) {
+    public VFragmentRecord setContainer(final String value) {
         set(1, value);
         return this;
     }
@@ -115,7 +115,7 @@ public class VFragmentRecord extends UpdatableRecordImpl<VFragmentRecord> implem
      * Setter for <code>ZDB.V_FRAGMENT.NOTICE</code>. 「notice」- notice选项，Alert结构
      */
     @Override
-    public VFragmentRecord setNotice(String value) {
+    public VFragmentRecord setNotice(final String value) {
         set(2, value);
         return this;
     }
@@ -134,7 +134,7 @@ public class VFragmentRecord extends UpdatableRecordImpl<VFragmentRecord> implem
      * 按钮的ID（单按钮）
      */
     @Override
-    public VFragmentRecord setButtonConnect(String value) {
+    public VFragmentRecord setButtonConnect(final String value) {
         set(3, value);
         return this;
     }
@@ -153,7 +153,7 @@ public class VFragmentRecord extends UpdatableRecordImpl<VFragmentRecord> implem
      * 一组按钮配置
      */
     @Override
-    public VFragmentRecord setButtonGroup(String value) {
+    public VFragmentRecord setButtonGroup(final String value) {
         set(4, value);
         return this;
     }
@@ -170,7 +170,7 @@ public class VFragmentRecord extends UpdatableRecordImpl<VFragmentRecord> implem
      * Setter for <code>ZDB.V_FRAGMENT.MODAL</code>. 「modal」- modal选项，Model专用结构
      */
     @Override
-    public VFragmentRecord setModal(String value) {
+    public VFragmentRecord setModal(final String value) {
         set(5, value);
         return this;
     }
@@ -195,7 +195,7 @@ public class VFragmentRecord extends UpdatableRecordImpl<VFragmentRecord> implem
      * Setter for <code>ZDB.V_FRAGMENT.GRID</code>. 「grid」- grid选项（分区面板专用）
      */
     @Override
-    public VFragmentRecord setGrid(Integer value) {
+    public VFragmentRecord setGrid(final Integer value) {
         set(6, value);
         return this;
     }
@@ -212,7 +212,7 @@ public class VFragmentRecord extends UpdatableRecordImpl<VFragmentRecord> implem
      * Setter for <code>ZDB.V_FRAGMENT.CONFIG</code>. 「config」- 根目录开始的基本配置
      */
     @Override
-    public VFragmentRecord setConfig(String value) {
+    public VFragmentRecord setConfig(final String value) {
         set(7, value);
         return this;
     }
@@ -353,31 +353,31 @@ public class VFragmentRecord extends UpdatableRecordImpl<VFragmentRecord> implem
     }
 
     @Override
-    public VFragmentRecord value1(String value) {
+    public VFragmentRecord value1(final String value) {
         setKey(value);
         return this;
     }
 
     @Override
-    public VFragmentRecord value2(String value) {
+    public VFragmentRecord value2(final String value) {
         setContainer(value);
         return this;
     }
 
     @Override
-    public VFragmentRecord value3(String value) {
+    public VFragmentRecord value3(final String value) {
         setNotice(value);
         return this;
     }
 
     @Override
-    public VFragmentRecord value4(String value) {
+    public VFragmentRecord value4(final String value) {
         setButtonConnect(value);
         return this;
     }
 
     @Override
-    public VFragmentRecord value5(String value) {
+    public VFragmentRecord value5(final String value) {
         setButtonGroup(value);
         return this;
     }
@@ -387,13 +387,13 @@ public class VFragmentRecord extends UpdatableRecordImpl<VFragmentRecord> implem
     // -------------------------------------------------------------------------
 
     @Override
-    public VFragmentRecord value6(String value) {
+    public VFragmentRecord value6(final String value) {
         setModal(value);
         return this;
     }
 
     @Override
-    public VFragmentRecord value7(Integer value) {
+    public VFragmentRecord value7(final Integer value) {
         setGrid(value);
         return this;
     }
@@ -403,13 +403,13 @@ public class VFragmentRecord extends UpdatableRecordImpl<VFragmentRecord> implem
     // -------------------------------------------------------------------------
 
     @Override
-    public VFragmentRecord value8(String value) {
+    public VFragmentRecord value8(final String value) {
         setConfig(value);
         return this;
     }
 
     @Override
-    public VFragmentRecord values(String value1, String value2, String value3, String value4, String value5, String value6, Integer value7, String value8) {
+    public VFragmentRecord values(final String value1, final String value2, final String value3, final String value4, final String value5, final String value6, final Integer value7, final String value8) {
         value1(value1);
         value2(value2);
         value3(value3);
@@ -422,7 +422,7 @@ public class VFragmentRecord extends UpdatableRecordImpl<VFragmentRecord> implem
     }
 
     @Override
-    public void from(IVFragment from) {
+    public void from(final IVFragment from) {
         setKey(from.getKey());
         setContainer(from.getContainer());
         setNotice(from.getNotice());
@@ -435,7 +435,7 @@ public class VFragmentRecord extends UpdatableRecordImpl<VFragmentRecord> implem
     }
 
     @Override
-    public <E extends IVFragment> E into(E into) {
+    public <E extends IVFragment> E into(final E into) {
         into.from(this);
         return into;
     }

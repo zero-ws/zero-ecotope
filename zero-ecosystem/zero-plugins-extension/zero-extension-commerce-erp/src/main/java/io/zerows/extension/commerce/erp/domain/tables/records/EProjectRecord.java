@@ -4,7 +4,7 @@
 package io.zerows.extension.commerce.erp.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.commerce.erp.domain.tables.EProject;
 import io.zerows.extension.commerce.erp.domain.tables.interfaces.IEProject;
 import org.jooq.Record1;
@@ -31,7 +31,7 @@ public class EProjectRecord extends UpdatableRecordImpl<EProjectRecord> implemen
     /**
      * Create a detached, initialised EProjectRecord
      */
-    public EProjectRecord(String key, String name, String code, String shortName, String deptId, String type, String status, String budget, String level, String priority, String risk, String title, String icon, BigDecimal amount, String subject, String description, String remark, String leadBy, LocalDateTime planStartAt, LocalDateTime planEndAt, LocalDateTime startAt, LocalDateTime endAt, String metadata, Boolean active, String sigma, String language, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public EProjectRecord(final String key, final String name, final String code, final String shortName, final String deptId, final String type, final String status, final String budget, final String level, final String priority, final String risk, final String title, final String icon, final BigDecimal amount, final String subject, final String description, final String remark, final String leadBy, final LocalDateTime planStartAt, final LocalDateTime planEndAt, final LocalDateTime startAt, final LocalDateTime endAt, final String metadata, final Boolean active, final String sigma, final String language, final LocalDateTime createdAt, final String createdBy, final LocalDateTime updatedAt, final String updatedBy) {
         super(EProject.E_PROJECT);
 
         setKey(key);
@@ -70,7 +70,7 @@ public class EProjectRecord extends UpdatableRecordImpl<EProjectRecord> implemen
     /**
      * Create a detached, initialised EProjectRecord
      */
-    public EProjectRecord(io.zerows.extension.commerce.erp.domain.tables.pojos.EProject value) {
+    public EProjectRecord(final io.zerows.extension.commerce.erp.domain.tables.pojos.EProject value) {
         super(EProject.E_PROJECT);
 
         if (value != null) {
@@ -108,7 +108,7 @@ public class EProjectRecord extends UpdatableRecordImpl<EProjectRecord> implemen
         }
     }
 
-    public EProjectRecord(io.vertx.core.json.JsonObject json) {
+    public EProjectRecord(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -125,7 +125,7 @@ public class EProjectRecord extends UpdatableRecordImpl<EProjectRecord> implemen
      * Setter for <code>ZDB.E_PROJECT.KEY</code>. 「key」- 项目ID
      */
     @Override
-    public EProjectRecord setKey(String value) {
+    public EProjectRecord setKey(final String value) {
         set(0, value);
         return this;
     }
@@ -142,7 +142,7 @@ public class EProjectRecord extends UpdatableRecordImpl<EProjectRecord> implemen
      * Setter for <code>ZDB.E_PROJECT.NAME</code>. 「name」- 项目名称
      */
     @Override
-    public EProjectRecord setName(String value) {
+    public EProjectRecord setName(final String value) {
         set(1, value);
         return this;
     }
@@ -159,7 +159,7 @@ public class EProjectRecord extends UpdatableRecordImpl<EProjectRecord> implemen
      * Setter for <code>ZDB.E_PROJECT.CODE</code>. 「code」- 项目编号
      */
     @Override
-    public EProjectRecord setCode(String value) {
+    public EProjectRecord setCode(final String value) {
         set(2, value);
         return this;
     }
@@ -176,7 +176,7 @@ public class EProjectRecord extends UpdatableRecordImpl<EProjectRecord> implemen
      * Setter for <code>ZDB.E_PROJECT.SHORT_NAME</code>. 「shortName」- 项目简称
      */
     @Override
-    public EProjectRecord setShortName(String value) {
+    public EProjectRecord setShortName(final String value) {
         set(3, value);
         return this;
     }
@@ -195,7 +195,7 @@ public class EProjectRecord extends UpdatableRecordImpl<EProjectRecord> implemen
      * resource.departments
      */
     @Override
-    public EProjectRecord setDeptId(String value) {
+    public EProjectRecord setDeptId(final String value) {
         set(4, value);
         return this;
     }
@@ -212,7 +212,7 @@ public class EProjectRecord extends UpdatableRecordImpl<EProjectRecord> implemen
      * Setter for <code>ZDB.E_PROJECT.TYPE</code>. 「type」- 项目分类，zero.project
      */
     @Override
-    public EProjectRecord setType(String value) {
+    public EProjectRecord setType(final String value) {
         set(5, value);
         return this;
     }
@@ -231,7 +231,7 @@ public class EProjectRecord extends UpdatableRecordImpl<EProjectRecord> implemen
      * 项目状态，zero.project.status
      */
     @Override
-    public EProjectRecord setStatus(String value) {
+    public EProjectRecord setStatus(final String value) {
         set(6, value);
         return this;
     }
@@ -250,7 +250,7 @@ public class EProjectRecord extends UpdatableRecordImpl<EProjectRecord> implemen
      * 所属预算，zero.project.budget
      */
     @Override
-    public EProjectRecord setBudget(String value) {
+    public EProjectRecord setBudget(final String value) {
         set(7, value);
         return this;
     }
@@ -269,7 +269,7 @@ public class EProjectRecord extends UpdatableRecordImpl<EProjectRecord> implemen
      * 项目级别，zero.project.level
      */
     @Override
-    public EProjectRecord setLevel(String value) {
+    public EProjectRecord setLevel(final String value) {
         set(8, value);
         return this;
     }
@@ -288,7 +288,7 @@ public class EProjectRecord extends UpdatableRecordImpl<EProjectRecord> implemen
      * 项目优先级，zero.project.priority
      */
     @Override
-    public EProjectRecord setPriority(String value) {
+    public EProjectRecord setPriority(final String value) {
         set(9, value);
         return this;
     }
@@ -307,7 +307,7 @@ public class EProjectRecord extends UpdatableRecordImpl<EProjectRecord> implemen
      * 项目风险，zero.project.risk
      */
     @Override
-    public EProjectRecord setRisk(String value) {
+    public EProjectRecord setRisk(final String value) {
         set(10, value);
         return this;
     }
@@ -324,7 +324,7 @@ public class EProjectRecord extends UpdatableRecordImpl<EProjectRecord> implemen
      * Setter for <code>ZDB.E_PROJECT.TITLE</code>. 「title」- 项目标题
      */
     @Override
-    public EProjectRecord setTitle(String value) {
+    public EProjectRecord setTitle(final String value) {
         set(11, value);
         return this;
     }
@@ -341,7 +341,7 @@ public class EProjectRecord extends UpdatableRecordImpl<EProjectRecord> implemen
      * Setter for <code>ZDB.E_PROJECT.ICON</code>. 「icon」- 项目图标
      */
     @Override
-    public EProjectRecord setIcon(String value) {
+    public EProjectRecord setIcon(final String value) {
         set(12, value);
         return this;
     }
@@ -358,7 +358,7 @@ public class EProjectRecord extends UpdatableRecordImpl<EProjectRecord> implemen
      * Setter for <code>ZDB.E_PROJECT.AMOUNT</code>. 「amount」- 项目金额
      */
     @Override
-    public EProjectRecord setAmount(BigDecimal value) {
+    public EProjectRecord setAmount(final BigDecimal value) {
         set(13, value);
         return this;
     }
@@ -375,7 +375,7 @@ public class EProjectRecord extends UpdatableRecordImpl<EProjectRecord> implemen
      * Setter for <code>ZDB.E_PROJECT.SUBJECT</code>. 「subject」- 项目目标
      */
     @Override
-    public EProjectRecord setSubject(String value) {
+    public EProjectRecord setSubject(final String value) {
         set(14, value);
         return this;
     }
@@ -392,7 +392,7 @@ public class EProjectRecord extends UpdatableRecordImpl<EProjectRecord> implemen
      * Setter for <code>ZDB.E_PROJECT.DESCRIPTION</code>. 「description」- 主单描述内容
      */
     @Override
-    public EProjectRecord setDescription(String value) {
+    public EProjectRecord setDescription(final String value) {
         set(15, value);
         return this;
     }
@@ -409,7 +409,7 @@ public class EProjectRecord extends UpdatableRecordImpl<EProjectRecord> implemen
      * Setter for <code>ZDB.E_PROJECT.REMARK</code>. 「remark」- 项目备注
      */
     @Override
-    public EProjectRecord setRemark(String value) {
+    public EProjectRecord setRemark(final String value) {
         set(16, value);
         return this;
     }
@@ -426,7 +426,7 @@ public class EProjectRecord extends UpdatableRecordImpl<EProjectRecord> implemen
      * Setter for <code>ZDB.E_PROJECT.LEAD_BY</code>. 「leadBy」- 项目经理
      */
     @Override
-    public EProjectRecord setLeadBy(String value) {
+    public EProjectRecord setLeadBy(final String value) {
         set(17, value);
         return this;
     }
@@ -443,7 +443,7 @@ public class EProjectRecord extends UpdatableRecordImpl<EProjectRecord> implemen
      * Setter for <code>ZDB.E_PROJECT.PLAN_START_AT</code>. 「planStartAt」- 开始日期
      */
     @Override
-    public EProjectRecord setPlanStartAt(LocalDateTime value) {
+    public EProjectRecord setPlanStartAt(final LocalDateTime value) {
         set(18, value);
         return this;
     }
@@ -460,7 +460,7 @@ public class EProjectRecord extends UpdatableRecordImpl<EProjectRecord> implemen
      * Setter for <code>ZDB.E_PROJECT.PLAN_END_AT</code>. 「planEndAt」- 结束日期
      */
     @Override
-    public EProjectRecord setPlanEndAt(LocalDateTime value) {
+    public EProjectRecord setPlanEndAt(final LocalDateTime value) {
         set(19, value);
         return this;
     }
@@ -477,7 +477,7 @@ public class EProjectRecord extends UpdatableRecordImpl<EProjectRecord> implemen
      * Setter for <code>ZDB.E_PROJECT.START_AT</code>. 「startAt」- 实际开始日期
      */
     @Override
-    public EProjectRecord setStartAt(LocalDateTime value) {
+    public EProjectRecord setStartAt(final LocalDateTime value) {
         set(20, value);
         return this;
     }
@@ -494,7 +494,7 @@ public class EProjectRecord extends UpdatableRecordImpl<EProjectRecord> implemen
      * Setter for <code>ZDB.E_PROJECT.END_AT</code>. 「endAt」- 实际结束日期
      */
     @Override
-    public EProjectRecord setEndAt(LocalDateTime value) {
+    public EProjectRecord setEndAt(final LocalDateTime value) {
         set(21, value);
         return this;
     }
@@ -511,7 +511,7 @@ public class EProjectRecord extends UpdatableRecordImpl<EProjectRecord> implemen
      * Setter for <code>ZDB.E_PROJECT.METADATA</code>. 「metadata」- 附加配置
      */
     @Override
-    public EProjectRecord setMetadata(String value) {
+    public EProjectRecord setMetadata(final String value) {
         set(22, value);
         return this;
     }
@@ -528,7 +528,7 @@ public class EProjectRecord extends UpdatableRecordImpl<EProjectRecord> implemen
      * Setter for <code>ZDB.E_PROJECT.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public EProjectRecord setActive(Boolean value) {
+    public EProjectRecord setActive(final Boolean value) {
         set(23, value);
         return this;
     }
@@ -545,7 +545,7 @@ public class EProjectRecord extends UpdatableRecordImpl<EProjectRecord> implemen
      * Setter for <code>ZDB.E_PROJECT.SIGMA</code>. 「sigma」- 统一标识（项目所属应用）
      */
     @Override
-    public EProjectRecord setSigma(String value) {
+    public EProjectRecord setSigma(final String value) {
         set(24, value);
         return this;
     }
@@ -562,7 +562,7 @@ public class EProjectRecord extends UpdatableRecordImpl<EProjectRecord> implemen
      * Setter for <code>ZDB.E_PROJECT.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public EProjectRecord setLanguage(String value) {
+    public EProjectRecord setLanguage(final String value) {
         set(25, value);
         return this;
     }
@@ -579,7 +579,7 @@ public class EProjectRecord extends UpdatableRecordImpl<EProjectRecord> implemen
      * Setter for <code>ZDB.E_PROJECT.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public EProjectRecord setCreatedAt(LocalDateTime value) {
+    public EProjectRecord setCreatedAt(final LocalDateTime value) {
         set(26, value);
         return this;
     }
@@ -596,7 +596,7 @@ public class EProjectRecord extends UpdatableRecordImpl<EProjectRecord> implemen
      * Setter for <code>ZDB.E_PROJECT.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public EProjectRecord setCreatedBy(String value) {
+    public EProjectRecord setCreatedBy(final String value) {
         set(27, value);
         return this;
     }
@@ -621,7 +621,7 @@ public class EProjectRecord extends UpdatableRecordImpl<EProjectRecord> implemen
      * Setter for <code>ZDB.E_PROJECT.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public EProjectRecord setUpdatedAt(LocalDateTime value) {
+    public EProjectRecord setUpdatedAt(final LocalDateTime value) {
         set(28, value);
         return this;
     }
@@ -642,7 +642,7 @@ public class EProjectRecord extends UpdatableRecordImpl<EProjectRecord> implemen
      * Setter for <code>ZDB.E_PROJECT.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public EProjectRecord setUpdatedBy(String value) {
+    public EProjectRecord setUpdatedBy(final String value) {
         set(29, value);
         return this;
     }
@@ -653,7 +653,7 @@ public class EProjectRecord extends UpdatableRecordImpl<EProjectRecord> implemen
     }
 
     @Override
-    public void from(IEProject from) {
+    public void from(final IEProject from) {
         setKey(from.getKey());
         setName(from.getName());
         setCode(from.getCode());
@@ -688,7 +688,7 @@ public class EProjectRecord extends UpdatableRecordImpl<EProjectRecord> implemen
     }
 
     @Override
-    public <E extends IEProject> E into(E into) {
+    public <E extends IEProject> E into(final E into) {
         into.from(this);
         return into;
     }

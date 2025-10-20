@@ -4,7 +4,7 @@
 package io.zerows.extension.mbse.basement.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.mbse.basement.domain.tables.MKey;
 import io.zerows.extension.mbse.basement.domain.tables.interfaces.IMKey;
 import org.jooq.Field;
@@ -33,7 +33,7 @@ public class MKeyRecord extends UpdatableRecordImpl<MKeyRecord> implements Vertx
     /**
      * Create a detached, initialised MKeyRecord
      */
-    public MKeyRecord(String key, String name, String type, String columns, String entityId, String comments, String sigma, String language, Boolean active, String metadata, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public MKeyRecord(final String key, final String name, final String type, final String columns, final String entityId, final String comments, final String sigma, final String language, final Boolean active, final String metadata, final LocalDateTime createdAt, final String createdBy, final LocalDateTime updatedAt, final String updatedBy) {
         super(MKey.M_KEY);
 
         setKey(key);
@@ -56,7 +56,7 @@ public class MKeyRecord extends UpdatableRecordImpl<MKeyRecord> implements Vertx
     /**
      * Create a detached, initialised MKeyRecord
      */
-    public MKeyRecord(io.zerows.extension.mbse.basement.domain.tables.pojos.MKey value) {
+    public MKeyRecord(final io.zerows.extension.mbse.basement.domain.tables.pojos.MKey value) {
         super(MKey.M_KEY);
 
         if (value != null) {
@@ -78,7 +78,7 @@ public class MKeyRecord extends UpdatableRecordImpl<MKeyRecord> implements Vertx
         }
     }
 
-    public MKeyRecord(io.vertx.core.json.JsonObject json) {
+    public MKeyRecord(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -95,7 +95,7 @@ public class MKeyRecord extends UpdatableRecordImpl<MKeyRecord> implements Vertx
      * Setter for <code>ZDB.M_KEY.KEY</code>. 「key」- 键ID
      */
     @Override
-    public MKeyRecord setKey(String value) {
+    public MKeyRecord setKey(final String value) {
         set(0, value);
         return this;
     }
@@ -112,7 +112,7 @@ public class MKeyRecord extends UpdatableRecordImpl<MKeyRecord> implements Vertx
      * Setter for <code>ZDB.M_KEY.NAME</code>. 「name」- 键名称
      */
     @Override
-    public MKeyRecord setName(String value) {
+    public MKeyRecord setName(final String value) {
         set(1, value);
         return this;
     }
@@ -129,7 +129,7 @@ public class MKeyRecord extends UpdatableRecordImpl<MKeyRecord> implements Vertx
      * Setter for <code>ZDB.M_KEY.TYPE</code>. 「type」- 键类型
      */
     @Override
-    public MKeyRecord setType(String value) {
+    public MKeyRecord setType(final String value) {
         set(2, value);
         return this;
     }
@@ -146,7 +146,7 @@ public class MKeyRecord extends UpdatableRecordImpl<MKeyRecord> implements Vertx
      * Setter for <code>ZDB.M_KEY.COLUMNS</code>. 「columns」- JsonArray格式，键覆盖的列集合
      */
     @Override
-    public MKeyRecord setColumns(String value) {
+    public MKeyRecord setColumns(final String value) {
         set(3, value);
         return this;
     }
@@ -163,7 +163,7 @@ public class MKeyRecord extends UpdatableRecordImpl<MKeyRecord> implements Vertx
      * Setter for <code>ZDB.M_KEY.ENTITY_ID</code>. 「entityId」- 关联的实体ID
      */
     @Override
-    public MKeyRecord setEntityId(String value) {
+    public MKeyRecord setEntityId(final String value) {
         set(4, value);
         return this;
     }
@@ -180,7 +180,7 @@ public class MKeyRecord extends UpdatableRecordImpl<MKeyRecord> implements Vertx
      * Setter for <code>ZDB.M_KEY.COMMENTS</code>. 「comments」- 当前属性的描述信息
      */
     @Override
-    public MKeyRecord setComments(String value) {
+    public MKeyRecord setComments(final String value) {
         set(5, value);
         return this;
     }
@@ -197,7 +197,7 @@ public class MKeyRecord extends UpdatableRecordImpl<MKeyRecord> implements Vertx
      * Setter for <code>ZDB.M_KEY.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public MKeyRecord setSigma(String value) {
+    public MKeyRecord setSigma(final String value) {
         set(6, value);
         return this;
     }
@@ -214,7 +214,7 @@ public class MKeyRecord extends UpdatableRecordImpl<MKeyRecord> implements Vertx
      * Setter for <code>ZDB.M_KEY.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public MKeyRecord setLanguage(String value) {
+    public MKeyRecord setLanguage(final String value) {
         set(7, value);
         return this;
     }
@@ -231,7 +231,7 @@ public class MKeyRecord extends UpdatableRecordImpl<MKeyRecord> implements Vertx
      * Setter for <code>ZDB.M_KEY.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public MKeyRecord setActive(Boolean value) {
+    public MKeyRecord setActive(final Boolean value) {
         set(8, value);
         return this;
     }
@@ -248,7 +248,7 @@ public class MKeyRecord extends UpdatableRecordImpl<MKeyRecord> implements Vertx
      * Setter for <code>ZDB.M_KEY.METADATA</code>. 「metadata」- 附加配置数据
      */
     @Override
-    public MKeyRecord setMetadata(String value) {
+    public MKeyRecord setMetadata(final String value) {
         set(9, value);
         return this;
     }
@@ -265,7 +265,7 @@ public class MKeyRecord extends UpdatableRecordImpl<MKeyRecord> implements Vertx
      * Setter for <code>ZDB.M_KEY.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public MKeyRecord setCreatedAt(LocalDateTime value) {
+    public MKeyRecord setCreatedAt(final LocalDateTime value) {
         set(10, value);
         return this;
     }
@@ -282,7 +282,7 @@ public class MKeyRecord extends UpdatableRecordImpl<MKeyRecord> implements Vertx
      * Setter for <code>ZDB.M_KEY.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public MKeyRecord setCreatedBy(String value) {
+    public MKeyRecord setCreatedBy(final String value) {
         set(11, value);
         return this;
     }
@@ -307,7 +307,7 @@ public class MKeyRecord extends UpdatableRecordImpl<MKeyRecord> implements Vertx
      * Setter for <code>ZDB.M_KEY.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public MKeyRecord setUpdatedAt(LocalDateTime value) {
+    public MKeyRecord setUpdatedAt(final LocalDateTime value) {
         set(12, value);
         return this;
     }
@@ -324,7 +324,7 @@ public class MKeyRecord extends UpdatableRecordImpl<MKeyRecord> implements Vertx
      * Setter for <code>ZDB.M_KEY.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public MKeyRecord setUpdatedBy(String value) {
+    public MKeyRecord setUpdatedBy(final String value) {
         set(13, value);
         return this;
     }
@@ -555,67 +555,67 @@ public class MKeyRecord extends UpdatableRecordImpl<MKeyRecord> implements Vertx
     }
 
     @Override
-    public MKeyRecord value1(String value) {
+    public MKeyRecord value1(final String value) {
         setKey(value);
         return this;
     }
 
     @Override
-    public MKeyRecord value2(String value) {
+    public MKeyRecord value2(final String value) {
         setName(value);
         return this;
     }
 
     @Override
-    public MKeyRecord value3(String value) {
+    public MKeyRecord value3(final String value) {
         setType(value);
         return this;
     }
 
     @Override
-    public MKeyRecord value4(String value) {
+    public MKeyRecord value4(final String value) {
         setColumns(value);
         return this;
     }
 
     @Override
-    public MKeyRecord value5(String value) {
+    public MKeyRecord value5(final String value) {
         setEntityId(value);
         return this;
     }
 
     @Override
-    public MKeyRecord value6(String value) {
+    public MKeyRecord value6(final String value) {
         setComments(value);
         return this;
     }
 
     @Override
-    public MKeyRecord value7(String value) {
+    public MKeyRecord value7(final String value) {
         setSigma(value);
         return this;
     }
 
     @Override
-    public MKeyRecord value8(String value) {
+    public MKeyRecord value8(final String value) {
         setLanguage(value);
         return this;
     }
 
     @Override
-    public MKeyRecord value9(Boolean value) {
+    public MKeyRecord value9(final Boolean value) {
         setActive(value);
         return this;
     }
 
     @Override
-    public MKeyRecord value10(String value) {
+    public MKeyRecord value10(final String value) {
         setMetadata(value);
         return this;
     }
 
     @Override
-    public MKeyRecord value11(LocalDateTime value) {
+    public MKeyRecord value11(final LocalDateTime value) {
         setCreatedAt(value);
         return this;
     }
@@ -625,13 +625,13 @@ public class MKeyRecord extends UpdatableRecordImpl<MKeyRecord> implements Vertx
     // -------------------------------------------------------------------------
 
     @Override
-    public MKeyRecord value12(String value) {
+    public MKeyRecord value12(final String value) {
         setCreatedBy(value);
         return this;
     }
 
     @Override
-    public MKeyRecord value13(LocalDateTime value) {
+    public MKeyRecord value13(final LocalDateTime value) {
         setUpdatedAt(value);
         return this;
     }
@@ -641,13 +641,13 @@ public class MKeyRecord extends UpdatableRecordImpl<MKeyRecord> implements Vertx
     // -------------------------------------------------------------------------
 
     @Override
-    public MKeyRecord value14(String value) {
+    public MKeyRecord value14(final String value) {
         setUpdatedBy(value);
         return this;
     }
 
     @Override
-    public MKeyRecord values(String value1, String value2, String value3, String value4, String value5, String value6, String value7, String value8, Boolean value9, String value10, LocalDateTime value11, String value12, LocalDateTime value13, String value14) {
+    public MKeyRecord values(final String value1, final String value2, final String value3, final String value4, final String value5, final String value6, final String value7, final String value8, final Boolean value9, final String value10, final LocalDateTime value11, final String value12, final LocalDateTime value13, final String value14) {
         value1(value1);
         value2(value2);
         value3(value3);
@@ -666,7 +666,7 @@ public class MKeyRecord extends UpdatableRecordImpl<MKeyRecord> implements Vertx
     }
 
     @Override
-    public void from(IMKey from) {
+    public void from(final IMKey from) {
         setKey(from.getKey());
         setName(from.getName());
         setType(from.getType());
@@ -685,7 +685,7 @@ public class MKeyRecord extends UpdatableRecordImpl<MKeyRecord> implements Vertx
     }
 
     @Override
-    public <E extends IMKey> E into(E into) {
+    public <E extends IMKey> E into(final E into) {
         into.from(this);
         return into;
     }

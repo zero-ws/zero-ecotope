@@ -4,7 +4,7 @@
 package io.zerows.extension.commerce.erp.domain.tables.pojos;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.commerce.erp.domain.tables.interfaces.ITVendorCheckOut;
 
 import java.time.LocalDateTime;
@@ -29,7 +29,7 @@ public class TVendorCheckOut implements VertxPojo, ITVendorCheckOut {
     public TVendorCheckOut() {
     }
 
-    public TVendorCheckOut(ITVendorCheckOut value) {
+    public TVendorCheckOut(final ITVendorCheckOut value) {
         this.key = value.getKey();
         this.commentExtension = value.getCommentExtension();
         this.classification = value.getClassification();
@@ -41,14 +41,14 @@ public class TVendorCheckOut implements VertxPojo, ITVendorCheckOut {
     }
 
     public TVendorCheckOut(
-        String key,
-        String commentExtension,
-        String classification,
-        LocalDateTime startAt,
-        LocalDateTime endAt,
-        Integer days,
-        LocalDateTime leaveAt,
-        String reason
+        final String key,
+        final String commentExtension,
+        final String classification,
+        final LocalDateTime startAt,
+        final LocalDateTime endAt,
+        final Integer days,
+        final LocalDateTime leaveAt,
+        final String reason
     ) {
         this.key = key;
         this.commentExtension = commentExtension;
@@ -60,7 +60,7 @@ public class TVendorCheckOut implements VertxPojo, ITVendorCheckOut {
         this.reason = reason;
     }
 
-    public TVendorCheckOut(io.vertx.core.json.JsonObject json) {
+    public TVendorCheckOut(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -79,7 +79,7 @@ public class TVendorCheckOut implements VertxPojo, ITVendorCheckOut {
      * Key
      */
     @Override
-    public TVendorCheckOut setKey(String key) {
+    public TVendorCheckOut setKey(final String key) {
         this.key = key;
         return this;
     }
@@ -98,7 +98,7 @@ public class TVendorCheckOut implements VertxPojo, ITVendorCheckOut {
      * 「commentExtension」- Extension Comment
      */
     @Override
-    public TVendorCheckOut setCommentExtension(String commentExtension) {
+    public TVendorCheckOut setCommentExtension(final String commentExtension) {
         this.commentExtension = commentExtension;
         return this;
     }
@@ -117,7 +117,7 @@ public class TVendorCheckOut implements VertxPojo, ITVendorCheckOut {
      * 「classification」- The ticket related income type
      */
     @Override
-    public TVendorCheckOut setClassification(String classification) {
+    public TVendorCheckOut setClassification(final String classification) {
         this.classification = classification;
         return this;
     }
@@ -134,7 +134,7 @@ public class TVendorCheckOut implements VertxPojo, ITVendorCheckOut {
      * Setter for <code>ZDB.T_VENDOR_CHECK_OUT.START_AT</code>. 「startAt」- From
      */
     @Override
-    public TVendorCheckOut setStartAt(LocalDateTime startAt) {
+    public TVendorCheckOut setStartAt(final LocalDateTime startAt) {
         this.startAt = startAt;
         return this;
     }
@@ -151,7 +151,7 @@ public class TVendorCheckOut implements VertxPojo, ITVendorCheckOut {
      * Setter for <code>ZDB.T_VENDOR_CHECK_OUT.END_AT</code>. 「endAt」- To
      */
     @Override
-    public TVendorCheckOut setEndAt(LocalDateTime endAt) {
+    public TVendorCheckOut setEndAt(final LocalDateTime endAt) {
         this.endAt = endAt;
         return this;
     }
@@ -168,7 +168,7 @@ public class TVendorCheckOut implements VertxPojo, ITVendorCheckOut {
      * Setter for <code>ZDB.T_VENDOR_CHECK_OUT.DAYS</code>. 「days」- Duration
      */
     @Override
-    public TVendorCheckOut setDays(Integer days) {
+    public TVendorCheckOut setDays(final Integer days) {
         this.days = days;
         return this;
     }
@@ -185,7 +185,7 @@ public class TVendorCheckOut implements VertxPojo, ITVendorCheckOut {
      * Setter for <code>ZDB.T_VENDOR_CHECK_OUT.LEAVE_AT</code>. 「leaveAt」- To
      */
     @Override
-    public TVendorCheckOut setLeaveAt(LocalDateTime leaveAt) {
+    public TVendorCheckOut setLeaveAt(final LocalDateTime leaveAt) {
         this.leaveAt = leaveAt;
         return this;
     }
@@ -204,13 +204,13 @@ public class TVendorCheckOut implements VertxPojo, ITVendorCheckOut {
      * reason to be done
      */
     @Override
-    public TVendorCheckOut setReason(String reason) {
+    public TVendorCheckOut setReason(final String reason) {
         this.reason = reason;
         return this;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
@@ -278,7 +278,7 @@ public class TVendorCheckOut implements VertxPojo, ITVendorCheckOut {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("TVendorCheckOut (");
+        final StringBuilder sb = new StringBuilder("TVendorCheckOut (");
 
         sb.append(key);
         sb.append(", ").append(commentExtension);
@@ -298,7 +298,7 @@ public class TVendorCheckOut implements VertxPojo, ITVendorCheckOut {
     // -------------------------------------------------------------------------
 
     @Override
-    public void from(ITVendorCheckOut from) {
+    public void from(final ITVendorCheckOut from) {
         setKey(from.getKey());
         setCommentExtension(from.getCommentExtension());
         setClassification(from.getClassification());
@@ -310,7 +310,7 @@ public class TVendorCheckOut implements VertxPojo, ITVendorCheckOut {
     }
 
     @Override
-    public <E extends ITVendorCheckOut> E into(E into) {
+    public <E extends ITVendorCheckOut> E into(final E into) {
         into.from(this);
         return into;
     }

@@ -4,7 +4,7 @@
 package io.zerows.extension.runtime.workflow.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.runtime.workflow.domain.tables.WTodo;
 import io.zerows.extension.runtime.workflow.domain.tables.interfaces.IWTodo;
 import org.jooq.Record1;
@@ -30,7 +30,7 @@ public class WTodoRecord extends UpdatableRecordImpl<WTodoRecord> implements Ver
     /**
      * Create a detached, initialised WTodoRecord
      */
-    public WTodoRecord(String key, String serial, String name, String code, String icon, String status, String todoUrl, String type, LocalDateTime expiredAt, String modelId, String modelKey, String modelCategory, String parentId, String serialFork, String traceId, Integer traceOrder, String taskId, String taskKey, String comment, String commentApproval, String commentReject, String toLocation, String toGroup, String toTeam, String toRole, String toUser, String toDept, Boolean escalate, String escalateData, String assignedBy, LocalDateTime assignedAt, String acceptedBy, String acceptedGroup, LocalDateTime acceptedAt, String finishedBy, LocalDateTime finishedAt, Boolean active, String sigma, String metadata, String language, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public WTodoRecord(final String key, final String serial, final String name, final String code, final String icon, final String status, final String todoUrl, final String type, final LocalDateTime expiredAt, final String modelId, final String modelKey, final String modelCategory, final String parentId, final String serialFork, final String traceId, final Integer traceOrder, final String taskId, final String taskKey, final String comment, final String commentApproval, final String commentReject, final String toLocation, final String toGroup, final String toTeam, final String toRole, final String toUser, final String toDept, final Boolean escalate, final String escalateData, final String assignedBy, final LocalDateTime assignedAt, final String acceptedBy, final String acceptedGroup, final LocalDateTime acceptedAt, final String finishedBy, final LocalDateTime finishedAt, final Boolean active, final String sigma, final String metadata, final String language, final LocalDateTime createdAt, final String createdBy, final LocalDateTime updatedAt, final String updatedBy) {
         super(WTodo.W_TODO);
 
         setKey(key);
@@ -83,7 +83,7 @@ public class WTodoRecord extends UpdatableRecordImpl<WTodoRecord> implements Ver
     /**
      * Create a detached, initialised WTodoRecord
      */
-    public WTodoRecord(io.zerows.extension.runtime.workflow.domain.tables.pojos.WTodo value) {
+    public WTodoRecord(final io.zerows.extension.runtime.workflow.domain.tables.pojos.WTodo value) {
         super(WTodo.W_TODO);
 
         if (value != null) {
@@ -135,7 +135,7 @@ public class WTodoRecord extends UpdatableRecordImpl<WTodoRecord> implements Ver
         }
     }
 
-    public WTodoRecord(io.vertx.core.json.JsonObject json) {
+    public WTodoRecord(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -152,7 +152,7 @@ public class WTodoRecord extends UpdatableRecordImpl<WTodoRecord> implements Ver
      * Setter for <code>ZDB.W_TODO.KEY</code>. 「key」- 待办主键
      */
     @Override
-    public WTodoRecord setKey(String value) {
+    public WTodoRecord setKey(final String value) {
         set(0, value);
         return this;
     }
@@ -169,7 +169,7 @@ public class WTodoRecord extends UpdatableRecordImpl<WTodoRecord> implements Ver
      * Setter for <code>ZDB.W_TODO.SERIAL</code>. 「serial」- 待办编号，使用 X_NUMBER 生成
      */
     @Override
-    public WTodoRecord setSerial(String value) {
+    public WTodoRecord setSerial(final String value) {
         set(1, value);
         return this;
     }
@@ -186,7 +186,7 @@ public class WTodoRecord extends UpdatableRecordImpl<WTodoRecord> implements Ver
      * Setter for <code>ZDB.W_TODO.NAME</code>. 「name」- 待办名称（标题）
      */
     @Override
-    public WTodoRecord setName(String value) {
+    public WTodoRecord setName(final String value) {
         set(2, value);
         return this;
     }
@@ -203,7 +203,7 @@ public class WTodoRecord extends UpdatableRecordImpl<WTodoRecord> implements Ver
      * Setter for <code>ZDB.W_TODO.CODE</code>. 「code」- 待办系统码，使用流程时候关联流程的任务ID
      */
     @Override
-    public WTodoRecord setCode(String value) {
+    public WTodoRecord setCode(final String value) {
         set(3, value);
         return this;
     }
@@ -220,7 +220,7 @@ public class WTodoRecord extends UpdatableRecordImpl<WTodoRecord> implements Ver
      * Setter for <code>ZDB.W_TODO.ICON</code>. 「icon」- 待办显示的图标
      */
     @Override
-    public WTodoRecord setIcon(String value) {
+    public WTodoRecord setIcon(final String value) {
         set(4, value);
         return this;
     }
@@ -237,7 +237,7 @@ public class WTodoRecord extends UpdatableRecordImpl<WTodoRecord> implements Ver
      * Setter for <code>ZDB.W_TODO.STATUS</code>. 「status」- 待办状态
      */
     @Override
-    public WTodoRecord setStatus(String value) {
+    public WTodoRecord setStatus(final String value) {
         set(5, value);
         return this;
     }
@@ -254,7 +254,7 @@ public class WTodoRecord extends UpdatableRecordImpl<WTodoRecord> implements Ver
      * Setter for <code>ZDB.W_TODO.TODO_URL</code>. 「todoUrl」- 待办路径
      */
     @Override
-    public WTodoRecord setTodoUrl(String value) {
+    public WTodoRecord setTodoUrl(final String value) {
         set(6, value);
         return this;
     }
@@ -271,7 +271,7 @@ public class WTodoRecord extends UpdatableRecordImpl<WTodoRecord> implements Ver
      * Setter for <code>ZDB.W_TODO.TYPE</code>. 「type」- 待办类型
      */
     @Override
-    public WTodoRecord setType(String value) {
+    public WTodoRecord setType(final String value) {
         set(7, value);
         return this;
     }
@@ -288,7 +288,7 @@ public class WTodoRecord extends UpdatableRecordImpl<WTodoRecord> implements Ver
      * Setter for <code>ZDB.W_TODO.EXPIRED_AT</code>. 「expiredAt」- 超时时间
      */
     @Override
-    public WTodoRecord setExpiredAt(LocalDateTime value) {
+    public WTodoRecord setExpiredAt(final LocalDateTime value) {
         set(8, value);
         return this;
     }
@@ -307,7 +307,7 @@ public class WTodoRecord extends UpdatableRecordImpl<WTodoRecord> implements Ver
      * 关联的模型identifier，用于描述
      */
     @Override
-    public WTodoRecord setModelId(String value) {
+    public WTodoRecord setModelId(final String value) {
         set(9, value);
         return this;
     }
@@ -326,7 +326,7 @@ public class WTodoRecord extends UpdatableRecordImpl<WTodoRecord> implements Ver
      * 关联的模型记录ID，用于描述哪一个Model中的记录
      */
     @Override
-    public WTodoRecord setModelKey(String value) {
+    public WTodoRecord setModelKey(final String value) {
         set(10, value);
         return this;
     }
@@ -345,7 +345,7 @@ public class WTodoRecord extends UpdatableRecordImpl<WTodoRecord> implements Ver
      * 关联的category记录，只包含叶节点
      */
     @Override
-    public WTodoRecord setModelCategory(String value) {
+    public WTodoRecord setModelCategory(final String value) {
         set(11, value);
         return this;
     }
@@ -364,7 +364,7 @@ public class WTodoRecord extends UpdatableRecordImpl<WTodoRecord> implements Ver
      * 待办支持父子集结构，父待办执行时候子待办同样执行
      */
     @Override
-    public WTodoRecord setParentId(String value) {
+    public WTodoRecord setParentId(final String value) {
         set(12, value);
         return this;
     }
@@ -381,7 +381,7 @@ public class WTodoRecord extends UpdatableRecordImpl<WTodoRecord> implements Ver
      * Setter for <code>ZDB.W_TODO.SERIAL_FORK</code>. 「serialFork」- 生成序号的分支序号
      */
     @Override
-    public WTodoRecord setSerialFork(String value) {
+    public WTodoRecord setSerialFork(final String value) {
         set(13, value);
         return this;
     }
@@ -398,7 +398,7 @@ public class WTodoRecord extends UpdatableRecordImpl<WTodoRecord> implements Ver
      * Setter for <code>ZDB.W_TODO.TRACE_ID</code>. 「traceId」- 同一个流程的待办执行分组
      */
     @Override
-    public WTodoRecord setTraceId(String value) {
+    public WTodoRecord setTraceId(final String value) {
         set(14, value);
         return this;
     }
@@ -415,7 +415,7 @@ public class WTodoRecord extends UpdatableRecordImpl<WTodoRecord> implements Ver
      * Setter for <code>ZDB.W_TODO.TRACE_ORDER</code>. 「traceOrder」- 待办的处理顺序
      */
     @Override
-    public WTodoRecord setTraceOrder(Integer value) {
+    public WTodoRecord setTraceOrder(final Integer value) {
         set(15, value);
         return this;
     }
@@ -432,7 +432,7 @@ public class WTodoRecord extends UpdatableRecordImpl<WTodoRecord> implements Ver
      * Setter for <code>ZDB.W_TODO.TASK_ID</code>. 「taskId」- 和待办绑定的taskId（任务）
      */
     @Override
-    public WTodoRecord setTaskId(String value) {
+    public WTodoRecord setTaskId(final String value) {
         set(16, value);
         return this;
     }
@@ -449,7 +449,7 @@ public class WTodoRecord extends UpdatableRecordImpl<WTodoRecord> implements Ver
      * Setter for <code>ZDB.W_TODO.TASK_KEY</code>. 「taskKey」- 和待办绑定的taskKey
      */
     @Override
-    public WTodoRecord setTaskKey(String value) {
+    public WTodoRecord setTaskKey(final String value) {
         set(17, value);
         return this;
     }
@@ -466,7 +466,7 @@ public class WTodoRecord extends UpdatableRecordImpl<WTodoRecord> implements Ver
      * Setter for <code>ZDB.W_TODO.COMMENT</code>. 「comment」- 待办描述
      */
     @Override
-    public WTodoRecord setComment(String value) {
+    public WTodoRecord setComment(final String value) {
         set(18, value);
         return this;
     }
@@ -485,7 +485,7 @@ public class WTodoRecord extends UpdatableRecordImpl<WTodoRecord> implements Ver
      * 审批描述
      */
     @Override
-    public WTodoRecord setCommentApproval(String value) {
+    public WTodoRecord setCommentApproval(final String value) {
         set(19, value);
         return this;
     }
@@ -502,7 +502,7 @@ public class WTodoRecord extends UpdatableRecordImpl<WTodoRecord> implements Ver
      * Setter for <code>ZDB.W_TODO.COMMENT_REJECT</code>. 「commentReject」- 拒绝理由
      */
     @Override
-    public WTodoRecord setCommentReject(String value) {
+    public WTodoRecord setCommentReject(final String value) {
         set(20, value);
         return this;
     }
@@ -519,7 +519,7 @@ public class WTodoRecord extends UpdatableRecordImpl<WTodoRecord> implements Ver
      * Setter for <code>ZDB.W_TODO.TO_LOCATION</code>. 「toLocation」- 指定地址区域
      */
     @Override
-    public WTodoRecord setToLocation(String value) {
+    public WTodoRecord setToLocation(final String value) {
         set(21, value);
         return this;
     }
@@ -536,7 +536,7 @@ public class WTodoRecord extends UpdatableRecordImpl<WTodoRecord> implements Ver
      * Setter for <code>ZDB.W_TODO.TO_GROUP</code>. 「toGroup」- 指定用户组
      */
     @Override
-    public WTodoRecord setToGroup(String value) {
+    public WTodoRecord setToGroup(final String value) {
         set(22, value);
         return this;
     }
@@ -553,7 +553,7 @@ public class WTodoRecord extends UpdatableRecordImpl<WTodoRecord> implements Ver
      * Setter for <code>ZDB.W_TODO.TO_TEAM</code>. 「toTeam」- 指定业务组
      */
     @Override
-    public WTodoRecord setToTeam(String value) {
+    public WTodoRecord setToTeam(final String value) {
         set(23, value);
         return this;
     }
@@ -570,7 +570,7 @@ public class WTodoRecord extends UpdatableRecordImpl<WTodoRecord> implements Ver
      * Setter for <code>ZDB.W_TODO.TO_ROLE</code>. 「toRole」- 待办角色（集体）
      */
     @Override
-    public WTodoRecord setToRole(String value) {
+    public WTodoRecord setToRole(final String value) {
         set(24, value);
         return this;
     }
@@ -587,7 +587,7 @@ public class WTodoRecord extends UpdatableRecordImpl<WTodoRecord> implements Ver
      * Setter for <code>ZDB.W_TODO.TO_USER</code>. 「toUser」- 待办指定人
      */
     @Override
-    public WTodoRecord setToUser(String value) {
+    public WTodoRecord setToUser(final String value) {
         set(25, value);
         return this;
     }
@@ -604,7 +604,7 @@ public class WTodoRecord extends UpdatableRecordImpl<WTodoRecord> implements Ver
      * Setter for <code>ZDB.W_TODO.TO_DEPT</code>. 「toDept」- 指定部门
      */
     @Override
-    public WTodoRecord setToDept(String value) {
+    public WTodoRecord setToDept(final String value) {
         set(26, value);
         return this;
     }
@@ -621,7 +621,7 @@ public class WTodoRecord extends UpdatableRecordImpl<WTodoRecord> implements Ver
      * Setter for <code>ZDB.W_TODO.ESCALATE</code>. 「escalate」- 是否升级
      */
     @Override
-    public WTodoRecord setEscalate(Boolean value) {
+    public WTodoRecord setEscalate(final Boolean value) {
         set(27, value);
         return this;
     }
@@ -638,7 +638,7 @@ public class WTodoRecord extends UpdatableRecordImpl<WTodoRecord> implements Ver
      * Setter for <code>ZDB.W_TODO.ESCALATE_DATA</code>. 「escalateData」- 升级单据数据
      */
     @Override
-    public WTodoRecord setEscalateData(String value) {
+    public WTodoRecord setEscalateData(final String value) {
         set(28, value);
         return this;
     }
@@ -655,7 +655,7 @@ public class WTodoRecord extends UpdatableRecordImpl<WTodoRecord> implements Ver
      * Setter for <code>ZDB.W_TODO.ASSIGNED_BY</code>. 「assignedBy」- 待办指派人
      */
     @Override
-    public WTodoRecord setAssignedBy(String value) {
+    public WTodoRecord setAssignedBy(final String value) {
         set(29, value);
         return this;
     }
@@ -672,7 +672,7 @@ public class WTodoRecord extends UpdatableRecordImpl<WTodoRecord> implements Ver
      * Setter for <code>ZDB.W_TODO.ASSIGNED_AT</code>. 「assignedAt」- 指派时间
      */
     @Override
-    public WTodoRecord setAssignedAt(LocalDateTime value) {
+    public WTodoRecord setAssignedAt(final LocalDateTime value) {
         set(30, value);
         return this;
     }
@@ -689,7 +689,7 @@ public class WTodoRecord extends UpdatableRecordImpl<WTodoRecord> implements Ver
      * Setter for <code>ZDB.W_TODO.ACCEPTED_BY</code>. 「acceptedBy」- 待办接收人
      */
     @Override
-    public WTodoRecord setAcceptedBy(String value) {
+    public WTodoRecord setAcceptedBy(final String value) {
         set(31, value);
         return this;
     }
@@ -706,7 +706,7 @@ public class WTodoRecord extends UpdatableRecordImpl<WTodoRecord> implements Ver
      * Setter for <code>ZDB.W_TODO.ACCEPTED_GROUP</code>. 「acceptedGroup」- 当前处理组
      */
     @Override
-    public WTodoRecord setAcceptedGroup(String value) {
+    public WTodoRecord setAcceptedGroup(final String value) {
         set(32, value);
         return this;
     }
@@ -723,7 +723,7 @@ public class WTodoRecord extends UpdatableRecordImpl<WTodoRecord> implements Ver
      * Setter for <code>ZDB.W_TODO.ACCEPTED_AT</code>. 「acceptedAt」- 接收时间
      */
     @Override
-    public WTodoRecord setAcceptedAt(LocalDateTime value) {
+    public WTodoRecord setAcceptedAt(final LocalDateTime value) {
         set(33, value);
         return this;
     }
@@ -740,7 +740,7 @@ public class WTodoRecord extends UpdatableRecordImpl<WTodoRecord> implements Ver
      * Setter for <code>ZDB.W_TODO.FINISHED_BY</code>. 「finishedBy」- 待办完成人
      */
     @Override
-    public WTodoRecord setFinishedBy(String value) {
+    public WTodoRecord setFinishedBy(final String value) {
         set(34, value);
         return this;
     }
@@ -757,7 +757,7 @@ public class WTodoRecord extends UpdatableRecordImpl<WTodoRecord> implements Ver
      * Setter for <code>ZDB.W_TODO.FINISHED_AT</code>. 「finishedAt」- 完成时间
      */
     @Override
-    public WTodoRecord setFinishedAt(LocalDateTime value) {
+    public WTodoRecord setFinishedAt(final LocalDateTime value) {
         set(35, value);
         return this;
     }
@@ -774,7 +774,7 @@ public class WTodoRecord extends UpdatableRecordImpl<WTodoRecord> implements Ver
      * Setter for <code>ZDB.W_TODO.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public WTodoRecord setActive(Boolean value) {
+    public WTodoRecord setActive(final Boolean value) {
         set(36, value);
         return this;
     }
@@ -791,7 +791,7 @@ public class WTodoRecord extends UpdatableRecordImpl<WTodoRecord> implements Ver
      * Setter for <code>ZDB.W_TODO.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public WTodoRecord setSigma(String value) {
+    public WTodoRecord setSigma(final String value) {
         set(37, value);
         return this;
     }
@@ -808,7 +808,7 @@ public class WTodoRecord extends UpdatableRecordImpl<WTodoRecord> implements Ver
      * Setter for <code>ZDB.W_TODO.METADATA</code>. 「metadata」- 附加配置
      */
     @Override
-    public WTodoRecord setMetadata(String value) {
+    public WTodoRecord setMetadata(final String value) {
         set(38, value);
         return this;
     }
@@ -825,7 +825,7 @@ public class WTodoRecord extends UpdatableRecordImpl<WTodoRecord> implements Ver
      * Setter for <code>ZDB.W_TODO.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public WTodoRecord setLanguage(String value) {
+    public WTodoRecord setLanguage(final String value) {
         set(39, value);
         return this;
     }
@@ -842,7 +842,7 @@ public class WTodoRecord extends UpdatableRecordImpl<WTodoRecord> implements Ver
      * Setter for <code>ZDB.W_TODO.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public WTodoRecord setCreatedAt(LocalDateTime value) {
+    public WTodoRecord setCreatedAt(final LocalDateTime value) {
         set(40, value);
         return this;
     }
@@ -859,7 +859,7 @@ public class WTodoRecord extends UpdatableRecordImpl<WTodoRecord> implements Ver
      * Setter for <code>ZDB.W_TODO.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public WTodoRecord setCreatedBy(String value) {
+    public WTodoRecord setCreatedBy(final String value) {
         set(41, value);
         return this;
     }
@@ -884,7 +884,7 @@ public class WTodoRecord extends UpdatableRecordImpl<WTodoRecord> implements Ver
      * Setter for <code>ZDB.W_TODO.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public WTodoRecord setUpdatedAt(LocalDateTime value) {
+    public WTodoRecord setUpdatedAt(final LocalDateTime value) {
         set(42, value);
         return this;
     }
@@ -905,7 +905,7 @@ public class WTodoRecord extends UpdatableRecordImpl<WTodoRecord> implements Ver
      * Setter for <code>ZDB.W_TODO.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public WTodoRecord setUpdatedBy(String value) {
+    public WTodoRecord setUpdatedBy(final String value) {
         set(43, value);
         return this;
     }
@@ -916,7 +916,7 @@ public class WTodoRecord extends UpdatableRecordImpl<WTodoRecord> implements Ver
     }
 
     @Override
-    public void from(IWTodo from) {
+    public void from(final IWTodo from) {
         setKey(from.getKey());
         setSerial(from.getSerial());
         setName(from.getName());
@@ -965,7 +965,7 @@ public class WTodoRecord extends UpdatableRecordImpl<WTodoRecord> implements Ver
     }
 
     @Override
-    public <E extends IWTodo> E into(E into) {
+    public <E extends IWTodo> E into(final E into) {
         into.from(this);
         return into;
     }

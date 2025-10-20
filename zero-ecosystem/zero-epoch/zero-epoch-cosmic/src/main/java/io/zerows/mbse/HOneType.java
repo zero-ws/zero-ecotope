@@ -106,10 +106,10 @@ class HOneType implements HOne<ConcurrentMap<String, Class<?>>> {
     }
 
     /**
-     * 此方法负责类型加载，但是类型加载中的 class 必须是 {@link io.github.jklingsporn.vertx.jooq.classic.VertxDAO} 类型，实际
+     * 此方法负责类型加载，但是类型加载中的 class 必须是 {@link io.r2mo.vertx.jooq.classic.VertxDAO} 类型，实际
      * 所有的实体类的属性名和对应类型是依靠「数据访问器」的类型分析而得的，而不是直接分析实体类而得到的。
      *
-     * @param daoCls {@link io.github.jklingsporn.vertx.jooq.classic.VertxDAO} 的子类
+     * @param daoCls {@link io.r2mo.vertx.jooq.classic.VertxDAO} 的子类
      *
      * @return 分析结果，哈希表存储了属性和类型
      */

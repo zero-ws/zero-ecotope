@@ -4,7 +4,7 @@
 package io.zerows.extension.runtime.ambient.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.runtime.ambient.domain.tables.XNumber;
 import io.zerows.extension.runtime.ambient.domain.tables.interfaces.IXNumber;
 import org.jooq.Record1;
@@ -24,7 +24,7 @@ public class XNumberRecord extends UpdatableRecordImpl<XNumberRecord> implements
      * Setter for <code>ZDB.X_NUMBER.KEY</code>. 「key」- 主键
      */
     @Override
-    public XNumberRecord setKey(String value) {
+    public XNumberRecord setKey(final String value) {
         set(0, value);
         return this;
     }
@@ -41,7 +41,7 @@ public class XNumberRecord extends UpdatableRecordImpl<XNumberRecord> implements
      * Setter for <code>ZDB.X_NUMBER.CODE</code>. 「code」- 编码
      */
     @Override
-    public XNumberRecord setCode(String value) {
+    public XNumberRecord setCode(final String value) {
         set(1, value);
         return this;
     }
@@ -59,7 +59,7 @@ public class XNumberRecord extends UpdatableRecordImpl<XNumberRecord> implements
      * 编号备注信息，用于描述编号数据,comment,S_COMMENT
      */
     @Override
-    public XNumberRecord setComment(String value) {
+    public XNumberRecord setComment(final String value) {
         set(2, value);
         return this;
     }
@@ -79,7 +79,7 @@ public class XNumberRecord extends UpdatableRecordImpl<XNumberRecord> implements
      * step,current,L_CURRENT
      */
     @Override
-    public XNumberRecord setCurrent(Long value) {
+    public XNumberRecord setCurrent(final Long value) {
         set(3, value);
         return this;
     }
@@ -99,7 +99,7 @@ public class XNumberRecord extends UpdatableRecordImpl<XNumberRecord> implements
      * 「formatFail」格式信息，用于处理最终格式：,formatFail,S_FORMAT
      */
     @Override
-    public XNumberRecord setFormat(String value) {
+    public XNumberRecord setFormat(final String value) {
         set(4, value);
         return this;
     }
@@ -118,7 +118,7 @@ public class XNumberRecord extends UpdatableRecordImpl<XNumberRecord> implements
      * 「identifier」编号对应的identifier，用于查询当前identifier使用的序号信息,identifier,S_IDENTIFIER
      */
     @Override
-    public XNumberRecord setIdentifier(String value) {
+    public XNumberRecord setIdentifier(final String value) {
         set(5, value);
         return this;
     }
@@ -136,7 +136,7 @@ public class XNumberRecord extends UpdatableRecordImpl<XNumberRecord> implements
      * Setter for <code>ZDB.X_NUMBER.PREFIX</code>. 「prefix」编号前缀,prefix,S_PREFIX
      */
     @Override
-    public XNumberRecord setPrefix(String value) {
+    public XNumberRecord setPrefix(final String value) {
         set(6, value);
         return this;
     }
@@ -153,7 +153,7 @@ public class XNumberRecord extends UpdatableRecordImpl<XNumberRecord> implements
      * Setter for <code>ZDB.X_NUMBER.SUFFIX</code>. 「suffix」编号后缀,suffix,S_SUFFIX
      */
     @Override
-    public XNumberRecord setSuffix(String value) {
+    public XNumberRecord setSuffix(final String value) {
         set(7, value);
         return this;
     }
@@ -172,7 +172,7 @@ public class XNumberRecord extends UpdatableRecordImpl<XNumberRecord> implements
      * HH:mm:ss用于描述时间格式生成序号时间部分,time,S_TIME
      */
     @Override
-    public XNumberRecord setTime(String value) {
+    public XNumberRecord setTime(final String value) {
         set(8, value);
         return this;
     }
@@ -192,7 +192,7 @@ public class XNumberRecord extends UpdatableRecordImpl<XNumberRecord> implements
      * 「length」编号长度，编号长度不包含prefix和suffix部分,length,I_LENGTH
      */
     @Override
-    public XNumberRecord setLength(Integer value) {
+    public XNumberRecord setLength(final Integer value) {
         set(9, value);
         return this;
     }
@@ -211,7 +211,7 @@ public class XNumberRecord extends UpdatableRecordImpl<XNumberRecord> implements
      * 「step」编号的步进系数，每次按照step进行变化,step,I_STEP
      */
     @Override
-    public XNumberRecord setStep(Integer value) {
+    public XNumberRecord setStep(final Integer value) {
         set(10, value);
         return this;
     }
@@ -230,7 +230,7 @@ public class XNumberRecord extends UpdatableRecordImpl<XNumberRecord> implements
      * 「decrement」递增/递减？如果为true则递减，为false则是递增,decrement,IS_DECREMENT
      */
     @Override
-    public XNumberRecord setDecrement(Boolean value) {
+    public XNumberRecord setDecrement(final Boolean value) {
         set(11, value);
         return this;
     }
@@ -248,7 +248,7 @@ public class XNumberRecord extends UpdatableRecordImpl<XNumberRecord> implements
      * Setter for <code>ZDB.X_NUMBER.APP_ID</code>. 「id」- 关联的应用程序ID
      */
     @Override
-    public XNumberRecord setAppId(String value) {
+    public XNumberRecord setAppId(final String value) {
         set(12, value);
         return this;
     }
@@ -266,7 +266,7 @@ public class XNumberRecord extends UpdatableRecordImpl<XNumberRecord> implements
      * 发号器执行组件，雪花算法所需
      */
     @Override
-    public XNumberRecord setRunComponent(String value) {
+    public XNumberRecord setRunComponent(final String value) {
         set(13, value);
         return this;
     }
@@ -284,7 +284,7 @@ public class XNumberRecord extends UpdatableRecordImpl<XNumberRecord> implements
      * Setter for <code>ZDB.X_NUMBER.RENEWAL</code>. 「renewal」- 是否循环
      */
     @Override
-    public XNumberRecord setRenewal(Boolean value) {
+    public XNumberRecord setRenewal(final Boolean value) {
         set(14, value);
         return this;
     }
@@ -301,7 +301,7 @@ public class XNumberRecord extends UpdatableRecordImpl<XNumberRecord> implements
      * Setter for <code>ZDB.X_NUMBER.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public XNumberRecord setActive(Boolean value) {
+    public XNumberRecord setActive(final Boolean value) {
         set(15, value);
         return this;
     }
@@ -318,7 +318,7 @@ public class XNumberRecord extends UpdatableRecordImpl<XNumberRecord> implements
      * Setter for <code>ZDB.X_NUMBER.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public XNumberRecord setSigma(String value) {
+    public XNumberRecord setSigma(final String value) {
         set(16, value);
         return this;
     }
@@ -335,7 +335,7 @@ public class XNumberRecord extends UpdatableRecordImpl<XNumberRecord> implements
      * Setter for <code>ZDB.X_NUMBER.METADATA</code>. 「metadata」- 附加配置
      */
     @Override
-    public XNumberRecord setMetadata(String value) {
+    public XNumberRecord setMetadata(final String value) {
         set(17, value);
         return this;
     }
@@ -352,7 +352,7 @@ public class XNumberRecord extends UpdatableRecordImpl<XNumberRecord> implements
      * Setter for <code>ZDB.X_NUMBER.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public XNumberRecord setLanguage(String value) {
+    public XNumberRecord setLanguage(final String value) {
         set(18, value);
         return this;
     }
@@ -369,7 +369,7 @@ public class XNumberRecord extends UpdatableRecordImpl<XNumberRecord> implements
      * Setter for <code>ZDB.X_NUMBER.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public XNumberRecord setCreatedAt(LocalDateTime value) {
+    public XNumberRecord setCreatedAt(final LocalDateTime value) {
         set(19, value);
         return this;
     }
@@ -386,7 +386,7 @@ public class XNumberRecord extends UpdatableRecordImpl<XNumberRecord> implements
      * Setter for <code>ZDB.X_NUMBER.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public XNumberRecord setCreatedBy(String value) {
+    public XNumberRecord setCreatedBy(final String value) {
         set(20, value);
         return this;
     }
@@ -403,7 +403,7 @@ public class XNumberRecord extends UpdatableRecordImpl<XNumberRecord> implements
      * Setter for <code>ZDB.X_NUMBER.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public XNumberRecord setUpdatedAt(LocalDateTime value) {
+    public XNumberRecord setUpdatedAt(final LocalDateTime value) {
         set(21, value);
         return this;
     }
@@ -420,7 +420,7 @@ public class XNumberRecord extends UpdatableRecordImpl<XNumberRecord> implements
      * Setter for <code>ZDB.X_NUMBER.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public XNumberRecord setUpdatedBy(String value) {
+    public XNumberRecord setUpdatedBy(final String value) {
         set(22, value);
         return this;
     }
@@ -447,7 +447,7 @@ public class XNumberRecord extends UpdatableRecordImpl<XNumberRecord> implements
     // -------------------------------------------------------------------------
 
     @Override
-    public void from(IXNumber from) {
+    public void from(final IXNumber from) {
         setKey(from.getKey());
         setCode(from.getCode());
         setComment(from.getComment());
@@ -475,7 +475,7 @@ public class XNumberRecord extends UpdatableRecordImpl<XNumberRecord> implements
     }
 
     @Override
-    public <E extends IXNumber> E into(E into) {
+    public <E extends IXNumber> E into(final E into) {
         into.from(this);
         return into;
     }
@@ -494,7 +494,7 @@ public class XNumberRecord extends UpdatableRecordImpl<XNumberRecord> implements
     /**
      * Create a detached, initialised XNumberRecord
      */
-    public XNumberRecord(String key, String code, String comment, Long current, String format, String identifier, String prefix, String suffix, String time, Integer length, Integer step, Boolean decrement, String appId, String runComponent, Boolean renewal, Boolean active, String sigma, String metadata, String language, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public XNumberRecord(final String key, final String code, final String comment, final Long current, final String format, final String identifier, final String prefix, final String suffix, final String time, final Integer length, final Integer step, final Boolean decrement, final String appId, final String runComponent, final Boolean renewal, final Boolean active, final String sigma, final String metadata, final String language, final LocalDateTime createdAt, final String createdBy, final LocalDateTime updatedAt, final String updatedBy) {
         super(XNumber.X_NUMBER);
 
         setKey(key);
@@ -526,7 +526,7 @@ public class XNumberRecord extends UpdatableRecordImpl<XNumberRecord> implements
     /**
      * Create a detached, initialised XNumberRecord
      */
-    public XNumberRecord(io.zerows.extension.runtime.ambient.domain.tables.pojos.XNumber value) {
+    public XNumberRecord(final io.zerows.extension.runtime.ambient.domain.tables.pojos.XNumber value) {
         super(XNumber.X_NUMBER);
 
         if (value != null) {
@@ -557,7 +557,7 @@ public class XNumberRecord extends UpdatableRecordImpl<XNumberRecord> implements
         }
     }
 
-    public XNumberRecord(io.vertx.core.json.JsonObject json) {
+    public XNumberRecord(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }

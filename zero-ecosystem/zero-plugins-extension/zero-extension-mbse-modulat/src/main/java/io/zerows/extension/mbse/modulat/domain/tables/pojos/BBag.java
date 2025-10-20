@@ -4,7 +4,7 @@
 package io.zerows.extension.mbse.modulat.domain.tables.pojos;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.mbse.modulat.domain.tables.interfaces.IBBag;
 
 import java.time.LocalDateTime;
@@ -42,7 +42,7 @@ public class BBag implements VertxPojo, IBBag {
     public BBag() {
     }
 
-    public BBag(IBBag value) {
+    public BBag(final IBBag value) {
         this.key = value.getKey();
         this.name = value.getName();
         this.nameAbbr = value.getNameAbbr();
@@ -67,27 +67,27 @@ public class BBag implements VertxPojo, IBBag {
     }
 
     public BBag(
-        String key,
-        String name,
-        String nameAbbr,
-        String nameFull,
-        String type,
-        String uiIcon,
-        String uiStyle,
-        Long uiSort,
-        String uiConfig,
-        Boolean entry,
-        String entryId,
-        String appId,
-        String parentId,
-        Boolean active,
-        String sigma,
-        String metadata,
-        String language,
-        LocalDateTime createdAt,
-        String createdBy,
-        LocalDateTime updatedAt,
-        String updatedBy
+        final String key,
+        final String name,
+        final String nameAbbr,
+        final String nameFull,
+        final String type,
+        final String uiIcon,
+        final String uiStyle,
+        final Long uiSort,
+        final String uiConfig,
+        final Boolean entry,
+        final String entryId,
+        final String appId,
+        final String parentId,
+        final Boolean active,
+        final String sigma,
+        final String metadata,
+        final String language,
+        final LocalDateTime createdAt,
+        final String createdBy,
+        final LocalDateTime updatedAt,
+        final String updatedBy
     ) {
         this.key = key;
         this.name = name;
@@ -112,7 +112,7 @@ public class BBag implements VertxPojo, IBBag {
         this.updatedBy = updatedBy;
     }
 
-    public BBag(io.vertx.core.json.JsonObject json) {
+    public BBag(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -129,7 +129,7 @@ public class BBag implements VertxPojo, IBBag {
      * Setter for <code>ZDB.B_BAG.KEY</code>. 「key」- 模块主键
      */
     @Override
-    public BBag setKey(String key) {
+    public BBag setKey(final String key) {
         this.key = key;
         return this;
     }
@@ -146,7 +146,7 @@ public class BBag implements VertxPojo, IBBag {
      * Setter for <code>ZDB.B_BAG.NAME</code>. 「name」- 模块名称
      */
     @Override
-    public BBag setName(String name) {
+    public BBag setName(final String name) {
         this.name = name;
         return this;
     }
@@ -163,7 +163,7 @@ public class BBag implements VertxPojo, IBBag {
      * Setter for <code>ZDB.B_BAG.NAME_ABBR</code>. 「nameAbbr」- 模块缩写
      */
     @Override
-    public BBag setNameAbbr(String nameAbbr) {
+    public BBag setNameAbbr(final String nameAbbr) {
         this.nameAbbr = nameAbbr;
         return this;
     }
@@ -180,7 +180,7 @@ public class BBag implements VertxPojo, IBBag {
      * Setter for <code>ZDB.B_BAG.NAME_FULL</code>. 「nameFull」- 模块全名
      */
     @Override
-    public BBag setNameFull(String nameFull) {
+    public BBag setNameFull(final String nameFull) {
         this.nameFull = nameFull;
         return this;
     }
@@ -197,7 +197,7 @@ public class BBag implements VertxPojo, IBBag {
      * Setter for <code>ZDB.B_BAG.TYPE</code>. 「type」- 包类型
      */
     @Override
-    public BBag setType(String type) {
+    public BBag setType(final String type) {
         this.type = type;
         return this;
     }
@@ -214,7 +214,7 @@ public class BBag implements VertxPojo, IBBag {
      * Setter for <code>ZDB.B_BAG.UI_ICON</code>. 「uiIcon」- 模块图标
      */
     @Override
-    public BBag setUiIcon(String uiIcon) {
+    public BBag setUiIcon(final String uiIcon) {
         this.uiIcon = uiIcon;
         return this;
     }
@@ -231,7 +231,7 @@ public class BBag implements VertxPojo, IBBag {
      * Setter for <code>ZDB.B_BAG.UI_STYLE</code>. 「uiStyle」- 模块风格
      */
     @Override
-    public BBag setUiStyle(String uiStyle) {
+    public BBag setUiStyle(final String uiStyle) {
         this.uiStyle = uiStyle;
         return this;
     }
@@ -248,7 +248,7 @@ public class BBag implements VertxPojo, IBBag {
      * Setter for <code>ZDB.B_BAG.UI_SORT</code>. 「uiSort」- 模块排序
      */
     @Override
-    public BBag setUiSort(Long uiSort) {
+    public BBag setUiSort(final Long uiSort) {
         this.uiSort = uiSort;
         return this;
     }
@@ -265,7 +265,7 @@ public class BBag implements VertxPojo, IBBag {
      * Setter for <code>ZDB.B_BAG.UI_CONFIG</code>. 「uiConfig」- 模块核心配置
      */
     @Override
-    public BBag setUiConfig(String uiConfig) {
+    public BBag setUiConfig(final String uiConfig) {
         this.uiConfig = uiConfig;
         return this;
     }
@@ -284,7 +284,7 @@ public class BBag implements VertxPojo, IBBag {
      * 是否入口（带入口为应用，当前APP_ID下安装内容）
      */
     @Override
-    public BBag setEntry(Boolean entry) {
+    public BBag setEntry(final Boolean entry) {
         this.entry = entry;
         return this;
     }
@@ -303,7 +303,7 @@ public class BBag implements VertxPojo, IBBag {
      * 中的ID，其余的直接使用链接
      */
     @Override
-    public BBag setEntryId(String entryId) {
+    public BBag setEntryId(final String entryId) {
         this.entryId = entryId;
         return this;
     }
@@ -320,7 +320,7 @@ public class BBag implements VertxPojo, IBBag {
      * Setter for <code>ZDB.B_BAG.APP_ID</code>. 「id」- 关联的应用程序ID
      */
     @Override
-    public BBag setAppId(String appId) {
+    public BBag setAppId(final String appId) {
         this.appId = appId;
         return this;
     }
@@ -337,7 +337,7 @@ public class BBag implements VertxPojo, IBBag {
      * Setter for <code>ZDB.B_BAG.PARENT_ID</code>. 「parentId」- 父包ID
      */
     @Override
-    public BBag setParentId(String parentId) {
+    public BBag setParentId(final String parentId) {
         this.parentId = parentId;
         return this;
     }
@@ -354,7 +354,7 @@ public class BBag implements VertxPojo, IBBag {
      * Setter for <code>ZDB.B_BAG.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public BBag setActive(Boolean active) {
+    public BBag setActive(final Boolean active) {
         this.active = active;
         return this;
     }
@@ -371,7 +371,7 @@ public class BBag implements VertxPojo, IBBag {
      * Setter for <code>ZDB.B_BAG.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public BBag setSigma(String sigma) {
+    public BBag setSigma(final String sigma) {
         this.sigma = sigma;
         return this;
     }
@@ -388,7 +388,7 @@ public class BBag implements VertxPojo, IBBag {
      * Setter for <code>ZDB.B_BAG.METADATA</code>. 「metadata」- 附加配置
      */
     @Override
-    public BBag setMetadata(String metadata) {
+    public BBag setMetadata(final String metadata) {
         this.metadata = metadata;
         return this;
     }
@@ -405,7 +405,7 @@ public class BBag implements VertxPojo, IBBag {
      * Setter for <code>ZDB.B_BAG.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public BBag setLanguage(String language) {
+    public BBag setLanguage(final String language) {
         this.language = language;
         return this;
     }
@@ -422,7 +422,7 @@ public class BBag implements VertxPojo, IBBag {
      * Setter for <code>ZDB.B_BAG.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public BBag setCreatedAt(LocalDateTime createdAt) {
+    public BBag setCreatedAt(final LocalDateTime createdAt) {
         this.createdAt = createdAt;
         return this;
     }
@@ -439,7 +439,7 @@ public class BBag implements VertxPojo, IBBag {
      * Setter for <code>ZDB.B_BAG.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public BBag setCreatedBy(String createdBy) {
+    public BBag setCreatedBy(final String createdBy) {
         this.createdBy = createdBy;
         return this;
     }
@@ -456,7 +456,7 @@ public class BBag implements VertxPojo, IBBag {
      * Setter for <code>ZDB.B_BAG.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public BBag setUpdatedAt(LocalDateTime updatedAt) {
+    public BBag setUpdatedAt(final LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
         return this;
     }
@@ -473,13 +473,13 @@ public class BBag implements VertxPojo, IBBag {
      * Setter for <code>ZDB.B_BAG.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public BBag setUpdatedBy(String updatedBy) {
+    public BBag setUpdatedBy(final String updatedBy) {
         this.updatedBy = updatedBy;
         return this;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
@@ -625,7 +625,7 @@ public class BBag implements VertxPojo, IBBag {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("BBag (");
+        final StringBuilder sb = new StringBuilder("BBag (");
 
         sb.append(key);
         sb.append(", ").append(name);
@@ -658,7 +658,7 @@ public class BBag implements VertxPojo, IBBag {
     // -------------------------------------------------------------------------
 
     @Override
-    public void from(IBBag from) {
+    public void from(final IBBag from) {
         setKey(from.getKey());
         setName(from.getName());
         setNameAbbr(from.getNameAbbr());
@@ -683,7 +683,7 @@ public class BBag implements VertxPojo, IBBag {
     }
 
     @Override
-    public <E extends IBBag> E into(E into) {
+    public <E extends IBBag> E into(final E into) {
         into.from(this);
         return into;
     }

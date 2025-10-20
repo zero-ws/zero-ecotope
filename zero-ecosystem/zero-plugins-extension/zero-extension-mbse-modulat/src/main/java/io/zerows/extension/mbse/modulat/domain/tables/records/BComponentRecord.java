@@ -4,7 +4,7 @@
 package io.zerows.extension.mbse.modulat.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.mbse.modulat.domain.tables.BComponent;
 import io.zerows.extension.mbse.modulat.domain.tables.interfaces.IBComponent;
 import org.jooq.Field;
@@ -31,7 +31,7 @@ public class BComponentRecord extends UpdatableRecordImpl<BComponentRecord> impl
     /**
      * Create a detached, initialised BComponentRecord
      */
-    public BComponentRecord(String key, String blockId, String type, String mavenAid, String mavenGid, String specInterface, String specImpl, Boolean integrated, Boolean active, String sigma, String metadata, String language) {
+    public BComponentRecord(final String key, final String blockId, final String type, final String mavenAid, final String mavenGid, final String specInterface, final String specImpl, final Boolean integrated, final Boolean active, final String sigma, final String metadata, final String language) {
         super(BComponent.B_COMPONENT);
 
         setKey(key);
@@ -52,7 +52,7 @@ public class BComponentRecord extends UpdatableRecordImpl<BComponentRecord> impl
     /**
      * Create a detached, initialised BComponentRecord
      */
-    public BComponentRecord(io.zerows.extension.mbse.modulat.domain.tables.pojos.BComponent value) {
+    public BComponentRecord(final io.zerows.extension.mbse.modulat.domain.tables.pojos.BComponent value) {
         super(BComponent.B_COMPONENT);
 
         if (value != null) {
@@ -72,7 +72,7 @@ public class BComponentRecord extends UpdatableRecordImpl<BComponentRecord> impl
         }
     }
 
-    public BComponentRecord(io.vertx.core.json.JsonObject json) {
+    public BComponentRecord(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -89,7 +89,7 @@ public class BComponentRecord extends UpdatableRecordImpl<BComponentRecord> impl
      * Setter for <code>ZDB.B_COMPONENT.KEY</code>. 「key」- 主键
      */
     @Override
-    public BComponentRecord setKey(String value) {
+    public BComponentRecord setKey(final String value) {
         set(0, value);
         return this;
     }
@@ -106,7 +106,7 @@ public class BComponentRecord extends UpdatableRecordImpl<BComponentRecord> impl
      * Setter for <code>ZDB.B_COMPONENT.BLOCK_ID</code>. 「blockId」- 所属模块ID
      */
     @Override
-    public BComponentRecord setBlockId(String value) {
+    public BComponentRecord setBlockId(final String value) {
         set(1, value);
         return this;
     }
@@ -123,7 +123,7 @@ public class BComponentRecord extends UpdatableRecordImpl<BComponentRecord> impl
      * Setter for <code>ZDB.B_COMPONENT.TYPE</code>. 「type」- 类型保留，单独区分
      */
     @Override
-    public BComponentRecord setType(String value) {
+    public BComponentRecord setType(final String value) {
         set(2, value);
         return this;
     }
@@ -140,7 +140,7 @@ public class BComponentRecord extends UpdatableRecordImpl<BComponentRecord> impl
      * Setter for <code>ZDB.B_COMPONENT.MAVEN_AID</code>. 「mavenAid」- 所在项目ID
      */
     @Override
-    public BComponentRecord setMavenAid(String value) {
+    public BComponentRecord setMavenAid(final String value) {
         set(3, value);
         return this;
     }
@@ -157,7 +157,7 @@ public class BComponentRecord extends UpdatableRecordImpl<BComponentRecord> impl
      * Setter for <code>ZDB.B_COMPONENT.MAVEN_GID</code>. 「mavenGid」- 所在Group的ID
      */
     @Override
-    public BComponentRecord setMavenGid(String value) {
+    public BComponentRecord setMavenGid(final String value) {
         set(4, value);
         return this;
     }
@@ -176,7 +176,7 @@ public class BComponentRecord extends UpdatableRecordImpl<BComponentRecord> impl
      * 接口名称
      */
     @Override
-    public BComponentRecord setSpecInterface(String value) {
+    public BComponentRecord setSpecInterface(final String value) {
         set(5, value);
         return this;
     }
@@ -193,7 +193,7 @@ public class BComponentRecord extends UpdatableRecordImpl<BComponentRecord> impl
      * Setter for <code>ZDB.B_COMPONENT.SPEC_IMPL</code>. 「specImpl」- 实现组件
      */
     @Override
-    public BComponentRecord setSpecImpl(String value) {
+    public BComponentRecord setSpecImpl(final String value) {
         set(6, value);
         return this;
     }
@@ -212,7 +212,7 @@ public class BComponentRecord extends UpdatableRecordImpl<BComponentRecord> impl
      * 是否用于外部集成
      */
     @Override
-    public BComponentRecord setIntegrated(Boolean value) {
+    public BComponentRecord setIntegrated(final Boolean value) {
         set(7, value);
         return this;
     }
@@ -229,7 +229,7 @@ public class BComponentRecord extends UpdatableRecordImpl<BComponentRecord> impl
      * Setter for <code>ZDB.B_COMPONENT.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public BComponentRecord setActive(Boolean value) {
+    public BComponentRecord setActive(final Boolean value) {
         set(8, value);
         return this;
     }
@@ -246,7 +246,7 @@ public class BComponentRecord extends UpdatableRecordImpl<BComponentRecord> impl
      * Setter for <code>ZDB.B_COMPONENT.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public BComponentRecord setSigma(String value) {
+    public BComponentRecord setSigma(final String value) {
         set(9, value);
         return this;
     }
@@ -271,7 +271,7 @@ public class BComponentRecord extends UpdatableRecordImpl<BComponentRecord> impl
      * Setter for <code>ZDB.B_COMPONENT.METADATA</code>. 「metadata」- 附加配置
      */
     @Override
-    public BComponentRecord setMetadata(String value) {
+    public BComponentRecord setMetadata(final String value) {
         set(10, value);
         return this;
     }
@@ -288,7 +288,7 @@ public class BComponentRecord extends UpdatableRecordImpl<BComponentRecord> impl
      * Setter for <code>ZDB.B_COMPONENT.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public BComponentRecord setLanguage(String value) {
+    public BComponentRecord setLanguage(final String value) {
         set(11, value);
         return this;
     }
@@ -489,55 +489,55 @@ public class BComponentRecord extends UpdatableRecordImpl<BComponentRecord> impl
     }
 
     @Override
-    public BComponentRecord value1(String value) {
+    public BComponentRecord value1(final String value) {
         setKey(value);
         return this;
     }
 
     @Override
-    public BComponentRecord value2(String value) {
+    public BComponentRecord value2(final String value) {
         setBlockId(value);
         return this;
     }
 
     @Override
-    public BComponentRecord value3(String value) {
+    public BComponentRecord value3(final String value) {
         setType(value);
         return this;
     }
 
     @Override
-    public BComponentRecord value4(String value) {
+    public BComponentRecord value4(final String value) {
         setMavenAid(value);
         return this;
     }
 
     @Override
-    public BComponentRecord value5(String value) {
+    public BComponentRecord value5(final String value) {
         setMavenGid(value);
         return this;
     }
 
     @Override
-    public BComponentRecord value6(String value) {
+    public BComponentRecord value6(final String value) {
         setSpecInterface(value);
         return this;
     }
 
     @Override
-    public BComponentRecord value7(String value) {
+    public BComponentRecord value7(final String value) {
         setSpecImpl(value);
         return this;
     }
 
     @Override
-    public BComponentRecord value8(Boolean value) {
+    public BComponentRecord value8(final Boolean value) {
         setIntegrated(value);
         return this;
     }
 
     @Override
-    public BComponentRecord value9(Boolean value) {
+    public BComponentRecord value9(final Boolean value) {
         setActive(value);
         return this;
     }
@@ -547,13 +547,13 @@ public class BComponentRecord extends UpdatableRecordImpl<BComponentRecord> impl
     // -------------------------------------------------------------------------
 
     @Override
-    public BComponentRecord value10(String value) {
+    public BComponentRecord value10(final String value) {
         setSigma(value);
         return this;
     }
 
     @Override
-    public BComponentRecord value11(String value) {
+    public BComponentRecord value11(final String value) {
         setMetadata(value);
         return this;
     }
@@ -563,13 +563,13 @@ public class BComponentRecord extends UpdatableRecordImpl<BComponentRecord> impl
     // -------------------------------------------------------------------------
 
     @Override
-    public BComponentRecord value12(String value) {
+    public BComponentRecord value12(final String value) {
         setLanguage(value);
         return this;
     }
 
     @Override
-    public BComponentRecord values(String value1, String value2, String value3, String value4, String value5, String value6, String value7, Boolean value8, Boolean value9, String value10, String value11, String value12) {
+    public BComponentRecord values(final String value1, final String value2, final String value3, final String value4, final String value5, final String value6, final String value7, final Boolean value8, final Boolean value9, final String value10, final String value11, final String value12) {
         value1(value1);
         value2(value2);
         value3(value3);
@@ -586,7 +586,7 @@ public class BComponentRecord extends UpdatableRecordImpl<BComponentRecord> impl
     }
 
     @Override
-    public void from(IBComponent from) {
+    public void from(final IBComponent from) {
         setKey(from.getKey());
         setBlockId(from.getBlockId());
         setType(from.getType());
@@ -603,7 +603,7 @@ public class BComponentRecord extends UpdatableRecordImpl<BComponentRecord> impl
     }
 
     @Override
-    public <E extends IBComponent> E into(E into) {
+    public <E extends IBComponent> E into(final E into) {
         into.from(this);
         return into;
     }

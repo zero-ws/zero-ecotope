@@ -4,7 +4,7 @@
 package io.zerows.extension.runtime.workflow.domain.tables.pojos;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.runtime.workflow.domain.tables.interfaces.IWFlow;
 
 import java.time.LocalDateTime;
@@ -49,7 +49,7 @@ public class WFlow implements VertxPojo, IWFlow {
     public WFlow() {
     }
 
-    public WFlow(IWFlow value) {
+    public WFlow(final IWFlow value) {
         this.key = value.getKey();
         this.name = value.getName();
         this.code = value.getCode();
@@ -81,34 +81,34 @@ public class WFlow implements VertxPojo, IWFlow {
     }
 
     public WFlow(
-        String key,
-        String name,
-        String code,
-        String type,
-        String definitionKey,
-        String authorizedComponent,
-        String authorizedConfig,
-        String generateComponent,
-        String generateConfig,
-        String runComponent,
-        String runConfig,
-        String startComponent,
-        String startConfig,
-        String endComponent,
-        String endConfig,
-        String uiComponent,
-        String uiConfig,
-        String uiAssist,
-        String uiLinkage,
-        String comment,
-        Boolean active,
-        String sigma,
-        String metadata,
-        String language,
-        LocalDateTime createdAt,
-        String createdBy,
-        LocalDateTime updatedAt,
-        String updatedBy
+        final String key,
+        final String name,
+        final String code,
+        final String type,
+        final String definitionKey,
+        final String authorizedComponent,
+        final String authorizedConfig,
+        final String generateComponent,
+        final String generateConfig,
+        final String runComponent,
+        final String runConfig,
+        final String startComponent,
+        final String startConfig,
+        final String endComponent,
+        final String endConfig,
+        final String uiComponent,
+        final String uiConfig,
+        final String uiAssist,
+        final String uiLinkage,
+        final String comment,
+        final Boolean active,
+        final String sigma,
+        final String metadata,
+        final String language,
+        final LocalDateTime createdAt,
+        final String createdBy,
+        final LocalDateTime updatedAt,
+        final String updatedBy
     ) {
         this.key = key;
         this.name = name;
@@ -140,7 +140,7 @@ public class WFlow implements VertxPojo, IWFlow {
         this.updatedBy = updatedBy;
     }
 
-    public WFlow(io.vertx.core.json.JsonObject json) {
+    public WFlow(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -157,7 +157,7 @@ public class WFlow implements VertxPojo, IWFlow {
      * Setter for <code>ZDB.W_FLOW.KEY</code>. 「key」- 流程定义主键
      */
     @Override
-    public WFlow setKey(String key) {
+    public WFlow setKey(final String key) {
         this.key = key;
         return this;
     }
@@ -174,7 +174,7 @@ public class WFlow implements VertxPojo, IWFlow {
      * Setter for <code>ZDB.W_FLOW.NAME</code>. 「name」- 流程定义名称
      */
     @Override
-    public WFlow setName(String name) {
+    public WFlow setName(final String name) {
         this.name = name;
         return this;
     }
@@ -191,7 +191,7 @@ public class WFlow implements VertxPojo, IWFlow {
      * Setter for <code>ZDB.W_FLOW.CODE</code>. 「code」- 流程定义编号（系统可用）
      */
     @Override
-    public WFlow setCode(String code) {
+    public WFlow setCode(final String code) {
         this.code = code;
         return this;
     }
@@ -210,7 +210,7 @@ public class WFlow implements VertxPojo, IWFlow {
      * zero.workflow.cat的X_TABULAR
      */
     @Override
-    public WFlow setType(String type) {
+    public WFlow setType(final String type) {
         this.type = type;
         return this;
     }
@@ -229,7 +229,7 @@ public class WFlow implements VertxPojo, IWFlow {
      * 定义ID（读取流程图所需）, getProcessDefinitionId
      */
     @Override
-    public WFlow setDefinitionKey(String definitionKey) {
+    public WFlow setDefinitionKey(final String definitionKey) {
         this.definitionKey = definitionKey;
         return this;
     }
@@ -248,7 +248,7 @@ public class WFlow implements VertxPojo, IWFlow {
      * 「authorizedComponent」- 流程授权组件
      */
     @Override
-    public WFlow setAuthorizedComponent(String authorizedComponent) {
+    public WFlow setAuthorizedComponent(final String authorizedComponent) {
         this.authorizedComponent = authorizedComponent;
         return this;
     }
@@ -267,7 +267,7 @@ public class WFlow implements VertxPojo, IWFlow {
      * 流程授权配置
      */
     @Override
-    public WFlow setAuthorizedConfig(String authorizedConfig) {
+    public WFlow setAuthorizedConfig(final String authorizedConfig) {
         this.authorizedConfig = authorizedConfig;
         return this;
     }
@@ -286,7 +286,7 @@ public class WFlow implements VertxPojo, IWFlow {
      * 「generateComponent」- Todo生成组件
      */
     @Override
-    public WFlow setGenerateComponent(String generateComponent) {
+    public WFlow setGenerateComponent(final String generateComponent) {
         this.generateComponent = generateComponent;
         return this;
     }
@@ -305,7 +305,7 @@ public class WFlow implements VertxPojo, IWFlow {
      * Todo生成配置
      */
     @Override
-    public WFlow setGenerateConfig(String generateConfig) {
+    public WFlow setGenerateConfig(final String generateConfig) {
         this.generateConfig = generateConfig;
         return this;
     }
@@ -322,7 +322,7 @@ public class WFlow implements VertxPojo, IWFlow {
      * Setter for <code>ZDB.W_FLOW.RUN_COMPONENT</code>. 「runComponent」- 执行组件
      */
     @Override
-    public WFlow setRunComponent(String runComponent) {
+    public WFlow setRunComponent(final String runComponent) {
         this.runComponent = runComponent;
         return this;
     }
@@ -339,7 +339,7 @@ public class WFlow implements VertxPojo, IWFlow {
      * Setter for <code>ZDB.W_FLOW.RUN_CONFIG</code>. 「runConfig」- 执行配置
      */
     @Override
-    public WFlow setRunConfig(String runConfig) {
+    public WFlow setRunConfig(final String runConfig) {
         this.runConfig = runConfig;
         return this;
     }
@@ -358,7 +358,7 @@ public class WFlow implements VertxPojo, IWFlow {
      * 启动组件
      */
     @Override
-    public WFlow setStartComponent(String startComponent) {
+    public WFlow setStartComponent(final String startComponent) {
         this.startComponent = startComponent;
         return this;
     }
@@ -375,7 +375,7 @@ public class WFlow implements VertxPojo, IWFlow {
      * Setter for <code>ZDB.W_FLOW.START_CONFIG</code>. 「startConfig」- 启动配置
      */
     @Override
-    public WFlow setStartConfig(String startConfig) {
+    public WFlow setStartConfig(final String startConfig) {
         this.startConfig = startConfig;
         return this;
     }
@@ -392,7 +392,7 @@ public class WFlow implements VertxPojo, IWFlow {
      * Setter for <code>ZDB.W_FLOW.END_COMPONENT</code>. 「endComponent」- 完成组件
      */
     @Override
-    public WFlow setEndComponent(String endComponent) {
+    public WFlow setEndComponent(final String endComponent) {
         this.endComponent = endComponent;
         return this;
     }
@@ -409,7 +409,7 @@ public class WFlow implements VertxPojo, IWFlow {
      * Setter for <code>ZDB.W_FLOW.END_CONFIG</code>. 「endConfig」- 完成配置
      */
     @Override
-    public WFlow setEndConfig(String endConfig) {
+    public WFlow setEndConfig(final String endConfig) {
         this.endConfig = endConfig;
         return this;
     }
@@ -426,7 +426,7 @@ public class WFlow implements VertxPojo, IWFlow {
      * Setter for <code>ZDB.W_FLOW.UI_COMPONENT</code>. 「uiComponent」- 界面组件
      */
     @Override
-    public WFlow setUiComponent(String uiComponent) {
+    public WFlow setUiComponent(final String uiComponent) {
         this.uiComponent = uiComponent;
         return this;
     }
@@ -443,7 +443,7 @@ public class WFlow implements VertxPojo, IWFlow {
      * Setter for <code>ZDB.W_FLOW.UI_CONFIG</code>. 「uiConfig」- 界面配置
      */
     @Override
-    public WFlow setUiConfig(String uiConfig) {
+    public WFlow setUiConfig(final String uiConfig) {
         this.uiConfig = uiConfig;
         return this;
     }
@@ -460,7 +460,7 @@ public class WFlow implements VertxPojo, IWFlow {
      * Setter for <code>ZDB.W_FLOW.UI_ASSIST</code>. 「uiAssist」- 界面辅助数据专用配置
      */
     @Override
-    public WFlow setUiAssist(String uiAssist) {
+    public WFlow setUiAssist(final String uiAssist) {
         this.uiAssist = uiAssist;
         return this;
     }
@@ -479,7 +479,7 @@ public class WFlow implements VertxPojo, IWFlow {
      * 关联部分专用配置：关联工单、关联资产、关联附件
      */
     @Override
-    public WFlow setUiLinkage(String uiLinkage) {
+    public WFlow setUiLinkage(final String uiLinkage) {
         this.uiLinkage = uiLinkage;
         return this;
     }
@@ -496,7 +496,7 @@ public class WFlow implements VertxPojo, IWFlow {
      * Setter for <code>ZDB.W_FLOW.COMMENT</code>. 「comment」 - 流程定义备注
      */
     @Override
-    public WFlow setComment(String comment) {
+    public WFlow setComment(final String comment) {
         this.comment = comment;
         return this;
     }
@@ -513,7 +513,7 @@ public class WFlow implements VertxPojo, IWFlow {
      * Setter for <code>ZDB.W_FLOW.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public WFlow setActive(Boolean active) {
+    public WFlow setActive(final Boolean active) {
         this.active = active;
         return this;
     }
@@ -530,7 +530,7 @@ public class WFlow implements VertxPojo, IWFlow {
      * Setter for <code>ZDB.W_FLOW.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public WFlow setSigma(String sigma) {
+    public WFlow setSigma(final String sigma) {
         this.sigma = sigma;
         return this;
     }
@@ -547,7 +547,7 @@ public class WFlow implements VertxPojo, IWFlow {
      * Setter for <code>ZDB.W_FLOW.METADATA</code>. 「metadata」- 附加配置
      */
     @Override
-    public WFlow setMetadata(String metadata) {
+    public WFlow setMetadata(final String metadata) {
         this.metadata = metadata;
         return this;
     }
@@ -564,7 +564,7 @@ public class WFlow implements VertxPojo, IWFlow {
      * Setter for <code>ZDB.W_FLOW.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public WFlow setLanguage(String language) {
+    public WFlow setLanguage(final String language) {
         this.language = language;
         return this;
     }
@@ -581,7 +581,7 @@ public class WFlow implements VertxPojo, IWFlow {
      * Setter for <code>ZDB.W_FLOW.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public WFlow setCreatedAt(LocalDateTime createdAt) {
+    public WFlow setCreatedAt(final LocalDateTime createdAt) {
         this.createdAt = createdAt;
         return this;
     }
@@ -598,7 +598,7 @@ public class WFlow implements VertxPojo, IWFlow {
      * Setter for <code>ZDB.W_FLOW.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public WFlow setCreatedBy(String createdBy) {
+    public WFlow setCreatedBy(final String createdBy) {
         this.createdBy = createdBy;
         return this;
     }
@@ -615,7 +615,7 @@ public class WFlow implements VertxPojo, IWFlow {
      * Setter for <code>ZDB.W_FLOW.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public WFlow setUpdatedAt(LocalDateTime updatedAt) {
+    public WFlow setUpdatedAt(final LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
         return this;
     }
@@ -632,13 +632,13 @@ public class WFlow implements VertxPojo, IWFlow {
      * Setter for <code>ZDB.W_FLOW.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public WFlow setUpdatedBy(String updatedBy) {
+    public WFlow setUpdatedBy(final String updatedBy) {
         this.updatedBy = updatedBy;
         return this;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
@@ -826,7 +826,7 @@ public class WFlow implements VertxPojo, IWFlow {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("WFlow (");
+        final StringBuilder sb = new StringBuilder("WFlow (");
 
         sb.append(key);
         sb.append(", ").append(name);
@@ -866,7 +866,7 @@ public class WFlow implements VertxPojo, IWFlow {
     // -------------------------------------------------------------------------
 
     @Override
-    public void from(IWFlow from) {
+    public void from(final IWFlow from) {
         setKey(from.getKey());
         setName(from.getName());
         setCode(from.getCode());
@@ -898,7 +898,7 @@ public class WFlow implements VertxPojo, IWFlow {
     }
 
     @Override
-    public <E extends IWFlow> E into(E into) {
+    public <E extends IWFlow> E into(final E into) {
         into.from(this);
         return into;
     }

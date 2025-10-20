@@ -4,7 +4,7 @@
 package io.zerows.extension.mbse.basement.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.mbse.basement.domain.tables.MField;
 import io.zerows.extension.mbse.basement.domain.tables.interfaces.IMField;
 import org.jooq.Field;
@@ -33,7 +33,7 @@ public class MFieldRecord extends UpdatableRecordImpl<MFieldRecord> implements V
     /**
      * Create a detached, initialised MFieldRecord
      */
-    public MFieldRecord(String key, String name, String type, String columnName, String columnType, Boolean isPrimary, Boolean isNullable, Integer length, Integer precision, String format, String inComponent, String outComponent, String entityId, String comments, String sigma, String language, Boolean active, String metadata, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public MFieldRecord(final String key, final String name, final String type, final String columnName, final String columnType, final Boolean isPrimary, final Boolean isNullable, final Integer length, final Integer precision, final String format, final String inComponent, final String outComponent, final String entityId, final String comments, final String sigma, final String language, final Boolean active, final String metadata, final LocalDateTime createdAt, final String createdBy, final LocalDateTime updatedAt, final String updatedBy) {
         super(MField.M_FIELD);
 
         setKey(key);
@@ -64,7 +64,7 @@ public class MFieldRecord extends UpdatableRecordImpl<MFieldRecord> implements V
     /**
      * Create a detached, initialised MFieldRecord
      */
-    public MFieldRecord(io.zerows.extension.mbse.basement.domain.tables.pojos.MField value) {
+    public MFieldRecord(final io.zerows.extension.mbse.basement.domain.tables.pojos.MField value) {
         super(MField.M_FIELD);
 
         if (value != null) {
@@ -94,7 +94,7 @@ public class MFieldRecord extends UpdatableRecordImpl<MFieldRecord> implements V
         }
     }
 
-    public MFieldRecord(io.vertx.core.json.JsonObject json) {
+    public MFieldRecord(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -111,7 +111,7 @@ public class MFieldRecord extends UpdatableRecordImpl<MFieldRecord> implements V
      * Setter for <code>ZDB.M_FIELD.KEY</code>. 「key」- 字段ID
      */
     @Override
-    public MFieldRecord setKey(String value) {
+    public MFieldRecord setKey(final String value) {
         set(0, value);
         return this;
     }
@@ -128,7 +128,7 @@ public class MFieldRecord extends UpdatableRecordImpl<MFieldRecord> implements V
      * Setter for <code>ZDB.M_FIELD.NAME</code>. 「name」- 属性名（非列）
      */
     @Override
-    public MFieldRecord setName(String value) {
+    public MFieldRecord setName(final String value) {
         set(1, value);
         return this;
     }
@@ -145,7 +145,7 @@ public class MFieldRecord extends UpdatableRecordImpl<MFieldRecord> implements V
      * Setter for <code>ZDB.M_FIELD.TYPE</code>. 「type」- OX核心类型
      */
     @Override
-    public MFieldRecord setType(String value) {
+    public MFieldRecord setType(final String value) {
         set(2, value);
         return this;
     }
@@ -162,7 +162,7 @@ public class MFieldRecord extends UpdatableRecordImpl<MFieldRecord> implements V
      * Setter for <code>ZDB.M_FIELD.COLUMN_NAME</code>. 「columnName」- 数据库列名
      */
     @Override
-    public MFieldRecord setColumnName(String value) {
+    public MFieldRecord setColumnName(final String value) {
         set(3, value);
         return this;
     }
@@ -179,7 +179,7 @@ public class MFieldRecord extends UpdatableRecordImpl<MFieldRecord> implements V
      * Setter for <code>ZDB.M_FIELD.COLUMN_TYPE</code>. 「columnType」- 数据库转换过后的类型
      */
     @Override
-    public MFieldRecord setColumnType(String value) {
+    public MFieldRecord setColumnType(final String value) {
         set(4, value);
         return this;
     }
@@ -196,7 +196,7 @@ public class MFieldRecord extends UpdatableRecordImpl<MFieldRecord> implements V
      * Setter for <code>ZDB.M_FIELD.IS_PRIMARY</code>. 「isPrimary」- 是否为主键
      */
     @Override
-    public MFieldRecord setIsPrimary(Boolean value) {
+    public MFieldRecord setIsPrimary(final Boolean value) {
         set(5, value);
         return this;
     }
@@ -213,7 +213,7 @@ public class MFieldRecord extends UpdatableRecordImpl<MFieldRecord> implements V
      * Setter for <code>ZDB.M_FIELD.IS_NULLABLE</code>. 「isNullable」- 是否可为空
      */
     @Override
-    public MFieldRecord setIsNullable(Boolean value) {
+    public MFieldRecord setIsNullable(final Boolean value) {
         set(6, value);
         return this;
     }
@@ -230,7 +230,7 @@ public class MFieldRecord extends UpdatableRecordImpl<MFieldRecord> implements V
      * Setter for <code>ZDB.M_FIELD.LENGTH</code>. 「length」- String类型的长度
      */
     @Override
-    public MFieldRecord setLength(Integer value) {
+    public MFieldRecord setLength(final Integer value) {
         set(7, value);
         return this;
     }
@@ -247,7 +247,7 @@ public class MFieldRecord extends UpdatableRecordImpl<MFieldRecord> implements V
      * Setter for <code>ZDB.M_FIELD.PRECISION</code>. 「precision」- Decimal类型的精度
      */
     @Override
-    public MFieldRecord setPrecision(Integer value) {
+    public MFieldRecord setPrecision(final Integer value) {
         set(8, value);
         return this;
     }
@@ -266,7 +266,7 @@ public class MFieldRecord extends UpdatableRecordImpl<MFieldRecord> implements V
      * 当前数据列的格式，String或Date类型
      */
     @Override
-    public MFieldRecord setFormat(String value) {
+    public MFieldRecord setFormat(final String value) {
         set(9, value);
         return this;
     }
@@ -283,7 +283,7 @@ public class MFieldRecord extends UpdatableRecordImpl<MFieldRecord> implements V
      * Setter for <code>ZDB.M_FIELD.IN_COMPONENT</code>. 「inComponent」- 写入插件
      */
     @Override
-    public MFieldRecord setInComponent(String value) {
+    public MFieldRecord setInComponent(final String value) {
         set(10, value);
         return this;
     }
@@ -300,7 +300,7 @@ public class MFieldRecord extends UpdatableRecordImpl<MFieldRecord> implements V
      * Setter for <code>ZDB.M_FIELD.OUT_COMPONENT</code>. 「outComponent」- 读取插件
      */
     @Override
-    public MFieldRecord setOutComponent(String value) {
+    public MFieldRecord setOutComponent(final String value) {
         set(11, value);
         return this;
     }
@@ -317,7 +317,7 @@ public class MFieldRecord extends UpdatableRecordImpl<MFieldRecord> implements V
      * Setter for <code>ZDB.M_FIELD.ENTITY_ID</code>. 「entityId」- 关联的实体ID
      */
     @Override
-    public MFieldRecord setEntityId(String value) {
+    public MFieldRecord setEntityId(final String value) {
         set(12, value);
         return this;
     }
@@ -334,7 +334,7 @@ public class MFieldRecord extends UpdatableRecordImpl<MFieldRecord> implements V
      * Setter for <code>ZDB.M_FIELD.COMMENTS</code>. 「comments」- 当前属性的描述信息
      */
     @Override
-    public MFieldRecord setComments(String value) {
+    public MFieldRecord setComments(final String value) {
         set(13, value);
         return this;
     }
@@ -351,7 +351,7 @@ public class MFieldRecord extends UpdatableRecordImpl<MFieldRecord> implements V
      * Setter for <code>ZDB.M_FIELD.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public MFieldRecord setSigma(String value) {
+    public MFieldRecord setSigma(final String value) {
         set(14, value);
         return this;
     }
@@ -368,7 +368,7 @@ public class MFieldRecord extends UpdatableRecordImpl<MFieldRecord> implements V
      * Setter for <code>ZDB.M_FIELD.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public MFieldRecord setLanguage(String value) {
+    public MFieldRecord setLanguage(final String value) {
         set(15, value);
         return this;
     }
@@ -385,7 +385,7 @@ public class MFieldRecord extends UpdatableRecordImpl<MFieldRecord> implements V
      * Setter for <code>ZDB.M_FIELD.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public MFieldRecord setActive(Boolean value) {
+    public MFieldRecord setActive(final Boolean value) {
         set(16, value);
         return this;
     }
@@ -402,7 +402,7 @@ public class MFieldRecord extends UpdatableRecordImpl<MFieldRecord> implements V
      * Setter for <code>ZDB.M_FIELD.METADATA</code>. 「metadata」- 附加配置数据
      */
     @Override
-    public MFieldRecord setMetadata(String value) {
+    public MFieldRecord setMetadata(final String value) {
         set(17, value);
         return this;
     }
@@ -419,7 +419,7 @@ public class MFieldRecord extends UpdatableRecordImpl<MFieldRecord> implements V
      * Setter for <code>ZDB.M_FIELD.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public MFieldRecord setCreatedAt(LocalDateTime value) {
+    public MFieldRecord setCreatedAt(final LocalDateTime value) {
         set(18, value);
         return this;
     }
@@ -436,7 +436,7 @@ public class MFieldRecord extends UpdatableRecordImpl<MFieldRecord> implements V
      * Setter for <code>ZDB.M_FIELD.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public MFieldRecord setCreatedBy(String value) {
+    public MFieldRecord setCreatedBy(final String value) {
         set(19, value);
         return this;
     }
@@ -461,7 +461,7 @@ public class MFieldRecord extends UpdatableRecordImpl<MFieldRecord> implements V
      * Setter for <code>ZDB.M_FIELD.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public MFieldRecord setUpdatedAt(LocalDateTime value) {
+    public MFieldRecord setUpdatedAt(final LocalDateTime value) {
         set(20, value);
         return this;
     }
@@ -478,7 +478,7 @@ public class MFieldRecord extends UpdatableRecordImpl<MFieldRecord> implements V
      * Setter for <code>ZDB.M_FIELD.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public MFieldRecord setUpdatedBy(String value) {
+    public MFieldRecord setUpdatedBy(final String value) {
         set(21, value);
         return this;
     }
@@ -829,115 +829,115 @@ public class MFieldRecord extends UpdatableRecordImpl<MFieldRecord> implements V
     }
 
     @Override
-    public MFieldRecord value1(String value) {
+    public MFieldRecord value1(final String value) {
         setKey(value);
         return this;
     }
 
     @Override
-    public MFieldRecord value2(String value) {
+    public MFieldRecord value2(final String value) {
         setName(value);
         return this;
     }
 
     @Override
-    public MFieldRecord value3(String value) {
+    public MFieldRecord value3(final String value) {
         setType(value);
         return this;
     }
 
     @Override
-    public MFieldRecord value4(String value) {
+    public MFieldRecord value4(final String value) {
         setColumnName(value);
         return this;
     }
 
     @Override
-    public MFieldRecord value5(String value) {
+    public MFieldRecord value5(final String value) {
         setColumnType(value);
         return this;
     }
 
     @Override
-    public MFieldRecord value6(Boolean value) {
+    public MFieldRecord value6(final Boolean value) {
         setIsPrimary(value);
         return this;
     }
 
     @Override
-    public MFieldRecord value7(Boolean value) {
+    public MFieldRecord value7(final Boolean value) {
         setIsNullable(value);
         return this;
     }
 
     @Override
-    public MFieldRecord value8(Integer value) {
+    public MFieldRecord value8(final Integer value) {
         setLength(value);
         return this;
     }
 
     @Override
-    public MFieldRecord value9(Integer value) {
+    public MFieldRecord value9(final Integer value) {
         setPrecision(value);
         return this;
     }
 
     @Override
-    public MFieldRecord value10(String value) {
+    public MFieldRecord value10(final String value) {
         setFormat(value);
         return this;
     }
 
     @Override
-    public MFieldRecord value11(String value) {
+    public MFieldRecord value11(final String value) {
         setInComponent(value);
         return this;
     }
 
     @Override
-    public MFieldRecord value12(String value) {
+    public MFieldRecord value12(final String value) {
         setOutComponent(value);
         return this;
     }
 
     @Override
-    public MFieldRecord value13(String value) {
+    public MFieldRecord value13(final String value) {
         setEntityId(value);
         return this;
     }
 
     @Override
-    public MFieldRecord value14(String value) {
+    public MFieldRecord value14(final String value) {
         setComments(value);
         return this;
     }
 
     @Override
-    public MFieldRecord value15(String value) {
+    public MFieldRecord value15(final String value) {
         setSigma(value);
         return this;
     }
 
     @Override
-    public MFieldRecord value16(String value) {
+    public MFieldRecord value16(final String value) {
         setLanguage(value);
         return this;
     }
 
     @Override
-    public MFieldRecord value17(Boolean value) {
+    public MFieldRecord value17(final Boolean value) {
         setActive(value);
         return this;
     }
 
     @Override
-    public MFieldRecord value18(String value) {
+    public MFieldRecord value18(final String value) {
         setMetadata(value);
         return this;
     }
 
     @Override
-    public MFieldRecord value19(LocalDateTime value) {
+    public MFieldRecord value19(final LocalDateTime value) {
         setCreatedAt(value);
         return this;
     }
@@ -947,13 +947,13 @@ public class MFieldRecord extends UpdatableRecordImpl<MFieldRecord> implements V
     // -------------------------------------------------------------------------
 
     @Override
-    public MFieldRecord value20(String value) {
+    public MFieldRecord value20(final String value) {
         setCreatedBy(value);
         return this;
     }
 
     @Override
-    public MFieldRecord value21(LocalDateTime value) {
+    public MFieldRecord value21(final LocalDateTime value) {
         setUpdatedAt(value);
         return this;
     }
@@ -963,13 +963,13 @@ public class MFieldRecord extends UpdatableRecordImpl<MFieldRecord> implements V
     // -------------------------------------------------------------------------
 
     @Override
-    public MFieldRecord value22(String value) {
+    public MFieldRecord value22(final String value) {
         setUpdatedBy(value);
         return this;
     }
 
     @Override
-    public MFieldRecord values(String value1, String value2, String value3, String value4, String value5, Boolean value6, Boolean value7, Integer value8, Integer value9, String value10, String value11, String value12, String value13, String value14, String value15, String value16, Boolean value17, String value18, LocalDateTime value19, String value20, LocalDateTime value21, String value22) {
+    public MFieldRecord values(final String value1, final String value2, final String value3, final String value4, final String value5, final Boolean value6, final Boolean value7, final Integer value8, final Integer value9, final String value10, final String value11, final String value12, final String value13, final String value14, final String value15, final String value16, final Boolean value17, final String value18, final LocalDateTime value19, final String value20, final LocalDateTime value21, final String value22) {
         value1(value1);
         value2(value2);
         value3(value3);
@@ -996,7 +996,7 @@ public class MFieldRecord extends UpdatableRecordImpl<MFieldRecord> implements V
     }
 
     @Override
-    public void from(IMField from) {
+    public void from(final IMField from) {
         setKey(from.getKey());
         setName(from.getName());
         setType(from.getType());
@@ -1023,7 +1023,7 @@ public class MFieldRecord extends UpdatableRecordImpl<MFieldRecord> implements V
     }
 
     @Override
-    public <E extends IMField> E into(E into) {
+    public <E extends IMField> E into(final E into) {
         into.from(this);
         return into;
     }

@@ -4,7 +4,7 @@
 package io.zerows.extension.mbse.ui.domain.tables.pojos;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.mbse.ui.domain.tables.interfaces.IVTable;
 
 /**
@@ -34,7 +34,7 @@ public class VTable implements VertxPojo, IVTable {
     public VTable() {
     }
 
-    public VTable(IVTable value) {
+    public VTable(final IVTable value) {
         this.key = value.getKey();
         this.bordered = value.getBordered();
         this.size = value.getSize();
@@ -53,21 +53,21 @@ public class VTable implements VertxPojo, IVTable {
     }
 
     public VTable(
-        String key,
-        Boolean bordered,
-        String size,
-        String className,
-        String totalReport,
-        String totalSelected,
-        String rowDoubleClick,
-        String rowClick,
-        String rowContextMenu,
-        String rowMouseEnter,
-        String rowMouseLeave,
-        String opTitle,
-        String opDataIndex,
-        Boolean opFixed,
-        String opConfig
+        final String key,
+        final Boolean bordered,
+        final String size,
+        final String className,
+        final String totalReport,
+        final String totalSelected,
+        final String rowDoubleClick,
+        final String rowClick,
+        final String rowContextMenu,
+        final String rowMouseEnter,
+        final String rowMouseLeave,
+        final String opTitle,
+        final String opDataIndex,
+        final Boolean opFixed,
+        final String opConfig
     ) {
         this.key = key;
         this.bordered = bordered;
@@ -86,7 +86,7 @@ public class VTable implements VertxPojo, IVTable {
         this.opConfig = opConfig;
     }
 
-    public VTable(io.vertx.core.json.JsonObject json) {
+    public VTable(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -103,7 +103,7 @@ public class VTable implements VertxPojo, IVTable {
      * Setter for <code>ZDB.V_TABLE.KEY</code>. 「key」- 表选项主键
      */
     @Override
-    public VTable setKey(String key) {
+    public VTable setKey(final String key) {
         this.key = key;
         return this;
     }
@@ -120,7 +120,7 @@ public class VTable implements VertxPojo, IVTable {
      * Setter for <code>ZDB.V_TABLE.BORDERED</code>. 「bordered」- 是否带表框
      */
     @Override
-    public VTable setBordered(Boolean bordered) {
+    public VTable setBordered(final Boolean bordered) {
         this.bordered = bordered;
         return this;
     }
@@ -137,7 +137,7 @@ public class VTable implements VertxPojo, IVTable {
      * Setter for <code>ZDB.V_TABLE.SIZE</code>. 「size」- 表格尺寸
      */
     @Override
-    public VTable setSize(String size) {
+    public VTable setSize(final String size) {
         this.size = size;
         return this;
     }
@@ -154,7 +154,7 @@ public class VTable implements VertxPojo, IVTable {
      * Setter for <code>ZDB.V_TABLE.CLASS_NAME</code>. 「className」- CSS属性
      */
     @Override
-    public VTable setClassName(String className) {
+    public VTable setClassName(final String className) {
         this.className = className;
         return this;
     }
@@ -173,7 +173,7 @@ public class VTable implements VertxPojo, IVTable {
      * total.report - 文字: 总共多少条统计
      */
     @Override
-    public VTable setTotalReport(String totalReport) {
+    public VTable setTotalReport(final String totalReport) {
         this.totalReport = totalReport;
         return this;
     }
@@ -192,7 +192,7 @@ public class VTable implements VertxPojo, IVTable {
      * total.selected - 文字: 选择了多少条
      */
     @Override
-    public VTable setTotalSelected(String totalSelected) {
+    public VTable setTotalSelected(final String totalSelected) {
         this.totalSelected = totalSelected;
         return this;
     }
@@ -211,7 +211,7 @@ public class VTable implements VertxPojo, IVTable {
      * row.onDoubleClick - 双击事件名
      */
     @Override
-    public VTable setRowDoubleClick(String rowDoubleClick) {
+    public VTable setRowDoubleClick(final String rowDoubleClick) {
         this.rowDoubleClick = rowDoubleClick;
         return this;
     }
@@ -230,7 +230,7 @@ public class VTable implements VertxPojo, IVTable {
      * 单击事件名
      */
     @Override
-    public VTable setRowClick(String rowClick) {
+    public VTable setRowClick(final String rowClick) {
         this.rowClick = rowClick;
         return this;
     }
@@ -249,7 +249,7 @@ public class VTable implements VertxPojo, IVTable {
      * row.onContextMenu - 右键菜单事件名
      */
     @Override
-    public VTable setRowContextMenu(String rowContextMenu) {
+    public VTable setRowContextMenu(final String rowContextMenu) {
         this.rowContextMenu = rowContextMenu;
         return this;
     }
@@ -268,7 +268,7 @@ public class VTable implements VertxPojo, IVTable {
      * row.onMouseEnter - 鼠标左键事件名
      */
     @Override
-    public VTable setRowMouseEnter(String rowMouseEnter) {
+    public VTable setRowMouseEnter(final String rowMouseEnter) {
         this.rowMouseEnter = rowMouseEnter;
         return this;
     }
@@ -287,7 +287,7 @@ public class VTable implements VertxPojo, IVTable {
      * row.onMouseLeave - 鼠标移开事件名
      */
     @Override
-    public VTable setRowMouseLeave(String rowMouseLeave) {
+    public VTable setRowMouseLeave(final String rowMouseLeave) {
         this.rowMouseLeave = rowMouseLeave;
         return this;
     }
@@ -306,7 +306,7 @@ public class VTable implements VertxPojo, IVTable {
      * columns/[0]/title, 执行列标题
      */
     @Override
-    public VTable setOpTitle(String opTitle) {
+    public VTable setOpTitle(final String opTitle) {
         this.opTitle = opTitle;
         return this;
     }
@@ -325,7 +325,7 @@ public class VTable implements VertxPojo, IVTable {
      * columns/[0]/dataIndex, 执行列标题
      */
     @Override
-    public VTable setOpDataIndex(String opDataIndex) {
+    public VTable setOpDataIndex(final String opDataIndex) {
         this.opDataIndex = opDataIndex;
         return this;
     }
@@ -344,7 +344,7 @@ public class VTable implements VertxPojo, IVTable {
      * columns/[0]/fixed，执行列左还是右
      */
     @Override
-    public VTable setOpFixed(Boolean opFixed) {
+    public VTable setOpFixed(final Boolean opFixed) {
         this.opFixed = opFixed;
         return this;
     }
@@ -363,13 +363,13 @@ public class VTable implements VertxPojo, IVTable {
      * columns/[0]/$option, 执行类对应配置，配置按钮
      */
     @Override
-    public VTable setOpConfig(String opConfig) {
+    public VTable setOpConfig(final String opConfig) {
         this.opConfig = opConfig;
         return this;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
@@ -479,7 +479,7 @@ public class VTable implements VertxPojo, IVTable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("VTable (");
+        final StringBuilder sb = new StringBuilder("VTable (");
 
         sb.append(key);
         sb.append(", ").append(bordered);
@@ -506,7 +506,7 @@ public class VTable implements VertxPojo, IVTable {
     // -------------------------------------------------------------------------
 
     @Override
-    public void from(IVTable from) {
+    public void from(final IVTable from) {
         setKey(from.getKey());
         setBordered(from.getBordered());
         setSize(from.getSize());
@@ -525,7 +525,7 @@ public class VTable implements VertxPojo, IVTable {
     }
 
     @Override
-    public <E extends IVTable> E into(E into) {
+    public <E extends IVTable> E into(final E into) {
         into.from(this);
         return into;
     }

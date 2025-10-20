@@ -4,7 +4,7 @@
 package io.zerows.extension.runtime.integration.domain.tables.pojos;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.runtime.integration.domain.tables.interfaces.IIPortfolio;
 
 import java.time.LocalDateTime;
@@ -44,7 +44,7 @@ public class IPortfolio implements VertxPojo, IIPortfolio {
     public IPortfolio() {
     }
 
-    public IPortfolio(IIPortfolio value) {
+    public IPortfolio(final IIPortfolio value) {
         this.key = value.getKey();
         this.name = value.getName();
         this.code = value.getCode();
@@ -71,29 +71,29 @@ public class IPortfolio implements VertxPojo, IIPortfolio {
     }
 
     public IPortfolio(
-        String key,
-        String name,
-        String code,
-        String status,
-        String type,
-        String integrationId,
-        String ownerType,
-        String owner,
-        String runComponent,
-        String runConfig,
-        String dataKey,
-        String dataConfig,
-        String dataSecure,
-        String dataIntegration,
-        String appId,
-        Boolean active,
-        String sigma,
-        String metadata,
-        String language,
-        LocalDateTime createdAt,
-        String createdBy,
-        LocalDateTime updatedAt,
-        String updatedBy
+        final String key,
+        final String name,
+        final String code,
+        final String status,
+        final String type,
+        final String integrationId,
+        final String ownerType,
+        final String owner,
+        final String runComponent,
+        final String runConfig,
+        final String dataKey,
+        final String dataConfig,
+        final String dataSecure,
+        final String dataIntegration,
+        final String appId,
+        final Boolean active,
+        final String sigma,
+        final String metadata,
+        final String language,
+        final LocalDateTime createdAt,
+        final String createdBy,
+        final LocalDateTime updatedAt,
+        final String updatedBy
     ) {
         this.key = key;
         this.name = name;
@@ -120,7 +120,7 @@ public class IPortfolio implements VertxPojo, IIPortfolio {
         this.updatedBy = updatedBy;
     }
 
-    public IPortfolio(io.vertx.core.json.JsonObject json) {
+    public IPortfolio(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -137,7 +137,7 @@ public class IPortfolio implements VertxPojo, IIPortfolio {
      * Setter for <code>ZDB.I_PORTFOLIO.KEY</code>. 「key」- 目录专用ID
      */
     @Override
-    public IPortfolio setKey(String key) {
+    public IPortfolio setKey(final String key) {
         this.key = key;
         return this;
     }
@@ -154,7 +154,7 @@ public class IPortfolio implements VertxPojo, IIPortfolio {
      * Setter for <code>ZDB.I_PORTFOLIO.NAME</code>. 「name」- 目录名称
      */
     @Override
-    public IPortfolio setName(String name) {
+    public IPortfolio setName(final String name) {
         this.name = name;
         return this;
     }
@@ -171,7 +171,7 @@ public class IPortfolio implements VertxPojo, IIPortfolio {
      * Setter for <code>ZDB.I_PORTFOLIO.CODE</code>. 「code」- 目录系统编码
      */
     @Override
-    public IPortfolio setCode(String code) {
+    public IPortfolio setCode(final String code) {
         this.code = code;
         return this;
     }
@@ -188,7 +188,7 @@ public class IPortfolio implements VertxPojo, IIPortfolio {
      * Setter for <code>ZDB.I_PORTFOLIO.STATUS</code>. 「status」- 目录状态
      */
     @Override
-    public IPortfolio setStatus(String status) {
+    public IPortfolio setStatus(final String status) {
         this.status = status;
         return this;
     }
@@ -205,7 +205,7 @@ public class IPortfolio implements VertxPojo, IIPortfolio {
      * Setter for <code>ZDB.I_PORTFOLIO.TYPE</code>. 「type」- 目录类型
      */
     @Override
-    public IPortfolio setType(String type) {
+    public IPortfolio setType(final String type) {
         this.type = type;
         return this;
     }
@@ -224,7 +224,7 @@ public class IPortfolio implements VertxPojo, IIPortfolio {
      * 是否关联集成配置，管理时直接同步
      */
     @Override
-    public IPortfolio setIntegrationId(String integrationId) {
+    public IPortfolio setIntegrationId(final String integrationId) {
         this.integrationId = integrationId;
         return this;
     }
@@ -241,7 +241,7 @@ public class IPortfolio implements VertxPojo, IIPortfolio {
      * Setter for <code>ZDB.I_PORTFOLIO.OWNER_TYPE</code>. 「ownerType」- 关联主体类型
      */
     @Override
-    public IPortfolio setOwnerType(String ownerType) {
+    public IPortfolio setOwnerType(final String ownerType) {
         this.ownerType = ownerType;
         return this;
     }
@@ -258,7 +258,7 @@ public class IPortfolio implements VertxPojo, IIPortfolio {
      * Setter for <code>ZDB.I_PORTFOLIO.OWNER</code>. 「owner」- 关联主体主键
      */
     @Override
-    public IPortfolio setOwner(String owner) {
+    public IPortfolio setOwner(final String owner) {
         this.owner = owner;
         return this;
     }
@@ -277,7 +277,7 @@ public class IPortfolio implements VertxPojo, IIPortfolio {
      * 执行组件，LDAP执行专用
      */
     @Override
-    public IPortfolio setRunComponent(String runComponent) {
+    public IPortfolio setRunComponent(final String runComponent) {
         this.runComponent = runComponent;
         return this;
     }
@@ -294,7 +294,7 @@ public class IPortfolio implements VertxPojo, IIPortfolio {
      * Setter for <code>ZDB.I_PORTFOLIO.RUN_CONFIG</code>. 「runConfig」- 执行组件额外配置
      */
     @Override
-    public IPortfolio setRunConfig(String runConfig) {
+    public IPortfolio setRunConfig(final String runConfig) {
         this.runConfig = runConfig;
         return this;
     }
@@ -311,7 +311,7 @@ public class IPortfolio implements VertxPojo, IIPortfolio {
      * Setter for <code>ZDB.I_PORTFOLIO.DATA_KEY</code>. 「dataKey」- LDAP路径做完整标识
      */
     @Override
-    public IPortfolio setDataKey(String dataKey) {
+    public IPortfolio setDataKey(final String dataKey) {
         this.dataKey = dataKey;
         return this;
     }
@@ -328,7 +328,7 @@ public class IPortfolio implements VertxPojo, IIPortfolio {
      * Setter for <code>ZDB.I_PORTFOLIO.DATA_CONFIG</code>. 「dataConfig」- 数据基础配置
      */
     @Override
-    public IPortfolio setDataConfig(String dataConfig) {
+    public IPortfolio setDataConfig(final String dataConfig) {
         this.dataConfig = dataConfig;
         return this;
     }
@@ -345,7 +345,7 @@ public class IPortfolio implements VertxPojo, IIPortfolio {
      * Setter for <code>ZDB.I_PORTFOLIO.DATA_SECURE</code>. 「dataSecure」- 安全专用配置
      */
     @Override
-    public IPortfolio setDataSecure(String dataSecure) {
+    public IPortfolio setDataSecure(final String dataSecure) {
         this.dataSecure = dataSecure;
         return this;
     }
@@ -364,7 +364,7 @@ public class IPortfolio implements VertxPojo, IIPortfolio {
      * 「dataIntegration」- 绑定好过后，导入/导出数据专用配置
      */
     @Override
-    public IPortfolio setDataIntegration(String dataIntegration) {
+    public IPortfolio setDataIntegration(final String dataIntegration) {
         this.dataIntegration = dataIntegration;
         return this;
     }
@@ -381,7 +381,7 @@ public class IPortfolio implements VertxPojo, IIPortfolio {
      * Setter for <code>ZDB.I_PORTFOLIO.APP_ID</code>. 「id」- 关联的应用程序ID
      */
     @Override
-    public IPortfolio setAppId(String appId) {
+    public IPortfolio setAppId(final String appId) {
         this.appId = appId;
         return this;
     }
@@ -398,7 +398,7 @@ public class IPortfolio implements VertxPojo, IIPortfolio {
      * Setter for <code>ZDB.I_PORTFOLIO.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public IPortfolio setActive(Boolean active) {
+    public IPortfolio setActive(final Boolean active) {
         this.active = active;
         return this;
     }
@@ -415,7 +415,7 @@ public class IPortfolio implements VertxPojo, IIPortfolio {
      * Setter for <code>ZDB.I_PORTFOLIO.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public IPortfolio setSigma(String sigma) {
+    public IPortfolio setSigma(final String sigma) {
         this.sigma = sigma;
         return this;
     }
@@ -432,7 +432,7 @@ public class IPortfolio implements VertxPojo, IIPortfolio {
      * Setter for <code>ZDB.I_PORTFOLIO.METADATA</code>. 「metadata」- 附加配置
      */
     @Override
-    public IPortfolio setMetadata(String metadata) {
+    public IPortfolio setMetadata(final String metadata) {
         this.metadata = metadata;
         return this;
     }
@@ -449,7 +449,7 @@ public class IPortfolio implements VertxPojo, IIPortfolio {
      * Setter for <code>ZDB.I_PORTFOLIO.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public IPortfolio setLanguage(String language) {
+    public IPortfolio setLanguage(final String language) {
         this.language = language;
         return this;
     }
@@ -466,7 +466,7 @@ public class IPortfolio implements VertxPojo, IIPortfolio {
      * Setter for <code>ZDB.I_PORTFOLIO.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public IPortfolio setCreatedAt(LocalDateTime createdAt) {
+    public IPortfolio setCreatedAt(final LocalDateTime createdAt) {
         this.createdAt = createdAt;
         return this;
     }
@@ -483,7 +483,7 @@ public class IPortfolio implements VertxPojo, IIPortfolio {
      * Setter for <code>ZDB.I_PORTFOLIO.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public IPortfolio setCreatedBy(String createdBy) {
+    public IPortfolio setCreatedBy(final String createdBy) {
         this.createdBy = createdBy;
         return this;
     }
@@ -500,7 +500,7 @@ public class IPortfolio implements VertxPojo, IIPortfolio {
      * Setter for <code>ZDB.I_PORTFOLIO.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public IPortfolio setUpdatedAt(LocalDateTime updatedAt) {
+    public IPortfolio setUpdatedAt(final LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
         return this;
     }
@@ -517,13 +517,13 @@ public class IPortfolio implements VertxPojo, IIPortfolio {
      * Setter for <code>ZDB.I_PORTFOLIO.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public IPortfolio setUpdatedBy(String updatedBy) {
+    public IPortfolio setUpdatedBy(final String updatedBy) {
         this.updatedBy = updatedBy;
         return this;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
@@ -681,7 +681,7 @@ public class IPortfolio implements VertxPojo, IIPortfolio {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("IPortfolio (");
+        final StringBuilder sb = new StringBuilder("IPortfolio (");
 
         sb.append(key);
         sb.append(", ").append(name);
@@ -716,7 +716,7 @@ public class IPortfolio implements VertxPojo, IIPortfolio {
     // -------------------------------------------------------------------------
 
     @Override
-    public void from(IIPortfolio from) {
+    public void from(final IIPortfolio from) {
         setKey(from.getKey());
         setName(from.getName());
         setCode(from.getCode());
@@ -743,7 +743,7 @@ public class IPortfolio implements VertxPojo, IIPortfolio {
     }
 
     @Override
-    public <E extends IIPortfolio> E into(E into) {
+    public <E extends IIPortfolio> E into(final E into) {
         into.from(this);
         return into;
     }

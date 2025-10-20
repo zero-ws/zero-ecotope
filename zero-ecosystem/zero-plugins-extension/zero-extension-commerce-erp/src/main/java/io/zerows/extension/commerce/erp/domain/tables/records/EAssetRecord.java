@@ -4,7 +4,7 @@
 package io.zerows.extension.commerce.erp.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.commerce.erp.domain.tables.EAsset;
 import io.zerows.extension.commerce.erp.domain.tables.interfaces.IEAsset;
 import org.jooq.Record1;
@@ -31,7 +31,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
     /**
      * Create a detached, initialised EAssetRecord
      */
-    public EAssetRecord(String key, String name, String code, String type, String status, String modelNumber, String unit, Long num, Long numDeprecating, Long numDeprecated, Long numUsing, Long numUsed, String wayChange, String wayDeprecate, String wayAccording, LocalDateTime usedAt, String usedBy, String usedStatus, BigDecimal vOriginal, BigDecimal vTax, BigDecimal vDeReady, BigDecimal vNetJunk, BigDecimal vNet, BigDecimal vNetAmount, BigDecimal vDeprecatedM, BigDecimal vDeprecatedA, String kFixed, String kDeprecated, String kAssignment, String kTax, String kDevalue, String kChange, String customerId, LocalDateTime expiredAt, String expiredComment, String userId, String storeId, String deptId, String companyId, String parentId, String comment, String sigma, String language, Boolean active, String metadata, LocalDateTime enterAt, String enterBy, LocalDateTime accountAt, String accountBy, LocalDateTime scrapAt, String scrapBy, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public EAssetRecord(final String key, final String name, final String code, final String type, final String status, final String modelNumber, final String unit, final Long num, final Long numDeprecating, final Long numDeprecated, final Long numUsing, final Long numUsed, final String wayChange, final String wayDeprecate, final String wayAccording, final LocalDateTime usedAt, final String usedBy, final String usedStatus, final BigDecimal vOriginal, final BigDecimal vTax, final BigDecimal vDeReady, final BigDecimal vNetJunk, final BigDecimal vNet, final BigDecimal vNetAmount, final BigDecimal vDeprecatedM, final BigDecimal vDeprecatedA, final String kFixed, final String kDeprecated, final String kAssignment, final String kTax, final String kDevalue, final String kChange, final String customerId, final LocalDateTime expiredAt, final String expiredComment, final String userId, final String storeId, final String deptId, final String companyId, final String parentId, final String comment, final String sigma, final String language, final Boolean active, final String metadata, final LocalDateTime enterAt, final String enterBy, final LocalDateTime accountAt, final String accountBy, final LocalDateTime scrapAt, final String scrapBy, final LocalDateTime createdAt, final String createdBy, final LocalDateTime updatedAt, final String updatedBy) {
         super(EAsset.E_ASSET);
 
         setKey(key);
@@ -95,7 +95,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
     /**
      * Create a detached, initialised EAssetRecord
      */
-    public EAssetRecord(io.zerows.extension.commerce.erp.domain.tables.pojos.EAsset value) {
+    public EAssetRecord(final io.zerows.extension.commerce.erp.domain.tables.pojos.EAsset value) {
         super(EAsset.E_ASSET);
 
         if (value != null) {
@@ -158,7 +158,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
         }
     }
 
-    public EAssetRecord(io.vertx.core.json.JsonObject json) {
+    public EAssetRecord(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -175,7 +175,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.KEY</code>. 「key」- 资产主键
      */
     @Override
-    public EAssetRecord setKey(String value) {
+    public EAssetRecord setKey(final String value) {
         set(0, value);
         return this;
     }
@@ -192,7 +192,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.NAME</code>. 「name」- 资产名称
      */
     @Override
-    public EAssetRecord setName(String value) {
+    public EAssetRecord setName(final String value) {
         set(1, value);
         return this;
     }
@@ -209,7 +209,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.CODE</code>. 「code」- 资产编号
      */
     @Override
-    public EAssetRecord setCode(String value) {
+    public EAssetRecord setCode(final String value) {
         set(2, value);
         return this;
     }
@@ -226,7 +226,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.TYPE</code>. 「type」- 资产类型
      */
     @Override
-    public EAssetRecord setType(String value) {
+    public EAssetRecord setType(final String value) {
         set(3, value);
         return this;
     }
@@ -243,7 +243,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.STATUS</code>. 「status」- 资产状态
      */
     @Override
-    public EAssetRecord setStatus(String value) {
+    public EAssetRecord setStatus(final String value) {
         set(4, value);
         return this;
     }
@@ -260,7 +260,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.MODEL_NUMBER</code>. 「modelNumber」- 规格型号
      */
     @Override
-    public EAssetRecord setModelNumber(String value) {
+    public EAssetRecord setModelNumber(final String value) {
         set(5, value);
         return this;
     }
@@ -277,7 +277,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.UNIT</code>. 「unit」- 计量单位
      */
     @Override
-    public EAssetRecord setUnit(String value) {
+    public EAssetRecord setUnit(final String value) {
         set(6, value);
         return this;
     }
@@ -294,7 +294,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.NUM</code>. 「num」- 资产数量
      */
     @Override
-    public EAssetRecord setNum(Long value) {
+    public EAssetRecord setNum(final Long value) {
         set(7, value);
         return this;
     }
@@ -313,7 +313,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * 预计折旧数量
      */
     @Override
-    public EAssetRecord setNumDeprecating(Long value) {
+    public EAssetRecord setNumDeprecating(final Long value) {
         set(8, value);
         return this;
     }
@@ -332,7 +332,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * 已折旧数量
      */
     @Override
-    public EAssetRecord setNumDeprecated(Long value) {
+    public EAssetRecord setNumDeprecated(final Long value) {
         set(9, value);
         return this;
     }
@@ -349,7 +349,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.NUM_USING</code>. 「numUsing」- 预计使用数量
      */
     @Override
-    public EAssetRecord setNumUsing(Long value) {
+    public EAssetRecord setNumUsing(final Long value) {
         set(10, value);
         return this;
     }
@@ -366,7 +366,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.NUM_USED</code>. 「numUsed」- 已使用数量
      */
     @Override
-    public EAssetRecord setNumUsed(Long value) {
+    public EAssetRecord setNumUsed(final Long value) {
         set(11, value);
         return this;
     }
@@ -383,7 +383,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.WAY_CHANGE</code>. 「wayChange」- 变动方式
      */
     @Override
-    public EAssetRecord setWayChange(String value) {
+    public EAssetRecord setWayChange(final String value) {
         set(12, value);
         return this;
     }
@@ -400,7 +400,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.WAY_DEPRECATE</code>. 「wayDeprecate」- 折旧方式
      */
     @Override
-    public EAssetRecord setWayDeprecate(String value) {
+    public EAssetRecord setWayDeprecate(final String value) {
         set(13, value);
         return this;
     }
@@ -417,7 +417,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.WAY_ACCORDING</code>. 「wayAccording」- 折旧依据
      */
     @Override
-    public EAssetRecord setWayAccording(String value) {
+    public EAssetRecord setWayAccording(final String value) {
         set(14, value);
         return this;
     }
@@ -434,7 +434,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.USED_AT</code>. 「usedAt」- 开始使用时间
      */
     @Override
-    public EAssetRecord setUsedAt(LocalDateTime value) {
+    public EAssetRecord setUsedAt(final LocalDateTime value) {
         set(15, value);
         return this;
     }
@@ -451,7 +451,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.USED_BY</code>. 「usedBy」- 使用者
      */
     @Override
-    public EAssetRecord setUsedBy(String value) {
+    public EAssetRecord setUsedBy(final String value) {
         set(16, value);
         return this;
     }
@@ -468,7 +468,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.USED_STATUS</code>. 「usedStatus」- 使用状态
      */
     @Override
-    public EAssetRecord setUsedStatus(String value) {
+    public EAssetRecord setUsedStatus(final String value) {
         set(17, value);
         return this;
     }
@@ -485,7 +485,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.V_ORIGINAL</code>. 「vOriginal」- 原价值
      */
     @Override
-    public EAssetRecord setVOriginal(BigDecimal value) {
+    public EAssetRecord setVOriginal(final BigDecimal value) {
         set(18, value);
         return this;
     }
@@ -502,7 +502,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.V_TAX</code>. 「vTax」- 税额
      */
     @Override
-    public EAssetRecord setVTax(BigDecimal value) {
+    public EAssetRecord setVTax(final BigDecimal value) {
         set(19, value);
         return this;
     }
@@ -519,7 +519,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.V_DE_READY</code>. 「vDeReady」- 减值准备
      */
     @Override
-    public EAssetRecord setVDeReady(BigDecimal value) {
+    public EAssetRecord setVDeReady(final BigDecimal value) {
         set(20, value);
         return this;
     }
@@ -536,7 +536,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.V_NET_JUNK</code>. 「vNetJunk」- 净残值
      */
     @Override
-    public EAssetRecord setVNetJunk(BigDecimal value) {
+    public EAssetRecord setVNetJunk(final BigDecimal value) {
         set(21, value);
         return this;
     }
@@ -553,7 +553,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.V_NET</code>. 「vNet」- 净值
      */
     @Override
-    public EAssetRecord setVNet(BigDecimal value) {
+    public EAssetRecord setVNet(final BigDecimal value) {
         set(22, value);
         return this;
     }
@@ -570,7 +570,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.V_NET_AMOUNT</code>. 「vNetAmount」- 净额
      */
     @Override
-    public EAssetRecord setVNetAmount(BigDecimal value) {
+    public EAssetRecord setVNetAmount(final BigDecimal value) {
         set(23, value);
         return this;
     }
@@ -587,7 +587,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.V_DEPRECATED_M</code>. 「vDeprecatedM」- 月折旧
      */
     @Override
-    public EAssetRecord setVDeprecatedM(BigDecimal value) {
+    public EAssetRecord setVDeprecatedM(final BigDecimal value) {
         set(24, value);
         return this;
     }
@@ -604,7 +604,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.V_DEPRECATED_A</code>. 「vDeprecatedA」- 累积折旧
      */
     @Override
-    public EAssetRecord setVDeprecatedA(BigDecimal value) {
+    public EAssetRecord setVDeprecatedA(final BigDecimal value) {
         set(25, value);
         return this;
     }
@@ -621,7 +621,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.K_FIXED</code>. 「kFixed」- 固定资产科目
      */
     @Override
-    public EAssetRecord setKFixed(String value) {
+    public EAssetRecord setKFixed(final String value) {
         set(26, value);
         return this;
     }
@@ -638,7 +638,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.K_DEPRECATED</code>. 「kDeprecated」- 累积折旧科目
      */
     @Override
-    public EAssetRecord setKDeprecated(String value) {
+    public EAssetRecord setKDeprecated(final String value) {
         set(27, value);
         return this;
     }
@@ -655,7 +655,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.K_ASSIGNMENT</code>. 「kAssignment」- 折旧费用分配科目
      */
     @Override
-    public EAssetRecord setKAssignment(String value) {
+    public EAssetRecord setKAssignment(final String value) {
         set(28, value);
         return this;
     }
@@ -672,7 +672,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.K_TAX</code>. 「kTax」- 税金科目
      */
     @Override
-    public EAssetRecord setKTax(String value) {
+    public EAssetRecord setKTax(final String value) {
         set(29, value);
         return this;
     }
@@ -689,7 +689,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.K_DEVALUE</code>. 「kDevalue」- 减值准备科目
      */
     @Override
-    public EAssetRecord setKDevalue(String value) {
+    public EAssetRecord setKDevalue(final String value) {
         set(30, value);
         return this;
     }
@@ -706,7 +706,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.K_CHANGE</code>. 「kChange」- 资产变动对方科目
      */
     @Override
-    public EAssetRecord setKChange(String value) {
+    public EAssetRecord setKChange(final String value) {
         set(31, value);
         return this;
     }
@@ -723,7 +723,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.CUSTOMER_ID</code>. 「customerId」- 供应商ID
      */
     @Override
-    public EAssetRecord setCustomerId(String value) {
+    public EAssetRecord setCustomerId(final String value) {
         set(32, value);
         return this;
     }
@@ -740,7 +740,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.EXPIRED_AT</code>. 「expiredAt」- 到期时间
      */
     @Override
-    public EAssetRecord setExpiredAt(LocalDateTime value) {
+    public EAssetRecord setExpiredAt(final LocalDateTime value) {
         set(33, value);
         return this;
     }
@@ -759,7 +759,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * 到期说明
      */
     @Override
-    public EAssetRecord setExpiredComment(String value) {
+    public EAssetRecord setExpiredComment(final String value) {
         set(34, value);
         return this;
     }
@@ -776,7 +776,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.USER_ID</code>. 「userId」- 资产管理者
      */
     @Override
-    public EAssetRecord setUserId(String value) {
+    public EAssetRecord setUserId(final String value) {
         set(35, value);
         return this;
     }
@@ -793,7 +793,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.STORE_ID</code>. 「storeId」- 所属仓库ID
      */
     @Override
-    public EAssetRecord setStoreId(String value) {
+    public EAssetRecord setStoreId(final String value) {
         set(36, value);
         return this;
     }
@@ -810,7 +810,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.DEPT_ID</code>. 「deptId」- 所属部门
      */
     @Override
-    public EAssetRecord setDeptId(String value) {
+    public EAssetRecord setDeptId(final String value) {
         set(37, value);
         return this;
     }
@@ -827,7 +827,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.COMPANY_ID</code>. 「companyId」- 所属公司
      */
     @Override
-    public EAssetRecord setCompanyId(String value) {
+    public EAssetRecord setCompanyId(final String value) {
         set(38, value);
         return this;
     }
@@ -844,7 +844,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.PARENT_ID</code>. 「parentId」- 上级资产
      */
     @Override
-    public EAssetRecord setParentId(String value) {
+    public EAssetRecord setParentId(final String value) {
         set(39, value);
         return this;
     }
@@ -861,7 +861,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.COMMENT</code>. 「comment」- 资产备注
      */
     @Override
-    public EAssetRecord setComment(String value) {
+    public EAssetRecord setComment(final String value) {
         set(40, value);
         return this;
     }
@@ -878,7 +878,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public EAssetRecord setSigma(String value) {
+    public EAssetRecord setSigma(final String value) {
         set(41, value);
         return this;
     }
@@ -895,7 +895,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public EAssetRecord setLanguage(String value) {
+    public EAssetRecord setLanguage(final String value) {
         set(42, value);
         return this;
     }
@@ -912,7 +912,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public EAssetRecord setActive(Boolean value) {
+    public EAssetRecord setActive(final Boolean value) {
         set(43, value);
         return this;
     }
@@ -929,7 +929,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.METADATA</code>. 「metadata」- 附加配置数据
      */
     @Override
-    public EAssetRecord setMetadata(String value) {
+    public EAssetRecord setMetadata(final String value) {
         set(44, value);
         return this;
     }
@@ -946,7 +946,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.ENTER_AT</code>. 「enterAt」- 入库时间
      */
     @Override
-    public EAssetRecord setEnterAt(LocalDateTime value) {
+    public EAssetRecord setEnterAt(final LocalDateTime value) {
         set(45, value);
         return this;
     }
@@ -963,7 +963,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.ENTER_BY</code>. 「enterBy」- 入库人
      */
     @Override
-    public EAssetRecord setEnterBy(String value) {
+    public EAssetRecord setEnterBy(final String value) {
         set(46, value);
         return this;
     }
@@ -980,7 +980,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.ACCOUNT_AT</code>. 「accountAt」- 入账时间
      */
     @Override
-    public EAssetRecord setAccountAt(LocalDateTime value) {
+    public EAssetRecord setAccountAt(final LocalDateTime value) {
         set(47, value);
         return this;
     }
@@ -997,7 +997,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.ACCOUNT_BY</code>. 「accountBy」- 入账人
      */
     @Override
-    public EAssetRecord setAccountBy(String value) {
+    public EAssetRecord setAccountBy(final String value) {
         set(48, value);
         return this;
     }
@@ -1014,7 +1014,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.SCRAP_AT</code>. 「scrapAt」- 报废时间
      */
     @Override
-    public EAssetRecord setScrapAt(LocalDateTime value) {
+    public EAssetRecord setScrapAt(final LocalDateTime value) {
         set(49, value);
         return this;
     }
@@ -1031,7 +1031,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.SCRAP_BY</code>. 「scrapBy」- 报废人
      */
     @Override
-    public EAssetRecord setScrapBy(String value) {
+    public EAssetRecord setScrapBy(final String value) {
         set(50, value);
         return this;
     }
@@ -1048,7 +1048,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public EAssetRecord setCreatedAt(LocalDateTime value) {
+    public EAssetRecord setCreatedAt(final LocalDateTime value) {
         set(51, value);
         return this;
     }
@@ -1065,7 +1065,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public EAssetRecord setCreatedBy(String value) {
+    public EAssetRecord setCreatedBy(final String value) {
         set(52, value);
         return this;
     }
@@ -1090,7 +1090,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public EAssetRecord setUpdatedAt(LocalDateTime value) {
+    public EAssetRecord setUpdatedAt(final LocalDateTime value) {
         set(53, value);
         return this;
     }
@@ -1111,7 +1111,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public EAssetRecord setUpdatedBy(String value) {
+    public EAssetRecord setUpdatedBy(final String value) {
         set(54, value);
         return this;
     }
@@ -1122,7 +1122,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
     }
 
     @Override
-    public void from(IEAsset from) {
+    public void from(final IEAsset from) {
         setKey(from.getKey());
         setName(from.getName());
         setCode(from.getCode());
@@ -1182,7 +1182,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
     }
 
     @Override
-    public <E extends IEAsset> E into(E into) {
+    public <E extends IEAsset> E into(final E into) {
         into.from(this);
         return into;
     }

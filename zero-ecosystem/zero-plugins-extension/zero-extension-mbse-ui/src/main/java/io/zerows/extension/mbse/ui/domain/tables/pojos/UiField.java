@@ -4,7 +4,7 @@
 package io.zerows.extension.mbse.ui.domain.tables.pojos;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.mbse.ui.domain.tables.interfaces.IUiField;
 
 import java.time.LocalDateTime;
@@ -44,7 +44,7 @@ public class UiField implements VertxPojo, IUiField {
     public UiField() {
     }
 
-    public UiField(IUiField value) {
+    public UiField(final IUiField value) {
         this.key = value.getKey();
         this.xPoint = value.getXPoint();
         this.yPoint = value.getYPoint();
@@ -71,29 +71,29 @@ public class UiField implements VertxPojo, IUiField {
     }
 
     public UiField(
-        String key,
-        Integer xPoint,
-        Integer yPoint,
-        String label,
-        String name,
-        Integer span,
-        Boolean hidden,
-        String render,
-        String container,
-        String optionJsx,
-        String optionConfig,
-        String optionItem,
-        String rules,
-        String controlId,
-        String rowType,
-        Boolean active,
-        String sigma,
-        String metadata,
-        String language,
-        LocalDateTime createdAt,
-        String createdBy,
-        LocalDateTime updatedAt,
-        String updatedBy
+        final String key,
+        final Integer xPoint,
+        final Integer yPoint,
+        final String label,
+        final String name,
+        final Integer span,
+        final Boolean hidden,
+        final String render,
+        final String container,
+        final String optionJsx,
+        final String optionConfig,
+        final String optionItem,
+        final String rules,
+        final String controlId,
+        final String rowType,
+        final Boolean active,
+        final String sigma,
+        final String metadata,
+        final String language,
+        final LocalDateTime createdAt,
+        final String createdBy,
+        final LocalDateTime updatedAt,
+        final String updatedBy
     ) {
         this.key = key;
         this.xPoint = xPoint;
@@ -120,7 +120,7 @@ public class UiField implements VertxPojo, IUiField {
         this.updatedBy = updatedBy;
     }
 
-    public UiField(io.vertx.core.json.JsonObject json) {
+    public UiField(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -137,7 +137,7 @@ public class UiField implements VertxPojo, IUiField {
      * Setter for <code>ZDB.UI_FIELD.KEY</code>. 「key」- 字段主键
      */
     @Override
-    public UiField setKey(String key) {
+    public UiField setKey(final String key) {
         this.key = key;
         return this;
     }
@@ -154,7 +154,7 @@ public class UiField implements VertxPojo, IUiField {
      * Setter for <code>ZDB.UI_FIELD.X_POINT</code>. 「xPoint] - 字段的X坐标（列）
      */
     @Override
-    public UiField setXPoint(Integer xPoint) {
+    public UiField setXPoint(final Integer xPoint) {
         this.xPoint = xPoint;
         return this;
     }
@@ -171,7 +171,7 @@ public class UiField implements VertxPojo, IUiField {
      * Setter for <code>ZDB.UI_FIELD.Y_POINT</code>. 「yPoint」- 字段的Y坐标（行）
      */
     @Override
-    public UiField setYPoint(Integer yPoint) {
+    public UiField setYPoint(final Integer yPoint) {
         this.yPoint = yPoint;
         return this;
     }
@@ -188,7 +188,7 @@ public class UiField implements VertxPojo, IUiField {
      * Setter for <code>ZDB.UI_FIELD.LABEL</code>. 「label」- 字段标签
      */
     @Override
-    public UiField setLabel(String label) {
+    public UiField setLabel(final String label) {
         this.label = label;
         return this;
     }
@@ -205,7 +205,7 @@ public class UiField implements VertxPojo, IUiField {
      * Setter for <code>ZDB.UI_FIELD.NAME</code>. 「name」- 字段名称
      */
     @Override
-    public UiField setName(String name) {
+    public UiField setName(final String name) {
         this.name = name;
         return this;
     }
@@ -222,7 +222,7 @@ public class UiField implements VertxPojo, IUiField {
      * Setter for <code>ZDB.UI_FIELD.SPAN</code>. 「span」- 字段宽度
      */
     @Override
-    public UiField setSpan(Integer span) {
+    public UiField setSpan(final Integer span) {
         this.span = span;
         return this;
     }
@@ -239,7 +239,7 @@ public class UiField implements VertxPojo, IUiField {
      * Setter for <code>ZDB.UI_FIELD.HIDDEN</code>. 「hidden」- button专用
      */
     @Override
-    public UiField setHidden(Boolean hidden) {
+    public UiField setHidden(final Boolean hidden) {
         this.hidden = hidden;
         return this;
     }
@@ -256,7 +256,7 @@ public class UiField implements VertxPojo, IUiField {
      * Setter for <code>ZDB.UI_FIELD.RENDER</code>. 「render」- 使用的Render函数
      */
     @Override
-    public UiField setRender(String render) {
+    public UiField setRender(final String render) {
         this.render = render;
         return this;
     }
@@ -275,7 +275,7 @@ public class UiField implements VertxPojo, IUiField {
      * 容器字段专用容器信息，映射到 name 中
      */
     @Override
-    public UiField setContainer(String container) {
+    public UiField setContainer(final String container) {
         this.container = container;
         return this;
     }
@@ -292,7 +292,7 @@ public class UiField implements VertxPojo, IUiField {
      * Setter for <code>ZDB.UI_FIELD.OPTION_JSX</code>. 「optionJsx」- 字段专用配置
      */
     @Override
-    public UiField setOptionJsx(String optionJsx) {
+    public UiField setOptionJsx(final String optionJsx) {
         this.optionJsx = optionJsx;
         return this;
     }
@@ -311,7 +311,7 @@ public class UiField implements VertxPojo, IUiField {
      * 字段专用配置
      */
     @Override
-    public UiField setOptionConfig(String optionConfig) {
+    public UiField setOptionConfig(final String optionConfig) {
         this.optionConfig = optionConfig;
         return this;
     }
@@ -328,7 +328,7 @@ public class UiField implements VertxPojo, IUiField {
      * Setter for <code>ZDB.UI_FIELD.OPTION_ITEM</code>. 「optionItem」- 字段专用配置
      */
     @Override
-    public UiField setOptionItem(String optionItem) {
+    public UiField setOptionItem(final String optionItem) {
         this.optionItem = optionItem;
         return this;
     }
@@ -347,7 +347,7 @@ public class UiField implements VertxPojo, IUiField {
      * 验证专用的配置，描述规则
      */
     @Override
-    public UiField setRules(String rules) {
+    public UiField setRules(final String rules) {
         this.rules = rules;
         return this;
     }
@@ -364,7 +364,7 @@ public class UiField implements VertxPojo, IUiField {
      * Setter for <code>ZDB.UI_FIELD.CONTROL_ID</code>. 「controlId」- 关联的表单ID
      */
     @Override
-    public UiField setControlId(String controlId) {
+    public UiField setControlId(final String controlId) {
         this.controlId = controlId;
         return this;
     }
@@ -381,7 +381,7 @@ public class UiField implements VertxPojo, IUiField {
      * Setter for <code>ZDB.UI_FIELD.ROW_TYPE</code>. 「rowType」- 行类型
      */
     @Override
-    public UiField setRowType(String rowType) {
+    public UiField setRowType(final String rowType) {
         this.rowType = rowType;
         return this;
     }
@@ -398,7 +398,7 @@ public class UiField implements VertxPojo, IUiField {
      * Setter for <code>ZDB.UI_FIELD.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public UiField setActive(Boolean active) {
+    public UiField setActive(final Boolean active) {
         this.active = active;
         return this;
     }
@@ -415,7 +415,7 @@ public class UiField implements VertxPojo, IUiField {
      * Setter for <code>ZDB.UI_FIELD.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public UiField setSigma(String sigma) {
+    public UiField setSigma(final String sigma) {
         this.sigma = sigma;
         return this;
     }
@@ -432,7 +432,7 @@ public class UiField implements VertxPojo, IUiField {
      * Setter for <code>ZDB.UI_FIELD.METADATA</code>. 「metadata」- 附加配置
      */
     @Override
-    public UiField setMetadata(String metadata) {
+    public UiField setMetadata(final String metadata) {
         this.metadata = metadata;
         return this;
     }
@@ -449,7 +449,7 @@ public class UiField implements VertxPojo, IUiField {
      * Setter for <code>ZDB.UI_FIELD.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public UiField setLanguage(String language) {
+    public UiField setLanguage(final String language) {
         this.language = language;
         return this;
     }
@@ -466,7 +466,7 @@ public class UiField implements VertxPojo, IUiField {
      * Setter for <code>ZDB.UI_FIELD.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public UiField setCreatedAt(LocalDateTime createdAt) {
+    public UiField setCreatedAt(final LocalDateTime createdAt) {
         this.createdAt = createdAt;
         return this;
     }
@@ -483,7 +483,7 @@ public class UiField implements VertxPojo, IUiField {
      * Setter for <code>ZDB.UI_FIELD.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public UiField setCreatedBy(String createdBy) {
+    public UiField setCreatedBy(final String createdBy) {
         this.createdBy = createdBy;
         return this;
     }
@@ -500,7 +500,7 @@ public class UiField implements VertxPojo, IUiField {
      * Setter for <code>ZDB.UI_FIELD.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public UiField setUpdatedAt(LocalDateTime updatedAt) {
+    public UiField setUpdatedAt(final LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
         return this;
     }
@@ -517,13 +517,13 @@ public class UiField implements VertxPojo, IUiField {
      * Setter for <code>ZDB.UI_FIELD.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public UiField setUpdatedBy(String updatedBy) {
+    public UiField setUpdatedBy(final String updatedBy) {
         this.updatedBy = updatedBy;
         return this;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
@@ -681,7 +681,7 @@ public class UiField implements VertxPojo, IUiField {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("UiField (");
+        final StringBuilder sb = new StringBuilder("UiField (");
 
         sb.append(key);
         sb.append(", ").append(xPoint);
@@ -716,7 +716,7 @@ public class UiField implements VertxPojo, IUiField {
     // -------------------------------------------------------------------------
 
     @Override
-    public void from(IUiField from) {
+    public void from(final IUiField from) {
         setKey(from.getKey());
         setXPoint(from.getXPoint());
         setYPoint(from.getYPoint());
@@ -743,7 +743,7 @@ public class UiField implements VertxPojo, IUiField {
     }
 
     @Override
-    public <E extends IUiField> E into(E into) {
+    public <E extends IUiField> E into(final E into) {
         into.from(this);
         return into;
     }

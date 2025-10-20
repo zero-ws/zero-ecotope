@@ -4,7 +4,7 @@
 package io.zerows.extension.runtime.integration.domain.tables.pojos;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.runtime.integration.domain.tables.interfaces.IIDirectory;
 
 import java.time.LocalDateTime;
@@ -45,7 +45,7 @@ public class IDirectory implements VertxPojo, IIDirectory {
     public IDirectory() {
     }
 
-    public IDirectory(IIDirectory value) {
+    public IDirectory(final IIDirectory value) {
         this.key = value.getKey();
         this.name = value.getName();
         this.code = value.getCode();
@@ -73,30 +73,30 @@ public class IDirectory implements VertxPojo, IIDirectory {
     }
 
     public IDirectory(
-        String key,
-        String name,
-        String code,
-        String storePath,
-        String linkedPath,
-        String parentId,
-        String category,
-        String type,
-        String owner,
-        String integrationId,
-        String runComponent,
-        Boolean visit,
-        String visitMode,
-        String visitRole,
-        String visitGroup,
-        String visitComponent,
-        String sigma,
-        String language,
-        Boolean active,
-        String metadata,
-        LocalDateTime createdAt,
-        String createdBy,
-        LocalDateTime updatedAt,
-        String updatedBy
+        final String key,
+        final String name,
+        final String code,
+        final String storePath,
+        final String linkedPath,
+        final String parentId,
+        final String category,
+        final String type,
+        final String owner,
+        final String integrationId,
+        final String runComponent,
+        final Boolean visit,
+        final String visitMode,
+        final String visitRole,
+        final String visitGroup,
+        final String visitComponent,
+        final String sigma,
+        final String language,
+        final Boolean active,
+        final String metadata,
+        final LocalDateTime createdAt,
+        final String createdBy,
+        final LocalDateTime updatedAt,
+        final String updatedBy
     ) {
         this.key = key;
         this.name = name;
@@ -124,7 +124,7 @@ public class IDirectory implements VertxPojo, IIDirectory {
         this.updatedBy = updatedBy;
     }
 
-    public IDirectory(io.vertx.core.json.JsonObject json) {
+    public IDirectory(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -141,7 +141,7 @@ public class IDirectory implements VertxPojo, IIDirectory {
      * Setter for <code>ZDB.I_DIRECTORY.KEY</code>. 「key」- 目录主键
      */
     @Override
-    public IDirectory setKey(String key) {
+    public IDirectory setKey(final String key) {
         this.key = key;
         return this;
     }
@@ -158,7 +158,7 @@ public class IDirectory implements VertxPojo, IIDirectory {
      * Setter for <code>ZDB.I_DIRECTORY.NAME</code>. 「name」- 目录名称
      */
     @Override
-    public IDirectory setName(String name) {
+    public IDirectory setName(final String name) {
         this.name = name;
         return this;
     }
@@ -175,7 +175,7 @@ public class IDirectory implements VertxPojo, IIDirectory {
      * Setter for <code>ZDB.I_DIRECTORY.CODE</code>. 「code」- 目录编号
      */
     @Override
-    public IDirectory setCode(String code) {
+    public IDirectory setCode(final String code) {
         this.code = code;
         return this;
     }
@@ -192,7 +192,7 @@ public class IDirectory implements VertxPojo, IIDirectory {
      * Setter for <code>ZDB.I_DIRECTORY.STORE_PATH</code>. 「storePath」- 目录相对路径
      */
     @Override
-    public IDirectory setStorePath(String storePath) {
+    public IDirectory setStorePath(final String storePath) {
         this.storePath = storePath;
         return this;
     }
@@ -211,7 +211,7 @@ public class IDirectory implements VertxPojo, IIDirectory {
      * 链接路径，type = LINK 时专用
      */
     @Override
-    public IDirectory setLinkedPath(String linkedPath) {
+    public IDirectory setLinkedPath(final String linkedPath) {
         this.linkedPath = linkedPath;
         return this;
     }
@@ -228,7 +228,7 @@ public class IDirectory implements VertxPojo, IIDirectory {
      * Setter for <code>ZDB.I_DIRECTORY.PARENT_ID</code>. 「parentId」- 父目录ID
      */
     @Override
-    public IDirectory setParentId(String parentId) {
+    public IDirectory setParentId(final String parentId) {
         this.parentId = parentId;
         return this;
     }
@@ -245,7 +245,7 @@ public class IDirectory implements VertxPojo, IIDirectory {
      * Setter for <code>ZDB.I_DIRECTORY.CATEGORY</code>. 「category」- 目录连接的类型树
      */
     @Override
-    public IDirectory setCategory(String category) {
+    public IDirectory setCategory(final String category) {
         this.category = category;
         return this;
     }
@@ -264,7 +264,7 @@ public class IDirectory implements VertxPojo, IIDirectory {
      * STORE / LINK
      */
     @Override
-    public IDirectory setType(String type) {
+    public IDirectory setType(final String type) {
         this.type = type;
         return this;
     }
@@ -281,7 +281,7 @@ public class IDirectory implements VertxPojo, IIDirectory {
      * Setter for <code>ZDB.I_DIRECTORY.OWNER</code>. 「owner」- 目录访问人
      */
     @Override
-    public IDirectory setOwner(String owner) {
+    public IDirectory setOwner(final String owner) {
         this.owner = owner;
         return this;
     }
@@ -300,7 +300,7 @@ public class IDirectory implements VertxPojo, IIDirectory {
      * 该目录关联的 KIntegration，不关联则不转存
      */
     @Override
-    public IDirectory setIntegrationId(String integrationId) {
+    public IDirectory setIntegrationId(final String integrationId) {
         this.integrationId = integrationId;
         return this;
     }
@@ -319,7 +319,7 @@ public class IDirectory implements VertxPojo, IIDirectory {
      * 目录执行组件，抓文件专用
      */
     @Override
-    public IDirectory setRunComponent(String runComponent) {
+    public IDirectory setRunComponent(final String runComponent) {
         this.runComponent = runComponent;
         return this;
     }
@@ -336,7 +336,7 @@ public class IDirectory implements VertxPojo, IIDirectory {
      * Setter for <code>ZDB.I_DIRECTORY.VISIT</code>. 「visit」- 公有 / 私有
      */
     @Override
-    public IDirectory setVisit(Boolean visit) {
+    public IDirectory setVisit(final Boolean visit) {
         this.visit = visit;
         return this;
     }
@@ -355,7 +355,7 @@ public class IDirectory implements VertxPojo, IIDirectory {
      * / 可写，以后扩展为其他
      */
     @Override
-    public IDirectory setVisitMode(String visitMode) {
+    public IDirectory setVisitMode(final String visitMode) {
         this.visitMode = visitMode;
         return this;
     }
@@ -372,7 +372,7 @@ public class IDirectory implements VertxPojo, IIDirectory {
      * Setter for <code>ZDB.I_DIRECTORY.VISIT_ROLE</code>. 「visitRole」- 目录访问角色
      */
     @Override
-    public IDirectory setVisitRole(String visitRole) {
+    public IDirectory setVisitRole(final String visitRole) {
         this.visitRole = visitRole;
         return this;
     }
@@ -389,7 +389,7 @@ public class IDirectory implements VertxPojo, IIDirectory {
      * Setter for <code>ZDB.I_DIRECTORY.VISIT_GROUP</code>. 「visitGroup」- 目录访问组
      */
     @Override
-    public IDirectory setVisitGroup(String visitGroup) {
+    public IDirectory setVisitGroup(final String visitGroup) {
         this.visitGroup = visitGroup;
         return this;
     }
@@ -408,7 +408,7 @@ public class IDirectory implements VertxPojo, IIDirectory {
      * 「visitComponent」- 目录访问控制专用组件
      */
     @Override
-    public IDirectory setVisitComponent(String visitComponent) {
+    public IDirectory setVisitComponent(final String visitComponent) {
         this.visitComponent = visitComponent;
         return this;
     }
@@ -425,7 +425,7 @@ public class IDirectory implements VertxPojo, IIDirectory {
      * Setter for <code>ZDB.I_DIRECTORY.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public IDirectory setSigma(String sigma) {
+    public IDirectory setSigma(final String sigma) {
         this.sigma = sigma;
         return this;
     }
@@ -442,7 +442,7 @@ public class IDirectory implements VertxPojo, IIDirectory {
      * Setter for <code>ZDB.I_DIRECTORY.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public IDirectory setLanguage(String language) {
+    public IDirectory setLanguage(final String language) {
         this.language = language;
         return this;
     }
@@ -459,7 +459,7 @@ public class IDirectory implements VertxPojo, IIDirectory {
      * Setter for <code>ZDB.I_DIRECTORY.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public IDirectory setActive(Boolean active) {
+    public IDirectory setActive(final Boolean active) {
         this.active = active;
         return this;
     }
@@ -476,7 +476,7 @@ public class IDirectory implements VertxPojo, IIDirectory {
      * Setter for <code>ZDB.I_DIRECTORY.METADATA</code>. 「metadata」- 附加配置数据
      */
     @Override
-    public IDirectory setMetadata(String metadata) {
+    public IDirectory setMetadata(final String metadata) {
         this.metadata = metadata;
         return this;
     }
@@ -493,7 +493,7 @@ public class IDirectory implements VertxPojo, IIDirectory {
      * Setter for <code>ZDB.I_DIRECTORY.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public IDirectory setCreatedAt(LocalDateTime createdAt) {
+    public IDirectory setCreatedAt(final LocalDateTime createdAt) {
         this.createdAt = createdAt;
         return this;
     }
@@ -510,7 +510,7 @@ public class IDirectory implements VertxPojo, IIDirectory {
      * Setter for <code>ZDB.I_DIRECTORY.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public IDirectory setCreatedBy(String createdBy) {
+    public IDirectory setCreatedBy(final String createdBy) {
         this.createdBy = createdBy;
         return this;
     }
@@ -527,7 +527,7 @@ public class IDirectory implements VertxPojo, IIDirectory {
      * Setter for <code>ZDB.I_DIRECTORY.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public IDirectory setUpdatedAt(LocalDateTime updatedAt) {
+    public IDirectory setUpdatedAt(final LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
         return this;
     }
@@ -544,13 +544,13 @@ public class IDirectory implements VertxPojo, IIDirectory {
      * Setter for <code>ZDB.I_DIRECTORY.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public IDirectory setUpdatedBy(String updatedBy) {
+    public IDirectory setUpdatedBy(final String updatedBy) {
         this.updatedBy = updatedBy;
         return this;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
@@ -714,7 +714,7 @@ public class IDirectory implements VertxPojo, IIDirectory {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("IDirectory (");
+        final StringBuilder sb = new StringBuilder("IDirectory (");
 
         sb.append(key);
         sb.append(", ").append(name);
@@ -750,7 +750,7 @@ public class IDirectory implements VertxPojo, IIDirectory {
     // -------------------------------------------------------------------------
 
     @Override
-    public void from(IIDirectory from) {
+    public void from(final IIDirectory from) {
         setKey(from.getKey());
         setName(from.getName());
         setCode(from.getCode());
@@ -778,7 +778,7 @@ public class IDirectory implements VertxPojo, IIDirectory {
     }
 
     @Override
-    public <E extends IIDirectory> E into(E into) {
+    public <E extends IIDirectory> E into(final E into) {
         into.from(this);
         return into;
     }

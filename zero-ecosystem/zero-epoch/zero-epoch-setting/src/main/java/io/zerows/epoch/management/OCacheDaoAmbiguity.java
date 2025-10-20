@@ -1,7 +1,7 @@
 package io.zerows.epoch.management;
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.AbstractVertxDAO;
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.epoch.basicore.MDMeta;
 import io.zerows.platform.management.AbstractAmbiguity;
 import io.zerows.specification.development.compiled.HBundle;

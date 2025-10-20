@@ -4,7 +4,7 @@
 package io.zerows.extension.runtime.ambient.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.runtime.ambient.domain.tables.XApp;
 import io.zerows.extension.runtime.ambient.domain.tables.interfaces.IXApp;
 import org.jooq.Record1;
@@ -24,7 +24,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      * Setter for <code>ZDB.X_APP.KEY</code>. 「key」- 应用程序主键
      */
     @Override
-    public XAppRecord setKey(String value) {
+    public XAppRecord setKey(final String value) {
         set(0, value);
         return this;
     }
@@ -41,7 +41,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      * Setter for <code>ZDB.X_APP.NAME</code>. 「name」- 应用程序名称
      */
     @Override
-    public XAppRecord setName(String value) {
+    public XAppRecord setName(final String value) {
         set(1, value);
         return this;
     }
@@ -58,7 +58,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      * Setter for <code>ZDB.X_APP.CODE</code>. 「code」- 应用程序编码
      */
     @Override
-    public XAppRecord setCode(String value) {
+    public XAppRecord setCode(final String value) {
         set(2, value);
         return this;
     }
@@ -75,7 +75,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      * Setter for <code>ZDB.X_APP.STATUS</code>. 「status」- 应用状态
      */
     @Override
-    public XAppRecord setStatus(String value) {
+    public XAppRecord setStatus(final String value) {
         set(3, value);
         return this;
     }
@@ -92,7 +92,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      * Setter for <code>ZDB.X_APP.TENANT_ID</code>. 「tenantId」- 租户ID
      */
     @Override
-    public XAppRecord setTenantId(String value) {
+    public XAppRecord setTenantId(final String value) {
         set(4, value);
         return this;
     }
@@ -109,7 +109,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      * Setter for <code>ZDB.X_APP.APP_SECRET</code>. 「appSecret」- 专用密钥
      */
     @Override
-    public XAppRecord setAppSecret(String value) {
+    public XAppRecord setAppSecret(final String value) {
         set(5, value);
         return this;
     }
@@ -126,7 +126,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      * Setter for <code>ZDB.X_APP.APP_KEY</code>. 「appKey」- 应用程序专用唯一hashKey
      */
     @Override
-    public XAppRecord setAppKey(String value) {
+    public XAppRecord setAppKey(final String value) {
         set(6, value);
         return this;
     }
@@ -143,7 +143,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      * Setter for <code>ZDB.X_APP.TITLE</code>. 「title」- 应用程序标题
      */
     @Override
-    public XAppRecord setTitle(String value) {
+    public XAppRecord setTitle(final String value) {
         set(7, value);
         return this;
     }
@@ -160,7 +160,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      * Setter for <code>ZDB.X_APP.LOGO</code>. 「logo」- 应用程序图标
      */
     @Override
-    public XAppRecord setLogo(String value) {
+    public XAppRecord setLogo(final String value) {
         set(8, value);
         return this;
     }
@@ -177,7 +177,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      * Setter for <code>ZDB.X_APP.ICP</code>. 「icp」- ICP备案号
      */
     @Override
-    public XAppRecord setIcp(String value) {
+    public XAppRecord setIcp(final String value) {
         set(9, value);
         return this;
     }
@@ -194,7 +194,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      * Setter for <code>ZDB.X_APP.COPY_RIGHT</code>. 「copyRight」- CopyRight版权信息
      */
     @Override
-    public XAppRecord setCopyRight(String value) {
+    public XAppRecord setCopyRight(final String value) {
         set(10, value);
         return this;
     }
@@ -211,7 +211,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      * Setter for <code>ZDB.X_APP.EMAIL</code>. 「email」- 应用Email信息
      */
     @Override
-    public XAppRecord setEmail(String value) {
+    public XAppRecord setEmail(final String value) {
         set(11, value);
         return this;
     }
@@ -228,7 +228,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      * Setter for <code>ZDB.X_APP.DOMAIN</code>. 「domain」- 应用程序所在域
      */
     @Override
-    public XAppRecord setDomain(String value) {
+    public XAppRecord setDomain(final String value) {
         set(12, value);
         return this;
     }
@@ -245,7 +245,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      * Setter for <code>ZDB.X_APP.PORT</code>. 「port」- 应用程序端口号，和SOURCE的端口号区别开
      */
     @Override
-    public XAppRecord setPort(Integer value) {
+    public XAppRecord setPort(final Integer value) {
         set(13, value);
         return this;
     }
@@ -262,7 +262,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      * Setter for <code>ZDB.X_APP.CONTEXT</code>. 「configure」- 应用程序路径
      */
     @Override
-    public XAppRecord setContext(String value) {
+    public XAppRecord setContext(final String value) {
         set(14, value);
         return this;
     }
@@ -279,7 +279,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      * Setter for <code>ZDB.X_APP.URL_LOGIN</code>. 「urlLogin」— 应用程序入口页面（登录页）
      */
     @Override
-    public XAppRecord setUrlLogin(String value) {
+    public XAppRecord setUrlLogin(final String value) {
         set(15, value);
         return this;
     }
@@ -296,7 +296,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      * Setter for <code>ZDB.X_APP.URL_ADMIN</code>. 「urlAdmin」- 应用程序内置主页（带安全）
      */
     @Override
-    public XAppRecord setUrlAdmin(String value) {
+    public XAppRecord setUrlAdmin(final String value) {
         set(16, value);
         return this;
     }
@@ -313,7 +313,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      * Setter for <code>ZDB.X_APP.ENDPOINT</code>. 「endpoint」- 后端API的根路径，启动时需要
      */
     @Override
-    public XAppRecord setEndpoint(String value) {
+    public XAppRecord setEndpoint(final String value) {
         set(17, value);
         return this;
     }
@@ -330,7 +330,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      * Setter for <code>ZDB.X_APP.ENTRY</code>. 「entry」- App 关联的入口菜单
      */
     @Override
-    public XAppRecord setEntry(String value) {
+    public XAppRecord setEntry(final String value) {
         set(18, value);
         return this;
     }
@@ -347,7 +347,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      * Setter for <code>ZDB.X_APP.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public XAppRecord setActive(Boolean value) {
+    public XAppRecord setActive(final Boolean value) {
         set(19, value);
         return this;
     }
@@ -364,7 +364,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      * Setter for <code>ZDB.X_APP.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public XAppRecord setSigma(String value) {
+    public XAppRecord setSigma(final String value) {
         set(20, value);
         return this;
     }
@@ -381,7 +381,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      * Setter for <code>ZDB.X_APP.METADATA</code>. 「metadata」- 附加配置
      */
     @Override
-    public XAppRecord setMetadata(String value) {
+    public XAppRecord setMetadata(final String value) {
         set(21, value);
         return this;
     }
@@ -398,7 +398,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      * Setter for <code>ZDB.X_APP.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public XAppRecord setLanguage(String value) {
+    public XAppRecord setLanguage(final String value) {
         set(22, value);
         return this;
     }
@@ -415,7 +415,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      * Setter for <code>ZDB.X_APP.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public XAppRecord setCreatedAt(LocalDateTime value) {
+    public XAppRecord setCreatedAt(final LocalDateTime value) {
         set(23, value);
         return this;
     }
@@ -432,7 +432,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      * Setter for <code>ZDB.X_APP.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public XAppRecord setCreatedBy(String value) {
+    public XAppRecord setCreatedBy(final String value) {
         set(24, value);
         return this;
     }
@@ -449,7 +449,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      * Setter for <code>ZDB.X_APP.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public XAppRecord setUpdatedAt(LocalDateTime value) {
+    public XAppRecord setUpdatedAt(final LocalDateTime value) {
         set(25, value);
         return this;
     }
@@ -466,7 +466,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      * Setter for <code>ZDB.X_APP.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public XAppRecord setUpdatedBy(String value) {
+    public XAppRecord setUpdatedBy(final String value) {
         set(26, value);
         return this;
     }
@@ -493,7 +493,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
     // -------------------------------------------------------------------------
 
     @Override
-    public void from(IXApp from) {
+    public void from(final IXApp from) {
         setKey(from.getKey());
         setName(from.getName());
         setCode(from.getCode());
@@ -525,7 +525,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
     }
 
     @Override
-    public <E extends IXApp> E into(E into) {
+    public <E extends IXApp> E into(final E into) {
         into.from(this);
         return into;
     }
@@ -544,7 +544,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
     /**
      * Create a detached, initialised XAppRecord
      */
-    public XAppRecord(String key, String name, String code, String status, String tenantId, String appSecret, String appKey, String title, String logo, String icp, String copyRight, String email, String domain, Integer port, String context, String urlLogin, String urlAdmin, String endpoint, String entry, Boolean active, String sigma, String metadata, String language, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public XAppRecord(final String key, final String name, final String code, final String status, final String tenantId, final String appSecret, final String appKey, final String title, final String logo, final String icp, final String copyRight, final String email, final String domain, final Integer port, final String context, final String urlLogin, final String urlAdmin, final String endpoint, final String entry, final Boolean active, final String sigma, final String metadata, final String language, final LocalDateTime createdAt, final String createdBy, final LocalDateTime updatedAt, final String updatedBy) {
         super(XApp.X_APP);
 
         setKey(key);
@@ -580,7 +580,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
     /**
      * Create a detached, initialised XAppRecord
      */
-    public XAppRecord(io.zerows.extension.runtime.ambient.domain.tables.pojos.XApp value) {
+    public XAppRecord(final io.zerows.extension.runtime.ambient.domain.tables.pojos.XApp value) {
         super(XApp.X_APP);
 
         if (value != null) {
@@ -615,7 +615,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
         }
     }
 
-    public XAppRecord(io.vertx.core.json.JsonObject json) {
+    public XAppRecord(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }

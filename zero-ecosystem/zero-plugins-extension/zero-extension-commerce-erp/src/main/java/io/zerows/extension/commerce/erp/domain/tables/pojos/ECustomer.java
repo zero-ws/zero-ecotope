@@ -4,7 +4,7 @@
 package io.zerows.extension.commerce.erp.domain.tables.pojos;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.commerce.erp.domain.tables.interfaces.IECustomer;
 
 import java.math.BigDecimal;

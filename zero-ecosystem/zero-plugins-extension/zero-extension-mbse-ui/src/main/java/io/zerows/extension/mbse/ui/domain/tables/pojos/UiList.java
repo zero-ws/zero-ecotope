@@ -4,7 +4,7 @@
 package io.zerows.extension.mbse.ui.domain.tables.pojos;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.mbse.ui.domain.tables.interfaces.IUiList;
 
 import java.time.LocalDateTime;
@@ -43,7 +43,7 @@ public class UiList implements VertxPojo, IUiList {
     public UiList() {
     }
 
-    public UiList(IUiList value) {
+    public UiList(final IUiList value) {
         this.key = value.getKey();
         this.name = value.getName();
         this.code = value.getCode();
@@ -69,28 +69,28 @@ public class UiList implements VertxPojo, IUiList {
     }
 
     public UiList(
-        String key,
-        String name,
-        String code,
-        String identifier,
-        String vQuery,
-        String vSearch,
-        String vTable,
-        String vSegment,
-        Boolean dynamicColumn,
-        Boolean dynamicSwitch,
-        String optionsAjax,
-        String optionsSubmit,
-        String options,
-        String classCombiner,
-        Boolean active,
-        String sigma,
-        String metadata,
-        String language,
-        LocalDateTime createdAt,
-        String createdBy,
-        LocalDateTime updatedAt,
-        String updatedBy
+        final String key,
+        final String name,
+        final String code,
+        final String identifier,
+        final String vQuery,
+        final String vSearch,
+        final String vTable,
+        final String vSegment,
+        final Boolean dynamicColumn,
+        final Boolean dynamicSwitch,
+        final String optionsAjax,
+        final String optionsSubmit,
+        final String options,
+        final String classCombiner,
+        final Boolean active,
+        final String sigma,
+        final String metadata,
+        final String language,
+        final LocalDateTime createdAt,
+        final String createdBy,
+        final LocalDateTime updatedAt,
+        final String updatedBy
     ) {
         this.key = key;
         this.name = name;
@@ -116,7 +116,7 @@ public class UiList implements VertxPojo, IUiList {
         this.updatedBy = updatedBy;
     }
 
-    public UiList(io.vertx.core.json.JsonObject json) {
+    public UiList(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -133,7 +133,7 @@ public class UiList implements VertxPojo, IUiList {
      * Setter for <code>ZDB.UI_LIST.KEY</code>. 「key」- 主键
      */
     @Override
-    public UiList setKey(String key) {
+    public UiList setKey(final String key) {
         this.key = key;
         return this;
     }
@@ -150,7 +150,7 @@ public class UiList implements VertxPojo, IUiList {
      * Setter for <code>ZDB.UI_LIST.NAME</code>. 「name」- 名称
      */
     @Override
-    public UiList setName(String name) {
+    public UiList setName(final String name) {
         this.name = name;
         return this;
     }
@@ -167,7 +167,7 @@ public class UiList implements VertxPojo, IUiList {
      * Setter for <code>ZDB.UI_LIST.CODE</code>. 「code」- 系统编码
      */
     @Override
-    public UiList setCode(String code) {
+    public UiList setCode(final String code) {
         this.code = code;
         return this;
     }
@@ -184,7 +184,7 @@ public class UiList implements VertxPojo, IUiList {
      * Setter for <code>ZDB.UI_LIST.IDENTIFIER</code>. 「identifier」- 表单所属的模型ID
      */
     @Override
-    public UiList setIdentifier(String identifier) {
+    public UiList setIdentifier(final String identifier) {
         this.identifier = identifier;
         return this;
     }
@@ -203,7 +203,7 @@ public class UiList implements VertxPojo, IUiList {
      * -&gt; query 节点
      */
     @Override
-    public UiList setVQuery(String vQuery) {
+    public UiList setVQuery(final String vQuery) {
         this.vQuery = vQuery;
         return this;
     }
@@ -222,7 +222,7 @@ public class UiList implements VertxPojo, IUiList {
      * -&gt; options 节点
      */
     @Override
-    public UiList setVSearch(String vSearch) {
+    public UiList setVSearch(final String vSearch) {
         this.vSearch = vSearch;
         return this;
     }
@@ -241,7 +241,7 @@ public class UiList implements VertxPojo, IUiList {
      * -&gt; table 节点
      */
     @Override
-    public UiList setVTable(String vTable) {
+    public UiList setVTable(final String vTable) {
         this.vTable = vTable;
         return this;
     }
@@ -260,7 +260,7 @@ public class UiList implements VertxPojo, IUiList {
      * grid -&gt; component 节点
      */
     @Override
-    public UiList setVSegment(String vSegment) {
+    public UiList setVSegment(final String vSegment) {
         this.vSegment = vSegment;
         return this;
     }
@@ -277,7 +277,7 @@ public class UiList implements VertxPojo, IUiList {
      * Setter for <code>ZDB.UI_LIST.DYNAMIC_COLUMN</code>. 「dynamicColumn」- 动态列？
      */
     @Override
-    public UiList setDynamicColumn(Boolean dynamicColumn) {
+    public UiList setDynamicColumn(final Boolean dynamicColumn) {
         this.dynamicColumn = dynamicColumn;
         return this;
     }
@@ -296,7 +296,7 @@ public class UiList implements VertxPojo, IUiList {
      * 动态切换？
      */
     @Override
-    public UiList setDynamicSwitch(Boolean dynamicSwitch) {
+    public UiList setDynamicSwitch(final Boolean dynamicSwitch) {
         this.dynamicSwitch = dynamicSwitch;
         return this;
     }
@@ -315,7 +315,7 @@ public class UiList implements VertxPojo, IUiList {
      * ajax系列的配置
      */
     @Override
-    public UiList setOptionsAjax(String optionsAjax) {
+    public UiList setOptionsAjax(final String optionsAjax) {
         this.optionsAjax = optionsAjax;
         return this;
     }
@@ -334,7 +334,7 @@ public class UiList implements VertxPojo, IUiList {
      * 所有提交类的配置
      */
     @Override
-    public UiList setOptionsSubmit(String optionsSubmit) {
+    public UiList setOptionsSubmit(final String optionsSubmit) {
         this.optionsSubmit = optionsSubmit;
         return this;
     }
@@ -351,7 +351,7 @@ public class UiList implements VertxPojo, IUiList {
      * Setter for <code>ZDB.UI_LIST.OPTIONS</code>. 「options」- 配置项
      */
     @Override
-    public UiList setOptions(String options) {
+    public UiList setOptions(final String options) {
         this.options = options;
         return this;
     }
@@ -368,7 +368,7 @@ public class UiList implements VertxPojo, IUiList {
      * Setter for <code>ZDB.UI_LIST.CLASS_COMBINER</code>. 「classCombiner」- 组装器
      */
     @Override
-    public UiList setClassCombiner(String classCombiner) {
+    public UiList setClassCombiner(final String classCombiner) {
         this.classCombiner = classCombiner;
         return this;
     }
@@ -385,7 +385,7 @@ public class UiList implements VertxPojo, IUiList {
      * Setter for <code>ZDB.UI_LIST.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public UiList setActive(Boolean active) {
+    public UiList setActive(final Boolean active) {
         this.active = active;
         return this;
     }
@@ -402,7 +402,7 @@ public class UiList implements VertxPojo, IUiList {
      * Setter for <code>ZDB.UI_LIST.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public UiList setSigma(String sigma) {
+    public UiList setSigma(final String sigma) {
         this.sigma = sigma;
         return this;
     }
@@ -419,7 +419,7 @@ public class UiList implements VertxPojo, IUiList {
      * Setter for <code>ZDB.UI_LIST.METADATA</code>. 「metadata」- 附加配置
      */
     @Override
-    public UiList setMetadata(String metadata) {
+    public UiList setMetadata(final String metadata) {
         this.metadata = metadata;
         return this;
     }
@@ -436,7 +436,7 @@ public class UiList implements VertxPojo, IUiList {
      * Setter for <code>ZDB.UI_LIST.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public UiList setLanguage(String language) {
+    public UiList setLanguage(final String language) {
         this.language = language;
         return this;
     }
@@ -453,7 +453,7 @@ public class UiList implements VertxPojo, IUiList {
      * Setter for <code>ZDB.UI_LIST.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public UiList setCreatedAt(LocalDateTime createdAt) {
+    public UiList setCreatedAt(final LocalDateTime createdAt) {
         this.createdAt = createdAt;
         return this;
     }
@@ -470,7 +470,7 @@ public class UiList implements VertxPojo, IUiList {
      * Setter for <code>ZDB.UI_LIST.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public UiList setCreatedBy(String createdBy) {
+    public UiList setCreatedBy(final String createdBy) {
         this.createdBy = createdBy;
         return this;
     }
@@ -487,7 +487,7 @@ public class UiList implements VertxPojo, IUiList {
      * Setter for <code>ZDB.UI_LIST.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public UiList setUpdatedAt(LocalDateTime updatedAt) {
+    public UiList setUpdatedAt(final LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
         return this;
     }
@@ -504,13 +504,13 @@ public class UiList implements VertxPojo, IUiList {
      * Setter for <code>ZDB.UI_LIST.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public UiList setUpdatedBy(String updatedBy) {
+    public UiList setUpdatedBy(final String updatedBy) {
         this.updatedBy = updatedBy;
         return this;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
@@ -662,7 +662,7 @@ public class UiList implements VertxPojo, IUiList {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("UiList (");
+        final StringBuilder sb = new StringBuilder("UiList (");
 
         sb.append(key);
         sb.append(", ").append(name);
@@ -696,7 +696,7 @@ public class UiList implements VertxPojo, IUiList {
     // -------------------------------------------------------------------------
 
     @Override
-    public void from(IUiList from) {
+    public void from(final IUiList from) {
         setKey(from.getKey());
         setName(from.getName());
         setCode(from.getCode());
@@ -722,7 +722,7 @@ public class UiList implements VertxPojo, IUiList {
     }
 
     @Override
-    public <E extends IUiList> E into(E into) {
+    public <E extends IUiList> E into(final E into) {
         into.from(this);
         return into;
     }

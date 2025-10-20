@@ -4,7 +4,7 @@
 package io.zerows.extension.runtime.ambient.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.runtime.ambient.domain.tables.XLinkage;
 import io.zerows.extension.runtime.ambient.domain.tables.interfaces.IXLinkage;
 import org.jooq.Field;
@@ -27,7 +27,7 @@ public class XLinkageRecord extends UpdatableRecordImpl<XLinkageRecord> implemen
      * Setter for <code>ZDB.X_LINKAGE.KEY</code>. 「key」- 连接主键
      */
     @Override
-    public XLinkageRecord setKey(String value) {
+    public XLinkageRecord setKey(final String value) {
         set(0, value);
         return this;
     }
@@ -44,7 +44,7 @@ public class XLinkageRecord extends UpdatableRecordImpl<XLinkageRecord> implemen
      * Setter for <code>ZDB.X_LINKAGE.NAME</code>. 「name」- 名称
      */
     @Override
-    public XLinkageRecord setName(String value) {
+    public XLinkageRecord setName(final String value) {
         set(1, value);
         return this;
     }
@@ -61,7 +61,7 @@ public class XLinkageRecord extends UpdatableRecordImpl<XLinkageRecord> implemen
      * Setter for <code>ZDB.X_LINKAGE.TYPE</code>. 「type」- 连接类型
      */
     @Override
-    public XLinkageRecord setType(String value) {
+    public XLinkageRecord setType(final String value) {
         set(2, value);
         return this;
     }
@@ -78,7 +78,7 @@ public class XLinkageRecord extends UpdatableRecordImpl<XLinkageRecord> implemen
      * Setter for <code>ZDB.X_LINKAGE.ALIAS</code>. 「alias」- 别称
      */
     @Override
-    public XLinkageRecord setAlias(String value) {
+    public XLinkageRecord setAlias(final String value) {
         set(3, value);
         return this;
     }
@@ -96,7 +96,7 @@ public class XLinkageRecord extends UpdatableRecordImpl<XLinkageRecord> implemen
      * 连接区域标识，同一个区域算一个连接（批次）
      */
     @Override
-    public XLinkageRecord setRegion(String value) {
+    public XLinkageRecord setRegion(final String value) {
         set(4, value);
         return this;
     }
@@ -115,7 +115,7 @@ public class XLinkageRecord extends UpdatableRecordImpl<XLinkageRecord> implemen
      * source / ofMain 计算
      */
     @Override
-    public XLinkageRecord setLinkKey(String value) {
+    public XLinkageRecord setLinkKey(final String value) {
         set(5, value);
         return this;
     }
@@ -133,7 +133,7 @@ public class XLinkageRecord extends UpdatableRecordImpl<XLinkageRecord> implemen
      * Setter for <code>ZDB.X_LINKAGE.LINK_TYPE</code>. 「linkType」- 关系记录类型
      */
     @Override
-    public XLinkageRecord setLinkType(String value) {
+    public XLinkageRecord setLinkType(final String value) {
         set(6, value);
         return this;
     }
@@ -150,7 +150,7 @@ public class XLinkageRecord extends UpdatableRecordImpl<XLinkageRecord> implemen
      * Setter for <code>ZDB.X_LINKAGE.LINK_DATA</code>. 「linkData」- 关联数据Json格式
      */
     @Override
-    public XLinkageRecord setLinkData(String value) {
+    public XLinkageRecord setLinkData(final String value) {
         set(7, value);
         return this;
     }
@@ -167,7 +167,7 @@ public class XLinkageRecord extends UpdatableRecordImpl<XLinkageRecord> implemen
      * Setter for <code>ZDB.X_LINKAGE.SOURCE_KEY</code>. 「sourceKey」- 源实体
      */
     @Override
-    public XLinkageRecord setSourceKey(String value) {
+    public XLinkageRecord setSourceKey(final String value) {
         set(8, value);
         return this;
     }
@@ -184,7 +184,7 @@ public class XLinkageRecord extends UpdatableRecordImpl<XLinkageRecord> implemen
      * Setter for <code>ZDB.X_LINKAGE.SOURCE_TYPE</code>. 「sourceType」- 源实体类型
      */
     @Override
-    public XLinkageRecord setSourceType(String value) {
+    public XLinkageRecord setSourceType(final String value) {
         set(9, value);
         return this;
     }
@@ -202,7 +202,7 @@ public class XLinkageRecord extends UpdatableRecordImpl<XLinkageRecord> implemen
      * 源记录Json格式
      */
     @Override
-    public XLinkageRecord setSourceData(String value) {
+    public XLinkageRecord setSourceData(final String value) {
         set(10, value);
         return this;
     }
@@ -220,7 +220,7 @@ public class XLinkageRecord extends UpdatableRecordImpl<XLinkageRecord> implemen
      * Setter for <code>ZDB.X_LINKAGE.TARGET_KEY</code>. 「targetKey」- 目标实体
      */
     @Override
-    public XLinkageRecord setTargetKey(String value) {
+    public XLinkageRecord setTargetKey(final String value) {
         set(11, value);
         return this;
     }
@@ -237,7 +237,7 @@ public class XLinkageRecord extends UpdatableRecordImpl<XLinkageRecord> implemen
      * Setter for <code>ZDB.X_LINKAGE.TARGET_TYPE</code>. 「targetType」- 目标实体类型
      */
     @Override
-    public XLinkageRecord setTargetType(String value) {
+    public XLinkageRecord setTargetType(final String value) {
         set(12, value);
         return this;
     }
@@ -255,7 +255,7 @@ public class XLinkageRecord extends UpdatableRecordImpl<XLinkageRecord> implemen
      * 目标记录Json格式
      */
     @Override
-    public XLinkageRecord setTargetData(String value) {
+    public XLinkageRecord setTargetData(final String value) {
         set(13, value);
         return this;
     }
@@ -273,7 +273,7 @@ public class XLinkageRecord extends UpdatableRecordImpl<XLinkageRecord> implemen
      * Setter for <code>ZDB.X_LINKAGE.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public XLinkageRecord setSigma(String value) {
+    public XLinkageRecord setSigma(final String value) {
         set(14, value);
         return this;
     }
@@ -290,7 +290,7 @@ public class XLinkageRecord extends UpdatableRecordImpl<XLinkageRecord> implemen
      * Setter for <code>ZDB.X_LINKAGE.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public XLinkageRecord setLanguage(String value) {
+    public XLinkageRecord setLanguage(final String value) {
         set(15, value);
         return this;
     }
@@ -307,7 +307,7 @@ public class XLinkageRecord extends UpdatableRecordImpl<XLinkageRecord> implemen
      * Setter for <code>ZDB.X_LINKAGE.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public XLinkageRecord setActive(Boolean value) {
+    public XLinkageRecord setActive(final Boolean value) {
         set(16, value);
         return this;
     }
@@ -324,7 +324,7 @@ public class XLinkageRecord extends UpdatableRecordImpl<XLinkageRecord> implemen
      * Setter for <code>ZDB.X_LINKAGE.METADATA</code>. 「metadata」- 附加配置数据
      */
     @Override
-    public XLinkageRecord setMetadata(String value) {
+    public XLinkageRecord setMetadata(final String value) {
         set(17, value);
         return this;
     }
@@ -341,7 +341,7 @@ public class XLinkageRecord extends UpdatableRecordImpl<XLinkageRecord> implemen
      * Setter for <code>ZDB.X_LINKAGE.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public XLinkageRecord setCreatedAt(LocalDateTime value) {
+    public XLinkageRecord setCreatedAt(final LocalDateTime value) {
         set(18, value);
         return this;
     }
@@ -358,7 +358,7 @@ public class XLinkageRecord extends UpdatableRecordImpl<XLinkageRecord> implemen
      * Setter for <code>ZDB.X_LINKAGE.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public XLinkageRecord setCreatedBy(String value) {
+    public XLinkageRecord setCreatedBy(final String value) {
         set(19, value);
         return this;
     }
@@ -375,7 +375,7 @@ public class XLinkageRecord extends UpdatableRecordImpl<XLinkageRecord> implemen
      * Setter for <code>ZDB.X_LINKAGE.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public XLinkageRecord setUpdatedAt(LocalDateTime value) {
+    public XLinkageRecord setUpdatedAt(final LocalDateTime value) {
         set(20, value);
         return this;
     }
@@ -392,7 +392,7 @@ public class XLinkageRecord extends UpdatableRecordImpl<XLinkageRecord> implemen
      * Setter for <code>ZDB.X_LINKAGE.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public XLinkageRecord setUpdatedBy(String value) {
+    public XLinkageRecord setUpdatedBy(final String value) {
         set(21, value);
         return this;
     }
@@ -759,139 +759,139 @@ public class XLinkageRecord extends UpdatableRecordImpl<XLinkageRecord> implemen
     }
 
     @Override
-    public XLinkageRecord value1(String value) {
+    public XLinkageRecord value1(final String value) {
         setKey(value);
         return this;
     }
 
     @Override
-    public XLinkageRecord value2(String value) {
+    public XLinkageRecord value2(final String value) {
         setName(value);
         return this;
     }
 
     @Override
-    public XLinkageRecord value3(String value) {
+    public XLinkageRecord value3(final String value) {
         setType(value);
         return this;
     }
 
     @Override
-    public XLinkageRecord value4(String value) {
+    public XLinkageRecord value4(final String value) {
         setAlias(value);
         return this;
     }
 
     @Override
-    public XLinkageRecord value5(String value) {
+    public XLinkageRecord value5(final String value) {
         setRegion(value);
         return this;
     }
 
     @Override
-    public XLinkageRecord value6(String value) {
+    public XLinkageRecord value6(final String value) {
         setLinkKey(value);
         return this;
     }
 
     @Override
-    public XLinkageRecord value7(String value) {
+    public XLinkageRecord value7(final String value) {
         setLinkType(value);
         return this;
     }
 
     @Override
-    public XLinkageRecord value8(String value) {
+    public XLinkageRecord value8(final String value) {
         setLinkData(value);
         return this;
     }
 
     @Override
-    public XLinkageRecord value9(String value) {
+    public XLinkageRecord value9(final String value) {
         setSourceKey(value);
         return this;
     }
 
     @Override
-    public XLinkageRecord value10(String value) {
+    public XLinkageRecord value10(final String value) {
         setSourceType(value);
         return this;
     }
 
     @Override
-    public XLinkageRecord value11(String value) {
+    public XLinkageRecord value11(final String value) {
         setSourceData(value);
         return this;
     }
 
     @Override
-    public XLinkageRecord value12(String value) {
+    public XLinkageRecord value12(final String value) {
         setTargetKey(value);
         return this;
     }
 
     @Override
-    public XLinkageRecord value13(String value) {
+    public XLinkageRecord value13(final String value) {
         setTargetType(value);
         return this;
     }
 
     @Override
-    public XLinkageRecord value14(String value) {
+    public XLinkageRecord value14(final String value) {
         setTargetData(value);
         return this;
     }
 
     @Override
-    public XLinkageRecord value15(String value) {
+    public XLinkageRecord value15(final String value) {
         setSigma(value);
         return this;
     }
 
     @Override
-    public XLinkageRecord value16(String value) {
+    public XLinkageRecord value16(final String value) {
         setLanguage(value);
         return this;
     }
 
     @Override
-    public XLinkageRecord value17(Boolean value) {
+    public XLinkageRecord value17(final Boolean value) {
         setActive(value);
         return this;
     }
 
     @Override
-    public XLinkageRecord value18(String value) {
+    public XLinkageRecord value18(final String value) {
         setMetadata(value);
         return this;
     }
 
     @Override
-    public XLinkageRecord value19(LocalDateTime value) {
+    public XLinkageRecord value19(final LocalDateTime value) {
         setCreatedAt(value);
         return this;
     }
 
     @Override
-    public XLinkageRecord value20(String value) {
+    public XLinkageRecord value20(final String value) {
         setCreatedBy(value);
         return this;
     }
 
     @Override
-    public XLinkageRecord value21(LocalDateTime value) {
+    public XLinkageRecord value21(final LocalDateTime value) {
         setUpdatedAt(value);
         return this;
     }
 
     @Override
-    public XLinkageRecord value22(String value) {
+    public XLinkageRecord value22(final String value) {
         setUpdatedBy(value);
         return this;
     }
 
     @Override
-    public XLinkageRecord values(String value1, String value2, String value3, String value4, String value5, String value6, String value7, String value8, String value9, String value10, String value11, String value12, String value13, String value14, String value15, String value16, Boolean value17, String value18, LocalDateTime value19, String value20, LocalDateTime value21, String value22) {
+    public XLinkageRecord values(final String value1, final String value2, final String value3, final String value4, final String value5, final String value6, final String value7, final String value8, final String value9, final String value10, final String value11, final String value12, final String value13, final String value14, final String value15, final String value16, final Boolean value17, final String value18, final LocalDateTime value19, final String value20, final LocalDateTime value21, final String value22) {
         value1(value1);
         value2(value2);
         value3(value3);
@@ -922,7 +922,7 @@ public class XLinkageRecord extends UpdatableRecordImpl<XLinkageRecord> implemen
     // -------------------------------------------------------------------------
 
     @Override
-    public void from(IXLinkage from) {
+    public void from(final IXLinkage from) {
         setKey(from.getKey());
         setName(from.getName());
         setType(from.getType());
@@ -949,7 +949,7 @@ public class XLinkageRecord extends UpdatableRecordImpl<XLinkageRecord> implemen
     }
 
     @Override
-    public <E extends IXLinkage> E into(E into) {
+    public <E extends IXLinkage> E into(final E into) {
         into.from(this);
         return into;
     }
@@ -968,7 +968,7 @@ public class XLinkageRecord extends UpdatableRecordImpl<XLinkageRecord> implemen
     /**
      * Create a detached, initialised XLinkageRecord
      */
-    public XLinkageRecord(String key, String name, String type, String alias, String region, String linkKey, String linkType, String linkData, String sourceKey, String sourceType, String sourceData, String targetKey, String targetType, String targetData, String sigma, String language, Boolean active, String metadata, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public XLinkageRecord(final String key, final String name, final String type, final String alias, final String region, final String linkKey, final String linkType, final String linkData, final String sourceKey, final String sourceType, final String sourceData, final String targetKey, final String targetType, final String targetData, final String sigma, final String language, final Boolean active, final String metadata, final LocalDateTime createdAt, final String createdBy, final LocalDateTime updatedAt, final String updatedBy) {
         super(XLinkage.X_LINKAGE);
 
         setKey(key);
@@ -999,7 +999,7 @@ public class XLinkageRecord extends UpdatableRecordImpl<XLinkageRecord> implemen
     /**
      * Create a detached, initialised XLinkageRecord
      */
-    public XLinkageRecord(io.zerows.extension.runtime.ambient.domain.tables.pojos.XLinkage value) {
+    public XLinkageRecord(final io.zerows.extension.runtime.ambient.domain.tables.pojos.XLinkage value) {
         super(XLinkage.X_LINKAGE);
 
         if (value != null) {
@@ -1029,7 +1029,7 @@ public class XLinkageRecord extends UpdatableRecordImpl<XLinkageRecord> implemen
         }
     }
 
-    public XLinkageRecord(io.vertx.core.json.JsonObject json) {
+    public XLinkageRecord(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }

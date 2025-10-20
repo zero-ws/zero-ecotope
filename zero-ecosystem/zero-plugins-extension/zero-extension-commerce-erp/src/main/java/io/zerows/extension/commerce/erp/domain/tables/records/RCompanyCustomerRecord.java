@@ -4,7 +4,7 @@
 package io.zerows.extension.commerce.erp.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.commerce.erp.domain.tables.RCompanyCustomer;
 import io.zerows.extension.commerce.erp.domain.tables.interfaces.IRCompanyCustomer;
 import org.jooq.Field;
@@ -31,7 +31,7 @@ public class RCompanyCustomerRecord extends UpdatableRecordImpl<RCompanyCustomer
     /**
      * Create a detached, initialised RCompanyCustomerRecord
      */
-    public RCompanyCustomerRecord(String companyId, String customerId, String linkComponent, String comment) {
+    public RCompanyCustomerRecord(final String companyId, final String customerId, final String linkComponent, final String comment) {
         super(RCompanyCustomer.R_COMPANY_CUSTOMER);
 
         setCompanyId(companyId);
@@ -44,7 +44,7 @@ public class RCompanyCustomerRecord extends UpdatableRecordImpl<RCompanyCustomer
     /**
      * Create a detached, initialised RCompanyCustomerRecord
      */
-    public RCompanyCustomerRecord(io.zerows.extension.commerce.erp.domain.tables.pojos.RCompanyCustomer value) {
+    public RCompanyCustomerRecord(final io.zerows.extension.commerce.erp.domain.tables.pojos.RCompanyCustomer value) {
         super(RCompanyCustomer.R_COMPANY_CUSTOMER);
 
         if (value != null) {
@@ -56,7 +56,7 @@ public class RCompanyCustomerRecord extends UpdatableRecordImpl<RCompanyCustomer
         }
     }
 
-    public RCompanyCustomerRecord(io.vertx.core.json.JsonObject json) {
+    public RCompanyCustomerRecord(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -75,7 +75,7 @@ public class RCompanyCustomerRecord extends UpdatableRecordImpl<RCompanyCustomer
      * 企业的ID
      */
     @Override
-    public RCompanyCustomerRecord setCompanyId(String value) {
+    public RCompanyCustomerRecord setCompanyId(final String value) {
         set(0, value);
         return this;
     }
@@ -94,7 +94,7 @@ public class RCompanyCustomerRecord extends UpdatableRecordImpl<RCompanyCustomer
      * 客户信息的ID
      */
     @Override
-    public RCompanyCustomerRecord setCustomerId(String value) {
+    public RCompanyCustomerRecord setCustomerId(final String value) {
         set(1, value);
         return this;
     }
@@ -121,7 +121,7 @@ public class RCompanyCustomerRecord extends UpdatableRecordImpl<RCompanyCustomer
      * 「linkComponent」- 关联执行组件（扩展用）
      */
     @Override
-    public RCompanyCustomerRecord setLinkComponent(String value) {
+    public RCompanyCustomerRecord setLinkComponent(final String value) {
         set(2, value);
         return this;
     }
@@ -138,7 +138,7 @@ public class RCompanyCustomerRecord extends UpdatableRecordImpl<RCompanyCustomer
      * Setter for <code>ZDB.R_COMPANY_CUSTOMER.COMMENT</code>. 「comment」- 关系备注
      */
     @Override
-    public RCompanyCustomerRecord setComment(String value) {
+    public RCompanyCustomerRecord setComment(final String value) {
         set(3, value);
         return this;
     }
@@ -219,7 +219,7 @@ public class RCompanyCustomerRecord extends UpdatableRecordImpl<RCompanyCustomer
     }
 
     @Override
-    public RCompanyCustomerRecord value1(String value) {
+    public RCompanyCustomerRecord value1(final String value) {
         setCompanyId(value);
         return this;
     }
@@ -229,13 +229,13 @@ public class RCompanyCustomerRecord extends UpdatableRecordImpl<RCompanyCustomer
     // -------------------------------------------------------------------------
 
     @Override
-    public RCompanyCustomerRecord value2(String value) {
+    public RCompanyCustomerRecord value2(final String value) {
         setCustomerId(value);
         return this;
     }
 
     @Override
-    public RCompanyCustomerRecord value3(String value) {
+    public RCompanyCustomerRecord value3(final String value) {
         setLinkComponent(value);
         return this;
     }
@@ -245,13 +245,13 @@ public class RCompanyCustomerRecord extends UpdatableRecordImpl<RCompanyCustomer
     // -------------------------------------------------------------------------
 
     @Override
-    public RCompanyCustomerRecord value4(String value) {
+    public RCompanyCustomerRecord value4(final String value) {
         setComment(value);
         return this;
     }
 
     @Override
-    public RCompanyCustomerRecord values(String value1, String value2, String value3, String value4) {
+    public RCompanyCustomerRecord values(final String value1, final String value2, final String value3, final String value4) {
         value1(value1);
         value2(value2);
         value3(value3);
@@ -260,7 +260,7 @@ public class RCompanyCustomerRecord extends UpdatableRecordImpl<RCompanyCustomer
     }
 
     @Override
-    public void from(IRCompanyCustomer from) {
+    public void from(final IRCompanyCustomer from) {
         setCompanyId(from.getCompanyId());
         setCustomerId(from.getCustomerId());
         setLinkComponent(from.getLinkComponent());
@@ -269,7 +269,7 @@ public class RCompanyCustomerRecord extends UpdatableRecordImpl<RCompanyCustomer
     }
 
     @Override
-    public <E extends IRCompanyCustomer> E into(E into) {
+    public <E extends IRCompanyCustomer> E into(final E into) {
         into.from(this);
         return into;
     }

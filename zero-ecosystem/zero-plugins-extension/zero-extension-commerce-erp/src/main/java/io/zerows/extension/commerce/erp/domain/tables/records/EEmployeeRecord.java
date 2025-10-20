@@ -4,7 +4,7 @@
 package io.zerows.extension.commerce.erp.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.commerce.erp.domain.tables.EEmployee;
 import io.zerows.extension.commerce.erp.domain.tables.interfaces.IEEmployee;
 import org.jooq.Record1;
@@ -30,7 +30,7 @@ public class EEmployeeRecord extends UpdatableRecordImpl<EEmployeeRecord> implem
     /**
      * Create a detached, initialised EEmployeeRecord
      */
-    public EEmployeeRecord(String key, String companyId, String deptId, String teamId, String identityId, String viceName, String viceEmail, String viceMobile, String workNumber, String workTitle, String workLocation, String workPhone, String workExtension, LocalDateTime workHireAt, String bankId, String bankCard, String type, String status, String metadata, Boolean active, String sigma, String language, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public EEmployeeRecord(final String key, final String companyId, final String deptId, final String teamId, final String identityId, final String viceName, final String viceEmail, final String viceMobile, final String workNumber, final String workTitle, final String workLocation, final String workPhone, final String workExtension, final LocalDateTime workHireAt, final String bankId, final String bankCard, final String type, final String status, final String metadata, final Boolean active, final String sigma, final String language, final LocalDateTime createdAt, final String createdBy, final LocalDateTime updatedAt, final String updatedBy) {
         super(EEmployee.E_EMPLOYEE);
 
         setKey(key);
@@ -65,7 +65,7 @@ public class EEmployeeRecord extends UpdatableRecordImpl<EEmployeeRecord> implem
     /**
      * Create a detached, initialised EEmployeeRecord
      */
-    public EEmployeeRecord(io.zerows.extension.commerce.erp.domain.tables.pojos.EEmployee value) {
+    public EEmployeeRecord(final io.zerows.extension.commerce.erp.domain.tables.pojos.EEmployee value) {
         super(EEmployee.E_EMPLOYEE);
 
         if (value != null) {
@@ -99,7 +99,7 @@ public class EEmployeeRecord extends UpdatableRecordImpl<EEmployeeRecord> implem
         }
     }
 
-    public EEmployeeRecord(io.vertx.core.json.JsonObject json) {
+    public EEmployeeRecord(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -116,7 +116,7 @@ public class EEmployeeRecord extends UpdatableRecordImpl<EEmployeeRecord> implem
      * Setter for <code>ZDB.E_EMPLOYEE.KEY</code>. 「key」- 员工主键
      */
     @Override
-    public EEmployeeRecord setKey(String value) {
+    public EEmployeeRecord setKey(final String value) {
         set(0, value);
         return this;
     }
@@ -133,7 +133,7 @@ public class EEmployeeRecord extends UpdatableRecordImpl<EEmployeeRecord> implem
      * Setter for <code>ZDB.E_EMPLOYEE.COMPANY_ID</code>. 「companyId」- 所属公司
      */
     @Override
-    public EEmployeeRecord setCompanyId(String value) {
+    public EEmployeeRecord setCompanyId(final String value) {
         set(1, value);
         return this;
     }
@@ -150,7 +150,7 @@ public class EEmployeeRecord extends UpdatableRecordImpl<EEmployeeRecord> implem
      * Setter for <code>ZDB.E_EMPLOYEE.DEPT_ID</code>. 「deptId」- 所属部门
      */
     @Override
-    public EEmployeeRecord setDeptId(String value) {
+    public EEmployeeRecord setDeptId(final String value) {
         set(2, value);
         return this;
     }
@@ -167,7 +167,7 @@ public class EEmployeeRecord extends UpdatableRecordImpl<EEmployeeRecord> implem
      * Setter for <code>ZDB.E_EMPLOYEE.TEAM_ID</code>. 「teamId」- 所属组
      */
     @Override
-    public EEmployeeRecord setTeamId(String value) {
+    public EEmployeeRecord setTeamId(final String value) {
         set(3, value);
         return this;
     }
@@ -184,7 +184,7 @@ public class EEmployeeRecord extends UpdatableRecordImpl<EEmployeeRecord> implem
      * Setter for <code>ZDB.E_EMPLOYEE.IDENTITY_ID</code>. 「identityId」- 关联档案
      */
     @Override
-    public EEmployeeRecord setIdentityId(String value) {
+    public EEmployeeRecord setIdentityId(final String value) {
         set(4, value);
         return this;
     }
@@ -201,7 +201,7 @@ public class EEmployeeRecord extends UpdatableRecordImpl<EEmployeeRecord> implem
      * Setter for <code>ZDB.E_EMPLOYEE.VICE_NAME</code>. 「viceName」- 员工姓名
      */
     @Override
-    public EEmployeeRecord setViceName(String value) {
+    public EEmployeeRecord setViceName(final String value) {
         set(5, value);
         return this;
     }
@@ -218,7 +218,7 @@ public class EEmployeeRecord extends UpdatableRecordImpl<EEmployeeRecord> implem
      * Setter for <code>ZDB.E_EMPLOYEE.VICE_EMAIL</code>. 「viceEmail」- 员工邮箱
      */
     @Override
-    public EEmployeeRecord setViceEmail(String value) {
+    public EEmployeeRecord setViceEmail(final String value) {
         set(6, value);
         return this;
     }
@@ -235,7 +235,7 @@ public class EEmployeeRecord extends UpdatableRecordImpl<EEmployeeRecord> implem
      * Setter for <code>ZDB.E_EMPLOYEE.VICE_MOBILE</code>. 「viceMobile」- 员工手机
      */
     @Override
-    public EEmployeeRecord setViceMobile(String value) {
+    public EEmployeeRecord setViceMobile(final String value) {
         set(7, value);
         return this;
     }
@@ -252,7 +252,7 @@ public class EEmployeeRecord extends UpdatableRecordImpl<EEmployeeRecord> implem
      * Setter for <code>ZDB.E_EMPLOYEE.WORK_NUMBER</code>. 「workNumber」- 工号
      */
     @Override
-    public EEmployeeRecord setWorkNumber(String value) {
+    public EEmployeeRecord setWorkNumber(final String value) {
         set(8, value);
         return this;
     }
@@ -269,7 +269,7 @@ public class EEmployeeRecord extends UpdatableRecordImpl<EEmployeeRecord> implem
      * Setter for <code>ZDB.E_EMPLOYEE.WORK_TITLE</code>. 「workTitle」- 头衔
      */
     @Override
-    public EEmployeeRecord setWorkTitle(String value) {
+    public EEmployeeRecord setWorkTitle(final String value) {
         set(9, value);
         return this;
     }
@@ -288,7 +288,7 @@ public class EEmployeeRecord extends UpdatableRecordImpl<EEmployeeRecord> implem
      * 办公地点
      */
     @Override
-    public EEmployeeRecord setWorkLocation(String value) {
+    public EEmployeeRecord setWorkLocation(final String value) {
         set(10, value);
         return this;
     }
@@ -305,7 +305,7 @@ public class EEmployeeRecord extends UpdatableRecordImpl<EEmployeeRecord> implem
      * Setter for <code>ZDB.E_EMPLOYEE.WORK_PHONE</code>. 「workPhone」- 办公电话
      */
     @Override
-    public EEmployeeRecord setWorkPhone(String value) {
+    public EEmployeeRecord setWorkPhone(final String value) {
         set(11, value);
         return this;
     }
@@ -324,7 +324,7 @@ public class EEmployeeRecord extends UpdatableRecordImpl<EEmployeeRecord> implem
      * 分机号
      */
     @Override
-    public EEmployeeRecord setWorkExtension(String value) {
+    public EEmployeeRecord setWorkExtension(final String value) {
         set(12, value);
         return this;
     }
@@ -341,7 +341,7 @@ public class EEmployeeRecord extends UpdatableRecordImpl<EEmployeeRecord> implem
      * Setter for <code>ZDB.E_EMPLOYEE.WORK_HIRE_AT</code>. 「workHireAt」- 入职时间
      */
     @Override
-    public EEmployeeRecord setWorkHireAt(LocalDateTime value) {
+    public EEmployeeRecord setWorkHireAt(final LocalDateTime value) {
         set(13, value);
         return this;
     }
@@ -358,7 +358,7 @@ public class EEmployeeRecord extends UpdatableRecordImpl<EEmployeeRecord> implem
      * Setter for <code>ZDB.E_EMPLOYEE.BANK_ID</code>. 「bankId」- 开户行
      */
     @Override
-    public EEmployeeRecord setBankId(String value) {
+    public EEmployeeRecord setBankId(final String value) {
         set(14, value);
         return this;
     }
@@ -375,7 +375,7 @@ public class EEmployeeRecord extends UpdatableRecordImpl<EEmployeeRecord> implem
      * Setter for <code>ZDB.E_EMPLOYEE.BANK_CARD</code>. 「bankCard」- 开户行账号
      */
     @Override
-    public EEmployeeRecord setBankCard(String value) {
+    public EEmployeeRecord setBankCard(final String value) {
         set(15, value);
         return this;
     }
@@ -392,7 +392,7 @@ public class EEmployeeRecord extends UpdatableRecordImpl<EEmployeeRecord> implem
      * Setter for <code>ZDB.E_EMPLOYEE.TYPE</code>. 「type」- 员工分类
      */
     @Override
-    public EEmployeeRecord setType(String value) {
+    public EEmployeeRecord setType(final String value) {
         set(16, value);
         return this;
     }
@@ -409,7 +409,7 @@ public class EEmployeeRecord extends UpdatableRecordImpl<EEmployeeRecord> implem
      * Setter for <code>ZDB.E_EMPLOYEE.STATUS</code>. 「status」- 员工状态
      */
     @Override
-    public EEmployeeRecord setStatus(String value) {
+    public EEmployeeRecord setStatus(final String value) {
         set(17, value);
         return this;
     }
@@ -426,7 +426,7 @@ public class EEmployeeRecord extends UpdatableRecordImpl<EEmployeeRecord> implem
      * Setter for <code>ZDB.E_EMPLOYEE.METADATA</code>. 「metadata」- 附加配置
      */
     @Override
-    public EEmployeeRecord setMetadata(String value) {
+    public EEmployeeRecord setMetadata(final String value) {
         set(18, value);
         return this;
     }
@@ -443,7 +443,7 @@ public class EEmployeeRecord extends UpdatableRecordImpl<EEmployeeRecord> implem
      * Setter for <code>ZDB.E_EMPLOYEE.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public EEmployeeRecord setActive(Boolean value) {
+    public EEmployeeRecord setActive(final Boolean value) {
         set(19, value);
         return this;
     }
@@ -460,7 +460,7 @@ public class EEmployeeRecord extends UpdatableRecordImpl<EEmployeeRecord> implem
      * Setter for <code>ZDB.E_EMPLOYEE.SIGMA</code>. 「sigma」- 统一标识（公司所属应用）
      */
     @Override
-    public EEmployeeRecord setSigma(String value) {
+    public EEmployeeRecord setSigma(final String value) {
         set(20, value);
         return this;
     }
@@ -477,7 +477,7 @@ public class EEmployeeRecord extends UpdatableRecordImpl<EEmployeeRecord> implem
      * Setter for <code>ZDB.E_EMPLOYEE.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public EEmployeeRecord setLanguage(String value) {
+    public EEmployeeRecord setLanguage(final String value) {
         set(21, value);
         return this;
     }
@@ -494,7 +494,7 @@ public class EEmployeeRecord extends UpdatableRecordImpl<EEmployeeRecord> implem
      * Setter for <code>ZDB.E_EMPLOYEE.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public EEmployeeRecord setCreatedAt(LocalDateTime value) {
+    public EEmployeeRecord setCreatedAt(final LocalDateTime value) {
         set(22, value);
         return this;
     }
@@ -511,7 +511,7 @@ public class EEmployeeRecord extends UpdatableRecordImpl<EEmployeeRecord> implem
      * Setter for <code>ZDB.E_EMPLOYEE.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public EEmployeeRecord setCreatedBy(String value) {
+    public EEmployeeRecord setCreatedBy(final String value) {
         set(23, value);
         return this;
     }
@@ -536,7 +536,7 @@ public class EEmployeeRecord extends UpdatableRecordImpl<EEmployeeRecord> implem
      * Setter for <code>ZDB.E_EMPLOYEE.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public EEmployeeRecord setUpdatedAt(LocalDateTime value) {
+    public EEmployeeRecord setUpdatedAt(final LocalDateTime value) {
         set(24, value);
         return this;
     }
@@ -557,7 +557,7 @@ public class EEmployeeRecord extends UpdatableRecordImpl<EEmployeeRecord> implem
      * Setter for <code>ZDB.E_EMPLOYEE.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public EEmployeeRecord setUpdatedBy(String value) {
+    public EEmployeeRecord setUpdatedBy(final String value) {
         set(25, value);
         return this;
     }
@@ -568,7 +568,7 @@ public class EEmployeeRecord extends UpdatableRecordImpl<EEmployeeRecord> implem
     }
 
     @Override
-    public void from(IEEmployee from) {
+    public void from(final IEEmployee from) {
         setKey(from.getKey());
         setCompanyId(from.getCompanyId());
         setDeptId(from.getDeptId());
@@ -599,7 +599,7 @@ public class EEmployeeRecord extends UpdatableRecordImpl<EEmployeeRecord> implem
     }
 
     @Override
-    public <E extends IEEmployee> E into(E into) {
+    public <E extends IEEmployee> E into(final E into) {
         into.from(this);
         return into;
     }

@@ -14,7 +14,7 @@
     <name>(POM) 📚️ - Zero::Extension</name>
     <modules>
         <!-- 扩展模块骨架 -->
-        <module>zero-extension-runtime-skeleton</module>
+        <module>zero-extension-skeleton</module>
         <module>zero-extension-runtime-crud</module>                 <!-- CRUD 引擎 -->
 
 

@@ -4,7 +4,7 @@
 package io.zerows.extension.mbse.modulat.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.mbse.modulat.domain.tables.BBlock;
 import io.zerows.extension.mbse.modulat.domain.tables.interfaces.IBBlock;
 import org.jooq.Record1;
@@ -30,7 +30,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
     /**
      * Create a detached, initialised BBlockRecord
      */
-    public BBlockRecord(String key, String code, String name, String version, Boolean authorized, String uiIcon, String uiStyle, Long uiSort, String uiConfig, String uiContent, String signIssuer, String signName, LocalDateTime signAt, String signSecret, String signLic, LocalDateTime signEnd, LocalDateTime signStart, String licIdentifier, String licMenu, String appId, String bagId, Boolean active, String sigma, String metadata, String language, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public BBlockRecord(final String key, final String code, final String name, final String version, final Boolean authorized, final String uiIcon, final String uiStyle, final Long uiSort, final String uiConfig, final String uiContent, final String signIssuer, final String signName, final LocalDateTime signAt, final String signSecret, final String signLic, final LocalDateTime signEnd, final LocalDateTime signStart, final String licIdentifier, final String licMenu, final String appId, final String bagId, final Boolean active, final String sigma, final String metadata, final String language, final LocalDateTime createdAt, final String createdBy, final LocalDateTime updatedAt, final String updatedBy) {
         super(BBlock.B_BLOCK);
 
         setKey(key);
@@ -68,7 +68,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
     /**
      * Create a detached, initialised BBlockRecord
      */
-    public BBlockRecord(io.zerows.extension.mbse.modulat.domain.tables.pojos.BBlock value) {
+    public BBlockRecord(final io.zerows.extension.mbse.modulat.domain.tables.pojos.BBlock value) {
         super(BBlock.B_BLOCK);
 
         if (value != null) {
@@ -105,7 +105,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
         }
     }
 
-    public BBlockRecord(io.vertx.core.json.JsonObject json) {
+    public BBlockRecord(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -122,7 +122,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      * Setter for <code>ZDB.B_BLOCK.KEY</code>. 「key」- 模块主键
      */
     @Override
-    public BBlockRecord setKey(String value) {
+    public BBlockRecord setKey(final String value) {
         set(0, value);
         return this;
     }
@@ -139,7 +139,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      * Setter for <code>ZDB.B_BLOCK.CODE</code>. 「code」- 子模块编码
      */
     @Override
-    public BBlockRecord setCode(String value) {
+    public BBlockRecord setCode(final String value) {
         set(1, value);
         return this;
     }
@@ -156,7 +156,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      * Setter for <code>ZDB.B_BLOCK.NAME</code>. 「name」- 子模块名称
      */
     @Override
-    public BBlockRecord setName(String value) {
+    public BBlockRecord setName(final String value) {
         set(2, value);
         return this;
     }
@@ -173,7 +173,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      * Setter for <code>ZDB.B_BLOCK.VERSION</code>. 「version」- 子模块版本
      */
     @Override
-    public BBlockRecord setVersion(String value) {
+    public BBlockRecord setVersion(final String value) {
         set(3, value);
         return this;
     }
@@ -190,7 +190,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      * Setter for <code>ZDB.B_BLOCK.AUTHORIZED</code>. 「authorized」- 是否授权
      */
     @Override
-    public BBlockRecord setAuthorized(Boolean value) {
+    public BBlockRecord setAuthorized(final Boolean value) {
         set(4, value);
         return this;
     }
@@ -207,7 +207,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      * Setter for <code>ZDB.B_BLOCK.UI_ICON</code>. 「uiIcon」- 子模块图标
      */
     @Override
-    public BBlockRecord setUiIcon(String value) {
+    public BBlockRecord setUiIcon(final String value) {
         set(5, value);
         return this;
     }
@@ -224,7 +224,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      * Setter for <code>ZDB.B_BLOCK.UI_STYLE</code>. 「uiStyle」- 子模块风格
      */
     @Override
-    public BBlockRecord setUiStyle(String value) {
+    public BBlockRecord setUiStyle(final String value) {
         set(6, value);
         return this;
     }
@@ -241,7 +241,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      * Setter for <code>ZDB.B_BLOCK.UI_SORT</code>. 「uiSort」- 子模块排序
      */
     @Override
-    public BBlockRecord setUiSort(Long value) {
+    public BBlockRecord setUiSort(final Long value) {
         set(7, value);
         return this;
     }
@@ -258,7 +258,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      * Setter for <code>ZDB.B_BLOCK.UI_CONFIG</code>. 「uiConfig」- 子模块核心配置
      */
     @Override
-    public BBlockRecord setUiConfig(String value) {
+    public BBlockRecord setUiConfig(final String value) {
         set(8, value);
         return this;
     }
@@ -275,7 +275,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      * Setter for <code>ZDB.B_BLOCK.UI_CONTENT</code>. 「uiContent」- 配置数据
      */
     @Override
-    public BBlockRecord setUiContent(String value) {
+    public BBlockRecord setUiContent(final String value) {
         set(9, value);
         return this;
     }
@@ -292,7 +292,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      * Setter for <code>ZDB.B_BLOCK.SIGN_ISSUER</code>. 「signIssuer」- 许可证发证机构
      */
     @Override
-    public BBlockRecord setSignIssuer(String value) {
+    public BBlockRecord setSignIssuer(final String value) {
         set(10, value);
         return this;
     }
@@ -309,7 +309,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      * Setter for <code>ZDB.B_BLOCK.SIGN_NAME</code>. 「signName」- 许可证名称
      */
     @Override
-    public BBlockRecord setSignName(String value) {
+    public BBlockRecord setSignName(final String value) {
         set(11, value);
         return this;
     }
@@ -326,7 +326,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      * Setter for <code>ZDB.B_BLOCK.SIGN_AT</code>. 「signAt」- 发证时间
      */
     @Override
-    public BBlockRecord setSignAt(LocalDateTime value) {
+    public BBlockRecord setSignAt(final LocalDateTime value) {
         set(12, value);
         return this;
     }
@@ -343,7 +343,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      * Setter for <code>ZDB.B_BLOCK.SIGN_SECRET</code>. 「signSecret」- 证书专用密钥
      */
     @Override
-    public BBlockRecord setSignSecret(String value) {
+    public BBlockRecord setSignSecret(final String value) {
         set(13, value);
         return this;
     }
@@ -360,7 +360,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      * Setter for <code>ZDB.B_BLOCK.SIGN_LIC</code>. 「signLic」- 许可证内容
      */
     @Override
-    public BBlockRecord setSignLic(String value) {
+    public BBlockRecord setSignLic(final String value) {
         set(14, value);
         return this;
     }
@@ -377,7 +377,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      * Setter for <code>ZDB.B_BLOCK.SIGN_END</code>. 「signEnd」- 证书过期时间
      */
     @Override
-    public BBlockRecord setSignEnd(LocalDateTime value) {
+    public BBlockRecord setSignEnd(final LocalDateTime value) {
         set(15, value);
         return this;
     }
@@ -394,7 +394,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      * Setter for <code>ZDB.B_BLOCK.SIGN_START</code>. 「signStart」- 证书过期时间
      */
     @Override
-    public BBlockRecord setSignStart(LocalDateTime value) {
+    public BBlockRecord setSignStart(final LocalDateTime value) {
         set(16, value);
         return this;
     }
@@ -413,7 +413,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      * 允许的模型标识
      */
     @Override
-    public BBlockRecord setLicIdentifier(String value) {
+    public BBlockRecord setLicIdentifier(final String value) {
         set(17, value);
         return this;
     }
@@ -430,7 +430,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      * Setter for <code>ZDB.B_BLOCK.LIC_MENU</code>. 「licMenu」- 该Block包含的菜单
      */
     @Override
-    public BBlockRecord setLicMenu(String value) {
+    public BBlockRecord setLicMenu(final String value) {
         set(18, value);
         return this;
     }
@@ -447,7 +447,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      * Setter for <code>ZDB.B_BLOCK.APP_ID</code>. 「id」- 关联的应用程序ID
      */
     @Override
-    public BBlockRecord setAppId(String value) {
+    public BBlockRecord setAppId(final String value) {
         set(19, value);
         return this;
     }
@@ -464,7 +464,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      * Setter for <code>ZDB.B_BLOCK.BAG_ID</code>. 「bagId」- 所属包ID
      */
     @Override
-    public BBlockRecord setBagId(String value) {
+    public BBlockRecord setBagId(final String value) {
         set(20, value);
         return this;
     }
@@ -481,7 +481,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      * Setter for <code>ZDB.B_BLOCK.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public BBlockRecord setActive(Boolean value) {
+    public BBlockRecord setActive(final Boolean value) {
         set(21, value);
         return this;
     }
@@ -498,7 +498,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      * Setter for <code>ZDB.B_BLOCK.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public BBlockRecord setSigma(String value) {
+    public BBlockRecord setSigma(final String value) {
         set(22, value);
         return this;
     }
@@ -515,7 +515,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      * Setter for <code>ZDB.B_BLOCK.METADATA</code>. 「metadata」- 附加配置
      */
     @Override
-    public BBlockRecord setMetadata(String value) {
+    public BBlockRecord setMetadata(final String value) {
         set(23, value);
         return this;
     }
@@ -532,7 +532,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      * Setter for <code>ZDB.B_BLOCK.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public BBlockRecord setLanguage(String value) {
+    public BBlockRecord setLanguage(final String value) {
         set(24, value);
         return this;
     }
@@ -549,7 +549,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      * Setter for <code>ZDB.B_BLOCK.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public BBlockRecord setCreatedAt(LocalDateTime value) {
+    public BBlockRecord setCreatedAt(final LocalDateTime value) {
         set(25, value);
         return this;
     }
@@ -566,7 +566,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      * Setter for <code>ZDB.B_BLOCK.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public BBlockRecord setCreatedBy(String value) {
+    public BBlockRecord setCreatedBy(final String value) {
         set(26, value);
         return this;
     }
@@ -591,7 +591,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      * Setter for <code>ZDB.B_BLOCK.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public BBlockRecord setUpdatedAt(LocalDateTime value) {
+    public BBlockRecord setUpdatedAt(final LocalDateTime value) {
         set(27, value);
         return this;
     }
@@ -612,7 +612,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      * Setter for <code>ZDB.B_BLOCK.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public BBlockRecord setUpdatedBy(String value) {
+    public BBlockRecord setUpdatedBy(final String value) {
         set(28, value);
         return this;
     }
@@ -623,7 +623,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
     }
 
     @Override
-    public void from(IBBlock from) {
+    public void from(final IBBlock from) {
         setKey(from.getKey());
         setCode(from.getCode());
         setName(from.getName());
@@ -657,7 +657,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
     }
 
     @Override
-    public <E extends IBBlock> E into(E into) {
+    public <E extends IBBlock> E into(final E into) {
         into.from(this);
         return into;
     }

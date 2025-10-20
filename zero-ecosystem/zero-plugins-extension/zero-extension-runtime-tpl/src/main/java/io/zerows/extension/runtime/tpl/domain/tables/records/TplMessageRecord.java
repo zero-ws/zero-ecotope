@@ -4,7 +4,7 @@
 package io.zerows.extension.runtime.tpl.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.runtime.tpl.domain.tables.TplMessage;
 import io.zerows.extension.runtime.tpl.domain.tables.interfaces.ITplMessage;
 import org.jooq.Field;

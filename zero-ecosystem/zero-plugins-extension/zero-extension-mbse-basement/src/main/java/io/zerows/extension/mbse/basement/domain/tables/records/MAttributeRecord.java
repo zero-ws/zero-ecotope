@@ -4,7 +4,7 @@
 package io.zerows.extension.mbse.basement.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.mbse.basement.domain.tables.MAttribute;
 import io.zerows.extension.mbse.basement.domain.tables.interfaces.IMAttribute;
 import org.jooq.Record1;
@@ -30,7 +30,7 @@ public class MAttributeRecord extends UpdatableRecordImpl<MAttributeRecord> impl
     /**
      * Create a detached, initialised MAttributeRecord
      */
-    public MAttributeRecord(String key, String name, String alias, String type, String expression, String normalize, String inComponent, String outComponent, String modelId, String comments, String source, String sourceField, String sourceConfig, String sourceReference, String sourceExternal, Boolean isArray, Boolean isRefer, Boolean isSyncIn, Boolean isSyncOut, Boolean isLock, Boolean isTrack, Boolean isConfirm, String sigma, String language, Boolean active, String metadata, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public MAttributeRecord(final String key, final String name, final String alias, final String type, final String expression, final String normalize, final String inComponent, final String outComponent, final String modelId, final String comments, final String source, final String sourceField, final String sourceConfig, final String sourceReference, final String sourceExternal, final Boolean isArray, final Boolean isRefer, final Boolean isSyncIn, final Boolean isSyncOut, final Boolean isLock, final Boolean isTrack, final Boolean isConfirm, final String sigma, final String language, final Boolean active, final String metadata, final LocalDateTime createdAt, final String createdBy, final LocalDateTime updatedAt, final String updatedBy) {
         super(MAttribute.M_ATTRIBUTE);
 
         setKey(key);
@@ -69,7 +69,7 @@ public class MAttributeRecord extends UpdatableRecordImpl<MAttributeRecord> impl
     /**
      * Create a detached, initialised MAttributeRecord
      */
-    public MAttributeRecord(io.zerows.extension.mbse.basement.domain.tables.pojos.MAttribute value) {
+    public MAttributeRecord(final io.zerows.extension.mbse.basement.domain.tables.pojos.MAttribute value) {
         super(MAttribute.M_ATTRIBUTE);
 
         if (value != null) {
@@ -107,7 +107,7 @@ public class MAttributeRecord extends UpdatableRecordImpl<MAttributeRecord> impl
         }
     }
 
-    public MAttributeRecord(io.vertx.core.json.JsonObject json) {
+    public MAttributeRecord(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -124,7 +124,7 @@ public class MAttributeRecord extends UpdatableRecordImpl<MAttributeRecord> impl
      * Setter for <code>ZDB.M_ATTRIBUTE.KEY</code>. 「key」- 属性ID
      */
     @Override
-    public MAttributeRecord setKey(String value) {
+    public MAttributeRecord setKey(final String value) {
         set(0, value);
         return this;
     }
@@ -141,7 +141,7 @@ public class MAttributeRecord extends UpdatableRecordImpl<MAttributeRecord> impl
      * Setter for <code>ZDB.M_ATTRIBUTE.NAME</code>. 「name」- 属性名称
      */
     @Override
-    public MAttributeRecord setName(String value) {
+    public MAttributeRecord setName(final String value) {
         set(1, value);
         return this;
     }
@@ -158,7 +158,7 @@ public class MAttributeRecord extends UpdatableRecordImpl<MAttributeRecord> impl
      * Setter for <code>ZDB.M_ATTRIBUTE.ALIAS</code>. 「alias」- 属性别名（业务名）
      */
     @Override
-    public MAttributeRecord setAlias(String value) {
+    public MAttributeRecord setAlias(final String value) {
         set(2, value);
         return this;
     }
@@ -177,7 +177,7 @@ public class MAttributeRecord extends UpdatableRecordImpl<MAttributeRecord> impl
      * INTERNAL/EXTERNAL/REFERENCE属性
      */
     @Override
-    public MAttributeRecord setType(String value) {
+    public MAttributeRecord setType(final String value) {
         set(3, value);
         return this;
     }
@@ -194,7 +194,7 @@ public class MAttributeRecord extends UpdatableRecordImpl<MAttributeRecord> impl
      * Setter for <code>ZDB.M_ATTRIBUTE.EXPRESSION</code>. 「expression」- 表达式
      */
     @Override
-    public MAttributeRecord setExpression(String value) {
+    public MAttributeRecord setExpression(final String value) {
         set(4, value);
         return this;
     }
@@ -211,7 +211,7 @@ public class MAttributeRecord extends UpdatableRecordImpl<MAttributeRecord> impl
      * Setter for <code>ZDB.M_ATTRIBUTE.NORMALIZE</code>. 「normalize」- 表达式
      */
     @Override
-    public MAttributeRecord setNormalize(String value) {
+    public MAttributeRecord setNormalize(final String value) {
         set(5, value);
         return this;
     }
@@ -228,7 +228,7 @@ public class MAttributeRecord extends UpdatableRecordImpl<MAttributeRecord> impl
      * Setter for <code>ZDB.M_ATTRIBUTE.IN_COMPONENT</code>. 「inComponent」- 写入插件
      */
     @Override
-    public MAttributeRecord setInComponent(String value) {
+    public MAttributeRecord setInComponent(final String value) {
         set(6, value);
         return this;
     }
@@ -247,7 +247,7 @@ public class MAttributeRecord extends UpdatableRecordImpl<MAttributeRecord> impl
      * 读取插件
      */
     @Override
-    public MAttributeRecord setOutComponent(String value) {
+    public MAttributeRecord setOutComponent(final String value) {
         set(7, value);
         return this;
     }
@@ -264,7 +264,7 @@ public class MAttributeRecord extends UpdatableRecordImpl<MAttributeRecord> impl
      * Setter for <code>ZDB.M_ATTRIBUTE.MODEL_ID</code>. 「modelId」- 关联的模型ID
      */
     @Override
-    public MAttributeRecord setModelId(String value) {
+    public MAttributeRecord setModelId(final String value) {
         set(8, value);
         return this;
     }
@@ -281,7 +281,7 @@ public class MAttributeRecord extends UpdatableRecordImpl<MAttributeRecord> impl
      * Setter for <code>ZDB.M_ATTRIBUTE.COMMENTS</code>. 「comments」- 当前属性的描述信息
      */
     @Override
-    public MAttributeRecord setComments(String value) {
+    public MAttributeRecord setComments(final String value) {
         set(9, value);
         return this;
     }
@@ -298,7 +298,7 @@ public class MAttributeRecord extends UpdatableRecordImpl<MAttributeRecord> impl
      * Setter for <code>ZDB.M_ATTRIBUTE.SOURCE</code>. 「source」- 关联实体ID
      */
     @Override
-    public MAttributeRecord setSource(String value) {
+    public MAttributeRecord setSource(final String value) {
         set(10, value);
         return this;
     }
@@ -317,7 +317,7 @@ public class MAttributeRecord extends UpdatableRecordImpl<MAttributeRecord> impl
      * 可选，如果不设置则以name为主
      */
     @Override
-    public MAttributeRecord setSourceField(String value) {
+    public MAttributeRecord setSourceField(final String value) {
         set(11, value);
         return this;
     }
@@ -336,7 +336,7 @@ public class MAttributeRecord extends UpdatableRecordImpl<MAttributeRecord> impl
      * 数据集配置（区分 Array 和 Object）
      */
     @Override
-    public MAttributeRecord setSourceConfig(String value) {
+    public MAttributeRecord setSourceConfig(final String value) {
         set(12, value);
         return this;
     }
@@ -355,7 +355,7 @@ public class MAttributeRecord extends UpdatableRecordImpl<MAttributeRecord> impl
      * 「sourceReference」- 引用配置信息（ type = REFERENCE）
      */
     @Override
-    public MAttributeRecord setSourceReference(String value) {
+    public MAttributeRecord setSourceReference(final String value) {
         set(13, value);
         return this;
     }
@@ -374,7 +374,7 @@ public class MAttributeRecord extends UpdatableRecordImpl<MAttributeRecord> impl
      * 「sourceExternal」- 外部配置信息（ type = EXTERNAL ）
      */
     @Override
-    public MAttributeRecord setSourceExternal(String value) {
+    public MAttributeRecord setSourceExternal(final String value) {
         set(14, value);
         return this;
     }
@@ -393,7 +393,7 @@ public class MAttributeRecord extends UpdatableRecordImpl<MAttributeRecord> impl
      * 是否集合属性，集合属性在导入导出时可用（保留）
      */
     @Override
-    public MAttributeRecord setIsArray(Boolean value) {
+    public MAttributeRecord setIsArray(final Boolean value) {
         set(15, value);
         return this;
     }
@@ -412,7 +412,7 @@ public class MAttributeRecord extends UpdatableRecordImpl<MAttributeRecord> impl
      * 是否引用属性的主属性，主属性才可拥有 sourceReference 配置，根据 source 有区别
      */
     @Override
-    public MAttributeRecord setIsRefer(Boolean value) {
+    public MAttributeRecord setIsRefer(final Boolean value) {
         set(16, value);
         return this;
     }
@@ -429,7 +429,7 @@ public class MAttributeRecord extends UpdatableRecordImpl<MAttributeRecord> impl
      * Setter for <code>ZDB.M_ATTRIBUTE.IS_SYNC_IN</code>. 「isSyncIn」- 是否同步读
      */
     @Override
-    public MAttributeRecord setIsSyncIn(Boolean value) {
+    public MAttributeRecord setIsSyncIn(final Boolean value) {
         set(17, value);
         return this;
     }
@@ -446,7 +446,7 @@ public class MAttributeRecord extends UpdatableRecordImpl<MAttributeRecord> impl
      * Setter for <code>ZDB.M_ATTRIBUTE.IS_SYNC_OUT</code>. 「isSyncOut」- 是否同步写
      */
     @Override
-    public MAttributeRecord setIsSyncOut(Boolean value) {
+    public MAttributeRecord setIsSyncOut(final Boolean value) {
         set(18, value);
         return this;
     }
@@ -463,7 +463,7 @@ public class MAttributeRecord extends UpdatableRecordImpl<MAttributeRecord> impl
      * Setter for <code>ZDB.M_ATTRIBUTE.IS_LOCK</code>. 「isLock」- 是否锁定，锁定属性不可删除
      */
     @Override
-    public MAttributeRecord setIsLock(Boolean value) {
+    public MAttributeRecord setIsLock(final Boolean value) {
         set(19, value);
         return this;
     }
@@ -482,7 +482,7 @@ public class MAttributeRecord extends UpdatableRecordImpl<MAttributeRecord> impl
      * isTrack 那么启用 ACTIVITY 的变更记录，对应 ITEM
      */
     @Override
-    public MAttributeRecord setIsTrack(Boolean value) {
+    public MAttributeRecord setIsTrack(final Boolean value) {
         set(20, value);
         return this;
     }
@@ -501,7 +501,7 @@ public class MAttributeRecord extends UpdatableRecordImpl<MAttributeRecord> impl
      * 是否生成待确认变更，只有放在待确认变更中的数据需要生成待确认变更
      */
     @Override
-    public MAttributeRecord setIsConfirm(Boolean value) {
+    public MAttributeRecord setIsConfirm(final Boolean value) {
         set(21, value);
         return this;
     }
@@ -518,7 +518,7 @@ public class MAttributeRecord extends UpdatableRecordImpl<MAttributeRecord> impl
      * Setter for <code>ZDB.M_ATTRIBUTE.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public MAttributeRecord setSigma(String value) {
+    public MAttributeRecord setSigma(final String value) {
         set(22, value);
         return this;
     }
@@ -535,7 +535,7 @@ public class MAttributeRecord extends UpdatableRecordImpl<MAttributeRecord> impl
      * Setter for <code>ZDB.M_ATTRIBUTE.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public MAttributeRecord setLanguage(String value) {
+    public MAttributeRecord setLanguage(final String value) {
         set(23, value);
         return this;
     }
@@ -552,7 +552,7 @@ public class MAttributeRecord extends UpdatableRecordImpl<MAttributeRecord> impl
      * Setter for <code>ZDB.M_ATTRIBUTE.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public MAttributeRecord setActive(Boolean value) {
+    public MAttributeRecord setActive(final Boolean value) {
         set(24, value);
         return this;
     }
@@ -569,7 +569,7 @@ public class MAttributeRecord extends UpdatableRecordImpl<MAttributeRecord> impl
      * Setter for <code>ZDB.M_ATTRIBUTE.METADATA</code>. 「metadata」- 附加配置数据
      */
     @Override
-    public MAttributeRecord setMetadata(String value) {
+    public MAttributeRecord setMetadata(final String value) {
         set(25, value);
         return this;
     }
@@ -586,7 +586,7 @@ public class MAttributeRecord extends UpdatableRecordImpl<MAttributeRecord> impl
      * Setter for <code>ZDB.M_ATTRIBUTE.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public MAttributeRecord setCreatedAt(LocalDateTime value) {
+    public MAttributeRecord setCreatedAt(final LocalDateTime value) {
         set(26, value);
         return this;
     }
@@ -603,7 +603,7 @@ public class MAttributeRecord extends UpdatableRecordImpl<MAttributeRecord> impl
      * Setter for <code>ZDB.M_ATTRIBUTE.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public MAttributeRecord setCreatedBy(String value) {
+    public MAttributeRecord setCreatedBy(final String value) {
         set(27, value);
         return this;
     }
@@ -628,7 +628,7 @@ public class MAttributeRecord extends UpdatableRecordImpl<MAttributeRecord> impl
      * Setter for <code>ZDB.M_ATTRIBUTE.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public MAttributeRecord setUpdatedAt(LocalDateTime value) {
+    public MAttributeRecord setUpdatedAt(final LocalDateTime value) {
         set(28, value);
         return this;
     }
@@ -649,7 +649,7 @@ public class MAttributeRecord extends UpdatableRecordImpl<MAttributeRecord> impl
      * Setter for <code>ZDB.M_ATTRIBUTE.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public MAttributeRecord setUpdatedBy(String value) {
+    public MAttributeRecord setUpdatedBy(final String value) {
         set(29, value);
         return this;
     }
@@ -660,7 +660,7 @@ public class MAttributeRecord extends UpdatableRecordImpl<MAttributeRecord> impl
     }
 
     @Override
-    public void from(IMAttribute from) {
+    public void from(final IMAttribute from) {
         setKey(from.getKey());
         setName(from.getName());
         setAlias(from.getAlias());
@@ -695,7 +695,7 @@ public class MAttributeRecord extends UpdatableRecordImpl<MAttributeRecord> impl
     }
 
     @Override
-    public <E extends IMAttribute> E into(E into) {
+    public <E extends IMAttribute> E into(final E into) {
         into.from(this);
         return into;
     }

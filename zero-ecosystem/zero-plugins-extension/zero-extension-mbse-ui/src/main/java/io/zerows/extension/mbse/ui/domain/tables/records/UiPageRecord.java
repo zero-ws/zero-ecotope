@@ -4,7 +4,7 @@
 package io.zerows.extension.mbse.ui.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.mbse.ui.domain.tables.UiPage;
 import io.zerows.extension.mbse.ui.domain.tables.interfaces.IUiPage;
 import org.jooq.Field;
@@ -33,7 +33,7 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements V
     /**
      * Create a detached, initialised UiPageRecord
      */
-    public UiPageRecord(String key, String app, String module, String page, String layoutId, Boolean secure, String paramMap, String containerName, String containerConfig, String state, String grid, String assist, Boolean active, String sigma, String metadata, String language, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public UiPageRecord(final String key, final String app, final String module, final String page, final String layoutId, final Boolean secure, final String paramMap, final String containerName, final String containerConfig, final String state, final String grid, final String assist, final Boolean active, final String sigma, final String metadata, final String language, final LocalDateTime createdAt, final String createdBy, final LocalDateTime updatedAt, final String updatedBy) {
         super(UiPage.UI_PAGE);
 
         setKey(key);
@@ -62,7 +62,7 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements V
     /**
      * Create a detached, initialised UiPageRecord
      */
-    public UiPageRecord(io.zerows.extension.mbse.ui.domain.tables.pojos.UiPage value) {
+    public UiPageRecord(final io.zerows.extension.mbse.ui.domain.tables.pojos.UiPage value) {
         super(UiPage.UI_PAGE);
 
         if (value != null) {
@@ -90,7 +90,7 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements V
         }
     }
 
-    public UiPageRecord(io.vertx.core.json.JsonObject json) {
+    public UiPageRecord(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -107,7 +107,7 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements V
      * Setter for <code>ZDB.UI_PAGE.KEY</code>. 「key」- 页面唯一主键
      */
     @Override
-    public UiPageRecord setKey(String value) {
+    public UiPageRecord setKey(final String value) {
         set(0, value);
         return this;
     }
@@ -124,7 +124,7 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements V
      * Setter for <code>ZDB.UI_PAGE.APP</code>. 「app」- 入口APP名称，APP中的path
      */
     @Override
-    public UiPageRecord setApp(String value) {
+    public UiPageRecord setApp(final String value) {
         set(1, value);
         return this;
     }
@@ -141,7 +141,7 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements V
      * Setter for <code>ZDB.UI_PAGE.MODULE</code>. 「module」- 模块相关信息
      */
     @Override
-    public UiPageRecord setModule(String value) {
+    public UiPageRecord setModule(final String value) {
         set(2, value);
         return this;
     }
@@ -158,7 +158,7 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements V
      * Setter for <code>ZDB.UI_PAGE.PAGE</code>. 「page」- 页面路径信息
      */
     @Override
-    public UiPageRecord setPage(String value) {
+    public UiPageRecord setPage(final String value) {
         set(3, value);
         return this;
     }
@@ -177,7 +177,7 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements V
      * layout 顶层节点数据
      */
     @Override
-    public UiPageRecord setLayoutId(String value) {
+    public UiPageRecord setLayoutId(final String value) {
         set(4, value);
         return this;
     }
@@ -196,7 +196,7 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements V
      * 是否执行安全检查（安全检查才会被权限系统捕捉）
      */
     @Override
-    public UiPageRecord setSecure(Boolean value) {
+    public UiPageRecord setSecure(final Boolean value) {
         set(5, value);
         return this;
     }
@@ -215,7 +215,7 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements V
      * URL地址中的配置key=get
      */
     @Override
-    public UiPageRecord setParamMap(String value) {
+    public UiPageRecord setParamMap(final String value) {
         set(6, value);
         return this;
     }
@@ -234,7 +234,7 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements V
      * 当前页面是否存在容器，如果有容器，那么设置容器名称
      */
     @Override
-    public UiPageRecord setContainerName(String value) {
+    public UiPageRecord setContainerName(final String value) {
         set(7, value);
         return this;
     }
@@ -253,7 +253,7 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements V
      * 当前页面容器相关配置
      */
     @Override
-    public UiPageRecord setContainerConfig(String value) {
+    public UiPageRecord setContainerConfig(final String value) {
         set(8, value);
         return this;
     }
@@ -270,7 +270,7 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements V
      * Setter for <code>ZDB.UI_PAGE.STATE</code>. 「state」- 当前页面的初始化状态信息
      */
     @Override
-    public UiPageRecord setState(String value) {
+    public UiPageRecord setState(final String value) {
         set(9, value);
         return this;
     }
@@ -287,7 +287,7 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements V
      * Setter for <code>ZDB.UI_PAGE.GRID</code>. 「grid」- 当前页面的布局信息，Grid布局格式
      */
     @Override
-    public UiPageRecord setGrid(String value) {
+    public UiPageRecord setGrid(final String value) {
         set(10, value);
         return this;
     }
@@ -304,7 +304,7 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements V
      * Setter for <code>ZDB.UI_PAGE.ASSIST</code>. 「assist」- 当前页面的辅助数据Ajax配置
      */
     @Override
-    public UiPageRecord setAssist(String value) {
+    public UiPageRecord setAssist(final String value) {
         set(11, value);
         return this;
     }
@@ -321,7 +321,7 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements V
      * Setter for <code>ZDB.UI_PAGE.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public UiPageRecord setActive(Boolean value) {
+    public UiPageRecord setActive(final Boolean value) {
         set(12, value);
         return this;
     }
@@ -338,7 +338,7 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements V
      * Setter for <code>ZDB.UI_PAGE.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public UiPageRecord setSigma(String value) {
+    public UiPageRecord setSigma(final String value) {
         set(13, value);
         return this;
     }
@@ -355,7 +355,7 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements V
      * Setter for <code>ZDB.UI_PAGE.METADATA</code>. 「metadata」- 附加配置
      */
     @Override
-    public UiPageRecord setMetadata(String value) {
+    public UiPageRecord setMetadata(final String value) {
         set(14, value);
         return this;
     }
@@ -372,7 +372,7 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements V
      * Setter for <code>ZDB.UI_PAGE.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public UiPageRecord setLanguage(String value) {
+    public UiPageRecord setLanguage(final String value) {
         set(15, value);
         return this;
     }
@@ -389,7 +389,7 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements V
      * Setter for <code>ZDB.UI_PAGE.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public UiPageRecord setCreatedAt(LocalDateTime value) {
+    public UiPageRecord setCreatedAt(final LocalDateTime value) {
         set(16, value);
         return this;
     }
@@ -406,7 +406,7 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements V
      * Setter for <code>ZDB.UI_PAGE.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public UiPageRecord setCreatedBy(String value) {
+    public UiPageRecord setCreatedBy(final String value) {
         set(17, value);
         return this;
     }
@@ -431,7 +431,7 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements V
      * Setter for <code>ZDB.UI_PAGE.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public UiPageRecord setUpdatedAt(LocalDateTime value) {
+    public UiPageRecord setUpdatedAt(final LocalDateTime value) {
         set(18, value);
         return this;
     }
@@ -448,7 +448,7 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements V
      * Setter for <code>ZDB.UI_PAGE.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public UiPageRecord setUpdatedBy(String value) {
+    public UiPageRecord setUpdatedBy(final String value) {
         set(19, value);
         return this;
     }
@@ -769,103 +769,103 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements V
     }
 
     @Override
-    public UiPageRecord value1(String value) {
+    public UiPageRecord value1(final String value) {
         setKey(value);
         return this;
     }
 
     @Override
-    public UiPageRecord value2(String value) {
+    public UiPageRecord value2(final String value) {
         setApp(value);
         return this;
     }
 
     @Override
-    public UiPageRecord value3(String value) {
+    public UiPageRecord value3(final String value) {
         setModule(value);
         return this;
     }
 
     @Override
-    public UiPageRecord value4(String value) {
+    public UiPageRecord value4(final String value) {
         setPage(value);
         return this;
     }
 
     @Override
-    public UiPageRecord value5(String value) {
+    public UiPageRecord value5(final String value) {
         setLayoutId(value);
         return this;
     }
 
     @Override
-    public UiPageRecord value6(Boolean value) {
+    public UiPageRecord value6(final Boolean value) {
         setSecure(value);
         return this;
     }
 
     @Override
-    public UiPageRecord value7(String value) {
+    public UiPageRecord value7(final String value) {
         setParamMap(value);
         return this;
     }
 
     @Override
-    public UiPageRecord value8(String value) {
+    public UiPageRecord value8(final String value) {
         setContainerName(value);
         return this;
     }
 
     @Override
-    public UiPageRecord value9(String value) {
+    public UiPageRecord value9(final String value) {
         setContainerConfig(value);
         return this;
     }
 
     @Override
-    public UiPageRecord value10(String value) {
+    public UiPageRecord value10(final String value) {
         setState(value);
         return this;
     }
 
     @Override
-    public UiPageRecord value11(String value) {
+    public UiPageRecord value11(final String value) {
         setGrid(value);
         return this;
     }
 
     @Override
-    public UiPageRecord value12(String value) {
+    public UiPageRecord value12(final String value) {
         setAssist(value);
         return this;
     }
 
     @Override
-    public UiPageRecord value13(Boolean value) {
+    public UiPageRecord value13(final Boolean value) {
         setActive(value);
         return this;
     }
 
     @Override
-    public UiPageRecord value14(String value) {
+    public UiPageRecord value14(final String value) {
         setSigma(value);
         return this;
     }
 
     @Override
-    public UiPageRecord value15(String value) {
+    public UiPageRecord value15(final String value) {
         setMetadata(value);
         return this;
     }
 
     @Override
-    public UiPageRecord value16(String value) {
+    public UiPageRecord value16(final String value) {
         setLanguage(value);
         return this;
     }
 
     @Override
-    public UiPageRecord value17(LocalDateTime value) {
+    public UiPageRecord value17(final LocalDateTime value) {
         setCreatedAt(value);
         return this;
     }
@@ -875,13 +875,13 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements V
     // -------------------------------------------------------------------------
 
     @Override
-    public UiPageRecord value18(String value) {
+    public UiPageRecord value18(final String value) {
         setCreatedBy(value);
         return this;
     }
 
     @Override
-    public UiPageRecord value19(LocalDateTime value) {
+    public UiPageRecord value19(final LocalDateTime value) {
         setUpdatedAt(value);
         return this;
     }
@@ -891,13 +891,13 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements V
     // -------------------------------------------------------------------------
 
     @Override
-    public UiPageRecord value20(String value) {
+    public UiPageRecord value20(final String value) {
         setUpdatedBy(value);
         return this;
     }
 
     @Override
-    public UiPageRecord values(String value1, String value2, String value3, String value4, String value5, Boolean value6, String value7, String value8, String value9, String value10, String value11, String value12, Boolean value13, String value14, String value15, String value16, LocalDateTime value17, String value18, LocalDateTime value19, String value20) {
+    public UiPageRecord values(final String value1, final String value2, final String value3, final String value4, final String value5, final Boolean value6, final String value7, final String value8, final String value9, final String value10, final String value11, final String value12, final Boolean value13, final String value14, final String value15, final String value16, final LocalDateTime value17, final String value18, final LocalDateTime value19, final String value20) {
         value1(value1);
         value2(value2);
         value3(value3);
@@ -922,7 +922,7 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements V
     }
 
     @Override
-    public void from(IUiPage from) {
+    public void from(final IUiPage from) {
         setKey(from.getKey());
         setApp(from.getApp());
         setModule(from.getModule());
@@ -947,7 +947,7 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements V
     }
 
     @Override
-    public <E extends IUiPage> E into(E into) {
+    public <E extends IUiPage> E into(final E into) {
         into.from(this);
         return into;
     }

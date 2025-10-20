@@ -4,7 +4,7 @@
 package io.zerows.extension.runtime.integration.domain.tables.pojos;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.runtime.integration.domain.tables.interfaces.IIIntegration;
 
 import java.time.LocalDateTime;
@@ -50,7 +50,7 @@ public class IIntegration implements VertxPojo, IIIntegration {
     public IIntegration() {
     }
 
-    public IIntegration(IIIntegration value) {
+    public IIntegration(final IIIntegration value) {
         this.key = value.getKey();
         this.name = value.getName();
         this.type = value.getType();
@@ -83,35 +83,35 @@ public class IIntegration implements VertxPojo, IIIntegration {
     }
 
     public IIntegration(
-        String key,
-        String name,
-        String type,
-        String ipV4,
-        String ipV6,
-        String hostname,
-        Integer port,
-        String protocol,
-        Integer securePort,
-        String secureProtocol,
-        String endpoint,
-        String path,
-        String osKey,
-        String osSecret,
-        String osAuthorize,
-        String osToken,
-        String username,
-        String password,
-        String publicKey,
-        String options,
-        String appId,
-        Boolean active,
-        String sigma,
-        String metadata,
-        String language,
-        LocalDateTime createdAt,
-        String createdBy,
-        LocalDateTime updatedAt,
-        String updatedBy
+        final String key,
+        final String name,
+        final String type,
+        final String ipV4,
+        final String ipV6,
+        final String hostname,
+        final Integer port,
+        final String protocol,
+        final Integer securePort,
+        final String secureProtocol,
+        final String endpoint,
+        final String path,
+        final String osKey,
+        final String osSecret,
+        final String osAuthorize,
+        final String osToken,
+        final String username,
+        final String password,
+        final String publicKey,
+        final String options,
+        final String appId,
+        final Boolean active,
+        final String sigma,
+        final String metadata,
+        final String language,
+        final LocalDateTime createdAt,
+        final String createdBy,
+        final LocalDateTime updatedAt,
+        final String updatedBy
     ) {
         this.key = key;
         this.name = name;
@@ -144,7 +144,7 @@ public class IIntegration implements VertxPojo, IIIntegration {
         this.updatedBy = updatedBy;
     }
 
-    public IIntegration(io.vertx.core.json.JsonObject json) {
+    public IIntegration(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -161,7 +161,7 @@ public class IIntegration implements VertxPojo, IIIntegration {
      * Setter for <code>ZDB.I_INTEGRATION.KEY</code>. 「key」- 集成配置主键
      */
     @Override
-    public IIntegration setKey(String key) {
+    public IIntegration setKey(final String key) {
         this.key = key;
         return this;
     }
@@ -178,7 +178,7 @@ public class IIntegration implements VertxPojo, IIIntegration {
      * Setter for <code>ZDB.I_INTEGRATION.NAME</code>. 「name」- 集成名称
      */
     @Override
-    public IIntegration setName(String name) {
+    public IIntegration setName(final String name) {
         this.name = name;
         return this;
     }
@@ -195,7 +195,7 @@ public class IIntegration implements VertxPojo, IIIntegration {
      * Setter for <code>ZDB.I_INTEGRATION.TYPE</code>. 「type」- 集成类型
      */
     @Override
-    public IIntegration setType(String type) {
+    public IIntegration setType(final String type) {
         this.type = type;
         return this;
     }
@@ -212,7 +212,7 @@ public class IIntegration implements VertxPojo, IIIntegration {
      * Setter for <code>ZDB.I_INTEGRATION.IP_V4</code>. 「ipV4」- IP v4地址
      */
     @Override
-    public IIntegration setIpV4(String ipV4) {
+    public IIntegration setIpV4(final String ipV4) {
         this.ipV4 = ipV4;
         return this;
     }
@@ -229,7 +229,7 @@ public class IIntegration implements VertxPojo, IIIntegration {
      * Setter for <code>ZDB.I_INTEGRATION.IP_V6</code>. 「ipV6」- IP v6地址
      */
     @Override
-    public IIntegration setIpV6(String ipV6) {
+    public IIntegration setIpV6(final String ipV6) {
         this.ipV6 = ipV6;
         return this;
     }
@@ -246,7 +246,7 @@ public class IIntegration implements VertxPojo, IIIntegration {
      * Setter for <code>ZDB.I_INTEGRATION.HOSTNAME</code>. 「hostname」- 主机地址
      */
     @Override
-    public IIntegration setHostname(String hostname) {
+    public IIntegration setHostname(final String hostname) {
         this.hostname = hostname;
         return this;
     }
@@ -263,7 +263,7 @@ public class IIntegration implements VertxPojo, IIIntegration {
      * Setter for <code>ZDB.I_INTEGRATION.PORT</code>. 「port」- 端口号
      */
     @Override
-    public IIntegration setPort(Integer port) {
+    public IIntegration setPort(final Integer port) {
         this.port = port;
         return this;
     }
@@ -282,7 +282,7 @@ public class IIntegration implements VertxPojo, IIIntegration {
      * 协议类型：HTTP, HTTPS, FTP
      */
     @Override
-    public IIntegration setProtocol(String protocol) {
+    public IIntegration setProtocol(final String protocol) {
         this.protocol = protocol;
         return this;
     }
@@ -301,7 +301,7 @@ public class IIntegration implements VertxPojo, IIIntegration {
      * 传输层安全接口
      */
     @Override
-    public IIntegration setSecurePort(Integer securePort) {
+    public IIntegration setSecurePort(final Integer securePort) {
         this.securePort = securePort;
         return this;
     }
@@ -320,7 +320,7 @@ public class IIntegration implements VertxPojo, IIIntegration {
      * 「secureProtocol」- 传入层协议：TLS / SSL（邮件服务器需要）
      */
     @Override
-    public IIntegration setSecureProtocol(String secureProtocol) {
+    public IIntegration setSecureProtocol(final String secureProtocol) {
         this.secureProtocol = secureProtocol;
         return this;
     }
@@ -337,7 +337,7 @@ public class IIntegration implements VertxPojo, IIIntegration {
      * Setter for <code>ZDB.I_INTEGRATION.ENDPOINT</code>. 「endpoint」- 端地址
      */
     @Override
-    public IIntegration setEndpoint(String endpoint) {
+    public IIntegration setEndpoint(final String endpoint) {
         this.endpoint = endpoint;
         return this;
     }
@@ -354,7 +354,7 @@ public class IIntegration implements VertxPojo, IIIntegration {
      * Setter for <code>ZDB.I_INTEGRATION.PATH</code>. 「path」- 集成专用根路径
      */
     @Override
-    public IIntegration setPath(String path) {
+    public IIntegration setPath(final String path) {
         this.path = path;
         return this;
     }
@@ -371,7 +371,7 @@ public class IIntegration implements VertxPojo, IIIntegration {
      * Setter for <code>ZDB.I_INTEGRATION.OS_KEY</code>. 「osKey」- 开源专用Key
      */
     @Override
-    public IIntegration setOsKey(String osKey) {
+    public IIntegration setOsKey(final String osKey) {
         this.osKey = osKey;
         return this;
     }
@@ -390,7 +390,7 @@ public class IIntegration implements VertxPojo, IIIntegration {
      * 开源专用Secret
      */
     @Override
-    public IIntegration setOsSecret(String osSecret) {
+    public IIntegration setOsSecret(final String osSecret) {
         this.osSecret = osSecret;
         return this;
     }
@@ -409,7 +409,7 @@ public class IIntegration implements VertxPojo, IIIntegration {
      * Authorize接口
      */
     @Override
-    public IIntegration setOsAuthorize(String osAuthorize) {
+    public IIntegration setOsAuthorize(final String osAuthorize) {
         this.osAuthorize = osAuthorize;
         return this;
     }
@@ -426,7 +426,7 @@ public class IIntegration implements VertxPojo, IIIntegration {
      * Setter for <code>ZDB.I_INTEGRATION.OS_TOKEN</code>. 「osToken」- Token接口
      */
     @Override
-    public IIntegration setOsToken(String osToken) {
+    public IIntegration setOsToken(final String osToken) {
         this.osToken = osToken;
         return this;
     }
@@ -443,7 +443,7 @@ public class IIntegration implements VertxPojo, IIIntegration {
      * Setter for <code>ZDB.I_INTEGRATION.USERNAME</code>. 「username」- 账号
      */
     @Override
-    public IIntegration setUsername(String username) {
+    public IIntegration setUsername(final String username) {
         this.username = username;
         return this;
     }
@@ -460,7 +460,7 @@ public class IIntegration implements VertxPojo, IIIntegration {
      * Setter for <code>ZDB.I_INTEGRATION.PASSWORD</code>. 「password」- 密码
      */
     @Override
-    public IIntegration setPassword(String password) {
+    public IIntegration setPassword(final String password) {
         this.password = password;
         return this;
     }
@@ -477,7 +477,7 @@ public class IIntegration implements VertxPojo, IIIntegration {
      * Setter for <code>ZDB.I_INTEGRATION.PUBLIC_KEY</code>. 「publicKey」- Key文件
      */
     @Override
-    public IIntegration setPublicKey(String publicKey) {
+    public IIntegration setPublicKey(final String publicKey) {
         this.publicKey = publicKey;
         return this;
     }
@@ -494,7 +494,7 @@ public class IIntegration implements VertxPojo, IIIntegration {
      * Setter for <code>ZDB.I_INTEGRATION.OPTIONS</code>. 「options」- 集成相关配置
      */
     @Override
-    public IIntegration setOptions(String options) {
+    public IIntegration setOptions(final String options) {
         this.options = options;
         return this;
     }
@@ -511,7 +511,7 @@ public class IIntegration implements VertxPojo, IIIntegration {
      * Setter for <code>ZDB.I_INTEGRATION.APP_ID</code>. 「id」- 关联的应用程序ID
      */
     @Override
-    public IIntegration setAppId(String appId) {
+    public IIntegration setAppId(final String appId) {
         this.appId = appId;
         return this;
     }
@@ -528,7 +528,7 @@ public class IIntegration implements VertxPojo, IIIntegration {
      * Setter for <code>ZDB.I_INTEGRATION.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public IIntegration setActive(Boolean active) {
+    public IIntegration setActive(final Boolean active) {
         this.active = active;
         return this;
     }
@@ -545,7 +545,7 @@ public class IIntegration implements VertxPojo, IIIntegration {
      * Setter for <code>ZDB.I_INTEGRATION.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public IIntegration setSigma(String sigma) {
+    public IIntegration setSigma(final String sigma) {
         this.sigma = sigma;
         return this;
     }
@@ -562,7 +562,7 @@ public class IIntegration implements VertxPojo, IIIntegration {
      * Setter for <code>ZDB.I_INTEGRATION.METADATA</code>. 「metadata」- 附加配置
      */
     @Override
-    public IIntegration setMetadata(String metadata) {
+    public IIntegration setMetadata(final String metadata) {
         this.metadata = metadata;
         return this;
     }
@@ -579,7 +579,7 @@ public class IIntegration implements VertxPojo, IIIntegration {
      * Setter for <code>ZDB.I_INTEGRATION.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public IIntegration setLanguage(String language) {
+    public IIntegration setLanguage(final String language) {
         this.language = language;
         return this;
     }
@@ -596,7 +596,7 @@ public class IIntegration implements VertxPojo, IIIntegration {
      * Setter for <code>ZDB.I_INTEGRATION.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public IIntegration setCreatedAt(LocalDateTime createdAt) {
+    public IIntegration setCreatedAt(final LocalDateTime createdAt) {
         this.createdAt = createdAt;
         return this;
     }
@@ -613,7 +613,7 @@ public class IIntegration implements VertxPojo, IIIntegration {
      * Setter for <code>ZDB.I_INTEGRATION.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public IIntegration setCreatedBy(String createdBy) {
+    public IIntegration setCreatedBy(final String createdBy) {
         this.createdBy = createdBy;
         return this;
     }
@@ -630,7 +630,7 @@ public class IIntegration implements VertxPojo, IIIntegration {
      * Setter for <code>ZDB.I_INTEGRATION.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public IIntegration setUpdatedAt(LocalDateTime updatedAt) {
+    public IIntegration setUpdatedAt(final LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
         return this;
     }
@@ -647,13 +647,13 @@ public class IIntegration implements VertxPojo, IIIntegration {
      * Setter for <code>ZDB.I_INTEGRATION.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public IIntegration setUpdatedBy(String updatedBy) {
+    public IIntegration setUpdatedBy(final String updatedBy) {
         this.updatedBy = updatedBy;
         return this;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
@@ -847,7 +847,7 @@ public class IIntegration implements VertxPojo, IIIntegration {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("IIntegration (");
+        final StringBuilder sb = new StringBuilder("IIntegration (");
 
         sb.append(key);
         sb.append(", ").append(name);
@@ -888,7 +888,7 @@ public class IIntegration implements VertxPojo, IIIntegration {
     // -------------------------------------------------------------------------
 
     @Override
-    public void from(IIIntegration from) {
+    public void from(final IIIntegration from) {
         setKey(from.getKey());
         setName(from.getName());
         setType(from.getType());
@@ -921,7 +921,7 @@ public class IIntegration implements VertxPojo, IIIntegration {
     }
 
     @Override
-    public <E extends IIIntegration> E into(E into) {
+    public <E extends IIIntegration> E into(final E into) {
         into.from(this);
         return into;
     }

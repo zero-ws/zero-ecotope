@@ -4,7 +4,7 @@
 package io.zerows.extension.mbse.modulat.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.mbse.modulat.domain.tables.BAuthority;
 import io.zerows.extension.mbse.modulat.domain.tables.interfaces.IBAuthority;
 import org.jooq.Field;
@@ -31,7 +31,7 @@ public class BAuthorityRecord extends UpdatableRecordImpl<BAuthorityRecord> impl
     /**
      * Create a detached, initialised BAuthorityRecord
      */
-    public BAuthorityRecord(String key, String code, String blockId, String type, String licResource, String licAction, String licPermission, String licView, Boolean active, String sigma, String metadata, String language) {
+    public BAuthorityRecord(final String key, final String code, final String blockId, final String type, final String licResource, final String licAction, final String licPermission, final String licView, final Boolean active, final String sigma, final String metadata, final String language) {
         super(BAuthority.B_AUTHORITY);
 
         setKey(key);
@@ -52,7 +52,7 @@ public class BAuthorityRecord extends UpdatableRecordImpl<BAuthorityRecord> impl
     /**
      * Create a detached, initialised BAuthorityRecord
      */
-    public BAuthorityRecord(io.zerows.extension.mbse.modulat.domain.tables.pojos.BAuthority value) {
+    public BAuthorityRecord(final io.zerows.extension.mbse.modulat.domain.tables.pojos.BAuthority value) {
         super(BAuthority.B_AUTHORITY);
 
         if (value != null) {
@@ -72,7 +72,7 @@ public class BAuthorityRecord extends UpdatableRecordImpl<BAuthorityRecord> impl
         }
     }
 
-    public BAuthorityRecord(io.vertx.core.json.JsonObject json) {
+    public BAuthorityRecord(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -89,7 +89,7 @@ public class BAuthorityRecord extends UpdatableRecordImpl<BAuthorityRecord> impl
      * Setter for <code>ZDB.B_AUTHORITY.KEY</code>. 「key」- 主键
      */
     @Override
-    public BAuthorityRecord setKey(String value) {
+    public BAuthorityRecord setKey(final String value) {
         set(0, value);
         return this;
     }
@@ -106,7 +106,7 @@ public class BAuthorityRecord extends UpdatableRecordImpl<BAuthorityRecord> impl
      * Setter for <code>ZDB.B_AUTHORITY.CODE</code>. 「name」- 系统内部编码
      */
     @Override
-    public BAuthorityRecord setCode(String value) {
+    public BAuthorityRecord setCode(final String value) {
         set(1, value);
         return this;
     }
@@ -123,7 +123,7 @@ public class BAuthorityRecord extends UpdatableRecordImpl<BAuthorityRecord> impl
      * Setter for <code>ZDB.B_AUTHORITY.BLOCK_ID</code>. 「blockId」- 所属模块ID
      */
     @Override
-    public BAuthorityRecord setBlockId(String value) {
+    public BAuthorityRecord setBlockId(final String value) {
         set(2, value);
         return this;
     }
@@ -140,7 +140,7 @@ public class BAuthorityRecord extends UpdatableRecordImpl<BAuthorityRecord> impl
      * Setter for <code>ZDB.B_AUTHORITY.TYPE</code>. 「type」- 类型保留，单独区分
      */
     @Override
-    public BAuthorityRecord setType(String value) {
+    public BAuthorityRecord setType(final String value) {
         set(3, value);
         return this;
     }
@@ -157,7 +157,7 @@ public class BAuthorityRecord extends UpdatableRecordImpl<BAuthorityRecord> impl
      * Setter for <code>ZDB.B_AUTHORITY.LIC_RESOURCE</code>. 「licResource」- 资源编码
      */
     @Override
-    public BAuthorityRecord setLicResource(String value) {
+    public BAuthorityRecord setLicResource(final String value) {
         set(4, value);
         return this;
     }
@@ -174,7 +174,7 @@ public class BAuthorityRecord extends UpdatableRecordImpl<BAuthorityRecord> impl
      * Setter for <code>ZDB.B_AUTHORITY.LIC_ACTION</code>. 「licAction」- 操作编码
      */
     @Override
-    public BAuthorityRecord setLicAction(String value) {
+    public BAuthorityRecord setLicAction(final String value) {
         set(5, value);
         return this;
     }
@@ -193,7 +193,7 @@ public class BAuthorityRecord extends UpdatableRecordImpl<BAuthorityRecord> impl
      * 所需权限集合
      */
     @Override
-    public BAuthorityRecord setLicPermission(String value) {
+    public BAuthorityRecord setLicPermission(final String value) {
         set(6, value);
         return this;
     }
@@ -210,7 +210,7 @@ public class BAuthorityRecord extends UpdatableRecordImpl<BAuthorityRecord> impl
      * Setter for <code>ZDB.B_AUTHORITY.LIC_VIEW</code>. 「licView」- 视图集合
      */
     @Override
-    public BAuthorityRecord setLicView(String value) {
+    public BAuthorityRecord setLicView(final String value) {
         set(7, value);
         return this;
     }
@@ -227,7 +227,7 @@ public class BAuthorityRecord extends UpdatableRecordImpl<BAuthorityRecord> impl
      * Setter for <code>ZDB.B_AUTHORITY.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public BAuthorityRecord setActive(Boolean value) {
+    public BAuthorityRecord setActive(final Boolean value) {
         set(8, value);
         return this;
     }
@@ -244,7 +244,7 @@ public class BAuthorityRecord extends UpdatableRecordImpl<BAuthorityRecord> impl
      * Setter for <code>ZDB.B_AUTHORITY.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public BAuthorityRecord setSigma(String value) {
+    public BAuthorityRecord setSigma(final String value) {
         set(9, value);
         return this;
     }
@@ -269,7 +269,7 @@ public class BAuthorityRecord extends UpdatableRecordImpl<BAuthorityRecord> impl
      * Setter for <code>ZDB.B_AUTHORITY.METADATA</code>. 「metadata」- 附加配置
      */
     @Override
-    public BAuthorityRecord setMetadata(String value) {
+    public BAuthorityRecord setMetadata(final String value) {
         set(10, value);
         return this;
     }
@@ -286,7 +286,7 @@ public class BAuthorityRecord extends UpdatableRecordImpl<BAuthorityRecord> impl
      * Setter for <code>ZDB.B_AUTHORITY.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public BAuthorityRecord setLanguage(String value) {
+    public BAuthorityRecord setLanguage(final String value) {
         set(11, value);
         return this;
     }
@@ -487,55 +487,55 @@ public class BAuthorityRecord extends UpdatableRecordImpl<BAuthorityRecord> impl
     }
 
     @Override
-    public BAuthorityRecord value1(String value) {
+    public BAuthorityRecord value1(final String value) {
         setKey(value);
         return this;
     }
 
     @Override
-    public BAuthorityRecord value2(String value) {
+    public BAuthorityRecord value2(final String value) {
         setCode(value);
         return this;
     }
 
     @Override
-    public BAuthorityRecord value3(String value) {
+    public BAuthorityRecord value3(final String value) {
         setBlockId(value);
         return this;
     }
 
     @Override
-    public BAuthorityRecord value4(String value) {
+    public BAuthorityRecord value4(final String value) {
         setType(value);
         return this;
     }
 
     @Override
-    public BAuthorityRecord value5(String value) {
+    public BAuthorityRecord value5(final String value) {
         setLicResource(value);
         return this;
     }
 
     @Override
-    public BAuthorityRecord value6(String value) {
+    public BAuthorityRecord value6(final String value) {
         setLicAction(value);
         return this;
     }
 
     @Override
-    public BAuthorityRecord value7(String value) {
+    public BAuthorityRecord value7(final String value) {
         setLicPermission(value);
         return this;
     }
 
     @Override
-    public BAuthorityRecord value8(String value) {
+    public BAuthorityRecord value8(final String value) {
         setLicView(value);
         return this;
     }
 
     @Override
-    public BAuthorityRecord value9(Boolean value) {
+    public BAuthorityRecord value9(final Boolean value) {
         setActive(value);
         return this;
     }
@@ -545,13 +545,13 @@ public class BAuthorityRecord extends UpdatableRecordImpl<BAuthorityRecord> impl
     // -------------------------------------------------------------------------
 
     @Override
-    public BAuthorityRecord value10(String value) {
+    public BAuthorityRecord value10(final String value) {
         setSigma(value);
         return this;
     }
 
     @Override
-    public BAuthorityRecord value11(String value) {
+    public BAuthorityRecord value11(final String value) {
         setMetadata(value);
         return this;
     }
@@ -561,13 +561,13 @@ public class BAuthorityRecord extends UpdatableRecordImpl<BAuthorityRecord> impl
     // -------------------------------------------------------------------------
 
     @Override
-    public BAuthorityRecord value12(String value) {
+    public BAuthorityRecord value12(final String value) {
         setLanguage(value);
         return this;
     }
 
     @Override
-    public BAuthorityRecord values(String value1, String value2, String value3, String value4, String value5, String value6, String value7, String value8, Boolean value9, String value10, String value11, String value12) {
+    public BAuthorityRecord values(final String value1, final String value2, final String value3, final String value4, final String value5, final String value6, final String value7, final String value8, final Boolean value9, final String value10, final String value11, final String value12) {
         value1(value1);
         value2(value2);
         value3(value3);
@@ -584,7 +584,7 @@ public class BAuthorityRecord extends UpdatableRecordImpl<BAuthorityRecord> impl
     }
 
     @Override
-    public void from(IBAuthority from) {
+    public void from(final IBAuthority from) {
         setKey(from.getKey());
         setCode(from.getCode());
         setBlockId(from.getBlockId());
@@ -601,7 +601,7 @@ public class BAuthorityRecord extends UpdatableRecordImpl<BAuthorityRecord> impl
     }
 
     @Override
-    public <E extends IBAuthority> E into(E into) {
+    public <E extends IBAuthority> E into(final E into) {
         into.from(this);
         return into;
     }

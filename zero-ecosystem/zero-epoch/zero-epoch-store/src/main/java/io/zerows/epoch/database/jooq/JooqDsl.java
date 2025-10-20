@@ -1,8 +1,8 @@
 package io.zerows.epoch.database.jooq;
 
-import io.github.jklingsporn.vertx.jooq.classic.VertxDAO;
 import io.r2mo.function.Fn;
 import io.r2mo.typed.cc.Cc;
+import io.r2mo.vertx.jooq.classic.VertxDAO;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.core.Promise;

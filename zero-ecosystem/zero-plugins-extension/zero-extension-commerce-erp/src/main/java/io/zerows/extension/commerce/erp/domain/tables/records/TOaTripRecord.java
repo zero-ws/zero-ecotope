@@ -4,7 +4,7 @@
 package io.zerows.extension.commerce.erp.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.commerce.erp.domain.tables.TOaTrip;
 import io.zerows.extension.commerce.erp.domain.tables.interfaces.ITOaTrip;
 import org.jooq.Field;
@@ -33,7 +33,7 @@ public class TOaTripRecord extends UpdatableRecordImpl<TOaTripRecord> implements
     /**
      * Create a detached, initialised TOaTripRecord
      */
-    public TOaTripRecord(String key, String commentExtension, String requestBy, LocalDateTime startAt, LocalDateTime endAt, Integer days, String tripProvince, String tripCity, String tripAddress, String reason, String workContent) {
+    public TOaTripRecord(final String key, final String commentExtension, final String requestBy, final LocalDateTime startAt, final LocalDateTime endAt, final Integer days, final String tripProvince, final String tripCity, final String tripAddress, final String reason, final String workContent) {
         super(TOaTrip.T_OA_TRIP);
 
         setKey(key);
@@ -53,7 +53,7 @@ public class TOaTripRecord extends UpdatableRecordImpl<TOaTripRecord> implements
     /**
      * Create a detached, initialised TOaTripRecord
      */
-    public TOaTripRecord(io.zerows.extension.commerce.erp.domain.tables.pojos.TOaTrip value) {
+    public TOaTripRecord(final io.zerows.extension.commerce.erp.domain.tables.pojos.TOaTrip value) {
         super(TOaTrip.T_OA_TRIP);
 
         if (value != null) {
@@ -72,7 +72,7 @@ public class TOaTripRecord extends UpdatableRecordImpl<TOaTripRecord> implements
         }
     }
 
-    public TOaTripRecord(io.vertx.core.json.JsonObject json) {
+    public TOaTripRecord(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -89,7 +89,7 @@ public class TOaTripRecord extends UpdatableRecordImpl<TOaTripRecord> implements
      * Setter for <code>ZDB.T_OA_TRIP.KEY</code>. 「key」- Ticket Primary Key
      */
     @Override
-    public TOaTripRecord setKey(String value) {
+    public TOaTripRecord setKey(final String value) {
         set(0, value);
         return this;
     }
@@ -108,7 +108,7 @@ public class TOaTripRecord extends UpdatableRecordImpl<TOaTripRecord> implements
      * 「commentExtension」- Extension Comment
      */
     @Override
-    public TOaTripRecord setCommentExtension(String value) {
+    public TOaTripRecord setCommentExtension(final String value) {
         set(1, value);
         return this;
     }
@@ -127,7 +127,7 @@ public class TOaTripRecord extends UpdatableRecordImpl<TOaTripRecord> implements
      * User
      */
     @Override
-    public TOaTripRecord setRequestBy(String value) {
+    public TOaTripRecord setRequestBy(final String value) {
         set(2, value);
         return this;
     }
@@ -144,7 +144,7 @@ public class TOaTripRecord extends UpdatableRecordImpl<TOaTripRecord> implements
      * Setter for <code>ZDB.T_OA_TRIP.START_AT</code>. 「startAt」- From
      */
     @Override
-    public TOaTripRecord setStartAt(LocalDateTime value) {
+    public TOaTripRecord setStartAt(final LocalDateTime value) {
         set(3, value);
         return this;
     }
@@ -161,7 +161,7 @@ public class TOaTripRecord extends UpdatableRecordImpl<TOaTripRecord> implements
      * Setter for <code>ZDB.T_OA_TRIP.END_AT</code>. 「endAt」- To
      */
     @Override
-    public TOaTripRecord setEndAt(LocalDateTime value) {
+    public TOaTripRecord setEndAt(final LocalDateTime value) {
         set(4, value);
         return this;
     }
@@ -178,7 +178,7 @@ public class TOaTripRecord extends UpdatableRecordImpl<TOaTripRecord> implements
      * Setter for <code>ZDB.T_OA_TRIP.DAYS</code>. 「days」- Duration
      */
     @Override
-    public TOaTripRecord setDays(Integer value) {
+    public TOaTripRecord setDays(final Integer value) {
         set(5, value);
         return this;
     }
@@ -197,7 +197,7 @@ public class TOaTripRecord extends UpdatableRecordImpl<TOaTripRecord> implements
      * Province
      */
     @Override
-    public TOaTripRecord setTripProvince(String value) {
+    public TOaTripRecord setTripProvince(final String value) {
         set(6, value);
         return this;
     }
@@ -214,7 +214,7 @@ public class TOaTripRecord extends UpdatableRecordImpl<TOaTripRecord> implements
      * Setter for <code>ZDB.T_OA_TRIP.TRIP_CITY</code>. 「tripCity」- Trip City
      */
     @Override
-    public TOaTripRecord setTripCity(String value) {
+    public TOaTripRecord setTripCity(final String value) {
         set(7, value);
         return this;
     }
@@ -233,7 +233,7 @@ public class TOaTripRecord extends UpdatableRecordImpl<TOaTripRecord> implements
      * Address
      */
     @Override
-    public TOaTripRecord setTripAddress(String value) {
+    public TOaTripRecord setTripAddress(final String value) {
         set(8, value);
         return this;
     }
@@ -260,7 +260,7 @@ public class TOaTripRecord extends UpdatableRecordImpl<TOaTripRecord> implements
      * done
      */
     @Override
-    public TOaTripRecord setReason(String value) {
+    public TOaTripRecord setReason(final String value) {
         set(9, value);
         return this;
     }
@@ -279,7 +279,7 @@ public class TOaTripRecord extends UpdatableRecordImpl<TOaTripRecord> implements
      * Working Assignment Content
      */
     @Override
-    public TOaTripRecord setWorkContent(String value) {
+    public TOaTripRecord setWorkContent(final String value) {
         set(10, value);
         return this;
     }
@@ -465,49 +465,49 @@ public class TOaTripRecord extends UpdatableRecordImpl<TOaTripRecord> implements
     }
 
     @Override
-    public TOaTripRecord value1(String value) {
+    public TOaTripRecord value1(final String value) {
         setKey(value);
         return this;
     }
 
     @Override
-    public TOaTripRecord value2(String value) {
+    public TOaTripRecord value2(final String value) {
         setCommentExtension(value);
         return this;
     }
 
     @Override
-    public TOaTripRecord value3(String value) {
+    public TOaTripRecord value3(final String value) {
         setRequestBy(value);
         return this;
     }
 
     @Override
-    public TOaTripRecord value4(LocalDateTime value) {
+    public TOaTripRecord value4(final LocalDateTime value) {
         setStartAt(value);
         return this;
     }
 
     @Override
-    public TOaTripRecord value5(LocalDateTime value) {
+    public TOaTripRecord value5(final LocalDateTime value) {
         setEndAt(value);
         return this;
     }
 
     @Override
-    public TOaTripRecord value6(Integer value) {
+    public TOaTripRecord value6(final Integer value) {
         setDays(value);
         return this;
     }
 
     @Override
-    public TOaTripRecord value7(String value) {
+    public TOaTripRecord value7(final String value) {
         setTripProvince(value);
         return this;
     }
 
     @Override
-    public TOaTripRecord value8(String value) {
+    public TOaTripRecord value8(final String value) {
         setTripCity(value);
         return this;
     }
@@ -517,13 +517,13 @@ public class TOaTripRecord extends UpdatableRecordImpl<TOaTripRecord> implements
     // -------------------------------------------------------------------------
 
     @Override
-    public TOaTripRecord value9(String value) {
+    public TOaTripRecord value9(final String value) {
         setTripAddress(value);
         return this;
     }
 
     @Override
-    public TOaTripRecord value10(String value) {
+    public TOaTripRecord value10(final String value) {
         setReason(value);
         return this;
     }
@@ -533,13 +533,13 @@ public class TOaTripRecord extends UpdatableRecordImpl<TOaTripRecord> implements
     // -------------------------------------------------------------------------
 
     @Override
-    public TOaTripRecord value11(String value) {
+    public TOaTripRecord value11(final String value) {
         setWorkContent(value);
         return this;
     }
 
     @Override
-    public TOaTripRecord values(String value1, String value2, String value3, LocalDateTime value4, LocalDateTime value5, Integer value6, String value7, String value8, String value9, String value10, String value11) {
+    public TOaTripRecord values(final String value1, final String value2, final String value3, final LocalDateTime value4, final LocalDateTime value5, final Integer value6, final String value7, final String value8, final String value9, final String value10, final String value11) {
         value1(value1);
         value2(value2);
         value3(value3);
@@ -555,7 +555,7 @@ public class TOaTripRecord extends UpdatableRecordImpl<TOaTripRecord> implements
     }
 
     @Override
-    public void from(ITOaTrip from) {
+    public void from(final ITOaTrip from) {
         setKey(from.getKey());
         setCommentExtension(from.getCommentExtension());
         setRequestBy(from.getRequestBy());
@@ -571,7 +571,7 @@ public class TOaTripRecord extends UpdatableRecordImpl<TOaTripRecord> implements
     }
 
     @Override
-    public <E extends ITOaTrip> E into(E into) {
+    public <E extends ITOaTrip> E into(final E into) {
         into.from(this);
         return into;
     }

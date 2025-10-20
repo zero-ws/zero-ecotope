@@ -4,7 +4,7 @@
 package io.zerows.extension.mbse.ui.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.mbse.ui.domain.tables.UiList;
 import io.zerows.extension.mbse.ui.domain.tables.interfaces.IUiList;
 import org.jooq.Field;
@@ -33,7 +33,7 @@ public class UiListRecord extends UpdatableRecordImpl<UiListRecord> implements V
     /**
      * Create a detached, initialised UiListRecord
      */
-    public UiListRecord(String key, String name, String code, String identifier, String vQuery, String vSearch, String vTable, String vSegment, Boolean dynamicColumn, Boolean dynamicSwitch, String optionsAjax, String optionsSubmit, String options, String classCombiner, Boolean active, String sigma, String metadata, String language, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public UiListRecord(final String key, final String name, final String code, final String identifier, final String vQuery, final String vSearch, final String vTable, final String vSegment, final Boolean dynamicColumn, final Boolean dynamicSwitch, final String optionsAjax, final String optionsSubmit, final String options, final String classCombiner, final Boolean active, final String sigma, final String metadata, final String language, final LocalDateTime createdAt, final String createdBy, final LocalDateTime updatedAt, final String updatedBy) {
         super(UiList.UI_LIST);
 
         setKey(key);
@@ -64,7 +64,7 @@ public class UiListRecord extends UpdatableRecordImpl<UiListRecord> implements V
     /**
      * Create a detached, initialised UiListRecord
      */
-    public UiListRecord(io.zerows.extension.mbse.ui.domain.tables.pojos.UiList value) {
+    public UiListRecord(final io.zerows.extension.mbse.ui.domain.tables.pojos.UiList value) {
         super(UiList.UI_LIST);
 
         if (value != null) {
@@ -94,7 +94,7 @@ public class UiListRecord extends UpdatableRecordImpl<UiListRecord> implements V
         }
     }
 
-    public UiListRecord(io.vertx.core.json.JsonObject json) {
+    public UiListRecord(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -111,7 +111,7 @@ public class UiListRecord extends UpdatableRecordImpl<UiListRecord> implements V
      * Setter for <code>ZDB.UI_LIST.KEY</code>. 「key」- 主键
      */
     @Override
-    public UiListRecord setKey(String value) {
+    public UiListRecord setKey(final String value) {
         set(0, value);
         return this;
     }
@@ -128,7 +128,7 @@ public class UiListRecord extends UpdatableRecordImpl<UiListRecord> implements V
      * Setter for <code>ZDB.UI_LIST.NAME</code>. 「name」- 名称
      */
     @Override
-    public UiListRecord setName(String value) {
+    public UiListRecord setName(final String value) {
         set(1, value);
         return this;
     }
@@ -145,7 +145,7 @@ public class UiListRecord extends UpdatableRecordImpl<UiListRecord> implements V
      * Setter for <code>ZDB.UI_LIST.CODE</code>. 「code」- 系统编码
      */
     @Override
-    public UiListRecord setCode(String value) {
+    public UiListRecord setCode(final String value) {
         set(2, value);
         return this;
     }
@@ -162,7 +162,7 @@ public class UiListRecord extends UpdatableRecordImpl<UiListRecord> implements V
      * Setter for <code>ZDB.UI_LIST.IDENTIFIER</code>. 「identifier」- 表单所属的模型ID
      */
     @Override
-    public UiListRecord setIdentifier(String value) {
+    public UiListRecord setIdentifier(final String value) {
         set(3, value);
         return this;
     }
@@ -181,7 +181,7 @@ public class UiListRecord extends UpdatableRecordImpl<UiListRecord> implements V
      * -&gt; query 节点
      */
     @Override
-    public UiListRecord setVQuery(String value) {
+    public UiListRecord setVQuery(final String value) {
         set(4, value);
         return this;
     }
@@ -200,7 +200,7 @@ public class UiListRecord extends UpdatableRecordImpl<UiListRecord> implements V
      * -&gt; options 节点
      */
     @Override
-    public UiListRecord setVSearch(String value) {
+    public UiListRecord setVSearch(final String value) {
         set(5, value);
         return this;
     }
@@ -219,7 +219,7 @@ public class UiListRecord extends UpdatableRecordImpl<UiListRecord> implements V
      * -&gt; table 节点
      */
     @Override
-    public UiListRecord setVTable(String value) {
+    public UiListRecord setVTable(final String value) {
         set(6, value);
         return this;
     }
@@ -238,7 +238,7 @@ public class UiListRecord extends UpdatableRecordImpl<UiListRecord> implements V
      * grid -&gt; component 节点
      */
     @Override
-    public UiListRecord setVSegment(String value) {
+    public UiListRecord setVSegment(final String value) {
         set(7, value);
         return this;
     }
@@ -255,7 +255,7 @@ public class UiListRecord extends UpdatableRecordImpl<UiListRecord> implements V
      * Setter for <code>ZDB.UI_LIST.DYNAMIC_COLUMN</code>. 「dynamicColumn」- 动态列？
      */
     @Override
-    public UiListRecord setDynamicColumn(Boolean value) {
+    public UiListRecord setDynamicColumn(final Boolean value) {
         set(8, value);
         return this;
     }
@@ -274,7 +274,7 @@ public class UiListRecord extends UpdatableRecordImpl<UiListRecord> implements V
      * 动态切换？
      */
     @Override
-    public UiListRecord setDynamicSwitch(Boolean value) {
+    public UiListRecord setDynamicSwitch(final Boolean value) {
         set(9, value);
         return this;
     }
@@ -293,7 +293,7 @@ public class UiListRecord extends UpdatableRecordImpl<UiListRecord> implements V
      * ajax系列的配置
      */
     @Override
-    public UiListRecord setOptionsAjax(String value) {
+    public UiListRecord setOptionsAjax(final String value) {
         set(10, value);
         return this;
     }
@@ -312,7 +312,7 @@ public class UiListRecord extends UpdatableRecordImpl<UiListRecord> implements V
      * 所有提交类的配置
      */
     @Override
-    public UiListRecord setOptionsSubmit(String value) {
+    public UiListRecord setOptionsSubmit(final String value) {
         set(11, value);
         return this;
     }
@@ -329,7 +329,7 @@ public class UiListRecord extends UpdatableRecordImpl<UiListRecord> implements V
      * Setter for <code>ZDB.UI_LIST.OPTIONS</code>. 「options」- 配置项
      */
     @Override
-    public UiListRecord setOptions(String value) {
+    public UiListRecord setOptions(final String value) {
         set(12, value);
         return this;
     }
@@ -346,7 +346,7 @@ public class UiListRecord extends UpdatableRecordImpl<UiListRecord> implements V
      * Setter for <code>ZDB.UI_LIST.CLASS_COMBINER</code>. 「classCombiner」- 组装器
      */
     @Override
-    public UiListRecord setClassCombiner(String value) {
+    public UiListRecord setClassCombiner(final String value) {
         set(13, value);
         return this;
     }
@@ -363,7 +363,7 @@ public class UiListRecord extends UpdatableRecordImpl<UiListRecord> implements V
      * Setter for <code>ZDB.UI_LIST.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public UiListRecord setActive(Boolean value) {
+    public UiListRecord setActive(final Boolean value) {
         set(14, value);
         return this;
     }
@@ -380,7 +380,7 @@ public class UiListRecord extends UpdatableRecordImpl<UiListRecord> implements V
      * Setter for <code>ZDB.UI_LIST.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public UiListRecord setSigma(String value) {
+    public UiListRecord setSigma(final String value) {
         set(15, value);
         return this;
     }
@@ -397,7 +397,7 @@ public class UiListRecord extends UpdatableRecordImpl<UiListRecord> implements V
      * Setter for <code>ZDB.UI_LIST.METADATA</code>. 「metadata」- 附加配置
      */
     @Override
-    public UiListRecord setMetadata(String value) {
+    public UiListRecord setMetadata(final String value) {
         set(16, value);
         return this;
     }
@@ -414,7 +414,7 @@ public class UiListRecord extends UpdatableRecordImpl<UiListRecord> implements V
      * Setter for <code>ZDB.UI_LIST.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public UiListRecord setLanguage(String value) {
+    public UiListRecord setLanguage(final String value) {
         set(17, value);
         return this;
     }
@@ -431,7 +431,7 @@ public class UiListRecord extends UpdatableRecordImpl<UiListRecord> implements V
      * Setter for <code>ZDB.UI_LIST.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public UiListRecord setCreatedAt(LocalDateTime value) {
+    public UiListRecord setCreatedAt(final LocalDateTime value) {
         set(18, value);
         return this;
     }
@@ -448,7 +448,7 @@ public class UiListRecord extends UpdatableRecordImpl<UiListRecord> implements V
      * Setter for <code>ZDB.UI_LIST.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public UiListRecord setCreatedBy(String value) {
+    public UiListRecord setCreatedBy(final String value) {
         set(19, value);
         return this;
     }
@@ -473,7 +473,7 @@ public class UiListRecord extends UpdatableRecordImpl<UiListRecord> implements V
      * Setter for <code>ZDB.UI_LIST.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public UiListRecord setUpdatedAt(LocalDateTime value) {
+    public UiListRecord setUpdatedAt(final LocalDateTime value) {
         set(20, value);
         return this;
     }
@@ -490,7 +490,7 @@ public class UiListRecord extends UpdatableRecordImpl<UiListRecord> implements V
      * Setter for <code>ZDB.UI_LIST.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public UiListRecord setUpdatedBy(String value) {
+    public UiListRecord setUpdatedBy(final String value) {
         set(21, value);
         return this;
     }
@@ -841,115 +841,115 @@ public class UiListRecord extends UpdatableRecordImpl<UiListRecord> implements V
     }
 
     @Override
-    public UiListRecord value1(String value) {
+    public UiListRecord value1(final String value) {
         setKey(value);
         return this;
     }
 
     @Override
-    public UiListRecord value2(String value) {
+    public UiListRecord value2(final String value) {
         setName(value);
         return this;
     }
 
     @Override
-    public UiListRecord value3(String value) {
+    public UiListRecord value3(final String value) {
         setCode(value);
         return this;
     }
 
     @Override
-    public UiListRecord value4(String value) {
+    public UiListRecord value4(final String value) {
         setIdentifier(value);
         return this;
     }
 
     @Override
-    public UiListRecord value5(String value) {
+    public UiListRecord value5(final String value) {
         setVQuery(value);
         return this;
     }
 
     @Override
-    public UiListRecord value6(String value) {
+    public UiListRecord value6(final String value) {
         setVSearch(value);
         return this;
     }
 
     @Override
-    public UiListRecord value7(String value) {
+    public UiListRecord value7(final String value) {
         setVTable(value);
         return this;
     }
 
     @Override
-    public UiListRecord value8(String value) {
+    public UiListRecord value8(final String value) {
         setVSegment(value);
         return this;
     }
 
     @Override
-    public UiListRecord value9(Boolean value) {
+    public UiListRecord value9(final Boolean value) {
         setDynamicColumn(value);
         return this;
     }
 
     @Override
-    public UiListRecord value10(Boolean value) {
+    public UiListRecord value10(final Boolean value) {
         setDynamicSwitch(value);
         return this;
     }
 
     @Override
-    public UiListRecord value11(String value) {
+    public UiListRecord value11(final String value) {
         setOptionsAjax(value);
         return this;
     }
 
     @Override
-    public UiListRecord value12(String value) {
+    public UiListRecord value12(final String value) {
         setOptionsSubmit(value);
         return this;
     }
 
     @Override
-    public UiListRecord value13(String value) {
+    public UiListRecord value13(final String value) {
         setOptions(value);
         return this;
     }
 
     @Override
-    public UiListRecord value14(String value) {
+    public UiListRecord value14(final String value) {
         setClassCombiner(value);
         return this;
     }
 
     @Override
-    public UiListRecord value15(Boolean value) {
+    public UiListRecord value15(final Boolean value) {
         setActive(value);
         return this;
     }
 
     @Override
-    public UiListRecord value16(String value) {
+    public UiListRecord value16(final String value) {
         setSigma(value);
         return this;
     }
 
     @Override
-    public UiListRecord value17(String value) {
+    public UiListRecord value17(final String value) {
         setMetadata(value);
         return this;
     }
 
     @Override
-    public UiListRecord value18(String value) {
+    public UiListRecord value18(final String value) {
         setLanguage(value);
         return this;
     }
 
     @Override
-    public UiListRecord value19(LocalDateTime value) {
+    public UiListRecord value19(final LocalDateTime value) {
         setCreatedAt(value);
         return this;
     }
@@ -959,13 +959,13 @@ public class UiListRecord extends UpdatableRecordImpl<UiListRecord> implements V
     // -------------------------------------------------------------------------
 
     @Override
-    public UiListRecord value20(String value) {
+    public UiListRecord value20(final String value) {
         setCreatedBy(value);
         return this;
     }
 
     @Override
-    public UiListRecord value21(LocalDateTime value) {
+    public UiListRecord value21(final LocalDateTime value) {
         setUpdatedAt(value);
         return this;
     }
@@ -975,13 +975,13 @@ public class UiListRecord extends UpdatableRecordImpl<UiListRecord> implements V
     // -------------------------------------------------------------------------
 
     @Override
-    public UiListRecord value22(String value) {
+    public UiListRecord value22(final String value) {
         setUpdatedBy(value);
         return this;
     }
 
     @Override
-    public UiListRecord values(String value1, String value2, String value3, String value4, String value5, String value6, String value7, String value8, Boolean value9, Boolean value10, String value11, String value12, String value13, String value14, Boolean value15, String value16, String value17, String value18, LocalDateTime value19, String value20, LocalDateTime value21, String value22) {
+    public UiListRecord values(final String value1, final String value2, final String value3, final String value4, final String value5, final String value6, final String value7, final String value8, final Boolean value9, final Boolean value10, final String value11, final String value12, final String value13, final String value14, final Boolean value15, final String value16, final String value17, final String value18, final LocalDateTime value19, final String value20, final LocalDateTime value21, final String value22) {
         value1(value1);
         value2(value2);
         value3(value3);
@@ -1008,7 +1008,7 @@ public class UiListRecord extends UpdatableRecordImpl<UiListRecord> implements V
     }
 
     @Override
-    public void from(IUiList from) {
+    public void from(final IUiList from) {
         setKey(from.getKey());
         setName(from.getName());
         setCode(from.getCode());
@@ -1035,7 +1035,7 @@ public class UiListRecord extends UpdatableRecordImpl<UiListRecord> implements V
     }
 
     @Override
-    public <E extends IUiList> E into(E into) {
+    public <E extends IUiList> E into(final E into) {
         into.from(this);
         return into;
     }

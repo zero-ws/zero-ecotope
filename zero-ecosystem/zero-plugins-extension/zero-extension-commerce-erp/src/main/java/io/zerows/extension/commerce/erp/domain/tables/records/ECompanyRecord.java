@@ -4,7 +4,7 @@
 package io.zerows.extension.commerce.erp.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.commerce.erp.domain.tables.ECompany;
 import io.zerows.extension.commerce.erp.domain.tables.interfaces.IECompany;
 import org.jooq.Record1;
@@ -30,7 +30,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
     /**
      * Create a detached, initialised ECompanyRecord
      */
-    public ECompanyRecord(String key, String name, String alias, String title, String code, String comment, String taxCode, String taxTitle, String email, String fax, String homepage, String logo, String phone, String address, String locationId, String corporationName, String corporationPhone, String contactName, String contactPhone, String contactOnline, String companyId, String customerId, String type, String metadata, Boolean active, String sigma, String language, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public ECompanyRecord(final String key, final String name, final String alias, final String title, final String code, final String comment, final String taxCode, final String taxTitle, final String email, final String fax, final String homepage, final String logo, final String phone, final String address, final String locationId, final String corporationName, final String corporationPhone, final String contactName, final String contactPhone, final String contactOnline, final String companyId, final String customerId, final String type, final String metadata, final Boolean active, final String sigma, final String language, final LocalDateTime createdAt, final String createdBy, final LocalDateTime updatedAt, final String updatedBy) {
         super(ECompany.E_COMPANY);
 
         setKey(key);
@@ -70,7 +70,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
     /**
      * Create a detached, initialised ECompanyRecord
      */
-    public ECompanyRecord(io.zerows.extension.commerce.erp.domain.tables.pojos.ECompany value) {
+    public ECompanyRecord(final io.zerows.extension.commerce.erp.domain.tables.pojos.ECompany value) {
         super(ECompany.E_COMPANY);
 
         if (value != null) {
@@ -109,7 +109,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
         }
     }
 
-    public ECompanyRecord(io.vertx.core.json.JsonObject json) {
+    public ECompanyRecord(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -126,7 +126,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      * Setter for <code>ZDB.E_COMPANY.KEY</code>. 「key」- 公司主键
      */
     @Override
-    public ECompanyRecord setKey(String value) {
+    public ECompanyRecord setKey(final String value) {
         set(0, value);
         return this;
     }
@@ -143,7 +143,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      * Setter for <code>ZDB.E_COMPANY.NAME</code>. 「name」- 公司名称
      */
     @Override
-    public ECompanyRecord setName(String value) {
+    public ECompanyRecord setName(final String value) {
         set(1, value);
         return this;
     }
@@ -160,7 +160,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      * Setter for <code>ZDB.E_COMPANY.ALIAS</code>. 「alias」- 公司别称
      */
     @Override
-    public ECompanyRecord setAlias(String value) {
+    public ECompanyRecord setAlias(final String value) {
         set(2, value);
         return this;
     }
@@ -177,7 +177,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      * Setter for <code>ZDB.E_COMPANY.TITLE</code>. 「title」- 公司显示标题
      */
     @Override
-    public ECompanyRecord setTitle(String value) {
+    public ECompanyRecord setTitle(final String value) {
         set(3, value);
         return this;
     }
@@ -194,7 +194,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      * Setter for <code>ZDB.E_COMPANY.CODE</code>. 「code」- 公司编号
      */
     @Override
-    public ECompanyRecord setCode(String value) {
+    public ECompanyRecord setCode(final String value) {
         set(4, value);
         return this;
     }
@@ -211,7 +211,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      * Setter for <code>ZDB.E_COMPANY.COMMENT</code>. 「comment」- 公司简介
      */
     @Override
-    public ECompanyRecord setComment(String value) {
+    public ECompanyRecord setComment(final String value) {
         set(5, value);
         return this;
     }
@@ -228,7 +228,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      * Setter for <code>ZDB.E_COMPANY.TAX_CODE</code>. 「taxCode」- 公司税号
      */
     @Override
-    public ECompanyRecord setTaxCode(String value) {
+    public ECompanyRecord setTaxCode(final String value) {
         set(6, value);
         return this;
     }
@@ -245,7 +245,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      * Setter for <code>ZDB.E_COMPANY.TAX_TITLE</code>. 「taxTitle」- 开票抬头
      */
     @Override
-    public ECompanyRecord setTaxTitle(String value) {
+    public ECompanyRecord setTaxTitle(final String value) {
         set(7, value);
         return this;
     }
@@ -262,7 +262,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      * Setter for <code>ZDB.E_COMPANY.EMAIL</code>. 「email」- 企业邮箱
      */
     @Override
-    public ECompanyRecord setEmail(String value) {
+    public ECompanyRecord setEmail(final String value) {
         set(8, value);
         return this;
     }
@@ -279,7 +279,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      * Setter for <code>ZDB.E_COMPANY.FAX</code>. 「fax」- 传真号
      */
     @Override
-    public ECompanyRecord setFax(String value) {
+    public ECompanyRecord setFax(final String value) {
         set(9, value);
         return this;
     }
@@ -296,7 +296,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      * Setter for <code>ZDB.E_COMPANY.HOMEPAGE</code>. 「homepage」- 公司主页
      */
     @Override
-    public ECompanyRecord setHomepage(String value) {
+    public ECompanyRecord setHomepage(final String value) {
         set(10, value);
         return this;
     }
@@ -313,7 +313,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      * Setter for <code>ZDB.E_COMPANY.LOGO</code>. 「logo」- 附件对应的 attachment Key
      */
     @Override
-    public ECompanyRecord setLogo(String value) {
+    public ECompanyRecord setLogo(final String value) {
         set(11, value);
         return this;
     }
@@ -330,7 +330,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      * Setter for <code>ZDB.E_COMPANY.PHONE</code>. 「phone」- 公司座机
      */
     @Override
-    public ECompanyRecord setPhone(String value) {
+    public ECompanyRecord setPhone(final String value) {
         set(12, value);
         return this;
     }
@@ -347,7 +347,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      * Setter for <code>ZDB.E_COMPANY.ADDRESS</code>. 「address」- 公司地址
      */
     @Override
-    public ECompanyRecord setAddress(String value) {
+    public ECompanyRecord setAddress(final String value) {
         set(13, value);
         return this;
     }
@@ -366,7 +366,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      * 启用LBS时对应的Location主键
      */
     @Override
-    public ECompanyRecord setLocationId(String value) {
+    public ECompanyRecord setLocationId(final String value) {
         set(14, value);
         return this;
     }
@@ -385,7 +385,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      * 「corporationName」- 企业法人
      */
     @Override
-    public ECompanyRecord setCorporationName(String value) {
+    public ECompanyRecord setCorporationName(final String value) {
         set(15, value);
         return this;
     }
@@ -404,7 +404,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      * 「corporationPhone」- 法人电话
      */
     @Override
-    public ECompanyRecord setCorporationPhone(String value) {
+    public ECompanyRecord setCorporationPhone(final String value) {
         set(16, value);
         return this;
     }
@@ -421,7 +421,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      * Setter for <code>ZDB.E_COMPANY.CONTACT_NAME</code>. 「contactName」- 联系人电话
      */
     @Override
-    public ECompanyRecord setContactName(String value) {
+    public ECompanyRecord setContactName(final String value) {
         set(17, value);
         return this;
     }
@@ -440,7 +440,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      * 联系人电话
      */
     @Override
-    public ECompanyRecord setContactPhone(String value) {
+    public ECompanyRecord setContactPhone(final String value) {
         set(18, value);
         return this;
     }
@@ -459,7 +459,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      * 在线联系方式
      */
     @Override
-    public ECompanyRecord setContactOnline(String value) {
+    public ECompanyRecord setContactOnline(final String value) {
         set(19, value);
         return this;
     }
@@ -478,7 +478,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      * 公司、子公司结构时需要
      */
     @Override
-    public ECompanyRecord setCompanyId(String value) {
+    public ECompanyRecord setCompanyId(final String value) {
         set(20, value);
         return this;
     }
@@ -497,7 +497,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      * 公司作为客户时的客户信息
      */
     @Override
-    public ECompanyRecord setCustomerId(String value) {
+    public ECompanyRecord setCustomerId(final String value) {
         set(21, value);
         return this;
     }
@@ -514,7 +514,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      * Setter for <code>ZDB.E_COMPANY.TYPE</code>. 「type」- 公司分类
      */
     @Override
-    public ECompanyRecord setType(String value) {
+    public ECompanyRecord setType(final String value) {
         set(22, value);
         return this;
     }
@@ -531,7 +531,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      * Setter for <code>ZDB.E_COMPANY.METADATA</code>. 「metadata」- 附加配置
      */
     @Override
-    public ECompanyRecord setMetadata(String value) {
+    public ECompanyRecord setMetadata(final String value) {
         set(23, value);
         return this;
     }
@@ -548,7 +548,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      * Setter for <code>ZDB.E_COMPANY.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public ECompanyRecord setActive(Boolean value) {
+    public ECompanyRecord setActive(final Boolean value) {
         set(24, value);
         return this;
     }
@@ -565,7 +565,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      * Setter for <code>ZDB.E_COMPANY.SIGMA</code>. 「sigma」- 统一标识（公司所属应用）
      */
     @Override
-    public ECompanyRecord setSigma(String value) {
+    public ECompanyRecord setSigma(final String value) {
         set(25, value);
         return this;
     }
@@ -582,7 +582,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      * Setter for <code>ZDB.E_COMPANY.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public ECompanyRecord setLanguage(String value) {
+    public ECompanyRecord setLanguage(final String value) {
         set(26, value);
         return this;
     }
@@ -599,7 +599,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      * Setter for <code>ZDB.E_COMPANY.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public ECompanyRecord setCreatedAt(LocalDateTime value) {
+    public ECompanyRecord setCreatedAt(final LocalDateTime value) {
         set(27, value);
         return this;
     }
@@ -616,7 +616,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      * Setter for <code>ZDB.E_COMPANY.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public ECompanyRecord setCreatedBy(String value) {
+    public ECompanyRecord setCreatedBy(final String value) {
         set(28, value);
         return this;
     }
@@ -641,7 +641,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      * Setter for <code>ZDB.E_COMPANY.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public ECompanyRecord setUpdatedAt(LocalDateTime value) {
+    public ECompanyRecord setUpdatedAt(final LocalDateTime value) {
         set(29, value);
         return this;
     }
@@ -662,7 +662,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      * Setter for <code>ZDB.E_COMPANY.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public ECompanyRecord setUpdatedBy(String value) {
+    public ECompanyRecord setUpdatedBy(final String value) {
         set(30, value);
         return this;
     }
@@ -673,7 +673,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
     }
 
     @Override
-    public void from(IECompany from) {
+    public void from(final IECompany from) {
         setKey(from.getKey());
         setName(from.getName());
         setAlias(from.getAlias());
@@ -709,7 +709,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
     }
 
     @Override
-    public <E extends IECompany> E into(E into) {
+    public <E extends IECompany> E into(final E into) {
         into.from(this);
         return into;
     }

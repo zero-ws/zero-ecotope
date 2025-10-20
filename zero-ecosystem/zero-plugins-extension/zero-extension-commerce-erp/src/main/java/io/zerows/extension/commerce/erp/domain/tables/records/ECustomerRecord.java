@@ -4,7 +4,7 @@
 package io.zerows.extension.commerce.erp.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.commerce.erp.domain.tables.ECustomer;
 import io.zerows.extension.commerce.erp.domain.tables.interfaces.IECustomer;
 import org.jooq.Record1;
@@ -31,7 +31,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
     /**
      * Create a detached, initialised ECustomerRecord
      */
-    public ECustomerRecord(String key, String name, String code, String type, String status, String taxCode, String taxTitle, String contactName, String contactPhone, String contactEmail, String contactOnline, String title, String comment, String email, String fax, String homepage, String logo, String phone, String address, String signName, String signPhone, Boolean runUp, BigDecimal runUpAmount, String bankId, String bankCard, String metadata, Boolean active, String sigma, String language, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public ECustomerRecord(final String key, final String name, final String code, final String type, final String status, final String taxCode, final String taxTitle, final String contactName, final String contactPhone, final String contactEmail, final String contactOnline, final String title, final String comment, final String email, final String fax, final String homepage, final String logo, final String phone, final String address, final String signName, final String signPhone, final Boolean runUp, final BigDecimal runUpAmount, final String bankId, final String bankCard, final String metadata, final Boolean active, final String sigma, final String language, final LocalDateTime createdAt, final String createdBy, final LocalDateTime updatedAt, final String updatedBy) {
         super(ECustomer.E_CUSTOMER);
 
         setKey(key);
@@ -73,7 +73,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
     /**
      * Create a detached, initialised ECustomerRecord
      */
-    public ECustomerRecord(io.zerows.extension.commerce.erp.domain.tables.pojos.ECustomer value) {
+    public ECustomerRecord(final io.zerows.extension.commerce.erp.domain.tables.pojos.ECustomer value) {
         super(ECustomer.E_CUSTOMER);
 
         if (value != null) {
@@ -114,7 +114,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
         }
     }
 
-    public ECustomerRecord(io.vertx.core.json.JsonObject json) {
+    public ECustomerRecord(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -131,7 +131,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      * Setter for <code>ZDB.E_CUSTOMER.KEY</code>. 「key」- 客户ID
      */
     @Override
-    public ECustomerRecord setKey(String value) {
+    public ECustomerRecord setKey(final String value) {
         set(0, value);
         return this;
     }
@@ -148,7 +148,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      * Setter for <code>ZDB.E_CUSTOMER.NAME</code>. 「name」- 客户名称
      */
     @Override
-    public ECustomerRecord setName(String value) {
+    public ECustomerRecord setName(final String value) {
         set(1, value);
         return this;
     }
@@ -165,7 +165,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      * Setter for <code>ZDB.E_CUSTOMER.CODE</code>. 「code」- 客户编号
      */
     @Override
-    public ECustomerRecord setCode(String value) {
+    public ECustomerRecord setCode(final String value) {
         set(2, value);
         return this;
     }
@@ -182,7 +182,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      * Setter for <code>ZDB.E_CUSTOMER.TYPE</code>. 「type」- 客户分类（不同类型代表不同客户）
      */
     @Override
-    public ECustomerRecord setType(String value) {
+    public ECustomerRecord setType(final String value) {
         set(3, value);
         return this;
     }
@@ -199,7 +199,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      * Setter for <code>ZDB.E_CUSTOMER.STATUS</code>. 「status」- 客户状态
      */
     @Override
-    public ECustomerRecord setStatus(String value) {
+    public ECustomerRecord setStatus(final String value) {
         set(4, value);
         return this;
     }
@@ -216,7 +216,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      * Setter for <code>ZDB.E_CUSTOMER.TAX_CODE</code>. 「taxCode」- 税号
      */
     @Override
-    public ECustomerRecord setTaxCode(String value) {
+    public ECustomerRecord setTaxCode(final String value) {
         set(5, value);
         return this;
     }
@@ -233,7 +233,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      * Setter for <code>ZDB.E_CUSTOMER.TAX_TITLE</code>. 「taxTitle」- 开票抬头
      */
     @Override
-    public ECustomerRecord setTaxTitle(String value) {
+    public ECustomerRecord setTaxTitle(final String value) {
         set(6, value);
         return this;
     }
@@ -250,7 +250,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      * Setter for <code>ZDB.E_CUSTOMER.CONTACT_NAME</code>. 「contactName」- 联系人姓名
      */
     @Override
-    public ECustomerRecord setContactName(String value) {
+    public ECustomerRecord setContactName(final String value) {
         set(7, value);
         return this;
     }
@@ -269,7 +269,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      * 联系人电话
      */
     @Override
-    public ECustomerRecord setContactPhone(String value) {
+    public ECustomerRecord setContactPhone(final String value) {
         set(8, value);
         return this;
     }
@@ -288,7 +288,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      * 联系人Email
      */
     @Override
-    public ECustomerRecord setContactEmail(String value) {
+    public ECustomerRecord setContactEmail(final String value) {
         set(9, value);
         return this;
     }
@@ -307,7 +307,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      * 在线联系方式
      */
     @Override
-    public ECustomerRecord setContactOnline(String value) {
+    public ECustomerRecord setContactOnline(final String value) {
         set(10, value);
         return this;
     }
@@ -324,7 +324,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      * Setter for <code>ZDB.E_CUSTOMER.TITLE</code>. 「title」- 客户显示标题
      */
     @Override
-    public ECustomerRecord setTitle(String value) {
+    public ECustomerRecord setTitle(final String value) {
         set(11, value);
         return this;
     }
@@ -341,7 +341,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      * Setter for <code>ZDB.E_CUSTOMER.COMMENT</code>. 「comment」- 客户备注
      */
     @Override
-    public ECustomerRecord setComment(String value) {
+    public ECustomerRecord setComment(final String value) {
         set(12, value);
         return this;
     }
@@ -358,7 +358,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      * Setter for <code>ZDB.E_CUSTOMER.EMAIL</code>. 「email」- 企业邮箱
      */
     @Override
-    public ECustomerRecord setEmail(String value) {
+    public ECustomerRecord setEmail(final String value) {
         set(13, value);
         return this;
     }
@@ -375,7 +375,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      * Setter for <code>ZDB.E_CUSTOMER.FAX</code>. 「fax」- 传真号
      */
     @Override
-    public ECustomerRecord setFax(String value) {
+    public ECustomerRecord setFax(final String value) {
         set(14, value);
         return this;
     }
@@ -392,7 +392,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      * Setter for <code>ZDB.E_CUSTOMER.HOMEPAGE</code>. 「homepage」- 客户主页
      */
     @Override
-    public ECustomerRecord setHomepage(String value) {
+    public ECustomerRecord setHomepage(final String value) {
         set(15, value);
         return this;
     }
@@ -409,7 +409,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      * Setter for <code>ZDB.E_CUSTOMER.LOGO</code>. 「logo」- 附件对应的 attachment Key
      */
     @Override
-    public ECustomerRecord setLogo(String value) {
+    public ECustomerRecord setLogo(final String value) {
         set(16, value);
         return this;
     }
@@ -426,7 +426,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      * Setter for <code>ZDB.E_CUSTOMER.PHONE</code>. 「phone」- 客户座机
      */
     @Override
-    public ECustomerRecord setPhone(String value) {
+    public ECustomerRecord setPhone(final String value) {
         set(17, value);
         return this;
     }
@@ -443,7 +443,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      * Setter for <code>ZDB.E_CUSTOMER.ADDRESS</code>. 「address」- 客户地址
      */
     @Override
-    public ECustomerRecord setAddress(String value) {
+    public ECustomerRecord setAddress(final String value) {
         set(18, value);
         return this;
     }
@@ -460,7 +460,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      * Setter for <code>ZDB.E_CUSTOMER.SIGN_NAME</code>. 「signName」- 签单人姓名
      */
     @Override
-    public ECustomerRecord setSignName(String value) {
+    public ECustomerRecord setSignName(final String value) {
         set(19, value);
         return this;
     }
@@ -477,7 +477,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      * Setter for <code>ZDB.E_CUSTOMER.SIGN_PHONE</code>. 「signPhone」- 签单人电话
      */
     @Override
-    public ECustomerRecord setSignPhone(String value) {
+    public ECustomerRecord setSignPhone(final String value) {
         set(20, value);
         return this;
     }
@@ -494,7 +494,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      * Setter for <code>ZDB.E_CUSTOMER.RUN_UP</code>. 「runUp」- 挂账属性
      */
     @Override
-    public ECustomerRecord setRunUp(Boolean value) {
+    public ECustomerRecord setRunUp(final Boolean value) {
         set(21, value);
         return this;
     }
@@ -511,7 +511,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      * Setter for <code>ZDB.E_CUSTOMER.RUN_UP_AMOUNT</code>. 「runUpAmount」- 挂账限额
      */
     @Override
-    public ECustomerRecord setRunUpAmount(BigDecimal value) {
+    public ECustomerRecord setRunUpAmount(final BigDecimal value) {
         set(22, value);
         return this;
     }
@@ -528,7 +528,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      * Setter for <code>ZDB.E_CUSTOMER.BANK_ID</code>. 「bankId」- 开户行
      */
     @Override
-    public ECustomerRecord setBankId(String value) {
+    public ECustomerRecord setBankId(final String value) {
         set(23, value);
         return this;
     }
@@ -545,7 +545,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      * Setter for <code>ZDB.E_CUSTOMER.BANK_CARD</code>. 「bankCard」- 开户行账号
      */
     @Override
-    public ECustomerRecord setBankCard(String value) {
+    public ECustomerRecord setBankCard(final String value) {
         set(24, value);
         return this;
     }
@@ -562,7 +562,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      * Setter for <code>ZDB.E_CUSTOMER.METADATA</code>. 「metadata」- 附加配置
      */
     @Override
-    public ECustomerRecord setMetadata(String value) {
+    public ECustomerRecord setMetadata(final String value) {
         set(25, value);
         return this;
     }
@@ -579,7 +579,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      * Setter for <code>ZDB.E_CUSTOMER.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public ECustomerRecord setActive(Boolean value) {
+    public ECustomerRecord setActive(final Boolean value) {
         set(26, value);
         return this;
     }
@@ -596,7 +596,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      * Setter for <code>ZDB.E_CUSTOMER.SIGMA</code>. 「sigma」- 统一标识（客户所属应用）
      */
     @Override
-    public ECustomerRecord setSigma(String value) {
+    public ECustomerRecord setSigma(final String value) {
         set(27, value);
         return this;
     }
@@ -613,7 +613,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      * Setter for <code>ZDB.E_CUSTOMER.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public ECustomerRecord setLanguage(String value) {
+    public ECustomerRecord setLanguage(final String value) {
         set(28, value);
         return this;
     }
@@ -630,7 +630,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      * Setter for <code>ZDB.E_CUSTOMER.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public ECustomerRecord setCreatedAt(LocalDateTime value) {
+    public ECustomerRecord setCreatedAt(final LocalDateTime value) {
         set(29, value);
         return this;
     }
@@ -647,7 +647,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      * Setter for <code>ZDB.E_CUSTOMER.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public ECustomerRecord setCreatedBy(String value) {
+    public ECustomerRecord setCreatedBy(final String value) {
         set(30, value);
         return this;
     }
@@ -672,7 +672,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      * Setter for <code>ZDB.E_CUSTOMER.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public ECustomerRecord setUpdatedAt(LocalDateTime value) {
+    public ECustomerRecord setUpdatedAt(final LocalDateTime value) {
         set(31, value);
         return this;
     }
@@ -693,7 +693,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      * Setter for <code>ZDB.E_CUSTOMER.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public ECustomerRecord setUpdatedBy(String value) {
+    public ECustomerRecord setUpdatedBy(final String value) {
         set(32, value);
         return this;
     }
@@ -704,7 +704,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
     }
 
     @Override
-    public void from(IECustomer from) {
+    public void from(final IECustomer from) {
         setKey(from.getKey());
         setName(from.getName());
         setCode(from.getCode());
@@ -742,7 +742,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
     }
 
     @Override
-    public <E extends IECustomer> E into(E into) {
+    public <E extends IECustomer> E into(final E into) {
         into.from(this);
         return into;
     }

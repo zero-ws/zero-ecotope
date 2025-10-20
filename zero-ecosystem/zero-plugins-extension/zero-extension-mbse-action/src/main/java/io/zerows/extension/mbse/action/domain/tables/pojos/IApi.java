@@ -4,7 +4,7 @@
 package io.zerows.extension.mbse.action.domain.tables.pojos;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.mbse.action.domain.tables.interfaces.IIApi;
 
 import java.time.LocalDateTime;
@@ -52,7 +52,7 @@ public class IApi implements VertxPojo, IIApi {
     public IApi() {
     }
 
-    public IApi(IIApi value) {
+    public IApi(final IIApi value) {
         this.key = value.getKey();
         this.name = value.getName();
         this.uri = value.getUri();
@@ -87,37 +87,37 @@ public class IApi implements VertxPojo, IIApi {
     }
 
     public IApi(
-        String key,
-        String name,
-        String uri,
-        String method,
-        String consumes,
-        String produces,
-        Boolean secure,
-        String comment,
-        String type,
-        String paramMode,
-        String paramRequired,
-        String paramContained,
-        String inRule,
-        String inMapping,
-        String inPlug,
-        String inScript,
-        String outWriter,
-        String workerType,
-        String workerAddress,
-        String workerConsumer,
-        String workerClass,
-        String workerJs,
-        String serviceId,
-        String sigma,
-        String language,
-        Boolean active,
-        String metadata,
-        LocalDateTime createdAt,
-        String createdBy,
-        LocalDateTime updatedAt,
-        String updatedBy
+        final String key,
+        final String name,
+        final String uri,
+        final String method,
+        final String consumes,
+        final String produces,
+        final Boolean secure,
+        final String comment,
+        final String type,
+        final String paramMode,
+        final String paramRequired,
+        final String paramContained,
+        final String inRule,
+        final String inMapping,
+        final String inPlug,
+        final String inScript,
+        final String outWriter,
+        final String workerType,
+        final String workerAddress,
+        final String workerConsumer,
+        final String workerClass,
+        final String workerJs,
+        final String serviceId,
+        final String sigma,
+        final String language,
+        final Boolean active,
+        final String metadata,
+        final LocalDateTime createdAt,
+        final String createdBy,
+        final LocalDateTime updatedAt,
+        final String updatedBy
     ) {
         this.key = key;
         this.name = name;
@@ -152,7 +152,7 @@ public class IApi implements VertxPojo, IIApi {
         this.updatedBy = updatedBy;
     }
 
-    public IApi(io.vertx.core.json.JsonObject json) {
+    public IApi(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -169,7 +169,7 @@ public class IApi implements VertxPojo, IIApi {
      * Setter for <code>ZDB.I_API.KEY</code>. 「key」- 接口ID
      */
     @Override
-    public IApi setKey(String key) {
+    public IApi setKey(final String key) {
         this.key = key;
         return this;
     }
@@ -186,7 +186,7 @@ public class IApi implements VertxPojo, IIApi {
      * Setter for <code>ZDB.I_API.NAME</code>. 「name」- 接口名称
      */
     @Override
-    public IApi setName(String name) {
+    public IApi setName(final String name) {
         this.name = name;
         return this;
     }
@@ -203,7 +203,7 @@ public class IApi implements VertxPojo, IIApi {
      * Setter for <code>ZDB.I_API.URI</code>. 「uri」- 接口路径，安全路径位于 /api 之下
      */
     @Override
-    public IApi setUri(String uri) {
+    public IApi setUri(final String uri) {
         this.uri = uri;
         return this;
     }
@@ -220,7 +220,7 @@ public class IApi implements VertxPojo, IIApi {
      * Setter for <code>ZDB.I_API.METHOD</code>. 「method」- 接口对应的HTTP方法
      */
     @Override
-    public IApi setMethod(String method) {
+    public IApi setMethod(final String method) {
         this.method = method;
         return this;
     }
@@ -237,7 +237,7 @@ public class IApi implements VertxPojo, IIApi {
      * Setter for <code>ZDB.I_API.CONSUMES</code>. 「consumes」- 当前接口使用的客户端 MIME
      */
     @Override
-    public IApi setConsumes(String consumes) {
+    public IApi setConsumes(final String consumes) {
         this.consumes = consumes;
         return this;
     }
@@ -254,7 +254,7 @@ public class IApi implements VertxPojo, IIApi {
      * Setter for <code>ZDB.I_API.PRODUCES</code>. 「produces」- 当前接口使用的服务端 MIME
      */
     @Override
-    public IApi setProduces(String produces) {
+    public IApi setProduces(final String produces) {
         this.produces = produces;
         return this;
     }
@@ -271,7 +271,7 @@ public class IApi implements VertxPojo, IIApi {
      * Setter for <code>ZDB.I_API.SECURE</code>. 「secure」- 是否走安全通道，默认为TRUE
      */
     @Override
-    public IApi setSecure(Boolean secure) {
+    public IApi setSecure(final Boolean secure) {
         this.secure = secure;
         return this;
     }
@@ -288,7 +288,7 @@ public class IApi implements VertxPojo, IIApi {
      * Setter for <code>ZDB.I_API.COMMENT</code>. 「comment」- 备注信息
      */
     @Override
-    public IApi setComment(String comment) {
+    public IApi setComment(final String comment) {
         this.comment = comment;
         return this;
     }
@@ -307,7 +307,7 @@ public class IApi implements VertxPojo, IIApi {
      * REQUEST-RESPONSE / PUBLISH-SUBSCRIBE
      */
     @Override
-    public IApi setType(String type) {
+    public IApi setType(final String type) {
         this.type = type;
         return this;
     }
@@ -326,7 +326,7 @@ public class IApi implements VertxPojo, IIApi {
      * BODY / DEFINE / PATH
      */
     @Override
-    public IApi setParamMode(String paramMode) {
+    public IApi setParamMode(final String paramMode) {
         this.paramMode = paramMode;
         return this;
     }
@@ -345,7 +345,7 @@ public class IApi implements VertxPojo, IIApi {
      * 必须参数表，一个JsonArray用于返回 400基本验证（验证Query和Path）
      */
     @Override
-    public IApi setParamRequired(String paramRequired) {
+    public IApi setParamRequired(final String paramRequired) {
         this.paramRequired = paramRequired;
         return this;
     }
@@ -364,7 +364,7 @@ public class IApi implements VertxPojo, IIApi {
      * 必须参数表，一个JsonArray用于返回 400基本验证（验证Body）
      */
     @Override
-    public IApi setParamContained(String paramContained) {
+    public IApi setParamContained(final String paramContained) {
         this.paramContained = paramContained;
         return this;
     }
@@ -381,7 +381,7 @@ public class IApi implements VertxPojo, IIApi {
      * Setter for <code>ZDB.I_API.IN_RULE</code>. 「inRule」- 参数验证、转换基本规则
      */
     @Override
-    public IApi setInRule(String inRule) {
+    public IApi setInRule(final String inRule) {
         this.inRule = inRule;
         return this;
     }
@@ -398,7 +398,7 @@ public class IApi implements VertxPojo, IIApi {
      * Setter for <code>ZDB.I_API.IN_MAPPING</code>. 「inMapping」- 参数映射规则
      */
     @Override
-    public IApi setInMapping(String inMapping) {
+    public IApi setInMapping(final String inMapping) {
         this.inMapping = inMapping;
         return this;
     }
@@ -415,7 +415,7 @@ public class IApi implements VertxPojo, IIApi {
      * Setter for <code>ZDB.I_API.IN_PLUG</code>. 「inPlug」- 参数请求流程中的插件
      */
     @Override
-    public IApi setInPlug(String inPlug) {
+    public IApi setInPlug(final String inPlug) {
         this.inPlug = inPlug;
         return this;
     }
@@ -432,7 +432,7 @@ public class IApi implements VertxPojo, IIApi {
      * Setter for <code>ZDB.I_API.IN_SCRIPT</code>. 「inScript」- 【保留】参数请求流程中的脚本控制
      */
     @Override
-    public IApi setInScript(String inScript) {
+    public IApi setInScript(final String inScript) {
         this.inScript = inScript;
         return this;
     }
@@ -449,7 +449,7 @@ public class IApi implements VertxPojo, IIApi {
      * Setter for <code>ZDB.I_API.OUT_WRITER</code>. 「outWriter」- 响应格式处理器
      */
     @Override
-    public IApi setOutWriter(String outWriter) {
+    public IApi setOutWriter(final String outWriter) {
         this.outWriter = outWriter;
         return this;
     }
@@ -468,7 +468,7 @@ public class IApi implements VertxPojo, IIApi {
      * / PLUG / STD
      */
     @Override
-    public IApi setWorkerType(String workerType) {
+    public IApi setWorkerType(final String workerType) {
         this.workerType = workerType;
         return this;
     }
@@ -485,7 +485,7 @@ public class IApi implements VertxPojo, IIApi {
      * Setter for <code>ZDB.I_API.WORKER_ADDRESS</code>. 「workerAddress」- 请求发送地址
      */
     @Override
-    public IApi setWorkerAddress(String workerAddress) {
+    public IApi setWorkerAddress(final String workerAddress) {
         this.workerAddress = workerAddress;
         return this;
     }
@@ -504,7 +504,7 @@ public class IApi implements VertxPojo, IIApi {
      * 请求地址消费专用组件
      */
     @Override
-    public IApi setWorkerConsumer(String workerConsumer) {
+    public IApi setWorkerConsumer(final String workerConsumer) {
         this.workerConsumer = workerConsumer;
         return this;
     }
@@ -523,7 +523,7 @@ public class IApi implements VertxPojo, IIApi {
      * PLUG专用，请求执行器对应的JavaClass名称
      */
     @Override
-    public IApi setWorkerClass(String workerClass) {
+    public IApi setWorkerClass(final String workerClass) {
         this.workerClass = workerClass;
         return this;
     }
@@ -542,7 +542,7 @@ public class IApi implements VertxPojo, IIApi {
      * 专用，JavaScript路径：running/workers/&lt;app&gt;/下的执行器
      */
     @Override
-    public IApi setWorkerJs(String workerJs) {
+    public IApi setWorkerJs(final String workerJs) {
         this.workerJs = workerJs;
         return this;
     }
@@ -559,7 +559,7 @@ public class IApi implements VertxPojo, IIApi {
      * Setter for <code>ZDB.I_API.SERVICE_ID</code>. 「serviceId」- 关联的服务ID
      */
     @Override
-    public IApi setServiceId(String serviceId) {
+    public IApi setServiceId(final String serviceId) {
         this.serviceId = serviceId;
         return this;
     }
@@ -576,7 +576,7 @@ public class IApi implements VertxPojo, IIApi {
      * Setter for <code>ZDB.I_API.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public IApi setSigma(String sigma) {
+    public IApi setSigma(final String sigma) {
         this.sigma = sigma;
         return this;
     }
@@ -593,7 +593,7 @@ public class IApi implements VertxPojo, IIApi {
      * Setter for <code>ZDB.I_API.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public IApi setLanguage(String language) {
+    public IApi setLanguage(final String language) {
         this.language = language;
         return this;
     }
@@ -610,7 +610,7 @@ public class IApi implements VertxPojo, IIApi {
      * Setter for <code>ZDB.I_API.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public IApi setActive(Boolean active) {
+    public IApi setActive(final Boolean active) {
         this.active = active;
         return this;
     }
@@ -627,7 +627,7 @@ public class IApi implements VertxPojo, IIApi {
      * Setter for <code>ZDB.I_API.METADATA</code>. 「metadata」- 附加配置数据
      */
     @Override
-    public IApi setMetadata(String metadata) {
+    public IApi setMetadata(final String metadata) {
         this.metadata = metadata;
         return this;
     }
@@ -644,7 +644,7 @@ public class IApi implements VertxPojo, IIApi {
      * Setter for <code>ZDB.I_API.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public IApi setCreatedAt(LocalDateTime createdAt) {
+    public IApi setCreatedAt(final LocalDateTime createdAt) {
         this.createdAt = createdAt;
         return this;
     }
@@ -661,7 +661,7 @@ public class IApi implements VertxPojo, IIApi {
      * Setter for <code>ZDB.I_API.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public IApi setCreatedBy(String createdBy) {
+    public IApi setCreatedBy(final String createdBy) {
         this.createdBy = createdBy;
         return this;
     }
@@ -678,7 +678,7 @@ public class IApi implements VertxPojo, IIApi {
      * Setter for <code>ZDB.I_API.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public IApi setUpdatedAt(LocalDateTime updatedAt) {
+    public IApi setUpdatedAt(final LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
         return this;
     }
@@ -695,13 +695,13 @@ public class IApi implements VertxPojo, IIApi {
      * Setter for <code>ZDB.I_API.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public IApi setUpdatedBy(String updatedBy) {
+    public IApi setUpdatedBy(final String updatedBy) {
         this.updatedBy = updatedBy;
         return this;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
@@ -907,7 +907,7 @@ public class IApi implements VertxPojo, IIApi {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("IApi (");
+        final StringBuilder sb = new StringBuilder("IApi (");
 
         sb.append(key);
         sb.append(", ").append(name);
@@ -950,7 +950,7 @@ public class IApi implements VertxPojo, IIApi {
     // -------------------------------------------------------------------------
 
     @Override
-    public void from(IIApi from) {
+    public void from(final IIApi from) {
         setKey(from.getKey());
         setName(from.getName());
         setUri(from.getUri());
@@ -985,7 +985,7 @@ public class IApi implements VertxPojo, IIApi {
     }
 
     @Override
-    public <E extends IIApi> E into(E into) {
+    public <E extends IIApi> E into(final E into) {
         into.from(this);
         return into;
     }

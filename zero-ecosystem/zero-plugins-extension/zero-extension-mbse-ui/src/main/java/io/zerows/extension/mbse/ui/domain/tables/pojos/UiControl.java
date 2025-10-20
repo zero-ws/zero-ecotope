@@ -4,7 +4,7 @@
 package io.zerows.extension.mbse.ui.domain.tables.pojos;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.mbse.ui.domain.tables.interfaces.IUiControl;
 
 import java.time.LocalDateTime;
@@ -40,7 +40,7 @@ public class UiControl implements VertxPojo, IUiControl {
     public UiControl() {
     }
 
-    public UiControl(IUiControl value) {
+    public UiControl(final IUiControl value) {
         this.key = value.getKey();
         this.sign = value.getSign();
         this.pageId = value.getPageId();
@@ -63,25 +63,25 @@ public class UiControl implements VertxPojo, IUiControl {
     }
 
     public UiControl(
-        String key,
-        String sign,
-        String pageId,
-        String type,
-        String containerName,
-        String containerConfig,
-        String assist,
-        String grid,
-        String componentName,
-        String componentConfig,
-        String componentData,
-        Boolean active,
-        String sigma,
-        String metadata,
-        String language,
-        LocalDateTime createdAt,
-        String createdBy,
-        LocalDateTime updatedAt,
-        String updatedBy
+        final String key,
+        final String sign,
+        final String pageId,
+        final String type,
+        final String containerName,
+        final String containerConfig,
+        final String assist,
+        final String grid,
+        final String componentName,
+        final String componentConfig,
+        final String componentData,
+        final Boolean active,
+        final String sigma,
+        final String metadata,
+        final String language,
+        final LocalDateTime createdAt,
+        final String createdBy,
+        final LocalDateTime updatedAt,
+        final String updatedBy
     ) {
         this.key = key;
         this.sign = sign;
@@ -104,7 +104,7 @@ public class UiControl implements VertxPojo, IUiControl {
         this.updatedBy = updatedBy;
     }
 
-    public UiControl(io.vertx.core.json.JsonObject json) {
+    public UiControl(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -121,7 +121,7 @@ public class UiControl implements VertxPojo, IUiControl {
      * Setter for <code>ZDB.UI_CONTROL.KEY</code>. 「key」- 主键
      */
     @Override
-    public UiControl setKey(String key) {
+    public UiControl setKey(final String key) {
         this.key = key;
         return this;
     }
@@ -138,7 +138,7 @@ public class UiControl implements VertxPojo, IUiControl {
      * Setter for <code>ZDB.UI_CONTROL.SIGN</code>. 「sign」- 控件使用的签名基本信息
      */
     @Override
-    public UiControl setSign(String sign) {
+    public UiControl setSign(final String sign) {
         this.sign = sign;
         return this;
     }
@@ -155,7 +155,7 @@ public class UiControl implements VertxPojo, IUiControl {
      * Setter for <code>ZDB.UI_CONTROL.PAGE_ID</code>. 「pageId」- 当前控件所在的页面ID
      */
     @Override
-    public UiControl setPageId(String pageId) {
+    public UiControl setPageId(final String pageId) {
         this.pageId = pageId;
         return this;
     }
@@ -174,7 +174,7 @@ public class UiControl implements VertxPojo, IUiControl {
      * COMPONENT / FORM / LIST，其中 FORM / LIST 需要访问子表
      */
     @Override
-    public UiControl setType(String type) {
+    public UiControl setType(final String type) {
         this.type = type;
         return this;
     }
@@ -193,7 +193,7 @@ public class UiControl implements VertxPojo, IUiControl {
      * 当前控件使用的容器名
      */
     @Override
-    public UiControl setContainerName(String containerName) {
+    public UiControl setContainerName(final String containerName) {
         this.containerName = containerName;
         return this;
     }
@@ -212,7 +212,7 @@ public class UiControl implements VertxPojo, IUiControl {
      * 「containerConfig」- 当前控件使用的容器配置
      */
     @Override
-    public UiControl setContainerConfig(String containerConfig) {
+    public UiControl setContainerConfig(final String containerConfig) {
         this.containerConfig = containerConfig;
         return this;
     }
@@ -229,7 +229,7 @@ public class UiControl implements VertxPojo, IUiControl {
      * Setter for <code>ZDB.UI_CONTROL.ASSIST</code>. 「assist」 - 辅助数据（容器专用）
      */
     @Override
-    public UiControl setAssist(String assist) {
+    public UiControl setAssist(final String assist) {
         this.assist = assist;
         return this;
     }
@@ -246,7 +246,7 @@ public class UiControl implements VertxPojo, IUiControl {
      * Setter for <code>ZDB.UI_CONTROL.GRID</code>. 「grid」 - 容器专用
      */
     @Override
-    public UiControl setGrid(String grid) {
+    public UiControl setGrid(final String grid) {
         this.grid = grid;
         return this;
     }
@@ -265,7 +265,7 @@ public class UiControl implements VertxPojo, IUiControl {
      * 当前控件使用的组件名
      */
     @Override
-    public UiControl setComponentName(String componentName) {
+    public UiControl setComponentName(final String componentName) {
         this.componentName = componentName;
         return this;
     }
@@ -284,7 +284,7 @@ public class UiControl implements VertxPojo, IUiControl {
      * 「componentConfig」- 当前控件使用的配置
      */
     @Override
-    public UiControl setComponentConfig(String componentConfig) {
+    public UiControl setComponentConfig(final String componentConfig) {
         this.componentConfig = componentConfig;
         return this;
     }
@@ -303,7 +303,7 @@ public class UiControl implements VertxPojo, IUiControl {
      * 当前控件使用的数据，使用表达式结构
      */
     @Override
-    public UiControl setComponentData(String componentData) {
+    public UiControl setComponentData(final String componentData) {
         this.componentData = componentData;
         return this;
     }
@@ -320,7 +320,7 @@ public class UiControl implements VertxPojo, IUiControl {
      * Setter for <code>ZDB.UI_CONTROL.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public UiControl setActive(Boolean active) {
+    public UiControl setActive(final Boolean active) {
         this.active = active;
         return this;
     }
@@ -337,7 +337,7 @@ public class UiControl implements VertxPojo, IUiControl {
      * Setter for <code>ZDB.UI_CONTROL.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public UiControl setSigma(String sigma) {
+    public UiControl setSigma(final String sigma) {
         this.sigma = sigma;
         return this;
     }
@@ -354,7 +354,7 @@ public class UiControl implements VertxPojo, IUiControl {
      * Setter for <code>ZDB.UI_CONTROL.METADATA</code>. 「metadata」- 附加配置
      */
     @Override
-    public UiControl setMetadata(String metadata) {
+    public UiControl setMetadata(final String metadata) {
         this.metadata = metadata;
         return this;
     }
@@ -371,7 +371,7 @@ public class UiControl implements VertxPojo, IUiControl {
      * Setter for <code>ZDB.UI_CONTROL.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public UiControl setLanguage(String language) {
+    public UiControl setLanguage(final String language) {
         this.language = language;
         return this;
     }
@@ -388,7 +388,7 @@ public class UiControl implements VertxPojo, IUiControl {
      * Setter for <code>ZDB.UI_CONTROL.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public UiControl setCreatedAt(LocalDateTime createdAt) {
+    public UiControl setCreatedAt(final LocalDateTime createdAt) {
         this.createdAt = createdAt;
         return this;
     }
@@ -405,7 +405,7 @@ public class UiControl implements VertxPojo, IUiControl {
      * Setter for <code>ZDB.UI_CONTROL.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public UiControl setCreatedBy(String createdBy) {
+    public UiControl setCreatedBy(final String createdBy) {
         this.createdBy = createdBy;
         return this;
     }
@@ -422,7 +422,7 @@ public class UiControl implements VertxPojo, IUiControl {
      * Setter for <code>ZDB.UI_CONTROL.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public UiControl setUpdatedAt(LocalDateTime updatedAt) {
+    public UiControl setUpdatedAt(final LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
         return this;
     }
@@ -439,13 +439,13 @@ public class UiControl implements VertxPojo, IUiControl {
      * Setter for <code>ZDB.UI_CONTROL.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public UiControl setUpdatedBy(String updatedBy) {
+    public UiControl setUpdatedBy(final String updatedBy) {
         this.updatedBy = updatedBy;
         return this;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
@@ -579,7 +579,7 @@ public class UiControl implements VertxPojo, IUiControl {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("UiControl (");
+        final StringBuilder sb = new StringBuilder("UiControl (");
 
         sb.append(key);
         sb.append(", ").append(sign);
@@ -610,7 +610,7 @@ public class UiControl implements VertxPojo, IUiControl {
     // -------------------------------------------------------------------------
 
     @Override
-    public void from(IUiControl from) {
+    public void from(final IUiControl from) {
         setKey(from.getKey());
         setSign(from.getSign());
         setPageId(from.getPageId());
@@ -633,7 +633,7 @@ public class UiControl implements VertxPojo, IUiControl {
     }
 
     @Override
-    public <E extends IUiControl> E into(E into) {
+    public <E extends IUiControl> E into(final E into) {
         into.from(this);
         return into;
     }

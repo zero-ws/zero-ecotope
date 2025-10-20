@@ -4,7 +4,7 @@
 package io.zerows.extension.commerce.erp.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.commerce.erp.domain.tables.EDept;
 import io.zerows.extension.commerce.erp.domain.tables.interfaces.IEDept;
 import org.jooq.Field;
@@ -33,7 +33,7 @@ public class EDeptRecord extends UpdatableRecordImpl<EDeptRecord> implements Ver
     /**
      * Create a detached, initialised EDeptRecord
      */
-    public EDeptRecord(String key, String name, String code, String managerId, String managerName, String companyId, String deptId, String comment, String metadata, Boolean active, String sigma, String language, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public EDeptRecord(final String key, final String name, final String code, final String managerId, final String managerName, final String companyId, final String deptId, final String comment, final String metadata, final Boolean active, final String sigma, final String language, final LocalDateTime createdAt, final String createdBy, final LocalDateTime updatedAt, final String updatedBy) {
         super(EDept.E_DEPT);
 
         setKey(key);
@@ -58,7 +58,7 @@ public class EDeptRecord extends UpdatableRecordImpl<EDeptRecord> implements Ver
     /**
      * Create a detached, initialised EDeptRecord
      */
-    public EDeptRecord(io.zerows.extension.commerce.erp.domain.tables.pojos.EDept value) {
+    public EDeptRecord(final io.zerows.extension.commerce.erp.domain.tables.pojos.EDept value) {
         super(EDept.E_DEPT);
 
         if (value != null) {
@@ -82,7 +82,7 @@ public class EDeptRecord extends UpdatableRecordImpl<EDeptRecord> implements Ver
         }
     }
 
-    public EDeptRecord(io.vertx.core.json.JsonObject json) {
+    public EDeptRecord(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -99,7 +99,7 @@ public class EDeptRecord extends UpdatableRecordImpl<EDeptRecord> implements Ver
      * Setter for <code>ZDB.E_DEPT.KEY</code>. 「key」- 部门主键
      */
     @Override
-    public EDeptRecord setKey(String value) {
+    public EDeptRecord setKey(final String value) {
         set(0, value);
         return this;
     }
@@ -116,7 +116,7 @@ public class EDeptRecord extends UpdatableRecordImpl<EDeptRecord> implements Ver
      * Setter for <code>ZDB.E_DEPT.NAME</code>. 「name」- 部门名称
      */
     @Override
-    public EDeptRecord setName(String value) {
+    public EDeptRecord setName(final String value) {
         set(1, value);
         return this;
     }
@@ -133,7 +133,7 @@ public class EDeptRecord extends UpdatableRecordImpl<EDeptRecord> implements Ver
      * Setter for <code>ZDB.E_DEPT.CODE</code>. 「code」- 部门编号
      */
     @Override
-    public EDeptRecord setCode(String value) {
+    public EDeptRecord setCode(final String value) {
         set(2, value);
         return this;
     }
@@ -150,7 +150,7 @@ public class EDeptRecord extends UpdatableRecordImpl<EDeptRecord> implements Ver
      * Setter for <code>ZDB.E_DEPT.MANAGER_ID</code>. 「managerId」- 部门经理
      */
     @Override
-    public EDeptRecord setManagerId(String value) {
+    public EDeptRecord setManagerId(final String value) {
         set(3, value);
         return this;
     }
@@ -167,7 +167,7 @@ public class EDeptRecord extends UpdatableRecordImpl<EDeptRecord> implements Ver
      * Setter for <code>ZDB.E_DEPT.MANAGER_NAME</code>. 「managerName」- 部门名称
      */
     @Override
-    public EDeptRecord setManagerName(String value) {
+    public EDeptRecord setManagerName(final String value) {
         set(4, value);
         return this;
     }
@@ -184,7 +184,7 @@ public class EDeptRecord extends UpdatableRecordImpl<EDeptRecord> implements Ver
      * Setter for <code>ZDB.E_DEPT.COMPANY_ID</code>. 「companyId」- 所属公司
      */
     @Override
-    public EDeptRecord setCompanyId(String value) {
+    public EDeptRecord setCompanyId(final String value) {
         set(5, value);
         return this;
     }
@@ -201,7 +201,7 @@ public class EDeptRecord extends UpdatableRecordImpl<EDeptRecord> implements Ver
      * Setter for <code>ZDB.E_DEPT.DEPT_ID</code>. 「deptId」- 父部门
      */
     @Override
-    public EDeptRecord setDeptId(String value) {
+    public EDeptRecord setDeptId(final String value) {
         set(6, value);
         return this;
     }
@@ -218,7 +218,7 @@ public class EDeptRecord extends UpdatableRecordImpl<EDeptRecord> implements Ver
      * Setter for <code>ZDB.E_DEPT.COMMENT</code>. 「comment」- 部门备注
      */
     @Override
-    public EDeptRecord setComment(String value) {
+    public EDeptRecord setComment(final String value) {
         set(7, value);
         return this;
     }
@@ -235,7 +235,7 @@ public class EDeptRecord extends UpdatableRecordImpl<EDeptRecord> implements Ver
      * Setter for <code>ZDB.E_DEPT.METADATA</code>. 「metadata」- 附加配置
      */
     @Override
-    public EDeptRecord setMetadata(String value) {
+    public EDeptRecord setMetadata(final String value) {
         set(8, value);
         return this;
     }
@@ -252,7 +252,7 @@ public class EDeptRecord extends UpdatableRecordImpl<EDeptRecord> implements Ver
      * Setter for <code>ZDB.E_DEPT.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public EDeptRecord setActive(Boolean value) {
+    public EDeptRecord setActive(final Boolean value) {
         set(9, value);
         return this;
     }
@@ -269,7 +269,7 @@ public class EDeptRecord extends UpdatableRecordImpl<EDeptRecord> implements Ver
      * Setter for <code>ZDB.E_DEPT.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public EDeptRecord setSigma(String value) {
+    public EDeptRecord setSigma(final String value) {
         set(10, value);
         return this;
     }
@@ -286,7 +286,7 @@ public class EDeptRecord extends UpdatableRecordImpl<EDeptRecord> implements Ver
      * Setter for <code>ZDB.E_DEPT.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public EDeptRecord setLanguage(String value) {
+    public EDeptRecord setLanguage(final String value) {
         set(11, value);
         return this;
     }
@@ -303,7 +303,7 @@ public class EDeptRecord extends UpdatableRecordImpl<EDeptRecord> implements Ver
      * Setter for <code>ZDB.E_DEPT.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public EDeptRecord setCreatedAt(LocalDateTime value) {
+    public EDeptRecord setCreatedAt(final LocalDateTime value) {
         set(12, value);
         return this;
     }
@@ -320,7 +320,7 @@ public class EDeptRecord extends UpdatableRecordImpl<EDeptRecord> implements Ver
      * Setter for <code>ZDB.E_DEPT.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public EDeptRecord setCreatedBy(String value) {
+    public EDeptRecord setCreatedBy(final String value) {
         set(13, value);
         return this;
     }
@@ -345,7 +345,7 @@ public class EDeptRecord extends UpdatableRecordImpl<EDeptRecord> implements Ver
      * Setter for <code>ZDB.E_DEPT.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public EDeptRecord setUpdatedAt(LocalDateTime value) {
+    public EDeptRecord setUpdatedAt(final LocalDateTime value) {
         set(14, value);
         return this;
     }
@@ -362,7 +362,7 @@ public class EDeptRecord extends UpdatableRecordImpl<EDeptRecord> implements Ver
      * Setter for <code>ZDB.E_DEPT.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public EDeptRecord setUpdatedBy(String value) {
+    public EDeptRecord setUpdatedBy(final String value) {
         set(15, value);
         return this;
     }
@@ -623,79 +623,79 @@ public class EDeptRecord extends UpdatableRecordImpl<EDeptRecord> implements Ver
     }
 
     @Override
-    public EDeptRecord value1(String value) {
+    public EDeptRecord value1(final String value) {
         setKey(value);
         return this;
     }
 
     @Override
-    public EDeptRecord value2(String value) {
+    public EDeptRecord value2(final String value) {
         setName(value);
         return this;
     }
 
     @Override
-    public EDeptRecord value3(String value) {
+    public EDeptRecord value3(final String value) {
         setCode(value);
         return this;
     }
 
     @Override
-    public EDeptRecord value4(String value) {
+    public EDeptRecord value4(final String value) {
         setManagerId(value);
         return this;
     }
 
     @Override
-    public EDeptRecord value5(String value) {
+    public EDeptRecord value5(final String value) {
         setManagerName(value);
         return this;
     }
 
     @Override
-    public EDeptRecord value6(String value) {
+    public EDeptRecord value6(final String value) {
         setCompanyId(value);
         return this;
     }
 
     @Override
-    public EDeptRecord value7(String value) {
+    public EDeptRecord value7(final String value) {
         setDeptId(value);
         return this;
     }
 
     @Override
-    public EDeptRecord value8(String value) {
+    public EDeptRecord value8(final String value) {
         setComment(value);
         return this;
     }
 
     @Override
-    public EDeptRecord value9(String value) {
+    public EDeptRecord value9(final String value) {
         setMetadata(value);
         return this;
     }
 
     @Override
-    public EDeptRecord value10(Boolean value) {
+    public EDeptRecord value10(final Boolean value) {
         setActive(value);
         return this;
     }
 
     @Override
-    public EDeptRecord value11(String value) {
+    public EDeptRecord value11(final String value) {
         setSigma(value);
         return this;
     }
 
     @Override
-    public EDeptRecord value12(String value) {
+    public EDeptRecord value12(final String value) {
         setLanguage(value);
         return this;
     }
 
     @Override
-    public EDeptRecord value13(LocalDateTime value) {
+    public EDeptRecord value13(final LocalDateTime value) {
         setCreatedAt(value);
         return this;
     }
@@ -705,13 +705,13 @@ public class EDeptRecord extends UpdatableRecordImpl<EDeptRecord> implements Ver
     // -------------------------------------------------------------------------
 
     @Override
-    public EDeptRecord value14(String value) {
+    public EDeptRecord value14(final String value) {
         setCreatedBy(value);
         return this;
     }
 
     @Override
-    public EDeptRecord value15(LocalDateTime value) {
+    public EDeptRecord value15(final LocalDateTime value) {
         setUpdatedAt(value);
         return this;
     }
@@ -721,13 +721,13 @@ public class EDeptRecord extends UpdatableRecordImpl<EDeptRecord> implements Ver
     // -------------------------------------------------------------------------
 
     @Override
-    public EDeptRecord value16(String value) {
+    public EDeptRecord value16(final String value) {
         setUpdatedBy(value);
         return this;
     }
 
     @Override
-    public EDeptRecord values(String value1, String value2, String value3, String value4, String value5, String value6, String value7, String value8, String value9, Boolean value10, String value11, String value12, LocalDateTime value13, String value14, LocalDateTime value15, String value16) {
+    public EDeptRecord values(final String value1, final String value2, final String value3, final String value4, final String value5, final String value6, final String value7, final String value8, final String value9, final Boolean value10, final String value11, final String value12, final LocalDateTime value13, final String value14, final LocalDateTime value15, final String value16) {
         value1(value1);
         value2(value2);
         value3(value3);
@@ -748,7 +748,7 @@ public class EDeptRecord extends UpdatableRecordImpl<EDeptRecord> implements Ver
     }
 
     @Override
-    public void from(IEDept from) {
+    public void from(final IEDept from) {
         setKey(from.getKey());
         setName(from.getName());
         setCode(from.getCode());
@@ -769,7 +769,7 @@ public class EDeptRecord extends UpdatableRecordImpl<EDeptRecord> implements Ver
     }
 
     @Override
-    public <E extends IEDept> E into(E into) {
+    public <E extends IEDept> E into(final E into) {
         into.from(this);
         return into;
     }

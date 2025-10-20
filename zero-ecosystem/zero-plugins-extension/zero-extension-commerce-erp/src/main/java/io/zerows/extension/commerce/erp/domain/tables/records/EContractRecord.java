@@ -4,7 +4,7 @@
 package io.zerows.extension.commerce.erp.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.commerce.erp.domain.tables.EContract;
 import io.zerows.extension.commerce.erp.domain.tables.interfaces.IEContract;
 import org.jooq.Record1;
@@ -31,7 +31,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
     /**
      * Create a detached, initialised EContractRecord
      */
-    public EContractRecord(String key, String name, String code, String deptId, String type, String status, String budget, String level, String title, String subject, String description, BigDecimal amount, String remark, LocalDateTime planStartAt, LocalDateTime planEndAt, LocalDateTime startAt, LocalDateTime endAt, String signedBy, LocalDateTime signedAt, String partyA, String partyB, String aName, String aPhone, String aLegal, String aAddress, String bName, String bPhone, String bLegal, String bAddress, String metadata, Boolean active, String sigma, String language, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public EContractRecord(final String key, final String name, final String code, final String deptId, final String type, final String status, final String budget, final String level, final String title, final String subject, final String description, final BigDecimal amount, final String remark, final LocalDateTime planStartAt, final LocalDateTime planEndAt, final LocalDateTime startAt, final LocalDateTime endAt, final String signedBy, final LocalDateTime signedAt, final String partyA, final String partyB, final String aName, final String aPhone, final String aLegal, final String aAddress, final String bName, final String bPhone, final String bLegal, final String bAddress, final String metadata, final Boolean active, final String sigma, final String language, final LocalDateTime createdAt, final String createdBy, final LocalDateTime updatedAt, final String updatedBy) {
         super(EContract.E_CONTRACT);
 
         setKey(key);
@@ -77,7 +77,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
     /**
      * Create a detached, initialised EContractRecord
      */
-    public EContractRecord(io.zerows.extension.commerce.erp.domain.tables.pojos.EContract value) {
+    public EContractRecord(final io.zerows.extension.commerce.erp.domain.tables.pojos.EContract value) {
         super(EContract.E_CONTRACT);
 
         if (value != null) {
@@ -122,7 +122,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
         }
     }
 
-    public EContractRecord(io.vertx.core.json.JsonObject json) {
+    public EContractRecord(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -139,7 +139,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      * Setter for <code>ZDB.E_CONTRACT.KEY</code>. 「key」- 合同主键
      */
     @Override
-    public EContractRecord setKey(String value) {
+    public EContractRecord setKey(final String value) {
         set(0, value);
         return this;
     }
@@ -156,7 +156,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      * Setter for <code>ZDB.E_CONTRACT.NAME</code>. 「name」- 合同名称
      */
     @Override
-    public EContractRecord setName(String value) {
+    public EContractRecord setName(final String value) {
         set(1, value);
         return this;
     }
@@ -173,7 +173,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      * Setter for <code>ZDB.E_CONTRACT.CODE</code>. 「code」- 合同编号
      */
     @Override
-    public EContractRecord setCode(String value) {
+    public EContractRecord setCode(final String value) {
         set(2, value);
         return this;
     }
@@ -192,7 +192,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      * resource.departments
      */
     @Override
-    public EContractRecord setDeptId(String value) {
+    public EContractRecord setDeptId(final String value) {
         set(3, value);
         return this;
     }
@@ -209,7 +209,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      * Setter for <code>ZDB.E_CONTRACT.TYPE</code>. 「type」- 合同分类，zero.contract
      */
     @Override
-    public EContractRecord setType(String value) {
+    public EContractRecord setType(final String value) {
         set(4, value);
         return this;
     }
@@ -228,7 +228,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      * 合同状态，zero.contract.status
      */
     @Override
-    public EContractRecord setStatus(String value) {
+    public EContractRecord setStatus(final String value) {
         set(5, value);
         return this;
     }
@@ -247,7 +247,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      * 所属预算，zero.contract.budget
      */
     @Override
-    public EContractRecord setBudget(String value) {
+    public EContractRecord setBudget(final String value) {
         set(6, value);
         return this;
     }
@@ -266,7 +266,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      * 合同级别，zero.contract.level
      */
     @Override
-    public EContractRecord setLevel(String value) {
+    public EContractRecord setLevel(final String value) {
         set(7, value);
         return this;
     }
@@ -283,7 +283,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      * Setter for <code>ZDB.E_CONTRACT.TITLE</code>. 「title」- 合同标题
      */
     @Override
-    public EContractRecord setTitle(String value) {
+    public EContractRecord setTitle(final String value) {
         set(8, value);
         return this;
     }
@@ -300,7 +300,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      * Setter for <code>ZDB.E_CONTRACT.SUBJECT</code>. 「subject」- 合同目标
      */
     @Override
-    public EContractRecord setSubject(String value) {
+    public EContractRecord setSubject(final String value) {
         set(9, value);
         return this;
     }
@@ -317,7 +317,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      * Setter for <code>ZDB.E_CONTRACT.DESCRIPTION</code>. 「description」- 合同描述
      */
     @Override
-    public EContractRecord setDescription(String value) {
+    public EContractRecord setDescription(final String value) {
         set(10, value);
         return this;
     }
@@ -334,7 +334,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      * Setter for <code>ZDB.E_CONTRACT.AMOUNT</code>. 「amount」- 合同金额
      */
     @Override
-    public EContractRecord setAmount(BigDecimal value) {
+    public EContractRecord setAmount(final BigDecimal value) {
         set(11, value);
         return this;
     }
@@ -351,7 +351,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      * Setter for <code>ZDB.E_CONTRACT.REMARK</code>. 「remark」- 合同备注
      */
     @Override
-    public EContractRecord setRemark(String value) {
+    public EContractRecord setRemark(final String value) {
         set(12, value);
         return this;
     }
@@ -368,7 +368,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      * Setter for <code>ZDB.E_CONTRACT.PLAN_START_AT</code>. 「planStartAt」- 开始日期
      */
     @Override
-    public EContractRecord setPlanStartAt(LocalDateTime value) {
+    public EContractRecord setPlanStartAt(final LocalDateTime value) {
         set(13, value);
         return this;
     }
@@ -385,7 +385,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      * Setter for <code>ZDB.E_CONTRACT.PLAN_END_AT</code>. 「planEndAt」- 结束日期
      */
     @Override
-    public EContractRecord setPlanEndAt(LocalDateTime value) {
+    public EContractRecord setPlanEndAt(final LocalDateTime value) {
         set(14, value);
         return this;
     }
@@ -402,7 +402,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      * Setter for <code>ZDB.E_CONTRACT.START_AT</code>. 「startAt」- 实际开始日期
      */
     @Override
-    public EContractRecord setStartAt(LocalDateTime value) {
+    public EContractRecord setStartAt(final LocalDateTime value) {
         set(15, value);
         return this;
     }
@@ -419,7 +419,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      * Setter for <code>ZDB.E_CONTRACT.END_AT</code>. 「endAt」- 实际结束日期
      */
     @Override
-    public EContractRecord setEndAt(LocalDateTime value) {
+    public EContractRecord setEndAt(final LocalDateTime value) {
         set(16, value);
         return this;
     }
@@ -436,7 +436,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      * Setter for <code>ZDB.E_CONTRACT.SIGNED_BY</code>. 「signedBy」- 签订人
      */
     @Override
-    public EContractRecord setSignedBy(String value) {
+    public EContractRecord setSignedBy(final String value) {
         set(17, value);
         return this;
     }
@@ -453,7 +453,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      * Setter for <code>ZDB.E_CONTRACT.SIGNED_AT</code>. 「signedAt」- 签订时间
      */
     @Override
-    public EContractRecord setSignedAt(LocalDateTime value) {
+    public EContractRecord setSignedAt(final LocalDateTime value) {
         set(18, value);
         return this;
     }
@@ -472,7 +472,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      * 甲方（关联公司ID，E_COMPANY）
      */
     @Override
-    public EContractRecord setPartyA(String value) {
+    public EContractRecord setPartyA(final String value) {
         set(19, value);
         return this;
     }
@@ -491,7 +491,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      * 乙方（关联客户ID，E_CUSTOMER）
      */
     @Override
-    public EContractRecord setPartyB(String value) {
+    public EContractRecord setPartyB(final String value) {
         set(20, value);
         return this;
     }
@@ -510,7 +510,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      * 甲方名称（个人为姓名/企业为企业名）
      */
     @Override
-    public EContractRecord setAName(String value) {
+    public EContractRecord setAName(final String value) {
         set(21, value);
         return this;
     }
@@ -527,7 +527,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      * Setter for <code>ZDB.E_CONTRACT.A_PHONE</code>. 「aPhone」- 甲方电话
      */
     @Override
-    public EContractRecord setAPhone(String value) {
+    public EContractRecord setAPhone(final String value) {
         set(22, value);
         return this;
     }
@@ -544,7 +544,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      * Setter for <code>ZDB.E_CONTRACT.A_LEGAL</code>. 「aLegal」- 甲方法人（企业合同专用）
      */
     @Override
-    public EContractRecord setALegal(String value) {
+    public EContractRecord setALegal(final String value) {
         set(23, value);
         return this;
     }
@@ -561,7 +561,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      * Setter for <code>ZDB.E_CONTRACT.A_ADDRESS</code>. 「aAddress」- 甲方地址
      */
     @Override
-    public EContractRecord setAAddress(String value) {
+    public EContractRecord setAAddress(final String value) {
         set(24, value);
         return this;
     }
@@ -580,7 +580,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      * 乙方名称（个人为姓名/企业为企业名）
      */
     @Override
-    public EContractRecord setBName(String value) {
+    public EContractRecord setBName(final String value) {
         set(25, value);
         return this;
     }
@@ -597,7 +597,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      * Setter for <code>ZDB.E_CONTRACT.B_PHONE</code>. 「bPhone」- 乙方人电话
      */
     @Override
-    public EContractRecord setBPhone(String value) {
+    public EContractRecord setBPhone(final String value) {
         set(26, value);
         return this;
     }
@@ -614,7 +614,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      * Setter for <code>ZDB.E_CONTRACT.B_LEGAL</code>. 「bLegal」- 乙方法人（企业合同专用）
      */
     @Override
-    public EContractRecord setBLegal(String value) {
+    public EContractRecord setBLegal(final String value) {
         set(27, value);
         return this;
     }
@@ -631,7 +631,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      * Setter for <code>ZDB.E_CONTRACT.B_ADDRESS</code>. 「bAddress」- 乙方地址
      */
     @Override
-    public EContractRecord setBAddress(String value) {
+    public EContractRecord setBAddress(final String value) {
         set(28, value);
         return this;
     }
@@ -648,7 +648,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      * Setter for <code>ZDB.E_CONTRACT.METADATA</code>. 「metadata」- 附加配置
      */
     @Override
-    public EContractRecord setMetadata(String value) {
+    public EContractRecord setMetadata(final String value) {
         set(29, value);
         return this;
     }
@@ -665,7 +665,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      * Setter for <code>ZDB.E_CONTRACT.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public EContractRecord setActive(Boolean value) {
+    public EContractRecord setActive(final Boolean value) {
         set(30, value);
         return this;
     }
@@ -682,7 +682,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      * Setter for <code>ZDB.E_CONTRACT.SIGMA</code>. 「sigma」- 统一标识（公司所属应用）
      */
     @Override
-    public EContractRecord setSigma(String value) {
+    public EContractRecord setSigma(final String value) {
         set(31, value);
         return this;
     }
@@ -699,7 +699,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      * Setter for <code>ZDB.E_CONTRACT.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public EContractRecord setLanguage(String value) {
+    public EContractRecord setLanguage(final String value) {
         set(32, value);
         return this;
     }
@@ -716,7 +716,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      * Setter for <code>ZDB.E_CONTRACT.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public EContractRecord setCreatedAt(LocalDateTime value) {
+    public EContractRecord setCreatedAt(final LocalDateTime value) {
         set(33, value);
         return this;
     }
@@ -733,7 +733,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      * Setter for <code>ZDB.E_CONTRACT.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public EContractRecord setCreatedBy(String value) {
+    public EContractRecord setCreatedBy(final String value) {
         set(34, value);
         return this;
     }
@@ -758,7 +758,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      * Setter for <code>ZDB.E_CONTRACT.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public EContractRecord setUpdatedAt(LocalDateTime value) {
+    public EContractRecord setUpdatedAt(final LocalDateTime value) {
         set(35, value);
         return this;
     }
@@ -779,7 +779,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      * Setter for <code>ZDB.E_CONTRACT.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public EContractRecord setUpdatedBy(String value) {
+    public EContractRecord setUpdatedBy(final String value) {
         set(36, value);
         return this;
     }
@@ -790,7 +790,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
     }
 
     @Override
-    public void from(IEContract from) {
+    public void from(final IEContract from) {
         setKey(from.getKey());
         setName(from.getName());
         setCode(from.getCode());
@@ -832,7 +832,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
     }
 
     @Override
-    public <E extends IEContract> E into(E into) {
+    public <E extends IEContract> E into(final E into) {
         into.from(this);
         return into;
     }

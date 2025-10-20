@@ -4,7 +4,7 @@
 package io.zerows.extension.commerce.erp.domain.tables.pojos;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.commerce.erp.domain.tables.interfaces.IEAsset;
 
 import java.math.BigDecimal;
@@ -77,7 +77,7 @@ public class EAsset implements VertxPojo, IEAsset {
     public EAsset() {
     }
 
-    public EAsset(IEAsset value) {
+    public EAsset(final IEAsset value) {
         this.key = value.getKey();
         this.name = value.getName();
         this.code = value.getCode();
@@ -136,61 +136,61 @@ public class EAsset implements VertxPojo, IEAsset {
     }
 
     public EAsset(
-        String key,
-        String name,
-        String code,
-        String type,
-        String status,
-        String modelNumber,
-        String unit,
-        Long num,
-        Long numDeprecating,
-        Long numDeprecated,
-        Long numUsing,
-        Long numUsed,
-        String wayChange,
-        String wayDeprecate,
-        String wayAccording,
-        LocalDateTime usedAt,
-        String usedBy,
-        String usedStatus,
-        BigDecimal vOriginal,
-        BigDecimal vTax,
-        BigDecimal vDeReady,
-        BigDecimal vNetJunk,
-        BigDecimal vNet,
-        BigDecimal vNetAmount,
-        BigDecimal vDeprecatedM,
-        BigDecimal vDeprecatedA,
-        String kFixed,
-        String kDeprecated,
-        String kAssignment,
-        String kTax,
-        String kDevalue,
-        String kChange,
-        String customerId,
-        LocalDateTime expiredAt,
-        String expiredComment,
-        String userId,
-        String storeId,
-        String deptId,
-        String companyId,
-        String parentId,
-        String comment,
-        String sigma,
-        String language,
-        Boolean active,
-        String metadata,
-        LocalDateTime enterAt,
-        String enterBy,
-        LocalDateTime accountAt,
-        String accountBy,
-        LocalDateTime scrapAt,
-        String scrapBy,
-        LocalDateTime createdAt,
-        String createdBy,
-        LocalDateTime updatedAt,
-        String updatedBy
+        final String key,
+        final String name,
+        final String code,
+        final String type,
+        final String status,
+        final String modelNumber,
+        final String unit,
+        final Long num,
+        final Long numDeprecating,
+        final Long numDeprecated,
+        final Long numUsing,
+        final Long numUsed,
+        final String wayChange,
+        final String wayDeprecate,
+        final String wayAccording,
+        final LocalDateTime usedAt,
+        final String usedBy,
+        final String usedStatus,
+        final BigDecimal vOriginal,
+        final BigDecimal vTax,
+        final BigDecimal vDeReady,
+        final BigDecimal vNetJunk,
+        final BigDecimal vNet,
+        final BigDecimal vNetAmount,
+        final BigDecimal vDeprecatedM,
+        final BigDecimal vDeprecatedA,
+        final String kFixed,
+        final String kDeprecated,
+        final String kAssignment,
+        final String kTax,
+        final String kDevalue,
+        final String kChange,
+        final String customerId,
+        final LocalDateTime expiredAt,
+        final String expiredComment,
+        final String userId,
+        final String storeId,
+        final String deptId,
+        final String companyId,
+        final String parentId,
+        final String comment,
+        final String sigma,
+        final String language,
+        final Boolean active,
+        final String metadata,
+        final LocalDateTime enterAt,
+        final String enterBy,
+        final LocalDateTime accountAt,
+        final String accountBy,
+        final LocalDateTime scrapAt,
+        final String scrapBy,
+        final LocalDateTime createdAt,
+        final String createdBy,
+        final LocalDateTime updatedAt,
+        final String updatedBy
     ) {
         this.key = key;
         this.name = name;
@@ -249,7 +249,7 @@ public class EAsset implements VertxPojo, IEAsset {
         this.updatedBy = updatedBy;
     }
 
-    public EAsset(io.vertx.core.json.JsonObject json) {
+    public EAsset(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -266,7 +266,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.KEY</code>. 「key」- 资产主键
      */
     @Override
-    public EAsset setKey(String key) {
+    public EAsset setKey(final String key) {
         this.key = key;
         return this;
     }
@@ -283,7 +283,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.NAME</code>. 「name」- 资产名称
      */
     @Override
-    public EAsset setName(String name) {
+    public EAsset setName(final String name) {
         this.name = name;
         return this;
     }
@@ -300,7 +300,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.CODE</code>. 「code」- 资产编号
      */
     @Override
-    public EAsset setCode(String code) {
+    public EAsset setCode(final String code) {
         this.code = code;
         return this;
     }
@@ -317,7 +317,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.TYPE</code>. 「type」- 资产类型
      */
     @Override
-    public EAsset setType(String type) {
+    public EAsset setType(final String type) {
         this.type = type;
         return this;
     }
@@ -334,7 +334,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.STATUS</code>. 「status」- 资产状态
      */
     @Override
-    public EAsset setStatus(String status) {
+    public EAsset setStatus(final String status) {
         this.status = status;
         return this;
     }
@@ -351,7 +351,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.MODEL_NUMBER</code>. 「modelNumber」- 规格型号
      */
     @Override
-    public EAsset setModelNumber(String modelNumber) {
+    public EAsset setModelNumber(final String modelNumber) {
         this.modelNumber = modelNumber;
         return this;
     }
@@ -368,7 +368,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.UNIT</code>. 「unit」- 计量单位
      */
     @Override
-    public EAsset setUnit(String unit) {
+    public EAsset setUnit(final String unit) {
         this.unit = unit;
         return this;
     }
@@ -385,7 +385,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.NUM</code>. 「num」- 资产数量
      */
     @Override
-    public EAsset setNum(Long num) {
+    public EAsset setNum(final Long num) {
         this.num = num;
         return this;
     }
@@ -404,7 +404,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * 预计折旧数量
      */
     @Override
-    public EAsset setNumDeprecating(Long numDeprecating) {
+    public EAsset setNumDeprecating(final Long numDeprecating) {
         this.numDeprecating = numDeprecating;
         return this;
     }
@@ -423,7 +423,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * 已折旧数量
      */
     @Override
-    public EAsset setNumDeprecated(Long numDeprecated) {
+    public EAsset setNumDeprecated(final Long numDeprecated) {
         this.numDeprecated = numDeprecated;
         return this;
     }
@@ -440,7 +440,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.NUM_USING</code>. 「numUsing」- 预计使用数量
      */
     @Override
-    public EAsset setNumUsing(Long numUsing) {
+    public EAsset setNumUsing(final Long numUsing) {
         this.numUsing = numUsing;
         return this;
     }
@@ -457,7 +457,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.NUM_USED</code>. 「numUsed」- 已使用数量
      */
     @Override
-    public EAsset setNumUsed(Long numUsed) {
+    public EAsset setNumUsed(final Long numUsed) {
         this.numUsed = numUsed;
         return this;
     }
@@ -474,7 +474,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.WAY_CHANGE</code>. 「wayChange」- 变动方式
      */
     @Override
-    public EAsset setWayChange(String wayChange) {
+    public EAsset setWayChange(final String wayChange) {
         this.wayChange = wayChange;
         return this;
     }
@@ -491,7 +491,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.WAY_DEPRECATE</code>. 「wayDeprecate」- 折旧方式
      */
     @Override
-    public EAsset setWayDeprecate(String wayDeprecate) {
+    public EAsset setWayDeprecate(final String wayDeprecate) {
         this.wayDeprecate = wayDeprecate;
         return this;
     }
@@ -508,7 +508,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.WAY_ACCORDING</code>. 「wayAccording」- 折旧依据
      */
     @Override
-    public EAsset setWayAccording(String wayAccording) {
+    public EAsset setWayAccording(final String wayAccording) {
         this.wayAccording = wayAccording;
         return this;
     }
@@ -525,7 +525,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.USED_AT</code>. 「usedAt」- 开始使用时间
      */
     @Override
-    public EAsset setUsedAt(LocalDateTime usedAt) {
+    public EAsset setUsedAt(final LocalDateTime usedAt) {
         this.usedAt = usedAt;
         return this;
     }
@@ -542,7 +542,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.USED_BY</code>. 「usedBy」- 使用者
      */
     @Override
-    public EAsset setUsedBy(String usedBy) {
+    public EAsset setUsedBy(final String usedBy) {
         this.usedBy = usedBy;
         return this;
     }
@@ -559,7 +559,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.USED_STATUS</code>. 「usedStatus」- 使用状态
      */
     @Override
-    public EAsset setUsedStatus(String usedStatus) {
+    public EAsset setUsedStatus(final String usedStatus) {
         this.usedStatus = usedStatus;
         return this;
     }
@@ -576,7 +576,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.V_ORIGINAL</code>. 「vOriginal」- 原价值
      */
     @Override
-    public EAsset setVOriginal(BigDecimal vOriginal) {
+    public EAsset setVOriginal(final BigDecimal vOriginal) {
         this.vOriginal = vOriginal;
         return this;
     }
@@ -593,7 +593,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.V_TAX</code>. 「vTax」- 税额
      */
     @Override
-    public EAsset setVTax(BigDecimal vTax) {
+    public EAsset setVTax(final BigDecimal vTax) {
         this.vTax = vTax;
         return this;
     }
@@ -610,7 +610,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.V_DE_READY</code>. 「vDeReady」- 减值准备
      */
     @Override
-    public EAsset setVDeReady(BigDecimal vDeReady) {
+    public EAsset setVDeReady(final BigDecimal vDeReady) {
         this.vDeReady = vDeReady;
         return this;
     }
@@ -627,7 +627,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.V_NET_JUNK</code>. 「vNetJunk」- 净残值
      */
     @Override
-    public EAsset setVNetJunk(BigDecimal vNetJunk) {
+    public EAsset setVNetJunk(final BigDecimal vNetJunk) {
         this.vNetJunk = vNetJunk;
         return this;
     }
@@ -644,7 +644,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.V_NET</code>. 「vNet」- 净值
      */
     @Override
-    public EAsset setVNet(BigDecimal vNet) {
+    public EAsset setVNet(final BigDecimal vNet) {
         this.vNet = vNet;
         return this;
     }
@@ -661,7 +661,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.V_NET_AMOUNT</code>. 「vNetAmount」- 净额
      */
     @Override
-    public EAsset setVNetAmount(BigDecimal vNetAmount) {
+    public EAsset setVNetAmount(final BigDecimal vNetAmount) {
         this.vNetAmount = vNetAmount;
         return this;
     }
@@ -678,7 +678,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.V_DEPRECATED_M</code>. 「vDeprecatedM」- 月折旧
      */
     @Override
-    public EAsset setVDeprecatedM(BigDecimal vDeprecatedM) {
+    public EAsset setVDeprecatedM(final BigDecimal vDeprecatedM) {
         this.vDeprecatedM = vDeprecatedM;
         return this;
     }
@@ -695,7 +695,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.V_DEPRECATED_A</code>. 「vDeprecatedA」- 累积折旧
      */
     @Override
-    public EAsset setVDeprecatedA(BigDecimal vDeprecatedA) {
+    public EAsset setVDeprecatedA(final BigDecimal vDeprecatedA) {
         this.vDeprecatedA = vDeprecatedA;
         return this;
     }
@@ -712,7 +712,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.K_FIXED</code>. 「kFixed」- 固定资产科目
      */
     @Override
-    public EAsset setKFixed(String kFixed) {
+    public EAsset setKFixed(final String kFixed) {
         this.kFixed = kFixed;
         return this;
     }
@@ -729,7 +729,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.K_DEPRECATED</code>. 「kDeprecated」- 累积折旧科目
      */
     @Override
-    public EAsset setKDeprecated(String kDeprecated) {
+    public EAsset setKDeprecated(final String kDeprecated) {
         this.kDeprecated = kDeprecated;
         return this;
     }
@@ -746,7 +746,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.K_ASSIGNMENT</code>. 「kAssignment」- 折旧费用分配科目
      */
     @Override
-    public EAsset setKAssignment(String kAssignment) {
+    public EAsset setKAssignment(final String kAssignment) {
         this.kAssignment = kAssignment;
         return this;
     }
@@ -763,7 +763,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.K_TAX</code>. 「kTax」- 税金科目
      */
     @Override
-    public EAsset setKTax(String kTax) {
+    public EAsset setKTax(final String kTax) {
         this.kTax = kTax;
         return this;
     }
@@ -780,7 +780,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.K_DEVALUE</code>. 「kDevalue」- 减值准备科目
      */
     @Override
-    public EAsset setKDevalue(String kDevalue) {
+    public EAsset setKDevalue(final String kDevalue) {
         this.kDevalue = kDevalue;
         return this;
     }
@@ -797,7 +797,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.K_CHANGE</code>. 「kChange」- 资产变动对方科目
      */
     @Override
-    public EAsset setKChange(String kChange) {
+    public EAsset setKChange(final String kChange) {
         this.kChange = kChange;
         return this;
     }
@@ -814,7 +814,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.CUSTOMER_ID</code>. 「customerId」- 供应商ID
      */
     @Override
-    public EAsset setCustomerId(String customerId) {
+    public EAsset setCustomerId(final String customerId) {
         this.customerId = customerId;
         return this;
     }
@@ -831,7 +831,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.EXPIRED_AT</code>. 「expiredAt」- 到期时间
      */
     @Override
-    public EAsset setExpiredAt(LocalDateTime expiredAt) {
+    public EAsset setExpiredAt(final LocalDateTime expiredAt) {
         this.expiredAt = expiredAt;
         return this;
     }
@@ -850,7 +850,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * 到期说明
      */
     @Override
-    public EAsset setExpiredComment(String expiredComment) {
+    public EAsset setExpiredComment(final String expiredComment) {
         this.expiredComment = expiredComment;
         return this;
     }
@@ -867,7 +867,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.USER_ID</code>. 「userId」- 资产管理者
      */
     @Override
-    public EAsset setUserId(String userId) {
+    public EAsset setUserId(final String userId) {
         this.userId = userId;
         return this;
     }
@@ -884,7 +884,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.STORE_ID</code>. 「storeId」- 所属仓库ID
      */
     @Override
-    public EAsset setStoreId(String storeId) {
+    public EAsset setStoreId(final String storeId) {
         this.storeId = storeId;
         return this;
     }
@@ -901,7 +901,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.DEPT_ID</code>. 「deptId」- 所属部门
      */
     @Override
-    public EAsset setDeptId(String deptId) {
+    public EAsset setDeptId(final String deptId) {
         this.deptId = deptId;
         return this;
     }
@@ -918,7 +918,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.COMPANY_ID</code>. 「companyId」- 所属公司
      */
     @Override
-    public EAsset setCompanyId(String companyId) {
+    public EAsset setCompanyId(final String companyId) {
         this.companyId = companyId;
         return this;
     }
@@ -935,7 +935,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.PARENT_ID</code>. 「parentId」- 上级资产
      */
     @Override
-    public EAsset setParentId(String parentId) {
+    public EAsset setParentId(final String parentId) {
         this.parentId = parentId;
         return this;
     }
@@ -952,7 +952,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.COMMENT</code>. 「comment」- 资产备注
      */
     @Override
-    public EAsset setComment(String comment) {
+    public EAsset setComment(final String comment) {
         this.comment = comment;
         return this;
     }
@@ -969,7 +969,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public EAsset setSigma(String sigma) {
+    public EAsset setSigma(final String sigma) {
         this.sigma = sigma;
         return this;
     }
@@ -986,7 +986,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public EAsset setLanguage(String language) {
+    public EAsset setLanguage(final String language) {
         this.language = language;
         return this;
     }
@@ -1003,7 +1003,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public EAsset setActive(Boolean active) {
+    public EAsset setActive(final Boolean active) {
         this.active = active;
         return this;
     }
@@ -1020,7 +1020,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.METADATA</code>. 「metadata」- 附加配置数据
      */
     @Override
-    public EAsset setMetadata(String metadata) {
+    public EAsset setMetadata(final String metadata) {
         this.metadata = metadata;
         return this;
     }
@@ -1037,7 +1037,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.ENTER_AT</code>. 「enterAt」- 入库时间
      */
     @Override
-    public EAsset setEnterAt(LocalDateTime enterAt) {
+    public EAsset setEnterAt(final LocalDateTime enterAt) {
         this.enterAt = enterAt;
         return this;
     }
@@ -1054,7 +1054,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.ENTER_BY</code>. 「enterBy」- 入库人
      */
     @Override
-    public EAsset setEnterBy(String enterBy) {
+    public EAsset setEnterBy(final String enterBy) {
         this.enterBy = enterBy;
         return this;
     }
@@ -1071,7 +1071,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.ACCOUNT_AT</code>. 「accountAt」- 入账时间
      */
     @Override
-    public EAsset setAccountAt(LocalDateTime accountAt) {
+    public EAsset setAccountAt(final LocalDateTime accountAt) {
         this.accountAt = accountAt;
         return this;
     }
@@ -1088,7 +1088,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.ACCOUNT_BY</code>. 「accountBy」- 入账人
      */
     @Override
-    public EAsset setAccountBy(String accountBy) {
+    public EAsset setAccountBy(final String accountBy) {
         this.accountBy = accountBy;
         return this;
     }
@@ -1105,7 +1105,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.SCRAP_AT</code>. 「scrapAt」- 报废时间
      */
     @Override
-    public EAsset setScrapAt(LocalDateTime scrapAt) {
+    public EAsset setScrapAt(final LocalDateTime scrapAt) {
         this.scrapAt = scrapAt;
         return this;
     }
@@ -1122,7 +1122,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.SCRAP_BY</code>. 「scrapBy」- 报废人
      */
     @Override
-    public EAsset setScrapBy(String scrapBy) {
+    public EAsset setScrapBy(final String scrapBy) {
         this.scrapBy = scrapBy;
         return this;
     }
@@ -1139,7 +1139,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public EAsset setCreatedAt(LocalDateTime createdAt) {
+    public EAsset setCreatedAt(final LocalDateTime createdAt) {
         this.createdAt = createdAt;
         return this;
     }
@@ -1156,7 +1156,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public EAsset setCreatedBy(String createdBy) {
+    public EAsset setCreatedBy(final String createdBy) {
         this.createdBy = createdBy;
         return this;
     }
@@ -1173,7 +1173,7 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public EAsset setUpdatedAt(LocalDateTime updatedAt) {
+    public EAsset setUpdatedAt(final LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
         return this;
     }
@@ -1190,13 +1190,13 @@ public class EAsset implements VertxPojo, IEAsset {
      * Setter for <code>ZDB.E_ASSET.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public EAsset setUpdatedBy(String updatedBy) {
+    public EAsset setUpdatedBy(final String updatedBy) {
         this.updatedBy = updatedBy;
         return this;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
@@ -1546,7 +1546,7 @@ public class EAsset implements VertxPojo, IEAsset {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("EAsset (");
+        final StringBuilder sb = new StringBuilder("EAsset (");
 
         sb.append(key);
         sb.append(", ").append(name);
@@ -1613,7 +1613,7 @@ public class EAsset implements VertxPojo, IEAsset {
     // -------------------------------------------------------------------------
 
     @Override
-    public void from(IEAsset from) {
+    public void from(final IEAsset from) {
         setKey(from.getKey());
         setName(from.getName());
         setCode(from.getCode());
@@ -1672,7 +1672,7 @@ public class EAsset implements VertxPojo, IEAsset {
     }
 
     @Override
-    public <E extends IEAsset> E into(E into) {
+    public <E extends IEAsset> E into(final E into) {
         into.from(this);
         return into;
     }

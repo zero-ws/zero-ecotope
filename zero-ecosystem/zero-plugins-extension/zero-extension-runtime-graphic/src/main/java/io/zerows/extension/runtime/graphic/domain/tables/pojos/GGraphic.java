@@ -4,7 +4,7 @@
 package io.zerows.extension.runtime.graphic.domain.tables.pojos;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.runtime.graphic.domain.tables.interfaces.IGGraphic;
 
 import java.time.LocalDateTime;
@@ -42,7 +42,7 @@ public class GGraphic implements VertxPojo, IGGraphic {
     public GGraphic() {
     }
 
-    public GGraphic(IGGraphic value) {
+    public GGraphic(final IGGraphic value) {
         this.key = value.getKey();
         this.name = value.getName();
         this.code = value.getCode();
@@ -67,27 +67,27 @@ public class GGraphic implements VertxPojo, IGGraphic {
     }
 
     public GGraphic(
-        String key,
-        String name,
-        String code,
-        String mode,
-        String type,
-        String comments,
-        String ownerId,
-        String ui,
-        String graphicId,
-        Boolean master,
-        String modelId,
-        String modelKey,
-        String modelCategory,
-        String sigma,
-        String language,
-        Boolean active,
-        String metadata,
-        LocalDateTime createdAt,
-        String createdBy,
-        LocalDateTime updatedAt,
-        String updatedBy
+        final String key,
+        final String name,
+        final String code,
+        final String mode,
+        final String type,
+        final String comments,
+        final String ownerId,
+        final String ui,
+        final String graphicId,
+        final Boolean master,
+        final String modelId,
+        final String modelKey,
+        final String modelCategory,
+        final String sigma,
+        final String language,
+        final Boolean active,
+        final String metadata,
+        final LocalDateTime createdAt,
+        final String createdBy,
+        final LocalDateTime updatedAt,
+        final String updatedBy
     ) {
         this.key = key;
         this.name = name;
@@ -112,7 +112,7 @@ public class GGraphic implements VertxPojo, IGGraphic {
         this.updatedBy = updatedBy;
     }
 
-    public GGraphic(io.vertx.core.json.JsonObject json) {
+    public GGraphic(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -129,7 +129,7 @@ public class GGraphic implements VertxPojo, IGGraphic {
      * Setter for <code>ZDB.G_GRAPHIC.KEY</code>. 「key」- 图ID
      */
     @Override
-    public GGraphic setKey(String key) {
+    public GGraphic setKey(final String key) {
         this.key = key;
         return this;
     }
@@ -146,7 +146,7 @@ public class GGraphic implements VertxPojo, IGGraphic {
      * Setter for <code>ZDB.G_GRAPHIC.NAME</code>. 「name」- 图名称
      */
     @Override
-    public GGraphic setName(String name) {
+    public GGraphic setName(final String name) {
         this.name = name;
         return this;
     }
@@ -165,7 +165,7 @@ public class GGraphic implements VertxPojo, IGGraphic {
      * neo4j的图ID规范（使用一定命名规则）
      */
     @Override
-    public GGraphic setCode(String code) {
+    public GGraphic setCode(final String code) {
         this.code = code;
         return this;
     }
@@ -184,7 +184,7 @@ public class GGraphic implements VertxPojo, IGGraphic {
      * MIND / TREE
      */
     @Override
-    public GGraphic setMode(String mode) {
+    public GGraphic setMode(final String mode) {
         this.mode = mode;
         return this;
     }
@@ -203,7 +203,7 @@ public class GGraphic implements VertxPojo, IGGraphic {
      * INSTANCE 圈子、定义、实例，可扩展 tabular
      */
     @Override
-    public GGraphic setType(String type) {
+    public GGraphic setType(final String type) {
         this.type = type;
         return this;
     }
@@ -220,7 +220,7 @@ public class GGraphic implements VertxPojo, IGGraphic {
      * Setter for <code>ZDB.G_GRAPHIC.COMMENTS</code>. 「comments」- 图备注信息
      */
     @Override
-    public GGraphic setComments(String comments) {
+    public GGraphic setComments(final String comments) {
         this.comments = comments;
         return this;
     }
@@ -239,7 +239,7 @@ public class GGraphic implements VertxPojo, IGGraphic {
      * 图的拥有者，可管理该图信息的人员ID
      */
     @Override
-    public GGraphic setOwnerId(String ownerId) {
+    public GGraphic setOwnerId(final String ownerId) {
         this.ownerId = ownerId;
         return this;
     }
@@ -256,7 +256,7 @@ public class GGraphic implements VertxPojo, IGGraphic {
      * Setter for <code>ZDB.G_GRAPHIC.UI</code>. 「ui」- ui配置专用
      */
     @Override
-    public GGraphic setUi(String ui) {
+    public GGraphic setUi(final String ui) {
         this.ui = ui;
         return this;
     }
@@ -275,7 +275,7 @@ public class GGraphic implements VertxPojo, IGGraphic {
      * 父图ID（当前图是父图的子图，独立管理，创建时需要）
      */
     @Override
-    public GGraphic setGraphicId(String graphicId) {
+    public GGraphic setGraphicId(final String graphicId) {
         this.graphicId = graphicId;
         return this;
     }
@@ -294,7 +294,7 @@ public class GGraphic implements VertxPojo, IGGraphic {
      * 主图（不可删除、父ID为NULL、模块级唯一）
      */
     @Override
-    public GGraphic setMaster(Boolean master) {
+    public GGraphic setMaster(final Boolean master) {
         this.master = master;
         return this;
     }
@@ -313,7 +313,7 @@ public class GGraphic implements VertxPojo, IGGraphic {
      * 关联的模型identifier，用于描述
      */
     @Override
-    public GGraphic setModelId(String modelId) {
+    public GGraphic setModelId(final String modelId) {
         this.modelId = modelId;
         return this;
     }
@@ -332,7 +332,7 @@ public class GGraphic implements VertxPojo, IGGraphic {
      * 关联的模型记录ID，用于描述哪一个Model中的记录
      */
     @Override
-    public GGraphic setModelKey(String modelKey) {
+    public GGraphic setModelKey(final String modelKey) {
         this.modelKey = modelKey;
         return this;
     }
@@ -351,7 +351,7 @@ public class GGraphic implements VertxPojo, IGGraphic {
      * 关联的category记录，只包含叶节点
      */
     @Override
-    public GGraphic setModelCategory(String modelCategory) {
+    public GGraphic setModelCategory(final String modelCategory) {
         this.modelCategory = modelCategory;
         return this;
     }
@@ -368,7 +368,7 @@ public class GGraphic implements VertxPojo, IGGraphic {
      * Setter for <code>ZDB.G_GRAPHIC.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public GGraphic setSigma(String sigma) {
+    public GGraphic setSigma(final String sigma) {
         this.sigma = sigma;
         return this;
     }
@@ -385,7 +385,7 @@ public class GGraphic implements VertxPojo, IGGraphic {
      * Setter for <code>ZDB.G_GRAPHIC.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public GGraphic setLanguage(String language) {
+    public GGraphic setLanguage(final String language) {
         this.language = language;
         return this;
     }
@@ -402,7 +402,7 @@ public class GGraphic implements VertxPojo, IGGraphic {
      * Setter for <code>ZDB.G_GRAPHIC.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public GGraphic setActive(Boolean active) {
+    public GGraphic setActive(final Boolean active) {
         this.active = active;
         return this;
     }
@@ -419,7 +419,7 @@ public class GGraphic implements VertxPojo, IGGraphic {
      * Setter for <code>ZDB.G_GRAPHIC.METADATA</code>. 「metadata」- 附加配置数据
      */
     @Override
-    public GGraphic setMetadata(String metadata) {
+    public GGraphic setMetadata(final String metadata) {
         this.metadata = metadata;
         return this;
     }
@@ -436,7 +436,7 @@ public class GGraphic implements VertxPojo, IGGraphic {
      * Setter for <code>ZDB.G_GRAPHIC.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public GGraphic setCreatedAt(LocalDateTime createdAt) {
+    public GGraphic setCreatedAt(final LocalDateTime createdAt) {
         this.createdAt = createdAt;
         return this;
     }
@@ -453,7 +453,7 @@ public class GGraphic implements VertxPojo, IGGraphic {
      * Setter for <code>ZDB.G_GRAPHIC.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public GGraphic setCreatedBy(String createdBy) {
+    public GGraphic setCreatedBy(final String createdBy) {
         this.createdBy = createdBy;
         return this;
     }
@@ -470,7 +470,7 @@ public class GGraphic implements VertxPojo, IGGraphic {
      * Setter for <code>ZDB.G_GRAPHIC.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public GGraphic setUpdatedAt(LocalDateTime updatedAt) {
+    public GGraphic setUpdatedAt(final LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
         return this;
     }
@@ -487,13 +487,13 @@ public class GGraphic implements VertxPojo, IGGraphic {
      * Setter for <code>ZDB.G_GRAPHIC.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public GGraphic setUpdatedBy(String updatedBy) {
+    public GGraphic setUpdatedBy(final String updatedBy) {
         this.updatedBy = updatedBy;
         return this;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
@@ -639,7 +639,7 @@ public class GGraphic implements VertxPojo, IGGraphic {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("GGraphic (");
+        final StringBuilder sb = new StringBuilder("GGraphic (");
 
         sb.append(key);
         sb.append(", ").append(name);
@@ -672,7 +672,7 @@ public class GGraphic implements VertxPojo, IGGraphic {
     // -------------------------------------------------------------------------
 
     @Override
-    public void from(IGGraphic from) {
+    public void from(final IGGraphic from) {
         setKey(from.getKey());
         setName(from.getName());
         setCode(from.getCode());
@@ -697,7 +697,7 @@ public class GGraphic implements VertxPojo, IGGraphic {
     }
 
     @Override
-    public <E extends IGGraphic> E into(E into) {
+    public <E extends IGGraphic> E into(final E into) {
         into.from(this);
         return into;
     }

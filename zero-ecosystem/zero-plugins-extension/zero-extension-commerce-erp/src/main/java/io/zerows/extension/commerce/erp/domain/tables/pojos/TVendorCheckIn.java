@@ -4,7 +4,7 @@
 package io.zerows.extension.commerce.erp.domain.tables.pojos;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.commerce.erp.domain.tables.interfaces.ITVendorCheckIn;
 
 import java.time.LocalDateTime;
@@ -28,7 +28,7 @@ public class TVendorCheckIn implements VertxPojo, ITVendorCheckIn {
     public TVendorCheckIn() {
     }
 
-    public TVendorCheckIn(ITVendorCheckIn value) {
+    public TVendorCheckIn(final ITVendorCheckIn value) {
         this.key = value.getKey();
         this.commentExtension = value.getCommentExtension();
         this.classification = value.getClassification();
@@ -39,13 +39,13 @@ public class TVendorCheckIn implements VertxPojo, ITVendorCheckIn {
     }
 
     public TVendorCheckIn(
-        String key,
-        String commentExtension,
-        String classification,
-        LocalDateTime startAt,
-        LocalDateTime endAt,
-        Integer days,
-        LocalDateTime onboardAt
+        final String key,
+        final String commentExtension,
+        final String classification,
+        final LocalDateTime startAt,
+        final LocalDateTime endAt,
+        final Integer days,
+        final LocalDateTime onboardAt
     ) {
         this.key = key;
         this.commentExtension = commentExtension;
@@ -56,7 +56,7 @@ public class TVendorCheckIn implements VertxPojo, ITVendorCheckIn {
         this.onboardAt = onboardAt;
     }
 
-    public TVendorCheckIn(io.vertx.core.json.JsonObject json) {
+    public TVendorCheckIn(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -75,7 +75,7 @@ public class TVendorCheckIn implements VertxPojo, ITVendorCheckIn {
      * Key
      */
     @Override
-    public TVendorCheckIn setKey(String key) {
+    public TVendorCheckIn setKey(final String key) {
         this.key = key;
         return this;
     }
@@ -94,7 +94,7 @@ public class TVendorCheckIn implements VertxPojo, ITVendorCheckIn {
      * 「commentExtension」- Extension Comment
      */
     @Override
-    public TVendorCheckIn setCommentExtension(String commentExtension) {
+    public TVendorCheckIn setCommentExtension(final String commentExtension) {
         this.commentExtension = commentExtension;
         return this;
     }
@@ -113,7 +113,7 @@ public class TVendorCheckIn implements VertxPojo, ITVendorCheckIn {
      * 「classification」- The ticket related income type
      */
     @Override
-    public TVendorCheckIn setClassification(String classification) {
+    public TVendorCheckIn setClassification(final String classification) {
         this.classification = classification;
         return this;
     }
@@ -130,7 +130,7 @@ public class TVendorCheckIn implements VertxPojo, ITVendorCheckIn {
      * Setter for <code>ZDB.T_VENDOR_CHECK_IN.START_AT</code>. 「startAt」- From
      */
     @Override
-    public TVendorCheckIn setStartAt(LocalDateTime startAt) {
+    public TVendorCheckIn setStartAt(final LocalDateTime startAt) {
         this.startAt = startAt;
         return this;
     }
@@ -147,7 +147,7 @@ public class TVendorCheckIn implements VertxPojo, ITVendorCheckIn {
      * Setter for <code>ZDB.T_VENDOR_CHECK_IN.END_AT</code>. 「endAt」- To
      */
     @Override
-    public TVendorCheckIn setEndAt(LocalDateTime endAt) {
+    public TVendorCheckIn setEndAt(final LocalDateTime endAt) {
         this.endAt = endAt;
         return this;
     }
@@ -164,7 +164,7 @@ public class TVendorCheckIn implements VertxPojo, ITVendorCheckIn {
      * Setter for <code>ZDB.T_VENDOR_CHECK_IN.DAYS</code>. 「days」- Duration
      */
     @Override
-    public TVendorCheckIn setDays(Integer days) {
+    public TVendorCheckIn setDays(final Integer days) {
         this.days = days;
         return this;
     }
@@ -181,13 +181,13 @@ public class TVendorCheckIn implements VertxPojo, ITVendorCheckIn {
      * Setter for <code>ZDB.T_VENDOR_CHECK_IN.ONBOARD_AT</code>. 「onboardAt」- To
      */
     @Override
-    public TVendorCheckIn setOnboardAt(LocalDateTime onboardAt) {
+    public TVendorCheckIn setOnboardAt(final LocalDateTime onboardAt) {
         this.onboardAt = onboardAt;
         return this;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
@@ -249,7 +249,7 @@ public class TVendorCheckIn implements VertxPojo, ITVendorCheckIn {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("TVendorCheckIn (");
+        final StringBuilder sb = new StringBuilder("TVendorCheckIn (");
 
         sb.append(key);
         sb.append(", ").append(commentExtension);
@@ -268,7 +268,7 @@ public class TVendorCheckIn implements VertxPojo, ITVendorCheckIn {
     // -------------------------------------------------------------------------
 
     @Override
-    public void from(ITVendorCheckIn from) {
+    public void from(final ITVendorCheckIn from) {
         setKey(from.getKey());
         setCommentExtension(from.getCommentExtension());
         setClassification(from.getClassification());
@@ -279,7 +279,7 @@ public class TVendorCheckIn implements VertxPojo, ITVendorCheckIn {
     }
 
     @Override
-    public <E extends ITVendorCheckIn> E into(E into) {
+    public <E extends ITVendorCheckIn> E into(final E into) {
         into.from(this);
         return into;
     }

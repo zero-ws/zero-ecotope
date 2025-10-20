@@ -4,7 +4,7 @@
 package io.zerows.extension.runtime.workflow.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.runtime.workflow.domain.tables.WTicket;
 import io.zerows.extension.runtime.workflow.domain.tables.interfaces.IWTicket;
 import org.jooq.Record1;
@@ -30,7 +30,7 @@ public class WTicketRecord extends UpdatableRecordImpl<WTicketRecord> implements
     /**
      * Create a detached, initialised WTicketRecord
      */
-    public WTicketRecord(String key, String serial, String name, String code, String type, String phase, String modelId, String modelKey, String modelCategory, String modelComponent, String modelChild, Integer quantity, String flowDefinitionKey, String flowDefinitionId, String flowInstanceId, Boolean flowEnd, String title, String description, String catalog, String category, String categorySub, String owner, String supervisor, String openBy, String openGroup, LocalDateTime openAt, String cancelBy, LocalDateTime cancelAt, String closeBy, LocalDateTime closeAt, String closeSolution, String closeCode, String closeKb, Boolean active, String sigma, String metadata, String language, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public WTicketRecord(final String key, final String serial, final String name, final String code, final String type, final String phase, final String modelId, final String modelKey, final String modelCategory, final String modelComponent, final String modelChild, final Integer quantity, final String flowDefinitionKey, final String flowDefinitionId, final String flowInstanceId, final Boolean flowEnd, final String title, final String description, final String catalog, final String category, final String categorySub, final String owner, final String supervisor, final String openBy, final String openGroup, final LocalDateTime openAt, final String cancelBy, final LocalDateTime cancelAt, final String closeBy, final LocalDateTime closeAt, final String closeSolution, final String closeCode, final String closeKb, final Boolean active, final String sigma, final String metadata, final String language, final LocalDateTime createdAt, final String createdBy, final LocalDateTime updatedAt, final String updatedBy) {
         super(WTicket.W_TICKET);
 
         setKey(key);
@@ -80,7 +80,7 @@ public class WTicketRecord extends UpdatableRecordImpl<WTicketRecord> implements
     /**
      * Create a detached, initialised WTicketRecord
      */
-    public WTicketRecord(io.zerows.extension.runtime.workflow.domain.tables.pojos.WTicket value) {
+    public WTicketRecord(final io.zerows.extension.runtime.workflow.domain.tables.pojos.WTicket value) {
         super(WTicket.W_TICKET);
 
         if (value != null) {
@@ -129,7 +129,7 @@ public class WTicketRecord extends UpdatableRecordImpl<WTicketRecord> implements
         }
     }
 
-    public WTicketRecord(io.vertx.core.json.JsonObject json) {
+    public WTicketRecord(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -146,7 +146,7 @@ public class WTicketRecord extends UpdatableRecordImpl<WTicketRecord> implements
      * Setter for <code>ZDB.W_TICKET.KEY</code>. 「key」- 单据主键
      */
     @Override
-    public WTicketRecord setKey(String value) {
+    public WTicketRecord setKey(final String value) {
         set(0, value);
         return this;
     }
@@ -165,7 +165,7 @@ public class WTicketRecord extends UpdatableRecordImpl<WTicketRecord> implements
      * 生成
      */
     @Override
-    public WTicketRecord setSerial(String value) {
+    public WTicketRecord setSerial(final String value) {
         set(1, value);
         return this;
     }
@@ -182,7 +182,7 @@ public class WTicketRecord extends UpdatableRecordImpl<WTicketRecord> implements
      * Setter for <code>ZDB.W_TICKET.NAME</code>. 「name」- 单据标题
      */
     @Override
-    public WTicketRecord setName(String value) {
+    public WTicketRecord setName(final String value) {
         set(2, value);
         return this;
     }
@@ -199,7 +199,7 @@ public class WTicketRecord extends UpdatableRecordImpl<WTicketRecord> implements
      * Setter for <code>ZDB.W_TICKET.CODE</code>. 「code」- 单据系统编号（内码）
      */
     @Override
-    public WTicketRecord setCode(String value) {
+    public WTicketRecord setCode(final String value) {
         set(3, value);
         return this;
     }
@@ -216,7 +216,7 @@ public class WTicketRecord extends UpdatableRecordImpl<WTicketRecord> implements
      * Setter for <code>ZDB.W_TICKET.TYPE</code>. 「type」- 主单类型类型
      */
     @Override
-    public WTicketRecord setType(String value) {
+    public WTicketRecord setType(final String value) {
         set(4, value);
         return this;
     }
@@ -235,7 +235,7 @@ public class WTicketRecord extends UpdatableRecordImpl<WTicketRecord> implements
      * 主单据所属阶段（状态描述，由于挂TODO，所以不使用status）
      */
     @Override
-    public WTicketRecord setPhase(String value) {
+    public WTicketRecord setPhase(final String value) {
         set(5, value);
         return this;
     }
@@ -254,7 +254,7 @@ public class WTicketRecord extends UpdatableRecordImpl<WTicketRecord> implements
      * 关联的模型identifier，用于描述
      */
     @Override
-    public WTicketRecord setModelId(String value) {
+    public WTicketRecord setModelId(final String value) {
         set(6, value);
         return this;
     }
@@ -273,7 +273,7 @@ public class WTicketRecord extends UpdatableRecordImpl<WTicketRecord> implements
      * 关联的模型记录ID，用于描述哪一个Model中的记录
      */
     @Override
-    public WTicketRecord setModelKey(String value) {
+    public WTicketRecord setModelKey(final String value) {
         set(7, value);
         return this;
     }
@@ -292,7 +292,7 @@ public class WTicketRecord extends UpdatableRecordImpl<WTicketRecord> implements
      * 关联的category记录，只包含叶节点
      */
     @Override
-    public WTicketRecord setModelCategory(String value) {
+    public WTicketRecord setModelCategory(final String value) {
         set(8, value);
         return this;
     }
@@ -311,7 +311,7 @@ public class WTicketRecord extends UpdatableRecordImpl<WTicketRecord> implements
      * 关联的待办组件记录
      */
     @Override
-    public WTicketRecord setModelComponent(String value) {
+    public WTicketRecord setModelComponent(final String value) {
         set(9, value);
         return this;
     }
@@ -330,7 +330,7 @@ public class WTicketRecord extends UpdatableRecordImpl<WTicketRecord> implements
      * 关联多个模型的记录ID，JsonArray格式
      */
     @Override
-    public WTicketRecord setModelChild(String value) {
+    public WTicketRecord setModelChild(final String value) {
         set(10, value);
         return this;
     }
@@ -349,7 +349,7 @@ public class WTicketRecord extends UpdatableRecordImpl<WTicketRecord> implements
      * 数量信息，多个模型记录时统计模型总数
      */
     @Override
-    public WTicketRecord setQuantity(Integer value) {
+    public WTicketRecord setQuantity(final Integer value) {
         set(11, value);
         return this;
     }
@@ -368,7 +368,7 @@ public class WTicketRecord extends UpdatableRecordImpl<WTicketRecord> implements
      * 「flowDefinitionKey」- 流程定义的KEY, getProcessDefinitionKey
      */
     @Override
-    public WTicketRecord setFlowDefinitionKey(String value) {
+    public WTicketRecord setFlowDefinitionKey(final String value) {
         set(12, value);
         return this;
     }
@@ -387,7 +387,7 @@ public class WTicketRecord extends UpdatableRecordImpl<WTicketRecord> implements
      * 「flowDefinitionId」- 流程定义的ID，getProcessDefinitionKey
      */
     @Override
-    public WTicketRecord setFlowDefinitionId(String value) {
+    public WTicketRecord setFlowDefinitionId(final String value) {
         set(13, value);
         return this;
     }
@@ -406,7 +406,7 @@ public class WTicketRecord extends UpdatableRecordImpl<WTicketRecord> implements
      * 流程定义的ID，getProcessId
      */
     @Override
-    public WTicketRecord setFlowInstanceId(String value) {
+    public WTicketRecord setFlowInstanceId(final String value) {
         set(14, value);
         return this;
     }
@@ -423,7 +423,7 @@ public class WTicketRecord extends UpdatableRecordImpl<WTicketRecord> implements
      * Setter for <code>ZDB.W_TICKET.FLOW_END</code>. 「flowEnd」- 主单是否执行完成
      */
     @Override
-    public WTicketRecord setFlowEnd(Boolean value) {
+    public WTicketRecord setFlowEnd(final Boolean value) {
         set(15, value);
         return this;
     }
@@ -440,7 +440,7 @@ public class WTicketRecord extends UpdatableRecordImpl<WTicketRecord> implements
      * Setter for <code>ZDB.W_TICKET.TITLE</code>. 「title」- 主单业务标题
      */
     @Override
-    public WTicketRecord setTitle(String value) {
+    public WTicketRecord setTitle(final String value) {
         set(16, value);
         return this;
     }
@@ -457,7 +457,7 @@ public class WTicketRecord extends UpdatableRecordImpl<WTicketRecord> implements
      * Setter for <code>ZDB.W_TICKET.DESCRIPTION</code>. 「description」- 主单描述内容
      */
     @Override
-    public WTicketRecord setDescription(String value) {
+    public WTicketRecord setDescription(final String value) {
         set(17, value);
         return this;
     }
@@ -474,7 +474,7 @@ public class WTicketRecord extends UpdatableRecordImpl<WTicketRecord> implements
      * Setter for <code>ZDB.W_TICKET.CATALOG</code>. 「catalog」- 关联服务目录
      */
     @Override
-    public WTicketRecord setCatalog(String value) {
+    public WTicketRecord setCatalog(final String value) {
         set(18, value);
         return this;
     }
@@ -491,7 +491,7 @@ public class WTicketRecord extends UpdatableRecordImpl<WTicketRecord> implements
      * Setter for <code>ZDB.W_TICKET.CATEGORY</code>. 「category」- 业务类别
      */
     @Override
-    public WTicketRecord setCategory(String value) {
+    public WTicketRecord setCategory(final String value) {
         set(19, value);
         return this;
     }
@@ -508,7 +508,7 @@ public class WTicketRecord extends UpdatableRecordImpl<WTicketRecord> implements
      * Setter for <code>ZDB.W_TICKET.CATEGORY_SUB</code>. 「categorySub」- 子类别
      */
     @Override
-    public WTicketRecord setCategorySub(String value) {
+    public WTicketRecord setCategorySub(final String value) {
         set(20, value);
         return this;
     }
@@ -525,7 +525,7 @@ public class WTicketRecord extends UpdatableRecordImpl<WTicketRecord> implements
      * Setter for <code>ZDB.W_TICKET.OWNER</code>. 「owner」- 制单人/拥有者
      */
     @Override
-    public WTicketRecord setOwner(String value) {
+    public WTicketRecord setOwner(final String value) {
         set(21, value);
         return this;
     }
@@ -542,7 +542,7 @@ public class WTicketRecord extends UpdatableRecordImpl<WTicketRecord> implements
      * Setter for <code>ZDB.W_TICKET.SUPERVISOR</code>. 「supervisor」- 监督人
      */
     @Override
-    public WTicketRecord setSupervisor(String value) {
+    public WTicketRecord setSupervisor(final String value) {
         set(22, value);
         return this;
     }
@@ -559,7 +559,7 @@ public class WTicketRecord extends UpdatableRecordImpl<WTicketRecord> implements
      * Setter for <code>ZDB.W_TICKET.OPEN_BY</code>. 「openBy」- 开单人
      */
     @Override
-    public WTicketRecord setOpenBy(String value) {
+    public WTicketRecord setOpenBy(final String value) {
         set(23, value);
         return this;
     }
@@ -576,7 +576,7 @@ public class WTicketRecord extends UpdatableRecordImpl<WTicketRecord> implements
      * Setter for <code>ZDB.W_TICKET.OPEN_GROUP</code>. 「openGroup」- 开单组
      */
     @Override
-    public WTicketRecord setOpenGroup(String value) {
+    public WTicketRecord setOpenGroup(final String value) {
         set(24, value);
         return this;
     }
@@ -593,7 +593,7 @@ public class WTicketRecord extends UpdatableRecordImpl<WTicketRecord> implements
      * Setter for <code>ZDB.W_TICKET.OPEN_AT</code>. 「openAt」- 开单时间
      */
     @Override
-    public WTicketRecord setOpenAt(LocalDateTime value) {
+    public WTicketRecord setOpenAt(final LocalDateTime value) {
         set(25, value);
         return this;
     }
@@ -610,7 +610,7 @@ public class WTicketRecord extends UpdatableRecordImpl<WTicketRecord> implements
      * Setter for <code>ZDB.W_TICKET.CANCEL_BY</code>. 「cancelBy」- 中断人
      */
     @Override
-    public WTicketRecord setCancelBy(String value) {
+    public WTicketRecord setCancelBy(final String value) {
         set(26, value);
         return this;
     }
@@ -627,7 +627,7 @@ public class WTicketRecord extends UpdatableRecordImpl<WTicketRecord> implements
      * Setter for <code>ZDB.W_TICKET.CANCEL_AT</code>. 「cancelAt」- 中断时间
      */
     @Override
-    public WTicketRecord setCancelAt(LocalDateTime value) {
+    public WTicketRecord setCancelAt(final LocalDateTime value) {
         set(27, value);
         return this;
     }
@@ -644,7 +644,7 @@ public class WTicketRecord extends UpdatableRecordImpl<WTicketRecord> implements
      * Setter for <code>ZDB.W_TICKET.CLOSE_BY</code>. 「closeBy」- 关闭人
      */
     @Override
-    public WTicketRecord setCloseBy(String value) {
+    public WTicketRecord setCloseBy(final String value) {
         set(28, value);
         return this;
     }
@@ -661,7 +661,7 @@ public class WTicketRecord extends UpdatableRecordImpl<WTicketRecord> implements
      * Setter for <code>ZDB.W_TICKET.CLOSE_AT</code>. 「closeAt」- 关闭时间
      */
     @Override
-    public WTicketRecord setCloseAt(LocalDateTime value) {
+    public WTicketRecord setCloseAt(final LocalDateTime value) {
         set(29, value);
         return this;
     }
@@ -680,7 +680,7 @@ public class WTicketRecord extends UpdatableRecordImpl<WTicketRecord> implements
      * 关闭解决方案
      */
     @Override
-    public WTicketRecord setCloseSolution(String value) {
+    public WTicketRecord setCloseSolution(final String value) {
         set(30, value);
         return this;
     }
@@ -697,7 +697,7 @@ public class WTicketRecord extends UpdatableRecordImpl<WTicketRecord> implements
      * Setter for <code>ZDB.W_TICKET.CLOSE_CODE</code>. 「closeCode」- 关闭代码
      */
     @Override
-    public WTicketRecord setCloseCode(String value) {
+    public WTicketRecord setCloseCode(final String value) {
         set(31, value);
         return this;
     }
@@ -714,7 +714,7 @@ public class WTicketRecord extends UpdatableRecordImpl<WTicketRecord> implements
      * Setter for <code>ZDB.W_TICKET.CLOSE_KB</code>. 「closeKb」- 关闭时KB链接地址
      */
     @Override
-    public WTicketRecord setCloseKb(String value) {
+    public WTicketRecord setCloseKb(final String value) {
         set(32, value);
         return this;
     }
@@ -731,7 +731,7 @@ public class WTicketRecord extends UpdatableRecordImpl<WTicketRecord> implements
      * Setter for <code>ZDB.W_TICKET.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public WTicketRecord setActive(Boolean value) {
+    public WTicketRecord setActive(final Boolean value) {
         set(33, value);
         return this;
     }
@@ -748,7 +748,7 @@ public class WTicketRecord extends UpdatableRecordImpl<WTicketRecord> implements
      * Setter for <code>ZDB.W_TICKET.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public WTicketRecord setSigma(String value) {
+    public WTicketRecord setSigma(final String value) {
         set(34, value);
         return this;
     }
@@ -765,7 +765,7 @@ public class WTicketRecord extends UpdatableRecordImpl<WTicketRecord> implements
      * Setter for <code>ZDB.W_TICKET.METADATA</code>. 「metadata」- 附加配置
      */
     @Override
-    public WTicketRecord setMetadata(String value) {
+    public WTicketRecord setMetadata(final String value) {
         set(35, value);
         return this;
     }
@@ -782,7 +782,7 @@ public class WTicketRecord extends UpdatableRecordImpl<WTicketRecord> implements
      * Setter for <code>ZDB.W_TICKET.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public WTicketRecord setLanguage(String value) {
+    public WTicketRecord setLanguage(final String value) {
         set(36, value);
         return this;
     }
@@ -799,7 +799,7 @@ public class WTicketRecord extends UpdatableRecordImpl<WTicketRecord> implements
      * Setter for <code>ZDB.W_TICKET.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public WTicketRecord setCreatedAt(LocalDateTime value) {
+    public WTicketRecord setCreatedAt(final LocalDateTime value) {
         set(37, value);
         return this;
     }
@@ -816,7 +816,7 @@ public class WTicketRecord extends UpdatableRecordImpl<WTicketRecord> implements
      * Setter for <code>ZDB.W_TICKET.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public WTicketRecord setCreatedBy(String value) {
+    public WTicketRecord setCreatedBy(final String value) {
         set(38, value);
         return this;
     }
@@ -841,7 +841,7 @@ public class WTicketRecord extends UpdatableRecordImpl<WTicketRecord> implements
      * Setter for <code>ZDB.W_TICKET.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public WTicketRecord setUpdatedAt(LocalDateTime value) {
+    public WTicketRecord setUpdatedAt(final LocalDateTime value) {
         set(39, value);
         return this;
     }
@@ -862,7 +862,7 @@ public class WTicketRecord extends UpdatableRecordImpl<WTicketRecord> implements
      * Setter for <code>ZDB.W_TICKET.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public WTicketRecord setUpdatedBy(String value) {
+    public WTicketRecord setUpdatedBy(final String value) {
         set(40, value);
         return this;
     }
@@ -873,7 +873,7 @@ public class WTicketRecord extends UpdatableRecordImpl<WTicketRecord> implements
     }
 
     @Override
-    public void from(IWTicket from) {
+    public void from(final IWTicket from) {
         setKey(from.getKey());
         setSerial(from.getSerial());
         setName(from.getName());
@@ -919,7 +919,7 @@ public class WTicketRecord extends UpdatableRecordImpl<WTicketRecord> implements
     }
 
     @Override
-    public <E extends IWTicket> E into(E into) {
+    public <E extends IWTicket> E into(final E into) {
         into.from(this);
         return into;
     }

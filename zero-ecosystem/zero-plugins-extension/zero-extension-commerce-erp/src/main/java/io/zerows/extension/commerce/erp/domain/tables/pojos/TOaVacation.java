@@ -4,7 +4,7 @@
 package io.zerows.extension.commerce.erp.domain.tables.pojos;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.commerce.erp.domain.tables.interfaces.ITOaVacation;
 
 import java.time.LocalDateTime;
@@ -30,7 +30,7 @@ public class TOaVacation implements VertxPojo, ITOaVacation {
     public TOaVacation() {
     }
 
-    public TOaVacation(ITOaVacation value) {
+    public TOaVacation(final ITOaVacation value) {
         this.key = value.getKey();
         this.commentExtension = value.getCommentExtension();
         this.requestBy = value.getRequestBy();
@@ -43,15 +43,15 @@ public class TOaVacation implements VertxPojo, ITOaVacation {
     }
 
     public TOaVacation(
-        String key,
-        String commentExtension,
-        String requestBy,
-        String classification,
-        LocalDateTime startAt,
-        LocalDateTime endAt,
-        Integer days,
-        String reason,
-        String workContent
+        final String key,
+        final String commentExtension,
+        final String requestBy,
+        final String classification,
+        final LocalDateTime startAt,
+        final LocalDateTime endAt,
+        final Integer days,
+        final String reason,
+        final String workContent
     ) {
         this.key = key;
         this.commentExtension = commentExtension;
@@ -64,7 +64,7 @@ public class TOaVacation implements VertxPojo, ITOaVacation {
         this.workContent = workContent;
     }
 
-    public TOaVacation(io.vertx.core.json.JsonObject json) {
+    public TOaVacation(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -81,7 +81,7 @@ public class TOaVacation implements VertxPojo, ITOaVacation {
      * Setter for <code>ZDB.T_OA_VACATION.KEY</code>. 「key」- Ticket Primary Key
      */
     @Override
-    public TOaVacation setKey(String key) {
+    public TOaVacation setKey(final String key) {
         this.key = key;
         return this;
     }
@@ -100,7 +100,7 @@ public class TOaVacation implements VertxPojo, ITOaVacation {
      * 「commentExtension」- Extension Comment
      */
     @Override
-    public TOaVacation setCommentExtension(String commentExtension) {
+    public TOaVacation setCommentExtension(final String commentExtension) {
         this.commentExtension = commentExtension;
         return this;
     }
@@ -119,7 +119,7 @@ public class TOaVacation implements VertxPojo, ITOaVacation {
      * Request User
      */
     @Override
-    public TOaVacation setRequestBy(String requestBy) {
+    public TOaVacation setRequestBy(final String requestBy) {
         this.requestBy = requestBy;
         return this;
     }
@@ -138,7 +138,7 @@ public class TOaVacation implements VertxPojo, ITOaVacation {
      * 「classification」- The ticket related income type
      */
     @Override
-    public TOaVacation setClassification(String classification) {
+    public TOaVacation setClassification(final String classification) {
         this.classification = classification;
         return this;
     }
@@ -155,7 +155,7 @@ public class TOaVacation implements VertxPojo, ITOaVacation {
      * Setter for <code>ZDB.T_OA_VACATION.START_AT</code>. 「startAt」- From
      */
     @Override
-    public TOaVacation setStartAt(LocalDateTime startAt) {
+    public TOaVacation setStartAt(final LocalDateTime startAt) {
         this.startAt = startAt;
         return this;
     }
@@ -172,7 +172,7 @@ public class TOaVacation implements VertxPojo, ITOaVacation {
      * Setter for <code>ZDB.T_OA_VACATION.END_AT</code>. 「endAt」- To
      */
     @Override
-    public TOaVacation setEndAt(LocalDateTime endAt) {
+    public TOaVacation setEndAt(final LocalDateTime endAt) {
         this.endAt = endAt;
         return this;
     }
@@ -189,7 +189,7 @@ public class TOaVacation implements VertxPojo, ITOaVacation {
      * Setter for <code>ZDB.T_OA_VACATION.DAYS</code>. 「days」- Duration
      */
     @Override
-    public TOaVacation setDays(Integer days) {
+    public TOaVacation setDays(final Integer days) {
         this.days = days;
         return this;
     }
@@ -208,7 +208,7 @@ public class TOaVacation implements VertxPojo, ITOaVacation {
      * be done
      */
     @Override
-    public TOaVacation setReason(String reason) {
+    public TOaVacation setReason(final String reason) {
         this.reason = reason;
         return this;
     }
@@ -227,13 +227,13 @@ public class TOaVacation implements VertxPojo, ITOaVacation {
      * Working Assignment Content
      */
     @Override
-    public TOaVacation setWorkContent(String workContent) {
+    public TOaVacation setWorkContent(final String workContent) {
         this.workContent = workContent;
         return this;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
@@ -307,7 +307,7 @@ public class TOaVacation implements VertxPojo, ITOaVacation {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("TOaVacation (");
+        final StringBuilder sb = new StringBuilder("TOaVacation (");
 
         sb.append(key);
         sb.append(", ").append(commentExtension);
@@ -328,7 +328,7 @@ public class TOaVacation implements VertxPojo, ITOaVacation {
     // -------------------------------------------------------------------------
 
     @Override
-    public void from(ITOaVacation from) {
+    public void from(final ITOaVacation from) {
         setKey(from.getKey());
         setCommentExtension(from.getCommentExtension());
         setRequestBy(from.getRequestBy());
@@ -341,7 +341,7 @@ public class TOaVacation implements VertxPojo, ITOaVacation {
     }
 
     @Override
-    public <E extends ITOaVacation> E into(E into) {
+    public <E extends ITOaVacation> E into(final E into) {
         into.from(this);
         return into;
     }

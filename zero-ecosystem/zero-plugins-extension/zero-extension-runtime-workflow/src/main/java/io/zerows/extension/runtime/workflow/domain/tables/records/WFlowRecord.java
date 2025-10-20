@@ -4,7 +4,7 @@
 package io.zerows.extension.runtime.workflow.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.runtime.workflow.domain.tables.WFlow;
 import io.zerows.extension.runtime.workflow.domain.tables.interfaces.IWFlow;
 import org.jooq.Record1;
@@ -30,7 +30,7 @@ public class WFlowRecord extends UpdatableRecordImpl<WFlowRecord> implements Ver
     /**
      * Create a detached, initialised WFlowRecord
      */
-    public WFlowRecord(String key, String name, String code, String type, String definitionKey, String authorizedComponent, String authorizedConfig, String generateComponent, String generateConfig, String runComponent, String runConfig, String startComponent, String startConfig, String endComponent, String endConfig, String uiComponent, String uiConfig, String uiAssist, String uiLinkage, String comment, Boolean active, String sigma, String metadata, String language, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public WFlowRecord(final String key, final String name, final String code, final String type, final String definitionKey, final String authorizedComponent, final String authorizedConfig, final String generateComponent, final String generateConfig, final String runComponent, final String runConfig, final String startComponent, final String startConfig, final String endComponent, final String endConfig, final String uiComponent, final String uiConfig, final String uiAssist, final String uiLinkage, final String comment, final Boolean active, final String sigma, final String metadata, final String language, final LocalDateTime createdAt, final String createdBy, final LocalDateTime updatedAt, final String updatedBy) {
         super(WFlow.W_FLOW);
 
         setKey(key);
@@ -67,7 +67,7 @@ public class WFlowRecord extends UpdatableRecordImpl<WFlowRecord> implements Ver
     /**
      * Create a detached, initialised WFlowRecord
      */
-    public WFlowRecord(io.zerows.extension.runtime.workflow.domain.tables.pojos.WFlow value) {
+    public WFlowRecord(final io.zerows.extension.runtime.workflow.domain.tables.pojos.WFlow value) {
         super(WFlow.W_FLOW);
 
         if (value != null) {
@@ -103,7 +103,7 @@ public class WFlowRecord extends UpdatableRecordImpl<WFlowRecord> implements Ver
         }
     }
 
-    public WFlowRecord(io.vertx.core.json.JsonObject json) {
+    public WFlowRecord(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -120,7 +120,7 @@ public class WFlowRecord extends UpdatableRecordImpl<WFlowRecord> implements Ver
      * Setter for <code>ZDB.W_FLOW.KEY</code>. 「key」- 流程定义主键
      */
     @Override
-    public WFlowRecord setKey(String value) {
+    public WFlowRecord setKey(final String value) {
         set(0, value);
         return this;
     }
@@ -137,7 +137,7 @@ public class WFlowRecord extends UpdatableRecordImpl<WFlowRecord> implements Ver
      * Setter for <code>ZDB.W_FLOW.NAME</code>. 「name」- 流程定义名称
      */
     @Override
-    public WFlowRecord setName(String value) {
+    public WFlowRecord setName(final String value) {
         set(1, value);
         return this;
     }
@@ -154,7 +154,7 @@ public class WFlowRecord extends UpdatableRecordImpl<WFlowRecord> implements Ver
      * Setter for <code>ZDB.W_FLOW.CODE</code>. 「code」- 流程定义编号（系统可用）
      */
     @Override
-    public WFlowRecord setCode(String value) {
+    public WFlowRecord setCode(final String value) {
         set(2, value);
         return this;
     }
@@ -173,7 +173,7 @@ public class WFlowRecord extends UpdatableRecordImpl<WFlowRecord> implements Ver
      * zero.workflow.cat的X_TABULAR
      */
     @Override
-    public WFlowRecord setType(String value) {
+    public WFlowRecord setType(final String value) {
         set(3, value);
         return this;
     }
@@ -192,7 +192,7 @@ public class WFlowRecord extends UpdatableRecordImpl<WFlowRecord> implements Ver
      * 定义ID（读取流程图所需）, getProcessDefinitionId
      */
     @Override
-    public WFlowRecord setDefinitionKey(String value) {
+    public WFlowRecord setDefinitionKey(final String value) {
         set(4, value);
         return this;
     }
@@ -211,7 +211,7 @@ public class WFlowRecord extends UpdatableRecordImpl<WFlowRecord> implements Ver
      * 「authorizedComponent」- 流程授权组件
      */
     @Override
-    public WFlowRecord setAuthorizedComponent(String value) {
+    public WFlowRecord setAuthorizedComponent(final String value) {
         set(5, value);
         return this;
     }
@@ -230,7 +230,7 @@ public class WFlowRecord extends UpdatableRecordImpl<WFlowRecord> implements Ver
      * 流程授权配置
      */
     @Override
-    public WFlowRecord setAuthorizedConfig(String value) {
+    public WFlowRecord setAuthorizedConfig(final String value) {
         set(6, value);
         return this;
     }
@@ -249,7 +249,7 @@ public class WFlowRecord extends UpdatableRecordImpl<WFlowRecord> implements Ver
      * 「generateComponent」- Todo生成组件
      */
     @Override
-    public WFlowRecord setGenerateComponent(String value) {
+    public WFlowRecord setGenerateComponent(final String value) {
         set(7, value);
         return this;
     }
@@ -268,7 +268,7 @@ public class WFlowRecord extends UpdatableRecordImpl<WFlowRecord> implements Ver
      * Todo生成配置
      */
     @Override
-    public WFlowRecord setGenerateConfig(String value) {
+    public WFlowRecord setGenerateConfig(final String value) {
         set(8, value);
         return this;
     }
@@ -285,7 +285,7 @@ public class WFlowRecord extends UpdatableRecordImpl<WFlowRecord> implements Ver
      * Setter for <code>ZDB.W_FLOW.RUN_COMPONENT</code>. 「runComponent」- 执行组件
      */
     @Override
-    public WFlowRecord setRunComponent(String value) {
+    public WFlowRecord setRunComponent(final String value) {
         set(9, value);
         return this;
     }
@@ -302,7 +302,7 @@ public class WFlowRecord extends UpdatableRecordImpl<WFlowRecord> implements Ver
      * Setter for <code>ZDB.W_FLOW.RUN_CONFIG</code>. 「runConfig」- 执行配置
      */
     @Override
-    public WFlowRecord setRunConfig(String value) {
+    public WFlowRecord setRunConfig(final String value) {
         set(10, value);
         return this;
     }
@@ -321,7 +321,7 @@ public class WFlowRecord extends UpdatableRecordImpl<WFlowRecord> implements Ver
      * 启动组件
      */
     @Override
-    public WFlowRecord setStartComponent(String value) {
+    public WFlowRecord setStartComponent(final String value) {
         set(11, value);
         return this;
     }
@@ -338,7 +338,7 @@ public class WFlowRecord extends UpdatableRecordImpl<WFlowRecord> implements Ver
      * Setter for <code>ZDB.W_FLOW.START_CONFIG</code>. 「startConfig」- 启动配置
      */
     @Override
-    public WFlowRecord setStartConfig(String value) {
+    public WFlowRecord setStartConfig(final String value) {
         set(12, value);
         return this;
     }
@@ -355,7 +355,7 @@ public class WFlowRecord extends UpdatableRecordImpl<WFlowRecord> implements Ver
      * Setter for <code>ZDB.W_FLOW.END_COMPONENT</code>. 「endComponent」- 完成组件
      */
     @Override
-    public WFlowRecord setEndComponent(String value) {
+    public WFlowRecord setEndComponent(final String value) {
         set(13, value);
         return this;
     }
@@ -372,7 +372,7 @@ public class WFlowRecord extends UpdatableRecordImpl<WFlowRecord> implements Ver
      * Setter for <code>ZDB.W_FLOW.END_CONFIG</code>. 「endConfig」- 完成配置
      */
     @Override
-    public WFlowRecord setEndConfig(String value) {
+    public WFlowRecord setEndConfig(final String value) {
         set(14, value);
         return this;
     }
@@ -389,7 +389,7 @@ public class WFlowRecord extends UpdatableRecordImpl<WFlowRecord> implements Ver
      * Setter for <code>ZDB.W_FLOW.UI_COMPONENT</code>. 「uiComponent」- 界面组件
      */
     @Override
-    public WFlowRecord setUiComponent(String value) {
+    public WFlowRecord setUiComponent(final String value) {
         set(15, value);
         return this;
     }
@@ -406,7 +406,7 @@ public class WFlowRecord extends UpdatableRecordImpl<WFlowRecord> implements Ver
      * Setter for <code>ZDB.W_FLOW.UI_CONFIG</code>. 「uiConfig」- 界面配置
      */
     @Override
-    public WFlowRecord setUiConfig(String value) {
+    public WFlowRecord setUiConfig(final String value) {
         set(16, value);
         return this;
     }
@@ -423,7 +423,7 @@ public class WFlowRecord extends UpdatableRecordImpl<WFlowRecord> implements Ver
      * Setter for <code>ZDB.W_FLOW.UI_ASSIST</code>. 「uiAssist」- 界面辅助数据专用配置
      */
     @Override
-    public WFlowRecord setUiAssist(String value) {
+    public WFlowRecord setUiAssist(final String value) {
         set(17, value);
         return this;
     }
@@ -442,7 +442,7 @@ public class WFlowRecord extends UpdatableRecordImpl<WFlowRecord> implements Ver
      * 关联部分专用配置：关联工单、关联资产、关联附件
      */
     @Override
-    public WFlowRecord setUiLinkage(String value) {
+    public WFlowRecord setUiLinkage(final String value) {
         set(18, value);
         return this;
     }
@@ -459,7 +459,7 @@ public class WFlowRecord extends UpdatableRecordImpl<WFlowRecord> implements Ver
      * Setter for <code>ZDB.W_FLOW.COMMENT</code>. 「comment」 - 流程定义备注
      */
     @Override
-    public WFlowRecord setComment(String value) {
+    public WFlowRecord setComment(final String value) {
         set(19, value);
         return this;
     }
@@ -476,7 +476,7 @@ public class WFlowRecord extends UpdatableRecordImpl<WFlowRecord> implements Ver
      * Setter for <code>ZDB.W_FLOW.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public WFlowRecord setActive(Boolean value) {
+    public WFlowRecord setActive(final Boolean value) {
         set(20, value);
         return this;
     }
@@ -493,7 +493,7 @@ public class WFlowRecord extends UpdatableRecordImpl<WFlowRecord> implements Ver
      * Setter for <code>ZDB.W_FLOW.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public WFlowRecord setSigma(String value) {
+    public WFlowRecord setSigma(final String value) {
         set(21, value);
         return this;
     }
@@ -510,7 +510,7 @@ public class WFlowRecord extends UpdatableRecordImpl<WFlowRecord> implements Ver
      * Setter for <code>ZDB.W_FLOW.METADATA</code>. 「metadata」- 附加配置
      */
     @Override
-    public WFlowRecord setMetadata(String value) {
+    public WFlowRecord setMetadata(final String value) {
         set(22, value);
         return this;
     }
@@ -527,7 +527,7 @@ public class WFlowRecord extends UpdatableRecordImpl<WFlowRecord> implements Ver
      * Setter for <code>ZDB.W_FLOW.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public WFlowRecord setLanguage(String value) {
+    public WFlowRecord setLanguage(final String value) {
         set(23, value);
         return this;
     }
@@ -544,7 +544,7 @@ public class WFlowRecord extends UpdatableRecordImpl<WFlowRecord> implements Ver
      * Setter for <code>ZDB.W_FLOW.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public WFlowRecord setCreatedAt(LocalDateTime value) {
+    public WFlowRecord setCreatedAt(final LocalDateTime value) {
         set(24, value);
         return this;
     }
@@ -561,7 +561,7 @@ public class WFlowRecord extends UpdatableRecordImpl<WFlowRecord> implements Ver
      * Setter for <code>ZDB.W_FLOW.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public WFlowRecord setCreatedBy(String value) {
+    public WFlowRecord setCreatedBy(final String value) {
         set(25, value);
         return this;
     }
@@ -586,7 +586,7 @@ public class WFlowRecord extends UpdatableRecordImpl<WFlowRecord> implements Ver
      * Setter for <code>ZDB.W_FLOW.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public WFlowRecord setUpdatedAt(LocalDateTime value) {
+    public WFlowRecord setUpdatedAt(final LocalDateTime value) {
         set(26, value);
         return this;
     }
@@ -607,7 +607,7 @@ public class WFlowRecord extends UpdatableRecordImpl<WFlowRecord> implements Ver
      * Setter for <code>ZDB.W_FLOW.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public WFlowRecord setUpdatedBy(String value) {
+    public WFlowRecord setUpdatedBy(final String value) {
         set(27, value);
         return this;
     }
@@ -618,7 +618,7 @@ public class WFlowRecord extends UpdatableRecordImpl<WFlowRecord> implements Ver
     }
 
     @Override
-    public void from(IWFlow from) {
+    public void from(final IWFlow from) {
         setKey(from.getKey());
         setName(from.getName());
         setCode(from.getCode());
@@ -651,7 +651,7 @@ public class WFlowRecord extends UpdatableRecordImpl<WFlowRecord> implements Ver
     }
 
     @Override
-    public <E extends IWFlow> E into(E into) {
+    public <E extends IWFlow> E into(final E into) {
         into.from(this);
         return into;
     }

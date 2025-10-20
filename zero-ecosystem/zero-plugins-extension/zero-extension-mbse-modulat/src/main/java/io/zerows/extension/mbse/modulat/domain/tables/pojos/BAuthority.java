@@ -4,7 +4,7 @@
 package io.zerows.extension.mbse.modulat.domain.tables.pojos;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.mbse.modulat.domain.tables.interfaces.IBAuthority;
 
 /**
@@ -31,7 +31,7 @@ public class BAuthority implements VertxPojo, IBAuthority {
     public BAuthority() {
     }
 
-    public BAuthority(IBAuthority value) {
+    public BAuthority(final IBAuthority value) {
         this.key = value.getKey();
         this.code = value.getCode();
         this.blockId = value.getBlockId();
@@ -47,18 +47,18 @@ public class BAuthority implements VertxPojo, IBAuthority {
     }
 
     public BAuthority(
-        String key,
-        String code,
-        String blockId,
-        String type,
-        String licResource,
-        String licAction,
-        String licPermission,
-        String licView,
-        Boolean active,
-        String sigma,
-        String metadata,
-        String language
+        final String key,
+        final String code,
+        final String blockId,
+        final String type,
+        final String licResource,
+        final String licAction,
+        final String licPermission,
+        final String licView,
+        final Boolean active,
+        final String sigma,
+        final String metadata,
+        final String language
     ) {
         this.key = key;
         this.code = code;
@@ -74,7 +74,7 @@ public class BAuthority implements VertxPojo, IBAuthority {
         this.language = language;
     }
 
-    public BAuthority(io.vertx.core.json.JsonObject json) {
+    public BAuthority(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -91,7 +91,7 @@ public class BAuthority implements VertxPojo, IBAuthority {
      * Setter for <code>ZDB.B_AUTHORITY.KEY</code>. 「key」- 主键
      */
     @Override
-    public BAuthority setKey(String key) {
+    public BAuthority setKey(final String key) {
         this.key = key;
         return this;
     }
@@ -108,7 +108,7 @@ public class BAuthority implements VertxPojo, IBAuthority {
      * Setter for <code>ZDB.B_AUTHORITY.CODE</code>. 「name」- 系统内部编码
      */
     @Override
-    public BAuthority setCode(String code) {
+    public BAuthority setCode(final String code) {
         this.code = code;
         return this;
     }
@@ -125,7 +125,7 @@ public class BAuthority implements VertxPojo, IBAuthority {
      * Setter for <code>ZDB.B_AUTHORITY.BLOCK_ID</code>. 「blockId」- 所属模块ID
      */
     @Override
-    public BAuthority setBlockId(String blockId) {
+    public BAuthority setBlockId(final String blockId) {
         this.blockId = blockId;
         return this;
     }
@@ -142,7 +142,7 @@ public class BAuthority implements VertxPojo, IBAuthority {
      * Setter for <code>ZDB.B_AUTHORITY.TYPE</code>. 「type」- 类型保留，单独区分
      */
     @Override
-    public BAuthority setType(String type) {
+    public BAuthority setType(final String type) {
         this.type = type;
         return this;
     }
@@ -159,7 +159,7 @@ public class BAuthority implements VertxPojo, IBAuthority {
      * Setter for <code>ZDB.B_AUTHORITY.LIC_RESOURCE</code>. 「licResource」- 资源编码
      */
     @Override
-    public BAuthority setLicResource(String licResource) {
+    public BAuthority setLicResource(final String licResource) {
         this.licResource = licResource;
         return this;
     }
@@ -176,7 +176,7 @@ public class BAuthority implements VertxPojo, IBAuthority {
      * Setter for <code>ZDB.B_AUTHORITY.LIC_ACTION</code>. 「licAction」- 操作编码
      */
     @Override
-    public BAuthority setLicAction(String licAction) {
+    public BAuthority setLicAction(final String licAction) {
         this.licAction = licAction;
         return this;
     }
@@ -195,7 +195,7 @@ public class BAuthority implements VertxPojo, IBAuthority {
      * 所需权限集合
      */
     @Override
-    public BAuthority setLicPermission(String licPermission) {
+    public BAuthority setLicPermission(final String licPermission) {
         this.licPermission = licPermission;
         return this;
     }
@@ -212,7 +212,7 @@ public class BAuthority implements VertxPojo, IBAuthority {
      * Setter for <code>ZDB.B_AUTHORITY.LIC_VIEW</code>. 「licView」- 视图集合
      */
     @Override
-    public BAuthority setLicView(String licView) {
+    public BAuthority setLicView(final String licView) {
         this.licView = licView;
         return this;
     }
@@ -229,7 +229,7 @@ public class BAuthority implements VertxPojo, IBAuthority {
      * Setter for <code>ZDB.B_AUTHORITY.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public BAuthority setActive(Boolean active) {
+    public BAuthority setActive(final Boolean active) {
         this.active = active;
         return this;
     }
@@ -246,7 +246,7 @@ public class BAuthority implements VertxPojo, IBAuthority {
      * Setter for <code>ZDB.B_AUTHORITY.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public BAuthority setSigma(String sigma) {
+    public BAuthority setSigma(final String sigma) {
         this.sigma = sigma;
         return this;
     }
@@ -263,7 +263,7 @@ public class BAuthority implements VertxPojo, IBAuthority {
      * Setter for <code>ZDB.B_AUTHORITY.METADATA</code>. 「metadata」- 附加配置
      */
     @Override
-    public BAuthority setMetadata(String metadata) {
+    public BAuthority setMetadata(final String metadata) {
         this.metadata = metadata;
         return this;
     }
@@ -280,13 +280,13 @@ public class BAuthority implements VertxPojo, IBAuthority {
      * Setter for <code>ZDB.B_AUTHORITY.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public BAuthority setLanguage(String language) {
+    public BAuthority setLanguage(final String language) {
         this.language = language;
         return this;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
@@ -378,7 +378,7 @@ public class BAuthority implements VertxPojo, IBAuthority {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("BAuthority (");
+        final StringBuilder sb = new StringBuilder("BAuthority (");
 
         sb.append(key);
         sb.append(", ").append(code);
@@ -402,7 +402,7 @@ public class BAuthority implements VertxPojo, IBAuthority {
     // -------------------------------------------------------------------------
 
     @Override
-    public void from(IBAuthority from) {
+    public void from(final IBAuthority from) {
         setKey(from.getKey());
         setCode(from.getCode());
         setBlockId(from.getBlockId());
@@ -418,7 +418,7 @@ public class BAuthority implements VertxPojo, IBAuthority {
     }
 
     @Override
-    public <E extends IBAuthority> E into(E into) {
+    public <E extends IBAuthority> E into(final E into) {
         into.from(this);
         return into;
     }

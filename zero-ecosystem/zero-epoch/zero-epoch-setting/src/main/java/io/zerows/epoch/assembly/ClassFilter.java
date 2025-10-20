@@ -47,7 +47,7 @@ interface ClassFilter {
         "freemarker",
         "geny",
         "io.github",
-        "io.github.jklingsporn",
+        "io.r2mo",
         "io.grpc",
         "io.micrometer",
         "io.netty",

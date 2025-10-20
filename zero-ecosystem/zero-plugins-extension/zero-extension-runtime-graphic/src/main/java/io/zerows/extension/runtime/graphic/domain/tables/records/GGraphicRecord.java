@@ -4,7 +4,7 @@
 package io.zerows.extension.runtime.graphic.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.runtime.graphic.domain.tables.GGraphic;
 import io.zerows.extension.runtime.graphic.domain.tables.interfaces.IGGraphic;
 import org.jooq.Field;
@@ -33,7 +33,7 @@ public class GGraphicRecord extends UpdatableRecordImpl<GGraphicRecord> implemen
     /**
      * Create a detached, initialised GGraphicRecord
      */
-    public GGraphicRecord(String key, String name, String code, String mode, String type, String comments, String ownerId, String ui, String graphicId, Boolean master, String modelId, String modelKey, String modelCategory, String sigma, String language, Boolean active, String metadata, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public GGraphicRecord(final String key, final String name, final String code, final String mode, final String type, final String comments, final String ownerId, final String ui, final String graphicId, final Boolean master, final String modelId, final String modelKey, final String modelCategory, final String sigma, final String language, final Boolean active, final String metadata, final LocalDateTime createdAt, final String createdBy, final LocalDateTime updatedAt, final String updatedBy) {
         super(GGraphic.G_GRAPHIC);
 
         setKey(key);
@@ -63,7 +63,7 @@ public class GGraphicRecord extends UpdatableRecordImpl<GGraphicRecord> implemen
     /**
      * Create a detached, initialised GGraphicRecord
      */
-    public GGraphicRecord(io.zerows.extension.runtime.graphic.domain.tables.pojos.GGraphic value) {
+    public GGraphicRecord(final io.zerows.extension.runtime.graphic.domain.tables.pojos.GGraphic value) {
         super(GGraphic.G_GRAPHIC);
 
         if (value != null) {
@@ -92,7 +92,7 @@ public class GGraphicRecord extends UpdatableRecordImpl<GGraphicRecord> implemen
         }
     }
 
-    public GGraphicRecord(io.vertx.core.json.JsonObject json) {
+    public GGraphicRecord(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -109,7 +109,7 @@ public class GGraphicRecord extends UpdatableRecordImpl<GGraphicRecord> implemen
      * Setter for <code>ZDB.G_GRAPHIC.KEY</code>. 「key」- 图ID
      */
     @Override
-    public GGraphicRecord setKey(String value) {
+    public GGraphicRecord setKey(final String value) {
         set(0, value);
         return this;
     }
@@ -126,7 +126,7 @@ public class GGraphicRecord extends UpdatableRecordImpl<GGraphicRecord> implemen
      * Setter for <code>ZDB.G_GRAPHIC.NAME</code>. 「name」- 图名称
      */
     @Override
-    public GGraphicRecord setName(String value) {
+    public GGraphicRecord setName(final String value) {
         set(1, value);
         return this;
     }
@@ -145,7 +145,7 @@ public class GGraphicRecord extends UpdatableRecordImpl<GGraphicRecord> implemen
      * neo4j的图ID规范（使用一定命名规则）
      */
     @Override
-    public GGraphicRecord setCode(String value) {
+    public GGraphicRecord setCode(final String value) {
         set(2, value);
         return this;
     }
@@ -164,7 +164,7 @@ public class GGraphicRecord extends UpdatableRecordImpl<GGraphicRecord> implemen
      * MIND / TREE
      */
     @Override
-    public GGraphicRecord setMode(String value) {
+    public GGraphicRecord setMode(final String value) {
         set(3, value);
         return this;
     }
@@ -183,7 +183,7 @@ public class GGraphicRecord extends UpdatableRecordImpl<GGraphicRecord> implemen
      * INSTANCE 圈子、定义、实例，可扩展 tabular
      */
     @Override
-    public GGraphicRecord setType(String value) {
+    public GGraphicRecord setType(final String value) {
         set(4, value);
         return this;
     }
@@ -200,7 +200,7 @@ public class GGraphicRecord extends UpdatableRecordImpl<GGraphicRecord> implemen
      * Setter for <code>ZDB.G_GRAPHIC.COMMENTS</code>. 「comments」- 图备注信息
      */
     @Override
-    public GGraphicRecord setComments(String value) {
+    public GGraphicRecord setComments(final String value) {
         set(5, value);
         return this;
     }
@@ -219,7 +219,7 @@ public class GGraphicRecord extends UpdatableRecordImpl<GGraphicRecord> implemen
      * 图的拥有者，可管理该图信息的人员ID
      */
     @Override
-    public GGraphicRecord setOwnerId(String value) {
+    public GGraphicRecord setOwnerId(final String value) {
         set(6, value);
         return this;
     }
@@ -236,7 +236,7 @@ public class GGraphicRecord extends UpdatableRecordImpl<GGraphicRecord> implemen
      * Setter for <code>ZDB.G_GRAPHIC.UI</code>. 「ui」- ui配置专用
      */
     @Override
-    public GGraphicRecord setUi(String value) {
+    public GGraphicRecord setUi(final String value) {
         set(7, value);
         return this;
     }
@@ -255,7 +255,7 @@ public class GGraphicRecord extends UpdatableRecordImpl<GGraphicRecord> implemen
      * 父图ID（当前图是父图的子图，独立管理，创建时需要）
      */
     @Override
-    public GGraphicRecord setGraphicId(String value) {
+    public GGraphicRecord setGraphicId(final String value) {
         set(8, value);
         return this;
     }
@@ -274,7 +274,7 @@ public class GGraphicRecord extends UpdatableRecordImpl<GGraphicRecord> implemen
      * 主图（不可删除、父ID为NULL、模块级唯一）
      */
     @Override
-    public GGraphicRecord setMaster(Boolean value) {
+    public GGraphicRecord setMaster(final Boolean value) {
         set(9, value);
         return this;
     }
@@ -293,7 +293,7 @@ public class GGraphicRecord extends UpdatableRecordImpl<GGraphicRecord> implemen
      * 关联的模型identifier，用于描述
      */
     @Override
-    public GGraphicRecord setModelId(String value) {
+    public GGraphicRecord setModelId(final String value) {
         set(10, value);
         return this;
     }
@@ -312,7 +312,7 @@ public class GGraphicRecord extends UpdatableRecordImpl<GGraphicRecord> implemen
      * 关联的模型记录ID，用于描述哪一个Model中的记录
      */
     @Override
-    public GGraphicRecord setModelKey(String value) {
+    public GGraphicRecord setModelKey(final String value) {
         set(11, value);
         return this;
     }
@@ -331,7 +331,7 @@ public class GGraphicRecord extends UpdatableRecordImpl<GGraphicRecord> implemen
      * 关联的category记录，只包含叶节点
      */
     @Override
-    public GGraphicRecord setModelCategory(String value) {
+    public GGraphicRecord setModelCategory(final String value) {
         set(12, value);
         return this;
     }
@@ -348,7 +348,7 @@ public class GGraphicRecord extends UpdatableRecordImpl<GGraphicRecord> implemen
      * Setter for <code>ZDB.G_GRAPHIC.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public GGraphicRecord setSigma(String value) {
+    public GGraphicRecord setSigma(final String value) {
         set(13, value);
         return this;
     }
@@ -365,7 +365,7 @@ public class GGraphicRecord extends UpdatableRecordImpl<GGraphicRecord> implemen
      * Setter for <code>ZDB.G_GRAPHIC.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public GGraphicRecord setLanguage(String value) {
+    public GGraphicRecord setLanguage(final String value) {
         set(14, value);
         return this;
     }
@@ -382,7 +382,7 @@ public class GGraphicRecord extends UpdatableRecordImpl<GGraphicRecord> implemen
      * Setter for <code>ZDB.G_GRAPHIC.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public GGraphicRecord setActive(Boolean value) {
+    public GGraphicRecord setActive(final Boolean value) {
         set(15, value);
         return this;
     }
@@ -399,7 +399,7 @@ public class GGraphicRecord extends UpdatableRecordImpl<GGraphicRecord> implemen
      * Setter for <code>ZDB.G_GRAPHIC.METADATA</code>. 「metadata」- 附加配置数据
      */
     @Override
-    public GGraphicRecord setMetadata(String value) {
+    public GGraphicRecord setMetadata(final String value) {
         set(16, value);
         return this;
     }
@@ -416,7 +416,7 @@ public class GGraphicRecord extends UpdatableRecordImpl<GGraphicRecord> implemen
      * Setter for <code>ZDB.G_GRAPHIC.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public GGraphicRecord setCreatedAt(LocalDateTime value) {
+    public GGraphicRecord setCreatedAt(final LocalDateTime value) {
         set(17, value);
         return this;
     }
@@ -433,7 +433,7 @@ public class GGraphicRecord extends UpdatableRecordImpl<GGraphicRecord> implemen
      * Setter for <code>ZDB.G_GRAPHIC.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public GGraphicRecord setCreatedBy(String value) {
+    public GGraphicRecord setCreatedBy(final String value) {
         set(18, value);
         return this;
     }
@@ -458,7 +458,7 @@ public class GGraphicRecord extends UpdatableRecordImpl<GGraphicRecord> implemen
      * Setter for <code>ZDB.G_GRAPHIC.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public GGraphicRecord setUpdatedAt(LocalDateTime value) {
+    public GGraphicRecord setUpdatedAt(final LocalDateTime value) {
         set(19, value);
         return this;
     }
@@ -475,7 +475,7 @@ public class GGraphicRecord extends UpdatableRecordImpl<GGraphicRecord> implemen
      * Setter for <code>ZDB.G_GRAPHIC.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public GGraphicRecord setUpdatedBy(String value) {
+    public GGraphicRecord setUpdatedBy(final String value) {
         set(20, value);
         return this;
     }
@@ -811,109 +811,109 @@ public class GGraphicRecord extends UpdatableRecordImpl<GGraphicRecord> implemen
     }
 
     @Override
-    public GGraphicRecord value1(String value) {
+    public GGraphicRecord value1(final String value) {
         setKey(value);
         return this;
     }
 
     @Override
-    public GGraphicRecord value2(String value) {
+    public GGraphicRecord value2(final String value) {
         setName(value);
         return this;
     }
 
     @Override
-    public GGraphicRecord value3(String value) {
+    public GGraphicRecord value3(final String value) {
         setCode(value);
         return this;
     }
 
     @Override
-    public GGraphicRecord value4(String value) {
+    public GGraphicRecord value4(final String value) {
         setMode(value);
         return this;
     }
 
     @Override
-    public GGraphicRecord value5(String value) {
+    public GGraphicRecord value5(final String value) {
         setType(value);
         return this;
     }
 
     @Override
-    public GGraphicRecord value6(String value) {
+    public GGraphicRecord value6(final String value) {
         setComments(value);
         return this;
     }
 
     @Override
-    public GGraphicRecord value7(String value) {
+    public GGraphicRecord value7(final String value) {
         setOwnerId(value);
         return this;
     }
 
     @Override
-    public GGraphicRecord value8(String value) {
+    public GGraphicRecord value8(final String value) {
         setUi(value);
         return this;
     }
 
     @Override
-    public GGraphicRecord value9(String value) {
+    public GGraphicRecord value9(final String value) {
         setGraphicId(value);
         return this;
     }
 
     @Override
-    public GGraphicRecord value10(Boolean value) {
+    public GGraphicRecord value10(final Boolean value) {
         setMaster(value);
         return this;
     }
 
     @Override
-    public GGraphicRecord value11(String value) {
+    public GGraphicRecord value11(final String value) {
         setModelId(value);
         return this;
     }
 
     @Override
-    public GGraphicRecord value12(String value) {
+    public GGraphicRecord value12(final String value) {
         setModelKey(value);
         return this;
     }
 
     @Override
-    public GGraphicRecord value13(String value) {
+    public GGraphicRecord value13(final String value) {
         setModelCategory(value);
         return this;
     }
 
     @Override
-    public GGraphicRecord value14(String value) {
+    public GGraphicRecord value14(final String value) {
         setSigma(value);
         return this;
     }
 
     @Override
-    public GGraphicRecord value15(String value) {
+    public GGraphicRecord value15(final String value) {
         setLanguage(value);
         return this;
     }
 
     @Override
-    public GGraphicRecord value16(Boolean value) {
+    public GGraphicRecord value16(final Boolean value) {
         setActive(value);
         return this;
     }
 
     @Override
-    public GGraphicRecord value17(String value) {
+    public GGraphicRecord value17(final String value) {
         setMetadata(value);
         return this;
     }
 
     @Override
-    public GGraphicRecord value18(LocalDateTime value) {
+    public GGraphicRecord value18(final LocalDateTime value) {
         setCreatedAt(value);
         return this;
     }
@@ -923,13 +923,13 @@ public class GGraphicRecord extends UpdatableRecordImpl<GGraphicRecord> implemen
     // -------------------------------------------------------------------------
 
     @Override
-    public GGraphicRecord value19(String value) {
+    public GGraphicRecord value19(final String value) {
         setCreatedBy(value);
         return this;
     }
 
     @Override
-    public GGraphicRecord value20(LocalDateTime value) {
+    public GGraphicRecord value20(final LocalDateTime value) {
         setUpdatedAt(value);
         return this;
     }
@@ -939,13 +939,13 @@ public class GGraphicRecord extends UpdatableRecordImpl<GGraphicRecord> implemen
     // -------------------------------------------------------------------------
 
     @Override
-    public GGraphicRecord value21(String value) {
+    public GGraphicRecord value21(final String value) {
         setUpdatedBy(value);
         return this;
     }
 
     @Override
-    public GGraphicRecord values(String value1, String value2, String value3, String value4, String value5, String value6, String value7, String value8, String value9, Boolean value10, String value11, String value12, String value13, String value14, String value15, Boolean value16, String value17, LocalDateTime value18, String value19, LocalDateTime value20, String value21) {
+    public GGraphicRecord values(final String value1, final String value2, final String value3, final String value4, final String value5, final String value6, final String value7, final String value8, final String value9, final Boolean value10, final String value11, final String value12, final String value13, final String value14, final String value15, final Boolean value16, final String value17, final LocalDateTime value18, final String value19, final LocalDateTime value20, final String value21) {
         value1(value1);
         value2(value2);
         value3(value3);
@@ -971,7 +971,7 @@ public class GGraphicRecord extends UpdatableRecordImpl<GGraphicRecord> implemen
     }
 
     @Override
-    public void from(IGGraphic from) {
+    public void from(final IGGraphic from) {
         setKey(from.getKey());
         setName(from.getName());
         setCode(from.getCode());
@@ -997,7 +997,7 @@ public class GGraphicRecord extends UpdatableRecordImpl<GGraphicRecord> implemen
     }
 
     @Override
-    public <E extends IGGraphic> E into(E into) {
+    public <E extends IGGraphic> E into(final E into) {
         into.from(this);
         return into;
     }

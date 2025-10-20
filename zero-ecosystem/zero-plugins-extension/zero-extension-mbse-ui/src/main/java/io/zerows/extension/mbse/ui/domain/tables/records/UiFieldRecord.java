@@ -4,7 +4,7 @@
 package io.zerows.extension.mbse.ui.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.mbse.ui.domain.tables.UiField;
 import io.zerows.extension.mbse.ui.domain.tables.interfaces.IUiField;
 import org.jooq.Record1;
@@ -30,7 +30,7 @@ public class UiFieldRecord extends UpdatableRecordImpl<UiFieldRecord> implements
     /**
      * Create a detached, initialised UiFieldRecord
      */
-    public UiFieldRecord(String key, Integer xPoint, Integer yPoint, String label, String name, Integer span, Boolean hidden, String render, String container, String optionJsx, String optionConfig, String optionItem, String rules, String controlId, String rowType, Boolean active, String sigma, String metadata, String language, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public UiFieldRecord(final String key, final Integer xPoint, final Integer yPoint, final String label, final String name, final Integer span, final Boolean hidden, final String render, final String container, final String optionJsx, final String optionConfig, final String optionItem, final String rules, final String controlId, final String rowType, final Boolean active, final String sigma, final String metadata, final String language, final LocalDateTime createdAt, final String createdBy, final LocalDateTime updatedAt, final String updatedBy) {
         super(UiField.UI_FIELD);
 
         setKey(key);
@@ -62,7 +62,7 @@ public class UiFieldRecord extends UpdatableRecordImpl<UiFieldRecord> implements
     /**
      * Create a detached, initialised UiFieldRecord
      */
-    public UiFieldRecord(io.zerows.extension.mbse.ui.domain.tables.pojos.UiField value) {
+    public UiFieldRecord(final io.zerows.extension.mbse.ui.domain.tables.pojos.UiField value) {
         super(UiField.UI_FIELD);
 
         if (value != null) {
@@ -93,7 +93,7 @@ public class UiFieldRecord extends UpdatableRecordImpl<UiFieldRecord> implements
         }
     }
 
-    public UiFieldRecord(io.vertx.core.json.JsonObject json) {
+    public UiFieldRecord(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -110,7 +110,7 @@ public class UiFieldRecord extends UpdatableRecordImpl<UiFieldRecord> implements
      * Setter for <code>ZDB.UI_FIELD.KEY</code>. 「key」- 字段主键
      */
     @Override
-    public UiFieldRecord setKey(String value) {
+    public UiFieldRecord setKey(final String value) {
         set(0, value);
         return this;
     }
@@ -127,7 +127,7 @@ public class UiFieldRecord extends UpdatableRecordImpl<UiFieldRecord> implements
      * Setter for <code>ZDB.UI_FIELD.X_POINT</code>. 「xPoint] - 字段的X坐标（列）
      */
     @Override
-    public UiFieldRecord setXPoint(Integer value) {
+    public UiFieldRecord setXPoint(final Integer value) {
         set(1, value);
         return this;
     }
@@ -144,7 +144,7 @@ public class UiFieldRecord extends UpdatableRecordImpl<UiFieldRecord> implements
      * Setter for <code>ZDB.UI_FIELD.Y_POINT</code>. 「yPoint」- 字段的Y坐标（行）
      */
     @Override
-    public UiFieldRecord setYPoint(Integer value) {
+    public UiFieldRecord setYPoint(final Integer value) {
         set(2, value);
         return this;
     }
@@ -161,7 +161,7 @@ public class UiFieldRecord extends UpdatableRecordImpl<UiFieldRecord> implements
      * Setter for <code>ZDB.UI_FIELD.LABEL</code>. 「label」- 字段标签
      */
     @Override
-    public UiFieldRecord setLabel(String value) {
+    public UiFieldRecord setLabel(final String value) {
         set(3, value);
         return this;
     }
@@ -178,7 +178,7 @@ public class UiFieldRecord extends UpdatableRecordImpl<UiFieldRecord> implements
      * Setter for <code>ZDB.UI_FIELD.NAME</code>. 「name」- 字段名称
      */
     @Override
-    public UiFieldRecord setName(String value) {
+    public UiFieldRecord setName(final String value) {
         set(4, value);
         return this;
     }
@@ -195,7 +195,7 @@ public class UiFieldRecord extends UpdatableRecordImpl<UiFieldRecord> implements
      * Setter for <code>ZDB.UI_FIELD.SPAN</code>. 「span」- 字段宽度
      */
     @Override
-    public UiFieldRecord setSpan(Integer value) {
+    public UiFieldRecord setSpan(final Integer value) {
         set(5, value);
         return this;
     }
@@ -212,7 +212,7 @@ public class UiFieldRecord extends UpdatableRecordImpl<UiFieldRecord> implements
      * Setter for <code>ZDB.UI_FIELD.HIDDEN</code>. 「hidden」- button专用
      */
     @Override
-    public UiFieldRecord setHidden(Boolean value) {
+    public UiFieldRecord setHidden(final Boolean value) {
         set(6, value);
         return this;
     }
@@ -229,7 +229,7 @@ public class UiFieldRecord extends UpdatableRecordImpl<UiFieldRecord> implements
      * Setter for <code>ZDB.UI_FIELD.RENDER</code>. 「render」- 使用的Render函数
      */
     @Override
-    public UiFieldRecord setRender(String value) {
+    public UiFieldRecord setRender(final String value) {
         set(7, value);
         return this;
     }
@@ -248,7 +248,7 @@ public class UiFieldRecord extends UpdatableRecordImpl<UiFieldRecord> implements
      * 容器字段专用容器信息，映射到 name 中
      */
     @Override
-    public UiFieldRecord setContainer(String value) {
+    public UiFieldRecord setContainer(final String value) {
         set(8, value);
         return this;
     }
@@ -265,7 +265,7 @@ public class UiFieldRecord extends UpdatableRecordImpl<UiFieldRecord> implements
      * Setter for <code>ZDB.UI_FIELD.OPTION_JSX</code>. 「optionJsx」- 字段专用配置
      */
     @Override
-    public UiFieldRecord setOptionJsx(String value) {
+    public UiFieldRecord setOptionJsx(final String value) {
         set(9, value);
         return this;
     }
@@ -284,7 +284,7 @@ public class UiFieldRecord extends UpdatableRecordImpl<UiFieldRecord> implements
      * 字段专用配置
      */
     @Override
-    public UiFieldRecord setOptionConfig(String value) {
+    public UiFieldRecord setOptionConfig(final String value) {
         set(10, value);
         return this;
     }
@@ -301,7 +301,7 @@ public class UiFieldRecord extends UpdatableRecordImpl<UiFieldRecord> implements
      * Setter for <code>ZDB.UI_FIELD.OPTION_ITEM</code>. 「optionItem」- 字段专用配置
      */
     @Override
-    public UiFieldRecord setOptionItem(String value) {
+    public UiFieldRecord setOptionItem(final String value) {
         set(11, value);
         return this;
     }
@@ -320,7 +320,7 @@ public class UiFieldRecord extends UpdatableRecordImpl<UiFieldRecord> implements
      * 验证专用的配置，描述规则
      */
     @Override
-    public UiFieldRecord setRules(String value) {
+    public UiFieldRecord setRules(final String value) {
         set(12, value);
         return this;
     }
@@ -337,7 +337,7 @@ public class UiFieldRecord extends UpdatableRecordImpl<UiFieldRecord> implements
      * Setter for <code>ZDB.UI_FIELD.CONTROL_ID</code>. 「controlId」- 关联的表单ID
      */
     @Override
-    public UiFieldRecord setControlId(String value) {
+    public UiFieldRecord setControlId(final String value) {
         set(13, value);
         return this;
     }
@@ -354,7 +354,7 @@ public class UiFieldRecord extends UpdatableRecordImpl<UiFieldRecord> implements
      * Setter for <code>ZDB.UI_FIELD.ROW_TYPE</code>. 「rowType」- 行类型
      */
     @Override
-    public UiFieldRecord setRowType(String value) {
+    public UiFieldRecord setRowType(final String value) {
         set(14, value);
         return this;
     }
@@ -371,7 +371,7 @@ public class UiFieldRecord extends UpdatableRecordImpl<UiFieldRecord> implements
      * Setter for <code>ZDB.UI_FIELD.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public UiFieldRecord setActive(Boolean value) {
+    public UiFieldRecord setActive(final Boolean value) {
         set(15, value);
         return this;
     }
@@ -388,7 +388,7 @@ public class UiFieldRecord extends UpdatableRecordImpl<UiFieldRecord> implements
      * Setter for <code>ZDB.UI_FIELD.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public UiFieldRecord setSigma(String value) {
+    public UiFieldRecord setSigma(final String value) {
         set(16, value);
         return this;
     }
@@ -405,7 +405,7 @@ public class UiFieldRecord extends UpdatableRecordImpl<UiFieldRecord> implements
      * Setter for <code>ZDB.UI_FIELD.METADATA</code>. 「metadata」- 附加配置
      */
     @Override
-    public UiFieldRecord setMetadata(String value) {
+    public UiFieldRecord setMetadata(final String value) {
         set(17, value);
         return this;
     }
@@ -422,7 +422,7 @@ public class UiFieldRecord extends UpdatableRecordImpl<UiFieldRecord> implements
      * Setter for <code>ZDB.UI_FIELD.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public UiFieldRecord setLanguage(String value) {
+    public UiFieldRecord setLanguage(final String value) {
         set(18, value);
         return this;
     }
@@ -439,7 +439,7 @@ public class UiFieldRecord extends UpdatableRecordImpl<UiFieldRecord> implements
      * Setter for <code>ZDB.UI_FIELD.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public UiFieldRecord setCreatedAt(LocalDateTime value) {
+    public UiFieldRecord setCreatedAt(final LocalDateTime value) {
         set(19, value);
         return this;
     }
@@ -456,7 +456,7 @@ public class UiFieldRecord extends UpdatableRecordImpl<UiFieldRecord> implements
      * Setter for <code>ZDB.UI_FIELD.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public UiFieldRecord setCreatedBy(String value) {
+    public UiFieldRecord setCreatedBy(final String value) {
         set(20, value);
         return this;
     }
@@ -481,7 +481,7 @@ public class UiFieldRecord extends UpdatableRecordImpl<UiFieldRecord> implements
      * Setter for <code>ZDB.UI_FIELD.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public UiFieldRecord setUpdatedAt(LocalDateTime value) {
+    public UiFieldRecord setUpdatedAt(final LocalDateTime value) {
         set(21, value);
         return this;
     }
@@ -502,7 +502,7 @@ public class UiFieldRecord extends UpdatableRecordImpl<UiFieldRecord> implements
      * Setter for <code>ZDB.UI_FIELD.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public UiFieldRecord setUpdatedBy(String value) {
+    public UiFieldRecord setUpdatedBy(final String value) {
         set(22, value);
         return this;
     }
@@ -513,7 +513,7 @@ public class UiFieldRecord extends UpdatableRecordImpl<UiFieldRecord> implements
     }
 
     @Override
-    public void from(IUiField from) {
+    public void from(final IUiField from) {
         setKey(from.getKey());
         setXPoint(from.getXPoint());
         setYPoint(from.getYPoint());
@@ -541,7 +541,7 @@ public class UiFieldRecord extends UpdatableRecordImpl<UiFieldRecord> implements
     }
 
     @Override
-    public <E extends IUiField> E into(E into) {
+    public <E extends IUiField> E into(final E into) {
         into.from(this);
         return into;
     }

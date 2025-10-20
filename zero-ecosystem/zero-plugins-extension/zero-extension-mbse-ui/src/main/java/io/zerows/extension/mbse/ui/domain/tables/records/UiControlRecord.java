@@ -4,7 +4,7 @@
 package io.zerows.extension.mbse.ui.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.mbse.ui.domain.tables.UiControl;
 import io.zerows.extension.mbse.ui.domain.tables.interfaces.IUiControl;
 import org.jooq.Field;
@@ -33,7 +33,7 @@ public class UiControlRecord extends UpdatableRecordImpl<UiControlRecord> implem
     /**
      * Create a detached, initialised UiControlRecord
      */
-    public UiControlRecord(String key, String sign, String pageId, String type, String containerName, String containerConfig, String assist, String grid, String componentName, String componentConfig, String componentData, Boolean active, String sigma, String metadata, String language, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public UiControlRecord(final String key, final String sign, final String pageId, final String type, final String containerName, final String containerConfig, final String assist, final String grid, final String componentName, final String componentConfig, final String componentData, final Boolean active, final String sigma, final String metadata, final String language, final LocalDateTime createdAt, final String createdBy, final LocalDateTime updatedAt, final String updatedBy) {
         super(UiControl.UI_CONTROL);
 
         setKey(key);
@@ -61,7 +61,7 @@ public class UiControlRecord extends UpdatableRecordImpl<UiControlRecord> implem
     /**
      * Create a detached, initialised UiControlRecord
      */
-    public UiControlRecord(io.zerows.extension.mbse.ui.domain.tables.pojos.UiControl value) {
+    public UiControlRecord(final io.zerows.extension.mbse.ui.domain.tables.pojos.UiControl value) {
         super(UiControl.UI_CONTROL);
 
         if (value != null) {
@@ -88,7 +88,7 @@ public class UiControlRecord extends UpdatableRecordImpl<UiControlRecord> implem
         }
     }
 
-    public UiControlRecord(io.vertx.core.json.JsonObject json) {
+    public UiControlRecord(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -105,7 +105,7 @@ public class UiControlRecord extends UpdatableRecordImpl<UiControlRecord> implem
      * Setter for <code>ZDB.UI_CONTROL.KEY</code>. 「key」- 主键
      */
     @Override
-    public UiControlRecord setKey(String value) {
+    public UiControlRecord setKey(final String value) {
         set(0, value);
         return this;
     }
@@ -122,7 +122,7 @@ public class UiControlRecord extends UpdatableRecordImpl<UiControlRecord> implem
      * Setter for <code>ZDB.UI_CONTROL.SIGN</code>. 「sign」- 控件使用的签名基本信息
      */
     @Override
-    public UiControlRecord setSign(String value) {
+    public UiControlRecord setSign(final String value) {
         set(1, value);
         return this;
     }
@@ -139,7 +139,7 @@ public class UiControlRecord extends UpdatableRecordImpl<UiControlRecord> implem
      * Setter for <code>ZDB.UI_CONTROL.PAGE_ID</code>. 「pageId」- 当前控件所在的页面ID
      */
     @Override
-    public UiControlRecord setPageId(String value) {
+    public UiControlRecord setPageId(final String value) {
         set(2, value);
         return this;
     }
@@ -158,7 +158,7 @@ public class UiControlRecord extends UpdatableRecordImpl<UiControlRecord> implem
      * COMPONENT / FORM / LIST，其中 FORM / LIST 需要访问子表
      */
     @Override
-    public UiControlRecord setType(String value) {
+    public UiControlRecord setType(final String value) {
         set(3, value);
         return this;
     }
@@ -177,7 +177,7 @@ public class UiControlRecord extends UpdatableRecordImpl<UiControlRecord> implem
      * 当前控件使用的容器名
      */
     @Override
-    public UiControlRecord setContainerName(String value) {
+    public UiControlRecord setContainerName(final String value) {
         set(4, value);
         return this;
     }
@@ -196,7 +196,7 @@ public class UiControlRecord extends UpdatableRecordImpl<UiControlRecord> implem
      * 「containerConfig」- 当前控件使用的容器配置
      */
     @Override
-    public UiControlRecord setContainerConfig(String value) {
+    public UiControlRecord setContainerConfig(final String value) {
         set(5, value);
         return this;
     }
@@ -213,7 +213,7 @@ public class UiControlRecord extends UpdatableRecordImpl<UiControlRecord> implem
      * Setter for <code>ZDB.UI_CONTROL.ASSIST</code>. 「assist」 - 辅助数据（容器专用）
      */
     @Override
-    public UiControlRecord setAssist(String value) {
+    public UiControlRecord setAssist(final String value) {
         set(6, value);
         return this;
     }
@@ -230,7 +230,7 @@ public class UiControlRecord extends UpdatableRecordImpl<UiControlRecord> implem
      * Setter for <code>ZDB.UI_CONTROL.GRID</code>. 「grid」 - 容器专用
      */
     @Override
-    public UiControlRecord setGrid(String value) {
+    public UiControlRecord setGrid(final String value) {
         set(7, value);
         return this;
     }
@@ -249,7 +249,7 @@ public class UiControlRecord extends UpdatableRecordImpl<UiControlRecord> implem
      * 当前控件使用的组件名
      */
     @Override
-    public UiControlRecord setComponentName(String value) {
+    public UiControlRecord setComponentName(final String value) {
         set(8, value);
         return this;
     }
@@ -268,7 +268,7 @@ public class UiControlRecord extends UpdatableRecordImpl<UiControlRecord> implem
      * 「componentConfig」- 当前控件使用的配置
      */
     @Override
-    public UiControlRecord setComponentConfig(String value) {
+    public UiControlRecord setComponentConfig(final String value) {
         set(9, value);
         return this;
     }
@@ -287,7 +287,7 @@ public class UiControlRecord extends UpdatableRecordImpl<UiControlRecord> implem
      * 当前控件使用的数据，使用表达式结构
      */
     @Override
-    public UiControlRecord setComponentData(String value) {
+    public UiControlRecord setComponentData(final String value) {
         set(10, value);
         return this;
     }
@@ -304,7 +304,7 @@ public class UiControlRecord extends UpdatableRecordImpl<UiControlRecord> implem
      * Setter for <code>ZDB.UI_CONTROL.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public UiControlRecord setActive(Boolean value) {
+    public UiControlRecord setActive(final Boolean value) {
         set(11, value);
         return this;
     }
@@ -321,7 +321,7 @@ public class UiControlRecord extends UpdatableRecordImpl<UiControlRecord> implem
      * Setter for <code>ZDB.UI_CONTROL.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public UiControlRecord setSigma(String value) {
+    public UiControlRecord setSigma(final String value) {
         set(12, value);
         return this;
     }
@@ -338,7 +338,7 @@ public class UiControlRecord extends UpdatableRecordImpl<UiControlRecord> implem
      * Setter for <code>ZDB.UI_CONTROL.METADATA</code>. 「metadata」- 附加配置
      */
     @Override
-    public UiControlRecord setMetadata(String value) {
+    public UiControlRecord setMetadata(final String value) {
         set(13, value);
         return this;
     }
@@ -355,7 +355,7 @@ public class UiControlRecord extends UpdatableRecordImpl<UiControlRecord> implem
      * Setter for <code>ZDB.UI_CONTROL.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public UiControlRecord setLanguage(String value) {
+    public UiControlRecord setLanguage(final String value) {
         set(14, value);
         return this;
     }
@@ -372,7 +372,7 @@ public class UiControlRecord extends UpdatableRecordImpl<UiControlRecord> implem
      * Setter for <code>ZDB.UI_CONTROL.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public UiControlRecord setCreatedAt(LocalDateTime value) {
+    public UiControlRecord setCreatedAt(final LocalDateTime value) {
         set(15, value);
         return this;
     }
@@ -389,7 +389,7 @@ public class UiControlRecord extends UpdatableRecordImpl<UiControlRecord> implem
      * Setter for <code>ZDB.UI_CONTROL.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public UiControlRecord setCreatedBy(String value) {
+    public UiControlRecord setCreatedBy(final String value) {
         set(16, value);
         return this;
     }
@@ -414,7 +414,7 @@ public class UiControlRecord extends UpdatableRecordImpl<UiControlRecord> implem
      * Setter for <code>ZDB.UI_CONTROL.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public UiControlRecord setUpdatedAt(LocalDateTime value) {
+    public UiControlRecord setUpdatedAt(final LocalDateTime value) {
         set(17, value);
         return this;
     }
@@ -431,7 +431,7 @@ public class UiControlRecord extends UpdatableRecordImpl<UiControlRecord> implem
      * Setter for <code>ZDB.UI_CONTROL.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public UiControlRecord setUpdatedBy(String value) {
+    public UiControlRecord setUpdatedBy(final String value) {
         set(18, value);
         return this;
     }
@@ -737,97 +737,97 @@ public class UiControlRecord extends UpdatableRecordImpl<UiControlRecord> implem
     }
 
     @Override
-    public UiControlRecord value1(String value) {
+    public UiControlRecord value1(final String value) {
         setKey(value);
         return this;
     }
 
     @Override
-    public UiControlRecord value2(String value) {
+    public UiControlRecord value2(final String value) {
         setSign(value);
         return this;
     }
 
     @Override
-    public UiControlRecord value3(String value) {
+    public UiControlRecord value3(final String value) {
         setPageId(value);
         return this;
     }
 
     @Override
-    public UiControlRecord value4(String value) {
+    public UiControlRecord value4(final String value) {
         setType(value);
         return this;
     }
 
     @Override
-    public UiControlRecord value5(String value) {
+    public UiControlRecord value5(final String value) {
         setContainerName(value);
         return this;
     }
 
     @Override
-    public UiControlRecord value6(String value) {
+    public UiControlRecord value6(final String value) {
         setContainerConfig(value);
         return this;
     }
 
     @Override
-    public UiControlRecord value7(String value) {
+    public UiControlRecord value7(final String value) {
         setAssist(value);
         return this;
     }
 
     @Override
-    public UiControlRecord value8(String value) {
+    public UiControlRecord value8(final String value) {
         setGrid(value);
         return this;
     }
 
     @Override
-    public UiControlRecord value9(String value) {
+    public UiControlRecord value9(final String value) {
         setComponentName(value);
         return this;
     }
 
     @Override
-    public UiControlRecord value10(String value) {
+    public UiControlRecord value10(final String value) {
         setComponentConfig(value);
         return this;
     }
 
     @Override
-    public UiControlRecord value11(String value) {
+    public UiControlRecord value11(final String value) {
         setComponentData(value);
         return this;
     }
 
     @Override
-    public UiControlRecord value12(Boolean value) {
+    public UiControlRecord value12(final Boolean value) {
         setActive(value);
         return this;
     }
 
     @Override
-    public UiControlRecord value13(String value) {
+    public UiControlRecord value13(final String value) {
         setSigma(value);
         return this;
     }
 
     @Override
-    public UiControlRecord value14(String value) {
+    public UiControlRecord value14(final String value) {
         setMetadata(value);
         return this;
     }
 
     @Override
-    public UiControlRecord value15(String value) {
+    public UiControlRecord value15(final String value) {
         setLanguage(value);
         return this;
     }
 
     @Override
-    public UiControlRecord value16(LocalDateTime value) {
+    public UiControlRecord value16(final LocalDateTime value) {
         setCreatedAt(value);
         return this;
     }
@@ -837,13 +837,13 @@ public class UiControlRecord extends UpdatableRecordImpl<UiControlRecord> implem
     // -------------------------------------------------------------------------
 
     @Override
-    public UiControlRecord value17(String value) {
+    public UiControlRecord value17(final String value) {
         setCreatedBy(value);
         return this;
     }
 
     @Override
-    public UiControlRecord value18(LocalDateTime value) {
+    public UiControlRecord value18(final LocalDateTime value) {
         setUpdatedAt(value);
         return this;
     }
@@ -853,13 +853,13 @@ public class UiControlRecord extends UpdatableRecordImpl<UiControlRecord> implem
     // -------------------------------------------------------------------------
 
     @Override
-    public UiControlRecord value19(String value) {
+    public UiControlRecord value19(final String value) {
         setUpdatedBy(value);
         return this;
     }
 
     @Override
-    public UiControlRecord values(String value1, String value2, String value3, String value4, String value5, String value6, String value7, String value8, String value9, String value10, String value11, Boolean value12, String value13, String value14, String value15, LocalDateTime value16, String value17, LocalDateTime value18, String value19) {
+    public UiControlRecord values(final String value1, final String value2, final String value3, final String value4, final String value5, final String value6, final String value7, final String value8, final String value9, final String value10, final String value11, final Boolean value12, final String value13, final String value14, final String value15, final LocalDateTime value16, final String value17, final LocalDateTime value18, final String value19) {
         value1(value1);
         value2(value2);
         value3(value3);
@@ -883,7 +883,7 @@ public class UiControlRecord extends UpdatableRecordImpl<UiControlRecord> implem
     }
 
     @Override
-    public void from(IUiControl from) {
+    public void from(final IUiControl from) {
         setKey(from.getKey());
         setSign(from.getSign());
         setPageId(from.getPageId());
@@ -907,7 +907,7 @@ public class UiControlRecord extends UpdatableRecordImpl<UiControlRecord> implem
     }
 
     @Override
-    public <E extends IUiControl> E into(E into) {
+    public <E extends IUiControl> E into(final E into) {
         into.from(this);
         return into;
     }

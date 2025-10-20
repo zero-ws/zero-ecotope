@@ -4,7 +4,7 @@
 package io.zerows.extension.commerce.erp.domain.tables.pojos;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.commerce.erp.domain.tables.interfaces.ITVendorHour;
 
 import java.time.LocalDateTime;
@@ -32,7 +32,7 @@ public class TVendorHour implements VertxPojo, ITVendorHour {
     public TVendorHour() {
     }
 
-    public TVendorHour(ITVendorHour value) {
+    public TVendorHour(final ITVendorHour value) {
         this.key = value.getKey();
         this.commentExtension = value.getCommentExtension();
         this.classification = value.getClassification();
@@ -47,17 +47,17 @@ public class TVendorHour implements VertxPojo, ITVendorHour {
     }
 
     public TVendorHour(
-        String key,
-        String commentExtension,
-        String classification,
-        LocalDateTime startAt,
-        LocalDateTime endAt,
-        Integer days,
-        String requestType,
-        String fromType,
-        LocalDateTime fromAt,
-        String toType,
-        LocalDateTime toAt
+        final String key,
+        final String commentExtension,
+        final String classification,
+        final LocalDateTime startAt,
+        final LocalDateTime endAt,
+        final Integer days,
+        final String requestType,
+        final String fromType,
+        final LocalDateTime fromAt,
+        final String toType,
+        final LocalDateTime toAt
     ) {
         this.key = key;
         this.commentExtension = commentExtension;
@@ -72,7 +72,7 @@ public class TVendorHour implements VertxPojo, ITVendorHour {
         this.toAt = toAt;
     }
 
-    public TVendorHour(io.vertx.core.json.JsonObject json) {
+    public TVendorHour(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -89,7 +89,7 @@ public class TVendorHour implements VertxPojo, ITVendorHour {
      * Setter for <code>ZDB.T_VENDOR_HOUR.KEY</code>. 「key」- Ticket Primary Key
      */
     @Override
-    public TVendorHour setKey(String key) {
+    public TVendorHour setKey(final String key) {
         this.key = key;
         return this;
     }
@@ -108,7 +108,7 @@ public class TVendorHour implements VertxPojo, ITVendorHour {
      * 「commentExtension」- Extension Comment
      */
     @Override
-    public TVendorHour setCommentExtension(String commentExtension) {
+    public TVendorHour setCommentExtension(final String commentExtension) {
         this.commentExtension = commentExtension;
         return this;
     }
@@ -127,7 +127,7 @@ public class TVendorHour implements VertxPojo, ITVendorHour {
      * 「classification」- The ticket related income type
      */
     @Override
-    public TVendorHour setClassification(String classification) {
+    public TVendorHour setClassification(final String classification) {
         this.classification = classification;
         return this;
     }
@@ -144,7 +144,7 @@ public class TVendorHour implements VertxPojo, ITVendorHour {
      * Setter for <code>ZDB.T_VENDOR_HOUR.START_AT</code>. 「startAt」- From
      */
     @Override
-    public TVendorHour setStartAt(LocalDateTime startAt) {
+    public TVendorHour setStartAt(final LocalDateTime startAt) {
         this.startAt = startAt;
         return this;
     }
@@ -161,7 +161,7 @@ public class TVendorHour implements VertxPojo, ITVendorHour {
      * Setter for <code>ZDB.T_VENDOR_HOUR.END_AT</code>. 「endAt」- To
      */
     @Override
-    public TVendorHour setEndAt(LocalDateTime endAt) {
+    public TVendorHour setEndAt(final LocalDateTime endAt) {
         this.endAt = endAt;
         return this;
     }
@@ -178,7 +178,7 @@ public class TVendorHour implements VertxPojo, ITVendorHour {
      * Setter for <code>ZDB.T_VENDOR_HOUR.DAYS</code>. 「days」- Duration
      */
     @Override
-    public TVendorHour setDays(Integer days) {
+    public TVendorHour setDays(final Integer days) {
         this.days = days;
         return this;
     }
@@ -197,7 +197,7 @@ public class TVendorHour implements VertxPojo, ITVendorHour {
      * Request type of hour
      */
     @Override
-    public TVendorHour setRequestType(String requestType) {
+    public TVendorHour setRequestType(final String requestType) {
         this.requestType = requestType;
         return this;
     }
@@ -214,7 +214,7 @@ public class TVendorHour implements VertxPojo, ITVendorHour {
      * Setter for <code>ZDB.T_VENDOR_HOUR.FROM_TYPE</code>. 「fromType」
      */
     @Override
-    public TVendorHour setFromType(String fromType) {
+    public TVendorHour setFromType(final String fromType) {
         this.fromType = fromType;
         return this;
     }
@@ -231,7 +231,7 @@ public class TVendorHour implements VertxPojo, ITVendorHour {
      * Setter for <code>ZDB.T_VENDOR_HOUR.FROM_AT</code>. 「fromAt」
      */
     @Override
-    public TVendorHour setFromAt(LocalDateTime fromAt) {
+    public TVendorHour setFromAt(final LocalDateTime fromAt) {
         this.fromAt = fromAt;
         return this;
     }
@@ -248,7 +248,7 @@ public class TVendorHour implements VertxPojo, ITVendorHour {
      * Setter for <code>ZDB.T_VENDOR_HOUR.TO_TYPE</code>. 「toType」
      */
     @Override
-    public TVendorHour setToType(String toType) {
+    public TVendorHour setToType(final String toType) {
         this.toType = toType;
         return this;
     }
@@ -265,13 +265,13 @@ public class TVendorHour implements VertxPojo, ITVendorHour {
      * Setter for <code>ZDB.T_VENDOR_HOUR.TO_AT</code>. 「toAt」
      */
     @Override
-    public TVendorHour setToAt(LocalDateTime toAt) {
+    public TVendorHour setToAt(final LocalDateTime toAt) {
         this.toAt = toAt;
         return this;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
@@ -357,7 +357,7 @@ public class TVendorHour implements VertxPojo, ITVendorHour {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("TVendorHour (");
+        final StringBuilder sb = new StringBuilder("TVendorHour (");
 
         sb.append(key);
         sb.append(", ").append(commentExtension);
@@ -380,7 +380,7 @@ public class TVendorHour implements VertxPojo, ITVendorHour {
     // -------------------------------------------------------------------------
 
     @Override
-    public void from(ITVendorHour from) {
+    public void from(final ITVendorHour from) {
         setKey(from.getKey());
         setCommentExtension(from.getCommentExtension());
         setClassification(from.getClassification());
@@ -395,7 +395,7 @@ public class TVendorHour implements VertxPojo, ITVendorHour {
     }
 
     @Override
-    public <E extends ITVendorHour> E into(E into) {
+    public <E extends ITVendorHour> E into(final E into) {
         into.from(this);
         return into;
     }

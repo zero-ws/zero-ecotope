@@ -4,7 +4,7 @@
 package io.zerows.extension.runtime.graphic.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.runtime.graphic.domain.tables.GCluster;
 import io.zerows.extension.runtime.graphic.domain.tables.interfaces.IGCluster;
 import org.jooq.Field;
@@ -33,7 +33,7 @@ public class GClusterRecord extends UpdatableRecordImpl<GClusterRecord> implemen
     /**
      * Create a detached, initialised GClusterRecord
      */
-    public GClusterRecord(String key, String name, Integer x, Integer y, String graphicId, String ui, String recordKey, String recordData, String sigma, String language, Boolean active, String metadata, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public GClusterRecord(final String key, final String name, final Integer x, final Integer y, final String graphicId, final String ui, final String recordKey, final String recordData, final String sigma, final String language, final Boolean active, final String metadata, final LocalDateTime createdAt, final String createdBy, final LocalDateTime updatedAt, final String updatedBy) {
         super(GCluster.G_CLUSTER);
 
         setKey(key);
@@ -58,7 +58,7 @@ public class GClusterRecord extends UpdatableRecordImpl<GClusterRecord> implemen
     /**
      * Create a detached, initialised GClusterRecord
      */
-    public GClusterRecord(io.zerows.extension.runtime.graphic.domain.tables.pojos.GCluster value) {
+    public GClusterRecord(final io.zerows.extension.runtime.graphic.domain.tables.pojos.GCluster value) {
         super(GCluster.G_CLUSTER);
 
         if (value != null) {
@@ -82,7 +82,7 @@ public class GClusterRecord extends UpdatableRecordImpl<GClusterRecord> implemen
         }
     }
 
-    public GClusterRecord(io.vertx.core.json.JsonObject json) {
+    public GClusterRecord(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -99,7 +99,7 @@ public class GClusterRecord extends UpdatableRecordImpl<GClusterRecord> implemen
      * Setter for <code>ZDB.G_CLUSTER.KEY</code>. 「key」- 组ID
      */
     @Override
-    public GClusterRecord setKey(String value) {
+    public GClusterRecord setKey(final String value) {
         set(0, value);
         return this;
     }
@@ -116,7 +116,7 @@ public class GClusterRecord extends UpdatableRecordImpl<GClusterRecord> implemen
      * Setter for <code>ZDB.G_CLUSTER.NAME</code>. 「name」- 组呈现名称
      */
     @Override
-    public GClusterRecord setName(String value) {
+    public GClusterRecord setName(final String value) {
         set(1, value);
         return this;
     }
@@ -133,7 +133,7 @@ public class GClusterRecord extends UpdatableRecordImpl<GClusterRecord> implemen
      * Setter for <code>ZDB.G_CLUSTER.X</code>. 「x」- 当前组在图上的x坐标
      */
     @Override
-    public GClusterRecord setX(Integer value) {
+    public GClusterRecord setX(final Integer value) {
         set(2, value);
         return this;
     }
@@ -150,7 +150,7 @@ public class GClusterRecord extends UpdatableRecordImpl<GClusterRecord> implemen
      * Setter for <code>ZDB.G_CLUSTER.Y</code>. 「y」- 当前组在图上的y坐标
      */
     @Override
-    public GClusterRecord setY(Integer value) {
+    public GClusterRecord setY(final Integer value) {
         set(3, value);
         return this;
     }
@@ -167,7 +167,7 @@ public class GClusterRecord extends UpdatableRecordImpl<GClusterRecord> implemen
      * Setter for <code>ZDB.G_CLUSTER.GRAPHIC_ID</code>. 「graphicId」- 它所关联的图实例ID
      */
     @Override
-    public GClusterRecord setGraphicId(String value) {
+    public GClusterRecord setGraphicId(final String value) {
         set(4, value);
         return this;
     }
@@ -184,7 +184,7 @@ public class GClusterRecord extends UpdatableRecordImpl<GClusterRecord> implemen
      * Setter for <code>ZDB.G_CLUSTER.UI</code>. 「ui」- ui配置专用
      */
     @Override
-    public GClusterRecord setUi(String value) {
+    public GClusterRecord setUi(final String value) {
         set(5, value);
         return this;
     }
@@ -201,7 +201,7 @@ public class GClusterRecord extends UpdatableRecordImpl<GClusterRecord> implemen
      * Setter for <code>ZDB.G_CLUSTER.RECORD_KEY</code>. 「recordKey」- 记录主键
      */
     @Override
-    public GClusterRecord setRecordKey(String value) {
+    public GClusterRecord setRecordKey(final String value) {
         set(6, value);
         return this;
     }
@@ -220,7 +220,7 @@ public class GClusterRecord extends UpdatableRecordImpl<GClusterRecord> implemen
      * 组中存储的数据信息
      */
     @Override
-    public GClusterRecord setRecordData(String value) {
+    public GClusterRecord setRecordData(final String value) {
         set(7, value);
         return this;
     }
@@ -237,7 +237,7 @@ public class GClusterRecord extends UpdatableRecordImpl<GClusterRecord> implemen
      * Setter for <code>ZDB.G_CLUSTER.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public GClusterRecord setSigma(String value) {
+    public GClusterRecord setSigma(final String value) {
         set(8, value);
         return this;
     }
@@ -254,7 +254,7 @@ public class GClusterRecord extends UpdatableRecordImpl<GClusterRecord> implemen
      * Setter for <code>ZDB.G_CLUSTER.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public GClusterRecord setLanguage(String value) {
+    public GClusterRecord setLanguage(final String value) {
         set(9, value);
         return this;
     }
@@ -271,7 +271,7 @@ public class GClusterRecord extends UpdatableRecordImpl<GClusterRecord> implemen
      * Setter for <code>ZDB.G_CLUSTER.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public GClusterRecord setActive(Boolean value) {
+    public GClusterRecord setActive(final Boolean value) {
         set(10, value);
         return this;
     }
@@ -288,7 +288,7 @@ public class GClusterRecord extends UpdatableRecordImpl<GClusterRecord> implemen
      * Setter for <code>ZDB.G_CLUSTER.METADATA</code>. 「metadata」- 附加配置数据
      */
     @Override
-    public GClusterRecord setMetadata(String value) {
+    public GClusterRecord setMetadata(final String value) {
         set(11, value);
         return this;
     }
@@ -305,7 +305,7 @@ public class GClusterRecord extends UpdatableRecordImpl<GClusterRecord> implemen
      * Setter for <code>ZDB.G_CLUSTER.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public GClusterRecord setCreatedAt(LocalDateTime value) {
+    public GClusterRecord setCreatedAt(final LocalDateTime value) {
         set(12, value);
         return this;
     }
@@ -322,7 +322,7 @@ public class GClusterRecord extends UpdatableRecordImpl<GClusterRecord> implemen
      * Setter for <code>ZDB.G_CLUSTER.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public GClusterRecord setCreatedBy(String value) {
+    public GClusterRecord setCreatedBy(final String value) {
         set(13, value);
         return this;
     }
@@ -347,7 +347,7 @@ public class GClusterRecord extends UpdatableRecordImpl<GClusterRecord> implemen
      * Setter for <code>ZDB.G_CLUSTER.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public GClusterRecord setUpdatedAt(LocalDateTime value) {
+    public GClusterRecord setUpdatedAt(final LocalDateTime value) {
         set(14, value);
         return this;
     }
@@ -364,7 +364,7 @@ public class GClusterRecord extends UpdatableRecordImpl<GClusterRecord> implemen
      * Setter for <code>ZDB.G_CLUSTER.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public GClusterRecord setUpdatedBy(String value) {
+    public GClusterRecord setUpdatedBy(final String value) {
         set(15, value);
         return this;
     }
@@ -625,79 +625,79 @@ public class GClusterRecord extends UpdatableRecordImpl<GClusterRecord> implemen
     }
 
     @Override
-    public GClusterRecord value1(String value) {
+    public GClusterRecord value1(final String value) {
         setKey(value);
         return this;
     }
 
     @Override
-    public GClusterRecord value2(String value) {
+    public GClusterRecord value2(final String value) {
         setName(value);
         return this;
     }
 
     @Override
-    public GClusterRecord value3(Integer value) {
+    public GClusterRecord value3(final Integer value) {
         setX(value);
         return this;
     }
 
     @Override
-    public GClusterRecord value4(Integer value) {
+    public GClusterRecord value4(final Integer value) {
         setY(value);
         return this;
     }
 
     @Override
-    public GClusterRecord value5(String value) {
+    public GClusterRecord value5(final String value) {
         setGraphicId(value);
         return this;
     }
 
     @Override
-    public GClusterRecord value6(String value) {
+    public GClusterRecord value6(final String value) {
         setUi(value);
         return this;
     }
 
     @Override
-    public GClusterRecord value7(String value) {
+    public GClusterRecord value7(final String value) {
         setRecordKey(value);
         return this;
     }
 
     @Override
-    public GClusterRecord value8(String value) {
+    public GClusterRecord value8(final String value) {
         setRecordData(value);
         return this;
     }
 
     @Override
-    public GClusterRecord value9(String value) {
+    public GClusterRecord value9(final String value) {
         setSigma(value);
         return this;
     }
 
     @Override
-    public GClusterRecord value10(String value) {
+    public GClusterRecord value10(final String value) {
         setLanguage(value);
         return this;
     }
 
     @Override
-    public GClusterRecord value11(Boolean value) {
+    public GClusterRecord value11(final Boolean value) {
         setActive(value);
         return this;
     }
 
     @Override
-    public GClusterRecord value12(String value) {
+    public GClusterRecord value12(final String value) {
         setMetadata(value);
         return this;
     }
 
     @Override
-    public GClusterRecord value13(LocalDateTime value) {
+    public GClusterRecord value13(final LocalDateTime value) {
         setCreatedAt(value);
         return this;
     }
@@ -707,13 +707,13 @@ public class GClusterRecord extends UpdatableRecordImpl<GClusterRecord> implemen
     // -------------------------------------------------------------------------
 
     @Override
-    public GClusterRecord value14(String value) {
+    public GClusterRecord value14(final String value) {
         setCreatedBy(value);
         return this;
     }
 
     @Override
-    public GClusterRecord value15(LocalDateTime value) {
+    public GClusterRecord value15(final LocalDateTime value) {
         setUpdatedAt(value);
         return this;
     }
@@ -723,13 +723,13 @@ public class GClusterRecord extends UpdatableRecordImpl<GClusterRecord> implemen
     // -------------------------------------------------------------------------
 
     @Override
-    public GClusterRecord value16(String value) {
+    public GClusterRecord value16(final String value) {
         setUpdatedBy(value);
         return this;
     }
 
     @Override
-    public GClusterRecord values(String value1, String value2, Integer value3, Integer value4, String value5, String value6, String value7, String value8, String value9, String value10, Boolean value11, String value12, LocalDateTime value13, String value14, LocalDateTime value15, String value16) {
+    public GClusterRecord values(final String value1, final String value2, final Integer value3, final Integer value4, final String value5, final String value6, final String value7, final String value8, final String value9, final String value10, final Boolean value11, final String value12, final LocalDateTime value13, final String value14, final LocalDateTime value15, final String value16) {
         value1(value1);
         value2(value2);
         value3(value3);
@@ -750,7 +750,7 @@ public class GClusterRecord extends UpdatableRecordImpl<GClusterRecord> implemen
     }
 
     @Override
-    public void from(IGCluster from) {
+    public void from(final IGCluster from) {
         setKey(from.getKey());
         setName(from.getName());
         setX(from.getX());
@@ -771,7 +771,7 @@ public class GClusterRecord extends UpdatableRecordImpl<GClusterRecord> implemen
     }
 
     @Override
-    public <E extends IGCluster> E into(E into) {
+    public <E extends IGCluster> E into(final E into) {
         into.from(this);
         return into;
     }

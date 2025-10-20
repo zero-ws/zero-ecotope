@@ -4,7 +4,7 @@
 package io.zerows.extension.mbse.action.domain.tables.pojos;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.mbse.action.domain.tables.interfaces.IIService;
 
 import java.time.LocalDateTime;
@@ -54,7 +54,7 @@ public class IService implements VertxPojo, IIService {
     public IService() {
     }
 
-    public IService(IIService value) {
+    public IService(final IIService value) {
         this.key = value.getKey();
         this.namespace = value.getNamespace();
         this.name = value.getName();
@@ -91,39 +91,39 @@ public class IService implements VertxPojo, IIService {
     }
 
     public IService(
-        String key,
-        String namespace,
-        String name,
-        String comment,
-        Boolean isWorkflow,
-        Boolean isGraphic,
-        String inScript,
-        String outScript,
-        String channelType,
-        String channelComponent,
-        String channelConfig,
-        String configIntegration,
-        String configDatabase,
-        String dictConfig,
-        String dictComponent,
-        String dictEpsilon,
-        String mappingConfig,
-        String mappingMode,
-        String mappingComponent,
-        String serviceRecord,
-        String serviceComponent,
-        String serviceConfig,
-        String identifier,
-        String identifierComponent,
-        String ruleUnique,
-        String sigma,
-        String language,
-        Boolean active,
-        String metadata,
-        LocalDateTime createdAt,
-        String createdBy,
-        LocalDateTime updatedAt,
-        String updatedBy
+        final String key,
+        final String namespace,
+        final String name,
+        final String comment,
+        final Boolean isWorkflow,
+        final Boolean isGraphic,
+        final String inScript,
+        final String outScript,
+        final String channelType,
+        final String channelComponent,
+        final String channelConfig,
+        final String configIntegration,
+        final String configDatabase,
+        final String dictConfig,
+        final String dictComponent,
+        final String dictEpsilon,
+        final String mappingConfig,
+        final String mappingMode,
+        final String mappingComponent,
+        final String serviceRecord,
+        final String serviceComponent,
+        final String serviceConfig,
+        final String identifier,
+        final String identifierComponent,
+        final String ruleUnique,
+        final String sigma,
+        final String language,
+        final Boolean active,
+        final String metadata,
+        final LocalDateTime createdAt,
+        final String createdBy,
+        final LocalDateTime updatedAt,
+        final String updatedBy
     ) {
         this.key = key;
         this.namespace = namespace;
@@ -160,7 +160,7 @@ public class IService implements VertxPojo, IIService {
         this.updatedBy = updatedBy;
     }
 
-    public IService(io.vertx.core.json.JsonObject json) {
+    public IService(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -177,7 +177,7 @@ public class IService implements VertxPojo, IIService {
      * Setter for <code>ZDB.I_SERVICE.KEY</code>. 「key」- 服务ID
      */
     @Override
-    public IService setKey(String key) {
+    public IService setKey(final String key) {
         this.key = key;
         return this;
     }
@@ -194,7 +194,7 @@ public class IService implements VertxPojo, IIService {
      * Setter for <code>ZDB.I_SERVICE.NAMESPACE</code>. 「namespace」- 服务所在名空间
      */
     @Override
-    public IService setNamespace(String namespace) {
+    public IService setNamespace(final String namespace) {
         this.namespace = namespace;
         return this;
     }
@@ -211,7 +211,7 @@ public class IService implements VertxPojo, IIService {
      * Setter for <code>ZDB.I_SERVICE.NAME</code>. 「name」- 服务名称
      */
     @Override
-    public IService setName(String name) {
+    public IService setName(final String name) {
         this.name = name;
         return this;
     }
@@ -228,7 +228,7 @@ public class IService implements VertxPojo, IIService {
      * Setter for <code>ZDB.I_SERVICE.COMMENT</code>. 「comment」- 备注信息
      */
     @Override
-    public IService setComment(String comment) {
+    public IService setComment(final String comment) {
         this.comment = comment;
         return this;
     }
@@ -247,7 +247,7 @@ public class IService implements VertxPojo, IIService {
      * 是否驱动工作流引擎
      */
     @Override
-    public IService setIsWorkflow(Boolean isWorkflow) {
+    public IService setIsWorkflow(final Boolean isWorkflow) {
         this.isWorkflow = isWorkflow;
         return this;
     }
@@ -264,7 +264,7 @@ public class IService implements VertxPojo, IIService {
      * Setter for <code>ZDB.I_SERVICE.IS_GRAPHIC</code>. 「isGraphic」- 是否驱动图引擎
      */
     @Override
-    public IService setIsGraphic(Boolean isGraphic) {
+    public IService setIsGraphic(final Boolean isGraphic) {
         this.isGraphic = isGraphic;
         return this;
     }
@@ -283,7 +283,7 @@ public class IService implements VertxPojo, IIService {
      * 本次不使用，加载脚本引擎ScriptEngine前置脚本
      */
     @Override
-    public IService setInScript(String inScript) {
+    public IService setInScript(final String inScript) {
         this.inScript = inScript;
         return this;
     }
@@ -302,7 +302,7 @@ public class IService implements VertxPojo, IIService {
      * 本次不使用，加载脚本引擎ScriptEngine后置脚本
      */
     @Override
-    public IService setOutScript(String outScript) {
+    public IService setOutScript(final String outScript) {
         this.outScript = outScript;
         return this;
     }
@@ -321,7 +321,7 @@ public class IService implements VertxPojo, IIService {
      * 通道类型：ADAPTOR / CONNECTOR / ACTOR / DIRECTOR / DEFINE
      */
     @Override
-    public IService setChannelType(String channelType) {
+    public IService setChannelType(final String channelType) {
         this.channelType = channelType;
         return this;
     }
@@ -340,7 +340,7 @@ public class IService implements VertxPojo, IIService {
      * 「channelComponent」- 自定义通道专用组件
      */
     @Override
-    public IService setChannelComponent(String channelComponent) {
+    public IService setChannelComponent(final String channelComponent) {
         this.channelComponent = channelComponent;
         return this;
     }
@@ -359,7 +359,7 @@ public class IService implements VertxPojo, IIService {
      * 通道（自定义）配置信息，Channel专用
      */
     @Override
-    public IService setChannelConfig(String channelConfig) {
+    public IService setChannelConfig(final String channelConfig) {
         this.channelConfig = channelConfig;
         return this;
     }
@@ -378,7 +378,7 @@ public class IService implements VertxPojo, IIService {
      * 「configIntegration」- 集成配置信息，第三方专用
      */
     @Override
-    public IService setConfigIntegration(String configIntegration) {
+    public IService setConfigIntegration(final String configIntegration) {
         this.configIntegration = configIntegration;
         return this;
     }
@@ -397,7 +397,7 @@ public class IService implements VertxPojo, IIService {
      * 数据库配置，当前通道访问的Database
      */
     @Override
-    public IService setConfigDatabase(String configDatabase) {
+    public IService setConfigDatabase(final String configDatabase) {
         this.configDatabase = configDatabase;
         return this;
     }
@@ -414,7 +414,7 @@ public class IService implements VertxPojo, IIService {
      * Setter for <code>ZDB.I_SERVICE.DICT_CONFIG</code>. 「dictConfig」- 字典的配置信息
      */
     @Override
-    public IService setDictConfig(String dictConfig) {
+    public IService setDictConfig(final String dictConfig) {
         this.dictConfig = dictConfig;
         return this;
     }
@@ -433,7 +433,7 @@ public class IService implements VertxPojo, IIService {
      * 字典配置中的插件
      */
     @Override
-    public IService setDictComponent(String dictComponent) {
+    public IService setDictComponent(final String dictComponent) {
         this.dictComponent = dictComponent;
         return this;
     }
@@ -452,7 +452,7 @@ public class IService implements VertxPojo, IIService {
      * 字典的消费配置
      */
     @Override
-    public IService setDictEpsilon(String dictEpsilon) {
+    public IService setDictEpsilon(final String dictEpsilon) {
         this.dictEpsilon = dictEpsilon;
         return this;
     }
@@ -471,7 +471,7 @@ public class IService implements VertxPojo, IIService {
      * 映射专用配置
      */
     @Override
-    public IService setMappingConfig(String mappingConfig) {
+    public IService setMappingConfig(final String mappingConfig) {
         this.mappingConfig = mappingConfig;
         return this;
     }
@@ -488,7 +488,7 @@ public class IService implements VertxPojo, IIService {
      * Setter for <code>ZDB.I_SERVICE.MAPPING_MODE</code>. 「mappingMode」- 映射的模式
      */
     @Override
-    public IService setMappingMode(String mappingMode) {
+    public IService setMappingMode(final String mappingMode) {
         this.mappingMode = mappingMode;
         return this;
     }
@@ -507,7 +507,7 @@ public class IService implements VertxPojo, IIService {
      * 「mappingComponent」- 映射组件类型
      */
     @Override
-    public IService setMappingComponent(String mappingComponent) {
+    public IService setMappingComponent(final String mappingComponent) {
         this.mappingComponent = mappingComponent;
         return this;
     }
@@ -526,7 +526,7 @@ public class IService implements VertxPojo, IIService {
      * 服务记录定义
      */
     @Override
-    public IService setServiceRecord(String serviceRecord) {
+    public IService setServiceRecord(final String serviceRecord) {
         this.serviceRecord = serviceRecord;
         return this;
     }
@@ -545,7 +545,7 @@ public class IService implements VertxPojo, IIService {
      * 「serviceComponent」- 服务组件定义
      */
     @Override
-    public IService setServiceComponent(String serviceComponent) {
+    public IService setServiceComponent(final String serviceComponent) {
         this.serviceComponent = serviceComponent;
         return this;
     }
@@ -564,7 +564,7 @@ public class IService implements VertxPojo, IIService {
      * 业务组件配置，业务组件专用
      */
     @Override
-    public IService setServiceConfig(String serviceConfig) {
+    public IService setServiceConfig(final String serviceConfig) {
         this.serviceConfig = serviceConfig;
         return this;
     }
@@ -583,7 +583,7 @@ public class IService implements VertxPojo, IIService {
      * 当前类型描述的Model的标识
      */
     @Override
-    public IService setIdentifier(String identifier) {
+    public IService setIdentifier(final String identifier) {
         this.identifier = identifier;
         return this;
     }
@@ -602,7 +602,7 @@ public class IService implements VertxPojo, IIService {
      * 「identifierComponent」- 当前业务接口使用的标识选择器
      */
     @Override
-    public IService setIdentifierComponent(String identifierComponent) {
+    public IService setIdentifierComponent(final String identifierComponent) {
         this.identifierComponent = identifierComponent;
         return this;
     }
@@ -621,7 +621,7 @@ public class IService implements VertxPojo, IIService {
      * 第二标识规则，当前通道的专用标识规则RuleUnique
      */
     @Override
-    public IService setRuleUnique(String ruleUnique) {
+    public IService setRuleUnique(final String ruleUnique) {
         this.ruleUnique = ruleUnique;
         return this;
     }
@@ -638,7 +638,7 @@ public class IService implements VertxPojo, IIService {
      * Setter for <code>ZDB.I_SERVICE.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public IService setSigma(String sigma) {
+    public IService setSigma(final String sigma) {
         this.sigma = sigma;
         return this;
     }
@@ -655,7 +655,7 @@ public class IService implements VertxPojo, IIService {
      * Setter for <code>ZDB.I_SERVICE.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public IService setLanguage(String language) {
+    public IService setLanguage(final String language) {
         this.language = language;
         return this;
     }
@@ -672,7 +672,7 @@ public class IService implements VertxPojo, IIService {
      * Setter for <code>ZDB.I_SERVICE.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public IService setActive(Boolean active) {
+    public IService setActive(final Boolean active) {
         this.active = active;
         return this;
     }
@@ -689,7 +689,7 @@ public class IService implements VertxPojo, IIService {
      * Setter for <code>ZDB.I_SERVICE.METADATA</code>. 「metadata」- 附加配置数据
      */
     @Override
-    public IService setMetadata(String metadata) {
+    public IService setMetadata(final String metadata) {
         this.metadata = metadata;
         return this;
     }
@@ -706,7 +706,7 @@ public class IService implements VertxPojo, IIService {
      * Setter for <code>ZDB.I_SERVICE.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public IService setCreatedAt(LocalDateTime createdAt) {
+    public IService setCreatedAt(final LocalDateTime createdAt) {
         this.createdAt = createdAt;
         return this;
     }
@@ -723,7 +723,7 @@ public class IService implements VertxPojo, IIService {
      * Setter for <code>ZDB.I_SERVICE.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public IService setCreatedBy(String createdBy) {
+    public IService setCreatedBy(final String createdBy) {
         this.createdBy = createdBy;
         return this;
     }
@@ -740,7 +740,7 @@ public class IService implements VertxPojo, IIService {
      * Setter for <code>ZDB.I_SERVICE.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public IService setUpdatedAt(LocalDateTime updatedAt) {
+    public IService setUpdatedAt(final LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
         return this;
     }
@@ -757,13 +757,13 @@ public class IService implements VertxPojo, IIService {
      * Setter for <code>ZDB.I_SERVICE.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public IService setUpdatedBy(String updatedBy) {
+    public IService setUpdatedBy(final String updatedBy) {
         this.updatedBy = updatedBy;
         return this;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
@@ -981,7 +981,7 @@ public class IService implements VertxPojo, IIService {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("IService (");
+        final StringBuilder sb = new StringBuilder("IService (");
 
         sb.append(key);
         sb.append(", ").append(namespace);
@@ -1026,7 +1026,7 @@ public class IService implements VertxPojo, IIService {
     // -------------------------------------------------------------------------
 
     @Override
-    public void from(IIService from) {
+    public void from(final IIService from) {
         setKey(from.getKey());
         setNamespace(from.getNamespace());
         setName(from.getName());
@@ -1063,7 +1063,7 @@ public class IService implements VertxPojo, IIService {
     }
 
     @Override
-    public <E extends IIService> E into(E into) {
+    public <E extends IIService> E into(final E into) {
         into.from(this);
         return into;
     }

@@ -4,7 +4,7 @@
 package io.zerows.extension.runtime.ambient.domain.tables.pojos;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.runtime.ambient.domain.tables.interfaces.IXNumber;
 
 import java.time.LocalDateTime;
@@ -44,7 +44,7 @@ public class XNumber implements VertxPojo, IXNumber {
     public XNumber() {
     }
 
-    public XNumber(IXNumber value) {
+    public XNumber(final IXNumber value) {
         this.key = value.getKey();
         this.code = value.getCode();
         this.comment = value.getComment();
@@ -71,29 +71,29 @@ public class XNumber implements VertxPojo, IXNumber {
     }
 
     public XNumber(
-        String key,
-        String code,
-        String comment,
-        Long current,
-        String format,
-        String identifier,
-        String prefix,
-        String suffix,
-        String time,
-        Integer length,
-        Integer step,
-        Boolean decrement,
-        String appId,
-        String runComponent,
-        Boolean renewal,
-        Boolean active,
-        String sigma,
-        String metadata,
-        String language,
-        LocalDateTime createdAt,
-        String createdBy,
-        LocalDateTime updatedAt,
-        String updatedBy
+        final String key,
+        final String code,
+        final String comment,
+        final Long current,
+        final String format,
+        final String identifier,
+        final String prefix,
+        final String suffix,
+        final String time,
+        final Integer length,
+        final Integer step,
+        final Boolean decrement,
+        final String appId,
+        final String runComponent,
+        final Boolean renewal,
+        final Boolean active,
+        final String sigma,
+        final String metadata,
+        final String language,
+        final LocalDateTime createdAt,
+        final String createdBy,
+        final LocalDateTime updatedAt,
+        final String updatedBy
     ) {
         this.key = key;
         this.code = code;
@@ -120,7 +120,7 @@ public class XNumber implements VertxPojo, IXNumber {
         this.updatedBy = updatedBy;
     }
 
-    public XNumber(io.vertx.core.json.JsonObject json) {
+    public XNumber(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -137,7 +137,7 @@ public class XNumber implements VertxPojo, IXNumber {
      * Setter for <code>ZDB.X_NUMBER.KEY</code>. 「key」- 主键
      */
     @Override
-    public XNumber setKey(String key) {
+    public XNumber setKey(final String key) {
         this.key = key;
         return this;
     }
@@ -154,7 +154,7 @@ public class XNumber implements VertxPojo, IXNumber {
      * Setter for <code>ZDB.X_NUMBER.CODE</code>. 「code」- 编码
      */
     @Override
-    public XNumber setCode(String code) {
+    public XNumber setCode(final String code) {
         this.code = code;
         return this;
     }
@@ -173,7 +173,7 @@ public class XNumber implements VertxPojo, IXNumber {
      * 编号备注信息，用于描述编号数据,comment,S_COMMENT
      */
     @Override
-    public XNumber setComment(String comment) {
+    public XNumber setComment(final String comment) {
         this.comment = comment;
         return this;
     }
@@ -194,7 +194,7 @@ public class XNumber implements VertxPojo, IXNumber {
      * step,current,L_CURRENT
      */
     @Override
-    public XNumber setCurrent(Long current) {
+    public XNumber setCurrent(final Long current) {
         this.current = current;
         return this;
     }
@@ -213,7 +213,7 @@ public class XNumber implements VertxPojo, IXNumber {
      * 「formatFail」格式信息，用于处理最终格式：,formatFail,S_FORMAT
      */
     @Override
-    public XNumber setFormat(String format) {
+    public XNumber setFormat(final String format) {
         this.format = format;
         return this;
     }
@@ -232,7 +232,7 @@ public class XNumber implements VertxPojo, IXNumber {
      * 「identifier」编号对应的identifier，用于查询当前identifier使用的序号信息,identifier,S_IDENTIFIER
      */
     @Override
-    public XNumber setIdentifier(String identifier) {
+    public XNumber setIdentifier(final String identifier) {
         this.identifier = identifier;
         return this;
     }
@@ -249,7 +249,7 @@ public class XNumber implements VertxPojo, IXNumber {
      * Setter for <code>ZDB.X_NUMBER.PREFIX</code>. 「prefix」编号前缀,prefix,S_PREFIX
      */
     @Override
-    public XNumber setPrefix(String prefix) {
+    public XNumber setPrefix(final String prefix) {
         this.prefix = prefix;
         return this;
     }
@@ -266,7 +266,7 @@ public class XNumber implements VertxPojo, IXNumber {
      * Setter for <code>ZDB.X_NUMBER.SUFFIX</code>. 「suffix」编号后缀,suffix,S_SUFFIX
      */
     @Override
-    public XNumber setSuffix(String suffix) {
+    public XNumber setSuffix(final String suffix) {
         this.suffix = suffix;
         return this;
     }
@@ -287,7 +287,7 @@ public class XNumber implements VertxPojo, IXNumber {
      * HH:mm:ss用于描述时间格式生成序号时间部分,time,S_TIME
      */
     @Override
-    public XNumber setTime(String time) {
+    public XNumber setTime(final String time) {
         this.time = time;
         return this;
     }
@@ -306,7 +306,7 @@ public class XNumber implements VertxPojo, IXNumber {
      * 「length」编号长度，编号长度不包含prefix和suffix部分,length,I_LENGTH
      */
     @Override
-    public XNumber setLength(Integer length) {
+    public XNumber setLength(final Integer length) {
         this.length = length;
         return this;
     }
@@ -325,7 +325,7 @@ public class XNumber implements VertxPojo, IXNumber {
      * 「step」编号的步进系数，每次按照step进行变化,step,I_STEP
      */
     @Override
-    public XNumber setStep(Integer step) {
+    public XNumber setStep(final Integer step) {
         this.step = step;
         return this;
     }
@@ -344,7 +344,7 @@ public class XNumber implements VertxPojo, IXNumber {
      * 「decrement」递增/递减？如果为true则递减，为false则是递增,decrement,IS_DECREMENT
      */
     @Override
-    public XNumber setDecrement(Boolean decrement) {
+    public XNumber setDecrement(final Boolean decrement) {
         this.decrement = decrement;
         return this;
     }
@@ -361,7 +361,7 @@ public class XNumber implements VertxPojo, IXNumber {
      * Setter for <code>ZDB.X_NUMBER.APP_ID</code>. 「id」- 关联的应用程序ID
      */
     @Override
-    public XNumber setAppId(String appId) {
+    public XNumber setAppId(final String appId) {
         this.appId = appId;
         return this;
     }
@@ -380,7 +380,7 @@ public class XNumber implements VertxPojo, IXNumber {
      * 发号器执行组件，雪花算法所需
      */
     @Override
-    public XNumber setRunComponent(String runComponent) {
+    public XNumber setRunComponent(final String runComponent) {
         this.runComponent = runComponent;
         return this;
     }
@@ -397,7 +397,7 @@ public class XNumber implements VertxPojo, IXNumber {
      * Setter for <code>ZDB.X_NUMBER.RENEWAL</code>. 「renewal」- 是否循环
      */
     @Override
-    public XNumber setRenewal(Boolean renewal) {
+    public XNumber setRenewal(final Boolean renewal) {
         this.renewal = renewal;
         return this;
     }
@@ -414,7 +414,7 @@ public class XNumber implements VertxPojo, IXNumber {
      * Setter for <code>ZDB.X_NUMBER.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public XNumber setActive(Boolean active) {
+    public XNumber setActive(final Boolean active) {
         this.active = active;
         return this;
     }
@@ -431,7 +431,7 @@ public class XNumber implements VertxPojo, IXNumber {
      * Setter for <code>ZDB.X_NUMBER.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public XNumber setSigma(String sigma) {
+    public XNumber setSigma(final String sigma) {
         this.sigma = sigma;
         return this;
     }
@@ -448,7 +448,7 @@ public class XNumber implements VertxPojo, IXNumber {
      * Setter for <code>ZDB.X_NUMBER.METADATA</code>. 「metadata」- 附加配置
      */
     @Override
-    public XNumber setMetadata(String metadata) {
+    public XNumber setMetadata(final String metadata) {
         this.metadata = metadata;
         return this;
     }
@@ -465,7 +465,7 @@ public class XNumber implements VertxPojo, IXNumber {
      * Setter for <code>ZDB.X_NUMBER.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public XNumber setLanguage(String language) {
+    public XNumber setLanguage(final String language) {
         this.language = language;
         return this;
     }
@@ -482,7 +482,7 @@ public class XNumber implements VertxPojo, IXNumber {
      * Setter for <code>ZDB.X_NUMBER.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public XNumber setCreatedAt(LocalDateTime createdAt) {
+    public XNumber setCreatedAt(final LocalDateTime createdAt) {
         this.createdAt = createdAt;
         return this;
     }
@@ -499,7 +499,7 @@ public class XNumber implements VertxPojo, IXNumber {
      * Setter for <code>ZDB.X_NUMBER.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public XNumber setCreatedBy(String createdBy) {
+    public XNumber setCreatedBy(final String createdBy) {
         this.createdBy = createdBy;
         return this;
     }
@@ -516,7 +516,7 @@ public class XNumber implements VertxPojo, IXNumber {
      * Setter for <code>ZDB.X_NUMBER.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public XNumber setUpdatedAt(LocalDateTime updatedAt) {
+    public XNumber setUpdatedAt(final LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
         return this;
     }
@@ -533,13 +533,13 @@ public class XNumber implements VertxPojo, IXNumber {
      * Setter for <code>ZDB.X_NUMBER.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public XNumber setUpdatedBy(String updatedBy) {
+    public XNumber setUpdatedBy(final String updatedBy) {
         this.updatedBy = updatedBy;
         return this;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
@@ -697,7 +697,7 @@ public class XNumber implements VertxPojo, IXNumber {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("XNumber (");
+        final StringBuilder sb = new StringBuilder("XNumber (");
 
         sb.append(key);
         sb.append(", ").append(code);
@@ -732,7 +732,7 @@ public class XNumber implements VertxPojo, IXNumber {
     // -------------------------------------------------------------------------
 
     @Override
-    public void from(IXNumber from) {
+    public void from(final IXNumber from) {
         setKey(from.getKey());
         setCode(from.getCode());
         setComment(from.getComment());
@@ -759,7 +759,7 @@ public class XNumber implements VertxPojo, IXNumber {
     }
 
     @Override
-    public <E extends IXNumber> E into(E into) {
+    public <E extends IXNumber> E into(final E into) {
         into.from(this);
         return into;
     }

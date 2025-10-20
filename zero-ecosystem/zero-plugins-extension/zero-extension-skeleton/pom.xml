@@ -9,13 +9,18 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>zero-extension-runtime-skeleton</artifactId>
-    <name>🧬 - Zero::Extension::Runtime Skeleton</name>
+    <artifactId>zero-extension-skeleton</artifactId>
+    <name>🧬 - Zero::Extension::Skeleton</name>
     <dependencies>
         <!-- 模块化改造 -->
         <dependency>
             <groupId>io.zerows</groupId>
             <artifactId>zero-boot-mini-actor</artifactId>
+        </dependency>
+        <!-- 代码生成开启 -->
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>r2mo-vertx-jooq-generate</artifactId>
         </dependency>
         <!-- 插件 -->
         <dependency>

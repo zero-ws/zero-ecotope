@@ -4,7 +4,7 @@
 package io.zerows.extension.mbse.ui.domain.tables.pojos;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.mbse.ui.domain.tables.interfaces.IVQuery;
 
 /**
@@ -24,7 +24,7 @@ public class VQuery implements VertxPojo, IVQuery {
     public VQuery() {
     }
 
-    public VQuery(IVQuery value) {
+    public VQuery(final IVQuery value) {
         this.key = value.getKey();
         this.projection = value.getProjection();
         this.pager = value.getPager();
@@ -33,11 +33,11 @@ public class VQuery implements VertxPojo, IVQuery {
     }
 
     public VQuery(
-        String key,
-        String projection,
-        String pager,
-        String sorter,
-        String criteria
+        final String key,
+        final String projection,
+        final String pager,
+        final String sorter,
+        final String criteria
     ) {
         this.key = key;
         this.projection = projection;
@@ -46,7 +46,7 @@ public class VQuery implements VertxPojo, IVQuery {
         this.criteria = criteria;
     }
 
-    public VQuery(io.vertx.core.json.JsonObject json) {
+    public VQuery(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -63,7 +63,7 @@ public class VQuery implements VertxPojo, IVQuery {
      * Setter for <code>ZDB.V_QUERY.KEY</code>. 「key」- 选项主键
      */
     @Override
-    public VQuery setKey(String key) {
+    public VQuery setKey(final String key) {
         this.key = key;
         return this;
     }
@@ -82,7 +82,7 @@ public class VQuery implements VertxPojo, IVQuery {
      * query/projection:[], 默认列过滤项
      */
     @Override
-    public VQuery setProjection(String projection) {
+    public VQuery setProjection(final String projection) {
         this.projection = projection;
         return this;
     }
@@ -99,7 +99,7 @@ public class VQuery implements VertxPojo, IVQuery {
      * Setter for <code>ZDB.V_QUERY.PAGER</code>. 「pager」- query/pager:{}, 分页选项
      */
     @Override
-    public VQuery setPager(String pager) {
+    public VQuery setPager(final String pager) {
         this.pager = pager;
         return this;
     }
@@ -118,7 +118,7 @@ public class VQuery implements VertxPojo, IVQuery {
      * 排序选项
      */
     @Override
-    public VQuery setSorter(String sorter) {
+    public VQuery setSorter(final String sorter) {
         this.sorter = sorter;
         return this;
     }
@@ -137,13 +137,13 @@ public class VQuery implements VertxPojo, IVQuery {
      * query/criteria:{}, 查询条件选项
      */
     @Override
-    public VQuery setCriteria(String criteria) {
+    public VQuery setCriteria(final String criteria) {
         this.criteria = criteria;
         return this;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
@@ -193,7 +193,7 @@ public class VQuery implements VertxPojo, IVQuery {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("VQuery (");
+        final StringBuilder sb = new StringBuilder("VQuery (");
 
         sb.append(key);
         sb.append(", ").append(projection);
@@ -210,7 +210,7 @@ public class VQuery implements VertxPojo, IVQuery {
     // -------------------------------------------------------------------------
 
     @Override
-    public void from(IVQuery from) {
+    public void from(final IVQuery from) {
         setKey(from.getKey());
         setProjection(from.getProjection());
         setPager(from.getPager());
@@ -219,7 +219,7 @@ public class VQuery implements VertxPojo, IVQuery {
     }
 
     @Override
-    public <E extends IVQuery> E into(E into) {
+    public <E extends IVQuery> E into(final E into) {
         into.from(this);
         return into;
     }

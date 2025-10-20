@@ -4,7 +4,7 @@
 package io.zerows.extension.mbse.action.domain.tables.records;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.mbse.action.domain.tables.IService;
 import io.zerows.extension.mbse.action.domain.tables.interfaces.IIService;
 import org.jooq.Record1;

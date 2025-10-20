@@ -4,7 +4,7 @@
 package io.zerows.extension.runtime.ambient.domain.tables.pojos;
 
 
-import io.github.jklingsporn.vertx.jooq.shared.internal.VertxPojo;
+import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.extension.runtime.ambient.domain.tables.interfaces.IXApp;
 
 import java.time.LocalDateTime;
@@ -48,7 +48,7 @@ public class XApp implements VertxPojo, IXApp {
     public XApp() {
     }
 
-    public XApp(IXApp value) {
+    public XApp(final IXApp value) {
         this.key = value.getKey();
         this.name = value.getName();
         this.code = value.getCode();
@@ -79,33 +79,33 @@ public class XApp implements VertxPojo, IXApp {
     }
 
     public XApp(
-        String key,
-        String name,
-        String code,
-        String status,
-        String tenantId,
-        String appSecret,
-        String appKey,
-        String title,
-        String logo,
-        String icp,
-        String copyRight,
-        String email,
-        String domain,
-        Integer port,
-        String context,
-        String urlLogin,
-        String urlAdmin,
-        String endpoint,
-        String entry,
-        Boolean active,
-        String sigma,
-        String metadata,
-        String language,
-        LocalDateTime createdAt,
-        String createdBy,
-        LocalDateTime updatedAt,
-        String updatedBy
+        final String key,
+        final String name,
+        final String code,
+        final String status,
+        final String tenantId,
+        final String appSecret,
+        final String appKey,
+        final String title,
+        final String logo,
+        final String icp,
+        final String copyRight,
+        final String email,
+        final String domain,
+        final Integer port,
+        final String context,
+        final String urlLogin,
+        final String urlAdmin,
+        final String endpoint,
+        final String entry,
+        final Boolean active,
+        final String sigma,
+        final String metadata,
+        final String language,
+        final LocalDateTime createdAt,
+        final String createdBy,
+        final LocalDateTime updatedAt,
+        final String updatedBy
     ) {
         this.key = key;
         this.name = name;
@@ -136,7 +136,7 @@ public class XApp implements VertxPojo, IXApp {
         this.updatedBy = updatedBy;
     }
 
-    public XApp(io.vertx.core.json.JsonObject json) {
+    public XApp(final io.vertx.core.json.JsonObject json) {
         this();
         fromJson(json);
     }
@@ -153,7 +153,7 @@ public class XApp implements VertxPojo, IXApp {
      * Setter for <code>ZDB.X_APP.KEY</code>. 「key」- 应用程序主键
      */
     @Override
-    public XApp setKey(String key) {
+    public XApp setKey(final String key) {
         this.key = key;
         return this;
     }
@@ -170,7 +170,7 @@ public class XApp implements VertxPojo, IXApp {
      * Setter for <code>ZDB.X_APP.NAME</code>. 「name」- 应用程序名称
      */
     @Override
-    public XApp setName(String name) {
+    public XApp setName(final String name) {
         this.name = name;
         return this;
     }
@@ -187,7 +187,7 @@ public class XApp implements VertxPojo, IXApp {
      * Setter for <code>ZDB.X_APP.CODE</code>. 「code」- 应用程序编码
      */
     @Override
-    public XApp setCode(String code) {
+    public XApp setCode(final String code) {
         this.code = code;
         return this;
     }
@@ -204,7 +204,7 @@ public class XApp implements VertxPojo, IXApp {
      * Setter for <code>ZDB.X_APP.STATUS</code>. 「status」- 应用状态
      */
     @Override
-    public XApp setStatus(String status) {
+    public XApp setStatus(final String status) {
         this.status = status;
         return this;
     }
@@ -221,7 +221,7 @@ public class XApp implements VertxPojo, IXApp {
      * Setter for <code>ZDB.X_APP.TENANT_ID</code>. 「tenantId」- 租户ID
      */
     @Override
-    public XApp setTenantId(String tenantId) {
+    public XApp setTenantId(final String tenantId) {
         this.tenantId = tenantId;
         return this;
     }
@@ -238,7 +238,7 @@ public class XApp implements VertxPojo, IXApp {
      * Setter for <code>ZDB.X_APP.APP_SECRET</code>. 「appSecret」- 专用密钥
      */
     @Override
-    public XApp setAppSecret(String appSecret) {
+    public XApp setAppSecret(final String appSecret) {
         this.appSecret = appSecret;
         return this;
     }
@@ -255,7 +255,7 @@ public class XApp implements VertxPojo, IXApp {
      * Setter for <code>ZDB.X_APP.APP_KEY</code>. 「appKey」- 应用程序专用唯一hashKey
      */
     @Override
-    public XApp setAppKey(String appKey) {
+    public XApp setAppKey(final String appKey) {
         this.appKey = appKey;
         return this;
     }
@@ -272,7 +272,7 @@ public class XApp implements VertxPojo, IXApp {
      * Setter for <code>ZDB.X_APP.TITLE</code>. 「title」- 应用程序标题
      */
     @Override
-    public XApp setTitle(String title) {
+    public XApp setTitle(final String title) {
         this.title = title;
         return this;
     }
@@ -289,7 +289,7 @@ public class XApp implements VertxPojo, IXApp {
      * Setter for <code>ZDB.X_APP.LOGO</code>. 「logo」- 应用程序图标
      */
     @Override
-    public XApp setLogo(String logo) {
+    public XApp setLogo(final String logo) {
         this.logo = logo;
         return this;
     }
@@ -306,7 +306,7 @@ public class XApp implements VertxPojo, IXApp {
      * Setter for <code>ZDB.X_APP.ICP</code>. 「icp」- ICP备案号
      */
     @Override
-    public XApp setIcp(String icp) {
+    public XApp setIcp(final String icp) {
         this.icp = icp;
         return this;
     }
@@ -323,7 +323,7 @@ public class XApp implements VertxPojo, IXApp {
      * Setter for <code>ZDB.X_APP.COPY_RIGHT</code>. 「copyRight」- CopyRight版权信息
      */
     @Override
-    public XApp setCopyRight(String copyRight) {
+    public XApp setCopyRight(final String copyRight) {
         this.copyRight = copyRight;
         return this;
     }
@@ -340,7 +340,7 @@ public class XApp implements VertxPojo, IXApp {
      * Setter for <code>ZDB.X_APP.EMAIL</code>. 「email」- 应用Email信息
      */
     @Override
-    public XApp setEmail(String email) {
+    public XApp setEmail(final String email) {
         this.email = email;
         return this;
     }
@@ -357,7 +357,7 @@ public class XApp implements VertxPojo, IXApp {
      * Setter for <code>ZDB.X_APP.DOMAIN</code>. 「domain」- 应用程序所在域
      */
     @Override
-    public XApp setDomain(String domain) {
+    public XApp setDomain(final String domain) {
         this.domain = domain;
         return this;
     }
@@ -374,7 +374,7 @@ public class XApp implements VertxPojo, IXApp {
      * Setter for <code>ZDB.X_APP.PORT</code>. 「port」- 应用程序端口号，和SOURCE的端口号区别开
      */
     @Override
-    public XApp setPort(Integer port) {
+    public XApp setPort(final Integer port) {
         this.port = port;
         return this;
     }
@@ -391,7 +391,7 @@ public class XApp implements VertxPojo, IXApp {
      * Setter for <code>ZDB.X_APP.CONTEXT</code>. 「configure」- 应用程序路径
      */
     @Override
-    public XApp setContext(String context) {
+    public XApp setContext(final String context) {
         this.context = context;
         return this;
     }
@@ -408,7 +408,7 @@ public class XApp implements VertxPojo, IXApp {
      * Setter for <code>ZDB.X_APP.URL_LOGIN</code>. 「urlLogin」— 应用程序入口页面（登录页）
      */
     @Override
-    public XApp setUrlLogin(String urlLogin) {
+    public XApp setUrlLogin(final String urlLogin) {
         this.urlLogin = urlLogin;
         return this;
     }
@@ -425,7 +425,7 @@ public class XApp implements VertxPojo, IXApp {
      * Setter for <code>ZDB.X_APP.URL_ADMIN</code>. 「urlAdmin」- 应用程序内置主页（带安全）
      */
     @Override
-    public XApp setUrlAdmin(String urlAdmin) {
+    public XApp setUrlAdmin(final String urlAdmin) {
         this.urlAdmin = urlAdmin;
         return this;
     }
@@ -442,7 +442,7 @@ public class XApp implements VertxPojo, IXApp {
      * Setter for <code>ZDB.X_APP.ENDPOINT</code>. 「endpoint」- 后端API的根路径，启动时需要
      */
     @Override
-    public XApp setEndpoint(String endpoint) {
+    public XApp setEndpoint(final String endpoint) {
         this.endpoint = endpoint;
         return this;
     }
@@ -459,7 +459,7 @@ public class XApp implements VertxPojo, IXApp {
      * Setter for <code>ZDB.X_APP.ENTRY</code>. 「entry」- App 关联的入口菜单
      */
     @Override
-    public XApp setEntry(String entry) {
+    public XApp setEntry(final String entry) {
         this.entry = entry;
         return this;
     }
@@ -476,7 +476,7 @@ public class XApp implements VertxPojo, IXApp {
      * Setter for <code>ZDB.X_APP.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public XApp setActive(Boolean active) {
+    public XApp setActive(final Boolean active) {
         this.active = active;
         return this;
     }
@@ -493,7 +493,7 @@ public class XApp implements VertxPojo, IXApp {
      * Setter for <code>ZDB.X_APP.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public XApp setSigma(String sigma) {
+    public XApp setSigma(final String sigma) {
         this.sigma = sigma;
         return this;
     }
@@ -510,7 +510,7 @@ public class XApp implements VertxPojo, IXApp {
      * Setter for <code>ZDB.X_APP.METADATA</code>. 「metadata」- 附加配置
      */
     @Override
-    public XApp setMetadata(String metadata) {
+    public XApp setMetadata(final String metadata) {
         this.metadata = metadata;
         return this;
     }
@@ -527,7 +527,7 @@ public class XApp implements VertxPojo, IXApp {
      * Setter for <code>ZDB.X_APP.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
-    public XApp setLanguage(String language) {
+    public XApp setLanguage(final String language) {
         this.language = language;
         return this;
     }
@@ -544,7 +544,7 @@ public class XApp implements VertxPojo, IXApp {
      * Setter for <code>ZDB.X_APP.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public XApp setCreatedAt(LocalDateTime createdAt) {
+    public XApp setCreatedAt(final LocalDateTime createdAt) {
         this.createdAt = createdAt;
         return this;
     }
@@ -561,7 +561,7 @@ public class XApp implements VertxPojo, IXApp {
      * Setter for <code>ZDB.X_APP.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public XApp setCreatedBy(String createdBy) {
+    public XApp setCreatedBy(final String createdBy) {
         this.createdBy = createdBy;
         return this;
     }
@@ -578,7 +578,7 @@ public class XApp implements VertxPojo, IXApp {
      * Setter for <code>ZDB.X_APP.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public XApp setUpdatedAt(LocalDateTime updatedAt) {
+    public XApp setUpdatedAt(final LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
         return this;
     }
@@ -595,13 +595,13 @@ public class XApp implements VertxPojo, IXApp {
      * Setter for <code>ZDB.X_APP.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public XApp setUpdatedBy(String updatedBy) {
+    public XApp setUpdatedBy(final String updatedBy) {
         this.updatedBy = updatedBy;
         return this;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
@@ -783,7 +783,7 @@ public class XApp implements VertxPojo, IXApp {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("XApp (");
+        final StringBuilder sb = new StringBuilder("XApp (");
 
         sb.append(key);
         sb.append(", ").append(name);
@@ -822,7 +822,7 @@ public class XApp implements VertxPojo, IXApp {
     // -------------------------------------------------------------------------
 
     @Override
-    public void from(IXApp from) {
+    public void from(final IXApp from) {
         setKey(from.getKey());
         setName(from.getName());
         setCode(from.getCode());
@@ -853,7 +853,7 @@ public class XApp implements VertxPojo, IXApp {
     }
 
     @Override
-    public <E extends IXApp> E into(E into) {
+    public <E extends IXApp> E into(final E into) {
         into.from(this);
         return into;
     }
