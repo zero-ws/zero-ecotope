@@ -20,6 +20,8 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.Supplier;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author lang : 2025-10-05
@@ -202,6 +204,26 @@ public class ENV implements HEnvironment, HLog {
         return ENV_VARS.keySet();
     }
 
+    // ========== 特殊处理
+    public static String parseVariable(final String wrapValue) {
+        // 定义匹配的正则表达式
+        final String regex = "\\$\\{(.+)\\}";
+        final Pattern pattern = Pattern.compile(regex);
+        final Matcher matcher = pattern.matcher(wrapValue);
+
+        final String envValue;
+        if (matcher.find()) {
+            // 使用了环境变量
+            final String envKey = matcher.group(1);
+            envValue = ENV.of().get(envKey, (String) null);
+            log.info("[ ZERO ] 解析环境变量：{}，值为：{}", envKey, envValue);
+        } else {
+            envValue = wrapValue;
+            // 未使用环境变量
+            log.info("[ ZERO ] 未设置环境变量：{}", envValue);
+        }
+        return envValue;
+    }
     // ========== Reporter ==========
 
     // 环境变量打印专用

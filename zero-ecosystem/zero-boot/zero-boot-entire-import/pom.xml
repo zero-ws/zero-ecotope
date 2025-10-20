@@ -33,7 +33,7 @@
             <!-- Core -->
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-version</artifactId>
+                <artifactId>zero-stack</artifactId>
                 <version>${zero.version}</version>
                 <scope>import</scope>
                 <type>pom</type>

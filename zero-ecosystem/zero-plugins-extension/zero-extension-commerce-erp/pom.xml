@@ -24,8 +24,7 @@
                 <groupId>org.liquibase</groupId>
                 <artifactId>liquibase-maven-plugin</artifactId>
                 <configuration>
-                    <propertyProviderClass>io.zerows.extension.skeleton.liquibase.ZeroLiquibaseEncryption
-                    </propertyProviderClass>
+                    <propertyProviderClass>io.zerows.extension.skeleton.liquibase.ZeroLiquibaseEncryption</propertyProviderClass>
                     <!-- 配置文件路径 -->
                     <propertyFile>plugins/${project.artifactId}/database/MYSQL.properties</propertyFile>
                     <changeLogFile>plugins/${project.artifactId}/database/MYSQL.yml</changeLogFile>

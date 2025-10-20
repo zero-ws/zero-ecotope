@@ -125,6 +125,10 @@ class ExtensionGenerate {
             configuration.classGenerator(ClassicJDBCVertxGenerator.class);
         }
 
+        if (Objects.nonNull(generate.resolver())) {
+            configuration.resolver(generate.resolver());
+        }
+
 
         configuration.classPackage(clazz.getPackage());
         configuration.databaseIncludes(source.getIncludes());

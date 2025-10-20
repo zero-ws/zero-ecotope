@@ -1,0 +1,22 @@
+{
+    "name": "w-vendor-check-in",
+    "daoCls": "T_VENDOR_CHECK_IN",
+    "field": {
+        "unique": [
+            [
+                "key"
+            ]
+        ]
+    },
+    "connect": {
+        "targetIndent": "w.todo",
+        "target": {
+            "w.todo": {
+                "keyJoin": "traceId"
+            }
+        },
+        "source": {
+            "keyJoin": "key"
+        }
+    }
+}

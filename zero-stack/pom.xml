@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>io.zerows</groupId>
+    <artifactId>zero-stack</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+    <name>(POM) 📚️ - Zero ${zero.version} / Momo ${momo.version} / R2mo ${r2mo.version}</name>
+    <properties>
+        <momo.version>1.0.7</momo.version>
+        <zero.version>1.0.0</zero.version>
+    </properties>
+    <dependencyManagement>
+        <dependencies>
+            <!--
+            版本管理专用 Stack
+            -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>rachel-momo-stack</artifactId>
+                <version>${momo.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <!--
+            Zero Core 版本管理
+            -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-version-epoch</artifactId>
+                <version>${zero.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <!--
+            Zero Plugins 版本管理
+            -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-version-plugins</artifactId>
+                <version>${zero.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <!--
+            Zero Extension 版本管理
+            -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-version-extension</artifactId>
+                <version>${zero.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <!--
+            对接层，底层连接 Overlay / R2MO
+            -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-version-overlay</artifactId>
+                <version>${zero.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <!-- ================= 入口 ================== -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-boot-mini-actor</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

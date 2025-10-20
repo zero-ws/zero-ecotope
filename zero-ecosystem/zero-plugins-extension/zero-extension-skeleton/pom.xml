@@ -28,6 +28,10 @@
             <artifactId>zero-plugins-office-excel</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>r2mo-io-local</artifactId>
+        </dependency>
         <!-- MySQL -->
         <dependency>
             <groupId>com.mysql</groupId>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>io.zerows</groupId>
+        <artifactId>zero-version</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>zero-version-plugins</artifactId>
+    <name>(POM) 📣 - Zero::Version::Plugins</name>
+    <packaging>pom</packaging>
+    <dependencyManagement>
+        <dependencies>
+            <!-- ================= 静态插件 ================== -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-plugins-common-shell</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-plugins-trash</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-plugins-integration-sms</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-plugins-integration-wechat</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-plugins-integration-feign</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-plugins-office-excel</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-plugins-store-elasticsearch</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-plugins-store-liquibase</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-plugins-websocket-stomp</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-plugins-swagger</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

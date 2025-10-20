@@ -94,12 +94,6 @@
             <artifactId>zero-plugins-websocket-stomp</artifactId>
         </dependency>
 
-        <!-- ================= 动态插件 ================== -->
-        <dependency>
-            <groupId>io.zerows</groupId>
-            <artifactId>zero-runner-toolkit-hed</artifactId>
-        </dependency>
-
         <!-- ===================== 商业接口部分 ==================== -->
         <dependency>
             <groupId>io.zerows</groupId>

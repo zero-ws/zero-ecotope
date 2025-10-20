@@ -11,4 +11,11 @@
 
     <artifactId>zero-extension-erp-api</artifactId>
     <name>Zero::Extension💎 - ERP::Api</name>
+    <dependencies>
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-extension-erp-provider</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
 </project>
