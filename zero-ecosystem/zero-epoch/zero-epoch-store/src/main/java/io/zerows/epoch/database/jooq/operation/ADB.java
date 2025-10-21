@@ -120,7 +120,7 @@ public class ADB {
     }
 
     public Future<Long> countAllAsync() {
-        return this.dbe().countAllAsync();
+        return this.dbe().countAsync();
     }
 
     // endregion
@@ -1573,16 +1573,8 @@ public class ADB {
         return this.aggregator.count(this.workflow.inputQrJ(criteria));
     }
 
-    public Long count(final JsonObject criteria, final String pojo) {
-        return this.aggregator.count(JqFlow.create(this.analyzer, pojo).inputQrJ(criteria));
-    }
-
     public Future<Long> countAsync(final JsonObject criteria) {
         return this.workflow.inputQrJAsync(criteria).compose(this.aggregator::countAsync);
-    }
-
-    public Future<Long> countAsync(final JsonObject criteria, final String pojo) {
-        return JqFlow.create(this.analyzer, pojo).inputQrJAsync(criteria).compose(this.aggregator::countAsync);
     }
 
 

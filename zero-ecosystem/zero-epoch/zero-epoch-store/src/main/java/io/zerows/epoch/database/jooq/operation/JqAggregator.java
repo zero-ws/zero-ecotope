@@ -3,8 +3,8 @@ package io.zerows.epoch.database.jooq.operation;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.database.jooq.util.JqAnalyzer;
 import io.zerows.component.qr.syntax.Ir;
+import io.zerows.epoch.database.jooq.util.JqAnalyzer;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -54,7 +54,7 @@ class JqAggregator {
 
     /*
      * AgCount class for count
-     * 1) countAll / countAllAsync
+     * 1) countAll / countAsync
      */
     Long countAll() {
         return this.counter.count();
