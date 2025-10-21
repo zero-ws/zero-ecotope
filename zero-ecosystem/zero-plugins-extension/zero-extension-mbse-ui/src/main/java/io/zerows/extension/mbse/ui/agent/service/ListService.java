@@ -1,10 +1,10 @@
 package io.zerows.extension.mbse.ui.agent.service;
 
+import io.r2mo.base.dbe.syntax.QSorter;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.LogOf;
-import io.zerows.component.qr.Sorter;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.mbse.ui.domain.tables.daos.UiListDao;
@@ -60,7 +60,7 @@ public class ListService implements ListStub {
     @Override
     public Future<JsonArray> fetchQr(final JsonObject condition) {
 
-        final Sorter sorter = Sorter.create(KName.SORT, true);
+        final QSorter sorter = QSorter.of(KName.SORT, true);
 
         return DB.on(UiViewDao.class).<UiView>fetchAsync(condition, sorter)
             // Cached Data for future usage

@@ -9,6 +9,7 @@ import io.zerows.platform.exception._60025Exception400QrPageIndex;
 import java.io.Serializable;
 import java.util.Objects;
 
+@Deprecated
 public class Pager implements Serializable {
 
     private static final String PAGE = "page";

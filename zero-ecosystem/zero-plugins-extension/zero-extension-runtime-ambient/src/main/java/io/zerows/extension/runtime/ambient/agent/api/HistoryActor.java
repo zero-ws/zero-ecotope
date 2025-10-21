@@ -6,11 +6,11 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.runtime.ambient.agent.service.ActivityStub;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XActivityDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XActivity;
 import io.zerows.extension.runtime.ambient.eon.Addr;
-import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import jakarta.inject.Inject;
@@ -48,7 +48,7 @@ public class HistoryActor {
 
     @Address(Addr.History.ACTIVITY_SEARCH)
     public Future<JsonObject> searchActivities(final JsonObject body) {
-        return DB.on(XActivityDao.class).searchAsync(body);
+        return DB.on(XActivityDao.class).searchJAsync(body);
     }
 
     @Address(Addr.History.ACTIVITY_GET)

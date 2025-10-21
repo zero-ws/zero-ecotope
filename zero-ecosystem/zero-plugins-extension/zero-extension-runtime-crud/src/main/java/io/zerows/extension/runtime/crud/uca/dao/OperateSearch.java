@@ -33,7 +33,7 @@ class OperateSearch implements Operate<JsonObject, JsonObject> {
 
                 // Direct 模式
                 final ADB jooq = IxPin.jooq(in);
-                return jooq.searchAsync(condition);
+                return jooq.searchJAsync(condition);
             }
         };
     }

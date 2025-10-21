@@ -1,5 +1,6 @@
 package io.zerows.extension.commerce.rbac.agent.api;
 
+import io.r2mo.base.dbe.syntax.QSorter;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
@@ -8,18 +9,17 @@ import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Me;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.constant.KName;
-import io.zerows.component.qr.Sorter;
-import io.zerows.platform.constant.VString;
-import io.zerows.epoch.store.jooq.DB;
-import io.zerows.program.Ux;
 import io.zerows.epoch.metadata.KView;
 import io.zerows.epoch.metadata.XHeader;
-import io.zerows.support.Ut;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.commerce.rbac.agent.service.view.RuleStub;
 import io.zerows.extension.commerce.rbac.atom.ScOwner;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.SPathDao;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SPath;
 import io.zerows.extension.commerce.rbac.eon.Addr;
+import io.zerows.platform.constant.VString;
+import io.zerows.program.Ux;
+import io.zerows.support.Ut;
 import jakarta.inject.Inject;
 
 /**
@@ -40,7 +40,7 @@ public class RuleActor {
             .put(KName.PARENT_ID + ",n", VString.EMPTY);
 
         return DB.on(SPathDao.class)
-            .<SPath>fetchAsync(condition, Sorter.create(KName.UI_SORT, true))
+            .<SPath>fetchAsync(condition, QSorter.of(KName.UI_SORT, true))
             .compose(Ux::futureA);
     }
 

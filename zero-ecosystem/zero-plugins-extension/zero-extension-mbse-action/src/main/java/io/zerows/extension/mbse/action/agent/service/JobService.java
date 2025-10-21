@@ -5,12 +5,12 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.LogOf;
 import io.zerows.component.qr.syntax.Ir;
 import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.mbse.action.domain.tables.daos.IJobDao;
 import io.zerows.extension.mbse.action.domain.tables.daos.IServiceDao;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IJob;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IService;
 import io.zerows.extension.mbse.action.util.Jt;
-import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -35,7 +35,7 @@ public class JobService implements JobStub {
         final JsonObject condition = qr.toJson();
         LOGGER.info("Job condition: {0}", condition);
         return DB.on(IJobDao.class)
-            .searchAsync(condition)
+            .searchJAsync(condition)
             .compose(jobs -> {
                 /*
                  * Result for all jobs that are belong to current sigma here.

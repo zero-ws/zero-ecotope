@@ -10,6 +10,7 @@ import java.util.Set;
  * @author lang
  * Batch operation by `pager` instead of fetch all data here.
  */
+@Deprecated
 public class Pagination {
     private final Pager pager;
     private Integer total;

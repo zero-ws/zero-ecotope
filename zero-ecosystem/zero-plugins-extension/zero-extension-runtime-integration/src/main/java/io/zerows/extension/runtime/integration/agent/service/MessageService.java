@@ -1,9 +1,9 @@
 package io.zerows.extension.runtime.integration.agent.service;
 
+import io.r2mo.base.dbe.syntax.QSorter;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.qr.Sorter;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.database.jooq.operation.ADB;
 import io.zerows.epoch.store.jooq.DB;
@@ -26,7 +26,7 @@ public class MessageService implements MessageStub {
     public Future<List<IMessage>> fetchTyped(final EmMessage.Type type, final JsonObject condition) {
         condition.put(KName.TYPE, type.name());
         return DB.on(IMessageDao.class).fetchAsync(condition,
-            Sorter.create(KName.CREATED_AT, Boolean.FALSE));
+            QSorter.of(KName.CREATED_AT, Boolean.FALSE));
     }
 
     @Override

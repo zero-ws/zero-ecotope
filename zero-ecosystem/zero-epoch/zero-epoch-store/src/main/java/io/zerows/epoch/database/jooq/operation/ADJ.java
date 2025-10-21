@@ -127,8 +127,8 @@ public final class ADJ {
 
     // -------------------- Search Operation -----------
     /*
-     * searchAsync(JsonObject)
-     * searchAsync(Qr)
+     * searchJAsync(JsonObject)
+     * searchJAsync(Qr)
      */
     public Future<JsonObject> searchAsync(final JsonObject params) {
         return searchAsync(toQr(params));

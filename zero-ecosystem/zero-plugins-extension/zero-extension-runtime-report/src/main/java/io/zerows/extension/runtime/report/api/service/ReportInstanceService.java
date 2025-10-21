@@ -6,6 +6,7 @@ import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.runtime.report.atom.RGeneration;
 import io.zerows.extension.runtime.report.domain.tables.daos.KpReportInstanceDao;
 import io.zerows.extension.runtime.report.domain.tables.pojos.KpFeature;
@@ -13,7 +14,6 @@ import io.zerows.extension.runtime.report.domain.tables.pojos.KpReport;
 import io.zerows.extension.runtime.report.domain.tables.pojos.KpReportInstance;
 import io.zerows.extension.runtime.report.uca.combiner.StepGenerator;
 import io.zerows.extension.runtime.report.uca.pull.DataInput;
-import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.base.FnBase;
@@ -32,7 +32,7 @@ public class ReportInstanceService implements ReportInstanceStub {
     @Override
     public Future<JsonObject> searchPaged(final JsonObject query) {
         return DB.on(KpReportInstanceDao.class)
-            .searchAsync(query);
+            .searchJAsync(query);
     }
 
     @Override

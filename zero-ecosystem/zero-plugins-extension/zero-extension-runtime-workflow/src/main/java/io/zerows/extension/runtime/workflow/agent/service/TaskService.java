@@ -50,7 +50,7 @@ public class TaskService implements TaskStub {
     @Override
     public Future<JsonObject> fetchHistory(final JsonObject condition) {
         final JsonObject combine = Ut.irAndQH(condition, KName.Flow.FLOW_END, Boolean.TRUE);
-        return DB.on(WTicketDao.class).searchAsync(combine);
+        return DB.on(WTicketDao.class).searchJAsync(combine);
     }
 
     // ====================== Single Record

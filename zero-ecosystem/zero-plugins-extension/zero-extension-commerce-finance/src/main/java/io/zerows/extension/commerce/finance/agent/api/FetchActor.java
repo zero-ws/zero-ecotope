@@ -6,6 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.commerce.finance.agent.service.BookStub;
 import io.zerows.extension.commerce.finance.agent.service.FetchStub;
 import io.zerows.extension.commerce.finance.agent.service.end.SettleRStub;
@@ -22,7 +23,6 @@ import io.zerows.extension.commerce.finance.domain.tables.pojos.FSettlement;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FTrans;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FTransItem;
 import io.zerows.extension.commerce.finance.eon.Addr;
-import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -84,7 +84,7 @@ public class FetchActor {
     @Address(Addr.Bill.FETCH_BILLS)
     public Future<JsonObject> fetchBills(final JsonObject query) {
         // Search Bills by Pagination ( Qr Engine )
-        return DB.on(FBillDao.class).searchAsync(query).compose(response -> {
+        return DB.on(FBillDao.class).searchJAsync(query).compose(response -> {
             final JsonArray bill = Ut.valueJArray(response, KName.LIST);
             final Set<String> bills = Ut.valueSetString(bill, KName.KEY);
             return DB.on(FBillItemDao.class).fetchJInAsync("billId", Ut.toJArray(bills))
@@ -102,7 +102,7 @@ public class FetchActor {
                     return Ux.future(response);
                 });
         });
-        // return Ux.Jooq.join(FBillDao.class).searchAsync(query);
+        // return Ux.Jooq.join(FBillDao.class).searchJAsync(query);
     }
 
     @Address(Addr.Bill.FETCH_BILL)

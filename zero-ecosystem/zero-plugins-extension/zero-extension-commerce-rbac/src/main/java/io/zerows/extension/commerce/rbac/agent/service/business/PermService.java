@@ -151,7 +151,7 @@ public class PermService implements PermStub {
             /*
              * Replace for criteria
              */
-            return DB.on(SPermissionDao.class).searchAsync(query);
+            return DB.on(SPermissionDao.class).searchJAsync(query);
         });
     }
 

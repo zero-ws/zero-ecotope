@@ -6,11 +6,11 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.commerce.finance.agent.service.end.DebtStub;
 import io.zerows.extension.commerce.finance.agent.service.end.SettleRStub;
 import io.zerows.extension.commerce.finance.domain.tables.daos.FSettlementDao;
 import io.zerows.extension.commerce.finance.eon.Addr;
-import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -35,7 +35,7 @@ public class BatchActor {
 
     @Address(Addr.Settle.FETCH_BY_QR)
     public Future<JsonObject> searchSettle(final JsonObject qr) {
-        return DB.on(FSettlementDao.class).searchAsync(qr).compose(pageData -> {
+        return DB.on(FSettlementDao.class).searchJAsync(qr).compose(pageData -> {
             final JsonArray settlementData = Ut.valueJArray(pageData, KName.LIST);
             return this.settleRStub.statusSettlement(settlementData).compose(settlementA -> {
                 pageData.put(KName.LIST, settlementA);

@@ -371,7 +371,7 @@ public abstract class AbstractDao implements HDao {
     @Override
     public Future<JsonObject> searchAsync(final JsonObject query) {
         return Ux.future(this.search(query));
-        // return Fn.getNull(Ux.futureJ(), () -> this.search.searchAsync(query), query);
+        // return Fn.getNull(Ux.futureJ(), () -> this.search.searchJAsync(query), query);
     }
 
     @Override

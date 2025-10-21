@@ -20,6 +20,7 @@ import java.util.function.BiConsumer;
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Deprecated
 public class Criteria implements Serializable {
     /**
      * The mode of current criteria condition.

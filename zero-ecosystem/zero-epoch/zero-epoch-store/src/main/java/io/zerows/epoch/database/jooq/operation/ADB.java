@@ -2,16 +2,17 @@ package io.zerows.epoch.database.jooq.operation;
 
 import cn.hutool.core.util.StrUtil;
 import io.r2mo.base.dbe.DBS;
+import io.r2mo.base.dbe.syntax.QSorter;
 import io.r2mo.base.program.R2Mapping;
 import io.r2mo.base.program.R2Vector;
 import io.r2mo.typed.cc.Cc;
+import io.r2mo.typed.common.Pagination;
 import io.r2mo.vertx.jooq.AsyncDBContext;
 import io.r2mo.vertx.jooq.DBEx;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.qr.Sorter;
 import io.zerows.epoch.database.cp.DataPool;
 import io.zerows.epoch.database.jooq.JooqDsl;
 import io.zerows.epoch.database.jooq.JooqInfix;
@@ -22,7 +23,9 @@ import io.zerows.epoch.metadata.MMAdapt;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.constant.VValue;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -96,35 +99,612 @@ public class ADB {
         return (DBEx<R>) this.dbe;
     }
 
-    // region fetchAll??? / 查询所有数据，两种形态：T 和 J
+    /*
+     * 所有的方法都会有两个标记
+     * map  ->  executed  --> map
+     * - 支持用 ✅
+     * - 不支持用 ❌
+     * - 内部调用变体 🌸
+     * 输入是 JsonObject 或 JsonArray 会支持
+     * 输出是 JsonObject 或 JsonArray 会支持
+     * 1）同一个方法的形态会有 8 种
+     * 2）参考如下矩阵
+     *                          同步方法             |          异步方法
+     *    输入T / 输出T           xxxxx              |          xxxxxAsync
+     *    输入J / 输出T           xxxxx              |          xxxxxAsync
+     *    输入T / 输出J           xxxxxJ             |          xxxxxJAsync
+     *    输入J / 输出J           xxxxxJ             |          xxxxxJAsync
+     * 3）带上单记录操作和批量操作会从 8 种变成 16 种
+     */
+    // region 查找（所有） x 4
+    // map ❌ ------> executed ✅ ------> map ❌
     public <T> List<T> fetchAll() {
         return this.<T>dbe().findAll();
     }
 
+    // map ❌ ------> executed ✅ ------> map ✅
     public JsonArray fetchJAll() {
         return this.dbe().findAllJ();
     }
 
+    // map ❌ ------> executed ✅ ------> map ❌
     public <T> Future<List<T>> fetchAllAsync() {
         return this.<T>dbe().findAllAsync();
     }
 
+    // map ❌ ------> executed ✅ ------> map ✅
     public Future<JsonArray> fetchJAllAsync() {
         return this.dbe().findAllJAsync();
     }
     // endregion
 
-    // region countAll??? / 统计所有数据条数
+    // region 计数（所有） x 2
+    // map ❌ ------> executed ✅ ------> map ❌
     public Long countAll() {
         return this.dbe().count().orElse(0L);
     }
 
+
+    // map ❌ ------> executed ✅ ------> map ❌
     public Future<Long> countAllAsync() {
         return this.dbe().countAsync();
+    }
+    // endregion
+
+    // region 搜索方法 x 4
+
+    // map ✅ ------> executed ✅ ------> map ❌
+    public <T> Future<Pagination<T>> searchAsync(final JsonObject query) {
+        return this.<T>dbe().findPageAsync(query);
+    }
+
+    // map ✅ ------> executed ✅ ------> map ✅
+    public <T> Future<JsonObject> searchJAsync(final JsonObject query) {
+        return this.<T>dbe().findPageAsyncJ(query);
+    }
+
+    // map ✅ ------> executed ✅ ------> map ❌
+    public <T> Pagination<T> search(final JsonObject query) {
+        return this.<T>dbe().findPage(query);
+    }
+
+    // map ✅ ------> executed ✅ ------> map ✅
+    public <T> JsonObject searchJ(final JsonObject query) {
+        return this.<T>dbe().findPageJ(query);
     }
 
     // endregion
 
+    // region 单字段 IN 多记录查询 x 12
+    //  map ❌ ------> executed ✅ ------> map ❌
+    public <T> Future<List<T>> fetchInAsync(final String field, final Object... values) {
+        return this.<T>dbe().findManyInAsync(field, values);
+    }
+
+    //  map ❌ ------> executed ✅ ------> map ❌
+    public <T> Future<List<T>> fetchInAsync(final String field, final JsonArray values) {
+        return this.<T>fetchInAsync(field, values.getList());
+    }
+
+    //  map ❌ ------> executed ✅ ------> map ❌
+    public <T, K> Future<List<T>> fetchInAsync(final String field, final Collection<K> collection) {
+        return this.<T>dbe().findManyInAsync(field, new ArrayList<>(collection));
+    }
+
+    // map ❌ ------> executed ✅ ------> map ✅
+    public <T> Future<JsonArray> fetchJInAsync(final String field, final Object... values) {
+        return this.<T>dbe().findManyInAsyncJ(field, values);
+    }
+
+    // map ❌ ------> executed ✅ ------> map ✅
+    public <T> Future<JsonArray> fetchJInAsync(final String field, final JsonArray values) {
+        return this.<T>dbe().findManyInAsyncJ(field, values.getList());
+    }
+
+    // map ❌ ------> executed ✅ ------> map ✅
+    public <T, K> Future<JsonArray> fetchJInAsync(final String field, final Collection<K> collection) {
+        return this.<T>dbe().findManyInAsyncJ(field, collection);
+    }
+
+    // map ❌ ------> executed ✅ ------> map ❌
+    public <T> List<T> fetchIn(final String field, final Object... values) {
+        return this.<T>dbe().findManyIn(field, values);
+    }
+
+    // map ❌ ------> executed ✅ ------> map ❌
+    public <T> List<T> fetchIn(final String field, final JsonArray values) {
+        return this.<T>dbe().findManyIn(field, values.getList());
+    }
+
+    // map ❌ ------> executed ✅ ------> map ❌
+    public <T, K> List<T> fetchIn(final String field, final Collection<K> collection) {
+        return this.<T>dbe().findManyIn(field, new ArrayList<>(collection));
+    }
+
+
+    // map ❌ ------> executed ✅ ------> map ✅
+    public <T> JsonArray fetchJIn(final String field, final Object... values) {
+        return this.<T>dbe().findManyInJ(field, values);
+    }
+
+    // map ❌ ------> executed ✅ ------> map ✅
+    public <T> JsonArray fetchJIn(final String field, final JsonArray values) {
+        return this.<T>dbe().findManyInJ(field, values.getList());
+    }
+
+    // map ❌ ------> executed ✅ ------> map ✅
+    public <T, K> JsonArray fetchJIn(final String field, final Collection<K> collection) {
+        return this.<T>dbe().findManyInJ(field, new ArrayList<>(collection));
+    }
+    // endregion
+
+    //  region 单字段 = 多记录查询 x 4
+    //  map ❌ ------> executed ✅ ------> map ❌
+    public <T> Future<List<T>> fetchAsync(final String field, final Object value) {
+        return this.<T>dbe().findManyAsync(field, value);
+    }
+
+    //  map ❌ ------> executed ✅ ------> map ✅
+    public <T> Future<JsonArray> fetchJAsync(final String field, final Object value) {
+        return this.<T>dbe().findManyAsyncJ(field, value);
+    }
+
+    // map ❌ ------> executed ✅ ------> map ❌
+    public <T> List<T> fetch(final String field, final Object value) {
+        return this.<T>dbe().findMany(field, value);
+    }
+
+    // map ❌ ------> executed ✅ ------> map ✅
+    public <T> JsonArray fetchJ(final String field, final Object value) {
+        return this.<T>dbe().findManyJ(field, value);
+    }
+    // endregion
+
+    // region 查询条件树 = 多记录查询 x 24, 带有 AND / OR 变种
+    // map ✅ ------> executed ✅ ------> map ❌
+    public <T> Future<List<T>> fetchAsync(final JsonObject criteria) {
+        return this.<T>dbe().findManyAsync(criteria);
+    }
+
+    // map ✅ ------> executed ✅ ------> map ✅
+    public <T> Future<JsonArray> fetchJAsync(final JsonObject criteria) {
+        return this.<T>dbe().findManyAsyncJ(criteria);
+    }
+
+    // ( 🌸 ) map ✅ ------> executed ✅ ------> map ❌
+    public <T> Future<List<T>> fetchAndAsync(final JsonObject criteria) {
+        return this.fetchAsync(criteria.put(VString.EMPTY, Boolean.TRUE));
+    }
+
+    // ( 🌸 ) map ✅ ------> executed ✅ ------> map ❌
+    public <T> Future<List<T>> fetchOrAsync(final JsonObject criteria) {
+        return this.fetchAsync(criteria.put(VString.EMPTY, Boolean.FALSE));
+    }
+
+    // ( 🌸 ) map ✅ ------> executed ✅ ------> map ✅
+    public Future<JsonArray> fetchJAndAsync(final JsonObject criteria) {
+        return this.fetchJAsync(criteria.put(VString.EMPTY, Boolean.TRUE));
+    }
+
+    // ( 🌸 ) map ✅ ------> executed ✅ ------> map ✅
+    public Future<JsonArray> fetchJOrAsync(final JsonObject criteria) {
+        return this.fetchJAsync(criteria.put(VString.EMPTY, Boolean.FALSE));
+    }
+
+    // map ✅ ------> executed ✅ ------> map ❌
+    public <T> Future<List<T>> fetchAsync(final JsonObject criteria, final QSorter sorter) {
+        return this.<T>dbe().findManyAsync(criteria, sorter);
+    }
+
+    // map ✅ ------> executed ✅ ------> map ✅
+    public <T> Future<JsonArray> fetchJAsync(final JsonObject criteria, final QSorter sorter) {
+        return this.<T>dbe().findManyAsyncJ(criteria, sorter);
+    }
+
+    // ( 🌸 ) map ✅ ------> executed ✅ ------> map ❌
+    public <T> Future<List<T>> fetchAndAsync(final JsonObject criteria, final QSorter sorter) {
+        return this.fetchAsync(criteria.put(VString.EMPTY, Boolean.TRUE), sorter);
+    }
+
+    // ( 🌸 ) map ✅ ------> executed ✅ ------> map ❌
+    public <T> Future<List<T>> fetchOrAsync(final JsonObject criteria, final QSorter sorter) {
+        return this.fetchAsync(criteria.put(VString.EMPTY, Boolean.FALSE), sorter);
+    }
+
+    // ( 🌸 ) map ✅ ------> executed ✅ ------> map ✅
+    public Future<JsonArray> fetchJAndAsync(final JsonObject criteria, final QSorter sorter) {
+        return this.fetchJAsync(criteria.put(VString.EMPTY, Boolean.TRUE), sorter);
+    }
+
+    // ( 🌸 ) map ✅ ------> executed ✅ ------> map ✅
+    public Future<JsonArray> fetchJOrAsync(final JsonObject criteria, final QSorter sorter) {
+        return this.fetchJAsync(criteria.put(VString.EMPTY, Boolean.FALSE), sorter);
+    }
+
+    // map ✅ ------> executed ✅ ------> map ❌
+    public <T> List<T> fetch(final JsonObject criteria) {
+        return this.<T>dbe().findMany(criteria);
+    }
+
+    // map ✅ ------> executed ✅ ------> map ✅
+    public <T> JsonArray fetchJ(final JsonObject criteria) {
+        return this.<T>dbe().findManyJ(criteria);
+    }
+
+    // ( 🌸 ) map ✅ ------> executed ✅ ------> map ❌
+    public <T> List<T> fetchAnd(final JsonObject criteria) {
+        return this.fetch(criteria.put(VString.EMPTY, Boolean.TRUE));
+    }
+
+    // ( 🌸 ) map ✅ ------> executed ✅ ------> map ❌
+    public <T> List<T> fetchOr(final JsonObject criteria) {
+        return this.fetch(criteria.put(VString.EMPTY, Boolean.FALSE));
+    }
+
+    // ( 🌸 ) map ✅ ------> executed ✅ ------> map ✅
+    public <T> JsonArray fetchJAnd(final JsonObject criteria) {
+        return this.<T>fetchJ(criteria.put(VString.EMPTY, Boolean.TRUE));
+    }
+
+    // ( 🌸 ) map ✅ ------> executed ✅ ------> map ✅
+    public <T> JsonArray fetchJOr(final JsonObject criteria) {
+        return this.<T>fetchJ(criteria.put(VString.EMPTY, Boolean.FALSE));
+    }
+
+    // map ✅ ------> executed ✅ ------> map ❌
+    public <T> List<T> fetch(final JsonObject criteria, final QSorter sorter) {
+        return this.<T>dbe().findMany(criteria, sorter);
+    }
+
+    // map ✅ ------> executed ✅ ------> map ✅
+    public <T> JsonArray fetchJ(final JsonObject criteria, final QSorter sorter) {
+        return this.<T>dbe().findManyJ(criteria, sorter);
+    }
+
+    // ( 🌸 ) map ✅ ------> executed ✅ ------> map ❌
+    public <T> List<T> fetchAnd(final JsonObject criteria, final QSorter sorter) {
+        return this.fetch(criteria.put(VString.EMPTY, Boolean.TRUE), sorter);
+    }
+
+    // ( 🌸 ) map ✅ ------> executed ✅ ------> map ❌
+    public <T> List<T> fetchOr(final JsonObject criteria, final QSorter sorter) {
+        return this.fetch(criteria.put(VString.EMPTY, Boolean.FALSE), sorter);
+    }
+
+    // ( 🌸 ) map ✅ ------> executed ✅ ------> map ✅
+    public <T> JsonArray fetchJAnd(final JsonObject criteria, final QSorter sorter) {
+        return this.<T>fetchJ(criteria.put(VString.EMPTY, Boolean.TRUE), sorter);
+    }
+
+    // ( 🌸 ) map ✅ ------> executed ✅ ------> map ✅
+    public <T> JsonArray fetchJOr(final JsonObject criteria, final QSorter sorter) {
+        return this.<T>fetchJ(criteria.put(VString.EMPTY, Boolean.FALSE), sorter);
+    }
+    // endregion
+
+    // region 按照ID查询 x 4
+    // map ❌ ------> executed ✅ ------> map ❌
+    public <T> Future<T> fetchByIdAsync(final Object id) {
+        return this.<T>dbe().findOneAsync((Serializable) id);
+    }
+
+    // map ❌ ------> executed ✅ ------> map ✅
+    public <T> Future<JsonObject> fetchJByIdAsync(final Object id) {
+        return this.<T>dbe().findOneAsyncJ((Serializable) id);
+    }
+
+    // map ❌ ------> executed ✅ ------> map ❌
+    public <T> T fetchById(final Object id) {
+        return this.<T>dbe().findOne((Serializable) id).orElse(null);
+    }
+
+    // map ❌ ------> executed ✅ ------> map ✅
+    public <T> JsonObject fetchJById(final Object id) {
+        return this.<T>dbe().findOneJ((Serializable) id);
+    }
+    // endregion
+
+    // region 单字段 = 单记录查询 x 4
+    // map ❌ ------> executed ✅ ------> map ❌
+    public <T> Future<T> fetchOneAsync(final String field, final Object value) {
+        return this.<T>dbe().findOneAsync(field, value);
+    }
+
+    // map ❌ ------> executed ✅ ------> map ✅
+    public <T> Future<JsonObject> fetchJOneAsync(final String field, final Object value) {
+        return this.<T>dbe().findOneAsyncJ(field, value);
+    }
+
+    // map ❌ ------> executed ✅ ------> map ❌
+    public <T> T fetchOne(final String field, final Object value) {
+        return this.<T>dbe().findOne(field, value).orElse(null);
+    }
+
+    // map ❌ ------> executed ✅ ------> map ✅
+    public <T> JsonObject fetchJOne(final String field, final Object value) {
+        return this.<T>dbe().findOneJ(field, value);
+    }
+    // endregion
+
+    // region 查询条件数 = 单记录查询 x 4，强制 AND 变种
+    // map ✅ ------> executed ✅ ------> map ❌
+    public <T> Future<T> fetchOneAsync(final JsonObject criteria) {
+        criteria.put(VString.EMPTY, Boolean.TRUE);                                                  // Unique Forced
+        return this.<T>dbe().findOneAsync(criteria);
+    }
+
+    // map ✅ ------> executed ✅ ------> map ✅
+    public <T> Future<JsonObject> fetchJOneAsync(final JsonObject criteria) {
+        criteria.put(VString.EMPTY, Boolean.TRUE);
+        return this.<T>dbe().findOneAsyncJ(criteria);
+    }
+
+    // map ✅ ------> executed ✅ ------> map ❌
+    public <T> T fetchOne(final JsonObject criteria) {
+        criteria.put(VString.EMPTY, Boolean.TRUE);                                                  // Unique Forced
+        return this.<T>dbe().findOne(criteria);
+    }
+
+    // map ✅ ------> executed ✅ ------> map ✅
+    public <T> JsonObject fetchJOne(final JsonObject criteria) {
+        criteria.put(VString.EMPTY, Boolean.TRUE);
+        return this.<T>dbe().findOneJ(criteria);
+    }
+    // endregion
+
+    // region （write）插入单条数据 x 8
+    // map ❌ ------> executed ✅ ------> map ❌
+    public <T> Future<T> insertAsync(final T entity) {
+        return this.<T>dbe().createAsync(entity);
+    }
+
+    // map ✅ ------> executed ✅ ------> map ❌
+    public <T> Future<T> insertAsync(final JsonObject data) {
+        return this.<T>dbe().createAsync(data);
+    }
+
+    // map ❌ ------> executed ✅ ------> map ✅
+    public <T> Future<JsonObject> insertJAsync(final T entity) {
+        return this.<T>dbe().createAsyncJ(entity);
+    }
+
+    // map ✅ ------> executed ✅ ------> map ✅
+    public <T> Future<JsonObject> insertJAsync(final JsonObject data) {
+        return this.<T>dbe().createAsyncJ(data);
+    }
+
+    // map ❌ ------> executed ✅ ------> map ❌
+    public <T> T insert(final T entity) {
+        return this.<T>dbe().create(entity);
+    }
+
+    // map ✅ ------> executed ✅ ------> map ❌
+    public <T> T insert(final JsonObject data) {
+        return this.<T>dbe().create(data);
+    }
+
+    // map ❌ ------> executed ✅ ------> map ✅
+    public <T> JsonObject insertJ(final T entity) {
+        return this.<T>dbe().createJ(entity);
+    }
+
+    // map ✅ ------> executed ✅ ------> map ✅
+    public <T> JsonObject insertJ(final JsonObject data) {
+        return this.<T>dbe().createJ(data);
+    }
+    // endregion
+
+    // region （write）插入批量数据 x 8
+    // map ❌ ------> executed ✅ ------> map ❌
+    public <T> Future<List<T>> insertAsync(final List<T> entities) {
+        return this.<T>dbe().createAsync(entities);
+    }
+
+    // map ✅ ------> executed ✅ ------> map ❌
+    public <T> Future<List<T>> insertAsync(final JsonArray input) {
+        return this.<T>dbe().createAsync(input);
+    }
+
+    // map ❌ ------> executed ✅ ------> map ✅
+    public <T> Future<JsonArray> insertJAsync(final List<T> list) {
+        return this.<T>dbe().createAsyncJ(list);
+    }
+
+    // map ✅ ------> executed ✅ ------> map ✅
+    public <T> Future<JsonArray> insertJAsync(final JsonArray input) {
+        return this.<T>dbe().createAsyncJ(input);
+    }
+
+    // map ❌ ------> executed ✅ ------> map ❌
+    public <T> List<T> insert(final List<T> entities) {
+        return this.<T>dbe().create(entities);
+    }
+
+    // map ✅ ------> executed ✅ ------> map ❌
+    public <T> List<T> insert(final JsonArray data) {
+        return this.<T>dbe().create(data);
+    }
+
+    // map ❌ ------> executed ✅ ------> map ✅
+    public <T> JsonArray insertJ(final List<T> list) {
+        return this.<T>dbe().createJ(list);
+    }
+
+    // map ✅ ------> executed ✅ ------> map ✅
+    public <T> JsonArray insertJ(final JsonArray data) {
+        return this.<T>dbe().createJ(data);
+    }
+
+    // endregion
+
+    // region（write）更新单条数据 x 8
+    // map ❌ ------> executed ✅ ------> map ❌
+    public <T> T update(final T entity) {
+        return this.<T>dbe().update(entity);
+    }
+
+    // map ✅ ------> executed ✅ ------> map ❌
+    public <T> T update(final JsonObject data) {
+        return this.<T>dbe().update(data);
+    }
+
+    // map ❌ ------> executed ✅ ------> map ✅
+    public <T> JsonObject updateJ(final T entity) {
+        return this.<T>dbe().updateJ(entity);
+    }
+
+    // map ✅ ------> executed ✅ ------> map ✅
+    public <T> JsonObject updateJ(final JsonObject data) {
+        return this.<T>dbe().updateJ(data);
+    }
+
+    // map ❌ ------> executed ✅ ------> map ❌
+    public <T> Future<T> updateAsync(final T entity) {
+        return this.<T>dbe().updateAsync(entity);
+    }
+
+    // map ✅ ------> executed ✅ ------> map ❌
+    public <T> Future<T> updateAsync(final JsonObject data) {
+        return this.<T>dbe().updateAsync(data);
+    }
+
+    // map ❌ ------> executed ✅ ------> map ✅
+    public <T> Future<JsonObject> updateAsyncJ(final T entity) {
+        return this.<T>dbe().updateAsyncJ(entity);
+    }
+
+    // map ✅ ------> executed ✅ ------> map ✅
+    public <T> Future<JsonObject> updateAsyncJ(final JsonObject data) {
+        return this.<T>dbe().updateAsyncJ(data);
+    }
+    // endregion
+
+    // region（write）更新批量数据 x 8
+    // map ❌ ------> executed ✅ ------> map ❌
+    public <T> List<T> update(final List<T> entities) {
+        return this.<T>dbe().update(entities);
+    }
+
+    // map ✅ ------> executed ✅ ------> map ❌
+    public <T> List<T> update(final JsonArray data) {
+        return this.<T>dbe().update(data);
+    }
+
+    // map ❌ ------> executed ✅ ------> map ✅
+    public <T> JsonArray updateJ(final List<T> entities) {
+        return this.<T>dbe().updateJ(entities);
+    }
+
+    // map ✅ ------> executed ✅ ------> map ✅
+    public <T> JsonArray updateJ(final JsonArray data) {
+        return this.<T>dbe().updateJ(data);
+    }
+
+    // map ❌ ------> executed ✅ ------> map ❌
+    public <T> Future<List<T>> updateAsync(final List<T> entities) {
+        return this.<T>dbe().updateAsync(entities);
+    }
+
+    // map ✅ ------> executed ✅ ------> map ❌
+    public <T> Future<List<T>> updateAsync(final JsonArray data) {
+        return this.<T>dbe().updateAsync(data);
+    }
+
+    // map ❌ ------> executed ✅ ------> map ✅
+    public <T> Future<JsonArray> updateAsyncJ(final List<T> entities) {
+        return this.<T>dbe().updateAsyncJ(entities);
+    }
+
+    // map ✅ ------> executed ✅ ------> map ✅
+    public <T> Future<JsonArray> updateAsyncJ(final JsonArray input) {
+        return this.<T>dbe().updateAsyncJ(input);
+    }
+
+    // endregion
+
+    // region（write）按照ID更新单条数据 x 8
+    // map ❌ ------> executed ✅ ------> map ❌
+    public <T> T update(final Object id, final T updated) {
+        return this.<T>dbe().updateBy((Serializable) id, updated);
+    }
+
+    // map ✅ ------> executed ✅ ------> map ❌
+    public <T> T update(final Object id, final JsonObject data) {
+        return this.<T>dbe().updateBy((Serializable) id, data);
+    }
+
+    // map ❌ ------> executed ✅ ------> map ✅
+    public <T> JsonObject updateJ(final Object id, final T updated) {
+        return this.dbe().updateByJ((Serializable) id, updated);
+    }
+
+    // map ✅ ------> executed ✅ ------> map ✅
+    public <T> JsonObject updateJ(final Object id, final JsonObject data) {
+        return this.dbe().updateByJ((Serializable) id, data);
+    }
+
+    // map ❌ ------> executed ✅ ------> map ❌
+    public <T, ID extends Serializable> Future<T> updateAsync(final ID id, final T updated) {
+        return this.<T>dbe().updateByAsync(id, updated);
+    }
+
+    // map ✅ ------> executed ✅ ------> map ❌
+    public <T, ID extends Serializable> Future<T> updateAsync(final ID id, final JsonObject data) {
+        return this.<T>dbe().updateByAsync(id, data);
+    }
+
+    // map ❌ ------> executed ✅ ------> map ✅
+    public <T, ID extends Serializable> Future<JsonObject> updateJAsync(final ID id, final T updated) {
+        return this.<T>dbe().updateByAsyncJ(id, updated);
+    }
+
+    // map ✅ ------> executed ✅ ------> map ✅
+    public <T, ID extends Serializable> Future<JsonObject> updateJAsync(final ID id, final JsonObject data) {
+        return this.<T>dbe().updateByAsyncJ(id, data);
+    }
+    // endregion
+
+    // region（write）按照“条件”更新单条数据 x 8
+    public <T> T update(final JsonObject criteria, final T updated) {
+        criteria.put(VString.EMPTY, Boolean.TRUE);                                                  // Unique Forced
+        return this.<T>dbe().updateBy(criteria, updated);
+    }
+
+    public <T> T update(final JsonObject criteria, final JsonObject data) {
+        criteria.put(VString.EMPTY, Boolean.TRUE);                                                  // Unique Forced
+        return this.<T>dbe().updateBy(criteria, data);
+    }
+
+    public <T> JsonObject updateJ(final JsonObject criteria, final T updated) {
+        criteria.put(VString.EMPTY, Boolean.TRUE);                                                  // Unique Forced
+        return this.<T>dbe().updateByJ(criteria, updated);
+    }
+
+    public <T> JsonObject updateJ(final JsonObject criteria, final JsonObject data) {
+        criteria.put(VString.EMPTY, Boolean.TRUE);                                                  // Unique Forced
+        return this.<T>dbe().updateByJ(criteria, data);
+    }
+
+    public <T> Future<T> updateAsync(final JsonObject criteria, final T updated) {
+        criteria.put(VString.EMPTY, Boolean.TRUE);
+        return this.<T>dbe().updateByAsync(criteria, updated);
+    }
+
+    public <T> Future<T> updateAsync(final JsonObject criteria, final JsonObject data) {
+        criteria.put(VString.EMPTY, Boolean.TRUE);
+        return this.<T>dbe().updateByAsync(criteria, data);
+    }
+
+    public <T> Future<JsonObject> updateJAsync(final JsonObject criteria, final T updated) {
+        criteria.put(VString.EMPTY, Boolean.TRUE);
+        return this.<T>dbe().updateByAsyncJ(criteria, updated);
+    }
+
+    public <T> Future<JsonObject> updateJAsync(final JsonObject criteria, final JsonObject data) {
+        criteria.put(VString.EMPTY, Boolean.TRUE);
+        return this.<T>dbe().updateByAsyncJ(criteria, data);
+    }
+    // endregion
 
     // -------------------- Pojo File --------------------
     // region 旧版 Jooq 操作，逐步迁移中
@@ -191,828 +771,7 @@ public class ADB {
         return criteria;
     }
 
-    // -------------------- INSERT --------------------
-    /*
-     * Async Only
-     * Disabled increament primary key processing, this method is not used in our system once,
-     * In distributed system environment, it's no usage.
-     *
-     * public <Tool> Future<Tool> insertReturningPrimaryAsync(final Tool entity, final Consumer<Long> consumer) {
-     *    return this.writer.insertReturningPrimaryAsync(entity, consumer);
-     * }
-     */
-    /*
-     * insertAsync(Tool)
-     *      <-- insertAsync(JsonObject)
-     *      <-- insertAsync(JsonObject,pojo)
-     *      <-- insertJAsync(Tool)
-     *      <-- insertJAsync(JsonObject, pojo)
-     *      <-- insertJAsync(JsonObject)
-     * */
-    public <T> Future<T> insertAsync(final T entity) {
-        return this.writer.insertAsync(entity);
-    }
-
-    public <T> Future<T> insertAsync(final JsonObject data) {
-        return this.workflow.<T>inputAsync(data).compose(this::insertAsync);
-    }
-
-    public <T> Future<JsonObject> insertJAsync(final T entity) {
-        return this.insertAsync(entity).compose(this.workflow::outputAsync);
-    }
-
-    public <T> Future<JsonObject> insertJAsync(final JsonObject data) {
-        return this.workflow.<T>inputAsync(data).compose(this::insertAsync).compose(this.workflow::outputAsync);
-    }
-
-    /*
-     * insert(Tool)
-     *      <-- insert(JsonObject)
-     *      <-- insert(JsonObject, pojo)
-     *      <-- insertJ(Tool)
-     *      <-- insertJ(JsonObject)
-     *      <-- insertJ(JsonObject, pojo)
-     * */
-    public <T> T insert(final T entity) {
-        return this.writer.insert(entity);
-    }
-
-    public <T> T insert(final JsonObject data) {
-        return this.insert((T) this.workflow.input(data));
-    }
-
-    public <T> T insert(final JsonObject data, final String pojo) {
-        return this.insert((T) JqFlow.create(this.analyzer, pojo).input(data));
-    }
-
-    public <T> JsonObject insertJ(final T entity) {
-        return this.workflow.output(this.insert(entity));
-    }
-
-    public <T> JsonObject insertJ(final JsonObject data) {
-        return this.workflow.output(this.insert((T) this.workflow.input(data)));  // Tool & List<Tool> Diff
-    }
-
-    public <T> JsonObject insertJ(final JsonObject data, final String pojo) {
-        final JqFlow flow = JqFlow.create(this.analyzer, pojo);
-        return flow.output(this.insert((T) flow.input(data)));          // Tool & List<Tool> Diff
-    }
-
-    /*
-     * insertAsync(List<Tool>)
-     *      <-- insertAsync(JsonArray)
-     *      <-- insertAsync(JsonArray, pojo)
-     *      <-- insertJAsync(List<Tool>)
-     *      <-- insertJAsync(JsonArray)
-     *      <-- insertJAsync(JsonArray, pojo)
-     */
-    public <T> Future<List<T>> insertAsync(final List<T> entities) {
-        return this.writer.insertAsync(entities);
-    }
-
-    public <T> Future<List<T>> insertAsync(final JsonArray input) {
-        return this.workflow.<T>inputAsync(input).compose(this::insertAsync);          // --> `insertAsync(List<Tool>)`
-    }
-
-    public <T> Future<List<T>> insertAsync(final JsonArray input, final String pojo) {
-        return JqFlow.create(this.analyzer, pojo).<T>inputAsync(input).compose(this::insertAsync);         // --> `insertAsync(List<Tool>)`
-    }
-
-    public <T> Future<JsonArray> insertJAsync(final List<T> list) {
-        return this.insertAsync(list).compose(this.workflow::outputAsync);
-    }
-
-    public <T> Future<JsonArray> insertJAsync(final JsonArray input) {
-        return this.workflow.<T>inputAsync(input).compose(this::insertAsync).compose(this.workflow::outputAsync);
-    }
-
-    public <T> Future<JsonArray> insertJAsync(final JsonArray input, final String pojo) {
-        final JqFlow flow = JqFlow.create(this.analyzer, pojo);
-        return flow.<T>inputAsync(input).compose(this::insertAsync).compose(flow::outputAsync);
-    }
-
-    /*
-     * insert(List<Tool>)
-     *      <-- insert(JsonArray)
-     *      <-- insert(JsonArray,pojo)
-     *      <-- insertJ(List<Tool>)
-     *      <-- insertJ(JsonArray)
-     *      <-- insertJ(JsonArray, pojo)
-     */
-    public <T> List<T> insert(final List<T> entities) {
-        return this.writer.insert(entities);
-    }
-
-    public <T> List<T> insert(final JsonArray data) {
-        return this.insert(this.workflow.input(data));
-    }
-
-    public <T> List<T> insert(final JsonArray data, final String pojo) {
-        final JqFlow flow = JqFlow.create(this.analyzer, pojo);
-        return this.insert(flow.input(data));
-    }
-
-    public <T> JsonArray insertJ(final List<T> list) {
-        return this.workflow.output(this.insert(list));
-    }
-
-    public JsonArray insertJ(final JsonArray data) {
-        return this.workflow.output(this.insert(this.workflow.input(data)));
-    }
-
-    public <T> JsonArray insertJ(final JsonArray data, final String pojo) {
-        final JqFlow flow = JqFlow.create(this.analyzer, pojo);
-        return flow.<T>output(this.insert(flow.input(data)));
-    }
-
-    // -------------------- Search Operation -----------
-    /*
-     * searchAsync(JsonObject, pojo)
-     * searchAsync(JsonObject)
-     * search(JsonObject, pojo)
-     * search(JsonObject)
-     */
-    public Future<JsonObject> searchAsync(final JsonObject params, final String pojo) {
-        return this.reader.searchAsync(params, JqFlow.create(this.analyzer, pojo));
-    }
-
-    public Future<JsonObject> searchAsync(final JsonObject params) {
-        return this.reader.searchAsync(params, this.workflow);
-    }
-
-    public JsonObject search(final JsonObject params, final String pojo) {
-        return this.reader.search(params, JqFlow.create(this.analyzer, pojo));
-    }
-
-    public JsonObject search(final JsonObject params) {
-        return this.reader.search(params, this.workflow);
-    }
-
-    // -------------------- Fetch List -------------------
-    /*
-     * fetchAllAsync()
-     *      <-- fetchJAllAsync()
-     *      <-- fetchJAllAsync(pojo)
-     *
-     * fetchAll()
-     *      <-- fetchJAll()
-     *      <-- fetchJAll(pojo)
-     *
-     * fetchAsync(String, Object)
-     *      <-- fetchJAsync(String, Object)
-     *      <-- fetchInAsync(String, Object...)
-     *      <-- fetchInAsync(String, Collection)
-     *      <-- fetchInAsync(String, JsonArray)
-     *      <-- fetchJInAsync(String, Object...)
-     *      <-- fetchJInAsync(String, Collection)
-     *      <-- fetchJInAsync(String, JsonArray)
-     * fetch(String, Object)
-     *      <-- fetchJ(String, Object)
-     *      <-- fetchIn(String, Object...)
-     *      <-- fetchIn(String, Collection)
-     *      <-- fetchIn(String, JsonArray)
-     *      <-- fetchJIn(String, Object...)
-     *      <-- fetchJIn(String, Collection)
-     *      <-- fetchJIn(String, JsonArray)
-     *
-     * fetchAsync(JsonObject)
-     *      <-- fetchJAsync(JsonObject)
-     *      <-- fetchAndAsync(JsonObject)
-     *      <-- fetchJAndAsync(JsonObject)
-     *      <-- fetchOrAsync(JsonObject)
-     *      <-- fetchJOrAsync(JsonObject)
-     *
-     * fetchAsync(JsonObject, pojo)
-     *      <-- fetchJAsync(JsonObject, pojo)
-     *      <-- fetchAndAsync(JsonObject, pojo)
-     *      <-- fetchJAndAsync(JsonObject, pojo)
-     *      <-- fetchOrAsync(JsonObject, pojo)
-     *      <-- fetchJOrAsync(JsonObject, pojo)
-     *
-     * fetch(JsonObject)
-     *      <-- fetchJ(JsonObject)
-     *      <-- fetchAnd(JsonObject)
-     *      <-- fetchJAnd(JsonObject)
-     *      <-- fetchOr(JsonObject)
-     *      <-- fetchJOr(JsonObject)
-     *
-     * fetch(JsonObject, pojo)
-     *      <-- fetchJ(JsonObject, pojo)
-     *      <-- fetchAnd(JsonObject, pojo)
-     *      <-- fetchJAnd(JsonObject, pojo)
-     *      <-- fetchOr(JsonObject, pojo)
-     *      <-- fetchJOr(JsonObject, pojo)
-     */
-    /* fetchAllAsync() */
-
-    /* fetchAsync(String, Object) */
-    public <T> Future<List<T>> fetchAsync(final String field, final Object value) {
-        return this.reader.fetchAsync(field, value);
-    }
-
-    public <T> Future<List<T>> fetchInAsync(final String field, final Object... value) {
-        return this.fetchAsync(field, Arrays.asList(value));
-    }
-
-    public <T> Future<List<T>> fetchInAsync(final String field, final JsonArray values) {
-        return this.fetchAsync(field, values.getList());
-    }
-
-    public <T, K> Future<List<T>> fetchInAsync(final String field, final Collection<K> collection) {
-        return this.fetchAsync(field, collection);
-    }
-
-    public Future<JsonArray> fetchJAsync(final String field, final Object value) {
-        return this.fetchAsync(field, value).compose(this.workflow::outputAsync);
-    }
-
-    public Future<JsonArray> fetchJInAsync(final String field, final Object... value) {
-        return this.fetchAsync(field, Arrays.asList(value)).compose(this.workflow::outputAsync);
-    }
-
-    public Future<JsonArray> fetchJInAsync(final String field, final JsonArray values) {
-        return this.fetchAsync(field, values.getList()).compose(this.workflow::outputAsync);
-    }
-
-    public <K> Future<JsonArray> fetchJInAsync(final String field, final Collection<K> collection) {
-        return this.fetchAsync(field, collection).compose(this.workflow::outputAsync);
-    }
-
-    /* fetch(String, Object) */
-    public <T> List<T> fetch(final String field, final Object value) {
-        return this.reader.fetch(field, value);
-    }
-
-    public <T> List<T> fetchIn(final String field, final Object... values) {
-        return this.fetch(field, Arrays.asList(values));
-    }
-
-    public <T> List<T> fetchIn(final String field, final JsonArray values) {
-        return this.fetch(field, values.getList());
-    }
-
-    public <T, K> List<T> fetchIn(final String field, final Collection<K> collection) {
-        return this.fetch(field, collection);
-    }
-
-    public JsonArray fetchJ(final String field, final Object value) {
-        return this.workflow.output(this.fetch(field, value));
-    }
-
-    public JsonArray fetchJIn(final String field, final Object... values) {
-        return this.workflow.output(this.fetch(field, Arrays.asList(values)));
-    }
-
-    public JsonArray fetchJIn(final String field, final JsonArray values) {
-        return this.workflow.output(this.fetch(field, values.getList()));
-    }
-
-    public <K> JsonArray fetchJIn(final String field, final Collection<K> collection) {
-        return this.workflow.output(this.fetch(field, collection));
-    }
-
-    /*
-     * fetchAsync(JsonObject)
-     * fetchAsync(JsonObject, Sorter)
-     **/
-    public <T> Future<List<T>> fetchAsync(final JsonObject criteria) {
-        return this.workflow.inputQrJAsync(criteria).compose(this.reader::fetchAsync);
-    }
-
-    public <T> Future<List<T>> fetchAndAsync(final JsonObject criteria) {
-        return this.fetchAsync(criteria.put(VString.EMPTY, Boolean.TRUE));
-    }
-
-    public <T> Future<List<T>> fetchOrAsync(final JsonObject criteria) {
-        return this.fetchAsync(criteria.put(VString.EMPTY, Boolean.FALSE));
-    }
-
-    public Future<JsonArray> fetchJAsync(final JsonObject criteria) {
-        return this.fetchAsync(criteria).compose(this.workflow::outputAsync);
-    }
-
-    public Future<JsonArray> fetchJAndAsync(final JsonObject criteria) {
-        return this.fetchAsync(criteria.put(VString.EMPTY, Boolean.TRUE)).compose(this.workflow::outputAsync);
-    }
-
-    public Future<JsonArray> fetchJOrAsync(final JsonObject criteria) {
-        return this.fetchAsync(criteria.put(VString.EMPTY, Boolean.FALSE)).compose(this.workflow::outputAsync);
-    }
-
-    public <T> Future<List<T>> fetchAsync(final JsonObject criteria, final Sorter sorter) {
-        return this.workflow.inputQrJAsync(criteria).compose(qr -> this.reader.fetchAsync(qr, sorter));
-    }
-
-
-    public <T> Future<List<T>> fetchAndAsync(final JsonObject criteria, final Sorter sorter) {
-        return this.fetchAsync(criteria.put(VString.EMPTY, Boolean.TRUE), sorter);
-    }
-
-    public <T> Future<List<T>> fetchOrAsync(final JsonObject criteria, final Sorter sorter) {
-        return this.fetchAsync(criteria.put(VString.EMPTY, Boolean.FALSE), sorter);
-    }
-
-    public Future<JsonArray> fetchJAsync(final JsonObject criteria, final Sorter sorter) {
-        return this.fetchAsync(criteria, sorter).compose(this.workflow::outputAsync);
-    }
-
-    public Future<JsonArray> fetchJAndAsync(final JsonObject criteria, final Sorter sorter) {
-        return this.fetchAsync(criteria.put(VString.EMPTY, Boolean.TRUE), sorter).compose(this.workflow::outputAsync);
-    }
-
-    public Future<JsonArray> fetchJOrAsync(final JsonObject criteria, final Sorter sorter) {
-        return this.fetchAsync(criteria.put(VString.EMPTY, Boolean.FALSE), sorter).compose(this.workflow::outputAsync);
-    }
-
-    /* fetch(JsonObject)
-     * fetch(JsonObject, Sorter)
-     **/
-    public <T> List<T> fetch(final JsonObject criteria) {
-        return this.reader.fetch(this.workflow.inputQrJ(criteria));
-    }
-
-    public <T> List<T> fetchAnd(final JsonObject criteria) {
-        return this.fetch(criteria.put(VString.EMPTY, Boolean.TRUE));
-    }
-
-    public <T> List<T> fetchOr(final JsonObject criteria) {
-        return this.fetch(criteria.put(VString.EMPTY, Boolean.FALSE));
-    }
-
-    public JsonArray fetchJ(final JsonObject criteria) {
-        return this.workflow.output(this.fetch(criteria));
-    }
-
-    public JsonArray fetchJAnd(final JsonObject criteria) {
-        return this.workflow.output(this.fetch(criteria.put(VString.EMPTY, Boolean.TRUE)));
-    }
-
-    public JsonArray fetchJOr(final JsonObject criteria) {
-        return this.workflow.output(this.fetch(criteria.put(VString.EMPTY, Boolean.FALSE)));
-    }
-
-    public <T> List<T> fetch(final JsonObject criteria, final Sorter sorter) {
-        return this.reader.fetch(this.workflow.inputQrJ(criteria), sorter);
-    }
-
-    public <T> List<T> fetchAnd(final JsonObject criteria, final Sorter sorter) {
-        return this.fetch(criteria.put(VString.EMPTY, Boolean.TRUE), sorter);
-    }
-
-    public <T> List<T> fetchOr(final JsonObject criteria, final Sorter sorter) {
-        return this.fetch(criteria.put(VString.EMPTY, Boolean.FALSE), sorter);
-    }
-
-    public JsonArray fetchJ(final JsonObject criteria, final Sorter sorter) {
-        return this.workflow.output(this.fetch(criteria, sorter));
-    }
-
-    public JsonArray fetchJAnd(final JsonObject criteria, final Sorter sorter) {
-        return this.workflow.output(this.fetch(criteria.put(VString.EMPTY, Boolean.TRUE), sorter));
-    }
-
-    public JsonArray fetchJOr(final JsonObject criteria, final Sorter sorter) {
-        return this.workflow.output(this.fetch(criteria.put(VString.EMPTY, Boolean.FALSE), sorter));
-    }
-
-    /* fetchAsync(JsonObject, pojo) */
-    public <T> Future<List<T>> fetchAsync(final JsonObject criteria, final String pojo) {
-        return JqFlow.create(this.analyzer, pojo).inputQrJAsync(criteria).compose(this.reader::fetchAsync);
-    }
-
-    public <T> Future<List<T>> fetchAndAsync(final JsonObject criteria, final String pojo) {
-        return this.fetchAsync(criteria.put(VString.EMPTY, Boolean.TRUE), pojo);
-    }
-
-    public <T> Future<List<T>> fetchOrAsync(final JsonObject criteria, final String pojo) {
-        return this.fetchAsync(criteria.put(VString.EMPTY, Boolean.FALSE), pojo);
-    }
-
-    public Future<JsonArray> fetchJAsync(final JsonObject criteria, final String pojo) {
-        return this.fetchAsync(criteria, pojo).compose(JqFlow.create(this.analyzer, pojo)::outputAsync);
-    }
-
-    public Future<JsonArray> fetchJAndAsync(final JsonObject criteria, final String pojo) {
-        return this.fetchAsync(criteria.put(VString.EMPTY, Boolean.TRUE), pojo).compose(JqFlow.create(this.analyzer, pojo)::outputAsync);
-    }
-
-    public Future<JsonArray> fetchJOrAsync(final JsonObject criteria, final String pojo) {
-        return this.fetchAsync(criteria.put(VString.EMPTY, Boolean.FALSE), pojo).compose(JqFlow.create(this.analyzer, pojo)::outputAsync);
-    }
-
-    /* fetch(JsonObject, pojo) */
-    public <T> List<T> fetch(final JsonObject criteria, final String pojo) {
-        return this.reader.fetch(JqFlow.create(this.analyzer, pojo).inputQrJ(criteria));
-    }
-
-    public <T> List<T> fetchAnd(final JsonObject criteria, final String pojo) {
-        return this.fetch(criteria.put(VString.EMPTY, Boolean.TRUE), pojo);
-    }
-
-    public <T> List<T> fetchOr(final JsonObject criteria, final String pojo) {
-        return this.fetch(criteria.put(VString.EMPTY, Boolean.FALSE), pojo);
-    }
-
-    public JsonArray fetchJ(final JsonObject criteria, final String pojo) {
-        return JqFlow.create(this.analyzer, pojo).output(this.fetch(criteria, pojo));
-    }
-
-    public JsonArray fetchJAnd(final JsonObject criteria, final String pojo) {
-        return JqFlow.create(this.analyzer, pojo).output(this.fetch(criteria.put(VString.EMPTY, Boolean.TRUE), pojo));
-    }
-    // -------------------- Fetch One/All --------------------
-
-    public JsonArray fetchJOr(final JsonObject criteria, final String pojo) {
-        return JqFlow.create(this.analyzer, pojo).output(this.fetch(criteria.put(VString.EMPTY, Boolean.FALSE), pojo));
-    }
-
-    /*
-     * fetchByIdAsync(Object)
-     *      <-- fetchJByIdAsync(Object)
-     *
-     * fetchById(Object)
-     *      <-- fetchJById(Object)
-     *
-     * fetchOneAsync(String, Object)
-     *      <-- fetchJOneAsync(String, Object)
-     *
-     * fetchOne(String, Object)
-     *      <-- fetchJOne(String, Object)
-     *
-     * fetchOneAsync(JsonObject)
-     *      <-- fetchJOneAsync(JsonObject)
-     *
-     * fetchOne(JsonObject)
-     *      <-- fetchJOne(JsonObject)
-     *
-     * fetchOneAsync(JsonObject, pojo)
-     *      <-- fetchJOneAsync(JsonObject, pojo)
-     *
-     * fetchOne(JsonObject, pojo)
-     *      <-- fetchJOne(JsonObject, pojo)
-     */
-    public <T> Future<T> fetchByIdAsync(final Object id) {
-        return this.reader.fetchByIdAsync(id);
-    }
-
-    public Future<JsonObject> fetchJByIdAsync(final Object id) {
-        return this.fetchByIdAsync(id).compose(this.workflow::outputAsync);
-    }
-
-    public <T> T fetchById(final Object id) {
-        return this.reader.fetchById(id);
-    }
-
-    public <T> JsonObject fetchJById(final Object id) {
-        return this.workflow.output((T) this.fetchById(id));
-    }
-
-    public <T> Future<T> fetchOneAsync(final String field, final Object value) {
-        return this.reader.fetchOneAsync(field, value);
-    }
-
-    public Future<JsonObject> fetchJOneAsync(final String field, final Object value) {
-        return this.fetchOneAsync(field, value).compose(this.workflow::outputAsync);
-    }
-
-    public <T> T fetchOne(final String field, final Object value) {
-        return this.reader.fetchOne(field, value);
-    }
-
-    public <T> JsonObject fetchJOne(final String field, final Object value) {
-        return this.workflow.output((T) this.fetchOne(field, value));
-    }
-
-    public <T> Future<T> fetchOneAsync(final JsonObject criteria) {
-        criteria.put(VString.EMPTY, Boolean.TRUE);                                                  // Unique Forced
-        return this.workflow.inputQrJAsync(criteria).compose(this.reader::fetchOneAsync);
-    }
-
-    public Future<JsonObject> fetchJOneAsync(final JsonObject criteria) {
-        return this.fetchOneAsync(criteria).compose(this.workflow::outputAsync);
-    }
-
-    public <T> T fetchOne(final JsonObject criteria) {
-        criteria.put(VString.EMPTY, Boolean.TRUE);                                                  // Unique Forced
-        return this.reader.fetchOne(this.workflow.inputQrJ(criteria));
-    }
-
-    public <T> JsonObject fetchJOne(final JsonObject criteria) {
-        return this.workflow.output((T) this.fetchOne(criteria));
-    }
-
-    public <T> Future<T> fetchOneAsync(final JsonObject criteria, final String pojo) {
-        criteria.put(VString.EMPTY, Boolean.TRUE);                                                  // Unique Forced
-        return JqFlow.create(this.analyzer, pojo).inputQrJAsync(criteria).compose(this.reader::fetchOneAsync);
-    }
-
-    public Future<JsonObject> fetchJOneAsync(final JsonObject criteria, final String pojo) {
-        return this.fetchOneAsync(criteria, pojo).compose(JqFlow.create(this.analyzer, pojo)::outputAsync);
-    }
-
-    public <T> T fetchOne(final JsonObject criteria, final String pojo) {
-        criteria.put(VString.EMPTY, Boolean.TRUE);                                                  // Unique Forced
-        return this.reader.fetchOne(JqFlow.create(this.analyzer, pojo).inputQrJ(criteria));
-    }
-
-    public <T> JsonObject fetchJOne(final JsonObject criteria, final String pojo) {
-        return JqFlow.create(this.analyzer, pojo).output((T) this.fetchOne(criteria, pojo));
-    }
-
-    // -------------------- Fetch Record -------------------
-    /*
-     * update(Tool)
-     *      <-- update(JsonObject)
-     *      <-- update(JsonObject, pojo)
-     *      <-- updateJ(Tool)
-     *      <-- updateJ(JsonObject)
-     *      <-- updateJ(JsonObject, pojo)
-     */
-    public <T> T update(final T entity) {
-        return this.writer.update(entity);
-    }
-
-    public <T> T update(final JsonObject data) {
-        return this.update((T) this.workflow.input(data));
-    }
-
-    public <T> T update(final JsonObject data, final String pojo) {
-        return this.update((T) JqFlow.create(this.analyzer, pojo).input(data));
-    }
-
-    public <T> JsonObject updateJ(final T entity) {
-        return this.workflow.output(this.update(entity));
-    }
-
-    public <T> JsonObject updateJ(final JsonObject data) {
-        return this.workflow.output(this.update((T) this.workflow.input(data)));
-    }
-
-    public <T> JsonObject updateJ(final JsonObject data, final String pojo) {
-        final JqFlow flow = JqFlow.create(this.analyzer, pojo);
-        return flow.output(this.update((T) flow.input(data)));
-    }
-
-    /*
-     * updateAsync(Tool)
-     *      <-- updateAsync(JsonObject)
-     *      <-- updateAsync(JsonObject, pojo)
-     *      <-- updateAsyncJ(Tool)
-     *      <-- updateAsyncJ(JsonObject)
-     *      <-- updateAsyncJ(JsonObject, pojo)
-     */
-    public <T> Future<T> updateAsync(final T entity) {
-        return this.writer.updateAsync(entity);
-    }
-
-    public <T> Future<T> updateAsync(final JsonObject data) {
-        return this.workflow.<T>inputAsync(data).compose(this::updateAsync);
-    }
-
-    public <T> Future<T> updateAsync(final JsonObject data, final String pojo) {
-        return JqFlow.create(this.analyzer, pojo).<T>inputAsync(data).compose(this::updateAsync);
-    }
-
-    public <T> Future<JsonObject> updateAsyncJ(final T entity) {
-        return this.updateAsync(entity).compose(this.workflow::outputAsync);
-    }
-
-    public <T> Future<JsonObject> updateAsyncJ(final JsonObject data) {
-        return this.workflow.<T>inputAsync(data).compose(this::updateAsync).compose(this.workflow::outputAsync);
-    }
-
-    public <T> Future<JsonObject> updateAsyncJ(final JsonObject data, final String pojo) {
-        final JqFlow flow = JqFlow.create(this.analyzer, pojo);
-        return flow.<T>inputAsync(data).compose(this::updateAsync).compose(flow::outputAsync);
-    }
-
-    /*
-     * update(List<Tool>)
-     *      <-- update(JsonArray)
-     *      <-- update(JsonArray, pojo)
-     *      <-- updateJ(Tool)
-     *      <-- updateJ(JsonArray)
-     *      <-- updateJ(JsonArray, pojo)
-     */
-    public <T> List<T> update(final List<T> entities) {
-        return this.writer.update(entities);
-    }
-
-    public <T> List<T> update(final JsonArray data) {
-        return this.update(this.workflow.input(data));
-    }
-
-    public <T> List<T> update(final JsonArray data, final String pojo) {
-        return this.update(JqFlow.create(this.analyzer, pojo).input(data));
-    }
-
-    public <T> JsonArray updateJ(final List<T> entities) {
-        return this.workflow.output(this.update(entities));
-    }
-
-    public JsonArray updateJ(final JsonArray data) {
-        return this.workflow.output(this.update(this.workflow.input(data)));
-    }
-
-    public <T> JsonArray updateJ(final JsonArray data, final String pojo) {
-        final JqFlow flow = JqFlow.create(this.analyzer, pojo);
-        return flow.output(this.update(flow.input(data)));
-    }
-
-    /*
-     * updateAsync(List<Tool>)
-     *      <-- updateAsync(JsonArray)
-     *      <-- updateAsync(JsonArray, pojo)
-     *      <-- updateJAsync(List<Tool>)
-     *      <-- updateJAsync(JsonArray)
-     *      <-- updateJAsync(JsonArray, pojo)
-     */
-    public <T> Future<List<T>> updateAsync(final List<T> entities) {
-        return this.writer.updateAsync(entities);
-    }
-
-    public <T> Future<List<T>> updateAsync(final JsonArray data) {
-        return this.workflow.<T>inputAsync(data).compose(this::updateAsync);
-    }
-
-    public <T> Future<List<T>> updateAsync(final JsonArray data, final String pojo) {
-        return JqFlow.create(this.analyzer, pojo).<T>inputAsync(data).compose(this::updateAsync);
-    }
-
-    public <T> Future<JsonArray> updateAsyncJ(final List<T> entities) {
-        return this.updateAsync(entities).compose(this.workflow::outputAsync);
-    }
-
-    public <T> Future<JsonArray> updateAsyncJ(final JsonArray input) {
-        return this.workflow.<T>inputAsync(input).compose(this::updateAsync).compose(this.workflow::outputAsync);
-    }
-
-    public <T> Future<JsonArray> updateAsyncJ(final JsonArray input, final String pojo) {
-        final JqFlow flow = JqFlow.create(this.analyzer, pojo);
-        return flow.<T>inputAsync(input).compose(this::updateAsync).compose(flow::outputAsync);
-    }
-
-    /*
-     * update(id, Tool)
-     *      <-- update(id, JsonObject)
-     *      <-- update(id, JsonObject, pojo)
-     *      <-- updateJ(id, Tool)
-     *      <-- updateJ(id, JsonObject)
-     *      <-- updateJ(id, JsonObject, pojo)
-     */
-    public <T> T update(final Object id, final T updated) {
-        return this.writer.update(id, updated);
-    }
-
-    public <T> T update(final Object id, final JsonObject data) {
-        return this.update(id, (T) this.workflow.input(data));
-    }
-
-    public <T> T update(final Object id, final JsonObject data, final String pojo) {
-        return this.update(id, (T) JqFlow.create(this.analyzer, pojo).input(data));
-    }
-
-    public <T> JsonObject updateJ(final Object id, final T updated) {
-        return this.workflow.output(this.update(id, updated));
-    }
-
-    public <T> JsonObject updateJ(final Object id, final JsonObject data) {
-        return this.workflow.output(this.update(id, (T) this.workflow.input(data)));
-    }
-
-    public <T> JsonObject updateJ(final Object id, final JsonObject data, final String pojo) {
-        final JqFlow flow = JqFlow.create(this.analyzer, pojo);
-        return flow.output(this.update(id, (T) flow.input(data)));
-    }
-
-    /*
-     * updateAsync(id, Tool)
-     *      <-- updateAsync(id, JsonObject)
-     *      <-- updateAsync(id, JsonObject, pojo)
-     *      <-- updateJAsync(id, Tool)
-     *      <-- updateJAsync(id, JsonObject)
-     *      <-- updateJAsync(id, JsonObject, pojo)
-     */
-    public <T, ID> Future<T> updateAsync(final ID id, final T updated) {
-        return this.writer.updateAsync(id, updated);
-    }
-
-    public <T, ID> Future<T> updateAsync(final ID id, final JsonObject data) {
-        return this.workflow.<T>inputAsync(data).compose(entity -> this.updateAsync(id, entity));
-    }
-
-    public <T, ID> Future<T> updateAsync(final ID id, final JsonObject data, final String pojo) {
-        return JqFlow.create(this.analyzer, pojo).<T>inputAsync(data).compose(entity -> this.updateAsync(id, entity));
-    }
-
-    public <T, ID> Future<JsonObject> updateJAsync(final ID id, final T updated) {
-        return this.updateAsync(id, updated).compose(this.workflow::outputAsync);
-    }
-
-    public <T, ID> Future<JsonObject> updateJAsync(final ID id, final JsonObject data) {
-        return this.workflow.<T>inputAsync(data).compose(entity -> this.updateAsync(id, entity)).compose(this.workflow::outputAsync);
-    }
-
-    public <T, ID> Future<JsonObject> updateJAsync(final ID id, final JsonObject data, final String pojo) {
-        final JqFlow flow = JqFlow.create(this.analyzer, pojo);
-        return flow.<T>inputAsync(data).compose(entity -> this.updateAsync(id, entity)).compose(flow::outputAsync);
-    }
-
-    /*
-     * update(criteria, Tool)
-     *      <-- update(criteria, JsonObject)
-     *      <-- updateJ(criteria, Tool)
-     *      <-- updateJ(criteria, JsonObject)
-     * update(criteria, Tool, pojo)
-     *      <-- update(criteria, JsonObject, pojo)
-     *      <-- updateJ(criteria, Tool, pojo)
-     *      <-- updateJ(criteria, JsonObject, pojo)
-     */
-    public <T> T update(final JsonObject criteria, final T updated) {
-        criteria.put(VString.EMPTY, Boolean.TRUE);                                                  // Unique Forced
-        return this.writer.update(this.workflow.inputQrJ(criteria), updated);
-    }
-
-    public <T> T update(final JsonObject criteria, final JsonObject data) {
-        return this.update(criteria, (T) this.workflow.input(data));
-    }
-
-    public <T> JsonObject updateJ(final JsonObject criteria, final T updated) {
-        return this.workflow.output(this.update(criteria, updated));
-    }
-
-    public <T> JsonObject updateJ(final JsonObject criteria, final JsonObject data) {
-        return this.workflow.output(this.update(criteria, (T) this.workflow.input(data)));
-    }
-
-    public <T> T update(final JsonObject criteria, final T updated, final String pojo) {
-        criteria.put(VString.EMPTY, Boolean.TRUE);                                                  // Unique Forced
-        return this.writer.update(JqFlow.create(this.analyzer, pojo).inputQrJ(criteria), updated);
-    }
-
-    public <T> T update(final JsonObject criteria, final JsonObject data, final String pojo) {
-        return this.update(criteria, (T) JqFlow.create(this.analyzer, pojo).input(data), pojo);
-    }
-
-    public <T> JsonObject updateJ(final JsonObject criteria, final T updated, final String pojo) {
-        return this.workflow.output(this.update(criteria, updated, pojo));
-    }
-
-    public <T> JsonObject updateJ(final JsonObject criteria, final JsonObject data, final String pojo) {
-        final JqFlow flow = JqFlow.create(this.analyzer, pojo);
-        return flow.output(this.update(criteria, (T) flow.input(data), pojo));
-    }
-
-    /*
-     * updateAsync(criteria, Tool)
-     *      <-- updateAsync(criteria, JsonObject)
-     *      <-- updateJAsync(criteria, Tool)
-     *      <-- updateJAsync(criteria, JsonObject)
-     * updateAsync(criteria, Tool, pojo)
-     *      <-- updateAsync(criteria, JsonObject, pojo)
-     *      <-- updateJAsync(criteria, Tool, pojo)
-     *      <-- updateJAsync(criteria, JsonObject, pojo)
-     */
-    public <T> Future<T> updateAsync(final JsonObject criteria, final T updated) {
-        criteria.put(VString.EMPTY, Boolean.TRUE);                                                  // Unique Forced
-        return this.workflow.inputQrJAsync(criteria).compose(normalized -> this.writer.updateAsync(normalized, updated));
-    }
-
-    public <T> Future<T> updateAsync(final JsonObject criteria, final JsonObject data) {
-        return JqTool.joinAsync(criteria, data, this.workflow)
-            .compose(response -> this.updateAsync(response.resultAt(VValue.IDX), (T) response.resultAt(VValue.ONE)));
-    }
-
-    public <T> Future<JsonObject> updateJAsync(final JsonObject criteria, final T updated) {
-        return this.updateAsync(criteria, updated).compose(this.workflow::outputAsync);
-    }
-
-    public <T> Future<JsonObject> updateJAsync(final JsonObject criteria, final JsonObject data) {
-        return JqTool.joinAsync(criteria, data, this.workflow)
-            .compose(response -> this.updateAsync(response.resultAt(VValue.IDX), (T) response.resultAt(VValue.ONE)))
-            .compose(this.workflow::outputAsync);
-    }
-
-    public <T> Future<T> updateAsync(final JsonObject criteria, final T updated, final String pojo) {
-        criteria.put(VString.EMPTY, Boolean.TRUE);                                                  // Unique Forced
-        return JqFlow.create(this.analyzer, pojo).inputQrJAsync(criteria).compose(normalized -> this.writer.updateAsync(normalized, updated));
-    }
-
-    public <T> Future<T> updateAsync(final JsonObject criteria, final JsonObject data, final String pojo) {
-        return JqTool.joinAsync(criteria, data, JqFlow.create(this.analyzer, pojo))
-            .compose(response -> this.updateAsync(response.resultAt(VValue.IDX), (T) response.resultAt(VValue.ONE), pojo));
-    }
-
-    public <T> Future<JsonObject> updateJAsync(final JsonObject criteria, final T updated, final String pojo) {
-        return this.updateAsync(criteria, updated, pojo).compose(JqFlow.create(this.analyzer, pojo)::outputAsync);
-    }
-
-    public <T> Future<JsonObject> updateJAsync(final JsonObject criteria, final JsonObject data, final String pojo) {
-        final JqFlow flow = JqFlow.create(this.analyzer, pojo);
-        return JqTool.joinAsync(criteria, data, flow)
-            .compose(response -> this.updateAsync(response.resultAt(VValue.IDX), (T) response.resultAt(VValue.ONE), pojo))
-            .compose(flow::outputAsync);
-    }
+    // endregion
 
     // -------------------- Upsert Operation ( INSERT / UPDATE ) ---------
 
