@@ -4,7 +4,7 @@ import io.r2mo.typed.common.Kv;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.database.jooq.operation.ADB;
+import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.epoch.metadata.KTransform;
 import io.zerows.epoch.metadata.KTree;
 import io.zerows.extension.runtime.crud.bootstrap.IxPin;

@@ -2,8 +2,6 @@ package io.zerows.mbse;
 
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.database.jooq.operation.ADB;
-import io.zerows.epoch.database.jooq.util.JqAnalyzer;
 import io.zerows.epoch.metadata.KJoin;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.mbse.metadata.KClass;
@@ -94,7 +92,7 @@ class HOneType implements HOne<ConcurrentMap<String, Class<?>>> {
      */
     private ConcurrentMap<String, Class<?>> typeModule(final KModule module) {
         final ConcurrentMap<String, Class<?>> typeMap = new ConcurrentHashMap<>();
-        final ConcurrentMap<String, Class<?>> moduleMap = this.typeDao(module.getDaoCls());
+        final ConcurrentMap<String, Class<?>> moduleMap = DB.on(module.getDaoCls()).metaTypes();
         final KJoin join = module.getConnect();
         if (Objects.isNull(join)) {
             typeMap.putAll(this.typeSynonym(moduleMap, null));
@@ -103,19 +101,5 @@ class HOneType implements HOne<ConcurrentMap<String, Class<?>>> {
             typeMap.putAll(this.typeSynonym(moduleMap, join.getSource()));
         }
         return typeMap;
-    }
-
-    /**
-     * 此方法负责类型加载，但是类型加载中的 class 必须是 {@link io.r2mo.vertx.jooq.classic.VertxDAO} 类型，实际
-     * 所有的实体类的属性名和对应类型是依靠「数据访问器」的类型分析而得的，而不是直接分析实体类而得到的。
-     *
-     * @param daoCls {@link io.r2mo.vertx.jooq.classic.VertxDAO} 的子类
-     *
-     * @return 分析结果，哈希表存储了属性和类型
-     */
-    private ConcurrentMap<String, Class<?>> typeDao(final Class<?> daoCls) {
-        final ADB jq = DB.on(daoCls);
-        final JqAnalyzer analyzer = jq.analyzer();
-        return analyzer.types();
     }
 }

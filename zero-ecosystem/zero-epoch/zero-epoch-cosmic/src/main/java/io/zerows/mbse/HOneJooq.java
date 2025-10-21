@@ -1,7 +1,7 @@
 package io.zerows.mbse;
 
 import io.vertx.core.MultiMap;
-import io.zerows.epoch.database.jooq.operation.ADB;
+import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.mbse.metadata.KModule;
 
 /**

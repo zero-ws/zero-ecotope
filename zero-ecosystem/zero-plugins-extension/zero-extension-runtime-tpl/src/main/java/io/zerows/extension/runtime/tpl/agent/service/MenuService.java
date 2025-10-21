@@ -3,7 +3,7 @@ package io.zerows.extension.runtime.tpl.agent.service;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.database.jooq.operation.ADB;
+import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.runtime.tpl.domain.tables.daos.MyMenuDao;
 import io.zerows.extension.runtime.tpl.domain.tables.pojos.MyMenu;

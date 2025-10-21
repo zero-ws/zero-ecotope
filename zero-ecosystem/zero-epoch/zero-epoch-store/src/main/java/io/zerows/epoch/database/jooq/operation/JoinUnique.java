@@ -3,6 +3,7 @@ package io.zerows.epoch.database.jooq.operation;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.support.Ut;
 
 import java.util.Objects;

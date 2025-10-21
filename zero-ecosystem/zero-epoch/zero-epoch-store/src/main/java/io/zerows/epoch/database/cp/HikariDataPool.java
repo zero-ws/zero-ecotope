@@ -13,6 +13,7 @@ import org.jooq.impl.DSL;
 
 import java.util.Objects;
 
+@Deprecated
 public class HikariDataPool implements DataPool {
     private static final LogO LOGGER = Ut.Log.database(HikariDataPool.class);
     private static final String OPT_AUTO_COMMIT = "hikari.auto.commit";

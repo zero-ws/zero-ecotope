@@ -6,9 +6,8 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
-import io.zerows.epoch.database.jooq.operation.ADB;
-import io.zerows.epoch.database.jooq.util.JqAnalyzer;
 import io.zerows.epoch.metadata.KField;
+import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.runtime.crud.bootstrap.IxPin;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
@@ -130,8 +129,7 @@ class IxData {
     private static List<HMetaField> column(final KModule module, final Envelop envelop,
                                            final ConcurrentMap<String, String> headerMap) {
         final ADB jooq = IxPin.jooq(module, envelop);
-        final JqAnalyzer analyzer = jooq.analyzer();
-        final ConcurrentMap<String, Class<?>> typeMap = analyzer.types();
+        final ConcurrentMap<String, Class<?>> typeMap = jooq.metaTypes();
         /*
          * Processing for TypeField list building
          */

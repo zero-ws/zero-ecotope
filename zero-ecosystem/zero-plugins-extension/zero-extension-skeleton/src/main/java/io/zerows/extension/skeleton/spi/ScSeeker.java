@@ -3,7 +3,7 @@ package io.zerows.extension.skeleton.spi;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.ADB;
+import io.zerows.epoch.store.jooq.ADB;
 
 /*
  * View seeking interface

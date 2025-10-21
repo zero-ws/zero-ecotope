@@ -1,4 +1,4 @@
-package io.zerows.epoch.database.jooq.operation;
+package io.zerows.epoch.store.jooq;
 
 import cn.hutool.core.util.StrUtil;
 import io.r2mo.base.dbe.DBS;
@@ -8,16 +8,15 @@ import io.r2mo.base.program.R2Vector;
 import io.r2mo.typed.cc.Cc;
 import io.r2mo.typed.common.Pagination;
 import io.r2mo.vertx.jooq.AsyncDBContext;
+import io.r2mo.vertx.jooq.AsyncMeta;
 import io.r2mo.vertx.jooq.DBEx;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.database.jooq.JooqDsl;
-import io.zerows.epoch.database.jooq.util.JqAnalyzer;
-import io.zerows.epoch.database.jooq.util.JqFlow;
 import io.zerows.epoch.metadata.MMAdapt;
 import io.zerows.platform.constant.VString;
+import org.jooq.Table;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -25,7 +24,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -35,14 +33,34 @@ public class ADB {
 
     // region 基本变量定义和构造函数
     private final DBEx<?> dbe;
+    private final AsyncMeta metadata;
 
     /**
      * 直接新版访问 {@link DBEx} 的入口，之后的内容不再访问
      */
     private <T> ADB(final Class<T> daoCls, final DBS dbs, final R2Vector vector) {
         this.dbe = DBEx.of(daoCls, dbs, vector);
+        this.metadata = this.dbe.metadata();
     }
 
+    public AsyncMeta metadata() {
+        return this.dbe.metadata();
+    }
+
+    public ConcurrentMap<String, Class<?>> metaTypes() {
+        if (Objects.isNull(this.metadata)) {
+            return new ConcurrentHashMap<>();
+        }
+        return this.metadata.metaTypes();
+    }
+
+    public String table() {
+        final Table<?> table = this.metadata.metaTable();
+        if (Objects.isNull(table)) {
+            return "(Unknown)";
+        }
+        return table.getName();
+    }
     // endregion
 
     // region 最终构造包域，所以此方法的访问会被内部访问
@@ -1193,68 +1211,6 @@ public class ADB {
     // map ✅ ------> executed ✅ ------> map ❌
     public <T> Future<ConcurrentMap<String, BigDecimal>> minByAsync(final String field, final JsonObject criteria, final String groupField) {
         return this.<T>dbe().minByAsync(field, criteria, groupField);
-    }
-
-    // endregion
-
-    // -------------------- Pojo File --------------------
-    // region 旧版 Jooq 操作，逐步迁移中
-
-    /* Analyzer */
-    private transient JqAnalyzer analyzer;
-    /* Aggre */
-    private transient JqAggregator aggregator;
-    /* Writer */
-    private transient JqWriter writer;
-    /* Reader */
-    private transient JqReader reader;
-    /*
-     * New Structure for usage
-     */
-    private transient JqFlow workflow;
-
-    @Deprecated
-    protected <T> ADB(final Class<T> clazz, final JooqDsl dsl) {
-        this.dbe = null;
-        // this.mapped = null;
-        /* New exception to avoid programming missing */
-        // this.daoCls = clazz;
-
-        /* Analyzing column for Jooq */
-        this.analyzer = JqAnalyzer.create(dsl);
-        this.aggregator = JqAggregator.create(this.analyzer);
-
-        /* Reader connect Analayzer */
-        this.reader = JqReader.create(this.analyzer);
-
-        /* Writer connect Reader */
-        this.writer = JqWriter.create(this.analyzer);
-
-        /* New Structure */
-        this.workflow = JqFlow.create(this.analyzer);
-    }
-
-    @Deprecated
-    public JqAnalyzer analyzer() {
-        return this.analyzer;
-    }
-
-    @Deprecated
-    public Set<String> columns() {
-        return this.analyzer.columns().keySet();
-    }
-
-    @Deprecated
-    public String table() {
-        return this.analyzer.table().getName();
-    }
-
-    @Deprecated
-    private JsonObject andOr(final JsonObject criteria) {
-        if (!criteria.containsKey(VString.EMPTY)) {
-            criteria.put(VString.EMPTY, Boolean.TRUE);
-        }
-        return criteria;
     }
 
     // endregion

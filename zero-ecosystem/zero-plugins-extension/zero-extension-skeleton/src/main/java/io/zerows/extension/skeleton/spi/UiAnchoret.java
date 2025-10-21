@@ -1,7 +1,7 @@
 package io.zerows.extension.skeleton.spi;
 
 import io.zerows.component.log.LogOf;
-import io.zerows.epoch.database.jooq.operation.ADB;
+import io.zerows.epoch.store.jooq.ADB;
 
 /*
  * All sub-class for extension of Jooq type

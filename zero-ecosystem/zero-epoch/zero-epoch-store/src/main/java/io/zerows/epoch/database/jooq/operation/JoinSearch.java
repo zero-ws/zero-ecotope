@@ -1,8 +1,6 @@
 package io.zerows.epoch.database.jooq.operation;
 
 import io.vertx.core.json.JsonArray;
-import io.zerows.component.environment.DevEnv;
-import io.zerows.component.log.LogO;
 import io.zerows.component.qr.Pager;
 import io.zerows.component.qr.syntax.Ir;
 import io.zerows.epoch.database.jooq.JooqDsl;
@@ -11,6 +9,7 @@ import io.zerows.epoch.database.jooq.util.JqAnalyzer;
 import io.zerows.epoch.database.jooq.util.JqOut;
 import io.zerows.epoch.metadata.MMPojo;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 import org.jooq.Condition;
 import org.jooq.DSLContext;
 import org.jooq.Field;
@@ -29,8 +28,8 @@ import java.util.Set;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 @SuppressWarnings("all")
+@Slf4j
 class JoinSearch {
-    private static final LogO LOGGER = Ut.Log.database(JoinSearch.class);
     private final transient JoinStore store;
 
     JoinSearch(final JoinStore store) {
@@ -87,9 +86,7 @@ class JoinSearch {
         if (null != qr.getCriteria()) {
             final Condition condition = JooqCond.transform(qr.getCriteria().toJson(),
                 this.store::metaColumn, this.store::metaTable);
-            if (DevEnv.devJooqCond()) {
-                LOGGER.info(INFO.JOOQ_PARSE, condition);
-            }
+            log.debug("[ ZERO ] ( Jooq -> Condition ) 解析查询条件 condition = {}", condition);
             started.where(condition);
         }
         /*

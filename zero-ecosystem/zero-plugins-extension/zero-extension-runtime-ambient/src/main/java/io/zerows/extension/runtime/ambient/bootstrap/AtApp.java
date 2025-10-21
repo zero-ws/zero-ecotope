@@ -3,7 +3,7 @@ package io.zerows.extension.runtime.ambient.bootstrap;
 import io.r2mo.function.Fn;
 import io.r2mo.typed.cc.Cc;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.ADB;
+import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XAppDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XApp;

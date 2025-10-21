@@ -6,6 +6,7 @@ import org.jooq.SQLDialect;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
+@Deprecated
 public interface DSMeta {
 
     @SuppressWarnings("all")

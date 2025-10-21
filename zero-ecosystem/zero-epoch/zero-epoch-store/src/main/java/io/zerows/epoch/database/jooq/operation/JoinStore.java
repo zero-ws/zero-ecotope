@@ -7,6 +7,7 @@ import io.zerows.epoch.database.jooq.JooqInfix;
 import io.zerows.epoch.database.jooq.util.JqAnalyzer;
 import io.zerows.epoch.metadata.MMPojo;
 import io.zerows.epoch.store.DBSActor;
+import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.platform.exception._60050Exception501NotSupport;
 import org.jooq.Field;
 import org.jooq.Table;
