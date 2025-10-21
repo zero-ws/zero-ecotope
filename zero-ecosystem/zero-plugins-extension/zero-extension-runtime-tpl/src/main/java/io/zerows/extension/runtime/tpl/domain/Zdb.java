@@ -4,7 +4,7 @@
 package io.zerows.extension.runtime.tpl.domain;
 
 
-import io.zerows.extension.runtime.skeleton.refine.Ke;
+import io.zerows.extension.skeleton.common.Ke;
 import io.zerows.extension.runtime.tpl.domain.tables.*;
 import org.jooq.Catalog;
 import org.jooq.Table;

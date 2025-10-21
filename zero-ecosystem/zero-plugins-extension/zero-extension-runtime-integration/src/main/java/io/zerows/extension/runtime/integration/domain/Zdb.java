@@ -8,7 +8,7 @@ import io.zerows.extension.runtime.integration.domain.tables.IDirectory;
 import io.zerows.extension.runtime.integration.domain.tables.IIntegration;
 import io.zerows.extension.runtime.integration.domain.tables.IMessage;
 import io.zerows.extension.runtime.integration.domain.tables.IPortfolio;
-import io.zerows.extension.runtime.skeleton.refine.Ke;
+import io.zerows.extension.skeleton.common.Ke;
 import org.jooq.Catalog;
 import org.jooq.Table;
 import org.jooq.impl.SchemaImpl;

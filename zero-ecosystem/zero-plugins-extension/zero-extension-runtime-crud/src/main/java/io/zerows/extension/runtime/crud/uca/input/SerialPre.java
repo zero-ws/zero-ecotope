@@ -22,7 +22,7 @@ import java.util.concurrent.LinkedBlockingDeque;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static io.zerows.extension.runtime.skeleton.refine.Ke.LOG;
+import static io.zerows.extension.skeleton.common.Ke.LOG;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>

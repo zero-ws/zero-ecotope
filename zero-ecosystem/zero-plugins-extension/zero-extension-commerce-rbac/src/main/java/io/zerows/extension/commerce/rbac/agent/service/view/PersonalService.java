@@ -6,7 +6,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.SViewDao;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SView;
-import io.zerows.extension.runtime.skeleton.eon.em.OwnerType;
+import io.zerows.extension.skeleton.common.enums.OwnerType;
 import io.zerows.platform.constant.VName;
 import io.zerows.platform.constant.VValue;
 import io.zerows.program.Ux;

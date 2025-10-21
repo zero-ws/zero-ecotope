@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.extension.mbse.basement.util.Ao;
-import io.zerows.extension.runtime.skeleton.osgi.spi.modeler.Atom;
+import io.zerows.extension.skeleton.spi.ExAtom;
 import io.zerows.program.Ux;
 import io.zerows.specification.modeling.HRecord;
 import io.zerows.specification.modeling.operation.HDao;
@@ -16,7 +16,7 @@ import java.util.Set;
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
-public class AtomAction implements Atom {
+public class AtomAction implements ExAtom {
 
     @Override
     public Future<JsonObject> createAsync(final String identifier, final JsonObject data) {

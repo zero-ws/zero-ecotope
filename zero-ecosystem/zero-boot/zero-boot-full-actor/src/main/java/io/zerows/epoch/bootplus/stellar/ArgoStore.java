@@ -2,7 +2,7 @@ package io.zerows.epoch.bootplus.stellar;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.bootplus.extension.uca.commerce.ArmsSix;
-import io.zerows.extension.runtime.skeleton.refine.Ke;
+import io.zerows.extension.skeleton.common.Ke;
 import io.zerows.platform.ENV;
 import io.zerows.platform.EnvironmentVariable;
 import io.zerows.platform.constant.VClassPath;

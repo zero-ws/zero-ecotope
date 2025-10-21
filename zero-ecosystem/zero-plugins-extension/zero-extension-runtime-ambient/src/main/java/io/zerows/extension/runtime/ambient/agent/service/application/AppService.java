@@ -9,9 +9,9 @@ import io.zerows.extension.runtime.ambient.domain.tables.daos.XAppDao;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XSourceDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XApp;
 import io.zerows.extension.runtime.ambient.util.At;
-import io.zerows.extension.runtime.skeleton.osgi.spi.business.ExApp;
-import io.zerows.extension.runtime.skeleton.osgi.spi.feature.Attachment;
-import io.zerows.extension.runtime.skeleton.osgi.spi.modeler.Modulat;
+import io.zerows.extension.skeleton.spi.ExApp;
+import io.zerows.extension.skeleton.spi.ExAttachment;
+import io.zerows.extension.skeleton.spi.ExModulat;
 import io.zerows.platform.constant.VString;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
@@ -49,7 +49,7 @@ public class AppService implements AppStub {
              * */
             .compose(At::fileMeta)
             /* Modulat Processing */
-            .compose(appJ -> Ux.channel(Modulat.class, () -> appJ, stub -> stub.extension(appJ, true)));
+            .compose(appJ -> Ux.channel(ExModulat.class, () -> appJ, stub -> stub.extension(appJ, true)));
     }
 
     @Override
@@ -68,7 +68,7 @@ public class AppService implements AppStub {
             /* ExApp Processing, options for application */
             .compose(appJ -> Ux.channel(ExApp.class, () -> appJ, stub -> stub.fetchOpts(appJ)))
             /* Modulat Processing */
-            .compose(appJ -> Ux.channel(Modulat.class, () -> appJ, stub -> stub.extension(appJ, false)));
+            .compose(appJ -> Ux.channel(ExModulat.class, () -> appJ, stub -> stub.extension(appJ, false)));
         /* Document Platform Initialized */
         // .compose(appJ -> AtPin.?nitDocument(id).compose(nil -> Ux.future(appJ)));
     }
@@ -101,7 +101,7 @@ public class AppService implements AppStub {
         condition.put(KName.MODEL_CATEGORY, KName.App.LOGO);
         condition.put(KName.MODEL_KEY, appId);
         condition.put(VString.EMPTY, Boolean.TRUE);
-        return Ux.channel(Attachment.class, () -> data,
+        return Ux.channel(ExAttachment.class, () -> data,
             // Sync Attachment with channel
             file -> file.saveAsync(condition, attachment).compose(saved -> {
                 data.put(KName.App.LOGO, saved.encode());

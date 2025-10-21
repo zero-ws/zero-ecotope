@@ -8,7 +8,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IService;
-import io.zerows.extension.runtime.skeleton.refine.Ke;
+import io.zerows.extension.skeleton.common.Ke;
 import io.zerows.platform.enums.EmAop;
 import io.zerows.platform.metadata.KDictConfig;
 import io.zerows.platform.metadata.KIdentity;

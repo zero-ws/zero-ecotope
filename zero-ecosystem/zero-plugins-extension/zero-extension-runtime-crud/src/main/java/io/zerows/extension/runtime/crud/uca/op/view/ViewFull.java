@@ -9,7 +9,7 @@ import io.zerows.epoch.database.jooq.operation.ADB;
 import io.zerows.extension.runtime.crud.bootstrap.IxPin;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 import io.zerows.extension.runtime.crud.uca.op.Agonic;
-import io.zerows.extension.runtime.skeleton.osgi.spi.ui.Apeak;
+import io.zerows.extension.skeleton.spi.UiApeak;
 import io.zerows.program.Ux;
 
 /**
@@ -24,7 +24,7 @@ import io.zerows.program.Ux;
  *        - 静态模式：直接走 zero-ui 中的静态定义
  *        - 动态模式：调用 zero-ui 中的动态表 UI_COLUMN
  * </code></pre>
- * 此处最核心的接口为底层 SPI（列计算）接口 {@link Apeak}，此处读取的所有列表中的列信息是当前模型可支持的所有
+ * 此处最核心的接口为底层 SPI（列计算）接口 {@link UiApeak}，此处读取的所有列表中的列信息是当前模型可支持的所有
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
@@ -37,7 +37,7 @@ class ViewFull implements Agonic {
 
 
             final ADB jooq = IxPin.jooq(in);
-            return Ux.channel(Apeak.class, JsonArray::new,
+            return Ux.channel(UiApeak.class, JsonArray::new,
                 stub -> stub.on(jooq).fetchFull(input));
         });
     }

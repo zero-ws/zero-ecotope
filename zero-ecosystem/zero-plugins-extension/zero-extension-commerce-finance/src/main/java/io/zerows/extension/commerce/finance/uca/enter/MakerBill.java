@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FBill;
-import io.zerows.extension.runtime.skeleton.refine.Ke;
+import io.zerows.extension.skeleton.common.Ke;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 

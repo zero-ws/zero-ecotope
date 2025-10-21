@@ -8,7 +8,7 @@ import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XAttachmentDao;
 import io.zerows.extension.runtime.ambient.eon.Addr;
-import io.zerows.extension.runtime.skeleton.eon.em.FileStatus;
+import io.zerows.extension.skeleton.common.enums.FileStatus;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;

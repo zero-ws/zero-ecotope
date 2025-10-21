@@ -6,7 +6,7 @@ import io.zerows.epoch.database.OldDatabase;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IService;
 import io.zerows.extension.mbse.action.eon.JtKey;
 import io.zerows.extension.mbse.action.util.Jt;
-import io.zerows.extension.runtime.skeleton.refine.Ke;
+import io.zerows.extension.skeleton.common.Ke;
 import io.zerows.mbse.sdk.Commercial;
 import io.zerows.platform.enums.EmWeb;
 import io.zerows.platform.enums.Environment;

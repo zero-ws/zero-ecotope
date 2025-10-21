@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XModuleDao;
-import io.zerows.extension.runtime.skeleton.osgi.spi.environment.Modeling;
+import io.zerows.extension.skeleton.spi.ScModeling;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
@@ -39,13 +39,13 @@ public class ModelService implements ModelStub {
 
     @Override
     public Future<JsonArray> fetchModels(final String sigma) {
-        return Ux.channel(Modeling.class, JsonArray::new,
+        return Ux.channel(ScModeling.class, JsonArray::new,
             model -> model.fetchAsync(sigma));
     }
 
     @Override
     public Future<JsonArray> fetchAttrs(final String identifier, final String sigma) {
-        return Ux.channel(Modeling.class, JsonArray::new,
+        return Ux.channel(ScModeling.class, JsonArray::new,
             model -> model.fetchAttrs(identifier, sigma));
     }
 

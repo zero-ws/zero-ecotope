@@ -7,7 +7,7 @@ import io.zerows.epoch.application.YmlCore;
 import io.zerows.extension.mbse.action.atom.JtConfig;
 import io.zerows.extension.mbse.action.eon.JtConstant;
 import io.zerows.extension.mbse.action.util.Jt;
-import io.zerows.extension.runtime.skeleton.eon.KeMsg;
+import io.zerows.extension.skeleton.common.KeMsg;
 import io.zerows.management.OZeroStore;
 import io.zerows.program.Ux;
 import io.zerows.specification.app.HAmbient;

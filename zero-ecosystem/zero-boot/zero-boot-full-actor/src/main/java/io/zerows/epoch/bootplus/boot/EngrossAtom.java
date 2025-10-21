@@ -2,7 +2,7 @@ package io.zerows.epoch.bootplus.boot;
 
 import io.zerows.epoch.bootplus.exploit.QModeller;
 import io.zerows.epoch.constant.KName;
-import io.zerows.extension.runtime.skeleton.refine.Ke;
+import io.zerows.extension.skeleton.common.Ke;
 import io.zerows.support.Ut;
 
 /**

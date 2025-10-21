@@ -13,7 +13,7 @@ import io.zerows.extension.mbse.basement.atom.data.DataRecord;
 import io.zerows.extension.mbse.basement.osgi.spi.mixture.HLoadAtom;
 import io.zerows.extension.mbse.basement.osgi.spi.robin.Switcher;
 import io.zerows.extension.mbse.basement.uca.jdbc.Pin;
-import io.zerows.extension.runtime.skeleton.refine.Ke;
+import io.zerows.extension.skeleton.common.Ke;
 import io.zerows.platform.metadata.KDatabase;
 import io.zerows.platform.metadata.KIdentity;
 import io.zerows.platform.metadata.OldKDS;

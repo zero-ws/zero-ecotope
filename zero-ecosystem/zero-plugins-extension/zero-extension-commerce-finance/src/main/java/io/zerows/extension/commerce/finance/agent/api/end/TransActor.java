@@ -14,7 +14,7 @@ import io.zerows.extension.commerce.finance.agent.service.end.SettleWStub;
 import io.zerows.extension.commerce.finance.agent.service.end.TransStub;
 import io.zerows.extension.commerce.finance.eon.Addr;
 import io.zerows.extension.commerce.finance.eon.FmConstant;
-import io.zerows.extension.runtime.skeleton.refine.Ke;
+import io.zerows.extension.skeleton.common.Ke;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import jakarta.inject.Inject;

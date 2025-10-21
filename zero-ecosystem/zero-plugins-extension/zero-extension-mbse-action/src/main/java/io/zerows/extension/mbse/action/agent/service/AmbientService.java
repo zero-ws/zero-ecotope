@@ -13,7 +13,7 @@ import io.zerows.extension.mbse.action.bootstrap.ServiceEnvironment;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IApi;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IJob;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IService;
-import io.zerows.extension.runtime.skeleton.refine.Ke;
+import io.zerows.extension.skeleton.common.Ke;
 import io.zerows.platform.enums.EmService;
 import io.zerows.program.Ux;
 import io.zerows.specification.app.HApp;

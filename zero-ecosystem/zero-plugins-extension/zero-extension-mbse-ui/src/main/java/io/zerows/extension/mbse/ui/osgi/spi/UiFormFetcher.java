@@ -7,7 +7,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.extension.mbse.ui.agent.service.FieldService;
 import io.zerows.extension.mbse.ui.agent.service.FormService;
 import io.zerows.extension.mbse.ui.agent.service.FormStub;
-import io.zerows.extension.runtime.skeleton.osgi.spi.ui.Form;
+import io.zerows.extension.skeleton.spi.UiForm;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -16,7 +16,7 @@ import static io.zerows.extension.mbse.ui.util.Ui.LOG;
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
-public class UiFormFetcher implements Form {
+public class UiFormFetcher implements UiForm {
     private final static LogOf LOGGER = LogOf.get(UiFormFetcher.class);
 
     @Override

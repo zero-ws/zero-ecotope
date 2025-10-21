@@ -3,8 +3,8 @@ package io.zerows.extension.runtime.tpl.osgi.spi;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.extension.runtime.skeleton.eon.em.EmMessage;
-import io.zerows.extension.runtime.skeleton.osgi.spi.feature.Transit;
+import io.zerows.extension.skeleton.common.enums.EmMessage;
+import io.zerows.extension.skeleton.spi.ExTransit;
 import io.zerows.extension.runtime.tpl.domain.tables.daos.TplMessageDao;
 import io.zerows.extension.runtime.tpl.domain.tables.pojos.TplMessage;
 import io.zerows.extension.runtime.tpl.util.Tl;
@@ -19,7 +19,7 @@ import java.util.Objects;
  *
  * @author lang : 2024-04-04
  */
-public class TransitMessage implements Transit {
+public class TransitMessage implements ExTransit {
     @Override
     public Future<JsonObject> message(final JsonObject input) {
         // message 属性丢失，直接跳过

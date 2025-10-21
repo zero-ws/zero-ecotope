@@ -10,8 +10,8 @@ import io.zerows.extension.runtime.ambient.agent.service.file.DocBStub;
 import io.zerows.extension.runtime.ambient.agent.service.file.DocBuilder;
 import io.zerows.extension.runtime.ambient.bootstrap.AtConfig;
 import io.zerows.extension.runtime.ambient.bootstrap.AtPin;
-import io.zerows.extension.runtime.skeleton.eon.em.BizInternal;
-import io.zerows.extension.runtime.skeleton.osgi.spi.business.ExIo;
+import io.zerows.extension.skeleton.common.KeBiz;
+import io.zerows.extension.skeleton.spi.ExIo;
 import io.zerows.platform.constant.VString;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
@@ -145,7 +145,7 @@ class AtFsDir {
 
         // 提取 id / type 两个参数
         final String appId = params.getString(KName.APP_ID);
-        final String type = BizInternal.TypeEntity.Directory.value();
+        final String type = KeBiz.TypeEntity.Directory.value();
 
 
         // 计算目录名称，相对路径提取名称为绝对路径，内置使用 DocBuilder 进行同步构建。

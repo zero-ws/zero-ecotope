@@ -8,14 +8,14 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.database.OldDatabase;
 import io.zerows.extension.runtime.ambient.eon.AtMsg;
-import io.zerows.extension.runtime.skeleton.osgi.spi.extension.Init;
+import io.zerows.extension.skeleton.spi.ExInit;
 import io.zerows.program.Ux;
 
 import java.util.function.Function;
 
 import static io.zerows.extension.runtime.ambient.util.At.LOG;
 
-public class DatabaseInit implements Init {
+public class DatabaseInit implements ExInit {
 
     private static final LogOf LOGGER = LogOf.get(DatabaseInit.class);
 

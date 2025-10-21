@@ -8,7 +8,7 @@ import io.zerows.extension.mbse.action.domain.tables.pojos.IJob;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IService;
 import io.zerows.extension.mbse.action.eon.JtConstant;
 import io.zerows.extension.mbse.action.eon.em.WorkerType;
-import io.zerows.extension.runtime.skeleton.refine.Ke;
+import io.zerows.extension.skeleton.common.Ke;
 import io.zerows.platform.metadata.KDictConfig;
 import io.zerows.platform.metadata.KIntegration;
 import io.zerows.platform.metadata.OldKDS;

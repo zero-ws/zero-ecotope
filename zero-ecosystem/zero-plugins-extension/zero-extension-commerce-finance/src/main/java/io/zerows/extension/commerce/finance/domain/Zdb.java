@@ -5,7 +5,7 @@ package io.zerows.extension.commerce.finance.domain;
 
 
 import io.zerows.extension.commerce.finance.domain.tables.*;
-import io.zerows.extension.runtime.skeleton.refine.Ke;
+import io.zerows.extension.skeleton.common.Ke;
 import org.jooq.Catalog;
 import org.jooq.Table;
 import org.jooq.impl.SchemaImpl;

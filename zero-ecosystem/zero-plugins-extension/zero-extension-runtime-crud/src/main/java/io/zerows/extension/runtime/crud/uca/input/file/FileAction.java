@@ -7,7 +7,7 @@ import io.zerows.mbse.metadata.KModule;
 import io.zerows.epoch.metadata.KField;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 import io.zerows.extension.runtime.crud.uca.input.Pre;
-import io.zerows.extension.runtime.skeleton.refine.Ke;
+import io.zerows.extension.skeleton.common.Ke;
 import io.zerows.program.Ux;
 
 import java.util.Objects;

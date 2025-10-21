@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.component.aop.After;
 import io.zerows.component.aop.Around;
 import io.zerows.epoch.constant.KName;
-import io.zerows.extension.runtime.skeleton.osgi.spi.feature.Valve;
+import io.zerows.extension.skeleton.spi.UiValve;
 import io.zerows.extension.runtime.workflow.uca.camunda.Io;
 import io.zerows.platform.constant.VName;
 import io.zerows.platform.enums.typed.ChangeFlag;
@@ -50,7 +50,7 @@ public class ActivityTabb implements After {
              * }
              */
             .compose(processed -> this.dataDelay(processed, config))
-            .compose(processed -> Ux.channel(Valve.class,
+            .compose(processed -> Ux.channel(UiValve.class,
                 /*
                  * Returned original JsonObject
                  */

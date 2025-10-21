@@ -8,8 +8,8 @@ import io.zerows.epoch.metadata.UObject;
 import io.zerows.extension.runtime.ambient.bootstrap.AtPin;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XAppDao;
 import io.zerows.extension.runtime.ambient.util.At;
-import io.zerows.extension.runtime.skeleton.osgi.spi.extension.Init;
-import io.zerows.extension.runtime.skeleton.osgi.spi.extension.Prerequisite;
+import io.zerows.extension.skeleton.spi.ExInit;
+import io.zerows.extension.skeleton.spi.ExPrerequisite;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
@@ -41,7 +41,7 @@ public class InitService implements InitStub {
     /**
      * 「Async」( Creation ) This api is for application initialization at first time.
      *
-     * Related Interface: {@link Init}
+     * Related Interface: {@link ExInit}
      *
      * @param appId {@link java.lang.String} The application primary key that stored in `KEY` field of `X_APP`.
      * @param data  {@link io.vertx.core.json.JsonObject} The data that will create application instance.
@@ -70,7 +70,7 @@ public class InitService implements InitStub {
     /**
      * 「Async」( Edition ) This api is for application initialization at any time after 1st.
      *
-     * Related Interface: {@link Init}
+     * Related Interface: {@link ExInit}
      *
      * @param appName {@link java.lang.String} The application name that stored in `NAME` field of `X_APP`.
      *
@@ -86,7 +86,7 @@ public class InitService implements InitStub {
     /**
      * 「Async」Pre-Workflow before initialization when call this method.
      *
-     * Related Interface: {@link Prerequisite}
+     * Related Interface: {@link ExPrerequisite}
      *
      * @param appName {@link java.lang.String} The application name that stored in `NAME` field of `X_APP`.
      *
@@ -95,7 +95,7 @@ public class InitService implements InitStub {
     @Override
     public Future<JsonObject> prerequisite(final String appName) {
         /* Prerequisite Extension */
-        final Prerequisite prerequisite = AtPin.getPrerequisite();
+        final ExPrerequisite prerequisite = AtPin.getPrerequisite();
         if (Objects.isNull(prerequisite)) {
             LOG.Init.info(LOGGER, "`Prerequisite` configuration is null");
             return Ux.future(new JsonObject());
@@ -157,12 +157,12 @@ public class InitService implements InitStub {
     /**
      * 「Async」Call `initializer` that defined in our configuration file.
      *
-     * @param input {@link io.vertx.core.json.JsonObject} Input parameters related to {@link Init}
+     * @param input {@link io.vertx.core.json.JsonObject} Input parameters related to {@link ExInit}
      *
      * @return {@link io.vertx.core.Future}<{@link io.vertx.core.json.JsonObject}>
      */
     private Future<JsonObject> initDefined(final JsonObject input) {
-        final Init initializer = AtPin.getInit();
+        final ExInit initializer = AtPin.getInit();
         if (Objects.isNull(initializer)) {
             LOG.Init.info(LOGGER, "`Init` configuration is null");
             return Ux.future(input);

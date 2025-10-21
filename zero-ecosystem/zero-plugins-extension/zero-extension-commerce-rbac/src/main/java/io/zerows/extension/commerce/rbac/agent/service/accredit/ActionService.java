@@ -12,7 +12,7 @@ import io.zerows.extension.commerce.rbac.domain.tables.daos.SResourceDao;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SAction;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SPermission;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SResource;
-import io.zerows.extension.runtime.skeleton.osgi.spi.web.Routine;
+import io.zerows.extension.skeleton.spi.ScRoutine;
 import io.zerows.platform.constant.VString;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
@@ -96,7 +96,7 @@ public class ActionService implements ActionStub {
         /*
          * Dynamic by `keyword` and `sigma` ( zero-jet )
          */
-        return Ux.channel(Routine.class, ArrayList::new, route -> route.searchAsync(keyword, sigma)).compose(uris -> {
+        return Ux.channel(ScRoutine.class, ArrayList::new, route -> route.searchAsync(keyword, sigma)).compose(uris -> {
             /*
              * Combine two list of uri metadata
              */

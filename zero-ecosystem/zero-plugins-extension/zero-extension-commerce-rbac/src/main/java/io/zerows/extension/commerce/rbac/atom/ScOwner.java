@@ -3,7 +3,7 @@ package io.zerows.extension.commerce.rbac.atom;
 import io.zerows.platform.constant.VValue;
 import io.zerows.epoch.metadata.KView;
 import io.zerows.support.Ut;
-import io.zerows.extension.runtime.skeleton.eon.em.OwnerType;
+import io.zerows.extension.skeleton.common.enums.OwnerType;
 
 import java.io.Serializable;
 import java.util.HashSet;

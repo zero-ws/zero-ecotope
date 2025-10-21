@@ -25,7 +25,7 @@ import io.zerows.extension.commerce.erp.domain.tables.TVendorAssessment;
 import io.zerows.extension.commerce.erp.domain.tables.TVendorCheckIn;
 import io.zerows.extension.commerce.erp.domain.tables.TVendorCheckOut;
 import io.zerows.extension.commerce.erp.domain.tables.TVendorHour;
-import io.zerows.extension.runtime.skeleton.refine.Ke;
+import io.zerows.extension.skeleton.common.Ke;
 import org.jooq.Catalog;
 import org.jooq.Table;
 import org.jooq.impl.DSL;

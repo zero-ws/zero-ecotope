@@ -4,7 +4,7 @@
 package io.zerows.extension.runtime.workflow.domain;
 
 
-import io.zerows.extension.runtime.skeleton.refine.Ke;
+import io.zerows.extension.skeleton.common.Ke;
 import io.zerows.extension.runtime.workflow.domain.tables.WFlow;
 import io.zerows.extension.runtime.workflow.domain.tables.WTicket;
 import io.zerows.extension.runtime.workflow.domain.tables.WTodo;

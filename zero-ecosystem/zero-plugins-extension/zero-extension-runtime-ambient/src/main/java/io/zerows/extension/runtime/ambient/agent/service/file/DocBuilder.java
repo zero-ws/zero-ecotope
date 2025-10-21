@@ -9,7 +9,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.extension.runtime.ambient.bootstrap.AtConfig;
 import io.zerows.extension.runtime.ambient.bootstrap.AtPin;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XCategoryDao;
-import io.zerows.extension.runtime.skeleton.osgi.spi.feature.Arbor;
+import io.zerows.extension.skeleton.spi.ExArbor;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
@@ -25,7 +25,7 @@ import static io.zerows.extension.runtime.ambient.util.At.LOG;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 public class DocBuilder implements DocBStub {
-    private static final Cc<String, Arbor> CC_ARBOR = Cc.openThread();
+    private static final Cc<String, ExArbor> CC_ARBOR = Cc.openThread();
     private static final LogOf LOGGER = LogOf.get(DocReader.class);
 
     // ------------------------- Document Management Tree -------------------------
@@ -87,7 +87,7 @@ public class DocBuilder implements DocBStub {
 
 
         // Terminal 1:
-        if (Objects.isNull(arborCls) || !Ut.isImplement(arborCls, Arbor.class)) {
+        if (Objects.isNull(arborCls) || !Ut.isImplement(arborCls, ExArbor.class)) {
             return Ux.futureA();
         }
 
@@ -115,7 +115,7 @@ public class DocBuilder implements DocBStub {
         storeRef.put(KName.STORE_PATH, config.getStorePath());
         configuration.put(KName.STORE, storeRef);
 
-        final Arbor arbor = CC_ARBOR.pick(() -> Ut.instance(arborCls), arborCls.getName());
+        final ExArbor arbor = CC_ARBOR.pick(() -> Ut.instance(arborCls), arborCls.getName());
         // FnZero.po?lThread(POOL_ARBOR, () -> Ut.instance(arborCls), arborCls.getName());
         LOG.File.info(LOGGER, "Arbor = {0}, Configuration = {1}", arborCls.getName(), configuration.encode());
         return arbor.generate(input, configuration);

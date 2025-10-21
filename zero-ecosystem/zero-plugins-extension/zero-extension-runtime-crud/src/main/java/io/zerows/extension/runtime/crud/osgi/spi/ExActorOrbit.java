@@ -2,14 +2,14 @@ package io.zerows.extension.runtime.crud.osgi.spi;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.extension.runtime.crud.bootstrap.IxPin;
-import io.zerows.extension.runtime.skeleton.osgi.spi.web.Orbit;
+import io.zerows.extension.skeleton.spi.ScOrbit;
 
 import java.util.Set;
 
 /*
  * Calculate Resource Key;
  */
-public class ExActorOrbit implements Orbit {
+public class ExActorOrbit implements ScOrbit {
     /*
      * Critical Pool For URI Here.
      */

@@ -8,7 +8,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XAppDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XApp;
 import io.zerows.extension.runtime.ambient.eon.AtMsg;
-import io.zerows.extension.runtime.skeleton.osgi.spi.extension.Init;
+import io.zerows.extension.skeleton.spi.ExInit;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
@@ -20,7 +20,7 @@ import static io.zerows.extension.runtime.ambient.util.At.LOG;
 /*
  * EmApp Initialization
  */
-public class AppInit implements Init {
+public class AppInit implements ExInit {
     private static final LogOf LOGGER = LogOf.get(AppInit.class);
 
     @Override

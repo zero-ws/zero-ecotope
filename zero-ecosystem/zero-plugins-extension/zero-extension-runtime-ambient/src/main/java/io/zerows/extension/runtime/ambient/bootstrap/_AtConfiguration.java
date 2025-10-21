@@ -7,9 +7,9 @@ import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.extension.runtime.ambient.eon.AtConstant;
 import io.zerows.extension.runtime.ambient.exception._80302Exception500InitSpecification;
 import io.zerows.extension.runtime.ambient.exception._80303Exception500PrerequisiteSpec;
-import io.zerows.extension.runtime.skeleton.eon.KeMsg;
-import io.zerows.extension.runtime.skeleton.osgi.spi.extension.Init;
-import io.zerows.extension.runtime.skeleton.osgi.spi.extension.Prerequisite;
+import io.zerows.extension.skeleton.common.KeMsg;
+import io.zerows.extension.skeleton.spi.ExInit;
+import io.zerows.extension.skeleton.spi.ExPrerequisite;
 import io.zerows.specification.app.HAmbient;
 import io.zerows.support.Ut;
 
@@ -46,22 +46,22 @@ final class AtConfiguration {
         return CONFIG;
     }
 
-    static Init getInit(final Class<?> initClass) {
+    static ExInit getInit(final Class<?> initClass) {
         if (Objects.isNull(initClass)) {
             return null;
         } else {
-            Fn.jvmKo(!Ut.isImplement(initClass, Init.class), _80302Exception500InitSpecification.class, initClass.getName());
-            return Init.generate(initClass);
+            Fn.jvmKo(!Ut.isImplement(initClass, ExInit.class), _80302Exception500InitSpecification.class, initClass.getName());
+            return ExInit.generate(initClass);
         }
     }
 
-    static Prerequisite getPrerequisite() {
+    static ExPrerequisite getPrerequisite() {
         final Class<?> prerequisite = CONFIG.getPrerequisite();
         if (Objects.isNull(prerequisite)) {
             return null;
         } else {
-            Fn.jvmKo(!Ut.isImplement(prerequisite, Prerequisite.class), _80303Exception500PrerequisiteSpec.class, prerequisite.getName());
-            return Prerequisite.generate(prerequisite);
+            Fn.jvmKo(!Ut.isImplement(prerequisite, ExPrerequisite.class), _80303Exception500PrerequisiteSpec.class, prerequisite.getName());
+            return ExPrerequisite.generate(prerequisite);
         }
     }
 }

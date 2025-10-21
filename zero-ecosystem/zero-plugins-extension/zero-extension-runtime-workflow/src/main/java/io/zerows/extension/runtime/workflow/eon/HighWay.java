@@ -1,6 +1,6 @@
 package io.zerows.extension.runtime.workflow.eon;
 
-import io.zerows.extension.runtime.skeleton.eon.KeIpc;
+import io.zerows.extension.skeleton.common.KeIpc;
 
 /**
  * To avoid duplicated with Addr class, here provide new class named 'HighWay'

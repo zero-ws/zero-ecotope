@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.spi.Dictionary;
-import io.zerows.extension.runtime.skeleton.osgi.spi.business.ExActivity;
+import io.zerows.extension.skeleton.spi.ExActivity;
 import io.zerows.extension.runtime.workflow.atom.EngineOn;
 import io.zerows.extension.runtime.workflow.atom.configuration.MetaInstance;
 import io.zerows.extension.runtime.workflow.domain.tables.pojos.WTicket;

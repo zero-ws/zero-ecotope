@@ -8,7 +8,7 @@ import io.zerows.extension.runtime.graphic.domain.tables.GCluster;
 import io.zerows.extension.runtime.graphic.domain.tables.GEdge;
 import io.zerows.extension.runtime.graphic.domain.tables.GGraphic;
 import io.zerows.extension.runtime.graphic.domain.tables.GNode;
-import io.zerows.extension.runtime.skeleton.refine.Ke;
+import io.zerows.extension.skeleton.common.Ke;
 import org.jooq.Catalog;
 import org.jooq.Table;
 import org.jooq.impl.SchemaImpl;

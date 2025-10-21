@@ -5,9 +5,9 @@ import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.extension.runtime.skeleton.osgi.spi.business.ExIo;
-import io.zerows.extension.runtime.skeleton.osgi.spi.business.ExUser;
-import io.zerows.extension.runtime.skeleton.osgi.spi.feature.Attachment;
+import io.zerows.extension.skeleton.spi.ExIo;
+import io.zerows.extension.skeleton.spi.ExUser;
+import io.zerows.extension.skeleton.spi.ExAttachment;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import jakarta.inject.Inject;
@@ -20,7 +20,7 @@ import java.util.Set;
  */
 public class DocReader implements DocRStub {
     @Inject
-    private transient Attachment attachment;
+    private transient ExAttachment attachment;
 
 
     // ------------------------- Document Method ( Other ) -------------------------

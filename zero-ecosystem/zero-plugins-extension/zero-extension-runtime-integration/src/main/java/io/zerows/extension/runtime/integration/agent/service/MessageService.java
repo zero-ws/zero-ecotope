@@ -9,7 +9,7 @@ import io.zerows.epoch.database.jooq.operation.ADB;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.runtime.integration.domain.tables.daos.IMessageDao;
 import io.zerows.extension.runtime.integration.domain.tables.pojos.IMessage;
-import io.zerows.extension.runtime.skeleton.eon.em.EmMessage;
+import io.zerows.extension.skeleton.common.enums.EmMessage;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 

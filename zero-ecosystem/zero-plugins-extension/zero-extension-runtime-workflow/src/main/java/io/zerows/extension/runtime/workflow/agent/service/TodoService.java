@@ -5,7 +5,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.extension.runtime.skeleton.osgi.spi.feature.Todo;
+import io.zerows.extension.skeleton.spi.ExTodo;
 import io.zerows.extension.runtime.workflow.bootstrap.WfPin;
 import io.zerows.extension.runtime.workflow.domain.tables.daos.WTodoDao;
 import io.zerows.extension.runtime.workflow.domain.tables.pojos.WTodo;
@@ -169,7 +169,7 @@ public class TodoService implements TodoStub {
         return DB.on(WTodoDao.class)
             .<WTodo>fetchByIdAsync(key)
             .compose(Ux::futureJ)
-            .compose(Fx.ofJObject((todo) -> Ux.channel(Todo.class, () -> todo, channel -> {
+            .compose(Fx.ofJObject((todo) -> Ux.channel(ExTodo.class, () -> todo, channel -> {
                 LOG.Init.info(this.getClass(), WfMsg.CHANNEL_TODO, channel.getClass().getName());
                 /*
                  * X_TODO channel and data merged.

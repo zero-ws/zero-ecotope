@@ -11,9 +11,9 @@ import io.zerows.epoch.database.jooq.operation.ADB;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XAttachmentDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XAttachment;
-import io.zerows.extension.runtime.skeleton.exception._81002Exception400FilenameInvalid;
-import io.zerows.extension.runtime.skeleton.osgi.spi.business.ExIo;
-import io.zerows.extension.runtime.skeleton.osgi.spi.feature.Attachment;
+import io.zerows.extension.skeleton.exception._81002Exception400FilenameInvalid;
+import io.zerows.extension.skeleton.spi.ExIo;
+import io.zerows.extension.skeleton.spi.ExAttachment;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import jakarta.inject.Inject;
@@ -31,7 +31,7 @@ public class DocWriter implements DocWStub {
     private static final LogOf LOGGER = LogOf.get(DocWriter.class);
 
     @Inject
-    private transient Attachment attachment;
+    private transient ExAttachment attachment;
 
     @Override
     public Future<JsonArray> upload(final JsonArray documentA) {
@@ -45,7 +45,7 @@ public class DocWriter implements DocWStub {
          * move the files to actual storage, instead the template file storage will take
          * place.
          */
-        return Ux.channel(Attachment.class, () -> documentA, file -> file.uploadAsync(documentA));
+        return Ux.channel(ExAttachment.class, () -> documentA, file -> file.uploadAsync(documentA));
     }
 
     @Override

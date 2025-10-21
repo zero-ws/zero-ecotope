@@ -5,7 +5,6 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.mbse.modulat.uca.dock.Ark;
-import io.zerows.extension.runtime.skeleton.osgi.spi.modeler.Modulat;
 import io.zerows.program.Ux;
 
 import java.util.Objects;
@@ -13,7 +12,7 @@ import java.util.Objects;
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
-public class ExModulat implements Modulat {
+public class ExModulat implements io.zerows.extension.skeleton.spi.ExModulat {
     @Override
     public Future<JsonObject> extension(final JsonObject appJson, final boolean open) {
         final String key = appJson.getString(KName.KEY);

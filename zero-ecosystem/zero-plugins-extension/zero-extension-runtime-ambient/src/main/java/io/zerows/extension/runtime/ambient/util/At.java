@@ -14,7 +14,7 @@ import io.zerows.extension.runtime.ambient.osgi.spi.extension.AppInit;
 import io.zerows.extension.runtime.ambient.osgi.spi.extension.DatabaseInit;
 import io.zerows.extension.runtime.ambient.osgi.spi.extension.DatumInit;
 import io.zerows.extension.runtime.ambient.osgi.spi.extension.SourceInit;
-import io.zerows.extension.runtime.skeleton.osgi.spi.extension.Init;
+import io.zerows.extension.skeleton.spi.ExInit;
 import io.zerows.program.Ux;
 import io.zerows.specification.modeling.HAtom;
 
@@ -25,24 +25,24 @@ import java.util.List;
  */
 public class At {
 
-    private static final Cc<String, Init> CC_INIT = Cc.open();
+    private static final Cc<String, ExInit> CC_INIT = Cc.open();
 
-    public static Init initApp() {
+    public static ExInit initApp() {
         return CC_INIT.pick(AppInit::new, AppInit.class.getName());
         // return FnZero.po?l(Pool.INIT_POOL, AppInit.class.getName(), AppInit::new);
     }
 
-    public static Init initSource() {
+    public static ExInit initSource() {
         return CC_INIT.pick(SourceInit::new, SourceInit.class.getName());
         // return FnZero.po?l(Pool.INIT_POOL, SourceInit.class.getName(), SourceInit::new);
     }
 
-    public static Init initDatabase() {
+    public static ExInit initDatabase() {
         return CC_INIT.pick(DatabaseInit::new, DatabaseInit.class.getName());
         // return FnZero.po?l(Pool.INIT_POOL, DatabaseInit.class.getName(), DatabaseInit::new);
     }
 
-    public static Init initData() {
+    public static ExInit initData() {
         return CC_INIT.pick(DatumInit::new, DatumInit.class.getName());
         // return FnZero.po?l(Pool.INIT_POOL, DatumInit.class.getName(), DatumInit::new);
     }

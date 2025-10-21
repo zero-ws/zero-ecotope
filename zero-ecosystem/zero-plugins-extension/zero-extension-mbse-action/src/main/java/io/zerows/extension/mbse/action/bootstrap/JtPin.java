@@ -3,7 +3,7 @@ package io.zerows.extension.mbse.action.bootstrap;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.zerows.extension.mbse.action.atom.JtConfig;
-import io.zerows.extension.runtime.skeleton.refine.Ke;
+import io.zerows.extension.skeleton.common.Ke;
 import io.zerows.specification.app.HAmbient;
 import io.zerows.specification.configuration.HRegistry;
 

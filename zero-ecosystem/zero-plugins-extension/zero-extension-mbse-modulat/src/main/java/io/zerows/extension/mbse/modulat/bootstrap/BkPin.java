@@ -2,9 +2,8 @@ package io.zerows.extension.mbse.modulat.bootstrap;
 
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
-import io.zerows.extension.mbse.modulat.osgi.spi.ExModulat;
 import io.zerows.extension.mbse.modulat.util.Bk;
-import io.zerows.extension.runtime.skeleton.osgi.spi.modeler.Modulat;
+import io.zerows.extension.skeleton.spi.ExModulat;
 import io.zerows.program.Ux;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.app.HArk;
@@ -31,7 +30,7 @@ public class BkPin implements HRegistry.Mod<Vertx> {
             Bk.LOG.Init.warn(this.getClass(), "App Id = null, ignored initialized!!");
             return Ux.futureF();
         }
-        final Modulat modulat = new ExModulat();
+        final ExModulat modulat = new io.zerows.extension.mbse.modulat.osgi.spi.ExModulat();
         return modulat.extension(app.option()).compose(nil -> Ux.futureT());
     }
 }

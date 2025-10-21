@@ -9,7 +9,7 @@ import io.zerows.program.Ux;
 import io.zerows.support.fn.Fx;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XCategoryDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XCategory;
-import io.zerows.extension.runtime.skeleton.osgi.spi.phantom.AbstractArbor;
+import io.zerows.extension.skeleton.spi.ExArborBase;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -19,7 +19,7 @@ import java.util.Set;
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
-public class CatalogArbor extends AbstractArbor {
+public class CatalogArbor extends ExArborBase {
     @Override
     public Future<JsonArray> generate(final JsonObject categoryJ, final JsonObject configuration) {
         final JsonObject condition = Ux.whereAnd();

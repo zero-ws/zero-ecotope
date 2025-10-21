@@ -10,7 +10,7 @@ import io.zerows.cortex.extension.PlugAuditor;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.management.OCacheUri;
 import io.zerows.epoch.web.Envelop;
-import io.zerows.extension.runtime.skeleton.eon.KeIpc;
+import io.zerows.extension.skeleton.common.KeIpc;
 import io.zerows.program.Ux;
 import lombok.extern.slf4j.Slf4j;
 

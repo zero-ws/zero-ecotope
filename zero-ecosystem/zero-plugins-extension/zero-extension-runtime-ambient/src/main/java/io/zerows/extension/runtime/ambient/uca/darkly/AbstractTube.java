@@ -9,7 +9,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.mbse.HLoadSmart;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XActivity;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XActivityRule;
-import io.zerows.extension.runtime.skeleton.refine.Ke;
+import io.zerows.extension.skeleton.common.Ke;
 import io.zerows.program.Ux;
 import io.zerows.specification.modeling.HAtom;
 import io.zerows.specification.modeling.operation.HLoad;

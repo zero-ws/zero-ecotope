@@ -9,7 +9,7 @@ import io.zerows.extension.commerce.erp.common.ErpMsg;
 import io.zerows.extension.commerce.erp.service.CompanyStub;
 import jakarta.inject.Inject;
 
-import static io.zerows.extension.commerce.erp.common.Er.LOG;
+import static io.zerows.extension.commerce.erp.common.Erp.LOG;
 
 @Queue
 public class CompanyActor {

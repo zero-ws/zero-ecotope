@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.program.Ux;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
-import io.zerows.extension.runtime.skeleton.osgi.spi.feature.Attachment;
+import io.zerows.extension.skeleton.spi.ExAttachment;
 
 /**
  * 附件同步
@@ -16,7 +16,7 @@ class FileSavePre extends FileAction {
     @Override
     public Future<JsonObject> inJAsync(final JsonObject data, final IxMod in) {
         return this.actionFn(in, (criteria, dataArray) -> Ux.channel(
-            Attachment.class,                                       // Component
+            ExAttachment.class,                                       // Component
             JsonArray::new,                                         // JsonArray Data
             file -> file.saveAsync(criteria, dataArray, data)       // Execution Logical
         )).apply(data);

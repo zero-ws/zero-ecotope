@@ -12,7 +12,7 @@ import io.zerows.extension.commerce.rbac.uca.acl.rapid.Dmx;
 import io.zerows.extension.commerce.rbac.uca.acl.rapid.DmxColumn;
 import io.zerows.extension.commerce.rbac.uca.acl.rapid.DmxQr;
 import io.zerows.extension.commerce.rbac.uca.acl.rapid.DmxRow;
-import io.zerows.extension.runtime.skeleton.osgi.spi.modeler.Confine;
+import io.zerows.extension.skeleton.spi.ScConfine;
 import io.zerows.platform.constant.VValue;
 import io.zerows.platform.enums.EmSecure;
 import io.zerows.epoch.store.jooq.DB;
@@ -28,7 +28,7 @@ import static io.zerows.extension.commerce.rbac.util.Sc.LOG;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 class SyntaxAop {
-    static final Cc<String, Confine> CC_FINITY = Cc.openThread();
+    static final Cc<String, ScConfine> CC_FINITY = Cc.openThread();
 
     private static Future<JsonObject> normInput(final JsonObject bodyData, final JsonObject matrixJ, final JsonObject headerJ) {
         /*
@@ -51,7 +51,7 @@ class SyntaxAop {
          *
          * }
          */
-        final Class<?> confineCls = Ut.valueCI(syntaxJ, KName.SELECTOR, Confine.class, ConfineBuiltIn.class);
+        final Class<?> confineCls = Ut.valueCI(syntaxJ, KName.SELECTOR, ScConfine.class, ConfineBuiltIn.class);
 
 
         /*
@@ -79,7 +79,7 @@ class SyntaxAop {
         requestJ.put(KName.VIEW, viewData.getString(KName.NAME, VValue.DFT.V_VIEW));
         requestJ.put(KName.POSITION, viewData.getString(KName.POSITION, VValue.DFT.V_POSITION));
         LOG.Visit.info(SyntaxAop.class, "Confine component input: {0}", requestJ.encode());
-        final Confine confine = CC_FINITY.pick(() -> Ut.instance(confineCls), confineCls.getName());
+        final ScConfine confine = CC_FINITY.pick(() -> Ut.instance(confineCls), confineCls.getName());
         return confine.restrict(requestJ, syntaxJ);
     }
 

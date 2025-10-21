@@ -10,8 +10,8 @@ import io.zerows.extension.commerce.rbac.domain.tables.daos.RUserRoleDao;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.RUserRole;
 import io.zerows.extension.commerce.rbac.eon.AuthKey;
 import io.zerows.extension.commerce.rbac.eon.AuthMsg;
-import io.zerows.extension.runtime.skeleton.refine.Ke;
-import io.zerows.extension.runtime.skeleton.secure.Tie;
+import io.zerows.extension.skeleton.common.Ke;
+import io.zerows.extension.skeleton.spi.ScTie;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -23,7 +23,7 @@ import static io.zerows.extension.commerce.rbac.util.Sc.LOG;
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
-public class TieRole implements Tie<String, JsonArray> {
+public class TieRole implements ScTie<String, JsonArray> {
     @Override
     public Future<JsonArray> identAsync(final JsonObject userJ) {
         final String userKey = Ut.valueString(userJ, KName.KEY);

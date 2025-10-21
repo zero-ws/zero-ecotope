@@ -14,7 +14,7 @@ import io.zerows.extension.commerce.rbac.agent.service.view.PersonalStub;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.SViewDao;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SAction;
 import io.zerows.extension.commerce.rbac.eon.Addr;
-import io.zerows.extension.runtime.skeleton.eon.em.OwnerType;
+import io.zerows.extension.skeleton.common.enums.OwnerType;
 import io.zerows.platform.constant.VName;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;

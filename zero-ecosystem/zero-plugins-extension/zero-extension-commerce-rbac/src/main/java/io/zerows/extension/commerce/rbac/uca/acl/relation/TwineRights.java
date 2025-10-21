@@ -10,14 +10,14 @@ import io.zerows.extension.commerce.rbac.domain.tables.daos.RUserGroupDao;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.SUserDao;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SUser;
 import io.zerows.extension.commerce.rbac.eon.AuthKey;
-import io.zerows.extension.runtime.skeleton.secure.Twine;
+import io.zerows.extension.skeleton.spi.ScTwine;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
 import java.util.Collection;
 import java.util.Objects;
 
-public class TwineRights implements Twine<String> {
+public class TwineRights implements ScTwine<String> {
     /*
      * userJ -> User + Extension JsonObject
      * This method will extract `roles` & `groups` from system

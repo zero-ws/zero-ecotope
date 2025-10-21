@@ -9,13 +9,13 @@ import io.zerows.extension.runtime.crud.eon.em.QrType;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 import io.zerows.extension.runtime.crud.uca.input.Pre;
 import io.zerows.extension.runtime.crud.uca.op.Agonic;
-import io.zerows.extension.runtime.skeleton.osgi.spi.ui.ApeakMy;
-import io.zerows.extension.runtime.skeleton.osgi.spi.web.Seeker;
+import io.zerows.extension.skeleton.spi.UiApeakMy;
+import io.zerows.extension.skeleton.spi.ScSeeker;
 import io.zerows.program.Ux;
 
 /**
  * 「视图同步」
- * 此类实现用于个人视图的保存，同步视图专用，内置调用 {@link ApeakMy} 接口来保存当前视图
+ * 此类实现用于个人视图的保存，同步视图专用，内置调用 {@link UiApeakMy} 接口来保存当前视图
  * 此处的视图保存包含两部分：
  * <pre><code>
  *     - projection：列定义
@@ -30,7 +30,7 @@ class ViewSync implements Agonic {
     @Override
     public Future<JsonObject> runJAsync(final JsonObject input, final IxMod in) {
         final ADB jooq = IxPin.jooq(in);
-        return Ux.channel(Seeker.class, JsonObject::new, seeker -> seeker.on(jooq).fetchImpact(input))
+        return Ux.channel(ScSeeker.class, JsonObject::new, seeker -> seeker.on(jooq).fetchImpact(input))
             /* view has get, ignored, */
             /*
              * url processing
@@ -51,7 +51,7 @@ class ViewSync implements Agonic {
              * data_key 的计算流程
              */
             .compose(params -> Pre.qr(QrType.BY_VK).inJAsync(params, in))
-            .compose(params -> Ux.channel(ApeakMy.class, JsonObject::new,
+            .compose(params -> Ux.channel(UiApeakMy.class, JsonObject::new,
                 stub -> stub.on(jooq).saveMy(params, params.getJsonObject(KName.DATA))));
     }
 }

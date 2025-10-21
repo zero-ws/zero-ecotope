@@ -8,7 +8,7 @@ import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.extension.commerce.rbac.atom.ScOwner;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.SViewDao;
-import io.zerows.extension.runtime.skeleton.eon.em.OwnerType;
+import io.zerows.extension.skeleton.common.enums.OwnerType;
 
 import java.util.ArrayList;
 import java.util.Set;

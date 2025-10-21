@@ -6,14 +6,14 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.extension.commerce.rbac.atom.ScToken;
 import io.zerows.extension.commerce.rbac.uca.timer.ClockFactory;
 import io.zerows.extension.commerce.rbac.uca.timer.ScClock;
-import io.zerows.extension.runtime.skeleton.osgi.spi.environment.Permit;
+import io.zerows.extension.skeleton.spi.ScPermit;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
 /**
  * @author lang : 2023-09-15
  */
-public class SafePermit implements Permit {
+public class SafePermit implements ScPermit {
     private final ScClock<ScToken> cache;
 
     public SafePermit() {

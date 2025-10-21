@@ -10,7 +10,7 @@ import io.zerows.extension.runtime.crud.uca.desk.IxReply;
 import io.zerows.extension.runtime.crud.uca.input.Pre;
 import io.zerows.extension.runtime.crud.uca.op.Agonic;
 import io.zerows.extension.runtime.crud.util.Ix;
-import io.zerows.extension.runtime.skeleton.osgi.spi.feature.Trash;
+import io.zerows.extension.skeleton.spi.ExTrash;
 import io.zerows.mbse.metadata.KModule;
 import io.zerows.program.Ux;
 
@@ -42,7 +42,7 @@ class AgonicDelete implements Agonic {
             return Pre.fileOut().inJAsync(json, in)
 
                 // 如果打开了 Trash 功能，则执行 Trash 的备份
-                .compose(removed -> Ux.channelA(Trash.class, () -> Ux.future(removed),
+                .compose(removed -> Ux.channelA(ExTrash.class, () -> Ux.future(removed),
                     (stub) -> stub.backupAsync(module.identifier(), removed)))
 
                 // 「AOP」带 AOP 的核心删除执行逻辑
@@ -66,7 +66,7 @@ class AgonicDelete implements Agonic {
 
 
                 // 如果打开了 Trash 功能，则执行 Trash 的备份
-                .compose(removed -> Ux.channelA(Trash.class, () -> Ux.future(array),
+                .compose(removed -> Ux.channelA(ExTrash.class, () -> Ux.future(array),
                     stub -> stub.backupAsync(module.identifier(), array)))
 
 

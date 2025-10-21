@@ -3,7 +3,7 @@ package io.zerows.epoch.bootplus.stellar;
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.database.OldDatabase;
-import io.zerows.extension.runtime.skeleton.refine.Ke;
+import io.zerows.extension.skeleton.common.Ke;
 import io.zerows.platform.enums.Environment;
 import io.zerows.platform.exception._40103Exception500ConnectAmbient;
 import io.zerows.platform.metadata.KGlobal;
@@ -19,7 +19,7 @@ import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-import static io.zerows.extension.runtime.skeleton.refine.Ke.LOG;
+import static io.zerows.extension.skeleton.common.Ke.LOG;
 
 /**
  * @author lang : 2023-06-13

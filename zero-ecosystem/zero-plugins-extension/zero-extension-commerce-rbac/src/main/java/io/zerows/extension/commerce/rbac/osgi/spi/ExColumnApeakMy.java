@@ -10,25 +10,25 @@ import io.zerows.extension.commerce.rbac.atom.ScOwner;
 import io.zerows.extension.commerce.rbac.eon.AuthMsg;
 import io.zerows.extension.commerce.rbac.uca.acl.rapier.Quinn;
 import io.zerows.extension.commerce.rbac.uca.logged.ScUser;
-import io.zerows.extension.runtime.skeleton.eon.em.OwnerType;
-import io.zerows.extension.runtime.skeleton.osgi.spi.ui.Anchoret;
-import io.zerows.extension.runtime.skeleton.osgi.spi.ui.ApeakMy;
+import io.zerows.extension.skeleton.common.enums.OwnerType;
+import io.zerows.extension.skeleton.spi.UiAnchoret;
+import io.zerows.extension.skeleton.spi.UiApeakMy;
 import io.zerows.platform.constant.VName;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
 import static io.zerows.extension.commerce.rbac.util.Sc.LOG;
 
-public class ExColumnApeakMy extends Anchoret<ApeakMy> implements ApeakMy {
+public class ExColumnApeakMy extends UiAnchoret<UiApeakMy> implements UiApeakMy {
 
     @Override
     public Future<JsonArray> fetchMy(final JsonObject params) {
-        final String resourceId = params.getString(ApeakMy.ARG0);
+        final String resourceId = params.getString(UiApeakMy.ARG0);
         if (Ut.isNil(resourceId)) {
             return Ux.futureA();
         }
-        final String userId = params.getString(ApeakMy.ARG1);
-        final KView view = KView.smart(params.getValue(ApeakMy.ARG2));
+        final String userId = params.getString(UiApeakMy.ARG1);
+        final KView view = KView.smart(params.getValue(UiApeakMy.ARG2));
         // DataBound Building
         final ScOwner owner = new ScOwner(userId, OwnerType.USER);
         owner.bind(view);
@@ -45,11 +45,11 @@ public class ExColumnApeakMy extends Anchoret<ApeakMy> implements ApeakMy {
 
     @Override
     public Future<JsonObject> saveMy(final JsonObject params, final JsonObject viewInput) {
-        final String resourceId = params.getString(ApeakMy.ARG0);
+        final String resourceId = params.getString(UiApeakMy.ARG0);
         if (Ut.isNil(resourceId)) {
             return Ux.futureJ();
         }
-        final String userId = params.getString(ApeakMy.ARG1);
+        final String userId = params.getString(UiApeakMy.ARG1);
         /* Normalize data for `language` and `sigma` etc.*/
         final JsonObject viewData = params.copy();
 
@@ -89,12 +89,12 @@ public class ExColumnApeakMy extends Anchoret<ApeakMy> implements ApeakMy {
         /*
          * ScHabitus instance
          */
-        final String habitus = params.getString(ApeakMy.ARG3);
+        final String habitus = params.getString(UiApeakMy.ARG3);
         final ScUser user = ScUser.login(habitus);
         /*
          * Method / Uri
          */
-        final String dataKey = params.getString(ApeakMy.ARG4);
+        final String dataKey = params.getString(UiApeakMy.ARG4);
         /*
          * projection / criteria only
          */

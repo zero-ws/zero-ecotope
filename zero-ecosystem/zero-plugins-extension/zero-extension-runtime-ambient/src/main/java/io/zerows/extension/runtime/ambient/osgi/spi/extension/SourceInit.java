@@ -10,7 +10,7 @@ import io.zerows.support.Ut;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XSourceDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XSource;
 import io.zerows.extension.runtime.ambient.eon.AtMsg;
-import io.zerows.extension.runtime.skeleton.osgi.spi.extension.Init;
+import io.zerows.extension.skeleton.spi.ExInit;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -18,7 +18,7 @@ import java.util.function.Function;
 
 import static io.zerows.extension.runtime.ambient.util.At.LOG;
 
-public class SourceInit implements Init {
+public class SourceInit implements ExInit {
 
     private static final LogOf LOGGER = LogOf.get(SourceInit.class);
 

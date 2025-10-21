@@ -8,7 +8,7 @@ import io.zerows.extension.mbse.modulat.agent.service.BagArgStub;
 import io.zerows.extension.mbse.modulat.domain.tables.pojos.BBag;
 import io.zerows.extension.mbse.modulat.domain.tables.pojos.BBlock;
 import io.zerows.extension.mbse.modulat.uca.configure.Combiner;
-import io.zerows.extension.runtime.skeleton.eon.em.TypeBag;
+import io.zerows.extension.skeleton.common.enums.TypeBag;
 import io.zerows.platform.constant.VValue;
 import io.zerows.platform.enums.modeling.EmModel;
 import io.zerows.program.Ux;

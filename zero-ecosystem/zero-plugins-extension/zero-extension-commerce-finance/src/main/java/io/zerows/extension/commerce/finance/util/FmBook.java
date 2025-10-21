@@ -5,7 +5,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.MMShared;
 import io.zerows.extension.commerce.finance.domain.tables.pojos.FBook;
 import io.zerows.extension.commerce.finance.eon.FmConstant;
-import io.zerows.extension.runtime.skeleton.refine.Ke;
+import io.zerows.extension.skeleton.common.Ke;
 import io.zerows.platform.constant.VString;
 import io.zerows.support.Ut;
 

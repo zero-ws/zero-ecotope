@@ -2,12 +2,12 @@ package io.zerows.extension.mbse.basement.osgi.spi.ambient;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.extension.runtime.skeleton.osgi.spi.extension.Init;
+import io.zerows.extension.skeleton.spi.ExInit;
 import io.zerows.program.Ux;
 
 import java.util.function.Function;
 
-public class ApplicationInitializer implements Init {
+public class ApplicationInitializer implements ExInit {
 
     @Override
     public Function<JsonObject, Future<JsonObject>> apply() {

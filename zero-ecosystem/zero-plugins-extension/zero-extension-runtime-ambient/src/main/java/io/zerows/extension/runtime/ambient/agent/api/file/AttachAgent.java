@@ -9,7 +9,7 @@ import io.zerows.extension.runtime.ambient.bootstrap.AtConfig;
 import io.zerows.extension.runtime.ambient.bootstrap.AtPin;
 import io.zerows.extension.runtime.ambient.eon.Addr;
 import io.zerows.extension.runtime.ambient.eon.AtConstant;
-import io.zerows.extension.runtime.skeleton.eon.em.FileStatus;
+import io.zerows.extension.skeleton.common.enums.FileStatus;
 import io.zerows.support.Ut;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;

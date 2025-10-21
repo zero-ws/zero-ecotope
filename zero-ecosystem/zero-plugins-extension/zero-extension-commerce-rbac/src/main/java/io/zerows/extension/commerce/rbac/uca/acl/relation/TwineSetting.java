@@ -5,8 +5,8 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SUser;
-import io.zerows.extension.runtime.skeleton.osgi.spi.business.ExSetting;
-import io.zerows.extension.runtime.skeleton.secure.Twine;
+import io.zerows.extension.skeleton.spi.ExSetting;
+import io.zerows.extension.skeleton.spi.ScTwine;
 import io.zerows.platform.exception._60050Exception501NotSupport;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
@@ -16,7 +16,7 @@ import io.zerows.support.Ut;
  *
  * @author lang : 2024-04-09
  */
-public class TwineSetting implements Twine<SUser> {
+public class TwineSetting implements ScTwine<SUser> {
     @Override
     public Future<JsonObject> identAsync(final JsonObject userJ) {
         final String userId = Ut.valueString(userJ, KName.KEY);

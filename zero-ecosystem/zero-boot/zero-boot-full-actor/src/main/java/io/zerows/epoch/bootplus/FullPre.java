@@ -2,7 +2,7 @@ package io.zerows.epoch.bootplus;
 
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
-import io.zerows.extension.runtime.skeleton.boot.lighter.ZeroPre;
+import io.zerows.extension.skeleton.boot.ZeroPre;
 
 /**
  * 在原生的 {@link ZeroPre} 基础之上追加 ES 和 Neo4J 的初始化

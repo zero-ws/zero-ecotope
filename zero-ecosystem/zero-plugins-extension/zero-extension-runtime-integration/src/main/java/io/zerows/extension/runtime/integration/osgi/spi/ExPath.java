@@ -12,7 +12,7 @@ import io.zerows.extension.runtime.integration.domain.tables.daos.IDirectoryDao;
 import io.zerows.extension.runtime.integration.domain.tables.pojos.IDirectory;
 import io.zerows.extension.runtime.integration.uca.command.Fs;
 import io.zerows.extension.runtime.integration.util.Is;
-import io.zerows.extension.runtime.skeleton.osgi.spi.business.ExIo;
+import io.zerows.extension.skeleton.spi.ExIo;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.base.FnBase;

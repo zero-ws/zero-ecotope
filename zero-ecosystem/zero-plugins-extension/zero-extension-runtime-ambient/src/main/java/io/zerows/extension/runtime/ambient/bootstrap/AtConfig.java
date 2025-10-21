@@ -4,8 +4,8 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.r2mo.typed.json.jackson.ClassDeserializer;
 import io.r2mo.typed.json.jackson.ClassSerializer;
-import io.zerows.extension.runtime.skeleton.osgi.spi.extension.Init;
-import io.zerows.extension.runtime.skeleton.osgi.spi.extension.Prerequisite;
+import io.zerows.extension.skeleton.spi.ExInit;
+import io.zerows.extension.skeleton.spi.ExPrerequisite;
 
 import java.io.Serializable;
 
@@ -22,9 +22,9 @@ import java.io.Serializable;
  *
  * |Name|Interface|Comments|
  * |---|---:|:---|
- * |prerequisite|{@link Prerequisite}|The first phase before all, assist for Front-End app.|
- * |initializer|{@link Init}|After `X_APP, X_SOURCE` processed.|
- * |loader|{@link Init}|After configuration data, this phase will be call for data loading.|
+ * |prerequisite|{@link ExPrerequisite}|The first phase before all, assist for Front-End app.|
+ * |initializer|{@link ExInit}|After `X_APP, X_SOURCE` processed.|
+ * |loader|{@link ExInit}|After configuration data, this phase will be call for data loading.|
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */

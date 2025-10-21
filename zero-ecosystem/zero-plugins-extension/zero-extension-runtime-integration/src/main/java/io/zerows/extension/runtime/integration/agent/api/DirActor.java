@@ -10,7 +10,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.support.Ut;
 import io.zerows.extension.runtime.integration.agent.service.DirStub;
 import io.zerows.extension.runtime.integration.eon.Addr;
-import io.zerows.extension.runtime.skeleton.exception._81002Exception400FilenameInvalid;
+import io.zerows.extension.skeleton.exception._81002Exception400FilenameInvalid;
 import jakarta.inject.Inject;
 
 /**

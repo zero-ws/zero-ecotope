@@ -11,8 +11,8 @@ import io.zerows.extension.commerce.rbac.agent.service.accredit.ActionService;
 import io.zerows.extension.commerce.rbac.agent.service.accredit.ActionStub;
 import io.zerows.extension.commerce.rbac.eon.AuthMsg;
 import io.zerows.extension.commerce.rbac.exception._80209Exception404ActionMissing;
-import io.zerows.extension.runtime.skeleton.osgi.spi.ui.Anchoret;
-import io.zerows.extension.runtime.skeleton.osgi.spi.web.Seeker;
+import io.zerows.extension.skeleton.spi.UiAnchoret;
+import io.zerows.extension.skeleton.spi.ScSeeker;
 
 import java.util.Objects;
 
@@ -21,7 +21,7 @@ import static io.zerows.extension.commerce.rbac.util.Sc.LOG;
 /*
  * Seek impact resource for params here, it will be passed by crud
  */
-public class ExIntimitySeeker extends Anchoret<Seeker> implements Seeker {
+public class ExIntimitySeeker extends UiAnchoret<ScSeeker> implements ScSeeker {
 
     private transient final ActionStub stub = Ut.singleton(ActionService.class);
 
@@ -30,9 +30,9 @@ public class ExIntimitySeeker extends Anchoret<Seeker> implements Seeker {
         /*
          * Uri, Method
          */
-        final String uri = params.getString(Seeker.ARG0);
-        final HttpMethod method = HttpMethod.valueOf(params.getString(Seeker.ARG1));
-        final String sigma = params.getString(Seeker.ARG2);
+        final String uri = params.getString(ScSeeker.ARG0);
+        final HttpMethod method = HttpMethod.valueOf(params.getString(ScSeeker.ARG1));
+        final String sigma = params.getString(ScSeeker.ARG2);
         LOG.Resource.info(this.getLogger(), AuthMsg.SEEKER_RESOURCE, uri, method, sigma);
         return this.stub.fetchAction(uri, method, sigma).compose(action -> Objects.isNull(action) ?
             FnVertx.failOut(_80209Exception404ActionMissing.class, method + " " + uri) :

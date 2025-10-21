@@ -11,7 +11,7 @@ import io.zerows.extension.runtime.ambient.domain.tables.daos.XActivityChangeDao
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XActivityChange;
 import io.zerows.extension.runtime.ambient.eon.em.ActivityStatus;
 import io.zerows.extension.runtime.ambient.osgi.spi.business.ExActivityTracker;
-import io.zerows.extension.runtime.skeleton.osgi.spi.business.ExActivity;
+import io.zerows.extension.skeleton.spi.ExActivity;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 

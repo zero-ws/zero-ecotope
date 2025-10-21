@@ -7,7 +7,7 @@ import io.zerows.cosmic.plugins.cache.Rapid;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SPath;
 import io.zerows.extension.commerce.rbac.eon.ScConstant;
 import io.zerows.extension.commerce.rbac.uca.logged.ScUser;
-import io.zerows.extension.runtime.skeleton.refine.Ke;
+import io.zerows.extension.skeleton.common.Ke;
 import io.zerows.platform.constant.VString;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;

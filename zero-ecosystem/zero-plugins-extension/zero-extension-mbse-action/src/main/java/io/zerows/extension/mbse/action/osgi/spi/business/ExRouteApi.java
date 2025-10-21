@@ -7,8 +7,8 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.extension.mbse.action.domain.tables.daos.IApiDao;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IApi;
 import io.zerows.extension.mbse.action.util.Jt;
-import io.zerows.extension.runtime.skeleton.osgi.spi.web.Routine;
-import io.zerows.extension.runtime.skeleton.refine.Ke;
+import io.zerows.extension.skeleton.spi.ScRoutine;
+import io.zerows.extension.skeleton.common.Ke;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.specification.app.HArk;
@@ -21,7 +21,7 @@ import java.util.Objects;
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
-public class ExRouteApi implements Routine {
+public class ExRouteApi implements ScRoutine {
 
     @Override
     public Future<List<UriMeta>> searchAsync(final String keyword, final String sigma) {

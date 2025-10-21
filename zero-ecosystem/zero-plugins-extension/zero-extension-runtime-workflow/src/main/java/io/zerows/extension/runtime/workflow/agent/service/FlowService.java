@@ -3,7 +3,7 @@ package io.zerows.extension.runtime.workflow.agent.service;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.extension.runtime.skeleton.osgi.spi.ui.Form;
+import io.zerows.extension.skeleton.spi.UiForm;
 import io.zerows.extension.runtime.workflow.domain.tables.daos.WFlowDao;
 import io.zerows.extension.runtime.workflow.uca.camunda.Io;
 import io.zerows.extension.runtime.workflow.util.Wf;
@@ -124,6 +124,6 @@ public class FlowService implements FlowStub {
     private Future<JsonObject> formInternal(final JsonObject formInput, final String sigma) {
         final JsonObject parameters = formInput.copy();
         parameters.put(KName.SIGMA, sigma);
-        return Ux.channel(Form.class, JsonObject::new, stub -> stub.fetchUi(parameters));
+        return Ux.channel(UiForm.class, JsonObject::new, stub -> stub.fetchUi(parameters));
     }
 }

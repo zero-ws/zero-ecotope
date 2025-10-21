@@ -11,7 +11,7 @@ import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
 import io.zerows.extension.runtime.ambient.bootstrap.AtConfig;
 import io.zerows.extension.runtime.ambient.bootstrap.AtPin;
-import io.zerows.extension.runtime.skeleton.osgi.spi.business.ExIo;
+import io.zerows.extension.skeleton.spi.ExIo;
 import io.zerows.specification.vital.HFS;
 
 import java.util.*;

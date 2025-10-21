@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.zerows.mbse.metadata.KModule;
 import io.zerows.epoch.metadata.KField;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
-import io.zerows.extension.runtime.skeleton.osgi.spi.business.ExUser;
+import io.zerows.extension.skeleton.spi.ExUser;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 

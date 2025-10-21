@@ -6,7 +6,7 @@ import io.zerows.epoch.database.jooq.operation.ADB;
 import io.zerows.epoch.database.jooq.operation.ADJ;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
-import io.zerows.extension.runtime.skeleton.refine.Ke;
+import io.zerows.extension.skeleton.common.Ke;
 import io.zerows.mbse.HOne;
 import io.zerows.mbse.metadata.KModule;
 import io.zerows.specification.app.HAmbient;

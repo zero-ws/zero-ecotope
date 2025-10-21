@@ -12,9 +12,9 @@ import io.zerows.epoch.web.Envelop;
 import io.zerows.support.Ut;
 import io.zerows.extension.mbse.action.atom.JtConfig;
 import io.zerows.extension.mbse.action.bootstrap.JtPin;
-import io.zerows.extension.runtime.skeleton.osgi.spi.ui.Apeak;
-import io.zerows.extension.runtime.skeleton.osgi.spi.web.Seeker;
-import io.zerows.extension.runtime.skeleton.refine.Ke;
+import io.zerows.extension.skeleton.spi.UiApeak;
+import io.zerows.extension.skeleton.spi.ScSeeker;
+import io.zerows.extension.skeleton.common.Ke;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.app.HArk;
 
@@ -97,7 +97,7 @@ final class OxView {
             params.mergeIn(header, true);
         }
         /* Apeak found */
-        return Ux.channel(Apeak.class, JsonArray::new, apeak -> apeak.fetchFull(params));
+        return Ux.channel(UiApeak.class, JsonArray::new, apeak -> apeak.fetchFull(params));
     }
 
     /**
@@ -157,7 +157,7 @@ final class OxView {
         /*
          * 3. Seeker 读取视图
          */
-        return Ux.channel(Seeker.class, JsonObject::new, seeker -> seeker.fetchImpact(params).compose(item -> {
+        return Ux.channel(ScSeeker.class, JsonObject::new, seeker -> seeker.fetchImpact(params).compose(item -> {
             /*
              * 4. 构造参数
              */

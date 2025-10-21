@@ -8,7 +8,7 @@ import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.mbse.ui.atom.UiConfig;
 import io.zerows.extension.mbse.ui.eon.UiConstant;
-import io.zerows.extension.runtime.skeleton.eon.KeMsg;
+import io.zerows.extension.skeleton.common.KeMsg;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.constant.VValue;
 import io.zerows.specification.app.HAmbient;

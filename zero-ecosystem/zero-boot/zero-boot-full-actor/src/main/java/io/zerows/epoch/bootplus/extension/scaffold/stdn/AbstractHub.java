@@ -15,7 +15,7 @@ import io.zerows.epoch.database.OldDatabase;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.osgi.spi.robin.Switcher;
 import io.zerows.extension.mbse.basement.util.Ao;
-import io.zerows.extension.runtime.skeleton.osgi.spi.feature.Trash;
+import io.zerows.extension.skeleton.spi.ExTrash;
 import io.zerows.mbse.metadata.ActIn;
 import io.zerows.mbse.metadata.ActOut;
 import io.zerows.platform.metadata.KIntegration;
@@ -242,12 +242,12 @@ public class AbstractHub extends AbstractActor {
         return this.transferAsync(input,
 
             /* JsonObject */
-            data -> Ux.channelA(Trash.class,
+            data -> Ux.channelA(ExTrash.class,
                 () -> Ux.future(data),
                 stub -> stub.backupAsync(atom.identifier(), data)),
 
             /* JsonArray */
-            data -> Ux.channelA(Trash.class,
+            data -> Ux.channelA(ExTrash.class,
                 () -> Ux.future(data),
                 stub -> stub.backupAsync(atom.identifier(), data))
         );

@@ -14,8 +14,8 @@ import io.zerows.extension.commerce.rbac.domain.tables.daos.SUserDao;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SUser;
 import io.zerows.extension.commerce.rbac.eon.AuthKey;
 import io.zerows.extension.commerce.rbac.eon.AuthMsg;
-import io.zerows.extension.runtime.skeleton.osgi.spi.business.ExOwner;
-import io.zerows.extension.runtime.skeleton.secure.Twine;
+import io.zerows.extension.skeleton.spi.ExOwner;
+import io.zerows.extension.skeleton.spi.ScTwine;
 import io.zerows.mbse.metadata.KQr;
 import io.zerows.platform.metadata.KRef;
 import io.zerows.program.Ux;
@@ -65,7 +65,7 @@ import static io.zerows.extension.commerce.rbac.util.Sc.LOG;
  *   3.2）modelKey -> employeeId 为前端提供语义级消费
  *   3.3）initialize 为导入时的模板数据
  */
-class TwineExtension implements Twine<SUser> {
+class TwineExtension implements ScTwine<SUser> {
 
     private static final ScConfig CONFIG = ScPin.getConfig();
 

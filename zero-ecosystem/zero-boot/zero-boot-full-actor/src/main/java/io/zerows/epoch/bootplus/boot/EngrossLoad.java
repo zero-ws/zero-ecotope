@@ -3,10 +3,10 @@ package io.zerows.epoch.bootplus.boot;
 import io.vertx.core.Vertx;
 import io.zerows.epoch.boot.ZeroLauncher;
 import io.zerows.epoch.constant.KName;
-import io.zerows.extension.runtime.skeleton.boot.supply.DataImport;
+import io.zerows.extension.skeleton.boot.DataImport;
 import io.zerows.support.Ut;
 
-import static io.zerows.extension.runtime.skeleton.refine.Ke.LOG;
+import static io.zerows.extension.skeleton.common.Ke.LOG;
 
 /**
  * 「单应用」目前版本

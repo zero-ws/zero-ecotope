@@ -3,7 +3,7 @@ package io.zerows.extension.mbse.ui.osgi.spi.secure;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.extension.runtime.skeleton.osgi.spi.modeler.Confine;
+import io.zerows.extension.skeleton.spi.ScConfine;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -12,7 +12,7 @@ import static io.zerows.extension.mbse.ui.util.Ui.LOG;
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
-public class ConfineKind implements Confine {
+public class ConfineKind implements ScConfine {
     /*
      * 这个组件在 ConfineBuiltIn 中的数据结构多了一个维度
      * {

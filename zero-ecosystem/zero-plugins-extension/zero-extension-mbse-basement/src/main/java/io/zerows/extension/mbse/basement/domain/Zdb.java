@@ -5,7 +5,7 @@ package io.zerows.extension.mbse.basement.domain;
 
 
 import io.zerows.extension.mbse.basement.domain.tables.*;
-import io.zerows.extension.runtime.skeleton.refine.Ke;
+import io.zerows.extension.skeleton.common.Ke;
 import org.jooq.Catalog;
 import org.jooq.Table;
 import org.jooq.impl.SchemaImpl;

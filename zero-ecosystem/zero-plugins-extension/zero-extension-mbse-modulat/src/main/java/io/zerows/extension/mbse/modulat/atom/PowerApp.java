@@ -7,7 +7,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.extension.mbse.modulat.store.OCacheMod;
-import io.zerows.extension.runtime.skeleton.osgi.spi.modeler.Modulat;
+import io.zerows.extension.skeleton.spi.ExModulat;
 import io.zerows.specification.app.HMod;
 
 import java.util.Objects;
@@ -33,7 +33,7 @@ public class PowerApp {
 
     public static Future<PowerApp> getOrCreate(final String appId, final boolean open) {
         Objects.requireNonNull(appId);
-        return CC_APP.pick(() -> Ux.channel(Modulat.class, JsonObject::new, modulat -> modulat.extension(appId, open)).compose(storedJ -> {
+        return CC_APP.pick(() -> Ux.channel(ExModulat.class, JsonObject::new, modulat -> modulat.extension(appId, open)).compose(storedJ -> {
             final String configApp = Ut.valueString(storedJ, KName.KEY);
             if (appId.equals(configApp)) {
                 // 抓取应用相关的 HMod 缓存

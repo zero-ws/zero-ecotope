@@ -7,7 +7,7 @@ import io.zerows.cortex.extension.HExtension;
 import io.zerows.epoch.application.YmlCore;
 import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.epoch.basicore.MDWorkflow;
-import io.zerows.extension.runtime.skeleton.refine.Ke;
+import io.zerows.extension.skeleton.common.Ke;
 import io.zerows.extension.runtime.workflow.domain.tables.pojos.WFlow;
 import io.zerows.extension.runtime.workflow.uca.deployment.DeployOn;
 import io.zerows.management.OZeroStore;

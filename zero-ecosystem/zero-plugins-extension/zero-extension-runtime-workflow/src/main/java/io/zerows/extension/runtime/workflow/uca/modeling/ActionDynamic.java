@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.extension.runtime.skeleton.osgi.spi.modeler.Atom;
+import io.zerows.extension.skeleton.spi.ExAtom;
 import io.zerows.extension.runtime.workflow.atom.configuration.MetaInstance;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
@@ -21,7 +21,7 @@ class ActionDynamic implements ActionOn {
     public <T> Future<JsonObject> createAsync(final JsonObject params, final MetaInstance metadata) {
         return this.identifierJ((identifier, data) ->
             // Single Create
-            Ux.channel(Atom.class, JsonObject::new,
+            Ux.channel(ExAtom.class, JsonObject::new,
                 // Channel
                 atom -> atom.createAsync(identifier, data))).apply(params);
     }
@@ -30,7 +30,7 @@ class ActionDynamic implements ActionOn {
     public <T> Future<JsonObject> updateAsync(final String key, final JsonObject params, final MetaInstance metadata) {
         return this.identifierJ((identifier, data) ->
             // Single Update
-            Ux.channel(Atom.class, JsonObject::new,
+            Ux.channel(ExAtom.class, JsonObject::new,
                 // Channel
                 atom -> atom.updateAsync(identifier, key, data))).apply(params);
     }
@@ -38,7 +38,7 @@ class ActionDynamic implements ActionOn {
     @Override
     public <T> Future<JsonObject> fetchAsync(final String key, final String identifier, final MetaInstance metadata) {
         // Single Fetch
-        return Ux.channel(Atom.class, JsonObject::new,
+        return Ux.channel(ExAtom.class, JsonObject::new,
             // Channel
             atom -> atom.fetchAsync(identifier, key));
     }
@@ -47,7 +47,7 @@ class ActionDynamic implements ActionOn {
     public <T> Future<JsonArray> createAsync(final JsonArray params, final MetaInstance instance) {
         return this.identifierA((identifier, dataArray) ->
             // Batch Create
-            Ux.channel(Atom.class, JsonArray::new,
+            Ux.channel(ExAtom.class, JsonArray::new,
                 // Channel
                 atom -> atom.createAsync(identifier, dataArray))).apply(params);
     }
@@ -56,7 +56,7 @@ class ActionDynamic implements ActionOn {
     public <T> Future<JsonArray> updateAsync(final Set<String> keys, final JsonArray params, final MetaInstance metadata) {
         // Batch Update
         return this.identifierA((identifier, dataArray) ->
-            Ux.channel(Atom.class, JsonArray::new,
+            Ux.channel(ExAtom.class, JsonArray::new,
                 // Channel
                 atom -> atom.updateAsync(identifier, keys, dataArray))).apply(params);
     }
@@ -64,7 +64,7 @@ class ActionDynamic implements ActionOn {
     @Override
     public <T> Future<JsonArray> fetchAsync(final Set<String> keys, final String identifier, final MetaInstance metadata) {
         // Batch Fetch
-        return Ux.channel(Atom.class, JsonArray::new,
+        return Ux.channel(ExAtom.class, JsonArray::new,
             // Channel
             atom -> atom.fetchAsync(identifier, keys));
     }

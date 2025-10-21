@@ -10,8 +10,8 @@ import io.zerows.extension.runtime.crud.bootstrap.IxPin;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 import io.zerows.extension.runtime.crud.uca.input.Pre;
 import io.zerows.extension.runtime.crud.uca.op.Agonic;
-import io.zerows.extension.runtime.skeleton.osgi.spi.ui.ApeakMy;
-import io.zerows.extension.runtime.skeleton.osgi.spi.web.Seeker;
+import io.zerows.extension.skeleton.spi.UiApeakMy;
+import io.zerows.extension.skeleton.spi.ScSeeker;
 import io.zerows.program.Ux;
 
 /**
@@ -65,7 +65,7 @@ class ViewMy implements Agonic {
      *      1. 缓存的 key 值为 {module}:{connect}:{HashCode (input)}
      *         - 基于 {@link IxMod} 的模型信息
      *         - 请求级：输入专用的哈希值
-     *      2. 提取资源信息依赖 {@link Seeker} 接口，此接口负责提取资源信息
+     *      2. 提取资源信息依赖 {@link ScSeeker} 接口，此接口负责提取资源信息
      * </code></pre>
      *
      * @param input 输入数据
@@ -77,12 +77,12 @@ class ViewMy implements Agonic {
     private Future<JsonObject> fetchResources(final JsonObject input, final ADB jooq, final IxMod in) {
         final String key = in.cached() + ":" + input.hashCode();
         return Rapid.<String, JsonObject>object(KWeb.CACHE.RESOURCE, Agonic.EXPIRED).cached(key,
-            () -> Ux.channel(Seeker.class, JsonObject::new, seeker -> seeker.on(jooq).fetchImpact(input)));
+            () -> Ux.channel(ScSeeker.class, JsonObject::new, seeker -> seeker.on(jooq).fetchImpact(input)));
     }
 
     /**
      * 为了避免不同的模型进行计算，此处也许会引起性能问题，但对用户本身而言，提取个人视图缓存是一个必须步骤
-     * 读取个人视图时访问了 {@link ApeakMy} 接口
+     * 读取个人视图时访问了 {@link UiApeakMy} 接口
      *
      * @param params 参数信息（提取视图的参数信息）
      * @param jooq   Jooq接口，可指定绑定的数据源
@@ -98,7 +98,7 @@ class ViewMy implements Agonic {
              return Rapid.<JsonArray>user(user, CACHE.User.MY_VIEW).cached(key,
                     () -> Ux.channel(ApeakMy.class, JsonArray::new, stub -> stub.join(jooq).fetchMy(params)));
          */
-        return Ux.channel(ApeakMy.class, JsonArray::new, stub -> stub.on(jooq).fetchMy(params));
+        return Ux.channel(UiApeakMy.class, JsonArray::new, stub -> stub.on(jooq).fetchMy(params));
 
     }
 }

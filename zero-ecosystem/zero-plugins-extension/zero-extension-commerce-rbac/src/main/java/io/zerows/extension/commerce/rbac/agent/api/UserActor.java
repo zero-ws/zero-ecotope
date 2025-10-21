@@ -11,7 +11,7 @@ import io.zerows.extension.commerce.rbac.agent.service.business.UserStub;
 import io.zerows.extension.commerce.rbac.agent.service.login.LoginStub;
 import io.zerows.extension.commerce.rbac.eon.Addr;
 import io.zerows.extension.commerce.rbac.uca.acl.relation.Junc;
-import io.zerows.extension.runtime.skeleton.osgi.spi.feature.Trash;
+import io.zerows.extension.skeleton.spi.ExTrash;
 import io.zerows.program.Ux;
 import jakarta.inject.Inject;
 
@@ -83,7 +83,7 @@ public class UserActor {
 
     @Address(Addr.User.DELETE)
     public Future<Boolean> delete(final String key) {
-        return Ux.channelA(Trash.class, () -> this.stub.deleteUser(key),
+        return Ux.channelA(ExTrash.class, () -> this.stub.deleteUser(key),
             tunnel -> Junc.refRights().identAsync(key)
                 .compose(user -> tunnel.backupAsync("sec.user", user))
                 .compose(backup -> this.stub.deleteUser(key)));

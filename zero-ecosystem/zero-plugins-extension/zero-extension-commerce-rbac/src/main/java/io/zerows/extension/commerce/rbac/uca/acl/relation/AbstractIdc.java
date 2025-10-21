@@ -6,8 +6,8 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.extension.runtime.skeleton.exception._60045Exception400SigmaMissing;
-import io.zerows.extension.runtime.skeleton.osgi.spi.environment.Modeling;
+import io.zerows.extension.skeleton.exception._60045Exception400SigmaMissing;
+import io.zerows.extension.skeleton.spi.ScModeling;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -21,7 +21,7 @@ public abstract class AbstractIdc implements IdcStub {
     }
 
     protected Future<JsonArray> model(final JsonArray userJson) {
-        return Ux.channelA(Modeling.class, () -> Ux.future(userJson), stub -> stub.keyAsync(this.sigma, userJson).compose(keyMap -> {
+        return Ux.channelA(ScModeling.class, () -> Ux.future(userJson), stub -> stub.keyAsync(this.sigma, userJson).compose(keyMap -> {
             /* Reference 修改，此处修改 userJson 相关数据 */
             Ut.itJArray(userJson).forEach(user -> {
                 /* Fix issue of `modelKey` injection */

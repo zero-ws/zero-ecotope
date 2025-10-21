@@ -7,9 +7,9 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.commerce.erp.domain.tables.daos.EEmployeeDao;
 import io.zerows.extension.commerce.erp.domain.tables.pojos.EEmployee;
-import io.zerows.extension.runtime.skeleton.eon.em.BizInternal;
-import io.zerows.extension.runtime.skeleton.osgi.spi.business.ExUser;
-import io.zerows.extension.runtime.skeleton.osgi.spi.feature.Trash;
+import io.zerows.extension.skeleton.common.KeBiz;
+import io.zerows.extension.skeleton.spi.ExUser;
+import io.zerows.extension.skeleton.spi.ExTrash;
 import io.zerows.program.Ux;
 import io.zerows.spi.modeler.Indent;
 import io.zerows.support.Ut;
@@ -139,7 +139,7 @@ public class EmployeeService implements EmployeeStub {
     @Override
     public Future<Boolean> deleteAsync(final String key) {
         return this.fetchAsync(key)
-            .compose(Fx.ifNil(() -> Boolean.TRUE, item -> Ux.channelA(Trash.class,
+            .compose(Fx.ifNil(() -> Boolean.TRUE, item -> Ux.channelA(ExTrash.class,
                 () -> this.deleteAsync(key, item),
                 tunnel -> tunnel.backupAsync("res.employee", item)
                     .compose(backup -> this.deleteAsync(key, item)))));
@@ -196,12 +196,12 @@ public class EmployeeService implements EmployeeStub {
             if (Ut.isNil(input)) {
                 // fix issue: https://gitee.com/silentbalanceyh/vertx-zero-scaffold/issues/I6W2L9
                 final JsonObject filters = new JsonObject();
-                filters.put(KName.IDENTIFIER, BizInternal.TypeUser.employee.name());
+                filters.put(KName.IDENTIFIER, KeBiz.TypeUser.employee.name());
                 return executor.apply(user, filters);
                 //return Ux.future(new JsonObject());
             } else {
                 final JsonObject filters = new JsonObject();
-                filters.put(KName.IDENTIFIER, BizInternal.TypeUser.employee.name());
+                filters.put(KName.IDENTIFIER, KeBiz.TypeUser.employee.name());
                 filters.put(KName.SIGMA, input.getString(KName.SIGMA));
                 filters.put(KName.KEY, input.getString(KName.KEY));
                 return executor.apply(user, filters);

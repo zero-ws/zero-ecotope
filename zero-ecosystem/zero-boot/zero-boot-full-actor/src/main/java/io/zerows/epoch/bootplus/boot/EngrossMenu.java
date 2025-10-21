@@ -5,7 +5,7 @@ import io.zerows.epoch.boot.Electy;
 import io.zerows.epoch.boot.ZeroLauncher;
 import io.zerows.epoch.bootplus.exploit.QSiteMap;
 import io.zerows.epoch.constant.KName;
-import io.zerows.extension.runtime.skeleton.refine.Ke;
+import io.zerows.extension.skeleton.common.Ke;
 import io.zerows.support.Ut;
 
 /**

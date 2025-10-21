@@ -8,7 +8,7 @@ import io.zerows.epoch.metadata.UObject;
 import io.zerows.extension.runtime.ambient.bootstrap.AtConfig;
 import io.zerows.extension.runtime.ambient.bootstrap.AtPin;
 import io.zerows.extension.runtime.ambient.eon.AtMsg;
-import io.zerows.extension.runtime.skeleton.osgi.spi.extension.Init;
+import io.zerows.extension.skeleton.spi.ExInit;
 import io.zerows.plugins.office.excel.ExcelClient;
 import io.zerows.plugins.office.excel.ExcelInfix;
 import io.zerows.program.Ux;
@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 
 import static io.zerows.extension.runtime.ambient.util.At.LOG;
 
-public class DatumInit implements Init {
+public class DatumInit implements ExInit {
 
     private static final LogOf LOGGER = LogOf.get(DatumInit.class);
     private static final AtConfig CONFIG = AtPin.getConfig();
@@ -38,7 +38,7 @@ public class DatumInit implements Init {
     }
 
     public Future<JsonObject> doExtension(final JsonObject appJson) {
-        final Init loader = AtPin.getLoader();
+        final ExInit loader = AtPin.getLoader();
         if (Objects.isNull(loader)) {
             return Ux.future(appJson);
         } else {

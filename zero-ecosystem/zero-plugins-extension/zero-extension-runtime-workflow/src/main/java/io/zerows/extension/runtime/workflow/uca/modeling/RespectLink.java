@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.extension.runtime.skeleton.osgi.spi.feature.Linkage;
+import io.zerows.extension.skeleton.spi.ExLinkage;
 import io.zerows.extension.runtime.workflow.atom.runtime.WRecord;
 import io.zerows.extension.runtime.workflow.domain.tables.pojos.WTicket;
 import io.zerows.program.Ux;
@@ -39,7 +39,7 @@ public class RespectLink extends AbstractRespect {
          */
         final JsonArray keys = Ut.valueJArray(dataArray, KName.KEY);
         condition.put("key,!i", keys);
-        return Ux.channelA(Linkage.class, Ux::futureA, (link) ->
+        return Ux.channelA(ExLinkage.class, Ux::futureA, (link) ->
             // Linkage Removing / Create
             link.unlink(condition).compose(deleted -> link.link(dataArray, false))
         );
@@ -82,6 +82,6 @@ public class RespectLink extends AbstractRespect {
         final WTicket ticket = record.ticket();
         final JsonObject condition = this.queryTpl();
         condition.put(KName.SOURCE_KEY, ticket.getKey());
-        return Ux.channelA(Linkage.class, Ux::futureA, link -> link.fetch(condition));
+        return Ux.channelA(ExLinkage.class, Ux::futureA, link -> link.fetch(condition));
     }
 }

@@ -11,8 +11,8 @@ import io.zerows.extension.runtime.ambient.domain.tables.pojos.XActivityRule;
 import io.zerows.extension.runtime.ambient.eon.em.TubeType;
 import io.zerows.extension.runtime.ambient.exception._80305Exception500IndentMissing;
 import io.zerows.extension.runtime.ambient.uca.darkly.Tube;
-import io.zerows.extension.runtime.skeleton.osgi.spi.feature.Valve;
-import io.zerows.extension.runtime.skeleton.refine.Ke;
+import io.zerows.extension.skeleton.spi.UiValve;
+import io.zerows.extension.skeleton.common.Ke;
 import io.zerows.platform.constant.VName;
 import io.zerows.platform.metadata.KRef;
 import io.zerows.program.Ux;
@@ -34,7 +34,7 @@ import static io.zerows.extension.runtime.ambient.util.At.LOG;
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
-public class ValueRule implements Valve {
+public class ValueRule implements UiValve {
 
     @Override
     public Future<JsonObject> execAsync(final JsonObject data, final JsonObject config) {

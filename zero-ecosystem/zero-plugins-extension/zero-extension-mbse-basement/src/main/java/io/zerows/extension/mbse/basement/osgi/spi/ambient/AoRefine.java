@@ -1,12 +1,12 @@
 package io.zerows.extension.mbse.basement.osgi.spi.ambient;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.extension.runtime.skeleton.osgi.spi.extension.Init;
+import io.zerows.extension.skeleton.spi.ExInit;
 
 /*
  * OOB数据初始化专用接口
  */
-public interface AoRefine extends Init {
+public interface AoRefine extends ExInit {
 
     static AoRefine combine() {
         return Pool.CC_REFINE.pick(CombineRefine::new, CombineRefine.class.getName());

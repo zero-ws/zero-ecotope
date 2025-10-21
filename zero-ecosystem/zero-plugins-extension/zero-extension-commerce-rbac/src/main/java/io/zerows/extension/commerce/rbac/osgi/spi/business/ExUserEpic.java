@@ -12,7 +12,7 @@ import io.zerows.extension.commerce.rbac.domain.tables.daos.SUserDao;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SUser;
 import io.zerows.extension.commerce.rbac.eon.AuthKey;
 import io.zerows.extension.commerce.rbac.uca.acl.relation.Junc;
-import io.zerows.extension.runtime.skeleton.osgi.spi.business.ExUser;
+import io.zerows.extension.skeleton.spi.ExUser;
 
 import java.util.List;
 import java.util.Set;

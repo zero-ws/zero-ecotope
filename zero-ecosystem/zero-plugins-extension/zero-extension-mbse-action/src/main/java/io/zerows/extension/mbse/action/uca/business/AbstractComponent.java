@@ -7,7 +7,7 @@ import io.zerows.component.log.LogOf;
 import io.zerows.epoch.annotations.Contract;
 import io.zerows.epoch.metadata.XHeader;
 import io.zerows.extension.mbse.action.osgi.spi.jet.JtComponent;
-import io.zerows.extension.runtime.skeleton.exception._60045Exception400SigmaMissing;
+import io.zerows.extension.skeleton.exception._60045Exception400SigmaMissing;
 import io.zerows.mbse.metadata.ActIn;
 import io.zerows.mbse.metadata.ActOut;
 import io.zerows.mbse.sdk.Service;

@@ -8,7 +8,7 @@ import io.zerows.epoch.bootplus.extension.scaffold.component.AbstractAdaptor;
 import io.zerows.epoch.bootplus.extension.scaffold.plugin.AspectSwitcher;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
-import io.zerows.extension.runtime.skeleton.refine.Ke;
+import io.zerows.extension.skeleton.common.Ke;
 import io.zerows.mbse.metadata.ActIn;
 import io.zerows.mbse.metadata.ActOut;
 import io.zerows.platform.constant.VName;

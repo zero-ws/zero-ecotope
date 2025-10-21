@@ -6,8 +6,8 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.metadata.KView;
 import io.zerows.extension.mbse.ui.agent.service.column.UiValve;
 import io.zerows.extension.mbse.ui.eon.UiMsg;
-import io.zerows.extension.runtime.skeleton.osgi.spi.ui.Anchoret;
-import io.zerows.extension.runtime.skeleton.osgi.spi.ui.Apeak;
+import io.zerows.extension.skeleton.spi.UiAnchoret;
+import io.zerows.extension.skeleton.spi.UiApeak;
 
 import static io.zerows.extension.mbse.ui.util.Ui.LOG;
 
@@ -16,12 +16,12 @@ import static io.zerows.extension.mbse.ui.util.Ui.LOG;
  * 1. Dynamic Apeak
  * 2. Static Apeak
  */
-public class ExColumnApeak extends Anchoret<Apeak> implements Apeak {
+public class ExColumnApeak extends UiAnchoret<UiApeak> implements UiApeak {
 
     @Override
     public Future<JsonArray> fetchFull(final JsonObject params) {
         LOG.Ui.info(this.getLogger(), UiMsg.COLUMN_FULL, params.encodePrettily());
-        final Boolean dynamic = params.getBoolean(Apeak.ARG0);
+        final Boolean dynamic = params.getBoolean(UiApeak.ARG0);
         /* Ui valve initialization */
         final UiValve valve;
         if (dynamic) {
@@ -30,9 +30,9 @@ public class ExColumnApeak extends Anchoret<Apeak> implements Apeak {
             valve = UiValve.fixed();
         }
         /* Whether this module used dynamic column here */
-        final String identifier = params.getString(Apeak.ARG1);
-        final String sigma = params.getString(Apeak.ARG2);
-        final KView view = KView.smart(params.getValue(Apeak.ARG3));
+        final String identifier = params.getString(UiApeak.ARG1);
+        final String sigma = params.getString(UiApeak.ARG2);
+        final KView view = KView.smart(params.getValue(UiApeak.ARG3));
         return valve.fetchColumn(view, identifier, sigma);
     }
 }

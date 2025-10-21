@@ -11,7 +11,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.XHeader;
 import io.zerows.extension.runtime.integration.agent.service.MessageStub;
 import io.zerows.extension.runtime.integration.eon.Addr;
-import io.zerows.extension.runtime.skeleton.eon.em.EmMessage;
+import io.zerows.extension.skeleton.common.enums.EmMessage;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import jakarta.inject.Inject;

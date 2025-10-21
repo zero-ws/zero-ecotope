@@ -8,7 +8,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.mbse.metadata.ActIn;
 import io.zerows.epoch.metadata.Apt;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
-import io.zerows.extension.runtime.skeleton.refine.Ke;
+import io.zerows.extension.skeleton.common.Ke;
 import io.zerows.support.Ut;
 
 /**

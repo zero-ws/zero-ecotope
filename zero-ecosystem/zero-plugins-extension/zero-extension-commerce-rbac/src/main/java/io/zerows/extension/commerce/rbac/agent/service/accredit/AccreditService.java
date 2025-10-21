@@ -24,7 +24,7 @@ import io.zerows.extension.commerce.rbac.uca.acl.rapier.Quinn;
 import io.zerows.extension.commerce.rbac.uca.logged.ScResource;
 import io.zerows.extension.commerce.rbac.uca.logged.ScUser;
 import io.zerows.extension.commerce.rbac.util.Sc;
-import io.zerows.extension.runtime.skeleton.eon.em.OwnerType;
+import io.zerows.extension.skeleton.common.enums.OwnerType;
 import jakarta.inject.Inject;
 
 import java.util.Objects;

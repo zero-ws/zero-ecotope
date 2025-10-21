@@ -10,7 +10,7 @@ import io.zerows.extension.runtime.crud.eon.IxMsg;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 import io.zerows.extension.runtime.crud.uca.input.Pre;
 import io.zerows.extension.runtime.crud.util.Ix;
-import io.zerows.extension.runtime.skeleton.refine.Ke;
+import io.zerows.extension.skeleton.common.Ke;
 import io.zerows.program.Ux;
 
 import static io.zerows.extension.runtime.crud.util.Ix.LOG;

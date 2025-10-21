@@ -5,9 +5,9 @@ import io.vertx.core.Vertx;
 import io.zerows.epoch.assembly.DI;
 import io.zerows.extension.runtime.ambient.agent.service.file.DocBStub;
 import io.zerows.extension.runtime.ambient.agent.service.file.DocBuilder;
-import io.zerows.extension.runtime.skeleton.osgi.spi.extension.Init;
-import io.zerows.extension.runtime.skeleton.osgi.spi.extension.Prerequisite;
-import io.zerows.extension.runtime.skeleton.refine.Ke;
+import io.zerows.extension.skeleton.spi.ExInit;
+import io.zerows.extension.skeleton.spi.ExPrerequisite;
+import io.zerows.extension.skeleton.common.Ke;
 import io.zerows.program.Ux;
 import io.zerows.specification.app.HAmbient;
 import io.zerows.specification.app.HApp;
@@ -24,15 +24,15 @@ public class AtPin implements HRegistry.Mod<Vertx> {
         return AtConfiguration.getConfig();
     }
 
-    public static Init getInit() {
+    public static ExInit getInit() {
         return AtConfiguration.getInit(getConfig().getInitializer());
     }
 
-    public static Init getLoader() {
+    public static ExInit getLoader() {
         return AtConfiguration.getInit(getConfig().getLoader());
     }
 
-    public static Prerequisite getPrerequisite() {
+    public static ExPrerequisite getPrerequisite() {
         return AtConfiguration.getPrerequisite();
     }
 

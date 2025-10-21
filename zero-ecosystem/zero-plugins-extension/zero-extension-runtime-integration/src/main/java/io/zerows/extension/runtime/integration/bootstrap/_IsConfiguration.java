@@ -5,7 +5,7 @@ import io.zerows.cortex.extension.HExtension;
 import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.extension.runtime.integration.atom.IsConfig;
 import io.zerows.extension.runtime.integration.eon.IsConstant;
-import io.zerows.extension.runtime.skeleton.eon.KeMsg;
+import io.zerows.extension.skeleton.common.KeMsg;
 import io.zerows.platform.ENV;
 import io.zerows.platform.EnvironmentVariable;
 import io.zerows.specification.app.HAmbient;
