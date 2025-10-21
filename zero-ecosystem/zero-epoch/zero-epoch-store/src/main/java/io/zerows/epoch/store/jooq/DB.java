@@ -157,7 +157,7 @@ public class DB {
      */
     @Deprecated
     public static ADB on(final Class<?> clazz, final DataPool pool) {
-        return ADB.of(clazz, pool);
+        return null; // ADB.of(clazz, pool);
     }
 
 
