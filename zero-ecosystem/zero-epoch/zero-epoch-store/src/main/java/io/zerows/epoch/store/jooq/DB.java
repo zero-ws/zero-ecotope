@@ -29,7 +29,7 @@ public class DB {
      * @return 复用或新建的 {@link ADB} 实例
      */
     public static ADB on(final Class<?> clazz) {
-        return ADB.of(clazz, null, null);
+        return ADB.of(clazz, null, DBSActor.ofDBS());
     }
 
     /**

@@ -1,5 +1,6 @@
 package io.zerows.epoch.database.jooq.operation;
 
+import cn.hutool.core.util.StrUtil;
 import io.r2mo.base.dbe.DBS;
 import io.r2mo.base.program.R2Mapping;
 import io.r2mo.base.program.R2Vector;
@@ -25,6 +26,7 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.BiPredicate;
@@ -77,7 +79,13 @@ public class ADB {
      * @return 复用或新建的 {@link ADB} 实例
      */
     public static ADB of(final Class<?> daoCls, final String filename, final DBS dbs) {
-        final R2Vector vector = MMAdapt.of(filename).vector();
+        Objects.requireNonNull(dbs, "[ ZERO ] 传入的数据源不可以为 null");
+        final R2Vector vector;
+        if (StrUtil.isNotBlank(filename)) {
+            vector = MMAdapt.of(filename).vector();
+        } else {
+            vector = null;
+        }
         final String cached = AsyncDBContext.cached(daoCls, dbs, vector);
         return CC_JOOQ.pick(() -> new ADB(daoCls, dbs, vector), cached);
     }
@@ -104,8 +112,19 @@ public class ADB {
     public Future<JsonArray> fetchJAllAsync() {
         return this.dbe().findAllJAsync();
     }
+    // endregion
+
+    // region countAll??? / 统计所有数据条数
+    public Long countAll() {
+        return this.dbe().count().orElse(0L);
+    }
+
+    public Future<Long> countAllAsync() {
+        return this.dbe().countAllAsync();
+    }
 
     // endregion
+
 
     // -------------------- Pojo File --------------------
     // region 旧版 Jooq 操作，逐步迁移中
@@ -1543,18 +1562,6 @@ public class ADB {
     }
 
     // -------------------- Count Operation ------------
-    /*
-     * countAll()
-     * countAllAsync()
-     */
-    public Long countAll() {
-        return this.aggregator.countAll();
-    }
-
-    public Future<Long> countAllAsync() {
-        return this.aggregator.countAllAsync();
-    }
-
     /*
      * count(JsonObject)
      * count(JsonObject, pojo)

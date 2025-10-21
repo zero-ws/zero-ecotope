@@ -82,7 +82,9 @@ public abstract class DBETestSupport extends AppIoTestSupport {
      *
      * @return 启动类
      */
-    protected abstract Class<?> getStartupClass();
+    protected Class<?> getStartupClass() {
+        return this.getClass();
+    }
 
     public ADB db(final Class<?> daoCls) {
         return DB.on(daoCls);
