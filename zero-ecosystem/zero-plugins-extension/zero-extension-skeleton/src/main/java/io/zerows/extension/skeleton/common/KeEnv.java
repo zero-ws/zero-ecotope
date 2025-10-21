@@ -222,10 +222,12 @@ class KeEnv {
             // clazz could not be found, default workflow
             return Ux.future(supplier.get());
         }
-        final ADB jq = DB.on(daoCls);
         final String pojo = safeJ.getString("pojo", null);
+        final ADB jq;
         if (Ut.isNotNil(pojo)) {
-            jq.on(pojo);
+            jq = DB.on(daoCls, pojo);
+        } else {
+            jq = DB.on(daoCls);
         }
         return executor.apply(jq);
     }

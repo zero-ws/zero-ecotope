@@ -7,6 +7,7 @@ import io.vertx.core.MultiMap;
  * For dynamic data source capture here instead of
  * Only one
  */
+@Deprecated
 public interface DS {
     /*
      * Sync method to get `Data Source`

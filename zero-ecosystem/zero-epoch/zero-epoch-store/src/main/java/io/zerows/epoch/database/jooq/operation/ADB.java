@@ -4,8 +4,8 @@ import io.r2mo.base.dbe.DBS;
 import io.r2mo.base.program.R2Mapping;
 import io.r2mo.base.program.R2Vector;
 import io.r2mo.typed.cc.Cc;
+import io.r2mo.vertx.jooq.AsyncDBContext;
 import io.r2mo.vertx.jooq.DBEx;
-import io.r2mo.vertx.jooq.JooqContext;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonArray;
@@ -18,10 +18,8 @@ import io.zerows.epoch.database.jooq.util.JqAnalyzer;
 import io.zerows.epoch.database.jooq.util.JqFlow;
 import io.zerows.epoch.database.jooq.util.JqTool;
 import io.zerows.epoch.metadata.MMAdapt;
-import io.zerows.epoch.store.DBSActor;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.constant.VValue;
-import io.zerows.support.Ut;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -41,60 +39,21 @@ public class ADB {
     /**
      * 直接新版访问 {@link DBEx} 的入口，之后的内容不再访问
      */
-    protected <T> ADB(final Class<T> daoCls, final DBS dbs) {
-        this.dbe = DBEx.of(daoCls, dbs);
+    private <T> ADB(final Class<T> daoCls, final DBS dbs, final R2Vector vector) {
+        this.dbe = DBEx.of(daoCls, dbs, vector);
     }
+
     // endregion
 
-    // region 静态构造方法，只能使用这三种方式构造，且带有绑定额外数据源的功能
+    // region 最终构造包域，所以此方法的访问会被内部访问
 
     /**
-     * 使用默认数据源
-     * <pre>
-     *     1. master                 -> 默认主数据源
-     * </pre>
+     * 工厂方法：基于给定 DAO 类、数据源以及映射文件创建/复用 {@link ADB} 实例。🧩
      *
-     * @param daoCls {@link Class}
+     * <p>流程：先通过映射文件 {@code filename} 构造字段映射向量 {@link R2Vector}，
+     * 再用 {@link AsyncDBContext#cached(Class, DBS, R2Vector)} 生成缓存键，
+     * 最终由 {@link ADB#CC_JOOQ#pick(java.util.function.Supplier, String)} 复用或创建实例。</p>
      *
-     * @return {@link ADB}
-     */
-    public static ADB of(final Class<?> daoCls) {
-        final DBS dbs = DBSActor.ofDBS();
-        return of(daoCls, dbs);
-    }
-
-    /**
-     * 使用指定名称数据源
-     * <pre>
-     *     1. master-history        -> history 数据源
-     *     2. master-workflow       -> workflow 数据源
-     * </pre>
-     *
-     * @param daoCls {@link Class}
-     * @param name   数据源名称
-     *
-     * @return {@link ADB}
-     */
-    public static ADB of(final Class<?> daoCls, final String name) {
-        final DBS dbs = DBSActor.ofDBS(name);
-        return of(daoCls, dbs);
-    }
-
-    /**
-     * 直接使用构造的动态数据源（动态建模中会使用）
-     *
-     * @param daoCls {@link Class}
-     * @param dbs    {@link DBS}
-     *
-     * @return {@link ADB}
-     */
-    public static ADB of(final Class<?> daoCls, final DBS dbs) {
-        final String cached = JooqContext.cached(daoCls, dbs);
-        return CC_JOOQ.pick(() -> new ADB(daoCls, dbs), cached);
-    }
-
-
-    /**
      * 新版引入 {@link MMAdapt} 构造 {@link R2Vector} 实现完整的数据交换映射信息，因此有了此处的 pojoFile 之后，流程
      * 如
      * <pre>
@@ -111,19 +70,17 @@ public class ADB {
      *     2. field ( Class ) -> column ( DB ), 数据类型 {@link R2Mapping}
      * </pre>
      *
-     * @param pojo {@link String}
+     * @param daoCls   DAO 类（通常为 jOOQ 生成的 *Dao 类）
+     * @param dbs      数据源描述对象 {@link DBS}（连接信息、方言等）
+     * @param filename 映射文件名（用于解析并构建 {@link R2Vector} 字段映射）；可指向类路径或绝对路径
      *
-     * @return {@link ADB}
+     * @return 复用或新建的 {@link ADB} 实例
      */
-    public ADB on(final String pojo) {
-        if (Ut.isNil(pojo)) {
-            // 如果没有 pojo 文件和它绑定，则直接取消
-            return this;
-        }
-        this.dbe.vector(MMAdapt.of(pojo).vector());
-        return this;
+    public static ADB of(final Class<?> daoCls, final String filename, final DBS dbs) {
+        final R2Vector vector = MMAdapt.of(filename).vector();
+        final String cached = AsyncDBContext.cached(daoCls, dbs, vector);
+        return CC_JOOQ.pick(() -> new ADB(daoCls, dbs, vector), cached);
     }
-
     // endregion
 
     @SuppressWarnings("all")
@@ -131,7 +88,7 @@ public class ADB {
         return (DBEx<R>) this.dbe;
     }
 
-    // region fetchAll??? / 查询所有数据
+    // region fetchAll??? / 查询所有数据，两种形态：T 和 J
     public <T> List<T> fetchAll() {
         return this.<T>dbe().findAll();
     }
@@ -241,21 +198,12 @@ public class ADB {
         return this.workflow.<T>inputAsync(data).compose(this::insertAsync);
     }
 
-    public <T> Future<T> insertAsync(final JsonObject data, final String pojo) {
-        return JqFlow.create(this.analyzer, pojo).<T>inputAsync(data).compose(this::insertAsync);
-    }
-
     public <T> Future<JsonObject> insertJAsync(final T entity) {
         return this.insertAsync(entity).compose(this.workflow::outputAsync);
     }
 
     public <T> Future<JsonObject> insertJAsync(final JsonObject data) {
         return this.workflow.<T>inputAsync(data).compose(this::insertAsync).compose(this.workflow::outputAsync);
-    }
-
-    public <T> Future<JsonObject> insertJAsync(final JsonObject data, final String pojo) {
-        final JqFlow flow = JqFlow.create(this.analyzer, pojo);
-        return flow.<T>inputAsync(data).compose(this::insertAsync).compose(flow::outputAsync);
     }
 
     /*

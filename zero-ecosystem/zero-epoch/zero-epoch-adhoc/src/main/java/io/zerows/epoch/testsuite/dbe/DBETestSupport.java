@@ -13,6 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -150,5 +152,21 @@ public abstract class DBETestSupport extends AppIoTestSupport {
                 context.failNow(new RuntimeException("Wait interrupted", e));
             }
         }
+    }
+
+    protected void vLog(final String message, final Object... args) {
+        this.log().info("[ \uD83E\uDEBC ] " + message, args);
+    }
+
+    protected void vErr(final String message, final Object... args) {
+        this.log().error("[ \uD83E\uDDA0 ] " + message, args);
+    }
+
+    protected void vErr(final Throwable ex) {
+        this.log().error(ex.getMessage(), ex);
+    }
+
+    private Logger log() {
+        return LoggerFactory.getLogger(this.getClass());
     }
 }

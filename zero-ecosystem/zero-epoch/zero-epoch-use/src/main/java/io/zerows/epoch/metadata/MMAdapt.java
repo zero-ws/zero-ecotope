@@ -33,7 +33,7 @@ public class MMAdapt {
     private MMAdapt(final String filename) {
         this.vector = CC_VECTOR.pick(() -> {
             final String filepath = MessageFormat.format(DEFAULT_YML, filename);
-            log.info("[ ZERO ] 从文件加载 MMVector: {}", filepath);
+            log.info("[ ZERO ] 从文件加载 MMVector: {} / 环境变量 > 当前目录 > 类路径", filepath);
             return R2Vector.of(filepath);
         }, filename);
     }

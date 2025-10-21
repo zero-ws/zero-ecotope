@@ -62,7 +62,7 @@ class SingleDelete implements Operate<Object, Boolean> {
         final KModule switched = IxPin.getActor(point.getCrud());
         final ADB switchedJq = IxPin.jooq(switched, in.envelop());
         // 绑定 pojo
-        switchedJq.on(switched.getPojo());
+        // switchedJq.on(switched.getPojo());
         return switchedJq;
     }
 

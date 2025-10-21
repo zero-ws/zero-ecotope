@@ -6,7 +6,6 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.destine.Hymn;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.ADB;
 import io.zerows.epoch.database.jooq.operation.ADJ;
 import io.zerows.epoch.metadata.KJoin;
 import io.zerows.epoch.store.jooq.DB;
@@ -229,7 +228,7 @@ public class HAtomReference implements HReference {
                 // Static
                 if (Objects.isNull(target)) {
                     // Jooq
-                    return ADB.of(source.getClassDao()).fetchJAsync(condition);
+                    return DB.on(source.getClassDao()).fetchJAsync(condition);
                 } else {
                     // Join
                     return ADJ.of(null)

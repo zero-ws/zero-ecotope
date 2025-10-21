@@ -6,6 +6,7 @@ import io.zerows.epoch.database.jooq.JooqDsl;
 import io.zerows.epoch.database.jooq.JooqInfix;
 import io.zerows.epoch.database.jooq.util.JqAnalyzer;
 import io.zerows.epoch.metadata.MMPojo;
+import io.zerows.epoch.store.DBSActor;
 import io.zerows.platform.exception._60050Exception501NotSupport;
 import org.jooq.Field;
 import org.jooq.Table;
@@ -184,7 +185,7 @@ class JoinStore {
     }
 
     ADB jooq() {
-        return ADB.of(this.firstDao);
+        return ADB.of(this.firstDao, null, DBSActor.ofDBS());
     }
 
     ADB childJooq() {
@@ -193,7 +194,7 @@ class JoinStore {
             .collect(Collectors.toSet());
         if (1 == analyzers.size()) {
             final Class<?> daoCls = analyzers.iterator().next();
-            return ADB.of(daoCls);
+            return ADB.of(daoCls, null, DBSActor.ofDBS());
         } else {
             throw new _60050Exception501NotSupport(this.getClass());
         }

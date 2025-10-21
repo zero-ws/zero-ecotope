@@ -56,7 +56,7 @@ class DataSetTable extends AbstractDataSet {
         this.logger().info("Report processing for table = {}, Cond: {}",
             this.connect.getTable(), parameters.encode());
         // 提取 UxJooq
-        final ADB jq = DB.bridge(this.connect);
+        final ADB jq = DB.on(this.connect);
         if (parameters.getBoolean("") != null) {
             if (!parameters.getBoolean("")) {
                 return jq.fetchJOrAsync(parameters).compose(data -> this.loadChildren(data, this.children));

@@ -62,9 +62,11 @@ public class DpmDao implements Dpm {
             return null;
         } else {
             final JsonObject config = source.getPluginConfig();
-            final ADB jooq = DB.on(daoCls);
+            final ADB jooq;
             if (config.containsKey("pojo")) {
-                jooq.on(config.getString("pojo"));
+                jooq = DB.on(daoCls, config.getString("pojo"));
+            } else {
+                jooq = DB.on(daoCls);
             }
             return jooq;
         }

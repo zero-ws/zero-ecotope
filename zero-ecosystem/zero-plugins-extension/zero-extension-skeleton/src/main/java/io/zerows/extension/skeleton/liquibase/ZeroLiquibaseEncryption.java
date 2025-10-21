@@ -1,7 +1,6 @@
 package io.zerows.extension.skeleton.liquibase;
 
 import io.r2mo.base.secure.EDCrypto;
-import io.r2mo.jce.component.secure.CryptoDatabase;
 import io.zerows.epoch.constant.KName;
 import io.zerows.platform.ENV;
 import lombok.extern.slf4j.Slf4j;
@@ -10,6 +9,11 @@ import java.util.Properties;
 import java.util.Set;
 
 /**
+ * <pre>
+ *     1. 处理环境变量
+ *     2. 处理密码解密
+ * </pre>
+ *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 @Slf4j
@@ -33,24 +37,11 @@ public class ZeroLiquibaseEncryption extends Properties {
         final String envValue = ENV.parseVariable(wrapValue);
         final String finalValue;
         if (KName.PASSWORD.equals(paramK)) {
-            finalValue = this.decryptPassword(envValue);
+            finalValue = EDCrypto.decryptPassword(envValue);
         } else {
             finalValue = wrapValue;
         }
         log.info("[ ZERO ] 处理的属性键值对：{} = {}", paramK, finalValue);
         return super.put(paramK, finalValue);
-    }
-
-    private String decryptPassword(final String wrapValue) {
-        if (128 > wrapValue.length()) {
-            // 明文密码，直接返回
-            return wrapValue;
-        }
-        try {
-            final EDCrypto crypto = new CryptoDatabase();
-            return crypto.decrypt(wrapValue);
-        } catch (final Throwable ex) {
-            return wrapValue;
-        }
     }
 }

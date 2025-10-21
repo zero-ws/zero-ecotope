@@ -222,12 +222,12 @@ class SheetImport {
 
     private ADB jooq(final ExTable table) {
         final MDConnect connect = table.getConnect();
-        final ADB jooq = DB.on(connect.getDao());
-        if (null != jooq) {
-            final String pojoFile = connect.getPojoFile();
-            if (Ut.isNotNil(pojoFile)) {
-                jooq.on(pojoFile);
-            }
+        final String pojoFile = connect.getPojoFile();
+        final ADB jooq;
+        if (Ut.isNotNil(pojoFile)) {
+            jooq = DB.on(connect.getDao(), pojoFile);
+        } else {
+            jooq = DB.on(connect.getDao());
         }
         return jooq;
     }
