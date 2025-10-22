@@ -79,10 +79,9 @@ class TwineExtension implements ScTwine<SUser> {
         return TwineQr.normalize(qr, query)
             .compose(queryJ ->
                 DB.on(Join.of(
-                        SUserDao.class,
-                        qr.getClassDao()
-                    ), KName.MODEL_KEY
-                ).searchAsync(queryJ)
+                    SUserDao.class, KName.MODEL_KEY,
+                    qr.getClassDao()
+                )).searchAsync(queryJ)
             )
             // Connect to `groups`
             .compose(this::connect);

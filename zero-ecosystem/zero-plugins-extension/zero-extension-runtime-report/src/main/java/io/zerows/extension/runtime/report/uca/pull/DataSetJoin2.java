@@ -9,7 +9,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.cortex.extension.HExtension;
 import io.zerows.epoch.basicore.MDConnect;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.ADJ;
+import io.zerows.epoch.store.jooq.ADJ;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;

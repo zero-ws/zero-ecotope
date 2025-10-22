@@ -8,14 +8,15 @@ import io.r2mo.typed.json.jackson.ClassSerializer;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.aop.Aspect;
 import io.zerows.component.destine.Hymn;
-import io.zerows.epoch.database.jooq.JooqPin;
 import io.zerows.epoch.metadata.KField;
 import io.zerows.epoch.metadata.KJoin;
 import io.zerows.epoch.metadata.KTransform;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.integrated.jackson.JsonObjectDeserializer;
 import io.zerows.integrated.jackson.JsonObjectSerializer;
 import io.zerows.platform.enums.EmDS;
 import io.zerows.support.Ut;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -44,6 +45,7 @@ import java.util.Objects;
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Data
 public class KModule implements Serializable {
     /**
      * 模块名称，此名称并非模型的 identifier，而是 /api/:actor 中的 actor 参数，最终会转换成 API 定义中的路径，需要注意的是此路径在整个容器环境中都是唯一的，且您的项目一旦启用了 zero-crud 之后，此名称必须是全容器中唯一的，而且开发人员必须特别熟悉 CRUD 中提供的十五个标准化接口，否则会导致 RESTful 接口规范的冲突。
@@ -147,22 +149,6 @@ public class KModule implements Serializable {
      */
     private JsonObject aop;
 
-    public KField getField() {
-        return this.field;
-    }
-
-    public void setField(final KField field) {
-        this.field = field;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(final String name) {
-        this.name = name;
-    }
-
     /**
      * 切换 identifier 的提取优先级，旧版是以 {@link KColumn} 中为主
      * <pre><code>
@@ -193,55 +179,14 @@ public class KModule implements Serializable {
         return this;
     }
 
-    public String getPojo() {
-        return this.pojo;
-    }
-
-    public void setPojo(final String pojo) {
-        this.pojo = pojo;
-    }
-
-
-    public Class<?> getDaoCls() {
-        return this.daoCls;
-    }
-
-    public void setDaoCls(final Class<?> daoCls) {
-        this.daoCls = daoCls;
-    }
-
-    public JsonObject getHeader() {
-        return this.header;
-    }
-
-    public void setHeader(final JsonObject header) {
-        this.header = header;
-    }
-
-    public KColumn getColumn() {
-        return this.column;
-    }
-
-    public void setColumn(final KColumn column) {
-        this.column = column;
-    }
-
     public String getTable() {
         Objects.requireNonNull(this.daoCls);
-        return JooqPin.initTable(this.daoCls);
+        return DB.on(this.daoCls).metaTable(); // JooqPin.initTable(this.daoCls);
     }
 
     public Class<?> getPojoCls() {
         Objects.requireNonNull(this.daoCls);
-        return JooqPin.initPojo(this.daoCls);
-    }
-
-    public KJoin getConnect() {
-        return this.connect;
-    }
-
-    public void setConnect(final KJoin connect) {
-        this.connect = connect;
+        return DB.on(this.daoCls).metaEntity(); // JooqPin.initPojo(this.daoCls);
     }
 
     public KJoin.Point getConnect(final String identifier) {
@@ -266,30 +211,6 @@ public class KModule implements Serializable {
         } else {
             this.mode = mode.name();
         }
-    }
-
-    public KTransform getTransform() {
-        return this.transform;
-    }
-
-    public void setTransform(final KTransform transform) {
-        this.transform = transform;
-    }
-
-    public String getModeKey() {
-        return this.modeKey;
-    }
-
-    public void setModeKey(final String modeKey) {
-        this.modeKey = modeKey;
-    }
-
-    public JsonObject getAop() {
-        return this.aop;
-    }
-
-    public void setAop(final JsonObject aop) {
-        this.aop = aop;
     }
 
     @Override

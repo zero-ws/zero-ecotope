@@ -3,9 +3,10 @@ package io.zerows.mbse;
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.destine.Hymn;
-import io.zerows.epoch.database.jooq.operation.ADJ;
 import io.zerows.epoch.metadata.KJoin;
+import io.zerows.epoch.store.jooq.ADJ;
 import io.zerows.epoch.store.jooq.DB;
+import io.zerows.epoch.store.jooq.Join;
 import io.zerows.mbse.metadata.KModule;
 import io.zerows.support.Ut;
 
@@ -39,7 +40,6 @@ class HOneJoin implements HOne<ADJ> {
          * - 父主表：（动态选择）直接使用主键连接
          * - 父从表：（静态唯一选择）使用 keyJoin 连接
          */
-        final ADJ dao = DB.join();
         final KJoin join = module.getConnect();
         final KJoin.Point source = join.getSource();
 
@@ -52,15 +52,8 @@ class HOneJoin implements HOne<ADJ> {
          * pojo 文件为 null 或 “”，则直接跳过绑定阶段。
          */
         final String keyJoin = source.getKeyJoin();
-        if (Objects.isNull(keyJoin)) {
-            dao.add(module.getDaoCls());                // 主键连接
-        } else {
-            dao.add(module.getDaoCls(), keyJoin);       // keyJoin连接
-        }
-        final String pojoS = module.getPojo();
-        dao.pojo(module.getDaoCls(), pojoS);
 
-
+        final Join dbJoin = Join.of().from(module.getDaoCls(), keyJoin);                // LEFT
         /*
          * 构造 Hymn 接口（String模式），直接根据 identifier 解析连接点相关信息，然后执行连接点
          * 的 JOIN 设置，此处连接点是根据 connect 中的 identifier 计算而得，并且在 JOIN 模式下
@@ -75,19 +68,21 @@ class HOneJoin implements HOne<ADJ> {
         final KJoin.Point target = hymn.pointer(connect.identifier());
         Objects.requireNonNull(target);
         final Class<?> daoCls = connect.getDaoCls();
-        dao.join(daoCls, target.getKeyJoin());
+        dbJoin.to(daoCls, target.getKeyJoin());                                         // RIGHT
 
+
+        // 绑定 Pojo
+        final String pojoS = module.getPojo();
+        final String pojoT = connect.getPojo();
+        final ADJ dao = DB.on(dbJoin, pojoS, pojoT);                                    // POJO Configure 配置
 
         /*
          * 别名解析，直接解析 synonym 中的内容，然后执行别名绑定，此处的别名绑定是针对当前模块的别名绑定
          */
         final JsonObject synonym = target.getSynonym();
-        Ut.<String>itJObject(synonym, (aliasField, field) -> dao.alias(daoCls, field, aliasField));
-
-
-        // 绑定 Pojo
-        final String pojoT = connect.getPojo();
-        dao.pojo(connect.getDaoCls(), pojoT);
+        Ut.<String>itJObject(synonym,
+            // 字段匿名处理
+            (aliasField, field) -> dao.alias(daoCls, field, aliasField));
         return dao;
     }
 }

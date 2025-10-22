@@ -35,9 +35,9 @@ public class TaskService implements TaskStub {
     public Future<JsonObject> fetchQueue(final JsonObject condition) {
         final JsonObject combine = Ut.irAndQH(condition, KName.Flow.FLOW_END, Boolean.FALSE);
         return DB.on(Join.of(
-                WTodoDao.class,
+                WTodoDao.class, KName.Flow.TRACE_ID,
                 WTicketDao.class
-            ), KName.Flow.TRACE_ID)
+            ))
             .alias(WTicketDao.class, Map.of(
                 KName.KEY, KName.Flow.TRACE_KEY,
                 KName.SERIAL, KName.Flow.TRACE_SERIAL,

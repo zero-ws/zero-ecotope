@@ -6,7 +6,6 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.destine.Hymn;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.ADJ;
 import io.zerows.epoch.metadata.KJoin;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.epoch.store.jooq.Join;
@@ -232,10 +231,14 @@ public class HAtomReference implements HReference {
                     return DB.on(source.getClassDao()).fetchJAsync(condition);
                 } else {
                     // Join
-                    return ADJ.of(null)
-                        .add(source.getClassDao(), source.getKeyJoin())
-                        .join(target.getClassDao(), target.getKeyJoin())
-                        .fetchAsync(condition);
+                    return DB.on(Join.of(
+                        source.getClassDao(), source.getKeyJoin(),
+                        target.getClassDao(), target.getKeyJoin()
+                    )).fetchAsync(condition);
+                    //                    return ADJ.of(null)
+                    //                        .add(source.getClassDao(), source.getKeyJoin())
+                    //                        .join(target.getClassDao(), target.getKeyJoin())
+                    //                        .fetchAsync(condition);
                 }
             } else {
                 // Dynamic
@@ -262,10 +265,9 @@ public class HAtomReference implements HReference {
                 } else {
                     // Join
                     return DB.on(Join.of(
-                            source.getClassDao(),
-                            target.getClassDao()
-                        ), source.getKeyJoin(), target.getKeyJoin())
-                        .fetch(condition);
+                        source.getClassDao(), source.getKeyJoin(),
+                        target.getClassDao(), target.getKeyJoin()
+                    )).fetch(condition);
                     //                    return DB.join()
                     //                        .add(source.getClassDao(), source.getKeyJoin())
                     //                        .join(target.getClassDao(), target.getKeyJoin())

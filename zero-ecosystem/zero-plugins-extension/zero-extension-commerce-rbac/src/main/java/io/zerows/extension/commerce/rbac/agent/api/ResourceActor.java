@@ -34,10 +34,9 @@ public class ResourceActor {
          */
         log.info("[ ZMOD ] 输入的查询条件：{}", query.encode());
         return DB.on(Join.of(
-                SResourceDao.class,
-                SActionDao.class
-            ), null, "resourceId")
-            .searchAsync(query);
+            SResourceDao.class,
+            SActionDao.class, "resourceId"
+        )).searchAsync(query);
         //        return DB.join()
         //            /*
         //             * Join in jooq here:

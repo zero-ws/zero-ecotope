@@ -2,8 +2,8 @@ package io.zerows.extension.runtime.crud.bootstrap;
 
 import io.vertx.core.Vertx;
 import io.zerows.cortex.metadata.WebRule;
-import io.zerows.epoch.database.jooq.operation.ADJ;
 import io.zerows.epoch.store.jooq.ADB;
+import io.zerows.epoch.store.jooq.ADJ;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 import io.zerows.extension.skeleton.common.Ke;

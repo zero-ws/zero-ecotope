@@ -43,10 +43,6 @@ public class ADB {
         this.metadata = this.dbe.metadata();
     }
 
-    public AsyncMeta metadata() {
-        return this.dbe.metadata();
-    }
-
     public ConcurrentMap<String, Class<?>> metaTypes() {
         if (Objects.isNull(this.metadata)) {
             return new ConcurrentHashMap<>();
@@ -54,12 +50,16 @@ public class ADB {
         return this.metadata.metaTypes();
     }
 
-    public String table() {
+    public String metaTable() {
         final Table<?> table = this.metadata.metaTable();
         if (Objects.isNull(table)) {
             return "(Unknown)";
         }
         return table.getName();
+    }
+
+    public Class<?> metaEntity() {
+        return this.metadata.metaEntity();
     }
     // endregion
 
@@ -94,7 +94,7 @@ public class ADB {
      *
      * @return 复用或新建的 {@link ADB} 实例
      */
-    public static ADB of(final Class<?> daoCls, final String filename, final DBS dbs) {
+    static ADB of(final Class<?> daoCls, final String filename, final DBS dbs) {
         Objects.requireNonNull(dbs, "[ ZERO ] 传入的数据源不可以为 null");
         final R2Vector vector;
         if (StrUtil.isNotBlank(filename)) {

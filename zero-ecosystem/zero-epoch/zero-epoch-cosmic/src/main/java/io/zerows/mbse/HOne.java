@@ -3,8 +3,8 @@ package io.zerows.mbse;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.database.jooq.operation.ADJ;
 import io.zerows.epoch.store.jooq.ADB;
+import io.zerows.epoch.store.jooq.ADJ;
 import io.zerows.mbse.metadata.KModule;
 
 import java.util.concurrent.ConcurrentMap;
