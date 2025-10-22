@@ -1,15 +1,18 @@
 package io.zerows.extension.mbse.basement.uca.query;
 
+import io.r2mo.base.dbe.syntax.QSorter;
+import io.r2mo.base.dbe.syntax.QTree;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.LogOf;
 import io.zerows.component.qr.Criteria;
-import io.zerows.component.qr.Sorter;
-import io.zerows.component.qr.syntax.QTree;
 import io.zerows.extension.mbse.basement.atom.element.DataMatrix;
 import io.zerows.extension.mbse.basement.atom.element.DataTpl;
 import io.zerows.extension.mbse.basement.uca.jooq.internal.Jq;
-import org.jooq.*;
+import lombok.extern.slf4j.Slf4j;
+import org.jooq.Condition;
+import org.jooq.Field;
+import org.jooq.OrderField;
 import org.jooq.Record;
+import org.jooq.Table;
 import org.jooq.impl.DSL;
 
 import java.util.ArrayList;
@@ -18,25 +21,22 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
 
-import static io.zerows.extension.mbse.basement.util.Ao.LOG;
-
+@Slf4j
 class DirectIngest implements Ingest {
-
-    private static final LogOf LOGGER = LogOf.get(DirectIngest.class);
 
     @Override
     public Condition onCondition(final DataTpl tpl,
                                  final Criteria criteria) {
         /* 构造查询树 */
-        final QTree tree = QTree.create(criteria);
-        LOG.SQL.info(tree.hasValue(), LOGGER, "（Direct模式）查询分析树：\n{0}", tree.toString());
+        final QTree tree = QTree.of(criteria.toJson());
+        log.info("[ MBSE ]（Direct模式）查询分析树：\n{}", tree);
         final DataMatrix matrix = this.getMatrix(tpl);
         return QVisitor.analyze(tree, matrix);
     }
 
     @Override
     @SuppressWarnings("all")
-    public List<OrderField> onOrder(final DataTpl tpl, final Sorter sorter) {
+    public List<OrderField> onOrder(final DataTpl tpl, final QSorter sorter) {
         final List<OrderField> orders = new ArrayList<>();
         final JsonObject data = sorter.toJson();
         for (final String field : data.fieldNames()) {
@@ -47,7 +47,7 @@ class DirectIngest implements Ingest {
                 orders.add(isAsc ? column.asc() : column.desc());
             }
         }
-        LOG.SQL.info(0 < orders.size(), LOGGER, "（Direct模式）排序条件：{0}, size = {1}", data.encode(), orders.size());
+        log.info("[ MBSE ]（Direct模式）排序条件：{0}, size = {1}", data.encode(), orders.size());
         return orders;
     }
 

@@ -1,4 +1,4 @@
-package io.zerows.component.qr.syntax;
+package io.zerows.component.qr;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
@@ -10,17 +10,17 @@ import java.util.function.BiConsumer;
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
-public interface IrDo {
+interface Analyzer {
 
     /**
      * Create new QrDo stored.
      *
      * @param data {@link io.vertx.core.json.JsonObject} Input json object.
      *
-     * @return {@link IrDo}
+     * @return {@link Analyzer}
      */
-    static IrDo create(final JsonObject data) {
-        return new IrAnalyzer(data);
+    static Analyzer create(final JsonObject data) {
+        return new AnalyzerImpl(data);
     }
 
     /**
@@ -33,7 +33,7 @@ public interface IrDo {
      * @return {@link java.lang.Boolean}
      */
     static boolean isComplex(final JsonObject source) {
-        return IrAnalyzer.isComplex(source);
+        return AnalyzerImpl.isComplex(source);
     }
 
     @SuppressWarnings("all")
@@ -58,25 +58,25 @@ public interface IrDo {
      * @param fieldExpr {@link java.lang.String}
      * @param value     {@link java.lang.Object}
      *
-     * @return {@link IrDo}
+     * @return {@link Analyzer}
      */
-    IrDo save(String fieldExpr, Object value);
+    Analyzer save(String fieldExpr, Object value);
 
     /**
      * @param fieldExpr {@link java.lang.String} Removed fieldExpr
      * @param fully     {@link java.lang.Boolean} Removed fully or ?
      *
-     * @return {@link IrDo}
+     * @return {@link Analyzer}
      */
-    IrDo remove(String fieldExpr, boolean fully);
+    Analyzer remove(String fieldExpr, boolean fully);
 
     /**
      * @param fieldExpr {@link java.lang.String}
      * @param value     {@link java.lang.Object}
      *
-     * @return {@link IrDo}
+     * @return {@link Analyzer}
      */
-    IrDo update(String fieldExpr, Object value);
+    Analyzer update(String fieldExpr, Object value);
 
     /**
      * @param field    {@link java.lang.String} The field name

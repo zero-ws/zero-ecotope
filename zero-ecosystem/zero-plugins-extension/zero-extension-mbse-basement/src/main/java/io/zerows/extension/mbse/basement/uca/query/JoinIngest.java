@@ -1,10 +1,9 @@
 package io.zerows.extension.mbse.basement.uca.query;
 
+import io.r2mo.base.dbe.syntax.QSorter;
+import io.r2mo.base.dbe.syntax.QTree;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.LogOf;
 import io.zerows.component.qr.Criteria;
-import io.zerows.component.qr.Sorter;
-import io.zerows.component.qr.syntax.QTree;
 import io.zerows.extension.mbse.basement.atom.Schema;
 import io.zerows.extension.mbse.basement.atom.element.DataMatrix;
 import io.zerows.extension.mbse.basement.atom.element.DataTpl;
@@ -12,19 +11,25 @@ import io.zerows.extension.mbse.basement.domain.tables.pojos.MField;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MJoin;
 import io.zerows.extension.mbse.basement.uca.jooq.internal.Jq;
 import io.zerows.extension.mbse.basement.uca.metadata.AoSentence;
-import org.jooq.*;
+import lombok.extern.slf4j.Slf4j;
+import org.jooq.Condition;
+import org.jooq.Field;
+import org.jooq.OrderField;
 import org.jooq.Record;
+import org.jooq.Table;
 import org.jooq.impl.DSL;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-import static io.zerows.extension.mbse.basement.util.Ao.LOG;
-
+@Slf4j
 class JoinIngest implements Ingest {
 
-    private static final LogOf LOGGER = LogOf.get(JoinIngest.class);
     private transient AoSentence sentence;
 
     @Override
@@ -32,8 +37,8 @@ class JoinIngest implements Ingest {
                                  final Criteria criteria,
                                  final ConcurrentMap<String, String> aliasMap) {
         /* 构造查询树 */
-        final QTree tree = QTree.create(criteria);
-        LOG.SQL.info(tree.hasValue(), LOGGER, "（Join模式）查询分析树：\n{0}", tree.toString());
+        final QTree tree = QTree.of(criteria.toJson());
+        log.info("[ MBSE ]（Join模式）查询分析树：\n{}", tree);
         /* 抽取Tpl中的查询条件，Join模式考虑多表 */
         final ConcurrentMap<String, DataMatrix> matrixs = tpl.matrixData();
         final ConcurrentMap<String, String> prefixMap = this.calculatePrefix(matrixs, aliasMap);
@@ -73,7 +78,7 @@ class JoinIngest implements Ingest {
              * 直接使用自然连接
              * join 中的 priority 全部为 null 的情况，直接使用自然连接
              */
-            LOG.SQL.info(LOGGER, "连接模式: Nature（自然连接）");
+            log.info("[ MBSE ] 连接模式: Nature（自然连接）");
             return Jq.joinNature(aliasMap);
         } else {
             /*
@@ -109,7 +114,7 @@ class JoinIngest implements Ingest {
             /*
              * 列专用处理
              */
-            LOG.SQL.info(LOGGER, "连接模式: Left（左连接）");
+            log.info("[ MBSE ] 连接模式: Left（左连接）");
             return Jq.joinLeft(primary, joinedCols, aliasMap);
         }
     }
@@ -117,7 +122,7 @@ class JoinIngest implements Ingest {
     @Override
     @SuppressWarnings("all")
     public List<OrderField> onOrder(final DataTpl tpl,
-                                    final Sorter sorter,
+                                    final QSorter sorter,
                                     final ConcurrentMap<String, String> aliasMap) {
         final List<OrderField> orders = new ArrayList<>();
         final JsonObject data = sorter.toJson();
@@ -129,7 +134,7 @@ class JoinIngest implements Ingest {
                 orders.add(isAsc ? column.asc() : column.desc());
             }
         }
-        LOG.SQL.info(0 < orders.size(), LOGGER, "（Join模式）排序条件：{0}, size = {1}", data.encode(), orders.size());
+        log.info("[ MBSE ]（Join模式）排序条件：{0}, size = {1}", data.encode(), orders.size());
         return orders;
     }
 

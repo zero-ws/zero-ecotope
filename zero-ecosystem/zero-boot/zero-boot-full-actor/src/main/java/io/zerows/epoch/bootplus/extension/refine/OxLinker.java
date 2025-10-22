@@ -3,7 +3,6 @@ package io.zerows.epoch.bootplus.extension.refine;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.qr.Criteria;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.program.Ux;
 import io.zerows.specification.modeling.HRecord;
@@ -23,7 +22,7 @@ class OxLinker {
         final String field, final Object value) {
         final JsonObject criteria = new JsonObject();
         criteria.put(field, value);
-        return OxTo.toDao(atom.ark().sigma(), identifier).fetchOneAsync(Criteria.create(criteria));
+        return OxTo.toDao(atom.ark().sigma(), identifier).fetchOneAsync(criteria);
     }
 
     static Future<HRecord[]> viGet(

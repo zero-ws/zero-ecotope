@@ -2,9 +2,6 @@ package io.zerows.component.qr;
 
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.qr.syntax.Ir;
-import io.zerows.component.qr.syntax.IrDo;
-import io.zerows.component.qr.syntax.IrItem;
 import io.zerows.platform.exception._60024Exception500QueryMetaNull;
 
 import java.io.Serializable;
@@ -20,7 +17,6 @@ import java.util.function.BiConsumer;
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
-@Deprecated
 public class Criteria implements Serializable {
     /**
      * The mode of current criteria condition.
@@ -32,7 +28,7 @@ public class Criteria implements Serializable {
     /**
      * The LINEAR/TREE analyzer.
      */
-    private final transient IrDo analyzer;
+    private final transient Analyzer analyzer;
 
     /**
      * Create criteria based on json object.
@@ -42,12 +38,12 @@ public class Criteria implements Serializable {
     private Criteria(final JsonObject data) {
         Fn.jvmKo(Objects.isNull(data), _60024Exception500QueryMetaNull.class);
         assert data != null : "If null dot, the exception will be thrown out.";
-        if (IrDo.isComplex(data)) {
+        if (Analyzer.isComplex(data)) {
             this.mode = Ir.Mode.TREE;
         } else {
             this.mode = Ir.Mode.LINEAR;
         }
-        this.analyzer = IrDo.create(data);
+        this.analyzer = Analyzer.create(data);
     }
 
     /**

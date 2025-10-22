@@ -1,11 +1,11 @@
 package io.zerows.extension.mbse.basement.uca.query;
 
-import io.zerows.platform.enums.modeling.EmModel;
+import io.r2mo.base.dbe.syntax.QSorter;
 import io.zerows.component.qr.Criteria;
-import io.zerows.component.qr.Sorter;
 import io.zerows.extension.mbse.basement.atom.element.DataTpl;
 import io.zerows.extension.mbse.basement.exception._80503Exception501IngestImplement;
 import io.zerows.extension.mbse.basement.uca.metadata.AoSentence;
+import io.zerows.platform.enums.modeling.EmModel;
 import org.jooq.Condition;
 import org.jooq.OrderField;
 import org.jooq.Record;
@@ -43,7 +43,7 @@ public interface Ingest {
      */
     @SuppressWarnings("all")
     default List<OrderField> onOrder(final DataTpl tpl,
-                                     final Sorter sorter) {
+                                     final QSorter sorter) {
         throw new _80503Exception501IngestImplement();
     }
 
@@ -66,7 +66,7 @@ public interface Ingest {
 
     @SuppressWarnings("all")
     default List<OrderField> onOrder(final DataTpl tpl,
-                                     final Sorter sorter,
+                                     final QSorter sorter,
                                      final ConcurrentMap<String, String> aliasMap) {
         throw new _80503Exception501IngestImplement();
     }

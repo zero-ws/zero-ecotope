@@ -1,4 +1,4 @@
-package io.zerows.component.qr.syntax;
+package io.zerows.component.qr;
 
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonArray;
@@ -89,7 +89,7 @@ public class IrItem implements Serializable {
 
     public IrItem add(final JsonArray value, final boolean isAnd) {
         if (this.value instanceof JsonArray) {
-            this.value = IrDo.combine(value, this.value, isAnd);
+            this.value = Analyzer.combine(value, this.value, isAnd);
         }
         return this;
     }

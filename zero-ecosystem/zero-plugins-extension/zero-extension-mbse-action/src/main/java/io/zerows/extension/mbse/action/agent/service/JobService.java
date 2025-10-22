@@ -3,7 +3,7 @@ package io.zerows.extension.mbse.action.agent.service;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.LogOf;
-import io.zerows.component.qr.syntax.Ir;
+import io.zerows.component.qr.Ir;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.mbse.action.domain.tables.daos.IJobDao;

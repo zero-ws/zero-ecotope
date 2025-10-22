@@ -1,14 +1,14 @@
 package io.zerows.extension.mbse.basement.atom.data;
 
+import io.r2mo.base.dbe.syntax.QPager;
+import io.r2mo.base.dbe.syntax.QSorter;
 import io.r2mo.function.Fn;
 import io.r2mo.typed.exception.WebException;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.qr.Criteria;
-import io.zerows.component.qr.Pager;
-import io.zerows.component.qr.Sorter;
-import io.zerows.component.qr.syntax.Ir;
+import io.zerows.component.qr.Ir;
 import io.zerows.extension.mbse.basement.atom.Model;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.atom.element.DataRow;
@@ -184,7 +184,7 @@ public class DataEvent implements Serializable {
         return this.projection;
     }
 
-    public Pager getPager() {
+    public QPager getPager() {
         if (Objects.nonNull(this.qr)) {
             return this.qr.getPager();
         } else {
@@ -192,7 +192,7 @@ public class DataEvent implements Serializable {
         }
     }
 
-    public Sorter getSorter() {
+    public QSorter getSorter() {
         if (Objects.nonNull(this.qr)) {
             return this.qr.getSorter();
         } else {

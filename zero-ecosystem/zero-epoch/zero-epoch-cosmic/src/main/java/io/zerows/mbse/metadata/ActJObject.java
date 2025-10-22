@@ -1,7 +1,7 @@
 package io.zerows.mbse.metadata;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.qr.syntax.Ir;
+import io.zerows.component.qr.Ir;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.platform.constant.VName;

@@ -1,15 +1,14 @@
 package io.zerows.extension.mbse.basement.uca.query;
 
-import io.zerows.component.qr.syntax.QBranch;
-import io.zerows.component.qr.syntax.QLeaf;
-import io.zerows.component.qr.syntax.QNode;
-import io.zerows.component.qr.syntax.QOp;
-import io.zerows.component.qr.syntax.QTree;
-import io.zerows.component.qr.syntax.QValue;
-import io.zerows.platform.constant.VValue;
-import io.zerows.epoch.database.jooq.condition.Clause;
+import io.r2mo.base.dbe.constant.QOp;
+import io.r2mo.base.dbe.syntax.QBranch;
+import io.r2mo.base.dbe.syntax.QLeaf;
+import io.r2mo.base.dbe.syntax.QNode;
+import io.r2mo.base.dbe.syntax.QTree;
+import io.r2mo.base.dbe.syntax.QValue;
 import io.zerows.extension.mbse.basement.atom.element.DataMatrix;
 import io.zerows.extension.mbse.basement.uca.jooq.internal.Jq;
+import io.zerows.platform.constant.VValue;
 import org.jooq.Condition;
 import org.jooq.Field;
 import org.jooq.impl.DSL;
@@ -32,7 +31,7 @@ class QVisitor {
      * 直接解析，不带表前缀
      */
     static Condition analyze(final QTree tree, final DataMatrix matrix) {
-        final QNode node = tree.getData();
+        final QNode node = tree.item();
         final Set<DataMatrix> set = new HashSet<>();
         set.add(matrix);
         return analyze(node, set, null);
@@ -40,7 +39,7 @@ class QVisitor {
 
     static Condition analyze(final QTree tree, final Set<DataMatrix> matrix,
                              final ConcurrentMap<String, String> fieldMap) {
-        final QNode node = tree.getData();
+        final QNode node = tree.item();
         return analyze(node, matrix, fieldMap);
     }
 
@@ -76,10 +75,15 @@ class QVisitor {
              */
             return null;
         } else {
-            final Clause clause = Clause.get(column.getType());
-            return clause.where(column, column.getName(),
-                /* 特殊 op 处理 */
-                leaf.op().value(), leaf.value());
+            return null;
+            // UPD-007: 查询条件分析
+
+            //            final Clause clause = Clause.of(column.getType());
+            //            final QValue value = io.r2mo.base.dbe.syntax.QValue
+            //            return clause.where(column,)
+            //            return clause.where(column, column.getName(),
+            //                /* 特殊 op 处理 */
+            //                leaf.op().value(), leaf.value());
         }
     }
 

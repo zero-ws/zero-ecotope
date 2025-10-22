@@ -1,9 +1,8 @@
-package io.zerows.component.qr.syntax;
+package io.zerows.component.qr;
 
+import io.r2mo.base.dbe.syntax.QPager;
+import io.r2mo.base.dbe.syntax.QSorter;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.qr.Criteria;
-import io.zerows.component.qr.Pager;
-import io.zerows.component.qr.Sorter;
 import io.zerows.platform.constant.VName;
 
 import java.util.HashSet;
@@ -47,7 +46,7 @@ public interface Ir {
     String[] KEY_QUERY = new String[]{VName.KEY_CRITERIA, VName.KEY_PAGER, VName.KEY_PROJECTION, VName.KEY_SORTER};
 
     /**
-     * Create Qr instance ( The default implementation class is {@link IrQr} )
+     * Create Qr instance ( The default implementation class is {@link IrImpl} )
      * The implementation class name meaning is `IrQr` - Internal Reactive Query Engine
      *
      * @param data {@link io.vertx.core.json.JsonObject} json literal
@@ -55,7 +54,7 @@ public interface Ir {
      * @return {@link Ir} stored. ( simple criteria or qtree automatically )
      */
     static Ir create(final JsonObject data) {
-        return new IrQr(data);
+        return new IrImpl(data);
     }
 
     /**
@@ -76,16 +75,16 @@ public interface Ir {
     /**
      * Get pager
      *
-     * @return {@link Pager} Pager for pagination
+     * @return {@link QPager} Pager for pagination
      */
-    Pager getPager();
+    QPager getPager();
 
     /**
      * Get Sorter
      *
-     * @return {@link Sorter} Sorter for order by
+     * @return {@link QSorter} Sorter for order by
      */
-    Sorter getSorter();
+    QSorter getSorter();
 
     /**
      * Get criteria

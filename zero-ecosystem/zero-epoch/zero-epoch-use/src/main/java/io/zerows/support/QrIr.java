@@ -5,7 +5,7 @@ import io.r2mo.typed.common.Kv;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.LogO;
-import io.zerows.component.qr.syntax.Ir;
+import io.zerows.component.qr.Ir;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.platform.constant.VName;
 import io.zerows.platform.constant.VString;

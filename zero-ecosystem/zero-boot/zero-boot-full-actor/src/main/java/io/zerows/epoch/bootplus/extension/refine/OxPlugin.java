@@ -1,10 +1,10 @@
 package io.zerows.epoch.bootplus.extension.refine;
 
+import io.r2mo.base.dbe.DBS;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.bootplus.extension.uca.log.Ko;
-import io.zerows.epoch.database.cp.DataPool;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.atom.data.DataGroup;
 import io.zerows.extension.mbse.basement.osgi.spi.plugin.AspectPlugin;
@@ -29,7 +29,7 @@ import java.util.function.Supplier;
  *
  * ### 2. 插件表
  *
- * - 数据连接池插件：{@link DataPool}类型。
+ * - 数据连接池插件：{@link DBS}类型。
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */

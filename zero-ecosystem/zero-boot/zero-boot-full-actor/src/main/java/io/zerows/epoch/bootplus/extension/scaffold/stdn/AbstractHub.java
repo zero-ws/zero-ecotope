@@ -1,5 +1,6 @@
 package io.zerows.epoch.bootplus.extension.scaffold.stdn;
 
+import io.r2mo.base.dbe.Database;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
@@ -11,7 +12,6 @@ import io.zerows.epoch.bootplus.extension.uca.commerce.Completer;
 import io.zerows.epoch.bootplus.extension.uca.commerce.CompleterDefault;
 import io.zerows.epoch.bootplus.extension.uca.log.TrackIo;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.OldDatabase;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.osgi.spi.robin.Switcher;
 import io.zerows.extension.mbse.basement.util.Ao;
@@ -34,7 +34,7 @@ import java.util.Objects;
  *
  * - 任务配置：{@link Mission}
  * - 集成配置：{@link KIntegration}
- * - 数据库配置：{@link OldDatabase}
+ * - 数据库配置：{@link Database}
  *
  * 除开上述配置以外，该组件中还新增了特殊成员配置
  *

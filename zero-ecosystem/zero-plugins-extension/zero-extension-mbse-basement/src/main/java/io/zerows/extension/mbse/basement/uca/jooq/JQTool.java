@@ -1,8 +1,8 @@
 package io.zerows.extension.mbse.basement.uca.jooq;
 
+import io.r2mo.base.dbe.syntax.QPager;
+import io.r2mo.base.dbe.syntax.QSorter;
 import io.zerows.component.log.LogOf;
-import io.zerows.component.qr.Pager;
-import io.zerows.component.qr.Sorter;
 import io.zerows.extension.mbse.basement.atom.data.DataEvent;
 import io.zerows.extension.mbse.basement.atom.element.DataTpl;
 import io.zerows.extension.mbse.basement.uca.metadata.AoSentence;
@@ -142,7 +142,7 @@ class JQTerm {
         /*
          * 构造分页
          */
-        final Pager pager = event.getPager();
+        final QPager pager = event.getPager();
         if (Objects.nonNull(pager)) {
             step.offset(pager.getStart()).limit(pager.getSize());
         }
@@ -199,7 +199,7 @@ class JQToolkit {
                                       final Ingest ingest,
                                       final ConcurrentMap<String, String> map) {
         final List<OrderField> orders = new ArrayList<>();
-        final Sorter sorter = event.getSorter();
+        final QSorter sorter = event.getSorter();
         if (Objects.nonNull(sorter)) {
             if (map.isEmpty()) {
                 orders.addAll(ingest.onOrder(event.getTpl(), sorter));

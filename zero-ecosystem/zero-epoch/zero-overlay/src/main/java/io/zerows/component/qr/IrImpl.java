@@ -1,32 +1,31 @@
-package io.zerows.component.qr.syntax;
+package io.zerows.component.qr;
 
+import io.r2mo.base.dbe.syntax.QPager;
+import io.r2mo.base.dbe.syntax.QSorter;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.qr.Criteria;
-import io.zerows.component.qr.Pager;
-import io.zerows.component.qr.Sorter;
 import io.zerows.platform.constant.VName;
 import io.zerows.support.base.UtBase;
 
 import java.util.HashSet;
 import java.util.Set;
 
-class IrQr implements Ir {
+class IrImpl implements Ir {
 
-    private Pager pager;
-    private Sorter sorter;
+    private QPager pager;
+    private QSorter sorter;
     private Set<String> projection;
     private Criteria criteria;
 
-    IrQr(final JsonObject input) {
+    IrImpl(final JsonObject input) {
         // Building
         this.init(input);
     }
 
     @SuppressWarnings("unchecked")
     private void init(final JsonObject input) {
-        this.pager = Pager.create(input.getJsonObject(VName.KEY_PAGER));
-        this.sorter = Sorter.create(input.getJsonArray(VName.KEY_SORTER));
+        this.pager = QPager.of(input.getJsonObject(VName.KEY_PAGER));
+        this.sorter = QSorter.of(input.getJsonArray(VName.KEY_SORTER));
         this.projection = new HashSet<String>(input.getJsonArray(VName.KEY_PROJECTION).getList());
         this.criteria = Criteria.create(input.getJsonObject(VName.KEY_CRITERIA));
     }
@@ -37,12 +36,12 @@ class IrQr implements Ir {
     }
 
     @Override
-    public Pager getPager() {
+    public QPager getPager() {
         return this.pager;
     }
 
     @Override
-    public Sorter getSorter() {
+    public QSorter getSorter() {
         return this.sorter;
     }
 

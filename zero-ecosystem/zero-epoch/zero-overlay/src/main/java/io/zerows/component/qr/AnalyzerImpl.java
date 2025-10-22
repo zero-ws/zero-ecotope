@@ -1,4 +1,4 @@
-package io.zerows.component.qr.syntax;
+package io.zerows.component.qr;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
@@ -87,10 +87,10 @@ import java.util.function.BiPredicate;
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
-class IrAnalyzer implements IrDo {
+class AnalyzerImpl implements Analyzer {
     private final JsonObject raw = new JsonObject();
 
-    IrAnalyzer(final JsonObject input) {
+    AnalyzerImpl(final JsonObject input) {
         this.raw.mergeIn(input, true);
     }
 
@@ -130,10 +130,10 @@ class IrAnalyzer implements IrDo {
      * @param fieldExpr {@link java.lang.String}
      * @param value     {@link java.lang.Object}
      *
-     * @return {@link IrDo}
+     * @return {@link Analyzer}
      */
     @Override
-    public IrDo save(final String fieldExpr, final Object value) {
+    public Analyzer save(final String fieldExpr, final Object value) {
         if (VString.EMPTY.equals(fieldExpr)) {
             /*
              * "" for AND / OR
@@ -170,10 +170,10 @@ class IrAnalyzer implements IrDo {
      * @param fieldExpr {@link java.lang.String} Removed fieldExpr
      * @param fully     {@link java.lang.Boolean} Removed fully or ?
      *
-     * @return {@link IrDo}
+     * @return {@link Analyzer}
      */
     @Override
-    public IrDo remove(final String fieldExpr, final boolean fully) {
+    public Analyzer remove(final String fieldExpr, final boolean fully) {
         /*
          * Existing the QrItem
          */
@@ -202,10 +202,10 @@ class IrAnalyzer implements IrDo {
      * @param fieldExpr {@link java.lang.String}
      * @param newValue  {@link java.lang.Object}
      *
-     * @return {@link IrDo}
+     * @return {@link Analyzer}
      */
     @Override
-    public IrDo update(final String fieldExpr, final Object newValue) {
+    public Analyzer update(final String fieldExpr, final Object newValue) {
         /*
          * Existing the QrItem
          */
@@ -255,7 +255,7 @@ class IrAnalyzer implements IrDo {
             }
             raw.put(newItem.field() + ",i", in);
         } else if (Ir.Op.IN.equals(newItem.op())) {
-            raw.put(newItem.qrKey(), IrDo.combine(newItem.value(), oldItem.value(), isAnd));
+            raw.put(newItem.qrKey(), Analyzer.combine(newItem.value(), oldItem.value(), isAnd));
         }
     }
 

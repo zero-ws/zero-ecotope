@@ -2,10 +2,10 @@ package io.zerows.extension.mbse.basement.uca.dao.internal;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.qr.Criteria;
-import io.zerows.component.qr.syntax.Ir;
-import io.zerows.support.Ut;
+import io.zerows.component.qr.Ir;
 import io.zerows.extension.mbse.basement.atom.data.DataEvent;
 import io.zerows.specification.modeling.HRecord;
+import io.zerows.support.Ut;
 
 import static io.zerows.extension.mbse.basement.util.Ao.LOG;
 
