@@ -1,8 +1,6 @@
 package io.zerows.epoch.bootplus.stellar;
 
 import io.r2mo.base.dbe.Database;
-import io.r2mo.spi.SPI;
-import io.r2mo.typed.json.JObject;
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.constant.VClassPath;
 import io.zerows.platform.enums.Environment;
@@ -25,8 +23,7 @@ public class MockitoA extends AbstractPartyA {
     public Database configDatabase() {
         final String path = VClassPath.runtime.environment.ofDatabase(this.environment());
         final JsonObject item = Ut.ioJObject(path);
-        final JObject databaseJ = SPI.J(item);
-        return Database.createDatabase(databaseJ);
+        return Database.createDatabase(item);
     }
 
     /**

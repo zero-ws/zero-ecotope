@@ -1,7 +1,6 @@
 package io.zerows.extension.runtime.ambient.osgi.spi.extension;
 
 import io.r2mo.base.dbe.Database;
-import io.r2mo.spi.SPI;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.LogOf;
@@ -26,7 +25,7 @@ public class DatabaseInit implements ExInit {
             LOG.App.info(LOGGER, AtMsg.INIT_DATABASE, appJson.encode());
             /* Database InJson */
             final JsonObject databaseJson = appJson.getJsonObject(KName.SOURCE);
-            final Database database = Database.createDatabase(SPI.J(databaseJson));
+            final Database database = Database.createDatabase(databaseJson);
             /*
              * Init third step: X_SOURCE stored into pool
              */
