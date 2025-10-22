@@ -1,6 +1,10 @@
 package io.zerows.epoch.database.jooq.operation;
 
+import cn.hutool.core.util.StrUtil;
+import io.r2mo.base.dbe.DBS;
+import io.r2mo.base.dbe.join.DBRef;
 import io.r2mo.base.program.R2Vector;
+import io.r2mo.typed.common.Kv;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
@@ -9,9 +13,11 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.database.jooq.util.JqTool;
 import io.zerows.epoch.metadata.MMPojo;
 import io.zerows.epoch.metadata.MMPojoMapping;
+import io.zerows.epoch.store.jooq.Join;
 import io.zerows.platform.constant.VName;
 import io.zerows.support.Ut;
 
+import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -19,6 +25,40 @@ import java.util.concurrent.ConcurrentMap;
 @SuppressWarnings("all")
 public final class ADJ {
 
+    private final DBRef ref;
+    private final DBS dbs;
+
+    private ADJ(final DBRef ref, final DBS dbs) {
+        this.ref = ref;
+        this.dbs = dbs;
+    }
+
+    public static ADJ of(final DBRef ref, final DBS dbs) {
+        return null;
+    }
+
+    public static ADJ of(final Join meta, final Kv<String, String> waitFor, final DBS dbs) {
+        return null;
+    }
+
+    public ADJ alias(final Class<?> vertxDao, final String name, final String alias) {
+        this.ref.alias(null, name, alias);
+        return this;
+    }
+
+    public ADJ alias(final Class<?> vertxDao, final Map<String, String> waitFor) {
+        waitFor.forEach((k, v) -> this.ref.alias(null, k, v));
+        return this;
+    }
+
+    private static Kv<String, String> waitForDefault(final Kv<String, String> waitFor) {
+        final String vKey = StrUtil.isEmpty(waitFor.key()) ? KName.KEY : waitFor.key();
+        final String vFinal = StrUtil.isEmpty(waitFor.value()) ? KName.KEY : waitFor.value();
+        waitFor.set(vKey, vFinal);
+        return waitFor;
+    }
+
+    // region 待移除
     private transient final JsonObject configuration = new JsonObject();
     private transient final JoinEngine joinder = new JoinEngine();
 
@@ -27,21 +67,8 @@ public final class ADJ {
     private transient MMPojo merged = null;
     private transient R2Vector vector;
 
-    private ADJ(final String file) {
-        if (Ut.isNotNil(file)) {
-            final JsonObject config = Ut.ioJObject(file);
-            if (Ut.isNotNil(config)) {
-                /*
-                 * Only one level for mapping configuration
-                 * - field -> sourceTable
-                 */
-                configuration.mergeIn(config);
-            }
-        }
-    }
-
     public static ADJ of(final String file) {
-        return new ADJ(file);
+        return null; // new ADJ(file);
     }
 
     /*
@@ -75,10 +102,10 @@ public final class ADJ {
      *      "nameT2": "Value2"
      * }
      */
-    public <T> ADJ alias(final Class<?> daoCls, final String field, final String alias) {
-        this.joinder.alias(daoCls, field, alias);
-        return this;
-    }
+    //    public <T> ADJ alias(final Class<?> daoCls, final String field, final String alias) {
+    //        this.joinder.alias(daoCls, field, alias);
+    //        return this;
+    //    }
 
     public <T> ADJ alias(final Class<?> daoCls, final JsonObject fieldMap) {
         Ut.<String>itJObject(fieldMap,
@@ -124,6 +151,7 @@ public final class ADJ {
         this.joinder.join(daoCls, this.translate(daoCls, field));
         return this;
     }
+    // endregion
 
     // -------------------- Search Operation -----------
     /*

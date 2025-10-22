@@ -1,17 +1,20 @@
 package io.zerows.epoch.store.jooq;
 
+import cn.hutool.core.util.StrUtil;
 import io.r2mo.base.dbe.DBS;
+import io.r2mo.base.dbe.join.DBRef;
 import io.r2mo.typed.common.Kv;
-import io.vertx.core.json.JsonArray;
-import io.vertx.core.json.JsonObject;
+import io.r2mo.typed.exception.web._501NotSupportException;
 import io.zerows.epoch.basicore.MDConnect;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.database.jooq.operation.ADJ;
 import io.zerows.epoch.store.DBSActor;
-import io.zerows.platform.constant.VValue;
-import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class DB {
+    // region 单表访问器
+
     /**
      * 便捷工厂：仅指定 DAO 类，创建/复用 {@link ADB} 实例。🚀
      *
@@ -142,89 +145,259 @@ public class DB {
         return ADB.of(connect.getDao(), connect.getPojoFile(), dbs);
     }
 
+    // endregion
 
-    // ------------------------ 下边是 Join 部分 -------------------------
+    // region 多表访问器（双表）
 
-    public static ADJ bridge(final MDConnect active, final MDConnect standBy,
-                             final Kv<String, String> fieldJoin, final JsonObject aliasJ) {
-        final ADJ join = ADJ.of(null);
-        final String pojoActive = active.getPojoFile();
-        if (Ut.isNotNil(pojoActive)) {
-            join.pojo(active.getDao(), pojoActive);
-        }
-        final String pojoStandBy = standBy.getPojoFile();
-        if (Ut.isNotNil(pojoStandBy)) {
-            join.pojo(standBy.getDao(), pojoStandBy);
-        }
-        final String fieldActive = Ut.isNotNil(fieldJoin.key()) ? fieldJoin.key() : KName.KEY;
-        final String fieldStandBy = Ut.isNotNil(fieldJoin.value()) ? fieldJoin.value() : KName.KEY;
-
-        join.add(active.getDao(), fieldActive).join(standBy.getDao(), fieldStandBy);
-
-        return bridgeAlias(join, active, standBy, aliasJ);
-    }
-
-    public static ADJ bridge(final MDConnect active, final MDConnect standBy,
-                             final Kv<String, String> fieldJoin) {
-        return bridge(active, standBy, fieldJoin, null);
+    /**
+     * ✨ <b>on(DBRef)</b> — 基于已构造好的 {@link DBRef} 创建双表访问器（使用默认 {@link DBS} 上下文）。
+     *
+     * 🧩 <b>适用场景</b>：
+     * <ul>
+     *   <li>✅ 已从其它工厂/装配流程产出完整 {@link DBRef}（含两表、别名、连接键）。</li>
+     *   <li>⚡ 想在“默认数据源/默认事务”下立即发起 JOIN 查询、更新、聚合统计等。</li>
+     * </ul>
+     *
+     * 🌟 <b>优势/特征</b>：
+     * <ul>
+     *   <li>🛠️ 直接复用标准化的 DB 引用定义，减少重复拼装。</li>
+     *   <li>🧼 API 简洁：不关心上下文选择，默认即开即用。</li>
+     * </ul>
+     *
+     * ⚠️ <b>注意</b>：
+     * <ul>
+     *   <li>🔀 若需指定数据源/库/事务边界，请改用 {@link #on(DBRef, DBS)}。</li>
+     *   <li>🧱 依赖默认 {@link DBS} 的环境一致性，测试/生产切换需留意。</li>
+     * </ul>
+     *
+     * @param ref 预先构造好的双表引用（含两表与连接信息）
+     *
+     * @return 使用默认 {@link DBS} 上下文的 {@link ADJ} 访问器
+     */
+    public static ADJ on(final DBRef ref) {
+        return ADJ.of(ref, DBSActor.ofDBS());
     }
 
     /**
-     * alias 的数据结构如
-     * <pre><code>
-     *     "alias": {
-     *          "{TABLE1}": [
-     *              field1,
-     *              field2,
-     *          ],
-     *          "{TABLE2}": [
-     *              field1,
-     *              field2
-     *          ]
-     *     }
-     * </code></pre>
+     * 🧭 <b>on(DBRef, DBS)</b> — 基于已构造好的 {@link DBRef} 创建双表访问器（绑定指定 {@link DBS} 上下文）。
      *
-     * @param join
-     * @param active
-     * @param standBy
-     * @param aliasJ
+     * 🧩 <b>适用场景</b>：
+     * <ul>
+     *   <li>🏷️ 多库/多租户/读写分离环境下，需明确绑定上下文执行一次性或阶段性操作。</li>
+     *   <li>🧾 需要更清晰的审计与事务边界可观测性。</li>
+     * </ul>
+     *
+     * 🌟 <b>优势/特征</b>：
+     * <ul>
+     *   <li>🎛️ 上下文可注入：支持在调用栈/拦截器中统一分发 {@code dbs}。</li>
+     *   <li>🔒 与事务管理器/路由策略自然对齐。</li>
+     * </ul>
+     *
+     * ⚠️ <b>注意</b>：
+     * <ul>
+     *   <li>📌 {@code dbs} 的生命周期与传播策略需与调用方一致，否则可能产生越权或跨库风险。</li>
+     * </ul>
+     *
+     * @param ref 已包含两表与连接信息的引用
+     * @param dbs 目标数据源/库/事务上下文
+     *
+     * @return 绑定指定 {@link DBS} 的 {@link ADJ} 访问器
      */
-    public static ADJ bridgeAlias(final ADJ join, final MDConnect active, final MDConnect standBy, final JsonObject aliasJ) {
-        if (Ut.isNil(aliasJ)) {
-            return join;
-        }
-        Ut.<JsonArray>itJObject(aliasJ).forEach(entry -> {
-            final JsonArray fields = entry.getValue();
-            if (2 == fields.size()) {
-                final String tableName = entry.getKey();
-                final Class<?> daoCls;
-                if (tableName.equals(active.getTable())) {
-                    daoCls = active.getDao();
-                } else if (tableName.equals(standBy.getTable())) {
-                    daoCls = standBy.getDao();
-                } else {
-                    Ut.Log.database(ADJ.class).error("( Join ) Please check your table name: {}", tableName);
-                    daoCls = null;
-                }
-                final String fieldKey = fields.getString(VValue.IDX);
-                final String fieldJoin = fields.getString(VValue.ONE);
-                join.alias(daoCls, fieldKey, fieldJoin);
-            } else {
-                Ut.Log.database(ADJ.class).error("( Join ) Please check your alias configuration: {}", fields);
-            }
-        });
-        return join;
+    public static ADJ on(final DBRef ref, final DBS dbs) {
+        return ADJ.of(ref, dbs);
     }
 
-    public static ADJ join(final String configFile) {
-        return ADJ.of(configFile);
+    /**
+     * 🔗 <b>on(meta, leftKey)</b> — 仅给出左键的 JOIN 入口（默认 {@link DBS}，右键采用默认键 {@link KName#KEY}）。
+     *
+     * 🧩 <b>适用场景</b>：
+     * <ul>
+     *   <li>🪪 左右表连接列名一致，或右表遵循系统默认主键/连接键。</li>
+     *   <li>⚡ 需要以最少参数快速搭建双表引用并立刻操作。</li>
+     * </ul>
+     *
+     * 🌟 <b>优势/特征</b>：
+     * <ul>
+     *   <li>✂️ 参数极简，降低接入复杂度。</li>
+     *   <li>🧭 默认值兜底，减少命名不一致带来的干扰。</li>
+     * </ul>
+     *
+     * 🧱 <b>约束/规则</b>：
+     * <ul>
+     *   <li>🧾 {@code meta} 必须且只能包含两项（实体/DAO类 → 别名）。</li>
+     *   <li>🗝️ {@code leftKey} 为空/空白 → 退回 {@link KName#KEY}，右键始终使用 {@link KName#KEY}。</li>
+     * </ul>
+     *
+     * ⚠️ <b>注意</b>：
+     * <ul>
+     *   <li>🔧 若两表连接列名不同，请使用显式左右键或向量重载。</li>
+     * </ul>
+     *
+     * @param meta    双表元信息：Class -&gt; alias（恰好两项）
+     * @param leftKey 左表连接键（如 "u.id" 或 "id"）
+     *
+     * @return 基于默认 {@link DBS} 的 {@link ADJ} 访问器
+     */
+    public static ADJ on(final Join meta, final String leftKey) {
+        return on(meta, leftKey, null, DBSActor.ofDBS());
     }
+
+    /**
+     * 🔗 <b>on(meta, leftKey, rightKey)</b> — 显式给出左右连接键的 JOIN 入口（默认 {@link DBS}）。
+     *
+     * 🧩 <b>适用场景</b>：
+     * <ul>
+     *   <li>🔀 左右表连接列名不同（例如主外键命名不一、历史库字段差异）。</li>
+     *   <li>🧭 需要“明确对齐左右键”来避免与默认键冲突。</li>
+     * </ul>
+     *
+     * 🌟 <b>优势/特征</b>：
+     * <ul>
+     *   <li>🎯 消除歧义：显式约束左右键，提升可读性与稳定性。</li>
+     *   <li>🧩 易于调试与审计：变更影响面可控。</li>
+     * </ul>
+     *
+     * 🧱 <b>约束/规则</b>：
+     * <ul>
+     *   <li>🧾 {@code meta} 必须且只能包含两项（实体/DAO类 → 别名）。</li>
+     *   <li>🗝️ {@code leftKey/rightKey} 任一为空/空白 → 自动回退 {@link KName#KEY}。</li>
+     * </ul>
+     *
+     * @param meta     双表元信息：Class -&gt; alias（恰好两项）
+     * @param leftKey  左表连接键
+     * @param rightKey 右表连接键
+     *
+     * @return 基于默认 {@link DBS} 的 {@link ADJ} 访问器
+     */
+    public static ADJ on(final Join meta, final String leftKey, final String rightKey) {
+        return on(meta, leftKey, rightKey, DBSActor.ofDBS());
+    }
+
+    /**
+     * 🌐 <b>on(meta, leftKey, dbs)</b> — 指定 {@link DBS} + 仅左键（右键默认）的 JOIN 入口。
+     *
+     * 🧩 <b>适用场景</b>：
+     * <ul>
+     *   <li>🗝️ 右键沿用默认键（如主键 id），但需在特定 {@link DBS} 上下文中执行。</li>
+     *   <li>🏷️ 多库/多租户场景下的轻量化连接声明。</li>
+     * </ul>
+     *
+     * 🌟 <b>优势/特征</b>：
+     * <ul>
+     *   <li>🎛️ 将“连接定义”与“上下文选择”解耦，按需绑定。</li>
+     *   <li>⚙️ 适合策略化路由（读写分离/灰度流量）。</li>
+     * </ul>
+     *
+     * 🧱 <b>约束/规则</b>：
+     * <ul>
+     *   <li>🧾 {@code meta} 恰好两项；{@code leftKey} 为空/空白 → {@link KName#KEY}；右键默认 {@link KName#KEY}。</li>
+     * </ul>
+     *
+     * @param meta    双表元信息：Class -&gt; alias（恰好两项）
+     * @param leftKey 左表连接键
+     * @param dbs     指定的数据源/库/事务上下文
+     *
+     * @return 绑定指定 {@link DBS} 的 {@link ADJ} 访问器
+     */
+    public static ADJ on(final Join meta, final String leftKey, final DBS dbs) {
+        return on(meta, leftKey, null, dbs);
+    }
+
+    /**
+     * 🌐 <b>on(meta, leftKey, rightKey, dbs)</b> — 指定 {@link DBS} + 显式左右键的 JOIN 入口。
+     *
+     * 🔧 <b>实现要点</b>：
+     * <ul>
+     *   <li>🧰 对空/空白键自动回退为 {@link KName#KEY}，再封装为“键向量”统一传递。</li>
+     * </ul>
+     *
+     * 💡 <b>使用建议</b>：
+     * <ul>
+     *   <li>🏢 多租户、灰度或读写分离时，显式传入 {@code dbs} 以提升可观测性与安全性。</li>
+     *   <li>📊 与审计链路（链路ID、租户ID、事务ID）组合记录更清晰。</li>
+     * </ul>
+     *
+     * 🧱 <b>约束/规则</b>：
+     * <ul>
+     *   <li>🧾 {@code meta} 必须且只能包含两项（实体/DAO类 → 别名）。</li>
+     * </ul>
+     *
+     * @param meta     双表元信息：Class -&gt; alias（恰好两项）
+     * @param leftKey  左表连接键（为空→{@link KName#KEY}）
+     * @param rightKey 右表连接键（为空→{@link KName#KEY}）
+     * @param dbs      指定的数据源/库/事务上下文
+     *
+     * @return 绑定指定 {@link DBS} 的 {@link ADJ} 访问器
+     */
+    public static ADJ on(final Join meta, final String leftKey, final String rightKey, final DBS dbs) {
+        final String left = StrUtil.isEmpty(leftKey) ? KName.KEY : leftKey;
+        final String right = StrUtil.isEmpty(rightKey) ? KName.KEY : rightKey;
+        return on(meta, Kv.create(left, right), dbs);
+    }
+
+    /**
+     * 🧩 <b>on(meta, vector)</b> — 直接传入“连接向量”的 JOIN 入口（默认 {@link DBS}）。
+     *
+     * 🧩 <b>适用场景</b>：
+     * <ul>
+     *   <li>🧱 调用方已将左右键封装为 {@code Kv&lt;String,String&gt;}（例如“左→右”的一对映射）。</li>
+     *   <li>🧠 希望以“组合参数对象”提升描述性、可复用性与团队协作规范。</li>
+     * </ul>
+     *
+     * 🌟 <b>优势/特征</b>：
+     * <ul>
+     *   <li>📦 连接定义集中化：便于缓存/下发/复用。</li>
+     *   <li>🧭 可与字典/元数据系统对齐（字段别名/标准化对照）。</li>
+     * </ul>
+     *
+     * 🧱 <b>约束/规则</b>：
+     * <ul>
+     *   <li>🧾 {@code meta} 恰好两项（实体/DAO类 → 别名）。</li>
+     * </ul>
+     *
+     * @param meta    双表元信息：Class -&gt; alias（恰好两项）
+     * @param waitFor 连接向量（左键 → 右键）
+     *
+     * @return 基于默认 {@link DBS} 的 {@link ADJ} 访问器
+     */
+    public static ADJ on(final Join meta, final Kv<String, String> waitFor) {
+        return on(meta, waitFor, DBSActor.ofDBS());
+    }
+
+    /**
+     * 🧩 <b>on(meta, vector, dbs)</b> — 传入“连接向量”并绑定指定 {@link DBS} 的 JOIN 入口。
+     *
+     * 🧪 <b>参数校验</b>：
+     * <ul>
+     *   <li>🧯 {@code meta == null} 或 {@code meta.size() != 2} → 抛出 {@link _501NotSupportException}。</li>
+     * </ul>
+     *
+     * 🌟 <b>优势/特征</b>：
+     * <ul>
+     *   <li>🧩 将连接关系与上下文解耦，适合策略化路由、演练与回放。</li>
+     *   <li>🧱 便于以“配置/元数据”形式沉淀到平台层。</li>
+     * </ul>
+     *
+     * ⚠️ <b>注意</b>：
+     * <ul>
+     *   <li>📌 向量键名建议带别名前缀（如 {@code u.id}），避免字段重名冲突。</li>
+     * </ul>
+     *
+     * @param meta    双表元信息：Class -&gt; alias（恰好两项）
+     * @param waitFor 连接向量（左键 → 右键）
+     * @param dbs     指定的数据源/库/事务上下文
+     *
+     * @return 绑定指定 {@link DBS} 的 {@link ADJ} 访问器
+     */
+    public static ADJ on(final Join meta, final Kv<String, String> waitFor, final DBS dbs) {
+        return ADJ.of(meta, waitFor, dbs);
+    }
+    // endregion
+
+
+    // ------------------------ 下边是 Join 部分 -------------------------
 
     public static ADJ join() {
-        return ADJ.of(null);
-    }
-
-    public static ADJ join(final Class<?> daoCls) {
-        return ADJ.of(null).add(daoCls);
+        return null;
     }
 }

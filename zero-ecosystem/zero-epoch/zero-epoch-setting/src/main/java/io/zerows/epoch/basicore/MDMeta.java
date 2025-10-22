@@ -2,6 +2,7 @@ package io.zerows.epoch.basicore;
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
 import io.zerows.support.Ut;
+import lombok.Getter;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -14,6 +15,7 @@ public class MDMeta implements Serializable {
     private final Class<?> dao;
     private final Class<?> pojo;
     private final String table;
+    @Getter
     private final boolean isEntity;
 
     public MDMeta(final Class<?> dao, final Class<?> pojo) {
@@ -66,10 +68,6 @@ public class MDMeta implements Serializable {
 
     public String table() {
         return this.table;
-    }
-
-    public boolean isEntity() {
-        return this.isEntity;
     }
 
     public String toLine() {

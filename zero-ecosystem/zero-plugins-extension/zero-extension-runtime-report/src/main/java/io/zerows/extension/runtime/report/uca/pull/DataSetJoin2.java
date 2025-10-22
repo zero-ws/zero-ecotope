@@ -1,5 +1,7 @@
 package io.zerows.extension.runtime.report.uca.pull;
 
+import io.r2mo.base.dbe.join.DBNode;
+import io.r2mo.base.dbe.join.DBRef;
 import io.r2mo.typed.common.Kv;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
@@ -11,12 +13,14 @@ import io.zerows.epoch.database.jooq.operation.ADJ;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
 
 /**
  * @author lang : 2024-10-22
  */
+@Slf4j
 class DataSetJoin2 extends AbstractDataSet {
     protected final MDConnect active;
     protected final MDConnect standBy;
@@ -47,11 +51,76 @@ class DataSetJoin2 extends AbstractDataSet {
         if (Ut.isNil(parameters)) {
             return Ux.futureA();
         }
-        this.logger().info("Report processing for Active = {}, StandBy = {}, Cond: {}",
+        log.info("[ ZERO ] 报表处理 / Active = {}, StandBy = {}, Cond: {}",
             this.active.getTable(), this.standBy.getTable(), parameters.encode());
         // 提取 UxJoin
-        final ADJ jq = DB.bridge(this.active, this.standBy, this.kvJoin, this.aliasJ);
+        final ADJ jq = this.ofADJ();
 
         return jq.fetchAsync(parameters).compose(data -> this.loadChildren(data, this.children));
+    }
+
+    /**
+     * 构造多表访问器
+     * alias 的数据结构如
+     * <pre><code>
+     *     "alias": {
+     *          "{TABLE1}": [
+     *              field1,
+     *              field2,
+     *          ],
+     *          "{TABLE2}": [
+     *              field1,
+     *              field2
+     *          ]
+     *     }
+     * </code></pre>
+     *
+     * 此处针对数据结构要做一个说明，此处的数据结构
+     * <pre>
+     *     {
+     *         "active": "X_CATEGORY",
+     *         "active.field": "key",
+     *         "standby": "F_PAY_TERM",
+     *         "standby.field": "category",
+     *         "alias": {
+     *             "X_CATEGORY": [
+     *                 "key",
+     *                 "categoryId"
+     *             ],
+     *             "F_PAY_TERM": [
+     *                 "key",
+     *                 "payTermId"
+     *             ]
+     *         }
+     *     }
+     * </pre>
+     * 根据上述数据结构，整体配置如下
+     * <pre>
+     *     1. X_CATEGORY JOIN F_PAY_TERM
+     *     2. on X_CATEGORY.key = F_PAY_TERM.category
+     *     3. 别名用于提取时使用
+     *        alias -> X_CATEGORY.key -> categoryId
+     *                 F_PAY_TERM.payTermId -> payTermId
+     *     *: 此处非列名，全是属性名
+     * </pre>
+     *
+     * @return 多表访问器
+     */
+    public ADJ ofADJ() {
+        final DBNode nodeLeft = this.active.forJoin();
+        final DBNode nodeRight = this.standBy.forJoin();
+        final DBRef ref = DBRef.of(nodeLeft, nodeRight, this.kvJoin);
+        // 别名计算和追加
+        for (final String table : this.aliasJ.fieldNames()) {
+            final JsonArray array = Ut.valueJArray(this.aliasJ, table);
+            if (2 != array.size()) {
+                log.warn("[ ZERO ] 请检查 alias 的配置信息：{} / {}", table, array.encode());
+                continue;
+            }
+            final String name = array.getString(0);
+            final String alias = array.getString(1);
+            ref.alias(table, name, alias);
+        }
+        return DB.on(ref);
     }
 }

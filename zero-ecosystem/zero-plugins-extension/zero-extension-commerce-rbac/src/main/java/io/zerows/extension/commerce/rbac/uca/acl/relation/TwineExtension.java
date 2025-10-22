@@ -4,10 +4,10 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.jooq.operation.ADJ;
 import io.zerows.epoch.metadata.UObject;
 import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.epoch.store.jooq.DB;
+import io.zerows.epoch.store.jooq.Join;
 import io.zerows.extension.commerce.rbac.atom.ScConfig;
 import io.zerows.extension.commerce.rbac.bootstrap.ScPin;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.SUserDao;
@@ -76,21 +76,33 @@ class TwineExtension implements ScTwine<SUser> {
         if (Objects.isNull(qr) || !qr.valid()) {
             return DB.on(SUserDao.class).fetchJOneAsync(query);
         }
-        return TwineQr.normalize(qr, query).compose(queryJ -> {
-            final ADJ searcher = DB.join();
-            /*
-             * S_USER ( modelKey )
-             *    JOIN
-             * XXX ( key )
-             * 额外步骤
-             * */
-            searcher.add(SUserDao.class, KName.MODEL_KEY);
-            final Class<?> clazz = qr.getClassDao();
-            searcher.join(clazz);
-            return searcher.searchAsync(queryJ)
-                // Connect to `groups`
-                .compose(this::connect);
-        });
+        return TwineQr.normalize(qr, query)
+            .compose(queryJ ->
+                DB.on(Join.of(
+                        SUserDao.class,
+                        qr.getClassDao()
+                    ), KName.MODEL_KEY
+                ).searchAsync(queryJ)
+            )
+            // Connect to `groups`
+            .compose(this::connect);
+        //            .compose(queryJ -> {
+        //
+        //
+        //                final ADJ searcher = DB.join();
+        //                /*
+        //                 * S_USER ( modelKey )
+        //                 *    JOIN
+        //                 * XXX ( key )
+        //                 * 额外步骤
+        //                 * */
+        //                searcher.add(SUserDao.class, KName.MODEL_KEY);
+        //                final Class<?> clazz = qr.getClassDao();
+        //                searcher.join(clazz);
+        //                return searcher.searchAsync(queryJ)
+        //                    // Connect to `groups`
+        //                    .compose(this::connect);
+        //            });
     }
 
     /**

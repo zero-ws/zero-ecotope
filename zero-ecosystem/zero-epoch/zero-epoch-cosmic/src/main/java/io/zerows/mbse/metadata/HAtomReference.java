@@ -9,6 +9,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.database.jooq.operation.ADJ;
 import io.zerows.epoch.metadata.KJoin;
 import io.zerows.epoch.store.jooq.DB;
+import io.zerows.epoch.store.jooq.Join;
 import io.zerows.platform.enums.modeling.EmValue;
 import io.zerows.platform.exception._60050Exception501NotSupport;
 import io.zerows.platform.metadata.RDao;
@@ -260,10 +261,15 @@ public class HAtomReference implements HReference {
                     return DB.on(source.getClassDao()).fetchJ(condition);
                 } else {
                     // Join
-                    return DB.join()
-                        .add(source.getClassDao(), source.getKeyJoin())
-                        .join(target.getClassDao(), target.getKeyJoin())
+                    return DB.on(Join.of(
+                            source.getClassDao(),
+                            target.getClassDao()
+                        ), source.getKeyJoin(), target.getKeyJoin())
                         .fetch(condition);
+                    //                    return DB.join()
+                    //                        .add(source.getClassDao(), source.getKeyJoin())
+                    //                        .join(target.getClassDao(), target.getKeyJoin())
+                    //                        .fetch(condition);
                 }
             } else {
                 // Dynamic

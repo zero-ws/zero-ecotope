@@ -11,7 +11,7 @@ import java.util.function.Supplier;
 /**
  * @author lang : 2023-06-11
  */
-class _Debug extends _Complex {
+class _Debug extends _Compare {
     /**
      * Create new log instance for get `Annal` mapping
      * <p>

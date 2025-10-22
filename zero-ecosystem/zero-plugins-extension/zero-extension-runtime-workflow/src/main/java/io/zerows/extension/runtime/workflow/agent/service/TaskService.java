@@ -5,6 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.epoch.store.jooq.DB;
+import io.zerows.epoch.store.jooq.Join;
 import io.zerows.extension.runtime.workflow.atom.EngineOn;
 import io.zerows.extension.runtime.workflow.atom.configuration.MetaInstance;
 import io.zerows.extension.runtime.workflow.atom.runtime.WRecord;
@@ -18,6 +19,7 @@ import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
 import jakarta.inject.Inject;
 
+import java.util.Map;
 import java.util.Objects;
 
 import static io.zerows.extension.runtime.workflow.util.Wf.LOG;
@@ -32,19 +34,29 @@ public class TaskService implements TaskStub {
     @Override
     public Future<JsonObject> fetchQueue(final JsonObject condition) {
         final JsonObject combine = Ut.irAndQH(condition, KName.Flow.FLOW_END, Boolean.FALSE);
-        return DB.join()
-
-            // Join WTodo Here
-            .add(WTodoDao.class, KName.Flow.TRACE_ID)
-            .join(WTicketDao.class)
-
-            // Alias must be called after `add/join`
-            .alias(WTicketDao.class, new JsonObject()
-                .put(KName.KEY, KName.Flow.TRACE_KEY)
-                .put(KName.SERIAL, KName.Flow.TRACE_SERIAL)
-                .put(KName.CODE, KName.Flow.TRACE_CODE)
-            )
+        return DB.on(Join.of(
+                WTodoDao.class,
+                WTicketDao.class
+            ), KName.Flow.TRACE_ID)
+            .alias(WTicketDao.class, Map.of(
+                KName.KEY, KName.Flow.TRACE_KEY,
+                KName.SERIAL, KName.Flow.TRACE_SERIAL,
+                KName.CODE, KName.Flow.TRACE_CODE
+            ))
             .searchAsync(combine);
+        //        return DB.join()
+        //
+        //            // Join WTodo Here
+        //            .add(WTodoDao.class, KName.Flow.TRACE_ID)
+        //            .join(WTicketDao.class)
+        //
+        //            // Alias must be called after `add/join`
+        //            .alias(WTicketDao.class, new JsonObject()
+        //                .put(KName.KEY, KName.Flow.TRACE_KEY)
+        //                .put(KName.SERIAL, KName.Flow.TRACE_SERIAL)
+        //                .put(KName.CODE, KName.Flow.TRACE_CODE)
+        //            )
+        //            .searchAsync(combine);
     }
 
     @Override
