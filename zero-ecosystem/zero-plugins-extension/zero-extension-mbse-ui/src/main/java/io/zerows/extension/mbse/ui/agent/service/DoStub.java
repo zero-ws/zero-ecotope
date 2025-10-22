@@ -7,13 +7,13 @@ import io.vertx.core.json.JsonObject;
 /**
  * --> type = null
  * -----> control     = null,         WEB
- * -----> control     = get,        ATOM
+ * -----> control     = findRunning,        ATOM
  * --> type = ATOM
- * -----> control     = get
+ * -----> control     = findRunning
  * --> type = WEB
- * -----> identifier  = get
+ * -----> identifier  = findRunning
  * --> type = FLOW
- * -----> control     = get,
+ * -----> control     = findRunning,
  * -----> event       = 任务节点
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>

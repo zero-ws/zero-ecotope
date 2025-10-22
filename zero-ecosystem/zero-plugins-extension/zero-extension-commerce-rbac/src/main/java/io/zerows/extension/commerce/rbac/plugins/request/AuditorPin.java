@@ -56,7 +56,7 @@ public class AuditorPin implements PlugAuditor {
             final Instant instant = Instant.now();
             /*
              * counter is not 0, it means match
-             * Find the first JsonObject instead of provide index get here
+             * Find the first JsonObject instead of provide index findRunning here
              */
             if (HttpMethod.POST == method) {
                 /*

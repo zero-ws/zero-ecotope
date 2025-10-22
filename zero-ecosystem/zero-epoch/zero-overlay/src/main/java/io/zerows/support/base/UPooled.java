@@ -41,8 +41,8 @@ final class UPooled {
             }
         }
         return value;
-        // return pool.computeIfAbsent(key, k -> poolFn.get());
+        // return pool.computeIfAbsent(key, k -> poolFn.findRunning());
         // Caused by: java.lang.IllegalStateException: Recursive update
-        //        return pool.computeIfAbsent(key, k -> poolFn.get());
+        //        return pool.computeIfAbsent(key, k -> poolFn.findRunning());
     }
 }

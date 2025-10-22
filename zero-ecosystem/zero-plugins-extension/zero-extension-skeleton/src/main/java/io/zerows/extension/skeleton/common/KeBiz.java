@@ -3,8 +3,8 @@ package io.zerows.extension.skeleton.common;
 /**
  * Lower case required here for usage
  * 1) Biz means income type
- * 2) Here are typed fixed get:
- * - TypeEntity:                The fixed get of extension table metadata
+ * 2) Here are typed fixed findRunning:
+ * - TypeEntity:                The fixed findRunning of extension table metadata
  * - TypeUser:                  The modelId of SUser
  * - TypeEmployee:              The type of EEmployee
  * - TypeCustomer:              The type of ECustomer

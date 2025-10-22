@@ -1,9 +1,9 @@
 package io.zerows.specification.app;
 
+import io.r2mo.base.dbe.Database;
 import io.zerows.platform.constant.VName;
 import io.zerows.platform.constant.VString;
-import io.zerows.platform.metadata.KDatabase;
-import io.zerows.platform.metadata.OldKDS;
+import io.zerows.platform.metadata.KDS;
 import io.zerows.specification.vital.HOI;
 
 import java.util.Objects;
@@ -25,14 +25,15 @@ public interface HArk extends Function<HArk, HArk> {
 
     HApp app();
 
+
     /**
-     * 应用配置容器中的数据库定义
+     * 应用配置容器中的数据源定义
      *
-     * @param <T> {@link KDatabase} 的子类
-     *
-     * @return {@link OldKDS} 数据库定义
+     * @return {@link KDS} 数据源定义
      */
-    <T extends KDatabase> OldKDS<T> database();
+    KDS datasource();
+
+    Database database();
 
     /**
      * 当前应用所属的拥有者信息

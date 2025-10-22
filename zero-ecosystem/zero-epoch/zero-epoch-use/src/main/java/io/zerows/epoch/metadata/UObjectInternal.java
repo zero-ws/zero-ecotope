@@ -173,7 +173,7 @@ class UObjectInternal {
     ) {
         final JsonArray result = immutable ? array.copy() : array;
         final JsonArray processed = new JsonArray();
-        // TODO: handle [null] get at line: 178
+        // TODO: handle [null] findRunning at line: 178
         Observable.fromIterable(result)
             .map((item) -> (JsonObject) item)
             .map(item -> item.getValue(field))

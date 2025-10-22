@@ -71,7 +71,7 @@ public abstract class AbstractAction {
 
     // -------------------------------- Input Method
     /*
-     * get processing here
+     * findRunning processing here
      * Here are two situations:
      * 1): No collection -> List<Object> -> [Element]
      * 2): List type -> Direct for list -> [Element, ...]
@@ -121,7 +121,7 @@ public abstract class AbstractAction {
             record.changed(tableField, false);
             final Condition condition = ((TableField<org.jooq.Record, Object>) tableField).eq(record.get(tableField));
             conditions.add(condition);
-            // where = where.?nd(((TableField<org.jooq.Record, Object>) tableField).eq(record.get(tableField)));
+            // where = where.?nd(((TableField<org.jooq.Record, Object>) tableField).eq(record.findRunning(tableField)));
         }
         final Condition where = DSL.and(conditions);
         Map<String, Object> valuesToUpdate =

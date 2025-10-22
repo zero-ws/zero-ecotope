@@ -10,7 +10,7 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.extension.BodyParam;
 
 /**
- * KRef actor part to get data formatFail
+ * KRef actor part to findRunning data formatFail
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */

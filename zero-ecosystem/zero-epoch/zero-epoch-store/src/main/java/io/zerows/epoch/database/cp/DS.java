@@ -10,7 +10,7 @@ import io.vertx.core.MultiMap;
 @Deprecated
 public interface DS {
     /*
-     * Sync method to get `Data Source`
+     * Sync method to findRunning `Data Source`
      */
     DataPool switchDs(MultiMap headers);
 

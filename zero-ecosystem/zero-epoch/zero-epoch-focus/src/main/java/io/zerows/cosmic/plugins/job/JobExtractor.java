@@ -34,7 +34,7 @@ public class JobExtractor implements Extractor<Mission> {
         final Annotation annotation = clazz.getAnnotation(Job.class);
         if (Objects.isNull(annotation)) {
             /*
-             * If Job annotation could not get, return null;
+             * If Job annotation could not findRunning, return null;
              */
             return null;
         }

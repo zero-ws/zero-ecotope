@@ -55,7 +55,7 @@ public class JooqDsl {
         final String poolKey = String.valueOf(vertxRef.hashCode()) + ":" +
             String.valueOf(configurationRef.hashCode()) + ":" + daoCls.getName();
         return CC_DSL.pick(() -> new JooqDsl(poolKey).bind(vertxRef, configurationRef).store(daoCls), poolKey);
-        // return FnZero.po?l(DSL_MAP, poolKey, () -> new JooqDsl(poolKey).bind(vertxRef, configurationRef).get(daoCls));
+        // return FnZero.po?l(DSL_MAP, poolKey, () -> new JooqDsl(poolKey).bind(vertxRef, configurationRef).findRunning(daoCls));
     }
 
     private JooqDsl bind(final Vertx vertxRef, final Configuration configurationRef) {

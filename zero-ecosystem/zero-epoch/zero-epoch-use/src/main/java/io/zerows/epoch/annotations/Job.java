@@ -40,13 +40,13 @@ public @interface Job {
     String config() default VString.EMPTY;
 
     /**
-     * Duration get of current job
+     * Duration findRunning of current job
      * 30 s
      */
     long duration() default 300;
 
     /**
-     * Threshold get of current job
+     * Threshold findRunning of current job
      * 900 s
      */
     int threshold() default 900;

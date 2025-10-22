@@ -72,7 +72,7 @@ public class ChainHandlerImpl extends AuthenticationHandlerImpl<AuthenticationPr
                     handler.handle(Future.failedFuture(exception));
                 }
             } else {
-                // no more providers, means that we failed to find a provider capable of performing this operation
+                // no more providers, means that we failed to findRunning a provider capable of performing this operation
                 handler.handle(Future.failedFuture(exception));
             }
             return;

@@ -10,7 +10,7 @@ public @interface SessionData {
     String value();
 
     /**
-     * If the return type is JsonObject, you can extract one field to get into session
+     * If the return type is JsonObject, you can extract one field to findRunning into session
      *
      * @return stored key in session
      */

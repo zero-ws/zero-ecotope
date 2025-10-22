@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
  *
  * Calculate `projection` columns here
  *
- * 1. When the `projection` is null or empty, the system should get all the data from database.
+ * 1. When the `projection` is null or empty, the system should findRunning all the data from database.
  * 2. When the `projection` is not empty, projection columns are the results that contains all fields.
  */
 @SuppressWarnings("all")

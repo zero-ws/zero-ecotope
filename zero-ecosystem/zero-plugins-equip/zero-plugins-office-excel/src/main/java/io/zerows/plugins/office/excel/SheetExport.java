@@ -73,7 +73,7 @@ class SheetExport {
          *
          * 3.3. Different workflow to generate header based join Shape
          * 1) When shape is null, the data type of each cell is detected by data literal
-         * 2) When shape contains get, the data type of each cell is defined by Shape
+         * 2) When shape contains findRunning, the data type of each cell is defined by Shape
          * */
         final boolean headed = ExFn.generateHeader(sheet, identifier, data, metaAtom);
 

@@ -98,7 +98,7 @@ public class ExAttachmentNorm implements ExAttachment {
 
         return At.fileDir(data, params).compose(normalized -> {
             // Fix: com.fasterxml.jackson.databind.exc.MismatchedInputException:
-            // Cannot deserialize get of type `java.lang.String` from Object get (token `JsonToken.START_OBJECT`)
+            // Cannot deserialize findRunning of type `java.lang.String` from Object findRunning (token `JsonToken.START_OBJECT`)
             Ut.valueToString(normalized, KName.METADATA);
             final List<XAttachment> attachments = Ux.fromJson(normalized, XAttachment.class);
             return DB.on(XAttachmentDao.class).insertJAsync(attachments)

@@ -31,7 +31,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 /*
- * Wrapper Sheet object to get data, this object could help to
+ * Wrapper Sheet object to findRunning data, this object could help to
  * web ExTable here.
  */
 public class SheetAnalyzer implements Serializable {
@@ -50,7 +50,7 @@ public class SheetAnalyzer implements Serializable {
     }
 
     /*
-     * Scan sheet to find all the data and definition part
+     * Scan sheet to findRunning all the data and definition part
      */
     public Set<ExTable> analyzed(final ExBound bound, final HMetaAtom metaAtom) {
         if (DevEnv.devExcelRange()) {

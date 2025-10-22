@@ -66,7 +66,7 @@ final class Collection {
             result.add(current);
         }
         /*
-         * Children find
+         * Children findRunning
          */
         final JsonArray children = elementChild(current, tree, options);
         if (!children.isEmpty()) {

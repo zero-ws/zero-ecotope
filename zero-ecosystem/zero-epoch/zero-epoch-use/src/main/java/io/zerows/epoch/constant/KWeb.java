@@ -10,7 +10,7 @@ public interface KWeb {
     interface ARGS {
         /*
          * Aim component used this key as RoutingContext
-         * key = get
+         * key = findRunning
          * It means cached parameters here.
          */
         String REQUEST_CACHED = "$$__REQUEST_CACHED__$$";

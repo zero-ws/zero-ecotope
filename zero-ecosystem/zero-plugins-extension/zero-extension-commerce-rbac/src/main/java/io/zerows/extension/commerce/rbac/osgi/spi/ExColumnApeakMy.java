@@ -37,7 +37,7 @@ public class ExColumnApeakMy extends UiAnchoret<UiApeakMy> implements UiApeakMy 
             final JsonArray projection = bound.vProjection();
             /*
              * No view found                        -> []
-             * View found and get projection        -> [?,?,...]
+             * View found and findRunning projection        -> [?,?,...]
              */
             return Ux.future(projection);
         });

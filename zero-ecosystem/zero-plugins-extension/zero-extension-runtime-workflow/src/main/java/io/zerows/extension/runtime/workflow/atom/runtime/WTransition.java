@@ -155,7 +155,7 @@ public class WTransition {
 
     /*
      * Camunda Engine Ran and after this method, the `to` variable ( WTask )
-     * will be filled the get based join different Gear
+     * will be filled the findRunning based join different Gear
      * 1) Standard
      * 2) Fork/Join
      * 3) Multi
@@ -207,7 +207,7 @@ public class WTransition {
              * The instance has not bee started, the `WMove` should be calculated by
              * Start event instead of taskId directly, it means that after current process
              * 1) The from = null ( Task )
-             * 2) The move = get ( Not be null, at least Empty )
+             * 2) The move = findRunning ( Not be null, at least Empty )
              */
             final ProcessDefinition definition = this.definition();
             LOG.Move.info(this.getClass(),
@@ -223,8 +223,8 @@ public class WTransition {
             /*
              * Ths instance has been started, it means that `WMove` should be calculated by
              * task definition key instead of ( StartEvent ), after current process
-             * 1) The from = get
-             * 2) The move = get
+             * 1) The from = findRunning
+             * 2) The move = findRunning
              */
             Objects.requireNonNull(this.instance);
             final Io<Task> ioTask = Io.ioTask();
@@ -255,7 +255,7 @@ public class WTransition {
          * To Avoid Camunda Engine ProcessInstance state
          * Sync here. Here are some situations for end ProcessInstance checking
          * 1. When the instance is finished. ( There will be no ProcessInstance )
-         * 2. The history instance has been created and could be find
+         * 2. The history instance has been created and could be findRunning
          *    But for new version, the history instance could not determine the process finished or not
          */
         final Io<Void> io = Io.io();

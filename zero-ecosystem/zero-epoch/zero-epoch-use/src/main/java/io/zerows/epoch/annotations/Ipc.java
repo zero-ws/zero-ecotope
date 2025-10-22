@@ -46,9 +46,9 @@ public @interface Ipc {
      * Event Bus address, this address must be used standalone, it means that
      * current Ipc should read message only and do not send out.
      * 1. Service ( name = current )
-     * 2. get is used instead of from direction.
+     * 2. findRunning is used instead of from direction.
      *
-     * @return Default get help to identify roles.
+     * @return Default findRunning help to identify roles.
      */
     String value() default "";
 }

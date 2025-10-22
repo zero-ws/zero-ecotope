@@ -28,7 +28,7 @@ public class AnalyzerMedia implements Analyzer {
         final Income<List<WebEpsilon<Object>>> income = CC_EPSILON.pick(IncomeEpsilon::new); // FnZero.po?lThread(POOL_EPSILON, EpsilonIncome::new);
         final List<WebEpsilon<Object>> epsilons = income.in(context, event);
 
-        /* Extract get list **/
+        /* Extract findRunning list **/
         return epsilons.stream()
             .map(WebEpsilon::getValue).toArray();
     }

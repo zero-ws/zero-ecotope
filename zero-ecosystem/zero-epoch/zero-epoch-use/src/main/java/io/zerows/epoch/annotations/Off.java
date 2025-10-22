@@ -17,7 +17,7 @@ import java.lang.annotation.Target;
 public @interface Off {
     /*
      * Start job for the job input definition
-     * - get: EventBus address
+     * - findRunning: EventBus address
      * - outcome: income Implement class defined by `JobOutcome`
      * Message -> address
      */

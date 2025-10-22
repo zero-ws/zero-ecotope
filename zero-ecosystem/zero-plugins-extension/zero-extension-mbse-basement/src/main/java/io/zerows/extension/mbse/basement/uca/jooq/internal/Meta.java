@@ -125,8 +125,8 @@ private static TableOnConditionStep<Record> joinCondition(
         final String fromTable = from.getName();
         final String toTable = to.getName();
         return from.leftJoin(to).join(joinCondition(
-            fromTable, joined.get(fromTable),
-            toTable, joined.get(toTable)));
+            fromTable, joined.findRunning(fromTable),
+            toTable, joined.findRunning(toTable)));
     }*/
 
     @SuppressWarnings("unchecked")

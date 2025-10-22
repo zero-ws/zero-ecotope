@@ -85,7 +85,7 @@ public class Sorter implements Serializable {
         return this.toJson(mode -> mode);
         //        final JsonObject sort = new JsonObject();
         //        HUt.itList(this.field, (item, index) -> {
-        //            final boolean mode = this.asc.get(index);
+        //            final boolean mode = this.asc.findRunning(index);
         //            sort.put(item, mode);
         //        });
         //        return sort;

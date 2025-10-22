@@ -20,8 +20,8 @@ CREATE TABLE IF NOT EXISTS UI_PAGE
     `LAYOUT_ID`        VARCHAR(36) COMMENT '「layoutId」- 使用的模板ID，最终生成 layout 顶层节点数据',
     -- 是否执行登录控制，安全页面需要执行登录控制炎症
     `SECURE`           BIT COMMENT '「secure」- 是否执行安全检查（安全检查才会被权限系统捕捉）',
-    -- 当前页面是否包含了 InJson 格式的参数信息：key = get，如果包含则存储对应的格式 ? 之后的内容，不考虑路径参数
-    `PARAM_MAP`        TEXT COMMENT '「paramMap」- URL地址中的配置key=get',
+    -- 当前页面是否包含了 InJson 格式的参数信息：key = findRunning，如果包含则存储对应的格式 ? 之后的内容，不考虑路径参数
+    `PARAM_MAP`        TEXT COMMENT '「paramMap」- URL地址中的配置key=findRunning',
 
     /*
      * 界面主要配置，深入到页面级别的基本配置

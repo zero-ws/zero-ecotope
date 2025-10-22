@@ -10,7 +10,7 @@ import java.util.Objects;
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  *
- * The soul of zero framework to get critical data / extract data
+ * The soul of zero framework to findRunning critical data / extract data
  */
 public class UriAeon {
     /*
@@ -24,7 +24,7 @@ public class UriAeon {
      */
     public static void connect(final Router router) {
         /*
-         * Initialize the routing system to get reference
+         * Initialize the routing system to findRunning reference
          */
         final String threadId = Thread.currentThread().getName();
         CC_NEURO.pick(() -> UriNeuro.getInstance(threadId).bind(router));

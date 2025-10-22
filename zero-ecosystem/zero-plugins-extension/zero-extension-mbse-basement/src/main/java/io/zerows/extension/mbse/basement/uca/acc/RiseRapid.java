@@ -1,18 +1,18 @@
 package io.zerows.extension.mbse.basement.uca.acc;
 
+import io.r2mo.base.dbe.Database;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.OldDatabase;
 import io.zerows.epoch.metadata.Apt;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.domain.tables.daos.MAccDao;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MAcc;
 import io.zerows.extension.mbse.basement.util.Ao;
 import io.zerows.platform.enums.modeling.EmAttribute;
 import io.zerows.platform.enums.typed.ChangeFlag;
-import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.specification.app.HArk;
 import io.zerows.specification.modeling.operation.HDao;
@@ -28,11 +28,11 @@ import java.util.concurrent.ConcurrentMap;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 class RiseRapid implements Rise {
-    private transient OldDatabase oldDatabase;
+    private transient Database database;
 
     @Override
-    public Rise bind(final OldDatabase oldDatabase) {
-        this.oldDatabase = oldDatabase;
+    public Rise bind(final Database database) {
+        this.database = database;
         return this;
     }
 
@@ -52,7 +52,7 @@ class RiseRapid implements Rise {
     }
 
     private Future<JsonArray> inputData(final JsonObject criteria, final DataAtom atom) {
-        final HDao dao = Ao.toDao(atom, this.oldDatabase);
+        final HDao dao = Ao.toDao(atom, this.database);
         return dao.fetchAsync(criteria)
             .compose(records -> Ux.future(Ut.toJArray(records)));
     }

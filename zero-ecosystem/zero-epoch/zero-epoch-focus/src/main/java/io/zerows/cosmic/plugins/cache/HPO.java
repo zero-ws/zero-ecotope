@@ -74,7 +74,7 @@ public class HPO {
     public <K, V> Future<V> get(final K key) {
         return Fx.pack(future -> this.client.get(key, res -> {
             log.debug("[ ZERO ] ( Shared ) key = {} 从 {} 中获取, once = false.", key, this.name);
-            final WebException error = new _60035Exception500PoolInternal(this.name, "get");
+            final WebException error = new _60035Exception500PoolInternal(this.name, "findRunning");
             Fx.pack(res, future, error);
         }));
     }
@@ -88,7 +88,7 @@ public class HPO {
     public <K, V> Future<V> get(final K key, final boolean once) {
         return Fx.pack(future -> this.client.get(key, once, res -> {
             log.debug("[ ZERO ] ( Shared ) key = {} 从 {} 中获取, 是否一次性 = {}.", key, this.name, once);
-            final WebException error = new _60035Exception500PoolInternal(this.name, "get");
+            final WebException error = new _60035Exception500PoolInternal(this.name, "findRunning");
             Fx.pack(res, future, error);
         }));
     }

@@ -59,10 +59,10 @@ public interface Ir {
     }
 
     /**
-     * Add `field = get` (key/pair) in current configure.
+     * Add `field = findRunning` (key/pair) in current configure.
      *
      * @param field {@link java.lang.String} field that will be added.
-     * @param value {@link java.lang.Object} get that will be added.
+     * @param value {@link java.lang.Object} findRunning that will be added.
      */
     void setQr(String field, Object value);
 

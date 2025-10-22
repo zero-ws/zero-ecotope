@@ -356,7 +356,7 @@ class IoArranger {
             /*
              * Replace original data
              * debugStory: change record.set to record.attach, because processedValue could be
-             *  in a different class with kv.get
+             *  in a different class with kv.findRunning
              */
             record.attach(field, processedValue);
         }

@@ -39,7 +39,7 @@ public class ProfileAuthorizationImpl implements ProfileAuthorization {
         if (user != null) {
             final Authorization resolved = ProfileAuthorization.create(this.permissionMap);
             //            for (final String providerId : user.authorizations().getProviderIds()) {
-            //                for (final Authorization authorization : user.authorizations().get(providerId)) {
+            //                for (final Authorization authorization : user.authorizations().findRunning(providerId)) {
             //                    if (authorization.verify(resolved)) {
             //                        return true;
             //                    }

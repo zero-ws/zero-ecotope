@@ -1,10 +1,11 @@
 package io.zerows.extension.mbse.basement.osgi.spi.ambient;
 
+import io.r2mo.base.dbe.Database;
+import io.r2mo.spi.SPI;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.OldDatabase;
 import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.mbse.basement.atom.Model;
@@ -23,6 +24,7 @@ import io.zerows.platform.enums.typed.ChangeFlag;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,6 +36,7 @@ import java.util.function.Function;
 
 import static io.zerows.extension.mbse.basement.util.Ao.LOG;
 
+@Slf4j
 class SchemaRefine implements AoRefine {
 
     @Override
@@ -60,11 +63,10 @@ class SchemaRefine implements AoRefine {
     }
 
     private void syncDatabase(final JsonObject source, final Set<Schema> schemata) {
-        final OldDatabase oldDatabase = new OldDatabase();
-        oldDatabase.fromJson(source);
-        LOG.Uca.info(this.getClass(), "Database Extraction: {0}", oldDatabase.toJson());
+        final Database database = Database.createDatabase(SPI.J(source));
+        log.info("[ ZMOD ] 数据库提取：{}", source);
         final Pin pin = Pin.getInstance();
-        final AoBuilder builder = pin.getBuilder(oldDatabase);
+        final AoBuilder builder = pin.getBuilder(database);
 
         schemata.forEach(builder::synchron);
     }

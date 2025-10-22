@@ -8,7 +8,7 @@ import java.lang.annotation.*;
  * > Vert.x native client
  *
  * This annotation is for MySql database in zero with jdbc ( MySql Async Client ) instead of
- * Jooq, it provide extension to access MySql database and you can get MySql client reference
+ * Jooq, it provide extension to access MySql database and you can findRunning MySql client reference
  * with this annotation. The infix usage is as following ( `vertx-ifx/zero-ifx-native` module ):
  *
  * ```java
@@ -22,7 +22,7 @@ import java.lang.annotation.*;
  * // </code></pre>
  * ```
  *
- * Here you can provide two mode to get `io.vertx.ext.sql.SQLClient`
+ * Here you can provide two mode to findRunning `io.vertx.ext.sql.SQLClient`
  *
  * ```java
  * // <pre><code>

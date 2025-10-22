@@ -27,8 +27,8 @@ class JobStoreUnity implements JobStore {
     public Set<Mission> fetch() {
         /*
          * Split all the job from here
-         * 1) All programming jobs are readonly ( Fixed get )
-         * 2) All stored jobs are editable ( Fixed get )
+         * 1) All programming jobs are readonly ( Fixed findRunning )
+         * 2) All stored jobs are editable ( Fixed findRunning )
          * 3) Double check jobs `readOnly` here ( Be sure readOnly set correctly )
          */
         final Set<Mission> missions = this.reader.fetch()

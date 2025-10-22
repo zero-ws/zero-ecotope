@@ -35,7 +35,7 @@ public abstract class ExAttributeComponent {
      *         "source": "Related to `source` field of M_ATTRIBUTE",
      *         "sourceField": "Related to `sourceField` field of M_ATTRIBUTE",
      *         "sourceData": {
-     *             "comments": "The final dictionary data get"
+     *             "comments": "The final dictionary data findRunning"
      *         }
      *     }
      * // </code></pre>

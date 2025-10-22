@@ -1,8 +1,8 @@
 package io.zerows.extension.mbse.action.util;
 
+import io.r2mo.base.dbe.Database;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.OldDatabase;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IApi;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IJob;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IService;
@@ -11,7 +11,6 @@ import io.zerows.extension.mbse.action.eon.em.WorkerType;
 import io.zerows.extension.skeleton.common.Ke;
 import io.zerows.platform.metadata.KDictConfig;
 import io.zerows.platform.metadata.KIntegration;
-import io.zerows.platform.metadata.OldKDS;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.app.HArk;
 import io.zerows.specification.modeling.HRule;
@@ -58,18 +57,20 @@ class JtDataObject {
         }
     }
 
-    static OldDatabase toDatabase(final IService service) {
+    static Database toDatabase(final IService service) {
         final HArk ark = Ke.ark(service.getSigma());
-        final OldKDS<OldDatabase> ds = ark.database();
-        final JsonObject databaseJ = Ut.toJObject(service.getConfigDatabase());
-        // 通道中未配置数据库
-        if (Ut.isNil(databaseJ)) {
-            return ds.dynamic();
-        }
-        // 构造通道中数据库
-        final OldDatabase oldDatabase = new OldDatabase();
-        oldDatabase.fromJson(databaseJ);
-        return oldDatabase;
+        final Database ds = ark.database();
+        // UPD-006: 根据服务配置中的数据库信息构造数据库对象
+
+        //        final JsonObject databaseJ = Ut.toJObject(service.getConfigDatabase());
+        //        // 通道中未配置数据库
+        //        if (Ut.isNil(databaseJ)) {
+        //            return ds.dynamic();
+        //        }
+        //        // 构造通道中数据库
+        //        final OldDatabase oldDatabase = new OldDatabase();
+        //        oldDatabase.fromJson(databaseJ);
+        return null;
     }
 
     @SuppressWarnings("all")
@@ -111,7 +112,7 @@ class JtDataObject {
 
     static void initApi(final IApi api) {
         /*
-         * Set default get in I_API related to worker
+         * Set default findRunning in I_API related to worker
          * workerType
          * workerAddress
          * workerConsumer

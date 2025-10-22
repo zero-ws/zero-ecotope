@@ -49,7 +49,7 @@ public interface UserAgent {
 
     /**
      * modified by Hongwei at 2019/12/06
-     * add get, create, update and delete methods for user domain.
+     * add findRunning, create, update and delete methods for user domain.
      */
     @GET
     @Path("/user/:key")

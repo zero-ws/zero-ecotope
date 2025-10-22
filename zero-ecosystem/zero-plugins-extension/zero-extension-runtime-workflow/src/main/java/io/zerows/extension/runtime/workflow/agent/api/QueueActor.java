@@ -104,7 +104,7 @@ public class QueueActor {
      *
      * The code logical is as following
      * 1) When condition provided, DEFAULT
-     * 2) When condition contains get ( Not Empty ), User/Assignment
+     * 2) When condition contains findRunning ( Not Empty ), User/Assignment
      * History Queue based join WTicket
      * - flowEnd = true
      * - WTicket is ok to display in the done queue

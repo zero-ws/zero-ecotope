@@ -1,10 +1,10 @@
 package io.zerows.extension.mbse.action.uca.tunnel;
 
+import io.r2mo.base.dbe.Database;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.cosmic.plugins.cache.Rapid;
 import io.zerows.epoch.constant.KWeb;
-import io.zerows.epoch.database.OldDatabase;
 import io.zerows.epoch.metadata.XHeader;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.mbse.action.osgi.spi.jet.JtComponent;
@@ -35,8 +35,8 @@ class Anagogic {
     /*
      * Database processing
      */
-    static Future<OldDatabase> databaseAsync(final Commercial commercial) {
-        return Rapid.<String, OldDatabase>object(KWeb.CACHE.DATABASE_MULTI)
+    static Future<Database> databaseAsync(final Commercial commercial) {
+        return Rapid.<String, Database>object(KWeb.CACHE.DATABASE_MULTI)
             .cached(commercial.app(), () -> Ux.future(commercial.database()));
     }
 

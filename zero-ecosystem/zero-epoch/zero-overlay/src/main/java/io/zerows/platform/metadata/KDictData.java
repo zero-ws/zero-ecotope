@@ -42,7 +42,7 @@ class KDictData {
     }
 
     /*
-     * Api for update / add / get operation on `dictData`
+     * Api for update / add / findRunning operation on `dictData`
      */
     void itemUpdate(final String dictName, final JsonObject input, final String keyField) {
         final JsonObject data = UtBase.valueJObject(input);
@@ -75,7 +75,7 @@ class KDictData {
 
     JsonObject itemFind(final String dictName, final String value, final String keyField) {
         final JsonArray dictData = this.item(dictName);
-        // Find the `keyField` = get as condition
+        // Find the `keyField` = findRunning as condition
         return UtBase.elementFind(dictData, keyField, value);
     }
 }

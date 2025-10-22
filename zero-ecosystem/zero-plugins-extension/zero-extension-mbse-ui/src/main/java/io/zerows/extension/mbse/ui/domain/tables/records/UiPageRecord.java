@@ -203,7 +203,7 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements V
 
     /**
      * Getter for <code>ZDB.UI_PAGE.PARAM_MAP</code>. 「paramMap」-
-     * URL地址中的配置key=get
+     * URL地址中的配置key=findRunning
      */
     @Override
     public String getParamMap() {
@@ -212,7 +212,7 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements V
 
     /**
      * Setter for <code>ZDB.UI_PAGE.PARAM_MAP</code>. 「paramMap」-
-     * URL地址中的配置key=get
+     * URL地址中的配置key=findRunning
      */
     @Override
     public UiPageRecord setParamMap(final String value) {

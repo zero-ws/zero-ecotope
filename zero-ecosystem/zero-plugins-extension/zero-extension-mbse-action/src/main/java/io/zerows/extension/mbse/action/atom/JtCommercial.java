@@ -1,8 +1,8 @@
 package io.zerows.extension.mbse.action.atom;
 
+import io.r2mo.base.dbe.Database;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.OldDatabase;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IService;
 import io.zerows.extension.mbse.action.eon.JtKey;
 import io.zerows.extension.mbse.action.util.Jt;
@@ -106,7 +106,7 @@ public abstract class JtCommercial implements Commercial {
     }
 
     @Override
-    public OldDatabase database() {
+    public Database database() {
         return Jt.toDatabase(this.service);
     }
 

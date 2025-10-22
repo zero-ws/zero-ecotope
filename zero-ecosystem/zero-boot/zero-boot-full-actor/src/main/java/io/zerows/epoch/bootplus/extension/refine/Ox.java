@@ -9,7 +9,6 @@ import io.zerows.epoch.bootplus.extension.cv.em.TypeLog;
 import io.zerows.epoch.bootplus.extension.uca.code.Numeration;
 import io.zerows.epoch.bootplus.stellar.ArgoStore;
 import io.zerows.epoch.constant.VDBC;
-import io.zerows.epoch.database.cp.DataPool;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.atom.data.DataGroup;
@@ -118,7 +117,7 @@ public final class Ox {
     }
 
     /**
-     * 「After」读取<get>plugin.ticket</get>值提取ITSM开单专用插件。
+     * 「After」读取<findRunning>plugin.ticket</findRunning>值提取ITSM开单专用插件。
      *
      * @param options {@link JsonObject} ServiceConfig配置原始数据
      *
@@ -129,7 +128,7 @@ public final class Ox {
     }
 
     /**
-     * 「Around」读取<get>plugin.activity</get>值构造历史记录生成专用插件。
+     * 「Around」读取<findRunning>plugin.activity</findRunning>值构造历史记录生成专用插件。
      *
      * @param options {@link JsonObject} ServiceConfig配置原始数据
      *
@@ -140,7 +139,7 @@ public final class Ox {
     }
 
     /**
-     * 「Around」读取<get>plugin.todo</get>值构造待办确认单生成专用插件。
+     * 「Around」读取<findRunning>plugin.todo</findRunning>值构造待办确认单生成专用插件。
      *
      * @param options {@link JsonObject} ServiceConfig配置原始数据
      *
@@ -151,10 +150,10 @@ public final class Ox {
     }
 
     /**
-     * 「Around」读取<get>plugin.component</get>值构造标准的AOP插件，执行Before和After两个核心流程
+     * 「Around」读取<findRunning>plugin.component</findRunning>值构造标准的AOP插件，执行Before和After两个核心流程
      *
-     * - <get>plugin.component.before</get>：前置插件表（数组）
-     * - <get>plugin.component.after</get>：后置插件表（数组）
+     * - <findRunning>plugin.component.before</findRunning>：前置插件表（数组）
+     * - <findRunning>plugin.component.after</findRunning>：后置插件表（数组）
      *
      * @param options {@link JsonObject} ServiceConfig配置原始数据
      *
@@ -165,7 +164,7 @@ public final class Ox {
     }
 
     /**
-     * 构造标识规则选择器，读取插件<get>plugin.identifier</get>值提取标识规则选择器，使用默认配置项`options`。
+     * 构造标识规则选择器，读取插件<findRunning>plugin.identifier</findRunning>值提取标识规则选择器，使用默认配置项`options`。
      *
      * @param atom {@link DataAtom} 模型定义
      *
@@ -251,21 +250,6 @@ public final class Ox {
                                             final Supplier<AspectPlugin> supplier, final DataAtom atom,
                                             final Function<JsonObject, Future<JsonObject>> executor) {
         return OxPlugin.runAop(input, config, supplier, atom, executor);
-    }
-
-    /**
-     * 数据源执行器，{@link DataPool}数据源运行主流程。
-     *
-     * @param sigma    {@link String} 应用统一标识符
-     * @param supplier {@link Supplier} 外部数据读取器
-     * @param executor {@link Function} 函数执行器
-     * @param <T>      最终执行后返回的数据类型
-     *
-     * @return {@link Future}
-     */
-    public static <T> Future<T> runDs(final String sigma, final Supplier<T> supplier,
-                                      final Function<DataPool, Future<T>> executor) {
-        return OxPlugin.runDs(sigma, supplier, executor);
     }
 
     /**
@@ -791,7 +775,7 @@ public final class Ox {
 
 
         /**
-         * <get>cmdb.commutator</get>，反射专用生命周期处理器配置（下层调用上层，使用反射，不能直接使用类型）。
+         * <findRunning>cmdb.commutator</findRunning>，反射专用生命周期处理器配置（下层调用上层，使用反射，不能直接使用类型）。
          *
          * @param commutator `io.zerows.epoch.bootplus.extension.operation.workflow.Commutator`类型默认值
          *

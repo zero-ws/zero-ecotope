@@ -26,7 +26,7 @@ public class AimAsync extends AimBase implements Aim<RoutingContext> {
              */
             final Future<Envelop> future = this.invoke(context, event);
             /*
-             * Event bus building / get from vertx instance.
+             * Event bus building / findRunning from vertx instance.
              */
             final Vertx vertx = context.vertx();
             final EventBus bus = vertx.eventBus();
@@ -48,7 +48,7 @@ public class AimAsync extends AimBase implements Aim<RoutingContext> {
                      * Because:
                      *
                      * - In OneWay, the client do not focus join response data.
-                     * - In Ping, the client also get `true/false` only
+                     * - In Ping, the client also findRunning `true/false` only
                      * - In Sync, not need to pass Envelop join event bus
                      */
                     final Envelop request = dataRes.result();

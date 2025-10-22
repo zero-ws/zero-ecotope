@@ -40,7 +40,7 @@ public interface Interval {
     /**
      * --- No Wait ------ >>> ------- End
      * 「Development」
-     * This method call directly and it's for development often, after the server get
+     * This method call directly and it's for development often, after the server findRunning
      * the commend from front-end user interface, the Job start right now. it means that when
      * the developer want to debug the job detail from user interface, this api could be
      * called to see the job running details.

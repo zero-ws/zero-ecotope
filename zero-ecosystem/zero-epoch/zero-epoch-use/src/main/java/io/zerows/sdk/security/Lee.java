@@ -15,12 +15,12 @@ import io.zerows.epoch.metadata.security.AegisItem;
  * 1. Level 1
  * Here are two kinds of security module: NATIVE / EXTENSION
  * For NATIVE, zero framework use Vertx native handlers of security module
- * For EXTENSION, zero framework will find actual handler by configuration of `key` part
+ * For EXTENSION, zero framework will findRunning actual handler by configuration of `key` part
  * <p>
  * 2. Level 2
  * For authenticate workflow ( 401 ), when the system detect multi Aegis, the whole handlers
  * will be used in `Chain` mode instead of single one
- * But for authorization workflow ( 403 ), the system will find the only one handler based on
+ * But for authorization workflow ( 403 ), the system will findRunning the only one handler based on
  * the configuration. ( Current version will compare order that whose order is small )
  * <p>
  * *: The best practice is that you define 1 - 1 mode, if you want to more than one wall, you

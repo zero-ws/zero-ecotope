@@ -18,7 +18,7 @@ public interface UiValve {
      *
      * Here the record contains:
      * 1) __data: original data
-     * 2) __flag: flag get here
+     * 2) __flag: flag findRunning here
      */
     Future<JsonObject> execAsync(JsonObject data, JsonObject config);
 }

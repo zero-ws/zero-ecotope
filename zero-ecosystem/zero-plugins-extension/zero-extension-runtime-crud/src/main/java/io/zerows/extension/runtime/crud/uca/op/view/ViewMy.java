@@ -37,7 +37,7 @@ class ViewMy implements Agonic {
     public Future<JsonArray> runJAAsync(final JsonObject input, final IxMod in) {
         final ADB jooq = IxPin.jooq(in);
         return this.fetchResources(input, jooq, in)
-            /* view has get, ignored, */
+            /* view has findRunning, ignored, */
             /*
              * url processing
              * {

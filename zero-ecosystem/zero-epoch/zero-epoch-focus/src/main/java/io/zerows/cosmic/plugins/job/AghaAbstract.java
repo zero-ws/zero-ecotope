@@ -107,8 +107,8 @@ public abstract class AghaAbstract implements Agha {
     /*
      * Input workflow for Mission
      * 1. Whether address configured ?
-     *    - Yes, get Envelop from event bus as secondary input
-     *    - No, get Envelop of `Envelop.ok()` instead
+     *    - Yes, findRunning Envelop from event bus as secondary input
+     *    - No, findRunning Envelop of `Envelop.ok()` instead
      * 2. Extract `JobIncome`
      * 3. Major
      * 4. JobOutcome

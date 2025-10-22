@@ -17,7 +17,7 @@ public interface KName extends VName {
 
     // 「Attachment Definition」
     interface Attachment {
-        String STORE_WAY = "storeWay";               /* XAttachment, get way of the file */
+        String STORE_WAY = "storeWay";               /* XAttachment, findRunning way of the file */
         String FILE_NAME = "fileName";               /* XAttachment filename */
         String FILE_URL = "fileUrl";                 /* XAttachment fileUrl */
         String FILE_PATH = "filePath";               /* XAttachment filePath processing */
@@ -79,7 +79,7 @@ public interface KName extends VName {
 
         String MAPPING_CONFIG = "mappingConfig";
 
-        String DICT_EPSILON = "dictEpsilon";                 /* Origin X to get definition of Epsilon */
+        String DICT_EPSILON = "dictEpsilon";                 /* Origin X to findRunning definition of Epsilon */
     }
 
 

@@ -1,22 +1,17 @@
 package io.zerows.extension.mbse.basement.util;
 
+import io.r2mo.base.dbe.Database;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.OldDatabase;
-import io.zerows.epoch.database.cp.DS;
-import io.zerows.epoch.database.cp.DataPool;
 import io.zerows.extension.mbse.basement.atom.Model;
 import io.zerows.extension.mbse.basement.atom.Schema;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
-import io.zerows.extension.mbse.basement.atom.data.DataRecord;
 import io.zerows.extension.mbse.basement.osgi.spi.mixture.HLoadAtom;
 import io.zerows.extension.mbse.basement.osgi.spi.robin.Switcher;
 import io.zerows.extension.mbse.basement.uca.jdbc.Pin;
 import io.zerows.extension.skeleton.common.Ke;
-import io.zerows.platform.metadata.KDatabase;
 import io.zerows.platform.metadata.KIdentity;
-import io.zerows.platform.metadata.OldKDS;
 import io.zerows.program.Ux;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.app.HArk;
@@ -109,21 +104,14 @@ class AoImpl {
     }
 
     static HDao toDao(final HAtom atom) {
-        return Ux.channelS(DS.class, ds -> {
-            /* 连接池绑定数据库 */
-            final HArk ark = atom.ark();
-            final DataPool pool = ds.switchDs(ark.sigma());
-            if (Objects.nonNull(pool)) {
-                /* 返回AoDao */
-                final KDatabase database = pool.getDatabase();
-                return toDao(() -> atom, database);
-            } else {
-                return null;
-            }
-        });
+        /* 数据连接池从应用中绑定 */
+        final HArk ark = atom.ark();
+        final Database database = ark.database();
+        Objects.requireNonNull(database, "[ ZMOD ] 数据库配置不可为空，请检查应用配置！");
+        return toDao(() -> atom, database);
     }
 
-    static HDao toDao(final Supplier<HAtom> supplier, final KDatabase database) {
+    static HDao toDao(final Supplier<HAtom> supplier, final Database database) {
         if (Objects.isNull(database)) {
             return null;
         } else {
@@ -154,8 +142,7 @@ class AoImpl {
         if (Objects.isNull(atom)) {
             return null;
         }
-        final HRecord record = new DataRecord();
-        Ut.contract(record, DataAtom.class, atom);
+        final HRecord record = AoData.record(atom);
         return Ux.updateR(record, data);
     }
 
@@ -169,8 +156,8 @@ class AoImpl {
             atom = null;
         }
         if (Objects.nonNull(atom)) {
-            final OldKDS<OldDatabase> ds = ark.database();
-            return toDao(() -> atom, ds.dynamic());
+            final Database database = ark.database();
+            return toDao(() -> atom, database);
         } else {
             return null;
         }

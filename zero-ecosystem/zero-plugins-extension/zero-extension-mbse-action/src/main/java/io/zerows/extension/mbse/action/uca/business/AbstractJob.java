@@ -1,12 +1,12 @@
 package io.zerows.extension.mbse.action.uca.business;
 
+import io.r2mo.base.dbe.Database;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.LogOf;
 import io.zerows.cosmic.plugins.job.metadata.Mission;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
-import io.zerows.epoch.database.OldDatabase;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IService;
 import io.zerows.extension.mbse.action.util.Jt;
 import io.zerows.mbse.sdk.Service;
@@ -91,7 +91,7 @@ public abstract class AbstractJob implements Service {
     }
 
     /*
-     * All `Job` sub-class must implement this method to get `Mission` object
+     * All `Job` sub-class must implement this method to findRunning `Mission` object
      * This component configuration are all created by `Mission` instead of
      * channel @Contract.
      */
@@ -104,7 +104,7 @@ public abstract class AbstractJob implements Service {
      * 2. Get dao reference ( OxDao )
      * 3. Get data argument reference ( DataAtom )
      */
-    protected OldDatabase database() {
+    protected Database database() {
         return Jt.toDatabase(this.service());
     }
 

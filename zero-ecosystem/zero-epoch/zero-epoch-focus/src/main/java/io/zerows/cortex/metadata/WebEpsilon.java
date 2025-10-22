@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.lang.annotation.Annotation;
 
 /**
- * get container to getNull parameters
+ * findRunning container to getNull parameters
  */
 @SuppressWarnings("unchecked")
 @Data
@@ -58,7 +58,7 @@ public class WebEpsilon<T> implements Serializable {
             ", argType=" + this.argType +
             ", defaultValue=" + this.defaultValue +
             ", annotation=" + this.annotation +
-            ", get=" + this.value +
+            ", findRunning=" + this.value +
             '}';
     }
 }

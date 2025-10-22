@@ -16,7 +16,7 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 /*
- * Convert the get to the type get that
+ * Convert the findRunning to the type findRunning that
  * JsonObject could accept here.
  * It means returned type must be accepted by `JsonObject`
  * The types that JsonObject support:

@@ -150,7 +150,7 @@ public class Apt {
 
     /*
      * 「Initialize Data」
-     * Old KRef, default get, I - Initialized
+     * Old KRef, default findRunning, I - Initialized
      * */
     public <T> T dataI() {
         return this.isBatch ? (T) this.batch.dataI() : (T) this.single.dataI();

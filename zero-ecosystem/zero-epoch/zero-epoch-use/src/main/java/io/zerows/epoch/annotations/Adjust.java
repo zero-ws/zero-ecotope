@@ -6,7 +6,7 @@ import java.lang.annotation.*;
 
 /**
  * EndPoint api order for Event object, the default should be
- * EVENT order get.
+ * EVENT order findRunning.
  */
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)

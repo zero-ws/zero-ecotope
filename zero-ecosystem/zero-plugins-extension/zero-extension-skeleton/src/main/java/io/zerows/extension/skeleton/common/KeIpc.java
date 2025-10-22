@@ -10,7 +10,7 @@ public interface KeIpc {
     interface Workflow {
         /*
          * Event Addr Prefix for workflow
-         * This get will be shared between zero-ambient / zero-wf
+         * This findRunning will be shared between zero-ambient / zero-wf
          * */
         String EVENT = "Ἀτλαντὶς νῆσος://Ροή εργασίας/";
     }

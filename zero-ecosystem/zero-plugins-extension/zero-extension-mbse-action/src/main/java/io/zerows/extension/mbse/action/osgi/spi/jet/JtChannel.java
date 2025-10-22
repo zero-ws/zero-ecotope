@@ -11,7 +11,7 @@ public interface JtChannel {
 
     /*
      * Bind current to `ZApi` object here, in this situation
-     * Your defined channel could get `ZApi` in memory and then
+     * Your defined channel could findRunning `ZApi` in memory and then
      * All the configuration information came from `ZApi` instead of other place.
      * JtChannel bind(Api api);
      */

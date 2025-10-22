@@ -105,7 +105,7 @@ public interface ExIo {
      * File Map Data structure
      * -- storePath = directoryId
      *
-     * Here directoryId will detect get integration part for under Fs interface switch
+     * Here directoryId will detect findRunning integration part for under Fs interface switch
      */
     Future<JsonArray> trashIn(JsonArray directoryJ, ConcurrentMap<String, String> fileMap);
 

@@ -2,7 +2,6 @@ package io.zerows.epoch.database.cp;
 
 import io.r2mo.typed.cc.Cc;
 import io.zerows.component.log.LogO;
-import io.zerows.epoch.database.OldDatabase;
 import io.zerows.platform.metadata.KDatabase;
 import io.zerows.support.Ut;
 import org.jooq.Configuration;
@@ -27,7 +26,7 @@ public interface DataPool {
     Cc<String, DataPool> CC_POOL_DYNAMIC = Cc.open();
 
     static DataPool create() {
-        return create(OldDatabase.getCurrent());
+        return null; // create(OldDatabase.getCurrent());
     }
 
     static DataPool create(final KDatabase database) {

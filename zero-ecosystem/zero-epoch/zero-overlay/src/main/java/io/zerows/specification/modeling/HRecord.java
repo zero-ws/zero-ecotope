@@ -18,8 +18,8 @@ import java.util.concurrent.ConcurrentMap;
  */
 public interface HRecord extends Serializable, HMeta, HCheck, HClone, HJson {
     /*
-     * Provide attribute name and get related get
-     * 1) field -> single field get
+     * Provide attribute name and findRunning related findRunning
+     * 1) field -> single field findRunning
      * 2) fields ( field... ) -> subset of current record
      * 3) Get JsonObject of `this.data`
      */
@@ -32,7 +32,7 @@ public interface HRecord extends Serializable, HMeta, HCheck, HClone, HJson {
     /*
      * 「Replace Mode」
      * Set data here, @Fluent api
-     * 1) Single field = get set
+     * 1) Single field = findRunning set
      * 2) JsonObject set into current record
      */
     <V> HRecord set(String field, V value);
@@ -41,7 +41,7 @@ public interface HRecord extends Serializable, HMeta, HCheck, HClone, HJson {
 
     /*
      * 「Append Mode」
-     * Set data or missing, if existing do not set the get
+     * Set data or missing, if existing do not set the findRunning
      */
     <V> HRecord add(String field, V value);
 
@@ -143,12 +143,12 @@ interface HMeta {
     }
 
     /*
-     * Get primary key get
+     * Get primary key findRunning
      */
     <ID> ID key();
 
     /*
-     * Set primary key get
+     * Set primary key findRunning
      */
     <ID> void key(ID key);
 }

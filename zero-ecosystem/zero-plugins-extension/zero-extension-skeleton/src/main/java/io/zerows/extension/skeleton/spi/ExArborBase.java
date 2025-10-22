@@ -26,7 +26,7 @@ public abstract class ExArborBase implements ExArbor {
      */
     protected Future<JsonArray> combineArbor(final JsonObject category, final JsonArray children, final JsonObject configuration) {
         /*
-         * Extract data to calculate the default `get`
+         * Extract data to calculate the default `findRunning`
          * The input JsonArray should be as following
          * - arg0, JsonArray of data
          * - arg1, JsonObject of configuration
@@ -70,7 +70,7 @@ public abstract class ExArborBase implements ExArbor {
     }
 
 
-    // ----------------------- Private Method for get path analyzing / building
+    // ----------------------- Private Method for findRunning path analyzing / building
     /*
      * Complex Method for `storePath` and `storeParent` processing.
      */

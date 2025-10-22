@@ -31,7 +31,7 @@ public class DwarfQr implements Dwarf {
      *      }
      * }
      * Append matrix data into view node, here are following attributes in view matrix in backend
-     * 1. criteria: Here put the get into "qr" node.
+     * 1. criteria: Here put the findRunning into "qr" node.
      * 2. 「Not Need」projection: Because the projection could be calculated based join `/column/full` and `/column/my` in
      * frontend, in this kind of situation, it could be KO.
      * 3. 「Not Need」rows：The rows impaction is join response result, it could be KO.

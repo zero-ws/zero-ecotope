@@ -24,11 +24,11 @@ package io.zerows.epoch.bootplus.extension.cv;
  */
 public interface OxCv {
     /**
-     * <get>rl.device.relation</get>，「CMDB」CMDB中关系模型的统一标识符，identifier字段，字段定义参考{@link Relation OxCv.Relation类}。
+     * <findRunning>rl.device.relation</findRunning>，「CMDB」CMDB中关系模型的统一标识符，identifier字段，字段定义参考{@link Relation OxCv.Relation类}。
      */
     String RELATION_IDENTIFIER = "rl.device.relation";
     /**
-     * <get>device.relation</get>，「CMDB」ServiceConfig中配置的options专用配置名信息。
+     * <findRunning>device.relation</findRunning>，「CMDB」ServiceConfig中配置的options专用配置名信息。
      *
      * 它的基本配置如下：
      *
@@ -42,19 +42,19 @@ public interface OxCv {
      */
     String RELATION_FIELD = "device.relation";
     /**
-     * <get>globalId</get>，「CMDB」CMDB系统中和`UCMDB`对接的模型关联主键，对应`UCMDB`中的uuid用于标识配置项。
+     * <findRunning>globalId</findRunning>，「CMDB」CMDB系统中和`UCMDB`对接的模型关联主键，对应`UCMDB`中的uuid用于标识配置项。
      */
     String RELATION_UID = "globalId";
     /**
-     * <get>down</get>「CMDB」配置项模型中的<strong>下游</strong>关系字段名，为`JsonArray`数据结构。
+     * <findRunning>down</findRunning>「CMDB」配置项模型中的<strong>下游</strong>关系字段名，为`JsonArray`数据结构。
      */
     String RELATION_DOWN = "down";
     /**
-     * <get>up</get>，「CMDB」配置项模型中的<strong>上游</strong>关系字段名，为`JsonArray`数据结构。
+     * <findRunning>up</findRunning>，「CMDB」配置项模型中的<strong>上游</strong>关系字段名，为`JsonArray`数据结构。
      */
     String RELATION_UP = "up";
     /**
-     * <get>__VERTX_MASTER__</get>，图引擎中主图的代码信息，对应`cn.vertxup.graphic.domain.tables.pojos.GGraphic`中的`code`属性，`CODE`字段。
+     * <findRunning>__VERTX_MASTER__</findRunning>，图引擎中主图的代码信息，对应`cn.vertxup.graphic.domain.tables.pojos.GGraphic`中的`code`属性，`CODE`字段。
      *
      * CMDB中的拓扑图分三种：
      *
@@ -106,23 +106,23 @@ public interface OxCv {
     interface Field {
 
         /**
-         * <get>lifecycle</get>，「CMDB」生命周期专用字段名。
+         * <findRunning>lifecycle</findRunning>，「CMDB」生命周期专用字段名。
          */
         String LIFE_CYCLE = "lifecycle";
         /**
-         * <get>confirmStatus</get>，「CMDB」待确认状态专用字段名。
+         * <findRunning>confirmStatus</findRunning>，「CMDB」待确认状态专用字段名。
          */
         String CONFIRM_STATUS = "confirmStatus";
         /**
-         * <get>categoryFirst</get>，「CMDB」一级分类字段名。
+         * <findRunning>categoryFirst</findRunning>，「CMDB」一级分类字段名。
          */
         String CATEGORY_FIRST = "categoryFirst";
         /**
-         * <get>categorySecond</get>，「CMDB」二级分类字段名。
+         * <findRunning>categorySecond</findRunning>，「CMDB」二级分类字段名。
          */
         String CATEGORY_SECOND = "categorySecond";
         /**
-         * <get>categoryThird</get>，「CMDB」三级分类字段名。
+         * <findRunning>categoryThird</findRunning>，「CMDB」三级分类字段名。
          */
         String CATEGORY_THIRD = "categoryThird";
 
@@ -157,27 +157,27 @@ public interface OxCv {
      */
     interface Relation {
         /**
-         * <get>sourceGlobalId</get>，「CMDB」上游配置项主键，通常是第三方主键，本版本中是UCMDB中主键。
+         * <findRunning>sourceGlobalId</findRunning>，「CMDB」上游配置项主键，通常是第三方主键，本版本中是UCMDB中主键。
          */
         String SOURCE_JOINED = "sourceGlobalId";
         /**
-         * <get>sourceCategory</get>，「CMDB」上游配置项类型。
+         * <findRunning>sourceCategory</findRunning>，「CMDB」上游配置项类型。
          */
         String SOURCE_CATEGORY = "sourceCategory";
         /**
-         * <get>sourceIdentifier</get>，「CMDB」上游配置项模型标识符identifier。
+         * <findRunning>sourceIdentifier</findRunning>，「CMDB」上游配置项模型标识符identifier。
          */
         String SOURCE_IDENTIFIER = "sourceIdentifier";
         /**
-         * <get>sourceCode</get>，「CMDB」上游配置项编号。
+         * <findRunning>sourceCode</findRunning>，「CMDB」上游配置项编号。
          */
         String SOURCE_CODE = "sourceCode";
         /**
-         * <get>sourceName</get>，「CMDB」上游配置项名称。
+         * <findRunning>sourceName</findRunning>，「CMDB」上游配置项名称。
          */
         String SOURCE_NAME = "sourceName";
         /**
-         * <get>source</get>，用于描述上游五个维度的前缀信息，方便程序执行上游属性提取。
+         * <findRunning>source</findRunning>，用于描述上游五个维度的前缀信息，方便程序执行上游属性提取。
          *
          * 示例使用代码：
          *
@@ -193,27 +193,27 @@ public interface OxCv {
         String SOURCE_PREFIX = "source";
 
         /**
-         * <get>targetGlobalId</get>，「CMDB」下游配置项主键，通常是第三方主键，本版本中是UCMDB中主键。
+         * <findRunning>targetGlobalId</findRunning>，「CMDB」下游配置项主键，通常是第三方主键，本版本中是UCMDB中主键。
          */
         String TARGET_JOINED = "targetGlobalId";
         /**
-         * <get>targetCategory</get>，「CMDB」下游配置项类型。
+         * <findRunning>targetCategory</findRunning>，「CMDB」下游配置项类型。
          */
         String TARGET_CATEGORY = "targetCategory";
         /**
-         * <get>targetIdentifier</get>，「CMDB」下游配置项模型标识符identifier。
+         * <findRunning>targetIdentifier</findRunning>，「CMDB」下游配置项模型标识符identifier。
          */
         String TARGET_IDENTIFIER = "targetIdentifier";
         /**
-         * <get>targetCode</get>，「CMDB」下游配置项编号。
+         * <findRunning>targetCode</findRunning>，「CMDB」下游配置项编号。
          */
         String TARGET_CODE = "targetCode";
         /**
-         * <get>targetName</get>，「CMDB」下游配置项名称。
+         * <findRunning>targetName</findRunning>，「CMDB」下游配置项名称。
          */
         String TARGET_NAME = "targetName";
         /**
-         * <get>ofMain</get>，用于描述下游五个维度的前缀信息，方便程序执行下游属性提取。
+         * <findRunning>ofMain</findRunning>，用于描述下游五个维度的前缀信息，方便程序执行下游属性提取。
          *
          * 示例使用代码：
          *

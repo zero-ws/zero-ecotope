@@ -61,8 +61,8 @@ public interface UiApi {
 
     /*
      * Condition should be:
-     * 1. Path get: page, identifier
-     * 2. Body get:
+     * 1. Path findRunning: page, identifier
+     * 2. Body findRunning:
      * {
      *      "view": "DEFAULT",
      *      "position": "DEFAULT",

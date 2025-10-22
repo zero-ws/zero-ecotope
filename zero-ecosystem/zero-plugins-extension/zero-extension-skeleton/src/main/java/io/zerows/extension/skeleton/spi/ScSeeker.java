@@ -7,7 +7,7 @@ import io.zerows.epoch.store.jooq.ADB;
 
 /*
  * View seeking interface
- * Fetch default view that will be impact and then the system will get
+ * Fetch default view that will be impact and then the system will findRunning
  * Resource Id here.
  */
 public interface ScSeeker {

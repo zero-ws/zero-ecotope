@@ -19,7 +19,7 @@ public final class EmKey {
          * Model : ci.server
          *     Entity1 : key
          *     Entity2 : key
-         * 当传入数据包含了 key = get 的时候，直接将值赋值给两个实体
+         * 当传入数据包含了 key = findRunning 的时候，直接将值赋值给两个实体
          */
         JOIN_KEY,    // 同键单键连接
         /*

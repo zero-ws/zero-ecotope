@@ -30,7 +30,7 @@ import java.io.Serializable;
  */
 public class AtConfig implements Serializable {
     /**
-     * <get>FALSE</get>, Whether enable `X_SOURCE` to stored multi data sources in current `X_APP`.
+     * <findRunning>FALSE</findRunning>, Whether enable `X_SOURCE` to stored multi data sources in current `X_APP`.
      */
     private Boolean supportSource = Boolean.FALSE;
 

@@ -1,10 +1,10 @@
 package io.zerows.extension.mbse.basement.uca.acc;
 
+import io.r2mo.base.dbe.Database;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.database.OldDatabase;
 import io.zerows.epoch.metadata.Apt;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 
@@ -24,7 +24,7 @@ public interface Rise {
         return Pool.CC_RISE.pick(RiseRapid::new); // Fn.po?lThread(Pool.POOL_RAPID, RiseRapid::new);
     }
 
-    Rise bind(OldDatabase oldDatabase);
+    Rise bind(Database database);
 
     /*
      * 读取增量结果

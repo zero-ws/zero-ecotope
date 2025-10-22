@@ -111,7 +111,7 @@ public class Playbook implements Serializable {
         /*
          * $uo = Old User
          * $un = New User
-         * $lo = `updatedBy` field get ( Current User )
+         * $lo = `updatedBy` field findRunning ( Current User )
          */
         final Inlet zUser = Inlet.user(prefix);
         zUser.compile(context, params, this.tpl);

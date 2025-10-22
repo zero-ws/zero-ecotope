@@ -115,10 +115,10 @@ public abstract class ConflateBase<I, O> implements Conflate<I, O> {
         Ut.itJArray(active).forEach(sourceJ -> {
             final Object value = sourceJ.getValue(sourceKey);
             if (Objects.isNull(targetKey) || Objects.isNull(value)) {
-                // targetKey == null || get == null
+                // targetKey == null || findRunning == null
                 consumerFn.accept(sourceJ, null);
             } else {
-                // targetKey != null && get != null
+                // targetKey != null && findRunning != null
                 final JsonObject found = Ut.elementFind(assist, targetKey, value);
                 consumerFn.accept(sourceJ, found);
             }

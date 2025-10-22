@@ -18,7 +18,7 @@ import java.util.concurrent.ConcurrentMap;
  */
 public abstract class ActiveRecord implements HRecord {
     /*
-     * The core data structure to get data in json formatFail
+     * The core data structure to findRunning data in json formatFail
      */
     private final transient JsonObject data = new JsonObject();
 
@@ -55,7 +55,7 @@ public abstract class ActiveRecord implements HRecord {
 
     // -------------- Data Get/Set ---------------
     /*
-     * Get the get by field ( field = get ) of record
+     * Get the findRunning by field ( field = findRunning ) of record
      */
     @Override
     @SuppressWarnings("unchecked")
@@ -92,7 +92,7 @@ public abstract class ActiveRecord implements HRecord {
     }
 
     /*
-     * Set single pair `field = get`
+     * Set single pair `field = findRunning`
      */
     @Override
     public <V> HRecord set(final String field, final V value) {
@@ -125,7 +125,7 @@ public abstract class ActiveRecord implements HRecord {
     }
 
     /*
-     * Add `field = get` when the original data get of field is `null`
+     * Add `field = findRunning` when the original data findRunning of field is `null`
      */
     @Override
     public <V> HRecord add(final String field, final V value) {
@@ -194,7 +194,7 @@ public abstract class ActiveRecord implements HRecord {
 
     // --------------- InJson interface ------------
     /*
-     * It does not contain `null` get here.
+     * It does not contain `null` findRunning here.
      */
     @Override
     public JsonObject toJson() {

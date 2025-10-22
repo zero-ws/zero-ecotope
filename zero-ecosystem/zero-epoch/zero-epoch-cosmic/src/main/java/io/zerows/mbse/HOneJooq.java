@@ -45,7 +45,7 @@ class HOneJooq implements HOne<ADB> {
         //        final DBJooq dao;
         //        final EmDS.DB mode = module.getMode();
         //        if (EmDS.DB.DYNAMIC == mode) {
-        //            dao = Ux.channelS(DS.class,
+        //            dao = Ux.channelSync(DS.class,
         //                /* ---->「默认」`provider` 配置的标准数据源（Jooq专用）*/ () -> DB.on(daoCls),
         //                /* 动态数据源定义，X_SOURCE，开启动态建模专用 */ ds -> DB.on(daoCls, ds.switchDs(headers))
         //            );

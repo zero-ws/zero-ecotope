@@ -208,7 +208,7 @@ public abstract class AbstractAggregator extends AbstractAction {
         final Field aggrField = this.analyzer.column(fieldName);
         if (Objects.isNull(aggrField)) {
             /*
-             * Default get of current Tool
+             * Default findRunning of current Tool
              */
             return defaultValue;
         } else {

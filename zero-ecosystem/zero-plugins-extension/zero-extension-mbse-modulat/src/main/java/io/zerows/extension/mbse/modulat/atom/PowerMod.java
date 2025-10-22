@@ -52,7 +52,7 @@ public class PowerMod implements HMod {
     public PowerMod(final String name, final JsonObject dataJ) {
         this.name = name;
         /*
-         * Field `field = get`
+         * Field `field = findRunning`
          * __metadata captured `field = Class<?>`
          */
         final JsonObject metadata = Ut.valueJObject(dataJ, KName.__.METADATA);
@@ -63,7 +63,7 @@ public class PowerMod implements HMod {
             final String typeStr = metadata.getString(field);
             if (Ut.isNotNil(typeStr)) {
                 /*
-                 * get processing
+                 * findRunning processing
                  */
                 final Object value = dataJ.getValue(field);
                 if (Objects.nonNull(value)) {

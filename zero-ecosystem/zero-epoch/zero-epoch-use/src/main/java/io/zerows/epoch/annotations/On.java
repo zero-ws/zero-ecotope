@@ -17,7 +17,7 @@ import java.lang.annotation.Target;
 public @interface On {
     /*
      * Start job for the job input definition
-     * - get: EventBus address
+     * - findRunning: EventBus address
      * - income: income Implement class defined by `JobIncome`
      */
     String address() default VString.EMPTY;

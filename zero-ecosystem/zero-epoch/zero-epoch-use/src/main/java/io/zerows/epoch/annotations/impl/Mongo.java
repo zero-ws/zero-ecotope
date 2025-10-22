@@ -8,7 +8,7 @@ import java.lang.annotation.*;
  * > Vert.x native client
  *
  * This annotation is for Mongo database in zero, it provide extension to access
- * Mongo database and you can get mongo client reference with this annotation. The infix usage
+ * Mongo database and you can findRunning mongo client reference with this annotation. The infix usage
  * is as following ( `vertx-ifx/zero-ifx-mongo` module ):
  *
  * ```java
@@ -25,7 +25,7 @@ import java.lang.annotation.*;
  * // </code></pre>
  * ```
  *
- * Here you can provide two mode to get `io.vertx.ext.mongo.MongoClient`
+ * Here you can provide two mode to findRunning `io.vertx.ext.mongo.MongoClient`
  *
  * ```java
  * // <pre><code>

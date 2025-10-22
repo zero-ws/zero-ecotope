@@ -118,7 +118,7 @@ public interface YmlCore {
      * session:
      *     config:
      *         category:    SessionType
-     *         get:
+     *         findRunning:
      *         options:
      * </code></pre>
      */
@@ -310,8 +310,8 @@ public interface YmlCore {
     /**
      * vertx-job.yml
      * <pre><code>
-     * job:  {@see io.vertx.up.operation.job.get.JobConfig}
-     *     get:
+     * job:  {@see io.vertx.up.operation.job.findRunning.JobConfig}
+     *     findRunning:
      *        component:
      *        config:
      *     client:

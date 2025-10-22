@@ -19,7 +19,7 @@ import java.util.Set;
 @AddOn.Name("DEFAULT_JOB_CLIENT")
 public interface JobClient {
     /*
-     * Create local session get bind data
+     * Create local session findRunning bind data
      */
     static JobClient createClient(final Vertx vertx, final HConfig config) {
         return new JobClientImpl(vertx, config);

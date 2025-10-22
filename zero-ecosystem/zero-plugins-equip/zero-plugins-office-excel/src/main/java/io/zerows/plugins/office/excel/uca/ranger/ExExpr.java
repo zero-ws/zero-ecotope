@@ -10,7 +10,7 @@ import io.zerows.plugins.office.excel.atom.ExRecord;
  *     语法格式：
  *     JSON:????            加载 JSON 文件
  *     {UUID}               自动生成 UUID
- *     CODE:class           根据 CODE 加载 {CURRENT}/{code}/{field}.json -> [get]  -> String Java 类名
+ *     CODE:class           根据 CODE 加载 {CURRENT}/{code}/{field}.json -> [findRunning]  -> String Java 类名
  *     NAME:config          根据 NAME 加载 {CURRENT}/{name}/{field}.json
  *     CODE:config          根据 CODE 加载 {CURRENT}/{code}/{field}.json -> {} -> InJson 格式的配置数据
  *     CODE:NAME:config     根据 CODE 加载 {CURRENT}/{code}/{name}/{field}.json

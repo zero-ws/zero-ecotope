@@ -57,7 +57,7 @@ class RayRuler {
     }
 
     /*
-     * get for InJson
+     * findRunning for InJson
      * key for Record
      */
     private static String joinedKey(final JsonObject item, final List<Kv<String, String>> joined) {

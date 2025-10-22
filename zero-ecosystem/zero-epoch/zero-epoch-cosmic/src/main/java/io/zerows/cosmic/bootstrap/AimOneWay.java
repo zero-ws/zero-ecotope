@@ -40,7 +40,7 @@ public class AimOneWay extends AimBase implements Aim<RoutingContext> {
             final String address = this.address(event);
 
             /*
-             * Call Flower next method to get future
+             * Call Flower next method to findRunning future
              * This future is async and we must set handler to capture the result of this future
              * here.
              */

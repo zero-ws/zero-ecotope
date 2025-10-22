@@ -183,7 +183,7 @@ class WfFlow {
     /*
      * The method is recursion calling join BPMN, here are some situations
      * 1. The objective will be: Find the next all UserTask
-     * 2. When the system met gateway node, continue to find the task here
+     * 2. When the system met gateway node, continue to findRunning the task here
      */
     private static Set<String> taskSearch(final ModelElementInstance nodeTask, final BpmnModelInstance instance) {
         // Find all `outgoing` that belong to `nodeTask`

@@ -18,7 +18,7 @@ import jakarta.ws.rs.extension.BodyParam;
  * This is interface to query history of each records from zero framework.
  * It's for `X_ACTIVITY` and `X_ACTIVITY_CHANGE` table that enabled following features.
  *
- * 1. Trash to get all the records that have been deleted from our system.
+ * 1. Trash to findRunning all the records that have been deleted from our system.
  * 2. Query all records' histories that have been removed.
  */
 @EndPoint
@@ -48,7 +48,7 @@ public interface HistoryAgent {
      * Only support two read method:
      *
      * 1) Search by query engine
-     * 2) Get activity by id get here
+     * 2) Get activity by id findRunning here
      */
     @Path("/x-activity/search")
     @POST

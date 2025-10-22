@@ -65,7 +65,7 @@ public interface Addr {
 
         /**
          * modified by Hongwei at 2019/12/06
-         * add get, create, update and delete methods for user domain.
+         * add findRunning, create, update and delete methods for user domain.
          */
         String GET = Prefix._EVENT + "X-USER/GET/ID";
 
@@ -116,7 +116,7 @@ public interface Addr {
         /* Save all relation between role & permission */
         String PERMISSION_SAVE = Prefix._EVENT + "X-PERMISSION/SAVING";
 
-        /* Resource get with action */
+        /* Resource findRunning with action */
         String RESOURCE_GET_CASCADE = Prefix._EVENT + "X-RESOURCE/GET-CASCADE";
         /* Resource add with action */
         String RESOURCE_ADD_CASCADE = Prefix._EVENT + "X-RESOURCE/ADD-CASCADE";

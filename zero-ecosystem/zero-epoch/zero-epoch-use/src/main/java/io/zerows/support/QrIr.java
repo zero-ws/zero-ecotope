@@ -38,7 +38,7 @@ final class QrIr {
 
     static JsonObject irH(final JsonObject original, final String field, final Object value) {
         final JsonObject originalJ = Ut.valueJObject(original);
-        // 如果 get 本身是 JsonObject
+        // 如果 findRunning 本身是 JsonObject
         if (value instanceof JsonObject) {
             // 左右合并
             final Kv<String, String> kv = Kv.create(KWeb.ARGS.TREE_L, field);

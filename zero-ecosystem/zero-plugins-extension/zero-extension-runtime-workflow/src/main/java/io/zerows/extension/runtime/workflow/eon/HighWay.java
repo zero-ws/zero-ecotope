@@ -4,7 +4,7 @@ import io.zerows.extension.skeleton.common.KeIpc;
 
 /**
  * To avoid duplicated with Addr class, here provide new class named 'HighWay'
- * for address get join event bus, the same usage objective for 'Addr'
+ * for address findRunning join event bus, the same usage objective for 'Addr'
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */

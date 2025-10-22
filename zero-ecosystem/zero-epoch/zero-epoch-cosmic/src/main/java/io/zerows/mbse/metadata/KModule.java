@@ -60,19 +60,6 @@ public class KModule implements Serializable {
 
 
     /**
-     * 和数据源相关的模式选择，通常会有五种核心模式，位于 {@link EmDS.DB} 枚举变量中，现阶段支持的值如：
-     * <pre><code>
-     *     - PRIMARY：主数据库，配置在 vertx-jooq.yml 中的数据库
-     *     - HISTORY：历史数据库，启用了 Trash 功能之后的数据库
-     *     - WORKFLOW：工作流数据库，启用了工作流功能之后的数据库
-     *     - DYNAMIC：动态数据库，存储于 X_SOURCE 中的数据库
-     *     - EXTENSION：扩展数据库，可使用插件挂载额外的数据源实现模型定义
-     * </code></pre>
-     */
-    private String mode;
-
-
-    /**
      * 跟随 mode = EXTENSION 的专用配置，当您需要自定义数据源时，自定义数据源的 modeKey 会让您的模型仓库中支持模型查找相关功能，如此一来您就可以直接在模型仓库中根据 modeKey 查找对应的模型定义，而不需要在代码中写死。从模型库中搜索模型信息具备唯一检索的主动权，这是 Zero 框架的核心功能之一。
      */
     private String modeKey;     // mode = EXTENSION
@@ -197,28 +184,11 @@ public class KModule implements Serializable {
         return hymn.pointer(identifier); // this.connect.point(identifier);
     }
 
-    public EmDS.DB getMode() {
-        if (Objects.isNull(this.mode)) {
-            return EmDS.DB.PRIMARY;
-        } else {
-            return Ut.toEnum(() -> this.mode, EmDS.DB.class, EmDS.DB.PRIMARY);
-        }
-    }
-
-    public void setMode(final EmDS.DB mode) {
-        if (Objects.isNull(mode)) {
-            this.mode = EmDS.DB.PRIMARY.name();
-        } else {
-            this.mode = mode.name();
-        }
-    }
-
     @Override
     public String toString() {
         return "IxModule{" +
             "name='" + this.name + '\'' +
             ", pojo='" + this.pojo + '\'' +
-            ", mode='" + this.mode + '\'' +
             ", modeKey='" + this.modeKey + '\'' +
             ", field=" + this.field +
             ", column=" + this.column +

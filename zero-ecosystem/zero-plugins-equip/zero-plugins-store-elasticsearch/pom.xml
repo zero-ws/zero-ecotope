@@ -34,7 +34,7 @@
             <groupId>org.elasticsearch.client</groupId>
             <artifactId>elasticsearch-rest-client</artifactId>
         </dependency>
-        <!-- ERROR StatusLogger Log4j2 could not find a logging implementation. Please add log4j-core to the classpath. Using SimpleLogger to log to the console... -->
+        <!-- ERROR StatusLogger Log4j2 could not findRunning a logging implementation. Please add log4j-core to the classpath. Using SimpleLogger to log to the console... -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-to-slf4j</artifactId>

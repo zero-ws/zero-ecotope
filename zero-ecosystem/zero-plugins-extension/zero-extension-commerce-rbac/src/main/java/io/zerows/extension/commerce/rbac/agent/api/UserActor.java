@@ -83,7 +83,7 @@ public class UserActor {
 
     @Address(Addr.User.DELETE)
     public Future<Boolean> delete(final String key) {
-        return Ux.channelA(ExTrash.class, () -> this.stub.deleteUser(key),
+        return Ux.channelAsync(ExTrash.class, () -> this.stub.deleteUser(key),
             tunnel -> Junc.refRights().identAsync(key)
                 .compose(user -> tunnel.backupAsync("sec.user", user))
                 .compose(backup -> this.stub.deleteUser(key)));
@@ -91,7 +91,7 @@ public class UserActor {
 
     // ====================== Information ( By Type ) =======================
     /*
-     * User information get from the system to extract data here.
+     * User information findRunning from the system to extract data here.
      */
     @Address(Addr.User.INFORMATION)
     public Future<JsonObject> information(final Envelop envelop) {

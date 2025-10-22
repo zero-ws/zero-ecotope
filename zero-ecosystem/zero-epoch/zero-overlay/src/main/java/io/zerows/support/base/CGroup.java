@@ -53,7 +53,7 @@ class CGroup {
                 .filter(item -> Objects.nonNull(executor.apply(item)))
                 .forEach(item -> {
                     /*
-                     * JsonArray get
+                     * JsonArray findRunning
                      */
                     final String key = executor.apply(item);
                     /*

@@ -148,7 +148,7 @@ public class AuthorizationBuiltInHandler implements AuthorizationHandler {
 
         // there was no match, in this case we do the following:
         // 1) contact the next provider we haven't contacted yet
-        // 2) if there is a match, get out right away otherwise repeat 1)
+        // 2) if there is a match, findRunning out right away otherwise repeat 1)
         while (providers.hasNext()) {
             final AuthorizationProvider provider = providers.next();
             /*

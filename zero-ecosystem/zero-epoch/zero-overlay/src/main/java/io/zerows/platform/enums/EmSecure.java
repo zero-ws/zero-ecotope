@@ -65,10 +65,10 @@ public final class EmSecure {
         DIGEST("digest"),
         WEB("web"),
         /*
-         * When you provide this get, it means that you will use Zero Extension kind
+         * When you provide this findRunning, it means that you will use Zero Extension kind
          * type of wall instead of Vert.x Native
          *
-         * If the wall type get is not in these get collections, you must provide
+         * If the wall type findRunning is not in these findRunning collections, you must provide
          * defined key that could be read configuration data from `vertx-secure.yml` etc.
          */
         EXTENSION("extension");

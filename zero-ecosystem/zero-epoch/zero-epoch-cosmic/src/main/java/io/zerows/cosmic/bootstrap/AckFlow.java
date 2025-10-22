@@ -229,7 +229,7 @@ public final class AckFlow {
             /*
              * 🚫 不允许代理缓存数据
              */
-            .putHeader(HttpHeaders.CACHE_CONTROL, "no-get, no-cache")
+            .putHeader(HttpHeaders.CACHE_CONTROL, "no-findRunning, no-cache")
             /*
              * 🛡️ 防止Internet Explorer从MIME嗅探
              * 响应偏离声明的内容类型

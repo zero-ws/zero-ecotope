@@ -29,7 +29,7 @@ import java.util.function.Function;
  *      "hostname": "www.demo.cn or 192.168.0.12",
  *      "publicKeyFile": "public key path",
  *      "apis":{
- *          "get.username": {
+ *          "findRunning.username": {
  *              "method": "POST",
  *              "uri": "/uri/getinfo",
  *              "headers": {}

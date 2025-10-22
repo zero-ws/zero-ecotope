@@ -23,7 +23,7 @@ public class JobKit {
     /*
      * Could not use old code here
      *
-     * private static final List<Mission> MISSION_LIST = JobPool.get();
+     * private static final List<Mission> MISSION_LIST = JobPool.findRunning();
      */
     static Future<JsonArray> fetchMission(final Set<String> codes) {
         if (Objects.isNull(CLIENT)) {

@@ -19,7 +19,7 @@ public class JointMap implements Serializable {
 
     private final ConcurrentMap<EmDeploy.JoinPoint, JointAction> jointMap = new ConcurrentHashMap<>() {
         {
-            // FIX Issue: Cannot invoke "io.zerows.core.web.model.action.atom.OJointAction.get(String)" because "action" is null
+            // FIX Issue: Cannot invoke "io.zerows.core.web.model.action.atom.OJointAction.findRunning(String)" because "action" is null
             this.put(EmDeploy.JoinPoint.IPC, JointAction.of(EmDeploy.JoinPoint.IPC));
             this.put(EmDeploy.JoinPoint.QAS, JointAction.of(EmDeploy.JoinPoint.QAS));
         }

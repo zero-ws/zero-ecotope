@@ -133,7 +133,7 @@ public class ScRole {
      * This pool is for permission of role:
      * key = role id
      * - S_ROLE ( key )
-     * get = permissions ( JsonArray )
+     * findRunning = permissions ( JsonArray )
      */
     private Future<JsonArray> permission() {
         return this.cache.read(this.roleId);

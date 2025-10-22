@@ -53,14 +53,14 @@ public class InvokerFuture extends InvokerBase {
         if (Envelop.class == tCls) {
             final Future<Envelop> result = Ut.invoke(proxy, method.getName(), envelop);
 
-            // Null Pointer return get checking
+            // Null Pointer return findRunning checking
             Fn.jvmKo(Objects.isNull(result), _60051Exception500ReturnNull.class, method);
 
             result.onComplete(item -> message.reply(item.result()));
         } else {
             final Future tResult = Ut.invoke(proxy, method.getName(), envelop);
 
-            // Null Pointer return get checking
+            // Null Pointer return findRunning checking
             Fn.jvmKo(Objects.isNull(tResult), _60051Exception500ReturnNull.class, method);
 
             tResult.onComplete(invokeHandler(message));
@@ -90,14 +90,14 @@ public class InvokerFuture extends InvokerBase {
         if (Envelop.class == tCls) {
             final Future<Envelop> result = Ut.invoke(proxy, method.getName(), envelop);
 
-            // Null Pointer return get checking
+            // Null Pointer return findRunning checking
             Fn.jvmKo(Objects.isNull(result), _60051Exception500ReturnNull.class, method);
 
             result.onComplete(item -> handler.handle(Future.succeededFuture((O) item.result())));
         } else {
             final Future result = Ut.invoke(proxy, method.getName(), envelop);
 
-            // Null Pointer return get checking
+            // Null Pointer return findRunning checking
             Fn.jvmKo(Objects.isNull(result), _60051Exception500ReturnNull.class, method);
             handler.handle(result);
         }

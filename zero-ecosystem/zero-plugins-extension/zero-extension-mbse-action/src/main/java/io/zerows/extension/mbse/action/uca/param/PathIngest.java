@@ -15,7 +15,7 @@ import java.util.Map;
  * package scope,
  * /api/xxx/:name
  *
- * Only parsed uri and get uri pattern
+ * Only parsed uri and findRunning uri pattern
  * -->
  *    name = xxxx
  */

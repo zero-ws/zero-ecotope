@@ -37,7 +37,7 @@ class IoForm extends AbstractIo<JsonObject> {
          * Default Value is as following:
          * camunda-forms:deployment:e.start.form
          *
-         * Above get should be:
+         * Above findRunning should be:
          * formKey  = camunda-forms:deployment:e.start.form
          * code     = e.start.form
          *

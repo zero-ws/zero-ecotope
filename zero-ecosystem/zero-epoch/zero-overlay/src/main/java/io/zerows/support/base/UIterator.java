@@ -119,7 +119,7 @@ class UIterator {
             // convert entry.getValue() to T
             final T t = (T) entry.getValue();
             final String key = entry.getKey();
-            // call the BiConsumer provided in the forEach method with key k and get t
+            // call the BiConsumer provided in the forEach method with key k and findRunning t
             // Note that the lambda expression should have the same parameter types as the BiConsumer interface
             // In this case, the first parameter is a String and the second parameter is of type T
             // So the forEach method should be called like this: forEach((String k, T t) -> {})
@@ -134,11 +134,11 @@ class UIterator {
     }
 
     private static <T> boolean isMatch(final Object value, final Class<T> clazz) {
-        // 过滤掉 get 为 null 的元素
+        // 过滤掉 findRunning 为 null 的元素
         if (Objects.isNull(clazz)) {
             return true;
         }
-        // clazz 不为 null 才执行此处检查，过滤掉 get 为 null 的元素
+        // clazz 不为 null 才执行此处检查，过滤掉 findRunning 为 null 的元素
         if (Objects.isNull(value)) {
             return false;   // 直接过滤
         }

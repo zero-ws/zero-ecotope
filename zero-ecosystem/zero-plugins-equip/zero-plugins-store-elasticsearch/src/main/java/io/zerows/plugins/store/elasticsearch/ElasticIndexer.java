@@ -55,7 +55,7 @@ public class ElasticIndexer extends AbstractEsClient {
 
             this.toResultGet(response, result);
         } catch (final IOException ioe) {
-            this.logger().error("failed to get index information");
+            this.logger().error("failed to findRunning index information");
             this.logger().error(ioe.getMessage());
         }
 

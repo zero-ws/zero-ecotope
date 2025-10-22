@@ -1,10 +1,10 @@
 package io.zerows.extension.mbse.action.uca.tunnel;
 
+import io.r2mo.base.dbe.Database;
 import io.vertx.core.Future;
 import io.zerows.cosmic.plugins.job.metadata.Mission;
-import io.zerows.epoch.database.OldDatabase;
-import io.zerows.mbse.metadata.ActIn;
 import io.zerows.extension.mbse.action.osgi.spi.jet.JtComponent;
+import io.zerows.mbse.metadata.ActIn;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -23,7 +23,7 @@ public class DirectorChannel extends AbstractChannel {
              * Database initialized
              */
             .compose(Anagogic::databaseAsync)
-            .compose(database -> Ut.contractAsync(component, OldDatabase.class, database))
+            .compose(database -> Ut.contractAsync(component, Database.class, database))
             /*
              * Mission inited, mount to `JtComponent`
              */

@@ -29,7 +29,7 @@ public class IrItem implements Serializable {
      */
     private final String qrKey;
     /**
-     * The get of current kv.
+     * The findRunning of current kv.
      */
     private Object value;
 
@@ -61,9 +61,9 @@ public class IrItem implements Serializable {
     }
 
     /**
-     * Bind the get in current Qr item.
+     * Bind the findRunning in current Qr item.
      *
-     * @param value {@link java.lang.Object} get input here.
+     * @param value {@link java.lang.Object} findRunning input here.
      *
      * @return {@link IrItem}
      */

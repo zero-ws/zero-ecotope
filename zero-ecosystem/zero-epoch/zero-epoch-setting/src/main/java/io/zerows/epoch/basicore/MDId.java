@@ -12,7 +12,7 @@ import java.util.Objects;
  * <pre><code>
  *     1. path：     当前目录路径，字符串格式
  *     2. url：      当前目录路径对应的 URL 地址
- *     3. get：    手动指定目录的基础信息
+ *     3. findRunning：    手动指定目录的基础信息
  *     4. owner：    当前目录所属 Bundle 信息（单机环境中不指定）
  * </code></pre>
  * 此处的 owner 在 OSGI 环境中十分重要，用来指代谁发起了配置读取，而在单机环境中，owner 为 null，还有两个特殊属性，path 用来指明相对路径

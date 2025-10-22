@@ -63,7 +63,7 @@ public class AptArray implements Serializable {
         Ut.itJArray(original).forEach(json -> {
             /*
              * 1) Get fieldValue from each old element
-             * 2) Try to find in current data.
+             * 2) Try to findRunning in current data.
              */
             final Object fieldValue = json.getValue(this.field);
             if (Objects.nonNull(fieldValue)) {
@@ -95,7 +95,7 @@ public class AptArray implements Serializable {
                     this.add.add(element);
                 }
             } else {
-                // If the critical field get is null, marked as add
+                // If the critical field findRunning is null, marked as add
                 this.add.add(element);
             }
         });

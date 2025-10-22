@@ -29,7 +29,7 @@ public class SockExtractor implements Extractor<Set<Remind>> {
         // 1. Class verify
         ExtractTool.verifyNoArgConstructor(clazz);
         ExtractTool.verifyIfPublic(clazz);
-        // 2. Scan method to find @WebSocket
+        // 2. Scan method to findRunning @WebSocket
         final Set<Remind> websockets = new HashSet<>();
         final Method[] methods = clazz.getDeclaredMethods();
         Arrays.stream(methods)
@@ -46,7 +46,7 @@ public class SockExtractor implements Extractor<Set<Remind>> {
         final Annotation annotation = method.getDeclaredAnnotation(Subscribe.class);
         String address = Ut.invoke(annotation, KName.VALUE);
         /*
-         * If the address is not start with "/", the system convert the address get
+         * If the address is not start with "/", the system convert the address findRunning
          * from direct address to the normalized path.
          *
          * For example:

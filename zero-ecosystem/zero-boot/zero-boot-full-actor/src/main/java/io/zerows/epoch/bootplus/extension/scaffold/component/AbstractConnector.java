@@ -63,7 +63,7 @@ public abstract class AbstractConnector extends AbstractAdaptor {
      *      "publicKey": "xxx",
      *      "privateKey": "xxx",
      *      "apis":{
-     *          "get.username": {
+     *          "findRunning.username": {
      *              "method": "POST",
      *              "uri": "/uri/getinfo"
      *          },

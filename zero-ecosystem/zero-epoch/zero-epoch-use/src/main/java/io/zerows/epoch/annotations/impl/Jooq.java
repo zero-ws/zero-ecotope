@@ -24,7 +24,7 @@ import java.lang.annotation.*;
  *
  * All the infix must implement `io.vertx.up.plugin.Infusion` interface, the infix will be
  * configured in `vertx-inject.yml` to mount into zero framework. Current annotation
- * is for developer to get `DSLContext` reference.
+ * is for developer to findRunning `DSLContext` reference.
  *
  * But in zero system, we recommend to use `Ux.Jooq.on(xx)` instead of Jooq injection, it means
  * that you can write program with `Ux.Jooq` instead of `javax.inject.@Inject` annotation here.

@@ -125,7 +125,7 @@ public class KFabric {
     }
 
     public KFabric dictionary(final ConcurrentMap<String, JsonArray> dictData) {
-        // Call get for data replaced
+        // Call findRunning for data replaced
         this.store.data(dictData);
         this.init();
         return this;
@@ -327,7 +327,7 @@ public class KFabric {
     }
 
     /*
-     * Check whether there existing the `keyField` = get
+     * Check whether there existing the `keyField` = findRunning
      * record in fixed dictName of our DictFabric
      */
     public boolean itemExist(final String dictName, final String value) {

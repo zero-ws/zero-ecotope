@@ -280,7 +280,7 @@ class KeCompare {
                 // Place holder
                 row.addNull();
             } else {
-                // Child get here
+                // Child findRunning here
                 final String childField = shapeItem.name();
                 final Object childValue = value.getValue(childField);
                 row.add(childValue);

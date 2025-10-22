@@ -110,7 +110,7 @@ public class InquirerForIpc implements Inquirer<ConcurrentMap<String, Method>> {
         final String to = Ut.invoke(annotation, "to");
         final String name = Ut.invoke(annotation, "name");
         if (Ut.isNil(to) && Ut.isNil(name)) {
-            // If ( to is null and name is null, get must be required, or the system do not know the direction
+            // If ( to is null and name is null, findRunning must be required, or the system do not know the direction
             final String from = annotation.value();
             Fn.jvmKo(Ut.isNil(from), _40045Exception500IpcDirection.class, method);
             // Passed validation.

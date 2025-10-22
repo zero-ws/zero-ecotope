@@ -18,7 +18,7 @@ import io.zerows.extension.runtime.crud.util.Ix;
  * 3. language
  * 4. id
  *
- * Other variable should use fixed get instead of expression
+ * Other variable should use fixed findRunning instead of expression
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */

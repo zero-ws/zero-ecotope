@@ -1,24 +1,15 @@
 package io.zerows.extension.runtime.ambient.uca.boot;
 
-import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.application.YmlOption;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.OldDatabase;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XApp;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XSource;
-import io.zerows.platform.enums.EmDS;
 import io.zerows.platform.metadata.KArk;
-import io.zerows.platform.metadata.KDatabase;
-import io.zerows.platform.metadata.OldKDS;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.app.HArk;
 import io.zerows.support.Ut;
 
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Objects;
-import java.util.Set;
 
 /**
  * @author lang : 2024-07-08
@@ -123,55 +114,56 @@ public class UniteArkSource implements UniteArk<List<XSource>> {
             auditor.put(KName.UPDATED_AT, Ut.parse(app.getUpdatedAt()).toInstant());
             normalized.put("auditor", auditor);
         }
+        // UPD-004: Remove Database Configuration Here
         // Database
-        final OldKDS<KDatabase> oldKds = ark.database();
-        {
-            oldKds.registry(EmDS.DB.PRIMARY, OldDatabase.getCurrent());
-            oldKds.registry(EmDS.DB.WORKFLOW, OldDatabase.getCamunda());
-            oldKds.registry(EmDS.DB.HISTORY, OldDatabase.getHistory());
-        }
-        if (Objects.nonNull(sources) && !sources.isEmpty()) {
-            final JsonArray sourceArray = new JsonArray();
-            final Set<KDatabase> databaseSet = new LinkedHashSet<>();
-            sources.forEach(source -> {
-                final JsonObject sourceJson = new JsonObject();
-                sourceJson.put(YmlOption.database.HOSTNAME, source.getHostname());
-                sourceJson.put(YmlOption.database.INSTANCE, source.getInstance());
-                sourceJson.put(YmlOption.database.PORT, source.getPort());
-                sourceJson.put(YmlOption.database.CATEGORY, source.getCategory());
-                sourceJson.put(YmlOption.database.JDBC_URL, source.getJdbcUrl());
-                sourceJson.put(YmlOption.database.USERNAME, source.getUsername());
-                sourceJson.put(YmlOption.database.PASSWORD, source.getPassword());
-                sourceJson.put(YmlOption.database.DRIVER_CLASS_NAME, source.getDriverClassName());
-                final String jdbcConfig = source.getJdbcConfig();
-                if (Ut.isNotNil(jdbcConfig)) {
-                    sourceJson.put(YmlOption.database.OPTIONS, Ut.toJObject(jdbcConfig));
-                }
-                /*
-                 * {
-                 *     "source": [
-                 *         {
-                 *             "hostname": "xx",
-                 *             "instance": "instance",
-                 *             "port": "",
-                 *             "category": "",
-                 *             "jdbcUrl": "",
-                 *             "username": "",
-                 *             "password": "",
-                 *             "driverClassName": "",
-                 *             "options": {
-                 *             }
-                 *         }
-                 *     ]
-                 * }
-                 */
-                sourceArray.add(sourceJson);
-                final OldDatabase oldDatabase = new OldDatabase();
-                oldDatabase.fromJson(sourceJson);
-                databaseSet.add(oldDatabase);
-            });
-            oldKds.registry(databaseSet);
-        }
+        //        final OldKDS<KDatabase> oldKds = ark.database();
+        //        {
+        //            oldKds.registry(EmDS.DB.PRIMARY, OldDatabase.getCurrent());
+        //            oldKds.registry(EmDS.DB.WORKFLOW, OldDatabase.getCamunda());
+        //            oldKds.registry(EmDS.DB.HISTORY, OldDatabase.getHistory());
+        //        }
+        //        if (Objects.nonNull(sources) && !sources.isEmpty()) {
+        //            final JsonArray sourceArray = new JsonArray();
+        //            final Set<KDatabase> databaseSet = new LinkedHashSet<>();
+        //            sources.forEach(source -> {
+        //                final JsonObject sourceJson = new JsonObject();
+        //                sourceJson.put(YmlOption.database.HOSTNAME, source.getHostname());
+        //                sourceJson.put(YmlOption.database.INSTANCE, source.getInstance());
+        //                sourceJson.put(YmlOption.database.PORT, source.getPort());
+        //                sourceJson.put(YmlOption.database.CATEGORY, source.getCategory());
+        //                sourceJson.put(YmlOption.database.JDBC_URL, source.getJdbcUrl());
+        //                sourceJson.put(YmlOption.database.USERNAME, source.getUsername());
+        //                sourceJson.put(YmlOption.database.PASSWORD, source.getPassword());
+        //                sourceJson.put(YmlOption.database.DRIVER_CLASS_NAME, source.getDriverClassName());
+        //                final String jdbcConfig = source.getJdbcConfig();
+        //                if (Ut.isNotNil(jdbcConfig)) {
+        //                    sourceJson.put(YmlOption.database.OPTIONS, Ut.toJObject(jdbcConfig));
+        //                }
+        //                /*
+        //                 * {
+        //                 *     "source": [
+        //                 *         {
+        //                 *             "hostname": "xx",
+        //                 *             "instance": "instance",
+        //                 *             "port": "",
+        //                 *             "category": "",
+        //                 *             "jdbcUrl": "",
+        //                 *             "username": "",
+        //                 *             "password": "",
+        //                 *             "driverClassName": "",
+        //                 *             "options": {
+        //                 *             }
+        //                 *         }
+        //                 *     ]
+        //                 * }
+        //                 */
+        //                sourceArray.add(sourceJson);
+        //                final OldDatabase oldDatabase = new OldDatabase();
+        //                oldDatabase.fromJson(sourceJson);
+        //                databaseSet.add(oldDatabase);
+        //            });
+        //            oldKds.registry(databaseSet);
+        //        }
         // App InJson
         final HApp appRef = ark.app();
         appRef.option(normalized);

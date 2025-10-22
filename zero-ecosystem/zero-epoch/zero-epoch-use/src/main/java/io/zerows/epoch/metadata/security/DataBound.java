@@ -17,7 +17,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 /*
- * Data Bound feature for result, DTO to get metadata information here.
+ * Data Bound feature for result, DTO to findRunning metadata information here.
  * Pre-Condition
  * 1. criteria:
  *    Only available in query engine enabled here.
@@ -142,7 +142,7 @@ public class DataBound implements Serializable {
         final JsonObject criteriaJson = Ut.toJObject(criteria);
         if (!criteriaJson.isEmpty()) {
             /*
-             * Contains get here.
+             * Contains findRunning here.
              */
             if (this.criteria.isEmpty()) {
                 /*

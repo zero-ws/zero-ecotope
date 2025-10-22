@@ -21,7 +21,7 @@ public abstract class AbstractIdc implements IdcStub {
     }
 
     protected Future<JsonArray> model(final JsonArray userJson) {
-        return Ux.channelA(ScModeling.class, () -> Ux.future(userJson), stub -> stub.keyAsync(this.sigma, userJson).compose(keyMap -> {
+        return Ux.channelAsync(ScModeling.class, () -> Ux.future(userJson), stub -> stub.keyAsync(this.sigma, userJson).compose(keyMap -> {
             /* Reference 修改，此处修改 userJson 相关数据 */
             Ut.itJArray(userJson).forEach(user -> {
                 /* Fix issue of `modelKey` injection */

@@ -15,7 +15,7 @@ public class HSDimArea extends HSDimNorm {
          * 输出格式:
          * -- key
          * -- label
-         * -- get
+         * -- findRunning
          * -- data 这个节点是非静态模式必须带的数据节点，用于前端做维度计算
          */
         /* 提取类型和参数 */

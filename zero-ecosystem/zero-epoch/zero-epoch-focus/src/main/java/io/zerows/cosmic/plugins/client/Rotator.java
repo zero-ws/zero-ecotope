@@ -38,7 +38,7 @@ public interface Rotator {
     Rotator bind(CloseableHttpClient client);
 
     /*
-     * Request data with `InJson` parameters, get string response
+     * Request data with `InJson` parameters, findRunning string response
      */
     String request(KIntegration.Api request, JsonObject params);
 }

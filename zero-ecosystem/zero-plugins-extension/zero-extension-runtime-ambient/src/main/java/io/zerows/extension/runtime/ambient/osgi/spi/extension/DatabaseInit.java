@@ -1,12 +1,13 @@
 package io.zerows.extension.runtime.ambient.osgi.spi.extension;
 
+import io.r2mo.base.dbe.Database;
+import io.r2mo.spi.SPI;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.LogOf;
 import io.zerows.cosmic.plugins.cache.Rapid;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
-import io.zerows.epoch.database.OldDatabase;
 import io.zerows.extension.runtime.ambient.eon.AtMsg;
 import io.zerows.extension.skeleton.spi.ExInit;
 import io.zerows.program.Ux;
@@ -25,14 +26,13 @@ public class DatabaseInit implements ExInit {
             LOG.App.info(LOGGER, AtMsg.INIT_DATABASE, appJson.encode());
             /* Database InJson */
             final JsonObject databaseJson = appJson.getJsonObject(KName.SOURCE);
-            final OldDatabase oldDatabase = new OldDatabase();
-            oldDatabase.fromJson(databaseJson);
+            final Database database = Database.createDatabase(SPI.J(databaseJson));
             /*
              * Init third step: X_SOURCE stored into pool
              */
-            return Rapid.<String, OldDatabase>object(KWeb.CACHE.DATABASE)
-                .write(appJson.getString(KName.KEY), oldDatabase)
-                .compose(item -> Ux.future(item.toJson()))
+            return Rapid.<String, Database>object(KWeb.CACHE.DATABASE)
+                .write(appJson.getString(KName.KEY), database)
+                .compose(item -> Ux.future((JsonObject) item.toJson()))
                 .compose(item -> Ux.future(this.result(appJson, item)));
         };
     }

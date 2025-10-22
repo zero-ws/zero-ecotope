@@ -1,11 +1,11 @@
 package io.zerows.extension.mbse.action.util;
 
+import io.r2mo.base.dbe.Database;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.Log;
 import io.zerows.component.log.LogModule;
-import io.zerows.epoch.database.OldDatabase;
 import io.zerows.extension.mbse.action.atom.JtConfig;
 import io.zerows.extension.mbse.action.atom.JtUri;
 import io.zerows.extension.mbse.action.atom.JtWorker;
@@ -139,7 +139,7 @@ public class Jt {
      *
      * @return 选择的数据库
      */
-    public static OldDatabase toDatabase(final IService service) {
+    public static Database toDatabase(final IService service) {
         return JtDataObject.toDatabase(service);
     }
 

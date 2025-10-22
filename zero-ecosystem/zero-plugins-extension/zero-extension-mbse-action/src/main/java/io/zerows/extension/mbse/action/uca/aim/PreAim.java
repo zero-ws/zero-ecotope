@@ -11,7 +11,7 @@ import io.zerows.extension.mbse.action.osgi.spi.jet.JtIngest;
  * The first handler in routing
  * 1. Host http header checking ( Not Support ）
  * 2. Analyzing required part ( required / contained )
- * 3. Analyzing parameters of api, get parameters and web `Envelop`
+ * 3. Analyzing parameters of api, findRunning parameters and web `Envelop`
  */
 public class PreAim implements JtAim {
     @Override

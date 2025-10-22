@@ -5,13 +5,13 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.bootplus.extension.refine.Ox;
 import io.zerows.epoch.bootplus.extension.scaffold.component.AbstractAdaptor;
 import io.zerows.epoch.constant.KName;
-import io.zerows.mbse.metadata.ActIn;
-import io.zerows.mbse.metadata.ActOut;
 import io.zerows.epoch.metadata.KView;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
-import io.zerows.extension.skeleton.spi.UiApeakMy;
 import io.zerows.extension.skeleton.common.Ke;
+import io.zerows.extension.skeleton.spi.UiApeakMy;
+import io.zerows.mbse.metadata.ActIn;
+import io.zerows.mbse.metadata.ActOut;
 import io.zerows.program.Ux;
 
 /**
@@ -82,7 +82,7 @@ public class ViewComponent extends AbstractAdaptor {
             final String sessionKey = Ke.keyView(params.getString(KName.METHOD),
                 params.getString(KName.URI), KView.create(literal));
             params.put(KName.DATA_KEY, sessionKey);
-            return Ux.channelA(UiApeakMy.class,
+            return Ux.channelAsync(UiApeakMy.class,
                 () -> ActOut.future(new JsonObject()),
                 stub -> {
                     /*

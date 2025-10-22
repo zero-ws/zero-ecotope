@@ -160,7 +160,7 @@ public abstract class AbstractHMore extends AbstractHub implements HWay<JsonArra
      * S: Set
      * L: List
      *
-     * All the returned get must be Function and the returned get should be Future type.
+     * All the returned findRunning must be Function and the returned findRunning should be Future type.
      *
      * i -> Future(o)
      *

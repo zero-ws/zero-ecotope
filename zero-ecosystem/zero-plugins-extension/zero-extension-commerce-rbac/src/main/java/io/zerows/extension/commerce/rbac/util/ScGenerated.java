@@ -83,7 +83,7 @@ class ScGenerated {
          * 此处主要信息为 realm 和 grantType 两个属性
          */
         final String sigma = sigmaSet.iterator().next();
-        return Ux.channelA(ScCredential.class, Ux::futureL, stub -> stub.fetchAsync(sigma).compose(credential -> {
+        return Ux.channelAsync(ScCredential.class, Ux::futureL, stub -> stub.fetchAsync(sigma).compose(credential -> {
             // OUser processing ( Batch Mode )
             final List<OUser> ousers = new ArrayList<>();
             users.stream().map(user -> new OUser()

@@ -1,17 +1,15 @@
 package io.zerows.extension.runtime.workflow.bootstrap;
 
+import io.r2mo.base.dbe.Database;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.application.YmlCore;
-import io.zerows.epoch.database.OldDatabase;
-import io.zerows.extension.skeleton.common.KeMsg;
-import io.zerows.extension.skeleton.common.Ke;
 import io.zerows.extension.runtime.workflow.atom.configuration.MetaWorkflow;
 import io.zerows.extension.runtime.workflow.domain.tables.daos.WFlowDao;
 import io.zerows.extension.runtime.workflow.domain.tables.pojos.WFlow;
 import io.zerows.extension.runtime.workflow.eon.WfConstant;
-import io.zerows.management.OZeroStore;
+import io.zerows.extension.skeleton.common.Ke;
+import io.zerows.extension.skeleton.common.KeMsg;
 import io.zerows.program.Ux;
 import io.zerows.specification.app.HAmbient;
 import io.zerows.support.Ut;
@@ -47,15 +45,19 @@ final class WfConfiguration {
     }
 
     private static MetaWorkflow configure() {
-        if (Objects.isNull(CONFIG) && OZeroStore.is(YmlCore.workflow.__KEY)) {
-            CONFIG = OZeroStore.option(YmlCore.workflow.__KEY, MetaWorkflow.class, null);
-            LOG.Init.info(WfConfiguration.class, KeMsg.Configuration.DATA_T, CONFIG.toString());
-        }
+        // UPD-005: 工作流部分配置改为统一入口
+
+        //        final HConfig configuration = NodeStore.findExtension()
+        //        if (Objects.isNull(CONFIG) && OZeroStore.is(YmlCore.workflow.__KEY)) {
+        //            CONFIG = OZeroStore.option(YmlCore.workflow.__KEY, MetaWorkflow.class, null);
+        //            LOG.Init.info(WfConfiguration.class, KeMsg.Configuration.DATA_T, CONFIG.toString());
+        //        }
         return CONFIG;
     }
 
     static Future<Boolean> registry(final HAmbient ambient, final Vertx vertx) {
-        final JsonObject configJ = OZeroStore.option(YmlCore.workflow.__KEY);
+        // UPD-005: 工作流部分配置改为统一入口
+        final JsonObject configJ = null; // OZeroStore.option(YmlCore.workflow.__KEY);
         final String module = WfConstant.BUNDLE_SYMBOLIC_NAME;
         LOG.Init.info(WfConfiguration.class, KeMsg.Configuration.DATA_J,
             module, configJ.encode());
@@ -79,8 +81,8 @@ final class WfConfiguration {
     static ProcessEngine camunda() {
         Objects.requireNonNull(CONFIG);
         if (Objects.isNull(ENGINE)) {
-            final OldDatabase oldDatabase = CONFIG.camundaDatabase();
-            Objects.requireNonNull(oldDatabase);
+            final Database database = CONFIG.camundaDatabase();
+            Objects.requireNonNull(database);
             final ProcessEngineConfigurationImpl configuration = new StandaloneProcessEngineConfiguration()
                 // Fix Issue:
                 // org.camunda.bpm.engine.ProcessEngineException: historyLevel mismatch: configuration says HistoryLevelAudit(name=audit, id=2) and database says HistoryLevelFull(name=full, id=3)
@@ -88,17 +90,17 @@ final class WfConfiguration {
                 .setHistoryEventHandler(new DbHistoryEventHandler())
                 // Fix Issue:
                 // ENGINE-12019 The transaction isolation level set for the database is 'REPEATABLE_READ' which differs
-                // from the recommended get. Please change the isolation level to 'READ_COMMITTED' or set property
+                // from the recommended findRunning. Please change the isolation level to 'READ_COMMITTED' or set property
                 // 'skipIsolationLevelCheck' to true. Please keep in mind that some levels are known to cause deadlocks
                 // and other unexpected behaviours.
                 .setSkipIsolationLevelCheck(true)
                 .setIdGenerator(new StrongUuidGenerator())                 // uuid for task
                 .setProcessEngineName(CONFIG.getName())
                 .setDatabaseSchemaUpdate(ProcessEngineConfiguration.DB_SCHEMA_UPDATE_FALSE)
-                .setJdbcUrl(oldDatabase.getUrl())
-                .setJdbcDriver(oldDatabase.getDriverClassName())
-                .setJdbcUsername(oldDatabase.getUsername())
-                .setJdbcPassword(oldDatabase.getPasswordDecrypted())
+                .setJdbcUrl(database.getUrl())
+                .setJdbcDriver(database.getDriverClassName())
+                .setJdbcUsername(database.getUsername())
+                .setJdbcPassword(database.getPasswordDecrypted())
                 .setJobExecutorActivate(true);
             // Default Handler for History
             HANDLER = configuration.getHistoryEventHandler();

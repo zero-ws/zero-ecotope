@@ -42,7 +42,7 @@ class AgonicDelete implements Agonic {
             return Pre.fileOut().inJAsync(json, in)
 
                 // 如果打开了 Trash 功能，则执行 Trash 的备份
-                .compose(removed -> Ux.channelA(ExTrash.class, () -> Ux.future(removed),
+                .compose(removed -> Ux.channelAsync(ExTrash.class, () -> Ux.future(removed),
                     (stub) -> stub.backupAsync(module.identifier(), removed)))
 
                 // 「AOP」带 AOP 的核心删除执行逻辑
@@ -66,7 +66,7 @@ class AgonicDelete implements Agonic {
 
 
                 // 如果打开了 Trash 功能，则执行 Trash 的备份
-                .compose(removed -> Ux.channelA(ExTrash.class, () -> Ux.future(array),
+                .compose(removed -> Ux.channelAsync(ExTrash.class, () -> Ux.future(array),
                     stub -> stub.backupAsync(module.identifier(), array)))
 
 

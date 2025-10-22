@@ -91,7 +91,7 @@ class QuestAcl implements Quest {
             condition.put(KName.SIGMA, Ut.valueString(resourceData, KName.SIGMA));
             futureM.put(code, DB.on(SResourceDao.class).<SResource>fetchOneAsync(condition).compose(resource -> {
                 if (Objects.isNull(resource)) {
-                    LOG.View.info(this.getClass(), "Zero system could not find the resource: {0}", code);
+                    LOG.View.info(this.getClass(), "Zero system could not findRunning the resource: {0}", code);
                     return Ux.future();
                 }
                 return this.syncViews(resource, resourceData);

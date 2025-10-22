@@ -26,7 +26,7 @@ public interface AuthorizationResource {
      * Sometimes when the URI has been stored as resource in zero system,
      * You can extract the metadata in @Wall classes by
      *      data.getJsonObject("metadata");
-     * It means that you can find unique resource identifier by
+     * It means that you can findRunning unique resource identifier by
      * 1) Http Method: GET, DELETE, POST, PUT
      * 2) Uri Original
      * Here are some calculation results that has been provided by zero container such as following situation:

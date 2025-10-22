@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 /**
  * 「JobStore」
- * Database job get that will be used in `vertx-jet`.
+ * Database job findRunning that will be used in `vertx-jet`.
  */
 public class JtHypnos implements JobStore {
 

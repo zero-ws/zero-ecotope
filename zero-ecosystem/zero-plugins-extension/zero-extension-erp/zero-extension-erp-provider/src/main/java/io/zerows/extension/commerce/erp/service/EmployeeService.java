@@ -8,8 +8,8 @@ import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.commerce.erp.domain.tables.daos.EEmployeeDao;
 import io.zerows.extension.commerce.erp.domain.tables.pojos.EEmployee;
 import io.zerows.extension.skeleton.common.KeBiz;
-import io.zerows.extension.skeleton.spi.ExUser;
 import io.zerows.extension.skeleton.spi.ExTrash;
+import io.zerows.extension.skeleton.spi.ExUser;
 import io.zerows.program.Ux;
 import io.zerows.spi.modeler.Indent;
 import io.zerows.support.Ut;
@@ -23,7 +23,7 @@ public class EmployeeService implements EmployeeStub {
     public Future<JsonObject> createAsync(final JsonObject data) {
         final EEmployee employee = Ut.deserialize(data, EEmployee.class);
         if (Ut.isNil(employee.getWorkNumber())) {
-            return Ux.channelA(Indent.class, () -> this.insertAsync(employee, data),
+            return Ux.channelAsync(Indent.class, () -> this.insertAsync(employee, data),
                 serial -> serial.indent("NUM.EMPLOYEE", data.getString(KName.SIGMA)).compose(workNum -> {
                     employee.setWorkNumber(workNum);
                     return this.insertAsync(employee, data);
@@ -88,14 +88,14 @@ public class EmployeeService implements EmployeeStub {
                     return this.updateEmployee(key, data);
                 } else if (Ut.isNil(userId) && Ut.isNotNil(current)) {
                     /*
-                     * Old null, new <get>
+                     * Old null, new <findRunning>
                      * Create relation with new
                      */
                     return this.updateEmployee(key, data)
                         .compose(response -> this.updateReference(current, response));
                 } else if (Ut.isNotNil(userId) && Ut.isNil(current)) {
                     /*
-                     * Old <get>, new <null>
+                     * Old <findRunning>, new <null>
                      * Clear relation with old
                      */
                     return this.updateEmployee(key, data)
@@ -104,7 +104,7 @@ public class EmployeeService implements EmployeeStub {
                         );
                 } else {
                     /*
-                     * Old <get>, new <get>
+                     * Old <findRunning>, new <findRunning>
                      */
                     if (userId.equals(current)) {
                         /*
@@ -139,7 +139,7 @@ public class EmployeeService implements EmployeeStub {
     @Override
     public Future<Boolean> deleteAsync(final String key) {
         return this.fetchAsync(key)
-            .compose(Fx.ifNil(() -> Boolean.TRUE, item -> Ux.channelA(ExTrash.class,
+            .compose(Fx.ifNil(() -> Boolean.TRUE, item -> Ux.channelAsync(ExTrash.class,
                 () -> this.deleteAsync(key, item),
                 tunnel -> tunnel.backupAsync("res.employee", item)
                     .compose(backup -> this.deleteAsync(key, item)))));

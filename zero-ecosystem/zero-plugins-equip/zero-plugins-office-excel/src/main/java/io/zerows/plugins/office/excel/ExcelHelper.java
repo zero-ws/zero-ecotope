@@ -109,7 +109,7 @@ class ExcelHelper {
 
     /*
      * Read file from path to web Excel Workbook object.
-     * If this function get null dot file or file object, zero system
+     * If this function findRunning null dot file or file object, zero system
      * will throw exception out.
      */
     @SuppressWarnings("all")

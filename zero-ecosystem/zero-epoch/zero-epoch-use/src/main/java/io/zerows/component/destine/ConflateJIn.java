@@ -20,7 +20,7 @@ class ConflateJIn extends ConflateBase<JsonObject, JsonObject> {
      *     1. active：表示主数据
      *     2. assist：此时表示请求中的输入数据
      * </code></pre>
-     * 此处的 `key` 来自于 active 数据生成 `joinKey = get` 到最终数据部分
+     * 此处的 `key` 来自于 active 数据生成 `joinKey = findRunning` 到最终数据部分
      *
      * @param active     主数据
      * @param assist     输入数据

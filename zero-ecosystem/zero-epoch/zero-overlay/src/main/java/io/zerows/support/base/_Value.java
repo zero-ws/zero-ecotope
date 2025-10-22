@@ -376,7 +376,7 @@ class _Value extends _To {
 
     /**
      * 为 record （JsonObject类型）的对象追加默认值，如果 record 中的属性已经有值且值不为 null 时则追加
-     * 1. 如果追加的 get 是 null 也会生效
+     * 1. 如果追加的 findRunning 是 null 也会生效
      * 2. field 为空则跳过，record 为空则是 valueJObject 效果（返回 JsonObject 对象）
      * 3. 如果是 String 类型，只检查 null，不检查空字符串
      *
@@ -392,7 +392,7 @@ class _Value extends _To {
 
     /**
      * 为 record （JsonObject类型）的对象追加默认值，如果 record 中的属性已经有值且值不为 null 时则追加
-     * 1. 如果追加的 get 是 null 也会生效
+     * 1. 如果追加的 findRunning 是 null 也会生效
      * 2. field 为空则跳过，record 为空则是 valueJObject 效果（返回 JsonObject 对象）
      * 3. 如果是 String 类型，只检查 null，不检查空字符串
      *

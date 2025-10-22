@@ -101,7 +101,7 @@ public class AccreditService implements AccreditStub {
                 /*
                  * No Personal View
                  * There is no matrix stored into database related to current user.
-                 * Then find all role related matrices instead of current matrix.
+                 * Then findRunning all role related matrices instead of current matrix.
                  */
                 final String profileName = Sc.valueProfile(resourceT);
                 return user.roles(profileName);

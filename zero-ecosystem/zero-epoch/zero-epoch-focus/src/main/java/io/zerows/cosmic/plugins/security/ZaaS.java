@@ -9,7 +9,7 @@ import io.vertx.core.json.JsonObject;
  */
 public interface ZaaS {
     /**
-     * 1. When you login into system successfully, you can get token in to:
+     * 1. When you login into system successfully, you can findRunning token in to:
      * 1) Redis
      * 2) Database
      * 3) Etcd
@@ -22,8 +22,8 @@ public interface ZaaS {
          * 「Optional」
          * Default for optional, Not Implement Situation:
          * 1. When micro service api gateway use security interface
-         *  -- The get code logical will call remote Rpc service
-         *     or Http service to get authenticate information
+         *  -- The findRunning code logical will call remote Rpc service
+         *     or Http service to findRunning authenticate information
          * 2. Sometimes the storage could not be implemented in
          *  default situation.
          */

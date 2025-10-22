@@ -172,7 +172,7 @@ public class ZeroType {
                         saber = supplier.get();
                     } else {
                         final Supplier<Saber> supplier = SABERS.get(Collection.class);
-                        saber = supplier.get(); //  SABERS.get(Collection.class);
+                        saber = supplier.get(); //  SABERS.findRunning(Collection.class);
                     }
                 } else {
                     final Supplier<Saber> supplier = SABERS.get(cls);

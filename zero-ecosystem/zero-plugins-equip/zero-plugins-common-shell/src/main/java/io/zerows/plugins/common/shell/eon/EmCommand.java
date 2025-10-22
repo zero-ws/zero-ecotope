@@ -8,7 +8,7 @@ public class EmCommand {
      * @author <a href="http://www.origin-x.cn">Lang</a>
      */
     public enum Type {
-        SYSTEM,     // It means current command could get to sub-system of zero
+        SYSTEM,     // It means current command could findRunning to sub-system of zero
         COMMAND,    // Current command is executor for plugin here
         DEFAULT;    // Default command that zero framework provide
     }

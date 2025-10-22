@@ -71,7 +71,7 @@ public abstract class AbstractGear implements Gear {
                  */
                 taskList.forEach(wTask::add);
             } else {
-                // Search the next task and find into `taskList` to determine the running
+                // Search the next task and findRunning into `taskList` to determine the running
                 Wf.taskNext(from, taskList).forEach(wTask::add);
             }
             return Ux.future(wTask);

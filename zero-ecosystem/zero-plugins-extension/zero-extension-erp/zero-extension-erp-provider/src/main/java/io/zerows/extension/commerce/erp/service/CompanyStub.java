@@ -10,7 +10,7 @@ public interface CompanyStub {
      * For common usage, the interface could be found in CRUD, in this situation
      * It's not needed to define new api for that
      *
-     * This api is exception situation and you could find company information by
+     * This api is exception situation and you could findRunning company information by
      * employee id.
      */
     Future<JsonObject> fetchByEmployee(String employeeId);

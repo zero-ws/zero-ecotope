@@ -8,7 +8,7 @@ import java.lang.annotation.*;
  * > Vert.x native client
  *
  * This annotation is for Redis in zero framework, it provide extension to access Redis
- * database and you can get Redis client reference with this annotation. The infix usage
+ * database and you can findRunning Redis client reference with this annotation. The infix usage
  * is as following ( `vertx-ifx/zero-ifx-native` module ):
  *
  * ```java

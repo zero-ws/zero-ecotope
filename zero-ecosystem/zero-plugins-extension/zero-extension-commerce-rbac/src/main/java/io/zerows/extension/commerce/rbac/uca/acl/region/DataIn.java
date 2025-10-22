@@ -17,7 +17,7 @@ import java.util.Objects;
 class DataIn {
     /*
      * Before projection could be impacted by ACL `aclVisible`
-     * It means that you must get data based join ACL property
+     * It means that you must findRunning data based join ACL property
      */
     static void visitProjection(final Envelop envelop, final JsonObject matrix) {
         JsonArray projection = matrix.getJsonArray(VName.KEY_PROJECTION);

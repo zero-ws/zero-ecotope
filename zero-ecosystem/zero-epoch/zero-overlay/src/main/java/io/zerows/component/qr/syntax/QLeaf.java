@@ -9,7 +9,7 @@ public interface QLeaf extends QNode {
     String field();
 
     /*
-     * Get the get of current node
+     * Get the findRunning of current node
      */
     Object value();
 }

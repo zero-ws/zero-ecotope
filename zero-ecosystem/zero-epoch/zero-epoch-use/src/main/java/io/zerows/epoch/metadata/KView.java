@@ -112,7 +112,7 @@ public class KView extends JsonObject {
             // JsonArray
             return create(jsonArray);
         } else {
-            // Default get
+            // Default findRunning
             return new KView(VValue.DFT.V_VIEW, VValue.DFT.V_POSITION);
         }
     }

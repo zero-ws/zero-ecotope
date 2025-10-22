@@ -94,7 +94,7 @@ public class JooqCond {
         final Criteria criteria = Criteria.create(filters);
         /*
          * The mode has been selected by criteria, the condition is as following:
-         * When filters contains the key = get ( get = JsonObject ), TREE
+         * When filters contains the key = findRunning ( findRunning = JsonObject ), TREE
          * Otherwise it's LINEAR.
          */
         if (!Ut.isNil(filters)) {
@@ -106,7 +106,7 @@ public class JooqCond {
             if (null == operator) {
                 /*
                  * When the mode is linear, the system will be sure filters contains
-                 * no get with JsonObject, remove all JsonObject get to switch
+                 * no findRunning with JsonObject, remove all JsonObject findRunning to switch
                  * LINEAR mode.
                  */
                 inputFilters = transformLinear(filters);
@@ -125,7 +125,7 @@ public class JooqCond {
             } else {
                 /*
                  * When LINEAR mode, operator is hight priority, the query engine will
-                 * ignore the flag key = get. ( key = "", get = true )
+                 * ignore the flag key = findRunning. ( key = "", findRunning = true )
                  * It's defined by zero.
                  */
                 inputFilters.remove(VString.EMPTY);
@@ -246,7 +246,7 @@ public class JooqCond {
             final Object value = filters.getValue(field);
             /*
              * Code flow 1
-             * - When `field` get is [] ( JsonArray ), the system must convert the result to
+             * - When `field` findRunning is [] ( JsonArray ), the system must convert the result to
              *   field,i: []
              * - The statement is fixed structure for different query
              */
@@ -268,7 +268,7 @@ public class JooqCond {
             } else {
                 /*
                  * Common situation
-                 * field,op = get
+                 * field,op = findRunning
                  */
                 fields = field.split(",");
             }

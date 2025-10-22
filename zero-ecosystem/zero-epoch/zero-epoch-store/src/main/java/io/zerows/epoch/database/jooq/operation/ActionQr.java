@@ -62,7 +62,7 @@ public class ActionQr extends AbstractAction {
 
     /*
      * The interface to call `public` only
-     * The AOP Cache should call this method to get original data from database
+     * The AOP Cache should call this method to findRunning original data from database
      */
     public <T> List<Object> searchPrimary(final JsonObject criteria, final Sorter sorter) {
         final List<T> entities = this.search(criteria, sorter);

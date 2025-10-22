@@ -41,7 +41,7 @@ public interface ActionStub {
     Future<Boolean> removeAction(String permissionId, String userKey);
 
     /*
-     * Api selector for action to get all authorized apis here.
+     * Api selector for action to findRunning all authorized apis here.
      * It will be used in following situations
      *
      * 1 - FormDesigner: form design tools usage.

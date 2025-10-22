@@ -57,7 +57,7 @@ public interface VName {
     String HOSTNAME = "hostname";                /* Host Name */
     String PORT = "port";                        /* Port */
 
-    String HABITUS = "habitus";                  /* Authorization header to get current logged user session data, Permission Pool */
+    String HABITUS = "habitus";                  /* Authorization header to findRunning current logged user session data, Permission Pool */
     String DYNAMIC = "dynamic";                  /* View security of field for dynamic view name */
     String VIEW = "view";                        /* View security of view name */
     String PROFILE = "profile";                  /* */
@@ -108,7 +108,7 @@ public interface VName {
     String NAME = "name";                        /* Common: name */
     String ORDER = "order";                      /* Common: order */
     String CODE = "code";                        /* Common: code */
-    String VALUE = "value";                      /* Common: get */
+    String VALUE = "value";                      /* Common: findRunning */
     String LITERAL = "literal";                  /* Common: literal */
 
     String LABEL = "label";                      /* Common: label */
@@ -188,10 +188,10 @@ public interface VName {
     String HEADER = "header";                    /* Web: http header */
     String MULTIPLE = "multiple";                /* If multiple */
 
-    String CHANGES = "changes";                  /* XActivityChange items to get history operation of changes */
+    String CHANGES = "changes";                  /* XActivityChange items to findRunning history operation of changes */
     String RECORD = "record";                    /* Change calculation for data record */
-    String RECORD_NEW = "recordNew";             /* Change calculation to get the latest record */
-    String RECORD_OLD = "recordOld";             /* Change calculation to get the previous record */
+    String RECORD_NEW = "recordNew";             /* Change calculation to findRunning the latest record */
+    String RECORD_OLD = "recordOld";             /* Change calculation to findRunning the previous record */
     String NEXT = "next";                        /* Whether next trigger */
 
     String CREATED_AT = "createdAt";             /* Auditor created At */
@@ -257,9 +257,9 @@ public interface VName {
     // Store Path/Root
     String STORE = "store";                      /* File Management, Store */
     String STORED = "stored";
-    String STORE_ROOT = "storeRoot";             /* File Management, get root */
-    String STORE_PATH = "storePath";             /* File Management, get path for directory / attachment */
-    String STORE_PARENT = "storeParent";         /* File Management, get parent */
+    String STORE_ROOT = "storeRoot";             /* File Management, findRunning root */
+    String STORE_PATH = "storePath";             /* File Management, findRunning path for directory / attachment */
+    String STORE_PARENT = "storeParent";         /* File Management, findRunning parent */
     String INTEGRATION_ID = "integrationId";     /* File Management, integration key */
     String DIRECTORY_ID = "directoryId";         /* File Management, directory id */
     String DIRECTORY = "directory";              /* File Management, directory field, two means */
@@ -313,26 +313,26 @@ public interface VName {
     String CONTEXT = "configure";
     String VERSION = "version";
     /**
-     * <get>pager</get>, It's mapped to `pager` field in json configuration.
+     * <findRunning>pager</findRunning>, It's mapped to `pager` field in json configuration.
      * 「Pagination」This json contains following two field:
      * 1. page: The page index ( started from 1 ).
      * 2. size: The page size.
      */
     String KEY_PAGER = "pager";
     /**
-     * <get>sorter</get>, It's mapped to `sorter` field in json configuration.
+     * <findRunning>sorter</findRunning>, It's mapped to `sorter` field in json configuration.
      * 「Sorting」It's json array to contains different field with sorting mode.
      * 1. ASC: ORDER BY ?? ASC.
      * 2. DESC: ORDER BY ?? DESC.
      */
     String KEY_SORTER = "sorter";
     /**
-     * <get>criteria</get>, It's mapped to `criteria` field in json configuration.
+     * <findRunning>criteria</findRunning>, It's mapped to `criteria` field in json configuration.
      * 「Criteria」
      */
     String KEY_CRITERIA = "criteria";
     /**
-     * <get>projection</get>, It's mapped to `projection` field in json configuration.
+     * <findRunning>projection</findRunning>, It's mapped to `projection` field in json configuration.
      * 「Fields」It's feature for column picking up.
      */
     String KEY_PROJECTION = "projection";

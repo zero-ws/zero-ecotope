@@ -42,7 +42,7 @@ error:
   #    E80413 = _501NotImplementException
   E60050: "(501) - This api is not supported or implemented, please check your specification, source = {0}"
   E60059: "(400) - (Progma) Detected Null Value = `{0}`"
-  E60060: "(500) - Method invoking met exception, but could not find WebException, ex = {0}"
+  E60060: "(500) - Method invoking met exception, but could not findRunning WebException, ex = {0}"
   E80413: "(501) - (Jet) This api Method does not implement here, please provide in programming"
 
   # ----------- (DemonException) Checked, Standard Zero Configuration FnVertx --------------------
@@ -54,7 +54,7 @@ error:
   # Configuration validation Error
   E10001: (V) - This rule require all elements of array is JsonObject, Now the index = {0} does not match, it''s {1}
   E10002: (V) - The data object {0} missed required field "{1}"
-  E10003: (V) - The field {0} get is "{1}", but expected type is "{2}"
+  E10003: (V) - The field {0} findRunning is "{1}", but expected type is "{2}"
   # 移除：E10004: (V) - The cluster options is enabled, but the "{0}" vertx instance = "{1}"
   E10005: (V) - The dynamic key "{0}" missing in uniform extension configuration data {1}
   E10006: (V) - The data object {0} contains unsupported/forbidden field "{1}"
@@ -67,7 +67,7 @@ error:
   E20002: (401) - Qiy token record does not contain "access_token", client_id = {0}
   E20003: (424) - Ali Acs Client profile met error when it''s initializing, details = {0}
   E20004: (424) - Ali Acs Client send request met error, details = {0}
-  E20005: "(500) - You selected mode = `DEFINED`, but there missed `get` key in config"
+  E20005: "(500) - You selected mode = `DEFINED`, but there missed `findRunning` key in config"
 
   # ElasticSearch
   E20006: (404) - the Configuration of ElasticSearch is missinng, please check vertx-elasticsearch.yml.
@@ -96,11 +96,11 @@ error:
   E40017: Worker method signature is wrong, the parameter length must be > 0. method = {0}, class = {1}
   E40018: "Async mode: return = {0}, parameter = {1}, valid - Envelop method(Envelop), void method(Message<Envelop>;)"
   # 移除：E40019: Your plugin {0} met error when starting, please check the details {1}
-  E40020: Zero system could not find the config of key = {0}, please check your configurations
+  E40020: Zero system could not findRunning the config of key = {0}, please check your configurations
   # 移除：E40021: The field "{0}" of class {1} has been annotated with Zero annotation more than once, data = {2}
   # 移除：E40023: "Zero system found field \"{0}\" of class {1} is interface with non-unique implementation, but @Qualifier missed"
   # 移除：E40024: "One of the classes \"{0}\" missed @Named annotation, because they implement the same interface {1}"
-  # 移除：E40025: "All the implementation class \"{0}\" with @Named contains no get of \"{1}\""
+  # 移除：E40025: "All the implementation class \"{0}\" with @Named contains no findRunning of \"{1}\""
   # 移除：E40026: "You will initialize infix = \"{0}\", but the configuration missed \"{1}\" in lime node of vertx.xml"
   # 移除：E40027: "You are trying to initialize EtcdClient, but the configuration data is empty."
   E40028: Duplicated implementation of interface \"{0}\" found in the system, it''s invalid
@@ -119,8 +119,8 @@ error:
   E40041: "(Security) Every @Wall class must contains only one method annotated with {0}, current {1} contains more"
   E40042: "You have enabled @Address and @Ipc both on method \"{0}\" of class \"{1}\", only one channel should be valid"
   E40043: "You have annotated method {0} with @Ipc and set current point is \"sender\", it means that you must set \"to\" and \"name\" both at the same time, but now ( to = {1}, name = {2} )"
-  E40044: "The method {0} annotated with @Ipc must contain return get, return type must not be Void/void"
-  E40045: "The method {0} annotated with @Ipc must set direction ( get or (name|to) ), now the system do not know the direction"
+  E40044: "The method {0} annotated with @Ipc must contain return findRunning, return type must not be Void/void"
+  E40045: "The method {0} annotated with @Ipc must set direction ( findRunning or (name|to) ), now the system do not know the direction"
   E40046: "The method {0} annotated with @Ipc must contain only one argument of Envelop type"
   E40047: "Zero system could not select correct invoker by returnType = {0}, paramType = {1}"
   E40048: "(Rpc) Zero system detect agent interface \"{0}\" only without implementation class, it''s forbidden in rpc stream workflow."
@@ -128,7 +128,7 @@ error:
   E40050: "You''ll run zero in \"Micro Mode\", but etcd configuration is not prepared, system detected error: {0}"
   # 移除：E40051: "Your RoutingContext object reference is null, could not be getNull by getContext()."
   E40052: "You defined @WebFilter \"{0}\", but it does not implement interface \"io.vertx.up.backbone.filter\"."
-  E40053: "The order of @WebFilter must be greater than or equal 0 ( >= 0 ), but now \"{0}\" @Ordered get is negative number."
+  E40053: "The order of @WebFilter must be greater than or equal 0 ( >= 0 ), but now \"{0}\" @Ordered findRunning is negative number."
   # 移除：E40054: "The @WebFilter \"{0}\"could not be initialized, please check your class."
   E40055: "(Jooq) The analyzed field of original \"{0}\" field is null, it means that the field is invalid"
   # 移除：E40056: "(Database) Data pool initialized met issue, jdbcUrl = {0}, exception = {1}"
@@ -169,7 +169,7 @@ error:
   E60002: (500) - The system detect some error in delivery on address {0}, error message = {1}
   E60003: (500) - The event bus detect some error in receiving message on address {0}, error message = {1}
   E60004: (400) - Zero system detect conversation from "{0}" to type "{1}", but it's conflict
-  E60005: (400) - Request body validation handler, field = {0}, get = {1}, message = {2}
+  E60005: (400) - Request body validation handler, field = {0}, findRunning = {1}, message = {2}
   E60006: (415) - Server could not accept the mime "{0}", expected should be one of {1}
   # 移除：E60008: (404) - Zero system detect non record in storage, no record
   # 移除：E60009: (400) - Zero system detect duplicated records in storage, size = {0}
@@ -179,7 +179,7 @@ error:
   # 移除：E60015: "(501) - The service ( name = {0}, address = {1}, method = {2}, class = {3} ) could not be found"
   # 移除：E60016: "(501) - The service address = {0} is wrong in name = {1}"
   # 移除：E60017: "(504) - The remote service ( location = {0}, name = {1} ) met error, details = {2}"
-  # 移除：E60018: "(501) - The micro service could not find method by address = {0}, error occurs"
+  # 移除：E60018: "(501) - The micro service could not findRunning method by address = {0}, error occurs"
   # 移除：E60019: "(500) - Unexpected error found when communitting, details {0}"
   # 移除：E60020: "(424) - This call dependency Rpc remote service ( name = {0}, address = {1} ) could not be found now"
   E60021: "(400) - File uploading to {0} met errors, please check"
@@ -213,7 +213,7 @@ error:
   E60047: "(501) - Sorry, the client that your bind is `null`, could not continue this operation"
   E60048: "(415) The argument type of @PointParam is invalid, valid is ( List<Tool>, JsonArray, VPosition ), current is \"{0}\""
   E60049: "({0}) HttpException: {1}"
-  E60051: "(500) - System found `null` return get of method `{0}` in class `{1}`"
+  E60051: "(500) - System found `null` return findRunning of method `{0}` in class `{1}`"
   E60058: "(409) - You `runComponent` has not been configured, but the scDim = `{0}`, they are conflict"
 
   # File attachment
@@ -272,7 +272,7 @@ error:
   E80230: "(401) - (RBAC) SMS code `{1}` for your client `{0}` has been expired"
 
   # Ambient Module
-  E80300: "(500) - (Ambient) The application environment error, could not get app data"
+  E80300: "(500) - (Ambient) The application environment error, could not findRunning app data"
   E80301: "(500) - (Ambient) The application ( name = `{0}` ) could not be initialized"
   E80302: "(500) - (Ambient) The Init implementation class = {0} does not `implement` interface Init"
   E80303: "(500) - (Ambient) The Prerequisite class = {0} does not satisfy specification"
@@ -286,7 +286,7 @@ error:
   E80403: "(400) - The required parameter `{0}` is missing and please input valid parameter here"
   E80404: "(500) - (Jet) The class = `{0}` does not extend from `AbstractVerticle`, it''s invalid"
   E80405: "(500) - (Jet) The class = `{0}` does not implement `JtConsumer` interface, it''s invalid"
-  E80406: "(500) - (Jet) The definition from IApi/IService met error, system could not find configuration of key = `{0}`"
+  E80406: "(500) - (Jet) The definition from IApi/IService met error, system could not findRunning configuration of key = `{0}`"
   E80407: "(501) - (Jet) The channel component met error and coult not be initialized with class {0}"
   E80408: "(424) - (Jet) The component `{0}` does not match channel type `{1}` "
   E80409: "(424) - (Jet) The channel must be one of `{0}`, but now your class `{1}` does not match ( current = {2} )"
@@ -299,7 +299,7 @@ error:
   E80502: "(500) - (Atom) System detect empty sql statement, it''s invalid"
   E80503: "(501) - (Atom) Sorry the implementation class  of `Ingest` is invalid"
   E80504: "(500) - (Atom) You''ll try to add `not null` column to table, it''s invalid, table = {0}, column = {1}"
-  E80505: "(500) - (Atom) There are `null get` in column, the constraints could not be change to NOT NULL, table = {0}, column = {1}"
+  E80505: "(500) - (Atom) There are `null findRunning` in column, the constraints could not be change to NOT NULL, table = {0}, column = {1}"
   E80506: "(501) - (Atom) The implementation of `AoReflector` is null"
   E80507: "(501) - (Atom) The implementation of `AoSentence` is null, but it''s required"
   E80508: "(501) - (Atom) There are configuration error when read `Pin` component, key = {0}"
@@ -337,7 +337,7 @@ error:
   E80540: "(501) - (Web) The model of `DataTpl` is null and could not be found in your environment, Anonymous error"
   E80541: "(409) - (Ref) The model `{0}` defined static references, but found more than one dao in field `{1}`, please check \"sourceReference\" configuration."
   E80542: "(409) - (Ke) You want to seek `ofMain` configuration in JOIN, but now the fields ( one of `crud, classDao, classDefine` ) is missing."
-  E80543: "(412) - (Ke) You parsed targetIndent = `{0}` in Join workflow, but now get null. data = `{1}`."
+  E80543: "(412) - (Ke) You parsed targetIndent = `{0}` in Join workflow, but now findRunning null. data = `{1}`."
   E80544: "(500) - (Ref) Please bind `DataAtom` first and then you can call `bind(Model)` method for this current model ( identifier = `{0}` ). "
   E80545: "(400) - (Mod) Because both new and old record(s) are null/empty, could not be valid to generate history"
   E80546: "(500) - (Excel) Read the excel file met null file issue, please check your code"
@@ -345,10 +345,10 @@ error:
   E80548: "(412) - (Ke) You parsed targetIndent = `{0}` in Join workflow with JsonArray, but found more than one identifiers. "
 
   # Workflow Module
-  E80600: "(404) - (Workflow) The system could not find the ProcessDefinition by code = `{0}`"
+  E80600: "(404) - (Workflow) The system could not findRunning the ProcessDefinition by code = `{0}`"
   E80601: "(501) - (Workflow) Your BPMN file has no `StartEvent`, please check by id = `{0}`"
   E80602: "(409) - (Workflow) This api could be called when unique `StartEvent`, but not the size is `{0}`, id = `{1}`"
-  E80603: "(404) - (Workflow) The system could not find workflow record by definitionKey = `{0}`"
+  E80603: "(404) - (Workflow) The system could not findRunning workflow record by definitionKey = `{0}`"
   E80604: "(409) - (Workflow) The workflow of definitionKey = `{0}` has already been started ! Invalid Call MoveOn"
   E80605: "(404) - (Workflow) The workflow of instanceId = `{0}` has been not found in your workflow engine"
   E80606: "(500) - (Workflow) The workflow engine could not parsed task type of `{0}`"

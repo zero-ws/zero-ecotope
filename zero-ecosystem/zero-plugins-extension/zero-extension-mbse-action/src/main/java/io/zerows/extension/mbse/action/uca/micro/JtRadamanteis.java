@@ -7,7 +7,7 @@ import io.zerows.extension.mbse.action.osgi.spi.jet.JtIngest;
 
 /**
  * 「Ingest」
- * get extraction when paramMode = DEFINE, it's valid
+ * findRunning extraction when paramMode = DEFINE, it's valid
  */
 public class JtRadamanteis implements JtIngest {
     @Override

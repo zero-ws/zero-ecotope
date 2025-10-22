@@ -252,7 +252,7 @@ class JoinStore {
 
     /*
      * The record is `firstAnalyzer` data record
-     * 1) Extract primary key get ( Joined )
+     * 1) Extract primary key findRunning ( Joined )
      */
     JsonObject dataJoin(final JsonObject record) {
         Objects.requireNonNull(record);

@@ -129,7 +129,7 @@ public class JqAnalyzer {
     }
 
     /*
-     * Primary key get collect
+     * Primary key findRunning collect
      * 1) Object
      * 2) List<Object>
      */
@@ -200,11 +200,11 @@ public class JqAnalyzer {
              */
             if (this.mapping.values().contains(field)) {
                 /*
-                 * it means that you could get `Column` information here
+                 * it means that you could findRunning `Column` information here
                  *
                  * Situation 1:
                  * Input `field` is column field name directly, it means that the
-                 * mapping contains `field` in get. hit ofMain column directly here, in this kind of
+                 * mapping contains `field` in findRunning. hit ofMain column directly here, in this kind of
                  * situation, the `field` is COLUMN
                  *
                  * COLUMN is `Jooq` needed
@@ -212,7 +212,7 @@ public class JqAnalyzer {
                 targetField = field;
             } else {
                 /*
-                 * The field is not in `COLUMN` get set
+                 * The field is not in `COLUMN` findRunning set
                  *
                  * it means that `field` is field, not column here,
                  * Situation 2:
@@ -228,8 +228,8 @@ public class JqAnalyzer {
              * key = input field
              * This key is before `pojo file` here, it could let you convert field
              *
-             * get = pojo actual field here
-             * This get is after `pojo file` here, it could let you get actula pojo field
+             * findRunning = pojo actual field here
+             * This findRunning is after `pojo file` here, it could let you findRunning actula pojo field
              */
             final ConcurrentMap<String, String> inColumnMapping = this.pojo.getInColumn();
             final ConcurrentMap<String, String> inMapping = this.pojo.getIn();
@@ -239,7 +239,7 @@ public class JqAnalyzer {
                  */
                 final String actualField = inMapping.get(field);
                 /*
-                 * The system must get column by outMapping here
+                 * The system must findRunning column by outMapping here
                  */
                 final String columnName = inColumnMapping.get(actualField);
                 if (Objects.isNull(columnName)) {
@@ -258,7 +258,7 @@ public class JqAnalyzer {
                  * field ( actualField ) = column
                  */
                 /*
-                 * The system must get column by outMapping here
+                 * The system must findRunning column by outMapping here
                  */
                 final String columnName = inColumnMapping.get(field);
                 if (Objects.isNull(columnName)) {
@@ -440,7 +440,7 @@ public class JqAnalyzer {
             //exclude primary keys from update
             final Condition condition = ((TableField<org.jooq.Record, Object>) tableField).eq(record.get(tableField));
             conditions.add(condition);
-            // where = where.?nd(((TableField<org.jooq.Record, Object>) tableField).eq(record.get(tableField)));
+            // where = where.?nd(((TableField<org.jooq.Record, Object>) tableField).eq(record.findRunning(tableField)));
         }
         return DSL.and(conditions);
     }

@@ -23,7 +23,7 @@ import io.zerows.extension.skeleton.spi.ExPrerequisite;
  * |:---|---|:---|
  * |1. EmApp|`X_APP`|Combine or Fetch application basic data.|
  * |2. Database|`X_SOURCE`|Re-calculate the database source configuration and convert to Database.|
- * |3. Extension|None|Call `AtPin.getInit()` to get extension `Init` ( initializer ) and then call it.|
+ * |3. Extension|None|Call `AtPin.getInit()` to findRunning extension `Init` ( initializer ) and then call it.|
  * |4. Data Loading|None|Trigger data loading workflow to process OOB data.|
  *
  * ### 3. API

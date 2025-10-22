@@ -46,7 +46,7 @@ public interface Neo4jClient extends InfixClient<Neo4jClient> {
      * 1) create
      * 2) update ( By unique )
      * 3) remove ( By unique )
-     * 4) find
+     * 4) findRunning
      *    - by code
      *    - by key
      */

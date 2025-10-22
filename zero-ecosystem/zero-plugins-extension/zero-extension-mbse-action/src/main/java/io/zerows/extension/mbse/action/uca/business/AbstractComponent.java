@@ -57,7 +57,7 @@ public abstract class AbstractComponent implements JtComponent, Service {
      * - dictEpsilon
      *
      * The situation for dict is complex because all the sub-classes could not use
-     * `Dict` directly, instead they all used `fabric` api to get `DictFabric` based join
+     * `Dict` directly, instead they all used `fabric` api to findRunning `DictFabric` based join
      * dictData and dictEpsilon here.
      *
      * `DictFabric` is new structure but it could support

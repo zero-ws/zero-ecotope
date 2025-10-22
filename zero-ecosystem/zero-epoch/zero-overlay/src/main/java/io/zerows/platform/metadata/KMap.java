@@ -96,7 +96,7 @@ public class KMap implements Serializable {
              * Content mapping `Map` here
              */
             input.fieldNames().stream()
-                /* Only stored JsonObject get here */
+                /* Only stored JsonObject findRunning here */
                 .filter(field -> input.getValue(field) instanceof JsonObject)
                 .forEach(field -> {
                     final JsonObject fieldValue = input.getJsonObject(field);
@@ -127,7 +127,7 @@ public class KMap implements Serializable {
 
     // -------------  Get by identifier ----------------------------
     /*
-     * Child get here
+     * Child findRunning here
      */
     public Node child(final String key) {
         final Node selected = this.mapping.get(key);
@@ -163,7 +163,7 @@ public class KMap implements Serializable {
     }
 
     /*
-     * Get get by from key, get to get
+     * Get findRunning by from key, findRunning to findRunning
      */
     public String to(final String from) {
         return this.root.to(from);
@@ -258,7 +258,7 @@ public class KMap implements Serializable {
         void init(final JsonObject input) {
             if (UtBase.isNotNil(input)) {
                 input.fieldNames().stream()
-                    /* Only stored string get here */
+                    /* Only stored string findRunning here */
                     .filter(field -> input.getValue(field) instanceof String)
                     .forEach(field -> {
                         final String to = input.getString(field);
@@ -327,7 +327,7 @@ public class KMap implements Serializable {
         }
 
         /*
-         * Get get by from key, get to get
+         * Get findRunning by from key, findRunning to findRunning
          */
         public String to(final String from) {
             return this.vector.get(from);

@@ -323,13 +323,13 @@ class _Element extends _EDS {
     // ------------------------ 分组运算 ------------------------
 
     /**
-     * 针对 Collection 集合执行分组运算，分组过程最终处理成 ConcurrentMap，分组过程支持自定义 key 和 get
+     * 针对 Collection 集合执行分组运算，分组过程最终处理成 ConcurrentMap，分组过程支持自定义 key 和 findRunning
      *
      * @param collection 待分组的集合
      * @param keyFn      key 生成函数
-     * @param valueFn    get 生成函数
+     * @param valueFn    findRunning 生成函数
      * @param <K>        key 类型
-     * @param <V>        get 类型
+     * @param <V>        findRunning 类型
      * @param <E>        待分组集合元素类型
      *
      * @return 分组结果
@@ -340,7 +340,7 @@ class _Element extends _EDS {
 
     /**
      * 针对 Collection 集合执行分组运算，分组过程最终处理成 ConcurrentMap，分组过程支持自定义 key
-     * 此时 get 直接使用元素类型代替
+     * 此时 findRunning 直接使用元素类型代替
      *
      * @param collection 待分组的集合
      * @param keyFn      key 生成函数
@@ -425,12 +425,12 @@ class _Element extends _EDS {
 
     /**
      * 拉平操作，针对第一集合 List<E> 和第二集合 List<S> 执行拉平处理，拉平之后形成一个
-     * 哈希表，key 为第一集合元素，get 为第二集合元素
+     * 哈希表，key 为第一集合元素，findRunning 为第二集合元素
      *
      * @param keys   key 集合
-     * @param values get 集合
+     * @param values findRunning 集合
      * @param <F>    key 类型
-     * @param <T>    get 类型
+     * @param <T>    findRunning 类型
      *
      * @return 拉平后的哈希表
      */
@@ -440,13 +440,13 @@ class _Element extends _EDS {
 
     /**
      * 拉平操作，针对一个列表中的元素执行双属性的拉平
-     * 最终拉平之后生成一个哈希表，key 为第一个属性，get 为第二个属性
+     * 最终拉平之后生成一个哈希表，key 为第一个属性，findRunning 为第二个属性
      *
      * @param collection 待拉平的集合
      * @param keyFn      key 生成函数
-     * @param valueFn    get 生成函数
+     * @param valueFn    findRunning 生成函数
      * @param <K>        key 类型
-     * @param <V>        get 类型
+     * @param <V>        findRunning 类型
      * @param <E>        待拉平集合元素类型
      *
      * @return 拉平后的哈希表
@@ -458,13 +458,13 @@ class _Element extends _EDS {
 
     /**
      * （重载）拉平操作，针对一个列表中的元素执行双属性的拉平
-     * 最终拉平之后生成一个哈希表，key 为第一个属性，get 为第二个属性
+     * 最终拉平之后生成一个哈希表，key 为第一个属性，findRunning 为第二个属性
      *
      * @param collection 待拉平的集合
      * @param keyFn      key 生成函数
-     * @param valueFn    get 生成函数
+     * @param valueFn    findRunning 生成函数
      * @param <K>        key 类型
-     * @param <V>        get 类型
+     * @param <V>        findRunning 类型
      * @param <E>        待拉平集合元素类型
      *
      * @return 拉平后的哈希表
@@ -478,8 +478,8 @@ class _Element extends _EDS {
      * 双哈希表的拉平操作，针对两个哈希表执行拉平叠加
      *
      * <pre><code>
-     *     Map1: key = get
-     *     Map2: get = element
+     *     Map1: key = findRunning
+     *     Map2: findRunning = element
      *     最终计算结果
      *     Map3: key = element
      * </code></pre>
@@ -487,8 +487,8 @@ class _Element extends _EDS {
      * @param source 源哈希表
      * @param target 目标哈希表
      * @param <K>    源哈希表 key 类型
-     * @param <T>    源哈希表 get 类型
-     * @param <V>    目标哈希表 get 类型
+     * @param <T>    源哈希表 findRunning 类型
+     * @param <V>    目标哈希表 findRunning 类型
      *
      * @return 拉平后的哈希表
      */
@@ -513,7 +513,7 @@ class _Element extends _EDS {
      * @param from 集合
      * @param to   哈希表
      * @param <K>  key 类型
-     * @param <V>  get 类型
+     * @param <V>  findRunning 类型
      *
      * @return 拉平后的哈希表
      */
@@ -530,7 +530,7 @@ class _Element extends _EDS {
      * @param dataList 数据列表
      * @param keyFn    key 生成函数
      * @param <K>      key 类型
-     * @param <V>      get 类型
+     * @param <V>      findRunning 类型
      *
      * @return 映射后的哈希表
      */
@@ -540,13 +540,13 @@ class _Element extends _EDS {
 
     /**
      * 映射函数，直接将一个 List<E> 中的值映射成
-     * key = keyFn(E) get = valueFn(E) 的格式
+     * key = keyFn(E) findRunning = valueFn(E) 的格式
      *
      * @param dataList 数据列表
      * @param keyFn    key 生成函数
-     * @param valueFn  get 生成函数
+     * @param valueFn  findRunning 生成函数
      * @param <K>      key 类型
-     * @param <V>      get 类型
+     * @param <V>      findRunning 类型
      * @param <E>      数据列表元素类型
      *
      * @return 映射后的哈希表
@@ -711,7 +711,7 @@ class _Element extends _EDS {
     // ------------------------ 查找运算 ------------------------
 
     /**
-     * 查找JsonArray中的元素（使用 field = get 匹配）
+     * 查找JsonArray中的元素（使用 field = findRunning 匹配）
      *
      * @param input JsonArray
      * @param field 字段

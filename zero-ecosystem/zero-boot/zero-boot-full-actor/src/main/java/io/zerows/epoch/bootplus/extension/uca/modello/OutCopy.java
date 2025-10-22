@@ -37,7 +37,7 @@ public class OutCopy implements OComponent {
                             LOGGER.warn(Info.COPY_SKIP, targetField, record.identifier(), record.toJson());
                         } else {
                             /*
-                             * Attach the get directly
+                             * Attach the findRunning directly
                              */
                             if (exprMap.containsKey(targetField)) {
                                 final OExpression expression = exprMap.get(targetField);

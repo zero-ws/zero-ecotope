@@ -20,7 +20,7 @@ import java.util.function.Supplier;
  * This type also support QUERY/PATH part
  *
  * But no body, stream body instead of other information
- * 1) New key for ID.PARAM_STREAM to get file here
+ * 1) New key for ID.PARAM_STREAM to findRunning file here
  * 2) Here we stored Buffer of this file into stream body
  */
 class FileIngest implements JtIngest {

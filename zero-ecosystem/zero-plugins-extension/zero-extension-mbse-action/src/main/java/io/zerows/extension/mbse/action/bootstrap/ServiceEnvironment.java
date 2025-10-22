@@ -1,13 +1,13 @@
 package io.zerows.extension.mbse.action.bootstrap;
 
+import io.r2mo.base.dbe.DBS;
+import io.r2mo.dbe.jooq.core.domain.JooqDatabase;
 import io.r2mo.function.Fn;
 import io.vertx.codegen.annotations.Fluent;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.OldDatabase;
-import io.zerows.epoch.database.cp.DataPool;
 import io.zerows.extension.mbse.action.atom.JtJob;
 import io.zerows.extension.mbse.action.atom.JtUri;
 import io.zerows.extension.mbse.action.domain.tables.daos.IApiDao;
@@ -17,7 +17,6 @@ import io.zerows.extension.mbse.action.domain.tables.pojos.IApi;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IJob;
 import io.zerows.extension.mbse.action.domain.tables.pojos.IService;
 import io.zerows.platform.exception._40103Exception500ConnectAmbient;
-import io.zerows.platform.metadata.OldKDS;
 import io.zerows.program.Ux;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.app.HArk;
@@ -28,7 +27,6 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -53,13 +51,12 @@ public class ServiceEnvironment {
     /* XApp application, class JtApp */
     private final transient HArk ark;
     private final transient Set<String> condition = new HashSet<>();
-    private final transient DataPool poolMeta;
     /*
      * Service Map
      */
     private final ConcurrentMap<String, IService> serviceMap = new ConcurrentHashMap<>();
-    /* Data source, DSLContext, DataSource */
-    private transient DataPool pool;
+    private final DBS dbs;
+    private JooqDatabase database;
 
     /**
      * 包内初始化
@@ -68,6 +65,10 @@ public class ServiceEnvironment {
      */
     ServiceEnvironment(final HArk ark) {
         this.ark = ark;
+        this.dbs = ark.datasource().findRunning();
+        if (this.dbs.getDatabase() instanceof final JooqDatabase jooqDatabase) {
+            this.database = jooqDatabase;
+        }
         final HApp app = ark.app();
 
         final String sigma = app.option(KName.SIGMA);
@@ -79,11 +80,6 @@ public class ServiceEnvironment {
         // 是否配置了动态数据源
         // 1. 动态数据库         dynamic
         // 2. 静态元数据库       database
-        final OldKDS<OldDatabase> oldKds = ark.database();
-        if (Objects.nonNull(oldKds.dynamic())) {
-            this.pool = DataPool.create(oldKds.dynamic());
-        }
-        this.poolMeta = DataPool.create(oldKds.database());
     }
 
     @Fluent
@@ -105,7 +101,7 @@ public class ServiceEnvironment {
     }
 
     private Future<Boolean> initService(final Vertx vertx) {
-        final IServiceDao serviceDao = new IServiceDao(this.poolMeta.getExecutor().configuration(), vertx);
+        final IServiceDao serviceDao = new IServiceDao(this.database.getConfiguration(), vertx);
         return serviceDao.findManyBySigma(this.condition).compose(services -> {
             this.serviceMap.putAll(Ut.elementZip(services, IService::getKey, service -> service));
             LOG.Init.info(LOGGER, "AE ( {0} ) Service initialized !!!",
@@ -115,7 +111,7 @@ public class ServiceEnvironment {
     }
 
     private Future<Boolean> initJobs(final Vertx vertx) {
-        final IJobDao jobDao = new IJobDao(this.poolMeta.getExecutor().configuration(), vertx);
+        final IJobDao jobDao = new IJobDao(this.database.getConfiguration(), vertx);
         if (this.jobs.isEmpty()) {
             /*
              * Map for JOB + Service
@@ -141,7 +137,7 @@ public class ServiceEnvironment {
     }
 
     private Future<Boolean> initUris(final Vertx vertx) {
-        final IApiDao apiDao = new IApiDao(this.poolMeta.getExecutor().configuration(), vertx);
+        final IApiDao apiDao = new IApiDao(this.database.getConfiguration(), vertx);
         if (this.uris.isEmpty()) {
             /*
              * Map for API + Service
@@ -166,14 +162,7 @@ public class ServiceEnvironment {
     }
 
     public Connection getConnection() {
-        if (Objects.isNull(this.pool)) {
-            return null;
-        }
-        return Fn.jvmOr(() -> this.pool.getDataSource().getConnection());
-    }
-
-    public DataPool getPool() {
-        return this.pool;
+        return Fn.jvmOr(this.dbs::getConnection);
     }
 
     public Set<JtUri> routes() {

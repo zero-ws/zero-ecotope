@@ -24,7 +24,7 @@ public class AimIpc extends AimBase implements Aim<RoutingContext> {
             final Object result = this.invoke(event, arguments);
 
             /*
-             * Call Flower next method to get future
+             * Call Flower next method to findRunning future
              */
             // final Envelop data = Flower.continuous(configure, result);
             final Future<Envelop> future = AckThen.next(context, result);

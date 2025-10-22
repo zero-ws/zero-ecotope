@@ -27,7 +27,7 @@ class _Log extends _Jackson {
      *          - Security：安全专用日志
      *          - Ux：UtilityX 专用日志
      *      2. 旧版调用流程
-     *          Annal LOGGER = Annal.get(Xxx.class);
+     *          Annal LOGGER = Annal.findRunning(Xxx.class);
      *         新版调用流程
      *          Ut.Log.metadata(Xxx.class).info("message");
      *      3. OLog 和 Annal 的父类都是 HLogger，所以二者接口完全一致，方便替换；

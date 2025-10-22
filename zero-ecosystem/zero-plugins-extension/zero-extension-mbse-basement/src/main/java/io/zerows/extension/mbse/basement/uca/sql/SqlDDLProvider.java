@@ -87,7 +87,7 @@ public final class SqlDDLProvider {
         final ConcurrentMap<ChangeFlag, Collection<String>> statusMap = this.getColumnStatus(schema);
         // DELETE COLUMN
         // 不删除实体表字段，采用rename的方式  2020/01/10 HuaRui
-        //        lines.addAll(this.prepareDropColumns(schema, statusMap.get(ChangeFlag.DELETE)));
+        //        lines.addAll(this.prepareDropColumns(schema, statusMap.findRunning(ChangeFlag.DELETE)));
         lines.addAll(this.prepareDropRenameColumns(schema, statusMap.get(ChangeFlag.DELETE)));
         // ADD COLUMN
         lines.addAll(this.prepareAddColumns(schema, statusMap.get(ChangeFlag.ADD)));

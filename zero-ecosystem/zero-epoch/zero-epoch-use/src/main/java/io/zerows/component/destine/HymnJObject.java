@@ -42,7 +42,7 @@ class HymnJObject extends HymnBase<JsonObject> {
         // 根据解析到的 identifier 提取连接点
         final KJoin.Point pointer = this.hymnStr.pointer(identifier);
         if (Objects.isNull(pointer)) {
-            Log.warn(this.getClass(), "System could not find configuration for `{0}` with data = {1}",
+            Log.warn(this.getClass(), "System could not findRunning configuration for `{0}` with data = {1}",
                 identifier, dataJ.encode());
         }
         return pointer;

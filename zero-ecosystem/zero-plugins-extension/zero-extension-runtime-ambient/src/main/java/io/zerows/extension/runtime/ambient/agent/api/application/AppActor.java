@@ -1,18 +1,19 @@
 package io.zerows.extension.runtime.ambient.agent.api.application;
 
+import io.r2mo.base.dbe.Database;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.OldDatabase;
 import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.runtime.ambient.agent.service.application.AppStub;
 import io.zerows.extension.runtime.ambient.domain.tables.daos.XNoticeDao;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XNotice;
 import io.zerows.extension.runtime.ambient.eon.Addr;
+import io.zerows.platform.metadata.KDS;
 import io.zerows.program.Ux;
 import jakarta.inject.Inject;
 
@@ -55,12 +56,12 @@ public class AppActor {
             /*
              * 三个静态库
              */
-            final OldDatabase current = OldDatabase.getCurrent();
-            final OldDatabase orbit = OldDatabase.getHistory();
-            final OldDatabase workflow = OldDatabase.getCamunda();
+            final Database current = KDS.findCurrent();
+            final Database history = KDS.findHistory();
+            final Database workflow = KDS.findCamunda();
             final JsonObject response = new JsonObject();
             response.put("database", consumer.apply(current.toJson()));
-            response.put("history", consumer.apply(orbit.toJson()));
+            response.put("history", consumer.apply(history.toJson()));
             response.put("workflow", consumer.apply(workflow.toJson()));
             response.put("argument", consumer.apply(atom));
             return Ux.future(response);

@@ -2,11 +2,12 @@ package io.zerows.extension.runtime.workflow.atom.configuration;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.r2mo.base.dbe.Database;
 import io.vertx.core.json.JsonArray;
-import io.zerows.epoch.database.OldDatabase;
-import io.zerows.support.Ut;
 import io.zerows.integrated.jackson.JsonArrayDeserializer;
 import io.zerows.integrated.jackson.JsonArraySerializer;
+import io.zerows.platform.metadata.KDS;
+import io.zerows.support.Ut;
 
 import java.util.Set;
 
@@ -59,8 +60,8 @@ public class MetaWorkflow {
         return Ut.toSet(this.resource);
     }
 
-    public OldDatabase camundaDatabase() {
-        return OldDatabase.getCamunda();
+    public Database camundaDatabase() {
+        return KDS.findCamunda();
     }
 
     @Override

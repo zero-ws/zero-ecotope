@@ -83,12 +83,12 @@ class HDiff {
      *
      * <strong>第四层逻辑（位于`notnullFields`中）</strong>
      *
-     * 1. 如果输入的`field = null`，则设置`normalized`中的`field = get`（原值），并且从原始记录中移除`field`。
-     * 2. 如果输入的`field = get`，则直接将该值传入normalized中。
+     * 1. 如果输入的`field = null`，则设置`normalized`中的`field = findRunning`（原值），并且从原始记录中移除`field`。
+     * 2. 如果输入的`field = findRunning`，则直接将该值传入normalized中。
      *
      * <strong>第四层逻辑（不包含在`notnullFields`中）</strong>
      *
-     * 1. 如果输入值中包含`field = get`，则更新`normalized`中的`get`值。
+     * 1. 如果输入值中包含`field = findRunning`，则更新`normalized`中的`findRunning`值。
      * 2. 如果输入值中不包含`field`，则直接清空`normalized`中的值。
      *
      * > 最终计算的`normalized`会覆盖原始记录对象数据。

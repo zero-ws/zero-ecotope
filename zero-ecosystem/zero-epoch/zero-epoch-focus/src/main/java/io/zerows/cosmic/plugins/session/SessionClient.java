@@ -10,12 +10,12 @@ import io.zerows.specification.configuration.HConfig;
  * Session Client in zero system, it could be enabled by zero
  * and keep session when authorization.
  *
- * Keep only one session get.
+ * Keep only one session findRunning.
  */
 @AddOn.Name("DEFAULT_SESSION_CLIENT")
 public interface SessionClient {
     /*
-     * Create local session get bind data
+     * Create local session findRunning bind data
      */
     static SessionClient createClient(final Vertx vertx, final HConfig config) {
         return SessionClientImpl.create(vertx, config);

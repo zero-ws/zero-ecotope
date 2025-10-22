@@ -4,9 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.bootplus.extension.uca.log.Ko;
-import io.zerows.epoch.database.cp.DS;
 import io.zerows.epoch.database.cp.DataPool;
-import io.zerows.epoch.spi.channel.Pocket;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.atom.data.DataGroup;
 import io.zerows.extension.mbse.basement.osgi.spi.plugin.AspectPlugin;
@@ -41,26 +39,6 @@ final class OxPlugin {
      * 私有构造函数（工具类转换）
      */
     private OxPlugin() {
-    }
-
-    /**
-     * 根据应用标识符读取数据连接池（{@link DataPool}类型）。
-     *
-     * @param sigma {@link String} 应用统一标识符
-     *
-     * @return {@link DataPool}连接池对象
-     */
-    private static DataPool pluginDs(final String sigma) {
-        if (Ut.isNil(sigma)) {
-            return null;
-        } else {
-            final DS ds = Pocket.lookup(DS.class);
-            if (Objects.isNull(ds)) {
-                return null;
-            } else {
-                return ds.switchDs(sigma);
-            }
-        }
     }
 
     /**
@@ -117,26 +95,6 @@ final class OxPlugin {
         /* 集成专用信息，这里不打印 ex 的 Stack 信息 */
         Ko.integration(clazz, null, ex);
         return Ux.future(input);
-    }
-
-    /**
-     * 数据源执行器，{@link DataPool}数据源运行主流程。
-     *
-     * @param sigma    {@link String} 应用统一标识符
-     * @param supplier {@link Supplier} 外部数据读取器
-     * @param executor {@link Function} 函数执行器
-     * @param <T>      最终执行后返回的数据类型
-     *
-     * @return {@link Future}
-     */
-    static <T> Future<T> runDs(final String sigma, final Supplier<T> supplier,
-                               final Function<DataPool, Future<T>> executor) {
-        final DataPool ds = pluginDs(sigma);
-        if (Objects.isNull(ds)) {
-            return Ux.future(supplier.get());
-        } else {
-            return executor.apply(ds);
-        }
     }
 
     /**

@@ -11,7 +11,7 @@ import io.zerows.weaver.ZeroType;
  *
  * ```shell
  * // <pre><code>
- *    name = get
+ *    name = findRunning
  * // </code></pre>
  * ```
  *

@@ -5,6 +5,6 @@ package io.zerows.support.fn;
  */
 interface __Message {
     interface ThenJ {
-        String TYPE_JA_NOT_MATCH = "[FnZero] Extracted get from `input` (JsonObject) is not JsonArray or JsonObject. {0}";
+        String TYPE_JA_NOT_MATCH = "[FnZero] Extracted findRunning from `input` (JsonObject) is not JsonArray or JsonObject. {0}";
     }
 }

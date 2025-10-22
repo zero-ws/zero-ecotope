@@ -1,15 +1,14 @@
 package io.zerows.epoch.bootplus.stellar;
 
+import io.r2mo.base.dbe.Database;
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.database.OldDatabase;
 import io.zerows.extension.skeleton.common.Ke;
 import io.zerows.platform.enums.Environment;
 import io.zerows.platform.exception._40103Exception500ConnectAmbient;
 import io.zerows.platform.metadata.KGlobal;
 import io.zerows.platform.metadata.KIntegration;
 import io.zerows.platform.metadata.KPivot;
-import io.zerows.platform.metadata.OldKDS;
 import io.zerows.specification.app.HAmbient;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.app.HArk;
@@ -81,9 +80,8 @@ public abstract class AbstractPartyA implements OkA {
     }
 
     @Override
-    public OldDatabase configDatabase() {
-        final OldKDS<OldDatabase> oldKds = this.ark.database();
-        return oldKds.dynamic();
+    public Database configDatabase() {
+        return this.ark.database();
     }
 
     @Override

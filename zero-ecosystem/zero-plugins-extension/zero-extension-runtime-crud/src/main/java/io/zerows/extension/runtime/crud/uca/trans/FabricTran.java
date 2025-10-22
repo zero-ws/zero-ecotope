@@ -7,7 +7,6 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.KTransform;
 import io.zerows.epoch.spi.Dictionary;
-import io.zerows.epoch.spi.channel.Pocket;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 import io.zerows.mbse.metadata.KModule;
@@ -15,18 +14,19 @@ import io.zerows.platform.metadata.KDictConfig;
 import io.zerows.platform.metadata.KDictUse;
 import io.zerows.platform.metadata.KFabric;
 import io.zerows.program.Ux;
+import io.zerows.spi.HPI;
 import io.zerows.support.fn.Fx;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-import static io.zerows.extension.runtime.crud.util.Ix.LOG;
-
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
 class FabricTran implements Tran {
     private transient final boolean isFrom;
 
@@ -98,14 +98,14 @@ class FabricTran implements Tran {
         /* Epsilon */
         final ConcurrentMap<String, KDictUse> epsilonMap = transform.epsilon();
         /* Channel Infusion, Here will enable Pool */
-        final Dictionary plugin = Pocket.lookup(Dictionary.class);
+        final Dictionary plugin = HPI.findOverwrite(Dictionary.class);
         /* Dict */
         final KDictConfig dict = transform.source();
         if (epsilonMap.isEmpty() || Objects.isNull(plugin) || !dict.validSource()) {
             /*
              * Direct returned
              */
-            LOG.Rest.info(this.getClass(), "Infusion condition handler, {0}, {1}, {2}",
+            log.info("[ ZMOD ] 条件处理插件：{}, {}, {}",
                 epsilonMap.isEmpty(), Objects.isNull(plugin), !dict.validSource());
             return Ux.future(new ConcurrentHashMap<>());
         }

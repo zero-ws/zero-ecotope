@@ -2,13 +2,12 @@ package io.zerows.extension.skeleton.common;
 
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServerRequest;
+import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.management.OCacheUri;
 import io.zerows.epoch.metadata.KView;
-import io.zerows.epoch.spi.channel.KIncome;
-import io.zerows.epoch.spi.channel.Pocket;
 import io.zerows.extension.skeleton.spi.ScOrbit;
 import io.zerows.program.Ux;
 
@@ -36,11 +35,11 @@ class KeCache {
     }
 
     static String uri(final String uri, final String requestUri) {
-        return Ux.channelS(ScOrbit.class, () -> uri, orbit -> {
-            /* Pocket processing */
-            final KIncome income = Pocket.income(ScOrbit.class, uri, requestUri);
-            return orbit.analyze(income.arguments());
-        });
+        final JsonObject parameters = new JsonObject();
+        parameters.put(KName.URI, uri);
+        parameters.put(KName.URI_REQUEST, requestUri);
+        return Ux.channelSync(ScOrbit.class, () -> uri,
+            orbit -> orbit.analyze(parameters));
     }
 
     static String uri(final RoutingContext context) {

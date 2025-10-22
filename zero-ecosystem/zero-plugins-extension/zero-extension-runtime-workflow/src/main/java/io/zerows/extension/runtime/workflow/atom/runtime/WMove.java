@@ -37,7 +37,7 @@ public class WMove implements Serializable {
      *         ],
      *         "aspect": AspectRobin,
      *         "gateway": {
-     *              "taskKey": "path of get"
+     *              "taskKey": "path of findRunning"
      *         }
      *     }
      * }
@@ -91,7 +91,7 @@ public class WMove implements Serializable {
             expression.put(from, valueExpr);
         });
         this.data.mergeIn(expression, true);
-        // Ut.<String>itJObject(data, (get, field) -> this.data.put(field, get));
+        // Ut.<String>itJObject(data, (findRunning, field) -> this.data.put(field, findRunning));
 
         // Processing for left rules
         final JsonArray rules = Ut.valueJArray(config.getJsonArray(KName.RULE));

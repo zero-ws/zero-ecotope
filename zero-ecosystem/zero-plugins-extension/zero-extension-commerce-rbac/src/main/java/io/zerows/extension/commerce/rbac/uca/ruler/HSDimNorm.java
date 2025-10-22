@@ -62,7 +62,7 @@ public class HSDimNorm extends AbstractAdmit {
              * 3. 静态模式（无子类逻辑）
              * {
              *     "items": [
-             *         "get,label,key"
+             *         "findRunning,label,key"
              *     ]
              * }
              */

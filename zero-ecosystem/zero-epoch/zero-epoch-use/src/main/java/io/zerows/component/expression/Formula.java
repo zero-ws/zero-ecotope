@@ -22,7 +22,7 @@ public class Formula implements Serializable {
      * tpl          - for tpl of parameters
      *
      * 1) Extract Data from X_ACTIVITY_RULE
-     * 2) Set the get from:
+     * 2) Set the findRunning from:
      *    RULE_EXPRESSION   -> expression   JEXL
      *    RULE_TPL          -> tpl          ( JsonObject )
      *    RULE_NAME         -> name

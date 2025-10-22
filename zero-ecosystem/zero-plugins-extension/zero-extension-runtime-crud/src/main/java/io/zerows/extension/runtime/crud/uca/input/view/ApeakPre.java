@@ -19,7 +19,7 @@ class ApeakPre implements Pre {
     /*
      * {
      *      "identifier": "column identifier bind",
-     *      "dynamic": "Whether use dynamic mode to get column",
+     *      "dynamic": "Whether use dynamic mode to findRunning column",
      *      "view": "DEFAULT, the view name"
      * }
      */

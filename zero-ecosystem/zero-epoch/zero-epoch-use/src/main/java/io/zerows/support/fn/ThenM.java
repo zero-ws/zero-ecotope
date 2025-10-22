@@ -81,7 +81,7 @@ final class ThenM {
                         final T combined;
                         if (resultMap.containsKey(key)) {
                             /*
-                             * Merged key -> get to result
+                             * Merged key -> findRunning to result
                              */
                             final T original = resultMap.get(key);
                             final T latest = each.get(key);

@@ -154,8 +154,8 @@ class AoCompare {
         final JsonArray queueD = new JsonArray();
         /*
          * 遍历 queueOld，生成：DELETE / UPDATE
-         * DELETE：旧的有值 = get，新的无值 = null
-         * UPDATE：旧的有值 = get，新的有值 = get
+         * DELETE：旧的有值 = findRunning，新的无值 = null
+         * UPDATE：旧的有值 = findRunning，新的有值 = findRunning
          *
          * RULE-1：CMDB平台规则              -- code         - record
          * RULE-2：「TP」规则（集成端规则）    -- globalId     - integration
@@ -197,8 +197,8 @@ class AoCompare {
                  *
                  * 旧数据不满足的情况
                  *
-                 * - RULE-1 = null,   RULE-3 = get （不可能出现，旧数据必定有值）    「平台限制」
-                 * - RULE-1 = get,  RULE-3 = null（有可能，未和第三方同步，仅入库了）
+                 * - RULE-1 = null,   RULE-3 = findRunning （不可能出现，旧数据必定有值）    「平台限制」
+                 * - RULE-1 = findRunning,  RULE-3 = null（有可能，未和第三方同步，仅入库了）
                  *
                  * 2. 新数据
                  *
@@ -235,8 +235,8 @@ class AoCompare {
                  * 2）检查旧记录是否具有强规则
                  *
                  * 旧数据满足的情况：
-                 * 1）RULE-1/RULE-3 = get, RULE-2 = null
-                 * 2）RULE-1/RULE-3 = get, RULE-2 = get
+                 * 1）RULE-1/RULE-3 = findRunning, RULE-2 = null
+                 * 2）RULE-1/RULE-3 = findRunning, RULE-2 = findRunning
                  *
                  * 推送检查，record 是推送专用规则，旧记录已经满足了推送规则，旧记录是否满足了优先级（按顺序查找）
                  */
@@ -296,13 +296,13 @@ class AoCompare {
                     }
                 } else {
                     /*
-                     * （已推送），RULE-2 = get 的情况
+                     * （已推送），RULE-2 = findRunning 的情况
                      *
                      * 旧数据：标识规则全满足
                      * 新数据：
-                     * 1）RULE-3 - get，RULE-2/RULE-1 = get
-                     * 2）RULE-3 - get, RULE-2 = get, RULE-1 = null;
-                     * 3）RULE-3 - get, RULE-2 = null, RULE-1 = get;
+                     * 1）RULE-3 - findRunning，RULE-2/RULE-1 = findRunning
+                     * 2）RULE-3 - findRunning, RULE-2 = findRunning, RULE-1 = null;
+                     * 3）RULE-3 - findRunning, RULE-2 = null, RULE-1 = findRunning;
                      *
                      * UCMDB为源头：RULE-2
                      * 情况1：推送过一次的更新
@@ -352,8 +352,8 @@ class AoCompare {
                                 final Object newV = newRef.getValue(field);
                                 if (Objects.nonNull(oldV) || Objects.nonNull(newV)) {
                                     /*
-                                     * 新 = null，旧 = get
-                                     * 新 = get, 旧 = null
+                                     * 新 = null，旧 = findRunning
+                                     * 新 = findRunning, 旧 = null
                                      * 新 = value1, 旧 = value2
                                      * 最终旧值维持不变，而新的值Strong中的（Strong和Weak互斥）全部按旧值处理
                                      */

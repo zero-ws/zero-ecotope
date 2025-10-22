@@ -10,7 +10,6 @@ import io.zerows.platform.ENV;
 import io.zerows.platform.EnvironmentVariable;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.constant.VValue;
-import io.zerows.platform.enums.EmDS;
 import io.zerows.support.Ut;
 
 import java.util.Arrays;
@@ -63,34 +62,34 @@ public class MatureOn implements EnvironmentVariable {
     }
 
     // Database Connected ( Multi Support )
-    public static JsonObject envDatabase(final JsonObject database, final EmDS.DB mode) {
-        final R2VarSet set;
-        if (EmDS.DB.WORKFLOW == mode) {
-            // Workflow
-            set = envDatabase(EnvironmentVariable.DB_HOST, EnvironmentVariable.DB_PORT, EnvironmentVariable.DBW_INSTANCE);
-        } else if (EmDS.DB.HISTORY == mode) {
-            // History
-            set = envDatabase(EnvironmentVariable.DB_HOST, EnvironmentVariable.DB_PORT, EnvironmentVariable.DBH_INSTANCE);
-        } else {
-            // Database
-            set = envDatabase(EnvironmentVariable.DB_HOST, EnvironmentVariable.DB_PORT, EnvironmentVariable.DBS_INSTANCE);
-        }
-        // 创建拷贝
-        final JsonObject databaseJ = Ut.valueJObject(database, true);
-        final Mature mature = CC_MATURE.pick(MatureEnv::new, MatureEnv.class.getName());
-        final JsonObject normJ = mature.configure(databaseJ, set);
-        // JdbcUrl
-        final String jdbcUrl = Ut.valueString(normJ, "jdbcUrl");
-        final String replaced;
-        if (Objects.nonNull(jdbcUrl) && jdbcUrl.contains(VString.DOLLAR)) {
-            final JsonObject parameters = normJ.copy();
-            replaced = Ut.fromExpression("`" + jdbcUrl + "`", parameters);
-        } else {
-            replaced = jdbcUrl;
-        }
-        normJ.put("jdbcUrl", replaced);
-        return normJ;
-    }
+    //    public static JsonObject envDatabase(final JsonObject database, final EmDS.DB mode) {
+    //        final R2VarSet set;
+    //        if (EmDS.DB.WORKFLOW == mode) {
+    //            // Workflow
+    //            set = envDatabase(EnvironmentVariable.DB_HOST, EnvironmentVariable.DB_PORT, EnvironmentVariable.DBW_INSTANCE);
+    //        } else if (EmDS.DB.HISTORY == mode) {
+    //            // History
+    //            set = envDatabase(EnvironmentVariable.DB_HOST, EnvironmentVariable.DB_PORT, EnvironmentVariable.DBH_INSTANCE);
+    //        } else {
+    //            // Database
+    //            set = envDatabase(EnvironmentVariable.DB_HOST, EnvironmentVariable.DB_PORT, EnvironmentVariable.DBS_INSTANCE);
+    //        }
+    //        // 创建拷贝
+    //        final JsonObject databaseJ = Ut.valueJObject(database, true);
+    //        final Mature mature = CC_MATURE.pick(MatureEnv::new, MatureEnv.class.getName());
+    //        final JsonObject normJ = mature.configure(databaseJ, set);
+    //        // JdbcUrl
+    //        final String jdbcUrl = Ut.valueString(normJ, "jdbcUrl");
+    //        final String replaced;
+    //        if (Objects.nonNull(jdbcUrl) && jdbcUrl.contains(VString.DOLLAR)) {
+    //            final JsonObject parameters = normJ.copy();
+    //            replaced = Ut.fromExpression("`" + jdbcUrl + "`", parameters);
+    //        } else {
+    //            replaced = jdbcUrl;
+    //        }
+    //        normJ.put("jdbcUrl", replaced);
+    //        return normJ;
+    //    }
 
     // Domain Connected
     public static JsonArray envDomain(final JsonArray domainA) {

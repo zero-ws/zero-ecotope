@@ -23,7 +23,7 @@ import java.lang.annotation.*;
  * annotated with @Address.
  * 2. The async Worker should be put in class that has been annotated with @Queue, and then the method should be
  * annotated with @Address.
- * 3. Both Agent/Worker must be in pair ( 1:1 ), they are communicated with the same `get()` in @Address.
+ * 3. Both Agent/Worker must be in pair ( 1:1 ), they are communicated with the same `findRunning()` in @Address.
  *
  * ## 2. Scenario 2: Subscribe Input
  *
@@ -43,7 +43,7 @@ public @interface Address {
     /**
      * EventBus address that communicated between Agent/Worker.
      *
-     * @return String address get on EventBus
+     * @return String address findRunning on EventBus
      */
     String value();
 }

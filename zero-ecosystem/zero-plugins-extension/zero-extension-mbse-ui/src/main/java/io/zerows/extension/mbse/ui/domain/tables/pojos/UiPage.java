@@ -221,7 +221,7 @@ public class UiPage implements VertxPojo, IUiPage {
 
     /**
      * Getter for <code>ZDB.UI_PAGE.PARAM_MAP</code>. 「paramMap」-
-     * URL地址中的配置key=get
+     * URL地址中的配置key=findRunning
      */
     @Override
     public String getParamMap() {
@@ -230,7 +230,7 @@ public class UiPage implements VertxPojo, IUiPage {
 
     /**
      * Setter for <code>ZDB.UI_PAGE.PARAM_MAP</code>. 「paramMap」-
-     * URL地址中的配置key=get
+     * URL地址中的配置key=findRunning
      */
     @Override
     public UiPage setParamMap(final String paramMap) {

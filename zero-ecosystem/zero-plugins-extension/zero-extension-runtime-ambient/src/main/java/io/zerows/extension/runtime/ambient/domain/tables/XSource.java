@@ -83,9 +83,9 @@ public class XSource extends TableImpl<XSourceRecord> {
 
     /**
      * The column <code>ZDB.X_SOURCE.JDBC_CONFIG</code>. 「jdbcConfig」-
-     * 连接字符串中的配置key=get
+     * 连接字符串中的配置key=findRunning
      */
-    public final TableField<XSourceRecord, String> JDBC_CONFIG = createField(DSL.name("JDBC_CONFIG"), SQLDataType.CLOB, this, "「jdbcConfig」- 连接字符串中的配置key=get");
+    public final TableField<XSourceRecord, String> JDBC_CONFIG = createField(DSL.name("JDBC_CONFIG"), SQLDataType.CLOB, this, "「jdbcConfig」- 连接字符串中的配置key=findRunning");
 
     /**
      * The column <code>ZDB.X_SOURCE.INSTANCE</code>. 「instance」- 实例名称

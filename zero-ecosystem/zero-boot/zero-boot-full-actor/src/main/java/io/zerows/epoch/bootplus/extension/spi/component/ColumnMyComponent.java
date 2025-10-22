@@ -4,11 +4,11 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.zerows.epoch.bootplus.extension.refine.Ox;
 import io.zerows.epoch.bootplus.extension.scaffold.component.AbstractAdaptor;
-import io.zerows.mbse.metadata.ActIn;
-import io.zerows.mbse.metadata.ActOut;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.skeleton.spi.UiApeakMy;
+import io.zerows.mbse.metadata.ActIn;
+import io.zerows.mbse.metadata.ActOut;
 import io.zerows.program.Ux;
 
 /**
@@ -77,7 +77,7 @@ public class ColumnMyComponent extends AbstractAdaptor {
         /* 最终Uri */
         final DataAtom atom = this.atom();
         /* 前置一致 */
-        return Ox.viewMy(envelop, atom.identifier()).compose(params -> Ux.channelA(UiApeakMy.class,
+        return Ox.viewMy(envelop, atom.identifier()).compose(params -> Ux.channelAsync(UiApeakMy.class,
             () -> ActOut.future(new JsonArray()),
             stub -> stub.fetchMy(params).compose(ActOut::future)
         ));

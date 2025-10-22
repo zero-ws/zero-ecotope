@@ -14,9 +14,9 @@ import jakarta.ws.rs.extension.BodyParam;
 
 /*
  * Login Api
- * 1. Provide username/password to access /oauth/login get client_secret field ( Issue when create )
- * 2. Access /oauth/authorize to get authorization code
- * 3. Access /oauth/token to get token
+ * 1. Provide username/password to access /oauth/login findRunning client_secret field ( Issue when create )
+ * 2. Access /oauth/authorize to findRunning authorization code
+ * 3. Access /oauth/token to findRunning token
  */
 @EndPoint
 public interface LoginAgent {

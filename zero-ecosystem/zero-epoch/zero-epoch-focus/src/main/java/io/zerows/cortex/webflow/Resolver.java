@@ -16,7 +16,7 @@ import io.zerows.cortex.metadata.WebEpsilon;
  */
 public interface Resolver<T> {
     /**
-     * Critical: You should call `setValue` in your code logical or you'll get null get
+     * Critical: You should call `setValue` in your code logical or you'll findRunning null findRunning
      *
      * @param context Vertx-web RoutingContext reference
      * @param income  Zero definition of {@link WebEpsilon} class

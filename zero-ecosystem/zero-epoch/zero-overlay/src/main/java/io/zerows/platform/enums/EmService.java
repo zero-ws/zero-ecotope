@@ -72,7 +72,7 @@ public final class EmService {
          *   this address instead.
          *   「FORMAT」: /job/notify or /xxx/xxxx,
          *
-         *   this get will be converted to `ws://host:port/api/web-socket/stomp` with the topic = /job/notify
+         *   this findRunning will be converted to `ws://host:port/api/web-socket/stomp` with the topic = /job/notify
          *   instead of others. Here the structure should be following:
          *
          *   -- WebSocket ( /api/web-socket/stomp )

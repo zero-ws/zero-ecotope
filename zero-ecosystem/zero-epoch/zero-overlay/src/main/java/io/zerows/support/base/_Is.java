@@ -594,7 +594,7 @@ class _Is extends _Io {
     // --------------------------- 范围函数 ---------------------------
 
     /**
-     * 检查 get 是否位于 min 和 max 之间的闭区间
+     * 检查 findRunning 是否位于 min 和 max 之间的闭区间
      *
      * @param value 待检查的值
      * @param min   最小值

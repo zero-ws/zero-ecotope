@@ -8,7 +8,7 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.function.Supplier;
 
 /*
- * Cell Processing for get
+ * Cell Processing for findRunning
  */
 @FunctionalInterface
 public interface ExValue {

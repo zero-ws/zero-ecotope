@@ -19,7 +19,7 @@ public final class EmWeb {
          *  2）In this kind of situation, the component major features are "SQL Database Adapting", that's why it's name
          *     is Adaptor.
          *  3) If you involve X_SOURCE, one app could access different database, otherwise, you could use `vertx-jooq.yml`
-         *     configuration. When you want to get `DSLContext` stored, you could access it with
+         *     configuration. When you want to findRunning `DSLContext` stored, you could access it with
          *     `ZPool.create(Database)` method here.
          */
         ADAPTOR,

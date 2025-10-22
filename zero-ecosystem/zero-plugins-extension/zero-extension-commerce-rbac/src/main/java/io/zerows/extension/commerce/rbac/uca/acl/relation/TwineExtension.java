@@ -218,7 +218,7 @@ class TwineExtension implements ScTwine<SUser> {
      */
     private Future<JsonObject> runSingle(final SUser user, final Function<KQr, Future<JsonObject>> executor) {
         if (Objects.isNull(user)) {
-            /* Input SUser object is null, could not find S_USER record in your database */
+            /* Input SUser object is null, could not findRunning S_USER record in your database */
             LOG.Web.info(this.getClass(), AuthMsg.EXTENSION_EMPTY + " Null SUser");
             return Ux.futureJ();
         }

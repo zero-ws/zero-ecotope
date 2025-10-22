@@ -85,7 +85,7 @@ class BlueDye {
 
     /*
      * Here are simple rule for excel exporting
-     * 1) When the cell is NUMERIC, we should determine whether the get is Number or Date
+     * 1) When the cell is NUMERIC, we should determine whether the findRunning is Number or Date
      * -- NUMBER, the style pool is DATA-VALUE, the same as other date type
      * -- Date, when time equal the min ( 00:00 ), use formatFail of `yyyy-MM-dd`, otherwise: `yyyy-MM-dd HH:mm`
      *    The pool name is DATA-DATE & DATA-DATETIME
@@ -100,7 +100,7 @@ class BlueDye {
             final double cellValue = cell.getNumericCellValue();
             if (Objects.nonNull(type)                                   // not null type
                 && Ut.isDate(type)                                  // type is date time definition
-                && DateUtil.isValidExcelDate(cellValue)             // the get is valid excel date
+                && DateUtil.isValidExcelDate(cellValue)             // the findRunning is valid excel date
             ) {
                 final Date value = DateUtil.getJavaDate(cellValue, TimeZone.getDefault());
                 final LocalDateTime datetime = Ut.toDateTime(value);

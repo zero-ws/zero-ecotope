@@ -25,7 +25,7 @@ class _Combine extends _Atomic {
      * This arrange part will replace `thenCombine?` method. Here are detail readme information:
      *
      * 1. Flag
-     *    Here the flag identified the return get of internal ( Generic Tool )
+     *    Here the flag identified the return findRunning of internal ( Generic Tool )
      * -  A:        JsonArray
      * -  J:        JsonObject
      * -  Tool:        Generice <Tool>
@@ -359,7 +359,7 @@ class _Combine extends _Atomic {
      * 「2 Dim」
      * The input is matrix, this method will compress the 2 dim matrix to 1 dim, the code logical is:
      *
-     * 1. Process each element ( Future<List<Tool>> ) async operation to get the result ( List<Tool> ).
+     * 1. Process each element ( Future<List<Tool>> ) async operation to findRunning the result ( List<Tool> ).
      * 2. Combine the result   ( List<List<Tool>> )  =>  ( List<Tool> ) only.
      * 3. The final data structure is:  [[]] => []
      */

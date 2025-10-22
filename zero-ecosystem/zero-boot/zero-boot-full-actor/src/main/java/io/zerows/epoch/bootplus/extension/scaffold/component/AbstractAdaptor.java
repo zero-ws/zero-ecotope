@@ -1,5 +1,6 @@
 package io.zerows.epoch.bootplus.extension.scaffold.component;
 
+import io.r2mo.base.dbe.Database;
 import io.r2mo.function.Fn;
 import io.r2mo.typed.exception.WebException;
 import io.r2mo.typed.exception.web._501NotSupportException;
@@ -9,7 +10,6 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Contract;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.database.OldDatabase;
 import io.zerows.epoch.metadata.XHeader;
 import io.zerows.extension.mbse.action.uca.business.AbstractComponent;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
@@ -42,7 +42,7 @@ import static io.zerows.epoch.bootplus.extension.refine.Ox.LOG;
  *
  * ### 2. 组件功能
  *
- * - 提供数据库实例，对应`I_SERVICE`中的数据库配置{@link OldDatabase}对象（configDatabase属性）。
+ * - 提供数据库实例，对应`I_SERVICE`中的数据库配置{@link Database}对象（configDatabase属性）。
  * - 数据库访问Dao的专用创建，Dao分为两种：<strong>配置型</strong>（不传参数）和<strong>切换型</strong>（传入参数）。
  *
  * ### 3. 配置数据结构
@@ -105,7 +105,7 @@ public abstract class AbstractAdaptor extends AbstractComponent {
 
     // ------------ 数据库实例引用 -------------------------
     /**
-     * 「合约」成员实例，`I_SERVICE`表中的`configDatabase`属性设置，关联{@link OldDatabase}对象。
+     * 「合约」成员实例，`I_SERVICE`表中的`configDatabase`属性设置，关联{@link Database}对象。
      *
      * 该实例是通过{@link Contract}注解赋值，配置结构如上述文档中所描述，下边是其中一个示例：
      *
@@ -125,7 +125,7 @@ public abstract class AbstractAdaptor extends AbstractComponent {
      * ```
      */
     @Contract
-    private transient OldDatabase oldDatabase;
+    private transient Database database;
     /**
      * 成员实例，配置型（不传参）的模型定义对象{@link DataAtom}。
      */
@@ -137,10 +137,10 @@ public abstract class AbstractAdaptor extends AbstractComponent {
     /**
      * 返回当前系统中的数据库实例引用。
      *
-     * @return {@link OldDatabase}数据库实例
+     * @return {@link Database}数据库实例
      */
-    protected OldDatabase database() {
-        return this.oldDatabase;
+    protected Database database() {
+        return this.database;
     }
 
     /**
@@ -240,7 +240,7 @@ public abstract class AbstractAdaptor extends AbstractComponent {
     /**
      * 「静态」数据库访问器获取。
      *
-     * - 数据库实例{@link OldDatabase}。
+     * - 数据库实例{@link Database}。
      * - 模型定义{@link DataAtom}。
      *
      * > 如果系统中未配置`identifier`属性——即通道和模型未绑定，则调用`this.argument()`执行运算修改`this.internalAtom`再构造数据库访问器。
@@ -248,13 +248,13 @@ public abstract class AbstractAdaptor extends AbstractComponent {
      * @return {@link HDao}数据库访问器
      */
     protected HDao dao() {
-        return Ao.toDao(this.atom(), this.oldDatabase);
+        return Ao.toDao(this.atom(), this.database);
     }
 
     /**
      * 「动态」数据库访问器获取。
      *
-     * - 数据库实例{@link OldDatabase}。
+     * - 数据库实例{@link Database}。
      * - 模型定义从外置传入，但在这个过程中需要执行<strong>标识规则</strong>绑定，绑定到当前通道中的标识规则。
      *
      * @param atom 传入的{@link DataAtom}模型定义对象。
@@ -262,7 +262,7 @@ public abstract class AbstractAdaptor extends AbstractComponent {
      * @return {@link HDao}数据库访问器
      */
     protected HDao dao(final DataAtom atom) {
-        return Ao.toDao(atom.rule(this.rule()), this.oldDatabase);
+        return Ao.toDao(atom.rule(this.rule()), this.database);
     }
 
 

@@ -40,7 +40,7 @@ public class AxisSecure implements Axis {
     public void mount(final RunServer server, final HBundle bundle) {
         /*
          * Wall mounting for authorization
-         * Here create order set to remove duplicated order and re-generate the get.
+         * Here create order set to remove duplicated order and re-generate the findRunning.
          *
          * Default order: 0
          *

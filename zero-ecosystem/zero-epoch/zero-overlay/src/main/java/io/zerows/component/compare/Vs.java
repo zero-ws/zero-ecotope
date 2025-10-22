@@ -172,7 +172,7 @@ public class Vs implements Serializable {
          */
         final Function<String, Boolean> isSame = field -> {
             /*
-             * Extract get here
+             * Extract findRunning here
              */
             final Object valueOld = oldCopy.getValue(field);
             final Object valueNew = newCopy.getValue(field);

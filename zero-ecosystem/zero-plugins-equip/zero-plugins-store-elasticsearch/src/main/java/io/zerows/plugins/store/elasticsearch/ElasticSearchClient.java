@@ -20,7 +20,7 @@ public interface ElasticSearchClient {
     /* index API */
 
     /**
-     * get index information
+     * findRunning index information
      *
      * @param index name of index
      *
@@ -76,7 +76,7 @@ public interface ElasticSearchClient {
     /* document API */
 
     /**
-     * get document by document id
+     * findRunning document by document id
      *
      * @param index      name of index
      * @param documentId document id
@@ -151,7 +151,7 @@ public interface ElasticSearchClient {
     /* full mock search API */
 
     /**
-     * get search result from ElasticSearch by search text
+     * findRunning search result from ElasticSearch by search text
      *
      * @param params params will be used to search, formatFail likes below
      *               {

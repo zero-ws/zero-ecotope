@@ -111,7 +111,7 @@ public class InvokerUtil {
         if (Session.class == type) {
             /*
              * RBAC required ( When Authenticate )
-             * 1) Provide username / password to get data from remote server.
+             * 1) Provide username / password to findRunning data from remote server.
              * 2) Request temp authorization code ( Required Session ).
              */
             value = envelop.session();
@@ -238,7 +238,7 @@ public class InvokerUtil {
         final long count = json.fieldNames().stream().filter(Ut::isInteger)
             .count();
         // All json keys are numbers
-        LOGGER.debug("( isInterface Mode ) get count: {0}, json: {1}",
+        LOGGER.debug("( isInterface Mode ) findRunning count: {0}, json: {1}",
             count, json.encode());
         return count == json.fieldNames().size();
     }

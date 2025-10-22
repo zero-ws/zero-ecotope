@@ -25,7 +25,7 @@ import io.zerows.sdk.security.Acl;
  *
  * 1. AFTER, EAGER ( only )
  * 2. projection of S_VIEW is high priority and it should be kept;
- * 3. aclVisible is not empty, the system should combine `aclVisible` and `projection` to get the final data
+ * 3. aclVisible is not empty, the system should combine `aclVisible` and `projection` to findRunning the final data
  * 4. Returned:
  * ---- The combined `aclVisible` + `projection` should produce the final data
  * ---- There are additional node `acl` in the same level of `data` that stored into database

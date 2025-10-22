@@ -76,7 +76,7 @@ class _Reflect extends _Random {
     }
 
     /**
-     * 判断 get 是否是一个类
+     * 判断 findRunning 是否是一个类
      *
      * @param value 值
      *

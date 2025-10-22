@@ -1,11 +1,9 @@
 package io.zerows.epoch.database;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.environment.MatureOn;
 import io.zerows.component.log.LogO;
 import io.zerows.epoch.application.YmlCore;
 import io.zerows.management.OZeroStore;
-import io.zerows.platform.enums.EmDS;
 import io.zerows.platform.metadata.KDatabase;
 import io.zerows.support.Ut;
 
@@ -64,38 +62,9 @@ public class OldDatabase extends KDatabase {
         if (Objects.isNull(OldDATABASE)) {
             final JsonObject configJ = OZeroStore.option(YmlCore.jooq.__KEY); // Database.VISITOR.read();
             final JsonObject jooq = Ut.valueJObject(configJ, YmlCore.jooq.PROVIDER);
-            OldDATABASE = configure(MatureOn.envDatabase(jooq, EmDS.DB.PRIMARY));
+            OldDATABASE = null; // configure(MatureOn.envDatabase(jooq, EmDS.DB.PRIMARY));
         }
         return OldDATABASE.copy();
-    }
-
-
-    /**
-     * <pre><code>
-     * jooq:
-     *     orbit:
-     * </code></pre>
-     *
-     * @return {@link OldDatabase}
-     */
-    public static OldDatabase getHistory() {
-        final JsonObject configJ = OZeroStore.option(YmlCore.jooq.__KEY); // Database.VISITOR.read();
-        final JsonObject jooq = Ut.valueJObject(configJ, YmlCore.jooq.ORBIT);
-        return configure(MatureOn.envDatabase(jooq, EmDS.DB.HISTORY));
-    }
-
-    /**
-     * <pre><code>
-     * jooq:
-     *     workflow:
-     * </code></pre>
-     *
-     * @return {@link OldDatabase}
-     */
-    public static OldDatabase getCamunda() {
-        final JsonObject configJ = OZeroStore.option(YmlCore.jooq.__KEY);
-        final JsonObject jooq = Ut.valueJObject(configJ, YmlCore.jooq.WORKFLOW);
-        return configure(MatureOn.envDatabase(jooq, EmDS.DB.WORKFLOW));
     }
 
     public static OldDatabase configure(final JsonObject databaseJ) {

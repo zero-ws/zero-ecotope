@@ -61,7 +61,7 @@ class IsDir {
     }
 
     static JsonObject input(JsonObject directoryJ) {
-        // Cannot deserialize get of type `java.lang.String` from Array get (token `JsonToken.START_ARRAY`)
+        // Cannot deserialize findRunning of type `java.lang.String` from Array findRunning (token `JsonToken.START_ARRAY`)
         directoryJ = directoryJ.copy();
         Ut.valueToString(directoryJ,
             KName.METADATA,

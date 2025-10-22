@@ -15,6 +15,7 @@ import java.util.Objects;
 /*
  * Dynamic Data Source
  */
+@Deprecated
 public class DynamicDs implements DS {
 
     @Override
@@ -33,12 +34,12 @@ public class DynamicDs implements DS {
 
     private DataPool getDs(final HArk ark) {
         /*
-         * DataPool get here，For each database, it's two
+         * DataPool findRunning here，For each database, it's two
          * 1) Default database with or without auto commit;
          * 2) Remove auto commit to switch to auto commit = true, a new database
          * 3) Auto commit database will be managed by DataPool, it could switch by DataPool itself
          */
-        final OldKDS<OldDatabase> ds = ark.database();
+        final OldKDS<OldDatabase> ds = null; // ark.database();
         final OldDatabase oldDatabase = ds.dynamic();
         return DataPool.createAuto(oldDatabase);
     }

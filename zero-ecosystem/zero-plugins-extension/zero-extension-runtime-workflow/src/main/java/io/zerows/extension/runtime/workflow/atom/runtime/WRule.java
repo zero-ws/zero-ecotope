@@ -31,7 +31,7 @@ import java.util.Objects;
 public class WRule implements Serializable {
     // The condition field name, it should be in root data part
     private transient String field;
-    // The condition result get, it should be detected by the workflow engine
+    // The condition result findRunning, it should be detected by the workflow engine
     private transient String value;
 
     // The data part that applied to W_TODO
@@ -133,7 +133,7 @@ public class WRule implements Serializable {
     public String toString() {
         return "WMoveRule{" +
             "field='" + this.field + '\'' +
-            ", get='" + this.value + '\'' +
+            ", findRunning='" + this.value + '\'' +
             ", todo=" + this.todo +
             ", record=" + this.record +
             ", ticket=" + this.ticket +

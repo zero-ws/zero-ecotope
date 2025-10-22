@@ -44,7 +44,7 @@ public class Terminal {
      */
     public void run(final Handler<AsyncResult<String[]>> handler) {
         /*
-         * Std in to get arguments
+         * Std in to findRunning arguments
          * Fix bug: java.lang.IndexOutOfBoundsException: end
          */
         try {

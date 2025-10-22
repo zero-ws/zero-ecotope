@@ -98,13 +98,13 @@ class ActionUpsert extends AbstractAction {
     <T> ConcurrentMap<ChangeFlag, List<T>> compared(final List<T> original, final List<T> updated, final BiPredicate<T, T> finder) {
         /*
          * Combine original / updated
-         * list to get result for
+         * list to findRunning result for
          * INSERT / UPDATE
          */
         final List<T> addQueue = new ArrayList<>();
         final List<T> updateQueue = new ArrayList<>();
         /*
-         * Only get `ADD` & `UPDATE`
+         * Only findRunning `ADD` & `UPDATE`
          * Iterate original list
          * 1) If the entity is missing in original, ADD
          * 2) If the entity is existing in original, UPDATE

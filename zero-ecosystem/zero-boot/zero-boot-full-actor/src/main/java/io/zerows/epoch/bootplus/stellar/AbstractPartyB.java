@@ -1,12 +1,12 @@
 package io.zerows.epoch.bootplus.stellar;
 
+import io.r2mo.base.dbe.Database;
 import io.vertx.core.Future;
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.bootplus.boot.EAnvoy;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
-import io.zerows.epoch.database.OldDatabase;
 import io.zerows.platform.metadata.KDictConfig;
 import io.zerows.platform.metadata.KFabric;
 import io.zerows.program.Ux;
@@ -26,10 +26,10 @@ public abstract class AbstractPartyB implements OkB {
      * 获取数据库对象默认实现
      * > 「RD」桥梁模式扩展。
      *
-     * @return {@link OldDatabase}
+     * @return {@link Database}
      */
     @Override
-    public OldDatabase configDatabase() {
+    public Database configDatabase() {
         return this.partyA.configDatabase();
     }
 

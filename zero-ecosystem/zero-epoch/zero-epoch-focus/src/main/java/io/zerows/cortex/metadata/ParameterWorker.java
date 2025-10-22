@@ -48,7 +48,7 @@ class ParameterWorker implements ParameterBuilder<Envelop> {
         } else if (is(type, Session.class)) {
             /*
              * RBAC required ( When Authenticate )
-             * 1) Provide username / password to get data from remote server.
+             * 1) Provide username / password to findRunning data from remote server.
              * 2) Request temp authorization code ( Required Session ).
              */
             returnValue = envelop.session();

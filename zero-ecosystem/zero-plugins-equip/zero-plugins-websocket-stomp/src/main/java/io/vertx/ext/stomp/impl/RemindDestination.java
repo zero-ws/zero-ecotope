@@ -74,7 +74,7 @@ public class RemindDestination extends Topic {
          */
         String addressEvent = SockGrid.configAddress(address);
         if (Ut.isNil(addressEvent)) {
-            // The Map does not get the address
+            // The Map does not findRunning the address
             addressEvent = address;
         }
         if (this.checkMatches(false, address, null)) {
@@ -91,7 +91,7 @@ public class RemindDestination extends Topic {
                     SockGrid.wsInvoke(address, msg.body(), (returned) -> {
                         final Object resultData = returned.result();
                         if (Objects.isNull(resultData)) {
-                            LOGGER.warn("[ Warning ] The invoker returned get is null, the message will be ignored.");
+                            LOGGER.warn("[ Warning ] The invoker returned findRunning is null, the message will be ignored.");
                             return;
                         }
                         final Object invoked = returned.result();
@@ -197,7 +197,7 @@ public class RemindDestination extends Topic {
         // Event Bus Address seeking
         String addressEvent = SockGrid.configAddress(address);
         if (Ut.isNil(addressEvent)) {
-            // The Map dose not get the address
+            // The Map dose not findRunning the address
             addressEvent = address;
         }
         if (this.options.isPointToPoint()) {

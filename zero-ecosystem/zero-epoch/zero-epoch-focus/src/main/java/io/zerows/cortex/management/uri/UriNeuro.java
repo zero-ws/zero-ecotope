@@ -8,7 +8,7 @@ import io.zerows.epoch.constant.KWeb;
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  *
- * The data structure to get following data ( Each thread )
+ * The data structure to findRunning following data ( Each thread )
  */
 public class UriNeuro {
     private final transient String name;

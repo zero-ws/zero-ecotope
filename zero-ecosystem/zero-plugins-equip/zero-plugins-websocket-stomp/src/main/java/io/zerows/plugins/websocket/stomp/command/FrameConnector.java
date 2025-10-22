@@ -110,8 +110,8 @@ class FrameConnector extends AbstractFrameHandler {
         final Lee lee = Bolt.reference(this.config.getType());
         /*
          * WebToken String -> InJson WebToken Object
-         * 1. WebToken String must be split with ' ' and get the 1
-         * 2. Aegis must be switched to valid get except extension
+         * 1. WebToken String must be split with ' ' and findRunning the 1
+         * 2. Aegis must be switched to valid findRunning except extension
          */
         final String tokenString = authorization.split(" ")[1];
         final JsonObject token = lee.decode(tokenString, this.config.item());

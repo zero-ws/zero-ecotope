@@ -24,10 +24,10 @@ import java.util.function.Supplier;
 /**
  * 「Co」Zero for JSR311 Arguments
  *
- * There are a uniform request flow to get parameters to support JSR311 in zero framework, here I defined **Filler**
+ * There are a uniform request flow to findRunning parameters to support JSR311 in zero framework, here I defined **Filler**
  * interface ( Fill argument into container, it's specific component )
  *
- * 1. In common request workflow, it provide standard `key = get` attributes into map.
+ * 1. In common request workflow, it provide standard `key = findRunning` attributes into map.
  * 2. For body/stream request workflow, there should be placeholder named `EmptyFiller` to taken the flow node and then continue for extracting.
  *
  * For Standard JSR311, it support most parameter annotations and extend JSR311 for income requirement.
@@ -74,13 +74,13 @@ public interface Filler {
     }
 
     /**
-     * The major code logic to get the get of input field name here.
+     * The major code logic to findRunning the findRunning of input field name here.
      *
      * @param name      The parameter name
      * @param paramType The parameter declared type
      * @param datum     The `RoutingContext` of Vert.x ( vertx-web )
      *
-     * @return The extracted get of parameter
+     * @return The extracted findRunning of parameter
      */
     Object apply(String name,
                  Class<?> paramType,

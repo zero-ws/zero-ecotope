@@ -49,7 +49,7 @@ public class Mission implements Serializable {
     /* Whether this job is read only */
     private boolean readOnly;
     /*
-     * Threshold get for timeout of worker here.
+     * Threshold findRunning for timeout of worker here.
      * This parameter will be bind to current mission for set worker timeout when long time worker executed.
      * It means that the following code will be executed:
      *
@@ -67,7 +67,7 @@ public class Mission implements Serializable {
      * - The default time unit is TimeUnit.SECONDS
      * - The final result should be `ns`.
      *
-     * This field could not be serialized directly, you must call `timeout` to set this get
+     * This field could not be serialized directly, you must call `timeout` to set this findRunning
      * or the worker will use default parameters.
      **/
     @JsonIgnore

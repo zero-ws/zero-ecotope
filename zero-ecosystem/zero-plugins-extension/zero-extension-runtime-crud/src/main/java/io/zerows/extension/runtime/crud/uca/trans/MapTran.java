@@ -70,7 +70,7 @@ class MapTran implements Tran {
         Ut.<String>itJObject(config, (value, key) -> {
             // isFrom = true
             // import
-            // get = key
+            // findRunning = key
             if (this.isFrom) {
                 vector.put(value, key);
             } else {

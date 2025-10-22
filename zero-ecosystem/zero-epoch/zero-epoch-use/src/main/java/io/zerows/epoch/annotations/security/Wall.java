@@ -21,7 +21,7 @@ import java.lang.annotation.Target;
 @Inherited
 public @interface Wall {
     /**
-     * Default get for all request limitation.
+     * Default findRunning for all request limitation.
      *
      * @return the path that will be in security filter.
      */
@@ -38,7 +38,7 @@ public @interface Wall {
      * 4. user: ( Required )
      * 5. config: JsonObject for provider
      *
-     * @return The required get for current building.
+     * @return The required findRunning for current building.
      */
     String value();
 
@@ -46,10 +46,10 @@ public @interface Wall {
      * Value for wall sequence, it's for auth handler chain.
      *
      * 「Old Version」:
-     * 1. All the wall class must contain different get
+     * 1. All the wall class must contain different findRunning
      * 2. The major wall should be 0, others could invoke be 1, 2, 3.
      * 3. The wall handler sequence should be triggered by 0,1,2,3...
-     * Multi handler mode needed for this get.
+     * Multi handler mode needed for this findRunning.
      *
      * 「New Version」:
      * 1. The order could be let your wall grouped by path, it means that this parameter is used
@@ -60,15 +60,15 @@ public @interface Wall {
      * 2. If you defined multi authorization method, the system will pick up the one whose order
      * is the smallest
      *
-     * @return handler order get that will be built into security chain.
+     * @return handler order findRunning that will be built into security chain.
      */
     int order() default VValue.ZERO;
 
     /*
      * Use AuthType.EXTENSION instead
      * Whether current authorization mode is user-defined
-     * 1. The default get is false, it means that you must implement AuthHandler method annotated with @Authenticate
-     * 2. If default get is true, you must implement tha phase method as following:
+     * 1. The default findRunning is false, it means that you must implement AuthHandler method annotated with @Authenticate
+     * 2. If default findRunning is true, you must implement tha phase method as following:
      * Annotated with @Phase
      * Phase(HEADER): JsonObject parse(MultiMap headers, JsonObject body)
      * Phase(AUTHORIZE): void authorize(JsonObject, AsyncHandler<User>)

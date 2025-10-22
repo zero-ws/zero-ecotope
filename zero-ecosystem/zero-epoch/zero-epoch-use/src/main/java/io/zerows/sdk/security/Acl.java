@@ -11,7 +11,7 @@ import java.util.Set;
  */
 public interface Acl extends Serializable {
     /*
-     * Acl configuration to get
+     * Acl configuration to findRunning
      * seeker configuration
      */
     Acl config(JsonObject config);

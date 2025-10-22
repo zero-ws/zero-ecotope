@@ -5,9 +5,9 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
-import io.zerows.mbse.metadata.KModule;
 import io.zerows.epoch.metadata.KField;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
+import io.zerows.mbse.metadata.KModule;
 import io.zerows.program.Ux;
 import io.zerows.spi.modeler.Indent;
 import io.zerows.support.Ut;
@@ -40,7 +40,7 @@ class SerialPre implements Pre {
         }
 
         /* Number generation */
-        return this.run(data, in, (numbers) -> Ux.channelA(Indent.class, () -> Ux.future(data), stub -> {
+        return this.run(data, in, (numbers) -> Ux.channelAsync(Indent.class, () -> Ux.future(data), stub -> {
             LOG.Ke.info(LOGGER, "Table here {0}, Serial numbers {1}", in.module().getTable(), numbers.encode());
             /* Channel */
             final ConcurrentMap<String, Future<String>> numberMap = new ConcurrentHashMap<>();
@@ -61,13 +61,13 @@ class SerialPre implements Pre {
 
     @Override
     public Future<JsonArray> inAAsync(final JsonArray data, final IxMod in) {
-        /* Compress all sigma no get */
+        /* Compress all sigma no findRunning */
         final String sigma = Ut.valueString(data, KName.SIGMA);
         if (Ut.isNil(sigma) || Ut.isNil(data)) {
             return Ux.future(data);
         }
         /* Number generation */
-        return this.run(data, in, (numbers) -> Ux.channelA(Indent.class, () -> Ux.future(data), stub -> {
+        return this.run(data, in, (numbers) -> Ux.channelAsync(Indent.class, () -> Ux.future(data), stub -> {
             LOG.Ke.info(LOGGER, "Table here {0}, Size {1}, Serial numbers {2}", in.module().getTable(), data.size(), numbers.encode());
             /* Queue<String> */
             final ConcurrentMap<String, Future<Queue<String>>> numberMap = new ConcurrentHashMap<>();

@@ -65,7 +65,7 @@ public class HikariDataPool implements DataPool {
             // Fix Issue: https://github.com/silentbalanceyh/vertx-zero/issues/304
             this.dataSource.setConnectionTimeout(this.database.getLong(OPT_CONNECTION_TIMEOUT, 300000L));
             this.dataSource.setIdleTimeout(this.database.getLong(OPT_IDLE_TIMEOUT, 60000L));
-            // Fix: Possibly consider using a shorter maxLifetime get
+            // Fix: Possibly consider using a shorter maxLifetime findRunning
             this.dataSource.setMaxLifetime(this.database.getLong(OPT_MAX_LIFETIME, 120000L));
             this.dataSource.setKeepaliveTime(this.database.getLong(OPT_KEEP_ALIVE_TIME, 90000L));
             this.dataSource.setMinimumIdle(this.database.getOption(OPT_MINIMUM_IDLE, 0));
@@ -172,7 +172,7 @@ public class HikariDataPool implements DataPool {
              *
              * The pre-condition is that you have set jdbcUrl before, and the HikariCPPool did not
              * distinguish whether it's the same data source by `jdbcUrl`, instead by java reference.
-             * If we used singleton design pattern here, it means that you get previous reference each time
+             * If we used singleton design pattern here, it means that you findRunning previous reference each time
              * `old == new` will be true, when you set jdbcUrl again, above issue will throw out.
              *
              */

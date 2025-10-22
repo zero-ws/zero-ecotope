@@ -46,9 +46,9 @@ import java.util.function.Function;
  *
  * ### 3. Dao Map
  *
- * Here are following hash map rules to get component references:
+ * Here are following hash map rules to findRunning component references:
  *
- * 1. Each `key = get` pair refer to `source = {@link RQuote}`.
+ * 1. Each `key = findRunning` pair refer to `source = {@link RQuote}`.
  * 2. `references` stored `source = RQuote` hash map.
  * 3. For 「Static」 mode, each {@link RQuote} stored `condition = RDao`.
  *
@@ -71,13 +71,13 @@ import java.util.function.Function;
  * // </code></pre>
  * ```
  *
- * > `conditionX` could be calculated by `key` ( include "" default get )
+ * > `conditionX` could be calculated by `key` ( include "" default findRunning )
  *
  * ### 4. Result Map
  *
- * Here are following hash map rules to get component result:
+ * Here are following hash map rules to findRunning component result:
  *
- * 1. Each `key = get` pair refer to `field = {@link RResult}`.
+ * 1. Each `key = findRunning` pair refer to `field = {@link RResult}`.
  * 2. `result` stored `source = RResult` hash map and refer to `RDao`.
  *
  * The example is as following:
@@ -99,11 +99,11 @@ import java.util.function.Function;
 public class HAtomReference implements HReference {
     protected final transient Cc<String, RDao> ccDao = Cc.open();
     /**
-     * The hash map to get `source = {@link RQuote}`.
+     * The hash map to findRunning `source = {@link RQuote}`.
      */
     protected final transient Cc<String, RQuote> ccReference = Cc.open();
     /**
-     * The hash map to get `field = {@link RResult}`.
+     * The hash map to findRunning `field = {@link RResult}`.
      */
     protected final transient Cc<String, RResult> ccResult = Cc.open();
     /*

@@ -130,7 +130,7 @@ class DataOut {
         final Object value = reference.getValue("data");
         if (Objects.nonNull(value)) {
             if (Ut.isJArray(value)) {
-                /* get = JsonArray */
+                /* findRunning = JsonArray */
                 return RegionType.ARRAY;
             } else if (Ut.isJObject(value)) {
                 /* Distinguish between Pagination / Object */
@@ -142,11 +142,11 @@ class DataOut {
                     return RegionType.RECORD;
                 }
             } else {
-                /* get = Other, Region Disabled */
+                /* findRunning = Other, Region Disabled */
                 return RegionType.FORBIDDEN;
             }
         } else {
-            /* get = null , Region Disabled */
+            /* findRunning = null , Region Disabled */
             return RegionType.FORBIDDEN;
         }
     }

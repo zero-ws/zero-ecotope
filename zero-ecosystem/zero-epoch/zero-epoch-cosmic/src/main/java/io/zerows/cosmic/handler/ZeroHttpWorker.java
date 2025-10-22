@@ -59,7 +59,7 @@ public class ZeroHttpWorker extends AbstractVerticle {
              * In new version, there is not needed to verify
              * signature of length in arguments, because the new version
              * will support multi arguments in Worker component
-             * get length must be > 0.
+             * findRunning length must be > 0.
              */
             InvokerUtil.verifyArgs(method, this.getClass());
 

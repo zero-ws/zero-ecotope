@@ -3,7 +3,6 @@ package io.zerows.program;
 import io.vertx.core.Future;
 import io.vertx.core.Promise;
 import io.zerows.component.log.LogO;
-import io.zerows.epoch.spi.channel.Pocket;
 import io.zerows.platform.constant.VValue;
 import io.zerows.platform.metadata.KRef;
 import io.zerows.support.Ut;
@@ -109,46 +108,5 @@ class Async {
             }
             return Future.succeededFuture(input.get());
         };
-    }
-
-
-    static <T, O> Future<O> channel(final Class<T> clazz, final Supplier<O> supplier,
-                                    final Function<T, Future<O>> executor) {
-        final T channel = Pocket.lookup(clazz);
-        if (Objects.isNull(channel)) {
-            LOGGER.warn("「SL Channel」Channel {0} null", clazz.getName());
-            return ToCommon.future(supplier.get());
-        } else {
-            LOGGER.debug("「SL Channel」Channel Async selected {0}, {1}",
-                channel.getClass().getName(), String.valueOf(channel.hashCode()));
-            return executor.apply(channel);
-        }
-    }
-
-
-    static <T, O> O channelSync(final Class<T> clazz, final Supplier<O> supplier,
-                                final Function<T, O> executor) {
-        final T channel = Pocket.lookup(clazz);
-        if (Objects.isNull(channel)) {
-            LOGGER.warn("「SL Channel」Channel Sync {0} null", clazz.getName());
-            return supplier.get();
-        } else {
-            LOGGER.debug("「SL Channel」Channel Sync selected {0}, {1}",
-                channel.getClass().getName(), String.valueOf(channel.hashCode()));
-            return executor.apply(channel);
-        }
-    }
-
-    static <T, O> Future<O> channelAsync(final Class<T> clazz, final Supplier<Future<O>> supplier,
-                                         final Function<T, Future<O>> executor) {
-        final T channel = Pocket.lookup(clazz);
-        if (Objects.isNull(channel)) {
-            LOGGER.warn("「SL Channel」Channel Async {0} null", clazz.getName());
-            return supplier.get();
-        } else {
-            LOGGER.debug("「SL Channel」Channel Async selected {0}, {1}",
-                channel.getClass().getName(), String.valueOf(channel.hashCode()));
-            return executor.apply(channel);
-        }
     }
 }

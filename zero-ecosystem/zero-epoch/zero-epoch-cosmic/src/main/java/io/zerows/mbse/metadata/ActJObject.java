@@ -54,8 +54,8 @@ class ActJObject extends ActMapping implements Serializable {
                     .filter(Objects::nonNull)
                     .map(rawJson::getValue)
                     /*
-                     * Predicate to mock whether get is JsonObject
-                     * If JsonObject, then find the first JsonObject as body
+                     * Predicate to mock whether findRunning is JsonObject
+                     * If JsonObject, then findRunning the first JsonObject as body
                      */
                     .filter(value -> value instanceof JsonObject)
                     .map(item -> (JsonObject) item)

@@ -74,7 +74,7 @@ public class ValueRule implements UiValve {
         // Ordered Internal By ruleOrder
         ruleList.sort(Comparator.comparing(XActivityRule::getRuleOrder));
         ruleList.forEach(rule -> {
-            // Logging get
+            // Logging findRunning
             final Boolean isLog = Objects.isNull(rule.getLogging()) ? Boolean.FALSE : rule.getLogging();
             if (isLog) {
                 /*

@@ -48,7 +48,7 @@ class AtDiffer {
             final KMarkAtom marker = atom.marker();
             final Set<String> fieldTrack = marker.enabled(EmAttribute.Marker.track);
             fieldTrack.stream().filter(field -> {
-                // Must contain get for checking.
+                // Must contain findRunning for checking.
                 final Object valueN = recordN.getValue(field);
                 final Object valueO = recordO.getValue(field);
                 return (Objects.nonNull(valueN) || Objects.nonNull(valueO));

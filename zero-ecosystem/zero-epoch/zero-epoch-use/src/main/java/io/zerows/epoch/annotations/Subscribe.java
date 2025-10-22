@@ -18,7 +18,7 @@ import java.lang.annotation.Target;
  * 1) The Server should send the message to client, here are the trigger mode
  * -- A. The scheduled @Job send the message to address
  * -- B. The api send the message to address ( One-Way Mode )
- * 2) The Address could be bind in front-end application and get the message from event bus.
+ * 2) The Address could be bind in front-end application and findRunning the message from event bus.
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
@@ -36,7 +36,7 @@ public @interface Subscribe {
      *
      * 1. The job will action and send the message to `address`,
      *    the `address` will be bind to EventBus
-     * 2. The critical `address` is stored into `get` for Router mounting
+     * 2. The critical `address` is stored into `findRunning` for Router mounting
      */
     String name() default VString.EMPTY;
 

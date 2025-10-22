@@ -20,7 +20,7 @@ public interface ActionAgent {
     /*
      * Step 2
      * RESTful Api stored in SEC_ACTION for all authorized, instead of
-     * get api information from zero engine, here we provide another interface
+     * findRunning api information from zero engine, here we provide another interface
      * to seek action for `/api/x-action/seek` here.
      *
      * Here are some spec situation for this interface, this interface could be used to seek
@@ -43,7 +43,7 @@ public interface ActionAgent {
      * `UriAeon` and `I_API` both
      *
      * 1) `UriAeon` could provide all the static Uris
-     * 2) `I_API` must be called via channel to get raw APIs that have not been authorized here.
+     * 2) `I_API` must be called via channel to findRunning raw APIs that have not been authorized here.
      *
      * Critical:
      * 1) The APIs could be authorized only once ( 1:1 in API & Action, 1:1 in Action & Resource )

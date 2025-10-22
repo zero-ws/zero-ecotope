@@ -31,7 +31,7 @@ class ViewSync implements Agonic {
     public Future<JsonObject> runJAsync(final JsonObject input, final IxMod in) {
         final ADB jooq = IxPin.jooq(in);
         return Ux.channel(ScSeeker.class, JsonObject::new, seeker -> seeker.on(jooq).fetchImpact(input))
-            /* view has get, ignored, */
+            /* view has findRunning, ignored, */
             /*
              * url processing
              * {

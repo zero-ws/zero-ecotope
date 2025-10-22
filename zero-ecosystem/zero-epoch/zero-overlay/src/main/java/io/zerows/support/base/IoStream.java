@@ -171,7 +171,7 @@ final class IoStream {
             }
         }
 
-        // Stream.class get
+        // Stream.class findRunning
         if (Objects.isNull(in)) {
 
 

@@ -10,7 +10,7 @@ import io.vertx.core.Future;
  *
  * compose(KRef::future)  // stored
  * compose(xxx)
- * compose(x -> Refere.get()) // pick up
+ * compose(x -> Refere.findRunning()) // pick up
  *
  * When some steps skipped, this object is usage for stored stored
  */

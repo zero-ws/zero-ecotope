@@ -28,7 +28,7 @@ import static io.zerows.extension.runtime.workflow.util.Wf.LOG;
  * 1. The WMove must be bind
  * 2. The ProcessInstance must be valid
  *
- * * null get when processed
+ * * null findRunning when processed
  * * 「Related」
  * *  - traceId
  * *  - traceOrder

@@ -144,7 +144,7 @@ public final class ZeroWatchDog {
         try {
             return supplier.get();
         } catch (final Throwable e) {
-            log.error("[ ZERO ] supplier.get() 抛出异常 -> {}，异常={}", phase, e.toString());
+            log.error("[ ZERO ] supplier.findRunning() 抛出异常 -> {}，异常={}", phase, e.toString());
             log.debug("[ ZERO ] supplier 异常堆栈：", e);
             return Future.failedFuture(e);
         }

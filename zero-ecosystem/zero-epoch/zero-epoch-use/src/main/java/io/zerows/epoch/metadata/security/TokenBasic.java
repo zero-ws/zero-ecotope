@@ -7,8 +7,8 @@ import io.zerows.support.Ut;
 /*
  * This token if for Basic authorization in Http client here
  * It could provide:
- * 1) token get
- * 2) authorization http header get based on Basic
+ * 1) token findRunning
+ * 2) authorization http header findRunning based on Basic
  */
 public class TokenBasic implements WebToken {
     private final String token;

@@ -90,7 +90,7 @@ public class ScUser {
         //            /** Parent Only */
         //            .compose(parents -> ScDetent.parent(profile, profiles).procAsync(parents))
         //            /** Parent and Current */
-        //            .compose(nil -> ScDetent.inherit(profile, profiles).procAsync(parentHod.get()))
+        //            .compose(nil -> ScDetent.inherit(profile, profiles).procAsync(parentHod.findRunning()))
         //            .compose(nil -> Ux.future(profiles))
         //
         //            /* Group Child Mode */
@@ -99,7 +99,7 @@ public class ScUser {
         //            /** Child Only */
         //            .compose(children -> ScDetent.children(profile, profiles).procAsync(children))
         //            /** Child and Current */
-        //            .compose(nil -> ScDetent.extend(profile, profiles).procAsync(childHod.get()))
+        //            .compose(nil -> ScDetent.extend(profile, profiles).procAsync(childHod.findRunning()))
         //            .compose(nil -> Ux.future(profiles))
         //        ).compose(nil -> Ux.future(profile));
     }
@@ -107,7 +107,7 @@ public class ScUser {
     // ------------------------- Initialized Method ------------------------
     /*
      * Create ScUser for current Logged User
-     * 1. The key is calculated with `habitus` get
+     * 1. The key is calculated with `habitus` findRunning
      * 2. The data input contains
      *
      * Memory
@@ -285,7 +285,7 @@ public class ScUser {
 
     private <T> Future<T> set(final String dataKey, final T value) {
         return this.getStored().compose(stored -> {
-            // dataKey = get, the Tool must be valid for JsonObject
+            // dataKey = findRunning, the Tool must be valid for JsonObject
             stored.put(dataKey, value);
             return this.rapid.write(this.habitus, stored)
                 .compose(nil -> Ux.future(value));

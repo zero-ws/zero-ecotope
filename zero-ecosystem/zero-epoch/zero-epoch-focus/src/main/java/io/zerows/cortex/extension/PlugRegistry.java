@@ -13,7 +13,7 @@ public interface PlugRegistry {
     /*
      * Process extension for routes.
      * Convert /api/:actor because of CRUD module.
-     * This method must modify the routes inner method to get the final result instead
+     * This method must modify the routes inner method to findRunning the final result instead
      * of old.
      */
     Set<String> analyze(Set<String> routes);

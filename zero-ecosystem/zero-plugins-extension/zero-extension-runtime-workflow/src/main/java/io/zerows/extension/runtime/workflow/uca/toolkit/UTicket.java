@@ -87,7 +87,7 @@ public class UTicket {
      * {
      *      "key": null,
      *      "record": {
-     *          "key": null or has get
+     *          "key": null or has findRunning
      *      }
      * }
      * We should prepare the whole key related here to web relationship between
@@ -159,7 +159,7 @@ public class UTicket {
                 ticketJ.remove(KName.KEY);
                 final WTicket ticket = Ux.fromJson(ticketJ, WTicket.class);
                 /*
-                 * null get when ticket processed
+                 * null findRunning when ticket processed
                  *
                  *  - code: came from serial
                  * 「Camunda」

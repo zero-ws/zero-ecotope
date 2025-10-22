@@ -10,7 +10,7 @@ import io.zerows.extension.mbse.ui.domain.tables.pojos.UiVisitor;
  *
  * 1) The UI_VISITOR must contain `controlId` in static mode.
  * 2) When dynamic = true, it means that the controlId has been calculated by
- * `runComponent` here, the component must be extend from UiHunter to get the
+ * `runComponent` here, the component must be extend from UiHunter to findRunning the
  * correct controlId instead.
  *
  * The request formatFail is as following

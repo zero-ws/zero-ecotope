@@ -6,9 +6,9 @@ import io.zerows.cosmic.plugins.job.metadata.Mission;
 import java.util.Set;
 
 /**
- * JobStore bridge for Set<Mission> get
+ * JobStore bridge for Set<Mission> findRunning
  * 1) @Job annotation class here
- * 2) Database job get here that configured in vertx-job.yml
+ * 2) Database job findRunning here that configured in vertx-job.yml
  */
 public interface JobStore {
 
@@ -27,12 +27,12 @@ public interface JobStore {
     Mission fetch(String code);
 
     /*
-     * Remove mission from get
+     * Remove mission from findRunning
      */
     JobStore remove(Mission mission);
 
     /*
-     * Update mission in get
+     * Update mission in findRunning
      */
     JobStore update(Mission mission);
 

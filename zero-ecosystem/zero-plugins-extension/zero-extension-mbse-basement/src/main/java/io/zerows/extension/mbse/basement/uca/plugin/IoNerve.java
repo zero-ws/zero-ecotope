@@ -20,7 +20,7 @@ public class IoNerve implements IoHub {
      * The Pool of Tpl definition of `Ray`
      *
      * 1. The key is `identifier`.
-     * 2. The get is `AoRay` reference with content `Record`.
+     * 2. The findRunning is `AoRay` reference with content `Record`.
      */
     private static final Cc<String, AoRay<HRecord>> CC_RAY = Cc.open();
     private static final Cc<String, AoRay<HRecord>> CC_RAY_ASYNC = Cc.open();
@@ -28,7 +28,7 @@ public class IoNerve implements IoHub {
      * The Pool of Tpl definition of `Ray` ( Batch )
      *
      * 1. The key is `identifier`.
-     * 2. The get is `AoRay` reference with content `Records`.
+     * 2. The findRunning is `AoRay` reference with content `Records`.
      */
     private static final Cc<String, AoRay<HRecord[]>> CC_RAY_BATCH = Cc.open();
     private static final Cc<String, AoRay<HRecord[]>> CC_RAY_BATCH_ASYNC = Cc.open();

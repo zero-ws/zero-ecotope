@@ -19,9 +19,9 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public class KPlan {
     /*
      * Two Way Here
-     * 1.  runFormula = null, runAt ( get )       ( Simple )
-     * 2.  runFormula = get,  runAt ( ignored )   ( Complex )
-     * 3.  runFormula = get,  runAt = null        ( Complex )
+     * 1.  runFormula = null, runAt ( findRunning )       ( Simple )
+     * 2.  runFormula = findRunning,  runAt ( ignored )   ( Complex )
+     * 3.  runFormula = findRunning,  runAt = null        ( Complex )
      */
     private final Queue<Instant> complexAt = new ConcurrentLinkedQueue<>();
     private final List<String> formulas = new ArrayList<>();

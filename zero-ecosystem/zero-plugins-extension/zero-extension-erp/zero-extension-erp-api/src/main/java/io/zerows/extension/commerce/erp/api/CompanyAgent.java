@@ -15,7 +15,7 @@ import jakarta.ws.rs.PathParam;
 public interface CompanyAgent {
     /*
      * /api/company/employee/:eid
-     * Request: get company information by user id
+     * Request: findRunning company information by user id
      */
     @GET
     @Path("company/employee/:eid")

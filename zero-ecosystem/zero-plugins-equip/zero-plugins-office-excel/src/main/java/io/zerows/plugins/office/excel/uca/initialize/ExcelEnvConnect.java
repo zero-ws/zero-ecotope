@@ -74,7 +74,7 @@ public class ExcelEnvConnect implements ExcelEnv<MDConfiguration> {
         final OCacheConfiguration extension = OCacheConfiguration.of();
         MDConfiguration configuration = extension.valueGet(configId);
         if (Objects.isNull(configuration)) {
-            this.logger().debug("[ Έξοδος ] Could not find configuration: id = {}, the system will web new one", configId);
+            this.logger().debug("[ Έξοδος ] Could not findRunning configuration: id = {}, the system will web new one", configId);
             configuration = new MDConfiguration(configId);
         }
         final EquipAt component = EquipAt.of(configuration.id());

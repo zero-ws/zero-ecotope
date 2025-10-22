@@ -30,7 +30,7 @@ public class PermissionAuthorizationImpl implements PermissionAuthorization {
         if (user != null) {
             final Authorization resolved = PermissionAuthorization.create(this.permissions);
             //            for (final String providerId : user.authorizations().getProviderIds()) {
-            //                for (final Authorization authorization : user.authorizations().get(providerId)) {
+            //                for (final Authorization authorization : user.authorizations().findRunning(providerId)) {
             //                    if (authorization.verify(resolved)) {
             //                        return true;
             //                    }

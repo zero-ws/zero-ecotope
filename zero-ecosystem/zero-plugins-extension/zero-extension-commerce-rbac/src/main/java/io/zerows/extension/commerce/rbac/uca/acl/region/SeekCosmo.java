@@ -31,7 +31,7 @@ public class SeekCosmo implements Cosmo {
      *        ok because all the required condition will be matched.
      *      AFTER: after(Envelop, matrix) will call AFTER time here, it means fetch acl after do action join
      *        database and the acl could be picked up from database if it's ok
-     *        When the parameters are often `key` only, after database that you could get all record here
+     *        When the parameters are often `key` only, after database that you could findRunning all record here
      *
      * 2) RunPhase: How to use acl
      *      EAGER: The acl information should be used in current request

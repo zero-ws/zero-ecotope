@@ -1,12 +1,12 @@
 package io.zerows.extension.mbse.basement.uca.jdbc;
 
+import io.r2mo.base.dbe.Database;
 import io.r2mo.function.Fn;
-import io.zerows.platform.metadata.KDatabase;
-import io.zerows.support.Ut;
 import io.zerows.extension.mbse.basement.exception._80508Exception404PinNotFound;
 import io.zerows.extension.mbse.basement.uca.metadata.AoBuilder;
 import io.zerows.extension.mbse.basement.util.Ao;
 import io.zerows.specification.modeling.operation.HDao;
+import io.zerows.support.Ut;
 
 import java.util.Objects;
 
@@ -30,11 +30,11 @@ public interface Pin {
      * 读取发布器专用接口
      * 发布器执行时，必须知道是针对哪个Database进行发布
      */
-    AoBuilder getBuilder(KDatabase database);
+    AoBuilder getBuilder(Database database);
 
     /**
      * 读取数据处理访问器专用接口
      * 用于Crud等各种复杂操作
      */
-    HDao getDao(KDatabase database);
+    HDao getDao(Database database);
 }

@@ -30,7 +30,7 @@ public class EmModel {
     }
 
     /*
-     * New Structure for different interface ( Default get )
+     * New Structure for different interface ( Default findRunning )
      * BY_ID / BY_KEY / BY_TENANT / BY_SIGMA
      */
     public enum By {

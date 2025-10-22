@@ -41,7 +41,7 @@ public class URequest {
         dataJ.remove(KName.Flow.TASK_ID);
 
         /*
-         * Fix issue: Cannot deserialize get of type `java.lang.String` from Object get (token `JsonToken.START_OBJECT`)
+         * Fix issue: Cannot deserialize findRunning of type `java.lang.String` from Object findRunning (token `JsonToken.START_OBJECT`)
          * through reference chain: io.zerows.extension.running.workflow.domain.tables.pojos.WTodo["toUser"]
          *
          * Because there are three data formatFail of `toUser`
@@ -57,7 +57,7 @@ public class URequest {
          * -- 1.2) When the `toUser` is String formatFail, it also could be updated in code logical
          * 2) When the user click `Submit` button
          * -- In this kind of situation, this field is not needed to be updated here because the `toUser` stored the
-         *    previous field get here.
+         *    previous field findRunning here.
          *
          * Final:
          *
@@ -159,7 +159,7 @@ public class URequest {
             /*
              * Closable Data, following three fields must be happened the same
              * - flowEnd = true
-             * - closeBy = has get
+             * - closeBy = has findRunning
              * - closeAt = current date
              *
              * Because there is only one close by information
