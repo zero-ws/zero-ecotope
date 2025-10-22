@@ -1,11 +1,12 @@
 package io.zerows.plugins.trash;
 
+import io.r2mo.base.dbe.DBS;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.codegen.annotations.Fluent;
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.database.jooq.JooqInfix;
+import io.zerows.epoch.store.DBSActor;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
 import org.jooq.Batch;
@@ -68,7 +69,8 @@ class TrashBuilder {
             .replace('.', '_')
             .replace('-', '_');
         this.tableName = "HIS_" + tableName;
-        this.context = JooqInfix.contextTrash();
+        final DBS dbs = DBSActor.ofDBS("master-history");   // 固定值
+        this.context = DBSActor.ofContext(dbs.getDatabase()); // JooqInfix.contextTrash();
     }
 
     @Fluent

@@ -8,8 +8,6 @@ import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.zerows.cosmic.plugins.cache.SharedActor;
 import io.zerows.cosmic.plugins.cache.SharedClient;
-import io.zerows.epoch.application.YmlCore;
-import io.zerows.epoch.database.jooq.JooqInfix;
 import io.zerows.extension.skeleton.exception._80214Exception417LoadingNotReady;
 import io.zerows.platform.metadata.KTimer;
 import io.zerows.plugins.office.excel.ExcelClient;
@@ -66,7 +64,8 @@ public class DataImport {
 
     private static void ensureEnvironment() {
         // 检查一：Jooq基础环境是否准备
-        final Configuration jooq = JooqInfix.get(YmlCore.jooq.PROVIDER);
+        // UPD-001: 由于 JooqInfix 废弃，此处待修正
+        final Configuration jooq = null; // JooqInfix.get(YmlCore.jooq.PROVIDER);
         Fn.jvmKo(Objects.isNull(jooq), _80214Exception417LoadingNotReady.class, "jooq / provider");
         // 检查二：Excel导入环境是否准备
         final ExcelClient excel = ExcelInfix.getClient();

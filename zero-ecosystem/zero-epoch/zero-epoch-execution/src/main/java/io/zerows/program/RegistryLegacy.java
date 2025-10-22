@@ -6,7 +6,6 @@ import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.application.YmlCore;
-import io.zerows.epoch.database.jooq.JooqInfix;
 import io.zerows.support.Ut;
 import io.zerows.support.base.FnBase;
 
@@ -35,7 +34,8 @@ class RegistryLegacy {
             final JsonArray bridges = Ut.valueJArray(initConfig, YmlCore.init.COMPILE);
             if (0 < bridges.size()) {
                 // BootJooqConfigurationException
-                JooqInfix.init(vertx);
+                // UPD-003: 由于 JooqInfix 废弃，此处待修正
+                // JooqInfix.init(vertx);
                 return registryBridge(bridges, vertx);
             } else {
                 return Ux.futureT();
