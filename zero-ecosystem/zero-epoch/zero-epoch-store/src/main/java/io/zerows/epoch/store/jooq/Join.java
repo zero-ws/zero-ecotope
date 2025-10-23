@@ -1,8 +1,10 @@
 package io.zerows.epoch.store.jooq;
 
 import cn.hutool.core.util.StrUtil;
+import io.r2mo.base.dbe.join.DBNode;
 import io.r2mo.typed.common.Kv;
 import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.metadata.MMAdapt;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;
@@ -10,6 +12,7 @@ import lombok.experimental.Accessors;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author lang : 2025-10-22
@@ -39,6 +42,20 @@ public class Join {
         this.from = from;
         this.fromField = StrUtil.isEmpty(fromField) ? KName.KEY : fromField;
         return this;
+    }
+
+    DBNode forFrom(final Kv<String, String> vectorPojo) {
+        return DBNode.of(this.from,
+            Optional.ofNullable(vectorPojo.key())
+                .map(pojoFile -> MMAdapt.of(pojoFile).vector())
+                .orElse(null));
+    }
+
+    DBNode forTo(final Kv<String, String> vectorPojo) {
+        return DBNode.of(this.to,
+            Optional.ofNullable(vectorPojo.value())
+                .map(pojoFile -> MMAdapt.of(pojoFile).vector())
+                .orElse(null));
     }
 
     public Join from(final Class<?> from) {

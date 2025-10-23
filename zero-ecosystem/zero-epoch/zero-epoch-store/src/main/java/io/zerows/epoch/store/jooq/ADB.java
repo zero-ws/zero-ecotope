@@ -30,6 +30,7 @@ import java.util.concurrent.ConcurrentMap;
 public class ADB {
 
     private static final Cc<String, ADB> CC_JOOQ = Cc.openThread();
+    private static final ConcurrentMap<Class<?>, AsyncMeta> META_CACHE = new ConcurrentHashMap<>();
 
     // region 基本变量定义和构造函数
     private final DBEx<?> dbe;
@@ -40,7 +41,9 @@ public class ADB {
      */
     private <T> ADB(final Class<T> daoCls, final DBS dbs, final R2Vector vector) {
         this.dbe = DBEx.of(daoCls, dbs, vector);
-        this.metadata = this.dbe.metadata();
+        final AsyncMeta meta = this.dbe.metadata();
+        META_CACHE.put(daoCls, meta);
+        this.metadata = meta;
     }
 
     public ConcurrentMap<String, Class<?>> metaTypes() {
@@ -95,13 +98,17 @@ public class ADB {
      * @return 复用或新建的 {@link ADB} 实例
      */
     static ADB of(final Class<?> daoCls, final String filename, final DBS dbs) {
-        Objects.requireNonNull(dbs, "[ ZERO ] 传入的数据源不可以为 null");
+        Objects.requireNonNull(dbs, "[ ZERO ] (Direct模式）传入的数据源不可以为 null");
         final R2Vector vector;
         if (StrUtil.isNotBlank(filename)) {
             vector = MMAdapt.of(filename).vector();
         } else {
             vector = null;
         }
+        return new ADB(daoCls, dbs, vector);
+    }
+
+    static ADB of(final Class<?> daoCls, final R2Vector vector, final DBS dbs) {
         final String cached = AsyncDBContext.cached(daoCls, dbs, vector);
         return CC_JOOQ.pick(() -> new ADB(daoCls, dbs, vector), cached);
     }

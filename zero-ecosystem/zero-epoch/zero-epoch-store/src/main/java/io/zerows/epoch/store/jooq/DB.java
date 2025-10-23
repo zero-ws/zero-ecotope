@@ -26,7 +26,7 @@ public class DB {
      * @return 复用或新建的 {@link ADB} 实例
      */
     public static ADB on(final Class<?> clazz) {
-        return ADB.of(clazz, null, DBSActor.ofDBS());
+        return ADB.of(clazz, (String) null, DBSActor.ofDBS());
     }
 
     /**
@@ -68,7 +68,7 @@ public class DB {
      * @return 复用或新建的 {@link ADB} 实例
      */
     public static ADB on(final Class<?> clazz, final DBS dbs) {
-        return ADB.of(clazz, null, dbs);
+        return ADB.of(clazz, (String) null, dbs);
     }
 
     /**
@@ -145,7 +145,7 @@ public class DB {
 
     // region 多表访问器（双表）
     public static ADJ on(final DBRef ref) {
-        return ADJ.of(ref, DBSActor.ofDBS());
+        return ADJ.of(DBSActor.ofDBS()).configure(ref);
     }
 
     public static ADJ on(final Join meta) {
@@ -166,7 +166,7 @@ public class DB {
 
     // ----- DBS 分割线
     public static ADJ on(final DBRef ref, final DBS dbs) {
-        return ADJ.of(ref, dbs);
+        return ADJ.of(dbs).configure(ref);
     }
 
     public static ADJ on(final Join meta, final DBS dbs) {
@@ -182,7 +182,12 @@ public class DB {
     }
 
     public static ADJ on(final Join meta, final Kv<String, String> vectorPojo, final DBS dbs) {
-        return ADJ.of(meta, vectorPojo, dbs);
+        /*
+         * FIX-DBE: 内部切换初始化流程，此处由于没有表名，无法构造完整的 DBRef，所以此处形成二阶段流程
+         * - 直接传入 DBRef，这种场景 DBRef 是完整的
+         * - 重新构造 DBRef，依赖 Join 对象，这种场景下构造的 DBRef 要在 configure 中去完善
+         */
+        return ADJ.of(dbs).configure(meta, vectorPojo);
     }
     // endregion
 }

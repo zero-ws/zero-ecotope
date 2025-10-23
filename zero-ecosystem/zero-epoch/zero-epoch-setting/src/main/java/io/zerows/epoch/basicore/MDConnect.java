@@ -1,11 +1,9 @@
 package io.zerows.epoch.basicore;
 
-import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.r2mo.base.dbe.join.DBNode;
-import io.r2mo.base.program.R2Vector;
 import io.vertx.core.json.JsonArray;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.MMAdapt;
@@ -15,6 +13,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Connect configuration data to
@@ -49,16 +48,19 @@ public class MDConnect implements Serializable {
      * @return 连接专用
      */
     public DBNode forJoin() {
-        final DBNode node = new DBNode();
-        node.entity(this.meta.pojo());      // 表实体信息
-        node.table(this.meta.table());      // 表名信息
-        node.key(this.key);                 // 主键信息
-        // 根据是否带有 pojo 计算 R2Vector
-        if (StrUtil.isNotEmpty(this.pojoFile)) {
-            final R2Vector vector = MMAdapt.of(this.pojoFile).vector();
-            node.vector(vector);
-        }
-        return node;
+        /*
+         * 赋值属性
+         * - dao
+         * - vector
+         * 上述两个属性是构造 ADB 必须的属性
+         */
+        return DBNode.of(this.meta.dao(),
+            Optional.ofNullable(this.pojoFile)
+                .map(pojoFile -> MMAdapt.of(pojoFile).vector())
+                /*
+                 * FIX-DBE: 表名在 JOIN 流程中要用来做缓存键，所以此处不可以返回 null，否则会引发 NPE 问题
+                 */
+                .orElse(null)).table(this.meta.table());
     }
 
 
