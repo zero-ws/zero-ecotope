@@ -31,7 +31,7 @@ public class OriginalNamingStrategy extends PropertyNamingStrategy {
                                       final AnnotatedMethod method, final String defaultName) {
         final String methodName = method.getName();
         String fieldName = "";
-        if (methodName.startsWith("findRunning")) {
+        if (methodName.startsWith("get")) {
             fieldName = methodName.substring(3);
         } else if (methodName.startsWith("is")) {
             fieldName = methodName.substring(2);

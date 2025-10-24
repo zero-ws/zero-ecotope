@@ -8,7 +8,7 @@ import io.zerows.component.destine.Hymn;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.KJoin;
 import io.zerows.epoch.store.jooq.DB;
-import io.zerows.epoch.store.jooq.Join;
+import io.zerows.epoch.store.jooq.OldJoin;
 import io.zerows.platform.enums.modeling.EmValue;
 import io.zerows.platform.exception._60050Exception501NotSupport;
 import io.zerows.platform.metadata.RDao;
@@ -231,7 +231,7 @@ public class HAtomReference implements HReference {
                     return DB.on(source.getClassDao()).fetchJAsync(condition);
                 } else {
                     // Join
-                    return DB.on(Join.of(
+                    return DB.on(OldJoin.of(
                         source.getClassDao(), source.getKeyJoin(),
                         target.getClassDao(), target.getKeyJoin()
                     )).fetchAsync(condition);
@@ -264,7 +264,7 @@ public class HAtomReference implements HReference {
                     return DB.on(source.getClassDao()).fetchJ(condition);
                 } else {
                     // Join
-                    return DB.on(Join.of(
+                    return DB.on(OldJoin.of(
                         source.getClassDao(), source.getKeyJoin(),
                         target.getClassDao(), target.getKeyJoin()
                     )).fetch(condition);

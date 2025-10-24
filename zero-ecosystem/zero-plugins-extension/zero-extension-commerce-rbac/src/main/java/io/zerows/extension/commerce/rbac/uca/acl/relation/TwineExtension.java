@@ -7,7 +7,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.UObject;
 import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.epoch.store.jooq.DB;
-import io.zerows.epoch.store.jooq.Join;
+import io.zerows.epoch.store.jooq.OldJoin;
 import io.zerows.extension.commerce.rbac.atom.ScConfig;
 import io.zerows.extension.commerce.rbac.bootstrap.ScPin;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.SUserDao;
@@ -78,7 +78,7 @@ class TwineExtension implements ScTwine<SUser> {
         }
         return TwineQr.normalize(qr, query)
             .compose(queryJ ->
-                DB.on(Join.of(
+                DB.on(OldJoin.of(
                     SUserDao.class, KName.MODEL_KEY,
                     qr.getClassDao()
                 )).searchAsync(queryJ)

@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.store.jooq.DB;
-import io.zerows.epoch.store.jooq.Join;
+import io.zerows.epoch.store.jooq.OldJoin;
 import io.zerows.extension.commerce.rbac.agent.service.business.ResourceStub;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.SActionDao;
 import io.zerows.extension.commerce.rbac.domain.tables.daos.SResourceDao;
@@ -33,7 +33,7 @@ public class ResourceActor {
          * - The permissionId ( S_ACTION ) could be null when the new resource created.
          */
         log.info("[ ZMOD ] 输入的查询条件：{}", query.encode());
-        return DB.on(Join.of(
+        return DB.on(OldJoin.of(
             SResourceDao.class,
             SActionDao.class, "resourceId"
         )).searchAsync(query);

@@ -56,7 +56,7 @@ public final class ADJ {
      *
      * @return 当前引用
      */
-    ADJ configure(final Join meta, final Kv<String, String> vectorPojo) {
+    ADJ configure(final OldJoin meta, final Kv<String, String> vectorPojo) {
         final DBNode nodeFrom = meta.forFrom(vectorPojo);
         final DBNode nodeTo = meta.forTo(vectorPojo);
         this.complete(nodeFrom, this.dbs);

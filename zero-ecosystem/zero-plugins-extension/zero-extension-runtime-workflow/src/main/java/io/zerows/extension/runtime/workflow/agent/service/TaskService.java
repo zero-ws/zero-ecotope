@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.epoch.store.jooq.DB;
-import io.zerows.epoch.store.jooq.Join;
+import io.zerows.epoch.store.jooq.OldJoin;
 import io.zerows.extension.runtime.workflow.atom.EngineOn;
 import io.zerows.extension.runtime.workflow.atom.configuration.MetaInstance;
 import io.zerows.extension.runtime.workflow.atom.runtime.WRecord;
@@ -34,7 +34,7 @@ public class TaskService implements TaskStub {
     @Override
     public Future<JsonObject> fetchQueue(final JsonObject condition) {
         final JsonObject combine = Ut.irAndQH(condition, KName.Flow.FLOW_END, Boolean.FALSE);
-        return DB.on(Join.of(
+        return DB.on(OldJoin.of(
                 WTodoDao.class, KName.Flow.TRACE_ID,
                 WTicketDao.class
             ))

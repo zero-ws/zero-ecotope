@@ -17,28 +17,29 @@ import java.util.Optional;
 /**
  * @author lang : 2025-10-22
  */
+@Deprecated
 @Data
 @Accessors(fluent = true, chain = true)
-public class Join {
+public class OldJoin {
     private Class<?> from;
     private String fromField;
     private Class<?> to;
     private String toField;
 
-    public Join(final Class<?> from, final String fromField, final Class<?> to, final String toField) {
+    public OldJoin(final Class<?> from, final String fromField, final Class<?> to, final String toField) {
         this.from = from;
         this.fromField = fromField;
         this.to = to;
         this.toField = toField;
     }
 
-    private Join() {
+    private OldJoin() {
     }
 
     @Setter(AccessLevel.NONE)
     private List<Kv<Class<?>, String>> others = new ArrayList<>();
 
-    public Join from(final Class<?> from, final String fromField) {
+    public OldJoin from(final Class<?> from, final String fromField) {
         this.from = from;
         this.fromField = StrUtil.isEmpty(fromField) ? KName.KEY : fromField;
         return this;
@@ -58,50 +59,50 @@ public class Join {
                 .orElse(null));
     }
 
-    public Join from(final Class<?> from) {
+    public OldJoin from(final Class<?> from) {
         this.from = from;
         this.fromField = KName.KEY;
         return this;
     }
 
-    public Join to(final Class<?> to, final String toField) {
+    public OldJoin to(final Class<?> to, final String toField) {
         this.to = to;
         this.toField = StrUtil.isEmpty(toField) ? KName.KEY : toField;
         return this;
     }
 
-    public Join to(final Class<?> to) {
+    public OldJoin to(final Class<?> to) {
         this.to = to;
         this.toField = KName.KEY;
         return this;
     }
 
-    public static Join of() {
-        return new Join();
+    public static OldJoin of() {
+        return new OldJoin();
     }
 
-    public static Join of(final Class<?> from, final Class<?> to) {
-        return new Join(from, KName.KEY, to, KName.KEY);
+    public static OldJoin of(final Class<?> from, final Class<?> to) {
+        return new OldJoin(from, KName.KEY, to, KName.KEY);
     }
 
-    public static Join of(final Class<?> from, final String fromField, final Class<?> to) {
-        return new Join(from, fromField, to, KName.KEY);
+    public static OldJoin of(final Class<?> from, final String fromField, final Class<?> to) {
+        return new OldJoin(from, fromField, to, KName.KEY);
     }
 
-    public static Join of(final Class<?> from, final Class<?> to, final String fromField) {
-        return new Join(from, KName.KEY, to, fromField);
+    public static OldJoin of(final Class<?> from, final Class<?> to, final String fromField) {
+        return new OldJoin(from, KName.KEY, to, fromField);
     }
 
-    public static Join of(final Class<?> from, final String fromField, final Class<?> to, final String toField) {
-        return new Join(from, fromField, to, toField);
+    public static OldJoin of(final Class<?> from, final String fromField, final Class<?> to, final String toField) {
+        return new OldJoin(from, fromField, to, toField);
     }
 
-    public Join add(final Class<?> joinEntity) {
+    public OldJoin add(final Class<?> joinEntity) {
         this.others.add(Kv.create(joinEntity, KName.KEY));
         return this;
     }
 
-    public Join add(final Class<?> joinEntity, final String joinOf) {
+    public OldJoin add(final Class<?> joinEntity, final String joinOf) {
         this.others.add(Kv.create(joinEntity, joinOf));
         return this;
     }

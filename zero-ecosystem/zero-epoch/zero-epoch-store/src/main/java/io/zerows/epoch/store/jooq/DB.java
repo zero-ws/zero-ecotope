@@ -148,19 +148,19 @@ public class DB {
         return ADJ.of(DBSActor.ofDBS()).configure(ref);
     }
 
-    public static ADJ on(final Join meta) {
+    public static ADJ on(final OldJoin meta) {
         return on(meta, null, null, DBSActor.ofDBS());
     }
 
-    public static ADJ on(final Join meta, final String leftPojo) {
+    public static ADJ on(final OldJoin meta, final String leftPojo) {
         return on(meta, leftPojo, null, DBSActor.ofDBS());
     }
 
-    public static ADJ on(final Join meta, final String leftPojo, final String rightPojo) {
+    public static ADJ on(final OldJoin meta, final String leftPojo, final String rightPojo) {
         return on(meta, leftPojo, rightPojo, DBSActor.ofDBS());
     }
 
-    public static ADJ on(final Join meta, final Kv<String, String> vectorPojo) {
+    public static ADJ on(final OldJoin meta, final Kv<String, String> vectorPojo) {
         return on(meta, vectorPojo, DBSActor.ofDBS());
     }
 
@@ -169,19 +169,19 @@ public class DB {
         return ADJ.of(dbs).configure(ref);
     }
 
-    public static ADJ on(final Join meta, final DBS dbs) {
+    public static ADJ on(final OldJoin meta, final DBS dbs) {
         return on(meta, null, null, dbs);
     }
 
-    public static ADJ on(final Join meta, final String leftPojo, final DBS dbs) {
+    public static ADJ on(final OldJoin meta, final String leftPojo, final DBS dbs) {
         return on(meta, leftPojo, null, dbs);
     }
 
-    public static ADJ on(final Join meta, final String leftPojo, final String rightPojo, final DBS dbs) {
+    public static ADJ on(final OldJoin meta, final String leftPojo, final String rightPojo, final DBS dbs) {
         return on(meta, Kv.create(leftPojo, rightPojo), dbs);
     }
 
-    public static ADJ on(final Join meta, final Kv<String, String> vectorPojo, final DBS dbs) {
+    public static ADJ on(final OldJoin meta, final Kv<String, String> vectorPojo, final DBS dbs) {
         /*
          * FIX-DBE: 内部切换初始化流程，此处由于没有表名，无法构造完整的 DBRef，所以此处形成二阶段流程
          * - 直接传入 DBRef，这种场景 DBRef 是完整的
@@ -189,5 +189,6 @@ public class DB {
          */
         return ADJ.of(dbs).configure(meta, vectorPojo);
     }
+
     // endregion
 }
