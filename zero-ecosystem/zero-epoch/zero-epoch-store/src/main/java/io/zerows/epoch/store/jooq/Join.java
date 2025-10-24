@@ -1,7 +1,7 @@
 package io.zerows.epoch.store.jooq;
 
 import cn.hutool.core.util.StrUtil;
-import io.r2mo.base.dbe.join.DBNode;
+import io.r2mo.base.dbe.common.DBNode;
 import io.r2mo.typed.common.Kv;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.MMAdapt;

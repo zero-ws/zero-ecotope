@@ -3,7 +3,7 @@ package io.zerows.epoch.basicore;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.r2mo.base.dbe.join.DBNode;
+import io.r2mo.base.dbe.common.DBNode;
 import io.vertx.core.json.JsonArray;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.MMAdapt;
@@ -37,10 +37,10 @@ public class MDConnect implements Serializable {
 
     /**
      * 使用 {@link MDConnect} 可直接构造 Join 所需的参数信息，注意一点就是 {@link MDConnect} 不能初始化字段，字段级别的
-     * 初始化只能在底层处理过程中完成，不可以在创建的时候处理，所以到时候只能调用{@link DBNode#put(String, Class)} 来追加
+     * 初始化只能在底层处理过程中完成，不可以在创建的时候处理，所以到时候只能调用{@link DBNode#types(String, Class)} 来追加
      * 和字段、类型相关的一系列信息，只要拥有了如下信息就可以完整完成 JOIN
      * <pre>
-     *     1. name = alias              / 提取数据时候专用
+     *     1. name = findAlias              / 提取数据时候专用
      *     2. name = {@link Class}      / 数据类型映射
      *     3. waitFor = ( key = value ) / JOIN 过程中的 ON 语句专用
      * </pre>
@@ -54,13 +54,12 @@ public class MDConnect implements Serializable {
          * - vector
          * 上述两个属性是构造 ADB 必须的属性
          */
-        return DBNode.of(this.meta.dao(),
-            Optional.ofNullable(this.pojoFile)
-                .map(pojoFile -> MMAdapt.of(pojoFile).vector())
-                /*
-                 * FIX-DBE: 表名在 JOIN 流程中要用来做缓存键，所以此处不可以返回 null，否则会引发 NPE 问题
-                 */
-                .orElse(null)).table(this.meta.table());
+        return DBNode.of(this.meta.dao(), Optional.ofNullable(this.pojoFile)
+            .map(pojoFile -> MMAdapt.of(pojoFile).vector())
+            /*
+             * FIX-DBE: 表名在 JOIN 流程中要用来做缓存键，所以此处不可以返回 null，否则会引发 NPE 问题
+             */
+            .orElse(null)).table(this.meta.table());
     }
 
 

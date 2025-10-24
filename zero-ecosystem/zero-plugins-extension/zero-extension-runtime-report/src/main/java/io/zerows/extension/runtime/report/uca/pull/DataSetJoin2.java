@@ -1,7 +1,7 @@
 package io.zerows.extension.runtime.report.uca.pull;
 
-import io.r2mo.base.dbe.join.DBNode;
-import io.r2mo.base.dbe.join.DBRef;
+import io.r2mo.base.dbe.common.DBNode;
+import io.r2mo.base.dbe.common.DBRef;
 import io.r2mo.typed.common.Kv;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
@@ -61,9 +61,9 @@ class DataSetJoin2 extends AbstractDataSet {
 
     /**
      * 构造多表访问器
-     * alias 的数据结构如
+     * findAlias 的数据结构如
      * <pre><code>
-     *     "alias": {
+     *     "findAlias": {
      *          "{TABLE1}": [
      *              field1,
      *              field2,
@@ -82,7 +82,7 @@ class DataSetJoin2 extends AbstractDataSet {
      *         "active.field": "key",
      *         "standby": "F_PAY_TERM",
      *         "standby.field": "category",
-     *         "alias": {
+     *         "findAlias": {
      *             "X_CATEGORY": [
      *                 "key",
      *                 "categoryId"
@@ -99,7 +99,7 @@ class DataSetJoin2 extends AbstractDataSet {
      *     1. X_CATEGORY JOIN F_PAY_TERM
      *     2. on X_CATEGORY.key = F_PAY_TERM.category
      *     3. 别名用于提取时使用
-     *        alias -> X_CATEGORY.key -> categoryId
+     *        findAlias -> X_CATEGORY.key -> categoryId
      *                 F_PAY_TERM.payTermId -> payTermId
      *     *: 此处非列名，全是属性名
      * </pre>
@@ -114,7 +114,7 @@ class DataSetJoin2 extends AbstractDataSet {
         for (final String table : this.aliasJ.fieldNames()) {
             final JsonArray array = Ut.valueJArray(this.aliasJ, table);
             if (2 != array.size()) {
-                log.warn("[ ZERO ] 请检查 alias 的配置信息：{} / {}", table, array.encode());
+                log.warn("[ ZERO ] 请检查 findAlias 的配置信息：{} / {}", table, array.encode());
                 continue;
             }
             final String name = array.getString(0);

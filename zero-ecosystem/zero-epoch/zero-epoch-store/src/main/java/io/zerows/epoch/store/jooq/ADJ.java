@@ -2,9 +2,8 @@ package io.zerows.epoch.store.jooq;
 
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import io.r2mo.base.dbe.DBS;
-import io.r2mo.base.dbe.join.DBNode;
-import io.r2mo.base.dbe.join.DBRef;
-import io.r2mo.base.program.R2Vector;
+import io.r2mo.base.dbe.common.DBNode;
+import io.r2mo.base.dbe.common.DBRef;
 import io.r2mo.typed.cc.Cc;
 import io.r2mo.typed.common.Kv;
 import io.vertx.core.Future;
@@ -14,8 +13,6 @@ import io.zerows.component.qr.Ir;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Map;
-import java.util.Objects;
-import java.util.UUID;
 
 @Slf4j
 public final class ADJ {
@@ -110,32 +107,33 @@ public final class ADJ {
 
     @CanIgnoreReturnValue
     private DBNode complete(final DBNode node, final DBS dbs) {
-        Objects.requireNonNull(dbs, "[ ZERO ] （Join模式）传入的数据源不可以为 null");
-        final R2Vector vector = node.vector();
-        /*
-         * FIX-DBE: 此处直接调用 dao() 来提取，而不是 entity() 提取，entity 是后期完成的
-         * 旧代码：final Class<?> daoCls = node.entity();
-         */
-        final Class<?> daoCls = node.dao();
-        final ADB adb = ADB.of(daoCls, vector, dbs);
-        /*
-         * 反向书写属性值，针对 node 节点执行信息补充
-         * 1. 已设置：
-         *    - dao
-         *    - vector
-         * 2. 待设置：
-         *    - entity
-         *    - table
-         *    - types
-         *    - key
-         */
-        node.table(adb.metaTable());
-        node.types(adb.metaTypes());
-        node.entity(adb.metaEntity());
-        node.key(UUID.randomUUID().toString());
-        log.info("[ ZERO ] 最终构造的 node 节点信息：{}", node);
-        CC_ADB.put(daoCls, adb);
-        return node;
+        //        Objects.requireNonNull(dbs, "[ ZERO ] （Join模式）传入的数据源不可以为 null");
+        //        final R2Vector vector = node.vector();
+        //        /*
+        //         * FIX-DBE: 此处直接调用 dao() 来提取，而不是 entity() 提取，entity 是后期完成的
+        //         * 旧代码：final Class<?> daoCls = node.entity();
+        //         */
+        //        final Class<?> daoCls = node.dao();
+        //        final ADB adb = ADB.of(daoCls, vector, dbs);
+        //        /*
+        //         * 反向书写属性值，针对 node 节点执行信息补充
+        //         * 1. 已设置：
+        //         *    - dao
+        //         *    - vector
+        //         * 2. 待设置：
+        //         *    - entity
+        //         *    - table
+        //         *    - types
+        //         *    - key
+        //         */
+        //        node.table(adb.metaTable());
+        //        node.types(adb.metaTypes());
+        //        node.entity(adb.metaEntity());
+        //        node.key(UUID.randomUUID().toString());
+        //        log.info("[ ZERO ] 最终构造的 node 节点信息：{}", node);
+        //        CC_ADB.put(daoCls, adb);
+        //        return node;
+        return null;
     }
 
     private String findTable(final Class<?> vertxDao) {
@@ -192,7 +190,7 @@ public final class ADJ {
     }
 
     public JsonArray fetch(final JsonObject params) {
-        return null; // this.fetch(toQr(new JsonObject().put(VName.KEY_CRITERIA, params)));
+        return null; // this.fetch(toQr(new JsonObject().types(VName.KEY_CRITERIA, params)));
     }
 
     public Future<JsonArray> fetchAsync(final Ir qr) {
@@ -200,7 +198,7 @@ public final class ADJ {
     }
 
     public Future<JsonArray> fetchAsync(final JsonObject params) {
-        return null; // fetchAsync(toQr(new JsonObject().put(VName.KEY_CRITERIA, params)));
+        return null; // fetchAsync(toQr(new JsonObject().types(VName.KEY_CRITERIA, params)));
     }
 
     // -------------------- Crud Operation -----------

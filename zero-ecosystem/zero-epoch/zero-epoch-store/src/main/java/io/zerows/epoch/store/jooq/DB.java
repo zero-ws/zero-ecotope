@@ -1,7 +1,7 @@
 package io.zerows.epoch.store.jooq;
 
 import io.r2mo.base.dbe.DBS;
-import io.r2mo.base.dbe.join.DBRef;
+import io.r2mo.base.dbe.common.DBRef;
 import io.r2mo.typed.common.Kv;
 import io.zerows.epoch.basicore.MDConnect;
 import io.zerows.epoch.store.DBSActor;
