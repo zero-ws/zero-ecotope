@@ -1,12 +1,12 @@
 package io.zerows.mbse;
 
+import io.r2mo.base.dbe.Join;
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.destine.Hymn;
 import io.zerows.epoch.metadata.KJoin;
 import io.zerows.epoch.store.jooq.ADJ;
 import io.zerows.epoch.store.jooq.DB;
-import io.zerows.epoch.store.jooq.OldJoin;
 import io.zerows.mbse.metadata.KModule;
 import io.zerows.support.Ut;
 
@@ -53,7 +53,6 @@ class HOneJoin implements HOne<ADJ> {
          */
         final String keyJoin = source.getKeyJoin();
 
-        final OldJoin dbJoin = OldJoin.of().from(module.getDaoCls(), keyJoin);                // LEFT
         /*
          * 构造 Hymn 接口（String模式），直接根据 identifier 解析连接点相关信息，然后执行连接点
          * 的 JOIN 设置，此处连接点是根据 connect 中的 identifier 计算而得，并且在 JOIN 模式下
@@ -68,7 +67,11 @@ class HOneJoin implements HOne<ADJ> {
         final KJoin.Point target = hymn.pointer(connect.identifier());
         Objects.requireNonNull(target);
         final Class<?> daoCls = connect.getDaoCls();
-        dbJoin.to(daoCls, target.getKeyJoin());                                         // RIGHT
+
+        final Join dbJoin = Join.of(
+            module.getDaoCls(), keyJoin,        // LEFT
+            daoCls, target.getKeyJoin()         // RIGHT
+        );
 
 
         // 绑定 Pojo

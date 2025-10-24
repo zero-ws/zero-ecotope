@@ -1,6 +1,7 @@
 package io.zerows.epoch.store.jooq;
 
 import io.r2mo.base.dbe.DBS;
+import io.r2mo.base.dbe.Join;
 import io.r2mo.base.dbe.common.DBRef;
 import io.r2mo.typed.common.Kv;
 import io.zerows.epoch.basicore.MDConnect;
@@ -145,49 +146,49 @@ public class DB {
 
     // region 多表访问器（双表）
     public static ADJ on(final DBRef ref) {
-        return ADJ.of(DBSActor.ofDBS()).configure(ref);
+        return ADJ.of(ref, DBSActor.ofDBS());
     }
 
-    public static ADJ on(final OldJoin meta) {
+    public static ADJ on(final Join meta) {
         return on(meta, null, null, DBSActor.ofDBS());
     }
 
-    public static ADJ on(final OldJoin meta, final String leftPojo) {
+    public static ADJ on(final Join meta, final String leftPojo) {
         return on(meta, leftPojo, null, DBSActor.ofDBS());
     }
 
-    public static ADJ on(final OldJoin meta, final String leftPojo, final String rightPojo) {
+    public static ADJ on(final Join meta, final String leftPojo, final String rightPojo) {
         return on(meta, leftPojo, rightPojo, DBSActor.ofDBS());
     }
 
-    public static ADJ on(final OldJoin meta, final Kv<String, String> vectorPojo) {
+    public static ADJ on(final Join meta, final Kv<String, String> vectorPojo) {
         return on(meta, vectorPojo, DBSActor.ofDBS());
     }
 
     // ----- DBS 分割线
     public static ADJ on(final DBRef ref, final DBS dbs) {
-        return ADJ.of(dbs).configure(ref);
+        return ADJ.of(ref, dbs);
     }
 
-    public static ADJ on(final OldJoin meta, final DBS dbs) {
+    public static ADJ on(final Join meta, final DBS dbs) {
         return on(meta, null, null, dbs);
     }
 
-    public static ADJ on(final OldJoin meta, final String leftPojo, final DBS dbs) {
+    public static ADJ on(final Join meta, final String leftPojo, final DBS dbs) {
         return on(meta, leftPojo, null, dbs);
     }
 
-    public static ADJ on(final OldJoin meta, final String leftPojo, final String rightPojo, final DBS dbs) {
+    public static ADJ on(final Join meta, final String leftPojo, final String rightPojo, final DBS dbs) {
         return on(meta, Kv.create(leftPojo, rightPojo), dbs);
     }
 
-    public static ADJ on(final OldJoin meta, final Kv<String, String> vectorPojo, final DBS dbs) {
+    public static ADJ on(final Join meta, final Kv<String, String> vectorPojo, final DBS dbs) {
         /*
          * FIX-DBE: 内部切换初始化流程，此处由于没有表名，无法构造完整的 DBRef，所以此处形成二阶段流程
          * - 直接传入 DBRef，这种场景 DBRef 是完整的
          * - 重新构造 DBRef，依赖 Join 对象，这种场景下构造的 DBRef 要在 configure 中去完善
          */
-        return ADJ.of(dbs).configure(meta, vectorPojo);
+        return ADJ.of(meta, dbs, vectorPojo);
     }
 
     // endregion

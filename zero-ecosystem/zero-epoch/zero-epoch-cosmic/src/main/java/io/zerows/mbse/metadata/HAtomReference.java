@@ -1,5 +1,6 @@
 package io.zerows.mbse.metadata;
 
+import io.r2mo.base.dbe.Join;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
@@ -8,7 +9,6 @@ import io.zerows.component.destine.Hymn;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.KJoin;
 import io.zerows.epoch.store.jooq.DB;
-import io.zerows.epoch.store.jooq.OldJoin;
 import io.zerows.platform.enums.modeling.EmValue;
 import io.zerows.platform.exception._60050Exception501NotSupport;
 import io.zerows.platform.metadata.RDao;
@@ -231,7 +231,7 @@ public class HAtomReference implements HReference {
                     return DB.on(source.getClassDao()).fetchJAsync(condition);
                 } else {
                     // Join
-                    return DB.on(OldJoin.of(
+                    return DB.on(Join.of(
                         source.getClassDao(), source.getKeyJoin(),
                         target.getClassDao(), target.getKeyJoin()
                     )).fetchAsync(condition);
@@ -264,7 +264,7 @@ public class HAtomReference implements HReference {
                     return DB.on(source.getClassDao()).fetchJ(condition);
                 } else {
                     // Join
-                    return DB.on(OldJoin.of(
+                    return DB.on(Join.of(
                         source.getClassDao(), source.getKeyJoin(),
                         target.getClassDao(), target.getKeyJoin()
                     )).fetch(condition);

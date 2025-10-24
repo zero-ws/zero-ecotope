@@ -1,11 +1,11 @@
 package io.zerows.extension.runtime.workflow.agent.service;
 
+import io.r2mo.base.dbe.Join;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.epoch.store.jooq.DB;
-import io.zerows.epoch.store.jooq.OldJoin;
 import io.zerows.extension.runtime.workflow.atom.EngineOn;
 import io.zerows.extension.runtime.workflow.atom.configuration.MetaInstance;
 import io.zerows.extension.runtime.workflow.atom.runtime.WRecord;
@@ -34,7 +34,7 @@ public class TaskService implements TaskStub {
     @Override
     public Future<JsonObject> fetchQueue(final JsonObject condition) {
         final JsonObject combine = Ut.irAndQH(condition, KName.Flow.FLOW_END, Boolean.FALSE);
-        return DB.on(OldJoin.of(
+        return DB.on(Join.of(
                 WTodoDao.class, KName.Flow.TRACE_ID,
                 WTicketDao.class
             ))
