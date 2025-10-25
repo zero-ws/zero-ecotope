@@ -6,133 +6,81 @@ import io.r2mo.function.Fn;
 import io.zerows.specification.development.compiled.HBundle;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 /**
- * 扫描加速版：
- * 1) 前缀匹配器预编译 + 去冗余
- * 2) 跳过结果缓存（包名 -> 是否跳过）
- * 3) 全流程并行 + 无锁集合
- * 4) 最后再做 ClassFilter 校验
+ * 扫描加速版 🚀（Trie 前缀匹配 + 包级跳过缓存 + 并行流 + 无锁集合）
+ *
+ * 语义保持不变：
+ * - 全量发现顶级类 → 黑名单前缀跳过（包名 startsWith）→ 并行装载 → 最终 ClassFilter::isValid 过滤
+ * - 不指定“只扫描哪些包”，仅用黑名单跳过
+ * - 仅输出一条总览日志
  */
 @Slf4j
 @SuppressWarnings("all")
 class ClassScannerCommon implements ClassScanner {
 
-    /** 去冗余后的前缀匹配器（只在类加载前判一次） */
-    private static final PrefixMatcher SKIP_MATCHER = PrefixMatcher.compile(ClassFilterPackage.SKIP_PACKAGE);
+    /** 黑名单前缀匹配器（去重/去冗余后构建 Trie） */
+    private static final ClassMatcherTrie SKIP_MATCHER =
+        ClassMatcherTrie.compile(ClassFilterPackage.SKIP_PACKAGE);
 
-    /** 包名 -> 是否跳过 的缓存，避免重复 startsWith */
+    /** 包名 -> 是否跳过 的缓存，避免对同包反复匹配（并发场景下命中更高） */
     private static final ConcurrentMap<String, Boolean> SKIP_CACHE = new ConcurrentHashMap<>(4096);
 
-    /** 并发结果集合（比 synchronizedSet 更少锁竞争） */
+    /** 并发结果集合（比 Collections.synchronizedSet 更少锁竞争） */
     private static Set<Class<?>> newConcurrentSet() {
         return ConcurrentHashMap.newKeySet();
     }
 
     @Override
     public Set<Class<?>> scan(final HBundle bundle) {
+        final long t0 = System.nanoTime();
         final ClassLoader loader = Thread.currentThread().getContextClassLoader();
-        final Set<Class<?>> classSet = newConcurrentSet();
+        final Set<Class<?>> loaded = newConcurrentSet();
 
-        Fn.jvmAt(() -> {
-            final ClassPath cp = ClassPath.from(loader);
-            final ImmutableSet<ClassPath.ClassInfo> all = cp.getTopLevelClasses();
+        final int totalTopLevel = Fn.jvmOr(() -> {
+            int total = 0;
+            try {
+                final ClassPath cp = ClassPath.from(loader);
+                final ImmutableSet<ClassPath.ClassInfo> all = cp.getTopLevelClasses();
+                total = all.size();
 
-            log.info("[ZERO] Skip roots: {}, (deduped: {})",
-                ClassFilterPackage.SKIP_PACKAGE.length, SKIP_MATCHER.size());
-
-            // 先过滤包，再并行装载
-            all.parallelStream() // 并行遍历
-                .map(ci -> ci)   // 保留 ClassInfo
-                .filter(ci -> {
-                    final String pkg = ci.getPackageName();
-                    // 包级跳过判定带缓存
-                    return !SKIP_CACHE.computeIfAbsent(pkg, SKIP_MATCHER::matches);
-                })
-                .forEach(ci -> {
-                    try {
-                        System.out.println(ci.getPackageName());
-                        // 避免 ClassInfo.load() 的内部异常包装，直接走 loader
-                        final Class<?> cls = loader.loadClass(ci.getName());
-                        classSet.add(cls);
-                    } catch (ClassNotFoundException | NoClassDefFoundError e) {
-                        // 依赖可达性问题：忽略但不打印，保持扫描快速安静
-                    } catch (LinkageError e) {
-                        // 版本冲突/重复类等链接错误，同样跳过
-                    } catch (Throwable t) {
-                        // 兜底，避免扫描中断；如需排障可改为 debug 级别打印
-                    }
-                });
+                // 并行 + 无序，保持你原先的 computeIfAbsent 方案（在你的环境里更快）
+                StreamSupport.stream(all.spliterator(), true).unordered()
+                    .filter(ci -> {
+                        final String pkg = ci.getPackageName();
+                        return !SKIP_CACHE.computeIfAbsent(pkg, SKIP_MATCHER::matches);
+                    })
+                    .forEach(ci -> {
+                        try {
+                            final Class<?> cls = loader.loadClass(ci.getName());
+                            loaded.add(cls);
+                        } catch (ClassNotFoundException | NoClassDefFoundError e) {
+                            // 静默：依赖不可达
+                        } catch (Exception e) {
+                            // 静默：其它受检/运行时异常
+                        }
+                        // 不额外处理 LinkageError（按你的要求）
+                    });
+            } catch (Exception ignore) {
+                // 保持扫描不中断
+            }
+            return total;
         });
 
-        // 最终合法性过滤（并行）
-        return classSet.parallelStream()
+        // 最终合法性过滤（并行）—— 与旧版保持一致
+        final Set<Class<?>> result = loaded.parallelStream()
             .filter(ClassFilter::isValid)
             .collect(Collectors.toCollection(ClassScannerCommon::newConcurrentSet));
-    }
 
-    // ------------------------------------------------------------
-    //              高性能前缀匹配器（去冗余 + 线性匹配）
-    // ------------------------------------------------------------
-    private static final class PrefixMatcher {
-        private final String[] roots; // 去冗余后的根前缀，已按长度升序
+        final long t1 = System.nanoTime();
+        log.info("[ ZERO ] 扫描完成：{}/{}，总耗时={} ms 📊",
+            result.size(), totalTopLevel, (t1 - t0) / 1_000_000L);
 
-        private PrefixMatcher(String[] roots) {
-            this.roots = roots;
-        }
-
-        /** 构建时：去重、去冗余（如果存在 'org.apache' 就移除 'org.apache.xxx'）并按长度升序 */
-        static PrefixMatcher compile(String[] raw) {
-            if (raw == null || raw.length == 0) return new PrefixMatcher(new String[0]);
-
-            // 去重
-            final Set<String> uniq = new HashSet<>(raw.length * 2);
-            for (String s : raw) {
-                if (s != null && !s.isEmpty()) {
-                    uniq.add(s.trim());
-                }
-            }
-            // 升序（长度 + 字典序），便于做“是否被更短前缀覆盖”的判断
-            final List<String> list = new ArrayList<>(uniq);
-            list.sort((a, b) -> {
-                int la = a.length(), lb = b.length();
-                return la == lb ? a.compareTo(b) : Integer.compare(la, lb);
-            });
-
-            // 去冗余：如果当前前缀被已选更短前缀覆盖，则丢弃
-            final List<String> dedup = new ArrayList<>(list.size());
-            outer:
-            for (String p : list) {
-                for (String kept : dedup) {
-                    if (p.startsWith(kept)) {
-                        // p 被 kept 覆盖，丢弃
-                        continue outer;
-                    }
-                }
-                dedup.add(p);
-            }
-
-            return new PrefixMatcher(dedup.toArray(new String[0]));
-        }
-
-        /** 是否匹配任一根前缀（线性扫描，对已压缩后的 roots 性能足够） */
-        boolean matches(String pkgOrClass) {
-            if (pkgOrClass == null || pkgOrClass.isEmpty()) return true;
-            for (String r : roots) {
-                if (pkgOrClass.startsWith(r)) return true;
-            }
-            return false;
-        }
-
-        int size() {
-            return roots.length;
-        }
+        return result;
     }
 }

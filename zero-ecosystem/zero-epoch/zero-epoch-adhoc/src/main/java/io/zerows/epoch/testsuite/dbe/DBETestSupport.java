@@ -45,12 +45,12 @@ public abstract class DBETestSupport extends AppIoTestSupport {
         if (!containerStarted.get()) {
             synchronized (DBETestSupport.class) {
                 if (!containerStarted.get()) {
-                    log.info("🚀 Starting ZeroLauncher...");
+                    log.info("[ MOMO ] 🚀 Starting ZeroLauncher...");
 
                     // 创建启动类实例
                     final Class<?> startupClass = this.getStartupClass();
                     if (startupClass == null) {
-                        context.failNow(new IllegalArgumentException("Startup class cannot be null"));
+                        context.failNow(new IllegalArgumentException("[ MOMO ] Startup class cannot be null"));
                         return;
                     }
 
@@ -59,13 +59,13 @@ public abstract class DBETestSupport extends AppIoTestSupport {
                         vertx = vertxInstance;
                         containerStarted.set(true);
                         startupLatch.countDown(); // 🔓 释放等待的测试
-                        log.info("✅ ZeroLauncher started successfully");
+                        log.info("[ MOMO ] ✅ ZeroLauncher started successfully");
                         context.completeNow();
                     }));
 
                     // 等待启动完成
                     if (!startupLatch.await(30, TimeUnit.SECONDS)) {
-                        log.error("❌ ZeroLauncher startup timeout after 30 seconds");
+                        log.error("[ MOMO ] ❌ ZeroLauncher startup timeout after 30 seconds");
                         context.failNow(new RuntimeException("Container startup timeout"));
                     }
                 } else {
@@ -101,11 +101,11 @@ public abstract class DBETestSupport extends AppIoTestSupport {
                 if (startupLatch.await(30, TimeUnit.SECONDS)) {
                     context.completeNow();
                 } else {
-                    context.failNow(new RuntimeException("Container startup timeout"));
+                    context.failNow(new RuntimeException("[ MOMO ] Container startup timeout"));
                 }
             } catch (final InterruptedException e) {
                 Thread.currentThread().interrupt();
-                context.failNow(new RuntimeException("Wait interrupted", e));
+                context.failNow(new RuntimeException("[ MOMO ] Wait interrupted", e));
             }
         }
     }
@@ -115,7 +115,7 @@ public abstract class DBETestSupport extends AppIoTestSupport {
      */
     protected Vertx getCurrentVertx() {
         if (!containerStarted.get()) {
-            throw new IllegalStateException("Container not started yet. Use VertxTestContext to wait for startup.");
+            throw new IllegalStateException("[ MOMO ] Container not started yet. Use VertxTestContext to wait for startup.");
         }
         return vertx;
     }
@@ -125,7 +125,7 @@ public abstract class DBETestSupport extends AppIoTestSupport {
      */
     protected ZeroLauncher<Vertx> getContainer() {
         if (!containerStarted.get()) {
-            throw new IllegalStateException("Container not started yet. Use VertxTestContext to wait for startup.");
+            throw new IllegalStateException("[ MOMO ] Container not started yet. Use VertxTestContext to wait for startup.");
         }
         return container;
     }
@@ -147,11 +147,11 @@ public abstract class DBETestSupport extends AppIoTestSupport {
                     Fn.jvmAt(consumer);
                     context.completeNow();
                 } else {
-                    context.failNow(new RuntimeException("Container startup timeout"));
+                    context.failNow(new RuntimeException("[ MOMO ] Container startup timeout"));
                 }
             } catch (final InterruptedException e) {
                 Thread.currentThread().interrupt();
-                context.failNow(new RuntimeException("Wait interrupted", e));
+                context.failNow(new RuntimeException("[ MOMO ] Wait interrupted", e));
             }
         }
     }
