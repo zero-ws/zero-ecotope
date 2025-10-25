@@ -1,4 +1,4 @@
-package io.zerows.plugins.store.liquibase;
+package io.zerows.plugins.liquibase;
 
 import io.zerows.epoch.constant.KName;
 import io.zerows.platform.ENV;

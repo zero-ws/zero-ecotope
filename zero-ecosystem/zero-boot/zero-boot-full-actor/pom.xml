@@ -24,6 +24,24 @@
             <artifactId>zero-boot-mini-actor</artifactId>
             <version>${zero.version}</version>
         </dependency>
+        <!--
+        静态插件
+        - trash
+        - flyway
+        - liquibase
+        -->
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-plugins-trash</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-plugins-flyway</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-plugins-liquibase</artifactId>
+        </dependency>
 
         <!-- 核心底层 -->
         <dependency>
@@ -108,10 +126,6 @@
         </dependency>
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-plugins-trash</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.zerows</groupId>
             <artifactId>zero-plugins-integration-sms</artifactId>
         </dependency>
         <dependency>
@@ -129,10 +143,6 @@
         <dependency>
             <groupId>io.zerows</groupId>
             <artifactId>zero-plugins-store-elasticsearch</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.zerows</groupId>
-            <artifactId>zero-plugins-store-liquibase</artifactId>
         </dependency>
         <dependency>
             <groupId>io.zerows</groupId>

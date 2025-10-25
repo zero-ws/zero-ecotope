@@ -24,7 +24,7 @@ import java.util.Objects;
  *
  * @author lang : 2025-10-13
  */
-@Actor("SESSION")
+@Actor(value = "SESSION", configured = false)
 @Slf4j
 public class SessionActor extends AbstractHActor {
     private static final SessionManager MANAGER = SessionManager.of();

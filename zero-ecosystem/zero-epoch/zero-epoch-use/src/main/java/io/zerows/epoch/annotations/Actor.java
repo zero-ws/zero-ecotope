@@ -47,5 +47,5 @@ public @interface Actor {
      *
      * @return 是否配置
      */
-    boolean configured() default false;
+    boolean configured() default true;
 }

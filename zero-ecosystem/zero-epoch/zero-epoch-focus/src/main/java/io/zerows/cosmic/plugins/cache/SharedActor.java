@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * @author lang : 2025-10-15
  */
-@Actor("SHARE")
+@Actor(value = "SHARE", configured = false)
 @Slf4j
 public class SharedActor extends AbstractHActor {
 

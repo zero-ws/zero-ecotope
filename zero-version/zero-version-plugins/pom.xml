@@ -14,15 +14,25 @@
     <packaging>pom</packaging>
     <dependencyManagement>
         <dependencies>
-            <!-- ================= 静态插件 ================== -->
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-plugins-common-shell</artifactId>
+                <artifactId>zero-plugins-trash</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-plugins-trash</artifactId>
+                <artifactId>zero-plugins-flyway</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-plugins-liquibase</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <!-- ================= 静态插件 ================== -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-plugins-common-shell</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>
@@ -49,11 +59,6 @@
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-plugins-store-elasticsearch</artifactId>
-                <version>${zero.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.zerows</groupId>
-                <artifactId>zero-plugins-store-liquibase</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>

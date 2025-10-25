@@ -1,4 +1,4 @@
-package io.zerows.plugins.store.liquibase;
+package io.zerows.plugins.liquibase;
 
 import liquibase.database.Database;
 import liquibase.database.jvm.JdbcConnection;

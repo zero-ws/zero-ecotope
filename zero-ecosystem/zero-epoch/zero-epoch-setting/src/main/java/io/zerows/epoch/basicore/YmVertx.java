@@ -1,5 +1,7 @@
 package io.zerows.epoch.basicore;
 
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.vertx.core.json.JsonObject;
@@ -11,10 +13,14 @@ import io.zerows.platform.annotations.ClassYml;
 import io.zerows.support.Ut;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 /**
  * {@link YmSpec.vertx}
@@ -34,6 +40,22 @@ public class YmVertx extends InPreVertx implements Serializable {
     @JsonSerialize(using = JsonObjectSerializer.class)
     @JsonDeserialize(using = JsonObjectDeserializer.class)
     private JsonObject shared;
+
+    @JsonIgnore
+    @Accessors(fluent = true, chain = true)
+    private ConcurrentMap<String, JsonObject> extension = new ConcurrentHashMap<>();
+
+    @JsonAnySetter
+    public YmVertx put(final String configKey, final Object config) {
+        // this.extension.put(configKey, config);
+        if (config instanceof final JsonObject configJ) {
+            this.extension.put(configKey, configJ);
+        } else if (config instanceof final Map<?, ?> map) {
+            final JsonObject configJ = JsonObject.mapFrom(map);
+            this.extension.put(configKey, configJ);
+        }
+        return this;
+    }
 
     /**
      * 🏗️ 实例配置类

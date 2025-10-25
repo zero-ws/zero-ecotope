@@ -11,7 +11,7 @@
 
     <artifactId>zero-plugins-trash</artifactId>
     <!-- Higher dependency -->
-    <name>Zero::Plugins::🧩 - Common Trash</name>
+    <name>Zero::Plugins::🧩 - Trash</name>
     <dependencies>
         <dependency>
             <groupId>io.zerows</groupId>

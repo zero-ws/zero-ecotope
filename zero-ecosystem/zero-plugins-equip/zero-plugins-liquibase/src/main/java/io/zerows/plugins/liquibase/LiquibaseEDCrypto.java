@@ -1,4 +1,4 @@
-package io.zerows.plugins.store.liquibase;
+package io.zerows.plugins.liquibase;
 
 import io.r2mo.base.secure.EDPair;
 import io.r2mo.jce.component.secure.AlgNorm;

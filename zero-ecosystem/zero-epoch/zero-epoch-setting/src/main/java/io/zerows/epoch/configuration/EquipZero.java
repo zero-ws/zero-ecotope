@@ -11,6 +11,7 @@ import io.zerows.epoch.basicore.YmVertx;
 import io.zerows.epoch.basicore.YmWebSocket;
 import io.zerows.epoch.metadata.MMComponent;
 import io.zerows.platform.enums.EmApp;
+import io.zerows.specification.configuration.HActor;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HSetting;
 import io.zerows.support.Ut;
@@ -23,6 +24,23 @@ import java.util.function.Supplier;
 /**
  * 将 {@link YmConfiguration} 转换成 {@link HSetting} 的核心实现逻辑，有必要会更改 {@link HSetting} 的接口设计，以
  * 保证为上层提供整个配置服务的能力，代码执行到此处已完成了 Nacos 对接，所以此处不再考虑配置本身的来源问题。
+ * 插件配置 / 扩展配置
+ * <pre>
+ *     插件配置：通常是原生配置，对应 {@link EmApp.Native#values()} 中的值，特征：
+ *     - 不论 vertx.yml 中是否存在配置键值，这些插件还是会启动
+ *     - 配置信息只是为了扩展这些 {@link HActor}
+ *
+ *     扩展配置：通常是业务层配置，对应自由的 String 值，特征：
+ *     - 想要启动必须在 Maven 配置中防止对应的含有 {@link HActor} 的依赖项
+ *     - 如果配置信息中忘记了 configured 中指定的配置项，会抛出警告信息，并且跳过不启动（可选）
+ * </pre>
+ * 扩展配置的源头
+ * <pre>
+ *     1. vertx.yml 中的根路径配置
+ *         / 这种一般是自定义、非标准化的配置信息
+ *     2. vertx.yml 中 vertx 节点之下的配置
+ *         / 这种一般是标准化的配置，虽然位于 zero-plugins- 插件模块中，但配置键还是会放在 extension 扩展中
+ * </pre>
  *
  * @author lang : 2025-10-08
  */
@@ -41,6 +59,9 @@ class EquipZero implements Equip {
 
         // 添加 vertx 核心配置
         this.initialize(setting, configuration.getVertx());
+
+        // 添加 vertx 扩展配置 -> extension 作为扩展而不是插件
+        this.initialize(setting, configuration.getVertx().extension());
 
         // 扩展配置 extension 核心
         this.initialize(setting, configuration.extension());

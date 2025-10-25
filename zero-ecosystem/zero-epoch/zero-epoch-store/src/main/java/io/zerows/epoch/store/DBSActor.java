@@ -25,7 +25,7 @@ import javax.sql.DataSource;
 /**
  * @author lang : 2025-10-17
  */
-@Actor(value = "DATABASE", sequence = -1017, configured = true)
+@Actor(value = "DATABASE", sequence = -1017)
 @Slf4j
 public class DBSActor extends AbstractHActor {
 
