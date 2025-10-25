@@ -35,16 +35,13 @@ import java.util.Objects;
 public final class ADJ {
     private static final Cc<String, ADJ> CC_ADB = Cc.openThread();
 
-    private final DBS dbs;
     private final DBJx dbj;
 
     private ADJ(final DBRef ref, final DBS dbs) {
-        this.dbs = dbs;
-        this.dbj = DBJx.of(ref, this.dbs);
+        this.dbj = DBJx.of(ref, dbs);
     }
 
     private ADJ(final Join join, final DBS dbs) {
-        this.dbs = dbs;
         this.dbj = DBJx.of(join, dbs);
     }
 
@@ -65,11 +62,12 @@ public final class ADJ {
     }
 
     public ADJ alias(final Class<?> vertxDao, final String name, final String alias) {
+        this.dbj.alias(vertxDao, name, alias);
         return this;
     }
 
     public ADJ alias(final Class<?> vertxDao, final Map<String, String> waitFor) {
-
+        this.dbj.alias(vertxDao, waitFor);
         return this;
     }
 
