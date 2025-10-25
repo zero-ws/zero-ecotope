@@ -1,139 +1,37 @@
 package io.zerows.epoch.assembly;
 
+import org.junit.runner.RunWith;
+
+import java.lang.reflect.Modifier;
+
 /**
- * @author lang : 2024-04-17
+ * @author lang : 2025-10-25
  */
+public
 interface ClassFilter {
 
-    String[] SKIP_PACKAGE = new String[]{
-        "android.annotation",
-        "aj.org.objectweb",
-        "camundajar",
-        "camundafeel",
-        "cglib",
-        "ch.qos.logback",
-        "cn.hutool",
-        "co.elastic",
-        "co.paralleluniverse",
-        "connectjar",
-        "com.aliyun",
-        "com.carrotsearch",
-        "com.eclipsesource",
-        "com.esotericsoftware",
-        "com.fasterxml",
-        "com.github",
-        "com.google",
-        "com.graphbuilder",
-        "com.hazelcast",
-        "com.hp",
-        "com.intellij",
-        "com.jcraft.jzlib",
-        "com.microfocus",
-        "com.microsoft",
-        "com.mysql",
-        "com.networknt",
-        "com.netflix",
-        "com.oracle",
-        "com.opencsv",
-        "com.sun",
-        "com.tdunning",
-        "com.zaxxer",
-        "com.codahale",
-        "de.javakaffee",
-        "de.odysseus",
-        "examples",
-        "fastparse",
-        "feign",
-        "freemarker",
-        "geny",
-        "io.github",
-        "io.r2mo",
-        "io.grpc",
-        "io.micrometer",
-        "io.netty",
-        "io.opentracing",
-        "io.prometheus",
-        "io.perfmark",
-        "io.reactivex",
-        "io.r2dbc",
-        "io.swagger",
-        "io.termd",
-        "io.vertx",
-        "jakarta",
-        "joptsimple",
-        "java",
-        "java.util.concurrent",
-        "javassist",
-        "javax",
-        "jdk",
-        "junit",
-        "kotlin",
-        "lombok",
-        "liquibase",
-        "IMPL-JARS",
-        "me.escofflier",
-        "mousio",
-        "net",
-        "nonapi",
-        "oracle",
-        "org.apiguardian",
-        "org.HdrHistogram",
-        "org.aopalliance",
-        "org.aspectj",
-        "org.apache",
-        "org.bouncycastle",
-        "org.camunda",
-        "org.checkerframework",
-        "org.cliffc",
-        "org.conscrypt",
-        "org.codehaus",
-        "org.eclipse",
-        "org.elasticsearch",
-        "org.etsi",
-        "org.glassfish",
-        "org.hamcrest",
-        "org.hibernate",
-        "org.intellij",
-        "org.infinispan",
-        "org.joni",
-        "org.jcodings",
-        "org.jboss",
-        "org.jetbrains",
-        "org.jgroups",
-        "org.joda",
-        "org.jooq",
-        "org.json",
-        "org.jspecify",
-        "org.junit",
-        "org.jvnet",
-        "org.mvel2",
-        "org.neo4j",
-        "org.objenesis",
-        "org.objectweb",
-        "org.opentest4j",
-        "org.openxmlformats",
-        "org.osgi",
-        "org.reactivestreams",
-        "org.reflections",
-        "org.slf4j",
-        "org.tartarus",
-        "org.w3c",
-        "org.w3",
-        "org.wildfly",
-        "org.xml",
-        "org.yaml",
-        "protostream",
-        "picocli",
-        "redis",
-        "reactor",
-        "scala",
-        "sourcecode",
-        "schemaorg_apache_xmlbeans",
-        "sun",
-        "META-INF",
-        // OSGI Processing
-        "org.jline",
-        "org.easymock",
-        "org.fusesource",
-    };
+    @SuppressWarnings("all")
+    static boolean isValidMember(final Class<?> type) {
+        try {
+            // Fix issue of Guice
+            // java.lang.NoClassDefFoundError: camundajar/impl/scala/reflect/macros/blackbox/Context
+            type.getDeclaredMethods();
+            type.getDeclaredFields();
+            return true;
+        } catch (NoClassDefFoundError ex) {
+            return false;
+        }
+    }
+
+    static boolean isValid(final Class<?> type) {
+        return !type.isAnonymousClass()                             // Ko Anonymous
+            && !type.isAnnotation()                                 // Ko Annotation
+            && !type.isEnum()                                       // Ko Enum
+            && !Modifier.isPrivate(type.getModifiers())             // Ko No Private，新版开放 default 域，只有私有类无法被扫描
+            && !(Modifier.isAbstract(type.getModifiers()) && !type.isInterface())
+            && !Modifier.isStatic(type.getModifiers())              // Ko Static
+            && !Throwable.class.isAssignableFrom(type)              // Ko Exception
+            && !type.isAnnotationPresent(RunWith.class)             // Ko Test Class
+            && isValidMember(type);                          // Ko `Method/Field`
+    }
 }

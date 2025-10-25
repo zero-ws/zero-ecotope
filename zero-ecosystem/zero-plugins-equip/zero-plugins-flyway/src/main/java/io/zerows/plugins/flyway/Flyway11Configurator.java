@@ -1,6 +1,7 @@
 package io.zerows.plugins.flyway;
 
 import io.r2mo.base.dbe.DBS;
+import io.vertx.core.json.JsonArray;
 import io.zerows.epoch.store.DBSActor;
 import io.zerows.specification.configuration.HConfig;
 import org.flywaydb.core.Flyway;
@@ -51,13 +52,20 @@ final class Flyway11Configurator {
         // driver-class-name 通常由 JDBC SPI 发现；如需强制，可自行 Class.forName()
     }
 
+    @SuppressWarnings("all")
     static FluentConfiguration from(final HConfig config) {
         final FluentConfiguration fc = Flyway.configure();
         // 数据源单独处理
         configure(fc, config);
 
         /* ========= 位置 & 编码 ========= */
-        final List<String> locations = asStringList(config.options(FlywayKeys.LOCATIONS));
+        final Object value = config.options(FlywayKeys.LOCATIONS);
+        final List<String> locations;
+        if (value instanceof final JsonArray valueA) {
+            locations = valueA.getList();
+        } else {
+            locations = asStringList(config.options(FlywayKeys.LOCATIONS));
+        }
         if (!locations.isEmpty()) {
             fc.locations(locations.toArray(new String[0]));
         }

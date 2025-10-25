@@ -103,7 +103,7 @@ public class ZeroModule<T> {
                         final Actor actorAnnotation = actor.getClass().getDeclaredAnnotation(Actor.class);
                         final boolean mustConfigured = actorAnnotation.configured();
                         if (mustConfigured && Objects.isNull(config)) {
-                            log.warn("[ ZMOD ] \t\t⚠️ ---> 跳过 Actor = `{}`, 检查配置项：`{}`",
+                            log.warn("[ ZMOD ] \t\t⚪️ ---> 跳过 actor = `{}`, 检查配置项：`{}`",
                                 actor.getClass().getName(), actorAnnotation.value());
                             return null;
                         }

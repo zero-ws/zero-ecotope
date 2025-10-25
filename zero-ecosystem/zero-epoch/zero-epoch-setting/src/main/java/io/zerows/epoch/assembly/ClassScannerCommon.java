@@ -32,10 +32,10 @@ class ClassScannerCommon implements ClassScanner {
             final ImmutableSet<ClassPath.ClassInfo> set = cp.getTopLevelClasses();
             final ConcurrentMap<String, Set<String>> packageMap = new ConcurrentHashMap<>();
             // 性能提高一倍，并行流处理更合理，暂时没发现明显问题
-            log.info("[ ZERO ] 忽略的包数量: {}, 检查是否跳过？", String.valueOf(ClassFilter.SKIP_PACKAGE.length));
+            log.info("[ ZERO ] 忽略的包数量: {}, 检查是否跳过？", String.valueOf(ClassFilterPackage.SKIP_PACKAGE.length));
             set.stream().forEach(cls -> {
                 final String packageName = cls.getPackageName();
-                final boolean skip = Arrays.stream(ClassFilter.SKIP_PACKAGE).anyMatch(packageName::startsWith);
+                final boolean skip = Arrays.stream(ClassFilterPackage.SKIP_PACKAGE).anyMatch(packageName::startsWith);
                 if (!skip) {
                     try {
                         classSet.add(loader.loadClass(cls.getName()));
@@ -48,7 +48,7 @@ class ClassScannerCommon implements ClassScanner {
 
         // 过滤合法的 Class
         return classSet.stream()
-            .filter(Tool::isValid)
+            .filter(ClassFilter::isValid)
             .collect(Collectors.toSet());
     }
 }

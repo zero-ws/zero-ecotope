@@ -13,7 +13,7 @@ import org.flywaydb.core.api.output.MigrateResult;
 /**
  * @author lang : 2025-10-25
  */
-@Actor(value = "flyway")
+@Actor(value = "flyway", sequence = -216)
 @Slf4j
 public class FlywayActor extends AbstractHActor {
 
