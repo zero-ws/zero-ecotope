@@ -5,7 +5,7 @@ import io.r2mo.base.dbe.Join;
 import io.r2mo.base.dbe.common.DBLoad;
 import io.r2mo.base.dbe.common.DBNode;
 import io.r2mo.base.dbe.common.DBRef;
-import io.r2mo.spi.SPI;
+import io.r2mo.dbe.jooq.spi.LoadREF;
 import io.r2mo.typed.cc.Cc;
 import io.r2mo.typed.common.Kv;
 import io.r2mo.vertx.jooq.DBJx;
@@ -19,41 +19,33 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * 统一构造流程（双流程）
+ * <pre>
+ *    1. 使用 {@link Join} 构造 {@link ADJ}
+ *       -> 分析初始化 {@link LoadREF}
+ *          -> 调用 {@link DBLoad} 来构造 {@link DBNode}
+ *             -> 根据 {@link DBNode} 构造 {@link DBRef}
+ *       -> {@link DBRef} 构造完成
+ *    2. 使用 {@link DBRef} 构造 {@link ADJ}
+ *    3. 最终的流程合二为一
+ * </pre>
+ */
 @Slf4j
 public final class ADJ {
     private static final Cc<String, ADJ> CC_ADB = Cc.openThread();
 
-    private final DBRef ref;
     private final DBS dbs;
     private final DBJx dbj;
 
-    /**
-     * {@link DBLoad} 之后的方法，此处无需再执行任何节点级别的处理
-     *
-     * @param ref DBRef 引用
-     * @param dbs 数据源信息
-     */
     private ADJ(final DBRef ref, final DBS dbs) {
         this.dbs = dbs;
-        this.ref = ref;
-        this.dbj = DBJx.of(this.ref, this.dbs);
+        this.dbj = DBJx.of(ref, this.dbs);
     }
 
-    /**
-     * {@link DBLoad} 之前的方法，此处要执行 {@link DBLoad} 来构造 {@link DBNode}
-     *
-     * @param join Join 元信息
-     * @param dbs  数据源信息
-     */
     private ADJ(final Join join, final DBS dbs) {
         this.dbs = dbs;
-
-        final DBLoad loader = SPI.SPI_DB.loader();
-        final DBNode leftNode = loader.configure(join.from(), join.vFrom(), dbs);
-        final DBNode rightNode = loader.configure(join.to(), join.vTo(), dbs);
-
-        this.ref = DBRef.of(leftNode, rightNode, Kv.create(join.fromField(), join.toField()));
-        this.dbj = DBJx.of(this.ref, dbs);
+        this.dbj = DBJx.of(join, dbs);
     }
 
     static ADJ of(final DBRef ref, final DBS dbs) {

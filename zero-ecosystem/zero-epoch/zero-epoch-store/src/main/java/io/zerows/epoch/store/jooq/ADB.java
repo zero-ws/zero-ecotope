@@ -30,7 +30,6 @@ import java.util.concurrent.ConcurrentMap;
 public class ADB {
 
     private static final Cc<String, ADB> CC_JOOQ = Cc.openThread();
-    private static final ConcurrentMap<Class<?>, AsyncMeta> META_CACHE = new ConcurrentHashMap<>();
 
     // region 基本变量定义和构造函数
     private final DBEx<?> dbe;
@@ -41,9 +40,7 @@ public class ADB {
      */
     private <T> ADB(final Class<T> daoCls, final DBS dbs, final R2Vector vector) {
         this.dbe = DBEx.of(daoCls, dbs, vector);
-        final AsyncMeta meta = this.dbe.metadata();
-        META_CACHE.put(daoCls, meta);
-        this.metadata = meta;
+        this.metadata = this.dbe.metadata();
     }
 
     public ConcurrentMap<String, Class<?>> metaTypes() {
