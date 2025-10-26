@@ -12,7 +12,9 @@ import io.r2mo.vertx.jooq.DBJx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.MMAdapt;
+import io.zerows.platform.constant.VString;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
@@ -52,6 +54,13 @@ public final class ADJ {
     }
 
     static ADJ of(final Join join, final DBS dbs, final Kv<String, String> vectorPojo) {
+        // 修正 id -> key
+        if (Objects.isNull(join.fromField()) || KName.ID.equals(join.fromField())) {
+            join.from(KName.KEY);
+        }
+        if (Objects.isNull(join.toField()) || KName.ID.equals(join.toField())) {
+            join.to(KName.KEY);
+        }
         if (Objects.nonNull(vectorPojo.key())) {
             join.from(MMAdapt.of(vectorPojo.key()).vector());
         }
@@ -190,10 +199,12 @@ public final class ADJ {
 
     // ========== 单条查询（One）==========
     public JsonObject fetchOne(final JsonObject treeJ) {
+        treeJ.put(VString.EMPTY, Boolean.TRUE);
         return this.dbj.findOneJ(treeJ);
     }
 
     public Future<JsonObject> fetchOneAsync(final JsonObject treeJ) {
+        treeJ.put(VString.EMPTY, Boolean.TRUE);
         return this.dbj.findOneAsyncJ(treeJ);
     }
 
