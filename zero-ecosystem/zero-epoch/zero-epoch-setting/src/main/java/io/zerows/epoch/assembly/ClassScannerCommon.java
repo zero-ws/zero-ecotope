@@ -49,10 +49,11 @@ class ClassScannerCommon implements ClassScanner {
                 final ImmutableSet<ClassPath.ClassInfo> all = cp.getTopLevelClasses();
                 total = all.size();
 
-                // 并行 + 无序，保持你原先的 computeIfAbsent 方案（在你的环境里更快）
+                // 并行 + 无序，配合包级缓存（在你的环境里更快）
                 StreamSupport.stream(all.spliterator(), true).unordered()
                     .filter(ci -> {
                         final String pkg = ci.getPackageName();
+                        // 命中黑名单则跳过
                         return !SKIP_CACHE.computeIfAbsent(pkg, SKIP_MATCHER::matches);
                     })
                     .forEach(ci -> {
@@ -61,10 +62,9 @@ class ClassScannerCommon implements ClassScanner {
                             loaded.add(cls);
                         } catch (ClassNotFoundException | NoClassDefFoundError e) {
                             // 静默：依赖不可达
-                        } catch (Exception e) {
-                            // 静默：其它受检/运行时异常
+                        } catch (Throwable e) { // 关键修复点：兜底 Error，防止并行流提前终止导致漏扫
+                            // 静默：其他异常/Error
                         }
-                        // 不额外处理 LinkageError（按你的要求）
                     });
             } catch (Exception ignore) {
                 // 保持扫描不中断

@@ -6,7 +6,6 @@ import io.zerows.epoch.configuration.Inquirer;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
 
-import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Objects;
@@ -93,22 +92,26 @@ public class InquirerForGuice implements Inquirer<Injector> {
         }
     }
 
+    /**
+     * 此处比底层的方法多做了一步，防止 NoClassDefFoundError 导致的异常，实现类在旧版中被 kill 了 No-Public 的类，这个是
+     * 不对的，因为这里在实现类的注入过程中会出现使用 Provider 机制的创建，这种模式下实现类并不要求使用 public 的方式。特别是
+     * {@link Defer} 注解的类，由于使用了 {@link jakarta.inject.Provider} 的方式构造，就更不要求 public 修饰符了，为了
+     * 保证包本身的封装型，default 域也是可使用这种方式初始化的，所以此处的过滤条件需要放宽。
+     * <pre>
+     *     旧版 public 引起的问题
+     *     [Guice/MissingImplementation] : No implementation for ??? was bound.
+     * </pre>
+     *
+     * @param clazz 实现类
+     *
+     * @return 是否合法
+     */
     private boolean isValid(final Class<?> clazz) {
         // java.lang.NoClassDefFoundError
         final Class<?> existing = Ut.clazz(clazz.getName(), null);
         if (Objects.isNull(existing)) {
             return false;
         }
-        final int modifier = clazz.getModifiers();
-        if (!Modifier.isPublic(modifier)) {
-            return false;           // Ko Non-Public
-        }
-        if (Modifier.isAbstract(modifier) && !clazz.isInterface()) {
-            return false;           // Ko Abstract Class
-        }
-        if (clazz.isAnonymousClass()) {
-            return false;           // Ko AnonymousClass
-        }
-        return !clazz.isEnum();     // Ko Enum
+        return ClassFilter.isValid(clazz);
     }
 }

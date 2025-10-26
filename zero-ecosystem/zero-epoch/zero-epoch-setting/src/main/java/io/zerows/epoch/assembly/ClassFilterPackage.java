@@ -5,7 +5,6 @@ package io.zerows.epoch.assembly;
  * 1) 此清单用于“前缀黑名单”（String.startsWith），命中即跳过扫描与反射；不删除任何原有项，仅分区+注释增强。
  * 2) 已按你的反馈补回：org.reactivestreams、ch.qos、org.aspectj、org.jcodings（与 org.joni 配套）。
  * 3) 建议对白名单（如 io.zerows.**）优先放行，结合本黑名单可进一步降低扫描量。
- *
  * 新增标记（最近几次补全）：
  * - ch.qos（Logback 上游组织根包，含 ch.qos.logback）🪵
  * - org.reactivestreams（Reactive Streams 标准）🔁
