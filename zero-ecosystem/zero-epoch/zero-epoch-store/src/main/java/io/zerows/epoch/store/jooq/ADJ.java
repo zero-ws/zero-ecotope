@@ -12,10 +12,11 @@ import io.r2mo.vertx.jooq.DBJx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.qr.Ir;
 import io.zerows.epoch.metadata.MMAdapt;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -71,87 +72,236 @@ public final class ADJ {
         return this;
     }
 
-    // -------------------- Search Operation -----------
-    /*
-     * searchJAsync(JsonObject)
-     * searchJAsync(Qr)
-     */
-    public Future<JsonObject> searchAsync(final JsonObject params) {
-        return null; // searchAsync(toQr(params));
+    // 补齐原始的 DBJ 方法之后追加对应的 Async 方法
+
+    // ========== 计数 ==========
+    public Long count(final JsonObject criteriaJ) {
+        return this.dbj.countJ(criteriaJ);
     }
 
-    public Future<JsonObject> searchAsync(final Ir qr) {
-        return null; // this.joinder.searchAsync(qr, this.merged);
+    public Future<Long> countAsync(final JsonObject criteriaJ) {
+        return this.dbj.countAsyncJ(criteriaJ);
     }
 
-    /*
-     * countAsync(JsonObject)
-     * countAsync(Qr)
-     */
-    public Future<Long> countAsync(final JsonObject params) {
-        return null; // countAsync(toQr(params));
+    // ========== 分页 ==========
+
+    // （可选别名：保留你之前的 search/searchAsync，如不需要可删除）
+    public JsonObject search(final JsonObject queryJ) {
+        return this.dbj.findPageJ(queryJ);
     }
 
-    public Future<Long> countAsync(final Ir qr) {
-        return null; // this.joinder.countAsync(qr);
+    public Future<JsonObject> searchAsync(final JsonObject queryJ) {
+        return this.dbj.findPageAsyncJ(queryJ);
     }
 
-    /*
-     * 「Sync」Operation
-     * fetch(Qr)
-     * fetch(JsonObject)
-     *
-     * 「Async」Standard Api
-     * fetchAsync(Qr)
-     * fetchAsync(JsonObject)
-     */
-    public JsonArray fetch(final Ir qr) {
-        return null; // this.joinder.searchArray(qr, this.merged);
+    // ========== 全量 ==========
+    public JsonArray fetchAll() {
+        return this.dbj.findAllJ();
     }
 
-    public JsonArray fetch(final JsonObject params) {
-        return null; // this.fetch(toQr(new JsonObject().types(VName.KEY_CRITERIA, params)));
+    public Future<JsonArray> fetchAllAsync() {
+        return this.dbj.findAllAsyncJ();
     }
 
-    public Future<JsonArray> fetchAsync(final Ir qr) {
-        return null; // Ut.future(this.fetch(qr));
+    // ========== 存在性(Exist) ==========
+    public Boolean fetchExist(final JsonObject treeJ) {
+        return this.dbj.findExistJ(treeJ);
     }
 
-    public Future<JsonArray> fetchAsync(final JsonObject params) {
-        return null; // fetchAsync(toQr(new JsonObject().types(VName.KEY_CRITERIA, params)));
+    public Future<Boolean> fetchExistAsync(final JsonObject treeJ) {
+        return this.dbj.findExistAsyncJ(treeJ);
     }
 
-    // -------------------- Crud Operation -----------
-    /*
-     * Delete Operation Cascade
-     * 1) 1 x T1, n x T2
-     * 2) 1 x T1, 1 x T2
-     * Read Operation Cascade
-     * 1) 1 x T1, n x T2
-     * 2) 1 x T1, 1 x T2
-     * Create/Update Operation
-     * 1) 1 x T1 ( Create ), 1 x T2 ( Save )
-     * 2) 1 x T1 ( Create ), n x T2 ( Save )
-     * 3) 1 x T1 ( Update ), 1 x T2 ( Save )
-     * 4) 1 x T1 ( Update ), 1 x T2 ( Save )
-     */
-    public Future<JsonObject> fetchByIdJAsync(final String key, final String field) {
-        return null; // this.joinder.fetchById(key, false, field);
+    // ========== Full 查询（带联表/聚合等的完整查询）==========
+    public JsonArray fetchFull(final JsonObject queryJ) {
+        return this.dbj.findFullJ(queryJ);
     }
 
-    public Future<JsonObject> fetchByIdAAsync(final String key, final String field) {
-        return null; // this.joinder.fetchById(key, true, field);
+    public Future<JsonArray> fetchFullAsync(final JsonObject queryJ) {
+        return this.dbj.findFullAsyncJ(queryJ);
     }
 
-    public Future<Boolean> removeByIdAsync(final String key) {
-        return null; // this.joinder.deleteById(key);
+    // ========== 批量查询（Many）==========
+    public JsonArray fetch(final JsonObject treeJ) {
+        return this.dbj.findManyJ(treeJ);
     }
 
-    public Future<JsonObject> insertAsync(final JsonObject data, final String field) {
-        return null; // this.joinder.insert(data, field);
+    public Future<JsonArray> fetchAsync(final JsonObject treeJ) {
+        return this.dbj.findManyAsyncJ(treeJ);
     }
 
-    public Future<JsonObject> updateAsync(final String key, final JsonObject data, final String field) {
-        return null; // this.joinder.update(key, data, field);
+    public JsonArray fetch(final Map<String, Object> map) {
+        return this.dbj.findManyJ(map);
+    }
+
+    public Future<JsonArray> fetchAsync(final Map<String, Object> map) {
+        return this.dbj.findManyAsyncJ(map);
+    }
+
+    public JsonArray fetch(final String field, final Object value) {
+        return this.dbj.findManyJ(field, value);
+    }
+
+    public Future<JsonArray> fetchAsync(final String field, final Object value) {
+        return this.dbj.findManyAsyncJ(field, value);
+    }
+
+    public JsonArray fetch() {
+        return this.dbj.findManyJ();
+    }
+
+    public Future<JsonArray> fetchAsync() {
+        return this.dbj.findManyAsyncJ();
+    }
+
+    // ========== 按条件 MapJ（By）==========
+    public JsonArray fetchBy(final JsonObject mapJ) {
+        return this.dbj.findManyByJ(mapJ);
+    }
+
+    public Future<JsonArray> fetchByAsync(final JsonObject mapJ) {
+        return this.dbj.findManyByAsyncJ(mapJ);
+    }
+
+    // ========== IN 查询（ManyIn）==========
+    public JsonArray fetchIn(final String field, final List<?> values) {
+        return this.dbj.findManyInJ(field, values);
+    }
+
+    public Future<JsonArray> fetchInAsync(final String field, final List<?> values) {
+        return this.dbj.findManyInAsyncJ(field, values);
+    }
+
+    public JsonArray fetchIn(final String field, final Object... values) {
+        return this.dbj.findManyInJ(field, values);
+    }
+
+    public Future<JsonArray> fetchInAsync(final String field, final Object... values) {
+        return this.dbj.findManyInAsyncJ(field, values);
+    }
+
+    public JsonArray fetchIn(final String field, final JsonArray values) {
+        return this.dbj.findManyInJ(field, values);
+    }
+
+    public Future<JsonArray> fetchInAsync(final String field, final JsonArray values) {
+        return this.dbj.findManyInAsyncJ(field, values);
+    }
+
+    // ========== 单条查询（One）==========
+    public JsonObject fetchOne(final JsonObject treeJ) {
+        return this.dbj.findOneJ(treeJ);
+    }
+
+    public Future<JsonObject> fetchOneAsync(final JsonObject treeJ) {
+        return this.dbj.findOneAsyncJ(treeJ);
+    }
+
+    public JsonObject fetchOne(final Map<String, Object> map) {
+        return this.dbj.findOneJ(map);
+    }
+
+    public Future<JsonObject> fetchOneAsync(final Map<String, Object> map) {
+        return this.dbj.findOneAsyncJ(map);
+    }
+
+    public JsonObject fetchOne(final String field, final Object value) {
+        return this.dbj.findOneJ(field, value);
+    }
+
+    public Future<JsonObject> fetchOneAsync(final String field, final Object value) {
+        return this.dbj.findOneAsyncJ(field, value);
+    }
+
+    public JsonObject fetchOne(final Serializable id) {
+        return this.dbj.findOneJ(id);
+    }
+
+    public Future<JsonObject> fetchOneAsync(final Serializable id) {
+        return this.dbj.findOneAsyncJ(id);
+    }
+
+    // ========== 单条查询（By）==========
+    public JsonObject fetchOneBy(final JsonObject mapJ) {
+        return this.dbj.findOneByJ(mapJ);
+    }
+
+    public Future<JsonObject> fetchOneByAsync(final JsonObject mapJ) {
+        return this.dbj.findOneByAsyncJ(mapJ);
+    }
+
+    // ========== 删除（remove -> delete）==========
+    public Boolean deleteBy(final JsonObject criteriaJ) {
+        return this.dbj.removeByJ(criteriaJ);
+    }
+
+    public Future<Boolean> deleteByAsync(final JsonObject criteriaJ) {
+        return this.dbj.removeByAsyncJ(criteriaJ);
+    }
+
+    public Boolean deleteBy(final Map<String, Object> criteria) {
+        return this.dbj.removeByJ(criteria);
+    }
+
+    public Future<Boolean> deleteByAsync(final Map<String, Object> criteria) {
+        return this.dbj.removeByAsyncJ(criteria);
+    }
+
+    public Boolean deleteBy(final String field, final Object value) {
+        return this.dbj.removeByJ(field, value);
+    }
+
+    public Future<Boolean> deleteByAsync(final String field, final Object value) {
+        return this.dbj.removeByAsyncJ(field, value);
+    }
+
+    public Boolean deleteBy(final Serializable id) {
+        return this.dbj.removeByJ(id);
+    }
+
+    public Future<Boolean> deleteByAsync(final Serializable id) {
+        return this.dbj.removeByAsyncJ(id);
+    }
+
+    // ========== 更新（update 保持不变）==========
+    public JsonObject updateBy(final JsonObject criteriaJ, final JsonObject updateJ) {
+        return this.dbj.updateByJ(criteriaJ, updateJ);
+    }
+
+    public Future<JsonObject> updateByAsync(final JsonObject criteriaJ, final JsonObject updateJ) {
+        return this.dbj.updateByAsyncJ(criteriaJ, updateJ);
+    }
+
+    public JsonObject updateBy(final Map<String, Object> criteria, final JsonObject updateJ) {
+        return this.dbj.updateByJ(criteria, updateJ);
+    }
+
+    public Future<JsonObject> updateByAsync(final Map<String, Object> criteria, final JsonObject updateJ) {
+        return this.dbj.updateByAsyncJ(criteria, updateJ);
+    }
+
+    public JsonObject updateBy(final String field, final Object value, final JsonObject updateJ) {
+        return this.dbj.updateByJ(field, value, updateJ);
+    }
+
+    public Future<JsonObject> updateByAsync(final String field, final Object value, final JsonObject updateJ) {
+        return this.dbj.updateByAsyncJ(field, value, updateJ);
+    }
+
+    public JsonObject updateBy(final Serializable id, final JsonObject updateJ) {
+        return this.dbj.updateByJ(id, updateJ);
+    }
+
+    public Future<JsonObject> updateByAsync(final Serializable id, final JsonObject updateJ) {
+        return this.dbj.updateByAsyncJ(id, updateJ);
+    }
+
+    // ========== 插入（create -> insert）==========
+    public JsonObject insert(final JsonObject insertJ) {
+        return this.dbj.createJ(insertJ);
+    }
+
+    public Future<JsonObject> insertAsync(final JsonObject insertJ) {
+        return this.dbj.createAsyncJ(insertJ);
     }
 }
