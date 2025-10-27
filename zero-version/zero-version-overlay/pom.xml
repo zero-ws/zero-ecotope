@@ -13,7 +13,7 @@
     <name>(POM) 📣 - Zero::Version::Overlay / ${r2mo.version}</name>
     <packaging>pom</packaging>
     <properties>
-        <r2mo.version>1.0-M23</r2mo.version>
+        <r2mo.version>1.0-M24</r2mo.version>
     </properties>
     <dependencyManagement>
         <dependencies>
