@@ -5,8 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.authentication.AuthenticationProvider;
 import io.vertx.ext.web.handler.AuthenticationHandler;
 import io.vertx.ext.web.handler.AuthorizationHandler;
-import io.zerows.epoch.metadata.security.Aegis;
-import io.zerows.epoch.metadata.security.AegisItem;
+import io.zerows.epoch.metadata.security.KSecurity;
 
 /**
  * Security Module for dispatcher,
@@ -45,24 +44,24 @@ public interface Lee {
      * 1. Authenticate Handler
      *    Authenticate Provider For Usage etc such as WebSocket
      */
-    AuthenticationHandler authenticate(Vertx vertx, Aegis config);
+    AuthenticationHandler authenticate(Vertx vertx, KSecurity config);
 
     /*
      * 2. Authorization Handler
      */
-    AuthorizationHandler authorization(Vertx vertx, Aegis config);
+    AuthorizationHandler authorization(Vertx vertx, KSecurity config);
 
     // ------------------ WebToken Encode/Decode Processing ----------------------
     /*
      * 3. WebToken operation
      */
-    String encode(JsonObject data, AegisItem config);
+    String encode(JsonObject data, KSecurity.Provider config);
 
-    JsonObject decode(String token, AegisItem config);
+    JsonObject decode(String token, KSecurity.Provider config);
 
     // ------------------ New Interface for Extension ----------------------
     /*
      * 4.  AuthenticationProvider wrapped by ( Default + Extension )
      */
-    AuthenticationProvider provider(Vertx vertx, Aegis config);
+    AuthenticationProvider provider(Vertx vertx, KSecurity config);
 }

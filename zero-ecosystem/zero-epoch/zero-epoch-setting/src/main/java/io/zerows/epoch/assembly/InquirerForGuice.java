@@ -43,15 +43,19 @@ public class InquirerForGuice implements Inquirer<Injector> {
         final ConcurrentMap<Class<?>, Set<Class<?>>> tree = new ConcurrentHashMap<>();
         final Set<Class<?>> flat = new HashSet<>();
         clazzes.stream().filter(this::isValid).forEach(clazz -> {
-            this.buildTree(tree, flat, clazz);
-            if (!clazz.isInterface()) {
-                if (jsrField.success(clazz)) {
-                    queueField.add(clazz);
-                } else if (jsrMethod.success(clazz)) {
-                    queueMethod.add(clazz);
-                } else if (jsrCon.success(clazz)) {
-                    queueCon.add(clazz);
+            try {
+                this.buildTree(tree, flat, clazz);
+                if (!clazz.isInterface()) {
+                    if (jsrField.success(clazz)) {
+                        queueField.add(clazz);
+                    } else if (jsrMethod.success(clazz)) {
+                        queueMethod.add(clazz);
+                    } else if (jsrCon.success(clazz)) {
+                        queueCon.add(clazz);
+                    }
                 }
+            } catch (Throwable ex) {
+                log.error(ex.getMessage(), ex);
             }
         });
         log.info("[ ZERO ] ( DI ) \uD83E\uDEBC 扫描信息 / field = {}, method = {}, constructor = {}",

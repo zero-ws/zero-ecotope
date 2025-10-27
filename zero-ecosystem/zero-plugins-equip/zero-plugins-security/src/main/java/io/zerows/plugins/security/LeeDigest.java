@@ -8,8 +8,7 @@ import io.vertx.ext.auth.htdigest.HtdigestAuth;
 import io.vertx.ext.web.handler.AuthenticationHandler;
 import io.vertx.ext.web.handler.impl.HTTPAuthorizationHandler;
 import io.zerows.epoch.application.YmlCore;
-import io.zerows.epoch.metadata.security.Aegis;
-import io.zerows.epoch.metadata.security.AegisItem;
+import io.zerows.epoch.metadata.security.KSecurity;
 import io.zerows.plugins.security.authenticate.AdapterProvider;
 import io.zerows.support.Ut;
 
@@ -18,7 +17,7 @@ import io.zerows.support.Ut;
  */
 class LeeDigest extends AbstractLee {
     @Override
-    public AuthenticationHandler authenticate(final Vertx vertx, final Aegis config) {
+    public AuthenticationHandler authenticate(final Vertx vertx, final KSecurity config) {
         // provider processing
         final HtdigestAuth standard = this.providerInternal(vertx, config);
         // handler building
@@ -28,7 +27,7 @@ class LeeDigest extends AbstractLee {
     }
 
     @Override
-    public AuthenticationProvider provider(final Vertx vertx, final Aegis config) {
+    public AuthenticationProvider provider(final Vertx vertx, final KSecurity config) {
         final HtdigestAuth standard = this.providerInternal(vertx, config);
         final AdapterProvider extension = AdapterProvider.extension(standard);
         return extension.provider(config);
@@ -36,7 +35,7 @@ class LeeDigest extends AbstractLee {
 
     @Override
     @SuppressWarnings("unchecked")
-    public HtdigestAuth providerInternal(final Vertx vertx, final Aegis config) {
+    public HtdigestAuth providerInternal(final Vertx vertx, final KSecurity config) {
         final String filename = this.option(config,
             YmlCore.secure.digest.options.FILENAME);
         final HtdigestAuth standard;
@@ -49,12 +48,12 @@ class LeeDigest extends AbstractLee {
     }
 
     @Override
-    public String encode(final JsonObject data, final AegisItem config) {
+    public String encode(final JsonObject data, final KSecurity.Provider config) {
         throw new _501NotSupportException("[ ZERO ] 不支持 Digest 编码操作");
     }
 
     @Override
-    public JsonObject decode(final String token, final AegisItem config) {
+    public JsonObject decode(final String token, final KSecurity.Provider config) {
         throw new _501NotSupportException("[ ZERO ] 不支持 Digest 解码操作");
     }
 }

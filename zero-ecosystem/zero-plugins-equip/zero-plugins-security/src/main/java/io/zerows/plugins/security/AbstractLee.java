@@ -14,8 +14,7 @@ import io.vertx.ext.web.handler.AuthorizationHandler;
 import io.vertx.ext.web.handler.impl.AuthenticationHandlerImpl;
 import io.vertx.ext.web.handler.impl.HTTPAuthorizationHandler;
 import io.zerows.component.log.LogOf;
-import io.zerows.epoch.metadata.security.Aegis;
-import io.zerows.epoch.metadata.security.AegisItem;
+import io.zerows.epoch.metadata.security.KSecurity;
 import io.zerows.platform.enums.EmSecure;
 import io.zerows.plugins.security.authenticate.AuthenticateBuiltInProvider;
 import io.zerows.plugins.security.authenticate.ChainHandler;
@@ -36,7 +35,7 @@ public abstract class AbstractLee implements LeeBuiltIn {
     // --------------------------- Interface Method
 
     @Override
-    public AuthorizationHandler authorization(final Vertx vertx, final Aegis config) {
+    public AuthorizationHandler authorization(final Vertx vertx, final KSecurity config) {
         final Class<?> handlerCls = config.getHandler();
         if (Objects.isNull(handlerCls)) {
             // Default profile is no access ( 403 )
@@ -48,10 +47,10 @@ public abstract class AbstractLee implements LeeBuiltIn {
              * Check whether user defined provider, here are defined provider
              * for current 403 workflow instead of standard workflow here
              */
-            final AegisItem item = config.item();
+            final KSecurity.Provider item = config.item();
             final Class<?> providerCls = item.getProviderAuthenticate();
             if (Objects.nonNull(providerCls)) {
-                final EmSecure.AuthWall wall = config.getType();
+                final EmSecure.SecurityType wall = config.getType();
                 final AuthorizationProvider defined = Ut.invokeStatic(providerCls, "provider", config);
                 if (Objects.nonNull(defined)) {
                     handler.addAuthorizationProvider(defined);
@@ -65,7 +64,7 @@ public abstract class AbstractLee implements LeeBuiltIn {
         }
     }
 
-    protected AuthenticationHandler wrapHandler(final AuthenticationHandler standard, final Aegis aegis) {
+    protected AuthenticationHandler wrapHandler(final AuthenticationHandler standard, final KSecurity aegis) {
         final ChainHandler handler = ChainHandler.all();
         handler.add(standard);
         final AuthenticateBuiltInProvider provider = AuthenticateBuiltInProvider.provider(aegis);
@@ -89,7 +88,7 @@ public abstract class AbstractLee implements LeeBuiltIn {
         return handler;
     }
 
-    protected AuthenticationHandler buildHandler(final AuthenticationProvider standard, final Aegis aegis,
+    protected AuthenticationHandler buildHandler(final AuthenticationProvider standard, final KSecurity aegis,
                                                  final HTTPAuthorizationHandler.Type type) {
         final String realm = this.option(aegis, "realm");
         return new HTTPAuthorizationHandler<>(standard, type, realm) {
@@ -106,11 +105,11 @@ public abstract class AbstractLee implements LeeBuiltIn {
     }
 
     // --------------------------- Sub class only
-    protected abstract <T extends AuthenticationProvider> T providerInternal(Vertx vertx, Aegis config);
+    protected abstract <T extends AuthenticationProvider> T providerInternal(Vertx vertx, KSecurity config);
 
-    protected <T> T option(final Aegis aegis, final String key) {
-        final AegisItem item = aegis.item();
-        return (T) item.options().getValue(key, null);
+    protected <T> T option(final KSecurity aegis, final String key) {
+        final KSecurity.Provider provider = aegis.item();
+        return (T) provider.options().getValue(key, null);
     }
 
     protected LogOf logger() {

@@ -7,7 +7,7 @@ import io.vertx.core.Handler;
 import io.vertx.ext.auth.User;
 import io.vertx.ext.auth.authorization.Authorization;
 import io.vertx.ext.auth.authorization.AuthorizationProvider;
-import io.zerows.epoch.metadata.security.Aegis;
+import io.zerows.epoch.metadata.security.KSecurity;
 import io.zerows.plugins.security.profile.PermissionAuthorization;
 
 import java.lang.reflect.Method;
@@ -18,13 +18,13 @@ import java.util.Set;
  */
 public class AuthorizationBuiltInProvider implements AuthorizationProvider {
 
-    private transient final Aegis aegis;
+    private transient final KSecurity aegis;
 
-    private AuthorizationBuiltInProvider(final Aegis aegis) {
+    private AuthorizationBuiltInProvider(final KSecurity aegis) {
         this.aegis = aegis;
     }
 
-    public static AuthorizationProvider provider(final Aegis aegis) {
+    public static AuthorizationProvider provider(final KSecurity aegis) {
         return new AuthorizationBuiltInProvider(aegis);
     }
 

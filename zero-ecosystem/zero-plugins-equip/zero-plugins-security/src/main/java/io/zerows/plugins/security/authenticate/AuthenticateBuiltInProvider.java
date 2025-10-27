@@ -11,7 +11,7 @@ import io.vertx.ext.auth.User;
 import io.vertx.ext.auth.authentication.AuthenticationProvider;
 import io.vertx.ext.auth.authentication.Credentials;
 import io.zerows.component.log.LogOf;
-import io.zerows.epoch.metadata.security.Aegis;
+import io.zerows.epoch.metadata.security.KSecurity;
 
 import java.lang.reflect.Method;
 import java.util.Objects;
@@ -23,11 +23,11 @@ import java.util.function.Function;
 public class AuthenticateBuiltInProvider implements AuthenticationProvider {
 
     private final static LogOf LOGGER = LogOf.get(AuthenticateBuiltInProvider.class);
-    private final transient Aegis aegis;
+    private final transient KSecurity aegis;
     private transient Function<JsonObject, Future<User>> userFn;
 
     @SuppressWarnings("all")
-    private AuthenticateBuiltInProvider(final Aegis aegis) {
+    private AuthenticateBuiltInProvider(final KSecurity aegis) {
         this.aegis = aegis;
         // @AuthorizedUser method process user data
         final Method method = aegis.getAuthorizer().getUser();
@@ -36,7 +36,7 @@ public class AuthenticateBuiltInProvider implements AuthenticationProvider {
         }
     }
 
-    public static AuthenticateBuiltInProvider provider(final Aegis aegis) {
+    public static AuthenticateBuiltInProvider provider(final KSecurity aegis) {
         return new AuthenticateBuiltInProvider(aegis);
     }
 

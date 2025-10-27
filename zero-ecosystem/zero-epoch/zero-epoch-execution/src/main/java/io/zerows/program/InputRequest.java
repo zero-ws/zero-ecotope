@@ -4,8 +4,8 @@ import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Session;
+import io.zerows.epoch.metadata.security.KSecurity;
 import io.zerows.epoch.web.Envelop;
-import io.zerows.epoch.metadata.security.AegisItem;
 import io.zerows.platform.enums.EmSecure;
 import io.zerows.sdk.security.Lee;
 import io.zerows.sdk.security.LeeBuiltIn;
@@ -59,7 +59,7 @@ class InputRequest {
         String result = null;
         if (Ut.isNotNil(tokenString)) {
             final Lee lee = Ut.service(LeeBuiltIn.class);
-            final JsonObject token = lee.decode(tokenString, AegisItem.configMap(EmSecure.AuthWall.JWT));
+            final JsonObject token = lee.decode(tokenString, KSecurity.Provider.configMap(EmSecure.SecurityType.JWT));
             if (Objects.nonNull(token)) {
                 result = token.getString(field);
             }

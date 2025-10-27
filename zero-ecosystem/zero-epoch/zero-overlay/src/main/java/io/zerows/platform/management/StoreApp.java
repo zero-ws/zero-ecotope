@@ -1,8 +1,8 @@
 package io.zerows.platform.management;
 
+import io.r2mo.base.dbe.DBS;
 import io.r2mo.typed.cc.Cc;
 import io.zerows.platform.constant.VString;
-import io.zerows.platform.metadata.OldKDS;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.app.HArk;
 import io.zerows.specification.development.compiled.HBundle;
@@ -14,7 +14,7 @@ import io.zerows.specification.vital.HOI;
  *     1. 所属：{@link HArk} 数据结构
  *             - {@link HApp} 应用 x 1
  *             - {@link HOI} 租户 x 1
- *             - {@link OldKDS} 数据库 x N
+ *             - {@link DBS} 数据库 x N
  *               - PRIMARY：  主数据库
  *               - HISTORY：  历史数据库
  *               - WORKFLOW： 工作流数据库

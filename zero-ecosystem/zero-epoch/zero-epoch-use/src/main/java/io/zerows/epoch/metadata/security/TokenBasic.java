@@ -1,6 +1,8 @@
 package io.zerows.epoch.metadata.security;
 
 import io.vertx.core.json.JsonObject;
+import io.vertx.ext.auth.authentication.Credentials;
+import io.vertx.ext.auth.authentication.UsernamePasswordCredentials;
 import io.zerows.epoch.constant.KName;
 import io.zerows.support.Ut;
 
@@ -10,13 +12,15 @@ import io.zerows.support.Ut;
  * 1) token findRunning
  * 2) authorization http header findRunning based on Basic
  */
-public class TokenBasic implements WebToken {
+public class TokenBasic implements Token {
     private final String token;
     private final String username;
+    private final Credentials credentials;
 
     public TokenBasic(final String username, final String password) {
         this.username = username;
         this.token = Ut.encryptBase64(username, password);
+        this.credentials = new UsernamePasswordCredentials(username, password);
     }
 
     @Override
@@ -26,7 +30,8 @@ public class TokenBasic implements WebToken {
 
     @Override
     public String authorization() {
-        return "Basic " + this.token;
+        return this.credentials.toHttpAuthorization();
+        // return "Basic " + this.token;
     }
 
     @Override

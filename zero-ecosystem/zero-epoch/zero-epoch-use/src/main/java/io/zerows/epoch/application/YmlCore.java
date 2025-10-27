@@ -183,7 +183,7 @@ public interface YmlCore {
      * vertx-secure.yml
      * <pre><code>
      * secure:
-     *    jwt: {@link EmSecure.AuthWall#JWT}
+     *    jwt: {@link EmSecure.SecurityType#JWT}
      *        options:
      *            realm:
      *            jwtOptions:
@@ -191,13 +191,13 @@ public interface YmlCore {
      *        provider:
      *            authenticate:
      *            authorization:
-     *    digest: {@link EmSecure.AuthWall#DIGEST}
+     *    digest: {@link EmSecure.SecurityType#HT_DIGEST}
      *        options:
      *            filename:
      *        provider:
      *            authenticate:
      *            authorization:
-     *    oauth2: {@link EmSecure.AuthWall#OAUTH2}
+     *    oauth2: {@link EmSecure.SecurityType#OAUTH2}
      *        options:
      *            callback:
      *        provider:

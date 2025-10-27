@@ -8,7 +8,7 @@ import io.vertx.ext.stomp.StompServerOptions;
 import io.zerows.cortex.metadata.RunServer;
 import io.zerows.cortex.sdk.Axis;
 import io.zerows.epoch.basicore.option.SockOptions;
-import io.zerows.epoch.metadata.security.Aegis;
+import io.zerows.epoch.metadata.security.KSecurity;
 import io.zerows.plugins.websocket.stomp.socket.ServerWsHandler;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
@@ -38,7 +38,7 @@ public class AxisStomp implements Axis {
             // Security for WebSocket
             final Mixer mAuthorize =
                 Mixer.instance(MixerAuthorize.class, vertx);
-            final Aegis aegis = mAuthorize.mount(handler, stompOptions);
+            final KSecurity aegis = mAuthorize.mount(handler, stompOptions);
 
             // Mount user definition handler
             final Mixer mHandler =

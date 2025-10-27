@@ -1,23 +1,14 @@
 package io.zerows.cosmic.bootstrap;
 
-import io.vertx.ext.web.handler.AuthenticationHandler;
-import io.vertx.ext.web.handler.AuthorizationHandler;
-import io.vertx.ext.web.handler.ChainAuthHandler;
 import io.zerows.cortex.metadata.RunServer;
 import io.zerows.cortex.sdk.Axis;
-import io.zerows.cosmic.handler.EndurerAuthenticate;
 import io.zerows.cosmic.plugins.security.Bolt;
 import io.zerows.cosmic.plugins.security.management.OCacheSecurity;
-import io.zerows.epoch.constant.KWeb;
-import io.zerows.epoch.metadata.security.Aegis;
-import io.zerows.platform.constant.VValue;
+import io.zerows.epoch.metadata.security.KSecurity;
 import io.zerows.specification.development.compiled.HBundle;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Comparator;
-import java.util.Objects;
 import java.util.Set;
-import java.util.TreeSet;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -50,7 +41,7 @@ public class AxisSecure implements Axis {
          *      0                0                  0
          *      1                1                  1
          */
-        final ConcurrentMap<String, Set<Aegis>> store = OCacheSecurity.entireWall();
+        final ConcurrentMap<String, Set<KSecurity>> store = OCacheSecurity.entireWall();
         store.forEach((path, aegisSet) -> {
             if (!aegisSet.isEmpty()) {
                 /*
@@ -78,49 +69,49 @@ public class AxisSecure implements Axis {
         }
     }
 
-    private void mountAuthenticate(final RunServer server, final String path, final Set<Aegis> aegisSet) {
-        final AuthenticationHandler resultHandler;
-        if (VValue.ONE == aegisSet.size()) {
-            // 1 = handler
-            final Aegis aegis = aegisSet.iterator().next();
-            resultHandler = this.bolt.authenticate(server.refVertx(), aegis);
-        } else {
-            // 1 < handler
-            final ChainAuthHandler handler = ChainAuthHandler.all();
-            aegisSet.stream()
-                .map(item -> this.bolt.authenticate(server.refVertx(), item))
-                .filter(Objects::nonNull)
-                .forEach(handler::add);
-            resultHandler = handler;
-        }
-        if (Objects.nonNull(resultHandler)) {
-            server.refRouter().route(path).order(KWeb.ORDER.SECURE)
-                .handler(resultHandler)
-                .failureHandler(EndurerAuthenticate.create());
-        }
+    private void mountAuthenticate(final RunServer server, final String path, final Set<KSecurity> aegisSet) {
+        //        final AuthenticationHandler resultHandler;
+        //        if (VValue.ONE == aegisSet.size()) {
+        //            // 1 = handler
+        //            final KSecurity aegis = aegisSet.iterator().next();
+        //            resultHandler = this.bolt.authenticate(server.refVertx(), aegis);
+        //        } else {
+        //            // 1 < handler
+        //            final ChainAuthHandler handler = ChainAuthHandler.all();
+        //            aegisSet.stream()
+        //                .map(item -> this.bolt.authenticate(server.refVertx(), item))
+        //                .filter(Objects::nonNull)
+        //                .forEach(handler::add);
+        //            resultHandler = handler;
+        //        }
+        //        if (Objects.nonNull(resultHandler)) {
+        //            server.refRouter().route(path).order(KWeb.ORDER.SECURE)
+        //                .handler(resultHandler)
+        //                .failureHandler(EndurerAuthenticate.create());
+        //        }
     }
 
-    private void mountAuthorization(final RunServer server, final String path, final Set<Aegis> aegisSet) {
-        final AuthorizationHandler resultHandler;
-        if (VValue.ONE == aegisSet.size()) {
-            // 1 = handler
-            final Aegis aegis = aegisSet
-                .iterator().next();
-            resultHandler = this.bolt.authorization(server.refVertx(), aegis);
-        } else {
-            // 1 = handler ( sorted )
-            final Aegis aegis = new TreeSet<>(Comparator.comparingInt(Aegis::getOrder)).getFirst();
-            resultHandler = this.bolt.authorization(server.refVertx(), aegis);
-        }
-        if (IS_OUT.getAndSet(Boolean.FALSE)) {
-            log.info("[ ZERO ] \uD83D\uDD11 安全处理选择：handler = {}, bolt = {}",
-                Objects.isNull(resultHandler) ? null : resultHandler.getClass(),
-                this.bolt.getClass());
-        }
-        if (Objects.nonNull(resultHandler)) {
-            server.refRouter().route(path).order(KWeb.ORDER.SECURE_AUTHORIZATION)
-                .handler(resultHandler)
-                .failureHandler(EndurerAuthenticate.create());
-        }
+    private void mountAuthorization(final RunServer server, final String path, final Set<KSecurity> aegisSet) {
+        //        final AuthorizationHandler resultHandler;
+        //        if (VValue.ONE == aegisSet.size()) {
+        //            // 1 = handler
+        //            final KSecurity aegis = aegisSet
+        //                .iterator().next();
+        //            resultHandler = this.bolt.authorization(server.refVertx(), aegis);
+        //        } else {
+        //            // 1 = handler ( sorted )
+        //            final KSecurity aegis = new TreeSet<>(Comparator.comparingInt(KSecurity::getOrder)).getFirst();
+        //            resultHandler = this.bolt.authorization(server.refVertx(), aegis);
+        //        }
+        //        if (IS_OUT.getAndSet(Boolean.FALSE)) {
+        //            log.info("[ ZERO ] \uD83D\uDD11 安全处理选择：handler = {}, bolt = {}",
+        //                Objects.isNull(resultHandler) ? null : resultHandler.getClass(),
+        //                this.bolt.getClass());
+        //        }
+        //        if (Objects.nonNull(resultHandler)) {
+        //            server.refRouter().route(path).order(KWeb.ORDER.SECURE_AUTHORIZATION)
+        //                .handler(resultHandler)
+        //                .failureHandler(EndurerAuthenticate.create());
+        //        }
     }
 }

@@ -10,7 +10,7 @@ import io.vertx.ext.auth.authorization.Authorization;
 import io.vertx.ext.auth.authorization.OrAuthorization;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.epoch.annotations.security.AuthorizedResource;
-import io.zerows.epoch.metadata.security.Aegis;
+import io.zerows.epoch.metadata.security.KSecurity;
 import io.zerows.platform.enums.EmSecure;
 import io.zerows.plugins.security.profile.PermissionAuthorization;
 import io.zerows.support.Ut;
@@ -28,9 +28,9 @@ import java.util.Set;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 public class AuthorizationResourceImpl implements AuthorizationResource {
-    private final transient Aegis aegis;
+    private final transient KSecurity aegis;
 
-    AuthorizationResourceImpl(final Aegis aegis) {
+    AuthorizationResourceImpl(final KSecurity aegis) {
         this.aegis = aegis;
     }
 

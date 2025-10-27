@@ -5,7 +5,7 @@ import io.vertx.ext.stomp.Frame;
 import io.vertx.ext.stomp.ServerFrame;
 import io.vertx.ext.stomp.StompServerConnection;
 import io.vertx.ext.stomp.impl.FrameParser;
-import io.zerows.epoch.metadata.security.Aegis;
+import io.zerows.epoch.metadata.security.KSecurity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,14 +19,14 @@ abstract class AbstractFrameHandler implements FrameWsHandler {
     /*
      * Bolt for Zero Security Injection to implement custom define for STOMP
      */
-    protected transient Aegis config;
+    protected transient KSecurity config;
 
     AbstractFrameHandler(final Vertx vertx) {
         this.vertx = vertx;
     }
 
     @Override
-    public FrameWsHandler bind(final Aegis config) {
+    public FrameWsHandler bind(final KSecurity config) {
         this.config = config;
         return this;
     }

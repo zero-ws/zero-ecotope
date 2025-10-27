@@ -7,7 +7,7 @@ import io.zerows.platform.enums.EmSecure;
  * @author lang : 2025-09-30
  */
 public class _40076Exception400WallSize extends VertxBootException {
-    public _40076Exception400WallSize(final EmSecure.AuthWall wall, final String size) {
+    public _40076Exception400WallSize(final EmSecure.SecurityType wall, final String size) {
         super(ERR._40076, wall.key(), size);
     }
 }

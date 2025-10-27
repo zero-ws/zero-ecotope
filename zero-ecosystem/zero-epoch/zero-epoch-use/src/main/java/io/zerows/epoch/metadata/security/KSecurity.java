@@ -1,10 +1,14 @@
 package io.zerows.epoch.metadata.security;
 
+import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.LogO;
+import io.zerows.epoch.application.YmlCore;
+import io.zerows.management.OZeroStore;
 import io.zerows.platform.constant.VValue;
 import io.zerows.platform.enums.EmSecure;
-import io.zerows.support.Ut;
 import io.zerows.specification.atomic.HCopier;
+import io.zerows.support.Ut;
+import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
@@ -18,17 +22,17 @@ import java.util.stream.Collectors;
  * Secure class container for special class extraction.
  * Scanned ( KMetadata ) for each @Wall.
  */
-public class Aegis implements Serializable, Comparable<Aegis>, HCopier<Aegis> {
-    private static final LogO LOGGER = Ut.Log.security(Aegis.class);
+public class KSecurity implements Serializable, Comparable<KSecurity>, HCopier<KSecurity> {
+    private static final LogO LOGGER = Ut.Log.security(KSecurity.class);
     /**
      * defined = false
      * Standard Authorization
      */
-    private final Against authorizer = new Against();
+    private final KSecurityExecutor authorizer = new KSecurityExecutor();
     /**
      * Current config
      */
-    private final ConcurrentMap<String, AegisItem> items = new ConcurrentHashMap<>();
+    private final ConcurrentMap<String, Provider> items = new ConcurrentHashMap<>();
     /**
      * The wall path to be security limitation
      */
@@ -40,7 +44,7 @@ public class Aegis implements Serializable, Comparable<Aegis>, HCopier<Aegis> {
     /**
      * Current wall type
      */
-    private EmSecure.AuthWall type;
+    private EmSecure.SecurityType type;
     /**
      * Proxy instance
      */
@@ -52,7 +56,7 @@ public class Aegis implements Serializable, Comparable<Aegis>, HCopier<Aegis> {
      */
     private boolean defined = false;
 
-    public Against getAuthorizer() {
+    public KSecurityExecutor getAuthorizer() {
         return this.authorizer;
     }
 
@@ -80,11 +84,11 @@ public class Aegis implements Serializable, Comparable<Aegis>, HCopier<Aegis> {
         this.order = order;
     }
 
-    public EmSecure.AuthWall getType() {
+    public EmSecure.SecurityType getType() {
         return this.type;
     }
 
-    public Aegis setType(final EmSecure.AuthWall type) {
+    public KSecurity setType(final EmSecure.SecurityType type) {
         this.type = type;
         return this;
     }
@@ -106,8 +110,8 @@ public class Aegis implements Serializable, Comparable<Aegis>, HCopier<Aegis> {
     }
 
     public Set<Class<?>> providers() {
-        return AegisItem.configMap().values().stream()
-            .map(AegisItem::getProviderAuthenticate)
+        return Provider.configMap().values().stream()
+            .map(Provider::getProviderAuthenticate)
             .filter(Objects::nonNull)
             .collect(Collectors.toSet());
     }
@@ -121,41 +125,41 @@ public class Aegis implements Serializable, Comparable<Aegis>, HCopier<Aegis> {
     }
 
     // ------------------- Extension ------------------------
-    public void addItem(final String key, final AegisItem item) {
-        if (EmSecure.AuthWall.EXTENSION == this.type) {
-            this.items.put(key, item);
+    public void addItem(final String key, final Provider provider) {
+        if (EmSecure.SecurityType.EXTENSION == this.type) {
+            this.items.put(key, provider);
         } else {
             LOGGER.warn("[ Auth ] The `key` = {0} will be ignored because of the type is: `{1}`.",
                 key, this.type);
         }
     }
 
-    public ConcurrentMap<String, AegisItem> items() {
-        if (EmSecure.AuthWall.EXTENSION == this.type) {
-            return AegisItem.configMap();
+    public ConcurrentMap<String, Provider> items() {
+        if (EmSecure.SecurityType.EXTENSION == this.type) {
+            return Provider.configMap();
         } else {
-            final EmSecure.AuthWall wall = this.type;
+            final EmSecure.SecurityType wall = this.type;
             LOGGER.warn("[ Auth ] We recommend use 'item(AuthWall)' instead of item() because of the type.");
             return new ConcurrentHashMap<>() {
                 {
-                    this.put(wall.key(), AegisItem.configMap(wall));
+                    this.put(wall.key(), Provider.configMap(wall));
                 }
             };
         }
     }
 
     // ------------------- Native ------------------------
-    public void setItem(final AegisItem item) {
-        if (EmSecure.AuthWall.EXTENSION != this.type) {
-            this.items.put(this.type.key(), item);
+    public void setItem(final Provider provider) {
+        if (EmSecure.SecurityType.EXTENSION != this.type) {
+            this.items.put(this.type.key(), provider);
         } else {
             LOGGER.warn("[ Auth ] Please use `addItem` instead of current method because your type is Extension");
         }
     }
 
-    public AegisItem item() {
-        final EmSecure.AuthWall wall = this.type;
-        if (EmSecure.AuthWall.EXTENSION != wall) {
+    public Provider item() {
+        final EmSecure.SecurityType wall = this.type;
+        if (EmSecure.SecurityType.EXTENSION != wall) {
             return this.items.getOrDefault(wall.key(), null);
         } else {
             // Smart Analyzing
@@ -171,8 +175,8 @@ public class Aegis implements Serializable, Comparable<Aegis>, HCopier<Aegis> {
 
     @Override
     @SuppressWarnings("unchecked")
-    public <CHILD extends Aegis> CHILD copy() {
-        final Aegis aegis = new Aegis();
+    public <CHILD extends KSecurity> CHILD copy() {
+        final KSecurity aegis = new KSecurity();
         // Final
         aegis.authorizer.setResource(this.authorizer.getResource());
         aegis.authorizer.setAuthorization(this.authorizer.getAuthorization());
@@ -195,7 +199,7 @@ public class Aegis implements Serializable, Comparable<Aegis>, HCopier<Aegis> {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof final Aegis wall)) {
+        if (!(o instanceof final KSecurity wall)) {
             return false;
         }
         return this.order == wall.order &&
@@ -205,7 +209,7 @@ public class Aegis implements Serializable, Comparable<Aegis>, HCopier<Aegis> {
     }
 
     @Override
-    public int compareTo(final @NotNull Aegis target) {
+    public int compareTo(final @NotNull KSecurity target) {
         return Ut.compareTo(this, target, (left, right) -> {
             // 1. Compare Path
             int result = Ut.compareTo(left.getPath(), right.getPath());
@@ -234,5 +238,90 @@ public class Aegis implements Serializable, Comparable<Aegis>, HCopier<Aegis> {
             ", defined=" + this.defined +
             ", handler=" + this.handler +
             '}';
+    }
+
+    /**
+     * 安全项相关的方法，根据配置初始化
+     */
+    public static class Provider implements Serializable {
+        private static final ConcurrentMap<String, Provider> SECURE = new ConcurrentHashMap<>();
+        private static final LogO LOGGER = Ut.Log.security(Provider.class);
+
+        static {
+            //    final JsonObject configuration = Ut.valueJObject(config.getJsonObject(YmlCore.inject.SECURE));
+            final JsonObject configuration = OZeroStore.option(YmlCore.inject.SECURE);
+            final Set<String> keys = EmSecure.SecurityType.keys();
+            Ut.<JsonObject>itJObject(configuration, (value, field) -> {
+                if (keys.contains(field)) {
+                    final String ruleKey = "wall-" + field;
+                    SECURE.put(field, new Provider(field, value));
+                } else {
+                    LOGGER.info("[ Auth ] You have defined extension configuration with key `{0}`", field);
+                    SECURE.put(field, new Provider(EmSecure.SecurityType.EXTENSION.key(), value));
+                }
+            });
+            LOGGER.info("[ Auth ] You have configured `{0}` kind security mode.", String.valueOf(SECURE.size()));
+        }
+
+        private final JsonObject options = new JsonObject();
+        private final String key;
+        private final EmSecure.SecurityType wall;
+        @Getter
+        private Class<?> providerAuthenticate;
+        @Getter
+        private Class<?> providerAuthorization;
+
+        private Provider(final String key, final JsonObject config) {
+            this.key = key;
+            this.wall = EmSecure.SecurityType.from(key);
+            /*
+             * options:
+             */
+            this.options.mergeIn(config.getJsonObject(YmlCore.secure.OPTIONS, new JsonObject()), true);
+            /*
+             * provider class for current item
+             * provider:
+             *   authenticate:
+             *   authorization:
+             */
+            this.init(config.getJsonObject(YmlCore.secure.PROVIDER, new JsonObject()));
+        }
+
+        public static ConcurrentMap<String, Provider> configMap() {
+            return SECURE;
+        }
+
+        public static Provider configMap(final EmSecure.SecurityType wall) {
+            return SECURE.getOrDefault(wall.key(), null);
+        }
+
+        private void init(final JsonObject provider) {
+            // 401
+            final String authenticate = provider.getString(YmlCore.secure.provider.AUTHENTICATE);
+            if (Ut.isNil(authenticate)) {
+                this.providerAuthenticate = null;
+            } else {
+                this.providerAuthenticate = Ut.clazz(authenticate);
+            }
+            // 403
+            final String authorization = provider.getString(YmlCore.secure.provider.AUTHORIZATION);
+            if (Ut.isNil(authorization)) {
+                this.providerAuthorization = null;
+            } else {
+                this.providerAuthorization = Ut.clazz(authorization, null);
+            }
+        }
+
+        public JsonObject options() {
+            return this.options;
+        }
+
+        public EmSecure.SecurityType wall() {
+            return this.wall;
+        }
+
+        public String key() {
+            return this.key;
+        }
     }
 }

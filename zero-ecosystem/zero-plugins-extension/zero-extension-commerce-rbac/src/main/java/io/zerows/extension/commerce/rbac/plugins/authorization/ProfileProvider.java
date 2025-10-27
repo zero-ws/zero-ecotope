@@ -9,7 +9,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 import io.vertx.ext.auth.authorization.Authorization;
 import io.vertx.ext.auth.authorization.AuthorizationProvider;
-import io.zerows.epoch.metadata.security.Aegis;
+import io.zerows.epoch.metadata.security.KSecurity;
 import io.zerows.support.Ut;
 
 import java.lang.reflect.Method;
@@ -22,13 +22,13 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class ProfileProvider implements AuthorizationProvider {
 
-    private transient final Aegis aegis;
+    private transient final KSecurity aegis;
 
-    private ProfileProvider(final Aegis aegis) {
+    private ProfileProvider(final KSecurity aegis) {
         this.aegis = aegis;
     }
 
-    public static AuthorizationProvider provider(final Aegis aegis) {
+    public static AuthorizationProvider provider(final KSecurity aegis) {
         return new ProfileProvider(aegis);
     }
 

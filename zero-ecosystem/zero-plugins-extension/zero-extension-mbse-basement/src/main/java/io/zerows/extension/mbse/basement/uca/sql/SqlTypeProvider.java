@@ -1,9 +1,9 @@
 package io.zerows.extension.mbse.basement.uca.sql;
 
+import io.r2mo.base.dbe.Database;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.platform.metadata.KDatabase;
 import io.zerows.support.Ut;
 
 import java.util.concurrent.ConcurrentHashMap;
@@ -20,9 +20,9 @@ public class SqlTypeProvider {
         new ConcurrentHashMap<>();
     private static final Cc<String, SqlTypeProvider> CC_PROVIDER = Cc.open();
 
-    private SqlTypeProvider(final KDatabase database) {
+    private SqlTypeProvider(final Database database) {
         final JsonObject schemaData = Ut.ioJObject(
-            "engine/database/sql/" + database.getCategory().name() + "/schema.json");
+            "engine/database/sql/" + database.getType().name() + "/schema.json");
         final JsonObject definitions = schemaData.getJsonObject("definitions");
         for (final String field : definitions.fieldNames()) {
             if (Ut.isNotNil(field) && null != definitions.getValue(field)) {
@@ -37,8 +37,8 @@ public class SqlTypeProvider {
         }
     }
 
-    public static SqlTypeProvider create(final KDatabase database) {
-        return CC_PROVIDER.pick(() -> new SqlTypeProvider(database), database.getCategory().name());
+    public static SqlTypeProvider create(final Database database) {
+        return CC_PROVIDER.pick(() -> new SqlTypeProvider(database), database.getType().name());
         // Fn.po?l(DB_TYPE_REF, database.getCategory().name(), () -> new SqlTypeProvider(database));
     }
 

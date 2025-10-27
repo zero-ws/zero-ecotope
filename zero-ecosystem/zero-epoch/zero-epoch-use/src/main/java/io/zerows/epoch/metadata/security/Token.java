@@ -5,11 +5,11 @@ import io.vertx.core.json.JsonObject;
 import java.io.Serializable;
 
 /*
- * WebToken core interface
+ * Token core interface
  */
-public interface WebToken extends Serializable {
+public interface Token extends Serializable {
     /*
-     * 读取 WebToken 的值
+     * 读取 Token 的值
      */
     String token();
 

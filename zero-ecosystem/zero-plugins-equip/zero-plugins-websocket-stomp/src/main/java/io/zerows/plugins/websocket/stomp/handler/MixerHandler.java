@@ -3,16 +3,16 @@ package io.zerows.plugins.websocket.stomp.handler;
 import io.vertx.core.Vertx;
 import io.vertx.ext.stomp.StompServerHandler;
 import io.vertx.ext.stomp.StompServerOptions;
-import io.zerows.epoch.metadata.security.Aegis;
+import io.zerows.epoch.metadata.security.KSecurity;
 import io.zerows.plugins.websocket.stomp.command.FrameWsHandler;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 public class MixerHandler extends AbstractMixer {
-    private transient final Aegis aegis;
+    private transient final KSecurity aegis;
 
-    public MixerHandler(final Vertx vertx, final Aegis aegis) {
+    public MixerHandler(final Vertx vertx, final KSecurity aegis) {
         super(vertx);
         this.aegis = aegis;
     }

@@ -1,65 +1,40 @@
 package io.zerows.epoch.metadata.security;
 
+import io.zerows.epoch.annotations.security.Authenticate;
+import io.zerows.epoch.annotations.security.Authorized;
+import io.zerows.epoch.annotations.security.AuthorizedResource;
+import io.zerows.epoch.annotations.security.AuthorizedUser;
+import lombok.Data;
+
 import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.util.Objects;
 
 /**
- *
+ * 安全专用方法集，用于存储安全相关的方法引用
  */
-public class Against implements Serializable {
-    /*
-     * 401: Authenticate method
-     * @Authenticate
+@Data
+public class KSecurityExecutor implements Serializable {
+    /**
+     * 401: 认证专用方法
+     * {@link Authenticate}
      */
     private Method authenticate;
-    /*
-     * 403: Authorize method
-     * @Authorized
+    /**
+     * 403: 授权专用方法
+     * {@link Authorized}
      */
     private Method authorization;
-    /*
-     * 403: Resource
-     * @AuthorizedResource
+    /**
+     * 403: 资源标记专用
+     * {@link AuthorizedResource}
      */
     private Method resource;
-    /*
-     * 403: User
-     * @AuthorizedUser
+    /**
+     * 403: 授权用户专用方法
+     * {@link AuthorizedUser}
      */
     private Method user;
-
-    public Method getAuthenticate() {
-        return this.authenticate;
-    }
-
-    public void setAuthenticate(final Method authenticate) {
-        this.authenticate = authenticate;
-    }
-
-    public Method getAuthorization() {
-        return this.authorization;
-    }
-
-    public void setAuthorization(final Method authorization) {
-        this.authorization = authorization;
-    }
-
-    public Method getResource() {
-        return this.resource;
-    }
-
-    public void setResource(final Method resource) {
-        this.resource = resource;
-    }
-
-    public Method getUser() {
-        return this.user;
-    }
-
-    public void setUser(final Method user) {
-        this.user = user;
-    }
 
     @Override
     public String toString() {
@@ -79,7 +54,7 @@ public class Against implements Serializable {
         if (o == null || this.getClass() != o.getClass()) {
             return false;
         }
-        final Against against = (Against) o;
+        final KSecurityExecutor against = (KSecurityExecutor) o;
         return this.authenticate.equals(against.authenticate) &&
             Objects.equals(this.authorization, against.authorization) &&
             Objects.equals(this.resource, against.resource) &&

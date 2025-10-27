@@ -1,7 +1,7 @@
 package io.zerows.plugins.security.authenticate;
 
 import io.vertx.ext.auth.authentication.AuthenticationProvider;
-import io.zerows.epoch.metadata.security.Aegis;
+import io.zerows.epoch.metadata.security.KSecurity;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
@@ -15,7 +15,7 @@ class AdapterExtension extends AbstractAdapter {
     }
 
     @Override
-    public AuthenticationProvider provider(final Aegis aegis) {
+    public AuthenticationProvider provider(final KSecurity aegis) {
         final AuthenticateBuiltInProvider provider = AuthenticateBuiltInProvider.provider(aegis);
         return credentials ->
             AdapterExtension.this.standard.authenticate(credentials)

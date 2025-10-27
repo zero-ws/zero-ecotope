@@ -12,7 +12,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.management.OCacheUri;
 import io.zerows.epoch.metadata.KView;
-import io.zerows.epoch.metadata.security.Aegis;
+import io.zerows.epoch.metadata.security.KSecurity;
 
 import java.util.Objects;
 
@@ -88,7 +88,7 @@ public interface AuthorizationResource {
         return normalized;
     }
 
-    static AuthorizationResource buildIn(final Aegis aegis) {
+    static AuthorizationResource buildIn(final KSecurity aegis) {
         return new AuthorizationResourceImpl(aegis);
     }
 

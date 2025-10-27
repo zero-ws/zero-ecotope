@@ -6,18 +6,18 @@ import io.vertx.ext.auth.User;
 import io.zerows.epoch.constant.KName;
 import io.zerows.platform.enums.EmSecure;
 import io.zerows.platform.exception._60050Exception501NotSupport;
-import io.zerows.support.Ut;
 import io.zerows.sdk.security.Lee;
 import io.zerows.sdk.security.LeeBuiltIn;
+import io.zerows.support.Ut;
 
 import java.util.Objects;
 
 /**
  * @author lang : 2024-04-20
  */
-public class TokenJwt implements WebToken {
+public class TokenJwt implements Token {
     private static final Cc<String, JsonObject> STORE_TOKEN = Cc.open();
-    private static final Cc<Integer, WebToken> USER_TOKEN = Cc.open();
+    private static final Cc<Integer, Token> USER_TOKEN = Cc.open();
 
     private String token;
     private JsonObject tokenJson;
@@ -30,7 +30,7 @@ public class TokenJwt implements WebToken {
 
     private TokenJwt(final JsonObject tokenJson) {
         final Lee lee = Ut.service(LeeBuiltIn.class);
-        this.token = lee.encode(tokenJson, AegisItem.configMap(EmSecure.AuthWall.JWT));
+        this.token = lee.encode(tokenJson, KSecurity.Provider.configMap(EmSecure.SecurityType.JWT));
         this.tokenJson = tokenJson;
     }
 
@@ -50,21 +50,18 @@ public class TokenJwt implements WebToken {
         }
     }
 
-    public static <T> WebToken of(final T input) {
+    public static <T> Token of(final T input) {
         Objects.requireNonNull(input);
         return USER_TOKEN.pick(() -> ofInternal(input), input.hashCode());
     }
 
-    private static <T> WebToken ofInternal(final T input) {
-        if (input instanceof final String token) {
-            return new TokenJwt(token);
-        } else if (input instanceof final JsonObject tokenJson) {
-            return new TokenJwt(tokenJson);
-        } else if (input instanceof final User user) {
-            return new TokenJwt(user);
-        } else {
-            throw new _60050Exception501NotSupport(TokenJwt.class);
-        }
+    private static <T> Token ofInternal(final T input) {
+        return switch (input) {
+            case final String token -> new TokenJwt(token);
+            case final JsonObject tokenJson -> new TokenJwt(tokenJson);
+            case final User user -> new TokenJwt(user);
+            case null, default -> throw new _60050Exception501NotSupport(TokenJwt.class);
+        };
     }
 
     private JsonObject tokenJson() {
@@ -72,7 +69,7 @@ public class TokenJwt implements WebToken {
         final Lee lee = Ut.service(LeeBuiltIn.class);
         return STORE_TOKEN
             // 防止 JWT 的高频解码（速度很慢）
-            .pick(() -> lee.decode(this.token, AegisItem.configMap(EmSecure.AuthWall.JWT)), this.token);
+            .pick(() -> lee.decode(this.token, KSecurity.Provider.configMap(EmSecure.SecurityType.JWT)), this.token);
     }
 
     @Override

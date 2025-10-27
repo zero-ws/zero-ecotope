@@ -4,7 +4,7 @@ import io.vertx.core.Vertx;
 import io.vertx.ext.auth.authentication.AuthenticationProvider;
 import io.vertx.ext.web.handler.AuthenticationHandler;
 import io.vertx.ext.web.handler.AuthorizationHandler;
-import io.zerows.epoch.metadata.security.Aegis;
+import io.zerows.epoch.metadata.security.KSecurity;
 import io.zerows.platform.enums.EmSecure;
 import io.zerows.sdk.security.Lee;
 import io.zerows.sdk.security.LeeBuiltIn;
@@ -19,9 +19,9 @@ public interface Bolt {
         return BoltWhich.CC_BOLT.pick(BoltWhich::new);
     }
 
-    static Lee reference(final EmSecure.AuthWall wall) {
+    static Lee reference(final EmSecure.SecurityType wall) {
         //final AuthWall wall = config.getType();
-        if (EmSecure.AuthWall.EXTENSION == wall) {
+        if (EmSecure.SecurityType.EXTENSION == wall) {
             return BoltWhich.CC_LEE.pick(() -> Ut.service(LeeExtension.class), LeeExtension.class.getName());
         } else {
             return BoltWhich.CC_LEE.pick(() -> Ut.service(LeeBuiltIn.class), LeeBuiltIn.class.getName());
@@ -31,12 +31,12 @@ public interface Bolt {
     /*
      * 1. Authenticate Handler
      */
-    AuthenticationHandler authenticate(Vertx vertx, Aegis config);
+    AuthenticationHandler authenticate(Vertx vertx, KSecurity config);
 
     /*
      * 2. Authorization Handler
      */
-    AuthorizationHandler authorization(Vertx vertx, Aegis config);
+    AuthorizationHandler authorization(Vertx vertx, KSecurity config);
 
-    AuthenticationProvider authenticateProvider(Vertx vertx, Aegis config);
+    AuthenticationProvider authenticateProvider(Vertx vertx, KSecurity config);
 }

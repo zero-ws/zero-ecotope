@@ -10,9 +10,9 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.authorization.Authorization;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.epoch.metadata.security.Aegis;
-import io.zerows.support.Ut;
+import io.zerows.epoch.metadata.security.KSecurity;
 import io.zerows.plugins.security.authorization.AuthorizationResource;
+import io.zerows.support.Ut;
 
 import java.lang.reflect.Method;
 import java.util.Objects;
@@ -24,13 +24,13 @@ import java.util.concurrent.ConcurrentMap;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 public class ProfileResource implements AuthorizationResource {
-    private final transient Aegis aegis;
+    private final transient KSecurity aegis;
 
-    private ProfileResource(final Aegis aegis) {
+    private ProfileResource(final KSecurity aegis) {
         this.aegis = aegis;
     }
 
-    public static AuthorizationResource create(final Aegis aegis) {
+    public static AuthorizationResource create(final KSecurity aegis) {
         return new ProfileResource(aegis);
     }
 

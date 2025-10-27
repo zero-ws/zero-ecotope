@@ -11,8 +11,7 @@ import io.vertx.ext.auth.jwt.JWTAuthOptions;
 import io.vertx.ext.web.handler.AuthenticationHandler;
 import io.vertx.ext.web.handler.JWTAuthHandler;
 import io.zerows.epoch.application.YmlCore;
-import io.zerows.epoch.metadata.security.Aegis;
-import io.zerows.epoch.metadata.security.AegisItem;
+import io.zerows.epoch.metadata.security.KSecurity;
 import io.zerows.plugins.security.authenticate.AdapterProvider;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
@@ -26,7 +25,7 @@ class LeeJwt extends AbstractLee {
     private static final Cc<String, JWTAuth> CC_PROVIDER = Cc.openThread();
 
     @Override
-    public AuthenticationHandler authenticate(final Vertx vertx, final Aegis config) {
+    public AuthenticationHandler authenticate(final Vertx vertx, final KSecurity config) {
         final JWTAuth provider = this.providerInternal(vertx, config);
         // Jwt Handler Generated
         final String realm = this.option(config, YmlCore.secure.options.REALM);
@@ -40,7 +39,7 @@ class LeeJwt extends AbstractLee {
     }
 
     @Override
-    public AuthenticationProvider provider(final Vertx vertx, final Aegis config) {
+    public AuthenticationProvider provider(final Vertx vertx, final KSecurity config) {
         final JWTAuth standard = this.providerInternal(vertx, config);
         final AdapterProvider extension = AdapterProvider.extension(standard);
         return extension.provider(config);
@@ -48,26 +47,26 @@ class LeeJwt extends AbstractLee {
 
     @Override
     @SuppressWarnings("unchecked")
-    public JWTAuth providerInternal(final Vertx vertx, final Aegis config) {
+    public JWTAuth providerInternal(final Vertx vertx, final KSecurity config) {
         // Options
-        final AegisItem item = config.item();
-        return this.provider(vertx, item);
+        final KSecurity.Provider provider = config.item();
+        return this.provider(vertx, provider);
     }
 
-    private JWTAuth provider(final Vertx vertx, final AegisItem item) {
-        final JWTAuthOptions options = new JWTAuthOptions(item.options());
-        final String key = item.wall().name() + options.hashCode();
+    private JWTAuth provider(final Vertx vertx, final KSecurity.Provider provider) {
+        final JWTAuthOptions options = new JWTAuthOptions(provider.options());
+        final String key = provider.wall().name() + options.hashCode();
         return CC_PROVIDER.pick(() -> JWTAuth.create(vertx, options), key);
     }
 
     @Override
-    public String encode(final JsonObject data, final AegisItem config) {
+    public String encode(final JsonObject data, final KSecurity.Provider config) {
         final JWTAuth provider = this.provider(Ux.nativeVertx(), config);
         return provider.generateToken(data);
     }
 
     @Override
-    public JsonObject decode(final String token, final AegisItem config) {
+    public JsonObject decode(final String token, final KSecurity.Provider config) {
         final JWTAuth provider = this.provider(Ux.nativeVertx(), config);
         final JWT jwt = Ut.field(provider, "jwt");
         return Objects.isNull(jwt) ? new JsonObject() : Fn.jvmOr(() -> jwt.decode(token));

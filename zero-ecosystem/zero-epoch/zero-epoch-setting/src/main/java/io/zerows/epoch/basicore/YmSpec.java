@@ -2,7 +2,9 @@ package io.zerows.epoch.basicore;
 
 import com.hazelcast.shaded.com.zaxxer.hikari.HikariConfig;
 import io.r2mo.SourceReflect;
+import io.r2mo.base.dbe.Database;
 import io.r2mo.base.io.HStore;
+import io.r2mo.typed.enums.DatabaseType;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Vertx;
 import io.vertx.core.VertxOptions;
@@ -18,9 +20,7 @@ import io.zerows.epoch.basicore.option.ClusterOptions;
 import io.zerows.epoch.basicore.option.CorsOptions;
 import io.zerows.epoch.configuration.ZeroPlugins;
 import io.zerows.epoch.metadata.MMComponent;
-import io.zerows.platform.enums.EmDS;
 import io.zerows.platform.enums.EmSecure;
-import io.zerows.platform.metadata.KDatabase;
 
 import java.lang.reflect.Method;
 
@@ -188,38 +188,38 @@ import java.lang.reflect.Method;
  *   cluster:                                                               # {@link ClusterOptions}
  *     manager:                                                             # 🔸 集群管理器
  *     options:                                                             # 🌷 {@link ClusterManager}
- *   datasource:                                                            # {@link YmDataSource} / {@link KDatabase}
+ *   datasource:                                                            # {@link YmDataSource} / {@link Database}
  *     dynamic:                                                             # {@link YmDataSource.Dynamic}
  *       primary:                                                           # 主数据源名称
  *       strict:                                                            # 严格模式
- *       datasource:                                                        # Map 结构，name = {@link KDatabase} 的数据库结构
- *         master: 🟢                                                       # 主库 {@link KDatabase}
+ *       datasource:                                                        # Map 结构，name = {@link Database} 的数据库结构
+ *         master: 🟢                                                       # 主库 {@link Database}
  *           url:                                                           # 数据库连接 URL
  *           username:                                                      # 数据库连接用户名
  *           password:                                                      # 数据库连接密码
  *           instance:                                                      # ---> 💻️ Z_DBS_INSTANCE
  *           driver-class-name:                                             # 数据库驱动
- *           category:                                                      # 数据库类型 {@link EmDS.Database}, 默认 MYSQL
+ *           category:                                                      # 数据库类型 {@link DatabaseType}, 默认 MYSQL
  *           hostname:                                                      # ---> 💻️ Z_DBS_HOST
  *           port:                                                          # ---> 💻️ Z_DBS_PORT
  *           options:                                                       # 其他特殊选项，如自动提交、事务配置等
- *         master-history: 🔵                                               # 历史库 {@link KDatabase}
+ *         master-history: 🔵                                               # 历史库 {@link Database}
  *           url:                                                           # 数据库连接 URL
  *           username:                                                      # 数据库连接用户名
  *           password:                                                      # 数据库连接密码
  *           instance:                                                      # ---> 💻️ Z_DBH_INSTANCE
  *           driver-class-name:                                             # 数据库驱动
- *           category:                                                      # 数据库类型 {@link EmDS.Database}, 默认 MYSQL
+ *           category:                                                      # 数据库类型 {@link DatabaseType}, 默认 MYSQL
  *           hostname:                                                      # ---> 💻️ Z_DBH_HOST
  *           port:                                                          # ---> 💻️ Z_DBH_PORT
  *           options:                                                       # 其他特殊选项，如自动提交、事务配置等
- *         master-workflow: 🔵                                              # 工作流 库 {@link KDatabase}
+ *         master-workflow: 🔵                                              # 工作流 库 {@link Database}
  *           url:                                                           # 数据库连接 URL
  *           username:                                                      # 数据库连接用户名
  *           password:                                                      # 数据库连接密码
  *           instance:                                                      # ---> 💻️ Z_DBW_INSTANCE
  *           driver-class-name:                                             # 数据库驱动
- *           category:                                                      # 数据库类型 {@link EmDS.Database}, 默认 MYSQL
+ *           category:                                                      # 数据库类型 {@link DatabaseType}, 默认 MYSQL
  *           hostname:                                                      # ---> 💻️ Z_DBW_HOST
  *           port:                                                          # ---> 💻️ Z_DBW_PORT
  *           options:                                                       # 其他特殊选项，如自动提交、事务配置等
@@ -244,7 +244,7 @@ import java.lang.reflect.Method;
  *       endpoint:                                                          # 自动计算
  *   security:                                                              # {@link YmSecurity}
  *     wall:                                                                # 安全管控路径 /api
- *     jwt:                                                                 # {@link EmSecure.AuthWall#JWT}
+ *     jwt:                                                                 # {@link EmSecure.SecurityType#JWT}
  *       options:                                                           #
  *         jwtOptions:                                                      # 🌷 {@link JWTOptions}
  *           algorithm: HS256                                               # 加密算法
@@ -255,13 +255,13 @@ import java.lang.reflect.Method;
  *       provider:
  *         authenticate:                                                    # 🔸 认证 {@link Method}
  *         authorization:                                                   # 🔸 授权 {@link Method}
- *     digest:                                                              # {@link EmSecure.AuthWall#DIGEST}
+ *     digest:                                                              # {@link EmSecure.SecurityType#HT_DIGEST}
  *       options:                                                           #
  *         filename:
  *       provider:
  *         authenticate:                                                    # 🔸 认证 {@link Method}
  *         authorization:                                                   # 🔸 授权 {@link Method}
- *     oauth2:                                                              # {@link EmSecure.AuthWall#OAUTH2}
+ *     oauth2:                                                              # {@link EmSecure.SecurityType#OAUTH2}
  *       options:                                                           #
  *         callback:
  *       provider:

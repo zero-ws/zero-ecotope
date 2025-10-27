@@ -2,7 +2,7 @@ package io.zerows.plugins.security.authenticate;
 
 import io.vertx.ext.auth.ChainAuth;
 import io.vertx.ext.auth.authentication.AuthenticationProvider;
-import io.zerows.epoch.metadata.security.Aegis;
+import io.zerows.epoch.metadata.security.KSecurity;
 
 import java.util.Objects;
 
@@ -11,7 +11,7 @@ import java.util.Objects;
  */
 class AdapterCommon extends AbstractAdapter {
     @Override
-    public AuthenticationProvider provider(final Aegis aegis) {
+    public AuthenticationProvider provider(final KSecurity aegis) {
         // Chain Provider
         final ChainAuth chain = ChainAuth.all();
         final AuthenticationProvider provider = this.provider401Internal(aegis);

@@ -45,8 +45,8 @@ public class KPivot<T> {
      *     1. {@link HAmbient}
      *        key = {@link HArk}
      *               - {@link HApp}
-     *               - {@link OldKDS}
-     *                  - {@link KDatabase}
+     *               - {@link DBS}
+     *                  - {@link Database}
      *               - {@link HBelong}
      *                  - {@link HFrontier}
      *                  - {@link HGalaxy}

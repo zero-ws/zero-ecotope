@@ -1,12 +1,8 @@
 package io.zerows.extension.mbse.basement.uca.metadata;
 
+import io.r2mo.base.dbe.Database;
 import io.vertx.core.json.JsonArray;
-import io.zerows.platform.constant.VString;
-import io.zerows.platform.constant.VValue;
-import io.zerows.platform.enums.modeling.EmKey;
-import io.zerows.platform.metadata.KDatabase;
 import io.zerows.component.log.LogOf;
-import io.zerows.support.Ut;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MField;
 import io.zerows.extension.mbse.basement.domain.tables.pojos.MKey;
 import io.zerows.extension.mbse.basement.eon.em.CheckResult;
@@ -14,6 +10,10 @@ import io.zerows.extension.mbse.basement.eon.sql.SqlStatement;
 import io.zerows.extension.mbse.basement.eon.sql.SqlWord;
 import io.zerows.extension.mbse.basement.uca.sql.SqlDDLBuilder;
 import io.zerows.extension.mbse.basement.uca.sql.SqlTypeProvider;
+import io.zerows.platform.constant.VString;
+import io.zerows.platform.constant.VValue;
+import io.zerows.platform.enums.modeling.EmKey;
+import io.zerows.support.Ut;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -21,11 +21,11 @@ import java.util.List;
 import java.util.concurrent.ConcurrentMap;
 
 public abstract class AbstractSentence implements AoSentence, SqlStatement {
-    protected final transient KDatabase database;
+    protected final transient Database database;
     protected final transient SqlTypeProvider typeProvider;
     private final transient SqlDDLBuilder builder = SqlDDLBuilder.create();
 
-    public AbstractSentence(final KDatabase database) {
+    public AbstractSentence(final Database database) {
         this.database = database;
         this.typeProvider = SqlTypeProvider.create(database);
     }

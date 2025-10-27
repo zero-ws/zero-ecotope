@@ -9,8 +9,7 @@ import io.vertx.ext.web.handler.AuthorizationHandler;
 import io.zerows.component.log.LogO;
 import io.zerows.cosmic.plugins.security.exception._40076Exception400WallSize;
 import io.zerows.cosmic.plugins.security.exception._40077Exception400WallProviderConflict;
-import io.zerows.epoch.metadata.security.Aegis;
-import io.zerows.epoch.metadata.security.AegisItem;
+import io.zerows.epoch.metadata.security.KSecurity;
 import io.zerows.platform.enums.EmSecure;
 import io.zerows.sdk.security.Lee;
 import io.zerows.support.Ut;
@@ -38,7 +37,7 @@ class BoltWhich implements Bolt {
     static Cc<String, Lee> CC_LEE = Cc.openThread();
 
     @Override
-    public AuthenticationHandler authenticate(final Vertx vertx, final Aegis config) {
+    public AuthenticationHandler authenticate(final Vertx vertx, final KSecurity config) {
         Objects.requireNonNull(config);
         if (config.noAuthentication()) {
             // Log
@@ -47,7 +46,7 @@ class BoltWhich implements Bolt {
             }
             return null;
         }
-        final Aegis verified = this.verifyAuthenticate(config);
+        final KSecurity verified = this.verifyAuthenticate(config);
         final Lee lee = Bolt.reference(config.getType());
         if (Objects.isNull(lee)) {
             // Log
@@ -67,7 +66,7 @@ class BoltWhich implements Bolt {
     }
 
     @Override
-    public AuthorizationHandler authorization(final Vertx vertx, final Aegis config) {
+    public AuthorizationHandler authorization(final Vertx vertx, final KSecurity config) {
         Objects.requireNonNull(config);
         if (config.noAuthorization()) {
             return null;
@@ -80,7 +79,7 @@ class BoltWhich implements Bolt {
     }
 
     @Override
-    public AuthenticationProvider authenticateProvider(final Vertx vertx, final Aegis config) {
+    public AuthenticationProvider authenticateProvider(final Vertx vertx, final KSecurity config) {
         Objects.requireNonNull(config);
         if (config.noAuthentication()) {
             return null;
@@ -101,13 +100,13 @@ class BoltWhich implements Bolt {
      * - JWT, WEB, OAUTH2, DIGEST
      * They are fixed provider of authenticate
      */
-    private Aegis verifyAuthenticate(final Aegis config) {
-        if (EmSecure.AuthWall.EXTENSION != config.getType()) {
+    private KSecurity verifyAuthenticate(final KSecurity config) {
+        if (EmSecure.SecurityType.EXTENSION != config.getType()) {
             /*
              * The size should be 1 ( For non-extension )
              */
-            final AegisItem item = config.item();
-            Fn.jvmKo(Objects.isNull(item), _40076Exception400WallSize.class, config.getType(), 1);
+            final KSecurity.Provider provider = config.item();
+            Fn.jvmKo(Objects.isNull(provider), _40076Exception400WallSize.class, config.getType(), 1);
         }
         final Set<Class<?>> provider = config.providers();
         /*

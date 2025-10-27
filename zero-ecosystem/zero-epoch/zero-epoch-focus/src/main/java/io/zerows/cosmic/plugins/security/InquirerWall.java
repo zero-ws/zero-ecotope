@@ -13,8 +13,7 @@ import io.zerows.epoch.annotations.security.Wall;
 import io.zerows.epoch.assembly.DI;
 import io.zerows.epoch.assembly.ExtractorEvent;
 import io.zerows.epoch.configuration.Inquirer;
-import io.zerows.epoch.metadata.security.Aegis;
-import io.zerows.epoch.metadata.security.AegisItem;
+import io.zerows.epoch.metadata.security.KSecurity;
 import io.zerows.platform.enums.EmSecure;
 import io.zerows.support.Ut;
 
@@ -31,14 +30,14 @@ import java.util.stream.Collectors;
 /**
  * This class is for @Wall of security here.
  */
-public class InquirerWall implements Inquirer<Set<Aegis>> {
+public class InquirerWall implements Inquirer<Set<KSecurity>> {
 
     private static final DI PLUGIN = DI.create(ExtractorEvent.class);
 
     @Override
-    public Set<Aegis> scan(final Set<Class<?>> walls) {
+    public Set<KSecurity> scan(final Set<Class<?>> walls) {
         /* 1. Build result **/
-        final Set<Aegis> wallSet = new TreeSet<>();
+        final Set<KSecurity> wallSet = new TreeSet<>();
         final Set<Class<?>> wallClass = walls.stream()
             .filter((item) -> item.isAnnotationPresent(Wall.class))
             .collect(Collectors.toSet());
@@ -60,8 +59,8 @@ public class InquirerWall implements Inquirer<Set<Aegis>> {
         return wallSet;
     }
 
-    private Aegis create(final Class<?> clazz) {
-        final Aegis aegis = new Aegis();
+    private KSecurity create(final Class<?> clazz) {
+        final KSecurity aegis = new KSecurity();
         /*
          * 「Validation」
          * 1 - Proxy Creation with Wall Specification
@@ -85,20 +84,20 @@ public class InquirerWall implements Inquirer<Set<Aegis>> {
         return aegis;
     }
 
-    private void verifyConfig(final Class<?> clazz, final Aegis reference, final String typeKey) {
-        final EmSecure.AuthWall wall = EmSecure.AuthWall.from(typeKey);
+    private void verifyConfig(final Class<?> clazz, final KSecurity reference, final String typeKey) {
+        final EmSecure.SecurityType wall = EmSecure.SecurityType.from(typeKey);
         /* Wall Type Wrong */
         Fn.jvmKo(Objects.isNull(wall), _40075Exception400WallTypeWrong.class, typeKey, clazz);
         reference.setType(wall);
-        final ConcurrentMap<String, AegisItem> configMap = AegisItem.configMap();
-        if (EmSecure.AuthWall.EXTENSION == wall) {
+        final ConcurrentMap<String, KSecurity.Provider> configMap = KSecurity.Provider.configMap();
+        if (EmSecure.SecurityType.EXTENSION == wall) {
             /* Extension */
             reference.setDefined(Boolean.TRUE);
             configMap.forEach(reference::addItem);
         } else {
             /* Standard */
             reference.setDefined(Boolean.FALSE);
-            final AegisItem found = configMap.getOrDefault(wall.key(), null);
+            final KSecurity.Provider found = configMap.getOrDefault(wall.key(), null);
             Fn.jvmKo(Objects.isNull(found), _40040Exception400WallKeyMissing.class, wall.key(), clazz);
             reference.setItem(found);
         }
@@ -108,7 +107,7 @@ public class InquirerWall implements Inquirer<Set<Aegis>> {
      * Wall class specification scanned and verified by zero framework
      * the class must contain method `@Authenticate` and optional method `@Authorization` once
      */
-    private void verifyProxy(final Class<?> clazz, final Aegis reference) {
+    private void verifyProxy(final Class<?> clazz, final KSecurity reference) {
         final Method[] methods = clazz.getDeclaredMethods();
         // Duplicated Method checking
         Fn.jvmKo(this.verifyMethod(methods, Authenticate.class),
