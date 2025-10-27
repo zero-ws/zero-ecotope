@@ -18,8 +18,8 @@
         <module>zero-plugins-trash</module>
         <module>zero-plugins-flyway</module>
         <module>zero-plugins-swagger</module>
-        <module>zero-plugins-common-security</module>
-        <module>zero-plugins-common-shell</module>
+        <module>zero-plugins-liquibase</module>
+        <module>zero-plugins-security</module>
 
         <!-- Integration -->
         <!--        <module>zero-plugins-integration-feign</module>-->
@@ -32,7 +32,6 @@
 
         <!-- Store -->
         <module>zero-plugins-store-elasticsearch</module>
-        <module>zero-plugins-liquibase</module>
         <!--        <module>zero-plugins-store-mongo</module>  -->
         <module>zero-plugins-store-neo4j</module>
         <!--        <module>zero-plugins-store-redis</module>-->

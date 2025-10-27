@@ -29,12 +29,12 @@
                 <artifactId>zero-plugins-liquibase</artifactId>
                 <version>${zero.version}</version>
             </dependency>
-            <!-- ================= 静态插件 ================== -->
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-plugins-common-shell</artifactId>
+                <artifactId>zero-plugins-security</artifactId>
                 <version>${zero.version}</version>
             </dependency>
+            <!-- ================= 静态插件 ================== -->
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-plugins-integration-sms</artifactId>

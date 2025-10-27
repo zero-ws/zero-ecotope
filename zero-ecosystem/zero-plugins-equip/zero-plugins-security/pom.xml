@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>zero-plugins-common-security</artifactId>
+    <artifactId>zero-plugins-security</artifactId>
     <name>Zero::Plugins::🧩 - Common Security</name>
     <dependencies>
         <dependency>

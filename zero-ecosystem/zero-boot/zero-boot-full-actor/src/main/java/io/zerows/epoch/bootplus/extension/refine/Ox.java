@@ -22,7 +22,6 @@ import io.zerows.platform.enums.Environment;
 import io.zerows.platform.enums.typed.ChangeFlag;
 import io.zerows.platform.metadata.KIdentity;
 import io.zerows.platform.metadata.KIntegration;
-import io.zerows.plugins.store.elasticsearch.ElasticSearchClient;
 import io.zerows.program.Ux;
 import io.zerows.specification.modeling.HRecord;
 import io.zerows.specification.modeling.operation.HDao;
@@ -49,7 +48,6 @@ import java.util.function.Supplier;
  * |{@link OxAmbient}|环境工具|
  * |{@link OxCompareUi}|界面比对工具|
  * |{@link OxConfig}|环境配置工具|
- * |{@link OxConsole}|命令行工具|
  * |{@link OxTo}|数据工具|
  * |{@link OxField}|字段工具|
  * |{@link OxJson}|Json处理工具|
@@ -294,26 +292,6 @@ public final class Ox {
      */
     public static <T> Future<T> runSafe(final Class<?> clazz, final T input, final Supplier<T> supplier) {
         return OxPlugin.runSafe(clazz, input, supplier);
-    }
-
-    /**
-     * 命令执行器，批量调用操作系统中的命令提示符运行操作命令。
-     *
-     * @param commands {@link List}<{@link String}> 待执行的命令清单
-     */
-    public static void runCmd(final List<String> commands) {
-        OxConsole.runCmd(commands);
-    }
-
-    /**
-     * 「Async」ElasticSearch异步执行器，重建索引。
-     *
-     * @param atom {@link DataAtom} 模型定义
-     *
-     * @return {@link Future}<{@link ElasticSearchClient}>
-     */
-    public static Future<ElasticSearchClient> runEs(final DataAtom atom) {
-        return OxConsole.runEs(atom);
     }
 
     /**

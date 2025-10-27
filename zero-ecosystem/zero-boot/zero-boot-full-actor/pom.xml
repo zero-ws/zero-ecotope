@@ -29,6 +29,7 @@
         - trash
         - flyway
         - liquibase
+        - security
         -->
         <dependency>
             <groupId>io.zerows</groupId>
@@ -41,6 +42,10 @@
         <dependency>
             <groupId>io.zerows</groupId>
             <artifactId>zero-plugins-liquibase</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-plugins-security</artifactId>
         </dependency>
 
         <!-- 核心底层 -->
@@ -120,10 +125,6 @@
             <artifactId>zero-extension-runtime-workflow</artifactId>
         </dependency>
         <!-- ================= 静态插件 ================== -->
-        <dependency>
-            <groupId>io.zerows</groupId>
-            <artifactId>zero-plugins-common-shell</artifactId>
-        </dependency>
         <dependency>
             <groupId>io.zerows</groupId>
             <artifactId>zero-plugins-integration-sms</artifactId>
