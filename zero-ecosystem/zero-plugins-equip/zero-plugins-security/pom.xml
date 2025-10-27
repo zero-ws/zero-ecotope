@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>zero-plugins-security</artifactId>
-    <name>Zero::Plugins::🧩 - Common Security</name>
+    <name>Zero::Plugins::🧩 - Security</name>
     <dependencies>
         <dependency>
             <groupId>io.zerows</groupId>

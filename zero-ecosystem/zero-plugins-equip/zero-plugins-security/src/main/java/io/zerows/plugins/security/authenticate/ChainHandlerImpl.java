@@ -1,4 +1,4 @@
-package io.zerows.plugins.common.security.authenticate;
+package io.zerows.plugins.security.authenticate;
 
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;

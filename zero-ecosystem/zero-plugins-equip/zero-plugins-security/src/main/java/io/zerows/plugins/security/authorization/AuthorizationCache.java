@@ -1,4 +1,4 @@
-package io.zerows.plugins.common.security.authorization;
+package io.zerows.plugins.security.authorization;
 
 import io.r2mo.function.Actuator;
 import io.r2mo.function.Fn;

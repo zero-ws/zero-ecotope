@@ -1,4 +1,4 @@
-package io.zerows.plugins.common.security.authorization;
+package io.zerows.plugins.security.authorization;
 
 import io.r2mo.function.Fn;
 import io.vertx.core.AsyncResult;
@@ -8,7 +8,7 @@ import io.vertx.ext.auth.User;
 import io.vertx.ext.auth.authorization.Authorization;
 import io.vertx.ext.auth.authorization.AuthorizationProvider;
 import io.zerows.epoch.metadata.security.Aegis;
-import io.zerows.plugins.common.security.profile.PermissionAuthorization;
+import io.zerows.plugins.security.profile.PermissionAuthorization;
 
 import java.lang.reflect.Method;
 import java.util.Set;

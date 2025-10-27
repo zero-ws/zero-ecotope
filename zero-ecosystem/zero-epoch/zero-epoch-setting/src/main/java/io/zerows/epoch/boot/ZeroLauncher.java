@@ -189,6 +189,7 @@ public class ZeroLauncher<T> {
                 /*
                  * 🟤BOOT-011 执行 HActor 的基础前置处理
                  *   执行 < 0 的默认内置 HActor 组件
+                 *   如果是 > 0 的应该由 Zero Extension 框架执行而不是此处执行
                  */
                 .compose(containerWeb -> ZeroModule.of(container).startActor(sequence -> sequence < 0));
         }

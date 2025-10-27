@@ -12,7 +12,7 @@ import io.vertx.ext.auth.authorization.Authorization;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.epoch.metadata.security.Aegis;
 import io.zerows.support.Ut;
-import io.zerows.plugins.common.security.authorization.AuthorizationResource;
+import io.zerows.plugins.security.authorization.AuthorizationResource;
 
 import java.lang.reflect.Method;
 import java.util.Objects;

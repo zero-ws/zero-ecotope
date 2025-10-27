@@ -1,4 +1,4 @@
-package io.zerows.plugins.common.security;
+package io.zerows.plugins.security;
 
 import io.r2mo.function.Fn;
 import io.r2mo.typed.cc.Cc;
@@ -13,7 +13,7 @@ import io.vertx.ext.web.handler.JWTAuthHandler;
 import io.zerows.epoch.application.YmlCore;
 import io.zerows.epoch.metadata.security.Aegis;
 import io.zerows.epoch.metadata.security.AegisItem;
-import io.zerows.plugins.common.security.authenticate.AdapterProvider;
+import io.zerows.plugins.security.authenticate.AdapterProvider;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 

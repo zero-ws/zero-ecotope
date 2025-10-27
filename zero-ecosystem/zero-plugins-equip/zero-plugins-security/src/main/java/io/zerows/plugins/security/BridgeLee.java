@@ -1,4 +1,4 @@
-package io.zerows.plugins.common.security;
+package io.zerows.plugins.security;
 
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Vertx;

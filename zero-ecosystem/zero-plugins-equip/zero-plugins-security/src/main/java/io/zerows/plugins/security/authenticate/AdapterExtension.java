@@ -1,4 +1,4 @@
-package io.zerows.plugins.common.security.authenticate;
+package io.zerows.plugins.security.authenticate;
 
 import io.vertx.ext.auth.authentication.AuthenticationProvider;
 import io.zerows.epoch.metadata.security.Aegis;

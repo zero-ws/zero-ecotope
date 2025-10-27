@@ -1,4 +1,4 @@
-package io.zerows.plugins.common.security.authenticate;
+package io.zerows.plugins.security.authenticate;
 
 import io.r2mo.typed.cc.Cc;
 import io.vertx.ext.auth.authentication.AuthenticationProvider;

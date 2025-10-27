@@ -1,4 +1,4 @@
-package io.zerows.plugins.common.security;
+package io.zerows.plugins.security;
 
 import io.r2mo.typed.exception.WebException;
 import io.r2mo.typed.exception.web._401UnauthorizedException;
@@ -17,12 +17,13 @@ import io.zerows.component.log.LogOf;
 import io.zerows.epoch.metadata.security.Aegis;
 import io.zerows.epoch.metadata.security.AegisItem;
 import io.zerows.platform.enums.EmSecure;
-import io.zerows.support.Ut;
+import io.zerows.plugins.security.authenticate.AuthenticateBuiltInProvider;
+import io.zerows.plugins.security.authenticate.ChainHandler;
+import io.zerows.plugins.security.authorization.AuthorizationBuiltInHandler;
+import io.zerows.plugins.security.authorization.AuthorizationBuiltInProvider;
+import io.zerows.plugins.security.authorization.AuthorizationExtensionHandler;
 import io.zerows.sdk.security.LeeBuiltIn;
-import io.zerows.plugins.common.security.authenticate.AuthenticateBuiltInProvider;
-import io.zerows.plugins.common.security.authenticate.ChainHandler;
-import io.zerows.plugins.common.security.authorization.AuthorizationBuiltInHandler;
-import io.zerows.plugins.common.security.authorization.AuthorizationBuiltInProvider;
+import io.zerows.support.Ut;
 
 import java.util.Objects;
 
@@ -60,7 +61,7 @@ public abstract class AbstractLee implements LeeBuiltIn {
             return handler;
         } else {
             // The class must contain constructor with `(Vertx)`
-            return ((io.zerows.plugins.common.security.authorization.AuthorizationExtensionHandler) Ut.instance(handlerCls, vertx)).configure(config);
+            return ((AuthorizationExtensionHandler) Ut.instance(handlerCls, vertx)).configure(config);
         }
     }
 

@@ -1,4 +1,4 @@
-package io.zerows.plugins.common.security.authenticate;
+package io.zerows.plugins.security.authenticate;
 
 import io.r2mo.function.Fn;
 import io.r2mo.typed.exception.web._401UnauthorizedException;

@@ -1,4 +1,4 @@
-package io.zerows.plugins.common.security.profile;
+package io.zerows.plugins.security.profile;
 
 import io.vertx.ext.auth.User;
 import io.vertx.ext.auth.authorization.Authorization;

@@ -1,8 +1,8 @@
-package io.zerows.plugins.common.security.authenticate;
+package io.zerows.plugins.security.authenticate;
 
 import io.vertx.ext.auth.authentication.AuthenticationProvider;
-import io.zerows.epoch.application.YmlCore;
 import io.zerows.component.log.LogOf;
+import io.zerows.epoch.application.YmlCore;
 import io.zerows.epoch.metadata.security.Aegis;
 import io.zerows.epoch.metadata.security.AegisItem;
 import io.zerows.platform.enums.EmSecure;
