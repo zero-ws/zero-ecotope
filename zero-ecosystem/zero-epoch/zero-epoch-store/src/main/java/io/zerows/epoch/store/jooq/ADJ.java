@@ -88,8 +88,32 @@ public final class ADJ {
         return this.dbj.countJ(criteriaJ);
     }
 
+    public Long count(final Map<String, Object> criteria) {
+        return this.dbj.countJ(criteria);
+    }
+
+    public Long count(final String field, final Object value) {
+        return this.dbj.countJ(field, value);
+    }
+
+    public Long count() {
+        return this.dbj.countJ();
+    }
+
     public Future<Long> countAsync(final JsonObject criteriaJ) {
         return this.dbj.countAsyncJ(criteriaJ);
+    }
+
+    public Future<Long> countAsync(final Map<String, Object> criteria) {
+        return this.dbj.countAsyncJ(criteria);
+    }
+
+    public Future<Long> countAsync(final String field, final Object value) {
+        return this.dbj.countAsyncJ(field, value);
+    }
+
+    public Future<Long> countAsync() {
+        return this.dbj.countAsyncJ();
     }
 
     // ========== 分页 ==========

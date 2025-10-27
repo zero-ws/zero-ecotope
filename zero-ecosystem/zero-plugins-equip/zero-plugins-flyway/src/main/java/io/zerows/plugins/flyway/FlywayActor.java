@@ -1,5 +1,6 @@
 package io.zerows.plugins.flyway;
 
+import io.r2mo.function.Fn;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.zerows.component.module.AbstractHActor;
@@ -26,7 +27,7 @@ public class FlywayActor extends AbstractHActor {
         // 配置信息
         final FluentConfiguration configuration = Flyway11Configurator.from(config);
         final Flyway flyway = new Flyway(configuration);
-        final MigrateResult result = flyway.migrate();
+        final MigrateResult result = Fn.jvmOr(flyway::migrate);
         log.info("[ ZERO ] Flyway数据库迁移结果：{}", result.getTotalMigrationTime());
         return Future.succeededFuture(Boolean.TRUE);
     }
