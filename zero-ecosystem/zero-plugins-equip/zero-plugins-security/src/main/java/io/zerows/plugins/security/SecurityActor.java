@@ -27,6 +27,7 @@ public class SecurityActor extends AbstractHActor {
 
         // 扫描 @Wall 的所有元数据信息，用于后期直接挂载到路由中去
         SecurityContext.scanned(vertxRef);
+        
 
         // 填充构造 Lee 的的核心信息
         return Future.succeededFuture(Boolean.TRUE);

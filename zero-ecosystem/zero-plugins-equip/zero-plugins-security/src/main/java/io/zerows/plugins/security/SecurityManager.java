@@ -113,6 +113,10 @@ class SecurityManager {
         return CONFIG_DEFAULT.getOrDefault(SecurityType.JWT, null);
     }
 
+    public SecurityConfig configOf(final SecurityType type) {
+        return CONFIG_DEFAULT.getOrDefault(type, null);
+    }
+
     SecurityConfig configJwt(final String appOr) {
         final Map<SecurityType, SecurityConfig> configMap = CONFIG_MAP.getOrDefault(appOr, new HashMap<>());
         return configMap.getOrDefault(SecurityType.JWT, null);

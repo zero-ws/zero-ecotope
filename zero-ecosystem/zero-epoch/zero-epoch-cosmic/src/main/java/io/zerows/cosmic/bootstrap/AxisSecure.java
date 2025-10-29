@@ -1,12 +1,19 @@
 package io.zerows.cosmic.bootstrap;
 
+import io.r2mo.spi.SPI;
+import io.vertx.ext.web.handler.AuthorizationHandler;
+import io.vertx.ext.web.handler.ChainAuthHandler;
 import io.zerows.cortex.metadata.RunServer;
 import io.zerows.cortex.sdk.Axis;
+import io.zerows.cosmic.handler.EndurerAuthenticate;
 import io.zerows.cosmic.plugins.security.management.OCacheSecurity;
+import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.metadata.security.SecurityMeta;
+import io.zerows.sdk.security.WallProvider;
 import io.zerows.specification.development.compiled.HBundle;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -20,9 +27,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class AxisSecure implements Axis {
     private static final AtomicBoolean IS_OUT = new AtomicBoolean(Boolean.TRUE);
     private static final AtomicBoolean IS_DISABLED = new AtomicBoolean(Boolean.TRUE);
+    private final WallProvider provider;
 
     public AxisSecure() {
-        // this.bolt = Bolt.get();
+        this.provider = SPI.findOverwrite(WallProvider.class);
     }
 
     @Override
@@ -40,8 +48,8 @@ public class AxisSecure implements Axis {
          *      1                1                  1
          */
         final ConcurrentMap<String, Set<SecurityMeta>> store = OCacheSecurity.entireWall();
-        store.forEach((path, aegisSet) -> {
-            if (!aegisSet.isEmpty()) {
+        store.forEach((path, securityMeta) -> {
+            if (!securityMeta.isEmpty()) {
                 /*
                  * The handler of 401 of each group should be
                  * 1. The path is the same
@@ -51,7 +59,16 @@ public class AxisSecure implements Axis {
                  * -- 1 size：return the single handler
                  * -- n size: return the handler collection of ChainAuthHandler ( all )
                  */
-                this.mountAuthenticate(server, path, aegisSet);
+                // 构造 401 认证处理器
+                final ChainAuthHandler handler401 = this.provider.handler401(server.refVertx(), securityMeta);
+                if (Objects.nonNull(handler401)) {
+                    server.refRouter().route(path).order(KWeb.ORDER.SECURE)
+                        .handler(handler401)
+                        .failureHandler(EndurerAuthenticate.create());
+                }
+
+
+
                 /*
                  * New design for 403 access issue here to implement RBAC mode
                  * This design is optional plugin into zero system, you can enable this feature.
@@ -59,57 +76,22 @@ public class AxisSecure implements Axis {
                  * 1. The uri is the same as 401, it means that the request must be passed to 401 handler first
                  * 2. The order must be after 401 Orders.SECURE
                  */
-                this.mountAuthorization(server, path, aegisSet);
+                // 构造 403 授权处理器
+                final AuthorizationHandler handler403 = this.provider.handler403(server.refVertx(), securityMeta);
+                if (Objects.nonNull(handler403)) {
+                    server.refRouter().route(path).order(KWeb.ORDER.SECURE_AUTHORIZATION)
+                        .handler(handler403)
+                        .failureHandler(EndurerAuthenticate.create());
+                }
+                if (IS_OUT.getAndSet(Boolean.FALSE)) {
+                    log.info("[ ZERO ] ( Secure ) \uD83D\uDD11 安全处理器选择：authenticate = {} / authorization = {}",
+                        Objects.isNull(handler401) ? null : handler401.getClass(),
+                        Objects.isNull(handler403) ? null : handler403.getClass());
+                }
             }
         });
         if (store.isEmpty() && IS_DISABLED.getAndSet(Boolean.FALSE)) {
-            // log.info("[ ZERO ] ⚠️ 安全机制禁用：bolt = {}", this.bolt.getClass());
+            log.info("[ ZERO ] ( Secure ) ⚠️ 安全机制禁用：provider = {}", this.provider.getClass());
         }
-    }
-
-    private void mountAuthenticate(final RunServer server, final String path, final Set<SecurityMeta> aegisSet) {
-        //        final AuthenticationHandler resultHandler;
-        //        if (VValue.ONE == aegisSet.size()) {
-        //            // 1 = handler
-        //            final KSecurity aegis = aegisSet.iterator().next();
-        //            resultHandler = this.bolt.authenticate(server.refVertx(), aegis);
-        //        } else {
-        //            // 1 < handler
-        //            final ChainAuthHandler handler = ChainAuthHandler.all();
-        //            aegisSet.stream()
-        //                .map(item -> this.bolt.authenticate(server.refVertx(), item))
-        //                .filter(Objects::nonNull)
-        //                .forEach(handler::add);
-        //            resultHandler = handler;
-        //        }
-        //        if (Objects.nonNull(resultHandler)) {
-        //            server.refRouter().route(path).order(KWeb.ORDER.SECURE)
-        //                .handler(resultHandler)
-        //                .failureHandler(EndurerAuthenticate.create());
-        //        }
-    }
-
-    private void mountAuthorization(final RunServer server, final String path, final Set<SecurityMeta> aegisSet) {
-        //        final AuthorizationHandler resultHandler;
-        //        if (VValue.ONE == aegisSet.size()) {
-        //            // 1 = handler
-        //            final KSecurity aegis = aegisSet
-        //                .iterator().next();
-        //            resultHandler = this.bolt.authorization(server.refVertx(), aegis);
-        //        } else {
-        //            // 1 = handler ( sorted )
-        //            final KSecurity aegis = new TreeSet<>(Comparator.comparingInt(KSecurity::getOrder)).getFirst();
-        //            resultHandler = this.bolt.authorization(server.refVertx(), aegis);
-        //        }
-        //        if (IS_OUT.getAndSet(Boolean.FALSE)) {
-        //            log.info("[ ZERO ] \uD83D\uDD11 安全处理选择：handler = {}, bolt = {}",
-        //                Objects.isNull(resultHandler) ? null : resultHandler.getClass(),
-        //                this.bolt.getClass());
-        //        }
-        //        if (Objects.nonNull(resultHandler)) {
-        //            server.refRouter().route(path).order(KWeb.ORDER.SECURE_AUTHORIZATION)
-        //                .handler(resultHandler)
-        //                .failureHandler(EndurerAuthenticate.create());
-        //        }
     }
 }

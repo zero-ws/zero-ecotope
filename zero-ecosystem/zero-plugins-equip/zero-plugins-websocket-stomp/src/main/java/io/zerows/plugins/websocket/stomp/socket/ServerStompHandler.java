@@ -36,6 +36,7 @@ import io.vertx.ext.stomp.impl.RemindDestination;
 import io.vertx.ext.stomp.impl.ServerFrameImpl;
 import io.vertx.ext.stomp.impl.Transactions;
 import io.zerows.component.log.LogOf;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +46,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
 public class ServerStompHandler implements ServerWsHandler {
 
     private static final LogOf LOGGER = LogOf.get(ServerStompHandler.class);
@@ -72,8 +74,8 @@ public class ServerStompHandler implements ServerWsHandler {
     });
     private AuthenticationProvider authProvider;
     private Handler<StompServerConnection> pingHandler = StompServerConnection::ping;
-    private Handler<Acknowledgement> onAckHandler = (acknowledgement) -> LOGGER.info("Acknowledge messages - " +
-        acknowledgement.frames());
+    private Handler<Acknowledgement> onAckHandler = (acknowledgement) ->
+        log.info("[ ZERO ] ( Stomp ) Acknowledge messages - {}", acknowledgement.frames());
     private Handler<Acknowledgement> onNackHandler = (acknowledgement) ->
         LOGGER.warn("Messages not acknowledge - " + acknowledgement.frames());
     private DestinationFactory factory = Destination::topic;

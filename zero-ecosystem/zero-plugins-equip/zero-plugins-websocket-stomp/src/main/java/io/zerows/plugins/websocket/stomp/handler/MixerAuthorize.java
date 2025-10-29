@@ -1,13 +1,15 @@
 package io.zerows.plugins.websocket.stomp.handler;
 
+import io.r2mo.spi.SPI;
 import io.vertx.core.Vertx;
 import io.vertx.ext.auth.authentication.AuthenticationProvider;
 import io.vertx.ext.stomp.StompServerHandler;
 import io.vertx.ext.stomp.StompServerOptions;
-import io.zerows.cosmic.plugins.security.Bolt;
 import io.zerows.cosmic.plugins.security.management.OCacheSecurity;
 import io.zerows.epoch.metadata.security.SecurityMeta;
+import io.zerows.sdk.security.WallProvider;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
 import java.util.Set;
@@ -18,15 +20,16 @@ import java.util.concurrent.atomic.AtomicReference;
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
 public class MixerAuthorize extends AbstractMixer {
     private static final AtomicBoolean LOG_FOUND = new AtomicBoolean(Boolean.TRUE);
     private static final AtomicBoolean LOG_PROVIDER = new AtomicBoolean(Boolean.TRUE);
 
-    private transient final Bolt bolt;
+    private final WallProvider provider;
 
     public MixerAuthorize(final Vertx vertx) {
         super(vertx);
-        this.bolt = Bolt.get();
+        this.provider = SPI.findOverwrite(WallProvider.class);
     }
 
     @Override
@@ -43,16 +46,17 @@ public class MixerAuthorize extends AbstractMixer {
              */
             if (!aegisSet.isEmpty() && Ut.uriMatch(stomp, path)) {
                 if (LOG_FOUND.getAndSet(Boolean.FALSE)) {
-                    this.logger().info(Info.SECURE_FOUND, stomp, path, String.valueOf(aegisSet.size()));
+                    log.info("[ ZERO ] ( Stomp ) Zero 查找到安全配置：( stomp = {}, path = {}, size = {} )",
+                        stomp, path, aegisSet.size());
                 }
                 reference.set(aegisSet.iterator().next());
             }
         });
         final SecurityMeta config = reference.get();
         if (Objects.nonNull(config)) {
-            final AuthenticationProvider provider = this.bolt.authenticateProvider(this.vertx, config);
+            final AuthenticationProvider provider = this.provider.provider401(this.vertx, config);
             if (LOG_PROVIDER.getAndSet(Boolean.FALSE)) {
-                this.logger().info(Info.SECURE_PROVIDER, provider.getClass());
+                log.info("[ ZERO ] ( Stomp ) 安全认证器：{}", provider.getClass());
             }
             handler.authProvider(provider);
         }

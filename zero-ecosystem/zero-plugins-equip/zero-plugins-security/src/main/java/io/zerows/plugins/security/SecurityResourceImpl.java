@@ -1,4 +1,4 @@
-package io.zerows.plugins.security.authorization;
+package io.zerows.plugins.security;
 
 import io.r2mo.function.Fn;
 import io.vertx.core.AsyncResult;
@@ -19,17 +19,17 @@ import java.lang.reflect.Method;
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
-public class AuthorizationResourceImpl implements AuthorizationResource {
+class SecurityResourceImpl implements SecurityResource {
     private final transient SecurityMeta aegis;
 
-    AuthorizationResourceImpl(final SecurityMeta aegis) {
+    SecurityResourceImpl(final SecurityMeta aegis) {
         this.aegis = aegis;
     }
 
     @Override
     @SuppressWarnings("all")
     public void requestResource(final RoutingContext context, final Handler<AsyncResult<Authorization>> handler) {
-        final JsonObject params = AuthorizationResource.parameters(context);
+        final JsonObject params = SecurityResource.parameters(context);
         final Method method = null; // this.aegis.getAuthorizer().getResource();
         Fn.jvmAt(() -> {
             final Future<Object> future = (Future<Object>) method.invoke(this.aegis.getProxy(), params);

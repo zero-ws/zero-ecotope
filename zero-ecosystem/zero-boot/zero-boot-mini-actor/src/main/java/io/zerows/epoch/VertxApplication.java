@@ -25,6 +25,8 @@ import io.zerows.epoch.management.OCacheClass;
 import io.zerows.platform.EnvironmentVariable;
 import io.zerows.platform.enums.VertxComponent;
 import io.zerows.platform.metadata.KRunner;
+import io.zerows.sdk.security.Lee;
+import io.zerows.sdk.security.WallProvider;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.app.HArk;
 import io.zerows.specification.configuration.HBoot;
@@ -107,6 +109,8 @@ public class VertxApplication {
          * MOMO-001: SPI 监控注册
          */
         HPI.registry(
+            Lee.class,                  // 安全组件
+            WallProvider.class,         // 安全提供者组件
             FactoryDBAsync.class,       // 异步DBE
             AxisSockFactory.class,      // WebSocket
             AxisDynamicFactory.class    // 动态路由

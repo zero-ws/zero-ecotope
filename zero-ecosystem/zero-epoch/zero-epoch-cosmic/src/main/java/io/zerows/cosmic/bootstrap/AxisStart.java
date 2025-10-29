@@ -77,6 +77,6 @@ public class AxisStart implements Axis {
         final HttpServerOptions optionOfServer = runServer.config();
         final String prefix = optionOfServer.isSsl() ? "https" : "http";
         log.info("[ ZERO ] ( Http Server ) {} ✅️ 服务器成功启动 SUCCESS !. Endpoint: {}://{}:{}.",
-            this.getClass().getSimpleName(), prefix, Ut.netIPv4(), String.valueOf(running.actualPort()));
+            this.getClass().getSimpleName(), prefix, Ut.netIPv4(), running.actualPort());
     }
 }

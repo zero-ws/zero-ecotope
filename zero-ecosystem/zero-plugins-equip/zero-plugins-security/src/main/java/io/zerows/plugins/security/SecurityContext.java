@@ -1,6 +1,5 @@
 package io.zerows.plugins.security;
 
-import io.r2mo.typed.common.MultiKeyMap;
 import io.vertx.core.Vertx;
 import io.vertx.ext.auth.authorization.AuthorizationProvider;
 import io.zerows.cosmic.plugins.security.management.ORepositorySecurity;
@@ -62,7 +61,6 @@ import java.util.Set;
  */
 @Slf4j
 class SecurityContext {
-    private static final MultiKeyMap<SecurityMeta> CC_META = new MultiKeyMap<>();
 
     static void scanned(final Vertx vertxRef) {
         final Reflections reflections = new Reflections("io.vertx.ext.auth");

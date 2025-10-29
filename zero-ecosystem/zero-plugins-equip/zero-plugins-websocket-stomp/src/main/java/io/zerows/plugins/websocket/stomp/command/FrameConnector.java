@@ -9,7 +9,9 @@ import io.vertx.ext.stomp.Frame;
 import io.vertx.ext.stomp.ServerFrame;
 import io.vertx.ext.stomp.StompServerConnection;
 import io.vertx.ext.stomp.StompServerHandler;
+import io.zerows.epoch.constant.KName;
 import io.zerows.plugins.websocket.stomp.socket.ServerWsHandler;
+import io.zerows.sdk.security.Token;
 import io.zerows.support.Ut;
 import jakarta.ws.rs.core.HttpHeaders;
 
@@ -103,33 +105,15 @@ class FrameConnector extends AbstractFrameHandler {
     }
 
     private JsonObject authenticateToken(final String authorization) {
-        //        // Extract authorization to token
-        //        final Lee lee = Bolt.reference(this.config.getType());
-        //        /*
-        //         * WebToken String -> InJson WebToken Object
-        //         * 1. WebToken String must be split with ' ' and findRunning the 1
-        //         * 2. Aegis must be switched to valid findRunning except extension
-        //         */
-        //        final String tokenString = authorization.split(" ")[1];
-        //        final JsonObject token = lee.decode(tokenString, this.config.item());
-        //        final JsonObject request = token.copy();
-        //        request.put(KName.ACCESS_TOKEN, tokenString);
-        //        {
-        //            /*
-        //             * This code is required when you want to process validated by user-defined
-        //             * 1) Here the `token` is required by JWTAuth provider and it's connected your defined as well.
-        //             * 2) Here are two providers merged
-        //             *    - Standard ( JWTAuthProvider )
-        //             *    - Extension ( @Wall annotated provider class )
-        //             */
-        //            request.put("token", tokenString);
-        //        }
-        //        return request;
         /*
          * Token 验证流程，处理 401 基础验证信息
          */
         final String tokenString = authorization.split(" ")[1];
-        return null;
+        final JsonObject token = Token.decode(tokenString, this.config.getType());
+        final JsonObject request = token.copy();
+        request.put(KName.ACCESS_TOKEN, tokenString);
+        request.put(KName.TOKEN, tokenString);
+        return request;
     }
 
     private void authenticateOriginal(final Frame frame, final StompServerConnection connection,

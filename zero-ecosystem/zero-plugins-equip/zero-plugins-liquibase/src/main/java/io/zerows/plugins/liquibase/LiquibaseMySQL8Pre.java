@@ -5,8 +5,7 @@ import liquibase.database.jvm.JdbcConnection;
 import liquibase.exception.CustomPreconditionErrorException;
 import liquibase.exception.CustomPreconditionFailedException;
 import liquibase.precondition.CustomPrecondition;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -15,9 +14,8 @@ import java.sql.Statement;
 import java.text.MessageFormat;
 import java.util.Objects;
 
+@Slf4j
 public class LiquibaseMySQL8Pre implements CustomPrecondition {
-    private static final Logger LOGGER = LoggerFactory.getLogger(LiquibaseMySQL8Pre.class);
-
     /*
      * 该函数为 MySQL 升级8.0过后引起的约束问题执行临时解决方案
      * liquibase.exception.DatabaseException: The table does not comply with the requirements by an external plugin
@@ -57,7 +55,7 @@ public class LiquibaseMySQL8Pre implements CustomPrecondition {
         final Connection conn = this.getConnection(database);
         final Statement stmt = conn.createStatement();
 
-        LOGGER.info("[Zero] Liquibase Fix ? {}", sqlTpl);
+        log.info("[ ZERO ] Liquibase 补丁 ? {}", sqlTpl);
         stmt.executeUpdate(MessageFormat.format(sqlTpl, tableName));
     }
 
@@ -72,7 +70,7 @@ public class LiquibaseMySQL8Pre implements CustomPrecondition {
             counter = rs.getInt("RET");
         }
         final boolean result = counter == 0;
-        LOGGER.info("[Zero] Liquibase table Missing = {}, SQL: {}", result, sql);
+        log.info("[ ZERO ] Liquibase 表丢失 = {}, SQL: {}", result, sql);
         return result;
     }
 
@@ -94,7 +92,7 @@ public class LiquibaseMySQL8Pre implements CustomPrecondition {
             name = rs.getString("COLUMN_NAME");
         }
         final boolean result = Objects.nonNull(name);
-        LOGGER.info("[Zero] Liquibase primary key Existed = {}, SQL: {}", result, sql);
+        log.info("[ ZERO ] Liquibase 已存在主键 = {}, SQL: {}", result, sql);
         return result;
     }
 

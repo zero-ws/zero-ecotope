@@ -56,7 +56,7 @@ public class InquirerWall implements Inquirer<Set<SecurityMeta>> {
                 .forEach(wallSet::add);
         }
         log.info("[ PLUG ] ( {} Secure ) \uD83E\uDDEC Zero 系统扫描到 {} 个 @Wall 组件", wallSet.size(), wallSet.size());
-        return Set.of();
+        return wallSet;
     }
 
     private SecurityMeta create(final Class<?> clazz, final Vertx vertxRef) {

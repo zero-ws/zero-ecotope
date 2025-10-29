@@ -1,4 +1,4 @@
-package io.zerows.plugins.security.authorization;
+package io.zerows.plugins.security;
 
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
@@ -19,7 +19,7 @@ import java.util.Objects;
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
-public interface AuthorizationResource {
+public interface SecurityResource {
 
     /*
      * This method is for dynamic using of 403 authorization.
@@ -88,8 +88,8 @@ public interface AuthorizationResource {
         return normalized;
     }
 
-    static AuthorizationResource buildIn(final SecurityMeta aegis) {
-        return new AuthorizationResourceImpl(aegis);
+    static SecurityResource buildIn(final SecurityMeta aegis) {
+        return new SecurityResourceImpl(aegis);
     }
 
     void requestResource(RoutingContext context, Handler<AsyncResult<Authorization>> handler);

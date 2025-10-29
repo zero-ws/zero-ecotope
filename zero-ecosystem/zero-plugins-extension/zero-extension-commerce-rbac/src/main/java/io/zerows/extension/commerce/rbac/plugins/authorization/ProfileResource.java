@@ -5,19 +5,19 @@ import io.vertx.core.Handler;
 import io.vertx.ext.auth.authorization.Authorization;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.epoch.metadata.security.SecurityMeta;
-import io.zerows.plugins.security.authorization.AuthorizationResource;
+import io.zerows.plugins.security.SecurityResource;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
-public class ProfileResource implements AuthorizationResource {
+public class ProfileResource implements SecurityResource {
     private final transient SecurityMeta aegis;
 
     private ProfileResource(final SecurityMeta aegis) {
         this.aegis = aegis;
     }
 
-    public static AuthorizationResource create(final SecurityMeta aegis) {
+    public static SecurityResource create(final SecurityMeta aegis) {
         return new ProfileResource(aegis);
     }
 

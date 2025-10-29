@@ -1,6 +1,5 @@
 package io.zerows.epoch.annotations;
 
-import io.zerows.epoch.constant.KWeb;
 import io.zerows.platform.enums.SecurityType;
 
 import java.lang.annotation.Documented;
@@ -69,7 +68,7 @@ public @interface Wall {
      *
      * @return 将被构建到安全链中的处理器顺序值。
      */
-    int order() default KWeb.ORDER.SECURE;          // VValue.ZERO;
+    int order() default 0;          // VValue.ZERO;
 
     SecurityType type() default SecurityType.NONE;  // 默认无认证
 }

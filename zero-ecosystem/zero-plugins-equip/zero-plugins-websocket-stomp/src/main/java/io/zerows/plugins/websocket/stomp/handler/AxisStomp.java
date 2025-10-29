@@ -12,13 +12,18 @@ import io.zerows.epoch.metadata.security.SecurityMeta;
 import io.zerows.plugins.websocket.stomp.socket.ServerWsHandler;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * @author lang : 2024-06-26
  */
+@Slf4j
 public class AxisStomp implements Axis {
+    private static final AtomicBoolean IS_OUT = new AtomicBoolean(Boolean.TRUE);
+
     @Override
     public void mount(final RunServer server, final HBundle bundle) {
 
@@ -60,5 +65,17 @@ public class AxisStomp implements Axis {
         stompServer.handler(handler);
         final HttpServer httpServer = server.instance();
         httpServer.webSocketHandler(stompServer.webSocketHandler());
+
+        if (IS_OUT.getAndSet(Boolean.FALSE)) {
+            final String endpoint = this.pathOfEndpoint(sockOptions);
+            log.info("[ ZERO ] ( WebSocket ) \uD83E\uDDFF Endpoint: ws://{}:{}{}，{} ✅️ WebSocket 成功开启 SUCCESS !",
+                Ut.netIPv4(), httpServer.actualPort(), endpoint, this.getClass().getSimpleName());
+        }
+    }
+
+    private String pathOfEndpoint(final SockOptions sockOptions) {
+        final JsonObject config = sockOptions.getConfig();
+        final JsonObject stomp = Ut.valueJObject(config, "stomp");
+        return stomp.getString("websocketPath");
     }
 }
