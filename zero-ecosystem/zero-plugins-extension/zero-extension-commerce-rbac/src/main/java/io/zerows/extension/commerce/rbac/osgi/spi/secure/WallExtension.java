@@ -8,12 +8,12 @@ import io.vertx.ext.web.handler.AuthenticationHandler;
 import io.vertx.ext.web.handler.AuthorizationHandler;
 import io.zerows.epoch.metadata.security.SecurityConfig;
 import io.zerows.epoch.metadata.security.SecurityMeta;
-import io.zerows.epoch.metadata.security.TokenJwt;
 import io.zerows.extension.commerce.rbac.plugins.authorization.ProfileProvider;
 import io.zerows.extension.commerce.rbac.plugins.authorization.ProfileResource;
 import io.zerows.plugins.security.authorization.AuthorizationBuiltInHandler;
 import io.zerows.plugins.security.authorization.AuthorizationResource;
 import io.zerows.sdk.security.OldLeeExtension;
+import io.zerows.sdk.security.Token;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
@@ -51,11 +51,11 @@ public class WallExtension implements OldLeeExtension {
 
     @Override
     public String encode(final JsonObject data, final SecurityConfig config) {
-        return TokenJwt.encode(data);
+        return Token.encode(data, config.type());
     }
 
     @Override
     public JsonObject decode(final String token, final SecurityConfig config) {
-        return TokenJwt.decode(token);
+        return Token.decode(token, config.type());
     }
 }

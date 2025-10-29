@@ -1,15 +1,12 @@
 package io.zerows.epoch.metadata.security;
 
-import io.r2mo.spi.SPI;
 import io.r2mo.typed.cc.Cc;
-import io.r2mo.typed.exception.web._501NotSupportException;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 import io.vertx.ext.auth.authentication.Credentials;
 import io.vertx.ext.auth.authentication.TokenCredentials;
 import io.zerows.epoch.constant.KName;
 import io.zerows.platform.exception._60050Exception501NotSupport;
-import io.zerows.sdk.security.Lee;
 import io.zerows.sdk.security.Token;
 
 import java.util.Objects;
@@ -25,22 +22,6 @@ public class TokenJwt implements Token {
     private final Credentials credentials;
     private String userKey;
 
-    public static String encode(final JsonObject payload) {
-        return ofLee().encode(payload);
-    }
-
-    public static JsonObject decode(final String token) {
-        return ofLee().decode(token);
-    }
-
-    private static Lee ofLee() {
-        final Lee lee = SPI.findOverwrite(Lee.class);
-        if (Objects.isNull(lee)) {
-            throw new _501NotSupportException("[ ZERO ] 为找到 Lee 编解码实现，无法执行操作！");
-        }
-        return lee;
-    }
-
     private TokenJwt(final String token) {
         this.token = token;
         this.tokenJson = this.tokenJson();
@@ -48,7 +29,7 @@ public class TokenJwt implements Token {
     }
 
     private TokenJwt(final JsonObject tokenJson) {
-        this.token = encode(tokenJson);
+        this.token = Token.encodeJwt(tokenJson);
         this.tokenJson = tokenJson;
         this.credentials = new TokenCredentials(this.token);
     }
@@ -88,7 +69,7 @@ public class TokenJwt implements Token {
 
     private JsonObject tokenJson() {
         Objects.requireNonNull(this.token);
-        return decode(this.token);
+        return Token.decodeJwt(this.token);
     }
 
     @Override

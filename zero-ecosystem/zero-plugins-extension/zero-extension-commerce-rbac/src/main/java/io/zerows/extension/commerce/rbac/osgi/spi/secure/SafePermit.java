@@ -3,12 +3,12 @@ package io.zerows.extension.commerce.rbac.osgi.spi.secure;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.metadata.security.TokenJwt;
 import io.zerows.extension.commerce.rbac.atom.ScToken;
 import io.zerows.extension.commerce.rbac.uca.timer.ClockFactory;
 import io.zerows.extension.commerce.rbac.uca.timer.ScClock;
 import io.zerows.extension.skeleton.spi.ScPermit;
 import io.zerows.program.Ux;
+import io.zerows.sdk.security.Token;
 import io.zerows.support.Ut;
 
 /**
@@ -28,7 +28,7 @@ public class SafePermit implements ScPermit {
             return Ux.futureF();
         }
         // 拆分出来的 token 信息
-        final JsonObject extract = TokenJwt.decode(token);
+        final JsonObject extract = Token.decodeJwt(token);
 
         // token / user
         final String user = extract.getString(KName.USER);

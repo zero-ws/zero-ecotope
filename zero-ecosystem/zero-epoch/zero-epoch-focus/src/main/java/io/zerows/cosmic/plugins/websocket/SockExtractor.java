@@ -5,13 +5,11 @@ import io.zerows.epoch.annotations.Subscribe;
 import io.zerows.epoch.assembly.ExtractTool;
 import io.zerows.epoch.assembly.ExtractToolMethod;
 import io.zerows.epoch.assembly.Extractor;
-import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.XEmptyInstance;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.enums.EmService;
 import io.zerows.support.Ut;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -43,8 +41,8 @@ public class SockExtractor implements Extractor<Set<Remind>> {
     private Remind extract(final Method method) {
         final Class<?> clazz = method.getDeclaringClass();
         // 1. Scan whole Endpoints
-        final Annotation annotation = method.getDeclaredAnnotation(Subscribe.class);
-        String address = Ut.invoke(annotation, KName.VALUE);
+        final Subscribe annoSubscribe = method.getDeclaredAnnotation(Subscribe.class);
+        String address = annoSubscribe.value();
         /*
          * If the address is not start with "/", the system convert the address findRunning
          * from direct address to the normalized path.
@@ -56,7 +54,7 @@ public class SockExtractor implements Extractor<Set<Remind>> {
         if (!address.startsWith(VString.SLASH)) {
             address = VString.SLASH + address;
         }
-        final EmService.NotifyType type = Ut.invoke(annotation, KName.TYPE);
+        final EmService.NotifyType type = annoSubscribe.type();
         // 2. Build Remind
         final Remind remind = new Remind();
         remind.setMethod(method);
@@ -66,14 +64,14 @@ public class SockExtractor implements Extractor<Set<Remind>> {
         // Fix: Instance class for proxy
         //        final Object proxy = PLUGIN.createInstance(clazz);
         remind.setProxy(clazz);
-        remind.setName(Ut.invoke(annotation, KName.NAME));
-        remind.setSecure(Ut.invoke(annotation, "secure"));
+        remind.setName(annoSubscribe.name());
+        remind.setSecure(annoSubscribe.secure());
         // Input Part: input / inputAddress
-        final Annotation annoAddr = method.getDeclaredAnnotation(Address.class);
-        final String inputAddress = Ut.invoke(annoAddr, KName.VALUE);
+        final Address addressAnno = method.getDeclaredAnnotation(Address.class);
+        final String inputAddress = addressAnno.value();
         if (Ut.isNotNil(inputAddress)) {
             remind.setAddress(inputAddress);
-            final Class<?> inputCls = Ut.invoke(annotation, "input");
+            final Class<?> inputCls = annoSubscribe.input();
             if (XEmptyInstance.class != inputCls) {
                 remind.setInput(inputCls);
             }

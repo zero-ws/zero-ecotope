@@ -46,7 +46,7 @@ class FrameOutput {
     private static String getSupportedVersionsHeaderLine(final StompServerConnection connection) {
         final StringBuilder builder = new StringBuilder();
         connection.server().options().getSupportedVersions().forEach(
-            v -> builder.append(builder.length() == 0 ? v : FrameParser.COMMA + v));
+            v -> builder.append(builder.isEmpty() ? v : FrameParser.COMMA + v));
         return builder.toString();
     }
 }

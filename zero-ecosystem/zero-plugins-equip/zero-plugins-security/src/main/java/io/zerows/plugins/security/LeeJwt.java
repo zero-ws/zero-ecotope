@@ -9,7 +9,9 @@ import io.vertx.ext.auth.impl.jose.JWT;
 import io.vertx.ext.auth.jwt.JWTAuth;
 import io.vertx.ext.auth.jwt.JWTAuthOptions;
 import io.zerows.cortex.management.StoreVertx;
+import io.zerows.cosmic.plugins.security.exception._40079Exception500SecurityType;
 import io.zerows.epoch.metadata.security.SecurityConfig;
+import io.zerows.platform.enums.SecurityType;
 import io.zerows.sdk.security.Lee;
 import io.zerows.support.Ut;
 
@@ -26,7 +28,7 @@ import java.util.Objects;
  *
  * @author lang : 2025-10-29
  */
-public class LeeJwt implements Lee {
+class LeeJwt implements Lee {
     private static final SecurityConfig CONFIG = SecurityActor.ofJwt();
     // 防止 JWT 的高频解码（速度很慢）
     private static final Cc<String, JsonObject> STORE_TOKEN = Cc.open();
@@ -53,12 +55,16 @@ public class LeeJwt implements Lee {
     }
 
     @Override
-    public String encode(final JsonObject payload) {
+    public String encode(final JsonObject payload, final SecurityType type) {
+        Fn.jvmKo(SecurityType.JWT != type,
+            _40079Exception500SecurityType.class, SecurityType.JWT, type);
         return Objects.requireNonNull(this.provider()).generateToken(payload);
     }
 
     @Override
-    public JsonObject decode(final String token) {
+    public JsonObject decode(final String token, final SecurityType type) {
+        Fn.jvmKo(SecurityType.JWT != type,
+            _40079Exception500SecurityType.class, SecurityType.JWT, type);
         if (Objects.isNull(token)) {
             return new JsonObject();
         }

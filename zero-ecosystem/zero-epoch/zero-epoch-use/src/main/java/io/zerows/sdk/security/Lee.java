@@ -1,6 +1,10 @@
 package io.zerows.sdk.security;
 
+import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonObject;
+import io.zerows.platform.enums.SecurityType;
+
+import java.util.function.Supplier;
 
 /**
  * Encode/Decode Coder
@@ -9,8 +13,13 @@ import io.vertx.core.json.JsonObject;
  * @author lang : 2025-10-29
  */
 public interface Lee {
+    Cc<String, Lee> CC_LEE = Cc.openThread();
 
-    String encode(JsonObject payload);
+    static Lee of(final Supplier<Lee> constructorFn) {
+        return CC_LEE.pick(constructorFn, String.valueOf(constructorFn));
+    }
 
-    JsonObject decode(String token);
+    String encode(JsonObject payload, SecurityType type);
+
+    JsonObject decode(String token, SecurityType type);
 }

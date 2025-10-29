@@ -4,7 +4,6 @@ import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.metadata.security.TokenJwt;
 import io.zerows.extension.commerce.rbac.atom.ScConfig;
 import io.zerows.extension.commerce.rbac.atom.ScToken;
 import io.zerows.extension.commerce.rbac.bootstrap.ScPin;
@@ -15,6 +14,7 @@ import io.zerows.extension.commerce.rbac.exception._80207Exception401TokenInvali
 import io.zerows.extension.commerce.rbac.exception._80208Exception401TokenExpired;
 import io.zerows.platform.constant.VValue;
 import io.zerows.program.Ux;
+import io.zerows.sdk.security.Token;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
 
@@ -118,11 +118,11 @@ class ScClockToken extends AbstractClock<ScToken> {
          * - token
          * - refreshToken
          */
-        final String vToken = TokenJwt.encode(tokenData);
+        final String vToken = Token.encodeJwt(tokenData);
         final JsonObject refreshData = new JsonObject();
         refreshData.put(KName.USER, userId);
         refreshData.put(KName.ACCESS_TOKEN, vToken);
-        final String vRefresh = TokenJwt.encode(refreshData);
+        final String vRefresh = Token.encodeJwt(refreshData);
         return token.token(vToken).refreshToken(vRefresh);
     }
 

@@ -2,6 +2,7 @@ package io.zerows.sdk.security;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.authentication.Credentials;
+import io.zerows.platform.enums.SecurityType;
 
 import java.io.Serializable;
 
@@ -13,6 +14,30 @@ import java.io.Serializable;
  * </p>
  */
 public interface Token extends Serializable {
+
+    static String encode(final JsonObject payload, final SecurityType type) {
+        return TokenUtil.encode(payload, type);
+    }
+
+    static String encodeJwt(final JsonObject payload) {
+        return TokenUtil.encode(payload, SecurityType.JWT);
+    }
+
+    static String encodeBasic(final JsonObject payload) {
+        return TokenUtil.encode(payload, SecurityType.BASIC);
+    }
+
+    static JsonObject decode(final String token, final SecurityType type) {
+        return TokenUtil.decode(token, type);
+    }
+
+    static JsonObject decodeJwt(final String token) {
+        return TokenUtil.decode(token, SecurityType.JWT);
+    }
+
+    static JsonObject decodeBasic(final String token) {
+        return TokenUtil.decode(token, SecurityType.BASIC);
+    }
 
     /**
      * 🏷️ 获取令牌的原始字符串值。

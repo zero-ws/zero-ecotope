@@ -24,6 +24,7 @@ import java.util.Objects;
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Deprecated
 @SuppressWarnings("all")
 public abstract class AbstractOldLee implements OldLeeBuiltIn {
 

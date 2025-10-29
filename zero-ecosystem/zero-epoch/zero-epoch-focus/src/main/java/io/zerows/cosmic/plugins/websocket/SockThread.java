@@ -23,7 +23,7 @@ public class SockThread extends Thread {
     private final transient Class<?> reference;
 
     public SockThread(final Class<?> clazz) {
-        this.setName("zero-web-socket-scanner-" + this.getId());
+        this.setName("zero-web-socket-scanner-" + this.threadId());
         this.reference = clazz;
     }
 

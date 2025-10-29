@@ -125,6 +125,10 @@ class FrameConnector extends AbstractFrameHandler {
         //            request.put("token", tokenString);
         //        }
         //        return request;
+        /*
+         * Token 验证流程，处理 401 基础验证信息
+         */
+        final String tokenString = authorization.split(" ")[1];
         return null;
     }
 
