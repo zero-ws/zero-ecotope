@@ -2,12 +2,11 @@ package io.zerows.extension.commerce.rbac.atom.acl;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.platform.enums.EmSecure;
-import io.zerows.support.Ut;
-import io.zerows.sdk.security.Acl;
-import io.zerows.sdk.security.AclView;
 import io.zerows.extension.commerce.rbac.domain.tables.pojos.SVisitant;
 import io.zerows.extension.commerce.rbac.eon.em.AclType;
+import io.zerows.platform.enums.EmSecure;
+import io.zerows.sdk.security.Acl;
+import io.zerows.support.Ut;
 
 import java.util.Objects;
 import java.util.Set;
@@ -28,7 +27,7 @@ public class AclData implements Acl {
      * 2) view
      * 3) edit
      */
-    private final ConcurrentMap<String, AclView> commonMap =
+    private final ConcurrentMap<String, View> commonMap =
         new ConcurrentHashMap<>();
 
     /*
@@ -36,8 +35,8 @@ public class AclData implements Acl {
      * 1) variety
      * 2) vow
      */
-    private final ConcurrentMap<AclType, ConcurrentMap<String, AclView>> complexMap =
-        new ConcurrentHashMap<AclType, ConcurrentMap<String, AclView>>() {
+    private final ConcurrentMap<AclType, ConcurrentMap<String, View>> complexMap =
+        new ConcurrentHashMap<AclType, ConcurrentMap<String, View>>() {
             {
                 this.put(AclType.DATA, new ConcurrentHashMap<>());
                 this.put(AclType.REFERENCE, new ConcurrentHashMap<>());
@@ -66,7 +65,7 @@ public class AclData implements Acl {
             final Set<String> viewSet = Ut.toSet(Ut.toJArray(visitant.getAclView()));
             visibleSet.forEach(field -> {
                 final boolean view = viewSet.contains(field);
-                final AclView simple = new AclItem(field, view, true);
+                final View simple = new AclItem(field, view, true);
                 simple.depend(this.dependMap.containsKey(field));
                 this.commonMap.put(field, simple);
             });
@@ -89,7 +88,7 @@ public class AclData implements Acl {
     private void initComplex(final JsonObject input, final AclType type, final Set<String> viewSet) {
         Ut.<JsonObject>itJObject(input, (config, field) -> {
             final boolean view = viewSet.contains(field);
-            final AclView complex = new AclMap(field, view, config);
+            final View complex = new AclMap(field, view, config);
             complex.depend(this.dependMap.containsKey(field));
             this.complexType.put(field, type);
             this.complexMap.get(type).put(field, complex);

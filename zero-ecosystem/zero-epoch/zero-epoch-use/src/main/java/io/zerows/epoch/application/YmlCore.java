@@ -7,6 +7,7 @@ import io.zerows.platform.constant.VString;
 import io.zerows.platform.constant.VValue;
 import io.zerows.platform.enums.EmDS;
 import io.zerows.platform.enums.EmSecure;
+import io.zerows.platform.enums.SecurityType;
 import io.zerows.support.base.UtBase;
 
 /**
@@ -183,7 +184,7 @@ public interface YmlCore {
      * vertx-secure.yml
      * <pre><code>
      * secure:
-     *    jwt: {@link EmSecure.SecurityType#JWT}
+     *    jwt: {@link SecurityType#JWT}
      *        options:
      *            realm:
      *            jwtOptions:
@@ -191,13 +192,13 @@ public interface YmlCore {
      *        provider:
      *            authenticate:
      *            authorization:
-     *    digest: {@link EmSecure.SecurityType#HT_DIGEST}
+     *    digest: {@link SecurityType#HT_DIGEST}
      *        options:
      *            filename:
      *        provider:
      *            authenticate:
      *            authorization:
-     *    oauth2: {@link EmSecure.SecurityType#OAUTH2}
+     *    oauth2: {@link SecurityType#OAUTH2}
      *        options:
      *            callback:
      *        provider:

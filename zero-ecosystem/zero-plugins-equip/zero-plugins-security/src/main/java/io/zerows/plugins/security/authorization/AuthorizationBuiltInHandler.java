@@ -16,7 +16,7 @@ import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.AuthorizationHandler;
 import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.metadata.security.KSecurity;
+import io.zerows.epoch.metadata.security.SecurityMeta;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -41,7 +41,7 @@ public class AuthorizationBuiltInHandler implements AuthorizationHandler {
     }
 
     // Built In
-    public static AuthorizationBuiltInHandler create(final KSecurity aegis) {
+    public static AuthorizationBuiltInHandler create(final SecurityMeta aegis) {
         return new AuthorizationBuiltInHandler(AuthorizationResource.buildIn(aegis));
     }
 

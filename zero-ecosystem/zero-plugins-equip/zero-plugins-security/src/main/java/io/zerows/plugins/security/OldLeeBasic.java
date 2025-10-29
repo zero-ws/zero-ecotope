@@ -7,7 +7,8 @@ import io.vertx.ext.web.handler.AuthenticationHandler;
 import io.vertx.ext.web.handler.BasicAuthHandler;
 import io.zerows.epoch.application.YmlCore;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.metadata.security.KSecurity;
+import io.zerows.epoch.metadata.security.SecurityConfig;
+import io.zerows.epoch.metadata.security.SecurityMeta;
 import io.zerows.platform.constant.VString;
 import io.zerows.plugins.security.authenticate.AdapterProvider;
 import io.zerows.support.Ut;
@@ -15,9 +16,9 @@ import io.zerows.support.Ut;
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
-class LeeBasic extends AbstractLee {
+class OldLeeBasic extends AbstractOldLee {
     @Override
-    public AuthenticationHandler authenticate(final Vertx vertx, final KSecurity config) {
+    public AuthenticationHandler authenticate(final Vertx vertx, final SecurityMeta config) {
         final AuthenticationProvider provider = this.providerInternal(vertx, config);
         // Basic Handler Generated
         final String realm = this.option(config, YmlCore.secure.options.REALM);
@@ -29,7 +30,7 @@ class LeeBasic extends AbstractLee {
     }
 
     @Override
-    public AuthenticationProvider provider(final Vertx vertx, final KSecurity config) {
+    public AuthenticationProvider provider(final Vertx vertx, final SecurityMeta config) {
         final AuthenticationProvider standard = this.providerInternal(vertx, config);
         final AdapterProvider extension = AdapterProvider.extension(standard);
         return extension.provider(config);
@@ -37,7 +38,7 @@ class LeeBasic extends AbstractLee {
 
     @Override
     @SuppressWarnings("unchecked")
-    public AuthenticationProvider providerInternal(final Vertx vertx, final KSecurity config) {
+    public AuthenticationProvider providerInternal(final Vertx vertx, final SecurityMeta config) {
         /*
          * Here provider could web ChainAuth instead of handler chain
          * The provider type is: io.vertx.ext.auth.ChainAuth
@@ -55,7 +56,7 @@ class LeeBasic extends AbstractLee {
      * username must not be null, but password could be null.
      */
     @Override
-    public String encode(final JsonObject data, final KSecurity.Provider config) {
+    public String encode(final JsonObject data, final SecurityConfig config) {
         final String username = data.getString(KName.USERNAME, null);
         if (Ut.isNil(username)) {
             return null;
@@ -65,7 +66,7 @@ class LeeBasic extends AbstractLee {
     }
 
     @Override
-    public JsonObject decode(final String token, final KSecurity.Provider config) {
+    public JsonObject decode(final String token, final SecurityConfig config) {
         final String decoded = Ut.decryptBase64(token);
         final int colonIdx = decoded.indexOf(":");
         final JsonObject data = new JsonObject();

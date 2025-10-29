@@ -76,11 +76,11 @@ class ExtensionGenerate {
 
     void start(final MetaGenerate program, final String[] args) {
         // 提取配置信息，执行代码生成
-        Objects.requireNonNull(program, "[ ZMOD ] 代码生成配置不可为 null.");
+        Objects.requireNonNull(program, "[ PLUG ] 代码生成配置不可为 null.");
         final Class<?> clazz = program.getClass();
-        log.info("[ ZMOD ] 代码生成配置类：{}", clazz.getName());
+        log.info("[ PLUG ] 代码生成配置类：{}", clazz.getName());
         final URL url = this.loadUrl(clazz, "vertx-generate.yml");
-        log.info("[ ZMOD ] 加载配置文件：{}", url);
+        log.info("[ PLUG ] 加载配置文件：{}", url);
 
         // 根据配置直接提取 Yaml
         final JObject sourceYaml = STORE.inYaml(url);
@@ -91,18 +91,18 @@ class ExtensionGenerate {
         final MetaGenerate generate = configured.merge(program);
 
         if (Objects.isNull(generate)) {
-            log.error("[ ZMOD ] 代码生成配置解析失败，程序终止，vertx-generate.yml 文件缺失！！");
+            log.error("[ PLUG ] 代码生成配置解析失败，程序终止，vertx-generate.yml 文件缺失！！");
             System.exit(-1);
         }
         final MetaSource source = generate.getSource();
-        Objects.requireNonNull(source, "[ ZMOD ] 代码生成源代码配置不可为 null.");
+        Objects.requireNonNull(source, "[ PLUG ] 代码生成源代码配置不可为 null.");
         if (Objects.isNull(source.getDirectory())) {
             source.setDirectory(this.findMavenSourceDirectory(clazz));
         }
-        log.info("[ ZMOD ] Maven 源代码目录：{}", source.getDirectory());
+        log.info("[ PLUG ] Maven 源代码目录：{}", source.getDirectory());
 
         if (Objects.isNull(generate.getDatabase())) {
-            log.error("[ ZMOD ] 代码生成数据库配置解析失败！");
+            log.error("[ PLUG ] 代码生成数据库配置解析失败！");
             System.exit(-1);
         }
 
@@ -134,15 +134,15 @@ class ExtensionGenerate {
         configuration.databaseIncludes(source.getIncludes());
 
         // 构造 Jooq 的标准代码生成配置
-        log.info("[ ZMOD ] 配置程序预处理……");
-        log.info("[ ZMOD ] Includes 规则：{}", source.getIncludes());
-        log.info("[ ZMOD ] Strategy 类：{}", configuration.classStrategy().getName());
-        log.info("[ ZMOD ] Generator 类：{}", configuration.classGenerator().getName());
+        log.info("[ PLUG ] 配置程序预处理……");
+        log.info("[ PLUG ] Includes 规则：{}", source.getIncludes());
+        log.info("[ PLUG ] Strategy 类：{}", configuration.classStrategy().getName());
+        log.info("[ PLUG ] Generator 类：{}", configuration.classGenerator().getName());
         final Configuration compiled = JooqSourceConfigurer.of().configure(configuration);
-        log.info("[ ZMOD ] 生成核心代码");
+        log.info("[ PLUG ] 生成核心代码");
         try {
             GenerationTool.generate(compiled);
-            log.info("[ ZMOD ] 您的代码已经成功生成，注：如果是 Zero Extension 扩展模块开发，请自己修改 ZDB 为动态数据库名称！");
+            log.info("[ PLUG ] 您的代码已经成功生成，注：如果是 Zero Extension 扩展模块开发，请自己修改 ZDB 为动态数据库名称！");
         } catch (final Throwable ex) {
             ex.printStackTrace();
             log.error(ex.getMessage(), ex);

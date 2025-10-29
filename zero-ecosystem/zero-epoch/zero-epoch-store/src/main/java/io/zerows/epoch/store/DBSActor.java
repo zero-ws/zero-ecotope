@@ -134,7 +134,8 @@ public class DBSActor extends AbstractHActor {
     private static DBContext context() {
         // TODO: DBE-EXTENSION / 未来可扩展更多数据库类型
         //       目前仅支持 JooqDatabase 类型
-        return CC_CONTEXT.pick(() -> HPI.findOne(DBContext.class, DBContext.DEFAULT_CONTEXT_SPID),
+        return CC_CONTEXT.pick(
+            () -> HPI.findOne(DBContext.class, DBContext.DEFAULT_CONTEXT_SPID),
             DBContext.DEFAULT_CONTEXT_SPID);
     }
 

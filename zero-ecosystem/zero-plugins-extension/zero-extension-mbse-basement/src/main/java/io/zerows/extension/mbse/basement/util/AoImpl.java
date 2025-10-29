@@ -107,7 +107,7 @@ class AoImpl {
         /* 数据连接池从应用中绑定 */
         final HArk ark = atom.ark();
         final Database database = ark.database();
-        Objects.requireNonNull(database, "[ ZMOD ] 数据库配置不可为空，请检查应用配置！");
+        Objects.requireNonNull(database, "[ PLUG ] 数据库配置不可为空，请检查应用配置！");
         return toDao(() -> atom, database);
     }
 

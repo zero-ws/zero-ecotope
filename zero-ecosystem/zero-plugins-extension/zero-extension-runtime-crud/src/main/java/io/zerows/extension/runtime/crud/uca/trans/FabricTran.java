@@ -105,7 +105,7 @@ class FabricTran implements Tran {
             /*
              * Direct returned
              */
-            log.info("[ ZMOD ] 条件处理插件：{}, {}, {}",
+            log.info("[ PLUG ] 条件处理插件：{}, {}, {}",
                 epsilonMap.isEmpty(), Objects.isNull(plugin), !dict.validSource());
             return Ux.future(new ConcurrentHashMap<>());
         }

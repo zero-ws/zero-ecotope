@@ -1,10 +1,14 @@
 package io.zerows.plugins.security;
 
+import io.r2mo.typed.cc.Cc;
 import io.r2mo.typed.common.MultiKeyMap;
 import io.vertx.ext.auth.authorization.AuthorizationProvider;
+import io.zerows.epoch.basicore.YmSecurity;
 import io.zerows.epoch.management.OCacheClass;
-import io.zerows.epoch.metadata.security.KSecurity;
 import io.zerows.epoch.metadata.security.KSecurityExecutor;
+import io.zerows.epoch.metadata.security.SecurityConfig;
+import io.zerows.epoch.metadata.security.SecurityMeta;
+import io.zerows.platform.enums.SecurityType;
 import io.zerows.specification.configuration.HSetting;
 import lombok.extern.slf4j.Slf4j;
 
@@ -15,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
  *        vertx:
  *           security:
  *     2. 每个应用会拥有一份 {@link HSetting} 的基础配置，其中包含了 SECURITY 配置
- *     3. 每个应用只拥有一份 {@link KSecurity} 安全上下文环境
+ *     3. 每个应用只拥有一份 {@link SecurityMeta} 安全上下文环境
  *        /xxx-01 -> Provider-01
  *        /xxx-02 -> Provider-02
  *        /xxx-03 -> Provider-03
@@ -41,20 +45,23 @@ import lombok.extern.slf4j.Slf4j;
  * 其中每一个应用都会挂载多份安全基础配置
  * <pre>
  *     1. App ->
- *            {@link KSecurity} / {@link KSecurityExecutor}
+ *            {@link SecurityMeta} / {@link KSecurityExecutor}
  *               Provider x N
  *                 - and / or 逻辑关系
  *               wall = /api/**
  *                      - type = JWT
  *                      - type = OAUTH2
  *               wall = /admin/**
+ *     2. 非自定义模式 ->
+ *            {@link SecurityMeta} 只支持单一 Provider 配置，直接对接 {@link YmSecurity} 中的基础配置
  * </pre>
  *
  * @author lang : 2025-10-27
  */
 @Slf4j
-public class SecurityContext {
-    private static final MultiKeyMap<KSecurity> SECURITY_REF = new MultiKeyMap<>();
+class SecurityContext {
+    private static final MultiKeyMap<SecurityMeta> CC_META = new MultiKeyMap<>();
+    private static final Cc<SecurityType, SecurityConfig> CC_CONFIG = Cc.open();
 
     static void scanned() {
         OCacheClass.entireValue().forEach(each -> {

@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public class JobInquirer implements Inquirer<Set<Mission>> {
 
-    public static final String JOB = "[ ZERO ] \t\t\t \uD83D\uDCA4 ---> ( {} Job ) \uD83E\uDDEC Zero 系统扫描到 {} 个 @Job 组件.";
+    public static final String JOB = "[ ZERO ] ( {} Job ) \uD83E\uDDEC Zero 系统扫描到 {} 个 @Job 组件.";
 
     private final transient Extractor<Mission> extractor = Ut.singleton(JobExtractor.class);
 

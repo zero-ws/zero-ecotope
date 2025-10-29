@@ -9,9 +9,10 @@ import io.vertx.ext.web.handler.AuthorizationHandler;
 import io.zerows.component.log.LogO;
 import io.zerows.cosmic.plugins.security.exception._40076Exception400WallSize;
 import io.zerows.cosmic.plugins.security.exception._40077Exception400WallProviderConflict;
-import io.zerows.epoch.metadata.security.KSecurity;
-import io.zerows.platform.enums.EmSecure;
-import io.zerows.sdk.security.Lee;
+import io.zerows.epoch.metadata.security.SecurityConfig;
+import io.zerows.epoch.metadata.security.SecurityMeta;
+import io.zerows.platform.enums.SecurityType;
+import io.zerows.sdk.security.OldLee;
 import io.zerows.support.Ut;
 
 import java.util.Objects;
@@ -21,6 +22,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Deprecated
 class BoltWhich implements Bolt {
     public static final String AUTH_401_METHOD = "[ Auth ] Your `@Wall` class missed @Authenticate method ! {0}";
     public static final String AUTH_401_SERVICE = "[ Auth ] Your `Lee` in service-loader /META-INF/services/ is missing....";
@@ -34,28 +36,28 @@ class BoltWhich implements Bolt {
     };
 
     static Cc<String, Bolt> CC_BOLT = Cc.openThread();
-    static Cc<String, Lee> CC_LEE = Cc.openThread();
+    static Cc<String, OldLee> CC_LEE = Cc.openThread();
 
     @Override
-    public AuthenticationHandler authenticate(final Vertx vertx, final KSecurity config) {
+    public AuthenticationHandler authenticate(final Vertx vertx, final SecurityMeta config) {
         Objects.requireNonNull(config);
-        if (config.noAuthentication()) {
-            // Log
-            if (LOG_LEE[0].getAndSet(Boolean.FALSE)) {
-                LOGGER.warn(AUTH_401_METHOD, config);
-            }
-            return null;
-        }
-        final KSecurity verified = this.verifyAuthenticate(config);
-        final Lee lee = Bolt.reference(config.getType());
-        if (Objects.isNull(lee)) {
+        //        if (config.noAuthentication()) {
+        //            // Log
+        //            if (LOG_LEE[0].getAndSet(Boolean.FALSE)) {
+        //                LOGGER.warn(AUTH_401_METHOD, config);
+        //            }
+        //            return null;
+        //        }
+        final SecurityMeta verified = this.verifyAuthenticate(config);
+        final OldLee oldLee = Bolt.reference(config.getType());
+        if (Objects.isNull(oldLee)) {
             // Log
             if (LOG_LEE[1].getAndSet(Boolean.FALSE)) {
                 LOGGER.warn(AUTH_401_SERVICE, config.getType());
             }
             return null;
         }
-        final AuthenticationHandler handler = lee.authenticate(vertx, verified);
+        final AuthenticationHandler handler = oldLee.authenticate(vertx, verified);
         if (Objects.isNull(handler)) {
             // Log
             if (LOG_LEE[2].getAndSet(Boolean.FALSE)) {
@@ -66,29 +68,29 @@ class BoltWhich implements Bolt {
     }
 
     @Override
-    public AuthorizationHandler authorization(final Vertx vertx, final KSecurity config) {
+    public AuthorizationHandler authorization(final Vertx vertx, final SecurityMeta config) {
         Objects.requireNonNull(config);
-        if (config.noAuthorization()) {
+        //        if (config.noAuthorization()) {
+        //            return null;
+        //        }
+        final OldLee oldLee = Bolt.reference(config.getType());
+        if (Objects.isNull(oldLee)) {
             return null;
         }
-        final Lee lee = Bolt.reference(config.getType());
-        if (Objects.isNull(lee)) {
-            return null;
-        }
-        return lee.authorization(vertx, config);
+        return oldLee.authorization(vertx, config);
     }
 
     @Override
-    public AuthenticationProvider authenticateProvider(final Vertx vertx, final KSecurity config) {
+    public AuthenticationProvider authenticateProvider(final Vertx vertx, final SecurityMeta config) {
         Objects.requireNonNull(config);
-        if (config.noAuthentication()) {
+        //        if (config.noAuthentication()) {
+        //            return null;
+        //        }
+        final OldLee oldLee = Bolt.reference(config.getType());
+        if (Objects.isNull(oldLee)) {
             return null;
         }
-        final Lee lee = Bolt.reference(config.getType());
-        if (Objects.isNull(lee)) {
-            return null;
-        }
-        return lee.provider(vertx, config);
+        return oldLee.provider(vertx, config);
     }
 
     /*
@@ -100,15 +102,15 @@ class BoltWhich implements Bolt {
      * - JWT, WEB, OAUTH2, DIGEST
      * They are fixed provider of authenticate
      */
-    private KSecurity verifyAuthenticate(final KSecurity config) {
-        if (EmSecure.SecurityType.EXTENSION != config.getType()) {
+    private SecurityMeta verifyAuthenticate(final SecurityMeta config) {
+        if (SecurityType.EXTENSION != config.getType()) {
             /*
              * The size should be 1 ( For non-extension )
              */
-            final KSecurity.Provider provider = config.item();
-            Fn.jvmKo(Objects.isNull(provider), _40076Exception400WallSize.class, config.getType(), 1);
+            final SecurityConfig securityConfig = null; // config.item();
+            Fn.jvmKo(Objects.isNull(securityConfig), _40076Exception400WallSize.class, config.getType(), 1);
         }
-        final Set<Class<?>> provider = config.providers();
+        final Set<Class<?>> provider = Set.of(); // config.providers();
         /*
          * Must be valid type of provider
          */

@@ -13,8 +13,7 @@ import io.zerows.component.log.LogOf;
 import io.zerows.cosmic.plugins.cache.Rapid;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
-import io.zerows.epoch.metadata.security.KSecurity;
-import io.zerows.epoch.metadata.security.KSecurityExecutor;
+import io.zerows.epoch.metadata.security.SecurityMeta;
 import io.zerows.support.Ut;
 
 import java.lang.reflect.Method;
@@ -56,9 +55,9 @@ public class AuthenticateGateway {
      *  1) AuthenticateBuiltInProvider code     HTTP Workflow
      *  2) SicStompServerHandler       code     WebSocket Workflow
      */
-    public static void userVerified(final JsonObject credentials, final KSecurity aegis, final Handler<AsyncResult<Boolean>> handler) {
-        final KSecurityExecutor against = aegis.getAuthorizer();
-        final Method method = against.getAuthenticate();
+    public static void userVerified(final JsonObject credentials, final SecurityMeta aegis, final Handler<AsyncResult<Boolean>> handler) {
+        // final KSecurityExecutor against = aegis.getAuthorizer();
+        final Method method = null; // against.getAuthenticate();
         if (Objects.isNull(method)) {
             // Exception for method is null ( This situation should not happen )
             handler.handle(FnVertx.failOut(_401UnauthorizedException.class, "[ ZERO ] 认证权限不够！"));

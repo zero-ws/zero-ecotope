@@ -10,7 +10,7 @@ import io.vertx.ext.auth.authorization.Authorization;
 import io.vertx.ext.auth.authorization.OrAuthorization;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.epoch.annotations.security.AuthorizedResource;
-import io.zerows.epoch.metadata.security.KSecurity;
+import io.zerows.epoch.metadata.security.SecurityMeta;
 import io.zerows.platform.enums.EmSecure;
 import io.zerows.plugins.security.profile.PermissionAuthorization;
 import io.zerows.support.Ut;
@@ -28,9 +28,9 @@ import java.util.Set;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 public class AuthorizationResourceImpl implements AuthorizationResource {
-    private final transient KSecurity aegis;
+    private final transient SecurityMeta aegis;
 
-    AuthorizationResourceImpl(final KSecurity aegis) {
+    AuthorizationResourceImpl(final SecurityMeta aegis) {
         this.aegis = aegis;
     }
 
@@ -38,7 +38,7 @@ public class AuthorizationResourceImpl implements AuthorizationResource {
     @SuppressWarnings("all")
     public void requestResource(final RoutingContext context, final Handler<AsyncResult<Authorization>> handler) {
         final JsonObject params = AuthorizationResource.parameters(context);
-        final Method method = this.aegis.getAuthorizer().getResource();
+        final Method method = null; // this.aegis.getAuthorizer().getResource();
         Fn.jvmAt(() -> {
             final Future<Object> future = (Future<Object>) method.invoke(this.aegis.getProxy(), params);
             future.onComplete(res -> {

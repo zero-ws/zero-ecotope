@@ -20,7 +20,7 @@ import io.zerows.epoch.basicore.option.ClusterOptions;
 import io.zerows.epoch.basicore.option.CorsOptions;
 import io.zerows.epoch.configuration.ZeroPlugins;
 import io.zerows.epoch.metadata.MMComponent;
-import io.zerows.platform.enums.EmSecure;
+import io.zerows.platform.enums.SecurityType;
 
 import java.lang.reflect.Method;
 
@@ -244,7 +244,7 @@ import java.lang.reflect.Method;
  *       endpoint:                                                          # 自动计算
  *   security:                                                              # {@link YmSecurity}
  *     wall:                                                                # 安全管控路径 /api
- *     jwt:                                                                 # {@link EmSecure.SecurityType#JWT}
+ *     jwt:                                                                 # {@link SecurityType#JWT}
  *       options:                                                           #
  *         jwtOptions:                                                      # 🌷 {@link JWTOptions}
  *           algorithm: HS256                                               # 加密算法
@@ -255,13 +255,13 @@ import java.lang.reflect.Method;
  *       provider:
  *         authenticate:                                                    # 🔸 认证 {@link Method}
  *         authorization:                                                   # 🔸 授权 {@link Method}
- *     digest:                                                              # {@link EmSecure.SecurityType#HT_DIGEST}
+ *     digest:                                                              # {@link SecurityType#HT_DIGEST}
  *       options:                                                           #
  *         filename:
  *       provider:
  *         authenticate:                                                    # 🔸 认证 {@link Method}
  *         authorization:                                                   # 🔸 授权 {@link Method}
- *     oauth2:                                                              # {@link EmSecure.SecurityType#OAUTH2}
+ *     oauth2:                                                              # {@link SecurityType#OAUTH2}
  *       options:                                                           #
  *         callback:
  *       provider:

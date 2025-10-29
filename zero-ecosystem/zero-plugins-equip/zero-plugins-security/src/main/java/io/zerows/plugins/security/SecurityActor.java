@@ -11,8 +11,17 @@ import io.zerows.specification.configuration.HConfig;
  */
 @Actor(value = "SECURITY")
 public class SecurityActor extends AbstractHActor {
+    private final SecurityManager manager = SecurityManager.of();
+
     @Override
     protected Future<Boolean> startAsync(final HConfig config, final Vertx vertxRef) {
+        // 先注册配置信息
+        this.manager.registryConfiguration(config);
+
         return Future.succeededFuture(Boolean.TRUE);
+    }
+
+    public void registrySecurity(final HConfig config, final String appId) {
+        this.manager.registryConfiguration(config, appId);
     }
 }

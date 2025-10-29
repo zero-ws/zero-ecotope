@@ -1,11 +1,11 @@
 package io.zerows.extension.commerce.rbac.atom.acl;
 
-import io.zerows.sdk.security.AclView;
+import io.zerows.sdk.security.Acl;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
-public abstract class AbstractAcl implements AclView {
+public abstract class AbstractAcl implements Acl.View {
     protected final String field;
     private boolean depend = false;     // Default is no depend
     private boolean readOnly = false;   // Default is false
@@ -26,7 +26,7 @@ public abstract class AbstractAcl implements AclView {
     }
 
     @Override
-    public AclView depend(final boolean depend) {
+    public Acl.View depend(final boolean depend) {
         this.depend = depend;
         return this;
     }

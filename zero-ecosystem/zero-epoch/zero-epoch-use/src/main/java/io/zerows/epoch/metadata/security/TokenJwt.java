@@ -3,11 +3,13 @@ package io.zerows.epoch.metadata.security;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
+import io.vertx.ext.auth.authentication.Credentials;
 import io.zerows.epoch.constant.KName;
-import io.zerows.platform.enums.EmSecure;
+import io.zerows.platform.enums.SecurityType;
 import io.zerows.platform.exception._60050Exception501NotSupport;
-import io.zerows.sdk.security.Lee;
-import io.zerows.sdk.security.LeeBuiltIn;
+import io.zerows.sdk.security.OldLee;
+import io.zerows.sdk.security.OldLeeBuiltIn;
+import io.zerows.sdk.security.Token;
 import io.zerows.support.Ut;
 
 import java.util.Objects;
@@ -29,8 +31,8 @@ public class TokenJwt implements Token {
     }
 
     private TokenJwt(final JsonObject tokenJson) {
-        final Lee lee = Ut.service(LeeBuiltIn.class);
-        this.token = lee.encode(tokenJson, KSecurity.Provider.configMap(EmSecure.SecurityType.JWT));
+        final OldLee oldLee = Ut.service(OldLeeBuiltIn.class);
+        this.token = oldLee.encode(tokenJson, SecurityConfig.configMap(SecurityType.JWT));
         this.tokenJson = tokenJson;
     }
 
@@ -66,10 +68,10 @@ public class TokenJwt implements Token {
 
     private JsonObject tokenJson() {
         Objects.requireNonNull(this.token);
-        final Lee lee = Ut.service(LeeBuiltIn.class);
+        final OldLee oldLee = Ut.service(OldLeeBuiltIn.class);
         return STORE_TOKEN
             // 防止 JWT 的高频解码（速度很慢）
-            .pick(() -> lee.decode(this.token, KSecurity.Provider.configMap(EmSecure.SecurityType.JWT)), this.token);
+            .pick(() -> oldLee.decode(this.token, SecurityConfig.configMap(SecurityType.JWT)), this.token);
     }
 
     @Override
@@ -90,5 +92,10 @@ public class TokenJwt implements Token {
     @Override
     public JsonObject data() {
         return this.tokenJson;
+    }
+
+    @Override
+    public Credentials credentials() {
+        return null;
     }
 }

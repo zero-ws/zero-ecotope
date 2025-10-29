@@ -4,11 +4,11 @@ import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Session;
-import io.zerows.epoch.metadata.security.KSecurity;
+import io.zerows.epoch.metadata.security.SecurityConfig;
 import io.zerows.epoch.web.Envelop;
-import io.zerows.platform.enums.EmSecure;
-import io.zerows.sdk.security.Lee;
-import io.zerows.sdk.security.LeeBuiltIn;
+import io.zerows.platform.enums.SecurityType;
+import io.zerows.sdk.security.OldLee;
+import io.zerows.sdk.security.OldLeeBuiltIn;
 import io.zerows.support.Ut;
 
 import java.time.Instant;
@@ -58,8 +58,8 @@ class InputRequest {
     static String requestToken(final String tokenString, final String field) {
         String result = null;
         if (Ut.isNotNil(tokenString)) {
-            final Lee lee = Ut.service(LeeBuiltIn.class);
-            final JsonObject token = lee.decode(tokenString, KSecurity.Provider.configMap(EmSecure.SecurityType.JWT));
+            final OldLee oldLee = Ut.service(OldLeeBuiltIn.class);
+            final JsonObject token = oldLee.decode(tokenString, SecurityConfig.configMap(SecurityType.JWT));
             if (Objects.nonNull(token)) {
                 result = token.getString(field);
             }

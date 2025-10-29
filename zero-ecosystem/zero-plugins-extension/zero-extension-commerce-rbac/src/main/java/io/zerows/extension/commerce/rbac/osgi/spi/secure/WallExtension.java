@@ -6,40 +6,41 @@ import io.vertx.ext.auth.authentication.AuthenticationProvider;
 import io.vertx.ext.auth.authorization.AuthorizationProvider;
 import io.vertx.ext.web.handler.AuthenticationHandler;
 import io.vertx.ext.web.handler.AuthorizationHandler;
-import io.zerows.epoch.metadata.security.KSecurity;
+import io.zerows.epoch.metadata.security.SecurityConfig;
+import io.zerows.epoch.metadata.security.SecurityMeta;
 import io.zerows.extension.commerce.rbac.plugins.authorization.ProfileProvider;
 import io.zerows.extension.commerce.rbac.plugins.authorization.ProfileResource;
-import io.zerows.platform.enums.EmSecure;
+import io.zerows.platform.enums.SecurityType;
 import io.zerows.plugins.security.authorization.AuthorizationBuiltInHandler;
 import io.zerows.plugins.security.authorization.AuthorizationResource;
 import io.zerows.program.Ux;
-import io.zerows.sdk.security.LeeBuiltIn;
-import io.zerows.sdk.security.LeeExtension;
+import io.zerows.sdk.security.OldLeeBuiltIn;
+import io.zerows.sdk.security.OldLeeExtension;
 import io.zerows.support.Ut;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
-public class WallExtension implements LeeExtension {
+public class WallExtension implements OldLeeExtension {
     /*
      * 401 call internal workflow
      */
     @Override
-    public AuthenticationHandler authenticate(final Vertx vertx, final KSecurity config) {
-        final LeeBuiltIn internal = Ut.service(LeeBuiltIn.class);
-        final KSecurity copy = config.copy().setType(EmSecure.SecurityType.JWT);
+    public AuthenticationHandler authenticate(final Vertx vertx, final SecurityMeta config) {
+        final OldLeeBuiltIn internal = Ut.service(OldLeeBuiltIn.class);
+        final SecurityMeta copy = config.copy().setType(SecurityType.JWT);
         return internal.authenticate(vertx, copy);
     }
 
     @Override
-    public AuthenticationProvider provider(final Vertx vertx, final KSecurity config) {
-        final LeeBuiltIn internal = Ut.service(LeeBuiltIn.class);
-        final KSecurity copy = config.copy().setType(EmSecure.SecurityType.JWT);
+    public AuthenticationProvider provider(final Vertx vertx, final SecurityMeta config) {
+        final OldLeeBuiltIn internal = Ut.service(OldLeeBuiltIn.class);
+        final SecurityMeta copy = config.copy().setType(SecurityType.JWT);
         return internal.provider(vertx, copy);
     }
 
     @Override
-    public AuthorizationHandler authorization(final Vertx vertx, final KSecurity config) {
+    public AuthorizationHandler authorization(final Vertx vertx, final SecurityMeta config) {
         // Ignore handler class mode
         final AuthorizationResource resource = ProfileResource.create(config);
         final AuthorizationHandler handler = AuthorizationBuiltInHandler.create(resource);
@@ -50,12 +51,12 @@ public class WallExtension implements LeeExtension {
     }
 
     @Override
-    public String encode(final JsonObject data, final KSecurity.Provider config) {
+    public String encode(final JsonObject data, final SecurityConfig config) {
         return Ux.Jwt.token(data);
     }
 
     @Override
-    public JsonObject decode(final String token, final KSecurity.Provider config) {
+    public JsonObject decode(final String token, final SecurityConfig config) {
         return Ux.Jwt.extract(token);
     }
 }

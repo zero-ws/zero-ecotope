@@ -3,7 +3,7 @@ package io.zerows.plugins.websocket.stomp.command;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.ext.stomp.ServerFrame;
-import io.zerows.epoch.metadata.security.KSecurity;
+import io.zerows.epoch.metadata.security.SecurityMeta;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
@@ -16,5 +16,5 @@ public interface FrameWsHandler extends Handler<ServerFrame> {
     }
 
     // Api For Definition
-    FrameWsHandler bind(KSecurity config);
+    FrameWsHandler bind(SecurityMeta config);
 }

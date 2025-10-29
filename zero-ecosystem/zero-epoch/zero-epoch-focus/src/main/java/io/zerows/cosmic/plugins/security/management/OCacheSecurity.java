@@ -1,7 +1,7 @@
 package io.zerows.cosmic.plugins.security.management;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.epoch.metadata.security.KSecurity;
+import io.zerows.epoch.metadata.security.SecurityMeta;
 import io.zerows.platform.management.OCache;
 import io.zerows.specification.development.compiled.HBundle;
 
@@ -12,7 +12,7 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * @author lang : 2024-04-22
  */
-public interface OCacheSecurity extends OCache<Set<KSecurity>> {
+public interface OCacheSecurity extends OCache<Set<SecurityMeta>> {
     Cc<String, OCacheSecurity> CC_SKELETON = Cc.open();
 
     static OCacheSecurity of() {
@@ -24,15 +24,15 @@ public interface OCacheSecurity extends OCache<Set<KSecurity>> {
         return CC_SKELETON.pick(() -> new OCacheSecurityAmbiguity(bundle), cacheKey);
     }
 
-    static ConcurrentMap<String, Set<KSecurity>> entireWall() {
-        final ConcurrentMap<String, Set<KSecurity>> walls = new ConcurrentHashMap<>();
+    static ConcurrentMap<String, Set<SecurityMeta>> entireWall() {
+        final ConcurrentMap<String, Set<SecurityMeta>> walls = new ConcurrentHashMap<>();
         CC_SKELETON.values().forEach(self -> walls.putAll(self.valueWall()));
         return walls;
     }
 
-    OCacheSecurity remove(KSecurity wall);
+    OCacheSecurity remove(SecurityMeta wall);
 
-    OCacheSecurity add(KSecurity wall);
+    OCacheSecurity add(SecurityMeta wall);
 
-    ConcurrentMap<String, Set<KSecurity>> valueWall();
+    ConcurrentMap<String, Set<SecurityMeta>> valueWall();
 }

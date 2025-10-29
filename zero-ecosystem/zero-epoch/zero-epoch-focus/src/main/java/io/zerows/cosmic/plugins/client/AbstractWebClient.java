@@ -1,8 +1,8 @@
 package io.zerows.cosmic.plugins.client;
 
 import io.vertx.core.MultiMap;
-import io.zerows.epoch.metadata.security.Token;
 import io.zerows.platform.metadata.KIntegration;
+import io.zerows.sdk.security.Token;
 import org.apache.http.HttpHeaders;
 
 import java.util.Objects;

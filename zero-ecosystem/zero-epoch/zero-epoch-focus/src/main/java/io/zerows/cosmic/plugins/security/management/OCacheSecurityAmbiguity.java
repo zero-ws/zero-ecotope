@@ -1,6 +1,6 @@
 package io.zerows.cosmic.plugins.security.management;
 
-import io.zerows.epoch.metadata.security.KSecurity;
+import io.zerows.epoch.metadata.security.SecurityMeta;
 import io.zerows.platform.management.AbstractAmbiguity;
 import io.zerows.specification.development.compiled.HBundle;
 
@@ -13,20 +13,20 @@ import java.util.concurrent.ConcurrentMap;
  * @author lang : 2024-04-22
  */
 class OCacheSecurityAmbiguity extends AbstractAmbiguity implements OCacheSecurity {
-    private final Set<KSecurity> walls = new HashSet<>();
-    private final ConcurrentMap<String, Set<KSecurity>> wallMap = new ConcurrentHashMap<>();
+    private final Set<SecurityMeta> walls = new HashSet<>();
+    private final ConcurrentMap<String, Set<SecurityMeta>> wallMap = new ConcurrentHashMap<>();
 
     OCacheSecurityAmbiguity(final HBundle bundle) {
         super(bundle);
     }
 
     @Override
-    public Set<KSecurity> value() {
+    public Set<SecurityMeta> value() {
         return this.walls;
     }
 
     @Override
-    public OCacheSecurity add(final Set<KSecurity> walls) {
+    public OCacheSecurity add(final Set<SecurityMeta> walls) {
         this.walls.addAll(walls);
         // 同步更新
         walls.forEach(this::add);
@@ -34,7 +34,7 @@ class OCacheSecurityAmbiguity extends AbstractAmbiguity implements OCacheSecurit
     }
 
     @Override
-    public OCacheSecurity remove(final Set<KSecurity> walls) {
+    public OCacheSecurity remove(final Set<SecurityMeta> walls) {
         this.walls.removeAll(walls);
         // 同步移除
         walls.forEach(this::remove);
@@ -42,11 +42,11 @@ class OCacheSecurityAmbiguity extends AbstractAmbiguity implements OCacheSecurit
     }
 
     @Override
-    public OCacheSecurity remove(final KSecurity wall) {
+    public OCacheSecurity remove(final SecurityMeta wall) {
         if (!this.wallMap.containsKey(wall.getPath())) {
             return this;
         }
-        final Set<KSecurity> walls = this.wallMap.get(wall.getPath());
+        final Set<SecurityMeta> walls = this.wallMap.get(wall.getPath());
         walls.remove(wall);
         if (walls.isEmpty()) {
             this.wallMap.remove(wall.getPath());
@@ -57,7 +57,7 @@ class OCacheSecurityAmbiguity extends AbstractAmbiguity implements OCacheSecurit
     }
 
     @Override
-    public OCacheSecurity add(final KSecurity wall) {
+    public OCacheSecurity add(final SecurityMeta wall) {
         if (!this.wallMap.containsKey(wall.getPath())) {
             this.wallMap.put(wall.getPath(), new HashSet<>());
         }
@@ -74,7 +74,7 @@ class OCacheSecurityAmbiguity extends AbstractAmbiguity implements OCacheSecurit
 
 
     @Override
-    public synchronized ConcurrentMap<String, Set<KSecurity>> valueWall() {
+    public synchronized ConcurrentMap<String, Set<SecurityMeta>> valueWall() {
         return this.wallMap;
     }
 }

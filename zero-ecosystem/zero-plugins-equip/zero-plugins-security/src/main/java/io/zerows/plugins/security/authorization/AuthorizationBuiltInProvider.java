@@ -7,7 +7,7 @@ import io.vertx.core.Handler;
 import io.vertx.ext.auth.User;
 import io.vertx.ext.auth.authorization.Authorization;
 import io.vertx.ext.auth.authorization.AuthorizationProvider;
-import io.zerows.epoch.metadata.security.KSecurity;
+import io.zerows.epoch.metadata.security.SecurityMeta;
 import io.zerows.plugins.security.profile.PermissionAuthorization;
 
 import java.lang.reflect.Method;
@@ -18,13 +18,13 @@ import java.util.Set;
  */
 public class AuthorizationBuiltInProvider implements AuthorizationProvider {
 
-    private transient final KSecurity aegis;
+    private transient final SecurityMeta aegis;
 
-    private AuthorizationBuiltInProvider(final KSecurity aegis) {
+    private AuthorizationBuiltInProvider(final SecurityMeta aegis) {
         this.aegis = aegis;
     }
 
-    public static AuthorizationProvider provider(final KSecurity aegis) {
+    public static AuthorizationProvider provider(final SecurityMeta aegis) {
         return new AuthorizationBuiltInProvider(aegis);
     }
 
@@ -40,7 +40,7 @@ public class AuthorizationBuiltInProvider implements AuthorizationProvider {
 
     @SuppressWarnings("all")
     public void getAuthorizations(final User user, final Handler<AsyncResult<Void>> handler) {
-        final Method method = this.aegis.getAuthorizer().getAuthorization();
+        final Method method = null; // this.aegis.getAuthorizer().getAuthorization();
         Fn.jvmAt(() -> {
             /*
              * Future<Set<String>> fetching

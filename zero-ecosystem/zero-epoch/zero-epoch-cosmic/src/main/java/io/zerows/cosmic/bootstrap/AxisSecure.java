@@ -2,9 +2,8 @@ package io.zerows.cosmic.bootstrap;
 
 import io.zerows.cortex.metadata.RunServer;
 import io.zerows.cortex.sdk.Axis;
-import io.zerows.cosmic.plugins.security.Bolt;
 import io.zerows.cosmic.plugins.security.management.OCacheSecurity;
-import io.zerows.epoch.metadata.security.KSecurity;
+import io.zerows.epoch.metadata.security.SecurityMeta;
 import io.zerows.specification.development.compiled.HBundle;
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,10 +20,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class AxisSecure implements Axis {
     private static final AtomicBoolean IS_OUT = new AtomicBoolean(Boolean.TRUE);
     private static final AtomicBoolean IS_DISABLED = new AtomicBoolean(Boolean.TRUE);
-    private final Bolt bolt;
 
     public AxisSecure() {
-        this.bolt = Bolt.get();
+        // this.bolt = Bolt.get();
     }
 
     @Override
@@ -41,7 +39,7 @@ public class AxisSecure implements Axis {
          *      0                0                  0
          *      1                1                  1
          */
-        final ConcurrentMap<String, Set<KSecurity>> store = OCacheSecurity.entireWall();
+        final ConcurrentMap<String, Set<SecurityMeta>> store = OCacheSecurity.entireWall();
         store.forEach((path, aegisSet) -> {
             if (!aegisSet.isEmpty()) {
                 /*
@@ -65,11 +63,11 @@ public class AxisSecure implements Axis {
             }
         });
         if (store.isEmpty() && IS_DISABLED.getAndSet(Boolean.FALSE)) {
-            log.info("[ ZERO ] ⚠️ 安全机制禁用：bolt = {}", this.bolt.getClass());
+            // log.info("[ ZERO ] ⚠️ 安全机制禁用：bolt = {}", this.bolt.getClass());
         }
     }
 
-    private void mountAuthenticate(final RunServer server, final String path, final Set<KSecurity> aegisSet) {
+    private void mountAuthenticate(final RunServer server, final String path, final Set<SecurityMeta> aegisSet) {
         //        final AuthenticationHandler resultHandler;
         //        if (VValue.ONE == aegisSet.size()) {
         //            // 1 = handler
@@ -91,7 +89,7 @@ public class AxisSecure implements Axis {
         //        }
     }
 
-    private void mountAuthorization(final RunServer server, final String path, final Set<KSecurity> aegisSet) {
+    private void mountAuthorization(final RunServer server, final String path, final Set<SecurityMeta> aegisSet) {
         //        final AuthorizationHandler resultHandler;
         //        if (VValue.ONE == aegisSet.size()) {
         //            // 1 = handler

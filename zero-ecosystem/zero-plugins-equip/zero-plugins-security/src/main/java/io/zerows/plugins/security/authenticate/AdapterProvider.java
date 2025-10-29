@@ -2,7 +2,7 @@ package io.zerows.plugins.security.authenticate;
 
 import io.r2mo.typed.cc.Cc;
 import io.vertx.ext.auth.authentication.AuthenticationProvider;
-import io.zerows.epoch.metadata.security.KSecurity;
+import io.zerows.epoch.metadata.security.SecurityMeta;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
@@ -24,5 +24,5 @@ public interface AdapterProvider {
             () -> new AdapterExtension(standard), AdapterExtension.class.getName());
     }
 
-    AuthenticationProvider provider(KSecurity aegis);
+    AuthenticationProvider provider(SecurityMeta aegis);
 }

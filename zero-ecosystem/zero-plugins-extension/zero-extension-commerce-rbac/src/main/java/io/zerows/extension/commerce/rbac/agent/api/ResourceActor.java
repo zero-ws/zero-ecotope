@@ -32,7 +32,7 @@ public class ResourceActor {
          * - The action and resource is the relation ( 1:1 ) binding
          * - The permissionId ( S_ACTION ) could be null when the new resource created.
          */
-        log.info("[ ZMOD ] 输入的查询条件：{}", query.encode());
+        log.info("[ PLUG ] 输入的查询条件：{}", query.encode());
         return DB.on(Join.of(
             SResourceDao.class,
             SActionDao.class, "resourceId"

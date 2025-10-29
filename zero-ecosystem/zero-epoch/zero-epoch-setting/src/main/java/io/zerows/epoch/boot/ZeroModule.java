@@ -79,6 +79,7 @@ public class ZeroModule<T> {
 
     private Future<Boolean> runActor(final Predicate<Integer> sequenceFn, final BiFunction<HConfig, HActor, Future<Boolean>> executorFn) {
         Future<Boolean> future = Future.succeededFuture(Boolean.TRUE);
+        // 首层处理
         for (final Integer sequence : ACTOR_SEQUENCE) {
             /*
              * 条件不满足则直接直接 continue，切换到下一轮
@@ -95,21 +96,22 @@ public class ZeroModule<T> {
             if (Objects.isNull(actorSet) || actorSet.isEmpty()) {
                 future = future.compose(nil -> Future.succeededFuture(Boolean.TRUE));
             } else {
+                // 缩进更改
                 future = future.compose(nil -> {
-                    log.info("[ ZMOD ] \t \uD83E\uDDCA ---> 启动 sequence = `{}` 的 Actor 集合，共 {} 个组件",
+                    log.info("[ PLUG ] \uD83E\uDDCA ---> 启动 sequence = `{}` 的 Actor 集合，共 {} 个组件",
                         String.format("%6d", sequence), actorSet.size());
                     return Fx.combineB(actorSet.parallelStream().map(actor -> {
                         final HConfig config = this.findConfig(actor);
                         final Actor actorAnnotation = actor.getClass().getDeclaredAnnotation(Actor.class);
                         final boolean mustConfigured = actorAnnotation.configured();
                         if (mustConfigured && Objects.isNull(config)) {
-                            log.warn("[ ZMOD ] \t\t⚪️ ---> 跳过 actor = `{}`, 检查配置项：`{}`",
+                            log.warn("[ PLUG ]    ⚪️ ---> 跳过 actor = `{}`, 检查配置项：`{}`",
                                 actor.getClass().getName(), actorAnnotation.value());
                             return null;
                         }
                         return executorFn.apply(config, actor);
                     }).filter(Objects::nonNull).collect(Collectors.toSet())).otherwise(error -> {
-                        log.error("[ ZMOD ] 执行异常 --> ", error);
+                        log.error("    [ PLUG ] 执行异常 --> ", error);
                         return Boolean.FALSE;
                     });
                 });

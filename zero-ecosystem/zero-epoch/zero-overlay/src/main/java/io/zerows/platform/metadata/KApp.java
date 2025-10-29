@@ -1,5 +1,6 @@
 package io.zerows.platform.metadata;
 
+import cn.hutool.core.util.StrUtil;
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.ENV;
 import io.zerows.platform.EnvironmentVariable;
@@ -141,6 +142,7 @@ public class KApp implements HApp, HLog {
         return this;
     }
 
+    @Override
     public JsonObject data() {
         return this.data;
     }
@@ -217,6 +219,11 @@ public class KApp implements HApp, HLog {
     public HApp id(final String id) {
         this.id = id;
         return this;
+    }
+
+    @Override
+    public boolean isLoad() {
+        return StrUtil.isNotBlank(this.id);
     }
 
     @Override

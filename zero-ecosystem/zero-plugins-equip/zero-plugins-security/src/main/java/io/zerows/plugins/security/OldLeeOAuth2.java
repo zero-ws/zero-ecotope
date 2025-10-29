@@ -9,18 +9,19 @@ import io.vertx.ext.auth.oauth2.OAuth2Options;
 import io.vertx.ext.web.handler.AuthenticationHandler;
 import io.vertx.ext.web.handler.OAuth2AuthHandler;
 import io.zerows.epoch.application.YmlCore;
-import io.zerows.epoch.metadata.security.KSecurity;
+import io.zerows.epoch.metadata.security.SecurityConfig;
+import io.zerows.epoch.metadata.security.SecurityMeta;
 import io.zerows.plugins.security.authenticate.AdapterProvider;
 import io.zerows.support.Ut;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
-class LeeOAuth2 extends AbstractLee {
+class OldLeeOAuth2 extends AbstractOldLee {
     private static final Cc<String, OAuth2Auth> CC_PROVIDER = Cc.openThread();
 
     @Override
-    public AuthenticationHandler authenticate(final Vertx vertx, final KSecurity config) {
+    public AuthenticationHandler authenticate(final Vertx vertx, final SecurityMeta config) {
         // Options
         final OAuth2Auth provider = this.providerInternal(vertx, config);
         final String callback = this.option(config, YmlCore.secure.oauth2.options.CALLBACK);
@@ -34,7 +35,7 @@ class LeeOAuth2 extends AbstractLee {
     }
 
     @Override
-    public AuthenticationProvider provider(final Vertx vertx, final KSecurity config) {
+    public AuthenticationProvider provider(final Vertx vertx, final SecurityMeta config) {
         final OAuth2Auth standard = this.providerInternal(vertx, config);
         final AdapterProvider extension = AdapterProvider.extension(standard);
         return extension.provider(config);
@@ -42,22 +43,22 @@ class LeeOAuth2 extends AbstractLee {
 
     @Override
     @SuppressWarnings("unchecked")
-    public OAuth2Auth providerInternal(final Vertx vertx, final KSecurity config) {
+    public OAuth2Auth providerInternal(final Vertx vertx, final SecurityMeta config) {
         // Options
-        final KSecurity.Provider provider = config.item();
-        final OAuth2Options options = new OAuth2Options(provider.options());
-        final String key = provider.wall().name() + options.hashCode();
+        final SecurityConfig securityConfig = null; // config.item();
+        final OAuth2Options options = new OAuth2Options(securityConfig.options());
+        final String key = securityConfig.type().name() + options.hashCode();
         return CC_PROVIDER.pick(() -> OAuth2Auth.create(vertx, options), key);
         // return Fn.po?lThread(POOL_PROVIDER, () -> OAuth2Auth.create(vertx, options), key);
     }
 
     @Override
-    public String encode(final JsonObject data, final KSecurity.Provider config) {
+    public String encode(final JsonObject data, final SecurityConfig config) {
         return null;
     }
 
     @Override
-    public JsonObject decode(final String token, final KSecurity.Provider config) {
+    public JsonObject decode(final String token, final SecurityConfig config) {
         return null;
     }
 }

@@ -230,6 +230,23 @@ public interface HApp extends HBoundary<String>, Function<HApp, HApp> {
 
     HApp id(String id);
 
+    /**
+     * 加载应用表示当前应用彻底加载完成，这种模式下 id 一定有值，通常应用分成两类
+     * <pre>
+     *     1. 和持久化设备无关：zero-extension-ambient 未启用
+     *        这种模式下只会包含
+     *        - name
+     *        - ns
+     *        两个属性值
+     *     2. 和持久化设备有关：zero-extension-ambient 启用
+     *        这种模式下会包含完整的应用属性值，特别是 id 属性，这种模式才表示加载完成
+     * </pre>
+     * 应用未加载完成时使用 name 作为唯一标识符，加载完成之后使用 id 作为唯一标识符
+     *
+     * @return 是否加载完成
+     */
+    boolean isLoad();
+
     HApp vLog();
 
     // 🚀 名空间工具类----------------------------------------------------------

@@ -6,7 +6,7 @@ import io.vertx.ext.stomp.StompServerHandler;
 import io.vertx.ext.stomp.StompServerOptions;
 import io.zerows.cosmic.plugins.security.Bolt;
 import io.zerows.cosmic.plugins.security.management.OCacheSecurity;
-import io.zerows.epoch.metadata.security.KSecurity;
+import io.zerows.epoch.metadata.security.SecurityMeta;
 import io.zerows.support.Ut;
 
 import java.util.Objects;
@@ -33,9 +33,9 @@ public class MixerAuthorize extends AbstractMixer {
     public <T> T mount(final StompServerHandler handler, final StompServerOptions option) {
         // Stomp Path Find
         final String stomp = option.getWebsocketPath();
-        final AtomicReference<KSecurity> reference = new AtomicReference<>();
+        final AtomicReference<SecurityMeta> reference = new AtomicReference<>();
 
-        final ConcurrentMap<String, Set<KSecurity>> walls = OCacheSecurity.entireWall();
+        final ConcurrentMap<String, Set<SecurityMeta>> walls = OCacheSecurity.entireWall();
         walls.forEach((path, aegisSet) -> {
             /*
              * Stomp:   /api/web-socket/stomp
@@ -48,7 +48,7 @@ public class MixerAuthorize extends AbstractMixer {
                 reference.set(aegisSet.iterator().next());
             }
         });
-        final KSecurity config = reference.get();
+        final SecurityMeta config = reference.get();
         if (Objects.nonNull(config)) {
             final AuthenticationProvider provider = this.bolt.authenticateProvider(this.vertx, config);
             if (LOG_PROVIDER.getAndSet(Boolean.FALSE)) {

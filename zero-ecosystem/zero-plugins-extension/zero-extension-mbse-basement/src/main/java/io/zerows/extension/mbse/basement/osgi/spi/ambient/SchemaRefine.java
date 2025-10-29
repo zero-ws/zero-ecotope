@@ -63,7 +63,7 @@ class SchemaRefine implements AoRefine {
 
     private void syncDatabase(final JsonObject source, final Set<Schema> schemata) {
         final Database database = Database.createDatabase(source);
-        log.info("[ ZMOD ] 数据库提取：{}", source);
+        log.info("[ PLUG ] 数据库提取：{}", source);
         final Pin pin = Pin.getInstance();
         final AoBuilder builder = pin.getBuilder(database);
 
