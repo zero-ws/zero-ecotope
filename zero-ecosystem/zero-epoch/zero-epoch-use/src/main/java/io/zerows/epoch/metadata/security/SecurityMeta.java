@@ -1,91 +1,34 @@
 package io.zerows.epoch.metadata.security;
 
+import io.zerows.epoch.annotations.Wall;
 import io.zerows.platform.enums.SecurityType;
+import io.zerows.sdk.security.WallExecutor;
 import io.zerows.specification.atomic.HCopier;
-import io.zerows.support.Ut;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
 import java.util.Objects;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 /**
- * Secure class container for special class extraction.
- * Scanned ( KMetadata ) for each @Wall.
+ * 安全墙 {@link Wall} 的专用配置
  */
 @Slf4j
+@Data
 public class SecurityMeta implements Serializable, Comparable<SecurityMeta>, HCopier<SecurityMeta> {
-    /**
-     * Current config
-     */
-    private final ConcurrentMap<String, SecurityConfig> items = new ConcurrentHashMap<>();
-
-    /**
-     * The wall path to be security limitation
-     */
     private String path;
-    /**
-     * Current wall order
-     */
     private int order;
-    /**
-     * Current wall type
-     */
     private SecurityType type;
-    /**
-     * Proxy instance
-     */
-    private Object proxy;
+    private WallExecutor proxy;
 
     private Class<?> handler;
-
-    public String getPath() {
-        return this.path;
-    }
-
-    public void setPath(final String path) {
-        this.path = path;
-    }
-
-    public int getOrder() {
-        return this.order;
-    }
-
-    public void setOrder(final int order) {
-        this.order = order;
-    }
-
-    public SecurityType getType() {
-        return this.type;
-    }
-
-    public SecurityMeta setType(final SecurityType type) {
-        this.type = type;
-        return this;
-    }
-
-    public Object getProxy() {
-        return this.proxy;
-    }
-
-    public void setProxy(final Object proxy) {
-        this.proxy = proxy;
-    }
 
     @Override
     @SuppressWarnings("unchecked")
     public <CHILD extends SecurityMeta> CHILD copy() {
         final SecurityMeta aegis = new SecurityMeta();
-        // Final
-        //        aegis.authorizer.setResource(this.authorizer.getResource());
-        //        aegis.authorizer.setAuthorization(this.authorizer.getAuthorization());
-        //        aegis.authorizer.setAuthenticate(this.authorizer.getAuthenticate());
-        //        aegis.authorizer.setUser(this.authorizer.getUser());
-        // Reference
         aegis.handler = this.handler;
-        aegis.items.putAll(this.items);
         aegis.proxy = this.proxy;
         aegis.order = this.order;
         aegis.path = this.path;
@@ -109,15 +52,13 @@ public class SecurityMeta implements Serializable, Comparable<SecurityMeta>, HCo
 
     @Override
     public int compareTo(final @NotNull SecurityMeta target) {
-        return Ut.compareTo(this, target, (left, right) -> {
-            // 1. Compare Path
-            int result = Ut.compareTo(left.getPath(), right.getPath());
-            if (0 == result) {
-                // 2. Compare Order
-                result = Ut.compareTo(left.getOrder(), right.getOrder());
-            }
-            return result;
-        });
+        // 1. Compare Path
+        int result = Objects.compare(this.getPath(), target.getPath(), String::compareTo);
+        if (0 == result) {
+            // 2. Compare Order
+            result = Integer.compare(this.getOrder(), target.getOrder());
+        }
+        return result;
     }
 
     @Override

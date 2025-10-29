@@ -1,22 +1,16 @@
 package io.zerows.cosmic.plugins.security;
 
-import io.r2mo.function.Fn;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Vertx;
 import io.vertx.ext.auth.authentication.AuthenticationProvider;
 import io.vertx.ext.web.handler.AuthenticationHandler;
 import io.vertx.ext.web.handler.AuthorizationHandler;
 import io.zerows.component.log.LogO;
-import io.zerows.cosmic.plugins.security.exception._40076Exception400WallSize;
-import io.zerows.cosmic.plugins.security.exception._40077Exception400WallProviderConflict;
-import io.zerows.epoch.metadata.security.SecurityConfig;
 import io.zerows.epoch.metadata.security.SecurityMeta;
-import io.zerows.platform.enums.SecurityType;
 import io.zerows.sdk.security.OldLee;
 import io.zerows.support.Ut;
 
 import java.util.Objects;
-import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
@@ -103,19 +97,20 @@ class BoltWhich implements Bolt {
      * They are fixed provider of authenticate
      */
     private SecurityMeta verifyAuthenticate(final SecurityMeta config) {
-        if (SecurityType.EXTENSION != config.getType()) {
-            /*
-             * The size should be 1 ( For non-extension )
-             */
-            final SecurityConfig securityConfig = null; // config.item();
-            Fn.jvmKo(Objects.isNull(securityConfig), _40076Exception400WallSize.class, config.getType(), 1);
-        }
-        final Set<Class<?>> provider = Set.of(); // config.providers();
-        /*
-         * Must be valid type of provider
-         */
-        provider.forEach(item -> Fn.jvmKo(!AuthenticationProvider.class.isAssignableFrom(item),
-            _40077Exception400WallProviderConflict.class, item));
-        return config;
+        //        if (SecurityType.EXTENSION != config.getType()) {
+        //            /*
+        //             * The size should be 1 ( For non-extension )
+        //             */
+        //            final SecurityConfig securityConfig = null; // config.item();
+        //            Fn.jvmKo(Objects.isNull(securityConfig), _40076Exception400WallSize.class, config.getType(), 1);
+        //        }
+        //        final Set<Class<?>> provider = Set.of(); // config.providers();
+        //        /*
+        //         * Must be valid type of provider
+        //         */
+        //        provider.forEach(item -> Fn.jvmKo(!AuthenticationProvider.class.isAssignableFrom(item),
+        //            _40077Exception400WallProviderConflict.class, item));
+        //        return config;
+        return null;
     }
 }

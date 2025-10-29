@@ -3,45 +3,40 @@ package io.zerows.extension.commerce.rbac.plugins;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
-import io.zerows.epoch.annotations.security.Authenticate;
-import io.zerows.epoch.annotations.security.Authorized;
-import io.zerows.epoch.annotations.security.AuthorizedResource;
-import io.zerows.epoch.annotations.security.Wall;
+import io.zerows.epoch.annotations.Wall;
 import io.zerows.epoch.constant.KName;
-import io.zerows.component.log.LogOf;
 import io.zerows.extension.commerce.rbac.agent.service.accredit.AccreditStub;
 import io.zerows.extension.commerce.rbac.agent.service.login.jwt.JwtStub;
-import io.zerows.extension.commerce.rbac.eon.AuthMsg;
+import io.zerows.sdk.security.WallExecutor;
 import jakarta.inject.Inject;
-
-import static io.zerows.extension.commerce.rbac.util.Sc.LOG;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Interface defined for component
  */
-@Wall(value = "extension", path = "/api/*")
-public class RbacWall {
-    private static final LogOf LOGGER = LogOf.get(RbacWall.class);
+@Wall(path = "/api/*")
+@Slf4j
+public class RbacWall implements WallExecutor {
     @Inject
     private transient JwtStub jwtStub;
     @Inject
     private transient AccreditStub accredit;
 
-    @Authenticate
+    @Override
     public Future<Boolean> authenticate(final JsonObject data) {
         final String token = data.getString(KName.ACCESS_TOKEN);
         final String user = data.getString(KName.USER);
         // No Cache
-        LOG.Auth.info(LOGGER, AuthMsg.TOKEN_INPUT, token, user);
+        log.info("[ MOD ] Verify data = {} from token = {}", user, token);
         return this.jwtStub.verify(user, token);
     }
 
-    @Authorized
+    @Override
     public Future<JsonObject> authorize(final User user) {
         return this.accredit.profile(user);
     }
 
-    @AuthorizedResource
+    @Override
     public Future<JsonObject> resource(final JsonObject params) {
         return this.accredit.resource(params);
     }

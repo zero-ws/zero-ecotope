@@ -4,6 +4,7 @@ import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.metadata.security.TokenJwt;
 import io.zerows.extension.commerce.rbac.atom.ScConfig;
 import io.zerows.extension.commerce.rbac.atom.ScToken;
 import io.zerows.extension.commerce.rbac.bootstrap.ScPin;
@@ -117,11 +118,11 @@ class ScClockToken extends AbstractClock<ScToken> {
          * - token
          * - refreshToken
          */
-        final String vToken = Ux.Jwt.token(tokenData);
+        final String vToken = TokenJwt.encode(tokenData);
         final JsonObject refreshData = new JsonObject();
-        refreshData.put(KName.ID, userId);
+        refreshData.put(KName.USER, userId);
         refreshData.put(KName.ACCESS_TOKEN, vToken);
-        final String vRefresh = Ux.Jwt.token(refreshData);
+        final String vRefresh = TokenJwt.encode(refreshData);
         return token.token(vToken).refreshToken(vRefresh);
     }
 

@@ -132,14 +132,14 @@ public class JwtWall implements Security {
             .put("id", filter.getString("_id"));
         // Build the data that you want to store into config.
         // 1. Generate Token
-        final String config = Ux.Jwt.config(seed);
+        final String config = TokenJwt.encode(seed);
         // 2. Store config into mongo db
         return Ux.Mongo.findOneAndReplace("DB_USER", filter, "config", config);
     }
 
     @Override
     public Future<Boolean> verify(final JsonObject data) {
-        final JsonObject extracted = Ux.Jwt.extract(data);
+        final JsonObject extracted = TokenJwt.decode(data);
         // 1. Extract data from config: Authorization Header.
         final String config = data.getString("jwt");
         // 2. Set filters to check whether user id and config are matching in storage ( Mongo DB )

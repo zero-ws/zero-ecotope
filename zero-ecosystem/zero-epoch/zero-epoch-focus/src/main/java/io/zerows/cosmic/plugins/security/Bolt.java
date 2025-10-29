@@ -7,9 +7,6 @@ import io.vertx.ext.web.handler.AuthorizationHandler;
 import io.zerows.epoch.metadata.security.SecurityMeta;
 import io.zerows.platform.enums.SecurityType;
 import io.zerows.sdk.security.OldLee;
-import io.zerows.sdk.security.OldLeeBuiltIn;
-import io.zerows.sdk.security.OldLeeExtension;
-import io.zerows.support.Ut;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
@@ -22,11 +19,12 @@ public interface Bolt {
 
     static OldLee reference(final SecurityType wall) {
         //final AuthWall wall = config.getType();
-        if (SecurityType.EXTENSION == wall) {
-            return BoltWhich.CC_LEE.pick(() -> Ut.service(OldLeeExtension.class), OldLeeExtension.class.getName());
-        } else {
-            return BoltWhich.CC_LEE.pick(() -> Ut.service(OldLeeBuiltIn.class), OldLeeBuiltIn.class.getName());
-        }
+        //        if (SecurityType.EXTENSION == wall) {
+        //            return BoltWhich.CC_LEE.pick(() -> Ut.service(OldLeeExtension.class), OldLeeExtension.class.getName());
+        //        } else {
+        //            return BoltWhich.CC_LEE.pick(() -> Ut.service(OldLeeBuiltIn.class), OldLeeBuiltIn.class.getName());
+        //        }
+        return null;
     }
 
     /*

@@ -4,11 +4,8 @@ import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Session;
-import io.zerows.epoch.metadata.security.SecurityConfig;
+import io.zerows.epoch.metadata.security.TokenJwt;
 import io.zerows.epoch.web.Envelop;
-import io.zerows.platform.enums.SecurityType;
-import io.zerows.sdk.security.OldLee;
-import io.zerows.sdk.security.OldLeeBuiltIn;
 import io.zerows.support.Ut;
 
 import java.time.Instant;
@@ -56,13 +53,13 @@ class InputRequest {
     }
 
     static String requestToken(final String tokenString, final String field) {
+        if (Ut.isNil(tokenString)) {
+            return null;
+        }
         String result = null;
-        if (Ut.isNotNil(tokenString)) {
-            final OldLee oldLee = Ut.service(OldLeeBuiltIn.class);
-            final JsonObject token = oldLee.decode(tokenString, SecurityConfig.configMap(SecurityType.JWT));
-            if (Objects.nonNull(token)) {
-                result = token.getString(field);
-            }
+        final JsonObject token = TokenJwt.decode(tokenString);
+        if (Objects.nonNull(token)) {
+            result = token.getString(field);
         }
         return result;
     }

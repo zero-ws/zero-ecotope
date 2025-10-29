@@ -282,28 +282,4 @@ public final class Ux extends _Where {
             return new UxJob();
         }
     }
-
-    /*
-     * Here the Jwt class is for lagency system because all following method will be called and existed
-     * But the new structure is just like following:
-     *
-     * 1. Lee -> ( Impl ) by Service Loader
-     * 2. The `AuthWall.JWT` will be selected and called API of Lee interface
-     * 3. The final result is token ( encoding / decoding ) part
-     * 4. The implementation class is defined in `zero-ifx-auth` instead of standard framework
-     *
-     * If you want to use security module, you should set-up `zero-ifx-auth` infix instead, or
-     * you can run zero framework in non-secure mode
-     */
-    public static class Jwt {
-
-        public static String token(final JsonObject data) {
-            return TokenJwt.of(data).token();
-        }
-
-        public static JsonObject extract(final String token) {
-            return TokenJwt.of(token).data();
-        }
-    }
-
 }

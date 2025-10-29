@@ -8,15 +8,12 @@ import io.vertx.ext.web.handler.AuthenticationHandler;
 import io.vertx.ext.web.handler.AuthorizationHandler;
 import io.zerows.epoch.metadata.security.SecurityConfig;
 import io.zerows.epoch.metadata.security.SecurityMeta;
+import io.zerows.epoch.metadata.security.TokenJwt;
 import io.zerows.extension.commerce.rbac.plugins.authorization.ProfileProvider;
 import io.zerows.extension.commerce.rbac.plugins.authorization.ProfileResource;
-import io.zerows.platform.enums.SecurityType;
 import io.zerows.plugins.security.authorization.AuthorizationBuiltInHandler;
 import io.zerows.plugins.security.authorization.AuthorizationResource;
-import io.zerows.program.Ux;
-import io.zerows.sdk.security.OldLeeBuiltIn;
 import io.zerows.sdk.security.OldLeeExtension;
-import io.zerows.support.Ut;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
@@ -27,16 +24,18 @@ public class WallExtension implements OldLeeExtension {
      */
     @Override
     public AuthenticationHandler authenticate(final Vertx vertx, final SecurityMeta config) {
-        final OldLeeBuiltIn internal = Ut.service(OldLeeBuiltIn.class);
-        final SecurityMeta copy = config.copy().setType(SecurityType.JWT);
-        return internal.authenticate(vertx, copy);
+        //        final OldLeeBuiltIn internal = Ut.service(OldLeeBuiltIn.class);
+        //        final SecurityMeta copy = config.copy().setType(SecurityType.JWT);
+        //        return internal.authenticate(vertx, copy);
+        return null;
     }
 
     @Override
     public AuthenticationProvider provider(final Vertx vertx, final SecurityMeta config) {
-        final OldLeeBuiltIn internal = Ut.service(OldLeeBuiltIn.class);
-        final SecurityMeta copy = config.copy().setType(SecurityType.JWT);
-        return internal.provider(vertx, copy);
+        //        final OldLeeBuiltIn internal = Ut.service(OldLeeBuiltIn.class);
+        //        final SecurityMeta copy = config.copy().setType(SecurityType.JWT);
+        //        return internal.provider(vertx, copy);
+        return null;
     }
 
     @Override
@@ -52,11 +51,11 @@ public class WallExtension implements OldLeeExtension {
 
     @Override
     public String encode(final JsonObject data, final SecurityConfig config) {
-        return Ux.Jwt.token(data);
+        return TokenJwt.encode(data);
     }
 
     @Override
     public JsonObject decode(final String token, final SecurityConfig config) {
-        return Ux.Jwt.extract(token);
+        return TokenJwt.decode(token);
     }
 }

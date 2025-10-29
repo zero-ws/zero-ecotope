@@ -5,19 +5,11 @@ import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.core.json.JsonObject;
-import io.vertx.ext.auth.authorization.AndAuthorization;
 import io.vertx.ext.auth.authorization.Authorization;
-import io.vertx.ext.auth.authorization.OrAuthorization;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.epoch.annotations.security.AuthorizedResource;
 import io.zerows.epoch.metadata.security.SecurityMeta;
-import io.zerows.platform.enums.EmSecure;
-import io.zerows.plugins.security.profile.PermissionAuthorization;
-import io.zerows.support.Ut;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-import java.util.Set;
 
 /**
  * There are some difference between vertx and zero, in vertx, the resource and permissions are defined in
@@ -55,24 +47,25 @@ public class AuthorizationResourceImpl implements AuthorizationResource {
 
     @SuppressWarnings("all")
     private Authorization getResource(final Object item, final Method method) {
-        final Annotation annotation = method.getAnnotation(AuthorizedResource.class);
-        final EmSecure.AuthWord word = Ut.invoke(annotation, "value");
-        final Authorization required;
-        if (item instanceof Set) {
-            final Set<String> set = (Set<String>) item;
-            if (EmSecure.AuthWord.AND == word) {
-                final AndAuthorization and = AndAuthorization.create();
-                set.forEach(each -> and.addAuthorization(PermissionAuthorization.create(each)));
-                required = and;
-            } else {
-                final OrAuthorization and = OrAuthorization.create();
-                set.forEach(each -> and.addAuthorization(PermissionAuthorization.create(each)));
-                required = and;
-            }
-        } else {
-            // Only one
-            required = PermissionAuthorization.create((String) item);
-        }
-        return required;
+        //        final Annotation annotation = method.getAnnotation(AuthorizedResource.class);
+        //        final EmSecure.AuthWord word = Ut.invoke(annotation, "value");
+        //        final Authorization required;
+        //        if (item instanceof Set) {
+        //            final Set<String> set = (Set<String>) item;
+        //            if (EmSecure.AuthWord.AND == word) {
+        //                final AndAuthorization and = AndAuthorization.create();
+        //                set.forEach(each -> and.addAuthorization(PermissionAuthorization.create(each)));
+        //                required = and;
+        //            } else {
+        //                final OrAuthorization and = OrAuthorization.create();
+        //                set.forEach(each -> and.addAuthorization(PermissionAuthorization.create(each)));
+        //                required = and;
+        //            }
+        //        } else {
+        //            // Only one
+        //            required = PermissionAuthorization.create((String) item);
+        //        }
+        //        return required;
+        return null;
     }
 }

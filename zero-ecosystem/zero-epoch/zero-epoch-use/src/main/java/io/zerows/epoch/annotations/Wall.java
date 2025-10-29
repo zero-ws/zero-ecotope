@@ -1,4 +1,4 @@
-package io.zerows.epoch.annotations.security;
+package io.zerows.epoch.annotations;
 
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.platform.enums.SecurityType;

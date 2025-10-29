@@ -1,16 +1,16 @@
 package io.zerows.epoch.metadata.security;
 
+import io.r2mo.spi.SPI;
 import io.r2mo.typed.cc.Cc;
+import io.r2mo.typed.exception.web._501NotSupportException;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 import io.vertx.ext.auth.authentication.Credentials;
+import io.vertx.ext.auth.authentication.TokenCredentials;
 import io.zerows.epoch.constant.KName;
-import io.zerows.platform.enums.SecurityType;
 import io.zerows.platform.exception._60050Exception501NotSupport;
-import io.zerows.sdk.security.OldLee;
-import io.zerows.sdk.security.OldLeeBuiltIn;
+import io.zerows.sdk.security.Lee;
 import io.zerows.sdk.security.Token;
-import io.zerows.support.Ut;
 
 import java.util.Objects;
 
@@ -18,38 +18,58 @@ import java.util.Objects;
  * @author lang : 2024-04-20
  */
 public class TokenJwt implements Token {
-    private static final Cc<String, JsonObject> STORE_TOKEN = Cc.open();
     private static final Cc<Integer, Token> USER_TOKEN = Cc.open();
 
-    private String token;
-    private JsonObject tokenJson;
+    private final String token;
+    private final JsonObject tokenJson;
+    private final Credentials credentials;
     private String userKey;
+
+    public static String encode(final JsonObject payload) {
+        return ofLee().encode(payload);
+    }
+
+    public static JsonObject decode(final String token) {
+        return ofLee().decode(token);
+    }
+
+    private static Lee ofLee() {
+        final Lee lee = SPI.findOverwrite(Lee.class);
+        if (Objects.isNull(lee)) {
+            throw new _501NotSupportException("[ ZERO ] 为找到 Lee 编解码实现，无法执行操作！");
+        }
+        return lee;
+    }
 
     private TokenJwt(final String token) {
         this.token = token;
         this.tokenJson = this.tokenJson();
+        this.credentials = new TokenCredentials(this.token);
     }
 
     private TokenJwt(final JsonObject tokenJson) {
-        final OldLee oldLee = Ut.service(OldLeeBuiltIn.class);
-        this.token = oldLee.encode(tokenJson, SecurityConfig.configMap(SecurityType.JWT));
+        this.token = encode(tokenJson);
         this.tokenJson = tokenJson;
+        this.credentials = new TokenCredentials(this.token);
     }
 
+    /**
+     * 此处 {@link User#principal()} 的数据结构如下
+     * <pre>
+     *     {
+     *         "user": "唯一用户标识",
+     *         "accessToken": "JWT字符串",
+     *     }
+     * </pre>
+     *
+     * @param user {@link User} 用户信息
+     */
     private TokenJwt(final User user) {
         final JsonObject principle = user.principal();
-        if (principle.containsKey(KName.USER)) {
-            this.userKey = principle.getString(KName.USER);
-            if (principle.containsKey(KName.ACCESS_TOKEN)) {
-                this.token = principle.getString(KName.ACCESS_TOKEN);
-                this.tokenJson = this.tokenJson();
-            }
-        } else {
-            // 避免从 JWT 中反复提取用户信息
-            this.token = principle.getString(KName.ACCESS_TOKEN);
-            this.tokenJson = this.tokenJson();
-            this.userKey = principle.getString(KName.USER);
-        }
+        this.token = principle.getString(KName.ACCESS_TOKEN);
+        this.credentials = new TokenCredentials(this.token);
+        this.tokenJson = this.tokenJson();
+        this.userKey = principle.getString(KName.USER);
     }
 
     public static <T> Token of(final T input) {
@@ -68,10 +88,7 @@ public class TokenJwt implements Token {
 
     private JsonObject tokenJson() {
         Objects.requireNonNull(this.token);
-        final OldLee oldLee = Ut.service(OldLeeBuiltIn.class);
-        return STORE_TOKEN
-            // 防止 JWT 的高频解码（速度很慢）
-            .pick(() -> oldLee.decode(this.token, SecurityConfig.configMap(SecurityType.JWT)), this.token);
+        return decode(this.token);
     }
 
     @Override
@@ -96,6 +113,6 @@ public class TokenJwt implements Token {
 
     @Override
     public Credentials credentials() {
-        return null;
+        return this.credentials;
     }
 }

@@ -60,7 +60,7 @@ class MakerEntity implements MakerIo<MDEntity> {
 
         final String idOfDir = this.buildId(dir);
         // model/<identifier>/entity.json / 一旦定义了实体，此处必须包含 entity.json 文件
-        final JsonObject entityJ = Ut.ioJObject("entity.json");
+        final JsonObject entityJ = Ut.ioJObject(dir + "/entity.json");
         // model/<identifier>/column.json
         final JsonArray columnA = new JsonArray();
         // 检查

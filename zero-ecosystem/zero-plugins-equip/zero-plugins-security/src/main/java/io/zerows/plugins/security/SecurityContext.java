@@ -1,16 +1,18 @@
 package io.zerows.plugins.security;
 
-import io.r2mo.typed.cc.Cc;
 import io.r2mo.typed.common.MultiKeyMap;
+import io.vertx.core.Vertx;
 import io.vertx.ext.auth.authorization.AuthorizationProvider;
+import io.zerows.cosmic.plugins.security.management.ORepositorySecurity;
 import io.zerows.epoch.basicore.YmSecurity;
-import io.zerows.epoch.management.OCacheClass;
-import io.zerows.epoch.metadata.security.KSecurityExecutor;
-import io.zerows.epoch.metadata.security.SecurityConfig;
+import io.zerows.epoch.configuration.NodeStore;
+import io.zerows.epoch.management.ORepository;
 import io.zerows.epoch.metadata.security.SecurityMeta;
-import io.zerows.platform.enums.SecurityType;
 import io.zerows.specification.configuration.HSetting;
 import lombok.extern.slf4j.Slf4j;
+import org.reflections.Reflections;
+
+import java.util.Set;
 
 /**
  * 安全上下文，构造安全扫描等相关环境，安全上下文和App执行器结合使用
@@ -45,7 +47,7 @@ import lombok.extern.slf4j.Slf4j;
  * 其中每一个应用都会挂载多份安全基础配置
  * <pre>
  *     1. App ->
- *            {@link SecurityMeta} / {@link KSecurityExecutor}
+ *            {@link SecurityMeta}
  *               Provider x N
  *                 - and / or 逻辑关系
  *               wall = /api/**
@@ -61,13 +63,16 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 class SecurityContext {
     private static final MultiKeyMap<SecurityMeta> CC_META = new MultiKeyMap<>();
-    private static final Cc<SecurityType, SecurityConfig> CC_CONFIG = Cc.open();
 
-    static void scanned() {
-        OCacheClass.entireValue().forEach(each -> {
-            if (AuthorizationProvider.class.isAssignableFrom(each)) {
-                log.info("[ ZERO ] 平台可支持的安全提供器：{}", each.getName());
-            }
+    static void scanned(final Vertx vertxRef) {
+        final Reflections reflections = new Reflections("io.vertx.ext.auth");
+        final Set<Class<? extends AuthorizationProvider>> subTypes = reflections.getSubTypesOf(AuthorizationProvider.class);
+        subTypes.forEach(clazz -> {
+            log.debug("[ PLUG ] \t\t 可用的 Vert.x 内置的认证提供者：{} ", clazz.getName());
         });
+
+        log.info("[ PLUG ] ( Secure ) 启动安全扫描器……");
+        final HSetting setting = NodeStore.ofSetting(vertxRef);
+        ORepository.ofOr(ORepositorySecurity.class).whenStart(setting);
     }
 }

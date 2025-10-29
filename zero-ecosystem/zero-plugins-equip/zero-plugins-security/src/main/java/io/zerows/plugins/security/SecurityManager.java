@@ -2,7 +2,7 @@ package io.zerows.plugins.security;
 
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.annotations.security.Wall;
+import io.zerows.epoch.annotations.Wall;
 import io.zerows.epoch.metadata.security.SecurityConfig;
 import io.zerows.epoch.metadata.security.SecurityMeta;
 import io.zerows.platform.enums.SecurityType;
@@ -36,9 +36,27 @@ import java.util.Objects;
  */
 @Slf4j
 class SecurityManager {
+    /**
+     * 此处 CONFIG_MAP 结构是双模型
+     * <pre>
+     *     key = appId / appName 或 vertx hashCode
+     *     1. 默认单实例场景下，vertx hashCode
+     *        vertx:
+     *          security:
+     *            ????
+     *     2. 非持久化场景：App Name
+     *        app:
+     *          security:
+     *            ????
+     *     3. 持久化场景：App Id
+     * </pre>
+     */
     private static final Cc<String, Map<SecurityType, SecurityConfig>> CONFIG_MAP = Cc.open();
 
+    private static final Map<SecurityType, SecurityConfig> CONFIG_DEFAULT = new HashMap<>();
+
     private static final SecurityManager INSTANCE = new SecurityManager();
+
 
     private SecurityManager() {
     }
@@ -47,11 +65,7 @@ class SecurityManager {
         return INSTANCE;
     }
 
-    void registryConfiguration(final HConfig config) {
-        this.registryConfiguration(config, null);
-    }
-
-    void registryConfiguration(final HConfig config, final String appId) {
+    void registryOf(final HConfig config, final String appId) {
         Objects.requireNonNull(config, "[ PLUG ] 安全配置对象不能为空！");
 
         final HApp stored = StoreApp.of().valueGet(appId);
@@ -61,23 +75,46 @@ class SecurityManager {
         }
 
         final String cacheKey = stored.isLoad() ? stored.id() : stored.name();
-        CONFIG_MAP.pick(() -> {
-            final Map<SecurityType, SecurityConfig> securityMap = new HashMap<>();
-            final JsonObject options = config.options();
-            // 迭代目前可配的所有安全类型
-            for (final String optionKey : options.fieldNames()) {
-                final SecurityType type = SecurityType.from(optionKey);
-                if (Objects.isNull(type)) {
-                    continue;
-                }
+        CONFIG_MAP.pick(() -> this.createConfiguration(config, cacheKey), cacheKey);
 
-                final JsonObject configOption = options.getJsonObject(optionKey);
-                final SecurityConfig configObj = new SecurityConfig(type, configOption);
-                securityMap.put(type, configObj);
-                log.info("[ PLUG ] ( Secure ) 应用 `{}` 已注册安全配置：`{}`, value = {}",
-                    cacheKey, configObj.key(), configOption.encode());
+    }
+
+    void registryOf(final HConfig config, final int vertxCode) {
+        final Map<SecurityType, SecurityConfig> defaultMap = CONFIG_MAP.pick(
+            () -> this.createConfiguration(config, vertxCode), String.valueOf(vertxCode));
+        // 默认配置只会被初始化一次，为当前启动节点（或主节点）的全局默认配置
+        if (CONFIG_DEFAULT.isEmpty()) {
+            CONFIG_DEFAULT.putAll(defaultMap);
+        }
+    }
+
+    private Map<SecurityType, SecurityConfig> createConfiguration(
+        final HConfig config, final Object ownerId
+    ) {
+        final Map<SecurityType, SecurityConfig> securityMap = new HashMap<>();
+        final JsonObject options = config.options();
+        // 迭代目前可配的所有安全类型
+        for (final String optionKey : options.fieldNames()) {
+            final SecurityType type = SecurityType.from(optionKey);
+            if (Objects.isNull(type)) {
+                continue;
             }
-            return securityMap;
-        }, cacheKey);
+
+            final JsonObject configOption = options.getJsonObject(optionKey);
+            final SecurityConfig configObj = new SecurityConfig(type, configOption);
+            securityMap.put(type, configObj);
+            log.info("[ PLUG ] ( Secure ) By - {} / 已注册安全配置：`{}`, value = {}",
+                ownerId, configObj.key(), configOption.encode());
+        }
+        return securityMap;
+    }
+
+    SecurityConfig configJwt() {
+        return CONFIG_DEFAULT.getOrDefault(SecurityType.JWT, null);
+    }
+
+    SecurityConfig configJwt(final String appOr) {
+        final Map<SecurityType, SecurityConfig> configMap = CONFIG_MAP.getOrDefault(appOr, new HashMap<>());
+        return configMap.getOrDefault(SecurityType.JWT, null);
     }
 }
