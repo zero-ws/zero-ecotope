@@ -29,7 +29,8 @@ import java.util.Objects;
  * @author lang : 2025-10-29
  */
 class LeeJwt implements Lee {
-    private static final SecurityConfig CONFIG = SecurityActor.ofJwt();
+    private static final SecurityManager MANAGER = SecurityManager.of();
+    private static final SecurityConfig CONFIG = MANAGER.configJwt();
     // 防止 JWT 的高频解码（速度很慢）
     private static final Cc<String, JsonObject> STORE_TOKEN = Cc.open();
     private static JWTAuth PROVIDER;
