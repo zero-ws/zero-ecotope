@@ -29,8 +29,4 @@ public interface WallProvider {
     ChainAuthHandler handler401(Vertx vertxRef, Set<SecurityMeta> metaSet);
 
     AuthorizationHandler handler403(Vertx vertxRef, Set<SecurityMeta> metaSet);
-
-    interface BuiltIn {
-        AuthenticationProvider provider401(Vertx vertxRef, SecurityMeta meta);
-    }
 }

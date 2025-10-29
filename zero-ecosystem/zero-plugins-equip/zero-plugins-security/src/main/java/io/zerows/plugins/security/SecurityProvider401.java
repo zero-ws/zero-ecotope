@@ -10,7 +10,7 @@ import io.zerows.epoch.metadata.security.SecurityMeta;
 /**
  * @author lang : 2025-10-29
  */
-class SecurityProvider401 extends SecurityProvider implements AuthenticationProvider {
+class SecurityProvider401 extends SecurityProviderBase implements AuthenticationProvider {
 
     SecurityProvider401(final Vertx vertxRef, final SecurityMeta meta) {
         super(vertxRef, meta);
@@ -18,7 +18,6 @@ class SecurityProvider401 extends SecurityProvider implements AuthenticationProv
 
     @Override
     public Future<User> authenticate(final Credentials credentials) {
-
         return null;
     }
 }

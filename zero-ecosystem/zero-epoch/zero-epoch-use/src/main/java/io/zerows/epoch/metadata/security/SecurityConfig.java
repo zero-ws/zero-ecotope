@@ -9,8 +9,6 @@ import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.util.Optional;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 /**
  * 安全项相关的方法，根据配置初始化，此处初始化的维度是类型，简单说就是不同类型在配置中出现次数会不同
@@ -34,7 +32,6 @@ import java.util.concurrent.ConcurrentMap;
 @Data
 @Accessors(chain = true, fluent = true)
 public class SecurityConfig implements Serializable {
-    private static final ConcurrentMap<String, SecurityConfig> SECURE = new ConcurrentHashMap<>();
     @Setter(AccessLevel.NONE)
     private final JsonObject options = new JsonObject();
     @Setter(AccessLevel.NONE)
@@ -47,10 +44,5 @@ public class SecurityConfig implements Serializable {
         this.key = type.key();
         Optional.ofNullable(options)
             .ifPresent(optionOpt -> this.options.mergeIn(optionOpt, true));
-    }
-
-    @Deprecated
-    public static SecurityConfig configMap(final SecurityType wall) {
-        return null; // SECURE.getOrDefault(wall.key(), null);
     }
 }

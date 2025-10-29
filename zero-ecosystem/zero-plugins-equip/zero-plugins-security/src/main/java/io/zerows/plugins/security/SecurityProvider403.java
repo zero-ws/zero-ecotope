@@ -9,7 +9,7 @@ import io.zerows.epoch.metadata.security.SecurityMeta;
 /**
  * @author lang : 2025-10-29
  */
-class SecurityProvider403 extends SecurityProvider implements AuthorizationProvider {
+class SecurityProvider403 extends SecurityProviderBase implements AuthorizationProvider {
 
     public SecurityProvider403(final Vertx vertxRef, final SecurityMeta meta) {
         super(vertxRef, meta);

@@ -20,8 +20,7 @@ public class SecurityWallProvider implements WallProvider {
 
     @Override
     public AuthenticationProvider provider401(final Vertx vertxRef, final SecurityMeta meta) {
-        final String cacheKey = vertxRef.hashCode() + "@" + meta.hashCode();
-        return CC_PROVIDER_401.pick(() -> new SecurityProvider401(vertxRef, meta), cacheKey);
+        return SecurityChain.of(vertxRef).provider401(meta);
     }
 
     @Override
