@@ -11,7 +11,7 @@ import io.vertx.ext.auth.User;
  */
 public interface WallExecutor {
 
-    Future<Boolean> authenticate(JsonObject data);
+    Future<Boolean> authenticate(JsonObject credentials);
 
     Future<JsonObject> authorize(User user);
 

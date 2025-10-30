@@ -54,7 +54,7 @@ public class MixerAuthorize extends AbstractMixer {
         });
         final SecurityMeta config = reference.get();
         if (Objects.nonNull(config)) {
-            final AuthenticationProvider provider = this.provider.provider401(this.vertx, config);
+            final AuthenticationProvider provider = this.provider.providerOfAuthentication(this.vertx, Set.of(config));
             if (LOG_PROVIDER.getAndSet(Boolean.FALSE)) {
                 log.info("[ ZERO ] ( Stomp ) 安全认证器：{}", provider.getClass());
             }

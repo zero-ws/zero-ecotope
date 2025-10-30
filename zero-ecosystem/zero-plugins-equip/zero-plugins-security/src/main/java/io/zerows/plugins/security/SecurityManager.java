@@ -1,6 +1,7 @@
 package io.zerows.plugins.security;
 
 import io.r2mo.typed.cc.Cc;
+import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Wall;
 import io.zerows.epoch.metadata.security.SecurityConfig;
@@ -113,8 +114,13 @@ class SecurityManager {
         return CONFIG_DEFAULT.getOrDefault(SecurityType.JWT, null);
     }
 
-    public SecurityConfig configOf(final SecurityType type) {
+    SecurityConfig configOf(final SecurityType type) {
         return CONFIG_DEFAULT.getOrDefault(type, null);
+    }
+
+    SecurityConfig configOf(final SecurityType type, final Vertx vertxRef) {
+        return CONFIG_MAP.getOrDefault(String.valueOf(vertxRef.hashCode()), Map.of())
+            .getOrDefault(type, null);
     }
 
     SecurityConfig configJwt(final String appOr) {

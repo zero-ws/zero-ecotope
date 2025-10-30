@@ -1,5 +1,6 @@
 package io.zerows.epoch.metadata.security;
 
+import io.vertx.core.Vertx;
 import io.zerows.epoch.annotations.Wall;
 import io.zerows.platform.enums.SecurityType;
 import io.zerows.sdk.security.WallExecutor;
@@ -66,4 +67,11 @@ public class SecurityMeta implements Serializable, Comparable<SecurityMeta>, HCo
         return Objects.hash(this.path, this.order, this.type, this.proxy);
     }
 
+    public String id(final Vertx vertx) {
+        return vertx.hashCode() + "@" + this.hashCode();
+    }
+
+    public String idPre(final Vertx vertx) {
+        return vertx.hashCode() + "@" + this.path + this.type;
+    }
 }

@@ -60,7 +60,7 @@ public class AxisSecure implements Axis {
                  * -- n size: return the handler collection of ChainAuthHandler ( all )
                  */
                 // 构造 401 认证处理器
-                final ChainAuthHandler handler401 = this.provider.handler401(server.refVertx(), securityMeta);
+                final ChainAuthHandler handler401 = this.provider.handlerOfAuthentication(server.refVertx(), securityMeta);
                 if (Objects.nonNull(handler401)) {
                     server.refRouter().route(path).order(KWeb.ORDER.SECURE)
                         .handler(handler401)
@@ -77,7 +77,7 @@ public class AxisSecure implements Axis {
                  * 2. The order must be after 401 Orders.SECURE
                  */
                 // 构造 403 授权处理器
-                final AuthorizationHandler handler403 = this.provider.handler403(server.refVertx(), securityMeta);
+                final AuthorizationHandler handler403 = this.provider.handlerOfAuthorization(server.refVertx(), securityMeta);
                 if (Objects.nonNull(handler403)) {
                     server.refRouter().route(path).order(KWeb.ORDER.SECURE_AUTHORIZATION)
                         .handler(handler403)

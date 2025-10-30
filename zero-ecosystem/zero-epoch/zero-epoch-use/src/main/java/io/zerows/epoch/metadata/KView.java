@@ -91,29 +91,38 @@ public class KView extends JsonObject {
     }
 
     public static KView smart(final Object json) {
-        if (json instanceof KView) {
-            // Vis object, convert directly
-            return (KView) json;
-        } else if (json instanceof JsonObject) {
-            // InJson object convert to Vis ( sub class )
-            return new KView(((JsonObject) json));
-        } else if (json instanceof final String viewJson) {
-            if (Ut.isJObject(viewJson)) {
-                // The json is literal
-                return new KView(Ut.toJObject(viewJson));
-            } else if (Ut.isJArray(viewJson)) {
-                // String literal
-                return create(viewJson);
-            } else {
-                // Single view with default position
-                return new KView((String) json, VValue.DFT.V_POSITION);
+        switch (json) {
+            case final KView entries -> {
+                // Vis object, convert directly
+                return entries;
+                // Vis object, convert directly
             }
-        } else if (json instanceof final JsonArray jsonArray) {
-            // JsonArray
-            return create(jsonArray);
-        } else {
-            // Default findRunning
-            return new KView(VValue.DFT.V_VIEW, VValue.DFT.V_POSITION);
+            case final JsonObject entries -> {
+                // InJson object convert to Vis ( sub class )
+                return new KView(entries);
+                // InJson object convert to Vis ( sub class )
+            }
+            case final String viewJson -> {
+                if (Ut.isJObject(viewJson)) {
+                    // The json is literal
+                    return new KView(Ut.toJObject(viewJson));
+                } else if (Ut.isJArray(viewJson)) {
+                    // String literal
+                    return create(viewJson);
+                } else {
+                    // Single view with default position
+                    return new KView((String) json, VValue.DFT.V_POSITION);
+                }
+            }
+            case final JsonArray jsonArray -> {
+                // JsonArray
+                return create(jsonArray);
+                // JsonArray
+            }
+            case null, default -> {
+                // Default findRunning
+                return new KView(VValue.DFT.V_VIEW, VValue.DFT.V_POSITION);
+            }
         }
     }
 

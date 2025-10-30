@@ -248,6 +248,7 @@ public interface VName {
 
     String FILE_KEY = "fileKey";                 /* XAttachment belong-to field */
     String FILE_NAME = "filename";               /* XAttachment filename */
+    String FILE_HT_DIGEST = "htdigest";           /* XAttachment htdigest */
 
     String LINKAGE = "linkage";                  /* XLinkage instance */
     String QUERY = "query";                      /* XLinkage query */

@@ -1,7 +1,7 @@
 package io.zerows.plugins.security;
 
 import io.vertx.core.Vertx;
-import io.vertx.ext.auth.authorization.AuthorizationProvider;
+import io.vertx.ext.auth.authentication.AuthenticationProvider;
 import io.zerows.cosmic.plugins.security.management.ORepositorySecurity;
 import io.zerows.epoch.basicore.YmSecurity;
 import io.zerows.epoch.configuration.NodeStore;
@@ -64,9 +64,9 @@ class SecurityContext {
 
     static void scanned(final Vertx vertxRef) {
         final Reflections reflections = new Reflections("io.vertx.ext.auth");
-        final Set<Class<? extends AuthorizationProvider>> subTypes = reflections.getSubTypesOf(AuthorizationProvider.class);
+        final Set<Class<? extends AuthenticationProvider>> subTypes = reflections.getSubTypesOf(AuthenticationProvider.class);
         subTypes.forEach(clazz -> {
-            log.debug("[ PLUG ] \t\t 可用的 Vert.x 内置的认证提供者：{} ", clazz.getName());
+            log.info("[ PLUG ] \t\t 可用的 Vert.x 内置的认证提供者：{} ", clazz.getName());
         });
 
         log.info("[ PLUG ] ( Secure ) 启动安全扫描器……");

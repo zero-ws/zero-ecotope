@@ -24,9 +24,9 @@ import java.util.Set;
  */
 public interface WallProvider {
 
-    AuthenticationProvider provider401(Vertx vertxRef, SecurityMeta meta);
+    AuthenticationProvider providerOfAuthentication(Vertx vertxRef, Set<SecurityMeta> meta);
 
-    ChainAuthHandler handler401(Vertx vertxRef, Set<SecurityMeta> metaSet);
+    ChainAuthHandler handlerOfAuthentication(Vertx vertxRef, Set<SecurityMeta> metaSet);
 
-    AuthorizationHandler handler403(Vertx vertxRef, Set<SecurityMeta> metaSet);
+    AuthorizationHandler handlerOfAuthorization(Vertx vertxRef, Set<SecurityMeta> metaSet);
 }

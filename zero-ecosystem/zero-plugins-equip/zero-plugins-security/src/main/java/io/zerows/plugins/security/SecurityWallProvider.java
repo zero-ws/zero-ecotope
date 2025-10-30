@@ -1,6 +1,5 @@
 package io.zerows.plugins.security;
 
-import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Vertx;
 import io.vertx.ext.auth.authentication.AuthenticationProvider;
 import io.vertx.ext.web.handler.AuthorizationHandler;
@@ -16,20 +15,19 @@ import java.util.Set;
  * @author lang : 2025-10-29
  */
 public class SecurityWallProvider implements WallProvider {
-    private static final Cc<String, AuthenticationProvider> CC_PROVIDER_401 = Cc.openThread();
 
     @Override
-    public AuthenticationProvider provider401(final Vertx vertxRef, final SecurityMeta meta) {
-        return SecurityChain.of(vertxRef).provider401(meta);
+    public AuthenticationProvider providerOfAuthentication(final Vertx vertxRef, final Set<SecurityMeta> metaSet) {
+        return SecurityProviderFactory.of(vertxRef).providerOfAuthentication(metaSet);
     }
 
     @Override
-    public ChainAuthHandler handler401(final Vertx vertxRef, final Set<SecurityMeta> metaSet) {
-        return null;
+    public ChainAuthHandler handlerOfAuthentication(final Vertx vertxRef, final Set<SecurityMeta> metaSet) {
+        return SecurityProviderFactory.of(vertxRef).handlerOfAuthentication(metaSet);
     }
 
     @Override
-    public AuthorizationHandler handler403(final Vertx vertxRef, final Set<SecurityMeta> metaSet) {
-        return null;
+    public AuthorizationHandler handlerOfAuthorization(final Vertx vertxRef, final Set<SecurityMeta> metaSet) {
+        return SecurityProviderFactory.of(vertxRef).handlerOfAuthorization(metaSet);
     }
 }

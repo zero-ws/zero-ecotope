@@ -16,4 +16,5 @@ interface ERR {
 
     VertxE _40078 = VertxE.of(-40078).state(HttpResponseStatus.INTERNAL_SERVER_ERROR);
     VertxE _40079 = VertxE.of(-40079).state(HttpResponseStatus.INTERNAL_SERVER_ERROR);
+    VertxE _40080 = VertxE.of(-40080).state(HttpResponseStatus.INTERNAL_SERVER_ERROR);
 }

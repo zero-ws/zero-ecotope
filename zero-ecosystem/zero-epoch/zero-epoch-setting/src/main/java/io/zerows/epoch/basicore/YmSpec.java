@@ -595,11 +595,39 @@ public interface YmSpec {
             String __ = "security";
             String wall = "wall";
 
+            interface basic {
+                String __ = "basic";
+
+                interface options {
+                    String __ = "options";
+                    String realm = "realm";
+                }
+            }
+
+            interface oauth2 {
+                String __ = "oauth2";
+
+                interface options {
+                    String __ = "options";
+                    String callback = "callback";
+                }
+            }
+
+            interface htdigest {
+                String __ = "htdigest";
+
+                interface options {
+                    String __ = "options";
+                    String filename = "filename";
+                }
+            }
+
             interface jwt {
                 String __ = "jwt";
 
                 interface options {
                     String __ = "options";
+                    String realm = "realm";
 
                     interface jwtOptions {
                         String __ = "jwtOptions";

@@ -1,47 +1,57 @@
 package io.zerows.plugins.security;
 
-import io.vertx.core.AsyncResult;
-import io.vertx.core.Handler;
 import io.vertx.core.MultiMap;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
-import io.vertx.ext.auth.authorization.Authorization;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.management.OCacheUri;
 import io.zerows.epoch.metadata.KView;
-import io.zerows.epoch.metadata.security.SecurityMeta;
 
 import java.util.Objects;
 
 /**
- * @author <a href="http://www.origin-x.cn">Lang</a>
+ * @author lang : 2025-10-30
  */
-public interface SecurityResource {
-
-    /*
-     * This method is for dynamic using of 403 authorization.
-     * Sometimes when the URI has been stored as resource in zero system,
-     * You can extract the metadata in @Wall classes by
-     *      data.getJsonObject("metadata");
-     * It means that you can findRunning unique resource identifier by
-     * 1) Http Method: GET, DELETE, POST, PUT
-     * 2) Uri Original
-     * Here are some calculation results that has been provided by zero container such as following situation:
-     * When the registry uri is as : /api/mock/:name
-     * In this situation the real path should be : /api/mock/lang
-     * In this method the metadata -> uri will be provided by : /api/mock/:name
-     *                    metadata -> requestUri will be provided by : /api/mock/lang
-     * It's specific situation when you used path variable.
+class ProfileParameter {
+    /**
+     * 静态授权参数构造器，这个方法主要用于 403 授权的动态构造，部分信息是存储在 Zero 系统中的，此处的参数可用来提取 403 所需的所有基本信息，
+     * 资源的标识包括
+     * <pre>
+     *     1. HTTP 方法：GET, DELETE, POST, PUT
+     *     2. 原始 URI
+     * </pre>
+     * 此处有针对 Pattern 路径计算的处理逻辑，例如注册的 URI 是 /api/mock/:name，那么实际请求的路径可能是 /api/mock/lang，这种模式下
+     * 授权部分会分为两个级别
+     * <pre>
+     *     1. 原始 URI 基础授权，直接针对 /api/mock/:name 进行权限控制
+     *     2. 实际请求 URI 的权限控制，针对 /api/mock/lang（数据域部分）未来版本可进行细粒度控制
+     * </pre>
+     * 标准化之后的数据格式
+     * <pre>
+     *     {
+     *         // ... User Principal Original Data
+     *         "metadata": {
+     *             "uri": "/api/mock/:name",
+     *             "uriRequest": "/api/mock/lang",
+     *             "method": "GET",
+     *             "view": {
+     *                 "view": "视图名称",
+     *                 "position": "视图位置说明（视图分组）"
+     *             }
+     *         },
+     *         "headers": {
+     *         }
+     *     }
+     * </pre>
      *
-     * 「Objective」
-     * The metadata stored for real project when you want to do some limitation in RBAC mode.
-     * Because the application system will scan our storage to do resource authorization, the application
-     * often need the metadata information to do locating and checking here.
+     * @param context 路由上下文
+     *
+     * @return 授权参数
      */
-    static JsonObject parameters(final RoutingContext context) {
+    static JsonObject build(final RoutingContext context) {
         final User user = context.user();
         final JsonObject normalized;
         if (Objects.isNull(user)) {
@@ -64,7 +74,7 @@ public interface SecurityResource {
         metadata.put(KName.URI_REQUEST, request.path());
         metadata.put(KName.METHOD, request.method().name());
         /*
-         * view parameters for ScRequest to web cache key
+         * view build for ScRequest to web cache key
          * It's important
          */
         final String literal = request.getParam(KName.VIEW);
@@ -87,10 +97,4 @@ public interface SecurityResource {
          */
         return normalized;
     }
-
-    static SecurityResource buildIn(final SecurityMeta aegis) {
-        return new SecurityResourceImpl(aegis);
-    }
-
-    void requestResource(RoutingContext context, Handler<AsyncResult<Authorization>> handler);
 }

@@ -27,7 +27,7 @@ public class RbacWall implements WallExecutor {
         final String token = data.getString(KName.ACCESS_TOKEN);
         final String user = data.getString(KName.USER);
         // No Cache
-        log.info("[ MOD ] Verify data = {} from token = {}", user, token);
+        log.info("[ MOD ] 验证用户数据和令牌 data = {} / token = {}", user, token);
         return this.jwtStub.verify(user, token);
     }
 
