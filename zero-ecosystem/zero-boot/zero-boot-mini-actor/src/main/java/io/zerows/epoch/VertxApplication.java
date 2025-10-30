@@ -9,6 +9,7 @@ import io.vertx.core.eventbus.EventBusOptions;
 import io.vertx.core.http.HttpServerOptions;
 import io.zerows.cortex.AxisDynamicFactory;
 import io.zerows.cortex.AxisSockFactory;
+import io.zerows.cortex.AxisSwaggerFactory;
 import io.zerows.cortex.management.StoreVertx;
 import io.zerows.cortex.metadata.RunRoute;
 import io.zerows.cortex.metadata.RunServer;
@@ -113,6 +114,7 @@ public class VertxApplication {
             WallProvider.class,         // 安全提供者组件
             FactoryDBAsync.class,       // 异步DBE
             AxisSockFactory.class,      // WebSocket
+            AxisSwaggerFactory.class,    //Swagger
             AxisDynamicFactory.class    // 动态路由
         );
 

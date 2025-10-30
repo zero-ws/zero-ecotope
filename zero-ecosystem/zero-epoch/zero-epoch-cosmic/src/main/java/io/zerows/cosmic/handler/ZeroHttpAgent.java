@@ -13,6 +13,7 @@ import io.zerows.cosmic.bootstrap.AxisFilter;
 import io.zerows.cosmic.bootstrap.AxisMeasure;
 import io.zerows.cosmic.bootstrap.AxisSecure;
 import io.zerows.cosmic.bootstrap.AxisStart;
+import io.zerows.cosmic.bootstrap.AxisSwagger;
 import io.zerows.epoch.annotations.Agent;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.spi.HPI;
@@ -45,16 +46,15 @@ public class ZeroHttpAgent extends AbstractVerticle {
              *     - Cors
              */
             Axis.ofOr(AxisCommon.class).mount(runServer, bundle);
-
             /*
-             * 02. 安全
+             * 03. 安全
              *     - 401 Authentication
              *     - 403 Authorization
              */
             Axis.ofOr(AxisSecure.class).mount(runServer, bundle);
 
             /*
-             * 03. 监控
+             * 04. 监控
              *     - Module Monitor
              *     - Service Monitor
              *     - Gateway Monitor
@@ -62,24 +62,28 @@ public class ZeroHttpAgent extends AbstractVerticle {
             Axis.ofOr(AxisMeasure.class).mount(runServer, bundle);
 
             /*
-             * 04. JSR-340
+             * 05. JSR-340
              *     - Filter
              *     - Listener
              */
             Axis.ofOr(AxisFilter.class).mount(runServer, bundle);
 
             /*
-             * 05. 主流程
+             * 06. 主流程
              */
             Axis.ofOr(AxisEvent.class).mount(runServer, bundle);
 
             /*
-             * 06. Extension 扩展路由
+             * 07. Extension 扩展路由
              */
             Axis.ofOr(AxisExtension.class).mount(runServer, bundle);
+            /*
+             * 08. Swagger 挂载
+             */
+            Axis.ofOr(AxisSwagger.class).mount(runServer, bundle);
 
             /*
-             * 07. 启动完成监听
+             * 09. 启动完成监听
              */
             Axis.ofOr(AxisStart.class).mount(runServer, bundle);
 

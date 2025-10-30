@@ -33,6 +33,10 @@
         -->
         <dependency>
             <groupId>io.zerows</groupId>
+            <artifactId>zero-plugins-swagger</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.zerows</groupId>
             <artifactId>zero-plugins-trash</artifactId>
         </dependency>
         <dependency>
@@ -133,10 +137,10 @@
             <groupId>io.zerows</groupId>
             <artifactId>zero-plugins-integration-wechat</artifactId>
         </dependency>
-        <dependency>
-            <groupId>io.zerows</groupId>
-            <artifactId>zero-plugins-integration-feign</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>io.zerows</groupId>-->
+<!--            <artifactId>zero-plugins-integration-feign</artifactId>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>io.zerows</groupId>
             <artifactId>zero-plugins-office-excel</artifactId>
