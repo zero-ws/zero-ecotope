@@ -5,7 +5,7 @@ import io.swagger.v3.oas.models.OpenAPI;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.StaticHandler;
 
-class SwaggerRouteBuilder {
+class SwaggerRouteMount {
 
     public static void mount(Router router, OpenAPI openAPI) {
         // Static UI

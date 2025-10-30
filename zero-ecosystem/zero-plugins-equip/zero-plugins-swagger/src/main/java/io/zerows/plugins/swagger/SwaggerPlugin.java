@@ -38,7 +38,7 @@ public class SwaggerPlugin implements AxisSwaggerFactory {
             if (data != null) {
                final OpenAPI openAPI = data.getOpenAPI();
                 // Step3: 构造路由并挂载
-                SwaggerRouteBuilder.mount(router, openAPI);
+                SwaggerRouteMount.mount(router, openAPI);
             }
             return true;
         }
