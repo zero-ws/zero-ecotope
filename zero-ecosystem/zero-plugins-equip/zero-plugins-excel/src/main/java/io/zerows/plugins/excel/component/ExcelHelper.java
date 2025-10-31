@@ -1,4 +1,4 @@
-package io.zerows.plugins.excel;
+package io.zerows.plugins.excel.component;
 
 import io.r2mo.function.Fn;
 import io.r2mo.typed.cc.Cc;
@@ -10,15 +10,7 @@ import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.epoch.basicore.MDConnect;
 import io.zerows.epoch.jigsaw.Oneness;
 import io.zerows.platform.constant.VValue;
-import io.zerows.plugins.excel.component.DataTaker;
-import io.zerows.plugins.excel.component.ExBound;
-import io.zerows.plugins.excel.component.ExBoundRow;
-import io.zerows.plugins.excel.component.ExExpr;
-import io.zerows.plugins.excel.component.ExcelEnv;
-import io.zerows.plugins.excel.component.ExcelEnvConnect;
-import io.zerows.plugins.excel.component.ExcelEnvFormula;
-import io.zerows.plugins.excel.component.ExcelEnvPen;
-import io.zerows.plugins.excel.component.ExcelEnvTenant;
+import io.zerows.plugins.excel.ExcelAnalyzer;
 import io.zerows.plugins.excel.exception._60037Exception404ExcelFileNull;
 import io.zerows.plugins.excel.metadata.ExRecord;
 import io.zerows.plugins.excel.metadata.ExTable;
@@ -49,7 +41,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 /*
  * Excel Helper to help ExcelClient to do some object building
  */
-class ExcelHelper {
+public class ExcelHelper {
 
     private static final Cc<String, ExcelHelper> CC_HELPER = Cc.open();
     private static final Cc<String, Workbook> CC_WORKBOOK = Cc.open();
@@ -78,18 +70,18 @@ class ExcelHelper {
         this.envTenant = (ExcelEnv<ExTenant>) ExcelEnv.of(ExcelEnvTenant.class);
     }
 
-    static ExcelHelper helper(final Class<?> target) {
+    public static ExcelHelper helper(final Class<?> target) {
         return CC_HELPER.pick(() -> new ExcelHelper(target), target.getName());
         // FnZero.po?l(Pool.HELPERS, ofMain.getName(), () -> new ExcelHelper(ofMain));
     }
 
-    Future<JsonArray> extract(final Set<ExTable> tables) {
+    public Future<JsonArray> extract(final Set<ExTable> tables) {
         final List<Future<JsonArray>> futures = new ArrayList<>();
         tables.forEach(table -> futures.add(this.extract(table)));
         return Fx.compressA(futures);
     }
 
-    Future<JsonArray> extract(final ExTable table) {
+    public Future<JsonArray> extract(final ExTable table) {
         /* Records extracting */
         final List<ExRecord> records = table.get();
         final String tableName = table.getName();
@@ -114,7 +106,7 @@ class ExcelHelper {
      * will throw exception out.
      */
     @SuppressWarnings("all")
-    Workbook getWorkbook(final String filename) {
+    public Workbook getWorkbook(final String filename) {
         Fn.jvmKo(Objects.isNull(filename), _60037Exception404ExcelFileNull.class, filename);
         /*
          * Here the InputStream directly from
@@ -133,7 +125,7 @@ class ExcelHelper {
     }
 
     @SuppressWarnings("all")
-    Workbook getWorkbook(final InputStream in, final boolean isXlsx) {
+    public Workbook getWorkbook(final InputStream in, final boolean isXlsx) {
         Fn.jvmKo(Objects.isNull(in), _60037Exception404ExcelFileNull.class, "Stream");
         final Workbook workbook;
         if (isXlsx) {
@@ -151,7 +143,7 @@ class ExcelHelper {
     /*
      * Get Set<ExSheet> collection based join workbook
      */
-    Set<ExTable> getExTables(final ExWorkbook exWorkbook, final HMetaAtom metaAtom) {
+    public Set<ExTable> getExTables(final ExWorkbook exWorkbook, final HMetaAtom metaAtom) {
         if (Objects.isNull(exWorkbook) || Objects.isNull(exWorkbook.getWorkbook())) {
             return new HashSet<>();
         }
@@ -211,7 +203,7 @@ class ExcelHelper {
         return sheets;
     }
 
-    void runBrush(final Workbook workbook, final Sheet sheet, final HMetaAtom metaAtom) {
+    public void runBrush(final Workbook workbook, final Sheet sheet, final HMetaAtom metaAtom) {
         if (Objects.nonNull(this.tpl)) {
             this.tpl.bind(workbook);
             this.tpl.applyStyle(sheet, metaAtom);
@@ -219,19 +211,19 @@ class ExcelHelper {
     }
 
     // --------------------- 初始化专用方法 ---------------------
-    void initPen(final JsonObject excelJ) {
+    public void initPen(final JsonObject excelJ) {
         this.tpl = this.envPen.prepare(excelJ);
     }
 
-    void initConnect(final JsonObject excelJ) {
+    public void initConnect(final JsonObject excelJ) {
         this.envConnect.prepare(excelJ);
     }
 
-    void initEnvironment(final JsonObject excelJ) {
+    public void initEnvironment(final JsonObject excelJ) {
         REFERENCES.putAll(this.envFormula.prepare(excelJ));
     }
 
-    void initTenant(final JsonObject excelJ) {
+    public void initTenant(final JsonObject excelJ) {
         this.tenant = this.envTenant.prepare(excelJ);
     }
 
@@ -240,7 +232,7 @@ class ExcelHelper {
      * 1. Key duplicated
      * 2. Unique duplicated
      */
-    <T> List<T> compress(final List<T> input, final ExTable table) {
+    public <T> List<T> compress(final List<T> input, final ExTable table) {
 
         final MDConnect connect = table.getConnect();
         final Oneness<MDConnect> oneness = Oneness.ofConnect();

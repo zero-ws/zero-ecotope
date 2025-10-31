@@ -29,7 +29,7 @@ public class SharedActor extends AbstractHActor {
         return Future.succeededFuture(Boolean.TRUE);
     }
 
-    public static SharedClient ofDefault() {
+    public static SharedClient ofClient() {
         return SharedAddOn.of().createSingleton();
     }
 }

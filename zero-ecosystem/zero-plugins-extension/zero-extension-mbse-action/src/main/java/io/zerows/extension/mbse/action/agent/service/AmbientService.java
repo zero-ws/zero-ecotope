@@ -54,7 +54,7 @@ public class AmbientService implements AmbientStub {
          * Reset `Status`
          */
         mission.setStatus(EmService.JobStatus.STOPPED);
-        final JobClient client = JobClientActor.ofDefault(); // JobClientAddOn.of().createSingleton();
+        final JobClient client = JobClientActor.ofClient(); // JobClientAddOn.of().createSingleton();
         client.save(mission);
         return Ux.future(JobKit.toJson(mission));
     }

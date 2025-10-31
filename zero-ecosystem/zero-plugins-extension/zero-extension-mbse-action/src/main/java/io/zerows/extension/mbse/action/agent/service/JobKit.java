@@ -18,7 +18,7 @@ import java.util.Set;
  *  Job kit here for configuration
  */
 public class JobKit {
-    private static final JobClient CLIENT = JobClientActor.ofDefault();
+    private static final JobClient CLIENT = JobClientActor.ofClient();
 
     /*
      * Could not use old code here

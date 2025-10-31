@@ -1,5 +1,6 @@
 package io.zerows.plugins.excel;
 
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import io.vertx.codegen.annotations.Fluent;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
@@ -7,9 +8,9 @@ import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
-import io.vertx.core.json.JsonObject;
 import io.zerows.plugins.excel.metadata.ExTable;
-import io.zerows.sdk.plugins.InfixClient;
+import io.zerows.sdk.plugins.AddOn;
+import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.modeling.metadata.HMetaAtom;
 
 import java.io.InputStream;
@@ -19,17 +20,14 @@ import java.util.Set;
  * ExcelClient for office excel data loading
  * Apache Poi
  */
-public interface ExcelClient extends InfixClient<ExcelClient> {
+@AddOn.Name("DEFAULT_EXCEL_CLIENT")
+public interface ExcelClient {
 
-    static ExcelClient createShared(final Vertx vertx, final JsonObject config) {
+    static ExcelClient createClient(final Vertx vertx, final HConfig config) {
         return new ExcelClientImpl(vertx, config);
     }
 
     // --------------------- ExTable Ingesting -----------------------
-
-    @Fluent
-    @Override
-    ExcelClient init(JsonObject params);
 
     Future<Set<ExTable>> ingestAsync(String filename);
 
@@ -75,6 +73,7 @@ public interface ExcelClient extends InfixClient<ExcelClient> {
     ExcelClient exportAsync(String identifier, JsonArray data, HMetaAtom metaAtom, Handler<AsyncResult<Buffer>> handler);
 
     @Fluent
+    @CanIgnoreReturnValue
     <T> ExcelClient importAsync(String filename, Handler<AsyncResult<Set<T>>> handler);
 
     @Fluent

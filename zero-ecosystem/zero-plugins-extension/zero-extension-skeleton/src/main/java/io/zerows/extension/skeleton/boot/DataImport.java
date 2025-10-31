@@ -71,7 +71,7 @@ public class DataImport {
         final ExcelClient excel = ExcelInfix.getClient();
         Fn.jvmKo(Objects.isNull(excel), _80214Exception417LoadingNotReady.class, "excel");
         // 检查三：Map导入环境是否准备
-        final SharedClient shared = SharedActor.ofDefault();
+        final SharedClient shared = SharedActor.ofClient();
         Fn.jvmKo(Objects.isNull(shared), _80214Exception417LoadingNotReady.class, "shared");
     }
 

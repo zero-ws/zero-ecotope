@@ -8,12 +8,19 @@ import io.vertx.core.Vertx;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.annotations.Defer;
+import io.zerows.plugins.excel.component.ExcelHelper;
 import io.zerows.plugins.excel.metadata.ExTable;
+import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.modeling.metadata.HMetaAtom;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.InputStream;
+import java.util.Objects;
 import java.util.Set;
 
+@Slf4j
+@Defer
 public class ExcelClientImpl implements ExcelClient {
 
     private transient final Vertx vertx;
@@ -23,24 +30,29 @@ public class ExcelClientImpl implements ExcelClient {
     private transient final ExcelIngest ingest = ExcelIngest.create(this.helper);
     private transient final ExcelImport importer = ExcelImport.create(this.helper);
 
-    ExcelClientImpl(final Vertx vertx, final JsonObject config) {
+    ExcelClientImpl(final Vertx vertx, final HConfig config) {
         this.vertx = vertx;
-        this.init(config);
-    }
 
-    @Override
-    public ExcelClient init(final JsonObject config) {
-        this.helper.initConnect(config);
+        if (Objects.isNull(config)) {
+            log.warn("[ ZERO ] ( Excel ) 配置为空（小概率事件）！");
+            return;
+        }
+        final JsonObject options = config.options();
+        if (Objects.isNull(options)) {
+            log.warn("[ ZERO ] ( Excel ) 配置选项为空，无法初始化当前客户端！");
+            return;
+        }
+
+        this.helper.initConnect(options);
 
 
-        this.helper.initEnvironment(config);
+        this.helper.initEnvironment(options);
 
 
-        this.helper.initPen(config);
+        this.helper.initPen(options);
 
 
-        this.helper.initTenant(config);
-        return this;
+        this.helper.initTenant(options);
     }
 
     // --------------------- ExTable Ingesting -----------------------

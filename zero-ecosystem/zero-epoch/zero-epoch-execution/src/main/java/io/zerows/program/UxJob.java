@@ -12,7 +12,7 @@ public class UxJob {
     private transient final JobClient client;
 
     UxJob() {
-        this.client = JobClientActor.ofDefault();
+        this.client = JobClientActor.ofClient();
     }
 
     // Start job

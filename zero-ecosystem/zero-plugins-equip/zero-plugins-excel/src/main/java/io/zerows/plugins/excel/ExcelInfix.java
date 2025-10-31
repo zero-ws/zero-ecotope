@@ -18,7 +18,7 @@ public class ExcelInfix implements Infix {
     private static void initInternal(final Vertx vertx,
                                      final String name) {
         CC_CLIENT.pick(() -> Infix.init(YmlCore.inject.EXCEL,
-            (config) -> ExcelClient.createShared(vertx, config),
+            (config) -> null, // ExcelClient.createClient(vertx, config),
             ExcelInfix.class), name);
     }
 
@@ -35,7 +35,7 @@ public class ExcelInfix implements Infix {
     }
 
     public static ExcelClient createClient(final Vertx vertx) {
-        return Infix.init("excel", (config) -> ExcelClient.createShared(vertx, config), ExcelInfix.class);
+        return Infix.init("excel", (config) -> null, ExcelInfix.class);
     }
 
     @Override

@@ -28,7 +28,7 @@ public class JobClientActor extends AbstractHActor {
         return Future.succeededFuture(Boolean.TRUE);
     }
 
-    public static JobClient ofDefault() {
+    public static JobClient ofClient() {
         return JobClientAddOn.of().createSingleton();
     }
 }

@@ -1,13 +1,13 @@
 package io.zerows.plugins.excel.metadata;
 
-import io.zerows.component.log.LogOf;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.util.CellRangeAddress;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
 public class ExPos {
-    private static final LogOf LOGGER = LogOf.get(ExPos.class);
     private final transient int rowIndex;
     private final transient int colIndex;
 
@@ -56,7 +56,7 @@ public class ExPos {
         final int rowAcc = (rowEnd - rowStart);
         final int colAcc = (colEnd - colStart);
         if (0 < rowAcc || 0 < colAcc) {
-            LOGGER.debug("[ Έξοδος ] Region created: ( Row: {0} ~ {1}, Column: {2} ~ {3} )",
+            log.debug("[ ZERO ] ( Excel ) 范围扫描: ( Row: {} ~ {}, Column: {} ~ {} )",
                 rowStart, rowEnd, colStart, colEnd);
             return new CellRangeAddress(rowStart, rowEnd, colStart, colEnd);
         } else {
