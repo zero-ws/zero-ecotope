@@ -11,8 +11,8 @@ import io.zerows.extension.runtime.crud.exception._80102Exception409MultiModule;
 import io.zerows.extension.runtime.crud.exception._80103Exception409ModuleConflict;
 import io.zerows.extension.runtime.crud.uca.desk.IxMod;
 import io.zerows.mbse.metadata.KModule;
-import io.zerows.plugins.office.excel.ExcelClient;
-import io.zerows.plugins.office.excel.atom.ExTable;
+import io.zerows.plugins.excel.ExcelClient;
+import io.zerows.plugins.excel.metadata.ExTable;
 import io.zerows.program.Ux;
 
 import java.io.File;

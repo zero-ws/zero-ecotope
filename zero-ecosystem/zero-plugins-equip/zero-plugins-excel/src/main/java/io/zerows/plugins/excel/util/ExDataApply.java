@@ -1,0 +1,70 @@
+package io.zerows.plugins.excel.util;
+
+import io.r2mo.typed.cc.Cc;
+import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.constant.KName;
+import io.zerows.plugins.excel.metadata.ExTable;
+import io.zerows.plugins.excel.metadata.ExTenant;
+import io.zerows.support.Ut;
+
+import java.util.Objects;
+import java.util.Set;
+
+/**
+ * @author lang : 2024-06-12
+ */
+public class ExDataApply {
+    private static final Cc<String, ExDataApply> CC_APPLY = Cc.openThread();
+    private final ExTenant tenant;
+
+    private ExDataApply(final ExTenant tenant) {
+        this.tenant = tenant;
+    }
+
+    public static ExDataApply of(final ExTenant tenant) {
+        return CC_APPLY.pick(() -> new ExDataApply(tenant), String.valueOf(tenant.hashCode()));
+    }
+
+    /*
+     * Here for critical injection, mount the data of
+     * {
+     *      "global": {
+     *      }
+     * }
+     * */
+    public void applyData(final Set<ExTable> dataSet) {
+        if (Objects.nonNull(this.tenant)) {
+            final JsonObject dataGlobal = this.tenant.valueDefault();
+            if (Ut.isNotNil(dataGlobal)) {
+                /*
+                 * New for developer account importing cross different
+                 * apps
+                 * {
+                 *     "developer":
+                 * }
+                 */
+                final JsonObject developer = Ut.valueJObject(dataGlobal, KName.DEVELOPER).copy();
+                final JsonObject normalized = dataGlobal.copy();
+                normalized.remove(KName.DEVELOPER);
+                dataSet.forEach(table -> {
+                    // Developer Checking
+                    if ("S_USER".equals(table.getName()) && Ut.isNotNil(developer)) {
+                        // JsonObject ( user = employeeId )
+                        table.get().forEach(record -> {
+                            // Mount Global Data
+                            record.putOr(normalized);
+                            // EmployeeId Replacement for `lang.yu` or other developer account
+                            final String username = record.get(KName.USERNAME);
+                            if (developer.containsKey(username)) {
+                                record.put(KName.MODEL_KEY, developer.getString(username));
+                            }
+                        });
+                    } else {
+                        // Mount Global Data into the ingest data.
+                        table.get().forEach(record -> record.putOr(normalized));
+                    }
+                });
+            }
+        }
+    }
+}

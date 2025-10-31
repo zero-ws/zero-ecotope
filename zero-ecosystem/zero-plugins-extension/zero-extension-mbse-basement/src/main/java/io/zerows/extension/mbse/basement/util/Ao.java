@@ -13,7 +13,7 @@ import io.zerows.extension.mbse.basement.atom.element.DataMatrix;
 import io.zerows.extension.mbse.basement.osgi.spi.robin.Switcher;
 import io.zerows.platform.enums.typed.ChangeFlag;
 import io.zerows.platform.metadata.KIdentity;
-import io.zerows.plugins.office.excel.atom.ExTable;
+import io.zerows.plugins.excel.metadata.ExTable;
 import io.zerows.specification.modeling.HAtom;
 import io.zerows.specification.modeling.HRecord;
 import io.zerows.specification.modeling.operation.HDao;

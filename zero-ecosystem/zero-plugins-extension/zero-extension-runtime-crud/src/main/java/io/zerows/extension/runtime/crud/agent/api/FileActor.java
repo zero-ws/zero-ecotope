@@ -22,7 +22,7 @@ import io.zerows.extension.runtime.crud.uca.trans.Tran;
 import io.zerows.extension.runtime.crud.util.Ix;
 import io.zerows.mbse.metadata.KModule;
 import io.zerows.platform.constant.VName;
-import io.zerows.plugins.office.excel.ExcelClient;
+import io.zerows.plugins.excel.ExcelClient;
 import io.zerows.program.Ux;
 import io.zerows.specification.modeling.metadata.HMetaAtom;
 import io.zerows.support.Ut;

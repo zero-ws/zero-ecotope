@@ -28,7 +28,7 @@
         <module>zero-plugins-integration-wechat</module>
 
         <!-- Office -->
-        <module>zero-plugins-office-excel</module>
+        <module>zero-plugins-excel</module>
 
         <!-- Store -->
         <module>zero-plugins-store-elasticsearch</module>

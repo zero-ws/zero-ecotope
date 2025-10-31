@@ -2,7 +2,7 @@ package io.zerows.extension.skeleton.boot;
 
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
-import io.zerows.plugins.office.excel.ExcelInfix;
+import io.zerows.plugins.excel.ExcelInfix;
 import io.zerows.specification.configuration.HLauncher;
 
 /**

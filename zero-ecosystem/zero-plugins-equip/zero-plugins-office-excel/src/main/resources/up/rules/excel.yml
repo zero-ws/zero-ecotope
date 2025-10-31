@@ -1,5 +1,0 @@
-required:
-  - mapping
-typed:
-  environment: JARRAY
-  boot: JARRAY

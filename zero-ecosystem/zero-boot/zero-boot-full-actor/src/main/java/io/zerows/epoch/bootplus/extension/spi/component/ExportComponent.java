@@ -12,8 +12,8 @@ import io.zerows.extension.skeleton.common.Ke;
 import io.zerows.mbse.metadata.ActIn;
 import io.zerows.mbse.metadata.ActOut;
 import io.zerows.platform.constant.VName;
-import io.zerows.plugins.office.excel.ExcelClient;
-import io.zerows.plugins.office.excel.ExcelInfix;
+import io.zerows.plugins.excel.ExcelClient;
+import io.zerows.plugins.excel.ExcelInfix;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 

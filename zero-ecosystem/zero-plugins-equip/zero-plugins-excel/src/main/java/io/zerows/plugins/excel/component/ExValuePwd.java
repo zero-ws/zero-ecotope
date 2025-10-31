@@ -1,0 +1,25 @@
+package io.zerows.plugins.excel.component;
+
+import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.constant.KName;
+import io.zerows.platform.constant.VString;
+import io.zerows.platform.constant.VValue;
+import io.zerows.support.Ut;
+
+import java.util.concurrent.ConcurrentMap;
+
+/**
+ * PWD Processing
+ */
+public class ExValuePwd implements ExValue {
+
+    @Override
+    @SuppressWarnings("all")
+    public Object to(final Object value, final ConcurrentMap<String, String> paramMap) {
+        final String pathRoot = paramMap.get(KName.DIRECTORY);
+        final String field = paramMap.get(KName.FIELD);
+        final String filepath = Ut.ioPath(pathRoot, field) + VString.DOT + VValue.SUFFIX.JSON;
+        final JsonObject content = Ut.ioJObject(filepath);
+        return content.encode();
+    }
+}

@@ -44,6 +44,11 @@
                 <artifactId>zero-plugins-swagger</artifactId>
                 <version>${zero.version}</version>
             </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-plugins-excel</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
             <!-- ================= 静态插件 ================== -->
             <dependency>
                 <groupId>io.zerows</groupId>
@@ -60,12 +65,6 @@
             <!--                <artifactId>zero-plugins-integration-feign</artifactId>-->
             <!--                <version>${zero.version}</version>-->
             <!--            </dependency>-->
-
-            <dependency>
-                <groupId>io.zerows</groupId>
-                <artifactId>zero-plugins-office-excel</artifactId>
-                <version>${zero.version}</version>
-            </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-plugins-store-elasticsearch</artifactId>

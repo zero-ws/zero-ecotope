@@ -12,9 +12,9 @@ import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.commerce.rbac.eon.Addr;
 import io.zerows.extension.commerce.rbac.uca.acl.relation.IdcStub;
-import io.zerows.plugins.office.excel.ExcelClient;
-import io.zerows.plugins.office.excel.atom.ExRecord;
-import io.zerows.plugins.office.excel.atom.ExTable;
+import io.zerows.plugins.excel.ExcelClient;
+import io.zerows.plugins.excel.metadata.ExRecord;
+import io.zerows.plugins.excel.metadata.ExTable;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 

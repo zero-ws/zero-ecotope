@@ -1,4 +1,0 @@
-required:
-  - dao
-typed:
-  unique: JARRAY

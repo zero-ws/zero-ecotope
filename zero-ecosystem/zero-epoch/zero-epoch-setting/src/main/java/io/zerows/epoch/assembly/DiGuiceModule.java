@@ -5,6 +5,7 @@ import com.google.inject.Key;
 import com.google.inject.binder.ScopedBindingBuilder;
 import com.google.inject.name.Names;
 import io.zerows.epoch.annotations.Defer;
+import io.zerows.specification.configuration.HActor;
 import io.zerows.support.Ut;
 import jakarta.inject.Named;
 import jakarta.inject.Singleton;
@@ -91,14 +92,15 @@ public abstract class DiGuiceModule extends AbstractModule {
 
         if (Ut.isNil(name)) {
             this.bind(interfaceCls).toProvider(new DiDynamicProvider<>(Key.get(interfaceCls)));
-            log.info("[ ZERO ] ( DI ) Defer / 实现类: `{}`, 接口 = `{}`", implCls.getName(), interfaceCls.getName());
+            log.info("[ ZERO ] ( DI ) {} / 实现类: `{}`, 接口 = `{}`",
+                HActor.COLOR_DEFER, implCls.getName(), interfaceCls.getName());
         } else {
             this.bind(interfaceCls).annotatedWith(Names.named(name)).toProvider(
                 // 注意此处是带有 @Named 的操作，在实现这一层需要去考虑
                 new DiDynamicProvider<>(Key.get(interfaceCls, Names.named(name)))
             );
-            log.info("[ ZERO ] ( DI ) Defer / 实现类: `{}`, 接口 = `{}`, 标识 = {}",
-                implCls.getName(), interfaceCls.getName(), name);
+            log.info("[ ZERO ] ( DI ) {} / 实现类: `{}`, 接口 = `{}`, 标识 = {}",
+                HActor.COLOR_DEFER, implCls.getName(), interfaceCls.getName(), name);
         }
         return implCls;
     }

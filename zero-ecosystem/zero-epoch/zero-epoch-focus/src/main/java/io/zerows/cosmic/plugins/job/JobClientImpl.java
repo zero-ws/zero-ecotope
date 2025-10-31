@@ -6,6 +6,7 @@ import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.zerows.cosmic.plugins.job.metadata.Mission;
+import io.zerows.epoch.annotations.Defer;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +18,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Slf4j
+@Defer
 class JobClientImpl implements JobClient {
 
     private transient final Vertx vertx;
