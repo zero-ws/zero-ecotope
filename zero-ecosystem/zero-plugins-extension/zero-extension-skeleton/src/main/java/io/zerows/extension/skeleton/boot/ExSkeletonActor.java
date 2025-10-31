@@ -17,8 +17,8 @@ public class ExSkeletonActor extends ExAbstractHActor {
 
         ExBoot.vLog();
 
+        ExBoot.vModule();
+
         return Future.succeededFuture(Boolean.TRUE);
     }
-
-
 }
