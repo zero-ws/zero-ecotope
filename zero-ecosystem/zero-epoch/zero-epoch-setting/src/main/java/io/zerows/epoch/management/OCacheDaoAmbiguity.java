@@ -1,18 +1,12 @@
 package io.zerows.epoch.management;
 
-import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
-import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.zerows.epoch.basicore.MDMeta;
 import io.zerows.platform.management.AbstractAmbiguity;
 import io.zerows.specification.development.compiled.HBundle;
-import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -58,65 +52,6 @@ class OCacheDaoAmbiguity extends AbstractAmbiguity implements OCacheDao {
     @Override
     public OCacheDao remove(final MDMeta pojo) {
         this.storedMeta.remove(pojo.table());
-        return this;
-    }
-
-    /**
-     * 这个过程只执行一次，不同环境执行效果会不相同
-     * <pre><code>
-     *     1. 原始环境中，由于每个 Module 都可能调用，但读取到的对象在上层 SKELETON 中只会出现一次，所以第二次调用时直接就返回了
-     *     2. OSGI 环境中，每个 Bundle 都会调用一次，所以每个 Bundle 都会有一份自己的配置
-     * </code></pre>
-     *
-     * @param configuration 配置对象
-     * @param <C>           泛型
-     *
-     * @return OCacheDao
-     */
-    @Override
-    public <C> OCacheDao configure(final C configuration) {
-        if (!this.storedMeta.isEmpty()) {
-            return this;
-        }
-        // 扫描的类，环境构造时直接扫描
-        final Set<Class<?>> scanned = OCacheClass.of(this.caller()).value();
-        final ConcurrentMap<String, Class<?>> daoMap = new ConcurrentHashMap<>();
-        scanned.stream()
-            .filter(AbstractVertxDAO.class::isAssignableFrom)
-            .forEach(daoCls -> daoMap.put(MDMeta.toTable(daoCls), daoCls));
-
-        final ConcurrentMap<String, Class<?>> pojoMap = new ConcurrentHashMap<>();
-        scanned.stream()
-            .filter(VertxPojo.class::isAssignableFrom)
-            .forEach(pojoCls -> pojoMap.put(MDMeta.toTable(pojoCls), pojoCls));
-
-        final Set<String> lineSet = new TreeSet<>();
-        final ConcurrentMap<String, String> lineMap = new ConcurrentHashMap<>();
-        daoMap.forEach((table, daoCls) -> {
-            final Class<?> pojoCls = pojoMap.getOrDefault(table, null);
-            if (Objects.nonNull(pojoCls)) {
-                final MDMeta pojo = new MDMeta(daoCls, pojoCls);
-                this.add(pojo);
-                lineMap.put(pojo.table(), pojo.toLine());
-                lineSet.add(pojo.table());
-            }
-        });
-        // 打印结果
-        final List<String> lines = new ArrayList<>();
-        lineSet.forEach(table -> lines.add(lineMap.get(table)));
-        if (lines.isEmpty()) {
-            return this;
-        }
-
-        if (Objects.isNull(this.caller())) {
-            log.info("[ ZERO ] Norm 环境，扫描了 \"{}\" 张表的 Dao 配置. \n{}",
-                this.storedMeta.size(), Ut.fromJoin(lines, "\n"));
-        } else {
-            log.info("[ ZERO ] OSGI 环境中，扫描了 \"{}\" 张表的 Dao 配置. \n{}",
-                this.storedMeta.size(), Ut.fromJoin(lines, "\n"));
-        }
-
-        // 打印结果
         return this;
     }
 

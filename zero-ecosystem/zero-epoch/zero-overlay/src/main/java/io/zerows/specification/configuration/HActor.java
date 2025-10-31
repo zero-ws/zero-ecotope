@@ -19,6 +19,9 @@ import io.vertx.core.Future;
  * @author lang : 2025-10-08
  */
 public interface HActor {
+    String COLOR_PLUG = "\033[38;5;38m[ PLUG ]\033[0m";
+    String COLOR_EXTENSION = "\033[38;5;10m[ XMOD ]\033[0m";
+    String COLOR_MONITOR = "\033[38;5;208m[ MNTR ]\033[0m";
 
     <T> Future<Boolean> startAsync(HConfig config, T vertxRef);
 

@@ -42,7 +42,7 @@ public class SeekCosmo implements Cosmo {
     public Future<Envelop> before(final Envelop request, final JsonObject matrix) {
         return this.runAop(request, matrix, EmAop.Effect.BEFORE, () -> Quest.syntax()
             /*
-             * Before -> beforeAsync
+             * Before -> waitAsync
              * 1）以条件判断是否读取资源访问者（带缓存访问）
              * 2）使用资源访问者构造Acl
              * 3）Acl用于 List 和 Form

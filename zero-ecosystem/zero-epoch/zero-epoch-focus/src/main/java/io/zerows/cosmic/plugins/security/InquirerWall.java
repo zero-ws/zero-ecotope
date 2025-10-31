@@ -55,7 +55,7 @@ public class InquirerWall implements Inquirer<Set<SecurityMeta>> {
             wallClass.stream().map(clazz -> this.create(clazz, vertxRef))
                 .forEach(wallSet::add);
         }
-        log.info("[ PLUG ] ( {} Secure ) \uD83E\uDDEC Zero 系统扫描到 {} 个 @Wall 组件", wallSet.size(), wallSet.size());
+        log.info("[ ZERO ] ( {} Secure ) \uD83E\uDDEC Zero 系统扫描到 {} 个 @Wall 组件", wallSet.size(), wallSet.size());
         return wallSet;
     }
 
@@ -139,14 +139,14 @@ public class InquirerWall implements Inquirer<Set<SecurityMeta>> {
         final JsonObject configJ = config.options(KName.CONFIG);
         final String configKey = wall.value();
         if (!configJ.containsKey(configKey)) {
-            log.warn("[ PLUG ] ( Secure ) Wall `{}` ( path = {} ) 未找到安全配置 key `{}`，您的自定义配置不会生效！",
+            log.warn("[ ZERO ] ( Secure ) Wall `{}` ( path = {} ) 未找到安全配置 key `{}`，您的自定义配置不会生效！",
                 target.getName(), wall.path(), configKey);
             return wall.type();
         }
         final JsonObject configData = configJ.getJsonObject(configKey);
         final String typeStr = Ut.valueString(configData, KName.TYPE);
         final SecurityType type = SecurityType.from(typeStr);
-        log.info("[ PLUG ] ( Secure ) Wall `{}` ( path = {} ) 使用了安全配置类型 {}", target.getName(), wall.path(), type);
+        log.info("[ ZERO ] ( Secure ) Wall `{}` ( path = {} ) 使用了安全配置类型 {}", target.getName(), wall.path(), type);
 
         Fn.jvmKo(Objects.isNull(type), _40040Exception400WallKeyMissing.class, configKey, target);
         return type;

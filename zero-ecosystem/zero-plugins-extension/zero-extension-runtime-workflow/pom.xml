@@ -59,7 +59,7 @@
                 <groupId>org.liquibase</groupId>
                 <artifactId>liquibase-maven-plugin</artifactId>
                 <configuration>
-                    <propertyProviderClass>io.zerows.extension.skeleton.liquibase.ZeroLiquibaseEncryption
+                    <propertyProviderClass>io.zerows.plugins.liquibase.LiquibaseEncryptionZero
                     </propertyProviderClass>
                     <!-- 配置文件路径 -->
                     <propertyFile>plugins/${project.artifactId}/database/MYSQL.properties</propertyFile>

@@ -147,7 +147,7 @@ final class OxPlugin {
             } else {
                 /*
                  * 插件不为空
-                 * - beforeAsync
+                 * - waitAsync
                  * - 主逻辑
                  * - afterAsync
                  */

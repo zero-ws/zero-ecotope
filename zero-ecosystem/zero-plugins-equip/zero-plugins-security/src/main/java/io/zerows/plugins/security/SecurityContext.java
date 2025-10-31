@@ -7,6 +7,7 @@ import io.zerows.epoch.basicore.YmSecurity;
 import io.zerows.epoch.configuration.NodeStore;
 import io.zerows.epoch.management.ORepository;
 import io.zerows.epoch.metadata.security.SecurityMeta;
+import io.zerows.specification.configuration.HActor;
 import io.zerows.specification.configuration.HSetting;
 import lombok.extern.slf4j.Slf4j;
 import org.reflections.Reflections;
@@ -66,10 +67,10 @@ class SecurityContext {
         final Reflections reflections = new Reflections("io.vertx.ext.auth");
         final Set<Class<? extends AuthenticationProvider>> subTypes = reflections.getSubTypesOf(AuthenticationProvider.class);
         subTypes.forEach(clazz -> {
-            log.info("[ PLUG ] \t\t 可用的 Vert.x 内置的认证提供者：{} ", clazz.getName());
+            log.debug("{} \t\t 可用的 Vert.x 内置的认证提供者：{} ", HActor.COLOR_PLUG, clazz.getName());
         });
 
-        log.info("[ PLUG ] ( Secure ) 启动安全扫描器……");
+        log.info("{} ( Secure ) 启动安全扫描器……", HActor.COLOR_PLUG);
         final HSetting setting = NodeStore.ofSetting(vertxRef);
         ORepository.ofOr(ORepositorySecurity.class).whenStart(setting);
     }

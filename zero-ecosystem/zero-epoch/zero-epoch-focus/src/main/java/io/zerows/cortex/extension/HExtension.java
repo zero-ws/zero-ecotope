@@ -28,6 +28,7 @@ import java.util.concurrent.ConcurrentMap;
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Deprecated
 public interface HExtension {
 
     Cc<Class<?>, HExtension> CC_BOOT = Cc.open();

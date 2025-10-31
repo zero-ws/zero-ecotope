@@ -3,7 +3,6 @@ package io.zerows.epoch.jigsaw;
 import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.epoch.basicore.MDId;
 import io.zerows.epoch.management.OCacheConfiguration;
-import io.zerows.epoch.management.OCacheDao;
 
 /**
  * @author lang : 2024-05-08
@@ -23,10 +22,6 @@ class EquipEntry implements EquipAt {
             this.logger().info("The Extension Configuration has been initialized! id = {}", id.value());
             return;
         }
-
-
-        // 先执行初始化，保证 MDMeta 在当前环境中存在
-        OCacheDao.of(configuration.id().owner()).configure(configuration);
 
 
         {

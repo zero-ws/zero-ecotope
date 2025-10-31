@@ -6,11 +6,14 @@ import lombok.Getter;
 
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 /**
  * @author lang : 2024-05-10
  */
 public class MDMeta implements Serializable {
+    private static final ConcurrentMap<Class<?>, String> TABLE_MAP = new ConcurrentHashMap<>();
 
     private final Class<?> dao;
     private final Class<?> pojo;
@@ -39,11 +42,18 @@ public class MDMeta implements Serializable {
      */
     public static String toTable(final Class<?> clazz) {
         Objects.requireNonNull(clazz);
+        // 缓存中提取，如果可提取提前结束
+        if (TABLE_MAP.containsKey(clazz)) {
+            return TABLE_MAP.get(clazz);
+        }
+        // 表名计算
         final String inputName = clazz.getSimpleName();
         final String input;
         if (AbstractVertxDAO.class.isAssignableFrom(clazz)) {
+            // X????Dao -> X????
             input = inputName.substring(0, inputName.length() - 3);
         } else {
+            // X???? -> X????
             input = inputName;
         }
         final StringBuilder result = new StringBuilder();
@@ -55,7 +65,10 @@ public class MDMeta implements Serializable {
             }
             result.append(Character.toUpperCase(currentChar));
         }
-        return result.toString();
+        final String table = result.toString();
+        // 缓存回写
+        TABLE_MAP.put(clazz, table);
+        return table;
     }
 
     public Class<?> dao() {

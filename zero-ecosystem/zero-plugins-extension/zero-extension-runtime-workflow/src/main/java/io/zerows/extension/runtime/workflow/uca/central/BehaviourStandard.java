@@ -3,13 +3,13 @@ package io.zerows.extension.runtime.workflow.uca.central;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.support.Ut;
 import io.zerows.extension.runtime.workflow.atom.configuration.MetaInstance;
 import io.zerows.extension.runtime.workflow.atom.runtime.WMove;
 import io.zerows.extension.runtime.workflow.atom.runtime.WRecord;
 import io.zerows.extension.runtime.workflow.atom.runtime.WRequest;
 import io.zerows.extension.runtime.workflow.atom.runtime.WTransition;
 import io.zerows.extension.runtime.workflow.uca.toolkit.UTracker;
+import io.zerows.support.Ut;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
@@ -69,7 +69,7 @@ public class BehaviourStandard implements Behaviour {
     }
 
     /*
-     * The beforeAsync method will call `wTransition.start()` method for any continue operation.
+     * The waitAsync method will call `wTransition.start()` method for any continue operation.
      * Here the `start()` method will findRunning two results:
      *
      * 1) When workflow is not running:

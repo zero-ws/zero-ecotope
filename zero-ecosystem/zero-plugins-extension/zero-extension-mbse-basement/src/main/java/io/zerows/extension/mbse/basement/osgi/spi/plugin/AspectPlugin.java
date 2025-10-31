@@ -4,14 +4,14 @@ import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.platform.metadata.KFabric;
-import io.zerows.platform.exception._60050Exception501NotSupport;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
+import io.zerows.platform.exception._60050Exception501NotSupport;
+import io.zerows.platform.metadata.KFabric;
 
 /*
  * 用于处理 AOP 横切层的专用插件接口，目前主要使用在
  * Activity 和 WTodo 中
- * 1）beforeAsync：在逻辑之前执行
+ * 1）waitAsync：在逻辑之前执行
  * 2）afterAsync：在逻辑之后执行
  */
 public interface AspectPlugin extends DataPlugin<AspectPlugin> {

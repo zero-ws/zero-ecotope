@@ -76,10 +76,10 @@ public class UTracker {
      *     }
      * }
      *
-     * 1) beforeAsync -> Movement -> Transfer -> afterAsync
-     * 2) beforeAsync -> Movement -> Transfer -> afterAsync ->
-     *                               beforeAsync -> Generator -> afterAsync
-     * 3) beforeAsync -> Movement -> Stay     -> afterAsync
+     * 1) waitAsync -> Movement -> Transfer -> afterAsync
+     * 2) waitAsync -> Movement -> Transfer -> afterAsync ->
+     *                               waitAsync -> Generator -> afterAsync
+     * 3) waitAsync -> Movement -> Stay     -> afterAsync
      *
      * Actually you can ignore Movement because it's only for Camunda Workflow Moving
      * The rule of tracker is for objective:

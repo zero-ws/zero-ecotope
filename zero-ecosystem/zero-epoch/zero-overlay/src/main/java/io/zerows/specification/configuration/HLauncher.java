@@ -130,9 +130,9 @@ public interface HLauncher<WebContainer> {
      */
     interface Pre<WebContainer> {
         /**
-         * 前置容器主体运行方法，会在启动之前被触发
+         * 前置容器主体运行方法，会在容器启动之前触发，主要负责资源初始化
          */
-        default Future<Boolean> beforeAsync(final WebContainer container, final JsonObject options) {
+        default Future<Boolean> waitAsync(final WebContainer container, final JsonObject options) {
             return Future.succeededFuture(Boolean.FALSE);
         }
 

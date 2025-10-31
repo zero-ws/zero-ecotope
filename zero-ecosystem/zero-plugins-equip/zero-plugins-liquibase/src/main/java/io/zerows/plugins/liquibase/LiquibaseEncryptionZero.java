@@ -1,4 +1,4 @@
-package io.zerows.extension.skeleton.liquibase;
+package io.zerows.plugins.liquibase;
 
 import io.r2mo.base.secure.EDCrypto;
 import io.zerows.epoch.constant.KName;
@@ -17,9 +17,9 @@ import java.util.Set;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 @Slf4j
-public class ZeroLiquibaseEncryption extends Properties {
+public class LiquibaseEncryptionZero extends Properties {
 
-    public ZeroLiquibaseEncryption() {
+    public LiquibaseEncryptionZero() {
         super.defaults = new Properties();
     }
 

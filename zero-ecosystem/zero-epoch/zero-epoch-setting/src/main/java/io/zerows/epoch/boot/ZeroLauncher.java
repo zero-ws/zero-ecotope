@@ -27,6 +27,7 @@ public class ZeroLauncher<T> {
     @SuppressWarnings("rawtypes")
     private static ZeroLauncher INSTANCE;
     private static final Cc<String, Pre<?>> CC_PRE = Cc.openThread();
+    private static final Cc<String, Mod<?>> CC_MOD = Cc.openThread();
     private final HBoot boot;
     private final HEnergy energy;
 
@@ -145,19 +146,27 @@ public class ZeroLauncher<T> {
         launcher.start(this.energy,
             /*
              * 🟤BOOT-011: 启动完成之后的基础回调，此时 Vertx 实例已创建
-             *   - BOOT-012:
              */
-            vertx -> this.beforeAsync(vertx).onSuccess(done -> {
-                if (done) {
-                    log.info("[ ZERO ] ( Pre ) 前置组件执行完成！");
-                    before.complete(vertx);
+            vertx -> this.startPreAsync(vertx).compose(started -> {
+                if (!started) {
+                    before.fail("[ ZERO ] 插件启动失败！");
                 }
+                return this.startModAsync(vertx);
+            }).onSuccess(started -> {
+                if (!started) {
+                    before.fail("[ ZERO ] 扩展模块启动失败！");
+                }
+                before.complete(vertx);
+            }).otherwise(error -> {
+                log.error(error.getMessage(), error);
+                before.fail(error);
+                return null;
             })
         );
 
 
         /*
-         * 🟤BOOT-013: 启动完成之后的配置回调
+         * 🟤BOOT-014: 启动完成之后的配置回调
          */
         final HConfig.HOn<?> on = this.boot.whenOn();
         before.future().onSuccess(vertx -> {
@@ -167,7 +176,7 @@ public class ZeroLauncher<T> {
     }
 
     @SuppressWarnings("unchecked")
-    private Future<Boolean> beforeAsync(final T container) {
+    private Future<Boolean> startPreAsync(final T container) {
         Objects.requireNonNull(container, "[ ZERO ] 启动容器不可以为 null.");
         HLauncher.Pre<T> launcherPre = this.boot.withPre();
         if (Objects.isNull(launcherPre)) {
@@ -176,22 +185,38 @@ public class ZeroLauncher<T> {
         }
         final HConfig configurationPre = this.energy.boot(EmApp.LifeCycle.PRE);
         final JsonObject options = Objects.isNull(configurationPre) ? new JsonObject() : configurationPre.options();
-        return launcherPre.beforeAsync(container, options);
+        return launcherPre.waitAsync(container, options);
     }
 
-    /**
-     * @author lang : 2025-10-13
-     */
+    @SuppressWarnings("unchecked")
+    private Future<Boolean> startModAsync(final T container) {
+        Objects.requireNonNull(container, "[ ZERO ] 启动容器不可以为 null.");
+        final String cacheKey = container.hashCode() + "@" + ZeroLauncher.class.getName();
+        final HLauncher.Pre<T> launcherMod = (HLauncher.Pre<T>) CC_MOD.pick(Mod::new, cacheKey);
+        return launcherMod.waitAsync(container, null);
+    }
+
     private static class Pre<T> implements HLauncher.Pre<T> {
         @Override
-        public Future<Boolean> beforeAsync(final T container, final JsonObject options) {
-            return Future.succeededFuture(container)
-                /*
-                 * 🟤BOOT-011 执行 HActor 的基础前置处理
-                 *   执行 < 0 的默认内置 HActor 组件
-                 *   如果是 > 0 的应该由 Zero Extension 框架执行而不是此处执行
-                 */
-                .compose(containerWeb -> ZeroModule.of(container).startActor(sequence -> sequence < 0));
+        public Future<Boolean> waitAsync(final T container, final JsonObject options) {
+            /*
+             * 🟤BOOT-012 执行 HActor 的基础前置处理
+             *   执行 < 0 的默认内置 HActor 组件
+             *   如果是 > 0 的应该由 Zero Extension 框架执行而不是此处执行
+             */
+            return ZeroModule.of(container).startActor(sequence -> sequence < 0);
+        }
+    }
+
+    private static class Mod<T> implements HLauncher.Pre<T> {
+        @Override
+        public Future<Boolean> waitAsync(final T container, final JsonObject options) {
+            /*
+             * 🟤BOOT-013 执行 HActor 的后置扩展模块
+             *   执行 >= 0 的扩展 HActor 组件
+             *   实际上代码本质很简单，但为了职责清晰，所以此处定义两个不同的类来处理
+             */
+            return ZeroModule.of(container).startActor(sequence -> sequence >= 0);
         }
     }
 }

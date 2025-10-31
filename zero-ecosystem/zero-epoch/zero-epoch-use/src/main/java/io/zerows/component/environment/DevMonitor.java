@@ -5,6 +5,7 @@ import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
+import io.zerows.specification.configuration.HActor;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -32,16 +33,16 @@ public class DevMonitor {
             instance.put("poolName", options.getWorkerPoolName());
             instance.put("poolSize", options.getWorkerPoolSize());
             data.put(name, instance).onSuccess(nil ->
-                log.info("[ Monitor ] The {} has been added. ( instances = {} ), TM = {}",
-                    name, options.getInstances(), options.getThreadingModel()));
+                log.info("{} The {} has been added. ( instances = {} ), TM = {}",
+                    HActor.COLOR_MONITOR, name, options.getInstances(), options.getThreadingModel()));
         });
     }
 
     private static void remove(final Vertx vertx, final String name, final DeploymentOptions options) {
         vertx.sharedData().<String, Object>getAsyncMap(KWeb.SHARED.DEPLOYMENT).onSuccess(data -> {
             data.remove(name).onSuccess(nil ->
-                log.info("[ Monitor ] The {} has been removed. ( instances = {} )",
-                    name, options.getInstances()));
+                log.info("{} The {} has been removed. ( instances = {} )",
+                    HActor.COLOR_MONITOR, name, options.getInstances()));
         });
     }
 

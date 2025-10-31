@@ -152,7 +152,7 @@ public class ZeroSetting implements HSetting, HLog {
         final StringBuilder content = new StringBuilder();
         final HConfig config = this.launcher;
         final Class<?> launcherCls = config.executor();
-        content.append("[ BOOT ] 核心组件：\n\uD83D\uDD25 主启动器 = ")
+        content.append("[ ZERO ] 核心组件：\n\uD83D\uDD25 主启动器 = ")
             .append(Objects.isNull(launcherCls) ? null : launcherCls.getName()).append("\n");
         this.boot.forEach((lifeCycle, bootConfig) -> {
             final Class<?> executor = bootConfig.executor();
