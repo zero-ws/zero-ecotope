@@ -8,7 +8,7 @@
         <version>1.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>zero-plugins-websocket-stomp</artifactId>
+    <artifactId>zero-plugins-websocket</artifactId>
     <name>Zero::Plugins::🧩 - WebSocket Stomp</name>
     <dependencies>
         <dependency>

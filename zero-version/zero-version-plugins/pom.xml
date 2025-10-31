@@ -34,6 +34,16 @@
                 <artifactId>zero-plugins-security</artifactId>
                 <version>${zero.version}</version>
             </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-plugins-websocket</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-plugins-swagger</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
             <!-- ================= 静态插件 ================== -->
             <dependency>
                 <groupId>io.zerows</groupId>
@@ -45,11 +55,11 @@
                 <artifactId>zero-plugins-integration-wechat</artifactId>
                 <version>${zero.version}</version>
             </dependency>
-<!--            <dependency>-->
-<!--                <groupId>io.zerows</groupId>-->
-<!--                <artifactId>zero-plugins-integration-feign</artifactId>-->
-<!--                <version>${zero.version}</version>-->
-<!--            </dependency>-->
+            <!--            <dependency>-->
+            <!--                <groupId>io.zerows</groupId>-->
+            <!--                <artifactId>zero-plugins-integration-feign</artifactId>-->
+            <!--                <version>${zero.version}</version>-->
+            <!--            </dependency>-->
 
             <dependency>
                 <groupId>io.zerows</groupId>
@@ -59,16 +69,6 @@
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-plugins-store-elasticsearch</artifactId>
-                <version>${zero.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.zerows</groupId>
-                <artifactId>zero-plugins-websocket-stomp</artifactId>
-                <version>${zero.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.zerows</groupId>
-                <artifactId>zero-plugins-swagger</artifactId>
                 <version>${zero.version}</version>
             </dependency>
         </dependencies>

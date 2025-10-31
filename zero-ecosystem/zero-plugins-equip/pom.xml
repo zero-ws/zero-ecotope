@@ -38,6 +38,6 @@
 
         <!-- Web -->
         <!--        <module>zero-plugins-video-iqiy</module>-->
-        <module>zero-plugins-websocket-stomp</module>
+        <module>zero-plugins-websocket</module>
     </modules>
 </project>
