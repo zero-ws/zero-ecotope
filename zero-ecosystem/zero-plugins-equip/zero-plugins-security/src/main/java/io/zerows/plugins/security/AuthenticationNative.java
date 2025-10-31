@@ -24,6 +24,8 @@ import io.zerows.epoch.metadata.security.SecurityMeta;
 import io.zerows.platform.enums.SecurityType;
 import io.zerows.support.Ut;
 
+import java.util.Objects;
+
 /**
  * 内部 Provider 专用构造器，用于构造内部认证对应的 Provider 组件
  *
@@ -90,6 +92,9 @@ class AuthenticationNative {
      * @return 认证处理器
      */
     private static AuthenticationHandler createHandler(final Vertx vertxRef, final SecurityConfig config) {
+        if (Objects.isNull(config)) {
+            return null;
+        }
         final JsonObject options = config.options();
         if (SecurityType.JWT == config.type()) {
             final String realm = Ut.valueString(options, YmSpec.vertx.security.jwt.options.realm);
@@ -127,6 +132,9 @@ class AuthenticationNative {
      */
     @SuppressWarnings("unchecked")
     private static <T extends AuthenticationProvider> T createProvider(final Vertx vertxRef, final SecurityConfig config) {
+        if (Objects.isNull(config)) {
+            return null;
+        }
         final JsonObject options = config.options();
         if (SecurityType.JWT == config.type()) {
             final JWTAuthOptions jwtOptions = new JWTAuthOptions(options);

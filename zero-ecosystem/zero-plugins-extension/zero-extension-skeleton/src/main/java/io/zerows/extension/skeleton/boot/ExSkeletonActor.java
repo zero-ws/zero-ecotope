@@ -15,6 +15,10 @@ public class ExSkeletonActor extends ExAbstractHActor {
     @Override
     protected Future<Boolean> startAsync(final HConfig config, final Vertx vertxRef) {
 
+        ExBoot.vLog();
+
         return Future.succeededFuture(Boolean.TRUE);
     }
+
+
 }
