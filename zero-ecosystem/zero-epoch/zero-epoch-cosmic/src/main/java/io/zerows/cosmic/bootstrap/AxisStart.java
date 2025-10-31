@@ -11,6 +11,7 @@ import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -57,18 +58,20 @@ public class AxisStart implements Axis {
         // 标准日志格式化
         final Set<String> pathSet = new TreeSet<>();
         final ConcurrentMap<String, Route> pathMap = new ConcurrentHashMap<>();
+        final Set<String> pathSetAny = new HashSet<>();
         routes.forEach(route -> {
             final String path = route.getPath();
             final Set<HttpMethod> methods = route.methods();
             if (Objects.isNull(methods) || methods.isEmpty()) {
                 if (Objects.nonNull(path)) {
-                    log.info("[ ZERO ]  -->  Uri 注册:        * {}", path);
+                    pathSetAny.add(path);
                 }
             } else {
                 pathSet.add(path);
                 pathMap.put(path, route);
             }
         });
+        pathSetAny.forEach(path -> log.info("  -->  Uri 注册:        * {}", path));
         pathSet.forEach(path -> {
             final Route route = pathMap.get(path);
             final Set<HttpMethod> methods = route.methods();

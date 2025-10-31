@@ -4,23 +4,31 @@ import io.vertx.ext.auth.User;
 import io.vertx.ext.auth.authorization.Authorization;
 import io.vertx.ext.auth.authorization.AuthorizationContext;
 
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+import java.util.stream.Collectors;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 class ProfileAuthorizationImpl implements ProfileAuthorization {
-    private final Set<String> permissions = new HashSet<>();
+    private final ConcurrentMap<String, Set<String>> permissionMap = new ConcurrentHashMap<>();
 
-    ProfileAuthorizationImpl(final Set<String> permissions) {
-        this.permissions.addAll(Objects.requireNonNull(permissions));
+    ProfileAuthorizationImpl(final ConcurrentMap<String, Set<String>> permissionMap) {
+        Objects.requireNonNull(permissionMap);
+        this.permissionMap.putAll(permissionMap);
     }
 
     @Override
-    public Set<String> permissions() {
-        return this.permissions;
+    public ConcurrentMap<String, Set<String>> permissions() {
+        return this.permissionMap;
+    }
+
+    @Override
+    public Set<String> permissions(final String profile) {
+        return this.permissionMap.getOrDefault(profile, Set.of());
     }
 
     @Override
@@ -28,7 +36,7 @@ class ProfileAuthorizationImpl implements ProfileAuthorization {
         Objects.requireNonNull(context);
         final User user = context.user();
         if (user != null) {
-            final Authorization resolved = ProfileAuthorization.create(this.permissions);
+            final Authorization resolved = ProfileAuthorization.create(this.permissionMap);
             return user.authorizations().verify(resolved);
         }
         return false;
@@ -37,9 +45,15 @@ class ProfileAuthorizationImpl implements ProfileAuthorization {
     @Override
     public boolean verify(final Authorization otherAuthorization) {
         Objects.requireNonNull(otherAuthorization);
-        if (otherAuthorization instanceof final ProfileAuthorization permission) {
-            return this.permissions.containsAll(permission.permissions());
+        if (!(otherAuthorization instanceof final ProfileAuthorization profileAuthorization)) {
+            return false;
         }
-        return false;
+        final Set<Boolean> authorized = profileAuthorization.permissions().keySet().stream().map(profileName -> {
+            final Set<String> resourcePermissions = profileAuthorization.permissions(profileName);
+            final Set<String> userPermissions = this.permissionMap.getOrDefault(profileName, Set.of());
+            return userPermissions.containsAll(resourcePermissions);
+        }).collect(Collectors.toSet());
+        // 任何一个合法就算通过
+        return authorized.stream().anyMatch(item -> item);
     }
 }

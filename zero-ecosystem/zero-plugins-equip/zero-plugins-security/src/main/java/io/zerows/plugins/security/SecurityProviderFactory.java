@@ -84,7 +84,7 @@ class SecurityProviderFactory {
         // 提取前置验证器
         final ChainAuthHandler chain = ChainAuthHandler.all();
         if (metaSet.isEmpty()) {
-            return chain;
+            return null;
         }
         // 先构造 Provider
         final AuthenticationProvider provider = this.providerOfAuthentication(metaSet);
@@ -98,7 +98,6 @@ class SecurityProviderFactory {
         if (Objects.nonNull(handler)) {
             chain.add(handler);
         }
-
 
         // 构造自定义的 Handler
         final List<SecurityMeta> sortedList = new ArrayList<>(metaSet);
@@ -122,8 +121,12 @@ class SecurityProviderFactory {
      * @return 授权处理器
      */
     AuthorizationHandler handlerOfAuthorization(final Set<SecurityMeta> metaSet) {
+        if (metaSet.isEmpty()) {
+            // 为空则不加载任何 Handler
+            return null;
+        }
 
-        return null;
+        return AuthorizationCommonHandler.create(metaSet);
     }
 
     /**

@@ -1,7 +1,6 @@
 package io.zerows.plugins.security;
 
-import io.vertx.core.AsyncResult;
-import io.vertx.core.Handler;
+import io.vertx.core.Future;
 import io.vertx.ext.auth.authorization.Authorization;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.epoch.metadata.security.SecurityMeta;
@@ -11,9 +10,9 @@ import io.zerows.epoch.metadata.security.SecurityMeta;
  */
 public interface ProfileResource {
 
-    static ProfileResource buildIn(final SecurityMeta aegis) {
-        return new ProfileResourceImpl(aegis);
+    static ProfileResource buildIn(final SecurityMeta meta) {
+        return new ProfileResourceImpl(meta);
     }
 
-    void requestResource(RoutingContext context, Handler<AsyncResult<Authorization>> handler);
+    Future<Authorization> requestResource(RoutingContext context);
 }
