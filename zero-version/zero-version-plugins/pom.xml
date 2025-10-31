@@ -45,11 +45,11 @@
                 <artifactId>zero-plugins-integration-wechat</artifactId>
                 <version>${zero.version}</version>
             </dependency>
-            <dependency>
-                <groupId>io.zerows</groupId>
-                <artifactId>zero-plugins-integration-feign</artifactId>
-                <version>${zero.version}</version>
-            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>io.zerows</groupId>-->
+<!--                <artifactId>zero-plugins-integration-feign</artifactId>-->
+<!--                <version>${zero.version}</version>-->
+<!--            </dependency>-->
 
             <dependency>
                 <groupId>io.zerows</groupId>

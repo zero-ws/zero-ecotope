@@ -30,7 +30,7 @@ import java.util.Set;
  * - @Tag: 标签分组
  * - @Schema: 数据模型描述
  */
-public class OpenApiGenerator {
+class SwaggerOpenAPI {
 
     /**
      * 生成 OpenAPI 文档对象。
