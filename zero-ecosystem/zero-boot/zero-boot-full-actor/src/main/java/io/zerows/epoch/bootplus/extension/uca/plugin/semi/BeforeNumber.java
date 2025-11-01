@@ -3,7 +3,7 @@ package io.zerows.epoch.bootplus.extension.uca.plugin.semi;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.bootplus.extension.uca.code.Numeration;
+import io.zerows.boot.extension.component.Numeration;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.osgi.spi.plugin.BeforePlugin;
@@ -15,7 +15,7 @@ import java.util.Objects;
 import java.util.Queue;
 import java.util.stream.Collectors;
 
-import static io.zerows.epoch.bootplus.extension.refine.Ox.LOG;
+import static io.zerows.boot.extension.util.Ox.LOG;
 
 public class BeforeNumber implements BeforePlugin {
     private static final String PLUGIN_NUMBER_SINGLE = "生成配置项编号：{0}";

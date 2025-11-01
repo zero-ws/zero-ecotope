@@ -6,8 +6,8 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.metadata.KGlobal;
+import io.zerows.plugins.excel.ExcelActor;
 import io.zerows.plugins.excel.ExcelClient;
-import io.zerows.plugins.excel.ExcelInfix;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.base.FnBase;
@@ -108,7 +108,7 @@ public class ExTenant implements Serializable {
         final String[] segments = expression.split(",");
         if (5 <= segments.length) {
             final String filename = segments[0];
-            final ExcelClient client = ExcelInfix.createClient();
+            final ExcelClient client = ExcelActor.ofClient();
             return client.ingestAsync(filename).compose(tables -> {
                 // Table filter
                 final String table = segments[1];

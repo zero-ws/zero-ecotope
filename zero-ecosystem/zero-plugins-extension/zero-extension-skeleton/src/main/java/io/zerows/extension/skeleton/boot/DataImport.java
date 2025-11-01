@@ -10,8 +10,8 @@ import io.zerows.cosmic.plugins.cache.SharedActor;
 import io.zerows.cosmic.plugins.cache.SharedClient;
 import io.zerows.extension.skeleton.exception._80214Exception417LoadingNotReady;
 import io.zerows.platform.metadata.KTimer;
+import io.zerows.plugins.excel.ExcelActor;
 import io.zerows.plugins.excel.ExcelClient;
-import io.zerows.plugins.excel.ExcelInfix;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.base.FnBase;
@@ -68,7 +68,7 @@ public class DataImport {
         final Configuration jooq = null; // JooqInfix.findRunning(YmlCore.jooq.PROVIDER);
         Fn.jvmKo(Objects.isNull(jooq), _80214Exception417LoadingNotReady.class, "jooq / provider");
         // 检查二：Excel导入环境是否准备
-        final ExcelClient excel = ExcelInfix.getClient();
+        final ExcelClient excel = ExcelActor.ofClient();
         Fn.jvmKo(Objects.isNull(excel), _80214Exception417LoadingNotReady.class, "excel");
         // 检查三：Map导入环境是否准备
         final SharedClient shared = SharedActor.ofClient();
@@ -170,7 +170,7 @@ public class DataImport {
     // 内部执行专用方法
     private Future<String> execute(final String filename) {
         return Ux.nativeWorker(filename, this.vertx, pre -> {
-            final ExcelClient client = ExcelInfix.createClient();
+            final ExcelClient client = ExcelActor.ofClient();
             LOG.Ke.info(this.getClass(), "Excel importing file = {0}", filename);
             client.importAsync(filename, handler -> {
                 if (handler.succeeded()) {

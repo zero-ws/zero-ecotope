@@ -9,8 +9,8 @@ import io.zerows.extension.runtime.ambient.bootstrap.AtConfig;
 import io.zerows.extension.runtime.ambient.bootstrap.AtPin;
 import io.zerows.extension.runtime.ambient.eon.AtMsg;
 import io.zerows.extension.skeleton.spi.ExInit;
+import io.zerows.plugins.excel.ExcelActor;
 import io.zerows.plugins.excel.ExcelClient;
-import io.zerows.plugins.excel.ExcelInfix;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -68,7 +68,7 @@ public class DatumInit implements ExInit {
     private Future<JsonObject> doLoading(final String filename) {
         return Ux.nativeWorker(filename, pre -> {
             /* ExcelClient */
-            final ExcelClient client = ExcelInfix.createClient();
+            final ExcelClient client = ExcelActor.ofClient();
             client.importAsync(filename, result -> {
                 LOG.App.info(LOGGER, AtMsg.INIT_DATUM_EACH, filename);
                 if (result.succeeded()) {

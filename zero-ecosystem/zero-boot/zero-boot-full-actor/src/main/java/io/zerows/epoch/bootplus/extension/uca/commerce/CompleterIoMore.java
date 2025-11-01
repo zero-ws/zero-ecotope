@@ -2,13 +2,13 @@ package io.zerows.epoch.bootplus.extension.uca.commerce;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
-import io.zerows.epoch.bootplus.extension.refine.Ox;
-import io.zerows.epoch.bootplus.extension.uca.concrete.AgileAdd;
-import io.zerows.epoch.bootplus.extension.uca.concrete.AgileDelete;
-import io.zerows.epoch.bootplus.extension.uca.concrete.AgileEdit;
-import io.zerows.epoch.bootplus.extension.uca.concrete.AgileFind;
+import io.zerows.boot.extension.util.Ox;
 import io.zerows.epoch.bootplus.extension.uca.concrete.Arrow;
-import io.zerows.epoch.bootplus.extension.uca.plugin.AgileSwitcher;
+import io.zerows.epoch.bootplus.extension.uca.concrete.ArrowAdd;
+import io.zerows.epoch.bootplus.extension.uca.concrete.ArrowDelete;
+import io.zerows.epoch.bootplus.extension.uca.concrete.ArrowEdit;
+import io.zerows.epoch.bootplus.extension.uca.concrete.ArrowFind;
+import io.zerows.epoch.bootplus.extension.uca.plugin.SwitcherAgile;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.atom.data.DataGroup;
 import io.zerows.extension.mbse.basement.osgi.spi.robin.Switcher;
@@ -48,25 +48,25 @@ public class CompleterIoMore implements CompleterIo<JsonArray> {
     @Override
     public Future<JsonArray> create(final JsonArray input) {
         return this.switcher(input).compose(groupSet ->
-            this.compressor(groupSet, AgileAdd::new));
+            this.compressor(groupSet, ArrowAdd::new));
     }
 
     @Override
     public Future<JsonArray> update(final JsonArray input) {
         return this.switcher(input).compose(groupSet ->
-            this.compressor(groupSet, AgileEdit::new));
+            this.compressor(groupSet, ArrowEdit::new));
     }
 
     @Override
     public Future<JsonArray> remove(final JsonArray input) {
         return this.switcher(input).compose(groupSet ->
-            this.compressor(groupSet, AgileDelete::new));
+            this.compressor(groupSet, ArrowDelete::new));
     }
 
     @Override
     public Future<JsonArray> find(final JsonArray input) {
         return this.switcher(input).compose(groupSet ->
-            this.compressor(groupSet, AgileFind::new));
+            this.compressor(groupSet, ArrowFind::new));
     }
 
     /*
@@ -85,7 +85,7 @@ public class CompleterIoMore implements CompleterIo<JsonArray> {
 
     private Future<JsonArray> compressor(final Set<DataGroup> group, final Supplier<Arrow> supplier) {
         return Ox.runGroup(group, (input, atom) -> {
-            final AgileSwitcher switcher = new AgileSwitcher().initialize(atom, this.dao);
+            final SwitcherAgile switcher = new SwitcherAgile().initialize(atom, this.dao);
             return switcher.switchAsync(supplier).compose(arrow -> arrow.processAsync(input));
         });
     }

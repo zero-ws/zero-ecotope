@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
  * @author Hongwei
  * @since 2020/1/8, 21:13
  */
-public class EsDeleteIndexer extends AbstractEsIndex {
+public class EsDeleteIndexer extends EsIndexBase {
     public EsDeleteIndexer(final String name) {
         super(name);
     }

@@ -3,13 +3,13 @@ package io.zerows.epoch.bootplus.extension.uca.plugin.ui;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.LogOf;
-import io.zerows.epoch.bootplus.extension.uca.plugin.indent.KeyIndent;
+import io.zerows.epoch.bootplus.extension.uca.plugin.indent.IndentKey;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.UData;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.mbse.ui.domain.tables.daos.UiVisitorDao;
 import io.zerows.extension.mbse.ui.domain.tables.pojos.UiVisitor;
 import io.zerows.extension.mbse.ui.osgi.spi.ui.UiHunter;
-import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 import io.zerows.spi.modeler.Identifier;
 import io.zerows.support.Ut;
@@ -23,7 +23,7 @@ import static io.zerows.extension.mbse.ui.util.Ui.LOG;
  */
 public class ControlHunter implements UiHunter {
     private static final LogOf LOGGER = LogOf.get(ControlHunter.class);
-    private transient final Identifier indent = new KeyIndent();
+    private transient final Identifier indent = new IndentKey();
 
     @Override
     public Future<String> seek(final UData data, final UiVisitor visitor) {

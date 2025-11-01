@@ -4,13 +4,13 @@ import io.r2mo.base.dbe.Database;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.boot.extension.component.TrackIo;
+import io.zerows.boot.extension.constant.OxConstant;
+import io.zerows.boot.extension.util.Ox;
 import io.zerows.cosmic.plugins.job.metadata.Mission;
-import io.zerows.epoch.bootplus.extension.cv.OxCv;
-import io.zerows.epoch.bootplus.extension.refine.Ox;
 import io.zerows.epoch.bootplus.extension.scaffold.component.AbstractActor;
 import io.zerows.epoch.bootplus.extension.uca.commerce.Completer;
 import io.zerows.epoch.bootplus.extension.uca.commerce.CompleterDefault;
-import io.zerows.epoch.bootplus.extension.uca.log.TrackIo;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.osgi.spi.robin.Switcher;
@@ -174,7 +174,7 @@ public class AbstractHub extends AbstractActor {
      * @return {@link java.lang.String}
      */
     protected String diffKey() {
-        final String diffKey = this.option(OxCv.Field.DIFF_KEY);
+        final String diffKey = this.option(OxConstant.Field.DIFF_KEY);
         return Ut.isNil(diffKey) ? KName.KEY : diffKey;
     }
     // ------------- 历史记录处理 -------------

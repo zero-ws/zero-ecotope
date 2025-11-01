@@ -1,7 +1,7 @@
 package io.zerows.epoch.bootplus.boot;
 
 import io.vertx.core.Vertx;
-import io.zerows.epoch.boot.Electy;
+import io.zerows.boot.mini.Electy;
 import io.zerows.epoch.boot.ZeroLauncher;
 import io.zerows.epoch.bootplus.exploit.QSiteMap;
 import io.zerows.epoch.constant.KName;

@@ -187,7 +187,7 @@ Vert.x 引入独立项目的底层功能使用。
 基本启动代码如下：
 
 ```java
-import io.zerows.epoch.VertxApplication;
+import io.zerows.boot.VertxApplication;
 import io.zerows.epoch.annotations.Up;
 
 @Up

@@ -10,8 +10,8 @@ import io.zerows.extension.mbse.basement.exception._80531Exception409IdentifierC
 import io.zerows.extension.mbse.basement.exception._80532Exception404DataEmpty;
 import io.zerows.mbse.metadata.ActIn;
 import io.zerows.mbse.metadata.ActOut;
+import io.zerows.plugins.excel.ExcelActor;
 import io.zerows.plugins.excel.ExcelClient;
-import io.zerows.plugins.excel.ExcelInfix;
 import io.zerows.plugins.excel.metadata.ExRecord;
 import io.zerows.plugins.excel.metadata.ExTable;
 import io.zerows.program.Ux;
@@ -22,7 +22,7 @@ import java.io.InputStream;
 import java.util.Collection;
 import java.util.Set;
 
-import static io.zerows.epoch.bootplus.extension.refine.Ox.LOG;
+import static io.zerows.boot.extension.util.Ox.LOG;
 
 /**
  * ## 导入专用顶层通道
@@ -60,7 +60,7 @@ public abstract class AbstractHFile extends AbstractHMore {
         final File file = files[0];
         try {
             final InputStream inputStream = new FileInputStream(file);
-            final ExcelClient client = ExcelInfix.getClient();
+            final ExcelClient client = ExcelActor.ofClient();
             /*
              * 批量插入收集到的数据
              */

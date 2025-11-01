@@ -3,7 +3,7 @@ package io.zerows.epoch.bootplus.extension.scaffold.plugin;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.bootplus.extension.refine.Ox;
+import io.zerows.boot.extension.util.Ox;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.osgi.spi.plugin.AspectPlugin;
@@ -14,7 +14,7 @@ import io.zerows.support.Ut;
 import java.util.Objects;
 import java.util.function.Function;
 
-import static io.zerows.epoch.bootplus.extension.refine.Ox.LOG;
+import static io.zerows.boot.extension.util.Ox.LOG;
 
 /*
  * 横切专用处理，用于加载

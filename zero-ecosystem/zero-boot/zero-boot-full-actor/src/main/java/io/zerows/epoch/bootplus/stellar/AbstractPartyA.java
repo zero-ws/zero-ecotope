@@ -3,6 +3,7 @@ package io.zerows.epoch.bootplus.stellar;
 import io.r2mo.base.dbe.Database;
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonObject;
+import io.zerows.boot.extension.component.ArmsStore;
 import io.zerows.extension.skeleton.common.Ke;
 import io.zerows.platform.enums.Environment;
 import io.zerows.platform.exception._40103Exception500ConnectAmbient;
@@ -35,7 +36,7 @@ public abstract class AbstractPartyA implements OkA {
     protected AbstractPartyA(final Environment environment) {
         this.environment = environment;
         // 直接从存储中提取
-        final JsonObject globalJ = ArgoStore.stellar();
+        final JsonObject globalJ = ArmsStore.stellar();
         final KGlobal globalRef = Ut.deserialize(globalJ, KGlobal.class);
         this.global = globalRef;
         LOG.Ok.info(this.getClass(), "Global environment has been initialized!! = {0}", globalRef);

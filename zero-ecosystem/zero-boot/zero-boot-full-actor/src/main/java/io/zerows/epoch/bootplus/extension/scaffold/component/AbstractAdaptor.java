@@ -31,7 +31,7 @@ import java.lang.reflect.Array;
 import java.util.Objects;
 import java.util.function.Function;
 
-import static io.zerows.epoch.bootplus.extension.refine.Ox.LOG;
+import static io.zerows.boot.extension.util.Ox.LOG;
 
 /**
  * ## 「Adaptor」顶层适配器

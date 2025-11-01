@@ -3,7 +3,6 @@ package io.zerows.support.base;
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.LogUtil;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.exception._11002Exception500EmptyIo;
 import io.zerows.platform.exception._11004Exception415JsonFormat;
@@ -23,12 +22,6 @@ import java.util.Properties;
  * The library for IO resource reading.
  */
 final class Io {
-
-    /**
-     * 「DEAD-LOCK」LoggerFactory.getLogger
-     * Do not use `Annal` logger because of deadlock.
-     */
-    private static final LogUtil LOG = LogUtil.from(Io.class);
 
     private Io() {
     }

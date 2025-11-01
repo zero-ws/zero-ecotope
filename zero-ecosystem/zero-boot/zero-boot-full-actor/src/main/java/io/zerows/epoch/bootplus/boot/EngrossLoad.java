@@ -5,8 +5,7 @@ import io.zerows.epoch.boot.ZeroLauncher;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.skeleton.boot.DataImport;
 import io.zerows.support.Ut;
-
-import static io.zerows.extension.skeleton.common.Ke.LOG;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 「单应用」目前版本
@@ -17,6 +16,7 @@ import static io.zerows.extension.skeleton.common.Ke.LOG;
  *
  * @author lang : 2023-06-10
  */
+@Slf4j
 public class EngrossLoad {
 
     public static void run(final Class<?> clazz, final String... args) {
@@ -32,11 +32,11 @@ public class EngrossLoad {
         final String prefix = input.value(KName.PREFIX);
 
         final String vPath = Ut.ioPath(path, input.environment());
-        LOG.Ke.info(clazz, """
+        log.info("""
                 信息说明
-                \t环境：{0}, 开启OOB：{1}
-                \t数据路径：{2}
-                \t过滤模式：{3}
+                \t环境：{}, 开启OOB：{}
+                \t数据路径：{}
+                \t过滤模式：{}
                 """,
             input.environment(), oob, vPath, prefix
         );

@@ -103,7 +103,7 @@ different from Service Node.
 In service node, you start up zero instance as following:
 
 ```java
-import io.zerows.epoch.VertxApplication;
+import io.zerows.boot.VertxApplication;
 import io.zerows.epoch.annotations.Up;
 
 @Up
@@ -121,7 +121,7 @@ But in api gateway, you must use another class for start up, you must use `io.ve
 annotation for launcher:
 
 ```java
-import io.zerows.epoch.VertxApplication;
+import io.zerows.boot.VertxApplication;
 import io.vertx.up.annotations.ApiGateway;
 import io.zerows.epoch.annotations.Up;
 

@@ -2,7 +2,6 @@ package io.zerows.extension.skeleton.boot;
 
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
-import io.zerows.plugins.excel.ExcelInfix;
 import io.zerows.specification.configuration.HLauncher;
 
 /**
@@ -37,7 +36,7 @@ public class ZeroPre implements HLauncher.Pre<Vertx> {
          */
         // UPD-002: 由于 JooqInfix 废弃，此处待修正
         // JooqInfix.init(vertx);
-        ExcelInfix.init(vertx);
+        // ExcelInfix.init(vertx);
 
         return Boolean.TRUE;
     }

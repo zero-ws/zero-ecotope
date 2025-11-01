@@ -19,5 +19,8 @@
         <module>zero-boot-full-actor</module>
         <!-- 扩展模块启动（继承模式）-->
         <module>zero-boot-import</module>
+        <!-- 测试专用 -->
+        <module>zero-boot-testing</module>
+        <module>zero-boot-extension</module>
     </modules>
 </project>

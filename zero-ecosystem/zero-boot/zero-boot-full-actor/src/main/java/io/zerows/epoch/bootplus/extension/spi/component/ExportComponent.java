@@ -3,7 +3,7 @@ package io.zerows.epoch.bootplus.extension.spi.component;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.bootplus.extension.refine.Ox;
+import io.zerows.boot.extension.util.Ox;
 import io.zerows.epoch.bootplus.extension.scaffold.component.AbstractAdaptor;
 import io.zerows.epoch.bootplus.extension.scaffold.plugin.AspectSwitcher;
 import io.zerows.epoch.web.Envelop;
@@ -12,8 +12,8 @@ import io.zerows.extension.skeleton.common.Ke;
 import io.zerows.mbse.metadata.ActIn;
 import io.zerows.mbse.metadata.ActOut;
 import io.zerows.platform.constant.VName;
+import io.zerows.plugins.excel.ExcelActor;
 import io.zerows.plugins.excel.ExcelClient;
-import io.zerows.plugins.excel.ExcelInfix;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -98,7 +98,7 @@ public class ExportComponent extends AbstractAdaptor {
         final JsonArray removed = new JsonArray();
 
         final String identifier = atom.identifier();
-        final ExcelClient client = ExcelInfix.getClient();
+        final ExcelClient client = ExcelActor.ofClient();
 
         /*
          * 导出的头信息

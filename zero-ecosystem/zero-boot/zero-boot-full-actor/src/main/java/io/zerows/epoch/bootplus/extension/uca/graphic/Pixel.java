@@ -20,8 +20,8 @@ public interface Pixel {
      * Neo4j 关系服务
      */
     static Pixel edge(final ChangeFlag type, final String identifier) {
-        final Function<String, Pixel> executor = Pool.POOL_EDGE_SUPPLIER.get(type);
-        final ConcurrentMap<String, Pixel> pool = Pool.POOL_EDGE.get(type);
+        final Function<String, Pixel> executor = PoolInternal.POOL_EDGE_SUPPLIER.get(type);
+        final ConcurrentMap<String, Pixel> pool = PoolInternal.POOL_EDGE.get(type);
         if (Objects.isNull(pool)) {
             return executor.apply(identifier);
         } else {
@@ -33,8 +33,8 @@ public interface Pixel {
      * Neo4j 节点服务
      */
     static Pixel node(final ChangeFlag type, final String identifier) {
-        final Function<String, Pixel> executor = Pool.POOL_NODE_SUPPLIER.get(type);
-        final ConcurrentMap<String, Pixel> pool = Pool.POOL_NODE.get(type);
+        final Function<String, Pixel> executor = PoolInternal.POOL_NODE_SUPPLIER.get(type);
+        final ConcurrentMap<String, Pixel> pool = PoolInternal.POOL_NODE.get(type);
         if (Objects.isNull(pool)) {
             return executor.apply(identifier);
         } else {

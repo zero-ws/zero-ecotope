@@ -5,8 +5,8 @@ import io.zerows.component.environment.DevEnv;
 import io.zerows.extension.mbse.basement.atom.Schema;
 import io.zerows.extension.mbse.basement.eon.AoTable;
 import io.zerows.extension.mbse.basement.util.Ao;
+import io.zerows.plugins.excel.ExcelActor;
 import io.zerows.plugins.excel.ExcelClient;
-import io.zerows.plugins.excel.ExcelInfix;
 import io.zerows.plugins.excel.metadata.ExRecord;
 import io.zerows.plugins.excel.metadata.ExTable;
 import io.zerows.support.Ut;
@@ -25,7 +25,7 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class ExModello {
 
-    private static final ExcelClient CLIENT = ExcelInfix.getClient();
+    private static final ExcelClient CLIENT = ExcelActor.ofClient();
     private transient final ConcurrentMap<String, Set<ExRecord>> recordMap
         = new ConcurrentHashMap<>();
     /* 应用程序名称 */

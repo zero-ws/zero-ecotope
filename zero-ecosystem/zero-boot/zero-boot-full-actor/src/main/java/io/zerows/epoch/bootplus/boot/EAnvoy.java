@@ -2,7 +2,7 @@ package io.zerows.epoch.bootplus.boot;
 
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.boot.Electy;
+import io.zerows.boot.mini.Electy;
 import io.zerows.epoch.bootplus.stellar.AbstractPartyB;
 import io.zerows.epoch.bootplus.stellar.OkA;
 import io.zerows.platform.metadata.KDictConfig;

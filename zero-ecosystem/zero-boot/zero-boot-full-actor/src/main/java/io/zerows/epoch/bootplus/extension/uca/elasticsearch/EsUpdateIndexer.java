@@ -10,7 +10,7 @@ import io.zerows.epoch.constant.KName;
  * @author Hongwei
  * @since 2020/1/8, 21:13
  */
-public class EsUpdateIndexer extends AbstractEsIndex {
+public class EsUpdateIndexer extends EsIndexBase {
 
 
     public EsUpdateIndexer(final String name) {

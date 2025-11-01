@@ -1,6 +1,7 @@
 package io.zerows.epoch.bootplus.stellar;
 
 import io.r2mo.base.dbe.Database;
+import io.zerows.boot.extension.component.ArmsStore;
 import io.zerows.platform.metadata.KGlobal;
 import io.zerows.specification.app.HArk;
 
@@ -8,7 +9,7 @@ import io.zerows.specification.app.HArk;
  * 合同术语中，Party A 代表甲方，Party B 代表乙方，所以此处的 Party 接口代表甲乙双方相关信息。
  * <pre><code>
  *     1. 甲方直接走 {@link KGlobal} 全局配置用于测试和开发（包括模拟模式）
- *     2. 乙方则考虑从 {@link ArgoStore#stellar()} 中提取所有乙方信息，包括多个乙方等相关信息。
+ *     2. 乙方则考虑从 {@link ArmsStore#stellar()} 中提取所有乙方信息，包括多个乙方等相关信息。
  * </code></pre>
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>

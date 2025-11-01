@@ -3,7 +3,7 @@ package io.zerows.epoch.bootplus.extension.scaffold.plugin;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.bootplus.extension.refine.Ox;
+import io.zerows.boot.extension.util.Ox;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.osgi.spi.plugin.AfterPlugin;
 import io.zerows.extension.mbse.basement.osgi.spi.plugin.BeforePlugin;
