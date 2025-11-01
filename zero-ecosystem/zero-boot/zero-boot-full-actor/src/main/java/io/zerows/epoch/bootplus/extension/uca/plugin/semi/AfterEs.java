@@ -3,8 +3,8 @@ package io.zerows.epoch.bootplus.extension.uca.plugin.semi;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.boot.elastic.EsIndex;
 import io.zerows.epoch.bootplus.extension.scaffold.plugin.AbstractAfter;
-import io.zerows.epoch.bootplus.extension.uca.elasticsearch.EsIndex;
 import io.zerows.program.Ux;
 
 /*

@@ -20,7 +20,9 @@
         <!-- 扩展模块启动（继承模式）-->
         <module>zero-boot-import</module>
         <!-- 测试专用 -->
-        <module>zero-boot-testing</module>
+        <module>zero-boot-test-actor</module>
         <module>zero-boot-extension</module>
+        <module>zero-boot-elastic-actor</module>
+        <module>zero-boot-graphic-actor</module>
     </modules>
 </project>

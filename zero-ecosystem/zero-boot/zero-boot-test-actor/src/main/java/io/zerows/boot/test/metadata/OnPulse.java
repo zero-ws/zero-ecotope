@@ -1,0 +1,126 @@
+package io.zerows.boot.test.metadata;
+
+import io.r2mo.typed.cc.Cc;
+import io.zerows.boot.test.EngrossLoad;
+import io.zerows.platform.constant.VClassPath;
+import io.zerows.platform.constant.VString;
+import io.zerows.platform.constant.VValue;
+import io.zerows.platform.metadata.KPathAtom;
+import io.zerows.support.Ut;
+
+/**
+ * 统一入口，防止新版的单独处理，直接在主函数中调用对应信息启动
+ *
+ * @author lang : 2023-06-12
+ */
+public class OnPulse {
+    private static final Cc<String, QModeller> CC_MODELLER = Cc.openThread();
+
+    // --------------------- 数据相关
+    public static void runActivity(final Class<?> mainClass) {
+        final String path = VClassPath.init.OOB;
+        EngrossLoad.run(mainClass,
+            path,                 // path     = init/oob/activity-rule
+            VValue.FALSE,                // oob      = false
+            "activity-rule"              // prefix   = "activity-rule"
+        );
+    }
+
+    public static void runCab(final Class<?> mainClass) {
+        final String path = VClassPath.init.oob.CAB;
+        EngrossLoad.run(mainClass,
+            path,                 // path     = init/oob/cab
+            VValue.FALSE,                // oob      = false
+            null                         // prefix   = null
+        );
+    }
+
+    public static void runData(final Class<?> mainClass) {
+        final String path = VClassPath.init.oob.DATA;
+        EngrossLoad.run(mainClass,
+            path,                 // path     = init/oob/data
+            VValue.FALSE,                // oob      = false
+            null                         // prefix   = null
+        );
+    }
+
+    public static void runEnvironment(final Class<?> mainClass) {
+        final String path = VClassPath.init.oob.ENVIRONMENT;
+        EngrossLoad.run(mainClass,
+            path,                 // path     = init/oob/environment
+            VValue.FALSE,                // oob      = false
+            null                         // prefix   = null
+        );
+    }
+
+    public static void runPermission(final Class<?> mainClass, final String role) {
+        final String path = VClassPath.init.oob.role.of(role);
+        EngrossLoad.run(mainClass,
+            path,                 // path     = init/oob/role/LANG.YU
+            VValue.FALSE,                // oob      = false
+            null                         // prefix   = null
+        );
+    }
+
+    public static void runOob(final Class<?> mainClass, final String prefix) {
+        final String path = VClassPath.init.OOB;
+        EngrossLoad.run(mainClass,
+            path,
+            VValue.TRUE,
+            prefix
+        );
+    }
+
+    public static void runOob(final Class<?> mainClass) {
+        final String path = VClassPath.init.OOB;
+        EngrossLoad.run(mainClass,
+            path,
+            VValue.TRUE,
+            null
+        );
+    }
+
+    // --------------------- 菜单相关
+    public static void menuReview(final Class<?> mainClass) {
+        OnMenu.review(mainClass);
+    }
+
+    public static void menuWrite(final Class<?> mainClass) {
+        // 提取角色相关信息
+        OnMenu.write(mainClass);
+    }
+
+    // --------------------- 建模相关
+    public static void atomLoad(final Class<?> mainClass, final KPathAtom pathAtom) {
+        EngrossLoad.run(mainClass,
+            pathAtom.path(),       // path      = init/oob/cmdb
+            VValue.FALSE,                 // oob       = false
+            null                          // prefix    = null
+        );
+    }
+
+    public static void atomInit(final Class<?> mainClass, final KPathAtom pathAtom) {
+        final QModeller modeller = atomModeller(pathAtom);
+        modeller.initialize();
+    }
+
+    public static void atomPre(final Class<?> mainClass, final KPathAtom pathAtom) {
+        final QModeller modeller = atomModeller(pathAtom);
+        modeller.preprocess();
+    }
+
+    public static void atomUi(final Class<?> mainClass, final KPathAtom pathAtom, final String prefix) {
+        EngrossLoad.run(mainClass,
+            pathAtom.atomUi(),
+            VValue.FALSE,
+            prefix
+        );
+    }
+
+    private static QModeller atomModeller(final KPathAtom pathAtom) {
+        final String input = pathAtom.input();
+        final String output = pathAtom.output();
+        final String hashKey = Ut.encryptMD5(input + VString.COLON + output);
+        return CC_MODELLER.pick(() -> QModeller.of(input, output), hashKey);
+    }
+}

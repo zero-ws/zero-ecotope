@@ -1,0 +1,53 @@
+package io.zerows.boot.test.metadata;
+
+import io.vertx.core.Vertx;
+import io.zerows.epoch.boot.ZeroLauncher;
+import io.zerows.platform.constant.VClassPath;
+import io.zerows.platform.constant.VString;
+import io.zerows.program.Ux;
+import io.zerows.support.Ut;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+/**
+ * @author lang : 2023-06-27
+ */
+class OnMenu {
+    private static final String RESOURCE_ROOT = "src/main/resources/";
+
+    static void review(final Class<?> mainClass) {
+        final ZeroLauncher<Vertx> container = ZeroLauncher.create(mainClass, new String[]{});
+        container.start((vertx, config) -> {
+            // 打印所有菜单
+            QMenu.menuFetch(List.of(), true).compose(menus -> {
+                System.out.println(menus.encodePrettily());
+                return Ux.futureT();
+            }).compose(nil -> QMenu.menuFetch(List.of(), false)).onSuccess(menus -> {
+                System.out.println(menus.encodePrettily());
+                System.exit(0);
+            });
+        });
+    }
+
+    static void write(final Class<?> mainClass) {
+        final ZeroLauncher<Vertx> container = ZeroLauncher.create(mainClass, new String[]{});
+        container.start((vertx, config) -> {
+            final List<String> files = Ut.ioFiles(VClassPath.init.permission.ui_menu.ROLE);
+            final Set<String> roleSet = new HashSet<>();
+            files.forEach(file -> {
+                final String role = file.replace(".json", VString.EMPTY);
+                roleSet.add(role);
+            });
+
+            // 处理角色相关菜单
+            QMenu.menuInitialize(roleSet)
+                .compose(map -> QMenu.menuOutput(map, RESOURCE_ROOT))
+                .onSuccess(output -> {
+                    System.out.println("执行完成！");
+                    System.exit(0);
+                });
+        });
+    }
+}

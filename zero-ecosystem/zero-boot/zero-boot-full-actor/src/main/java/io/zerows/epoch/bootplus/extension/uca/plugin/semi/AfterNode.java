@@ -3,8 +3,8 @@ package io.zerows.epoch.bootplus.extension.uca.plugin.semi;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.boot.graphic.Pixel;
 import io.zerows.epoch.bootplus.extension.scaffold.plugin.AbstractAfter;
-import io.zerows.epoch.bootplus.extension.uca.graphic.Pixel;
 import io.zerows.program.Ux;
 
 /**

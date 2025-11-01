@@ -11,12 +11,35 @@
 
     <artifactId>zero-boot-full-actor</artifactId>
     <name>✅️ - Zero::Boot::Entire Actor</name>
-
+    <description>
+        zero-boot-full-actor ( MBSE )
+        / - zero-boot-test-actor
+        / - zero-boot-elastic-actor
+        / - zero-boot-graphic-actor
+        / - |-- zero-boot-extension
+        / ----- |-- zero-boot-mini-actor
+    </description>
     <dependencies>
         <!-- 入口依赖 -->
         <dependency>
             <groupId>io.zerows</groupId>
             <artifactId>zero-boot-extension</artifactId>
+            <version>${zero.version}</version>
+        </dependency>
+        <!-- Actor -->
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-boot-test-actor</artifactId>
+            <version>${zero.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-boot-elastic-actor</artifactId>
+            <version>${zero.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-boot-graphic-actor</artifactId>
             <version>${zero.version}</version>
         </dependency>
     </dependencies>
