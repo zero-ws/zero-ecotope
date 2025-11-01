@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.atom.data.DataGroup;
-import io.zerows.extension.mbse.basement.osgi.spi.plugin.AspectPlugin;
+import io.zerows.extension.mbse.basement.osgi.spi.plugins.AspectPlugin;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;

@@ -1,0 +1,32 @@
+package io.zerows.boot.full.plugins;
+
+import io.vertx.core.Future;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
+import io.zerows.boot.extension.util.Ox;
+import io.zerows.boot.full.base.AbstractAfter;
+import io.zerows.boot.graphic.Pixel;
+import io.zerows.platform.enums.typed.ChangeFlag;
+import io.zerows.program.Ux;
+
+/**
+ * @author <a href="http://www.origin-x.cn">Lang</a>
+ */
+public class AfterUdEdgeAdd extends AbstractAfter {
+    @Override
+    public Future<JsonObject> afterAsync(final JsonObject record, final JsonObject options) {
+        final JsonArray normalized = Ox.toLinker(record);
+        /*
+         * 先删除，再添加
+         */
+        return Pixel.edge(ChangeFlag.ADD, this.atom.identifier()).drawAsync(normalized)
+            .compose(processed -> Ux.future(record));
+    }
+
+    @Override
+    public Future<JsonArray> afterAsync(final JsonArray records, final JsonObject options) {
+        final JsonArray normalized = Ox.toLinker(records);
+        return Pixel.edge(ChangeFlag.ADD, this.atom.identifier()).drawAsync(normalized)
+            .compose(processed -> Ux.future(records));
+    }
+}

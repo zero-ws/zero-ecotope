@@ -7,7 +7,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.boot.extension.util.Ox;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
 import io.zerows.extension.mbse.basement.exception._80545Exception400Tracking;
-import io.zerows.extension.mbse.basement.osgi.spi.plugin.AspectPlugin;
+import io.zerows.extension.mbse.basement.osgi.spi.plugins.AspectPlugin;
 import io.zerows.extension.runtime.ambient.domain.tables.pojos.XActivity;
 import io.zerows.platform.enums.modeling.EmAttribute;
 import io.zerows.platform.metadata.KMarkAtom;
