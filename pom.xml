@@ -5,11 +5,23 @@
     <parent>
         <groupId>io.zerows</groupId>
         <artifactId>rachel-momo-0216</artifactId>
-        <version>1.0.8</version>
+        <version>1.0.11</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>zero-ecotope</artifactId>
     <version>1.0.0</version>
+    <properties>
+        <zero.version>1.0.0</zero.version>
+        <r2mo.version>1.0-M26</r2mo.version>
+
+        <!-- ====================== Java ======================================== -->
+        <encoding>UTF-8</encoding>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <java.version>21</java.version>
+    </properties>
     <name>(POM) 📚️ - Zero Framework ${zero.version}</name>
     <description>Zero Ecotope Framework is a tool for Service Mesh Micro Service.</description>
     <url>http://www.zerows.io</url>
@@ -57,17 +69,6 @@
         <module>zero-stack</module>
         <module>zero-ecosystem</module>
     </modules>
-    <properties>
-        <zero.version>1.0.0</zero.version>
-
-        <!-- ====================== Java ======================================== -->
-        <encoding>UTF-8</encoding>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
-        <java.version>21</java.version>
-    </properties>
     <build>
         <plugins>
             <plugin>

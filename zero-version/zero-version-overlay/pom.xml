@@ -12,9 +12,6 @@
     <artifactId>zero-version-overlay</artifactId>
     <name>(POM) 📣 - Zero::Version::Overlay / ${r2mo.version}</name>
     <packaging>pom</packaging>
-    <properties>
-        <r2mo.version>1.0-M25</r2mo.version>
-    </properties>
     <dependencyManagement>
         <dependencies>
             <!-- R2MO 相关依赖 -->

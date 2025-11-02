@@ -12,17 +12,26 @@
     <artifactId>zero-boot</artifactId>
     <name>(POM) 📚️ - Zero::Boot</name>
     <packaging>pom</packaging>
+    <description>
+        1）扩展应用（微服务）启动
+        zero-boot-full-actor ( MBSE ), Actor启动器，内置所有功能模块
+        / - zero-boot-test-actor, Actor启动器（专用于测试环境）
+        / - zero-boot-elastic-actor, Actor启动器，ES专用，内部依赖 zero-plugins-elasticsearch
+        / - zero-boot-graphic-actor, Actor启动器，Neo4j专用，内部依赖 zero-plugins-neo4j
+        / - |-- zero-boot-extension, 统一依赖（非启动器），扩展模块底座依赖统一归口
+        / ----- |-- zero-boot-mini-actor, Actor启动器（核心模块，不带任何扩展模块）
+
+        2）核心应用（微服务）启动
+        zero-boot-mini-actor, Actor启动器（核心模块，不带任何扩展模块）
+
+        3）工具模块启动
+    </description>
     <modules>
         <!-- 核心模块启动器 -->
-        <module>zero-boot-mini-actor</module>
-        <!-- 扩展模块启动器 -->
-        <module>zero-boot-full-actor</module>
+        <module>zero-boot-epoch-actor</module>
         <!-- 扩展模块启动（继承模式）-->
         <module>zero-boot-import</module>
-        <!-- 测试专用 -->
-        <module>zero-boot-test-actor</module>
         <module>zero-boot-extension</module>
-        <module>zero-boot-elastic-actor</module>
-        <module>zero-boot-graphic-actor</module>
+        <module>zero-boot-actor-extra</module>
     </modules>
 </project>

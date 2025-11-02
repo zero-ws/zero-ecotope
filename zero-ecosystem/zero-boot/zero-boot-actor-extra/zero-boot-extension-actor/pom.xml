@@ -3,29 +3,15 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>zero-boot</artifactId>
+        <artifactId>zero-boot-actor-extra</artifactId>
         <groupId>io.zerows</groupId>
         <version>1.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>zero-boot-full-actor</artifactId>
-    <name>✅️ - Zero::Boot::Entire Actor</name>
-    <description>
-        zero-boot-full-actor ( MBSE )
-        / - zero-boot-test-actor
-        / - zero-boot-elastic-actor
-        / - zero-boot-graphic-actor
-        / - |-- zero-boot-extension
-        / ----- |-- zero-boot-mini-actor
-    </description>
+    <artifactId>zero-boot-extension-actor</artifactId>
+    <name>✅️ - Zero::Boot::Extension Actor</name>
     <dependencies>
-        <!-- 入口依赖 -->
-        <dependency>
-            <groupId>io.zerows</groupId>
-            <artifactId>zero-boot-extension</artifactId>
-            <version>${zero.version}</version>
-        </dependency>
         <!-- Actor -->
         <dependency>
             <groupId>io.zerows</groupId>

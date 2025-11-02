@@ -68,7 +68,7 @@
             <!-- ================= 入口 ================== -->
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-boot-mini-actor</artifactId>
+                <artifactId>zero-boot-epoch-actor</artifactId>
                 <version>${zero.version}</version>
             </dependency>
         </dependencies>

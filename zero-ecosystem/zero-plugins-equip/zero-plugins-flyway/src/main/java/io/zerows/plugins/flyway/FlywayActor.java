@@ -11,6 +11,8 @@ import org.flywaydb.core.Flyway;
 import org.flywaydb.core.api.configuration.FluentConfiguration;
 import org.flywaydb.core.api.output.MigrateResult;
 
+import java.util.Objects;
+
 /**
  * @author lang : 2025-10-25
  */
@@ -28,7 +30,11 @@ public class FlywayActor extends AbstractHActor {
         final FluentConfiguration configuration = Flyway11Configurator.from(config);
         final Flyway flyway = new Flyway(configuration);
         final MigrateResult result = Fn.jvmOr(flyway::migrate);
-        log.info("[ ZERO ] Flyway数据库迁移结果：{}", result.getTotalMigrationTime());
+        if (Objects.nonNull(result)) {
+            log.info("[ ZERO ] Flyway数据库迁移结果：{}", result.getTotalMigrationTime());
+        } else {
+            log.warn("[ ZERO ] Flyway数据库迁移执行失败！");
+        }
         return Future.succeededFuture(Boolean.TRUE);
     }
 }

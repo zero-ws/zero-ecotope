@@ -9,8 +9,15 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>zero-boot-elastic-actor</artifactId>
-    <name>✅️ - Zero::Boot::Elastic Actor</name>
+    <artifactId>zero-boot-actor-extra</artifactId>
+    <name>(POM) 📚️ - Zero::Boot::Actor Extra</name>
+    <packaging>pom</packaging>
+    <modules>
+        <module>zero-boot-extension-actor</module>
+        <module>zero-boot-test-actor</module>
+        <module>zero-boot-elastic-actor</module>
+        <module>zero-boot-graphic-actor</module>
+    </modules>
     <dependencies>
         <!-- 入口依赖 -->
         <dependency>
@@ -19,5 +26,4 @@
             <version>${zero.version}</version>
         </dependency>
     </dependencies>
-
 </project>

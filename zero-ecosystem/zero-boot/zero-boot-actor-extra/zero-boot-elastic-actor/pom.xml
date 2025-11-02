@@ -5,19 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.zerows</groupId>
-        <artifactId>zero-boot</artifactId>
+        <artifactId>zero-boot-actor-extra</artifactId>
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>zero-boot-graphic-actor</artifactId>
-    <name>✅️ - Zero::Boot::Graphic Actor</name>
-    <dependencies>
-        <!-- 入口依赖 -->
-        <dependency>
-            <groupId>io.zerows</groupId>
-            <artifactId>zero-boot-extension</artifactId>
-            <version>${zero.version}</version>
-        </dependency>
-    </dependencies>
+    <artifactId>zero-boot-elastic-actor</artifactId>
+    <name>✅️ - Zero::Boot::Elastic Actor</name>
 
 </project>

@@ -24,7 +24,7 @@
             <exclusions>
                 <exclusion>
                     <groupId>io.zerows</groupId>
-                    <artifactId>zero-boot-mini-actor</artifactId>
+                    <artifactId>zero-boot-epoch-actor</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>

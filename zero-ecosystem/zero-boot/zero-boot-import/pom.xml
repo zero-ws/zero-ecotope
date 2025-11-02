@@ -25,7 +25,7 @@
         <!-- Switch to Up -->
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-boot-mini-actor</artifactId>
+            <artifactId>zero-boot-epoch-actor</artifactId>
         </dependency>
     </dependencies>
     <dependencyManagement>
@@ -41,12 +41,12 @@
             <!-- Business Scaffold -->
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-boot-full-actor</artifactId>
+                <artifactId>zero-boot-extension-actor</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-boot-mini-actor</artifactId>
+                <artifactId>zero-boot-epoch-actor</artifactId>
                 <version>${zero.version}</version>
             </dependency>
         </dependencies>
