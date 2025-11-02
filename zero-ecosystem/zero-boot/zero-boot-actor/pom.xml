@@ -9,8 +9,8 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>zero-boot-actor-extra</artifactId>
-    <name>(POM) 📚️ - Zero::Boot::Actor Extra</name>
+    <artifactId>zero-boot-actor</artifactId>
+    <name>(POM) 📚️ - Zero::Boot::Actor</name>
     <packaging>pom</packaging>
     <modules>
         <module>zero-boot-extension-actor</module>

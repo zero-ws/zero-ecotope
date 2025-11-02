@@ -32,6 +32,6 @@
         <!-- 扩展模块启动（继承模式）-->
         <module>zero-boot-import</module>
         <module>zero-boot-extension</module>
-        <module>zero-boot-actor-extra</module>
+        <module>zero-boot-actor</module>
     </modules>
 </project>

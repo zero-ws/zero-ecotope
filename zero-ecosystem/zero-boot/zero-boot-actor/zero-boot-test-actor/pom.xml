@@ -5,11 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.zerows</groupId>
-        <artifactId>zero-boot-actor-extra</artifactId>
+        <artifactId>zero-boot-actor</artifactId>
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>zero-boot-graphic-actor</artifactId>
-    <name>✅️ - Zero::Boot::Graphic Actor</name>
-
+    <artifactId>zero-boot-test-actor</artifactId>
+    <name>✅️ - Zero::Boot::Test Actor</name>
 </project>
