@@ -14,17 +14,22 @@
     <packaging>pom</packaging>
     <description>
         1）扩展应用（微服务）启动
-        zero-boot-full-actor ( MBSE ), Actor启动器，内置所有功能模块
-        / - zero-boot-test-actor, Actor启动器（专用于测试环境）
-        / - zero-boot-elastic-actor, Actor启动器，ES专用，内部依赖 zero-plugins-elasticsearch
-        / - zero-boot-graphic-actor, Actor启动器，Neo4j专用，内部依赖 zero-plugins-neo4j
-        / - |-- zero-boot-extension, 统一依赖（非启动器），扩展模块底座依赖统一归口
-        / ----- |-- zero-boot-mini-actor, Actor启动器（核心模块，不带任何扩展模块）
+        - zero-boot-extension-actor ( MBSE ), Actor启动器，内置所有功能模块
+        - / - Dependency: zero-boot-inst-load, 工具模块加载器
+        - / - Dependency: zero-boot-test-actor, Actor启动器（专用于测试环境）
+        - / - Dependency: zero-boot-elastic-actor, Actor启动器，ES专用，内部依赖 zero-plugins-elasticsearch
+        - / - Dependency: zero-boot-graphic-actor, Actor启动器，Neo4j专用，内部依赖 zero-plugins-neo4j
+        - / - |-- Dependency: zero-boot-extension, 统一依赖（非启动器），扩展模块底座依赖统一归口
+        - / ----- |-- Dependency: zero-boot-epoch-actor, Actor启动器（核心模块，不带任何扩展模块）
 
         2）核心应用（微服务）启动
-        zero-boot-mini-actor, Actor启动器（核心模块，不带任何扩展模块）
+        - zero-boot-epoch-actor, Actor启动器（核心模块，不带任何扩展模块）
 
         3）工具模块启动
+        - zero-boot-inst, 工具模块启动器
+        - / - Dependency: zero-boot-test-actor, Actor启动器（专用于测试环境）
+        ----- Child / - zero-boot-inst-load, 数据加载器
+        ----- Child / - zero-boot-inst-menu, 菜单规划器
     </description>
     <modules>
         <!-- 核心模块启动器 -->
@@ -33,5 +38,6 @@
         <module>zero-boot-import</module>
         <module>zero-boot-extension</module>
         <module>zero-boot-actor</module>
+        <module>zero-boot-inst</module>
     </modules>
 </project>

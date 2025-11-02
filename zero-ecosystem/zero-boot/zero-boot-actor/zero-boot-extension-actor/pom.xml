@@ -28,5 +28,11 @@
             <artifactId>zero-boot-graphic-actor</artifactId>
             <version>${zero.version}</version>
         </dependency>
+        <!-- Inst -->
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-boot-inst-load</artifactId>
+            <version>${zero.version}</version>
+        </dependency>
     </dependencies>
 </project>
