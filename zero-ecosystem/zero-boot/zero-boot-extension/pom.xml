@@ -103,10 +103,9 @@
             <groupId>io.zerows</groupId>
             <artifactId>zero-exmodule-graphic-api</artifactId>
         </dependency>
-        <!-- ===================== 商业接口部分 ==================== -->
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-extension-commerce-rbac</artifactId>
+            <artifactId>zero-exmodule-rbac-api</artifactId>
         </dependency>
 
         <!-- ===================== 核心建模部分 ==================== -->

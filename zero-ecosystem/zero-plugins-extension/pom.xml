@@ -29,6 +29,7 @@
         <module>zero-exmodule-integration</module>                         <!-- Integration -->
         <module>zero-exmodule-report</module>                              <!-- Report -->
         <module>zero-exmodule-graphic</module>                             <!-- Graphic -->
+        <module>zero-exmodule-rbac</module>                                <!-- RBAC -->
 
         <!-- 系统核心模块 -->
         <module>zero-extension-runtime-workflow</module>          <!-- 工作流引擎 -->
@@ -38,9 +39,6 @@
         <module>zero-extension-mbse-action</module>
         <module>zero-extension-mbse-basement</module>
 
-
-        <!-- 业务相关模块 -->
-        <module>zero-extension-commerce-rbac</module>
 
     </modules>
 </project>
