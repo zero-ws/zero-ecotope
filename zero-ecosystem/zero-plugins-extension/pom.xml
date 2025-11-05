@@ -26,9 +26,9 @@
         <module>zero-exmodule-tpl</module>                                 <!-- TPL -->
         <module>zero-exmodule-modulat</module>                             <!-- Modulat -->
         <module>zero-exmodule-ambient</module>                             <!-- Ambient -->
+        <module>zero-exmodule-integration</module>                         <!-- Integration -->
 
         <!-- 系统核心模块 -->
-        <module>zero-extension-runtime-integration</module>       <!-- 集成管理 -->
         <module>zero-extension-runtime-workflow</module>          <!-- 工作流引擎 -->
         <module>zero-extension-runtime-graphic</module>
 

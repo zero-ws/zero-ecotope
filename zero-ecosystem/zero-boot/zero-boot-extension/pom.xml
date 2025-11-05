@@ -95,6 +95,10 @@
             <groupId>io.zerows</groupId>
             <artifactId>zero-exmodule-report-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-exmodule-integration-api</artifactId>
+        </dependency>
         <!-- ===================== 商业接口部分 ==================== -->
         <dependency>
             <groupId>io.zerows</groupId>
@@ -112,10 +116,6 @@
         </dependency>
 
         <!-- ===================== 运行时部分 ==================== -->
-        <dependency>
-            <groupId>io.zerows</groupId>
-            <artifactId>zero-extension-runtime-integration</artifactId>
-        </dependency>
         <dependency>
             <groupId>io.zerows</groupId>
             <artifactId>zero-extension-runtime-graphic</artifactId>
