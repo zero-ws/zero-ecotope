@@ -3,6 +3,7 @@ package io.zerows.plugins.liquibase;
 import io.r2mo.base.secure.EDCrypto;
 import io.zerows.epoch.constant.KName;
 import io.zerows.platform.ENV;
+import io.zerows.spi.HPI;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Properties;
@@ -24,7 +25,7 @@ public class LiquibaseEncryptionZero extends Properties {
     }
 
     private static final Set<String> ENV_SET = Set.of(
-        KName.USERNAME, KName.PASSWORD
+        KName.USER, KName.USERNAME, KName.PASSWORD
     );
 
     @Override
@@ -39,9 +40,17 @@ public class LiquibaseEncryptionZero extends Properties {
         if (KName.PASSWORD.equals(paramK)) {
             finalValue = EDCrypto.decryptPassword(envValue);
         } else {
-            finalValue = wrapValue;
+            finalValue = envValue;
         }
         log.info("[ ZERO ] 处理的属性键值对：{} = {}", paramK, finalValue);
         return super.put(paramK, finalValue);
+    }
+
+    // gAiPC5bovk7L6tl6hx7T1zmtZmksXtXyQVLuRS2GRIBl6pw8SpktWa6ko9gjS9az9Lov3/zdOY6bdrge6+mYMqbSbmD9y5jYIOIygo0rMbOIx0l17+yAi/lbxdKn0QAqL/lDfHxWL/9p8NRSEOR9Cf1ntECtIkYHmRv8X5O0sPU=
+    public static void main(final String[] args) {
+        final String encrypt = HPI.findOverwrite(EDCrypto.class).encrypt("pl,okmijn123");
+        System.out.println("encrypt = " + encrypt);
+        final String decrypt = EDCrypto.decryptPassword(encrypt);
+        System.out.println("decrypt = " + decrypt);
     }
 }

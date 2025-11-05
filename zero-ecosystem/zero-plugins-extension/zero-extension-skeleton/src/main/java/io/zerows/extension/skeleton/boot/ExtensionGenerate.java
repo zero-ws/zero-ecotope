@@ -142,11 +142,22 @@ class ExtensionGenerate {
         log.info("[ PLUG ] 生成核心代码");
         try {
             GenerationTool.generate(compiled);
-            log.info("[ PLUG ] 您的代码已经成功生成，注：如果是 Zero Extension 扩展模块开发，请自己修改 ZDB 为动态数据库名称！");
+            log.info("[ PLUG ] 注：如果是 Zero Extension 扩展模块开发，请检查 Zdb.java 文件中的数据库名称！");
+            this.writeZDB(configuration);
+            log.info("[ PLUG ] 您的数据库相关代码生成成功！");
         } catch (final Throwable ex) {
             ex.printStackTrace();
             log.error(ex.getMessage(), ex);
         }
+    }
+
+    private void writeZDB(final JooqSourceConfiguration configuration) {
+        final String packageName = configuration.classPackage().getName();
+        final String zdbPath = configuration.directory() +
+            File.separator + packageName.replace('.', File.separatorChar) +
+            File.separator + "domain" +
+            File.separator + "Zdb.java";
+        ExtensionModifier.modifyZdbFile(zdbPath);
     }
 
     /**

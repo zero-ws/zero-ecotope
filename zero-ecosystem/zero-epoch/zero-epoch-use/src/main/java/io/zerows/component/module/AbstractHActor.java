@@ -19,7 +19,7 @@ public abstract class AbstractHActor implements HActor {
             return vertxRef.executeBlocking(() -> {
                     // 1) 先在 worker 线程里打印一遍
                     logger.info("{}    🐦‍🔥 ---> 运行 actor = `{}` / hash = {} | thread={}",
-                        this.vColor(), this.getClass().getName(), this.hashCode(), Thread.currentThread().getName());
+                        this.vLogColor(), this.getClass().getName(), this.hashCode(), Thread.currentThread().getName());
                     return true; // Callable 必须返回一个值，这里随便给 true
                 })
                 // 2) 然后继续你原来的异步逻辑（回到 Vert.x Future 链）
@@ -28,14 +28,14 @@ public abstract class AbstractHActor implements HActor {
                     final Future<Boolean> executed = this.startAsync(config, vertxRef);
                     if (executed == null) {
                         logger.warn("{}    ❗ ---> Actor = `{}` 执行失败，返回值为 null！",
-                            this.vColor(), this.getClass().getName());
+                            this.vLogColor(), this.getClass().getName());
                         return Future.succeededFuture(false);
                     }
                     return executed;
                 })
                 .recover(e -> {
                     logger.error("{}    ❗ ---> Actor = `{}` 执行异常",
-                        this.vColor(), this.getClass().getName(), e);
+                        this.vLogColor(), this.getClass().getName(), e);
                     return Future.failedFuture(e);
                 });
         }
@@ -44,12 +44,12 @@ public abstract class AbstractHActor implements HActor {
 
     protected void vLog(final String message, final Object... params) {
         final Logger logger = LoggerFactory.getLogger(this.getClass());
-        final Object[] parameters = this.elementConcat(this.vColor(), params);
+        final Object[] parameters = this.elementConcat(this.vLogColor(), params);
         logger.info("{}        \uD83D\uDCA4 ---> " + message, parameters);
     }
 
-    protected String vColor() {
-        return COLOR_PLUG;
+    protected String vLogColor() {
+        return "[ PLUG ]";
     }
 
     private Object[] elementConcat(final Object obj, final Object[] array) {

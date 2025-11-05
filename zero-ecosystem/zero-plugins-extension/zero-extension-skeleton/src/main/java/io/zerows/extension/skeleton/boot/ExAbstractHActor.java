@@ -8,7 +8,7 @@ import io.zerows.component.module.AbstractHActor;
 public abstract class ExAbstractHActor extends AbstractHActor {
 
     @Override
-    protected String vColor() {
-        return COLOR_EXTENSION;
+    protected String vLogColor() {
+        return "[ XMOD ]";
     }
 }

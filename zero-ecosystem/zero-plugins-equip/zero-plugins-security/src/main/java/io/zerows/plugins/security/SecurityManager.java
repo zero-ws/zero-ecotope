@@ -9,7 +9,6 @@ import io.zerows.epoch.metadata.security.SecurityMeta;
 import io.zerows.platform.enums.SecurityType;
 import io.zerows.platform.management.StoreApp;
 import io.zerows.specification.app.HApp;
-import io.zerows.specification.configuration.HActor;
 import io.zerows.specification.configuration.HConfig;
 import lombok.extern.slf4j.Slf4j;
 
@@ -72,7 +71,7 @@ class SecurityManager {
 
         final HApp stored = StoreApp.of().valueGet(appId);
         if (Objects.isNull(stored)) {
-            log.warn("{} ( Secure ) 应用 `{}` 未找到，无法注册安全配置！", HActor.COLOR_PLUG, appId);
+            log.warn("[ PLUG ] ( Secure ) 应用 `{}` 未找到，无法注册安全配置！", appId);
             return;
         }
 
@@ -105,8 +104,7 @@ class SecurityManager {
             final JsonObject configOption = options.getJsonObject(optionKey);
             final SecurityConfig configObj = new SecurityConfig(type, configOption);
             securityMap.put(type, configObj);
-            log.info("{} ( Secure ) By - {} / 已注册安全配置：`{}`, value = {}",
-                HActor.COLOR_PLUG, ownerId, configObj.key(), configOption.encode());
+            log.info("[ PLUG ] ( Secure ) By - {} / 已注册安全配置：`{}`, value = {}", ownerId, configObj.key(), configOption.encode());
         }
         return securityMap;
     }

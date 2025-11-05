@@ -1,5 +1,7 @@
 <included>
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- 关键：启用 Jansi 以支持 ANSI 颜色转义序列 -->
+        <withJansi>true</withJansi>
         <encoder charset="UTF-8">
             <pattern>${CONSOLE_LOG_PATTERN}</pattern>
         </encoder>

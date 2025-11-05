@@ -25,21 +25,25 @@ CREATE TABLE `X_NUMBER`
     `STEP`          INT(11)     NOT NULL COMMENT '「step」编号的步进系数，每次按照step进行变化,step,I_STEP',
     `DECREMENT`     BIT         NOT NULL COMMENT '「decrement」递增/递减？如果为true则递减，为false则是递增,decrement,IS_DECREMENT',
 
-    `APP_ID`        VARCHAR(255) COMMENT '「id」- 关联的应用程序ID',
     `RUN_COMPONENT` TEXT COMMENT '「runComponent」- 发号器执行组件，雪花算法所需',
 
     -- 特殊字段
     `RENEWAL`       BIT          DEFAULT FALSE COMMENT '「renewal」- 是否循环',
-    `ACTIVE`        BIT          DEFAULT NULL COMMENT '「active」- 是否启用',
-    `SIGMA`         VARCHAR(32)  DEFAULT NULL COMMENT '「sigma」- 统一标识',
-    `METADATA`      TEXT COMMENT '「metadata」- 附加配置',
-    `LANGUAGE`      VARCHAR(8)   DEFAULT NULL COMMENT '「language」- 使用的语言',
+
+    -- ------------------------------ 公共字段 --------------------------------
+    `SIGMA`         VARCHAR(128) COMMENT '「sigma」- 用户组绑定的统一标识',
+    `LANGUAGE`      VARCHAR(10) COMMENT '「language」- 使用的语言',
+    `ACTIVE`        BIT COMMENT '「active」- 是否启用',
+    `METADATA`      TEXT COMMENT '「metadata」- 附加配置数据',
 
     -- Auditor字段
     `CREATED_AT`    DATETIME COMMENT '「createdAt」- 创建时间',
     `CREATED_BY`    VARCHAR(36) COMMENT '「createdBy」- 创建人',
     `UPDATED_AT`    DATETIME COMMENT '「updatedAt」- 更新时间',
     `UPDATED_BY`    VARCHAR(36) COMMENT '「updatedBy」- 更新人',
+
+    `APP_ID`        VARCHAR(255) COMMENT '「appId」- 应用ID',
+    `TENANT_ID`     VARCHAR(36) COMMENT '「tenantId」- 租户ID',
     PRIMARY KEY (`KEY`) USING BTREE
 );
 

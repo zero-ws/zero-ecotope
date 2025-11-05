@@ -14,26 +14,26 @@ CREATE TABLE IF NOT EXISTS X_TAG
     `ICON`        VARCHAR(255) COMMENT '「icon」- 标签使用的图标',
     `COLOR`       VARCHAR(32) COMMENT '「color」- 标签颜色',
     `SORT`        BIGINT COMMENT '「sort」- 标签排序',
-    `SHOW`        BIT         DEFAULT FALSE COMMENT '「show」- 是否显示在导航栏',
+    `SHOW`        BIT DEFAULT FALSE COMMENT '「show」- 是否显示在导航栏',
     `DESCRIPTION` LONGTEXT COMMENT '「description」- 标签描述',
 
     `UI_STYLE`    LONGTEXT COMMENT '「uiStyle」- 标签的其他风格处理', -- 色彩字体在此处
     `UI_CONFIG`   LONGTEXT COMMENT '「uiConfig」- 标签的其他配置',
 
-    -- 所属应用
-    `APP_ID`      VARCHAR(255) COMMENT '「id」- 关联的应用程序ID',
-
-    -- 特殊字段
-    `ACTIVE`      BIT         DEFAULT NULL COMMENT '「active」- 是否启用',
-    `SIGMA`       VARCHAR(32) DEFAULT NULL COMMENT '「sigma」- 统一标识',
-    `METADATA`    TEXT COMMENT '「metadata」- 附加配置',
-    `LANGUAGE`    VARCHAR(8)  DEFAULT NULL COMMENT '「language」- 使用的语言',
+    -- ------------------------------ 公共字段 --------------------------------
+    `SIGMA`       VARCHAR(128) COMMENT '「sigma」- 用户组绑定的统一标识',
+    `LANGUAGE`    VARCHAR(10) COMMENT '「language」- 使用的语言',
+    `ACTIVE`      BIT COMMENT '「active」- 是否启用',
+    `METADATA`    TEXT COMMENT '「metadata」- 附加配置数据',
 
     -- Auditor字段
     `CREATED_AT`  DATETIME COMMENT '「createdAt」- 创建时间',
     `CREATED_BY`  VARCHAR(36) COMMENT '「createdBy」- 创建人',
     `UPDATED_AT`  DATETIME COMMENT '「updatedAt」- 更新时间',
     `UPDATED_BY`  VARCHAR(36) COMMENT '「updatedBy」- 更新人',
+
+    `APP_ID`      VARCHAR(255) COMMENT '「appId」- 应用ID',
+    `TENANT_ID`   VARCHAR(36) COMMENT '「tenantId」- 租户ID',
     PRIMARY KEY (`KEY`) USING BTREE
 );
 

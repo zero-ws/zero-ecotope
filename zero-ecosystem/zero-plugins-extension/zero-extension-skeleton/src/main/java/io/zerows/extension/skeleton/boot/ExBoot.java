@@ -10,7 +10,6 @@ import io.zerows.extension.skeleton.spi.UiApeak;
 import io.zerows.extension.skeleton.spi.UiApeakMy;
 import io.zerows.extension.skeleton.spi.UiForm;
 import io.zerows.platform.constant.VString;
-import io.zerows.specification.configuration.HActor;
 import io.zerows.specification.development.HMaven;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
@@ -43,7 +42,7 @@ class ExBoot {
     };
 
     static void vLog() {
-        log.info("{} 扩展模块 SPI 监控详情：", HActor.COLOR_EXTENSION);
+        log.info("[ XMOD ] 扩展模块 SPI 监控详情：");
         for (final Class<?> spiClass : SPI_SET) {
             final List<?> implementations = SPI.findMany(spiClass);
             final String implNames = implementations.isEmpty()
@@ -52,18 +51,18 @@ class ExBoot {
                 .map(impl -> impl.getClass().getName())
                 .distinct()
                 .collect(Collectors.joining(", "));
-            log.info("{}    \uD83E\uDD4F {} = [{}]", HActor.COLOR_EXTENSION, spiClass.getName(), implNames);
+            log.info("[ XMOD ]    \uD83E\uDD4F {} = [{}]", spiClass.getName(), implNames);
         }
     }
 
     static void vModule() {
-        log.info("{} 加载模块 ID 集合：", HActor.COLOR_EXTENSION);
+        log.info("[ XMOD ]  加载模块 ID 集合：");
         final Set<Class<?>> scanned = OCacheClass.entireValue();
         scanned.forEach(item -> {
             if (Arrays.asList(item.getInterfaces()).contains(HMaven.class)) {
                 final String value = Ut.field(item, "BUNDLE_SYMBOLIC_NAME");
                 if (Objects.nonNull(value)) {
-                    log.info("{}    - {}", HActor.COLOR_EXTENSION, value);
+                    log.info("[ XMOD ]    - {}", value);
                 }
             }
         });

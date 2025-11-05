@@ -22,7 +22,7 @@ public class LiquibaseEncryption extends Properties {
     }
 
     private static final Set<String> ENV_SET = Set.of(
-        KName.USERNAME, KName.PASSWORD
+        KName.USER, KName.USERNAME, KName.PASSWORD
     );
 
     @Override

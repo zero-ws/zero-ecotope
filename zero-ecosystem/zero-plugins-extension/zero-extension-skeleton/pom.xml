@@ -24,6 +24,10 @@
         </dependency>
         <dependency>
             <groupId>io.zerows</groupId>
+            <artifactId>zero-plugins-liquibase</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.zerows</groupId>
             <artifactId>zero-plugins-store-neo4j</artifactId>
         </dependency>
         <!-- 代码生成开启 -->

@@ -19,11 +19,20 @@
         Properties definition in current environment
     -->
     <property name="CONSOLE_LOG_PATTERN"
-              value="%boldMagenta(%date{HH:mm:ss.SSS}) | %highlight(%.-1level){ERROR=RED, WARN=YELLOW, INFO=BLUE} | %boldYellow(%-36thread) | %msg | %boldGreen(%logger) %n"/>
+              value="%boldMagenta(%date{HH:mm:ss.SSS}) | %highlight(%.-1level){ERROR=RED, WARN=YELLOW, INFO=BLUE} | %boldYellow(%-36thread) | %smartmsg | %boldGreen(%logger) %n"/>
     <property name="LOG_FOLDER" value="logs/%d{yyyy-MM-dd}/"/>
     <property name="LOG_MAX_HISTORY" value="30"/>
     <property name="LOG_MAX_FILE_SIZE" value="10MB"/>
     <property name="LOG_PATTERN" value="%d [%-5level] | %thread | %logger | %msg %n"/>
+
+    <!-- ========================= Register Custom Converter ====================== -->
+    <!--
+         关键步骤：注册你的自定义转换器
+         conversionWord: 在 pattern 中使用的占位符名称
+         converterClass: 自定义类的全限定名
+    -->
+    <conversionRule conversionWord="smartmsg"
+                    converterClass="io.zerows.component.environment.DevZeroConverter"/>
 
     <!-- ========================= Third Part Logger definition ====================== -->
     <!--

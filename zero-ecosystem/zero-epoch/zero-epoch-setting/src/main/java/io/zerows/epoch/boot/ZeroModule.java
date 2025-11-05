@@ -98,20 +98,20 @@ public class ZeroModule<T> {
             } else {
                 // 缩进更改
                 future = future.compose(nil -> {
-                    log.info("{} \uD83E\uDDCA ---> 启动 sequence = `{}` 的 Actor 集合，共 {} 个组件",
-                        HActor.COLOR_PLUG, String.format("%6d", sequence), actorSet.size());
+                    log.info("[ PLUG ] \uD83E\uDDCA ---> 启动 sequence = `{}` 的 Actor 集合，共 {} 个组件",
+                        String.format("%6d", sequence), actorSet.size());
                     return Fx.combineB(actorSet.parallelStream().map(actor -> {
                         final HConfig config = this.findConfig(actor);
                         final Actor actorAnnotation = actor.getClass().getDeclaredAnnotation(Actor.class);
                         final boolean mustConfigured = actorAnnotation.configured();
                         if (mustConfigured && Objects.isNull(config)) {
-                            log.warn("{}    ⚪️ ---> 跳过 actor = `{}`, 检查配置项：`{}`",
-                                HActor.COLOR_PLUG, actor.getClass().getName(), actorAnnotation.value());
+                            log.warn("[ PLUG ]    ⚪️ ---> 跳过 actor = `{}`, 检查配置项：`{}`",
+                                actor.getClass().getName(), actorAnnotation.value());
                             return null;
                         }
                         return executorFn.apply(config, actor);
                     }).filter(Objects::nonNull).collect(Collectors.toSet())).otherwise(error -> {
-                        log.error("    {} 执行异常 --> ", HActor.COLOR_PLUG, error);
+                        log.error("[ PLUG ] 执行异常 --> ", error);
                         return Boolean.FALSE;
                     });
                 });

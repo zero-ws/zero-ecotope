@@ -26,7 +26,7 @@ import io.zerows.extension.module.ambient.domain.tables.XTenant;
 /**
  * Convenience access to all tables in ZDB.
  */
-@SuppressWarnings({"all", "unchecked", "rawtypes"})
+@SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
 public class Tables {
 
     /**
