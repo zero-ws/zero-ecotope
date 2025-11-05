@@ -111,11 +111,11 @@
             <groupId>io.zerows</groupId>
             <artifactId>zero-exmodule-workflow-api</artifactId>
         </dependency>
-        <!-- ===================== 核心建模部分 ==================== -->
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-extension-mbse-action</artifactId>
+            <artifactId>zero-exmodule-mbseapi-api</artifactId>
         </dependency>
+        <!-- ===================== 核心建模部分 ==================== -->
         <dependency>
             <groupId>io.zerows</groupId>
             <artifactId>zero-extension-mbse-basement</artifactId>

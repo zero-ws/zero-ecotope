@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>io.zerows</groupId>
+        <artifactId>zero-exmodule-mbseapi</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>zero-exmodule-mbseapi-domain</artifactId>
+    <name>Zero::ExModule💎 - MBSE Api::Domain</name>
+    <dependencies>
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-extension-skeleton</artifactId>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <configuration>
+                    <propertyProviderClass>io.zerows.plugins.liquibase.LiquibaseEncryptionZero</propertyProviderClass>
+                    <!-- 配置文件路径 -->
+                    <propertyFile>plugins/${project.parent.artifactId}/database/MYSQL.properties</propertyFile>
+                    <changeLogFile>plugins/${project.parent.artifactId}/database/MYSQL.yml</changeLogFile>
+                    <!-- 配置参数 -->
+                    <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
+                    <outputFileEncoding>UTF-8</outputFileEncoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

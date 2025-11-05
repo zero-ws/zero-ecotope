@@ -102,12 +102,12 @@
                 <artifactId>zero-exmodule-workflow-api</artifactId>
                 <version>${zero.version}</version>
             </dependency>
-            <!-- ===================== 核心建模部分 ==================== -->
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-extension-mbse-action</artifactId>
+                <artifactId>zero-exmodule-mbseapi-api</artifactId>
                 <version>${zero.version}</version>
             </dependency>
+            <!-- ===================== 核心建模部分 ==================== -->
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-extension-mbse-basement</artifactId>

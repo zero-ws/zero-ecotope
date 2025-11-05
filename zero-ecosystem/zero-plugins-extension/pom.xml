@@ -31,10 +31,10 @@
         <module>zero-exmodule-graphic</module>                             <!-- Graphic -->
         <module>zero-exmodule-rbac</module>                                <!-- RBAC -->
         <module>zero-exmodule-workflow</module>                            <!-- Workflow -->
+        <module>zero-exmodule-mbseapi</module>                             <!-- MBSE API -->
 
 
         <!-- 动态配置模块 -->
-        <module>zero-extension-mbse-action</module>
         <module>zero-extension-mbse-basement</module>
 
 

@@ -1,0 +1,195 @@
+package io.zerows.extension.module.mbseapi.component;
+
+import io.r2mo.vertx.function.FnVertx;
+import io.vertx.core.Future;
+import io.vertx.core.json.JsonArray;
+import io.zerows.component.log.LogOf;
+import io.zerows.cosmic.plugins.job.metadata.Mission;
+import io.zerows.epoch.annotations.Contract;
+import io.zerows.epoch.constant.KWeb;
+import io.zerows.epoch.web.Envelop;
+import io.zerows.extension.module.mbseapi.boot.Jt;
+import io.zerows.extension.module.mbseapi.exception._80407Exception501ChannelError;
+import io.zerows.extension.module.mbseapi.plugins.JtChannel;
+import io.zerows.extension.module.mbseapi.plugins.JtComponent;
+import io.zerows.mbse.metadata.ActIn;
+import io.zerows.mbse.metadata.ActOut;
+import io.zerows.mbse.sdk.Commercial;
+import io.zerows.platform.metadata.KDictConfig;
+import io.zerows.platform.metadata.KFabric;
+import io.zerows.program.Ux;
+import io.zerows.specification.modeling.HRecord;
+import io.zerows.support.Ut;
+
+import java.util.Objects;
+import java.util.concurrent.ConcurrentMap;
+
+/**
+ * Abstract channel
+ * reference matrix
+ * Name                 Database            KIntegration         Mission
+ * AdaptorChannel       Yes                 No                  No
+ * ConnectorChannel     Yes                 Yes                 No
+ * DirectorChannel      Yes                 No                  Yes
+ * ActorChannel         Yes                 Yes                 Yes
+ * <p>
+ * For above support list, here are some rules:
+ * 1) Request - Response MODE, Client send request
+ * 2) Publish - Subscribe MODE, Server send request
+ * <p>
+ * For common usage, it should use AdaptorChannel instead of other three types; If you want to send
+ * request to third part interface ( API ), you can use ConnectorChannel instead of others.
+ * <p>
+ * The left two: ActorChannel & DirectorChannel are Background task in zero ( Job Support ), the
+ * difference between them is that whether the channel support KIntegration.
+ * <p>
+ * The full feature of channel should be : ActorChannel
+ */
+public abstract class JtChannelBase implements JtChannel {
+
+    private final transient JtMonitor monitor = JtMonitor.create(this.getClass());
+    /* This field will be injected by zero directly from backend */
+    @Contract
+    private transient Commercial commercial;
+    @Contract
+    private transient Mission mission;
+    /*
+     * In `Job` mode, the dictionary may came from `JobIncome`.
+     * In `Api` mode, the dictionary is null reference here.
+     */
+    @Contract
+    private transient ConcurrentMap<String, JsonArray> dictionary;
+
+    @Override
+    public Future<Envelop> transferAsync(final Envelop envelop) {
+        /*
+         * Build record and init
+         */
+        final Class<?> recordClass = this.commercial.recordComponent();
+        /*
+         * Build component and init
+         */
+        final Class<?> componentClass = this.commercial.businessComponent();
+        if (Objects.isNull(componentClass)) {
+            /*
+             * null class of component
+             */
+            return FnVertx.failOut(_80407Exception501ChannelError.class, (Object) null);
+        } else {
+            return this.createRequest(envelop, recordClass).compose(request -> {
+                /*
+                 * Create new component here
+                 * It means that Channel/Component must contains new object
+                 * Container will create new Channel - Component to process request
+                 * Instead of singleton here.
+                 *  */
+                final JtComponent component = Ut.instance(componentClass);
+                if (Objects.nonNull(component)) {
+                    this.monitor.componentHit(componentClass, recordClass);
+                    /*
+                     * Initialized first and then
+                     */
+                    Ux.debug();
+                    /*
+                     * Options without `mapping` here
+                     */
+                    return this.initAsync(component, request)
+                        /*
+                         * Contract here
+                         * 1) Definition in current channel
+                         * 2) Data came from request ( XHeader )
+                         */
+                        .compose(initialized -> JtChannelAnagogic.componentAsync(component, this.commercial, this::createFabric))
+                        .compose(initialized -> JtChannelAnagogic.componentAsync(component, envelop))
+                        /*
+                         * Children initialized
+                         */
+                        .compose(initialized -> component.transferAsync(request))
+                        /*
+                         * Response here for future custom
+                         */
+                        .compose(actOut -> this.createResponse(actOut, envelop))
+                        /*
+                         * Otherwise;
+                         */
+                        .otherwise(Ux.otherwise());
+                } else {
+                    /*
+                     * singleton singleton error
+                     */
+                    return FnVertx.failOut(_80407Exception501ChannelError.class, componentClass.getName());
+                }
+            });
+        }
+    }
+
+    private Future<Envelop> createResponse(final ActOut actOut, final Envelop envelop) {
+        return Ux.future(actOut.envelop(this.commercial.mapping()).from(envelop));
+    }
+
+    /*
+     * OnOff `dictionary` here for usage
+     * 1) When `Job`, assist data may be initialized before.
+     * 2) When `Api`, here will initialize assist data.
+     * 3) Finally the data will bind to request
+     */
+    private Future<ActIn> createRequest(final Envelop envelop, final Class<?> recordClass) {
+        /*
+         * Data object, could not be singleton
+         *  */
+        final HRecord definition = Ut.instance(recordClass);
+        /*
+         * First step for channel
+         * Initialize the `ActIn` object and reference
+         */
+        final ActIn request = new ActIn(envelop);
+        request.bind(this.commercial.mapping());
+        request.connect(definition);
+
+        return Ux.future(request);
+    }
+
+    private Future<KFabric> createFabric() {
+        /*
+         * Dict configuration
+         */
+        final KDictConfig dict = this.commercial.dict();
+        if (Objects.isNull(this.dictionary)) {
+            final String appKey = this.commercial.app();
+            final String identifier = this.commercial.identifier();
+            return Jt.toDictionary(appKey, KWeb.CACHE.DIRECTORY, identifier, dict).compose(dictionary -> {
+                /*
+                 * Bind dictionary to current dictionary reference
+                 */
+                this.dictionary = dictionary;
+                return Ux.future(KFabric.create().dictionary(dictionary).epsilon(dict.configUse()));
+            });
+        } else {
+            return Ux.future(KFabric.create().dictionary(this.dictionary).epsilon(dict.configUse()));
+        }
+    }
+
+    /*
+     * Initialize component
+     */
+    public abstract Future<Boolean> initAsync(JtComponent component, ActIn request);
+
+    protected LogOf getLogger() {
+        return LogOf.get(this.getClass());
+    }
+
+    // ------------- Rename configuration object -------------
+    /*
+     * Get service definition from `Commercial`
+     */
+    protected Commercial commercial() {
+        return this.commercial;
+    }
+
+    /*
+     * Get job definition from `Mission`
+     */
+    protected Mission mission() {
+        return this.mission;
+    }
+}
