@@ -35,24 +35,27 @@
                 <artifactId>zero-extension-api</artifactId>
                 <version>${zero.version}</version>
             </dependency>
-            <!-- ERP -->
+            <!--
+            - ERP
+            - LBS
+            - Finance
+            -->
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-extension-erp-api</artifactId>
+                <artifactId>zero-exmodule-erp-api</artifactId>
                 <version>${zero.version}</version>
             </dependency>
-            <!-- LBS -->
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-extension-lbs-api</artifactId>
                 <version>${zero.version}</version>
             </dependency>
-            <!-- ===================== 商业接口部分 ==================== -->
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-extension-commerce-finance</artifactId>
+                <artifactId>zero-extension-finance-api</artifactId>
                 <version>${zero.version}</version>
             </dependency>
+            <!-- ===================== 商业接口部分 ==================== -->
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-extension-commerce-rbac</artifactId>

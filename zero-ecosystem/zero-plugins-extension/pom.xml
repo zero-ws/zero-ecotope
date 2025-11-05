@@ -14,12 +14,14 @@
     <name>(POM) 📚️ - Zero::Extension</name>
     <modules>
         <!-- 扩展模块骨架 -->
-        <module>zero-extension-skeleton</module>
-        <module>zero-extension-crud</module>                 <!-- CRUD 引擎 -->
-        <module>zero-extension-api</module>
+        <module>zero-extension-skeleton</module>                            <!-- Skeleton -->
+        <module>zero-extension-crud</module>                                <!-- CRUD 引擎 -->
+        <module>zero-extension-api</module>                                 <!-- API 规范 -->
+
         <!-- Module -->
-        <module>zero-extension-erp</module><!-- ERP -->
-        <module>zero-extension-lbs</module><!-- LBS -->
+        <module>zero-exmodule-erp</module>                                 <!-- ERP -->
+        <module>zero-extension-lbs</module>                                 <!-- LBS -->
+        <module>zero-extension-finance</module>                             <!-- Finance -->
 
         <!-- 系统核心模块 -->
         <module>zero-extension-runtime-ambient</module>           <!-- 配置管理 -->
@@ -38,7 +40,6 @@
 
 
         <!-- 业务相关模块 -->
-        <module>zero-extension-commerce-finance</module>          <!-- Commerce：Finance -->
         <module>zero-extension-commerce-rbac</module>
 
     </modules>

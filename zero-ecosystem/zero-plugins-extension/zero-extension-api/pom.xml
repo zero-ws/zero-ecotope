@@ -27,7 +27,7 @@
         -->
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-extension-erp-api</artifactId>
+            <artifactId>zero-exmodule-erp-api</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

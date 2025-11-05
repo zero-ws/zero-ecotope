@@ -63,18 +63,18 @@
         <!-- ERP -->
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-extension-erp-api</artifactId>
+            <artifactId>zero-exmodule-erp-api</artifactId>
         </dependency>
         <dependency>
             <groupId>io.zerows</groupId>
             <artifactId>zero-extension-lbs-api</artifactId>
         </dependency>
-
-        <!-- ===================== 商业接口部分 ==================== -->
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-extension-commerce-finance</artifactId>
+            <artifactId>zero-extension-finance-api</artifactId>
         </dependency>
+
+        <!-- ===================== 商业接口部分 ==================== -->
         <dependency>
             <groupId>io.zerows</groupId>
             <artifactId>zero-extension-commerce-rbac</artifactId>
