@@ -60,7 +60,9 @@
             <groupId>io.zerows</groupId>
             <artifactId>zero-extension-crud</artifactId>
         </dependency>
-        <!-- ERP -->
+        <!--
+        带数据库的表结构
+        -->
         <dependency>
             <groupId>io.zerows</groupId>
             <artifactId>zero-exmodule-erp-api</artifactId>
@@ -76,6 +78,10 @@
         <dependency>
             <groupId>io.zerows</groupId>
             <artifactId>zero-exmodule-ui-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-exmodule-tpl-api</artifactId>
         </dependency>
 
         <!-- ===================== 商业接口部分 ==================== -->
@@ -114,10 +120,6 @@
         <dependency>
             <groupId>io.zerows</groupId>
             <artifactId>zero-extension-runtime-graphic</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.zerows</groupId>
-            <artifactId>zero-extension-runtime-tpl</artifactId>
         </dependency>
         <dependency>
             <groupId>io.zerows</groupId>
