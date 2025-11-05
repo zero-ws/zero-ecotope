@@ -30,6 +30,11 @@
                 <artifactId>zero-extension-crud</artifactId>
                 <version>${zero.version}</version>
             </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-extension-api</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
             <!-- ERP -->
             <dependency>
                 <groupId>io.zerows</groupId>
@@ -37,11 +42,6 @@
                 <version>${zero.version}</version>
             </dependency>
             <!-- ===================== 商业接口部分 ==================== -->
-            <dependency>
-                <groupId>io.zerows</groupId>
-                <artifactId>zero-extension-api</artifactId>
-                <version>${zero.version}</version>
-            </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-extension-commerce-finance</artifactId>

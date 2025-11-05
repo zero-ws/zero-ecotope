@@ -3,16 +3,24 @@ package io.zerows.extension.module.erp.api;
 interface Addr {
 
     interface Company {
-        String INFORMATION = AddrPrefix._EVENT + "X-COMPANY";
+        String INFORMATION = Prefix._EVENT + "X-COMPANY";
     }
 
     interface Employee {
-        String ADD = AddrPrefix._EVENT + "E-EMPLOYEE/ADD";
+        String ADD = Prefix._EVENT + "E-EMPLOYEE/ADD";
 
-        String BY_ID = AddrPrefix._EVENT + "E-EMPLOYEE/BY-ID";
+        String BY_ID = Prefix._EVENT + "E-EMPLOYEE/BY-ID";
 
-        String EDIT = AddrPrefix._EVENT + "E-EMPLOYEE/EDIT";
+        String EDIT = Prefix._EVENT + "E-EMPLOYEE/EDIT";
 
-        String DELETE = AddrPrefix._EVENT + "E-EMPLOYEE/DELETE";
+        String DELETE = Prefix._EVENT + "E-EMPLOYEE/DELETE";
+    }
+
+    /**
+     * @author lang : 2025-10-21
+     */
+    interface Prefix {
+
+        String _EVENT = "Ἀτλαντὶς νῆσος://Επιχείρηση/";
     }
 }

@@ -1,4 +1,4 @@
-package io.zerows.extension.sdk.cross.spi.business;
+package io.zerows.extension.api.plugins;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;

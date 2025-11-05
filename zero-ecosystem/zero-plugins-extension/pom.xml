@@ -41,7 +41,8 @@
         <!-- <module>zero-extension-commerce-erp</module>              Commerce：企业资源管理 -->
         <module>zero-extension-commerce-finance</module>          <!-- Commerce：Finance -->
         <module>zero-extension-commerce-lbs</module>              <!-- Commerce：Location Service -->
-        <module>zero-extension-commerce-rbac</module>             <!-- Commerce：RBAC -->
+        <module>zero-extension-commerce-rbac</module>
+        <module>zero-extension-lbs</module>             <!-- Commerce：RBAC -->
 
     </modules>
 </project>
