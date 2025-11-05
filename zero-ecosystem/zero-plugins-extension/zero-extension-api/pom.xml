@@ -37,7 +37,7 @@
         </dependency>
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-extension-commerce-rbac</artifactId>
+            <artifactId>zero-exmodule-rbac-api</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
