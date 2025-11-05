@@ -1,0 +1,15 @@
+package io.zerows.extension.module.graphic.api;
+
+/*
+ * Address for Event Bus of Graphic
+ */
+interface Prefix {
+    String _EVENT = "Ἀτλαντὶς νῆσος://γραφικό/";
+}
+
+interface Addr {
+    /*
+     * Get graph by node key ( analyze )
+     */
+    String GRAPH_ANALYZE = Prefix._EVENT + "X-GRAPH/BY/NODE";
+}

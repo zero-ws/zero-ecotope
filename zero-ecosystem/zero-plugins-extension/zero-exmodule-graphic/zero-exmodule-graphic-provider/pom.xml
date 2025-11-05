@@ -5,16 +5,16 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.zerows</groupId>
-        <artifactId>zero-exmodule-finance</artifactId>
+        <artifactId>zero-exmodule-graphic</artifactId>
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>zero-exmodule-finance-api</artifactId>
-    <name>Zero::ExModule💎 - Finance::Api</name>
+    <artifactId>zero-exmodule-graphic-provider</artifactId>
+    <name>Zero::ExModule💎 - Graphic::Provider</name>
     <dependencies>
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-exmodule-finance-provider</artifactId>
+            <artifactId>zero-exmodule-graphic-domain</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

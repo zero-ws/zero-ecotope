@@ -17,16 +17,21 @@
             <groupId>io.zerows</groupId>
             <artifactId>zero-boot-epoch-actor</artifactId>
         </dependency>
-        <!-- 代码生成开启 -->
-        <dependency>
-            <groupId>io.zerows</groupId>
-            <artifactId>r2mo-vertx-jooq-generate</artifactId>
-        </dependency>
         <!-- 插件 -->
         <dependency>
             <groupId>io.zerows</groupId>
             <artifactId>zero-plugins-excel</artifactId>
         </dependency>
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-plugins-store-neo4j</artifactId>
+        </dependency>
+        <!-- 代码生成开启 -->
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>r2mo-vertx-jooq-generate</artifactId>
+        </dependency>
+        <!-- R2MO IO Local -->
         <dependency>
             <groupId>io.zerows</groupId>
             <artifactId>r2mo-io-local</artifactId>
