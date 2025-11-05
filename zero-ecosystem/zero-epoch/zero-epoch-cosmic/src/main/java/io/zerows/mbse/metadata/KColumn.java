@@ -1,6 +1,7 @@
 package io.zerows.mbse.metadata;
 
 import io.zerows.support.Ut;
+import lombok.Data;
 
 import java.io.Serializable;
 
@@ -24,6 +25,7 @@ import java.io.Serializable;
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Data
 public class KColumn implements Serializable {
     /** 动态配置开关，若是动态列则 dynamic = true */
     private transient Boolean dynamic = Boolean.FALSE;
@@ -38,26 +40,6 @@ public class KColumn implements Serializable {
         /* Basic calculation for column analyze mode */
         this.dynamic = Ut.isNil(this.identifier);
         return this.dynamic;
-    }
-
-    public void setDynamic(final Boolean dynamic) {
-        this.dynamic = dynamic;
-    }
-
-    public String getIdentifier() {
-        return this.identifier;
-    }
-
-    public void setIdentifier(final String identifier) {
-        this.identifier = identifier;
-    }
-
-    public String getView() {
-        return this.view;
-    }
-
-    public void setView(final String view) {
-        this.view = view;
     }
 
     @Override

@@ -219,18 +219,23 @@ class ExcelHelper {
     }
 
     // --------------------- 初始化专用方法 ---------------------
-    void initPen(final JsonObject excelJ) {
-        this.tpl = this.envPen.prepare(excelJ);
-    }
 
+    // 第一步
     void initConnect(final JsonObject excelJ) {
         this.envConnect.prepare(excelJ);
     }
 
+    // 第二步
     void initEnvironment(final JsonObject excelJ) {
         REFERENCES.putAll(this.envFormula.prepare(excelJ));
     }
 
+    // 第三步
+    void initPen(final JsonObject excelJ) {
+        this.tpl = this.envPen.prepare(excelJ);
+    }
+
+    // 第四步
     void initTenant(final JsonObject excelJ) {
         this.tenant = this.envTenant.prepare(excelJ);
     }

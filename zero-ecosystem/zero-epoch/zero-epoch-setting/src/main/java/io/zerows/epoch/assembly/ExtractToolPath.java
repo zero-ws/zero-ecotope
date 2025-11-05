@@ -101,7 +101,7 @@ class ExtractToolPath {
         final String processed = uri;
         final String finalUri = processed.startsWith(VString.SLASH) ? processed : VString.SLASH + processed;
         if (!path.equals(finalUri)) {
-            log.info("[ ZERO ] \uD83E\uDEA1 地址转换 `{}` ---> `{}`.", path, finalUri);
+            log.debug("[ ZERO ] \uD83E\uDEA1 地址转换 `{}` ---> `{}`.", path, finalUri);
         }
         return finalUri;
     }

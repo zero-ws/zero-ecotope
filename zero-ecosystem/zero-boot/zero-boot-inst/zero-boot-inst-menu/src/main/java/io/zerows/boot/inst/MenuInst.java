@@ -1,4 +1,4 @@
-package io.zerows.boot.test;
+package io.zerows.boot.inst;
 
 import io.vertx.core.Vertx;
 import io.zerows.boot.mini.Electy;
@@ -14,7 +14,7 @@ import io.zerows.support.Ut;
  *
  * @author lang : 2023-06-12
  */
-public class EngrossMenu {
+public class MenuInst {
     public static void run(final Class<?> clazz, final String[] args) {
 
         // 构造启动器（构造命令启动器）

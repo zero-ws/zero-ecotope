@@ -12,10 +12,6 @@
     <artifactId>zero-boot-extension</artifactId>
     <name>🧬 - Zero::Boot::Extension</name>
     <dependencies>
-        <dependency>
-            <groupId>io.netty</groupId>
-            <artifactId>netty-resolver-dns-native-macos</artifactId>
-        </dependency>
 
         <!-- 入口依赖 -->
         <dependency>

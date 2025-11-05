@@ -1,5 +1,6 @@
 package io.zerows.extension.skeleton.boot;
 
+import io.r2mo.base.dbe.DBS;
 import io.r2mo.function.Fn;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.AsyncResult;
@@ -8,6 +9,7 @@ import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.zerows.cosmic.plugins.cache.SharedActor;
 import io.zerows.cosmic.plugins.cache.SharedClient;
+import io.zerows.epoch.store.DBSActor;
 import io.zerows.extension.skeleton.exception._80214Exception417LoadingNotReady;
 import io.zerows.platform.metadata.KTimer;
 import io.zerows.plugins.excel.ExcelActor;
@@ -15,13 +17,11 @@ import io.zerows.plugins.excel.ExcelClient;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.base.FnBase;
-import org.jooq.Configuration;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-import static io.zerows.extension.skeleton.common.Ke.LOG;
 
 /**
  * 替换旧版本中的静态模式下的 {@see Bt}，用于处理数据加载的专用操作，容器分两种模式
@@ -37,6 +37,7 @@ import static io.zerows.extension.skeleton.common.Ke.LOG;
  *
  * @author lang : 2023-06-12
  */
+@Slf4j
 public class DataImport {
 
     private static final Cc<Integer, DataImport> CC_IMPORT = Cc.open();
@@ -49,30 +50,22 @@ public class DataImport {
 
     public static DataImport of(final Vertx vertx) {
         // 环境检查，防止导入问题，如果导入过程中没有准备好环境则直接抛出异常
-        ensureEnvironment();
+        ensureEnvironment(vertx);
         // 构造导入器
         return CC_IMPORT.pick(() -> new DataImport(vertx), vertx.hashCode());
     }
 
-    public static DataImport of() {
-        // 环境检查，防止导入问题，如果导入过程中没有准备好环境则直接抛出异常
-        ensureEnvironment();
-        // 构造导入器
-        final Vertx vertx = Ux.nativeVertx();
-        return CC_IMPORT.pick(() -> new DataImport(vertx), vertx.hashCode());
-    }
-
-    private static void ensureEnvironment() {
+    private static void ensureEnvironment(final Vertx vertx) {
         // 检查一：Jooq基础环境是否准备
-        // UPD-001: 由于 JooqInfix 废弃，此处待修正
-        final Configuration jooq = null; // JooqInfix.findRunning(YmlCore.jooq.PROVIDER);
-        Fn.jvmKo(Objects.isNull(jooq), _80214Exception417LoadingNotReady.class, "jooq / provider");
+        final DBS dbs = DBSActor.ofDBS();
+        Fn.jvmKo(Objects.isNull(dbs), _80214Exception417LoadingNotReady.class, "database");
         // 检查二：Excel导入环境是否准备
         final ExcelClient excel = ExcelActor.ofClient();
         Fn.jvmKo(Objects.isNull(excel), _80214Exception417LoadingNotReady.class, "excel");
         // 检查三：Map导入环境是否准备
         final SharedClient shared = SharedActor.ofClient();
         Fn.jvmKo(Objects.isNull(shared), _80214Exception417LoadingNotReady.class, "shared");
+        log.info("[ ZERO ] \uD83C\uDF89 数据导入环境检查通过，准备就绪！");
     }
 
     /**
@@ -117,11 +110,11 @@ public class DataImport {
      *
      * @return {@link Future} 异步结果
      */
-    public Future<Boolean> landAsync(final String folder, final String prefix) {
+    public Future<Boolean> loadWithAsync(final String folder, final String prefix) {
         return this.future(folder, prefix, Boolean.TRUE);
     }
 
-    public Future<Boolean> landAsync(final String folder) {
+    public Future<Boolean> loadWithAsync(final String folder) {
         return this.future(folder, null, Boolean.TRUE);
     }
 
@@ -131,13 +124,13 @@ public class DataImport {
      * @param folder 目录
      * @param prefix 前缀
      */
-    public void land(final String folder, final String prefix) {
+    public void loadWith(final String folder, final String prefix) {
         final KTimer timer = KTimer.of().start();
         this.future(folder, prefix, Boolean.TRUE)
             .onComplete(this.complete(folder, prefix, timer));
     }
 
-    public void land(final String folder) {
+    public void loadWith(final String folder) {
         final KTimer timer = KTimer.of().start();
         this.future(folder, null, Boolean.TRUE)
             .onComplete(this.complete(folder, null, timer));
@@ -148,14 +141,15 @@ public class DataImport {
         return handler -> {
             if (handler.succeeded()) {
                 if (Ut.isNil(prefix)) {
-                    LOG.Ke.info(this.getClass(), "The data folder `{0}` has been imported successfully!", folder);
+                    log.info("[ ZERO ] 数据目录 `{}` 导入成功！", folder);
                 } else {
-                    LOG.Ke.info(this.getClass(), "The data folder `{0}` with `{1}` has been imported successfully!", folder, prefix);
+                    log.info("[ ZERO ] 数据目录 `{}` 匹配文件 `{}` 导入成功！", folder, prefix);
                 }
                 timer.end();
-                LOG.Ke.info(this.getClass(), "TOTAL EXECUTION TIME = The total execution time = {0}!", timer.value());
+                log.info("[ ZERO ] 总执行时间 {}", timer.value());
                 System.exit(0);
             } else {
+                log.info(handler.cause().getMessage(), handler.cause());
                 handler.cause().printStackTrace();
             }
         };
@@ -171,7 +165,7 @@ public class DataImport {
     private Future<String> execute(final String filename) {
         return Ux.nativeWorker(filename, this.vertx, pre -> {
             final ExcelClient client = ExcelActor.ofClient();
-            LOG.Ke.info(this.getClass(), "Excel importing file = {0}", filename);
+            log.info("[ ZERO ] 开始导入文件：{}", filename);
             client.importAsync(filename, handler -> {
                 if (handler.succeeded()) {
                     pre.complete(filename);

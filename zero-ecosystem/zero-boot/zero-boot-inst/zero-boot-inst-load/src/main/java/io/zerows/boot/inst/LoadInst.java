@@ -1,8 +1,9 @@
-package io.zerows.boot.test;
+package io.zerows.boot.inst;
 
 import io.vertx.core.Vertx;
 import io.zerows.boot.test.metadata.ArgLoad;
 import io.zerows.epoch.boot.ZeroLauncher;
+import io.zerows.epoch.configuration.NodePre;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.skeleton.boot.DataImport;
 import io.zerows.support.Ut;
@@ -18,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
  * @author lang : 2023-06-10
  */
 @Slf4j
-public class EngrossLoad {
+public class LoadInst {
 
     public static void run(final Class<?> clazz, final String... args) {
         /*
@@ -43,13 +44,13 @@ public class EngrossLoad {
         );
 
         // 构造启动器（构造命令启动器）
-        final ZeroLauncher<Vertx> container = ZeroLauncher.create(clazz, args);
+        final ZeroLauncher<Vertx> container = ZeroLauncher.create(clazz, args, NodePre::ensureDB);
         container.start((vertx, config) -> {
             // 构造数据导入器
             final DataImport importer = DataImport.of(vertx);
             if (oob) {
-                // 开启 OOB      ---> land
-                importer.land(vPath, prefix);
+                // 开启 OOB      ---> loadWith
+                importer.loadWith(vPath, prefix);
             } else {
                 // 不开启 OOB   ---> load
                 importer.load(vPath, prefix);

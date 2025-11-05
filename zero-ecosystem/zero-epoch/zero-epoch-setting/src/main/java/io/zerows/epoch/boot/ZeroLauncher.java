@@ -2,6 +2,7 @@ package io.zerows.epoch.boot;
 
 import io.r2mo.function.Fn;
 import io.r2mo.typed.cc.Cc;
+import io.r2mo.typed.exception.web._500ServerInternalException;
 import io.vertx.core.Future;
 import io.vertx.core.Promise;
 import io.vertx.core.json.JsonObject;
@@ -20,16 +21,17 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
 import java.util.function.BiConsumer;
+import java.util.function.Predicate;
 
 @Slf4j
 public class ZeroLauncher<T> {
     /** 🔒 单例实例（无并发保护，外层需确保仅初始化一次） */
-    @SuppressWarnings("rawtypes")
-    private static ZeroLauncher INSTANCE;
+    private static final Cc<Class<?>, ZeroLauncher<?>> CC_LAUNCHER = Cc.open();
     private static final Cc<String, Pre<?>> CC_PRE = Cc.openThread();
     private static final Cc<String, Mod<?>> CC_MOD = Cc.openThread();
     private final HBoot boot;
     private final HEnergy energy;
+    private Predicate<T> verifyFn;
 
     /**
      *
@@ -105,14 +107,27 @@ public class ZeroLauncher<T> {
      * @param args    命令行参数（将被注入配置） 🧵
      * @param <T>     服务器/框架的核心实例类型
      *
-     * @return 单例的 {@link ZeroLauncher} 实例 🔁
+     * @return 池化单例 {@link ZeroLauncher} 实例 🔁
      */
     @SuppressWarnings("unchecked")
     public static <T> ZeroLauncher<T> create(final Class<?> bootCls, final String[] args) {
-        if (INSTANCE == null) {
-            INSTANCE = new ZeroLauncher<>(bootCls, args);
-        }
-        return (ZeroLauncher<T>) INSTANCE;
+        return (ZeroLauncher<T>) CC_LAUNCHER.pick(() -> new ZeroLauncher<>(bootCls, args), bootCls);
+    }
+
+    /**
+     * 特殊启动器，带容器验证条件
+     *
+     * @param bootCls  启动入口类（用于 {@link BootIo#energy(Class, String[])}） 📌
+     * @param args     命令行参数（将被注入配置） 🧵
+     * @param <T>      服务器/框架的核心实例类型
+     * @param verifyFn 容器验证函数
+     *
+     * @return 池化单例 {@link ZeroLauncher} 实例 🔁
+     */
+    public static <T> ZeroLauncher<T> create(final Class<?> bootCls, final String[] args, final Predicate<T> verifyFn) {
+        final ZeroLauncher<T> launcher = create(bootCls, args);
+        launcher.verifyFn = verifyFn;
+        return launcher;
     }
 
     /**
@@ -175,8 +190,22 @@ public class ZeroLauncher<T> {
         });
     }
 
+    private boolean verifyContainer(final T container) {
+        final boolean verified;
+        if (Objects.nonNull(this.verifyFn)) {
+            verified = this.verifyFn.test(container);
+        } else {
+            verified = true;
+        }
+        return verified;
+    }
+
     @SuppressWarnings("unchecked")
     private Future<Boolean> startPreAsync(final T container) {
+        if (!this.verifyContainer(container)) {
+            return Future.failedFuture(new _500ServerInternalException("[ ZERO ] 容器验证函数验证失败，终止启动！"));
+        }
+        
         Objects.requireNonNull(container, "[ ZERO ] 启动容器不可以为 null.");
         HLauncher.Pre<T> launcherPre = this.boot.withPre();
         if (Objects.isNull(launcherPre)) {

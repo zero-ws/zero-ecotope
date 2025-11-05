@@ -7,6 +7,6 @@ import io.r2mo.vertx.common.exception.VertxWebException;
  */
 public class _80214Exception417LoadingNotReady extends VertxWebException {
     public _80214Exception417LoadingNotReady(final String key) {
-        super(ERR._80214);
+        super(ERR._80214, key);
     }
 }

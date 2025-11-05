@@ -8,6 +8,7 @@ import io.r2mo.vertx.common.exception.VertxE;
  */
 public interface ERR {
     VertxE _60007 = VertxE.of(-60007).state(HttpResponseStatus.INTERNAL_SERVER_ERROR);
+    VertxE _60012 = VertxE.of(-60012).state(HttpResponseStatus.INTERNAL_SERVER_ERROR);
     VertxE _60023 = VertxE.of(-60023).state(HttpResponseStatus.BAD_REQUEST);
     VertxE _60024 = VertxE.of(-60024).state(HttpResponseStatus.INTERNAL_SERVER_ERROR);
     VertxE _60025 = VertxE.of(-60025).state(HttpResponseStatus.BAD_REQUEST);

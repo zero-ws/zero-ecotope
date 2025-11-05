@@ -44,11 +44,42 @@ public abstract class AbstractHActor implements HActor {
 
     protected void vLog(final String message, final Object... params) {
         final Logger logger = LoggerFactory.getLogger(this.getClass());
-        logger.info("{}        \uD83D\uDCA4 ---> " + message, this.vColor(), params);
+        final Object[] parameters = this.elementConcat(this.vColor(), params);
+        logger.info("{}        \uD83D\uDCA4 ---> " + message, parameters);
     }
 
     protected String vColor() {
         return COLOR_PLUG;
+    }
+
+    private Object[] elementConcat(final Object obj, final Object[] array) {
+        if (array == null) {
+            // 如果原数组为 null，直接返回包含单个元素的新数组
+            return new Object[]{obj};
+        }
+        // 1. 创建一个长度为原数组长度 + 1 的新数组
+        // Arrays.copyOf 会复制原数组内容到新数组的前 array.length 个位置
+        // Object[] newArray = Arrays.copyOf(array, array.length + 1);
+        // 2. 将原数组内容向后移动一位 (System.arraycopy 是为了通用性，这里其实可以直接赋值)
+        //    实际上，Arrays.copyOf 已经把原数组内容放在了 [0, array.length) 位置
+        //    我们只需要将 obj 放在索引 0，然后将 [0, array.length) 的内容移动到 [1, array.length+1)
+        //    但更简单的做法是，将 [0, array.length) 保留在 [0, array.length)，然后在末尾 (array.length) 放 obj
+        //    或者，先在末尾放 obj (这一步 Arrays.copyOf 已经做了，新位置是 null)，然后将 [0, array.length) 整体向后移，
+        //    最后在 0 位置放 obj。
+        //    最符合“obj 在第一个”的逻辑是：
+        //    1. 创建长度为 array.length + 1 的数组
+        //    2. 将 obj 放在新数组索引 0
+        //    3. 将 array 的所有元素复制到新数组的 [1, array.length+1) 位置
+
+        // 重新实现逻辑：
+        // a. 创建长度为 array.length + 1 的数组
+        final Object[] resultArray = new Object[array.length + 1];
+        // b. 将 obj 放在第一个位置 (索引 0)
+        resultArray[0] = obj;
+        // c. 将原数组 array 的内容复制到 resultArray 的 [1, array.length+1) 位置
+        System.arraycopy(array, 0, resultArray, 1, array.length);
+
+        return resultArray;
     }
 
     protected abstract Future<Boolean> startAsync(final HConfig config, final Vertx vertxRef);

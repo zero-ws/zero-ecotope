@@ -11,6 +11,15 @@
     <artifactId>zero-boot-epoch-actor</artifactId>
     <name>✅️ - Zero::Boot::Epoch Actor</name>
     <dependencies>
+        <!--
+        FIX: Can not find io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider in the classpath,
+        fallback to system defaults. This may result in incorrect DNS resolutions on MacOS.
+        Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'
+        -->
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-resolver-dns-native-macos</artifactId>
+        </dependency>
         <dependency>
             <groupId>io.zerows</groupId>
             <artifactId>zero-epoch-adhoc</artifactId>

@@ -39,6 +39,7 @@ build/
 .idea/
 document/
 *.versionsBackup
+dependency-reduced-pom.xml
 script/code/*.jar
 git-push.sh
 git-upstream.sh
