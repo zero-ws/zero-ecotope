@@ -61,7 +61,7 @@
         <!-- ===================== 商业接口部分 ==================== -->
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-extension-commerce-api</artifactId>
+            <artifactId>zero-extension-api</artifactId>
         </dependency>
         <dependency>
             <groupId>io.zerows</groupId>
@@ -101,7 +101,7 @@
         </dependency>
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-extension-runtime-crud</artifactId>
+            <artifactId>zero-extension-crud</artifactId>
         </dependency>
         <dependency>
             <groupId>io.zerows</groupId>

@@ -77,7 +77,7 @@ public class FileActor {
         JsonObject criteria = Ut.valueJObject(condition.getJsonObject(VName.KEY_CRITERIA));
         final IxPanel panel = IxPanel.on(request);
         final IxMod mod = request.active();
-        return T.fetchFull(request).runJ(request.dataV())
+        return ViewHelper.fetchFull(request).runJ(request.dataV())
             /*
              * Data Processing
              */

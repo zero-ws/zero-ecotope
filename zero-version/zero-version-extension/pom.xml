@@ -14,10 +14,20 @@
     <packaging>pom</packaging>
     <dependencyManagement>
         <dependencies>
-            <!-- 核心底层 -->
+            <!--
+            核心底层，无数据表
+            - Skeleton 骨架：Zero 核心框架对接层
+            - Crud 增删改查：核心管理层（操作标准化）
+            - Api 接口规范：系统功能对外接口规范
+            -->
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-extension-skeleton</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-extension-crud</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <!-- ERP -->
@@ -29,7 +39,7 @@
             <!-- ===================== 商业接口部分 ==================== -->
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-extension-commerce-api</artifactId>
+                <artifactId>zero-extension-api</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>
@@ -72,11 +82,6 @@
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-extension-runtime-ambient</artifactId>
-                <version>${zero.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.zerows</groupId>
-                <artifactId>zero-extension-runtime-crud</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>

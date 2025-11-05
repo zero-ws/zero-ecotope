@@ -25,7 +25,7 @@ public class ViewActor {
     @Address(Addr.Get.COLUMN_FULL)
     public Future<JsonArray> getFull(final Envelop envelop) {
         final IxRequest request = IxRequest.create(ApiSpec.BODY_NONE).build(envelop);
-        return T.fetchFull(request).runJ(request.dataV());
+        return ViewHelper.fetchFull(request).runJ(request.dataV());
     }
 
     /*
@@ -54,26 +54,3 @@ public class ViewActor {
     }
 }
 
-class T {
-    /*
-     * Shared Method mask as static method for two usage
-     */
-    @SuppressWarnings("all")
-    static IxPanel fetchFull(final IxRequest request) {
-        return IxPanel.on(request)
-            .input(
-                Pre.apeak(false)::inJAsync,             /* Apeak */
-                Pre.head()::inJAsync                    /* Header */
-            )
-            /*
-             * {
-             *     "identifier": "Model identifier",
-             *     "view": "The view name, if not put DEFAULT",
-             *     "dynamic": "true if use dynamic",
-             *     "sigma": "The application uniform"
-             * }
-             */
-            .parallel(/* Active */Agonic.view(false)::runJAAsync)
-            .output(/* Columns connected */Co.endV(false)::ok);
-    }
-}

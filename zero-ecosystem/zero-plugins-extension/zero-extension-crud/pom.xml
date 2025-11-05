@@ -9,8 +9,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>zero-extension-runtime-crud</artifactId>
-    <name>🧬 - Zero::Extension::Runtime CRUD</name>
+    <artifactId>zero-extension-crud</artifactId>
+    <name>🧬 - Zero::Extension::CRUD</name>
     <dependencies>
         <!-- Kern -->
         <dependency>
