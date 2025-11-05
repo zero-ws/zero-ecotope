@@ -30,7 +30,6 @@
         <!-- 系统核心模块 -->
         <module>zero-extension-runtime-integration</module>       <!-- 集成管理 -->
         <module>zero-extension-runtime-workflow</module>          <!-- 工作流引擎 -->
-        <module>zero-extension-runtime-report</module>            <!-- 报表管理 -->
         <module>zero-extension-runtime-graphic</module>
 
 
@@ -41,6 +40,7 @@
 
         <!-- 业务相关模块 -->
         <module>zero-extension-commerce-rbac</module>
+        <module>zero-exmodule-report</module>
 
     </modules>
 </project>

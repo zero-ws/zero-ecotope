@@ -1,0 +1,13 @@
+package io.zerows.extension.module.report.plugins;
+
+import io.vertx.core.Future;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
+
+/**
+ * @author Yu : 2024-11-27
+ */
+public interface RQueryComponent {
+
+    Future<JsonArray> dataAsync(JsonArray dataSource, JsonObject parameters);
+}

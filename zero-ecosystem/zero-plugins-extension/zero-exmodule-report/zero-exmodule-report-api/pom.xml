@@ -5,16 +5,17 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.zerows</groupId>
-        <artifactId>zero-exmodule-modulat</artifactId>
+        <artifactId>zero-exmodule-report</artifactId>
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>zero-exmodule-modulat-provider</artifactId>
-    <name>Zero::ExModule💎 - Modulat::Provider</name>
+    <artifactId>zero-exmodule-report-api</artifactId>
+
+    <name>Zero::ExModule💎 - Report::Api</name>
     <dependencies>
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-exmodule-modulat-domain</artifactId>
+            <artifactId>zero-exmodule-report-provider</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
