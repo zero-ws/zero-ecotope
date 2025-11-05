@@ -83,6 +83,10 @@
             <groupId>io.zerows</groupId>
             <artifactId>zero-exmodule-tpl-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-exmodule-modulat-api</artifactId>
+        </dependency>
 
         <!-- ===================== 商业接口部分 ==================== -->
         <dependency>
@@ -91,10 +95,6 @@
         </dependency>
 
         <!-- ===================== 核心建模部分 ==================== -->
-        <dependency>
-            <groupId>io.zerows</groupId>
-            <artifactId>zero-extension-mbse-modulat</artifactId>
-        </dependency>
         <dependency>
             <groupId>io.zerows</groupId>
             <artifactId>zero-extension-mbse-action</artifactId>

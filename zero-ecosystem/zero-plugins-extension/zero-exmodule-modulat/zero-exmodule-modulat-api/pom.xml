@@ -5,16 +5,18 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.zerows</groupId>
-        <artifactId>zero-plugins-extension</artifactId>
+        <artifactId>zero-exmodule-modulat</artifactId>
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>zero-exmodule-tpl</artifactId>
-    <name>(POM) 📚️ - Zero::ExModule::TPL</name>
-    <modules>
-        <module>zero-exmodule-tpl-domain</module>
-        <module>zero-exmodule-tpl-provider</module>
-        <module>zero-exmodule-tpl-api</module>
-    </modules>
-    <packaging>pom</packaging>
+    <artifactId>zero-exmodule-modulat-api</artifactId>
+    <name>Zero::ExModule💎 - Modulat::Api</name>
+    <dependencies>
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-exmodule-modulat-provider</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+
 </project>

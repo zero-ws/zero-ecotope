@@ -24,6 +24,7 @@
         <module>zero-exmodule-finance</module>                             <!-- Finance -->
         <module>zero-exmodule-ui</module>                                  <!-- UI -->
         <module>zero-exmodule-tpl</module>                                 <!-- TPL -->
+        <module>zero-exmodule-modulat</module>                             <!-- Modulat -->
 
         <!-- 系统核心模块 -->
         <module>zero-extension-runtime-ambient</module>           <!-- 配置管理 -->
@@ -34,7 +35,6 @@
 
 
         <!-- 动态配置模块 -->
-        <module>zero-extension-mbse-modulat</module>              <!-- 模块化管理 -->
         <module>zero-extension-mbse-action</module>
         <module>zero-extension-mbse-basement</module>
 
