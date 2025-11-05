@@ -1,7 +1,0 @@
-{
-    "name": "流程任务",
-    "module": "ticket",
-    "identifier": "w.ticket",
-    "api": "ticket",
-    "type": "resource.document"
-}

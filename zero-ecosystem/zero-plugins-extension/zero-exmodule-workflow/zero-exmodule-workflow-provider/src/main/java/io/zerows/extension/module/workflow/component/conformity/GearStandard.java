@@ -1,0 +1,74 @@
+package io.zerows.extension.module.workflow.component.conformity;
+
+import io.vertx.core.Future;
+import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.constant.KName;
+import io.zerows.extension.module.workflow.common.em.PassWay;
+import io.zerows.extension.module.workflow.domain.tables.pojos.WTicket;
+import io.zerows.extension.module.workflow.domain.tables.pojos.WTodo;
+import io.zerows.extension.module.workflow.metadata.WTask;
+import io.zerows.program.Ux;
+import org.camunda.bpm.engine.task.Task;
+
+import java.util.List;
+import java.util.Objects;
+
+/**
+ * @author <a href="http://www.origin-x.cn">Lang</a>
+ */
+public class GearStandard extends AbstractGear {
+
+    public GearStandard() {
+        super(PassWay.Standard);
+    }
+
+    @Override
+    public Future<List<WTodo>> todoAsync(final JsonObject parameters, final WTask wTask, final WTicket ticket) {
+        final Task task = wTask.standard();
+        if (Objects.isNull(task)) {
+            return Ux.futureL();
+        }
+
+        // 0. Pre-Assignment: toUser -> acceptedBy
+        this.buildAssign(parameters);
+
+        // 1. Keep the same acceptedBy / toUser findRunning and do nothing
+        final Gain starter = Gain.starter(ticket);
+        return starter.buildAsync(parameters, task, null).compose(generated -> {
+            // 2. Select Method to set Serial
+            generated.setSerialFork(null);
+            this.buildSerial(generated, ticket, null);
+
+            return Ux.futureL(generated);
+        });
+    }
+
+    @Override
+    public Future<List<WTodo>> todoAsync(final JsonObject parameters, final WTask wTask, final WTicket ticket,
+                                         final WTodo todo) {
+        final Task task = wTask.standard();
+        if (Objects.isNull(task)) {
+            return Ux.futureL();
+        }
+
+        // 0. Pre-Assignment: toUser -> acceptedBy
+        this.buildAssign(parameters);
+
+        // 1. Generate new WTodo
+        final Gain generator = Gain.generator(ticket);
+        return generator.buildAsync(parameters, task, todo).compose(generated -> {
+            // 2. Select Method to set Serial
+            generated.setSerialFork(todo.getSerialFork());
+            this.buildSerial(generated, ticket, null);
+
+            return Ux.futureL(generated);
+        });
+    }
+
+    private void buildAssign(final JsonObject parameters) {
+        // toUser -> acceptedBy
+        final String toUser = parameters.getString(KName.Auditor.TO_USER);
+        parameters.put(KName.Auditor.ACCEPTED_BY, toUser);
+        parameters.remove(KName.Auditor.TO_USER);
+    }
+}

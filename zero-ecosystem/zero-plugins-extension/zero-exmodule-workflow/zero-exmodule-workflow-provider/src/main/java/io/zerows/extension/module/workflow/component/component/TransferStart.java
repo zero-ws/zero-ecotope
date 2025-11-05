@@ -1,0 +1,46 @@
+package io.zerows.extension.module.workflow.component.component;
+
+import io.vertx.core.Future;
+import io.vertx.core.json.JsonObject;
+import io.zerows.extension.module.workflow.component.central.AbstractMovement;
+import io.zerows.extension.module.workflow.component.modeling.Register;
+import io.zerows.extension.module.workflow.metadata.WRecord;
+import io.zerows.extension.module.workflow.metadata.WRequest;
+import io.zerows.extension.module.workflow.metadata.WTransition;
+import io.zerows.program.Ux;
+
+/**
+ * @author <a href="http://www.origin-x.cn">Lang</a>
+ */
+public class TransferStart extends AbstractMovement implements Transfer {
+    @Override
+    public Future<WRecord> moveAsync(final WRequest request, final WTransition wTransition) {
+        /*
+         * Record processing first, here the parameters are following:
+         *
+         * 1. Process Record
+         * 2. Todo Record
+         *
+         * Record support ADD / UPDATE operation combined
+         */
+        final JsonObject inputJ = request.request();
+        return this.inputAsync(inputJ, wTransition)
+            .compose(normalized -> {
+                JsonObject requestJ = wTransition.moveTicket(normalized);
+                requestJ = wTransition.moveRecord(requestJ);
+                return Ux.future(requestJ);
+            })
+
+
+            /* Entity / Extension Ticket Record Execution, ( Insert or Update ) */
+            .compose(normalized -> {
+                final Register register = Register.phantom(normalized, this.metadataIn());
+                return register.saveAsync(normalized, this.metadataIn());
+            })
+
+
+            /* Todo Execution ( Todo Insert ) */
+            .compose(processed -> this.insertAsync(processed, wTransition))
+            .compose(record -> this.afterAsync(record, wTransition));
+    }
+}

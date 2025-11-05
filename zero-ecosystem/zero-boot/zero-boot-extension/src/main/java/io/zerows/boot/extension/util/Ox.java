@@ -17,7 +17,7 @@ import io.zerows.extension.mbse.basement.osgi.spi.plugins.AspectPlugin;
 import io.zerows.extension.module.ambient.domain.tables.pojos.XActivity;
 import io.zerows.extension.module.ambient.servicespec.AppStub;
 import io.zerows.extension.module.ambient.servicespec.InitStub;
-import io.zerows.extension.runtime.workflow.domain.tables.pojos.WTodo;
+import io.zerows.extension.module.workflow.domain.tables.pojos.WTodo;
 import io.zerows.platform.enums.Environment;
 import io.zerows.platform.enums.typed.ChangeFlag;
 import io.zerows.platform.metadata.KIdentity;

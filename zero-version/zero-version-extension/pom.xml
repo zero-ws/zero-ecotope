@@ -97,7 +97,11 @@
                 <artifactId>zero-exmodule-rbac-api</artifactId>
                 <version>${zero.version}</version>
             </dependency>
-            
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-exmodule-workflow-api</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
             <!-- ===================== 核心建模部分 ==================== -->
             <dependency>
                 <groupId>io.zerows</groupId>
@@ -107,12 +111,6 @@
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-extension-mbse-basement</artifactId>
-                <version>${zero.version}</version>
-            </dependency>
-            <!-- ===================== 运行时部分 ==================== -->
-            <dependency>
-                <groupId>io.zerows</groupId>
-                <artifactId>zero-extension-runtime-workflow</artifactId>
                 <version>${zero.version}</version>
             </dependency>
         </dependencies>
