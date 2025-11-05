@@ -8,7 +8,7 @@ import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.module.finance.component.Maker;
 import io.zerows.extension.module.finance.domain.tables.pojos.FBillItem;
-import io.zerows.extension.module.finance.service.InBillStub;
+import io.zerows.extension.module.finance.servicespec.InBillStub;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import jakarta.inject.Inject;

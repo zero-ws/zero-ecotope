@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
-import io.zerows.extension.module.ambient.service.DatumStub;
+import io.zerows.extension.module.ambient.servicespec.DatumStub;
 import jakarta.inject.Inject;
 
 @Queue

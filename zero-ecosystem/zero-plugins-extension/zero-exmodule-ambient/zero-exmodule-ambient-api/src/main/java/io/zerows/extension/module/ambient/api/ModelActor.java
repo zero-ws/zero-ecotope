@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.metadata.XHeader;
-import io.zerows.extension.module.ambient.service.ModelStub;
+import io.zerows.extension.module.ambient.servicespec.ModelStub;
 import jakarta.inject.Inject;
 
 @Queue

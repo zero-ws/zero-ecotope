@@ -13,7 +13,7 @@ import io.zerows.extension.module.finance.component.Maker;
 import io.zerows.extension.module.finance.domain.tables.daos.FBookDao;
 import io.zerows.extension.module.finance.domain.tables.pojos.FBillItem;
 import io.zerows.extension.module.finance.domain.tables.pojos.FBook;
-import io.zerows.extension.module.finance.service.InVarietyStub;
+import io.zerows.extension.module.finance.servicespec.InVarietyStub;
 import io.zerows.program.Ux;
 import jakarta.inject.Inject;
 

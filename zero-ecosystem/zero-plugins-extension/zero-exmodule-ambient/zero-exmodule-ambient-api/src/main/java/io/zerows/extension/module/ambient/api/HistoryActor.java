@@ -9,7 +9,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.module.ambient.domain.tables.daos.XActivityDao;
 import io.zerows.extension.module.ambient.domain.tables.pojos.XActivity;
-import io.zerows.extension.module.ambient.service.ActivityStub;
+import io.zerows.extension.module.ambient.servicespec.ActivityStub;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import jakarta.inject.Inject;

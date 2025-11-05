@@ -7,7 +7,7 @@ import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Me;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.constant.KName;
-import io.zerows.extension.module.modulat.service.BagArgStub;
+import io.zerows.extension.module.modulat.servicespec.BagArgStub;
 import io.zerows.program.Ux;
 import jakarta.inject.Inject;
 

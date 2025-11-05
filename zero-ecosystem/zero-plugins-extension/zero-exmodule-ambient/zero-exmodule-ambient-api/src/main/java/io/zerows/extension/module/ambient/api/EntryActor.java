@@ -6,8 +6,8 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.metadata.XHeader;
-import io.zerows.extension.module.ambient.service.AppStub;
-import io.zerows.extension.module.ambient.service.MenuStub;
+import io.zerows.extension.module.ambient.servicespec.AppStub;
+import io.zerows.extension.module.ambient.servicespec.MenuStub;
 import jakarta.inject.Inject;
 
 /**

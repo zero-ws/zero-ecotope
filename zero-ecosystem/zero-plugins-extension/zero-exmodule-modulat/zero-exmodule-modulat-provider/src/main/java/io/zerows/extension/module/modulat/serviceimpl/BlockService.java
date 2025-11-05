@@ -1,0 +1,75 @@
+package io.zerows.extension.module.modulat.serviceimpl;
+
+import io.vertx.core.Future;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.store.jooq.DB;
+import io.zerows.extension.module.modulat.common.BkConstant;
+import io.zerows.extension.module.modulat.domain.tables.daos.BBlockDao;
+import io.zerows.extension.module.modulat.domain.tables.pojos.BBlock;
+import io.zerows.extension.module.modulat.servicespec.BlockStub;
+import io.zerows.program.Ux;
+import io.zerows.support.Ut;
+import io.zerows.support.fn.Fx;
+
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.ConcurrentMap;
+
+/**
+ * @author <a href="http://www.origin-x.cn">Lang</a>
+ */
+public class BlockService implements BlockStub {
+    @Override
+    public Future<ConcurrentMap<String, JsonArray>> fetchByApp(final String appId) {
+        final JsonObject condition = Ux.whereAnd(KName.APP_ID, appId);
+        return this.fetchBlock(condition)
+            // bagId = JsonArray
+            .compose(blockArray -> Ux.future(Ut.elementGroup(blockArray, KName.App.BAG_ID)));
+    }
+
+    @Override
+    public Future<JsonArray> fetchByBag(final String bagId) {
+        final JsonObject condition = Ux.whereAnd(KName.App.BAG_ID, bagId);
+        return this.fetchBlock(condition);
+    }
+
+    @Override
+    public Future<ConcurrentMap<String, JsonArray>> fetchByBag(final Set<String> bagIds) {
+        final JsonObject condition = Ux.whereAnd();
+        condition.put(KName.App.BAG_ID + ",i", Ut.toJArray(bagIds));
+        return this.fetchBlock(condition)
+            // bagId = JsonArray
+            .compose(blockArray -> Ux.future(Ut.elementGroup(blockArray, KName.App.BAG_ID)));
+    }
+
+    @Override
+    public Future<JsonObject> saveParameters(final List<BBlock> blocks, final JsonObject data) {
+        // Parameters Processing
+        blocks.forEach(block -> {
+            // Field Processing
+            final JsonObject uiConfig = Ut.toJObject(block.getUiConfig());
+            final JsonObject fields = uiConfig.getJsonObject(KName.FIELD, new JsonObject());
+            // New Ui Config
+            final JsonObject uiContent = new JsonObject();
+            fields.fieldNames().forEach(field -> uiContent.put(field, data.getValue(field)));
+            block.setUiContent(uiContent.encode());
+            // updatedAt / updatedBy
+            block.setUpdatedAt(LocalDateTime.now());
+            block.setUpdatedBy(data.getString(KName.UPDATED_BY));
+        });
+        return DB.on(BBlockDao.class).updateAsync(blocks).compose(nil -> Ux.future(data));
+    }
+
+    private Future<JsonArray> fetchBlock(final JsonObject condition) {
+        // Block Processing
+        return DB.on(BBlockDao.class).fetchJAsync(condition).compose(Fx.ofJArray(
+            KName.Flow.UI_STYLE,
+            KName.Flow.UI_CONFIG,
+            BkConstant.License.LIC_IDENTIFIER,
+            BkConstant.License.LIC_MENU
+        ));
+    }
+}

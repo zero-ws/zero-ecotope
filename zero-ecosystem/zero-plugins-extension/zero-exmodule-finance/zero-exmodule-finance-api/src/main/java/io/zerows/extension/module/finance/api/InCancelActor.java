@@ -7,7 +7,7 @@ import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Me;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.constant.KName;
-import io.zerows.extension.module.finance.service.InCancelStub;
+import io.zerows.extension.module.finance.servicespec.InCancelStub;
 import io.zerows.program.Ux;
 import jakarta.inject.Inject;
 

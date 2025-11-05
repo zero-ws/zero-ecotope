@@ -11,7 +11,7 @@ import io.zerows.epoch.metadata.XHeader;
 import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.module.ambient.domain.tables.daos.XLinkageDao;
-import io.zerows.extension.module.ambient.service.LinkStub;
+import io.zerows.extension.module.ambient.servicespec.LinkStub;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import jakarta.inject.Inject;

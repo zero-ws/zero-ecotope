@@ -11,7 +11,7 @@ import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.module.ambient.domain.tables.daos.XNoticeDao;
 import io.zerows.extension.module.ambient.domain.tables.pojos.XNotice;
-import io.zerows.extension.module.ambient.service.AppStub;
+import io.zerows.extension.module.ambient.servicespec.AppStub;
 import io.zerows.platform.metadata.KDS;
 import io.zerows.program.Ux;
 import jakarta.inject.Inject;

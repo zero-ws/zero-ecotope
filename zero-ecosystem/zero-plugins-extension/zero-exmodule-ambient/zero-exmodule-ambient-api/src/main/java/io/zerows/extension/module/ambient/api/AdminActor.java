@@ -6,7 +6,7 @@ import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.UArray;
-import io.zerows.extension.module.ambient.service.AppStub;
+import io.zerows.extension.module.ambient.servicespec.AppStub;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import jakarta.inject.Inject;

@@ -6,7 +6,7 @@ import io.zerows.component.log.LogOf;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.extension.module.erp.common.ErpMsg;
-import io.zerows.extension.module.erp.service.CompanyStub;
+import io.zerows.extension.module.erp.servicespec.CompanyStub;
 import jakarta.inject.Inject;
 
 import static io.zerows.extension.module.erp.common.Erp.LOG;

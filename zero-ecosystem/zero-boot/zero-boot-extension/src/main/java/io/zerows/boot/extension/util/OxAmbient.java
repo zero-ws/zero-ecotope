@@ -3,10 +3,10 @@ package io.zerows.boot.extension.util;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.VDBC;
-import io.zerows.extension.module.ambient.service.AppService;
-import io.zerows.extension.module.ambient.service.AppStub;
-import io.zerows.extension.module.ambient.service.InitService;
-import io.zerows.extension.module.ambient.service.InitStub;
+import io.zerows.extension.module.ambient.serviceimpl.AppService;
+import io.zerows.extension.module.ambient.serviceimpl.InitService;
+import io.zerows.extension.module.ambient.servicespec.AppStub;
+import io.zerows.extension.module.ambient.servicespec.InitStub;
 import io.zerows.platform.enums.Environment;
 import io.zerows.support.Ut;
 

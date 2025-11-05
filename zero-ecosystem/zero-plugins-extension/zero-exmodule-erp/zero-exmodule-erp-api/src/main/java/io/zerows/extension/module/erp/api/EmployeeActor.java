@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
-import io.zerows.extension.module.erp.service.EmployeeStub;
+import io.zerows.extension.module.erp.servicespec.EmployeeStub;
 import jakarta.inject.Inject;
 
 @Queue

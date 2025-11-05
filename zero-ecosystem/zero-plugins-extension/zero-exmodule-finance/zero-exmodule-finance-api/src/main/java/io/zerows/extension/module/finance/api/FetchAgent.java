@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.EndPoint;
 import io.zerows.epoch.constant.KName;
-import io.zerows.extension.module.finance.service.FetchStub;
+import io.zerows.extension.module.finance.servicespec.FetchStub;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;

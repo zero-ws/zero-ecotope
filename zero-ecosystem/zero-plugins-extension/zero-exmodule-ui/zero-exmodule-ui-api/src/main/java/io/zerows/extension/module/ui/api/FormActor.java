@@ -6,9 +6,9 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.LogOf;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
-import io.zerows.extension.module.ui.service.FieldStub;
-import io.zerows.extension.module.ui.service.FormStub;
-import io.zerows.extension.module.ui.service.OptionStub;
+import io.zerows.extension.module.ui.servicespec.FieldStub;
+import io.zerows.extension.module.ui.servicespec.FormStub;
+import io.zerows.extension.module.ui.servicespec.OptionStub;
 import io.zerows.program.Ux;
 import jakarta.inject.Inject;
 

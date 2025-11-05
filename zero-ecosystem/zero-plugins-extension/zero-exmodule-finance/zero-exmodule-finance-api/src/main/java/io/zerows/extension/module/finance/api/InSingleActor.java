@@ -9,7 +9,7 @@ import io.zerows.extension.module.finance.common.Fm;
 import io.zerows.extension.module.finance.component.Maker;
 import io.zerows.extension.module.finance.domain.tables.pojos.FBillItem;
 import io.zerows.extension.module.finance.domain.tables.pojos.FPreAuthorize;
-import io.zerows.extension.module.finance.service.InBillStub;
+import io.zerows.extension.module.finance.servicespec.InBillStub;
 import io.zerows.program.Ux;
 import jakarta.inject.Inject;
 

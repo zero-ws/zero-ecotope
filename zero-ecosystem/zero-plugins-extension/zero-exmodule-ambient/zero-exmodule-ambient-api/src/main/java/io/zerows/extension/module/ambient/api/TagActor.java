@@ -12,7 +12,7 @@ import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.module.ambient.domain.tables.daos.RTagObjectDao;
 import io.zerows.extension.module.ambient.domain.tables.daos.XTagDao;
 import io.zerows.extension.module.ambient.domain.tables.pojos.RTagObject;
-import io.zerows.extension.module.ambient.service.TagStub;
+import io.zerows.extension.module.ambient.servicespec.TagStub;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import jakarta.inject.Inject;

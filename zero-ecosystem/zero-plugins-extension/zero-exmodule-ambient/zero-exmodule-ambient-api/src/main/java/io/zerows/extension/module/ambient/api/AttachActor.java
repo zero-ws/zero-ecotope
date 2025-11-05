@@ -9,7 +9,7 @@ import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.XHeader;
 import io.zerows.extension.module.ambient.common.AtMsg;
-import io.zerows.extension.module.ambient.service.DocRStub;
+import io.zerows.extension.module.ambient.servicespec.DocRStub;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import jakarta.inject.Inject;

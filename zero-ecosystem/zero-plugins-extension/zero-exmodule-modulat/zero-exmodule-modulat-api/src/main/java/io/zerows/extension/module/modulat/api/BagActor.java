@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
-import io.zerows.extension.module.modulat.service.BagStub;
+import io.zerows.extension.module.modulat.servicespec.BagStub;
 import io.zerows.program.Ux;
 import jakarta.inject.Inject;
 
