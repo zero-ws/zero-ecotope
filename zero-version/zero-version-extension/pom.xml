@@ -55,6 +55,11 @@
                 <artifactId>zero-exmodule-finance-api</artifactId>
                 <version>${zero.version}</version>
             </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-exmodule-ui-api</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
             <!-- ===================== 商业接口部分 ==================== -->
             <dependency>
                 <groupId>io.zerows</groupId>
@@ -65,11 +70,6 @@
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-extension-mbse-modulat</artifactId>
-                <version>${zero.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.zerows</groupId>
-                <artifactId>zero-extension-mbse-ui</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>

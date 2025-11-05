@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>zero-exmodule-lbs-provider</artifactId>
-    <name>Zero::ExModule💎 - LBS::Api</name>
+    <name>Zero::ExModule💎 - LBS::Provider</name>
     <dependencies>
         <dependency>
             <groupId>io.zerows</groupId>

@@ -6,20 +6,22 @@ import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.UData;
 import io.zerows.epoch.store.jooq.DB;
-import io.zerows.extension.mbse.ui.domain.tables.daos.UiVisitorDao;
-import io.zerows.extension.mbse.ui.domain.tables.pojos.UiVisitor;
-import io.zerows.extension.mbse.ui.osgi.spi.ui.UiHunter;
+import io.zerows.extension.module.ui.boot.Ui;
+import io.zerows.extension.module.ui.domain.tables.daos.UiVisitorDao;
+import io.zerows.extension.module.ui.domain.tables.pojos.UiVisitor;
+import io.zerows.extension.module.ui.spi.UiHunter;
 import io.zerows.program.Ux;
 import io.zerows.spi.modeler.Identifier;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
 
-import static io.zerows.extension.mbse.ui.util.Ui.LOG;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
 public class UiHunterControl implements UiHunter {
     private static final LogOf LOGGER = LogOf.get(UiHunterControl.class);
     private transient final Identifier indent = new IndentKey();
@@ -60,7 +62,7 @@ public class UiHunterControl implements UiHunter {
             criteria.put(KName.App.CONTEXT, visitor.getPath());
             criteria.put(KName.Ui.PAGE, visitor.getPage());
 
-            LOG.Ui.info(LOGGER, "Dynamic Control,  condition = `{0}`", criteria.encode());
+            Ui.LOG.Ui.info(LOGGER, "Dynamic Control,  condition = `{0}`", criteria.encode());
             return DB.on(UiVisitorDao.class).<UiVisitor>fetchOneAsync(criteria);
         }).compose(searched -> {
             if (Objects.isNull(searched) || Ut.isNil(searched.getControlId())) {

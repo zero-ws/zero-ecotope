@@ -1,6 +1,6 @@
 package io.zerows.boot.extension.component;
 
-import io.zerows.extension.mbse.ui.eon.em.ControlType;
+import io.zerows.extension.module.ui.common.em.ControlType;
 
 import java.util.Objects;
 

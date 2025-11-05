@@ -1,0 +1,34 @@
+package io.zerows.extension.module.ui.service;
+
+import io.vertx.core.Future;
+import io.vertx.core.json.JsonObject;
+import io.zerows.component.log.LogOf;
+import io.zerows.epoch.constant.KName;
+import io.zerows.extension.skeleton.spi.UiForm;
+import io.zerows.program.Ux;
+import io.zerows.support.Ut;
+
+import static io.zerows.extension.module.ui.boot.Ui.LOG;
+
+/**
+ * @author <a href="http://www.origin-x.cn">Lang</a>
+ */
+public class UiFormFetcher implements UiForm {
+    private final static LogOf LOGGER = LogOf.get(UiFormFetcher.class);
+
+    @Override
+    public Future<JsonObject> fetchUi(final JsonObject params) {
+        final Boolean dynamic = params.getBoolean(KName.DYNAMIC, Boolean.FALSE);
+        final String code = params.getString(KName.CODE);
+        LOG.Ui.info(LOGGER, "( Form ) parameters: {0}", params.encode());
+        if (dynamic) {
+            final FormStub formStub = Ut.singleton(FormService.class);
+            Ut.field(formStub, "fieldStub", Ut.singleton(FieldService.class));
+            final String sigma = params.getString(KName.SIGMA);
+            return formStub.fetchByCode(code, sigma);
+        } else {
+            final JsonObject formData = Ut.ioJObject(code);
+            return Ux.future(formData);
+        }
+    }
+}

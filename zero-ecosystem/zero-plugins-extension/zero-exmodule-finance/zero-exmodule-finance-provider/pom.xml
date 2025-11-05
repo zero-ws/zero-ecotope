@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>zero-exmodule-finance-provider</artifactId>
-    <name>Zero::ExModule💎 - Finance::Api</name>
+    <name>Zero::ExModule💎 - Finance::Provider</name>
     <dependencies>
         <dependency>
             <groupId>io.zerows</groupId>

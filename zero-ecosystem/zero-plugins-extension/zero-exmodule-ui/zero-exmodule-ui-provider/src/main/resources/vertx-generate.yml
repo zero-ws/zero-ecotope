@@ -1,0 +1,7 @@
+database:
+  url: "jdbc:mysql://ox.engine.cn:3306/ZDB"
+  instance: "ZDB"
+  username: ${R2MO_DB_MYSQL5_USER}
+  password: ${R2MO_DB_MYSQL5_PASSWORD}
+source:
+  includes: (^(UI_|V_).*)
