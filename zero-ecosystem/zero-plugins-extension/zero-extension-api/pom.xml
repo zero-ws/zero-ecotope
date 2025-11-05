@@ -32,12 +32,12 @@
         </dependency>
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-extension-commerce-rbac</artifactId>
+            <artifactId>zero-exmodule-ambient-api</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-extension-runtime-ambient</artifactId>
+            <artifactId>zero-extension-commerce-rbac</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

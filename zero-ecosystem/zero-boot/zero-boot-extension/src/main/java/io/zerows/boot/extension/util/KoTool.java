@@ -7,8 +7,8 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.mbse.basement.atom.Model;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
-import io.zerows.extension.runtime.ambient.domain.tables.daos.XLogDao;
-import io.zerows.extension.runtime.ambient.domain.tables.pojos.XLog;
+import io.zerows.extension.module.ambient.domain.tables.daos.XLogDao;
+import io.zerows.extension.module.ambient.domain.tables.pojos.XLog;
 
 import java.time.LocalDateTime;
 import java.util.List;

@@ -72,6 +72,11 @@
                 <artifactId>zero-exmodule-modulat-api</artifactId>
                 <version>${zero.version}</version>
             </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-exmodule-ambient-api</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
             <!-- ===================== 商业接口部分 ==================== -->
             <dependency>
                 <groupId>io.zerows</groupId>
@@ -90,11 +95,6 @@
                 <version>${zero.version}</version>
             </dependency>
             <!-- ===================== 运行时部分 ==================== -->
-            <dependency>
-                <groupId>io.zerows</groupId>
-                <artifactId>zero-extension-runtime-ambient</artifactId>
-                <version>${zero.version}</version>
-            </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-extension-runtime-integration</artifactId>

@@ -1,0 +1,74 @@
+package io.zerows.extension.module.ambient.component;
+
+import io.vertx.core.Future;
+import io.vertx.core.MultiMap;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
+import io.zerows.cosmic.plugins.cache.Rapid;
+import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.constant.KWeb;
+import io.zerows.epoch.store.jooq.ADB;
+import io.zerows.epoch.store.jooq.DB;
+import io.zerows.platform.metadata.KDictConfig;
+import io.zerows.program.Ux;
+import io.zerows.support.Ut;
+
+import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+
+/**
+ * @author <a href="http://www.origin-x.cn">Lang</a>
+ */
+public class DpmDao implements Dpm {
+    @Override
+    public Future<ConcurrentMap<String, JsonArray>> fetchAsync(final KDictConfig.Source source, final MultiMap params) {
+        final ADB jooq = this.dao(source);
+        if (Objects.isNull(jooq) || Ut.isNil(source.getKey())) {
+            return Ux.future(new ConcurrentHashMap<>());
+        } else {
+            return Rapid.<String, JsonArray>object(KWeb.CACHE.DIRECTORY, KWeb.ARGS.V_DATA_EXPIRED)
+                .cached(source.getKey(), () -> jooq.fetchJAsync(this.condition(params)))
+                .compose(result -> {
+                    final ConcurrentMap<String, JsonArray> uniqueMap = new ConcurrentHashMap<>();
+                    uniqueMap.put(source.getKey(), result);
+                    return Ux.future(uniqueMap);
+                });
+        }
+    }
+
+    @Override
+    public ConcurrentMap<String, JsonArray> fetch(final KDictConfig.Source source, final MultiMap params) {
+        final ADB jooq = this.dao(source);
+        if (Objects.isNull(jooq) || Ut.isNil(source.getKey())) {
+            return new ConcurrentHashMap<>();
+        }
+        final JsonArray result = jooq.fetchJ(this.condition(params));
+        final ConcurrentMap<String, JsonArray> uniqueMap = new ConcurrentHashMap<>();
+        uniqueMap.put(source.getKey(), result);
+        return uniqueMap;
+    }
+
+    private JsonObject condition(final MultiMap params) {
+        final JsonObject condition = new JsonObject();
+        condition.put(KName.SIGMA, params.get(KName.SIGMA));
+        return condition;
+    }
+
+    private ADB dao(final KDictConfig.Source source) {
+        final ConcurrentMap<String, JsonArray> uniqueMap = new ConcurrentHashMap<>();
+        final Class<?> daoCls = source.getComponent();
+        if (Objects.isNull(daoCls) || Ut.isNil(source.getKey())) {
+            return null;
+        } else {
+            final JsonObject config = source.getPluginConfig();
+            final ADB jooq;
+            if (config.containsKey("pojo")) {
+                jooq = DB.on(daoCls, config.getString("pojo"));
+            } else {
+                jooq = DB.on(daoCls);
+            }
+            return jooq;
+        }
+    }
+}

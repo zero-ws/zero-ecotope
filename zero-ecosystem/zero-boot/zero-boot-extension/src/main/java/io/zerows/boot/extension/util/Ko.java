@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
-import io.zerows.extension.runtime.ambient.domain.tables.pojos.XLog;
+import io.zerows.extension.module.ambient.domain.tables.pojos.XLog;
 
 import java.util.List;
 

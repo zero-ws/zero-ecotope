@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.boot.extension.constant.MenuType;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.DB;
-import io.zerows.extension.runtime.ambient.domain.tables.daos.XMenuDao;
+import io.zerows.extension.module.ambient.domain.tables.daos.XMenuDao;
 import io.zerows.platform.constant.VClassPath;
 import io.zerows.platform.constant.VValue;
 import io.zerows.program.Ux;

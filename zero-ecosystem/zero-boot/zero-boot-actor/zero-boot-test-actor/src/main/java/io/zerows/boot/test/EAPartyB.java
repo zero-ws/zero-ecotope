@@ -3,7 +3,7 @@ package io.zerows.boot.test;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.extension.runtime.ambient.osgi.spi.component.ExAmbientDictionary;
+import io.zerows.extension.module.ambient.spi.DictionaryAmbient;
 import io.zerows.platform.metadata.KDictConfig;
 import io.zerows.platform.metadata.KIntegration;
 import io.zerows.platform.metadata.KMap;
@@ -22,7 +22,7 @@ class EAPartyB {
         final JsonObject useJ = Ut.ioJObject(epsilon);
         return new KDictConfig(dictA)
             .bind(Ux.dictUse(useJ))
-            .bind(ExAmbientDictionary.class);
+            .bind(DictionaryAmbient.class);
     }
 
     static KMap partyMap(final KIntegration integration) {

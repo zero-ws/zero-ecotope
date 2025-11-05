@@ -4,7 +4,7 @@ import io.r2mo.typed.common.Kv;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.extension.runtime.ambient.osgi.spi.component.ExAttributeComponent;
+import io.zerows.extension.module.ambient.spi.ExAttributeComponent;
 import io.zerows.specification.modeling.HRecord;
 import io.zerows.specification.modeling.property.OComponent;
 import io.zerows.specification.modeling.property.OExpression;

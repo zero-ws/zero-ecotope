@@ -6,8 +6,8 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.epoch.store.jooq.DB;
-import io.zerows.extension.runtime.ambient.domain.tables.daos.XMenuDao;
-import io.zerows.extension.runtime.ambient.domain.tables.pojos.XMenu;
+import io.zerows.extension.module.ambient.domain.tables.daos.XMenuDao;
+import io.zerows.extension.module.ambient.domain.tables.pojos.XMenu;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 

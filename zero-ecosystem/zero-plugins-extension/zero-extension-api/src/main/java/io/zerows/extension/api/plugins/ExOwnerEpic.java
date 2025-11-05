@@ -6,8 +6,8 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.module.erp.domain.tables.daos.ECompanyDao;
-import io.zerows.extension.runtime.ambient.domain.tables.daos.XTenantDao;
-import io.zerows.extension.runtime.ambient.domain.tables.pojos.XTenant;
+import io.zerows.extension.module.ambient.domain.tables.daos.XTenantDao;
+import io.zerows.extension.module.ambient.domain.tables.pojos.XTenant;
 import io.zerows.extension.skeleton.spi.ExOwner;
 import io.zerows.program.Ux;
 

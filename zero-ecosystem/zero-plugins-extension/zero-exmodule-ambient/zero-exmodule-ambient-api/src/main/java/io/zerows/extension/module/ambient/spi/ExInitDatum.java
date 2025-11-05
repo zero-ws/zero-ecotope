@@ -1,0 +1,88 @@
+package io.zerows.extension.module.ambient.spi;
+
+import io.vertx.core.Future;
+import io.vertx.core.json.JsonObject;
+import io.zerows.component.log.LogOf;
+import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.metadata.UObject;
+import io.zerows.extension.module.ambient.common.AtMsg;
+import io.zerows.extension.module.ambient.boot.AtConfig;
+import io.zerows.extension.module.ambient.boot.AtPin;
+import io.zerows.extension.skeleton.spi.ExInit;
+import io.zerows.plugins.excel.ExcelActor;
+import io.zerows.plugins.excel.ExcelClient;
+import io.zerows.program.Ux;
+import io.zerows.support.Ut;
+import io.zerows.support.fn.Fx;
+
+import java.util.List;
+import java.util.Objects;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+import static io.zerows.extension.module.ambient.boot.At.LOG;
+
+public class ExInitDatum implements ExInit {
+
+    private static final LogOf LOGGER = LogOf.get(ExInitDatum.class);
+    private static final AtConfig CONFIG = AtPin.getConfig();
+
+    @Override
+    public Function<JsonObject, Future<JsonObject>> apply() {
+        return appJson -> {
+            LOG.App.info(LOGGER, AtMsg.INIT_DATUM, appJson.encode());
+            return this.doLoading(appJson)
+                /* Extension */
+                .compose(this::doExtension);
+        };
+    }
+
+    public Future<JsonObject> doExtension(final JsonObject appJson) {
+        final ExInit loader = AtPin.getLoader();
+        if (Objects.isNull(loader)) {
+            return Ux.future(appJson);
+        } else {
+            return loader.apply().apply(appJson);
+        }
+    }
+
+    private Future<JsonObject> doLoading(final JsonObject appJson) {
+        /* Datum Loading */
+        final String dataFolder = CONFIG.getDataFolder();
+        final List<String> files = Ut.ioFiles(dataFolder);
+        /* List<Future> */
+        final List<Future<JsonObject>> futures = files.stream()
+            .filter(Ut::isNotNil)
+            /* Remove temp file of Excel */
+            .filter(file -> !file.startsWith("~$"))
+            .map(file -> dataFolder + file)
+            .map(this::doLoading)
+            .collect(Collectors.toList());
+        return Fx.combineA(futures)
+            /* Stored each result */
+            .compose(results -> UObject.create().append(KName.RESULT, results)
+                .toFuture())
+            .compose(results -> Ux.future(this.result(results, appJson)));
+    }
+
+    private Future<JsonObject> doLoading(final String filename) {
+        return Ux.nativeWorker(filename, pre -> {
+            /* ExcelClient */
+            final ExcelClient client = ExcelActor.ofClient();
+            client.importAsync(filename, result -> {
+                LOG.App.info(LOGGER, AtMsg.INIT_DATUM_EACH, filename);
+                if (result.succeeded()) {
+                    pre.complete(Ut.endBool(Boolean.TRUE, filename));
+                } else {
+                    pre.fail(result.cause());
+                }
+            });
+        });
+    }
+
+    @Override
+    public JsonObject result(final JsonObject input, final JsonObject appJson) {
+        /* Extract Failure Filename, No thing to do or */
+        return appJson;
+    }
+}
