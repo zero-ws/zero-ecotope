@@ -4,14 +4,9 @@ import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.extension.crud.eon.Pooled;
-import io.zerows.extension.crud.eon.em.QrType;
-import io.zerows.extension.crud.uca.desk.IxMod;
-import io.zerows.extension.crud.uca.input.audit.PreAudit;
-import io.zerows.extension.crud.uca.input.file.PreFile;
-import io.zerows.extension.crud.uca.input.id.PreId;
-import io.zerows.extension.crud.uca.input.qr.PreQr;
-import io.zerows.extension.crud.uca.input.view.PreView;
+import io.zerows.extension.crud.common.Pooled;
+import io.zerows.extension.crud.common.em.QrType;
+import io.zerows.extension.crud.uca.IxMod;
 import io.zerows.platform.exception._60050Exception501NotSupport;
 import io.zerows.plugins.excel.ExcelClient;
 
@@ -29,16 +24,16 @@ public interface Pre {
      * 5) Excel file calculation
      */
     static Pre codex() {
-        return Pooled.CCT_PRE.pick(CodexPre::new, CodexPre.class.getName());
+        return Pooled.CCT_PRE.pick(PreCodex::new, PreCodex.class.getName());
         // Pooled.CC_PRE.pick(CodexPre::new, CodexPre.class.getName());
     }
 
     static Pre head() {
-        return Pooled.CCT_PRE.pick(HeadPre::new, HeadPre.class.getName());
+        return Pooled.CCT_PRE.pick(PreHead::new, PreHead.class.getName());
     }
 
     static Pre uri() {
-        return Pooled.CCT_PRE.pick(UriPre::new, UriPre.class.getName());
+        return Pooled.CCT_PRE.pick(PreUri::new, PreUri.class.getName());
     }
 
     static Pre key(final boolean isNew) {
@@ -50,7 +45,7 @@ public interface Pre {
     }
 
     static Pre excel(final ExcelClient client) {
-        return Pooled.CCT_PRE.pick(() -> new ExcelPre(client), ExcelPre.class.getName() + client.hashCode());
+        return Pooled.CCT_PRE.pick(() -> new PreExcel(client), PreExcel.class.getName() + client.hashCode());
     }
 
 
@@ -62,7 +57,7 @@ public interface Pre {
      * 4) Initial Data
      */
     static Pre user() {
-        return Pooled.CCT_PRE.pick(UserPre::new, UserPre.class.getName());
+        return Pooled.CCT_PRE.pick(PreUser::new, PreUser.class.getName());
     }
 
     static Pre audit(final boolean created) {
@@ -79,7 +74,7 @@ public interface Pre {
      * 2) column calculation
      */
     static Pre serial() {
-        return Pooled.CCT_PRE.pick(SerialPre::new, SerialPre.class.getName());
+        return Pooled.CCT_PRE.pick(PreSerial::new, PreSerial.class.getName());
     }
 
     static Pre apeak(final boolean isMy) {

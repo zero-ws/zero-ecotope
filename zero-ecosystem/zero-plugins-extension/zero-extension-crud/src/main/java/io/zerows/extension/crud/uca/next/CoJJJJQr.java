@@ -1,0 +1,44 @@
+package io.zerows.extension.crud.uca.next;
+
+import io.vertx.core.Future;
+import io.vertx.core.json.JsonObject;
+import io.zerows.component.destine.Conflate;
+import io.zerows.extension.crud.common.Pooled;
+import io.zerows.extension.crud.uca.IxMod;
+import io.zerows.program.Ux;
+
+/**
+ * @author <a href="http://www.origin-x.cn">Lang</a>
+ */
+@SuppressWarnings("all")
+class CoJJJJQr implements Co<JsonObject, JsonObject, JsonObject, JsonObject> {
+    private transient final IxMod in;
+    private transient final Co<JsonObject, JsonObject, JsonObject, JsonObject> record;
+
+    CoJJJJQr(final IxMod in) {
+        this.in = in;
+        this.record = Pooled.CCT_CO.pick(() -> new CoJJJJData(in), CoJJJJData.class.getName() + in.cached());
+        // FnZero.po?lThread(Pooled.CO_MAP, () -> new NtJData(in), NtJData.class.getName() + in.keyPool());
+    }
+
+    @Override
+    public Future<JsonObject> next(final JsonObject input, final JsonObject active) {
+        if (this.in.canJoin()) {
+            final Conflate<JsonObject, JsonObject> conflate =
+                Conflate.ofQr(this.in.connect(), false);
+            final JsonObject params = conflate.treat(active, this.in.connectId());
+            return Ux.future(params);
+        } else {
+            return Ux.future(active.copy());
+        }
+    }
+
+    @Override
+    public Future<JsonObject> ok(JsonObject active, JsonObject standBy) {
+        if (this.in.canJoin()) {
+            return this.record.ok(active, standBy);
+        } else {
+            return Ux.future(active.copy());
+        }
+    }
+}

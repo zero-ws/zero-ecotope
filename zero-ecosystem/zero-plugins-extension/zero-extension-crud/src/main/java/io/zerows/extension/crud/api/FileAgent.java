@@ -9,7 +9,7 @@ import io.zerows.epoch.annotations.EndPoint;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.metadata.KView;
-import io.zerows.extension.crud.eon.IxMsg;
+import io.zerows.extension.crud.common.IxMsg;
 import io.zerows.program.Ux;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.POST;
@@ -22,7 +22,7 @@ import jakarta.ws.rs.extension.BodyParam;
 import jakarta.ws.rs.extension.PointParam;
 import jakarta.ws.rs.extension.StreamParam;
 
-import static io.zerows.extension.crud.util.Ix.LOG;
+import static io.zerows.extension.crud.common.Ix.LOG;
 
 /*
  * Export / Import file here for processing

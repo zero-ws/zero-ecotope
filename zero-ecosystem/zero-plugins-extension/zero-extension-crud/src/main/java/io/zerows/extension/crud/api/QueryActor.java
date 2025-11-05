@@ -6,11 +6,11 @@ import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.web.Envelop;
-import io.zerows.extension.crud.eon.em.ApiSpec;
-import io.zerows.extension.crud.uca.desk.IxPanel;
-import io.zerows.extension.crud.uca.desk.IxRequest;
+import io.zerows.extension.crud.common.em.ApiSpec;
+import io.zerows.extension.crud.uca.Agonic;
+import io.zerows.extension.crud.uca.IxPanel;
+import io.zerows.extension.crud.uca.IxRequest;
 import io.zerows.extension.crud.uca.input.Pre;
-import io.zerows.extension.crud.uca.op.Agonic;
 import io.zerows.program.Ux;
 
 /*

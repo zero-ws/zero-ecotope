@@ -1,10 +1,10 @@
 package io.zerows.extension.crud.api;
 
-import io.zerows.extension.crud.uca.desk.IxPanel;
-import io.zerows.extension.crud.uca.desk.IxRequest;
+import io.zerows.extension.crud.uca.Agonic;
+import io.zerows.extension.crud.uca.IxPanel;
+import io.zerows.extension.crud.uca.IxRequest;
 import io.zerows.extension.crud.uca.input.Pre;
 import io.zerows.extension.crud.uca.next.Co;
-import io.zerows.extension.crud.uca.op.Agonic;
 
 /**
  * @author lang : 2025-11-05
