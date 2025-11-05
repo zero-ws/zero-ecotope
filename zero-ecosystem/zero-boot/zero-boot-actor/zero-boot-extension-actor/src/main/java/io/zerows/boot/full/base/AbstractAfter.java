@@ -1,6 +1,6 @@
 package io.zerows.boot.full.base;
 
-import io.zerows.extension.mbse.basement.osgi.spi.plugins.AfterPlugin;
+import io.zerows.extension.module.mbsecore.api.AfterPlugin;
 
 /*
  * DataAtom模型定义

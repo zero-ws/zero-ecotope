@@ -4,8 +4,8 @@ import io.r2mo.typed.exception.WebException;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.LogOf;
-import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
-import io.zerows.extension.mbse.basement.util.Ao;
+import io.zerows.extension.module.mbsecore.boot.Ao;
+import io.zerows.extension.module.mbsecore.metadata.builtin.DataAtom;
 import io.zerows.specification.modeling.HRecord;
 import io.zerows.support.Ut;
 

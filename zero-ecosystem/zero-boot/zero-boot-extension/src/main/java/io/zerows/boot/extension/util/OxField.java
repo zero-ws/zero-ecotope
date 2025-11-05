@@ -4,7 +4,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.boot.extension.constant.OxConstant;
 import io.zerows.epoch.constant.KName;
-import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
+import io.zerows.extension.module.mbsecore.metadata.builtin.DataAtom;
 import io.zerows.platform.enums.modeling.EmAttribute;
 import io.zerows.specification.modeling.HRule;
 import io.zerows.support.Ut;

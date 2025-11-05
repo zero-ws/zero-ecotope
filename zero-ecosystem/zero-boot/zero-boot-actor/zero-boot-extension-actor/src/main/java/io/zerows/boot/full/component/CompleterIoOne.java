@@ -4,8 +4,8 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.boot.extension.util.Ko;
 import io.zerows.boot.full.plugins.SwitcherAgile;
-import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
-import io.zerows.extension.mbse.basement.osgi.spi.robin.Switcher;
+import io.zerows.extension.module.mbsecore.metadata.builtin.DataAtom;
+import io.zerows.extension.module.mbsecore.plugins.Switcher;
 import io.zerows.program.Ux;
 import io.zerows.specification.modeling.operation.HDao;
 

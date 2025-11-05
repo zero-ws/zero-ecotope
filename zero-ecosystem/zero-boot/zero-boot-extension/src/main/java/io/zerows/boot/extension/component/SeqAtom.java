@@ -1,7 +1,7 @@
 package io.zerows.boot.extension.component;
 
 import io.vertx.core.Future;
-import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
+import io.zerows.extension.module.mbsecore.metadata.builtin.DataAtom;
 
 import java.util.Objects;
 import java.util.Queue;

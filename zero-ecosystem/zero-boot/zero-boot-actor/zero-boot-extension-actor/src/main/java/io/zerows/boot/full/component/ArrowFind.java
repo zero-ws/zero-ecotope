@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import static io.zerows.extension.mbse.basement.util.Ao.LOG;
+import static io.zerows.extension.module.mbsecore.boot.Ao.LOG;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>

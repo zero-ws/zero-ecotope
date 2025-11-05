@@ -107,10 +107,9 @@
                 <artifactId>zero-exmodule-mbseapi-api</artifactId>
                 <version>${zero.version}</version>
             </dependency>
-            <!-- ===================== 核心建模部分 ==================== -->
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-extension-mbse-basement</artifactId>
+                <artifactId>zero-exmodule-mbsecore-api</artifactId>
                 <version>${zero.version}</version>
             </dependency>
         </dependencies>

@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.program.Ux;
 
-import static io.zerows.extension.mbse.basement.util.Ao.LOG;
+import static io.zerows.extension.module.mbsecore.boot.Ao.LOG;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>

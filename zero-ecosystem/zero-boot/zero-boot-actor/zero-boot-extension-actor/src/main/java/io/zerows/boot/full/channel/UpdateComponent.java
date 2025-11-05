@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.boot.full.base.AbstractHOne;
 import io.zerows.epoch.metadata.Apt;
-import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
+import io.zerows.extension.module.mbsecore.metadata.builtin.DataAtom;
 import io.zerows.mbse.metadata.ActIn;
 
 

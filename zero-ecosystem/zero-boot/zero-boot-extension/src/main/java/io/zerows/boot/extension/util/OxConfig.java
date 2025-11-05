@@ -4,7 +4,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.boot.extension.component.ArmsStore;
 import io.zerows.boot.extension.constant.TypeLog;
 import io.zerows.epoch.constant.VDBC;
-import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
+import io.zerows.extension.module.mbsecore.metadata.builtin.DataAtom;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.metadata.KIdentity;
 import io.zerows.support.Ut;

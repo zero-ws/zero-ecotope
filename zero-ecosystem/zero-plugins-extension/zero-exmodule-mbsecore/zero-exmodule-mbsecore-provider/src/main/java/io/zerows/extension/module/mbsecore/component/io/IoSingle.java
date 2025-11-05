@@ -1,0 +1,34 @@
+package io.zerows.extension.module.mbsecore.component.io;
+
+import io.r2mo.function.Fn;
+import io.zerows.platform.constant.VValue;
+import io.zerows.extension.module.exception._80534Exception417EventTypeConflict;
+import io.zerows.extension.module.mbsecore.component.plugin.IoHub;
+import io.zerows.specification.modeling.HRecord;
+
+public class IoSingle extends AbstractIo {
+
+    private void ensure(final Integer length) {
+        Fn.jvmKo(1 < length, _80534Exception417EventTypeConflict.class);
+    }
+
+    @Override
+    @SafeVarargs
+    public final <ID> AoIo keys(final ID... keys) {
+        /* keys长度 */
+        this.ensure(keys.length);
+
+        return this.saveRow(() -> this.newRow().setKey(keys[VValue.IDX]));
+    }
+
+    @Override
+    public AoIo records(final HRecord... records) {
+        /* records长度 */
+        this.ensure(records.length);
+        /* Record */
+        final HRecord record = records[VValue.IDX];
+        final IoHub hub = IoHub.instance();
+        final HRecord processed = hub.in(record, this.tpl());
+        return this.saveRow(() -> this.newRow().request(processed));
+    }
+}

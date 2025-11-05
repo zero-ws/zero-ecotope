@@ -1,7 +1,7 @@
 package io.zerows.boot.full.component;
 
 import io.vertx.core.Future;
-import io.zerows.extension.mbse.basement.osgi.spi.robin.Switcher;
+import io.zerows.extension.module.mbsecore.plugins.Switcher;
 
 /*
  * 批量 / 单量分流器

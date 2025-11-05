@@ -3,9 +3,9 @@ package io.zerows.boot.full.plugins;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
-import io.zerows.extension.mbse.basement.osgi.spi.plugins.AfterPlugin;
-import io.zerows.extension.mbse.basement.osgi.spi.plugins.BeforePlugin;
+import io.zerows.extension.module.mbsecore.api.AfterPlugin;
+import io.zerows.extension.module.mbsecore.api.BeforePlugin;
+import io.zerows.extension.module.mbsecore.metadata.builtin.DataAtom;
 import io.zerows.program.Ux;
 
 import java.util.Objects;

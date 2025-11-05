@@ -3,7 +3,7 @@ package io.zerows.boot.test;
 import io.r2mo.base.dbe.Database;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
+import io.zerows.extension.module.mbsecore.metadata.builtin.DataAtom;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.metadata.KDictConfig;
 import io.zerows.platform.metadata.KFabric;

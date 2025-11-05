@@ -7,7 +7,7 @@ import io.zerows.boot.full.base.AbstractAdaptor;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.KView;
 import io.zerows.epoch.web.Envelop;
-import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
+import io.zerows.extension.module.mbsecore.metadata.builtin.DataAtom;
 import io.zerows.extension.skeleton.common.Ke;
 import io.zerows.extension.skeleton.spi.UiApeakMy;
 import io.zerows.mbse.metadata.ActIn;

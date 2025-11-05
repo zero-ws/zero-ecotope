@@ -3,8 +3,8 @@ package io.zerows.boot.full.plugins;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.boot.full.component.Arrow;
-import io.zerows.extension.mbse.basement.atom.builtin.DataAtom;
-import io.zerows.extension.mbse.basement.osgi.spi.robin.Switcher;
+import io.zerows.extension.module.mbsecore.metadata.builtin.DataAtom;
+import io.zerows.extension.module.mbsecore.plugins.Switcher;
 import io.zerows.program.Ux;
 import io.zerows.specification.modeling.operation.HDao;
 import io.zerows.support.Ut;
@@ -12,7 +12,7 @@ import io.zerows.support.Ut;
 import java.util.Objects;
 import java.util.function.Supplier;
 
-import static io.zerows.extension.mbse.basement.util.Ao.LOG;
+import static io.zerows.extension.module.mbsecore.boot.Ao.LOG;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
