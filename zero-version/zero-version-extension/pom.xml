@@ -41,15 +41,16 @@
                 <artifactId>zero-extension-erp-api</artifactId>
                 <version>${zero.version}</version>
             </dependency>
+            <!-- LBS -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-extension-lbs-api</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
             <!-- ===================== 商业接口部分 ==================== -->
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-extension-commerce-finance</artifactId>
-                <version>${zero.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.zerows</groupId>
-                <artifactId>zero-extension-commerce-lbs</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>

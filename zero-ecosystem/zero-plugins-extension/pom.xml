@@ -16,10 +16,10 @@
         <!-- 扩展模块骨架 -->
         <module>zero-extension-skeleton</module>
         <module>zero-extension-crud</module>                 <!-- CRUD 引擎 -->
-        <module>zero-extension-erp</module>
-
-        <!-- 上层开发库 -->
         <module>zero-extension-api</module>
+        <!-- Module -->
+        <module>zero-extension-erp</module><!-- ERP -->
+        <module>zero-extension-lbs</module><!-- LBS -->
 
         <!-- 系统核心模块 -->
         <module>zero-extension-runtime-ambient</module>           <!-- 配置管理 -->
@@ -38,11 +38,8 @@
 
 
         <!-- 业务相关模块 -->
-        <!-- <module>zero-extension-commerce-erp</module>              Commerce：企业资源管理 -->
         <module>zero-extension-commerce-finance</module>          <!-- Commerce：Finance -->
-        <module>zero-extension-commerce-lbs</module>              <!-- Commerce：Location Service -->
         <module>zero-extension-commerce-rbac</module>
-        <module>zero-extension-lbs</module>             <!-- Commerce：RBAC -->
 
     </modules>
 </project>

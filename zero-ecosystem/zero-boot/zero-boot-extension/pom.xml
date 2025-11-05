@@ -52,24 +52,28 @@
             <groupId>io.zerows</groupId>
             <artifactId>zero-extension-skeleton</artifactId>
         </dependency>
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-extension-api</artifactId>
+        </dependency>
         <!-- ERP -->
         <dependency>
             <groupId>io.zerows</groupId>
             <artifactId>zero-extension-erp-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-extension-lbs-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-extension-crud</artifactId>
+        </dependency>
 
         <!-- ===================== 商业接口部分 ==================== -->
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-extension-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.zerows</groupId>
             <artifactId>zero-extension-commerce-finance</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.zerows</groupId>
-            <artifactId>zero-extension-commerce-lbs</artifactId>
         </dependency>
         <dependency>
             <groupId>io.zerows</groupId>
@@ -98,10 +102,6 @@
         <dependency>
             <groupId>io.zerows</groupId>
             <artifactId>zero-extension-runtime-ambient</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.zerows</groupId>
-            <artifactId>zero-extension-crud</artifactId>
         </dependency>
         <dependency>
             <groupId>io.zerows</groupId>
