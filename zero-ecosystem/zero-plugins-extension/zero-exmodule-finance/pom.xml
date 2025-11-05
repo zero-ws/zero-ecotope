@@ -5,17 +5,16 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.zerows</groupId>
-        <artifactId>zero-extension-finance</artifactId>
+        <artifactId>zero-plugins-extension</artifactId>
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>zero-extension-finance-provider</artifactId>
-    <name>Zero::Extension💎 - Finance::Api</name>
-    <dependencies>
-        <dependency>
-            <groupId>io.zerows</groupId>
-            <artifactId>zero-extension-finance-domain</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-    </dependencies>
+    <artifactId>zero-exmodule-finance</artifactId>
+    <name>(POM) 📚️ - Zero::ExModule::Finance</name>
+    <modules>
+        <module>zero-exmodule-finance-domain</module>
+        <module>zero-exmodule-finance-api</module>
+        <module>zero-exmodule-finance-provider</module>
+    </modules>
+    <packaging>pom</packaging>
 </project>

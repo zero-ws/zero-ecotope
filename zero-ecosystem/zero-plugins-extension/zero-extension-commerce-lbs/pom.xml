@@ -19,7 +19,7 @@
         </dependency>
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-extension-lbs-api</artifactId>
+            <artifactId>zero-exmodule-lbs-api</artifactId>
         </dependency>
     </dependencies>
     <build>

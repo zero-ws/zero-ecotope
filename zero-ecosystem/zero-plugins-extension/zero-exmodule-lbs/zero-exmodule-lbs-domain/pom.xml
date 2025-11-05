@@ -5,12 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.zerows</groupId>
-        <artifactId>zero-extension-finance</artifactId>
+        <artifactId>zero-exmodule-lbs</artifactId>
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>zero-extension-finance-domain</artifactId>
-    <name>Zero::Extension💎 - Finance::Domain</name>
+    <artifactId>zero-exmodule-lbs-domain</artifactId>
+    <name>Zero::ExModule💎 - LBS::Domain</name>
     <dependencies>
         <dependency>
             <groupId>io.zerows</groupId>

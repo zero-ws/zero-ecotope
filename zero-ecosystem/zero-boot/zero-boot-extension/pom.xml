@@ -67,11 +67,11 @@
         </dependency>
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-extension-lbs-api</artifactId>
+            <artifactId>zero-exmodule-lbs-api</artifactId>
         </dependency>
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-extension-finance-api</artifactId>
+            <artifactId>zero-exmodule-finance-api</artifactId>
         </dependency>
 
         <!-- ===================== 商业接口部分 ==================== -->

@@ -5,15 +5,17 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.zerows</groupId>
-        <artifactId>zero-plugins-extension</artifactId>
+        <artifactId>zero-exmodule-lbs</artifactId>
         <version>1.0.0</version>
     </parent>
-    <artifactId>zero-extension-lbs</artifactId>
-    <name>(POM) 📚️ - Zero::Extension::LBS</name>
-    <modules>
-        <module>zero-extension-lbs-api</module>
-        <module>zero-extension-lbs-domain</module>
-        <module>zero-extension-lbs-provider</module>
-    </modules>
-    <packaging>pom</packaging>
+
+    <artifactId>zero-exmodule-lbs-api</artifactId>
+    <name>Zero::ExModule💎 - LBS::Api</name>
+    <dependencies>
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-exmodule-lbs-provider</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
 </project>
