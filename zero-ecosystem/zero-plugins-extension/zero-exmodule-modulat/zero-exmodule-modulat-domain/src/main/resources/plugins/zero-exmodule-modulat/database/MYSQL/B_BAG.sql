@@ -44,21 +44,23 @@ CREATE TABLE IF NOT EXISTS B_BAG
     `ENTRY`      BIT         DEFAULT NULL COMMENT '「entry」- 是否入口（带入口为应用，当前APP_ID下安装内容）',
     `ENTRY_ID`   VARCHAR(36) DEFAULT NULL COMMENT '「entryId」- 入口专用ID，关联 X_MENU 中的ID，其余的直接使用链接',
     -- 应用ID
-    `APP_ID`     VARCHAR(36) COMMENT '「id」- 关联的应用程序ID',
     `PARENT_ID`  VARCHAR(36) COMMENT '「parentId」- 父包ID',
 
-    -- 特殊字段
-    `ACTIVE`     BIT         DEFAULT NULL COMMENT '「active」- 是否启用',
-    `SIGMA`      VARCHAR(32) DEFAULT NULL COMMENT '「sigma」- 统一标识',
-    `METADATA`   TEXT COMMENT '「metadata」- 附加配置',
-    `LANGUAGE`   VARCHAR(8)  DEFAULT NULL COMMENT '「language」- 使用的语言',
+    -- ------------------------------ 公共字段 --------------------------------
+    `SIGMA`      VARCHAR(128) COMMENT '「sigma」- 用户组绑定的统一标识',
+    `LANGUAGE`   VARCHAR(10) COMMENT '「language」- 使用的语言',
+    `ACTIVE`     BIT COMMENT '「active」- 是否启用',
+    `METADATA`   TEXT COMMENT '「metadata」- 附加配置数据',
 
     -- Auditor字段
     `CREATED_AT` DATETIME COMMENT '「createdAt」- 创建时间',
     `CREATED_BY` VARCHAR(36) COMMENT '「createdBy」- 创建人',
     `UPDATED_AT` DATETIME COMMENT '「updatedAt」- 更新时间',
     `UPDATED_BY` VARCHAR(36) COMMENT '「updatedBy」- 更新人',
-    PRIMARY KEY (`KEY`)
+
+    `APP_ID`     VARCHAR(36) COMMENT '「appId」- 应用ID',
+    `TENANT_ID`  VARCHAR(36) COMMENT '「tenantId」- 租户ID',
+    PRIMARY KEY (`KEY`) USING BTREE
 );
 -- changeset Lang:b-bag-2
 ALTER TABLE B_BAG

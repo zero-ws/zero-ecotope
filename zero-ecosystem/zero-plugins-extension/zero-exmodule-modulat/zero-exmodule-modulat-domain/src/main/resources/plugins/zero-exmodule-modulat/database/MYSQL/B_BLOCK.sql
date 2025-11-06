@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS B_BLOCK
     `CODE`           VARCHAR(255) COMMENT '「code」- 子模块编码',
     `NAME`           VARCHAR(255) COMMENT '「name」- 子模块名称',
     `VERSION`        VARCHAR(64) COMMENT '「version」- 子模块版本', -- 模块版本
-    `AUTHORIZED`     BIT         DEFAULT NULL COMMENT '「authorized」- 是否授权',
+    `AUTHORIZED`     BIT DEFAULT NULL COMMENT '「authorized」- 是否授权',
 
     `UI_ICON`        VARCHAR(255) COMMENT '「uiIcon」- 子模块图标',
     `UI_STYLE`       TEXT COMMENT '「uiStyle」- 子模块风格',
@@ -37,21 +37,22 @@ CREATE TABLE IF NOT EXISTS B_BLOCK
     `LIC_MENU`       LONGTEXT COMMENT '「licMenu」- 该Block包含的菜单',
 
     -- 关联信息
-    `APP_ID`         VARCHAR(36) COMMENT '「id」- 关联的应用程序ID',
     `BAG_ID`         VARCHAR(36) COMMENT '「bagId」- 所属包ID',
-
-    -- 特殊字段
-    `ACTIVE`         BIT         DEFAULT NULL COMMENT '「active」- 是否启用',
-    `SIGMA`          VARCHAR(32) DEFAULT NULL COMMENT '「sigma」- 统一标识',
-    `METADATA`       TEXT COMMENT '「metadata」- 附加配置',
-    `LANGUAGE`       VARCHAR(8)  DEFAULT NULL COMMENT '「language」- 使用的语言',
+    -- ------------------------------ 公共字段 --------------------------------
+    `SIGMA`          VARCHAR(128) COMMENT '「sigma」- 用户组绑定的统一标识',
+    `LANGUAGE`       VARCHAR(10) COMMENT '「language」- 使用的语言',
+    `ACTIVE`         BIT COMMENT '「active」- 是否启用',
+    `METADATA`       TEXT COMMENT '「metadata」- 附加配置数据',
 
     -- Auditor字段
     `CREATED_AT`     DATETIME COMMENT '「createdAt」- 创建时间',
     `CREATED_BY`     VARCHAR(36) COMMENT '「createdBy」- 创建人',
     `UPDATED_AT`     DATETIME COMMENT '「updatedAt」- 更新时间',
     `UPDATED_BY`     VARCHAR(36) COMMENT '「updatedBy」- 更新人',
-    PRIMARY KEY (`KEY`)
+
+    `APP_ID`         VARCHAR(36) COMMENT '「appId」- 应用ID',
+    `TENANT_ID`      VARCHAR(36) COMMENT '「tenantId」- 租户ID',
+    PRIMARY KEY (`KEY`) USING BTREE
 );
 -- changeset Lang:b-block-2
 ALTER TABLE B_BLOCK
