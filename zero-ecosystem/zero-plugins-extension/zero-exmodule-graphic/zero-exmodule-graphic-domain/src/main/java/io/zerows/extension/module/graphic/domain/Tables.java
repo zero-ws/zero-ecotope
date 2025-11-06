@@ -8,12 +8,13 @@ import io.zerows.extension.module.graphic.domain.tables.GCluster;
 import io.zerows.extension.module.graphic.domain.tables.GEdge;
 import io.zerows.extension.module.graphic.domain.tables.GGraphic;
 import io.zerows.extension.module.graphic.domain.tables.GNode;
+import io.zerows.extension.module.graphic.domain.tables.RClusterNode;
 
 
 /**
  * Convenience access to all tables in ZDB.
  */
-@SuppressWarnings({"all", "unchecked", "rawtypes"})
+@SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
 public class Tables {
 
     /**
@@ -35,4 +36,9 @@ public class Tables {
      * The table <code>ZDB.G_NODE</code>.
      */
     public static final GNode G_NODE = GNode.G_NODE;
+
+    /**
+     * The table <code>ZDB.R_CLUSTER_NODE</code>.
+     */
+    public static final RClusterNode R_CLUSTER_NODE = RClusterNode.R_CLUSTER_NODE;
 }
