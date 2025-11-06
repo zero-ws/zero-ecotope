@@ -224,9 +224,14 @@ public class EIdentity extends TableImpl<EIdentityRecord> {
     public final TableField<EIdentityRecord, Boolean> VERIFIED = createField(DSL.name("VERIFIED"), SQLDataType.BIT, this, "「verified」- 是否验证、备案");
 
     /**
-     * The column <code>ZDB.E_IDENTITY.METADATA</code>. 「metadata」- 附加配置
+     * The column <code>ZDB.E_IDENTITY.SIGMA</code>. 「sigma」- 用户组绑定的统一标识
      */
-    public final TableField<EIdentityRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 附加配置");
+    public final TableField<EIdentityRecord, String> SIGMA = createField(DSL.name("SIGMA"), SQLDataType.VARCHAR(128), this, "「sigma」- 用户组绑定的统一标识");
+
+    /**
+     * The column <code>ZDB.E_IDENTITY.LANGUAGE</code>. 「language」- 使用的语言
+     */
+    public final TableField<EIdentityRecord, String> LANGUAGE = createField(DSL.name("LANGUAGE"), SQLDataType.VARCHAR(10), this, "「language」- 使用的语言");
 
     /**
      * The column <code>ZDB.E_IDENTITY.ACTIVE</code>. 「active」- 是否启用
@@ -234,14 +239,9 @@ public class EIdentity extends TableImpl<EIdentityRecord> {
     public final TableField<EIdentityRecord, Boolean> ACTIVE = createField(DSL.name("ACTIVE"), SQLDataType.BIT, this, "「active」- 是否启用");
 
     /**
-     * The column <code>ZDB.E_IDENTITY.SIGMA</code>. 「sigma」- 统一标识
+     * The column <code>ZDB.E_IDENTITY.METADATA</code>. 「metadata」- 附加配置数据
      */
-    public final TableField<EIdentityRecord, String> SIGMA = createField(DSL.name("SIGMA"), SQLDataType.VARCHAR(32), this, "「sigma」- 统一标识");
-
-    /**
-     * The column <code>ZDB.E_IDENTITY.LANGUAGE</code>. 「language」- 使用的语言
-     */
-    public final TableField<EIdentityRecord, String> LANGUAGE = createField(DSL.name("LANGUAGE"), SQLDataType.VARCHAR(8), this, "「language」- 使用的语言");
+    public final TableField<EIdentityRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 附加配置数据");
 
     /**
      * The column <code>ZDB.E_IDENTITY.CREATED_AT</code>. 「createdAt」- 创建时间
@@ -262,6 +262,16 @@ public class EIdentity extends TableImpl<EIdentityRecord> {
      * The column <code>ZDB.E_IDENTITY.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     public final TableField<EIdentityRecord, String> UPDATED_BY = createField(DSL.name("UPDATED_BY"), SQLDataType.VARCHAR(36), this, "「updatedBy」- 更新人");
+
+    /**
+     * The column <code>ZDB.E_IDENTITY.APP_ID</code>. 「appId」- 应用ID
+     */
+    public final TableField<EIdentityRecord, String> APP_ID = createField(DSL.name("APP_ID"), SQLDataType.VARCHAR(36), this, "「appId」- 应用ID");
+
+    /**
+     * The column <code>ZDB.E_IDENTITY.TENANT_ID</code>. 「tenantId」- 租户ID
+     */
+    public final TableField<EIdentityRecord, String> TENANT_ID = createField(DSL.name("TENANT_ID"), SQLDataType.VARCHAR(36), this, "「tenantId」- 租户ID");
 
     private EIdentity(Name alias, Table<EIdentityRecord> aliased) {
         this(alias, aliased, (Field<?>[]) null, null);

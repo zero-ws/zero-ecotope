@@ -435,46 +435,6 @@ public interface IEAsset extends VertxPojo, Serializable {
     public String getComment();
 
     /**
-     * Setter for <code>ZDB.E_ASSET.SIGMA</code>. 「sigma」- 统一标识
-     */
-    public IEAsset setSigma(String value);
-
-    /**
-     * Getter for <code>ZDB.E_ASSET.SIGMA</code>. 「sigma」- 统一标识
-     */
-    public String getSigma();
-
-    /**
-     * Setter for <code>ZDB.E_ASSET.LANGUAGE</code>. 「language」- 使用的语言
-     */
-    public IEAsset setLanguage(String value);
-
-    /**
-     * Getter for <code>ZDB.E_ASSET.LANGUAGE</code>. 「language」- 使用的语言
-     */
-    public String getLanguage();
-
-    /**
-     * Setter for <code>ZDB.E_ASSET.ACTIVE</code>. 「active」- 是否启用
-     */
-    public IEAsset setActive(Boolean value);
-
-    /**
-     * Getter for <code>ZDB.E_ASSET.ACTIVE</code>. 「active」- 是否启用
-     */
-    public Boolean getActive();
-
-    /**
-     * Setter for <code>ZDB.E_ASSET.METADATA</code>. 「metadata」- 附加配置数据
-     */
-    public IEAsset setMetadata(String value);
-
-    /**
-     * Getter for <code>ZDB.E_ASSET.METADATA</code>. 「metadata」- 附加配置数据
-     */
-    public String getMetadata();
-
-    /**
      * Setter for <code>ZDB.E_ASSET.ENTER_AT</code>. 「enterAt」- 入库时间
      */
     public IEAsset setEnterAt(LocalDateTime value);
@@ -535,6 +495,46 @@ public interface IEAsset extends VertxPojo, Serializable {
     public String getScrapBy();
 
     /**
+     * Setter for <code>ZDB.E_ASSET.SIGMA</code>. 「sigma」- 用户组绑定的统一标识
+     */
+    public IEAsset setSigma(String value);
+
+    /**
+     * Getter for <code>ZDB.E_ASSET.SIGMA</code>. 「sigma」- 用户组绑定的统一标识
+     */
+    public String getSigma();
+
+    /**
+     * Setter for <code>ZDB.E_ASSET.LANGUAGE</code>. 「language」- 使用的语言
+     */
+    public IEAsset setLanguage(String value);
+
+    /**
+     * Getter for <code>ZDB.E_ASSET.LANGUAGE</code>. 「language」- 使用的语言
+     */
+    public String getLanguage();
+
+    /**
+     * Setter for <code>ZDB.E_ASSET.ACTIVE</code>. 「active」- 是否启用
+     */
+    public IEAsset setActive(Boolean value);
+
+    /**
+     * Getter for <code>ZDB.E_ASSET.ACTIVE</code>. 「active」- 是否启用
+     */
+    public Boolean getActive();
+
+    /**
+     * Setter for <code>ZDB.E_ASSET.METADATA</code>. 「metadata」- 附加配置数据
+     */
+    public IEAsset setMetadata(String value);
+
+    /**
+     * Getter for <code>ZDB.E_ASSET.METADATA</code>. 「metadata」- 附加配置数据
+     */
+    public String getMetadata();
+
+    /**
      * Setter for <code>ZDB.E_ASSET.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     public IEAsset setCreatedAt(LocalDateTime value);
@@ -573,6 +573,26 @@ public interface IEAsset extends VertxPojo, Serializable {
      * Getter for <code>ZDB.E_ASSET.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     public String getUpdatedBy();
+
+    /**
+     * Setter for <code>ZDB.E_ASSET.APP_ID</code>. 「appId」- 应用ID
+     */
+    public IEAsset setAppId(String value);
+
+    /**
+     * Getter for <code>ZDB.E_ASSET.APP_ID</code>. 「appId」- 应用ID
+     */
+    public String getAppId();
+
+    /**
+     * Setter for <code>ZDB.E_ASSET.TENANT_ID</code>. 「tenantId」- 租户ID
+     */
+    public IEAsset setTenantId(String value);
+
+    /**
+     * Getter for <code>ZDB.E_ASSET.TENANT_ID</code>. 「tenantId」- 租户ID
+     */
+    public String getTenantId();
 
     // -------------------------------------------------------------------------
     // FROM and INTO
@@ -633,20 +653,22 @@ public interface IEAsset extends VertxPojo, Serializable {
                 setOrThrow(this::setCompanyId,json::getString,"COMPANY_ID","java.lang.String");
                 setOrThrow(this::setParentId,json::getString,"PARENT_ID","java.lang.String");
                 setOrThrow(this::setComment,json::getString,"COMMENT","java.lang.String");
-                setOrThrow(this::setSigma,json::getString,"SIGMA","java.lang.String");
-                setOrThrow(this::setLanguage,json::getString,"LANGUAGE","java.lang.String");
-                setOrThrow(this::setActive,json::getBoolean,"ACTIVE","java.lang.Boolean");
-                setOrThrow(this::setMetadata,json::getString,"METADATA","java.lang.String");
                 setOrThrow(this::setEnterAt,key -> {String s = json.getString(key); return s==null?null:java.time.LocalDateTime.parse(s);},"ENTER_AT","java.time.LocalDateTime");
                 setOrThrow(this::setEnterBy,json::getString,"ENTER_BY","java.lang.String");
                 setOrThrow(this::setAccountAt,key -> {String s = json.getString(key); return s==null?null:java.time.LocalDateTime.parse(s);},"ACCOUNT_AT","java.time.LocalDateTime");
                 setOrThrow(this::setAccountBy,json::getString,"ACCOUNT_BY","java.lang.String");
                 setOrThrow(this::setScrapAt,key -> {String s = json.getString(key); return s==null?null:java.time.LocalDateTime.parse(s);},"SCRAP_AT","java.time.LocalDateTime");
                 setOrThrow(this::setScrapBy,json::getString,"SCRAP_BY","java.lang.String");
+                setOrThrow(this::setSigma,json::getString,"SIGMA","java.lang.String");
+                setOrThrow(this::setLanguage,json::getString,"LANGUAGE","java.lang.String");
+                setOrThrow(this::setActive,json::getBoolean,"ACTIVE","java.lang.Boolean");
+                setOrThrow(this::setMetadata,json::getString,"METADATA","java.lang.String");
                 setOrThrow(this::setCreatedAt,key -> {String s = json.getString(key); return s==null?null:java.time.LocalDateTime.parse(s);},"CREATED_AT","java.time.LocalDateTime");
                 setOrThrow(this::setCreatedBy,json::getString,"CREATED_BY","java.lang.String");
                 setOrThrow(this::setUpdatedAt,key -> {String s = json.getString(key); return s==null?null:java.time.LocalDateTime.parse(s);},"UPDATED_AT","java.time.LocalDateTime");
                 setOrThrow(this::setUpdatedBy,json::getString,"UPDATED_BY","java.lang.String");
+                setOrThrow(this::setAppId,json::getString,"APP_ID","java.lang.String");
+                setOrThrow(this::setTenantId,json::getString,"TENANT_ID","java.lang.String");
                 return this;
         }
 
@@ -695,20 +717,22 @@ public interface IEAsset extends VertxPojo, Serializable {
                 json.put("COMPANY_ID",getCompanyId());
                 json.put("PARENT_ID",getParentId());
                 json.put("COMMENT",getComment());
-                json.put("SIGMA",getSigma());
-                json.put("LANGUAGE",getLanguage());
-                json.put("ACTIVE",getActive());
-                json.put("METADATA",getMetadata());
                 json.put("ENTER_AT",getEnterAt()==null?null:getEnterAt().toString());
                 json.put("ENTER_BY",getEnterBy());
                 json.put("ACCOUNT_AT",getAccountAt()==null?null:getAccountAt().toString());
                 json.put("ACCOUNT_BY",getAccountBy());
                 json.put("SCRAP_AT",getScrapAt()==null?null:getScrapAt().toString());
                 json.put("SCRAP_BY",getScrapBy());
+                json.put("SIGMA",getSigma());
+                json.put("LANGUAGE",getLanguage());
+                json.put("ACTIVE",getActive());
+                json.put("METADATA",getMetadata());
                 json.put("CREATED_AT",getCreatedAt()==null?null:getCreatedAt().toString());
                 json.put("CREATED_BY",getCreatedBy());
                 json.put("UPDATED_AT",getUpdatedAt()==null?null:getUpdatedAt().toString());
                 json.put("UPDATED_BY",getUpdatedBy());
+                json.put("APP_ID",getAppId());
+                json.put("TENANT_ID",getTenantId());
                 return json;
         }
 

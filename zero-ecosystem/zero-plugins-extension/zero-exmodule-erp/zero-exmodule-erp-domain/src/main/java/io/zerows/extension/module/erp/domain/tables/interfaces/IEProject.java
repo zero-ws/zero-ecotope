@@ -251,32 +251,12 @@ public interface IEProject extends VertxPojo, Serializable {
     public LocalDateTime getEndAt();
 
     /**
-     * Setter for <code>ZDB.E_PROJECT.METADATA</code>. 「metadata」- 附加配置
-     */
-    public IEProject setMetadata(String value);
-
-    /**
-     * Getter for <code>ZDB.E_PROJECT.METADATA</code>. 「metadata」- 附加配置
-     */
-    public String getMetadata();
-
-    /**
-     * Setter for <code>ZDB.E_PROJECT.ACTIVE</code>. 「active」- 是否启用
-     */
-    public IEProject setActive(Boolean value);
-
-    /**
-     * Getter for <code>ZDB.E_PROJECT.ACTIVE</code>. 「active」- 是否启用
-     */
-    public Boolean getActive();
-
-    /**
-     * Setter for <code>ZDB.E_PROJECT.SIGMA</code>. 「sigma」- 统一标识（项目所属应用）
+     * Setter for <code>ZDB.E_PROJECT.SIGMA</code>. 「sigma」- 用户组绑定的统一标识
      */
     public IEProject setSigma(String value);
 
     /**
-     * Getter for <code>ZDB.E_PROJECT.SIGMA</code>. 「sigma」- 统一标识（项目所属应用）
+     * Getter for <code>ZDB.E_PROJECT.SIGMA</code>. 「sigma」- 用户组绑定的统一标识
      */
     public String getSigma();
 
@@ -289,6 +269,26 @@ public interface IEProject extends VertxPojo, Serializable {
      * Getter for <code>ZDB.E_PROJECT.LANGUAGE</code>. 「language」- 使用的语言
      */
     public String getLanguage();
+
+    /**
+     * Setter for <code>ZDB.E_PROJECT.ACTIVE</code>. 「active」- 是否启用
+     */
+    public IEProject setActive(Boolean value);
+
+    /**
+     * Getter for <code>ZDB.E_PROJECT.ACTIVE</code>. 「active」- 是否启用
+     */
+    public Boolean getActive();
+
+    /**
+     * Setter for <code>ZDB.E_PROJECT.METADATA</code>. 「metadata」- 附加配置数据
+     */
+    public IEProject setMetadata(String value);
+
+    /**
+     * Getter for <code>ZDB.E_PROJECT.METADATA</code>. 「metadata」- 附加配置数据
+     */
+    public String getMetadata();
 
     /**
      * Setter for <code>ZDB.E_PROJECT.CREATED_AT</code>. 「createdAt」- 创建时间
@@ -330,6 +330,26 @@ public interface IEProject extends VertxPojo, Serializable {
      */
     public String getUpdatedBy();
 
+    /**
+     * Setter for <code>ZDB.E_PROJECT.APP_ID</code>. 「appId」- 应用ID
+     */
+    public IEProject setAppId(String value);
+
+    /**
+     * Getter for <code>ZDB.E_PROJECT.APP_ID</code>. 「appId」- 应用ID
+     */
+    public String getAppId();
+
+    /**
+     * Setter for <code>ZDB.E_PROJECT.TENANT_ID</code>. 「tenantId」- 租户ID
+     */
+    public IEProject setTenantId(String value);
+
+    /**
+     * Getter for <code>ZDB.E_PROJECT.TENANT_ID</code>. 「tenantId」- 租户ID
+     */
+    public String getTenantId();
+
     // -------------------------------------------------------------------------
     // FROM and INTO
     // -------------------------------------------------------------------------
@@ -370,14 +390,16 @@ public interface IEProject extends VertxPojo, Serializable {
                 setOrThrow(this::setPlanEndAt,key -> {String s = json.getString(key); return s==null?null:java.time.LocalDateTime.parse(s);},"PLAN_END_AT","java.time.LocalDateTime");
                 setOrThrow(this::setStartAt,key -> {String s = json.getString(key); return s==null?null:java.time.LocalDateTime.parse(s);},"START_AT","java.time.LocalDateTime");
                 setOrThrow(this::setEndAt,key -> {String s = json.getString(key); return s==null?null:java.time.LocalDateTime.parse(s);},"END_AT","java.time.LocalDateTime");
-                setOrThrow(this::setMetadata,json::getString,"METADATA","java.lang.String");
-                setOrThrow(this::setActive,json::getBoolean,"ACTIVE","java.lang.Boolean");
                 setOrThrow(this::setSigma,json::getString,"SIGMA","java.lang.String");
                 setOrThrow(this::setLanguage,json::getString,"LANGUAGE","java.lang.String");
+                setOrThrow(this::setActive,json::getBoolean,"ACTIVE","java.lang.Boolean");
+                setOrThrow(this::setMetadata,json::getString,"METADATA","java.lang.String");
                 setOrThrow(this::setCreatedAt,key -> {String s = json.getString(key); return s==null?null:java.time.LocalDateTime.parse(s);},"CREATED_AT","java.time.LocalDateTime");
                 setOrThrow(this::setCreatedBy,json::getString,"CREATED_BY","java.lang.String");
                 setOrThrow(this::setUpdatedAt,key -> {String s = json.getString(key); return s==null?null:java.time.LocalDateTime.parse(s);},"UPDATED_AT","java.time.LocalDateTime");
                 setOrThrow(this::setUpdatedBy,json::getString,"UPDATED_BY","java.lang.String");
+                setOrThrow(this::setAppId,json::getString,"APP_ID","java.lang.String");
+                setOrThrow(this::setTenantId,json::getString,"TENANT_ID","java.lang.String");
                 return this;
         }
 
@@ -407,14 +429,16 @@ public interface IEProject extends VertxPojo, Serializable {
                 json.put("PLAN_END_AT",getPlanEndAt()==null?null:getPlanEndAt().toString());
                 json.put("START_AT",getStartAt()==null?null:getStartAt().toString());
                 json.put("END_AT",getEndAt()==null?null:getEndAt().toString());
-                json.put("METADATA",getMetadata());
-                json.put("ACTIVE",getActive());
                 json.put("SIGMA",getSigma());
                 json.put("LANGUAGE",getLanguage());
+                json.put("ACTIVE",getActive());
+                json.put("METADATA",getMetadata());
                 json.put("CREATED_AT",getCreatedAt()==null?null:getCreatedAt().toString());
                 json.put("CREATED_BY",getCreatedBy());
                 json.put("UPDATED_AT",getUpdatedAt()==null?null:getUpdatedAt().toString());
                 json.put("UPDATED_BY",getUpdatedBy());
+                json.put("APP_ID",getAppId());
+                json.put("TENANT_ID",getTenantId());
                 return json;
         }
 

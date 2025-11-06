@@ -60,12 +60,6 @@ CREATE TABLE `E_ASSET`
     `PARENT_ID`       VARCHAR(36) COMMENT '「parentId」- 上级资产',
     `COMMENT`         TEXT COMMENT '「comment」- 资产备注',
 
-    -- 特殊字段
-    `SIGMA`           VARCHAR(32) COMMENT '「sigma」- 统一标识',
-    `LANGUAGE`        VARCHAR(10) COMMENT '「language」- 使用的语言',
-    `ACTIVE`          BIT COMMENT '「active」- 是否启用',
-    `METADATA`        TEXT COMMENT '「metadata」- 附加配置数据',
-
     -- 时间处理
     `ENTER_AT`        DATETIME COMMENT '「enterAt」- 入库时间',
     `ENTER_BY`        VARCHAR(36) COMMENT '「enterBy」- 入库人',
@@ -74,12 +68,21 @@ CREATE TABLE `E_ASSET`
     `SCRAP_AT`        DATETIME COMMENT '「scrapAt」- 报废时间',
     `SCRAP_BY`        VARCHAR(36) COMMENT '「scrapBy」- 报废人',
 
+    -- ------------------------------ 公共字段 --------------------------------
+    `SIGMA`           VARCHAR(128) COMMENT '「sigma」- 用户组绑定的统一标识',
+    `LANGUAGE`        VARCHAR(10) COMMENT '「language」- 使用的语言',
+    `ACTIVE`          BIT COMMENT '「active」- 是否启用',
+    `METADATA`        TEXT COMMENT '「metadata」- 附加配置数据',
+
     -- Auditor字段
     `CREATED_AT`      DATETIME COMMENT '「createdAt」- 创建时间',
     `CREATED_BY`      VARCHAR(36) COMMENT '「createdBy」- 创建人',
     `UPDATED_AT`      DATETIME COMMENT '「updatedAt」- 更新时间',
     `UPDATED_BY`      VARCHAR(36) COMMENT '「updatedBy」- 更新人',
-    PRIMARY KEY (`KEY`)
+
+    `APP_ID`          VARCHAR(36) COMMENT '「appId」- 应用ID',
+    `TENANT_ID`       VARCHAR(36) COMMENT '「tenantId」- 租户ID',
+    PRIMARY KEY (`KEY`) USING BTREE
 );
 -- changeset Lang:e-asset-2
 ALTER TABLE E_ASSET

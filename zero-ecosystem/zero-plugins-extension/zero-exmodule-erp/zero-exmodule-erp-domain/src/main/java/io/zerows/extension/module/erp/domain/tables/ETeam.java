@@ -111,9 +111,14 @@ public class ETeam extends TableImpl<ETeamRecord> {
     public final TableField<ETeamRecord, String> BIND_CONFIG = createField(DSL.name("BIND_CONFIG"), SQLDataType.CLOB, this, "「bindConfig」- 绑定JSON详细配置");
 
     /**
-     * The column <code>ZDB.E_TEAM.METADATA</code>. 「metadata」- 附加配置
+     * The column <code>ZDB.E_TEAM.SIGMA</code>. 「sigma」- 用户组绑定的统一标识
      */
-    public final TableField<ETeamRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 附加配置");
+    public final TableField<ETeamRecord, String> SIGMA = createField(DSL.name("SIGMA"), SQLDataType.VARCHAR(128), this, "「sigma」- 用户组绑定的统一标识");
+
+    /**
+     * The column <code>ZDB.E_TEAM.LANGUAGE</code>. 「language」- 使用的语言
+     */
+    public final TableField<ETeamRecord, String> LANGUAGE = createField(DSL.name("LANGUAGE"), SQLDataType.VARCHAR(10), this, "「language」- 使用的语言");
 
     /**
      * The column <code>ZDB.E_TEAM.ACTIVE</code>. 「active」- 是否启用
@@ -121,14 +126,9 @@ public class ETeam extends TableImpl<ETeamRecord> {
     public final TableField<ETeamRecord, Boolean> ACTIVE = createField(DSL.name("ACTIVE"), SQLDataType.BIT, this, "「active」- 是否启用");
 
     /**
-     * The column <code>ZDB.E_TEAM.SIGMA</code>. 「sigma」- 统一标识
+     * The column <code>ZDB.E_TEAM.METADATA</code>. 「metadata」- 附加配置数据
      */
-    public final TableField<ETeamRecord, String> SIGMA = createField(DSL.name("SIGMA"), SQLDataType.VARCHAR(32), this, "「sigma」- 统一标识");
-
-    /**
-     * The column <code>ZDB.E_TEAM.LANGUAGE</code>. 「language」- 使用的语言
-     */
-    public final TableField<ETeamRecord, String> LANGUAGE = createField(DSL.name("LANGUAGE"), SQLDataType.VARCHAR(8), this, "「language」- 使用的语言");
+    public final TableField<ETeamRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 附加配置数据");
 
     /**
      * The column <code>ZDB.E_TEAM.CREATED_AT</code>. 「createdAt」- 创建时间
@@ -149,6 +149,16 @@ public class ETeam extends TableImpl<ETeamRecord> {
      * The column <code>ZDB.E_TEAM.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     public final TableField<ETeamRecord, String> UPDATED_BY = createField(DSL.name("UPDATED_BY"), SQLDataType.VARCHAR(36), this, "「updatedBy」- 更新人");
+
+    /**
+     * The column <code>ZDB.E_TEAM.APP_ID</code>. 「appId」- 应用ID
+     */
+    public final TableField<ETeamRecord, String> APP_ID = createField(DSL.name("APP_ID"), SQLDataType.VARCHAR(36), this, "「appId」- 应用ID");
+
+    /**
+     * The column <code>ZDB.E_TEAM.TENANT_ID</code>. 「tenantId」- 租户ID
+     */
+    public final TableField<ETeamRecord, String> TENANT_ID = createField(DSL.name("TENANT_ID"), SQLDataType.VARCHAR(36), this, "「tenantId」- 租户ID");
 
     private ETeam(Name alias, Table<ETeamRecord> aliased) {
         this(alias, aliased, (Field<?>[]) null, null);

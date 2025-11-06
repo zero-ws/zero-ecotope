@@ -105,9 +105,14 @@ public class EBrand extends TableImpl<EBrandRecord> {
     public final TableField<EBrandRecord, String> AREA_CATEGORY = createField(DSL.name("AREA_CATEGORY"), SQLDataType.VARCHAR(16), this, "「areaCategory」- 区域类别码");
 
     /**
-     * The column <code>ZDB.E_BRAND.METADATA</code>. 「metadata」- 附加配置
+     * The column <code>ZDB.E_BRAND.SIGMA</code>. 「sigma」- 用户组绑定的统一标识
      */
-    public final TableField<EBrandRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 附加配置");
+    public final TableField<EBrandRecord, String> SIGMA = createField(DSL.name("SIGMA"), SQLDataType.VARCHAR(128), this, "「sigma」- 用户组绑定的统一标识");
+
+    /**
+     * The column <code>ZDB.E_BRAND.LANGUAGE</code>. 「language」- 使用的语言
+     */
+    public final TableField<EBrandRecord, String> LANGUAGE = createField(DSL.name("LANGUAGE"), SQLDataType.VARCHAR(10), this, "「language」- 使用的语言");
 
     /**
      * The column <code>ZDB.E_BRAND.ACTIVE</code>. 「active」- 是否启用
@@ -115,14 +120,9 @@ public class EBrand extends TableImpl<EBrandRecord> {
     public final TableField<EBrandRecord, Boolean> ACTIVE = createField(DSL.name("ACTIVE"), SQLDataType.BIT, this, "「active」- 是否启用");
 
     /**
-     * The column <code>ZDB.E_BRAND.SIGMA</code>. 「sigma」- 统一标识（公司所属应用）
+     * The column <code>ZDB.E_BRAND.METADATA</code>. 「metadata」- 附加配置数据
      */
-    public final TableField<EBrandRecord, String> SIGMA = createField(DSL.name("SIGMA"), SQLDataType.VARCHAR(32), this, "「sigma」- 统一标识（公司所属应用）");
-
-    /**
-     * The column <code>ZDB.E_BRAND.LANGUAGE</code>. 「language」- 使用的语言
-     */
-    public final TableField<EBrandRecord, String> LANGUAGE = createField(DSL.name("LANGUAGE"), SQLDataType.VARCHAR(8), this, "「language」- 使用的语言");
+    public final TableField<EBrandRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 附加配置数据");
 
     /**
      * The column <code>ZDB.E_BRAND.CREATED_AT</code>. 「createdAt」- 创建时间
@@ -143,6 +143,16 @@ public class EBrand extends TableImpl<EBrandRecord> {
      * The column <code>ZDB.E_BRAND.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     public final TableField<EBrandRecord, String> UPDATED_BY = createField(DSL.name("UPDATED_BY"), SQLDataType.VARCHAR(36), this, "「updatedBy」- 更新人");
+
+    /**
+     * The column <code>ZDB.E_BRAND.APP_ID</code>. 「appId」- 应用ID
+     */
+    public final TableField<EBrandRecord, String> APP_ID = createField(DSL.name("APP_ID"), SQLDataType.VARCHAR(36), this, "「appId」- 应用ID");
+
+    /**
+     * The column <code>ZDB.E_BRAND.TENANT_ID</code>. 「tenantId」- 租户ID
+     */
+    public final TableField<EBrandRecord, String> TENANT_ID = createField(DSL.name("TENANT_ID"), SQLDataType.VARCHAR(36), this, "「tenantId」- 租户ID");
 
     private EBrand(Name alias, Table<EBrandRecord> aliased) {
         this(alias, aliased, (Field<?>[]) null, null);
