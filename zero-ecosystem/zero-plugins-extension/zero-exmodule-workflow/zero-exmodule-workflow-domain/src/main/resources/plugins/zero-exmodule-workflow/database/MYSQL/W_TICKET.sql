@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS W_TICKET
     `FLOW_DEFINITION_KEY` VARCHAR(64) COMMENT '「flowDefinitionKey」- 流程定义的KEY, getProcessDefinitionKey',
     `FLOW_DEFINITION_ID`  VARCHAR(64) COMMENT '「flowDefinitionId」- 流程定义的ID，getProcessDefinitionKey',
     `FLOW_INSTANCE_ID`    VARCHAR(64) COMMENT '「flowInstanceId」- 流程定义的ID，getProcessId',
-    `FLOW_END`            BIT         DEFAULT NULL COMMENT '「flowEnd」- 主单是否执行完成',
+    `FLOW_END`            BIT DEFAULT NULL COMMENT '「flowEnd」- 主单是否执行完成',
 
 
     /*
@@ -96,19 +96,21 @@ CREATE TABLE IF NOT EXISTS W_TICKET
     `CLOSE_CODE`          VARCHAR(255) COMMENT '「closeCode」- 关闭代码',
     `CLOSE_KB`            VARCHAR(1024) COMMENT '「closeKb」- 关闭时KB链接地址',
 
-    /*
-     * 核心八个信息（Zero Framework自带）
-     */
-    `ACTIVE`              BIT         DEFAULT NULL COMMENT '「active」- 是否启用',
-    `SIGMA`               VARCHAR(32) DEFAULT NULL COMMENT '「sigma」- 统一标识',
-    `METADATA`            TEXT COMMENT '「metadata」- 附加配置',
-    `LANGUAGE`            VARCHAR(8)  DEFAULT NULL COMMENT '「language」- 使用的语言',
+    -- ------------------------------ 公共字段 --------------------------------
+    `SIGMA`               VARCHAR(128) COMMENT '「sigma」- 用户组绑定的统一标识',
+    `LANGUAGE`            VARCHAR(10) COMMENT '「language」- 使用的语言',
+    `ACTIVE`              BIT COMMENT '「active」- 是否启用',
+    `METADATA`            TEXT COMMENT '「metadata」- 附加配置数据',
+
     -- Auditor字段
     `CREATED_AT`          DATETIME COMMENT '「createdAt」- 创建时间',
-    `CREATED_BY`          VARCHAR(36) COMMENT '「createdBy」- 创建人', -- 创建人
+    `CREATED_BY`          VARCHAR(36) COMMENT '「createdBy」- 创建人',
     `UPDATED_AT`          DATETIME COMMENT '「updatedAt」- 更新时间',
-    `UPDATED_BY`          VARCHAR(36) COMMENT '「updatedBy」- 更新人', -- 更新人
-    PRIMARY KEY (`KEY`)
+    `UPDATED_BY`          VARCHAR(36) COMMENT '「updatedBy」- 更新人',
+
+    `APP_ID`              VARCHAR(36) COMMENT '「appId」- 应用ID',
+    `TENANT_ID`           VARCHAR(36) COMMENT '「tenantId」- 租户ID',
+    PRIMARY KEY (`KEY`) USING BTREE
 );
 -- changeset Lang:w-ticket-2
 -- 流程主单：W_TICKET

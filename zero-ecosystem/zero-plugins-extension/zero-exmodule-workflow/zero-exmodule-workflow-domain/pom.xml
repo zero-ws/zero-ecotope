@@ -61,8 +61,8 @@
                     <propertyProviderClass>io.zerows.plugins.liquibase.LiquibaseEncryptionZero
                     </propertyProviderClass>
                     <!-- 配置文件路径 -->
-                    <propertyFile>plugins/${project.artifactId}/database/MYSQL.properties</propertyFile>
-                    <changeLogFile>plugins/${project.artifactId}/database/MYSQL.yml</changeLogFile>
+                    <propertyFile>plugins/${project.parent.artifactId}/database/MYSQL.properties</propertyFile>
+                    <changeLogFile>plugins/${project.parent.artifactId}/database/MYSQL.yml</changeLogFile>
                     <!-- 配置参数 -->
                     <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
                     <outputFileEncoding>UTF-8</outputFileEncoding>
