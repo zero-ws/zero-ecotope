@@ -28,8 +28,8 @@ CREATE TABLE IF NOT EXISTS M_MODEL
     `SPIDER`           TEXT COMMENT '「spider」- 主图格式，存储当前模型为起点的图层Json数据，每个模型只有一张',
     `SPIDER_COMPONENT` VARCHAR(255) COMMENT '「spiderComponent」- 在主图格式上存在的插件信息，用于处理主图格式的内容',
 
-    -- 特殊字段
-    `SIGMA`            VARCHAR(32) COMMENT '「sigma」- 统一标识',
+    -- ------------------------------ 公共字段 --------------------------------
+    `SIGMA`            VARCHAR(128) COMMENT '「sigma」- 用户组绑定的统一标识',
     `LANGUAGE`         VARCHAR(10) COMMENT '「language」- 使用的语言',
     `ACTIVE`           BIT COMMENT '「active」- 是否启用',
     `METADATA`         TEXT COMMENT '「metadata」- 附加配置数据',
@@ -39,6 +39,9 @@ CREATE TABLE IF NOT EXISTS M_MODEL
     `CREATED_BY`       VARCHAR(36) COMMENT '「createdBy」- 创建人',
     `UPDATED_AT`       DATETIME COMMENT '「updatedAt」- 更新时间',
     `UPDATED_BY`       VARCHAR(36) COMMENT '「updatedBy」- 更新人',
+
+    `APP_ID`           VARCHAR(36) COMMENT '「appId」- 应用ID',
+    `TENANT_ID`        VARCHAR(36) COMMENT '「tenantId」- 租户ID',
     PRIMARY KEY (`KEY`) USING BTREE
 );
 
