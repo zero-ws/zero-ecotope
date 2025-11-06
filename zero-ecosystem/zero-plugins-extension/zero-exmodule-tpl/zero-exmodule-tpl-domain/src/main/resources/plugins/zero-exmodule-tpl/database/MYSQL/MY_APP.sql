@@ -12,7 +12,6 @@ CREATE TABLE IF NOT EXISTS MY_APP
      * 关联 Apps 只能处理 AppId 以及入口问题，不可以处理其他问题，比如使用 AppId 直接读取
      * 字典相关数据，不包含在 Apps 的个人设置中，所以此处主要针对 AppId 以及 BagId 进行关联设置
      */
-    `APP_ID`     VARCHAR(36) COMMENT '「id」- 个人应用关联ID',
     `BAG_ID`     VARCHAR(36) COMMENT '「bagId」- 个人应用绑定的 BAG ID',
 
     `OWNER`      VARCHAR(36) COMMENT '「owner」- 拥有者ID，我的 / 角色级',
@@ -25,18 +24,21 @@ CREATE TABLE IF NOT EXISTS MY_APP
     `TYPE`       VARCHAR(32) COMMENT '「type」- 类型（默认全站）',
     `POSITION`   VARCHAR(16) COMMENT '「position」- 位置（默认左上）',
 
-    -- 特殊字段
-    `ACTIVE`     BIT         DEFAULT NULL COMMENT '「active」- 是否启用',
-    `SIGMA`      VARCHAR(32) DEFAULT NULL COMMENT '「sigma」- 统一标识',
-    `METADATA`   TEXT COMMENT '「metadata」- 附加配置',
-    `LANGUAGE`   VARCHAR(8)  DEFAULT NULL COMMENT '「language」- 使用的语言',
+    -- ------------------------------ 公共字段 --------------------------------
+    `SIGMA`      VARCHAR(128) COMMENT '「sigma」- 用户组绑定的统一标识',
+    `LANGUAGE`   VARCHAR(10) COMMENT '「language」- 使用的语言',
+    `ACTIVE`     BIT COMMENT '「active」- 是否启用',
+    `METADATA`   TEXT COMMENT '「metadata」- 附加配置数据',
 
     -- Auditor字段
     `CREATED_AT` DATETIME COMMENT '「createdAt」- 创建时间',
     `CREATED_BY` VARCHAR(36) COMMENT '「createdBy」- 创建人',
     `UPDATED_AT` DATETIME COMMENT '「updatedAt」- 更新时间',
     `UPDATED_BY` VARCHAR(36) COMMENT '「updatedBy」- 更新人',
-    PRIMARY KEY (`KEY`)
+
+    `APP_ID`     VARCHAR(36) COMMENT '「appId」- 应用ID',
+    `TENANT_ID`  VARCHAR(36) COMMENT '「tenantId」- 租户ID',
+    PRIMARY KEY (`KEY`) USING BTREE
 );
 
 -- changeset Lang:my-app-2
