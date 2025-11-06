@@ -17,9 +17,9 @@ CREATE TABLE `F_SETTLEMENT_ITEM`
     `MANUAL_NO`     VARCHAR(255) COMMENT '「manualNo」 - 手工单号（线下单号专用）',
     `PAY_TERM_ID`   VARCHAR(36)    NOT NULL COMMENT '「payTermId」- 账单项ID',
 
-    `START_AT`   DATETIME COMMENT '「startAt」- 开始时间',
-    `END_AT`     DATETIME COMMENT '「endAt」- 结束时间',
-    `GROUP_BY`   VARCHAR(64) COMMENT '「groupBy」- 分组',
+    `START_AT`      DATETIME COMMENT '「startAt」- 开始时间',
+    `END_AT`        DATETIME COMMENT '「endAt」- 结束时间',
+    `GROUP_BY`      VARCHAR(64) COMMENT '「groupBy」- 分组',
 
     -- 结算基础信息
     `RELATED_ID`    VARCHAR(36) COMMENT '「relatedId」- 关联BillItem ID（保留，原系统存在）',
@@ -27,8 +27,8 @@ CREATE TABLE `F_SETTLEMENT_ITEM`
     `DEBT_ID`       VARCHAR(36) COMMENT '「debtId」- 应收账单ID',
     `FINISHED_ID`   VARCHAR(36) COMMENT '「finishedId」- 关联交易ID',
 
-    -- 特殊字段
-    `SIGMA`         VARCHAR(32) COMMENT '「sigma」- 统一标识',
+    -- ------------------------------ 公共字段 --------------------------------
+    `SIGMA`         VARCHAR(128) COMMENT '「sigma」- 用户组绑定的统一标识',
     `LANGUAGE`      VARCHAR(10) COMMENT '「language」- 使用的语言',
     `ACTIVE`        BIT COMMENT '「active」- 是否启用',
     `METADATA`      TEXT COMMENT '「metadata」- 附加配置数据',
@@ -38,7 +38,10 @@ CREATE TABLE `F_SETTLEMENT_ITEM`
     `CREATED_BY`    VARCHAR(36) COMMENT '「createdBy」- 创建人',
     `UPDATED_AT`    DATETIME COMMENT '「updatedAt」- 更新时间',
     `UPDATED_BY`    VARCHAR(36) COMMENT '「updatedBy」- 更新人',
-    PRIMARY KEY (`KEY`)
+
+    `APP_ID`        VARCHAR(36) COMMENT '「appId」- 应用ID',
+    `TENANT_ID`     VARCHAR(36) COMMENT '「tenantId」- 租户ID',
+    PRIMARY KEY (`KEY`) USING BTREE
 );
 -- changeset Lang:f-settlement-item-2
 ALTER TABLE F_SETTLEMENT_ITEM

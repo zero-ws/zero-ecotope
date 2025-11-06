@@ -21,8 +21,8 @@ CREATE TABLE `F_SUBJECT`
     `COMPANY_ID` VARCHAR(36) COMMENT '「companyId」- 会计科目所属公司',
     `PARENT_ID`  VARCHAR(36) COMMENT '「parentId」- 会计科目父科目',
 
-    -- 特殊字段
-    `SIGMA`      VARCHAR(32) COMMENT '「sigma」- 统一标识',
+    -- ------------------------------ 公共字段 --------------------------------
+    `SIGMA`      VARCHAR(128) COMMENT '「sigma」- 用户组绑定的统一标识',
     `LANGUAGE`   VARCHAR(10) COMMENT '「language」- 使用的语言',
     `ACTIVE`     BIT COMMENT '「active」- 是否启用',
     `METADATA`   TEXT COMMENT '「metadata」- 附加配置数据',
@@ -32,7 +32,10 @@ CREATE TABLE `F_SUBJECT`
     `CREATED_BY` VARCHAR(36) COMMENT '「createdBy」- 创建人',
     `UPDATED_AT` DATETIME COMMENT '「updatedAt」- 更新时间',
     `UPDATED_BY` VARCHAR(36) COMMENT '「updatedBy」- 更新人',
-    PRIMARY KEY (`KEY`)
+
+    `APP_ID`     VARCHAR(36) COMMENT '「appId」- 应用ID',
+    `TENANT_ID`  VARCHAR(36) COMMENT '「tenantId」- 租户ID',
+    PRIMARY KEY (`KEY`) USING BTREE
 );
 -- changeset Lang:f-subject-2
 ALTER TABLE F_SUBJECT

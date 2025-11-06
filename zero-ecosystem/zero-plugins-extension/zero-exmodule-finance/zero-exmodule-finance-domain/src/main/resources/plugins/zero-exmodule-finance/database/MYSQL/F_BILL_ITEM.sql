@@ -14,9 +14,9 @@ CREATE TABLE `F_BILL_ITEM`
     `TYPE`          VARCHAR(36)    NOT NULL COMMENT '「type」- 明细类型',
     `STATUS`        VARCHAR(36)    NOT NULL COMMENT '「status」- 明细状态',
 
-    `START_AT`   DATETIME COMMENT '「startAt」- 开始时间',
-    `END_AT`     DATETIME COMMENT '「endAt」- 结束时间',
-    `GROUP_BY`   VARCHAR(64) COMMENT '「groupBy」- 分组',
+    `START_AT`      DATETIME COMMENT '「startAt」- 开始时间',
+    `END_AT`        DATETIME COMMENT '「endAt」- 结束时间',
+    `GROUP_BY`      VARCHAR(64) COMMENT '「groupBy」- 分组',
 
     -- 基本信息
     `AMOUNT`        DECIMAL(18, 2) DEFAULT NULL COMMENT '「amount」——价税合计，实际付款结果，有可能父项',
@@ -41,8 +41,8 @@ CREATE TABLE `F_BILL_ITEM`
     `SUBJECT_ID`    VARCHAR(36) COMMENT '「subjectId」- 会计科目ID，依赖账单项选择结果',
     `PAY_TERM_ID`   VARCHAR(36)    NOT NULL COMMENT '「payTermId」- 账单项ID',
 
-    -- 特殊字段
-    `SIGMA`         VARCHAR(32) COMMENT '「sigma」- 统一标识',
+    -- ------------------------------ 公共字段 --------------------------------
+    `SIGMA`         VARCHAR(128) COMMENT '「sigma」- 用户组绑定的统一标识',
     `LANGUAGE`      VARCHAR(10) COMMENT '「language」- 使用的语言',
     `ACTIVE`        BIT COMMENT '「active」- 是否启用',
     `METADATA`      TEXT COMMENT '「metadata」- 附加配置数据',
@@ -52,7 +52,10 @@ CREATE TABLE `F_BILL_ITEM`
     `CREATED_BY`    VARCHAR(36) COMMENT '「createdBy」- 创建人',
     `UPDATED_AT`    DATETIME COMMENT '「updatedAt」- 更新时间',
     `UPDATED_BY`    VARCHAR(36) COMMENT '「updatedBy」- 更新人',
-    PRIMARY KEY (`KEY`)
+
+    `APP_ID`        VARCHAR(36) COMMENT '「appId」- 应用ID',
+    `TENANT_ID`     VARCHAR(36) COMMENT '「tenantId」- 租户ID',
+    PRIMARY KEY (`KEY`) USING BTREE
 );
 -- changeset Lang:f-income-item-2
 ALTER TABLE F_BILL_ITEM
