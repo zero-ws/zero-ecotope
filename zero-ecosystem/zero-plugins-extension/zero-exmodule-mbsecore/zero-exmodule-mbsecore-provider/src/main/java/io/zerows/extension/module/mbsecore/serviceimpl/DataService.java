@@ -1,7 +1,7 @@
 package io.zerows.extension.module.mbsecore.serviceimpl;
 
 import io.zerows.extension.module.mbsecore.boot.AoCache;
-import io.zerows.extension.module.servicespec.DataStub;
+import io.zerows.extension.module.mbsecore.servicespec.DataStub;
 
 public class DataService implements DataStub {
     @Override

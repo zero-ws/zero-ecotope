@@ -4,7 +4,7 @@ import io.r2mo.base.dbe.Database;
 import io.r2mo.function.Fn;
 import io.zerows.extension.module.mbsecore.boot.Ao;
 import io.zerows.extension.module.mbsecore.component.metadata.AoBuilder;
-import io.zerows.extension.module.exception._80508Exception404PinNotFound;
+import io.zerows.extension.module.mbsecore.exception._80508Exception404PinNotFound;
 import io.zerows.specification.modeling.operation.HDao;
 import io.zerows.support.Ut;
 

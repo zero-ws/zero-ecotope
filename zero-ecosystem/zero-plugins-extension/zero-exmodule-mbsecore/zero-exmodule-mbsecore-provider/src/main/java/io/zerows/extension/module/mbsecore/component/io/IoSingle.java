@@ -1,9 +1,9 @@
 package io.zerows.extension.module.mbsecore.component.io;
 
 import io.r2mo.function.Fn;
-import io.zerows.platform.constant.VValue;
-import io.zerows.extension.module.exception._80534Exception417EventTypeConflict;
 import io.zerows.extension.module.mbsecore.component.plugin.IoHub;
+import io.zerows.extension.module.mbsecore.exception._80534Exception417EventTypeConflict;
+import io.zerows.platform.constant.VValue;
 import io.zerows.specification.modeling.HRecord;
 
 public class IoSingle extends AbstractIo {

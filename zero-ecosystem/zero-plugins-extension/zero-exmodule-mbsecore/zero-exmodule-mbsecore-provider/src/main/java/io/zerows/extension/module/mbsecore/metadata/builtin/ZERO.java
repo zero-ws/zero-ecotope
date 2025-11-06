@@ -2,17 +2,17 @@ package io.zerows.extension.module.mbsecore.metadata.builtin;
 
 
 import io.r2mo.function.Fn;
+import io.zerows.extension.module.mbsecore.domain.tables.pojos.MAttribute;
+import io.zerows.extension.module.mbsecore.domain.tables.pojos.MField;
+import io.zerows.extension.module.mbsecore.domain.tables.pojos.MJoin;
+import io.zerows.extension.module.mbsecore.exception._80538Exception417RelationCounter;
+import io.zerows.extension.module.mbsecore.metadata.Model;
+import io.zerows.extension.module.mbsecore.metadata.Schema;
+import io.zerows.extension.module.mbsecore.metadata.element.DataKey;
 import io.zerows.platform.constant.VValue;
 import io.zerows.platform.enums.modeling.EmKey;
 import io.zerows.platform.enums.modeling.EmModel;
 import io.zerows.support.Ut;
-import io.zerows.extension.module.mbsecore.metadata.Model;
-import io.zerows.extension.module.mbsecore.metadata.Schema;
-import io.zerows.extension.module.mbsecore.metadata.element.DataKey;
-import io.zerows.extension.module.mbsecore.domain.tables.pojos.MAttribute;
-import io.zerows.extension.module.mbsecore.domain.tables.pojos.MField;
-import io.zerows.extension.module.mbsecore.domain.tables.pojos.MJoin;
-import io.zerows.extension.module.exception._80538Exception417RelationCounter;
 import org.jooq.tools.StringUtils;
 
 import java.util.List;

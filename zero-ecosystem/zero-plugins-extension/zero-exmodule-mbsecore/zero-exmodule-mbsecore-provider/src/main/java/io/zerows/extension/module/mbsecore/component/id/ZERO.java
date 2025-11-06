@@ -1,13 +1,13 @@
 package io.zerows.extension.module.mbsecore.component.id;
 
 import io.r2mo.function.Fn;
-import io.zerows.platform.enums.modeling.EmKey;
-import io.zerows.extension.module.mbsecore.metadata.Model;
-import io.zerows.extension.module.mbsecore.metadata.Schema;
 import io.zerows.extension.module.mbsecore.domain.tables.pojos.MField;
 import io.zerows.extension.module.mbsecore.domain.tables.pojos.MJoin;
-import io.zerows.extension.module.exception._80514Exception409PrimaryKeyResult;
-import io.zerows.extension.module.exception._80515Exception417PrimaryKeySize;
+import io.zerows.extension.module.mbsecore.exception._80514Exception409PrimaryKeyResult;
+import io.zerows.extension.module.mbsecore.exception._80515Exception417PrimaryKeySize;
+import io.zerows.extension.module.mbsecore.metadata.Model;
+import io.zerows.extension.module.mbsecore.metadata.Schema;
+import io.zerows.platform.enums.modeling.EmKey;
 
 import java.util.HashSet;
 import java.util.List;

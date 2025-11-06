@@ -1,8 +1,8 @@
 package io.zerows.extension.module.mbsecore.component.io;
 
+import io.zerows.extension.module.mbsecore.common.em.EventType;
 import io.zerows.extension.module.mbsecore.metadata.element.DataRow;
 import io.zerows.extension.module.mbsecore.metadata.element.DataTpl;
-import io.zerows.extension.module.common.em.EventType;
 import io.zerows.specification.modeling.HRecord;
 
 import java.util.List;

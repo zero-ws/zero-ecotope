@@ -1,24 +1,31 @@
 package io.zerows.extension.module.mbsecore.component.sql;
 
 import io.r2mo.function.Fn;
-import io.zerows.extension.module.exception._80504Exception500NullableAdd;
-import io.zerows.extension.module.exception._80505Exception500NullableAlter;
-import io.zerows.extension.module.exception._80506Exception501ReflectorNull;
-import io.zerows.extension.module.exception._80507Exception501SentenceNull;
-import io.zerows.extension.module.exception._80509Exception500TypeAlter;
+import io.zerows.extension.module.mbsecore.common.em.CheckResult;
+import io.zerows.extension.module.mbsecore.component.metadata.AoReflector;
+import io.zerows.extension.module.mbsecore.component.metadata.AoSentence;
+import io.zerows.extension.module.mbsecore.component.metadata.FieldComparator;
+import io.zerows.extension.module.mbsecore.domain.tables.pojos.MField;
+import io.zerows.extension.module.mbsecore.domain.tables.pojos.MKey;
+import io.zerows.extension.module.mbsecore.exception._80504Exception500NullableAdd;
+import io.zerows.extension.module.mbsecore.exception._80505Exception500NullableAlter;
+import io.zerows.extension.module.mbsecore.exception._80506Exception501ReflectorNull;
+import io.zerows.extension.module.mbsecore.exception._80507Exception501SentenceNull;
+import io.zerows.extension.module.mbsecore.exception._80509Exception500TypeAlter;
+import io.zerows.extension.module.mbsecore.metadata.Schema;
 import io.zerows.platform.constant.VValue;
 import io.zerows.platform.enums.modeling.EmKey;
 import io.zerows.platform.enums.typed.ChangeFlag;
 import io.zerows.support.Ut;
-import io.zerows.extension.module.mbsecore.metadata.Schema;
-import io.zerows.extension.module.mbsecore.domain.tables.pojos.MField;
-import io.zerows.extension.module.mbsecore.domain.tables.pojos.MKey;
-import io.zerows.extension.module.common.em.CheckResult;
-import io.zerows.extension.module.mbsecore.component.metadata.AoReflector;
-import io.zerows.extension.module.mbsecore.component.metadata.AoSentence;
-import io.zerows.extension.module.mbsecore.component.metadata.FieldComparator;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 

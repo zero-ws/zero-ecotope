@@ -2,13 +2,13 @@ package io.zerows.extension.module.mbsecore.component.jooq;
 
 import io.r2mo.function.Fn;
 import io.zerows.component.log.LogOf;
+import io.zerows.extension.module.mbsecore.component.query.Ingest;
+import io.zerows.extension.module.mbsecore.exception._80524Exception500TableCounter;
 import io.zerows.extension.module.mbsecore.metadata.builtin.DataAtom;
 import io.zerows.extension.module.mbsecore.metadata.data.DataEvent;
 import io.zerows.extension.module.mbsecore.metadata.element.DataMatrix;
 import io.zerows.extension.module.mbsecore.metadata.element.DataRow;
 import io.zerows.extension.module.mbsecore.metadata.element.DataTpl;
-import io.zerows.extension.module.mbsecore.component.query.Ingest;
-import io.zerows.extension.module.exception._80524Exception500TableCounter;
 import io.zerows.platform.constant.VValue;
 import io.zerows.platform.enums.modeling.EmModel;
 import org.jooq.DSLContext;

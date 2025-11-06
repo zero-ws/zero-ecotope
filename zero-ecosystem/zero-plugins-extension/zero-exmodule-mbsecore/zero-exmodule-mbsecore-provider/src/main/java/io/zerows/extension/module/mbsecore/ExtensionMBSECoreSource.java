@@ -1,6 +1,5 @@
 package io.zerows.extension.module.mbsecore;
 
-import io.zerows.extension.module.ExtensionMBSECoreGeneration;
 import io.zerows.extension.skeleton.boot.ExtensionLauncher;
 import io.zerows.platform.ENV;
 

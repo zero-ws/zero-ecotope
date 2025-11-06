@@ -2,9 +2,9 @@ package io.zerows.extension.module.mbsecore.component.id;
 
 import io.r2mo.function.Fn;
 import io.zerows.extension.module.mbsecore.boot.Ao;
-import io.zerows.extension.module.mbsecore.metadata.Model;
-import io.zerows.extension.module.exception._80514Exception409PrimaryKeyResult;
 import io.zerows.extension.module.mbsecore.domain.tables.pojos.MJoin;
+import io.zerows.extension.module.mbsecore.exception._80514Exception409PrimaryKeyResult;
+import io.zerows.extension.module.mbsecore.metadata.Model;
 import io.zerows.specification.modeling.HRecord;
 import io.zerows.support.Ut;
 

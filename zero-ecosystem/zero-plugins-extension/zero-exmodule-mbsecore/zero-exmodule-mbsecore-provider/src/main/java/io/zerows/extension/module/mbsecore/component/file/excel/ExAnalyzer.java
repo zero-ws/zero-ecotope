@@ -2,9 +2,9 @@ package io.zerows.extension.module.mbsecore.component.file.excel;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.mbsecore.boot.Ao;
+import io.zerows.extension.module.mbsecore.common.AoTable;
 import io.zerows.extension.module.mbsecore.metadata.Model;
 import io.zerows.extension.module.mbsecore.metadata.Schema;
-import io.zerows.extension.module.common.AoTable;
 import io.zerows.plugins.excel.ExcelActor;
 import io.zerows.plugins.excel.ExcelClient;
 import io.zerows.plugins.excel.metadata.ExRecord;

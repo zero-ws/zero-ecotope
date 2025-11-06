@@ -1,9 +1,9 @@
 package io.zerows.extension.module.mbsecore.component.metadata;
 
 import io.vertx.core.json.JsonArray;
+import io.zerows.extension.module.mbsecore.common.em.CheckResult;
 import io.zerows.extension.module.mbsecore.domain.tables.pojos.MField;
 import io.zerows.extension.module.mbsecore.domain.tables.pojos.MKey;
-import io.zerows.extension.module.common.em.CheckResult;
 
 import java.util.concurrent.ConcurrentMap;
 

@@ -2,18 +2,18 @@ package io.zerows.extension.module.mbsecore.metadata.data;
 
 import io.r2mo.function.Fn;
 import io.zerows.component.log.LogOf;
-import io.zerows.support.Ut;
+import io.zerows.extension.module.mbsecore.domain.tables.pojos.MAttribute;
+import io.zerows.extension.module.mbsecore.domain.tables.pojos.MField;
+import io.zerows.extension.module.mbsecore.domain.tables.pojos.MJoin;
+import io.zerows.extension.module.mbsecore.exception._80536Exception417RelatedField;
+import io.zerows.extension.module.mbsecore.exception._80537Exception417RelatedSchema;
 import io.zerows.extension.module.mbsecore.metadata.Model;
 import io.zerows.extension.module.mbsecore.metadata.Schema;
 import io.zerows.extension.module.mbsecore.metadata.builtin.DataAtom;
 import io.zerows.extension.module.mbsecore.metadata.element.DataKey;
 import io.zerows.extension.module.mbsecore.metadata.element.DataRow;
 import io.zerows.extension.module.mbsecore.metadata.element.DataTpl;
-import io.zerows.extension.module.mbsecore.domain.tables.pojos.MAttribute;
-import io.zerows.extension.module.mbsecore.domain.tables.pojos.MField;
-import io.zerows.extension.module.mbsecore.domain.tables.pojos.MJoin;
-import io.zerows.extension.module.exception._80536Exception417RelatedField;
-import io.zerows.extension.module.exception._80537Exception417RelatedSchema;
+import io.zerows.support.Ut;
 
 import java.util.Arrays;
 import java.util.List;

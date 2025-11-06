@@ -1,7 +1,7 @@
 package io.zerows.extension.module.mbsecore.boot;
 
 import io.zerows.cortex.extension.AbstractBoot;
-import io.zerows.extension.module.common.AoConstant;
+import io.zerows.extension.module.mbsecore.common.AoConstant;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>

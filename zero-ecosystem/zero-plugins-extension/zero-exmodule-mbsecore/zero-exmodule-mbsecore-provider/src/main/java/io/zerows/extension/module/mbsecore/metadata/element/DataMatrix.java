@@ -1,8 +1,8 @@
 package io.zerows.extension.module.mbsecore.metadata.element;
 
 import io.vertx.codegen.annotations.Fluent;
+import io.zerows.extension.module.mbsecore.common.AoMsg;
 import io.zerows.extension.module.mbsecore.component.metadata.AoSentence;
-import io.zerows.extension.module.common.AoMsg;
 import io.zerows.extension.module.mbsecore.domain.tables.pojos.MAttribute;
 import io.zerows.extension.module.mbsecore.domain.tables.pojos.MField;
 import io.zerows.support.Ut;

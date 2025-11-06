@@ -2,7 +2,7 @@ package io.zerows.extension.module.mbsecore.component.apply;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.extension.module.common.em.EntityType;
+import io.zerows.extension.module.mbsecore.common.em.EntityType;
 import io.zerows.platform.constant.VString;
 import io.zerows.support.Ut;
 

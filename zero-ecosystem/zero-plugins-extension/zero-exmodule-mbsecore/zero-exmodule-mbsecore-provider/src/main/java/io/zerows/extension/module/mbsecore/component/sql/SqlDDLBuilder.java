@@ -1,8 +1,8 @@
 package io.zerows.extension.module.mbsecore.component.sql;
 
+import io.zerows.extension.module.mbsecore.common.sql.SqlStatement;
 import io.zerows.platform.constant.VString;
 import io.zerows.support.Ut;
-import io.zerows.extension.module.common.sql.SqlStatement;
 
 import java.text.MessageFormat;
 import java.util.List;

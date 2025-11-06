@@ -2,17 +2,17 @@ package io.zerows.extension.module.mbsecore.component.metadata;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.platform.constant.VValue;
-import io.zerows.epoch.constant.KName;
 import io.zerows.component.log.LogOf;
-import io.zerows.support.Ut;
-import io.zerows.extension.module.mbsecore.metadata.Schema;
-import io.zerows.extension.module.mbsecore.domain.tables.pojos.MField;
-import io.zerows.extension.module.common.em.CheckResult;
-import io.zerows.extension.module.common.sql.SqlStatement;
+import io.zerows.epoch.constant.KName;
+import io.zerows.extension.module.mbsecore.common.em.CheckResult;
+import io.zerows.extension.module.mbsecore.common.sql.SqlStatement;
 import io.zerows.extension.module.mbsecore.component.jdbc.AoConnection;
 import io.zerows.extension.module.mbsecore.component.sql.SqlDDLBuilder;
 import io.zerows.extension.module.mbsecore.component.sql.SqlDDLProvider;
+import io.zerows.extension.module.mbsecore.domain.tables.pojos.MField;
+import io.zerows.extension.module.mbsecore.metadata.Schema;
+import io.zerows.platform.constant.VValue;
+import io.zerows.support.Ut;
 
 import java.util.ArrayList;
 import java.util.List;

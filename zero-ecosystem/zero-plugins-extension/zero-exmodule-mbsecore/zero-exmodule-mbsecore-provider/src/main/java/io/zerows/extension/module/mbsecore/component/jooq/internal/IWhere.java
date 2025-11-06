@@ -1,8 +1,8 @@
 package io.zerows.extension.module.mbsecore.component.jooq.internal;
 
 import io.r2mo.function.Fn;
+import io.zerows.extension.module.mbsecore.exception._80523Exception417ConditionWhere;
 import io.zerows.extension.module.mbsecore.metadata.element.DataMatrix;
-import io.zerows.extension.module.exception._80523Exception417ConditionWhere;
 import org.jooq.Condition;
 import org.jooq.Field;
 import org.jooq.impl.DSL;
