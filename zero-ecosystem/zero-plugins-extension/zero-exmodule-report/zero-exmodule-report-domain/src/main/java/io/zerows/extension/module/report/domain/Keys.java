@@ -14,6 +14,7 @@ import io.zerows.extension.module.report.domain.tables.records.KpDimensionRecord
 import io.zerows.extension.module.report.domain.tables.records.KpFeatureRecord;
 import io.zerows.extension.module.report.domain.tables.records.KpReportInstanceRecord;
 import io.zerows.extension.module.report.domain.tables.records.KpReportRecord;
+
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.DSL;
@@ -23,21 +24,21 @@ import org.jooq.impl.Internal;
 /**
  * A class modelling foreign key relationships and constraints of tables in ZDB.
  */
-@SuppressWarnings({"all", "unchecked", "rawtypes"})
+@SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
 public class Keys {
 
     // -------------------------------------------------------------------------
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
-    public static final UniqueKey<KpDataSetRecord> KEY_KP_DATA_SET_PRIMARY = Internal.createUniqueKey(KpDataSet.KP_DATA_SET, DSL.name("KEY_KP_DATA_SET_PRIMARY"), new TableField[]{KpDataSet.KP_DATA_SET.KEY}, true);
-    public static final UniqueKey<KpDimensionRecord> KEY_KP_DIMENSION_CODE = Internal.createUniqueKey(KpDimension.KP_DIMENSION, DSL.name("KEY_KP_DIMENSION_CODE"), new TableField[]{KpDimension.KP_DIMENSION.CODE, KpDimension.KP_DIMENSION.REPORT_ID, KpDimension.KP_DIMENSION.SIGMA}, true);
-    public static final UniqueKey<KpDimensionRecord> KEY_KP_DIMENSION_PRIMARY = Internal.createUniqueKey(KpDimension.KP_DIMENSION, DSL.name("KEY_KP_DIMENSION_PRIMARY"), new TableField[]{KpDimension.KP_DIMENSION.KEY}, true);
-    public static final UniqueKey<KpFeatureRecord> KEY_KP_FEATURE_NAME = Internal.createUniqueKey(KpFeature.KP_FEATURE, DSL.name("KEY_KP_FEATURE_NAME"), new TableField[]{KpFeature.KP_FEATURE.NAME, KpFeature.KP_FEATURE.REPORT_ID, KpFeature.KP_FEATURE.SIGMA}, true);
-    public static final UniqueKey<KpFeatureRecord> KEY_KP_FEATURE_PRIMARY = Internal.createUniqueKey(KpFeature.KP_FEATURE, DSL.name("KEY_KP_FEATURE_PRIMARY"), new TableField[]{KpFeature.KP_FEATURE.KEY}, true);
-    public static final UniqueKey<KpReportRecord> KEY_KP_REPORT_CODE = Internal.createUniqueKey(KpReport.KP_REPORT, DSL.name("KEY_KP_REPORT_CODE"), new TableField[]{KpReport.KP_REPORT.CODE, KpReport.KP_REPORT.SIGMA}, true);
-    public static final UniqueKey<KpReportRecord> KEY_KP_REPORT_NAME = Internal.createUniqueKey(KpReport.KP_REPORT, DSL.name("KEY_KP_REPORT_NAME"), new TableField[]{KpReport.KP_REPORT.NAME, KpReport.KP_REPORT.SIGMA}, true);
-    public static final UniqueKey<KpReportRecord> KEY_KP_REPORT_PRIMARY = Internal.createUniqueKey(KpReport.KP_REPORT, DSL.name("KEY_KP_REPORT_PRIMARY"), new TableField[]{KpReport.KP_REPORT.KEY}, true);
-    public static final UniqueKey<KpReportInstanceRecord> KEY_KP_REPORT_INSTANCE_PRIMARY = Internal.createUniqueKey(KpReportInstance.KP_REPORT_INSTANCE, DSL.name("KEY_KP_REPORT_INSTANCE_PRIMARY"), new TableField[]{KpReportInstance.KP_REPORT_INSTANCE.KEY}, true);
-    public static final UniqueKey<KpReportInstanceRecord> KEY_KP_REPORT_INSTANCE_REPORT_ID = Internal.createUniqueKey(KpReportInstance.KP_REPORT_INSTANCE, DSL.name("KEY_KP_REPORT_INSTANCE_REPORT_ID"), new TableField[]{KpReportInstance.KP_REPORT_INSTANCE.REPORT_ID, KpReportInstance.KP_REPORT_INSTANCE.NAME}, true);
+    public static final UniqueKey<KpDataSetRecord> KEY_KP_DATA_SET_PRIMARY = Internal.createUniqueKey(KpDataSet.KP_DATA_SET, DSL.name("KEY_KP_DATA_SET_PRIMARY"), new TableField[] { KpDataSet.KP_DATA_SET.KEY }, true);
+    public static final UniqueKey<KpDimensionRecord> KEY_KP_DIMENSION_CODE = Internal.createUniqueKey(KpDimension.KP_DIMENSION, DSL.name("KEY_KP_DIMENSION_CODE"), new TableField[] { KpDimension.KP_DIMENSION.CODE, KpDimension.KP_DIMENSION.REPORT_ID, KpDimension.KP_DIMENSION.SIGMA }, true);
+    public static final UniqueKey<KpDimensionRecord> KEY_KP_DIMENSION_PRIMARY = Internal.createUniqueKey(KpDimension.KP_DIMENSION, DSL.name("KEY_KP_DIMENSION_PRIMARY"), new TableField[] { KpDimension.KP_DIMENSION.KEY }, true);
+    public static final UniqueKey<KpFeatureRecord> KEY_KP_FEATURE_NAME = Internal.createUniqueKey(KpFeature.KP_FEATURE, DSL.name("KEY_KP_FEATURE_NAME"), new TableField[] { KpFeature.KP_FEATURE.NAME, KpFeature.KP_FEATURE.REPORT_ID, KpFeature.KP_FEATURE.SIGMA }, true);
+    public static final UniqueKey<KpFeatureRecord> KEY_KP_FEATURE_PRIMARY = Internal.createUniqueKey(KpFeature.KP_FEATURE, DSL.name("KEY_KP_FEATURE_PRIMARY"), new TableField[] { KpFeature.KP_FEATURE.KEY }, true);
+    public static final UniqueKey<KpReportRecord> KEY_KP_REPORT_CODE = Internal.createUniqueKey(KpReport.KP_REPORT, DSL.name("KEY_KP_REPORT_CODE"), new TableField[] { KpReport.KP_REPORT.CODE, KpReport.KP_REPORT.SIGMA }, true);
+    public static final UniqueKey<KpReportRecord> KEY_KP_REPORT_NAME = Internal.createUniqueKey(KpReport.KP_REPORT, DSL.name("KEY_KP_REPORT_NAME"), new TableField[] { KpReport.KP_REPORT.NAME, KpReport.KP_REPORT.SIGMA }, true);
+    public static final UniqueKey<KpReportRecord> KEY_KP_REPORT_PRIMARY = Internal.createUniqueKey(KpReport.KP_REPORT, DSL.name("KEY_KP_REPORT_PRIMARY"), new TableField[] { KpReport.KP_REPORT.KEY }, true);
+    public static final UniqueKey<KpReportInstanceRecord> KEY_KP_REPORT_INSTANCE_PRIMARY = Internal.createUniqueKey(KpReportInstance.KP_REPORT_INSTANCE, DSL.name("KEY_KP_REPORT_INSTANCE_PRIMARY"), new TableField[] { KpReportInstance.KP_REPORT_INSTANCE.KEY }, true);
+    public static final UniqueKey<KpReportInstanceRecord> KEY_KP_REPORT_INSTANCE_REPORT_ID = Internal.createUniqueKey(KpReportInstance.KP_REPORT_INSTANCE, DSL.name("KEY_KP_REPORT_INSTANCE_REPORT_ID"), new TableField[] { KpReportInstance.KP_REPORT_INSTANCE.REPORT_ID, KpReportInstance.KP_REPORT_INSTANCE.NAME }, true);
 }

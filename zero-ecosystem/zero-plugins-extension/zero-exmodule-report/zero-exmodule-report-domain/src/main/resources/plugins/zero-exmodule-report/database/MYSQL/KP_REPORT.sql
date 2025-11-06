@@ -23,21 +23,21 @@ CREATE TABLE IF NOT EXISTS KP_REPORT
     `DATA_SET_ID`   VARCHAR(36) COMMENT '「dataSetId」- 数据源ID',
     `DATA_TPL_ID`   VARCHAR(36) COMMENT '「dataTplId」- 关联报表模板',
 
-    -- 报表归属（反向广义关联）
-    `APP_ID`        VARCHAR(36) COMMENT '「id」- 应用数据',
-
-    -- 特殊字段
-    `ACTIVE`        BIT         DEFAULT NULL COMMENT '「active」- 是否启用',
-    `SIGMA`         VARCHAR(32) DEFAULT NULL COMMENT '「sigma」- 统一标识',
-    `METADATA`      TEXT COMMENT '「metadata」- 附加配置',
-    `LANGUAGE`      VARCHAR(8)  DEFAULT NULL COMMENT '「language」- 使用的语言',
+-- ------------------------------ 公共字段 --------------------------------
+    `SIGMA`         VARCHAR(128) COMMENT '「sigma」- 用户组绑定的统一标识',
+    `LANGUAGE`      VARCHAR(10) COMMENT '「language」- 使用的语言',
+    `ACTIVE`        BIT COMMENT '「active」- 是否启用',
+    `METADATA`      TEXT COMMENT '「metadata」- 附加配置数据',
 
     -- Auditor字段
     `CREATED_AT`    DATETIME COMMENT '「createdAt」- 创建时间',
     `CREATED_BY`    VARCHAR(36) COMMENT '「createdBy」- 创建人',
     `UPDATED_AT`    DATETIME COMMENT '「updatedAt」- 更新时间',
     `UPDATED_BY`    VARCHAR(36) COMMENT '「updatedBy」- 更新人',
-    PRIMARY KEY (`KEY`)
+
+    `APP_ID`        VARCHAR(36) COMMENT '「appId」- 应用ID',
+    `TENANT_ID`     VARCHAR(36) COMMENT '「tenantId」- 租户ID',
+    PRIMARY KEY (`KEY`) USING BTREE
 );
 -- changeset Lang:kp-report-2
 -- Unique Key: 独立唯一键定义
