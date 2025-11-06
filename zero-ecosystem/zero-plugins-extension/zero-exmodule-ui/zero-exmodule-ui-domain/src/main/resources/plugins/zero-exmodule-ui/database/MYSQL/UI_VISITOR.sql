@@ -36,8 +36,20 @@ CREATE TABLE IF NOT EXISTS UI_VISITOR
     `CONTROL_ID`    VARCHAR(36) COMMENT '「controlId」- 挂载专用的ID：List / Form 都可用',
     `RESOURCE_ID`   VARCHAR(36) COMMENT '「resourceId」- 关联资源ID',
 
-    `SIGMA`         VARCHAR(128) COMMENT '「sigma」- 高维度：统一标识符',
-    `METADATA`      TEXT COMMENT '「metadata」- 附加配置数据',
     `RUN_COMPONENT` TEXT COMMENT '「runComponent」- 执行组件，扩展时专用',
+    -- ------------------------------ 公共字段 --------------------------------
+    `SIGMA`         VARCHAR(128) COMMENT '「sigma」- 用户组绑定的统一标识',
+    `LANGUAGE`      VARCHAR(10) COMMENT '「language」- 使用的语言',
+    `ACTIVE`        BIT COMMENT '「active」- 是否启用',
+    `METADATA`      TEXT COMMENT '「metadata」- 附加配置数据',
+
+    -- Auditor字段
+    `CREATED_AT`    DATETIME COMMENT '「createdAt」- 创建时间',
+    `CREATED_BY`    VARCHAR(36) COMMENT '「createdBy」- 创建人',
+    `UPDATED_AT`    DATETIME COMMENT '「updatedAt」- 更新时间',
+    `UPDATED_BY`    VARCHAR(36) COMMENT '「updatedBy」- 更新人',
+
+    `APP_ID`        VARCHAR(36) COMMENT '「appId」- 应用ID',
+    `TENANT_ID`     VARCHAR(36) COMMENT '「tenantId」- 租户ID',
     PRIMARY KEY (`IDENTIFIER`, `PAGE`, `PATH`, `TYPE`, `SIGMA`)
 );

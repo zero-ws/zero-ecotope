@@ -15,11 +15,11 @@ CREATE TABLE IF NOT EXISTS UI_COLUMN
      */
     -- 强制宽度
     `WIDTH`         INTEGER COMMENT '「width」- 当前列的宽度',
-    `FIXED`         BIT         DEFAULT FALSE COMMENT '「fixed」- 当前列是否固定',
+    `FIXED`         BIT DEFAULT FALSE COMMENT '「fixed」- 当前列是否固定',
     `CLASS_NAME`    VARCHAR(255) COMMENT '「className」- 当前列的特殊CSS类',
 
     -- 排序/过滤
-    `SORTER`        BIT         DEFAULT FALSE COMMENT '「sorter」- 当前列是否支持排序',
+    `SORTER`        BIT DEFAULT FALSE COMMENT '「sorter」- 当前列是否支持排序',
     `FILTER_TYPE`   VARCHAR(10) COMMENT '「filterType」- $filter.type 支持列搜索时的搜索类型',
     `FILTER_CONFIG` TEXT COMMENT '「filterConfig」- $filter.config 列搜索支持时的搜索配置',
 
@@ -38,17 +38,20 @@ CREATE TABLE IF NOT EXISTS UI_COLUMN
      */
     `CONTROL_ID`    VARCHAR(36) COMMENT '「controlId」- 关联的控件ID',
 
-    -- 特殊字段
-    `ACTIVE`        BIT         DEFAULT NULL COMMENT '「active」- 是否启用',
-    `SIGMA`         VARCHAR(32) DEFAULT NULL COMMENT '「sigma」- 统一标识',
-    `METADATA`      TEXT COMMENT '「metadata」- 附加配置',
-    `LANGUAGE`      VARCHAR(8)  DEFAULT NULL COMMENT '「language」- 使用的语言',
+    -- ------------------------------ 公共字段 --------------------------------
+    `SIGMA`         VARCHAR(128) COMMENT '「sigma」- 用户组绑定的统一标识',
+    `LANGUAGE`      VARCHAR(10) COMMENT '「language」- 使用的语言',
+    `ACTIVE`        BIT COMMENT '「active」- 是否启用',
+    `METADATA`      TEXT COMMENT '「metadata」- 附加配置数据',
 
     -- Auditor字段
     `CREATED_AT`    DATETIME COMMENT '「createdAt」- 创建时间',
     `CREATED_BY`    VARCHAR(36) COMMENT '「createdBy」- 创建人',
     `UPDATED_AT`    DATETIME COMMENT '「updatedAt」- 更新时间',
     `UPDATED_BY`    VARCHAR(36) COMMENT '「updatedBy」- 更新人',
+
+    `APP_ID`        VARCHAR(36) COMMENT '「appId」- 应用ID',
+    `TENANT_ID`     VARCHAR(36) COMMENT '「tenantId」- 租户ID',
     PRIMARY KEY (`KEY`) USING BTREE
 );
 
