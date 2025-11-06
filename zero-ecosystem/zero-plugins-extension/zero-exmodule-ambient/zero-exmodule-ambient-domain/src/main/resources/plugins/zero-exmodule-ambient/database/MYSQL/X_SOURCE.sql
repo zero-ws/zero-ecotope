@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS X_SOURCE
 
     `APP_ID`            VARCHAR(255) COMMENT '「appId」- 应用ID',
     `TENANT_ID`         VARCHAR(36) COMMENT '「tenantId」- 租户ID',
-    PRIMARY KEY (`KEY`)
+    PRIMARY KEY (`KEY`) USING BTREE
 );
 
 -- changeset Lang:ox-source-2

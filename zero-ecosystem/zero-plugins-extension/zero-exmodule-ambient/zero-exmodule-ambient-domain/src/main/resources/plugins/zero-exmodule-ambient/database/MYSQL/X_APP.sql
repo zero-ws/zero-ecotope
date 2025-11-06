@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS X_APP
 
     `APP_ID`     VARCHAR(36) COMMENT '「appId」- 应用ID', -- 此处作为父应用
     `TENANT_ID`  VARCHAR(36) COMMENT '「tenantId」- 租户ID',
-    PRIMARY KEY (`KEY`)
+    PRIMARY KEY (`KEY`) USING BTREE
 );
 
 -- changeset Lang:ox-app-2

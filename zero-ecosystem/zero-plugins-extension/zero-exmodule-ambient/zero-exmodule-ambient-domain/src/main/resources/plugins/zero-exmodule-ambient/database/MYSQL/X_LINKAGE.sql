@@ -39,7 +39,7 @@ CREATE TABLE `X_LINKAGE`
 
     `APP_ID`      VARCHAR(36) COMMENT '「appId」- 应用ID',
     `TENANT_ID`   VARCHAR(36) COMMENT '「tenantId」- 租户ID',
-    PRIMARY KEY (`KEY`)
+    PRIMARY KEY (`KEY`) USING BTREE
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_bin;
