@@ -85,7 +85,7 @@ CREATE TABLE IF NOT EXISTS S_VISITANT
     `ACL_VOW`     TEXT COMMENT '「aclVow」- 引用类属性集',
     `ACL_VERGE`   TEXT COMMENT '「aclVerge」- 依赖属性集',
 
-    -- 特殊字段
+    -- ------------------------------ 公共字段 --------------------------------
     `SIGMA`       VARCHAR(128) COMMENT '「sigma」- 用户组绑定的统一标识',
     `LANGUAGE`    VARCHAR(10) COMMENT '「language」- 使用的语言',
     `ACTIVE`      BIT COMMENT '「active」- 是否启用',
@@ -96,6 +96,9 @@ CREATE TABLE IF NOT EXISTS S_VISITANT
     `CREATED_BY`  VARCHAR(36) COMMENT '「createdBy」- 创建人',
     `UPDATED_AT`  DATETIME COMMENT '「updatedAt」- 更新时间',
     `UPDATED_BY`  VARCHAR(36) COMMENT '「updatedBy」- 更新人',
+
+    `APP_ID`      VARCHAR(36) COMMENT '「appId」- 应用ID',
+    `TENANT_ID`   VARCHAR(36) COMMENT '「tenantId」- 租户ID',
     PRIMARY KEY (`KEY`) USING BTREE
 );
 
