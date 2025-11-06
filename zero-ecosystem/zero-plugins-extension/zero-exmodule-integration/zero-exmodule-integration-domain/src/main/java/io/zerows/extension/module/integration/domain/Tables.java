@@ -13,7 +13,7 @@ import io.zerows.extension.module.integration.domain.tables.IPortfolio;
 /**
  * Convenience access to all tables in ZDB.
  */
-@SuppressWarnings({"all", "unchecked", "rawtypes"})
+@SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
 public class Tables {
 
     /**
