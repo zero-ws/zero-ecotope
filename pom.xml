@@ -12,7 +12,7 @@
     <version>1.0.0</version>
     <properties>
         <zero.version>1.0.0</zero.version>
-        <r2mo.version>1.0.28</r2mo.version>
+        <r2mo.version>1.0.29</r2mo.version>
 
         <!-- ====================== Java ======================================== -->
         <encoding>UTF-8</encoding>
