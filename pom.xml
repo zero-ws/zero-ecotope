@@ -5,7 +5,7 @@
     <parent>
         <groupId>io.zerows</groupId>
         <artifactId>rachel-momo-0216</artifactId>
-        <version>1.0.14</version>
+        <version>1.0.15</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>zero-ecotope</artifactId>
