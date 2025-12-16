@@ -2,9 +2,10 @@ package io.zerows.plugins.excel.component;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.environment.DevEnv;
 import io.zerows.platform.constant.VString;
+import io.zerows.plugins.excel.ExcelConstant;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.ConcurrentMap;
 
@@ -12,6 +13,7 @@ import java.util.concurrent.ConcurrentMap;
  * Fix issue of excel length: 32767 characters
  */
 @SuppressWarnings("all")
+@Slf4j
 public class ExValueJson implements ExValue {
 
     @Override
@@ -24,10 +26,7 @@ public class ExValueJson implements ExValue {
                 final String content = Ut.ioString(path.trim());
                 if (Ut.isNotNil(content)) {
                     // 日志级别调整
-                    if (DevEnv.devExcelRange()) {
-                        this.logger().info("[ Έξοδος ] （ExJson）File = {0}, InJson Value captured `{1}`",
-                            path, content);
-                    }
+                    log.debug("{} (ExJson) 文件：{}, 捕捉的值：{}", ExcelConstant.K_PREFIX, path, content);
                     if (Ut.isJArray(content)) {
                         final JsonArray normalized = Ut.toJArray(content);
                         literal = normalized.encodePrettily();
@@ -36,7 +35,7 @@ public class ExValueJson implements ExValue {
                         literal = normalized.encodePrettily();
                     }
                 } else {
-                    this.logger().warn("[ Έξοδος ] （ExJson) File = {0} met error!!", path);
+                    log.warn("{}（ExJson) File = {} 遇到未可知的异常!!", ExcelConstant.K_PREFIX, path);
                 }
             }
         }

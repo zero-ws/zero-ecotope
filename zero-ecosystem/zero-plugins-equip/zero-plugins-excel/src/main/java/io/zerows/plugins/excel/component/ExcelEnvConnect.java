@@ -47,7 +47,6 @@ public class ExcelEnvConnect implements ExcelEnv<Void> {
             log.info("{} Connect 配置检查：{}，MDConnect 数量：{}",
                 ExcelConstant.K_PREFIX, id.value(), connects.size());
         }
-        log.info("{} 导入配置检查完成！", ExcelConstant.K_PREFIX);
         return null;
     }
 }

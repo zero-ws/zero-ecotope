@@ -47,7 +47,8 @@ class ZeroSource implements ZeroPower.Source {
      */
     @Override
     public YmConfiguration load() {
-        final InPre pre = ZeroOr.of().inPre();
+        final InPre pre = ZeroFs.of().inPre();
+
         final YmConfiguration configuration;
         final HApp app;
         if (Objects.isNull(pre)) {
@@ -57,6 +58,9 @@ class ZeroSource implements ZeroPower.Source {
             log.info("[ ZERO ] 本地 -> 加载配置文件…… ⚙️ {}", load.getClass().getName());
             configuration = load.configure(app);
         } else {
+            // 日志处理（此处可保证启动前的日志信息）
+            ZeroLogging.configure(pre.getLogging());
+
             // -41001 验证
             final YmApplication application = pre.application();
             Fn.jvmKo(Objects.isNull(application) || StrUtil.isEmpty(application.getName()),

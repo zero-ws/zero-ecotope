@@ -2,12 +2,12 @@ package io.zerows.extension.crud.common;
 
 import io.r2mo.typed.common.MultiKeyMap;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.environment.DevEnv;
 import io.zerows.cortex.extension.HExtension;
 import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.epoch.basicore.MDEntity;
 import io.zerows.mbse.metadata.KModule;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
 import java.util.Set;
@@ -15,14 +15,13 @@ import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-import static io.zerows.extension.crud.common.Ix.LOG;
-
 ;
 
 /*
  * Dao class initialization
  * plugin/crud/module/ folder singleton
  */
+@Slf4j
 class IxDao {
     private static final MultiKeyMap<KModule> MODULE_MAP = new MultiKeyMap<>();
 
@@ -59,23 +58,20 @@ class IxDao {
             MODULE_MAP.put(identifier, config, config.getName());
 
 
-            if (DevEnv.devDaoBind()) {
-                logId.add(identifier);
-                logMap.put(identifier, Ut.fromMessage(IxMsg.INIT_INFO, identifier, config.getName()));
-            }
+            logId.add(identifier);
+            logMap.put(identifier, Ut.fromMessage("[ XMOD ] --- identifier = `{0}` and actor = `{1}`", identifier, config.getName()));
         }));
-        logId.forEach(identifier -> LOG.Init.info(IxDao.class, logMap.get(identifier)));
-        LOG.Init.info(IxDao.class, "IxDao Finished ! Size = {0}, Uris = {0}",
-            MODULE_MAP.values().size(), IxConfiguration.getUris().size());
+        logId.forEach(identifier -> log.info(logMap.get(identifier)));
+        log.info("[ XMOD ] IxDao 配置完成 ! Size = {}, Uris = {}", MODULE_MAP.values().size(), IxConfiguration.getUris().size());
     }
 
     static KModule get(final String actor) {
         final KModule config = MODULE_MAP.getOr(actor);
         if (Objects.isNull(config)) {
-            LOG.Rest.warn(IxDao.class, "Actor: identifier = `{}` configuration is missing!", actor);
+            log.warn("[ XMOD ] Actor: identifier = `{}` configuration is missing!", actor);
             return null;
         } else {
-            LOG.Rest.info(IxDao.class, "Actor: identifier = `{0}`", actor);
+            log.info("[ XMOD ] Actor: identifier = `{}`", actor);
             return config;
         }
     }

@@ -30,7 +30,8 @@ public class DevZeroConverter extends CompositeConverter<ILoggingEvent> {
         PREFIX_REPLACEMENTS.put("[ PLUG ]", "\033[38;5;38m[ PLUG ]\033[0m");   // 青蓝色 [ PLUG ]
         PREFIX_REPLACEMENTS.put("[ XMOD ]", "\033[38;5;10m[ XMOD ]\033[0m");  // 绿色 [ XMOD ]
         PREFIX_REPLACEMENTS.put("[ MNTR ]", "\033[38;5;208m[ MNTR ]\033[0m"); // 橙黄色 [ MNTR ]
-        PREFIX_REPLACEMENTS.put("[ ZERO ]", "\033[38;5;91m[ ZERO ]\033[0m"); // 橙黄色 [ MNTR ]
+        PREFIX_REPLACEMENTS.put("[ ZERO ]", "\033[38;5;91m[ ZERO ]\033[0m"); // 紫色 [ ZERO ]
+        PREFIX_REPLACEMENTS.put("[ INST ]", "\033[38;5;106m[ INST ]\033[0m"); // 黄绿色 [ INST ]
         PREFIX_REPLACEMENTS.put("Defer", "\033[38;5;196mDefer\033[0m");     // 红色 Defer
         // 可以在这里轻松添加更多前缀和颜色
         // 例如: PREFIX_REPLACEMENTS.put("[CACHE]", "\033[1;38;5;220m[ CACHE ]\033[0m"); // 加粗金色

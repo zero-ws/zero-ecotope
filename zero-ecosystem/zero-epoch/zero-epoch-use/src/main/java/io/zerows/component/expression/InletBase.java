@@ -1,8 +1,7 @@
 package io.zerows.component.expression;
 
-import io.zerows.component.environment.DevEnv;
-import io.zerows.component.log.LogO;
-import io.zerows.support.Ut;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
@@ -24,9 +23,7 @@ public abstract class InletBase implements Inlet {
     }
 
     protected void console(final String message, final Object... args) {
-        if (DevEnv.devExprBind()) {
-            final LogO logger = Ut.Log.plugin(this.getClass());
-            logger.info(message, args);
-        }
+        final Logger logger = LoggerFactory.getLogger(this.getClass());
+        logger.debug(message, args);
     }
 }

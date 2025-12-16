@@ -2,7 +2,7 @@ package io.zerows.epoch.basicore;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.metadata.MetaCachePage;
-import io.zerows.support.Ut;
+import io.zerows.epoch.boot.ZeroFs;
 
 import java.io.Serializable;
 
@@ -32,11 +32,11 @@ public class MDPage implements Serializable {
 
     public MDPage configure(final String path) {
         // 非 OSGI
-        final String dataPath = "plugins/" + this.id.value() + path;
-        this.configData.mergeIn(Ut.ioJObject(dataPath), true);
-        this.filename = dataPath.substring(dataPath.lastIndexOf("/") + 1);
+        final ZeroFs fs = ZeroFs.of(this.id);
+        this.configData.mergeIn(fs.inJObject(path), true);
+        this.filename = path.substring(path.lastIndexOf("/") + 1);
         // 去掉文件名
-        final String url = dataPath.substring(0, dataPath.lastIndexOf("/"));
+        final String url = path.substring(0, path.lastIndexOf("/"));
         this.key = url.split("web")[1];
         // 填充 MetaCachePage，此处填充之后后续才可以读取到
         final MetaCachePage pageCache = MetaCachePage.singleton();

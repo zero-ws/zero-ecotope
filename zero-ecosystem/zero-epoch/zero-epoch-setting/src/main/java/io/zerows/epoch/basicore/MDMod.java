@@ -59,6 +59,16 @@ public class MDMod implements Serializable {
         private JsonObject config;
     }
 
+    /**
+     * 模块加载器的检索流程
+     * <pre>
+     *     1. 优先考虑 supplier.component 指定的配置处理器类
+     *     2. 如果没有指定则直接使用默认的配置处理器
+     *     3. 默认处理器中的组件可以依靠 SPI 优先级进行覆盖 priority > 0 的模式
+     * </pre>
+     *
+     * @return 配置处理器实例
+     */
     public ConfigMod configurer() {
         if (Objects.isNull(this.supplier) || Objects.isNull(this.supplier.getComponent())) {
             return ConfigMod.of();

@@ -1,9 +1,13 @@
 package io.zerows.epoch.basicore;
 
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.boot.ZeroFs;
 import io.zerows.support.Ut;
 
 import java.io.Serializable;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -65,17 +69,25 @@ public class MDWorkflow implements Serializable {
         return this;
     }
 
+    // ... 类定义 ...
+
     public MDWorkflow configure(final List<String> formSet,
                                 final List<String> formData) {
+        // 1. 处理 Form 文件路径
         formSet.forEach(formEach -> {
-            if (formEach.startsWith(this.directory)) {
+            if (this.isPathResolved(formEach)) {
+                // 如果已经是完整路径（包含前缀或已存在），直接添加
                 this.formSet.add(formEach);
             } else {
+                // 否则拼接目录
                 final String formFile = Ut.ioPath(this.directory, formEach);
                 this.formSet.add(formFile);
             }
         });
+
+        // 2. 处理 Data 数据读取
         formData.forEach(file -> {
+            // 这里的 replace 是为了生成 Key，不影响读取路径
             final String filename = file.replace(".json", "");
             this.formData.put(filename, this.ioData(file));
         });
@@ -83,8 +95,42 @@ public class MDWorkflow implements Serializable {
     }
 
     private JsonObject ioData(final String file) {
-        final String filepath = Ut.ioPath(this.directory, file);
-        return Ut.ioJObject(filepath);
+        // 判断 file 是否已经是完整路径
+        final String filepath;
+        if (this.isPathResolved(file)) {
+            filepath = file;
+        } else {
+            filepath = Ut.ioPath(this.directory, file);
+        }
+        return ZeroFs.of().inJObject(filepath);
+    }
+
+    /**
+     * 辅助方法：判断路径是否已经“就绪”
+     * 不需要再拼接目录的情况：
+     * 1. 字符串以 directory 开头（防重复拼接）
+     * 2. 是绝对路径 (/etc/...)
+     * 3. 文件在当前路径下真实存在 (init/oob/...)
+     */
+    private boolean isPathResolved(final String pathStr) {
+        if (pathStr == null) {
+            return false;
+        }
+
+        // 1. 字符串检查：如果已经包含了 directory 前缀
+        if (pathStr.startsWith(this.directory)) {
+            return true;
+        }
+
+        try {
+            final Path path = Paths.get(pathStr);
+            // 2. 物理/逻辑检查：绝对路径 或 文件存在
+            // (Files.exists 解决了你刚才遇到的 init/oob 返回完整相对路径的问题)
+            return path.isAbsolute() || Files.exists(path);
+        } catch (final Exception ignored) {
+            // 路径字符串非法等情况，默认视为未解析，交由后续 Ut.ioPath 处理
+            return false;
+        }
     }
 
     @Override

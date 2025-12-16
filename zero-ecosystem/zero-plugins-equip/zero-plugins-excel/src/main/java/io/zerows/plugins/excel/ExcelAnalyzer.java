@@ -1,7 +1,5 @@
 package io.zerows.plugins.excel;
 
-import io.zerows.component.environment.DevEnv;
-import io.zerows.component.log.LogO;
 import io.zerows.epoch.basicore.MDConnect;
 import io.zerows.epoch.management.OCacheConfiguration;
 import io.zerows.platform.constant.VValue;
@@ -15,6 +13,7 @@ import io.zerows.plugins.excel.metadata.ExTable;
 import io.zerows.plugins.excel.util.ExFn;
 import io.zerows.specification.modeling.metadata.HMetaAtom;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.FormulaEvaluator;
@@ -34,8 +33,8 @@ import java.util.concurrent.ConcurrentMap;
  * Wrapper Sheet object to findRunning data, this object could help to
  * web ExTable here.
  */
+@Slf4j
 public class ExcelAnalyzer implements Serializable {
-    private static final LogO LOGGER = Ut.Log.plugin(ExcelAnalyzer.class);
     private final transient Sheet sheet;
     private transient FormulaEvaluator evaluator;
     private transient ExIn scanner;
@@ -53,9 +52,7 @@ public class ExcelAnalyzer implements Serializable {
      * Scan sheet to findRunning all the data and definition part
      */
     public Set<ExTable> analyzed(final ExBound bound, final HMetaAtom metaAtom) {
-        if (DevEnv.devExcelRange()) {
-            LOGGER.info("[ Έξοδος ] Scan Range: {0}", bound);
-        }
+        log.debug("{} 扫描范围：{} / {}", ExcelConstant.K_PREFIX, this.sheet.getSheetName(), bound);
         try {
             /* Sheet scanning */
             final Set<ExTable> tables = new HashSet<>();
@@ -76,10 +73,8 @@ public class ExcelAnalyzer implements Serializable {
             });
             /* analyzedBounds */
             if (!tableCell.isEmpty()) {
-                if (DevEnv.devExcelRange()) {
-                    LOGGER.info("[ Έξοδος ] Scanned sheet: {0}, tableCell = {1}",
-                        this.sheet.getSheetName(), String.valueOf(tableCell.size()));
-                }
+                log.debug("{} 发现数据表格数量：{} / {}", ExcelConstant.K_PREFIX,
+                    this.sheet.getSheetName(), tableCell.size());
                 /* Range scaned */
                 final ConcurrentMap<Integer, Integer> range = this.getRange(tableCell);
                 tableCell.stream().map(cell -> {
@@ -94,7 +89,7 @@ public class ExcelAnalyzer implements Serializable {
             }
             return tables;
         } catch (final Throwable ex) {
-            LOGGER.fatal(ex);
+            log.error(ex.getMessage(), ex);
             return new HashSet<>();
         }
     }
@@ -159,7 +154,7 @@ public class ExcelAnalyzer implements Serializable {
             if (Objects.nonNull(connect)) {
                 table.setConnect(connect);
             } else {
-                LOGGER.warn("The connect of configuration: {} is missing.", table.getName());
+                log.warn("{} 数据表 {} 连接配置丢失.", ExcelConstant.K_PREFIX, table.getName());
             }
         }
         return table;

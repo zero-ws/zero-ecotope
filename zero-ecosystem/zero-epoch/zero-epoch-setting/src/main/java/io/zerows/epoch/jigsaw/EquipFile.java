@@ -2,13 +2,15 @@ package io.zerows.epoch.jigsaw;
 
 import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.epoch.basicore.MDId;
-import io.zerows.support.Ut;
+import io.zerows.epoch.boot.ZeroFs;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 扫描所有数据目录，提取相关数据文件
  *
  * @author lang : 2024-05-12
  */
+@Slf4j
 class EquipFile implements EquipAt {
     @Override
     public void initialize(final MDConfiguration configuration) {
@@ -22,11 +24,12 @@ class EquipFile implements EquipAt {
          * - reporting：报表相关目录
          * - extension：扩展目录
          */
-        configuration.addFile(Ut.ioFilesN(id.path() + "/data"));
-        configuration.addFile(Ut.ioFilesN(id.path() + "/modulat"));
-        configuration.addFile(Ut.ioFilesN(id.path() + "/security"));
-        configuration.addFile(Ut.ioFilesN(id.path() + "/workflow"));
-        configuration.addFile(Ut.ioFilesN(id.path() + "/reporting"));
-        configuration.addFile(Ut.ioFilesN(id.path() + "/extension"));
+        final ZeroFs io = ZeroFs.of(id);
+        configuration.addFile(io.inFiles("data"));
+        configuration.addFile(io.inFiles("modulat"));
+        configuration.addFile(io.inFiles("security"));
+        configuration.addFile(io.inFiles("workflow"));
+        configuration.addFile(io.inFiles("reporting"));
+        configuration.addFile(io.inFiles("extension"));
     }
 }

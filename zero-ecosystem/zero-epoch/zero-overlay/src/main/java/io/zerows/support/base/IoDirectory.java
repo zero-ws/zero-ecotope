@@ -2,8 +2,8 @@ package io.zerows.support.base;
 
 import io.r2mo.function.Fn;
 import io.zerows.component.fs.LocalDir;
-import io.zerows.component.log.LogUtil;
 import io.zerows.platform.constant.VValue;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,8 +22,8 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.stream.Collectors;
 
+@Slf4j
 final class IoDirectory {
-    private static final LogUtil LOG = LogUtil.from(IoDirectory.class);
 
     private IoDirectory() {
     }
@@ -95,7 +95,7 @@ final class IoDirectory {
              * Split steps for url extraction
              */
             if (Objects.isNull(url)) {
-                LOG.debug("The url of folder = `{0}` is null", folder);
+                log.debug("The url of folder = `{}` is null", folder);
             } else {
                 /*
                  * Whether it's jar path or common path.
@@ -112,7 +112,7 @@ final class IoDirectory {
                      */
                     retSet.addAll(getJars(url, extension, isDirectory));
                 } else {
-                    LOG.error("protocol error! protocol = {0}, url = {1}", protocol, url);
+                    log.error("[ ZERO ] protocol error! protocol = {}, url = {}", protocol, url);
                 }
             }
         }
@@ -211,7 +211,15 @@ final class IoDirectory {
 
     private static List<String> getFiles(final File directory, final String extension, final boolean isDirectory) {
         final List<String> retList = new ArrayList<>();
-        if (directory.isDirectory() && directory.exists()) {
+
+        // 1. 先优先检查是否存在
+        if (!directory.exists()) {
+            log.error("The path does not exist, file = `{}`", directory.getAbsolutePath());
+            return retList;
+        }
+
+        // 2. 只有存在时，才判断是否为目录
+        if (directory.isDirectory()) {
             final File[] files = (isDirectory) ?
                 directory.listFiles(File::isDirectory) :
                 (null == extension ?
@@ -220,10 +228,20 @@ final class IoDirectory {
             if (null != files) {
                 retList.addAll(Arrays.stream(files)
                     .map(File::getName)
-                    .toList());
+                    .toList()); // 注意：Java 8使用 collect, Java 16+ 可用 toList()
             }
         } else {
-            LOG.error("The file doest not exist, file = `{0}`", directory.getAbsolutePath());
+            // 3. 既存在，又不是目录（说明传入的是一个普通文件）
+            // 在 IoDirectory 的语境下，列出文件的子文件没有意义，
+            // 但这里不应该报错说"不存在"，可以选择 debug 记录一下或者直接忽略
+            log.debug("The path is a file, not a directory, skip listing: `{}`", directory.getAbsolutePath());
+
+            // 备选逻辑：如果你希望传入单个文件时，如果满足 extension 也把它自己返回，可以在这里处理
+            /*
+            if (!isDirectory && (extension == null || directory.getName().endsWith(extension))) {
+                retList.add(directory.getName());
+            }
+            */
         }
         return retList;
     }

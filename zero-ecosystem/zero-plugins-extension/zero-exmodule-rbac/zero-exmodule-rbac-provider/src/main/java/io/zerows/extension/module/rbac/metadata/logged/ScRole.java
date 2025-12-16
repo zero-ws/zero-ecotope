@@ -3,8 +3,6 @@ package io.zerows.extension.module.rbac.metadata.logged;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
-import io.zerows.component.environment.DevEnv;
-import io.zerows.component.log.LogOf;
 import io.zerows.cosmic.plugins.cache.Rapid;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.module.rbac.common.ScAuthKey;
@@ -13,6 +11,7 @@ import io.zerows.extension.module.rbac.domain.tables.daos.RRolePermDao;
 import io.zerows.extension.module.rbac.domain.tables.pojos.RRolePerm;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashSet;
 import java.util.List;
@@ -20,17 +19,15 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static io.zerows.extension.module.rbac.boot.Sc.LOG;
-
 /**
  * Data in Global Shared Data for current role
  * Connect to Pool: permissionPool
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
 public class ScRole {
     private static final Cc<String, ScRole> CC_ROLE = Cc.open();
-    private static final LogOf LOGGER = LogOf.get(ScRole.class);
     private final transient Rapid<String, JsonArray> cache;
     private final transient String roleId;
     private final transient Set<String> authorities = new HashSet<>();
@@ -76,9 +73,7 @@ public class ScRole {
             if (Objects.isNull(permissions)) {
                 return this.fetch().compose(this::permission);
             } else {
-                if (DevEnv.devAuthorized()) {
-                    LOG.Auth.info(LOGGER, "ScRole \u001b[0;37m----> Cache key = {0}\u001b[m.", this.roleId);
-                }
+                log.debug("[ XMOD ] ScRole 缓存命中 key = {}", this.roleId);
                 /* Authorities fill from cache ( Sync the authorities ) */
                 permissions.stream().map(item -> (String) item)
                     .forEach(this.authorities::add);

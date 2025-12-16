@@ -1,7 +1,7 @@
 package io.zerows.epoch.jigsaw;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.epoch.boot.ZeroOr;
+import io.zerows.epoch.boot.ZeroFs;
 import io.zerows.platform.exception._60050Exception501NotSupport;
 import io.zerows.specification.development.compiled.HBundle;
 
@@ -22,13 +22,13 @@ interface MakerIo<T> {
     Cc<String, MakerIo> CC_MAKER = Cc.openThread();
 
     @SuppressWarnings("unchecked")
-    static <T> MakerIo<T> ofConnect(final ZeroOr io) {
+    static <T> MakerIo<T> ofConnect(final ZeroFs io) {
         final String makerKey = MakerIoConnect.class.getName() + "@" + io.hashCode();
         return (MakerIo<T>) CC_MAKER.pick(() -> new MakerIoConnect(io), makerKey);
     }
 
     @SuppressWarnings("unchecked")
-    static <T> MakerIo<T> ofEntity(final ZeroOr io) {
+    static <T> MakerIo<T> ofEntity(final ZeroFs io) {
         final String makerKey = MakerIoEntity.class.getName() + "@" + io.hashCode();
         return (MakerIo<T>) CC_MAKER.pick(() -> new MakerIoEntity(io), makerKey);
     }

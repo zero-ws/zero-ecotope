@@ -4,7 +4,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.basicore.MDConnect;
 import io.zerows.epoch.basicore.MDEntity;
-import io.zerows.epoch.boot.ZeroOr;
+import io.zerows.epoch.boot.ZeroFs;
 import io.zerows.epoch.constant.KName;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
@@ -18,7 +18,7 @@ import java.util.concurrent.ConcurrentMap;
  * @author lang : 2024-05-12
  */
 class MakerIoEntity extends MakerIoBase<MDEntity> {
-    MakerIoEntity(final ZeroOr io) {
+    MakerIoEntity(final ZeroFs io) {
         super(io);
     }
 
@@ -30,14 +30,11 @@ class MakerIoEntity extends MakerIoBase<MDEntity> {
         // 遍历 modelDir 目录提取当前环境中所有定义的实体信息
         final ConcurrentMap<String, MDEntity> entityMap = new ConcurrentHashMap<>();
         // 非 OSGI 环境
-        final List<String> dirs = Ut.ioDirectories(modelDir);
-        final List<String> pathes = dirs.stream()
-            .map(identifier -> Ut.ioPath(modelDir, identifier))
-            .toList();
+        final List<String> dirs = this.io().inDirectories(modelDir);
 
 
-        Objects.requireNonNull(pathes);
-        pathes.stream()
+        Objects.requireNonNull(dirs);
+        dirs.stream()
             .map(path -> this.buildOne(path, bundle, args))
             .forEach(entity -> entityMap.put(entity.identifier(), entity));
         return entityMap;
@@ -53,6 +50,15 @@ class MakerIoEntity extends MakerIoBase<MDEntity> {
      *     1. 若表名在传入的 Map 中不存在，则规则为此时 daoCls 配置的就是 Java 类全名而并非表名，留给上层 KModule 去执行。
      *     2. 若表名存在则直接修改 entityJ 中的 daoCls 字段
      * </code></pre>
+     * 新版统一路径信息，如果此处是 dir，则 idFile 的计算从 plugins/{id}/model/{identifier}/entity.json 开始计算，由于此处传
+     * 入的 {@link ZeroFs} 已经包含了之前的 plugins/{id}，所以 idFile 的最终计算结果应该是 model/{identifier}/entity.json，
+     * 这种模式下也同样适用于 OSGI 环境和远程环境，其语义转换成唯一
+     * <pre>
+     *     {@link ZeroFs} 从模块根目录开始读取
+     *     1. 单机环境下模块根目录为 plugins/{mid}，防止多个模块在一起的冲突
+     *     2. 模块环境下根目录为当前模块目录
+     *     3. 远程环境下可以直接替换 {@link ZeroFs} 的实现让它支持远程读取
+     * </pre>
      *
      * @param dir  子目录名称
      * @param args 参数
@@ -65,18 +71,14 @@ class MakerIoEntity extends MakerIoBase<MDEntity> {
 
         final String idOfDir = this.buildId(dir);
         // model/<identifier>/entity.json / 一旦定义了实体，此处必须包含 entity.json 文件
-        final JsonObject entityJ = Ut.ioJObject(dir + "/entity.json");
+        final String idFile = Ut.ioPath("model/" + idOfDir, "entity.json");
+        final JsonObject entityJ = this.io().inJObject(idFile);
         // model/<identifier>/column.json
         final JsonArray columnA = new JsonArray();
-        // 检查
-        //        if (Ut.Bnd.ioExist("column.json", owner, dir)) {
-        //            columnA = Ut.ioJArray("column.json", dir);
-        //        }
-
         final String idOfFile = Ut.valueString(entityJ, KName.IDENTIFIER);
 
 
-        // 构造 MDEntity
+        // --------------- 构造 MDEntity
         final MDEntity entity;
         if (Ut.isNil(idOfFile)) {
             // Bind：列
@@ -89,6 +91,8 @@ class MakerIoEntity extends MakerIoBase<MDEntity> {
         final ConcurrentMap<String, MDConnect> connectMap = (ConcurrentMap<String, MDConnect>) args[0];
         final String daoCls = Ut.valueString(entityJ, "daoCls");
 
+
+        // --------------- 查找 MDConnect
         final MDConnect found;
         if (connectMap.containsKey(daoCls)) {
             // daoCls 配置的是表名
@@ -112,7 +116,7 @@ class MakerIoEntity extends MakerIoBase<MDEntity> {
         }
 
 
-        // Bind：entity 和 connect
+        // 最终构造模型对应的元数据绑定信息 / Bind：entity 和 connect
         return entity.bind(entityJ).bind(found);
     }
 

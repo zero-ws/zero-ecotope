@@ -1,12 +1,9 @@
 package io.zerows.epoch.boot;
 
-import cn.hutool.core.util.StrUtil;
 import io.r2mo.function.Fn;
 import io.r2mo.io.common.HFS;
-import io.r2mo.spi.SPI;
 import io.r2mo.typed.cc.Cc;
 import io.r2mo.typed.json.JObject;
-import io.r2mo.typed.json.JUtil;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.basicore.InPre;
@@ -24,19 +21,17 @@ import java.util.Objects;
  * 配置分流器（底层核心组件）
  * <pre>
  *     1. 配置分流读取 {@link InPre} 前置配置
- *        {@link ZeroSource} -> {@link ZeroOr} -> 加载前置配置
+ *        {@link ZeroSource} -> {@link ZeroFs} -> 加载前置配置
  *     2. 配置分流加载模块配置
  * </pre>
  *
  * @author lang : 2025-12-15
  */
 @Slf4j
-public class ZeroOr {
+public class ZeroFs {
     private static final String FILE_BOOT = "vertx-boot.yml";
     private static final String MOD_CONTAINER = "zero-exmodule::CORE";
-    private static final Cc<String, ZeroOr> CC_SKELETON = Cc.open();
-
-    private static final JUtil UT = SPI.V_UTIL;
+    private static final Cc<String, ZeroFs> CC_SKELETON = Cc.open();
     // ------ 成员变量
     private final MDId id;
     private final String mid;
@@ -44,26 +39,26 @@ public class ZeroOr {
     private MDMod mod;
     private final transient HFS fs = HFS.of();
 
-    private ZeroOr(final MDId id) {
+    private ZeroFs(final MDId id) {
         this.id = id;
         this.mid = Objects.isNull(id) ? MOD_CONTAINER : id.value();
     }
 
-    public static ZeroOr of(final String mid) {
-        return CC_SKELETON.pick(() -> new ZeroOr(MDId.of(mid)), mid);
+    public static ZeroFs of(final String mid) {
+        return CC_SKELETON.pick(() -> new ZeroFs(MDId.of(mid)), mid);
     }
 
-    public static ZeroOr of(final MDId mdId) {
+    public static ZeroFs of(final MDId mdId) {
         return of(mdId.value());
     }
 
-    public static ZeroOr of() {
+    public static ZeroFs of() {
         return of(MOD_CONTAINER);
     }
 
     public String name() {
         final MDMod mod = this.getOrCreate();
-        return mod.name();
+        return Objects.isNull(mod) ? null : mod.name();
     }
 
     /**
@@ -73,27 +68,12 @@ public class ZeroOr {
      */
     public InPre inPre() {
         Fn.jvmKo(!MOD_CONTAINER.equals(this.mid), _41002Exception500ConfigConflict.class, MOD_CONTAINER, this.mid);
+        final ConfigFs<InPre> fs = this.getOrCreate(FILE_BOOT, InPre.class);
+        return Objects.isNull(fs) ? null : fs.refT();
+    }
 
-        final String content = this.fs.inContent(FILE_BOOT);
-
-
-        // ------------- 两次加载都失败则直接返回 null
-        if (StrUtil.isEmpty(content)) {
-            return null;
-        }
-
-
-        final String parsedString = ZeroParser.compile(content);
-
-
-        final JObject parsed = this.fs.ymlForJ(parsedString);
-        final InPre inPre = UT.deserializeJson(parsed, InPre.class);
-
-
-        // 设置日志
-        ZeroLogging.configure(inPre.getLogging());
-        log.debug("[ ZERO ] 读取到的配置内容：\n{}", parsed.encodePretty());
-        return inPre;
+    public <T> ConfigFs<T> inFs(final String filename, final Class<T> clazz) {
+        return this.getOrCreate(filename, clazz);
     }
 
     /**
@@ -102,22 +82,33 @@ public class ZeroOr {
      * @return 模块配置对象
      */
     private MDMod getOrCreate() {
+        // 非模块处理
+        if (MOD_CONTAINER.equals(this.mid)) {
+            return null;
+        }
+
+
+        // 模块处理流程
         if (Objects.nonNull(this.mod)) {
             return this.mod;
         }
-        Fn.jvmKo(MOD_CONTAINER.equals(this.mid), _41002Exception500ConfigConflict.class, "NONE", MOD_CONTAINER);
-
-
-        final String content = this.fs.inContent("plugins/" + this.mid + ".yml");
-
-
-        final JObject parsed = this.fs.ymlForJ(content);
-        final MDMod inMod = UT.deserializeJson(parsed, MDMod.class);
-
-
-        log.debug("[ ZERO ] 读取到的模块配置内容：\n{}", parsed.encodePretty());
-        this.mod = inMod;
+        // Fn.jvmKo(MOD_CONTAINER.equals(this.mid), _41002Exception500ConfigConflict.class, "NONE", MOD_CONTAINER);
+        final ConfigFs<MDMod> fs = this.getOrCreate("plugins/" + this.mid + ".yml", MDMod.class);
+        this.mod = Objects.isNull(fs) ? null : fs.refT();
         return this.mod;
+    }
+
+    private <T> ConfigFs<T> getOrCreate(final String filename, final Class<T> clazz) {
+        final String content = this.fs.inContent(filename);
+        if (Ut.isNil(content)) {
+            return null;
+        }
+
+        // 根据环境变量和当前内容进行解析
+        final String parsedString = ZeroParser.compile(content);
+        // 有内容，则直接解析之后处理
+        final JObject parsed = this.fs.ymlForJ(parsedString);
+        return new ConfigFs<>(parsed, clazz);
     }
 
     // ------------------- 模块加载文件配置 -------------------
@@ -138,6 +129,13 @@ public class ZeroOr {
      * @return 配置处理器
      */
     private ConfigMod loader() {
+        // 非模块处理
+        if (MOD_CONTAINER.equals(this.mid)) {
+            return ConfigMod.of();
+        }
+
+
+        // 模块处理流程
         if (Objects.isNull(this.mod)) {
             final MDMod mod = this.getOrCreate();
             Objects.requireNonNull(mod, "[ ZERO ] 模块配置初始化失败，无法继续进行后续操作！");
@@ -147,7 +145,8 @@ public class ZeroOr {
     }
 
     private String inPath(final String filename) {
-        if (Objects.isNull(this.id)) {
+        if (Objects.isNull(this.id) || MOD_CONTAINER.equals(this.id.value())) {
+            // 排除容器模式下的默认加载
             return filename;
         }
         final String baseDir = this.id.path();

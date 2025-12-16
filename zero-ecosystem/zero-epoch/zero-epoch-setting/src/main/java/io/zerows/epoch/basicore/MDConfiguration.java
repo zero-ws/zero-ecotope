@@ -1,5 +1,6 @@
 package io.zerows.epoch.basicore;
 
+import cn.hutool.core.util.StrUtil;
 import io.r2mo.typed.common.MultiKeyMap;
 import io.vertx.core.json.JsonObject;
 import io.zerows.specification.development.compiled.HBundle;
@@ -118,6 +119,15 @@ public class MDConfiguration {
 
     public Set<String> inFiles() {
         return this.fileSet;
+    }
+
+    public Set<String> inFiles(final String prefix) {
+        if (StrUtil.isEmpty(prefix)) {
+            return this.inFiles();
+        }
+        return this.fileSet.stream()
+            .filter(item -> item.contains(prefix))
+            .collect(HashSet::new, Set::add, Set::addAll);
     }
 
     // ------------ 设置配置信息

@@ -60,7 +60,7 @@ public class ConfigModLocal implements ConfigMod {
 
     @Override
     public List<String> ioFiles(final String directory, final String suffix) {
-        return STORE.lsFiles(directory, suffix);
+        return STORE.lsFilesN(directory, suffix);
     }
 
     @Override

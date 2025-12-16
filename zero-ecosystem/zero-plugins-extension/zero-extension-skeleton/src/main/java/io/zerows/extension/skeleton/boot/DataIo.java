@@ -1,8 +1,10 @@
 package io.zerows.extension.skeleton.boot;
 
-import io.zerows.cortex.extension.HExtension;
-import io.zerows.extension.skeleton.common.Ke;
+import io.zerows.epoch.basicore.MDConfiguration;
+import io.zerows.epoch.boot.ZeroFs;
+import io.zerows.epoch.management.OCacheConfiguration;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.Set;
@@ -17,18 +19,22 @@ import java.util.stream.Stream;
  *
  * @author lang : 2023-06-12
  */
+@Slf4j
 class DataIo {
 
     static Stream<String> ioFiles(final String folder, final String prefix, final boolean oob) {
 
-        final List<String> files = Ut.ioFilesN(folder, null, prefix);
-        Ke.LOG.Ke.info(DataIo.class, "Before Extension Files = {0}", String.valueOf(files.size()));
-        final Set<HExtension> boots = HExtension.initialize();
-        if (!boots.isEmpty() && oob) {
-            boots.forEach(boot -> files.addAll(boot.oob(prefix)));
-            // boots.forEach(boot -> files.addAll(boot.oob(prefix)));
+        final ZeroFs fs = ZeroFs.of();
+        final List<String> files = fs.inFiles(folder, prefix);
+        log.info("[ INST ] 已加载文件数：{}", files.size());
+        if (oob) {
+            final OCacheConfiguration configuration = OCacheConfiguration.of();
+            final Set<MDConfiguration> configSet = configuration.valueSet();
+            configSet.stream()
+                .map(each -> each.inFiles(prefix))
+                .forEach(files::addAll);
         }
-        Ke.LOG.Ke.info(DataIo.class, "After Extension Files = {0}", String.valueOf(files.size()));
+        log.info("[ INST ] 扩展文件数（含 OOB）: {}", files.size());
         // 并行
         return files.stream().filter(DataIo::ensure);
     }

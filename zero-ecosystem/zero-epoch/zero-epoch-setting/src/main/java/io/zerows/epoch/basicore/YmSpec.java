@@ -737,6 +737,7 @@ public interface YmSpec {
         String __ = "app";
         String id = "id";
         String tenant = "tenant";
+        String ns = "ns";
 
         interface data {
             String __ = "data";
@@ -758,6 +759,13 @@ public interface YmSpec {
         String pen = "pen";
         String temp = "temp";
         String tenant = "tenant";
+
+        interface formula {
+            String __ = "formula";
+            String path = "path";
+            String name = "name";
+            String alias = "alias";
+        }
     }
 
     interface flyway {

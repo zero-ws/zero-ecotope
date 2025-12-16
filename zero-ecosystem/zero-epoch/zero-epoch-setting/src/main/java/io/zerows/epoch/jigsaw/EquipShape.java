@@ -3,7 +3,7 @@ package io.zerows.epoch.jigsaw;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.epoch.basicore.MDId;
-import io.zerows.epoch.boot.ZeroOr;
+import io.zerows.epoch.boot.ZeroFs;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +20,7 @@ class EquipShape implements EquipAt {
         final MDId id = configuration.id();
         Objects.requireNonNull(id);
 
-        final ZeroOr io = ZeroOr.of(id);
+        final ZeroFs io = ZeroFs.of(id);
         /*
          * 新版引入了 MDMod 的核心配置项，所以不用再加载 plugins/{id}.yml 文件，直接做设置绑定即可
          * 而且 EquipShape 是内部调用，所以代码走到这里 name 一定存在，外层已检查过
@@ -40,7 +40,7 @@ class EquipShape implements EquipAt {
 
         final JsonObject configurationJ = io.inJObject(filename);
         if (Ut.isNil(configurationJ)) {
-            log.warn("[ XMOD ] 配置文件不存在: id = {}, file = {}", id.value(), filename);
+            log.info("[ XMOD ] 配置文件不存在: id = {}, file = {}", id.value(), filename);
             return;
         }
         configuration.addShape(name, configurationJ);

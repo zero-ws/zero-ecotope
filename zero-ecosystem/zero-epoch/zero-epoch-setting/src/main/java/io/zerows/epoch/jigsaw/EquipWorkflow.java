@@ -3,8 +3,8 @@ package io.zerows.epoch.jigsaw;
 import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.epoch.basicore.MDId;
 import io.zerows.epoch.basicore.MDWorkflow;
+import io.zerows.epoch.boot.ZeroFs;
 import io.zerows.platform.constant.VValue;
-import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
 
 import java.util.List;
@@ -18,10 +18,10 @@ class EquipWorkflow implements EquipAt {
 
         // workflow/RUNNING/
         final MDId id = configuration.id();
-        final HBundle owner = id.owner();
+        final ZeroFs io = ZeroFs.of(id);
 
-        final String workflowDir = id.path() + "/workflow/RUNNING";
-        final List<String> workflowList = Ut.ioDirectories(workflowDir);
+        final String workflowDir = Ut.ioPath(id.path(), WORKFLOW_DIR);
+        final List<String> workflowList = io.inDirectories(WORKFLOW_DIR);
         workflowList.stream().map(workflowEach -> {
                 final String workflowPath;
                 if (workflowEach.startsWith(workflowDir)) {
@@ -34,14 +34,19 @@ class EquipWorkflow implements EquipAt {
             .forEach(configuration::addWorkflow);
     }
 
+    private static final String WORKFLOW_DIR = "workflow/RUNNING";
+
     private MDWorkflow buildWorkflow(final String workflowDir, final MDId id) {
         final MDWorkflow workflow = new MDWorkflow(id);
-        final HBundle owner = id.owner();
         workflow.configure(workflowDir.trim());
+        final ZeroFs io = ZeroFs.of(id);
         // *.form
-        final List<String> formFiles = Ut.ioFiles(workflowDir, VValue.SUFFIX.BPMN_FORM);
+        final List<String> formFiles = io.inFiles(WORKFLOW_DIR, VValue.SUFFIX.BPMN_FORM)
+            // 追加一层后缀过滤
+            .stream().filter(file -> file.endsWith(VValue.SUFFIX.BPMN_FORM))
+            .toList();
         // *.json
-        final List<String> formData = Ut.ioFiles(workflowDir, VValue.SUFFIX.JSON);
+        final List<String> formData = io.inFiles(WORKFLOW_DIR, VValue.SUFFIX.JSON);
         return workflow.configure(formFiles, formData);
     }
 }

@@ -2,7 +2,7 @@ package io.zerows.epoch.jigsaw;
 
 import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.epoch.basicore.MDId;
-import io.zerows.epoch.boot.ZeroOr;
+import io.zerows.epoch.boot.ZeroFs;
 import io.zerows.epoch.management.OCacheConfiguration;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
@@ -32,7 +32,7 @@ class EquipEntry implements EquipAt {
         }
 
 
-        final String name = ZeroOr.of(id).name();
+        final String name = ZeroFs.of(id).name();
         if (Ut.isNil(name)) {
             log.warn("[ ZERO ] 无配置名称: shape -> name，跳过加载！");
             return;

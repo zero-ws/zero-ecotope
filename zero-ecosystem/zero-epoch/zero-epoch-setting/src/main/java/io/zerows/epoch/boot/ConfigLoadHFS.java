@@ -1,11 +1,10 @@
 package io.zerows.epoch.boot;
 
-import io.r2mo.io.common.HFS;
-import io.r2mo.typed.json.JObject;
 import io.zerows.epoch.basicore.YmConfiguration;
 import io.zerows.specification.app.HApp;
-import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.Objects;
 
 /**
  * HFS 模式的加载有两种情况
@@ -19,25 +18,16 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 class ConfigLoadHFS extends ConfigLoadBase {
     private static final String FILE_VERTX = "vertx.yml";
-    private final transient HFS fs = HFS.of();
 
     @Override
     public YmConfiguration configure(final HApp app) {
-        final String content = this.fs.inContent(FILE_VERTX);
-
-        if (Ut.isNil(content)) {
+        final ConfigFs<YmConfiguration> fs = ZeroFs.of().inFs(FILE_VERTX, YmConfiguration.class);
+        if (Objects.isNull(fs) || Objects.isNull(fs.refT())) {
             // 不存在 vertx.yml 的默认配置
             return YmConfiguration.createDefault();
         }
-
-
-        // 有内容，则直接解析之后处理
-        final String parsedString = ZeroParser.compile(content);
-
-
-        final JObject parsed = this.fs.ymlForJ(parsedString);
-        final YmConfiguration inConfiguration = UT.deserializeJson(parsed, YmConfiguration.class);
-
-        return this.completeConfiguration(inConfiguration, parsed, app);
+        final YmConfiguration inConfiguration = fs.refT();
+        // 双模式处理
+        return this.completeConfiguration(inConfiguration, fs.refJson(), app);
     }
 }

@@ -2,7 +2,7 @@ package io.zerows.epoch.jigsaw;
 
 import io.vertx.core.json.JsonArray;
 import io.zerows.epoch.basicore.MDConnect;
-import io.zerows.epoch.boot.ZeroOr;
+import io.zerows.epoch.boot.ZeroFs;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
 
@@ -20,7 +20,7 @@ import java.util.concurrent.ConcurrentMap;
  * @author lang : 2024-05-12
  */
 class MakerIoConnect extends MakerIoBase<MDConnect> {
-    MakerIoConnect(final ZeroOr io) {
+    MakerIoConnect(final ZeroFs io) {
         super(io);
     }
 
@@ -29,10 +29,14 @@ class MakerIoConnect extends MakerIoBase<MDConnect> {
                                                   final HBundle bundle,
                                                   final Object... args) {
         // 部分模块没有 /model/connect.yml 文件，如 CRUD
-        final JsonArray connectA = Ut.ioExist(filename) ? Ut.ioYaml(filename) : new JsonArray();
+        final JsonArray connectA = this.io().isExist(filename) ?
+            this.io().inYamlA(filename) : new JsonArray();
+
         if (Ut.isNil(connectA)) {
+            // 无定义
             return new ConcurrentHashMap<>();
         } else {
+            // 替换定义
             final Replacer<MDConnect> connectReplacer = Replacer.ofConnect();
             final List<MDConnect> connectList = connectReplacer.build(connectA);
             return Ut.elementMap(connectList, MDConnect::getTable);

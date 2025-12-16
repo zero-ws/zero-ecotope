@@ -2,26 +2,24 @@ package io.zerows.extension.module.rbac.component.acl.rapier;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.environment.DevEnv;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.DB;
-import io.zerows.extension.module.rbac.common.ScAuthMsg;
 import io.zerows.extension.module.rbac.common.ScOwner;
 import io.zerows.extension.module.rbac.domain.tables.daos.SViewDao;
 import io.zerows.extension.module.rbac.domain.tables.pojos.SView;
 import io.zerows.platform.constant.VName;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
-import static io.zerows.extension.module.rbac.boot.Sc.LOG;
-
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
 public class QuinnView implements Quinn {
     @Override
     @SuppressWarnings("unchecked")
@@ -102,9 +100,7 @@ public class QuinnView implements Quinn {
         // OWNER = ?, OWNER_TYPE = ? --- ownerType 从 ScOwner 中提取
         condition.put(KName.OWNER, owner.owner());
         condition.put(KName.OWNER_TYPE, owner.type().name());
-        if (DevEnv.devAuthorized()) {
-            LOG.Resource.info(this.getClass(), ScAuthMsg.VIEW_PROCESS, "fetchAsync", condition.encode());
-        }
+        log.debug("[ RBAC ] 我的视图操作：fetchAsync, 过滤条件：{}", condition.encode());
         return DB.on(SViewDao.class).fetchOneAsync(condition);
     }
 }

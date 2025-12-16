@@ -3,8 +3,8 @@ package io.zerows.epoch.jigsaw;
 import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.epoch.basicore.MDId;
 import io.zerows.epoch.basicore.MDPage;
+import io.zerows.epoch.boot.ZeroFs;
 import io.zerows.platform.constant.VValue;
-import io.zerows.support.Ut;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ class EquipWeb implements EquipAt {
 
         // web
         final MDId id = configuration.id();
-        final List<String> fileList = this.scanPage("/web", id);
+        final List<String> fileList = this.scanPage(id);
         fileList.stream().filter(filePath -> !filePath.contains("SHARED")).map(filePath -> {
             final MDPage page = new MDPage(id);
             // 路径处理
@@ -29,12 +29,12 @@ class EquipWeb implements EquipAt {
 
     private String normalizePath(final String filePath, final MDId id) {
         final String split = id.value();
-        return filePath.split(split)[2];
+        return filePath.split(split)[1];
     }
 
     @SuppressWarnings("all")
-    private List<String> scanPage(final String pathRoot, final MDId id) {
-        final String webDir = id.path() + pathRoot;
-        return Ut.ioFilesN(webDir, VValue.SUFFIX.JSON);
+    private List<String> scanPage(final MDId id) {
+        final ZeroFs io = ZeroFs.of(id);
+        return io.inFiles("web", VValue.SUFFIX.JSON);
     }
 }

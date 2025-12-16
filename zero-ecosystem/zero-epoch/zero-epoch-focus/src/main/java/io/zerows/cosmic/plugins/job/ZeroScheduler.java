@@ -3,7 +3,6 @@ package io.zerows.cosmic.plugins.job;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
-import io.zerows.component.environment.DevEnv;
 import io.zerows.cosmic.plugins.job.metadata.Mission;
 import io.zerows.epoch.annotations.Worker;
 import io.zerows.platform.constant.VValue;
@@ -83,9 +82,7 @@ public class ZeroScheduler extends AbstractVerticle {
             /*
              * Invoke here to provide input
              */
-            if (DevEnv.devJobBoot()) {
-                log.info(JOB_AGHA_SELECTED, agha.getClass(), mission.getCode(), mission.getType());
-            }
+            log.debug(JOB_AGHA_SELECTED, agha.getClass(), mission.getCode(), mission.getType());
             /*
              * If job type is ONCE, it's not started
              */

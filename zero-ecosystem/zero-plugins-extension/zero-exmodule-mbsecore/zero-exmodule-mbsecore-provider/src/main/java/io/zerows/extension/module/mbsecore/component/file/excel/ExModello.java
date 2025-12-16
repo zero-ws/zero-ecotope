@@ -1,7 +1,6 @@
 package io.zerows.extension.module.mbsecore.component.file.excel;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.environment.DevEnv;
 import io.zerows.extension.module.mbsecore.boot.Ao;
 import io.zerows.extension.module.mbsecore.common.AoTable;
 import io.zerows.extension.module.mbsecore.metadata.Schema;
@@ -10,6 +9,7 @@ import io.zerows.plugins.excel.ExcelClient;
 import io.zerows.plugins.excel.metadata.ExRecord;
 import io.zerows.plugins.excel.metadata.ExTable;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -23,6 +23,7 @@ import java.util.concurrent.ConcurrentMap;
  * 1. 提取所有的 Entity 部分生成 模型集合
  * 2. 包括：Entity, Field, Key, Index
  */
+@Slf4j
 public class ExModello {
 
     private static final ExcelClient CLIENT = ExcelActor.ofClient();
@@ -37,9 +38,7 @@ public class ExModello {
                 final Set<ExTable> tables = CLIENT.ingest(file);
                 this.initMap(tables);
             } catch (final Throwable ex) {
-                if (DevEnv.devJvmStack()) {
-                    ex.printStackTrace();
-                }
+                log.error(ex.getMessage(), ex);
             }
         });
     }

@@ -5,7 +5,6 @@ import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.LogOf;
 import io.zerows.epoch.basicore.MDConnect;
 import io.zerows.epoch.jigsaw.Oneness;
 import io.zerows.platform.constant.VValue;
@@ -28,11 +27,14 @@ import io.zerows.plugins.excel.util.ExDataApply;
 import io.zerows.specification.modeling.metadata.HMetaAtom;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -48,6 +50,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 /*
  * Excel Helper to help ExcelClient to do some object building
  */
+@Slf4j
 class ExcelHelper {
 
     private static final Cc<String, ExcelHelper> CC_HELPER = Cc.open();
@@ -268,8 +271,8 @@ class ExcelHelper {
         });
         final int ignored = counter.get();
         if (0 < ignored) {
-            final LogOf annal = LogOf.get(this.target);
-            annal.warn("[ Έξοδος ] Ignore table `{0}` with size `{1}`", table.getName(), ignored);
+            final Logger logger = LoggerFactory.getLogger(this.target);
+            logger.warn("{} 忽略数据表 `{}`，记录数 `{}`", ExcelConstant.K_PREFIX, table.getName(), ignored);
         }
         // Entity Release
         return keyList;

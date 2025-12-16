@@ -5,7 +5,6 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
-import io.zerows.component.environment.DevEnv;
 import io.zerows.component.log.LogOf;
 import io.zerows.cosmic.plugins.cache.Rapid;
 import io.zerows.epoch.constant.KName;
@@ -15,6 +14,7 @@ import io.zerows.platform.metadata.KRef;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +28,7 @@ import static io.zerows.extension.module.rbac.boot.Sc.LOG;
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
 public class ScUser {
     private static final LogOf LOGGER = LogOf.get(ScUser.class);
     private static final Cc<String, ScUser> CC_USER = Cc.open();
@@ -198,9 +199,8 @@ public class ScUser {
     public Future<JsonObject> view(final String viewKey) {
         return this.view().compose(view -> Ux.future(view.getJsonObject(viewKey)))
             .compose(view -> {
-                if (Ut.isNotNil(view) && DevEnv.devAuthorized()) {
-                    LOG.Auth.info(LOGGER, "ScUser \u001b[0;37m----> Cache key = {0}, Data = {1}\u001b[m.",
-                        viewKey, view.encode());
+                if (Ut.isNotNil(view)) {
+                    log.debug("[ XMOD ] ScUser 缓存命中 View，Key = {}, Data = {}", viewKey, view.encode());
                 }
                 return Ux.future(view);
             });

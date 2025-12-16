@@ -5,7 +5,7 @@ import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.epoch.basicore.MDConnect;
 import io.zerows.epoch.basicore.MDEntity;
 import io.zerows.epoch.basicore.MDId;
-import io.zerows.epoch.boot.ZeroOr;
+import io.zerows.epoch.boot.ZeroFs;
 import io.zerows.epoch.management.OCacheConfiguration;
 import io.zerows.specification.development.compiled.HBundle;
 
@@ -20,20 +20,20 @@ import java.util.concurrent.ConcurrentMap;
 class EquipModel implements EquipAt {
     @Override
     public void initialize(final MDConfiguration configuration) {
-
-
         // model/connect.yml 文件提取
         final MDId id = configuration.id();
         final HBundle owner = id.owner();
+        final ZeroFs io = ZeroFs.of(id);
 
-        final String connectFile = id.path() + "/model/connect.yml";
 
-        final ZeroOr io = ZeroOr.of(id);
+        // -------------- model/connect.yml 文件处理，调用 MakerIoConnect
+        final String connectFile = "model/connect.yml";
         final MakerIo<MDConnect> makerConnect = MakerIo.ofConnect(io);
         // 此处键值是表名
         final ConcurrentMap<String, MDConnect> connectMap = makerConnect.build(connectFile, owner);
 
 
+        // -------------- 覆盖模式单独处理
         final JsonObject configurationJ = configuration.inConfiguration();
         final Boolean isOverwrite = configurationJ.getBoolean("overwrite", Boolean.FALSE);
         if (isOverwrite) {
@@ -42,12 +42,11 @@ class EquipModel implements EquipAt {
             connects.forEach(connect -> connectMap.put(connect.getTable(), connect));
             this.logger().info("Connect Overwrite Mode: Size = {}", connects.size());
         }
-
-
         configuration.setConnect(connectMap);
 
 
-        final String modelDir = id.path() + "/model";
+        // -------------- model 目录处理，调用 MakerIoEntity
+        final String modelDir = "model";
         final MakerIo<MDEntity> makerEntity = MakerIo.ofEntity(io);
         final ConcurrentMap<String, MDEntity> entityMap = makerEntity.build(modelDir, owner,
             // 第三参此处必须包含
