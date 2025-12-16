@@ -5,14 +5,14 @@ package io.zerows.boot.extension.constant;
  *
  * ### 1. 基本介绍
  *
- * 日志类型枚举变量，用来设置日志类型，对应到：`X_LOG`表中的`TYPE`字段，该枚举值目前只被`io.zerows.epoch.bootplus.extension.operation.log`包中的日志器使用，
+ * 日志类型枚举变量，用来设置日志类型，对应到：`X_LOG`表中的`TYPE`字段，该枚举值目前只被`io.zerows.epoch.bootplus.extension.operation.info`包中的日志器使用，
  * 支持<strong>同步</strong>和<strong>异步</strong>两种日志记录模式。
  *
  * ### 2. 核心点
  *
  * - 日志全部存储在`X_LOG`数据表中。
  * - 日志类型映射到`TYPE`字段，并且在日志管理中直接生成左侧的类型信息。
- * - 该数据类型目前只被`io.zerows.epoch.bootplus.extension.operation.log`中的日志器使用。
+ * - 该数据类型目前只被`io.zerows.epoch.bootplus.extension.operation.info`中的日志器使用。
  *
  * ### 3. 内部代码
  *
@@ -20,9 +20,9 @@ package io.zerows.boot.extension.constant;
  * // <pre><code class="java">
  *     // 数据库错误日志生成
  *     static XLog database(final Class<?> clazz, final DataAtom argument, final Throwable ex) {
- *         final XLog log = KoTool.error(clazz, argument, ex);
- *         log.setType(TypeLog.DATABASE_ERROR.name());
- *         return log;
+ *         final XLog info = KoTool.error(clazz, argument, ex);
+ *         info.setType(TypeLog.DATABASE_ERROR.name());
+ *         return info;
  *     }
  * // </code></pre>
  * ```

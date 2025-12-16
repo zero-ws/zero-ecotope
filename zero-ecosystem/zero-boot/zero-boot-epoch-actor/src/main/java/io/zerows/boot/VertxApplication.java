@@ -110,12 +110,12 @@ public class VertxApplication {
          * MOMO-001: SPI 监控注册
          */
         HPI.registry(
-            Lee.class,                  // 安全组件
-            WallProvider.class,         // 安全提供者组件
-            FactoryDBAsync.class,       // 异步DBE
-            AxisSockFactory.class,      // WebSocket
-            AxisSwaggerFactory.class,    //Swagger
-            AxisDynamicFactory.class    // 动态路由
+            Lee.class,                  // 🔐 安全组件，提供系统安全验证和授权功能
+            WallProvider.class,         // 🛡️ 安全提供者组件，实现具体的安全策略和防护机制
+            FactoryDBAsync.class,       // 🚀 异步DBE，基于 Vert.x 提供异步数据库操作能力
+            AxisSockFactory.class,      // 🧦 WebSocket工厂，处理 WebSocket 连接和通信
+            AxisSwaggerFactory.class,   // 📖 Swagger文档工厂，生成和管理 API 文档
+            AxisDynamicFactory.class    // 🔄 动态路由工厂，支持运行时动态路由配置
         );
 
 

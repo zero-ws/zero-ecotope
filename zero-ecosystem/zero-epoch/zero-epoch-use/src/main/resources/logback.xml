@@ -5,7 +5,7 @@
     <include resource="logging/zero-component.xml"/>
     <!--
          zero root logger, the configuration file name is the same
-         as log file with different file extension only.
+         as info file with different file extension only.
      -->
     <include resource="logging/zero-rule.xml"/>
     <!-- ========================= ZERO GLOBAL END ====================== -->

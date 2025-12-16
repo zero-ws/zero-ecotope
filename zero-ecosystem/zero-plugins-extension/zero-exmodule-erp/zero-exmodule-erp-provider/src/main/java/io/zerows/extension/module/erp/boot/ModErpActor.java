@@ -6,7 +6,7 @@ import io.zerows.extension.skeleton.metadata.MDModuleActor;
 /**
  * @author lang : 2025-11-04
  */
-@Actor(value = "extension", sequence = 211)
+@Actor(value = "extension", sequence = 1017)
 public class ModErpActor extends MDModuleActor {
     @Override
     protected String MID() {

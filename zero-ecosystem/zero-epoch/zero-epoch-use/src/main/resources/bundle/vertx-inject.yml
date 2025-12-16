@@ -1,1 +1,1 @@
-logger: io.zerows.epoch.common.log.uca.Log4JAnnal
+logger: io.zerows.epoch.common.info.uca.Log4JAnnal

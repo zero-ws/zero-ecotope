@@ -6,7 +6,6 @@ import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.LogOf;
 import io.zerows.epoch.basicore.MDConnect;
 import io.zerows.epoch.jigsaw.Oneness;
 import io.zerows.epoch.store.jooq.ADB;
@@ -17,6 +16,7 @@ import io.zerows.plugins.excel.metadata.ExTable;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.base.FnBase;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -28,9 +28,9 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
 @SuppressWarnings("unchecked")
 class ExcelImport {
-    private static final LogOf LOGGER = LogOf.get(ExcelClientImpl.class);
     private transient final ExcelHelper helper;
 
     private ExcelImport(final ExcelHelper helper) {
@@ -42,8 +42,10 @@ class ExcelImport {
     }
 
     <T> Set<T> saveEntity(final JsonArray data, final ExTable table) {
+        if (Ut.isNil(data)) {
+            return new HashSet<>();
+        }
         final Set<T> resultSet = new HashSet<>();
-
 
         final MDConnect connect = table.getConnect();
         Objects.requireNonNull(connect);
@@ -54,10 +56,9 @@ class ExcelImport {
         if (Objects.nonNull(classPojo) && Objects.nonNull(classDao)) {
             try {
                 final JsonObject filters = table.whereAncient(data);
-                LOGGER.debug("[ Έξοδος ]  Table: {1}, Filters: {0}", filters.encode(), table.getName());
+                log.debug("{} --> 多数据表: {}, 过滤器: {}", ExcelConstant.K_PREFIX, filters.encode(), table.getName());
                 final List<T> entities = Ux.fromJson(data, classPojo, connect.getPojoFile());
                 final ADB jooq = this.jooq(table);
-                assert null != jooq;
                 final List<T> queried = jooq.fetch(filters);
 
 
@@ -103,11 +104,10 @@ class ExcelImport {
                 final List<T> batchUpdate = jooq.update(qUpdate);
                 resultSet.addAll(batchUpdate);
                 final int total = batchUpdate.size() + batchInsert.size();
-                LOGGER.info("[ Έξοδος ] `{0}` -- ( {1} ), Inserted: {2}, Updated: {3}",
-                    table.getName(), String.valueOf(total), String.valueOf(batchInsert.size()), String.valueOf(batchUpdate.size()));
+                log.info("{} --> ( {} ), Inserted: {}, Updated: {}, Total: {}",
+                    ExcelConstant.K_PREFIX, table.getName(), batchInsert.size(), batchUpdate.size(), total);
             } catch (final Throwable ex) {
-                ex.printStackTrace();
-                LOGGER.fatal(ex);
+                log.error(ex.getMessage(), ex);
             }
         }
         return resultSet;
@@ -115,7 +115,6 @@ class ExcelImport {
 
     <T> T saveEntity(final JsonObject data, final ExTable table) {
         T reference = null;
-
 
         final MDConnect connect = table.getConnect();
         Objects.requireNonNull(connect);
@@ -128,10 +127,9 @@ class ExcelImport {
              * First, findRunning the record by unique filters that defined in income here.
              */
             final JsonObject filters = table.whereUnique(data);
-            LOGGER.debug("[ Έξοδος ]  Table: {1}, Filters: {0}", filters.encode(), table.getName());
+            log.debug("{} 单数据表: {}, 过滤器: {}", ExcelConstant.K_PREFIX, filters.encode(), table.getName());
             final T entity = Ux.fromJson(data, classPojo, connect.getPojoFile());
             final ADB jooq = this.jooq(table);
-            assert null != jooq;
             /*
              * Unique filter to fetch single record database here.
              * Such as code + sigma

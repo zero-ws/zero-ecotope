@@ -65,7 +65,7 @@ public class DataImport {
         // 检查三：Map导入环境是否准备
         final SharedClient shared = SharedActor.ofClient();
         Fn.jvmKo(Objects.isNull(shared), _80214Exception417LoadingNotReady.class, "shared");
-        log.info("[ ZERO ] \uD83C\uDF89 数据导入环境检查通过，准备就绪！");
+        log.info("[ INST ] \uD83C\uDF89 数据导入环境检查通过，准备就绪！");
     }
 
     /**
@@ -141,16 +141,15 @@ public class DataImport {
         return handler -> {
             if (handler.succeeded()) {
                 if (Ut.isNil(prefix)) {
-                    log.info("[ ZERO ] 数据目录 `{}` 导入成功！", folder);
+                    log.info("[ INST ] 数据目录 `{}` 导入成功！", folder);
                 } else {
-                    log.info("[ ZERO ] 数据目录 `{}` 匹配文件 `{}` 导入成功！", folder, prefix);
+                    log.info("[ INST ] 数据目录 `{}` 匹配文件 `{}` 导入成功！", folder, prefix);
                 }
                 timer.end();
-                log.info("[ ZERO ] 总执行时间 {}", timer.value());
+                log.info("[ INST ] 总执行时间 {}", timer.value());
                 System.exit(0);
             } else {
-                log.info(handler.cause().getMessage(), handler.cause());
-                handler.cause().printStackTrace();
+                log.error(handler.cause().getMessage(), handler.cause());
             }
         };
     }
@@ -165,7 +164,7 @@ public class DataImport {
     private Future<String> execute(final String filename) {
         return Ux.nativeWorker(filename, this.vertx, pre -> {
             final ExcelClient client = ExcelActor.ofClient();
-            log.info("[ ZERO ] 开始导入文件：{}", filename);
+            log.info("[ INST ] 开始导入文件：{}", filename);
             client.importAsync(filename, handler -> {
                 if (handler.succeeded()) {
                     pre.complete(filename);

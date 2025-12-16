@@ -87,7 +87,7 @@ public abstract class AghaAbstract implements Agha {
         Ut.contract(interval, Vertx.class, this.vertx);
 
         if (SELECTED.getAndSet(Boolean.FALSE)) {
-            /* Be sure the log only provide once */
+            /* Be sure the info only provide once */
             this.log().info("[ ZERO ] ( Job ) 任务选择了定时组件 {}", interval.getClass().getName());
         }
         if (Objects.nonNull(consumer)) {
@@ -166,7 +166,7 @@ public abstract class AghaAbstract implements Agha {
              * Worker Executor of New created
              * 1) Create new worker pool for next execution here
              * 2) Do not break the major thread for terminal current job
-             * 3）Executing log here for long block issue
+             * 3）Executing info here for long block issue
              */
             final String code = mission.getCode();
             final WorkerExecutor executor =

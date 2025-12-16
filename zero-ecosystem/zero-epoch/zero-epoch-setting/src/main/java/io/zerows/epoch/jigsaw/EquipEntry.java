@@ -34,7 +34,7 @@ class EquipEntry implements EquipAt {
 
         final String name = ZeroFs.of(id).name();
         if (Ut.isNil(name)) {
-            log.warn("[ ZERO ] 无配置名称: shape -> name，跳过加载！");
+            log.warn("[ ZERO ] 无配置名称: shape -> name，跳过加载！id = {}", id.value());
             return;
         }
 

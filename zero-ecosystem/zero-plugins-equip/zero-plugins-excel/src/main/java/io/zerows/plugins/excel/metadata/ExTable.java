@@ -6,9 +6,12 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.basicore.MDConnect;
 import io.zerows.epoch.jigsaw.Oneness;
 import io.zerows.platform.constant.VString;
+import io.zerows.plugins.excel.ExcelConstant;
 import io.zerows.plugins.excel.exception._60038Exception404ConnectMissing;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
+import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -20,6 +23,8 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
+@Slf4j
+@Data
 public class ExTable implements Serializable {
     /* Field */
     private final transient List<String> fields = new ArrayList<>();
@@ -36,29 +41,6 @@ public class ExTable implements Serializable {
 
     public ExTable(final String sheet) {
         this.sheet = sheet;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    /*
-     * ( Bean )
-     */
-    public void setName(final String name) {
-        this.name = name;
-    }
-
-    public String getDirectory() {
-        return this.directory;
-    }
-
-    public void setDirectory(final String directory) {
-        this.directory = directory;
-    }
-
-    public void setDescription(final String description) {
-        this.description = description;
     }
 
     /*
@@ -216,8 +198,11 @@ public class ExTable implements Serializable {
         return this.connect;
     }
 
-    public void setConnect(final MDConnect connect) {
-        this.connect = connect;
+    public boolean isConnected() {
+        if (Objects.isNull(this.connect)) {
+            log.warn("{} --> Connect 未配置，表：{}", ExcelConstant.K_PREFIX, this.name);
+        }
+        return Objects.nonNull(this.connect);
     }
 
     @Override
@@ -225,10 +210,9 @@ public class ExTable implements Serializable {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof ExTable)) {
+        if (!(o instanceof final ExTable table)) {
             return false;
         }
-        final ExTable table = (ExTable) o;
         return this.name.equals(table.name) &&
             this.sheet.equals(table.sheet);
     }

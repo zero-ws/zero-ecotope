@@ -88,7 +88,7 @@ public class Phase {
 
     /*
      * 6. Output callback ( Consume message )
-     * 1) - Write log
+     * 1) - Write info
      * 2) - Set some status
      * 3) - Do some checking or job status changing.
      */

@@ -1,6 +1,6 @@
 -- liquibase formatted sql
 
--- changeset Lang:ox-log-1
+-- changeset Lang:ox-info-1
 -- 应用程序表：X_LOG
 DROP TABLE IF EXISTS X_LOG;
 CREATE TABLE IF NOT EXISTS X_LOG

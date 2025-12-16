@@ -17,7 +17,7 @@ public class JtAimEngine implements JtAim {
     public Handler<RoutingContext> attack(final JtUri uri) {
         return context -> {
             /*
-             * Async log information in this step
+             * Async info information in this step
              */
             final Envelop request = AckFlow.previous(context);
             final JsonObject data = request.data();

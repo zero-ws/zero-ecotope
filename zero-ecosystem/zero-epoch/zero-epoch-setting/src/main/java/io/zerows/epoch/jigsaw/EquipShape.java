@@ -40,7 +40,7 @@ class EquipShape implements EquipAt {
 
         final JsonObject configurationJ = io.inJObject(filename);
         if (Ut.isNil(configurationJ)) {
-            log.info("[ XMOD ] 配置文件不存在: id = {}, file = {}", id.value(), filename);
+            log.debug("[ XMOD ] 配置文件不存在: id = {}, file = {}", id.value(), filename);
             return;
         }
         configuration.addShape(name, configurationJ);

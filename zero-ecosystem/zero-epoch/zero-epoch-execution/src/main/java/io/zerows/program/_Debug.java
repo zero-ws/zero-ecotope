@@ -13,7 +13,7 @@ import java.util.function.Supplier;
  */
 class _Debug extends _Compare {
     /**
-     * Create new log instance for findRunning `Annal` mapping
+     * Create new info instance for findRunning `Annal` mapping
      * <p>
      * Debug method for help us to do development
      * 1) debug:

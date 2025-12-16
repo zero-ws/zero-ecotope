@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
  *
  * @author lang : 2025-11-06
  */
-@Slf4j // Lombok 注解，自动生成 private static final Logger log = LoggerFactory.getLogger(ExtensionModifier.class);
+@Slf4j // Lombok 注解，自动生成 private static final Logger info = LoggerFactory.getLogger(ExtensionModifier.class);
 public class ExtensionModifier {
 
     // --- 配置常量 ---

@@ -18,7 +18,7 @@
     </appender>
     <!--
         ASYNC_STDOUT -> STDOUT
-        ASYNC_FILE -> FILE ( zero-epic-fabric.log )
+        ASYNC_FILE -> FILE ( zero-epic-fabric.info )
     -->
     <appender name="ASYNC_STDOUT" class="ch.qos.logback.classic.AsyncAppender">
         <filter class="ch.qos.logback.classic.filter.LevelFilter">

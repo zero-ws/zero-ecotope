@@ -2,9 +2,9 @@ package io.zerows.extension.module.ambient.component;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
+import io.zerows.extension.module.ambient.boot.At;
 import io.zerows.extension.module.ambient.domain.tables.pojos.XActivity;
 import io.zerows.extension.module.ambient.domain.tables.pojos.XActivityChange;
-import io.zerows.extension.module.ambient.boot.At;
 
 import java.util.List;
 import java.util.Objects;
@@ -13,7 +13,7 @@ import java.util.function.Supplier;
 /**
  * # Activity/Changes Operation
  *
- * The main record of log history ( Activity Record )
+ * The main record of info history ( Activity Record )
  *
  * - key                    ( System Generated )
  * - serial                 ( System Generated )            - 「Workflow」,「Atom」

@@ -48,7 +48,7 @@ class DeployBpmnService implements DeployOn {
         final BpmnModelInstance instance = Bpmn.readModelFromStream(Ut.ioStream(bpmnFile));
         Objects.requireNonNull(instance);
 
-        // Flow Processing for activity log
+        // Flow Processing for activity info
         this.initializeListener(instance);
         this.builder.addModelInstance(bpmnFile, instance);
 

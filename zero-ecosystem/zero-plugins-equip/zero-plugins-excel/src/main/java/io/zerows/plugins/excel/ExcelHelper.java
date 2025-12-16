@@ -92,6 +92,9 @@ class ExcelHelper {
     }
 
     Future<JsonArray> extract(final ExTable table) {
+        if (!table.isConnected()) {
+            return Future.succeededFuture(new JsonArray());
+        }
         /* Records extracting */
         final List<ExRecord> records = table.get();
         final String tableName = table.getName();

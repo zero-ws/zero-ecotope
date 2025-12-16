@@ -17,23 +17,25 @@ import java.util.regex.Pattern;
 
 class ZeroParser {
 
+    // Pattern 是线程安全的，可以保持 static
     private static final Pattern PLACEHOLDER_PATTERN = Pattern.compile("\\$\\{([^}]+)\\}");
-    private static final Yaml YAML_PARSER = new Yaml(new SafeConstructor(new LoaderOptions()));
-    private static final DumperOptions DUMPER_OPTIONS = new DumperOptions();
 
-    static {
-        DUMPER_OPTIONS.setDefaultFlowStyle(FlowStyle.BLOCK);
-        DUMPER_OPTIONS.setIndent(2);
-    }
+    // [删除] 移除 static 实例，因为它们非线程安全
+    // private static final Yaml YAML_PARSER = ...
+    // private static final DumperOptions DUMPER_OPTIONS = ...
 
     static String compile(final String input) {
         if (input == null || input.trim().isEmpty()) {
             return input;
         }
 
+        // [新增] 在方法内部创建 Yaml 实例（局部变量是线程安全的）
+        final Yaml yamlLoader = new Yaml(new SafeConstructor(new LoaderOptions()));
+
         // 1. 解析所有文档并合并为一个 Map
         final Map<String, Object> merged = new LinkedHashMap<>();
-        for (final Object doc : YAML_PARSER.loadAll(input)) {
+        // 使用局部的 yamlLoader
+        for (final Object doc : yamlLoader.loadAll(input)) {
             if (doc instanceof Map) {
                 mergeMaps(merged, (Map<String, Object>) doc);
             }
@@ -49,9 +51,16 @@ class ZeroParser {
         // 4. 第二轮：解析剩余占位符
         final Object secondPass = resolvePlaceholdersWithContext(firstPass, globalContext);
 
+        // [新增] 在方法内部创建 DumperOptions
+        final DumperOptions dumperOptions = new DumperOptions();
+        dumperOptions.setDefaultFlowStyle(FlowStyle.BLOCK);
+        dumperOptions.setIndent(2);
+
         // 5. 输出为单文档 YAML
-        return new Yaml(DUMPER_OPTIONS).dump(secondPass);
+        return new Yaml(dumperOptions).dump(secondPass);
     }
+
+    // ... 其余私有方法保持不变 ...
 
     // ———————— 合并两个 Map（递归）———————
     @SuppressWarnings("unchecked")
@@ -67,7 +76,9 @@ class ZeroParser {
         }
     }
 
-    // ———————— 第一轮：只处理 "安全" 表达式 ————————
+    // ... (后面的 resolvePlaceholders, extractLiteralValues 等方法无需修改) ...
+
+    // 为了完整性，这里列出 resolvePlaceholders
     private static Object resolvePlaceholders(final Object obj, final boolean safeOnly) {
         if (obj instanceof String) {
             return resolveStringPlaceholders((String) obj, safeOnly);
@@ -91,11 +102,9 @@ class ZeroParser {
         if (value == null || !value.contains("${")) {
             return value;
         }
-
         final Matcher matcher = PLACEHOLDER_PATTERN.matcher(value);
         final StringBuffer sb = new StringBuffer();
         boolean changed = false;
-
         while (matcher.find()) {
             final String content = matcher.group(1);
             String resolved;
@@ -103,16 +112,14 @@ class ZeroParser {
                 resolved = resolvePlaceholder(content, safeOnly, null);
             } catch (final IllegalArgumentException e) {
                 if (safeOnly) {
-                    // 第一轮：无法解析就保留原样
-                    resolved = matcher.group(0); // "${...}"
+                    resolved = matcher.group(0);
                 } else {
                     throw e;
                 }
             }
-            matcher.appendReplacement(sb, resolved.replace("\\", "\\\\").replace("$", "\\$"));
+            matcher.appendReplacement(sb, Matcher.quoteReplacement(resolved));
             changed = true;
         }
-
         if (changed) {
             matcher.appendTail(sb);
             return sb.toString();
@@ -120,7 +127,7 @@ class ZeroParser {
         return value;
     }
 
-    // ———————— 第二轮：使用 safeContext ————————
+    // ... 后续代码省略，逻辑不需要改动
     private static Object resolvePlaceholdersWithContext(final Object obj, final Map<String, String> context) {
         if (obj instanceof String) {
             return resolveStringWithContext((String) obj, context);
@@ -144,56 +151,41 @@ class ZeroParser {
         if (value == null || !value.contains("${")) {
             return value;
         }
-
         final Matcher matcher = PLACEHOLDER_PATTERN.matcher(value);
         final StringBuffer sb = new StringBuffer();
-
         while (matcher.find()) {
             final String content = matcher.group(1);
             final String resolved = resolvePlaceholder(content, false, context);
-            matcher.appendReplacement(sb, resolved.replace("\\", "\\\\").replace("$", "\\$"));
+            matcher.appendReplacement(sb, Matcher.quoteReplacement(resolved));
         }
         matcher.appendTail(sb);
         return sb.toString();
     }
 
-    // ———————— 核心解析逻辑 ————————
     private static String resolvePlaceholder(final String content, final boolean safeOnly, final Map<String, String> context) {
         final int colonIndex = content.indexOf(':');
         final String key = colonIndex != -1 ? content.substring(0, colonIndex) : content;
         final String defaultValue = colonIndex != -1 ? content.substring(colonIndex + 1) : null;
-
-        // 1. ZeroEnvironment
         String value = ENV.of().get(key);
         if (value != null) {
             return value;
         }
-
-        // 2. 如果有默认值，使用它
         if (defaultValue != null) {
             return defaultValue;
         }
-
-        // 3. 如果不是 safeOnly 模式，且提供了 configure，则查 configure
         if (!safeOnly && context != null) {
             value = context.get(key);
             if (value != null) {
                 return value;
             }
         }
-
-        // 4. 无法解析
         if (safeOnly) {
-            // 第一轮：不抛异常，由调用方决定保留
             throw new IllegalArgumentException("skip");
         } else {
-            throw new IllegalArgumentException(
-                "[ ZERO ] 占位符 '${" + content + "}' 无法解析，变量 '" + key + "' 未定义或输入丢失。"
-            );
+            throw new IllegalArgumentException("[ ZERO ] 占位符 '${" + content + "}' 无法解析，变量 '" + key + "' 未定义或输入丢失。");
         }
     }
 
-    // ———————— 提取字面量（无 ${} 的值） ————————
     private static void extractLiteralValues(final Object obj, final String prefix, final Map<String, String> context) {
         if (obj instanceof Map) {
             for (final Map.Entry<?, ?> entry : ((Map<?, ?>) obj).entrySet()) {
@@ -201,10 +193,8 @@ class ZeroParser {
                 extractLiteralValues(entry.getValue(), key, context);
             }
         } else if (obj instanceof List) {
-            // 列表不展开（或可选展开）
         } else {
             final String value = String.valueOf(obj);
-            // 只收录不包含占位符的字面量
             if (!value.contains("${")) {
                 context.put(prefix, value);
             }
