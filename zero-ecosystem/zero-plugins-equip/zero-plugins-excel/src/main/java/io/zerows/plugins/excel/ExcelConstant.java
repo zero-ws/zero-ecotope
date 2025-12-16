@@ -30,4 +30,6 @@ public interface ExcelConstant {
             KName.NAME, KName.CODE, "nameAbbr"
         };
     }
+
+    String K_PREFIX = "[ PLUG ]    \uD83D\uDCD7";
 }

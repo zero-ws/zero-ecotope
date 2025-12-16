@@ -4,6 +4,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.basicore.MDConnect;
 import io.zerows.epoch.basicore.MDEntity;
+import io.zerows.epoch.boot.ZeroOr;
 import io.zerows.epoch.constant.KName;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
@@ -16,7 +17,11 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * @author lang : 2024-05-12
  */
-class MakerEntity implements MakerIo<MDEntity> {
+class MakerIoEntity extends MakerIoBase<MDEntity> {
+    MakerIoEntity(final ZeroOr io) {
+        super(io);
+    }
+
     @Override
     public ConcurrentMap<String, MDEntity> build(final String modelDir,
                                                  final HBundle bundle,

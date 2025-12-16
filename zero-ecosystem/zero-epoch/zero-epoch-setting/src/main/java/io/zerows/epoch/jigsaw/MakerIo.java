@@ -1,6 +1,7 @@
 package io.zerows.epoch.jigsaw;
 
 import io.r2mo.typed.cc.Cc;
+import io.zerows.epoch.boot.ZeroOr;
 import io.zerows.platform.exception._60050Exception501NotSupport;
 import io.zerows.specification.development.compiled.HBundle;
 
@@ -21,13 +22,15 @@ interface MakerIo<T> {
     Cc<String, MakerIo> CC_MAKER = Cc.openThread();
 
     @SuppressWarnings("unchecked")
-    static <T> MakerIo<T> ofConnect() {
-        return (MakerIo<T>) CC_MAKER.pick(MakerConnect::new, MakerConnect.class.getName());
+    static <T> MakerIo<T> ofConnect(final ZeroOr io) {
+        final String makerKey = MakerIoConnect.class.getName() + "@" + io.hashCode();
+        return (MakerIo<T>) CC_MAKER.pick(() -> new MakerIoConnect(io), makerKey);
     }
 
     @SuppressWarnings("unchecked")
-    static <T> MakerIo<T> ofEntity() {
-        return (MakerIo<T>) CC_MAKER.pick(MakerEntity::new, MakerEntity.class.getName());
+    static <T> MakerIo<T> ofEntity(final ZeroOr io) {
+        final String makerKey = MakerIoEntity.class.getName() + "@" + io.hashCode();
+        return (MakerIo<T>) CC_MAKER.pick(() -> new MakerIoEntity(io), makerKey);
     }
 
     ConcurrentMap<String, T> build(String filename, HBundle bundle, Object... args);

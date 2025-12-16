@@ -13,6 +13,7 @@ import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
 
+@Deprecated
 public class Log4JAnnal implements LogOf {
 
     private transient final Logger logger;

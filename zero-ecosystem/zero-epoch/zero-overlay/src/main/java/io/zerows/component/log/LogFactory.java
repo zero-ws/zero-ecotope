@@ -8,6 +8,7 @@ import java.util.function.Function;
 /**
  * @author lang : 2023/4/25
  */
+@Deprecated
 public class LogFactory {
 
     private static final Cc<String, LogFactory> CC_LOG_FACTORY = Cc.openThread();

@@ -186,7 +186,11 @@ public class ZeroLauncher<T> {
         final HConfig.HOn<?> on = this.boot.whenOn();
         before.future().onSuccess(vertx -> {
             final CONFIG configuration = Objects.isNull(on) ? null : (CONFIG) on.store();
-            consumer.accept(vertx, configuration);
+            try {
+                consumer.accept(vertx, configuration);
+            } catch (final Throwable ex) {
+                log.error(ex.getMessage(), ex);
+            }
         });
     }
 
@@ -205,7 +209,7 @@ public class ZeroLauncher<T> {
         if (!this.verifyContainer(container)) {
             return Future.failedFuture(new _500ServerInternalException("[ ZERO ] 容器验证函数验证失败，终止启动！"));
         }
-        
+
         Objects.requireNonNull(container, "[ ZERO ] 启动容器不可以为 null.");
         HLauncher.Pre<T> launcherPre = this.boot.withPre();
         if (Objects.isNull(launcherPre)) {

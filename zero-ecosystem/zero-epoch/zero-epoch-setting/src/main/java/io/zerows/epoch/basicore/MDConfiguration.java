@@ -3,6 +3,7 @@ package io.zerows.epoch.basicore;
 import io.r2mo.typed.common.MultiKeyMap;
 import io.vertx.core.json.JsonObject;
 import io.zerows.specification.development.compiled.HBundle;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashSet;
 import java.util.List;
@@ -30,6 +31,7 @@ import java.util.concurrent.ConcurrentMap;
  *
  * @author lang : 2024-05-07
  */
+@Slf4j
 public class MDConfiguration {
     // configuration.json
     private final JsonObject configurationJ = new JsonObject();

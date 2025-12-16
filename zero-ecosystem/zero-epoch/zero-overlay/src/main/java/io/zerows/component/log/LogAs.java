@@ -3,6 +3,7 @@ package io.zerows.component.log;
 /**
  * @author lang : 2023/5/2
  */
+@Deprecated
 public interface LogAs {
     String MODULE = "Προδιαγραφή μεταδεδομένων";
 

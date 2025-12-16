@@ -5,6 +5,7 @@ import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.epoch.basicore.MDConnect;
 import io.zerows.epoch.basicore.MDEntity;
 import io.zerows.epoch.basicore.MDId;
+import io.zerows.epoch.boot.ZeroOr;
 import io.zerows.epoch.management.OCacheConfiguration;
 import io.zerows.specification.development.compiled.HBundle;
 
@@ -27,8 +28,8 @@ class EquipModel implements EquipAt {
 
         final String connectFile = id.path() + "/model/connect.yml";
 
-
-        final MakerIo<MDConnect> makerConnect = MakerIo.ofConnect();
+        final ZeroOr io = ZeroOr.of(id);
+        final MakerIo<MDConnect> makerConnect = MakerIo.ofConnect(io);
         // 此处键值是表名
         final ConcurrentMap<String, MDConnect> connectMap = makerConnect.build(connectFile, owner);
 
@@ -47,7 +48,7 @@ class EquipModel implements EquipAt {
 
 
         final String modelDir = id.path() + "/model";
-        final MakerIo<MDEntity> makerEntity = MakerIo.ofEntity();
+        final MakerIo<MDEntity> makerEntity = MakerIo.ofEntity(io);
         final ConcurrentMap<String, MDEntity> entityMap = makerEntity.build(modelDir, owner,
             // 第三参此处必须包含
             connectMap);

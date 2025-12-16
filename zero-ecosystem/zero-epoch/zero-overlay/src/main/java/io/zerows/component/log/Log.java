@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 
 import java.util.Objects;
 
+@Deprecated
 public final class Log {
 
     // -------------- 扩展日志

@@ -3,6 +3,7 @@ package io.zerows.component.log;
 /**
  * @author lang : 2024-04-17
  */
+@Deprecated
 class LogConsole implements LogO {
     private static final String MODULE = "Zero";
 

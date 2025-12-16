@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Deprecated
 public abstract class AbstractBoot implements HExtension {
     static final ConcurrentMap<String, MDConfiguration> CONFIGURATION_MAP = new ConcurrentHashMap<>();
     // 直接从 MSConfiguration 中提取

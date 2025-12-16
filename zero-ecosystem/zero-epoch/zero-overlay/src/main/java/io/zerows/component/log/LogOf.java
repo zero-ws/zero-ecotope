@@ -13,6 +13,7 @@ import io.zerows.specification.atomic.HLogger;
  * 假设底层已提供实现 Logger logger = LoggerFactory.getLogger，所以就不考虑线程安全
  * 问题，现阶段获取日志器会引起很大的线程安全问题，此处不能如此执行，特别针对全局模式下的操作尤其需要小心
  */
+@Deprecated
 public interface LogOf extends HLogger {
     @Memory(LogOf.class)
     Cc<Class<?>, LogOf> CC_LOGGER_COMMON = Cc.open();

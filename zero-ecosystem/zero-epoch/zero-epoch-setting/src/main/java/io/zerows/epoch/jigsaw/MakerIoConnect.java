@@ -2,6 +2,7 @@ package io.zerows.epoch.jigsaw;
 
 import io.vertx.core.json.JsonArray;
 import io.zerows.epoch.basicore.MDConnect;
+import io.zerows.epoch.boot.ZeroOr;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
 
@@ -18,7 +19,11 @@ import java.util.concurrent.ConcurrentMap;
  *
  * @author lang : 2024-05-12
  */
-class MakerConnect implements MakerIo<MDConnect> {
+class MakerIoConnect extends MakerIoBase<MDConnect> {
+    MakerIoConnect(final ZeroOr io) {
+        super(io);
+    }
+
     @Override
     public ConcurrentMap<String, MDConnect> build(final String filename,
                                                   final HBundle bundle,

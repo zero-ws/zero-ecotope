@@ -6,7 +6,6 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.LogOf;
-import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.epoch.basicore.MDConnect;
 import io.zerows.epoch.jigsaw.Oneness;
 import io.zerows.platform.constant.VValue;
@@ -59,7 +58,7 @@ class ExcelHelper {
     private transient final Class<?> target;
 
     // 四种特殊对象对应的构造器
-    private final transient ExcelEnv<MDConfiguration> envConnect;
+    private final transient ExcelEnv<Void> envConnect;
     private final transient ExcelEnv<ExTpl> envPen;
     private final transient ExcelEnv<Map<String, Workbook>> envFormula;
     private final transient ExcelEnv<ExTenant> envTenant;
@@ -71,7 +70,7 @@ class ExcelHelper {
     private ExcelHelper(final Class<?> target) {
         this.target = target;
 
-        this.envConnect = (ExcelEnv<MDConfiguration>) ExcelEnv.of(ExcelEnvConnect.class);
+        this.envConnect = (ExcelEnv<Void>) ExcelEnv.of(ExcelEnvConnect.class);
         this.envPen = (ExcelEnv<ExTpl>) ExcelEnv.of(ExcelEnvPen.class);
         this.envFormula = ((ExcelEnvFormula) ExcelEnv.of(ExcelEnvFormula.class))
             .bind(this::getWorkbook);

@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 /**
  * @author lang : 2024-06-17
  */
+@Deprecated
 public class LogUtil {
     private final Logger logger;
 

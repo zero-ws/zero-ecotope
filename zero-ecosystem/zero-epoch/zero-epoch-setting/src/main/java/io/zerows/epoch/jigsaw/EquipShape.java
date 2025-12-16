@@ -3,9 +3,7 @@ package io.zerows.epoch.jigsaw;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.epoch.basicore.MDId;
-import io.zerows.epoch.constant.KName;
-import io.zerows.platform.constant.VString;
-import io.zerows.platform.constant.VValue;
+import io.zerows.epoch.boot.ZeroOr;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
@@ -22,26 +20,29 @@ class EquipShape implements EquipAt {
         final MDId id = configuration.id();
         Objects.requireNonNull(id);
 
-        // 加载 <id>.xml 配置文件
-        // plugins/<id>.yml
-        final String baseDir = id.path();
-        final String filename = baseDir + VString.DOT + VValue.SUFFIX.YML;
+        final ZeroOr io = ZeroOr.of(id);
+        /*
+         * 新版引入了 MDMod 的核心配置项，所以不用再加载 plugins/{id}.yml 文件，直接做设置绑定即可
+         * 而且 EquipShape 是内部调用，所以代码走到这里 name 一定存在，外层已检查过
+         * - MDId
+         * - shape -> name
+         */
+        final String name = io.name();
 
 
         // plugins/<id>/configuration.json
-        final String fileConfiguration = baseDir + VString.SLASH + "configuration.json";
+        final String filename = "configuration.json";
         final HBundle owner = id.owner();
         if (Objects.isNull(owner)) {
-            log.info("[ ZERO ] 正常环境的配置加载: {}", filename);
+            log.info("[ XMOD ] 正常环境的配置加载: {}", filename);
         }
-        final JsonObject metadata = Ut.ioYaml(filename);
-        final JsonObject shapeJ = Ut.valueJObject(metadata, KName.SHAPE);
 
 
-        // 名称合法就处理 shape
-        final String name = Ut.valueString(shapeJ, KName.NAME);
-        if (Ut.isNotNil(name)) {
-            configuration.addShape(name, Ut.ioJObject(fileConfiguration));
+        final JsonObject configurationJ = io.inJObject(filename);
+        if (Ut.isNil(configurationJ)) {
+            log.warn("[ XMOD ] 配置文件不存在: id = {}, file = {}", id.value(), filename);
+            return;
         }
+        configuration.addShape(name, configurationJ);
     }
 }

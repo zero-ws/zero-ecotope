@@ -88,12 +88,25 @@ abstract class ConfigLoadBase implements ConfigLoad {
         // 步骤一：反向填充 app 信息
         final YmApp inApp = configuration.getApp();
         if (Objects.nonNull(inApp)) {
-            // id, tenant, name, ns
-            app.id(inApp.getId());
-            app.tenant(inApp.getTenant());
-            // config 配置
+            // 1. ID 填充
+            if (StrUtil.isEmpty(app.id())) {
+                app.id(inApp.getId());
+            }
+
+            // 2. NS (Namespace) 填充，名空间会从 yml 中加载
+            if (StrUtil.isNotEmpty(inApp.getNs())) {
+                app.ns(inApp.getNs());
+            }
+
+            // 3. Tenant 填充
+            if (StrUtil.isEmpty(app.tenant())) {
+                app.tenant(inApp.getTenant());
+            }
+
+            // 4. Config (Option) 配置填充 (通常对象类型判 null)
             app.option(inApp.getConfig());
-            // data 配置
+
+            // 5. Data 配置填充
             app.data(inApp.getData());
         }
         // -41001 验证

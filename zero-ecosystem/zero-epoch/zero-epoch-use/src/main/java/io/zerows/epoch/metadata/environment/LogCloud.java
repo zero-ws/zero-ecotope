@@ -6,6 +6,7 @@ import io.zerows.component.log.LogModule;
 /**
  * @author lang : 2023/4/26
  */
+@Deprecated
 public final class LogCloud {
     public interface LOG {
         String MODULE = "Δέκα δισεκατομμύρια";

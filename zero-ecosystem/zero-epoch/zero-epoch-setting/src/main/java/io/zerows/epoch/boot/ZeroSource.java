@@ -2,10 +2,6 @@ package io.zerows.epoch.boot;
 
 import cn.hutool.core.util.StrUtil;
 import io.r2mo.function.Fn;
-import io.r2mo.io.common.HFS;
-import io.r2mo.spi.SPI;
-import io.r2mo.typed.json.JObject;
-import io.r2mo.typed.json.JUtil;
 import io.vertx.core.json.JsonArray;
 import io.zerows.epoch.basicore.InPre;
 import io.zerows.epoch.basicore.YmApplication;
@@ -24,9 +20,6 @@ import java.util.Objects;
  */
 @Slf4j
 class ZeroSource implements ZeroPower.Source {
-    private static final JUtil UT = SPI.V_UTIL;
-    private static final String FILE_BOOT = "vertx-boot.yml";
-    private final transient HFS fs = HFS.of();
 
     /**
      * 加载过程中的名空间分配等相关信息
@@ -54,7 +47,7 @@ class ZeroSource implements ZeroPower.Source {
      */
     @Override
     public YmConfiguration load() {
-        final InPre pre = this.ioPre();
+        final InPre pre = ZeroOr.of().inPre();
         final YmConfiguration configuration;
         final HApp app;
         if (Objects.isNull(pre)) {
@@ -78,29 +71,5 @@ class ZeroSource implements ZeroPower.Source {
         }
         StoreApp.of().add(app.vLog());
         return configuration;
-    }
-
-    private InPre ioPre() {
-        final String content = this.fs.inContent(FILE_BOOT);
-
-
-        // ------------- 两次加载都失败则直接返回 null
-        if (Objects.isNull(content)) {
-            return null;
-        }
-
-
-        final String parsedString = ZeroParser.compile(content);
-
-
-        final JObject parsed = this.fs.ymlForJ(parsedString);
-        final InPre inPre = UT.deserializeJson(parsed, InPre.class);
-
-
-        // 设置日志
-        ZeroLogging.configure(inPre.getLogging());
-
-        log.debug("[ ZERO ] 读取到的配置内容：\n{}", parsed.encodePretty());
-        return inPre;
     }
 }

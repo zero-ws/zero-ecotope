@@ -2,6 +2,7 @@ package io.zerows.extension.skeleton.boot;
 
 import io.r2mo.spi.SPI;
 import io.zerows.cortex.sdk.HQBE;
+import io.zerows.epoch.boot.ConfigMod;
 import io.zerows.epoch.management.OCacheClass;
 import io.zerows.extension.skeleton.spi.ExActivity;
 import io.zerows.extension.skeleton.spi.ExApp;
@@ -29,6 +30,7 @@ class ExBoot {
 
     private static final List<Class<?>> SPI_SET = new ArrayList<>() {
         {
+            this.add(ConfigMod.class);
             this.add(HQBE.class);
             // -- 扩展接口处理
             this.add(ExActivity.class);

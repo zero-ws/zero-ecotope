@@ -18,6 +18,7 @@ import java.util.function.Supplier;
  *
  * @author lang : 2024-04-17
  */
+@Deprecated
 public interface LogO extends HLogger {
 
     Cc<String, LogO> CC_LOG = Cc.open();

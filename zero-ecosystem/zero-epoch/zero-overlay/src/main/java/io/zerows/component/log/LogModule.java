@@ -8,6 +8,7 @@ import java.util.function.Function;
 /**
  * @author lang : 2023/4/25
  */
+@Deprecated
 public class LogModule {
     private static final Cc<String, LogModule> CC_LOG_EXTENSION = Cc.openThread();
     private final String module;
