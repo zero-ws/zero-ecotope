@@ -46,7 +46,14 @@
             <groupId>io.zerows</groupId>
             <artifactId>zero-plugins-security</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-plugins-excel</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-plugins-websocket</artifactId>
+        </dependency>
         <!-- 核心底层 -->
         <dependency>
             <groupId>io.zerows</groupId>
@@ -134,15 +141,7 @@
         <!--        </dependency>-->
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-plugins-excel</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.zerows</groupId>
             <artifactId>zero-plugins-store-elasticsearch</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.zerows</groupId>
-            <artifactId>zero-plugins-websocket</artifactId>
         </dependency>
     </dependencies>
 </project>
