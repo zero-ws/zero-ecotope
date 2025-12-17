@@ -18,7 +18,6 @@
         <module>zero-plugins-trash</module>
         <module>zero-plugins-flyway</module>
         <module>zero-plugins-swagger</module>
-        <module>zero-plugins-liquibase</module>
         <module>zero-plugins-security</module>
 
         <!-- Integration -->

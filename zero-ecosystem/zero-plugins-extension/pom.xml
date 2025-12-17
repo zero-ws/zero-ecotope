@@ -34,4 +34,27 @@
         <module>zero-exmodule-mbseapi</module>                             <!-- MBSE API -->
         <module>zero-exmodule-mbsecore</module>                            <!-- MBSE Core -->
     </modules>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <configuration>
+                    <configFiles>
+                        <configFile>${project.build.outputDirectory}/flyway.conf</configFile>
+                    </configFiles>
+                    <locations>
+                        <location>filesystem:${project.basedir}/src/main/resources/plugins/${project.parent.artifactId}/flyway/MYSQL</location>
+                    </locations>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.flywaydb</groupId>
+                        <artifactId>flyway-mysql</artifactId>
+                        <version>11.19.0</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
 </project>

@@ -62,7 +62,6 @@
     <logger name="org.hibernate.validator" level="WARN"/>
     <logger name="org.hibernate.ejb.HibernatePersistence" level="OFF"/>
     <logger name="org.bson" level="WARN"/>
-    <logger name="liquibase" level="WARN"/>
     <logger name="LiquibaseSchemaResolver" level="INFO"/>
     <logger name="com.zaxxer" level="WARN"/>
 

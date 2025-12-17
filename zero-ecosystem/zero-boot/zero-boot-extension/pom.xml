@@ -23,7 +23,6 @@
         静态插件
         - trash
         - flyway
-        - liquibase
         - security
         -->
         <dependency>
@@ -37,10 +36,6 @@
         <dependency>
             <groupId>io.zerows</groupId>
             <artifactId>zero-plugins-flyway</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.zerows</groupId>
-            <artifactId>zero-plugins-liquibase</artifactId>
         </dependency>
         <dependency>
             <groupId>io.zerows</groupId>

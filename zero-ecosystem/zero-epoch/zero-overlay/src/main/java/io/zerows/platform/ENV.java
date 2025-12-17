@@ -62,7 +62,7 @@ public class ENV implements HEnvironment, HLog {
         }
         final Properties props = new Properties();
         final List<ResourceCandidate> candidates = this.candidatesFor(path);
-        boolean loaded = false;
+        boolean loaded;
 
         for (final ResourceCandidate c : candidates) {
             loaded = this.tryLoadAndApply(c, props);
@@ -204,25 +204,43 @@ public class ENV implements HEnvironment, HLog {
         return ENV_VARS.keySet();
     }
 
-    // ========== 特殊处理
+    // ========== 特殊处理：增强版变量解析 ==========
+
     public static String parseVariable(final String wrapValue) {
-        // 定义匹配的正则表达式
-        final String regex = "\\$\\{(.+)\\}";
+        if (UtBase.isNil(wrapValue)) {
+            return wrapValue;
+        }
+
+        // 定义非贪婪匹配的正则表达式：${KEY}
+        // [^}] 表示匹配除了右花括号外的所有字符，确保一行内多个变量能被正确分割
+        final String regex = "\\$\\{([^}]+)\\}";
         final Pattern pattern = Pattern.compile(regex);
         final Matcher matcher = pattern.matcher(wrapValue);
+        final StringBuilder buffer = new StringBuilder();
 
-        final String envValue;
-        if (matcher.find()) {
-            // 使用了环境变量
+        while (matcher.find()) {
+            // 获取 ${KEY} 中的 KEY
             final String envKey = matcher.group(1);
-            envValue = ENV.of().get(envKey, (String) null);
-            log.info("[ ZERO ] 解析环境变量：{}，值为：{}", envKey, envValue);
-        } else {
-            envValue = wrapValue;
-            // 未使用环境变量
-            log.info("[ ZERO ] 未设置环境变量：{}", envValue);
+
+            // 尝试获取环境变量
+            String envValue = ENV.of().get(envKey, (String) null);
+
+            if (UtBase.isNotNil(envValue)) {
+                log.info("[ ZERO ] 解析环境变量：{} -> {}", envKey, envValue);
+            } else {
+                // 策略：如果没找到环境变量，保留原样 "${KEY}"，方便后续排查或由其他层级处理
+                envValue = "${" + envKey + "}";
+                log.warn("[ ZERO ] 未设置环境变量：{}，保持原样", envKey);
+            }
+
+            // 执行替换 (使用 quoteReplacement 防止 envValue 中包含 $ 或 \ 等特殊字符导致报错)
+            matcher.appendReplacement(buffer, Matcher.quoteReplacement(envValue));
         }
-        return envValue;
+
+        // 将剩余未匹配的字符串拼接到尾部
+        matcher.appendTail(buffer);
+
+        return buffer.toString();
     }
     // ========== Reporter ==========
 

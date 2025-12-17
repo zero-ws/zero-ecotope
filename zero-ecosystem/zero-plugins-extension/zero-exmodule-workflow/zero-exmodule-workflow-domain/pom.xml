@@ -52,23 +52,4 @@
             <artifactId>joda-time</artifactId>
         </dependency>
     </dependencies>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.liquibase</groupId>
-                <artifactId>liquibase-maven-plugin</artifactId>
-                <configuration>
-                    <propertyProviderClass>io.zerows.plugins.liquibase.LiquibaseEncryptionZero
-                    </propertyProviderClass>
-                    <!-- 配置文件路径 -->
-                    <propertyFile>plugins/${project.parent.artifactId}/database/MYSQL.properties</propertyFile>
-                    <changeLogFile>plugins/${project.parent.artifactId}/database/MYSQL.yml</changeLogFile>
-                    <!-- 配置参数 -->
-                    <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
-                    <outputFileEncoding>UTF-8</outputFileEncoding>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-
 </project>

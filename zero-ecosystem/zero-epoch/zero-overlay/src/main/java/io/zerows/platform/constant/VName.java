@@ -125,6 +125,7 @@ public interface VName {
     String SERVER = "server";                    /* Common: server */
     String DATA = "data";                        /* Common: data */
     String DATABASE = "database";                /* Common: database */
+    String URL = "url";                          /* Common: url */
     String KIND = "kind";                        /* Common: kind */
 
     String FORK = "fork";                        /* Fork/Join -> Fork */
