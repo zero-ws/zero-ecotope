@@ -27,33 +27,6 @@ import io.zerows.spi.BootIo;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 public interface EnvironmentVariable {
-    // 「Development」开发专用 ---------------------------------------
-    /*
-     * @Deprecated -> 这些变量后期可能都会被 @Slf4j 的日志级别所取代
-     * 环境变量不出现在 vertx.yml 配置文件中，而是直接通过如下途径进行访问
-     * 1. 直接通过环境变量访问器访问
-     * 2. 通过 @Env 进行绑定（DI环境模式）
-     * 3. 直接调用工具类：ENV -> 调用它的静态方法进行访问，访问过程会精确命中当前变量
-     */
-    @Deprecated(forRemoval = true)
-    String DEV_IO = "Z_DEV_IO";                         // 查看底层IO日志
-    @Deprecated(forRemoval = true)
-    String DEV_JOOQ_COND = "Z_DEV_JOOQ_COND";           // 查看 jooq 查询条件日志（等价SQL日志）
-
-    @Deprecated(forRemoval = true)
-    String DEV_EXPR_BIND = "Z_DEV_EXPR_BIND";           // 表达式引擎专用日志打印
-    @Deprecated(forRemoval = true)
-    String DEV_EXCEL_RANGE = "Z_DEV_EXCEL_RANGE";       // Excel数据加载扫描日志
-    @Deprecated(forRemoval = true)
-    String DEV_JOB_BOOT = "Z_DEV_JOB_BOOT";             // 任务启动专用日志
-    @Deprecated(forRemoval = true)
-    String DEV_JVM_STACK = "Z_DEV_JVM_STACK";           // ex.printStackTrace() 异常日志
-    @Deprecated(forRemoval = true)
-    String DEV_WEB_URI = "Z_DEV_WEB_URI";               // URI路由检测状况
-    @Deprecated(forRemoval = true)
-    String DEV_DAO_BIND = "Z_DEV_DAO_BIND";             // CRUD的 Dao文件绑定
-    @Deprecated(forRemoval = true)
-    String DEV_AUTHORIZED = "Z_DEV_AUTHORIZED";         // 认证日志
 
     // 「容器级别」通用配置 ---------------------------------------
 
@@ -111,11 +84,6 @@ public interface EnvironmentVariable {
     String SIS_USERNAME = "Z_SIS_USERNAME";             // 集成服务中的用户名
     String SIS_PASSWORD = "Z_SIS_PASSWORD";             // 集成服务中的密码
     // 「Production」生产专用 ---------------------------------------
-    @Deprecated(forRemoval = true)
-    String HED_COMPONENT = "Z_HED";                     // 外置 HED 模块
-    @Deprecated(forRemoval = true)
-    String HED_ENABLED = "Z_HED_ENABLED";               // 是否打开 HED 模块
-
 
     String CORS_DOMAIN = "Z_CORS_DOMAIN";               // 跨域配置（可支持多个，这个作为额外的添加）
     // RESTful 端口号/主机

@@ -1,8 +1,6 @@
 package io.zerows.component.log;
 
 import io.r2mo.typed.exception.AbstractException;
-import io.zerows.platform.ENV;
-import io.zerows.platform.EnvironmentVariable;
 import io.zerows.platform.constant.VString;
 import io.zerows.support.base.UtBase;
 import org.slf4j.Logger;
@@ -40,15 +38,7 @@ public class Log4JAnnal implements LogOf {
         } else {
             this.logger.error(message);
         }
-        final Boolean isDebug = ENV.of().get(EnvironmentVariable.DEV_JVM_STACK, Boolean.FALSE, Boolean.class);
-        if (isDebug) {
-            /*
-             * 堆栈信息打印条件
-             * 1. 开启了 DEV_JVM_STACK 环境变量
-             * 2. 传入异常不可为空
-             */
-            ex.printStackTrace();
-        }
+        ex.printStackTrace();
     }
 
     private void log(final Supplier<Boolean> fnPre,
