@@ -157,7 +157,7 @@
                         <artifactId>maven-resources-plugin</artifactId>
                         <executions>
                             <execution>
-                                <id>build-deployment</id>
+                                <id>copy-resources</id>
                                 <phase>process-resources</phase>
                                 <goals>
                                     <goal>copy-resources</goal>
@@ -170,6 +170,25 @@
                                             <includes>
                                                 <include>**/*</include>
                                                 <include>**/*</include>
+                                            </includes>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>copy-scripts</id>
+                                <phase>process-sources</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>target</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>${basedir}/src/main/script</directory>
+                                            <includes>
+                                                <include>**/*.sh</include>
+                                                <include>**/*.bat</include>
                                             </includes>
                                         </resource>
                                     </resources>
