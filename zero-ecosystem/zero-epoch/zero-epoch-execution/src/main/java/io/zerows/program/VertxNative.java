@@ -3,17 +3,18 @@ package io.zerows.program;
 import io.vertx.core.Handler;
 import io.vertx.core.Promise;
 import io.vertx.core.Vertx;
-import io.vertx.core.VertxException;
 import io.vertx.core.VertxOptions;
 import io.vertx.core.WorkerExecutor;
 import io.vertx.core.eventbus.EventBus;
 import io.zerows.cortex.extension.CodecEnvelop;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
+@Slf4j
 class VertxNative {
 
     private static Vertx VERTX_NATIVE;
@@ -62,14 +63,10 @@ class VertxNative {
         }).onComplete(ar -> {
             // 无论成功还是失败，都要关闭 WorkerExecutor
             executor.close();
-
-            if (ar.failed()) {
-                // 异常时打印堆栈
-                final Throwable error = ar.cause();
-                if (!(error instanceof VertxException)) {
-                    error.printStackTrace();
-                }
-            }
+        }).onFailure(error -> {
+            // 异常时打印堆栈
+            log.error(error.getMessage(), error);
+            // 继续往上
         });
     }
 }

@@ -98,17 +98,23 @@ public interface EnvironmentVariable {
 
     // 数据库端口号/主机
     String DBS_INSTANCE = "Z_DBS_INSTANCE";
+    String DBS_URL = "Z_DBS_URL";
 
     // 工作流数据库端口号/主机
     String DBW_INSTANCE = "Z_DBW_INSTANCE";
+    String DBW_URL = "Z_DBW_URL";
 
     // 历史数据库端口号/主机
     String DBH_INSTANCE = "Z_DBH_INSTANCE";
+    String DBH_URL = "Z_DBH_URL";
 
+    String DB_TYPE = "Z_DB_TYPE";                // 统一数据库类型
     String DB_HOST = "Z_DB_HOST";               // 统一数据库主机
     String DB_PORT = "Z_DB_PORT";               // 统一数据库端口
     String DB_USERNAME = "Z_DB_USERNAME";
     String DB_PASSWORD = "Z_DB_PASSWORD";
+    String DB_APP_USER = "Z_DB_APP_USER";
+    String DB_APP_PASS = "Z_DB_APP_PASS";
     // 数据库在三个库中的账号和密码必须相同，此处三个库并非 App 的数据库，而是 Cloud 专用的三库
 
     // 「Cloud」云端专用 ---------------------------------------
@@ -171,6 +177,7 @@ public interface EnvironmentVariable {
         // DB Service
         DBS_INSTANCE, DBW_INSTANCE, DBH_INSTANCE,
         // 数据库账号密码
-        DB_USERNAME, DB_PASSWORD
+        DB_USERNAME, DB_PASSWORD,
+        DB_APP_USER, DB_APP_PASS,
     };
 }

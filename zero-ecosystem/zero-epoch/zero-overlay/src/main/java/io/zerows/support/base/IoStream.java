@@ -3,9 +3,9 @@ package io.zerows.support.base;
 import io.r2mo.function.Fn;
 import io.vertx.core.buffer.Buffer;
 import io.zerows.component.fs.LocalDir;
-import io.zerows.component.log.LogUtil;
 import io.zerows.platform.constant.VValue;
 import io.zerows.platform.exception._11002Exception500EmptyIo;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -22,13 +22,8 @@ import java.util.function.Supplier;
 /**
  * Stream read class.
  */
+@Slf4j
 final class IoStream {
-    /**
-     * 「DEAD-LOCK」LoggerFactory.getLogger
-     * Do not use `Annal` logger because of deadlock.
-     */
-    //    private static final Logger LOGGER = LoggerFactory.getLogger(IoStream.class);
-    private static final LogUtil LOG = LogUtil.from(IoStream.class);
 
     private IoStream() {
     }
@@ -124,7 +119,7 @@ final class IoStream {
     static InputStream read(final String filename,
                             final Class<?> clazz) {
         final String root = LocalDir.root();
-        LOG.io(INFO.IoStream.__FILE_ROOT, root, filename);
+        log.info("[ ZERO ] ( IO ) 文件：{} / 根目录：{}", filename, root);
         /*
          * 0. new File(filename)
          *    new FileInputStream(File)
@@ -132,7 +127,7 @@ final class IoStream {
         // 切换NIO
         final File file = new File(filename);
         if (file.exists()) {
-            LOG.io(INFO.IoStream.INF_CUR, file.exists());
+            log.debug("[ ZERO ] ( IO ) 文件 {} 存在于当前路径下，直接读取。", filename);
             return readSupplier(() -> readDirect(file), filename);
         } else {
             /*
@@ -178,8 +173,11 @@ final class IoStream {
             /*
              * 3. Stream.class.getResourceAsStream(filename)
              */
-            LOG.io(INFO.IoStream.__CLASS_LOADER_STREAM, filename);
             in = readSupplier(() -> IoStream.class.getResourceAsStream(filename), filename);
+            // 后置非空打印，才可知道是否当前IO操作成功
+            if (Objects.nonNull(in)) {
+                log.info("[ ZERO ] ( IO ) {}：4. IoStream.class.getResourceAsStream(String)", filename);
+            }
         }
         // System.Class Loader
         if (Objects.isNull(in)) {
@@ -188,8 +186,11 @@ final class IoStream {
             /*
              * 4. ClassLoader.getSystemResourceAsStream(filename)
              */
-            LOG.io(INFO.IoStream.__CLASS_LOADER_SYSTEM, filename);
             in = readSupplier(() -> ClassLoader.getSystemResourceAsStream(filename), filename);
+            // 后置非空打印，才可知道是否当前IO操作成功
+            if (Objects.nonNull(in)) {
+                log.info("[ ZERO ] ( IO ) {}：5. ClassLoader.getSystemResourceAsStream(String)", filename);
+            }
         }
         /*
          * Jar reading
@@ -201,8 +202,10 @@ final class IoStream {
             /*
              * 5. readJar(filename)
              */
-            LOG.io(INFO.IoStream.__JAR_RESOURCE, filename);
             in = readJar(filename);
+            if (Objects.nonNull(in)) {
+                log.info("[ ZERO ] ( IO ) {}：6. 从 JAR 中加载文件！", filename);
+            }
         }
         if (null == in) {
             throw new _11002Exception500EmptyIo(filename);
@@ -226,13 +229,20 @@ final class IoStream {
 
     static InputStream readDirect(final String filename) {
         final ClassLoader loader = Thread.currentThread().getContextClassLoader();
-        LOG.io(INFO.IoStream.__CLASS_LOADER, filename);
-        return Fn.jvmOr(() -> loader.getResourceAsStream(filename));
+        final InputStream inRet = Fn.jvmOr(() -> loader.getResourceAsStream(filename));
+        if (Objects.nonNull(inRet)) {
+            log.info("[ ZERO ] ( IO ) {}：3. Thread.currentThread().getContextClassLoader().getResourceAsStream(String)", filename);
+        }
+        return inRet;
     }
 
     private static InputStream readDirect(final String filename, final Class<?> clazz) {
-        LOG.io(INFO.IoStream.__RESOURCE_AS_STREAM, clazz, filename);
-        return Fn.jvmOr(() -> clazz.getResourceAsStream(filename));
+        final InputStream inRet = Fn.jvmOr(() -> clazz.getResourceAsStream(filename));
+        // 后置非空打印，才可知道是否当前IO操作成功
+        if (Objects.nonNull(inRet)) {
+            log.info("[ ZERO ] ( IO ) {}：2. clazz[{}].getResourceAsStream(String)", filename, clazz);
+        }
+        return inRet;
     }
 
     // ----------------- 私有方法
@@ -260,7 +270,7 @@ final class IoStream {
                                             final String filename) {
         final InputStream in = supplier.get();
         if (null != in) {
-            LOG.io(INFO.IoStream.INF_PATH, filename, in);
+            log.debug("[ ZERO ] 读取文件流成功，文件：{}，流对象：{}", filename, in);
         }
         return in;
     }

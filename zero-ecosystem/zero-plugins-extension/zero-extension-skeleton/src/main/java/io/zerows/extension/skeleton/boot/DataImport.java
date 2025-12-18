@@ -22,6 +22,8 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 /**
  * 替换旧版本中的静态模式下的 {@see Bt}，用于处理数据加载的专用操作，容器分两种模式
@@ -150,29 +152,86 @@ public class DataImport {
                 System.exit(0);
             } else {
                 log.error(handler.cause().getMessage(), handler.cause());
+                try {
+                    // 给异步日志框架一点时间将缓冲区（Buffer）中的内容推送到终端或文件
+                    // 如果在 log.error 之后立即执行 System.exit(1)，JVM 会瞬间关闭，此时日志缓冲区里的表格信息可能只打印了一半，甚至完全没打出来程序就死了。
+                    Thread.sleep(200);
+                } catch (final InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+                System.exit(1);
             }
         };
     }
 
     private Future<Boolean> future(final String folder, final String prefix, final boolean oob) {
         final List<Future<String>> files = new ArrayList<>();
-        DataIo.ioFiles(folder, prefix, oob).map(this::execute).forEach(files::add);
-        return FnBase.combineT(files).compose(nil -> Ux.future(Boolean.TRUE));
+        final ConcurrentMap<String, String> failureMap = new ConcurrentHashMap<>();
+
+        DataIo.ioFiles(folder, prefix, oob)
+            .map(filename -> this.execute(filename, failureMap))
+            .forEach(files::add);
+
+        return FnBase.combineT(files)
+            .map(nil -> Boolean.TRUE)
+            .recover(error -> {
+                if (!failureMap.isEmpty()) {
+                    // 1. 计算 Message 的最大长度（用于对齐），设定最小宽度为 20
+                    final int maxMessageLen = failureMap.values().stream()
+                        .mapToInt(String::length)
+                        .max()
+                        .orElse(20);
+
+                    // 2. 构造格式化字符串
+                    final StringBuilder sb = new StringBuilder();
+                    sb.append("\n\n").append("=".repeat(maxMessageLen + 50));
+                    sb.append(String.format("\n📊 数据导入异常汇总 (失败文件数: %d)\n", failureMap.size()));
+                    sb.append("-".repeat(maxMessageLen + 50)).append("\n");
+
+                    // 表头
+                    final String headerFormat = "   %-" + maxMessageLen + "s   |   %s\n";
+                    sb.append(String.format(headerFormat, "❌ 错误信息 (Message)", "📄 文件名 (File)"));
+                    sb.append("-".repeat(maxMessageLen + 50)).append("\n");
+
+                    // 内容行
+                    final String rowFormat = "   %-" + maxMessageLen + "s   |   %s\n";
+                    failureMap.forEach((file, message) -> {
+                        // 处理换行符，防止破坏表格结构
+                        final String cleanMsg = message.replace("\n", " ").trim();
+                        sb.append(String.format(rowFormat, cleanMsg, file));
+                    });
+
+                    sb.append("=".repeat(maxMessageLen + 50)).append("\n");
+
+                    // 3. 一次性打印输出
+                    log.error(sb.toString());
+                }
+
+                return Future.failedFuture(error);
+            });
     }
 
     // 内部执行专用方法
-    private Future<String> execute(final String filename) {
+    private Future<String> execute(final String filename, final ConcurrentMap<String, String> failureMap) {
         return Ux.nativeWorker(filename, this.vertx, pre -> {
-            final ExcelClient client = ExcelActor.ofClient();
-            log.info("[ INST ] 开始导入文件：{}", filename);
-            client.importAsync(filename, handler -> {
-                if (handler.succeeded()) {
-                    pre.complete(filename);
-                } else {
-                    pre.fail(handler.cause());
-                }
-            });
+            try {
+                final ExcelClient client = ExcelActor.ofClient();
+                log.info("[ INST ] 开始导入文件：{}", filename);
+                client.importAsync(filename, handler -> {
+                    if (handler.succeeded()) {
+                        pre.complete(filename);
+                    } else {
+                        // 路径 A：异步执行失败
+                        failureMap.put(filename, handler.cause().getMessage());
+                        pre.fail(handler.cause());
+                    }
+                });
+            } catch (final Throwable ex) {
+                // 路径 B：同步调用失败（如 importAsync 方法本身报错）
+                // 这里的统计必须补上！
+                failureMap.put(filename, ex.getMessage());
+                pre.fail(ex);
+            }
         });
     }
-    // 完成专用方法
 }

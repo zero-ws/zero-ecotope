@@ -14,7 +14,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -31,6 +33,9 @@ public class ENV implements HEnvironment, HLog {
 
     private static final ConcurrentMap<String, String> ENV_VARS = new ConcurrentHashMap<>();
     private static final ENV INSTANCE = new ENV();
+
+    // MySQL 默认连接参数
+    private static final String MYSQL_PARAMS = "?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&useSSL=false&allowPublicKeyRetrieval=true";
 
     private ENV() {
         // 私有构造函数，防止外部实例化
@@ -49,8 +54,75 @@ public class ENV implements HEnvironment, HLog {
                 this.loadProperties(path);
             }
         }
+
+        // [新增] 自动计算 JDBC URL
+        this.autoCalculateUrls();
+
         // 打印环境变量
         this.vLog();
+    }
+
+    // ========== Auto Calculation (New Added) ==========
+
+    /**
+     * 自动计算 JDBC URL
+     * 根据 Z_DB_TYPE, Z_DB_HOST, Z_DB_PORT 以及各实例名自动生成 Z_DBx_URL
+     */
+    private void autoCalculateUrls() {
+        // 1. 检查数据库类型，目前仅自动处理 MYSQL
+        // 使用常量 EnvironmentVariable.DB_TYPE
+        final String dbType = this.get(EnvironmentVariable.DB_TYPE);
+        if (!"MYSQL".equalsIgnoreCase(dbType)) {
+            log.debug("[ ZERO ] 数据库类型为 [{}]，跳过 MySQL URL 自动计算。", dbType);
+            return;
+        }
+
+        // 2. 获取基础连接信息
+        // 使用常量 EnvironmentVariable.DB_HOST / DB_PORT
+        final String host = this.get(EnvironmentVariable.DB_HOST);
+        final String port = this.get(EnvironmentVariable.DB_PORT);
+
+        if (UtBase.isNil(host) || UtBase.isNil(port)) {
+            log.warn("[ ZERO ] 缺少 {} 或 {} 配置，跳过 URL 计算。",
+                EnvironmentVariable.DB_HOST, EnvironmentVariable.DB_PORT);
+            return;
+        }
+
+        // 3. 定义需要计算的映射关系: { 生成的目标KEY : 依赖的实例名KEY }
+        final Map<String, String> targetMapping = new LinkedHashMap<>();
+        // 使用常量替换字符串 "Z_DBS_URL" -> DBS_URL 等
+        targetMapping.put(EnvironmentVariable.DBS_URL, EnvironmentVariable.DBS_INSTANCE); // 业务库
+        targetMapping.put(EnvironmentVariable.DBW_URL, EnvironmentVariable.DBW_INSTANCE); // 工作流库
+        targetMapping.put(EnvironmentVariable.DBH_URL, EnvironmentVariable.DBH_INSTANCE); // 历史库
+
+        // 4. 遍历计算
+        targetMapping.forEach((urlKey, instanceKey) -> {
+            // 如果已经被显式配置过，则不覆盖
+            if (this.contains(urlKey)) {
+                return;
+            }
+
+            final String instanceName = this.get(instanceKey);
+            if (UtBase.isNotNil(instanceName)) {
+                // 格式: jdbc:mysql://host:port/instance?params
+                final String url = StrUtil.format("jdbc:mysql://{}:{}/{}{}",
+                    host, port, instanceName, MYSQL_PARAMS);
+
+                // 写入系统属性和缓存
+                System.setProperty(urlKey, url);
+                ENV_VARS.put(urlKey, url);
+                log.info("[ ZERO ] 自动生成数据库 URL: {} = {}", urlKey, url);
+            }
+        });
+    }
+
+    /**
+     * 辅助判断是否存在 key
+     */
+    private boolean contains(final String key) {
+        return System.getenv().containsKey(key) ||
+            System.getProperties().containsKey(key) ||
+            ENV_VARS.containsKey(key);
     }
 
     // ========== Loaders (Public entry) ==========
@@ -171,8 +243,18 @@ public class ENV implements HEnvironment, HLog {
      */
     private void applyProperties(final Properties properties) {
         for (final String key : properties.stringPropertyNames()) {
-            final String value = properties.getProperty(key);
+            String value = properties.getProperty(key);
+
             if (UtBase.isNotNil(value)) {
+                // ---------------------------------------------------------
+                // [新增逻辑] 去除首尾双引号
+                // 场景：配置文件中写了 KEY="VALUE" 或 KEY="http://..."
+                // ---------------------------------------------------------
+                value = value.trim(); // 建议先 trim 去除可能存在的空白符
+                if (value.length() >= 2 && value.startsWith("\"") && value.endsWith("\"")) {
+                    value = value.substring(1, value.length() - 1);
+                }
+
                 System.setProperty(key, value);
                 ENV_VARS.put(key, value);
             }
@@ -252,6 +334,8 @@ public class ENV implements HEnvironment, HLog {
         content.append("\n======= Zero Framework 环境变量 =======\n");
 
         final HEnvironment environment = ENV.of();
+
+        // 1. 打印 EnvironmentVariable.NAMES 中定义的标准变量
         Arrays.stream(EnvironmentVariable.NAMES)
             .filter(StrUtil::isNotEmpty)
             .forEach(name -> {
@@ -260,6 +344,19 @@ public class ENV implements HEnvironment, HLog {
                     content.append("\t").append(name).append(" = ").append(value).append("\n");
                 }
             });
+
+        // 2. 额外打印自动生成的 URL (因为 NAMES 数组中不包含 URL 的常量定义，只有 INSTANCE)
+        // 使用常量 EnvironmentVariable.DBS_URL / DBW_URL / DBH_URL
+        Arrays.asList(
+            EnvironmentVariable.DBS_URL,
+            EnvironmentVariable.DBW_URL,
+            EnvironmentVariable.DBH_URL
+        ).forEach(name -> {
+            final String value = environment.get(name);
+            if (value != null) {
+                content.append("\t[Auto] ").append(name).append(" = ").append(value).append("\n");
+            }
+        });
 
         content.append("======================================\n");
         final String message = content.toString();

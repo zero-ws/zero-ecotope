@@ -1,8 +1,8 @@
 package io.zerows.support.base;
 
 import io.r2mo.function.Fn;
-import io.zerows.component.log.LogUtil;
 import io.zerows.platform.constant.VValue;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -19,20 +19,24 @@ import java.util.Objects;
  *
  * @author lang : 2023-05-26
  */
+@Slf4j
 class IoN {
-    private static final LogUtil LOG = LogUtil.from(IoN.class);
 
     @SuppressWarnings("all")
     static InputStream stream(final File file) {
         Objects.requireNonNull(file);
         final String parameters = file.getAbsolutePath();
-        LOG.io(INFO.IoStream.__FILE_INPUT_STREAM, parameters);
-        return Fn.jvmOr(() -> {
+        final InputStream inRet = Fn.jvmOr(() -> {
             // NIO切换IO
             final FileInputStream in = new FileInputStream(parameters);
             final ReadableByteChannel channel = in.getChannel();
             return Channels.newInputStream(channel);
         });
+        // 后置非空打印，才可知道是否当前IO操作成功
+        if (Objects.nonNull(inRet)) {
+            log.info("[ ZERO ] ( IO ) {}：1. new FileInputStream(File)", parameters);
+        }
+        return inRet;
     }
 
     static byte[] bytes(final InputStream in) throws IOException {
