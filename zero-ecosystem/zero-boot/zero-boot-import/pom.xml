@@ -76,4 +76,136 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <!--
+        发布部署专用 Profile，可执行如下命令在子类中激活
+        mvn -Pr2-matrix clean package install
+        -->
+        <profile>
+            <id>r2-matrix</id>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                        <includes>
+                            <include>**/*</include>
+                        </includes>
+                    </resource>
+                </resources>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-clean-plugin</artifactId>
+                        <configuration>
+                            <filesets>
+                                <!-- 实例依赖包相关信息 -->
+                                <fileset>
+                                    <directory>${project.basedir}/instance/__lib/</directory>
+                                    <includes>
+                                        <include>**/*</include>
+                                    </includes>
+                                </fileset>
+                                <fileset>
+                                    <directory>${project.basedir}/deployment/</directory>
+                                    <includes>
+                                        <include>**/*</include>
+                                    </includes>
+                                </fileset>
+                            </filesets>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>copy-dependencies</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>copy-dependencies</goal>
+                                </goals>
+                                <configuration>
+                                    <type>jar</type>
+                                    <includeTypes>jar</includeTypes>
+                                    <!-- 存放服务依赖的jar包，存放在服务相同目录的lib文件夹下 -->
+                                    <outputDirectory>
+                                        target/lib
+                                    </outputDirectory>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>copy-instance</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>copy-dependencies</goal>
+                                </goals>
+                                <configuration>
+                                    <!-- <includeScope>compile</includeScope> -->
+                                    <type>jar</type>
+                                    <includeTypes>jar</includeTypes>
+                                    <!-- 存放服务依赖的jar包，存放在服务相同目录的lib文件夹下 -->
+                                    <outputDirectory>
+                                        ${project.basedir}/instance/__lib
+                                    </outputDirectory>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <!--
+                    依赖程序拷贝
+                    -->
+                    <plugin>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>copy-resources</id>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${project.basedir}/deployment/</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>${project.basedir}/src/main/resources/</directory>
+                                            <includes>
+                                                <include>**/*</include>
+                                            </includes>
+                                            <excludes>
+                                                <!--
+                                                1. 数据库已经是成品，所以不需要拷贝
+                                                2. env.properties 仅用于开发过程 @PropertySource 读取
+                                                -->
+                                                <exclude>**/flyway.conf</exclude>
+                                                <exclude>**/env.properties</exclude>
+                                            </excludes>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>copy-scripts</id>
+                                <phase>process-sources</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>target</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>${basedir}/src/main/script</directory>
+                                            <includes>
+                                                <include>**/*.sh</include>
+                                                <include>**/*.bat</include>
+                                            </includes>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

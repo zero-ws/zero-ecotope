@@ -16,6 +16,10 @@
             <groupId>io.zerows</groupId>
             <artifactId>r2mo-boot-vertx</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.hubspot.jinjava</groupId>
+            <artifactId>jinjava</artifactId>
+        </dependency>
         <!-- Vert.x -->
         <dependency>
             <groupId>io.vertx</groupId>

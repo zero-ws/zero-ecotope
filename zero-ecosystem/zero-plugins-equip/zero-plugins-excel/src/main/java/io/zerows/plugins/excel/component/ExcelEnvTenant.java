@@ -24,7 +24,6 @@ public class ExcelEnvTenant implements ExcelEnv<ExTenant> {
             return null;
         }
 
-
         final ZeroFs fs = ZeroFs.of();
         final String tenantFile = Ut.valueString(config, YmSpec.excel.tenant);
         if (!fs.isExist(tenantFile)) {
@@ -32,8 +31,12 @@ public class ExcelEnvTenant implements ExcelEnv<ExTenant> {
             return null;
         }
         final JsonObject tenantJ = fs.inJObject(tenantFile);
+        /*
+         * 环境变量转换，替换旧版的
+         */
+        final String parsed = Ut.compileAnsible(tenantJ.encode());
 
-        log.info("{} Tenant 导入数据的租户配置: {}", ExcelConstant.K_PREFIX, tenantJ.encode());
-        return ExTenant.create(tenantJ);
+        log.info("{} Tenant 导入数据的租户配置: {}", ExcelConstant.K_PREFIX, parsed);
+        return ExTenant.create(new JsonObject(parsed));
     }
 }

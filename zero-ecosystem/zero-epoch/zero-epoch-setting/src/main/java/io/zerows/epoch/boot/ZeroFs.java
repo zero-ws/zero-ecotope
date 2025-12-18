@@ -105,7 +105,7 @@ public class ZeroFs {
         }
 
         // 根据环境变量和当前内容进行解析
-        final String parsedString = ZeroParser.compile(content);
+        final String parsedString = Ut.compileYml(content);
         // 有内容，则直接解析之后处理
         final JObject parsed = this.fs.ymlForJ(parsedString);
         return new ConfigFs<>(parsed, clazz);

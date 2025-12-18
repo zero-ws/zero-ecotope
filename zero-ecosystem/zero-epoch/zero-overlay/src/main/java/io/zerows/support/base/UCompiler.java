@@ -1,8 +1,8 @@
-package io.zerows.epoch.boot;
+package io.zerows.support.base;
 
+import com.hubspot.jinjava.Jinjava;
 import io.zerows.platform.ENV;
 import org.yaml.snakeyaml.DumperOptions;
-import org.yaml.snakeyaml.DumperOptions.FlowStyle;
 import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.SafeConstructor;
@@ -15,16 +15,19 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-class ZeroParser {
+/**
+ * @author lang : 2025-12-18
+ */
+class UCompiler {
 
     // Pattern 是线程安全的，可以保持 static
     private static final Pattern PLACEHOLDER_PATTERN = Pattern.compile("\\$\\{([^}]+)\\}");
-
+    private static final Jinjava JINJAVA = new Jinjava();
     // [删除] 移除 static 实例，因为它们非线程安全
     // private static final Yaml YAML_PARSER = ...
     // private static final DumperOptions DUMPER_OPTIONS = ...
 
-    static String compile(final String input) {
+    static String compileYml(final String input) {
         if (input == null || input.trim().isEmpty()) {
             return input;
         }
@@ -53,11 +56,19 @@ class ZeroParser {
 
         // [新增] 在方法内部创建 DumperOptions
         final DumperOptions dumperOptions = new DumperOptions();
-        dumperOptions.setDefaultFlowStyle(FlowStyle.BLOCK);
+        dumperOptions.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
         dumperOptions.setIndent(2);
 
         // 5. 输出为单文档 YAML
         return new Yaml(dumperOptions).dump(secondPass);
+    }
+
+    static String compileAnsible(final String content) {
+        final ENV env = ENV.of();
+        final Map<String, Object> params = new HashMap<>();
+        env.vars().forEach(name -> params.put(name, env.get(name)));
+        // Jinjia 处理
+        return JINJAVA.render(content, params);
     }
 
     // ... 其余私有方法保持不变 ...
@@ -103,7 +114,7 @@ class ZeroParser {
             return value;
         }
         final Matcher matcher = PLACEHOLDER_PATTERN.matcher(value);
-        final StringBuffer sb = new StringBuffer();
+        final StringBuilder sb = new StringBuilder();
         boolean changed = false;
         while (matcher.find()) {
             final String content = matcher.group(1);

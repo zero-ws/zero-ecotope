@@ -93,4 +93,12 @@ public class UtBase extends _Value {
     public static void requireNonNull(final Object... args) {
         Arrays.stream(args).forEach(Objects::requireNonNull);
     }
+
+    public static String compileYml(final String content) {
+        return UCompiler.compileYml(content);
+    }
+
+    public static String compileAnsible(final String content) {
+        return UCompiler.compileAnsible(content);
+    }
 }

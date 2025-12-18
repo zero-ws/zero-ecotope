@@ -13,7 +13,7 @@
     <name>🛠️ - Zero::Boot::Inst Load</name>
     <properties>
         <!-- 定义 mainClass 属性，子项目可以覆盖 -->
-        <maven.main.class>io.zerows.boot.inst.LoadInst</maven.main.class>
+        <maven.main.class>io.zerows.boot.inst.LoadApp</maven.main.class>
         <maven.main.output>inst-load</maven.main.output>
     </properties>
     <build>
