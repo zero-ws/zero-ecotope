@@ -10,6 +10,7 @@ import io.zerows.extension.module.ambient.domain.tables.daos.XMenuDao;
 import io.zerows.extension.module.ambient.domain.tables.pojos.XMenu;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -19,8 +20,7 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-import static io.zerows.extension.skeleton.common.Ke.LOG;
-
+@Slf4j
 public class QSiteMap {
     private static final ConcurrentMap<Integer, Integer> SEQ_STORE = new ConcurrentHashMap<>() {
         {
@@ -68,11 +68,11 @@ public class QSiteMap {
                 }
             });
             return jooq.updateAsync(updateQ).compose(updated -> {
-                LOG.Ke.info(QSiteMap.class, "更新菜单数：{0}", String.valueOf(updated.size()));
+                log.info("[ INST ] 更新菜单数：{}", updated.size());
                 return Ux.future(removeSet);
             });
         }).compose(removeSet -> {
-            LOG.Ke.info(QSiteMap.class, "移除菜单数量：{0}", String.valueOf(removeSet.size()));
+            log.info("[ INST ] 移除菜单数量：{}", removeSet.size());
             final JsonObject nameQr = Ux.whereAnd();
             nameQr.put(KName.NAME + ",i", Ut.toJArray(removeSet));
             return jooq.deleteByAsync(nameQr);

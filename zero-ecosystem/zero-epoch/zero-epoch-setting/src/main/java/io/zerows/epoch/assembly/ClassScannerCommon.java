@@ -1,37 +1,28 @@
 package io.zerows.epoch.assembly;
 
-import com.google.common.collect.ImmutableSet;
-import com.google.common.reflect.ClassPath;
-import io.r2mo.function.Fn;
+import io.github.classgraph.ClassGraph;
+import io.github.classgraph.ScanResult;
 import io.zerows.specification.development.compiled.HBundle;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 /**
- * 扫描加速版 🚀（Trie 前缀匹配 + 包级跳过缓存 + 并行流 + 无锁集合）
+ * 扫描加速版 🚀 (Powered by ClassGraph)
  *
- * 语义保持不变：
- * - 全量发现顶级类 → 黑名单前缀跳过（包名 startsWith）→ 并行装载 → 最终 ClassFilter::isValid 过滤
- * - 不指定“只扫描哪些包”，仅用黑名单跳过
- * - 仅输出一条总览日志
+ * 核心改进：
+ * 1. 解决了在非 URLClassLoader 环境下（如 Zero/Vert.x 工具启动时）扫描不到类的问题。
+ * 2. 利用 ClassGraph 底层多线程扫描。
+ * 3. 保持原有的“静默加载”和“最终过滤”逻辑。
  */
 @Slf4j
 @SuppressWarnings("all")
 class ClassScannerCommon implements ClassScanner {
 
-    /** 黑名单前缀匹配器（去重/去冗余后构建 Trie） */
-    private static final ClassMatcherTrie SKIP_MATCHER =
-        ClassMatcherTrie.compile(ClassFilterPackage.SKIP_PACKAGE);
-
-    /** 包名 -> 是否跳过 的缓存，避免对同包反复匹配（并发场景下命中更高） */
-    private static final ConcurrentMap<String, Boolean> SKIP_CACHE = new ConcurrentHashMap<>(4096);
-
-    /** 并发结果集合（比 Collections.synchronizedSet 更少锁竞争） */
+    /** 并发结果集合 */
     private static Set<Class<?>> newConcurrentSet() {
         return ConcurrentHashMap.newKeySet();
     }
@@ -39,38 +30,44 @@ class ClassScannerCommon implements ClassScanner {
     @Override
     public Set<Class<?>> scan(final HBundle bundle) {
         final long t0 = System.nanoTime();
-        final ClassLoader loader = Thread.currentThread().getContextClassLoader();
         final Set<Class<?>> loaded = newConcurrentSet();
 
-        final int totalTopLevel = Fn.jvmOr(() -> {
-            int total = 0;
-            try {
-                final ClassPath cp = ClassPath.from(loader);
-                final ImmutableSet<ClassPath.ClassInfo> all = cp.getTopLevelClasses();
-                total = all.size();
+        // 获取黑名单配置 (假设 ClassFilterPackage.SKIP_PACKAGE 是 String[] 或 List<String>)
+        // ClassGraph 的 rejectPackages 支持 String... 变长参数
+        String[] skipPackages = ClassFilterPackage.SKIP_PACKAGE;
 
-                // 并行 + 无序，配合包级缓存（在你的环境里更快）
-                StreamSupport.stream(all.spliterator(), true).unordered()
-                    .filter(ci -> {
-                        final String pkg = ci.getPackageName();
-                        // 命中黑名单则跳过
-                        return !SKIP_CACHE.computeIfAbsent(pkg, SKIP_MATCHER::matches);
-                    })
-                    .forEach(ci -> {
-                        try {
-                            final Class<?> cls = loader.loadClass(ci.getName());
-                            loaded.add(cls);
-                        } catch (ClassNotFoundException | NoClassDefFoundError e) {
-                            // 静默：依赖不可达
-                        } catch (Throwable e) { // 关键修复点：兜底 Error，防止并行流提前终止导致漏扫
-                            // 静默：其他异常/Error
-                        }
-                    });
-            } catch (Exception ignore) {
-                // 保持扫描不中断
-            }
-            return total;
-        });
+        int totalTopLevel = 0;
+
+        // 配置 ClassGraph
+        // .enableClassInfo() : 必须开启以获取类信息
+        // .rejectPackages()  : 在扫描底层直接剔除黑名单包，性能远高于加载后过滤
+        // .ignoreClassVisibility() : 扫描所有修饰符的类
+        try (ScanResult scanResult = new ClassGraph()
+            .enableClassInfo()
+            .rejectPackages(skipPackages)
+            .ignoreClassVisibility()
+            .scan()) {
+
+            // 获取所有扫描到的类信息（此时并未加载 Class 对象）
+            var allClassInfo = scanResult.getAllClasses();
+            totalTopLevel = allClassInfo.size();
+
+            // 使用并行流进行真正的类加载（保持你原有的异常处理逻辑）
+            StreamSupport.stream(allClassInfo.spliterator(), true).unordered()
+                .forEach(ci -> {
+                    try {
+                        // loadClass() 会使用扫描时检测到的正确 ClassLoader
+                        final Class<?> cls = ci.loadClass();
+                        loaded.add(cls);
+                    } catch (Throwable e) {
+                        // 保持原逻辑：静默处理依赖缺失或加载错误
+                        // ClassGraph 的 loadClass() 可能会抛出 IllegalArgumentException 如果依赖缺失
+                    }
+                });
+
+        } catch (Exception e) {
+            log.warn("[ ZERO ] ClassGraph 扫描过程发生异常", e);
+        }
 
         // 最终合法性过滤（并行）—— 与旧版保持一致
         final Set<Class<?>> result = loaded.parallelStream()

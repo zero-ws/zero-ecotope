@@ -40,6 +40,7 @@ public class ZeroModule<T> {
 
     private List<HActor> findActors() {
         final Set<Class<?>> clazzSet = OCacheClass.entireValue();
+        log.info("[ PLUG ] 扫描起点类数量：{}", clazzSet.size());
         return clazzSet.stream()
             .filter(each -> Ut.isImplement(each, HActor.class))
             .filter(each -> each.isAnnotationPresent(Actor.class))

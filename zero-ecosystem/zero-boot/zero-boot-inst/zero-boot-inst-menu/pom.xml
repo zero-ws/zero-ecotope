@@ -13,7 +13,7 @@
     <name>🛠️ - Zero::Boot::Inst Menu</name>
     <properties>
         <!-- 定义 mainClass 属性，子项目可以覆盖 -->
-        <maven.main.class>io.zerows.boot.inst.MenuInst</maven.main.class>
+        <maven.main.class>io.zerows.boot.inst.MenuApp</maven.main.class>
         <maven.main.output>inst-menu</maven.main.output>
     </properties>
     <build>
