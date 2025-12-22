@@ -149,6 +149,7 @@ public interface HLauncher<WebContainer> {
          *
          * @return {@link Boolean}
          */
+        @Deprecated
         default Boolean beforeMod(final WebContainer container, final HConfig config, final Set<HArk> arkSet) {
             return Boolean.TRUE;
         }
@@ -161,6 +162,7 @@ public interface HLauncher<WebContainer> {
          *
          * @return {@link Future}
          */
+        @Deprecated
         default Future<Boolean> beforeModAsync(final WebContainer container, final HConfig config, final Set<HArk> arkSet) {
             return Future.succeededFuture(this.beforeMod(container, config, arkSet));
         }
@@ -175,6 +177,7 @@ public interface HLauncher<WebContainer> {
          *
          * @return {@link Boolean}
          */
+        @Deprecated
         default Boolean beforeInit(final WebContainer container, final HConfig config, final Set<HArk> arkSet) {
             return Boolean.TRUE;
         }
@@ -187,6 +190,7 @@ public interface HLauncher<WebContainer> {
          *
          * @return {@link Future}
          */
+        @Deprecated
         default Future<Boolean> beforeInitAsync(final WebContainer container, final HConfig config, final Set<HArk> arkSet) {
             return Future.succeededFuture(this.beforeInit(container, config, arkSet));
         }

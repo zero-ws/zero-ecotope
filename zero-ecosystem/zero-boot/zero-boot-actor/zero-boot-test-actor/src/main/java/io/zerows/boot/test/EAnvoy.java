@@ -2,15 +2,14 @@ package io.zerows.boot.test;
 
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonObject;
-import io.zerows.boot.mini.Electy;
 import io.zerows.platform.metadata.KDictConfig;
 import io.zerows.platform.metadata.KIntegration;
 import io.zerows.platform.metadata.KMap;
 
 /**
- * 和内置的 {@link Electy} 形成对比
+ * 和内置的 {@see Electy} 形成对比
  * <pre><code>
- *     1. {@link Electy} 主要负责核心框架运行时处理
+ *     1. {@see Electy} 主要负责核心框架运行时处理
  *     2. {@link EAnvoy} 则负责扩展框架中启动时的数据提供，针对不同的入口启动器
  * </code></pre>
  *

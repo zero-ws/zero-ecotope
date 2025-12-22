@@ -5,10 +5,10 @@ import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.environment.DevMonitor;
 import io.zerows.extension.module.mbseapi.boot.Jt;
-import io.zerows.extension.module.mbseapi.boot.JtPin;
+import io.zerows.extension.module.mbseapi.boot.ModMBSEManager;
+import io.zerows.extension.module.mbseapi.boot.YmMetamodel;
 import io.zerows.extension.module.mbseapi.common.em.WorkerType;
 import io.zerows.extension.module.mbseapi.component.JtMonitor;
-import io.zerows.extension.module.mbseapi.metadata.JtConfigOld;
 import io.zerows.extension.module.mbseapi.metadata.JtUri;
 import io.zerows.extension.module.mbseapi.metadata.JtWorker;
 
@@ -21,6 +21,7 @@ import java.util.concurrent.ConcurrentMap;
  * This class will deploy the workers by JetPollux component when booting.
  */
 public class JetCastor {
+    private static final ModMBSEManager MANAGER = ModMBSEManager.of();
     private transient final Vertx vertx;
     private transient final JtMonitor monitor = JtMonitor.create(this.getClass());
 
@@ -55,7 +56,7 @@ public class JetCastor {
             /*
              * Deployment of workers
              */
-            final JtConfigOld configData = JtPin.getConfig();
+            final YmMetamodel configData = MANAGER.setting();
             POOL.WORKER_SET.forEach(workerCls -> {
                 /*
                  * Generate DeploymentOptions from JtConfig

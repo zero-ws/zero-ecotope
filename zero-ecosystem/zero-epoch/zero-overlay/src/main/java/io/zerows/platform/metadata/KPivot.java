@@ -1,5 +1,6 @@
 package io.zerows.platform.metadata;
 
+import io.r2mo.spi.SPI;
 import io.vertx.core.Future;
 import io.zerows.platform.exception._40104Exception409RegistryDuplicated;
 import io.zerows.specification.app.HAmbient;
@@ -64,7 +65,7 @@ public class KPivot<T> {
     private KPivot(final T container) {
         this.container = container;
         this.context = new KRegistry<>();
-        this.extension = UtBase.service(HRegistry.class, false);
+        this.extension = SPI.findOneOf(HRegistry.class);
     }
 
     public static HAmbient running() {

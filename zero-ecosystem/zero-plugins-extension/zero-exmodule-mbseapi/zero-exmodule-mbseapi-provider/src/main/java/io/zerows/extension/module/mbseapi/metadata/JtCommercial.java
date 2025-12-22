@@ -4,6 +4,7 @@ import io.r2mo.base.dbe.Database;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.module.mbseapi.boot.Jt;
+import io.zerows.extension.module.mbseapi.boot.YmMetamodel;
 import io.zerows.extension.module.mbseapi.common.JtKey;
 import io.zerows.extension.module.mbseapi.domain.tables.pojos.IService;
 import io.zerows.extension.skeleton.common.Ke;
@@ -43,7 +44,7 @@ public abstract class JtCommercial implements Commercial {
      * 1) JtApp ( application data )
      */
     private transient HArk ark;
-    private transient JtConfigOld config;
+    private transient YmMetamodel setting;
 
     JtCommercial() {
     }
@@ -52,8 +53,8 @@ public abstract class JtCommercial implements Commercial {
         this.service = service;
     }
 
-    public <T extends JtCommercial> T bind(final JtConfigOld config) {
-        this.config = config;
+    public <T extends JtCommercial> T bind(final YmMetamodel setting) {
+        this.setting = setting;
         return (T) this;
     }
 
@@ -76,8 +77,8 @@ public abstract class JtCommercial implements Commercial {
         return this.ark;
     }
 
-    protected JtConfigOld getConfig() {
-        return this.config;
+    protected YmMetamodel getConfig() {
+        return this.setting;
     }
 
     /*
@@ -190,10 +191,10 @@ public abstract class JtCommercial implements Commercial {
         /* key data */
         data.put(JtKey.Delivery.KEY, this.key());
 
-        /* service, config */
+        /* service, setting */
         final JsonObject serviceJson = Ut.serializeJson(this.service());
         data.put(JtKey.Delivery.SERVICE, serviceJson);
-        data.put(JtKey.Delivery.CONFIG, (JsonObject) Ut.serializeJson(this.config));
+        data.put(JtKey.Delivery.CONFIG, (JsonObject) Ut.serializeJson(this.setting));
 
         /* id */
         final HApp app = this.ark.app();
@@ -206,10 +207,10 @@ public abstract class JtCommercial implements Commercial {
     @Override
     public void fromJson(final JsonObject data) {
         /*
-         * service, config
+         * service, setting
          */
         this.service = Ut.deserialize(data.getJsonObject(JtKey.Delivery.SERVICE), IService.class);
-        this.config = Ut.deserialize(data.getJsonObject(JtKey.Delivery.CONFIG), JtConfigOld.class);
+        this.setting = Ut.deserialize(data.getJsonObject(JtKey.Delivery.CONFIG), YmMetamodel.class);
         /*
          * application id
          */

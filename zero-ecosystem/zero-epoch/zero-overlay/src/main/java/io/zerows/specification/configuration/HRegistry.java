@@ -113,6 +113,7 @@ public interface HRegistry<T> {
      *        而将 compile 阶段转换成 config 配置数据节点，针对不同的组件进行扩展配置以实现分离初始化
      * </code></pre>
      */
+    @Deprecated
     interface Mod<T> {
         /**
          * 静态模块注册

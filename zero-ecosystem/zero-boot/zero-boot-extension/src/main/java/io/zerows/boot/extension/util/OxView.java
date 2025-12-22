@@ -7,8 +7,8 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.web.Envelop;
-import io.zerows.extension.module.mbseapi.boot.JtPin;
-import io.zerows.extension.module.mbseapi.metadata.JtConfigOld;
+import io.zerows.extension.module.mbseapi.boot.ModMBSEManager;
+import io.zerows.extension.module.mbseapi.boot.YmMetamodel;
 import io.zerows.extension.skeleton.common.Ke;
 import io.zerows.extension.skeleton.spi.ScSeeker;
 import io.zerows.extension.skeleton.spi.UiApeak;
@@ -37,26 +37,7 @@ import java.util.Objects;
  */
 final class OxView {
 
-    /**
-     * {@link JtConfigOld}配置对象
-     *
-     * 配置格式：
-     *
-     * ```json
-     * // <pre><code class="json">
-     * {
-     *      "wall": "/api"
-     *      "worker":{
-     *          "instances": 64
-     *      },
-     *      "agent":{
-     *          "instances": 32
-     *      }
-     * }
-     * // </code></pre>
-     * ```
-     */
-    private static final JtConfigOld CONFIG = JtPin.getConfig();
+    private static final YmMetamodel CONFIG = ModMBSEManager.of().setting();
 
     /*
      * 私有构造函数（工具类转换）
@@ -139,7 +120,7 @@ final class OxView {
         /* 构造 路径参数 */
         final String route = app.option(KName.App.ENDPOINT);
         /* 构造 安全路径 */
-        final String wall = CONFIG.getWall();
+        final String wall = CONFIG.apiWall();       // 新版处理
         final String prefix = wall + route;
 
         /*

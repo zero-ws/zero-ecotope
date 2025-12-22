@@ -1,10 +1,7 @@
 package io.zerows.extension.module.mbseapi.boot;
 
 import io.vertx.core.json.JsonArray;
-import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.extension.module.mbseapi.metadata.JtConfigOld;
-import io.zerows.management.OZeroStore;
 import io.zerows.platform.constant.VString;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.app.HArk;
@@ -19,6 +16,7 @@ import java.util.function.Supplier;
  * Function for resolution null dot in conversion
  */
 class JtRoute {
+    private static final ModMBSEManager MANAGER = ModMBSEManager.of();
 
     static Set<String> toSet(final Supplier<String> supplier) {
         final String inputRequired = supplier.get();
@@ -32,20 +30,18 @@ class JtRoute {
 
     static String toPath(final HArk ark, final Supplier<String> uriSupplier,
                          final boolean secure) {
-        final JsonObject configRouter = OZeroStore.option(KName.ROUTER);
-        final JtConfigOld configuration = Ut.deserialize(configRouter, JtConfigOld.class);
-        return toPath(ark, uriSupplier, secure, configuration);
+        return toPath(ark, uriSupplier, secure, MANAGER.setting());
     }
 
     static String toPath(final HArk ark,
                          final Supplier<String> uriSupplier,
                          final boolean secure,      // Null Pointer if use Boolean
-                         final JtConfigOld config) {
+                         final YmMetamodel config) {
         /* Whether current api is secure */
         final StringBuilder uri = new StringBuilder();
         /* Get secure path here */
         if (secure) {
-            String wall = config.getWall();
+            String wall = config.apiWall();
             if (Ut.isNil(wall)) {
                 wall = VString.EMPTY;
             }

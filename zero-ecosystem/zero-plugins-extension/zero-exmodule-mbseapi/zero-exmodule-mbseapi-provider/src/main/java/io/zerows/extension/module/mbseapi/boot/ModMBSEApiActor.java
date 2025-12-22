@@ -4,9 +4,17 @@ import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.zerows.epoch.annotations.Actor;
 import io.zerows.epoch.basicore.MDConfiguration;
-import io.zerows.extension.skeleton.metadata.MDModuleActor;
+import io.zerows.extension.module.mbseapi.metadata.JtConstant;
+import io.zerows.extension.skeleton.common.Ke;
+import io.zerows.extension.skeleton.metadata.MDAppModuleActor;
 import io.zerows.extension.skeleton.metadata.MDSetting;
 import io.zerows.specification.app.HAmbient;
+import io.zerows.specification.app.HArk;
+import io.zerows.support.fn.Fx;
+import lombok.extern.slf4j.Slf4j;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 /**
  * 替换旧版的 JetPolluxOptions，转换成 Metamodel 专用配置对象，直接检查核心环境中是否包含主配置即可
@@ -19,7 +27,8 @@ import io.zerows.specification.app.HAmbient;
  * @author lang : 2025-12-16
  */
 @Actor(value = "metamodel", sequence = 1017)
-public class ModMBSEApiActor extends MDModuleActor {
+@Slf4j
+public class ModMBSEApiActor extends MDAppModuleActor {
     private static final ModMBSEManager MANAGER = ModMBSEManager.of();
 
     @Override
@@ -31,8 +40,24 @@ public class ModMBSEApiActor extends MDModuleActor {
      * 执行特殊方法，提取 {@link HAmbient} 并且注册对应的配置，对接遗留系统
      */
     @Override
-    protected Future<Boolean> startAsync(final MDConfiguration configuration, final Vertx vertxRef) {
-        return Future.succeededFuture(Boolean.TRUE);
+    protected Future<Boolean> startAsync(final HAmbient ambient, final Vertx vertxRef) {
+        Ke.banner("「Πίδακας δρομολογητή」- ( MBSEApi )");
+        final ConcurrentMap<String, HArk> arkMap = ambient.app();
+
+        // 应用数量统计
+        log.info("{} HAmbient 在环境中检测到 {} 应用", JtConstant.K_PREFIX_BOOT, arkMap.size());
+        if (arkMap.isEmpty()) {
+            log.warn("{} HAmbient 环境配置有误，跳过 Metamodel 模块初始化！", JtConstant.K_PREFIX_BOOT);
+            return Future.succeededFuture(Boolean.TRUE);
+        }
+
+        final ConcurrentMap<String, Future<ServiceEnvironment>> futureMap = new ConcurrentHashMap<>();
+        arkMap.forEach((appId, each) -> futureMap.put(appId, new ServiceEnvironment(each).init(vertxRef)));
+        return Fx.combineM(futureMap).compose(processed -> {
+            MANAGER.serviceEnvironment(processed);
+            log.info("{} ServiceEnvironment 初始化完成！", JtConstant.K_PREFIX_BOOT);
+            return Future.succeededFuture(Boolean.TRUE);
+        });
     }
 
     /**

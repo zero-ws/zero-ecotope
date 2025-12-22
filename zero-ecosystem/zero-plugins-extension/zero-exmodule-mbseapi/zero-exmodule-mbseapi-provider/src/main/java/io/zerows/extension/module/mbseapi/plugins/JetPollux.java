@@ -9,23 +9,19 @@ import io.zerows.cortex.sdk.Axis;
 import io.zerows.cosmic.handler.EndurerCommon;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.management.OCacheUri;
-import io.zerows.extension.module.mbseapi.boot.JtPin;
 import io.zerows.extension.module.mbseapi.boot.ModMBSEManager;
-import io.zerows.extension.module.mbseapi.boot.ServiceEnvironment;
 import io.zerows.extension.module.mbseapi.component.JtAim;
 import io.zerows.extension.module.mbseapi.component.JtAimEngine;
 import io.zerows.extension.module.mbseapi.component.JtAimIn;
 import io.zerows.extension.module.mbseapi.component.JtAimPre;
 import io.zerows.extension.module.mbseapi.component.JtAimSend;
 import io.zerows.extension.module.mbseapi.component.JtMonitor;
-import io.zerows.extension.module.mbseapi.metadata.JtConfigOld;
 import io.zerows.extension.module.mbseapi.metadata.JtUri;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
 
 import java.util.Objects;
 import java.util.Set;
-import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
@@ -36,10 +32,6 @@ import java.util.stream.Collectors;
  * 3) The dynamic router will registry the routers information when booting
  */
 public class JetPollux implements Axis {
-    /*
-     * Multi EmApp environment here
-     */
-    private static final ConcurrentMap<String, ServiceEnvironment> AMBIENT = JtPin.serviceEnvironment();
     private static final AtomicBoolean UNREADY = new AtomicBoolean(Boolean.TRUE);
     private static final ModMBSEManager MANAGER = ModMBSEManager.of();
 
@@ -53,18 +45,16 @@ public class JetPollux implements Axis {
     @Override
     @SuppressWarnings("all")
     public void mount(final RunServer server, final HBundle owner) {
-        /*
-         * 先提取配置，由于上层会直接调用 JetAxisManager 来对配置部分做启用 / 禁用的拦截，所以代码执行到这里已经是
-         * 整体流程上 configuration 的配置部分过了自检流程，且 ServiceEnvironment 也已经过了检查流程，相关应用
-         * 上下文已经全部通过校验。
-         */
-        final JetPolluxOptions options = JetPolluxOptions.singleton();
 
         final Router router = server.refRouter();
         Objects.requireNonNull(router);
         final Vertx vertx = server.refVertx();
 
-        final JtConfigOld config = Ut.deserialize(options.inConfiguration(), JtConfigOld.class);
+        /*
+         * 新版直接使用 ModMBSEManager 来提供配置，所以移除掉旧版的 JetPolluxOptions 配置读取逻辑，由于上层调用之前会直接
+         * 调用 JetAxisManager 来对配置部分做启用 / 禁用的拦截，所以代码执行到这里已经是整体流程上 configuration 的配置部
+         * 分过了自检流程，且 ServiceEnvironment 也已经过了检查流程，相关应用上下文已经全部通过校验。
+         */
         final Set<JtUri> uriSet = MANAGER.getApis().stream()
 
 
@@ -72,7 +62,7 @@ public class JetPollux implements Axis {
              * 1. 路由加载顺序设置 order
              * 2. 路由配置绑定，此处直接绑定到 JtConfig 中，新版只做一次反序列化
              * */
-            .map(uri -> uri.bind(KWeb.ORDER.DYNAMIC).<JtUri>bind(config))
+            .map(uri -> uri.bind(KWeb.ORDER.DYNAMIC).<JtUri>bind(MANAGER.setting()))
 
 
             /*

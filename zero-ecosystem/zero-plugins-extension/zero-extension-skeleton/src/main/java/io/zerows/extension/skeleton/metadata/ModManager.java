@@ -1,6 +1,6 @@
 package io.zerows.extension.skeleton.metadata;
 
-import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.specification.development.compiled.HBundle;
 
 /**
@@ -14,7 +14,7 @@ public interface ModManager<CONFIG> {
 
     CONFIG setting();
 
-    JsonObject configuration();
+    MDConfiguration configuration();
 
     default boolean isEnabled(final HBundle owner) {
         return true;

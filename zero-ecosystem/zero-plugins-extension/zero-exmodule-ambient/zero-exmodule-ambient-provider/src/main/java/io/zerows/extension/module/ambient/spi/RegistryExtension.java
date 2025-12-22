@@ -1,15 +1,16 @@
 package io.zerows.extension.module.ambient.spi;
 
+import io.r2mo.typed.annotation.SPID;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
-import io.zerows.extension.module.ambient.domain.tables.pojos.XApp;
-import io.zerows.extension.module.ambient.domain.tables.pojos.XSource;
-import io.zerows.extension.module.ambient.management.OCacheArk;
 import io.zerows.extension.module.ambient.component.Cabinet;
 import io.zerows.extension.module.ambient.component.CabinetApp;
 import io.zerows.extension.module.ambient.component.CabinetSource;
 import io.zerows.extension.module.ambient.component.UniteArk;
 import io.zerows.extension.module.ambient.component.UniteArkSource;
+import io.zerows.extension.module.ambient.domain.tables.pojos.XApp;
+import io.zerows.extension.module.ambient.domain.tables.pojos.XSource;
+import io.zerows.extension.module.ambient.management.OCacheArk;
 import io.zerows.platform.exception._60050Exception501NotSupport;
 import io.zerows.program.Ux;
 import io.zerows.specification.app.HAmbient;
@@ -32,6 +33,7 @@ import java.util.Set;
  *
  * @author lang : 2023-06-06
  */
+@SPID(priority = 211)
 public class RegistryExtension implements HRegistry<Vertx> {
     @Override
     public Set<HArk> registry(final Vertx container, final HConfig config) {

@@ -9,6 +9,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.basicore.YmSpec;
 import io.zerows.epoch.basicore.YmVertx;
 import io.zerows.extension.module.mbseapi.plugins.JetPollux;
+import io.zerows.support.Ut;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
@@ -53,6 +54,17 @@ public class YmMetamodel implements Serializable {
         @JsonSerialize(using = ClassSerializer.class)
         @JsonDeserialize(using = ClassDeserializer.class)
         private Class<?> component = JetPollux.class;
+    }
+
+    public String apiContext() {
+        return Objects.requireNonNull(this.router).context;
+    }
+
+    public String apiWall() {
+        Objects.requireNonNull(this.router);
+        final String context = this.router.context;
+        final String wall = this.router.wall;
+        return Ut.ioPath(context, wall);
     }
 
     public DeploymentOptions getWorkerOptions() {

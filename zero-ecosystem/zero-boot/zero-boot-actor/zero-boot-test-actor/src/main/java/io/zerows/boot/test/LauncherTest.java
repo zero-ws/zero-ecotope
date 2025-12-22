@@ -5,7 +5,6 @@ import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.Promise;
 import io.vertx.core.Vertx;
-import io.zerows.boot.mini.Electy;
 import io.zerows.epoch.annotations.Up;
 import io.zerows.epoch.configuration.ZeroConfigurer;
 import io.zerows.extension.module.mbsecore.exception._80517Exception404DataAtomNull;
@@ -58,10 +57,10 @@ public class LauncherTest {
         final HConfig config = configurer.onConfig();
         configurer.preExecute(vertx, config);
         // whenInstruction 中会执行应用注册，得到最终的 HAmbient 信息
-        Electy.whenInstruction((vertxRef, configRef) -> {
-            final PartyA okA = supplier.get();
-            promise.complete(okA);
-        }).accept(vertx, configurer.onConfig());
+        //        Electy.whenInstruction((vertxRef, configRef) -> {
+        //            final PartyA okA = supplier.get();
+        //            promise.complete(okA);
+        //        }).accept(vertx, configurer.onConfig());
         return promise.future();
     }
 

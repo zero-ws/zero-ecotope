@@ -1,9 +1,11 @@
 package io.zerows.epoch.management;
 
+import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.epoch.basicore.MDId;
 import io.zerows.platform.management.AbstractAmbiguity;
 import io.zerows.specification.development.compiled.HBundle;
+import io.zerows.support.Ut;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -26,6 +28,19 @@ class OCacheConfigurationAmbiguity extends AbstractAmbiguity implements OCacheCo
     public MDConfiguration valueGet(final String key) {
         Objects.requireNonNull(key);
         return this.moduleConfig.getOrDefault(key, null);
+    }
+
+    @Override
+    public JsonObject configurationJ(final String key) {
+        final MDConfiguration configuration = this.valueGet(key);
+        if (Objects.isNull(configuration)) {
+            return new JsonObject();
+        }
+        final JsonObject configurationJ = configuration.inConfiguration();
+        if (Ut.isNil(configurationJ)) {
+            return new JsonObject();
+        }
+        return configurationJ.copy();   // 拷贝副本
     }
 
     @Override

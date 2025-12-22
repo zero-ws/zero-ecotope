@@ -1,6 +1,7 @@
 package io.zerows.epoch.management;
 
 import io.r2mo.typed.cc.Cc;
+import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.epoch.basicore.MDConnect;
 import io.zerows.epoch.basicore.MDPage;
@@ -117,4 +118,6 @@ public interface OCacheConfiguration extends OCache<MDConfiguration> {
     }
 
     Set<MDConfiguration> valueSet();
+
+    JsonObject configurationJ(String key);
 }

@@ -3,11 +3,13 @@ package io.zerows.extension.module.mbseapi.boot;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonObject;
 import io.zerows.cortex.sdk.Axis;
+import io.zerows.epoch.basicore.MDConfiguration;
+import io.zerows.epoch.management.OCacheConfiguration;
 import io.zerows.extension.module.mbseapi.component.JtMonitor;
 import io.zerows.extension.module.mbseapi.metadata.JtConstant;
 import io.zerows.extension.module.mbseapi.metadata.JtUri;
 import io.zerows.extension.skeleton.metadata.MDModuleActor;
-import io.zerows.extension.skeleton.metadata.ModManagerBase;
+import io.zerows.extension.skeleton.metadata.ModManager;
 import io.zerows.platform.constant.VValue;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
@@ -39,9 +41,10 @@ import java.util.stream.Collectors;
  * @author lang : 2025-12-22
  */
 @Slf4j
-public class ModMBSEManager extends ModManagerBase<YmMetamodel> {
+public class ModMBSEManager implements ModManager<YmMetamodel> {
     private static ModMBSEManager INSTANCE;
     private static final Cc<String, ServiceEnvironment> AMBIENT = Cc.open();
+    private static final OCacheConfiguration STORE = OCacheConfiguration.of();
     private YmMetamodel setting;
     private Class<Axis> axisCls;
     // 监控专用
@@ -49,7 +52,6 @@ public class ModMBSEManager extends ModManagerBase<YmMetamodel> {
     private final transient JtMonitor monitor = JtMonitor.create(this.getClass());
 
     private ModMBSEManager() {
-        super(MID.BUNDLE_SYMBOLIC_NAME);
     }
 
     public static ModMBSEManager of() {
@@ -67,6 +69,11 @@ public class ModMBSEManager extends ModManagerBase<YmMetamodel> {
     @Override
     public YmMetamodel setting() {
         return this.setting;
+    }
+
+    @Override
+    public MDConfiguration configuration() {
+        return STORE.valueGet(MID.BUNDLE_SYMBOLIC_NAME);
     }
 
     /**
@@ -90,7 +97,7 @@ public class ModMBSEManager extends ModManagerBase<YmMetamodel> {
         if (VValue.ZERO == LOG_OPTION.getAndIncrement()) {
             log.info("{} 系统监测到动态系统路由组件：{}", JtConstant.K_PREFIX_BOOT, axisCls.getName());
         }
-        final JsonObject configuration = this.configuration();
+        final JsonObject configuration = STORE.configurationJ(MID.BUNDLE_SYMBOLIC_NAME);
         if (VValue.ONE == LOG_OPTION.getAndIncrement()) {
             log.info("{} 监测到动态组件核心配置：{}", JtConstant.K_PREFIX_BOOT, configuration);
         }
@@ -128,6 +135,10 @@ public class ModMBSEManager extends ModManagerBase<YmMetamodel> {
 
     public ConcurrentMap<String, ServiceEnvironment> serviceEnvironment() {
         return AMBIENT.get();
+    }
+
+    public ServiceEnvironment serviceEnvironment(final String appId) {
+        return AMBIENT.get(appId);
     }
 
     public void serviceEnvironment(final String appId, final ServiceEnvironment environment) {

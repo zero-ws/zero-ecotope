@@ -9,7 +9,6 @@ import io.zerows.component.log.LogModule;
 import io.zerows.extension.module.mbseapi.domain.tables.pojos.IApi;
 import io.zerows.extension.module.mbseapi.domain.tables.pojos.IJob;
 import io.zerows.extension.module.mbseapi.domain.tables.pojos.IService;
-import io.zerows.extension.module.mbseapi.metadata.JtConfigOld;
 import io.zerows.extension.module.mbseapi.metadata.JtUri;
 import io.zerows.extension.module.mbseapi.metadata.JtWorker;
 import io.zerows.platform.constant.VString;
@@ -37,7 +36,7 @@ public class Jt {
      * Extraction for some specification data
      */
     public static String toPath(final HArk ark, final Supplier<String> uriSupplier,
-                                final boolean secure, final JtConfigOld external) {
+                                final boolean secure, final YmMetamodel external) {
         return JtRoute.toPath(ark, uriSupplier, secure, external);
     }
 

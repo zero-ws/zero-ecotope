@@ -126,7 +126,7 @@ public abstract class MDModuleActor extends ExAbstractHActor {
         final MDConfiguration configuration = manager.registry(config);
 
 
-        // 特殊配置：MDSetting 转换基础配置
+        // 特殊配置：MDSetting 转换基础配置，转换必须是同步行为
         if (Objects.nonNull(config)) {
             final Object setting = this.setConfig(configuration, vertxRef);
             manager.registry(this.getClass(), setting);
