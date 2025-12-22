@@ -8,7 +8,7 @@ import io.zerows.extension.module.mbseapi.boot.Jt;
 import io.zerows.extension.module.mbseapi.boot.JtPin;
 import io.zerows.extension.module.mbseapi.common.em.WorkerType;
 import io.zerows.extension.module.mbseapi.component.JtMonitor;
-import io.zerows.extension.module.mbseapi.metadata.JtConfig;
+import io.zerows.extension.module.mbseapi.metadata.JtConfigOld;
 import io.zerows.extension.module.mbseapi.metadata.JtUri;
 import io.zerows.extension.module.mbseapi.metadata.JtWorker;
 
@@ -55,7 +55,7 @@ public class JetCastor {
             /*
              * Deployment of workers
              */
-            final JtConfig configData = JtPin.getConfig();
+            final JtConfigOld configData = JtPin.getConfig();
             POOL.WORKER_SET.forEach(workerCls -> {
                 /*
                  * Generate DeploymentOptions from JtConfig

@@ -3,7 +3,7 @@ package io.zerows.extension.module.mbseapi.boot;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.extension.module.mbseapi.metadata.JtConfig;
+import io.zerows.extension.module.mbseapi.metadata.JtConfigOld;
 import io.zerows.management.OZeroStore;
 import io.zerows.platform.constant.VString;
 import io.zerows.specification.app.HApp;
@@ -33,14 +33,14 @@ class JtRoute {
     static String toPath(final HArk ark, final Supplier<String> uriSupplier,
                          final boolean secure) {
         final JsonObject configRouter = OZeroStore.option(KName.ROUTER);
-        final JtConfig configuration = Ut.deserialize(configRouter, JtConfig.class);
+        final JtConfigOld configuration = Ut.deserialize(configRouter, JtConfigOld.class);
         return toPath(ark, uriSupplier, secure, configuration);
     }
 
     static String toPath(final HArk ark,
                          final Supplier<String> uriSupplier,
                          final boolean secure,      // Null Pointer if use Boolean
-                         final JtConfig config) {
+                         final JtConfigOld config) {
         /* Whether current api is secure */
         final StringBuilder uri = new StringBuilder();
         /* Get secure path here */

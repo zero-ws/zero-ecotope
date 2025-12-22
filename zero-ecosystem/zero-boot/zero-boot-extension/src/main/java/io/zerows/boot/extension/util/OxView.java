@@ -8,7 +8,7 @@ import io.vertx.ext.web.RoutingContext;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.module.mbseapi.boot.JtPin;
-import io.zerows.extension.module.mbseapi.metadata.JtConfig;
+import io.zerows.extension.module.mbseapi.metadata.JtConfigOld;
 import io.zerows.extension.skeleton.common.Ke;
 import io.zerows.extension.skeleton.spi.ScSeeker;
 import io.zerows.extension.skeleton.spi.UiApeak;
@@ -38,7 +38,7 @@ import java.util.Objects;
 final class OxView {
 
     /**
-     * {@link JtConfig}配置对象
+     * {@link JtConfigOld}配置对象
      *
      * 配置格式：
      *
@@ -56,7 +56,7 @@ final class OxView {
      * // </code></pre>
      * ```
      */
-    private static final JtConfig CONFIG = JtPin.getConfig();
+    private static final JtConfigOld CONFIG = JtPin.getConfig();
 
     /*
      * 私有构造函数（工具类转换）

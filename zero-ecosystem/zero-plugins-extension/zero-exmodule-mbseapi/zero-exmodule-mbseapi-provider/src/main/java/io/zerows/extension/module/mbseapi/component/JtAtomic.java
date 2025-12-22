@@ -1,13 +1,11 @@
 package io.zerows.extension.module.mbseapi.component;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.LogOf;
-import io.zerows.extension.module.mbseapi.common.JtMsg;
+import io.zerows.extension.module.mbseapi.metadata.JtConstant;
 import io.zerows.platform.metadata.KRunner;
+import org.slf4j.Logger;
 
 import java.util.concurrent.atomic.AtomicBoolean;
-
-import static io.zerows.extension.module.mbseapi.boot.Jt.LOG;
 
 public class JtAtomic {
     /*
@@ -20,35 +18,35 @@ public class JtAtomic {
     private static final AtomicBoolean WORKER_DEPLOYED = new AtomicBoolean(Boolean.FALSE);
 
 
-    public void start(final LogOf logger, final JsonObject config) {
+    public void start(final Logger logger, final JsonObject config) {
         if (!AGENT_CONFIG.getAndSet(Boolean.TRUE)) {
-            KRunner.run(() -> LOG.Route.info(logger, JtMsg.AGENT_CONFIG, config.encode()), "jet-agent-config");
+            KRunner.run(() -> logger.info("{} Jet 动态路由系统开启，配置 = {}", JtConstant.K_PREFIX_JET, config.encode()), "jet-agent-config");
         }
     }
 
-    public void worker(final LogOf logger) {
+    public void worker(final Logger logger) {
         if (!WORKER_DEPLOY.getAndSet(Boolean.TRUE)) {
-            KRunner.run(() -> LOG.Worker.info(logger, JtMsg.WORKER_DEPLOY), "jet-worker-deploy");
+            KRunner.run(() -> logger.info("{} 后台发布 Workers……（Async）", JtConstant.K_PREFIX_JET), "jet-worker-deploy");
         }
     }
 
-    public void workerFailure(final LogOf logger) {
+    public void workerFailure(final Logger logger) {
         if (!WORKER_FAILURE.getAndSet(Boolean.TRUE)) {
-            KRunner.run(() -> LOG.Worker.info(logger, JtMsg.WORKER_FAILURE), "jet-worker-handler");
+            KRunner.run(() -> logger.info("{} XHeader 解析导致 Ambient 构造失败", JtConstant.K_PREFIX_JET), "jet-worker-handler");
         }
     }
 
-    public void workerDeploying(final LogOf logger, final Integer instances, final String name) {
+    public void workerDeploying(final Logger logger, final Integer instances, final String name) {
         if (!WORKER_DEPLOYING.getAndSet(Boolean.TRUE)) {
-            KRunner.run(() -> LOG.Worker.info(logger, JtMsg.WORKER_DEPLOYING,
-                String.valueOf(instances), name), "jet-worker-deploying");
+            KRunner.run(() -> logger.info("{} Worker 组件发布，instances = {}, class = {}",
+                JtConstant.K_PREFIX_JET, instances, name), "jet-worker-deploying");
         }
     }
 
-    public void workerDeployed(final LogOf logger, final Integer instances, final String name) {
+    public void workerDeployed(final Logger logger, final Integer instances, final String name) {
         if (!WORKER_DEPLOYED.getAndSet(Boolean.TRUE)) {
-            KRunner.run(() -> LOG.Worker.info(logger, JtMsg.WORKER_DEPLOYED,
-                name, String.valueOf(instances)), "jet-worker-deployed");
+            KRunner.run(() -> logger.info("{} Worker `{}` 成功发布！！！( instances = {} )",
+                JtConstant.K_PREFIX_JET, name, instances), "jet-worker-deployed");
         }
     }
 }

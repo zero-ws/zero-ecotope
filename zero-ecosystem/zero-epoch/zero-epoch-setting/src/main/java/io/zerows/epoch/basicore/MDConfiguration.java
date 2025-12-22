@@ -3,6 +3,7 @@ package io.zerows.epoch.basicore;
 import cn.hutool.core.util.StrUtil;
 import io.r2mo.typed.common.MultiKeyMap;
 import io.vertx.core.json.JsonObject;
+import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.development.compiled.HBundle;
 import lombok.extern.slf4j.Slf4j;
 
@@ -34,6 +35,8 @@ import java.util.concurrent.ConcurrentMap;
  */
 @Slf4j
 public class MDConfiguration {
+    // 主配置 vertx.yml 中的核心配置信息
+    private HConfig launcherMod;
     // configuration.json
     private final JsonObject configurationJ = new JsonObject();
     /**
@@ -87,6 +90,10 @@ public class MDConfiguration {
     }
 
     // ---------- 数据提取专用方法
+    public HConfig inSetting() {
+        return this.launcherMod;
+    }
+
     // ---- Boot 扩展专用
     public Set<MDConnect> inConnect() {
         return this.connectMap.values();
@@ -109,6 +116,7 @@ public class MDConfiguration {
     }
 
     // ---- 其他位置调用
+
     public MDConnect inConnect(final String tableOr) {
         return this.connectMap.getOr(tableOr);
     }
@@ -131,6 +139,10 @@ public class MDConfiguration {
     }
 
     // ------------ 设置配置信息
+    public void addConfig(final HConfig launcherMod) {
+        this.launcherMod = launcherMod;
+    }
+
     public void addShape(final String name, final JsonObject configurationJ) {
         this.name = name;
         this.configurationJ.mergeIn(configurationJ, true);

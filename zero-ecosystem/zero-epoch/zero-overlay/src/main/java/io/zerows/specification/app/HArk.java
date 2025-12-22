@@ -1,5 +1,6 @@
 package io.zerows.specification.app;
 
+import io.r2mo.base.dbe.DBS;
 import io.r2mo.base.dbe.Database;
 import io.zerows.platform.constant.VName;
 import io.zerows.platform.constant.VString;
@@ -18,6 +19,24 @@ import java.util.function.Function;
  *     2. 租户信息
  *     3. 所有数据源信息
  * </code></pre>
+ * 数据结构如
+ * <pre>
+ *     - {@link HApp}，基础应用环境
+ *     - {@link KDS}，数据源定义
+ *         正常模式下一个应用会对接多个数据源，每个数据源绑定一个合法数据库，默认数据源如下：
+ *         master           = {@link DBS}    元数据库 + 业务数据库
+ *         master-history   = {@link DBS}    历史数据库
+ *         master-workflow  = {@link DBS}    工作流数据库
+ *     - {@link Database}：当前默认数据库基础配置
+ *
+ *     - {@link HOI}：租户对接模型，此处接口为租户基本接口，内置树型结构如：
+ *       整体结构如：
+ *         {@link HOI}
+ *             id-01 = {@link HOI}
+ *                     - id-0101 = {@link HOI}
+ *                     - id-0102 = {@link HOI}
+ *             id-02 = {@link HOI}
+ * </pre>
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */

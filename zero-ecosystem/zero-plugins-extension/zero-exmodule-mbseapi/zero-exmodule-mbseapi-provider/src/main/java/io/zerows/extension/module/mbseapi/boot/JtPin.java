@@ -2,7 +2,7 @@ package io.zerows.extension.module.mbseapi.boot;
 
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
-import io.zerows.extension.module.mbseapi.metadata.JtConfig;
+import io.zerows.extension.module.mbseapi.metadata.JtConfigOld;
 import io.zerows.extension.skeleton.common.Ke;
 import io.zerows.specification.app.HAmbient;
 import io.zerows.specification.configuration.HRegistry;
@@ -18,12 +18,16 @@ import static io.zerows.extension.module.mbseapi.boot.Jt.LOG;
  */
 public class JtPin implements HRegistry.Mod<Vertx> {
 
-    public static JtConfig getConfig() {
+    public static JtConfigOld getConfig() {
         return JtConfiguration.getConfig();
     }
 
+    public static YmMetamodel getSetting() {
+        return ModMBSEManager.of().setting();
+    }
+
     public static ConcurrentMap<String, ServiceEnvironment> serviceEnvironment() {
-        return JtConfiguration.serviceEnvironment();
+        return ModMBSEManager.of().serviceEnvironment();
     }
 
     @Override

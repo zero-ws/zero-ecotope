@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.application.YmlCore;
-import io.zerows.extension.module.mbseapi.metadata.JtConfig;
+import io.zerows.extension.module.mbseapi.metadata.JtConfigOld;
 import io.zerows.extension.module.mbseapi.metadata.JtConstant;
 import io.zerows.extension.skeleton.common.KeMsg;
 import io.zerows.management.OZeroStore;
@@ -24,7 +24,7 @@ import java.util.concurrent.ConcurrentMap;
 class JtConfiguration {
     private static final ConcurrentMap<String, ServiceEnvironment> CONTEXT =
         new ConcurrentHashMap<>();
-    private static JtConfig CONFIG = null;
+    private static JtConfigOld CONFIG = null;
 
     static void registry(final HAmbient ambient) {
         if (Objects.isNull(CONFIG) && OZeroStore.is(YmlCore.router.__KEY)) {
@@ -35,7 +35,7 @@ class JtConfiguration {
 
             ambient.registry(module, routerData);
 
-            CONFIG = Ut.deserialize(routerData, JtConfig.class);
+            CONFIG = Ut.deserialize(routerData, JtConfigOld.class);
             Jt.LOG.Init.info(JtConfiguration.class, KeMsg.Configuration.DATA_T,
                 CONFIG.toString());
             Jt.LOG.Init.info(JtConfiguration.class, "---> Jt @Wall for `{0}`", CONFIG.getWall());
@@ -61,7 +61,7 @@ class JtConfiguration {
         });
     }
 
-    static JtConfig getConfig() {
+    static JtConfigOld getConfig() {
         return CONFIG;
     }
 

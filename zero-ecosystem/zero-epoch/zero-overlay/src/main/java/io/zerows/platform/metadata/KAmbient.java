@@ -30,6 +30,13 @@ import java.util.concurrent.ConcurrentMap;
  *     2. app / tenant /
  *     3. app {@link HArk}
  * </code></pre>
+ * 核心容器环境，表示单个容器环境，此容器环境中会包含
+ * <pre>
+ *     1. 一个环境上下文：{@link Context}
+ *     2. 一个环境运行时：{@link Runtime}
+ *     3. 一个核心配置对象
+ *     4. 应用模式，对应：{@link EmApp.Mode}
+ * </pre>
  *
  * @author lang : 2023-06-05
  */

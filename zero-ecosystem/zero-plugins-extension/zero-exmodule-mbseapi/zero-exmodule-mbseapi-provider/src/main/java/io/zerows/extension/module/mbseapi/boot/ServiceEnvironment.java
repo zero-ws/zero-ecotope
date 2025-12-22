@@ -6,7 +6,6 @@ import io.r2mo.function.Fn;
 import io.vertx.codegen.annotations.Fluent;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
-import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.module.mbseapi.domain.tables.daos.IApiDao;
 import io.zerows.extension.module.mbseapi.domain.tables.daos.IJobDao;
@@ -14,6 +13,7 @@ import io.zerows.extension.module.mbseapi.domain.tables.daos.IServiceDao;
 import io.zerows.extension.module.mbseapi.domain.tables.pojos.IApi;
 import io.zerows.extension.module.mbseapi.domain.tables.pojos.IJob;
 import io.zerows.extension.module.mbseapi.domain.tables.pojos.IService;
+import io.zerows.extension.module.mbseapi.metadata.JtConstant;
 import io.zerows.extension.module.mbseapi.metadata.JtJob;
 import io.zerows.extension.module.mbseapi.metadata.JtUri;
 import io.zerows.platform.exception._40103Exception500ConnectAmbient;
@@ -22,6 +22,7 @@ import io.zerows.specification.app.HApp;
 import io.zerows.specification.app.HArk;
 import io.zerows.support.Ut;
 import io.zerows.support.base.FnBase;
+import lombok.extern.slf4j.Slf4j;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -31,30 +32,56 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-import static io.zerows.extension.module.mbseapi.boot.Jt.LOG;
 
-/*
- * Cross Data Object
- * 1) App / Source information here
- * 2) Pool ( DSLContext, Connection, DataSource )
+/**
+ * 启动环境中的服务环境，此服务环境对接动态接口模型，针对每一个应用环境，会包含一套独立的发布结构
+ * <pre>
+ *     1. 一个 {@link HArk} 环境 / 应用和租户基本信息
+ *     2. 当前默认数据源 {@link DBS}，内置辅助访问对象 {@link JooqDatabase}
+ *     3. 系统动态环境中主要包含两种业务逻辑模型
+ *        - 接口模型：
+ *          映射成 HTTP 中常用的 RESTful 接口请求，拆分成接口定义和业务组件定义
+ *          {@link JtUri} = {@link IApi} x 1 + {@link IService} x 1
+ *        - 任务模型：
+ *          映射成 JOB 中的后台任务，若存在客户端交互可直接转换成 WebSocket 主动模型，拆分成任务定义和业务组件定义
+ *          {@link JtJob} = {@link IJob} x 1 + {@link IService} x 1
+ *      4. 不论是接口还是任务，底层都会对应 {@link IService} 业务组件定义。
+ * </pre>
+ *
+ * @author lang
  */
+@Slf4j
 public class ServiceEnvironment {
 
-    private static final LogOf LOGGER = LogOf.get(ServiceEnvironment.class);
-    /* Pool of Jobs, it will be consumed by each application */
-    private final transient ConcurrentMap<String, JtJob> jobs
-        = new ConcurrentHashMap<>();
-    /* Pool of JtUri */
-    private final transient ConcurrentMap<String, JtUri> uris
-        = new ConcurrentHashMap<>();
+    /**
+     * key = ns + job code
+     * 逻辑对应 {@link JtJob} / {@link IService} / {@link IJob}
+     */
+    private final transient ConcurrentMap<String, JtJob> jobs = new ConcurrentHashMap<>();
 
-    /* XApp application, class JtApp */
+    /**
+     * key = ns + uri code
+     * 逻辑对应 {@link JtUri} / {@link IService} / {@link IApi}
+     */
+    private final transient ConcurrentMap<String, JtUri> uris = new ConcurrentHashMap<>();
+
+    /**
+     * Ref: XApp
+     * 应用程序配置容器：{@link HArk} / {@link HApp}
+     */
     private final transient HArk ark;
     private final transient Set<String> condition = new HashSet<>();
-    /*
-     * Service Map
+
+    /**
+     * key = ns + service code
+     * 服务组件处理：{@link IService}，对应核心服务组件
      */
     private final ConcurrentMap<String, IService> serviceMap = new ConcurrentHashMap<>();
+
+    /**
+     * Ref: XSource
+     * 数据源对象：{@link DBS}，内置服务对象 {@link JooqDatabase} 访问核心数据源
+     */
     private final DBS dbs;
     private JooqDatabase database;
 
@@ -104,8 +131,7 @@ public class ServiceEnvironment {
         final IServiceDao serviceDao = new IServiceDao(this.database.getConfiguration(), vertx);
         return serviceDao.findManyBySigma(this.condition).compose(services -> {
             this.serviceMap.putAll(Ut.elementZip(services, IService::getKey, service -> service));
-            LOG.Init.info(LOGGER, "AE ( {0} ) Service initialized !!!",
-                String.valueOf(this.serviceMap.keySet().size()));
+            log.info("{} ---> 服务环境初始化完成！！！数量 = {}", JtConstant.K_PREFIX_BOOT, this.serviceMap.size());
             return Ux.future(Boolean.TRUE);
         });
     }
@@ -127,8 +153,7 @@ public class ServiceEnvironment {
                         .<JtJob>bind(this.ark)
                     )
                     .forEach(entry -> this.jobs.put(entry.key(), entry));
-                LOG.Init.info(LOGGER, "AE ( {0} ) Jobs initialized !!!",
-                    String.valueOf(this.jobs.keySet().size()));
+                log.info("{} -> 作业环境初始化完成！！！数量 = {}", JtConstant.K_PREFIX_BOOT, this.jobs.size());
                 return Ux.future(Boolean.TRUE);
             });
         } else {
@@ -152,8 +177,7 @@ public class ServiceEnvironment {
                         /* Job Bind app id directly */
                         .<JtUri>bind(this.ark))
                     .forEach(entry -> this.uris.put(entry.key(), entry));
-                LOG.Init.info(LOGGER, "AE ( {0} ) Api initialized !!!",
-                    String.valueOf(this.uris.keySet().size()));
+                log.info("{} -> 接口环境初始化完成！！！数量 = {}", JtConstant.K_PREFIX_BOOT, this.uris.size());
                 return Ux.future(Boolean.TRUE);
             });
         } else {

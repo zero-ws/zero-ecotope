@@ -43,7 +43,7 @@ public abstract class JtCommercial implements Commercial {
      * 1) JtApp ( application data )
      */
     private transient HArk ark;
-    private transient JtConfig config;
+    private transient JtConfigOld config;
 
     JtCommercial() {
     }
@@ -52,7 +52,7 @@ public abstract class JtCommercial implements Commercial {
         this.service = service;
     }
 
-    public <T extends JtCommercial> T bind(final JtConfig config) {
+    public <T extends JtCommercial> T bind(final JtConfigOld config) {
         this.config = config;
         return (T) this;
     }
@@ -76,7 +76,7 @@ public abstract class JtCommercial implements Commercial {
         return this.ark;
     }
 
-    protected JtConfig getConfig() {
+    protected JtConfigOld getConfig() {
         return this.config;
     }
 
@@ -209,7 +209,7 @@ public abstract class JtCommercial implements Commercial {
          * service, config
          */
         this.service = Ut.deserialize(data.getJsonObject(JtKey.Delivery.SERVICE), IService.class);
-        this.config = Ut.deserialize(data.getJsonObject(JtKey.Delivery.CONFIG), JtConfig.class);
+        this.config = Ut.deserialize(data.getJsonObject(JtKey.Delivery.CONFIG), JtConfigOld.class);
         /*
          * application id
          */

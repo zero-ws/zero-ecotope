@@ -10,8 +10,6 @@ import io.zerows.epoch.basicore.MDEntity;
 import io.zerows.epoch.basicore.MDId;
 import io.zerows.epoch.basicore.MDMeta;
 import io.zerows.epoch.basicore.MDWorkflow;
-import io.zerows.epoch.jigsaw.EquipAt;
-import io.zerows.epoch.management.OCacheConfiguration;
 import io.zerows.extension.skeleton.boot.ExAbstractHActor;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.development.compiled.HBundle;
@@ -25,7 +23,6 @@ import java.util.Objects;
  * @author lang : 2025-11-04
  */
 public abstract class MDModuleActor extends ExAbstractHActor {
-    private static final OCacheConfiguration STORE = OCacheConfiguration.of();
 
     /**
      * {@link MDConfiguration} 的核心数据结构和用途
@@ -122,31 +119,34 @@ public abstract class MDModuleActor extends ExAbstractHActor {
     @Override
     protected Future<Boolean> startAsync(final HConfig config, final Vertx vertxRef) {
         this.vLog("启动扩展模块：{}", this.MID());
-        // 创建一个新的 MDConfiguration
-        final MDConfiguration configuration = this.createConfiguration();
+        final MDModuleManager manager = MDModuleManager.of(this.MID());
 
-        return this.startAsync(configuration, config, vertxRef);
+
+        // 标准配置：创建一个新的 MDConfiguration
+        final MDConfiguration configuration = manager.registry(config);
+
+
+        // 特殊配置：MDSetting 转换基础配置
+        if (Objects.nonNull(config)) {
+            final Object setting = this.setConfig(configuration, vertxRef);
+            manager.registry(this.getClass(), setting);
+        }
+
+        return this.startAsync(configuration, vertxRef);
     }
 
-    protected Future<Boolean> startAsync(final MDConfiguration configuration,
-                                         final HConfig config, final Vertx vertxRef) {
+    protected Future<Boolean> startAsync(final MDConfiguration configuration, final Vertx vertxRef) {
         // 子类实现，若有特殊模块信息则覆盖此方法
         return Future.succeededFuture(Boolean.TRUE);
     }
 
-    private MDConfiguration createConfiguration() {
-        MDConfiguration configuration = STORE.valueGet(this.MID());
-        if (Objects.isNull(configuration)) {
-            // 创建一个新的 MDConfiguration
-            configuration = new MDConfiguration(this.MID());
-            // 对新的 MDConfiguration 执行初始化 -> 写入到 MDConfiguration 对象中
-            final EquipAt equipAt = EquipAt.of(configuration.id());
-            equipAt.initialize(configuration);
-            // 初始化完成之后写入缓存
-            STORE.add(configuration);
-        }
-        return configuration;
+    protected abstract String MID();
+
+    protected Object setConfig(final MDConfiguration configuration, final Vertx vertxRef) {
+        return null;
     }
 
-    protected abstract String MID();
+    protected static <T> T getConfig(final String mid, final Class<?> key) {
+        return MDModuleManager.of(mid).getConfig(key);
+    }
 }

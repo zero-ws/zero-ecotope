@@ -3,26 +3,23 @@ package io.zerows.extension.module.mbseapi.component;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.LogOf;
-import io.zerows.extension.module.mbseapi.common.JtMsg;
+import io.zerows.extension.module.mbseapi.metadata.JtConstant;
 import io.zerows.extension.module.mbseapi.metadata.JtUri;
 import io.zerows.support.Ut;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import static io.zerows.extension.module.mbseapi.boot.Jt.LOG;
-
-/*
- * The monitor of workflow here.
+/**
+ * 基础日志监控，将旧版的日志器替换
  */
 public class JtMonitor {
 
     private static final Cc<Class<?>, JtMonitor> CC_MONITOR = Cc.open();
-    private transient final LogOf logger;
-    private transient final String name;
+    private transient final Logger logger;
     private transient final JtAtomic atomic = new JtAtomic();
 
     private JtMonitor(final Class<?> clazz) {
-        this.name = clazz.getName();
-        this.logger = LogOf.get(clazz);
+        this.logger = LoggerFactory.getLogger(clazz);
     }
 
     public static JtMonitor create(final Class<?> clazz) {
@@ -53,30 +50,30 @@ public class JtMonitor {
     }
 
     public void receiveData(final String identifier, final JtUri uri) {
-        LOG.Web.info(this.logger, JtMsg.CONSUME_MESSAGE, identifier, uri.method(), uri.path());
-        LOG.Web.info(this.logger, JtMsg.CONSUME_API, ((JsonObject) Ut.serializeJson(uri.api())).encode());
-        LOG.Web.info(this.logger, JtMsg.CONSUME_SERVICE, ((JsonObject) Ut.serializeJson(uri.service())).encode());
-        LOG.Web.info(this.logger, JtMsg.CONSUME_WORKER, ((JsonObject) Ut.serializeJson(uri.worker())).encode());
+        this.logger.info("{} Api 接口：id = {}, method = {}, path = {}", JtConstant.K_PREFIX_WEB, identifier, uri.method(), uri.path());
+        this.logger.info("{} ----> API 配置：{}", JtConstant.K_PREFIX_WEB, ((JsonObject) Ut.serializeJson(uri.api())).encode());
+        this.logger.info("{} ----> 服务配置：{}", JtConstant.K_PREFIX_WEB, ((JsonObject) Ut.serializeJson(uri.service())).encode());
+        this.logger.info("{} ----> Worker 配置：{}", JtConstant.K_PREFIX_WEB, ((JsonObject) Ut.serializeJson(uri.worker())).encode());
     }
 
     // ---------------- Ingest
 
     // ---------------- Aim
     public void aimEngine(final HttpMethod method, final String path, final JsonObject data) {
-        LOG.Web.info(this.logger, JtMsg.WEB_ENGINE, method, path, data.encode());
+        this.logger.info("{} Web 请求：`{} {}`，参数：{}", JtConstant.K_PREFIX_WEB, method, path, data.encode());
     }
 
     public void aimSend(final JsonObject data, final String address) {
-        LOG.Web.info(this.logger, JtMsg.WEB_SEND, data.encode(), address);
+        this.logger.info("{} 发送数据 `{}` 到 EventBus 地址：{}", JtConstant.K_PREFIX_JET, data.encode(), address);
     }
 
     // ---------------- Channel
     public void channelHit(final Class<?> clazz) {
-        LOG.Web.info(this.logger, JtMsg.CHANNEL_SELECT, null == clazz ? null : clazz.getName());
+        this.logger.info("{} 通道选择器：class = {}", JtConstant.K_PREFIX_JET, null == clazz ? null : clazz.getName());
     }
 
     public void componentHit(final Class<?> componentClass, final Class<?> recordClass) {
-        LOG.Web.info(this.logger, JtMsg.COMPONENT_SELECT,
+        this.logger.info("{} 通道组件：component = {}, 数据记录类 = {}", JtConstant.K_PREFIX_JET,
             null == componentClass ? null : componentClass.getName(),
             null == recordClass ? null : recordClass.getName());
     }

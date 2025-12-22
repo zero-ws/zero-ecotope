@@ -6,6 +6,7 @@ import io.zerows.cosmic.plugins.OAxisDynamicGateway;
 import io.zerows.cosmic.plugins.OAxisGateway;
 import io.zerows.cosmic.plugins.OAxisSockGateway;
 import io.zerows.specification.development.compiled.HBundle;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
 
@@ -23,23 +24,29 @@ import java.util.Objects;
  *
  * @author lang : 2024-06-26
  */
+@Slf4j
 public class AxisExtension implements Axis {
 
     @Override
     public void mount(final RunServer server, final HBundle bundle) {
         // Websocket 功能
-        final OAxisGateway sockGateway = OAxisGateway.of(OAxisSockGateway.class);
-        final Axis sockAxis = sockGateway.getAxis(bundle);
-        if (Objects.nonNull(sockAxis)) {
-            sockAxis.mount(server, bundle);
-        }
+        try {
+            final OAxisGateway sockGateway = OAxisGateway.of(OAxisSockGateway.class);
+            final Axis sockAxis = sockGateway.getAxis(bundle);
+            if (Objects.nonNull(sockAxis)) {
+                sockAxis.mount(server, bundle);
+            }
 
 
-        // Dynamic 动态扩展
-        final OAxisGateway dynamicGateway = OAxisGateway.of(OAxisDynamicGateway.class);
-        final Axis dynamicAxis = dynamicGateway.getAxis(bundle);
-        if (Objects.nonNull(dynamicAxis)) {
-            dynamicAxis.mount(server, bundle);
+            // Dynamic 动态扩展
+            final OAxisGateway dynamicGateway = OAxisGateway.of(OAxisDynamicGateway.class);
+            final Axis dynamicAxis = dynamicGateway.getAxis(bundle);
+            if (Objects.nonNull(dynamicAxis)) {
+                dynamicAxis.mount(server, bundle);
+            }
+        } catch (final Throwable ex) {
+            log.error(ex.getMessage(), ex);
+            System.exit(1);
         }
     }
 }

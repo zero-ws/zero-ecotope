@@ -358,12 +358,16 @@ import java.lang.reflect.Method;
  *     config:
  *
  * # 📌 =====> 动态建模
- * mbse:
+ * metamodel:
  *   router:
- *     point: /api
+ *     point:
+ *       path: /api
+ *       component:
  *     deployment:
- *       agent: 32
- *       worker: 64
+ *       worker:
+ *         instances: 64
+ *       agent:
+ *         instances: 32
  * </pre>
  */
 public interface YmSpec {

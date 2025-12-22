@@ -48,7 +48,7 @@ class LinearCenter {
         vertx.deployVerticle(classVerticle.getName(), options).onComplete(res -> {
             final String deploymentId = res.result();
             if (res.succeeded()) {
-                log.info("[ ZERO ] ✅ Verticle 组件 {} 发布成功！( instances = {}, deploymentId = {}, thread = {} ",
+                log.info("[ ZERO ] ✅ Verticle 组件 {} 发布成功！( instances = {}, deploymentId = {}, thread = {} )",
                     classVerticle.getName(), options.getInstances(), deploymentId,
                     options.getThreadingModel());
 

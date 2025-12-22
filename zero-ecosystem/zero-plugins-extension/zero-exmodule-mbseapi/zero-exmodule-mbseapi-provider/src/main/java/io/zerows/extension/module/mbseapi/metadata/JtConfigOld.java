@@ -24,7 +24,8 @@ import java.util.Objects;
  *      }
  * }
  */
-public class JtConfig implements Serializable {
+@Deprecated
+public class JtConfigOld implements Serializable {
     private transient String wall;
 
     @JsonSerialize(using = JsonObjectSerializer.class)

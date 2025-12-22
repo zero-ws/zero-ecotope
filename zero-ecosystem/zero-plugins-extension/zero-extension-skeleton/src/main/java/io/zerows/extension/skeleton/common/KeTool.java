@@ -75,7 +75,7 @@ class KeTool {
     static void banner(final String module) {
         System.out.println("-------------------------------------------------------------");
         System.out.println("|                                                           |");
-        System.out.println("|     Zero Extension:  " + module);
+        System.out.println("|     Zero 扩展模块:  " + module);
         System.out.println("|                                                           |");
         System.out.println("-------------------------------------------------------------");
     }

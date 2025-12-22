@@ -10,6 +10,7 @@ import io.zerows.cosmic.handler.EndurerCommon;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.management.OCacheUri;
 import io.zerows.extension.module.mbseapi.boot.JtPin;
+import io.zerows.extension.module.mbseapi.boot.ModMBSEManager;
 import io.zerows.extension.module.mbseapi.boot.ServiceEnvironment;
 import io.zerows.extension.module.mbseapi.component.JtAim;
 import io.zerows.extension.module.mbseapi.component.JtAimEngine;
@@ -17,7 +18,7 @@ import io.zerows.extension.module.mbseapi.component.JtAimIn;
 import io.zerows.extension.module.mbseapi.component.JtAimPre;
 import io.zerows.extension.module.mbseapi.component.JtAimSend;
 import io.zerows.extension.module.mbseapi.component.JtMonitor;
-import io.zerows.extension.module.mbseapi.metadata.JtConfig;
+import io.zerows.extension.module.mbseapi.metadata.JtConfigOld;
 import io.zerows.extension.module.mbseapi.metadata.JtUri;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
@@ -40,6 +41,7 @@ public class JetPollux implements Axis {
      */
     private static final ConcurrentMap<String, ServiceEnvironment> AMBIENT = JtPin.serviceEnvironment();
     private static final AtomicBoolean UNREADY = new AtomicBoolean(Boolean.TRUE);
+    private static final ModMBSEManager MANAGER = ModMBSEManager.of();
 
     private final transient JtMonitor monitor;
 
@@ -62,8 +64,8 @@ public class JetPollux implements Axis {
         Objects.requireNonNull(router);
         final Vertx vertx = server.refVertx();
 
-        final JtConfig config = Ut.deserialize(options.inConfiguration(), JtConfig.class);
-        final Set<JtUri> uriSet = options.inUri().stream()
+        final JtConfigOld config = Ut.deserialize(options.inConfiguration(), JtConfigOld.class);
+        final Set<JtUri> uriSet = MANAGER.getApis().stream()
 
 
             /*
