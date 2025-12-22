@@ -1,6 +1,5 @@
 package io.zerows.platform.metadata;
 
-import io.r2mo.typed.annotation.SPID;
 import io.vertx.core.Future;
 import io.zerows.platform.enums.EmApp;
 import io.zerows.specification.app.HApp;
@@ -73,7 +72,6 @@ import java.util.Set;
  *
  * @author lang : 2023-06-06
  */
-@SPID(priority = 207)
 public class KRegistry<T> implements HRegistry<T> {
     @Override
     public Set<HArk> registry(final T container, final HConfig config) {

@@ -52,7 +52,15 @@ public class ModMBSEApiActor extends MDAppModuleActor {
         }
 
         final ConcurrentMap<String, Future<ServiceEnvironment>> futureMap = new ConcurrentHashMap<>();
-        arkMap.forEach((appId, each) -> futureMap.put(appId, new ServiceEnvironment(each).init(vertxRef)));
+        arkMap.forEach((appId, each) -> {
+            final ServiceEnvironment environment = new ServiceEnvironment(each);
+            if (environment.isOk()) {
+                // 没有 Ok 的场景下 environment 是不可以执行初始化的
+                futureMap.put(appId, environment.init(vertxRef));
+            } else {
+                log.warn("{} 应用 {} 的 ServiceEnvironment 配置不完整，跳过初始化！", JtConstant.K_PREFIX_BOOT, appId);
+            }
+        });
         return Fx.combineM(futureMap).compose(processed -> {
             MANAGER.serviceEnvironment(processed);
             log.info("{} ServiceEnvironment 初始化完成！", JtConstant.K_PREFIX_BOOT);

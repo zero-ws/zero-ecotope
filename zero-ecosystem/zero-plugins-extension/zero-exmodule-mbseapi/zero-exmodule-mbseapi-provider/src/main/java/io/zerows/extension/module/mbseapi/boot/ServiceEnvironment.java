@@ -28,6 +28,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -93,7 +94,7 @@ public class ServiceEnvironment {
     ServiceEnvironment(final HArk ark) {
         this.ark = ark;
         this.dbs = ark.datasource().findRunning();
-        if (this.dbs.getDatabase() instanceof final JooqDatabase jooqDatabase) {
+        if (Objects.nonNull(this.dbs) && this.dbs.getDatabase() instanceof final JooqDatabase jooqDatabase) {
             this.database = jooqDatabase;
         }
         final HApp app = ark.app();
@@ -225,5 +226,10 @@ public class ServiceEnvironment {
          * serviceKey -> uri (JtUri)
          */
         this.uris.put(service.getKey(), uri);
+    }
+
+    public boolean isOk() {
+        return Objects.nonNull(this.ark)
+            && Objects.nonNull(this.dbs);
     }
 }

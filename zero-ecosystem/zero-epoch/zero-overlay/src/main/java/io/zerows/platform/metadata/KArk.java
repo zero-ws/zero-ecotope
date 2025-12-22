@@ -23,7 +23,7 @@ public class KArk implements HArk {
     private KArk(final String name) {
         this.app = new KApp(name);
         this.owner = new KTenement();
-        this.kds = KDS.of(name);
+        this.kds = Objects.isNull(name) ? null : KDS.of(name);
     }
 
     public static HArk of(final String name) {

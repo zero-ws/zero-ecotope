@@ -68,7 +68,7 @@ class StubServerService extends AbstractAmbiguity implements StubServer {
         }
 
         // 3) 以运行态选择锁类型
-        final String keyLock = "server:create:" + serverName;
+        final String keyLock = Thread.currentThread().getName() + "@server:create:" + serverName;
         final Future<Lock> futLock = clustered
             ? vertx.sharedData().getLockWithTimeout(keyLock, LOCK_TIMEOUT_MS)
             : vertx.sharedData().getLocalLockWithTimeout(keyLock, LOCK_TIMEOUT_MS);

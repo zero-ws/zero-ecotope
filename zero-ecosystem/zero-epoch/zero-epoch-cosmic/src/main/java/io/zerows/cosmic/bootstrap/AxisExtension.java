@@ -36,9 +36,13 @@ public class AxisExtension implements Axis {
             if (Objects.nonNull(sockAxis)) {
                 sockAxis.mount(server, bundle);
             }
+        } catch (final Throwable ex) {
+            log.error(ex.getMessage(), ex);
+            System.exit(1);
+        }
 
-
-            // Dynamic 动态扩展
+        // Dynamic 功能
+        try {
             final OAxisGateway dynamicGateway = OAxisGateway.of(OAxisDynamicGateway.class);
             final Axis dynamicAxis = dynamicGateway.getAxis(bundle);
             if (Objects.nonNull(dynamicAxis)) {

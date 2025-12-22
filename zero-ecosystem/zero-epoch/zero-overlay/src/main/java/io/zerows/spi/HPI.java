@@ -16,6 +16,7 @@ import io.r2mo.vertx.dbe.DBContext;
 import io.r2mo.vertx.dbe.FactoryDBAsync;
 import io.zerows.platform.constant.VString;
 import io.zerows.specification.configuration.HLauncher;
+import io.zerows.specification.configuration.HRegistry;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.specification.modeling.operation.HLoad;
 import io.zerows.spi.modeler.AtomNs;
@@ -77,6 +78,7 @@ public final class HPI extends SPI {
 
             // io.zerows.specification.*
             this.addAll(List.of(
+                HRegistry.class,            // 📋 注册表接口，管理系统中的各类注册信息
                 HBundle.class,              // 📦 模块包接口，定义系统模块化打包规范
                 HLauncher.class,            // 🚀 启动器接口，控制系统各组件的启动流程
                 HLoad.class                 // ⚖️ 加载器接口，处理系统资源和配置的加载

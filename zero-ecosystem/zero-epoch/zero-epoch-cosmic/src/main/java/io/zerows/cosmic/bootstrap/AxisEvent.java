@@ -14,6 +14,7 @@ import io.zerows.cosmic.handler.EndurerCommon;
 import io.zerows.epoch.basicore.WebEvent;
 import io.zerows.epoch.management.OCacheActor;
 import io.zerows.specification.development.compiled.HBundle;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
 import java.util.Set;
@@ -21,6 +22,7 @@ import java.util.Set;
 /**
  * @author lang : 2024-05-04
  */
+@Slf4j
 public class AxisEvent implements Axis {
 
     private static final Cc<String, SentryMode> CC_SPLITTER = Cc.openThread();
@@ -31,10 +33,8 @@ public class AxisEvent implements Axis {
 
     @Override
     public void mount(final RunServer server, final HBundle bundle) {
-
         final OCacheActor actor = OCacheActor.of(bundle);
         final Set<WebEvent> events = actor.value().getEvents();
-
         events.stream().filter(Objects::nonNull).forEach(event -> {
             /* 验证 */
             AxisVerifier.verify(event);

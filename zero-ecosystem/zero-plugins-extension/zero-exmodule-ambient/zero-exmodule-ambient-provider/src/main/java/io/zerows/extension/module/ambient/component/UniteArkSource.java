@@ -10,6 +10,7 @@ import io.zerows.specification.app.HArk;
 import io.zerows.support.Ut;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author lang : 2024-07-08
@@ -109,9 +110,13 @@ public class UniteArkSource implements UniteArk<List<XSource>> {
              */
             final JsonObject auditor = new JsonObject();
             auditor.put(KName.CREATED_BY, app.getCreatedBy());
-            auditor.put(KName.CREATED_AT, Ut.parse(app.getCreatedAt()).toInstant());
+            if (Objects.nonNull(app.getCreatedAt())) {
+                auditor.put(KName.CREATED_AT, Ut.parse(app.getCreatedAt()).toInstant());
+            }
             auditor.put(KName.UPDATED_BY, app.getUpdatedBy());
-            auditor.put(KName.UPDATED_AT, Ut.parse(app.getUpdatedAt()).toInstant());
+            if (Objects.nonNull(app.getUpdatedAt())) {
+                auditor.put(KName.UPDATED_AT, Ut.parse(app.getUpdatedAt()).toInstant());
+            }
             normalized.put("auditor", auditor);
         }
         // UPD-004: Remove Database Configuration Here

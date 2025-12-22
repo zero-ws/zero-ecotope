@@ -31,8 +31,6 @@ public interface StoreServer extends OCache<RunServer> {
      */
     HttpServer server(String serverKey);
 
-    HttpServer server();
-
     /**
      * 扩展的移除方法，直接通过 key 值移除相关数据
      *
