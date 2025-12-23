@@ -6,7 +6,7 @@ import io.zerows.cosmic.plugins.job.JobClient;
 import io.zerows.cosmic.plugins.job.JobClientActor;
 import io.zerows.cosmic.plugins.job.metadata.Mission;
 import io.zerows.epoch.constant.KName;
-import io.zerows.extension.module.mbseapi.boot.ModMBSEManager;
+import io.zerows.extension.module.mbseapi.boot.MDMBSEManager;
 import io.zerows.extension.module.mbseapi.boot.ServiceEnvironment;
 import io.zerows.extension.module.mbseapi.domain.tables.pojos.IApi;
 import io.zerows.extension.module.mbseapi.domain.tables.pojos.IJob;
@@ -23,7 +23,7 @@ import io.zerows.specification.app.HArk;
 import java.util.Objects;
 
 public class AmbientService implements AmbientStub {
-    private static final ModMBSEManager MANAGER = ModMBSEManager.of();
+    private static final MDMBSEManager MANAGER = MDMBSEManager.of();
 
     @Override
     public Future<JsonObject> updateJob(final IJob job, final IService service) {

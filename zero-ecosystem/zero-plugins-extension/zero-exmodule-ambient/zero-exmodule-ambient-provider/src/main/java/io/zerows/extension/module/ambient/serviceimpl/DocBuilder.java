@@ -7,7 +7,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.DB;
-import io.zerows.extension.module.ambient.boot.AtConfig;
+import io.zerows.extension.module.ambient.boot.AtConfigOld;
 import io.zerows.extension.module.ambient.boot.AtPin;
 import io.zerows.extension.module.ambient.domain.tables.daos.XCategoryDao;
 import io.zerows.extension.module.ambient.servicespec.DocBStub;
@@ -112,7 +112,7 @@ public class DocBuilder implements DocBStub {
          *      }
          * }
          */
-        final AtConfig config = AtPin.getConfig();
+        final AtConfigOld config = AtPin.getConfig();
         storeRef.put(KName.STORE_PATH, config.getStorePath());
         configuration.put(KName.STORE, storeRef);
 

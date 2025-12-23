@@ -6,6 +6,7 @@ import io.r2mo.typed.json.jackson.ClassDeserializer;
 import io.r2mo.typed.json.jackson.ClassSerializer;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.basicore.MDConfig;
 import io.zerows.epoch.basicore.YmSpec;
 import io.zerows.epoch.basicore.YmVertx;
 import io.zerows.extension.module.mbseapi.plugins.JetPollux;
@@ -28,16 +29,30 @@ import java.util.Objects;
  *           instances:         64
  *         agent:
  *           instances:         32
+ *       web:
+ *         ingest: ???
  * </pre>
  *
  * @author lang : 2025-12-22
  */
 @Data
 @Slf4j
-public class YmMetamodel implements Serializable {
+public class MDCMetamodel implements MDConfig {
     private Router router = new Router();
 
     private YmVertx.Deployment deployment;
+
+    private Web web;
+
+    /**
+     * Web 组件配置
+     */
+    @Data
+    public static class Web implements Serializable {
+        @JsonSerialize(using = ClassSerializer.class)
+        @JsonDeserialize(using = ClassDeserializer.class)
+        private Class<?> ingest;    // Ingest 组件类全名
+    }
 
     @Data
     public static class Router implements Serializable {
@@ -65,6 +80,13 @@ public class YmMetamodel implements Serializable {
         final String context = this.router.context;
         final String wall = this.router.wall;
         return Ut.ioPath(context, wall);
+    }
+
+    public Class<?> webIngest() {
+        if (Objects.isNull(this.web)) {
+            return null;
+        }
+        return this.web.ingest;
     }
 
     public DeploymentOptions getWorkerOptions() {

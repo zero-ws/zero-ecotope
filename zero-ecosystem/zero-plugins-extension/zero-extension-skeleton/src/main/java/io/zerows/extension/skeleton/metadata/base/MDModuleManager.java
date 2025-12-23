@@ -1,9 +1,10 @@
-package io.zerows.extension.skeleton.metadata;
+package io.zerows.extension.skeleton.metadata.base;
 
 import io.r2mo.typed.cc.Cc;
 import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.epoch.jigsaw.EquipAt;
 import io.zerows.epoch.management.OCacheConfiguration;
+import io.zerows.extension.skeleton.metadata.MDSetting;
 import io.zerows.specification.configuration.HActor;
 import io.zerows.specification.configuration.HConfig;
 

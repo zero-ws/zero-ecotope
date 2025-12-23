@@ -17,10 +17,11 @@ import io.zerows.support.Ut;
 
 import static io.zerows.extension.module.ambient.boot.At.LOG;
 
+@Deprecated
 public class AtPin implements HRegistry.Mod<Vertx> {
     private static final DI PLUGIN = DI.create(AtPin.class);
 
-    public static AtConfig getConfig() {
+    public static AtConfigOld getConfig() {
         return AtConfiguration.getConfig();
     }
 
@@ -47,7 +48,7 @@ public class AtPin implements HRegistry.Mod<Vertx> {
 
     @Override
     public Future<Boolean> initializeAsync(final Vertx container, final HArk ark) {
-        final AtConfig config = AtConfiguration.getConfig();
+        final AtConfigOld config = AtConfiguration.getConfig();
         final boolean disabled = Ut.isNil(config.getFileIntegration());
         if (disabled) {
             LOG.Init.info(this.getClass(), "Document Platform Disabled !!");

@@ -36,7 +36,7 @@ public class Jt {
      * Extraction for some specification data
      */
     public static String toPath(final HArk ark, final Supplier<String> uriSupplier,
-                                final boolean secure, final YmMetamodel external) {
+                                final boolean secure, final MDCMetamodel external) {
         return JtRoute.toPath(ark, uriSupplier, secure, external);
     }
 

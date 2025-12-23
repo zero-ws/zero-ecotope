@@ -9,7 +9,7 @@ import io.zerows.cortex.sdk.Axis;
 import io.zerows.cosmic.handler.EndurerCommon;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.management.OCacheUri;
-import io.zerows.extension.module.mbseapi.boot.ModMBSEManager;
+import io.zerows.extension.module.mbseapi.boot.MDMBSEManager;
 import io.zerows.extension.module.mbseapi.component.JtAim;
 import io.zerows.extension.module.mbseapi.component.JtAimEngine;
 import io.zerows.extension.module.mbseapi.component.JtAimIn;
@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
  */
 public class JetPollux implements Axis {
     private static final AtomicBoolean UNREADY = new AtomicBoolean(Boolean.TRUE);
-    private static final ModMBSEManager MANAGER = ModMBSEManager.of();
+    private static final MDMBSEManager MANAGER = MDMBSEManager.of();
 
     private final transient JtMonitor monitor;
 

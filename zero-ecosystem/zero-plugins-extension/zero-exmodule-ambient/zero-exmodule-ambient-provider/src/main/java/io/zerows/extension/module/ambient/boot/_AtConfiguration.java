@@ -17,9 +17,10 @@ import java.util.Objects;
 
 import static io.zerows.extension.module.ambient.boot.At.LOG;
 
+@Deprecated
 final class AtConfiguration {
 
-    private static AtConfig CONFIG = null;
+    private static AtConfigOld CONFIG = null;
 
     private AtConfiguration() {
     }
@@ -38,11 +39,11 @@ final class AtConfiguration {
 
         ambient.registry(module, configData);
 
-        CONFIG = Ut.deserialize(configData, AtConfig.class);
+        CONFIG = Ut.deserialize(configData, AtConfigOld.class);
         LOG.Init.info(AtConfiguration.class, KeMsg.Configuration.DATA_T, CONFIG.toString());
     }
 
-    static AtConfig getConfig() {
+    static AtConfigOld getConfig() {
         return CONFIG;
     }
 

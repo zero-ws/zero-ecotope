@@ -2,7 +2,7 @@ package io.zerows.extension.module.mbseapi.plugins;
 
 import io.zerows.cortex.AxisDynamicFactory;
 import io.zerows.cortex.sdk.Axis;
-import io.zerows.extension.module.mbseapi.boot.ModMBSEManager;
+import io.zerows.extension.module.mbseapi.boot.MDMBSEManager;
 import io.zerows.specification.development.compiled.HBundle;
 
 import java.util.Objects;
@@ -12,10 +12,10 @@ import java.util.Objects;
  */
 public class JetAxisManager implements AxisDynamicFactory {
 
-    private final ModMBSEManager manager;
+    private final MDMBSEManager manager;
 
     public JetAxisManager() {
-        this.manager = ModMBSEManager.of();
+        this.manager = MDMBSEManager.of();
     }
 
     @Override

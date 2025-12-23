@@ -7,8 +7,8 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.web.Envelop;
-import io.zerows.extension.module.mbseapi.boot.ModMBSEManager;
-import io.zerows.extension.module.mbseapi.boot.YmMetamodel;
+import io.zerows.extension.module.mbseapi.boot.MDCMetamodel;
+import io.zerows.extension.module.mbseapi.boot.MDMBSEManager;
 import io.zerows.extension.skeleton.common.Ke;
 import io.zerows.extension.skeleton.spi.ScSeeker;
 import io.zerows.extension.skeleton.spi.UiApeak;
@@ -37,7 +37,7 @@ import java.util.Objects;
  */
 final class OxView {
 
-    private static final YmMetamodel CONFIG = ModMBSEManager.of().setting();
+    private static final MDCMetamodel CONFIG = MDMBSEManager.of().setting();
 
     /*
      * 私有构造函数（工具类转换）

@@ -4,7 +4,7 @@ import io.r2mo.base.dbe.Database;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.module.mbseapi.boot.Jt;
-import io.zerows.extension.module.mbseapi.boot.YmMetamodel;
+import io.zerows.extension.module.mbseapi.boot.MDCMetamodel;
 import io.zerows.extension.module.mbseapi.common.JtKey;
 import io.zerows.extension.module.mbseapi.domain.tables.pojos.IService;
 import io.zerows.extension.skeleton.common.Ke;
@@ -44,7 +44,7 @@ public abstract class JtCommercial implements Commercial {
      * 1) JtApp ( application data )
      */
     private transient HArk ark;
-    private transient YmMetamodel setting;
+    private transient MDCMetamodel setting;
 
     JtCommercial() {
     }
@@ -53,7 +53,7 @@ public abstract class JtCommercial implements Commercial {
         this.service = service;
     }
 
-    public <T extends JtCommercial> T bind(final YmMetamodel setting) {
+    public <T extends JtCommercial> T bind(final MDCMetamodel setting) {
         this.setting = setting;
         return (T) this;
     }
@@ -77,7 +77,7 @@ public abstract class JtCommercial implements Commercial {
         return this.ark;
     }
 
-    protected YmMetamodel getConfig() {
+    protected MDCMetamodel getConfig() {
         return this.setting;
     }
 
@@ -210,7 +210,7 @@ public abstract class JtCommercial implements Commercial {
          * service, setting
          */
         this.service = Ut.deserialize(data.getJsonObject(JtKey.Delivery.SERVICE), IService.class);
-        this.setting = Ut.deserialize(data.getJsonObject(JtKey.Delivery.CONFIG), YmMetamodel.class);
+        this.setting = Ut.deserialize(data.getJsonObject(JtKey.Delivery.CONFIG), MDCMetamodel.class);
         /*
          * application id
          */

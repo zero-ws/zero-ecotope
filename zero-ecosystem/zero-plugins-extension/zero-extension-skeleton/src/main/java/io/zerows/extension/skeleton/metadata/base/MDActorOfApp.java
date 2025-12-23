@@ -1,4 +1,4 @@
-package io.zerows.extension.skeleton.metadata;
+package io.zerows.extension.skeleton.metadata.base;
 
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
@@ -16,14 +16,14 @@ import java.util.Objects;
  * Module 消费端基类，这个抽象类比较特殊，子类必须实现抽象方法用于应用级初始化，简单说
  * <pre>
  *     1. 如果继承此类意味着应用模式下的 App 环境和当前模块是强绑定关系，如果是强绑定关系，那么必须实现子类的初始化逻辑。
- *     2. 若只继承 {@link MDModuleActor} 则不需要考虑此处的问题
+ *     2. 若只继承 {@link MDActorOfModule} 则不需要考虑此处的问题
  *     3. {@link HAmbient} 本质是一个多应用环境，内置 key = {@link HArk} 的应用映射
  * </pre>
  * 后期所有多应用级的扩展可以直接在 {@link HAmbient} 中完成，这样可以保证模块的多应用能力。
  *
  * @author lang : 2025-12-22
  */
-public abstract class MDAppModuleActor extends MDModuleActor {
+public abstract class MDActorOfApp extends MDActorOfModule {
 
     @Override
     protected Future<Boolean> startAsync(final MDConfiguration configuration, final Vertx vertxRef) {
@@ -42,7 +42,7 @@ public abstract class MDAppModuleActor extends MDModuleActor {
         final MDModuleRegistry registry = MDModuleRegistry.of(this.MID());
         return registry.afterApp(config, vertxRef).compose(initialized -> {
 
-            
+
             // 此处 withRegistry 有注册过程，替换原始的 Pin.configure 方法的核心逻辑
             final HAmbient ambient = registry.withRegistry();
 

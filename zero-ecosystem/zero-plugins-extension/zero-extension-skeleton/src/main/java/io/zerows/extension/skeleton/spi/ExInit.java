@@ -9,7 +9,6 @@ import java.util.function.Function;
 
 /**
  * ## 「Init」Initializing Uniform Interface
- *
  * OOB Data initialization for The whole application.
  * 1) XApp: EmApp Data
  * 2) XSource: Data Source Data

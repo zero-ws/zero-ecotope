@@ -38,7 +38,7 @@ class AtFs {
     private static final LogOf LOGGER = LogOf.get(AtFs.class);
 
     static Future<JsonObject> fileMeta(final JsonObject appJ) {
-        final AtConfig config = AtPin.getConfig();
+        final AtConfigOld config = AtPin.getConfig();
         if (Objects.nonNull(config)) {
             appJ.put(KName.STORE_PATH, config.getStorePath());
         }

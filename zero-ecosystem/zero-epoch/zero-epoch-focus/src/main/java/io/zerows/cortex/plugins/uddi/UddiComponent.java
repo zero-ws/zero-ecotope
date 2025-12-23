@@ -1,10 +1,9 @@
 package io.zerows.cortex.plugins.uddi;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.management.OZeroStore;
 import io.zerows.support.Ut;
 
-class UddiConfig {
+class UddiComponent {
 
     static Class<?> registry() {
         final JsonObject data = uddiJson();
@@ -25,10 +24,7 @@ class UddiConfig {
     }
 
     private static JsonObject uddiJson() {
-        /*
-         * configuration in vertx-tp.yml
-         */
-        final JsonObject data = OZeroStore.option("uddi");
+        final JsonObject data = new JsonObject(); // OZeroStore.option("uddi");
         return Ut.valueJObject(data);
     }
 }

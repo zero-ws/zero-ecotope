@@ -5,7 +5,7 @@ import io.vertx.ext.web.FileUpload;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.EndPoint;
 import io.zerows.epoch.constant.KName;
-import io.zerows.extension.module.ambient.boot.AtConfig;
+import io.zerows.extension.module.ambient.boot.AtConfigOld;
 import io.zerows.extension.module.ambient.boot.AtPin;
 import io.zerows.extension.module.ambient.common.AtConstant;
 import io.zerows.extension.skeleton.common.enums.FileStatus;
@@ -41,7 +41,7 @@ public class AttachAgent {
         final String originalFile = fileUpload.fileName();
         if (Ut.isNotNil(originalFile) && originalFile.contains(".")) {
             // Config Read
-            final AtConfig config = AtPin.getConfig();
+            final AtConfigOld config = AtPin.getConfig();
             final int lastIndex = originalFile.lastIndexOf('.');
             final String fileName = originalFile.substring(0, lastIndex);
             final String extension = originalFile.substring(lastIndex + 1);

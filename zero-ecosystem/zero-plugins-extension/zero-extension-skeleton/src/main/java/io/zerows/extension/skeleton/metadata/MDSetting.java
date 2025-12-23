@@ -2,6 +2,7 @@ package io.zerows.extension.skeleton.metadata;
 
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Vertx;
+import io.zerows.epoch.basicore.MDConfig;
 import io.zerows.specification.configuration.HConfig;
 
 import java.util.function.Supplier;
@@ -11,12 +12,12 @@ import java.util.function.Supplier;
  *
  * @author lang : 2025-12-22
  */
-public interface MDSetting<CONFIG> {
+public interface MDSetting<CONFIG extends MDConfig> {
 
     Cc<String, MDSetting<?>> CC_SKELETON = Cc.openThread();
 
     @SuppressWarnings("all")
-    static <T> MDSetting<T> of(final Supplier<MDSetting<T>> constructorFn) {
+    static <T extends MDConfig> MDSetting<T> of(final Supplier<MDSetting<T>> constructorFn) {
         return (MDSetting<T>) CC_SKELETON.pick(constructorFn::get, String.valueOf(constructorFn.hashCode()));
     }
 

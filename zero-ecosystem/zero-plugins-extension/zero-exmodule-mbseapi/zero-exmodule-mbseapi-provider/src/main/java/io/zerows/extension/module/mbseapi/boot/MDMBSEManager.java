@@ -8,8 +8,8 @@ import io.zerows.epoch.management.OCacheConfiguration;
 import io.zerows.extension.module.mbseapi.component.JtMonitor;
 import io.zerows.extension.module.mbseapi.metadata.JtConstant;
 import io.zerows.extension.module.mbseapi.metadata.JtUri;
-import io.zerows.extension.skeleton.metadata.MDModuleActor;
-import io.zerows.extension.skeleton.metadata.ModManager;
+import io.zerows.extension.skeleton.metadata.MDManager;
+import io.zerows.extension.skeleton.metadata.base.MDActorOfModule;
 import io.zerows.platform.constant.VValue;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
@@ -30,44 +30,44 @@ import java.util.stream.Collectors;
  * </pre>
  * 管理器调用结构
  * <pre>
- *     1. {@link MDModuleActor} -> 内置 {@see MDModuleManager}，只能通过 Actor 调用
+ *     1. {@link MDActorOfModule} -> 内置 {@see MDModuleManager}，只能通过 Actor 调用
  *               继承
- *     2. {@link ModMBSEApiActor} -> 内置 {@see ModMBSEManager}，只能通过 Actor 调用
+ *     2. {@link MDMBSEApiActor} -> 内置 {@see ModMBSEManager}，只能通过 Actor 调用
  *
- *     3. 外部：只能通过 {@link ModMBSEApiActor} 调用获取，统一归口
+ *     3. 外部：只能通过 {@link MDMBSEApiActor} 调用获取，统一归口
  *        两个 Manager 都不对外
  * </pre>
  *
  * @author lang : 2025-12-22
  */
 @Slf4j
-public class ModMBSEManager implements ModManager<YmMetamodel> {
-    private static ModMBSEManager INSTANCE;
+public class MDMBSEManager implements MDManager<MDCMetamodel> {
+    private static MDMBSEManager INSTANCE;
     private static final Cc<String, ServiceEnvironment> AMBIENT = Cc.open();
     private static final OCacheConfiguration STORE = OCacheConfiguration.of();
-    private YmMetamodel setting;
+    private MDCMetamodel setting;
     private Class<Axis> axisCls;
     // 监控专用
     private static final AtomicInteger LOG_OPTION = new AtomicInteger(0);
     private final transient JtMonitor monitor = JtMonitor.create(this.getClass());
 
-    private ModMBSEManager() {
+    private MDMBSEManager() {
     }
 
-    public static ModMBSEManager of() {
+    public static MDMBSEManager of() {
         if (INSTANCE == null) {
-            INSTANCE = new ModMBSEManager();
+            INSTANCE = new MDMBSEManager();
         }
         return INSTANCE;
     }
 
     @Override
-    public void setting(final YmMetamodel setting) {
+    public void setting(final MDCMetamodel setting) {
         this.setting = setting;
     }
 
     @Override
-    public YmMetamodel setting() {
+    public MDCMetamodel setting() {
         return this.setting;
     }
 
@@ -77,7 +77,7 @@ public class ModMBSEManager implements ModManager<YmMetamodel> {
     }
 
     /**
-     * 是否启用，若启用则特殊配置 {@link YmMetamodel} 一定不能为 null，此处检查会影响 Dynamic 路由的挂载，若不满足则直接跳过，两处配置
+     * 是否启用，若启用则特殊配置 {@link MDCMetamodel} 一定不能为 null，此处检查会影响 Dynamic 路由的挂载，若不满足则直接跳过，两处配置
      * <pre>
      *     1. vertx.yml 中是否配置 metamodel 的动态路由信息
      *     2. ServiceEnvironment 环境信息检查，若环境信息不通过则直接返回 false
@@ -119,7 +119,7 @@ public class ModMBSEManager implements ModManager<YmMetamodel> {
         if (Objects.isNull(this.setting)) {
             return null;
         }
-        final YmMetamodel.Router router = this.setting.getRouter();
+        final MDCMetamodel.Router router = this.setting.getRouter();
         if (Objects.isNull(router)) {
             log.warn("{} 缺乏 router 配置，无法提取动态路由组件信息！", JtConstant.K_PREFIX_BOOT);
             return null;

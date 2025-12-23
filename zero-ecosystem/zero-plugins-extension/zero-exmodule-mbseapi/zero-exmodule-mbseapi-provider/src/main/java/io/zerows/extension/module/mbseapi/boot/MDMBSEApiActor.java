@@ -6,8 +6,8 @@ import io.zerows.epoch.annotations.Actor;
 import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.extension.module.mbseapi.metadata.JtConstant;
 import io.zerows.extension.skeleton.common.Ke;
-import io.zerows.extension.skeleton.metadata.MDAppModuleActor;
 import io.zerows.extension.skeleton.metadata.MDSetting;
+import io.zerows.extension.skeleton.metadata.base.MDActorOfApp;
 import io.zerows.specification.app.HAmbient;
 import io.zerows.specification.app.HArk;
 import io.zerows.support.fn.Fx;
@@ -28,8 +28,8 @@ import java.util.concurrent.ConcurrentMap;
  */
 @Actor(value = "metamodel", sequence = 1017)
 @Slf4j
-public class ModMBSEApiActor extends MDAppModuleActor {
-    private static final ModMBSEManager MANAGER = ModMBSEManager.of();
+public class MDMBSEApiActor extends MDActorOfApp {
+    private static final MDMBSEManager MANAGER = MDMBSEManager.of();
 
     @Override
     protected String MID() {
@@ -86,12 +86,12 @@ public class ModMBSEApiActor extends MDAppModuleActor {
      * @param configuration 基础配置
      * @param vertxRef      Vertx实例引用
      *
-     * @return 特殊配置对象，实际类型：{@link YmMetamodel}
+     * @return 特殊配置对象，实际类型：{@link MDCMetamodel}
      */
     @Override
     protected Object setConfig(final MDConfiguration configuration, final Vertx vertxRef) {
-        final MDSetting<YmMetamodel> settingFor = MDSetting.of(YmMetamodelSetting::new);
-        final YmMetamodel setting = settingFor.bootstrap(configuration.inSetting(), vertxRef);
+        final MDSetting<MDCMetamodel> settingFor = MDSetting.of(MDSettingMetamodel::new);
+        final MDCMetamodel setting = settingFor.bootstrap(configuration.inSetting(), vertxRef);
 
         // 注册特定配置到管理器中
         MANAGER.setting(setting);

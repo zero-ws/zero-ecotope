@@ -147,7 +147,7 @@ class AtFsDir {
 
 
         // 计算目录名称，相对路径提取名称为绝对路径，内置使用 DocBuilder 进行同步构建。
-        final AtConfig config = AtPin.getConfig();
+        final AtConfigOld config = AtPin.getConfig();
         final String rootPath = config.getStorePath();
 
         String name = storePath.replace(rootPath, VString.EMPTY);

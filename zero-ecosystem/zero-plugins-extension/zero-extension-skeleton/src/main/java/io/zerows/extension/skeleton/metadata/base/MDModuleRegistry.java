@@ -1,4 +1,4 @@
-package io.zerows.extension.skeleton.metadata;
+package io.zerows.extension.skeleton.metadata.base;
 
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;

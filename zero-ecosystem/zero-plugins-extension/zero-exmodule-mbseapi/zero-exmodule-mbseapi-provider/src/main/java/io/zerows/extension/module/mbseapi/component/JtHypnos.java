@@ -2,7 +2,7 @@ package io.zerows.extension.module.mbseapi.component;
 
 import io.zerows.cosmic.plugins.job.JobStore;
 import io.zerows.cosmic.plugins.job.metadata.Mission;
-import io.zerows.extension.module.mbseapi.boot.ModMBSEManager;
+import io.zerows.extension.module.mbseapi.boot.MDMBSEManager;
 import io.zerows.extension.module.mbseapi.boot.ServiceEnvironment;
 import io.zerows.extension.module.mbseapi.metadata.JtJob;
 
@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
  */
 public class JtHypnos implements JobStore {
 
-    private static final ConcurrentMap<String, ServiceEnvironment> ENVS = ModMBSEManager.of().serviceEnvironment();
+    private static final ConcurrentMap<String, ServiceEnvironment> ENVS = MDMBSEManager.of().serviceEnvironment();
 
     @Override
     public JobStore remove(final Mission mission) {

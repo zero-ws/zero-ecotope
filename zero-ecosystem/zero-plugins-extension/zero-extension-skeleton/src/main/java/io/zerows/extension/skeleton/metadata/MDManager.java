@@ -8,7 +8,7 @@ import io.zerows.specification.development.compiled.HBundle;
  *
  * @author lang : 2025-12-22
  */
-public interface ModManager<CONFIG> {
+public interface MDManager<CONFIG> {
 
     void setting(CONFIG config);
 

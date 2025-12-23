@@ -1,4 +1,4 @@
-package io.zerows.extension.skeleton.metadata;
+package io.zerows.extension.skeleton.metadata.base;
 
 import io.r2mo.base.program.R2Vector;
 import io.vertx.core.Future;
@@ -15,14 +15,13 @@ import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.development.compiled.HBundle;
 
 import java.net.URL;
-import java.util.Objects;
 
 /**
  * Extension 模块抽象类，启动过程中用于加载模块的专用配置，构造 {@link MDConfiguration} 对象管理，此对象管理会处理如下事情：
  *
  * @author lang : 2025-11-04
  */
-public abstract class MDModuleActor extends ExAbstractHActor {
+public abstract class MDActorOfModule extends ExAbstractHActor {
 
     /**
      * {@link MDConfiguration} 的核心数据结构和用途
@@ -127,10 +126,8 @@ public abstract class MDModuleActor extends ExAbstractHActor {
 
 
         // 特殊配置：MDSetting 转换基础配置，转换必须是同步行为
-        if (Objects.nonNull(config)) {
-            final Object setting = this.setConfig(configuration, vertxRef);
-            manager.registry(this.getClass(), setting);
-        }
+        final Object setting = this.setConfig(configuration, vertxRef);
+        manager.registry(this.getClass(), setting);
 
         return this.startAsync(configuration, vertxRef);
     }
@@ -142,6 +139,27 @@ public abstract class MDModuleActor extends ExAbstractHActor {
 
     protected abstract String MID();
 
+    /**
+     * 此方法必须详细说明
+     * <pre>
+     *     1. 模块配置来自两个位置：
+     *        vertx.yml -> 启用/禁用、核心系统配置
+     *        如果这份配置没有则直接不启动当前模块，或模块运行不正常
+     *        变量：{@link MDConfiguration#inSetting()}
+     *     2. 业务配置：
+     *        plugins/{mid}/configuration.json -> 模块的业务配置信息
+     *        配置只会影响当前模块的部分业务逻辑
+     *        变量：{@link MDConfiguration#inConfiguration()}
+     * </pre>
+     * 其中 vertx.yml 实际是绑定了 {@link HConfig} 对象的，而业务配置则是绑定的 {@link MDConfiguration}，业务配置中会包含系统配置对象，如果
+     * 系统配置对象没有，则证明当前模块无需此配置，但最少应该启用 extension 基础配置。这两套配置并非所有的配置对象都有所求，所以根据实际启动过程中的
+     * 资源管理来处理，微服务模式下可能部分配置并不需要。
+     *
+     * @param configuration 模块配置
+     * @param vertxRef      Vertx实例
+     *
+     * @return 被转换的特殊配置对象
+     */
     protected Object setConfig(final MDConfiguration configuration, final Vertx vertxRef) {
         return null;
     }

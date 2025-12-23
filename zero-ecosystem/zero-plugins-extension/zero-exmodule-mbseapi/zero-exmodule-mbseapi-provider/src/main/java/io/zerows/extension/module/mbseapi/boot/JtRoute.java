@@ -16,7 +16,7 @@ import java.util.function.Supplier;
  * Function for resolution null dot in conversion
  */
 class JtRoute {
-    private static final ModMBSEManager MANAGER = ModMBSEManager.of();
+    private static final MDMBSEManager MANAGER = MDMBSEManager.of();
 
     static Set<String> toSet(final Supplier<String> supplier) {
         final String inputRequired = supplier.get();
@@ -36,7 +36,7 @@ class JtRoute {
     static String toPath(final HArk ark,
                          final Supplier<String> uriSupplier,
                          final boolean secure,      // Null Pointer if use Boolean
-                         final YmMetamodel config) {
+                         final MDCMetamodel config) {
         /* Whether current api is secure */
         final StringBuilder uri = new StringBuilder();
         /* Get secure path here */

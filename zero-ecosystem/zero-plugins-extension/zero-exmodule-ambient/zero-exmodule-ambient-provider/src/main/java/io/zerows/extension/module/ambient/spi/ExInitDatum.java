@@ -5,9 +5,9 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.UObject;
-import io.zerows.extension.module.ambient.common.AtMsg;
-import io.zerows.extension.module.ambient.boot.AtConfig;
+import io.zerows.extension.module.ambient.boot.AtConfigOld;
 import io.zerows.extension.module.ambient.boot.AtPin;
+import io.zerows.extension.module.ambient.common.AtMsg;
 import io.zerows.extension.skeleton.spi.ExInit;
 import io.zerows.plugins.excel.ExcelActor;
 import io.zerows.plugins.excel.ExcelClient;
@@ -25,7 +25,7 @@ import static io.zerows.extension.module.ambient.boot.At.LOG;
 public class ExInitDatum implements ExInit {
 
     private static final LogOf LOGGER = LogOf.get(ExInitDatum.class);
-    private static final AtConfig CONFIG = AtPin.getConfig();
+    private static final AtConfigOld CONFIG = AtPin.getConfig();
 
     @Override
     public Function<JsonObject, Future<JsonObject>> apply() {
