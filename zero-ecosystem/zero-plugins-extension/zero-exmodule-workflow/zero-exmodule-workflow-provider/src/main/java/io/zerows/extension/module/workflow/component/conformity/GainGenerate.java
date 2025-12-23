@@ -46,7 +46,7 @@ class GainGenerate extends AbstractGain {
         // 2. Connect Camunda
         this.bridgeTask(generated, task, wTask.getTraceId());
 
-        // 3. TraceOrder = original + 1 and generate serial/code
+        // 3. TraceOrder = original + 1 and of serial/code
         generated.setTraceOrder(wTask.getTraceOrder() + 1);
 
         // 4. Set task auditor information

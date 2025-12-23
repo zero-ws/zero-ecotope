@@ -1,16 +1,17 @@
 package io.zerows.extension.module.ambient.boot;
 
+import io.r2mo.io.common.HFS;
 import io.vertx.core.Future;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
+import io.zerows.extension.module.ambient.common.AtConstant;
 import io.zerows.extension.skeleton.spi.ExIo;
 import io.zerows.program.Ux;
-import io.zerows.specification.vital.HFS;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -22,8 +23,6 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-import static io.zerows.extension.module.ambient.boot.At.LOG;
-
 /**
  * The directory data structure should be as following
  * // <pre><code class="json">
@@ -34,11 +33,13 @@ import static io.zerows.extension.module.ambient.boot.At.LOG;
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
 class AtFs {
-    private static final LogOf LOGGER = LogOf.get(AtFs.class);
+
+    private static final MDAmbientManager MANAGER = MDAmbientManager.of();
 
     static Future<JsonObject> fileMeta(final JsonObject appJ) {
-        final AtConfigOld config = AtPin.getConfig();
+        final AtConfig config = MANAGER.config();
         if (Objects.nonNull(config)) {
             appJ.put(KName.STORE_PATH, config.getStorePath());
         }
@@ -90,7 +91,10 @@ class AtFs {
 
                     // Call ExIo `fsUpload`
                     io -> io.fsUpload(directoryId, fileMap)
-                        .compose(removed -> HFS.common().rmAsync(fileMap.keySet()))
+                        .compose(removed -> {
+                            HFS.of().rm(fileMap.keySet());
+                            return Future.succeededFuture(Boolean.TRUE);
+                        })
                         .compose(removed -> Ux.future(remote))
                 )));
         }
@@ -104,8 +108,8 @@ class AtFs {
             return splitInternal(attachment, local -> {
                 final Set<String> files = new HashSet<>();
                 Ut.itJArray(local).forEach(each -> files.add(each.getString(KName.Attachment.FILE_PATH)));
-                HFS.common().rm(files);
-                LOG.File.info(LOGGER, "Deleted Local files: {0}", String.valueOf(files.size()));
+                HFS.of().rm(files);
+                log.info("{} 删除本地文件，数量：{}", AtConstant.K_PREFIX_AMB, files.size());
                 return Ux.future(local);
             }, remote -> splitRun(remote, (directoryId, fileMap) -> Ux.channel(ExIo.class, () -> remote,
 
@@ -147,7 +151,8 @@ class AtFs {
                 dataR.add(item);
             }
         });
-        LOG.File.info(LOGGER, "Split Running: Local = {0}, Remote = {1}", dataL.size(), dataR.size());
+        log.info("{} 数据拆分，目录文件数量：本地 = {}，远程 = {}",
+            AtConstant.K_PREFIX_AMB, dataL.size(), dataR.size());
         final List<Future<JsonArray>> futures = new ArrayList<>();
         if (Ut.isNotNil(dataL)) {
             futures.add(fnLocal.apply(dataL));

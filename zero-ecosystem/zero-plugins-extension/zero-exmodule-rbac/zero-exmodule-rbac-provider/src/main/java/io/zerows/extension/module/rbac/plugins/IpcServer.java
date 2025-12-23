@@ -11,7 +11,7 @@ import io.zerows.extension.skeleton.common.KeIpc;
  */
 public class IpcServer {
     /*
-     * This is specific because of @Inject may generate duplicated
+     * This is specific because of @Inject may of duplicated
      * implementation class in zero system.
      */
 

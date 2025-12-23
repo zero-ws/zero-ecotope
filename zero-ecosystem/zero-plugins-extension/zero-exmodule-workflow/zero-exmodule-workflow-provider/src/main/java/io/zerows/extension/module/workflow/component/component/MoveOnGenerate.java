@@ -24,7 +24,7 @@ public class MoveOnGenerate extends AbstractMoveOn {
          * 2) The Gear will determine the mode from WTransition
          *
          * Here are three parameters
-         * 1. Record        -> The based original WRecord that will be generate todo
+         * 1. Record        -> The based original WRecord that will be of todo
          * 2. JsonObject    -> requestJ that came from input
          * 3. WTransition   -> Transition ( The `to` will be used )
          **/

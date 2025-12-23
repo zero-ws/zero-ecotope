@@ -3,8 +3,8 @@ package io.zerows.epoch.basicore;
 import cn.hutool.core.util.StrUtil;
 import io.r2mo.typed.common.MultiKeyMap;
 import io.vertx.core.json.JsonObject;
-import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.development.compiled.HBundle;
+import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashSet;
@@ -35,8 +35,6 @@ import java.util.concurrent.ConcurrentMap;
  */
 @Slf4j
 public class MDConfiguration {
-    // 主配置 vertx.yml 中的核心配置信息
-    private HConfig launcherMod;
     // configuration.json
     private final JsonObject configurationJ = new JsonObject();
     /**
@@ -89,11 +87,6 @@ public class MDConfiguration {
         return this.name;
     }
 
-    // ---------- 数据提取专用方法
-    public HConfig inSetting() {
-        return this.launcherMod;
-    }
-
     // ---- Boot 扩展专用
     public Set<MDConnect> inConnect() {
         return this.connectMap.values();
@@ -125,6 +118,13 @@ public class MDConfiguration {
         return this.configurationJ;
     }
 
+    public <T> T inConfiguration(final Class<T> configCls) {
+        if (Ut.isNil(this.configurationJ)) {
+            return null;
+        }
+        return Ut.deserialize(this.configurationJ, configCls);
+    }
+
     public Set<String> inFiles() {
         return this.fileSet;
     }
@@ -139,10 +139,6 @@ public class MDConfiguration {
     }
 
     // ------------ 设置配置信息
-    public void addConfig(final HConfig launcherMod) {
-        this.launcherMod = launcherMod;
-    }
-
     public void addShape(final String name, final JsonObject configurationJ) {
         this.name = name;
         this.configurationJ.mergeIn(configurationJ, true);

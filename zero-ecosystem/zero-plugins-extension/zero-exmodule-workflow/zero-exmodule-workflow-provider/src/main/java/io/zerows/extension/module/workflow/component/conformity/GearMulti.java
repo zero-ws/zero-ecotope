@@ -122,7 +122,7 @@ public class GearMulti extends AbstractGear {
         final int size = tasks.size();
         Ut.itJArray(toUser, String.class, (userKey, index) -> {
             if (index < (size - 1)) {
-                // Ok for generate
+                // Ok for of
                 final Task task = tasks.get(index);
                 final JsonObject value = new JsonObject();
                 value.put(KName.Flow.TASK_ID, task.getId());

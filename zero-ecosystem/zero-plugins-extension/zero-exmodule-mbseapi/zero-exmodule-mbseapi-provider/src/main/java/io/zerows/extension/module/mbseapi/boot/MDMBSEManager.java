@@ -3,13 +3,12 @@ package io.zerows.extension.module.mbseapi.boot;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonObject;
 import io.zerows.cortex.sdk.Axis;
-import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.epoch.management.OCacheConfiguration;
 import io.zerows.extension.module.mbseapi.component.JtMonitor;
-import io.zerows.extension.module.mbseapi.metadata.JtConstant;
 import io.zerows.extension.module.mbseapi.metadata.JtUri;
-import io.zerows.extension.skeleton.metadata.MDManager;
-import io.zerows.extension.skeleton.metadata.base.MDActorOfModule;
+import io.zerows.extension.skeleton.common.KeConstant;
+import io.zerows.extension.skeleton.metadata.MDModuleActor;
+import io.zerows.extension.skeleton.metadata.MDModuleManager;
 import io.zerows.platform.constant.VValue;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
@@ -30,7 +29,7 @@ import java.util.stream.Collectors;
  * </pre>
  * 管理器调用结构
  * <pre>
- *     1. {@link MDActorOfModule} -> 内置 {@see MDModuleManager}，只能通过 Actor 调用
+ *     1. {@link MDModuleActor} -> 内置 {@see MDModuleManager}，只能通过 Actor 调用
  *               继承
  *     2. {@link MDMBSEApiActor} -> 内置 {@see ModMBSEManager}，只能通过 Actor 调用
  *
@@ -41,7 +40,7 @@ import java.util.stream.Collectors;
  * @author lang : 2025-12-22
  */
 @Slf4j
-public class MDMBSEManager implements MDManager<MDCMetamodel> {
+public class MDMBSEManager extends MDModuleManager<MDCMetamodel, Boolean> {
     private static MDMBSEManager INSTANCE;
     private static final Cc<String, ServiceEnvironment> AMBIENT = Cc.open();
     private static final OCacheConfiguration STORE = OCacheConfiguration.of();
@@ -52,6 +51,7 @@ public class MDMBSEManager implements MDManager<MDCMetamodel> {
     private final transient JtMonitor monitor = JtMonitor.create(this.getClass());
 
     private MDMBSEManager() {
+        super(MID.BUNDLE_SYMBOLIC_NAME);
     }
 
     public static MDMBSEManager of() {
@@ -59,21 +59,6 @@ public class MDMBSEManager implements MDManager<MDCMetamodel> {
             INSTANCE = new MDMBSEManager();
         }
         return INSTANCE;
-    }
-
-    @Override
-    public void setting(final MDCMetamodel setting) {
-        this.setting = setting;
-    }
-
-    @Override
-    public MDCMetamodel setting() {
-        return this.setting;
-    }
-
-    @Override
-    public MDConfiguration configuration() {
-        return STORE.valueGet(MID.BUNDLE_SYMBOLIC_NAME);
     }
 
     /**
@@ -95,11 +80,11 @@ public class MDMBSEManager implements MDManager<MDCMetamodel> {
             return false;
         }
         if (VValue.ZERO == LOG_OPTION.getAndIncrement()) {
-            log.info("{} 系统监测到动态系统路由组件：{}", JtConstant.K_PREFIX_BOOT, axisCls.getName());
+            log.info("{} 系统监测到动态系统路由组件：{}", KeConstant.K_PREFIX_BOOT, axisCls.getName());
         }
         final JsonObject configuration = STORE.configurationJ(MID.BUNDLE_SYMBOLIC_NAME);
         if (VValue.ONE == LOG_OPTION.getAndIncrement()) {
-            log.info("{} 监测到动态组件核心配置：{}", JtConstant.K_PREFIX_BOOT, configuration);
+            log.info("{} 监测到动态组件核心配置：{}", KeConstant.K_PREFIX_BOOT, configuration);
         }
 
         // 追加监控配置
@@ -121,12 +106,12 @@ public class MDMBSEManager implements MDManager<MDCMetamodel> {
         }
         final MDCMetamodel.Router router = this.setting.getRouter();
         if (Objects.isNull(router)) {
-            log.warn("{} 缺乏 router 配置，无法提取动态路由组件信息！", JtConstant.K_PREFIX_BOOT);
+            log.warn("{} 缺乏 router 配置，无法提取动态路由组件信息！", KeConstant.K_PREFIX_BOOT);
             return null;
         }
         final Class<?> cls = router.getComponent();
         if (!Ut.isImplement(cls, Axis.class)) {
-            log.warn("{} 动态路由组件信息错误，指定的组件 {} 未实现 Axis 接口！", JtConstant.K_PREFIX_BOOT, cls.getName());
+            log.warn("{} 动态路由组件信息错误，指定的组件 {} 未实现 Axis 接口！", KeConstant.K_PREFIX_BOOT, cls.getName());
             return null;
         }
         this.axisCls = (Class<Axis>) cls;

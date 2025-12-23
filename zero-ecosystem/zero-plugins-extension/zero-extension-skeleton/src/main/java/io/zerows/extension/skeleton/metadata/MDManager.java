@@ -8,11 +8,15 @@ import io.zerows.specification.development.compiled.HBundle;
  *
  * @author lang : 2025-12-22
  */
-public interface MDManager<CONFIG> {
+public interface MDManager<YAML, CONFIG> {
 
-    void setting(CONFIG config);
+    void setting(YAML yaml);
 
-    CONFIG setting();
+    YAML setting();
+
+    void config(CONFIG config);
+
+    CONFIG config();
 
     MDConfiguration configuration();
 

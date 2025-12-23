@@ -17,11 +17,10 @@ public interface ExPrerequisite {
     Cc<String, ExPrerequisite> CC_PREREQUISITE = Cc.open();
 
     /*
-     * Initializer generate method.
+     * Initializer of method.
      */
-    static ExPrerequisite generate(final Class<?> clazz) {
+    static ExPrerequisite of(final Class<?> clazz) {
         return CC_PREREQUISITE.pick(() -> Ut.instance(clazz), clazz.getName());
-        // return FnZero.po?l(Pool.PREREQUISITE_POOL, clazz.getName(), () -> Ut.instance(clazz));
     }
 
     /*

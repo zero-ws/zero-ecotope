@@ -10,7 +10,7 @@ import io.vertx.core.json.JsonObject;
  */
 public interface CodeStub {
     /*
-     * Get new authorization code / generate new code
+     * Get new authorization code / of new code
      */
     Future<JsonObject> authorize(String clientId);
 

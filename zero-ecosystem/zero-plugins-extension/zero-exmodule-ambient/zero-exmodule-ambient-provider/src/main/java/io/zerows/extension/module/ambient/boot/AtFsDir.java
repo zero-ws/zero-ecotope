@@ -3,9 +3,9 @@ package io.zerows.extension.module.ambient.boot;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.LogOf;
 import io.zerows.epoch.assembly.DI;
 import io.zerows.epoch.constant.KName;
+import io.zerows.extension.module.ambient.common.AtConstant;
 import io.zerows.extension.module.ambient.serviceimpl.DocBuilder;
 import io.zerows.extension.module.ambient.servicespec.DocBStub;
 import io.zerows.extension.skeleton.common.KeBiz;
@@ -13,16 +13,17 @@ import io.zerows.extension.skeleton.spi.ExIo;
 import io.zerows.platform.constant.VString;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
-
-import static io.zerows.extension.module.ambient.boot.At.LOG;
+import java.util.Objects;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
 class AtFsDir {
-    private static final LogOf LOGGER = LogOf.get(AtFsDir.class);
+    private static final MDAmbientManager MANAGER = MDAmbientManager.of();
     private static final DI PLUGIN = DI.create(AtFs.class);
 
     /**
@@ -147,14 +148,13 @@ class AtFsDir {
 
 
         // 计算目录名称，相对路径提取名称为绝对路径，内置使用 DocBuilder 进行同步构建。
-        final AtConfigOld config = AtPin.getConfig();
+        final AtConfig config = Objects.requireNonNull(MANAGER.config());
         final String rootPath = config.getStorePath();
 
         String name = storePath.replace(rootPath, VString.EMPTY);
         name = Ut.ioPathRoot(name);
-        LOG.File.info(LOGGER, "Zero will re-initialize directory try to process {0}", storePath);
-        LOG.File.info(LOGGER, "The builder parameters: name = {0}, type = {1}, id = {2}",
-            name, type, appId);
+        log.info("{} Zero 将重新初始化目录以尝试处理：{}", AtConstant.K_PREFIX_AMB, storePath);
+        log.info("{} 构建器参数：name = {}, type = {}, id = {}", AtConstant.K_PREFIX_AMB, name, type, appId);
         return builder.initialize(appId, type, name);
     }
 }

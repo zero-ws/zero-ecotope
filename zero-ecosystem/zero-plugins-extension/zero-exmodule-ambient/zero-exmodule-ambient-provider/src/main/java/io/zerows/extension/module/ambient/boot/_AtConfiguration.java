@@ -1,15 +1,10 @@
 package io.zerows.extension.module.ambient.boot;
 
-import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonObject;
 import io.zerows.cortex.extension.HExtension;
 import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.extension.module.ambient.common.AtConstant;
-import io.zerows.extension.module.ambient.exception._80302Exception500InitSpecification;
-import io.zerows.extension.module.ambient.exception._80303Exception500PrerequisiteSpec;
 import io.zerows.extension.skeleton.common.KeMsg;
-import io.zerows.extension.skeleton.spi.ExInit;
-import io.zerows.extension.skeleton.spi.ExPrerequisite;
 import io.zerows.specification.app.HAmbient;
 import io.zerows.support.Ut;
 
@@ -45,24 +40,5 @@ final class AtConfiguration {
 
     static AtConfigOld getConfig() {
         return CONFIG;
-    }
-
-    static ExInit getInit(final Class<?> initClass) {
-        if (Objects.isNull(initClass)) {
-            return null;
-        } else {
-            Fn.jvmKo(!Ut.isImplement(initClass, ExInit.class), _80302Exception500InitSpecification.class, initClass.getName());
-            return ExInit.generate(initClass);
-        }
-    }
-
-    static ExPrerequisite getPrerequisite() {
-        final Class<?> prerequisite = CONFIG.getPrerequisite();
-        if (Objects.isNull(prerequisite)) {
-            return null;
-        } else {
-            Fn.jvmKo(!Ut.isImplement(prerequisite, ExPrerequisite.class), _80303Exception500PrerequisiteSpec.class, prerequisite.getName());
-            return ExPrerequisite.generate(prerequisite);
-        }
     }
 }

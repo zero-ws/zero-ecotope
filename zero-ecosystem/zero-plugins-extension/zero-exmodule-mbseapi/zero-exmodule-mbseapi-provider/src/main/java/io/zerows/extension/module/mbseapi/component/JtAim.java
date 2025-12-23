@@ -5,7 +5,7 @@ import io.vertx.ext.web.RoutingContext;
 import io.zerows.extension.module.mbseapi.metadata.JtUri;
 
 /*
- * JtUri generate useful handler here
+ * JtUri of useful handler here
  */
 public interface JtAim {
     /*

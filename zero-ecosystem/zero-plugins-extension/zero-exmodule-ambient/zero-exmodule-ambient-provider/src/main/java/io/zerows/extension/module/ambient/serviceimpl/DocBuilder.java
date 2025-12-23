@@ -4,30 +4,30 @@ import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.DB;
-import io.zerows.extension.module.ambient.boot.AtConfigOld;
-import io.zerows.extension.module.ambient.boot.AtPin;
+import io.zerows.extension.module.ambient.boot.AtConfig;
+import io.zerows.extension.module.ambient.boot.MDAmbientManager;
+import io.zerows.extension.module.ambient.common.AtConstant;
 import io.zerows.extension.module.ambient.domain.tables.daos.XCategoryDao;
 import io.zerows.extension.module.ambient.servicespec.DocBStub;
 import io.zerows.extension.skeleton.spi.ExArbor;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static io.zerows.extension.module.ambient.boot.At.LOG;
-
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
 public class DocBuilder implements DocBStub {
     private static final Cc<String, ExArbor> CC_ARBOR = Cc.openThread();
-    private static final LogOf LOGGER = LogOf.get(DocReader.class);
+    private static final MDAmbientManager MANAGER = MDAmbientManager.of();
 
     // ------------------------- Document Management Tree -------------------------
     /*
@@ -112,13 +112,12 @@ public class DocBuilder implements DocBStub {
          *      }
          * }
          */
-        final AtConfigOld config = AtPin.getConfig();
+        final AtConfig config = Objects.requireNonNull(MANAGER.config());
         storeRef.put(KName.STORE_PATH, config.getStorePath());
         configuration.put(KName.STORE, storeRef);
 
         final ExArbor arbor = CC_ARBOR.pick(() -> Ut.instance(arborCls), arborCls.getName());
-        // FnZero.po?lThread(POOL_ARBOR, () -> Ut.instance(arborCls), arborCls.getName());
-        LOG.File.info(LOGGER, "Arbor = {0}, Configuration = {1}", arborCls.getName(), configuration.encode());
+        log.info("{} Arbor 组件：{}, 配置：{}", AtConstant.K_PREFIX_AMB, arborCls.getName(), configuration.encode());
         return arbor.generate(input, configuration);
     }
 }

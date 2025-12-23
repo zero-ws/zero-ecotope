@@ -5,8 +5,8 @@ import io.vertx.ext.web.FileUpload;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.EndPoint;
 import io.zerows.epoch.constant.KName;
-import io.zerows.extension.module.ambient.boot.AtConfigOld;
-import io.zerows.extension.module.ambient.boot.AtPin;
+import io.zerows.extension.module.ambient.boot.AtConfig;
+import io.zerows.extension.module.ambient.boot.MDAmbientManager;
 import io.zerows.extension.module.ambient.common.AtConstant;
 import io.zerows.extension.skeleton.common.enums.FileStatus;
 import io.zerows.support.Ut;
@@ -30,6 +30,8 @@ import java.util.UUID;
 @Path("/api")
 public class AttachAgent {
 
+    private static final MDAmbientManager MANAGER = MDAmbientManager.of();
+
     @Path("/file/upload/{identifier}")
     @POST
     @Address(Addr.File.UPLOAD)
@@ -41,7 +43,7 @@ public class AttachAgent {
         final String originalFile = fileUpload.fileName();
         if (Ut.isNotNil(originalFile) && originalFile.contains(".")) {
             // Config Read
-            final AtConfigOld config = AtPin.getConfig();
+            final AtConfig config = MANAGER.config();
             final int lastIndex = originalFile.lastIndexOf('.');
             final String fileName = originalFile.substring(0, lastIndex);
             final String extension = originalFile.substring(lastIndex + 1);

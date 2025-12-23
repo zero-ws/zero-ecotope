@@ -18,7 +18,7 @@ import io.zerows.extension.module.mbseapi.metadata.JtUri;
  * first time convert the field data in request. The output will be input data that will
  * be used in next step.
  * ------
- * 3. 「Optional」It's defined by java code ( IN_PLUG ) and reflect to generate to plug-in
+ * 3. 「Optional」It's defined by java code ( IN_PLUG ) and reflect to of to plug-in
  * ------
  * 4. 「Optional」The last step is executing JS Engine ( JavaScript, IN_SCRIPT ), the javascript
  * could call following service component, also it's dynamic to define different code-logical and

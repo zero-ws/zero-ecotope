@@ -5,6 +5,7 @@ import io.vertx.core.http.HttpMethod;
 import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.mbseapi.metadata.JtConstant;
 import io.zerows.extension.module.mbseapi.metadata.JtUri;
+import io.zerows.extension.skeleton.common.KeConstant;
 import io.zerows.support.Ut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,17 +51,17 @@ public class JtMonitor {
     }
 
     public void receiveData(final String identifier, final JtUri uri) {
-        this.logger.info("{} Api 接口：id = {}, method = {}, path = {}", JtConstant.K_PREFIX_WEB, identifier, uri.method(), uri.path());
-        this.logger.info("{} ----> API 配置：{}", JtConstant.K_PREFIX_WEB, ((JsonObject) Ut.serializeJson(uri.api())).encode());
-        this.logger.info("{} ----> 服务配置：{}", JtConstant.K_PREFIX_WEB, ((JsonObject) Ut.serializeJson(uri.service())).encode());
-        this.logger.info("{} ----> Worker 配置：{}", JtConstant.K_PREFIX_WEB, ((JsonObject) Ut.serializeJson(uri.worker())).encode());
+        this.logger.info("{} Api 接口：id = {}, method = {}, path = {}", KeConstant.K_PREFIX_WEB, identifier, uri.method(), uri.path());
+        this.logger.info("{} ----> API 配置：{}", KeConstant.K_PREFIX_WEB, ((JsonObject) Ut.serializeJson(uri.api())).encode());
+        this.logger.info("{} ----> 服务配置：{}", KeConstant.K_PREFIX_WEB, ((JsonObject) Ut.serializeJson(uri.service())).encode());
+        this.logger.info("{} ----> Worker 配置：{}", KeConstant.K_PREFIX_WEB, ((JsonObject) Ut.serializeJson(uri.worker())).encode());
     }
 
     // ---------------- Ingest
 
     // ---------------- Aim
     public void aimEngine(final HttpMethod method, final String path, final JsonObject data) {
-        this.logger.info("{} Web 请求：`{} {}`，参数：{}", JtConstant.K_PREFIX_WEB, method, path, data.encode());
+        this.logger.info("{} Web 请求：`{} {}`，参数：{}", KeConstant.K_PREFIX_WEB, method, path, data.encode());
     }
 
     public void aimSend(final JsonObject data, final String address) {

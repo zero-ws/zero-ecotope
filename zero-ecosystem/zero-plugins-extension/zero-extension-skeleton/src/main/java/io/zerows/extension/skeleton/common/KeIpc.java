@@ -54,7 +54,7 @@ public interface KeIpc {
             .add("/api/up/flow-queue")                  // zero-wf      流程处理队列
             .add("/api/up/flow-history")                // zero-wf      流程历史队列
             .add("/api/user/search/:identifier")        // zero-rbac    按统一标识符查询用户信息（某一类用户查询）
-            .add("/api/report/single-generate")         // zero-report  生成报表专用
+            .add("/api/report/single-of")         // zero-report  生成报表专用
             ;
     }
 }

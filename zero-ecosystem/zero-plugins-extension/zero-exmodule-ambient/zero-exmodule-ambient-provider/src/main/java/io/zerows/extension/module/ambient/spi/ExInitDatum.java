@@ -2,35 +2,31 @@ package io.zerows.extension.module.ambient.spi;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.UObject;
-import io.zerows.extension.module.ambient.boot.AtConfigOld;
-import io.zerows.extension.module.ambient.boot.AtPin;
-import io.zerows.extension.module.ambient.common.AtMsg;
+import io.zerows.extension.module.ambient.boot.MDAmbientManager;
+import io.zerows.extension.module.ambient.common.AtConstant;
 import io.zerows.extension.skeleton.spi.ExInit;
 import io.zerows.plugins.excel.ExcelActor;
 import io.zerows.plugins.excel.ExcelClient;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static io.zerows.extension.module.ambient.boot.At.LOG;
-
+@Slf4j
 public class ExInitDatum implements ExInit {
-
-    private static final LogOf LOGGER = LogOf.get(ExInitDatum.class);
-    private static final AtConfigOld CONFIG = AtPin.getConfig();
+    private static final MDAmbientManager MANAGER = MDAmbientManager.of();
 
     @Override
     public Function<JsonObject, Future<JsonObject>> apply() {
         return appJson -> {
-            LOG.App.info(LOGGER, AtMsg.INIT_DATUM, appJson.encode());
+            log.info("{} 数据加载，应用配置：{}", AtConstant.K_PREFIX_AMB, appJson.encode());
             return this.doLoading(appJson)
                 /* Extension */
                 .compose(this::doExtension);
@@ -38,17 +34,16 @@ public class ExInitDatum implements ExInit {
     }
 
     public Future<JsonObject> doExtension(final JsonObject appJson) {
-        final ExInit loader = AtPin.getLoader();
+        final ExInit loader = Objects.requireNonNull(MANAGER.config()).ofLoad();
         if (Objects.isNull(loader)) {
             return Ux.future(appJson);
-        } else {
-            return loader.apply().apply(appJson);
         }
+        return loader.apply().apply(appJson);
     }
 
     private Future<JsonObject> doLoading(final JsonObject appJson) {
         /* Datum Loading */
-        final String dataFolder = CONFIG.getDataFolder();
+        final String dataFolder = Objects.requireNonNull(MANAGER.config()).getDataFolder();
         final List<String> files = Ut.ioFiles(dataFolder);
         /* List<Future> */
         final List<Future<JsonObject>> futures = files.stream()
@@ -70,7 +65,7 @@ public class ExInitDatum implements ExInit {
             /* ExcelClient */
             final ExcelClient client = ExcelActor.ofClient();
             client.importAsync(filename, result -> {
-                LOG.App.info(LOGGER, AtMsg.INIT_DATUM_EACH, filename);
+                log.info("{} 数据加载，文件源：{}", AtConstant.K_PREFIX_AMB, filename);
                 if (result.succeeded()) {
                     pre.complete(Ut.endBool(Boolean.TRUE, filename));
                 } else {

@@ -43,7 +43,7 @@ public class TransferStandard extends AbstractMovement implements Transfer {
                 if (wTransition.isRunning()) {
                     /*
                      * Here the `to` tasks is not empty,
-                     * It means here are next steps to generate WTodo.
+                     * It means here are next steps to of WTodo.
                      *
                      * The old comments:
                      * Create new WProcess based join process / task and move
@@ -61,7 +61,7 @@ public class TransferStandard extends AbstractMovement implements Transfer {
                      * java.lang.NullPointerException
                      *      at java.base/java.util.Objects.requireNonNull(Objects.java:221)
                      *      at io.vertx.mod.workflow.operation.component.MoveOnUser.transferAsync(MoveOnUser.java:37)
-                     * Here means the `to` attribute is not null, it should generate many `todo`
+                     * Here means the `to` attribute is not null, it should of many `todo`
                      * Also the record in request should contain values.
                      */
                     final MoveOn move = MoveOn.instance(MoveOnGenerate.class);

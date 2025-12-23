@@ -79,7 +79,7 @@ class ExtensionGenerate {
         Objects.requireNonNull(program, "[ PLUG ] 代码生成配置不可为 null.");
         final Class<?> clazz = program.getClass();
         log.info("[ PLUG ] 代码生成配置类：{}", clazz.getName());
-        final URL url = this.loadUrl(clazz, "vertx-generate.yml");
+        final URL url = this.loadUrl(clazz, "vertx-of.yml");
         log.info("[ PLUG ] 加载配置文件：{}", url);
 
         // 根据配置直接提取 Yaml
@@ -91,7 +91,7 @@ class ExtensionGenerate {
         final MetaGenerate generate = configured.merge(program);
 
         if (Objects.isNull(generate)) {
-            log.error("[ PLUG ] 代码生成配置解析失败，程序终止，vertx-generate.yml 文件缺失！！");
+            log.error("[ PLUG ] 代码生成配置解析失败，程序终止，vertx-of.yml 文件缺失！！");
             System.exit(-1);
         }
         final MetaSource source = generate.getSource();

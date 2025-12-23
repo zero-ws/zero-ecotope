@@ -16,14 +16,13 @@ import java.util.function.Function;
  */
 public interface ExInit {
 
-    Cc<String, ExInit> CC_INIT = Cc.open();
+    Cc<String, ExInit> CC_INIT = Cc.openThread();
 
     /*
-     * Initializer generate method.
+     * Initializer of method.
      */
-    static ExInit generate(final Class<?> clazz) {
-        return CC_INIT.pick(() -> Ut.instance(clazz), clazz.getName()); //
-        // FnZero.po?l(Pool.INIT_POOL, clazz.getName(), () -> Ut.instance(clazz));
+    static ExInit of(final Class<?> clazz) {
+        return CC_INIT.pick(() -> Ut.instance(clazz), clazz.getName());
     }
 
     /*

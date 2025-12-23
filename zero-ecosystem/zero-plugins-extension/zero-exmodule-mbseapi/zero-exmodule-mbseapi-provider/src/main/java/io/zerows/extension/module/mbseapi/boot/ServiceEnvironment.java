@@ -13,9 +13,9 @@ import io.zerows.extension.module.mbseapi.domain.tables.daos.IServiceDao;
 import io.zerows.extension.module.mbseapi.domain.tables.pojos.IApi;
 import io.zerows.extension.module.mbseapi.domain.tables.pojos.IJob;
 import io.zerows.extension.module.mbseapi.domain.tables.pojos.IService;
-import io.zerows.extension.module.mbseapi.metadata.JtConstant;
 import io.zerows.extension.module.mbseapi.metadata.JtJob;
 import io.zerows.extension.module.mbseapi.metadata.JtUri;
+import io.zerows.extension.skeleton.common.KeConstant;
 import io.zerows.platform.exception._40103Exception500ConnectAmbient;
 import io.zerows.program.Ux;
 import io.zerows.specification.app.HApp;
@@ -132,7 +132,7 @@ public class ServiceEnvironment {
         final IServiceDao serviceDao = new IServiceDao(this.database.getConfiguration(), vertx);
         return serviceDao.findManyBySigma(this.condition).compose(services -> {
             this.serviceMap.putAll(Ut.elementZip(services, IService::getKey, service -> service));
-            log.info("{} ---> 服务环境初始化完成！！！数量 = {}", JtConstant.K_PREFIX_BOOT, this.serviceMap.size());
+            log.info("{} ---> 服务环境初始化完成！！！数量 = {}", KeConstant.K_PREFIX_BOOT, this.serviceMap.size());
             return Ux.future(Boolean.TRUE);
         });
     }
@@ -154,7 +154,7 @@ public class ServiceEnvironment {
                         .<JtJob>bind(this.ark)
                     )
                     .forEach(entry -> this.jobs.put(entry.key(), entry));
-                log.info("{} -> 作业环境初始化完成！！！数量 = {}", JtConstant.K_PREFIX_BOOT, this.jobs.size());
+                log.info("{} -> 作业环境初始化完成！！！数量 = {}", KeConstant.K_PREFIX_BOOT, this.jobs.size());
                 return Ux.future(Boolean.TRUE);
             });
         } else {
@@ -178,7 +178,7 @@ public class ServiceEnvironment {
                         /* Job Bind app id directly */
                         .<JtUri>bind(this.ark))
                     .forEach(entry -> this.uris.put(entry.key(), entry));
-                log.info("{} -> 接口环境初始化完成！！！数量 = {}", JtConstant.K_PREFIX_BOOT, this.uris.size());
+                log.info("{} -> 接口环境初始化完成！！！数量 = {}", KeConstant.K_PREFIX_BOOT, this.uris.size());
                 return Ux.future(Boolean.TRUE);
             });
         } else {

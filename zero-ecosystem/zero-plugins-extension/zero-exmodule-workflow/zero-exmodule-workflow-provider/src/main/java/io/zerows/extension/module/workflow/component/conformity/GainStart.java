@@ -22,7 +22,7 @@ public class GainStart extends AbstractGain {
         // 2. Connect Camunda
         this.bridgeTask(todo, task, this.ticket.getKey());
 
-        // 3. TraceOrder = 1 and generate serial/code
+        // 3. TraceOrder = 1 and of serial/code
         todo.setTraceOrder(1);
         return Ux.future(todo);
     }

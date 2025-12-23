@@ -2,12 +2,12 @@ package io.zerows.extension.module.ambient.serviceimpl;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.UObject;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.module.ambient.boot.At;
-import io.zerows.extension.module.ambient.boot.AtPin;
+import io.zerows.extension.module.ambient.boot.MDAmbientManager;
+import io.zerows.extension.module.ambient.common.AtConstant;
 import io.zerows.extension.module.ambient.domain.tables.daos.XAppDao;
 import io.zerows.extension.module.ambient.servicespec.AppStub;
 import io.zerows.extension.module.ambient.servicespec.InitStub;
@@ -17,23 +17,13 @@ import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
 import jakarta.inject.Inject;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
 
-import static io.zerows.extension.module.ambient.boot.At.LOG;
-
-/**
- * ## EmApp initializer Implementation
- *
- * Please refer {@link InitStub}
- *
- * @author <a href="http://www.origin-x.cn">Lang</a>
- */
+@Slf4j
 public class InitService implements InitStub {
-    /**
-     * Zero standard logger of {@link LogOf} instance.
-     */
-    private static final LogOf LOGGER = LogOf.get(InitService.class);
+    private static final MDAmbientManager MANAGER = MDAmbientManager.of();
     /**
      * Injection for {@link AppStub}
      */
@@ -42,7 +32,6 @@ public class InitService implements InitStub {
 
     /**
      * 「Async」( Creation ) This api is for application initialization at first time.
-     *
      * Related Interface: {@link ExInit}
      *
      * @param appId {@link java.lang.String} The application primary key that stored in `KEY` field of `X_APP`.
@@ -69,15 +58,6 @@ public class InitService implements InitStub {
             .compose(Fx.ofJObject(KName.App.LOGO));
     }
 
-    /**
-     * 「Async」( Edition ) This api is for application initialization at any time after 1st.
-     *
-     * Related Interface: {@link ExInit}
-     *
-     * @param appName {@link java.lang.String} The application name that stored in `NAME` field of `X_APP`.
-     *
-     * @return {@link io.vertx.core.Future}<{@link io.vertx.core.json.JsonObject}>
-     */
     @Override
     public Future<JsonObject> initEdition(final String appName) {
         return this.initModeling(appName)
@@ -85,37 +65,18 @@ public class InitService implements InitStub {
             .compose(At.initData().apply());
     }
 
-    /**
-     * 「Async」Pre-Workflow before initialization when call this method.
-     *
-     * Related Interface: {@link ExPrerequisite}
-     *
-     * @param appName {@link java.lang.String} The application name that stored in `NAME` field of `X_APP`.
-     *
-     * @return {@link io.vertx.core.Future}<{@link io.vertx.core.json.JsonObject}>
-     */
     @Override
     public Future<JsonObject> prerequisite(final String appName) {
         /* Prerequisite Extension */
-        final ExPrerequisite prerequisite = AtPin.getPrerequisite();
+        final ExPrerequisite prerequisite = Objects.requireNonNull(MANAGER.config()).ofPre();
         if (Objects.isNull(prerequisite)) {
-            LOG.Init.info(LOGGER, "`Prerequisite` configuration is null");
+            log.info("{} `ExPrerequisite` 组件未配置：null", AtConstant.K_PREFIX_AMB);
             return Ux.future(new JsonObject());
-        } else {
-            /*
-             * Prerequisite for initialization
-             */
-            return prerequisite.prepare(appName);
         }
+
+        return prerequisite.prepare(appName);
     }
 
-    /**
-     * 「Async」( Modeling Only ) This api is new for modeling initialization.
-     *
-     * @param appName {@link java.lang.String} The application name that stored in `NAME` field of `X_APP`.
-     *
-     * @return {@link io.vertx.core.Future}<{@link io.vertx.core.json.JsonObject}>
-     */
     @Override
     public Future<JsonObject> initModeling(final String appName) {
         return this.initModeling(appName, null);
@@ -144,36 +105,17 @@ public class InitService implements InitStub {
         return Ux.future(combined);
     }
 
-    /**
-     * 「Async」Combine `X_APP` and `X_SOURCE`, mount `source` attribute to application json.
-     *
-     * @param appJson {@link io.vertx.core.json.JsonObject} Input application json here.
-     *
-     * @return {@link io.vertx.core.Future}<{@link io.vertx.core.json.JsonObject}>
-     */
     private Future<JsonObject> initCombine(final JsonObject appJson) {
         return this.stub.fetchSource(appJson.getString(KName.KEY))
             .compose(source -> UObject.create(appJson).append(KName.SOURCE, source).toFuture());
     }
 
-    /**
-     * 「Async」Call `initializer` that defined in our configuration file.
-     *
-     * @param input {@link io.vertx.core.json.JsonObject} Input parameters related to {@link ExInit}
-     *
-     * @return {@link io.vertx.core.Future}<{@link io.vertx.core.json.JsonObject}>
-     */
     private Future<JsonObject> initDefined(final JsonObject input) {
-        final ExInit initializer = AtPin.getInit();
+        final ExInit initializer = Objects.requireNonNull(MANAGER.config()).ofInit();
         if (Objects.isNull(initializer)) {
-            LOG.Init.info(LOGGER, "`Init` configuration is null");
+            log.info("{} `Init` 组件未配置，null", AtConstant.K_PREFIX_AMB);
             return Ux.future(input);
-        } else {
-            /*
-             * Extension for initialization
-             * Will call initializer method, it's implemented Init.class ( Interface )
-             *  */
-            return initializer.apply().apply(input);
         }
+        return initializer.apply().apply(input);
     }
 }

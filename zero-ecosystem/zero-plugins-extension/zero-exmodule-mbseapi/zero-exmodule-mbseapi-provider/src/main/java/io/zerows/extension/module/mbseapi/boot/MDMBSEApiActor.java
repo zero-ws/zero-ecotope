@@ -3,11 +3,9 @@ package io.zerows.extension.module.mbseapi.boot;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.zerows.epoch.annotations.Actor;
-import io.zerows.epoch.basicore.MDConfiguration;
-import io.zerows.extension.module.mbseapi.metadata.JtConstant;
 import io.zerows.extension.skeleton.common.Ke;
-import io.zerows.extension.skeleton.metadata.MDSetting;
-import io.zerows.extension.skeleton.metadata.base.MDActorOfApp;
+import io.zerows.extension.skeleton.common.KeConstant;
+import io.zerows.extension.skeleton.metadata.MDModuleActor;
 import io.zerows.specification.app.HAmbient;
 import io.zerows.specification.app.HArk;
 import io.zerows.support.fn.Fx;
@@ -28,8 +26,7 @@ import java.util.concurrent.ConcurrentMap;
  */
 @Actor(value = "metamodel", sequence = 1017)
 @Slf4j
-public class MDMBSEApiActor extends MDActorOfApp {
-    private static final MDMBSEManager MANAGER = MDMBSEManager.of();
+public class MDMBSEApiActor extends MDModuleActor {
 
     @Override
     protected String MID() {
@@ -45,9 +42,9 @@ public class MDMBSEApiActor extends MDActorOfApp {
         final ConcurrentMap<String, HArk> arkMap = ambient.app();
 
         // 应用数量统计
-        log.info("{} HAmbient 在环境中检测到 {} 应用", JtConstant.K_PREFIX_BOOT, arkMap.size());
+        log.info("{} HAmbient 在环境中检测到 {} 应用", KeConstant.K_PREFIX_BOOT, arkMap.size());
         if (arkMap.isEmpty()) {
-            log.warn("{} HAmbient 环境配置有误，跳过 Metamodel 模块初始化！", JtConstant.K_PREFIX_BOOT);
+            log.warn("{} HAmbient 环境配置有误，跳过 Metamodel 模块初始化！", KeConstant.K_PREFIX_BOOT);
             return Future.succeededFuture(Boolean.TRUE);
         }
 
@@ -58,43 +55,26 @@ public class MDMBSEApiActor extends MDActorOfApp {
                 // 没有 Ok 的场景下 environment 是不可以执行初始化的
                 futureMap.put(appId, environment.init(vertxRef));
             } else {
-                log.warn("{} 应用 {} 的 ServiceEnvironment 配置不完整，跳过初始化！", JtConstant.K_PREFIX_BOOT, appId);
+                log.warn("{} 应用 {} 的 ServiceEnvironment 配置不完整，跳过初始化！", KeConstant.K_PREFIX_BOOT, appId);
             }
         });
         return Fx.combineM(futureMap).compose(processed -> {
-            MANAGER.serviceEnvironment(processed);
-            log.info("{} ServiceEnvironment 初始化完成！", JtConstant.K_PREFIX_BOOT);
+            final MDMBSEManager manager = this.manager();
+            manager.serviceEnvironment(processed);
+            log.info("{} ServiceEnvironment 初始化完成！", KeConstant.K_PREFIX_BOOT);
             return Future.succeededFuture(Boolean.TRUE);
         });
     }
 
-    /**
-     * 转换主配置中的特殊部分
-     * <pre>
-     *     metamodel:
-     *       router:
-     *         path:
-     *         component:
-     *       deployment:
-     *         worker:
-     *           instances:
-     *         agent:
-     *           instances:
-     * </pre>
-     * 这个步骤一定会在 {@link MDConfiguration} 配置初始化完成之后执行
-     *
-     * @param configuration 基础配置
-     * @param vertxRef      Vertx实例引用
-     *
-     * @return 特殊配置对象，实际类型：{@link MDCMetamodel}
-     */
     @Override
-    protected Object setConfig(final MDConfiguration configuration, final Vertx vertxRef) {
-        final MDSetting<MDCMetamodel> settingFor = MDSetting.of(MDSettingMetamodel::new);
-        final MDCMetamodel setting = settingFor.bootstrap(configuration.inSetting(), vertxRef);
+    @SuppressWarnings("unchecked")
+    protected MDMBSEManager manager() {
+        return MDMBSEManager.of();
+    }
 
-        // 注册特定配置到管理器中
-        MANAGER.setting(setting);
-        return setting;
+    @Override
+    @SuppressWarnings("unchecked")
+    protected Class<MDCMetamodel> typeOfMDC() {
+        return MDCMetamodel.class;
     }
 }

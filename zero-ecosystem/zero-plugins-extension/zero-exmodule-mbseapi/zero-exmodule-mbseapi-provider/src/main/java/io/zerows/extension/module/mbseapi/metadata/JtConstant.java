@@ -25,7 +25,5 @@ public interface JtConstant {
 
     String BUNDLE_SYMBOLIC_NAME = "zero-extension-mbse-action";
 
-    String K_PREFIX_BOOT = "[ XMOD ] ( Boot )";
     String K_PREFIX_JET = "[ XMOD ] ( Jet )";
-    String K_PREFIX_WEB = "[ XMOD ] ( Web )";
 }

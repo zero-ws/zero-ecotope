@@ -1,9 +1,11 @@
-package io.zerows.extension.skeleton.metadata.base;
+package io.zerows.extension.skeleton.metadata;
 
 import io.r2mo.base.program.R2Vector;
+import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.basicore.MDConfig;
 import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.epoch.basicore.MDConnect;
 import io.zerows.epoch.basicore.MDEntity;
@@ -11,17 +13,50 @@ import io.zerows.epoch.basicore.MDId;
 import io.zerows.epoch.basicore.MDMeta;
 import io.zerows.epoch.basicore.MDWorkflow;
 import io.zerows.extension.skeleton.boot.ExAbstractHActor;
+import io.zerows.extension.skeleton.common.KeConstant;
+import io.zerows.specification.app.HAmbient;
+import io.zerows.specification.app.HArk;
+import io.zerows.specification.configuration.HActor;
 import io.zerows.specification.configuration.HConfig;
+import io.zerows.specification.configuration.HRegistry;
 import io.zerows.specification.development.compiled.HBundle;
+import io.zerows.support.Ut;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.URL;
+import java.util.Objects;
 
 /**
  * Extension 模块抽象类，启动过程中用于加载模块的专用配置，构造 {@link MDConfiguration} 对象管理，此对象管理会处理如下事情：
+ * <pre>
+ *     1. 由于 {@link HRegistry} 已经完成了 {@link HAmbient} 的初始化，所以此处无需处理应用环境
+ *        --> 默认开始启动模块中的 {@link HActor} 时，整个应用环境已经就绪
+ *     2. 扩展模块直接从此处获取模块信息，提供统一的生命周期接口来完成模块的核心启停动作
+ *        --> Manager 初始化
+ *        --> Configuration 配置构造：包括 Yaml 和 Json 配置
+ *        --> {@link MDModuleRegistry} 构造当前 {@link HAmbient}
+ *     3. 根据配置类型执行配置绑定操作，在 Manager 构造过程中完成
+ *        {@link HAmbient} 自带多应用环境，内置 key = {@link HArk} 的应用映射关系
+ * </pre>
+ * 子类提供的支撑和选择
+ * <pre>
+ *     1. 子类必须实现 Manager 对象
+ *        -> 内置管理所有配置
+ *           {@link MDCOnfiguration}
+ *           Yaml Configuration         -> 核心配置
+ *           Configuration              -> 业务配置
+ *     2. 子类的模块标识符 MID
+ *        -> 用于标识当前模块
+ *     3. 子类可选实现配置类型
+ *        -> typeOfConfiguration        -> 业务配置类型
+ *        -> typeOfMDC                  -> 核心配置类型
+ * </pre>
  *
  * @author lang : 2025-11-04
  */
-public abstract class MDActorOfModule extends ExAbstractHActor {
+@SuppressWarnings("all")
+public abstract class MDModuleActor extends ExAbstractHActor {
 
     /**
      * {@link MDConfiguration} 的核心数据结构和用途
@@ -117,54 +152,99 @@ public abstract class MDActorOfModule extends ExAbstractHActor {
      */
     @Override
     protected Future<Boolean> startAsync(final HConfig config, final Vertx vertxRef) {
-        this.vLog("启动扩展模块：{}", this.MID());
-        final MDModuleManager manager = MDModuleManager.of(this.MID());
+        // 1. 构造 Manager
+        final MDModuleManager manager = CC_MANAGER.pick(this::manager, this.getClass());
+        Objects.requireNonNull(manager, "模块管理器不可为空，请检查模块实现：" + this.getClass().getName());
+        this.vLog("模块管理器：{} -> {}", this.MID(), manager.getClass().getName());
 
 
-        // 标准配置：创建一个新的 MDConfiguration
-        final MDConfiguration configuration = manager.registry(config);
+        // 2. 绑定配置
+        final Object setting = manager.setting();
+        if (Objects.isNull(setting)) {
+            this.configure(manager, config);
+        }
+        final Object configurationT = manager.config();
+        if (Objects.isNull(configurationT)) {
+            this.configure(manager);
+        }
 
 
-        // 特殊配置：MDSetting 转换基础配置，转换必须是同步行为
-        final Object setting = this.setConfig(configuration, vertxRef);
-        manager.registry(this.getClass(), setting);
-
-        return this.startAsync(configuration, vertxRef);
+        // 3. 构造 HAmbient 环境特殊方法
+        final MDModuleRegistry registry = MDModuleRegistry.of(this.MID());
+        return registry.withAmbient(config, vertxRef).compose(ambient -> {
+            Objects.requireNonNull(ambient);
+            // 此处 withAmbient 有注册过程，替换原始的 Pin.configure 方法的核心逻辑
+            return this.startAsync(ambient, vertxRef);
+        });
     }
 
-    protected Future<Boolean> startAsync(final MDConfiguration configuration, final Vertx vertxRef) {
+    private static final Cc<Class<?>, MDModuleManager> CC_MANAGER = Cc.open();
+
+    // ----- 子类附加实现的方法
+    protected Future<Boolean> startAsync(final HAmbient ambient, final Vertx vertxRef) {
         // 子类实现，若有特殊模块信息则覆盖此方法
         return Future.succeededFuture(Boolean.TRUE);
     }
 
+    // ----- 子类必须实现的方法
     protected abstract String MID();
 
-    /**
-     * 此方法必须详细说明
-     * <pre>
-     *     1. 模块配置来自两个位置：
-     *        vertx.yml -> 启用/禁用、核心系统配置
-     *        如果这份配置没有则直接不启动当前模块，或模块运行不正常
-     *        变量：{@link MDConfiguration#inSetting()}
-     *     2. 业务配置：
-     *        plugins/{mid}/configuration.json -> 模块的业务配置信息
-     *        配置只会影响当前模块的部分业务逻辑
-     *        变量：{@link MDConfiguration#inConfiguration()}
-     * </pre>
-     * 其中 vertx.yml 实际是绑定了 {@link HConfig} 对象的，而业务配置则是绑定的 {@link MDConfiguration}，业务配置中会包含系统配置对象，如果
-     * 系统配置对象没有，则证明当前模块无需此配置，但最少应该启用 extension 基础配置。这两套配置并非所有的配置对象都有所求，所以根据实际启动过程中的
-     * 资源管理来处理，微服务模式下可能部分配置并不需要。
-     *
-     * @param configuration 模块配置
-     * @param vertxRef      Vertx实例
-     *
-     * @return 被转换的特殊配置对象
-     */
-    protected Object setConfig(final MDConfiguration configuration, final Vertx vertxRef) {
+    @SuppressWarnings("all")
+    protected <M extends MDModuleManager> M manager() {
         return null;
     }
 
-    protected static <T> T getConfig(final String mid, final Class<?> key) {
-        return MDModuleManager.of(mid).getConfig(key);
+    // ----- 子类可选的方法
+    protected <C extends MDConfig> Class<C> typeOfConfiguration() {
+        return null;
+    }
+
+    protected <Y extends MDConfig> Class<Y> typeOfMDC() {
+        return null;
+    }
+
+    private Logger log() {
+        return LoggerFactory.getLogger(this.getClass());
+    }
+
+    private void configure(final MDModuleManager manager) {
+        // --> 业务配置
+        final MDConfiguration configuration = manager.configuration();
+        if (Objects.isNull(configuration)) {
+            return;
+        }
+        final JsonObject configurationJ = configuration.inConfiguration();
+        if (Ut.isNil(configurationJ)) {
+            return;
+        }
+
+        final Class<?> clsConfig = this.typeOfConfiguration();
+        if (Objects.isNull(clsConfig)) {
+            return;
+        }
+
+        final Object instance = Ut.deserialize(configurationJ, clsConfig);
+        if (Objects.nonNull(instance)) {
+            this.log().info("{} --- \uD83D\uDDDC️ JSON 业务配置：{}", KeConstant.K_PREFIX_BOOT, instance.getClass());
+            manager.config(instance);
+        }
+    }
+
+    private void configure(final MDModuleManager manager, final HConfig config) {
+        // --> 核心配置
+        if (Objects.isNull(config) || Ut.isNil(config.options())) {
+            return;
+        }
+        final Class<?> clsMDC = this.typeOfMDC();
+        if (Objects.isNull(clsMDC)) {
+            return;
+        }
+        // 反序列化
+        final JsonObject options = config.options();
+        final Object instance = Ut.deserialize(options, clsMDC);
+        if (Objects.nonNull(instance)) {
+            this.log().info("{} --- \uD83D\uDDDC️ YAML 核心配置：{}", KeConstant.K_PREFIX_BOOT, instance.getClass());
+            manager.setting(instance);
+        }
     }
 }

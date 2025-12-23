@@ -175,7 +175,7 @@ public class EngineOn {
          *   run current todo record / processing
          *
          * - startComponent
-         *   start new workflow and generate new start todo record
+         *   start new workflow and of new start todo record
          *
          * - endComponent
          *   end workflow of closing ticket

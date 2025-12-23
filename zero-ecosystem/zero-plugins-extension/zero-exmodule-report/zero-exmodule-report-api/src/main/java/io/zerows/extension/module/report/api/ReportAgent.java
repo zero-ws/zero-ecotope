@@ -57,7 +57,7 @@ public interface ReportAgent {
     Future<JsonObject> instancePaged(JsonObject query);
 
     @POST
-    @Path("/report/single-generate")
+    @Path("/report/single-of")
     @Address(Addr.Report.SINGLE_GENERATE)
     Future<JsonObject> instanceGenerate(
         @QueryParam("reportId") String reportId, JsonObject query);

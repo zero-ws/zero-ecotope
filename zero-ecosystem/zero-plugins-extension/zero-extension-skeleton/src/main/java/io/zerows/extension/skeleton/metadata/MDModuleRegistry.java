@@ -1,4 +1,4 @@
-package io.zerows.extension.skeleton.metadata.base;
+package io.zerows.extension.skeleton.metadata;
 
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
@@ -6,6 +6,7 @@ import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.epoch.management.OCacheConfiguration;
+import io.zerows.extension.skeleton.common.KeConstant;
 import io.zerows.platform.metadata.KPivot;
 import io.zerows.specification.app.HAmbient;
 import io.zerows.specification.app.HApp;
@@ -13,6 +14,8 @@ import io.zerows.specification.app.HArk;
 import io.zerows.specification.configuration.HActor;
 import io.zerows.specification.configuration.HConfig;
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.Objects;
 
 /**
  * 模块注册中心，用于原始流程中的 Electy 对比执行，当前扩展模块注册器只能在子类中调用
@@ -71,22 +74,29 @@ public class MDModuleRegistry {
      *     2. 多租户管理平台
      *     3. 多语言管理平台
      * </pre>
+     * 此处需要追加一个流程就是 {@link HAmbient} 只会初始化一次，一旦初始化成功完成之后，就只执行读取操作，不会重复注册，通常
+     * <pre>
+     *     1. 单个应用启动时会执行初始化
+     *     2. 单个服务（微服务）启动时会执行初始化
+     * </pre>
      *
      * @param config   配置
      * @param vertxRef Vertx实例引用
      *
      * @return 多个应用容器环境
      */
-    public Future<Boolean> afterApp(final HConfig config, final Vertx vertxRef) {
-        final KPivot<Vertx> pivot = KPivot.of(vertxRef);
-        return pivot.registryAsync(config)
-            .compose(arkSet -> Future.succeededFuture(Boolean.TRUE));
-    }
+    public Future<HAmbient> withAmbient(final HConfig config, final Vertx vertxRef) {
+        final HAmbient ambient = KPivot.running();
+        if (Objects.nonNull(ambient)) {
+            return Future.succeededFuture(ambient);
+        }
 
-    public HAmbient withRegistry() {
         final OCacheConfiguration store = OCacheConfiguration.of();
         final JsonObject configurationJ = store.configurationJ(this.mid);
-        log.info("[ XMOD ] ( Mod ) 配置数据加载：{}", configurationJ.encode());
-        return KPivot.running();
+        log.info("{} 配置数据加载：{}", KeConstant.K_PREFIX_BOOT, configurationJ.encode());
+
+        final KPivot<Vertx> pivot = KPivot.of(vertxRef);
+        return pivot.registryAsync(config)
+            .compose(arkSet -> Future.succeededFuture(KPivot.running()));
     }
 }

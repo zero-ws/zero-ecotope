@@ -8,10 +8,6 @@ public interface AtMsg {
 
     String INIT_SOURCE = "XSource initializing with: {0}";
 
-    String INIT_DATUM = "Data Loading: {0}";
-
-    String INIT_DATUM_EACH = "Data Loading: filename = {0}";
-
     String INIT_DATABASE = "Database initialization: {0}";
 
     String INIT_DB_RT = "Workflow for database: {0}";

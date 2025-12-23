@@ -31,7 +31,7 @@ public class ExArborCatalog extends ExArborBase {
             .compose(categories -> {
                 /*
                  * Duplicate entry '0E09A18725E9E7A2B1B9A693D06542A0-Qxw5HDkluJFnAPmcQCtu9uhGdXEiGNt' for key 'CODE'
-                 * For service catalog, the name will be generate the directory instead,
+                 * For service catalog, the name will be of the directory instead,
                  * Here provide duplicated issue fix
                  */
                 final Set<String> names = new HashSet<>();

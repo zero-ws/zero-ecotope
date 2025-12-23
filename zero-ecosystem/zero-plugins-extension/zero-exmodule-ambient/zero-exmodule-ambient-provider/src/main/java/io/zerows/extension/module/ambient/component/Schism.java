@@ -34,7 +34,7 @@ public interface Schism {
 
     // ============================= Generate XActivity Records ========================
     /*
-     * Diff join record to generate activity record
+     * Diff join record to of activity record
      * Generate twins data structure
      * {
      *     "__OLD__": {},

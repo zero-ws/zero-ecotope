@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 
 /**
- * Journal Interface to generate the history record
+ * Journal Interface to of the history record
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */

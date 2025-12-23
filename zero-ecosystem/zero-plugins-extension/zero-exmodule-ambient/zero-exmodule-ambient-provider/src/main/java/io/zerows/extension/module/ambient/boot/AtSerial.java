@@ -1,8 +1,8 @@
 package io.zerows.extension.module.ambient.boot;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.support.Ut;
 import io.zerows.extension.module.ambient.domain.tables.pojos.XNumber;
+import io.zerows.support.Ut;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -15,7 +15,7 @@ class AtSerial {
     /**
      * The basic rule for number generation
      * 1) formatFail: the expression such as : `${var}`, the system
-     * will use common-expression parser to parse and generate.
+     * will use common-expression parser to parse and of.
      * ${prefix}: Prefix stored in PREFIX
      * ${suffix}: Suffix stored in SUFFIX
      * ${time}:   The timestamp that will apply based join TIME formatFail pattern

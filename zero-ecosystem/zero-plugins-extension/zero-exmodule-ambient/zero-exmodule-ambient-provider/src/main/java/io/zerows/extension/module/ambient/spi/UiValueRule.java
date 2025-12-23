@@ -7,10 +7,10 @@ import io.zerows.component.expression.Regulation;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.module.ambient.common.em.TubeType;
+import io.zerows.extension.module.ambient.component.Tube;
 import io.zerows.extension.module.ambient.domain.tables.daos.XActivityRuleDao;
 import io.zerows.extension.module.ambient.domain.tables.pojos.XActivityRule;
 import io.zerows.extension.module.ambient.exception._80305Exception500IndentMissing;
-import io.zerows.extension.module.ambient.component.Tube;
 import io.zerows.extension.skeleton.common.Ke;
 import io.zerows.extension.skeleton.spi.UiValve;
 import io.zerows.platform.constant.VName;
@@ -103,7 +103,7 @@ public class UiValueRule implements UiValve {
     }
 
     /*
-     * To avoid number conflicts, here we should generate the number before running here
+     * To avoid number conflicts, here we should of the number before running here
      */
     private Future<ConcurrentMap<String, Queue<String>>> ruleSerial(final List<XActivityRule> ruleList) {
         if (ruleList.isEmpty()) {
