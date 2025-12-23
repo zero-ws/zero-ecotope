@@ -1,7 +1,7 @@
 package io.zerows.extension.module.workflow.component.camunda;
 
 import io.r2mo.function.Fn;
-import io.zerows.extension.module.workflow.boot.WfPin;
+import io.zerows.extension.module.workflow.boot.Wf;
 import io.zerows.extension.module.workflow.exception._80600Exception404ProcessMissing;
 import io.zerows.extension.module.workflow.metadata.WfPool;
 import org.camunda.bpm.engine.HistoryService;
@@ -22,7 +22,7 @@ public abstract class AbstractIo<I> implements Io<I> {
     public ProcessDefinition inProcess(final String idOrKey) {
         Objects.requireNonNull(idOrKey);
         final ProcessDefinition result = WfPool.CC_DEFINITION.pick(() -> {
-            final RepositoryService service = WfPin.camundaRepository();
+            final RepositoryService service = Wf.camundaRepository();
             /*
              * Fetch ProcessDefinition by two dim:
              * 1) By id first
@@ -68,14 +68,14 @@ public abstract class AbstractIo<I> implements Io<I> {
 
     @Override
     public ProcessInstance inInstance(final String instanceId) {
-        final RuntimeService service = WfPin.camundaRuntime();
+        final RuntimeService service = Wf.camundaRuntime();
         return service.createProcessInstanceQuery()
             .processInstanceId(instanceId).singleResult();
     }
 
     @Override
     public HistoricProcessInstance inHistoric(final String instanceId) {
-        final HistoryService service = WfPin.camundaHistory();
+        final HistoryService service = Wf.camundaHistory();
         return service.createHistoricProcessInstanceQuery()
             .processInstanceId(instanceId).singleResult();
     }

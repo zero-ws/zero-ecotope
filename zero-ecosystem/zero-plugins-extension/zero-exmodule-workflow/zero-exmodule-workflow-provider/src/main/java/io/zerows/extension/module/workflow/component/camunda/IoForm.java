@@ -3,7 +3,7 @@ package io.zerows.extension.module.workflow.component.camunda;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.extension.module.workflow.boot.WfPin;
+import io.zerows.extension.module.workflow.boot.Wf;
 import io.zerows.extension.module.workflow.common.WfConstant;
 import io.zerows.platform.constant.VString;
 import io.zerows.program.Ux;
@@ -25,7 +25,7 @@ class IoForm extends AbstractIo<JsonObject> {
     @Override
     public Future<JsonObject> start(final ProcessDefinition definition) {
         Objects.requireNonNull(definition);
-        final FormService formService = WfPin.camundaForm();
+        final FormService formService = Wf.camundaForm();
         final StartFormData startForm = formService.getStartFormData(definition.getId());
         Objects.requireNonNull(startForm);
         /*

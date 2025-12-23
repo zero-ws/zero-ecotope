@@ -4,7 +4,6 @@ package io.zerows.extension.module.workflow.common;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 public interface WfConstant {
-    String BUNDLE_SYMBOLIC_NAME = "zero-extension-runtime-workflow";
 
     String FOLDER_ROOT = "workflow";
 
@@ -13,4 +12,6 @@ public interface WfConstant {
     String CODE_HISTORY = "workflow.history";
 
     String CODE_CATALOG = "zero.service.catalog";
+
+    String K_PREFIX_WF = "[ XMOD ] ( WF )";
 }

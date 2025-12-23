@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.DB;
-import io.zerows.extension.module.workflow.boot.WfPin;
+import io.zerows.extension.module.workflow.boot.Wf;
 import io.zerows.extension.module.workflow.common.WfMsg;
 import io.zerows.extension.module.workflow.common.em.TodoStatus;
 import io.zerows.extension.module.workflow.domain.tables.daos.WTodoDao;
@@ -32,7 +32,7 @@ public class TodoService implements TodoStub {
         /*
          * Get by type
          */
-        final JsonObject defaultTodo = WfPin.getTodo(type);
+        final JsonObject defaultTodo = Wf.getTodo(type);
         final JsonObject inputData = data.copy();
         if (Objects.nonNull(defaultTodo)) {
             /*

@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * @author lang : 2025-12-16
  */
-@Actor(value = "extension", sequence = 1017, configured = false)
+@Actor(value = "extension", sequence = 1231, configured = false)
 @Slf4j
 public class MDUIActor extends MDModuleActor {
     @Override

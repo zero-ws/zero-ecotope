@@ -3,10 +3,12 @@ package io.zerows.extension.module.workflow.component.deployment;
 import io.vertx.core.Future;
 import io.zerows.epoch.basicore.MDWorkflow;
 import io.zerows.epoch.constant.KWeb;
-import io.zerows.extension.module.workflow.boot.WfPin;
+import io.zerows.extension.module.workflow.boot.Wf;
 import io.zerows.extension.module.workflow.plugins.FlowSequenceListener;
+import io.zerows.extension.skeleton.common.KeConstant;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.RepositoryService;
 import org.camunda.bpm.engine.repository.Deployment;
 import org.camunda.bpm.engine.repository.DeploymentBuilder;
@@ -19,13 +21,12 @@ import org.camunda.bpm.model.bpmn.instance.camunda.CamundaExecutionListener;
 import java.util.Collection;
 import java.util.Objects;
 
-import static io.zerows.extension.module.workflow.boot.Wf.LOG;
-
 ;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
 class DeployBpmnService implements DeployOn {
     private final transient DeploymentBuilder builder;
     private final transient DeployOn formStub;
@@ -33,7 +34,7 @@ class DeployBpmnService implements DeployOn {
 
     DeployBpmnService(final MDWorkflow workflow) {
         // DeploymentBuilder create
-        final RepositoryService repository = WfPin.camundaRepository();
+        final RepositoryService repository = Wf.camundaRepository();
         this.builder = repository.createDeployment();
         // Set Deployment Name
         this.builder.name(workflow.name());
@@ -42,8 +43,8 @@ class DeployBpmnService implements DeployOn {
         this.builder.enableDuplicateFiltering(Boolean.TRUE);
 
         final String bpmnFile = workflow.bpmnEntry();
-        LOG.Deploy.info(this.getClass(), "Load BPMN file for `{}`, bpmn file = `{}`",
-            workflow.name(), bpmnFile);
+        log.info("{} \uD83C\uDFC9 `{}` 加载 BPMN 文件：`{}`",
+            KeConstant.K_PREFIX_BOOT, workflow.name(), bpmnFile);
         // BPMN Model Instance
         final BpmnModelInstance instance = Bpmn.readModelFromStream(Ut.ioStream(bpmnFile));
         Objects.requireNonNull(instance);
@@ -81,7 +82,7 @@ class DeployBpmnService implements DeployOn {
         }
         return this.formStub.initialize().compose(nil -> {
             final Deployment deployment = this.builder.deployWithResult();
-            LOG.Deploy.info(this.getClass(), "Workflow `{0}（id = {1}）` has been deployed successfully!",
+            log.info("{}    `{}(id={})` 工作流成功部署！SUCCESS！", KeConstant.K_PREFIX_BOOT,
                 deployment.getName(), deployment.getId());
             return Ux.futureT();
         });

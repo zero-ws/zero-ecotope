@@ -2,7 +2,7 @@ package io.zerows.extension.module.workflow.component.camunda;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.extension.module.workflow.boot.WfPin;
+import io.zerows.extension.module.workflow.boot.Wf;
 import io.zerows.extension.module.workflow.common.em.TodoStatus;
 import io.zerows.extension.module.workflow.metadata.WTransition;
 import io.zerows.program.Ux;
@@ -24,7 +24,7 @@ import static io.zerows.extension.module.workflow.boot.Wf.LOG;
 class RunEngine implements RunOn {
     @Override
     public Future<ProcessInstance> moveAsync(final JsonObject params, final WTransition transition) {
-        final TaskService service = WfPin.camundaTask();
+        final TaskService service = Wf.camundaTask();
         final Task task = transition.from();
         Objects.requireNonNull(task);
         service.complete(task.getId(), Ut.toMap(params));
@@ -37,7 +37,7 @@ class RunEngine implements RunOn {
     @Override
     public Future<ProcessInstance> startAsync(final JsonObject params, final WTransition transition) {
         final ProcessDefinition definition = transition.definition();
-        final RuntimeService service = WfPin.camundaRuntime();
+        final RuntimeService service = Wf.camundaRuntime();
         final ProcessInstantiationBuilder builder = service.createProcessInstanceByKey(definition.getKey());
         builder.setVariables(Ut.toMap(params));
         final ProcessInstance instance = builder.execute();
@@ -48,7 +48,7 @@ class RunEngine implements RunOn {
 
     @Override
     public Future<Boolean> stopAsync(final TodoStatus status, final WTransition transition) {
-        final TaskService service = WfPin.camundaTask();
+        final TaskService service = Wf.camundaTask();
         return transition.start().compose(started -> {
             final Task task = started.from();
             // Fix issue of: The task cannot be deleted because is part of a running process
@@ -67,7 +67,7 @@ class RunEngine implements RunOn {
             return keeps.children(instance.getId()).compose(tasks -> {
                 if (tasks.isEmpty()) {
                     // There is no active tasks lefts
-                    final RuntimeService runtime = WfPin.camundaRuntime();
+                    final RuntimeService runtime = Wf.camundaRuntime();
                     runtime.deleteProcessInstanceIfExists(instance.getId(), status.name(),
                         false, false, false, false);
                 }

@@ -119,7 +119,7 @@ final class IoStream {
     static InputStream read(final String filename,
                             final Class<?> clazz) {
         final String root = LocalDir.root();
-        log.info("[ ZERO ] ( IO ) 文件：{} / 根目录：{}", filename, root);
+        log.debug("[ ZERO ] ( IO ) 文件：{} / 根目录：{}", filename, root);
         /*
          * 0. new File(filename)
          *    new FileInputStream(File)
@@ -176,7 +176,7 @@ final class IoStream {
             in = readSupplier(() -> IoStream.class.getResourceAsStream(filename), filename);
             // 后置非空打印，才可知道是否当前IO操作成功
             if (Objects.nonNull(in)) {
-                log.info("[ ZERO ] ( IO ) {}：4. IoStream.class.getResourceAsStream(String)", filename);
+                log.debug("[ ZERO ] ( IO ) {}：4. IoStream.class.getResourceAsStream(String)", filename);
             }
         }
         // System.Class Loader
@@ -189,7 +189,7 @@ final class IoStream {
             in = readSupplier(() -> ClassLoader.getSystemResourceAsStream(filename), filename);
             // 后置非空打印，才可知道是否当前IO操作成功
             if (Objects.nonNull(in)) {
-                log.info("[ ZERO ] ( IO ) {}：5. ClassLoader.getSystemResourceAsStream(String)", filename);
+                log.debug("[ ZERO ] ( IO ) {}：5. ClassLoader.getSystemResourceAsStream(String)", filename);
             }
         }
         /*
@@ -204,7 +204,7 @@ final class IoStream {
              */
             in = readJar(filename);
             if (Objects.nonNull(in)) {
-                log.info("[ ZERO ] ( IO ) {}：6. 从 JAR 中加载文件！", filename);
+                log.debug("[ ZERO ] ( IO ) {}：6. 从 JAR 中加载文件！", filename);
             }
         }
         if (null == in) {
@@ -231,7 +231,7 @@ final class IoStream {
         final ClassLoader loader = Thread.currentThread().getContextClassLoader();
         final InputStream inRet = Fn.jvmOr(() -> loader.getResourceAsStream(filename));
         if (Objects.nonNull(inRet)) {
-            log.info("[ ZERO ] ( IO ) {}：3. Thread.currentThread().getContextClassLoader().getResourceAsStream(String)", filename);
+            log.debug("[ ZERO ] ( IO ) {}：3. Thread.currentThread().getContextClassLoader().getResourceAsStream(String)", filename);
         }
         return inRet;
     }
@@ -240,7 +240,7 @@ final class IoStream {
         final InputStream inRet = Fn.jvmOr(() -> clazz.getResourceAsStream(filename));
         // 后置非空打印，才可知道是否当前IO操作成功
         if (Objects.nonNull(inRet)) {
-            log.info("[ ZERO ] ( IO ) {}：2. clazz[{}].getResourceAsStream(String)", filename, clazz);
+            log.debug("[ ZERO ] ( IO ) {}：2. clazz[{}].getResourceAsStream(String)", filename, clazz);
         }
         return inRet;
     }

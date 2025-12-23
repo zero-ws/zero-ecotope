@@ -4,7 +4,7 @@ import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.extension.module.workflow.boot.WfPin;
+import io.zerows.extension.module.workflow.boot.Wf;
 import io.zerows.extension.module.workflow.exception._80608Exception501EventEndMissing;
 import io.zerows.extension.module.workflow.exception._80609Exception409EventEndUnique;
 import io.zerows.platform.constant.VValue;
@@ -29,7 +29,7 @@ class IoEventEnd extends AbstractIo<EndEvent> {
         if (Ut.isNil(definitionId)) {
             return Ux.futureL();
         }
-        final RepositoryService service = WfPin.camundaRepository();
+        final RepositoryService service = Wf.camundaRepository();
         final BpmnModelInstance instance = service.getBpmnModelInstance(definitionId);
         final Collection<EndEvent> ends = instance.getModelElementsByType(EndEvent.class);
         if (ends.isEmpty()) {

@@ -3,7 +3,7 @@ package io.zerows.extension.module.workflow.component.camunda;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.extension.module.workflow.boot.WfPin;
+import io.zerows.extension.module.workflow.boot.Wf;
 import io.zerows.program.Ux;
 import org.camunda.bpm.engine.TaskService;
 import org.camunda.bpm.engine.task.Task;
@@ -17,7 +17,7 @@ import java.util.Objects;
 public class IoTask extends AbstractIo<Task> {
     @Override
     public Future<Task> run(final String taskId) {
-        final TaskService service = WfPin.camundaTask();
+        final TaskService service = Wf.camundaTask();
         return Ux.future(service.createTaskQuery()
             /*
              * Fix Issue:
@@ -31,7 +31,7 @@ public class IoTask extends AbstractIo<Task> {
 
     @Override
     public Future<Task> child(final String instanceId) {
-        final TaskService service = WfPin.camundaTask();
+        final TaskService service = Wf.camundaTask();
         return Ux.future(service.createTaskQuery()
             /*
              * Fix Issue:
@@ -45,7 +45,7 @@ public class IoTask extends AbstractIo<Task> {
 
     @Override
     public Future<List<Task>> children(final String instanceId) {
-        final TaskService service = WfPin.camundaTask();
+        final TaskService service = Wf.camundaTask();
         return Ux.future(service.createTaskQuery()
             /*
              * Fix Issue:

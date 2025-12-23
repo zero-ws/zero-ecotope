@@ -38,15 +38,16 @@ class EquipWorkflow implements EquipAt {
 
     private MDWorkflow buildWorkflow(final String workflowDir, final MDId id) {
         final MDWorkflow workflow = new MDWorkflow(id);
-        workflow.configure(workflowDir.trim());
+        final String workflowBase = workflowDir.trim();
+        workflow.configure(workflowBase);
         final ZeroFs io = ZeroFs.of(id);
         // *.form
-        final List<String> formFiles = io.inFiles(WORKFLOW_DIR, VValue.SUFFIX.BPMN_FORM)
+        final List<String> formFiles = io.inFiles(workflowBase, VValue.SUFFIX.BPMN_FORM)
             // 追加一层后缀过滤
             .stream().filter(file -> file.endsWith(VValue.SUFFIX.BPMN_FORM))
             .toList();
         // *.json
-        final List<String> formData = io.inFiles(WORKFLOW_DIR, VValue.SUFFIX.JSON);
+        final List<String> formData = io.inFiles(workflowBase, VValue.SUFFIX.JSON);
         return workflow.configure(formFiles, formData);
     }
 }

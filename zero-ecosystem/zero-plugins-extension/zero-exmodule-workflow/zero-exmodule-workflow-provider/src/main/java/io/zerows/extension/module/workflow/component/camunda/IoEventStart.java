@@ -4,7 +4,7 @@ import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.extension.module.workflow.boot.WfPin;
+import io.zerows.extension.module.workflow.boot.Wf;
 import io.zerows.extension.module.workflow.exception._80601Exception501EventStartMissing;
 import io.zerows.extension.module.workflow.exception._80602Exception409EventStartUnique;
 import io.zerows.platform.constant.VValue;
@@ -30,7 +30,7 @@ class IoEventStart extends AbstractIo<StartEvent> {
         if (Ut.isNil(definitionId)) {
             return Ux.futureL();
         }
-        final RepositoryService service = WfPin.camundaRepository();
+        final RepositoryService service = Wf.camundaRepository();
         final BpmnModelInstance instance = service.getBpmnModelInstance(definitionId);
         final Collection<StartEvent> starts = instance.getModelElementsByType(StartEvent.class);
         if (starts.isEmpty()) {

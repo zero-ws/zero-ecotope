@@ -1,6 +1,6 @@
 package io.zerows.extension.module.workflow.plugins;
 
-import io.zerows.extension.module.workflow.boot.WfPin;
+import io.zerows.extension.module.workflow.boot.Wf;
 import io.zerows.extension.module.workflow.common.WfConstant;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
@@ -59,7 +59,7 @@ public class FlowSequenceListener implements JavaDelegate {
         instance.setProcessDefinitionId(execution.getProcessDefinitionId());
         instance.setProcessInstanceId(execution.getProcessInstanceId());
         instance.setParentActivityInstanceId(execution.getParentActivityInstanceId());
-        final HistoryEventHandler handler = WfPin.camundaLogger();
+        final HistoryEventHandler handler = Wf.camundaLogger();
         handler.handleEvent(instance);
         LOG.Plugin.info(this.getClass(), "[ History ] `{0}` history generated {1}", instance.getActivityType(), instance.getActivityId());
     }

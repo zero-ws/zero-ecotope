@@ -1,7 +1,7 @@
 package io.zerows.extension.module.workflow.component.camunda;
 
 import io.vertx.core.Future;
-import io.zerows.extension.module.workflow.boot.WfPin;
+import io.zerows.extension.module.workflow.boot.Wf;
 import io.zerows.program.Ux;
 import org.camunda.bpm.engine.TaskService;
 import org.camunda.bpm.engine.task.Task;
@@ -17,7 +17,7 @@ public class IoTaskKo extends AbstractIo<Task> {
 
     @Override
     public Future<List<Task>> children(final String instanceId) {
-        final TaskService service = WfPin.camundaTask();
+        final TaskService service = Wf.camundaTask();
         return Ux.future(service.createTaskQuery()
             /*
              * Fix Issue:

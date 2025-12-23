@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.extension.module.workflow.boot.WfPin;
+import io.zerows.extension.module.workflow.boot.Wf;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import org.camunda.bpm.engine.HistoryService;
@@ -33,7 +33,7 @@ public class IoHistory extends AbstractIo<Set<String>> {
 
     private Set<String> activities(final String instanceId) {
         // HistoricActivityInstance -> List
-        final HistoryService serviceH = WfPin.camundaHistory();
+        final HistoryService serviceH = Wf.camundaHistory();
         final HistoricActivityInstanceQuery query = serviceH.createHistoricActivityInstanceQuery()
             .processInstanceId(instanceId);
         final List<HistoricActivityInstance> activities = query.list();

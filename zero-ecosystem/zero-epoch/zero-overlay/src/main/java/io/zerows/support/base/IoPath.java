@@ -25,26 +25,40 @@ class IoPath {
     }
 
     static String resolve(final String folder, final String file) {
-        Objects.requireNonNull(file);
-        final String valueFolder;
-        if (TIs.isNil(folder)) {
-            valueFolder = "/";
-        } else {
-            if (folder.endsWith("/")) {
-                // Fix issue of deployment on production environment data loading
-                valueFolder = folder.substring(0, folder.lastIndexOf("/"));
-            } else {
-                valueFolder = folder;
+        Objects.requireNonNull(file, "File path cannot be null");
+
+        // 1. 规范化 folder
+        final String base = (folder == null) ? "" : folder.trim().replace("\\", "/");
+
+        // 2. 规范化 file (去除首部的斜杠，因为我们要手动控制拼接)
+        String append = file.trim().replace("\\", "/");
+        while (append.startsWith("/")) {
+            append = append.substring(1);
+        }
+
+        if (base.isEmpty()) {
+            return append;
+        }
+
+        // 3. 智能处理重叠部分 (如 base="usr/local", append="local/bin")
+        // 这里保持您之前的逻辑，但去掉 base 结尾的斜杠
+        final String cleanBase = base.endsWith("/") ? base.substring(0, base.length() - 1) : base;
+
+        final String[] baseParts = cleanBase.split("/");
+        if (baseParts.length > 0) {
+            final String lastSegment = baseParts[baseParts.length - 1];
+            if (append.startsWith(lastSegment + "/")) {
+                append = append.substring(lastSegment.length() + 1);
+            } else if (append.equals(lastSegment)) {
+                append = "";
             }
         }
-        final String valueFile;
-        if (file.startsWith("/")) {
-            valueFile = file;
-        } else {
-            valueFile = "/" + file;
+
+        // 4. 最终拼接：不再强制在最前面加 "/"
+        if (append.isEmpty()) {
+            return cleanBase;
         }
-        // Convert `//` to `/`
-        return (valueFolder + valueFile).replace("//", "/");
+        return cleanBase + "/" + append;
     }
 
 

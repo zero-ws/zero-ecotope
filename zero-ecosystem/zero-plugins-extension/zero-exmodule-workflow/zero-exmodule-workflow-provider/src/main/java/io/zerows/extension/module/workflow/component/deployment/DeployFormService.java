@@ -2,19 +2,21 @@ package io.zerows.extension.module.workflow.component.deployment;
 
 import io.vertx.core.Future;
 import io.zerows.epoch.basicore.MDWorkflow;
+import io.zerows.epoch.boot.ZeroFs;
+import io.zerows.extension.skeleton.common.KeConstant;
 import io.zerows.program.Ux;
-import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.repository.DeploymentBuilder;
 
 import java.io.InputStream;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-
-import static io.zerows.extension.module.workflow.boot.Wf.LOG;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
 class DeployFormService implements DeployOn {
     private final transient DeploymentBuilder builderRef;
     private final transient MDWorkflow workflow;
@@ -31,15 +33,19 @@ class DeployFormService implements DeployOn {
         if (formFiles.isEmpty()) {
             return Ux.futureT();
         }
+        final Set<String> deployedSet = new HashSet<>();
         formFiles.forEach(formFile -> {
-            final InputStream istream = Ut.ioStream(formFile);
+            final InputStream istream = ZeroFs.of().inStream(formFile);
             if (Objects.nonNull(istream)) {
                 final String filename = formFile.substring(formFile.lastIndexOf("/") + 1);
                 this.builderRef.addInputStream(filename, istream);
+                deployedSet.add(formFile);
             } else {
-                LOG.Deploy.warn(this.getClass(), "Ignored: `{0}` does not exist.", formFile);
+                log.warn("{} 忽略表单文件：`{}` 不存在！", KeConstant.K_PREFIX_BOOT, formFile);
             }
         });
+        final String name = this.workflow.name();
+        log.info("{}    `{}` 工作流表单数：{}", KeConstant.K_PREFIX_BOOT, name, deployedSet.size());
         return Ux.futureT();
     }
 }

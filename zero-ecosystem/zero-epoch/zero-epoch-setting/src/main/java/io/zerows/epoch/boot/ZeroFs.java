@@ -146,10 +146,43 @@ public class ZeroFs {
 
     private String inPath(final String filename) {
         if (Objects.isNull(this.id) || MOD_CONTAINER.equals(this.id.value())) {
-            // 排除容器模式下的默认加载
             return filename;
         }
-        final String baseDir = this.id.path();
+
+        final String baseDir = this.id.path(); // 假设这里返回 "plugins/xxxx"
+        if (baseDir == null || baseDir.isEmpty()) {
+            return filename;
+        }
+
+        // 1. 预处理：统一斜杠并清理
+        final String normalizedBase = baseDir.replace("\\", "/");
+        final String normalizedFile = filename.replace("\\", "/");
+
+        // 2. 全路径匹配检测
+        // 去掉开头的 / 方便比较（不管是绝对还是相对，我们只比内容）
+        String checkBase = normalizedBase.startsWith("/") ? normalizedBase.substring(1) : normalizedBase;
+        final String checkFile = normalizedFile.startsWith("/") ? normalizedFile.substring(1) : normalizedFile;
+
+        // 如果 baseDir 结尾有 /，去掉它
+        if (checkBase.endsWith("/")) {
+            checkBase = checkBase.substring(0, checkBase.length() - 1);
+        }
+
+        boolean alreadyPrefixed = false;
+        if (checkFile.startsWith(checkBase)) {
+            if (checkFile.length() == checkBase.length()) {
+                alreadyPrefixed = true;
+            } else if (checkFile.charAt(checkBase.length()) == '/') {
+                alreadyPrefixed = true;
+            }
+        }
+
+        if (alreadyPrefixed) {
+            // 如果已经包含了，直接返回原 filename (保持其原始的绝对/相对状态)
+            return filename;
+        }
+
+        // 3. 不包含则进行智能拼接
         return Ut.ioPath(baseDir, filename);
     }
 

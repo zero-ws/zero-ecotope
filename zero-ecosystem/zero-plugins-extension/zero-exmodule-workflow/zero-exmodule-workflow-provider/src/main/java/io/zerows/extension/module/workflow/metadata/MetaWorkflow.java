@@ -4,10 +4,12 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.r2mo.base.dbe.Database;
 import io.vertx.core.json.JsonArray;
+import io.zerows.epoch.basicore.MDConfig;
 import io.zerows.integrated.jackson.JsonArrayDeserializer;
 import io.zerows.integrated.jackson.JsonArraySerializer;
 import io.zerows.platform.metadata.KDS;
 import io.zerows.support.Ut;
+import lombok.Data;
 
 import java.util.Set;
 
@@ -17,7 +19,8 @@ import java.util.Set;
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
-public class MetaWorkflow {
+@Data
+public class MetaWorkflow implements MDConfig {
     private transient String name;
 
     @JsonSerialize(using = JsonArraySerializer.class)
@@ -27,30 +30,6 @@ public class MetaWorkflow {
     @JsonSerialize(using = JsonArraySerializer.class)
     @JsonDeserialize(using = JsonArrayDeserializer.class)
     private transient JsonArray resource = new JsonArray();
-
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(final String name) {
-        this.name = name;
-    }
-
-    public JsonArray getBuiltIn() {
-        return this.builtIn;
-    }
-
-    public void setBuiltIn(final JsonArray builtIn) {
-        this.builtIn = builtIn;
-    }
-
-    public JsonArray getResource() {
-        return this.resource;
-    }
-
-    public void setResource(final JsonArray resource) {
-        this.resource = resource;
-    }
 
     public Set<String> camundaBuiltIn() {
         return Ut.toSet(this.builtIn);

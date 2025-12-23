@@ -2,7 +2,7 @@ package io.zerows.extension.module.workflow.metadata;
 
 import io.r2mo.function.Fn;
 import io.zerows.epoch.metadata.KFlow;
-import io.zerows.extension.module.workflow.boot.WfPin;
+import io.zerows.extension.module.workflow.boot.Wf;
 import io.zerows.extension.module.workflow.component.central.Behaviour;
 import io.zerows.extension.module.workflow.component.coadjutor.Stay;
 import io.zerows.extension.module.workflow.component.coadjutor.StayCancel;
@@ -44,7 +44,7 @@ public class EngineOn {
         /* Thread pool here. */
         LOG.Web.info(EngineOn.class, "The system will detect `{0}` workflow.", definitionKey);
         return WfPool.CC_ENGINE.pick(() -> {
-            final WFlow flow = WfPin.getFlow(definitionKey);
+            final WFlow flow = Wf.getFlow(definitionKey);
             /* Defined Exception throw out because of configuration data */
             Fn.jvmKo(Objects.isNull(flow), _80603Exception404WorkflowNull.class, definitionKey);
             return new EngineOn(flow);

@@ -219,7 +219,14 @@ public class KDS {
     }
 
     public DBS findRunning(final String name) {
-        return this.dbs.getOrDefault(name, null);
+        DBS found = this.dbs.getOrDefault(name, null);
+        if (Objects.isNull(found)) {
+            found = DBMany.of().get(name);
+        }
+        if (Objects.nonNull(found)) {
+            this.dbs.put(name, found);
+        }
+        return found;
     }
 
 

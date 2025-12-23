@@ -32,7 +32,7 @@ class WfFlow {
 
     // ------------------- Other Output ------------------------
     static JsonObject outBpmn(final ProcessDefinition definition) {
-        final RepositoryService service = WfPin.camundaRepository();
+        final RepositoryService service = Wf.camundaRepository();
         // Content Definition
         final BpmnModelInstance instance = service.getBpmnModelInstance(definition.getId());
         Objects.requireNonNull(instance);
@@ -165,7 +165,7 @@ class WfFlow {
         if (Objects.isNull(task)) {
             return null;
         }
-        final RepositoryService service = WfPin.camundaRepository();
+        final RepositoryService service = Wf.camundaRepository();
         final BpmnModelInstance instance = service.getBpmnModelInstance(task.getProcessDefinitionId());
         final ModelElementInstance node = instance.getModelElementById(task.getTaskDefinitionKey());
         return node.getElementType().getTypeName();
@@ -173,7 +173,7 @@ class WfFlow {
 
     static List<Task> taskNext(final Task task, final List<Task> source) {
         Objects.requireNonNull(task);
-        final RepositoryService service = WfPin.camundaRepository();
+        final RepositoryService service = Wf.camundaRepository();
         final BpmnModelInstance instance = service.getBpmnModelInstance(task.getProcessDefinitionId());
         final ModelElementInstance node = instance.getModelElementById(task.getTaskDefinitionKey());
         final Set<String> nextKeys = taskSearch(node, instance);
