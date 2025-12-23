@@ -4,59 +4,61 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.basicore.MDConfig;
 import io.zerows.integrated.jackson.JsonObjectDeserializer;
 import io.zerows.integrated.jackson.JsonObjectSerializer;
 import io.zerows.mbse.metadata.KQr;
 import io.zerows.support.Ut;
+import lombok.Data;
 
-import java.io.Serializable;
 import java.util.concurrent.TimeUnit;
 
 /*
  * Security configuration data
  *
  */
-public class ScConfig implements Serializable {
+@Data
+public class ScConfig implements MDConfig {
     private static final Cc<String, KQr> CC_KQR = Cc.open();
     // --------------- 图片验证码相关属性
     /**
      * 图片验证码长度
      */
-    private Integer imageLength = 5;
+    private final Integer imageLength = 5;
     /**
      * 图片验证码过期时间（秒）
      */
-    private Integer imageExpired = 30;
+    private final Integer imageExpired = 30;
     /**
      * 图片验证码宽度（像素）
      */
-    private Integer imageWidth = 180;
+    private final Integer imageWidth = 180;
     /**
      * 图片验证码高度（像素）
      */
-    private Integer imageHeight = 40;
+    private final Integer imageHeight = 40;
 
 
     // ---------------- 授权码相关属性
     /**
      * 授权码超时时间（秒）
      */
-    private Integer codeExpired = 30;
+    private final Integer codeExpired = 30;
     /**
      * 授权码长度
      */
-    private Integer codeLength = 8;
+    private final Integer codeLength = 8;
 
 
     // ---------------- 短信验证码相关属性
     /**
      * 短信码超时时间（秒）
      */
-    private Integer messageExpired = 60;
+    private final Integer messageExpired = 60;
     /**
      * 短信码长度
      */
-    private Integer messageLength = 4;
+    private final Integer messageLength = 4;
 
 
     // ----------------- 令牌相关属性
@@ -85,7 +87,7 @@ public class ScConfig implements Serializable {
      *     3. 用户组 - 角色（多对多）
      * </code></pre>
      */
-    private Boolean supportGroup = Boolean.FALSE;
+    private final Boolean supportGroup = Boolean.FALSE;
 
     /**
      * 是否支持权限的二级缓存，基于 role = xxx 的方式，角色和权限的关联关系如
@@ -94,7 +96,7 @@ public class ScConfig implements Serializable {
      * </code></pre>
      * 支持权限对应的二级缓存，有了二级缓存后，权限计算的 Profile 会变得相对复杂
      */
-    private Boolean supportSecondary = Boolean.FALSE;
+    private final Boolean supportSecondary = Boolean.FALSE;
 
     /**
      * 是否支持多应用模型，多应用模型和多租户模型区别
@@ -106,7 +108,7 @@ public class ScConfig implements Serializable {
      *        一个 sigma 会包含多个 id
      * </code></pre>
      */
-    private Boolean supportMultiApp = Boolean.TRUE;
+    private final Boolean supportMultiApp = Boolean.TRUE;
 
     /**
      * 是否支持 zero-is 的集成管理模块，若支持集成管理模块，则会开启集成存储模式
@@ -117,7 +119,7 @@ public class ScConfig implements Serializable {
      *        支持集成管理，可搭载额外的存储模块，对应 zero-is 扩展的内容。
      * </code></pre>
      */
-    private Boolean supportIntegration = Boolean.FALSE;
+    private final Boolean supportIntegration = Boolean.FALSE;
 
     /**
      * 是否支持图片验证码
@@ -126,14 +128,14 @@ public class ScConfig implements Serializable {
      *     false：不支持图片验证码
      * </code></pre>
      */
-    private Boolean supportCaptcha = Boolean.FALSE;
+    private final Boolean supportCaptcha = Boolean.FALSE;
 
 
     // ----------------- 登录限制设置
     /**
      * 异常登录次数限制，如果您密码错误次数超过了此属性的设置，那么账号将被锁定
      */
-    private Integer verifyLimitation = null;
+    private final Integer verifyLimitation = null;
     /**
      * 启用登录限制之后会启用此属性，此属性表示登录限制的时间间隔，常用属性如
      * <pre><code>
@@ -142,7 +144,7 @@ public class ScConfig implements Serializable {
      * </code></pre>
      * 上述含义表示登录限制为 3 次，账号锁定之后会设置 300 秒（5分钟）时间来解锁账号
      */
-    private Integer verifyDuration = 300;
+    private final Integer verifyDuration = 300;
 
 
     // ----------------- 安全实体 Qr 配置
@@ -155,7 +157,7 @@ public class ScConfig implements Serializable {
      * 5) Action，操作标识
      * 6) Resource，资源标识
      */
-    private ScCondition condition = new ScCondition();
+    private final ScCondition condition = new ScCondition();
     /**
      * 默认初始化密码，如果您的密码是此密码，那么前端会跳转到密码修改页面
      */
@@ -166,82 +168,6 @@ public class ScConfig implements Serializable {
     @JsonSerialize(using = JsonObjectSerializer.class)
     @JsonDeserialize(using = JsonObjectDeserializer.class)
     private JsonObject category = new JsonObject();
-
-    public String getInitializePassword() {
-        return this.initializePassword;
-    }
-
-    public void setInitializePassword(final String initializePassword) {
-        this.initializePassword = initializePassword;
-    }
-
-    public ScCondition getCondition() {
-        return this.condition;
-    }
-
-    public void setCondition(final ScCondition condition) {
-        this.condition = condition;
-    }
-
-    public Integer getImageExpired() {
-        return this.imageExpired;
-    }
-
-    public void setImageExpired(final Integer imageExpired) {
-        this.imageExpired = imageExpired;
-    }
-
-    public Integer getImageWidth() {
-        return this.imageWidth;
-    }
-
-    public void setImageWidth(final Integer imageWidth) {
-        this.imageWidth = imageWidth;
-    }
-
-    public Integer getImageHeight() {
-        return this.imageHeight;
-    }
-
-    public void setImageHeight(final Integer imageHeight) {
-        this.imageHeight = imageHeight;
-    }
-
-    public Integer getImageLength() {
-        return this.imageLength;
-    }
-
-    public void setImageLength(final Integer imageLength) {
-        this.imageLength = imageLength;
-    }
-
-    /*
-     * 默认使用秒，所以此处不转换
-     */
-    public Integer getCodeExpired() {
-        return this.codeExpired;
-    }
-
-    public void setCodeExpired(final Integer codeExpired) {
-        this.codeExpired = codeExpired;
-    }
-
-    public Integer getCodeLength() {
-        return this.codeLength;
-    }
-
-    public void setCodeLength(final Integer codeLength) {
-        this.codeLength = codeLength;
-    }
-
-
-    public Boolean getSupportSecondary() {
-        return this.supportSecondary;
-    }
-
-    public void setSupportSecondary(final Boolean supportSecondary) {
-        this.supportSecondary = supportSecondary;
-    }
 
     /**
      * 默认使用分钟，所以此处分钟转秒
@@ -255,82 +181,6 @@ public class ScConfig implements Serializable {
         return Math.toIntExact(TimeUnit.MINUTES.toSeconds(this.tokenExpired));
     }
 
-    public void setTokenExpired(final Long tokenExpired) {
-        this.tokenExpired = tokenExpired;
-    }
-
-    public Integer getMessageExpired() {
-        return this.messageExpired;
-    }
-
-    public void setMessageExpired(final Integer messageExpired) {
-        this.messageExpired = messageExpired;
-    }
-
-    public Integer getMessageLength() {
-        return this.messageLength;
-    }
-
-    public void setMessageLength(final Integer messageLength) {
-        this.messageLength = messageLength;
-    }
-
-    public Boolean getSupportCaptcha() {
-        return this.supportCaptcha;
-    }
-
-    public void setSupportCaptcha(final Boolean supportCaptcha) {
-        this.supportCaptcha = supportCaptcha;
-    }
-
-    public Integer getVerifyLimitation() {
-        return this.verifyLimitation;
-    }
-
-    public void setVerifyLimitation(final Integer verifyLimitation) {
-        this.verifyLimitation = verifyLimitation;
-    }
-
-    public Integer getVerifyDuration() {
-        return this.verifyDuration;
-    }
-
-    public void setVerifyDuration(final Integer verifyDuration) {
-        this.verifyDuration = verifyDuration;
-    }
-
-    public Boolean getSupportGroup() {
-        return this.supportGroup;
-    }
-
-    public void setSupportGroup(final Boolean supportGroup) {
-        this.supportGroup = supportGroup;
-    }
-
-    public Boolean getSupportMultiApp() {
-        return this.supportMultiApp;
-    }
-
-    public void setSupportMultiApp(final Boolean supportMultiApp) {
-        this.supportMultiApp = supportMultiApp;
-    }
-
-    public JsonObject getCategory() {
-        return this.category;
-    }
-
-    public void setCategory(final JsonObject category) {
-        this.category = category;
-    }
-
-    public Boolean getSupportIntegration() {
-        return this.supportIntegration;
-    }
-
-    public void setSupportIntegration(final Boolean supportIntegration) {
-        this.supportIntegration = supportIntegration;
-    }
-
     public KQr category(final String name) {
         return CC_KQR.pick(() -> {
             final JsonObject serializeJ = Ut.valueJObject(this.category, name);
@@ -341,14 +191,6 @@ public class ScConfig implements Serializable {
                 return null;
             }
         }, name);
-    }
-
-    public JsonObject getInitialize() {
-        return this.initialize;
-    }
-
-    public void setInitialize(final JsonObject initialize) {
-        this.initialize = initialize;
     }
 
     @Override

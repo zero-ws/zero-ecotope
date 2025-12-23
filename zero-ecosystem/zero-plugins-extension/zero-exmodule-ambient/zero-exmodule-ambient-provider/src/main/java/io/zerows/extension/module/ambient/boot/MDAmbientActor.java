@@ -8,7 +8,6 @@ import io.zerows.extension.module.ambient.common.AtConstant;
 import io.zerows.extension.module.ambient.component.UniteArkSource;
 import io.zerows.extension.module.ambient.serviceimpl.DocBuilder;
 import io.zerows.extension.module.ambient.servicespec.DocBStub;
-import io.zerows.extension.skeleton.common.Ke;
 import io.zerows.extension.skeleton.metadata.MDModuleActor;
 import io.zerows.extension.skeleton.metadata.MDModuleRegistry;
 import io.zerows.platform.metadata.KPivot;
@@ -63,7 +62,6 @@ public class MDAmbientActor extends MDModuleActor {
 
     @Override
     protected Future<Boolean> startAsync(final HAmbient ambient, final Vertx vertxRef) {
-        Ke.banner("「περιβάλλων」- Ambient ( At )");
         final AtConfig config = this.manager().config();
         final boolean disabled = Ut.isNil(config.getFileIntegration());
         if (disabled) {
@@ -74,12 +72,12 @@ public class MDAmbientActor extends MDModuleActor {
         final Set<Future<Boolean>> docStarter = new HashSet<>();
         ambient.app().forEach((k, v) -> {
             log.info("{} 初始化文档平台 AppId = {}", AtConstant.K_PREFIX_AMB, k);
-            docStarter.add(this.startAsyncDocument(v, config));
+            docStarter.add(this.startAsync(v, config));
         });
         return Fx.combineB(docStarter);
     }
 
-    private Future<Boolean> startAsyncDocument(final HArk ark, final AtConfig config) {
+    private Future<Boolean> startAsync(final HArk ark, final AtConfig config) {
         // 此处提前调用 initialize 方法，此方法保证无副作用的多次调用即可
         final DocBStub docStub = PLUGIN.createSingleton(DocBuilder.class);
         // Here mapApp function extract `id`

@@ -3,24 +3,24 @@ package io.zerows.extension.module.ui.serviceimpl;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.DB;
-import io.zerows.extension.module.ui.boot.UiPin;
+import io.zerows.extension.module.ui.boot.MDUIManager;
+import io.zerows.extension.module.ui.common.UiConstant;
 import io.zerows.extension.module.ui.domain.tables.daos.UiOpDao;
 import io.zerows.extension.module.ui.domain.tables.pojos.UiOp;
 import io.zerows.extension.module.ui.servicespec.DoStub;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
-
-import static io.zerows.extension.module.ui.boot.Ui.LOG;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
 public class DoService implements DoStub {
-    private static final LogOf LOGGER = LogOf.get(DoService.class);
+    private static final MDUIManager MANAGER = MDUIManager.of();
 
     // type = null, 旧的兼容流程
     @Override
@@ -45,8 +45,8 @@ public class DoService implements DoStub {
     @Override
     public Future<JsonArray> fetchWeb(final JsonObject params) {
         final String identifier = Ut.valueString(params, KName.IDENTIFIER);
-        LOG.Ui.info(LOGGER, "The fixed identifier = `{0}`", identifier);
-        return Ux.future(UiPin.getOp());
+        log.info("{} 固定标识符 identifier = `{}`", UiConstant.K_PREFIX_UI, identifier);
+        return Ux.future(MANAGER.getOp());
     }
 
     @Override
@@ -56,7 +56,8 @@ public class DoService implements DoStub {
         final JsonObject condition = Ux.whereAnd();
         condition.put(KName.Ui.CONTROL_ID, workflow);
         condition.put(KName.EVENT, task);
-        LOG.Ui.info(LOGGER, "The workflow condition = `{0}`", condition.encode());
+        log.info("{} 工作流条件 condition = `{}`, 节点 task = `{}`",
+            UiConstant.K_PREFIX_UI, condition.encode(), workflow + "/" + task);
         return DB.on(UiOpDao.class)
             .<UiOp>fetchAsync(condition)
             .compose(Ux::futureA)

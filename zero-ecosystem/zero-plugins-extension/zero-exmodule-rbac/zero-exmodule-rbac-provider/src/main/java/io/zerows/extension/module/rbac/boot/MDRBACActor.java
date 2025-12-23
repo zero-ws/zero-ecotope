@@ -7,7 +7,7 @@ import io.zerows.extension.skeleton.metadata.MDModuleActor;
  * @author lang : 2025-12-16
  */
 @Actor(value = "extension", sequence = 211)
-public class ModRbacActor extends MDModuleActor {
+public class MDRBACActor extends MDModuleActor {
     @Override
     protected String MID() {
         return MID.BUNDLE_SYMBOLIC_NAME;

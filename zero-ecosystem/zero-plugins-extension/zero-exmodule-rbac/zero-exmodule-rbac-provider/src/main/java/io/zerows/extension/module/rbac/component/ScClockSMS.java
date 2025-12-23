@@ -3,11 +3,11 @@ package io.zerows.extension.module.rbac.component;
 import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.extension.module.rbac.boot.ScPin;
-import io.zerows.extension.module.rbac.metadata.ScConfig;
+import io.zerows.extension.module.rbac.boot.MDRBACManager;
 import io.zerows.extension.module.rbac.common.ScConstant;
 import io.zerows.extension.module.rbac.exception._80229Exception401SmsCodeWrong;
 import io.zerows.extension.module.rbac.exception._80230Exception409SmsCodeExpired;
+import io.zerows.extension.module.rbac.metadata.ScConfig;
 import io.zerows.platform.exception._60050Exception501NotSupport;
 import io.zerows.program.Ux;
 import io.zerows.specification.development.compiled.HBundle;
@@ -27,7 +27,7 @@ import java.util.Objects;
  * @author lang : 2024-09-14
  */
 class ScClockSMS extends ScClockBase<String> {
-    private static final ScConfig CONFIG = ScPin.getConfig();
+    private static final ScConfig CONFIG = MDRBACManager.of().config();
 
     ScClockSMS(final HBundle bundle) {
         super(bundle, ScConstant.POOL_CODE_SMS);

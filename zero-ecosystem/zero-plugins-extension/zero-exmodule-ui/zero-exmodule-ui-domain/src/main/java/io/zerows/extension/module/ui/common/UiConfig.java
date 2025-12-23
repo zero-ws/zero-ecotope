@@ -4,20 +4,22 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.basicore.MDConfig;
 import io.zerows.epoch.constant.KName;
 import io.zerows.integrated.jackson.JsonArrayDeserializer;
 import io.zerows.integrated.jackson.JsonArraySerializer;
 import io.zerows.integrated.jackson.JsonObjectDeserializer;
 import io.zerows.integrated.jackson.JsonObjectSerializer;
 import io.zerows.support.Ut;
+import lombok.Data;
 
-import java.io.Serializable;
 import java.util.Objects;
 
 /*
  * Ui Configuration data
  */
-public class UiConfig implements Serializable {
+@Data
+public class UiConfig implements MDConfig {
 
     private transient String definition;
 
@@ -39,46 +41,6 @@ public class UiConfig implements Serializable {
     // Sec Expired seconds
     private transient int cacheExpired = 7200;
 
-    public JsonObject getAttributes() {
-        return this.attributes;
-    }
-
-    public void setAttributes(final JsonObject attributes) {
-        this.attributes = attributes;
-    }
-
-    public String getDefinition() {
-        return this.definition;
-    }
-
-    public void setDefinition(final String definition) {
-        this.definition = definition;
-    }
-
-    public JsonObject getMapping() {
-        return this.mapping;
-    }
-
-    public void setMapping(final JsonObject mapping) {
-        this.mapping = mapping;
-    }
-
-    public JsonArray getOp() {
-        return this.op;
-    }
-
-    public void setOp(final JsonArray op) {
-        this.op = op;
-    }
-
-    public JsonObject getCache() {
-        return this.cache;
-    }
-
-    public void setCache(final JsonObject cache) {
-        this.cache = cache;
-    }
-
     public boolean okCache() {
         return Ut.isNotNil(this.cache);
     }
@@ -96,10 +58,6 @@ public class UiConfig implements Serializable {
     public int getCacheExpired() {
         Objects.requireNonNull(this.cache);
         return this.cacheExpired;
-    }
-
-    public void setCacheExpired(final int cacheExpired) {
-        this.cacheExpired = cacheExpired;
     }
 
     @Override

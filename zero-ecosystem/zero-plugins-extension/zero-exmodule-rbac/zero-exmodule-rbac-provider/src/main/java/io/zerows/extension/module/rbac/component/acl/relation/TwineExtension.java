@@ -8,12 +8,12 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.UObject;
 import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.epoch.store.jooq.DB;
-import io.zerows.extension.module.rbac.boot.ScPin;
-import io.zerows.extension.module.rbac.metadata.ScConfig;
+import io.zerows.extension.module.rbac.boot.MDRBACManager;
 import io.zerows.extension.module.rbac.common.ScAuthKey;
 import io.zerows.extension.module.rbac.common.ScAuthMsg;
 import io.zerows.extension.module.rbac.domain.tables.daos.SUserDao;
 import io.zerows.extension.module.rbac.domain.tables.pojos.SUser;
+import io.zerows.extension.module.rbac.metadata.ScConfig;
 import io.zerows.extension.skeleton.spi.ExOwner;
 import io.zerows.extension.skeleton.spi.ScTwine;
 import io.zerows.mbse.metadata.KQr;
@@ -67,7 +67,7 @@ import static io.zerows.extension.module.rbac.boot.Sc.LOG;
  */
 class TwineExtension implements ScTwine<SUser> {
 
-    private static final ScConfig CONFIG = ScPin.getConfig();
+    private static final ScConfig CONFIG = MDRBACManager.of().config();
 
     @Override
     public Future<JsonObject> searchAsync(final String identifier, final JsonObject query) {

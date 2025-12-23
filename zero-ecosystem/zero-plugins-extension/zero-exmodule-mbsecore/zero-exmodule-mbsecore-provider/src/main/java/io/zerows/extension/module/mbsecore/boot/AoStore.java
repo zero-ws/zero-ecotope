@@ -11,16 +11,15 @@ import io.zerows.support.Ut;
 
 import java.util.Objects;
 
-;
-
 class AoStore {
     private static final String PATH_EXCEL = "running/excel/";
     private static final String PATH_JSON = "running/json/";
     private static final String PATH_ADJUSTER = "running/adjuster/config.json";
     private static final String PATH_MODELING = "running/adjuster/modeling";
+    private static final MDMBSECoreManager MANAGER = MDMBSECoreManager.of();
 
     static String namespace(final String appName) {
-        final String prefix = AoPin.getConfig().getNamespace();
+        final String prefix = MANAGER.config().getNamespace();
         if (Ut.isNil(prefix)) {
             // Default namespace
             return HApp.nsOf(appName);
@@ -31,12 +30,12 @@ class AoStore {
     }
 
     static String defineExcel() {
-        final String excel = AoPin.getConfig().getDefineExcel();
+        final String excel = MANAGER.config().getDefineExcel();
         return Ut.isNil(excel) ? PATH_EXCEL : excel;
     }
 
     static String defineJson() {
-        final String json = AoPin.getConfig().getDefineJson();
+        final String json = MANAGER.config().getDefineJson();
         return Ut.isNil(json) ? PATH_JSON : json;
     }
 
@@ -44,7 +43,7 @@ class AoStore {
      * Two Point for Null Pointer and EmptyStream Here
      */
     static JsonObject configAdjuster() {
-        String adjuster = AoPin.getConfig().getConfigAdjuster();
+        String adjuster = MANAGER.config().getConfigAdjuster();
         if (Ut.isNil(adjuster)) {
             adjuster = PATH_ADJUSTER;
         }
@@ -56,7 +55,7 @@ class AoStore {
     }
 
     static JsonObject configModeling(final String filename) {
-        String modeling = AoPin.getConfig().getConfigModeling();
+        String modeling = MANAGER.config().getConfigModeling();
         if (Ut.isNil(modeling)) {
             modeling = PATH_MODELING;
         }
@@ -80,7 +79,7 @@ class AoStore {
     }
 
     static boolean isDebug() {
-        final Boolean debug = AoPin.getConfig().getSqlDebug();
+        final Boolean debug = MANAGER.config().getSqlDebug();
         if (Objects.isNull(debug)) {
             return Boolean.FALSE;
         } else {
@@ -89,11 +88,11 @@ class AoStore {
     }
 
     static Class<?> clazzPin() {
-        return AoPin.getConfig().getImplPin();
+        return MANAGER.config().getImplPin();
     }
 
     static Class<?> clazzSchema() {
-        Class<?> clazz = AoPin.getConfig().getImplSchema();
+        Class<?> clazz = MANAGER.config().getImplSchema();
         if (Objects.isNull(clazz)) {
             /*
              * Default
@@ -104,7 +103,7 @@ class AoStore {
     }
 
     static Class<?> clazzModel() {
-        Class<?> clazz = AoPin.getConfig().getImplModel();
+        Class<?> clazz = MANAGER.config().getImplModel();
         if (Objects.isNull(clazz)) {
             /*
              * Default
@@ -115,6 +114,6 @@ class AoStore {
     }
 
     static Class<?> clazzSwitcher() {
-        return AoPin.getConfig().getImplSwitcher();
+        return MANAGER.config().getImplSwitcher();
     }
 }

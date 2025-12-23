@@ -6,10 +6,16 @@ import io.zerows.extension.skeleton.metadata.MDModuleActor;
 /**
  * @author lang : 2025-12-16
  */
-@Actor(value = "extension", sequence = 1017)
-public class ModReportActor extends MDModuleActor {
+@Actor(value = "extension", sequence = 1017, configured = false)
+public class MDReportActor extends MDModuleActor {
     @Override
     protected String MID() {
         return MID.BUNDLE_SYMBOLIC_NAME;
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    protected MDReportManager manager() {
+        return MDReportManager.of();
     }
 }

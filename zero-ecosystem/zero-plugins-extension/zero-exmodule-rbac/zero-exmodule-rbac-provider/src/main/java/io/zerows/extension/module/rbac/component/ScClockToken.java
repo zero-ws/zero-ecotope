@@ -4,14 +4,14 @@ import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.extension.module.rbac.boot.ScPin;
-import io.zerows.extension.module.rbac.metadata.ScConfig;
-import io.zerows.extension.module.rbac.metadata.ScToken;
+import io.zerows.extension.module.rbac.boot.MDRBACManager;
 import io.zerows.extension.module.rbac.common.ScAuthMsg;
 import io.zerows.extension.module.rbac.common.ScConstant;
 import io.zerows.extension.module.rbac.exception._80206Exception401TokenCounter;
 import io.zerows.extension.module.rbac.exception._80207Exception401TokenInvalid;
 import io.zerows.extension.module.rbac.exception._80208Exception401TokenExpired;
+import io.zerows.extension.module.rbac.metadata.ScConfig;
+import io.zerows.extension.module.rbac.metadata.ScToken;
 import io.zerows.platform.constant.VValue;
 import io.zerows.program.Ux;
 import io.zerows.sdk.security.Token;
@@ -40,7 +40,7 @@ import java.util.stream.Collectors;
  * @author lang : 2024-09-15
  */
 class ScClockToken extends ScClockBase<ScToken> {
-    private static final ScConfig CONFIG = ScPin.getConfig();
+    private static final ScConfig CONFIG = MDRBACManager.of().config();
     private static final ConcurrentMap<String, String> POINTER = new ConcurrentHashMap<>();
 
     ScClockToken(final HBundle bundle) {

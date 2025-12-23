@@ -6,10 +6,10 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
-import io.zerows.extension.module.rbac.metadata.ScConfig;
 import io.zerows.extension.module.rbac.domain.tables.pojos.OUser;
 import io.zerows.extension.module.rbac.domain.tables.pojos.SResource;
 import io.zerows.extension.module.rbac.domain.tables.pojos.SUser;
+import io.zerows.extension.module.rbac.metadata.ScConfig;
 import io.zerows.extension.skeleton.exception._80219Exception403TokenGeneration;
 import io.zerows.extension.skeleton.spi.ScCredential;
 import io.zerows.platform.constant.VValue;
@@ -27,7 +27,7 @@ import java.util.UUID;
  * @author lang : 2024-07-11
  */
 class ScGenerated {
-    private static final ScConfig CONFIG = ScPin.getConfig();
+    private static final ScConfig CONFIG = MDRBACManager.of().config();
 
     static String valuePassword() {
         return CONFIG.getInitializePassword();

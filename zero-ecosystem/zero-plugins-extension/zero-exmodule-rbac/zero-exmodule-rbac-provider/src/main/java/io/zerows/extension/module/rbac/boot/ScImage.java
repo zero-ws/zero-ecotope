@@ -17,7 +17,7 @@ import java.util.Random;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 class ScImage {
-    private static final ScConfig CONFIG = ScPin.getConfig();
+    private static final ScConfig CONFIG = MDRBACManager.of().config();
 
     private static final Random RANDOM = new Random();
     // BG /

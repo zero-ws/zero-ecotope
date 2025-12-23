@@ -2,9 +2,9 @@ package io.zerows.extension.module.rbac.metadata.logged;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.extension.module.rbac.boot.ScPin;
-import io.zerows.extension.module.rbac.metadata.ScConfig;
+import io.zerows.extension.module.rbac.boot.MDRBACManager;
 import io.zerows.extension.module.rbac.common.ScAuthKey;
+import io.zerows.extension.module.rbac.metadata.ScConfig;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -17,7 +17,7 @@ import java.util.Set;
  */
 public class ProfileRole implements Serializable {
 
-    private static final ScConfig CONFIG = ScPin.getConfig();
+    private static final ScConfig CONFIG = MDRBACManager.of().config();
     private transient final Integer priority;
     private final transient ScRole role;
     /* GroupId Process */

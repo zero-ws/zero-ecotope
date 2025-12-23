@@ -6,10 +6,10 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Session;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.UObject;
-import io.zerows.extension.module.rbac.boot.ScPin;
-import io.zerows.extension.module.rbac.metadata.ScConfig;
-import io.zerows.extension.module.rbac.component.acl.relation.Junc;
+import io.zerows.extension.module.rbac.boot.MDRBACManager;
 import io.zerows.extension.module.rbac.common.ScAuthKey;
+import io.zerows.extension.module.rbac.component.acl.relation.Junc;
+import io.zerows.extension.module.rbac.metadata.ScConfig;
 import io.zerows.extension.module.rbac.servicespec.GroupStub;
 import io.zerows.extension.module.rbac.servicespec.JwtStub;
 import io.zerows.extension.module.rbac.servicespec.TokenStub;
@@ -65,7 +65,7 @@ public class TokenService implements TokenStub {
         /*
          * Extract configuration of groupSupport
          */
-        final ScConfig config = ScPin.getConfig();
+        final ScConfig config = MDRBACManager.of().config();
         if (config.getSupportGroup()) {
 
             /*

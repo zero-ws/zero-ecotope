@@ -12,7 +12,7 @@ import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.metadata.UObject;
 import io.zerows.epoch.metadata.XHeader;
-import io.zerows.extension.module.rbac.boot.ScPin;
+import io.zerows.extension.module.rbac.boot.MDRBACManager;
 import io.zerows.extension.module.rbac.common.ScAuthKey;
 import io.zerows.extension.module.rbac.metadata.ScConfig;
 import io.zerows.extension.module.rbac.servicespec.AuthStub;
@@ -29,7 +29,7 @@ import java.util.Objects;
 @Queue
 public class LoginActor {
 
-    private static final ScConfig CONFIG = ScPin.getConfig();
+    private static final ScConfig CONFIG = MDRBACManager.of().config();
 
     @Inject
     private transient AuthStub stub;

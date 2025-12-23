@@ -4,7 +4,6 @@ import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.zerows.epoch.annotations.Actor;
 import io.zerows.extension.module.integration.common.IsConfig;
-import io.zerows.extension.skeleton.common.Ke;
 import io.zerows.extension.skeleton.common.KeConstant;
 import io.zerows.extension.skeleton.metadata.MDModuleActor;
 import io.zerows.platform.ENV;
@@ -27,8 +26,6 @@ public class MDIntegrationActor extends MDModuleActor {
 
     @Override
     protected Future<Boolean> startAsync(final HAmbient ambient, final Vertx vertxRef) {
-        Ke.banner("「Ολοκλήρωση」- Integration ( Is )");
-
 
         // 环境变量优先处理 Z_SIS_STORE
         final IsConfig config = this.manager().config();

@@ -5,9 +5,9 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.metadata.KView;
-import io.zerows.extension.module.rbac.boot.ScPin;
-import io.zerows.extension.module.rbac.metadata.ScConfig;
+import io.zerows.extension.module.rbac.boot.MDRBACManager;
 import io.zerows.extension.module.rbac.common.ScAuthKey;
+import io.zerows.extension.module.rbac.metadata.ScConfig;
 import io.zerows.extension.skeleton.common.Ke;
 
 /**
@@ -18,7 +18,7 @@ import io.zerows.extension.skeleton.common.Ke;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 public class ScResource {
-    private static final ScConfig CONFIG = ScPin.getConfig();
+    private static final ScConfig CONFIG = MDRBACManager.of().config();
 
     private transient final String resourceKey;
     private transient final String uri;

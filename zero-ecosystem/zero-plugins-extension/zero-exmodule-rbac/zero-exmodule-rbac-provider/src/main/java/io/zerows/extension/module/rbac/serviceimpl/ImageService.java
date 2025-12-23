@@ -3,12 +3,12 @@ package io.zerows.extension.module.rbac.serviceimpl;
 import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.buffer.Buffer;
+import io.zerows.extension.module.rbac.boot.MDRBACManager;
 import io.zerows.extension.module.rbac.boot.Sc;
-import io.zerows.extension.module.rbac.boot.ScPin;
-import io.zerows.extension.module.rbac.metadata.ScConfig;
 import io.zerows.extension.module.rbac.component.ScClock;
 import io.zerows.extension.module.rbac.component.ScClockFactory;
 import io.zerows.extension.module.rbac.exception._80222Exception401ImageCodeWrong;
+import io.zerows.extension.module.rbac.metadata.ScConfig;
 import io.zerows.extension.module.rbac.servicespec.ImageStub;
 import io.zerows.platform.exception._60050Exception501NotSupport;
 import io.zerows.program.Ux;
@@ -20,7 +20,7 @@ import java.util.Objects;
  */
 public class ImageService implements ImageStub {
 
-    private static final ScConfig CONFIG = ScPin.getConfig();
+    private static final ScConfig CONFIG = MDRBACManager.of().config();
 
     private final ScClock<String> cache;
 

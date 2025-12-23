@@ -4,9 +4,9 @@ import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.cosmic.plugins.cache.Rapid;
-import io.zerows.extension.module.rbac.metadata.ScConfig;
 import io.zerows.extension.module.rbac.common.ScConstant;
 import io.zerows.extension.module.rbac.exception._80221Exception401MaximumTimes;
+import io.zerows.extension.module.rbac.metadata.ScConfig;
 import io.zerows.program.Ux;
 
 import java.util.Objects;
@@ -16,7 +16,7 @@ import java.util.function.Supplier;
  * @author lang : 2024-07-11
  */
 class ScLock {
-    private static final ScConfig CONFIG = ScPin.getConfig();
+    private static final ScConfig CONFIG = MDRBACManager.of().config();
 
     /*
      * Login limitation for times in system, If failed the counter of current username should

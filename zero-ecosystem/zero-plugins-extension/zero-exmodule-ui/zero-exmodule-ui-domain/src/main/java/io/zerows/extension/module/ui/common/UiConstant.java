@@ -6,4 +6,6 @@ public interface UiConstant {
     String POOL_LAYOUT = "POOL_LAYOUT";
 
     String POOL_LIST_QR = "POOL_LIST_QR";
+
+    String K_PREFIX_UI = "[ XMOD ] ( UI )";
 }

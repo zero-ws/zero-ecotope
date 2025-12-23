@@ -3,7 +3,6 @@ package io.zerows.extension.module.mbseapi.boot;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.zerows.epoch.annotations.Actor;
-import io.zerows.extension.skeleton.common.Ke;
 import io.zerows.extension.skeleton.common.KeConstant;
 import io.zerows.extension.skeleton.metadata.MDModuleActor;
 import io.zerows.specification.app.HAmbient;
@@ -38,7 +37,6 @@ public class MDMBSEApiActor extends MDModuleActor {
      */
     @Override
     protected Future<Boolean> startAsync(final HAmbient ambient, final Vertx vertxRef) {
-        Ke.banner("「Πίδακας δρομολογητή」- ( MBSEApi )");
         final ConcurrentMap<String, HArk> arkMap = ambient.app();
 
         // 应用数量统计

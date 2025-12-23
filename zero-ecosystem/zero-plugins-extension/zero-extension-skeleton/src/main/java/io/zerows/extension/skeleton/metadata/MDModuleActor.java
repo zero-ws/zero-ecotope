@@ -21,11 +21,14 @@ import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HRegistry;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
+import io.zerows.support.fn.Fx;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.URL;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * Extension 模块抽象类，启动过程中用于加载模块的专用配置，构造 {@link MDConfiguration} 对象管理，此对象管理会处理如下事情：
@@ -158,7 +161,7 @@ public abstract class MDModuleActor extends ExAbstractHActor {
             this.log().info("{} \uD83D\uDFE1 `{}` 无特殊流程", KeConstant.K_PREFIX_BOOT, this.MID());
             return Future.succeededFuture(Boolean.TRUE);
         }
-        this.log().info("{} \uD83D\uDFE2 `{}` 特殊流程：-> {}", KeConstant.K_PREFIX_BOOT, this.MID(), manager.getClass().getName());
+        this.log().info("{} \uD83D\uDFE2 `{}` ----> {}", KeConstant.K_PREFIX_BOOT, this.MID(), manager.getClass().getName());
 
 
         // 2. 绑定配置
@@ -185,6 +188,13 @@ public abstract class MDModuleActor extends ExAbstractHActor {
 
     // ----- 子类附加实现的方法
     protected Future<Boolean> startAsync(final HAmbient ambient, final Vertx vertxRef) {
+        // 子类实现，若有特殊模块信息则覆盖此方法
+        final Set<Future<Boolean>> arkFuture = new HashSet<>();
+        ambient.app().forEach((k, v) -> arkFuture.add(this.startAsync(v, vertxRef)));
+        return Fx.combineB(arkFuture);
+    }
+
+    protected Future<Boolean> startAsync(final HArk ark, final Vertx vertxRef) {
         // 子类实现，若有特殊模块信息则覆盖此方法
         return Future.succeededFuture(Boolean.TRUE);
     }
