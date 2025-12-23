@@ -6,10 +6,16 @@ import io.zerows.extension.skeleton.metadata.MDModuleActor;
 /**
  * @author lang : 2025-12-16
  */
-@Actor(value = "extension", sequence = 1017)
-public class ModGraphicActor extends MDModuleActor {
+@Actor(value = "extension", sequence = 1017, configured = false)
+public class MDGraphicActor extends MDModuleActor {
     @Override
     protected String MID() {
         return MID.BUNDLE_SYMBOLIC_NAME;
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    protected MDGraphicManager manager() {
+        return MDGraphicManager.of();
     }
 }
