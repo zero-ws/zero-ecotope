@@ -154,8 +154,11 @@ public abstract class MDModuleActor extends ExAbstractHActor {
     protected Future<Boolean> startAsync(final HConfig config, final Vertx vertxRef) {
         // 1. 构造 Manager
         final MDModuleManager manager = CC_MANAGER.pick(this::manager, this.getClass());
-        Objects.requireNonNull(manager, "模块管理器不可为空，请检查模块实现：" + this.getClass().getName());
-        this.vLog("模块管理器：{} -> {}", this.MID(), manager.getClass().getName());
+        if (Objects.isNull(manager)) {
+            this.log().warn("{} \uD83D\uDFE1 `{}` 跳过管理器", KeConstant.K_PREFIX_BOOT, this.MID());
+            return Future.succeededFuture(Boolean.TRUE);
+        }
+        this.log().info("{} \uD83D\uDFE2 `{}` 模块管理器：-> {}", KeConstant.K_PREFIX_BOOT, this.MID(), manager.getClass().getName());
 
 
         // 2. 绑定配置
@@ -225,7 +228,7 @@ public abstract class MDModuleActor extends ExAbstractHActor {
 
         final Object instance = Ut.deserialize(configurationJ, clsConfig);
         if (Objects.nonNull(instance)) {
-            this.log().info("{} --- \uD83D\uDDDC️ JSON 业务配置：{}", KeConstant.K_PREFIX_BOOT, instance.getClass());
+            this.log().info("{} ⚙️ `{}` JSON 业务配置：{}", KeConstant.K_PREFIX_BOOT, this.MID(), instance.getClass());
             manager.config(instance);
         }
     }
@@ -243,7 +246,7 @@ public abstract class MDModuleActor extends ExAbstractHActor {
         final JsonObject options = config.options();
         final Object instance = Ut.deserialize(options, clsMDC);
         if (Objects.nonNull(instance)) {
-            this.log().info("{} --- \uD83D\uDDDC️ YAML 核心配置：{}", KeConstant.K_PREFIX_BOOT, instance.getClass());
+            this.log().info("{} ⚙️ `{}` YAML 核心配置：{}", KeConstant.K_PREFIX_BOOT, this.MID(), instance.getClass());
             manager.setting(instance);
         }
     }

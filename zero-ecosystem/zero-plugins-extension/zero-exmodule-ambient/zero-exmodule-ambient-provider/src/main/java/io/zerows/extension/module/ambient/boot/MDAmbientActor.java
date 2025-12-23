@@ -3,17 +3,28 @@ package io.zerows.extension.module.ambient.boot;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.zerows.epoch.annotations.Actor;
+import io.zerows.epoch.assembly.DI;
+import io.zerows.extension.module.ambient.common.AtConstant;
 import io.zerows.extension.module.ambient.component.UniteArkSource;
+import io.zerows.extension.module.ambient.serviceimpl.DocBuilder;
+import io.zerows.extension.module.ambient.servicespec.DocBStub;
+import io.zerows.extension.skeleton.common.Ke;
 import io.zerows.extension.skeleton.metadata.MDModuleActor;
 import io.zerows.extension.skeleton.metadata.MDModuleRegistry;
 import io.zerows.platform.metadata.KPivot;
 import io.zerows.platform.metadata.KRegistry;
+import io.zerows.program.Ux;
 import io.zerows.specification.app.HAmbient;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.app.HArk;
 import io.zerows.specification.configuration.HActor;
 import io.zerows.specification.configuration.HRegistry;
+import io.zerows.support.Ut;
+import io.zerows.support.fn.Fx;
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 此处 Ambient 模块本应该作为提供者存在，但是上层调用过程中还有一层预启动模型
@@ -43,6 +54,7 @@ import lombok.extern.slf4j.Slf4j;
 @Actor(value = "extension", sequence = 207, configured = false)
 @Slf4j
 public class MDAmbientActor extends MDModuleActor {
+    private static final DI PLUGIN = DI.create(MDAmbientActor.class);
 
     @Override
     protected String MID() {
@@ -51,7 +63,32 @@ public class MDAmbientActor extends MDModuleActor {
 
     @Override
     protected Future<Boolean> startAsync(final HAmbient ambient, final Vertx vertxRef) {
-        return null;
+        Ke.banner("「περιβάλλων」- Ambient ( At )");
+        final AtConfig config = this.manager().config();
+        final boolean disabled = Ut.isNil(config.getFileIntegration());
+        if (disabled) {
+            log.info("{} 文档平台已禁用 Document Platform Disabled !!", AtConstant.K_PREFIX_AMB);
+            return Future.succeededFuture(Boolean.TRUE);
+        }
+
+        final Set<Future<Boolean>> docStarter = new HashSet<>();
+        ambient.app().forEach((k, v) -> {
+            log.info("{} 初始化文档平台 AppId = {}", AtConstant.K_PREFIX_AMB, k);
+            docStarter.add(this.startAsyncDocument(v, config));
+        });
+        return Fx.combineB(docStarter);
+    }
+
+    private Future<Boolean> startAsyncDocument(final HArk ark, final AtConfig config) {
+        // 此处提前调用 initialize 方法，此方法保证无副作用的多次调用即可
+        final DocBStub docStub = PLUGIN.createSingleton(DocBuilder.class);
+        // Here mapApp function extract `id`
+        final HApp app = ark.app();
+        final String appId = app.id(); // Ut.valueString(appJ, KName.KEY);
+        return docStub.initialize(appId, config.getFileIntegration()).compose(initialized -> {
+            log.info("{} / AppId = {}, 目录数量 = {}", AtConstant.K_PREFIX_AMB, appId, initialized.size());
+            return Ux.futureT();
+        });
     }
 
     @Override
