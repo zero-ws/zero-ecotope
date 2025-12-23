@@ -1,18 +1,18 @@
 package io.zerows.extension.module.integration.component;
 
+import io.r2mo.io.common.HFS;
 import io.r2mo.typed.common.Kv;
 import io.vertx.core.Future;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.extension.module.integration.boot.IsPin;
+import io.zerows.extension.module.integration.boot.MDIntegrationManager;
 import io.zerows.extension.module.integration.common.IsConfig;
 import io.zerows.extension.module.integration.common.IsConstant;
 import io.zerows.extension.module.integration.common.em.EmDirectory;
 import io.zerows.extension.module.integration.domain.tables.pojos.IDirectory;
 import io.zerows.program.Ux;
-import io.zerows.specification.vital.HFS;
 import io.zerows.support.Ut;
 
 import java.util.Collection;
@@ -27,6 +27,7 @@ import static io.zerows.extension.module.integration.util.Is.LOG;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 public class FsDefault extends FsBase {
+    private static final MDIntegrationManager MANAGER = MDIntegrationManager.of();
 
     @Override
     public IDirectory initTree(final JsonObject directoryJ) {
@@ -42,12 +43,12 @@ public class FsDefault extends FsBase {
     public void initTrash() {
         final String root = this.configRoot();
         final String rootTrash = Ut.ioPath(root, IsConstant.TRASH_FOLDER);
-        HFS.common().mkdir(rootTrash);
+        HFS.of().mkdir(rootTrash);
     }
 
     @Override
     public Future<JsonArray> mkdir(final JsonArray data) {
-        this.runRoot(data, HFS.common()::mkdir);
+        this.runRoot(data, HFS.of()::mkdir);
         return Ux.future(data);
     }
 
@@ -55,7 +56,7 @@ public class FsDefault extends FsBase {
     public Future<JsonObject> mkdir(final JsonObject data) {
         final String root = this.configRoot();
         final String path = data.getString(KName.STORE_PATH);
-        HFS.common().mkdir(Ut.ioPath(root, path));
+        HFS.of().mkdir(Ut.ioPath(root, path));
         return Ux.future(data);
     }
 
@@ -75,14 +76,14 @@ public class FsDefault extends FsBase {
 
     @Override
     public Future<JsonArray> rm(final JsonArray data) {
-        this.runRoot(data, HFS.common()::rm);
+        this.runRoot(data, HFS.of()::rm);
         return Ux.future(data);
     }
 
     @Override
     public Future<Boolean> rm(final Collection<String> storeSet) {
         final String root = this.configRoot();
-        storeSet.forEach(path -> HFS.common().rm(Ut.ioPath(root, path)));
+        storeSet.forEach(path -> HFS.of().rm(Ut.ioPath(root, path)));
         return Ux.futureT();
     }
 
@@ -90,7 +91,7 @@ public class FsDefault extends FsBase {
     public Future<JsonObject> rm(final JsonObject data) {
         final String root = this.configRoot();
         final String path = data.getString(KName.STORE_PATH);
-        HFS.common().rm(Ut.ioPath(root, path));
+        HFS.of().rm(Ut.ioPath(root, path));
         return Ux.future(data);
     }
 
@@ -119,7 +120,7 @@ public class FsDefault extends FsBase {
             final String root = this.configRoot();
             transfer.forEach((from, to) -> {
                 final String toPath = Ut.ioPath(root, to);
-                HFS.common().rename(from, toPath);
+                HFS.of().mv(from, toPath);
             });
         }
         return Ux.futureT();
@@ -150,11 +151,11 @@ public class FsDefault extends FsBase {
         final String root = this.configRoot();
         final String fromPath = Ut.ioPath(root, from);
         final String toPath = Ut.ioPath(root, to);
-        HFS.common().rename(fromPath, toPath);
+        HFS.of().mv(fromPath, toPath);
     }
 
     private String configRoot() {
-        final IsConfig config = IsPin.getConfig();
+        final IsConfig config = MANAGER.config();
         final String rootPath = config.getStoreRoot();
         if (Ut.isNil(rootPath)) {
             LOG.Path.warn(this.getClass(), "The `storeRoot` of integration service is null");

@@ -155,10 +155,10 @@ public abstract class MDModuleActor extends ExAbstractHActor {
         // 1. 构造 Manager
         final MDModuleManager manager = CC_MANAGER.pick(this::manager, this.getClass());
         if (Objects.isNull(manager)) {
-            this.log().warn("{} \uD83D\uDFE1 `{}` 跳过管理器", KeConstant.K_PREFIX_BOOT, this.MID());
+            this.log().info("{} \uD83D\uDFE1 `{}` 无特殊流程", KeConstant.K_PREFIX_BOOT, this.MID());
             return Future.succeededFuture(Boolean.TRUE);
         }
-        this.log().info("{} \uD83D\uDFE2 `{}` 模块管理器：-> {}", KeConstant.K_PREFIX_BOOT, this.MID(), manager.getClass().getName());
+        this.log().info("{} \uD83D\uDFE2 `{}` 特殊流程：-> {}", KeConstant.K_PREFIX_BOOT, this.MID(), manager.getClass().getName());
 
 
         // 2. 绑定配置

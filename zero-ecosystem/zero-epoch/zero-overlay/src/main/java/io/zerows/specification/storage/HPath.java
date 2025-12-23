@@ -1,9 +1,9 @@
 package io.zerows.specification.storage;
 
+import io.r2mo.io.common.HFS;
 import io.zerows.platform.annotations.meta.One2One;
 import io.zerows.platform.enums.OS;
 import io.zerows.specification.modeling.norm.HUri;
-import io.zerows.specification.vital.HFS;
 
 /**
  * 「文件路径」
