@@ -8,6 +8,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.basicore.MDConnect;
 import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.management.OCacheConfiguration;
 import io.zerows.epoch.store.jooq.ADJ;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
@@ -29,10 +30,10 @@ class DataSetJoin2 extends DataSetBase {
 
     DataSetJoin2(final JsonObject sourceJ) {
         final String active = Ut.valueString(sourceJ, KName.ACTIVE);
-        this.active = MDConnect.lookup(active);
+        this.active = OCacheConfiguration.entireConnect(active);
         Objects.requireNonNull(this.active);
         final String standBy = Ut.valueString(sourceJ, "standby");
-        this.standBy = MDConnect.lookup(standBy);
+        this.standBy = OCacheConfiguration.entireConnect(standBy);
         Objects.requireNonNull(this.standBy);
         this.children.mergeIn(Ut.valueJObject(sourceJ, KName.CHILDREN));
 

@@ -5,5 +5,6 @@ package io.zerows.extension.skeleton.common;
  */
 public interface KeConstant {
     String K_PREFIX_BOOT = "[ XMOD ] ( Boot )";
+    String K_PREFIX_CRUD = "[ XMOD ] ( Crud )";
     String K_PREFIX_WEB = "[ XMOD ] ( Web )";
 }

@@ -94,19 +94,11 @@ public interface OCacheConfiguration extends OCache<MDConfiguration> {
 
     // ----------------- 全局方法，用于提取全局扫描的所有 MDConnect
     static MDConnect entireConnect(final String tableOr) {
-        return CC_SKELETON.values().stream()
-            .flatMap(meta -> meta.valueSet().stream())
-            .map(meta -> meta.inConnect(tableOr))
-            .filter(Objects::nonNull)
-            .findAny().orElse(null);
+        return OCacheConfigurationAmbiguity.entireConnect(tableOr);
     }
 
     static Set<MDConnect> entireConnect() {
-        return CC_SKELETON.values().stream()
-            .flatMap(meta -> meta.valueSet().stream())
-            .flatMap(meta -> meta.inConnect().stream())
-            .filter(Objects::nonNull)
-            .collect(Collectors.toSet());
+        return OCacheConfigurationAmbiguity.entireConnect();
     }
 
     static ConcurrentMap<String, MDPage> entireWeb() {

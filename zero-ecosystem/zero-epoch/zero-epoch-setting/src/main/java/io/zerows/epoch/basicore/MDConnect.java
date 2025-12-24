@@ -1,13 +1,11 @@
 package io.zerows.epoch.basicore;
 
-import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.r2mo.base.dbe.common.DBNode;
 import io.vertx.core.json.JsonArray;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.management.OCacheConfiguration;
 import io.zerows.epoch.metadata.MMAdapt;
 import io.zerows.integrated.jackson.JsonArrayDeserializer;
 import io.zerows.integrated.jackson.JsonArraySerializer;
@@ -16,8 +14,6 @@ import lombok.Data;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 /**
  * Connect configuration data to
@@ -27,17 +23,17 @@ import java.util.concurrent.ConcurrentMap;
 public class MDConnect implements Serializable {
 
     @JsonIgnore // 新版不执行 dao 的序列化，构造过程中单独处理
-    private Class<?> dao;
-    private String pojoFile;
+    private Class<?> dao;           // DaoClass 类名
+    private String pojoFile;        // 绑定的 pojo 名
 
     @JsonSerialize(using = JsonArraySerializer.class)
     @JsonDeserialize(using = JsonArrayDeserializer.class)
-    private JsonArray unique;
+    private JsonArray unique;       // 唯一键列表（二维矩阵）
 
-    private String key;
+    private String key;             // 主键字段名称
 
     @JsonIgnore
-    private MDMeta meta;
+    private MDMeta meta;            // 元数据信息（此处要唯一）
 
     /**
      * 使用 {@link MDConnect} 可直接构造 Join 所需的参数信息，注意一点就是 {@link MDConnect} 不能初始化字段，字段级别的
@@ -107,28 +103,6 @@ public class MDConnect implements Serializable {
         return this.meta.pojo();
     }
 
-    private static final ConcurrentMap<String, MDConnect> CONNECT_MAP = new ConcurrentHashMap<>();
-
-    public static MDConnect lookup(final String tableOr) {
-        if (StrUtil.isEmpty(tableOr)) {
-            return null;
-        }
-        // 内部缓存
-        if (CONNECT_MAP.containsKey(tableOr)) {
-            return CONNECT_MAP.getOrDefault(tableOr, null);
-        }
-        // 底层读取
-        final OCacheConfiguration store = OCacheConfiguration.of();
-        final MDConnect found = store.valueSet()
-            .stream()
-            .flatMap(configuration -> configuration.inConnect().stream())
-            .filter(connect -> tableOr.equals(connect.getTable()))
-            .findAny().orElse(null);
-        if (Objects.nonNull(found)) {
-            CONNECT_MAP.put(tableOr, found);
-        }
-        return found;
-    }
 
     @Override
     public String toString() {

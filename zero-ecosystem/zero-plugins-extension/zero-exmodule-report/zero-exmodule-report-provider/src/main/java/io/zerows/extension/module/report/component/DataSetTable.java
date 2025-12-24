@@ -5,6 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.basicore.MDConnect;
 import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.management.OCacheConfiguration;
 import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.module.report.domain.tables.pojos.KpDataSet;
@@ -39,7 +40,7 @@ class DataSetTable extends DataSetBase {
      */
     DataSetTable(final JsonObject sourceJ) {
         final String tableName = Ut.valueString(sourceJ, KName.SOURCE);
-        this.connect = MDConnect.lookup(tableName);
+        this.connect = OCacheConfiguration.entireConnect(tableName);
         Objects.requireNonNull(this.connect);
         this.children.mergeIn(Ut.valueJObject(sourceJ, KName.CHILDREN));
     }

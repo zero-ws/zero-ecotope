@@ -64,7 +64,7 @@ class IxSetupModule extends IxSetupBase<KModule> {
             final MDEntity entityOverwrite = entryConfiguration.inEntity(entity.identifier());
             final JsonObject moduleJ = entity.inModule();
             if (Objects.nonNull(entityOverwrite)) {
-                log.info("{} 重写 identifier = `{}` 的模块配置", KeConstant.K_PREFIX_BOOT, identifier);
+                log.info("{} `{}` <--- 被重写模块配置", KeConstant.K_PREFIX_CRUD, identifier);
                 final JsonObject moduleOverwriteJ = entityOverwrite.inModule();
                 moduleJ.mergeIn(moduleOverwriteJ, true);
             }
@@ -79,9 +79,9 @@ class IxSetupModule extends IxSetupBase<KModule> {
 
             // 存储 KModule
             MODULE_MAP.put(identifier, module, module.getName());
-            log.info("{} 模块配置加载完成，identifier = `{}`，actor = `{}`", KeConstant.K_PREFIX_BOOT, identifier, actor);
+            log.info("{} `{}` 加载完成，actor = `{}`", KeConstant.K_PREFIX_CRUD, identifier, actor);
         }));
-        log.info("{} IxSetupModule 配置完成 ! Size = {}, Uris = {}", KeConstant.K_PREFIX_BOOT, MODULE_MAP.values().size(), URI_SET.size());
+        log.info("{} IxSetupModule 配置完成 ! Size = {}, Uris = {}", KeConstant.K_PREFIX_CRUD, MODULE_MAP.values().size(), URI_SET.size());
         return true;
     }
 

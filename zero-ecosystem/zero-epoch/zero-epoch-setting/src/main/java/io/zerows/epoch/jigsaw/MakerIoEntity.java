@@ -8,6 +8,7 @@ import io.zerows.epoch.boot.ZeroFs;
 import io.zerows.epoch.constant.KName;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.Objects;
@@ -17,6 +18,7 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * @author lang : 2024-05-12
  */
+@Slf4j
 class MakerIoEntity extends MakerIoBase<MDEntity> {
     MakerIoEntity(final ZeroFs io) {
         super(io);
@@ -91,18 +93,25 @@ class MakerIoEntity extends MakerIoBase<MDEntity> {
         final ConcurrentMap<String, MDConnect> connectMap = (ConcurrentMap<String, MDConnect>) args[0];
         final String daoCls = Ut.valueString(entityJ, "daoCls");
 
-
-        // --------------- 查找 MDConnect
-        final MDConnect found;
-        if (connectMap.containsKey(daoCls)) {
-            // daoCls 配置的是表名
-            found = connectMap.getOrDefault(daoCls, null);
-
+        final MDConnect found = this.findOr(connectMap, daoCls);
+        if (Objects.nonNull(found)) {
             // 替换
             entityJ.put("daoCls", found.getDao().getName());
+        }
+
+        // 最终构造模型对应的元数据绑定信息 / Bind：entity 和 connect
+        return entity.bind(entityJ).bind(found);
+    }
+
+    private MDConnect findOr(final ConcurrentMap<String, MDConnect> stored, final String daoCls) {
+        // --------------- 查找 MDConnect
+        final MDConnect found;
+        if (stored.containsKey(daoCls)) {
+            // daoCls 配置的是表名
+            found = stored.getOrDefault(daoCls, null);
         } else {
             // daoCls 配置的并非表名，而是类名，类名要检索
-            found = connectMap.values().stream()
+            found = stored.values().stream()
                 /*
                  * 类名检索，数据层面必须找到，否则底层执行会不正常，一般一个模块 Bundle 中 MDConnect 是全的，而 MDEntity 可能会不全，
                  * 只有定义 crud 模块才会启动 MDEntity 部分，所以这里的检索一定会找到作为基本配置合规的前提
@@ -110,14 +119,11 @@ class MakerIoEntity extends MakerIoBase<MDEntity> {
                 .filter(connect -> connect.getDao().getName().equals(daoCls))
                 .findFirst().orElse(null);
             if (Objects.isNull(found)) {
-                Ut.Log.uca(this.getClass()).warn("The daoCls = {0} could not be found in MDConnect, ", daoCls);
+                log.warn("[ ZERO ] The daoCls = {} 无法找到 MDConnect, ", daoCls);
             }
             Objects.requireNonNull(found);
         }
-
-
-        // 最终构造模型对应的元数据绑定信息 / Bind：entity 和 connect
-        return entity.bind(entityJ).bind(found);
+        return found;
     }
 
     private String buildId(final String path) {
