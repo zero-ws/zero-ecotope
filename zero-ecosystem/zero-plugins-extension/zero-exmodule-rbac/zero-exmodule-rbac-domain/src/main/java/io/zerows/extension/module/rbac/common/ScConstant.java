@@ -5,10 +5,6 @@ package io.zerows.extension.module.rbac.common;
  * It's used in current module only
  */
 public interface ScConstant {
-
-    String BUNDLE_SYMBOLIC_NAME = "zero-exmodule-rbac";
-
-
     // 权限池
     String POOL_PERMISSIONS = "POOL_PERMISSIONS";
     // 资源池

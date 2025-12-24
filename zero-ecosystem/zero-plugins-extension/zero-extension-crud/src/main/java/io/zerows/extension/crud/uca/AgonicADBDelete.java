@@ -5,7 +5,6 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.extension.crud.common.Ix;
-import io.zerows.extension.crud.common.IxPin;
 import io.zerows.extension.crud.uca.input.Pre;
 import io.zerows.extension.skeleton.spi.ExTrash;
 import io.zerows.mbse.metadata.KModule;
@@ -19,7 +18,7 @@ import java.util.Objects;
 class AgonicADBDelete implements Agonic {
     @Override
     public Future<JsonObject> runJAsync(final JsonObject criteria, final IxMod in) {
-        final ADB jooq = IxPin.jooq(in);
+        final ADB jooq = Ix.jooq(in);
         return jooq.fetchOneAsync(criteria).compose(queried -> {
             if (Objects.isNull(queried)) {
                 /*
@@ -49,7 +48,7 @@ class AgonicADBDelete implements Agonic {
 
     @Override
     public Future<JsonArray> runJAAsync(final JsonObject criteria, final IxMod in) {
-        final ADB jooq = IxPin.jooq(in);
+        final ADB jooq = Ix.jooq(in);
         return jooq.fetchAsync(criteria).compose(queried -> {
             if (Objects.isNull(queried) || queried.isEmpty()) {
                 return Ux.futureA();

@@ -6,7 +6,6 @@ import io.r2mo.typed.common.Kv;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.cortex.extension.HExtension;
 import io.zerows.epoch.basicore.MDConnect;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.ADJ;
@@ -30,10 +29,10 @@ class DataSetJoin2 extends DataSetBase {
 
     DataSetJoin2(final JsonObject sourceJ) {
         final String active = Ut.valueString(sourceJ, KName.ACTIVE);
-        this.active = HExtension.connect(active);
+        this.active = MDConnect.lookup(active);
         Objects.requireNonNull(this.active);
         final String standBy = Ut.valueString(sourceJ, "standby");
-        this.standBy = HExtension.connect(standBy);
+        this.standBy = MDConnect.lookup(standBy);
         Objects.requireNonNull(this.standBy);
         this.children.mergeIn(Ut.valueJObject(sourceJ, KName.CHILDREN));
 

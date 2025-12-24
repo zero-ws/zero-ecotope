@@ -5,8 +5,6 @@ package io.zerows.extension.module.modulat.common;
  */
 public interface BkConstant {
 
-    String BUNDLE_SYMBOLIC_NAME = "zero-extension-mbse-modulat";
-
     interface License {
 
         String LIC_IDENTIFIER = "licIdentifier";

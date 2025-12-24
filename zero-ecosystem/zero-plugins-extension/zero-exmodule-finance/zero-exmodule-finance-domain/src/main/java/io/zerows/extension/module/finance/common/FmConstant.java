@@ -4,7 +4,6 @@ package io.zerows.extension.module.finance.common;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 public interface FmConstant {
-    String BUNDLE_SYMBOLIC_NAME = "zero-extension-commerce-finance";
 
     String[] SEQ = new String[]{"A", "B", "C", "D", "E", "F", "G"};
 

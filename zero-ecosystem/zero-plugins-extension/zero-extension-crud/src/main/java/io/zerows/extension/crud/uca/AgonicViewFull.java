@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.cosmic.plugins.cache.Rapid;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.store.jooq.ADB;
-import io.zerows.extension.crud.common.IxPin;
+import io.zerows.extension.crud.common.Ix;
 import io.zerows.extension.skeleton.spi.UiApeak;
 import io.zerows.program.Ux;
 
@@ -34,7 +34,7 @@ class AgonicViewFull implements Agonic {
         return Rapid.<String, JsonArray>object(KWeb.CACHE.VIEW_FULL, Agonic.EXPIRED).cached(cacheKey, () -> {
 
 
-            final ADB jooq = IxPin.jooq(in);
+            final ADB jooq = Ix.jooq(in);
             return Ux.channel(UiApeak.class, JsonArray::new,
                 stub -> stub.on(jooq).fetchFull(input));
         });

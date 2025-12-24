@@ -5,7 +5,6 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.extension.crud.common.Ix;
-import io.zerows.extension.crud.common.IxPin;
 import io.zerows.extension.crud.common.em.QrType;
 import io.zerows.extension.crud.uca.input.Pre;
 import io.zerows.mbse.metadata.KModule;
@@ -56,7 +55,7 @@ class AgonicADBCreate implements Agonic {
      * @return {@link Future} 异步记录结果集
      */
     private Future<JsonObject> uniqueJAsync(final JsonObject input, final IxMod in) {
-        final ADB jooq = IxPin.jooq(in);
+        final ADB jooq = Ix.jooq(in);
         return Pre.qr(QrType.BY_UK).inJAsync(input, in)
             .compose(jooq::fetchJOneAsync);
     }

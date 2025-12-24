@@ -8,6 +8,7 @@ import io.zerows.epoch.basicore.MDId;
 import io.zerows.epoch.boot.ZeroFs;
 import io.zerows.epoch.management.OCacheConfiguration;
 import io.zerows.specification.development.compiled.HBundle;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
@@ -17,6 +18,7 @@ import java.util.concurrent.ConcurrentMap;
  *
  * @author lang : 2024-05-09
  */
+@Slf4j
 class EquipModel implements EquipAt {
     @Override
     public void initialize(final MDConfiguration configuration) {
@@ -40,7 +42,7 @@ class EquipModel implements EquipAt {
             // 重写模式，直接从已经存在的 MDConnect 中提取信息来填充
             final Set<MDConnect> connects = OCacheConfiguration.entireConnect();
             connects.forEach(connect -> connectMap.put(connect.getTable(), connect));
-            this.logger().info("Connect Overwrite Mode: Size = {}", connects.size());
+            log.info("[ XMOD ] 连接重写模式：Size = {}", connects.size());
         }
         configuration.setConnect(connectMap);
 

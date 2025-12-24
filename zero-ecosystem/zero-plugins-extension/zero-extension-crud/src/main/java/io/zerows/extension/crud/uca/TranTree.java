@@ -7,7 +7,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.metadata.KTransform;
 import io.zerows.epoch.metadata.KTree;
 import io.zerows.epoch.store.jooq.ADB;
-import io.zerows.extension.crud.common.IxPin;
+import io.zerows.extension.crud.common.Ix;
 import io.zerows.mbse.metadata.KModule;
 import io.zerows.platform.constant.VString;
 import io.zerows.program.Ux;
@@ -91,7 +91,7 @@ class TranTree implements Tran {
         criteria.put(keyField + ",i", values);
         criteria.put(VString.EMPTY, Boolean.TRUE);
         LOG.Web.info(this.getClass(), "Tree Transform Condition: {0}", criteria.encode());
-        final ADB jooq = IxPin.jooq(in);
+        final ADB jooq = Ix.jooq(in);
         return jooq.fetchJAsync(criteria).compose(source -> Ux.future(this.tree(source, keyValue)));
     }
 

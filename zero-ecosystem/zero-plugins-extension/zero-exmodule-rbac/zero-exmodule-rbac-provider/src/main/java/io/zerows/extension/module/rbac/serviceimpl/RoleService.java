@@ -4,11 +4,10 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
-import io.zerows.cortex.extension.HExtension;
 import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.epoch.store.jooq.DB;
+import io.zerows.extension.module.rbac.boot.MDRBACManager;
 import io.zerows.extension.module.rbac.common.ScAuthKey;
-import io.zerows.extension.module.rbac.common.ScConstant;
 import io.zerows.extension.module.rbac.domain.tables.daos.RRolePermDao;
 import io.zerows.extension.module.rbac.domain.tables.daos.SPermissionDao;
 import io.zerows.extension.module.rbac.domain.tables.daos.SRoleDao;
@@ -28,7 +27,7 @@ public class RoleService implements RoleStub {
     @Override
     public Future<JsonObject> roleSave(final JsonObject data, final User user) {
         // 1. 加载配置信息
-        final MDConfiguration config = HExtension.getOrCreate(ScConstant.BUNDLE_SYMBOLIC_NAME);
+        final MDConfiguration config = MDRBACManager.of().configuration();
         final JsonObject configData = config.inConfiguration();
         final JsonObject initializeRole = configData.getJsonObject(ScAuthKey.INITIALIZE_ROLE);
         final JsonObject initializePermissions = configData.getJsonObject(ScAuthKey.INITIALIZE_PERMISSIONS);

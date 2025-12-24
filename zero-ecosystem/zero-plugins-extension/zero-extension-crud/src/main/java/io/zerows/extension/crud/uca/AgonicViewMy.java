@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.cosmic.plugins.cache.Rapid;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.store.jooq.ADB;
-import io.zerows.extension.crud.common.IxPin;
+import io.zerows.extension.crud.common.Ix;
 import io.zerows.extension.crud.uca.input.Pre;
 import io.zerows.extension.skeleton.spi.ScSeeker;
 import io.zerows.extension.skeleton.spi.UiApeakMy;
@@ -33,7 +33,7 @@ class AgonicViewMy implements Agonic {
 
     @Override
     public Future<JsonArray> runJAAsync(final JsonObject input, final IxMod in) {
-        final ADB jooq = IxPin.jooq(in);
+        final ADB jooq = Ix.jooq(in);
         return this.fetchResources(input, jooq, in)
             /* view has findRunning, ignored, */
             /*

@@ -7,7 +7,6 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.metadata.KJoin;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.crud.common.Ix;
-import io.zerows.extension.crud.common.IxPin;
 import io.zerows.extension.crud.exception._80100Exception404ModuleMissing;
 import io.zerows.mbse.metadata.KModule;
 import io.zerows.platform.constant.VString;
@@ -75,7 +74,7 @@ public class IxMod {
     private IxMod(final String actor) {
         final KModule module;
         try {
-            module = IxPin.getActor(actor);
+            module = Ix.getActor(actor);
             Fn.jvmKo(Objects.isNull(module), _80100Exception404ModuleMissing.class, actor);
             this.module = module;
         } catch (final WebException error) {

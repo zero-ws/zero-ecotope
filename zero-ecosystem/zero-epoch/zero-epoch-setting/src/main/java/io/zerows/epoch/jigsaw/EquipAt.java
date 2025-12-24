@@ -1,10 +1,8 @@
 package io.zerows.epoch.jigsaw;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.component.log.LogO;
 import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.epoch.basicore.MDId;
-import io.zerows.support.Ut;
 
 /**
  * 🧩 模块化扩展初始化器，主要用于构造扩展配置相关信息，执行模块化扩展的完整解析流程
@@ -48,13 +46,4 @@ public interface EquipAt {
      * @param configuration 模块化配置信息 ⚙️
      */
     void initialize(MDConfiguration configuration);
-
-    /**
-     * 📝 获取模块化日志记录器
-     *
-     * @return 模块化日志实例 📰
-     */
-    default LogO logger() {
-        return Ut.Log.boot(this.getClass());
-    }
 }

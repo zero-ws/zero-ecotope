@@ -4,7 +4,6 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.extension.crud.common.Ix;
-import io.zerows.extension.crud.common.IxPin;
 import io.zerows.extension.crud.uca.input.Pre;
 import io.zerows.extension.crud.uca.next.Co;
 import io.zerows.mbse.metadata.KModule;
@@ -94,7 +93,7 @@ class AgonicADBByID implements Agonic {
      * @return {@link Future}<{@link JsonObject}>
      */
     private Future<JsonObject> fetchAsync(final JsonObject criteria, final IxMod in) {
-        final ADB jooq = IxPin.jooq(in);
+        final ADB jooq = Ix.jooq(in);
         return jooq.fetchOneAsync(criteria).compose(queried -> {
             if (Objects.isNull(queried)) {
                 // null 返回，上层会转换成 204

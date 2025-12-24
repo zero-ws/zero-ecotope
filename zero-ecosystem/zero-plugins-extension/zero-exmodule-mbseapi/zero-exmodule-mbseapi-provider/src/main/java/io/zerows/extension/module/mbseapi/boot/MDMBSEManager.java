@@ -3,7 +3,6 @@ package io.zerows.extension.module.mbseapi.boot;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonObject;
 import io.zerows.cortex.sdk.Axis;
-import io.zerows.epoch.management.OCacheConfiguration;
 import io.zerows.extension.module.mbseapi.component.JtMonitor;
 import io.zerows.extension.module.mbseapi.metadata.JtUri;
 import io.zerows.extension.skeleton.common.KeConstant;
@@ -43,8 +42,6 @@ import java.util.stream.Collectors;
 public class MDMBSEManager extends MDModuleManager<MDCMetamodel, Boolean> {
     private static MDMBSEManager INSTANCE;
     private static final Cc<String, ServiceEnvironment> AMBIENT = Cc.open();
-    private static final OCacheConfiguration STORE = OCacheConfiguration.of();
-    private MDCMetamodel setting;
     private Class<Axis> axisCls;
     // 监控专用
     private static final AtomicInteger LOG_OPTION = new AtomicInteger(0);
@@ -72,7 +69,7 @@ public class MDMBSEManager extends MDModuleManager<MDCMetamodel, Boolean> {
      */
     @Override
     public boolean isEnabled(final HBundle bundle) {
-        if (Objects.isNull(this.setting)) {
+        if (Objects.isNull(this.setting())) {
             return false;
         }
         final Class<Axis> axisCls = this.getAxisCls();
@@ -82,7 +79,7 @@ public class MDMBSEManager extends MDModuleManager<MDCMetamodel, Boolean> {
         if (VValue.ZERO == LOG_OPTION.getAndIncrement()) {
             log.info("{} 系统监测到动态系统路由组件：{}", KeConstant.K_PREFIX_BOOT, axisCls.getName());
         }
-        final JsonObject configuration = STORE.configurationJ(MID.BUNDLE_SYMBOLIC_NAME);
+        final JsonObject configuration = this.configuration().inConfiguration();
         if (VValue.ONE == LOG_OPTION.getAndIncrement()) {
             log.info("{} 监测到动态组件核心配置：{}", KeConstant.K_PREFIX_BOOT, configuration);
         }
@@ -101,10 +98,10 @@ public class MDMBSEManager extends MDModuleManager<MDCMetamodel, Boolean> {
         if (Objects.nonNull(this.axisCls)) {
             return this.axisCls;
         }
-        if (Objects.isNull(this.setting)) {
+        if (Objects.isNull(this.setting())) {
             return null;
         }
-        final MDCMetamodel.Router router = this.setting.getRouter();
+        final MDCMetamodel.Router router = this.setting().getRouter();
         if (Objects.isNull(router)) {
             log.warn("{} 缺乏 router 配置，无法提取动态路由组件信息！", KeConstant.K_PREFIX_BOOT);
             return null;

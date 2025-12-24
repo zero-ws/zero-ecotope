@@ -58,8 +58,8 @@ class IxData {
                 }
             } else {
                 // dataIndex
-                field = column.getString(IxPin.getColumnKey());
-                fieldValue = column.getString(IxPin.getColumnLabel());
+                field = column.getString(Ix.getColumnKey());
+                fieldValue = column.getString(Ix.getColumnLabel());
             }
         }
         if (Objects.nonNull(field) && Objects.nonNull(fieldValue)) {
@@ -127,7 +127,7 @@ class IxData {
 
     private static List<HMetaField> column(final KModule module, final Envelop envelop,
                                            final ConcurrentMap<String, String> headerMap) {
-        final ADB jooq = IxPin.jooq(module, envelop);
+        final ADB jooq = Ix.jooq(module, envelop);
         final ConcurrentMap<String, Class<?>> typeMap = jooq.metaTypes();
         /*
          * Processing for TypeField list building

@@ -5,7 +5,6 @@ import io.vertx.core.json.JsonArray;
 import io.zerows.epoch.metadata.KField;
 import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.extension.crud.common.Ix;
-import io.zerows.extension.crud.common.IxPin;
 import io.zerows.extension.crud.common.em.QrType;
 import io.zerows.extension.crud.uca.input.Pre;
 import io.zerows.platform.enums.typed.ChangeFlag;
@@ -27,7 +26,7 @@ class AgonicADBImport implements Agonic {
         /*
          * Header And Compress
          */
-        final ADB jooq = IxPin.jooq(in);
+        final ADB jooq = Ix.jooq(in);
         return Ix.pass(input, in,
             Pre.head()::inAAsync,        /* Header Value */
             Pre.serial()::inAAsync,      /* Serial/Number */

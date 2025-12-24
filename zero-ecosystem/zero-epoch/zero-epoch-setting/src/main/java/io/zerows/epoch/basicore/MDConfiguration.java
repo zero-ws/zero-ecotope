@@ -3,6 +3,8 @@ package io.zerows.epoch.basicore;
 import cn.hutool.core.util.StrUtil;
 import io.r2mo.typed.common.MultiKeyMap;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.jigsaw.EquipAt;
+import io.zerows.epoch.management.OCacheConfiguration;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
@@ -183,6 +185,43 @@ public class MDConfiguration {
             final String daoCls = connect.getDao().getName();
             this.connectMap.put(table, connect, daoCls);
         });
+    }
+
+    // ---------- 特殊构造方法
+
+    /**
+     * 带缓存的配置创建，会和 {@link OCacheConfiguration} 进行交互
+     *
+     * @param mid 模块标识
+     *
+     * @return 模块配置
+     */
+    public static MDConfiguration getOrCreate(final String mid) {
+        // 提取存储
+        final OCacheConfiguration store = OCacheConfiguration.of();
+        MDConfiguration configuration = store.valueGet(mid);
+        if (Objects.isNull(configuration)) {
+            configuration = getInstance(mid);
+            // 初始化完成后追加
+            store.add(configuration);
+        }
+        return configuration;
+    }
+
+    /**
+     * 不带缓存的配置创建
+     *
+     * @param mid 模块标识
+     *
+     * @return 模块配置
+     */
+    public static MDConfiguration getInstance(final String mid) {
+        // 创建一个新模块
+        final MDConfiguration configuration = new MDConfiguration(mid);
+        // 新模块执行初始化
+        final EquipAt equipAt = EquipAt.of(configuration.id());
+        equipAt.initialize(configuration);
+        return configuration;
     }
 
     // ---------- 重写的 equals / hashCode 方法

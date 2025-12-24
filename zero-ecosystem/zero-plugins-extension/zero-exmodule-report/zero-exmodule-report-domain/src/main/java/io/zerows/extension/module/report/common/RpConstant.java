@@ -5,8 +5,6 @@ package io.zerows.extension.module.report.common;
  */
 public interface RpConstant {
 
-    String BUNDLE_SYMBOLIC_NAME = "zero-extension-runtime-report";
-
     interface SourceTypeField {
         String TABLE = "ds.table";
         String VIEW = "ds.view";

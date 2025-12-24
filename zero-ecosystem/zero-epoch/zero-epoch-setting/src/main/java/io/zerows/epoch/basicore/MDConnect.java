@@ -1,11 +1,13 @@
 package io.zerows.epoch.basicore;
 
+import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.r2mo.base.dbe.common.DBNode;
 import io.vertx.core.json.JsonArray;
 import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.management.OCacheConfiguration;
 import io.zerows.epoch.metadata.MMAdapt;
 import io.zerows.integrated.jackson.JsonArrayDeserializer;
 import io.zerows.integrated.jackson.JsonArraySerializer;
@@ -14,6 +16,8 @@ import lombok.Data;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 /**
  * Connect configuration data to
@@ -101,6 +105,29 @@ public class MDConnect implements Serializable {
     public Class<?> getPojo() {
         Objects.requireNonNull(this.meta);
         return this.meta.pojo();
+    }
+
+    private static final ConcurrentMap<String, MDConnect> CONNECT_MAP = new ConcurrentHashMap<>();
+
+    public static MDConnect lookup(final String tableOr) {
+        if (StrUtil.isEmpty(tableOr)) {
+            return null;
+        }
+        // 内部缓存
+        if (CONNECT_MAP.containsKey(tableOr)) {
+            return CONNECT_MAP.getOrDefault(tableOr, null);
+        }
+        // 底层读取
+        final OCacheConfiguration store = OCacheConfiguration.of();
+        final MDConnect found = store.valueSet()
+            .stream()
+            .flatMap(configuration -> configuration.inConnect().stream())
+            .filter(connect -> tableOr.equals(connect.getTable()))
+            .findAny().orElse(null);
+        if (Objects.nonNull(found)) {
+            CONNECT_MAP.put(tableOr, found);
+        }
+        return found;
     }
 
     @Override

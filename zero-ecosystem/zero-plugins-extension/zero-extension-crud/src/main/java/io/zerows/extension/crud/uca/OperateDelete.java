@@ -7,7 +7,7 @@ import io.zerows.component.destine.Conflate;
 import io.zerows.component.destine.Hymn;
 import io.zerows.epoch.metadata.KJoin;
 import io.zerows.epoch.store.jooq.ADB;
-import io.zerows.extension.crud.common.IxPin;
+import io.zerows.extension.crud.common.Ix;
 import io.zerows.mbse.metadata.KModule;
 import io.zerows.program.Ux;
 
@@ -58,8 +58,8 @@ class OperateDelete implements Operate<Object, Boolean> {
         }
         Objects.requireNonNull(point);
 
-        final KModule switched = IxPin.getActor(point.getCrud());
-        final ADB switchedJq = IxPin.jooq(switched, in.envelop());
+        final KModule switched = Ix.getActor(point.getCrud());
+        final ADB switchedJq = Ix.jooq(switched, in.envelop());
         // 绑定 pojo
         // switchedJq.on(switched.getPojo());
         return switchedJq;

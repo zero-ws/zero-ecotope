@@ -8,7 +8,6 @@ import io.zerows.component.destine.Hymn;
 import io.zerows.epoch.metadata.KJoin;
 import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.extension.crud.common.Ix;
-import io.zerows.extension.crud.common.IxPin;
 import io.zerows.extension.crud.uca.input.Pre;
 import io.zerows.mbse.metadata.KModule;
 import io.zerows.program.Ux;
@@ -82,7 +81,7 @@ class AgonicADJStandSave implements Agonic {
 
 
         // 此处读取 StandBy 相关记录
-        final ADB jooq = IxPin.jooq(in);
+        final ADB jooq = Ix.jooq(in);
         return jooq.fetchJOneAsync(condition);
     }
 
@@ -128,7 +127,7 @@ class AgonicADJStandSave implements Agonic {
         final JsonObject condition = conflate.treat(inputA, this.module.connectId());
 
         LOG.Filter.info(this.getClass(), "( Batch ) By Joined: identifier: {0}, condition: {1}", in.module().identifier(), condition);
-        final ADB jooq = IxPin.jooq(in);
+        final ADB jooq = Ix.jooq(in);
         return jooq.fetchJAsync(condition);
     }
 }

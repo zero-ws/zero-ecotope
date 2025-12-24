@@ -7,7 +7,6 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.KField;
 import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.extension.crud.common.Ix;
-import io.zerows.extension.crud.common.IxPin;
 import io.zerows.extension.crud.common.em.QrType;
 import io.zerows.extension.crud.uca.input.Pre;
 import io.zerows.platform.constant.VName;
@@ -66,7 +65,7 @@ class AgonicADBUpdate implements Agonic {
      * @return {@link Future} 异步记录结果
      */
     private Future<JsonObject> uniqueJAsync(final JsonObject inputJ, final IxMod in) {
-        final ADB jooq = IxPin.jooq(in);
+        final ADB jooq = Ix.jooq(in);
         /*
          * 此处特殊方法调用，peekJ 会执行优先方法调用，第一个方法返回 null 则继续执行，
          * 若是 JsonObject，则执行 Ut.isNil 的持续判断，否则直接返回第一个方法的结果。
@@ -116,7 +115,7 @@ class AgonicADBUpdate implements Agonic {
     private Future<JsonArray> uniqueAAsync(final JsonObject inputJ, final IxMod in) {
         final JsonObject query = inputJ.getJsonObject(VName.KEY_CRITERIA);
         LOG.Filter.info(this.getClass(), "( Mass Update ) Condition: {0}", query);
-        final ADB jooq = IxPin.jooq(in);
+        final ADB jooq = Ix.jooq(in);
         return jooq.fetchJAsync(query);
     }
 

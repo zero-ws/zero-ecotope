@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.cortex.metadata.WebRule;
 import io.zerows.cosmic.plugins.validation.Rigor;
 import io.zerows.epoch.web.Envelop;
-import io.zerows.extension.crud.common.IxPin;
+import io.zerows.extension.crud.common.Ix;
 import io.zerows.extension.crud.uca.IxMod;
 import io.zerows.mbse.metadata.KModule;
 import io.zerows.platform.constant.VString;
@@ -30,7 +30,7 @@ class PreCodex implements Pre {
 
         LOG.Verify.info(this.getClass(), "---> Rule: {0}", key);
 
-        final ConcurrentMap<String, List<WebRule>> rules = IxPin.getRules(key);
+        final ConcurrentMap<String, List<WebRule>> rules = Ix.getRules(key);
         if (!rules.isEmpty()) {
             /*
              * 2. Validate JsonObject

@@ -4,9 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.exception._80413Exception501NotImplement;
 import io.zerows.platform.metadata.KPivot;
-import io.zerows.specification.app.HArk;
 
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.Consumer;
@@ -134,65 +132,6 @@ public interface HLauncher<WebContainer> {
          */
         default Future<Boolean> waitAsync(final WebContainer container, final JsonObject options) {
             return Future.succeededFuture(Boolean.FALSE);
-        }
-
-        /**
-         * 第二生命周期：直接在 {@link WebContainer} 启动之后，扩展模块启动之前处理
-         * <pre><code>
-         *     1. 跨应用级，直接传入 {@link Set} 类型的 {@link HArk} 应用配置
-         *     2. 会多一个核心参数 {@link Set} 应用配置集合对象
-         * </code></pre>
-         *
-         * @param container 容器对象
-         * @param arkSet    应用配置对象集合
-         * @param config    应用配置对象
-         *
-         * @return {@link Boolean}
-         */
-        @Deprecated
-        default Boolean beforeMod(final WebContainer container, final HConfig config, final Set<HArk> arkSet) {
-            return Boolean.TRUE;
-        }
-
-        /**
-         *
-         * @param container 容器对象
-         * @param arkSet    应用配置对象集合
-         * @param config    应用配置对象
-         *
-         * @return {@link Future}
-         */
-        @Deprecated
-        default Future<Boolean> beforeModAsync(final WebContainer container, final HConfig config, final Set<HArk> arkSet) {
-            return Future.succeededFuture(this.beforeMod(container, config, arkSet));
-        }
-
-        /**
-         * 第三生命周期：直接在 {@link WebContainer} 对应的扩展模块 {@link HRegistry.Mod} 的配置部分启动之后
-         * 执行，此方法用于初始化扩展之前的核心操作
-         *
-         * @param container 容器对象
-         * @param config    应用配置对象
-         * @param arkSet    应用集合
-         *
-         * @return {@link Boolean}
-         */
-        @Deprecated
-        default Boolean beforeInit(final WebContainer container, final HConfig config, final Set<HArk> arkSet) {
-            return Boolean.TRUE;
-        }
-
-        /**
-         *
-         * @param container 容器对象
-         * @param config    应用配置对象
-         * @param arkSet    应用集合
-         *
-         * @return {@link Future}
-         */
-        @Deprecated
-        default Future<Boolean> beforeInitAsync(final WebContainer container, final HConfig config, final Set<HArk> arkSet) {
-            return Future.succeededFuture(this.beforeInit(container, config, arkSet));
         }
     }
 }

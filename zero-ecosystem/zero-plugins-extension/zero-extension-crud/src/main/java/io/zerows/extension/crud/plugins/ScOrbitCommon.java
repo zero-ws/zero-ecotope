@@ -1,7 +1,7 @@
 package io.zerows.extension.crud.plugins;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.extension.crud.common.IxPin;
+import io.zerows.extension.crud.common.Ix;
 import io.zerows.extension.skeleton.spi.ScOrbit;
 
 import java.util.Set;
@@ -13,7 +13,7 @@ public class ScOrbitCommon implements ScOrbit {
     /*
      * Critical Pool For URI Here.
      */
-    private static final Set<String> URIS = IxPin.getUris();
+    private static final Set<String> URIS = Ix.getUris();
 
     @Override
     public String analyze(final JsonObject arguments) {

@@ -1,7 +1,7 @@
 package io.zerows.extension.crud.plugins;
 
 import io.zerows.cortex.extension.PlugRegistry;
-import io.zerows.extension.crud.common.IxPin;
+import io.zerows.extension.crud.common.Ix;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -13,7 +13,7 @@ public class PlugRegistryCommon implements PlugRegistry {
     /*
      * Get module uris from the configuration of crud
      */
-    private static final Set<String> URIS = IxPin.getUris();
+    private static final Set<String> URIS = Ix.getUris();
 
     @Override
     public Set<String> analyze(final Set<String> routes) {

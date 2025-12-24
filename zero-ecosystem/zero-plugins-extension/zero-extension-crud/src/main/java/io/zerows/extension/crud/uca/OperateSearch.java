@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.epoch.store.jooq.ADJ;
-import io.zerows.extension.crud.common.IxPin;
+import io.zerows.extension.crud.common.Ix;
 import io.zerows.mbse.metadata.KModule;
 
 import java.util.function.Function;
@@ -25,13 +25,13 @@ class OperateSearch implements Operate<JsonObject, JsonObject> {
 
                 // Join 模式，此种情况下 in.connected() 不可能为 null
                 final KModule connect = in.connected();
-                final ADJ join = IxPin.join(in, connect);
+                final ADJ join = Ix.join(in, connect);
                 return join.searchAsync(condition);
             } else {
 
 
                 // Direct 模式
-                final ADB jooq = IxPin.jooq(in);
+                final ADB jooq = Ix.jooq(in);
                 return jooq.searchJAsync(condition);
             }
         };
