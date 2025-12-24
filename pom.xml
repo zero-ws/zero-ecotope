@@ -5,14 +5,14 @@
     <parent>
         <groupId>io.zerows</groupId>
         <artifactId>rachel-momo-0216</artifactId>
-        <version>1.0.39</version>
+        <version>1.0.40</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>zero-ecotope</artifactId>
     <version>1.0.0</version>
     <properties>
         <zero.version>1.0.0</zero.version>
-        <r2mo.version>1.0.39</r2mo.version>
+        <r2mo.version>1.0.40</r2mo.version>
 
         <!-- ====================== Java ======================================== -->
         <encoding>UTF-8</encoding>
