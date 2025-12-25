@@ -17,8 +17,6 @@ import java.util.Set;
 @Slf4j
 public class ExcelEnvConnect implements ExcelEnv<Void> {
 
-    private static final OCacheConfiguration STORE = OCacheConfiguration.of();
-
     /**
      * <pre>
      * 新配置处理，位于 vertx.yml 中的 excel: 节点，非 {@link EmApp.Native} 插件，只可以作为扩展来处理
@@ -40,7 +38,7 @@ public class ExcelEnvConnect implements ExcelEnv<Void> {
      */
     @Override
     public Void prepare(final JsonObject config) {
-        final Set<MDConfiguration> configSet = STORE.valueSet();
+        final Set<MDConfiguration> configSet = OCacheConfiguration.of().valueSet();
         for (final MDConfiguration configuration : configSet) {
             final MDId id = configuration.id();
             final Set<MDConnect> connects = configuration.inConnect();

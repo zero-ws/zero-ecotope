@@ -25,7 +25,7 @@ public class MDCRUDActor extends MDModuleActor {
             return Future.succeededFuture(Boolean.FALSE);
         }
 
-        final boolean initialized = this.manager().configure();
+        // 旧代码：final boolean initialized = this.manager().configure();
         return Future.succeededFuture(Boolean.TRUE);
     }
 

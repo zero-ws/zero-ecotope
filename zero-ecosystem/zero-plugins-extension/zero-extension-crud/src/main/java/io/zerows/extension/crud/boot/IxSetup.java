@@ -1,8 +1,10 @@
 package io.zerows.extension.crud.boot;
 
 import io.r2mo.typed.cc.Cc;
+import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.extension.crud.common.IxConfig;
 
+import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.Function;
 
@@ -19,7 +21,7 @@ public interface IxSetup<T> {
         return (IxSetup<R>) CC_SKELETON.pick(() -> constructorFn.apply(config), keyCached);
     }
 
-    Boolean configure();
+    Boolean configure(Set<MDConfiguration> waitSet);
 
     ConcurrentMap<String, T> map();
 

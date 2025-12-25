@@ -12,6 +12,7 @@ import io.zerows.platform.enums.modeling.EmModel;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.Set;
@@ -20,6 +21,7 @@ import java.util.concurrent.ConcurrentMap;
 
 import static io.zerows.extension.module.modulat.common.Bk.LOG;
 
+@Slf4j
 class ArkConfigure extends ArkBase {
 
     /*

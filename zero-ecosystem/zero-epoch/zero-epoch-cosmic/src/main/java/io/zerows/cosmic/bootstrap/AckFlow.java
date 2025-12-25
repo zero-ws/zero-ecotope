@@ -129,8 +129,9 @@ public final class AckFlow {
          * 🛡️ 响应安全设置，异常响应直接中断返回
          */
         if (!envelop.valid()) {
-            // ❌️ 出现异常，直接中断
-            reply(context, envelop);
+            // ❌️ 出现异常，直接中断，下边旧代码会导致死循环，所以此处直接 Reply
+            // reply(context, envelop);
+            Ack.of(context).handle(envelop, response, mediaTypes);
             return;
         }
 

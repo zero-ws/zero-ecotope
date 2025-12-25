@@ -1,6 +1,7 @@
 package io.zerows.extension.crud.boot;
 
 import io.zerows.cortex.metadata.WebRule;
+import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.extension.crud.common.IxConfig;
 import io.zerows.extension.skeleton.metadata.MDModuleManager;
 import io.zerows.mbse.metadata.KModule;
@@ -41,12 +42,11 @@ public class MDCRUDManager extends MDModuleManager<Boolean, IxConfig> {
         return INSTANCE;
     }
 
-    boolean configure() {
-        // 配置模块
-        Objects.requireNonNull(this.setupModule).configure();
-        // 配置规则
-        Objects.requireNonNull(this.setupRule).configure();
-        return true;
+    void handleAfter(final Set<MDConfiguration> configurationSet) {
+        // 处理模块配置
+        Objects.requireNonNull(this.setupModule).configure(configurationSet);
+        // 处理规则配置
+        Objects.requireNonNull(this.setupRule).configure(configurationSet);
     }
 
     // ------------------- 获取相关数据 -------------------

@@ -65,7 +65,7 @@ public class Envelop implements Serializable {
     private Envelop(final WebException error) {
         this.status = error.getStatus();
         this.error = error;
-        this.data = FnVertx.adapt(error);
+        this.data = FnVertx.failJson(error);
     }
 
     /*

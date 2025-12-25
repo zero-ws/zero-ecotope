@@ -4,6 +4,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.cortex.metadata.WebRule;
 import io.zerows.epoch.annotations.Codex;
+import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.epoch.boot.ZeroFs;
 import io.zerows.extension.crud.common.IxConfig;
 import io.zerows.extension.skeleton.common.KeConstant;
@@ -14,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -48,7 +50,7 @@ class IxSetupRule extends IxSetupBase<ConcurrentMap<String, List<WebRule>>> {
     private static final ZeroFs FS = ZeroFs.of();
 
     @Override
-    public Boolean configure() {
+    public Boolean configure(final Set<MDConfiguration> waitFor) {
         // 加载 yml 配置文件
         final List<String> files = FS.inFiles(CFG_VALIDATOR, VValue.SUFFIX.YML);
         files.forEach(filename -> {

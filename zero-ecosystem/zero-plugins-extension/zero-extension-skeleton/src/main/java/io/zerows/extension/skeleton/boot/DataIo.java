@@ -1,11 +1,12 @@
 package io.zerows.extension.skeleton.boot;
 
-import io.zerows.epoch.basicore.MDConfiguration;
+import cn.hutool.core.util.StrUtil;
 import io.zerows.epoch.boot.ZeroFs;
-import io.zerows.epoch.management.OCacheConfiguration;
+import io.zerows.extension.skeleton.common.KeConstant;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -15,6 +16,20 @@ import java.util.stream.Stream;
  */
 @Slf4j
 class DataIo {
+
+    static final Set<String> OOB_FILES = new HashSet<>();
+
+    private static Stream<String> waitFor(final String prefix) {
+        if (StrUtil.isEmpty(prefix)) {
+            log.info("{} OOB 文件数量：{}", KeConstant.K_PREFIX_LOAD, OOB_FILES.size());
+            return OOB_FILES.stream();
+        }
+        final Set<String> matched = OOB_FILES.stream()
+            .filter(item -> item.contains(prefix))
+            .collect(HashSet::new, Set::add, Set::addAll);
+        log.info("{} OOB 文件数量（前缀：{}）: {}", KeConstant.K_PREFIX_LOAD, prefix, matched.size());
+        return matched.stream();
+    }
 
     static Stream<String> ioFiles(final String folder, final String prefix, final boolean oob) {
         final ZeroFs fs = ZeroFs.of();
@@ -30,11 +45,8 @@ class DataIo {
         int addedCount = 0;
         if (oob) {
             final int sizeBefore = files.size();
-            final OCacheConfiguration configuration = OCacheConfiguration.of();
-            final Set<MDConfiguration> configSet = configuration.valueSet();
-            configSet.stream()
-                .map(each -> each.inFiles(prefix))
-                .forEach(files::addAll);
+            // 消费 Primed 启动过程中产生的配置信息
+            waitFor(prefix).forEach(files::add);
             addedCount = files.size() - sizeBefore;
         }
 

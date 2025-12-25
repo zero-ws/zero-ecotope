@@ -4,22 +4,13 @@ import io.r2mo.base.dbe.Database;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.zerows.epoch.annotations.Actor;
-import io.zerows.epoch.basicore.MDConfiguration;
-import io.zerows.epoch.basicore.MDWorkflow;
-import io.zerows.epoch.management.OCacheConfiguration;
-import io.zerows.extension.module.workflow.component.deployment.DeployOn;
 import io.zerows.extension.module.workflow.metadata.MetaWorkflow;
 import io.zerows.extension.skeleton.common.KeConstant;
 import io.zerows.extension.skeleton.metadata.MDModuleActor;
 import io.zerows.specification.app.HAmbient;
-import io.zerows.support.fn.Fx;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 /**
  * @author lang : 2025-12-16
@@ -45,26 +36,7 @@ public class MDWorkflowActor extends MDModuleActor {
             log.warn("{} `{}` 工作流数据库未初始化", KeConstant.K_PREFIX_BOOT, this.MID());
             return Future.succeededFuture(Boolean.TRUE);
         }
-        return this.manager().compile(workflow, vertxRef).compose(initalized -> {
-            log.info("{} `{}` 启动工作流引擎……，{}", KeConstant.K_PREFIX_BOOT, this.MID(), workflow.getName());
-
-            /* 提取所有 MDConfiguration 中的 Workflow 进行发布 */
-            final Set<MDConfiguration> exmodules = OCacheConfiguration.of().valueSet();
-            final Set<MDWorkflow> workflowSet = new HashSet<>();
-            exmodules.stream()
-                .filter(configuration -> Objects.nonNull(configuration.inWorkflow()))
-                .forEach(configuration -> {
-                    final Set<MDWorkflow> workflowOfMod = configuration.inWorkflow();
-                    log.info("{} ---> 模块 `{}` 包含 {} 个工作流定义", KeConstant.K_PREFIX_BOOT, configuration.id().value(), workflowOfMod.size());
-                    workflowSet.addAll(workflowOfMod);
-                });
-            final List<Future<Boolean>> futures = new ArrayList<>();
-            workflowSet.forEach(mdWorkflow -> futures.add(DeployOn.get(mdWorkflow).initialize()));
-            return Fx.combineB(futures).compose(completed -> {
-                log.info("{} `{}` 工作流引擎初始化完成！总发布：{}", KeConstant.K_PREFIX_BOOT, this.MID(), workflowSet.size());
-                return Future.succeededFuture(Boolean.TRUE);
-            });
-        });
+        return this.manager().compile(workflow, vertxRef);
     }
 
     @Override

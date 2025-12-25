@@ -31,7 +31,6 @@ class WingsJson extends WingsBase {
                 response.setStatusCode(state.state());
                 response.setStatusMessage(state.name());
                 response.end(VString.EMPTY);
-                response.end(VString.EMPTY);
             } else {
                 /*
                  * Freedom successful

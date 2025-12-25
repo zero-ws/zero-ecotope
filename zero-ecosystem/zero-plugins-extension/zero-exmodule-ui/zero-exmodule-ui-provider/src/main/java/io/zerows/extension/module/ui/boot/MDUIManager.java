@@ -2,12 +2,8 @@ package io.zerows.extension.module.ui.boot;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.basicore.MDConfiguration;
-import io.zerows.epoch.basicore.MDEntity;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.management.OCacheConfiguration;
 import io.zerows.extension.module.ui.common.UiConfig;
-import io.zerows.extension.skeleton.common.KeConstant;
 import io.zerows.extension.skeleton.metadata.MDModuleManager;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.constant.VValue;
@@ -16,7 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -160,23 +155,11 @@ public class MDUIManager extends MDModuleManager<Boolean, UiConfig> {
             }
         });
         config.setMapping(mappingCombine);
+    }
 
-
-        /* 提取所有 MDConfiguration 中的列信息进行填充 */
-        final Set<MDConfiguration> exmodules = OCacheConfiguration.of().valueSet();
-        log.info("{} 系统检测 {} 个模块！！", KeConstant.K_PREFIX_BOOT, exmodules.size());
-        exmodules.forEach(configuration -> {
-            // 懒加载列信息
-            final Set<MDEntity> entities = configuration.inEntity();
-            entities.stream().filter(Objects::nonNull)
-                .filter(entity -> Objects.nonNull(entity.identifier()))
-                .forEach(entity -> {
-                    final String identifier = entity.identifier();
-                    final JsonArray columns = entity.inColumns();
-                    if (!COLUMN_MAP.containsKey(identifier)) {
-                        COLUMN_MAP.put(identifier, columns);
-                    }
-                });
-        });
+    void handleAfter(final String identifier, final JsonArray columns) {
+        if (!COLUMN_MAP.containsKey(identifier)) {
+            COLUMN_MAP.put(identifier, columns);
+        }
     }
 }

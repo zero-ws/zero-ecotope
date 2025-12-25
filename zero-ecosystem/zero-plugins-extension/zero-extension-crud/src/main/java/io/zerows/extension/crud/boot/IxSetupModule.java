@@ -7,7 +7,6 @@ import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.epoch.basicore.MDEntity;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
-import io.zerows.epoch.management.OCacheConfiguration;
 import io.zerows.epoch.metadata.KField;
 import io.zerows.extension.crud.common.IxConfig;
 import io.zerows.extension.crud.common.IxConstant;
@@ -34,8 +33,6 @@ class IxSetupModule extends IxSetupBase<KModule> {
     // Module 集合
     private static final MultiKeyMap<KModule> MODULE_MAP = new MultiKeyMap<>();
 
-    private static final OCacheConfiguration STORE = OCacheConfiguration.of();
-
     IxSetupModule(final IxConfig config) {
         super(config);
     }
@@ -52,11 +49,10 @@ class IxSetupModule extends IxSetupBase<KModule> {
      * </pre>
      */
     @Override
-    public Boolean configure() {
+    public Boolean configure(final Set<MDConfiguration> configurationSet) {
         // 入口配置
         final MDConfiguration entryConfiguration = MDConfiguration.getInstance(IxConstant.ENTRY_CONFIGURATION);
         // 提取所有配置
-        final Set<MDConfiguration> configurationSet = STORE.valueSet();
         configurationSet.forEach(configuration -> configuration.inEntity().forEach(entity -> {
             Objects.requireNonNull(entity);
             final String identifier = entity.identifier();

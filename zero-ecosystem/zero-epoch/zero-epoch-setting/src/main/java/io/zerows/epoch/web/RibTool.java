@@ -4,8 +4,8 @@ import io.r2mo.typed.exception.WebException;
 import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonObject;
-import io.zerows.weaver.ZeroType;
 import io.zerows.platform.constant.VName;
+import io.zerows.weaver.ZeroType;
 
 import java.util.Objects;
 
@@ -32,7 +32,7 @@ class RibTool {
         if (Objects.isNull(error)) {
             return data;
         } else {
-            return FnVertx.adapt(error);
+            return FnVertx.failJson(error);
         }
     }
 
@@ -41,7 +41,7 @@ class RibTool {
             // final JsonObject response = data.getJsonObject(VName.DATA);
             return data.getBuffer(VName.DATA);
         } else {
-            final JsonObject errorJson = FnVertx.adapt(error);
+            final JsonObject errorJson = FnVertx.failJson(error);
             return Buffer.buffer(errorJson.encode());
         }
     }

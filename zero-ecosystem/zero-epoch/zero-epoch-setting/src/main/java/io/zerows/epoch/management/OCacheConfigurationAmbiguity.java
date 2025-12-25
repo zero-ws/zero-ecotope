@@ -92,42 +92,23 @@ class OCacheConfigurationAmbiguity extends AbstractAmbiguity implements OCacheCo
      * 上述结构中，不论是哪种，对底层而言 01-01 实例和 01-02 实例中的内容都是相同的，只是地址不同而已，这样即使出现“异步丢弃”的问题也不影响最终的结果，一旦容器启动完成后，
      * 依旧可以保证最终配置的结果一致性和正确性，简单说：只要可以访问数据库，最终的结果就是对的！！
      *
+     * Fix：上述解决问题的方式参考 {@see Primed} 接口中的说明（后续会包含特殊 Actor 启动）
+     *
      * @return MDConnect
      */
     static Set<MDConnect> entireConnect() {
-        final Set<MDConnect> foundSet = CC_SKELETON.values().stream()
+        return CC_SKELETON.values().stream()
             .flatMap(meta -> meta.valueSet().stream())
             .flatMap(meta -> meta.inConnect().stream())
             .filter(Objects::nonNull)
             .collect(Collectors.toSet());
-        // 此处要补充新的内容
-        foundSet.addAll(lookupSet());
-        return foundSet;
     }
 
     static MDConnect entireConnect(final String tableOr) {
-        final MDConnect found = CC_SKELETON.values().stream()
+        return CC_SKELETON.values().stream()
             .flatMap(meta -> meta.valueSet().stream())
             .map(meta -> meta.inConnect(tableOr))
             .filter(Objects::nonNull)
             .findAny().orElse(null);
-        if (Objects.nonNull(found)) {
-            return found;
-        }
-        return lookupSet().stream()
-            .filter(connect -> Objects.equals(connect.getTable(), tableOr))
-            .findAny().orElse(null);
-    }
-
-    private static Set<MDConnect> lookupSet() {
-        final OCacheDao dao = OCacheDao.of();
-        final Set<MDConnect> connectSet = new HashSet<>();
-        dao.keys().forEach(key -> {
-            final MDMeta meta = dao.valueGet(key);
-            final MDConnect connect = new MDConnect();
-            connect.build(meta);
-            connectSet.add(connect);
-        });
-        return connectSet;
     }
 }
