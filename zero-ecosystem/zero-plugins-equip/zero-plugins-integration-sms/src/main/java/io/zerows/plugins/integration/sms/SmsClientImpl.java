@@ -13,48 +13,26 @@ import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
-import io.zerows.plugins.integration.sms.exception._20003Exception424ProfileEndPoint;
+import io.zerows.epoch.annotations.Defer;
 import io.zerows.plugins.integration.sms.exception._20004Exception424MessageSend;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
+@Defer
 public class SmsClientImpl implements SmsClient {
 
-    private transient final Vertx vertx;
+    private transient final Vertx vertxRef;
     private transient SmsConfig config;
     private transient IAcsClient client;
 
     SmsClientImpl(final Vertx vertx, final SmsConfig config) {
-        this.vertx = vertx;
+        this.vertxRef = vertx;
         this.config = config;
-        this.initClient();
-    }
-
-    private void initClient() {
-        // Extract data from config
-        final JsonObject params = this.config.getConfig();
-        // Set default timeout
-        final String connect = params.containsKey(SmsConfig.TIMEOUT_CONN) ?
-            params.getInteger(SmsConfig.TIMEOUT_CONN).toString() : "10000";
-        final String read = params.containsKey(SmsConfig.TIMEOUT_READ) ?
-            params.getInteger(SmsConfig.TIMEOUT_READ).toString() : "10000";
-        System.setProperty("sun.net.client.defaultConnectTimeout", connect);
-        System.setProperty("sun.net.client.defaultReadTimeout", read);
-        // AscClient initialized.
         final IClientProfile profile = DefaultProfile.getProfile(SmsConfig.DFT_REGION,
-            this.config.getAccessId(), this.config.getAccessSecret());
-        try {
-            DefaultProfile.addEndpoint(SmsConfig.DFT_REGION, SmsConfig.DFT_REGION, SmsConfig.DFT_PRODUCT);
-        } catch (final Throwable ex) {
-            throw new _20003Exception424ProfileEndPoint(ex);
-        }
+                this.config.getAccessId(), this.config.getAccessSecret());
         this.client = new DefaultAcsClient(profile);
     }
 
-    @Override
-    public SmsClient init(final JsonObject params) {
-        this.config = SmsConfig.create(params);
-        this.initClient();
-        return this;
-    }
 
     @Override
     public SmsClient send(final String mobile, final String tplCode, final JsonObject params,
@@ -73,7 +51,7 @@ public class SmsClientImpl implements SmsClient {
             data.put(SmsConfig.RESPONSE_CODE, response.getCode());
             data.put(SmsConfig.RESPONSE_MESSAGE, response.getMessage());
             this.logger().info("Remove response, code = {}, message = {}",
-                response.getCode(), response.getMessage());
+                    response.getCode(), response.getMessage());
             return Future.succeededFuture(data);
         } catch (final ClientException ex) {
             this.logger().fatal(ex);
