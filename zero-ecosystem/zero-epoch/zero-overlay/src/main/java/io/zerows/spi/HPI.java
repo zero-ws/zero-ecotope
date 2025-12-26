@@ -157,6 +157,17 @@ public final class HPI<T> extends SPI {
         return Objects.isNull(executor) ? Future.succeededFuture() : executor.apply(this.service);
     }
 
+    public <O> Future<O> waitAsync(final Function<T, Future<O>> executor) {
+        // 默认流程处理 null
+        if (Objects.isNull(this.service)) {
+            return Future.succeededFuture();
+        }
+
+
+        // 非默认流程处理 null
+        return Objects.isNull(executor) ? Future.succeededFuture() : executor.apply(this.service);
+    }
+
     public <O> Future<O> waitOr(final Function<T, Future<O>> executor, final Supplier<Future<O>> defaultSupplier) {
         // 默认流程处理 null
         if (Objects.isNull(this.service)) {

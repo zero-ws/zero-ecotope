@@ -9,6 +9,7 @@ import io.zerows.extension.module.ambient.domain.tables.daos.XModuleDao;
 import io.zerows.extension.module.ambient.servicespec.ModelStub;
 import io.zerows.extension.skeleton.spi.ScModeling;
 import io.zerows.program.Ux;
+import io.zerows.spi.HPI;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
 
@@ -40,14 +41,18 @@ public class ModelService implements ModelStub {
 
     @Override
     public Future<JsonArray> fetchModels(final String sigma) {
-        return Ux.channel(ScModeling.class, JsonArray::new,
-            model -> model.fetchAsync(sigma));
+        return HPI.of(ScModeling.class).waitAsync(
+            model -> model.fetchAsync(sigma),
+            JsonArray::new
+        );
     }
 
     @Override
     public Future<JsonArray> fetchAttrs(final String identifier, final String sigma) {
-        return Ux.channel(ScModeling.class, JsonArray::new,
-            model -> model.fetchAttrs(identifier, sigma));
+        return HPI.of(ScModeling.class).waitAsync(
+            model -> model.fetchAttrs(identifier, sigma),
+            JsonArray::new
+        );
     }
 
     private Future<JsonObject> fetchModule(final JsonObject condition, final Supplier<Future<JsonObject>> executor) {

@@ -71,10 +71,9 @@ class AtFs {
             return Ux.future(Buffer.buffer());
         } else {
             final String storePath = attachment.getString(KName.STORE_PATH);
-            return Ux.channel(ExIo.class, Buffer::buffer,
-
-                // Call ExIo `fsDownload`
-                io -> io.fsDownload(directoryId, storePath)
+            return HPI.of(ExIo.class).waitAsync(
+                io -> io.fsDownload(directoryId, storePath),
+                Buffer::buffer
             );
         }
     }
@@ -90,15 +89,14 @@ class AtFs {
             return Ux.futureA();
         } else {
             return splitInternal(attachment, Ux::future,
-                remote -> splitRun(remote, (directoryId, fileMap) -> Ux.channel(ExIo.class, () -> remote,
-
-                    // Call ExIo `fsUpload`
+                remote -> splitRun(remote, (directoryId, fileMap) -> HPI.of(ExIo.class).waitAsync(
                     io -> io.fsUpload(directoryId, fileMap)
                         .compose(removed -> {
                             HFS.of().rm(fileMap.keySet());
                             return Future.succeededFuture(Boolean.TRUE);
                         })
-                        .compose(removed -> Ux.future(remote))
+                        .compose(removed -> Ux.future(remote)),
+                    () -> remote
                 )));
         }
     }
@@ -114,10 +112,9 @@ class AtFs {
                 HFS.of().rm(files);
                 log.info("{} 删除本地文件，数量：{}", AtConstant.K_PREFIX_AMB, files.size());
                 return Ux.future(local);
-            }, remote -> splitRun(remote, (directoryId, fileMap) -> Ux.channel(ExIo.class, () -> remote,
-
-                // Call ExIo `fsRemove`
-                io -> io.fsRemove(directoryId, fileMap).compose(removed -> Ux.future(remote))
+            }, remote -> splitRun(remote, (directoryId, fileMap) -> HPI.of(ExIo.class).waitAsync(
+                io -> io.fsRemove(directoryId, fileMap).compose(removed -> Ux.future(remote)),
+                () -> remote
             )));
         }
     }

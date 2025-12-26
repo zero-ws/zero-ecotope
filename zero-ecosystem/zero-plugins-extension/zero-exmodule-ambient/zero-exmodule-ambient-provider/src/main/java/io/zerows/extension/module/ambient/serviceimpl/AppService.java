@@ -16,6 +16,7 @@ import io.zerows.extension.skeleton.spi.ExAttachment;
 import io.zerows.extension.skeleton.spi.ExModulat;
 import io.zerows.platform.constant.VString;
 import io.zerows.program.Ux;
+import io.zerows.spi.HPI;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
 
@@ -50,7 +51,10 @@ public class AppService implements AppStub {
              * */
             .compose(At::fileMeta)
             /* Modulat Processing */
-            .compose(appJ -> Ux.channel(ExModulat.class, () -> appJ, stub -> stub.extension(appJ, true)));
+            .compose(appJ -> HPI.of(ExModulat.class).waitAsync(
+                stub -> stub.extension(appJ, true),
+                () -> appJ
+            ));
     }
 
     @Override
@@ -67,9 +71,15 @@ public class AppService implements AppStub {
              * */
             .compose(At::fileMeta)
             /* ExApp Processing, options for application */
-            .compose(appJ -> Ux.channel(ExApp.class, () -> appJ, stub -> stub.fetchOpts(appJ)))
+            .compose(appJ -> HPI.of(ExApp.class).waitAsync(
+                stub -> stub.fetchOpts(appJ),
+                () -> appJ
+            ))
             /* Modulat Processing */
-            .compose(appJ -> Ux.channel(ExModulat.class, () -> appJ, stub -> stub.extension(appJ, false)));
+            .compose(appJ -> HPI.of(ExModulat.class).waitAsync(
+                stub -> stub.extension(appJ, false),
+                () -> appJ
+            ));
         /* Document Platform Initialized */
         // .compose(appJ -> AtPin.?nitDocument(id).compose(nil -> Ux.future(appJ)));
     }
@@ -102,11 +112,12 @@ public class AppService implements AppStub {
         condition.put(KName.MODEL_CATEGORY, KName.App.LOGO);
         condition.put(KName.MODEL_KEY, appId);
         condition.put(VString.EMPTY, Boolean.TRUE);
-        return Ux.channel(ExAttachment.class, () -> data,
-            // Sync Attachment with channel
+        return HPI.of(ExAttachment.class).waitAsync(
             file -> file.saveAsync(condition, attachment).compose(saved -> {
                 data.put(KName.App.LOGO, saved.encode());
                 return Ux.future(data);
-            }));
+            }),
+            () -> data
+        );
     }
 }

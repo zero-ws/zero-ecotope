@@ -8,13 +8,14 @@ import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.epoch.store.jooq.DB;
+import io.zerows.extension.module.ambient.boot.At;
 import io.zerows.extension.module.ambient.domain.tables.daos.XAttachmentDao;
 import io.zerows.extension.module.ambient.domain.tables.pojos.XAttachment;
-import io.zerows.extension.module.ambient.boot.At;
 import io.zerows.extension.skeleton.spi.ExAttachment;
 import io.zerows.extension.skeleton.spi.ExIo;
 import io.zerows.platform.enums.typed.ChangeFlag;
 import io.zerows.program.Ux;
+import io.zerows.spi.HPI;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
 
@@ -181,34 +182,37 @@ public class ExAttachmentNorm implements ExAttachment {
          * Fetch `visit` information
          */
         final Set<String> keys = Ut.valueSetString(files, KName.DIRECTORY_ID);
-        return Ux.channel(ExIo.class, () -> files, io -> io.dirBy(keys).compose(map -> {
-            Ut.itJArray(files).forEach(file -> {
-                final String directoryId = file.getString(KName.DIRECTORY_ID);
-                if (Ut.isNotNil(directoryId)) {
-                    final JsonObject directoryJ = map.getOrDefault(directoryId, new JsonObject());
-                    final JsonObject visitJ = Ut.elementSubset(directoryJ,
-                        KName.VISIT_ROLE,
-                        KName.VISIT_GROUP,
-                        KName.VISIT,
-                        KName.VISIT_MODE
-                    );
-                    /*
-                     * visitMode switching
-                     *
-                     * 1. If directory contains "w",
-                     * 2. The attachment should append "x" for rename/trash
-                     */
-                    final JsonArray visitMode = Ut.valueJArray(visitJ, KName.VISIT_MODE);
-                    if (visitMode.contains(KName.Attachment.W) &&
-                        !visitMode.contains(KName.Attachment.X)) {
-                        visitMode.add(KName.Attachment.X);
-                        visitJ.put(KName.VISIT_MODE, visitMode);
+        return HPI.of(ExIo.class).waitAsync(
+            io -> io.dirBy(keys).compose(map -> {
+                Ut.itJArray(files).forEach(file -> {
+                    final String directoryId = file.getString(KName.DIRECTORY_ID);
+                    if (Ut.isNotNil(directoryId)) {
+                        final JsonObject directoryJ = map.getOrDefault(directoryId, new JsonObject());
+                        final JsonObject visitJ = Ut.elementSubset(directoryJ,
+                            KName.VISIT_ROLE,
+                            KName.VISIT_GROUP,
+                            KName.VISIT,
+                            KName.VISIT_MODE
+                        );
+                        /*
+                         * visitMode switching
+                         *
+                         * 1. If directory contains "w",
+                         * 2. The attachment should append "x" for rename/trash
+                         */
+                        final JsonArray visitMode = Ut.valueJArray(visitJ, KName.VISIT_MODE);
+                        if (visitMode.contains(KName.Attachment.W) &&
+                            !visitMode.contains(KName.Attachment.X)) {
+                            visitMode.add(KName.Attachment.X);
+                            visitJ.put(KName.VISIT_MODE, visitMode);
+                        }
+                        file.mergeIn(visitJ, true);
                     }
-                    file.mergeIn(visitJ, true);
-                }
-            });
-            return Ux.future(files);
-        })).compose(Fx.ofJArray(KName.METADATA)).compose(attachments -> {
+                });
+                return Ux.future(files);
+            }),
+            () -> files
+        ).compose(Fx.ofJArray(KName.METADATA)).compose(attachments -> {
             Ut.itJArray(attachments).forEach(file -> file.put(KName.DIRECTORY, Boolean.FALSE));
             return Ux.future(attachments);
         });

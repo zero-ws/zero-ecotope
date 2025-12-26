@@ -12,6 +12,7 @@ import io.zerows.extension.skeleton.common.KeBiz;
 import io.zerows.extension.skeleton.spi.ExIo;
 import io.zerows.platform.constant.VString;
 import io.zerows.program.Ux;
+import io.zerows.spi.HPI;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
 
@@ -68,35 +69,36 @@ class AtFsDir {
         final String sigma = params.getString(KName.SIGMA);
         final List<String> paths = Ut.ioPathSet(storePath);
 
-        return Ux.channel(ExIo.class, () -> null, io -> io.dirTree(sigma, paths).compose(directories -> {
+        return HPI.of(ExIo.class).waitAsync(io -> io.dirTree(sigma, paths).compose(directories -> {
 
 
-            /*
-             * 步骤三：
-             * 基于名称对目录执行初始化操作，初始化结构如：
-             * 默认的树为：
-             * /apps/<name>/document
-             * /apps/<name>/document/XXXX  ( Root根路径 )
-             *
-             * - `<name>`：此参数是应用的专用参数，和 `/apps/<name>/document` 完整配置到 zero-ambient 模块中，参考白皮书实现定制
-             *
-             * 此处的输入可能是：
-             *
-             * /apps/<name>/document/XXXX/AA/BB
-             *
-             * 这种情况下，AA 和 BB 就是此处的动态目录，动态目录在这个过程中应该在执行文件处理之前合法，这种场景下
-             * 会执行两个 API 来处理：
-             *
-             * - `seekDirectory`：第一次访问动态目录其上层路径是不存在的，所以依赖根路径的构造。
-             * - `dirTree`：第二次访问时此处的目录本身已经存在了，所以直接执行查询即可。
-             */
-            if (directories.isEmpty()) {
-                // 检查目录专用算法
-                return seekDirectory(storePath, params);
-            } else {
-                return Ux.future(directories);
+                /*
+                 * 步骤三：
+                 * 基于名称对目录执行初始化操作，初始化结构如：
+                 * 默认的树为：
+                 * /apps/<name>/document
+                 * /apps/<name>/document/XXXX  ( Root根路径 )
+                 *
+                 * - `<name>`：此参数是应用的专用参数，和 `/apps/<name>/document` 完整配置到 zero-ambient 模块中，参考白皮书实现定制
+                 *
+                 * 此处的输入可能是：
+                 *
+                 * /apps/<name>/document/XXXX/AA/BB
+                 *
+                 * 这种情况下，AA 和 BB 就是此处的动态目录，动态目录在这个过程中应该在执行文件处理之前合法，这种场景下
+                 * 会执行两个 API 来处理：
+                 *
+                 * - `seekDirectory`：第一次访问动态目录其上层路径是不存在的，所以依赖根路径的构造。
+                 * - `dirTree`：第二次访问时此处的目录本身已经存在了，所以直接执行查询即可。
+                 */
+                if (directories.isEmpty()) {
+                    // 检查目录专用算法
+                    return seekDirectory(storePath, params);
+                } else {
+                    return Ux.future(directories);
+                }
             }
-        }).compose(directoryA -> {
+        ).compose(directoryA -> {
 
 
             /*

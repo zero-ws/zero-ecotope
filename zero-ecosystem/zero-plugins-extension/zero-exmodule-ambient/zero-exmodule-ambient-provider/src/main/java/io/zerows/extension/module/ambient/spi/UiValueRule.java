@@ -16,6 +16,7 @@ import io.zerows.extension.skeleton.spi.UiValve;
 import io.zerows.platform.constant.VName;
 import io.zerows.platform.metadata.KRef;
 import io.zerows.program.Ux;
+import io.zerows.spi.HPI;
 import io.zerows.spi.modeler.Indent;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -124,9 +125,11 @@ public class UiValueRule implements UiValve {
                 serialC.put(code, counter);
             }
         });
-        final XActivityRule rule = ruleList.iterator().next();
-        serialC.forEach((code, size) ->
-            serialQ.put(code, Ux.channel(Indent.class, ConcurrentLinkedQueue::new, stub -> stub.indent(code, rule.getSigma(), size))));
+        final XActivityRule rule = ruleList.getFirst();
+        serialC.forEach((code, size) -> serialQ.put(code, HPI.of(Indent.class).waitAsync(
+            stub -> stub.indent(code, rule.getSigma(), size),
+            ConcurrentLinkedQueue::new
+        )));
         return Fx.combineM(serialQ).compose(Ux::future);
     }
 
