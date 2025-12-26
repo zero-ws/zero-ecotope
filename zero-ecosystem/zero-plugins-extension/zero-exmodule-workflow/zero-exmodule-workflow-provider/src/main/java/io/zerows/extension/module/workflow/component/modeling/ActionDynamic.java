@@ -30,43 +30,48 @@ class ActionDynamic implements ActionOn {
     public <T> Future<JsonObject> updateAsync(final String key, final JsonObject params, final MetaInstance metadata) {
         return this.identifierJ((identifier, data) ->
             // Single Update
-            Ux.channel(ExAtom.class, JsonObject::new,
-                // Channel
-                atom -> atom.updateAsync(identifier, key, data))).apply(params);
+            HPI.of(ExAtom.class).waitAsync(
+                atom -> atom.updateAsync(identifier, key, data),
+                JsonObject::new
+            )).apply(params);
     }
 
     @Override
     public <T> Future<JsonObject> fetchAsync(final String key, final String identifier, final MetaInstance metadata) {
         // Single Fetch
-        return Ux.channel(ExAtom.class, JsonObject::new,
-            // Channel
-            atom -> atom.fetchAsync(identifier, key));
+        return HPI.of(ExAtom.class).waitAsync(
+            atom -> atom.fetchAsync(identifier, key),
+            JsonObject::new
+        );
     }
 
     @Override
     public <T> Future<JsonArray> createAsync(final JsonArray params, final MetaInstance instance) {
         return this.identifierA((identifier, dataArray) ->
             // Batch Create
-            Ux.channel(ExAtom.class, JsonArray::new,
-                // Channel
-                atom -> atom.createAsync(identifier, dataArray))).apply(params);
+            HPI.of(ExAtom.class).waitAsync(
+                atom -> atom.createAsync(identifier, dataArray),
+                JsonArray::new
+            )).apply(params);
     }
 
     @Override
     public <T> Future<JsonArray> updateAsync(final Set<String> keys, final JsonArray params, final MetaInstance metadata) {
         // Batch Update
         return this.identifierA((identifier, dataArray) ->
-            Ux.channel(ExAtom.class, JsonArray::new,
-                // Channel
-                atom -> atom.updateAsync(identifier, keys, dataArray))).apply(params);
+            HPI.of(ExAtom.class).waitAsync(
+                atom -> atom.updateAsync(identifier, keys, dataArray),
+                JsonArray::new
+            )).apply(params);
     }
 
     @Override
     public <T> Future<JsonArray> fetchAsync(final Set<String> keys, final String identifier, final MetaInstance metadata) {
         // Batch Fetch
-        return Ux.channel(ExAtom.class, JsonArray::new,
-            // Channel
-            atom -> atom.fetchAsync(identifier, keys));
+        return HPI.of(ExAtom.class).waitAsync(
+            atom -> atom.fetchAsync(identifier, keys),
+            JsonArray::new
+        );
     }
 
     private Function<JsonArray, Future<JsonArray>> identifierA(

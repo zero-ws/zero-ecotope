@@ -7,6 +7,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.extension.module.workflow.servicespec.ReportStub;
 import io.zerows.extension.skeleton.spi.ExActivity;
 import io.zerows.program.Ux;
+import io.zerows.spi.HPI;
 import jakarta.inject.Inject;
 
 /**
@@ -20,7 +21,7 @@ public class ReportService implements ReportStub {
     public Future<JsonArray> fetchActivity(final String modelKey) {
         final JsonObject condition = Ux.whereAnd();
         condition.put(KName.MODEL_KEY, modelKey);
-        return Ux.channel(ExActivity.class, JsonArray::new, stub -> stub.activities(condition));
+        return HPI.of(ExActivity.class).waitAsync(stub -> stub.activities(condition), JsonArray::new);
     }
 
     @Override
@@ -28,6 +29,6 @@ public class ReportService implements ReportStub {
         final JsonObject condition = Ux.whereAnd();
         condition.put(KName.MODEL_KEY, modelKey);
         condition.put(KName.CREATED_BY, userId);
-        return Ux.channel(ExActivity.class, JsonArray::new, stub -> stub.activities(condition));
+        return HPI.of(ExActivity.class).waitAsync(stub -> stub.activities(condition), JsonArray::new);
     }
 }

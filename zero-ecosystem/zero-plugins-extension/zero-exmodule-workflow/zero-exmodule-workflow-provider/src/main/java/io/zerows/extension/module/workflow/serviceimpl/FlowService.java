@@ -10,6 +10,7 @@ import io.zerows.extension.module.workflow.domain.tables.daos.WFlowDao;
 import io.zerows.extension.module.workflow.servicespec.FlowStub;
 import io.zerows.extension.skeleton.spi.UiForm;
 import io.zerows.program.Ux;
+import io.zerows.spi.HPI;
 import io.zerows.support.Ut;
 import org.camunda.bpm.engine.history.HistoricProcessInstance;
 import org.camunda.bpm.engine.repository.ProcessDefinition;
@@ -125,6 +126,9 @@ public class FlowService implements FlowStub {
     private Future<JsonObject> formInternal(final JsonObject formInput, final String sigma) {
         final JsonObject parameters = formInput.copy();
         parameters.put(KName.SIGMA, sigma);
-        return Ux.channel(UiForm.class, JsonObject::new, stub -> stub.fetchUi(parameters));
+        return HPI.of(UiForm.class).waitAsync(
+            stub -> stub.fetchUi(parameters),
+            JsonObject::new
+        );
     }
 }

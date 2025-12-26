@@ -7,15 +7,17 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.module.workflow.boot.Wf;
-import io.zerows.extension.module.workflow.common.WfMsg;
 import io.zerows.extension.module.workflow.common.em.TodoStatus;
 import io.zerows.extension.module.workflow.domain.tables.daos.WTodoDao;
 import io.zerows.extension.module.workflow.domain.tables.pojos.WTodo;
 import io.zerows.extension.module.workflow.servicespec.TodoStub;
+import io.zerows.extension.skeleton.common.KeConstant;
 import io.zerows.extension.skeleton.spi.ExTodo;
 import io.zerows.program.Ux;
+import io.zerows.spi.HPI;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
+import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -23,8 +25,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static io.zerows.extension.module.workflow.boot.Wf.LOG;
-
+@Slf4j
 public class TodoService implements TodoStub {
 
     @Override
@@ -170,14 +171,18 @@ public class TodoService implements TodoStub {
         return DB.on(WTodoDao.class)
             .<WTodo>fetchByIdAsync(key)
             .compose(Ux::futureJ)
-            .compose(Fx.ofJObject((todo) -> Ux.channel(ExTodo.class, () -> todo, channel -> {
-                LOG.Init.info(this.getClass(), WfMsg.CHANNEL_TODO, channel.getClass().getName());
-                /*
-                 * X_TODO channel and data merged.
-                 */
-                final JsonObject params = Ut.elementSubset(todo,
-                    KName.MODEL_ID, KName.MODEL_CATEGORY, KName.MODEL_KEY, KName.SIGMA);
-                return channel.fetchAsync(key, params).compose(Fx.ofMerge(todo));
-            })));
+            .compose(Fx.ofJObject((todo) -> HPI.of(ExTodo.class).waitAsync(
+                    channel -> {
+                        log.info("{} Todo Channel 组件：{}", KeConstant.K_PREFIX_WEB, channel.getClass().getName());
+                        /*
+                         * X_TODO channel and data merged.
+                         */
+                        final JsonObject params = Ut.elementSubset(todo,
+                            KName.MODEL_ID, KName.MODEL_CATEGORY, KName.MODEL_KEY, KName.SIGMA);
+                        return channel.fetchAsync(key, params).compose(Fx.ofMerge(todo));
+                    },
+                    () -> todo
+                )
+            ));
     }
 }
