@@ -19,7 +19,7 @@ public interface ExcelConstant {
         String CODE_CONFIG = "CODE:config";
         String CODE_CLASS = "CODE:class";
         String CODE_NAME_CONFIG = "CODE:NAME:config";
-
+        String CODE_NAME_CLASS = "CODE:NAME:class";
         String P_JSON = "JSON";
         String P_FILE = "FILE";
         String P_PAGE = "PAGE";

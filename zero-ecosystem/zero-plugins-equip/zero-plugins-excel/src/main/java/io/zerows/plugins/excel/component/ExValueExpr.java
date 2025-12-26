@@ -45,7 +45,13 @@ public class ExValueExpr implements ExValue {
                 this.put(ExcelConstant.CELL.CODE_NAME_CONFIG, (pathRoot, paramMap) -> {
                     final String code = paramMap.get(KName.CODE);
                     final String name = paramMap.get(KName.NAME);
-                    return Ut.ioPath(pathRoot, code) + File.pathSeparator + name;
+                    return Ut.ioPath(pathRoot, code) + File.separatorChar + name;
+                });
+                // CODE:NAME:class
+                this.put(ExcelConstant.CELL.CODE_NAME_CLASS, (pathRoot, paramMap) -> {
+                    final String code = paramMap.get(KName.CODE);
+                    final String name = paramMap.get(KName.NAME);
+                    return Ut.ioPath(pathRoot, code) + File.separatorChar + name;
                 });
                 // CODE:class
                 this.put(ExcelConstant.CELL.CODE_CLASS, (pathRoot, paramMap) -> {

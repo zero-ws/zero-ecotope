@@ -27,6 +27,7 @@ public interface ExValueFn {
             this.put(ExcelConstant.CELL.CODE_CLASS, ExValueExpr::new);
             this.put(ExcelConstant.CELL.CODE_CONFIG, ExValueExpr::new);
             this.put(ExcelConstant.CELL.CODE_NAME_CONFIG, ExValueExpr::new);
+            this.put(ExcelConstant.CELL.CODE_NAME_CLASS, ExValueExpr::new);
             this.put(ExcelConstant.CELL.NAME_CONFIG, ExValueExpr::new);
             this.put(ExcelConstant.CELL.NAME_CLASS, ExValueExpr::new);
             this.put(ExcelConstant.CELL.NAME_ABBR_CONFIG, ExValueExpr::new);
