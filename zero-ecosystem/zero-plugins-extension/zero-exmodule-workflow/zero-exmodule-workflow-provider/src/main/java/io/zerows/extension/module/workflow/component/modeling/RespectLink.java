@@ -8,6 +8,7 @@ import io.zerows.extension.module.workflow.domain.tables.pojos.WTicket;
 import io.zerows.extension.module.workflow.metadata.WRecord;
 import io.zerows.extension.skeleton.spi.ExLinkage;
 import io.zerows.program.Ux;
+import io.zerows.spi.HPI;
 import io.zerows.support.Ut;
 
 /**
@@ -39,9 +40,9 @@ public class RespectLink extends AbstractRespect {
          */
         final JsonArray keys = Ut.valueJArray(dataArray, KName.KEY);
         condition.put("key,!i", keys);
-        return Ux.channelAsync(ExLinkage.class, Ux::futureA, (link) ->
-            // Linkage Removing / Create
-            link.unlink(condition).compose(deleted -> link.link(dataArray, false))
+        return HPI.of(ExLinkage.class).waitAsync(
+            link -> link.unlink(condition).compose(deleted -> link.link(dataArray, false)),
+            JsonArray::new
         );
     }
 
@@ -82,6 +83,6 @@ public class RespectLink extends AbstractRespect {
         final WTicket ticket = record.ticket();
         final JsonObject condition = this.queryTpl();
         condition.put(KName.SOURCE_KEY, ticket.getKey());
-        return Ux.channelAsync(ExLinkage.class, Ux::futureA, link -> link.fetch(condition));
+        return HPI.of(ExLinkage.class).waitAsync(link -> link.fetch(condition), JsonArray::new);
     }
 }

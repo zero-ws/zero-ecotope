@@ -13,16 +13,17 @@ import java.util.Objects;
 
 /**
  * 新版去掉原来繁琐的流程，构造新流程处理
- * <pre><code>
+ * <pre>
  *     1. 根据 id 从环境中提取 {@link OCacheMod} 的缓存信息
  *     2. 每个缓存信息中都会包含 mName = {@link HMod} 的基本信息
- * </code></pre>
+ * </pre>
  *
  * @author lang : 2024-07-08
  */
 public class PowerApp {
 
-    private static final Cc<String, Future<PowerApp>> CC_APP = Cc.open();
+    private static final Cc<String, Future<PowerApp>> CC_APP_OLD = Cc.open();
+    private static final Cc<String, PowerApp> CC_APP = Cc.open();
     private final OCacheMod modReference;
 
     public PowerApp(final String appId) {
@@ -30,18 +31,22 @@ public class PowerApp {
         this.modReference = OCacheMod.of(appId);
     }
 
-    public static Future<PowerApp> getOrCreate(final String appId, final boolean open) {
+    public static Future<PowerApp> getCreated(final String appId, final boolean open) {
         Objects.requireNonNull(appId);
-        return CC_APP.pick(() -> Ux.channel(ExModulat.class, JsonObject::new, modulat -> modulat.extension(appId, open)).compose(storedJ -> {
+        // 先做缓存检查，若缓存中存在则不用创建新内容
+        if (CC_APP.containsKey(appId)) {
+            return Ux.future(CC_APP.get(appId));
+        }
+
+        
+        return CC_APP_OLD.pick(() -> Ux.channel(ExModulat.class, JsonObject::new, modulat -> modulat.extension(appId, open)).compose(storedJ -> {
             final String configApp = Ut.valueString(storedJ, KName.KEY);
             if (appId.equals(configApp)) {
                 // 抓取应用相关的 HMod 缓存
                 final PowerApp app = new PowerApp(appId);
 
 
-                /*
-                 * 移除 bags / key
-                 */
+                /* 移除 bags / key */
                 final JsonObject configAppJ = storedJ.copy();
                 configAppJ.remove(KName.KEY);
                 configAppJ.remove(KName.App.BAGS);
@@ -54,9 +59,11 @@ public class PowerApp {
         }), appId);
     }
 
-    public static Future<PowerApp> getLatest(final String appId, final boolean open) {
+    public static Future<PowerApp> getRefresh(final String appId, final boolean open) {
+        // 移除旧缓存
         CC_APP.remove(appId);
-        return getOrCreate(appId, open);
+        // 重建以达到 Refresh 的目的
+        return getCreated(appId, open);
     }
 
     public PowerApp add(final HMod mod) {

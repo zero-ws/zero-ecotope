@@ -48,12 +48,25 @@ public class PowerMod implements HMod {
     private final String name;
     private HApp app;
 
+    /**
+     * 📘 dataJ 结构：
+     * <pre><code>
+     *     {
+     *         "field1": "value1",
+     *         "field2": "value2",
+     *         "...": "...",
+     *         "__metadata": {
+     *             "field1": "STRING",
+     *             "field2": "INTEGER"
+     *         }
+     *     }
+     * </code></pre>
+     *
+     * @param name  模块名称
+     * @param dataJ 模块数据
+     */
     public PowerMod(final String name, final JsonObject dataJ) {
         this.name = name;
-        /*
-         * Field `field = findRunning`
-         * __metadata captured `field = Class<?>`
-         */
         final JsonObject metadata = Ut.valueJObject(dataJ, KName.__.METADATA);
         dataJ.fieldNames().forEach(field -> {
             /*
@@ -61,9 +74,6 @@ public class PowerMod implements HMod {
              */
             final String typeStr = metadata.getString(field);
             if (Ut.isNotNil(typeStr)) {
-                /*
-                 * findRunning processing
-                 */
                 final Object value = dataJ.getValue(field);
                 if (Objects.nonNull(value)) {
                     // Fix: java.lang.NullPointerException

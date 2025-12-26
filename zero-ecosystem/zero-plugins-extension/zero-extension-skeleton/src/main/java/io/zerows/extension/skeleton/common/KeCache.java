@@ -4,20 +4,18 @@ import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.management.OCacheUri;
 import io.zerows.epoch.metadata.KView;
 import io.zerows.extension.skeleton.spi.ScOrbit;
-import io.zerows.program.Ux;
+import io.zerows.spi.HPI;
+import lombok.extern.slf4j.Slf4j;
 
 /*
  * Key generated for uniform app.zero.cloud
  */
+@Slf4j
 class KeCache {
-
-    private static final LogOf LOGGER = LogOf.get(KeCache.class);
-    private static final String LOGGER_VIEW = "Input view = {1}, Try cacheKey: \u001b[0;34m{0}\u001b[m, uri = {2}, method = {3}";
 
     static String keyView(final String method, final String uri, final KView view) {
         /*
@@ -38,8 +36,11 @@ class KeCache {
         final JsonObject parameters = new JsonObject();
         parameters.put(KName.URI, uri);
         parameters.put(KName.URI_REQUEST, requestUri);
-        return Ux.channelSync(ScOrbit.class, () -> uri,
-            orbit -> orbit.analyze(parameters));
+        // SPI: ScOrbit
+        return HPI.of(ScOrbit.class).waitUntil(
+            orbit -> orbit.analyze(parameters),
+            () -> uri
+        );
     }
 
     static String uri(final RoutingContext context) {
@@ -58,7 +59,8 @@ class KeCache {
         final KView vis = KView.create(literal);
         final String cacheKey = keyView(request.method().name(), uri, vis);
         /* Cache Data */
-        Ke.LOG.Ke.debug(LOGGER, LOGGER_VIEW, cacheKey, literal, uri, request.method().name());
+        log.debug("{} 输入视图 View = {} / By = {}, 尝试命中缓存：uri = {}, method = {}",
+            KeConstant.K_PREFIX_WEB, literal, cacheKey, uri, request.method().name());
         return cacheKey;
     }
 }

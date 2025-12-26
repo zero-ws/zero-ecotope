@@ -10,6 +10,11 @@ import io.zerows.program.Ux;
 import java.util.Objects;
 
 /**
+ * 扩展模块核心配置，用于加载模块化之后的配置信息
+ * <pre>
+ *
+ * </pre>
+ *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 public class ExModulatCommon implements ExModulat {
@@ -38,14 +43,14 @@ public class ExModulatCommon implements ExModulat {
         final JsonObject appJ = new JsonObject();
         // 解决无法连接导致AppId为空的问题
         appJ.put(KName.KEY, appId);
-        return Ark.configure().modularize(appId, open).compose(moduleJ -> {
+        return Ark.ofConfigure().modularize(appId, open).compose(moduleJ -> {
             appJ.mergeIn((JsonObject) moduleJ, true);
             if (open) {
                 // open = true 可启用“登录参数”
                 return Ux.future(appJ);
             } else {
                 // open = false 的时候才读取 bags 节点的数据，否则不读取
-                return Ark.bag().modularize(appId, false).compose(bagJ -> {
+                return Ark.ofBag().modularize(appId, false).compose(bagJ -> {
                     final JsonArray bags = (JsonArray) bagJ;
                     appJ.put(KName.App.BAGS, bags);
                     return Ux.future(appJ);

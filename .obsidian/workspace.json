@@ -1,0 +1,243 @@
+{
+  "main": {
+    "id": "93c249a8be613419",
+    "type": "split",
+    "children": [
+      {
+        "id": "dd77b5fbc181fb58",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "1e1e76b4ed90c12c",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "新标签页"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "c8249bec66970f20",
+    "type": "split",
+    "children": [
+      {
+        "id": "953a2e62567fddf4",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "885f9e3759734ce4",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "56efc15684402cdd",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "921d503d98b424f6",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 480.5
+  },
+  "right": {
+    "id": "25dcf648bd96bd3a",
+    "type": "split",
+    "children": [
+      {
+        "id": "d5cb18dd6932b01c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "fedfbc2f58313973",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "反向链接"
+            }
+          },
+          {
+            "id": "fed008adc2ca627f",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "出链"
+            }
+          },
+          {
+            "id": "5cbdfa5bc2abe460",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "6feadf1095c0b258",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "添加笔记属性"
+            }
+          },
+          {
+            "id": "899e33665118897d",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "大纲"
+            }
+          },
+          {
+            "id": "37b7e2ad6f2648c5",
+            "type": "leaf",
+            "state": {
+              "type": "footnotes",
+              "state": {},
+              "icon": "lucide-file-signature",
+              "title": "脚注"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "bases:创建新数据库": false,
+      "markdown-importer:打开 Markdown 格式转换器": false,
+      "publish:发布更改": false,
+      "audio-recorder:开始/结束录音": false,
+      "workspaces:管理工作区布局": false,
+      "zk-prefixer:创建时间戳笔记": false,
+      "random-note:开始漫游笔记": false,
+      "obsidian-excalidraw-plugin:新建绘图文件": false
+    }
+  },
+  "active": "885f9e3759734ce4",
+  "lastOpenFiles": [
+    "docs/AMS.excalidraw.md",
+    "docs/接口详情/未命名.canvas",
+    "docs/接口详情",
+    "docs/previous/zero-worker.md",
+    "docs/previous/zero-verify.md",
+    "docs/previous/zero-validate.md",
+    "docs/previous/zero-uniform.md",
+    "docs/previous/zero-typed.md",
+    "docs/previous/zero-trans-shunt.md",
+    "docs/previous/zero-starter.md",
+    "docs/previous/zero-safe.md",
+    "docs/previous/zero-pool.md",
+    "docs/previous/zero-pojo.md",
+    "docs/previous/zero-path.md",
+    "docs/previous/zero-param.md",
+    "docs/previous/zero-mysql.md",
+    "docs/previous/zero-mongo.md",
+    "docs/previous/zero-mode.md",
+    "docs/previous/zero-mime.md",
+    "docs/previous/zero-it.md",
+    "docs/previous/zero-istio.md",
+    "docs/previous/zero-interface.md",
+    "docs/previous/zero-hoc.md",
+    "docs/previous/zero-get.md",
+    "docs/previous/zero-flow.md",
+    "docs/previous/zero-fling.md",
+    "docs/previous/zero-error.md",
+    "docs/previous/vertx-zero-tutorial",
+    "docs/previous/image/zero-up.png",
+    "docs/previous/image/zero-tlk.png",
+    "docs/previous/image/rpc-workflow.png",
+    "docs/previous/image/request-mode5.png",
+    "docs/previous/image/request-mode4.png",
+    "docs/previous/image/request-mode3.png",
+    "docs/previous/image/request-mode2.png",
+    "docs/previous/image/request-mode1.png",
+    "docs/previous/image/minikube-dashboard.png",
+    "docs/previous/image/mime-matrix.png",
+    "docs/previous/image",
+    "docs/previous/contributing",
+    "docs/previous/_image",
+    "docs/previous",
+    "zero-design/数据模型",
+    "zero-design"
+  ]
+}

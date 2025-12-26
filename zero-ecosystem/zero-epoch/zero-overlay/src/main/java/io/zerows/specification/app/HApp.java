@@ -1,6 +1,5 @@
 package io.zerows.specification.app;
 
-import io.r2mo.spi.SPI;
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.constant.VValue;
 import io.zerows.platform.enums.EmApp;
@@ -8,6 +7,7 @@ import io.zerows.specification.atomic.HBoundary;
 import io.zerows.specification.cloud.HFrontier;
 import io.zerows.specification.cloud.HGalaxy;
 import io.zerows.specification.cloud.HSpace;
+import io.zerows.spi.HPI;
 import io.zerows.spi.modeler.AtomNs;
 import io.zerows.support.base.UtBase;
 
@@ -284,8 +284,8 @@ public interface HApp extends HBoundary<String>, Function<HApp, HApp> {
      * @return 名空间
      */
     static String nsOf(final String appName, final String identifier) {
-        // 查找合法的 SPI
-        final AtomNs atomNs = SPI.findOne(AtomNs.class);
+        // 查找合法的 HPI
+        final AtomNs atomNs = HPI.findOne(AtomNs.class);
         if (Objects.isNull(appName)) {
             return null;
         }

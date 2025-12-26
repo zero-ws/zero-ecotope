@@ -14,6 +14,7 @@ import io.zerows.extension.skeleton.exception._80219Exception403TokenGeneration;
 import io.zerows.extension.skeleton.spi.ScCredential;
 import io.zerows.platform.constant.VValue;
 import io.zerows.program.Ux;
+import io.zerows.spi.HPI;
 import io.zerows.support.Ut;
 
 import java.util.ArrayList;
@@ -82,20 +83,23 @@ class ScGenerated {
          * 此处主要信息为 realm 和 grantType 两个属性
          */
         final String sigma = sigmaSet.iterator().next();
-        return Ux.channelAsync(ScCredential.class, Ux::futureL, stub -> stub.fetchAsync(sigma).compose(credential -> {
-            // OUser processing ( Batch Mode )
-            final List<OUser> ousers = new ArrayList<>();
-            users.stream().map(user -> new OUser()
-                    .setActive(Boolean.TRUE)
-                    .setKey(UUID.randomUUID().toString())
-                    .setClientId(user.getKey())
-                    .setClientSecret(Ut.randomString(64))
-                    .setScope(credential.getRealm())
-                    .setLanguage(credential.getLanguage())
-                    .setGrantType(credential.getGrantType()))
-                .forEach(ousers::add);
-            return Ux.future(ousers);
-        }));
+        return HPI.of(ScCredential.class).waitAsync(
+            stub -> stub.fetchAsync(sigma).compose(credential -> {
+                // OUser processing ( Batch Mode )
+                final List<OUser> ousers = new ArrayList<>();
+                users.stream().map(user -> new OUser()
+                        .setActive(Boolean.TRUE)
+                        .setKey(UUID.randomUUID().toString())
+                        .setClientId(user.getKey())
+                        .setClientSecret(Ut.randomString(64))
+                        .setScope(credential.getRealm())
+                        .setLanguage(credential.getLanguage())
+                        .setGrantType(credential.getGrantType()))
+                    .forEach(ousers::add);
+                return Ux.future(ousers);
+            }),
+            ArrayList::new
+        );
     }
 
     static String valueProfile(final SResource resource) {

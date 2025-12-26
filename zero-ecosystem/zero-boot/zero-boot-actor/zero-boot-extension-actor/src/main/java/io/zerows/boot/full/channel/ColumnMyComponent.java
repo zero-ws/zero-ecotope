@@ -9,7 +9,7 @@ import io.zerows.extension.module.mbsecore.metadata.builtin.DataAtom;
 import io.zerows.extension.skeleton.spi.UiApeakMy;
 import io.zerows.mbse.metadata.ActIn;
 import io.zerows.mbse.metadata.ActOut;
-import io.zerows.program.Ux;
+import io.zerows.spi.HPI;
 
 /**
  * ## 「Channel」我的列读取通道
@@ -77,9 +77,11 @@ public class ColumnMyComponent extends AbstractAdaptor {
         /* 最终Uri */
         final DataAtom atom = this.atom();
         /* 前置一致 */
-        return Ox.viewMy(envelop, atom.identifier()).compose(params -> Ux.channelAsync(UiApeakMy.class,
-            () -> ActOut.future(new JsonArray()),
-            stub -> stub.fetchMy(params).compose(ActOut::future)
-        ));
+        // SPI: UiApeakMy
+        return Ox.viewMy(envelop, atom.identifier())
+            .compose(params -> HPI.of(UiApeakMy.class)
+                .waitAsync(stub -> stub.fetchMy(params), JsonArray::new)
+                .compose(ActOut::future)
+            );
     }
 }

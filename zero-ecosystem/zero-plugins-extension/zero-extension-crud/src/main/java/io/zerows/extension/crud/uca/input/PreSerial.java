@@ -3,15 +3,17 @@ package io.zerows.extension.crud.uca.input;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.KField;
 import io.zerows.extension.crud.uca.IxMod;
+import io.zerows.extension.skeleton.common.KeConstant;
 import io.zerows.mbse.metadata.KModule;
 import io.zerows.program.Ux;
+import io.zerows.spi.HPI;
 import io.zerows.spi.modeler.Indent;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
 import java.util.Queue;
@@ -22,13 +24,11 @@ import java.util.concurrent.LinkedBlockingDeque;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static io.zerows.extension.skeleton.common.Ke.LOG;
-
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
 class PreSerial implements Pre {
-    private static final LogOf LOGGER = LogOf.get(PreSerial.class);
 
     @Override
     public Future<JsonObject> inJAsync(final JsonObject data, final IxMod in) {
@@ -40,23 +40,26 @@ class PreSerial implements Pre {
         }
 
         /* Number generation */
-        return this.run(data, in, (numbers) -> Ux.channelAsync(Indent.class, () -> Ux.future(data), stub -> {
-            LOG.Ke.info(LOGGER, "Table here {0}, Serial numbers {1}", in.module().getTable(), numbers.encode());
-            /* Channel */
-            final ConcurrentMap<String, Future<String>> numberMap = new ConcurrentHashMap<>();
-            numbers.fieldNames().stream()
-                .filter(numberField -> !data.containsKey(numberField))
-                .filter(numberField -> Objects.nonNull(numbers.getString(numberField)))
-                .forEach(numberField -> {
-                    final String code = numbers.getString(numberField);
-                    numberMap.put(numberField, stub.indent(code, sigma));
+        return this.run(data, in, (numbers) -> HPI.of(Indent.class).waitAsync(
+            indent -> {
+                log.info("{} 表名 {}, 编号 {}",
+                    KeConstant.K_PREFIX_WEB, in.module().getTable(), numbers.encode());
+                /* Channel */
+                final ConcurrentMap<String, Future<String>> numberMap = new ConcurrentHashMap<>();
+                numbers.fieldNames().stream()
+                    .filter(numberField -> !data.containsKey(numberField))
+                    .filter(numberField -> Objects.nonNull(numbers.getString(numberField)))
+                    .forEach(numberField -> {
+                        final String code = numbers.getString(numberField);
+                        numberMap.put(numberField, indent.indent(code, sigma));
+                    });
+                /* Combine number map here for generation */
+                return Fx.combineM(numberMap).compose(generated -> {
+                    generated.forEach(data::put);
+                    return Ux.future(data);
                 });
-            /* Combine number map here for generation */
-            return Fx.combineM(numberMap).compose(generated -> {
-                generated.forEach(data::put);
-                return Ux.future(data);
-            });
-        }));
+            }, () -> data)
+        );
     }
 
     @Override
@@ -67,22 +70,26 @@ class PreSerial implements Pre {
             return Ux.future(data);
         }
         /* Number generation */
-        return this.run(data, in, (numbers) -> Ux.channelAsync(Indent.class, () -> Ux.future(data), stub -> {
-            LOG.Ke.info(LOGGER, "Table here {0}, Size {1}, Serial numbers {2}", in.module().getTable(), data.size(), numbers.encode());
-            /* Queue<String> */
-            final ConcurrentMap<String, Future<Queue<String>>> numberMap = new ConcurrentHashMap<>();
-            numbers.fieldNames().stream()
-                .filter(numberField -> Objects.nonNull(numbers.getString(numberField)))
-                .forEach(numberField -> numberMap.put(numberField, this.runIndent(data, numberField, size -> {
-                    final String code = numbers.getString(numberField);
-                    return stub.indent(code, sigma, size);
-                })));
-            /* Combine */
-            return Fx.combineM(numberMap).compose(generated -> {
-                generated.forEach((numberField, numberQueue) -> this.runFill(data, numberField, numberQueue));
-                return Ux.future(data);
-            });
-        }));
+        return this.run(data, in, (numbers) -> HPI.of(Indent.class).waitAsync(
+            stub -> {
+                log.info("{} 表名 {}, 数量：{}, 编号 {}",
+                    KeConstant.K_PREFIX_WEB, in.module().getTable(), data.size(), numbers.encode());
+                /* Queue<String> */
+                final ConcurrentMap<String, Future<Queue<String>>> numberMap = new ConcurrentHashMap<>();
+                numbers.fieldNames().stream()
+                    .filter(numberField -> Objects.nonNull(numbers.getString(numberField)))
+                    .forEach(numberField -> numberMap.put(numberField, this.runIndent(data, numberField, size -> {
+                        final String code = numbers.getString(numberField);
+                        return stub.indent(code, sigma, size);
+                    })));
+                /* Combine */
+                return Fx.combineM(numberMap).compose(generated -> {
+                    generated.forEach((numberField, numberQueue) -> this.runFill(data, numberField, numberQueue));
+                    return Ux.future(data);
+                });
+            },
+            () -> data)
+        );
     }
 
     private void runFill(final JsonArray source, final String field, final Queue<String> numberQueue) {

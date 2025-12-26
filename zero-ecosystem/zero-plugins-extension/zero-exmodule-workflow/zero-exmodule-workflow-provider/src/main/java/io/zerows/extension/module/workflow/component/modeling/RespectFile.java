@@ -7,7 +7,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.extension.module.workflow.domain.tables.pojos.WTicket;
 import io.zerows.extension.module.workflow.metadata.WRecord;
 import io.zerows.extension.skeleton.spi.ExAttachment;
-import io.zerows.program.Ux;
+import io.zerows.spi.HPI;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
@@ -33,13 +33,10 @@ public class RespectFile extends AbstractRespect {
         final WTicket ticket = record.ticket();
         final JsonObject condition = this.queryTpl(ticket);
         condition.put(KName.MODEL_KEY, ticket.getKey());
-
-        // final JsonArray keys = Ut.valueJArray(dataArray, KName.KEY);
-        // condition.put("key,!i", keys);
-        return Ux.channelAsync(ExAttachment.class, Ux::futureA, file ->
-            file.saveAsync(condition, dataArray, params));
-        // Attachment Removing / Create
-        // file.removeAsync(condition).compose(deleted -> file.uploadAsync(dataArray, params))
+        return HPI.of(ExAttachment.class).waitAsync(
+            file -> file.saveAsync(condition, dataArray, params),
+            JsonArray::new
+        );
     }
 
     @Override
@@ -47,7 +44,10 @@ public class RespectFile extends AbstractRespect {
         final WTicket ticket = record.ticket();
         final JsonObject condition = this.queryTpl(ticket);
         condition.put(KName.MODEL_KEY, ticket.getKey());
-        return Ux.channelAsync(ExAttachment.class, Ux::futureA, link -> link.fetchAsync(condition));
+        return HPI.of(ExAttachment.class).waitAsync(
+            link -> link.fetchAsync(condition),
+            JsonArray::new
+        );
     }
 
     /*

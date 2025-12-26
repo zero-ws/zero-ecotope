@@ -9,6 +9,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.extension.skeleton.exception._60045Exception400SigmaMissing;
 import io.zerows.extension.skeleton.spi.ScModeling;
 import io.zerows.program.Ux;
+import io.zerows.spi.HPI;
 import io.zerows.support.Ut;
 
 import java.util.Objects;
@@ -21,24 +22,27 @@ public abstract class AbstractIdc implements IdcStub {
     }
 
     protected Future<JsonArray> model(final JsonArray userJson) {
-        return Ux.channelAsync(ScModeling.class, () -> Ux.future(userJson), stub -> stub.keyAsync(this.sigma, userJson).compose(keyMap -> {
-            /* Reference 修改，此处修改 userJson 相关数据 */
-            Ut.itJArray(userJson).forEach(user -> {
-                /* Fix issue of `modelKey` injection */
-                final String username = user.getString(KName.USERNAME);
-                final JsonObject data = keyMap.get(username);
-                if (Ut.isNotNil(data)) {
-                    /*
-                     * Replace
-                     * - modelKey
-                     * - modelId
-                     * .etc here
-                     */
-                    user.mergeIn(data.copy(), true);
-                }
-            });
-            return Ux.future(userJson);
-        }));
+        return HPI.of(ScModeling.class).waitAsync(
+            stub -> stub.keyAsync(this.sigma, userJson).compose(keyMap -> {
+                /* Reference 修改，此处修改 userJson 相关数据 */
+                Ut.itJArray(userJson).forEach(user -> {
+                    /* Fix issue of `modelKey` injection */
+                    final String username = user.getString(KName.USERNAME);
+                    final JsonObject data = keyMap.get(username);
+                    if (Ut.isNotNil(data)) {
+                        /*
+                         * Replace
+                         * - modelKey
+                         * - modelId
+                         * .etc here
+                         */
+                        user.mergeIn(data.copy(), true);
+                    }
+                });
+                return Ux.future(userJson);
+            }),
+            () -> userJson
+        );
     }
 
     /*

@@ -9,6 +9,7 @@ import io.zerows.extension.crud.uca.input.Pre;
 import io.zerows.extension.skeleton.spi.ExTrash;
 import io.zerows.mbse.metadata.KModule;
 import io.zerows.program.Ux;
+import io.zerows.spi.HPI;
 
 import java.util.Objects;
 
@@ -38,8 +39,11 @@ class AgonicADBDelete implements Agonic {
             return Pre.fileOut().inJAsync(json, in)
 
                 // 如果打开了 Trash 功能，则执行 Trash 的备份
-                .compose(removed -> Ux.channelAsync(ExTrash.class, () -> Ux.future(removed),
-                    (stub) -> stub.backupAsync(module.identifier(), removed)))
+                // SPI: ExTrash
+                .compose(removed -> HPI.of(ExTrash.class).waitAsync(
+                    stub -> stub.backupAsync(module.identifier(), removed),
+                    () -> removed
+                ))
 
                 // 「AOP」带 AOP 的核心删除执行逻辑
                 .compose(AgonicHelper.deleteFnJ(criteria, in));
@@ -62,8 +66,11 @@ class AgonicADBDelete implements Agonic {
 
 
                 // 如果打开了 Trash 功能，则执行 Trash 的备份
-                .compose(removed -> Ux.channelAsync(ExTrash.class, () -> Ux.future(array),
-                    stub -> stub.backupAsync(module.identifier(), array)))
+                // SPI: ExTrash
+                .compose(removed -> HPI.of(ExTrash.class).waitAsync(
+                    stub -> stub.backupAsync(module.identifier(), removed),
+                    () -> removed
+                ))
 
 
                 // 「AOP」带 AOP 的核心删除执行逻辑

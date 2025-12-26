@@ -12,6 +12,7 @@ import io.zerows.extension.skeleton.common.KeBiz;
 import io.zerows.extension.skeleton.spi.ExTrash;
 import io.zerows.extension.skeleton.spi.ExUser;
 import io.zerows.program.Ux;
+import io.zerows.spi.HPI;
 import io.zerows.spi.modeler.Indent;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -24,14 +25,21 @@ public class EmployeeService implements EmployeeStub {
     public Future<JsonObject> createAsync(final JsonObject data) {
         final EEmployee employee = Ut.deserialize(data, EEmployee.class);
         if (Ut.isNil(employee.getWorkNumber())) {
-            return Ux.channelAsync(Indent.class, () -> this.insertAsync(employee, data),
-                serial -> serial.indent("NUM.EMPLOYEE", data.getString(KName.SIGMA)).compose(workNum -> {
-                    employee.setWorkNumber(workNum);
-                    return this.insertAsync(employee, data);
-                }));
+            return this.insertAsyncPre(employee, data);
         } else {
             return this.insertAsync(employee, data);
         }
+    }
+
+    private Future<JsonObject> insertAsyncPre(final EEmployee employee, final JsonObject data) {
+        final HPI<Indent> service = HPI.of(Indent.class);
+        return service.waitOr(
+            indent -> indent.indent("NUM.EMPLOYEE", data.getString(KName.SIGMA)).compose(workNum -> {
+                employee.setWorkNumber(workNum);
+                return this.insertAsync(employee, data);
+            }),
+            () -> this.insertAsync(employee, data)
+        );
     }
 
     private Future<JsonObject> insertAsync(final EEmployee employee, final JsonObject data) {
@@ -139,11 +147,14 @@ public class EmployeeService implements EmployeeStub {
 
     @Override
     public Future<Boolean> deleteAsync(final String key) {
-        return this.fetchAsync(key)
-            .compose(Fx.ifNil(() -> Boolean.TRUE, item -> Ux.channelAsync(ExTrash.class,
-                () -> this.deleteAsync(key, item),
-                tunnel -> tunnel.backupAsync("res.employee", item)
-                    .compose(backup -> this.deleteAsync(key, item)))));
+        return this.fetchAsync(key).compose(Fx.ifNil(() -> Boolean.TRUE, item ->
+            // SPI: ExTrash
+            HPI.of(ExTrash.class).waitOr(
+                trash -> trash.backupAsync("res.employee", item)
+                    .compose(backup -> this.deleteAsync(key, item)),
+                () -> this.deleteAsync(key, item)
+            )
+        ));
     }
 
     private Future<Boolean> deleteAsync(final String key, final JsonObject item) {
@@ -168,16 +179,6 @@ public class EmployeeService implements EmployeeStub {
                 }
             }
             return Ux.future(input);
-            /*
-             FnZero.ofJObject(response -> {
-            final String userId = response.getString(KName.KEY);
-            if (Ut.notNil(userId)) {
-                return Ux.future(input.put(KName.USER_ID, userId));
-            } else {
-                return Ux.future(input);
-            }
-        })
-             */
         });
     }
 
@@ -193,20 +194,24 @@ public class EmployeeService implements EmployeeStub {
 
     private Future<JsonObject> switchJ(final JsonObject input,
                                        final BiFunction<ExUser, JsonObject, Future<JsonObject>> executor) {
-        return Ux.channel(ExUser.class, JsonObject::new, user -> {
-            if (Ut.isNil(input)) {
-                // fix issue: https://gitee.com/silentbalanceyh/vertx-zero-scaffold/issues/I6W2L9
-                final JsonObject filters = new JsonObject();
-                filters.put(KName.IDENTIFIER, KeBiz.TypeUser.employee.name());
-                return executor.apply(user, filters);
-                //return Ux.future(new JsonObject());
-            } else {
-                final JsonObject filters = new JsonObject();
-                filters.put(KName.IDENTIFIER, KeBiz.TypeUser.employee.name());
-                filters.put(KName.SIGMA, input.getString(KName.SIGMA));
-                filters.put(KName.KEY, input.getString(KName.KEY));
-                return executor.apply(user, filters);
-            }
-        });
+        // SPI: ExUser
+        return HPI.of(ExUser.class).waitAsync(
+            user -> {
+                if (Ut.isNil(input)) {
+                    // fix issue: https://gitee.com/silentbalanceyh/vertx-zero-scaffold/issues/I6W2L9
+                    final JsonObject filters = new JsonObject();
+                    filters.put(KName.IDENTIFIER, KeBiz.TypeUser.employee.name());
+                    return executor.apply(user, filters);
+                    //return Ux.future(new JsonObject());
+                } else {
+                    final JsonObject filters = new JsonObject();
+                    filters.put(KName.IDENTIFIER, KeBiz.TypeUser.employee.name());
+                    filters.put(KName.SIGMA, input.getString(KName.SIGMA));
+                    filters.put(KName.KEY, input.getString(KName.KEY));
+                    return executor.apply(user, filters);
+                }
+            },
+            JsonObject::new
+        );
     }
 }

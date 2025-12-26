@@ -1,6 +1,5 @@
 package io.zerows.extension.skeleton.boot;
 
-import io.r2mo.spi.SPI;
 import io.zerows.cortex.sdk.HQBE;
 import io.zerows.epoch.boot.ConfigMod;
 import io.zerows.epoch.management.OCacheClass;
@@ -28,6 +27,7 @@ import io.zerows.extension.skeleton.spi.UiForm;
 import io.zerows.extension.skeleton.spi.UiValve;
 import io.zerows.platform.constant.VString;
 import io.zerows.specification.development.HMaven;
+import io.zerows.spi.HPI;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
 
@@ -78,7 +78,7 @@ class ExBoot {
     static void vLog() {
         log.info("[ XMOD ] 扩展模块 SPI 监控详情：");
         for (final Class<?> spiClass : SPI_SET) {
-            final List<?> implementations = SPI.findMany(spiClass);
+            final List<?> implementations = HPI.findMany(spiClass);
             final String implNames = implementations.isEmpty()
                 ? VString.EMPTY
                 : implementations.stream()

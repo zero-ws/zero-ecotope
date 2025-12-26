@@ -1,6 +1,5 @@
 package io.zerows.extension.skeleton.underway;
 
-import io.r2mo.spi.SPI;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
@@ -10,6 +9,7 @@ import io.zerows.epoch.management.OCacheConfiguration;
 import io.zerows.extension.skeleton.boot.ExAbstractHActor;
 import io.zerows.extension.skeleton.common.KeConstant;
 import io.zerows.specification.configuration.HConfig;
+import io.zerows.spi.HPI;
 import io.zerows.support.fn.Fx;
 
 import java.util.ArrayList;
@@ -41,7 +41,7 @@ public class PrimedActor extends ExAbstractHActor {
 
     @Override
     protected Future<Boolean> startAsync(final HConfig config, final Vertx vertxRef) {
-        final List<Primed> executors = CC_PRIMED.pick(() -> SPI.findMany(Primed.class), this.getClass());
+        final List<Primed> executors = CC_PRIMED.pick(() -> HPI.findMany(Primed.class), this.getClass());
         this.vLog("特殊 Actor 启动，执行后期调度！Provider提供者：{}", executors.size());
         if (executors.isEmpty()) {
             return Future.succeededFuture(Boolean.TRUE);

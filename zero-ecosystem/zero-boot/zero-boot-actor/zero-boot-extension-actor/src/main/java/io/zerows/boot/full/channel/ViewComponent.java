@@ -12,7 +12,7 @@ import io.zerows.extension.skeleton.common.Ke;
 import io.zerows.extension.skeleton.spi.UiApeakMy;
 import io.zerows.mbse.metadata.ActIn;
 import io.zerows.mbse.metadata.ActOut;
-import io.zerows.program.Ux;
+import io.zerows.spi.HPI;
 
 /**
  * ## 「Channel」我的列定制通道
@@ -82,22 +82,23 @@ public class ViewComponent extends AbstractAdaptor {
             final String sessionKey = Ke.keyView(params.getString(KName.METHOD),
                 params.getString(KName.URI), KView.create(literal));
             params.put(KName.DATA_KEY, sessionKey);
-            return Ux.channelAsync(UiApeakMy.class,
-                () -> ActOut.future(new JsonObject()),
-                stub -> {
-                    /*
-                     * 使用 query 参数替代body，此处可以拿到 projection 和 criteria （查询引擎参数）
-                     * 此处格式如：
-                     * {
-                     *      "criteria": {},
-                     *      "projection": []
-                     * }
-                     */
-                    final JsonObject requestData = request.getJObject();
-                    final JsonObject viewData = requestData.getJsonObject("viewData", new JsonObject());
-                    return stub.saveMy(params, viewData)
-                        .compose(ActOut::future);
-                });
+            // SPI: UiApeakMy
+            return HPI.of(UiApeakMy.class)
+                .waitAsync(stub -> {
+                        /*
+                         * 使用 query 参数替代body，此处可以拿到 projection 和 criteria （查询引擎参数）
+                         * 此处格式如：
+                         * {
+                         *      "criteria": {},
+                         *      "projection": []
+                         * }
+                         */
+                        final JsonObject requestData = request.getJObject();
+                        final JsonObject viewData = requestData.getJsonObject("viewData", new JsonObject());
+                        return stub.saveMy(params, viewData);
+                    }, JsonObject::new
+                )
+                .compose(ActOut::future);
         });
     }
 }

@@ -1,9 +1,9 @@
 package io.zerows.sdk.security;
 
-import io.r2mo.spi.SPI;
 import io.r2mo.typed.exception.web._501NotSupportException;
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.enums.SecurityType;
+import io.zerows.spi.HPI;
 
 import java.util.Objects;
 
@@ -24,7 +24,7 @@ class TokenUtil {
     }
 
     private static Lee ofLee() {
-        final Lee lee = SPI.findOverwrite(Lee.class);
+        final Lee lee = HPI.findOverwrite(Lee.class);
         if (Objects.isNull(lee)) {
             throw new _501NotSupportException("[ ZERO ] 为找到 Lee 编解码实现，无法执行操作！");
         }

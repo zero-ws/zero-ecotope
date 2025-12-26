@@ -102,7 +102,7 @@ public class BagArgService implements BagArgStub {
             // Parameters Store Code Logical
             .compose(blocks -> blockStub.saveParameters(blocks, data))
             // Refresh Cache of id
-            .compose(config -> PowerApp.getLatest(bag.getAppId(), true)
+            .compose(config -> PowerApp.getRefresh(bag.getAppId(), true)
                 .compose(nil -> Ux.future(config)));
     }
 

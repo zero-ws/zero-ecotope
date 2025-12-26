@@ -1,6 +1,5 @@
 package io.zerows.boot.test;
 
-import io.r2mo.spi.SPI;
 import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.Promise;
@@ -15,6 +14,7 @@ import io.zerows.platform.metadata.KFabric;
 import io.zerows.program.Ux;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.spi.BootIo;
+import io.zerows.spi.HPI;
 
 import java.util.Objects;
 import java.util.function.Supplier;
@@ -67,7 +67,7 @@ public class LauncherTest {
     private static ZeroConfigurer<Vertx> configurer() {
         /*  提取SPI部分，严格模式  */
 
-        final BootIo io = SPI.findOne(BootIo.class);
+        final BootIo io = HPI.findOne(BootIo.class);
         if (Objects.isNull(io)) {
             throw new _11010Exception500BootIoMissing(LauncherTest.class);
         }

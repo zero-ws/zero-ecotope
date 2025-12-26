@@ -12,11 +12,11 @@ import io.zerows.platform.enums.modeling.EmModel;
 public interface Ark {
     Cc<String, Ark> CC_ARK = Cc.openThread();
 
-    static Ark configure() {
+    static Ark ofConfigure() {
         return CC_ARK.pick(ArkConfigure::new, ArkConfigure.class.getName());
     }
 
-    static Ark bag() {
+    static Ark ofBag() {
         return CC_ARK.pick(ArkBag::new, ArkBag.class.getName());
     }
 

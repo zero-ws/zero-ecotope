@@ -7,7 +7,6 @@ import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.Message;
-import io.zerows.component.log.LogO;
 import io.zerows.cortex.plugins.uddi.Uddi;
 import io.zerows.cortex.plugins.uddi.UddiClient;
 import io.zerows.epoch.annotations.Me;
@@ -15,6 +14,8 @@ import io.zerows.epoch.web.Envelop;
 import io.zerows.platform.constant.VValue;
 import io.zerows.platform.enums.modeling.EmValue;
 import io.zerows.support.Ut;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -27,8 +28,8 @@ import java.util.function.Function;
 @SuppressWarnings("all")
 public abstract class InvokerBase implements Invoker {
 
-    protected LogO logger() {
-        return Ut.Log.uca(this.getClass());
+    protected Logger logger() {
+        return LoggerFactory.getLogger(getClass());
     }
 
     /**

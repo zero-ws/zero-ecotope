@@ -31,8 +31,10 @@ public class PrimedWorkflow implements Primed {
             .filter(configuration -> Objects.nonNull(configuration.inWorkflow()))
             .forEach(configuration -> {
                 final Set<MDWorkflow> workflowOfMod = configuration.inWorkflow();
-                log.info("{} ---> 模块 `{}` 包含 {} 个工作流定义", KeConstant.K_PREFIX_BOOT, configuration.id().value(), workflowOfMod.size());
-                workflowSet.addAll(workflowOfMod);
+                if (!workflowOfMod.isEmpty()) {
+                    log.info("{} ---> 模块 `{}` 包含 {} 个工作流定义", KeConstant.K_PREFIX_BOOT, configuration.id().value(), workflowOfMod.size());
+                    workflowSet.addAll(workflowOfMod);
+                }
             });
         final List<Future<Boolean>> futures = new ArrayList<>();
         workflowSet.forEach(mdWorkflow -> futures.add(DeployOn.get(mdWorkflow).initialize()));

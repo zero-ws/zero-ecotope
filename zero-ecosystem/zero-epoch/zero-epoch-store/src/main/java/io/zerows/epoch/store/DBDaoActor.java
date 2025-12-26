@@ -1,6 +1,5 @@
 package io.zerows.epoch.store;
 
-import io.r2mo.spi.SPI;
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import io.vertx.core.Future;
@@ -12,6 +11,7 @@ import io.zerows.epoch.management.OCacheClass;
 import io.zerows.epoch.management.OCacheDao;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.development.compiled.HBundle;
+import io.zerows.spi.HPI;
 
 import java.util.Set;
 import java.util.TreeSet;
@@ -34,7 +34,7 @@ public class DBDaoActor extends AbstractHActor {
     private final HBundle caller;
 
     public DBDaoActor() {
-        this.caller = SPI.findOverwrite(HBundle.class);
+        this.caller = HPI.findOverwrite(HBundle.class);
     }
 
     /**

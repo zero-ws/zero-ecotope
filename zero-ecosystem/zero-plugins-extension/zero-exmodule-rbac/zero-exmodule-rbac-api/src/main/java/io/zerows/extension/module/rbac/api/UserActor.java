@@ -12,6 +12,7 @@ import io.zerows.extension.module.rbac.servicespec.LoginStub;
 import io.zerows.extension.module.rbac.servicespec.UserStub;
 import io.zerows.extension.skeleton.spi.ExTrash;
 import io.zerows.program.Ux;
+import io.zerows.spi.HPI;
 import jakarta.inject.Inject;
 
 import java.util.Objects;
@@ -82,10 +83,13 @@ public class UserActor {
 
     @Address(Addr.User.DELETE)
     public Future<Boolean> delete(final String key) {
-        return Ux.channelAsync(ExTrash.class, () -> this.stub.deleteUser(key),
+        // SPI: ExTrash
+        return HPI.of(ExTrash.class).waitOr(
             tunnel -> Junc.refRights().identAsync(key)
                 .compose(user -> tunnel.backupAsync("sec.user", user))
-                .compose(backup -> this.stub.deleteUser(key)));
+                .compose(backup -> this.stub.deleteUser(key)),
+            () -> this.stub.deleteUser(key)
+        );
     }
 
     // ====================== Information ( By Type ) =======================

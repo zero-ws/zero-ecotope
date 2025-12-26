@@ -1,6 +1,5 @@
 package io.zerows.cosmic.bootstrap;
 
-import io.r2mo.spi.SPI;
 import io.vertx.ext.web.handler.AuthorizationHandler;
 import io.vertx.ext.web.handler.ChainAuthHandler;
 import io.zerows.cortex.metadata.RunServer;
@@ -11,6 +10,7 @@ import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.metadata.security.SecurityMeta;
 import io.zerows.sdk.security.WallProvider;
 import io.zerows.specification.development.compiled.HBundle;
+import io.zerows.spi.HPI;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
@@ -30,7 +30,7 @@ public class AxisSecure implements Axis {
     private final WallProvider provider;
 
     public AxisSecure() {
-        this.provider = SPI.findOverwrite(WallProvider.class);
+        this.provider = HPI.findOverwrite(WallProvider.class);
     }
 
     @Override

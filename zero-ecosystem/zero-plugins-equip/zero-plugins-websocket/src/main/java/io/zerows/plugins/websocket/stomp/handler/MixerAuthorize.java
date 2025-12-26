@@ -1,6 +1,5 @@
 package io.zerows.plugins.websocket.stomp.handler;
 
-import io.r2mo.spi.SPI;
 import io.vertx.core.Vertx;
 import io.vertx.ext.auth.authentication.AuthenticationProvider;
 import io.vertx.ext.stomp.StompServerHandler;
@@ -8,6 +7,7 @@ import io.vertx.ext.stomp.StompServerOptions;
 import io.zerows.cosmic.plugins.security.management.OCacheSecurity;
 import io.zerows.epoch.metadata.security.SecurityMeta;
 import io.zerows.sdk.security.WallProvider;
+import io.zerows.spi.HPI;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,7 +29,7 @@ public class MixerAuthorize extends AbstractMixer {
 
     public MixerAuthorize(final Vertx vertx) {
         super(vertx);
-        this.provider = SPI.findOverwrite(WallProvider.class);
+        this.provider = HPI.findOverwrite(WallProvider.class);
     }
 
     @Override

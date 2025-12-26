@@ -20,6 +20,7 @@ import io.zerows.mbse.metadata.ActOut;
 import io.zerows.platform.metadata.KIntegration;
 import io.zerows.program.Ux;
 import io.zerows.specification.modeling.operation.HDao;
+import io.zerows.spi.HPI;
 import io.zerows.support.Ut;
 
 import java.util.Objects;
@@ -238,17 +239,20 @@ public class AbstractHub extends AbstractActor {
      * @return {@link io.vertx.core.Future}
      */
     protected <T> Future<T> backupAsync(final T input, final DataAtom atom) {
+        // SPI: ExTrash
         return this.transferAsync(input,
 
             /* JsonObject */
-            data -> Ux.channelAsync(ExTrash.class,
-                () -> Ux.future(data),
-                stub -> stub.backupAsync(atom.identifier(), data)),
+            data -> HPI.of(ExTrash.class).waitAsync(
+                stub -> stub.backupAsync(atom.identifier(), data),
+                () -> data
+            ),
 
             /* JsonArray */
-            data -> Ux.channelAsync(ExTrash.class,
-                () -> Ux.future(data),
-                stub -> stub.backupAsync(atom.identifier(), data))
+            data -> HPI.of(ExTrash.class).waitAsync(
+                stub -> stub.backupAsync(atom.identifier(), data),
+                () -> data
+            )
         );
     }
 

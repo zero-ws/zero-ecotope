@@ -29,7 +29,7 @@ import java.util.function.Consumer;
  *
  * <h2>🧩 使用约定</h2>
  * <ul>
- *   <li>🔎 <b>发现机制</b>：推荐通过 SPI（如：{@code java.util.ServiceLoader} 或项目内 {@code SPI.findOneAsync}）发现 {@code BootIo} 实现；</li>
+ *   <li>🔎 <b>发现机制</b>：推荐通过 SPI（如：{@code java.util.ServiceLoader} 或项目内 {@code HPI.findOneOf}）发现 {@code BootIo} 实现；</li>
  *   <li>🧱 <b>无状态实现</b>：建议实现类保持无状态或仅持有只读元信息，以便被重复复用；</li>
  *   <li>🧵 <b>线程模型</b>：接口本身不做并发保证；若实现类内部存在状态，请自行保证线程安全；</li>
  *   <li>📂 <b>配置来源</b>：实现可从类路径、外部目录、环境变量、系统属性、命令行参数等多源合并为 {@link HEnergy}；</li>
@@ -39,7 +39,7 @@ import java.util.function.Consumer;
  * <h2>💡 典型调用示例</h2>
  * <pre>{@code
  * // 通过 SPI 查找 BootIo 实现
- * BootIo bootIo = SPI.findOneAsync(BootIo.class);
+ * BootIo bootIo = SPI.findOneOf(BootIo.class);
  *
  * // 1) 解析能量配置（基于启动类与 args）
  * HEnergy energy = bootIo.energy(MyBoot.class, args);
@@ -84,7 +84,7 @@ import java.util.function.Consumer;
  *                       1）withPre -> 负责预处理内置组件、非业务相关组件、所有被依赖的组件
  *                                     存在多个依赖流程时直接执行链式依赖处理
  *                       2）whenOn  -> 构造启动配置，为第三步做准备
- *                    3. {@link HLauncher#start(HConfig.HOn, Consumer)} 中的 {@link Consumer} 被触发，此处 {@link Consumer} 充当了启动
+ *                    3. {@see HLauncher#start(HConfig.HOn, Consumer)} 中的 {@link Consumer} 被触发，此处 {@link Consumer} 充当了启动
  *                       回调，开发过程中自定义的部分内容在此处被触发完成
  *                    4. {@link Consumer} 执行过程中依旧可以访问 {@link StoreSetting}，通过 configKey 提取 HConfig 配置信息
  *                       HConfig 的主结构

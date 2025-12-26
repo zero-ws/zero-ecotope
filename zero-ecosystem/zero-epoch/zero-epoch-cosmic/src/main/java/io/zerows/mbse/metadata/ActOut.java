@@ -12,10 +12,12 @@ import io.zerows.platform.metadata.KMap;
 import io.zerows.program.Ux;
 import io.zerows.specification.modeling.HRecord;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
 import java.util.Objects;
 
+@Slf4j
 public class ActOut extends ActMapping implements Serializable {
 
     private static final LogO LOGGER = Ut.Log.data(ActOut.class);
@@ -119,7 +121,7 @@ public class ActOut extends ActMapping implements Serializable {
                 } else {
                     node = mapping.child(this.identifier);
                     if (!node.isEmpty()) {
-                        LOGGER.info("identifier `{0}`, extract child mapping. {1}", this.identifier, node.toString());
+                        log.info("[ ZERO ] identifier `{}`, extract child mapping. {}", this.identifier, node.toString());
                     }
                 }
                 final WebState status = this.envelop.status();

@@ -12,8 +12,10 @@ import io.r2mo.spi.FactoryIo;
 import io.r2mo.spi.FactoryObject;
 import io.r2mo.spi.FactoryWeb;
 import io.r2mo.spi.SPI;
+import io.r2mo.typed.cc.Cc;
 import io.r2mo.vertx.dbe.DBContext;
 import io.r2mo.vertx.dbe.FactoryDBAsync;
+import io.vertx.core.Future;
 import io.zerows.platform.constant.VString;
 import io.zerows.specification.configuration.HLauncher;
 import io.zerows.specification.configuration.HRegistry;
@@ -26,6 +28,9 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+import java.util.function.Function;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 /**
@@ -34,7 +39,7 @@ import java.util.stream.Collectors;
  * @author lang : 2025-10-02
  */
 @Slf4j
-public final class HPI extends SPI {
+public final class HPI<T> extends SPI {
 
     private static final List<Class<?>> SPI_SET = new ArrayList<>() {
         {
@@ -91,14 +96,14 @@ public final class HPI extends SPI {
     }
 
     public static HBundle findBundle(final Class<?> clazzLoader) {
-        return SPI.findOverwrite(HBundle.class, clazzLoader);
+        return findOverwrite(HBundle.class, clazzLoader);
     }
 
     public static void vLog() {
 
         log.info("[ ZERO ] SPI 监控详情：");
         for (final Class<?> spiClass : SPI_SET) {
-            final List<?> implementations = SPI.findMany(spiClass);
+            final List<?> implementations = findMany(spiClass);
             final String implNames = implementations.isEmpty()
                 ? VString.EMPTY
                 : implementations.stream()
@@ -107,5 +112,70 @@ public final class HPI extends SPI {
                 .collect(Collectors.joining(", "));
             log.info("[ ZERO ]    \uD83D\uDCCC {} = [{}]", spiClass.getName(), implNames);
         }
+    }
+
+    // ------------------- HPI 对象模式，直接处理对象引用功能
+    private static final Cc<String, HPI<?>> CC_HPI = Cc.openThread();
+    private final T service;
+
+    private HPI(final Class<T> interfaceCls) {
+        final T service = findOverwrite(interfaceCls);
+        if (Objects.isNull(service)) {
+            log.warn("[ ZERO ] 功能性旁路 HPI / 接口 = {} 对应的实现服务在环境中未找到！", interfaceCls.getName());
+        }
+        this.service = service;
+    }
+
+    /**
+     * 此处有一点需要特殊说明：为何 wait?? 所有方法签名的第二参采用了 {@link Supplier} 而非直接对象引用？
+     * <pre>
+     *     1. 为了延迟加载默认对象，避免不必要的对象创建开销
+     *     2. 保持与异步方法签名的一致性，便于理解和使用
+     *     3. 避免在默认对象创建过程中出现副作用，确保只有在需要时才会执行相关逻辑
+     * </pre>
+     *
+     * @param interfaceCls SPI 接口
+     * @param <R>          SPI 中的组件类型
+     *
+     * @return 返回 {@link HPI} 引用
+     */
+    @SuppressWarnings("unchecked")
+    public static <R> HPI<R> of(final Class<R> interfaceCls) {
+        Objects.requireNonNull(interfaceCls);
+        return (HPI<R>) CC_HPI.pick(() -> new HPI<>(interfaceCls), interfaceCls.getName());
+    }
+
+    public <O> Future<O> waitAsync(final Function<T, Future<O>> executor, final Supplier<O> defaultSupplier) {
+        // 默认流程处理 null
+        if (Objects.isNull(this.service)) {
+            final O defaultValue = Objects.isNull(defaultSupplier) ? null : defaultSupplier.get();
+            return Future.succeededFuture(defaultValue);
+        }
+
+
+        // 非默认流程处理 null
+        return Objects.isNull(executor) ? Future.succeededFuture() : executor.apply(this.service);
+    }
+
+    public <O> Future<O> waitOr(final Function<T, Future<O>> executor, final Supplier<Future<O>> defaultSupplier) {
+        // 默认流程处理 null
+        if (Objects.isNull(this.service)) {
+            return Objects.isNull(defaultSupplier) ? Future.succeededFuture() : defaultSupplier.get();
+        }
+
+
+        // 非默认流程处理 null
+        return Objects.isNull(executor) ? Future.succeededFuture() : executor.apply(this.service);
+    }
+
+    public <O> O waitUntil(final Function<T, O> executor, final Supplier<O> defaultSupplier) {
+        // 默认流程处理 null
+        if (Objects.isNull(this.service)) {
+            return Objects.isNull(defaultSupplier) ? null : defaultSupplier.get();
+        }
+
+
+        // 非默认流程处理 null
+        return Objects.isNull(executor) ? null : executor.apply(this.service);
     }
 }

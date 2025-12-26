@@ -93,6 +93,9 @@ public class MDWorkflowManager extends MDModuleManager<MetaWorkflow, Boolean> {
         }
         final String folder = "plugins/runtime/todo/";
         final List<String> files = Ut.ioFiles(folder, VValue.SUFFIX.JSON);
+        if (files.isEmpty()) {
+            return Future.succeededFuture(Boolean.TRUE);
+        }
         log.info("{} Todo 遗留定义：{}, 目录：{}", KeConstant.K_PREFIX_BOOT, files.size(), folder);
         files.forEach(file -> {
             final String path = folder + file;

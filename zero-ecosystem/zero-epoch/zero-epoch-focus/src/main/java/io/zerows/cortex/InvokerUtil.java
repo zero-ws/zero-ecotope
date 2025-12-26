@@ -11,6 +11,7 @@ import io.zerows.epoch.web.Envelop;
 import io.zerows.platform.constant.VValue;
 import io.zerows.support.Ut;
 import io.zerows.weaver.ZeroType;
+import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -21,11 +22,11 @@ import java.util.function.Supplier;
  * Tool for invoker do shared works.
  */
 @SuppressWarnings("all")
+@Slf4j
 public class InvokerUtil {
-    public static final String MSG_DIRECT = "( Invoker ) Invoker = {0}, ReturnType = {1}, Method = {2}, Class = {3}.";
-    public static final String MSG_RPC = "( Invoker Rpc ) Invoker = {0}, ReturnType = {1}, Method = {2}, Class = {3}.";
-    public static final String MSG_HANDLE = "( Invoker Handle ) Invoker = {0}, ReturnType = {1}, Method = {2}, Class = {3}.";
-    private static final LogO LOGGER = Ut.Log.uca(InvokerUtil.class);
+    public static final String MSG_DIRECT = "( Invoker ) Invoker = {}, ReturnType = {}, Method = {}, Class = {}.";
+    public static final String MSG_RPC = "( Invoker Rpc ) Invoker = {}, ReturnType = {}, Method = {}, Class = {}.";
+    public static final String MSG_HANDLE = "( Invoker Handle ) Invoker = {}, ReturnType = {}, Method = {}, Class = {}.";
 
     public static Object invokeCall(
         final Object proxy,
@@ -238,8 +239,7 @@ public class InvokerUtil {
         final long count = json.fieldNames().stream().filter(Ut::isInteger)
             .count();
         // All json keys are numbers
-        LOGGER.debug("( isInterface Mode ) findRunning count: {0}, json: {1}",
-            count, json.encode());
+        log.debug("[ ZERO ] ( Mode ) 是否接口模式：count = {}, json = {}", count, json.encode());
         return count == json.fieldNames().size();
     }
 }
