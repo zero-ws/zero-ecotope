@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 public class SmsActor extends AbstractHActor {
     @Override
     protected Future<Boolean> startAsync(final HConfig config, final Vertx vertxRef) {
-        final AddOn<SmsClient> addOn = SmsAddon.of(vertxRef, config);
+        final AddOn<SmsClient> addOn = SmsAddOn.of(vertxRef, config);
         this.vLog("[ Sms ] SmsActor 初始化完成，配置：{}", config);
 
         final Provider<SmsClient> provider = new SmsProvider(addOn);
@@ -27,6 +27,6 @@ public class SmsActor extends AbstractHActor {
     }
 
     public static SmsClient ofClient() {
-        return SmsAddon.of().createSingleton();
+        return SmsAddOn.of().createSingleton();
     }
 }

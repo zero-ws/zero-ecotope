@@ -17,7 +17,7 @@ import io.zerows.specification.configuration.HConfig;
  */
 @AddOn.Name("DEFAULT_SMS_CLIENT")
 public interface SmsClient  {
-    static SmsClient createShared(final Vertx vertx, HConfig config) {
+    static SmsClient createClient(final Vertx vertx, HConfig config) {
         return new SmsClientImpl(vertx, SmsConfig.create(config));
     }
 
