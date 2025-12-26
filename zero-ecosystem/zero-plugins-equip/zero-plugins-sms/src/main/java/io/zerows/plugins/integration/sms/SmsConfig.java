@@ -1,18 +1,14 @@
 package io.zerows.plugins.integration.sms;
 
 import io.vertx.core.json.JsonObject;
+import io.zerows.specification.configuration.HConfig;
 import io.zerows.support.Ut;
-import io.zerows.sdk.plugins.InfixConfig;
+import lombok.Getter;
 
 import java.io.Serializable;
 import java.util.Objects;
 
 public class SmsConfig implements Serializable {
-
-    static final String CONFIG_KEY = "sms-ali";
-    static final String TIMEOUT_CONN = "timeout_connect";
-    static final String TIMEOUT_READ = "timeout_read";
-    static final String DFT_PRODUCT = "Dysmsapi";
     static final String DFT_REGION = "cn-hangzhou";
     static final String RESPONSE_REQUEST_ID = "request_id";
     static final String RESPONSE_BUSINESS_ID = "business_id";
@@ -24,48 +20,32 @@ public class SmsConfig implements Serializable {
     private static final String KEY_TPL = "tpl";
     private static final String DFT_DOMAIN = "dysmsapi.aliyuncs.com";
 
-    private static final InfixConfig CONFIG = InfixConfig.create(CONFIG_KEY, CONFIG_KEY);
 
+    @Getter
     private final String accessId;
+    @Getter
     private final String accessSecret;
+    @Getter
     private final String signName;
     private final JsonObject tpl;
     private String endpoint;
 
-    private SmsConfig(final JsonObject configJ) {
-        this.accessId = Ut.valueString(configJ, KEY_ID);
-        this.accessSecret = Ut.valueString(configJ, KEY_SECRET);
-        this.signName = Ut.valueString(configJ, KEY_SIGN_NAME);
-        this.tpl = Ut.valueJObject(configJ, KEY_TPL);
-        this.endpoint = CONFIG.getEndPoint();
+    private SmsConfig(final HConfig configJ) {
+        JsonObject options = configJ.options();
+        JsonObject smsConfig = options.getJsonObject("aliyun");
+        this.accessId = Ut.valueString(smsConfig, KEY_ID);
+        this.accessSecret = Ut.valueString(smsConfig, KEY_SECRET);
+        this.signName = Ut.valueString(smsConfig, KEY_SIGN_NAME);
+        this.tpl = Ut.valueJObject(smsConfig, KEY_TPL);
         if (null == this.endpoint) {
             this.endpoint = DFT_DOMAIN;
         }
     }
 
-    static SmsConfig create(final JsonObject config) {
+    static SmsConfig create(final HConfig config) {
         return new SmsConfig(config);
     }
 
-    static SmsConfig create() {
-        return new SmsConfig(CONFIG.getConfig());
-    }
-
-    public JsonObject getConfig() {
-        return CONFIG.getConfig();
-    }
-
-    public String getAccessId() {
-        return this.accessId;
-    }
-
-    public String getAccessSecret() {
-        return this.accessSecret;
-    }
-
-    public String getSignName() {
-        return this.signName;
-    }
 
     public String getDomain() {
         return this.endpoint;
@@ -85,7 +65,7 @@ public class SmsConfig implements Serializable {
             return false;
         }
         return Objects.equals(this.accessId, smsConfig.accessId) &&
-            Objects.equals(this.accessSecret, smsConfig.accessSecret);
+                Objects.equals(this.accessSecret, smsConfig.accessSecret);
     }
 
     @Override

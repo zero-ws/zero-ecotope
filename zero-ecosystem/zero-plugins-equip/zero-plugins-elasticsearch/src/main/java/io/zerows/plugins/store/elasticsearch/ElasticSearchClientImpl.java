@@ -4,9 +4,12 @@ import io.r2mo.function.Fn;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.annotations.Defer;
 import io.zerows.platform.enums.typed.ChangeFlag;
 import io.zerows.component.log.LogOf;
+import io.zerows.specification.configuration.HConfig;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.action.get.GetRequest;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.client.RequestOptions;
@@ -20,7 +23,8 @@ import java.util.concurrent.ConcurrentMap;
  * @author Hongwei
  * @since 2019/12/29, 13:31
  */
-
+@Slf4j
+@Defer
 public class ElasticSearchClientImpl implements ElasticSearchClient {
     private static final LogOf LOGGER = LogOf.get(ElasticSearchClientImpl.class);
 
@@ -32,8 +36,9 @@ public class ElasticSearchClientImpl implements ElasticSearchClient {
     // Indexer for index management
     private final transient ElasticIndexer indexer;
 
-    ElasticSearchClientImpl(final Vertx vertx, final JsonObject options) {
+    ElasticSearchClientImpl(final Vertx vertx, final HConfig config) {
         this.vertx = vertx;
+        JsonObject options = config.options();
         if (Ut.isNotNil(options)) {
             LOGGER.info("[ ZERO ] Elastic Search initialized: {0}", options.encode());
             this.options.mergeIn(options);
@@ -115,15 +120,15 @@ public class ElasticSearchClientImpl implements ElasticSearchClient {
 
         try {
             final GetRequest request = new GetRequest()
-                .index(index)
-                .id(documentId);
+                    .index(index)
+                    .id(documentId);
 
             final GetResponse response = client.get(request, RequestOptions.DEFAULT);
 
             result
-                .put("index", response.getIndex())
-                .put("id", response.getId())
-                .put("result", response.isExists());
+                    .put("index", response.getIndex())
+                    .put("id", response.getId())
+                    .put("result", response.isExists());
             if (response.isExists()) {
                 result.put("data", response.getSource());
             }

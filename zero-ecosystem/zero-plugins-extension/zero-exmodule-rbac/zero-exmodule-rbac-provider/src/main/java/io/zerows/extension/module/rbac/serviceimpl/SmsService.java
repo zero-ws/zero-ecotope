@@ -16,7 +16,7 @@ import io.zerows.extension.module.rbac.servicespec.ImageStub;
 import io.zerows.extension.module.rbac.servicespec.SmsStub;
 import io.zerows.extension.module.rbac.servicespec.TokenStub;
 import io.zerows.platform.constant.VValue;
-import io.zerows.plugins.integration.sms.SmsInfix;
+import io.zerows.plugins.integration.sms.SmsActor;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import jakarta.inject.Inject;
@@ -71,7 +71,7 @@ public class SmsService implements SmsStub {
         final String mobile = Ut.valueString(params, KName.MOBILE);
         final String tplCode = Ut.valueString(params, "tpl");
         // Inject 注入在 Service 中可用，但 Infusion 只在 Actor 中可用
-        return SmsInfix.getClient().send(mobile, tplCode, request)
+        return SmsActor.ofClient().send(mobile, tplCode, request)
             // 2 分钟过期 = 120 秒
             .compose(nil -> this.cache.put(sessionId, smsCode))
             .compose(nil -> Ux.futureT());

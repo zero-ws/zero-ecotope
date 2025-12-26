@@ -25,7 +25,7 @@
         <!-- 短信扩展 -->
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-plugins-integration-sms</artifactId>
+            <artifactId>zero-plugins-sms</artifactId>
             <version>${zero.version}</version>
         </dependency>
     </dependencies>
