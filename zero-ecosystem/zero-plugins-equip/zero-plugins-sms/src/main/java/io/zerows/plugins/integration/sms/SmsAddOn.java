@@ -8,16 +8,16 @@ import io.zerows.specification.configuration.HConfig;
 
 import java.util.Objects;
 
-class SmsAddon extends AddOnBase<SmsClient> {
-    private static SmsAddon INSTANCE;
+class SmsAddOn extends AddOnBase<SmsClient> {
+    private static SmsAddOn INSTANCE;
 
-    protected SmsAddon(Vertx vertx, HConfig config) {
+    protected SmsAddOn(Vertx vertx, HConfig config) {
         super(vertx, config);
     }
 
     public static AddOn<SmsClient> of(Vertx vertx, HConfig config) {
         if (INSTANCE == null) {
-            INSTANCE = new SmsAddon(vertx, config);
+            INSTANCE = new SmsAddOn(vertx, config);
         }
         return INSTANCE;
     }
