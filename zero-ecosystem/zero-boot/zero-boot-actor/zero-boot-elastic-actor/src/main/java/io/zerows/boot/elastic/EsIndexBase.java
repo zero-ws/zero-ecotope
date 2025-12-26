@@ -4,8 +4,8 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.zerows.boot.extension.util.Ox;
 import io.zerows.component.log.LogOf;
+import io.zerows.plugins.store.elasticsearch.ElasticSearchActor;
 import io.zerows.plugins.store.elasticsearch.ElasticSearchClient;
-import io.zerows.plugins.store.elasticsearch.ElasticSearchInfix;
 
 import java.util.function.Supplier;
 
@@ -16,7 +16,7 @@ abstract class EsIndexBase implements EsIndex {
 
     public EsIndexBase(final String identifier) {
         this.identifier = identifier;
-        this.client = ElasticSearchInfix.getClient();
+        this.client = ElasticSearchActor.ofClient();
     }
 
     protected <T> Future<T> runSingle(final T input, final Supplier<T> supplier) {

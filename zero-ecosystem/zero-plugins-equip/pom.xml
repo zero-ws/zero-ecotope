@@ -23,14 +23,14 @@
         <!-- Integration -->
         <!--        <module>zero-plugins-integration-feign</module>-->
         <!--        <module>zero-plugins-integration-git</module>-->
-        <module>zero-plugins-integration-sms</module>
+        <module>zero-plugins-sms</module>
         <module>zero-plugins-integration-wechat</module>
 
         <!-- Office -->
         <module>zero-plugins-excel</module>
 
         <!-- Store -->
-        <module>zero-plugins-store-elasticsearch</module>
+        <module>zero-plugins-elasticsearch</module>
         <!--        <module>zero-plugins-store-mongo</module>  -->
         <module>zero-plugins-store-neo4j</module>
         <!--        <module>zero-plugins-store-redis</module>-->

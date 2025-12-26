@@ -3,6 +3,8 @@ package io.zerows.plugins.store.elasticsearch;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.sdk.plugins.AddOn;
+import io.zerows.specification.configuration.HConfig;
 
 import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
@@ -11,8 +13,10 @@ import java.util.concurrent.ConcurrentMap;
  * @author Hongwei
  * @since 2019/12/29, 13:27
  */
+
+@AddOn.Name("DEFAULT_ELASTICSEARCH_CLIENT")
 public interface ElasticSearchClient {
-    static ElasticSearchClient createShared(final Vertx vertx, final JsonObject options) {
+    static ElasticSearchClient createShared(final Vertx vertx, final HConfig options) {
         return new ElasticSearchClientImpl(vertx, options);
     }
 
