@@ -10,6 +10,7 @@ import io.zerows.extension.skeleton.spi.ExAttachment;
 import io.zerows.extension.skeleton.spi.ExIo;
 import io.zerows.extension.skeleton.spi.ExUser;
 import io.zerows.program.Ux;
+import io.zerows.spi.HPI;
 import io.zerows.support.Ut;
 import jakarta.inject.Inject;
 
@@ -34,7 +35,10 @@ public class DocReader implements DocRStub {
          * 1. Copy `directory` visitMode to attachment
          * 2. Fetch `directory` of children
          */
-        return Ux.channel(ExIo.class, JsonArray::new, io -> io.dirRun(sigma, directoryId)).compose(directory -> {
+        return HPI.of(ExIo.class).waitAsync(
+            io -> io.dirRun(sigma, directoryId),
+            JsonArray::new
+        ).compose(directory -> {
             final JsonObject condition = Ux.whereAnd();
             condition.put(KName.DIRECTORY_ID, directoryId);
             // active = true
@@ -50,7 +54,10 @@ public class DocReader implements DocRStub {
     @Override
     public Future<JsonArray> fetchTrash(final String sigma) {
         Objects.requireNonNull(sigma);
-        return Ux.channel(ExIo.class, JsonArray::new, io -> io.dirTrash(sigma)).compose(directory -> {
+        return HPI.of(ExIo.class).waitAsync(
+            io -> io.dirTrash(sigma),
+            JsonArray::new
+        ).compose(directory -> {
             final JsonObject condition = Ux.whereAnd();
             // active = false
             condition.put(KName.ACTIVE, Boolean.FALSE);
@@ -75,7 +82,10 @@ public class DocReader implements DocRStub {
          * 1 - Upload
          * 2 - Replaced
          *  */
-        return Ux.channel(ExUser.class, JsonArray::new, user -> user.searchUser(keyword)).compose(keys -> {
+        return HPI.of(ExUser.class).waitAsync(
+            user -> user.searchUser(keyword),
+            JsonArray::new
+        ).compose(keys -> {
             if (Ut.isNotNil(keys)) {
                 // User Matched
                 final JsonObject criteria = Ux.whereOr();

@@ -14,7 +14,7 @@ import java.util.function.Function;
 /**
  * @author lang : 2023-06-11
  */
-class _Compare extends _Channel {
+class _Compare {
     public static <T, R> ConcurrentMap<ChangeFlag, List<T>> compare(final List<T> original, final List<T> current, final Function<T, R> fnValue, final String pojoFile) {
         return Ut.compare(original, current, fnValue, pojoFile);
     }

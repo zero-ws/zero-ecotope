@@ -44,7 +44,7 @@ public class NotifyService implements NotifyStub {
                     return Ux.future(null);
                 } else {
                     // TODO: 暂时只提取第一个角色的提醒设置，后续更改
-                    return Ux.future(roles.get(0));
+                    return Ux.future(roles.getFirst());
                 }
             });
     }

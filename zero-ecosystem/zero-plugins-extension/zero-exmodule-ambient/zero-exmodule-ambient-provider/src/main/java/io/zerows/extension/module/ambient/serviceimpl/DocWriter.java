@@ -16,6 +16,7 @@ import io.zerows.extension.skeleton.exception._81002Exception400FilenameInvalid;
 import io.zerows.extension.skeleton.spi.ExAttachment;
 import io.zerows.extension.skeleton.spi.ExIo;
 import io.zerows.program.Ux;
+import io.zerows.spi.HPI;
 import io.zerows.support.Ut;
 import jakarta.inject.Inject;
 
@@ -46,7 +47,10 @@ public class DocWriter implements DocWStub {
          * move the files to actual storage, instead the template file storage will take
          * place.
          */
-        return Ux.channel(ExAttachment.class, () -> documentA, file -> file.uploadAsync(documentA));
+        return HPI.of(ExAttachment.class).waitAsync(
+            file -> file.uploadAsync(documentA),
+            () -> documentA
+        );
     }
 
     @Override
@@ -71,8 +75,10 @@ public class DocWriter implements DocWStub {
                 final JsonObject directoryJ = new JsonObject();
                 directoryJ.put(KName.KEY, directoryId);
                 directoryJ.put(KName.UPDATED_BY, documentJ.getString(KName.UPDATED_BY));
-                return Ux.channel(ExIo.class, () -> documentJ, io -> io.rename(directoryJ, kv)
-                    .compose(nil -> Ux.future(documentJ)));
+                return HPI.of(ExIo.class).waitAsync(
+                    io -> io.rename(directoryJ, kv).compose(nil -> Ux.future(documentJ)),
+                    () -> documentJ
+                );
             });
         });
     }
@@ -95,7 +101,10 @@ public class DocWriter implements DocWStub {
             (attachmentA) -> this.attachment.updateAsync(attachmentA, Boolean.FALSE),
             (directoryA, attachmentA) -> {
                 final ConcurrentMap<String, String> fileMap = Ut.elementMap(attachmentA, KName.STORE_PATH, KName.DIRECTORY_ID);
-                return Ux.channel(ExIo.class, () -> documentA, fs -> fs.trashIn(directoryA, fileMap));
+                return HPI.of(ExIo.class).waitAsync(
+                    fs -> fs.trashIn(directoryA, fileMap),
+                    () -> documentA
+                );
             }
         );
     }
@@ -107,7 +116,10 @@ public class DocWriter implements DocWStub {
             (attachmentA) -> this.attachment.updateAsync(attachmentA, Boolean.TRUE),
             (directoryA, attachmentA) -> {
                 final ConcurrentMap<String, String> fileMap = Ut.elementMap(attachmentA, KName.STORE_PATH, KName.DIRECTORY_ID);
-                return Ux.channel(ExIo.class, () -> documentA, fs -> fs.trashOut(directoryA, fileMap));
+                return HPI.of(ExIo.class).waitAsync(
+                    fs -> fs.trashOut(directoryA, fileMap),
+                    () -> documentA
+                );
             }
         );
     }
@@ -119,9 +131,10 @@ public class DocWriter implements DocWStub {
             this.attachment::purgeAsync,
             (directoryA, attachmentA) -> {
                 final ConcurrentMap<String, String> fileMap = Ut.elementMap(attachmentA, KName.STORE_PATH, KName.DIRECTORY_ID);
-                return Ux.channel(ExIo.class, () -> documentA,
-                    // Kill Directory and All Sub Files
-                    fs -> fs.purge(directoryA, fileMap).compose(this::trashKoDeep));
+                return HPI.of(ExIo.class).waitAsync(
+                    fs -> fs.purge(directoryA, fileMap).compose(this::trashKoDeep),
+                    () -> documentA
+                );
             });
     }
 
