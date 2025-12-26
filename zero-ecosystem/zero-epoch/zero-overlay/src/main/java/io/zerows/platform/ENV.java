@@ -47,6 +47,45 @@ public class ENV implements HEnvironment, HLog {
 
     // ========== Lifecycle ==========
 
+    public static String parseVariable(final String wrapValue) {
+        if (UtBase.isNil(wrapValue)) {
+            return wrapValue;
+        }
+
+        // 定义非贪婪匹配的正则表达式：${KEY}
+        // [^}] 表示匹配除了右花括号外的所有字符，确保一行内多个变量能被正确分割
+        final String regex = "\\$\\{([^}]+)\\}";
+        final Pattern pattern = Pattern.compile(regex);
+        final Matcher matcher = pattern.matcher(wrapValue);
+        final StringBuilder buffer = new StringBuilder();
+
+        while (matcher.find()) {
+            // 获取 ${KEY} 中的 KEY
+            final String envKey = matcher.group(1);
+
+            // 尝试获取环境变量
+            String envValue = ENV.of().get(envKey, (String) null);
+
+            if (UtBase.isNotNil(envValue)) {
+                log.info("[ ZERO ] 解析环境变量：{} -> {}", envKey, envValue);
+            } else {
+                // 策略：如果没找到环境变量，保留原样 "${KEY}"，方便后续排查或由其他层级处理
+                envValue = "${" + envKey + "}";
+                log.warn("[ ZERO ] 未设置环境变量：{}，保持原样", envKey);
+            }
+
+            // 执行替换 (使用 quoteReplacement 防止 envValue 中包含 $ 或 \ 等特殊字符导致报错)
+            matcher.appendReplacement(buffer, Matcher.quoteReplacement(envValue));
+        }
+
+        // 将剩余未匹配的字符串拼接到尾部
+        matcher.appendTail(buffer);
+
+        return buffer.toString();
+    }
+
+    // ========== Auto Calculation (New Added) ==========
+
     public void whenStart(final Class<?> clazz) {
         final PropertySource source = clazz.getDeclaredAnnotation(PropertySource.class);
         if (source != null) {
@@ -61,8 +100,6 @@ public class ENV implements HEnvironment, HLog {
         // 打印环境变量
         this.vLog();
     }
-
-    // ========== Auto Calculation (New Added) ==========
 
     /**
      * 自动计算 JDBC URL
@@ -116,6 +153,8 @@ public class ENV implements HEnvironment, HLog {
         });
     }
 
+    // ========== Loaders (Public entry) ==========
+
     /**
      * 辅助判断是否存在 key
      */
@@ -125,7 +164,7 @@ public class ENV implements HEnvironment, HLog {
             ENV_VARS.containsKey(key);
     }
 
-    // ========== Loaders (Public entry) ==========
+    // ========== Candidate builder ==========
 
     private void loadProperties(final String path) {
         if (UtBase.isNil(path)) {
@@ -144,7 +183,7 @@ public class ENV implements HEnvironment, HLog {
         }
     }
 
-    // ========== Candidate builder ==========
+    // ========== Small helpers ==========
 
     /**
      * 按协议构建候选资源列表，按序尝试。
@@ -155,11 +194,11 @@ public class ENV implements HEnvironment, HLog {
         if (path.startsWith("classpath:")) {
             final String p = path.substring("classpath:".length());
             list.add(this.classpathCandidate(p, "[ ZERO ] 从 classpath 加载配置文件: " + p,
-                "[ ZERO ] 未找到配置文件: " + p));
+                "[ ZERO ] 未找到配置文件 / CLASSPATH: " + p));
         } else if (path.startsWith("file:")) {
             final String p = path.substring("file:".length());
             list.add(this.fileCandidate(p, "[ ZERO ] 从文件系统加载配置文件: " + p,
-                "[ ZERO ] 未找到文件配置: " + p));
+                "[ ZERO ] 未找到文件配置 / FILE: " + p));
         } else if (path.startsWith("test:")) {
             final String p = path.substring("test:".length());
             // 1) src/test/resources/ 前缀
@@ -174,18 +213,9 @@ public class ENV implements HEnvironment, HLog {
         } else {
             // 默认按 classpath 处理
             list.add(this.classpathCandidate(path, "[ ZERO ] 从 classpath 加载配置文件: " + path,
-                "[ ZERO ] 未找到配置文件: " + path));
+                "[ ZERO ] 未找到配置文件 / ELSE: " + path));
         }
         return list;
-    }
-
-    // ========== Small helpers ==========
-
-    @AllArgsConstructor
-    private static class ResourceCandidate {
-        Supplier<InputStream> supplier;
-        String successLog;   // 成功加载时的 info 日志
-        String notFoundWarn; // 找不到时的 warn（允许为 null：表示由后续候选继续处理）
     }
 
     private ResourceCandidate classpathCandidate(final String resourcePath,
@@ -288,44 +318,6 @@ public class ENV implements HEnvironment, HLog {
 
     // ========== 特殊处理：增强版变量解析 ==========
 
-    public static String parseVariable(final String wrapValue) {
-        if (UtBase.isNil(wrapValue)) {
-            return wrapValue;
-        }
-
-        // 定义非贪婪匹配的正则表达式：${KEY}
-        // [^}] 表示匹配除了右花括号外的所有字符，确保一行内多个变量能被正确分割
-        final String regex = "\\$\\{([^}]+)\\}";
-        final Pattern pattern = Pattern.compile(regex);
-        final Matcher matcher = pattern.matcher(wrapValue);
-        final StringBuilder buffer = new StringBuilder();
-
-        while (matcher.find()) {
-            // 获取 ${KEY} 中的 KEY
-            final String envKey = matcher.group(1);
-
-            // 尝试获取环境变量
-            String envValue = ENV.of().get(envKey, (String) null);
-
-            if (UtBase.isNotNil(envValue)) {
-                log.info("[ ZERO ] 解析环境变量：{} -> {}", envKey, envValue);
-            } else {
-                // 策略：如果没找到环境变量，保留原样 "${KEY}"，方便后续排查或由其他层级处理
-                envValue = "${" + envKey + "}";
-                log.warn("[ ZERO ] 未设置环境变量：{}，保持原样", envKey);
-            }
-
-            // 执行替换 (使用 quoteReplacement 防止 envValue 中包含 $ 或 \ 等特殊字符导致报错)
-            matcher.appendReplacement(buffer, Matcher.quoteReplacement(envValue));
-        }
-
-        // 将剩余未匹配的字符串拼接到尾部
-        matcher.appendTail(buffer);
-
-        return buffer.toString();
-    }
-    // ========== Reporter ==========
-
     // 环境变量打印专用
     @Override
     @SuppressWarnings("unchecked")
@@ -362,5 +354,13 @@ public class ENV implements HEnvironment, HLog {
         final String message = content.toString();
         log.info("[ ZERO ] 运行环境：{}", message);
         return this;
+    }
+    // ========== Reporter ==========
+
+    @AllArgsConstructor
+    private static class ResourceCandidate {
+        Supplier<InputStream> supplier;
+        String successLog;   // 成功加载时的 info 日志
+        String notFoundWarn; // 找不到时的 warn（允许为 null：表示由后续候选继续处理）
     }
 }

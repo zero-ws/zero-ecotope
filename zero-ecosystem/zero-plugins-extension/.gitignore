@@ -37,7 +37,7 @@ build/
 ### Mac OS ###
 .DS_Store
 .idea/
-document/
+docs/
 *.versionsBackup
 */script/code/*.jar
 git-push.sh
@@ -45,3 +45,6 @@ git-upstream.sh
 tree.txt
 archive
 *.log
+# 特殊 Exclude
+!x.log
+!document/tree*.json

@@ -27,7 +27,7 @@ class DataIo {
         final Set<String> matched = OOB_FILES.stream()
             .filter(item -> item.contains(prefix))
             .collect(HashSet::new, Set::add, Set::addAll);
-        log.info("{} OOB 文件数量（前缀：{}）: {}", KeConstant.K_PREFIX_LOAD, prefix, matched.size());
+        log.info("{} OOB 文件数量（关键字：`*{}*`）: {}", KeConstant.K_PREFIX_LOAD, prefix, matched.size());
         return matched.stream();
     }
 
