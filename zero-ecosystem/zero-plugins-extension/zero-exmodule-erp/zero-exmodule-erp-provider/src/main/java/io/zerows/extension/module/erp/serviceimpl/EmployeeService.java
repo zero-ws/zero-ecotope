@@ -183,10 +183,10 @@ public class EmployeeService implements EmployeeStub {
     }
 
     private Future<JsonArray> fetchRef(final JsonArray input) {
-        return Ux.channel(ExUser.class, JsonArray::new, user -> {
+        return HPI.of(ExUser.class).waitAsync(user -> {
             final Set<String> keys = Ut.valueSetString(input, KName.KEY);
             return user.rapport(keys);
-        }).compose(employee -> {
+        }, JsonArray::new).compose(employee -> {
             final JsonArray merged = Ut.elementJoin(input, employee, KName.KEY, KName.MODEL_KEY);
             return Ux.future(merged);
         });

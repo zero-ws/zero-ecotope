@@ -7,6 +7,7 @@ import io.zerows.extension.skeleton.spi.ExUser;
 import io.zerows.platform.constant.VString;
 import io.zerows.program.Ux;
 import io.zerows.specification.vital.HQR;
+import io.zerows.spi.HPI;
 import io.zerows.support.Ut;
 
 /**
@@ -27,19 +28,22 @@ public class HQRStandard implements HQR {
             .put("openGroup,n", VString.EMPTY)
             .put("acceptedGroup,n", VString.EMPTY);
 
-        return Ux.channel(ExUser.class, () -> defaultQr, stub -> stub.userGroup(userKey).compose(groups -> {
-            // groups information
-            if (groups.isEmpty()) {
-                return Ux.future(defaultQr);
-            }
-            final JsonObject combineQr = new JsonObject();
-            combineQr.put("$DFT$", defaultQr);
-            // openGroup
-            combineQr.put("openGroup,i", groups);
-            // acceptedGroup
-            Ut.itJArray(groups, String.class, (group, index) -> combineQr.put("acceptedGroup,c", group));
+        return HPI.of(ExUser.class).waitAsync(
+            stub -> stub.userGroup(userKey).compose(groups -> {
+                // groups information
+                if (groups.isEmpty()) {
+                    return Ux.future(defaultQr);
+                }
+                final JsonObject combineQr = new JsonObject();
+                combineQr.put("$DFT$", defaultQr);
+                // openGroup
+                combineQr.put("openGroup,i", groups);
+                // acceptedGroup
+                Ut.itJArray(groups, String.class, (group, index) -> combineQr.put("acceptedGroup,c", group));
 
-            return Ux.future(combineQr);
-        }));
+                return Ux.future(combineQr);
+            }),
+            () -> defaultQr
+        );
     }
 }

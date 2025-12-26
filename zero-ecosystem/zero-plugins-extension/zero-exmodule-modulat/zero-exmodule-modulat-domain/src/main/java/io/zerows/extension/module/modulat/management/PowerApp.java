@@ -2,12 +2,8 @@ package io.zerows.extension.module.modulat.management;
 
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
-import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.constant.KName;
-import io.zerows.extension.skeleton.spi.ExModulat;
 import io.zerows.program.Ux;
 import io.zerows.specification.app.HMod;
-import io.zerows.support.Ut;
 
 import java.util.Objects;
 
@@ -38,25 +34,26 @@ public class PowerApp {
             return Ux.future(CC_APP.get(appId));
         }
 
-        
-        return CC_APP_OLD.pick(() -> Ux.channel(ExModulat.class, JsonObject::new, modulat -> modulat.extension(appId, open)).compose(storedJ -> {
-            final String configApp = Ut.valueString(storedJ, KName.KEY);
-            if (appId.equals(configApp)) {
-                // 抓取应用相关的 HMod 缓存
-                final PowerApp app = new PowerApp(appId);
 
-
-                /* 移除 bags / key */
-                final JsonObject configAppJ = storedJ.copy();
-                configAppJ.remove(KName.KEY);
-                configAppJ.remove(KName.App.BAGS);
-                Ut.itJObject(configAppJ, JsonObject.class)
-                    .map(entry -> new PowerMod(entry.getKey(), entry.getValue()))
-                    .forEach(app::add);
-                return Ux.future(app);
-            }
-            return Ux.future(null);
-        }), appId);
+        //        return CC_APP_OLD.pick(() -> Ux.channel(ExModulat.class, JsonObject::new, modulat -> modulat.extension(appId, open)).compose(storedJ -> {
+        //            final String configApp = Ut.valueString(storedJ, KName.KEY);
+        //            if (appId.equals(configApp)) {
+        //                // 抓取应用相关的 HMod 缓存
+        //                final PowerApp app = new PowerApp(appId);
+        //
+        //
+        //                /* 移除 bags / key */
+        //                final JsonObject configAppJ = storedJ.copy();
+        //                configAppJ.remove(KName.KEY);
+        //                configAppJ.remove(KName.App.BAGS);
+        //                Ut.itJObject(configAppJ, JsonObject.class)
+        //                    .map(entry -> new PowerMod(entry.getKey(), entry.getValue()))
+        //                    .forEach(app::add);
+        //                return Ux.future(app);
+        //            }
+        //            return Ux.future(null);
+        //        }), appId);
+        return null;
     }
 
     public static Future<PowerApp> getRefresh(final String appId, final boolean open) {

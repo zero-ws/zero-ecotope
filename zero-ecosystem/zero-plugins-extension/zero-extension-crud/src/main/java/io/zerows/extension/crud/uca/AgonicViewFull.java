@@ -8,7 +8,7 @@ import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.extension.crud.common.Ix;
 import io.zerows.extension.skeleton.spi.UiApeak;
-import io.zerows.program.Ux;
+import io.zerows.spi.HPI;
 
 /**
  * 「全列读取」
@@ -35,8 +35,10 @@ class AgonicViewFull implements Agonic {
 
 
             final ADB jooq = Ix.jooq(in);
-            return Ux.channel(UiApeak.class, JsonArray::new,
-                stub -> stub.on(jooq).fetchFull(input));
+            return HPI.of(UiApeak.class).waitAsync(
+                stub -> stub.on(jooq).fetchFull(input),
+                JsonArray::new
+            );
         });
     }
 }

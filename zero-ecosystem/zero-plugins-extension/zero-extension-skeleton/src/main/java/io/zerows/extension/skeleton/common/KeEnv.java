@@ -11,6 +11,7 @@ import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.platform.constant.VName;
 import io.zerows.program.Ux;
+import io.zerows.spi.HPI;
 import io.zerows.spi.modeler.Indent;
 import io.zerows.support.Ut;
 
@@ -114,58 +115,66 @@ class KeEnv {
         if (Objects.isNull(input) || input.isEmpty()) {
             return Ux.future(new ArrayList<>());
         } else {
-            return Ux.channel(Indent.class, () -> input, stub ->
-                stub.indent(code, sigma, input.size()).compose(queue -> {
+            return HPI.of(Indent.class).waitAsync(stub -> stub.indent(code, sigma, input.size())
+                .compose(queue -> {
                     input.forEach(entity -> fnConsumer.accept(entity, queue.poll()));
                     return Ux.future(input);
-                }));
+                }), () -> input
+            );
         }
     }
 
     static <T> Future<T> indent(final T input, final String sigma,
                                 final String code,
                                 final BiConsumer<T, String> fnConsumer) {
-        return Ux.channel(Indent.class, () -> input, stub -> {
-            if (Ut.isNil(sigma)) {
-                return Ux.future(input);
-            } else {
-                return stub.indent(code, sigma)
-                    .compose(indent -> {
-                        fnConsumer.accept(input, indent);
-                        return Ux.future(input);
-                    });
-            }
-        });
+        return HPI.of(Indent.class).waitAsync(
+            stub -> {
+                if (Ut.isNil(sigma)) {
+                    return Ux.future(input);
+                }
+                return stub.indent(code, sigma).compose(indent -> {
+                    fnConsumer.accept(input, indent);
+                    return Ux.future(input);
+                });
+            },
+            () -> input
+        );
     }
 
     /*
      * Indent Single
      */
     static Future<JsonObject> indent(final JsonObject data, final String code) {
-        return Ux.channel(Indent.class, () -> data, stub -> {
-            final String sigma = data.getString(KName.SIGMA);
-            if (Ut.isNil(sigma) || Ut.isNil(code)) {
-                return Ux.future(data);
-            } else {
-                return stub.indent(code, sigma)
-                    .compose(indent -> Ux.future(data.put(KName.INDENT, indent)));
-            }
-        });
+        return HPI.of(Indent.class).waitAsync(
+            stub -> {
+                final String sigma = data.getString(KName.SIGMA);
+                if (Ut.isNil(sigma) || Ut.isNil(code)) {
+                    return Ux.future(data);
+                } else {
+                    return stub.indent(code, sigma)
+                        .compose(indent -> Ux.future(data.put(KName.INDENT, indent)));
+                }
+            },
+            () -> data
+        );
     }
 
     static Future<JsonArray> indent(final JsonArray data, final String code) {
-        return Ux.channel(Indent.class, () -> data, stub -> {
-            final String sigma = Ut.valueString(data, KName.SIGMA);
-            if (Ut.isNil(sigma)) {
-                return Ux.future(data);
-            } else {
-                return stub.indent(code, sigma, data.size())
-                    .compose(indentQ -> {
-                        Ut.itJArray(data).forEach(json -> json.put(KName.INDENT, indentQ.poll()));
-                        return Ux.future(data);
-                    });
-            }
-        });
+        return HPI.of(Indent.class).waitAsync(
+            stub -> {
+                final String sigma = Ut.valueString(data, KName.SIGMA);
+                if (Ut.isNil(sigma)) {
+                    return Ux.future(data);
+                } else {
+                    return stub.indent(code, sigma, data.size())
+                        .compose(indentQ -> {
+                            Ut.itJArray(data).forEach(json -> json.put(KName.INDENT, indentQ.poll()));
+                            return Ux.future(data);
+                        });
+                }
+            },
+            () -> data
+        );
     }
 
     static <T> Future<JsonArray> daoR(final String field, final String key, final Class<?> daoCls) {

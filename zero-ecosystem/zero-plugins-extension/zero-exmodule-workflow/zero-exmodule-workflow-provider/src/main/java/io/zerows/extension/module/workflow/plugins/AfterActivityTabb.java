@@ -11,6 +11,7 @@ import io.zerows.extension.skeleton.spi.UiValve;
 import io.zerows.platform.constant.VName;
 import io.zerows.platform.enums.typed.ChangeFlag;
 import io.zerows.program.Ux;
+import io.zerows.spi.HPI;
 import io.zerows.support.Ut;
 import org.camunda.bpm.engine.repository.ProcessDefinition;
 
@@ -50,11 +51,9 @@ public class AfterActivityTabb implements After {
              * }
              */
             .compose(processed -> this.dataDelay(processed, config))
-            .compose(processed -> Ux.channel(UiValve.class,
-                /*
-                 * Returned original JsonObject
-                 */
-                () -> data, valve -> valve.execAsync(processed, config)
+            .compose(processed -> HPI.of(UiValve.class).waitAsync(
+                valve -> valve.execAsync(processed, config),
+                () -> data
             )).compose(nil -> Ux.future(data));
     }
 

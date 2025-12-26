@@ -7,6 +7,7 @@ import io.zerows.extension.crud.uca.IxMod;
 import io.zerows.extension.skeleton.spi.ExUser;
 import io.zerows.mbse.metadata.KModule;
 import io.zerows.program.Ux;
+import io.zerows.spi.HPI;
 import io.zerows.support.Ut;
 
 import java.util.HashSet;
@@ -28,8 +29,8 @@ class PreAuditDeletePre extends PreAuditAction {
         if (keys.isEmpty()) {
             return Ux.future(data);
         } else {
-            return Ux.channel(ExUser.class, () -> data, stub -> stub.mapAuditor(keys)
-                .compose(map -> {
+            return HPI.of(ExUser.class).waitAsync(
+                stub -> stub.mapAuditor(keys).compose(map -> {
                     if (map.isEmpty()) {
                         return Ux.future(data);
                     } else {
@@ -39,7 +40,9 @@ class PreAuditDeletePre extends PreAuditAction {
                          */
                         return this.outKeys(data, field.fieldAudit(), map);
                     }
-                }));
+                }),
+                JsonArray::new
+            );
         }
     }
 

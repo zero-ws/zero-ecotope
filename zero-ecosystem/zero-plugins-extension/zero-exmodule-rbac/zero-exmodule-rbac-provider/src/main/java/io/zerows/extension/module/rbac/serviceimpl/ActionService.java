@@ -17,6 +17,7 @@ import io.zerows.extension.module.rbac.servicespec.ActionStub;
 import io.zerows.extension.skeleton.spi.ScRoutine;
 import io.zerows.platform.constant.VString;
 import io.zerows.program.Ux;
+import io.zerows.spi.HPI;
 import io.zerows.support.Ut;
 
 import java.time.LocalDateTime;
@@ -97,7 +98,10 @@ public class ActionService implements ActionStub {
         /*
          * Dynamic by `keyword` and `sigma` ( zero-jet )
          */
-        return Ux.channel(ScRoutine.class, ArrayList::new, route -> route.searchAsync(keyword, sigma)).compose(uris -> {
+        return HPI.of(ScRoutine.class).waitAsync(
+            route -> route.searchAsync(keyword, sigma),
+            ArrayList::new
+        ).compose(uris -> {
             /*
              * Combine two list of uri metadata
              */

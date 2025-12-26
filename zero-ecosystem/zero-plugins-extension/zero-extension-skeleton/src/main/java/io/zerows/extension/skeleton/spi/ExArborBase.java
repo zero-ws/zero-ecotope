@@ -5,6 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.program.Ux;
+import io.zerows.spi.HPI;
 import io.zerows.support.Ut;
 
 import java.util.ArrayList;
@@ -37,32 +38,35 @@ public abstract class ExArborBase implements ExArbor {
         normalized.add(this.storePathOn(category, null, childMap, store));
         Ut.itJArray(children).map(json -> this.storePathOn(json, category, childMap, store)).forEach(normalized::add);
 
-        return Ux.channel(ExIo.class, () -> children, io -> io.docInitialize(normalized, store)).compose(processed -> {
-            /*
-             * Filtered by `category` storePath field to exclude the invalid children
-             */
-            // final String storePath = category.getString(KName.STORE_PATH);
-            final JsonArray valid = new JsonArray();
-            /*
-             * Store Map For normalized for children sort
-             * The children node should be sort field `sort`
-             */
-            final ConcurrentMap<String, Integer> sortMap = Ut.elementMap(normalized, KName.STORE_PATH, KName.SORT);
-            Ut.itJArray(processed).forEach(json -> {
-                // Copy JsonObject
-                json = json.copy();
-                final String storePath = json.getString(KName.STORE_PATH);
-                if (sortMap.containsKey(storePath)) {
-                    /* Add `sort` to root node for root sorting */
-                    json.put(KName.SORT, sortMap.get(storePath));
-                }
-                //                if (storePath.equals(json.getString(KName.STORE_PATH))) {
-                //                    json.put(KName.SORT, category.getInteger(KName.SORT));
-                //                }
-                valid.add(json);
-            });
-            return Ux.future(valid);
-        });
+        return HPI.of(ExIo.class).waitAsync(
+            io -> io.docInitialize(normalized, store).compose(processed -> {
+                /*
+                 * Filtered by `category` storePath field to exclude the invalid children
+                 */
+                // final String storePath = category.getString(KName.STORE_PATH);
+                final JsonArray valid = new JsonArray();
+                /*
+                 * Store Map For normalized for children sort
+                 * The children node should be sort field `sort`
+                 */
+                final ConcurrentMap<String, Integer> sortMap = Ut.elementMap(normalized, KName.STORE_PATH, KName.SORT);
+                Ut.itJArray(processed).forEach(json -> {
+                    // Copy JsonObject
+                    json = json.copy();
+                    final String storePath = json.getString(KName.STORE_PATH);
+                    if (sortMap.containsKey(storePath)) {
+                        /* Add `sort` to root node for root sorting */
+                        json.put(KName.SORT, sortMap.get(storePath));
+                    }
+                    //                if (storePath.equals(json.getString(KName.STORE_PATH))) {
+                    //                    json.put(KName.SORT, category.getInteger(KName.SORT));
+                    //                }
+                    valid.add(json);
+                });
+                return Ux.future(valid);
+            }),
+            () -> children
+        );
     }
 
     protected Future<JsonArray> combineArbor(final JsonObject category, final JsonObject configuration) {

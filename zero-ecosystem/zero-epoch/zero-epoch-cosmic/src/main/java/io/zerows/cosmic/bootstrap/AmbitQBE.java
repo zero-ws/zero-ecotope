@@ -7,7 +7,7 @@ import io.vertx.ext.web.RoutingContext;
 import io.zerows.cortex.sdk.HQBE;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.web.Envelop;
-import io.zerows.program.Ux;
+import io.zerows.spi.HPI;
 import io.zerows.support.Ut;
 
 /**
@@ -28,13 +28,16 @@ public class AmbitQBE implements Ambit {
              */
             return Future.succeededFuture(envelop);
         }
-        return Ux.channel(HQBE.class, () -> envelop, hqbe -> {
-            /*
-             * 1. 先做Base64的解码
-             * 2. 再根据解码结果隐式替换 Envelop 中的 criteria 部分，QR 专用
-             */
-            final JsonObject qbeJ = Ut.toJObject(Ut.decryptBase64(qbe));
-            return hqbe.before(qbeJ, envelop);
-        });
+        return HPI.of(HQBE.class).waitAsync(
+            hqbe -> {
+                /*
+                 * 1. 先做Base64的解码
+                 * 2. 再根据解码结果隐式替换 Envelop 中的 criteria 部分，QR 专用
+                 */
+                final JsonObject qbeJ = Ut.toJObject(Ut.decryptBase64(qbe));
+                return hqbe.before(qbeJ, envelop);
+            },
+            () -> envelop
+        );
     }
 }

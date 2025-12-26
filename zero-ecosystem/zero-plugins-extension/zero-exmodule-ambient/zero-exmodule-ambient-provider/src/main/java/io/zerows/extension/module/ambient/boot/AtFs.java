@@ -9,6 +9,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.extension.module.ambient.common.AtConstant;
 import io.zerows.extension.skeleton.spi.ExIo;
 import io.zerows.program.Ux;
+import io.zerows.spi.HPI;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
 import lombok.extern.slf4j.Slf4j;
@@ -50,10 +51,12 @@ class AtFs {
         if (Ut.isNil(attachment)) {
             return Ux.future(Buffer.buffer());
         } else {
-            return splitRun(attachment, (directoryId, fileMap) -> Ux.channel(ExIo.class, Buffer::buffer,
-                // Call ExIo `fsDownload`
-                io -> io.fsDownload(directoryId, fileMap)
-            ));
+            return splitRun(attachment, (directoryId, fileMap) ->
+                HPI.of(ExIo.class).waitAsync(
+                    io -> io.fsDownload(directoryId, fileMap),
+                    Buffer::buffer
+                )
+            );
         }
     }
 

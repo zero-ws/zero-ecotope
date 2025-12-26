@@ -19,6 +19,7 @@ import io.zerows.extension.skeleton.spi.ScTwine;
 import io.zerows.mbse.metadata.KQr;
 import io.zerows.platform.metadata.KRef;
 import io.zerows.program.Ux;
+import io.zerows.spi.HPI;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
 
@@ -131,7 +132,10 @@ class TwineExtension implements ScTwine<SUser> {
              * 1. tenantId -> 租户ID
              * 2. tenant -> 租户基本信息
              */
-            .compose(nil -> Ux.channel(ExOwner.class, JsonObject::new, stub -> stub.fetchTenant(user.getSigma())))
+            .compose(nil -> HPI.of(ExOwner.class).waitAsync(
+                stub -> stub.fetchTenant(user.getSigma()),
+                JsonObject::new
+            ))
             .compose(tenant -> {
                 final JsonObject response = ref.get();
                 if (Ut.isNotNil(tenant)) {

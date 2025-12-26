@@ -18,6 +18,7 @@ import io.zerows.extension.skeleton.spi.ExActivity;
 import io.zerows.platform.constant.VValue;
 import io.zerows.platform.enums.typed.ChangeFlag;
 import io.zerows.program.Ux;
+import io.zerows.spi.HPI;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
 import org.camunda.bpm.engine.history.HistoricProcessInstance;
@@ -341,8 +342,10 @@ public class WRecord implements Serializable {
          * 2) Convert Catalog to extract identifier
          * 3) Build `modelId` and `modelKey`
          */
-        return Ux.channel(Dictionary.class, JsonArray::new,
-                dict -> dict.fetchTree(this.ticket.getSigma(), WfConstant.CODE_CATALOG))
+        return HPI.of(Dictionary.class).waitAsync(
+                dict -> dict.fetchTree(this.ticket.getSigma(), WfConstant.CODE_CATALOG),
+                JsonArray::new
+            )
             .compose(dict -> {
                 final ConcurrentMap<String, String> mapId = new ConcurrentHashMap<>();
                 Ut.itJArray(dict).forEach(record -> {
@@ -354,17 +357,20 @@ public class WRecord implements Serializable {
                 });
                 return Ux.future(mapId);
             })
-            .compose(map -> Ux.channel(ExActivity.class, JsonArray::new, activity -> {
-                // java.lang.NullPointerException: Avoid null for catalog
-                if (Objects.isNull(this.ticket.getCatalog())) {
-                    return Ux.futureA();
-                }
-                final String modelId = map.getOrDefault(this.ticket.getCatalog(), null);
-                if (Objects.isNull(modelId)) {
-                    return Ux.futureA();
-                }
-                return activity.activities(modelId, this.ticket.getKey());
-            }));
+            .compose(map -> HPI.of(ExActivity.class).waitAsync(
+                activity -> {
+                    // java.lang.NullPointerException: Avoid null for catalog
+                    if (Objects.isNull(this.ticket.getCatalog())) {
+                        return Ux.futureA();
+                    }
+                    final String modelId = map.getOrDefault(this.ticket.getCatalog(), null);
+                    if (Objects.isNull(modelId)) {
+                        return Ux.futureA();
+                    }
+                    return activity.activities(modelId, this.ticket.getKey());
+                },
+                JsonArray::new
+            ));
     }
 
     // ------------- Data Building -------------------------

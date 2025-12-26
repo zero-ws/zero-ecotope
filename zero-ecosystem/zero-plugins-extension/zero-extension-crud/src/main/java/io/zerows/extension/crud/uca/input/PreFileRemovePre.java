@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.extension.crud.uca.IxMod;
 import io.zerows.extension.skeleton.spi.ExAttachment;
-import io.zerows.program.Ux;
+import io.zerows.spi.HPI;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
 
@@ -20,10 +20,9 @@ import java.util.List;
 class PreFileRemovePre extends PreFileAction {
     @Override
     public Future<JsonObject> inJAsync(final JsonObject data, final IxMod in) {
-        return this.actionFn(in, (criteria, dataArray) -> Ux.channel(
-            ExAttachment.class,                                   // Component
-            JsonArray::new,                                     // JsonArray Data
-            file -> file.removeAsync(criteria)                  // Execution Logical
+        return this.actionFn(in, (criteria, dataArray) -> HPI.of(ExAttachment.class).waitAsync(
+            file -> file.removeAsync(criteria),
+            JsonArray::new
         )).apply(data);
     }
 

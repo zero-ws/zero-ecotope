@@ -7,6 +7,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.extension.module.workflow.metadata.MetaInstance;
 import io.zerows.extension.skeleton.spi.ExAtom;
 import io.zerows.program.Ux;
+import io.zerows.spi.HPI;
 import io.zerows.support.Ut;
 
 import java.util.Set;
@@ -19,11 +20,10 @@ import java.util.function.Function;
 class ActionDynamic implements ActionOn {
     @Override
     public <T> Future<JsonObject> createAsync(final JsonObject params, final MetaInstance metadata) {
-        return this.identifierJ((identifier, data) ->
-            // Single Create
-            Ux.channel(ExAtom.class, JsonObject::new,
-                // Channel
-                atom -> atom.createAsync(identifier, data))).apply(params);
+        return this.identifierJ((identifier, data) -> HPI.of(ExAtom.class).waitAsync(
+            atom -> atom.createAsync(identifier, data),
+            JsonObject::new
+        )).apply(params);
     }
 
     @Override

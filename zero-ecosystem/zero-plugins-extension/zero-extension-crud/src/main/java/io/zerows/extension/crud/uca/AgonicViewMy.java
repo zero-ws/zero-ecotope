@@ -10,7 +10,7 @@ import io.zerows.extension.crud.common.Ix;
 import io.zerows.extension.crud.uca.input.Pre;
 import io.zerows.extension.skeleton.spi.ScSeeker;
 import io.zerows.extension.skeleton.spi.UiApeakMy;
-import io.zerows.program.Ux;
+import io.zerows.spi.HPI;
 
 /**
  * 「我的列」
@@ -75,7 +75,11 @@ class AgonicViewMy implements Agonic {
     private Future<JsonObject> fetchResources(final JsonObject input, final ADB jooq, final IxMod in) {
         final String key = in.cached() + ":" + input.hashCode();
         return Rapid.<String, JsonObject>object(KWeb.CACHE.RESOURCE, Agonic.EXPIRED).cached(key,
-            () -> Ux.channel(ScSeeker.class, JsonObject::new, seeker -> seeker.on(jooq).fetchImpact(input)));
+            () -> HPI.of(ScSeeker.class).waitAsync(
+                seeker -> seeker.on(jooq).fetchImpact(input),
+                JsonObject::new
+            )
+        );
     }
 
     /**
@@ -96,7 +100,10 @@ class AgonicViewMy implements Agonic {
              return Rapid.<JsonArray>user(user, CACHE.User.MY_VIEW).cached(key,
                     () -> Ux.channel(ApeakMy.class, JsonArray::new, stub -> stub.join(jooq).fetchMy(params)));
          */
-        return Ux.channel(UiApeakMy.class, JsonArray::new, stub -> stub.on(jooq).fetchMy(params));
+        return HPI.of(UiApeakMy.class).waitAsync(
+            stub -> stub.on(jooq).fetchMy(params),
+            JsonArray::new
+        );
 
     }
 }

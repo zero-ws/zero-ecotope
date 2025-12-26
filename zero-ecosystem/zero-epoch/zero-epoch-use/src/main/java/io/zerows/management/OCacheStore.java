@@ -32,15 +32,6 @@ public interface OCacheStore {
     @Memory(HCommand.Async.class)
     Cc<String, HCommand.Async> CCT_EVENT = Cc.openThread();
     /*
-     * 「Zero标准」
-     * CC_SPI:    内置调用HService形成的通道接口（ServiceLoader规范）
-     *            HService优先级
-     *            - /META-INF/services/aeon/        Aeon Enabled
-     *            - /META-INF/services/             Zero Extension Enabled
-     */
-    @Memory(Object.class)
-    Cc<Class<?>, Object> CC_SPI = Cc.open();
-    /*
      * 「环境级别处理」安全管理专用
      * - CC_PERMIT  :  KPermit      权限定义对象
      * - CC_SEMI    :  KSemi        权限执行双维对象（维度+数据）

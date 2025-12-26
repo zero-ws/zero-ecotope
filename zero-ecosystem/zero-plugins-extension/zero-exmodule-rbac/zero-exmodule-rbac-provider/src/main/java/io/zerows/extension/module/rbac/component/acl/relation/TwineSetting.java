@@ -9,6 +9,7 @@ import io.zerows.extension.skeleton.spi.ExSetting;
 import io.zerows.extension.skeleton.spi.ScTwine;
 import io.zerows.platform.exception._60050Exception501NotSupport;
 import io.zerows.program.Ux;
+import io.zerows.spi.HPI;
 import io.zerows.support.Ut;
 
 /**
@@ -21,11 +22,13 @@ public class TwineSetting implements ScTwine<SUser> {
     public Future<JsonObject> identAsync(final JsonObject userJ) {
         final String userId = Ut.valueString(userJ, KName.KEY);
         final String sigma = Ut.valueString(userJ, KName.SIGMA);
-        return Ux.channel(ExSetting.class, JsonObject::new, stub -> stub.settingAsync(userId, sigma))
-            .compose(settings -> {
-                userJ.put(KName.SETTING, settings);
-                return Ux.future(userJ);
-            });
+        return HPI.of(ExSetting.class).waitAsync(
+            stub -> stub.settingAsync(userId, sigma),
+            JsonObject::new
+        ).compose(settings -> {
+            userJ.put(KName.SETTING, settings);
+            return Ux.future(userJ);
+        });
     }
 
     @Override

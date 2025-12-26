@@ -9,7 +9,7 @@ import io.zerows.extension.crud.common.em.QrType;
 import io.zerows.extension.crud.uca.input.Pre;
 import io.zerows.extension.skeleton.spi.ScSeeker;
 import io.zerows.extension.skeleton.spi.UiApeakMy;
-import io.zerows.program.Ux;
+import io.zerows.spi.HPI;
 
 /**
  * 「视图同步」
@@ -28,7 +28,10 @@ class AgonicViewSync implements Agonic {
     @Override
     public Future<JsonObject> runJAsync(final JsonObject input, final IxMod in) {
         final ADB jooq = Ix.jooq(in);
-        return Ux.channel(ScSeeker.class, JsonObject::new, seeker -> seeker.on(jooq).fetchImpact(input))
+        return HPI.of(ScSeeker.class).waitAsync(
+                stub -> stub.on(jooq).fetchImpact(input),
+                JsonObject::new
+            )
             /* view has findRunning, ignored, */
             /*
              * url processing
@@ -49,7 +52,9 @@ class AgonicViewSync implements Agonic {
              * data_key 的计算流程
              */
             .compose(params -> Pre.qr(QrType.BY_VK).inJAsync(params, in))
-            .compose(params -> Ux.channel(UiApeakMy.class, JsonObject::new,
-                stub -> stub.on(jooq).saveMy(params, params.getJsonObject(KName.DATA))));
+            .compose(params -> HPI.of(UiApeakMy.class).waitAsync(
+                stub -> stub.on(jooq).saveMy(params, params.getJsonObject(KName.DATA)),
+                JsonObject::new
+            ));
     }
 }

@@ -7,6 +7,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.extension.skeleton.spi.ExUser;
 import io.zerows.platform.metadata.KRef;
 import io.zerows.program.Ux;
+import io.zerows.spi.HPI;
 import io.zerows.support.Ut;
 
 import java.util.HashSet;
@@ -101,33 +102,36 @@ class KeUser {
                 keySet.add((String) value);
             }
         });
-        return Ux.channel(ExUser.class, () -> input, stub -> stub.mapUser(keySet, true).compose(userMap -> {
-            final JsonObject normalized = new JsonObject();
-            Ut.itJArray(users, String.class, (field, index) -> {
-                final Object value = input.getValue(field);
-                if (value instanceof JsonArray) {
-                    final Set<String> vSet = Ut.toSet((JsonArray) value);
-                    final JsonArray userA = new JsonArray();
-                    vSet.forEach(userKey -> {
+        return HPI.of(ExUser.class).waitAsync(
+            stub -> stub.mapUser(keySet, true).compose(userMap -> {
+                final JsonObject normalized = new JsonObject();
+                Ut.itJArray(users, String.class, (field, index) -> {
+                    final Object value = input.getValue(field);
+                    if (value instanceof JsonArray) {
+                        final Set<String> vSet = Ut.toSet((JsonArray) value);
+                        final JsonArray userA = new JsonArray();
+                        vSet.forEach(userKey -> {
+                            final JsonObject userJ = userMap.getOrDefault(userKey, null);
+                            if (Ut.isNotNil(userJ)) {
+                                userA.add(userJ);
+                            }
+                        });
+                        normalized.put(field, userA);                       // Replace
+                    } else if (value instanceof String) {                   // Replace
+                        final String userKey = (String) value;
                         final JsonObject userJ = userMap.getOrDefault(userKey, null);
                         if (Ut.isNotNil(userJ)) {
-                            userA.add(userJ);
+                            normalized.put(field, userJ);
+                        } else {
+                            normalized.put(field, new JsonObject());        // Replace
                         }
-                    });
-                    normalized.put(field, userA);                       // Replace
-                } else if (value instanceof String) {                   // Replace
-                    final String userKey = (String) value;
-                    final JsonObject userJ = userMap.getOrDefault(userKey, null);
-                    if (Ut.isNotNil(userJ)) {
-                        normalized.put(field, userJ);
                     } else {
-                        normalized.put(field, new JsonObject());        // Replace
+                        normalized.put(field, new JsonObject());            // Empty Replace
                     }
-                } else {
-                    normalized.put(field, new JsonObject());            // Empty Replace
-                }
-            });
-            return Ux.future(normalized);
-        }));
+                });
+                return Ux.future(normalized);
+            }),
+            () -> input
+        );
     }
 }

@@ -10,6 +10,7 @@ import io.zerows.extension.module.tpl.domain.tables.pojos.MyNotify;
 import io.zerows.extension.skeleton.common.enums.OwnerType;
 import io.zerows.extension.skeleton.spi.ExUser;
 import io.zerows.program.Ux;
+import io.zerows.spi.HPI;
 
 import java.util.Objects;
 
@@ -29,8 +30,10 @@ public class NotifyService implements NotifyStub {
     }
 
     private Future<MyNotify> fetchNotifyInternal(final String userId) {
-        return Ux.channel(ExUser.class, JsonArray::new, stub -> stub.userRole(userId))
-            .compose(roleIds -> {
+        return HPI.of(ExUser.class).waitAsync(
+                stub -> stub.userRole(userId),
+                JsonArray::new
+            ).compose(roleIds -> {
                 final JsonObject condition = Ux.whereAnd();
                 condition.put(KName.OWNER_TYPE, OwnerType.ROLE.name());
                 condition.put(KName.OWNER_ID + ",i", roleIds);

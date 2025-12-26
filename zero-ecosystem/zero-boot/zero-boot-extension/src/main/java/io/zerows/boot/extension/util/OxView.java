@@ -16,6 +16,7 @@ import io.zerows.platform.constant.VValue;
 import io.zerows.program.Ux;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.app.HArk;
+import io.zerows.spi.HPI;
 import io.zerows.support.Ut;
 
 import java.text.MessageFormat;
@@ -78,7 +79,10 @@ final class OxView {
             params.mergeIn(header, true);
         }
         /* Apeak found */
-        return Ux.channel(UiApeak.class, JsonArray::new, apeak -> apeak.fetchFull(params));
+        return HPI.of(UiApeak.class).waitAsync(
+            apeak -> apeak.fetchFull(params),
+            JsonArray::new
+        );
     }
 
     /**
@@ -138,17 +142,20 @@ final class OxView {
         /*
          * 3. Seeker 读取视图
          */
-        return Ux.channel(ScSeeker.class, JsonObject::new, seeker -> seeker.fetchImpact(params).compose(item -> {
-            /*
-             * 4. 构造参数
-             */
-            item.put(KName.VIEW, Objects.isNull(view) ? VValue.DFT.V_VIEW : view);
-            /*
-             * 5. 填充用户数据
-             */
-            item.put(KName.USER, envelop.userId());
-            item.put(KName.HABITUS, envelop.habitus());
-            return Ux.future(item);
-        }));
+        return HPI.of(ScSeeker.class).waitAsync(
+            seeker -> seeker.fetchImpact(params).compose(item -> {
+                /*
+                 * 4. 构造参数
+                 */
+                item.put(KName.VIEW, Objects.isNull(view) ? VValue.DFT.V_VIEW : view);
+                /*
+                 * 5. 填充用户数据
+                 */
+                item.put(KName.USER, envelop.userId());
+                item.put(KName.HABITUS, envelop.habitus());
+                return Ux.future(item);
+            }),
+            JsonObject::new
+        );
     }
 }

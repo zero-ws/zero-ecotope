@@ -45,38 +45,6 @@ public final class Ut extends _Visit {
         return Compare.compareTo(left, right, fnCompare);
     }
 
-    /*
-     * Reflection method to create instance
-     * 1) instance
-     * 2) singleton ( Global singleton object reference )
-     *
-     * Reflection method to be as action
-     * 1) invoke / invokeAsync
-     * 2) clazz
-     * 3) isImplement
-     * 4) proxy
-     * 5) withNoArgConstructor
-     * 6) childUnique
-     * 7) field / fields
-     * 8) contract / contractAsync ( @Contract )
-     * 9) plugin
-     * 10) service ( By Service Loader )
-     */
-
-    /**
-     * 将 service 重命名，保证和原始的 service 不冲突
-     * serviceChannel 会先检查 /META-INF/services/aeon/ 下的定义，如果没有则使用默认的
-     *
-     * @param interfaceCls
-     * @param <T>
-     *
-     * @return
-     */
-    public static <T> T serviceChannel(final Class<T> interfaceCls) {
-        final ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        return Service.load(interfaceCls, classLoader);
-    }
-
     public static <T> T plugin(final JsonObject options, final String pluginKey, final Class<T> interfaceCls) {
         return Instance.plugin(options, pluginKey, interfaceCls);
     }
