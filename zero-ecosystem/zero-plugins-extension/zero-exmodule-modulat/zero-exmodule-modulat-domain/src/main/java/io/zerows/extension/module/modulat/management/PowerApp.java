@@ -2,8 +2,13 @@ package io.zerows.extension.module.modulat.management;
 
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
+import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.constant.KName;
+import io.zerows.extension.skeleton.spi.ExModulat;
 import io.zerows.program.Ux;
 import io.zerows.specification.app.HMod;
+import io.zerows.spi.HPI;
+import io.zerows.support.Ut;
 
 import java.util.Objects;
 
@@ -18,7 +23,6 @@ import java.util.Objects;
  */
 public class PowerApp {
 
-    private static final Cc<String, Future<PowerApp>> CC_APP_OLD = Cc.open();
     private static final Cc<String, PowerApp> CC_APP = Cc.open();
     private final OCacheMod modReference;
 
@@ -35,25 +39,29 @@ public class PowerApp {
         }
 
 
-        //        return CC_APP_OLD.pick(() -> Ux.channel(ExModulat.class, JsonObject::new, modulat -> modulat.extension(appId, open)).compose(storedJ -> {
-        //            final String configApp = Ut.valueString(storedJ, KName.KEY);
-        //            if (appId.equals(configApp)) {
-        //                // 抓取应用相关的 HMod 缓存
-        //                final PowerApp app = new PowerApp(appId);
-        //
-        //
-        //                /* 移除 bags / key */
-        //                final JsonObject configAppJ = storedJ.copy();
-        //                configAppJ.remove(KName.KEY);
-        //                configAppJ.remove(KName.App.BAGS);
-        //                Ut.itJObject(configAppJ, JsonObject.class)
-        //                    .map(entry -> new PowerMod(entry.getKey(), entry.getValue()))
-        //                    .forEach(app::add);
-        //                return Ux.future(app);
-        //            }
-        //            return Ux.future(null);
-        //        }), appId);
-        return null;
+        // 直接调用 HPI 处理
+        return HPI.of(ExModulat.class).waitAsync(
+            modulat -> modulat.extension(appId, open),
+            JsonObject::new
+        ).compose(storedJ -> {
+            final String configApp = Ut.valueString(storedJ, KName.KEY);
+            if (!appId.equals(configApp)) {
+                return Ux.future(null);
+            }
+
+
+            // 抓取应用相关的 HMod 缓存
+            final PowerApp app = new PowerApp(appId);
+            /* 移除 bags / key */
+            final JsonObject configAppJ = storedJ.copy();
+            configAppJ.remove(KName.KEY);
+            configAppJ.remove(KName.App.BAGS);
+            Ut.itJObject(configAppJ, JsonObject.class)
+                .map(entry -> new PowerMod(entry.getKey(), entry.getValue()))
+                .forEach(app::block);
+            CC_APP.put(appId, app);
+            return Ux.future(app);
+        });
     }
 
     public static Future<PowerApp> getRefresh(final String appId, final boolean open) {
@@ -63,7 +71,7 @@ public class PowerApp {
         return getCreated(appId, open);
     }
 
-    public PowerApp add(final HMod mod) {
+    public PowerApp block(final HMod mod) {
         this.modReference.add(mod);
         return this;
     }
