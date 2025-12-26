@@ -70,7 +70,7 @@ public class DBDaoActor extends AbstractHActor {
         });
         // 3. 缓存填充
         final OCacheDao repository = OCacheDao.of(this.caller);
-        final StringBuilder vLog = new StringBuilder("( Dao ) 元数据扫描结果：\n");
+        final StringBuilder vLog = new StringBuilder("( Dao ) 元数据扫描结果 / {}：\n");
         new TreeSet<>(daoMap.keySet()).stream().filter(pojoMap::containsKey).forEach(table -> {
             final Class<?> daoCls = daoMap.get(table);
             final Class<?> pojoCls = pojoMap.get(table);
@@ -80,7 +80,7 @@ public class DBDaoActor extends AbstractHActor {
                 .append(" | \uD83C\uDF97️ ").append(String.format("%-80s", daoCls.getName()))
                 .append(" \uD83E\uDED0 ").append(pojoCls.getName()).append("\n");
         });
-        this.vLog(vLog.toString());
+        this.vLog(vLog.toString(), daoMap.size());
         // 3. 表名 = Class<?>
         return Future.succeededFuture(Boolean.TRUE);
     }

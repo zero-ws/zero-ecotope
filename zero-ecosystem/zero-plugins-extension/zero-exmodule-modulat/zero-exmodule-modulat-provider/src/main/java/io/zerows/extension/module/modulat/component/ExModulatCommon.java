@@ -18,13 +18,41 @@ import java.util.Objects;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 public class ExModulatCommon implements ExModulat {
+    /**
+     * 📘[JSON] --> appJson 结构：
+     * <pre><code>
+     * {
+     *     "key": "X_APP 数据表中的主键",
+     *     "name": "X_APP 表中的 name 字段",
+     *     "code": "应用编码",
+     *     "title": "应用标题",
+     *     "domain": "域名",
+     *     "port": "应用端口",
+     *     "context": "（前端）应用 Context",
+     *     "urlLogin": "（前端）登录页 /login/index",
+     *     "urlAdmin": "（前端）管理主页 /main/index",
+     *     "endpoint": "（后端）应用 EndPoint /htl",
+     *     "entry": "入口专用 BAG，对应 B_BAG 中的 code",
+     *     "sigma": "",
+     *     "language": "cn",
+     *     "active": true,
+     *     "createdBy": "auditor-active",
+     *     "appId": "",
+     *     "tenantId": ""
+     * }
+     * </code></pre>
+     *
+     * @param appJson 应用结构
+     * @param open    是否开启 open 模式
+     *                - open = true / 开放模式不屏蔽敏感数据
+     *                - open = false / 关闭模式屏蔽敏感数据（必须要求认证）
+     *
+     * @return 最终返回应用配置
+     */
     @Override
     public Future<JsonObject> extension(final JsonObject appJson, final boolean open) {
         final String key = appJson.getString(KName.KEY);
         return this.extension(key, open).compose(moduleJ -> {
-            /*
-             * appJ + moduleJ to web response ( Final )
-             */
             final JsonObject original = moduleJ.copy();
             original.mergeIn(appJson, true);
             return Ux.future(original);

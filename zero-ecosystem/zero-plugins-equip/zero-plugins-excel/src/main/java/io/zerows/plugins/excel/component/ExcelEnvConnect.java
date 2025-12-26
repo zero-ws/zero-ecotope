@@ -42,8 +42,10 @@ public class ExcelEnvConnect implements ExcelEnv<Void> {
         for (final MDConfiguration configuration : configSet) {
             final MDId id = configuration.id();
             final Set<MDConnect> connects = configuration.inConnect();
-            log.info("{} Connect 配置检查：{}，MDConnect 数量：{}",
-                ExcelConstant.K_PREFIX, id.value(), connects.size());
+            if (!connects.isEmpty()) {
+                log.info("{} Connect 配置检查：{}，MDConnect 数量：{}",
+                    ExcelConstant.K_PREFIX, id.value(), connects.size());
+            }
         }
         log.info("{} Connect 模块配置数量：{}", ExcelConstant.K_PREFIX, configSet.size());
         return null;

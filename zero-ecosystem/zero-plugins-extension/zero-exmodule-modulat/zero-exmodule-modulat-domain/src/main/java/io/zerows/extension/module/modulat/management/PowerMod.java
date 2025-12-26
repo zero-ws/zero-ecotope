@@ -49,7 +49,7 @@ public class PowerMod implements HMod {
     private HApp app;
 
     /**
-     * 📘 dataJ 结构：
+     * 📘[JSON] --> dataJ 结构：
      * <pre><code>
      *     {
      *         "field1": "value1",

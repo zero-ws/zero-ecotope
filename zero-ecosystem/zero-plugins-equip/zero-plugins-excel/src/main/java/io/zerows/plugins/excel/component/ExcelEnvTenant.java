@@ -31,11 +31,8 @@ public class ExcelEnvTenant implements ExcelEnv<ExTenant> {
             return null;
         }
         final JsonObject tenantJ = fs.inJObject(tenantFile);
-        /*
-         * 环境变量转换，替换旧版的
-         */
+        /* 1. Ansible 环境变量转换，替换旧版的 */
         final String parsed = Ut.compileAnsible(tenantJ.encode());
-
         log.info("{} Tenant 导入数据的租户配置: {}", ExcelConstant.K_PREFIX, parsed);
         return ExTenant.create(new JsonObject(parsed));
     }

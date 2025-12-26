@@ -60,7 +60,7 @@ class IxSetupModule extends IxSetupBase<KModule> {
             final MDEntity entityOverwrite = entryConfiguration.inEntity(entity.identifier());
             final JsonObject moduleJ = entity.inModule();
             if (Objects.nonNull(entityOverwrite)) {
-                log.info("{} `{}` <--- ✨️ 被重写模块配置", KeConstant.K_PREFIX_CRUD, identifier);
+                log.info("{} `{}` <--- ⚫ 被重写模块配置", KeConstant.K_PREFIX_CRUD, identifier);
                 final JsonObject moduleOverwriteJ = entityOverwrite.inModule();
                 moduleJ.mergeIn(moduleOverwriteJ, true);
             }

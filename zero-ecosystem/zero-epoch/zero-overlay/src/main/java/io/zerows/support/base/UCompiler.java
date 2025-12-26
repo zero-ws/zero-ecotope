@@ -1,6 +1,8 @@
 package io.zerows.support.base;
 
+import cn.hutool.core.date.DateUtil;
 import com.hubspot.jinjava.Jinjava;
+import com.hubspot.jinjava.lib.fn.ELFunctionDefinition;
 import io.zerows.platform.ENV;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.LoaderOptions;
@@ -23,6 +25,16 @@ class UCompiler {
     // Pattern 是线程安全的，可以保持 static
     private static final Pattern PLACEHOLDER_PATTERN = Pattern.compile("\\$\\{([^}]+)\\}");
     private static final Jinjava JINJAVA = new Jinjava();
+
+    static {
+        JINJAVA.getGlobalContext().registerFunction(
+            /*
+             * 函数表
+             * - R2_NOW()
+             */
+            new ELFunctionDefinition("", "R2_NOW", DateUtil.class, "now")
+        );
+    }
     // [删除] 移除 static 实例，因为它们非线程安全
     // private static final Yaml YAML_PARSER = ...
     // private static final DumperOptions DUMPER_OPTIONS = ...
