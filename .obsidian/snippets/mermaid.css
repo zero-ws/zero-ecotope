@@ -1,0 +1,48 @@
+/* =================================================================
+   1. 全局强制编辑器/预览区撑满宽度 (Global Full Width)
+   ================================================================= */
+
+/* 针对：阅读模式 (Reading View) */
+.markdown-preview-view.is-readable-line-width .markdown-preview-sizer {
+    max-width: 100% !important;
+    width: 95% !important; /* 留 5% 边距，避免文字贴死屏幕边缘，可改为 100% */
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+/* 针对：编辑模式 (Live Preview / Source Mode) */
+/* 关键点：这里加上了 .is-readable-line-width 才能覆盖默认设置 */
+.markdown-source-view.mod-cm6.is-readable-line-width .cm-sizer,
+.markdown-source-view.mod-cm6.is-readable-line-width .cm-content,
+.markdown-source-view.mod-cm6.is-readable-line-width .cm-scroller {
+    max-width: 100% !important;
+    width: 95% !important; /* 同上，建议留一点呼吸感 */
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+/* 确保每一行文字容器也撑开 */
+.markdown-source-view.mod-cm6 .cm-line {
+    max-width: 100% !important;
+}
+
+/* =================================================================
+   2. Mermaid 图表优化 (推荐：滚动模式)
+   ================================================================= */
+
+/* 让容器占满宽度，并允许横向滚动 */
+.mermaid {
+    display: block !important; /* 取消 flex，避免居中导致无法滚动 */
+    width: 100% !important;
+    overflow-x: auto !important; /* 关键：内容超出时显示滚动条 */
+    margin: 0 auto;
+    background-color: transparent; /* 可选：防止背景遮挡 */
+}
+
+/* 强制 SVG 至少撑满屏幕，如果图更大则保持原大 */
+.mermaid svg {
+    width: auto !important; /* 关键：取消 100% 强制压缩，改为自适应 */
+    min-width: 100% !important; /* 至少占满当前屏幕宽度 */
+    max-width: none !important; /* 解除最大宽度限制，让大图能展开 */
+    height: auto !important;
+}

@@ -1,4 +1,7 @@
 {
   "theme": "moonstone",
-  "cssTheme": "Border"
+  "cssTheme": "Border",
+  "enabledCssSnippets": [
+    "mermaid"
+  ]
 }

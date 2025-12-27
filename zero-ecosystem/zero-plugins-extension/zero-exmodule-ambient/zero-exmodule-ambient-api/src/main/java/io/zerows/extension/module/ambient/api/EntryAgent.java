@@ -43,7 +43,7 @@ public interface EntryAgent {
     @Path("/app/name/{name}")
     @GET
     @Address(Addr.App.BY_NAME)
-    JsonObject appByName(@PathParam("name") String name);
+    JsonObject byName(@PathParam("name") String name);
 
     /**
      * 读取应用之下所有的菜单

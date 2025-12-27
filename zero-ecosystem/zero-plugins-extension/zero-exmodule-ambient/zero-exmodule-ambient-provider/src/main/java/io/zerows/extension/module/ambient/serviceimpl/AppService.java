@@ -4,7 +4,6 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.metadata.UObject;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.module.ambient.boot.At;
 import io.zerows.extension.module.ambient.domain.tables.daos.XAppDao;
@@ -37,13 +36,11 @@ public class AppService implements AppStub {
             /* Convert to InJson */
             .compose(Ux::futureJ)
             /* Before App Initialized ( Public Api ) */
-            .compose(appData -> UObject.create(appData)
-                .remove(
-                    KName.APP_KEY,                  // appKey
-                    KName.APP_SECRET                // appSecret
-                )
-                .toFuture()
-            )
+            .compose(appData -> {
+                appData.remove(KName.APP_KEY);
+                appData.remove(KName.APP_SECRET);
+                return Ux.future(appData);
+            })
             /*
              * Storage of file definition, here are two parts:
              * 1) - Logo            to Object

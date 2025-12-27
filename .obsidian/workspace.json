@@ -4,20 +4,53 @@
     "type": "split",
     "children": [
       {
-        "id": "dd77b5fbc181fb58",
-        "type": "tabs",
+        "id": "c0195d493b3cbf99",
+        "type": "split",
         "children": [
           {
-            "id": "1e1e76b4ed90c12c",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "新标签页"
-            }
+            "id": "c0c0dbe8f9e93474",
+            "type": "tabs",
+            "dimension": 48.717948717948715,
+            "children": [
+              {
+                "id": "d28afe1c52c0d3b0",
+                "type": "leaf",
+                "state": {
+                  "type": "markdown",
+                  "state": {
+                    "file": "docs/graph/api/public/app_name_$name.md",
+                    "mode": "preview",
+                    "source": false
+                  },
+                  "icon": "lucide-file",
+                  "title": "app_name_$name"
+                }
+              }
+            ]
+          },
+          {
+            "id": "c6345880e843db09",
+            "type": "tabs",
+            "dimension": 51.28205128205128,
+            "children": [
+              {
+                "id": "1c3dac8141adf6bc",
+                "type": "leaf",
+                "state": {
+                  "type": "markdown",
+                  "state": {
+                    "file": "README.md",
+                    "mode": "source",
+                    "source": true
+                  },
+                  "icon": "lucide-file",
+                  "title": "README"
+                }
+              }
+            ]
           }
-        ]
+        ],
+        "direction": "horizontal"
       }
     ],
     "direction": "vertical"
@@ -190,11 +223,24 @@
       "workspaces:管理工作区布局": false,
       "zk-prefixer:创建时间戳笔记": false,
       "random-note:开始漫游笔记": false,
-      "obsidian-excalidraw-plugin:新建绘图文件": false
+      "obsidian-excalidraw-plugin:新建绘图文件": false,
+      "mermaid-tools:Open Mermaid Toolbar": false
     }
   },
-  "active": "885f9e3759734ce4",
+  "active": "1c3dac8141adf6bc",
   "lastOpenFiles": [
+    "docs/graph/api/public/app_name_$name.md",
+    "docs/graph/design/App应用结构.md",
+    "docs/graph/api/secure",
+    "docs/graph/api/public",
+    "docs/graph/design/App应用结构.excalidraw.md",
+    "docs/graph/api",
+    "docs/graph/design",
+    "docs/graph",
+    "docs/design/App应用入口.excalidraw.restored.md",
+    "docs/design/Untitled Diagram.svg",
+    "docs/design",
+    "docs/接口说明",
     "docs/AMS.excalidraw.md",
     "docs/接口详情/未命名.canvas",
     "docs/接口详情",
@@ -218,10 +264,6 @@
     "docs/previous/zero-istio.md",
     "docs/previous/zero-interface.md",
     "docs/previous/zero-hoc.md",
-    "docs/previous/zero-get.md",
-    "docs/previous/zero-flow.md",
-    "docs/previous/zero-fling.md",
-    "docs/previous/zero-error.md",
     "docs/previous/vertx-zero-tutorial",
     "docs/previous/image/zero-up.png",
     "docs/previous/image/zero-tlk.png",
@@ -232,12 +274,6 @@
     "docs/previous/image/request-mode2.png",
     "docs/previous/image/request-mode1.png",
     "docs/previous/image/minikube-dashboard.png",
-    "docs/previous/image/mime-matrix.png",
-    "docs/previous/image",
-    "docs/previous/contributing",
-    "docs/previous/_image",
-    "docs/previous",
-    "zero-design/数据模型",
-    "zero-design"
+    "docs/previous/image"
   ]
 }
