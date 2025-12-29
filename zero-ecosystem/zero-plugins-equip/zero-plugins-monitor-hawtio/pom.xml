@@ -26,7 +26,6 @@
         <dependency>
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-registry-jmx</artifactId>
-            <version>1.16.1</version>
         </dependency>
     </dependencies>
 </project>

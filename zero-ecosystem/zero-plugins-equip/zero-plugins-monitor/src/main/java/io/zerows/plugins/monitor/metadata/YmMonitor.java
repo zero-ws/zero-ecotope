@@ -157,10 +157,6 @@ public class YmMonitor implements Serializable {
          */
         @JsonProperty("name")
         private String name;
-        /**
-         * 插件组件监控时间，单位：秒
-         */
-        private Integer duration = 10;
 
         /**
          * 是否启用该插件能力
@@ -180,6 +176,11 @@ public class YmMonitor implements Serializable {
          */
         @JsonProperty("id")
         private String id;
+
+        /**
+         * 插件组件监控时间，单位：秒
+         */
+        private Integer duration = 10;
 
         /**
          * 引用 {@link Client#name}，指定使用哪种监控能力
