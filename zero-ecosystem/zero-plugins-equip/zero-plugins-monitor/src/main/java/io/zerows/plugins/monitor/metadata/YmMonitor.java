@@ -217,7 +217,7 @@ public class YmMonitor implements Serializable {
         private JsonObject config;
 
         public Integer getDuration() {
-            return Objects.requireNonNullElse(this.duration, 10);
+            return Objects.requireNonNullElse(this.duration, 10) * 1000;
         }
 
         public JsonObject getConfig() {

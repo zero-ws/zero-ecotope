@@ -107,7 +107,9 @@ class MonitorQuota {
                     continue;
                 }
 
-                waitFor.add(this.startQuota(clientConfig, roleConfig));
+                if (roleConfig.getComponent().equals(clientConfig.getName())) {
+                    waitFor.add(this.startQuota(clientConfig, roleConfig));
+                }
             }
         }
         return Fx.combineB(waitFor);

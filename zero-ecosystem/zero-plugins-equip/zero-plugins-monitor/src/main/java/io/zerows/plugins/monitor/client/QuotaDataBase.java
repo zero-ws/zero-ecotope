@@ -7,6 +7,7 @@ import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.plugins.monitor.metadata.MetricBase;
+import io.zerows.plugins.monitor.metadata.MonitorConstant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,7 +46,8 @@ public abstract class QuotaDataBase implements QuotaData {
 
             return Future.succeededFuture(Boolean.TRUE);
         }).recover(err -> {
-            this.log().error("[ ZERO ] ( Monitor ) 抓取指标失败: metric={}, error={}", this.metricName(), err.getMessage());
+            this.log().error("{} 抓取指标失败: metric={}, error={}",
+                MonitorConstant.K_PREFIX_MOC, this.metricName(), err.getMessage());
             return Future.succeededFuture(Boolean.FALSE);
         });
     }
@@ -57,7 +59,7 @@ public abstract class QuotaDataBase implements QuotaData {
                 .description("[ ZERO ] Monitor: " + this.metricName())
                 .tag(KName.NAME, this.metricName())
                 .register(registry);
-            this.log().info("[ ZERO ] ( Monitor ) 初始化指标容器完成: {}", metricName);
+            this.log().info("{} 初始化指标容器完成: {}", MonitorConstant.K_PREFIX_MOC, metricName);
         }
         return this.multiGauge;
     }
