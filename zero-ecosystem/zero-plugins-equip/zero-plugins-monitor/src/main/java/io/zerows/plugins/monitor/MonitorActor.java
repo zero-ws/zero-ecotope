@@ -4,6 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.zerows.component.module.AbstractHActor;
 import io.zerows.epoch.annotations.Actor;
+import io.zerows.plugins.monitor.client.QuotaValue;
 import io.zerows.plugins.monitor.metadata.MonitorConstant;
 import io.zerows.plugins.monitor.metadata.YmMonitor;
 import io.zerows.plugins.monitor.server.MonitorJmxConnector;
@@ -54,7 +55,7 @@ public class MonitorActor extends AbstractHActor {
 
 
             // Quota 启动
-            .compose(configuration -> QuotaMonitor.of(vertxRef).startQuota(configuration));
+            .compose(configuration -> MonitorQuota.of(vertxRef).startQuota(configuration));
     }
 
     /**
@@ -69,19 +70,19 @@ public class MonitorActor extends AbstractHActor {
         final Set<YmMonitor.Role> roleSet = new LinkedHashSet<>();
         final Set<YmMonitor.Client> clientSet = new LinkedHashSet<>();
         for (final QuotaValue quota : quotaList) {
-            final Set<YmMonitor.Role> roles = quota.ofRoles();
+            final Set<YmMonitor.Role> roles = quota.ofRole();
             roleSet.addAll(roles);
             log.info("{} --> Role 扩展：`{}` / 尺寸 = {}", MonitorConstant.K_PREFIX_MOC, quota.getClass(), roles.size());
-            clientSet.addAll(quota.ofClients());
+            clientSet.addAll(quota.ofClient());
         }
 
 
-        monitorConfig.getRoles().addAll(roleSet);
+        monitorConfig.addRoles(roleSet);
         log.info("{} --> 监控角色数量 {}", MonitorConstant.K_PREFIX_MOC, roleSet.size());
         monitorConfig.getClients().addAll(clientSet);
         log.info("{} --> QuotaData 组件数量 {}", MonitorConstant.K_PREFIX_MOC, clientSet.size());
 
-        
+
         return Future.succeededFuture(monitorConfig);
     }
 

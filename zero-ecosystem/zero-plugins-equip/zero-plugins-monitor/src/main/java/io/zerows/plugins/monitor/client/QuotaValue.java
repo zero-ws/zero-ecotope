@@ -1,4 +1,4 @@
-package io.zerows.plugins.monitor;
+package io.zerows.plugins.monitor.client;
 
 import io.zerows.plugins.monitor.metadata.YmMonitor;
 
@@ -10,11 +10,10 @@ import java.util.Set;
 public interface QuotaValue {
 
     String QUOTA_DATA_NS = "io.zerows.monitor.";
-    String QUOTA_DATA_CONFIG = QUOTA_DATA_NS + "config";
 
-    Set<YmMonitor.Role> ofRoles();
+    Set<YmMonitor.Role> ofRole();
 
-    default Set<YmMonitor.Client> ofClients() {
+    default Set<YmMonitor.Client> ofClient() {
         return Set.of();
     }
 }

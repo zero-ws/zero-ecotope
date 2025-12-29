@@ -7,6 +7,8 @@ import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.vertx.micrometer.backends.BackendRegistries;
+import io.zerows.epoch.constant.KName;
+import io.zerows.plugins.monitor.client.QuotaData;
 import io.zerows.plugins.monitor.metadata.MonitorConstant;
 import io.zerows.plugins.monitor.metadata.YmMonitor;
 import io.zerows.support.fn.Fx;
@@ -20,11 +22,11 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * 客户端连接器，先提取所有的 {@link QuotaData} 组件，数量结构如下
  * <pre>
- *     1. {@link Vertx}-01 --> {@link QuotaMonitor}-01
+ *     1. {@link Vertx}-01 --> {@link MonitorQuota}-01
  *           线程池
  *           {@link YmMonitor.Client}-01 --> {@link QuotaData}-01 x (Thread)
  *           {@link YmMonitor.Client}-02 --> {@link QuotaData}-02 x (Thread)
- *        {@link Vertx}-02 --> {@link QuotaMonitor}-02
+ *        {@link Vertx}-02 --> {@link MonitorQuota}-02
  *     2. 消费过程中，直接通过 Vertx.hashCode() 定位到对应的 QuotaMonitor 实例
  *     3. 如果出现了引用相同 {@link YmMonitor.Client} 的角色，则直接使用角色配置添加到新的监控表中
  * </pre>
@@ -32,23 +34,23 @@ import java.util.concurrent.ConcurrentMap;
  * @author lang : 2025-12-29
  */
 @Slf4j
-class QuotaMonitor {
+class MonitorQuota {
 
-    private static final Cc<Integer, QuotaMonitor> CC_QUOTA_MONITOR = Cc.open();
+    private static final Cc<Integer, MonitorQuota> CC_QUOTA_MONITOR = Cc.open();
     private static final ConcurrentMap<String, Class<?>> CLIENTS = MonitorManager.of().classOf();
     private final Vertx vertxRef;
     private final MeterRegistry meterRegistry = BackendRegistries.getDefaultNow();
 
     private final Cc<String, QuotaData> quotaMap = Cc.openThread();
 
-    private QuotaMonitor(final Vertx vertxRef) {
+    private MonitorQuota(final Vertx vertxRef) {
         this.vertxRef = vertxRef;
         Objects.requireNonNull(this.meterRegistry);
         Objects.requireNonNull(this.vertxRef);
     }
 
-    static QuotaMonitor of(final Vertx vertx) {
-        return CC_QUOTA_MONITOR.pick(() -> new QuotaMonitor(vertx), vertx.hashCode());
+    static MonitorQuota of(final Vertx vertx) {
+        return CC_QUOTA_MONITOR.pick(() -> new MonitorQuota(vertx), vertx.hashCode());
     }
 
     Future<Boolean> startQuota(final YmMonitor monitor) {
@@ -121,6 +123,32 @@ class QuotaMonitor {
         log.info("{} QuotaData 组件 `{}` 准备启动，角色实例 `{}`。",
             MonitorConstant.K_PREFIX_MOC, quotaRef.getClass().getName(), role.getId());
         final JsonObject roleConfig = role.getConfig();
-        return quotaRef.register(roleConfig, this.meterRegistry, this.vertxRef);
+        final String name = role.getId();
+        final Integer duration = role.getDuration();
+        final JsonObject configuration = roleConfig.copy()
+            .put(KName.NAME, name);
+
+
+        // 外层 Schedule
+        if (0 > duration) {
+            return quotaRef.register(configuration, this.meterRegistry, this.vertxRef);
+        } else {
+            // 方案：先执行一次，成功后再开启定时器
+            // 这样既能确保第一笔数据正常，又避免了 Promise 重复调用的问题
+            return quotaRef.register(configuration, this.meterRegistry, this.vertxRef).map(success -> {
+
+                // 1. 第一次执行成功，Promise 在这里就算结束了（返回给上层）
+
+                // 2. 开启后台定时器 (Fire and Forget)
+                this.vertxRef.setPeriodic(duration, id -> {
+                    configuration.put(KName.TIMER, id);
+                    // 后续的执行结果不需要再通知 promise 了，只记录日志即可
+                    // (QuotaDataBase 基类里已经有 recover 和 log 处理了)
+                    quotaRef.register(configuration, this.meterRegistry, this.vertxRef);
+                });
+
+                return true;
+            });
+        }
     }
 }

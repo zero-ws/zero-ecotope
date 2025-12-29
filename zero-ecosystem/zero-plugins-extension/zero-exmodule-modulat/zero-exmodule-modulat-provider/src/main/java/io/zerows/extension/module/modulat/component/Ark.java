@@ -2,8 +2,10 @@ package io.zerows.extension.module.modulat.component;
 
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
+import io.vertx.core.json.JsonObject;
 import io.vertx.core.shareddata.ClusterSerializable;
 import io.zerows.platform.enums.modeling.EmModel;
+import io.zerows.plugins.monitor.client.QuotaData;
 
 /*
  * Connect to HArk part for configuration in each application
@@ -18,6 +20,10 @@ public interface Ark {
 
     static Ark ofBag() {
         return CC_ARK.pick(ArkBag::new, ArkBag.class.getName());
+    }
+
+    static QuotaData.Supervisor<String, JsonObject> momBagAdmin() {
+        return QuotaData.mom(ArkConfigure.Mom::new);
     }
 
     /*

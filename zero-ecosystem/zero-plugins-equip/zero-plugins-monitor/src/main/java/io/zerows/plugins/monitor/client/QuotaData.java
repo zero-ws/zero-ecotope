@@ -1,4 +1,4 @@
-package io.zerows.plugins.monitor;
+package io.zerows.plugins.monitor.client;
 
 import io.micrometer.core.instrument.MeterRegistry;
 import io.r2mo.typed.cc.Cc;
@@ -30,8 +30,8 @@ public interface QuotaData {
     Cc<String, Supervisor<?, ?>> CC_SUPERVISOR = Cc.openThread();
 
     @SuppressWarnings("unchecked")
-    static <K, V> Supervisor<K, V> mom(final Supplier<Supervisor<K, V>> constructorFn) {
-        return (Supervisor<K, V>) CC_SUPERVISOR.pick(constructorFn::get, String.valueOf(constructorFn.get()));
+    static <K, V, C extends Supervisor<K, V>> C mom(final Supplier<Supervisor<K, V>> constructorFn) {
+        return (C) CC_SUPERVISOR.pick(constructorFn::get, String.valueOf(constructorFn.get()));
     }
 
     Future<Boolean> register(JsonObject config, MeterRegistry registry, Vertx vertxRef);

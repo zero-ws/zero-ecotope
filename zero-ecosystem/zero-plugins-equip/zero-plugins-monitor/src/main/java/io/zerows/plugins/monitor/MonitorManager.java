@@ -3,6 +3,7 @@ package io.zerows.plugins.monitor;
 import io.vertx.core.Vertx;
 import io.zerows.epoch.annotations.Monitor;
 import io.zerows.epoch.management.OCacheClass;
+import io.zerows.plugins.monitor.client.QuotaData;
 import io.zerows.plugins.monitor.metadata.MonitorConstant;
 import io.zerows.plugins.monitor.metadata.YmMonitor;
 import io.zerows.support.Ut;

@@ -8,6 +8,7 @@ import io.r2mo.typed.json.jackson.ClassSerializer;
 import io.vertx.core.json.JsonObject;
 import io.zerows.integrated.jackson.JsonObjectDeserializer;
 import io.zerows.integrated.jackson.JsonObjectSerializer;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +17,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -103,6 +105,17 @@ public class YmMonitor implements Serializable {
         return uniqueRoles;
     }
 
+    @SuppressWarnings("all")
+    public YmMonitor addRoles(final Set<Role> roleSet) {
+        if (this.roles == null) {
+            this.roles = new ArrayList<>();
+        }
+        if (roleSet != null) {
+            this.roles.addAll(roleSet);
+        }
+        return this;
+    }
+
     /* =========================================================================
      * 内部静态类定义 (Inner Static Classes)
      * =========================================================================
@@ -152,6 +165,7 @@ public class YmMonitor implements Serializable {
      */
     @Data
     @EqualsAndHashCode(of = {"name"})
+    @Builder
     public static class Client implements Serializable {
 
         /**
@@ -174,6 +188,7 @@ public class YmMonitor implements Serializable {
      */
     @Data
     @EqualsAndHashCode(of = {"id"})
+    @Builder
     public static class Role implements Serializable {
 
         /**
@@ -185,7 +200,7 @@ public class YmMonitor implements Serializable {
         /**
          * 插件组件监控时间，单位：秒
          */
-        private Integer duration = 10;
+        private Integer duration;
 
         /**
          * 引用 {@link Client#name}，指定使用哪种监控能力
@@ -199,6 +214,17 @@ public class YmMonitor implements Serializable {
         @JsonProperty("config")
         @JsonSerialize(using = JsonObjectSerializer.class)
         @JsonDeserialize(using = JsonObjectDeserializer.class)
-        private JsonObject config = new JsonObject();
+        private JsonObject config;
+
+        public Integer getDuration() {
+            return Objects.requireNonNullElse(this.duration, 10);
+        }
+
+        public JsonObject getConfig() {
+            if (this.config == null) {
+                this.config = new JsonObject();
+            }
+            return this.config;
+        }
     }
 }
