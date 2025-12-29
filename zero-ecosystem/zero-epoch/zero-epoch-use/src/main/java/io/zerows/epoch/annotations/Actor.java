@@ -18,7 +18,7 @@ import java.lang.annotation.Target;
  *
  * @author lang : 2025-10-13
  */
-@Target({ElementType.TYPE, ElementType.FIELD})
+@Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited

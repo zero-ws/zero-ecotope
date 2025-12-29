@@ -1,6 +1,7 @@
 package io.zerows.plugins.monitor.hawtio;
 
 import io.hawt.embedded.Main;
+import io.r2mo.typed.annotation.SPID;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
@@ -26,6 +27,7 @@ import java.security.ProtectionDomain;
  * @author lang : 2025-12-29
  */
 @Slf4j
+@SPID("MNTR/HAWTIO")
 public class MonitorJmxHawtIo implements MonitorJmxConnector {
 
     private static final String KEY_PORT = "port";

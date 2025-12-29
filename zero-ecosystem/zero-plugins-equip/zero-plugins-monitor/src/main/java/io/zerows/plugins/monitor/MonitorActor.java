@@ -29,19 +29,26 @@ public class MonitorActor extends AbstractHActor {
             return Future.succeededFuture(Boolean.TRUE);
         }
 
-        MonitorManager.of().registry(vertxRef, monitorConfig);
+        MonitorManager.of().configYaml(vertxRef, monitorConfig);
         this.vLog("[ Monitor ] MonitorActor 注册监控配置完成，配置：{}", config.options());
+
 
         // 启动 JMX 远程监控
         this.startJmxRemote(monitorConfig, vertxRef);
+
+
         // 启动 Server 部分
         final YmMonitor.Server serverConfig = monitorConfig.getServer();
         final MonitorJmxConnector connector = MonitorJmxConnector.of(serverConfig);
         if (Objects.isNull(connector)) {
+            this.vLog("[ Monitor ] 无 JmxConnector 组件，直接返回！");
             return Future.succeededFuture(Boolean.TRUE);
         }
+        return connector.startAsync(serverConfig.getMonitorConfig(), vertxRef)
 
-        return connector.startAsync(serverConfig.getMonitorConfig(), vertxRef);
+
+            // Quota 启动
+            .compose(started -> QuotaMonitor.of(vertxRef).startQuota(monitorConfig));
     }
 
     /**

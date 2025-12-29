@@ -9,10 +9,13 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.integrated.jackson.JsonObjectDeserializer;
 import io.zerows.integrated.jackson.JsonObjectSerializer;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 对应扩展数据结构
@@ -25,7 +28,7 @@ import java.util.List;
  *         monitor-type:                # 枚举值（内置专用）
  *         monitor-component: ???       # 扩展专用
  *         monitor-config: {@link JsonObject}
- *       client:
+ *       clients:
  *       - name: ???
  *         component: ???
  *         enabled: true/false
@@ -38,6 +41,7 @@ import java.util.List;
  * @author lang : 2025-12-29
  */
 @Data
+@Slf4j
 public class YmMonitor implements Serializable {
     /**
      * 服务端配置：JMX / 监控核心容器配置
@@ -49,7 +53,7 @@ public class YmMonitor implements Serializable {
      * 客户端插件定义列表 (Plugin Definitions)
      * <p>定义系统中有哪些可用的监控能力</p>
      */
-    @JsonProperty("client")
+    @JsonProperty("clients")
     private List<Client> clients = new ArrayList<>();
 
     /**
@@ -58,6 +62,45 @@ public class YmMonitor implements Serializable {
      */
     @JsonProperty("roles")
     private List<Role> roles = new ArrayList<>();
+
+    /**
+     * 重写 getRoles 方法：执行去重逻辑
+     * <p>规则：保留第一个出现的 ID，后续重复 ID 的条目将被忽略并打印警告。</p>
+     *
+     * @return 去重后的 Role 列表
+     */
+    public List<Role> getRoles() {
+        // 1. 防御性检查：如果为空直接返回空列表
+        if (this.roles == null || this.roles.isEmpty()) {
+            return new ArrayList<>();
+        }
+
+        final List<Role> uniqueRoles = new ArrayList<>();
+        final Set<String> distinctIds = new HashSet<>();
+
+        for (final Role role : this.roles) {
+            // 2. 校验数据完整性
+            if (role == null || role.getId() == null) {
+                continue;
+            }
+
+            final String uid = role.getId();
+
+            // 3. 检查 ID 是否已存在
+            if (distinctIds.contains(uid)) {
+                // 4. 发现重复：打印日志并忽略
+                log.warn("{} ⚠️ 检测到重复的 Role ID 配置: '{}' (Component: {}). 该条目将被忽略，仅保留首次定义。",
+                    MonitorConstant.K_PREFIX_MOC, uid, role.getComponent());
+                continue;
+            }
+
+            // 5. 加入结果集
+            distinctIds.add(uid);
+            uniqueRoles.add(role);
+        }
+
+        return uniqueRoles;
+    }
 
     /* =========================================================================
      * 内部静态类定义 (Inner Static Classes)
@@ -114,14 +157,10 @@ public class YmMonitor implements Serializable {
          */
         @JsonProperty("name")
         private String name;
-
         /**
-         * SPI 插件实现类的全限定名
+         * 插件组件监控时间，单位：秒
          */
-        @JsonProperty("component")
-        @JsonSerialize(using = ClassSerializer.class)
-        @JsonDeserialize(using = ClassDeserializer.class)
-        private Class<?> component;
+        private Integer duration = 10;
 
         /**
          * 是否启用该插件能力
