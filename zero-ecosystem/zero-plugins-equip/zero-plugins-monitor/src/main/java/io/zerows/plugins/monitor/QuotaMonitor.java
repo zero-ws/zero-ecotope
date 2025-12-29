@@ -121,6 +121,6 @@ class QuotaMonitor {
         log.info("{} QuotaData 组件 `{}` 准备启动，角色实例 `{}`。",
             MonitorConstant.K_PREFIX_MOC, quotaRef.getClass().getName(), role.getId());
         final JsonObject roleConfig = role.getConfig();
-        return quotaRef.register(roleConfig, this.meterRegistry);
+        return quotaRef.register(roleConfig, this.meterRegistry, this.vertxRef);
     }
 }

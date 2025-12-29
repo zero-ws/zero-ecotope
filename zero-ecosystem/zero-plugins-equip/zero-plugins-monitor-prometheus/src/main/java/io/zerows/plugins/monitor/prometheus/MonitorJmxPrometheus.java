@@ -25,7 +25,7 @@ public class MonitorJmxPrometheus implements MonitorJmxConnector {
     public Future<Boolean> startAsync(final JsonObject config, final Vertx vertxRef) {
         // 1. 获取配置 (注意：这里其实是"读取"配置，而不是"设置"，因为设置早就生效了)
         // 务必确保这里的默认值和 MonitorEquipPrometheus 里的默认值完全一致！
-        final int port = config.getInteger(KName.NAME, 9090);
+        final int port = config.getInteger(KName.PORT, 9090);
         final String path = config.getString(KName.PATH, "/metrics");
 
         // 2. 打印高亮日志 (提升开发者体验的核心)

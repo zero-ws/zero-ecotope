@@ -71,11 +71,11 @@ public class AxisStart implements Axis {
                 pathMap.put(path, route);
             }
         });
-        pathSetAny.forEach(path -> log.info("  -->  Uri 注册:        * {}", path));
+        pathSetAny.forEach(path -> log.info("[ ZERO ]  -->  Uri 注册:        * {}", path));
         pathSet.forEach(path -> {
             final Route route = pathMap.get(path);
             final Set<HttpMethod> methods = route.methods();
-            methods.forEach(method -> log.info("  -->  Uri 注册: {} {}", Ut.fromAdjust(method.name(), 8), path));
+            methods.forEach(method -> log.info("[ ZERO ]  -->  Uri 注册: {} {}", Ut.fromAdjust(method.name(), 8), path));
         });
         final HttpServerOptions optionOfServer = runServer.config();
         final String prefix = optionOfServer.isSsl() ? "https" : "http";

@@ -2,6 +2,7 @@ package io.zerows.plugins.monitor;
 
 import io.micrometer.core.instrument.MeterRegistry;
 import io.vertx.core.Future;
+import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 
 /**
@@ -22,5 +23,5 @@ import io.vertx.core.json.JsonObject;
  */
 public interface QuotaData {
 
-    Future<Boolean> register(JsonObject config, MeterRegistry registry);
+    Future<Boolean> register(JsonObject config, MeterRegistry registry, Vertx vertxRef);
 }
