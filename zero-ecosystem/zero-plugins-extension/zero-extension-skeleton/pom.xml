@@ -17,10 +17,20 @@
             <groupId>io.zerows</groupId>
             <artifactId>zero-boot-epoch-actor</artifactId>
         </dependency>
-        <!-- 插件 -->
+        <!--
+        插件
+        - Excel 数据导入插件
+        - 监控插件
+        - Flyway 数据库 DDL 处理插件
+        - Neo4j 图数据库存储插件
+        -->
         <dependency>
             <groupId>io.zerows</groupId>
             <artifactId>zero-plugins-excel</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-plugins-monitor</artifactId>
         </dependency>
         <dependency>
             <groupId>io.zerows</groupId>

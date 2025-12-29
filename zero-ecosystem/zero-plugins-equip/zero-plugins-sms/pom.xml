@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>zero-plugins-sms</artifactId>
-    <name>Zero::Plugins::🧩 - Integration SMS</name>
+    <name>Zero::Plugins::🧩 - SMS</name>
     <dependencies>
         <dependency>
             <groupId>io.zerows</groupId>

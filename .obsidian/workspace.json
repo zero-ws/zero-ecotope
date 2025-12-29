@@ -10,7 +10,7 @@
           {
             "id": "c0c0dbe8f9e93474",
             "type": "tabs",
-            "dimension": 48.717948717948715,
+            "dimension": 48.71794871794871,
             "children": [
               {
                 "id": "d28afe1c52c0d3b0",
@@ -31,7 +31,7 @@
           {
             "id": "c6345880e843db09",
             "type": "tabs",
-            "dimension": 51.28205128205128,
+            "dimension": 51.28205128205129,
             "children": [
               {
                 "id": "1c3dac8141adf6bc",
@@ -39,12 +39,12 @@
                 "state": {
                   "type": "markdown",
                   "state": {
-                    "file": "README.md",
+                    "file": "docs/graph/api/public/app_name_$name.md",
                     "mode": "source",
                     "source": true
                   },
                   "icon": "lucide-file",
-                  "title": "README"
+                  "title": "app_name_$name"
                 }
               }
             ]
@@ -229,21 +229,25 @@
   },
   "active": "1c3dac8141adf6bc",
   "lastOpenFiles": [
+    "zero-ecosystem/zero-epoch/zero-overlay/target/zero-overlay-1.0.0.jar",
+    "zero-ecosystem/zero-epoch/zero-overlay/target/maven-archiver/pom.properties",
+    "zero-ecosystem/zero-epoch/zero-overlay/target/maven-archiver",
+    "zero-ecosystem/zero-epoch/zero-overlay/target/test-classes",
+    "zero-ecosystem/zero-epoch/zero-overlay/target/generated-test-sources/test-annotations",
+    "zero-ecosystem/zero-epoch/zero-overlay/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst",
+    "zero-ecosystem/zero-epoch/zero-overlay/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst",
+    "zero-ecosystem/zero-epoch/zero-overlay/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile",
+    "zero-ecosystem/zero-epoch/zero-overlay/target/maven-status/maven-compiler-plugin/testCompile",
+    "zero-ecosystem/zero-epoch/zero-overlay/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst",
+    "zero-ecosystem/zero-epoch/zero-overlay/target/classes/io/zerows/specification/modeling/package-info.class",
+    "README.md",
     "docs/graph/api/public/app_name_$name.md",
     "docs/graph/design/App应用结构.md",
-    "docs/graph/api/secure",
-    "docs/graph/api/public",
     "docs/graph/design/App应用结构.excalidraw.md",
-    "docs/graph/api",
-    "docs/graph/design",
-    "docs/graph",
     "docs/design/App应用入口.excalidraw.restored.md",
     "docs/design/Untitled Diagram.svg",
-    "docs/design",
-    "docs/接口说明",
     "docs/AMS.excalidraw.md",
     "docs/接口详情/未命名.canvas",
-    "docs/接口详情",
     "docs/previous/zero-worker.md",
     "docs/previous/zero-verify.md",
     "docs/previous/zero-validate.md",
@@ -263,8 +267,6 @@
     "docs/previous/zero-it.md",
     "docs/previous/zero-istio.md",
     "docs/previous/zero-interface.md",
-    "docs/previous/zero-hoc.md",
-    "docs/previous/vertx-zero-tutorial",
     "docs/previous/image/zero-up.png",
     "docs/previous/image/zero-tlk.png",
     "docs/previous/image/rpc-workflow.png",
@@ -273,7 +275,6 @@
     "docs/previous/image/request-mode3.png",
     "docs/previous/image/request-mode2.png",
     "docs/previous/image/request-mode1.png",
-    "docs/previous/image/minikube-dashboard.png",
-    "docs/previous/image"
+    "docs/previous/image/minikube-dashboard.png"
   ]
 }

@@ -7,8 +7,7 @@ import java.lang.reflect.Modifier;
 /**
  * @author lang : 2025-10-25
  */
-public
-interface ClassFilter {
+public interface ClassFilter {
 
     @SuppressWarnings("all")
     static boolean isValidMember(final Class<?> type) {
@@ -19,6 +18,9 @@ interface ClassFilter {
             type.getDeclaredFields();
             return true;
         } catch (NoClassDefFoundError ex) {
+            return false;
+        } catch (Throwable ex) {
+            System.err.println(type);
             return false;
         }
     }

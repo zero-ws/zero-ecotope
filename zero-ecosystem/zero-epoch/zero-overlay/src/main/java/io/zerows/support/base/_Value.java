@@ -234,6 +234,10 @@ class _Value extends _To {
         return TV.vInt(json, field, VValue.RANGE);
     }
 
+    public static Integer valueInt(final JsonObject json, final String field, final Integer defaultValue) {
+        return TV.vInt(json, field, defaultValue);
+    }
+
     /**
      * （带非空检查）提取 JsonObject 中某个 String 属性值，并转换成 Class<?>
      *

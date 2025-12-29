@@ -27,8 +27,28 @@ import io.zerows.specification.atomic.HCommand;
  */
 public interface HConfig {
 
+    // ------- Class<?> 反射
+    String DEFAULT_META = "DEFAULT_META";
+    // ----- 对象引用操作
+    String DEFAULT_REFERENCE = "DEFAULT_REFERENCE";
+
     // --- 配置项操作
     JsonObject options();
+
+    /**
+     * 特殊方法，提供便捷的 vertx.yml 配置的读取能力，这种主要用于不同的配置对象读取
+     * <pre>
+     *     1. Zero 底层基于 {@see YmSpec} 的方式执行配置读取
+     *     2. 不同的组件定义不同的配置类，在 HActor 启动时会自动加载节点
+     *     3. 若定义了新的配置类，此方法可以将：yaml -> {@link JsonObject} -> 目标类 实现自动转换
+     * </pre>
+     *
+     * @param classYm 目标类
+     * @param <T>     返回值类型
+     *
+     * @return 目标对象
+     */
+    <T> T options(Class<T> classYm);
 
     HConfig putOptions(JsonObject options);
 
@@ -53,9 +73,6 @@ public interface HConfig {
     <T> T options(String field);
 
     <T> T options(String field, T defaultValue);
-
-    // ------- Class<?> 反射
-    String DEFAULT_META = "DEFAULT_META";
 
     /**
      * 设置配制键的反射组件，后期可直接反射得到结果
@@ -87,9 +104,6 @@ public interface HConfig {
     default Class<?> executor() {
         return this.executor(DEFAULT_META);
     }
-
-    // ----- 对象引用操作
-    String DEFAULT_REFERENCE = "DEFAULT_REFERENCE";
 
     default <T> HConfig putRef(final String refKey, final T reference) {
         throw new _501NotSupportException("[ ZERO ] 当前 HConfig 不支持 putRef 方法，请检查配置！");

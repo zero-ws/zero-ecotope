@@ -38,5 +38,6 @@
         <!-- Web -->
         <!--        <module>zero-plugins-video-iqiy</module>-->
         <module>zero-plugins-websocket</module>
+        <module>zero-plugins-monitor</module>
     </modules>
 </project>

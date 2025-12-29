@@ -45,6 +45,7 @@ interface ClassFilterPackage {
         "com.amazonaws",               // AWS SDK v1 ☁️
         "com.microsoft",               // Microsoft/Azure/Graph 等 SDK 🪟
         "com.oracle",                  // Oracle 相关（JDBC/SDK）🏛️
+        "com.nimbusds",                // Nimbus JOSE+JWT 🔐
         "oracle",                      // Oracle 历史/别名包 🏛️
         "software.amazon.awssdk",      // AWS SDK v2 ☁️
 
@@ -80,7 +81,9 @@ interface ClassFilterPackage {
         "io.r2dbc",                    // R2DBC SPI/驱动 🔌
         "io.reactivex",                // RxJava（1.x 根包）⚛️
         "io.swagger",                  // Swagger/OpenAPI 工具链 📜
+        "io.hawt",                     // Hawtio 控制台 🪟
         "org.reactivestreams",         // Reactive Streams 标准 🔁
+        "org.jolokia",                 // Jolokia JMX-HTTP 桥 🔧
         "reactor",                     // Reactor 旧根（与 io.projectreactor 并存）♻️
 
         // =========================== 🪵 Logging ===========================

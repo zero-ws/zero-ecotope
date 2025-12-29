@@ -4,6 +4,7 @@ import io.r2mo.SourceReflect;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.VertxBuilder;
+import io.vertx.core.VertxOptions;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.spi.cluster.ClusterManager;
 import io.zerows.cortex.extension.CodecEnvelop;
@@ -37,19 +38,24 @@ class StubVertxService extends AbstractAmbiguity implements StubVertx {
     public Future<RunVertx> createAsync(final NodeVertx nodeVertx, final boolean clustered) {
         Objects.requireNonNull(nodeVertx);
         final VertxBuilder builder = Vertx.builder();
+        // VertxOptions
+        final VertxOptions options = nodeVertx.vertxOptions();
+        final NodeNetwork network = nodeVertx.networkRef();
+        // 监控注入（懒加载模式）
+        StubVertxMonitor.of().configure(options, network);
+
         if (clustered) {
             // 集群模式创建
-            final NodeNetwork network = nodeVertx.networkRef();
             final ClusterManager manager = network.cluster().getClusterManager();
             log.info("[ ZERO ] 当前应用程序正在集群模式下运行，管理器 = {}，节点为 {}，isActive = {}。",
                 manager.getClass().getName(), manager.getNodeId(), manager.isActive());
             return builder
                 .withClusterManager(manager)
-                .with(nodeVertx.vertxOptions()).buildClustered()
+                .with(options).buildClustered()
                 .compose(vertx -> this.createFinished(nodeVertx, vertx));
         } else {
             // 非集群模式创建
-            return Future.succeededFuture(builder.with(nodeVertx.vertxOptions()).build())
+            return Future.succeededFuture(builder.with(options).build())
                 .compose(vertx -> this.createFinished(nodeVertx, vertx));
         }
     }
@@ -60,9 +66,7 @@ class StubVertxService extends AbstractAmbiguity implements StubVertx {
         eventBus.registerDefaultCodec(Envelop.class, SourceReflect.singleton(CodecEnvelop.class));
         log.info("[ ZERO ] 注册编解码器：{}", CodecEnvelop.class.getName());
 
-        vertx.exceptionHandler(error -> {
-            error.printStackTrace();
-        });
+        vertx.exceptionHandler(Throwable::printStackTrace);
 
         // 核心 RunVertx 实例
         final RunVertx runVertx = new RunVertx(config.name());
@@ -70,6 +74,7 @@ class StubVertxService extends AbstractAmbiguity implements StubVertx {
             .instance(vertx)           // 运行实例
             .config(config)            // 运行配置
         );
+
         return Future.succeededFuture(runVertx);
     }
 

@@ -54,6 +54,11 @@ public class ConfigNorm implements HConfig, HLog {
     }
 
     @Override
+    public <T> T options(final Class<T> classYm) {
+        return Ut.deserialize(this.options, classYm);
+    }
+
+    @Override
     @SuppressWarnings("unchecked")
     public <T> T options(final String field) {
         return (T) this.options.getValue(field);

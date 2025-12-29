@@ -140,14 +140,16 @@ final class Jackson {
     }
 
     static <T> T deserialize(final JsonObject value, final Class<T> type, final boolean isSmart) {
-        if (Objects.isNull(value)) {
+        // 特殊拦截
+        if (Ut.isNil(value)) {
             return null;
         }
         return Jackson.deserialize(value.encode(), type, isSmart);
     }
 
     static <T> T deserialize(final JsonArray value, final Class<T> type, final boolean isSmart) {
-        if (Objects.isNull(value)) {
+        // 特殊拦截
+        if (Ut.isNil(value)) {
             return null;
         }
         return Jackson.deserialize(value.encode(), type, isSmart);
