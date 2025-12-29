@@ -42,7 +42,7 @@ class StubVertxService extends AbstractAmbiguity implements StubVertx {
         final VertxOptions options = nodeVertx.vertxOptions();
         final NodeNetwork network = nodeVertx.networkRef();
         // 监控注入（懒加载模式）
-        StubVertxMonitor.of().configure(options, network);
+        MonitorVertx.of().configure(options, network);
 
         if (clustered) {
             // 集群模式创建

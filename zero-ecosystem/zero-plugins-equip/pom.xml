@@ -39,5 +39,7 @@
         <!--        <module>zero-plugins-video-iqiy</module>-->
         <module>zero-plugins-websocket</module>
         <module>zero-plugins-monitor</module>
+        <module>zero-plugins-monitor-hawtio</module>
+        <module>zero-plugins-monitor-prometheus</module>
     </modules>
 </project>

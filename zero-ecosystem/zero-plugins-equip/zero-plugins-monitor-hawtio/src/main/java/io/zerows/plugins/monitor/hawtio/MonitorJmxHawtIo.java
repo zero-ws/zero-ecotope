@@ -1,9 +1,11 @@
-package io.zerows.plugins.monitor.server;
+package io.zerows.plugins.monitor.hawtio;
 
 import io.hawt.embedded.Main;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
+import io.zerows.plugins.monitor.metadata.MonitorType;
+import io.zerows.plugins.monitor.server.MonitorJmxConnector;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
@@ -24,7 +26,7 @@ import java.security.ProtectionDomain;
  * @author lang : 2025-12-29
  */
 @Slf4j
-class MonitorJmxHawtIo implements MonitorJmxConnector {
+public class MonitorJmxHawtIo implements MonitorJmxConnector {
 
     private static final String KEY_PORT = "port";
     private static final String KEY_CONTEXT = "context";
@@ -134,6 +136,11 @@ class MonitorJmxHawtIo implements MonitorJmxConnector {
         hawtioThread.setName("zerows-hawtio-server");
         hawtioThread.setDaemon(true);
         return hawtioThread;
+    }
+
+    @Override
+    public boolean isMatch(final MonitorType required) {
+        return MonitorType.HAWTIO == required;
     }
 
     @Override

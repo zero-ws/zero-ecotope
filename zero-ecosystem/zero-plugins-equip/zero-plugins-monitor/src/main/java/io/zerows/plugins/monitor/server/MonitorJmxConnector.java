@@ -7,12 +7,13 @@ import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.zerows.plugins.monitor.metadata.MonitorType;
 import io.zerows.plugins.monitor.metadata.YmMonitor;
+import io.zerows.spi.HPI;
 import io.zerows.support.Ut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
 import java.util.Objects;
-import java.util.function.Supplier;
 
 /**
  * 解析配置之后创建连接器，若成功启动则返回 true，此处连接器会包含监控组件部分
@@ -37,12 +38,24 @@ public interface MonitorJmxConnector {
         if (Objects.isNull(monitorType)) {
             return null;
         }
-        final Supplier<MonitorJmxConnector> constructorFn = MonitorJmxUtil.SUPPLIER.getOrDefault(monitorType, null);
-        if (Objects.isNull(constructorFn)) {
-            return null;
-        }
+        final List<MonitorJmxConnector> foundList = HPI.findMany(MonitorJmxConnector.class);
 
-        return CC_JMX.pick(constructorFn, monitorType.name());
+        final List<MonitorJmxConnector> compress = foundList.stream()
+            .filter(connector -> connector.isMatch(monitorType))
+            .toList();
+        if (compress.isEmpty()) {
+            return null;
+        } else if (1 == compress.size()) {
+            return compress.getFirst();
+        } else {
+            /*
+             * 多个实现类的查找模型，当同一个 MonitorType 存在多个实现类时，已经无法定位到核心的 Connector，这种模型下最好的方式就是
+             * 统一查找优先级最高的唯一实现类！所以此处会诱发一个拉平场景
+             * 1）如果想要多个实现类共存：3 个不同的 MonitorType 都提供唯一实现
+             * 2）如果只想要三选一：则只能保证某一个实现类的优先级最高
+             */
+            return CC_JMX.pick(() -> HPI.findOneOf(MonitorJmxConnector.class), monitorType.name());
+        }
     }
 
     static MonitorJmxConnector of(final YmMonitor.Server server) {
@@ -59,6 +72,7 @@ public interface MonitorJmxConnector {
         return CC_JMX.pick(() -> SourceReflect.instance(componentCls), componentName);
     }
 
+    boolean isMatch(MonitorType required);
 
     Future<Boolean> startAsync(JsonObject config, Vertx vertxRef);
 }

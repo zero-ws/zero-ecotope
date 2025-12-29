@@ -9,17 +9,24 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>zero-plugins-monitor</artifactId>
-    <name>Zero::Plugins::🧩 - Monitor</name>
+    <artifactId>zero-plugins-monitor-hawtio</artifactId>
+    <name>Zero::Plugins::🧩 - Monitor / HawtIo</name>
     <dependencies>
         <!-- Dependency -->
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-epoch-cosmic</artifactId>
+            <artifactId>zero-plugins-monitor</artifactId>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.hawt/hawtio-embedded -->
+        <dependency>
+            <groupId>io.hawt</groupId>
+            <artifactId>hawtio-embedded</artifactId>
+            <version>4.6.2</version>
         </dependency>
         <dependency>
-            <groupId>io.vertx</groupId>
-            <artifactId>vertx-micrometer-metrics</artifactId>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-jmx</artifactId>
+            <version>1.16.1</version>
         </dependency>
     </dependencies>
 </project>

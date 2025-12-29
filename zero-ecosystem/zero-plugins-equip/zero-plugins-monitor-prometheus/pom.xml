@@ -9,17 +9,13 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>zero-plugins-monitor</artifactId>
-    <name>Zero::Plugins::🧩 - Monitor</name>
+    <artifactId>zero-plugins-monitor-prometheus</artifactId>
+    <name>Zero::Plugins::🧩 - Monitor / Premetheus</name>
     <dependencies>
         <!-- Dependency -->
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-epoch-cosmic</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.vertx</groupId>
-            <artifactId>vertx-micrometer-metrics</artifactId>
+            <artifactId>zero-plugins-monitor</artifactId>
         </dependency>
     </dependencies>
 </project>

@@ -2,7 +2,6 @@ package io.zerows.cosmic.bootstrap;
 
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Vertx;
-import io.zerows.component.environment.DevMonitor;
 import io.zerows.cortex.metadata.RunVertx;
 import io.zerows.platform.enums.VertxComponent;
 import io.zerows.specification.development.compiled.HBundle;
@@ -53,10 +52,6 @@ class LinearCenter {
                     options.getThreadingModel());
 
 
-                // 连接底层监控平台（开发监控专用）
-                DevMonitor.on(vertx).add(classVerticle, options, deploymentId);
-
-
                 runVertx.addDeployment(deploymentId, classVerticle);
             } else {
                 final Throwable ex = res.cause();
@@ -80,10 +75,6 @@ class LinearCenter {
         ids.forEach(id -> vertx.undeploy(id).onComplete(res -> {
             if (res.succeeded()) {
                 log.info("[ ZERO ] ✅ Verticle 组件 {} 撤销成功！( deploymentId = {})", verticleCls.getName(), id);
-
-
-                // 连接底层监控平台（开发监控专用）
-                DevMonitor.on(vertx).remove(verticleCls, options);
 
 
                 runVertx.removeDeployment(id);

@@ -6,4 +6,5 @@ package io.zerows.plugins.monitor.metadata;
 public enum MonitorType {
     HAWTIO,
     PROMETHEUS_GRAFANA,
+    EXTENSION,
 }

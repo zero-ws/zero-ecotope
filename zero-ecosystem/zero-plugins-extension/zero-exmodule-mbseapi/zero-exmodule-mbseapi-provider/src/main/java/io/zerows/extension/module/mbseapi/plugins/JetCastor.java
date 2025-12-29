@@ -3,7 +3,6 @@ package io.zerows.extension.module.mbseapi.plugins;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.environment.DevMonitor;
 import io.zerows.extension.module.mbseapi.boot.Jt;
 import io.zerows.extension.module.mbseapi.boot.MDCMetamodel;
 import io.zerows.extension.module.mbseapi.boot.MDMBSEManager;
@@ -92,8 +91,6 @@ public class JetCastor {
                 this.vertx.deployVerticle(name, options).onComplete(handler -> {
                     if (handler.succeeded()) {
                         this.monitor.workerDeployed(options.getInstances(), name);
-                        // LOG
-                        DevMonitor.on(this.vertx).add(name, options, handler.result());
                     } else {
                         if (Objects.nonNull(handler.cause())) {
                             handler.cause().printStackTrace();
