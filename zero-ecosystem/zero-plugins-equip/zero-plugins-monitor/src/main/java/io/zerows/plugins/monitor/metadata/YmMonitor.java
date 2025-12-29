@@ -9,6 +9,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.integrated.jackson.JsonObjectDeserializer;
 import io.zerows.integrated.jackson.JsonObjectSerializer;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
@@ -150,6 +151,7 @@ public class YmMonitor implements Serializable {
      * 客户端/插件定义节点
      */
     @Data
+    @EqualsAndHashCode(of = {"name"})
     public static class Client implements Serializable {
 
         /**
@@ -163,12 +165,15 @@ public class YmMonitor implements Serializable {
          */
         @JsonProperty("enabled")
         private Boolean enabled = Boolean.TRUE;
+
+
     }
 
     /**
      * 监控角色/实例节点
      */
     @Data
+    @EqualsAndHashCode(of = {"id"})
     public static class Role implements Serializable {
 
         /**

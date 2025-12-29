@@ -11,6 +11,7 @@ import io.zerows.extension.module.modulat.common.BkConstant;
 import io.zerows.extension.module.modulat.domain.tables.daos.BBagDao;
 import io.zerows.extension.module.modulat.domain.tables.pojos.BBag;
 import io.zerows.platform.enums.modeling.EmModel;
+import io.zerows.plugins.monitor.QuotaData;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -36,7 +37,6 @@ class ArkConfigure extends ArkBase {
      * 输入的格式
      */
     private static final Cc<String, JsonObject> BAG_ADMIN = Cc.open();
-    // private static final Cc<String, Future<JsonObject>> ASYNC_BAG_ADMIN = Cc.openA();
 
     @Override
     public Future<ClusterSerializable> modularize(final String appId,
@@ -56,6 +56,7 @@ class ArkConfigure extends ArkBase {
             return Ux.future(stored);
         });
     }
+    // private static final Cc<String, Future<JsonObject>> ASYNC_BAG_ADMIN = Cc.openA();
 
     private Future<JsonObject> modularizeInternal(final String appId,
                                                   final boolean open,
@@ -108,5 +109,18 @@ class ArkConfigure extends ArkBase {
                 return Ux.future(result);
             });
         });
+    }
+
+    public static class Mom implements QuotaData.Supervisor<String, JsonObject> {
+
+        @Override
+        public Set<String> keys() {
+            return BAG_ADMIN.keySet();
+        }
+
+        @Override
+        public JsonObject value(final String key) {
+            return BAG_ADMIN.get(key);
+        }
     }
 }

@@ -4,13 +4,18 @@ import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.zerows.component.module.AbstractHActor;
 import io.zerows.epoch.annotations.Actor;
+import io.zerows.plugins.monitor.metadata.MonitorConstant;
 import io.zerows.plugins.monitor.metadata.YmMonitor;
 import io.zerows.plugins.monitor.server.MonitorJmxConnector;
 import io.zerows.plugins.monitor.server.MonitorJmxRemote;
 import io.zerows.specification.configuration.HConfig;
+import io.zerows.spi.HPI;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * @author lang : 2025-12-29
@@ -45,10 +50,39 @@ public class MonitorActor extends AbstractHActor {
             return Future.succeededFuture(Boolean.TRUE);
         }
         return connector.startAsync(serverConfig.getMonitorConfig(), vertxRef)
+            .compose(started -> this.startConfigure(monitorConfig))
 
 
             // Quota 启动
-            .compose(started -> QuotaMonitor.of(vertxRef).startQuota(monitorConfig));
+            .compose(configuration -> QuotaMonitor.of(vertxRef).startQuota(configuration));
+    }
+
+    /**
+     * 调用 SPI 抓取默认组件
+     *
+     * @param monitorConfig 监控配置
+     *
+     * @return 修改之后的监控配置
+     */
+    private Future<YmMonitor> startConfigure(final YmMonitor monitorConfig) {
+        final List<QuotaValue> quotaList = HPI.findMany(QuotaValue.class);
+        final Set<YmMonitor.Role> roleSet = new LinkedHashSet<>();
+        final Set<YmMonitor.Client> clientSet = new LinkedHashSet<>();
+        for (final QuotaValue quota : quotaList) {
+            final Set<YmMonitor.Role> roles = quota.ofRoles();
+            roleSet.addAll(roles);
+            log.info("{} --> Role 扩展：`{}` / 尺寸 = {}", MonitorConstant.K_PREFIX_MOC, quota.getClass(), roles.size());
+            clientSet.addAll(quota.ofClients());
+        }
+
+
+        monitorConfig.getRoles().addAll(roleSet);
+        log.info("{} --> 监控角色数量 {}", MonitorConstant.K_PREFIX_MOC, roleSet.size());
+        monitorConfig.getClients().addAll(clientSet);
+        log.info("{} --> QuotaData 组件数量 {}", MonitorConstant.K_PREFIX_MOC, clientSet.size());
+
+        
+        return Future.succeededFuture(monitorConfig);
     }
 
     /**
