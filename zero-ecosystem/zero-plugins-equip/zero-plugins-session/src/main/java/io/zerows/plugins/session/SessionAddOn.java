@@ -1,4 +1,4 @@
-package io.zerows.cosmic.plugins.session;
+package io.zerows.plugins.session;
 
 import io.vertx.core.Vertx;
 import io.zerows.sdk.plugins.AddOnBase;
@@ -11,11 +11,11 @@ import java.util.Objects;
  */
 class SessionAddOn extends AddOnBase<SessionClient> {
 
+    private static SessionAddOn INSTANCE;
+
     private SessionAddOn(final Vertx vertx, final HConfig config) {
         super(vertx, config);
     }
-
-    private static SessionAddOn INSTANCE;
 
     static SessionAddOn of(final Vertx vertx, final HConfig config) {
         if (Objects.isNull(INSTANCE)) {

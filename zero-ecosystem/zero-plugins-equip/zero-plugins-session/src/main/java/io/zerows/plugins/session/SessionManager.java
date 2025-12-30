@@ -1,4 +1,4 @@
-package io.zerows.cosmic.plugins.session;
+package io.zerows.plugins.session;
 
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Vertx;

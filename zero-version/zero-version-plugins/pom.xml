@@ -39,12 +39,17 @@
                 <artifactId>zero-plugins-excel</artifactId>
                 <version>${zero.version}</version>
             </dependency>
-            <!-- ================= 静态插件 ================== -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-plugins-session</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-plugins-sms</artifactId>
                 <version>${zero.version}</version>
             </dependency>
+            <!-- ================= 静态插件 ================== -->
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-plugins-integration-wechat</artifactId>
@@ -86,6 +91,31 @@
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-plugins-security-oauth2</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-plugins-security-jwt</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-plugins-security-ldap</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-plugins-security-otp</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-plugins-security-htdigest</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-plugins-security-htpasswd</artifactId>
                 <version>${zero.version}</version>
             </dependency>
         </dependencies>

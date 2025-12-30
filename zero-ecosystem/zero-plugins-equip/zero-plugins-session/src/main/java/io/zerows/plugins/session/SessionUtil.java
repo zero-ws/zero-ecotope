@@ -1,4 +1,4 @@
-package io.zerows.cosmic.plugins.session;
+package io.zerows.plugins.session;
 
 import io.r2mo.SourceReflect;
 import io.r2mo.function.Fn;
@@ -7,7 +7,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.sstore.ClusteredSessionStore;
 import io.vertx.ext.web.sstore.LocalSessionStore;
 import io.vertx.ext.web.sstore.SessionStore;
-import io.zerows.cosmic.plugins.session.exception._20005Exception500SessionClientInit;
+import io.zerows.plugins.session.exception._20005Exception500SessionClientInit;
 import io.zerows.epoch.basicore.YmSpec;
 import io.zerows.epoch.configuration.NodeStore;
 import io.zerows.specification.configuration.HConfig;
@@ -87,7 +87,7 @@ class SessionUtil {
 
             final AtomicBoolean vertxLocked = LOCKED_MAP.computeIfAbsent(vertx.hashCode(), k -> new AtomicBoolean(true));
             if (vertxLocked.getAndSet(Boolean.FALSE)) {
-                log.info("[ ZERO ] 会话存储组件为 {}", storeComponent);
+                log.info("[ ZERO ] 会话存储组件 {}", storeComponent);
             }
 
             // 默认场景下这个构造必须是带有 Vertx 参数的

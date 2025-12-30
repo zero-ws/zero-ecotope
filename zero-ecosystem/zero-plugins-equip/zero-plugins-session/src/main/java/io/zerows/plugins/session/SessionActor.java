@@ -1,4 +1,4 @@
-package io.zerows.cosmic.plugins.session;
+package io.zerows.plugins.session;
 
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;

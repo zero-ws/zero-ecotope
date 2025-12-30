@@ -38,5 +38,6 @@
         <module>zero-plugins-security-ldap</module>
         <module>zero-plugins-security-htpasswd</module>
         <module>zero-plugins-security-jwt</module>
+        <module>zero-plugins-session</module>
     </modules>
 </project>

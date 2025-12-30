@@ -1,4 +1,4 @@
-package io.zerows.cosmic.plugins.session;
+package io.zerows.plugins.session;
 
 import io.zerows.sdk.plugins.AddOn;
 import io.zerows.sdk.plugins.AddOnProvider;

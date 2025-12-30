@@ -1,4 +1,4 @@
-package io.zerows.cosmic.plugins.session.exception;
+package io.zerows.plugins.session.exception;
 
 import io.r2mo.vertx.common.exception.VertxBootException;
 
