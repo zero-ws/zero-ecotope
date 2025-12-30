@@ -61,6 +61,8 @@ import java.util.Set;
 @SuppressWarnings("all")
 public abstract class MDModuleActor extends ExAbstractHActor {
 
+    private static final Cc<Class<?>, MDModuleManager> CC_MANAGER = Cc.open();
+
     /**
      * {@link MDConfiguration} 的核心数据结构和用途
      * 基础配置：configuration.json，路径位于 plugins/{mid}/configuration.json
@@ -184,8 +186,6 @@ public abstract class MDModuleActor extends ExAbstractHActor {
         });
     }
 
-    private static final Cc<Class<?>, MDModuleManager> CC_MANAGER = Cc.open();
-
     // ----- 子类附加实现的方法
     protected Future<Boolean> startAsync(final HAmbient ambient, final Vertx vertxRef) {
         // 子类实现，若有特殊模块信息则覆盖此方法
@@ -238,7 +238,7 @@ public abstract class MDModuleActor extends ExAbstractHActor {
 
         final Object instance = Ut.deserialize(configurationJ, clsConfig);
         if (Objects.nonNull(instance)) {
-            this.log().info("{} ⚙️ `{}` JSON 业务配置：{}", KeConstant.K_PREFIX_BOOT, this.MID(), instance.getClass());
+            this.log().info("{} --> ⚙️ JSON / `{}` 业务配置：{}", KeConstant.K_PREFIX_BOOT, this.MID(), instance.getClass());
             manager.config(instance);
         }
     }
@@ -256,7 +256,7 @@ public abstract class MDModuleActor extends ExAbstractHActor {
         final JsonObject options = config.options();
         final Object instance = Ut.deserialize(options, clsMDC);
         if (Objects.nonNull(instance)) {
-            this.log().info("{} ⚙️ `{}` YAML 核心配置：{}", KeConstant.K_PREFIX_BOOT, this.MID(), instance.getClass());
+            this.log().info("{} --> ⚙️ YAML / `{}` 核心配置：{}", KeConstant.K_PREFIX_BOOT, this.MID(), instance.getClass());
             manager.setting(instance);
         }
     }

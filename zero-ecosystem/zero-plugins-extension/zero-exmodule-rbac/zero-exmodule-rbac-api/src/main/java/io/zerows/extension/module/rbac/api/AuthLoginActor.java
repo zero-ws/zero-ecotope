@@ -27,7 +27,7 @@ import java.util.Objects;
  * Auth Actor
  */
 @Queue
-public class LoginActor {
+public class AuthLoginActor {
 
     private static final ScConfig CONFIG = MDRBACManager.of().config();
 
@@ -37,7 +37,7 @@ public class LoginActor {
     @Inject
     private transient ImageStub imageStub;
 
-    @Address(Addr.Auth.LOGIN)
+    @Address(AddrAuth.LOGIN)
     public Future<JsonObject> login(final JsonObject user, final XHeader header) {
         final JsonObject params = user.copy();
         final String imageCode = Ut.valueString(params, ScAuthKey.CAPTCHA_IMAGE);

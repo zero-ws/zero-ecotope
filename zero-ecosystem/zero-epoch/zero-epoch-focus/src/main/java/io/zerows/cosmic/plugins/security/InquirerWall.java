@@ -136,7 +136,7 @@ public class InquirerWall implements Inquirer<Set<SecurityMeta>> {
             return wall.type();
         }
 
-        final JsonObject configJ = config.options(KName.CONFIG);
+        final JsonObject configJ = Ut.valueJObject(config.options(KName.CONFIG));
         final String configKey = wall.value();
         if (!configJ.containsKey(configKey)) {
             log.warn("[ ZERO ] ( Secure ) Wall `{}` ( path = {} ) 未找到安全配置 key `{}`，您的自定义配置不会生效！",

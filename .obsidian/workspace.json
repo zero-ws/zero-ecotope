@@ -10,7 +10,7 @@
           {
             "id": "c0c0dbe8f9e93474",
             "type": "tabs",
-            "dimension": 48.71794871794871,
+            "dimension": 18.822843822843822,
             "children": [
               {
                 "id": "d28afe1c52c0d3b0",
@@ -31,7 +31,7 @@
           {
             "id": "c6345880e843db09",
             "type": "tabs",
-            "dimension": 51.28205128205129,
+            "dimension": 81.17715617715618,
             "children": [
               {
                 "id": "1c3dac8141adf6bc",
@@ -229,17 +229,17 @@
   },
   "active": "1c3dac8141adf6bc",
   "lastOpenFiles": [
-    "zero-ecosystem/zero-boot/zero-boot-inst/zero-boot-inst-menu/target/lib/r2mo-vertx-jooq-shared-1.0.43.jar",
-    "zero-ecosystem/zero-boot/zero-boot-inst/zero-boot-inst-load/target/lib/r2mo-vertx-jooq-shared-1.0.43.jar",
-    "zero-ecosystem/zero-boot/zero-boot-inst/zero-boot-inst-menu/target/lib/r2mo-vertx-jooq-jdbc-1.0.43.jar",
-    "zero-ecosystem/zero-boot/zero-boot-inst/zero-boot-inst-load/target/lib/r2mo-vertx-jooq-jdbc-1.0.43.jar",
-    "zero-ecosystem/zero-boot/zero-boot-inst/zero-boot-inst-menu/target/lib/r2mo-vertx-jooq-generate-1.0.43.jar",
-    "zero-ecosystem/zero-boot/zero-boot-inst/zero-boot-inst-load/target/lib/r2mo-vertx-jooq-generate-1.0.43.jar",
-    "zero-ecosystem/zero-boot/zero-boot-inst/zero-boot-inst-menu/target/lib/r2mo-vertx-jooq-1.0.43.jar",
-    "zero-ecosystem/zero-boot/zero-boot-inst/zero-boot-inst-load/target/lib/r2mo-vertx-jooq-1.0.43.jar",
-    "zero-ecosystem/zero-boot/zero-boot-inst/zero-boot-inst-load/target/lib/r2mo-jaas-1.0.43.jar",
-    "zero-ecosystem/zero-boot/zero-boot-inst/zero-boot-inst-load/target/lib/r2mo-jce-1.0.43.jar",
-    "zero-ecosystem/zero-boot/zero-boot-inst/zero-boot-inst-menu/target/lib/r2mo-jaas-1.0.43.jar",
+    "zero-ecosystem/zero-plugins-equip/zero-plugins-security/target/classes/io/zerows/plugins/security/SecurityManager.class",
+    "zero-ecosystem/zero-plugins-equip/zero-plugins-security/target/classes/io/zerows/plugins/security/metadata/YmSecurity.class",
+    "zero-ecosystem/zero-plugins-equip/zero-plugins-security/target/classes/io/zerows/plugins/security/metadata/YmSecurity$Limit.class",
+    "zero-ecosystem/zero-plugins-equip/zero-plugins-security/target/classes/io/zerows/plugins/security/metadata/YmSecurity$Scope.class",
+    "zero-ecosystem/zero-plugins-equip/zero-plugins-security/target/classes/io/zerows/plugins/security/metadata/YmSecuritySpec.class",
+    "zero-ecosystem/zero-plugins-equip/zero-plugins-security/target/classes/io/zerows/plugins/security/metadata/YmSecuritySpec$jwt.class",
+    "zero-ecosystem/zero-plugins-equip/zero-plugins-security/target/classes/io/zerows/plugins/security/metadata/YmSecuritySpec$jwt$options.class",
+    "zero-ecosystem/zero-plugins-equip/zero-plugins-security/target/classes/io/zerows/plugins/security/metadata/YmSecuritySpec$jwt$options$keyStore.class",
+    "zero-ecosystem/zero-plugins-equip/zero-plugins-security/target/classes/io/zerows/plugins/security/metadata/YmSecuritySpec$jwt$options$jwtOptions.class",
+    "zero-ecosystem/zero-plugins-equip/zero-plugins-security/target/classes/io/zerows/plugins/security/metadata/YmSecuritySpec$htdigest.class",
+    "zero-ecosystem/zero-plugins-equip/zero-plugins-security/target/classes/io/zerows/plugins/security/metadata/YmSecuritySpec$htdigest$options.class",
     "README.md",
     "docs/graph/api/public/app_name_$name.md",
     "docs/graph/design/App应用结构.md",

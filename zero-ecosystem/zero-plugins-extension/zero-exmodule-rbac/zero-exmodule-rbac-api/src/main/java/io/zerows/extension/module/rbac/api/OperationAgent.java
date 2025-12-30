@@ -15,7 +15,7 @@ import jakarta.ws.rs.extension.BodyParam;
  */
 @EndPoint
 @Path("/api")
-public interface ActionAgent {
+public interface OperationAgent {
     /*
      * Step 2
      * RESTful Api stored in SEC_ACTION for all authorized, instead of
