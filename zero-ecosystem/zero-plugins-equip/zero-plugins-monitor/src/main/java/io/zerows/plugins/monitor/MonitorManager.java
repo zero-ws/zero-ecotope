@@ -3,7 +3,7 @@ package io.zerows.plugins.monitor;
 import io.vertx.core.Vertx;
 import io.zerows.epoch.annotations.Monitor;
 import io.zerows.epoch.management.OCacheClass;
-import io.zerows.plugins.monitor.client.QuotaData;
+import io.zerows.plugins.monitor.client.QuotaMetric;
 import io.zerows.plugins.monitor.metadata.MonitorConstant;
 import io.zerows.plugins.monitor.metadata.YmMonitor;
 import io.zerows.support.Ut;
@@ -62,7 +62,7 @@ class MonitorManager {
     private Set<Class<?>> classOfMonitor() {
         final Set<Class<?>> clazzSet = OCacheClass.entireValue();
         return clazzSet.stream()
-            .filter(each -> Ut.isImplement(each, QuotaData.class))
+            .filter(each -> Ut.isImplement(each, QuotaMetric.class))
             .filter(each -> each.isAnnotationPresent(Monitor.class))
             .collect(Collectors.toSet());
     }

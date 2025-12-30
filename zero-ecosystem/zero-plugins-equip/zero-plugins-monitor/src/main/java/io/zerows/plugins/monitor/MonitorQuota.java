@@ -8,7 +8,7 @@ import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.vertx.micrometer.backends.BackendRegistries;
 import io.zerows.epoch.constant.KName;
-import io.zerows.plugins.monitor.client.QuotaData;
+import io.zerows.plugins.monitor.client.QuotaMetric;
 import io.zerows.plugins.monitor.metadata.MonitorConstant;
 import io.zerows.plugins.monitor.metadata.YmMonitor;
 import io.zerows.support.fn.Fx;
@@ -20,12 +20,12 @@ import java.util.Objects;
 import java.util.concurrent.ConcurrentMap;
 
 /**
- * 客户端连接器，先提取所有的 {@link QuotaData} 组件，数量结构如下
+ * 客户端连接器，先提取所有的 {@link QuotaMetric} 组件，数量结构如下
  * <pre>
  *     1. {@link Vertx}-01 --> {@link MonitorQuota}-01
  *           线程池
- *           {@link YmMonitor.Client}-01 --> {@link QuotaData}-01 x (Thread)
- *           {@link YmMonitor.Client}-02 --> {@link QuotaData}-02 x (Thread)
+ *           {@link YmMonitor.Client}-01 --> {@link QuotaMetric}-01 x (Thread)
+ *           {@link YmMonitor.Client}-02 --> {@link QuotaMetric}-02 x (Thread)
  *        {@link Vertx}-02 --> {@link MonitorQuota}-02
  *     2. 消费过程中，直接通过 Vertx.hashCode() 定位到对应的 QuotaMonitor 实例
  *     3. 如果出现了引用相同 {@link YmMonitor.Client} 的角色，则直接使用角色配置添加到新的监控表中
@@ -41,7 +41,7 @@ class MonitorQuota {
     private final Vertx vertxRef;
     private final MeterRegistry meterRegistry = BackendRegistries.getDefaultNow();
 
-    private final Cc<String, QuotaData> quotaMap = Cc.openThread();
+    private final Cc<String, QuotaMetric> quotaMap = Cc.openThread();
 
     private MonitorQuota(final Vertx vertxRef) {
         this.vertxRef = vertxRef;
@@ -117,7 +117,7 @@ class MonitorQuota {
 
     private Future<Boolean> startQuota(final YmMonitor.Client client, final YmMonitor.Role role) {
         final Class<?> clientCls = CLIENTS.get(client.getName());
-        final QuotaData quotaRef = this.quotaMap.pick(() -> SourceReflect.instance(clientCls), clientCls.getName());
+        final QuotaMetric quotaRef = this.quotaMap.pick(() -> SourceReflect.instance(clientCls), clientCls.getName());
         if (Objects.isNull(this.meterRegistry)) {
             log.warn("{} MeterRegistry 未初始化，跳过关键流程！", MonitorConstant.K_PREFIX_MOC);
             return Future.succeededFuture(Boolean.TRUE);

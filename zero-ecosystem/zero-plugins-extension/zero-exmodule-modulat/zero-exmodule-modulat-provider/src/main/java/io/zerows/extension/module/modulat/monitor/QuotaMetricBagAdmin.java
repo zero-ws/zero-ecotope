@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Monitor;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.module.modulat.component.Ark;
-import io.zerows.plugins.monitor.client.QuotaDataBase;
+import io.zerows.plugins.monitor.client.QuotaMetricBase;
 import io.zerows.plugins.monitor.metadata.MetricBase;
 import io.zerows.plugins.monitor.metadata.MetricConfig;
 import io.zerows.support.Ut;
@@ -19,7 +19,7 @@ import java.util.Objects;
  * @author lang : 2025-12-29
  */
 @Monitor(MOM.BAG_ADMIN)
-public class MNBagAdminQuotaData extends QuotaDataBase {
+public class QuotaMetricBagAdmin extends QuotaMetricBase {
     @Override
     protected Future<List<MetricBase>> metricFrom(final JsonObject config, final Vertx vertxRef) {
         final Supervisor<String, JsonObject> bagAdmin = Ark.momBagAdmin();

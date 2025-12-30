@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 /**
  * @author lang : 2025-12-29
  */
-public abstract class QuotaDataBase implements QuotaData {
+public abstract class QuotaMetricBase implements QuotaMetric {
 
     private MultiGauge multiGauge;
 

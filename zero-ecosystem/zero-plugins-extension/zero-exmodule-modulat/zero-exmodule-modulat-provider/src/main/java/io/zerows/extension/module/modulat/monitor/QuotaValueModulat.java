@@ -8,7 +8,7 @@ import java.util.Set;
 /**
  * @author lang : 2025-12-29
  */
-public class MNValueModulat extends QuotaValueBase {
+public class QuotaValueModulat extends QuotaValueBase {
     @Override
     protected Set<String> ofClientName() {
         return Set.of(

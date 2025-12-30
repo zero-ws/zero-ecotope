@@ -11,7 +11,7 @@ import io.zerows.extension.module.modulat.common.BkConstant;
 import io.zerows.extension.module.modulat.domain.tables.daos.BBagDao;
 import io.zerows.extension.module.modulat.domain.tables.pojos.BBag;
 import io.zerows.platform.enums.modeling.EmModel;
-import io.zerows.plugins.monitor.client.QuotaData;
+import io.zerows.plugins.monitor.client.QuotaMetric;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -111,7 +111,7 @@ class ArkConfigure extends ArkBase {
         });
     }
 
-    static class Mom implements QuotaData.Supervisor<String, JsonObject> {
+    static class Mom implements QuotaMetric.Supervisor<String, JsonObject> {
 
         @Override
         public Set<String> keys() {

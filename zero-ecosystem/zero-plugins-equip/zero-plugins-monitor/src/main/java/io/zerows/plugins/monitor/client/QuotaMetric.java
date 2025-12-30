@@ -25,7 +25,7 @@ import java.util.function.Supplier;
  *
  * @author lang : 2025-12-29
  */
-public interface QuotaData {
+public interface QuotaMetric {
 
     Cc<String, Supervisor<?, ?>> CC_SUPERVISOR = Cc.openThread();
 

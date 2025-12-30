@@ -5,7 +5,7 @@ import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Monitor;
 import io.zerows.extension.module.ambient.management.OCacheArk;
-import io.zerows.plugins.monitor.client.QuotaDataBase;
+import io.zerows.plugins.monitor.client.QuotaMetricBase;
 import io.zerows.plugins.monitor.metadata.MetricBase;
 import io.zerows.plugins.monitor.metadata.MetricConfig;
 import io.zerows.specification.app.HArk;
@@ -17,7 +17,7 @@ import java.util.List;
  * @author lang : 2025-12-29
  */
 @Monitor(MOM.APP)
-public class MNAppQuotaData extends QuotaDataBase {
+public class QuotaMetricApp extends QuotaMetricBase {
     @Override
     protected Future<List<MetricBase>> metricFrom(final JsonObject config, final Vertx vertxRef) {
         final OCacheArk arkStore = OCacheArk.of();
