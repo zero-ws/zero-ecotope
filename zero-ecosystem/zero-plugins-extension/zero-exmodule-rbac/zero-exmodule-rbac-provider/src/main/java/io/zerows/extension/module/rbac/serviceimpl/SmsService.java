@@ -16,7 +16,7 @@ import io.zerows.extension.module.rbac.servicespec.ImageStub;
 import io.zerows.extension.module.rbac.servicespec.SmsStub;
 import io.zerows.extension.module.rbac.servicespec.TokenStub;
 import io.zerows.platform.constant.VValue;
-import io.zerows.plugins.integration.sms.SmsActor;
+import io.zerows.plugins.sms.SmsActor;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import jakarta.inject.Inject;
