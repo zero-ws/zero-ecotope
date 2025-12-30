@@ -25,19 +25,19 @@ public class RapidUser<T> extends AbstractRapid<String, T> {
     @SuppressWarnings("unchecked")
     public Future<T> cached(final String key, final Supplier<Future<T>> executor) {
         Objects.requireNonNull(key);
-        return this.pool.<String, JsonObject>get(this.rootKey).compose(cached -> {
+        return this.pool().<String, JsonObject>get(this.rootKey).compose(cached -> {
             if (Objects.isNull(cached)) {
                 cached = new JsonObject();
             }
             if (cached.containsKey(key)) {
                 log.info("[ ZERO ] ( Pool ) \u001b[0;37mK = `{}`, R = `{}`, P = `{}`\u001b[m",
-                    key, this.rootKey, this.pool.name());
+                    key, this.rootKey, this.pool().name());
                 return Ut.future((T) cached.getValue(key));
             } else {
                 final JsonObject stored = cached;
                 return executor.get().compose(item -> {
                     stored.put(key, item);
-                    return this.pool.put(this.rootKey, stored).compose(nil -> Ut.future(item));
+                    return this.pool().put(this.rootKey, stored).compose(nil -> Ut.future(item));
                 });
             }
         });

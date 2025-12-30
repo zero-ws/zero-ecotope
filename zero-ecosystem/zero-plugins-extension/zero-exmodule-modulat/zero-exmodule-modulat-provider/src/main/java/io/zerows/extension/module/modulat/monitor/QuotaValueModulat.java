@@ -19,7 +19,7 @@ public class QuotaValueModulat extends QuotaValueBase {
     @Override
     protected Map<String, String> ofRoleName() {
         return Map.of(
-            "modulat.BAG-ADMIN", MOM.BAG_ADMIN
+            MOM.BAG_ADMIN_ID, MOM.BAG_ADMIN
         );
     }
 }

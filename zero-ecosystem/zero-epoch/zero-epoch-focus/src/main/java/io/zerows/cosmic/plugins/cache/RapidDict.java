@@ -2,8 +2,8 @@ package io.zerows.cosmic.plugins.cache;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
-import io.zerows.support.fn.Fx;
 import io.zerows.support.Ut;
+import io.zerows.support.fn.Fx;
 
 import java.util.Objects;
 import java.util.Set;
@@ -24,7 +24,7 @@ class RapidDict extends AbstractRapid<Set<String>, ConcurrentMap<String, JsonArr
         final Set<String> keys,
         final Function<Set<String>, Future<ConcurrentMap<String, JsonArray>>> executor) {
         Objects.requireNonNull(keys);
-        return this.pool.<String, JsonArray>get(keys).compose(dataMap -> {
+        return this.pool().<String, JsonArray>get(keys).compose(dataMap -> {
             final Set<String> keySet = Ut.elementDiff(keys, dataMap.keySet());
             final ConcurrentMap<String, JsonArray> cached = new ConcurrentHashMap<>(dataMap);
             if (keySet.isEmpty()) {
@@ -33,7 +33,7 @@ class RapidDict extends AbstractRapid<Set<String>, ConcurrentMap<String, JsonArr
                 return executor.apply(keySet).compose(queried -> {
                     final ConcurrentMap<String, Future<JsonArray>> futureMap = new ConcurrentHashMap<>();
                     queried.forEach((key, data) ->
-                        futureMap.put(key, this.pool.put(key, data, this.expired)
+                        futureMap.put(key, this.pool().put(key, data, this.expired)
                             .compose(kv -> Ut.future(kv.value()))));
                     return Fx.combineM(futureMap);
                 }).compose(newMap -> {

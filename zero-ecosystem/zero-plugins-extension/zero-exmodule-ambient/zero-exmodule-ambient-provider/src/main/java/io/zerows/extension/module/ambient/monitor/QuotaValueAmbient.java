@@ -19,7 +19,7 @@ public class QuotaValueAmbient extends QuotaValueBase {
     @Override
     protected Map<String, String> ofRoleName() {
         return Map.of(
-            "ambient.APP", MOM.APP
+            MOM.APP_ID, MOM.APP
         );
     }
 }
