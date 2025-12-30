@@ -40,56 +40,25 @@ class IoPath {
             return append;
         }
 
-        // 3. 去掉 base 结尾的斜杠
+        // 3. 智能处理重叠部分 (如 base="usr/local", append="local/bin")
+        // 这里保持您之前的逻辑，但去掉 base 结尾的斜杠
         final String cleanBase = base.endsWith("/") ? base.substring(0, base.length() - 1) : base;
 
-        // 4. 智能去重：检测并移除真正的路径重叠
-        // 例如：base="usr/local/bin", append="local/bin/test" 
-        //      找到最长重叠 "local/bin"，结果为 "usr/local/bin/test"
-        // 例如：base="a/rule.menu", append="rule.menu/config"
-        //      只有一段重叠 "rule.menu"，但这是合法的同名目录，需要保留
         final String[] baseParts = cleanBase.split("/");
-        final String[] appendParts = append.split("/");
-        
-        // 从 base 的末尾和 append 的开头找最长连续匹配段数
-        int maxOverlap = getMaxOverlap(baseParts, appendParts);
-
-        // 只有当重叠段数 >= 2 时才去重，避免误判单个同名目录
-        // 例如：base="a/b/c", append="b/c/d" 重叠2段 "b/c" → 去重 ✓
-        // 例如：base="a/rule.menu", append="rule.menu/c" 重叠1段 → 不去重 ✓
-        if (maxOverlap >= 2) {
-            final StringBuilder newAppend = new StringBuilder();
-            for (int i = maxOverlap; i < appendParts.length; i++) {
-                if (!newAppend.isEmpty()) {
-                    newAppend.append("/");
-                }
-                newAppend.append(appendParts[i]);
+        if (baseParts.length > 0) {
+            final String lastSegment = baseParts[baseParts.length - 1];
+            if (append.startsWith(lastSegment + "/")) {
+                append = append.substring(lastSegment.length() + 1);
+            } else if (append.equals(lastSegment)) {
+                append = "";
             }
-            append = newAppend.toString();
         }
 
-        // 5. 最终拼接
+        // 4. 最终拼接：不再强制在最前面加 "/"
         if (append.isEmpty()) {
             return cleanBase;
         }
         return cleanBase + "/" + append;
-    }
-
-    private static int getMaxOverlap(String[] baseParts, String[] appendParts) {
-        int maxOverlap = 0;
-        for (int overlapLen = 1; overlapLen <= Math.min(baseParts.length, appendParts.length); overlapLen++) {
-            boolean allMatch = true;
-            for (int i = 0; i < overlapLen; i++) {
-                if (!baseParts[baseParts.length - overlapLen + i].equals(appendParts[i])) {
-                    allMatch = false;
-                    break;
-                }
-            }
-            if (allMatch) {
-                maxOverlap = overlapLen;
-            }
-        }
-        return maxOverlap;
     }
 
 
