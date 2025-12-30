@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>zero-plugins-security-otp</artifactId>
-    <name>Zero::Plugins::🧩 - Security OTP</name>
+    <name>Zero::Plugins::🧩 - Security / 🔥 OTP</name>
     <dependencies>
         <dependency>
             <groupId>io.zerows</groupId>

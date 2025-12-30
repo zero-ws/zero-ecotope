@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>zero-plugins-security-htpasswd</artifactId>
-    <name>Zero::Plugins::🧩 - Security HtPasswd</name>
+    <name>Zero::Plugins::🧩 - Security / 🔥 HtPasswd</name>
     <dependencies>
         <dependency>
             <groupId>io.zerows</groupId>

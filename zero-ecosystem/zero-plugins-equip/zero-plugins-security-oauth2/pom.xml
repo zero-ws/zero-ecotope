@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>zero-plugins-security-oauth2</artifactId>
-    <name>Zero::Plugins::🧩 - Security OAuth2</name>
+    <name>Zero::Plugins::🧩 - Security / 🔥 OAuth2</name>
     <dependencies>
         <dependency>
             <groupId>io.zerows</groupId>

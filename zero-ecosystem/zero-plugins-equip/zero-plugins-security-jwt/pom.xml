@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>zero-plugins-security-jwt</artifactId>
-    <name>Zero::Plugins::🧩 - Security Jwt</name>
+    <name>Zero::Plugins::🧩 - Security / 🔥 Jwt</name>
     <dependencies>
         <dependency>
             <groupId>io.zerows</groupId>

@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>zero-plugins-security-ldap</artifactId>
-    <name>Zero::Plugins::🧩 - Security LDAP</name>
+    <name>Zero::Plugins::🧩 - Security / 🔥 LDAP</name>
     <dependencies>
         <dependency>
             <groupId>io.zerows</groupId>

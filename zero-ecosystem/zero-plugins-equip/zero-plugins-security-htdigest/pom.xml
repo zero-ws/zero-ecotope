@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>zero-plugins-security-htdigest</artifactId>
-    <name>Zero::Plugins::🧩 - Security HtDigest</name>
+    <name>Zero::Plugins::🧩 - Security / 🔥 HtDigest</name>
     <dependencies>
         <dependency>
             <groupId>io.zerows</groupId>
