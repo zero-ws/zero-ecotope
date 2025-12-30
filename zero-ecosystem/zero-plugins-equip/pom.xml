@@ -13,21 +13,19 @@
     <packaging>pom</packaging>
     <name>(POM) 📚️ - Zero::Plugins</name>
     <modules>
+        <!-- 旧版 -->
+        <module>zero-plugins-sms</module>
+        <module>zero-plugins-elasticsearch</module>
+        <module>zero-plugins-store-neo4j</module>
+        <module>zero-plugins-integration-wechat</module>
+
+
         <module>zero-plugins-trash</module>
         <module>zero-plugins-flyway</module>
         <module>zero-plugins-swagger</module>
-        <module>zero-plugins-sms</module>
-        <module>zero-plugins-integration-wechat</module>
         <module>zero-plugins-excel</module>
-        <module>zero-plugins-elasticsearch</module>
-        <module>zero-plugins-store-neo4j</module>
         <module>zero-plugins-websocket</module>
-
-
-        <!-- Monitor -->
-        <module>zero-plugins-monitor</module>
-        <module>zero-plugins-monitor-hawtio</module>
-        <module>zero-plugins-monitor-prometheus</module>
+        <module>zero-plugins-redis</module>
 
 
         <!-- Security -->
@@ -39,5 +37,11 @@
         <module>zero-plugins-security-htpasswd</module>
         <module>zero-plugins-security-jwt</module>
         <module>zero-plugins-session</module>
+
+
+        <!-- Monitor -->
+        <module>zero-plugins-monitor</module>
+        <module>zero-plugins-monitor-hawtio</module>
+        <module>zero-plugins-monitor-prometheus</module>
     </modules>
 </project>
