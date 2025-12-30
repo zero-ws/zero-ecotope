@@ -1,4 +1,4 @@
-package io.zerows.plugins.security;
+package io.zerows.plugins.security.jwt;
 
 import io.r2mo.function.Fn;
 import io.r2mo.typed.cc.Cc;
@@ -12,6 +12,7 @@ import io.zerows.cortex.management.StoreVertx;
 import io.zerows.cosmic.plugins.security.exception._40079Exception500SecurityType;
 import io.zerows.epoch.metadata.security.SecurityConfig;
 import io.zerows.platform.enums.SecurityType;
+import io.zerows.plugins.security.SecurityActor;
 import io.zerows.sdk.security.Lee;
 import io.zerows.support.Ut;
 
@@ -28,9 +29,8 @@ import java.util.Objects;
  *
  * @author lang : 2025-10-29
  */
-class LeeJwt implements Lee {
-    private static final SecurityManager MANAGER = SecurityManager.of();
-    private static final SecurityConfig CONFIG = MANAGER.configJwt();
+public class LeeJwt implements Lee {
+    private static final SecurityConfig CONFIG = SecurityActor.configJwt();
     // 防止 JWT 的高频解码（速度很慢）
     private static final Cc<String, JsonObject> STORE_TOKEN = Cc.open();
     private static JWTAuth PROVIDER;

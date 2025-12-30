@@ -2,24 +2,24 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.zerows</groupId>
         <artifactId>zero-plugins-equip</artifactId>
         <version>1.0.0</version>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>zero-plugins-security</artifactId>
-    <name>Zero::Plugins::🧩 - Security</name>
+    <artifactId>zero-plugins-security-otp</artifactId>
+    <name>Zero::Plugins::🧩 - Security OTP</name>
     <dependencies>
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-epoch-execution</artifactId>
+            <artifactId>zero-plugins-security</artifactId>
         </dependency>
-        <!-- ABAC ( 未来版本支持 ) -->
+        <!-- OTP -->
         <dependency>
             <groupId>io.vertx</groupId>
-            <artifactId>vertx-auth-abac</artifactId>
+            <artifactId>vertx-auth-otp</artifactId>
         </dependency>
     </dependencies>
 </project>

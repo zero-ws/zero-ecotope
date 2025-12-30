@@ -26,11 +26,6 @@
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-plugins-security</artifactId>
-                <version>${zero.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.zerows</groupId>
                 <artifactId>zero-plugins-websocket</artifactId>
                 <version>${zero.version}</version>
             </dependency>
@@ -55,11 +50,6 @@
                 <artifactId>zero-plugins-integration-wechat</artifactId>
                 <version>${zero.version}</version>
             </dependency>
-            <!--            <dependency>-->
-            <!--                <groupId>io.zerows</groupId>-->
-            <!--                <artifactId>zero-plugins-integration-feign</artifactId>-->
-            <!--                <version>${zero.version}</version>-->
-            <!--            </dependency>-->
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-plugins-elasticsearch</artifactId>
@@ -70,9 +60,32 @@
                 <artifactId>zero-plugins-store-neo4j</artifactId>
                 <version>${zero.version}</version>
             </dependency>
+            <!-- ================= 基础 / 实现 ================== -->
+            <!-- Monitor -->
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-plugins-monitor</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-plugins-monitor-hawtio</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-plugins-monitor-prometheus</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <!-- Security -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-plugins-security</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-plugins-security-oauth2</artifactId>
                 <version>${zero.version}</version>
             </dependency>
         </dependencies>
