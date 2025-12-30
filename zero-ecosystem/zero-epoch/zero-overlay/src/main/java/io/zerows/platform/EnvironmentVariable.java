@@ -66,6 +66,8 @@ public interface EnvironmentVariable {
     String Z_TENANT = "Z_TENANT";
     String Z_SIGMA = "Z_SIGMA";
     String Z_LANG = "Z_LANG";
+    String APP_ID = "APP_ID";
+    String Z_HOTEL = "Z_HOTEL";
 
     /*
      * Only Office 文档服务器专用
@@ -161,7 +163,7 @@ public interface EnvironmentVariable {
         R2MO_NACOS_ADDR, R2MO_NACOS_USERNAME, R2MO_NACOS_PASSWORD,
         R2MO_REDIS_HOST, R2MO_REDIS_PORT, R2MO_REDIS_DATABASE, R2MO_REDIS_PASSWORD,
         // 应用一阶变量
-        Z_NS, Z_APP, Z_TENANT, Z_LANG, Z_SIGMA,
+        Z_NS, Z_APP, Z_TENANT, Z_LANG, Z_SIGMA,APP_ID,Z_HOTEL,
         // 文档服务器变量
         Z_DOC_SECRET, Z_DOC_HOST, Z_DOC_PORT,
         // 集成存储变量
