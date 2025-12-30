@@ -27,8 +27,6 @@ interface Addr {
 
     interface Auth {
 
-        String LOGIN = Prefix._EVENT + "O-LOGIN";
-
 
         String LOGOUT = Prefix._EVENT + "O-LOGOUT";
 

@@ -11,14 +11,17 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.extension.BodyParam;
 
-/*
- * Login Api
- * 1. Provide username/password to access /oauth/login findRunning client_secret field ( Issue when create )
- * 2. Access /oauth/authorize to findRunning authorization code
- * 3. Access /oauth/token to findRunning token
+/**
+ * 新版基础登录接口定义
+ * <pre>
+ *     1. 基础账号登录
+ *        - POST /auth/login
+ *     2. 启用图片验证码
+ *        - GET /auth/captcha
+ * </pre>
  */
 @EndPoint
-public interface LoginAgent {
+public interface AuthLoginAgent {
 
     /*
      * /oauth/login
@@ -32,7 +35,7 @@ public interface LoginAgent {
      */
     @POST
     @Path("/oauth/login")
-    @Address(Addr.Auth.LOGIN)
+    @Address(AddrAuth.LOGIN)
     JsonObject login(@BodyParam @Codex JsonObject data);
 
     /*

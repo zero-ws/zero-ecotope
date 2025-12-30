@@ -34,12 +34,14 @@ public class YmVertx extends InPreVertx implements Serializable {
     private YmMvc mvc = new YmMvc();
     private ClusterOptions cluster;
     private YmDataSource datasource;
-    private YmSecurity security = new YmSecurity();
     private Data data = new Data();
     private YmSession session;
     @JsonSerialize(using = JsonObjectSerializer.class)
     @JsonDeserialize(using = JsonObjectDeserializer.class)
     private JsonObject shared;
+    @JsonSerialize(using = JsonObjectSerializer.class)
+    @JsonDeserialize(using = JsonObjectDeserializer.class)
+    private JsonObject security;
 
     @JsonIgnore
     @Accessors(fluent = true, chain = true)

@@ -242,9 +242,36 @@ import java.lang.reflect.Method;
  *       database:                                                          # ---> 💻️ R2MO_REDIS_DATABASE, Redis 数据库编号
  *       timeout:                                                           # 3000 连接超时时间（毫秒）
  *       endpoint:                                                          # 自动计算
- *   security:                                                              # {@link YmSecurity}
+ *   security:
  *     wall:                                                                # 安全管控路径 /api
+ *     limit:
+ *       session:
+ *       token:
+ *       timeout:
+ *       types:
+ *       - JWT:4096:30m
+ *     scope:
+ *       app:
+ *       tenant:
+ *     basic:
+ *       realm: "Zero Realm"
+ *     captcha:
+ *       type:
+ *       expiredAt:
+ *       width:
+ *       height:
+ *       textAlpha:
+ *       code:
+ *         type:
+ *         length:
+ *       font:
+ *         name:
+ *         weight:
+ *         size:
  *     jwt:                                                                 # {@link SecurityType#JWT}
+ *       issuer:
+ *       expiredAt:
+ *       refreshAt:
  *       options:                                                           #
  *         jwtOptions:                                                      # 🌷 {@link JWTOptions}
  *           algorithm: HS256                                               # 加密算法
@@ -513,13 +540,12 @@ public interface YmSpec {
             interface deployment {
                 String __ = "deployment";
                 String workerOf = "workerOf";
+                String agentOf = "agentOf";
 
                 interface worker {
                     String __ = "worker";
                     String instances = "instances";
                 }
-
-                String agentOf = "agentOf";
 
                 interface agent {
                     String __ = "agent";
@@ -599,12 +625,52 @@ public interface YmSpec {
             String __ = "security";
             String wall = "wall";
 
+            interface limit {
+                String __ = "limit";
+                String session = "session";
+                String token = "token";
+                String timeout = "timeout";
+                String types = "types";
+            }
+
+            interface scope {
+                String __ = "scope";
+                String app = "app";
+                String tenant = "tenant";
+            }
+
             interface basic {
                 String __ = "basic";
 
                 interface options {
                     String __ = "options";
                     String realm = "realm";
+                }
+            }
+
+            interface captcha {
+                String __ = "captcha";
+
+                interface code {
+                    String __ = "code";
+                    String type = "type";
+                    String length = "length";
+                }
+
+                interface font {
+                    String __ = "font";
+                    String name = "name";
+                    String weight = "weight";
+                    String size = "size";
+                }
+
+                interface options {
+                    String __ = "options";
+                    String type = "type";
+                    String expiredAt = "expiredAt";
+                    String width = "width";
+                    String height = "height";
+                    String textAlpha = "textAlpha";
                 }
             }
 

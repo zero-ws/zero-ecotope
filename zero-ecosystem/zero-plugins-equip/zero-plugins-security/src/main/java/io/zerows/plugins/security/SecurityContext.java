@@ -3,7 +3,6 @@ package io.zerows.plugins.security;
 import io.vertx.core.Vertx;
 import io.vertx.ext.auth.authentication.AuthenticationProvider;
 import io.zerows.cosmic.plugins.security.management.ORepositorySecurity;
-import io.zerows.epoch.basicore.YmSecurity;
 import io.zerows.epoch.configuration.NodeStore;
 import io.zerows.epoch.management.ORepository;
 import io.zerows.epoch.metadata.security.SecurityMeta;
@@ -54,7 +53,7 @@ import java.util.Set;
  *                      - type = OAUTH2
  *               wall = /admin/**
  *     2. 非自定义模式 ->
- *            {@link SecurityMeta} 只支持单一 Provider 配置，直接对接 {@link YmSecurity} 中的基础配置
+ *            {@link SecurityMeta} 只支持单一 Provider 配置，直接对接中的基础配置
  * </pre>
  *
  * @author lang : 2025-10-27

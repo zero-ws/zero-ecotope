@@ -13,7 +13,7 @@ import jakarta.inject.Inject;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 @Queue
-public class ActionActor {
+public class OperationActor {
 
     @Inject
     private transient ActionStub actionStub;
