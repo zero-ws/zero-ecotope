@@ -9,17 +9,16 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>zero-plugins-security-ldap</artifactId>
-    <name>Zero::Plugins::🧩 - Security / 🧊 LDAP</name>
+    <artifactId>zero-plugins-security-sms</artifactId>
+    <name>Zero::Plugins::🧩 - Security / 🧊 SMS</name>
     <dependencies>
         <dependency>
             <groupId>io.zerows</groupId>
             <artifactId>zero-plugins-security</artifactId>
         </dependency>
-        <!-- LDAP -->
         <dependency>
-            <groupId>io.vertx</groupId>
-            <artifactId>vertx-auth-ldap</artifactId>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-plugins-sms</artifactId>
         </dependency>
     </dependencies>
 </project>

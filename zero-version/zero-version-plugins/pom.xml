@@ -16,7 +16,17 @@
         <dependencies>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-plugins-trash</artifactId>
+                <artifactId>zero-plugins-elasticsearch</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-plugins-email</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-plugins-excel</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>
@@ -26,17 +36,7 @@
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-plugins-websocket</artifactId>
-                <version>${zero.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.zerows</groupId>
-                <artifactId>zero-plugins-swagger</artifactId>
-                <version>${zero.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.zerows</groupId>
-                <artifactId>zero-plugins-excel</artifactId>
+                <artifactId>zero-plugins-redis</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>
@@ -49,17 +49,27 @@
                 <artifactId>zero-plugins-sms</artifactId>
                 <version>${zero.version}</version>
             </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-plugins-swagger</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-plugins-trash</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-plugins-websocket</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-plugins-weco</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
             <!-- ================= 静态插件 ================== -->
-            <dependency>
-                <groupId>io.zerows</groupId>
-                <artifactId>zero-plugins-integration-wechat</artifactId>
-                <version>${zero.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.zerows</groupId>
-                <artifactId>zero-plugins-elasticsearch</artifactId>
-                <version>${zero.version}</version>
-            </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-plugins-store-neo4j</artifactId>
@@ -90,7 +100,17 @@
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-plugins-security-oauth2</artifactId>
+                <artifactId>zero-plugins-security-email</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-plugins-security-htdigest</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-plugins-security-htpasswd</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>
@@ -105,17 +125,22 @@
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
+                <artifactId>zero-plugins-security-oauth2</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
                 <artifactId>zero-plugins-security-otp</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-plugins-security-htdigest</artifactId>
+                <artifactId>zero-plugins-security-sms</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-plugins-security-htpasswd</artifactId>
+                <artifactId>zero-plugins-security-weco</artifactId>
                 <version>${zero.version}</version>
             </dependency>
         </dependencies>

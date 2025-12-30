@@ -15,6 +15,11 @@
             <groupId>io.zerows</groupId>
             <artifactId>zero-epoch-use</artifactId>
         </dependency>
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>r2mo-xync-sms</artifactId>
+            <version>${r2mo.version}</version>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/com.aliyun/aliyun-java-sdk-core -->
         <dependency>
             <groupId>com.aliyun</groupId>

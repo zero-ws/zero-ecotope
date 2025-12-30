@@ -1,7 +1,6 @@
 package io.zerows.plugins.integration.wechat;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.sdk.plugins.InfixConfig;
 
 import java.io.Serializable;
 
@@ -12,8 +11,6 @@ public class WechatConfig implements Serializable {
 
     static String CONFIG_KEY = "wechat";
 
-    private static final InfixConfig CONFIG = InfixConfig.create(CONFIG_KEY, CONFIG_KEY);
-
     private WechatConfig(final JsonObject config) {
 
     }
@@ -23,6 +20,6 @@ public class WechatConfig implements Serializable {
     }
 
     static WechatConfig create() {
-        return new WechatConfig(CONFIG.getConfig());
+        return null;
     }
 }

@@ -8,12 +8,17 @@
         <version>1.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>zero-plugins-integration-wechat</artifactId>
+    <artifactId>zero-plugins-weco</artifactId>
     <name>Zero::Plugins::🧩 - Integration Wechat</name>
     <dependencies>
         <dependency>
             <groupId>io.zerows</groupId>
             <artifactId>zero-epoch-use</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>r2mo-xync-weco</artifactId>
+            <version>${r2mo.version}</version>
         </dependency>
     </dependencies>
 </project>

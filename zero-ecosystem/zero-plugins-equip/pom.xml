@@ -17,12 +17,13 @@
         <module>zero-plugins-sms</module>
         <module>zero-plugins-elasticsearch</module>
         <module>zero-plugins-store-neo4j</module>
-        <module>zero-plugins-integration-wechat</module>
+        <module>zero-plugins-weco</module>
 
 
         <module>zero-plugins-trash</module>
         <module>zero-plugins-flyway</module>
         <module>zero-plugins-swagger</module>
+        <module>zero-plugins-email</module>
         <module>zero-plugins-excel</module>
         <module>zero-plugins-websocket</module>
         <module>zero-plugins-redis</module>
@@ -43,5 +44,8 @@
         <module>zero-plugins-monitor</module>
         <module>zero-plugins-monitor-hawtio</module>
         <module>zero-plugins-monitor-prometheus</module>
+        <module>zero-plugins-security-sms</module>
+        <module>zero-plugins-security-email</module>
+        <module>zero-plugins-security-weco</module>
     </modules>
 </project>

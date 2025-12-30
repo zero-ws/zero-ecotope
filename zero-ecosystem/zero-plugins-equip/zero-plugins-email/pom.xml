@@ -9,17 +9,13 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>zero-plugins-security-ldap</artifactId>
-    <name>Zero::Plugins::🧩 - Security / 🧊 LDAP</name>
+    <artifactId>zero-plugins-email</artifactId>
+    <name>Zero::Plugins::🧩 - Email</name>
     <dependencies>
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-plugins-security</artifactId>
-        </dependency>
-        <!-- LDAP -->
-        <dependency>
-            <groupId>io.vertx</groupId>
-            <artifactId>vertx-auth-ldap</artifactId>
+            <artifactId>r2mo-xync-email</artifactId>
+            <version>${r2mo.version}</version>
         </dependency>
     </dependencies>
 </project>

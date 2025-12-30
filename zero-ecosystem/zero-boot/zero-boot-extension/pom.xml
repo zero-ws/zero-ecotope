@@ -128,7 +128,7 @@
         </dependency>
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-plugins-integration-wechat</artifactId>
+            <artifactId>zero-plugins-weco</artifactId>
         </dependency>
         <!--        <dependency>-->
         <!--            <groupId>io.zerows</groupId>-->
