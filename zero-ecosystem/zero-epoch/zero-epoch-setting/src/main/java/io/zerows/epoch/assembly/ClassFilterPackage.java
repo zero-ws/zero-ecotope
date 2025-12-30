@@ -22,6 +22,7 @@ interface ClassFilterPackage {
         "META-INF",                    // JAR 元数据/清单 📦
         "apache",                      // 非标准顶级“apache”包（历史遗留，兜底）🧯
         "java",                        // JDK 标准库（java.*）☕
+        "com.azul",                    // Azul Zulu 专有包 🦎
         "java.util.concurrent",        // J.U.C（已被 java.* 覆盖，保留以稳健）⏱️
         "javax",                       // 旧 Javax API（向后兼容）🧷
         "jdk",                         // JDK 内部模块 ⚙️
@@ -130,6 +131,7 @@ interface ClassFilterPackage {
         "org.mongodb",                 // MongoDB 驱动（部分包）🍃
         "org.neo4j",                   // Neo4j（除 driver 外）🕸️
         "org.neo4j.driver",            // Neo4j 驱动 🕸️
+        "org.derive4j",                // Derive4j（函数式编程）🎯
         "org.postgresql",              // PostgreSQL JDBC 驱动 🐘
         "org.redisson",                // Redisson Redis 客户端 🔴
         "redis",                       // 旧 redis.*（历史兼容）🧱
@@ -174,6 +176,8 @@ interface ClassFilterPackage {
 
         // =========================== 🖼️ Templating / Office / HTML ===========================
         "com.lowagie",                 // iText 老包名（PDF 处理）📄
+        "com.hubspot",                 // Mustache 模板引擎 🖼️
+        "jinjava",                     // Jinjava 模板引擎 🍵
         "org.apache.pdfbox",           // PDFBox PDF 处理 📄
         "org.apache.poi",              // Apache POI（Excel/Word/PPT）📊
         "org.thymeleaf",               // Thymeleaf 模板引擎 🍃
@@ -187,6 +191,7 @@ interface ClassFilterPackage {
         "com.carrotsearch",            // HPPC 等性能工具 🥕
         "com.github",                  // 广义第三方（GitHub 组织发布的库）🐙
         "com.google",                  // Google 生态（Guava/Guice/Gson/Proto 等）🔎
+        "com.googlecode",              // Google Code 旧组织名 🏚️
         "com.graphbuilder",            // GraphBuilder（历史库）🕸️
         "com.hp",                      // HP 相关组件 🖨️
         "com.intellij",                // IntelliJ 注解/工具 💡
@@ -196,6 +201,14 @@ interface ClassFilterPackage {
         "com.opencsv",                 // OpenCSV 表格解析 📑
         "com.sun",                     // com.sun.*（JDK 专有/内部）🌞
         "com.tdunning",                // t-digest 分位数算法 📈
+        "com.terracottatech",          // Terracotta 技术 🧱
+        "com.aliyuncs",                // 阿里云旧 SDK 别名包 ☁️
+        "org.LatencyUtils",            // LatencyUtils 延迟工具 ⏱️
+        "com.codahale",                // Metrics 库（旧根包）📏
+        "ch.obermuhlner",              // fast-uuid 等工具 🆔
+        "org.jspecify",                // JSpecify 注解规范 🏷️
+        "edu.umd",                     // UMD 教育机构（Guava 旧包）🎓
+        "org.immutables",              // Immutables 注解处理器 🏷️
         "connectjar",                  // 构建/打包工具生成命名空间 🧳
         "fastparse",                   // Scala FastParse ⚡
         "geny",                        // Scala geny 工具 🧪
