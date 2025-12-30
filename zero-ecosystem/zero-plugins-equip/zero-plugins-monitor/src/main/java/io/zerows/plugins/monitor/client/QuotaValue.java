@@ -9,7 +9,7 @@ import java.util.Set;
  */
 public interface QuotaValue {
 
-    String QUOTA_DATA_NS = "io.zerows.monitor.";
+    String QUOTA_NS_PREFIX = "io.zerows.monitor.";
 
     Set<YmMonitor.Role> ofRole();
 

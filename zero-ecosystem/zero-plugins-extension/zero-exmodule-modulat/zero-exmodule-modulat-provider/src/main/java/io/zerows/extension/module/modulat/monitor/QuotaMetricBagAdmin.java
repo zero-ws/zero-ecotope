@@ -7,8 +7,7 @@ import io.zerows.epoch.annotations.Monitor;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.module.modulat.component.Ark;
 import io.zerows.plugins.monitor.client.QuotaMetricBase;
-import io.zerows.plugins.monitor.metadata.MetricBase;
-import io.zerows.plugins.monitor.metadata.MetricConfig;
+import io.zerows.plugins.monitor.metadata.MetricRow;
 import io.zerows.support.Ut;
 
 import java.util.ArrayList;
@@ -21,9 +20,9 @@ import java.util.Objects;
 @Monitor(MOM.BAG_ADMIN)
 public class QuotaMetricBagAdmin extends QuotaMetricBase {
     @Override
-    protected Future<List<MetricBase>> metricFrom(final JsonObject config, final Vertx vertxRef) {
+    protected Future<List<MetricRow>> metricFrom(final JsonObject config, final Vertx vertxRef) {
         final Supervisor<String, JsonObject> bagAdmin = Ark.momBagAdmin();
-        final List<MetricBase> metric = new ArrayList<>();
+        final List<MetricRow> metric = new ArrayList<>();
         bagAdmin.keys().stream()
             .map(bagAdmin::value)
             .filter(Objects::nonNull)
@@ -32,8 +31,8 @@ public class QuotaMetricBagAdmin extends QuotaMetricBase {
         return Future.succeededFuture(metric);
     }
 
-    private MetricConfig build(final JsonObject config) {
-        final MetricConfig item = new MetricConfig();
+    private MetricRow build(final JsonObject config) {
+        final MetricRow item = new MetricRow();
         item.id(Ut.valueString(config, KName.KEY));
         item.group("G.Config");
         item.name(Ut.valueString(config, KName.CODE));

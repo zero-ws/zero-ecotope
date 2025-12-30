@@ -8,5 +8,5 @@ public enum MetricType {
     COMPONENT,          // 组件监控
     SERVICE,            // 服务监控
     METRIC,             // 统计指标
-    CONFIG              // 配置监控
+    CONFIG,             // 配置监控
 }

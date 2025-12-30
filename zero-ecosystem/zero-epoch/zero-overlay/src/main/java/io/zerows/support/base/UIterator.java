@@ -2,6 +2,7 @@ package io.zerows.support.base;
 
 import io.r2mo.function.Actuator;
 import io.r2mo.function.Fn;
+import io.r2mo.typed.json.JObject;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.constant.VValue;
@@ -38,7 +39,16 @@ class UIterator {
     static Stream<JsonObject> itJArray(final JsonArray array) {
         final JsonArray source = UtBase.valueJArray(array);
         // 并行
-        return source.stream().filter(item -> item instanceof JsonObject).map(item -> (JsonObject) item);
+        return source.stream().map(item -> {
+            // 对接底层框架的 Unbox 问题
+            if (item instanceof final JsonObject itemJ) {
+                return itemJ;
+            }
+            if (item instanceof final JObject itemJ0) {
+                return itemJ0.data();
+            }
+            return null;
+        }).filter(Objects::nonNull);
     }
 
     @SuppressWarnings("unchecked")
@@ -88,11 +98,9 @@ class UIterator {
         if (Objects.isNull(data)) {
             return null;
         } else {
-            if (data instanceof JsonObject) {
-                final JsonObject reference = (JsonObject) data;
+            if (data instanceof final JsonObject reference) {
                 return executor.apply(reference);
-            } else if (data instanceof JsonArray) {
-                final JsonArray reference = (JsonArray) data;
+            } else if (data instanceof final JsonArray reference) {
                 final JsonArray normalized = new JsonArray();
                 itJArray(reference)
                     .map(each -> itJson(each, (json) -> executor.apply(json)))

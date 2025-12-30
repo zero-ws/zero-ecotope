@@ -122,8 +122,6 @@ class MonitorQuota {
             log.warn("{} MeterRegistry 未初始化，跳过关键流程！", MonitorConstant.K_PREFIX_MOC);
             return Future.succeededFuture(Boolean.TRUE);
         }
-        log.info("{} QuotaData 组件 `{}` 准备启动，角色实例 `{}`。",
-            MonitorConstant.K_PREFIX_MOC, quotaRef.getClass().getName(), role.getId());
         final JsonObject roleConfig = role.getConfig();
         final String name = role.getId();
         final Integer duration = role.getDuration();
@@ -133,8 +131,12 @@ class MonitorQuota {
 
         // 外层 Schedule
         if (0 > duration) {
+            log.info("{} --> / QuotaData 组件 `{}` 准备启动，角色实例 `{}`。",
+                MonitorConstant.K_PREFIX_MOC, quotaRef.getClass().getName(), role.getId());
             return quotaRef.register(configuration, this.meterRegistry, this.vertxRef);
         } else {
+            log.info("{} --> / QuotaData 组件 `{}` 准备启动，角色实例 `{}`, / {} 毫秒。",
+                MonitorConstant.K_PREFIX_MOC, quotaRef.getClass().getName(), role.getId(), duration);
             // 方案：先执行一次，成功后再开启定时器
             // 这样既能确保第一笔数据正常，又避免了 Promise 重复调用的问题
             return quotaRef.register(configuration, this.meterRegistry, this.vertxRef).map(success -> {

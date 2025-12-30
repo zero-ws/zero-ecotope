@@ -20,16 +20,25 @@ public abstract class QuotaValueBase implements QuotaValue {
         return Map.of();
     }
 
+    protected Map<String, Integer> ofRoleAt() {
+        return Map.of();
+    }
+
     @Override
     public Set<YmMonitor.Role> ofRole() {
         final YmMonitor.Role.RoleBuilder builder = YmMonitor.Role.builder();
         final Set<YmMonitor.Role> roleSet = new HashSet<>();
         final Map<String, JsonObject> roleConfigMap = this.ofRoleConfig();
         this.ofRoleName().forEach((roleId, roleComponent) -> {
-            final String key = QUOTA_DATA_NS + roleId;
+            final String key = QUOTA_NS_PREFIX + roleId;
             builder.id(key).component(roleComponent);
             final JsonObject config = roleConfigMap.getOrDefault(roleId, new JsonObject());
-            roleSet.add(builder.config(config).build());
+            builder.config(config);
+            final Map<String, Integer> roleAtMap = this.ofRoleAt();
+            if (roleAtMap.containsKey(roleId)) {
+                builder.duration(roleAtMap.get(roleId));
+            }
+            roleSet.add(builder.build());
         });
         return roleSet;
     }
