@@ -10,6 +10,8 @@ import io.zerows.plugins.excel.ExcelConstant;
 import io.zerows.support.Ut;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -89,14 +91,27 @@ public class ExValueExpr implements ExValue {
     private String getPath(final String value, final ConcurrentMap<String, String> paramMap) {
         Objects.requireNonNull(value);
         final String pathRoot = paramMap.get(KName.DIRECTORY);
+        final String code = paramMap.get(KName.CODE);
         final String field = paramMap.get(KName.FIELD);
-
         final BiFunction<String, ConcurrentMap<String, String>, String> exprFn =
             PATH_FN.getOrDefault(value.trim(), null);
         if (Objects.isNull(exprFn)) {
             throw new _60050Exception501NotSupport(this.getClass());
         }
         final String filepath = exprFn.apply(pathRoot, paramMap);
-        return Ut.ioPath(filepath, field) + VString.DOT + VValue.SUFFIX.JSON;
+        
+        // 判断pathRoot路径最后的目录是否与code同名，同名则直接拼接避免智能去重
+        final String normalizedRoot = pathRoot.replace("\\", "/");
+        final List<String> pathSegments = Arrays.stream(normalizedRoot.split("/"))
+            .filter(s -> !s.isEmpty())
+            .toList();
+        
+        if (!pathSegments.isEmpty() && code != null && pathSegments.getLast().equals(code)) {
+            // 同名情况：直接拼接，避免Ut.ioPath的智能去重
+            return normalizedRoot + "/" + code + "/" + field + VString.DOT + VValue.SUFFIX.JSON;
+        } else {
+            // 不同名：使用原有逻辑
+            return Ut.ioPath(filepath, field) + VString.DOT + VValue.SUFFIX.JSON;
+        }
     }
 }
