@@ -4,6 +4,8 @@ import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.zerows.component.module.AbstractHActor;
 import io.zerows.epoch.annotations.Actor;
+import io.zerows.epoch.metadata.security.SecurityConfig;
+import io.zerows.platform.enums.SecurityType;
 import io.zerows.specification.configuration.HConfig;
 
 /**
@@ -19,6 +21,11 @@ import io.zerows.specification.configuration.HConfig;
 public class SecurityActor extends AbstractHActor {
     private static final SecurityManager MANAGER = SecurityManager.of();
 
+    // ------------ Actor 提供的静态方法 ----------------
+    public static SecurityConfig getConfig(final SecurityType type) {
+        return MANAGER.configOf(type);
+    }
+
     @Override
     protected Future<Boolean> startAsync(final HConfig config, final Vertx vertxRef) {
         // 先注册配置信息
@@ -30,6 +37,4 @@ public class SecurityActor extends AbstractHActor {
         // 填充构造 Lee 的的核心信息
         return Future.succeededFuture(Boolean.TRUE);
     }
-
-    // ------------ Actor 提供的静态方法 ----------------
 }

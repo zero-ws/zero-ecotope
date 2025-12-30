@@ -18,10 +18,10 @@ import io.vertx.ext.auth.otp.hotp.HotpAuthOptions;
 import io.vertx.ext.web.handler.AuthenticationHandler;
 import io.vertx.ext.web.handler.JWTAuthHandler;
 import io.vertx.ext.web.handler.OAuth2AuthHandler;
-import io.zerows.epoch.basicore.YmSpec;
 import io.zerows.epoch.metadata.security.SecurityConfig;
 import io.zerows.epoch.metadata.security.SecurityMeta;
 import io.zerows.platform.enums.SecurityType;
+import io.zerows.plugins.security.metadata.YmSecuritySpec;
 import io.zerows.support.Ut;
 
 import java.util.Objects;
@@ -97,13 +97,13 @@ class AuthenticationNative {
         }
         final JsonObject options = config.options();
         if (SecurityType.JWT == config.type()) {
-            final String realm = Ut.valueString(options, YmSpec.vertx.security.jwt.options.realm);
+            final String realm = Ut.valueString(options, YmSecuritySpec.jwt.options.realm);
             final JWTAuth provider = createProvider(vertxRef, config);
             return JWTAuthHandler.create(provider, realm);
         }
 
         if (SecurityType.OAUTH2 == config.type()) {
-            final String callback = Ut.valueString(options, YmSpec.vertx.security.oauth2.options.callback);
+            final String callback = Ut.valueString(options, YmSecuritySpec.oauth2.options.callback);
             final OAuth2Auth provider = createProvider(vertxRef, config);
             return OAuth2AuthHandler.create(vertxRef, provider, callback);
         }
@@ -147,7 +147,7 @@ class AuthenticationNative {
         }
 
         if (SecurityType.HT_DIGEST == config.type()) {
-            String filename = Ut.valueString(options, YmSpec.vertx.security.htdigest.options.filename);
+            String filename = Ut.valueString(options, YmSecuritySpec.htdigest.options.filename);
             filename = Ut.isNil(filename) ? HtdigestAuth.HTDIGEST_FILE : filename;
             return (T) HtdigestAuth.create(vertxRef, filename);
         }

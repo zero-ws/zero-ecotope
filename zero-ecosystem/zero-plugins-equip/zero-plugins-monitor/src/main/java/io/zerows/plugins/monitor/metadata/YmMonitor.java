@@ -178,7 +178,7 @@ public class YmMonitor implements Serializable {
          * 是否启用该插件能力
          */
         @JsonProperty("enabled")
-        private Boolean enabled = Boolean.TRUE;
+        private Boolean enabled;
 
 
     }
@@ -216,7 +216,7 @@ public class YmMonitor implements Serializable {
         @JsonDeserialize(using = JsonObjectDeserializer.class)
         private JsonObject config;
 
-        public Integer getDuration() {
+        public Integer getMS() {
             return Objects.requireNonNullElse(this.duration, 15) * 1000;
         }
 

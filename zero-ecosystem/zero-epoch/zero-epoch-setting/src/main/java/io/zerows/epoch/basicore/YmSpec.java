@@ -12,7 +12,6 @@ import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.http.HttpServerOptions;
 import io.vertx.core.spi.cluster.ClusterManager;
 import io.vertx.core.tracing.TracingPolicy;
-import io.vertx.ext.auth.JWTOptions;
 import io.vertx.ext.auth.KeyStoreOptions;
 import io.vertx.ext.bridge.PermittedOptions;
 import io.vertx.ext.web.sstore.SessionStore;
@@ -20,9 +19,6 @@ import io.zerows.epoch.basicore.option.ClusterOptions;
 import io.zerows.epoch.basicore.option.CorsOptions;
 import io.zerows.epoch.configuration.ZeroPlugins;
 import io.zerows.epoch.metadata.MMComponent;
-import io.zerows.platform.enums.SecurityType;
-
-import java.lang.reflect.Method;
 
 /**
  * 基本注释格式
@@ -242,58 +238,6 @@ import java.lang.reflect.Method;
  *       database:                                                          # ---> 💻️ R2MO_REDIS_DATABASE, Redis 数据库编号
  *       timeout:                                                           # 3000 连接超时时间（毫秒）
  *       endpoint:                                                          # 自动计算
- *   security:
- *     wall:                                                                # 安全管控路径 /api
- *     limit:
- *       session:
- *       token:
- *       timeout:
- *       types:
- *       - JWT:4096:30m
- *     scope:
- *       app:
- *       tenant:
- *     basic:
- *       realm: "Zero Realm"
- *     captcha:
- *       type:
- *       expiredAt:
- *       width:
- *       height:
- *       textAlpha:
- *       code:
- *         type:
- *         length:
- *       font:
- *         name:
- *         weight:
- *         size:
- *     jwt:                                                                 # {@link SecurityType#JWT}
- *       issuer:
- *       expiredAt:
- *       refreshAt:
- *       options:                                                           #
- *         jwtOptions:                                                      # 🌷 {@link JWTOptions}
- *           algorithm: HS256                                               # 加密算法
- *         keyStore:                                                        # 🌷 {@link KeyStoreOptions}
- *           type:
- *           path:
- *           password:
- *       provider:
- *         authenticate:                                                    # 🔸 认证 {@link Method}
- *         authorization:                                                   # 🔸 授权 {@link Method}
- *     digest:                                                              # {@link SecurityType#HT_DIGEST}
- *       options:                                                           #
- *         filename:
- *       provider:
- *         authenticate:                                                    # 🔸 认证 {@link Method}
- *         authorization:                                                   # 🔸 授权 {@link Method}
- *     oauth2:                                                              # {@link SecurityType#OAUTH2}
- *       options:                                                           #
- *         callback:
- *       provider:
- *         authenticate:                                                    # 🔸 认证 {@link Method}
- *         authorization:                                                   # 🔸 授权 {@link Method}
  *
  * # =====> 🌀 Dubbo 配置，微服务通信
  * dubbo:                                                                   # {@link YmDubbo}
@@ -618,99 +562,6 @@ public interface YmSpec {
                 String __ = "options";
                 String clusterPublicHost = "clusterPublicHost";
                 String clusterPublicPort = "clusterPublicPort";
-            }
-        }
-
-        interface security {
-            String __ = "security";
-            String wall = "wall";
-
-            interface limit {
-                String __ = "limit";
-                String session = "session";
-                String token = "token";
-                String timeout = "timeout";
-                String types = "types";
-            }
-
-            interface scope {
-                String __ = "scope";
-                String app = "app";
-                String tenant = "tenant";
-            }
-
-            interface basic {
-                String __ = "basic";
-
-                interface options {
-                    String __ = "options";
-                    String realm = "realm";
-                }
-            }
-
-            interface captcha {
-                String __ = "captcha";
-
-                interface code {
-                    String __ = "code";
-                    String type = "type";
-                    String length = "length";
-                }
-
-                interface font {
-                    String __ = "font";
-                    String name = "name";
-                    String weight = "weight";
-                    String size = "size";
-                }
-
-                interface options {
-                    String __ = "options";
-                    String type = "type";
-                    String expiredAt = "expiredAt";
-                    String width = "width";
-                    String height = "height";
-                    String textAlpha = "textAlpha";
-                }
-            }
-
-            interface oauth2 {
-                String __ = "oauth2";
-
-                interface options {
-                    String __ = "options";
-                    String callback = "callback";
-                }
-            }
-
-            interface htdigest {
-                String __ = "htdigest";
-
-                interface options {
-                    String __ = "options";
-                    String filename = "filename";
-                }
-            }
-
-            interface jwt {
-                String __ = "jwt";
-
-                interface options {
-                    String __ = "options";
-                    String realm = "realm";
-
-                    interface jwtOptions {
-                        String __ = "jwtOptions";
-                        String algorithm = "algorithm";
-                    }
-
-                    interface keyStore {
-                        String __ = "keyStore";
-                        String type = "type";
-                        String path = "path";
-                        String password = "password";
-                    }
-                }
             }
         }
 

@@ -8,12 +8,12 @@ import io.zerows.epoch.metadata.security.SecurityConfig;
 import io.zerows.epoch.metadata.security.SecurityMeta;
 import io.zerows.platform.enums.SecurityType;
 import io.zerows.platform.management.StoreApp;
+import io.zerows.plugins.security.metadata.YmSecurity;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.configuration.HConfig;
+import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -52,11 +52,9 @@ class SecurityManager {
      *     3. 持久化场景：App Id
      * </pre>
      */
-    private static final Cc<String, Map<SecurityType, SecurityConfig>> CONFIG_MAP = Cc.open();
-
-    private static final Map<SecurityType, SecurityConfig> CONFIG_DEFAULT = new HashMap<>();
-
+    private static final Cc<String, YmSecurity> CC_SECURITY = Cc.open();
     private static final SecurityManager INSTANCE = new SecurityManager();
+    private static YmSecurity SECURITY;
 
 
     private SecurityManager() {
@@ -76,54 +74,40 @@ class SecurityManager {
         }
 
         final String cacheKey = stored.isLoad() ? stored.id() : stored.name();
-        CONFIG_MAP.pick(() -> this.createConfiguration(config, cacheKey), cacheKey);
-
+        CC_SECURITY.pick(() -> this.createConfiguration(config, cacheKey), cacheKey);
     }
 
     void registryOf(final HConfig config, final int vertxCode) {
-        final Map<SecurityType, SecurityConfig> defaultMap = CONFIG_MAP.pick(
-            () -> this.createConfiguration(config, vertxCode), String.valueOf(vertxCode));
+        // 注册 HConfig
+        final YmSecurity configuration = this.createConfiguration(config, String.valueOf(vertxCode));
         // 默认配置只会被初始化一次，为当前启动节点（或主节点）的全局默认配置
-        if (CONFIG_DEFAULT.isEmpty()) {
-            CONFIG_DEFAULT.putAll(defaultMap);
+        if (Objects.nonNull(configuration)) {
+            SECURITY = configuration;
         }
     }
 
-    private Map<SecurityType, SecurityConfig> createConfiguration(
-        final HConfig config, final Object ownerId
-    ) {
-        final Map<SecurityType, SecurityConfig> securityMap = new HashMap<>();
-        final JsonObject options = config.options();
-        // 迭代目前可配的所有安全类型
-        for (final String optionKey : options.fieldNames()) {
-            final SecurityType type = SecurityType.from(optionKey);
-            if (Objects.isNull(type)) {
-                continue;
-            }
-
-            final JsonObject configOption = options.getJsonObject(optionKey);
-            final SecurityConfig configObj = new SecurityConfig(type, configOption);
-            securityMap.put(type, configObj);
-            log.info("[ PLUG ] ( Secure ) By - {} / 已注册安全配置：`{}`, value = {}", ownerId, configObj.key(), configOption.encode());
-        }
-        return securityMap;
+    private YmSecurity createConfiguration(final HConfig config, final String cacheKey) {
+        return CC_SECURITY.pick(() -> {
+            final JsonObject configJ = config.options();
+            return Ut.deserialize(configJ, YmSecurity.class);
+        }, cacheKey);
     }
 
     SecurityConfig configJwt() {
-        return CONFIG_DEFAULT.getOrDefault(SecurityType.JWT, null);
-    }
-
-    SecurityConfig configOf(final SecurityType type) {
-        return CONFIG_DEFAULT.getOrDefault(type, null);
-    }
-
-    SecurityConfig configOf(final SecurityType type, final Vertx vertxRef) {
-        return CONFIG_MAP.getOrDefault(String.valueOf(vertxRef.hashCode()), Map.of())
-            .getOrDefault(type, null);
+        return SECURITY.extension(SecurityType.JWT);
     }
 
     SecurityConfig configJwt(final String appOr) {
-        final Map<SecurityType, SecurityConfig> configMap = CONFIG_MAP.getOrDefault(appOr, new HashMap<>());
-        return configMap.getOrDefault(SecurityType.JWT, null);
+        final YmSecurity configuration = CC_SECURITY.get(appOr);
+        return configuration.extension(SecurityType.JWT);
+    }
+
+    SecurityConfig configOf(final SecurityType type) {
+        return SECURITY.extension(type);
+    }
+
+    SecurityConfig configOf(final SecurityType type, final Vertx vertxRef) {
+        final YmSecurity configuration = CC_SECURITY.get(String.valueOf(vertxRef.hashCode()));
+        return configuration.extension(type);
     }
 }

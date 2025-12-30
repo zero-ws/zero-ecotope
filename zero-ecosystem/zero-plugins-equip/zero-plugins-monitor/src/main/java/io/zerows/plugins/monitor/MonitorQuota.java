@@ -124,7 +124,7 @@ class MonitorQuota {
         }
         final JsonObject roleConfig = role.getConfig();
         final String name = role.getId();
-        final Integer duration = role.getDuration();
+        final Integer duration = role.getMS();
         final JsonObject configuration = roleConfig.copy()
             .put(KName.NAME, name);
 
@@ -135,8 +135,8 @@ class MonitorQuota {
                 MonitorConstant.K_PREFIX_MOC, quotaRef.getClass().getName(), role.getId());
             return quotaRef.register(configuration, this.meterRegistry, this.vertxRef);
         } else {
-            log.info("{} --> / QuotaData 组件 `{}` 准备启动，角色实例 `{}`, / {} 毫秒。",
-                MonitorConstant.K_PREFIX_MOC, quotaRef.getClass().getName(), role.getId(), duration);
+            log.info("{} --> / QuotaData 组件 `{}` 准备启动，角色实例 `{}`, / {} 秒。",
+                MonitorConstant.K_PREFIX_MOC, quotaRef.getClass().getName(), role.getId(), role.getDuration());
             // 方案：先执行一次，成功后再开启定时器
             // 这样既能确保第一笔数据正常，又避免了 Promise 重复调用的问题
             return quotaRef.register(configuration, this.meterRegistry, this.vertxRef).map(success -> {
