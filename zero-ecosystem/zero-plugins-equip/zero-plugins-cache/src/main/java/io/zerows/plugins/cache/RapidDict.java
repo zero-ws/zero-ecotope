@@ -1,4 +1,4 @@
-package io.zerows.cosmic.plugins.cache;
+package io.zerows.plugins.cache;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;

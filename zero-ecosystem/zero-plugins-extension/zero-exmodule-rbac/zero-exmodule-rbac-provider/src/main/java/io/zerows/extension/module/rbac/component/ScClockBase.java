@@ -1,7 +1,7 @@
 package io.zerows.extension.module.rbac.component;
 
 import io.vertx.core.Future;
-import io.zerows.cosmic.plugins.cache.Rapid;
+import io.zerows.plugins.cache.Rapid;
 import io.zerows.platform.management.AbstractAmbiguity;
 import io.zerows.program.Ux;
 import io.zerows.specification.development.compiled.HBundle;

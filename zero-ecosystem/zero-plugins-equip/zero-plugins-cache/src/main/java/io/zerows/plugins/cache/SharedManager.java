@@ -1,4 +1,4 @@
-package io.zerows.cosmic.plugins.cache;
+package io.zerows.plugins.cache;
 
 import io.r2mo.typed.cc.Cc;
 import io.zerows.sdk.plugins.AddOnManager;
@@ -14,12 +14,12 @@ class SharedManager extends AddOnManager<SharedClient> {
     private SharedManager() {
     }
 
+    static SharedManager of() {
+        return INSTANCE;
+    }
+
     @Override
     protected Cc<String, SharedClient> stored() {
         return CC_STORED;
-    }
-
-    static SharedManager of() {
-        return INSTANCE;
     }
 }

@@ -1,4 +1,4 @@
-package io.zerows.cosmic.plugins.cache;
+package io.zerows.plugins.cache;
 
 import io.r2mo.typed.common.Kv;
 import io.vertx.codegen.annotations.Fluent;

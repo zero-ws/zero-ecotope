@@ -1,4 +1,4 @@
-package io.zerows.cosmic.plugins.cache;
+package io.zerows.plugins.cache;
 
 import io.zerows.sdk.plugins.AddOn;
 import io.zerows.sdk.plugins.AddOnProvider;

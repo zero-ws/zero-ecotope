@@ -1,4 +1,4 @@
-package io.zerows.cosmic.plugins.cache;
+package io.zerows.plugins.cache;
 
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;

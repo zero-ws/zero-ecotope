@@ -3,7 +3,7 @@ package io.zerows.extension.module.mbseapi.component;
 import io.r2mo.base.dbe.Database;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.cosmic.plugins.cache.Rapid;
+import io.zerows.plugins.cache.Rapid;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.metadata.XHeader;
 import io.zerows.epoch.web.Envelop;

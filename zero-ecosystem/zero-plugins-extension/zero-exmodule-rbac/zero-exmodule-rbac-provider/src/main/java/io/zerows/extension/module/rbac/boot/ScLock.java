@@ -3,7 +3,7 @@ package io.zerows.extension.module.rbac.boot;
 import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.cosmic.plugins.cache.Rapid;
+import io.zerows.plugins.cache.Rapid;
 import io.zerows.extension.module.rbac.common.ScConstant;
 import io.zerows.extension.module.rbac.exception._80221Exception401MaximumTimes;
 import io.zerows.extension.module.rbac.metadata.ScConfig;

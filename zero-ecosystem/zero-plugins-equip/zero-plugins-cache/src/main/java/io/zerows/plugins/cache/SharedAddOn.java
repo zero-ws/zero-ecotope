@@ -1,4 +1,4 @@
-package io.zerows.cosmic.plugins.cache;
+package io.zerows.plugins.cache;
 
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import io.vertx.core.Vertx;

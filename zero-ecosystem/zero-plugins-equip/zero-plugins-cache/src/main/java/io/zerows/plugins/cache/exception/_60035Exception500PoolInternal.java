@@ -1,4 +1,4 @@
-package io.zerows.cosmic.plugins.cache.exception;
+package io.zerows.plugins.cache.exception;
 
 import io.r2mo.vertx.common.exception.VertxWebException;
 

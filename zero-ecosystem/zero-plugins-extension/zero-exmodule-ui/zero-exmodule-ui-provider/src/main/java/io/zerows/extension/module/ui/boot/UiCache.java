@@ -3,7 +3,7 @@ package io.zerows.extension.module.ui.boot;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.cosmic.plugins.cache.Rapid;
+import io.zerows.plugins.cache.Rapid;
 import io.zerows.extension.module.ui.common.UiConstant;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;

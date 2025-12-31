@@ -1,4 +1,4 @@
-package io.zerows.cosmic.plugins.cache;
+package io.zerows.plugins.cache;
 
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
@@ -17,6 +17,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class SharedActor extends AbstractHActor {
 
+    public static SharedClient ofClient() {
+        return SharedAddOn.of().createSingleton();
+    }
+
     @Override
     @SuppressWarnings("all")
     protected Future<Boolean> startAsync(final HConfig config, final Vertx vertxRef) {
@@ -27,9 +31,5 @@ public class SharedActor extends AbstractHActor {
         DiRegistry.of().put(addOn.getKey(), provider);
         this.vLog("[ Shared ] DI 提供者 Provider 注册：provider = {}, key = {}", provider, addOn.getKey());
         return Future.succeededFuture(Boolean.TRUE);
-    }
-
-    public static SharedClient ofClient() {
-        return SharedAddOn.of().createSingleton();
     }
 }
