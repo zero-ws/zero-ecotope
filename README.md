@@ -80,20 +80,22 @@ public class BasicApplication {
 
 项目结构：
 
-- 应用案例（ `rachel-momo-app` ）：
-    - [x] `rachel-momo-app-basic`：Zero Core 最小化应用。
-    - [x] `rachel-momo-app-extension`：Zero Extension 扩展应用（带业务模块），内置 `vertx.yml` 格式。
-    - [x] `rachel-momo-app-module`：Zero 自定义模块化开发，扩展模块。
-    - [x] `rachel-momo-app-rapid-spring`：R2MO Rapid Spring Boot 应用。
-    - [x] `rachel-momo-app-rapid-vertx`：R2MO Rapid Vert.x 应用。
-    - [x] `rachel-momo-app-service`：Zero 微服务应用。
-- 测试用例（ `rachel-momo-rapid` ）：
-    - [x] `rachel-momo-rapid-spring`：R2MO Rapid Spring 测试用例。
-    - [x] `rachel-momo-rapid-vertx`：R2MO Rapid Vert.x 测试用例。
-- 测试套件（ `rachel-momo-suite` ）：
-    - [x] `rachel-momo-suite-config-l`：本地配置管理测试套件
-    - [x] `rachel-momo-suite-config-r`：远程配置（Nacos）管理测试套件
-    - [x] `rachel-momo-suite-zero`：Zero Core 专用测试套件
+- 📚️ 应用案例（ `rachel-momo-app` ）：
+    - [x] 📚️ `app-spring-rapid`：R2MO Rapid Spring Boot 应用。
+        - [x] ☘️ `app-spring-auth`：Spring 安全认证专用 Demo。
+        - [x] ☘️ `app-spring-test`：Spring 基础应用 Demo。
+    - [x] 💧 `app-vertx-rapid`：R2MO Rapid Vert.x 应用。
+    - [x] 🧊 `app-zero-basic`：Zero Core 最小化应用。
+    - [x] 🧊 `app-zero-extension`：Zero Extension 扩展应用（带业务模块），内置 `vertx.yml` 格式。
+    - [x] 🧊 `app-zero-module`：Zero 自定义模块化开发，扩展模块。
+    - [x] 🧊 `app-zero-service`：Zero 微服务应用。
+- 📚️ 测试用例（ `rachel-momo-rapid` ）：
+    - [x] 🍓 `rapid-spring`：R2MO Rapid Spring 测试用例。
+    - [x] 🍓 `rapid-vertx`：R2MO Rapid Vert.x 测试用例。
+- 📚️ 测试套件（ `rachel-momo-suite` ）：
+    - [x] 🐣 `suite-zero-common`：Zero Core 专用测试套件
+    - [x] 🐣 `suite-zero-config-l`：本地配置管理测试套件
+    - [x] 🐣 `suite-zero-config-r`：远程配置（Nacos）管理测试套件
 
 ### 1.3. 项目初始化
 
