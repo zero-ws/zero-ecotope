@@ -5,18 +5,18 @@
   'flowchart': { 
     'diagramPadding': 5, 
     'nodeSpacing': 10, 
-    'rankSpacing': 40, 
+    'rankSpacing': 35, 
     'curve': 'basis', 
     'useMaxWidth': true
   }
 } }%%
 graph LR
     %% =========================================================================
-    %% [全局样式库]
+    %% [样式定义库]
     %% =========================================================================
     linkStyle default interpolate basis stroke:#999,stroke-width:1px
     
-    %% --- Zero 体系样式 ---
+    %% Zero 体系颜色
     classDef z_boot fill:#37474f,stroke:#263238,stroke-width:2px,rx:4,ry:4,color:#fff
     classDef z_ext fill:#f1f8e9,stroke:#558b2f,stroke-width:2px,rx:4,ry:4,color:#33691e
     classDef z_plugin fill:#f3e5f5,stroke:#8e24aa,stroke-width:2px,rx:4,ry:4,color:#4a148c
@@ -26,7 +26,7 @@ graph LR
     classDef z_sec fill:#ffebee,stroke:#c62828,stroke-width:2px,rx:4,ry:4,color:#b71c1c
     classDef z_mon fill:#e0f7fa,stroke:#00838f,stroke-width:2px,rx:4,ry:4,color:#006064
 
-    %% --- R2MO 体系样式 ---
+    %% R2MO 体系颜色
     classDef r_boot fill:#455a64,stroke:#263238,stroke-width:2px,rx:4,ry:4,color:#fff
     classDef r_spring fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px,rx:4,ry:4,color:#1b5e20
     classDef r_vertx fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,rx:4,ry:4,color:#4a148c
@@ -59,23 +59,23 @@ graph LR
         subgraph Matrix_Modules ["🧪 Modules Matrix"]
             direction TB
             %% Core
-            za_a["🧪 ambient-api"]:::z_mod_api --> za_p["provider"]:::z_mod_node --> za_d["domain"]:::z_mod_node
-            ze_a["🧪 erp-api"]:::z_mod_api --> ze_p["provider"]:::z_mod_node --> ze_d["domain"]:::z_mod_node
-            zf_a["🧪 finance-api"]:::z_mod_api --> zf_p["provider"]:::z_mod_node --> zf_d["domain"]:::z_mod_node
-            zr_a["🧪 rbac-api"]:::z_mod_api --> zr_p["provider"]:::z_mod_node --> zr_d["domain"]:::z_mod_node
+            za_a["🧪 zero-exmodule-ambient-api"]:::z_mod_api --> za_p["🧪 zero-exmodule-ambient-provider"]:::z_mod_node --> za_d["🧪 zero-exmodule-ambient-domain"]:::z_mod_node
+            ze_a["🧪 zero-exmodule-erp-api"]:::z_mod_api --> ze_p["🧪 zero-exmodule-erp-provider"]:::z_mod_node --> ze_d["🧪 zero-exmodule-erp-domain"]:::z_mod_node
+            zf_a["🧪 zero-exmodule-finance-api"]:::z_mod_api --> zf_p["🧪 zero-exmodule-finance-provider"]:::z_mod_node --> zf_d["🧪 zero-exmodule-finance-domain"]:::z_mod_node
+            zr_a["🧪 zero-exmodule-rbac-api"]:::z_mod_api --> zr_p["🧪 zero-exmodule-rbac-provider"]:::z_mod_node --> zr_d["🧪 zero-exmodule-rbac-domain"]:::z_mod_node
             %% Features
-            zg_a["🧪 graphic-api"]:::z_mod_api --> zg_p["provider"]:::z_mod_node --> zg_d["domain"]:::z_mod_node
-            zu_a["🧪 ui-api"]:::z_mod_api --> zu_p["provider"]:::z_mod_node --> zu_d["domain"]:::z_mod_node
-            zi_a["🧪 integration-api"]:::z_mod_api --> zi_p["provider"]:::z_mod_node --> zi_d["domain"]:::z_mod_node
-            zl_a["🧪 lbs-api"]:::z_mod_api --> zl_p["provider"]:::z_mod_node --> zl_d["domain"]:::z_mod_node
+            zg_a["🧪 zero-exmodule-graphic-api"]:::z_mod_api --> zg_p["🧪 zero-exmodule-graphic-provider"]:::z_mod_node --> zg_d["🧪 zero-exmodule-graphic-domain"]:::z_mod_node
+            zu_a["🧪 zero-exmodule-ui-api"]:::z_mod_api --> zu_p["🧪 zero-exmodule-ui-provider"]:::z_mod_node --> zu_d["🧪 zero-exmodule-ui-domain"]:::z_mod_node
+            zi_a["🧪 zero-exmodule-integration-api"]:::z_mod_api --> zi_p["🧪 zero-exmodule-integration-provider"]:::z_mod_node --> zi_d["🧪 zero-exmodule-integration-domain"]:::z_mod_node
+            zl_a["🧪 zero-exmodule-lbs-api"]:::z_mod_api --> zl_p["🧪 zero-exmodule-lbs-provider"]:::z_mod_node --> zl_d["🧪 zero-exmodule-lbs-domain"]:::z_mod_node
             %% System
-            zrep_a["🧪 report-api"]:::z_mod_api --> zrep_p["provider"]:::z_mod_node --> zrep_d["domain"]:::z_mod_node
-            ztpl_a["🧪 tpl-api"]:::z_mod_api --> ztpl_p["provider"]:::z_mod_node --> ztpl_d["domain"]:::z_mod_node
-            zwf_a["🧪 workflow-api"]:::z_mod_api --> zwf_p["provider"]:::z_mod_node --> zwf_d["domain"]:::z_mod_node
-            zmd_a["🧪 modulat-api"]:::z_mod_api --> zmd_p["provider"]:::z_mod_node --> zmd_d["domain"]:::z_mod_node
+            zrep_a["🧪 zero-exmodule-report-api"]:::z_mod_api --> zrep_p["🧪 zero-exmodule-report-provider"]:::z_mod_node --> zrep_d["🧪 zero-exmodule-report-domain"]:::z_mod_node
+            ztpl_a["🧪 zero-exmodule-tpl-api"]:::z_mod_api --> ztpl_p["🧪 zero-exmodule-tpl-provider"]:::z_mod_node --> ztpl_d["🧪 zero-exmodule-tpl-domain"]:::z_mod_node
+            zwf_a["🧪 zero-exmodule-workflow-api"]:::z_mod_api --> zwf_p["🧪 zero-exmodule-workflow-provider"]:::z_mod_node --> zwf_d["🧪 zero-exmodule-workflow-domain"]:::z_mod_node
+            zmd_a["🧪 zero-exmodule-modulat-api"]:::z_mod_api --> zmd_p["🧪 zero-exmodule-modulat-provider"]:::z_mod_node --> zmd_d["🧪 zero-exmodule-modulat-domain"]:::z_mod_node
             %% MBSE
-            zma_a["🧪 mbseapi-api"]:::z_mod_api --> zma_p["provider"]:::z_mod_node --> zma_d["domain"]:::z_mod_node
-            zmc_a["🧪 mbsecore-api"]:::z_mod_api --> zmc_p["provider"]:::z_mod_node --> zmc_d["domain"]:::z_mod_node
+            zma_a["🧪 zero-exmodule-mbseapi-api"]:::z_mod_api --> zma_p["🧪 zero-exmodule-mbseapi-provider"]:::z_mod_node --> zma_d["🧪 zero-exmodule-mbseapi-domain"]:::z_mod_node
+            zmc_a["🧪 zero-exmodule-mbsecore-api"]:::z_mod_api --> zmc_p["🧪 zero-exmodule-mbsecore-provider"]:::z_mod_node --> zmc_d["🧪 zero-exmodule-mbsecore-domain"]:::z_mod_node
         end
         z-extension-skeleton["📚️ zero-extension-skeleton"]:::z_ext
     end
@@ -84,37 +84,37 @@ graph LR
     subgraph Z_Plugins ["🧩 Zero Plugins"]
         direction TB
         %% Standard
-        z-plugins-cache["🧩 cache"]:::z_plugin
-        z-plugins-session["🧩 session"]:::z_plugin
-        z-plugins-flyway["🧩 flyway"]:::z_plugin
-        z-plugins-excel["🧩 excel"]:::z_plugin
-        z-plugins-redis["🧩 redis"]:::z_plugin
-        z-plugins-elasticsearch["🧩 elasticsearch"]:::z_plugin
-        z-plugins-neo4j["🧩 neo4j"]:::z_plugin
-        z-plugins-trash["🧩 trash"]:::z_plugin
-        z-plugins-swagger["🧩 swagger"]:::z_plugin
-        z-plugins-websocket["🧩 websocket"]:::z_plugin
+        z-plugins-cache["🧩 zero-plugins-cache"]:::z_plugin
+        z-plugins-session["🧩 zero-plugins-session"]:::z_plugin
+        z-plugins-flyway["🧩 zero-plugins-flyway"]:::z_plugin
+        z-plugins-excel["🧩 zero-plugins-excel"]:::z_plugin
+        z-plugins-redis["🧩 zero-plugins-redis"]:::z_plugin
+        z-plugins-elasticsearch["🧩 zero-plugins-elasticsearch"]:::z_plugin
+        z-plugins-neo4j["🧩 zero-plugins-neo4j"]:::z_plugin
+        z-plugins-trash["🧩 zero-plugins-trash"]:::z_plugin
+        z-plugins-swagger["🧩 zero-plugins-swagger"]:::z_plugin
+        z-plugins-websocket["🧩 zero-plugins-websocket"]:::z_plugin
         %% Comms
-        z-plugins-email["🧩 email"]:::z_plugin
-        z-plugins-sms["🧩 sms"]:::z_plugin
-        z-plugins-weco["🧩 weco"]:::z_plugin
+        z-plugins-email["🧩 zero-plugins-email"]:::z_plugin
+        z-plugins-sms["🧩 zero-plugins-sms"]:::z_plugin
+        z-plugins-weco["🧩 zero-plugins-weco"]:::z_plugin
         %% Groups
         subgraph Box_Sec ["🔥 Security"]
-            z-plugins-security["🔥 security"]:::z_sec
-            z-plugins-security-email["🔥 sec-email"]:::z_sec
-            z-plugins-security-sms["🔥 sec-sms"]:::z_sec
-            z-plugins-security-weco["🔥 sec-weco"]:::z_sec
-            z-plugins-security-jwt["🔥 jwt"]:::z_sec
-            z-plugins-security-oauth2["🔥 oauth2"]:::z_sec
-            z-plugins-security-ldap["🔥 ldap"]:::z_sec
-            z-plugins-security-htdigest["🔥 htdigest"]:::z_sec
-            z-plugins-security-htpasswd["🔥 htpasswd"]:::z_sec
-            z-plugins-security-otp["🔥 otp"]:::z_sec
+            z-plugins-security["🔥 zero-plugins-security"]:::z_sec
+            z-plugins-security-email["🔥 zero-plugins-security-email"]:::z_sec
+            z-plugins-security-sms["🔥 zero-plugins-security-sms"]:::z_sec
+            z-plugins-security-weco["🔥 zero-plugins-security-weco"]:::z_sec
+            z-plugins-security-jwt["🔥 zero-plugins-security-jwt"]:::z_sec
+            z-plugins-security-oauth2["🔥 zero-plugins-security-oauth2"]:::z_sec
+            z-plugins-security-ldap["🔥 zero-plugins-security-ldap"]:::z_sec
+            z-plugins-security-htdigest["🔥 zero-plugins-security-htdigest"]:::z_sec
+            z-plugins-security-htpasswd["🔥 zero-plugins-security-htpasswd"]:::z_sec
+            z-plugins-security-otp["🔥 zero-plugins-security-otp"]:::z_sec
         end
         subgraph Box_Mon ["❄️ Monitor"]
-            z-plugins-monitor["❄️ monitor"]:::z_mon
-            z-plugins-monitor-hawtio["❄️ hawtio"]:::z_mon
-            z-plugins-monitor-prometheus["❄️ prometheus"]:::z_mon
+            z-plugins-monitor["❄️ zero-plugins-monitor"]:::z_mon
+            z-plugins-monitor-hawtio["❄️ zero-plugins-monitor-hawtio"]:::z_mon
+            z-plugins-monitor-prometheus["❄️ zero-plugins-monitor-prometheus"]:::z_mon
         end
     end
 
@@ -141,11 +141,11 @@ graph LR
         %% --- 2.1 R2MO Boot ---
         subgraph R_Boot ["🚀 R2MO Boot"]
             direction TB
-            r-boot-spring-default["🟢 boot-spring-default"]:::r_boot
-            r-boot-spring["🟢🟡 boot-spring"]:::r_boot
-            r-boot-vertx["🟣🟡 boot-vertx"]:::r_boot
-            r-spring-junit5["🧪 spring-junit5"]:::r_test
-            r-vertx-junit5["🧪 vertx-junit5"]:::r_test
+            r-boot-spring-default["🟢 r2mo-boot-spring-default"]:::r_boot
+            r-boot-spring["🟢🟡 r2mo-boot-spring"]:::r_boot
+            r-boot-vertx["🟣🟡 r2mo-boot-vertx"]:::r_boot
+            r-spring-junit5["🧪 r2mo-spring-junit5"]:::r_test
+            r-vertx-junit5["🧪 r2mo-vertx-junit5"]:::r_test
         end
 
         %% --- 2.2 R2MO Framework (Spring & Vertx Stack) ---
@@ -154,37 +154,37 @@ graph LR
             
             subgraph Box_Spring ["🍃 Spring Stack"]
                 direction TB
-                r-spring["🟢🟡 spring"]:::r_spring
+                r-spring["🟢🟡 r2mo-spring"]:::r_spring
                 %% Sec Group
                 subgraph Box_SpringSec ["🔒 Sec"]
-                    r-spring-security["🟢 security"]:::r_spring
-                    r-spring-security-oauth2client["🟢 oauth2-client"]:::r_spring
-                    r-spring-security-oauth2["🟢 oauth2"]:::r_spring
-                    r-spring-security-jwt["🟢 jwt"]:::r_spring
-                    r-spring-security-ldap["🟢 ldap"]:::r_spring
-                    r-spring-security-email["🟢 sec-email"]:::r_spring
-                    r-spring-security-sms["🟢 sec-sms"]:::r_spring
-                    r-spring-security-weco["🟢 sec-weco"]:::r_spring
+                    r-spring-security["🟢 r2mo-spring-security"]:::r_spring
+                    r-spring-security-oauth2client["🟢 r2mo-spring-security-oauth2client"]:::r_spring
+                    r-spring-security-oauth2["🟢 r2mo-spring-security-oauth2"]:::r_spring
+                    r-spring-security-jwt["🟢 r2mo-spring-security-jwt"]:::r_spring
+                    r-spring-security-ldap["🟢 r2mo-spring-security-ldap"]:::r_spring
+                    r-spring-security-email["🟢 r2mo-spring-security-email"]:::r_spring
+                    r-spring-security-sms["🟢 r2mo-spring-security-sms"]:::r_spring
+                    r-spring-security-weco["🟢 r2mo-spring-security-weco"]:::r_spring
                 end
                 %% Utils
-                r-spring-mybatisplus["🟢 mybatisplus"]:::r_spring
-                r-spring-template["🟢 template"]:::r_spring
-                r-spring-excel["🟢 excel"]:::r_spring
-                r-spring-json["🟢 json"]:::r_spring
-                r-spring-cache["🟢 cache"]:::r_spring
-                r-spring-email["🟢 email"]:::r_spring
-                r-spring-sms["🟢 sms"]:::r_spring
-                r-spring-weco["🟢 weco"]:::r_spring
+                r-spring-mybatisplus["🟢 r2mo-spring-mybatisplus"]:::r_spring
+                r-spring-template["🟢 r2mo-spring-template"]:::r_spring
+                r-spring-excel["🟢 r2mo-spring-excel"]:::r_spring
+                r-spring-json["🟢 r2mo-spring-json"]:::r_spring
+                r-spring-cache["🟢 r2mo-spring-cache"]:::r_spring
+                r-spring-email["🟢 r2mo-spring-email"]:::r_spring
+                r-spring-sms["🟢 r2mo-spring-sms"]:::r_spring
+                r-spring-weco["🟢 r2mo-spring-weco"]:::r_spring
             end
 
             subgraph Box_Vertx ["⚛️ Vert.x Stack"]
                 direction TB
-                r-vertx["🟣🟡 vertx"]:::r_vertx
+                r-vertx["🟣🟡 r2mo-vertx"]:::r_vertx
                 subgraph Box_Jooq ["🔮 Jooq"]
-                    r-vertx-jooq["🟣 jooq"]:::r_vertx
-                    r-vertx-jooq-generate["🟣 jooq-gen"]:::r_vertx
-                    r-vertx-jooq-jdbc["🟣 jooq-jdbc"]:::r_vertx
-                    r-vertx-jooq-shared["🟣 jooq-shared"]:::r_vertx
+                    r-vertx-jooq["🟣 r2mo-vertx-jooq"]:::r_vertx
+                    r-vertx-jooq-generate["🟣 r2mo-vertx-jooq-generate"]:::r_vertx
+                    r-vertx-jooq-jdbc["🟣 r2mo-vertx-jooq-jdbc"]:::r_vertx
+                    r-vertx-jooq-shared["🟣 r2mo-vertx-jooq-shared"]:::r_vertx
                 end
             end
         end
@@ -192,26 +192,26 @@ graph LR
         %% --- 2.3 R2MO Impl ---
         subgraph R_Impl ["🔧 Impl"]
             direction TB
-            r-dbe-jooq["🔵 dbe-jooq"]:::r_impl
-            r-dbe-mybatisplus["🔵 dbe-mp"]:::r_impl
-            r-io-local["🔵 io-local"]:::r_impl
-            r-typed-hutool["🔵 typed-hutool"]:::r_impl
-            r-typed-vertx["🔵 typed-vertx"]:::r_impl
+            r-dbe-jooq["🔵 r2mo-dbe-jooq"]:::r_impl
+            r-dbe-mybatisplus["🔵 r2mo-dbe-mybatisplus"]:::r_impl
+            r-io-local["🔵 r2mo-io-local"]:::r_impl
+            r-typed-hutool["🔵 r2mo-typed-hutool"]:::r_impl
+            r-typed-vertx["🔵 r2mo-typed-vertx"]:::r_impl
             subgraph Box_Xync ["⚡ Xync"]
-                r-xync-email["🔵 xync-email"]:::r_impl
-                r-xync-sms["🔵 xync-sms"]:::r_impl
-                r-xync-weco["🔵 xync-weco"]:::r_impl
+                r-xync-email["🔵 r2mo-xync-email"]:::r_impl
+                r-xync-sms["🔵 r2mo-xync-sms"]:::r_impl
+                r-xync-weco["🔵 r2mo-xync-weco"]:::r_impl
             end
         end
 
         %% --- 2.4 R2MO Kernel ---
         subgraph R_Kernel ["👑 Kernel"]
             direction TB
-            r-ams["🟡 ams"]:::r_kernel
-            r-dbe["🟡 dbe"]:::r_kernel
-            r-io["🟡 io"]:::r_kernel
-            r-jaas["🔵 jaas"]:::r_impl
-            r-jce["🔵 jce"]:::r_impl
+            r-ams["🟡 r2mo-ams"]:::r_kernel
+            r-dbe["🟡 r2mo-dbe"]:::r_kernel
+            r-io["🟡 r2mo-io"]:::r_kernel
+            r-jaas["🔵 r2mo-jaas"]:::r_impl
+            r-jce["🔵 r2mo-jce"]:::r_impl
         end
     end
 
