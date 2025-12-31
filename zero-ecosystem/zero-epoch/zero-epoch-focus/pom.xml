@@ -14,10 +14,6 @@
     <dependencies>
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-epoch-setting</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.zerows</groupId>
             <artifactId>zero-epoch-store</artifactId>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator -->

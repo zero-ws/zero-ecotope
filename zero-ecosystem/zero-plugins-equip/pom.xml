@@ -47,5 +47,6 @@
         <module>zero-plugins-security-sms</module>
         <module>zero-plugins-security-email</module>
         <module>zero-plugins-security-weco</module>
+        <module>zero-plugins-cache</module>
     </modules>
 </project>

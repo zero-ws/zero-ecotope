@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
@@ -12,13 +12,6 @@
     <artifactId>zero-boot-extension</artifactId>
     <name>🧬 - Zero::Boot::Extension</name>
     <dependencies>
-
-        <!-- 入口依赖 -->
-        <dependency>
-            <groupId>io.zerows</groupId>
-            <artifactId>zero-boot-epoch-actor</artifactId>
-            <version>${zero.version}</version>
-        </dependency>
         <!--
         静态插件
         - trash
@@ -35,91 +28,12 @@
         </dependency>
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-plugins-flyway</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.zerows</groupId>
-            <artifactId>zero-plugins-security</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.zerows</groupId>
-            <artifactId>zero-plugins-excel</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.zerows</groupId>
             <artifactId>zero-plugins-websocket</artifactId>
         </dependency>
         <!-- 核心底层 -->
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-extension-skeleton</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.zerows</groupId>
             <artifactId>zero-extension-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.zerows</groupId>
-            <artifactId>zero-extension-crud</artifactId>
-        </dependency>
-        <!--
-        带数据库的表结构
-        -->
-        <dependency>
-            <groupId>io.zerows</groupId>
-            <artifactId>zero-exmodule-erp-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.zerows</groupId>
-            <artifactId>zero-exmodule-lbs-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.zerows</groupId>
-            <artifactId>zero-exmodule-finance-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.zerows</groupId>
-            <artifactId>zero-exmodule-ui-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.zerows</groupId>
-            <artifactId>zero-exmodule-tpl-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.zerows</groupId>
-            <artifactId>zero-exmodule-modulat-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.zerows</groupId>
-            <artifactId>zero-exmodule-ambient-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.zerows</groupId>
-            <artifactId>zero-exmodule-report-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.zerows</groupId>
-            <artifactId>zero-exmodule-integration-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.zerows</groupId>
-            <artifactId>zero-exmodule-graphic-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.zerows</groupId>
-            <artifactId>zero-exmodule-rbac-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.zerows</groupId>
-            <artifactId>zero-exmodule-workflow-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.zerows</groupId>
-            <artifactId>zero-exmodule-mbseapi-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.zerows</groupId>
-            <artifactId>zero-exmodule-mbsecore-api</artifactId>
         </dependency>
         <!-- ================= 静态插件 ================== -->
         <dependency>
@@ -130,10 +44,6 @@
             <groupId>io.zerows</groupId>
             <artifactId>zero-plugins-weco</artifactId>
         </dependency>
-        <!--        <dependency>-->
-        <!--            <groupId>io.zerows</groupId>-->
-        <!--            <artifactId>zero-plugins-integration-feign</artifactId>-->
-        <!--        </dependency>-->
         <dependency>
             <groupId>io.zerows</groupId>
             <artifactId>zero-plugins-elasticsearch</artifactId>

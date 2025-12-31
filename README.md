@@ -20,7 +20,7 @@ Zero Waiting
 
 - 为兼容 Spring Boot 开发人员和 Vert.x 开发人员，重新设计底层抽象框架：[Rapid R2MO](https://gitee.com/silentbalanceyh/r2mo-rapid)。
 - 提供两套原生结构专注于 Spring / Vert.x 开发，若只是想要短平快地开发、实施、交付中小项目，可考虑使用。
-- 配置管理分为：本地配置和远程配置（Nacos），配置结构参考：[vertx.yml](https://gitee.com/zero-ws/zero-rachel-momo/blob/master/rachel-momo-app/rachel-momo-app-extension/src/main/resources/vertx.yml)，本次重构的配置结构契合 Spring Boot 中的
+- 配置管理分为：本地配置和远程配置（Nacos），配置结构参考：[vertx.yml](https://gitee.com/zero-ws/zero-rachel-momo/blob/master/rachel-momo-app/app-zero-extension/src/main/resources/vertx.yml)，本次重构的配置结构契合 Spring Boot 中的
   `application.yml` 结构，方便快速上手。
 - 提供 `HActor` 插件/模块 启动器，近似于 `-starter` 模型，更方便扩展开发。
 - 提供快速脚手架初始化工具：[Zero Ai](https://www.vertxai.cn)。
@@ -35,7 +35,25 @@ Zero Waiting
 
 > 精力有限，Vert.x 本在国内属于小众，无法提供更多关于 Zero 的测评数据，现阶段只在部分项目、公司产品研发中使用。
 
-<hr/>
+---
+
+## 1. 模块依赖
+
+### 1.1. 源文件
+
+- [整体依赖图](docs/dependency.md)
+- [R2MO依赖图](docs/dependency-r2mo-compile.md)
+- [ZERO依赖图](docs/dependency-zero-compile.md)
+
+### 1.2. ZERO
+
+![Zero Ecotope 主架构](.r2mo/zero-arch.svg)
+
+### 1.3. R2MO & ZERO
+
+![Zero R2MO 主架构](.r2mo/zero-r2mo-arch.svg)
+
+---
 
 ## 1. 快速开始
 
