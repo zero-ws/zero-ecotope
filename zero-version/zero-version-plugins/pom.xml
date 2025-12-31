@@ -72,7 +72,7 @@
             <!-- ================= 静态插件 ================== -->
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-plugins-store-neo4j</artifactId>
+                <artifactId>zero-plugins-neo4j</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <!-- ================= 基础 / 实现 ================== -->
