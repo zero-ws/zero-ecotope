@@ -3,6 +3,7 @@ package io.zerows.sdk.security;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.enums.SecurityType;
+import io.zerows.spi.HPI;
 
 import java.util.function.Supplier;
 
@@ -17,6 +18,10 @@ public interface Lee {
 
     static Lee of(final Supplier<Lee> constructorFn) {
         return CC_LEE.pick(constructorFn, String.valueOf(constructorFn));
+    }
+
+    static Lee of() {
+        return CC_LEE.pick(() -> HPI.findOneOf(Lee.class), Lee.class.getName());
     }
 
     String encode(JsonObject payload, SecurityType type);

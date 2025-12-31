@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>zero-plugins-monitor-prometheus</artifactId>
-    <name>Zero::Plugins::🧩 - Monitor / Premetheus</name>
+    <name>Zero::Plugins::🧩 - Monitor / 🔥 Premetheus</name>
     <dependencies>
         <!-- Dependency -->
         <dependency>

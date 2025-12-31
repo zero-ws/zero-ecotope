@@ -22,8 +22,12 @@ public class SecurityActor extends AbstractHActor {
     private static final SecurityManager MANAGER = SecurityManager.of();
 
     // ------------ Actor 提供的静态方法 ----------------
-    public static SecurityConfig getConfig(final SecurityType type) {
+    public static SecurityConfig configOf(final SecurityType type) {
         return MANAGER.configOf(type);
+    }
+
+    public static SecurityConfig configJwt() {
+        return MANAGER.configJwt();
     }
 
     @Override

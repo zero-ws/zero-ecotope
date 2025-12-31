@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>zero-plugins-monitor-hawtio</artifactId>
-    <name>Zero::Plugins::🧩 - Monitor / HawtIo</name>
+    <name>Zero::Plugins::🧩 - Monitor / 🔥 HawtIo</name>
     <dependencies>
         <!-- Dependency -->
         <dependency>
