@@ -12,11 +12,11 @@
 } }%%
 graph LR
     %% =========================================================================
-    %% [样式定义库]
+    %% [全局样式定义]
     %% =========================================================================
     linkStyle default interpolate basis stroke:#999,stroke-width:1px
     
-    %% Zero 体系颜色
+    %% --- Zero 体系样式 ---
     classDef z_boot fill:#37474f,stroke:#263238,stroke-width:2px,rx:4,ry:4,color:#fff
     classDef z_ext fill:#f1f8e9,stroke:#558b2f,stroke-width:2px,rx:4,ry:4,color:#33691e
     classDef z_plugin fill:#f3e5f5,stroke:#8e24aa,stroke-width:2px,rx:4,ry:4,color:#4a148c
@@ -26,7 +26,7 @@ graph LR
     classDef z_sec fill:#ffebee,stroke:#c62828,stroke-width:2px,rx:4,ry:4,color:#b71c1c
     classDef z_mon fill:#e0f7fa,stroke:#00838f,stroke-width:2px,rx:4,ry:4,color:#006064
 
-    %% R2MO 体系颜色
+    %% --- R2MO 体系样式 ---
     classDef r_boot fill:#455a64,stroke:#263238,stroke-width:2px,rx:4,ry:4,color:#fff
     classDef r_spring fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px,rx:4,ry:4,color:#1b5e20
     classDef r_vertx fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,rx:4,ry:4,color:#4a148c
@@ -138,17 +138,27 @@ graph LR
     subgraph Zone_R2MO_Infra ["🔷 R2MO Infrastructure"]
         direction LR 
         
-        %% --- 2.1 R2MO Boot ---
-        subgraph R_Boot ["🚀 R2MO Boot"]
+        %% 将 Boot 和 Test 放在一个垂直组里，确保它们对齐且 Test 独立
+        subgraph Group_R_Entry [" "]
             direction TB
-            r-boot-spring-default["🟢 r2mo-boot-spring-default"]:::r_boot
-            r-boot-spring["🟢🟡 r2mo-boot-spring"]:::r_boot
-            r-boot-vertx["🟣🟡 r2mo-boot-vertx"]:::r_boot
-            r-spring-junit5["🧪 r2mo-spring-junit5"]:::r_test
-            r-vertx-junit5["🧪 r2mo-vertx-junit5"]:::r_test
+            
+            %% --- 2.1 R2MO Boot (纯启动) ---
+            subgraph R_Boot ["🚀 R2MO Boot"]
+                direction TB
+                r-boot-spring-default["🟢 r2mo-boot-spring-default"]:::r_boot
+                r-boot-spring["🟢🟡 r2mo-boot-spring"]:::r_boot
+                r-boot-vertx["🟣🟡 r2mo-boot-vertx"]:::r_boot
+            end
+
+            %% --- 2.2 R2MO Test (独立测试层) ---
+            subgraph R_Test ["🧪 R2MO Test"]
+                direction TB
+                r-spring-junit5["🧪 r2mo-spring-junit5"]:::r_test
+                r-vertx-junit5["🧪 r2mo-vertx-junit5"]:::r_test
+            end
         end
 
-        %% --- 2.2 R2MO Framework (Spring & Vertx Stack) ---
+        %% --- 2.3 R2MO Framework (Spring & Vertx Stack) ---
         subgraph R_Framework ["🛠 Ecosystems"]
             direction TB
             
@@ -189,7 +199,7 @@ graph LR
             end
         end
 
-        %% --- 2.3 R2MO Impl ---
+        %% --- 2.4 R2MO Impl ---
         subgraph R_Impl ["🔧 Impl"]
             direction TB
             r-dbe-jooq["🔵 r2mo-dbe-jooq"]:::r_impl
@@ -204,7 +214,7 @@ graph LR
             end
         end
 
-        %% --- 2.4 R2MO Kernel ---
+        %% --- 2.5 R2MO Kernel ---
         subgraph R_Kernel ["👑 Kernel"]
             direction TB
             r-ams["🟡 r2mo-ams"]:::r_kernel
@@ -272,6 +282,8 @@ graph LR
     r-boot-vertx --> r-dbe & r-io & r-jce & r-jaas & r-vertx
     r-boot-spring --> r-dbe & r-io & r-jce & r-jaas & r-spring
     r-boot-spring-default --> r-boot-spring & r-spring-mybatisplus & r-spring-json & r-typed-hutool & r-io-local
+    
+    %% R2MO Test Links (Dashed)
     r-vertx-junit5 -.-> r-boot-vertx
     r-spring-junit5 -.-> r-boot-spring & r-dbe-mybatisplus
 
@@ -294,6 +306,9 @@ graph LR
     
     style Zone_R2MO_Infra fill:#e3f2fd,stroke:#90caf9,stroke-width:2px
     style R_Boot fill:#cfd8dc,stroke:#b0bec5,stroke-width:2px
+    style R_Test fill:#e0f2f1,stroke:#009688,stroke-width:2px,stroke-dasharray: 5,5
+    style Group_R_Entry fill:none,stroke:none
+
     style R_Framework fill:#f5f5f5,stroke:#e0e0e0,stroke-width:1px
     style R_Impl fill:#e1f5fe,stroke:#b3e5fc,stroke-width:1px
     style R_Kernel fill:#fffde7,stroke:#fff9c4,stroke-width:1px
