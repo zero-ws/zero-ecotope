@@ -1,5 +1,6 @@
 package io.zerows.cosmic.bootstrap;
 
+import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.BodyHandler;
@@ -71,8 +72,9 @@ public class AxisCommon implements Axis {
         final Router router = server.refRouter();
         final Vertx vertx = server.refVertx();
         // 新版 HActor 的实现类中直接构造，内部可如此使用
-        final SessionHandler handler = SessionActor.ofHandler(vertx);
-        router.route().order(KWeb.ORDER.SESSION)
-            .handler(handler);
+        final Future<SessionHandler> handlerFuture = SessionActor.waitHandler(vertx);
+        handlerFuture.onSuccess(router
+            .route()
+            .order(KWeb.ORDER.SESSION)::handler);
     }
 }

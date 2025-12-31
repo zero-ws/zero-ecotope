@@ -1,12 +1,16 @@
 package io.zerows.plugins.session;
 
 import io.r2mo.typed.cc.Cc;
+import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.ext.web.handler.SessionHandler;
 import io.vertx.ext.web.sstore.ClusteredSessionStore;
 import io.vertx.ext.web.sstore.LocalSessionStore;
 import io.vertx.ext.web.sstore.SessionStore;
 import io.zerows.sdk.plugins.AddOnManager;
+
+import java.util.Objects;
+import java.util.function.Supplier;
 
 /**
  * 内部会话客户端管理器
@@ -34,13 +38,16 @@ class SessionManager extends AddOnManager<SessionClient> {
 
     // --------------------------------------------------------------------------------
 
-    /**
-     * 二级对象，同样的一个 {@link AddOnManager}，但是管理的对象变成了 {@link SessionStore}。
-     *
-     * @return SessionStore 管理器
-     */
-    public SessionStoreManager STORE() {
-        return this.storeManager;
+    public Future<SessionStore> getOrCreate(final String key, final Supplier<Future<SessionStore>> asyncSupplier) {
+        final SessionStore stored = this.storeManager.get(key);
+        if (Objects.nonNull(stored)) {
+            return Future.succeededFuture(stored);
+        } else {
+            return asyncSupplier.get().compose(created -> {
+                this.storeManager.put(key, created);
+                return Future.succeededFuture(created);
+            });
+        }
     }
 
     public static class SessionStoreManager extends AddOnManager<SessionStore> {

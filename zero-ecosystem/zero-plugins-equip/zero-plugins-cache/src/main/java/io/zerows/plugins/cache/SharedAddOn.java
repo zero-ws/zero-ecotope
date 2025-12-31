@@ -16,7 +16,7 @@ class SharedAddOn extends AddOnBase<SharedClient> {
         super(vertx, config);
     }
 
-    public static SharedAddOn of() {
+    static SharedAddOn of() {
         return INSTANCE;
     }
 
