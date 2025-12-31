@@ -49,7 +49,11 @@ class AuthenticationNative {
         if (Objects.isNull(config)) {
             return null;
         }
-        return (T) SecurityProvider.of(config.type()).configureProvider401(vertxRef, config);
+        final SecurityProvider provider = SecurityProvider.of(config.type());
+        if (Objects.isNull(provider)) {
+            return null;
+        }
+        return (T) provider.configureProvider401(vertxRef, config);
     }
 
     static AuthenticationHandler createHandler(final Vertx vertxRef, final SecurityMeta meta) {
@@ -57,6 +61,10 @@ class AuthenticationNative {
         if (Objects.isNull(config)) {
             return null;
         }
-        return SecurityProvider.of(config.type()).configureHandler401(vertxRef, config);
+        final SecurityProvider provider = SecurityProvider.of(config.type());
+        if (Objects.isNull(provider)) {
+            return null;
+        }
+        return provider.configureHandler401(vertxRef, config);
     }
 }

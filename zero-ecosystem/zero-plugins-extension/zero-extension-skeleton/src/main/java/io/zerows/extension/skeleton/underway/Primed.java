@@ -1,6 +1,7 @@
 package io.zerows.extension.skeleton.underway;
 
 import io.vertx.core.Future;
+import io.vertx.core.Vertx;
 import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.epoch.management.OCacheConfiguration;
 import io.zerows.extension.skeleton.metadata.MDModuleManager;
@@ -35,9 +36,10 @@ public interface Primed {
      *     3. 提供更大的灵活性，允许实现类根据需要对所有模块进行统一处理
      * </pre>
      *
-     * @param waitSet 所有已经启动的模块信息
+     * @param waitSet  所有已经启动的模块信息
+     * @param vertxRef Vertx 实例引用
      *
      * @return 异步处理结果
      */
-    Future<Boolean> afterAsync(Set<MDConfiguration> waitSet);
+    Future<Boolean> afterAsync(Set<MDConfiguration> waitSet, Vertx vertxRef);
 }

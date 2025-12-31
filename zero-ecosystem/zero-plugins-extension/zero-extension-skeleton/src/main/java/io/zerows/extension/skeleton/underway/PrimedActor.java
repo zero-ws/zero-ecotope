@@ -52,7 +52,7 @@ public class PrimedActor extends ExAbstractHActor {
         this.vLog("@ / {} 系统检测到 {} 个模块！", KeConstant.K_PREFIX_BOOT, exmodule.size());
         executors.forEach(executor -> {
             this.vLog("@ / 执行后期调度器：{}", executor.getClass().getName());
-            futures.add(executor.afterAsync(exmodule));
+            futures.add(executor.afterAsync(exmodule, vertxRef));
         });
         return Fx.combineB(futures);
     }

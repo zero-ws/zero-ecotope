@@ -13,9 +13,11 @@ public interface ClassFilter {
     static boolean isValidMember(final Class<?> type) {
         try {
             // Fix issue of Guice
-            // java.lang.NoClassDefFoundError: camundajar/impl/scala/reflect/macros/blackbox/Context
+            // java.lang.NoClassDefFoundError: camundajar/impl/scala/reflect/macros/blackbox/Context（普通误扫描）
+            // java.lang.NoClassDefFoundError: org/springframework/data/redis/core/StringRedisTemplate（Inject误扫描）
             type.getDeclaredMethods();
             type.getDeclaredFields();
+            type.getDeclaredConstructors();
             return true;
         } catch (NoClassDefFoundError ex) {
             return false;
