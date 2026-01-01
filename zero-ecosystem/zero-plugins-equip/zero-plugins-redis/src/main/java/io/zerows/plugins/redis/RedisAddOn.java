@@ -5,13 +5,14 @@ import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.vertx.redis.client.Redis;
 import io.vertx.redis.client.RedisOptions;
-import io.zerows.sdk.plugins.AddOnBase;
+import io.zerows.sdk.plugins.AddOnVertx;
 import io.zerows.specification.configuration.HConfig;
 
 /**
  * @author lang : 2026-01-01
  */
-class RedisAddOn extends AddOnBase<Redis> {
+class RedisAddOn extends AddOnVertx<Redis> {
+    private static final String NAME_ADDON = "AddOn/DEFAULT";
     private static RedisAddOn INSTANCE;
 
     private RedisAddOn(final Vertx vertx, final HConfig config) {
@@ -28,6 +29,11 @@ class RedisAddOn extends AddOnBase<Redis> {
             INSTANCE = new RedisAddOn(vertx, config);
         }
         return INSTANCE;
+    }
+
+    @Override
+    protected String name() {
+        return NAME_ADDON;
     }
 
     @Override

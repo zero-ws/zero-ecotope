@@ -43,9 +43,13 @@ public abstract class AbstractHActor implements HActor {
     }
 
     protected void vLog(final String message, final Object... params) {
-        final Logger logger = LoggerFactory.getLogger(this.getClass());
+        final Logger logger = this.vLog();
         final Object[] parameters = this.elementConcat(this.vLogColor(), params);
         logger.info("{}        \uD83D\uDCA4 ---> " + message, parameters);
+    }
+
+    protected Logger vLog() {
+        return LoggerFactory.getLogger(this.getClass());
     }
 
     protected String vLogColor() {
