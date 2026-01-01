@@ -12,14 +12,14 @@
     <artifactId>zero-plugins-security</artifactId>
     <name>Zero::Plugins::🧩 - Security</name>
     <dependencies>
-        <dependency>
-            <groupId>io.zerows</groupId>
-            <artifactId>zero-epoch-execution</artifactId>
-        </dependency>
         <!-- Session Support -->
         <dependency>
             <groupId>io.zerows</groupId>
             <artifactId>zero-plugins-session</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-plugins-cache</artifactId>
         </dependency>
         <!-- ABAC ( 未来版本支持 ) -->
         <dependency>

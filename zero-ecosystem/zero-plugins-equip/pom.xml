@@ -13,39 +13,37 @@
     <packaging>pom</packaging>
     <name>(POM) 📚️ - Zero::Plugins</name>
     <modules>
-        <!-- 旧版 -->
-        <module>zero-plugins-sms</module>
+        <module>zero-plugins-cache</module>
         <module>zero-plugins-elasticsearch</module>
-        <module>zero-plugins-store-neo4j</module>
-        <module>zero-plugins-weco</module>
-
-
-        <module>zero-plugins-trash</module>
-        <module>zero-plugins-flyway</module>
-        <module>zero-plugins-swagger</module>
         <module>zero-plugins-email</module>
         <module>zero-plugins-excel</module>
-        <module>zero-plugins-websocket</module>
+        <module>zero-plugins-flyway</module>
+        <module>zero-plugins-neo4j</module>
         <module>zero-plugins-redis</module>
+        <module>zero-plugins-session</module>
+        <module>zero-plugins-sms</module>
+        <module>zero-plugins-swagger</module>
+        <module>zero-plugins-trash</module>
+        <module>zero-plugins-websocket</module>
+        <module>zero-plugins-weco</module>
 
 
         <!-- Security -->
         <module>zero-plugins-security</module>
-        <module>zero-plugins-security-oauth2</module>
-        <module>zero-plugins-security-otp</module>
+        <module>zero-plugins-security-email</module>
         <module>zero-plugins-security-htdigest</module>
-        <module>zero-plugins-security-ldap</module>
         <module>zero-plugins-security-htpasswd</module>
         <module>zero-plugins-security-jwt</module>
-        <module>zero-plugins-session</module>
+        <module>zero-plugins-security-ldap</module>
+        <module>zero-plugins-security-oauth2</module>
+        <module>zero-plugins-security-otp</module>
+        <module>zero-plugins-security-sms</module>
+        <module>zero-plugins-security-weco</module>
 
 
         <!-- Monitor -->
         <module>zero-plugins-monitor</module>
         <module>zero-plugins-monitor-hawtio</module>
         <module>zero-plugins-monitor-prometheus</module>
-        <module>zero-plugins-security-sms</module>
-        <module>zero-plugins-security-email</module>
-        <module>zero-plugins-security-weco</module>
     </modules>
 </project>

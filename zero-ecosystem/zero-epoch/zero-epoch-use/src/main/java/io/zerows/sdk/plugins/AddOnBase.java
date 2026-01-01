@@ -3,6 +3,7 @@ package io.zerows.sdk.plugins;
 import com.google.inject.Key;
 import io.r2mo.SourceReflect;
 import io.vertx.core.Vertx;
+import io.zerows.specification.configuration.HActor;
 import io.zerows.specification.configuration.HConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,13 +11,40 @@ import org.slf4j.LoggerFactory;
 import java.util.Objects;
 
 /**
+ * 此类的子类通常会包含两个静态方法
+ * <pre>
+ *     static Xxx of() {
+ *         return INSTANCE;
+ *     }
+ *
+ *     static Xxx of(final Vertx vertx, final HConfig config) {
+ *         if (INSTANCE == null) {
+ *             INSTANCE = new Xxx(vertx, config);
+ *         }
+ *         return INSTANCE;
+ *     }
+ * </pre>
+ * 其中 Xxx 是子类名称，用于构造单例对象：
+ * <pre>
+ *     1. 启动周期：
+ *        of(Vertx,HConfig) 方法用于首次创建单例对象，在 {@link HActor} 启动时创建，由于 {@link AddOn} 本身是单例模式，
+ *        一旦创建之后，INSTANCE 就不会再变更。
+ *     2. 请求周期：
+ *        of() 方法用于后续获取单例对象，直接返回 INSTANCE，通常在普通场景下使用。
+ * </pre>
+ * AddOn 组件会分为两种，用于创建真实环境中的 Client 对象
+ * <pre>
+ *     1. Client 为自定义对象，直接从当前类继承
+ *     2. Client 为 Vert.x 组件，继承自 {@link AddOnVertx} -> 特殊 Client，无法追加 {@link AddOn.Name} 注解
+ * </pre>
+ *
  * @author lang : 2025-10-16
  */
 public abstract class AddOnBase<DI> implements AddOn<DI> {
 
+    protected final Class<DI> clazzDi;
     private final Vertx vertx;
     private final HConfig config;
-    private final Class<DI> clazzDi;
 
     protected AddOnBase(final Vertx vertx, final HConfig config) {
         this.vertx = vertx;

@@ -14,6 +14,7 @@ import io.zerows.cortex.management.StoreVertx;
 import io.zerows.cortex.metadata.RunRoute;
 import io.zerows.cortex.metadata.RunServer;
 import io.zerows.cortex.metadata.RunVertx;
+import io.zerows.cortex.sdk.AtSession;
 import io.zerows.cosmic.bootstrap.Linear;
 import io.zerows.epoch.basicore.YmSpec;
 import io.zerows.epoch.basicore.option.ClusterOptions;
@@ -111,6 +112,7 @@ public class VertxApplication {
          */
         HPI.registry(
             Lee.class,                  // 🔐 安全组件，提供系统安全验证和授权功能
+            AtSession.class,            // 🧾 会话管理组件，处理用户会话和状态维护
             WallProvider.class,         // 🛡️ 安全提供者组件，实现具体的安全策略和防护机制
             FactoryDBAsync.class,       // 🚀 异步DBE，基于 Vert.x 提供异步数据库操作能力
             AxisSockFactory.class,      // 🧦 WebSocket工厂，处理 WebSocket 连接和通信

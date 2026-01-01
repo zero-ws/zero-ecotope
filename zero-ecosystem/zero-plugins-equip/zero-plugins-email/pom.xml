@@ -14,6 +14,10 @@
     <dependencies>
         <dependency>
             <groupId>io.zerows</groupId>
+            <artifactId>zero-epoch-execution</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.zerows</groupId>
             <artifactId>r2mo-xync-email</artifactId>
             <version>${r2mo.version}</version>
         </dependency>

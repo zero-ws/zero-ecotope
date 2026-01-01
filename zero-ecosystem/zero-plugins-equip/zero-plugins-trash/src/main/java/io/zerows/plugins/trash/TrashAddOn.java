@@ -16,7 +16,7 @@ class TrashAddOn extends AddOnBase<TrashClient> {
         super(vertx, config);
     }
 
-    public static TrashAddOn of() {
+    static TrashAddOn of() {
         return INSTANCE;
     }
 

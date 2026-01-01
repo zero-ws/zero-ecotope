@@ -551,6 +551,7 @@ public interface YmSpec {
 
             interface options {
                 // 扩展配置
+                String __ = "options";
             }
         }
 

@@ -16,15 +16,6 @@
             <groupId>io.vertx</groupId>
             <artifactId>vertx-web-api-contract</artifactId>
         </dependency>
-        <!-- Feign Client -->
-<!--        <dependency>-->
-<!--            <groupId>io.zerows</groupId>-->
-<!--            <artifactId>zero-plugins-integration-feign</artifactId>-->
-<!--        </dependency>-->
-        <dependency>
-            <groupId>io.zerows</groupId>
-            <artifactId>zero-epoch-setting</artifactId>
-        </dependency>
         <dependency>
             <groupId>io.swagger.core.v3</groupId>
             <artifactId>swagger-core</artifactId>
@@ -42,11 +33,6 @@
         <dependency>
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-yaml</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.github.classgraph</groupId>
-            <artifactId>classgraph</artifactId>
-            <version>4.8.158</version>
         </dependency>
         <dependency>
             <groupId>io.zerows</groupId>

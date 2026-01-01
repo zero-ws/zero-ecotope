@@ -1,6 +1,10 @@
 package io.zerows.epoch.constant;
 
-import io.zerows.epoch.annotations.impl.*;
+import io.zerows.epoch.annotations.impl.Jooq;
+import io.zerows.epoch.annotations.impl.Mongo;
+import io.zerows.epoch.annotations.impl.MySql;
+import io.zerows.epoch.annotations.impl.Redis;
+import io.zerows.epoch.annotations.impl.Rpc;
 import io.zerows.epoch.application.YmlCore;
 import jakarta.inject.Inject;
 
@@ -13,6 +17,7 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * Default plugin applied to vertx
  */
+@Deprecated
 public interface KPlugin {
 
     String[] FILE_KEY = new String[]{

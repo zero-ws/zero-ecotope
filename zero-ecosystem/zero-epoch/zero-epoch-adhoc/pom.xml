@@ -16,10 +16,6 @@
             <groupId>io.zerows</groupId>
             <artifactId>zero-epoch-store</artifactId>
         </dependency>
-        <dependency>
-            <groupId>io.zerows</groupId>
-            <artifactId>zero-epoch-use</artifactId>
-        </dependency>
 
         <!-- Unit Testing -->
         <dependency>

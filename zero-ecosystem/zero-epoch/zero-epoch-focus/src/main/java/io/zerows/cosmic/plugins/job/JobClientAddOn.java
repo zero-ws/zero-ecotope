@@ -15,7 +15,7 @@ class JobClientAddOn extends AddOnBase<JobClient> {
         super(vertx, config);
     }
 
-    public static JobClientAddOn of() {
+    static JobClientAddOn of() {
         return INSTANCE;
     }
 

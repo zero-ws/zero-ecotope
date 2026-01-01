@@ -3,7 +3,7 @@ package io.zerows.extension.module.ui.spi;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.cosmic.plugins.cache.Rapid;
+import io.zerows.plugins.cache.Rapid;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.module.ui.common.UiConstant;
 import io.zerows.extension.module.ui.domain.tables.pojos.UiView;

@@ -3,7 +3,7 @@ package io.zerows.extension.module.rbac.boot;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.cosmic.plugins.cache.Rapid;
+import io.zerows.plugins.cache.Rapid;
 import io.zerows.extension.module.rbac.metadata.logged.ScUser;
 import io.zerows.extension.module.rbac.common.ScConstant;
 import io.zerows.extension.module.rbac.domain.tables.pojos.SPath;

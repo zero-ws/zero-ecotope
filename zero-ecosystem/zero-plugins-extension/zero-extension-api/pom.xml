@@ -12,11 +12,6 @@
     <artifactId>zero-extension-api</artifactId>
     <name>🧬 - Zero::Extension::Api</name>
     <dependencies>
-        <!-- Kern -->
-        <dependency>
-            <groupId>io.zerows</groupId>
-            <artifactId>zero-extension-skeleton</artifactId>
-        </dependency>
         <dependency>
             <groupId>io.zerows</groupId>
             <artifactId>zero-extension-crud</artifactId>

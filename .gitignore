@@ -37,7 +37,6 @@ build/
 ### Mac OS ###
 .DS_Store
 .idea/
-docs/
 *.versionsBackup
 dependency-reduced-pom.xml
 script/code/*.jar

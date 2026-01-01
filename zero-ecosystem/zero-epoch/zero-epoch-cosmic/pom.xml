@@ -15,11 +15,11 @@
         <!-- Dependency -->
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-epoch-execution</artifactId>
+            <artifactId>zero-plugins-session</artifactId>
         </dependency>
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-plugins-session</artifactId>
+            <artifactId>zero-plugins-cache</artifactId>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator -->
         <dependency>

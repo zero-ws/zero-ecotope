@@ -36,16 +36,18 @@ public class SessionActor extends AbstractHActor {
      *
      * @return SessionHandler
      */
-    public static SessionHandler ofHandler(final Vertx vertx) {
-        final SessionStore store = ofStore(vertx);
-        return SessionHandler.create(store)
-            .setCookieHttpOnlyFlag(true);
+    public static Future<SessionHandler> waitHandler(final Vertx vertx) {
+        return waitStore(vertx).compose(store -> {
+            final SessionHandler handler = SessionHandler.create(store)
+                .setCookieHttpOnlyFlag(true);
+            return Future.succeededFuture(handler);
+        });
     }
 
-    public static SessionStore ofStore(final Vertx vertx) {
+    public static Future<SessionStore> waitStore(final Vertx vertx) {
         Objects.requireNonNull(vertx);
         final String key = SessionUtil.keyOf(vertx);
-        return MANAGER.STORE().get(key, (ignored) -> SessionUtil.createStore(vertx));
+        return MANAGER.getOrCreate(key, () -> SessionUtil.createStore(vertx));
     }
 
     @Override

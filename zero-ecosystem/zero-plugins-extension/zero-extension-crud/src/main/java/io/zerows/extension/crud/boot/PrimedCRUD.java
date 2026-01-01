@@ -2,6 +2,7 @@ package io.zerows.extension.crud.boot;
 
 import io.r2mo.typed.annotation.SPID;
 import io.vertx.core.Future;
+import io.vertx.core.Vertx;
 import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.extension.skeleton.underway.Primed;
 
@@ -13,7 +14,7 @@ import java.util.Set;
 @SPID(priority = 1024)
 public class PrimedCRUD implements Primed {
     @Override
-    public Future<Boolean> afterAsync(final Set<MDConfiguration> waitSet) {
+    public Future<Boolean> afterAsync(final Set<MDConfiguration> waitSet, final Vertx vertxRef) {
         /*
          * 带有 Overwrite 的执行处理流程
          */

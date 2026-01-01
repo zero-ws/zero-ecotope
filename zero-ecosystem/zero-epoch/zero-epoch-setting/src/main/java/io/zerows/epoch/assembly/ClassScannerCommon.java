@@ -17,14 +17,42 @@ import java.util.stream.StreamSupport;
  * 1. 解决了在非 URLClassLoader 环境下（如 Zero/Vert.x 工具启动时）扫描不到类的问题。
  * 2. 利用 ClassGraph 底层多线程扫描。
  * 3. 保持原有的“静默加载”和“最终过滤”逻辑。
+ * 4. 增加了外部包扫描日志打印，便于排查依赖问题。
  */
 @Slf4j
 @SuppressWarnings("all")
 class ClassScannerCommon implements ClassScanner {
 
-    /** 并发结果集合 */
+    /**
+     * 全局去重集合：记录已打印过的包名
+     * (必须是 static final 放在类级别，否则每次调用方法都会重置，无法去重)
+     */
+    private static final Set<String> LOGGED_PACKAGES = ConcurrentHashMap.newKeySet();
+
     private static Set<Class<?>> newConcurrentSet() {
         return ConcurrentHashMap.newKeySet();
+    }
+
+    /**
+     * 记录并打印扫描到的外部包名
+     * * @param packageName 从 ClassInfo 获取的包名字符串
+     */
+    private void logScannedPackage(String packageName) {
+        if (packageName == null || packageName.isEmpty()) {
+            return;
+        }
+
+        // 1. 过滤排除指定前缀 (本框架内部包 io.zerows 和 io.r2mo)
+        if (packageName.startsWith("io.zerows") || packageName.startsWith("io.r2mo")) {
+            return;
+        }
+
+        // 2. 去重并打印
+        // add 方法如果返回 true，说明集合中之前没有这个元素（即第一次遇到）
+        // 这样既完成了去重检查，又完成了添加操作，且是原子性的
+        if (LOGGED_PACKAGES.add(packageName)) {
+            System.out.println(packageName);
+        }
     }
 
     @Override
@@ -33,7 +61,6 @@ class ClassScannerCommon implements ClassScanner {
         final Set<Class<?>> loaded = newConcurrentSet();
 
         // 获取黑名单配置 (假设 ClassFilterPackage.SKIP_PACKAGE 是 String[] 或 List<String>)
-        // ClassGraph 的 rejectPackages 支持 String... 变长参数
         String[] skipPackages = ClassFilterPackage.SKIP_PACKAGE;
 
         int totalTopLevel = 0;
@@ -48,20 +75,24 @@ class ClassScannerCommon implements ClassScanner {
             .ignoreClassVisibility()
             .scan()) {
 
-            // 获取所有扫描到的类信息（此时并未加载 Class 对象）
+            // 获取所有扫描到的类信息
             var allClassInfo = scanResult.getAllClasses();
             totalTopLevel = allClassInfo.size();
 
-            // 使用并行流进行真正的类加载（保持你原有的异常处理逻辑）
+            // 使用并行流进行真正的类加载
             StreamSupport.stream(allClassInfo.spliterator(), true).unordered()
                 .forEach(ci -> {
+                    // [新增] 在加载类之前打印包名
+                    // 这样即使 loadClass 失败，也能知道是哪个包出的问题
+                    logScannedPackage(ci.getPackageName());
+
                     try {
                         // loadClass() 会使用扫描时检测到的正确 ClassLoader
                         final Class<?> cls = ci.loadClass();
                         loaded.add(cls);
                     } catch (Throwable e) {
                         // 保持原逻辑：静默处理依赖缺失或加载错误
-                        // ClassGraph 的 loadClass() 可能会抛出 IllegalArgumentException 如果依赖缺失
+                        // 例如 NoClassDefFoundError 会在这里被捕获
                     }
                 });
 

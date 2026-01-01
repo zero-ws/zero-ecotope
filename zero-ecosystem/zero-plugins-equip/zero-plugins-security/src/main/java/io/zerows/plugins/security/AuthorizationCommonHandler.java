@@ -16,11 +16,11 @@ import io.vertx.ext.auth.authorization.AuthorizationProvider;
 import io.vertx.ext.auth.authorization.Authorizations;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.AuthorizationHandler;
-import io.zerows.cosmic.plugins.cache.Rapid;
 import io.zerows.epoch.annotations.Wall;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.metadata.security.SecurityMeta;
+import io.zerows.plugins.cache.Rapid;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -39,8 +39,8 @@ import java.util.function.BiConsumer;
  */
 @Slf4j
 class AuthorizationCommonHandler implements AuthorizationHandler {
-    private final List<ResourceHandler> handlerList = new ArrayList<>();
     private static final WebException ERROR_FORBIDDEN = new _403ForbiddenException("[ ZERO ] 无权限访问申请资源！");
+    private final List<ResourceHandler> handlerList = new ArrayList<>();
 
     private AuthorizationCommonHandler(final List<ResourceHandler> handlerList) {
         this.handlerList.addAll(handlerList);
