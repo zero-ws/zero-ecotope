@@ -45,5 +45,6 @@
         <module>zero-plugins-monitor</module>
         <module>zero-plugins-monitor-hawtio</module>
         <module>zero-plugins-monitor-prometheus</module>
+        <module>zero-plugins-cache-ehcache</module>
     </modules>
 </project>

@@ -1,5 +1,6 @@
 package io.zerows.support.fn;
 
+import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
@@ -111,11 +112,11 @@ class End {
                 }
             }
         }
-        return ThenM.combineM(tree).compose(treeMap -> {
+        return FnVertx.combineM(tree).compose(treeMap -> {
             final JsonObject treeData = Ut.toJObject(treeMap);
             input.mergeIn(treeData, true);
             return Future.succeededFuture(input);
-        }).compose(response -> ThenM.combineM(children).compose(childMap -> {
+        }).compose(response -> FnVertx.combineM(children).compose(childMap -> {
             final JsonObject childData = Ut.toJObject(childMap);
             response.mergeIn(childData, true);
             return Future.succeededFuture(response);

@@ -15,6 +15,7 @@ import java.util.Set;
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Deprecated
 public class AbstractRapid<K, T> implements Rapid<K, T> {
     protected final String poolName;
     protected final int expired;

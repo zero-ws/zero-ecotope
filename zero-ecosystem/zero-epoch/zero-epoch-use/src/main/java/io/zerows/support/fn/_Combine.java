@@ -1,5 +1,6 @@
 package io.zerows.support.fn;
 
+import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
@@ -325,7 +326,7 @@ class _Combine extends _Atomic {
      * @return 返回执行过的结果数组 Future<ConcurrentMap<K, Tool>>
      */
     public static <K, T> Future<ConcurrentMap<K, T>> combineM(final ConcurrentMap<K, Future<T>> futureMap) {
-        return ThenM.combineM(futureMap);
+        return FnVertx.combineM(futureMap);
     }
     // >>> 返回：Future<Tool>
 
@@ -415,10 +416,10 @@ class _Combine extends _Atomic {
      */
     public static <T> Future<ConcurrentMap<String, T>> compressM(final List<Future<ConcurrentMap<String, T>>> futures,
                                                                  final BinaryOperator<T> combinerOf) {
-        return ThenM.compressM(futures, combinerOf);
+        return FnVertx.compressM(futures, combinerOf);
     }
 
     public static Future<ConcurrentMap<String, JsonArray>> compressM(final List<Future<ConcurrentMap<String, JsonArray>>> futures) {
-        return ThenM.compressM(futures, (original, latest) -> original.addAll(latest));
+        return FnVertx.compressM(futures, (original, latest) -> original.addAll(latest));
     }
 }

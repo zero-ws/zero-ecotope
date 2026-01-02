@@ -12,6 +12,7 @@ import java.util.function.Supplier;
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Deprecated
 @Slf4j
 class RapidObject<T> extends AbstractRapid<String, T> {
 

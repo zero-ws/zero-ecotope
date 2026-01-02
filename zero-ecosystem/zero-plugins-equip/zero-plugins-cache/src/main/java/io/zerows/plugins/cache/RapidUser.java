@@ -12,6 +12,7 @@ import java.util.function.Supplier;
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Deprecated
 @Slf4j
 public class RapidUser<T> extends AbstractRapid<String, T> {
     private final transient String rootKey;
@@ -33,13 +34,14 @@ public class RapidUser<T> extends AbstractRapid<String, T> {
                 log.info("[ ZERO ] ( Pool ) \u001b[0;37mK = `{}`, R = `{}`, P = `{}`\u001b[m",
                     key, this.rootKey, this.pool().name());
                 return Ut.future((T) cached.getValue(key));
-            } else {
-                final JsonObject stored = cached;
-                return executor.get().compose(item -> {
-                    stored.put(key, item);
-                    return this.pool().put(this.rootKey, stored).compose(nil -> Ut.future(item));
-                });
             }
+
+
+            final JsonObject stored = cached;
+            return executor.get().compose(item -> {
+                stored.put(key, item);
+                return this.pool().put(this.rootKey, stored).compose(nil -> Ut.future(item));
+            });
         });
     }
 }

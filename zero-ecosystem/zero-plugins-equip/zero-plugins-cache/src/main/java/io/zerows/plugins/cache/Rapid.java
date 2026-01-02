@@ -14,6 +14,7 @@ import java.util.function.Supplier;
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Deprecated
 @SuppressWarnings("all")
 public interface Rapid<K, V> {
     Cc<String, Rapid> CC_RAPID = Cc.openThread();
