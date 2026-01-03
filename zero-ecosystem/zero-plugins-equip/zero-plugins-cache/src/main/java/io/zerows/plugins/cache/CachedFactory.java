@@ -5,7 +5,7 @@ import io.r2mo.vertx.common.cache.MemoOptions;
 import io.vertx.core.Vertx;
 
 /**
- * 针对缓存的工厂设定，底层 SPI 必备，只实现一个 SPI 即可。
+ * 针对缓存的工厂设定，底层 SPI 必备，只实现一个 SPI 即可
  */
 public interface CachedFactory {
 
