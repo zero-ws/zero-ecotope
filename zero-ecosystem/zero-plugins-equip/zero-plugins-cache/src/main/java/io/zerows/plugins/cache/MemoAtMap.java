@@ -4,6 +4,7 @@ import io.r2mo.typed.common.Kv;
 import io.r2mo.vertx.common.cache.MemoAtBase;
 import io.r2mo.vertx.common.cache.MemoOptions;
 import io.vertx.core.Future;
+import io.vertx.core.Vertx;
 import io.vertx.core.shareddata.AsyncMap;
 import lombok.extern.slf4j.Slf4j;
 
@@ -33,8 +34,13 @@ public abstract class MemoAtMap<K, V> extends MemoAtBase<K, V> {
     // 异步 Map 实例缓存
     private volatile Future<AsyncMap<K, V>> mapFuture;
 
-    protected MemoAtMap(final String name, final MemoOptions<K, V> options, final Function<V, V> copier) {
-        super(name, options);
+    /**
+     * @param vertx   Vertx 实例
+     * @param options 配置项
+     * @param copier  拷贝函数
+     */
+    protected MemoAtMap(final Vertx vertx, final MemoOptions<K, V> options, final Function<V, V> copier) {
+        super(vertx, options);
         // 1. 设置拷贝策略，如果未提供则默认不拷贝
         this.copier = Objects.nonNull(copier) ? copier : v -> v;
 
@@ -43,7 +49,7 @@ public abstract class MemoAtMap<K, V> extends MemoAtBase<K, V> {
         if (Objects.nonNull(duration) && !duration.isZero() && !duration.isNegative()) {
             this.ttl = duration.toMillis();
             if (this.ttl > 0) {
-                log.info("[ ZERO ] 缓存 [{}] 启用 TTL 机制，过期时间: {} ms", name, this.ttl);
+                log.info("[ ZERO ] 缓存 [{}] 启用 TTL 机制，过期时间: {} ms", this.name(), this.ttl);
             }
         } else {
             this.ttl = 0;
@@ -67,7 +73,7 @@ public abstract class MemoAtMap<K, V> extends MemoAtBase<K, V> {
         synchronized (this) {
             if (this.mapFuture == null) {
                 this.mapFuture = this.supplyMap()
-                    .onFailure(err -> log.error("[ ZERO ] 获取 AsyncMap 失败，名称: {}", this.name(), err));
+                        .onFailure(err -> log.error("[ ZERO ] 获取 AsyncMap 失败，名称: {}", this.name(), err));
             }
         }
         return this.mapFuture;
@@ -106,29 +112,36 @@ public abstract class MemoAtMap<K, V> extends MemoAtBase<K, V> {
     @Override
     public Future<Kv<K, V>> remove(final K key) {
         return this.getMap().compose(map ->
-            map.remove(key).map(val -> Kv.create(key, val))
+                map.remove(key).map(val -> Kv.create(key, val))
         );
     }
 
     @Override
     public Future<V> find(final K key) {
         return this.getMap().compose(map ->
-            // 出库后拷贝
-            map.get(key).map(this::copy)
+                // 出库后拷贝
+                map.get(key).map(this::copy)
         );
     }
 
     @Override
     public Future<Boolean> clear() {
         return this.getMap().compose(map ->
-            map.clear().map(true)
+                map.clear().map(true)
         );
     }
 
     @Override
     public Future<Set<K>> keySet() {
         return this.getMap().compose(map ->
-            map.keys().map(HashSet::new)
+                map.keys().map(HashSet::new)
+        );
+    }
+
+    @Override
+    public Future<Integer> size() {
+        return this.getMap().compose(map ->
+                map.size().map(Integer::valueOf)
         );
     }
 }

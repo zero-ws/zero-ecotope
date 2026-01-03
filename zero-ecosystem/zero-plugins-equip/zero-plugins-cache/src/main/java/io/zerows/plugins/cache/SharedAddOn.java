@@ -2,6 +2,8 @@ package io.zerows.plugins.cache;
 
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import io.vertx.core.Vertx;
+import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.constant.KName;
 import io.zerows.sdk.plugins.AddOnBase;
 import io.zerows.specification.configuration.HConfig;
 
@@ -36,6 +38,8 @@ class SharedAddOn extends AddOnBase<SharedClient> {
 
     @Override
     protected SharedClient createInstanceBy(final String name) {
-        return SharedClient.createClient(this.vertx(), name);
+        final JsonObject options = this.options();
+        options.put(KName.NAME, name);
+        return SharedClient.createClient(this.vertx(), options);
     }
 }

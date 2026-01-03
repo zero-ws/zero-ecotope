@@ -1,8 +1,8 @@
 package io.zerows.plugins.cache;
 
-import io.r2mo.vertx.common.cache.MemoAt;
 import io.r2mo.vertx.common.cache.MemoOptions;
 import io.vertx.core.Future;
+import io.vertx.core.Vertx;
 import io.vertx.core.shareddata.AsyncMap;
 
 /**
@@ -13,13 +13,10 @@ import io.vertx.core.shareddata.AsyncMap;
  */
 public class MemoAtMapCluster<K, V> extends MemoAtMap<K, V> {
 
-    private MemoAtMapCluster(final String name, final MemoOptions<K, V> options) {
+    // 必须保留此构造函数供反射调用 (SourceReflect.instance)
+    public MemoAtMapCluster(final Vertx vertx, final MemoOptions<K, V> options) {
         // Cluster 模式：直接透传 (v -> v)，因为底层序列化已经做了 Deep Copy
-        super(name, options, v -> v);
-    }
-
-    public static <K, V> MemoAt<K, V> of(final String name, final MemoOptions<K, V> options) {
-        return of(name, options, MemoAtMapCluster.class);
+        super(vertx, options, v -> v);
     }
 
     @Override

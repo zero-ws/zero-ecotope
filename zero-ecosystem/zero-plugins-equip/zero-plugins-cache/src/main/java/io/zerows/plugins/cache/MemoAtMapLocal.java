@@ -1,8 +1,8 @@
 package io.zerows.plugins.cache;
 
-import io.r2mo.vertx.common.cache.MemoAt;
 import io.r2mo.vertx.common.cache.MemoOptions;
 import io.vertx.core.Future;
+import io.vertx.core.Vertx;
 import io.vertx.core.shareddata.AsyncMap;
 
 /**
@@ -13,14 +13,10 @@ import io.vertx.core.shareddata.AsyncMap;
  */
 public class MemoAtMapLocal<K, V> extends MemoAtMap<K, V> {
 
-    private MemoAtMapLocal(final String name, final MemoOptions<K, V> options) {
+    // 必须保留此构造函数供反射调用 (SourceReflect.instance)
+    public MemoAtMapLocal(final Vertx vertx, final MemoOptions<K, V> options) {
         // Local 模式：建议传入深拷贝逻辑，这里暂用 v->v (实际建议从 options 获取 copier)
-        // 示例：super(name, options, JsonObject::copy);
-        super(name, options, v -> v);
-    }
-
-    public static <K, V> MemoAt<K, V> of(final String name, final MemoOptions<K, V> options) {
-        return of(name, options, MemoAtMapLocal.class);
+        super(vertx, options, v -> v);
     }
 
     @Override
