@@ -14,6 +14,7 @@ import java.util.function.Function;
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Deprecated
 class RapidDict extends AbstractRapid<Set<String>, ConcurrentMap<String, JsonArray>> {
     RapidDict(final String cacheKey, final int expired) {
         super(cacheKey, expired);

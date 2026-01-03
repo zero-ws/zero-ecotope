@@ -3,6 +3,7 @@ package io.zerows.sdk.plugins;
 import com.google.inject.Key;
 import io.r2mo.SourceReflect;
 import io.vertx.core.Vertx;
+import io.vertx.core.json.JsonObject;
 import io.zerows.specification.configuration.HActor;
 import io.zerows.specification.configuration.HConfig;
 import org.slf4j.Logger;
@@ -67,6 +68,14 @@ public abstract class AddOnBase<DI> implements AddOn<DI> {
 
     protected HConfig config() {
         return this.config;
+    }
+
+    protected JsonObject options() {
+        if (Objects.isNull(this.config)) {
+            return new JsonObject();
+        }
+        final JsonObject options = this.config.options();
+        return Objects.isNull(options) ? new JsonObject() : options;
     }
 
     @Override

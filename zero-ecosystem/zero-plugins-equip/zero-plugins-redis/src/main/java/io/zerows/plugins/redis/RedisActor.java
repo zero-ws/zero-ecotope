@@ -18,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * @author lang : 2025-12-31
  */
-@Actor(value = "REDIS", sequence = -188)
+@Actor(value = "REDIS", sequence = -207)
 @Slf4j
 public class RedisActor extends AbstractHActor {
 

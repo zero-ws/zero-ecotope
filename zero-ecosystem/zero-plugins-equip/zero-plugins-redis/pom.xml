@@ -17,6 +17,10 @@
             <artifactId>zero-epoch-execution</artifactId>
         </dependency>
         <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-plugins-cache</artifactId>
+        </dependency>
+        <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-redis-client</artifactId>
         </dependency>

@@ -15,10 +15,11 @@ import java.util.Set;
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Deprecated
 public class AbstractRapid<K, T> implements Rapid<K, T> {
     protected final String poolName;
     protected final int expired;
-    private HPO waitPool;
+    private HMM waitPool;
 
     protected AbstractRapid(final String poolName, final int expired) {
         this.poolName = poolName;
@@ -33,9 +34,9 @@ public class AbstractRapid<K, T> implements Rapid<K, T> {
         this.poolName = credit.getString(KName.HABITUS);
     }
 
-    protected HPO pool() {
+    protected HMM pool() {
         if (Objects.isNull(this.waitPool)) {
-            this.waitPool = HPO.of(this.poolName);
+            this.waitPool = HMM.of(this.poolName);
         }
         return this.waitPool;
     }

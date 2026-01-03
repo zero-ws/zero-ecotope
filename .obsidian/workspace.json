@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/dependency.md",
-                "mode": "source",
+                "file": "docs/graph/api/public/app_name_$name.md",
+                "mode": "preview",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "dependency"
+              "title": "app_name_$name"
             }
           }
         ]
@@ -200,6 +200,8 @@
   },
   "active": "ad17b47082cda379",
   "lastOpenFiles": [
+    "docs/dependency.md",
+    "zero-ecosystem/zero-plugins-equip/zero-plugins-cache/src/main/java/io/zerows/plugins/shared",
     "zero-ecosystem/zero-boot/zero-boot-actor/zero-boot-extension-actor/target/classes/io/zerows/boot/full/plugins/UiHunterControl.class",
     "zero-ecosystem/zero-boot/zero-boot-actor/zero-boot-extension-actor/target/classes/io/zerows/boot/full/plugins/SwitcherAtom.class",
     "zero-ecosystem/zero-boot/zero-boot-actor/zero-boot-extension-actor/target/classes/io/zerows/boot/full/plugins/IndentName.class",
@@ -209,10 +211,7 @@
     "zero-ecosystem/zero-boot/zero-boot-actor/zero-boot-extension-actor/target/classes/io/zerows/boot/full/plugins/BeforeDict.class",
     "zero-ecosystem/zero-boot/zero-boot-actor/zero-boot-extension-actor/target/classes/io/zerows/boot/full/plugins/AfterUdEdgeDelete.class",
     "zero-ecosystem/zero-boot/zero-boot-actor/zero-boot-extension-actor/target/classes/io/zerows/boot/full/plugins/AfterUdEdgeAdd.class",
-    "zero-ecosystem/zero-boot/zero-boot-actor/zero-boot-extension-actor/target/classes/io/zerows/boot/full/plugins/AfterPk.class",
-    "zero-ecosystem/zero-boot/zero-boot-actor/zero-boot-extension-actor/target/classes/io/zerows/boot/full/plugins/AfterNode.class",
     "docs/dependency-r2mo-compile.md",
-    "docs/dependency.md",
     "docs/dependency-zero-compile.md",
     "docs/dependency-zero-source.md",
     "docs/dependency-r2mo-source.md",

@@ -9,12 +9,12 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>zero-plugins-cache</artifactId>
-    <name>Zero::Plugins::🧩 - Cache</name>
+    <artifactId>zero-plugins-cache-caffeine</artifactId>
+    <name>Zero::Plugins::🧩 - Cache / Caffeine</name>
     <dependencies>
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-epoch-execution</artifactId>
+            <artifactId>zero-plugins-cache</artifactId>
         </dependency>
     </dependencies>
 </project>
