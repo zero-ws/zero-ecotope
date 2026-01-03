@@ -9,5 +9,5 @@ import io.vertx.core.Vertx;
  */
 public interface CachedFactory {
 
-    <K, V> MemoAt<K, V> createMemoAt(Vertx vertx, MemoOptions<K, V> options);
+    <K, V> MemoAt<K, V> findMemoAt(Vertx vertx, MemoOptions<K, V> options);
 }

@@ -1,6 +1,7 @@
 package io.zerows.plugins.cache;
 
 import io.vertx.core.Vertx;
+import io.vertx.core.json.JsonObject;
 import io.zerows.sdk.plugins.AddOn;
 
 /**
@@ -9,7 +10,7 @@ import io.zerows.sdk.plugins.AddOn;
 @AddOn.Name("DEFAULT_MEM_CLIENT")
 public interface CachedClient extends BaseClient {
 
-    static CachedClient createClient(final Vertx vertx, final String name) {
-        return CachedClientImpl.create(vertx, name);
+    static CachedClient createClient(final Vertx vertx, final JsonObject options) {
+        return CachedClientImpl.create(vertx, options);
     }
 }

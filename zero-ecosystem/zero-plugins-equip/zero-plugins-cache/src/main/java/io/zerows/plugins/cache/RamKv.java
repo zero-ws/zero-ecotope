@@ -18,6 +18,6 @@ import io.vertx.core.json.JsonObject;
  *        - STRING = {@link JsonArray} 字典类型数据
  * </pre>
  */
-public interface RamKv {
-    
+public interface RamKv<T> {
+
 }

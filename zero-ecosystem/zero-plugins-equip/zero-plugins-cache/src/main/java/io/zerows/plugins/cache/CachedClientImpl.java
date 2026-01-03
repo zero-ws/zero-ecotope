@@ -1,11 +1,17 @@
 package io.zerows.plugins.cache;
 
+import io.r2mo.SourceReflect;
 import io.r2mo.typed.cc.Cc;
 import io.r2mo.vertx.common.cache.MemoAt;
+import io.r2mo.vertx.common.cache.MemoOptions;
 import io.vertx.core.Vertx;
+import io.vertx.core.json.JsonObject;
 import io.vertx.core.shareddata.AsyncMap;
 import io.vertx.core.shareddata.LocalMap;
+import io.zerows.epoch.constant.KName;
 import io.zerows.sdk.plugins.AddOn;
+import io.zerows.spi.HPI;
+import io.zerows.support.Ut;
 
 import java.time.Duration;
 
@@ -15,18 +21,36 @@ import java.time.Duration;
 class CachedClientImpl implements CachedClient {
 
     private static final Cc<String, CachedClient> CC_CLIENTS = Cc.openThread();
-
+    private static final Cc<String, CachedFactory> CC_FACTORY = Cc.openThread();
     private final transient Vertx vertx;
-    private final transient String poolName;
+    private final MemoOptions<?, ?> baseOption;
 
-    private CachedClientImpl(final Vertx vertx, final String name) {
+    /**
+     * 这种模式是特殊模式，所以 caller 不能计算，只能使用当前类作为 caller 对应的值，不能通过计算，基于此，只能在实现模式下重写此处内容完
+     * 善构造流程，此处的构造流程如下
+     * <pre>
+     *     - caller = 当前类
+     *     - name     配置项中的名称信息
+     *     - classK   配置项中的键类型
+     *     - classV   配置项中的值类型
+     * </pre>
+     */
+    @SuppressWarnings("all")
+    private CachedClientImpl(final Vertx vertx, final JsonObject options) {
         this.vertx = vertx;
-        this.poolName = name;
+        final String name = Ut.valueString(options, KName.NAME);
+        final Class classK = SourceReflect.clazz(Ut.valueString(options, "classK"));
+        final Class classV = SourceReflect.clazz(Ut.valueString(options, "classV"));
+        final Integer size = Ut.valueInt(options, KName.SIZE, 0);
+        this.baseOption = new MemoOptions<>(getClass()).name(name)
+                .classK(classK).classV(classV)
+                .size(size).extension(options);
     }
 
-    static CachedClient create(final Vertx vertx, final String name) {
+    static CachedClient create(final Vertx vertx, final JsonObject options) {
+        final String name = Ut.valueString(options, KName.NAME);
         final String cacheKey = vertx.hashCode() + "@" + name;
-        return CC_CLIENTS.pick(() -> new CachedClientImpl(vertx, name), cacheKey);
+        return CC_CLIENTS.pick(() -> new CachedClientImpl(vertx, options), cacheKey);
     }
 
     /**
@@ -67,6 +91,9 @@ class CachedClientImpl implements CachedClient {
      */
     @Override
     public <K, V> MemoAt<K, V> memoAt(final Duration expiredAt) {
-        return null;
+        final MemoOptions<K, V> optionsWithTTL = this.baseOption.of(expiredAt);
+        final String fingerprint = optionsWithTTL.fingerprint();
+        final CachedFactory factory = CC_FACTORY.pick(() -> HPI.findOneOf(CachedFactory.class), fingerprint);
+        return factory.findMemoAt(this.vertx, optionsWithTTL);
     }
 }

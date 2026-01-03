@@ -1,0 +1,3 @@
+- 0     / EhCacheCacheAtSecurity
+- 50    / CaffeineCacheAtSecurity
+- 100   / RedisCacheAtSecurity

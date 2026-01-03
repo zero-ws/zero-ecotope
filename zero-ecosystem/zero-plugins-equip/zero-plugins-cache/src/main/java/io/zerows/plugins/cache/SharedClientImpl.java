@@ -26,16 +26,15 @@ class SharedClientImpl implements SharedClient {
     @SuppressWarnings("all")
     private SharedClientImpl(final Vertx vertx, final JsonObject options) {
         this.vertx = vertx;
-        String poolName = Ut.valueString(options, KName.NAME);
+        final String name = Ut.valueString(options, KName.NAME);
 
         final Class<?> caller = this.vertx.isClustered() ? MemoAtMapCluster.class : MemoAtMapLocal.class;
         final Class classK = SourceReflect.clazz(Ut.valueString(options, "classK"));
         final Class classV = SourceReflect.clazz(Ut.valueString(options, "classV"));
         final Integer size = Ut.valueInt(options, KName.SIZE, 0);
-        this.baseOption = new MemoOptions<>(caller)
-                .name(poolName)
+        this.baseOption = new MemoOptions<>(caller).name(name)
                 .classK(classK).classV(classV)
-                .size(size);
+                .size(size).extension(options);
     }
 
     static SharedClient create(final Vertx vertx, final JsonObject options) {

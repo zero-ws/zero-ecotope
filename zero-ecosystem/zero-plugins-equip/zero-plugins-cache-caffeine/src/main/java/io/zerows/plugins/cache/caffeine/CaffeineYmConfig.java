@@ -1,4 +1,4 @@
-package io.zerows.plugins.cache.metadata;
+package io.zerows.plugins.cache.caffeine;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
@@ -6,10 +6,16 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
+ * <pre>
+ *     配置位置：
+ *     cache:
+ *       caffeine:
+ * </pre>
+ *
  * @author lang : 2025-12-31
  */
 @Data
-public class YmCacheCaffeine implements Serializable {
+public class CaffeineYmConfig implements Serializable {
     private long expired = 30;  // 30s
     private int capacity = 1000; // 最大缓存数量
     @JsonProperty("maximum-size")
