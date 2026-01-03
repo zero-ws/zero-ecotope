@@ -8,16 +8,21 @@ import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.shareddata.AsyncMap;
 import io.vertx.core.shareddata.LocalMap;
+import io.zerows.epoch.annotations.Defer;
 import io.zerows.epoch.constant.KName;
 import io.zerows.sdk.plugins.AddOn;
 import io.zerows.spi.HPI;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.time.Duration;
+import java.util.Objects;
 
 /**
  * @author lang : 2026-01-02
  */
+@Defer
+@Slf4j
 class CachedClientImpl implements CachedClient {
 
     private static final Cc<String, CachedClient> CC_CLIENTS = Cc.openThread();
@@ -43,8 +48,8 @@ class CachedClientImpl implements CachedClient {
         final Class classV = SourceReflect.clazz(Ut.valueString(options, "classV"));
         final Integer size = Ut.valueInt(options, KName.SIZE, 0);
         this.baseOption = new MemoOptions<>(getClass()).name(name)
-                .classK(classK).classV(classV)
-                .size(size).extension(options);
+            .classK(classK).classV(classV)
+            .size(size).extension(options);
     }
 
     static CachedClient create(final Vertx vertx, final JsonObject options) {
@@ -93,7 +98,13 @@ class CachedClientImpl implements CachedClient {
     public <K, V> MemoAt<K, V> memoAt(final Duration expiredAt) {
         final MemoOptions<K, V> optionsWithTTL = this.baseOption.of(expiredAt);
         final String fingerprint = optionsWithTTL.fingerprint();
-        final CachedFactory factory = CC_FACTORY.pick(() -> HPI.findOneOf(CachedFactory.class), fingerprint);
+        final CachedFactory factory = CC_FACTORY.pick(() -> {
+            final CachedFactory found = HPI.findOneOf(CachedFactory.class);
+            if (Objects.nonNull(found)) {
+                log.info("[ PLUG ] CachedFactory 实现类 = {}", found.getClass().getName());
+            }
+            return found;
+        }, fingerprint);
         return factory.findMemoAt(this.vertx, optionsWithTTL);
     }
 }

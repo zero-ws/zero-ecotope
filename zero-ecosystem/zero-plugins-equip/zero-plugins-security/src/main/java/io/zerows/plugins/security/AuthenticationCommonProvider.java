@@ -56,14 +56,14 @@ class AuthenticationCommonProvider implements AuthenticationProvider {
         // 提取缓存信息
         final String session = Ut.valueString(authJson, KName.SESSION);
         if (Ut.isNil(session)) {
-            return Future.failedFuture(new _401UnauthorizedException("[ ZERO ] 缺失认证会话信息！"));
+            return Future.failedFuture(new _401UnauthorizedException("[ PLUG ] 缺失认证会话信息！"));
         }
         // 提取会话专用缓存
         final Rapid<String, JsonObject> cached = Rapid.object(session);
         return cached.read(KWeb.CACHE.User.AUTHENTICATE).compose(res -> {
             if (Ut.isNotNil(res)) {
                 // 缓存中有值，可直接返回
-                log.info("[ ZERO ] ( Secure ) 401 用户认证命中缓存，session = {}", session);
+                log.info("[ PLUG ] ( Secure ) 401 用户认证命中缓存，session = {}", session);
                 return Future.succeededFuture(User.create(authJson));
             }
 
@@ -71,15 +71,15 @@ class AuthenticationCommonProvider implements AuthenticationProvider {
             // 缓存中没有值，要重新认证
             return this.userVerify(authJson).compose(verified -> {
                 if (!verified) {
-                    log.error("[ ZERO ] ( Secure ) 401 用户认证失败，session = {}", session);
-                    return Future.failedFuture(new _401UnauthorizedException("[ ZERO ] 用户认证失败！"));
+                    log.error("[ PLUG ] ( Secure ) 401 用户认证失败，session = {}", session);
+                    return Future.failedFuture(new _401UnauthorizedException("[ PLUG ] 用户认证失败！"));
                 }
 
 
                 // 认证成功，写入缓存
-                log.info("[ ZERO ] ( Secure ) 401 用户认证成功，写入缓存，session = {}", session);
+                log.info("[ PLUG ] ( Secure ) 401 用户认证成功，写入缓存，session = {}", session);
                 return cached.write(KWeb.CACHE.User.AUTHENTICATE, authJson)
-                    .compose(ignored -> Future.succeededFuture(User.create(authJson)));
+                        .compose(ignored -> Future.succeededFuture(User.create(authJson)));
             });
         });
     }
@@ -88,7 +88,7 @@ class AuthenticationCommonProvider implements AuthenticationProvider {
     private Future<Boolean> userVerify(final JsonObject authJson) {
         final WallExecutor executor = this.meta.getProxy();
         if (Objects.isNull(executor)) {
-            return Future.failedFuture(new _401UnauthorizedException("[ ZERO ] 认证执行器未找到！"));
+            return Future.failedFuture(new _401UnauthorizedException("[ PLUG ] 认证执行器未找到！"));
         }
         return executor.authenticate(authJson).compose(res -> {
             if (Objects.isNull(res)) {

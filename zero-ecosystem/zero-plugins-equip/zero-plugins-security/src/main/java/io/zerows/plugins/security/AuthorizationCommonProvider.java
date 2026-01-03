@@ -42,15 +42,14 @@ class AuthorizationCommonProvider implements AuthorizationProvider {
      * 此处的 {@link User} 一定不会为空！
      *
      * @param user 查询用户
-     *
      * @return 授权结果
      */
     @Override
     public Future<Void> getAuthorizations(final User user) {
-        Objects.requireNonNull(user, "[ ZERO ] 授权用户信息不能为空！");
+        Objects.requireNonNull(user, "[ PLUG ] 授权用户信息不能为空！");
         final WallExecutor executor = this.meta.getProxy();
         if (Objects.isNull(executor)) {
-            return Future.failedFuture(new _403ForbiddenException("[ ZERO ] 授权执行器未配置！"));
+            return Future.failedFuture(new _403ForbiddenException("[ PLUG ] 授权执行器未配置！"));
         }
 
         final Future<JsonObject> authorized = executor.authorize(user);

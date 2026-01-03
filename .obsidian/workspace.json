@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/graph/api/public/app_name_$name.md",
+                "file": "README.md",
                 "mode": "preview",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "app_name_$name"
+              "title": "README"
             }
           }
         ]
@@ -200,6 +200,11 @@
   },
   "active": "ad17b47082cda379",
   "lastOpenFiles": [
+    "zero-ecosystem/zero-plugins-equip/zero-plugins-redis/target/classes/io/zerows/plugins/redis/cache/RedisAtSession.class",
+    "zero-ecosystem/zero-plugins-equip/zero-plugins-session/target/classes/io/zerows/plugins/session/SessionUtil.class",
+    "zero-ecosystem/zero-plugins-equip/zero-plugins-redis/target/classes/io/zerows/plugins/redis/RedisActor.class",
+    "zero-ecosystem/zero-plugins-equip/zero-plugins-cache/target/classes/io/zerows/plugins/cache/CachedClientImpl.class",
+    "docs/graph/api/public/app_name_$name.md",
     "docs/dependency.md",
     "zero-ecosystem/zero-plugins-equip/zero-plugins-cache/src/main/java/io/zerows/plugins/shared",
     "zero-ecosystem/zero-boot/zero-boot-actor/zero-boot-extension-actor/target/classes/io/zerows/boot/full/plugins/UiHunterControl.class",
@@ -208,15 +213,11 @@
     "zero-ecosystem/zero-boot/zero-boot-actor/zero-boot-extension-actor/target/classes/io/zerows/boot/full/plugins/IndentKey.class",
     "zero-ecosystem/zero-boot/zero-boot-actor/zero-boot-extension-actor/target/classes/io/zerows/boot/full/plugins/BeforePk.class",
     "zero-ecosystem/zero-boot/zero-boot-actor/zero-boot-extension-actor/target/classes/io/zerows/boot/full/plugins/BeforeNumber.class",
-    "zero-ecosystem/zero-boot/zero-boot-actor/zero-boot-extension-actor/target/classes/io/zerows/boot/full/plugins/BeforeDict.class",
-    "zero-ecosystem/zero-boot/zero-boot-actor/zero-boot-extension-actor/target/classes/io/zerows/boot/full/plugins/AfterUdEdgeDelete.class",
-    "zero-ecosystem/zero-boot/zero-boot-actor/zero-boot-extension-actor/target/classes/io/zerows/boot/full/plugins/AfterUdEdgeAdd.class",
     "docs/dependency-r2mo-compile.md",
     "docs/dependency-zero-compile.md",
     "docs/dependency-zero-source.md",
     "docs/dependency-r2mo-source.md",
     "docs/graph/design/App应用结构.excalidraw.md",
-    "docs/graph/api/public/app_name_$name.md",
     "docs/dependency.excalidraw.md",
     "README.md",
     "docs/graph/design/App应用结构.md",

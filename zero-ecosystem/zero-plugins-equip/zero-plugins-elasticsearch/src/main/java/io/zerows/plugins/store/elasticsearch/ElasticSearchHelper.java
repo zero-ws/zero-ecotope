@@ -186,7 +186,7 @@ public class ElasticSearchHelper {
              * No precision map set
              */
             builder.query(textCond);
-            LOGGER.debug("[ ZERO ] Final query condition: {0}", textCond.toString());
+            LOGGER.debug("[ PLUG ] Final query condition: {0}", textCond.toString());
         } else {
             /*
              * Precision Condition
@@ -202,7 +202,7 @@ public class ElasticSearchHelper {
             final BoolQueryBuilder finalCond = QueryBuilders.boolQuery();
             finalCond.must(condition).must(textCond);
             builder.query(finalCond);
-            LOGGER.debug("[ ZERO ] Final query condition with precision: {0}", finalCond.toString());
+            LOGGER.debug("[ PLUG ] Final query condition with precision: {0}", finalCond.toString());
         }
         return builder.aggregation(AggregationBuilders.terms(InternalAggregations.AGGREGATIONS_FIELD).field("_index"))
             .highlighter(new HighlightBuilder().field("*").preTags("<strong>").postTags("</strong>").highlighterType("unified"))

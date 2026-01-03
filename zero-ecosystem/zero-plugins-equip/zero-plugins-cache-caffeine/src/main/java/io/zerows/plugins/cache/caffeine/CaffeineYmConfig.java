@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 /**
  * <pre>
- *     配置位置：
+ *     配置位置:
  *     cache:
  *       caffeine:
  * </pre>

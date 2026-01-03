@@ -10,11 +10,7 @@ import org.flywaydb.core.api.configuration.FluentConfiguration;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Flyway 11 配置构造器：
@@ -167,8 +163,8 @@ final class Flyway11Configurator {
         final Object targetRaw = config.options(FlywayKeys.TARGET);
         if (targetRaw != null) {
             final MigrationVersion target = "latest".equalsIgnoreCase(String.valueOf(targetRaw))
-                ? MigrationVersion.LATEST
-                : toVersion(targetRaw);
+                    ? MigrationVersion.LATEST
+                    : toVersion(targetRaw);
             if (target != null) {
                 fc.target(target);
             }
@@ -226,7 +222,7 @@ final class Flyway11Configurator {
             } catch (final NoSuchMethodException e) {
                 // 核心版无该方法：安全忽略（不影响编译与运行）
             } catch (final ReflectiveOperationException e) {
-                throw new IllegalStateException("[ ZERO ] 特殊配置异常：", e);
+                throw new IllegalStateException("[ PLUG ] 特殊配置异常：", e);
             }
         }
 

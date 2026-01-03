@@ -58,7 +58,7 @@ public abstract class QuotaMetricBase implements QuotaMetric {
         if (Objects.isNull(this.multiGauge)) {
             final String metricName = QuotaValue.QUOTA_NS_PREFIX + this.metricName();
             this.multiGauge = MultiGauge.builder(metricName)
-                .description("[ ZERO ] Monitor: " + this.metricName())
+                .description("[ PLUG ] Monitor: " + this.metricName())
                 .tag(KName.NAME, this.metricName())
                 .register(registry);
             this.log().info("{} --> / 指标容器 MeterRegistry 初始化完成: {}", MonitorConstant.K_PREFIX_MOC, metricName);

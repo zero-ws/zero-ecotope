@@ -26,18 +26,18 @@ class RapidObject<T> extends AbstractRapid<String, T> {
         return this.pool().<String, T>get(key).compose(queried -> {
             if (Objects.isNull(queried)) {
                 return executor.get()
-                    .compose(actual -> {
-                        if (Objects.isNull(actual)) {
-                            return Ut.future();
-                        } else {
-                            return 0 < this.expired ?
-                                this.pool().put(key, actual, this.expired) :
-                                this.pool().put(key, actual);
-                        }
-                    })
-                    .compose(kv -> Ut.future(Objects.nonNull(kv) ? kv.value() : null));
+                        .compose(actual -> {
+                            if (Objects.isNull(actual)) {
+                                return Ut.future();
+                            } else {
+                                return 0 < this.expired ?
+                                        this.pool().put(key, actual, this.expired) :
+                                        this.pool().put(key, actual);
+                            }
+                        })
+                        .compose(kv -> Ut.future(Objects.nonNull(kv) ? kv.value() : null));
             } else {
-                log.info("[ ZERO ] ( POOL ) \u001b[0;37mK = `{}`, P = `{}`\u001b[m", key, this.pool().name());
+                log.info("[ PLUG ] ( POOL ) \u001b[0;37mK = `{}`, P = `{}`\u001b[m", key, this.pool().name());
                 return Ut.future(queried);
             }
         });

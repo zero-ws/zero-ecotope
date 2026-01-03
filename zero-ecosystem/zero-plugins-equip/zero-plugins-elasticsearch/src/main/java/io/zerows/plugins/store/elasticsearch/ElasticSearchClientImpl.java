@@ -40,7 +40,7 @@ public class ElasticSearchClientImpl implements ElasticSearchClient {
         this.vertx = vertx;
         JsonObject options = config.options();
         if (Ut.isNotNil(options)) {
-            LOGGER.info("[ ZERO ] Elastic Search initialized: {0}", options.encode());
+            LOGGER.info("[ PLUG ] Elastic Search initialized: {0}", options.encode());
             this.options.mergeIn(options);
             this.qr.bind(options);
         }

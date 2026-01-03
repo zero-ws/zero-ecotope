@@ -23,13 +23,7 @@ import io.zerows.epoch.metadata.security.SecurityMeta;
 import io.zerows.plugins.cache.Rapid;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.function.BiConsumer;
 
 /**
@@ -39,7 +33,7 @@ import java.util.function.BiConsumer;
  */
 @Slf4j
 class AuthorizationCommonHandler implements AuthorizationHandler {
-    private static final WebException ERROR_FORBIDDEN = new _403ForbiddenException("[ ZERO ] 无权限访问申请资源！");
+    private static final WebException ERROR_FORBIDDEN = new _403ForbiddenException("[ PLUG ] 无权限访问申请资源！");
     private final List<ResourceHandler> handlerList = new ArrayList<>();
 
     private AuthorizationCommonHandler(final List<ResourceHandler> handlerList) {
@@ -129,12 +123,12 @@ class AuthorizationCommonHandler implements AuthorizationHandler {
 
 
         public void addAuthorizationProvider(
-            final AuthorizationProvider authorizationProvider) {
+                final AuthorizationProvider authorizationProvider) {
             this.providers.add(authorizationProvider);
         }
 
         public void variableConsumer(
-            final BiConsumer<RoutingContext, AuthorizationContext> variableFn) {
+                final BiConsumer<RoutingContext, AuthorizationContext> variableFn) {
             this.variableFn = variableFn;
         }
 
@@ -184,8 +178,8 @@ class AuthorizationCommonHandler implements AuthorizationHandler {
                     // 匹配合法，返回 True，将会执行下一个 Handler
                     final User user = authContext.user();
                     final String session = user.principal().getString(KName.SESSION);
-                    log.info("[ ZERO ] ( Secure ) 403 用户授权成功：session = {}, 用户User: principal = {} / attributes = {}",
-                        session, user.principal(), user.attributes());
+                    log.info("[ PLUG ] ( Secure ) 403 用户授权成功：session = {}, 用户User: principal = {} / attributes = {}",
+                            session, user.principal(), user.attributes());
                     // 缓存写入后返回
                     return this.waitCached(context, user);
                 }
@@ -222,10 +216,10 @@ class AuthorizationCommonHandler implements AuthorizationHandler {
 
                     // 如果包含则要授权
                     waitUpdate = waitUpdate
-                        // 1. 先更新用户信息
-                        .compose(nil -> provider.getAuthorizations(user))
-                        // 2. 再做一次匹配校验
-                        .compose(updated -> this.waitCached(context, user));
+                            // 1. 先更新用户信息
+                            .compose(nil -> provider.getAuthorizations(user))
+                            // 2. 再做一次匹配校验
+                            .compose(updated -> this.waitCached(context, user));
                 }
                 return waitUpdate;
             });
@@ -261,8 +255,8 @@ class AuthorizationCommonHandler implements AuthorizationHandler {
                 if (authorized) {
                     // 跳过认证
                     final String session = user.principal().getString(KName.HABITUS);
-                    log.info("[ ZERO ] ( Secure ) 403 用户授权命中缓存：session = {} / resource = {}",
-                        session, resource);
+                    log.info("[ PLUG ] ( Secure ) 403 用户授权命中缓存：session = {} / resource = {}",
+                            session, resource);
                     return Future.succeededFuture(Boolean.FALSE);
                 } else {
                     // 等待认证
@@ -336,7 +330,6 @@ class AuthorizationCommonHandler implements AuthorizationHandler {
          * 构造授权上下文，此处的 {@link User} 一定不会为 null，不仅如此，此处还可以绑定函数实现对授权上下文进行二次加工
          *
          * @param context 路由上下文
-         *
          * @return 授权上下文
          */
         private AuthorizationContext requestContext(final RoutingContext context) {

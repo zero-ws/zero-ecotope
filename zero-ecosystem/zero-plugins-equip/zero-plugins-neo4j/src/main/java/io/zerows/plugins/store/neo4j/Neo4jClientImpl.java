@@ -35,7 +35,7 @@ public class Neo4jClientImpl implements Neo4jClient {
 
     private void initDatabase() {
         final String uri = this.config.uri();
-        LOGGER.info("[ ZERO ] Graphic database initialized: {0}", uri);
+        LOGGER.info("[ PLUG ] Graphic database initialized: {0}", uri);
         this.driver = GraphDatabase.driver(uri, this.config.token(), this.config.config());
     }
 

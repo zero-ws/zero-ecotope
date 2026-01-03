@@ -31,8 +31,8 @@ public class RapidUser<T> extends AbstractRapid<String, T> {
                 cached = new JsonObject();
             }
             if (cached.containsKey(key)) {
-                log.info("[ ZERO ] ( Pool ) \u001b[0;37mK = `{}`, R = `{}`, P = `{}`\u001b[m",
-                    key, this.rootKey, this.pool().name());
+                log.info("[ PLUG ] ( Pool ) \u001b[0;37mK = `{}`, R = `{}`, P = `{}`\u001b[m",
+                        key, this.rootKey, this.pool().name());
                 return Ut.future((T) cached.getValue(key));
             }
 

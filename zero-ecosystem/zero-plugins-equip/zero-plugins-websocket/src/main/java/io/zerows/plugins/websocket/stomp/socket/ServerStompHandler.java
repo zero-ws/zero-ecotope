@@ -75,7 +75,7 @@ public class ServerStompHandler implements ServerWsHandler {
     private AuthenticationProvider authProvider;
     private Handler<StompServerConnection> pingHandler = StompServerConnection::ping;
     private Handler<Acknowledgement> onAckHandler = (acknowledgement) ->
-        log.info("[ ZERO ] ( Stomp ) Acknowledge messages - {}", acknowledgement.frames());
+        log.info("[ PLUG ] ( Stomp ) Acknowledge messages - {}", acknowledgement.frames());
     private Handler<Acknowledgement> onNackHandler = (acknowledgement) ->
         LOGGER.warn("Messages not acknowledge - " + acknowledgement.frames());
     private DestinationFactory factory = Destination::topic;

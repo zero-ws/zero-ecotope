@@ -15,6 +15,8 @@ import io.zerows.support.Ut;
 import jakarta.inject.Provider;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Objects;
+
 /**
  * @author lang : 2025-12-31
  */
@@ -23,7 +25,13 @@ import lombok.extern.slf4j.Slf4j;
 public class RedisActor extends AbstractHActor {
 
     public static Redis ofClient() {
-        return RedisAddOn.of().createSingleton();
+        // Fix: Cannot invoke "io.zerows.plugins.redis.RedisAddOn.createSingleton()" because the
+        //      return value of "io.zerows.plugins.redis.RedisAddOn.of()" is null
+        final RedisAddOn addOn = RedisAddOn.of();
+        if (Objects.isNull(addOn)) {
+            return null;
+        }
+        return addOn.createSingleton();
     }
 
     @Override

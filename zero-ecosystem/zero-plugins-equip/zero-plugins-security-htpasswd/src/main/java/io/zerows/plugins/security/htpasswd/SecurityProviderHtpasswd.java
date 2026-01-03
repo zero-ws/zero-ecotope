@@ -20,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 public class SecurityProviderHtpasswd implements SecurityProvider {
     @Override
     public AuthenticationHandler configureHandler401(final Vertx vertxRef, final SecurityConfig config) {
-        throw new _501NotSupportException("[ ZERO ] Security/HT_PASSWD 不支持 401 Handler 构造");
+        throw new _501NotSupportException("[ PLUG ] Security/HT_PASSWD 不支持 401 Handler 构造");
     }
 
     @Override
@@ -30,8 +30,8 @@ public class SecurityProviderHtpasswd implements SecurityProvider {
 
         final HtpasswdAuthOptions htpasswdOptions = new HtpasswdAuthOptions(options);
         return CC_PROVIDER_401.pick(
-            () -> HtpasswdAuth.create(vertxRef, htpasswdOptions),
-            String.valueOf(options.hashCode())
+                () -> HtpasswdAuth.create(vertxRef, htpasswdOptions),
+                String.valueOf(options.hashCode())
         );
     }
 }

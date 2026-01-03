@@ -90,7 +90,7 @@ class TrashBuilder {
             /* PRIMARY KEY */
             .constraint(DSL.constraint("PK_" + this.tableName).primaryKey(DSL.name("KEY")))
             .execute();
-        log.info("[ ZERO ] ( His ) 数据表 `{}` 已创建！", this.tableName);
+        log.info("[ PLUG ] ( His ) 数据表 `{}` 已创建！", this.tableName);
         return this;
     }
 

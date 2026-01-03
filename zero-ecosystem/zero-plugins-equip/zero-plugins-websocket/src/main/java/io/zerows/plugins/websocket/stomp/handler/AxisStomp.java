@@ -68,7 +68,7 @@ public class AxisStomp implements Axis {
 
         if (IS_OUT.getAndSet(Boolean.FALSE)) {
             final String endpoint = this.pathOfEndpoint(sockOptions);
-            log.info("[ ZERO ] ( WebSocket ) \uD83E\uDDFF Endpoint: ws://{}:{}{}，{} ✅️ WebSocket 成功开启 SUCCESS !",
+            log.info("[ PLUG ] ( WebSocket ) \uD83E\uDDFF Endpoint: ws://{}:{}{}，{} ✅️ WebSocket 成功开启 SUCCESS !",
                 Ut.netIPv4(), httpServer.actualPort(), endpoint, this.getClass().getSimpleName());
         }
     }

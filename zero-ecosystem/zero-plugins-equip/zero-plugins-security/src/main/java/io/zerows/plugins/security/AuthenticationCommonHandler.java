@@ -32,14 +32,14 @@ class AuthenticationCommonHandler extends AuthenticationHandlerImpl<Authenticati
          */
         final User user = context.user();
         if (Objects.isNull(user)) {
-            final WebException error = new _401UnauthorizedException("[ ZERO ] 权限不够！");
+            final WebException error = new _401UnauthorizedException("[ PLUG ] 权限不够！");
             return Future.failedFuture(error);
         }
 
 
         final WallExecutor executor = this.meta.getProxy();
         if (Objects.isNull(executor)) {
-            return Future.failedFuture(new _401UnauthorizedException("[ ZERO ] 认证执行器未找到！"));
+            return Future.failedFuture(new _401UnauthorizedException("[ PLUG ] 认证执行器未找到！"));
         }
 
 

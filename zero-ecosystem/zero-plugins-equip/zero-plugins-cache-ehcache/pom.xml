@@ -16,5 +16,10 @@
             <groupId>io.zerows</groupId>
             <artifactId>zero-plugins-cache</artifactId>
         </dependency>
+        <!-- EhCache -->
+        <dependency>
+            <groupId>org.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+        </dependency>
     </dependencies>
 </project>

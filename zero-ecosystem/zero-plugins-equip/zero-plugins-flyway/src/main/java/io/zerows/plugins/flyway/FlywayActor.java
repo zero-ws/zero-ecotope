@@ -31,9 +31,9 @@ public class FlywayActor extends AbstractHActor {
         final Flyway flyway = new Flyway(configuration);
         final MigrateResult result = Fn.jvmOr(flyway::migrate);
         if (Objects.nonNull(result)) {
-            log.info("[ ZERO ] Flyway数据库迁移结果：{}", result.getTotalMigrationTime());
+            log.info("[ PLUG ] Flyway数据库迁移结果：{}", result.getTotalMigrationTime());
         } else {
-            log.warn("[ ZERO ] Flyway数据库迁移执行失败！");
+            log.warn("[ PLUG ] Flyway数据库迁移执行失败！");
         }
         return Future.succeededFuture(Boolean.TRUE);
     }
