@@ -73,13 +73,9 @@ public class NodeVertx implements Serializable {
         final Worker worker = clazz.getDeclaredAnnotation(Worker.class);
         if (Objects.nonNull(worker)) {
             /*
-             * 如果是 Worker 模式，则强制设置 Worker，但在设置过程中
-             * - VIRTUAL_THREAD 为第一优先级，直接配置成此模式则直接忽略
-             * - 其他模式一律统一成 VIRTUAL_THREAD，此为第一优先级，暂时告别 Worker 模式
+             * Worker 中默认是 VIRTUAL_THREAD 模式，如果指定或更改过则使用指定模式
              */
-            if (ThreadingModel.VIRTUAL_THREAD != options.getThreadingModel()) {
-                options.setThreadingModel(ThreadingModel.VIRTUAL_THREAD);
-            }
+            options.setThreadingModel(worker.thread());
             if (0 < worker.instances() && KWeb.DEPLOY.INSTANCES != worker.instances()) {
                 options.setInstances(worker.instances());
             }

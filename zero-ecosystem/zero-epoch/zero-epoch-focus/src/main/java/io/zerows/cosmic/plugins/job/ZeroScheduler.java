@@ -2,6 +2,7 @@ package io.zerows.cosmic.plugins.job;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
+import io.vertx.core.ThreadingModel;
 import io.vertx.core.Vertx;
 import io.zerows.cosmic.plugins.job.metadata.Mission;
 import io.zerows.epoch.annotations.Worker;
@@ -22,7 +23,7 @@ import java.util.Set;
  * This worker must be SINGLE ( instances = 1 ) because multi worker with the same tasks may be
  * conflicts
  */
-@Worker(instances = VValue.SINGLE)
+@Worker(instances = VValue.SINGLE, thread = ThreadingModel.WORKER)
 @Slf4j
 public class ZeroScheduler extends AbstractVerticle {
 

@@ -1,14 +1,10 @@
 package io.zerows.epoch.annotations;
 
+import io.vertx.core.ThreadingModel;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.platform.enums.EmWeb;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
 /**
  * Worker will consume event bus data by address
@@ -48,4 +44,6 @@ public @interface Worker {
      * @return whether support HA feature for current worker.
      */
     boolean ha() default KWeb.DEPLOY.HA;
+
+    ThreadingModel thread() default ThreadingModel.VIRTUAL_THREAD;
 }
