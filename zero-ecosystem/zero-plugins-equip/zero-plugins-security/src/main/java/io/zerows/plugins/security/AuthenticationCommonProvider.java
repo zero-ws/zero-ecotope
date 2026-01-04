@@ -12,7 +12,7 @@ import io.vertx.ext.auth.authentication.UsernamePasswordCredentials;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.metadata.security.SecurityMeta;
-import io.zerows.plugins.cache.Rapid;
+import io.zerows.plugins.cache.HMM;
 import io.zerows.sdk.security.WallExecutor;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
@@ -59,8 +59,8 @@ class AuthenticationCommonProvider implements AuthenticationProvider {
             return Future.failedFuture(new _401UnauthorizedException("[ PLUG ] 缺失认证会话信息！"));
         }
         // 提取会话专用缓存
-        final Rapid<String, JsonObject> cached = Rapid.object(session);
-        return cached.read(KWeb.CACHE.User.AUTHENTICATE).compose(res -> {
+        final HMM<String, JsonObject> mmSession = HMM.of(session);
+        return mmSession.find(KWeb.CACHE.User.AUTHENTICATE).compose(res -> {
             if (Ut.isNotNil(res)) {
                 // 缓存中有值，可直接返回
                 log.info("[ PLUG ] ( Secure ) 401 用户认证命中缓存，session = {}", session);
@@ -78,8 +78,8 @@ class AuthenticationCommonProvider implements AuthenticationProvider {
 
                 // 认证成功，写入缓存
                 log.info("[ PLUG ] ( Secure ) 401 用户认证成功，写入缓存，session = {}", session);
-                return cached.write(KWeb.CACHE.User.AUTHENTICATE, authJson)
-                        .compose(ignored -> Future.succeededFuture(User.create(authJson)));
+                return mmSession.put(KWeb.CACHE.User.AUTHENTICATE, authJson)
+                    .compose(ignored -> Future.succeededFuture(User.create(authJson)));
             });
         });
     }

@@ -3,11 +3,11 @@ package io.zerows.extension.crud.uca;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.plugins.cache.Rapid;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.extension.crud.common.Ix;
 import io.zerows.extension.skeleton.spi.UiApeak;
+import io.zerows.plugins.cache.HMM;
 import io.zerows.spi.HPI;
 
 /**
@@ -31,14 +31,12 @@ class AgonicViewFull implements Agonic {
     @Override
     public Future<JsonArray> runJAAsync(final JsonObject input, final IxMod in) {
         final String cacheKey = in.cached();
-        return Rapid.<String, JsonArray>object(KWeb.CACHE.VIEW_FULL, Agonic.EXPIRED).cached(cacheKey, () -> {
-
-
+        return HMM.<String, JsonArray>of(KWeb.CACHE.VIEW_FULL).cached(cacheKey, () -> {
             final ADB jooq = Ix.jooq(in);
             return HPI.of(UiApeak.class).waitAsync(
                 stub -> stub.on(jooq).fetchFull(input),
                 JsonArray::new
             );
-        });
+        }, Agonic.EXPIRED);
     }
 }

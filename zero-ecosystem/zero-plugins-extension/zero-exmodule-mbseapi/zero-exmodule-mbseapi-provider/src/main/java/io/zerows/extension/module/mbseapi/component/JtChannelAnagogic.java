@@ -3,7 +3,6 @@ package io.zerows.extension.module.mbseapi.component;
 import io.r2mo.base.dbe.Database;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.plugins.cache.Rapid;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.metadata.XHeader;
 import io.zerows.epoch.web.Envelop;
@@ -12,6 +11,7 @@ import io.zerows.mbse.sdk.Commercial;
 import io.zerows.platform.metadata.KFabric;
 import io.zerows.platform.metadata.KIdentity;
 import io.zerows.platform.metadata.KMap;
+import io.zerows.plugins.cache.HMM;
 import io.zerows.program.Ux;
 import io.zerows.specification.modeling.HRule;
 import io.zerows.support.Ut;
@@ -36,7 +36,7 @@ class JtChannelAnagogic {
      * Database processing
      */
     static Future<Database> databaseAsync(final Commercial commercial) {
-        return Rapid.<String, Database>object(KWeb.CACHE.DATABASE_MULTI)
+        return HMM.<String, Database>of(KWeb.CACHE.DATABASE_MULTI)
             .cached(commercial.app(), () -> Ux.future(commercial.database()));
     }
 

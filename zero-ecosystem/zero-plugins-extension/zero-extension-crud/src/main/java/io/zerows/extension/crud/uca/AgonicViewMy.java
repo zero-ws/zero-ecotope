@@ -3,13 +3,13 @@ package io.zerows.extension.crud.uca;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.plugins.cache.Rapid;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.extension.crud.common.Ix;
 import io.zerows.extension.crud.uca.input.Pre;
 import io.zerows.extension.skeleton.spi.ScSeeker;
 import io.zerows.extension.skeleton.spi.UiApeakMy;
+import io.zerows.plugins.cache.HMM;
 import io.zerows.spi.HPI;
 
 /**
@@ -69,16 +69,16 @@ class AgonicViewMy implements Agonic {
      * @param input 输入数据
      * @param jooq  Jooq接口，可指定绑定的数据源
      * @param in    IxMod接口，专用模型信息
-     *
      * @return {@link Future}
      */
     private Future<JsonObject> fetchResources(final JsonObject input, final ADB jooq, final IxMod in) {
         final String key = in.cached() + ":" + input.hashCode();
-        return Rapid.<String, JsonObject>object(KWeb.CACHE.RESOURCE, Agonic.EXPIRED).cached(key,
+        return HMM.<String, JsonObject>of(KWeb.CACHE.RESOURCE).cached(key,
             () -> HPI.of(ScSeeker.class).waitAsync(
                 seeker -> seeker.on(jooq).fetchImpact(input),
                 JsonObject::new
-            )
+            ),
+            Agonic.EXPIRED
         );
     }
 
@@ -89,7 +89,6 @@ class AgonicViewMy implements Agonic {
      * @param params 参数信息（提取视图的参数信息）
      * @param jooq   Jooq接口，可指定绑定的数据源
      * @param in     IxMod接口，专用模型信息
-     *
      * @return {@link Future}
      */
     private Future<JsonArray> fetchViews(final JsonObject params, final ADB jooq, final IxMod in) {

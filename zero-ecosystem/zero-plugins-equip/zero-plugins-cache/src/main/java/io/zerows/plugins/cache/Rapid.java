@@ -15,7 +15,6 @@ import java.util.function.Supplier;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 @Deprecated
-@SuppressWarnings("all")
 public interface Rapid<K, V> {
     Cc<String, Rapid> CC_RAPID = Cc.openThread();
 
@@ -61,11 +60,11 @@ public interface Rapid<K, V> {
     }
 
     default Future<V> cached(final K key, final Supplier<Future<V>> executor) {
-        throw new _60050Exception501NotSupport(getClass());
+        throw new _60050Exception501NotSupport(this.getClass());
     }
 
     default Future<V> cached(final K key, final Function<K, Future<V>> executor) {
-        throw new _60050Exception501NotSupport(getClass());
+        throw new _60050Exception501NotSupport(this.getClass());
     }
 
     Future<V> write(K key, V value);

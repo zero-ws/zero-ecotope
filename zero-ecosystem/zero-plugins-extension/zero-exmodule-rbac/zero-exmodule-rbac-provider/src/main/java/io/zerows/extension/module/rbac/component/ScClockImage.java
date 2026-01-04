@@ -7,10 +7,12 @@ import io.zerows.extension.module.rbac.common.ScConstant;
 import io.zerows.extension.module.rbac.metadata.ScConfig;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author lang : 2024-09-16
  */
+@Slf4j
 class ScClockImage extends ScClockBase<String> {
     private static final ScConfig CONFIG = MDRBACManager.of().config();
 
@@ -22,7 +24,7 @@ class ScClockImage extends ScClockBase<String> {
     public String generate(final JsonObject config) {
         final int length = CONFIG.getImageLength();
         final String imageCode = Ut.randomCaptcha(length);
-        this.logger().info("Generated Image Code: {}", imageCode);
+        log.info("[ XMOD ] ( RBAC ) 生成图片验证码：{}", imageCode);
         return imageCode;
     }
 

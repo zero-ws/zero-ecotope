@@ -3,12 +3,12 @@ package io.zerows.extension.module.rbac.metadata.logged;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
-import io.zerows.plugins.cache.Rapid;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.module.rbac.common.ScAuthKey;
 import io.zerows.extension.module.rbac.common.ScConstant;
 import io.zerows.extension.module.rbac.domain.tables.daos.RRolePermDao;
 import io.zerows.extension.module.rbac.domain.tables.pojos.RRolePerm;
+import io.zerows.plugins.cache.HMM;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
@@ -28,13 +28,13 @@ import java.util.stream.Collectors;
 @Slf4j
 public class ScRole {
     private static final Cc<String, ScRole> CC_ROLE = Cc.open();
-    private final transient Rapid<String, JsonArray> cache;
+    private final transient HMM<String, JsonArray> cache;
     private final transient String roleId;
     private final transient Set<String> authorities = new HashSet<>();
 
     private ScRole(final String roleId) {
         this.roleId = roleId;
-        this.cache = Rapid.object(ScConstant.POOL_PERMISSIONS);
+        this.cache = HMM.of(ScConstant.POOL_PERMISSIONS);
     }
 
     public static ScRole login(final String roleId) {
@@ -54,7 +54,7 @@ public class ScRole {
     public Future<JsonArray> clear() {
         CC_ROLE.remove(this.roleId);
         // ROLES.remove(this.roleId);
-        return this.cache.clear(this.roleId);
+        return this.cache.remove(this.roleId);
     }
 
     /*
@@ -131,11 +131,11 @@ public class ScRole {
      * findRunning = permissions ( JsonArray )
      */
     private Future<JsonArray> permission() {
-        return this.cache.read(this.roleId);
+        return this.cache.find(this.roleId);
     }
 
     private Future<JsonArray> permission(final JsonArray permission) {
-        return this.cache.write(this.roleId, permission);
+        return this.cache.put(this.roleId, permission);
     }
 
     @Override

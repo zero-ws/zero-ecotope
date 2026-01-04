@@ -6,25 +6,25 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 import io.zerows.component.log.LogOf;
-import io.zerows.plugins.cache.Rapid;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.security.DataBound;
 import io.zerows.extension.module.rbac.boot.Sc;
-import io.zerows.extension.module.rbac.metadata.logged.ScResource;
-import io.zerows.extension.module.rbac.metadata.logged.ScUser;
-import io.zerows.extension.module.rbac.component.acl.rapier.Quinn;
 import io.zerows.extension.module.rbac.common.ScAuthMsg;
 import io.zerows.extension.module.rbac.common.ScConstant;
 import io.zerows.extension.module.rbac.common.ScOwner;
+import io.zerows.extension.module.rbac.component.acl.rapier.Quinn;
 import io.zerows.extension.module.rbac.domain.tables.pojos.SAction;
 import io.zerows.extension.module.rbac.domain.tables.pojos.SResource;
 import io.zerows.extension.module.rbac.exception._80209Exception404ActionMissing;
 import io.zerows.extension.module.rbac.exception._80210Exception404ResourceMissing;
 import io.zerows.extension.module.rbac.exception._80211Exception403ActionDinned;
+import io.zerows.extension.module.rbac.metadata.logged.ScResource;
+import io.zerows.extension.module.rbac.metadata.logged.ScUser;
 import io.zerows.extension.module.rbac.servicespec.AccreditStub;
 import io.zerows.extension.module.rbac.servicespec.ActionStub;
 import io.zerows.extension.skeleton.common.enums.OwnerType;
 import io.zerows.platform.metadata.KRef;
+import io.zerows.plugins.cache.HMM;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import jakarta.inject.Inject;
@@ -56,7 +56,7 @@ public class AccreditService implements AccreditStub {
     public Future<JsonObject> resource(final JsonObject requestData) {
         final ScResource request = ScResource.create(requestData);
         // First Phase
-        return Rapid.<String, JsonObject>object(ScConstant.POOL_RESOURCES)
+        return HMM.<String, JsonObject>of(ScConstant.POOL_RESOURCES)
             .cached(request.key(), () -> {
                 /* Fetch Action */
                 final KRef actionHod = new KRef();
@@ -96,7 +96,7 @@ public class AccreditService implements AccreditStub {
              * 提取RBAC配置信息（资源池的缓存）
              */
             final KRef resourceRef = new KRef();
-            return Rapid.<String, JsonObject>object(ScConstant.POOL_RESOURCES).read(resource.key()).compose(data -> {
+            return HMM.<String, JsonObject>of(ScConstant.POOL_RESOURCES).find(resource.key()).compose(data -> {
                 final SResource resourceT = Ux.fromJson(data.getJsonObject(KName.RECORD), SResource.class);
                 return resourceRef.future(resourceT);
             }).compose(resourceT -> {

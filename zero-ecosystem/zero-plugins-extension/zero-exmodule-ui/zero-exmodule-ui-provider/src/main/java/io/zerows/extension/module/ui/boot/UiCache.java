@@ -3,8 +3,8 @@ package io.zerows.extension.module.ui.boot;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.plugins.cache.Rapid;
 import io.zerows.extension.module.ui.common.UiConstant;
+import io.zerows.plugins.cache.HMM;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
 
@@ -34,7 +34,7 @@ class UiCache {
         final String keyPool = poolFn.get();
         if (Ut.isNotNil(keyPool)) {
             final String uiKey = String.valueOf(body.hashCode());
-            return Rapid.<String, T>object(keyPool).cached(uiKey, executor);
+            return HMM.<String, T>of(keyPool).cached(uiKey, executor);
         } else {
             log.warn("{} Ui 缓存已被禁用！", UiConstant.K_PREFIX_UI);
             return executor.get();

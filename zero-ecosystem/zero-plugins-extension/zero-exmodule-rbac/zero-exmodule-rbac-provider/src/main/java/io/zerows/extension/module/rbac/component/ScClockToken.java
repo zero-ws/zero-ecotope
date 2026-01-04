@@ -5,7 +5,6 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.module.rbac.boot.MDRBACManager;
-import io.zerows.extension.module.rbac.common.ScAuthMsg;
 import io.zerows.extension.module.rbac.common.ScConstant;
 import io.zerows.extension.module.rbac.exception._80206Exception401TokenCounter;
 import io.zerows.extension.module.rbac.exception._80207Exception401TokenInvalid;
@@ -17,12 +16,9 @@ import io.zerows.program.Ux;
 import io.zerows.sdk.security.Token;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.TimeUnit;
@@ -39,6 +35,7 @@ import java.util.stream.Collectors;
  *
  * @author lang : 2024-09-15
  */
+@Slf4j
 class ScClockToken extends ScClockBase<ScToken> {
     private static final ScConfig CONFIG = MDRBACManager.of().config();
     private static final ConcurrentMap<String, String> POINTER = new ConcurrentHashMap<>();
@@ -79,7 +76,6 @@ class ScClockToken extends ScClockBase<ScToken> {
      * </code></pre>
      *
      * @param data 基础内容数据
-     *
      * @return 生成好的令牌
      */
     @Override
@@ -132,7 +128,7 @@ class ScClockToken extends ScClockBase<ScToken> {
             if (isOnce) {
                 final String refreshToken = scToken.refreshToken();
                 POINTER.remove(refreshToken);
-                this.logger().info("Once token will remove `refreshToken` = {} related records.", refreshToken);
+                log.info("[ XMOD ] ( RBAC ) 一次性令牌 key = {}, refreshToken = {}.", key, refreshToken);
             }
             return Ux.future(scToken);
         });
@@ -149,8 +145,7 @@ class ScClockToken extends ScClockBase<ScToken> {
             );
             // refreshToken = relatedKeys
             keySet.forEach(related -> POINTER.put(scToken.refreshToken(), related));
-            this.logger().info("The refresh token `{}` will findRunning {} relations.",
-                scToken.refreshToken(), keySet.size());
+            log.info("[ XMOD ] ( RBAC ) 令牌 `{}` 相关键值 {}.", key, keySet);
             return Ux.future(scToken);
         });
     }
@@ -166,7 +161,6 @@ class ScClockToken extends ScClockBase<ScToken> {
      * @param stored   缓存中存储的值
      * @param waiting  等待验证的值（字面量）
      * @param identity 验证标识
-     *
      * @return 验证结果（异步）
      */
     @Override
@@ -175,7 +169,7 @@ class ScClockToken extends ScClockBase<ScToken> {
         // 无法找到 Token
         if (Objects.isNull(stored)) {
             // WebToken size
-            this.logger().info(ScAuthMsg.TOKEN_SIZE_NULL, null, identity);
+            log.info("[ XMOD ] 令牌尺寸不对 ( null ): {}, user: {}.", null, identity);
             return FnVertx.failOut(_80206Exception401TokenCounter.class, 0, identity);
         }
 
@@ -184,7 +178,7 @@ class ScClockToken extends ScClockBase<ScToken> {
         final byte[] authBytes = waiting.getBytes(VValue.DFT.CHARSET);
         if (!Arrays.equals(authBytes, stored.authToken())) {
             // WebToken invalid
-            this.logger().info(ScAuthMsg.TOKEN_INVALID, waiting);
+            log.info("[ XMOD ] 令牌不匹配 ( invalid ): {}, user: {}.", waiting, identity);
             return FnVertx.failOut(_80207Exception401TokenInvalid.class, waiting);
         }
 
@@ -193,7 +187,7 @@ class ScClockToken extends ScClockBase<ScToken> {
         final long currentAt = new Date().getTime();
         final long expiredAt = stored.expiredAt();
         if (expiredAt < currentAt) {
-            this.logger().info(ScAuthMsg.TOKEN_EXPIRED, waiting, expiredAt);
+            log.info("[ XMOD ] 令牌过期 ( expired ): {}, user: {}, expiredAt: {}.", waiting, identity, expiredAt);
             return FnVertx.failOut(_80208Exception401TokenExpired.class, waiting);
         }
         return Ux.futureT();
@@ -214,7 +208,6 @@ class ScClockToken extends ScClockBase<ScToken> {
      * 第一输入是 token
      *
      * @param keys 所有键值
-     *
      * @return 异步删除结果
      */
     @Override
