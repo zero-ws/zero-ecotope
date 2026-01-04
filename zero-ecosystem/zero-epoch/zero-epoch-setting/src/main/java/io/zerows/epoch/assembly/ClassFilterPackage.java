@@ -16,7 +16,6 @@ package io.zerows.epoch.assembly;
 interface ClassFilterPackage {
 
     String[] SKIP_PACKAGE = new String[]{
-
         // =========================== 🧱 Core / JDK / META ===========================
         "IMPL-JARS",                   // 自定义/实现 Jar 占位命名 🧩
         "META-INF",                    // JAR 元数据/清单 📦
@@ -241,6 +240,7 @@ interface ClassFilterPackage {
         "org.w3",                      // W3 相关 🛰️
         "org.w3c",                     // W3C DOM/SAX 🌐
         "org.xml",                     // XML 工具/解析 🧩
+        "org.xmlpull",                 // XMLPull 解析器 📜
         "picocli",                     // PicoCLI 命令行 📟
         "protostream",                 // Infinispan Protostream 🧱
         "scala",                       // Scala 标准库 🅂

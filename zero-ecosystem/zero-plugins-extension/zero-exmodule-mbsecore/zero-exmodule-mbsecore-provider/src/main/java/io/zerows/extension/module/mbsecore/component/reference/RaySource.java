@@ -4,14 +4,15 @@ import io.r2mo.typed.common.Kv;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.plugins.cache.Rapid;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.platform.metadata.RDao;
 import io.zerows.platform.metadata.RQuote;
 import io.zerows.platform.metadata.RRule;
+import io.zerows.plugins.cache.HMM;
 import io.zerows.program.Ux;
 import io.zerows.specification.modeling.HRecord;
 import io.zerows.support.fn.Fx;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
@@ -19,13 +20,12 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-import static io.zerows.extension.module.mbsecore.boot.Ao.LOG;
-
 /**
  * ## Data Fetcher
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
 class RaySource {
     private transient final RQuote quote;
 
@@ -68,12 +68,14 @@ class RaySource {
             execMap.forEach((hashCode, kv) -> {
                 final JsonObject condition = kv.key();
                 final RDao dao = kv.value();
-                futureMap.put(hashCode,
-                    Rapid.<String, JsonArray>object(KWeb.CACHE.REFERENCE, KWeb.ARGS.V_DATA_EXPIRED)
-                        .cached(String.valueOf(hashCode), () -> {
-                            LOG.Uca.info(this.getClass(), "Async Batch condition building: {0}", condition.encode());
-                            return dao.fetchByAsync(condition);
-                        }));
+                futureMap.put(hashCode, HMM.<String, JsonArray>of(KWeb.CACHE.REFERENCE).cached(
+                    String.valueOf(hashCode),
+                    () -> {
+                        log.info("[ ZERO ] ( UCA ) 异步批量查询：{}", condition.encode());
+                        return dao.fetchByAsync(condition);
+                    },
+                    KWeb.ARGS.V_DATA_EXPIRED
+                ));
             });
             return Fx.combineM(futureMap).compose(queriedMap -> {
                 final ConcurrentMap<String, JsonArray> data = new ConcurrentHashMap<>();
@@ -97,8 +99,7 @@ class RaySource {
                 final RDao dao = kv.value();
                 final JsonArray queried = dao.fetchBy(condition);
                 /* 反向运算 */
-                LOG.Uca.info(this.getClass(), "Batch condition building: {0}, size = {1}",
-                    condition.encode(), String.valueOf(queried.size()));
+                log.info("[ ZERO ] ( UCA ) 同步批量查询：{}，数量：{}", condition.encode(), queried.size());
                 fieldCodes.forEach((field, codeKey) -> {
                     if (Objects.equals(hashCode, codeKey)) {
                         data.put(field, queried);

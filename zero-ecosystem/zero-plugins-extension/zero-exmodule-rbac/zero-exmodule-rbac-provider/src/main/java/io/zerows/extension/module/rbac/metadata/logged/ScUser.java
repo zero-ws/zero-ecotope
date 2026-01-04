@@ -5,12 +5,11 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
-import io.zerows.component.log.LogOf;
-import io.zerows.plugins.cache.Rapid;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.extension.module.rbac.common.ScAuthKey;
 import io.zerows.platform.metadata.KRef;
+import io.zerows.plugins.cache.HMM;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -20,8 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static io.zerows.extension.module.rbac.boot.Sc.LOG;
-
 /**
  * Data in Session for current user
  * Connect to Pool: vertx-web.sessions.habitus for each user session
@@ -30,15 +27,14 @@ import static io.zerows.extension.module.rbac.boot.Sc.LOG;
  */
 @Slf4j
 public class ScUser {
-    private static final LogOf LOGGER = LogOf.get(ScUser.class);
     private static final Cc<String, ScUser> CC_USER = Cc.open();
-    private final transient Rapid<String, JsonObject> rapid;
+    private final transient HMM<String, JsonObject> rapid;
     private final transient String habitus;
     private transient String userId;
 
     private ScUser(final String habitus) {
         this.habitus = habitus;
-        this.rapid = Rapid.object(KWeb.CACHE.User.MY_HABITUS);
+        this.rapid = HMM.of(KWeb.CACHE.User.MY_HABITUS);
     }
 
     // ------------------------- Profile Method ------------------------
@@ -51,7 +47,7 @@ public class ScUser {
      */
     @SuppressWarnings("all")
     private static Future<JsonObject> initRoles(final JsonObject profile, final JsonArray roles) {
-        LOG.Auth.info(LOGGER, "Roles : {0}", roles.encode());
+        log.info("[ XMOD ] ( RBAC ) 初始化用户角色信息，Roles = {0}", roles.encode());
         final List futures = new ArrayList<>();
         roles.stream().filter(Objects::nonNull)
             .map(item -> (JsonObject) item)
@@ -68,7 +64,7 @@ public class ScUser {
 
     @SuppressWarnings("all")
     private static Future<JsonObject> initGroups(final JsonObject profile, final JsonArray groups) {
-        LOG.Auth.debug(LOGGER, "Groups: {0}", groups.encode());
+        log.info("[ XMOD ] ( RBAC ) 初始化用户分组信息，Groups = {0}", groups.encode());
         final List futures = new ArrayList();
         groups.stream().filter(Objects::nonNull)
             .map(item -> (JsonObject) item)
@@ -238,7 +234,7 @@ public class ScUser {
 
     public Future<JsonArray> roles(final String profileName) {
         return this.profile(ScAuthKey.PROFILE_ROLE).compose(json -> {
-            LOG.Auth.info(LOGGER, "Profile Name: {0}", profileName);
+            log.info("[ XMOD ] ( RBAC ) 获取用户角色信息，Profile Name = {}", profileName);
             return Ux.future(json.getJsonArray(profileName, new JsonArray()));
         });
     }
@@ -266,19 +262,19 @@ public class ScUser {
          */
         // USERS.remove(this.habitus);
         CC_USER.remove(this.habitus);
-        return this.rapid.clear(this.habitus)
+        return this.rapid.remove(this.habitus)
             .compose(nil -> Ux.future(Boolean.TRUE));
     }
 
     private Future<JsonObject> report(final JsonObject result) {
-        LOG.Auth.info(LOGGER, "Permissions: {0}", result.encode());
+        log.info("[ XMOD ] ( RBAC ) 用户权限信息报表：{}", result.encodePrettily());
         return Ux.future(result);
     }
 
     private Future<ScUser> set(final JsonObject data) {
         return this.getStored().compose(stored -> {
             stored.mergeIn(data, true);
-            return this.rapid.write(this.habitus, stored)
+            return this.rapid.put(this.habitus, stored)
                 .compose(nil -> Ux.future(this));
         });
     }
@@ -287,13 +283,13 @@ public class ScUser {
         return this.getStored().compose(stored -> {
             // dataKey = findRunning, the Tool must be valid for JsonObject
             stored.put(dataKey, value);
-            return this.rapid.write(this.habitus, stored)
+            return this.rapid.put(this.habitus, stored)
                 .compose(nil -> Ux.future(value));
         });
     }
 
     private Future<JsonObject> getStored() {
-        return this.rapid.<String, JsonObject>read(this.habitus).compose(stored -> {
+        return this.rapid.find(this.habitus).compose(stored -> {
             // 1st time fetch data often return null here
             if (Ut.isNil(stored)) {
                 stored = new JsonObject();

@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/graph/api/public/app_name_$name.md",
-                "mode": "preview",
-                "source": true
+                "file": "docs/graph/design/App应用结构.md",
+                "mode": "source",
+                "source": false
               },
               "icon": "lucide-file",
-              "title": "app_name_$name"
+              "title": "App应用结构"
             }
           }
         ]
@@ -200,25 +200,26 @@
   },
   "active": "ad17b47082cda379",
   "lastOpenFiles": [
+    "zero-ecosystem/zero-epoch/zero-overlay/target/classes/io/zerows/support/base/UInvoker.class",
+    "zero-ecosystem/zero-plugins-extension/zero-exmodule-rbac/zero-exmodule-rbac-provider/target/classes/io/zerows/extension/module/rbac/component/ScClockCode.class",
+    "zero-ecosystem/zero-plugins-extension/zero-exmodule-rbac/zero-exmodule-rbac-provider/target/classes/io/zerows/extension/module/rbac/component/ScClockImage.class",
+    "zero-ecosystem/zero-plugins-extension/zero-exmodule-rbac/zero-exmodule-rbac-provider/target/classes/io/zerows/extension/module/rbac/serviceimpl/AccreditService.class",
+    "zero-ecosystem/zero-plugins-extension/zero-exmodule-rbac/zero-exmodule-rbac-provider/target/classes/io/zerows/extension/module/rbac/component/ScClockToken.class",
+    "zero-ecosystem/zero-plugins-extension/zero-exmodule-rbac/zero-exmodule-rbac-provider/target/classes/io/zerows/extension/module/rbac/metadata/logged/ScUser.class",
+    "zero-ecosystem/zero-plugins-extension/zero-exmodule-rbac/zero-exmodule-rbac-provider/target/classes/io/zerows/extension/module/rbac/metadata/logged/ScRole.class",
+    "zero-ecosystem/zero-plugins-extension/zero-exmodule-rbac/zero-exmodule-rbac-provider/target/classes/io/zerows/extension/module/rbac/component/ScClockBase.class",
+    "zero-ecosystem/zero-plugins-extension/zero-exmodule-rbac/zero-exmodule-rbac-provider/target/classes/io/zerows/extension/module/rbac/component/ScClockSMS.class",
+    "zero-ecosystem/zero-plugins-extension/zero-exmodule-rbac/zero-exmodule-rbac-provider/target/classes/io/zerows/extension/module/rbac/component/ScClock.class",
+    "zero-ecosystem/zero-plugins-extension/zero-exmodule-rbac/zero-exmodule-rbac-provider/target/classes/io/zerows/extension/module/rbac/component/ScClockFactory.class",
+    "docs/graph/design/App应用结构.excalidraw.md",
+    "docs/graph/api/public/app_name_$name.md",
+    "README.md",
     "docs/dependency.md",
-    "zero-ecosystem/zero-plugins-equip/zero-plugins-cache/src/main/java/io/zerows/plugins/shared",
-    "zero-ecosystem/zero-boot/zero-boot-actor/zero-boot-extension-actor/target/classes/io/zerows/boot/full/plugins/UiHunterControl.class",
-    "zero-ecosystem/zero-boot/zero-boot-actor/zero-boot-extension-actor/target/classes/io/zerows/boot/full/plugins/SwitcherAtom.class",
-    "zero-ecosystem/zero-boot/zero-boot-actor/zero-boot-extension-actor/target/classes/io/zerows/boot/full/plugins/IndentName.class",
-    "zero-ecosystem/zero-boot/zero-boot-actor/zero-boot-extension-actor/target/classes/io/zerows/boot/full/plugins/IndentKey.class",
-    "zero-ecosystem/zero-boot/zero-boot-actor/zero-boot-extension-actor/target/classes/io/zerows/boot/full/plugins/BeforePk.class",
-    "zero-ecosystem/zero-boot/zero-boot-actor/zero-boot-extension-actor/target/classes/io/zerows/boot/full/plugins/BeforeNumber.class",
-    "zero-ecosystem/zero-boot/zero-boot-actor/zero-boot-extension-actor/target/classes/io/zerows/boot/full/plugins/BeforeDict.class",
-    "zero-ecosystem/zero-boot/zero-boot-actor/zero-boot-extension-actor/target/classes/io/zerows/boot/full/plugins/AfterUdEdgeDelete.class",
-    "zero-ecosystem/zero-boot/zero-boot-actor/zero-boot-extension-actor/target/classes/io/zerows/boot/full/plugins/AfterUdEdgeAdd.class",
     "docs/dependency-r2mo-compile.md",
     "docs/dependency-zero-compile.md",
     "docs/dependency-zero-source.md",
     "docs/dependency-r2mo-source.md",
-    "docs/graph/design/App应用结构.excalidraw.md",
-    "docs/graph/api/public/app_name_$name.md",
     "docs/dependency.excalidraw.md",
-    "README.md",
     "docs/graph/design/App应用结构.md",
     "docs/design/App应用入口.excalidraw.restored.md",
     "docs/design/Untitled Diagram.svg",

@@ -12,6 +12,7 @@ import io.zerows.platform.exception._60050Exception501NotSupport;
 import io.zerows.program.Ux;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
 
@@ -26,6 +27,7 @@ import java.util.Objects;
  *
  * @author lang : 2024-09-14
  */
+@Slf4j
 class ScClockCode extends ScClockBase<String> {
     private static final ScConfig CONFIG = MDRBACManager.of().config();
 
@@ -37,7 +39,7 @@ class ScClockCode extends ScClockBase<String> {
     public String generate() {
         final int length = CONFIG.getCodeLength();
         final String code = Ut.randomString(length);
-        this.logger().info("Generated Authorization Code: {}", code);
+        log.info("[ XMOD ] ( RBAC ) 生成授权码：{}", code);
         return code;
     }
 
@@ -62,7 +64,6 @@ class ScClockCode extends ScClockBase<String> {
      * @param stored   缓存中存储的值
      * @param waiting  等待验证的值（字面量）
      * @param identity 验证标识
-     *
      * @return 验证结果
      */
     @Override

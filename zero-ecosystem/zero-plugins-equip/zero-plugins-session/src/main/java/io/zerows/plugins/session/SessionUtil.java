@@ -54,7 +54,6 @@ class SessionUtil {
      * 根据 {@link HConfig} 中的 options 直接构造，这种状况之下配置优先
      *
      * @param config 配置
-     *
      * @return SessionStore
      */
     static Future<SessionStore> createStore(final Vertx vertx, final HConfig config) {
@@ -62,7 +61,7 @@ class SessionUtil {
          * 此处 config = null 会导致启动失败，所以必须双向检查，未配置的模式下的严格性
          */
         if (Objects.isNull(config) || Ut.isNil(config.options())) {
-            log.info("[ ZERO ] ( Session ) 未配置，默认会话存储模式启动：Cluster = {}", vertx.isClustered());
+            log.info("[ PLUG ] ( Session ) 未配置，默认会话存储模式启动：Cluster = {}", vertx.isClustered());
             // 配置为空，直接用 Vertx 构造
             final SessionStore store;
             if (vertx.isClustered()) {
@@ -91,15 +90,23 @@ class SessionUtil {
             if (Objects.nonNull(factory)) {
                 final JsonObject sessionOptions = Ut.valueJObject(sessionConfig, YmSpec.vertx.session.options.__);
                 if (LOCKED.getAndSet(Boolean.FALSE)) {
-                    log.info("[ ZERO ] ( Session ) 会话存储工厂 {}, 配置：{}",
+                    log.info("[ PLUG ] ( Session ) 会话存储工厂 {}, 配置：{}",
                         factory.getClass().getName(), sessionOptions.encode());
                 }
-                return factory.createStore(vertx, sessionOptions);
+                return factory.createStore(vertx, sessionOptions).compose(store -> {
+                    if (Objects.nonNull(store)) {
+                        return Future.succeededFuture(store);
+                    }
+                    return createStore(vertx, sessionConfig, SessionType.LOCAL);
+                });
             }
         }
 
+        return createStore(vertx, sessionConfig, sessionType);
+    }
 
-
+    private static Future<SessionStore> createStore(final Vertx vertx, final JsonObject sessionConfig,
+                                                    final SessionType sessionType) {
         /*
          * 如果配置了 sessionType，则跳过 SPI 自动发现机制而直接选择固定模式，简单说是为了让开发人员有一个基于优先级的选择
          * 1. 最高优先级，不配置 sessionType
@@ -112,7 +119,7 @@ class SessionUtil {
          *    - 纯自定义模式，必须配置 store_component 来指定组件类
          * */
         if (LOCKED.getAndSet(Boolean.FALSE)) {
-            log.info("[ ZERO ] ( Session ) 会话存储模式 = {}", sessionType);
+            log.info("[ PLUG ] ( Session ) 会话存储模式 = {}", sessionType);
         }
         final SessionStore store;
         if (SessionType.LOCAL == sessionType || Objects.isNull(sessionType)) {
@@ -128,7 +135,7 @@ class SessionUtil {
 
             final AtomicBoolean vertxLocked = LOCKED_MAP.computeIfAbsent(vertx.hashCode(), k -> new AtomicBoolean(true));
             if (vertxLocked.getAndSet(Boolean.FALSE)) {
-                log.info("[ ZERO ] 会话存储组件 {}", storeComponent);
+                log.info("[ PLUG ] 会话存储组件 {}", storeComponent);
             }
 
             // 默认场景下这个构造必须是带有 Vertx 参数的

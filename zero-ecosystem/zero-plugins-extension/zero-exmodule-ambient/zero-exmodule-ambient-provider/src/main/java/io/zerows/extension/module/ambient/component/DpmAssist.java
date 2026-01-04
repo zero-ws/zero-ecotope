@@ -3,11 +3,11 @@ package io.zerows.extension.module.ambient.component;
 import io.vertx.core.Future;
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonArray;
-import io.zerows.plugins.cache.Rapid;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.spi.DictionaryPlugin;
 import io.zerows.platform.metadata.KDictConfig;
+import io.zerows.plugins.cache.HMM;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -28,7 +28,7 @@ public class DpmAssist implements Dpm {
         if (Objects.isNull(plugin) || Ut.isNil(source.getKey())) {
             return Ux.future(uniqueMap);
         } else {
-            return Rapid.<String, JsonArray>object(Ut.isNil(params.get(KName.CACHE_KEY)) ? KWeb.CACHE.DIRECTORY : params.get(KName.CACHE_KEY), KWeb.ARGS.V_DATA_EXPIRED)
+            return HMM.<String, JsonArray>of(Ut.isNil(params.get(KName.CACHE_KEY)) ? KWeb.CACHE.DIRECTORY : params.get(KName.CACHE_KEY))
                 .cached(source.getKey(), () -> {
                     plugin.configuration(source.getPluginConfig());
                     return plugin.fetchAsync(source, params);

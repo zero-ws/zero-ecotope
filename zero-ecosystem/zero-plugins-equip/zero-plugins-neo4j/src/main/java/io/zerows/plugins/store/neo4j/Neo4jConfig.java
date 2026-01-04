@@ -26,7 +26,7 @@ public class Neo4jConfig implements Serializable {
 
     private Neo4jConfig(final JsonObject params) {
         final JsonObject input = Ut.valueJObject(params);
-        LOGGER.info("[ ZERO ] Neo4j configuration: {0}", input.encode());
+        LOGGER.info("[ PLUG ] Neo4j configuration: {0}", input.encode());
         this.username = input.getString(YmlCore.neo4j.USERNAME);
         this.password = input.getString(YmlCore.neo4j.PASSWORD);
         this.port = input.getInteger(YmlCore.neo4j.PORT, 7687);

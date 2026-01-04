@@ -68,7 +68,7 @@ public class PlugAuditorPin implements PlugAuditor {
                 envelop.value(KName.CREATED_AT, instant);
                 envelop.value(KName.UPDATED_BY, userId);
                 envelop.value(KName.UPDATED_AT, instant);
-                log.info("[ ZERO ] 添加：userId = `{}`, at = `{}`", userId, instant.toString());
+                log.info("[ XMOD ] 添加：userId = `{}`, at = `{}`", userId, instant.toString());
             } else {
                 /*
                  * /api/xxx
@@ -77,10 +77,10 @@ public class PlugAuditorPin implements PlugAuditor {
                  */
                 envelop.value(KName.UPDATED_BY, userId);
                 envelop.value(KName.UPDATED_AT, instant);
-                log.info("[ ZERO ] 更新：userId = `{}`, at = `{}`", userId, instant.toString());
+                log.info("[ XMOD ] 更新：userId = `{}`, at = `{}`", userId, instant.toString());
             }
         } else {
-            log.debug("[ ZERO ] 路径不满足: {}", request.path());
+            log.debug("[ XMOD ] 路径不满足: {}", request.path());
         }
         return Ux.future(envelop);
     }

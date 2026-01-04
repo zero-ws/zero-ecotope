@@ -3,10 +3,8 @@ package io.zerows.extension.module.rbac.component;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.LogO;
-import io.zerows.plugins.cache.Rapid;
 import io.zerows.extension.module.rbac.metadata.ScToken;
-import io.zerows.support.Ut;
+import io.zerows.plugins.cache.HMM;
 
 /**
  * 操作
@@ -28,7 +26,6 @@ import io.zerows.support.Ut;
  * 没有统一归口的部分：用户、组、角色、ACL管理部分，此处的 {T} 类型就是当前每种特殊组件处理的类型。
  *
  * @param <T> 当前操作的核心生成类型，此类型现阶段包括 {@link ScToken} 和 {@link String} 两种类型
- *
  * @author lang : 2024-09-14
  */
 public interface ScClock<T> {
@@ -48,7 +45,6 @@ public interface ScClock<T> {
      * 带配置的生成函数，配置中的包含了生成所需的基础数据信息
      *
      * @param config 配置/数据信息
-     *
      * @return 生成结果
      */
     T generate(JsonObject config);
@@ -63,7 +59,6 @@ public interface ScClock<T> {
      *
      * @param key    键
      * @param isOnce 是否一次性读取
-     *
      * @return 读取结果（异步）
      */
     Future<T> get(String key, boolean isOnce);
@@ -86,7 +81,6 @@ public interface ScClock<T> {
      * @param key      写入缓存的主要键
      * @param value    写入缓存的值
      * @param moreKeys 额外的键信息
-     *
      * @return 写入结果（异步）
      */
     Future<T> put(String key, T value, String... moreKeys);
@@ -97,7 +91,6 @@ public interface ScClock<T> {
      * @param stored   缓存中存储的值
      * @param waiting  等待验证的值（字面量）
      * @param identity 验证标识
-     *
      * @return 验证结果（异步）
      */
     <R> Future<R> verify(T stored, String waiting, String identity);
@@ -109,9 +102,5 @@ public interface ScClock<T> {
      */
     int configTtl();
 
-    Rapid<String, T> ofCache();
-
-    default LogO logger() {
-        return Ut.Log.security(this.getClass());
-    }
+    HMM<String, T> ofCache();
 }

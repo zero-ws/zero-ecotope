@@ -14,9 +14,8 @@ import java.util.stream.Collectors;
 /**
  * Redis 配置 POJO
  * <p>
- * 1. 支持标准 Java Bean 规范（无链式 Setter），确保序列化兼容性。
- * 2. 输入：支持 host/port 等散装字段。
- * 3. 输出：自动计算为 Vert.x RedisOptions 所需的 connectionString 格式。
+ * 1. 修复 NOAUTH 问题：直接暴露 password 字段，供 RedisOptions 直接读取。
+ * 2. 安全性提升：connectionString 中不再拼接密码，防止日志泄露。
  * </p>
  *
  * @author lang : 2025-10-06
@@ -26,8 +25,7 @@ import java.util.stream.Collectors;
 public class YmRedis implements Serializable {
 
     // =========================================================
-    // 原始配置字段 (Config -> Java)
-    // Access.WRITE_ONLY: 仅用于反序列化（读取配置），序列化成 JsonObject 时隐藏
+    // 基础连接字段
     // =========================================================
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -36,14 +34,16 @@ public class YmRedis implements Serializable {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private int port = 6379;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    // 🌟 重点修改：移除 WRITE_ONLY
+    // 让 Jackson 在序列化时包含此字段，这样 new RedisOptions(json) 能直接读到密码
+    // 而不需要去解析 connectionString
     private String password;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Integer database = 0;
 
     /**
-     * 如果配置了 endpoint (例如 redis://...)，则忽略 host/port/password
+     * 如果配置了 endpoint (例如 redis://...)，则将其作为 connectionString 的基础
      */
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String endpoint;
@@ -54,55 +54,49 @@ public class YmRedis implements Serializable {
     // =========================================================
 
     private String type;
-
-    // Sentinel 模式专用
     private String role = "MASTER";
     private String masterName;
 
-    // 连接池与性能配置
     private Integer maxPoolSize = 6;
     private Integer maxWaitingHandlers = 1024;
     private Long poolRecycleTimeout = 15000L;
     private Integer maxReconnectAttempts = 5;
     private Long reconnectInterval = 1000L;
 
-    // 嵌套网络配置 (映射为 netClientOptions)
     @JsonProperty("netClientOptions")
     private YmNet config = new YmNet();
 
 
     // =========================================================
-    // 核心：计算字段 (Java -> Json)
-    // 序列化时，Jackson 会调用这些 getter 生成 connectionString 或 endpoints
+    // 核心：计算字段
     // =========================================================
 
     /**
      * 虚拟 Getter：生成 "connectionString"
-     * 只有当不是 Cluster 模式时才输出
+     * 策略调整：仅生成 "redis://host:port/db"，不包含密码！
+     * 密码通过上面的 password 字段独立传递。
      */
     @JsonProperty("connectionString")
     public String getComputedConnectionString() {
         if ("CLUSTER".equalsIgnoreCase(this.type)) {
             return null;
         }
-        return this.resolveUri();
+        return this.resolveUri(false); // 传入 false，不包含密码
     }
 
     /**
-     * 虚拟 Getter：生成 "endpoints" 数组
-     * 只有当是 Cluster 模式时才输出
+     * 虚拟 Getter：生成 "endpoints" 数组 (Cluster 模式)
      */
     @JsonProperty("endpoints")
     public List<String> getComputedEndpoints() {
         if (!"CLUSTER".equalsIgnoreCase(this.type)) {
             return null;
         }
-        final String raw = this.resolveUri();
+        // Cluster 模式下，通常 endpoints 列表只是地址，密码也是统一配置的
+        final String raw = this.resolveUri(false);
         if (raw == null) {
             return null;
         }
-
-        // 假设集群配置 endpoint 也是逗号分隔的字符串
         return Arrays.stream(raw.split(","))
             .map(String::trim)
             .collect(Collectors.toList());
@@ -114,7 +108,7 @@ public class YmRedis implements Serializable {
     // =========================================================
 
     @JsonIgnore
-    private String resolveUri() {
+    private String resolveUri(final boolean includePassword) {
         // 1. 优先使用显式 endpoint
         if (Objects.nonNull(this.endpoint) && !this.endpoint.isBlank()) {
             return this.endpoint;
@@ -122,10 +116,17 @@ public class YmRedis implements Serializable {
 
         // 2. 自动组装
         final StringBuilder uri = new StringBuilder("redis://");
-        if (Objects.nonNull(this.password) && !this.password.isBlank()) {
+
+        // 🌟 策略调整：只有明确要求包含密码时才拼接
+        // 既然我们已经暴露了 password 字段，通常这里就不需要拼接了，避免特殊字符解析错误
+        if (includePassword && Objects.nonNull(this.password) && !this.password.isBlank()) {
+            // 注意：如果密码包含 @ 等字符，拼接在 URL 里需要 URLEncode，
+            // 既然我们要避免解析，这里直接不拼是最好的。
             uri.append(":").append(this.password).append("@");
         }
+
         uri.append(this.host).append(":").append(this.port);
+
         if (Objects.nonNull(this.database)) {
             uri.append("/").append(this.database);
         }

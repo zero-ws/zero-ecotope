@@ -2,7 +2,6 @@ package io.zerows.extension.module.ui.serviceimpl;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.plugins.cache.Rapid;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.module.ui.common.UiConstant;
@@ -11,6 +10,7 @@ import io.zerows.extension.module.ui.domain.tables.daos.UiPageDao;
 import io.zerows.extension.module.ui.domain.tables.pojos.UiPage;
 import io.zerows.extension.module.ui.servicespec.ControlStub;
 import io.zerows.extension.module.ui.servicespec.PageStub;
+import io.zerows.plugins.cache.HMM;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
@@ -37,7 +37,7 @@ public class PageService implements PageStub {
                  */
                 .compose(Fx.ofJObject(KName.Ui.CONFIG));
         // Ui Cache Enabled
-        return Rapid.<String, JsonObject>object(UiConstant.POOL_LAYOUT)
+        return HMM.<String, JsonObject>of(UiConstant.POOL_LAYOUT)
             .cached(layoutId, () -> executor.apply(layoutId));
     }
 

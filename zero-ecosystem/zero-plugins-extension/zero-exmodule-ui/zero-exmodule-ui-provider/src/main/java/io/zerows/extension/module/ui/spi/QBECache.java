@@ -7,7 +7,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.extension.module.ui.common.UiConstant;
 import io.zerows.extension.module.ui.domain.tables.pojos.UiView;
 import io.zerows.platform.constant.VString;
-import io.zerows.plugins.cache.Rapid;
+import io.zerows.plugins.cache.HMM;
 import io.zerows.program.Ux;
 import io.zerows.specification.vital.HQR;
 import io.zerows.support.base.FnBase;
@@ -21,7 +21,7 @@ import java.util.function.Supplier;
  */
 public class QBECache {
     public static final Cc<String, HQR> CCT_H_COND = Cc.openThread();
-    private static final Rapid<String, UiView> RAPID = Rapid.object(UiConstant.POOL_LIST_QR, 600); // 10 min
+    private static final HMM<String, UiView> MM_QBE = HMM.<String, UiView>of(UiConstant.POOL_LIST_QR);
 
     public static Future<List<UiView>> cached(final List<UiView> listQr) {
         final List<Future<Boolean>> futures = new ArrayList<>();
@@ -30,7 +30,7 @@ public class QBECache {
             final String key = qr.getSigma() + VString.SLASH +
                 qr.getCode() + VString.SLASH +
                 qr.getName();
-            futures.add(RAPID.write(key, qr).compose(v -> Ux.futureT()));
+            futures.add(MM_QBE.put(key, qr, 600).compose(v -> Ux.futureT()));
         });
         return FnBase.combineT(futures).compose(done -> Ux.future(listQr));
     }
@@ -39,6 +39,6 @@ public class QBECache {
         final String key = qr.getString(KName.SIGMA) + VString.SLASH +
             qr.getString(KName.CODE) + VString.SLASH +
             qr.getString(KName.NAME);
-        return RAPID.cached(key, executor);
+        return MM_QBE.cached(key, executor, 600);
     }
 }

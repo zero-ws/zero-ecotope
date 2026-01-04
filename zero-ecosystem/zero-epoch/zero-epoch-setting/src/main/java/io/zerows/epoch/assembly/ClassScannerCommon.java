@@ -12,7 +12,7 @@ import java.util.stream.StreamSupport;
 
 /**
  * 扫描加速版 🚀 (Powered by ClassGraph)
- *
+ * <p>
  * 核心改进：
  * 1. 解决了在非 URLClassLoader 环境下（如 Zero/Vert.x 工具启动时）扫描不到类的问题。
  * 2. 利用 ClassGraph 底层多线程扫描。
@@ -70,10 +70,10 @@ class ClassScannerCommon implements ClassScanner {
         // .rejectPackages()  : 在扫描底层直接剔除黑名单包，性能远高于加载后过滤
         // .ignoreClassVisibility() : 扫描所有修饰符的类
         try (ScanResult scanResult = new ClassGraph()
-            .enableClassInfo()
-            .rejectPackages(skipPackages)
-            .ignoreClassVisibility()
-            .scan()) {
+                .enableClassInfo()
+                .rejectPackages(skipPackages)
+                .ignoreClassVisibility()
+                .scan()) {
 
             // 获取所有扫描到的类信息
             var allClassInfo = scanResult.getAllClasses();
@@ -81,20 +81,20 @@ class ClassScannerCommon implements ClassScanner {
 
             // 使用并行流进行真正的类加载
             StreamSupport.stream(allClassInfo.spliterator(), true).unordered()
-                .forEach(ci -> {
-                    // [新增] 在加载类之前打印包名
-                    // 这样即使 loadClass 失败，也能知道是哪个包出的问题
-                    logScannedPackage(ci.getPackageName());
+                    .forEach(ci -> {
+                        // [新增] 在加载类之前打印包名
+                        // 这样即使 loadClass 失败，也能知道是哪个包出的问题
+                        // logScannedPackage(ci.getPackageName());
 
-                    try {
-                        // loadClass() 会使用扫描时检测到的正确 ClassLoader
-                        final Class<?> cls = ci.loadClass();
-                        loaded.add(cls);
-                    } catch (Throwable e) {
-                        // 保持原逻辑：静默处理依赖缺失或加载错误
-                        // 例如 NoClassDefFoundError 会在这里被捕获
-                    }
-                });
+                        try {
+                            // loadClass() 会使用扫描时检测到的正确 ClassLoader
+                            final Class<?> cls = ci.loadClass();
+                            loaded.add(cls);
+                        } catch (Throwable e) {
+                            // 保持原逻辑：静默处理依赖缺失或加载错误
+                            // 例如 NoClassDefFoundError 会在这里被捕获
+                        }
+                    });
 
         } catch (Exception e) {
             log.warn("[ ZERO ] ClassGraph 扫描过程发生异常", e);
@@ -102,12 +102,12 @@ class ClassScannerCommon implements ClassScanner {
 
         // 最终合法性过滤（并行）—— 与旧版保持一致
         final Set<Class<?>> result = loaded.parallelStream()
-            .filter(ClassFilter::isValid)
-            .collect(Collectors.toCollection(ClassScannerCommon::newConcurrentSet));
+                .filter(ClassFilter::isValid)
+                .collect(Collectors.toCollection(ClassScannerCommon::newConcurrentSet));
 
         final long t1 = System.nanoTime();
         log.info("[ ZERO ] 扫描完成：{}/{}，总耗时={} ms 📊",
-            result.size(), totalTopLevel, (t1 - t0) / 1_000_000L);
+                result.size(), totalTopLevel, (t1 - t0) / 1_000_000L);
 
         return result;
     }

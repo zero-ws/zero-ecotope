@@ -3,7 +3,6 @@ package io.zerows.cortex;
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Session;
-import io.zerows.component.log.LogO;
 import io.zerows.cortex.exception._40017Exception500WorkerArgument;
 import io.zerows.cortex.exception._40018Exception500AsyncSignature;
 import io.zerows.cortex.metadata.ParameterBuilder;
@@ -71,7 +70,6 @@ public class InvokerUtil {
      * Whether this method is void
      *
      * @param method checked method
-     *
      * @return checked result
      */
     static boolean isVoid(final Method method) {
@@ -91,7 +89,6 @@ public class InvokerUtil {
 
         // 1. Ensure method length
         final Class<?>[] params = method.getParameterTypes();
-        final LogO logger = Ut.Log.uca(target);
         // 2. The parameters
         Fn.jvmKo(VValue.ZERO == params.length, _40017Exception500WorkerArgument.class, method);
     }

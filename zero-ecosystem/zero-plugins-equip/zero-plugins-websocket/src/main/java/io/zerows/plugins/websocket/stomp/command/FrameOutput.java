@@ -25,7 +25,7 @@ class FrameOutput {
 
     static Frame errorVersion(final StompServerConnection connection) {
         return Frames.createErrorFrame(
-            "[ Zero ] Incompatible versions",
+            "[ PLUG ] Incompatible versions",
             Headers.create(
                 Frame.VERSION, getSupportedVersionsHeaderLine(connection),
                 Frame.CONTENT_TYPE, "text/plain"),
@@ -35,7 +35,7 @@ class FrameOutput {
 
     static Frame errorAuthenticate(final StompServerConnection connection) {
         return Frames.createErrorFrame(
-            "[ Zero ] Authentication failed",
+            "[ PLUG ] Authentication failed",
             Headers.create(
                 Frame.VERSION, getSupportedVersionsHeaderLine(connection),
                 Frame.CONTENT_TYPE, "text/plain"),

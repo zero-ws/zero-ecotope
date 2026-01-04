@@ -33,12 +33,12 @@ public class ExcelClientImpl implements ExcelClient {
         this.vertx = vertx;
 
         if (Objects.isNull(config)) {
-            log.warn("[ ZERO ] ( Excel ) 配置为空（小概率事件）！");
+            log.warn("[ PLUG ] ( Excel ) 配置为空（小概率事件）！");
             return;
         }
         final JsonObject options = config.options();
         if (Objects.isNull(options)) {
-            log.warn("[ ZERO ] ( Excel ) 配置选项为空，无法初始化当前客户端！");
+            log.warn("[ PLUG ] ( Excel ) 配置选项为空，无法初始化当前客户端！");
             return;
         }
 
@@ -151,7 +151,7 @@ public class ExcelClientImpl implements ExcelClient {
      * |        input-stream        |    isXlsx, true for 2007           |       x       |      true        |
      * |        filename            |    by extension ( .xls, .xlsx )    |       V       |      true        |
      * |        input-stream        |    isXlsx, true for 2007           |       V       |      true        |
-     *
+     * <p>
      * 2) 12 mode of `ingest` here
      * 2.1) The input contains two categories:
      * -- 1. InputStream for byte array input, in this mode, you must provide `isXlsx` parameter

@@ -3,12 +3,12 @@ package io.zerows.extension.module.rbac.boot;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.plugins.cache.Rapid;
-import io.zerows.extension.module.rbac.metadata.logged.ScUser;
 import io.zerows.extension.module.rbac.common.ScConstant;
 import io.zerows.extension.module.rbac.domain.tables.pojos.SPath;
+import io.zerows.extension.module.rbac.metadata.logged.ScUser;
 import io.zerows.extension.skeleton.common.Ke;
 import io.zerows.platform.constant.VString;
+import io.zerows.plugins.cache.HMM;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -22,8 +22,8 @@ class ScCache {
         final String admitPool = ScConstant.POOL_ADMIN;
         // Each sigma has been mapped to single pool
         final String poolName = admitPool + VString.SLASH + path.getSigma() + VString.SLASH + suffix;
-        final Rapid<String, R> rapid = Rapid.object(poolName, 3600);
-        return rapid.cached(path.getKey(), () -> executor.apply(path));
+        final HMM<String, R> mmAdmit = HMM.of(poolName);
+        return mmAdmit.cached(path.getKey(), () -> executor.apply(path), 3600);
     }
 
     static Future<JsonObject> view(final RoutingContext context, final String habitus) {

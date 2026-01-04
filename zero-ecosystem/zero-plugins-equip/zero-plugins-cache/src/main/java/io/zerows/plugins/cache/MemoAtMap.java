@@ -49,7 +49,7 @@ public abstract class MemoAtMap<K, V> extends MemoAtBase<K, V> {
         if (Objects.nonNull(duration) && !duration.isZero() && !duration.isNegative()) {
             this.ttl = duration.toMillis();
             if (this.ttl > 0) {
-                log.info("[ ZERO ] 缓存 [{}] 启用 TTL 机制，过期时间: {} ms", this.name(), this.ttl);
+                log.info("[ PLUG ] 缓存 [{}] 启用 TTL 机制，过期时间: {} ms", this.name(), this.ttl);
             }
         } else {
             this.ttl = 0;
@@ -73,7 +73,7 @@ public abstract class MemoAtMap<K, V> extends MemoAtBase<K, V> {
         synchronized (this) {
             if (this.mapFuture == null) {
                 this.mapFuture = this.supplyMap()
-                        .onFailure(err -> log.error("[ ZERO ] 获取 AsyncMap 失败，名称: {}", this.name(), err));
+                        .onFailure(err -> log.error("[ PLUG ] 获取 AsyncMap 失败，名称: {}", this.name(), err));
             }
         }
         return this.mapFuture;
@@ -89,7 +89,7 @@ public abstract class MemoAtMap<K, V> extends MemoAtBase<K, V> {
         try {
             return this.copier.apply(val);
         } catch (final Exception e) {
-            log.warn("[ ZERO ] 数据拷贝失败，降级使用原对象。错误: {}", e.getMessage());
+            log.warn("[ PLUG ] 数据拷贝失败，降级使用原对象。错误: {}", e.getMessage());
             return val;
         }
     }

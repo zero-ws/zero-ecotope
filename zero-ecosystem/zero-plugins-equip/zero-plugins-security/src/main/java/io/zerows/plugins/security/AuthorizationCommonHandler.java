@@ -1,6 +1,5 @@
 package io.zerows.plugins.security;
 
-import com.hazelcast.internal.json.JsonObject;
 import io.r2mo.function.Fn;
 import io.r2mo.typed.exception.WebException;
 import io.r2mo.typed.exception.web._403ForbiddenException;
@@ -10,6 +9,7 @@ import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.http.HttpVersion;
 import io.vertx.core.http.impl.Http1xServerRequest;
 import io.vertx.core.http.impl.Http2ServerRequest;
+import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 import io.vertx.ext.auth.authorization.AuthorizationContext;
 import io.vertx.ext.auth.authorization.AuthorizationProvider;
@@ -20,16 +20,10 @@ import io.zerows.epoch.annotations.Wall;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.metadata.security.SecurityMeta;
-import io.zerows.plugins.cache.Rapid;
+import io.zerows.plugins.cache.HMM;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.function.BiConsumer;
 
 /**
@@ -39,7 +33,7 @@ import java.util.function.BiConsumer;
  */
 @Slf4j
 class AuthorizationCommonHandler implements AuthorizationHandler {
-    private static final WebException ERROR_FORBIDDEN = new _403ForbiddenException("[ ZERO ] 无权限访问申请资源！");
+    private static final WebException ERROR_FORBIDDEN = new _403ForbiddenException("[ PLUG ] 无权限访问申请资源！");
     private final List<ResourceHandler> handlerList = new ArrayList<>();
 
     private AuthorizationCommonHandler(final List<ResourceHandler> handlerList) {
@@ -184,7 +178,7 @@ class AuthorizationCommonHandler implements AuthorizationHandler {
                     // 匹配合法，返回 True，将会执行下一个 Handler
                     final User user = authContext.user();
                     final String session = user.principal().getString(KName.SESSION);
-                    log.info("[ ZERO ] ( Secure ) 403 用户授权成功：session = {}, 用户User: principal = {} / attributes = {}",
+                    log.info("[ PLUG ] ( Secure ) 403 用户授权成功：session = {}, 用户User: principal = {} / attributes = {}",
                         session, user.principal(), user.attributes());
                     // 缓存写入后返回
                     return this.waitCached(context, user);
@@ -232,12 +226,15 @@ class AuthorizationCommonHandler implements AuthorizationHandler {
         }
 
         private Future<Boolean> waitCached(final RoutingContext context, final User user) {
-            final Rapid<String, JsonObject> cached = Rapid.user(user);
-            return cached.read(KWeb.CACHE.User.AUTHORIZATION).compose(authorized -> {
+            final HMM<String, JsonObject> mmUser = this.mmUser(user);
+            if (Objects.isNull(mmUser)) {
+                return Future.succeededFuture(Boolean.FALSE);
+            }
+            return mmUser.find(KWeb.CACHE.User.AUTHORIZATION).compose(authorized -> {
                 final String requestId = this.requestResourceId(context);
                 final JsonObject waitFor = Objects.isNull(authorized) ? new JsonObject() : authorized;
-                waitFor.add(requestId, Boolean.TRUE);
-                return cached.write(KWeb.CACHE.User.AUTHORIZATION, waitFor).compose(nil -> {
+                waitFor.put(requestId, Boolean.TRUE);
+                return mmUser.put(KWeb.CACHE.User.AUTHORIZATION, waitFor).compose(nil -> {
                     // 恢复请求处理
                     this.requestResume(context.request());
                     return Future.succeededFuture(Boolean.TRUE);
@@ -249,10 +246,23 @@ class AuthorizationCommonHandler implements AuthorizationHandler {
             });
         }
 
+        private HMM<String, JsonObject> mmUser(final User user) {
+            if (Objects.isNull(user)) {
+                return null;
+            }
+            final JsonObject principal = user.principal();
+            final String habitus = principal.getString(KName.HABITUS);
+            Objects.requireNonNull(habitus, "[ PLUG ] 用户会话标识缺失，无法获取缓存！");
+            return HMM.of(habitus);
+        }
+
         private Future<Boolean> waitCached(final RoutingContext context) {
             final User user = context.user();
-            final Rapid<String, JsonObject> cached = Rapid.user(user);
-            return cached.read(KWeb.CACHE.User.AUTHORIZATION).compose(res -> {
+            final HMM<String, JsonObject> mmUser = this.mmUser(user);
+            if (Objects.isNull(mmUser)) {
+                return Future.succeededFuture(Boolean.TRUE);
+            }
+            return mmUser.find(KWeb.CACHE.User.AUTHORIZATION).compose(res -> {
                 // 初始化授权结果
                 final JsonObject initialized = Objects.isNull(res) ? new JsonObject() : res;
                 // 提取当前资源的资源标识
@@ -261,7 +271,7 @@ class AuthorizationCommonHandler implements AuthorizationHandler {
                 if (authorized) {
                     // 跳过认证
                     final String session = user.principal().getString(KName.HABITUS);
-                    log.info("[ ZERO ] ( Secure ) 403 用户授权命中缓存：session = {} / resource = {}",
+                    log.info("[ PLUG ] ( Secure ) 403 用户授权命中缓存：session = {} / resource = {}",
                         session, resource);
                     return Future.succeededFuture(Boolean.FALSE);
                 } else {
@@ -336,7 +346,6 @@ class AuthorizationCommonHandler implements AuthorizationHandler {
          * 构造授权上下文，此处的 {@link User} 一定不会为 null，不仅如此，此处还可以绑定函数实现对授权上下文进行二次加工
          *
          * @param context 路由上下文
-         *
          * @return 授权上下文
          */
         private AuthorizationContext requestContext(final RoutingContext context) {

@@ -16,11 +16,6 @@
         <dependencies>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-plugins-cache</artifactId>
-                <version>${zero.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.zerows</groupId>
                 <artifactId>zero-plugins-elasticsearch</artifactId>
                 <version>${zero.version}</version>
             </dependency>
@@ -81,6 +76,22 @@
                 <version>${zero.version}</version>
             </dependency>
             <!-- ================= 基础 / 实现 ================== -->
+            <!-- Cache -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-plugins-cache</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-plugins-cache-ehcache</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-plugins-cache-caffeine</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
             <!-- Monitor -->
             <dependency>
                 <groupId>io.zerows</groupId>

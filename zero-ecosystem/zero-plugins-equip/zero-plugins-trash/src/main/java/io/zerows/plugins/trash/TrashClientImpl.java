@@ -16,7 +16,7 @@ class TrashClientImpl implements TrashClient {
 
     public TrashClientImpl(final Vertx vertxRef, final HConfig config) {
         this.vertxRef = vertxRef;
-        Objects.requireNonNull(config, "[ ZERO ] Actor 是必须配置的，所以 config 不可能为空！");
+        Objects.requireNonNull(config, "[ PLUG ] Actor 是必须配置的，所以 config 不可能为空！");
         if (Objects.nonNull(config.options())) {
             this.options.mergeIn(config.options(), true);
         }

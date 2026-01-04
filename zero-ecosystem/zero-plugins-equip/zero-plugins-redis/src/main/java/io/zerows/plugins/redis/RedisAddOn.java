@@ -12,7 +12,7 @@ import io.zerows.specification.configuration.HConfig;
  * @author lang : 2026-01-01
  */
 class RedisAddOn extends AddOnVertx<Redis> {
-    private static final String NAME_ADDON = "AddOn/DEFAULT";
+    private static final String NAME_ADDON = "AddOn/REDIS-DEFAULT";
     private static RedisAddOn INSTANCE;
 
     private RedisAddOn(final Vertx vertx, final HConfig config) {

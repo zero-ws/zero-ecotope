@@ -1,1 +1,1 @@
-io.zerows.plugins.redis.spi.AtSessionRedis
+io.zerows.plugins.redis.cache.RedisAtSession

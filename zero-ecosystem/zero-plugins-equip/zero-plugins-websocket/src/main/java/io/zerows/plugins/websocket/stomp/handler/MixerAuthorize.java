@@ -46,7 +46,7 @@ public class MixerAuthorize extends AbstractMixer {
              */
             if (!aegisSet.isEmpty() && Ut.uriMatch(stomp, path)) {
                 if (LOG_FOUND.getAndSet(Boolean.FALSE)) {
-                    log.info("[ ZERO ] ( Stomp ) Zero 查找到安全配置：( stomp = {}, path = {}, size = {} )",
+                    log.info("[ PLUG ] ( Stomp ) Zero 查找到安全配置：( stomp = {}, path = {}, size = {} )",
                         stomp, path, aegisSet.size());
                 }
                 reference.set(aegisSet.iterator().next());
@@ -56,7 +56,7 @@ public class MixerAuthorize extends AbstractMixer {
         if (Objects.nonNull(config)) {
             final AuthenticationProvider provider = this.provider.providerOfAuthentication(this.vertx, Set.of(config));
             if (LOG_PROVIDER.getAndSet(Boolean.FALSE)) {
-                log.info("[ ZERO ] ( Stomp ) 安全认证器：{}", provider.getClass());
+                log.info("[ PLUG ] ( Stomp ) 安全认证器：{}", provider.getClass());
             }
             handler.authProvider(provider);
         }
