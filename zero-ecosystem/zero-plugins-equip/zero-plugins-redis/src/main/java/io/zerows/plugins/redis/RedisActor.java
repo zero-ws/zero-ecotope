@@ -4,7 +4,9 @@ import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.vertx.redis.client.Command;
 import io.vertx.redis.client.Redis;
+import io.vertx.redis.client.Request;
 import io.zerows.component.module.AbstractHActor;
 import io.zerows.epoch.annotations.Actor;
 import io.zerows.epoch.assembly.DiRegistry;
@@ -58,12 +60,21 @@ public class RedisActor extends AbstractHActor {
         } else {
             content = Ut.valueString(options, "connectionString");
         }
-        redis.connect().onComplete(result -> {
-            if (result.succeeded()) {
-                this.vLog("[ Redis ] \uD83C\uDF52 Redis 连接成功！！--> {}", content);
-            } else {
-                this.vLog().error(result.cause().getMessage(), result.cause());
-            }
-        });
+        Objects.requireNonNull(redis).connect()
+            .compose(conn -> {
+                // ✅ 连接建立后，立即发送 PING 来验证身份
+                // 如果没密码或密码错误，这里会炸出 NOAUTH
+                return redis.send(Request.cmd(Command.PING));
+            })
+            .onComplete(result -> {
+                if (result.succeeded()) {
+                    // 只有 PING 通了，才是真的成功
+                    this.vLog("[ Redis ] \uD83C\uDF52 Redis 连接 + 认证成功！！--> {}", content);
+                } else {
+                    // 🛑 这里一定会捕获到 NOAUTH Authentication required
+                    this.vLog().error("[ Redis ] 连接建立了，但认证失败 (NOAUTH): {} / 访问：{}",
+                        result.cause().getMessage(), content);
+                }
+            });
     }
 }

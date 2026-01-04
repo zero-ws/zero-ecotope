@@ -64,7 +64,7 @@ public class RedisYmConfig implements Serializable {
      * - "string": 仅存储字符串 (性能最高，但仅适用于简单值)
      * - "binary": 二进制存储 (如 Protobuf/MsgPack，需额外适配)
      */
-    private String format = "json";
+    private String format;
 
     // ------------------- 辅助方法 -------------------
 
