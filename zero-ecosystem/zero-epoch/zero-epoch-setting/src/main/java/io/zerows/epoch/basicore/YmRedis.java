@@ -57,7 +57,7 @@ public class YmRedis implements Serializable {
     private String role = "MASTER";
     private String masterName;
 
-    private Integer maxPoolSize = 6;
+    private Integer maxPoolSize = 32;
     private Integer maxWaitingHandlers = 1024;
     private Long poolRecycleTimeout = 15000L;
     private Integer maxReconnectAttempts = 5;

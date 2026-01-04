@@ -8,13 +8,15 @@ import io.zerows.epoch.annotations.Defer;
 import io.zerows.support.Ut;
 import jakarta.inject.Named;
 import jakarta.inject.Singleton;
+import lombok.Builder;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Constructor;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.function.BiFunction;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
@@ -28,7 +30,6 @@ public abstract class DiGuiceModule extends AbstractModule {
             return clazz.getName();
         }
 
-
         final Constructor<T> constructor = Ut.constructor(clazz);
         if (clazz.isAnnotationPresent(Singleton.class)) {
             // 追加了 @Singleton 注解
@@ -41,88 +42,151 @@ public abstract class DiGuiceModule extends AbstractModule {
         return null;
     }
 
-    @SuppressWarnings("all")
     protected <T extends I, I> Set<String> bindInterface(final Class<I> interfaceCls, final Set<Class<T>> implSet) {
         // ❌️ 无法查找到实现类，跳过
         if (implSet.isEmpty()) {
             return null;
         }
 
-        Set<String> clazzSet = new HashSet<>();
-        // AddOn 先执行
-        clazzSet.addAll(this.bindInterface(implSet, (implCls, name) -> this.bindAddOn(interfaceCls, implCls, name)));
+        final boolean isSingleImpl = (1 == implSet.size());
 
-        clazzSet.addAll(this.bindInterface(implSet, (implCls, name) -> this.bindDefault(interfaceCls, implCls, name)));
+        // =========================================================
+        // 阶段 1：并行计算 (Parallel Computing)
+        // 利用 parallelStream 进行反射分析和日志拼接。
+        // Java ForkJoinPool 会自动评估开销：任务少时原地执行(无切换)，任务多时并行执行。
+        // 这是理论上开销最小、速度最快的方式。
+        // =========================================================
+        final List<BindingTask> tasks = implSet.parallelStream()
+            .map(implCls -> this.analyze(interfaceCls, implCls, isSingleImpl))
+            .filter(Objects::nonNull)
+            .toList();
+
+        // =========================================================
+        // 阶段 2：串行注册 (Serial Binding)
+        // Guice Binder 不是线程安全的，必须在主线程串行操作
+        // =========================================================
+        final Set<String> clazzSet = new HashSet<>();
+
+        for (final BindingTask task : tasks) {
+            if (task.skipped) {
+                // 对应原逻辑中返回 null 的情况
+                clazzSet.add(task.implCls.getName());
+                continue;
+            }
+
+            // 执行核心绑定逻辑
+            this.applyBinding(task);
+
+            // 输出预计算好的日志
+            log.info(task.logMessage);
+        }
+
         return clazzSet;
     }
 
-    private <T extends I, I> Set<String> bindInterface(final Set<Class<T>> implSet, final BiFunction<Class<T>, String, Class<T>> consumerFn) {
-        // 记录被注入的记录
-        final Set<String> clazzSet = new HashSet<>();
-        if (1 == implSet.size()) {
-            final Class<T> clazz = implSet.iterator().next();
-            final Class<T> bind = consumerFn.apply(clazz, null);
-            // 追加记录
-            if (Objects.isNull(bind)) {
-                clazzSet.add(clazz.getName());
+    // ----------------------------------------------------------------------
+    // 私有分析方法：运行在并行线程中 (纯计算，无副作用)
+    // ----------------------------------------------------------------------
+    private <T extends I, I> BindingTask analyze(final Class<I> interfaceCls, final Class<T> implCls, final boolean isSingleImpl) {
+
+        final boolean isDefer = implCls.isAnnotationPresent(Defer.class);
+        String name = null;
+        boolean isValid = false;
+
+        if (isSingleImpl) {
+            // 单实现类模式，无需 Named
+            isValid = true;
+        } else {
+            // 多实现类模式，必须有 Named
+            if (implCls.isAnnotationPresent(Named.class)) {
+                final Named annotation = implCls.getAnnotation(Named.class);
+                name = annotation.value();
+                isValid = true;
+            }
+        }
+
+        if (!isValid) {
+            // 不满足绑定条件，标记跳过
+            return BindingTask.builder().implCls(implCls).skipped(true).build();
+        }
+
+        // --- 生成日志字符串 (回归最原始的清爽格式) ---
+        final String logMsg;
+        if (isDefer) {
+            // AddOn / Defer 逻辑
+            if (Ut.isNil(name)) {
+                logMsg = Ut.fromMessage("[ ZERO ] ( DI ) Defer / 实现类: `{}`, 接口 = `{}`",
+                    implCls.getName(), interfaceCls.getName());
+            } else {
+                logMsg = Ut.fromMessage("[ ZERO ] ( DI ) Defer / 实现类: `{}`, 接口 = `{}`, 标识 = {}",
+                    implCls.getName(), interfaceCls.getName(), name);
             }
         } else {
-            // 多实现类必须使用 @Named 注解
-            implSet.forEach(implCls -> {
-                if (implCls.isAnnotationPresent(Named.class)) {
-                    final Named annotation = implCls.getAnnotation(Named.class);
-                    final String name = annotation.value();
-                    final Class<T> bind = consumerFn.apply(implCls, name);
-                    if (Objects.isNull(bind)) {
-                        // 追加记录
-                        clazzSet.add(implCls.getName());
-                    }
-                }
-            });
+            // Default 逻辑
+            if (Ut.isNil(name)) {
+                logMsg = Ut.fromMessage("[ ZERO ] ( DI ) 实现类: `{}`, 接口 = `{}`",
+                    implCls.getName(), interfaceCls.getName());
+            } else {
+                logMsg = Ut.fromMessage("[ ZERO ] ( DI ) 实现类: `{}`, 接口 = `{}`, 标识 = {}",
+                    implCls.getName(), interfaceCls.getName(), name);
+            }
         }
-        return clazzSet;
+
+        return BindingTask.builder()
+            .interfaceCls(interfaceCls)
+            .implCls(implCls)
+            .name(name)
+            .isDefer(isDefer)
+            .isSingleton(implCls.isAnnotationPresent(Singleton.class))
+            .logMessage(logMsg)
+            .skipped(false)
+            .build();
     }
 
-    private <T extends I, I> Class<T> bindAddOn(final Class<I> interfaceCls, final Class<T> implCls, final String name) {
-        if (!implCls.isAnnotationPresent(Defer.class)) {
-            // ❌️ 动态注册表未标记
-            return null;
-        }
+    // ----------------------------------------------------------------------
+    // 执行绑定：解决泛型编译问题 (运行在主线程)
+    // ----------------------------------------------------------------------
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    private void applyBinding(final BindingTask task) {
+        // 强制转型为 Class<Object>，解决编译器泛型检查报错
+        final Class<Object> iface = (Class<Object>) task.interfaceCls;
+        final Class<Object> impl = (Class<Object>) task.implCls;
 
-        if (Ut.isNil(name)) {
-            this.bind(interfaceCls).toProvider(new DiDynamicProvider<>(Key.get(interfaceCls)));
-            log.info("[ ZERO ] ( DI ) Defer / 实现类: `{}`, 接口 = `{}`", implCls.getName(), interfaceCls.getName());
+        if (task.isDefer) {
+            // Defer -> toProvider
+            if (Ut.isNil(task.name)) {
+                this.bind(iface).toProvider(new DiDynamicProvider(Key.get(iface)));
+            } else {
+                this.bind(iface).annotatedWith(Names.named(task.name)).toProvider(
+                    new DiDynamicProvider(Key.get(iface, Names.named(task.name)))
+                );
+            }
         } else {
-            this.bind(interfaceCls).annotatedWith(Names.named(name)).toProvider(
-                // 注意此处是带有 @Named 的操作，在实现这一层需要去考虑
-                new DiDynamicProvider<>(Key.get(interfaceCls, Names.named(name)))
-            );
-            log.info("[ ZERO ] ( DI ) Defer / 实现类: `{}`, 接口 = `{}`, 标识 = {}", implCls.getName(), interfaceCls.getName(), name);
+            // Default -> to
+            final ScopedBindingBuilder bindingBuilder;
+            if (Ut.isNil(task.name)) {
+                bindingBuilder = this.bind(iface).to(impl);
+            } else {
+                bindingBuilder = this.bind(iface).annotatedWith(Names.named(task.name)).to(impl);
+            }
+
+            // 处理 Singleton
+            if (task.isSingleton) {
+                bindingBuilder.asEagerSingleton();
+            }
         }
-        return implCls;
     }
 
-    private <T extends I, I> Class<T> bindDefault(final Class<I> interfaceCls, final Class<T> implCls, final String name) {
-        if (implCls.isAnnotationPresent(Defer.class)) {
-            // ❌️ 动态注册表模式的注入
-            return null;
-        }
-        if (Ut.isNil(name)) {
-            this.buildInstance(implCls,
-                this.bind(interfaceCls).to(implCls));
-            log.info("[ ZERO ] ( DI ) 实现类: `{}`, 接口 = `{}`", implCls.getName(), interfaceCls.getName());
-        } else {
-            this.buildInstance(implCls,
-                this.bind(interfaceCls).annotatedWith(Names.named(name)).to(implCls));
-            log.info("[ ZERO ] ( DI ) 实现类: `{}`, 接口 = `{}`, 标识 = {}",
-                implCls.getName(), interfaceCls.getName(), name);
-        }
-        return implCls;
-    }
-
-    private <T> void buildInstance(final Class<T> implCls, final ScopedBindingBuilder scopedBinding) {
-        if (implCls.isAnnotationPresent(Singleton.class)) {
-            scopedBinding.asEagerSingleton();
-        }
+    // --- 内部 DTO：用于存储并行计算的结果 ---
+    @Data
+    @Builder
+    private static class BindingTask {
+        Class<?> interfaceCls;
+        Class<?> implCls;
+        String name;           // @Named 的值
+        boolean isDefer;       // 是否是 Defer 模式
+        boolean isSingleton;   // 是否是单例
+        String logMessage;     // 预计算的日志
+        boolean skipped;       // 是否被逻辑跳过
     }
 }

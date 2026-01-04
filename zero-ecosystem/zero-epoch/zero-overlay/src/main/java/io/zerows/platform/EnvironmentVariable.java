@@ -39,6 +39,7 @@ public interface EnvironmentVariable {
 
 
     String Z_ENV = "Z_ENV";
+    String Z_DOG = "Z_DOG";                       // 是否开启监控系统
     /*
      *
      * - 💻 Z_NS     -> 一个UUID的值，标识当前 App / Service 所属的名空间
