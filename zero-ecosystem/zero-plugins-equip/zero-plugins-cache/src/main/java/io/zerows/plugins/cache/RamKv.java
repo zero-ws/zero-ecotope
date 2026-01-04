@@ -15,9 +15,9 @@ import io.vertx.core.json.JsonObject;
  *     3. 现阶段主要针对三种数据类型
  *        - String = {@link UserAt}
  *        - String = {@link JsonObject} 配置 / 全局数据
- *        - STRING = {@link JsonArray} 字典类型数据
+ *        - String = {@link JsonArray} 字典类型数据
  * </pre>
  */
-public interface RamKv<T> {
-
+public interface RamKv {
+    
 }

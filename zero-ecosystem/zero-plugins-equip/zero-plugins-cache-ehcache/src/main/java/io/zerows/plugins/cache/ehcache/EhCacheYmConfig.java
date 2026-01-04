@@ -17,7 +17,7 @@ import java.time.Duration;
  *       ehcache:
  *         expiredAt: ???
  *         size: ???
- *         # 下边也可自动计算
+ *         # 下边也可自动计算，默认使用 Object.class（无法解析时）
  *         classK: ???
  *         classV: ???
  * </pre>
@@ -28,12 +28,12 @@ public class EhCacheYmConfig implements Serializable {
     private int size = 10000;               // 尺寸信息
     @JsonSerialize(using = ClassSerializer.class)
     @JsonDeserialize(using = ClassDeserializer.class)
-    private Class<?> classK;                // Key 类型
+    private Class<?> classK = Object.class; // Key 类型
     @JsonSerialize(using = ClassSerializer.class)
     @JsonDeserialize(using = ClassDeserializer.class)
-    private Class<?> classV;                // Value 类型
+    private Class<?> classV = Object.class; // Value 类型
 
-    public Duration expiredMs() {
+    public Duration expiredAt() {
         return R2MO.toDuration(this.expiredAt);
     }
 }

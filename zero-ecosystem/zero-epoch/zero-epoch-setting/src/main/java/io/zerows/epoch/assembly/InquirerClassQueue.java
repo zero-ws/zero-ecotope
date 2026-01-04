@@ -40,9 +40,14 @@ public class InquirerClassQueue implements Inquirer<Set<Class<?>>> {
             .flatMap(Arrays::stream)
             .filter(method -> method.isAnnotationPresent(Address.class))
             .forEach(method -> {
+                // Fix: Exception in thread "meditate-class-2" java.lang.ArrayIndexOutOfBoundsException: Index 0 out of bounds for length 0
+                final Class<?>[] parameterTypes = method.getParameterTypes();
+                if (0 == parameterTypes.length) {
+                    return;
+                }
                 final Class<?> returnType = method.getReturnType();
-                final Class<?> parameterTypes = method.getParameterTypes()[0];
-                if (Message.class.isAssignableFrom(parameterTypes)) {
+                final Class<?> parameterType = parameterTypes[0];
+                if (Message.class.isAssignableFrom(parameterType)) {
                     Fn.jvmKo(void.class != returnType && Void.class != returnType, _40049Exception500WorkerConflict.class, method);
                 }
             });
