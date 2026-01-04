@@ -1,10 +1,8 @@
 package io.zerows.plugins.cache;
 
 import io.vertx.core.Future;
-import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Objects;
 import java.util.function.Supplier;
 
 /**
@@ -22,6 +20,7 @@ class RapidObject<T> extends AbstractRapid<String, T> {
 
     @Override
     public Future<T> cached(final String key, final Supplier<Future<T>> executor) {
+        /*
         Objects.requireNonNull(key);
         return this.pool().<String, T>get(key).compose(queried -> {
             if (Objects.isNull(queried)) {
@@ -41,6 +40,8 @@ class RapidObject<T> extends AbstractRapid<String, T> {
                 return Ut.future(queried);
             }
         });
+        */
+        return null;
     }
 
 }

@@ -2,12 +2,8 @@ package io.zerows.plugins.cache;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
-import io.zerows.support.Ut;
-import io.zerows.support.fn.Fx;
 
-import java.util.Objects;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.Function;
 
@@ -24,6 +20,7 @@ class RapidDict extends AbstractRapid<Set<String>, ConcurrentMap<String, JsonArr
     public Future<ConcurrentMap<String, JsonArray>> cached(
         final Set<String> keys,
         final Function<Set<String>, Future<ConcurrentMap<String, JsonArray>>> executor) {
+        /*
         Objects.requireNonNull(keys);
         return this.pool().<String, JsonArray>get(keys).compose(dataMap -> {
             final Set<String> keySet = Ut.elementDiff(keys, dataMap.keySet());
@@ -43,5 +40,7 @@ class RapidDict extends AbstractRapid<Set<String>, ConcurrentMap<String, JsonArr
                 });
             }
         });
+        */
+        return null;
     }
 }

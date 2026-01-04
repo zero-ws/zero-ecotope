@@ -1,12 +1,9 @@
 package io.zerows.plugins.cache;
 
 import io.vertx.core.Future;
-import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
-import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Objects;
 import java.util.function.Supplier;
 
 /**
@@ -25,6 +22,7 @@ public class RapidUser<T> extends AbstractRapid<String, T> {
     @Override
     @SuppressWarnings("unchecked")
     public Future<T> cached(final String key, final Supplier<Future<T>> executor) {
+        /*
         Objects.requireNonNull(key);
         return this.pool().<String, JsonObject>get(this.rootKey).compose(cached -> {
             if (Objects.isNull(cached)) {
@@ -43,5 +41,7 @@ public class RapidUser<T> extends AbstractRapid<String, T> {
                 return this.pool().put(this.rootKey, stored).compose(nil -> Ut.future(item));
             });
         });
+        */
+        return null;
     }
 }

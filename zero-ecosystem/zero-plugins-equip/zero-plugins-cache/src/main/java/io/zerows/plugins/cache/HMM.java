@@ -1,13 +1,8 @@
 package io.zerows.plugins.cache;
 
 import io.r2mo.typed.cc.Cc;
-import io.r2mo.typed.common.Kv;
-import io.vertx.core.Future;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
-
-import java.util.Set;
-import java.util.concurrent.ConcurrentMap;
 
 /**
  * 统一接口，替换原始的 UxPool 以及 Rapid，用于处理不同业务场景之下的共享数据池操作，内置 Bridge 桥接功能。
@@ -45,72 +40,23 @@ import java.util.concurrent.ConcurrentMap;
 public class HMM {
 
     private static final Cc<String, HMM> CC_UX_POOL = Cc.open();
-
-    private transient final String name;
-    private transient final SharedClient client;
+    private static final String HMM_DEFAULT = HMM.class.getName();
+    private final String name;
+    private final SharedClient sharedClient;
+    private final CachedClient cachedClient;
 
     private HMM(final String name) {
         this.name = name;
-        if (Ut.isNil(name)) {
-            this.client = SharedAddOn.of().createInstance();
-        } else {
-            this.client = SharedAddOn.of().createInstance(name);
-        }
+        this.sharedClient = SharedAddOn.of().createInstance(name);
+        this.cachedClient = CachedAddOn.of().createInstance(name);
     }
 
     public static HMM of(final String name) {
-        final String nameP = Ut.isNil(name) ? HMM.class.getName() : name;
-        return CC_UX_POOL.pick(() -> new HMM(nameP), nameP);
+        final String nameHMM = Ut.isNil(name) ? HMM_DEFAULT : name;
+        return CC_UX_POOL.pick(() -> new HMM(nameHMM), nameHMM);
     }
 
     public String name() {
         return this.name;
-    }
-
-    // Put Operation
-    public <K, V> Future<Kv<K, V>> put(final K key, final V value) {
-        return null;
-    }
-
-    public <K, V> Future<Kv<K, V>> put(final K key, final V value, final int expiredSecs) {
-        return null;
-    }
-
-    // Remove
-    public <K, V> Future<Kv<K, V>> remove(final K key) {
-
-        return null;
-    }
-
-    // Get
-    public <K, V> Future<V> get(final K key) {
-
-        return null;
-    }
-
-    public <K, V> Future<ConcurrentMap<K, V>> get(final Set<K> keys) {
-
-        return null;
-    }
-
-    public <K, V> Future<V> get(final K key, final boolean once) {
-
-        return null;
-    }
-
-    public Future<Boolean> clear() {
-
-        return null;
-    }
-
-    // Count
-    public Future<Integer> size() {
-
-        return null;
-    }
-
-    public Future<Set<String>> keys() {
-
-        return null;
     }
 }
