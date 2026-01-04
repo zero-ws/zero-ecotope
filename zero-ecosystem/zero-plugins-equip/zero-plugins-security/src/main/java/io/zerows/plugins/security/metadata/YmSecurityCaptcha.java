@@ -42,11 +42,11 @@ public class YmSecurityCaptcha implements Serializable {
     /**
      * 验证码图片宽度
      */
-    private int width = 220;
+    private int width = 180;
     /**
      * 验证码图片高度
      */
-    private int height = 80;
+    private int height = 48;
     /**
      * 验证码图片透明度
      */
@@ -91,6 +91,6 @@ public class YmSecurityCaptcha implements Serializable {
         /**
          * 字体大小
          */
-        private int size = 32;
+        private int size = 36;
     }
 }

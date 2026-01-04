@@ -34,27 +34,24 @@ public class CaptchaService implements CaptchaStub {
 
     @Override
     public Future<JsonObject> generate() {
-        // 0. 前置防御
         Fn.jvmKo(Objects.isNull(CAPTCHA), _80212Exception500CaptchaDisabled.class);
         final YmSecurityCaptcha config = CAPTCHA.captchaConfig();
 
-        // 1. 【Worker 线程】重计算外包
-        // 返回标准的 Map 结构，包含 ID, Code, Base64Image
-        final Map<String, String> result = Ux.waitFor(() -> this.execHeavyGeneration(config));
+        // 1. 【物理 Worker】重计算 (CPU 密集)
+        return Ux.waitAsync(() -> this.execHeavyGeneration(config))
+            // 2. 【虚拟线程】Redis 存储 (I/O 密集 + await 调用)
+            // 这里必须切换到 Virtual Thread，因为 UserCache.authorize 用了 Future.await()
+            .compose(result -> Ux.waitVirtual(() -> {
+                final String captchaId = result.get(KEY_ID);
+                final Kv<String, String> cacheEntry = Kv.create(captchaId, result.get(KEY_CODE));
 
-        // 2. 【虚拟线程】数据拆解与存储
-        // 严格遵循 Kv 的单一键值对定义：Key=ID, Value=Code
-        final String captchaId = result.get(KEY_ID);
-        final Kv<String, String> cacheEntry = Kv.create(captchaId, result.get(KEY_CODE));
+                // 这里调用 await() 现在是合法的，因为跑在 Virtual Thread 里
+                UserCache.of().authorize(cacheEntry, config.forArguments());
 
-        // 执行 Redis 存储 (I/O)
-        UserCache.of().authorize(cacheEntry, config.forArguments());
-
-        // 3. 【虚拟线程】响应构建
-        return Future.succeededFuture(new JsonObject()
-            .put(CaptchaRequest.ID, captchaId)
-            .put("image", result.get(KEY_IMAGE))
-        );
+                return new JsonObject()
+                    .put(CaptchaRequest.ID, captchaId)
+                    .put("image", result.get(KEY_IMAGE));
+            }));
     }
 
     /**
