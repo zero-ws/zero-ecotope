@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
-import io.zerows.plugins.security.captcha.CaptchaStub;
+import io.zerows.plugins.security.common.CaptchaStub;
 import jakarta.inject.Inject;
 
 @Queue

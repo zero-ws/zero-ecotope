@@ -6,4 +6,5 @@ import io.r2mo.vertx.common.exception.VertxE;
 interface ERR {
     VertxE _80222 = VertxE.of(-80222).state(HttpResponseStatus.UNAUTHORIZED);
     VertxE _80212 = VertxE.of(-80212).state(HttpResponseStatus.INTERNAL_SERVER_ERROR);
+    VertxE _80213 = VertxE.of(-80213).state(HttpResponseStatus.INTERNAL_SERVER_ERROR);
 }

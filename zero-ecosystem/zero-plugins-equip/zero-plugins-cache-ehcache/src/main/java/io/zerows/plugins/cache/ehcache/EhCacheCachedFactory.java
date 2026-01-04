@@ -27,7 +27,7 @@ public class EhCacheCachedFactory implements CachedFactory {
      * @return EhCacheMemoAt 实例
      */
     @Override
-    public <K, V> MemoAt<K, V> findMemoAt(final Vertx vertx, final MemoOptions<K, V> options) {
+    public <K, V> MemoAt<K, V> findConfigured(final Vertx vertx, final MemoOptions<K, V> options) {
         final EhCacheYmConfig config = this.configOf(options);
         if (Objects.isNull(config)) {
             log.warn("[ R2MO ] 配置缺失，无法构造此类 MemoAt，请检查：{}", options.extension());
@@ -39,7 +39,13 @@ public class EhCacheCachedFactory implements CachedFactory {
         final MemoOptions<K, V> optionsUpdated = options.of(expiredAt);
         optionsUpdated.size(config.getSize());
         optionsUpdated.configuration(config);
-        return new EhCacheMemoAt<>(vertx, optionsUpdated);
+        return this.findBy(vertx, optionsUpdated);
+    }
+
+    @Override
+    public <K, V> MemoAt<K, V> findBy(final Vertx vertx, final MemoOptions<K, V> options) {
+        Objects.requireNonNull(options, "[ R2MO ] MemoOptions 不能为空！");
+        return new EhCacheMemoAt<>(vertx, options);
     }
 
     private <K, V> EhCacheYmConfig configOf(final MemoOptions<K, V> options) {

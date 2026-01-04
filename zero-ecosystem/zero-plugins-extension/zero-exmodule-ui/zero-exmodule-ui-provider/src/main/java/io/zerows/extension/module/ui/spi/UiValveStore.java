@@ -11,9 +11,9 @@ import io.zerows.extension.module.ui.domain.tables.pojos.UiColumn;
 import io.zerows.platform.constant.VString;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
-import io.zerows.support.fn.Fx;
 
 import java.util.Comparator;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static io.zerows.extension.module.ui.boot.Ui.LOG;
@@ -55,20 +55,27 @@ class UiValveStore implements UiValve {
          * fixed
          * width
          */
-        Fx.monad(column::getSorter, (sorter) -> columnJson.put("sorter", sorter));
-        Fx.monad(column::getFixed, (fixed) -> {
-            if (fixed) {
+        if (Objects.nonNull(column.getSorter())) {
+            columnJson.put("sorter", column.getSorter());
+        }
+        if (Objects.nonNull(column.getFixed())) {
+            if (column.getFixed()) {
                 columnJson.put("fixed", "left");
             } else {
                 columnJson.put("fixed", "right");
             }
-        });
-        Fx.monad(column::getClassName, (className) -> columnJson.put("className", className));
-        Fx.monad(column::getWidth, (width) -> columnJson.put("width", width));
+        }
+        if (Objects.nonNull(column.getClassName())) {
+            columnJson.put("className", column.getClassName());
+        }
+        if (Objects.nonNull(column.getWidth())) {
+            columnJson.put("width", column.getWidth());
+        }
         /*
          * If render
          */
-        Fx.monad(column::getRender, (render) -> {
+        if (Objects.nonNull(column.getRender())) {
+            final String render = column.getRender();
             columnJson.put("$render", render);
             if ("DATE".equals(render)) {
                 assert null != column.getFormat() : " $formatFail should not be null when DATE";
@@ -78,24 +85,26 @@ class UiValveStore implements UiValve {
                 assert null != column.getDatum() : " $datum should not be null when DATUM";
                 columnJson.put("$datum", column.getDatum());
             }
-        });
-        Fx.monad(column::getFilterType, (filterType) -> {
-            columnJson.put("$filter.type", filterType);
+        }
+        if (Objects.nonNull(column.getFilterType())) {
+            columnJson.put("$filter.type", column.getFilterType());
             columnJson.put("$filter.config", column.getFilterConfig());
             Ut.valueToJObject(columnJson, "$filter.config");
-        });
+        }
         /*
          * Zero Config
          */
-        Fx.monad(column::getEmpty, (empty) -> columnJson.put("$empty", empty));
-        Fx.monad(column::getMapping, (mapping) -> {
-            columnJson.put("$mapping", mapping);
+        if (Objects.nonNull(column.getEmpty())) {
+            columnJson.put("$empty", column.getEmpty());
+        }
+        if (Objects.nonNull(column.getMapping())) {
+            columnJson.put("$mapping", column.getMapping());
             Ut.valueToJObject(columnJson, "$mapping");
-        });
-        Fx.monad(column::getConfig, (config) -> {
-            columnJson.put("$config", config);
+        }
+        if (Objects.nonNull(column.getConfig())) {
+            columnJson.put("$config", column.getConfig());
             Ut.valueToJObject(columnJson, "$config");
-        });
+        }
         return columnJson;
     }
 }

@@ -27,6 +27,10 @@ public class SecurityCaptcha {
         return CC_CAPTCHA.pick(() -> new SecurityCaptcha(captcha), captcha.hashCode());
     }
 
+    public YmSecurityCaptcha captchaConfig() {
+        return this.captchaConfig;
+    }
+
     /**
      * 验证码生成器构造
      */

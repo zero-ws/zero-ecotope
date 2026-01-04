@@ -78,9 +78,9 @@ class SecurityManager {
         CC_SECURITY.pick(() -> this.createConfiguration(config, cacheKey), cacheKey);
     }
 
-    void registryOf(final HConfig config, final int vertxCode) {
+    void registryOf(final HConfig config, final Vertx vertxRef) {
         // 注册 HConfig
-        final YmSecurity configuration = this.createConfiguration(config, String.valueOf(vertxCode));
+        final YmSecurity configuration = this.createConfiguration(config, String.valueOf(vertxRef.hashCode()));
         // 默认配置只会被初始化一次，为当前启动节点（或主节点）的全局默认配置
         if (Objects.nonNull(configuration)) {
             SECURITY = configuration;
@@ -119,5 +119,9 @@ class SecurityManager {
             return null;
         }
         return SecurityCaptcha.of(SECURITY.getCaptcha());
+    }
+
+    YmSecurity configuration() {
+        return SECURITY;
     }
 }

@@ -50,12 +50,10 @@ public class NodeVertx implements Serializable {
      * 但实例中的配置优先级更高，简单说就是 instance 本身在 yml 文件中可直接定制
      */
     private final ConcurrentMap<String, DeploymentOptions> deploymentOptions = new ConcurrentHashMap<>();
-
-    private DeploymentOptions agentOptions;
-    private DeploymentOptions workerOptions;
-
     private final String name;
     private final NodeNetwork networkRef;
+    private DeploymentOptions agentOptions;
+    private DeploymentOptions workerOptions;
     private EmDeploy.Mode mode = EmDeploy.Mode.CONFIG;
 
     private VertxOptions vertxOptions;
@@ -68,6 +66,49 @@ public class NodeVertx implements Serializable {
 
     public static NodeVertx of(final String name, final NodeNetwork networkRef) {
         return new NodeVertx(name, networkRef);
+    }
+
+    public static void setupAdjust(final DeploymentOptions options, final Class<?> clazz,
+                                   final EmDeploy.Mode mode) {
+        final Worker worker = clazz.getDeclaredAnnotation(Worker.class);
+        if (Objects.nonNull(worker)) {
+            /*
+             * 如果是 Worker 模式，则强制设置 Worker，但在设置过程中
+             * - VIRTUAL_THREAD 为第一优先级，直接配置成此模式则直接忽略
+             * - 其他模式一律统一成 VIRTUAL_THREAD，此为第一优先级，暂时告别 Worker 模式
+             */
+            if (ThreadingModel.VIRTUAL_THREAD != options.getThreadingModel()) {
+                options.setThreadingModel(ThreadingModel.VIRTUAL_THREAD);
+            }
+            if (0 < worker.instances() && KWeb.DEPLOY.INSTANCES != worker.instances()) {
+                options.setInstances(worker.instances());
+            }
+        }
+
+        final Agent agent = clazz.getDeclaredAnnotation(Agent.class);
+        if (Objects.nonNull(agent)) {
+            /*
+             * 如果是 Agent 模式，则必须是 EVENT_LOOP
+             */
+            options.setThreadingModel(ThreadingModel.EVENT_LOOP);
+            if (0 < agent.instances() && KWeb.DEPLOY.INSTANCES != agent.instances()) {
+                options.setInstances(agent.instances());
+            }
+        }
+
+        if (EmDeploy.Mode.CODE == mode) {
+            /*
+             * 编程模式优先
+             */
+            Optional.ofNullable(worker).ifPresent(workerAnnotation -> {
+                options.setInstances(workerAnnotation.instances());
+                options.setHa(workerAnnotation.ha());
+            });
+            Optional.ofNullable(agent).ifPresent(agentAnnotation -> {
+                options.setInstances(agentAnnotation.instances());
+                options.setHa(agentAnnotation.ha());
+            });
+        }
     }
 
     @CanIgnoreReturnValue
@@ -125,49 +166,6 @@ public class NodeVertx implements Serializable {
         } else {
             // Agent
             return this.agentOptions;
-        }
-    }
-
-    public static void setupAdjust(final DeploymentOptions options, final Class<?> clazz,
-                                   final EmDeploy.Mode mode) {
-        final Worker worker = clazz.getDeclaredAnnotation(Worker.class);
-        if (Objects.nonNull(worker)) {
-            /*
-             * 如果是 Worker 模式，则强制设置 Worker，但在设置过程中
-             * - VIRTUAL_THREAD 为第一优先级，直接配置成此模式则直接忽略
-             * - 其他模式一律统一成 Worker
-             */
-            if (ThreadingModel.VIRTUAL_THREAD != options.getThreadingModel()) {
-                options.setThreadingModel(ThreadingModel.WORKER);
-            }
-            if (0 < worker.instances() && KWeb.DEPLOY.INSTANCES != worker.instances()) {
-                options.setInstances(worker.instances());
-            }
-        }
-
-        final Agent agent = clazz.getDeclaredAnnotation(Agent.class);
-        if (Objects.nonNull(agent)) {
-            /*
-             * 如果是 Agent 模式，则必须是 EVENT_LOOP
-             */
-            options.setThreadingModel(ThreadingModel.EVENT_LOOP);
-            if (0 < agent.instances() && KWeb.DEPLOY.INSTANCES != agent.instances()) {
-                options.setInstances(agent.instances());
-            }
-        }
-
-        if (EmDeploy.Mode.CODE == mode) {
-            /*
-             * 编程模式优先
-             */
-            Optional.ofNullable(worker).ifPresent(workerAnnotation -> {
-                options.setInstances(workerAnnotation.instances());
-                options.setHa(workerAnnotation.ha());
-            });
-            Optional.ofNullable(agent).ifPresent(agentAnnotation -> {
-                options.setInstances(agentAnnotation.instances());
-                options.setHa(agentAnnotation.ha());
-            });
         }
     }
 }

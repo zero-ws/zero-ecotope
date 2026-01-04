@@ -277,6 +277,16 @@ public final class Ux extends _Where {
 
     // ---------------------------------- Children Utility
 
+    // 暴露同步方法
+    public static <T> T waitFor(Supplier<T> executor) {
+        return Task.sync(executor);
+    }
+
+    // 暴露异步方法
+    public static <T> Future<T> waitAsync(Supplier<T> executor) {
+        return Task.async(executor);
+    }
+
     public static class Job {
         public static UxJob on() {
             return new UxJob();

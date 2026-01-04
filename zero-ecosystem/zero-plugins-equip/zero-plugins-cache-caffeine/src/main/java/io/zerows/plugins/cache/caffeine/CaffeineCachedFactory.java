@@ -20,7 +20,7 @@ public class CaffeineCachedFactory implements CachedFactory {
 
     @Override
     @SuppressWarnings("unchecked")
-    public <K, V> MemoAt<K, V> findMemoAt(final Vertx vertx, final MemoOptions<K, V> options) {
+    public <K, V> MemoAt<K, V> findConfigured(final Vertx vertx, final MemoOptions<K, V> options) {
         final CaffeineYmConfig config = this.configOf(options);
         if (Objects.isNull(config)) {
             log.warn("[ R2MO ] 配置缺失，无法构造此类 MemoAt，请检查：{}", options.extension());
@@ -33,9 +33,17 @@ public class CaffeineCachedFactory implements CachedFactory {
         optionsUpdated.size(config.getInitialCapacity());
         optionsUpdated.configuration(config);
 
-        final String fingerprint = optionsUpdated.fingerprint();
-        return (MemoAt<K, V>) CC_MEMO.pick(() -> new CaffeineMemoAt<>(vertx, optionsUpdated), fingerprint);
+        return this.findBy(vertx, optionsUpdated);
     }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public <K, V> MemoAt<K, V> findBy(final Vertx vertx, final MemoOptions<K, V> options) {
+        Objects.requireNonNull(options, "[ R2MO ] MemoOptions 不能为空！");
+        final String fingerprint = options.fingerprint();
+        return (MemoAt<K, V>) CC_MEMO.pick(() -> new CaffeineMemoAt<>(vertx, options), fingerprint);
+    }
+
 
     private <K, V> CaffeineYmConfig configOf(final MemoOptions<K, V> options) {
         Objects.requireNonNull(options);

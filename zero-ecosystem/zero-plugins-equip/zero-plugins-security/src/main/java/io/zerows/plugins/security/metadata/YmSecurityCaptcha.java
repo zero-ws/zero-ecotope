@@ -1,5 +1,6 @@
 package io.zerows.plugins.security.metadata;
 
+import io.r2mo.base.util.R2MO;
 import io.r2mo.jaas.auth.CaptchaArgs;
 import io.r2mo.typed.enums.TypeLogin;
 import io.r2mo.typed.exception.web._401UnauthorizedException;
@@ -37,7 +38,7 @@ public class YmSecurityCaptcha implements Serializable {
      * 验证码过期时间，单位：30秒，此处之前有个问题就是 captcha 图片验证码的时间是 0s
      * 0s 会导致 {@link _401UnauthorizedException} 的过期异常信息。
      */
-    private int expiredAt = 30;
+    private String expiredAt = "30s";
     /**
      * 验证码图片宽度
      */
@@ -60,7 +61,7 @@ public class YmSecurityCaptcha implements Serializable {
     private ConfigFont font = new ConfigFont();
 
     public CaptchaArgs forArguments() {
-        final Duration duration = Duration.ofSeconds(this.expiredAt);
+        final Duration duration = R2MO.toDuration(this.expiredAt);
         return CaptchaArgs.of(TypeLogin.CAPTCHA, duration);
     }
 

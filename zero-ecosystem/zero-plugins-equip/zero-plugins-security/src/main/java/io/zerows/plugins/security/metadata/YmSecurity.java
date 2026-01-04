@@ -2,6 +2,7 @@ package io.zerows.plugins.security.metadata;
 
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.r2mo.base.util.R2MO;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.metadata.security.SecurityConfig;
 import io.zerows.platform.enums.SecurityType;
@@ -9,6 +10,7 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -65,7 +67,7 @@ import java.util.concurrent.ConcurrentMap;
 public class YmSecurity implements Serializable {
     private String wall = "/api";
     private ConcurrentMap<String, JsonObject> config = new ConcurrentHashMap<>();
-    private Limit limit;
+    private Limit limit = new Limit();
     private Scope scope = new Scope();
     private YmSecurityCaptcha captcha;
     // 2. 核心目标：用来存储不同类型的安全配置
@@ -83,6 +85,10 @@ public class YmSecurity implements Serializable {
         }
     }
 
+    public boolean isCaptcha() {
+        return Objects.nonNull(this.captcha) && this.captcha.isEnabled();
+    }
+
     public SecurityConfig extension(final SecurityType type) {
         return this.extension.getOrDefault(type, null);
     }
@@ -97,8 +103,17 @@ public class YmSecurity implements Serializable {
     public static class Limit implements Serializable {
         private long session = 8192;
         private long token = 4096;
-        private long timeout = 120;
+        private String expiredAt = "120m";
+        private String refreshAt = "7d";
         private long authorize = 2048;
         private List<String> types = new ArrayList<>();
+
+        public Duration expiredAt() {
+            return R2MO.toDuration(this.expiredAt);
+        }
+
+        public Duration refreshAt() {
+            return R2MO.toDuration(this.refreshAt);
+        }
     }
 }
