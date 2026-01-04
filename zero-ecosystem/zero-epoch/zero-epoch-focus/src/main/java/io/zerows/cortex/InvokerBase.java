@@ -1,7 +1,7 @@
 package io.zerows.cortex;
 
 import io.r2mo.typed.exception.WebException;
-import io.r2mo.typed.exception.web._500ServerInternalException;
+import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
@@ -87,11 +87,8 @@ public abstract class InvokerBase implements Invoker {
                 message.reply(Envelop.moveOn(handler.result()));
             } else {
                 // Readible codec for configured information, error flow needed.
-                if (null != handler.cause()) {
-                    handler.cause().printStackTrace();
-                }
-                final WebException error = new _500ServerInternalException("[ R2MO ] 其他异步调用异常：" + handler.cause().getMessage());
-                message.reply(Envelop.failure(error));
+                final WebException found = FnVertx.failAt(handler.cause());
+                message.reply(Envelop.failure(found));
             }
         };
     }

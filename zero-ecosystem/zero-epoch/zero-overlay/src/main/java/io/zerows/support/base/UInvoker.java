@@ -1,9 +1,8 @@
 package io.zerows.support.base;
 
 import io.r2mo.function.Fn;
-import io.r2mo.typed.exception.AbstractException;
 import io.r2mo.typed.exception.WebException;
-import io.r2mo.typed.exception.web._500ServerInternalException;
+import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
@@ -98,7 +97,7 @@ final class UInvoker {
         try {
             result = method.invoke(instance, args);
         } catch (final Throwable ex) {
-            final WebException error = invokeFailure(ex);
+            final WebException error = FnVertx.failAt(ex);
             if (Future.class.isAssignableFrom(returnType)) {
                 // Async Calling
                 result = Future.failedFuture(error);
@@ -191,21 +190,10 @@ final class UInvoker {
                 }
             }
         } catch (final Throwable ex) {
-            return Future.failedFuture(invokeFailure(ex));
+            return Future.failedFuture(FnVertx.failAt(ex));
         }
         // Old code set to un-reach code here
         // return promise.future();
-    }
-
-    private static WebException invokeFailure(final Throwable ex) {
-        log.error(ex.getMessage(), ex);
-        if (ex instanceof final WebException webEx) {
-            return webEx;
-        }
-        if (ex instanceof final AbstractException webAbs) {
-            return new _500ServerInternalException("[ R2MO ] 调用过程中的自定义异常：" + webAbs.getMessage());
-        }
-        return new _500ServerInternalException("[ R2MO ] 调用过程中的其他异常：" + ex.getMessage());
     }
 
     private static boolean isEqualAnd(final Class<?> clazz, final Class<?> interfaceCls) {

@@ -30,6 +30,10 @@ public class SecurityActor extends AbstractHActor {
         return MANAGER.configJwt();
     }
 
+    public static SecurityCaptcha configCaptcha() {
+        return MANAGER.configCaptcha();
+    }
+
     @Override
     protected Future<Boolean> startAsync(final HConfig config, final Vertx vertxRef) {
         // 先注册配置信息
