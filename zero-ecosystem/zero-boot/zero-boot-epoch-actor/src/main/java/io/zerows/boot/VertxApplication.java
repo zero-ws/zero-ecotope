@@ -46,6 +46,14 @@ import java.util.Set;
  */
 @Slf4j
 public class VertxApplication {
+    static {
+        // 尽早设置，抢在任何 Netty 类加载之前
+        if (System.getProperty("java.net.preferIPv4Stack") == null) {
+            System.setProperty("java.net.preferIPv4Stack", "true");
+        }
+        // ... 其他设置
+    }
+
     /**
      * 统一入口，不同对象的职责说明
      * <pre>

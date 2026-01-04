@@ -144,7 +144,8 @@ public class AuthUserCache implements UserCache {
                 .put(generated.key(), generated.value())
         );
 
-        log.info("[ ZERO ] 验证码缓存写入：Key = {}, expiredAt = {}", generated.key(), config.duration());
+        log.info("[ ZERO ] 验证码缓存写入：Key = {}, Code = {}, expiredAt = {}",
+            generated.key(), generated.value(), config.duration());
     }
 
     @Override
