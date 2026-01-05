@@ -26,5 +26,10 @@
             <groupId>io.vertx</groupId>
             <artifactId>vertx-auth-abac</artifactId>
         </dependency>
+        <!-- 验证码专用 -->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-captcha</artifactId>
+        </dependency>
     </dependencies>
 </project>

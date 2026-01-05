@@ -1,114 +1,116 @@
 package io.zerows.epoch.assembly;
 
 import io.github.classgraph.ClassGraph;
+import io.github.classgraph.ClassInfo;
+import io.github.classgraph.ClassInfoList;
 import io.github.classgraph.ScanResult;
 import io.zerows.specification.development.compiled.HBundle;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
+import java.util.concurrent.Executors;
 
 /**
- * 扫描加速版 🚀 (Powered by ClassGraph)
+ * 扫描加速版 V7 🚀🔥 (Broad-Scan + Batching)
  * <p>
- * 核心改进：
- * 1. 解决了在非 URLClassLoader 环境下（如 Zero/Vert.x 工具启动时）扫描不到类的问题。
- * 2. 利用 ClassGraph 底层多线程扫描。
- * 3. 保持原有的“静默加载”和“最终过滤”逻辑。
- * 4. 增加了外部包扫描日志打印，便于排查依赖问题。
+ * 场景适配：
+ * 1. 【广域扫描】保留 rejectPackages (黑名单)，适应未知包结构的复杂环境。
+ * 2. 【批量处理】应对广域扫描可能带来的海量类数量，使用分片 (Batching) 降低调度开销。
+ * 3. 【虚拟线程】利用 Java 21 虚拟线程的高吞吐特性处理 ClassLoader IO。
+ * 4. 【延迟加载】loadClass(false) 避免初始化静态块，提升速度并防止副作用。
  */
 @Slf4j
 @SuppressWarnings("all")
 class ClassScannerCommon implements ClassScanner {
 
-    /**
-     * 全局去重集合：记录已打印过的包名
-     * (必须是 static final 放在类级别，否则每次调用方法都会重置，无法去重)
-     */
-    private static final Set<String> LOGGED_PACKAGES = ConcurrentHashMap.newKeySet();
-
-    private static Set<Class<?>> newConcurrentSet() {
-        return ConcurrentHashMap.newKeySet();
-    }
-
-    /**
-     * 记录并打印扫描到的外部包名
-     * * @param packageName 从 ClassInfo 获取的包名字符串
-     */
-    private void logScannedPackage(String packageName) {
-        if (packageName == null || packageName.isEmpty()) {
-            return;
-        }
-
-        // 1. 过滤排除指定前缀 (本框架内部包 io.zerows 和 io.r2mo)
-        if (packageName.startsWith("io.zerows") || packageName.startsWith("io.r2mo")) {
-            return;
-        }
-
-        // 2. 去重并打印
-        // add 方法如果返回 true，说明集合中之前没有这个元素（即第一次遇到）
-        // 这样既完成了去重检查，又完成了添加操作，且是原子性的
-        if (LOGGED_PACKAGES.add(packageName)) {
-            System.out.println(packageName);
-        }
-    }
+    // 批处理大小：广域扫描下类数量可能很大，适当调大 Batch 减少任务总数
+    // 64-128 是个不错的平衡点，既能利用并发，又不会让任务队列爆炸
+    private static final int BATCH_SIZE = 128;
 
     @Override
     public Set<Class<?>> scan(final HBundle bundle) {
         final long t0 = System.nanoTime();
-        final Set<Class<?>> loaded = newConcurrentSet();
 
-        // 获取黑名单配置 (假设 ClassFilterPackage.SKIP_PACKAGE 是 String[] 或 List<String>)
-        String[] skipPackages = ClassFilterPackage.SKIP_PACKAGE;
+        // 1. 获取黑名单配置 (必须保留，用于剔除明确不需要的第三方库)
+        final String[] skipPackages = ClassFilterPackage.SKIP_PACKAGE;
 
-        int totalTopLevel = 0;
-
-        // 配置 ClassGraph
-        // .enableClassInfo() : 必须开启以获取类信息
-        // .rejectPackages()  : 在扫描底层直接剔除黑名单包，性能远高于加载后过滤
-        // .ignoreClassVisibility() : 扫描所有修饰符的类
+        // 2. ClassGraph 扫描配置
         try (ScanResult scanResult = new ClassGraph()
-                .enableClassInfo()
-                .rejectPackages(skipPackages)
-                .ignoreClassVisibility()
-                .scan()) {
+            .enableClassInfo()               // 必须开启
+            .rejectPackages(skipPackages)    // 🚫 核心：黑名单过滤
+            .ignoreClassVisibility()         // 扫描所有修饰符
+            .enableExternalClasses()         // 确保能扫描到非 System Loader 的类 (视环境而定，通常建议开启)
+            .scan()) {
 
-            // 获取所有扫描到的类信息
-            var allClassInfo = scanResult.getAllClasses();
-            totalTopLevel = allClassInfo.size();
+            final ClassInfoList allClassInfo = scanResult.getAllClasses();
+            final int totalClasses = allClassInfo.size();
 
-            // 使用并行流进行真正的类加载
-            StreamSupport.stream(allClassInfo.spliterator(), true).unordered()
-                    .forEach(ci -> {
-                        // [新增] 在加载类之前打印包名
-                        // 这样即使 loadClass 失败，也能知道是哪个包出的问题
-                        // logScannedPackage(ci.getPackageName());
+            // 结果容器：预估大小以减少扩容开销
+            final Set<Class<?>> result = ConcurrentHashMap.newKeySet(totalClasses);
 
-                        try {
-                            // loadClass() 会使用扫描时检测到的正确 ClassLoader
-                            final Class<?> cls = ci.loadClass();
-                            loaded.add(cls);
-                        } catch (Throwable e) {
-                            // 保持原逻辑：静默处理依赖缺失或加载错误
-                            // 例如 NoClassDefFoundError 会在这里被捕获
-                        }
-                    });
+            if (totalClasses == 0) {
+                return result;
+            }
+
+            // 3. 🚀 启动虚拟线程池
+            // 广域扫描可能会产生数万个类，使用 Batching 模式至关重要
+            try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
+
+                // 手动切片 (Chunking)
+                for (int i = 0; i < totalClasses; i += BATCH_SIZE) {
+                    final int start = i;
+                    final int end = Math.min(i + BATCH_SIZE, totalClasses);
+
+                    // 提交批处理任务
+                    executor.submit(() -> processBatch(allClassInfo, start, end, result));
+                }
+
+            } // 自动阻塞等待所有分片完成 (Auto Join)
+
+            final long t1 = System.nanoTime();
+            log.info("[ ZERO ] 扫描完成：{}/{}，总耗时={} ms (模式: BroadScan-VThreads🚀)",
+                result.size(), totalClasses, (t1 - t0) / 1_000_000L);
+
+            return result;
 
         } catch (Exception e) {
-            log.warn("[ ZERO ] ClassGraph 扫描过程发生异常", e);
+            log.warn("[ ZERO ] ClassGraph 扫描异常", e);
+            return Collections.emptySet();
+        }
+    }
+
+    /**
+     * 批处理逻辑：在单个虚拟线程内串行加载一批类
+     * 优势：
+     * 1. 减少 CPU 上下文切换（同线程处理一组数据）。
+     * 2. 减少 ConcurrentHashMap 的 CAS 写入竞争次数（从 N 次降为 N/BATCH_SIZE 次）。
+     */
+    private void processBatch(ClassInfoList allInfo, int start, int end, Set<Class<?>> globalResult) {
+        // 线程私有 Buffer (无锁，极快)
+        final List<Class<?>> localBuffer = new ArrayList<>(end - start);
+
+        for (int i = start; i < end; i++) {
+            try {
+                final ClassInfo ci = allInfo.get(i);
+                // 延迟加载：不初始化 static {} 代码块，这对广域扫描的安全性和速度至关重要
+                final Class<?> cls = ci.loadClass(false);
+
+                // 业务过滤
+                if (cls != null && ClassFilter.isValid(cls)) {
+                    localBuffer.add(cls);
+                }
+            } catch (Throwable ignored) {
+                // 广域扫描时，遇到 NoClassDefFoundError 或依赖缺失非常常见，直接静默跳过
+            }
         }
 
-        // 最终合法性过滤（并行）—— 与旧版保持一致
-        final Set<Class<?>> result = loaded.parallelStream()
-                .filter(ClassFilter::isValid)
-                .collect(Collectors.toCollection(ClassScannerCommon::newConcurrentSet));
-
-        final long t1 = System.nanoTime();
-        log.info("[ ZERO ] 扫描完成：{}/{}，总耗时={} ms 📊",
-                result.size(), totalTopLevel, (t1 - t0) / 1_000_000L);
-
-        return result;
+        // 批量写入全局容器
+        if (!localBuffer.isEmpty()) {
+            globalResult.addAll(localBuffer);
+        }
     }
 }

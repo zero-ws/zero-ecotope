@@ -1,11 +1,14 @@
 package io.zerows.cosmic.bootstrap;
 
+import io.r2mo.typed.exception.WebException;
 import io.r2mo.typed.exception.web._500ServerInternalException;
 import io.r2mo.typed.webflow.WebState;
 import io.vertx.core.Future;
 import io.vertx.core.http.HttpHeaders;
 import io.vertx.core.http.HttpServerResponse;
 import io.vertx.ext.web.RoutingContext;
+import io.zerows.cortex.extension.PlugAuditor;
+import io.zerows.cortex.extension.PlugRegion;
 import io.zerows.cortex.webflow.Later;
 import io.zerows.epoch.basicore.WebEvent;
 import io.zerows.epoch.constant.KWeb;
@@ -252,5 +255,32 @@ public final class AckFlow {
              * 📼 拒绝框架嵌入
              */
             .putHeader("X-FRAME-OPTIONS", "DENY");
+    }
+
+    static void replyError(final RoutingContext context,
+                           final WebException error,
+                           final WebEvent event) {
+        final Envelop envelop = Envelop.failure(error);
+        reply(context, envelop, event);
+    }
+
+    /**
+     *
+     * Extension System of:
+     * 1) {@link PlugAuditor}
+     * 2) {@link PlugRegion}
+     *
+     * @param context RoutingContext
+     * @param entity  Entity
+     * @param <T>     Entity Type
+     * @return Future of Envelop
+     */
+    static <T> Future<Envelop> nextT(final RoutingContext context,
+                                     final T entity) {
+        final Envelop envelop = Envelop
+            .success(entity)
+            .bind(context);     // Bind Data Here.
+
+        return Ambit.of(AmbitNext.class).then(context, envelop);
     }
 }

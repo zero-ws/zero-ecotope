@@ -61,7 +61,9 @@ class SessionUtil {
          * 此处 config = null 会导致启动失败，所以必须双向检查，未配置的模式下的严格性
          */
         if (Objects.isNull(config) || Ut.isNil(config.options())) {
-            log.info("[ PLUG ] ( Session ) 未配置，默认会话存储模式启动：Cluster = {}", vertx.isClustered());
+            if (LOCKED.getAndSet(Boolean.FALSE)) {
+                log.info("[ PLUG ] ( Session ) 未配置，默认会话存储模式启动：Cluster = {}", vertx.isClustered());
+            }
             // 配置为空，直接用 Vertx 构造
             final SessionStore store;
             if (vertx.isClustered()) {

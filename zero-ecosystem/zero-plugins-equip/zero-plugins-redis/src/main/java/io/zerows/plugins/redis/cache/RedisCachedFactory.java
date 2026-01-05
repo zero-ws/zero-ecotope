@@ -26,7 +26,7 @@ public class RedisCachedFactory implements CachedFactory {
 
     @Override
     @SuppressWarnings("unchecked")
-    public <K, V> MemoAt<K, V> findMemoAt(final Vertx vertx, final MemoOptions<K, V> options) {
+    public <K, V> MemoAt<K, V> findConfigured(final Vertx vertx, final MemoOptions<K, V> options) {
         // 1. 解析配置
         final RedisYmConfig config = this.configOf(options);
         if (Objects.isNull(config)) {
@@ -41,12 +41,18 @@ public class RedisCachedFactory implements CachedFactory {
         // 将完整的 RedisYmConfig 注入，以便 RedisMemoAt 获取 prefix, nullValue 等配置
         optionsUpdated.configuration(config);
 
-        // 3. 计算指纹并获取/创建实例
-        // 指纹会包含 optionsUpdated 中的关键信息，确保配置变更后能生成新实例
-        final String fingerprint = optionsUpdated.fingerprint();
+        return this.findBy(vertx, optionsUpdated);
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public <K, V> MemoAt<K, V> findBy(final Vertx vertx, final MemoOptions<K, V> options) {
+        Objects.requireNonNull(options, "[ R2MO ] MemoOptions 不能为空！");
+        // 指纹会包含 options 中的关键信息，确保配置变更后能生成新实例
+        final String fingerprint = options.fingerprint();
 
         return (MemoAt<K, V>) CC_MEMO.pick(
-            () -> new RedisMemoAt<>(vertx, optionsUpdated),
+            () -> new RedisMemoAt<>(vertx, options),
             fingerprint
         );
     }

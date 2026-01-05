@@ -19,12 +19,7 @@ import jakarta.ws.rs.extension.BodyParam;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -73,7 +68,6 @@ public class ValidatorEntry {
      * Advanced ruler building for Body content validation based on yml configuration.
      *
      * @param wrapRequest The container to contains event, configuration, ruler.
-     *
      * @return The configured rulers.
      */
     public Map<String, List<WebRule>> buildRulers(
@@ -122,9 +116,7 @@ public class ValidatorEntry {
         if (config instanceof final JsonArray configData) {
             Ut.itJArray(configData, JsonObject.class, (item, index) -> {
                 final WebRule ruler = WebRule.create(item);
-                if (null != ruler) {
-                    rulers.add(ruler);
-                }
+                rulers.add(ruler);
             });
         }
         return rulers;

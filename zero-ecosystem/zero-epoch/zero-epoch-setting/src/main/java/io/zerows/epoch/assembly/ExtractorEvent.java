@@ -89,7 +89,6 @@ public class ExtractorEvent implements Extractor<Set<WebEvent>> {
      *
      * @param method single method that will be scanned.
      * @param root   root path calculation
-     *
      * @return Standard Event object
      */
     private WebEvent extract(final Method method, final String root) {
@@ -99,7 +98,7 @@ public class ExtractorEvent implements Extractor<Set<WebEvent>> {
         final HttpMethod httpMethod = ExtractToolMethod.resolve(method);
         if (null == httpMethod) {
             // Ignored the method could not be annotated.
-            log.warn("\u001b[0;31m!!!!!, Missed HttpMethod annotation for method\u001b[m ? (GET,POST,PUT,...). method = \u001b[0;31m{}\u001b[m", method);
+            log.warn("[ ZEOR ] \u001b[0;31m!!!!!, Missed HttpMethod annotation for method\u001b[m ? (GET,POST,PUT,...). method = \u001b[0;31m{}\u001b[m", method);
             return null;
         } else {
             event.setMethod(httpMethod);

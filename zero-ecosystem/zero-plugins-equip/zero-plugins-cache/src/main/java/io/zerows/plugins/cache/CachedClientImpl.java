@@ -105,6 +105,6 @@ class CachedClientImpl implements CachedClient {
             }
             return found;
         }, fingerprint);
-        return factory.findMemoAt(this.vertx, optionsWithTTL);
+        return factory.findConfigured(this.vertx, optionsWithTTL);
     }
 }

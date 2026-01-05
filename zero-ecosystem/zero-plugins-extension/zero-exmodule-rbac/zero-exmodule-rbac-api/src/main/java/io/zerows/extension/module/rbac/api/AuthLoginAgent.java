@@ -4,11 +4,8 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Codex;
 import io.zerows.epoch.annotations.EndPoint;
-import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.extension.BodyParam;
 
 /**
@@ -33,10 +30,10 @@ public interface AuthLoginAgent {
      *      verifyCode: "When `verifyCode` enabled, here must contains additional part"
      * }
      */
-    @POST
-    @Path("/oauth/login")
-    @Address(AddrAuth.LOGIN)
-    JsonObject login(@BodyParam @Codex JsonObject data);
+//    @POST
+//    @Path("/oauth/login")
+//    @Address(AddrAuth.LOGIN)
+//    JsonObject login(@BodyParam @Codex JsonObject data);
 
     /*
      * /oauth/authorize
@@ -74,12 +71,12 @@ public interface AuthLoginAgent {
     /*
      * Sigma must be in XHeader for multi application here
      */
-    @POST
-    @Path("/captcha/image")
-    @Address(Addr.Auth.CAPTCHA_IMAGE)
-    @Consumes(MediaType.APPLICATION_OCTET_STREAM)
-    @Produces(MediaType.APPLICATION_OCTET_STREAM)
-    JsonObject generateImage();
+//    @POST
+//    @Path("/captcha/image")
+//    @Address(Addr.Auth.CAPTCHA_IMAGE)
+//    @Consumes(MediaType.APPLICATION_OCTET_STREAM)
+//    @Produces(MediaType.APPLICATION_OCTET_STREAM)
+//    JsonObject generateImage();
 
     @POST
     @Path("/captcha/image-verify")

@@ -9,6 +9,7 @@ import io.zerows.epoch.metadata.security.SecurityMeta;
 import io.zerows.platform.enums.SecurityType;
 import io.zerows.platform.management.StoreApp;
 import io.zerows.plugins.security.metadata.YmSecurity;
+import io.zerows.plugins.security.metadata.YmSecurityCaptcha;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.support.Ut;
@@ -77,9 +78,9 @@ class SecurityManager {
         CC_SECURITY.pick(() -> this.createConfiguration(config, cacheKey), cacheKey);
     }
 
-    void registryOf(final HConfig config, final int vertxCode) {
+    void registryOf(final HConfig config, final Vertx vertxRef) {
         // 注册 HConfig
-        final YmSecurity configuration = this.createConfiguration(config, String.valueOf(vertxCode));
+        final YmSecurity configuration = this.createConfiguration(config, String.valueOf(vertxRef.hashCode()));
         // 默认配置只会被初始化一次，为当前启动节点（或主节点）的全局默认配置
         if (Objects.nonNull(configuration)) {
             SECURITY = configuration;
@@ -109,5 +110,18 @@ class SecurityManager {
     SecurityConfig configOf(final SecurityType type, final Vertx vertxRef) {
         final YmSecurity configuration = CC_SECURITY.get(String.valueOf(vertxRef.hashCode()));
         return configuration.extension(type);
+    }
+
+    SecurityCaptcha configCaptcha() {
+        final YmSecurityCaptcha captcha = SECURITY.getCaptcha();
+        if (Objects.isNull(captcha)) {
+            log.warn("[ PLUG ] ( Secure ) 当前安全配置中未启用验证码配置，请检查相关配置！");
+            return null;
+        }
+        return SecurityCaptcha.of(SECURITY.getCaptcha());
+    }
+
+    YmSecurity configuration() {
+        return SECURITY;
     }
 }

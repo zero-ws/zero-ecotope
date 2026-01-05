@@ -6,6 +6,7 @@ import io.zerows.component.module.AbstractHActor;
 import io.zerows.epoch.annotations.Actor;
 import io.zerows.epoch.metadata.security.SecurityConfig;
 import io.zerows.platform.enums.SecurityType;
+import io.zerows.plugins.security.metadata.YmSecurity;
 import io.zerows.specification.configuration.HConfig;
 
 /**
@@ -30,10 +31,18 @@ public class SecurityActor extends AbstractHActor {
         return MANAGER.configJwt();
     }
 
+    public static SecurityCaptcha configCaptcha() {
+        return MANAGER.configCaptcha();
+    }
+
+    public static YmSecurity configuration() {
+        return MANAGER.configuration();
+    }
+
     @Override
     protected Future<Boolean> startAsync(final HConfig config, final Vertx vertxRef) {
         // 先注册配置信息
-        MANAGER.registryOf(config, vertxRef.hashCode());
+        MANAGER.registryOf(config, vertxRef);
 
         // 扫描 @Wall 的所有元数据信息，用于后期直接挂载到路由中去
         SecurityContext.scanned(vertxRef);

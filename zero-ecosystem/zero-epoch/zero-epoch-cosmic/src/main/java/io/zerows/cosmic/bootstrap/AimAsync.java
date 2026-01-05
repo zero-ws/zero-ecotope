@@ -98,13 +98,13 @@ public class AimAsync extends AimBase implements Aim<RoutingContext> {
             /*
              * Interface mode
              */
-            invoked = AckThen.next(context, message);
+            invoked = AckFlow.nextT(context, message);
         } else {
             /*
              * Agent mode
              */
             final Object returnValue = this.invoke(event, arguments);
-            invoked = AckThen.next(context, returnValue);
+            invoked = AckFlow.nextT(context, returnValue);
         }
 
         return invoked.compose(response -> {

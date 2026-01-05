@@ -2,11 +2,11 @@ package io.zerows.program;
 
 import io.vertx.core.Future;
 import io.vertx.core.Promise;
-import io.zerows.component.log.LogO;
 import io.zerows.platform.constant.VValue;
 import io.zerows.platform.metadata.KRef;
 import io.zerows.support.Ut;
 import io.zerows.support.base.FnBase;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,9 +16,8 @@ import java.util.concurrent.CompletionStage;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+@Slf4j
 class Async {
-
-    private static final LogO LOGGER = Ut.Log.ux(Async.class);
 
     static <T> Future<T> fromAsync(final CompletionStage<T> state) {
         final Promise<T> promise = Promise.promise();
@@ -36,7 +35,7 @@ class Async {
         final List<Future<T>> futures = new ArrayList<>();
         set.stream().map(consumer -> consumer.apply(input)).forEach(futures::add);
         FnBase.combineT(futures).compose(nil -> {
-            LOGGER.info("「Job Infusion」 There are `{0}` jobs that are finished successfully!", String.valueOf(set.size()));
+            log.info("[ ZERO ] ( Job ) 系统监测到 `{}` 任务已成功执行!", set.size());
             return ToCommon.future(nil);
         });
         return ToCommon.future(input);
@@ -52,7 +51,7 @@ class Async {
         } else {
             Future<T> first = queues.get(VValue.IDX).apply(input);
             if (Objects.isNull(first)) {
-                LOGGER.error("The index = 0 future<Tool> returned null, plugins will be terminal");
+                log.info("[ ZERO ] ( Job ) 索引 = 0 的 Future 返回 null，插件将终止！");
                 return ToCommon.future(input);
             } else {
                 if (1 == queues.size()) {

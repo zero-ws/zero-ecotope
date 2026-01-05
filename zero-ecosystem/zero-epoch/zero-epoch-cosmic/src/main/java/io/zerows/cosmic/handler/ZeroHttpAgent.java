@@ -2,18 +2,12 @@ package io.zerows.cosmic.handler;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Promise;
+import io.vertx.core.http.HttpServer;
 import io.zerows.cortex.management.StoreVertx;
 import io.zerows.cortex.metadata.RunVertx;
 import io.zerows.cortex.sdk.Axis;
 import io.zerows.cosmic.StubServer;
-import io.zerows.cosmic.bootstrap.AxisCommon;
-import io.zerows.cosmic.bootstrap.AxisEvent;
-import io.zerows.cosmic.bootstrap.AxisExtension;
-import io.zerows.cosmic.bootstrap.AxisFilter;
-import io.zerows.cosmic.bootstrap.AxisMeasure;
-import io.zerows.cosmic.bootstrap.AxisSecure;
-import io.zerows.cosmic.bootstrap.AxisStart;
-import io.zerows.cosmic.bootstrap.AxisSwagger;
+import io.zerows.cosmic.bootstrap.*;
 import io.zerows.epoch.annotations.Agent;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.spi.HPI;
@@ -38,7 +32,18 @@ public class ZeroHttpAgent extends AbstractVerticle {
             () -> stubServer.createAsync(runVertx),
             ZeroHttpAgent.class.getName()
         ).onSuccess(runServer -> {
-
+            // ============================================================
+            // 🚀 核心修复：检查服务器状态
+            // 如果从缓存中获取的 Server 已经处于监听状态 (actualPort > 0)，
+            // 说明这是 WatchDog 重试或者是热部署导致的复用。
+            // 此时绝对不能再次挂载 Handler，直接跳过所有步骤，视为成功。
+            // ============================================================
+            final HttpServer server = runServer.instance();
+            if (server.actualPort() > 0) {
+                log.info("[ ZERO ] ( Ok ) ♻️ 检测到服务器 {} 已经运行 (线程复用)，跳过步骤！{} ", server.actualPort(), server.hashCode());
+                startPromise.complete();
+                return;
+            }
             /*
              * 01：基础路由加载
              *     - Session
@@ -77,7 +82,7 @@ public class ZeroHttpAgent extends AbstractVerticle {
              * 07. Extension 扩展路由
              */
             Axis.ofOr(AxisExtension.class).mount(runServer, bundle);
-            
+
             /*
              * 08. Swagger 挂载
              */

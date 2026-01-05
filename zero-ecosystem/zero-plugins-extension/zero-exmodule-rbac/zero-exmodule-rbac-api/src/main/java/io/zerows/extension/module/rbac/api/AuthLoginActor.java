@@ -5,7 +5,6 @@ import io.r2mo.typed.exception.web._500ServerInternalException;
 import io.r2mo.typed.exception.web._501NotSupportException;
 import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
-import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Session;
 import io.zerows.epoch.annotations.Address;
@@ -36,14 +35,14 @@ public class AuthLoginActor {
 
     @Inject
     private transient ImageStub imageStub;
-
-    @Address(AddrAuth.LOGIN)
-    public Future<JsonObject> login(final JsonObject user, final XHeader header) {
-        final JsonObject params = user.copy();
-        final String imageCode = Ut.valueString(params, ScAuthKey.CAPTCHA_IMAGE);
-        return this.imageStub.verify(header.session(), imageCode)
-            .compose(verified -> this.stub.login(params));
-    }
+//
+//    @Address(AddrAuth.LOGIN)
+//    public Future<JsonObject> login(final JsonObject user, final XHeader header) {
+//        final JsonObject params = user.copy();
+//        final String imageCode = Ut.valueString(params, ScAuthKey.CAPTCHA_IMAGE);
+//        return this.imageStub.verify(header.session(), imageCode)
+//            .compose(verified -> this.stub.login(params));
+//    }
 
     @Address(Addr.Auth.AUTHORIZE)
     public Future<JsonObject> authorize(final JsonObject data) {
@@ -73,13 +72,13 @@ public class AuthLoginActor {
             return Ux.futureT();
         });
     }
-
-    /*
-     * Default: 180 x 40
-     */
-    @Address(Addr.Auth.CAPTCHA_IMAGE)
-    public Future<Buffer> generateImage(final XHeader header) {
-        Fn.jvmKo(Objects.isNull(header.session()), _501NotSupportException.class, "[ R2MO ] 会话不存在，当前 API 不可用！");
-        return this.imageStub.generate(header.session());
-    }
+//
+//    /*
+//     * Default: 180 x 40
+//     */
+//    @Address(Addr.Auth.CAPTCHA_IMAGE)
+//    public Future<Buffer> generateImage(final XHeader header) {
+//        Fn.jvmKo(Objects.isNull(header.session()), _501NotSupportException.class, "[ R2MO ] 会话不存在，当前 API 不可用！");
+//        return this.imageStub.generate(header.session());
+//    }
 }
