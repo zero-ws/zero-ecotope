@@ -10,7 +10,7 @@ public interface KWeb {
     interface ARGS {
         /*
          * Aim component used this key as RoutingContext
-         * key = findRunning
+         * key = value
          * It means cached parameters here.
          */
         String REQUEST_CACHED = "$$__REQUEST_CACHED__$$";
@@ -77,19 +77,6 @@ public interface KWeb {
         String NS = "zero.vertx.jobs";
     }
 
-    interface SHARED {
-        /* Deployment */
-        String DEPLOYMENT = "zero.pool.deployment";
-        /* Component Memory Hash Map */
-        String COMPONENT = "zero.pool.component";
-    }
-
-    interface COMPONENTS {
-        String WALL_MONGO = "io.vertx.mod.plugin.mongo.MongoWall";
-        String AGENT_RPC = "io.vertx.up.bottle.ZeroRpcAgent";
-        String AGENT_API = "io.vertx.up.bottle.ZeroApiAgent";
-    }
-
     interface MULTI {
         /**
          * Scanned data to distinguish mode
@@ -124,11 +111,6 @@ public interface KWeb {
          * Communication address to write data/status to etcd.
          */
         String EBS_IPC_START = "ZERO://MICRO/IPC/START";
-
-        /*
-         * Monitor Path of Address
-         */
-        String API_MONITOR = "/zero/health*";
         /*
          * Websocket Path of Address
          */

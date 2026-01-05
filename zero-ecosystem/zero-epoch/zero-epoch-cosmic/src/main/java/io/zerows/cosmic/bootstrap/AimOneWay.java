@@ -44,7 +44,7 @@ public class AimOneWay extends AimBase implements Aim<RoutingContext> {
              * This future is async and we must set handler to capture the result of this future
              * here.
              */
-            final Future<Envelop> future = AckThen.next(context, returnValue);
+            final Future<Envelop> future = AckFlow.nextT(context, returnValue);
 
             /*
              * Event bus send request out instead of other method

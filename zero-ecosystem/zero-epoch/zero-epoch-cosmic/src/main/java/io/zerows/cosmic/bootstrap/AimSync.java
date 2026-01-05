@@ -32,7 +32,7 @@ public class AimSync extends AimBase implements Aim<RoutingContext> {
                 /*
                  * Data handler to process Flower next result here.
                  */
-                final Future<Envelop> future = AckThen.next(context, result);
+                final Future<Envelop> future = AckFlow.nextT(context, result);
                 future.onComplete(dataRes -> {
                     /*
                      * To avoid null dot result when the handler triggered result here

@@ -10,13 +10,10 @@ import io.vertx.core.http.Cookie;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.Session;
 import io.zerows.cortex.InvokerUtil;
-import io.zerows.cortex.metadata.WebRequest;
-import io.zerows.cortex.metadata.WebRule;
 import io.zerows.cortex.webflow.Analyzer;
 import io.zerows.cortex.webflow.AnalyzerMedia;
 import io.zerows.cosmic.exception._60002Exception500DeliveryError;
 import io.zerows.cosmic.exception._60003Exception500EntityCast;
-import io.zerows.cosmic.plugins.validation.ValidatorEntry;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.basicore.WebEvent;
 import io.zerows.epoch.constant.KWeb;
@@ -27,8 +24,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Method;
-import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -36,17 +31,14 @@ import java.util.Objects;
  */
 public abstract class AimBase {
     private static final Cc<String, Analyzer> CC_ANALYZER = Cc.openThread();
-    private static final Cc<String, ValidatorEntry> CC_VALIDATOR = Cc.openThread();
 
     private transient final Analyzer analyzer = CC_ANALYZER.pick(AnalyzerMedia::new, AnalyzerMedia.class.getName());
-    private transient final ValidatorEntry verifier = CC_VALIDATOR.pick(ValidatorEntry::new);
 
     /**
      * Template method
      *
      * @param context RoutingContext reference
      * @param event   Event object of definition
-     *
      * @return TypedArgument ( Object[] )
      */
     protected Object[] buildArgs(final RoutingContext context,
@@ -64,7 +56,6 @@ public abstract class AimBase {
      * Get event bus address.
      *
      * @param event Event object of definition
-     *
      * @return Get event bus address
      */
     protected String address(final WebEvent event) {
@@ -76,7 +67,6 @@ public abstract class AimBase {
     /**
      * @param event Event object of definition
      * @param args  TypedArgument ( Object[] )
-     *
      * @return Return invoked result
      */
     protected Object invoke(final WebEvent event, final Object[] args) {
@@ -117,28 +107,8 @@ public abstract class AimBase {
         return envelop;
     }
 
-    protected ValidatorEntry verifier() {
-        return this.verifier;
-    }
-
     protected Logger logger() {
         return LoggerFactory.getLogger(this.getClass());
-    }
-
-    protected void executeRequest(final RoutingContext context,
-                                  final Map<String, List<WebRule>> rulers,
-                                  final WebRequest wrapRequest) {
-        try {
-            final Object[] args = this.buildArgs(context, wrapRequest.getEvent());
-            // Execute web flow and uniform call.
-            AckThen.executeRequest(context, rulers, wrapRequest, args, this.verifier());
-        } catch (final WebException error) {
-            // Bad request of 400 for parameter processing
-            AckThen.replyError(context, error, wrapRequest.getEvent());
-        } catch (final Exception ex) {
-            // DEBUG:
-            ex.printStackTrace();
-        }
     }
 
     protected void exec(final Actuator consumer,
@@ -159,7 +129,7 @@ public abstract class AimBase {
             }
             Fn.jvmAt(consumer);
         } catch (final WebException ex) {
-            AckThen.replyError(context, ex, event);
+            AckFlow.replyError(context, ex, event);
         }
     }
 }
