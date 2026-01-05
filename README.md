@@ -7,7 +7,8 @@ Zero Waiting
 
 ## 0. 引导
 
-目前未发布正式版本，等手中项目全部迁移完成之后会发布 `1.0.0` 正式版本，有兴趣的朋友可以参与测试，测试项目地址：<https://gitee.com/zero-ws/zero-rachel-momo>。
+目前未发布正式版本，等手中项目全部迁移完成之后会发布 `1.0.0`
+正式版本，有兴趣的朋友可以参与测试，测试项目地址：<https://gitee.com/zero-ws/zero-rachel-momo>。
 
 ### 0.1. 主页信息
 
@@ -18,10 +19,13 @@ Zero Waiting
 
 ### 0.2. 新版说明
 
-- 为兼容 Spring Boot 开发人员和 Vert.x 开发人员，重新设计底层抽象框架：[Rapid R2MO](https://gitee.com/silentbalanceyh/r2mo-rapid)。
+- 为兼容 Spring Boot 开发人员和 Vert.x
+  开发人员，重新设计底层抽象框架：[Rapid R2MO](https://gitee.com/silentbalanceyh/r2mo-rapid)。
 - 提供两套原生结构专注于 Spring / Vert.x 开发，若只是想要短平快地开发、实施、交付中小项目，可考虑使用。
-- 配置管理分为：本地配置和远程配置（Nacos），配置结构参考：[vertx.yml](https://gitee.com/zero-ws/zero-rachel-momo/blob/master/rachel-momo-app/app-zero-extension/src/main/resources/vertx.yml)，本次重构的配置结构契合 Spring Boot 中的
-  `application.yml` 结构，方便快速上手。
+-
+配置管理分为：本地配置和远程配置（Nacos），配置结构参考：[vertx.yml](https://gitee.com/zero-ws/zero-rachel-momo/blob/master/rachel-momo-app/app-zero-extension/src/main/resources/vertx.yml)
+，本次重构的配置结构契合 Spring Boot 中的
+`application.yml` 结构，方便快速上手。
 - 提供 `HActor` 插件/模块 启动器，近似于 `-starter` 模型，更方便扩展开发。
 - 提供快速脚手架初始化工具：[Zero Ai](https://www.vertxai.cn)。
 - 让 Spring 和 Vert.x（Zero）可无缝实现基于 Dubbo 的微服务通信。
@@ -80,22 +84,21 @@ public class BasicApplication {
 
 项目结构：
 
-- 📚️ 应用案例（ `rachel-momo-app` ）：
-    - [x] 📚️ `app-spring-rapid`：R2MO Rapid Spring Boot 应用。
+- 📚️ 应用案例（ `app-rachel-momo` ）：
+    - [x] ☘️ `app-spring-example`
         - [x] ☘️ `app-spring-auth`：Spring 安全认证专用 Demo。
         - [x] ☘️ `app-spring-test`：Spring 基础应用 Demo。
-    - [x] 💧 `app-vertx-rapid`：R2MO Rapid Vert.x 应用。
-    - [x] 🧊 `app-zero-basic`：Zero Core 最小化应用。
-    - [x] 🧊 `app-zero-extension`：Zero Extension 扩展应用（带业务模块），内置 `vertx.yml` 格式。
-    - [x] 🧊 `app-zero-module`：Zero 自定义模块化开发，扩展模块。
-    - [x] 🧊 `app-zero-service`：Zero 微服务应用。
-- 📚️ 测试用例（ `rachel-momo-rapid` ）：
-    - [x] 🍓 `rapid-spring`：R2MO Rapid Spring 测试用例。
-    - [x] 🍓 `rapid-vertx`：R2MO Rapid Vert.x 测试用例。
-- 📚️ 测试套件（ `rachel-momo-suite` ）：
-    - [x] 🐣 `suite-zero-common`：Zero Core 专用测试套件
-    - [x] 🐣 `suite-zero-config-l`：本地配置管理测试套件
-    - [x] 🐣 `suite-zero-config-r`：远程配置（Nacos）管理测试套件
+    - [x] 🍓 `app-vertx-example`
+        - [x] 🍓 `app-vertx-rapid`：Vert.x 基础应用。
+    - [x] 🧊 `app-zero-example`
+        - [x] 🧊 `app-zero-basic`：Zero Core 最小化应用。
+        - [x] 🧊 `app-zero-extension`：Zero Extension 扩展应用（带业务模块）。
+        - [x] 🧊 `app-zero-module`：Zero 自定义模块化开发，扩展模块。
+        - [x] 🧊 `app-zero-service`：Zero 微服务应用。
+    - [x] 🐣 `app-unit-example`：公共模块。
+        - [x] 🐣 `unit-zero-common`：单元测试基础
+        - [x] 🐣 `unit-zero-config-l`：本地配置测试
+        - [x] 🐣 `unit-zero-config-r`：远程配置（Nacos）测试
 
 ### 1.3. 项目初始化
 
