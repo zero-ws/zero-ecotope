@@ -136,7 +136,8 @@ public class ZeroModule<T> {
 
                             // 2. (并行) 校验逻辑
                             if (actorAnnotation.configured() && Objects.isNull(config)) {
-                                log.warn("[ PLUG ]    ⚪️ ---> 跳过 actor = `{}`, 检查配置项：`{}`",
+                                // 跳过应该是 info 而不是 warn
+                                log.info("[ PLUG ]    ⚪️ ---> 跳过 actor = `{}`, 检查配置项：`{}`",
                                     actor.getClass().getName(), actorAnnotation.value());
                                 return null;
                             }

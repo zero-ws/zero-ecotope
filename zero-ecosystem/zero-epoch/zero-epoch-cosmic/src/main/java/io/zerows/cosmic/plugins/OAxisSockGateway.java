@@ -30,7 +30,7 @@ public class OAxisSockGateway implements OAxisGateway {
         if (!factory.isEnabled(owner)) {
             // 没有启用
             if (IS_LOG.getAndSet(Boolean.FALSE)) {
-                log.warn("[ ZERO ] ( WebSocket ) 功能被配置禁用，请检查配置或联系管理员！");
+                log.info("[ ZERO ] ( WebSocket ) ⚠️ 功能被禁用，若想要打开，请检查配置 / 联系管理员！");
             }
             return null;
         }

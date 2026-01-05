@@ -7,11 +7,7 @@ import io.r2mo.base.io.HStore;
 import io.r2mo.base.io.HTransfer;
 import io.r2mo.base.secure.EDCrypto;
 import io.r2mo.jaas.session.UserCache;
-import io.r2mo.spi.FactoryDBAction;
-import io.r2mo.spi.FactoryIo;
-import io.r2mo.spi.FactoryObject;
-import io.r2mo.spi.FactoryWeb;
-import io.r2mo.spi.SPI;
+import io.r2mo.spi.*;
 import io.r2mo.typed.cc.Cc;
 import io.r2mo.vertx.dbe.DBContext;
 import io.r2mo.vertx.dbe.FactoryDBAsync;
@@ -90,6 +86,17 @@ public final class HPI<T> extends SPI {
             ));
         }
     };
+    // ------------------- HPI 对象模式，直接处理对象引用功能
+    private static final Cc<String, HPI<?>> CC_HPI = Cc.openThread();
+    private final T service;
+
+    private HPI(final Class<T> interfaceCls) {
+        final T service = findOverwrite(interfaceCls);
+        if (Objects.isNull(service)) {
+            log.warn("[ ZERO ] 功能性旁路 HPI / 接口 = {} 对应的实现服务在环境中未找到！", interfaceCls.getName());
+        }
+        this.service = service;
+    }
 
     public static void registry(final Class<?>... spiArray) {
         SPI_SET.addAll(Arrays.asList(spiArray));
@@ -110,20 +117,8 @@ public final class HPI<T> extends SPI {
                 .map(impl -> impl.getClass().getName())
                 .distinct()
                 .collect(Collectors.joining(", "));
-            log.info("[ ZERO ]    \uD83D\uDCCC {} = [{}]", spiClass.getName(), implNames);
+            log.info("[ ZERO ]    \uD83D\uDCCC {} = [{}]", String.format("%-64s", spiClass.getName()), implNames);
         }
-    }
-
-    // ------------------- HPI 对象模式，直接处理对象引用功能
-    private static final Cc<String, HPI<?>> CC_HPI = Cc.openThread();
-    private final T service;
-
-    private HPI(final Class<T> interfaceCls) {
-        final T service = findOverwrite(interfaceCls);
-        if (Objects.isNull(service)) {
-            log.warn("[ ZERO ] 功能性旁路 HPI / 接口 = {} 对应的实现服务在环境中未找到！", interfaceCls.getName());
-        }
-        this.service = service;
     }
 
     /**
@@ -136,7 +131,6 @@ public final class HPI<T> extends SPI {
      *
      * @param interfaceCls SPI 接口
      * @param <R>          SPI 中的组件类型
-     *
      * @return 返回 {@link HPI} 引用
      */
     @SuppressWarnings("unchecked")
