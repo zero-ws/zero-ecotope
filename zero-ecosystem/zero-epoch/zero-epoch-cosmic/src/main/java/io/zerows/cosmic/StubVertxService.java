@@ -64,7 +64,7 @@ class StubVertxService extends AbstractAmbiguity implements StubVertx {
         // 完善 Vertx 实例
         final EventBus eventBus = vertx.eventBus();
         eventBus.registerDefaultCodec(Envelop.class, SourceReflect.singleton(CodecEnvelop.class));
-        log.info("[ ZERO ] 注册编解码器：{}", CodecEnvelop.class.getName());
+        log.info("[ ZERO ] 注册编解码器：{} / 传输类型 {}", CodecEnvelop.class.getName(), Envelop.class.getName());
 
         vertx.exceptionHandler(Throwable::printStackTrace);
 
