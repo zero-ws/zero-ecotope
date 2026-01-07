@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-mvn clean package install -Dquickly -DskipTests=true -Dmaven.javadoc.skip=true -Dmaven.compile.fork=true -T 32C
+mvnd clean install -Dquickly -Dmaven.test.skip=true -Dmaven.javadoc.skip=true -Dmvnd.log.target=console
