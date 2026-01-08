@@ -27,7 +27,7 @@ public class InquirerForGuice implements Inquirer<Injector> {
     @Override
     @SuppressWarnings("all")
     public Injector scan(final Set<Class<?>> clazzes) {
-        log.info("[ ZERO ] ( DI ) \uD83E\uDEBC DI 环境即将初始化, Total = `{}`", String.valueOf(clazzes.size()));
+        log.debug("[ ZERO ] ( DI ) \uD83E\uDEBC DI 环境即将初始化, Total = `{}`", String.valueOf(clazzes.size()));
         /*
          * Scan start points, the condition is as following:
          * - 1. Contains member that annotated with @Inject
@@ -58,7 +58,7 @@ public class InquirerForGuice implements Inquirer<Injector> {
                 log.error(ex.getMessage(), ex);
             }
         });
-        log.info("[ ZERO ] ( DI ) \uD83E\uDEBC 扫描信息 / field = {}, method = {}, constructor = {}",
+        log.debug("[ ZERO ] ( DI ) \uD83E\uDEBC 扫描信息 / field = {}, method = {}, constructor = {}",
             String.valueOf(queueField.size()), String.valueOf(queueMethod.size()), String.valueOf(queueCon.size()));
 
         // Implementation = Interface
@@ -107,7 +107,6 @@ public class InquirerForGuice implements Inquirer<Injector> {
      * </pre>
      *
      * @param clazz 实现类
-     *
      * @return 是否合法
      */
     private boolean isValid(final Class<?> clazz) {

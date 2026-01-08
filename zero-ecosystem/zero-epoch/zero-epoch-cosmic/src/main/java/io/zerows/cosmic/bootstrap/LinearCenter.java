@@ -29,7 +29,7 @@ class LinearCenter {
 
     static Linear of(final VertxComponent type, final HBundle bundle) {
         return Linear.CC_SKELETON.pick(() -> {
-            log.info("[ ZERO ] Linear将会被初始化，类型：{}", type);
+            log.debug("[ ZERO ] Linear将会被初始化，类型：{}", type);
             final Function<HBundle, Linear> constructorFn = CONSTRUCTOR.get(type);
             Objects.requireNonNull(constructorFn);
             return constructorFn.apply(bundle);
@@ -42,7 +42,7 @@ class LinearCenter {
         final Vertx vertx = runVertx.instance();
         Objects.requireNonNull(vertx, "[ ZERO ] 发布模型中的 vertx 实例不可为空！");
 
-        log.info("[ ZERO ] ⏳ Verticle 组件 {} 发布中... instances = {}, thread = {}",
+        log.debug("[ ZERO ] ⏳ Verticle 组件 {} 发布中... instances = {}, thread = {}",
             classVerticle.getName(), options.getInstances(), options.getThreadingModel());
         vertx.deployVerticle(classVerticle.getName(), options).onComplete(res -> {
             final String deploymentId = res.result();

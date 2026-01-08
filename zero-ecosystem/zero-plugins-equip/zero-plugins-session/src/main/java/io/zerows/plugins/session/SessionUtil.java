@@ -62,7 +62,8 @@ class SessionUtil {
          */
         if (Objects.isNull(config) || Ut.isNil(config.options())) {
             if (LOCKED.getAndSet(Boolean.FALSE)) {
-                log.info("[ PLUG ] ( Session ) 未配置，默认会话存储模式启动：Cluster = {}", vertx.isClustered());
+                log.info("[ PLUG ] ( Session ) 未配置，默认会话存储模式启动：Store = {}",
+                    vertx.isClustered() ? "Cluster" : "Local");
             }
             // 配置为空，直接用 Vertx 构造
             final SessionStore store;

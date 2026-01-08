@@ -91,7 +91,7 @@ public class AxisSecure implements Axis {
             }
         });
         if (store.isEmpty() && IS_DISABLED.getAndSet(Boolean.FALSE)) {
-            log.info("[ ZERO ] ( Secure ) ⚠️ 安全机制禁用：provider = {}", Objects.isNull(this.provider) ? null : this.provider.getClass());
+            log.debug("[ ZERO ] ( Secure ) ⚠️ 安全机制禁用：provider = {}", Objects.isNull(this.provider) ? null : this.provider.getClass());
         }
     }
 }
