@@ -113,37 +113,58 @@ public class ProcessorInstance implements Processor<NodeNetwork, ConfigContainer
     }
 
     private DeploymentOptions makeupAgent(final JsonObject optionJ) {
-        // 默认 Agent 选项
+        // 1. 基础构造：自动映射 JSON 中的标准字段 (如 instances, ha, worker 等)
         final DeploymentOptions agentOptions = new DeploymentOptions(optionJ);
-        final int agent = Ut.valueInt(optionJ, "instances");
-        if (agent > 0) {
-            agentOptions.setInstances(agent);
-        } else {
-            agentOptions.setInstances(64);
+
+        // 2. 智能默认值：如果配置文件中没有指定 instances
+        if (!optionJ.containsKey("instances")) {
+            // 最优策略：EventLoop 类型的实例数建议等于 CPU 核心数
+            // 避免过多线程导致上下文切换，也能跑满 CPU
+            final int cpuCores = Runtime.getRuntime().availableProcessors();
+            agentOptions.setInstances(cpuCores);
         }
+
+        // 3. 强制约束：Agent 必须是 EventLoop 且开启 HA
         agentOptions
             .setHa(true)
             .setThreadingModel(ThreadingModel.EVENT_LOOP);
-        log.info("[ ZERO ] ( Deployment ) \uD83D\uDFE4 Agent 配置：instances {}, thread = {}, ha = {}",
+
+        log.info("[ ZERO ] ( Deployment ) \uD83D\uDFE4 Agent 配置：instances = {}, thread = {}, ha = {}",
             agentOptions.getInstances(), agentOptions.getThreadingModel(), agentOptions.isHa());
         return agentOptions;
     }
 
     private DeploymentOptions makeupWorker(final JsonObject optionJ) {
+        // 1. 基础构造
         final DeploymentOptions workerOptions = new DeploymentOptions(optionJ);
-        final int worker = Ut.valueInt(optionJ, "instances");
-        if (worker > 0) {
-            workerOptions.setInstances(worker);
-        } else {
-            workerOptions.setInstances(128);
+
+        // 2. 智能默认值：如果配置文件中没有指定 instances
+        if (!optionJ.containsKey("instances")) {
+            // Worker 属于阻塞型任务，默认给 64 个并发实例作为兜底
+            // 之前的 128 有点过于激进，64 是比较稳健的企业级默认值
+            workerOptions.setInstances(64);
         }
+
+        // 3. 动态配置 Worker Pool (关键修复)
+        // 优先读取配置中的 poolName，如果没有则生成通用名称
+        String poolName = optionJ.getString("workerPoolName");
+        if (poolName == null || poolName.isBlank()) {
+            poolName = "zero-rachel-momo";
+        }
+
+        // 优先读取配置中的 poolSize，如果没有则默认 128
+        // 注意：Vert.x 默认是 20，但在微服务/数据库密集型应用中，20 通常不够用，128 是个很好的平衡点
+        final int poolSize = optionJ.getInteger("workerPoolSize", 128);
+
         workerOptions
-            .setWorkerPoolName("zero-rachel-momo")
-            .setWorkerPoolSize(256)
+            .setWorkerPoolName(poolName)
+            .setWorkerPoolSize(poolSize)
             .setHa(true)
             .setThreadingModel(ThreadingModel.WORKER);
-        log.info("[ ZERO ] ( Deployment ) \uD83D\uDFE4 Worker 配置：instances {}, thread = {}, ha = {}",
-            workerOptions.getInstances(), workerOptions.getThreadingModel(), workerOptions.isHa());
+
+        log.info("[ ZERO ] ( Deployment ) \uD83D\uDFE4 Worker 配置：pool = {} (size: {}), instances = {}, ha = {}",
+            workerOptions.getWorkerPoolName(), workerOptions.getWorkerPoolSize(),
+            workerOptions.getInstances(), workerOptions.isHa());
         return workerOptions;
     }
 }

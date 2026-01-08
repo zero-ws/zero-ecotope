@@ -11,13 +11,7 @@ import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-import java.util.TreeSet;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
@@ -57,7 +51,6 @@ public class AxisStart implements Axis {
 
         // 标准日志格式化
         final Set<String> pathSet = new TreeSet<>();
-        final ConcurrentMap<String, Route> pathMap = new ConcurrentHashMap<>();
         final Set<String> pathSetAny = new HashSet<>();
         routes.forEach(route -> {
             final String path = route.getPath();
@@ -67,16 +60,14 @@ public class AxisStart implements Axis {
                     pathSetAny.add(path);
                 }
             } else {
-                pathSet.add(path);
-                pathMap.put(path, route);
+                methods.forEach(method -> {
+                    final String methodStr = Ut.fromAdjust(method.name(), 8);
+                    pathSet.add(methodStr + " " + path);
+                });
             }
         });
-        pathSetAny.forEach(path -> log.info("[ ZERO ]  -->  Uri 注册:        * {}", path));
-        pathSet.forEach(path -> {
-            final Route route = pathMap.get(path);
-            final Set<HttpMethod> methods = route.methods();
-            methods.forEach(method -> log.info("[ ZERO ]  -->  Uri 注册: {} {}", Ut.fromAdjust(method.name(), 8), path));
-        });
+        pathSetAny.forEach(path -> log.info("[ ZERO ]  -->  Uri 注册:        * {}（Wide）", path));
+        pathSet.forEach(path -> log.info("[ ZERO ]  -->  Uri 注册: {}", path));
         final HttpServerOptions optionOfServer = runServer.config();
         final String prefix = optionOfServer.isSsl() ? "https" : "http";
         log.info("[ ZERO ] ( Http Server ) {} ✅️ 服务器成功启动 SUCCESS !. Endpoint: {}://{}:{}.",
