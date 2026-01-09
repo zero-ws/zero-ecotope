@@ -30,6 +30,14 @@ public class ValidatorEntry {
         RULERS = new ConcurrentHashMap<>();
     private static final ConcurrentMap<String, JsonObject> STORED = OCacheStore.CC_CODEX.get();
 
+    private static final ValidatorInterpolator INTERPOLATOR = new ValidatorInterpolator();
+    @SuppressWarnings("all")
+    private static final Validator VALIDATOR = Validation.byDefaultProvider()
+        .configure()
+        .messageInterpolator(INTERPOLATOR)
+        .buildValidatorFactory()
+        .getValidator();
+
     /**
      * Validate the method parameters based on javax.validation: Hibernate Validator.
      *
@@ -43,11 +51,8 @@ public class ValidatorEntry {
         final Method method,
         final Object[] args) {
         // 1. Get method validator
-        final Validator validator = Validation.buildDefaultValidatorFactory().usingContext().messageInterpolator(
-            new ValidatorInterpolator()
-        ).getValidator();
         final ExecutableValidator validatorParam
-            = validator.forExecutables();
+            = VALIDATOR.forExecutables();
         // 2. Create new params that wait for validation
         final Set<ConstraintViolation<T>> constraints
             = validatorParam.validateParameters(proxy, method, args);
@@ -61,7 +66,15 @@ public class ValidatorEntry {
     private <T> void replyError(final T proxy, final Method method,
                                 final ConstraintViolation<T> item) {
         if (null != item) {
-            throw new _60000Exception400Validation(proxy.getClass(), method, item.getMessage());
+            String message = item.getMessage();
+            if (message.startsWith("${") && message.endsWith("}")) {
+                final String key = message.substring(2, message.length() - 1);
+                final String resolved = INTERPOLATOR.findMessage(key, Locale.SIMPLIFIED_CHINESE);
+                if (Ut.isNotNil(resolved)) {
+                    message = resolved;
+                }
+            }
+            throw new _60000Exception400Validation(proxy.getClass(), method, message);
         }
     }
 
