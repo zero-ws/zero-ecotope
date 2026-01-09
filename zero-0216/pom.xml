@@ -3,16 +3,14 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
-    <groupId>io.zerows</groupId>
-    <artifactId>zero-stack</artifactId>
-    <version>1.0.0</version>
+    <parent>
+        <groupId>io.zerows</groupId>
+        <artifactId>zero-ecotope</artifactId>
+        <version>${revision}</version>
+    </parent>
+    <artifactId>zero-0216</artifactId>
     <packaging>pom</packaging>
-    <name>(POM) 📚️ - Zero Stack ${zero.version} / Momo ${momo.version}</name>
-    <properties>
-        <momo.version>1.0.47</momo.version>
-        <zero.version>1.0.0</zero.version>
-    </properties>
+    <name>(POM) 📚️ - Zero Stack ${revision} / Momo ${momo.version}</name>
     <dependencyManagement>
         <dependencies>
             <!--
@@ -20,8 +18,18 @@
             -->
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>rachel-momo-stack</artifactId>
+                <artifactId>rachel-momo-0216</artifactId>
                 <version>${momo.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <!--
+            版本管理专用 Stack
+            -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>r2mo-0216</artifactId>
+                <version>${r2mo.version}</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
@@ -31,7 +39,7 @@
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-version-epoch</artifactId>
-                <version>${zero.version}</version>
+                <version>${revision}</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
@@ -41,7 +49,7 @@
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-version-plugins</artifactId>
-                <version>${zero.version}</version>
+                <version>${revision}</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
@@ -51,7 +59,7 @@
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-version-extension</artifactId>
-                <version>${zero.version}</version>
+                <version>${revision}</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
@@ -61,7 +69,7 @@
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-version-overlay</artifactId>
-                <version>${zero.version}</version>
+                <version>${revision}</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
@@ -69,7 +77,7 @@
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-boot-epoch-actor</artifactId>
-                <version>${zero.version}</version>
+                <version>${revision}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

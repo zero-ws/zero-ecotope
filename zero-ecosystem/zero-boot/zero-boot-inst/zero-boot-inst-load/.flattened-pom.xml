@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>io.zerows</groupId>
+        <artifactId>zero-boot-inst</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>zero-boot-inst-load</artifactId>
+    <name>🛠️ - Zero::Boot::Inst Load</name>
+    <properties>
+        <!-- 定义 mainClass 属性，子项目可以覆盖 -->
+        <maven.main.class>io.zerows.boot.inst.LoadApp</maven.main.class>
+        <maven.main.output>inst-load</maven.main.output>
+    </properties>
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <artifactId>maven-dependency-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>

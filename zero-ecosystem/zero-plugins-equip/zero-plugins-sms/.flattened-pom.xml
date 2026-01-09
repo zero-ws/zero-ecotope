@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>io.zerows</groupId>
+        <artifactId>zero-plugins-equip</artifactId>
+        <version>1.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>zero-plugins-sms</artifactId>
+    <name>Zero::Plugins::🧩 - SMS</name>
+    <dependencies>
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-epoch-execution</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>r2mo-xync-sms</artifactId>
+            <version>${r2mo.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.aliyun/aliyun-java-sdk-core -->
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-core</artifactId>
+            <version>4.7.6</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.aliyun/aliyun-java-sdk-dysmsapi -->
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-dysmsapi</artifactId>
+            <version>2.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-epoch-store</artifactId>
+        </dependency>
+    </dependencies>
+</project>

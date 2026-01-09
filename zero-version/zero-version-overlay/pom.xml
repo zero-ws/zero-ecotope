@@ -6,7 +6,7 @@
     <parent>
         <groupId>io.zerows</groupId>
         <artifactId>zero-version</artifactId>
-        <version>1.0.0</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>zero-version-overlay</artifactId>

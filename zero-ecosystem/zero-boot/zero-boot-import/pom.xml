@@ -5,7 +5,7 @@
     <parent>
         <artifactId>zero-boot</artifactId>
         <groupId>io.zerows</groupId>
-        <version>1.0.0</version>
+        <version>${revision}</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>zero-boot-import</artifactId>
@@ -33,8 +33,8 @@
             <!-- Core -->
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-stack</artifactId>
-                <version>${zero.version}</version>
+                <artifactId>zero-0216</artifactId>
+                <version>${revision}</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
@@ -42,12 +42,12 @@
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-boot-extension-actor</artifactId>
-                <version>${zero.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-boot-epoch-actor</artifactId>
-                <version>${zero.version}</version>
+                <version>${revision}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

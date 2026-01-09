@@ -6,7 +6,7 @@
     <parent>
         <groupId>io.zerows</groupId>
         <artifactId>zero-plugins-extension</artifactId>
-        <version>1.0.0</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>zero-extension-api</artifactId>
@@ -15,78 +15,78 @@
         <dependency>
             <groupId>io.zerows</groupId>
             <artifactId>zero-extension-crud</artifactId>
-            <version>${project.version}</version>
+            <version>${revision}</version>
         </dependency>
         <!-- Extension 依赖处理 -->
         <dependency>
             <groupId>io.zerows</groupId>
             <artifactId>zero-exmodule-ambient-api</artifactId>
-            <version>${project.version}</version>
+            <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>io.zerows</groupId>
             <artifactId>zero-exmodule-erp-api</artifactId>
-            <version>${project.version}</version>
+            <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>io.zerows</groupId>
             <artifactId>zero-exmodule-finance-api</artifactId>
-            <version>${project.version}</version>
+            <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>io.zerows</groupId>
             <artifactId>zero-exmodule-graphic-api</artifactId>
-            <version>${project.version}</version>
+            <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>io.zerows</groupId>
             <artifactId>zero-exmodule-integration-api</artifactId>
-            <version>${project.version}</version>
+            <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>io.zerows</groupId>
             <artifactId>zero-exmodule-lbs-api</artifactId>
-            <version>${project.version}</version>
+            <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>io.zerows</groupId>
             <artifactId>zero-exmodule-mbseapi-api</artifactId>
-            <version>${project.version}</version>
+            <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>io.zerows</groupId>
             <artifactId>zero-exmodule-mbsecore-api</artifactId>
-            <version>${project.version}</version>
+            <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>io.zerows</groupId>
             <artifactId>zero-exmodule-modulat-api</artifactId>
-            <version>${project.version}</version>
+            <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>io.zerows</groupId>
             <artifactId>zero-exmodule-rbac-api</artifactId>
-            <version>${project.version}</version>
+            <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>io.zerows</groupId>
             <artifactId>zero-exmodule-report-api</artifactId>
-            <version>${project.version}</version>
+            <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>io.zerows</groupId>
             <artifactId>zero-exmodule-tpl-api</artifactId>
-            <version>${project.version}</version>
+            <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>io.zerows</groupId>
             <artifactId>zero-exmodule-ui-api</artifactId>
-            <version>${project.version}</version>
+            <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>io.zerows</groupId>
             <artifactId>zero-exmodule-workflow-api</artifactId>
-            <version>${project.version}</version>
+            <version>${revision}</version>
         </dependency>
     </dependencies>
 </project>

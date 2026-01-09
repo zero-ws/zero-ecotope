@@ -6,7 +6,7 @@
     <parent>
         <groupId>io.zerows</groupId>
         <artifactId>zero-ecotope</artifactId>
-        <version>1.0.0</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>zero-ecosystem</artifactId>
@@ -24,8 +24,8 @@
             <!-- Import Stack -->
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-stack</artifactId>
-                <version>${zero.version}</version>
+                <artifactId>zero-0216</artifactId>
+                <version>${revision}</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>

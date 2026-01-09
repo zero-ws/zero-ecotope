@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>zero-ecosystem</artifactId>
+        <groupId>io.zerows</groupId>
+        <version>1.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>zero-plugins-equip</artifactId>
+    <packaging>pom</packaging>
+    <name>(POM) 📚️ - Zero::Plugins</name>
+    <modules>
+        <module>zero-plugins-cache</module>
+        <module>zero-plugins-elasticsearch</module>
+        <module>zero-plugins-email</module>
+        <module>zero-plugins-excel</module>
+        <module>zero-plugins-flyway</module>
+        <module>zero-plugins-neo4j</module>
+        <module>zero-plugins-redis</module>
+        <module>zero-plugins-session</module>
+        <module>zero-plugins-sms</module>
+        <module>zero-plugins-swagger</module>
+        <module>zero-plugins-trash</module>
+        <module>zero-plugins-websocket</module>
+        <module>zero-plugins-weco</module>
+
+
+        <!-- Security -->
+        <module>zero-plugins-security</module>
+        <module>zero-plugins-security-email</module>
+        <module>zero-plugins-security-htdigest</module>
+        <module>zero-plugins-security-htpasswd</module>
+        <module>zero-plugins-security-jwt</module>
+        <module>zero-plugins-security-ldap</module>
+        <module>zero-plugins-security-oauth2</module>
+        <module>zero-plugins-security-otp</module>
+        <module>zero-plugins-security-sms</module>
+        <module>zero-plugins-security-weco</module>
+
+
+        <!-- Monitor -->
+        <module>zero-plugins-monitor</module>
+        <module>zero-plugins-monitor-hawtio</module>
+        <module>zero-plugins-monitor-prometheus</module>
+        <module>zero-plugins-cache-ehcache</module>
+        <module>zero-plugins-cache-caffeine</module>
+    </modules>
+</project>

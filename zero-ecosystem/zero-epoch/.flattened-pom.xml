@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>io.zerows</groupId>
+        <artifactId>zero-ecosystem</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>zero-epoch</artifactId>
+    <name>(POM) 📚️ - Zero::Epoch</name>
+    <packaging>pom</packaging>
+    <modules>
+        <module>zero-overlay</module>
+        <module>zero-epoch-use</module>
+        <!--
+        - 设置模块，主要提供基础层之上的支持功能，其中包括
+          - io.zerows.epoch.boot:               启动器
+          - io.zerows.epoch.configuration:      配置
+          - io.zerows.epoch.management:         基本管理功能
+        -->
+        <module>zero-epoch-setting</module>
+        <module>zero-epoch-store</module>
+        <module>zero-epoch-focus</module>
+        <!-- 工具层 -->
+        <module>zero-epoch-execution</module>
+        <module>zero-epoch-cosmic</module>
+        <!-- 测试 -->
+        <module>zero-epoch-adhoc</module>
+    </modules>
+</project>
