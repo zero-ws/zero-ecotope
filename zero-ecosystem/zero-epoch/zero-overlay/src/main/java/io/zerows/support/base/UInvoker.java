@@ -102,8 +102,12 @@ final class UInvoker {
                 // Async Calling
                 result = Future.failedFuture(error);
             } else {
-                // Sync Calling
-                result = null;
+                /*
+                 * Fix: Sync Calling
+                 * 修复同步调用出现异常的问题，如果是异步调用，返回 Future.failedFuture(error)，而
+                 * 同步调用则直接抛出异常即可。
+                 */
+                throw error;
             }
         }
         return (T) result;
