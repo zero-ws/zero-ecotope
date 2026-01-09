@@ -45,3 +45,4 @@ git-upstream.sh
 tree.txt
 archive
 *.log
+.flattened-pom.xml
