@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.zerows</groupId>
         <artifactId>zero-version</artifactId>
-        <version>1.0.0</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>zero-version-epoch</artifactId>
@@ -18,45 +18,45 @@
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-epoch-adhoc</artifactId>
-                <version>${zero.version}</version>
+                <version>${revision}</version>
             </dependency>
             <!-- ================= 核心容器 ================== -->
             <!-- Zero Web Container -->
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-epoch-cosmic</artifactId>
-                <version>${zero.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-epoch-execution</artifactId>
-                <version>${zero.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-epoch-focus</artifactId>
-                <version>${zero.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-epoch-setting</artifactId>
-                <version>${zero.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-epoch-store</artifactId>
-                <version>${zero.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-epoch-use</artifactId>
-                <version>${zero.version}</version>
+                <version>${revision}</version>
             </dependency>
             <!-- ================= 对接层 ================== -->
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-overlay</artifactId>
-                <version>${zero.version}</version>
+                <version>${revision}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

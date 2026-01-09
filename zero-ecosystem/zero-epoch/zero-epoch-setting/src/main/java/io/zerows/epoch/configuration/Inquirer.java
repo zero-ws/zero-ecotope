@@ -1,8 +1,5 @@
 package io.zerows.epoch.configuration;
 
-import io.zerows.component.log.LogO;
-import io.zerows.support.Ut;
-
 import java.util.Set;
 
 /**
@@ -15,8 +12,4 @@ import java.util.Set;
 public interface Inquirer<R> {
 
     R scan(Set<Class<?>> clazzes);
-
-    default LogO logger() {
-        return Ut.Log.uca(this.getClass());
-    }
 }

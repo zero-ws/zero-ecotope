@@ -4,8 +4,8 @@ import io.r2mo.function.Fn;
 import io.reactivex.rxjava3.core.Observable;
 import io.vertx.core.http.HttpMethod;
 import io.zerows.epoch.annotations.Adjust;
-import io.zerows.epoch.annotations.Codex;
 import io.zerows.epoch.annotations.EndPoint;
+import io.zerows.epoch.annotations.Validated;
 import io.zerows.epoch.assembly.exception._40005Exception500EventSource;
 import io.zerows.epoch.assembly.exception._40036Exception500CodexMore;
 import io.zerows.epoch.basicore.WebEvent;
@@ -15,14 +15,12 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
  * Scanned @EndPoint clazz to build Event metadata
+ * 强校验版：发现重复路由定义将打印错误信息，且冲突的 Event 均不加入环境
  */
 @Slf4j
 public class ExtractorEvent implements Extractor<Set<WebEvent>> {
@@ -35,27 +33,22 @@ public class ExtractorEvent implements Extractor<Set<WebEvent>> {
         // 1. Class verify
         this.verify(clazz);
         // 2. Check whether clazz annotated with @PATH
-        final Set<WebEvent> result = new HashSet<>();
         if (clazz.isAnnotationPresent(Path.class)) {
             // 3.1. Append Root Path
             final Path path = this.path(clazz);
             assert null != path : "Path should not be null.";
-            result.addAll(this.extract(clazz, ExtractToolPath.resolve(path)));
+            return this.extract(clazz, ExtractToolPath.resolve(path));
         } else {
             // 3.2. Use method Path directly
-            result.addAll(this.extract(clazz, null));
+            return this.extract(clazz, null);
         }
-        return result;
     }
 
     private void verify(final Class<?> clazz) {
-        // Check basic specification: No Arg Constructor
         if (!clazz.isInterface()) {
-            // Class direct.
             ExtractTool.verifyNoArgConstructor(clazz);
         }
         ExtractTool.verifyIfPublic(clazz);
-        // Event Source Checking
         if (!clazz.isAnnotationPresent(EndPoint.class)) {
             throw new _40005Exception500EventSource(clazz);
         }
@@ -63,25 +56,64 @@ public class ExtractorEvent implements Extractor<Set<WebEvent>> {
 
     @SuppressWarnings("all")
     private Set<WebEvent> extract(final Class<?> clazz, final String root) {
-        final Set<WebEvent> events = new HashSet<>();
-        // 0.Preparing
         final Method[] methods = clazz.getDeclaredMethods();
-        // 1.Validate Codex annotation appears
+
+        // 1. Validate Codex annotation appears (RxJava logic)
         final Long counter = Observable.fromArray(methods)
             .map(Method::getParameterAnnotations)
             .flatMap(Observable::fromArray)
             .map(Arrays::asList)
             .map(item -> item.stream().map(Annotation::annotationType).collect(Collectors.toList()))
-            .filter(item -> item.contains(Codex.class))
+            .filter(item -> item.contains(Validated.class))
             .count().blockingGet();
         Fn.jvmKo(methods.length < counter, _40036Exception500CodexMore.class, clazz);
-        // 2.Build Set
-        events.addAll(Arrays.stream(methods).filter(ExtractToolMethod::isValid)
+
+        // 🚀 2. 第一阶段：收集该类下所有合法的 WebEvent 到 List（不提前去重）
+        final List<WebEvent> scannedEvents = Arrays.stream(methods)
+            .filter(ExtractToolMethod::isValid)
             .map(item -> this.extract(item, root))
             .filter(Objects::nonNull)
-            .collect(Collectors.toSet()));
-        // 3.Break the Event `priority` draw down.
-        return events;
+            .collect(Collectors.toList());
+
+        // 🚀 3. 第二阶段：根据 (Method + Path + Order) 进行分组，检测类内冲突
+        final Map<String, List<WebEvent>> grouped = scannedEvents.stream()
+            .collect(Collectors.groupingBy(event -> {
+                // 构造逻辑指纹 Key，确保 Path 归一化（转大写、去空格、去尾斜杠已在 WebEvent 内部或此处处理）
+                return (event.getMethod() + " " + event.getPath() + " " + event.getOrder()).toUpperCase();
+            }));
+
+        // 🚀 4. 第三阶段：执行过滤逻辑
+        final Set<WebEvent> result = new HashSet<>();
+        grouped.forEach((key, list) -> {
+            if (list.size() > 1) {
+                // 发现重复！
+                this.logConflict(clazz, list);
+            } else {
+                // 唯一项：安全加入
+                result.add(list.get(0));
+            }
+        });
+
+        return result;
+    }
+
+    /**
+     * 打印简短的冲突警告（单行）
+     */
+    private void logConflict(final Class<?> clazz, final List<WebEvent> conflicts) {
+        final WebEvent sample = conflicts.getFirst();
+        // 提取所有冲突的方法名，用逗号分隔
+        final String methodNames = conflicts.stream()
+            .map(e -> e.getAction().getName() + "()")
+            .collect(Collectors.joining(", "));
+
+        // 单行输出核心冲突点
+        log.error("[ ZERO ] ❌ 路由冲突 (已忽略): 类 {}, 坐标 [{}]{}:{}, 涉及方法: [{}]",
+            clazz.getSimpleName(),         // 简写类名更清晰
+            sample.getMethod(),
+            sample.getPath(),
+            sample.getOrder(),
+            methodNames);
     }
 
     /**
@@ -92,49 +124,38 @@ public class ExtractorEvent implements Extractor<Set<WebEvent>> {
      * @return Standard Event object
      */
     private WebEvent extract(final Method method, final String root) {
-        // 1.Method path
         final WebEvent event = new WebEvent();
-        // 2.Method resolve
         final HttpMethod httpMethod = ExtractToolMethod.resolve(method);
         if (null == httpMethod) {
-            // Ignored the method could not be annotated.
             log.warn("[ ZEOR ] \u001b[0;31m!!!!!, Missed HttpMethod annotation for method\u001b[m ? (GET,POST,PUT,...). method = \u001b[0;31m{}\u001b[m", method);
             return null;
         } else {
             event.setMethod(httpMethod);
         }
-        {
-            // 3.1. Get path from method
-            final Path path = this.path(method);
-            if (null == path) {
-                // 3.2. Check root double check
-                if (!Ut.isNil(root)) {
-                    // Use root directly.
-                    event.setPath(root);
-                }
-            } else {
-                final String result = ExtractToolPath.resolve(
-                    path, root);
-                event.setPath(result);
+
+        // Path Resolve
+        final Path path = this.path(method);
+        if (null == path) {
+            if (!Ut.isNil(root)) {
+                event.setPath(root);
             }
+        } else {
+            final String result = ExtractToolPath.resolve(path, root);
+            event.setPath(result);
         }
-        // 4.Action
+
         event.setAction(method);
-        // 6.Mime resolve
         event.setConsumes(ExtractToolMedia.consumes(method));
         event.setProduces(ExtractToolMedia.produces(method));
-        // 7. Instance clazz for proxy
-        final Class<?> clazz = method.getDeclaringClass();
-        event.setProxy(clazz);
-        // 8. Order
+        event.setProxy(method.getDeclaringClass());
+
+        // Order Resolve
         if (method.isAnnotationPresent(Adjust.class)) {
             final Adjust adjust = method.getDeclaredAnnotation(Adjust.class);
-            final int order = adjust.value();
-            event.setOrder(order);
+            event.setOrder(adjust.value());
         }
         return event;
     }
-
 
     private Path path(final Class<?> clazz) {
         return this.path(clazz.getDeclaredAnnotation(Path.class));

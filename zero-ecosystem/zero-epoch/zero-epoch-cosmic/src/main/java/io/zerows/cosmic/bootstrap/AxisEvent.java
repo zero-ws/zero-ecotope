@@ -66,6 +66,10 @@ public class AxisEvent implements Axis {
                 .failureHandler(EndurerCommon.create())
                 .handler(aim.attack(event))
                 .failureHandler(EndurerCommon.create());
+
+            /* 404 修复 */
+            runRoute.refRouter().errorHandler(404, AckFailure.of()::reply404);
+            runRoute.refRouter().errorHandler(405, AckFailure.of()::reply405);
         });
     }
 }

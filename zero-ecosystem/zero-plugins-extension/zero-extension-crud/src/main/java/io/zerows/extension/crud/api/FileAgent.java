@@ -4,19 +4,14 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.FileUpload;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Adjust;
-import io.zerows.epoch.annotations.Codex;
 import io.zerows.epoch.annotations.EndPoint;
+import io.zerows.epoch.annotations.Validated;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.metadata.KView;
 import io.zerows.extension.crud.common.IxMsg;
 import io.zerows.program.Ux;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
-import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.QueryParam;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.extension.BodyParam;
 import jakarta.ws.rs.extension.PointParam;
@@ -37,7 +32,7 @@ public class FileAgent {
     @Adjust(KWeb.ORDER.MODULE)
     public JsonObject importFile(@PathParam("actor") final String actor,
                                  @QueryParam(KName.MODULE) final String module,
-                                 @StreamParam @Codex final FileUpload fileUpload,
+                                 @StreamParam @Validated final FileUpload fileUpload,
                                  // For Import by different `type`
                                  @QueryParam(KName.TYPE) final String type) {
         /* File stored */

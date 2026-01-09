@@ -15,7 +15,7 @@ package up.god.micro.tabular;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
-import io.zerows.epoch.annotations.Codex;
+import io.zerows.epoch.annotations.Validated;
 import io.zerows.epoch.annotations.EndPoint;
 
 import javax.ws.rs.*;

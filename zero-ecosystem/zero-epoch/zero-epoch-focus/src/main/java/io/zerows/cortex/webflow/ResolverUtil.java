@@ -2,17 +2,11 @@ package io.zerows.cortex.webflow;
 
 import io.vertx.core.buffer.Buffer;
 import io.vertx.ext.web.FileUpload;
-import io.zerows.component.log.LogOf;
 import io.zerows.weaver.ZeroType;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.Function;
@@ -25,8 +19,8 @@ import java.util.stream.Stream;
  * @author lang : 2024-04-21
  */
 @SuppressWarnings("all")
+@Slf4j
 class ResolverUtil {
-    private static final LogOf LOGGER = LogOf.get(ResolverUtil.class);
 
     public static <T> T toFile(final Set<FileUpload> fileUploads, final Class<?> expected, final Function<String, Buffer> consumer) {
         /*
@@ -38,7 +32,7 @@ class ResolverUtil {
             /*
              * Size = 0 or null
              */
-            LOGGER.warn("The fileUploads set size is 0.");
+            log.warn("[ ZERO ] ( Resolver ) 上传文件数量为 0.");
             if (Collection.class.isAssignableFrom(expected)) {
                 if (List.class.isAssignableFrom(expected)) {
                     /*
@@ -51,7 +45,7 @@ class ResolverUtil {
                      */
                     return (T) Collections.emptySet();
                 } else {
-                    LOGGER.warn("The type {0} is not supported.", expected.getName());
+                    log.warn("[ ZERO ] ( Resolver ) 类型 {} 不支持.", expected.getName());
                     return null;
                 }
             } else {
@@ -84,7 +78,7 @@ class ResolverUtil {
                      */
                     return (T) stream.collect(Collectors.toSet());
                 } else {
-                    LOGGER.warn("The type {0} is not supported.", expected.getName());
+                    log.warn("[ ZERO ] ( Resolver ) 类型 {} 不支持.", expected.getName());
                     return null;
                 }
             } else {
@@ -145,7 +139,6 @@ class ResolverUtil {
      * Split `Set<FileUpload>` by fieldname
      *
      * @param fileUploads FileUpload Set
-     *
      * @return Map of `field = Set<FileUpload>`
      */
     public static ConcurrentMap<String, Set<FileUpload>> toFile(final Set<FileUpload> fileUploads) {
@@ -206,8 +199,7 @@ class ResolverUtil {
                     return (T) byteWrapper;
                 }
             } else {
-                LOGGER.warn("The array type support byte[]/Byte[] only in current version, current = {0}",
-                    componentCls.getName());
+                log.warn("[ ZERO ] ( Resolver ) 数组类型仅支持 byte[]/Byte[]，当前 = {}", componentCls.getName());
                 return null;
             }
         } else if (Buffer.class.isAssignableFrom(expected)) {
@@ -216,7 +208,7 @@ class ResolverUtil {
              */
             return (T) consumer.apply(filename);
         } else {
-            LOGGER.warn("The expected type {0} is not supported.", expected.getName());
+            log.warn("[ ZERO ] ( Resolver ) 上传文件不支持的目标类型: {}", expected.getName());
             return null;
         }
     }

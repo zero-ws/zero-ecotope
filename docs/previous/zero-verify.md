@@ -7,7 +7,7 @@ verify request data here.
 
 ```java
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.annotations.Codex;
+import io.zerows.epoch.annotations.Validated;
 import io.zerows.epoch.annotations.EndPoint;
 
 import io.zerows.epoch.corpus.annotations.io.BodyParam;

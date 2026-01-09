@@ -9,15 +9,10 @@ import org.hibernate.validator.internal.engine.messageinterpolation.LocalizedMes
 import org.hibernate.validator.internal.engine.messageinterpolation.parser.MessageDescriptorFormatException;
 import org.hibernate.validator.internal.engine.messageinterpolation.parser.Token;
 import org.hibernate.validator.internal.engine.messageinterpolation.parser.TokenCollector;
-import org.hibernate.validator.internal.engine.messageinterpolation.parser.TokenIterator;
 import org.hibernate.validator.internal.util.ConcurrentReferenceHashMap;
 import org.hibernate.validator.spi.resourceloading.ResourceBundleLocator;
 
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -88,7 +83,7 @@ public abstract class ValidatorMessager implements MessageInterpolator {
         String interpolatedMessage = message;
 
         try {
-            interpolatedMessage = this.interpolateMessage(message, context, this.defaultLocale);
+            interpolatedMessage = this.interpolateMessage(message, context, Locale.SIMPLIFIED_CHINESE);
         } catch (final MessageDescriptorFormatException var5) {
             LOGGER.warn(var5.getMessage());
         }
@@ -120,8 +115,8 @@ public abstract class ValidatorMessager implements MessageInterpolator {
         }
 
         if (resolvedMessage.indexOf(123) > -1) {
-            resolvedMessage = this.interpolateExpression(new TokenIterator(this.getParameterTokens(resolvedMessage, this.tokenizedParameterMessages, InterpolationTermType.PARAMETER)), context, locale);
-            resolvedMessage = this.interpolateExpression(new TokenIterator(this.getParameterTokens(resolvedMessage, this.tokenizedELMessages, InterpolationTermType.EL)), context, locale);
+            resolvedMessage = this.interpolateExpression(this.getParameterTokens(resolvedMessage, this.tokenizedParameterMessages, InterpolationTermType.PARAMETER), context, locale);
+            resolvedMessage = this.interpolateExpression(this.getParameterTokens(resolvedMessage, this.tokenizedELMessages, InterpolationTermType.EL), context, locale);
         }
 
         resolvedMessage = this.replaceEscapedLiterals(resolvedMessage);
@@ -177,25 +172,38 @@ public abstract class ValidatorMessager implements MessageInterpolator {
 
     private String interpolateBundleMessage(final String message, final ResourceBundle bundle, final Locale locale, final boolean recursive) throws MessageDescriptorFormatException {
         final TokenCollector tokenCollector = new TokenCollector(message, InterpolationTermType.PARAMETER);
-        final TokenIterator tokenIterator = new TokenIterator(tokenCollector.getTokenList());
+        final List<Token> tokenList = tokenCollector.getTokenList();
+        final StringBuilder sb = new StringBuilder();
 
-        while (tokenIterator.hasMoreInterpolationTerms()) {
-            final String term = tokenIterator.nextInterpolationTerm();
-            final String resolvedParameterValue = this.resolveParameter(term, bundle, locale, recursive);
-            tokenIterator.replaceCurrentInterpolationTerm(resolvedParameterValue);
+        for (Token token : tokenList) {
+            if (this.isInterpolationTerm(token)) {
+                String term = token.getTokenValue();
+                String resolvedParameterValue = this.resolveParameter(term, bundle, locale, recursive);
+                sb.append(resolvedParameterValue);
+            } else {
+                sb.append(token.getTokenValue());
+            }
         }
-
-        return tokenIterator.getInterpolatedMessage();
+        return sb.toString();
     }
 
-    private String interpolateExpression(final TokenIterator tokenIterator, final Context context, final Locale locale) throws MessageDescriptorFormatException {
-        while (tokenIterator.hasMoreInterpolationTerms()) {
-            final String term = tokenIterator.nextInterpolationTerm();
-            final String resolvedExpression = this.interpolate(context, locale, term);
-            tokenIterator.replaceCurrentInterpolationTerm(resolvedExpression);
+    private String interpolateExpression(final List<Token> tokens, final Context context, final Locale locale) throws MessageDescriptorFormatException {
+        final StringBuilder sb = new StringBuilder();
+        for (Token token : tokens) {
+            if (this.isInterpolationTerm(token)) {
+                String term = token.getTokenValue();
+                String resolvedExpression = this.interpolate(context, locale, term);
+                sb.append(resolvedExpression);
+            } else {
+                sb.append(token.getTokenValue());
+            }
         }
+        return sb.toString();
+    }
 
-        return tokenIterator.getInterpolatedMessage();
+    private boolean isInterpolationTerm(final Token token) {
+        final String tokenValue = token.getTokenValue();
+        return tokenValue.startsWith("{") || tokenValue.startsWith("${") || tokenValue.startsWith("#{");
     }
 
     public abstract String interpolate(Context var1, Locale var2, String var3);

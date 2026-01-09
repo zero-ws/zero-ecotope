@@ -4,21 +4,15 @@ import io.r2mo.typed.cc.Cc;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.LogO;
 import io.zerows.epoch.metadata.KView;
-import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.Supplier;
@@ -30,9 +24,9 @@ import java.util.function.Supplier;
  * 3. Tool -> String ( Generate resonse )
  * 4. Checking the request type to see where support serialization
  */
+@Slf4j
 public class ZeroType {
 
-    private static final LogO LOGGER = Ut.Log.ux(ZeroType.class);
     private static final Cc<String, Saber> CC_SABER = Cc.openThread();
     private static final ConcurrentMap<Class<?>, Supplier<Saber>> SABERS =
         new ConcurrentHashMap<>() {
@@ -93,7 +87,6 @@ public class ZeroType {
      *
      * @param paramType argument types
      * @param literal   literal values
-     *
      * @return deserialized object.
      */
     public static Object value(final Class<?> paramType,
@@ -109,10 +102,11 @@ public class ZeroType {
                 saber = supplier.get();
             } else {
                 final Supplier<Saber> supplier = SABERS.get(paramType);
-                if (Objects.isNull(supplier)) {
-                    LOGGER.warn("The type {0} is not supported, will use default saber.", paramType.getName());
-                }
-                saber = supplier.get();
+                /*
+                 * 修复旧代码
+                 * Fix: Cannot invoke "java.util.function.Supplier.get()" because "supplier" is null
+                 */
+                saber = Objects.isNull(supplier) ? null : supplier.get();
             }
             if (null == saber) {
                 saber = supplier(SaberCommon::new).get();
@@ -144,7 +138,6 @@ public class ZeroType {
      *
      * @param input Checked object
      * @param <T>   Generic Types
-     *
      * @return returned values.
      */
     public static <T> Object valueSupport(final T input) {
@@ -185,10 +178,7 @@ public class ZeroType {
             }
             return reference;
         } catch (final Throwable ex) {
-            /*
-             * Serialization debug for data
-             */
-            ex.printStackTrace();
+            log.error(ex.getMessage(), ex);
             return null;
         }
     }

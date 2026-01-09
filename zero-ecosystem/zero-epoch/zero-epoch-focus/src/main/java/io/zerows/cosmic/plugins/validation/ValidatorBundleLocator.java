@@ -1,25 +1,13 @@
 package io.zerows.cosmic.plugins.validation;
 
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.validator.internal.util.CollectionHelper;
-import org.hibernate.validator.internal.util.Contracts;
-import org.hibernate.validator.internal.util.logging.Messages;
-import org.hibernate.validator.internal.util.privilegedactions.GetClassLoader;
-import org.hibernate.validator.internal.util.privilegedactions.GetMethod;
-import org.hibernate.validator.internal.util.privilegedactions.GetResources;
 import org.hibernate.validator.spi.resourceloading.ResourceBundleLocator;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.security.PrivilegedAction;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.Locale;
-import java.util.MissingResourceException;
-import java.util.Properties;
-import java.util.ResourceBundle;
-import java.util.Set;
+import java.util.*;
 
 @SuppressWarnings("all")
 @Slf4j
@@ -38,7 +26,10 @@ public class ValidatorBundleLocator implements ResourceBundleLocator {
     }
 
     ValidatorBundleLocator(final String bundleName, final ClassLoader classLoader, final boolean aggregate) {
-        Contracts.assertNotNull(bundleName, "bundleName");
+        // Contracts.assertNotNull(bundleName, "bundleName");
+        if (bundleName == null) {
+            throw new IllegalArgumentException("The bundle name cannot be null.");
+        }
         this.bundleName = bundleName;
         this.classLoader = classLoader;
         this.aggregate = aggregate && RESOURCE_BUNDLE_CONTROL_INSTANTIABLE;
@@ -46,8 +37,6 @@ public class ValidatorBundleLocator implements ResourceBundleLocator {
 
     private static <T> T run(final PrivilegedAction<T> action) {
         return action.run();
-        // Old
-        // return System.getSecurityManager() != null ? AccessController.doPrivileged(action) : action.run();
     }
 
     private static boolean determineAvailabilityOfResourceBundleControl() {
@@ -56,18 +45,18 @@ public class ValidatorBundleLocator implements ResourceBundleLocator {
             if (dummyControl == null) {
                 return false;
             } else {
-                final Method getModule = (Method) run(GetMethod.action(Class.class, "getModule"));
+                final Method getModule = Class.class.getMethod("getModule");
                 if (getModule == null) {
                     return true;
                 } else {
                     final Object module = getModule.invoke(ValidatorBundleLocator.class);
-                    final Method isNamedMethod = (Method) run(GetMethod.action(module.getClass(), "isNamed"));
+                    final Method isNamedMethod = module.getClass().getMethod("isNamed");
                     final boolean isNamed = (Boolean) isNamedMethod.invoke(module);
                     return !isNamed;
                 }
             }
         } catch (final Throwable var5) {
-            log.info("[ ZERO ] Validator 异常：" + Messages.MESSAGES.unableToUseResourceBundleAggregation());
+            log.info("[ ZERO ] Validator Warning: Unable to use ResourceBundle aggregation");
             return false;
         }
     }
@@ -81,21 +70,21 @@ public class ValidatorBundleLocator implements ResourceBundleLocator {
 
         ClassLoader classLoader;
         if (rb == null) {
-            classLoader = (ClassLoader) run(GetClassLoader.fromContext());
+            classLoader = Thread.currentThread().getContextClassLoader();
             if (classLoader != null) {
                 rb = this.loadBundle(classLoader, locale, this.bundleName + " not found by thread configure classloader");
             }
         }
 
         if (rb == null) {
-            classLoader = (ClassLoader) run(GetClassLoader.fromClass(ValidatorBundleLocator.class));
+            classLoader = ValidatorBundleLocator.class.getClassLoader();
             rb = this.loadBundle(classLoader, locale, this.bundleName + " not found by validator classloader");
         }
 
         if (rb != null) {
-            log.info("[ ZERO ] 找到 {}", this.bundleName);
+            log.info("[ ZERO ] Found {}", this.bundleName);
         } else {
-            log.info("[ ZERO ] 未找到 {}", this.bundleName);
+            log.info("[ ZERO ] Not Found {}", this.bundleName);
         }
 
         return rb;
@@ -133,10 +122,10 @@ public class ValidatorBundleLocator implements ResourceBundleLocator {
 
         private Properties load(final String resourceName, final ClassLoader loader) throws IOException {
             final Properties aggregatedProperties = new Properties();
-            final Enumeration urls = (Enumeration) ValidatorBundleLocator.run(GetResources.action(loader, resourceName));
+            final Enumeration<URL> urls = loader.getResources(resourceName);
 
             while (urls.hasMoreElements()) {
-                final URL url = (URL) urls.nextElement();
+                final URL url = urls.nextElement();
                 final Properties properties = new Properties();
                 properties.load(url.openStream());
                 aggregatedProperties.putAll(properties);
@@ -160,7 +149,7 @@ public class ValidatorBundleLocator implements ResourceBundleLocator {
 
         @Override
         public Enumeration<String> getKeys() {
-            final Set<String> keySet = CollectionHelper.newHashSet();
+            final Set<String> keySet = new HashSet<>();
             keySet.addAll(this.properties.stringPropertyNames());
             if (this.parent != null) {
                 keySet.addAll(Collections.list(this.parent.getKeys()));

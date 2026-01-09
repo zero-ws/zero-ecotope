@@ -7,6 +7,7 @@ import io.zerows.cosmic.exception._40029Exception500AnnotationRepeat;
 import io.zerows.cosmic.exception._40030Exception500ParamAnnotation;
 import io.zerows.epoch.basicore.WebEvent;
 import io.zerows.support.Ut;
+import jakarta.ws.rs.BeanParam;
 import jakarta.ws.rs.extension.BodyParam;
 import jakarta.ws.rs.extension.StreamParam;
 
@@ -26,6 +27,7 @@ public class AxisVerifier {
         Fn.jvmKo(Objects.isNull(method), _40008Exception500EventActionNone.class, event);
         /* Specification **/
         verify(method, BodyParam.class);
+        verify(method, BeanParam.class);
         verify(method, StreamParam.class);
         /* Field Specification **/
         for (final Parameter parameter : method.getParameters()) {

@@ -2,22 +2,20 @@ package io.zerows.cortex.webflow;
 
 import io.r2mo.typed.cc.Cc;
 import io.r2mo.typed.exception.WebException;
-import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.cortex.metadata.WebEpsilon;
-import io.zerows.epoch.basicore.YmSpec;
 import io.zerows.epoch.configuration.NodeStore;
 import io.zerows.platform.enums.EmApp;
 import io.zerows.platform.enums.EmWeb;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.support.Ut;
+import jakarta.ws.rs.BeanParam;
 import jakarta.ws.rs.core.HttpHeaders;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.extension.BodyParam;
 import jakarta.ws.rs.extension.StreamParam;
 import lombok.extern.slf4j.Slf4j;
 
-import java.lang.annotation.Annotation;
 import java.util.Objects;
 
 @Slf4j
@@ -57,19 +55,17 @@ public class AtomicMime<T> implements Atomic<T> {
      *       default:
      *       application/xml:
      * </pre>
-     * 包含解析器的注解：{@link BodyParam} 和 {@link StreamParam}
+     * 包含解析器的注解：{@link BodyParam}, {@link StreamParam}, {@link BeanParam}
      *
      * @param context RoutingContext 路由对象
      * @param income  Zero 定义的 {@link WebEpsilon} 对象
-     *
      * @return 解析器
      */
     @SuppressWarnings("unchecked")
     private Resolver<T> getResolver(final RoutingContext context,
                                     final WebEpsilon<T> income) {
-        /* 1. 先提取 Resolver 组件 **/
-        final Annotation annotation = income.getAnnotation();
-        final Class<?> resolverCls = Ut.invoke(annotation, YmSpec.vertx.mvc.resolver.__);
+        // Fix: 过滤 BeanParam 的处理
+        final Class<?> resolverCls = AtomicResolver.ofResolver(income);
         final String header = context.request().getHeader(HttpHeaders.CONTENT_TYPE);
 
 
@@ -94,16 +90,14 @@ public class AtomicMime<T> implements Atomic<T> {
             }
 
 
-            final JsonObject resolvers = config.options(YmSpec.vertx.mvc.resolver.__);
             final String resolver;
             if (null == header) {
-                resolver = resolvers.getString("default");
-                log.info("( Resolver ) 选择 [DEFAULT] 默认解析器 {} / Content-Type = null , 请求地址：{}",
+                resolver = AtomicResolver.ofResolver(config);
+                log.info("[ ZERO ] ( Resolver ) 选择 [DEFAULT] 默认解析器 {} / Content-Type = null , 请求地址：{}",
                     resolver, context.request().absoluteURI());
             } else {
                 final MediaType type = MediaType.valueOf(header);
-                final String key = type.getType() + "/" + type.getSubtype();
-                resolver = resolvers.getString(key);
+                resolver = AtomicResolver.ofResolver(config, type);
                 log.info("[ ZERO ] ( Resolver ) 选择解析器 {} / Content-Type = {}, 请求地址：{}",
                     resolver, header, context.request().absoluteURI());
             }

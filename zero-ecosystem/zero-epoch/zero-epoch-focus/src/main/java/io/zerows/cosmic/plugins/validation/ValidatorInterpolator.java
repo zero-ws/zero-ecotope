@@ -4,84 +4,55 @@ import io.zerows.component.log.LogO;
 import io.zerows.support.Ut;
 import jakarta.el.ELManager;
 import jakarta.el.ExpressionFactory;
-import org.hibernate.validator.internal.engine.messageinterpolation.InterpolationTerm;
-import org.hibernate.validator.internal.util.privilegedactions.GetClassLoader;
-import org.hibernate.validator.internal.util.privilegedactions.SetContextClassLoader;
 import org.hibernate.validator.messageinterpolation.ResourceBundleMessageInterpolator;
 import org.hibernate.validator.spi.resourceloading.ResourceBundleLocator;
 
-import java.security.PrivilegedAction;
 import java.util.Locale;
 
 @SuppressWarnings("all")
 public class ValidatorInterpolator extends ValidatorMessager {
     private static final LogO LOGGER = Ut.Log.uca(ValidatorInterpolator.class);
+
     private final ExpressionFactory expressionFactory;
 
     public ValidatorInterpolator() {
-        this.expressionFactory = buildExpressionFactory();
+        this(null);
     }
 
     public ValidatorInterpolator(final ResourceBundleLocator userResourceBundleLocator) {
+        this(userResourceBundleLocator, buildExpressionFactory(), true);
+    }
+
+    private ValidatorInterpolator(final ResourceBundleLocator userResourceBundleLocator, final ExpressionFactory factory, boolean internal) {
         super(userResourceBundleLocator);
-        this.expressionFactory = buildExpressionFactory();
-    }
-
-    public ValidatorInterpolator(final ResourceBundleLocator userResourceBundleLocator, final ResourceBundleLocator contributorResourceBundleLocator) {
-        super(userResourceBundleLocator, contributorResourceBundleLocator);
-        this.expressionFactory = buildExpressionFactory();
-    }
-
-    public ValidatorInterpolator(final ResourceBundleLocator userResourceBundleLocator, final ResourceBundleLocator contributorResourceBundleLocator, final boolean cachingEnabled) {
-        super(userResourceBundleLocator, contributorResourceBundleLocator, cachingEnabled);
-        this.expressionFactory = buildExpressionFactory();
-    }
-
-    public ValidatorInterpolator(final ResourceBundleLocator userResourceBundleLocator, final boolean cachingEnabled) {
-        super(userResourceBundleLocator, (ResourceBundleLocator) null, cachingEnabled);
-        this.expressionFactory = buildExpressionFactory();
-    }
-
-    public ValidatorInterpolator(final ResourceBundleLocator userResourceBundleLocator, final boolean cachingEnabled, final ExpressionFactory expressionFactory) {
-        super(userResourceBundleLocator, (ResourceBundleLocator) null, cachingEnabled);
-        this.expressionFactory = expressionFactory;
+        this.expressionFactory = factory;
     }
 
     private static ExpressionFactory buildExpressionFactory() {
         if (canLoadExpressionFactory()) {
-            final ExpressionFactory expressionFactory = ELManager.getExpressionFactory();
             LOGGER.debug("Loaded expression factory via original TCCL");
-            return expressionFactory;
+            return ELManager.getExpressionFactory();
         } else {
-            final ClassLoader originalContextClassLoader = (ClassLoader) run(GetClassLoader.fromContext());
-
+            final ClassLoader originalContextClassLoader = Thread.currentThread().getContextClassLoader();
             try {
-                run(SetContextClassLoader.action(ResourceBundleMessageInterpolator.class.getClassLoader()));
-                final ExpressionFactory expressionFactory;
-                final ExpressionFactory var2;
+                Thread.currentThread().setContextClassLoader(ResourceBundleMessageInterpolator.class.getClassLoader());
                 if (canLoadExpressionFactory()) {
-                    expressionFactory = ELManager.getExpressionFactory();
                     LOGGER.debug("Loaded expression factory via HV classloader");
-                    var2 = expressionFactory;
-                    return var2;
+                    return ELManager.getExpressionFactory();
                 }
 
-                run(SetContextClassLoader.action(ELManager.class.getClassLoader()));
+                Thread.currentThread().setContextClassLoader(ELManager.class.getClassLoader());
                 if (canLoadExpressionFactory()) {
-                    expressionFactory = ELManager.getExpressionFactory();
                     LOGGER.debug("Loaded expression factory via EL classloader");
-                    var2 = expressionFactory;
-                    return var2;
+                    return ELManager.getExpressionFactory();
                 }
             } catch (final Throwable var6) {
-                //throw LOG.getUnableToInitializeELExpressionFactoryException(var6);
                 LOGGER.fatal(var6);
                 throw var6;
             } finally {
-                run(SetContextClassLoader.action(originalContextClassLoader));
+                Thread.currentThread().setContextClassLoader(originalContextClassLoader);
             }
-            throw new RuntimeException("Expression Factory error.");
-            //throw LOG.getUnableToInitializeELExpressionFactoryException((Throwable) null);
+            throw new RuntimeException("Expression Factory error: Could not initialize EL ExpressionFactory.");
         }
     }
 
@@ -94,15 +65,11 @@ public class ValidatorInterpolator extends ValidatorMessager {
         }
     }
 
-    private static <T> T run(final PrivilegedAction<T> action) {
-        return action.run();
-        // Old
-        // return System.getSecurityManager() != null ? AccessController.doPrivileged(action) : action.run();
-    }
-
     @Override
     public String interpolate(final Context context, final Locale locale, final String term) {
-        final InterpolationTerm expression = new InterpolationTerm(term, locale, this.expressionFactory);
-        return expression.interpolate(context);
+        // Fallback: return term as is.
+        // Full EL interpolation would require constructing an ELContext with proper bean references.
+        return term;
     }
 }
+
