@@ -4,19 +4,18 @@ import io.r2mo.typed.cc.Cc;
 import io.r2mo.typed.exception.WebException;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.cortex.metadata.WebEpsilon;
-import io.zerows.epoch.basicore.YmSpec;
 import io.zerows.epoch.configuration.NodeStore;
 import io.zerows.platform.enums.EmApp;
 import io.zerows.platform.enums.EmWeb;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.support.Ut;
+import jakarta.ws.rs.BeanParam;
 import jakarta.ws.rs.core.HttpHeaders;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.extension.BodyParam;
 import jakarta.ws.rs.extension.StreamParam;
 import lombok.extern.slf4j.Slf4j;
 
-import java.lang.annotation.Annotation;
 import java.util.Objects;
 
 @Slf4j
@@ -56,7 +55,7 @@ public class AtomicMime<T> implements Atomic<T> {
      *       default:
      *       application/xml:
      * </pre>
-     * 包含解析器的注解：{@link BodyParam} 和 {@link StreamParam}
+     * 包含解析器的注解：{@link BodyParam}, {@link StreamParam}, {@link BeanParam}
      *
      * @param context RoutingContext 路由对象
      * @param income  Zero 定义的 {@link WebEpsilon} 对象
@@ -65,9 +64,8 @@ public class AtomicMime<T> implements Atomic<T> {
     @SuppressWarnings("unchecked")
     private Resolver<T> getResolver(final RoutingContext context,
                                     final WebEpsilon<T> income) {
-        /* 1. 先提取 Resolver 组件 **/
-        final Annotation annotation = income.getAnnotation();
-        final Class<?> resolverCls = Ut.invoke(annotation, YmSpec.vertx.mvc.resolver.__);
+        // Fix: 过滤 BeanParam 的处理
+        final Class<?> resolverCls = AtomicResolver.ofResolver(income);
         final String header = context.request().getHeader(HttpHeaders.CONTENT_TYPE);
 
 

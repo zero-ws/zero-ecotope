@@ -13,6 +13,7 @@ import io.zerows.epoch.web.Envelop;
 import io.zerows.mbse.sdk.Commercial;
 import io.zerows.platform.metadata.KRef;
 import io.zerows.support.Ut;
+import jakarta.ws.rs.BeanParam;
 import jakarta.ws.rs.extension.BodyParam;
 
 import java.util.Objects;
@@ -74,7 +75,8 @@ public class ParameterJob implements ParameterBuilder<Envelop> {
                 return null;
             }
         } else if (is(type, JsonObject.class)) {
-            if (type.isAnnotationPresent(BodyParam.class)) {
+            if (type.isAnnotationPresent(BodyParam.class) ||
+                type.isAnnotationPresent(BeanParam.class)) {
                 /*
                  * @BodyParam, it's for data passing
                  */

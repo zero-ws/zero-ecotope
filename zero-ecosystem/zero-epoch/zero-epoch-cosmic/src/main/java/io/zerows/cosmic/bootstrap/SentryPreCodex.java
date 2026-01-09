@@ -57,6 +57,7 @@ class SentryPreCodex implements Sentry.Pre {
      * 根据基本规则，一个方法只能带有一个 Codex 注解，因为 Codex 注解是服务于请求体的整体校验，核心在于
      * <pre>
      *     自定义扩展注解
+     *     - {@link jakarta.ws.rs.BeanParam}
      *     - {@link jakarta.ws.rs.extension.BodyParam}
      *     - {@link jakarta.ws.rs.extension.StreamParam}
      * </pre>

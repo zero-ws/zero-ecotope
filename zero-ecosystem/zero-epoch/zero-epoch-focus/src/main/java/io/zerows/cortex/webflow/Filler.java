@@ -3,16 +3,8 @@ package io.zerows.cortex.webflow;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.support.Ut;
-import jakarta.ws.rs.CookieParam;
-import jakarta.ws.rs.FormParam;
-import jakarta.ws.rs.HeaderParam;
-import jakarta.ws.rs.PathParam;
-import jakarta.ws.rs.QueryParam;
-import jakarta.ws.rs.extension.BodyParam;
-import jakarta.ws.rs.extension.ContextParam;
-import jakarta.ws.rs.extension.PointParam;
-import jakarta.ws.rs.extension.SessionParam;
-import jakarta.ws.rs.extension.StreamParam;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.extension.*;
 
 import java.lang.annotation.Annotation;
 import java.util.HashSet;
@@ -23,13 +15,13 @@ import java.util.function.Supplier;
 
 /**
  * 「Co」Zero for JSR311 Arguments
- *
+ * <p>
  * There are a uniform request flow to findRunning parameters to support JSR311 in zero framework, here I defined **Filler**
  * interface ( Fill argument into container, it's specific component )
- *
+ * <p>
  * 1. In common request workflow, it provide standard `key = findRunning` attributes into map.
  * 2. For body/stream request workflow, there should be placeholder named `EmptyFiller` to taken the flow node and then continue for extracting.
- *
+ * <p>
  * For Standard JSR311, it support most parameter annotations and extend JSR311 for income requirement.
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
@@ -51,6 +43,7 @@ public interface Filler {
 
                 // Extension
                 this.put(BodyParam.class, supplier(FillerEmpty.class));
+                this.put(BeanParam.class, supplier(FillerEmpty.class));
                 this.put(StreamParam.class, supplier(FillerEmpty.class));
 
                 this.put(SessionParam.class, supplier(FillerSession.class));
@@ -66,6 +59,7 @@ public interface Filler {
             {
                 this.add(BodyParam.class);
                 this.add(StreamParam.class);
+                this.add(BeanParam.class);
             }
         };
 
@@ -79,7 +73,6 @@ public interface Filler {
      * @param name      The parameter name
      * @param paramType The parameter declared type
      * @param datum     The `RoutingContext` of Vert.x ( vertx-web )
-     *
      * @return The extracted findRunning of parameter
      */
     Object apply(String name,

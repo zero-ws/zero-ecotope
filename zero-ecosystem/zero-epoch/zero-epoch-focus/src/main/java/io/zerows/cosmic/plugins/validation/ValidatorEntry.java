@@ -15,6 +15,7 @@ import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.executable.ExecutableValidator;
+import jakarta.ws.rs.BeanParam;
 import jakarta.ws.rs.extension.BodyParam;
 
 import java.lang.annotation.Annotation;
@@ -80,7 +81,7 @@ public class ValidatorEntry {
             .filter(KWeb.ARGS.MIME_DIRECT::equals)
             .map(annotions::get)
             // 1. Check whether contains @BodyParam
-            .any(item -> BodyParam.class == item)
+            .any(item -> BodyParam.class == item || BeanParam.class == item)
             // 2. Build rulers
             .map(item -> this.buildKey(wrapRequest.getEvent()))
             .map(this::buildRulers)

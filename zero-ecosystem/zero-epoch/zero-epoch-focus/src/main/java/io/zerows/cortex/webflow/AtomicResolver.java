@@ -1,11 +1,14 @@
 package io.zerows.cortex.webflow;
 
 import io.vertx.core.json.JsonObject;
+import io.zerows.cortex.metadata.WebEpsilon;
 import io.zerows.epoch.basicore.YmSpec;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.support.Ut;
+import jakarta.ws.rs.BeanParam;
 import jakarta.ws.rs.core.MediaType;
 
+import java.lang.annotation.Annotation;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -45,6 +48,30 @@ class AtomicResolver {
             this.put(MediaType.MULTIPART_FORM_DATA, ResolverForm.class.getName());
         }
     };
+
+    /**
+     * <h3>🎯 注解解析器提取</h3>
+     * <pre>
+     * 从 {@link WebEpsilon} 中提取参数上的注解，并解析出对应的 Resolver 实现类。
+     *
+     * 特殊处理:
+     * - 如果注解是 {@link BeanParam}，则返回 {@link ResolverUnset}，
+     *   表示后续流程需要进行自动发现或递归解析 Bean 内部字段。
+     * - 其他情况通过反射调用注解上的 <code>resolver</code> 属性获取 Resolver 类。
+     * </pre>
+     *
+     * @param income 参数元数据描述对象 {@link WebEpsilon}
+     * @param <T>    参数类型泛型
+     * @return 解析器实现类 {@link Class}
+     */
+    static <T> Class<?> ofResolver(final WebEpsilon<T> income) {
+        /* 1. 先提取 Resolver 组件 **/
+        final Annotation annotation = income.getAnnotation();
+        // Fix: 过滤 BeanParam 的处理
+        return BeanParam.class == annotation.annotationType()
+            ? ResolverUnset.class       // 使用 ResolverUnset 占位触发自动发现
+            : Ut.invoke(annotation, YmSpec.vertx.mvc.resolver.__);
+    }
 
     /**
      * <h3>⚙️ 默认解析器</h3>
