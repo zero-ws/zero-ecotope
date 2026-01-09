@@ -6,9 +6,9 @@ import io.zerows.weaver.ZeroType;
 
 /**
  * 「Co」JSR311 for .@HeaderParam
- *
- * This `Filler` is for header map `key=findRunning` extract such as
- *
+ * <p>
+ * This `Filler` is for header map `key=value` extract such as
+ * <p>
  * ```shell
  * // <pre><code>
  *    Content-Type = application/json

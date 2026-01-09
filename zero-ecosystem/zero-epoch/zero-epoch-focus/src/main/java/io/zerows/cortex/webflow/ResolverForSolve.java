@@ -2,15 +2,15 @@ package io.zerows.cortex.webflow;
 
 import io.r2mo.typed.exception.web._500ServerInternalException;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.component.log.LogOf;
 import io.zerows.cortex.metadata.WebEpsilon;
 import io.zerows.epoch.annotations.Contract;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
 
+@Slf4j
 public class ResolverForSolve<T> implements Resolver<T> {
 
-    private static final LogOf LOGGER = LogOf.get(ResolverForSolve.class);
     @Contract
     private transient Solve<T> internalResolver;
 
@@ -21,7 +21,7 @@ public class ResolverForSolve<T> implements Resolver<T> {
         } else {
             // Default content from `configure`
             final String content = context.body().asString();
-            LOGGER.info("( Resolver ) Solve Type: {0}, Content = {1}",
+            log.info("[ ZERO ] ( Resolver ) Solve Type: {}, Content = {}",
                 this.internalResolver.getClass(), content);
             final T processed = this.internalResolver.resolve(content);
             income.setValue(processed);

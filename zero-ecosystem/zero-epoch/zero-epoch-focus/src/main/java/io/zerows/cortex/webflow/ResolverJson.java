@@ -1,10 +1,10 @@
 package io.zerows.cortex.webflow;
 
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.component.log.LogOf;
 import io.zerows.cortex.metadata.WebEpsilon;
 import io.zerows.support.Ut;
 import io.zerows.weaver.ZeroType;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * InJson Resolver
@@ -12,17 +12,18 @@ import io.zerows.weaver.ZeroType;
  * @param <T>
  */
 @SuppressWarnings("unchecked")
+@Slf4j
 public class ResolverJson<T> implements Resolver<T> {
-
-    private static final LogOf LOGGER = LogOf.get(ResolverJson.class);
 
     @Override
     public WebEpsilon<T> resolve(final RoutingContext context,
                                  final WebEpsilon<T> income) {
         // InJson Resolver
         final String content = context.body().asString();
-        LOGGER.info(Ut.isNotNil(content), "( Resolver ) KIncome Type: {0}, Content = \u001b[0;37m{1}\u001b[m",
-            income.getArgType().getName(), content);
+        if (Ut.isNotNil(content)) {
+            log.info("[ ZERO ] ( Resolver ) KIncome Type: {}, Content = [0;37m{}[m",
+                income.getArgType().getName(), content);
+        }
         if (Ut.isNil(content)) {
             // Default Value set for BodyParam
             final T defaultValue = (T) income.getDefaultValue();
