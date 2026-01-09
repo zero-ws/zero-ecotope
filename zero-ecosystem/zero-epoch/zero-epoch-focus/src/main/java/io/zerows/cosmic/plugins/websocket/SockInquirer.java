@@ -3,29 +3,27 @@ package io.zerows.cosmic.plugins.websocket;
 import io.r2mo.function.Fn;
 import io.zerows.epoch.annotations.Subscribe;
 import io.zerows.epoch.configuration.Inquirer;
+import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
 public class SockInquirer implements Inquirer<Set<Remind>> {
 
-    public static final String WEBSOCKET = "( {0} WebSocket ) The Zero system has found " +
-        "{0} components of @EndPoint.";
+    public static final String WEBSOCKET = "[ ZERO ] ( {} WebSocket ) The Zero system has found " +
+        "{} components of @EndPoint.";
 
     @Override
     public Set<Remind> scan(final Set<Class<?>> clazzes) {
         final Set<Class<?>> endpoints = clazzes.stream()
             .filter(this::isSocked)
             .collect(Collectors.toSet());
-        this.logger().info(WEBSOCKET, endpoints.size());
+        log.info(WEBSOCKET, endpoints.size(), endpoints.size());
         final List<SockThread> threadReference = new ArrayList<>();
         /* 2.1.Build Api metadata **/
         for (final Class<?> endpoint : endpoints) {
