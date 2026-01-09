@@ -4,8 +4,8 @@ import io.r2mo.function.Fn;
 import io.reactivex.rxjava3.core.Observable;
 import io.vertx.core.http.HttpMethod;
 import io.zerows.epoch.annotations.Adjust;
-import io.zerows.epoch.annotations.Codex;
 import io.zerows.epoch.annotations.EndPoint;
+import io.zerows.epoch.annotations.Validated;
 import io.zerows.epoch.assembly.exception._40005Exception500EventSource;
 import io.zerows.epoch.assembly.exception._40036Exception500CodexMore;
 import io.zerows.epoch.basicore.WebEvent;
@@ -64,7 +64,7 @@ public class ExtractorEvent implements Extractor<Set<WebEvent>> {
             .flatMap(Observable::fromArray)
             .map(Arrays::asList)
             .map(item -> item.stream().map(Annotation::annotationType).collect(Collectors.toList()))
-            .filter(item -> item.contains(Codex.class))
+            .filter(item -> item.contains(Validated.class))
             .count().blockingGet();
         Fn.jvmKo(methods.length < counter, _40036Exception500CodexMore.class, clazz);
 

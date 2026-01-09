@@ -8,7 +8,7 @@ import io.zerows.cortex.metadata.WebRequest;
 import io.zerows.cortex.metadata.WebRule;
 import io.zerows.cosmic.plugins.validation.Rigor;
 import io.zerows.cosmic.plugins.validation.ValidatorEntry;
-import io.zerows.epoch.annotations.Codex;
+import io.zerows.epoch.annotations.Validated;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Method;
@@ -70,7 +70,7 @@ class SentryPreCodex implements Sentry.Pre {
         int index = 0;
         final Kv<Integer, Class<?>> result = Kv.create();
         for (final Parameter parameter : method.getParameters()) {
-            if (parameter.isAnnotationPresent(Codex.class)) {
+            if (parameter.isAnnotationPresent(Validated.class)) {
                 result.set(index, parameter.getType());
                 break;
             }

@@ -7,7 +7,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.cortex.metadata.WebRequest;
 import io.zerows.cosmic.plugins.validation.ValidatorEntry;
-import io.zerows.epoch.annotations.Codex;
+import io.zerows.epoch.annotations.Validated;
 
 import java.util.function.Supplier;
 
@@ -34,7 +34,7 @@ public interface Sentry<Context> {
 
     /**
      * 专用于检查预处理阶段的参数合法性的前置组件，主要用于验证，配合 Bean Validation 以及 Hibernate Validator 实现参数的各种校验功能，
-     * 除开那些组件以外，还包括 {@link Codex} 注解的支持，这种注解可直接验证 {@link JsonObject} 以及 {@link JsonArray} 类型的参数
+     * 除开那些组件以外，还包括 {@link Validated} 注解的支持，这种注解可直接验证 {@link JsonObject} 以及 {@link JsonArray} 类型的参数
      * 的相关细节，实现对请求参数的全面检查。
      */
     interface Pre {

@@ -3,7 +3,7 @@ package io.zerows.extension.crud.boot;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.cortex.metadata.WebRule;
-import io.zerows.epoch.annotations.Codex;
+import io.zerows.epoch.annotations.Validated;
 import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.epoch.boot.ZeroFs;
 import io.zerows.extension.crud.common.IxConfig;
@@ -25,29 +25,28 @@ import java.util.concurrent.ConcurrentMap;
 @Slf4j
 class IxSetupRule extends IxSetupBase<ConcurrentMap<String, List<WebRule>>> {
 
-    IxSetupRule(final IxConfig config) {
-        super(config);
-    }
-
     /**
      * 全局管理：验证规则处理
      * <pre>
      *     uri --> field-01 --> List<WebRule>
      *             field-02 --> List<WebRule>
      * </pre>
-     * 后期 Worker 验证，这些模块相关的验证规则都是动态注入，此处不需要实现 {@link Codex} 注解之下的验证规则，相反而是使用扩展的方式处理，
-     * 但扩展方式处理的结果和 {@link Codex} 是一致的。
+     * 后期 Worker 验证，这些模块相关的验证规则都是动态注入，此处不需要实现 {@link Validated} 注解之下的验证规则，相反而是使用扩展的方式处理，
+     * 但扩展方式处理的结果和 {@link Validated} 是一致的。
      */
     private static final ConcurrentMap<String, ConcurrentMap<String, List<WebRule>>> STORED = new ConcurrentHashMap<>();
     /**
-     * 由于 {@link Codex} 注解的限制，必须指定配置文件，所以这里统一定义配置的路径用来解决验证问题
+     * 由于 {@link Validated} 注解的限制，必须指定配置文件，所以这里统一定义配置的路径用来解决验证问题
      * <pre>
-     *     1. 旧版的 {@link Codex} 配置路径位于：codex/{uri}
+     *     1. 旧版的 {@link Validated} 配置路径位于：codex/{uri}
      *     2. CRUD 模块配置的部分位于：codex/_crud/????
      * </pre>
      */
     private static final String CFG_VALIDATOR = "codex/_crud/";
     private static final ZeroFs FS = ZeroFs.of();
+    IxSetupRule(final IxConfig config) {
+        super(config);
+    }
 
     @Override
     public Boolean configure(final Set<MDConfiguration> waitFor) {

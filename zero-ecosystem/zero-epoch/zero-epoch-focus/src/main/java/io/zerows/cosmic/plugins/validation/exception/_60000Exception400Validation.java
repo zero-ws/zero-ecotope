@@ -9,9 +9,17 @@ import java.lang.reflect.Method;
  */
 public class _60000Exception400Validation extends VertxWebException {
 
+    private final String messageDisplay;
+
     public _60000Exception400Validation(final Class<?> target,
                                         final Method method,
                                         final String info) {
         super(ERR._60000, target.getName(), method.getName(), info);
+        this.messageDisplay = info;
+    }
+
+    @Override
+    public String getInfo() {
+        return this.messageDisplay;
     }
 }

@@ -3,8 +3,8 @@ package io.zerows.extension.module.rbac.api;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.FileUpload;
 import io.zerows.epoch.annotations.Address;
-import io.zerows.epoch.annotations.Codex;
 import io.zerows.epoch.annotations.EndPoint;
+import io.zerows.epoch.annotations.Validated;
 import io.zerows.program.Ux;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
@@ -26,7 +26,7 @@ public class FileAgent {
     @Path("/user/import")
     @POST
     @Address(Addr.User.IMPORT)
-    public JsonObject importUser(@StreamParam @Codex final FileUpload fileUpload) {
+    public JsonObject importUser(@StreamParam @Validated final FileUpload fileUpload) {
         /* File stored */
         final String filename = fileUpload.uploadedFileName();
         LOG.Web.info(this.getClass(), "User importing, filename = `{0}`, uploaded = `{1}`", fileUpload.fileName(), filename);

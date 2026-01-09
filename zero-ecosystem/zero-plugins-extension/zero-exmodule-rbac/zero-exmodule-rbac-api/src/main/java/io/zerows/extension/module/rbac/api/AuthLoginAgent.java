@@ -2,8 +2,8 @@ package io.zerows.extension.module.rbac.api;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
-import io.zerows.epoch.annotations.Codex;
 import io.zerows.epoch.annotations.EndPoint;
+import io.zerows.epoch.annotations.Validated;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.extension.BodyParam;
@@ -49,7 +49,7 @@ public interface AuthLoginAgent {
     @POST
     @Path("/oauth/authorize")
     @Address(Addr.Auth.AUTHORIZE)
-    JsonObject authorize(@BodyParam @Codex JsonObject data);
+    JsonObject authorize(@BodyParam @Validated JsonObject data);
 
     /*
      * /oauth/token
@@ -63,7 +63,7 @@ public interface AuthLoginAgent {
     @POST
     @Path("/oauth/token")
     @Address(Addr.Auth.TOKEN)
-    JsonObject token(@BodyParam @Codex JsonObject data);
+    JsonObject token(@BodyParam @Validated JsonObject data);
 
     // --------------------- Image Code ------------------------
 
