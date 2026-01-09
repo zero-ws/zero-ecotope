@@ -79,6 +79,11 @@
                 <artifactId>zero-boot-epoch-actor</artifactId>
                 <version>1.0.0</version>
             </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-boot-extension-actor</artifactId>
+                <version>1.0.0</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>
