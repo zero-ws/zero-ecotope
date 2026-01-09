@@ -165,6 +165,8 @@ public class VertxApplication {
             runInternal(runVertx, VertxComponent.AGENT);
 
             runInternal(runVertx, VertxComponent.WORKER);
+
+            runInternal(runVertx, VertxComponent.VALIDATED);
         });
     }
 

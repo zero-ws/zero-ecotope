@@ -24,6 +24,7 @@ class LinearCenter {
         {
             this.put(VertxComponent.AGENT, LinearAgent::new);
             this.put(VertxComponent.WORKER, LinearWorker::new);
+            this.put(VertxComponent.VALIDATED, LinearValidated::new);
         }
     };
 

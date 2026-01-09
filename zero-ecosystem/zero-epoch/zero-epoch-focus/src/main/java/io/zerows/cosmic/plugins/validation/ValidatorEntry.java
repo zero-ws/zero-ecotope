@@ -41,10 +41,10 @@ public class ValidatorEntry {
     /**
      * Validate the method parameters based on javax.validation: Hibernate Validator.
      *
-     * @param proxy  The checked ofMain object.
-     * @param method The checked ofMain method.
-     * @param args   The checked ofMain method's parameters.
-     * @param <T>    The ofMain object type: Generic types.
+     * @param proxy  The checked object.
+     * @param method The checked method.
+     * @param args   The checked method's parameters.
+     * @param <T>    The object type: Generic types.
      */
     public <T> void verifyMethod(
         final T proxy,
@@ -105,24 +105,23 @@ public class ValidatorEntry {
     private Map<String, List<WebRule>> buildRulers(final String key) {
         if (RULERS.containsKey(key)) {
             return RULERS.get(key);
-        } else {
-            final JsonObject rule = STORED.get(key); // ZeroCodex.getCodex(key);
-            final Map<String, List<WebRule>> ruler
-                = new LinkedHashMap<>();
-            if (null != rule) {
-                Ut.itJObject(rule, (value, field) -> {
-                    // Checked valid rule config
-                    final List<WebRule> rulers = this.buildRulers(value);
-                    if (!rulers.isEmpty()) {
-                        ruler.put(field, rulers);
-                    }
-                });
-                if (!ruler.isEmpty()) {
-                    RULERS.put(key, ruler);
-                }
-            }
-            return ruler;
         }
+
+        final JsonObject rule = STORED.get(key); // ZeroCodex.getCodex(key);
+        final Map<String, List<WebRule>> ruler = new LinkedHashMap<>();
+        if (null != rule) {
+            Ut.itJObject(rule, (value, field) -> {
+                // Checked valid rule config
+                final List<WebRule> rulers = this.buildRulers(value);
+                if (!rulers.isEmpty()) {
+                    ruler.put(field, rulers);
+                }
+            });
+            if (!ruler.isEmpty()) {
+                RULERS.put(key, ruler);
+            }
+        }
+        return ruler;
     }
 
     private List<WebRule> buildRulers(final Object config) {

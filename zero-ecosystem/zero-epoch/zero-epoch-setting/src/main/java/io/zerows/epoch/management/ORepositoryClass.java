@@ -1,17 +1,7 @@
 package io.zerows.epoch.management;
 
-import io.zerows.epoch.annotations.Actor;
-import io.zerows.epoch.annotations.Agent;
-import io.zerows.epoch.annotations.EndPoint;
-import io.zerows.epoch.annotations.Queue;
-import io.zerows.epoch.annotations.Worker;
-import io.zerows.epoch.assembly.InquirerClassActor;
-import io.zerows.epoch.assembly.InquirerClassAddOn;
-import io.zerows.epoch.assembly.InquirerClassAgent;
-import io.zerows.epoch.assembly.InquirerClassEndPoint;
-import io.zerows.epoch.assembly.InquirerClassIpc;
-import io.zerows.epoch.assembly.InquirerClassQueue;
-import io.zerows.epoch.assembly.InquirerClassWorker;
+import io.zerows.epoch.annotations.*;
+import io.zerows.epoch.assembly.*;
 import io.zerows.epoch.configuration.Inquirer;
 import io.zerows.platform.enums.VertxComponent;
 import io.zerows.platform.management.AbstractAmbiguity;
@@ -88,18 +78,23 @@ public class ORepositoryClass extends AbstractAmbiguity implements ORepository {
             },
             // Dot / @Worker
             () -> {
-                final Inquirer<Set<Class<?>>> workers = Ut.singleton(InquirerClassWorker.class);
-                processor.compile(VertxComponent.WORKER, workers::scan);
+                final Inquirer<Set<Class<?>>> worker = Ut.singleton(InquirerClassWorker.class);
+                processor.compile(VertxComponent.WORKER, worker::scan);
             },
             // Dot / @Agent
             () -> {
-                final Inquirer<Set<Class<?>>> agents = Ut.singleton(InquirerClassAgent.class);
-                processor.compile(VertxComponent.AGENT, agents::scan);
+                final Inquirer<Set<Class<?>>> agent = Ut.singleton(InquirerClassAgent.class);
+                processor.compile(VertxComponent.AGENT, agent::scan);
             },
             // Dot / @Agent ( type = ServerType )
             () -> {
-                final Inquirer<Set<Class<?>>> rpcs = Ut.singleton(InquirerClassIpc.class);
-                processor.compile(VertxComponent.IPC, rpcs::scan);
+                final Inquirer<Set<Class<?>>> rpc = Ut.singleton(InquirerClassIpc.class);
+                processor.compile(VertxComponent.IPC, rpc::scan);
+            },
+            // @Validated ( 留待后续扩展 )
+            () -> {
+                final Inquirer<Set<Class<?>>> validated = Ut.singleton(InquirerClassValidated.class);
+                processor.compile(VertxComponent.VALIDATED, validated::scan);
             }
         );
         final long end = System.currentTimeMillis();

@@ -14,6 +14,6 @@ public enum VertxComponent {
     ENDPOINT,   //  o            x         @EndPoint    自定义 Agent  内置
     WORKER,     //  o            o         @Worker      Verticle Worker
     AGENT,      //  o            o         @Agent       Verticle Agent
-    CODEX,      //  x            o         @Codex       验证规则
+    VALIDATED,  //  x            o         @Validated   验证规则
     IPC,        //  x            o         @Agent       gRPC 专用 ( type = ServerType.IPC )
 }
