@@ -22,7 +22,7 @@ public class HSDimNorm extends AbstractAdmit {
 
     @Override
     public Future<JsonObject> compile(final KPermit permit, final JsonObject request) {
-        return Fx.choiceJ(request, KName.ITEMS,
+        return Fx.combineJ(request, KName.ITEMS,
             itemJ -> {
                 final Class<?> daoCls = Ut.valueC(itemJ, KName.DAO, null);
                 if (Objects.isNull(daoCls)) {

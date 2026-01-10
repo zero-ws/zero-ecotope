@@ -25,11 +25,7 @@ import io.zerows.support.base.FnBase;
 import lombok.extern.slf4j.Slf4j;
 
 import java.sql.Connection;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -131,7 +127,7 @@ public class ServiceEnvironment {
     private Future<Boolean> initService(final Vertx vertx) {
         final IServiceDao serviceDao = new IServiceDao(this.database.getConfiguration(), vertx);
         return serviceDao.findManyBySigma(this.condition).compose(services -> {
-            this.serviceMap.putAll(Ut.elementZip(services, IService::getKey, service -> service));
+            this.serviceMap.putAll(Ut.elementMap(services, IService::getKey, service -> service));
             log.info("{} ---> 服务环境初始化完成！！！数量 = {}", KeConstant.K_PREFIX_BOOT, this.serviceMap.size());
             return Ux.future(Boolean.TRUE);
         });
@@ -146,7 +142,7 @@ public class ServiceEnvironment {
              * serviceKey -> service ( Cached )
              */
             return jobDao.findManyBySigma(this.condition).compose(jobList -> {
-                final ConcurrentMap<String, IJob> jobMap = Ut.elementZip(jobList, IJob::getServiceId, job -> job);
+                final ConcurrentMap<String, IJob> jobMap = Ut.elementMap(jobList, IJob::getServiceId, job -> job);
                 /* Job / Service Bind into data here */
                 jobMap.keySet().stream()
                     .map(serviceId -> new JtJob(jobMap.get(serviceId), this.serviceMap.get(serviceId))
@@ -171,7 +167,7 @@ public class ServiceEnvironment {
              * serviceKey -> service ( Cached )
              */
             return apiDao.findManyBySigma(this.condition).compose(apiList -> {
-                final ConcurrentMap<String, IApi> apiMap = Ut.elementZip(apiList, IApi::getServiceId, api -> api);
+                final ConcurrentMap<String, IApi> apiMap = Ut.elementMap(apiList, IApi::getServiceId, api -> api);
                 /* Uri / Service Bind into data here */
                 apiMap.keySet().stream()
                     .map(serviceId -> new JtUri(apiMap.get(serviceId), this.serviceMap.get(serviceId))
