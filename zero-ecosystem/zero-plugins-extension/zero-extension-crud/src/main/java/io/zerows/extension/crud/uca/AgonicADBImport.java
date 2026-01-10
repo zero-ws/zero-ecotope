@@ -9,7 +9,7 @@ import io.zerows.extension.crud.common.em.QrType;
 import io.zerows.extension.crud.uca.input.Pre;
 import io.zerows.platform.enums.typed.ChangeFlag;
 import io.zerows.program.Ux;
-import io.zerows.support.fn.Fx;
+import io.zerows.support.Fx;
 
 import java.util.ArrayList;
 import java.util.List;

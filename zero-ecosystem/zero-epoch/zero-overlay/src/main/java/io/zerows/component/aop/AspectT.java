@@ -1,18 +1,14 @@
 package io.zerows.component.aop;
 
+import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.constant.VName;
 import io.zerows.platform.enums.typed.ChangeFlag;
-import io.zerows.support.base.FnBase;
 import io.zerows.support.base.UtBase;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -37,7 +33,7 @@ class AspectT {
                 return Future.succeededFuture(supplierDefault.get());
             }
             // Before
-            return FnBase.passion(input,
+            return FnVertx.passion(input,
                 this.plugin(() -> this.config.beforeQueue(input), Before::types, type));
         };
     }
@@ -51,10 +47,10 @@ class AspectT {
                 return Future.succeededFuture(supplierDefault.get());
             }
             // After
-            return FnBase.passion(input,
+            return FnVertx.passion(input,
                     this.plugin(() -> this.config.afterQueue(input), After::types, type))
                 // Job
-                .compose(processed -> FnBase.parallel(processed,
+                .compose(processed -> FnVertx.parallel(processed,
                     this.plugin(() -> this.config.afterJob(input), After::types, type)));
         };
     }
@@ -71,17 +67,17 @@ class AspectT {
             // Before
             return Future.succeededFuture(input)
                 // Run Before
-                .compose(processed -> FnBase.passion(processed,
+                .compose(processed -> FnVertx.passion(processed,
                     this.plugin(() -> this.config.beforeQueue(input), Before::types, type)))
                 // KRunner
                 .compose(inputT -> runner.apply(inputT)
                     .compose(processed -> AspectData.build(inputT, processed))
                 )
                 // After
-                .compose(processed -> FnBase.passion(processed,
+                .compose(processed -> FnVertx.passion(processed,
                     this.plugin(() -> this.config.afterQueue(input), After::types, type)))
                 // Job
-                .compose(processed -> FnBase.parallel(processed,
+                .compose(processed -> FnVertx.parallel(processed,
                     this.plugin(() -> this.config.afterJob(input), After::types, type)));
         };
     }

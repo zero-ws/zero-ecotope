@@ -10,8 +10,8 @@ import io.zerows.extension.module.mbsecore.api.BeforePlugin;
 import io.zerows.extension.module.mbsecore.metadata.builtin.DataAtom;
 import io.zerows.program.Ux;
 import io.zerows.specification.modeling.HRecord;
+import io.zerows.support.Fx;
 import io.zerows.support.Ut;
-import io.zerows.support.fn.Fx;
 
 import java.util.Objects;
 import java.util.Set;

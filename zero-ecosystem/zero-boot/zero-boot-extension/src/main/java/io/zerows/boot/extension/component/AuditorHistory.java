@@ -8,14 +8,10 @@ import io.zerows.boot.extension.util.Ox;
 import io.zerows.epoch.constant.KName;
 import io.zerows.platform.enums.typed.ChangeFlag;
 import io.zerows.program.Ux;
+import io.zerows.support.Fx;
 import io.zerows.support.Ut;
-import io.zerows.support.fn.Fx;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Queue;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
@@ -89,7 +85,7 @@ public class AuditorHistory extends AuditorBase {
 
     /**
      * 创建Active的记录
-     *
+     * <p>
      * 1. 默认：Active记录，active = true
      * 2. 待确认：Inactive记录，active = false
      *

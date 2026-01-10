@@ -8,8 +8,8 @@ import io.zerows.extension.module.mbsecore.api.AspectPlugin;
 import io.zerows.extension.module.mbsecore.metadata.builtin.DataAtom;
 import io.zerows.extension.module.mbsecore.metadata.data.DataGroup;
 import io.zerows.program.Ux;
+import io.zerows.support.Fx;
 import io.zerows.support.Ut;
-import io.zerows.support.fn.Fx;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,13 +21,13 @@ import java.util.function.Supplier;
 
 /**
  * ## 插件工具
- *
+ * <p>
  * ### 1. 基本介绍
- *
+ * <p>
  * Ox平台专用插件处理工具。
- *
+ * <p>
  * ### 2. 插件表
- *
+ * <p>
  * - 数据连接池插件：{@link DBS}类型。
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
@@ -47,7 +47,6 @@ final class OxPlugin {
      * @param input    `executor`的输入
      * @param executor {@link Function} 外部传入执行器
      * @param <T>      `executor`执行器处理类型
-     *
      * @return `executor`执行结果
      */
     static <T> Future<T> runSafe(final Class<?> clazz, final T input, final Function<T, Future<T>> executor) {
@@ -65,7 +64,6 @@ final class OxPlugin {
      * @param input    `executor`的输入
      * @param supplier {@link Supplier} 外部传入数据构造器
      * @param <T>      `executor`执行器处理类型
-     *
      * @return `executor`执行结果
      */
     static <T> Future<T> runSafe(final Class<?> clazz, final T input, final Supplier<T> supplier) {
@@ -85,7 +83,6 @@ final class OxPlugin {
      * @param input `executor`的输入
      * @param ex    {@link Throwable} 异常信息
      * @param <T>   返回的真实数据类型
-     *
      * @return {@link Future}
      */
     private static <T> Future<T> runSafe(final Class<?> clazz, final T input, final Throwable ex) {
@@ -98,13 +95,12 @@ final class OxPlugin {
 
     /**
      * 分组运行器，将数据分组后执行分组过后的运行。
-     *
+     * <p>
      * - 每一组有相同的模型定义{@link DataAtom}。
      * - 每一组有相同的数据输入{@link JsonArray}
      *
      * @param groupSet {@link Set}<{@link DataGroup}> 分组集合
      * @param consumer {@link BiFunction} 双输入函数
-     *
      * @return {@link Future}<{@link JsonArray}>
      */
     static Future<JsonArray> runGroup(final Set<DataGroup> groupSet,
@@ -122,7 +118,6 @@ final class OxPlugin {
      * @param supplier {@link Supplier} 插件提取器，提取{@link AspectPlugin}插件
      * @param atom     {@link DataAtom} 模型定义
      * @param executor {@link Function} 函数执行器
-     *
      * @return {@link Future}<{@link JsonObject}>返回执行的最终结果
      */
     static Future<JsonObject> runAop(final JsonObject input, final JsonObject config,

@@ -13,8 +13,8 @@ import io.zerows.extension.module.modulat.domain.tables.pojos.BBag;
 import io.zerows.platform.enums.modeling.EmModel;
 import io.zerows.plugins.monitor.client.QuotaMetric;
 import io.zerows.program.Ux;
+import io.zerows.support.Fx;
 import io.zerows.support.Ut;
-import io.zerows.support.fn.Fx;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Set;

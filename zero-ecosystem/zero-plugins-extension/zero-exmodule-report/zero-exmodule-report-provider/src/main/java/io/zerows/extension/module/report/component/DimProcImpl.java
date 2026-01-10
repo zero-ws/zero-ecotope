@@ -16,9 +16,8 @@ import io.zerows.extension.module.report.domain.tables.pojos.KpDimension;
 import io.zerows.extension.module.report.exception._80703Exception400ReportDimType;
 import io.zerows.extension.module.report.plugins.RQueryComponent;
 import io.zerows.specification.development.compiled.HBundle;
+import io.zerows.support.Fx;
 import io.zerows.support.Ut;
-import io.zerows.support.base.FnBase;
-import io.zerows.support.fn.Fx;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +58,7 @@ class DimProcImpl extends DimProcBase {
                     futureList.add(this.dimAsync(params, source, dimension));
                 }
             });
-            return FnBase.combineT(futureList);
+            return Fx.combineT(futureList);
         });
     }
 

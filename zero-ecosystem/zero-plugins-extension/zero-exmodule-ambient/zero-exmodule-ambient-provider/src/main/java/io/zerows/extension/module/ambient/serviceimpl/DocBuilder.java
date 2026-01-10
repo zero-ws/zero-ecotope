@@ -13,8 +13,8 @@ import io.zerows.extension.module.ambient.domain.tables.daos.XCategoryDao;
 import io.zerows.extension.module.ambient.servicespec.DocBStub;
 import io.zerows.extension.skeleton.spi.ExArbor;
 import io.zerows.program.Ux;
+import io.zerows.support.Fx;
 import io.zerows.support.Ut;
-import io.zerows.support.fn.Fx;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;

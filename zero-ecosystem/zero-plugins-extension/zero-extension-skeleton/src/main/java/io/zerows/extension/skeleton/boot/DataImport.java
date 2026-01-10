@@ -15,8 +15,8 @@ import io.zerows.plugins.cache.SharedClient;
 import io.zerows.plugins.excel.ExcelActor;
 import io.zerows.plugins.excel.ExcelClient;
 import io.zerows.program.Ux;
+import io.zerows.support.Fx;
 import io.zerows.support.Ut;
-import io.zerows.support.base.FnBase;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -75,7 +75,6 @@ public class DataImport {
      *
      * @param folder 目录
      * @param prefix 前缀
-     *
      * @return {@link Future} 异步结果
      */
     public Future<Boolean> loadAsync(final String folder, final String prefix) {
@@ -109,7 +108,6 @@ public class DataImport {
      *
      * @param folder 目录
      * @param prefix 前缀
-     *
      * @return {@link Future} 异步结果
      */
     public Future<Boolean> loadWithAsync(final String folder, final String prefix) {
@@ -172,7 +170,7 @@ public class DataImport {
             .map(filename -> this.execute(filename, failureMap))
             .forEach(files::add);
 
-        return FnBase.combineT(files)
+        return Fx.combineT(files)
             .map(nil -> Boolean.TRUE)
             .recover(error -> {
                 if (!failureMap.isEmpty()) {

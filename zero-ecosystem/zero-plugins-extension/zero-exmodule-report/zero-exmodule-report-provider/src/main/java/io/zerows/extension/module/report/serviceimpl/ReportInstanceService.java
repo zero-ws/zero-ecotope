@@ -16,8 +16,8 @@ import io.zerows.extension.module.report.domain.tables.pojos.KpReport;
 import io.zerows.extension.module.report.domain.tables.pojos.KpReportInstance;
 import io.zerows.extension.module.report.servicespec.ReportInstanceStub;
 import io.zerows.program.Ux;
+import io.zerows.support.Fx;
 import io.zerows.support.Ut;
-import io.zerows.support.base.FnBase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -173,7 +173,7 @@ public class ReportInstanceService implements ReportInstanceStub {
             final KpFeature feature = generation.featureGlobal(featureName);
             futures.add(input.prepare(params, configureJ, feature));
         });
-        return FnBase.combineT(futures).compose(processed -> {
+        return Fx.combineT(futures).compose(processed -> {
             final ConcurrentMap<String, Object> paramMap = new ConcurrentHashMap<>();
             processed.forEach(kv -> {
                 if (paramMap.containsKey(kv.key())) {

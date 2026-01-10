@@ -11,7 +11,7 @@ import io.zerows.extension.module.ambient.servicespec.DatumStub;
 import io.zerows.platform.enums.EmDS;
 import io.zerows.platform.metadata.KDictConfig;
 import io.zerows.program.Ux;
-import io.zerows.support.fn.Fx;
+import io.zerows.support.Fx;
 
 import java.util.ArrayList;
 import java.util.List;

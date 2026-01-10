@@ -15,8 +15,8 @@ import io.zerows.extension.module.workflow.plugins.AfterActivityTabb;
 import io.zerows.platform.constant.VValue;
 import io.zerows.platform.enums.typed.ChangeFlag;
 import io.zerows.program.Ux;
+import io.zerows.support.Fx;
 import io.zerows.support.Ut;
-import io.zerows.support.fn.Fx;
 import org.camunda.bpm.engine.task.Task;
 
 import java.util.ArrayList;
@@ -28,10 +28,10 @@ import static io.zerows.extension.module.workflow.boot.Wf.LOG;
 /**
  * Tracker for different component history record
  * This tracker implementation is based join X_ACTIVITY_RULE
- *
+ * <p>
  * 1) The default logging will be put into camunda
  * 2) Tracker is for income activities
- *
+ * <p>
  * Internal call Journal interface for `zero-ambient` activity generation instead.
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>

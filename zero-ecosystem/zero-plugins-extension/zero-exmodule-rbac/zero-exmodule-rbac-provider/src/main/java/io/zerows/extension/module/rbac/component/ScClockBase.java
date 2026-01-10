@@ -5,7 +5,7 @@ import io.zerows.platform.management.AbstractAmbiguity;
 import io.zerows.plugins.cache.HMM;
 import io.zerows.program.Ux;
 import io.zerows.specification.development.compiled.HBundle;
-import io.zerows.support.base.FnBase;
+import io.zerows.support.Fx;
 
 import java.util.*;
 
@@ -46,7 +46,7 @@ abstract class ScClockBase<T> extends AbstractAmbiguity implements ScClock<T> {
     public Future<Boolean> remove(final String... keys) {
         final List<Future<Boolean>> waitingQ = new ArrayList<>();
         Arrays.asList(keys).forEach(key -> waitingQ.add(this.ofCache().remove(key).compose(nil -> Ux.futureT())));
-        return FnBase.combineB(waitingQ);
+        return Fx.combineB(waitingQ);
     }
 
     @Override

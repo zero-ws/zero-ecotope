@@ -20,8 +20,8 @@ import io.zerows.platform.exception._40103Exception500ConnectAmbient;
 import io.zerows.program.Ux;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.app.HArk;
+import io.zerows.support.Fx;
 import io.zerows.support.Ut;
-import io.zerows.support.base.FnBase;
 import lombok.extern.slf4j.Slf4j;
 
 import java.sql.Connection;
@@ -120,7 +120,7 @@ public class ServiceEnvironment {
              * IJob + IService
              */
             futures.add(this.initJobs(vertx));
-            return FnBase.combineT(futures).compose(res -> Ux.future(this));
+            return Fx.combineT(futures).compose(res -> Ux.future(this));
         });
     }
 

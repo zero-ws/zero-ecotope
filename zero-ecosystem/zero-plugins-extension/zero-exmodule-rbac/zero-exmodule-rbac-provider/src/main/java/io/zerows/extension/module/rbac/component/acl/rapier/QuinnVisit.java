@@ -13,8 +13,8 @@ import io.zerows.extension.module.rbac.domain.tables.pojos.SResource;
 import io.zerows.extension.module.rbac.domain.tables.pojos.SView;
 import io.zerows.extension.module.rbac.domain.tables.pojos.SVisitant;
 import io.zerows.program.Ux;
+import io.zerows.support.Fx;
 import io.zerows.support.Ut;
-import io.zerows.support.base.FnBase;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -111,7 +111,7 @@ public class QuinnVisit implements Quinn {
             final List<Future<List<SVisitant>>> futures = new ArrayList<>();
             futures.add(jq.insertAsync(qAdd));
             futures.add(jq.updateAsync(qUp));
-            return FnBase.combineT(futures).compose(matrix -> {
+            return Fx.combineT(futures).compose(matrix -> {
                 final List<SVisitant> visitants = new ArrayList<>();
                 matrix.forEach(visitants::addAll);
                 return Ux.future(visitants);

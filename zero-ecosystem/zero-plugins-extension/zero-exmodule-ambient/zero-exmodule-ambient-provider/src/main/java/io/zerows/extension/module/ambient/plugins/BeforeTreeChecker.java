@@ -8,7 +8,7 @@ import io.zerows.cortex.sdk.HocTrue;
 import io.zerows.extension.module.ambient.domain.tables.pojos.XCategory;
 import io.zerows.platform.enums.typed.ChangeFlag;
 import io.zerows.specification.atomic.HReturn;
-import io.zerows.support.base.FnBase;
+import io.zerows.support.Fx;
 
 import java.util.Set;
 
@@ -26,7 +26,7 @@ public class BeforeTreeChecker implements Before {
     @Override
     public Future<JsonObject> beforeAsync(final JsonObject data, final JsonObject config) {
         // 全为 false 过
-        return FnBase.passNone(data, HocTrue.web403Link(this.getClass(), data), Set.of(
+        return Fx.passNone(data, HocTrue.web403Link(this.getClass(), data), Set.of(
             (input) -> this.checker.executeJAsync(data, config)
         ));
     }
@@ -34,7 +34,7 @@ public class BeforeTreeChecker implements Before {
     @Override
     public Future<JsonArray> beforeAsync(final JsonArray data, final JsonObject config) {
         // 全为 false 过
-        return FnBase.passNone(data, HocTrue.web403Link(this.getClass(), data), Set.of(
+        return Fx.passNone(data, HocTrue.web403Link(this.getClass(), data), Set.of(
             (input) -> this.checker.executeJAsync(data, config)
         ));
     }

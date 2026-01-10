@@ -14,7 +14,7 @@ import io.zerows.extension.module.finance.domain.tables.pojos.FBillItem;
 import io.zerows.extension.module.finance.domain.tables.pojos.FPreAuthorize;
 import io.zerows.extension.module.finance.servicespec.InBillStub;
 import io.zerows.program.Ux;
-import io.zerows.support.fn.Fx;
+import io.zerows.support.Fx;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

@@ -8,8 +8,8 @@ import io.zerows.cosmic.plugins.job.metadata.Mission;
 import io.zerows.epoch.annotations.Worker;
 import io.zerows.platform.constant.VValue;
 import io.zerows.platform.enums.EmService;
+import io.zerows.support.Fx;
 import io.zerows.support.Ut;
-import io.zerows.support.base.FnBase;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -52,7 +52,7 @@ public class ZeroScheduler extends AbstractVerticle {
                 /* Start each job here by different types */
                 final List<Future<Void>> futures = new ArrayList<>();
                 missions.forEach(mission -> futures.add(this.start(mission)));
-                FnBase.combineT(futures).onSuccess(nil -> log.info(JOB_STARTED));
+                Fx.combineT(futures).onSuccess(nil -> log.info(JOB_STARTED));
             }
         } else {
             log.info(JOB_CONFIG_NULL);

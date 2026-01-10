@@ -4,19 +4,15 @@ import io.r2mo.typed.common.Kv;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.MMComponent;
+import io.zerows.extension.module.mbsecore.domain.tables.pojos.MAttribute;
 import io.zerows.extension.module.mbsecore.metadata.Model;
 import io.zerows.extension.module.mbsecore.metadata.builtin.DataAtom;
 import io.zerows.extension.module.mbsecore.metadata.element.DataTpl;
-import io.zerows.extension.module.mbsecore.domain.tables.pojos.MAttribute;
 import io.zerows.specification.modeling.HAttribute;
 import io.zerows.specification.modeling.HRecord;
-import io.zerows.specification.modeling.property.IComponent;
-import io.zerows.specification.modeling.property.INormalizer;
-import io.zerows.specification.modeling.property.IoSource;
-import io.zerows.specification.modeling.property.OComponent;
-import io.zerows.specification.modeling.property.OExpression;
+import io.zerows.specification.modeling.property.*;
+import io.zerows.support.TiConsumer;
 import io.zerows.support.Ut;
-import io.zerows.support.fn.TiConsumer;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -26,7 +22,7 @@ import java.util.function.Function;
 
 /**
  * ## Manager of ...
- *
+ * <p>
  * This class will parse DataTpl for standard workflow
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
@@ -37,7 +33,6 @@ class IoArranger {
      * Extract `IComponent` here.
      *
      * @param tpl {@link DataTpl}
-     *
      * @return {@link java.util.concurrent.ConcurrentMap} The JComponent map for each field.
      */
     static ConcurrentMap<String, MMComponent> pluginIn(final DataTpl tpl) {
@@ -48,7 +43,6 @@ class IoArranger {
      * Extract `IComponent` here. ( Before )
      *
      * @param tpl {@link DataTpl}
-     *
      * @return {@link java.util.concurrent.ConcurrentMap} The JComponent map for each field.
      */
     static ConcurrentMap<String, MMComponent> pluginInBefore(final DataTpl tpl) {
@@ -59,7 +53,6 @@ class IoArranger {
      * Extract `IComponent` here. ( After )
      *
      * @param tpl {@link DataTpl}
-     *
      * @return {@link java.util.concurrent.ConcurrentMap} The JComponent map for each field.
      */
     static ConcurrentMap<String, MMComponent> pluginInAfter(final DataTpl tpl) {
@@ -70,7 +63,6 @@ class IoArranger {
      * Extract `OComponent` here.
      *
      * @param tpl {@link DataTpl}
-     *
      * @return {@link java.util.concurrent.ConcurrentMap} The JComponent map for each field.
      */
     static ConcurrentMap<String, MMComponent> pluginOut(final DataTpl tpl) {
@@ -81,7 +73,6 @@ class IoArranger {
      * Extract `OComponent` here.( Before )
      *
      * @param tpl {@link DataTpl}
-     *
      * @return {@link java.util.concurrent.ConcurrentMap} The JComponent map for each field.
      */
     static ConcurrentMap<String, MMComponent> pluginOutBefore(final DataTpl tpl) {
@@ -92,7 +83,6 @@ class IoArranger {
      * Extract `OComponent` here.( After )
      *
      * @param tpl {@link DataTpl}
-     *
      * @return {@link java.util.concurrent.ConcurrentMap} The JComponent map for each field.
      */
     static ConcurrentMap<String, MMComponent> pluginOutAfter(final DataTpl tpl) {
@@ -103,7 +93,6 @@ class IoArranger {
      * Extract `INormalizer` here.
      *
      * @param tpl {@link DataTpl}
-     *
      * @return {@link java.util.concurrent.ConcurrentMap} The JComponent map for each field.
      */
     static ConcurrentMap<String, MMComponent> pluginNormalize(final DataTpl tpl) {
@@ -114,7 +103,6 @@ class IoArranger {
      * Extract `OExpression` here.
      *
      * @param tpl {@link DataTpl}
-     *
      * @return {@link java.util.concurrent.ConcurrentMap} The JComponent map for each field.
      */
     static ConcurrentMap<String, MMComponent> pluginExpression(final DataTpl tpl) {
@@ -125,7 +113,6 @@ class IoArranger {
      * Not AOP configuration ( sourceField != BEFORE && AFTER )
      *
      * @param attribute {@link MAttribute} Input attribute object that will be checked.
-     *
      * @return {@link java.lang.Boolean}
      */
     private static boolean notAop(final MAttribute attribute) {
@@ -136,7 +123,6 @@ class IoArranger {
      * AOP configuration ( sourceField == BEFORE || AFTER )
      *
      * @param attribute {@link MAttribute} Input attribute object that will be checked.
-     *
      * @return {@link java.lang.Boolean}
      */
     private static boolean isAop(final MAttribute attribute) {
@@ -147,7 +133,6 @@ class IoArranger {
      * AOP configuration ( sourceField == BEFORE  )
      *
      * @param attribute {@link MAttribute} Input attribute object that will be checked.
-     *
      * @return {@link java.lang.Boolean}
      */
     private static boolean isAopBefore(final MAttribute attribute) {
@@ -159,7 +144,6 @@ class IoArranger {
      * AOP configuration ( sourceField == BEFORE  )
      *
      * @param attribute {@link MAttribute} Input attribute object that will be checked.
-     *
      * @return {@link java.lang.Boolean}
      */
     private static boolean isAopAfter(final MAttribute attribute) {
@@ -173,7 +157,6 @@ class IoArranger {
      * @param fnComponent  {@link java.util.function.Function} The component name extract from.
      * @param fnFilter     {@link java.util.function.Function} The filter for attribute processing.
      * @param interfaceCls {@link java.lang.Class} required interface class
-     *
      * @return {@link java.util.concurrent.ConcurrentMap} The JComponent map for each field.
      */
     private static ConcurrentMap<String, MMComponent> extractPlugin(
@@ -207,10 +190,10 @@ class IoArranger {
 
     /**
      * Extract component configuration from attribute `sourceConfig` instead of other place.
-     *
+     * <p>
      * 1. sourceConfig stored component configuration.
      * 2. The json configuration came from `field = componentCls`.
-     *
+     * <p>
      * ```json
      * // <pre><code class="json">
      * {
@@ -230,7 +213,6 @@ class IoArranger {
      *
      * @param attribute    {@link MAttribute} Processed attribute that are related to `M_ATTRIBUTE`
      * @param componentCls {@link java.lang.Class} The component class of type
-     *
      * @return {@link JsonObject} The extracted configuration of current component.
      */
     private static JsonObject componentConfig(final MAttribute attribute, final DataAtom atom, final Class<?> componentCls) {

@@ -20,8 +20,8 @@ import io.zerows.mbse.metadata.KQr;
 import io.zerows.platform.metadata.KRef;
 import io.zerows.program.Ux;
 import io.zerows.spi.HPI;
+import io.zerows.support.Fx;
 import io.zerows.support.Ut;
-import io.zerows.support.fn.Fx;
 
 import java.util.Collection;
 import java.util.List;
@@ -115,7 +115,6 @@ class TwineExtension implements ScTwine<SUser> {
      * </code></pre>
      *
      * @param user 读取的用户对象
-     *
      * @return 返回追加到响应数据中的扩展信息
      */
     @Override
