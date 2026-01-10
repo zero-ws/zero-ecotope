@@ -16,7 +16,6 @@ import io.zerows.extension.skeleton.spi.ExTodo;
 import io.zerows.program.Ux;
 import io.zerows.spi.HPI;
 import io.zerows.support.Ut;
-import io.zerows.support.fn.Fx;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDateTime;
@@ -93,7 +92,10 @@ public class TodoService implements TodoStub {
         return DB.on(WTodoDao.class)
             .<WTodo>fetchInAsync(KName.KEY, Ut.toJArray(keys))
             .compose(Ux::futureA)
-            .compose(Fx.ofJArray((todoArray) -> {
+            .compose(todoArray -> {
+                if (Ut.isNil(todoArray)) {
+                    return Ux.futureA();
+                }
                 /*
                  * Update status of WTodo
                  */
@@ -109,7 +111,7 @@ public class TodoService implements TodoStub {
                 return DB.on(WTodoDao.class)
                     .updateAsync(todoList)
                     .compose(Ux::futureA);
-            }));
+            });
     }
 
     @Override
@@ -117,7 +119,7 @@ public class TodoService implements TodoStub {
         return DB.on(WTodoDao.class)
             .<WTodo>fetchByIdAsync(key)
             .compose(Ux::futureJ)
-            .compose(Fx.ofJObject((todoJson) -> {
+            .compose(todoJson -> {
                 /*
                  * Update status of WTodo
                  */
@@ -128,7 +130,7 @@ public class TodoService implements TodoStub {
                 return DB.on(WTodoDao.class)
                     .updateAsync(todo)
                     .compose(Ux::futureJ);
-            }));
+            });
     }
 
     private WTodo combineTodo(final WTodo todo, final JsonObject params) {
@@ -171,18 +173,19 @@ public class TodoService implements TodoStub {
         return DB.on(WTodoDao.class)
             .<WTodo>fetchByIdAsync(key)
             .compose(Ux::futureJ)
-            .compose(Fx.ofJObject((todo) -> HPI.of(ExTodo.class).waitAsync(
-                    channel -> {
-                        log.info("{} Todo Channel 组件：{}", KeConstant.K_PREFIX_WEB, channel.getClass().getName());
-                        /*
-                         * X_TODO channel and data merged.
-                         */
-                        final JsonObject params = Ut.elementSubset(todo,
-                            KName.MODEL_ID, KName.MODEL_CATEGORY, KName.MODEL_KEY, KName.SIGMA);
-                        return channel.fetchAsync(key, params).compose(Fx.ofMerge(todo));
-                    },
-                    () -> todo
-                )
-            ));
+            .compose(todo -> HPI.of(ExTodo.class).waitAsync(
+                channel -> {
+                    log.info("{} Todo Channel 组件：{}", KeConstant.K_PREFIX_WEB, channel.getClass().getName());
+                    /*
+                     * X_TODO channel and data merged.
+                     */
+                    final JsonObject params = Ut.elementSubset(todo,
+                        KName.MODEL_ID, KName.MODEL_CATEGORY, KName.MODEL_KEY, KName.SIGMA);
+                    return channel.fetchAsync(key, params)
+                        .map(doneJ -> Ut.valueMerge(todo, doneJ));
+                },
+                () -> todo
+            ))
+            .map(item -> Objects.isNull(item) ? new JsonObject() : item);
     }
 }

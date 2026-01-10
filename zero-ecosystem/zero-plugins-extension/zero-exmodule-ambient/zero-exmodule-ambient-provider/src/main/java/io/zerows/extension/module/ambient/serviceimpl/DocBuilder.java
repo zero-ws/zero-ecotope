@@ -39,7 +39,7 @@ public class DocBuilder implements DocBStub {
     public Future<JsonArray> initialize(final String appId, final String type) {
         final JsonObject condition = this.qrCond(appId, type, null);
         return DB.on(XCategoryDao.class).fetchJAsync(condition)
-            .compose(Fx.ofJArray(
+            .map(item -> Ut.valueToJArray(item,
                 KName.METADATA,
                 KName.Component.TREE_CONFIG,
                 KName.Component.RUN_CONFIG
@@ -55,7 +55,7 @@ public class DocBuilder implements DocBStub {
     public Future<JsonArray> initialize(final String appId, final String type, final String name) {
         final JsonObject condition = this.qrCond(appId, type, name);
         return DB.on(XCategoryDao.class).fetchJOneAsync(condition)
-            .compose(Fx.ofJObject(
+            .map(item -> Ut.valueToJObject(item,
                 KName.METADATA,
                 KName.Component.TREE_CONFIG,
                 KName.Component.RUN_CONFIG

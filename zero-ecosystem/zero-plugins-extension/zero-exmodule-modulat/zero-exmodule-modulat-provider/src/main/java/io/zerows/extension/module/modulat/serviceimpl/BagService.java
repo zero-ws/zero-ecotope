@@ -11,7 +11,6 @@ import io.zerows.extension.module.modulat.servicespec.BlockStub;
 import io.zerows.platform.metadata.KRef;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
-import io.zerows.support.fn.Fx;
 import jakarta.inject.Inject;
 
 import java.util.Set;
@@ -38,10 +37,11 @@ public class BagService implements BagStub {
     }
 
     private Future<JsonArray> fetchBag(final JsonObject condition) {
-        return DB.on(BBagDao.class).fetchJAsync(condition).compose(Fx.ofJArray(
-            KName.Flow.UI_STYLE,
-            KName.Flow.UI_CONFIG
-        ));
+        return DB.on(BBagDao.class).fetchJAsync(condition)
+            .map(item -> Ut.valueToJArray(item,
+                KName.Flow.UI_STYLE,
+                KName.Flow.UI_CONFIG
+            ));
     }
 
     private Future<JsonArray> output(final JsonArray response, final ConcurrentMap<String, JsonArray> blocks) {

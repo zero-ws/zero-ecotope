@@ -20,7 +20,6 @@ import io.zerows.platform.enums.typed.ChangeFlag;
 import io.zerows.program.Ux;
 import io.zerows.spi.HPI;
 import io.zerows.support.Ut;
-import io.zerows.support.fn.Fx;
 import org.camunda.bpm.engine.history.HistoricProcessInstance;
 import org.camunda.bpm.engine.task.Task;
 
@@ -129,13 +128,17 @@ public class WRecord implements Serializable {
      *  3. Linkage should be related to current WTodo record
      */
     public WRecord ticket(final WTicket ticket) {
-        this.ticket = Ux.cloneT(ticket);
+        if (Objects.nonNull(ticket)) {
+            this.ticket = Ux.cloneT(ticket);
+        }
         return this;
     }
 
     public WRecord task(final WTodo todo) {
-        this.todo.clear();
-        this.todo.add(Ux.cloneT(todo));
+        if (Objects.nonNull(todo)) {
+            this.todo.clear();
+            this.todo.add(Ux.cloneT(todo));
+        }
         return this;
     }
 
@@ -244,7 +247,12 @@ public class WRecord implements Serializable {
             .compose(workflow -> this.dataTicket(response, workflow))
             // `history` field mount
             .compose(this::dataHistory)
-            .compose(Fx.ofJObject(KName.HISTORY, response));
+            .compose(json -> {
+                if (Ut.isNotNil(json)) {
+                    response.put(KName.HISTORY, json);
+                }
+                return Ux.future(response);
+            });
     }
 
     public Future<WRecord> futureAfter(final JsonObject dataAfter) {

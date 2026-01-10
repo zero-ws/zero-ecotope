@@ -17,7 +17,6 @@ import io.zerows.extension.skeleton.common.enums.OwnerType;
 import io.zerows.platform.constant.VName;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
-import io.zerows.support.fn.Fx;
 import jakarta.inject.Inject;
 
 import java.util.HashSet;
@@ -71,7 +70,9 @@ public class ViewMyActor {
                 return this.personalStub.byUser(action.getResourceId(), userId,
                         data.getString(KName.POSITION))
                     .compose(Ux::futureA)
-                    .compose(Fx.ofJArray(VName.KEY_CRITERIA, VName.KEY_PROJECTION, KName.Rbac.ROWS));
+                    .map(item -> Ut.valueToJArray(item,
+                        VName.KEY_CRITERIA, VName.KEY_PROJECTION, KName.Rbac.ROWS
+                    ));
             }
         });
     }
@@ -113,7 +114,8 @@ public class ViewMyActor {
     public Future<JsonObject> pViewById(final String key) {
         return this.personalStub.byId(key)
             .compose(Ux::futureJ)
-            .compose(Fx.ofJObject(VName.KEY_CRITERIA, VName.KEY_PROJECTION, "rows"));
+            .map(item -> Ut.valueToJObject(item,
+                VName.KEY_CRITERIA, VName.KEY_PROJECTION, KName.Rbac.ROWS));
     }
 
     @Address(Addr.View.VIEW_P_UPDATE)
@@ -127,7 +129,8 @@ public class ViewMyActor {
         data.put(KName.USER, userId);
         return this.personalStub.update(key, data)
             .compose(Ux::futureJ)
-            .compose(Fx.ofJObject(VName.KEY_CRITERIA, VName.KEY_PROJECTION, "rows"));
+            .map(item -> Ut.valueToJObject(item,
+                VName.KEY_CRITERIA, VName.KEY_PROJECTION, KName.Rbac.ROWS));
     }
 
 

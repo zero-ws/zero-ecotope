@@ -15,7 +15,6 @@ import io.zerows.extension.module.mbseapi.servicespec.AmbientStub;
 import io.zerows.extension.module.mbseapi.servicespec.JobStub;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
-import io.zerows.support.fn.Fx;
 import jakarta.inject.Inject;
 
 import java.util.List;
@@ -81,7 +80,8 @@ public class JobService implements JobStub {
              * 1) Supplier here for `JsonObject` generated
              * 2) Mission conversation here to JsonObject directly
              */
-            .compose(Fx.ofJObject(job -> JobKit.fetchMission(Jt.jobCode(job))));
+            .compose(job -> JobKit.fetchMission(Jt.jobCode(job)))
+            .map(item -> Objects.isNull(item) ? new JsonObject() : item);
     }
 
     @Override

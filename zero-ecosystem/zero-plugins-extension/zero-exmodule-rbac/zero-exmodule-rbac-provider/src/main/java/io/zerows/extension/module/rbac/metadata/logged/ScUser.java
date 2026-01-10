@@ -12,7 +12,6 @@ import io.zerows.platform.metadata.KRef;
 import io.zerows.plugins.cache.HMM;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
-import io.zerows.support.fn.Fx;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -189,7 +188,12 @@ public class ScUser {
 
     // ------------------------- Session Method -----------------------
     public Future<JsonObject> view() {
-        return this.<JsonObject>get(KName.VIEW).compose(Fx.ifJObject(item -> item));
+        return this.<JsonObject>get(KName.VIEW).compose(item -> {
+            if (Objects.isNull(item)) {
+                return Ux.futureJ();
+            }
+            return Ux.future(item);
+        });
     }
 
     public Future<JsonObject> view(final String viewKey) {
@@ -221,7 +225,8 @@ public class ScUser {
      * }
      */
     public Future<JsonObject> profile() {
-        return this.<JsonObject>get(KName.PROFILE).compose(Fx.ifJObject(item -> item));
+        return this.<JsonObject>get(KName.PROFILE)
+            .map(item -> Objects.isNull(item) ? new JsonObject() : item);
     }
 
     public Future<JsonObject> permissions() {

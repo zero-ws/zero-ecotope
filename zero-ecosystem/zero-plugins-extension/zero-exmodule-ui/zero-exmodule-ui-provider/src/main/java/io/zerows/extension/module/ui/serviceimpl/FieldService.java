@@ -12,7 +12,6 @@ import io.zerows.extension.module.ui.domain.tables.pojos.UiField;
 import io.zerows.extension.module.ui.servicespec.FieldStub;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
-import io.zerows.support.fn.Fx;
 
 import java.util.Comparator;
 import java.util.List;
@@ -66,7 +65,7 @@ public class FieldService implements FieldStub {
                 .insertAsync(fields)
                 .compose(Ux::futureA)
                 // 3. mountOut
-                .compose(Fx.ofJArray(
+                .map(item -> Ut.valueToJArray(item,
                     OPTION_JSX,
                     OPTION_CONFIG,
                     OPTION_ITEM,

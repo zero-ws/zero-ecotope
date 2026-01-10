@@ -11,7 +11,6 @@ import io.zerows.extension.module.modulat.domain.tables.pojos.BBlock;
 import io.zerows.extension.module.modulat.servicespec.BlockStub;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
-import io.zerows.support.fn.Fx;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -65,11 +64,12 @@ public class BlockService implements BlockStub {
 
     private Future<JsonArray> fetchBlock(final JsonObject condition) {
         // Block Processing
-        return DB.on(BBlockDao.class).fetchJAsync(condition).compose(Fx.ofJArray(
-            KName.Flow.UI_STYLE,
-            KName.Flow.UI_CONFIG,
-            BkConstant.License.LIC_IDENTIFIER,
-            BkConstant.License.LIC_MENU
-        ));
+        return DB.on(BBlockDao.class).fetchJAsync(condition)
+            .map(item -> Ut.valueToJArray(item,
+                KName.Flow.UI_STYLE,
+                KName.Flow.UI_CONFIG,
+                BkConstant.License.LIC_IDENTIFIER,
+                BkConstant.License.LIC_MENU
+            ));
     }
 }

@@ -4,7 +4,6 @@ import io.vertx.core.Future;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.epoch.store.jooq.DB;
@@ -17,21 +16,18 @@ import io.zerows.platform.enums.typed.ChangeFlag;
 import io.zerows.program.Ux;
 import io.zerows.spi.HPI;
 import io.zerows.support.Ut;
-import io.zerows.support.fn.Fx;
+import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
 
-import static io.zerows.extension.module.ambient.boot.At.LOG;
-
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
 public class ExAttachmentNorm implements ExAttachment {
-    private static final LogOf LOGGER = LogOf.get(ExAttachmentNorm.class);
-
 
     @Override
     public Future<JsonArray> saveAsync(final JsonObject condition, final JsonArray data) {
@@ -119,7 +115,7 @@ public class ExAttachmentNorm implements ExAttachment {
         });
         final List<XAttachment> attachments = Ux.fromJson(attachmentJ, XAttachment.class);
         return DB.on(XAttachmentDao.class).updateAsyncJ(attachments)
-            .compose(Fx.ofJArray(KName.METADATA));
+            .map(item -> Ut.valueToJArray(item, KName.METADATA));
     }
 
     @Override
@@ -138,7 +134,7 @@ public class ExAttachmentNorm implements ExAttachment {
 
     @Override
     public Future<JsonArray> fetchAsync(final JsonObject condition) {
-        LOG.File.info(LOGGER, "Fetch Operation, condition: {0}", condition);
+        log.info("[ XMOD ] ( File ) 查询条件：{}", condition);
         return DB.on(XAttachmentDao.class)
             .fetchJAsync(condition)
             .compose(this::outAsync);
@@ -168,7 +164,7 @@ public class ExAttachmentNorm implements ExAttachment {
         } else {
             condition.put(KName.FILE_KEY, key);
         }
-        LOG.File.info(LOGGER, "Fetch Operation, condition: {0}", condition);
+        log.info("[ XMOD ] ( File ) 下载条件：{}", condition);
         return DB.on(XAttachmentDao.class).fetchJOneAsync(condition)
 
             // ExIo -> Call ExIo to impact actual file system ( Store )
@@ -212,14 +208,14 @@ public class ExAttachmentNorm implements ExAttachment {
                 return Ux.future(files);
             }),
             () -> files
-        ).compose(Fx.ofJArray(KName.METADATA)).compose(attachments -> {
+        ).map(item -> Ut.valueToJArray(item, KName.METADATA)).compose(attachments -> {
             Ut.itJArray(attachments).forEach(file -> file.put(KName.DIRECTORY, Boolean.FALSE));
             return Ux.future(attachments);
         });
     }
 
     private Future<JsonArray> removeAsyncInternal(final JsonObject condition, final JsonArray attachments) {
-        LOG.File.info(LOGGER, "Remove Operation, condition: {0}", condition);
+        log.info("[ XMOD ] ( File ) 删除条件：{}", condition);
         return DB.on(XAttachmentDao.class).deleteByAsync(condition)
 
             // ExIo -> Call ExIo to impact actual file system ( Store )

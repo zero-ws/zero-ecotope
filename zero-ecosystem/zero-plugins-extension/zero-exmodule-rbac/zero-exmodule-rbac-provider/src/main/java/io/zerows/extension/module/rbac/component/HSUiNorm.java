@@ -1,12 +1,14 @@
 package io.zerows.extension.module.rbac.component;
 
 import io.vertx.core.Future;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.security.KPermit;
 import io.zerows.sdk.security.AbstractAdmit;
 import io.zerows.support.Ut;
-import io.zerows.support.fn.Fx;
+
+import java.util.concurrent.ConcurrentMap;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
@@ -36,6 +38,18 @@ public class HSUiNorm extends AbstractAdmit {
          * 2）否则直接处理 data 节点的数据
          */
         final JsonObject output = Ut.valueJObject(config, KName.OUTPUT);
-        return compiler.ingest(qr, config).compose(data -> Fx.ifJArray(data, output));
+        return compiler.ingest(qr, config).compose(data -> compileAsync(output, data));
+    }
+
+    private Future<JsonObject> compileAsync(final JsonObject output, final JsonArray data) {
+        final String group = Ut.valueString(output, KName.GROUP);
+        final JsonObject response = new JsonObject();
+        if (Ut.isNil(group)) {
+            response.put(KName.DATA, data);
+        } else {
+            final ConcurrentMap<String, JsonArray> grouped = Ut.elementGroup(data, group);
+            response.put(KName.DATA, Ut.toJObject(grouped));
+        }
+        return Future.succeededFuture(response);
     }
 }

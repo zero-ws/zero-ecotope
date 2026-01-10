@@ -7,7 +7,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.module.ambient.domain.tables.daos.XCategoryDao;
 import io.zerows.program.Ux;
-import io.zerows.support.fn.Fx;
+import io.zerows.support.Ut;
 
 import java.util.Objects;
 
@@ -21,7 +21,7 @@ public abstract class TreeBase extends AideBase implements Tree {
     protected Future<JsonArray> fetchTree(final JsonObject criteria) {
         return DB.on(XCategoryDao.class).fetchAsync(criteria)
             .compose(Ux::futureA)
-            .compose(Fx.ofJArray(
+            .map(item -> Ut.valueToJArray(item,
                 KName.METADATA,
                 KName.Component.TREE_CONFIG,
                 KName.Component.RUN_CONFIG

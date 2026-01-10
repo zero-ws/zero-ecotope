@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.crud.common.Ix;
 import io.zerows.program.Ux;
-import io.zerows.support.fn.Fx;
+import io.zerows.support.Ut;
 
 import static io.zerows.extension.crud.common.Ix.LOG;
 
@@ -26,7 +26,7 @@ class AgonicADJSearch implements Agonic {
              *     "metadata": {}
              * }
              */
-            .compose(Fx.ofPage(KName.METADATA))
+            .map(item -> Ut.valueToPage(item, KName.METADATA))
             /*
              * 针对后期 Page 分页接口之后的序列化执行
              * {

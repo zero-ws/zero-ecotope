@@ -15,7 +15,6 @@ import io.zerows.extension.module.modulat.servicespec.BagArgStub;
 import io.zerows.extension.module.modulat.servicespec.BlockStub;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
-import io.zerows.support.fn.Fx;
 
 import java.util.List;
 import java.util.Objects;
@@ -81,7 +80,8 @@ public class BagArgService implements BagArgStub {
         Objects.requireNonNull(bagId);
         return DB.on(BBagDao.class).<BBag>fetchByIdAsync(bagId)
             // Cache Processing
-            .compose(Fx.ofJObject(bag -> this.saveConfigure(bag, data)));
+            .compose(bag -> this.saveConfigure(bag, data))
+            .map(item -> Objects.isNull(item) ? new JsonObject() : item);
     }
 
     @Override
@@ -89,7 +89,8 @@ public class BagArgService implements BagArgStub {
         Objects.requireNonNull(nameAbbr);
         return DB.on(BBagDao.class).<BBag>fetchOneAsync("nameAbbr", nameAbbr)
             // Cache Processing
-            .compose(Fx.ofJObject(bag -> this.saveConfigure(bag, data)));
+            .compose(bag -> this.saveConfigure(bag, data))
+            .map(item -> Objects.isNull(item) ? new JsonObject() : item);
     }
 
     private Future<JsonObject> saveConfigure(final BBag bag, final JsonObject data) {

@@ -14,11 +14,7 @@ import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.BiFunction;
@@ -44,7 +40,7 @@ class AtFs {
         if (Objects.nonNull(config)) {
             appJ.put(KName.STORE_PATH, config.getStorePath());
         }
-        return Ux.futureJ(appJ).compose(Fx.ofJObject(KName.App.LOGO));
+        return Ux.futureJ(Ut.valueToJObject(appJ, KName.App.LOGO));
     }
 
     static Future<Buffer> fileDownload(final JsonArray attachment) {

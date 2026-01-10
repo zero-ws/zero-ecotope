@@ -17,7 +17,6 @@ import io.zerows.extension.module.workflow.metadata.WRecord;
 import io.zerows.extension.module.workflow.servicespec.TaskStub;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
-import io.zerows.support.fn.Fx;
 import jakarta.inject.Inject;
 
 import java.util.Map;
@@ -108,12 +107,12 @@ public class TaskService implements TaskStub {
 
     private Future<WRecord> readTodo(final String key, final WRecord response) {
         return DB.on(WTodoDao.class).<WTodo>fetchByIdAsync(key)
-            .compose(Fx.ifNil(response::bind, todo -> Ux.future(response.task(todo))));
+            .compose(item -> Future.succeededFuture(response.task(item)));
     }
 
     private Future<WRecord> readTicket(final String key, final WRecord response) {
         return DB.on(WTicketDao.class).<WTicket>fetchByIdAsync(key)
-            .compose(Fx.ifNil(response::bind, ticket -> Ux.future(response.ticket(ticket))));
+            .compose(ticket -> Future.succeededFuture(response.ticket(ticket)));
     }
 
     private Future<WRecord> readChild(final WRecord response) {

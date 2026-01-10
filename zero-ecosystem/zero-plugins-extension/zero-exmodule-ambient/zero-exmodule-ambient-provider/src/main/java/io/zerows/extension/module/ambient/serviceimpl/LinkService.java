@@ -14,11 +14,7 @@ import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import io.zerows.support.fn.Fx;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
@@ -75,7 +71,10 @@ public class LinkService implements LinkStub {
         futures.add(jooq.updateAsync(queueU));
         return Fx.compressL(futures)
             .compose(Ux::futureA)
-            .compose(Fx.ofJArray(KName.SOURCE_DATA, KName.TARGET_DATA));
+            .map(item -> Ut.valueToJArray(item,
+                KName.SOURCE_DATA,
+                KName.TARGET_DATA)
+            );
     }
 
     @Override

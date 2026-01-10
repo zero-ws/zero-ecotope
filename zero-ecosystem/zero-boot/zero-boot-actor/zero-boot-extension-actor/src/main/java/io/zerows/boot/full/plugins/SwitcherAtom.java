@@ -13,20 +13,19 @@ import io.zerows.program.Ux;
 import io.zerows.specification.modeling.HRule;
 import io.zerows.spi.modeler.Identifier;
 import io.zerows.support.Ut;
-import io.zerows.support.fn.Fx;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
 
-import static io.zerows.boot.extension.util.Ox.LOG;
-
 /*
  * 动态模型筛选器，用于不同业务接口筛选统一记录专用
  * 1）只有动态 Atom 会使用
  * 2）单量 / 批量 筛选
  */
+@Slf4j
 public class SwitcherAtom implements Switcher {
     /*
      * 动态 identifier
@@ -87,16 +86,14 @@ public class SwitcherAtom implements Switcher {
             final JsonObject input = this.options.copy();
             input.put(KName.DATA, data);
             // #NEW_LOG
-            LOG.Uca.debug(this.getClass(), " Identifier 选择器：{0}", this.indent.getClass());
+            log.debug("[ XMOD ] ( MBSE ) Identifier 选择器输入数据：{}", this.indent.getClass());
             final JsonObject config = Ox.pluginOptions(this.indent.getClass(), input);
-            return this.indent.resolve(input, config).compose(Fx.ifNil(
-
-                /* 默认值，配置优先 */
-                () -> defaultAtom,
-
-                /* 动态驱动成功 */
-                switched -> this.atom(switched, defaultAtom.rule())
-            ));
+            return this.indent.resolve(input, config).compose(item -> {
+                if (Objects.isNull(item)) {
+                    return Future.succeededFuture(defaultAtom);
+                }
+                return this.atom(item, defaultAtom.rule());
+            });
         }
     }
 
@@ -112,21 +109,20 @@ public class SwitcherAtom implements Switcher {
     public Future<Set<DataGroup>> atom(final JsonArray data, final DataAtom atom) {
         if (Objects.isNull(this.indent)) {
             // #NEW_LOG
-            LOG.Uca.warn(this.getClass(), " Identifier 选择器未配置，请检查，数据：{0}", data.encode());
+            log.warn("[ XMOD ] ( MBSE ) Identifier 选择器未配置，请检查，数据：{}", data.encode());
             return Ux.future(Ox.toGroup(atom, data));
         } else {
             final JsonObject input = this.options.copy();
             input.put(KName.DATA, data);
             // #NEW_LOG
-            LOG.Uca.debug(this.getClass(), " Identifier 选择器（批量）：{0}", this.indent.getClass());
+            log.debug("[ XMOD ] ( MBSE ) Identifier 选择器（批量）：{}", this.indent.getClass());
             final JsonObject config = Ox.pluginOptions(this.indent.getClass(), input);
-            return this.indent.resolve(input, atom.identifier(), config).compose(Fx.ifNil(
-                /* 默认值，配置优先 */
-                HashSet::new,
-
-                /* 动态驱动 */
-                switched -> this.atom(switched, atom.rule())
-            ));
+            return this.indent.resolve(input, atom.identifier(), config).compose(switched -> {
+                if (Objects.isNull(switched)) {
+                    return Future.succeededFuture(new HashSet<>());
+                }
+                return this.atom(switched, atom.rule());
+            });
         }
     }
 
@@ -162,7 +158,7 @@ public class SwitcherAtom implements Switcher {
         identifiers.forEach((identifier, dataArray) -> {
             final DataAtom atom = this.connect(Ox.toAtom(sigma, identifier), unique);
             final DataGroup group = DataGroup.create(atom);
-            LOG.Uca.info(this.getClass(), "最终选择的（批量） identifier = {0}, sigma = {1}", identifier, sigma);
+            log.info("[ XMOD ] ( MBSE ) 最终选择的（批量） identifier = {}, sigma = {}", identifier, sigma);
             group.add(dataArray);
             resultSet.add(group);
         });
@@ -172,7 +168,7 @@ public class SwitcherAtom implements Switcher {
     private Future<DataAtom> atom(final String identifier,
                                   final HRule unique) {
         final String sigma = this.identity.getSigma();
-        LOG.Uca.info(this.getClass(), "最终选择的 identifier = {0}, sigma = {1}", identifier, sigma);
+        log.info("[ XMOD ] ( MBSE ) 最终选择的 identifier = {}, sigma = {}", identifier, sigma);
         return Ux.future(this.connect(Ox.toAtom(sigma, identifier), unique));
     }
 }

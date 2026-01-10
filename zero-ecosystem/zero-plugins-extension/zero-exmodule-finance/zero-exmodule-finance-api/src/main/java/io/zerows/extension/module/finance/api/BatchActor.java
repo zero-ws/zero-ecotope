@@ -12,7 +12,6 @@ import io.zerows.extension.module.finance.servicespec.EndDebtStub;
 import io.zerows.extension.module.finance.servicespec.EndSettleRStub;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
-import io.zerows.support.fn.Fx;
 import jakarta.inject.Inject;
 
 /**
@@ -28,7 +27,10 @@ public class BatchActor {
 
     @Address(Addr.Settle.FETCH_BY_KEY)
     public Future<JsonObject> fetchSettlement(final JsonArray keys) {
-        return Fx.ofJObject(this.settleRStub::fetchSettlement).apply(keys);
+        if (Ut.isNil(keys)) {
+            return Ux.futureJ();
+        }
+        return this.settleRStub.fetchSettlement(keys);
     }
 
 
@@ -45,6 +47,9 @@ public class BatchActor {
 
     @Address(Addr.Settle.FETCH_DEBT)
     public Future<JsonObject> fetchDebt(final JsonArray keys) {
-        return Fx.ofJObject(this.debtStub::fetchDebt).apply(keys);
+        if (Ut.isNil(keys)) {
+            return Ux.futureJ();
+        }
+        return this.debtStub.fetchDebt(keys);
     }
 }

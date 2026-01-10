@@ -9,7 +9,6 @@ import io.zerows.extension.module.ambient.domain.tables.daos.XTabularDao;
 import io.zerows.platform.constant.VValue;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
-import io.zerows.support.fn.Fx;
 
 import java.util.Objects;
 
@@ -24,7 +23,7 @@ public abstract class AideBase implements Aide {
     protected Future<JsonArray> fetchDict(final JsonObject criteria) {
         return DB.on(XTabularDao.class).fetchAsync(criteria)
             .compose(Ux::futureA)
-            .compose(Fx.ofJArray(KName.METADATA));
+            .map(item -> Ut.valueToJArray(item, KName.METADATA));
     }
 
     // --------------- condition building -----------------

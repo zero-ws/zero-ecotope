@@ -7,6 +7,7 @@ import io.zerows.epoch.metadata.UObject;
 import io.zerows.extension.module.ambient.boot.MDAmbientManager;
 import io.zerows.extension.module.ambient.common.AtConstant;
 import io.zerows.extension.skeleton.spi.ExInit;
+import io.zerows.platform.enums.Result;
 import io.zerows.plugins.excel.ExcelActor;
 import io.zerows.plugins.excel.ExcelClient;
 import io.zerows.program.Ux;
@@ -67,7 +68,9 @@ public class ExInitDatum implements ExInit {
             client.importAsync(filename, result -> {
                 log.info("{} 数据加载，文件源：{}", AtConstant.K_PREFIX_AMB, filename);
                 if (result.succeeded()) {
-                    pre.complete(Ut.endBool(Boolean.TRUE, filename));
+                    final JsonObject endJ = new JsonObject();
+                    endJ.put(filename, Result.SUCCESS.name());
+                    pre.complete(endJ);
                 } else {
                     pre.fail(result.cause());
                 }

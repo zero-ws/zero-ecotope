@@ -17,7 +17,6 @@ import io.zerows.platform.constant.VString;
 import io.zerows.program.Ux;
 import io.zerows.spi.HPI;
 import io.zerows.support.Ut;
-import io.zerows.support.fn.Fx;
 
 public class AppService implements AppStub {
 
@@ -89,7 +88,7 @@ public class AppService implements AppStub {
             /* Get Result */
             .compose(Ux::futureJ)
             /* JDBC */
-            .compose(Fx.ofJObject("jdbcConfig"));
+            .map(item -> Ut.valueToJObject(item, "jdbcConfig"));
     }
 
     @Override
@@ -97,7 +96,7 @@ public class AppService implements AppStub {
         return this.updateLogo(appId, data)
             .compose(updated -> DB.on(XAppDao.class).updateJAsync(appId, updated)
                 /* Image field: logo */
-                .compose(Fx.ofJObject(KName.App.LOGO)));
+                .map(item -> Ut.valueToJObject(item, KName.App.LOGO)));
     }
 
     private Future<JsonObject> updateLogo(final String appId, final JsonObject data) {

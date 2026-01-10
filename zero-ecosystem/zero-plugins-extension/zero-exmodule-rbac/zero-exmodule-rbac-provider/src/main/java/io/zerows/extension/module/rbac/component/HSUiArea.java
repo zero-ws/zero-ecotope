@@ -67,7 +67,10 @@ public class HSUiArea extends HSUiNorm {
         });
         return Fx.combineM(futureMap)
             /* children = {} */
-            .compose(normalized -> Fx.ifJObject(KName.CHILDREN, Ut.toJObject(normalized)));
+            .compose(normlized -> {
+                final JsonObject processed = Ut.toJObject(normlized);
+                return Future.succeededFuture(new JsonObject().put(KName.CHILDREN, processed));
+            });
     }
 
     private JsonObject valueChild(final String code, final JsonObject requestJ) {

@@ -14,7 +14,6 @@ import io.zerows.platform.metadata.KDictUse;
 import io.zerows.platform.metadata.KFabric;
 import io.zerows.program.Ux;
 import io.zerows.spi.HPI;
-import io.zerows.support.fn.Fx;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
@@ -35,22 +34,28 @@ class TranFabric implements Tran {
 
     @Override
     public Future<JsonObject> inJAsync(final JsonObject data, final IxMod in) {
-        if (in.canTransform()) {
-            return this.fabric(in).compose(Fx.ifNil(() -> data, fabric ->
-                this.isFrom ? fabric.inFrom(data) : fabric.inTo(data)));
-        } else {
+        if (!in.canTransform()) {
             return Ux.future(data);
         }
+        return this.fabric(in).compose(fabric -> {
+            if (Objects.isNull(fabric)) {
+                return Ux.future(data);
+            }
+            return this.isFrom ? fabric.inFrom(data) : fabric.inTo(data);
+        });
     }
 
     @Override
     public Future<JsonArray> inAAsync(final JsonArray data, final IxMod in) {
-        if (in.canTransform()) {
-            return this.fabric(in).compose(Fx.ifNil(() -> data, fabric ->
-                this.isFrom ? fabric.inFrom(data) : fabric.inTo(data)));
-        } else {
+        if (!in.canTransform()) {
             return Ux.future(data);
         }
+        return this.fabric(in).compose(fabric -> {
+            if (Objects.isNull(fabric)) {
+                return Ux.future(data);
+            }
+            return this.isFrom ? fabric.inFrom(data) : fabric.inTo(data);
+        });
     }
 
     private Future<KFabric> fabric(final IxMod in) {

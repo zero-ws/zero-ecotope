@@ -15,8 +15,8 @@ import io.zerows.program.Ux;
 import io.zerows.spi.HPI;
 import io.zerows.spi.modeler.Indent;
 import io.zerows.support.Ut;
-import io.zerows.support.fn.Fx;
 
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.BiFunction;
 
@@ -85,55 +85,57 @@ public class EmployeeService implements EmployeeStub {
 
     @Override
     public Future<JsonObject> updateAsync(final String key, final JsonObject data) {
-        return this.fetchAsync(key)
-            .compose(Fx.ofJObject(original -> {
-                final String userId = original.getString(KName.USER_ID);
-                final String current = data.getString(KName.USER_ID);
-                if (Ut.isNil(userId) && Ut.isNil(current)) {
+        return this.fetchAsync(key).compose(original -> {
+            if (Objects.isNull(original)) {
+                return Future.succeededFuture(new JsonObject());
+            }
+            final String userId = original.getString(KName.USER_ID);
+            final String current = data.getString(KName.USER_ID);
+            if (Ut.isNil(userId) && Ut.isNil(current)) {
+                /*
+                 * Old null, new null
+                 * Relation keep
+                 */
+                return this.updateEmployee(key, data);
+            } else if (Ut.isNil(userId) && Ut.isNotNil(current)) {
+                /*
+                 * Old null, new <value>
+                 * Create relation with new
+                 */
+                return this.updateEmployee(key, data)
+                    .compose(response -> this.updateReference(current, response));
+            } else if (Ut.isNotNil(userId) && Ut.isNil(current)) {
+                /*
+                 * Old <value>, new <null>
+                 * Clear relation with old
+                 */
+                return this.updateEmployee(key, data)
+                    .compose(response -> this.updateReference(userId, new JsonObject())
+                        .compose(nil -> Ux.future(response))
+                    );
+            } else {
+                /*
+                 * Old <value>, new <value>
+                 */
+                if (userId.equals(current)) {
                     /*
-                     * Old null, new null
+                     * Old = New
                      * Relation keep
                      */
                     return this.updateEmployee(key, data);
-                } else if (Ut.isNil(userId) && Ut.isNotNil(current)) {
-                    /*
-                     * Old null, new <findRunning>
-                     * Create relation with new
-                     */
-                    return this.updateEmployee(key, data)
-                        .compose(response -> this.updateReference(current, response));
-                } else if (Ut.isNotNil(userId) && Ut.isNil(current)) {
-                    /*
-                     * Old <findRunning>, new <null>
-                     * Clear relation with old
-                     */
-                    return this.updateEmployee(key, data)
-                        .compose(response -> this.updateReference(userId, new JsonObject())
-                            .compose(nil -> Ux.future(response))
-                        );
                 } else {
                     /*
-                     * Old <findRunning>, new <findRunning>
+                     * Clear first
                      */
-                    if (userId.equals(current)) {
+                    return this.updateEmployee(key, data).compose(response -> this.updateReference(userId, new JsonObject())
                         /*
-                         * Old = New
-                         * Relation keep
+                         * Then update
                          */
-                        return this.updateEmployee(key, data);
-                    } else {
-                        return this.updateEmployee(key, data)
-                            /*
-                             * Clear first
-                             */
-                            .compose(response -> this.updateReference(userId, new JsonObject())
-                                /*
-                                 * Then update
-                                 */
-                                .compose(nil -> this.updateReference(current, response)));
-                    }
+                        .compose(nil -> this.updateReference(current, response))
+                    );
                 }
-            }));
+            }
+        });
     }
 
     private Future<JsonObject> updateEmployee(final String key, final JsonObject data) {
@@ -147,14 +149,17 @@ public class EmployeeService implements EmployeeStub {
 
     @Override
     public Future<Boolean> deleteAsync(final String key) {
-        return this.fetchAsync(key).compose(Fx.ifNil(() -> Boolean.TRUE, item ->
+        return this.fetchAsync(key).compose(item -> {
+            if (Objects.isNull(item)) {
+                return Ux.futureT();
+            }
             // SPI: ExTrash
-            HPI.of(ExTrash.class).waitOr(
+            return HPI.of(ExTrash.class).waitOr(
                 trash -> trash.backupAsync("res.employee", item)
                     .compose(backup -> this.deleteAsync(key, item)),
                 () -> this.deleteAsync(key, item)
-            )
-        ));
+            );
+        });
     }
 
     private Future<Boolean> deleteAsync(final String key, final JsonObject item) {
@@ -166,8 +171,14 @@ public class EmployeeService implements EmployeeStub {
 
     private Future<JsonObject> updateReference(final String key, final JsonObject data) {
         return this.switchJ(data, (user, filters) -> user.rapport(key, filters)
-            .compose(Fx.ofJObject(response ->
-                Ux.future(data.put(KName.USER_ID, response.getString(KName.KEY))))));
+            .compose(response -> {
+                if (Objects.isNull(response)) {
+                    return Ux.futureJ();
+                }
+                data.put(KName.USER_ID, response.getString(KName.KEY));
+                return Ux.future(response);
+            })
+        );
     }
 
     private Future<JsonObject> fetchRef(final JsonObject input) {

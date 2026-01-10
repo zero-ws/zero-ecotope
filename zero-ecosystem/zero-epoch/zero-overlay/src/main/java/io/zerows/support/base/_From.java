@@ -10,7 +10,7 @@ import java.util.Set;
 /**
  * @author lang : 2023/4/27
  */
-class _From extends _End {
+class _From extends _Element {
     protected _From() {
     }
 
@@ -21,7 +21,6 @@ class _From extends _End {
      * @param seed  字符串
      * @param width 补充后的长度
      * @param fill  补充的字符
-     *
      * @return 补充后的字符串
      */
     public static String fromAdjust(final Integer seed, final Integer width, final char fill) {
@@ -35,7 +34,6 @@ class _From extends _End {
      * @param seed  数值
      * @param width 补充后的长度
      * @param fill  补充的字符
-     *
      * @return 补充后的字符串
      */
     public static String fromAdjust(final String seed, final Integer width, final char fill) {
@@ -47,7 +45,6 @@ class _From extends _End {
      *
      * @param seed  字符串
      * @param width 补充后的长度
-     *
      * @return 补充后的字符串
      */
     public static String fromAdjust(final String seed, final Integer width) {
@@ -59,7 +56,6 @@ class _From extends _End {
      *
      * @param seed  数值
      * @param width 补充后的长度
-     *
      * @return 补充后的字符串
      */
     public static String fromAdjust(final Integer seed, final Integer width) {
@@ -72,7 +68,6 @@ class _From extends _End {
      * @param pos    位置
      * @param buffer 二进制Buffer
      * @param <T>    泛型
-     *
      * @return 反序列化对象
      */
     public static <T> T fromBuffer(final int pos, final Buffer buffer) {
@@ -83,7 +78,6 @@ class _From extends _End {
      * 将集合转换成字符串，默认使用逗号分隔符
      *
      * @param input 集合
-     *
      * @return 字符串
      */
     public static String fromJoin(final Set<String> input) {
@@ -95,7 +89,6 @@ class _From extends _End {
      *
      * @param input     集合
      * @param separator 分隔符
-     *
      * @return 字符串
      */
     public static String fromJoin(final Set<String> input, final String separator) {
@@ -107,7 +100,6 @@ class _From extends _End {
      *
      * @param input     集合
      * @param separator 分隔符
-     *
      * @return 字符串
      */
     public static String fromJoin(final List<String> input, final String separator) {
@@ -118,7 +110,6 @@ class _From extends _End {
      * 将集合转换成字符串，默认使用逗号分隔符
      *
      * @param input 集合
-     *
      * @return 字符串
      */
     public static String fromJoin(final List<String> input) {
@@ -129,7 +120,6 @@ class _From extends _End {
      * 将数组转换成字符串，默认使用逗号分隔符
      *
      * @param input 数组
-     *
      * @return 字符串
      */
     public static String fromJoin(final Object[] input) {
@@ -141,7 +131,6 @@ class _From extends _End {
      *
      * @param input     数组
      * @param separator 分隔符
-     *
      * @return 字符串
      */
     public static String fromJoin(final Object[] input, final String separator) {
@@ -155,7 +144,6 @@ class _From extends _End {
      * @param expr   表达式
      * @param params 参数
      * @param <T>    泛型
-     *
      * @return 转换后的对象
      */
     public static <T> T fromExpressionT(final String expr, final JsonObject params) {
@@ -168,7 +156,6 @@ class _From extends _End {
      *
      * @param expr   表达式
      * @param params 参数
-     *
      * @return 转换后的字符串
      */
     public static String fromExpression(final String expr, final JsonObject params) {
@@ -181,7 +168,6 @@ class _From extends _End {
      *
      * @param exprObject 表达式
      * @param params     参数
-     *
      * @return 转换后的字符串
      */
     public static JsonObject fromExpression(final JsonObject exprObject, final JsonObject params) {
@@ -194,7 +180,6 @@ class _From extends _End {
      *
      * @param exprArray 表达式
      * @param params    参数
-     *
      * @return 转换后的字符串
      */
     public static JsonArray fromExpression(final JsonArray exprArray, final JsonObject params) {

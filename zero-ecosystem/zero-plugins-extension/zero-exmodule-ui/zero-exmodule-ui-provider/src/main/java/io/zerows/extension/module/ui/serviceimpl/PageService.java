@@ -13,7 +13,6 @@ import io.zerows.extension.module.ui.servicespec.PageStub;
 import io.zerows.plugins.cache.HMM;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
-import io.zerows.support.fn.Fx;
 import jakarta.inject.Inject;
 
 import java.util.Objects;
@@ -35,7 +34,7 @@ public class PageService implements PageStub {
                 /*
                  * Configuration converted to InJson
                  */
-                .compose(Fx.ofJObject(KName.Ui.CONFIG));
+                .map(item -> Ut.valueToJObject(item, KName.Ui.CONFIG));
         // Ui Cache Enabled
         return HMM.<String, JsonObject>of(UiConstant.POOL_LAYOUT)
             .cached(layoutId, () -> executor.apply(layoutId));
@@ -103,20 +102,11 @@ public class PageService implements PageStub {
             .compose(layout -> {
                 final JsonObject pageJson = Ux.toJson(page);
                 pageJson.put("layout", layout);
-                return Fx.ofJObject(
+                return Future.succeededFuture(Ut.valueToJObject(pageJson,
                     KName.Ui.CONTAINER_CONFIG,
                     KName.Ui.ASSIST,
                     KName.Ui.GRID
-                ).apply(pageJson);
-                /*
-                 * Configuration converted to InJson
-                 */
-                //.compose(Ke.mount(KName.Ui.CONTAINER_CONFIG))
-                //.compose(Ke.mount(KName.Ui.ASSIST))
-                /*
-                 * Another method to convert JsonArray
-                 */
-                //.compose(Ke.mountArray(KName.Ui.GRID));
+                ));
             });
     }
 }

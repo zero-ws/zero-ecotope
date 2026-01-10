@@ -11,7 +11,6 @@ import io.zerows.extension.skeleton.spi.ScModeling;
 import io.zerows.program.Ux;
 import io.zerows.spi.HPI;
 import io.zerows.support.Ut;
-import io.zerows.support.fn.Fx;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
@@ -36,7 +35,7 @@ public class ModelService implements ModelStub {
             .fetchOneAsync(filters)
             .compose(Ux::futureJ)
             /* KMetadata Field Usage */
-            .compose(Fx.ofJObject(KName.METADATA)));
+            .map(item -> Ut.valueToJObject(item, KName.METADATA)));
     }
 
     @Override
