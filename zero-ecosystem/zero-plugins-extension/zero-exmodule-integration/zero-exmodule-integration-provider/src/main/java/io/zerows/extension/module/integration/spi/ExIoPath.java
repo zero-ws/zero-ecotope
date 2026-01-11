@@ -14,16 +14,12 @@ import io.zerows.extension.module.integration.domain.tables.pojos.IDirectory;
 import io.zerows.extension.module.integration.util.Is;
 import io.zerows.extension.skeleton.spi.ExIo;
 import io.zerows.program.Ux;
+import io.zerows.support.Fx;
 import io.zerows.support.Ut;
-import io.zerows.support.base.FnBase;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -170,7 +166,7 @@ public class ExIoPath implements ExIo {
                     final ConcurrentMap<String, String> renameMap = Is.trashIn(storeSet);
                     futures.add(fs.rm(renameMap.values()));
                 });
-                return FnBase.combineT(futures);
+                return Fx.combineT(futures);
             }))
             .compose(nil -> Ux.future(directoryJ));
     }
@@ -234,7 +230,7 @@ public class ExIoPath implements ExIo {
             }
             futures.add(fs.rename(renameMap));
         });
-        return FnBase.combineT(futures).compose(nil -> Ux.futureT());
+        return Fx.combineT(futures).compose(nil -> Ux.futureT());
     }
 
     private Future<ConcurrentMap<Fs, Set<String>>> directoryD(final JsonArray directoryD) {

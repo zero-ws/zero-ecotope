@@ -11,8 +11,8 @@ import io.zerows.mbse.metadata.KModule;
 import io.zerows.program.Ux;
 import io.zerows.spi.HPI;
 import io.zerows.spi.modeler.Indent;
+import io.zerows.support.Fx;
 import io.zerows.support.Ut;
-import io.zerows.support.fn.Fx;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;

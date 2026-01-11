@@ -13,8 +13,8 @@ import io.zerows.extension.module.report.domain.tables.pojos.KpReport;
 import io.zerows.extension.module.report.domain.tables.pojos.KpReportInstance;
 import io.zerows.platform.constant.VValue;
 import io.zerows.program.Ux;
+import io.zerows.support.Fx;
 import io.zerows.support.Ut;
-import io.zerows.support.fn.Fx;
 
 import java.util.List;
 import java.util.Objects;
@@ -54,7 +54,6 @@ class StepGeneratorData extends StepGeneratorBase {
      * @param instance   新报表实例
      * @param request    请求数据
      * @param sourceData 源数据
-     *
      * @return 处理后的报表实例
      */
     @Override

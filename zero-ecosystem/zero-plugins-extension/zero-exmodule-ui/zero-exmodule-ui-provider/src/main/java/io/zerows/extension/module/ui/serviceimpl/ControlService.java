@@ -16,7 +16,6 @@ import io.zerows.extension.module.ui.servicespec.ControlStub;
 import io.zerows.extension.module.ui.spi.UiHunter;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
-import io.zerows.support.fn.Fx;
 
 import java.util.Objects;
 
@@ -54,7 +53,7 @@ public class ControlService implements ControlStub {
         return DB.on(UiControlDao.class)
             .<UiControl>fetchByIdAsync(control)
             .compose(Ux::futureJ)
-            .compose(Fx.ofJObject(
+            .map(item -> Ut.valueToJObject(item,
                 KName.Ui.CONTAINER_CONFIG,
                 KName.Ui.COMPONENT_CONFIG,
                 KName.Ui.ASSIST,

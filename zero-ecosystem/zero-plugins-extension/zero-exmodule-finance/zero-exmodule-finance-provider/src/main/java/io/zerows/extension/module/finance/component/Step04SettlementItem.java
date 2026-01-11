@@ -8,8 +8,8 @@ import io.zerows.extension.module.finance.domain.tables.daos.FSettlementItemDao;
 import io.zerows.extension.module.finance.domain.tables.pojos.FSettlement;
 import io.zerows.extension.module.finance.domain.tables.pojos.FSettlementItem;
 import io.zerows.program.Ux;
+import io.zerows.support.Fx;
 import io.zerows.support.Ut;
-import io.zerows.support.base.FnBase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +43,7 @@ class Step04SettlementItem implements Step<FSettlement, FSettlementItem> {
                 futures.add(Maker.upSTI().buildAsync(items, settlement));
             }
         });
-        return FnBase.combineT(futures)
+        return Fx.combineT(futures)
             .compose(result -> {
                 final List<FSettlementItem> inserted = new ArrayList<>();
                 result.forEach(inserted::addAll);

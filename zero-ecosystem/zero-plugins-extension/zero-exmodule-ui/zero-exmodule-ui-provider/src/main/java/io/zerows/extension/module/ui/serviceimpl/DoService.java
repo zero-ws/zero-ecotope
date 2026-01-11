@@ -12,7 +12,6 @@ import io.zerows.extension.module.ui.domain.tables.pojos.UiOp;
 import io.zerows.extension.module.ui.servicespec.DoStub;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
-import io.zerows.support.fn.Fx;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -39,7 +38,7 @@ public class DoService implements DoStub {
         return DB.on(UiOpDao.class)
             .<UiOp>fetchAsync(KName.Ui.CONTROL_ID, control)
             .compose(Ux::futureA)
-            .compose(Fx.ofJArray(KName.Ui.CONFIG));
+            .map(item -> Ut.valueToJArray(item, KName.Ui.CONFIG));
     }
 
     @Override
@@ -61,6 +60,6 @@ public class DoService implements DoStub {
         return DB.on(UiOpDao.class)
             .<UiOp>fetchAsync(condition)
             .compose(Ux::futureA)
-            .compose(Fx.ofJArray(KName.Ui.CONFIG));
+            .map(item -> Ut.valueToJArray(item, KName.Ui.CONFIG));
     }
 }

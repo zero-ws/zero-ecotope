@@ -13,8 +13,8 @@ import io.zerows.extension.module.rbac.domain.tables.pojos.SUser;
 import io.zerows.extension.skeleton.common.Ke;
 import io.zerows.platform.metadata.KRef;
 import io.zerows.program.Ux;
+import io.zerows.support.Fx;
 import io.zerows.support.Ut;
-import io.zerows.support.base.FnBase;
 
 import java.util.HashSet;
 import java.util.List;
@@ -63,7 +63,7 @@ class IdcService extends AbstractIdc {
 
     @SuppressWarnings("all")
     private Future<JsonArray> connect(final List<SUser> users, final JsonArray inputData) {
-        return FnBase.passion(inputData,
+        return Fx.passion(inputData,
             // roles = R1, R2, R3
             inputA -> IdcBinder.role(this.sigma).bindAsync(users, inputA),
             // groups = G1, G2, G3

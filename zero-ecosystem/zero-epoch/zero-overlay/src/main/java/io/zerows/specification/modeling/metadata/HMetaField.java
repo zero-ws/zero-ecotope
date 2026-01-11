@@ -1,9 +1,9 @@
 package io.zerows.specification.modeling.metadata;
 
-import io.zerows.spi.modeler.MetaOn;
-import io.zerows.support.base.UtBase;
 import io.zerows.specification.modeling.element.HConstraint;
 import io.zerows.specification.modeling.element.HKey;
+import io.zerows.spi.HPI;
+import io.zerows.spi.modeler.MetaOn;
 
 import java.util.Collection;
 import java.util.List;
@@ -34,7 +34,7 @@ public interface HMetaField extends HMetaFieldChildren, HMetaFieldKey {
                          final Class<?> type) {
         final MetaOn metaOn = CACHE.CCT_META_ON.pick(
             // 缓存 + SPI 双模式，既保证性能又保证扩展
-            () -> UtBase.service(MetaOn.class, false),
+            () -> HPI.findOneOf(MetaOn.class),
             MetaOn.class.getName()
         );
         return Objects.isNull(metaOn) ? new MetaField(name, alias, type) : metaOn.field(name, alias, type);
@@ -56,7 +56,6 @@ public interface HMetaField extends HMetaFieldChildren, HMetaFieldKey {
      * 返回传入字段 field 的别名
      *
      * @param field 子字段名
-     *
      * @return 别名
      */
     String alias(String field);
@@ -72,7 +71,6 @@ public interface HMetaField extends HMetaFieldChildren, HMetaFieldKey {
      * 返回传入字段 field 的名
      *
      * @param field 子字段名
-     *
      * @return 字段名称
      */
     String name(String field);
@@ -88,7 +86,6 @@ public interface HMetaField extends HMetaFieldChildren, HMetaFieldKey {
      * 返回传入字段 field 的类型
      *
      * @param field 子字段名
-     *
      * @return 字段类型
      */
     Class<?> type(String field);
@@ -111,7 +108,6 @@ interface HMetaFieldChildren {
      * 添加子结构中的元数据信息
      *
      * @param children 子结构中的元数据信息
-     *
      * @return 当前引用
      */
     HMetaField add(Collection<HMetaField> children);
@@ -121,7 +117,6 @@ interface HMetaFieldChildren {
      *
      * @param name  子结构中的属性名
      * @param child 子结构元模型定义
-     *
      * @return 当前引用
      */
     HMetaField add(String name, HMetaField child);
@@ -131,7 +126,6 @@ interface HMetaFieldChildren {
      *
      * @param name  子结构中的属性名
      * @param child 子结构元模型定义
-     *
      * @return 当前引用
      */
     HMetaField set(String name, HMetaField child);
@@ -170,7 +164,6 @@ interface HMetaFieldKey {
      * 设置复杂类型键相关信息
      *
      * @param keys 复杂类型键
-     *
      * @return 复杂类型键
      */
     HMetaField key(Set<String> keys);
@@ -179,7 +172,6 @@ interface HMetaFieldKey {
      * 返回复杂类型键相关信息，通常此键由多个字段构成
      *
      * @param key 复杂类型键
-     *
      * @return 复杂类型键
      */
     HMetaField key(HKey key);

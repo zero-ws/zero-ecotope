@@ -3,27 +3,22 @@ package io.zerows.extension.skeleton.common;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.Apt;
 import io.zerows.platform.constant.VValue;
 import io.zerows.program.Ux;
 import io.zerows.specification.modeling.metadata.HMetaAtom;
 import io.zerows.specification.modeling.metadata.HMetaField;
+import io.zerows.support.Fx;
 import io.zerows.support.Ut;
-import io.zerows.support.fn.Fx;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.BiFunction;
 import java.util.function.Function;
-
-import static io.zerows.extension.skeleton.common.Ke.LOG;
 
 class KeCompare {
 
@@ -67,14 +62,16 @@ class KeCompare {
             final JsonArray inserted = compared.comparedA();
             final JsonArray updated = compared.comparedU();
 
-            final LogOf LOGGER = LogOf.get(clazz);
-            LOG.Ke.info(LOGGER, "Result of calculated, Insert = {0}, Update = {1}",
-                String.valueOf(inserted.size()),
-                String.valueOf(updated.size()));
+            final Logger log = LoggerFactory.getLogger(clazz);
+            log.info("[ XMOD ] 比对结果，Insert = {}, Update = {}", inserted.size(), updated.size());
 
             final List<Future<JsonArray>> futures = new ArrayList<>();
-            futures.add(Fx.ofJArray(iFun).apply(inserted));
-            futures.add(Fx.ofJArray(uFun).apply(updated));
+            if (Ut.isNotNil(inserted)) {
+                futures.add(iFun.apply(inserted));
+            }
+            if (Ut.isNotNil(updated)) {
+                futures.add(uFun.apply(updated));
+            }
             return Fx.compressA(futures);
         };
     }

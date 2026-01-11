@@ -8,23 +8,14 @@ import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.module.finance.common.DataBill;
-import io.zerows.extension.module.finance.domain.tables.daos.FBillDao;
-import io.zerows.extension.module.finance.domain.tables.daos.FBillItemDao;
-import io.zerows.extension.module.finance.domain.tables.daos.FPreAuthorizeDao;
-import io.zerows.extension.module.finance.domain.tables.daos.FTransDao;
-import io.zerows.extension.module.finance.domain.tables.daos.FTransItemDao;
-import io.zerows.extension.module.finance.domain.tables.pojos.FBill;
-import io.zerows.extension.module.finance.domain.tables.pojos.FPreAuthorize;
-import io.zerows.extension.module.finance.domain.tables.pojos.FSettlement;
-import io.zerows.extension.module.finance.domain.tables.pojos.FTrans;
-import io.zerows.extension.module.finance.domain.tables.pojos.FTransItem;
+import io.zerows.extension.module.finance.domain.tables.daos.*;
+import io.zerows.extension.module.finance.domain.tables.pojos.*;
 import io.zerows.extension.module.finance.servicespec.BookStub;
 import io.zerows.extension.module.finance.servicespec.EndSettleRStub;
 import io.zerows.extension.module.finance.servicespec.EndTransStub;
 import io.zerows.extension.module.finance.servicespec.FetchStub;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
-import io.zerows.support.fn.Fx;
 import jakarta.inject.Inject;
 
 import java.util.ArrayList;
@@ -172,6 +163,9 @@ public class FetchActor {
     @Address(Addr.BillItem.FETCH_BOOK_BY_KEY)
     public Future<JsonObject> fetchBook(final String bookId) {
         // Null Prevent
-        return Fx.ofJObject(this.bookStub::fetchByKey).apply(bookId);
+        if (Ut.isNil(bookId)) {
+            return Ux.futureJ();
+        }
+        return this.bookStub.fetchByKey(bookId);
     }
 }

@@ -8,8 +8,8 @@ import io.zerows.epoch.metadata.security.KPermit;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.constant.VValue;
 import io.zerows.sdk.security.AbstractAdmit;
+import io.zerows.support.Fx;
 import io.zerows.support.Ut;
-import io.zerows.support.fn.Fx;
 
 import java.util.Objects;
 
@@ -22,7 +22,7 @@ public class HSDimNorm extends AbstractAdmit {
 
     @Override
     public Future<JsonObject> compile(final KPermit permit, final JsonObject request) {
-        return Fx.choiceJ(request, KName.ITEMS,
+        return Fx.combineJ(request, KName.ITEMS,
             itemJ -> {
                 final Class<?> daoCls = Ut.valueC(itemJ, KName.DAO, null);
                 if (Objects.isNull(daoCls)) {

@@ -19,13 +19,12 @@ import java.util.Objects;
 @SuppressWarnings("all")
 public class InvokerFuture extends InvokerBase {
 
-    @Override
-    public void ensure(final Class<?> returnType,
-                       final Class<?> paramCls) {
-        // Verify
-        final boolean valid =
-            Future.class.isAssignableFrom(returnType) && paramCls == Envelop.class;
-        InvokerUtil.verify(!valid, returnType, paramCls, this.getClass());
+    private InvokerFuture(Method method) {
+        super(method);
+        final boolean isOk = CallSpec.isRetFuture(method)
+            && CallSpec.isInEnvelop(method);
+        // 合法：返回值必须是 Future 且参数必须是 Envelop
+        this.failureAt(isOk, method);
     }
 
     @Override

@@ -9,7 +9,7 @@ import io.zerows.epoch.configuration.NodeNetwork;
 import io.zerows.epoch.configuration.NodeVertx;
 import io.zerows.platform.enums.VertxComponent;
 import io.zerows.specification.development.compiled.HBundle;
-import io.zerows.support.fn.Fx;
+import io.zerows.support.Fx;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
@@ -42,7 +42,7 @@ public class EnergyVertxService implements EnergyVertx {
          */
         final ConcurrentMap<String, NodeVertx> vertxInstances = network.vertxNodes();
 
-        
+
         final ConcurrentMap<String, Future<RunVertx>> futureMap = new ConcurrentHashMap<>();
         vertxInstances.forEach((name, nodeVertx) ->
             futureMap.put(name, this.ofVertx(bundle).createAsync(nodeVertx, isClustered)));

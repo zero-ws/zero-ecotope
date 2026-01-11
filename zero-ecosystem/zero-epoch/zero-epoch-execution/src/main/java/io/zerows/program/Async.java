@@ -4,8 +4,8 @@ import io.vertx.core.Future;
 import io.vertx.core.Promise;
 import io.zerows.platform.constant.VValue;
 import io.zerows.platform.metadata.KRef;
+import io.zerows.support.Fx;
 import io.zerows.support.Ut;
-import io.zerows.support.base.FnBase;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -34,7 +34,7 @@ class Async {
     static <T> Future<T> future(final T input, final Set<Function<T, Future<T>>> set) {
         final List<Future<T>> futures = new ArrayList<>();
         set.stream().map(consumer -> consumer.apply(input)).forEach(futures::add);
-        FnBase.combineT(futures).compose(nil -> {
+        Fx.combineT(futures).compose(nil -> {
             log.info("[ ZERO ] ( Job ) 系统监测到 `{}` 任务已成功执行!", set.size());
             return ToCommon.future(nil);
         });

@@ -4,16 +4,8 @@ import io.r2mo.function.Fn;
 import io.vertx.core.json.DecodeException;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.core.shareddata.ClusterSerializable;
-import io.zerows.platform.enums.Result;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Function;
 
 /**
@@ -314,22 +306,5 @@ class UJson {
                 UIterator.itJArray(subNew).anyMatch(jsonNew -> jsonNew.equals(jsonOld))
             );
         }
-    }
-
-
-    static Boolean endBool(final JsonObject input, final String field) {
-        final JsonObject inputJ = UJson.valueJObject(input, false);
-        final String literal = inputJ.getString(field);
-        final Result resultValue = TTo.toEnum(literal, Result.class, Result.FAILURE);
-        return Result.SUCCESS == resultValue;
-    }
-
-    static JsonObject endBool(final boolean checked, final String key) {
-        final Result response = checked ? Result.SUCCESS : Result.FAILURE;
-        return new JsonObject().put(key, response.name());
-    }
-
-    static JsonObject endJObject(final String key, final ClusterSerializable data) {
-        return new JsonObject().put(key, data);
     }
 }

@@ -6,17 +6,12 @@ import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.application.YmlCore;
+import io.zerows.support.Fx;
 import io.zerows.support.Ut;
-import io.zerows.support.base.FnBase;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Function;
 
 /**
@@ -58,7 +53,7 @@ class RegistryLegacy {
                 methodSet.forEach(method -> queue.add(json -> invokeComponent(componentCls, method, vertx)));
             }
         });
-        return FnBase.parallel(Boolean.TRUE, queue);
+        return Fx.parallel(Boolean.TRUE, queue);
     }
 
     private static Set<Method> registryBridgeMethod(final Class<?> clazz) {
@@ -116,7 +111,7 @@ class RegistryLegacy {
                 }
             }
         });
-        return FnBase.combineB(async);
+        return Fx.combineB(async);
     }
 
     private static Future<Boolean> invokeComponent(final Class<?> clazz, final String methodName, final Vertx vertx) {

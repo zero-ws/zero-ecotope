@@ -25,22 +25,17 @@ import org.camunda.bpm.engine.impl.history.handler.HistoryEventHandler;
 import org.camunda.bpm.engine.impl.persistence.StrongUuidGenerator;
 import org.jooq.Configuration;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author lang : 2025-12-23
  */
 @Slf4j
 public class MDWorkflowManager extends MDModuleManager<MetaWorkflow, Boolean> {
-    private static MDWorkflowManager INSTANCE;
     // 流程定义
     private static final Cc<String, WFlow> CC_FLOW = Cc.open();
     private static final Cc<String, JsonObject> CC_TODO = Cc.open();
-
+    private static MDWorkflowManager INSTANCE;
     private static ProcessEngine ENGINE;
     private static HistoryEventHandler HANDLER;
 
@@ -142,7 +137,7 @@ public class MDWorkflowManager extends MDModuleManager<MetaWorkflow, Boolean> {
         final WFlowDao flowDao = new WFlowDao(dbConfig, vertxRef);
         return flowDao.findAll().compose(flows -> {
             log.info("{} 流程定义: {}", KeConstant.K_PREFIX_BOOT, flows.size());
-            CC_FLOW.putAll(Ut.elementZip(flows, WFlow::getCode, flow -> flow));
+            CC_FLOW.putAll(Ut.elementMap(flows, WFlow::getCode, flow -> flow));
             return Future.succeededFuture(Boolean.TRUE);
         });
     }

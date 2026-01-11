@@ -9,8 +9,8 @@ import io.zerows.epoch.metadata.security.KPermit;
 import io.zerows.epoch.metadata.security.KSemi;
 import io.zerows.program.Ux;
 import io.zerows.sdk.security.HValve;
+import io.zerows.support.Fx;
 import io.zerows.support.Ut;
-import io.zerows.support.fn.Fx;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -67,7 +67,10 @@ public class HSUiArea extends HSUiNorm {
         });
         return Fx.combineM(futureMap)
             /* children = {} */
-            .compose(normalized -> Fx.ifJObject(KName.CHILDREN, Ut.toJObject(normalized)));
+            .compose(normlized -> {
+                final JsonObject processed = Ut.toJObject(normlized);
+                return Future.succeededFuture(new JsonObject().put(KName.CHILDREN, processed));
+            });
     }
 
     private JsonObject valueChild(final String code, final JsonObject requestJ) {

@@ -1,101 +1,94 @@
 package io.zerows.cortex;
 
-import io.r2mo.function.Fn;
-import io.r2mo.typed.cc.Cc;
-import io.vertx.core.Future;
 import io.vertx.core.eventbus.Message;
 import io.zerows.cortex.exception._40047Exception500InvokerNull;
-import io.zerows.epoch.web.Envelop;
 
-import java.util.Objects;
+import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 /**
- *
+ * Worker 模式下的调用者路由处理，根据不同的方法签名直接路由到不同的调用者中实现完整分流模式
+ * <pre>
+ *     1. 旧版本的第二参使用了 {@link Class} 类型，此处拓展成全参数模式
+ *     2. 追加了 {@link Message} 的全域调用模式，并且增强参数处理流程
+ * </pre>
  */
 public class InvokerGateway {
 
-    // Invoker Cache for Multi Thread
-    public static final Cc<String, Invoker> CCT_INVOKER = Cc.openThread();
-
-    public static Invoker invoker(final Class<?> returnType,
-                                  final Class<?> paramCls) {
-        Invoker invoker = null;
-        if (void.class == returnType || Void.class == returnType) {
-
+    public static Invoker invoker(final Method method) {
+        // ----------------------- Void / void
+        if (CallSpec.isRetVoid(method)) {
             /*
              * 「Async Support」
-             * Method return type is: void/Void
-             * It means that you must implement internal async operation in
-             * the method programming.
+             * 方法返回值是：void/Void，您必须内部实现异步流程，并且在方法内部处理相关逻辑，
+             * 还有一点，对于 message 类型的参数，必须在内部调用 reply，否则不会成功
              */
-            if (Envelop.class == paramCls) {
+            if (CallSpec.isInEnvelop(method)) {
                 // void method(Envelop)
-                invoker = CCT_INVOKER.pick(InvokerPing::new, InvokerPing.class.getName()); // Ut.?ingleton(PingInvoker.class);
-            } else if (Message.class.isAssignableFrom(paramCls)) {
-                // void method(Message<Envelop>)
-                invoker = CCT_INVOKER.pick(InvokerMessage::new, InvokerMessage.class.getName()); // Ut.?ingleton(MessageInvoker.class);
-            } else {
-                // void method(Tool)
-                invoker = CCT_INVOKER.pick(InvokerPingT::new, InvokerPingT.class.getName()); // Ut.?ingleton(PingTInvoker.class);
+                return Invoker.of(InvokerPing.class, method);
             }
-        } else if (Envelop.class == returnType) {
+
+            if (CallSpec.isInMessage(method)) {
+                // void method(Message<Envelop>)
+                return Invoker.of(InvokerMessage.class, method);
+            }
 
 
+            // void method(???)
+            return Invoker.of(InvokerPingT.class, method);
+        }
+
+
+        // ----------------------- Envelop
+        if (CallSpec.isRetEnvelop(method)) {
             /*
              * 「Sync Only」
-             * Method return type is: Envelop
-             * This operation of method is sync operation definition, you can not
-             * do any async operation in this kind of mode
+             * 方法返回值是 Envelop，此操作是内部定义的标准同步操作，您不能在此模式下执行异步操作
              */
-            if (Envelop.class == paramCls) {
+            if (CallSpec.isInEnvelop(method)) {
                 // Envelop method(Envelop)
-                // Rpc supported.
-                invoker = CCT_INVOKER.pick(InvokerSync::new, InvokerSync.class.getName()); // Ut.?ingleton(SyncInvoker.class);
-            } else {
-                // Envelop method(I)
-                invoker = CCT_INVOKER.pick(InvokerDim::new, InvokerDim.class.getName()); // Ut.?ingleton(DimInvoker.class);
+                return Invoker.of(InvokerSync.class, method);
             }
-        } else if (Future.class.isAssignableFrom(returnType)) {
 
 
+            // Envelop method(???)
+            return Invoker.of(InvokerDim.class, method);
+        }
+
+
+        // ----------------------- Future
+        if (CallSpec.isRetFuture(method)) {
             /*
              * 「Async Only」
-             * Method return type is: Future
-             * This operation of method is async operation definition, you can not
-             * do any sync operation in this kind of mode
+             * 方法返回值必须是 Future，标准模式
              */
-            if (Envelop.class == paramCls) {
-                // Future<Tool> method(Envelop)
-                // Rpc supported.
-                invoker = CCT_INVOKER.pick(InvokerFuture::new, InvokerFuture.class.getName()); // Ut.?ingleton(FutureInvoker.class);
-            } else {
-                // Future<Tool> method(I)
-                // Rpc supported.
-                invoker = CCT_INVOKER.pick(InvokerAsync::new, InvokerAsync.class.getName()); // Ut.?ingleton(AsyncInvoker.class);
+            if (CallSpec.isInEnvelop(method)) {
+                // Future<?> method(Envelop)
+                return Invoker.of(InvokerFuture.class, method);
             }
-        } else {
 
 
-            /*
-             * 「Freedom」
-             * Freedom mode is standard java specification method here, but in this kind of
-             * mode, the framework remove three situations:
-             * 1. Return = void/Void
-             * 2. Return = Envelop
-             * 3. Return = Future
-             *
-             * Also when you process this kind of method definition, the `Message` could not
-             * be used, if you want to do Async operation, you can select `Future` returned type
-             * as code major style in zero framework, it's recommend
-             */
-            if (!Message.class.isAssignableFrom(paramCls)) {
-                // Java direct type, except Message<Tool> / Envelop
-                // Tool method(I)
-                // Rpc supported.
-                invoker = CCT_INVOKER.pick(InvokerDynamic::new, InvokerDynamic.class.getName()); // Ut.?ingleton(DynamicInvoker.class);
-            }
+            // Future<T> method(I) 最高频的使用模式
+            return Invoker.of(InvokerAsync.class, method);
         }
-        Fn.jvmKo(Objects.isNull(invoker), _40047Exception500InvokerNull.class, returnType, paramCls);
-        return invoker;
+
+
+        // ----------------------- 参数不可以带有 Message
+        if (!CallSpec.isInMessage(method)) {
+            /*
+             * 自由模式（推荐模式）
+             * 自由模式采用了标准 Java 编程方法，但移除了下边几种特殊情况
+             * 1. 返回值 = void/Void
+             * 2. 返回值 = Envelop
+             * 3. 返回值 = Future
+             * 若想要执行这种模式，`Message` 就直接被禁用了，若想要异步则可直接返回 Future
+             */
+            return Invoker.of(InvokerDynamic.class, method);
+        }
+        final String parameters = Arrays.stream(method.getParameterTypes())
+            .map(Class::getSimpleName) // 获取类名 (不含包名)
+            .collect(Collectors.joining(", ", "[", "]")); // 拼接：分隔符, 前缀, 后缀
+        throw new _40047Exception500InvokerNull(method.getReturnType(), parameters);
     }
 }

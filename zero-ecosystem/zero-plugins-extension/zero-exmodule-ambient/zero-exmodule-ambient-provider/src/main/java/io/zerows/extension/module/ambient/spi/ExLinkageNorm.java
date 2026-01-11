@@ -10,7 +10,6 @@ import io.zerows.extension.module.ambient.serviceimpl.LinkService;
 import io.zerows.extension.module.ambient.servicespec.LinkStub;
 import io.zerows.extension.skeleton.spi.ExLinkage;
 import io.zerows.support.Ut;
-import io.zerows.support.fn.Fx;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
@@ -29,9 +28,10 @@ public class ExLinkageNorm implements ExLinkage {
 
     @Override
     public Future<JsonArray> fetch(final JsonObject criteria) {
-        return DB.on(XLinkageDao.class).fetchJAsync(criteria).compose(Fx.ofJArray(
-            KName.SOURCE_DATA,
-            KName.TARGET_DATA
-        ));
+        return DB.on(XLinkageDao.class).fetchJAsync(criteria)
+            .map(item -> Ut.valueToJArray(item,
+                KName.SOURCE_DATA,
+                KName.TARGET_DATA
+            ));
     }
 }

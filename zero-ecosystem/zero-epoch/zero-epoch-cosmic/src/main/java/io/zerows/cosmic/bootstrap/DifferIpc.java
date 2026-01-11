@@ -1,7 +1,6 @@
 package io.zerows.cosmic.bootstrap;
 
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.component.log.LogOf;
 import io.zerows.cortex.sdk.Aim;
 import io.zerows.cosmic.exception._40013Exception500ReturnType;
 import io.zerows.epoch.basicore.WebEvent;
@@ -10,8 +9,6 @@ import io.zerows.support.Ut;
 import java.lang.reflect.Method;
 
 class DifferIpc implements Differ<RoutingContext> {
-
-    private static final LogOf LOGGER = LogOf.get(DifferIpc.class);
 
     private DifferIpc() {
     }
@@ -25,17 +22,13 @@ class DifferIpc implements Differ<RoutingContext> {
         final Method method = event.getAction();
         final Class<?> returnType = method.getReturnType();
         // Rpc Mode only
-        Aim<RoutingContext> aim = null;
+        final Aim<RoutingContext> aim;
         if (Void.class == returnType || void.class == returnType) {
-            // Exception because this method must has return type to
-            // send message to event bus. It means that it require
-            // return types.
             throw new _40013Exception500ReturnType(method);
-        } else {
-            // Mode 6: Ipc channel enabled
-            aim = Differ.CC_AIMS.pick(() -> Ut.instance(AimIpc.class), "Mode Ipc");
-            // FnZero.po?l(Pool.AIMS, Thread.currentThread().getName() + "-mode-ipc",() -> Ut.instance(IpcAim.class));
         }
+
+        // Mode 6: Ipc channel enabled
+        aim = Differ.CC_AIMS.pick(() -> Ut.instance(AimIpc.class), AimType.IPC_COMMON.name());
         return aim;
     }
 

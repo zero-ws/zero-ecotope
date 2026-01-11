@@ -33,7 +33,7 @@ public abstract class DiGuiceModule extends AbstractModule {
         final Constructor<T> constructor = Ut.constructor(clazz);
         if (clazz.isAnnotationPresent(Singleton.class)) {
             // 追加了 @Singleton 注解
-            this.bind(clazz).toConstructor(constructor).asEagerSingleton();
+            this.bind(clazz).toConstructor(constructor).in(Singleton.class);
         } else {
             // 未追加 @Singleton 注解
             this.bind(clazz).toConstructor(constructor);

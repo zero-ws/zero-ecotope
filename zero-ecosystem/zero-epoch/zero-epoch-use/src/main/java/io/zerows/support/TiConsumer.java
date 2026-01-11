@@ -1,4 +1,4 @@
-package io.zerows.support.fn;
+package io.zerows.support;
 
 /**
  * @author lang : 2025-09-27

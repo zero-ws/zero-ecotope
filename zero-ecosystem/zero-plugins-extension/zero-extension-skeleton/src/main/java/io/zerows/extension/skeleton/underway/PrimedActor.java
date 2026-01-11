@@ -10,7 +10,7 @@ import io.zerows.extension.skeleton.boot.ExAbstractHActor;
 import io.zerows.extension.skeleton.common.KeConstant;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.spi.HPI;
-import io.zerows.support.fn.Fx;
+import io.zerows.support.Fx;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -9,7 +9,7 @@ import io.zerows.epoch.constant.KWeb;
 import io.zerows.plugins.store.neo4j.Neo4jClient;
 import io.zerows.plugins.store.neo4j.Neo4jInfix;
 import io.zerows.program.Ux;
-import io.zerows.support.fn.Fx;
+import io.zerows.support.Fx;
 
 import java.util.ArrayList;
 import java.util.List;

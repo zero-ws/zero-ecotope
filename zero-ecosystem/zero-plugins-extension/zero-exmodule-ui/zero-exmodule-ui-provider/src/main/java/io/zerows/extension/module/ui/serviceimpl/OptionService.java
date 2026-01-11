@@ -5,20 +5,11 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.DB;
-import io.zerows.extension.module.ui.domain.tables.daos.UiOpDao;
-import io.zerows.extension.module.ui.domain.tables.daos.VFragmentDao;
-import io.zerows.extension.module.ui.domain.tables.daos.VQueryDao;
-import io.zerows.extension.module.ui.domain.tables.daos.VSearchDao;
-import io.zerows.extension.module.ui.domain.tables.daos.VTableDao;
-import io.zerows.extension.module.ui.domain.tables.pojos.UiOp;
-import io.zerows.extension.module.ui.domain.tables.pojos.VFragment;
-import io.zerows.extension.module.ui.domain.tables.pojos.VQuery;
-import io.zerows.extension.module.ui.domain.tables.pojos.VSearch;
-import io.zerows.extension.module.ui.domain.tables.pojos.VTable;
+import io.zerows.extension.module.ui.domain.tables.daos.*;
+import io.zerows.extension.module.ui.domain.tables.pojos.*;
 import io.zerows.extension.module.ui.servicespec.OptionStub;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
-import io.zerows.support.fn.Fx;
 
 import java.util.List;
 import java.util.Optional;
@@ -32,7 +23,7 @@ public class OptionService implements OptionStub {
         return DB.on(VQueryDao.class)
             .<VQuery>fetchByIdAsync(id)
             .compose(Ux::futureJ)
-            .compose(Fx.ofJObject(
+            .map(item -> Ut.valueToJObject(item,
                 FIELD_QUERY_CRITERIA,
                 FIELD_QUERY_PROJECTION
             ));
@@ -43,7 +34,7 @@ public class OptionService implements OptionStub {
         return DB.on(VSearchDao.class)
             .<VSearch>fetchByIdAsync(id)
             .compose(Ux::futureJ)
-            .compose(Fx.ofJObject(
+            .map(item -> Ut.valueToJObject(item,
                 FIELD_SEARCH_NOTICE,
                 FIELD_SEARCH_VIEW,
                 FIELD_SEARCH_COND
@@ -55,7 +46,7 @@ public class OptionService implements OptionStub {
         return DB.on(VFragmentDao.class)
             .<VFragment>fetchByIdAsync(id)
             .compose(Ux::futureJ)
-            .compose(Fx.ofJObject(
+            .map(item -> Ut.valueToJObject(item,
                 FIELD_FRAGMENT_MODEL,
                 FIELD_FRAGMENT_NOTICE,
                 FIELD_FRAGMENT_CONFIG,
@@ -68,7 +59,7 @@ public class OptionService implements OptionStub {
         return DB.on(VTableDao.class)
             .<VTable>fetchByIdAsync(id)
             .compose(Ux::futureJ)
-            .compose(Fx.ofJObject(
+            .map(item -> Ut.valueToJObject(item,
                 FIELD_TABLE_OP_CONFIG
             ));
     }
@@ -94,7 +85,7 @@ public class OptionService implements OptionStub {
                 .insertAsync(ops)
                 .compose(Ux::futureA)
                 // 3. mountOut
-                .compose(Fx.ofJArray(
+                .map(item -> Ut.valueToJArray(item,
                     FIELD_OP_CONFIG,
                     FIELD_OP_PLUGIN,
                     KName.METADATA

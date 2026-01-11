@@ -8,6 +8,7 @@ import org.hibernate.validator.messageinterpolation.ResourceBundleMessageInterpo
 import org.hibernate.validator.spi.resourceloading.ResourceBundleLocator;
 
 import java.util.Locale;
+import java.util.Map;
 
 @SuppressWarnings("all")
 public class ValidatorInterpolator extends ValidatorMessager {
@@ -67,8 +68,23 @@ public class ValidatorInterpolator extends ValidatorMessager {
 
     @Override
     public String interpolate(final Context context, final Locale locale, final String term) {
-        // Fallback: return term as is.
-        // Full EL interpolation would require constructing an ELContext with proper bean references.
+        if (term.startsWith("${") && term.endsWith("}")) {
+            final String key = term.substring(2, term.length() - 1);
+            final String value = this.findMessage(key, locale);
+            if (value != null) {
+                return value;
+            }
+        }
+        if (term.startsWith("{") && term.endsWith("}")) {
+            final String key = term.substring(1, term.length() - 1);
+            if (context != null && context.getConstraintDescriptor() != null) {
+                final Map<String, Object> attributes = context.getConstraintDescriptor().getAttributes();
+                if (attributes != null && attributes.containsKey(key)) {
+                    final Object value = attributes.get(key);
+                    return value == null ? "null" : value.toString();
+                }
+            }
+        }
         return term;
     }
 }

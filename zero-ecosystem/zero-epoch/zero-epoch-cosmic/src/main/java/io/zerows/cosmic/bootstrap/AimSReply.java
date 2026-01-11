@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
  * SyncAim: Non-Event Bus: Request-Response
  */
 @Slf4j
-public class AimSync extends AimBase implements Aim<RoutingContext> {
+public class AimSReply extends AimBase implements Aim<RoutingContext> {
     @Override
     public Handler<RoutingContext> attack(final WebEvent event) {
         return (context) -> this.exec(() -> {

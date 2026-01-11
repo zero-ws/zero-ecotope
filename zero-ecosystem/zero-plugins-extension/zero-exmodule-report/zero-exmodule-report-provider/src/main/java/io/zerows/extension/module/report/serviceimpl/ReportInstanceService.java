@@ -16,9 +16,8 @@ import io.zerows.extension.module.report.domain.tables.pojos.KpReport;
 import io.zerows.extension.module.report.domain.tables.pojos.KpReportInstance;
 import io.zerows.extension.module.report.servicespec.ReportInstanceStub;
 import io.zerows.program.Ux;
+import io.zerows.support.Fx;
 import io.zerows.support.Ut;
-import io.zerows.support.base.FnBase;
-import io.zerows.support.fn.Fx;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,10 +59,8 @@ public class ReportInstanceService implements ReportInstanceStub {
     public Future<JsonObject> fetchInstance(final String key) {
         return DB.on(KpReportInstanceDao.class)
             .fetchByIdAsync(key)
-            .compose(Ux::futureJ).compose(Fx.ofJObject(
-                "reportContent",
-                "reportData"
-            ));
+            .compose(Ux::futureJ)
+            .map(item -> Ut.valueToJObject(item, "reportContent", "reportData"));
     }
 
     /**
@@ -95,7 +92,6 @@ public class ReportInstanceService implements ReportInstanceStub {
      * @param data       数据部分
      * @param params     参数部分
      * @param generation 生成配置
-     *
      * @return 生成好的报表实例
      */
     @Override
@@ -160,7 +156,6 @@ public class ReportInstanceService implements ReportInstanceStub {
      *
      * @param params     参数
      * @param generation 生成配置
-     *
      * @return 所有参数信息做输入处理
      */
     private Future<ConcurrentMap<String, Object>> parameterPrepare(final JsonObject params,
@@ -178,7 +173,7 @@ public class ReportInstanceService implements ReportInstanceStub {
             final KpFeature feature = generation.featureGlobal(featureName);
             futures.add(input.prepare(params, configureJ, feature));
         });
-        return FnBase.combineT(futures).compose(processed -> {
+        return Fx.combineT(futures).compose(processed -> {
             final ConcurrentMap<String, Object> paramMap = new ConcurrentHashMap<>();
             processed.forEach(kv -> {
                 if (paramMap.containsKey(kv.key())) {

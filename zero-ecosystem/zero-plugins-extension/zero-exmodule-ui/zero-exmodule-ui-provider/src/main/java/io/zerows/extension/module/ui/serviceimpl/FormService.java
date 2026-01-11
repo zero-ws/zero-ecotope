@@ -12,13 +12,12 @@ import io.zerows.extension.module.ui.servicespec.FieldStub;
 import io.zerows.extension.module.ui.servicespec.FormStub;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
-import io.zerows.support.fn.Fx;
 import jakarta.inject.Inject;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
 
-import static io.zerows.extension.module.ui.boot.Ui.LOG;
-
+@Slf4j
 public class FormService implements FormStub {
     private static final LogOf LOGGER = LogOf.get(FormService.class);
 
@@ -30,15 +29,14 @@ public class FormService implements FormStub {
         return DB.on(UiFormDao.class).<UiForm>fetchByIdAsync(formId)
             .compose(form -> {
                 if (Objects.isNull(form)) {
-                    LOG.Ui.warn(LOGGER, " Form not found, id = {0}", formId);
+                    log.warn("[ XMOD ] ( Ui ) 表单未找到， id = {}", formId);
                     return Ux.future(new JsonObject());
-                } else {
-                    /*
-                     * form / fields combine here
-                     */
-                    final JsonObject formJson = Ut.serializeJson(form);
-                    return this.attachConfig(formJson);
                 }
+                /*
+                 * form / fields combine here
+                 */
+                final JsonObject formJson = Ut.serializeJson(form);
+                return this.attachConfig(formJson);
             });
     }
 
@@ -50,17 +48,10 @@ public class FormService implements FormStub {
         return DB.on(UiFormDao.class).<UiForm>fetchAndAsync(condition)
             /* List<UiForm> */
             .compose(Ux::futureA)
-            .compose(Fx.ofJArray(
+            .map(item -> Ut.valueToJArray(item,
                 KName.Ui.HIDDEN,
                 KName.METADATA
             ));
-        //            .compose(forms -> {
-        //                Ut.itJArray(forms).forEach(form -> {
-        //                    Ke.mountArray(form, KName.Ui.HIDDEN);
-        //                    Ke.mount(form, KName.METADATA);
-        //                });
-        //                return Ux.future(forms);
-        //            });
     }
 
     @Override
@@ -73,19 +64,18 @@ public class FormService implements FormStub {
             .<UiForm>fetchOneAsync(filters)
             .compose(form -> {
                 if (Objects.isNull(form)) {
-                    LOG.Ui.warn(LOGGER, " Form not found, code = {0}, sigma = {1}", code, sigma);
+                    log.warn("[ XMOD ] ( Ui ) 表单未找到， code = {}, sigma = {}", code, sigma);
                     return Ux.future(new JsonObject());
-                } else {
-                    /*
-                     * form / fields combine here
-                     */
-                    final JsonObject formJson = Ut.serializeJson(form);
-                    return this.attachConfig(formJson)
-                        /*
-                         * Adapter for form configuration
-                         */
-                        .compose(config -> Ux.future(config.getJsonObject("form")));
                 }
+                /*
+                 * form / fields combine here
+                 */
+                final JsonObject formJson = Ut.serializeJson(form);
+                return this.attachConfig(formJson)
+                    /*
+                     * Adapter for form configuration
+                     */
+                    .compose(config -> Ux.future(config.getJsonObject("form")));
             });
     }
 
@@ -103,7 +93,7 @@ public class FormService implements FormStub {
             .updateAsync(key, uiForm)
             .compose(Ux::futureJ)
             // 3. mountOut
-            .compose(Fx.ofJObject(
+            .map(item -> Ut.valueToJObject(item,
                 KName.Ui.HIDDEN,
                 KName.Ui.ROW,
                 KName.METADATA
@@ -157,18 +147,4 @@ public class FormService implements FormStub {
             /* Put `ui` to form configuration */
             .compose(ui -> Ux.future(config.put("form", form.put("ui", ui))));
     }
-
-    //    private JsonObject mountIn(final JsonObject data) {
-    //        Ke.mountString(data, KName.Ui.HIDDEN);
-    //        Ke.mountString(data, KName.Ui.ROW);
-    //        Ke.mountString(data, KName.METADATA);
-    //        return data;
-    //    }
-    //
-    //    private JsonObject mountOut(final JsonObject data) {
-    //        Ke.mountArray(data, KName.Ui.HIDDEN);
-    //        Ke.mount(data, KName.Ui.ROW);
-    //        Ke.mount(data, KName.METADATA);
-    //        return data;
-    //    }
 }

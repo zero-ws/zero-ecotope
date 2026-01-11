@@ -14,61 +14,13 @@ import java.util.Objects;
 class _Reflect extends _Random {
     protected _Reflect() {
     }
-
-    /**
-     * 执行SPI级的实例化操作，Service Provider Interface 的底层执行
-     *
-     * @param interfaceCls 接口类型
-     * @param <T>          实例化的最终类型
-     *
-     * @return 实例化对象
-     */
-    @Deprecated
-    public static <T> T service(final Class<T> interfaceCls) {
-        return USPI.service(interfaceCls, (Class<?>) null, false);
-    }
-
-    /**
-     * 执行SPI级别的实例化操作，Service Provider Interface 的底层执行，带有第二参数限定
-     * 读取此SPI时，走严格模式还是宽松模式
-     * <pre><code>
-     *     1. 严格模式下，如果没有找到对应的实现类，则抛出异常
-     *     2. 非严格模式下，如果没有找到对应的视线类，直接返回 null
-     * </code></pre>
-     *
-     * @param interfaceCls 接口类型
-     * @param strict       是否严格模式
-     * @param <T>          实例化的最终类型
-     *
-     * @return 实例化对象
-     */
-    @Deprecated
-    public static <T> T service(final Class<T> interfaceCls, final boolean strict) {
-        return USPI.service(interfaceCls, (Class<?>) null, strict);
-    }
-
-    /**
-     * 执行SPI级的实例化操作，Service Provider Interface 的底层执行
-     * 可传入类加载器执行模块级的SPI实例化操作
-     *
-     * @param interfaceCls 接口类型
-     * @param loader       类加载器
-     * @param <T>          实例化的最终类型
-     *
-     * @return 实例化对象
-     */
-    @Deprecated
-    public static <T> T service(final Class<T> interfaceCls, final ClassLoader loader) {
-        return USPI.service(interfaceCls, loader, false);
-    }
-
+    
     /**
      * 判断 implCls 是否实现了 interfaceCls 接口，或者是否是 interfaceCls 的子类
      * 若 implCls 不是父类，则递归检索父类直到最终的 Object 类
      *
      * @param implCls      实现类
      * @param interfaceCls 接口类
-     *
      * @return 是否实现
      */
     public static boolean isImplement(final Class<?> implCls, final Class<?> interfaceCls) {
@@ -79,7 +31,6 @@ class _Reflect extends _Random {
      * 判断 findRunning 是否是一个类
      *
      * @param value 值
-     *
      * @return 是否是类
      */
     public static boolean isClass(final Object value) {
@@ -102,7 +53,6 @@ class _Reflect extends _Random {
      * @param className   类名
      * @param instanceCls 默认的类
      * @param loader      类加载器
-     *
      * @return Class<?> 对象
      */
     public static Class<?> clazzBy(final String className, final Class<?> instanceCls,
@@ -123,12 +73,11 @@ class _Reflect extends _Random {
      * - ClassLoader.getSystemClassLoader()
      * - ClassLoader.getPlatformClassLoader()
      * </code></pre>
-     *
+     * <p>
      * 改名的主要目的是旧系统和模块应用中的调用会有冲突
      *
      * @param className 类名
      * @param loader    类加载器
-     *
      * @return Class<?> 对象
      */
     public static Class<?> clazzBy(final String className, final ClassLoader loader) {
@@ -150,7 +99,6 @@ class _Reflect extends _Random {
      *
      * @param className   类名
      * @param instanceCls 默认的类
-     *
      * @return Class<?> 对象
      */
     public static Class<?> clazz(final String className, final Class<?> instanceCls) {
@@ -171,7 +119,6 @@ class _Reflect extends _Random {
      * </code></pre>
      *
      * @param className 类名
-     *
      * @return Class<?> 对象
      */
     public static Class<?> clazz(final String className) {
@@ -184,7 +131,6 @@ class _Reflect extends _Random {
      * @param clazz  类名
      * @param params 构造参数
      * @param <T>    T
-     *
      * @return T
      */
     public static <T> T instance(final Class<?> clazz, final Object... params) {
@@ -197,7 +143,6 @@ class _Reflect extends _Random {
      * @param className 类名
      * @param params    构造参数
      * @param <T>       T
-     *
      * @return T
      */
     public static <T> T instance(final String className, final Object... params) {
@@ -210,7 +155,6 @@ class _Reflect extends _Random {
      * @param className 类名
      * @param params    构造参数
      * @param <T>       T
-     *
      * @return T
      */
     public static <T> T singleton(final String className, final Object... params) {
@@ -223,7 +167,6 @@ class _Reflect extends _Random {
      * @param clazz  类名
      * @param params 构造参数
      * @param <T>    T
-     *
      * @return T
      */
     public static <T> T singleton(final Class<?> clazz, final Object... params) {
@@ -236,7 +179,6 @@ class _Reflect extends _Random {
      * @param clazz  类
      * @param params 构造参数
      * @param <T>    T
-     *
      * @return 构造函数
      */
     public static <T> Constructor<T> constructor(final Class<?> clazz, final Object... params) {
@@ -247,7 +189,6 @@ class _Reflect extends _Random {
      * 检查传入类是否带有默认无参构造函数
      *
      * @param clazz 类
-     *
      * @return 是否带有默认无参构造函数
      */
     public static boolean isDefaultConstructor(final Class<?> clazz) {
@@ -283,7 +224,6 @@ class _Reflect extends _Random {
      * @param instance 对象
      * @param name     属性名
      * @param <T>      属性值类型
-     *
      * @return 属性值
      */
     public static <T> T field(final Object instance, final String name) {
@@ -299,7 +239,6 @@ class _Reflect extends _Random {
      * @param interfaceCls 接口类
      * @param name         常量名
      * @param <T>          常量值类型
-     *
      * @return 常量值
      */
     public static <T> T field(final Class<?> interfaceCls, final String name) {
@@ -313,7 +252,6 @@ class _Reflect extends _Random {
      * @param name     方法名
      * @param args     参数
      * @param <T>      返回值类型
-     *
      * @return 返回值
      */
     public static <T> T invoke(final Object instance, final String name, final Object... args) {
@@ -327,7 +265,6 @@ class _Reflect extends _Random {
      * @param name  方法名
      * @param args  参数
      * @param <T>   返回值类型
-     *
      * @return 返回值
      */
     public static <T> T invokeStatic(final Class<?> clazz, final String name, final Object... args) {
@@ -341,7 +278,6 @@ class _Reflect extends _Random {
      * @param method   方法
      * @param args     参数
      * @param <T>      T
-     *
      * @return Future
      */
     public static <T> Future<T> invokeAsync(final Object instance, final Method method, final Object... args) {

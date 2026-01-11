@@ -28,12 +28,10 @@ class DifferCommon implements Differ<RoutingContext> {
         Aim<RoutingContext> aim = null;
         if (Void.class == returnType || void.class == returnType) {
             // Mode 4: Non-Event Bus: One-Way
-            aim = Differ.CC_AIMS.pick(() -> Ut.instance(AimPing.class), "Mode Ping");
-            // FnZero.po?l(Pool.AIMS, Thread.currentThread().getName() + "-mode-ping", () -> Ut.instance(PingAim.class));
+            aim = Differ.CC_AIMS.pick(() -> Ut.instance(AimSPing.class), AimType.SYNC_PING.name());
         } else {
             // Mode 2: Non-Event Bus: Request-Response\
-            aim = Differ.CC_AIMS.pick(() -> Ut.instance(AimSync.class), "Mode Sync");
-            // FnZero.po?l(Pool.AIMS, Thread.currentThread().getName() + "-mode-sync", () -> Ut.instance(SyncAim.class));
+            aim = Differ.CC_AIMS.pick(() -> Ut.instance(AimSReply.class), AimType.SYNC_REPLY.name());
         }
         return aim;
     }

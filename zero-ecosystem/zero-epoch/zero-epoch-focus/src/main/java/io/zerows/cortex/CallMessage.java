@@ -1,0 +1,16 @@
+package io.zerows.cortex;
+
+import io.vertx.core.eventbus.Message;
+import io.zerows.epoch.web.Envelop;
+
+import java.lang.reflect.Method;
+
+class CallMessage implements Invoker.Action {
+    @Override
+    public <T> T execute(final Object proxy, final Method method, final Object... args) {
+        final Envelop envelop = (Envelop) args[0];
+        final Message<?> message = (Message<?>) args[1];
+        final Object[] arguments = CallUtil.parseArguments(method, envelop, message);
+        return Invoker.ofAction(InvokerType.ONE_ENVELOP).execute(proxy, method, arguments);
+    }
+}

@@ -9,8 +9,8 @@ import io.zerows.extension.module.workflow.domain.tables.pojos.WTicket;
 import io.zerows.extension.module.workflow.domain.tables.pojos.WTodo;
 import io.zerows.extension.module.workflow.metadata.WTask;
 import io.zerows.program.Ux;
+import io.zerows.support.Fx;
 import io.zerows.support.Ut;
-import io.zerows.support.base.FnBase;
 import org.camunda.bpm.engine.task.Task;
 
 import java.util.ArrayList;
@@ -50,7 +50,7 @@ public class GearMulti extends AbstractGear {
             queue.add(starter.buildAsync(eachData, task, null));
         });
 
-        return FnBase.combineT(queue).compose(generatedQ -> {
+        return Fx.combineT(queue).compose(generatedQ -> {
 
             final AtomicInteger seed = new AtomicInteger(1);
             generatedQ.forEach(generated -> {
@@ -82,7 +82,7 @@ public class GearMulti extends AbstractGear {
             // 1. Deserialize new WTodo
             queue.add(generator.buildAsync(eachData, task, todo));
         });
-        return FnBase.combineT(queue).compose(generatedQ -> {
+        return Fx.combineT(queue).compose(generatedQ -> {
 
             final AtomicInteger seed = new AtomicInteger(1);
             generatedQ.forEach(generated -> {

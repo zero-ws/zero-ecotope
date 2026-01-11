@@ -5,13 +5,7 @@ import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.basicore.MDConfig;
-import io.zerows.epoch.basicore.MDConfiguration;
-import io.zerows.epoch.basicore.MDConnect;
-import io.zerows.epoch.basicore.MDEntity;
-import io.zerows.epoch.basicore.MDId;
-import io.zerows.epoch.basicore.MDMeta;
-import io.zerows.epoch.basicore.MDWorkflow;
+import io.zerows.epoch.basicore.*;
 import io.zerows.extension.skeleton.boot.ExAbstractHActor;
 import io.zerows.extension.skeleton.common.KeConstant;
 import io.zerows.specification.app.HAmbient;
@@ -20,8 +14,8 @@ import io.zerows.specification.configuration.HActor;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HRegistry;
 import io.zerows.specification.development.compiled.HBundle;
+import io.zerows.support.Fx;
 import io.zerows.support.Ut;
-import io.zerows.support.fn.Fx;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -152,7 +146,6 @@ public abstract class MDModuleActor extends ExAbstractHActor {
      *
      * @param config   加载的配置信息
      * @param vertxRef Vertx 实例引用
-     *
      * @return 加载结果（异步）
      */
     @Override

@@ -10,7 +10,7 @@ import io.zerows.platform.metadata.RRule;
 import io.zerows.program.Ux;
 import io.zerows.specification.modeling.HRecord;
 import io.zerows.specification.modeling.HReference;
-import io.zerows.support.base.FnBase;
+import io.zerows.support.Fx;
 
 import java.util.List;
 import java.util.Objects;
@@ -19,15 +19,15 @@ import java.util.concurrent.ConcurrentMap;
 
 /**
  * ## Abstract Reference Processor
- *
+ * <p>
  * ### 1. Intro
- *
+ * <p>
  * Template pattern to provide all the calculation metadata in current class, all sub-classes could share the data structure that current class defined.
- *
+ * <p>
  * ### 2. Components
- *
+ * <p>
  * Here are two hash maps that stored `field = xx`, the `xx` means components of following two categories:
- *
+ * <p>
  * - RaySource: The field calculator component that contains code logical ( Action ).
  * - DataQRule: The field definition rules POJO data object that contains metadata definition ( Rule ).
  *
@@ -51,15 +51,14 @@ public abstract class AbstractRay<T> implements AoRay<T> {
 
     /**
      * Bind the component to data model template {@link DataTpl}.
-     *
+     * <p>
      * The critical code logical is as following:
-     *
+     * <p>
      * - Bind the {@link DataTpl} to instance member `tpl`.
      * - Be sure the {@link DataAtom} in {@link DataTpl} is valid.
      * - Calculate the two hash maps in this method.
      *
      * @param tpl {@link DataTpl} The template that will be bind.
-     *
      * @return {@link AoRay} The component reference
      * @throws _80540Exception501AnonymousAtom Atom in tpl contains errors.
      */
@@ -82,11 +81,10 @@ public abstract class AbstractRay<T> implements AoRay<T> {
 
     /**
      * This method will modify the input {@link HRecord} element(s).
-     *
+     * <p>
      * Here contains `shorten` code logical when the hash map is EMPTY, skip reference calculator.
      *
      * @param input Input element of {@link HRecord} for single/multi
-     *
      * @return Return the modified data record(s).
      */
     @Override
@@ -111,7 +109,6 @@ public abstract class AbstractRay<T> implements AoRay<T> {
      * This method must be inherit by all sub-classes, it provide reference data mounting.
      *
      * @param input Input element of {@link HRecord} for single/multi
-     *
      * @return Return the modified data record(s).
      */
     public abstract T exec(T input);
@@ -119,7 +116,7 @@ public abstract class AbstractRay<T> implements AoRay<T> {
     public abstract Future<T> execAsync(T input);
 
     protected Future<ConcurrentMap<String, JsonArray>> thenCombine(final List<Future<ConcurrentMap<String, JsonArray>>> futures) {
-        return FnBase.combineT(futures).compose(listMap -> {
+        return Fx.combineT(futures).compose(listMap -> {
             final ConcurrentMap<String, JsonArray> response = new ConcurrentHashMap<>();
             listMap.forEach(response::putAll);
             return Ux.future(response);

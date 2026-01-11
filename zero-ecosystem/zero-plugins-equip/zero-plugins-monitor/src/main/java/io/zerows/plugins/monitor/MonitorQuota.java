@@ -11,7 +11,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.plugins.monitor.client.QuotaMetric;
 import io.zerows.plugins.monitor.metadata.MonitorConstant;
 import io.zerows.plugins.monitor.metadata.YmMonitor;
-import io.zerows.support.fn.Fx;
+import io.zerows.support.Fx;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;

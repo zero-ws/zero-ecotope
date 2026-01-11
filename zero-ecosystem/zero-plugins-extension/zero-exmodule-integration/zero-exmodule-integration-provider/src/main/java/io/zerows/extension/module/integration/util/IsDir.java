@@ -15,7 +15,6 @@ import io.zerows.extension.module.integration.domain.tables.pojos.IDirectory;
 import io.zerows.platform.constant.VString;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
-import io.zerows.support.fn.Fx;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -84,31 +83,29 @@ class IsDir {
     }
 
     static Future<JsonObject> output(final JsonObject response) {
-        return Fx.ofJObject(
+        final JsonObject directory = Ut.valueToJObject(response,
             KName.METADATA,
             KName.VISIT_GROUP,
             KName.VISIT_ROLE,
             KName.VISIT_MODE
-        ).apply(response).compose(directory -> {
-            directory.put(KName.DIRECTORY, Boolean.TRUE);
-            Ut.valueCopy(directory, KName.KEY, KName.DIRECTORY_ID);
-            return Ux.future(directory);
-        });
+        );
+        directory.put(KName.DIRECTORY, Boolean.TRUE);
+        Ut.valueCopy(directory, KName.KEY, KName.DIRECTORY_ID);
+        return Ux.future(directory);
     }
 
     static Future<JsonArray> output(final JsonArray response) {
-        return Fx.ofJArray(
+        final JsonArray directory = Ut.valueToJArray(response,
             KName.METADATA,
             KName.VISIT_GROUP,
             KName.VISIT_ROLE,
             KName.VISIT_MODE
-        ).apply(response).compose(directory -> {
-            Ut.itJArray(directory).forEach(each -> {
-                each.put(KName.DIRECTORY, Boolean.TRUE);
-                Ut.valueCopy(each, KName.KEY, KName.DIRECTORY_ID);
-            });
-            return Ux.future(directory);
+        );
+        Ut.itJArray(directory).forEach(each -> {
+            each.put(KName.DIRECTORY, Boolean.TRUE);
+            Ut.valueCopy(each, KName.KEY, KName.DIRECTORY_ID);
         });
+        return Ux.future(directory);
     }
 
     static Future<List<IDirectory>> query(final JsonObject condition) {

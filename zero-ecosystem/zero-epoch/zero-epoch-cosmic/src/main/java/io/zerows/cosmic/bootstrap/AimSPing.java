@@ -12,7 +12,7 @@ import io.zerows.support.Ut;
 /**
  * BlockAim: Non-Event Bus: One-Way
  */
-public class AimPing extends AimBase implements Aim<RoutingContext> {
+public class AimSPing extends AimBase implements Aim<RoutingContext> {
     private static final ForStatus STATE = SPI.V_STATUS;
 
     @Override

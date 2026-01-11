@@ -1,8 +1,8 @@
 package io.zerows.specification.modeling.metadata;
 
 import io.vertx.core.json.JsonArray;
+import io.zerows.spi.HPI;
 import io.zerows.spi.modeler.MetaOn;
-import io.zerows.support.base.UtBase;
 
 import java.util.Collection;
 import java.util.List;
@@ -17,7 +17,7 @@ import java.util.concurrent.ConcurrentMap;
  *        的情况，则该模型的 complex = true
  *     2. 添加有四个核心重载方法，用于追加单属性相关信息
  * </code></pre>
- *
+ * <p>
  * 元模型作为模型定义的基础，用来针对模型本身执行分析和结构化，辅助序列化手段
  * <pre><code>
  *     1. 可以快速从 InJson 结构反序列化到模型定义（定义描述内容）
@@ -31,7 +31,7 @@ public interface HMetaAtom extends HMetaAtomMatrix {
     static HMetaAtom of() {
         final MetaOn metaOn = CACHE.CCT_META_ON.pick(
             // 缓存 + SPI 双模式，既保证性能又保证扩展
-            () -> UtBase.service(MetaOn.class, false),
+            () -> HPI.findOneOf(MetaOn.class),
             MetaOn.class.getName()
         );
         return Objects.isNull(metaOn) ? new MetaAtom() : metaOn.atom();
@@ -41,7 +41,6 @@ public interface HMetaAtom extends HMetaAtomMatrix {
      * 添加单个字段到模型中
      *
      * @param field 字段
-     *
      * @return 模型
      */
     HMetaAtom add(HMetaField field);
@@ -52,7 +51,6 @@ public interface HMetaAtom extends HMetaAtomMatrix {
      * @param name  字段名
      * @param alias 字段别名
      * @param type  字段类型
-     *
      * @return 模型
      */
     HMetaAtom add(String name, String alias, Class<?> type);
@@ -62,7 +60,6 @@ public interface HMetaAtom extends HMetaAtomMatrix {
      *
      * @param name 字段名
      * @param type 字段类型
-     *
      * @return 模型
      */
     default HMetaAtom add(final String name, final Class<?> type) {
@@ -75,7 +72,6 @@ public interface HMetaAtom extends HMetaAtomMatrix {
      * @param name     字段名
      * @param alias    字段别名
      * @param children 字段子集
-     *
      * @return 模型
      */
     HMetaAtom add(String name, String alias, Collection<HMetaField> children);
@@ -85,7 +81,6 @@ public interface HMetaAtom extends HMetaAtomMatrix {
      *
      * @param name     字段名
      * @param children 字段子集
-     *
      * @return 模型
      */
     default HMetaAtom add(final String name, final Collection<HMetaField> children) {
@@ -111,7 +106,6 @@ public interface HMetaAtom extends HMetaAtomMatrix {
      * 判断某个字段是否复杂字段
      *
      * @param field 字段名
-     *
      * @return 是否复杂字段
      */
     boolean isComplex(String field);
@@ -127,7 +121,6 @@ public interface HMetaAtom extends HMetaAtomMatrix {
      * 返回某个字段的子字段数量
      *
      * @param field 字段名
-     *
      * @return 子字段数量
      */
     int size(String field);
@@ -136,7 +129,6 @@ public interface HMetaAtom extends HMetaAtomMatrix {
      * 返回某个字段的字段类型
      *
      * @param field 字段名
-     *
      * @return 字段类型
      */
     Class<?> type(String field);
@@ -146,7 +138,6 @@ public interface HMetaAtom extends HMetaAtomMatrix {
      *
      * @param field      字段名
      * @param childField 子字段名
-     *
      * @return 子字段类型
      */
     Class<?> type(String field, String childField);
@@ -164,7 +155,6 @@ public interface HMetaAtom extends HMetaAtomMatrix {
      * 读取传入字段 field 的字段原始定义
      *
      * @param field 字段名
-     *
      * @return 字段原始定义
      */
     HMetaField field(String field);
@@ -191,7 +181,6 @@ interface HMetaAtomMatrix {
      * 提取索引为 index 的类型信息
      *
      * @param index 索引
-     *
      * @return 类型信息
      */
     Class<?> type(Integer index);
@@ -207,7 +196,6 @@ interface HMetaAtomMatrix {
      * 逆向分析专用接口，根据数据分析类型
      *
      * @param matrix 数据矩阵
-     *
      * @return 元数据信息
      */
     HMetaAtom compile(JsonArray matrix);

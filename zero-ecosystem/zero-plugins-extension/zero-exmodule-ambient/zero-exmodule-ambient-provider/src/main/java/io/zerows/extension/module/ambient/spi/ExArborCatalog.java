@@ -9,7 +9,7 @@ import io.zerows.extension.module.ambient.domain.tables.daos.XCategoryDao;
 import io.zerows.extension.module.ambient.domain.tables.pojos.XCategory;
 import io.zerows.extension.skeleton.spi.ExArborBase;
 import io.zerows.program.Ux;
-import io.zerows.support.fn.Fx;
+import io.zerows.support.Ut;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -44,7 +44,7 @@ public class ExArborCatalog extends ExArborBase {
                 });
                 return Ux.futureA(compress);
             })
-            .compose(Fx.ofJArray(
+            .map(item -> Ut.valueToJArray(item,
                 KName.METADATA,
                 KName.Component.TREE_CONFIG,
                 KName.Component.RUN_CONFIG

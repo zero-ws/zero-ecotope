@@ -6,7 +6,6 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.epoch.store.jooq.DB;
-import io.zerows.extension.module.rbac.metadata.logged.ScRole;
 import io.zerows.extension.module.rbac.domain.tables.daos.RRolePermDao;
 import io.zerows.extension.module.rbac.domain.tables.daos.SActionDao;
 import io.zerows.extension.module.rbac.domain.tables.daos.SPermSetDao;
@@ -15,13 +14,14 @@ import io.zerows.extension.module.rbac.domain.tables.pojos.RRolePerm;
 import io.zerows.extension.module.rbac.domain.tables.pojos.SAction;
 import io.zerows.extension.module.rbac.domain.tables.pojos.SPermSet;
 import io.zerows.extension.module.rbac.domain.tables.pojos.SPermission;
+import io.zerows.extension.module.rbac.metadata.logged.ScRole;
 import io.zerows.extension.module.rbac.servicespec.ActionStub;
 import io.zerows.extension.module.rbac.servicespec.PermStub;
 import io.zerows.platform.constant.VName;
 import io.zerows.platform.constant.VString;
 import io.zerows.program.Ux;
+import io.zerows.support.Fx;
 import io.zerows.support.Ut;
-import io.zerows.support.base.FnBase;
 import jakarta.inject.Inject;
 
 import java.time.LocalDateTime;
@@ -65,7 +65,7 @@ public class PermService implements PermStub {
             })
             .compose(jooq::updateAsync)
         ).forEach(entities::add);
-        return FnBase.combineT(entities).compose(actions -> {
+        return Fx.combineT(entities).compose(actions -> {
 
             /*
              * Build relation between actionId -> permissionId
@@ -84,7 +84,7 @@ public class PermService implements PermStub {
                     return Ux.future(action);
                 }).compose(jooq::updateAsync)
             ));
-            return FnBase.combineT(actionList);
+            return Fx.combineT(actionList);
         }).compose(nil -> Ux.future(relation));
     }
 

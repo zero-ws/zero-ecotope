@@ -7,19 +7,19 @@ import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.Message;
+import io.zerows.cortex.exception._40018Exception500AsyncSignature;
 import io.zerows.cortex.plugins.uddi.Uddi;
 import io.zerows.cortex.plugins.uddi.UddiClient;
-import io.zerows.epoch.annotations.Me;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.platform.constant.VValue;
-import io.zerows.platform.enums.modeling.EmValue;
 import io.zerows.support.Ut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * Uniform call TunnelClient to remove duplicated codes
@@ -27,6 +27,12 @@ import java.util.function.Function;
  */
 @SuppressWarnings("all")
 public abstract class InvokerBase implements Invoker {
+
+    protected final Method method;
+
+    protected InvokerBase(final Method method) {
+        this.method = method;
+    }
 
     protected Logger logger() {
         return LoggerFactory.getLogger(getClass());
@@ -41,20 +47,12 @@ public abstract class InvokerBase implements Invoker {
         final Method method,
         final Envelop envelop) {
         // Preparing Method
-        invokePre(method, envelop);
+        Invoker.ofPre(PreMe::new).execute(method, envelop);
+
         final Object reference = envelop.data();
         final Class<?> argType = method.getParameterTypes()[VValue.IDX];
         final Object arguments = Ut.deserialize(Ut.toString(reference), argType);
         return InvokerUtil.invoke(proxy, method, arguments);
-    }
-
-    private void invokePre(final Method method, final Envelop envelop) {
-        if (method.isAnnotationPresent(Me.class)) {
-            final Annotation annotation = method.getDeclaredAnnotation(Me.class);
-            final EmValue.Bool active = Ut.invoke(annotation, "active");
-            final boolean app = Ut.invoke(annotation, "app");
-            envelop.onMe(active, app);
-        }
     }
 
     protected <I> Envelop invokeWrap(final I input) {
@@ -70,16 +68,23 @@ public abstract class InvokerBase implements Invoker {
     /**
      * R method(Tool..)
      */
-    protected Object invokeInternal(
-        final Object proxy,
-        final Method method,
-        final Envelop envelop
-    ) {
+    protected Object invokeInternal(final Object proxy, final Method method, final Envelop envelop) {
         // Preparing Method
-        invokePre(method, envelop);
-        // Return findRunning here.
-        return InvokerUtil.invokeCall(proxy, method, envelop);
+        Invoker.ofPre(PreMe::new).execute(method, envelop);
+
+        // Return value here.
+        return InvokerUtil.invokeAsync(proxy, method, envelop, null);
     }
+
+    protected void invokeInternal(final Object proxy, final Method method, final Message<Envelop> message) {
+        final Envelop envelop = message.body();
+        // Preparing Method
+        Invoker.ofPre(PreMe::new).execute(method, envelop);
+
+        // Return value here.
+        InvokerUtil.invokeAsync(proxy, method, envelop, message);
+    }
+
 
     protected <T> Handler<AsyncResult<T>> invokeHandler(final Message<Envelop> message) {
         return handler -> {
@@ -109,5 +114,17 @@ public abstract class InvokerBase implements Invoker {
     ) {
         final UddiClient client = Uddi.client(getClass());
         return client.bind(vertx).bind(method).connect(Envelop.moveOn(result));
+    }
+
+    protected void failureAt(final boolean isOk, final Method method) {
+        if (isOk) {
+            return;
+        }
+        final Class<?> returnType = method.getReturnType();
+        final Class<?>[] paramCls = method.getParameterTypes();
+        final String parameters = Arrays.stream(paramCls)
+            .map(Class::getSimpleName) // 获取类名 (不含包名)
+            .collect(Collectors.joining(", ", "[", "]")); // 拼接：分隔符, 前缀, 后缀
+        throw new _40018Exception500AsyncSignature(returnType, parameters);
     }
 }

@@ -1,16 +1,12 @@
 package io.zerows.support.base;
 
 import io.r2mo.SourceReflect;
+import io.r2mo.base.util.R2MO;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.constant.VName;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -30,7 +26,6 @@ class _Element extends _EDS {
      * @param array   数组
      * @param element 元素
      * @param <T>     泛型
-     *
      * @return 拷贝后的数组
      */
     public static <T> T[] elementAdd(final T[] array, final T element) {
@@ -46,7 +41,6 @@ class _Element extends _EDS {
      * @param array JsonArray
      * @param json  JsonObject
      * @param field 字段名
-     *
      * @return JsonArray
      */
     public static JsonArray elementSave(final JsonArray array, final JsonObject json, final String field) {
@@ -62,7 +56,6 @@ class _Element extends _EDS {
      * @param array JsonArray
      * @param json  JsonObject
      * @param field 字段名
-     *
      * @return JsonArray
      */
     public static JsonArray elementSave(final JsonArray array, final JsonArray json, final String field) {
@@ -77,7 +70,6 @@ class _Element extends _EDS {
      * @param entity 实体
      * @param field  字段名
      * @param <T>    泛型
-     *
      * @return List<T>
      */
     public static <T> List<T> elementSave(final List<T> list, final T entity, final String field) {
@@ -92,7 +84,6 @@ class _Element extends _EDS {
      * @param entity  实体
      * @param fieldFn 字段提取函数（非标准反射）
      * @param <T>     泛型
-     *
      * @return List<T>
      */
     public static <T> List<T> elementSave(final List<T> list, final T entity, final Function<T, String> fieldFn) {
@@ -105,7 +96,6 @@ class _Element extends _EDS {
      *
      * @param input  JsonObject
      * @param fields 字段名
-     *
      * @return JsonObject
      */
     public static JsonObject elementSubset(final JsonObject input, final String... fields) {
@@ -117,7 +107,6 @@ class _Element extends _EDS {
      *
      * @param input  JsonObject
      * @param fields 字段名
-     *
      * @return JsonArray
      */
     public static JsonObject elementSubset(final JsonObject input, final Set<String> fields) {
@@ -129,7 +118,6 @@ class _Element extends _EDS {
      *
      * @param input  JsonArray
      * @param fields 字段名
-     *
      * @return JsonArray
      */
     public static JsonArray elementSubset(final JsonArray input, final Set<String> fields) {
@@ -141,7 +129,6 @@ class _Element extends _EDS {
      *
      * @param input   JsonArray
      * @param matchFn 专用执行函数
-     *
      * @return JsonArray
      */
     public static JsonArray elementSubset(final JsonArray input, final Function<JsonObject, Boolean> matchFn) {
@@ -156,7 +143,6 @@ class _Element extends _EDS {
      * @param left  左集合
      * @param right 右集合
      * @param <T>   泛型
-     *
      * @return 左右集合交集
      */
     public static <T> Set<T> elementIntersect(final Set<T> left, final Set<T> right) {
@@ -169,7 +155,6 @@ class _Element extends _EDS {
      * @param left  左集合
      * @param right 右集合
      * @param <T>   泛型
-     *
      * @return 左右集合交集
      */
     public static <T> List<T> elementIntersect(final List<T> left, final List<T> right) {
@@ -184,7 +169,6 @@ class _Element extends _EDS {
      * @param fnGet 专用执行函数
      * @param <T>   泛型
      * @param <V>   泛型
-     *
      * @return 左右集合交集
      */
     public static <T, V> Set<T> elementIntersect(final Set<T> left, final Set<T> right, final Function<T, V> fnGet) {
@@ -199,7 +183,6 @@ class _Element extends _EDS {
      * @param fnGet 专用执行函数
      * @param <T>   泛型
      * @param <V>   泛型
-     *
      * @return 左右集合交集
      */
     public static <T, V> List<T> elementIntersect(final List<T> left, final List<T> right, final Function<T, V> fnGet) {
@@ -212,7 +195,6 @@ class _Element extends _EDS {
      * @param left  左集合
      * @param right 右集合
      * @param <T>   泛型
-     *
      * @return 左右集合并集
      */
     public static <T> Set<T> elementUnion(final Set<T> left, final Set<T> right) {
@@ -225,7 +207,6 @@ class _Element extends _EDS {
      * @param left  左集合
      * @param right 右集合
      * @param <T>   泛型
-     *
      * @return 左右集合并集
      */
     public static <T> List<T> elementUnion(final List<T> left, final List<T> right) {
@@ -240,7 +221,6 @@ class _Element extends _EDS {
      * @param fnGet 专用执行函数
      * @param <T>   泛型
      * @param <V>   泛型
-     *
      * @return 左右集合并集
      */
     public static <T, V> Set<T> elementUnion(final Set<T> left, final Set<T> right, final Function<T, V> fnGet) {
@@ -255,7 +235,6 @@ class _Element extends _EDS {
      * @param fnGet 专用执行函数
      * @param <T>   泛型
      * @param <V>   泛型
-     *
      * @return 左右集合并集
      */
     public static <T, V> List<T> elementUnion(final List<T> left, final List<T> right, final Function<T, V> fnGet) {
@@ -268,7 +247,6 @@ class _Element extends _EDS {
      * @param subtrahend 被减数
      * @param minuend    减数
      * @param <T>        泛型
-     *
      * @return 差集
      */
     public static <T> Set<T> elementDiff(final Set<T> subtrahend, final Set<T> minuend) {
@@ -281,7 +259,6 @@ class _Element extends _EDS {
      * @param subtrahend 被减数
      * @param minuend    减数
      * @param <T>        泛型
-     *
      * @return 差集
      */
     public static <T> List<T> elementDiff(final List<T> subtrahend, final List<T> minuend) {
@@ -297,7 +274,6 @@ class _Element extends _EDS {
      * @param fnGet      专用执行函数
      * @param <T>        泛型
      * @param <V>        泛型
-     *
      * @return 差集
      */
     public static <T, V> Set<T> elementDiff(final Set<T> subtrahend, final Set<T> minuend, final Function<T, V> fnGet) {
@@ -313,7 +289,6 @@ class _Element extends _EDS {
      * @param fnGet      专用执行函数
      * @param <T>        泛型
      * @param <V>        泛型
-     *
      * @return 差集
      */
     public static <T, V> List<T> elementDiff(final List<T> subtrahend, final List<T> minuend, final Function<T, V> fnGet) {
@@ -331,7 +306,6 @@ class _Element extends _EDS {
      * @param <K>        key 类型
      * @param <V>        findRunning 类型
      * @param <E>        待分组集合元素类型
-     *
      * @return 分组结果
      */
     public static <K, V, E> ConcurrentMap<K, List<V>> elementGroup(final Collection<E> collection, final Function<E, K> keyFn, final Function<E, V> valueFn) {
@@ -346,7 +320,6 @@ class _Element extends _EDS {
      * @param keyFn      key 生成函数
      * @param <K>        key 类型
      * @param <E>        待分组集合元素类型
-     *
      * @return 分组结果
      */
     public static <K, E> ConcurrentMap<K, List<E>> elementGroup(final Collection<E> collection, final Function<E, K> keyFn) {
@@ -359,7 +332,6 @@ class _Element extends _EDS {
      *
      * @param source 待分组的JsonArray集合
      * @param field  分组使用的属性名
-     *
      * @return 分组结果
      */
     public static ConcurrentMap<String, JsonArray> elementGroup(final JsonArray source, final String field) {
@@ -379,7 +351,6 @@ class _Element extends _EDS {
      *
      * @param source 待分组的JsonArray集合
      * @param size   分组尺寸
-     *
      * @return 分组结果
      */
     public static List<JsonArray> elementGroup(final JsonArray source, final Integer size) {
@@ -391,7 +362,6 @@ class _Element extends _EDS {
      *
      * @param source  待分组的JsonArray集合
      * @param groupFn 分组基础字段计算逻辑
-     *
      * @return 分组结果
      */
     public static ConcurrentMap<String, JsonArray> elementGroup(final JsonArray source, final Function<JsonObject, String> groupFn) {
@@ -407,7 +377,7 @@ class _Element extends _EDS {
      * <pre><code>
      *     [ F, F, F, F, F ] + [ S, S, S, S, S ] -> [ T, T, T, T, T ]
      * </code></pre>
-     *
+     * <p>
      * 尺寸以第一个集合的尺寸为基础，类似左连接的方式进行拉平
      *
      * @param first  第一集合
@@ -416,11 +386,10 @@ class _Element extends _EDS {
      * @param <F>    第一集合元素类型
      * @param <S>    第二集合元素类型
      * @param <T>    拉平后的元素类型
-     *
      * @return 拉平后的集合
      */
     public static <F, S, T> List<T> elementZip(final List<F> first, final List<S> second, final BiFunction<F, S, T> zipFn) {
-        return CZip.zip(first, second, zipFn);
+        return R2MO.elementZip(first, second, zipFn);
     }
 
     /**
@@ -431,47 +400,10 @@ class _Element extends _EDS {
      * @param values findRunning 集合
      * @param <F>    key 类型
      * @param <T>    findRunning 类型
-     *
      * @return 拉平后的哈希表
      */
     public static <F, T> ConcurrentMap<F, T> elementZip(final List<F> keys, final List<T> values) {
-        return CZip.zip(keys, values);
-    }
-
-    /**
-     * 拉平操作，针对一个列表中的元素执行双属性的拉平
-     * 最终拉平之后生成一个哈希表，key 为第一个属性，findRunning 为第二个属性
-     *
-     * @param collection 待拉平的集合
-     * @param keyFn      key 生成函数
-     * @param valueFn    findRunning 生成函数
-     * @param <K>        key 类型
-     * @param <V>        findRunning 类型
-     * @param <E>        待拉平集合元素类型
-     *
-     * @return 拉平后的哈希表
-     */
-    public static <K, V, E> ConcurrentMap<K, V> elementZip(final Collection<E> collection,
-                                                           final Function<E, K> keyFn, final Function<E, V> valueFn) {
-        return CZip.zip(collection, keyFn, valueFn);
-    }
-
-    /**
-     * （重载）拉平操作，针对一个列表中的元素执行双属性的拉平
-     * 最终拉平之后生成一个哈希表，key 为第一个属性，findRunning 为第二个属性
-     *
-     * @param collection 待拉平的集合
-     * @param keyFn      key 生成函数
-     * @param valueFn    findRunning 生成函数
-     * @param <K>        key 类型
-     * @param <V>        findRunning 类型
-     * @param <E>        待拉平集合元素类型
-     *
-     * @return 拉平后的哈希表
-     */
-    public static <K, V, E> ConcurrentMap<K, V> elementZip(final E[] collection,
-                                                           final Function<E, K> keyFn, final Function<E, V> valueFn) {
-        return CZip.zip(Arrays.asList(collection), keyFn, valueFn);
+        return R2MO.elementZip(keys, values);
     }
 
     /**
@@ -489,12 +421,11 @@ class _Element extends _EDS {
      * @param <K>    源哈希表 key 类型
      * @param <T>    源哈希表 findRunning 类型
      * @param <V>    目标哈希表 findRunning 类型
-     *
      * @return 拉平后的哈希表
      */
     public static <K, T, V> ConcurrentMap<K, V> elementZip(final ConcurrentMap<K, T> source,
                                                            final ConcurrentMap<T, V> target) {
-        return CZip.zip(source, target);
+        return R2MO.elementZip(source, target);
     }
 
     /**
@@ -514,11 +445,10 @@ class _Element extends _EDS {
      * @param to   哈希表
      * @param <K>  key 类型
      * @param <V>  findRunning 类型
-     *
      * @return 拉平后的哈希表
      */
     public static <K, V> ConcurrentMap<K, V> elementZip(final Set<K> from, final ConcurrentMap<K, V> to) {
-        return CZip.zip(from, to);
+        return R2MO.elementZip(from, to);
     }
 
     // ------------------------ 映射运算 ------------------------
@@ -531,7 +461,6 @@ class _Element extends _EDS {
      * @param keyFn    key 生成函数
      * @param <K>      key 类型
      * @param <V>      findRunning 类型
-     *
      * @return 映射后的哈希表
      */
     public static <K, V> ConcurrentMap<K, V> elementMap(final List<V> dataList, final Function<V, K> keyFn) {
@@ -548,7 +477,6 @@ class _Element extends _EDS {
      * @param <K>      key 类型
      * @param <V>      findRunning 类型
      * @param <E>      数据列表元素类型
-     *
      * @return 映射后的哈希表
      */
     public static <K, V, E> ConcurrentMap<K, V> elementMap(final List<E> dataList, final Function<E, K> keyFn, final Function<E, V> valueFn) {
@@ -560,7 +488,6 @@ class _Element extends _EDS {
      *
      * @param dataArray 数据列表
      * @param field     字段名
-     *
      * @return 映射后的哈希表
      */
     public static ConcurrentMap<String, JsonObject> elementMap(final JsonArray dataArray, final String field) {
@@ -573,7 +500,6 @@ class _Element extends _EDS {
      *
      * @param dataArray 数据列表
      * @param field     字段名
-     *
      * @return 映射后的哈希表
      */
     public static JsonObject elementMapJ(final JsonArray dataArray, final String field) {
@@ -589,7 +515,6 @@ class _Element extends _EDS {
      * @param field     字段名
      * @param to        映射的目标字段
      * @param <T>       映射的目标字段类型
-     *
      * @return 映射后的哈希表
      */
     public static <T> ConcurrentMap<String, T> elementMap(final JsonArray dataArray, final String field, final String to) {
@@ -605,7 +530,6 @@ class _Element extends _EDS {
      * @param target    目标JsonArray
      * @param sourceKey 源JsonArray中的连接key
      * @param targetKey 目标JsonArray中的连接key
-     *
      * @return 连接后的JsonArray
      */
     public static JsonArray elementJoin(final JsonArray source, final JsonArray target,
@@ -619,7 +543,6 @@ class _Element extends _EDS {
      * @param source  源JsonArray
      * @param target  目标JsonArray
      * @param bothKey 源JsonArray和目标JsonArray中的连接key（同Key）
-     *
      * @return 连接后的JsonArray
      */
     public static JsonArray elementJoin(final JsonArray source, final JsonArray target,
@@ -632,7 +555,6 @@ class _Element extends _EDS {
      *
      * @param source 源JsonArray
      * @param target 目标JsonArray
-     *
      * @return 连接后的JsonArray
      */
     public static JsonArray elementJoin(final JsonArray source, final JsonArray target) {
@@ -648,7 +570,6 @@ class _Element extends _EDS {
      * @param entity 元素
      * @param field  属性
      * @param <T>    列表元素类型
-     *
      * @return 移除后的列表
      */
     public static <T> List<T> elementRemove(final List<T> list, final T entity, final String field) {
@@ -662,7 +583,6 @@ class _Element extends _EDS {
      * @param entity  元素
      * @param matchFn 检查条件函数
      * @param <T>     列表元素类型
-     *
      * @return 移除后的列表
      */
     public static <T> List<T> elementRemove(final List<T> list, final T entity, final Function<T, String> matchFn) {
@@ -676,7 +596,6 @@ class _Element extends _EDS {
      *
      * @param input  输入列表
      * @param fields 字段列表
-     *
      * @return 统计结果
      */
     public static ConcurrentMap<String, Integer> elementCount(final JsonArray input, final String... fields) {
@@ -688,7 +607,6 @@ class _Element extends _EDS {
      *
      * @param input    输入列表
      * @param fieldSet 字段集合
-     *
      * @return 统计结果
      */
     public static ConcurrentMap<String, Integer> elementCount(final JsonArray input, final Set<String> fieldSet) {
@@ -700,7 +618,6 @@ class _Element extends _EDS {
      *
      * @param input      输入列表
      * @param fieldArray 字段数组
-     *
      * @return 统计结果
      */
     public static ConcurrentMap<String, Integer> elementCount(final JsonArray input, final JsonArray fieldArray) {
@@ -716,7 +633,6 @@ class _Element extends _EDS {
      * @param input JsonArray
      * @param field 字段
      * @param value 值
-     *
      * @return 匹配结果
      */
     public static JsonObject elementFind(final JsonArray input, final String field, final Object value) {
@@ -728,7 +644,6 @@ class _Element extends _EDS {
      *
      * @param input   JsonArray
      * @param subsetQ 匹配对象
-     *
      * @return 匹配结果
      */
     public static JsonObject elementFind(final JsonArray input, final JsonObject subsetQ) {
@@ -741,7 +656,6 @@ class _Element extends _EDS {
      * @param list    列表
      * @param matchFn 匹配函数
      * @param <T>     列表元素类型
-     *
      * @return 匹配结果
      */
     public static <T> T elementFind(final List<T> list, final Predicate<T> matchFn) {
@@ -756,7 +670,6 @@ class _Element extends _EDS {
      * </code></pre>
      *
      * @param input 输入JsonArray
-     *
      * @return 拉平后的JsonArray
      */
     public static JsonArray elementFlat(final JsonArray input) {
@@ -782,7 +695,6 @@ class _Element extends _EDS {
      * @param dataList List 集合
      * @param <K>      Key 类型
      * @param <V>      Value 类型
-     *
      * @return 拉平后的 ConcurrentMap<K, List<V>> 集合
      */
 

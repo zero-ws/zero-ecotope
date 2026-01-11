@@ -8,16 +8,16 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.Apt;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.module.mbsecore.boot.Ao;
-import io.zerows.extension.module.mbsecore.metadata.builtin.DataAtom;
 import io.zerows.extension.module.mbsecore.domain.tables.daos.MAccDao;
 import io.zerows.extension.module.mbsecore.domain.tables.pojos.MAcc;
+import io.zerows.extension.module.mbsecore.metadata.builtin.DataAtom;
 import io.zerows.platform.enums.modeling.EmAttribute;
 import io.zerows.platform.enums.typed.ChangeFlag;
 import io.zerows.program.Ux;
 import io.zerows.specification.app.HArk;
 import io.zerows.specification.modeling.operation.HDao;
+import io.zerows.support.Fx;
 import io.zerows.support.Ut;
-import io.zerows.support.base.FnBase;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -38,7 +38,7 @@ class RiseRapid implements Rise {
 
     @Override
     public Future<Apt> fetchBatch(final JsonObject criteria, final DataAtom atom) {
-        return FnBase.combineT(
+        return Fx.combineT(
             this.inputData(criteria, atom),
             this.inputAcc(criteria, atom),
             (data, acc) -> this.combineAcc(data, acc, atom)

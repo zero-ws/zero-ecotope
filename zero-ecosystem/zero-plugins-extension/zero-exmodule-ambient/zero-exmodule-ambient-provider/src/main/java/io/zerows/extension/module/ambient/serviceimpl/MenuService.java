@@ -6,7 +6,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.module.ambient.domain.tables.daos.XMenuDao;
 import io.zerows.extension.module.ambient.servicespec.MenuStub;
-import io.zerows.support.fn.Fx;
+import io.zerows.support.Ut;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
@@ -18,6 +18,6 @@ public class MenuService implements MenuStub {
         return DB.on(XMenuDao.class)
             .fetchJAsync(KName.APP_ID, appId)
             // metadata field extraction
-            .compose(Fx.ofJArray(KName.METADATA));
+            .map(item -> Ut.valueToJArray(item, KName.METADATA));
     }
 }

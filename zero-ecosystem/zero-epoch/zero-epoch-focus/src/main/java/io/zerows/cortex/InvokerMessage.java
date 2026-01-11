@@ -14,14 +14,12 @@ import java.lang.reflect.Method;
  * void method(Messsage<Envelop>)
  */
 public class InvokerMessage extends InvokerBase {
-    @Override
-    public void ensure(final Class<?> returnType,
-                       final Class<?> paramCls) {
-        // Verify
-        final boolean valid =
-            (void.class == returnType || Void.class == returnType)
-                && Message.class.isAssignableFrom(paramCls);
-        InvokerUtil.verify(!valid, returnType, paramCls, this.getClass());
+    private InvokerMessage(final Method method) {
+        super(method);
+        final boolean isOk = CallSpec.isRetVoid(method)
+            && CallSpec.isInMessage(method);
+        // 合法：返回值必须是 void / Void 且参数必须包含 Message
+        this.failureAt(isOk, method);
     }
 
     @Override
@@ -29,8 +27,7 @@ public class InvokerMessage extends InvokerBase {
                        final Method method,
                        final Message<Envelop> message) {
         // Invoker and do not reply
-        InvokerUtil.invoke(proxy, method, message);
-        // Ut.invoke(proxy, method.getName(), message);
+        this.invokeInternal(proxy, method, message);
     }
 
     @Override

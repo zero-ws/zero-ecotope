@@ -23,11 +23,10 @@ public final class Anno {
      * name -> Annotation
      *
      * @param clazz The class that will be scanned.
-     *
      * @return hash map that stored (name = Annotation) scanned results.
      */
     public static ConcurrentMap<String, Annotation> get(final Class<?> clazz) {
-        return Ut.elementZip(clazz.getDeclaredAnnotations(),
+        return Ut.elementMap(Arrays.asList(clazz.getDeclaredAnnotations()),
             (item) -> item.annotationType().getName(),
             (item) -> item);
     }
@@ -38,7 +37,6 @@ public final class Anno {
      *
      * @param clazz     The ofMain class that will be scanned.
      * @param methodCls The annotation class that has been annotated on the methods that belong to clazz.
-     *
      * @return All the annotations that in clazz's method.
      */
     public static Annotation[] query(final Class<?> clazz,
@@ -57,7 +55,6 @@ public final class Anno {
      *
      * @param clazz   The ofMain class that will be scanned.
      * @param annoCls The annotation set that annotated on the fields that belong to ofMain.
-     *
      * @return If class contains this kind of fields, return true, otherwise return false.
      */
     public static boolean isMark(final Class<?> clazz,

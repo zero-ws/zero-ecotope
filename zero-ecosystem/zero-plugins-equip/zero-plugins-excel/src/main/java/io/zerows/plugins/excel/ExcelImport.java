@@ -14,15 +14,11 @@ import io.zerows.platform.enums.typed.ChangeFlag;
 import io.zerows.plugins.excel.exception._60039Exception500ExportingError;
 import io.zerows.plugins.excel.metadata.ExTable;
 import io.zerows.program.Ux;
+import io.zerows.support.Fx;
 import io.zerows.support.Ut;
-import io.zerows.support.base.FnBase;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentMap;
 
 /**
@@ -196,7 +192,7 @@ class ExcelImport {
                 .compose(data -> Ux.future(this.saveEntity(data, table)))
             ));
         /* Set<Tool> handler */
-        return FnBase.combineT(futures).compose(result -> {
+        return Fx.combineT(futures).compose(result -> {
             final Set<T> entitySet = new HashSet<>();
             result.forEach(entitySet::addAll);
             return Ux.future(entitySet);

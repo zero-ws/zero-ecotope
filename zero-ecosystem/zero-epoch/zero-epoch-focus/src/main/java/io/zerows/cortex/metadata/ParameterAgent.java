@@ -2,6 +2,7 @@ package io.zerows.cortex.metadata;
 
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.MultiMap;
+import io.vertx.core.Vertx;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.http.HttpServerRequest;
@@ -36,74 +37,67 @@ class ParameterAgent implements ParameterBuilder<RoutingContext> {
         return CCT_PARAM.pick(ParameterAgent::new);
     }
 
+    /**
+     * 支持类型表
+     * <pre>
+     *    - {@link XHeader}
+     *    - {@link Session}
+     *    - {@link HttpServerRequest}
+     *    - {@link HttpServerResponse}
+     *    - {@link Vertx}
+     *    - {@link EventBus}
+     *    - {@link User}
+     *    - {@link Set} (FileUpload)
+     *    - {@link JsonArray}   / 有值
+     *    - {@link JsonObject}  / 有值
+     *    - {@link Buffer}      / 有值
+     *    - {@link FileUpload}  / 有值
+     * </pre>
+     *
+     * @param context   路由上下文
+     * @param type      参数类型
+     * @param extension 扩展参数（Agent中不包含）
+     * @return 参数对象
+     */
     @Override
-    public Object build(final RoutingContext context, final Class<?> type) {
+    public Object build(final RoutingContext context, final Class<?> type, final Object... extension) {
         Object returnValue = null;
         if (is(type, XHeader.class)) {
-            /*
-             * XHeader for
-             * - sigma
-             * - id
-             * - appKey
-             * - lang
-             */
             final HttpServerRequest request = context.request();
             final MultiMap headers = request.headers();
             final XHeader header = new XHeader();
             header.fromHeader(headers);
             returnValue = header;
         } else if (is(type, Session.class)) {
-            /* Http Session */
             returnValue = context.session();
         } else if (is(type, HttpServerRequest.class)) {
-            /* HttpServerRequest type */
             returnValue = context.request();
         } else if (is(type, HttpServerResponse.class)) {
-            /* HttpServerResponse type */
             returnValue = context.response();
-        } else if (is(type, io.vertx.core.Vertx.class)) {
-            /* Vertx type */
+        } else if (is(type, Vertx.class)) {
             returnValue = context.vertx();
         } else if (is(type, EventBus.class)) {
-            /* EventBus type */
             returnValue = context.vertx().eventBus();
         } else if (is(type, User.class)) {
-            /* User type */
             returnValue = context.user();
         } else if (is(type, Set.class)) {
-            /*
-             * It's only for file uploading here.
-             * ( FileUpload ) type here for actual in agent
-             */
             returnValue = new HashSet<>(context.fileUploads());
         } else if (is(type, JsonArray.class)) {
-            /*
-             * JsonArray, Could findRunning from Serialization
-             */
             returnValue = context.body().asJsonArray();
             if (Objects.isNull(returnValue)) {
                 returnValue = new JsonArray();
             }
         } else if (is(type, JsonObject.class)) {
-            /*
-             * JsonObject, Could findRunning from Serialization
-             */
             returnValue = context.body().asJsonObject();
             if (Objects.isNull(returnValue)) {
                 returnValue = new JsonObject();
             }
         } else if (is(type, Buffer.class)) {
-            /*
-             * Buffer, Could findRunning from Serialization
-             */
             returnValue = context.body().buffer();
             if (Objects.isNull(returnValue)) {
                 returnValue = Buffer.buffer();
             }
         } else if (is(type, FileUpload.class)) {
-            /*
-             * Single FileUpload
-             */
             final Set<FileUpload> uploads = new HashSet<>(context.fileUploads());
             if (!uploads.isEmpty()) {
                 returnValue = uploads.iterator().next();

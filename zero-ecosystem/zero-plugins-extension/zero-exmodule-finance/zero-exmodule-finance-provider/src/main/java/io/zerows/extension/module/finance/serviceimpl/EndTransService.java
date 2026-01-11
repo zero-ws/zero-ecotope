@@ -10,29 +10,15 @@ import io.zerows.extension.module.finance.common.FmConstant;
 import io.zerows.extension.module.finance.common.em.EmTran;
 import io.zerows.extension.module.finance.component.IkWay;
 import io.zerows.extension.module.finance.component.Step;
-import io.zerows.extension.module.finance.domain.tables.daos.FDebtDao;
-import io.zerows.extension.module.finance.domain.tables.daos.FSettlementDao;
-import io.zerows.extension.module.finance.domain.tables.daos.FSettlementItemDao;
-import io.zerows.extension.module.finance.domain.tables.daos.FTransDao;
-import io.zerows.extension.module.finance.domain.tables.daos.FTransItemDao;
-import io.zerows.extension.module.finance.domain.tables.daos.FTransOfDao;
-import io.zerows.extension.module.finance.domain.tables.pojos.FDebt;
-import io.zerows.extension.module.finance.domain.tables.pojos.FSettlement;
-import io.zerows.extension.module.finance.domain.tables.pojos.FSettlementItem;
-import io.zerows.extension.module.finance.domain.tables.pojos.FTrans;
-import io.zerows.extension.module.finance.domain.tables.pojos.FTransItem;
-import io.zerows.extension.module.finance.domain.tables.pojos.FTransOf;
+import io.zerows.extension.module.finance.domain.tables.daos.*;
+import io.zerows.extension.module.finance.domain.tables.pojos.*;
 import io.zerows.extension.module.finance.servicespec.EndTransStub;
 import io.zerows.platform.metadata.KRef;
 import io.zerows.program.Ux;
+import io.zerows.support.Fx;
 import io.zerows.support.Ut;
-import io.zerows.support.fn.Fx;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
@@ -116,7 +102,6 @@ public class EndTransService implements EndTransStub {
      *
      * @param keys    关联主键集合
      * @param typeSet 关联类型
-     *
      * @return 关联数据集合
      */
     @Override

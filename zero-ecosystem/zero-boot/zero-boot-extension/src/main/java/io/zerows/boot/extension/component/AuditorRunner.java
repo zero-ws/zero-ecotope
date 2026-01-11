@@ -5,30 +5,24 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.component.compare.Vs;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.DB;
-import io.zerows.extension.module.mbsecore.metadata.Model;
-import io.zerows.extension.module.mbsecore.metadata.Schema;
-import io.zerows.extension.module.mbsecore.metadata.builtin.DataAtom;
-import io.zerows.extension.module.mbsecore.domain.tables.pojos.MAttribute;
-import io.zerows.extension.module.mbsecore.domain.tables.pojos.MField;
 import io.zerows.extension.module.ambient.common.em.ActivityStatus;
 import io.zerows.extension.module.ambient.domain.tables.daos.XActivityChangeDao;
 import io.zerows.extension.module.ambient.domain.tables.daos.XActivityDao;
 import io.zerows.extension.module.ambient.domain.tables.pojos.XActivity;
 import io.zerows.extension.module.ambient.domain.tables.pojos.XActivityChange;
+import io.zerows.extension.module.mbsecore.domain.tables.pojos.MAttribute;
+import io.zerows.extension.module.mbsecore.domain.tables.pojos.MField;
+import io.zerows.extension.module.mbsecore.metadata.Model;
+import io.zerows.extension.module.mbsecore.metadata.Schema;
+import io.zerows.extension.module.mbsecore.metadata.builtin.DataAtom;
 import io.zerows.platform.enums.modeling.EmAttribute;
 import io.zerows.platform.enums.typed.ChangeFlag;
 import io.zerows.program.Ux;
 import io.zerows.specification.modeling.HAttribute;
 import io.zerows.support.Ut;
-import io.zerows.support.fn.Fx;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
@@ -164,7 +158,8 @@ class AuditorRunner {
                         .insertAsync(changeList)
                         .compose(nil -> Ux.future(inserted))
                         .compose(Ux::futureJ)
-                        .compose(Fx.ofJObject(KName.METADATA, KName.RECORD_NEW, KName.RECORD_OLD))
+                        .map(item -> Ut.valueToJObject(item, KName.METADATA, KName.RECORD_NEW, KName.RECORD_OLD))
+                        // .compose(Fx.ofJObject(KName.METADATA, KName.RECORD_NEW, KName.RECORD_OLD))
                         .compose(activityResult -> {
                             /*
                              * 特殊字段判断是否继续生成待确认
@@ -188,7 +183,6 @@ class AuditorRunner {
      * @param flag      {@link ChangeFlag} 当前变更的操作,ADD,DELETE,UPDATE
      * @param atom      {@link DataAtom} 模型定义对象
      * @param ignores   {@link Set} 被忽略的属性集
-     *
      * @return {@link List} 返回变更列表
      */
     private List<XActivityChange> toChanges(final JsonObject oldRecord, final JsonObject newRecord,

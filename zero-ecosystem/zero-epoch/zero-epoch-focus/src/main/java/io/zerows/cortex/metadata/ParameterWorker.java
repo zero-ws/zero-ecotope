@@ -2,7 +2,9 @@ package io.zerows.cortex.metadata;
 
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.MultiMap;
+import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.EventBus;
+import io.vertx.core.eventbus.Message;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.http.HttpServerResponse;
 import io.vertx.ext.auth.User;
@@ -29,51 +31,49 @@ class ParameterWorker implements ParameterBuilder<Envelop> {
         return CCT_PARAM.pick(ParameterWorker::new);
     }
 
+    /**
+     * 支持类型表
+     * <pre>
+     *     - {@link XHeader}
+     *     - {@link Session}
+     *     - {@link HttpServerRequest}
+     *     - {@link HttpServerResponse}
+     *     - {@link Vertx}
+     *     - {@link EventBus}
+     *     - {@link User}
+     *     - {@link Message}  / 有值
+     * </pre>
+     *
+     * @param envelop   信封对象
+     * @param type      参数类型
+     * @param extension 扩展参数
+     * @return 参数对象
+     */
     @Override
-    public Object build(final Envelop envelop, final Class<?> type) {
-        final Object returnValue;
+    public Object build(final Envelop envelop, final Class<?> type, final Object... extension) {
+        Object returnValue = null;
         final RoutingContext context = envelop.context();
         if (is(type, XHeader.class)) {
-            /*
-             * XHeader for
-             * - sigma
-             * - id
-             * - appKey
-             * - lang
-             */
             final MultiMap headers = envelop.headers();
             final XHeader header = new XHeader();
             header.fromHeader(headers);
             returnValue = header;
         } else if (is(type, Session.class)) {
-            /*
-             * RBAC required ( When Authenticate )
-             * 1) Provide username / password to findRunning data from remote server.
-             * 2) Request temp authorization code ( Required Session ).
-             */
             returnValue = envelop.session();
         } else if (is(type, HttpServerRequest.class)) {
-            /* HttpServerRequest type */
             returnValue = context.request();
         } else if (is(type, HttpServerResponse.class)) {
-            /* HttpServerResponse type */
             returnValue = context.response();
-        } else if (is(type, io.vertx.core.Vertx.class)) {
-            /* Vertx type */
+        } else if (is(type, Vertx.class)) {
             returnValue = context.vertx();
         } else if (is(type, EventBus.class)) {
-            /* EventBus type */
             returnValue = context.vertx().eventBus();
         } else if (is(type, User.class)) {
-            /*
-             * User type
-             */
             returnValue = envelop.user();
-        } else {
-            /*
-             * EmType handler
-             */
-            returnValue = null;
+        } else if (is(type, Message.class)) {
+            if (0 < extension.length && extension[0] instanceof Message<?>) {
+                returnValue = extension[0];
+            }
         }
         return returnValue;
     }

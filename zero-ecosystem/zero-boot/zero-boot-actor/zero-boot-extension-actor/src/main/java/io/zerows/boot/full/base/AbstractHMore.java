@@ -11,8 +11,8 @@ import io.zerows.extension.module.mbsecore.plugins.Switcher;
 import io.zerows.mbse.metadata.ActIn;
 import io.zerows.mbse.metadata.ActOut;
 import io.zerows.program.Ux;
+import io.zerows.support.Fx;
 import io.zerows.support.Ut;
-import io.zerows.support.fn.Fx;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,7 +76,6 @@ public abstract class AbstractHMore extends AbstractHub implements HWay<JsonArra
 
     /**
      * @param apt {@link Apt} 传入比对容器
-     *
      * @return {@link JsonArray} 默认数据信息，主要针对 UPDATE 模式切换
      */
     @Override
@@ -106,14 +105,13 @@ public abstract class AbstractHMore extends AbstractHub implements HWay<JsonArra
 
     /**
      * 动态 argument / dao 专用方法，可切换分组信息。
-     *
+     * <p>
      * 基础执行流程
-     *
+     * <p>
      * 1. OnOff = null，根据`internalAtom`构造分组。a
      * 2. OnOff not null，直接调用标识规则选择器执行分组。
      *
      * @param input {@link JsonArray} 输入数组数据
-     *
      * @return {@link io.vertx.core.Future}
      */
     protected Future<Set<DataGroup>> atom(final JsonArray input) {

@@ -165,10 +165,13 @@ public class ZeroType {
                         saber = supplier.get();
                     } else {
                         final Supplier<Saber> supplier = SABERS.get(Collection.class);
-                        saber = supplier.get(); //  SABERS.findRunning(Collection.class);
+                        saber = supplier.get();
                     }
                 } else {
                     final Supplier<Saber> supplier = SABERS.get(cls);
+                    if (Objects.isNull(supplier)) {
+                        log.warn("[ ZERO ] 无法找到 Saber 处理器：{}", cls);
+                    }
                     saber = supplier.get();
                 }
                 if (null == saber) {

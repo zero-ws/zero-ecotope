@@ -7,7 +7,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.module.ambient.domain.tables.daos.XTabularDao;
 import io.zerows.program.Ux;
-import io.zerows.support.fn.Fx;
+import io.zerows.support.Ut;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
@@ -25,6 +25,7 @@ public class AideApp extends AideBase {
     public Future<JsonObject> fetch(final String field, final String type, final String code) {
         return DB.on(XTabularDao.class)
             .fetchOneAsync(this.condApp(field, type, code))
-            .compose(Ux::futureJ).compose(Fx.ofJObject(KName.METADATA));
+            .compose(Ux::futureJ)
+            .map(item -> Ut.valueToJObject(item, KName.METADATA));
     }
 }

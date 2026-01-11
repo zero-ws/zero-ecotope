@@ -15,7 +15,6 @@ import io.zerows.extension.skeleton.spi.ExInit;
 import io.zerows.extension.skeleton.spi.ExPrerequisite;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
-import io.zerows.support.fn.Fx;
 import jakarta.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 
@@ -36,7 +35,6 @@ public class InitService implements InitStub {
      *
      * @param appId {@link java.lang.String} The application primary key that stored in `KEY` field of `X_APP`.
      * @param data  {@link io.vertx.core.json.JsonObject} The data that will create application instance.
-     *
      * @return {@link io.vertx.core.Future}<{@link io.vertx.core.json.JsonObject}>
      */
     @Override
@@ -55,7 +53,7 @@ public class InitService implements InitStub {
             /* Data Loading */
             .compose(At.initData().apply())
             /* Image */
-            .compose(Fx.ofJObject(KName.App.LOGO));
+            .map(item -> Ut.valueToJObject(item, KName.App.LOGO));
     }
 
     @Override
@@ -95,7 +93,7 @@ public class InitService implements InitStub {
             .compose(appJson -> this.initOutput(appJson, outPath))
             .compose(this::initDefined)
             /* Image */
-            .compose(Fx.ofJObject(KName.App.LOGO));
+            .map(item -> Ut.valueToJObject(item, KName.App.LOGO));
     }
 
     private Future<JsonObject> initOutput(final JsonObject combined, final String outPath) {

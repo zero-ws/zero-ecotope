@@ -10,7 +10,7 @@ import io.zerows.platform.constant.VString;
 import io.zerows.plugins.cache.HMM;
 import io.zerows.program.Ux;
 import io.zerows.specification.vital.HQR;
-import io.zerows.support.base.FnBase;
+import io.zerows.support.Fx;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +32,7 @@ public class QBECache {
                 qr.getName();
             futures.add(MM_QBE.put(key, qr, 600).compose(v -> Ux.futureT()));
         });
-        return FnBase.combineT(futures).compose(done -> Ux.future(listQr));
+        return Fx.combineT(futures).compose(done -> Ux.future(listQr));
     }
 
     public static Future<UiView> cached(final JsonObject qr, final Supplier<Future<UiView>> executor) {

@@ -9,8 +9,8 @@ import io.zerows.extension.module.finance.domain.tables.daos.FBillItemDao;
 import io.zerows.extension.module.finance.domain.tables.pojos.FBillItem;
 import io.zerows.extension.module.finance.domain.tables.pojos.FSettlement;
 import io.zerows.program.Ux;
+import io.zerows.support.Fx;
 import io.zerows.support.Ut;
-import io.zerows.support.base.FnBase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +61,6 @@ class Step02BillItem implements Step<FSettlement, FBillItem> {
      *
      * @param data     传入的数据
      * @param inserted 已经插入的结算单
-     *
      * @return {@link Future}
      */
     @Override
@@ -74,7 +73,7 @@ class Step02BillItem implements Step<FSettlement, FBillItem> {
             final JsonArray dataArray = grouped.get(key);
             futures.add(this.buildItems(dataArray, settlement));
         });
-        return FnBase.combineT(futures).compose(combined -> {
+        return Fx.combineT(futures).compose(combined -> {
             final List<FBillItem> items = new ArrayList<>();
             combined.forEach(items::addAll);
             return Ux.future(items);

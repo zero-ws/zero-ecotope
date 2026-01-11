@@ -26,7 +26,6 @@ import io.zerows.extension.module.report.servicespec.ReportStub;
 import io.zerows.platform.metadata.KRef;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
-import io.zerows.support.fn.Fx;
 import jakarta.inject.Inject;
 
 import java.util.List;
@@ -72,10 +71,7 @@ public class ReportService implements ReportStub {
                     .compose(data -> this.instanceStub.buildAsync(data, params, generation));
             })
             .compose(Ux::futureJ)
-            .compose(Fx.ofJObject(
-                "reportData",
-                "reportContent"
-            ));
+            .map(item -> Ut.valueToJObject(item, "reportData", "reportContent"));
     }
 
     /**
@@ -83,7 +79,6 @@ public class ReportService implements ReportStub {
      *
      * @param report 报表定义
      * @param params 参数
-     *
      * @return 数据源
      */
     @Override
@@ -141,7 +136,6 @@ public class ReportService implements ReportStub {
      * 特征提取
      *
      * @param report 报表定义
-     *
      * @return 返回列表
      */
     private Future<List<KpFeature>> featureOfAll(final KpReport report) {
@@ -171,7 +165,6 @@ public class ReportService implements ReportStub {
      *
      * @param report 报表定义
      * @param params 参
-     *
      * @return 返回 Map
      */
     private Future<ConcurrentMap<String, RDimension>> reportOfDim(final KpReport report, final JsonObject params) {

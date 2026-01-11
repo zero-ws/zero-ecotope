@@ -1,5 +1,6 @@
 package io.zerows.platform.metadata;
 
+import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.zerows.platform.exception._40104Exception409RegistryDuplicated;
 import io.zerows.specification.app.HAmbient;
@@ -13,14 +14,9 @@ import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HRegistry;
 import io.zerows.specification.vital.HOI;
 import io.zerows.spi.HPI;
-import io.zerows.support.base.FnBase;
 import io.zerows.support.base.UtBase;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
 
@@ -78,52 +74,6 @@ public class KPivot<T> {
         return new KPivot<>(container);
     }
 
-    public Set<HArk> registry(final HConfig config) {
-        // 前置检查（注册拦截）
-        fail(getClass(), RUNNING);
-
-        Set<HArk> contextDefault = this.context.registry(this.container, config);
-        final Set<HArk> contextCombine = new HashSet<>();
-        if (Objects.nonNull(this.extension)) {
-            final Set<HArk> contextExtension = this.extension.registry(this.container, config);
-            contextCombine.addAll(combine(contextDefault, contextExtension));
-        }
-        contextCombine.forEach(RUNNING::registry);
-        return contextCombine;
-    }
-
-    public Future<Set<HArk>> registryAsync(final HConfig config) {
-        // 纯容器模式
-        if (Objects.isNull(config)) {
-            return Future.succeededFuture(new HashSet<>());
-        }
-        // 前置检查（异步注册拦截）
-        return failAsync(getClass(), RUNNING).compose(nil ->
-            FnBase.<Set<HArk>, Set<HArk>, Set<HArk>>combineT(
-                // 第一个异步结果
-                () -> this.context.registryAsync(this.container, config),
-                // 第二个异步结果
-                () -> this.registryExtension(config),
-                // 合并函数
-                this::registryOut
-            ));
-    }
-
-    // ------------------------ 私有部分 -----------------------
-    private Future<Set<HArk>> registryOut(final Set<HArk> source, final Set<HArk> extension) {
-        final Set<HArk> combine = combine(source, extension);
-        combine.forEach(RUNNING::registry);
-        return Future.succeededFuture(combine);
-    }
-
-    private Future<Set<HArk>> registryExtension(final HConfig config) {
-        if (Objects.isNull(this.extension)) {
-            return Future.succeededFuture();
-        } else {
-            return this.extension.registryAsync(this.container, config);
-        }
-    }
-
     private static void fail(final Class<?> clazz,
                              final HAmbient ambient) {
         final ConcurrentMap<String, HArk> stored = ambient.app();
@@ -159,5 +109,50 @@ public class KPivot<T> {
         });
         // 3. 构造线程安全的集合
         return Collections.synchronizedSet(sources);
+    }
+
+    public Set<HArk> registry(final HConfig config) {
+        // 前置检查（注册拦截）
+        fail(getClass(), RUNNING);
+
+        Set<HArk> contextDefault = this.context.registry(this.container, config);
+        final Set<HArk> contextCombine = new HashSet<>();
+        if (Objects.nonNull(this.extension)) {
+            final Set<HArk> contextExtension = this.extension.registry(this.container, config);
+            contextCombine.addAll(combine(contextDefault, contextExtension));
+        }
+        contextCombine.forEach(RUNNING::registry);
+        return contextCombine;
+    }
+
+    public Future<Set<HArk>> registryAsync(final HConfig config) {
+        // 纯容器模式
+        if (Objects.isNull(config)) {
+            return Future.succeededFuture(new HashSet<>());
+        }
+        // 前置检查（异步注册拦截）
+        return failAsync(getClass(), RUNNING).compose(nil -> FnVertx.<Set<HArk>, Set<HArk>, Set<HArk>>combineT(
+            // 第一个异步结果
+            () -> this.context.registryAsync(this.container, config),
+            // 第二个异步结果
+            () -> this.registryExtension(config),
+            // 合并函数
+            this::registryOut
+        ));
+    }
+
+    // ------------------------ 私有部分 -----------------------
+    private Future<Set<HArk>> registryOut(final Set<HArk> source, final Set<HArk> extension) {
+        final Set<HArk> combine = combine(source, extension);
+        combine.forEach(RUNNING::registry);
+        return Future.succeededFuture(combine);
+    }
+
+    private Future<Set<HArk>> registryExtension(final HConfig config) {
+        if (Objects.isNull(this.extension)) {
+            return Future.succeededFuture();
+        } else {
+            return this.extension.registryAsync(this.container, config);
+        }
     }
 }

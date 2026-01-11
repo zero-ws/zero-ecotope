@@ -11,7 +11,6 @@ import io.zerows.extension.module.ambient.domain.tables.pojos.XActivity;
 import io.zerows.extension.skeleton.spi.ExActivity;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
-import io.zerows.support.fn.Fx;
 
 import java.util.List;
 import java.util.Objects;
@@ -26,7 +25,9 @@ public class ExActivityTracker implements ExActivity {
     public Future<JsonArray> activities(final String modelId, final String modelKey) {
         return this.fetchActivities(modelId, modelKey)
             .compose(Ux::futureA)
-            .compose(Fx.ofJArray(KName.RECORD_NEW, KName.RECORD_OLD));
+            .map(item -> Ut.valueToJArray(item,
+                KName.RECORD_NEW, KName.RECORD_OLD
+            ));
     }
 
     @Override

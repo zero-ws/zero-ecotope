@@ -11,12 +11,11 @@ import java.lang.reflect.Method;
 
 public class InvokerDynamic extends InvokerBase {
 
-    @Override
-    public void ensure(final Class<?> returnType, final Class<?> paramCls) {
-        // Verify
-        final boolean valid =
-            (void.class != returnType && Void.class != returnType);
-        InvokerUtil.verify(!valid, returnType, paramCls, this.getClass());
+    private InvokerDynamic(final Method method) {
+        super(method);
+        final boolean isOk = !CallSpec.isRetVoid(method);
+        // 合法：返回值不能是 void / Void
+        this.failureAt(isOk, method);
     }
 
     @Override

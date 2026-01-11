@@ -77,6 +77,10 @@ public class Envelop implements Serializable {
      * 5) Error: XXX with input WebException
      * 6) Error: 500 Default with Throwable ( JVM Error )
      */
+    public static Envelop ok204() {
+        return new Envelop(null, SPI.V_STATUS.ok204());
+    }
+
     // 204, null
     public static Envelop ok() {
         return new Envelop(null, SPI.V_STATUS.ok());

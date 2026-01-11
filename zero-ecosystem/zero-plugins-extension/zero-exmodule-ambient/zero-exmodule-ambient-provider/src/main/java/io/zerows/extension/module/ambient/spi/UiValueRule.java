@@ -18,8 +18,8 @@ import io.zerows.platform.metadata.KRef;
 import io.zerows.program.Ux;
 import io.zerows.spi.HPI;
 import io.zerows.spi.modeler.Indent;
+import io.zerows.support.Fx;
 import io.zerows.support.Ut;
-import io.zerows.support.fn.Fx;
 
 import java.util.Comparator;
 import java.util.List;

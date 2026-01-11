@@ -13,8 +13,8 @@ import io.zerows.extension.module.rbac.metadata.ScConfig;
 import io.zerows.extension.module.rbac.servicespec.GroupStub;
 import io.zerows.extension.module.rbac.servicespec.JwtStub;
 import io.zerows.extension.module.rbac.servicespec.TokenStub;
+import io.zerows.support.Fx;
 import io.zerows.support.Ut;
-import io.zerows.support.fn.Fx;
 import jakarta.inject.Inject;
 
 import java.util.ArrayList;

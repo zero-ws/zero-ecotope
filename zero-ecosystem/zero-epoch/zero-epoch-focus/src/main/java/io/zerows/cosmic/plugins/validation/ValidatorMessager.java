@@ -29,7 +29,6 @@ public abstract class ValidatorMessager implements MessageInterpolator {
     private static final Pattern RIGHT_BRACE = Pattern.compile("\\}", 16);
     private static final Pattern SLASH = Pattern.compile("\\\\", 16);
     private static final Pattern DOLLAR = Pattern.compile("\\$", 16);
-    private final Locale defaultLocale;
     private final ResourceBundleLocator userResourceBundleLocator;
     private final ResourceBundleLocator defaultResourceBundleLocator;
     private final ResourceBundleLocator contributorResourceBundleLocator;
@@ -51,9 +50,8 @@ public abstract class ValidatorMessager implements MessageInterpolator {
     }
 
     public ValidatorMessager(final ResourceBundleLocator userResourceBundleLocator, final ResourceBundleLocator contributorResourceBundleLocator, final boolean cacheMessages) {
-        this.defaultLocale = Locale.getDefault();
         if (userResourceBundleLocator == null) {
-            this.userResourceBundleLocator = new ValidatorBundleLocator(USER_VALIDATION_MESSAGES);
+            this.userResourceBundleLocator = new ValidatorBundleLocator(USER_VALIDATION_MESSAGES, (ClassLoader) null, true);
         } else {
             this.userResourceBundleLocator = userResourceBundleLocator;
         }
@@ -137,21 +135,41 @@ public abstract class ValidatorMessager implements MessageInterpolator {
             final ResourceBundle userResourceBundle = this.userResourceBundleLocator.getResourceBundle(locale);
             final ResourceBundle constraintContributorResourceBundle = this.contributorResourceBundleLocator.getResourceBundle(locale);
             final ResourceBundle defaultResourceBundle = this.defaultResourceBundleLocator.getResourceBundle(locale);
-            boolean evaluatedDefaultBundleOnce = false;
 
-            while (true) {
-                String userBundleResolvedMessage = this.interpolateBundleMessage(resolvedMessage, userResourceBundle, locale, true);
-                if (!this.hasReplacementTakenPlace(userBundleResolvedMessage, resolvedMessage)) {
-                    userBundleResolvedMessage = this.interpolateBundleMessage(resolvedMessage, constraintContributorResourceBundle, locale, true);
-                }
-
-                if (evaluatedDefaultBundleOnce && !this.hasReplacementTakenPlace(userBundleResolvedMessage, resolvedMessage)) {
-                    return resolvedMessage;
-                }
-
-                resolvedMessage = this.interpolateBundleMessage(userBundleResolvedMessage, defaultResourceBundle, locale, false);
-                evaluatedDefaultBundleOnce = true;
+            String userBundleResolvedMessage = this.interpolateBundleMessage(resolvedMessage, userResourceBundle, locale, true);
+            if (!this.hasReplacementTakenPlace(userBundleResolvedMessage, resolvedMessage)) {
+                userBundleResolvedMessage = this.interpolateBundleMessage(resolvedMessage, constraintContributorResourceBundle, locale, true);
             }
+            if (!this.hasReplacementTakenPlace(userBundleResolvedMessage, resolvedMessage)) {
+                resolvedMessage = this.interpolateBundleMessage(resolvedMessage, defaultResourceBundle, locale, false);
+            } else {
+                resolvedMessage = userBundleResolvedMessage;
+            }
+            return resolvedMessage;
+        }
+    }
+
+    protected String findMessage(final String key, final Locale locale) {
+        final ResourceBundle userResourceBundle = this.userResourceBundleLocator.getResourceBundle(locale);
+        final ResourceBundle constraintContributorResourceBundle = this.contributorResourceBundleLocator.getResourceBundle(locale);
+        final ResourceBundle defaultResourceBundle = this.defaultResourceBundleLocator.getResourceBundle(locale);
+
+        String value = this.getValue(key, userResourceBundle);
+        if (value == null) {
+            value = this.getValue(key, constraintContributorResourceBundle);
+        }
+        if (value == null) {
+            value = this.getValue(key, defaultResourceBundle);
+        }
+        return value;
+    }
+
+    private String getValue(String key, ResourceBundle bundle) {
+        if (bundle == null || key == null) return null;
+        try {
+            return bundle.getString(key);
+        } catch (MissingResourceException e) {
+            return null;
         }
     }
 
