@@ -4,7 +4,6 @@ import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Session;
 import io.zerows.cortex.exception._40017Exception500WorkerArgument;
-import io.zerows.cortex.exception._40018Exception500AsyncSignature;
 import io.zerows.cortex.metadata.ParameterBuilder;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.platform.constant.VValue;
@@ -91,14 +90,6 @@ public class InvokerUtil {
         final Class<?>[] params = method.getParameterTypes();
         // 2. The parameters
         Fn.jvmKo(VValue.ZERO == params.length, _40017Exception500WorkerArgument.class, method);
-    }
-
-    static void verify(
-        final boolean condition,
-        final Class<?> returnType,
-        final Class<?> paramType,
-        final Class<?> target) {
-        Fn.jvmKo(condition, _40018Exception500AsyncSignature.class, returnType, paramType);
     }
 
     private static Object getValue(final Class<?> type,

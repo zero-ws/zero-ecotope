@@ -15,12 +15,12 @@ import java.lang.reflect.Method;
 public class InvokerSync extends InvokerBase {
 
     @Override
-    public void ensure(final Class<?> returnType,
-                       final Class<?> paramCls) {
+    public void canInvoke(final Class<?> returnType,
+                          final Class<?>[] paramCls) {
         // Verify
-        final boolean valid =
-            Envelop.class == returnType && paramCls == Envelop.class;
-        InvokerUtil.verify(!valid, returnType, paramCls, this.getClass());
+        final boolean valid = Envelop.class == returnType
+            && 1 == paramCls.length && paramCls[0] == Envelop.class;
+        this.canInvoke(!valid, returnType, paramCls);
     }
 
     @Override

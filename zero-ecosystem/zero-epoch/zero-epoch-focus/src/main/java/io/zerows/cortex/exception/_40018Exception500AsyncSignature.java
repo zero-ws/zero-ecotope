@@ -7,7 +7,7 @@ import io.r2mo.vertx.common.exception.VertxBootException;
  */
 public class _40018Exception500AsyncSignature extends VertxBootException {
     public _40018Exception500AsyncSignature(final Class<?> returnType,
-                                            final Class<?> paramType) {
+                                            final String paramType) {
         super(ERR._40018, returnType, paramType);
     }
 }

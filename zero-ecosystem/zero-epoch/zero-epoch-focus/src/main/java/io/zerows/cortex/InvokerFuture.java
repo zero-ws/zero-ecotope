@@ -20,12 +20,13 @@ import java.util.Objects;
 public class InvokerFuture extends InvokerBase {
 
     @Override
-    public void ensure(final Class<?> returnType,
-                       final Class<?> paramCls) {
+    public void canInvoke(final Class<?> returnType,
+                          final Class<?>[] paramCls) {
         // Verify
-        final boolean valid =
-            Future.class.isAssignableFrom(returnType) && paramCls == Envelop.class;
-        InvokerUtil.verify(!valid, returnType, paramCls, this.getClass());
+        final boolean valid = Future.class.isAssignableFrom(returnType)
+            && 1 == paramCls.length && paramCls[0] == Envelop.class;
+
+        this.canInvoke(!valid, returnType, paramCls);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package io.zerows.cortex;
 
+import io.r2mo.function.Fn;
 import io.r2mo.typed.exception.WebException;
 import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.AsyncResult;
@@ -7,6 +8,7 @@ import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.Message;
+import io.zerows.cortex.exception._40018Exception500AsyncSignature;
 import io.zerows.cortex.plugins.uddi.Uddi;
 import io.zerows.cortex.plugins.uddi.UddiClient;
 import io.zerows.epoch.annotations.Me;
@@ -19,7 +21,9 @@ import org.slf4j.LoggerFactory;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * Uniform call TunnelClient to remove duplicated codes
@@ -109,5 +113,13 @@ public abstract class InvokerBase implements Invoker {
     ) {
         final UddiClient client = Uddi.client(getClass());
         return client.bind(vertx).bind(method).connect(Envelop.moveOn(result));
+    }
+
+    protected void canInvoke(final boolean isKo,
+                             final Class<?> returnType, final Class<?>[] paramCls) {
+        final String parameters = Arrays.stream(paramCls)
+            .map(Class::getSimpleName) // 获取类名 (不含包名)
+            .collect(Collectors.joining(", ", "[", "]")); // 拼接：分隔符, 前缀, 后缀
+        Fn.jvmKo(isKo, _40018Exception500AsyncSignature.class, returnType, parameters);
     }
 }

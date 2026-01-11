@@ -7,7 +7,7 @@ import io.r2mo.vertx.common.exception.VertxBootException;
  */
 public class _40047Exception500InvokerNull extends VertxBootException {
     public _40047Exception500InvokerNull(final Class<?> returnType,
-                                         final Class<?> paramType) {
+                                         final String paramType) {
         super(ERR._40047, returnType, paramType);
     }
 }

@@ -19,11 +19,11 @@ import java.util.Objects;
 public class InvokerAsync extends InvokerBase {
 
     @Override
-    public void ensure(final Class<?> returnType, final Class<?> paramCls) {
+    public void canInvoke(final Class<?> returnType, final Class<?>[] paramCls) {
         // Verify
         final boolean valid =
             (void.class != returnType && Void.class != returnType);
-        InvokerUtil.verify(!valid, returnType, paramCls, this.getClass());
+        this.canInvoke(!valid, returnType, paramCls);
     }
 
     @Override

@@ -10,7 +10,6 @@ import io.zerows.epoch.annotations.Worker;
 import io.zerows.epoch.basicore.WebReceipt;
 import io.zerows.epoch.management.OCacheActor;
 import io.zerows.epoch.web.Envelop;
-import io.zerows.platform.constant.VValue;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.spi.HPI;
 import lombok.extern.slf4j.Slf4j;
@@ -66,11 +65,10 @@ public class ZeroHttpWorker extends AbstractVerticle {
             // length = 1
             final Class<?>[] params = method.getParameterTypes();
             final Class<?> returnType = method.getReturnType();
-            final Class<?> paramCls = params[VValue.IDX];
 
             // 6. Invoker select
-            final Invoker invoker = InvokerGateway.invoker(returnType, paramCls);
-            invoker.ensure(returnType, paramCls);
+            final Invoker invoker = InvokerGateway.invoker(returnType, params);
+            invoker.canInvoke(returnType, params);
             // 7. Record for different invokers
             INVOKER_MAP.put(receipt.hashCode(), invoker);
 

@@ -6,7 +6,6 @@ import io.vertx.core.Handler;
 import io.zerows.cortex.Invoker;
 import io.zerows.cortex.InvokerGateway;
 import io.zerows.cosmic.plugins.websocket.management.OCacheSock;
-import io.zerows.platform.constant.VValue;
 import io.zerows.platform.enums.EmService;
 import io.zerows.support.Ut;
 
@@ -57,8 +56,7 @@ public class SockGrid {
             final Method method = remind.getMethod();
             final Class<?> returnType = method.getReturnType();
             final Class<?>[] params = method.getParameterTypes();
-            final Class<?> param = 0 == params.length ? null : params[VValue.IDX];
-            final Invoker invoker = InvokerGateway.invoker(returnType, param);
+            final Invoker invoker = InvokerGateway.invoker(returnType, params);
             invoker.handle(remind.getProxy(), method, body, handler);
         }
     }

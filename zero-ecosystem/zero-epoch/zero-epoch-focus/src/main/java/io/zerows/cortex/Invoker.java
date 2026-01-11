@@ -18,7 +18,7 @@ public interface Invoker {
      * @param returnType Method return type
      * @param paramCls   Method parameters
      */
-    void ensure(final Class<?> returnType, final Class<?> paramCls);
+    void canInvoke(final Class<?> returnType, final Class<?>[] paramCls);
 
     /**
      * Invoke method and replying

@@ -9,19 +9,25 @@ import io.zerows.epoch.web.Envelop;
 import io.zerows.platform.exception._60050Exception501NotSupport;
 
 import java.lang.reflect.Method;
+import java.util.Arrays;
 
 /**
  * void method(Messsage<Envelop>)
  */
 public class InvokerMessage extends InvokerBase {
     @Override
-    public void ensure(final Class<?> returnType,
-                       final Class<?> paramCls) {
+    public void canInvoke(final Class<?> returnType,
+                          final Class<?>[] paramCls) {
         // Verify
         final boolean valid =
             (void.class == returnType || Void.class == returnType)
-                && Message.class.isAssignableFrom(paramCls);
-        InvokerUtil.verify(!valid, returnType, paramCls, this.getClass());
+                && this.isMessage(paramCls);
+        this.canInvoke(!valid, returnType, paramCls);
+    }
+
+    private boolean isMessage(final Class<?>[] paramCls) {
+        return Arrays.stream(paramCls)
+            .anyMatch(Message.class::isAssignableFrom);
     }
 
     @Override

@@ -16,11 +16,11 @@ import java.lang.reflect.Method;
 public class InvokerPing extends InvokerBase {
 
     @Override
-    public void ensure(final Class<?> returnType,
-                       final Class<?> paramCls) {
+    public void canInvoke(final Class<?> returnType,
+                          final Class<?>[] paramCls) {
         final boolean valid = (void.class == returnType || Void.class == returnType)
-            && paramCls == Envelop.class;
-        InvokerUtil.verify(!valid, returnType, paramCls, this.getClass());
+            && 1 == paramCls.length && paramCls[0] == Envelop.class;
+        this.canInvoke(!valid, returnType, paramCls);
     }
 
     @Override
