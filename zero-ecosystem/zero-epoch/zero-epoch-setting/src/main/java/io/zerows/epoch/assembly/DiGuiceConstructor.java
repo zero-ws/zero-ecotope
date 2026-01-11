@@ -2,6 +2,7 @@ package io.zerows.epoch.assembly;
 
 import com.google.inject.AbstractModule;
 import jakarta.inject.Inject;
+import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Modifier;
@@ -14,6 +15,7 @@ import java.util.concurrent.ConcurrentMap;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 @SuppressWarnings("all")
+@Slf4j
 public class DiGuiceConstructor<T extends I, I> implements DiGuice<T, I> {
     private final transient Set<Class<?>> pointers = new HashSet<>();
 

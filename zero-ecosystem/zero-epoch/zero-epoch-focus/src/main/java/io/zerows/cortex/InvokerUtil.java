@@ -23,9 +23,9 @@ import java.util.function.Supplier;
 @SuppressWarnings("all")
 @Slf4j
 public class InvokerUtil {
-    public static final String MSG_DIRECT = "( Invoker ) Invoker = {}, ReturnType = {}, Method = {}, Class = {}.";
-    public static final String MSG_RPC = "( Invoker Rpc ) Invoker = {}, ReturnType = {}, Method = {}, Class = {}.";
-    public static final String MSG_HANDLE = "( Invoker Handle ) Invoker = {}, ReturnType = {}, Method = {}, Class = {}.";
+    public static final String MSG_DIRECT = "( Call ) Invoker = {}, ReturnType = {}, Method = {}, Class = {}.";
+    public static final String MSG_RPC = "( Call Rpc ) Invoker = {}, ReturnType = {}, Method = {}, Class = {}.";
+    public static final String MSG_HANDLE = "( Call Handle ) Invoker = {}, ReturnType = {}, Method = {}, Class = {}.";
 
     public static Object invokeCall(
         final Object proxy,

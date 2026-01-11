@@ -2,6 +2,7 @@ package io.zerows.cortex.metadata;
 
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.MultiMap;
+import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.http.HttpServerResponse;
@@ -58,7 +59,7 @@ class ParameterWorker implements ParameterBuilder<Envelop> {
         } else if (is(type, HttpServerResponse.class)) {
             /* HttpServerResponse type */
             returnValue = context.response();
-        } else if (is(type, io.vertx.core.Vertx.class)) {
+        } else if (is(type, Vertx.class)) {
             /* Vertx type */
             returnValue = context.vertx();
         } else if (is(type, EventBus.class)) {

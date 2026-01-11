@@ -10,7 +10,11 @@ import io.zerows.epoch.web.Envelop;
 import java.util.Objects;
 
 /**
- *
+ * Worker 模式下的调用者路由处理，根据不同的方法签名直接路由到不同的调用者中实现完整分流模式
+ * <pre>
+ *     1. 旧版本的第二参使用了 {@link Class} 类型，此处拓展成全参数模式
+ *     2. 追加了 {@link Message} 的全域调用模式，并且增强参数处理流程
+ * </pre>
  */
 public class InvokerGateway {
 

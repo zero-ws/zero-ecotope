@@ -44,32 +44,38 @@ public class DiGuiceField<T extends I, I> implements DiGuice<T, I> {
         return new DiGuiceModule() {
             @Override
             protected void configure() {
-                if (!classes.isEmpty()) {
-                    log.info("[ ZERO ] ( DI ) \uD83E\uDEBC DI 依赖注入扫描启动...");
-                    final Set<String> ignoreSet = new HashSet<>();
-                    classes.forEach(clazz -> {
-                        if (flat.contains(clazz)) {
-                            // Standalone, Non-Constructor
-                            final String bindCls = this.bindConstructor((Class<T>) clazz);
-                            if (Objects.nonNull(bindCls)) {
-                                ignoreSet.add(bindCls);
-                            }
-                        } else {
-                            // Interface Part
-                            if (clazz.isInterface()) {
-                                final Set<Class<T>> implCls = tree.get(clazz);
-                                final Set<String> ignored = this.bindInterface((Class<I>) clazz, implCls);
-                                if (Objects.nonNull(ignored)) {
-                                    ignoreSet.addAll(ignored);
-                                }
+                if (classes.isEmpty()) {
+                    return;
+                }
+
+
+                log.info("[ ZERO ] ( DI-F ) \uD83E\uDEBC / 依赖注入扫描启动...");
+                final Set<String> ignoreSet = new HashSet<>();
+                classes.forEach(clazz -> {
+                    if (flat.contains(clazz)) {
+                        // Standalone, Non-Constructor
+                        final String bindCls = this.bindConstructor((Class<T>) clazz);
+                        if (Objects.nonNull(bindCls)) {
+                            ignoreSet.add(bindCls);
+                        }
+                    } else {
+                        // Interface Part
+                        if (clazz.isInterface()) {
+                            final Set<Class<T>> implCls = tree.get(clazz);
+                            final Set<String> ignored = this.bindInterface((Class<I>) clazz, implCls);
+                            if (Objects.nonNull(ignored)) {
+                                ignoreSet.addAll(ignored);
                             }
                         }
-                    });
-                    if (ignoreSet.isEmpty()) {
-                        log.info("[ ZERO ] ( DI ) \uD83E\uDEBC 字段扫描完成 Successfully !!!");
-                    } else {
-                        log.info("[ ZERO ] ( DI ) \uD83E\uDEBC 字段扫描完成 Successfully, 忽略项: {} !!!", Ut.fromJoin(ignoreSet));
                     }
+                });
+
+
+                // 扫描结果
+                if (ignoreSet.isEmpty()) {
+                    log.info("[ ZERO ] ( DI-F ) \uD83E\uDEBC 字段扫描完成 Successfully !!!");
+                } else {
+                    log.info("[ ZERO ] ( DI-F ) \uD83E\uDEBC 字段扫描完成 Successfully, 忽略项: {} !!!", Ut.fromJoin(ignoreSet));
                 }
             }
         };

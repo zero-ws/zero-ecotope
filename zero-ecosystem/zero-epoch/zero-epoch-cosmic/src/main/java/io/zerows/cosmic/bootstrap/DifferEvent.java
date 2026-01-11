@@ -3,7 +3,6 @@ package io.zerows.cosmic.bootstrap;
 import io.r2mo.function.Fn;
 import io.vertx.core.eventbus.Message;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.component.log.LogOf;
 import io.zerows.cortex.sdk.Aim;
 import io.zerows.cosmic.exception._40013Exception500ReturnType;
 import io.zerows.cosmic.exception._40014Exception500WorkerMissing;
@@ -11,9 +10,9 @@ import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.basicore.WebEvent;
 import io.zerows.epoch.basicore.WebReceipt;
 import io.zerows.epoch.management.OCacheActor;
-import io.zerows.platform.constant.VValue;
 
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.Set;
 
@@ -24,8 +23,6 @@ import java.util.Set;
  * 5. Vertx AsyncAim: Request -> Agent -> EventBus -> Worker -> void Response(Replier)
  */
 class DifferEvent implements Differ<RoutingContext> {
-
-    private static final LogOf LOGGER = LogOf.get(DifferEvent.class);
 
     private static final Set<WebReceipt> RECEIPTS = OCacheActor.entireValue().getReceipts();
 
@@ -38,7 +35,7 @@ class DifferEvent implements Differ<RoutingContext> {
 
     @Override
     public Aim<RoutingContext> build(final WebEvent event) {
-        Aim<RoutingContext> aim = null;
+        final Aim<RoutingContext> aim;
         final Method replier = this.findReplier(event);
         final Method method = event.getAction();
         final Class<?> returnType = method.getReturnType();
@@ -47,37 +44,39 @@ class DifferEvent implements Differ<RoutingContext> {
             // send message to event bus. It means that it require
             // return types.
             throw new _40013Exception500ReturnType(method);
+        }
+
+
+        final Class<?> replierType = replier.getReturnType();
+        if (Void.class != replierType && void.class != replierType) {
+            // Mode 1: Event Bus: Request-Response
+            aim = Differ.CC_AIMS.pick(AimAStandard::new, AimType.ASYNC_STANDARD.name());
+            return aim;     // 截断
+        }
+
+        if (this.isAsync(replier)) {
+            // Mode 5: Event Bus: Callback
+            aim = Differ.CC_AIMS.pick(AimAStandard::new, AimType.ASYNC_CALLBACK.name());
         } else {
-            final Class<?> replierType = replier.getReturnType();
-            if (Void.class == replierType || void.class == replierType) {
-                if (this.isAsync(replier)) {
-                    // Mode 5: Event Bus: ( Async ) Request-Response
-                    aim = Differ.CC_AIMS.pick(AimAsync::new, "Mode Vert.x");
-                    // FnZero.po?l(Pool.AIMS, Thread.currentThread().getName() + "-mode-vert.x", AsyncAim::new);
-                } else {
-                    // Mode 3: Event Bus: One-Way
-                    aim = Differ.CC_AIMS.pick(AimOneWay::new, "Mode OneWay");
-                    // aim = FnZero.po?l(Pool.AIMS, Thread.currentThread().getName() + "-mode-oneway", OneWayAim::new);
-                }
-            } else {
-                // Mode 1: Event Bus: Request-Response
-                aim = Differ.CC_AIMS.pick(AimAsync::new, "Mode Java");
-                // aim = FnZero.po?l(Pool.AIMS, Thread.currentThread().getName() + "-mode-java", AsyncAim::new);
-            }
+            // Mode 3: Event Bus: One-Way
+            aim = Differ.CC_AIMS.pick(AimAOneWay::new, AimType.ASYNC_ONEWAY.name());
         }
         return aim;
     }
 
+    /**
+     * 拓展异步检查，不检查第一个参数，只要有一个参数是 {@link Message} 接口类型即视为异步回调
+     * <pre>
+     *     1. 条件1：返回值必须是 void.class / Void.class
+     *     2. 条件2：参数列表中必须包含且仅包含一个参数，且该参数类型是 {@link Message} 接口类型
+     * </pre>
+     *
+     * @param method Method reference
+     * @return 是否异步
+     */
     private boolean isAsync(final Method method) {
-        boolean async = false;
-        final Class<?>[] paramTypes = method.getParameterTypes();
-        if (VValue.ONE == paramTypes.length) {
-            final Class<?> argumentCls = paramTypes[0];
-            if (Message.class == argumentCls) {
-                async = true;
-            }
-        }
-        return async;
+        return Arrays.stream(method.getParameterTypes())
+            .anyMatch(Message.class::isAssignableFrom);
     }
 
     @SuppressWarnings("all")

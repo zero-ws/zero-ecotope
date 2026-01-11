@@ -12,7 +12,9 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
@@ -28,48 +30,49 @@ public class InquirerForGuice implements Inquirer<Injector> {
     @SuppressWarnings("all")
     public Injector scan(final Set<Class<?>> clazzes) {
         log.debug("[ ZERO ] ( DI ) \uD83E\uDEBC DI 环境即将初始化, Total = `{}`", String.valueOf(clazzes.size()));
-        /*
-         * Scan start points, the condition is as following:
-         * - 1. Contains member that annotated with @Inject
-         * - 2. Constructor that annotated with @Inject
-         * - 3. Method that annotated with @Inject
-         */
 
-        // The class that contains @Inject
-        final Set<Class<?>> queueField = new HashSet<>();
-        final Set<Class<?>> queueCon = new HashSet<>();
-        final Set<Class<?>> queueMethod = new HashSet<>();
+        final AtomicInteger countField = new AtomicInteger(0);
+        final AtomicInteger countMethod = new AtomicInteger(0);
+        final AtomicInteger countCon = new AtomicInteger(0);
         // All interface queue
         final ConcurrentMap<Class<?>, Set<Class<?>>> tree = new ConcurrentHashMap<>();
         final Set<Class<?>> flat = new HashSet<>();
-        clazzes.stream().filter(this::isValid).forEach(clazz -> {
-            try {
-                this.buildTree(tree, flat, clazz);
-                if (!clazz.isInterface()) {
+        clazzes.stream().filter(this::isValid)
+            .filter(Predicate.not(Class::isInterface))
+            .forEach(clazz -> {
+                try {
+                    this.buildTree(tree, flat, clazz);
                     if (jsrField.success(clazz)) {
-                        queueField.add(clazz);
-                    } else if (jsrMethod.success(clazz)) {
-                        queueMethod.add(clazz);
-                    } else if (jsrCon.success(clazz)) {
-                        queueCon.add(clazz);
+                        countField.incrementAndGet();
+                        return;
                     }
+
+                    if (jsrMethod.success(clazz)) {
+                        countMethod.incrementAndGet();
+                        return;
+                    }
+
+
+                    if (jsrCon.success(clazz)) {
+                        countCon.incrementAndGet();
+                        return;
+                    }
+
+                } catch (Throwable ex) {
+                    log.error(ex.getMessage(), ex);
                 }
-            } catch (Throwable ex) {
-                log.error(ex.getMessage(), ex);
-            }
-        });
-        log.debug("[ ZERO ] ( DI ) \uD83E\uDEBC 扫描信息 / field = {}, method = {}, constructor = {}",
-            String.valueOf(queueField.size()), String.valueOf(queueMethod.size()), String.valueOf(queueCon.size()));
+            });
+        log.info("[ ZERO ] ( DI ) \uD83E\uDEBC 扫描信息 / F = {}, M = {}, C = {}",
+            countField.get(), countMethod.get(), countCon.get()
+        );
 
         // Implementation = Interface
         // Standalone
 
         return Guice.createInjector(
-            this.jsrField.module(tree, flat),       // Field
-            this.jsrCon.module(tree, flat),         // Constructor
-            this.jsrMethod.module(tree, flat)       // Method
-            // new JavaDi(implMap),        // Java Specification ( IMPL Mode )
-            // new JsrDi(interfaceMap)     // Jsr Specification ( interface Map )
+            this.jsrField.module(tree, flat),       // Field        字段
+            this.jsrCon.module(tree, flat),         // Constructor  构造函数
+            this.jsrMethod.module(tree, flat)       // Method       方法
         );
     }
 
