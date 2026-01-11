@@ -15,12 +15,12 @@ import java.lang.reflect.Method;
  */
 public class InvokerPingT extends InvokerBase {
 
-    @Override
-    public void canInvoke(final Class<?> returnType,
-                          final Class<?>[] paramCls) {
-        final boolean valid = (void.class == returnType || Void.class == returnType);
-
-        this.canInvoke(!valid, returnType, paramCls);
+    private InvokerPingT(final Method method) {
+        super(method);
+        final boolean isOk = CallSpec.isRetVoid(method)
+            && CallSpec.isInEnvelop(method);
+        // 合法：返回值必须是 void / Void 且参数必须是 Envelop
+        this.failureAt(isOk, method);
     }
 
     @Override

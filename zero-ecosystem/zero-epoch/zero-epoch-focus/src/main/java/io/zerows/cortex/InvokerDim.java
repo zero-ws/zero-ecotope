@@ -11,12 +11,11 @@ import java.lang.reflect.Method;
 
 public class InvokerDim extends InvokerBase {
 
-    @Override
-    public void canInvoke(final Class<?> returnType, final Class<?>[] paramCls) {
-        // Verify
-        final boolean valid =
-            (void.class != returnType && Void.class != returnType);
-        this.canInvoke(!valid, returnType, paramCls);
+    private InvokerDim(final Method method) {
+        super(method);
+        final boolean isOk = !CallSpec.isRetVoid(method);
+        // 合法：返回值不能是 void / Void
+        this.failureAt(isOk, method);
     }
 
     @Override

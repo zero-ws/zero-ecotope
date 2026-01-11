@@ -14,13 +14,12 @@ import java.lang.reflect.Method;
  */
 public class InvokerSync extends InvokerBase {
 
-    @Override
-    public void canInvoke(final Class<?> returnType,
-                          final Class<?>[] paramCls) {
-        // Verify
-        final boolean valid = Envelop.class == returnType
-            && 1 == paramCls.length && paramCls[0] == Envelop.class;
-        this.canInvoke(!valid, returnType, paramCls);
+    private InvokerSync(final Method method) {
+        super(method);
+        final boolean isOk = CallSpec.isRetEnvelop(method)
+            && CallSpec.isInEnvelop(method);
+        // 合法：返回值必须是 Envelop 且参数必须是单个 Envelop
+        this.failureAt(isOk, method);
     }
 
     @Override

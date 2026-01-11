@@ -54,9 +54,7 @@ public class SockGrid {
             handler.handle(Future.succeededFuture((O) body));
         } else {
             final Method method = remind.getMethod();
-            final Class<?> returnType = method.getReturnType();
-            final Class<?>[] params = method.getParameterTypes();
-            final Invoker invoker = InvokerGateway.invoker(returnType, params);
+            final Invoker invoker = InvokerGateway.invoker(method);
             invoker.handle(remind.getProxy(), method, body, handler);
         }
     }

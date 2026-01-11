@@ -1,5 +1,7 @@
 package io.zerows.cortex;
 
+import io.r2mo.SourceReflect;
+import io.r2mo.typed.cc.Cc;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
@@ -7,18 +9,35 @@ import io.vertx.core.eventbus.Message;
 import io.zerows.epoch.web.Envelop;
 
 import java.lang.reflect.Method;
+import java.util.function.Supplier;
 
 /**
  * Replier for method invoking
  */
 public interface Invoker {
-    /**
-     * Ensure correct invoking
-     *
-     * @param returnType Method return type
-     * @param paramCls   Method parameters
-     */
-    void canInvoke(final Class<?> returnType, final Class<?>[] paramCls);
+    Cc<String, Invoker.Pre> CC_PRE = Cc.openThread();
+
+    Cc<String, Invoker.Action> CC_ACTION = Cc.openThread();
+
+    Cc<String, Invoker> CC_INVOKER = Cc.openThread();
+
+    static Invoker of(final Class<?> invokerCls, final Method method) {
+        final String keyCache = invokerCls.getName() + "@" + method.toString();
+        return CC_INVOKER.pick(() -> SourceReflect.instance(invokerCls, method), keyCache);
+    }
+
+    static Invoker.Pre ofPre(final Supplier<Invoker.Pre> constructorFn) {
+        return CC_PRE.pick(constructorFn, String.valueOf(constructorFn.hashCode()));
+    }
+
+    @SuppressWarnings("all")
+    static Invoker.Action ofAction(final InvokerType type) {
+        return switch (type) {
+            case ONE_ENVELOP -> CC_ACTION.pick(CallDirect::new, type.name());
+            case ONE_DYNAMIC -> CC_ACTION.pick(CallSingle::new, type.name());
+            case STANDARD -> CC_ACTION.pick(CallDynamic::new, type.name());
+        };
+    }
 
     /**
      * Invoke method and replying
@@ -50,4 +69,14 @@ public interface Invoker {
      * @param <O>     Output Type
      */
     <I, O> void handle(Object proxy, Method method, I input, Handler<AsyncResult<O>> handler);
+
+    interface Action {
+
+        <T> T execute(Object proxy, Method method, Object... args);
+    }
+
+    interface Pre {
+
+        void execute(Method method, Envelop envelop);
+    }
 }

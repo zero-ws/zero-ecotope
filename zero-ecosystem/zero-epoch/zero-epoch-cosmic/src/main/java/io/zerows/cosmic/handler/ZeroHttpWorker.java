@@ -1,15 +1,17 @@
 package io.zerows.cosmic.handler;
 
+import io.r2mo.function.Fn;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.eventbus.EventBus;
 import io.zerows.cortex.Invoker;
 import io.zerows.cortex.InvokerGateway;
-import io.zerows.cortex.InvokerUtil;
+import io.zerows.cortex.exception._40017Exception500WorkerArgument;
 import io.zerows.epoch.annotations.Ipc;
 import io.zerows.epoch.annotations.Worker;
 import io.zerows.epoch.basicore.WebReceipt;
 import io.zerows.epoch.management.OCacheActor;
 import io.zerows.epoch.web.Envelop;
+import io.zerows.platform.constant.VValue;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.spi.HPI;
 import lombok.extern.slf4j.Slf4j;
@@ -53,22 +55,23 @@ public class ZeroHttpWorker extends AbstractVerticle {
 
             // 4. Get ofMain reference and method
             final Method method = receipt.getMethod();
-            // final Object reference = receipt.getProxy();
+
+
+
             /*
              * In new version, there is not needed to verify
              * signature of length in arguments, because the new version
              * will support multi arguments in Worker component
              * findRunning length must be > 0.
              */
-            InvokerUtil.verifyArgs(method, this.getClass());
-
-            // length = 1
+            // 5.1. Ensure method length
             final Class<?>[] params = method.getParameterTypes();
-            final Class<?> returnType = method.getReturnType();
+            // 5.2. The parameters
+            Fn.jvmKo(VValue.ZERO == params.length, _40017Exception500WorkerArgument.class, method);
+
 
             // 6. Invoker select
-            final Invoker invoker = InvokerGateway.invoker(returnType, params);
-            invoker.canInvoke(returnType, params);
+            final Invoker invoker = InvokerGateway.invoker(method);
             // 7. Record for different invokers
             INVOKER_MAP.put(receipt.hashCode(), invoker);
 
