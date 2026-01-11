@@ -17,8 +17,7 @@ public class InvokerPingT extends InvokerBase {
 
     private InvokerPingT(final Method method) {
         super(method);
-        final boolean isOk = CallSpec.isRetVoid(method)
-            && CallSpec.isInEnvelop(method);
+        final boolean isOk = CallSpec.isRetVoid(method);
         // 合法：返回值必须是 void / Void 且参数必须是 Envelop
         this.failureAt(isOk, method);
     }

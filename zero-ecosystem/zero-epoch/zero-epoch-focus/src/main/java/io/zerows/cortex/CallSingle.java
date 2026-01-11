@@ -12,7 +12,7 @@ import java.lang.reflect.Method;
 import java.util.Objects;
 
 @Slf4j
-public class CallSingle implements Invoker.Action {
+class CallSingle implements Invoker.Action {
     private boolean modeInterface(final JsonObject json) {
         final long count = json.fieldNames().stream().filter(Ut::isInteger)
             .count();

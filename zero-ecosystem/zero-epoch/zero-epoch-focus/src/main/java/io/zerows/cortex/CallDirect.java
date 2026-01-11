@@ -5,7 +5,7 @@ import io.zerows.support.Ut;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-public class CallDirect implements Invoker.Action {
+class CallDirect implements Invoker.Action {
     @Override
     @SuppressWarnings("unchecked")
     public <T> T execute(final Object proxy, final Method method, final Object... args) {

@@ -27,8 +27,7 @@ public class InvokerMessage extends InvokerBase {
                        final Method method,
                        final Message<Envelop> message) {
         // Invoker and do not reply
-        InvokerUtil.invoke(proxy, method, message);
-        // Ut.invoke(proxy, method.getName(), message);
+        this.invokeInternal(proxy, method, message);
     }
 
     @Override

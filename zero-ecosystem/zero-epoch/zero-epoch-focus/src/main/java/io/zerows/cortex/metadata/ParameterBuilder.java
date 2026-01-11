@@ -21,7 +21,7 @@ public interface ParameterBuilder<SOURCE> {
         return ParameterWorker.of();
     }
 
-    default Object build(final SOURCE envelop, final Class<?> type) {
+    default Object build(final SOURCE envelop, final Class<?> type, final Object... extension) {
         throw new _60050Exception501NotSupport(this.getClass());
     }
 

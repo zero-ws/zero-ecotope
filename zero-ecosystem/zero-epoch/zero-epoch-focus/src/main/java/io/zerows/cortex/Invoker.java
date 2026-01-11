@@ -36,6 +36,7 @@ public interface Invoker {
             case ONE_ENVELOP -> CC_ACTION.pick(CallDirect::new, type.name());
             case ONE_DYNAMIC -> CC_ACTION.pick(CallSingle::new, type.name());
             case STANDARD -> CC_ACTION.pick(CallDynamic::new, type.name());
+            case MESSAGE -> CC_ACTION.pick(CallMessage::new, type.name());
         };
     }
 

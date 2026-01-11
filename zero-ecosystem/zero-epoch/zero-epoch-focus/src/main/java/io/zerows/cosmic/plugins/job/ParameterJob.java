@@ -39,32 +39,35 @@ public class ParameterJob implements ParameterBuilder<Envelop> {
         return CCT_PARAM.pick(() -> new ParameterJob(mission), String.valueOf(mission.hashCode()));
     }
 
+    /**
+     * 支持类型表
+     * <pre>
+     *     - {@link Envelop}
+     *     - {@link Session}
+     *     - {@link User}
+     *     - {@link MultiMap}
+     *     - {@link Commercial}
+     *     - {@link JsonObject}
+     *     - {@link Mission}
+     *     - {@link KRef}
+     * </pre>
+     *
+     * @param envelop  信封对象
+     * @param type     参数类型
+     * @param underway 特殊引用参数（任务专用）
+     * @return 参数对象
+     */
     @Override
     public Object build(final Envelop envelop, final Class<?> type, final KRef underway) {
         if (Envelop.class == type) {
-            /*
-             * Envelop
-             */
             return envelop;
         } else if (is(type, Session.class)) {
-            /*
-             * 「ONCE Only」Session
-             */
             return envelop.session();
         } else if (is(type, User.class)) {
-            /*
-             * 「ONCE Only」User
-             */
             return envelop.user();
         } else if (is(type, MultiMap.class)) {
-            /*
-             * 「ONCE Only」Headers
-             */
             return envelop.headers();
         } else if (is(type, Commercial.class)) {
-            /*
-             * Commercial specification
-             */
             final JsonObject metadata = this.mission.getMetadata();
             final String className = metadata.getString(KName.__.CLASS);
             if (Ut.isNotNil(className)) {
@@ -77,27 +80,13 @@ public class ParameterJob implements ParameterBuilder<Envelop> {
         } else if (is(type, JsonObject.class)) {
             if (type.isAnnotationPresent(BodyParam.class) ||
                 type.isAnnotationPresent(BeanParam.class)) {
-                /*
-                 * @BodyParam, it's for data passing
-                 */
                 return envelop.data();
             } else {
-                /*
-                 * Non @BodyParam, it's for configuration of current job here.
-                 * Return to additional data of JsonObject
-                 * This method will be used in future.
-                 */
                 return this.mission.getAdditional().copy();
             }
         } else if (is(type, Mission.class)) {
-            /*
-             * Actor/Director must
-             */
             return this.mission;
         } else if (is(type, KRef.class)) {
-            /*
-             * Bind Assist call here
-             */
             return underway;
         } else {
             throw new _60041Exception417JobMethod(this.mission.getCode());

@@ -73,8 +73,18 @@ public abstract class InvokerBase implements Invoker {
         Invoker.ofPre(PreMe::new).execute(method, envelop);
 
         // Return value here.
-        return InvokerUtil.invokeWorker(proxy, method, envelop);
+        return InvokerUtil.invokeAsync(proxy, method, envelop, null);
     }
+
+    protected void invokeInternal(final Object proxy, final Method method, final Message<Envelop> message) {
+        final Envelop envelop = message.body();
+        // Preparing Method
+        Invoker.ofPre(PreMe::new).execute(method, envelop);
+
+        // Return value here.
+        InvokerUtil.invokeAsync(proxy, method, envelop, message);
+    }
+
 
     protected <T> Handler<AsyncResult<T>> invokeHandler(final Message<Envelop> message) {
         return handler -> {
