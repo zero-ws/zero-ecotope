@@ -36,6 +36,9 @@ import java.util.Objects;
 @Slf4j
 class ExtensionGenerate {
 
+    private static final HStore STORE = SPI.V_STORE;
+    private static final JUtil UT = SPI.V_UTIL;
+
     private static Path resolve() {
         // 1) 明确指定优先
         final String explicit = System.getProperty("basedir");
@@ -71,15 +74,12 @@ class ExtensionGenerate {
         return Paths.get(".").toAbsolutePath().normalize();
     }
 
-    private static final HStore STORE = SPI.V_STORE;
-    private static final JUtil UT = SPI.V_UTIL;
-
     void start(final MetaGenerate program, final String[] args) {
         // 提取配置信息，执行代码生成
         Objects.requireNonNull(program, "[ PLUG ] 代码生成配置不可为 null.");
         final Class<?> clazz = program.getClass();
         log.info("[ PLUG ] 代码生成配置类：{}", clazz.getName());
-        final URL url = this.loadUrl(clazz, "vertx-of.yml");
+        final URL url = this.loadUrl(clazz, "vertx-generate.yml");
         log.info("[ PLUG ] 加载配置文件：{}", url);
 
         // 根据配置直接提取 Yaml
@@ -132,10 +132,12 @@ class ExtensionGenerate {
 
         configuration.classPackage(clazz.getPackage());
         configuration.databaseIncludes(source.getIncludes());
+        configuration.databaseExcludes(source.getExcludes());
 
         // 构造 Jooq 的标准代码生成配置
         log.info("[ PLUG ] 配置程序预处理……");
         log.info("[ PLUG ] Includes 规则：{}", source.getIncludes());
+        log.info("[ PLUG ] Excludes 规则：{}", source.getExcludes());
         log.info("[ PLUG ] Strategy 类：{}", configuration.classStrategy().getName());
         log.info("[ PLUG ] Generator 类：{}", configuration.classGenerator().getName());
         final Configuration compiled = JooqSourceConfigurer.of().configure(configuration);
@@ -164,7 +166,6 @@ class ExtensionGenerate {
      * 🔍 从类路径向上查找 Maven 标准源代码目录
      *
      * @param clazz 参考类
-     *
      * @return Maven 源代码目录 (src/main/java/)
      */
     public String findMavenSourceDirectory(final Class<?> clazz) {
@@ -204,7 +205,6 @@ class ExtensionGenerate {
      *
      * @param clazz        参考类
      * @param resourcePath 资源路径
-     *
      * @return URL 对象，如果找不到则返回 null
      */
     private URL loadUrl(final Class<?> clazz, final String resourcePath) {
