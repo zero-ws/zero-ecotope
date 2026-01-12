@@ -86,4 +86,92 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+    <properties>
+        <maven.main.class>WaitFor</maven.main.class>
+    </properties>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <configuration>
+                    <configFiles>
+                        <configFile>${project.build.outputDirectory}/flyway.conf</configFile>
+                    </configFiles>
+                    <locations>
+                        <location>filesystem:${project.basedir}/src/main/resources/plugins/${project.parent.artifactId}/flyway/MYSQL</location>
+                    </locations>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.flywaydb</groupId>
+                        <artifactId>flyway-mysql</artifactId>
+                        <version>${database-flyway.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <!-- <includeScope>compile</includeScope> -->
+                            <type>jar</type>
+                            <includeTypes>jar</includeTypes>
+                            <!-- 存放服务依赖的jar包，存放在服务相同目录的lib文件夹下 -->
+                            <outputDirectory>
+                                target/lib
+                            </outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!--
+            打包 JAR 可执行程序，并对之前的程序执行备份
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <!-- 把target/classes/下的文件导入到jar内 -->
+                    <classesDirectory>target/classes</classesDirectory>
+                    <finalName>app</finalName>
+                    <archive>
+                        <manifest>
+                            <!-- 指定程序入口 -->
+                            <mainClass>${maven.main.class}</mainClass>
+                            <!-- 打包时 MANIFEST.MF文件不记录的时间戳版本 -->
+                            <useUniqueVersions>false</useUniqueVersions>
+                            <addClasspath>true</addClasspath>
+                            <!-- 服务依赖的jar包放在lib目录下 -->
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                        </manifest>
+                        <manifestEntries>
+                            <Class-Path>conf/</Class-Path>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>issue-jar</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <classifier>bak</classifier>
+                            <classesDirectory>${project.build.directory}/target/</classesDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
