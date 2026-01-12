@@ -1,11 +1,9 @@
 package io.zerows.cosmic.bootstrap;
 
-import io.r2mo.typed.cc.Cc;
 import io.r2mo.typed.exception.WebException;
 import io.vertx.core.Handler;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.cortex.metadata.WebRequest;
-import io.zerows.cosmic.plugins.validation.ValidatorEntry;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -13,9 +11,6 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public class SentryVerifier extends AimBase implements Sentry<RoutingContext> {
-
-    private static final Cc<String, ValidatorEntry> CC_VALIDATOR = Cc.openThread();
-    private transient final ValidatorEntry verifier = CC_VALIDATOR.pick(ValidatorEntry::new);
 
     /**
      * 启动阶段就提取规则集合，其中包括
