@@ -11,7 +11,7 @@ import io.zerows.extension.module.ui.domain.tables.daos.UiVisitorDao;
 import io.zerows.extension.module.ui.domain.tables.pojos.UiVisitor;
 import io.zerows.extension.module.ui.spi.UiHunter;
 import io.zerows.program.Ux;
-import io.zerows.spi.modeler.Identifier;
+import io.zerows.spi.modeler.AtomId;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,7 +24,7 @@ import java.util.Objects;
 @Slf4j
 public class UiHunterControl implements UiHunter {
     private static final LogOf LOGGER = LogOf.get(UiHunterControl.class);
-    private transient final Identifier indent = new IndentKey();
+    private transient final AtomId indent = new IndentKey();
 
     @Override
     public Future<String> seek(final UData data, final UiVisitor visitor) {

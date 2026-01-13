@@ -1,7 +1,7 @@
 package io.zerows.component.compare;
 
 import io.zerows.specification.modeling.metadata.HMetaField;
-import io.zerows.spi.AtomDiff;
+import io.zerows.spi.modeler.AtomDiff;
 import io.zerows.support.base.UtBase;
 
 import java.util.Objects;

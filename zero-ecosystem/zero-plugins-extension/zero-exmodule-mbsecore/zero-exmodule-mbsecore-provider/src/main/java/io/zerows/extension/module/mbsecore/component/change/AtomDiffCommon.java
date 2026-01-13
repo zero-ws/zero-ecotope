@@ -1,6 +1,6 @@
 package io.zerows.extension.module.mbsecore.component.change;
 
-import io.zerows.spi.AtomDiff;
+import io.zerows.spi.modeler.AtomDiff;
 
 import java.util.Objects;
 

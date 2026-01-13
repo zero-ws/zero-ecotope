@@ -11,7 +11,7 @@ import io.zerows.extension.module.mbsecore.plugins.Switcher;
 import io.zerows.platform.metadata.KIdentity;
 import io.zerows.program.Ux;
 import io.zerows.specification.modeling.HRule;
-import io.zerows.spi.modeler.Identifier;
+import io.zerows.spi.modeler.AtomId;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
 
@@ -30,7 +30,7 @@ public class SwitcherAtom implements Switcher {
     /*
      * 动态 identifier
      */
-    private final transient Identifier indent;
+    private final transient AtomId indent;
     private final transient KIdentity identity;
     private final transient JsonObject options = new JsonObject();
 
@@ -43,7 +43,7 @@ public class SwitcherAtom implements Switcher {
             this.indent = null;
             this.identity = null;
         } else {
-            if (Ut.isImplement(instanceCls, Identifier.class)) {
+            if (Ut.isImplement(instanceCls, AtomId.class)) {
                 this.indent = Ut.instance(instanceCls);
                 this.identity = identity;
                 /*

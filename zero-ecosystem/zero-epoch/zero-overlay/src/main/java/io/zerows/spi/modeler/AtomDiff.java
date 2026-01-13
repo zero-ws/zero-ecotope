@@ -1,4 +1,4 @@
-package io.zerows.spi;
+package io.zerows.spi.modeler;
 
 /**
  * 比较扩展专用方法

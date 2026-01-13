@@ -18,6 +18,7 @@ import io.zerows.specification.configuration.HLauncher;
 import io.zerows.specification.configuration.HRegistry;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.specification.modeling.operation.HLoad;
+import io.zerows.spi.modeler.AtomDiff;
 import io.zerows.spi.modeler.AtomNo;
 import io.zerows.spi.modeler.AtomNs;
 import lombok.extern.slf4j.Slf4j;

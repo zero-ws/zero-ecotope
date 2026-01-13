@@ -9,7 +9,7 @@ import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.module.ambient.domain.tables.daos.XCategoryDao;
 import io.zerows.extension.module.ambient.domain.tables.pojos.XCategory;
 import io.zerows.program.Ux;
-import io.zerows.spi.modeler.Identifier;
+import io.zerows.spi.modeler.AtomId;
 import io.zerows.support.Ut;
 
 import java.util.Objects;
@@ -18,8 +18,8 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
-public class IndentName implements Identifier {
-    private final transient Identifier indent = Ut.singleton(IndentKey.class);
+public class IndentName implements AtomId {
+    private final transient AtomId indent = Ut.singleton(IndentKey.class);
 
     @Override
     public Future<String> resolve(final JsonObject data, final JsonObject config) {
