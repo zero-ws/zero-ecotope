@@ -74,7 +74,7 @@ public interface KWeb {
 
         String PREFIX = "jobs";
 
-        String NS = "zero.vertx.jobs";
+        String NS = "vertx.zero-jobs";
     }
 
     interface MULTI {

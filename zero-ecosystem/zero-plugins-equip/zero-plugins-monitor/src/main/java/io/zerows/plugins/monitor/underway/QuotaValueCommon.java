@@ -15,7 +15,8 @@ public class QuotaValueCommon extends QuotaValueBase {
         return Set.of(
             MOM.DATABASE,
             MOM.CLUSTER,
-            MOM.CC
+            MOM.CC,
+            MOM.TASK
         );
     }
 
@@ -25,6 +26,7 @@ public class QuotaValueCommon extends QuotaValueBase {
         roleMap.put(MOM.DATABASE_ID, MOM.DATABASE);
         roleMap.put(MOM.CLUSTER_ID, MOM.CLUSTER);
         roleMap.put(MOM.CC_ID, MOM.CC);
+        roleMap.put(MOM.TASK_ID, MOM.TASK);
         return roleMap;
     }
 

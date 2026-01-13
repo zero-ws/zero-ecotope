@@ -16,4 +16,8 @@ interface MOM {
     String NAME_CACHE = "cache";
     String CC_ID = "cache.CC";
     String CC = QuotaValue.QUOTA_NS_PREFIX + CC_ID;
+
+    String NAME_TASK = "task";
+    String TASK_ID = "task.TASK";
+    String TASK = QuotaValue.QUOTA_NS_PREFIX + TASK_ID;
 }

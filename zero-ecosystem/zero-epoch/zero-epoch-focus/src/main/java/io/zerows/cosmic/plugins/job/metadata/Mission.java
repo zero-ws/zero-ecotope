@@ -11,6 +11,7 @@ import io.zerows.cosmic.plugins.job.exception._60042Exception501JobOnMissing;
 import io.zerows.cosmic.plugins.job.exception._60054Exception409JobFormulaError;
 import io.zerows.epoch.annotations.Off;
 import io.zerows.epoch.annotations.On;
+import io.zerows.epoch.constant.KName;
 import io.zerows.integrated.jackson.JsonObjectDeserializer;
 import io.zerows.integrated.jackson.JsonObjectSerializer;
 import io.zerows.platform.constant.VValue;
@@ -233,6 +234,24 @@ public class Mission implements Serializable {
         if (EmService.JobType.FORMULA == this.type) {
             Fn.jvmKo(Ut.isNil(formula), _60054Exception409JobFormulaError.class, formula);
         }
+    }
+
+    public JsonObject mom() {
+        final JsonObject monitorJ = new JsonObject();
+        monitorJ.put(KName.STATUS, this.status.name());
+        monitorJ.put(KName.READ_ONLY, this.readOnly);
+        monitorJ.put(KName.TYPE, this.type.name());
+        monitorJ.put(KName.COMMENT, this.comment);
+        monitorJ.put("incomeAddr", this.incomeAddress);
+        monitorJ.put("incomeComponent", Objects.nonNull(this.income) ? this.income.getName() : null);
+        monitorJ.put("outcomeAddr", this.outcomeAddress);
+        monitorJ.put("outcomeComponent", Objects.nonNull(this.outcome) ? this.outcome.getName() : null);
+        monitorJ.put("onAction", this.on.getName());
+        monitorJ.put("proxy", this.proxy.getClass().getName());
+        monitorJ.put("offAction", Objects.nonNull(this.off) ? this.off.getName() : null);
+        monitorJ.put("timer", Objects.nonNull(this.timer) ? this.timer.name() : null);
+        monitorJ.put("threshold", TimeUnit.NANOSECONDS.toSeconds(this.timeout()) + "s");
+        return monitorJ;
     }
 
     @Override
