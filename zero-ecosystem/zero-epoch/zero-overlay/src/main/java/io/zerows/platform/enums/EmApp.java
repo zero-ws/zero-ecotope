@@ -203,7 +203,6 @@ public final class EmApp {
          * 🎯 将字符串名称转换为对应的生命周期枚举值
          *
          * @param name 生命周期名称
-         *
          * @return 对应的生命周期枚举
          */
         public static LifeCycle from(final String name) {
@@ -278,10 +277,10 @@ public final class EmApp {
         WEBSOCKET,
 
         /**
-         * 🔒 安全配置
-         * 🎯 应用安全策略和机制的配置管理
+         * 🛠️ Flyway配置
+         * 🎯 管理数据库迁移和版本控制的配置
          */
-        SECURITY,
+        FLYWAY,
 
         /**
          * 🗄️ 数据库配置

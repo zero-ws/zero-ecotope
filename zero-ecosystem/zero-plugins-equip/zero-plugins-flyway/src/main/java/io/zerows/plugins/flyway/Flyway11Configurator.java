@@ -4,6 +4,7 @@ import io.r2mo.base.dbe.DBS;
 import io.vertx.core.json.JsonArray;
 import io.zerows.epoch.store.DBSActor;
 import io.zerows.specification.configuration.HConfig;
+import lombok.extern.slf4j.Slf4j;
 import org.flywaydb.core.Flyway;
 import org.flywaydb.core.api.MigrationVersion;
 import org.flywaydb.core.api.configuration.FluentConfiguration;
@@ -18,6 +19,7 @@ import java.util.*;
  * - 适配 Flyway 11 的 API（ignoreMissing/future → ignoreMigrationPatterns）
  * - 支持：字符串或数组形式的 locations / suffixes / schemas / cherry-pick
  */
+@Slf4j
 final class Flyway11Configurator {
     private Flyway11Configurator() {
     }
@@ -63,6 +65,12 @@ final class Flyway11Configurator {
             locations = asStringList(config.options(FlywayKeys.LOCATIONS));
         }
         if (!locations.isEmpty()) {
+            final StringBuilder content = new StringBuilder();
+            content.append("[ PLUG ] Flyway 配置 Locations 列表：\n");
+            for (final String loc : locations) {
+                content.append("\t-- ").append(loc).append("\n");
+            }
+            log.info(content.toString());
             fc.locations(locations.toArray(new String[0]));
         }
         final String encoding = config.options(FlywayKeys.ENCODING);
@@ -163,8 +171,8 @@ final class Flyway11Configurator {
         final Object targetRaw = config.options(FlywayKeys.TARGET);
         if (targetRaw != null) {
             final MigrationVersion target = "latest".equalsIgnoreCase(String.valueOf(targetRaw))
-                    ? MigrationVersion.LATEST
-                    : toVersion(targetRaw);
+                ? MigrationVersion.LATEST
+                : toVersion(targetRaw);
             if (target != null) {
                 fc.target(target);
             }

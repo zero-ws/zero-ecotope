@@ -18,7 +18,7 @@ import io.zerows.specification.configuration.HConfig;
  *
  * @author lang : 2025-10-27
  */
-@Actor(value = "SECURITY")
+@Actor(value = "security")
 public class SecurityActor extends AbstractHActor {
     private static final SecurityManager MANAGER = SecurityManager.of();
 

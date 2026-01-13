@@ -41,7 +41,7 @@ public class YmVertx extends InPreVertx implements Serializable {
     private JsonObject shared;
     @JsonSerialize(using = JsonObjectSerializer.class)
     @JsonDeserialize(using = JsonObjectDeserializer.class)
-    private JsonObject security;
+    private JsonObject flyway;
 
     @JsonIgnore
     @Accessors(fluent = true, chain = true)

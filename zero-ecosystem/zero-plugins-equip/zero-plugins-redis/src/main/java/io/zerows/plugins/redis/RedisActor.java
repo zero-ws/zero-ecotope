@@ -72,7 +72,7 @@ public class RedisActor extends AbstractHActor {
                     this.vLog("[ Redis ] \uD83C\uDF52 Redis 连接 + 认证成功！！--> {}", content);
                 } else {
                     // 🛑 这里一定会捕获到 NOAUTH Authentication required
-                    this.vLog().error("[ Redis ] 连接建立了，但认证失败 (NOAUTH): {} / 访问：{}",
+                    this.vLog().error("[ XMOD ] [ Redis ] 连接建立了，但认证失败 (NOAUTH): {} / 访问：{}",
                         result.cause().getMessage(), content);
                 }
             });
