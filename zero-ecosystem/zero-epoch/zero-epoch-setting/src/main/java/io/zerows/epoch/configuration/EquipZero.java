@@ -2,13 +2,7 @@ package io.zerows.epoch.configuration;
 
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.basicore.YmBoot;
-import io.zerows.epoch.basicore.YmConfiguration;
-import io.zerows.epoch.basicore.YmDataSource;
-import io.zerows.epoch.basicore.YmMvc;
-import io.zerows.epoch.basicore.YmServer;
-import io.zerows.epoch.basicore.YmVertx;
-import io.zerows.epoch.basicore.YmWebSocket;
+import io.zerows.epoch.basicore.*;
 import io.zerows.epoch.metadata.MMComponent;
 import io.zerows.platform.enums.EmApp;
 import io.zerows.specification.configuration.HActor;
@@ -133,7 +127,7 @@ class EquipZero implements Equip {
             });
 
             // Security
-            this.initializeJ(setting, EmApp.Native.SECURITY, vertxYml::getSecurity);
+            this.initializeJ(setting, EmApp.Native.FLYWAY, vertxYml::getFlyway);
 
             // Session 高优先级 --> 覆盖
             this.initializeJ(setting, EmApp.Native.SESSION, vertxYml::getSession);

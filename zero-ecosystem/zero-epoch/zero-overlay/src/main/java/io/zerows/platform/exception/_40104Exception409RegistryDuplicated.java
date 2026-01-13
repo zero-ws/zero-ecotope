@@ -7,6 +7,6 @@ import io.r2mo.vertx.common.exception.VertxBootException;
  */
 public class _40104Exception409RegistryDuplicated extends VertxBootException {
     public _40104Exception409RegistryDuplicated(final int size) {
-        super(_80413Exception501NotImplement._40104, size);
+        super(ERR._40104, size);
     }
 }

@@ -2,7 +2,7 @@ package io.zerows.extension.module.mbsecore.component.change;
 
 import io.zerows.support.Ut;
 
-final class AjInteger extends AbstractAdjuster {
+final class AjInteger extends AjBase {
 
     public AjInteger() {
         super(Integer.class);

@@ -1,4 +1,4 @@
-package io.zerows.spi;
+package io.zerows.spi.modeler;
 
 /**
  * 比较扩展专用方法
@@ -8,13 +8,12 @@ package io.zerows.spi;
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
-public interface VsExtension {
+public interface AtomDiff {
 
     /**
      * @param valueOld {@link Object} input old
      * @param valueNew {@link Object} input new
      * @param type     {@link Class} input type
-     *
      * @return {@link Boolean} true when Same.
      */
     boolean is(Object valueOld, Object valueNew, Class<?> type);

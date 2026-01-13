@@ -9,7 +9,7 @@ import java.util.Queue;
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
-public interface Indent {
+public interface AtomNo {
     /*
      * Single Number
      */

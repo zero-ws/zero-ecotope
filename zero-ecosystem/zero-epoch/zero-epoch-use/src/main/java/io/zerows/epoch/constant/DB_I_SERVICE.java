@@ -2,7 +2,7 @@ package io.zerows.epoch.constant;
 
 import io.zerows.platform.constant.VPC;
 import io.zerows.platform.enums.typed.ChangeFlag;
-import io.zerows.spi.modeler.Identifier;
+import io.zerows.spi.modeler.AtomId;
 
 /**
  * @author lang : 2023-06-03
@@ -27,7 +27,7 @@ interface DB_I_SERVICE {
         /**
          * 「动态建模专用」
          * <findRunning>plugin.plugin</findRunning>，ServiceConfig中配置的标识选择插件，实现接口
-         * {@link Identifier}
+         * {@link AtomId}
          */
         String PLUGIN_IDENTIFIER = "plugin.identifier";
         /**

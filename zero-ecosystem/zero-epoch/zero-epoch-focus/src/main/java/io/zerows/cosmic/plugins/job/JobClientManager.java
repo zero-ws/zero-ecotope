@@ -1,6 +1,7 @@
 package io.zerows.cosmic.plugins.job;
 
 import io.r2mo.typed.cc.Cc;
+import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.zerows.sdk.plugins.AddOnManager;
 import io.zerows.specification.configuration.HConfig;
@@ -12,19 +13,26 @@ import java.util.Objects;
  * @author lang : 2025-10-17
  */
 class JobClientManager extends AddOnManager<JobClient> {
-    private static final Cc<String, JobClient> CC_STORED = Cc.open();
+    private static final Cc<String, JobClient> CC_CLIENT = Cc.open();
 
     private static final JobClientManager INSTANCE = new JobClientManager();
 
     private JobConfig configuration;
     private JobStore store;
-    private Interval interval;
+    private JobInterval interval;
+
+    private JobClientManager() {
+    }
+
+    static JobClientManager of() {
+        return INSTANCE;
+    }
 
     JobConfig refConfiguration() {
         return this.configuration;
     }
 
-    Interval refInterval() {
+    JobInterval refInterval() {
         return this.interval;
     }
 
@@ -32,16 +40,9 @@ class JobClientManager extends AddOnManager<JobClient> {
         return this.store;
     }
 
-    private JobClientManager() {
-    }
-
-    public static JobClientManager of() {
-        return INSTANCE;
-    }
-
     @Override
     protected Cc<String, JobClient> stored() {
-        return CC_STORED;
+        return CC_CLIENT;
     }
 
     @Override
@@ -56,8 +57,28 @@ class JobClientManager extends AddOnManager<JobClient> {
         if (Objects.isNull(this.configuration)) {
             return;
         }
-        // 初始化存储器
-        this.store = this.configuration.createStore();
-        this.interval = this.configuration.createInterval();
+        // 任务存储初始化
+        this.store = this.refStore(config);
+
+        // 间隔调度初始化
+        this.interval = this.refInterval(config);
+    }
+
+    private JobInterval refInterval(final HConfig config) {
+        final Vertx vertxRef = config.ref();
+        JobInterval interval = this.configuration.createInterval();
+        if (Objects.isNull(interval)) {
+            interval = new JobIntervalVertx();
+            Ut.contract(interval, Vertx.class, vertxRef);
+        }
+        return this.interval;
+    }
+
+    private JobStore refStore(final HConfig config) {
+        JobStore store = this.configuration.createStore();
+        if (Objects.isNull(store)) {
+            store = new JobStoreUnity();
+        }
+        return store;
     }
 }

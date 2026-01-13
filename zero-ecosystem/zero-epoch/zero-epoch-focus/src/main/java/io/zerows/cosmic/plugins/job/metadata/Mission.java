@@ -11,6 +11,7 @@ import io.zerows.cosmic.plugins.job.exception._60042Exception501JobOnMissing;
 import io.zerows.cosmic.plugins.job.exception._60054Exception409JobFormulaError;
 import io.zerows.epoch.annotations.Off;
 import io.zerows.epoch.annotations.On;
+import io.zerows.epoch.constant.KName;
 import io.zerows.integrated.jackson.JsonObjectDeserializer;
 import io.zerows.integrated.jackson.JsonObjectSerializer;
 import io.zerows.platform.constant.VValue;
@@ -23,60 +24,58 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.Serializable;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
 /**
- * Data Object to describe job detail, it stored job definition
- * 1) The definition came from scanned @Job annotation class ( each class should has one Mission )
- * 2) The definition came from JobStore interface ( the job definition may be stored into database or other
+ * Mission 数据对象，用于描述任务的详细信息并存储任务定义
+ * <p>
+ * 主要来源：
+ * 1) 来自被扫描的 @Job 注解类（每个类应对应一个 Mission）
+ * 2) 来自 JobStore 接口（任务定义也可能保存在数据库或其他持久化层）
  */
 @Data
 @Slf4j
 public class Mission implements Serializable {
-    /* Job status, default job is 'starting' */
+    /* 任务状态，默认状态为 STARTING */
     private EmService.JobStatus status = EmService.JobStatus.STARTING;
-    /* Job name */
+    /* 任务名称 */
     private String name;
-    /* Job type */
+    /* 任务类型 */
     private EmService.JobType type;
-    /* Job code */
+    /* 任务代码（唯一标识） */
     private String code;
-    /* Job description */
+    /* 任务描述 */
     private String comment;
-    /* Whether this job is read only */
+    /* 是否只读（编程定义） */
     private boolean readOnly;
     /*
-     * Threshold findRunning for timeout of worker here.
-     * This parameter will be bind to current mission for set worker timeout when long time worker executed.
-     * It means that the following code will be executed:
+     * Worker 的超时时间阈值（用于 findRunning 场景）
+     * 该参数会绑定到当前 Mission，用于设置后台 Worker 的超时，示例：
      *
      * final WorkerExecutor executor = this.vertx.createSharedWorkerExecutor(code, 1, threshold);
      *
-     * For above code, the system will set the timeout parameter of current worker ( Background Job ) and it's
-     * not related to scheduling instead.
+     * 上述代码中，系统会为当前后台任务设置超时参数，这与调度无直接关系，故将相关逻辑从 KScheduler 移至 Mission。
      *
-     * So I moved the code from `KScheduler` into `Mission` here.
+     * 两种来源：
+     * 1) 编程定义（注解中）
+     * 2) 配置项（如配置文件/持久化）
      *
-     * There are two mode focus on this parameter calculation as:
-     * 1) From programming part:
-     * 2) From configuration part:
+     * - 默认时间单位为 TimeUnit.SECONDS
+     * - 最终结果以纳秒（ns）保存
      *
-     * - The default time unit is TimeUnit.SECONDS
-     * - The final result should be `ns`.
-     *
-     * This field could not be serialized directly, you must call `timeout` to set this findRunning
-     * or the worker will use default parameters.
+     * 注意：该字段不可直接序列化，必须通过 timeout 方法来设置，否则 Worker 会使用默认参数。
      **/
     @JsonIgnore
     private long threshold = VValue.RANGE;
-    /* Job configuration */
+    /* 任务配置 */
     @JsonSerialize(using = JsonObjectSerializer.class)
     @JsonDeserialize(using = JsonObjectDeserializer.class)
     private JsonObject metadata = new JsonObject();
-    /* Job additional */
+    /* 任务附加信息 */
     @JsonSerialize(using = JsonObjectSerializer.class)
     @JsonDeserialize(using = JsonObjectDeserializer.class)
     private JsonObject additional = new JsonObject();
@@ -92,19 +91,17 @@ public class Mission implements Serializable {
 
     private String outcomeAddress;
 
-    /* Job reference */
+    /* 运行时引用（代理对象） */
     @JsonIgnore
     private Object proxy;
-    /* Job begin method */
+    /* 任务启动方法（@On 标注的方法） */
     @JsonIgnore
     private Method on;
-    /* Job end method */
+    /* 任务结束方法（@Off 标注的方法，可选） */
     @JsonIgnore
     private Method off;
     /*
-     * New attribute for
-     * EmApp Scope based on KAppOld specification here that belong to one KAppOld information
-     * The attribute is as following:
+     * 用于描述应用范围（基于旧 KApp 规范），该属性示例结构如下：
      * {
      *     "name":      "application name",
      *     "ns":        "the default namespace",
@@ -112,11 +109,8 @@ public class Mission implements Serializable {
      *     "sigma":     "the uniform sigma identifier"
      * }
      *
-     * Be careful that this variable will be used in Zero Extension Framework and it's based on
-     * `X_APP` etc here, for programming part it's null before SVN Store connected. In future
-     * version all the configuration data will be stored in integration, it means that you can
-     * set any information of current Mission reference.
-     * */
+     * 注意：该变量在 Zero 扩展框架中会被使用，编程方式下在 SVN Store 连接前可能为 null。
+     */
     @JsonIgnore
     private HArk ark;
 
@@ -125,11 +119,11 @@ public class Mission implements Serializable {
 
     public Mission connect(final Class<?> clazz) {
         /*
-         * Here the system should connect clazz to set:
-         * 1. proxy
+         * 将 clazz 与当前 Mission 关联，设置以下信息：
+         * 1. 代理实例 proxy
          *    - on
          *    - off
-         * 2. in/out
+         * 2. 输入/输出类型与地址
          *    - income
          *    - incomeAddress
          *    - outcome
@@ -138,20 +132,20 @@ public class Mission implements Serializable {
         final Object proxy = Ut.singleton(clazz);
         if (Objects.nonNull(proxy)) {
             /*
-             * 1. proxy of class has bee initialized successfully
-             * Care: The field of other instances will be bind in future after mission
+             * proxy 已成功初始化
+             * 注意：其他实例字段会在后续 mission 使用时绑定
              */
             this.proxy = proxy;
             /*
-             * 2. @On
-             *  It's required in clazz definition or here should throw exception or errors
+             * 查找 @On 方法
+             * 该方法在类定义中必须存在，否则抛出异常
              */
             this.on = Arrays.stream(clazz.getDeclaredMethods())
                 .filter(method -> method.isAnnotationPresent(On.class))
                 .findFirst().orElse(null);
             Fn.jvmKo(Objects.isNull(this.on), _60042Exception501JobOnMissing.class, clazz.getName());
             /*
-             * KIncome / IncomeAddress
+             * 解析 @On 注解中的 income 与 address
              */
             final Annotation on = this.on.getAnnotation(On.class);
             this.incomeAddress = this.invoke(on, "address", this::getIncomeAddress);
@@ -161,15 +155,14 @@ public class Mission implements Serializable {
             }
 
             /*
-             * 3. @Off
-             * It's optional in clazz definition
+             * 查找 @Off 方法（可选）
              */
             this.off = Arrays.stream(clazz.getDeclaredMethods())
                 .filter(method -> method.isAnnotationPresent(Off.class))
                 .findFirst().orElse(null);
             if (Objects.nonNull(this.off)) {
                 /*
-                 * Outcome / OutcomeAddress
+                 * 解析 @Off 注解中的 outcome 与 address
                  */
                 final Annotation out = this.off.getAnnotation(Off.class);
                 this.outcomeAddress = this.invoke(out, "address", this::getOutcomeAddress);
@@ -186,38 +179,38 @@ public class Mission implements Serializable {
     private <T> T invoke(final Annotation annotation, final String annotationMethod,
                          final Supplier<T> supplier) {
         /*
-         * Stored in database / or @Job -> config file
+         * 先尝试从持久化/配置中读取
          */
         T reference = supplier.get();
         if (Objects.isNull(reference)) {
             /*
-             * Annotation extraction
+             * 再从注解中提取值
              */
             reference = Ut.invoke(annotation, annotationMethod);
         }
         return reference;
     }
 
-    public Mission timeout(final Integer input, final TimeUnit unit) {
-        if (Objects.isNull(input)) {
+    public Mission timeout(final Duration timeoutAt) {
+        if (Objects.isNull(timeoutAt)) {
             this.threshold = VValue.RANGE;
             return this;
         } else {
-            this.threshold = unit.toNanos(input);
+            this.threshold = timeoutAt.toNanos();
             return this;
         }
     }
 
     public long timeout() {
         if (VValue.RANGE == this.threshold) {
-            // The default timeout is 15 min
+            // 默认超时时间为 15 分钟
             return TimeUnit.MINUTES.toNanos(15);
         } else {
             return this.threshold;
         }
     }
 
-    // ========================== KAppOld Information =======================
+    // ========================== KAppOld 信息 =======================
     public Mission ark(final HArk ark) {
         this.ark = ark;
         return this;
@@ -236,11 +229,29 @@ public class Mission implements Serializable {
         return this.timer;
     }
 
-    // ========================== Ensure the correct configuration =======================
+    // ========================== 确保配置合法性 =======================
     public void detectPre(final String formula) {
         if (EmService.JobType.FORMULA == this.type) {
             Fn.jvmKo(Ut.isNil(formula), _60054Exception409JobFormulaError.class, formula);
         }
+    }
+
+    public JsonObject mom() {
+        final JsonObject monitorJ = new JsonObject();
+        monitorJ.put(KName.STATUS, this.status.name());
+        monitorJ.put(KName.READ_ONLY, this.readOnly);
+        monitorJ.put(KName.TYPE, this.type.name());
+        monitorJ.put(KName.COMMENT, this.comment);
+        monitorJ.put("incomeAddr", this.incomeAddress);
+        monitorJ.put("incomeComponent", Objects.nonNull(this.income) ? this.income.getName() : null);
+        monitorJ.put("outcomeAddr", this.outcomeAddress);
+        monitorJ.put("outcomeComponent", Objects.nonNull(this.outcome) ? this.outcome.getName() : null);
+        monitorJ.put("onAction", this.on.getName());
+        monitorJ.put("proxy", this.proxy.getClass().getName());
+        monitorJ.put("offAction", Objects.nonNull(this.off) ? this.off.getName() : null);
+        monitorJ.put("timer", Objects.nonNull(this.timer) ? this.timer.name() : null);
+        monitorJ.put("threshold", TimeUnit.NANOSECONDS.toSeconds(this.timeout()) + "s");
+        return monitorJ;
     }
 
     @Override

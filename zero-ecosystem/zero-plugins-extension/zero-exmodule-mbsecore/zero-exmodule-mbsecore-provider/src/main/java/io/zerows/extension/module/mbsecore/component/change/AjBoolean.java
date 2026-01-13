@@ -4,7 +4,7 @@ import io.vertx.core.json.JsonObject;
 
 import java.util.Objects;
 
-final class AjBoolean extends AbstractAdjuster {
+final class AjBoolean extends AjBase {
 
     public AjBoolean() {
         super(Boolean.class);

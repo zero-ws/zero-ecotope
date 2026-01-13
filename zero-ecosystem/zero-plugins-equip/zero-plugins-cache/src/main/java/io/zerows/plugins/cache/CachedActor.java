@@ -24,7 +24,7 @@ public class CachedActor extends AbstractHActor {
     @Override
     protected Future<Boolean> startAsync(final HConfig config, final Vertx vertxRef) {
         final AddOn<CachedClient> addOn = CachedAddOn.of(vertxRef, config);
-        this.vLog("[ Cached ] SharedActor 初始化完成，忽略配置");
+        this.vLog("[ Cached ] CachedActor 初始化完成，忽略配置");
 
         final Provider<CachedClient> provider = new CachedProvider(addOn);
         DiRegistry.of().put(addOn.getKey(), provider);

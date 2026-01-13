@@ -7,6 +7,6 @@ import io.r2mo.vertx.common.exception.VertxBootException;
  */
 public class _11000Exception404SPINotFound extends VertxBootException {
     public _11000Exception404SPINotFound(final Class<?> clazz) {
-        super(_80413Exception501NotImplement._11000, clazz.getName());
+        super(ERR._11000, clazz.getName());
     }
 }

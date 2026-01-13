@@ -9,7 +9,7 @@ import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.module.ambient.domain.tables.daos.XCategoryDao;
 import io.zerows.extension.module.ambient.domain.tables.pojos.XCategory;
 import io.zerows.program.Ux;
-import io.zerows.spi.modeler.Identifier;
+import io.zerows.spi.modeler.AtomId;
 import io.zerows.support.Ut;
 
 import java.util.List;
@@ -22,7 +22,7 @@ import static io.zerows.boot.extension.util.Ox.LOG;
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
-public class IndentKey implements Identifier {
+public class IndentKey implements AtomId {
 
     @Override
     public Future<String> resolve(final JsonObject input, final JsonObject config) {

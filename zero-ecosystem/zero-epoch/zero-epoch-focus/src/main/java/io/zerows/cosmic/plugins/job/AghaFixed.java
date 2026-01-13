@@ -14,7 +14,7 @@ class AghaFixed extends AghaAbstract {
 
         final Promise<Long> future = Promise.promise();
 
-        final Interval interval = this.interval((timerId) ->
+        final JobInterval interval = this.interval((timerId) ->
             JobClient.bind(timerId, mission.getCode()));
 
         interval.startAt((timerId) -> this.working(mission, () -> {

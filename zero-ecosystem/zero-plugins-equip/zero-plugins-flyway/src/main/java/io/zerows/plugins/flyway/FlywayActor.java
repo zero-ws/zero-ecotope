@@ -16,7 +16,7 @@ import java.util.Objects;
 /**
  * @author lang : 2025-10-25
  */
-@Actor(value = "flyway", sequence = -216)
+@Actor(value = "FLYWAY", sequence = -216)
 @Slf4j
 public class FlywayActor extends AbstractHActor {
 

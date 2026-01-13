@@ -12,8 +12,9 @@ import io.zerows.platform.enums.EmService;
 import io.zerows.specification.app.HArk;
 import io.zerows.support.Ut;
 
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
 /*
  * Job ( JOB + SERVICE )
@@ -98,7 +99,8 @@ public class JtJob extends JtCommercial {
         final IService service = this.service();
         final HArk ark = Ke.ark(service.getSigma());
         mission.ark(ark);
-        mission.timeout(this.job.getThreshold(), TimeUnit.MINUTES);
+        final Duration timeoutAt = Duration.of(this.job.getThreshold(), ChronoUnit.MINUTES);
+        mission.timeout(timeoutAt);
 
         this.setTimer(mission);
         /*
@@ -132,7 +134,8 @@ public class JtJob extends JtCommercial {
         if (EmService.JobType.ONCE != type) {
             timer.configure(runFormula, this.job.getRunAt());
             if (Objects.nonNull(this.job.getDuration())) {
-                timer.configure(this.job.getDuration(), TimeUnit.MINUTES);
+                final Duration scheduledAt = Duration.of(this.job.getDuration(), ChronoUnit.MINUTES);
+                timer.configure(scheduledAt);
             }
             mission.timer(timer);
         }

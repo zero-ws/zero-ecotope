@@ -8,6 +8,6 @@ import io.r2mo.vertx.common.exception.VertxBootException;
 public class _11004Exception415JsonFormat extends VertxBootException {
 
     public _11004Exception415JsonFormat(final String filename) {
-        super(_80413Exception501NotImplement._11004, filename);
+        super(ERR._11004, filename);
     }
 }

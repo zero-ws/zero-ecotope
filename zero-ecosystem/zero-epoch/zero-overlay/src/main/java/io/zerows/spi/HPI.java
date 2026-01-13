@@ -1,6 +1,7 @@
 package io.zerows.spi;
 
 import io.r2mo.base.dbe.DBS;
+import io.r2mo.base.dbe.common.DBLoad;
 import io.r2mo.base.exchange.UniProvider;
 import io.r2mo.base.generator.GenProcessor;
 import io.r2mo.base.io.HStore;
@@ -17,8 +18,9 @@ import io.zerows.specification.configuration.HLauncher;
 import io.zerows.specification.configuration.HRegistry;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.specification.modeling.operation.HLoad;
+import io.zerows.spi.modeler.AtomDiff;
+import io.zerows.spi.modeler.AtomNo;
 import io.zerows.spi.modeler.AtomNs;
-import io.zerows.spi.modeler.Indent;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -65,16 +67,17 @@ public final class HPI<T> extends SPI {
             // io.r2mo.vertx.*
             this.addAll(List.of(
                 FactoryDBAsync.class,       // 🚀 异步数据库操作工厂，基于 Vert.x 提供异步数据库访问
-                DBContext.class             // 📂 数据库上下文接口，维护数据库操作所需的上下文信息
+                DBContext.class,            // 📂 数据库上下文接口，维护数据库操作所需的上下文信息
+                DBLoad.class                // 📥 数据加载接口，处理数据库数据的加载和初始化
             ));
 
 
             // 应用部分
             this.addAll(List.of(
-                AtomNs.class,               // 🧬 原子命名空间接口，处理系统中的原子化命名空间
-                Indent.class,               // 📑 缩进处理接口，用于格式化输出和文档生成
                 BootIo.class,               // 🥾 启动 IO 接口，处理系统启动时的 IO 操作
-                VsExtension.class           // 🧩 VS 扩展接口，提供系统可扩展的功能点
+                AtomNs.class,               // 🧬 原子命名空间接口，处理系统中的原子化命名空间
+                AtomNo.class,               // 📑 模型序号专用
+                AtomDiff.class              // 🧩 模型比对专用
             ));
 
             // io.zerows.specification.*

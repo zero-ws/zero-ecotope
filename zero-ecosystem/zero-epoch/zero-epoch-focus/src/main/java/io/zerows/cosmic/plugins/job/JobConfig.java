@@ -7,21 +7,25 @@ import java.io.Serializable;
 import java.util.Objects;
 import java.util.Optional;
 
-/*
+/**
  * Job configuration in `vertx-job.yml`, the job node
- * job:
- * - store:
- *   - component:
- *   - config:
- * - interval:
- *   - component:
- *   - config:
- * - client:
- *   - config:
+ * <pre>
+ *     job:
+ *       enabled:
+ *       store:
+ *         component:
+ *         config:
+ *       interval:
+ *         component:
+ *         config:
+ *       client:
+ *         component:
+ *         config:
+ * </pre>
  */
 @Data
 public class JobConfig implements Serializable {
-
+    private boolean enabled = Boolean.FALSE;
     private transient MMComponent store;
     private transient MMComponent interval;
     private transient MMComponent client;
@@ -33,7 +37,7 @@ public class JobConfig implements Serializable {
     public MMComponent getInterval() {
         final MMComponent componentOption = Optional.ofNullable(this.interval).orElse(new MMComponent());
         if (Objects.isNull(componentOption.getComponent())) {
-            componentOption.setComponent(IntervalVertx.class);
+            componentOption.setComponent(JobIntervalVertx.class);
         }
         return componentOption;
     }
@@ -53,10 +57,10 @@ public class JobConfig implements Serializable {
         }).orElse(null);
     }
 
-    public Interval createInterval(final Object... args) {
+    public JobInterval createInterval(final Object... args) {
         // 初始化间隔器
         return Optional.ofNullable(this.getInterval()).map(component -> {
-            final Interval created = component.instance(args);
+            final JobInterval created = component.instance(args);
             if (Objects.nonNull(created)) {
                 created.configure(component.getConfig());
             }

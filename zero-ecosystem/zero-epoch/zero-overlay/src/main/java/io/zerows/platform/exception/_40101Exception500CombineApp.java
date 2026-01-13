@@ -7,6 +7,6 @@ import io.r2mo.vertx.common.exception.VertxBootException;
  */
 public class _40101Exception500CombineApp extends VertxBootException {
     public _40101Exception500CombineApp(final String ns, final String name) {
-        super(_80413Exception501NotImplement._40101, ns, name);
+        super(ERR._40101, ns, name);
     }
 }

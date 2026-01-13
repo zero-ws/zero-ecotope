@@ -15,7 +15,6 @@ import io.zerows.epoch.configuration.Inquirer;
 import io.zerows.epoch.configuration.NodeStore;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.security.SecurityMeta;
-import io.zerows.platform.enums.EmApp;
 import io.zerows.platform.enums.SecurityType;
 import io.zerows.sdk.security.WallExecutor;
 import io.zerows.specification.configuration.HConfig;
@@ -131,7 +130,7 @@ public class InquirerWall implements Inquirer<Set<SecurityMeta>> {
 
     private SecurityType verifyConfig(final Class<?> target, final Vertx vertxRef) {
         final Wall wall = target.getAnnotation(Wall.class);
-        final HConfig config = NodeStore.findInfix(vertxRef, EmApp.Native.SECURITY);
+        final HConfig config = NodeStore.findInfix(vertxRef, "security");
         if (Objects.isNull(config)) {
             return wall.type();
         }

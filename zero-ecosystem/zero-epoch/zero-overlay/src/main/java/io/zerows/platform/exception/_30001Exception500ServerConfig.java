@@ -7,6 +7,6 @@ import io.r2mo.vertx.common.exception.VertxBootException;
  */
 public class _30001Exception500ServerConfig extends VertxBootException {
     public _30001Exception500ServerConfig(final String configKey) {
-        super(_80413Exception501NotImplement._30001, configKey);
+        super(ERR._30001, configKey);
     }
 }

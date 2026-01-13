@@ -8,6 +8,6 @@ import io.zerows.spi.BootIo;
  */
 public class _11010Exception500BootIoMissing extends VertxBootException {
     public _11010Exception500BootIoMissing(final Class<?> callerClass) {
-        super(_80413Exception501NotImplement._11010, BootIo.class, callerClass.getName());
+        super(ERR._11010, BootIo.class, callerClass.getName());
     }
 }

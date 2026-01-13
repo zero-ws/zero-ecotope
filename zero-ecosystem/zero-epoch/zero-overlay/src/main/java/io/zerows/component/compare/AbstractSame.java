@@ -1,7 +1,7 @@
 package io.zerows.component.compare;
 
 import io.zerows.specification.modeling.metadata.HMetaField;
-import io.zerows.spi.VsExtension;
+import io.zerows.spi.modeler.AtomDiff;
 import io.zerows.support.base.UtBase;
 
 import java.util.Objects;
@@ -13,12 +13,12 @@ import java.util.ServiceLoader;
 abstract class AbstractSame implements VsSame {
     protected transient final Class<?> type;
     protected transient HMetaField fieldType;
-    private transient VsExtension found;
+    private transient AtomDiff found;
 
     public AbstractSame(final Class<?> type) {
         this.type = type;
-        final ServiceLoader<VsExtension> loader = ServiceLoader.load(VsExtension.class, VsExtension.class.getClassLoader());
-        for (final VsExtension TEquation : loader) {
+        final ServiceLoader<AtomDiff> loader = ServiceLoader.load(AtomDiff.class, AtomDiff.class.getClassLoader());
+        for (final AtomDiff TEquation : loader) {
             this.found = TEquation;
             if (Objects.nonNull(this.found)) {
                 break;

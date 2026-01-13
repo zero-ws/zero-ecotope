@@ -12,6 +12,7 @@ public interface MetricOf {
     String CLUSTER = "Cluster";
     String VERTX = "Vert.x";
     String COMPONENT = "Component";
+    String TASK = "Task";
     String MANAGEMENT = "Management";
 
     static MetricRow cache(final String id) {
@@ -24,5 +25,9 @@ public interface MetricOf {
 
     static MetricRow vertx(final String id) {
         return new MetricRow().id(id).group(VERTX).category(MetricType.CONFIG);
+    }
+
+    static MetricRow task(final String id) {
+        return new MetricRow().id(id).group(TASK).category(MetricType.COMPONENT);
     }
 }

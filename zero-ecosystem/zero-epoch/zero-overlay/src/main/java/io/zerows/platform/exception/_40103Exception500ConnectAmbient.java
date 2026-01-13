@@ -7,6 +7,6 @@ import io.r2mo.vertx.common.exception.VertxBootException;
  */
 public class _40103Exception500ConnectAmbient extends VertxBootException {
     public _40103Exception500ConnectAmbient() {
-        super(_80413Exception501NotImplement._40103);
+        super(ERR._40103);
     }
 }

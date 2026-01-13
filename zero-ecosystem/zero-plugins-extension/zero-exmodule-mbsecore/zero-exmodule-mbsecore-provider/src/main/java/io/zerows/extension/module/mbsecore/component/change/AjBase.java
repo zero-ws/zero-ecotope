@@ -10,12 +10,12 @@ import java.util.Date;
 import java.util.Objects;
 import java.util.function.Supplier;
 
-public abstract class AbstractAdjuster implements Adjuster {
+public abstract class AjBase implements Adjuster {
     private static final JsonObject ADJUST = Ao.adjuster();
 
     protected transient Class<?> type;
 
-    public AbstractAdjuster(final Class<?> type) {
+    public AjBase(final Class<?> type) {
         this.type = type;
     }
 

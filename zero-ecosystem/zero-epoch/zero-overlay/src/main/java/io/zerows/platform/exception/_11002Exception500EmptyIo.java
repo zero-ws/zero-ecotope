@@ -7,6 +7,6 @@ import io.r2mo.vertx.common.exception.VertxBootException;
  */
 public class _11002Exception500EmptyIo extends VertxBootException {
     public _11002Exception500EmptyIo(final String filename) {
-        super(_80413Exception501NotImplement._11002, filename);
+        super(ERR._11002, filename);
     }
 }

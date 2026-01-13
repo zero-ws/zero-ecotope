@@ -78,8 +78,8 @@ public abstract class AghaAbstract implements Agha {
     @Contract
     private transient Vertx vertx;
 
-    Interval interval(final Consumer<Long> consumer) {
-        final Interval interval = JobActor.ofInterval();
+    JobInterval interval(final Consumer<Long> consumer) {
+        final JobInterval interval = JobActor.ofInterval();
         if (Objects.isNull(interval)) {
             this.log().error("[ ZERO ] ( Job ) 任务调度组件未正确配置，无法执行任务调度，请检查配置！");
             return null;
@@ -96,7 +96,7 @@ public abstract class AghaAbstract implements Agha {
         return interval;
     }
 
-    Interval interval() {
+    JobInterval interval() {
         return this.interval(null);
     }
 

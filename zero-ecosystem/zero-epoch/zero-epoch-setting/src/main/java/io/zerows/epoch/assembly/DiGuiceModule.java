@@ -44,7 +44,7 @@ public abstract class DiGuiceModule extends AbstractModule {
 
     protected <T extends I, I> Set<String> bindInterface(final Class<I> interfaceCls, final Set<Class<T>> implSet) {
         // ❌️ 无法查找到实现类，跳过
-        if (implSet.isEmpty()) {
+        if (Objects.isNull(implSet) || implSet.isEmpty()) {
             return null;
         }
 
