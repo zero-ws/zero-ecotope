@@ -88,13 +88,13 @@ class JobStoreUnity implements JobStore {
             .forEach(mission -> mission.setStatus(EmService.JobStatus.STOPPED));
 
         /* 同步到 JobPool */
-        JobPool.save(result);
+        JobControl.save(result);
         return result;
     }
 
     @Override
     public JobStore add(final Mission mission) {
-        JobPool.save(mission);
+        JobControl.save(mission);
         return this.store.add(mission);
     }
 
@@ -120,7 +120,7 @@ class JobStoreUnity implements JobStore {
 
     @Override
     public JobStore update(final Mission mission) {
-        JobPool.save(mission);
+        JobControl.save(mission);
         return this.store.update(mission);
     }
 }

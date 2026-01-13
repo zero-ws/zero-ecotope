@@ -3,6 +3,7 @@ package io.zerows.cosmic.plugins.job;
 import io.vertx.core.json.JsonObject;
 import io.zerows.cosmic.plugins.job.metadata.Mission;
 import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.constant.KWeb;
 import io.zerows.platform.enums.EmService;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +21,7 @@ import java.util.stream.Collectors;
  * Static pool for sync here.
  */
 @Slf4j
-class JobPool {
+class JobControl {
 
     public static final String IS_RUNNING = "[ ZERO ] ( Job ) 任务 {} 已经运行 !!!";
     public static final String IS_STARTING = "[ ZERO ] ( Job ) 任务 {} 正在启动，请等待它就绪 --> READY";
@@ -31,9 +32,21 @@ class JobPool {
     private static final ConcurrentMap<String, Mission> JOBS = new ConcurrentHashMap<>();
     /* RUNNING Reference */
     private static final ConcurrentMap<Long, String> RUNNING = new ConcurrentHashMap<>();
+    private static final ConcurrentMap<String, Long> RUNNING_REF = new ConcurrentHashMap<>();
 
     static void remove(final String code) {
-        JOBS.remove(code);
+        // 先检查是否存在
+        final Mission mission = get(code);
+        if (Objects.nonNull(mission)) {
+            final String codeJob = mission.getCode();
+            // 1. 移除 Mission
+            JOBS.remove(codeJob);
+            // 2. 移除 Timer
+            final Long timerId = RUNNING_REF.remove(codeJob);
+            if (Objects.nonNull(timerId)) {
+                RUNNING.remove(timerId);
+            }
+        }
     }
 
     static void save(final Mission mission) {
@@ -46,11 +59,14 @@ class JobPool {
         if (Objects.isNull(missions)) {
             return;
         }
-        missions.forEach(JobPool::save);
+        missions.forEach(JobControl::save);
     }
 
     static void bind(final Long timeId, final String code) {
-        RUNNING.put(timeId, code);
+        final Mission mission = get(code);
+        final String codeKey = Objects.isNull(mission) ? code : mission.getCode();
+        RUNNING.put(timeId, codeKey);
+        RUNNING_REF.put(codeKey, timeId);
     }
 
 
@@ -61,7 +77,13 @@ class JobPool {
     }
 
     static Mission get(final String code) {
-        return JOBS.get(code);
+        // 双重任务提取
+        Mission found = JOBS.get(code);
+        if (Objects.isNull(found)) {
+            final String withPrefix = KWeb.JOB.NS + "-" + code;
+            found = JOBS.get(withPrefix);
+        }
+        return found;
     }
 
     /*
@@ -94,10 +116,11 @@ class JobPool {
                     /*
                      * STOPPED -> READY
                      */
-                    JOBS.get(code).setStatus(EmService.JobStatus.READY);
+                    mission.setStatus(EmService.JobStatus.READY);
                 }
-                RUNNING.put(timeId, code);
-
+                final String codeKey = mission.getCode();
+                RUNNING.put(timeId, codeKey);
+                RUNNING_REF.put(codeKey, timeId);
             }
         });
     }
@@ -106,13 +129,17 @@ class JobPool {
     static void stop(final Long timeId) {
         uniform(timeId, mission -> {
             final EmService.JobStatus status = mission.getStatus();
-            if (EmService.JobStatus.RUNNING == status || EmService.JobStatus.READY == status) {
+            if (EmService.JobStatus.RUNNING == status ||
+                EmService.JobStatus.READY == status ||
+                EmService.JobStatus.STARTING == status  // Fix 修复任务状态从 STARTING 无法 STOP 的问题
+            ) {
                 /*
                  * If `RUNNING`
                  * stop will trigger from
                  * RUNNING -> STOPPED
                  */
                 RUNNING.remove(timeId);
+                RUNNING_REF.remove(mission.getCode());
                 mission.setStatus(EmService.JobStatus.STOPPED);
             } else {
                 /*
@@ -134,18 +161,17 @@ class JobPool {
                  * ERROR -> READY
                  */
                 RUNNING.put(timeId, mission.getCode());
+                RUNNING_REF.put(mission.getCode(), timeId);
                 mission.setStatus(EmService.JobStatus.READY);
             }
         });
     }
 
     static JsonObject status(final String namespace) {
-        /*
-         * Revert
-         */
-        final ConcurrentMap<String, Long> runsRevert =
-            new ConcurrentHashMap<>();
-        RUNNING.forEach((timer, code) -> runsRevert.put(code, timer));
+        // 避免参数未使用警告
+        if (Objects.nonNull(namespace)) {
+            log.debug("[ ZERO ] JobPool status query with namespace: {}", namespace);
+        }
         final JsonObject response = new JsonObject();
         JOBS.forEach((code, mission) -> {
             /*
@@ -157,21 +183,25 @@ class JobPool {
             /*
              * Timer
              */
-            instance.put(KName.TIMER, runsRevert.get(mission.getCode()));
+            instance.put(KName.TIMER, RUNNING_REF.get(mission.getCode()));
             response.put(mission.getCode(), instance);
         });
         return response;
     }
 
+    @SuppressWarnings("unused")
     static String code(final Long timeId) {
         return RUNNING.get(timeId);
     }
 
     /* Package Range */
     static Long timeId(final String code) {
-        return RUNNING.keySet().stream()
-            .filter(key -> code.equals(RUNNING.get(key)))
-            .findFirst().orElse(null);
+        Long timerId = RUNNING_REF.get(code);
+        if (Objects.isNull(timerId)) {
+            final String withPrefix = KWeb.JOB.NS + "-" + code;
+            timerId = RUNNING_REF.get(withPrefix);
+        }
+        return timerId;
     }
 
     private static void uniform(final Long timeId, final Consumer<Mission> consumer) {
@@ -184,7 +214,7 @@ class JobPool {
     }
 
     private static void uniform(final String code, final Consumer<Mission> consumer) {
-        final Mission mission = JOBS.get(code);
+        final Mission mission = get(code);
         if (Objects.nonNull(mission)) {
             consumer.accept(mission);
         }

@@ -33,7 +33,6 @@ import java.util.function.Consumer;
  *    - If `outcomeAddress`, the data came from Event Bus
  *    - Otherwise, the data came from `outcomeComponent`.
  */
-@SuppressWarnings("all")
 public abstract class AghaAbstract implements Agha {
 
     private static final AtomicBoolean SELECTED = new AtomicBoolean(Boolean.TRUE);
@@ -173,7 +172,7 @@ public abstract class AghaAbstract implements Agha {
                 this.vertx.createSharedWorkerExecutor(code, 1, threshold);
             this.log().info("[ ZERO ] ( Job ) 任务执行器 {} 已创建，最大执行时间 {} 秒",
                 code, TimeUnit.NANOSECONDS.toSeconds(threshold));
-            executor.<Envelop>executeBlocking(() -> {
+            executor.executeBlocking(() -> {
                 // 在 executeBlocking 的 Callable 中，直接执行阻塞逻辑
                 return this.workingAsync(mission)
                     .compose(result -> {
@@ -189,7 +188,7 @@ public abstract class AghaAbstract implements Agha {
                          * 任务执行异常
                          */
                         if (!(error instanceof VertxException)) {
-                            error.printStackTrace();
+                            this.log().error(error.getMessage(), error);
                             this.moveOn(mission, false);
                         }
                         return Envelop.failure(error);
@@ -212,12 +211,12 @@ public abstract class AghaAbstract implements Agha {
                          */
                         final Throwable error = handler.cause();
                         if (!(error instanceof VertxException)) {
-                            error.printStackTrace();
+                            this.log().error(error.getMessage(), error);
                         }
                     }
                 }
             }).otherwise(error -> {
-                error.printStackTrace();
+                this.log().error(error.getMessage(), error);
                 return null;
             });
         }
@@ -238,7 +237,7 @@ public abstract class AghaAbstract implements Agha {
                 /*
                  * Log and update cache
                  */
-                this.log().info("[ ZERO ] ( Job ) 任务状态变更：{} -> {}，任务类型：{}，任务编码：{}",
+                this.log().info("[ ZERO ] ( Job ) \uD83D\uDCAB 状态：{} -> {}，(类型：{} / 编码：{})",
                     original, moved, mission.getType(), mission.getCode());
                 this.store().update(mission);
             }
@@ -248,7 +247,7 @@ public abstract class AghaAbstract implements Agha {
              */
             if (EmService.JobStatus.RUNNING == mission.getStatus()) {
                 mission.setStatus(EmService.JobStatus.ERROR);
-                this.log().error("[ ZERO ] ( Job ) 任务状态变更：RUNNING -> ERROR，任务类型：{}，任务编码：{}",
+                this.log().error("[ ZERO ] ( Job ) \uD83D\uDCAB 状态：RUNNING -> ERROR，(类型：{} / 编码：{})",
                     mission.getType(), mission.getCode());
                 this.store().update(mission);
             }

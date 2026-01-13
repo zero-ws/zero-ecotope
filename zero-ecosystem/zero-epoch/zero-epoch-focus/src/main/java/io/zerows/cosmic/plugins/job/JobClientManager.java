@@ -71,7 +71,7 @@ class JobClientManager extends AddOnManager<JobClient> {
             interval = new JobIntervalVertx();
             Ut.contract(interval, Vertx.class, vertxRef);
         }
-        return this.interval;
+        return interval;
     }
 
     private JobStore refStore(final HConfig config) {
