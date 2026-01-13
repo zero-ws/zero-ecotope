@@ -1,13 +1,13 @@
 package io.zerows.extension.module.mbsecore.component.change;
 
-import io.zerows.spi.VsExtension;
+import io.zerows.spi.AtomDiff;
 
 import java.util.Objects;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
-public class AtomVsExtension implements VsExtension {
+public class AtomDiffCommon implements AtomDiff {
     @Override
     public boolean is(final Object valueOld, final Object valueNew, final Class<?> type) {
         final Adjuster adjuster = Adjuster.get(type);

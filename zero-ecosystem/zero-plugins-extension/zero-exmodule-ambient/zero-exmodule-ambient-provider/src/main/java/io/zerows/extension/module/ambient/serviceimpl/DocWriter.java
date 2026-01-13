@@ -5,7 +5,6 @@ import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.epoch.store.jooq.DB;
@@ -19,18 +18,17 @@ import io.zerows.program.Ux;
 import io.zerows.spi.HPI;
 import io.zerows.support.Ut;
 import jakarta.inject.Inject;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-import static io.zerows.extension.module.ambient.boot.At.LOG;
-
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
 public class DocWriter implements DocWStub {
-    private static final LogOf LOGGER = LogOf.get(DocWriter.class);
 
     @Inject
     private transient ExAttachment attachment;
@@ -175,7 +173,7 @@ public class DocWriter implements DocWStub {
                 attachmentJ.add(item);
             }
         });
-        LOG.File.info(LOGGER, "Split Running: Document = {0}, Directory = {1}", attachmentJ.size(), directoryJ.size());
+        log.info("[ XMOD ] 拆分运行：Document = {}, Directory = {}", attachmentJ.size(), directoryJ.size());
         // XAttachment First
         if (Ut.isNotNil(directoryJ)) {
             return Ux.future(attachmentJ).compose(fnAttachment)

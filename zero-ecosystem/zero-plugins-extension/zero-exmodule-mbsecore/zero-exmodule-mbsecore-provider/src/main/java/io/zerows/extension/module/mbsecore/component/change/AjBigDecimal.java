@@ -3,7 +3,7 @@ package io.zerows.extension.module.mbsecore.component.change;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-final class AjBigDecimal extends AbstractAdjuster {
+final class AjBigDecimal extends AjBase {
 
     public AjBigDecimal() {
         super(BigDecimal.class);

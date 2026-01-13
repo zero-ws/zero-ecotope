@@ -7,6 +7,6 @@ import io.r2mo.vertx.common.exception.VertxBootException;
  */
 public class _11007Exception404PoolIsNull extends VertxBootException {
     public _11007Exception404PoolIsNull() {
-        super(_80413Exception501NotImplement._11007);
+        super(ERR._11007);
     }
 }

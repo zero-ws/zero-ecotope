@@ -10,7 +10,7 @@ import io.zerows.extension.skeleton.common.KeConstant;
 import io.zerows.mbse.metadata.KModule;
 import io.zerows.program.Ux;
 import io.zerows.spi.HPI;
-import io.zerows.spi.modeler.Indent;
+import io.zerows.spi.modeler.AtomNo;
 import io.zerows.support.Fx;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
@@ -40,7 +40,7 @@ class PreSerial implements Pre {
         }
 
         /* Number generation */
-        return this.run(data, in, (numbers) -> HPI.of(Indent.class).waitAsync(
+        return this.run(data, in, (numbers) -> HPI.of(AtomNo.class).waitAsync(
             indent -> {
                 log.info("{} 表名 {}, 编号 {}",
                     KeConstant.K_PREFIX_WEB, in.module().getTable(), numbers.encode());
@@ -70,7 +70,7 @@ class PreSerial implements Pre {
             return Ux.future(data);
         }
         /* Number generation */
-        return this.run(data, in, (numbers) -> HPI.of(Indent.class).waitAsync(
+        return this.run(data, in, (numbers) -> HPI.of(AtomNo.class).waitAsync(
             stub -> {
                 log.info("{} 表名 {}, 数量：{}, 编号 {}",
                     KeConstant.K_PREFIX_WEB, in.module().getTable(), data.size(), numbers.encode());

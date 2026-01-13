@@ -7,6 +7,6 @@ import io.r2mo.vertx.common.exception.VertxBootException;
  */
 public class _40102Exception500CombineOwner extends VertxBootException {
     public _40102Exception500CombineOwner(final String targetId, final String owner) {
-        super(_80413Exception501NotImplement._40102, targetId, owner);
+        super(ERR._40102, targetId, owner);
     }
 }

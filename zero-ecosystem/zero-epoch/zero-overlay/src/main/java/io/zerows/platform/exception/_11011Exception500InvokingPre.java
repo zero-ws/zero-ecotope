@@ -9,6 +9,6 @@ import java.lang.reflect.Method;
  */
 public class _11011Exception500InvokingPre extends VertxBootException {
     public _11011Exception500InvokingPre(final Method method) {
-        super(_80413Exception501NotImplement._11011, method.getName());
+        super(ERR._11011, method.getName());
     }
 }

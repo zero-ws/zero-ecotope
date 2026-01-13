@@ -7,6 +7,6 @@ import io.r2mo.vertx.common.exception.VertxBootException;
  */
 public class _11005Exception501OperationInvalid extends VertxBootException {
     public _11005Exception501OperationInvalid(final String method) {
-        super(_80413Exception501NotImplement._11005, method);
+        super(ERR._11005, method);
     }
 }

@@ -13,7 +13,7 @@ import io.zerows.extension.skeleton.spi.ExTrash;
 import io.zerows.extension.skeleton.spi.ExUser;
 import io.zerows.program.Ux;
 import io.zerows.spi.HPI;
-import io.zerows.spi.modeler.Indent;
+import io.zerows.spi.modeler.AtomNo;
 import io.zerows.support.Ut;
 
 import java.util.Objects;
@@ -32,7 +32,7 @@ public class EmployeeService implements EmployeeStub {
     }
 
     private Future<JsonObject> insertAsyncPre(final EEmployee employee, final JsonObject data) {
-        final HPI<Indent> service = HPI.of(Indent.class);
+        final HPI<AtomNo> service = HPI.of(AtomNo.class);
         return service.waitOr(
             indent -> indent.indent("NUM.EMPLOYEE", data.getString(KName.SIGMA)).compose(workNum -> {
                 employee.setWorkNumber(workNum);

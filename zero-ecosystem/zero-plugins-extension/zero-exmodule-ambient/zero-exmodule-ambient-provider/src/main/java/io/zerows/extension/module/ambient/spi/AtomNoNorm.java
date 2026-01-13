@@ -7,7 +7,7 @@ import io.zerows.extension.module.ambient.servicespec.DatumStub;
 import io.zerows.extension.skeleton.exception._60045Exception400SigmaMissing;
 import io.zerows.platform.constant.VValue;
 import io.zerows.program.Ux;
-import io.zerows.spi.modeler.Indent;
+import io.zerows.spi.modeler.AtomNo;
 import io.zerows.support.Ut;
 
 import java.util.Queue;
@@ -16,7 +16,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
-public class IndentNorm implements Indent {
+public class AtomNoNorm implements AtomNo {
 
     private static final DatumStub stub = Ut.singleton(DatumService.class);
 

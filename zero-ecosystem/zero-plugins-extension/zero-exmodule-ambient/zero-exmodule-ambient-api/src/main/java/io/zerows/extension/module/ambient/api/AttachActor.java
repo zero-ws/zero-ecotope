@@ -3,23 +3,19 @@ package io.zerows.extension.module.ambient.api;
 import io.vertx.core.Future;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.LogOf;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.XHeader;
-import io.zerows.extension.module.ambient.common.AtMsg;
 import io.zerows.extension.module.ambient.servicespec.DocRStub;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import jakarta.inject.Inject;
-
-import static io.zerows.extension.module.ambient.boot.At.LOG;
+import lombok.extern.slf4j.Slf4j;
 
 @Queue
+@Slf4j
 public class AttachActor {
-
-    private static final LogOf LOGGER = LogOf.get(AttachActor.class);
 
     @Inject
     private transient DocRStub reader;
@@ -37,7 +33,7 @@ public class AttachActor {
          * -- 2.2. Remove all the related attachment and files
          * -- 2.3. Update all the attachments
          */
-        LOG.File.info(LOGGER, AtMsg.FILE_UPLOAD, content.encodePrettily());
+        log.info("[ XMOD ] 上传参数：{}", content.encodePrettily());
         Ut.valueToJObject(content, KName.METADATA);
         content.put(KName.SIGMA, header.getSigma());
         content.put(KName.ACTIVE, Boolean.TRUE);
@@ -58,7 +54,7 @@ public class AttachActor {
 
     @Address(Addr.File.DOWNLOAD)
     public Future<Buffer> download(final JsonObject filters) {
-        LOG.File.info(LOGGER, AtMsg.FILE_DOWNLOAD, filters.encodePrettily());
+        log.info("[ XMOD ] 下载条件：{}", filters.encodePrettily());
         return this.reader.downloadDoc(filters.getString(KName.KEY));
     }
 }
