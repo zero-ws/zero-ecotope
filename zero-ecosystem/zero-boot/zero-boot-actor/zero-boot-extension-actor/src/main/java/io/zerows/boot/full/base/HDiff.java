@@ -18,19 +18,18 @@ class HDiff {
 
     /**
      * 根据比对结果创建新容器。
-     *
+     * <p>
      * 1. ADD - 直接构造操作原始比对结果
      * 2. DELETE - 直接构造操作原始比对结果
      * 3. UPDATE - 下层逻辑
-     *
+     * <p>
      * 更新逻辑细节：
-     *
+     * <p>
      * 1. 条件过滤，调用内置`dataUnique()`方法（子类实现）
      * 2. 执行数据计算结果
      *
      * @param apt   {@link Apt} 比对结果容器
      * @param group {@link JsonArray} 单组容器
-     *
      * @return {@link Apt}
      */
     static Apt createApt(final Apt apt, final JsonArray group, final String diffKey) {
@@ -55,22 +54,22 @@ class HDiff {
      * 该方法为更新过程中的专用方法，会执行核心的更新逻辑。
      *
      * <strong>第一层逻辑</strong>
-     *
+     * <p>
      * - 遍历{@link io.vertx.core.json.JsonObject}直接提取Json对象引用。
      * - 遍历{@link io.vertx.core.json.JsonArray}中的每一个对象，提取Json对象引用。
      * - 在每一个元素中执行 `Function<JsonObject,Tool>`函数。
      *
      * <strong>第二层逻辑</strong>
-     *
+     * <p>
      * 判断逻辑，根据输入的第二参数执行判断：
-     *
+     * <p>
      * - 「Creation」去掉所有`null`对象过后执行更新。
      * - 「Edition」执行第三层核心逻辑。
      *
      * <strong>第三层逻辑</strong>
-     *
+     * <p>
      * 从系统中提取所有不执行清空的属性`notnullFields`，这种类型的属性表如下：
-     *
+     * <p>
      * |属性名|备注|
      * |---:|:---|
      * |createdAt|创建时间。|
@@ -82,22 +81,21 @@ class HDiff {
      * |`inSync = false`|配置的不需要从集成端输入的属性。|
      *
      * <strong>第四层逻辑（位于`notnullFields`中）</strong>
-     *
-     * 1. 如果输入的`field = null`，则设置`normalized`中的`field = findRunning`（原值），并且从原始记录中移除`field`。
-     * 2. 如果输入的`field = findRunning`，则直接将该值传入normalized中。
+     * <p>
+     * 1. 如果输入的`field = null`，则设置`normalized`中的`field = value`（原值），并且从原始记录中移除`field`。
+     * 2. 如果输入的`field = value`，则直接将该值传入normalized中。
      *
      * <strong>第四层逻辑（不包含在`notnullFields`中）</strong>
-     *
-     * 1. 如果输入值中包含`field = findRunning`，则更新`normalized`中的`findRunning`值。
+     * <p>
+     * 1. 如果输入值中包含`field = value`，则更新`normalized`中的`value`值。
      * 2. 如果输入值中不包含`field`，则直接清空`normalized`中的值。
-     *
+     * <p>
      * > 最终计算的`normalized`会覆盖原始记录对象数据。
      *
      * @param original 原始数据
      * @param updated  {@link io.vertx.core.json.JsonObject} 待更新数据对象
      * @param atom     {@link DataAtom} 模型信息
      * @param <T>      内容对象，通常为{@link io.vertx.core.json.JsonArray}或{@link io.vertx.core.json.JsonObject}
-     *
      * @return 返回执行完成后的内容对象
      */
     @SuppressWarnings("all")

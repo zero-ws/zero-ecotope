@@ -27,15 +27,15 @@ import java.util.Objects;
 
 /**
  * ## Ox平台顶层通道
- *
+ * <p>
  * ### 1. 基本介绍
- *
+ * <p>
  * 该组件为通道组件的顶层抽象组件，从ACTOR中继承，由于是ACTOR，所以包含：
- *
+ * <p>
  * - 任务配置：{@link Mission}
  * - 集成配置：{@link KIntegration}
  * - 数据库配置：{@link Database}
- *
+ * <p>
  * 除开上述配置以外，该组件中还新增了特殊成员配置
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
@@ -45,14 +45,13 @@ public class AbstractHub extends AbstractActor {
 
     /**
      * 默认请求处理（以未重写异常失败告终，主流程默认实现），子类必须实现该方法完成主流程的编程功能，
-     *
+     * <p>
      * 子类组件开发方法可选择如下：
-     *
+     * <p>
      * 1. 直接重写该方法（优先级最高）
      * 2. 重写直接子类的核心方法（带比对结果，次优先级）
      *
      * @param request {@link ActIn} 默认传入请求
-     *
      * @return {@link io.vertx.core.Future}<{@link ActOut}> 业务层输出
      */
     @Override
@@ -77,16 +76,15 @@ public class AbstractHub extends AbstractActor {
 
     /**
      * 数据合并专用功能，对`Tool`数据执行<strong>去空</strong>处理（移除掉`null`值）。
-     *
+     * <p>
      * - 如果是{@link io.vertx.core.json.JsonObject}，则直接去掉`field = null`部分的值。
      * - 如果是{@link io.vertx.core.json.JsonArray}，针对每一个元素去掉`field = null`部分的值。
-     *
+     * <p>
      * > 内部调用`combineEdit`方法。
      *
      * @param data 输入数据信息
      * @param atom {@link DataAtom} 模型定义对象
      * @param <T>  内容对象，通常为{@link io.vertx.core.json.JsonArray}或{@link io.vertx.core.json.JsonObject}
-     *
      * @return 返回执行完成后的内容对象
      */
     protected <T> T diffAdd(final T data, final DataAtom atom) {
@@ -95,17 +93,17 @@ public class AbstractHub extends AbstractActor {
 
     /**
      * 该方法和`combineEdit`方法一前一后合并使用，为「清空」做准备，该数据可<strong>规范化</strong>输入数据
-     *
+     * <p>
      * 1. 遍历`original`中的所有属性`field`。
      * 2. 提取`current`输入中没有的属性，并设置成<strong>null</strong>值。
      * 3. 最终属性为合并属性。
-     *
+     * <p>
      * 由于该步骤是`UPDATE`更新的前置步骤，所以会根据模型中的定义执行下边三种操作：
-     *
+     * <p>
      * - 「清空」清除原来有值的属性（`field = null`），本方法的核心逻辑。
      * - 「更新」更新原来有值的属性（直接合并可实现）。
      * - 「追加」追加原来无值的属性（直接合并可实现）。
-     *
+     * <p>
      * > 该方法有副作用，会改变`current`对象。
      *
      * @param original {@link io.vertx.core.json.JsonObject} 原始数据记录
@@ -119,22 +117,22 @@ public class AbstractHub extends AbstractActor {
      * 该方法为更新过程中的专用方法，会执行核心的更新逻辑。
      *
      * <strong>第一层逻辑</strong>
-     *
+     * <p>
      * - 遍历{@link io.vertx.core.json.JsonObject}直接提取Json对象引用。
      * - 遍历{@link io.vertx.core.json.JsonArray}中的每一个对象，提取Json对象引用。
      * - 在每一个元素中执行 `Function<JsonObject,Tool>`函数。
      *
      * <strong>第二层逻辑</strong>
-     *
+     * <p>
      * 判断逻辑，根据输入的第二参数执行判断：
-     *
+     * <p>
      * - 「Creation」去掉所有`null`对象过后执行更新。
      * - 「Edition」执行第三层核心逻辑。
      *
      * <strong>第三层逻辑</strong>
-     *
+     * <p>
      * 从系统中提取所有不执行清空的属性`notnullFields`，这种类型的属性表如下：
-     *
+     * <p>
      * |属性名|备注|
      * |---:|:---|
      * |createdAt|创建时间。|
@@ -146,22 +144,21 @@ public class AbstractHub extends AbstractActor {
      * |`inSync = false`|配置的不需要从集成端输入的属性。|
      *
      * <strong>第四层逻辑（位于`notnullFields`中）</strong>
-     *
-     * 1. 如果输入的`field = null`，则设置`normalized`中的`field = findRunning`（原值），并且从原始记录中移除`field`。
-     * 2. 如果输入的`field = findRunning`，则直接将该值传入normalized中。
+     * <p>
+     * 1. 如果输入的`field = null`，则设置`normalized`中的`field = value`（原值），并且从原始记录中移除`field`。
+     * 2. 如果输入的`field = value`，则直接将该值传入normalized中。
      *
      * <strong>第四层逻辑（不包含在`notnullFields`中）</strong>
-     *
-     * 1. 如果输入值中包含`field = findRunning`，则更新`normalized`中的`findRunning`值。
+     * <p>
+     * 1. 如果输入值中包含`field = value`，则更新`normalized`中的`value`值。
      * 2. 如果输入值中不包含`field`，则直接清空`normalized`中的值。
-     *
+     * <p>
      * > 最终计算的`normalized`会覆盖原始记录对象数据。
      *
      * @param original 原始数据
      * @param updated  {@link io.vertx.core.json.JsonObject} 待更新数据对象
      * @param atom     {@link DataAtom} 模型信息
      * @param <T>      内容对象，通常为{@link io.vertx.core.json.JsonArray}或{@link io.vertx.core.json.JsonObject}
-     *
      * @return 返回执行完成后的内容对象
      */
     protected <T> T diffEdit(final T original, final JsonObject updated, final DataAtom atom) {
@@ -181,14 +178,14 @@ public class AbstractHub extends AbstractActor {
 
     /**
      * 「删除备份」历史记录执行器，用于存储执行了物理删除的历史数据记录。
-     *
+     * <p>
      * 1. 启用了「删除历史」功能的数据可执行该操作。
      * 2. 原始库`DB_XXX`和`DB_XXX_HIS`，该方法会将数据记录存储到`DB_XXX_HIS`中执行备份。
      * 3. 记录条件是打开了 Trash 过后启用的功能。
-     *
+     * <p>
      * 下边步骤用于打开历史记录功能：
      * 1. 项目中创建类，源代码内容如下：
-     *
+     * <p>
      * // <pre><code class="java">
      *      package io.extension.channel;
      *
@@ -222,20 +219,19 @@ public class AbstractHub extends AbstractActor {
      *          }
      *      }
      * // </code></pre>
-     *
+     * <p>
      * 2. 然后在您的项目创建 ServiceLoader相关配置：
      * - 配置目录位于 src/main/resources/META-INF/services/
      * - 文件名为接口名：io.horizon.spi.feature.Trash
      * - 文件内容为上述类名：io.extension.channel.TrashTunnel
-     *
+     * <p>
      * 3. 上述配置完成后，就开启了"历史记录"专用功能。
-     *
+     * <p>
      * 该库中的数据记录会被备份到历史库，后续版本会有专程的模块来访问。
      *
      * @param input 被删除的数据记录
      * @param atom  {@link DataAtom} 模型信息
      * @param <T>   内容对象，通常为{@link io.vertx.core.json.JsonArray}或{@link io.vertx.core.json.JsonObject}
-     *
      * @return {@link io.vertx.core.Future}
      */
     protected <T> Future<T> backupAsync(final T input, final DataAtom atom) {
@@ -262,7 +258,6 @@ public class AbstractHub extends AbstractActor {
      * @param newR 新记录
      * @param atom {@link DataAtom} 模型信息
      * @param <T>  内容对象，通常为{@link io.vertx.core.json.JsonArray}或{@link io.vertx.core.json.JsonObject}
-     *
      * @return {@link io.vertx.core.Future}
      */
     protected <T> Future<T> trackAsyncC(final T newR, final DataAtom atom) {
@@ -282,7 +277,6 @@ public class AbstractHub extends AbstractActor {
      * @param oldR 旧记录
      * @param atom {@link DataAtom} 模型信息
      * @param <T>  内容对象，通常为{@link io.vertx.core.json.JsonArray}或{@link io.vertx.core.json.JsonObject}
-     *
      * @return {@link io.vertx.core.Future}
      */
     protected <T> Future<T> trackAsyncD(final T oldR, final DataAtom atom) {
@@ -305,7 +299,6 @@ public class AbstractHub extends AbstractActor {
      * @param newR 新记录
      * @param atom {@link DataAtom} 模型信息
      * @param <T>  内容对象，通常为{@link io.vertx.core.json.JsonArray}或{@link io.vertx.core.json.JsonObject}
-     *
      * @return {@link io.vertx.core.Future}
      */
     protected <T> Future<T> trackAsyncU(final T oldR, final T newR, final DataAtom atom) {
@@ -350,7 +343,6 @@ public class AbstractHub extends AbstractActor {
      * 模型专用统一访问器，提供<strong>输入模型</strong>的基础访问方法。
      *
      * @param atom {@link DataAtom} 模型定义对象
-     *
      * @return {@link Completer}
      */
     public Completer completer(final DataAtom atom) {
@@ -362,15 +354,15 @@ public class AbstractHub extends AbstractActor {
 
     /**
      * 模型专用统一访问器，提供<strong>当前模型</strong>的基础访问方法。
-     *
+     * <p>
      * 操作矩阵说明：
-     *
+     * <p>
      * |方法名|单参JsonObject|多参JsonArray|备注|
      * |:---|---|---|:---|
      * |create|OkOld|OkOld|创建/批量创建|
      * |update|OkOld|OkOld|更新/批量更新|
      * |remove|OkOld|OkOld|删除/批量删除|
-     * |findRunning|OkOld|OkOld|读取/批量读取|
+     * |value|OkOld|OkOld|读取/批量读取|
      *
      * @return {@link Completer}
      */
