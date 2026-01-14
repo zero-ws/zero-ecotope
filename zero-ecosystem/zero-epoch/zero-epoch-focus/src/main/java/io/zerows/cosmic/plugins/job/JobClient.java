@@ -23,7 +23,7 @@ public interface JobClient {
     }
 
     static void bind(final Long timerId, final String code) {
-        JobControl.bind(timerId, code);
+        JobQueue.bind(timerId, code);
     }
 
     static String code(final String name) {

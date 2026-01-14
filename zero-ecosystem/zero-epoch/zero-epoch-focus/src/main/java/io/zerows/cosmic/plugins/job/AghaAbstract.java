@@ -21,56 +21,78 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 
-/*
- * The chain should be
+/**
+ * <pre>
+ * 🔗 AghaAbstract — 任务执行链逻辑抽象基类。
  *
- * 1) Input data came from 'incomeAddress' ( There are some preparing or other info )
- * 2) `incomeComponent` will be triggered if it's existing.
- * 3) `component` is required and contain major code logical.
- * 4) `outcomeComponent` will be triggered if it's existing.
- * 5) The result message will be sent to `outcomeAddress`.
- * 6) There could be a callbackAsync method for callback execution ( After Out )
- *    - If `outcomeAddress`, the data came from Event Bus
- *    - Otherwise, the data came from `outcomeComponent`.
+ * 说明:
+ * 定义了标准的任务执行流程（Pipeline），涵盖从输入到输出及回调的全过程。
+ *
+ * 🔄 执行流程 (Workflow):
+ * 1. 📥 输入源 (Input Source):
+ *    - 数据源于 `incomeAddress`（可能包含预处理或其他信息）。
+ *
+ * 2. 🧩 Income 组件 (Pre-Processor):
+ *    - 如果配置了 `incomeComponent`，则触发该组件执行前置逻辑。
+ *
+ * 3. ⚙️ 核心组件 (Core Processor):
+ *    - `component` 是必须的，包含任务的核心业务逻辑。
+ *
+ * 4. 🧩 Outcome 组件 (Post-Processor):
+ *    - 如果配置了 `outcomeComponent`，则触发该组件执行后置逻辑。
+ *
+ * 5. 📤 输出源 (Output Source):
+ *    - 结果消息将被发送到 `outcomeAddress`。
+ *
+ * 6. 🔙 回调 (Callback):
+ *    - 执行完毕后可能触发 `callbackAsync` 进行回调处理：
+ *      - 如果存在 `outcomeAddress`，数据来自 Event Bus。
+ *      - 否则，数据直接来自 `outcomeComponent` 的输出。
+ * </pre>
+ *
+ * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 public abstract class AghaAbstract implements Agha {
 
     private static final AtomicBoolean SELECTED = new AtomicBoolean(Boolean.TRUE);
-    /*
+    /**
+     * <pre>
+     * 🚦 任务状态机流转图 (Job Status Machine)
+     *
      * STARTING ------|
      *                v
      *     |------> READY <-------------------|
      *     |          |                       |
-     *     |          |                    <start>
+     *     |          |                    &lt;start&gt;
      *     |          |                       |
-     *     |        <start>                   |
+     *     |        &lt;start&gt;                   |
      *     |          |                       |
      *     |          V                       |
-     *     |        RUNNING --- <stop> ---> STOPPED
+     *     |        RUNNING --- &lt;stop&gt; ---&gt; STOPPED
      *     |          |
      *     |          |
-     *  <resume>   ( error )
+     *  &lt;resume&gt;   ( error )
      *     |          |
      *     |          |
      *     |          v
      *     |------- ERROR
-     *
+     * </pre>
      */
     private static final ConcurrentMap<EmService.JobStatus, EmService.JobStatus> VM = new ConcurrentHashMap<>() {
         {
-            /* STARTING -> READY */
+            /* 初始化状态流转：STARTING -> READY */
             this.put(EmService.JobStatus.STARTING, EmService.JobStatus.READY);
 
-            /* READY -> RUNNING ( Automatically ) */
+            /* 自动流转：READY -> RUNNING */
             this.put(EmService.JobStatus.READY, EmService.JobStatus.RUNNING);
 
-            /* RUNNING -> STOPPED ( Automatically ) */
+            /* 自动流转：RUNNING -> STOPPED */
             this.put(EmService.JobStatus.RUNNING, EmService.JobStatus.STOPPED);
 
-            /* STOPPED -> READY */
+            /* 手动/触发流转：STOPPED -> READY */
             this.put(EmService.JobStatus.STOPPED, EmService.JobStatus.READY);
 
-            /* ERROR -> READY */
+            /* 错误恢复：ERROR -> READY */
             this.put(EmService.JobStatus.ERROR, EmService.JobStatus.READY);
         }
     };
@@ -103,46 +125,66 @@ public abstract class AghaAbstract implements Agha {
         return JobActor.ofStore();
     }
 
-    /*
-     * Input workflow for Mission
-     * 1. Whether address configured ?
-     *    - Yes, findRunning Envelop from event bus as secondary input
-     *    - No, findRunning Envelop of `Envelop.ok()` instead
-     * 2. Extract `JobIncome`
-     * 3. Major
-     * 4. JobOutcome
-     * 5. Whether defined address of output
-     * 6. If 5, provide callback function of this job here.
+    /**
+     * <pre>
+     * ⚡️ workingAsync - 异步任务执行链
+     *
+     * 说明:
+     * 构建并执行 Mission 的完整工作流。
+     *
+     * 📋 步骤说明:
+     * 1. 📬 地址检查 (Input Check):
+     *    - 是：从 Event Bus 获取 Envelop 作为辅助输入。
+     *    - 否：使用 `Envelop.ok()` 作为默认输入。
+     *
+     * 2. 📥 Income 提取 (Pre-Process):
+     *    - 执行 JobIncome 逻辑。
+     *
+     * 3. ⚙️ 核心逻辑 (Core Execution):
+     *    - 执行主要业务代码 (Component)。
+     *
+     * 4. 📤 Outcome 处理 (Post-Process):
+     *    - 执行 JobOutcome 逻辑。
+     *
+     * 5. 📡 输出检查 (Output Check):
+     *    - 检查是否定义了输出地址，如果有则发送结果。
+     *
+     * 6. 🔙 回调 (Callback):
+     *    - 提供任务完成后的回调钩子。
+     * </pre>
+     *
+     * @param mission 任务元数据对象
+     * @return Future&lt;Envelop&gt; 异步执行结果
      */
     private Future<Envelop> workingAsync(final Mission mission) {
         /*
-         * Initializing phase reference here.
+         * 初始化 Phase 引用，用于构建执行链
          */
         final Phase phase = Phase.start(mission.getCode())
             .bind(this.vertx)
             .bind(mission);
         /*
-         * 1. Step 1:  EventBus ( Input )
+         * 1. 步骤 1: EventBus ( 输入源 )
          */
         return phase.inputAsync(mission)
             /*
-             * 2. Step 2:  JobIncome ( Process )
+             * 2. 步骤 2: JobIncome ( 前置处理 )
              */
             .compose(phase::incomeAsync)
             /*
-             * 3. Step 3:  Major cole logical here
+             * 3. 步骤 3: 核心业务逻辑代码
              */
             .compose(phase::invokeAsync)
             /*
-             * 4. Step 4:  JobOutcome ( Process )
+             * 4. 步骤 4: JobOutcome ( 后置处理 )
              */
             .compose(phase::outcomeAsync)
             /*
-             * 5. Step 5: EventBus ( Output )
+             * 5. 步骤 5: EventBus ( 输出源 )
              */
             .compose(phase::outputAsync)
             /*
-             * 6. Final steps here
+             * 6. 最终步骤：回调处理
              */
             .compose(phase::callbackAsync);
     }
@@ -150,64 +192,61 @@ public abstract class AghaAbstract implements Agha {
     void working(final Mission mission, final Actuator actuator) {
         if (EmService.JobStatus.READY == mission.getStatus()) {
             /*
-             * READY -> RUNNING
+             * 状态变更：READY -> RUNNING
              */
             this.moveOn(mission, true);
             /*
-             * Read threshold
-             * 「OLD」for KScheduler not null, but in ONCE or some spec types,
-             * the timer could be null
-             * final KScheduler timer = mission.timer();
-             * Objects.requireNonNull(timer);
+             * 读取超时阈值
+             * 「注意」旧版本代码中 KScheduler 若为 null 可能导致问题，
+             * 但在 ONCE 或特定类型中，timer 可能确实为 null。
+             * 此处直接从 mission 获取计算好的 timeout。
              */
             final long threshold = mission.timeout();
             /*
-             * Worker Executor of New created
-             * 1) Create new worker pool for next execution here
-             * 2) Do not break the major thread for terminal current job
-             * 3）Executing info here for long block issue
+             * 创建新的 Worker Executor
+             * 1) 为下一次执行创建独立的 worker 线程池
+             * 2) 不要阻塞主线程，避免影响当前任务的终止操作
+             * 3) 在此处执行，解决长时间阻塞的问题（设置超时时间）
              */
             final String code = mission.getCode();
             final WorkerExecutor executor =
                 this.vertx.createSharedWorkerExecutor(code, 1, threshold);
-            this.log().info("[ ZERO ] ( Job ) 任务执行器 {} 已创建，最大执行时间 {} 秒",
+            this.log().debug("[ ZERO ] ( Job ) 任务执行器 {} 已创建，最大执行时间 {} 秒",
                 code, TimeUnit.NANOSECONDS.toSeconds(threshold));
-            executor.executeBlocking(() -> {
-                // 在 executeBlocking 的 Callable 中，直接执行阻塞逻辑
-                return this.workingAsync(mission)
-                    .compose(result -> {
-                        /*
-                         * 任务执行成功，执行后置逻辑
-                         */
-                        Fn.jvmAt(actuator);
-                        this.log().info("[ ZERO ] ( Job ) 任务执行器 {} 执行完成，准备关闭！", code);
-                        return Future.succeededFuture(result);
-                    })
-                    .otherwise(error -> {
-                        /*
-                         * 任务执行异常
-                         */
-                        if (!(error instanceof VertxException)) {
-                            this.log().error(error.getMessage(), error);
-                            this.moveOn(mission, false);
-                        }
-                        return Envelop.failure(error);
-                    })
-                    // 等待异步结果（因为 Callable 要返回 T，这里要阻塞获取）
-                    .toCompletionStage().toCompletableFuture().get();
-            }).onComplete(handler -> {
+            executor.executeBlocking(() -> this.workingAsync(mission)
+                .compose(result -> {
+                    /*
+                     * 任务执行成功，触发 Actuator 后置逻辑
+                     */
+                    Fn.jvmAt(actuator);
+                    this.log().info("[ ZERO ] ( Job ) 任务执行器 {} 执行完成，准备关闭！", code);
+                    return Future.succeededFuture(result);
+                })
+                .otherwise(error -> {
+                    /*
+                     * 任务执行异常处理
+                     */
+                    if (!(error instanceof VertxException)) {
+                        this.log().error(error.getMessage(), error);
+                        // 标记任务状态为异常，但不中断流程
+                        this.moveOn(mission, false);
+                    }
+                    return Envelop.failure(error);
+                })
+            ).onComplete(handler -> {
                 /*
                  * 异步结果检查是否完成
                  */
                 if (handler.succeeded()) {
                     /*
-                     * 成功，关闭 worker executor
+                     * 成功，关闭 worker executor 释放资源
                      */
                     executor.close();
                 } else {
                     if (Objects.nonNull(handler.cause())) {
                         /*
                          * 失败，打印堆栈而不是吞掉异常
+                         * 忽略 VertxException (如 Thread blocked)，避免日志噪音
                          */
                         final Throwable error = handler.cause();
                         if (!(error instanceof VertxException)) {
@@ -216,6 +255,7 @@ public abstract class AghaAbstract implements Agha {
                     }
                 }
             }).otherwise(error -> {
+                // 最后的防线，记录未捕获的异常
                 this.log().error(error.getMessage(), error);
                 return null;
             });
@@ -225,17 +265,17 @@ public abstract class AghaAbstract implements Agha {
     void moveOn(final Mission mission, final boolean noError) {
         if (noError) {
             /*
-             * Preparing for job
+             * 任务准备阶段
              **/
             if (VM.containsKey(mission.getStatus())) {
                 /*
-                 * Next Status
+                 * 计算下一个状态
                  */
                 final EmService.JobStatus moved = VM.get(mission.getStatus());
                 final EmService.JobStatus original = mission.getStatus();
                 mission.setStatus(moved);
                 /*
-                 * Log and update cache
+                 * 记录日志并更新存储中的状态缓存
                  */
                 this.log().info("[ ZERO ] ( Job ) \uD83D\uDCAB 状态：{} -> {}，(类型：{} / 编码：{})",
                     original, moved, mission.getType(), mission.getCode());
@@ -243,7 +283,7 @@ public abstract class AghaAbstract implements Agha {
             }
         } else {
             /*
-             * Terminal job here
+             * 任务终止阶段（异常情况）
              */
             if (EmService.JobStatus.RUNNING == mission.getStatus()) {
                 mission.setStatus(EmService.JobStatus.ERROR);
@@ -256,5 +296,9 @@ public abstract class AghaAbstract implements Agha {
 
     protected Logger log() {
         return LoggerFactory.getLogger(this.getClass());
+    }
+
+    protected Vertx vertx() {
+        return this.vertx;
     }
 }

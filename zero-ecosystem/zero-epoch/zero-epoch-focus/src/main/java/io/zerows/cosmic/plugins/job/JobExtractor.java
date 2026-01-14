@@ -101,7 +101,7 @@ public class JobExtractor implements Extractor<Mission> {
         // Error-60054 Detect
         mission.detectPre(runFormula);
         timer.configure(runFormula, null);
-        mission.timer(timer);
+        mission.scheduler(timer);
     }
 
     private Mission config(final Job annotation) {

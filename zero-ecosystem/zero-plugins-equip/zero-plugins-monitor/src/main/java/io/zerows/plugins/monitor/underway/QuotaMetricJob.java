@@ -23,7 +23,7 @@ public class QuotaMetricJob extends QuotaMetricBase {
         if (Objects.isNull(this.client)) {
             return Future.succeededFuture(new ArrayList<>());
         }
-        final List<MetricRow> metric = new ArrayList<>();
+        final List<MetricRow> metrics = new ArrayList<>();
         final List<Mission> missionList = this.client.fetch();
         missionList.forEach(mission -> {
             // 配置项
@@ -36,9 +36,9 @@ public class QuotaMetricJob extends QuotaMetricBase {
             item.addrStandBy(mission.hashCode());
             item.data(mission.mom());
 
-            metric.add(item);
+            metrics.add(item);
         });
-        return Future.succeededFuture(metric);
+        return Future.succeededFuture(metrics);
     }
 
     @Override

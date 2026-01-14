@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.r2mo.function.Fn;
 import io.r2mo.typed.json.jackson.ClassDeserializer;
 import io.r2mo.typed.json.jackson.ClassSerializer;
+import io.vertx.codegen.annotations.Fluent;
 import io.vertx.core.json.JsonObject;
 import io.zerows.cosmic.plugins.job.exception._60042Exception501JobOnMissing;
 import io.zerows.cosmic.plugins.job.exception._60054Exception409JobFormulaError;
@@ -115,7 +116,25 @@ public class Mission implements Serializable {
     private HArk ark;
 
     @JsonIgnore
-    private KScheduler timer;
+    private KScheduler scheduler;
+
+    // -------------------- 临时绑定
+    @JsonIgnore
+    private Long timerId;
+
+    @Fluent
+    public Mission timerId(final Long timerId) {
+        if (Objects.nonNull(timerId)) {
+            this.timerId = timerId;
+        }
+        return this;
+    }
+
+    public long timerId() {
+        return this.timerId;
+    }
+
+    // -----------------------------
 
     public Mission connect(final Class<?> clazz) {
         /*
@@ -194,11 +213,10 @@ public class Mission implements Serializable {
     public Mission timeout(final Duration timeoutAt) {
         if (Objects.isNull(timeoutAt)) {
             this.threshold = VValue.RANGE;
-            return this;
         } else {
             this.threshold = timeoutAt.toNanos();
-            return this;
         }
+        return this;
     }
 
     public long timeout() {
@@ -220,13 +238,13 @@ public class Mission implements Serializable {
         return this.ark;
     }
 
-    public Mission timer(final KScheduler timer) {
-        this.timer = timer;
+    public Mission scheduler(final KScheduler timer) {
+        this.scheduler = timer;
         return this;
     }
 
-    public KScheduler timer() {
-        return this.timer;
+    public KScheduler scheduler() {
+        return this.scheduler;
     }
 
     // ========================== 确保配置合法性 =======================
@@ -249,7 +267,7 @@ public class Mission implements Serializable {
         monitorJ.put("onAction", this.on.getName());
         monitorJ.put("proxy", this.proxy.getClass().getName());
         monitorJ.put("offAction", Objects.nonNull(this.off) ? this.off.getName() : null);
-        monitorJ.put("timer", Objects.nonNull(this.timer) ? this.timer.name() : null);
+        monitorJ.put("timer", Objects.nonNull(this.scheduler) ? this.scheduler.name() : null);
         monitorJ.put("threshold", TimeUnit.NANOSECONDS.toSeconds(this.timeout()) + "s");
         return monitorJ;
     }
@@ -273,7 +291,7 @@ public class Mission implements Serializable {
             ", on=" + this.on +
             ", off=" + this.off +
             ", ark=" + this.ark +
-            ", timer=" + this.timer +
+            ", timer=" + this.scheduler +
             '}';
     }
 }

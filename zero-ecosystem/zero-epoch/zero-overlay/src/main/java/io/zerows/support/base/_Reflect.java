@@ -14,7 +14,7 @@ import java.util.Objects;
 class _Reflect extends _Random {
     protected _Reflect() {
     }
-    
+
     /**
      * 判断 implCls 是否实现了 interfaceCls 接口，或者是否是 interfaceCls 的子类
      * 若 implCls 不是父类，则递归检索父类直到最终的 Object 类
@@ -256,19 +256,6 @@ class _Reflect extends _Random {
      */
     public static <T> T invoke(final Object instance, final String name, final Object... args) {
         return UInvoker.invokeObject(instance, name, args);
-    }
-
-    /**
-     * 静态方法调用
-     *
-     * @param clazz 类
-     * @param name  方法名
-     * @param args  参数
-     * @param <T>   返回值类型
-     * @return 返回值
-     */
-    public static <T> T invokeStatic(final Class<?> clazz, final String name, final Object... args) {
-        return UInvoker.invokeStatic(clazz, name, args);
     }
 
     /**

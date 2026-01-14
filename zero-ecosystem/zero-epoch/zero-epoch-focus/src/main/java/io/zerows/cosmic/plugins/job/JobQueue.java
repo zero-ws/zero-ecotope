@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
  * Static pool for sync here.
  */
 @Slf4j
-class JobControl {
+class JobQueue {
 
     public static final String IS_RUNNING = "[ ZERO ] ( Job ) 任务 {} 已经运行 !!!";
     public static final String IS_STARTING = "[ ZERO ] ( Job ) 任务 {} 正在启动，请等待它就绪 --> READY";
@@ -59,7 +59,7 @@ class JobControl {
         if (Objects.isNull(missions)) {
             return;
         }
-        missions.forEach(JobControl::save);
+        missions.forEach(JobQueue::save);
     }
 
     static void bind(final Long timeId, final String code) {

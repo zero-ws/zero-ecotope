@@ -60,10 +60,18 @@ class PhaseRunOn {
             try {
                 final Object[] arguments = this.buildArgs(envelop, method, mission);
                 return Ut.invokeAsync(proxy, method, arguments)
-                    /* Normalizing data */
-                    .compose(this::normalize);
+                    .compose(this::normalize)
+                    .otherwise(error -> {
+                        error.printStackTrace();
+                        return envelop;
+                    });
             } catch (final Throwable ex) {
                 log.error(ex.getMessage(), ex);
+                // 取消 timerId 处理
+                final long timerId = mission.timerId();
+                if (0 != timerId && Objects.nonNull(this.vertx)) {
+                    this.vertx.cancelTimer(timerId);
+                }
                 return Future.failedFuture(ex);
             }
         } else {
@@ -77,12 +85,11 @@ class PhaseRunOn {
         if (Objects.isNull(returnValue)) {
             // Return null
             return Ut.future(Envelop.okJson());
+        }
+        if (Envelop.class == returnValue.getClass()) {
+            return Future.succeededFuture((Envelop) returnValue);
         } else {
-            if (Envelop.class == returnValue.getClass()) {
-                return Future.succeededFuture((Envelop) returnValue);
-            } else {
-                return Ut.future(Envelop.success(returnValue));
-            }
+            return Ut.future(Envelop.success(returnValue));
         }
     }
 

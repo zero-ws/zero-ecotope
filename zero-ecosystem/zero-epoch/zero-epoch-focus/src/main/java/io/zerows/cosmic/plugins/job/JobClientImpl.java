@@ -31,7 +31,7 @@ class JobClientImpl implements JobClient {
     @Override
     public Future<Long> startAsync(final String code) {
         /* Find Mission by code */
-        final Mission mission = JobControl.get(code);
+        final Mission mission = JobQueue.get(code);
         if (Objects.nonNull(mission)) {
             /* Start new job here */
             final Agha agha = Agha.get(mission.getType());
@@ -44,7 +44,7 @@ class JobClientImpl implements JobClient {
              * returned directly.
              * */
             return agha.begin(mission).compose(timerId -> {
-                JobControl.start(timerId, code);
+                JobQueue.start(timerId, code);
                 return Future.succeededFuture(timerId);
             });
         } else {
@@ -55,11 +55,11 @@ class JobClientImpl implements JobClient {
 
     @Override
     public Future<Boolean> stopAsync(final String code) {
-        final Long timerId = JobControl.timeId(code);
+        final Long timerId = JobQueue.timeId(code);
         if (Objects.isNull(timerId)) {
             return Future.succeededFuture(Boolean.FALSE);
         }
-        JobControl.stop(timerId);
+        JobQueue.stop(timerId);
         /* Cancel job */
         this.vertx.cancelTimer(timerId);
         return Future.succeededFuture(Boolean.TRUE);
@@ -67,8 +67,8 @@ class JobClientImpl implements JobClient {
 
     @Override
     public Future<Long> resumeAsync(final String code) {
-        final Long timeId = JobControl.timeId(code);
-        JobControl.resume(timeId);
+        final Long timeId = JobQueue.timeId(code);
+        JobQueue.resume(timeId);
         return this.startAsync(code);
     }
 
@@ -79,12 +79,12 @@ class JobClientImpl implements JobClient {
 
     @Override
     public Mission fetch(final String code) {
-        return JobControl.get(code);
+        return JobQueue.get(code);
     }
 
     @Override
     public List<Mission> fetch(final Set<String> codes) {
-        final List<Mission> missionList = JobControl.get();
+        final List<Mission> missionList = JobQueue.get();
         if (Objects.isNull(codes) || codes.isEmpty()) {
             return new ArrayList<>();
         } else {
@@ -106,12 +106,12 @@ class JobClientImpl implements JobClient {
 
     @Override
     public List<Mission> fetch() {
-        return JobControl.get();
+        return JobQueue.get();
     }
 
     @Override
     public Mission save(final Mission mission) {
-        JobControl.save(mission);
+        JobQueue.save(mission);
         return mission;
     }
 
@@ -124,7 +124,7 @@ class JobClientImpl implements JobClient {
     @Override
     public Mission remove(final String code) {
         final Mission mission = this.fetch(code);
-        JobControl.remove(code);
+        JobQueue.remove(code);
         return mission;
     }
 
@@ -146,7 +146,7 @@ class JobClientImpl implements JobClient {
 
     @Override
     public JsonObject status(final String namespace) {
-        return JobControl.status(namespace);
+        return JobQueue.status(namespace);
     }
 
     @Override

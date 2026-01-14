@@ -79,6 +79,9 @@ class JobClientManager extends AddOnManager<JobClient> {
         if (Objects.isNull(store)) {
             store = new JobStoreUnity();
         }
+        // 调用初始化方法（填充 JobQueue）
+        store.initialize();
+
         return store;
     }
 }

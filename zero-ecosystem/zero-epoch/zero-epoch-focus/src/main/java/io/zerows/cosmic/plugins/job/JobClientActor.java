@@ -11,11 +11,17 @@ import jakarta.inject.Provider;
 import lombok.extern.slf4j.Slf4j;
 
 /**
+ * 修正 JobClientActor 的启动优先级为 -188，确保它在监控之前启动，监控要调用它。
+ *
  * @author lang : 2025-10-16
  */
-@Actor(value = "job")
+@Actor(value = "job", sequence = -188)
 @Slf4j
 public class JobClientActor extends AbstractHActor {
+    public static JobClient ofClient() {
+        return JobClientAddOn.of().createSingleton();
+    }
+
     @Override
     @SuppressWarnings("all")
     protected Future<Boolean> startAsync(final HConfig config, final Vertx vertxRef) {
@@ -26,9 +32,5 @@ public class JobClientActor extends AbstractHActor {
         DiRegistry.of().put(addOn.getKey(), provider);
         this.vLog("[ JobClient ] DI 提供者 Provider 注册：provider = {}, key = {}", provider, addOn.getKey());
         return Future.succeededFuture(Boolean.TRUE);
-    }
-
-    public static JobClient ofClient() {
-        return JobClientAddOn.of().createSingleton();
     }
 }
