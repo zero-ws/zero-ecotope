@@ -9,8 +9,8 @@ import io.zerows.cortex.metadata.RunServer;
 import io.zerows.cortex.sdk.Axis;
 import io.zerows.epoch.basicore.WebEvent;
 import io.zerows.epoch.management.OCacheActor;
+import io.zerows.epoch.web.Filter;
 import io.zerows.specification.development.compiled.HBundle;
-import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Method;
@@ -52,15 +52,15 @@ public class AxisFilter implements Axis {
             final WebEvent event = runRoute.refEvent();
 
             final Method method = event.getAction();
-            final Object proxy = event.getProxy();
 
             try {
+                final Filter filter = (Filter) event.getProxy();
                 // Init configure;
-                Ut.invoke(proxy, "init", context);
+                filter.init(context);
                 // Extract Request/Response
                 final HttpServerRequest request = context.request();
                 final HttpServerResponse response = context.response();
-                method.invoke(proxy, request, response);
+                filter.doFilter(request, response);
 
                 // Check whether called next or response
                 if (!response.ended()) {

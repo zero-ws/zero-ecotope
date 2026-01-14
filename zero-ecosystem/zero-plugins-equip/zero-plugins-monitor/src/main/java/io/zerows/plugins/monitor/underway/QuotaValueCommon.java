@@ -33,7 +33,7 @@ public class QuotaValueCommon extends QuotaValueBase {
     @Override
     protected Map<String, Integer> ofRoleAt() {
         final Map<String, Integer> roleAtMap = new HashMap<>();
-        roleAtMap.put(MOM.CC_ID, 300);      // 300 秒
+        roleAtMap.put(MOM.CC_ID, 600);      // 600 秒
         return roleAtMap;
     }
 }

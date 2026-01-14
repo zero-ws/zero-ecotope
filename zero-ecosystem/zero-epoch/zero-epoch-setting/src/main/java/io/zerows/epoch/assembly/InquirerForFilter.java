@@ -1,7 +1,6 @@
 package io.zerows.epoch.assembly;
 
 import io.r2mo.function.Fn;
-import io.reactivex.rxjava3.core.Observable;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.http.HttpServerResponse;
 import io.zerows.epoch.annotations.Ordered;
@@ -12,10 +11,8 @@ import io.zerows.epoch.configuration.Inquirer;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.web.Filter;
 import io.zerows.platform.constant.VValue;
-import io.zerows.support.Ut;
+import jakarta.servlet.annotation.WebFilter;
 
-import javax.servlet.annotation.WebFilter;
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -34,23 +31,19 @@ public class InquirerForFilter implements Inquirer<ConcurrentMap<String, Set<Web
     public ConcurrentMap<String, Set<WebEvent>> scan(final Set<Class<?>> clazzes) {
         // Scan all classess that are annotated with @WebFilter
         final ConcurrentMap<String, Set<WebEvent>> filters = new ConcurrentHashMap<>();
-        Observable.fromIterable(clazzes)
-            .filter(item -> item.isAnnotationPresent(WebFilter.class))
-            .map(this::ensure)
-            .subscribe(item -> this.extract(filters, item))
-            .dispose();
+        for (final Class<?> clazz : clazzes) {
+            if (clazz.isAnnotationPresent(WebFilter.class)) {
+                Fn.jvmKo(!Filter.class.isAssignableFrom(clazz), _40052Exception500FilterSpecification.class, clazz);
+                this.extract(filters, clazz);
+            }
+        }
         return filters;
-    }
-
-    private Class<?> ensure(final Class<?> clazz) {
-        Fn.jvmKo(!Filter.class.isAssignableFrom(clazz), _40052Exception500FilterSpecification.class, clazz);
-        return clazz;
     }
 
     private void extract(final ConcurrentMap<String, Set<WebEvent>> map,
                          final Class<?> clazz) {
-        final Annotation annotation = clazz.getAnnotation(WebFilter.class);
-        final String[] pathes = Ut.invoke(annotation, "value");
+        final WebFilter annotation = clazz.getAnnotation(WebFilter.class);
+        final String[] pathes = annotation.value();
         // Multi pathes supported
         for (final String path : pathes) {
             final WebEvent event = this.extract(path, clazz);
@@ -68,10 +61,10 @@ public class InquirerForFilter implements Inquirer<ConcurrentMap<String, Set<Web
     private WebEvent extract(final String path, final Class<?> clazz) {
         final WebEvent event = new WebEvent();
         event.setPath(path);
-        final Annotation annotation = clazz.getAnnotation(Ordered.class);
+        final Ordered annotation = clazz.getAnnotation(Ordered.class);
         int order = KWeb.ORDER.FILTER;
         if (null != annotation) {
-            final Integer setted = Ut.invoke(annotation, "value");
+            final int setted = annotation.value();
             // Order specification
             Fn.jvmKo(setted < 0, _40053Exception500FilterOrder.class, clazz);
             order = order + setted;
@@ -88,20 +81,24 @@ public class InquirerForFilter implements Inquirer<ConcurrentMap<String, Set<Web
 
     private Method findMethod(final Class<?> clazz) {
         final List<Method> methods = new ArrayList<>();
-        // One method only
+        // Scan for all valid methods defined in Filter interface
         final Method[] scanned = clazz.getDeclaredMethods();
-        Observable.fromArray(scanned)
-            .filter(item -> "doFilter".equals(item.getName()))
-            .subscribe(methods::add)
-            .dispose();
-        // No overwritting
-        if (VValue.ONE == methods.size()) {
-            return methods.get(VValue.IDX);
-        } else {
-            // Search for correct signature
-            return Observable.fromIterable(methods)
-                .filter(this::isValidFilter)
-                .blockingFirst();
+        for (final Method method : scanned) {
+            if (Filter.METHODS.contains(method.getName()) && this.isValidFilter(method)) {
+                methods.add(method);
+            }
+        }
+
+        // At least one method must exist
+        if (methods.isEmpty()) {
+            throw new _40052Exception500FilterSpecification(clazz);
+        }
+
+        try {
+            // Return doFilter as executable action
+            return clazz.getMethod(Filter.METHOD_FILTER, HttpServerRequest.class, HttpServerResponse.class);
+        } catch (final NoSuchMethodException e) {
+            throw new RuntimeException(e);
         }
     }
 

@@ -7,7 +7,6 @@ import io.zerows.epoch.annotations.Actor;
 import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.epoch.management.OCacheConfiguration;
 import io.zerows.extension.skeleton.boot.ExAbstractHActor;
-import io.zerows.extension.skeleton.common.KeConstant;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.spi.HPI;
 import io.zerows.support.Fx;
@@ -49,7 +48,7 @@ public class PrimedActor extends ExAbstractHActor {
 
         final List<Future<Boolean>> futures = new ArrayList<>();
         final Set<MDConfiguration> exmodule = OCacheConfiguration.of().valueSet();
-        this.vLog("@ / {} 系统检测到 {} 个模块！", KeConstant.K_PREFIX_BOOT, exmodule.size());
+        this.vLog("@ / 系统检测到 {} 个模块！", exmodule.size());
         executors.forEach(executor -> {
             this.vLog("@ / 执行后期调度器：{}", executor.getClass().getName());
             futures.add(executor.afterAsync(exmodule, vertxRef));

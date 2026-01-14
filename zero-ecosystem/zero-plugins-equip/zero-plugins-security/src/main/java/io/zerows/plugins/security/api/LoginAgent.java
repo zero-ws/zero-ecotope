@@ -21,6 +21,23 @@ import jakarta.ws.rs.extension.BodyParam;
  */
 @EndPoint
 public interface LoginAgent {
+
+    /**
+     * 获取图片验证码
+     * <pre>
+     *     {
+     *         "captchaId": "????",
+     *         "image": "data:image/png;base64,XXXX"
+     *     }
+     * </pre>
+     *
+     * @return 响应结果
+     */
+    @GET
+    @Path("/auth/captcha")
+    @Address(Addr.API_AUTH_CAPTCHA)
+    JsonObject captcha();
+
     /**
      * <pre>
      *     {
@@ -38,20 +55,4 @@ public interface LoginAgent {
     @Path("/auth/login")
     @Address(Addr.API_AUTH_LOGIN)
     JsonObject login(@BodyParam JsonObject body);
-
-    /**
-     * 获取图片验证码
-     * <pre>
-     *     {
-     *         "captchaId": "????",
-     *         "image": "data:image/png;base64,XXXX"
-     *     }
-     * </pre>
-     *
-     * @return 响应结果
-     */
-    @GET
-    @Path("/auth/captcha")
-    @Address(Addr.API_AUTH_CAPTCHA)
-    JsonObject captcha();
 }

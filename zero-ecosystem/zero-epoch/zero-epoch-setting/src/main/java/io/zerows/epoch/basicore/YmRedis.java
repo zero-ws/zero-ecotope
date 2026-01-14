@@ -16,10 +16,10 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
- * Redis 配置 POJO (最终修正版)
+ * Redis 配置 POJO (优化版 - 解决连接池假死问题)
  * <p>
  * 适配逻辑：RedisOptions(JsonObject)
- * 核心策略：强制将密码拼接到 connectionString 中，确保 Vert.x 客户端初始化即带认证信息。
+ * 核心策略：强制将密码拼接到 connectionString 中，并优化连接池与超时策略。
  * </p>
  *
  * @author lang : 2025-10-06
@@ -40,7 +40,6 @@ public class YmRedis implements Serializable, Shareable {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Integer database = 0;
 
-    // 显式配置的 endpoint (如 redis://...)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String endpoint;
 
@@ -48,17 +47,22 @@ public class YmRedis implements Serializable, Shareable {
     // 2. 直通字段 (输出到 JsonObject)
     // =========================================================
 
-    // 保留 password 字段，以此作为双重保险。
-    // 即使 connectionString 解析失败，Vert.x 也有机会读到这个字段。
     private String password;
-
     private String type = "STANDALONE";
     private String role = "MASTER";
     private String masterName;
 
+    // 【重要】保持 32 不变，并发能力的基础
     private Integer maxPoolSize = 32;
-    private Integer maxWaitingHandlers = 2048;
+
+    // 【关键优化】从 2048 降为 128。
+    // 如果 32 个连接都在忙，且有 128 个在排队，第 129 个请求应该直接报错，
+    // 而不是进入无尽的等待导致系统假死。
+    private Integer maxWaitingHandlers = 128;
+
     private Long poolRecycleTimeout = 15000L;
+
+    // Redis 客户端层的重连尝试（逻辑层）
     private Integer maxReconnectAttempts = 5;
     private Long reconnectInterval = 1000L;
 
@@ -69,34 +73,25 @@ public class YmRedis implements Serializable, Shareable {
     // 3. 计算字段 (专门给 RedisOptions 喂饭)
     // =========================================================
 
-    /**
-     * 生成 connectionString
-     * 结果示例： "redis://:lang1017@127.0.0.1:6379/0"
-     */
     @JsonProperty("connectionString")
     public String getComputedConnectionString() {
         if ("CLUSTER".equalsIgnoreCase(this.type)) {
-            return null; // 集群模式不看 connectionString
+            return null;
         }
         return this.resolveUri();
     }
 
-    /**
-     * 生成 endpoints (集群模式专用)
-     */
     @JsonProperty("endpoints")
     public List<String> getComputedEndpoints() {
         if (!"CLUSTER".equalsIgnoreCase(this.type)) {
             return null;
         }
-        // 集群模式下，如果手动配置了 endpoint，解析它
         if (Objects.nonNull(this.endpoint) && !this.endpoint.isBlank()) {
             return Arrays.stream(this.endpoint.split(","))
                 .map(String::trim)
                 .filter(s -> !s.isBlank())
                 .collect(Collectors.toList());
         }
-        // 否则用当前配置生成一个带密码的单点作为入口
         return Collections.singletonList(this.resolveUri());
     }
 
@@ -107,26 +102,21 @@ public class YmRedis implements Serializable, Shareable {
     private String resolveUri() {
         // 1. 优先使用 connectionString 全路径覆盖
         if (Objects.nonNull(this.endpoint) && !this.endpoint.isBlank() && !this.endpoint.contains(",")) {
-            // 如果用户自己在 yaml 里写了 endpoint，假设他已经拼好了密码
-            // 但为了保险，建议还是走下面的自动组装
             return this.endpoint.startsWith("redis://") ? this.endpoint : "redis://" + this.endpoint;
         }
 
         // 2. 自动组装
         final StringBuilder uri = new StringBuilder("redis://");
 
-        // 🔥 核心修正：密码拼接
+        // 密码拼接 (URL Encode 防止特殊字符破坏格式)
         if (Objects.nonNull(this.password) && !this.password.isBlank()) {
-            // URL Encode 主要是防止密码里有 @ / : 等特殊字符破坏 URI 结构
             final String encodedPass = URLEncoder.encode(this.password, StandardCharsets.UTF_8);
-            // Redis URI 规范： redis://[user]:[password]@[host]...
-            // 用户名通常为空，所以是冒号开头
             uri.append(":").append(encodedPass).append("@");
         }
 
         uri.append(this.host).append(":").append(this.port);
 
-        // 单机模式才拼 DB 号
+        // 单机模式拼 DB 号
         if (Objects.nonNull(this.database) && !"CLUSTER".equalsIgnoreCase(this.type)) {
             uri.append("/").append(this.database);
         }
@@ -135,15 +125,26 @@ public class YmRedis implements Serializable, Shareable {
     }
 
     // =========================================================
-    // 5. NetClient 配置
+    // 5. NetClient 配置 (TCP层优化)
     // =========================================================
     @Data
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public static class YmNet implements Serializable {
-        private Integer connectTimeout = 10000;
-        private Integer idleTimeout = 0;
+
+        // 【优化】连接超时从 10000ms 降为 3000ms，快速感知网络故障
+        private Integer connectTimeout = 3000;
+
+        // 【优化】设置为 30 (秒)。
+        // 这里的单位通常是秒(Vert.x NetClient标准)。
+        // 强制回收空闲超过 30秒 的连接，防止防火墙切断后产生的死链接。
+        private Integer idleTimeout = 30;
+
+        // 保持 KeepAlive 开启，检测死链
         private Boolean tcpKeepAlive = true;
+
+        // 禁用 Nagle 算法，减少小包延迟
         private Boolean tcpNoDelay = true;
+
         private Boolean soKeepAlive = true;
         private Boolean ssl = false;
         private Boolean trustAll = true;

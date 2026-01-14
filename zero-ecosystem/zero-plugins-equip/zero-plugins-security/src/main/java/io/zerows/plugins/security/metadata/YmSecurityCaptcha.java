@@ -14,6 +14,7 @@ import java.time.Duration;
  * <pre>
  *     security:
  *       captcha:
+ *         enabled: true            # 是否启用验证码
  *         type:                    # 验证码类型
  *         expiredAt: 60            # 验证码过期时间，单位：秒
  *         width: 220               # 验证码图片宽度

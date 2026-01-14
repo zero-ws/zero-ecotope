@@ -1,5 +1,6 @@
 package io.zerows.cortex.metadata;
 
+import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.Route;
 import io.vertx.ext.web.Router;
 import io.zerows.epoch.basicore.WebEvent;
@@ -35,7 +36,8 @@ public class RunRoute implements Serializable {
     public RunRoute refEvent(final WebEvent event) {
         Objects.requireNonNull(event);
         this.event = event;
-        this.key = event.getMethod().name() + VString.SLASH + event.getPath();
+        final HttpMethod method = event.getMethod();
+        this.key = Objects.isNull(method) ? "*" : method.name() + VString.SLASH + event.getPath();
         return this;
     }
 
