@@ -149,7 +149,7 @@ public class JobIntervalVertx implements JobInterval {
             final long waitSec = timer.waitUntil();
             final long delay = waitSec + START_UP_MS;
             this.vertx.setTimer(delay, actuator);
-            log.info("[ ZERO ] ( Job ) 任务重启: name={}, delay={}",
+            log.debug("[ ZERO ] ( Job ) 任务重启: name={}, delay={}",
                 timer.name(), FORMATTER.format(Ut.toDuration(waitSec)));
         }
     }

@@ -60,18 +60,9 @@ class PhaseRunOn {
             try {
                 final Object[] arguments = this.buildArgs(envelop, method, mission);
                 return Ut.invokeAsync(proxy, method, arguments)
-                    .compose(this::normalize)
-                    .otherwise(error -> {
-                        error.printStackTrace();
-                        return envelop;
-                    });
+                    .compose(this::normalize);
             } catch (final Throwable ex) {
                 log.error(ex.getMessage(), ex);
-                // 取消 timerId 处理
-                final long timerId = mission.timerId();
-                if (0 != timerId && Objects.nonNull(this.vertx)) {
-                    this.vertx.cancelTimer(timerId);
-                }
                 return Future.failedFuture(ex);
             }
         } else {

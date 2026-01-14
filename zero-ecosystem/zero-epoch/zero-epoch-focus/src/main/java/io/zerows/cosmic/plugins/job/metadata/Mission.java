@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.r2mo.function.Fn;
 import io.r2mo.typed.json.jackson.ClassDeserializer;
 import io.r2mo.typed.json.jackson.ClassSerializer;
-import io.vertx.codegen.annotations.Fluent;
 import io.vertx.core.json.JsonObject;
 import io.zerows.cosmic.plugins.job.exception._60042Exception501JobOnMissing;
 import io.zerows.cosmic.plugins.job.exception._60054Exception409JobFormulaError;
@@ -117,23 +116,6 @@ public class Mission implements Serializable {
 
     @JsonIgnore
     private KScheduler scheduler;
-
-    // -------------------- 临时绑定
-    @JsonIgnore
-    private Long timerId;
-
-    @Fluent
-    public Mission timerId(final Long timerId) {
-        if (Objects.nonNull(timerId)) {
-            this.timerId = timerId;
-        }
-        return this;
-    }
-
-    public long timerId() {
-        return this.timerId;
-    }
-
     // -----------------------------
 
     public Mission connect(final Class<?> clazz) {

@@ -18,7 +18,7 @@ class AghaFixed extends AghaAbstract {
             JobClient.bind(timerId, mission.getCode()));
 
         interval.startAt((timerId) ->
-            this.working(mission.timerId(timerId), () -> {
+            this.working(mission, () -> {
                 /*
                  * Complete future and returned Async
                  */

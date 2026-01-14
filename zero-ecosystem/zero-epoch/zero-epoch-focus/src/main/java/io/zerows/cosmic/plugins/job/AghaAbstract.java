@@ -214,12 +214,26 @@ public abstract class AghaAbstract implements Agha {
             this.log().debug("[ ZERO ] ( Job ) 任务执行器 {} 已创建，最大执行时间 {} 秒",
                 code, TimeUnit.NANOSECONDS.toSeconds(threshold));
             executor.executeBlocking(() -> this.workingAsync(mission)
+                /*
+                 * ⏰ 超时机制详解 (Critical Timeout Mechanism):
+                 *
+                 * 1. 为什么需要显式调用 .timeout() ?
+                 *    - WorkerExecutor 构造函数中的 threshold 仅用于监控线程阻塞 (BlockedThreadChecker)。
+                 *    - 如果 workingAsync 是非阻塞的异步调用（直接返回 Future），WorkerExecutor 会认为任务瞬间完成，
+                 *      无法监控到实际业务逻辑的运行时长。
+                 *    - 必须在 Future 链上显式应用 .timeout()，才能在异步任务超时未完成时抛出 TimeoutException。
+                 *
+                 * 2. 效果:
+                 *    - 无论内部逻辑是阻塞还是异步，只要总耗时超过 threshold，该 Future 都会被标记为失败。
+                 *    - 配合 executeBlocking，确保结果能正确传递给外层处理逻辑。
+                 */
+                .timeout(threshold, TimeUnit.NANOSECONDS)
                 .compose(result -> {
                     /*
                      * 任务执行成功，触发 Actuator 后置逻辑
                      */
                     Fn.jvmAt(actuator);
-                    this.log().info("[ ZERO ] ( Job ) 任务执行器 {} 执行完成，准备关闭！", code);
+                    this.log().debug("[ ZERO ] ( Job ) 任务执行器 {} 执行完成，准备关闭！", code);
                     return Future.succeededFuture(result);
                 })
                 .otherwise(error -> {
@@ -277,8 +291,8 @@ public abstract class AghaAbstract implements Agha {
                 /*
                  * 记录日志并更新存储中的状态缓存
                  */
-                this.log().info("[ ZERO ] ( Job ) \uD83D\uDCAB 状态：{} -> {}，(类型：{} / 编码：{})",
-                    original, moved, mission.getType(), mission.getCode());
+                this.log().info("[ ZERO ] ( Job ) \"{}\" / \uD83D\uDCAB 状态：{} -> {}，(类型：{})",
+                    mission.getCode(), original, moved, mission.getType());
                 this.store().update(mission);
             }
         } else {
@@ -287,8 +301,8 @@ public abstract class AghaAbstract implements Agha {
              */
             if (EmService.JobStatus.RUNNING == mission.getStatus()) {
                 mission.setStatus(EmService.JobStatus.ERROR);
-                this.log().error("[ ZERO ] ( Job ) \uD83D\uDCAB 状态：RUNNING -> ERROR，(类型：{} / 编码：{})",
-                    mission.getType(), mission.getCode());
+                this.log().error("[ ZERO ] ( Job ) \"{}\" \uD83D\uDCAB 状态：RUNNING -> ERROR，(类型：{})",
+                    mission.getCode(), mission.getType());
                 this.store().update(mission);
             }
         }

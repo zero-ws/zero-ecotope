@@ -27,7 +27,7 @@ public class AghaFormula extends AghaAbstract {
             if (EmService.JobStatus.STOPPED == mission.getStatus()) {
                 this.moveOn(mission, true);
             }
-            this.working(mission.timerId(timeId), () -> {
+            this.working(mission, () -> {
                 /*
                  * Complete future and returned Async
                  */
