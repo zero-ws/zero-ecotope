@@ -9,23 +9,26 @@ class AghaFixed extends AghaAbstract {
 
     @Override
     public Future<Long> begin(final Mission mission) {
+        final Promise<Long> handler = Promise.promise();
+        // 提取延迟执行逻辑
         // STARTING -> READY
         this.moveOn(mission, true);
-
-        final Promise<Long> future = Promise.promise();
 
         final JobInterval interval = this.interval((timerId) ->
             JobClient.bind(timerId, mission.getCode()));
 
-        interval.startAt((timerId) -> this.working(mission, () -> {
-            /*
-             * Complete future and returned Async
-             */
-            future.tryComplete(timerId);
+        interval.startAt((timerId) ->
+            this.working(mission, () -> {
+                /*
+                 * Complete future and returned Async
+                 */
+                handler.tryComplete(timerId);
 
-            // RUNNING -> STOPPED -> READY
-            Ut.itRepeat(2, () -> this.moveOn(mission, true));
-        }), mission.timer());
-        return future.future();
+                // RUNNING -> STOPPED -> READY
+                Ut.itRepeat(2, () -> this.moveOn(mission, true));
+            }), mission.scheduler()
+        );
+
+        return handler.future();
     }
 }

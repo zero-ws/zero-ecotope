@@ -12,7 +12,6 @@ import io.zerows.platform.exception._60059Exception412ArgumentNull;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -24,27 +23,6 @@ import java.util.Objects;
 @SuppressWarnings("unchecked")
 final class UInvoker {
     private UInvoker() {
-    }
-
-    static <T> T invokeStatic(
-        final Class<?> clazz,
-        final String name,
-        final Object... args
-    ) {
-        Objects.requireNonNull(clazz);
-        final Method[] methods = clazz.getDeclaredMethods();
-        Method found = null;
-        for (final Method method : methods) {
-            if (name.equals(method.getName())) {
-                found = method;
-                break;
-            }
-        }
-        if (Objects.isNull(found) || !Modifier.isStatic(found.getModifiers())) {
-            return null;
-        }
-        final Method invoker = found;
-        return (T) Fn.jvmOr(() -> invoker.invoke(null, args));
     }
 
     private static Method methodSeek(final Object instance, final String name, final Object... args) {
@@ -78,7 +56,7 @@ final class UInvoker {
         final String name,
         final Object... args) {
 
-        /* Method Extracting */
+        /* 提取方法引用 */
         Method method = null;
         try {
             method = methodSeek(instance, name, args);
@@ -86,20 +64,20 @@ final class UInvoker {
             log.error(ex.getMessage(), ex);
         }
 
-        /* Method checking */
+        /* 方法检查 */
         if (Objects.isNull(method)) {
             throw new _60059Exception412ArgumentNull("method: " + name + " is null");
         }
 
         final Class<?> returnType = method.getReturnType();
-        // Sync Calling
+        // 同步调用
         Object result;
         try {
             result = method.invoke(instance, args);
         } catch (final Throwable ex) {
             final WebException error = FnVertx.failAt(ex);
             if (Future.class.isAssignableFrom(returnType)) {
-                // Async Calling
+                // 异步调用
                 result = Future.failedFuture(error);
             } else {
                 /*
@@ -117,28 +95,27 @@ final class UInvoker {
                                      final Method method,
                                      final Object... args) {
         /*
-         * Analyzing method returnType first
+         * 首先分析方法的返回类型
          */
         final Class<?> returnType = method.getReturnType();
         try {
             /*
-             * Void return for continue calling
+             * 针对 void 返回类型的方法，通常用于延续调用
              */
             if (void.class == returnType) {
                 /*
-                 * When void returned, here you must set the last argument to Future<T>
-                 * Arguments [] + Future<T> future
+                 * 当返回类型为 void 时，必须保证最后一个参数是 Promise 或 Future
+                 * 参数列表：Arguments [] + Future<T> future
                  *
-                 * Critical:
-                 * -- It means that if you want to return void.class, you must provide
-                 *    argument future and let the future as last arguments
-                 * -- The basic condition is
-                 *    method declared length = args length + 1
+                 * 关键点：
+                 * -- 如果方法返回 void，则意味着该方法是一个异步回调模式的方法。
+                 * -- 调用方必须提供一个 Future/Promise 类型的参数，并且将其放在参数列表的末尾。
+                 * -- 基本条件：方法声明的参数数量 == 传入参数数量 + 1
                  */
                 Fn.jvmKo(method.getParameters().length != args.length + 1,
                     _11011Exception500InvokingPre.class, method);
                 /*
-                 * void.class, the system should provide secondary parameters
+                 * void 返回类型，系统自动追加最后一个 promise 参数
                  */
                 final Promise<T> promise = Promise.promise();
                 final Object[] arguments = CAdd.add(args, promise.future());
@@ -148,28 +125,25 @@ final class UInvoker {
                 final Object returnValue = method.invoke(instance, args);
                 if (Objects.isNull(returnValue)) {
                     /*
-                     * Future also null
-                     * Return to Future.succeededFuture with null stored
-                     * instead of use promise here.
+                     * 返回值为 null，直接返回 Future.succeededFuture(null)
+                     * 这种情况不使用 promise
                      */
                     return Future.succeededFuture(null);
                 } else {
                     /*
-                     * Workflow async invoking issue here for
-                     * Code programming, it's very critical issue of Future compose
+                     * 异步工作流调用的关键点，Future 编排逻辑的核心
+                     * 代码编程模式下，这是 Future compose 的关键问题
                      */
                     if (isEqualAnd(returnType, Future.class)) {
                         /*
-                         * Future<T> returned directly,
-                         * Connect future -> future
-                         * Return to Future directly, because future is method
-                         * return findRunning, here, we could return internal future directly
-                         * Replaced with method returnValue
+                         * 直接返回 Future<T>，连接 Future -> Future
+                         * 因为 Future 已经是方法的返回值，这里可以直接返回内部的 Future
+                         * 替换原有的 returnValue
                          */
                         return ((Future<T>) returnValue);
                     } else if (isEqualAnd(returnType, AsyncResult.class)) {
                         /*
-                         * AsyncResult
+                         * 返回 AsyncResult
                          */
                         final AsyncResult<T> async = (AsyncResult<T>) returnValue;
                         final Promise<T> promise = Promise.promise();
@@ -177,16 +151,14 @@ final class UInvoker {
                         return promise.future();
                     } else if (isEqualAnd(returnType, Handler.class)) {
                         /*
-                         * Handler, not testing here.
-                         * Connect future to handler
-                         * Old code
-                         * promise.future().setHandler(((Handler<AsyncResult<T>>) returnValue));
+                         * 返回 Handler，暂未严格测试
+                         * 连接 future 到 handler
                          */
                         return ((Future<T>) returnValue);
                     } else {
                         /*
-                         * Sync calling
-                         * Wrapper future with T instance directly
+                         * 同步调用结果
+                         * 直接将返回值包装成 Future.succeededFuture
                          */
                         final T returnT = (T) returnValue;
                         return Future.succeededFuture(returnT);
@@ -196,7 +168,7 @@ final class UInvoker {
         } catch (final Throwable ex) {
             return Future.failedFuture(FnVertx.failAt(ex));
         }
-        // Old code set to un-reach code here
+        // 旧代码，不可达区域
         // return promise.future();
     }
 

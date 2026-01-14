@@ -27,6 +27,10 @@ import java.util.Set;
  */
 public interface JobStore {
 
+    default void initialize() {
+        
+    }
+
     /**
      * <pre>
      * ⚙️ 配置方法（可选）

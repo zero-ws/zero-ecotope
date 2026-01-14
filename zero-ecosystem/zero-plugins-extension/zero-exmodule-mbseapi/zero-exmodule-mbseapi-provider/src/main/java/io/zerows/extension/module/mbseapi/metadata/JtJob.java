@@ -137,7 +137,7 @@ public class JtJob extends JtCommercial {
                 final Duration scheduledAt = Duration.of(this.job.getDuration(), ChronoUnit.MINUTES);
                 timer.configure(scheduledAt);
             }
-            mission.timer(timer);
+            mission.scheduler(timer);
         }
     }
 

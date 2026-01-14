@@ -51,6 +51,14 @@ class JobStoreUnity implements JobStore {
     private final transient JobStore store = new JobStoreExtension();
 
     @Override
+    public void initialize() {
+        this.reader.initialize();
+        this.store.initialize();
+        final Set<Mission> missionSet = this.fetch();
+        JobQueue.save(missionSet);
+    }
+
+    @Override
     public Set<Mission> fetch() {
         /*
          * 在此处将所有任务进行拆分
@@ -88,13 +96,13 @@ class JobStoreUnity implements JobStore {
             .forEach(mission -> mission.setStatus(EmService.JobStatus.STOPPED));
 
         /* 同步到 JobPool */
-        JobPool.save(result);
+        JobQueue.save(result);
         return result;
     }
 
     @Override
     public JobStore add(final Mission mission) {
-        JobPool.save(mission);
+        JobQueue.save(mission);
         return this.store.add(mission);
     }
 
@@ -120,7 +128,7 @@ class JobStoreUnity implements JobStore {
 
     @Override
     public JobStore update(final Mission mission) {
-        JobPool.save(mission);
+        JobQueue.save(mission);
         return this.store.update(mission);
     }
 }

@@ -5,7 +5,6 @@ import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.eventbus.EventBus;
-import io.zerows.component.log.LogO;
 import io.zerows.cosmic.plugins.job.metadata.Mission;
 import io.zerows.epoch.configuration.NodeStore;
 import io.zerows.epoch.web.Envelop;
@@ -17,7 +16,6 @@ import java.util.Objects;
 
 @Slf4j
 class PhaseOutPut {
-    private static final LogO LOGGER = Ut.Log.uca(PhaseOutPut.class);
     private transient final Vertx vertx;
     private transient final KRef assist = new KRef();
 
@@ -43,7 +41,7 @@ class PhaseOutPut {
                  * Directly
                  */
                 PhaseHelper.logOnce(mission, () ->
-                    log.info("[ ZERO ] ( Job {} ) 4. 未定义 JobOutcome，直接退出。", mission.getCode()));
+                    log.debug("[ ZERO ] ( Job {} ) 4. 未定义 JobOutcome，直接退出。", mission.getCode()));
 
                 return Future.succeededFuture(envelop);
             } else {
@@ -51,22 +49,22 @@ class PhaseOutPut {
                  * JobOutcome processing here
                  * Contract for vertx/mission
                  */
-                log.info("[ ZERO ] ( Job {} ) 2. 启用 JobOutcome 组件 {} 。", mission.getCode(), outcome.getClass().getName());
+                log.debug("[ ZERO ] ( Job {} ) 2. 启用 JobOutcome 组件 {} 。", mission.getCode(), outcome.getClass().getName());
                 Ut.contract(outcome, Vertx.class, this.vertx);
                 Ut.contract(outcome, Mission.class, mission);
 
                 PhaseHelper.logOnce(mission, () ->
-                    log.info("[ ZERO ] ( Job {} ) 4. --> JobOutcome 组件 {} 异步处理。", mission.getCode(), outcome.getClass().getName()));
+                    log.debug("[ ZERO ] ( Job {} ) 4. --> JobOutcome 组件 {} 异步处理。", mission.getCode(), outcome.getClass().getName()));
                 return outcome.afterAsync(envelop);
             }
         } else {
             PhaseHelper.logOnce(mission, () ->
-                log.info("[ ZERO ] ( Job {} ) 任务出错终止，出错组件：{}", mission.getCode(), envelop.error().getClass().getName()));
+                log.error("[ ZERO ] ( Job {} ) 任务出错终止，出错组件：{}", mission.getCode(), envelop.error().getClass().getName()));
             final WebException error = envelop.error();
             /*
              * For spec debug here, this code is very important
              */
-            error.printStackTrace();
+            log.error(error.getMessage(), error);
             return Ut.future(envelop);
         }
     }
@@ -82,17 +80,17 @@ class PhaseOutPut {
                  * Directly
                  */
                 PhaseHelper.logOnce(mission, () ->
-                    log.info("[ ZERO ] ( Job {} ) 5. 未定义 Outcome Address，忽略 EventBus 直接退出。", mission.getCode()));
+                    log.debug("[ ZERO ] ( Job {} ) 5. 未定义 Outcome Address，忽略 EventBus 直接退出。", mission.getCode()));
                 return Future.succeededFuture(envelop);
             } else {
                 /*
                  * Event bus provide output and then it will action
                  */
 
-                log.info("[ ZERO ] ( Job ) outputAsync 事件总线 EventBus 启用，地址：{}", address);
+                log.debug("[ ZERO ] ( Job ) outputAsync 事件总线 EventBus 启用，地址：{}", address);
                 final EventBus eventBus = this.vertx.eventBus();
                 PhaseHelper.logOnce(mission, () ->
-                    log.info("[ ZERO ] ( Job {} ) 5. --> 通过事件总线地址 {} 发布输出数据。", mission.getCode(), address));
+                    log.debug("[ ZERO ] ( Job {} ) 5. --> 通过事件总线地址 {} 发布输出数据。", mission.getCode(), address));
 
                 final DeliveryOptions deliveryOptions = NodeStore.ofDelivery(vertx);
                 eventBus.publish(address, envelop, deliveryOptions);
@@ -100,7 +98,7 @@ class PhaseOutPut {
             }
         } else {
             PhaseHelper.logOnce(mission, () ->
-                log.info("[ ZERO ] ( Job {} ) 任务之前步骤出错，出错组件：{}", mission.getCode(), envelop.error().getClass().getName()));
+                log.error("[ ZERO ] ( Job {} ) 任务之前步骤出错，出错组件：{}", mission.getCode(), envelop.error().getClass().getName()));
 
             return Ut.future(envelop);
         }

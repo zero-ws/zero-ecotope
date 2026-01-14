@@ -25,15 +25,17 @@ class AghaOnce extends AghaAbstract {
 
         final Promise<Long> promise = Promise.promise();
         final JobInterval interval = this.interval();
-        interval.startAt((timeId) -> this.working(mission, () -> {
-            /*
-             * Complete future and returned Async
-             */
-            promise.tryComplete(timeId);
+        interval.startAt((timeId) ->
+            this.working(mission, () -> {
+                /*
+                 * Complete future and returned Async
+                 */
+                promise.tryComplete(timeId);
 
-            // RUNNING -> STOPPED
-            this.moveOn(mission, true);
-        }));
+                // RUNNING -> STOPPED
+                this.moveOn(mission, true);
+            })
+        );
         return promise.future();
     }
 }

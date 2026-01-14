@@ -11,11 +11,7 @@ import io.zerows.epoch.metadata.KJoin;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.platform.enums.modeling.EmValue;
 import io.zerows.platform.exception._60050Exception501NotSupport;
-import io.zerows.platform.metadata.RDao;
-import io.zerows.platform.metadata.RQuery;
-import io.zerows.platform.metadata.RQuote;
-import io.zerows.platform.metadata.RReference;
-import io.zerows.platform.metadata.RResult;
+import io.zerows.platform.metadata.*;
 import io.zerows.program.Ux;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.app.HArk;
@@ -31,29 +27,29 @@ import java.util.function.Function;
 
 /**
  * ## Reference Calculation
- *
+ * <p>
  * ### 1. Intro
- *
+ * <p>
  * Reference Calculation based join configuration in each attribute, `serviceReference` field.
- *
+ * <p>
  * ### 2. Dao Mode
- *
+ * <p>
  * Here are three dao mode in MetaReference
- *
+ * <p>
  * 1. Dynamic Dao: {@link HDao}, based join `M_MODEL` definition.
  * 2. Static Dao: directly mapped to single table.
  * 3. Static Dao with Join: mapped to more than join table.
- *
+ * <p>
  * ### 3. Dao Map
- *
+ * <p>
  * Here are following hash map rules to findRunning component references:
- *
+ * <p>
  * 1. Each `key = findRunning` pair refer to `source = {@link RQuote}`.
  * 2. `references` stored `source = RQuote` hash map.
  * 3. For 「Static」 mode, each {@link RQuote} stored `condition = RDao`.
- *
+ * <p>
  * The example is as following:
- *
+ * <p>
  * ```
  * // <pre><code class="shell">
  *     source1: res.employee            ( type = io.vertx.up.experiment.reference.RQuote )
@@ -70,18 +66,18 @@ import java.util.function.Function;
  *              -- down
  * // </code></pre>
  * ```
- *
+ * <p>
  * > `conditionX` could be calculated by `key` ( include "" default findRunning )
- *
+ * <p>
  * ### 4. Result Map
- *
+ * <p>
  * Here are following hash map rules to findRunning component result:
- *
+ * <p>
  * 1. Each `key = findRunning` pair refer to `field = {@link RResult}`.
  * 2. `result` stored `source = RResult` hash map and refer to `RDao`.
- *
+ * <p>
  * The example is as following:
- *
+ * <p>
  * ```
  * // <pre><code class="shell">
  *     ( type = io.vertx.up.experiment.reference.RResult )
@@ -218,7 +214,7 @@ public class HAtomReference implements HReference {
     private Function<JsonObject, Future<JsonArray>> actionA(final HAtom atom, final KJoin join) {
         return condition -> {
             if (Ut.irNil(condition)) {
-                return Ut.futureA();
+                return Future.succeededFuture(new JsonArray());
             }
             if (Objects.isNull(atom)) {
                 Objects.requireNonNull(join);

@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * @author lang : 2025-10-17
  */
-@Actor(value = "job", sequence = -216, configured = false)
+@Actor(value = "job", sequence = -216)
 @Slf4j
 public class JobActor extends AbstractHActor {
     public static JobInterval ofInterval() {

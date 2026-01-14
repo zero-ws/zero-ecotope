@@ -21,7 +21,7 @@ public class AghaFormula extends AghaAbstract {
     private Future<Long> execute(final Mission mission) {
         final Promise<Long> promise = Promise.promise();
         final JobInterval interval = this.interval();
-        final KScheduler timer = mission.timer();
+        final KScheduler timer = mission.scheduler();
         interval.restartAt((timeId) -> {
             // STOPPED -> READY
             if (EmService.JobStatus.STOPPED == mission.getStatus()) {

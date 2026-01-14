@@ -128,7 +128,6 @@ class MonitorQuota {
         final JsonObject configuration = roleConfig.copy()
             .put(KName.NAME, name);
 
-
         // 外层 Schedule
         if (0 > duration) {
             log.info("{} --> / QuotaData 组件 `{}` 准备启动，角色实例 `{}`。",

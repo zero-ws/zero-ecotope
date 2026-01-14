@@ -2,7 +2,6 @@ package io.zerows.cosmic.plugins.job;
 
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
-import io.zerows.component.log.LogO;
 import io.zerows.cortex.metadata.ParameterBuilder;
 import io.zerows.cosmic.plugins.job.exception._60041Exception417JobMethod;
 import io.zerows.cosmic.plugins.job.metadata.Mission;
@@ -18,7 +17,6 @@ import java.util.Objects;
 
 @Slf4j
 class PhaseRunOn {
-    private static final LogO LOGGER = Ut.Log.uca(PhaseRunOn.class);
     private transient final Vertx vertx;
     private transient final KRef underway = new KRef();
 
@@ -37,7 +35,7 @@ class PhaseRunOn {
         final Method method = mission.getOn();
         if (Objects.nonNull(method)) {
             PhaseHelper.logOnce(mission, () ->
-                log.info("[ ZERO ] ( Job {} ) 3. --> 注解 @On 的方法调用：{} 。", mission.getCode(), method.getName()));
+                log.debug("[ ZERO ] ( Job {} ) 3. --> 注解 @On 的方法调用：{} 。", mission.getCode(), method.getName()));
             return this.execute(envelop, method, mission);
         } else {
             return Ut.future(envelop);
@@ -48,7 +46,7 @@ class PhaseRunOn {
         final Method method = mission.getOff();
         if (Objects.nonNull(method)) {
             PhaseHelper.logOnce(mission, () ->
-                log.info("[ ZERO ] ( Job {} ) 6. <-- 注解 @Off 的方法调用：{} 。", mission.getCode(), method.getName()));
+                log.debug("[ ZERO ] ( Job {} ) 6. <-- 注解 @Off 的方法调用：{} 。", mission.getCode(), method.getName()));
             return this.execute(envelop, method, mission);
         } else {
             return Ut.future(envelop);
@@ -62,15 +60,14 @@ class PhaseRunOn {
             try {
                 final Object[] arguments = this.buildArgs(envelop, method, mission);
                 return Ut.invokeAsync(proxy, method, arguments)
-                    /* Normalizing data */
                     .compose(this::normalize);
             } catch (final Throwable ex) {
-                ex.printStackTrace();
+                log.error(ex.getMessage(), ex);
                 return Future.failedFuture(ex);
             }
         } else {
             PhaseHelper.logOnce(mission, () ->
-                log.info("[ ZERO ] ( Job {} ) 任务出错终止，出错组件：{}", mission.getCode(), envelop.error().getClass().getName()));
+                log.error("[ ZERO ] ( Job {} ) 任务出错终止，出错组件：{}", mission.getCode(), envelop.error().getClass().getName()));
             return Ut.future(envelop);
         }
     }
@@ -79,12 +76,11 @@ class PhaseRunOn {
         if (Objects.isNull(returnValue)) {
             // Return null
             return Ut.future(Envelop.okJson());
+        }
+        if (Envelop.class == returnValue.getClass()) {
+            return Future.succeededFuture((Envelop) returnValue);
         } else {
-            if (Envelop.class == returnValue.getClass()) {
-                return Future.succeededFuture((Envelop) returnValue);
-            } else {
-                return Ut.future(Envelop.success(returnValue));
-            }
+            return Ut.future(Envelop.success(returnValue));
         }
     }
 

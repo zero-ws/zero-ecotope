@@ -87,7 +87,6 @@ public class JobIntervalVertx implements JobInterval {
             /*
              * timer 为空，表示无需 delay，直接使用最小延迟触发一次
              */
-            log.info("[ ZERO ] ( Job ) Timer = null 未设置，任务将立即启动！");
             this.vertx.setTimer(START_UP_MS, actuator);
         } else {
             /*
@@ -100,7 +99,6 @@ public class JobIntervalVertx implements JobInterval {
 
             if (delay <= 0) {
                 // 当前时间 >= 设定时间，立即执行一次
-                log.info("[ ZERO ] ( Job ) 当前时间 >= 设定时间，任务将立即启动！");
                 actuator.handle(null); // 立即执行
 
                 // 设置周期任务
@@ -108,22 +106,21 @@ public class JobIntervalVertx implements JobInterval {
                 /*
                  * 将周期任务的 timerId 通过 controlFn 通知外部，以便外部取消
                  */
-                log.info("[ ZERO ] ( Job ) 计时器 {}, `{}` 将每隔 {} 调度运行一次！",
+                log.info("[ ZERO ] ( Job ) 周期任务启动: id={}, name={}, duration={}ms",
                     timerId, timer.name(), duration);
                 if (Objects.nonNull(this.controlFn)) {
                     this.controlFn.accept(timerId);
                 }
             } else {
                 // 当前时间 < 设定时间，延迟 delay 毫秒后开始第一次任务
-                log.info("[ ZERO ] ( Job ) 调度器 {} 将在 {} 后启动！", timer.name(), FORMATTER.format(Ut.toDuration(delay)));
+                log.info("[ ZERO ] ( Job ) 延迟启动: name={}, delay={}", timer.name(), FORMATTER.format(Ut.toDuration(delay)));
 
                 this.vertx.setTimer(delay + START_UP_MS, ignored -> {
-                    log.info("[ ZERO ] ( Job ) 触发器在预定时间首次执行任务！");
                     actuator.handle(null); // 第一次执行
 
                     // 设置周期任务
                     final long timerId = this.vertx.setPeriodic(duration, actuator);
-                    log.info("[ ZERO ] ( Job ) 计时器 {} 首次触发, `{}` 将每隔 {} 调度运行一次！",
+                    log.info("[ ZERO ] ( Job ) 周期任务延续: id={}, name={}, duration={}ms",
                         timerId, timer.name(), duration);
                     if (Objects.nonNull(this.controlFn)) {
                         this.controlFn.accept(timerId);
@@ -147,14 +144,13 @@ public class JobIntervalVertx implements JobInterval {
     @Override
     public void restartAt(final Handler<Long> actuator, final KScheduler timer) {
         if (Objects.isNull(timer)) {
-            log.info("[ ZERO ] ( Job ) Timer = null 未设置，任务将立即重启！");
             this.vertx.setTimer(START_UP_MS, actuator);
         } else {
             final long waitSec = timer.waitUntil();
             final long delay = waitSec + START_UP_MS;
             this.vertx.setTimer(delay, actuator);
-            log.info("[ ZERO ] ( Job ) 计时器 {}, `{}` 将在 {} 后重启！",
-                timer.name(), timer.name(), FORMATTER.format(Ut.toDuration(waitSec)));
+            log.debug("[ ZERO ] ( Job ) 任务重启: name={}, delay={}",
+                timer.name(), FORMATTER.format(Ut.toDuration(waitSec)));
         }
     }
 }

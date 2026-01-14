@@ -1,9 +1,6 @@
 package io.zerows.cosmic.plugins.job;
 
-import io.vertx.codegen.annotations.Fluent;
-import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
-import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.zerows.cosmic.plugins.job.metadata.Mission;
@@ -26,7 +23,7 @@ public interface JobClient {
     }
 
     static void bind(final Long timerId, final String code) {
-        JobPool.bind(timerId, code);
+        JobQueue.bind(timerId, code);
     }
 
     static String code(final String name) {
@@ -34,35 +31,17 @@ public interface JobClient {
     }
 
     // ========================== UxJob mount
-    /* Start new job */
-    @Fluent
-    JobClient startAsync(String code, Handler<AsyncResult<Long>> handler);
 
     /* Start */
     Future<Long> startAsync(String code);
 
-    /* Stop running job */
-    @Fluent
-    JobClient stopAsync(String code, Handler<AsyncResult<Boolean>> handler);
-
     /* Stop */
     Future<Boolean> stopAsync(String code);
-
-    /* Resume a handler job */
-    @Fluent
-    JobClient resumeAsync(String code, Handler<AsyncResult<Long>> handler);
 
     /* Resume */
     Future<Long> resumeAsync(String timerId);
 
     // ========================== UxJob crud
-    /* Fetch Single **/
-    @Fluent
-    JobClient fetchAsync(String code, Handler<AsyncResult<Mission>> handler);
-
-    /* Fetch List */
-    @Fluent
-    JobClient fetchAsync(Set<String> code, Handler<AsyncResult<List<Mission>>> handler);
 
     /* Fetch */
     Future<Mission> fetchAsync(String code);
@@ -70,18 +49,15 @@ public interface JobClient {
     /* Fetch List */
     Future<List<Mission>> fetchAsync(Set<String> codes);
 
+    Future<List<Mission>> fetchAsync();
+
     Mission fetch(String code);
 
     List<Mission> fetch(Set<String> codes);
 
-    @Fluent
-    JobClient saveAsync(Set<Mission> missions, Handler<AsyncResult<Set<Mission>>> handler);
+    List<Mission> fetch();
 
     Future<Set<Mission>> saveAsync(Set<Mission> missions);
-
-    /* Save Mission */
-    @Fluent
-    JobClient saveAsync(Mission mission, Handler<AsyncResult<Mission>> handler);
 
     /* Save */
     Future<Mission> saveAsync(Mission mission);
@@ -89,10 +65,6 @@ public interface JobClient {
     Set<Mission> save(Set<Mission> missions);
 
     Mission save(Mission mission);
-
-    /* Remove */
-    @Fluent
-    JobClient removeAsync(String code, Handler<AsyncResult<Mission>> handler);
 
     /* Delete */
     Future<Mission> removeAsync(String code);
@@ -102,7 +74,4 @@ public interface JobClient {
     JsonObject status(String namespace);
 
     Future<JsonObject> statusAsync(String namespace);
-
-    @Fluent
-    JobClient statusAsync(String namespace, Handler<AsyncResult<JsonObject>> handler);
 }
