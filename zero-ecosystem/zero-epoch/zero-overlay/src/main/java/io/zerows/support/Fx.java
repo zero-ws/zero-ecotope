@@ -9,4 +9,12 @@ import io.r2mo.vertx.function.FnVertx;
 public final class Fx extends FnVertx {
     private Fx() {
     }
+
+    public static void runTimer() {
+        System.out.println("TIME@" + Thread.currentThread() + " / " + System.currentTimeMillis());
+    }
+
+    public static void runTimer(final int prefix) {
+        System.out.println("TIME#" + prefix + "@" + Thread.currentThread() + " / " + System.currentTimeMillis());
+    }
 }

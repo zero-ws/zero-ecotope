@@ -3,62 +3,61 @@ package io.zerows.epoch.basicore;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.vertx.core.shareddata.Shareable;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
- * Redis 配置 POJO
+ * Redis 配置 POJO (最终修正版)
  * <p>
- * 1. 修复 NOAUTH 问题：直接暴露 password 字段，供 RedisOptions 直接读取。
- * 2. 安全性提升：connectionString 中不再拼接密码，防止日志泄露。
+ * 适配逻辑：RedisOptions(JsonObject)
+ * 核心策略：强制将密码拼接到 connectionString 中，确保 Vert.x 客户端初始化即带认证信息。
  * </p>
  *
  * @author lang : 2025-10-06
  */
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class YmRedis implements Serializable {
+public class YmRedis implements Serializable, Shareable {
 
     // =========================================================
-    // 基础连接字段
+    // 1. 输入字段 (配置文件读取)
     // =========================================================
-
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String host = "127.0.0.1";
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private int port = 6379;
-
-    // 🌟 重点修改：移除 WRITE_ONLY
-    // 让 Jackson 在序列化时包含此字段，这样 new RedisOptions(json) 能直接读到密码
-    // 而不需要去解析 connectionString
-    private String password;
+    private Integer port = 6379;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Integer database = 0;
 
-    /**
-     * 如果配置了 endpoint (例如 redis://...)，则将其作为 connectionString 的基础
-     */
+    // 显式配置的 endpoint (如 redis://...)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String endpoint;
 
-
     // =========================================================
-    // Vert.x 直接需要的字段 (Java <-> Json)
+    // 2. 直通字段 (输出到 JsonObject)
     // =========================================================
 
-    private String type;
+    // 保留 password 字段，以此作为双重保险。
+    // 即使 connectionString 解析失败，Vert.x 也有机会读到这个字段。
+    private String password;
+
+    private String type = "STANDALONE";
     private String role = "MASTER";
     private String masterName;
 
     private Integer maxPoolSize = 32;
-    private Integer maxWaitingHandlers = 1024;
+    private Integer maxWaitingHandlers = 2048;
     private Long poolRecycleTimeout = 15000L;
     private Integer maxReconnectAttempts = 5;
     private Long reconnectInterval = 1000L;
@@ -66,82 +65,86 @@ public class YmRedis implements Serializable {
     @JsonProperty("netClientOptions")
     private YmNet config = new YmNet();
 
-
     // =========================================================
-    // 核心：计算字段
+    // 3. 计算字段 (专门给 RedisOptions 喂饭)
     // =========================================================
 
     /**
-     * 虚拟 Getter：生成 "connectionString"
-     * 策略调整：仅生成 "redis://host:port/db"，不包含密码！
-     * 密码通过上面的 password 字段独立传递。
+     * 生成 connectionString
+     * 结果示例： "redis://:lang1017@127.0.0.1:6379/0"
      */
     @JsonProperty("connectionString")
     public String getComputedConnectionString() {
         if ("CLUSTER".equalsIgnoreCase(this.type)) {
-            return null;
+            return null; // 集群模式不看 connectionString
         }
-        return this.resolveUri(false); // 传入 false，不包含密码
+        return this.resolveUri();
     }
 
     /**
-     * 虚拟 Getter：生成 "endpoints" 数组 (Cluster 模式)
+     * 生成 endpoints (集群模式专用)
      */
     @JsonProperty("endpoints")
     public List<String> getComputedEndpoints() {
         if (!"CLUSTER".equalsIgnoreCase(this.type)) {
             return null;
         }
-        // Cluster 模式下，通常 endpoints 列表只是地址，密码也是统一配置的
-        final String raw = this.resolveUri(false);
-        if (raw == null) {
-            return null;
+        // 集群模式下，如果手动配置了 endpoint，解析它
+        if (Objects.nonNull(this.endpoint) && !this.endpoint.isBlank()) {
+            return Arrays.stream(this.endpoint.split(","))
+                .map(String::trim)
+                .filter(s -> !s.isBlank())
+                .collect(Collectors.toList());
         }
-        return Arrays.stream(raw.split(","))
-            .map(String::trim)
-            .collect(Collectors.toList());
+        // 否则用当前配置生成一个带密码的单点作为入口
+        return Collections.singletonList(this.resolveUri());
     }
 
-
     // =========================================================
-    // 内部逻辑 Helper
+    // 4. URI 组装逻辑 (强制带密码)
     // =========================================================
-
     @JsonIgnore
-    private String resolveUri(final boolean includePassword) {
-        // 1. 优先使用显式 endpoint
-        if (Objects.nonNull(this.endpoint) && !this.endpoint.isBlank()) {
-            return this.endpoint;
+    private String resolveUri() {
+        // 1. 优先使用 connectionString 全路径覆盖
+        if (Objects.nonNull(this.endpoint) && !this.endpoint.isBlank() && !this.endpoint.contains(",")) {
+            // 如果用户自己在 yaml 里写了 endpoint，假设他已经拼好了密码
+            // 但为了保险，建议还是走下面的自动组装
+            return this.endpoint.startsWith("redis://") ? this.endpoint : "redis://" + this.endpoint;
         }
 
         // 2. 自动组装
         final StringBuilder uri = new StringBuilder("redis://");
 
-        // 🌟 策略调整：只有明确要求包含密码时才拼接
-        // 既然我们已经暴露了 password 字段，通常这里就不需要拼接了，避免特殊字符解析错误
-        if (includePassword && Objects.nonNull(this.password) && !this.password.isBlank()) {
-            // 注意：如果密码包含 @ 等字符，拼接在 URL 里需要 URLEncode，
-            // 既然我们要避免解析，这里直接不拼是最好的。
-            uri.append(":").append(this.password).append("@");
+        // 🔥 核心修正：密码拼接
+        if (Objects.nonNull(this.password) && !this.password.isBlank()) {
+            // URL Encode 主要是防止密码里有 @ / : 等特殊字符破坏 URI 结构
+            final String encodedPass = URLEncoder.encode(this.password, StandardCharsets.UTF_8);
+            // Redis URI 规范： redis://[user]:[password]@[host]...
+            // 用户名通常为空，所以是冒号开头
+            uri.append(":").append(encodedPass).append("@");
         }
 
         uri.append(this.host).append(":").append(this.port);
 
-        if (Objects.nonNull(this.database)) {
+        // 单机模式才拼 DB 号
+        if (Objects.nonNull(this.database) && !"CLUSTER".equalsIgnoreCase(this.type)) {
             uri.append("/").append(this.database);
         }
+
         return uri.toString();
     }
 
     // =========================================================
-    // 内部类：网络配置
+    // 5. NetClient 配置
     // =========================================================
     @Data
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public static class YmNet implements Serializable {
         private Integer connectTimeout = 10000;
+        private Integer idleTimeout = 0;
         private Boolean tcpKeepAlive = true;
         private Boolean tcpNoDelay = true;
+        private Boolean soKeepAlive = true;
         private Boolean ssl = false;
         private Boolean trustAll = true;
         private String hostnameVerificationAlgorithm = "";
