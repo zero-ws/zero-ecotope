@@ -1,7 +1,14 @@
 package io.zerows.plugins.security.service;
 
+import cn.hutool.core.util.StrUtil;
+import io.r2mo.jaas.auth.LoginID;
 import io.r2mo.jaas.auth.LoginRequest;
 import io.r2mo.typed.enums.TypeLogin;
+import io.vertx.core.Future;
+import io.zerows.plugins.security.exception._80240Exception400UsernameRequired;
+import io.zerows.plugins.security.exception._80241Exception400PasswordRequired;
+import io.zerows.program.Ux;
+import io.zerows.support.Fx;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -27,5 +34,15 @@ public class UserLoginRequest extends LoginRequest {
     @Override
     public TypeLogin type() {
         return TYPE;
+    }
+
+    public Future<UserLoginRequest> requestValidated() {
+        if (StrUtil.isEmpty(this.username)) {
+            return Fx.failOut(_80240Exception400UsernameRequired.class, LoginID.USERNAME);
+        }
+        if (StrUtil.isEmpty(this.password)) {
+            return Fx.failOut(_80241Exception400PasswordRequired.class, "password");
+        }
+        return Ux.future(this);
     }
 }

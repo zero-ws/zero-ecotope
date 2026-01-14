@@ -10,19 +10,35 @@ import io.vertx.core.Future;
  */
 public class SecurityUser {
 
-    public static Future<UserAt> logged() {
+    public static Future<UserAt> loggedAsync() {
         return null;
     }
 
-    public static Future<UserContext> context() {
+    public static UserAt logged() {
         return null;
     }
 
-    public static Future<String> id() {
+    public static Future<UserContext> contextAsync() {
+        return null;
+    }
+
+    public static UserContext context() {
+        return null;
+    }
+
+    public static Future<String> idAsync() {
+        return idAsync(false);
+    }
+
+    public static String id() {
         return id(false);
     }
 
-    public static <T> Future<T> id(final boolean isUuid) {
+    public static <T> Future<T> idAsync(final boolean isUuid) {
+        return null;
+    }
+
+    public static <T> T id(final boolean isUuid) {
         return null;
     }
 }
