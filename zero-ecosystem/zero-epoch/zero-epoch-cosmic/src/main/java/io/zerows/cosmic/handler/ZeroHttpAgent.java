@@ -59,37 +59,29 @@ public class ZeroHttpAgent extends AbstractVerticle {
             Axis.ofOr(AxisSecure.class).mount(runServer, bundle);
 
             /*
-             * 04. 监控
-             *     - Module Monitor
-             *     - Service Monitor
-             *     - Gateway Monitor
-             */
-            Axis.ofOr(AxisMeasure.class).mount(runServer, bundle);
-
-            /*
-             * 05. JSR-340
+             * 04. JSR-340
              *     - Filter
              *     - Listener
              */
             Axis.ofOr(AxisFilter.class).mount(runServer, bundle);
 
             /*
-             * 06. 主流程
+             * 05. 主流程
              */
             Axis.ofOr(AxisEvent.class).mount(runServer, bundle);
 
             /*
-             * 07. Extension 扩展路由
+             * 06. Extension 扩展路由
              */
             Axis.ofOr(AxisExtension.class).mount(runServer, bundle);
 
             /*
-             * 08. Swagger 挂载
+             * 07. Swagger 挂载
              */
             Axis.ofOr(AxisSwagger.class).mount(runServer, bundle);
 
             /*
-             * 09. 启动完成监听
+             * 08. 启动完成监听
              */
             Axis.ofOr(AxisStart.class).mount(runServer, bundle);
 

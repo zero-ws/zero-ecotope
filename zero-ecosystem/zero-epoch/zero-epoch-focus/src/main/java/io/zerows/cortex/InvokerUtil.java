@@ -13,9 +13,9 @@ import java.util.Objects;
 @SuppressWarnings("all")
 @Slf4j
 public class InvokerUtil {
-    public static final String MSG_DIRECT = "( Call ) Invoker = {}, ReturnType = {}, Method = {}, Class = {}.";
-    public static final String MSG_RPC = "( Call Rpc ) Invoker = {}, ReturnType = {}, Method = {}, Class = {}.";
-    public static final String MSG_HANDLE = "( Call Handle ) Invoker = {}, ReturnType = {}, Method = {}, Class = {}.";
+    public static final String MSG_DIRECT = "[ ZERO ] ( Call ) Invoker = {}, ReturnType = {}, Method = {}, Class = {}.";
+    public static final String MSG_RPC = "[ ZERO ] ( Call Rpc ) Invoker = {}, ReturnType = {}, Method = {}, Class = {}.";
+    public static final String MSG_HANDLE = "[ ZERO ] ( Call Handle ) Invoker = {}, ReturnType = {}, Method = {}, Class = {}.";
 
     static Object invokeAsync(final Object proxy,
                               final Method method,

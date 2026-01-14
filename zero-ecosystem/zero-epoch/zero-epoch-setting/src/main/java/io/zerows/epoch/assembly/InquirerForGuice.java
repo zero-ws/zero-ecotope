@@ -25,6 +25,7 @@ public class InquirerForGuice implements Inquirer<Injector> {
     private static final DiGuice jsrField = Ut.singleton(DiGuiceField.class);
     private static final DiGuice jsrMethod = Ut.singleton(DiGuiceMethod.class);
     private static final DiGuice jsrCon = Ut.singleton(DiGuiceConstructor.class);
+    private static final DiGuice jsrFilter = Ut.singleton(DiGuiceFilter.class);
 
     @Override
     @SuppressWarnings("all")
@@ -34,6 +35,7 @@ public class InquirerForGuice implements Inquirer<Injector> {
         final AtomicInteger countField = new AtomicInteger(0);
         final AtomicInteger countMethod = new AtomicInteger(0);
         final AtomicInteger countCon = new AtomicInteger(0);
+        final AtomicInteger countFilter = new AtomicInteger(0);
         // All interface queue
         final ConcurrentMap<Class<?>, Set<Class<?>>> tree = new ConcurrentHashMap<>();
         final Set<Class<?>> flat = new HashSet<>();
@@ -58,12 +60,18 @@ public class InquirerForGuice implements Inquirer<Injector> {
                         return;
                     }
 
+                    if (jsrFilter.success(clazz)) {
+                        countFilter.incrementAndGet();
+                        return;
+                    }
+
                 } catch (Throwable ex) {
                     log.error(ex.getMessage(), ex);
                 }
             });
-        log.info("[ ZERO ] ( DI ) \uD83E\uDEBC 扫描信息 / F = {}, M = {}, C = {}",
-            countField.get(), countMethod.get(), countCon.get()
+        log.info("[ ZERO ] ( DI ) \uD83E\uDEBC 扫描信息 / F = {}, M = {}, C = {} / WebFilter = {}",
+            countField.get(), countMethod.get(), countCon.get(),
+            countFilter.get()
         );
 
         // Implementation = Interface
@@ -72,7 +80,8 @@ public class InquirerForGuice implements Inquirer<Injector> {
         return Guice.createInjector(
             this.jsrField.module(tree, flat),       // Field        字段
             this.jsrCon.module(tree, flat),         // Constructor  构造函数
-            this.jsrMethod.module(tree, flat)       // Method       方法
+            this.jsrMethod.module(tree, flat),      // Method       方法
+            this.jsrFilter.module(tree, flat)       // Filter       专用构造
         );
     }
 

@@ -1,13 +1,17 @@
 package io.zerows.cosmic.bootstrap;
 
 import io.r2mo.typed.cc.Cc;
+import io.r2mo.typed.exception.WebException;
 import io.r2mo.typed.exception.web._404NotFoundException;
 import io.r2mo.typed.exception.web._405MethodBadException;
+import io.r2mo.typed.webflow.WebState;
 import io.vertx.core.http.HttpServerResponse;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.epoch.web.Envelop;
+import io.zerows.support.Fx;
 import jakarta.ws.rs.core.MediaType;
 
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -18,13 +22,13 @@ import java.util.Set;
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
-class AckFailure {
+public class AckFailure {
     private static final Cc<String, AckFailure> CCT_FAILURE = Cc.openThread();
 
     private AckFailure() {
     }
 
-    static AckFailure of() {
+    public static AckFailure of() {
         return CCT_FAILURE.pick(AckFailure::new);
     }
 
@@ -40,7 +44,7 @@ class AckFailure {
      *
      * @param context Vert.x Web 路由上下文
      */
-    void reply404(final RoutingContext context) {
+    public void reply404(final RoutingContext context) {
         final Envelop error404 = Envelop.failure(new _404NotFoundException("普通异常，无法找到对应资源！"));
         final HttpServerResponse response = context.response();
         response.setStatusCode(404);
@@ -59,10 +63,28 @@ class AckFailure {
      *
      * @param context Vert.x Web 路由上下文
      */
-    void reply405(final RoutingContext context) {
+    public void reply405(final RoutingContext context) {
         final Envelop error405 = Envelop.failure(new _405MethodBadException("普通异常，方法不被允许！"));
         final HttpServerResponse response = context.response();
         response.setStatusCode(405);
         Ack.of(context).handle(error405, response, Set.of(MediaType.APPLICATION_JSON_TYPE));
+    }
+
+    public void reply(final RoutingContext context, final Throwable error) {
+        final WebException found = Fx.failAt(error);
+        if (Objects.isNull(found)) {
+            final Envelop errorEnvelop = Envelop.failure(error);
+            final HttpServerResponse response = context.response();
+            response.setStatusCode(500);
+            Ack.of(context).handle(errorEnvelop, response, Set.of(MediaType.APPLICATION_JSON_TYPE));
+            return;
+        }
+
+        final HttpServerResponse response = context.response();
+        final WebState state = found.getStatus();
+        response.setStatusCode(state.state());
+        response.setStatusMessage(state.name());
+        final Envelop errorEnvelop = Envelop.failure(error);
+        Ack.of(context).handle(errorEnvelop, response, Set.of(MediaType.APPLICATION_JSON_TYPE));
     }
 }

@@ -14,7 +14,6 @@ import io.vertx.ext.web.FileUpload;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.Session;
 import io.zerows.epoch.metadata.XHeader;
-import io.zerows.support.Ut;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -27,10 +26,6 @@ class ParameterAgent implements ParameterBuilder<RoutingContext> {
     private static final Cc<String, ParameterBuilder<RoutingContext>> CCT_PARAM = Cc.openThread();
 
     private ParameterAgent() {
-    }
-
-    private static boolean is(final Class<?> paramType, final Class<?> expected) {
-        return expected == paramType || Ut.isImplement(paramType, expected);
     }
 
     static ParameterBuilder<RoutingContext> of() {
@@ -62,42 +57,42 @@ class ParameterAgent implements ParameterBuilder<RoutingContext> {
     @Override
     public Object build(final RoutingContext context, final Class<?> type, final Object... extension) {
         Object returnValue = null;
-        if (is(type, XHeader.class)) {
+        if (ParameterPre.is(type, XHeader.class)) {
             final HttpServerRequest request = context.request();
             final MultiMap headers = request.headers();
             final XHeader header = new XHeader();
             header.fromHeader(headers);
             returnValue = header;
-        } else if (is(type, Session.class)) {
+        } else if (ParameterPre.is(type, Session.class)) {
             returnValue = context.session();
-        } else if (is(type, HttpServerRequest.class)) {
+        } else if (ParameterPre.is(type, HttpServerRequest.class)) {
             returnValue = context.request();
-        } else if (is(type, HttpServerResponse.class)) {
+        } else if (ParameterPre.is(type, HttpServerResponse.class)) {
             returnValue = context.response();
-        } else if (is(type, Vertx.class)) {
+        } else if (ParameterPre.is(type, Vertx.class)) {
             returnValue = context.vertx();
-        } else if (is(type, EventBus.class)) {
+        } else if (ParameterPre.is(type, EventBus.class)) {
             returnValue = context.vertx().eventBus();
-        } else if (is(type, User.class)) {
+        } else if (ParameterPre.is(type, User.class)) {
             returnValue = context.user();
-        } else if (is(type, Set.class)) {
+        } else if (ParameterPre.is(type, Set.class)) {
             returnValue = new HashSet<>(context.fileUploads());
-        } else if (is(type, JsonArray.class)) {
+        } else if (ParameterPre.is(type, JsonArray.class)) {
             returnValue = context.body().asJsonArray();
             if (Objects.isNull(returnValue)) {
                 returnValue = new JsonArray();
             }
-        } else if (is(type, JsonObject.class)) {
+        } else if (ParameterPre.is(type, JsonObject.class)) {
             returnValue = context.body().asJsonObject();
             if (Objects.isNull(returnValue)) {
                 returnValue = new JsonObject();
             }
-        } else if (is(type, Buffer.class)) {
+        } else if (ParameterPre.is(type, Buffer.class)) {
             returnValue = context.body().buffer();
             if (Objects.isNull(returnValue)) {
                 returnValue = Buffer.buffer();
             }
-        } else if (is(type, FileUpload.class)) {
+        } else if (ParameterPre.is(type, FileUpload.class)) {
             final Set<FileUpload> uploads = new HashSet<>(context.fileUploads());
             if (!uploads.isEmpty()) {
                 returnValue = uploads.iterator().next();

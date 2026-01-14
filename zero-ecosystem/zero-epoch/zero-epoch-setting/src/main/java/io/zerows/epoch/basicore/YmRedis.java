@@ -3,145 +3,149 @@ package io.zerows.epoch.basicore;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.vertx.core.shareddata.Shareable;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
- * Redis 配置 POJO
+ * Redis 配置 POJO (优化版 - 解决连接池假死问题)
  * <p>
- * 1. 修复 NOAUTH 问题：直接暴露 password 字段，供 RedisOptions 直接读取。
- * 2. 安全性提升：connectionString 中不再拼接密码，防止日志泄露。
+ * 适配逻辑：RedisOptions(JsonObject)
+ * 核心策略：强制将密码拼接到 connectionString 中，并优化连接池与超时策略。
  * </p>
  *
  * @author lang : 2025-10-06
  */
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class YmRedis implements Serializable {
+public class YmRedis implements Serializable, Shareable {
 
     // =========================================================
-    // 基础连接字段
+    // 1. 输入字段 (配置文件读取)
     // =========================================================
-
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String host = "127.0.0.1";
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private int port = 6379;
-
-    // 🌟 重点修改：移除 WRITE_ONLY
-    // 让 Jackson 在序列化时包含此字段，这样 new RedisOptions(json) 能直接读到密码
-    // 而不需要去解析 connectionString
-    private String password;
+    private Integer port = 6379;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Integer database = 0;
 
-    /**
-     * 如果配置了 endpoint (例如 redis://...)，则将其作为 connectionString 的基础
-     */
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String endpoint;
 
-
     // =========================================================
-    // Vert.x 直接需要的字段 (Java <-> Json)
+    // 2. 直通字段 (输出到 JsonObject)
     // =========================================================
 
-    private String type;
+    private String password;
+    private String type = "STANDALONE";
     private String role = "MASTER";
     private String masterName;
 
+    // 【重要】保持 32 不变，并发能力的基础
     private Integer maxPoolSize = 32;
-    private Integer maxWaitingHandlers = 1024;
+
+    // 【关键优化】从 2048 降为 128。
+    // 如果 32 个连接都在忙，且有 128 个在排队，第 129 个请求应该直接报错，
+    // 而不是进入无尽的等待导致系统假死。
+    private Integer maxWaitingHandlers = 128;
+
     private Long poolRecycleTimeout = 15000L;
+
+    // Redis 客户端层的重连尝试（逻辑层）
     private Integer maxReconnectAttempts = 5;
     private Long reconnectInterval = 1000L;
 
     @JsonProperty("netClientOptions")
     private YmNet config = new YmNet();
 
-
     // =========================================================
-    // 核心：计算字段
+    // 3. 计算字段 (专门给 RedisOptions 喂饭)
     // =========================================================
 
-    /**
-     * 虚拟 Getter：生成 "connectionString"
-     * 策略调整：仅生成 "redis://host:port/db"，不包含密码！
-     * 密码通过上面的 password 字段独立传递。
-     */
     @JsonProperty("connectionString")
     public String getComputedConnectionString() {
         if ("CLUSTER".equalsIgnoreCase(this.type)) {
             return null;
         }
-        return this.resolveUri(false); // 传入 false，不包含密码
+        return this.resolveUri();
     }
 
-    /**
-     * 虚拟 Getter：生成 "endpoints" 数组 (Cluster 模式)
-     */
     @JsonProperty("endpoints")
     public List<String> getComputedEndpoints() {
         if (!"CLUSTER".equalsIgnoreCase(this.type)) {
             return null;
         }
-        // Cluster 模式下，通常 endpoints 列表只是地址，密码也是统一配置的
-        final String raw = this.resolveUri(false);
-        if (raw == null) {
-            return null;
+        if (Objects.nonNull(this.endpoint) && !this.endpoint.isBlank()) {
+            return Arrays.stream(this.endpoint.split(","))
+                .map(String::trim)
+                .filter(s -> !s.isBlank())
+                .collect(Collectors.toList());
         }
-        return Arrays.stream(raw.split(","))
-            .map(String::trim)
-            .collect(Collectors.toList());
+        return Collections.singletonList(this.resolveUri());
     }
 
-
     // =========================================================
-    // 内部逻辑 Helper
+    // 4. URI 组装逻辑 (强制带密码)
     // =========================================================
-
     @JsonIgnore
-    private String resolveUri(final boolean includePassword) {
-        // 1. 优先使用显式 endpoint
-        if (Objects.nonNull(this.endpoint) && !this.endpoint.isBlank()) {
-            return this.endpoint;
+    private String resolveUri() {
+        // 1. 优先使用 connectionString 全路径覆盖
+        if (Objects.nonNull(this.endpoint) && !this.endpoint.isBlank() && !this.endpoint.contains(",")) {
+            return this.endpoint.startsWith("redis://") ? this.endpoint : "redis://" + this.endpoint;
         }
 
         // 2. 自动组装
         final StringBuilder uri = new StringBuilder("redis://");
 
-        // 🌟 策略调整：只有明确要求包含密码时才拼接
-        // 既然我们已经暴露了 password 字段，通常这里就不需要拼接了，避免特殊字符解析错误
-        if (includePassword && Objects.nonNull(this.password) && !this.password.isBlank()) {
-            // 注意：如果密码包含 @ 等字符，拼接在 URL 里需要 URLEncode，
-            // 既然我们要避免解析，这里直接不拼是最好的。
-            uri.append(":").append(this.password).append("@");
+        // 密码拼接 (URL Encode 防止特殊字符破坏格式)
+        if (Objects.nonNull(this.password) && !this.password.isBlank()) {
+            final String encodedPass = URLEncoder.encode(this.password, StandardCharsets.UTF_8);
+            uri.append(":").append(encodedPass).append("@");
         }
 
         uri.append(this.host).append(":").append(this.port);
 
-        if (Objects.nonNull(this.database)) {
+        // 单机模式拼 DB 号
+        if (Objects.nonNull(this.database) && !"CLUSTER".equalsIgnoreCase(this.type)) {
             uri.append("/").append(this.database);
         }
+
         return uri.toString();
     }
 
     // =========================================================
-    // 内部类：网络配置
+    // 5. NetClient 配置 (TCP层优化)
     // =========================================================
     @Data
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public static class YmNet implements Serializable {
-        private Integer connectTimeout = 10000;
+
+        // 【优化】连接超时从 10000ms 降为 3000ms，快速感知网络故障
+        private Integer connectTimeout = 3000;
+
+        // 【优化】设置为 30 (秒)。
+        // 这里的单位通常是秒(Vert.x NetClient标准)。
+        // 强制回收空闲超过 30秒 的连接，防止防火墙切断后产生的死链接。
+        private Integer idleTimeout = 30;
+
+        // 保持 KeepAlive 开启，检测死链
         private Boolean tcpKeepAlive = true;
+
+        // 禁用 Nagle 算法，减少小包延迟
         private Boolean tcpNoDelay = true;
+
+        private Boolean soKeepAlive = true;
         private Boolean ssl = false;
         private Boolean trustAll = true;
         private String hostnameVerificationAlgorithm = "";

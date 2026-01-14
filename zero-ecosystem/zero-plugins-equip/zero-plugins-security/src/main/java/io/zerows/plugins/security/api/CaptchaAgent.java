@@ -3,9 +3,8 @@ package io.zerows.plugins.security.api;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.EndPoint;
-import jakarta.ws.rs.POST;
+import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
-import jakarta.ws.rs.extension.BodyParam;
 
 /**
  * 安全插件标准化基础接口
@@ -19,22 +18,20 @@ import jakarta.ws.rs.extension.BodyParam;
  * </pre>
  */
 @EndPoint
-public interface LoginAgent {
+public interface CaptchaAgent {
     /**
+     * 获取图片验证码
      * <pre>
      *     {
-     *         "username": "lang.yu",
-     *         "password": "XXX(新加密算法)",
-     *         "captcha": "????",
-     *         "captchaId": "????"
+     *         "captchaId": "????",
+     *         "image": "data:image/png;base64,XXXX"
      *     }
      * </pre>
      *
-     * @param body 请求体
      * @return 响应结果
      */
-    @POST
-    @Path("/auth/login")
-    @Address(Addr.API_AUTH_LOGIN)
-    JsonObject login(@BodyParam JsonObject body);
+    @GET
+    @Path("/auth/captcha")
+    @Address(Addr.API_AUTH_CAPTCHA)
+    JsonObject captcha();
 }

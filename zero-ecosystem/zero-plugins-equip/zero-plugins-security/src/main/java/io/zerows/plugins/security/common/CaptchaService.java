@@ -54,6 +54,11 @@ public class CaptchaService implements CaptchaStub {
             }));
     }
 
+    @Override
+    public Future<Boolean> validate(final String captchaId, final String captcha) {
+        return null;
+    }
+
     /**
      * 纯 CPU 计算逻辑 (运行在 Worker 线程)
      * 负责生成 ID、绘制图形、Base64 编码

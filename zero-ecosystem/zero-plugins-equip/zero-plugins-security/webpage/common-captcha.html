@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>显示Base64编码的验证码图片</title>
+    <style>
+        /* 简单的样式优化 */
+        #captchaImg {
+            border: 1px solid #ccc;
+            min-width: 100px;
+            min-height: 40px;
+            cursor: pointer; /* 鼠标放上去显示手型 */
+        }
+
+        .container {
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>显示Base64编码的验证码图片</h1>
+    <div>
+        <img alt="验证码加载中..." id="captchaImg" onclick="loadCaptcha()">
+    </div>
+    <br>
+    <button onclick="loadCaptcha()">刷新验证码</button>
+</div>
+
+<script>
+    // 加载验证码函数
+    function loadCaptcha() {
+        // 1. 修改接口地址为实际地址
+        const apiUrl = 'http://localhost:7085/auth/captcha';
+
+        fetch(apiUrl)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(res => {
+                // 2. 根据提供的 JSON 结构解析数据
+                // 响应结构是: { "data": { "captchaId": "...", "image": "..." } }
+                if (res.data) {
+                    const captchaData = res.data;
+
+                    // 设置图片源为Base64字符串
+                    const imgElement = document.getElementById('captchaImg');
+                    imgElement.src = captchaData.image;
+
+                    // 打印 ID，实际开发中通常需要将这个 ID 传回后端进行验证
+                    console.log("Captcha ID:", captchaData.captchaId);
+                } else {
+                    console.error("响应格式不正确", res);
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching captcha:', error);
+                document.getElementById('captchaImg').alt = "加载失败，请重试";
+            });
+    }
+
+    // 页面加载时自动加载一次验证码
+    window.onload = function () {
+        loadCaptcha();
+    }
+</script>
+</body>
+</html>

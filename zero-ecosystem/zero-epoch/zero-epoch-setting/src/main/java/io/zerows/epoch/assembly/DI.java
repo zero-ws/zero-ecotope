@@ -10,6 +10,7 @@ import jakarta.inject.Named;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -41,7 +42,6 @@ public class DI {
      *
      * @param clazz 类
      * @param <T>   类型
-     *
      * @return 单例对象
      */
     // 直接创建一个单例
@@ -84,10 +84,17 @@ public class DI {
                 instance = DiProxyInstance.create(clazz);
             }
         } else {
-            if (Objects.isNull(action)) {
-                instance = di.getInstance(clazz);
-            } else {
+            /*
+             * When the method is defined in the parent class or interface (default method),
+             * using action.getDeclaringClass() will return the parent/interface type.
+             * Attempting to instantiate this type will fail if it's abstract or an interface.
+             * Since `clazz` is the concrete implementation class we are working with,
+             * we should always instantiate `clazz` directly.
+             */
+            if (Objects.nonNull(action) && Modifier.isStatic(action.getModifiers())) {
                 instance = di.getInstance(action.getDeclaringClass());
+            } else {
+                instance = di.getInstance(clazz);
             }
         }
         return instance;

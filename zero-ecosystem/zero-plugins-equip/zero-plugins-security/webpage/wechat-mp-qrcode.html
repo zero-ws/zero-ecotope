@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeChat QR Code Login</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            text-align: center;
+            padding-top: 50px;
+        }
+
+        #qrcode-container {
+            margin: 20px auto;
+            width: 250px;
+            height: 250px;
+            border: 1px solid #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f0f0f0;
+        }
+
+        #qrcode-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<h1>Scan WeChat QR Code to Login</h1>
+
+<div id="qrcode-container">
+    <img id="qrcode-img" src="" alt="WeChat QR Code">
+</div>
+
+<p id="status">Initializing...</p>
+
+<script>
+    const qrcodeImg = document.getElementById('qrcode-img');
+    const statusParagraph = document.getElementById('status');
+    let uuid = null;
+    let checkStatusInterval = null;
+
+    // 1. 获取二维码
+    async function fetchQrCode() {
+        try {
+            statusParagraph.textContent = 'Requesting QR Code...';
+
+            // 注意：你的后端 WeChatActionQrCode 要求 Header 中必须包含 expireSeconds
+            const response = await fetch('http://localhost:9002/security/auth/wechat-qrcode', {
+                method: 'GET', // 或 POST，取决于你的 Controller 定义
+                headers: {
+                    'expireSeconds': '300' // 必填：5分钟有效期
+                }
+            });
+
+            // 解析响应（假设后端返回标准 UniResponse JSON）
+            const res = await response.json();
+
+            // 兼容性处理：取 payload 或直接取 data (取决于你的 UniResponse 序列化格式)
+            const data = res.payload || res;
+
+            if (data && data.qrUrl) {
+                // 核心修改：直接将 URL 赋值给 img src
+                qrcodeImg.src = data.qrUrl;
+                qrcodeImg.style.display = 'block';
+
+                uuid = data.uuid;
+                statusParagraph.textContent = 'QR Code ready. Please scan.';
+
+                // 开始轮询
+                startCheckingStatus();
+            } else {
+                statusParagraph.textContent = 'Failed: ' + (res.message || 'No QR URL returned');
+            }
+        } catch (error) {
+            console.error('Error fetching QR code:', error);
+            statusParagraph.textContent = 'Network Error. Check console.';
+        }
+    }
+
+    // 2. 轮询检查状态
+    async function checkStatus() {
+        if (!uuid) return;
+        try {
+            const response = await fetch('http://localhost:9002/security/auth/wechat-status', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json' // 这里看你的 UniMessage 接收方式
+                },
+                // UniMessage<String> payload 通常接受纯字符串或 JSON 包装
+                // 如果后端解析有问题，尝试直接传 uuid 字符串： body: uuid
+                body: JSON.stringify({uuid})
+            });
+
+            const res = await response.json();
+            const data = res.payload || res;
+
+            console.log('Status Check:', data);
+
+            if (data) {
+                // 显示当前状态
+                statusParagraph.textContent = `Status: ${data.status}`;
+
+                // 根据后端 WeCoStatus 枚举判断
+                if (data.status === 'SUCCESS') {
+                    clearInterval(checkStatusInterval);
+                    statusParagraph.textContent = 'Login Success! OpenID: ' + data.openId;
+                    statusParagraph.style.color = 'green';
+
+                    // TODO:在此处进行跳转或保存 Token
+                    // window.location.href = '/dashboard?token=' + ...
+
+                } else if (data.status === 'EXPIRED') {
+                    clearInterval(checkStatusInterval);
+                    statusParagraph.textContent = 'QR Code Expired. Please refresh.';
+                    statusParagraph.style.color = 'red';
+                }
+            }
+        } catch (error) {
+            console.error('Error checking status:', error);
+        }
+    }
+
+    // 3. 启动轮询定时器
+    function startCheckingStatus() {
+        if (checkStatusInterval) clearInterval(checkStatusInterval);
+        // 每 3 秒查一次，太快没意义
+        checkStatusInterval = setInterval(checkStatus, 3000);
+    }
+
+    // 页面加载即触发
+    fetchQrCode();
+</script>
+</body>
+</html>
