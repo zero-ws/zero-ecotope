@@ -20,6 +20,7 @@ public class LoginActor {
 
     @Address(Addr.API_AUTH_CAPTCHA)
     public Future<JsonObject> captcha(final JsonObject captcha) {
+        System.out.println(captcha);
         return this.captchaStub.generate();
     }
 }

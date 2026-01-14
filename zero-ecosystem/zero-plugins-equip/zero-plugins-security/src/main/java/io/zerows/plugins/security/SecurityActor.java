@@ -41,6 +41,7 @@ public class SecurityActor extends AbstractHActor {
 
     @Override
     protected Future<Boolean> startAsync(final HConfig config, final Vertx vertxRef) {
+        this.vLog("[ Security ] SecurityActor 初始化完成，配置：{}", config);
         // 先注册配置信息
         MANAGER.registryOf(config, vertxRef);
 
