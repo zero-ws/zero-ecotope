@@ -28,7 +28,13 @@ class CallSingle implements Invoker.Action {
         // Append single argument
         final ParameterBuilder<Envelop> builder = ParameterBuilder.ofWorker();
         final Object analyzed = builder.build(envelop, argType);
-        if (Objects.isNull(analyzed)) {
+        /*
+         * 解决 User = null（未登录）时无法调用的问题
+         * - 如果未登录 -> Objects.isNull -> true
+         * - 而参数允许为 null -> !allowNull -> false
+         * 直接进入 else 分支，而不走 if 分支
+         */
+        if (Objects.isNull(analyzed) && !ParameterBuilder.allowNull(argType)) {
             // One type dynamic here
             final Object reference = envelop.data();
             // Non Direct

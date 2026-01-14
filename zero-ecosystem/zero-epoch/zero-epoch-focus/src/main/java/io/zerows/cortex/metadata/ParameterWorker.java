@@ -12,7 +12,6 @@ import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.Session;
 import io.zerows.epoch.metadata.XHeader;
 import io.zerows.epoch.web.Envelop;
-import io.zerows.support.Ut;
 
 /**
  * @author lang : 2024-04-21
@@ -21,10 +20,6 @@ class ParameterWorker implements ParameterBuilder<Envelop> {
     private static final Cc<String, ParameterBuilder<Envelop>> CCT_PARAM = Cc.openThread();
 
     private ParameterWorker() {
-    }
-
-    private static boolean is(final Class<?> paramType, final Class<?> expected) {
-        return expected == paramType || Ut.isImplement(paramType, expected);
     }
 
     static ParameterBuilder<Envelop> of() {
@@ -53,24 +48,24 @@ class ParameterWorker implements ParameterBuilder<Envelop> {
     public Object build(final Envelop envelop, final Class<?> type, final Object... extension) {
         Object returnValue = null;
         final RoutingContext context = envelop.context();
-        if (is(type, XHeader.class)) {
+        if (ParameterPre.is(type, XHeader.class)) {
             final MultiMap headers = envelop.headers();
             final XHeader header = new XHeader();
             header.fromHeader(headers);
             returnValue = header;
-        } else if (is(type, Session.class)) {
+        } else if (ParameterPre.is(type, Session.class)) {
             returnValue = envelop.session();
-        } else if (is(type, HttpServerRequest.class)) {
+        } else if (ParameterPre.is(type, HttpServerRequest.class)) {
             returnValue = context.request();
-        } else if (is(type, HttpServerResponse.class)) {
+        } else if (ParameterPre.is(type, HttpServerResponse.class)) {
             returnValue = context.response();
-        } else if (is(type, Vertx.class)) {
+        } else if (ParameterPre.is(type, Vertx.class)) {
             returnValue = context.vertx();
-        } else if (is(type, EventBus.class)) {
+        } else if (ParameterPre.is(type, EventBus.class)) {
             returnValue = context.vertx().eventBus();
-        } else if (is(type, User.class)) {
+        } else if (ParameterPre.is(type, User.class)) {
             returnValue = envelop.user();
-        } else if (is(type, Message.class)) {
+        } else if (ParameterPre.is(type, Message.class)) {
             if (0 < extension.length && extension[0] instanceof Message<?>) {
                 returnValue = extension[0];
             }
