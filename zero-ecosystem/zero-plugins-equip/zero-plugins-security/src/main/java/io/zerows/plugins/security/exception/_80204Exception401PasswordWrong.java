@@ -1,4 +1,4 @@
-package io.zerows.extension.module.rbac.exception;
+package io.zerows.plugins.security.exception;
 
 import io.r2mo.vertx.common.exception.VertxWebException;
 

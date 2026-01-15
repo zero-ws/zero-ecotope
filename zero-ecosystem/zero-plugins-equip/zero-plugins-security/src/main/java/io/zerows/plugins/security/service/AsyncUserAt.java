@@ -1,10 +1,12 @@
 package io.zerows.plugins.security.service;
 
+import com.google.inject.Injector;
 import io.r2mo.jaas.auth.LoginRequest;
 import io.r2mo.jaas.session.UserAt;
 import io.r2mo.typed.cc.Cc;
 import io.r2mo.typed.enums.TypeLogin;
 import io.vertx.core.Future;
+import io.zerows.epoch.assembly.DiFactory;
 import io.zerows.spi.HPI;
 
 /**
@@ -15,7 +17,14 @@ public interface AsyncUserAt {
 
     static AsyncUserAt of(final TypeLogin typeLogin) {
         final String nameSPI = "UserAt/" + typeLogin.name();
-        return CC_SKELETON.pick(() -> HPI.findOneOf(AsyncUserAt.class), nameSPI);
+        return CC_SKELETON.pick(() -> {
+            // SPI
+            final AsyncUserAt userService = HPI.findOneOf(AsyncUserAt.class);
+            // DI
+            final Injector injector = DiFactory.singleton().build();
+            injector.injectMembers(userService);
+            return userService;
+        }, nameSPI);
     }
 
     /**

@@ -1,13 +1,13 @@
 package io.zerows.cosmic.bootstrap;
 
 import io.vertx.ext.web.handler.AuthorizationHandler;
-import io.vertx.ext.web.handler.ChainAuthHandler;
 import io.zerows.cortex.metadata.RunServer;
 import io.zerows.cortex.sdk.Axis;
 import io.zerows.cosmic.handler.EndurerAuthenticate;
 import io.zerows.cosmic.plugins.security.management.OCacheSecurity;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.metadata.security.SecurityMeta;
+import io.zerows.sdk.security.WallHandler;
 import io.zerows.sdk.security.WallProvider;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.spi.HPI;
@@ -61,7 +61,7 @@ public class AxisSecure implements Axis {
                  * - 多元素集合：返回 ChainAuthHandler（全部）
                  */
                 // 构造 401 认证处理器
-                final ChainAuthHandler handler401 = this.provider.handlerOfAuthentication(server.refVertx(), securityMeta);
+                final WallHandler handler401 = this.provider.handlerOfAuthentication(server.refVertx(), securityMeta);
                 if (Objects.nonNull(handler401)) {
                     server.refRouter().route(path).order(KWeb.ORDER.SECURE)
                         .handler(handler401)

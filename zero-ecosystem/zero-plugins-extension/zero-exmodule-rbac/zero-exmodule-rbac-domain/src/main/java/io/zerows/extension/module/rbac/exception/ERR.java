@@ -11,7 +11,6 @@ interface ERR {
     VertxE _80201 = VertxE.of(-80201).state(HttpResponseStatus.UNAUTHORIZED);
     VertxE _80202 = VertxE.of(-80202).state(HttpResponseStatus.UNAUTHORIZED);
     VertxE _80203 = VertxE.of(-80203).state(HttpResponseStatus.NOT_FOUND);
-    VertxE _80204 = VertxE.of(-80204).state(HttpResponseStatus.UNAUTHORIZED);
     VertxE _80206 = VertxE.of(-80206).state(HttpResponseStatus.UNAUTHORIZED);
     VertxE _80207 = VertxE.of(-80207).state(HttpResponseStatus.UNAUTHORIZED);
     VertxE _80208 = VertxE.of(-80208).state(HttpResponseStatus.UNAUTHORIZED);

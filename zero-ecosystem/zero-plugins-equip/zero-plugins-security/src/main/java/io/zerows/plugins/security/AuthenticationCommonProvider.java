@@ -51,7 +51,7 @@ class AuthenticationCommonProvider implements AuthenticationProvider {
      */
     @Override
     public Future<User> authenticate(final Credentials credentials) {
-        // 提取不同的认证信息
+        // Fix-AUTH-001 提取不同的认证信息
         final JsonObject authJson = this.valueCredentials(credentials);
         // 提取缓存信息
         final String session = Ut.valueString(authJson, KName.SESSION);
@@ -72,9 +72,12 @@ class AuthenticationCommonProvider implements AuthenticationProvider {
                 return Future.succeededFuture(User.create(authJson));
             }
 
-
+            final WallExecutor executor = this.meta.getProxy();
+            if (Objects.isNull(executor)) {
+                return Future.failedFuture(new _401UnauthorizedException("[ PLUG ] 认证执行器未找到！"));
+            }
             // 缓存中没有值，要重新认证
-            return this.userVerify(authJson).compose(authorized -> {
+            return executor.authenticate(authJson).compose(authorized -> {
                 if (Objects.isNull(authorized)) {
                     log.error("[ PLUG ] ( Secure ) 401 用户认证失败，session = {}", session);
                     return Future.failedFuture(new _401UnauthorizedException("[ PLUG ] 用户认证失败！"));
@@ -82,15 +85,6 @@ class AuthenticationCommonProvider implements AuthenticationProvider {
                 return Future.succeededFuture(authorized);
             });
         });
-    }
-
-
-    private Future<User> userVerify(final JsonObject authJson) {
-        final WallExecutor executor = this.meta.getProxy();
-        if (Objects.isNull(executor)) {
-            return Future.failedFuture(new _401UnauthorizedException("[ PLUG ] 认证执行器未找到！"));
-        }
-        return executor.authenticate(authJson);
     }
 
     private JsonObject valueCredentials(final Credentials credentials) {

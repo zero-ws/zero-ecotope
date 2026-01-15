@@ -22,12 +22,17 @@ public abstract class AsyncWallExecutor implements WallExecutor {
     public Future<User> authenticate(final JsonObject credentials) {
         // 请求访问
         final LoginRequest request = this.createRequest(credentials);
+        if (Objects.isNull(request)) {
+            // 请求失败
+            return Future.succeededFuture();
+        }
         // 构造核心组件
         final AsyncUserAt userService = AsyncUserAt.of(request.type());
         if (Objects.isNull(userService)) {
-            log.error("[ PLUG ] 未找到用户加载核心组件 / type = {}", request.type());
+            log.error("[ PLUG ] 未找到用户加载核心组件：SPID = UserAt/{}", request.type());
             return Future.succeededFuture();
         }
+
         // 加载用户信息
         return userService.loadLogged(request).compose(userAt -> {
             // 加载用户基础信息

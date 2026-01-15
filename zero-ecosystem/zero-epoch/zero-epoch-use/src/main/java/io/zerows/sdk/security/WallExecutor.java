@@ -10,7 +10,9 @@ import io.vertx.ext.auth.User;
  * @author lang : 2025-10-29
  */
 public interface WallExecutor {
-
+    /**
+     * FIX-AUTH-002
+     */
     Future<User> authenticate(JsonObject credentials);
 
     Future<JsonObject> authorize(User user);

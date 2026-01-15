@@ -6,10 +6,10 @@ import io.vertx.core.Vertx;
 import io.vertx.ext.auth.authentication.AuthenticationProvider;
 import io.vertx.ext.web.handler.AuthenticationHandler;
 import io.vertx.ext.web.handler.AuthorizationHandler;
-import io.vertx.ext.web.handler.ChainAuthHandler;
 import io.zerows.cosmic.plugins.security.exception._40080Exception500PreAuthentication;
 import io.zerows.epoch.annotations.Wall;
 import io.zerows.epoch.metadata.security.SecurityMeta;
+import io.zerows.sdk.security.WallHandler;
 
 import java.util.*;
 
@@ -52,7 +52,7 @@ class SecurityProviderFactory {
      */
     AuthenticationProvider providerOfAuthentication(final Set<SecurityMeta> metaSet) {
         final SecurityProviderOr providerSet = this.providerOfCombine(metaSet);
-        return providerSet.providerAny();
+        return providerSet.providerAll();
     }
 
     private SecurityProviderOr providerOfCombine(final Set<SecurityMeta> metaSet) {
@@ -75,11 +75,11 @@ class SecurityProviderFactory {
     }
 
 
-    ChainAuthHandler handlerOfAuthentication(final Set<SecurityMeta> metaSet) {
+    WallHandler handlerOfAuthentication(final Set<SecurityMeta> metaSet) {
         // 前置 Handler 验证
         this.ensurePreHandler(metaSet);
         // 提取前置验证器
-        final ChainAuthHandler chain = ChainAuthHandler.any();
+        final WallHandler chain = new AuthenticationWallHandler();
         if (metaSet.isEmpty()) {
             return null;
         }
@@ -88,7 +88,7 @@ class SecurityProviderFactory {
         // 提取第一个内置创建 Handler
         final SecurityMeta metaFirst = metaSet.iterator().next();
         final AuthenticationHandler handler = AuthenticationNative
-            .createHandler(this.vertxRef, metaFirst, securitySet.providerOne(true));
+            .createHandler(this.vertxRef, metaFirst, securitySet.providerOne());
         if (Objects.nonNull(handler)) {
             chain.add(handler);
         }
@@ -97,7 +97,7 @@ class SecurityProviderFactory {
         final List<SecurityMeta> sortedList = new ArrayList<>(metaSet);
         Collections.sort(sortedList);
         sortedList.stream().map(meta -> CC_HANDLER_401.pick(
-            () -> new AuthenticationCommonHandler(securitySet.providerAny(), meta),
+            () -> new AuthenticationCommonHandler(securitySet.providerAll(), meta),
             meta.id(this.vertxRef)
         )).forEach(chain::add);
         return chain;
