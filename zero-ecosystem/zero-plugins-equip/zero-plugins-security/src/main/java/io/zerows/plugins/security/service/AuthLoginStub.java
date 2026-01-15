@@ -1,8 +1,8 @@
-package io.zerows.plugins.security.common;
+package io.zerows.plugins.security.service;
 
+import io.r2mo.jaas.auth.LoginRequest;
 import io.r2mo.jaas.session.UserAt;
 import io.vertx.core.Future;
-import io.zerows.plugins.security.basic.BasicLoginRequest;
 
 public interface AuthLoginStub {
 
@@ -26,9 +26,9 @@ public interface AuthLoginStub {
      * </pre>
      *
      * @param request 包含用户登录信息（账号、密码、验证码等）的请求对象
-     * @return 校验通过后的 {@link BasicLoginRequest} 对象（通常直接返回原对象）
+     * @return 校验通过后的 {@link LoginRequest} 对象（通常直接返回原对象）
      */
-    Future<BasicLoginRequest> validateCaptcha(BasicLoginRequest request);
+    Future<CaptchaRequest> validateCaptcha(CaptchaRequest request);
 
-    Future<UserAt> login(BasicLoginRequest request);
+    Future<UserAt> login(LoginRequest request);
 }

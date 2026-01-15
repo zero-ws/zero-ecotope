@@ -57,7 +57,7 @@ public class QuotaMetricCache extends QuotaMetricBase {
                 }
             }
         });
-        this.log().info("{} --> \uD83D\uDCCA 抓取 Cache 指标数量: {}", MonitorConstant.K_PREFIX_MOC, metrics.size());
+        this.log().debug("{} --> \uD83D\uDCCA 抓取 Cache 指标数量: {}", MonitorConstant.K_PREFIX_MOC, metrics.size());
         return Future.succeededFuture(metrics);
     }
 

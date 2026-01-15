@@ -1,5 +1,7 @@
 package io.zerows.plugins.security;
 
+import io.r2mo.jaas.token.TokenBuilderManager;
+import io.r2mo.jaas.token.TokenType;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.zerows.component.module.AbstractHActor;
@@ -7,6 +9,8 @@ import io.zerows.epoch.annotations.Actor;
 import io.zerows.epoch.metadata.security.SecurityConfig;
 import io.zerows.platform.enums.SecurityType;
 import io.zerows.plugins.security.metadata.YmSecurity;
+import io.zerows.plugins.security.service.TokenBuilderAES;
+import io.zerows.plugins.security.service.TokenBuilderBasic;
 import io.zerows.specification.configuration.HConfig;
 
 /**
@@ -45,9 +49,11 @@ public class SecurityActor extends AbstractHActor {
         // 先注册配置信息
         MANAGER.registryOf(config, vertxRef);
 
+        TokenBuilderManager.of().registry(TokenType.BASIC, TokenBuilderBasic::new);
+        TokenBuilderManager.of().registry(TokenType.AES, TokenBuilderAES::new);
+
         // 扫描 @Wall 的所有元数据信息，用于后期直接挂载到路由中去
         SecurityContext.scanned(vertxRef);
-
         // 填充构造 Lee 的的核心信息
         return Future.succeededFuture(Boolean.TRUE);
     }

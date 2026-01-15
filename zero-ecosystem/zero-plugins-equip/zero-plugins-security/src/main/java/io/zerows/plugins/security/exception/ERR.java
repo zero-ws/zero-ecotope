@@ -4,6 +4,9 @@ import io.netty.handler.codec.http.HttpResponseStatus;
 import io.r2mo.vertx.common.exception.VertxE;
 
 interface ERR {
+    VertxE _80200 = VertxE.of(-80200).state(HttpResponseStatus.UNAUTHORIZED);
+    VertxE _80201 = VertxE.of(-80201).state(HttpResponseStatus.UNAUTHORIZED);
+
     VertxE _80203 = VertxE.of(-80203).state(HttpResponseStatus.NOT_FOUND);
     VertxE _80204 = VertxE.of(-80204).state(HttpResponseStatus.UNAUTHORIZED);
 

@@ -1,4 +1,4 @@
-package io.zerows.plugins.security.common;
+package io.zerows.plugins.security.service;
 
 import io.r2mo.jaas.auth.CaptchaArgs;
 import io.r2mo.jaas.session.UserAt;
@@ -26,7 +26,6 @@ class AuthMemoAtSecurity implements MemoAtSecurity {
 
     private static final Cc<String, MemoAt<?, ?>> CC_CACHE = Cc.open();
     private static final Cc<String, CachedFactory> CC_SECURITY = Cc.openThread();
-    private static final YmSecurity SECURITY = SecurityActor.configuration();
 
     AuthMemoAtSecurity() {
     }
@@ -45,7 +44,8 @@ class AuthMemoAtSecurity implements MemoAtSecurity {
 
     private void ensureAuthorize(final CaptchaArgs configuration) {
         final TypeLogin type = configuration.type();
-        if (TypeLogin.CAPTCHA == type && !SECURITY.isCaptcha()) {
+        final YmSecurity configSecurity = SecurityActor.configuration();
+        if (TypeLogin.CAPTCHA == type && !configSecurity.isCaptcha()) {
             throw new _501NotSupportException("[ R2MO ] 未启用图片验证码功能！");
         }
     }
@@ -84,8 +84,9 @@ class AuthMemoAtSecurity implements MemoAtSecurity {
     @SuppressWarnings("unchecked")
     public MemoAt<String, String> ofToken() {
         final String name = UserCache.NAME_TOKEN + "/ASYNC/" + this.getClass().getName();
+        final YmSecurity configSecurity = SecurityActor.configuration();
         return (MemoAt<String, String>) CC_CACHE.pick(
-            () -> this.memoAt(name, String.class, String.class, SECURITY.getLimit().expiredAt()),
+            () -> this.memoAt(name, String.class, String.class, configSecurity.getLimit().expiredAt()),
             name
         );
     }
@@ -94,8 +95,9 @@ class AuthMemoAtSecurity implements MemoAtSecurity {
     @SuppressWarnings("unchecked")
     public MemoAt<String, String> ofRefresh() {
         final String name = UserCache.NAME_REFRESH + "/ASYNC/" + this.getClass().getName();
+        final YmSecurity configSecurity = SecurityActor.configuration();
         return (MemoAt<String, String>) CC_CACHE.pick(
-            () -> this.memoAt(name, String.class, String.class, SECURITY.getLimit().refreshAt()),
+            () -> this.memoAt(name, String.class, String.class, configSecurity.getLimit().refreshAt()),
             name
         );
     }

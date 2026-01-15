@@ -7,6 +7,7 @@ import io.r2mo.typed.enums.TypeLogin;
 import io.vertx.core.Future;
 import io.zerows.plugins.security.exception._80240Exception400UsernameRequired;
 import io.zerows.plugins.security.exception._80241Exception400PasswordRequired;
+import io.zerows.plugins.security.service.CaptchaRequest;
 import io.zerows.program.Ux;
 import io.zerows.support.Fx;
 import lombok.Data;
@@ -14,7 +15,7 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class BasicLoginRequest extends LoginRequest {
+public class BasicLoginRequest extends LoginRequest implements CaptchaRequest {
     public static final TypeLogin TYPE = TypeLogin.PASSWORD;
     private String username;
     private String password;
@@ -29,6 +30,16 @@ public class BasicLoginRequest extends LoginRequest {
     public void setPassword(final String password) {
         this.password = password;
         this.setCredential(password);
+    }
+
+    @Override
+    public String captchaId() {
+        return this.captchaId;
+    }
+
+    @Override
+    public String captcha() {
+        return this.captcha;
     }
 
     @Override

@@ -1,9 +1,10 @@
-package io.zerows.plugins.security.common;
+package io.zerows.plugins.security.service;
 
 import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.LineCaptcha;
 import cn.hutool.core.codec.Base64;
 import io.r2mo.function.Fn;
+import io.r2mo.jaas.auth.CaptchaArgs;
 import io.r2mo.jaas.auth.CaptchaRequest;
 import io.r2mo.jaas.session.UserCache;
 import io.r2mo.typed.common.Kv;
@@ -11,8 +12,11 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.plugins.security.SecurityActor;
 import io.zerows.plugins.security.SecurityCaptcha;
+import io.zerows.plugins.security.exception._80200Exception401CaptchaWrong;
+import io.zerows.plugins.security.exception._80201Exception401CaptchaExpired;
 import io.zerows.plugins.security.exception._80212Exception500CaptchaDisabled;
 import io.zerows.plugins.security.exception._80213Exception500CaptchaGeneration;
+import io.zerows.plugins.security.metadata.YmSecurity;
 import io.zerows.plugins.security.metadata.YmSecurityCaptcha;
 import io.zerows.program.Ux;
 import lombok.extern.slf4j.Slf4j;
@@ -24,18 +28,39 @@ import java.util.UUID;
 
 @Slf4j
 public class CaptchaService implements CaptchaStub {
-
-    private static final SecurityCaptcha CAPTCHA = SecurityActor.configCaptcha();
-
     // 定义内部 Map Key 常量，防止魔法值
     private static final String KEY_ID = "id";
     private static final String KEY_CODE = "code";
     private static final String KEY_IMAGE = "image";
 
+    /**
+     * <pre>
+     * 生成验证码 \uD83C\uDFA8
+     *
+     * 采用【双模执行策略】生成验证码，平衡 CPU 与 I/O 资源的使用。
+     *
+     * 1. 物理线程阶段 (Worker Thread) \uD83C\uDFD7️
+     *    - 验证码图形生成属于 CPU 密集型任务。
+     *    - 使用 {@link io.zerows.program.Ux#waitAsync} 调度到 Worker 线程池执行。
+     *    - 避免阻塞 EventLoop 核心线程。
+     *
+     * 2. 虚拟线程阶段 (Virtual Thread) \uD83D\uDD78️
+     *    - Redis/缓存存储属于 I/O 密集型任务。
+     *    - 关键约束：{@link io.r2mo.jaas.session.UserCache} 组件使用了 await() 同步转异步机制。
+     *    - 必须使用 {@link io.zerows.program.Ux#waitVirtual} 切换到虚拟线程上下文。
+     *    - \uD83D\uDEA8 如果在 EventLoop 或普通 Worker 中调用 UserCache，可能导致死锁或线程耗尽。
+     *
+     * 流程总结：
+     * [ Worker ] 图形计算 -> [ Virtual ] 缓存存储 -> [ Response ] 返回结果
+     * </pre>
+     *
+     * @return Future<JsonObject> 包含验证码ID和Base64图像数据
+     */
     @Override
     public Future<JsonObject> generate() {
-        Fn.jvmKo(Objects.isNull(CAPTCHA), _80212Exception500CaptchaDisabled.class);
-        final YmSecurityCaptcha config = CAPTCHA.captchaConfig();
+        final SecurityCaptcha captcha = SecurityActor.configCaptcha();
+        Fn.jvmKo(Objects.isNull(captcha), _80212Exception500CaptchaDisabled.class);
+        final YmSecurityCaptcha config = captcha.captchaConfig();
 
         // 1. 【物理 Worker】重计算 (CPU 密集)
         return Ux.waitAsync(() -> this.execHeavyGeneration(config))
@@ -54,16 +79,12 @@ public class CaptchaService implements CaptchaStub {
             }));
     }
 
-    @Override
-    public Future<Boolean> validate(final String captchaId, final String captcha) {
-        return null;
-    }
-
     /**
      * 纯 CPU 计算逻辑 (运行在 Worker 线程)
      * 负责生成 ID、绘制图形、Base64 编码
      */
     private Map<String, String> execHeavyGeneration(final YmSecurityCaptcha config) {
+        final SecurityCaptcha securityCaptcha = SecurityActor.configCaptcha();
         // A. 生成 ID
         final String captchaId = UUID.randomUUID().toString().replace("-", "");
 
@@ -72,8 +93,8 @@ public class CaptchaService implements CaptchaStub {
             config.getWidth(),
             config.getHeight()
         );
-        captcha.setGenerator(CAPTCHA.captchaGenerator());
-        captcha.setFont(CAPTCHA.captchaFont());
+        captcha.setGenerator(securityCaptcha.captchaGenerator());
+        captcha.setFont(securityCaptcha.captchaFont());
 
         // C. 转换输出 (耗时)
         try (final ByteArrayOutputStream out = new ByteArrayOutputStream()) {
@@ -92,5 +113,32 @@ public class CaptchaService implements CaptchaStub {
             log.error("验证码图片生成失败", e);
             throw new _80213Exception500CaptchaGeneration(e.getMessage());
         }
+    }
+
+    /**
+     * 认证位于主流程，若没有开启则直接校验通过
+     */
+    @Override
+    public Future<Boolean> validate(final String captchaId, final String captcha) {
+        final YmSecurity configSecurity = SecurityActor.configuration();
+        if (!configSecurity.isCaptcha()) {
+            // 未启用验证码，直接通过
+            return Future.succeededFuture(Boolean.TRUE);
+        }
+        return Ux.waitVirtual(() -> {
+            // 这里调用 await() 提取 captchaId
+            final SecurityCaptcha configCaptcha = SecurityActor.configCaptcha();
+            final CaptchaArgs arguments = Objects.requireNonNull(configCaptcha.captchaConfig()).forArguments();
+            final String cached = UserCache.of().authorize(captchaId, arguments);
+            if (Objects.isNull(cached)) {
+                throw new _80201Exception401CaptchaExpired(captchaId, captcha);
+            }
+            if (!cached.equalsIgnoreCase(captcha)) {
+                throw new _80200Exception401CaptchaWrong(captcha);
+            }
+            // 移除验证码 / 认证成功之后再移除
+            UserCache.of().authorizeKo(captchaId, arguments);
+            return Boolean.TRUE;
+        });
     }
 }
