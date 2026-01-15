@@ -23,12 +23,12 @@ import java.util.Objects;
  * @author lang : 2025-10-29
  */
 @Slf4j
-class AuthenticationCommonProvider implements AuthenticationProvider {
+class AuthenticationProviderOne implements AuthenticationProvider {
 
     private final SecurityMeta meta;
     private final Vertx vertxRef;
 
-    AuthenticationCommonProvider(final Vertx vertxRef, final SecurityMeta meta) {
+    AuthenticationProviderOne(final Vertx vertxRef, final SecurityMeta meta) {
         this.meta = meta;
         this.vertxRef = vertxRef;
     }

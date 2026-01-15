@@ -8,6 +8,8 @@ import io.vertx.core.Future;
 import io.vertx.core.Promise;
 import io.vertx.core.Vertx;
 import io.vertx.core.buffer.Buffer;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import io.vertx.redis.client.Command;
 import io.vertx.redis.client.Redis;
 import io.vertx.redis.client.Request;
@@ -16,17 +18,12 @@ import io.zerows.plugins.redis.RedisActor;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * Redis 缓存实现（规范化版本）
- * <p>
- * 特性：
- * 1. 默认使用 Java 二进制序列化 (Buffer)。
- * 2. 依赖 R2MO 进行编解码（内部已处理异常）。
- * 3. 修正 TTL 逻辑：0 表示永不过期 (SET)，大于 0 使用过期时间 (SETEX)。
- * </p>
+ * Redis 缓存实现（修复序列化版本）
  */
 @Slf4j
 public class RedisMemoAt<K, V> extends MemoAtBase<K, V> {
@@ -37,13 +34,14 @@ public class RedisMemoAt<K, V> extends MemoAtBase<K, V> {
 
     private final RedisYmConfig config;
 
+    // ---------------- 新增：JSON 包装容器 ----------------
+
     protected RedisMemoAt(final Vertx vertxRef, final MemoOptions<K, V> options) {
         super(vertxRef, options);
         Objects.requireNonNull(REDIS, "[ PLUG ] ( Redis ) 客户端未初始化，无法使用 Redis 作为缓存，请检查 Redis 配置！");
         this.config = options.configuration() != null ? options.configuration() : new RedisYmConfig();
     }
-
-    // ---------------- 私有辅助方法：Codec ----------------
+    // ----------------------------------------------------
 
     /**
      * 序列化策略
@@ -52,20 +50,29 @@ public class RedisMemoAt<K, V> extends MemoAtBase<K, V> {
         if (value == null) {
             return null;
         }
-        // 兼容 JSON 模式
+        // 兼容 JSON 模式 (纯文本存储)
         if ("json".equalsIgnoreCase(this.config.getFormat())) {
             return Buffer.buffer(Ut.serialize(value));
         }
 
-        // 二进制序列化 (R2MO 内部自带 try-catch)
-        final byte[] bytes = R2MO.serialize(value);
-
-        // 🛡️ 防御：如果 R2MO 内部失败返回 null，手动抛出异常终止流程
-        if (bytes == null) {
-            throw new RuntimeException("[ PLUG ] ( Redis ) R2MO 序列化失败，返回结果为空");
+        // 二进制序列化
+        final Object converted;
+        if (value instanceof final JsonObject json) {
+            // 包装为可序列化的 Container
+            converted = new JsonContainer(json.encode(), true);
+        } else if (value instanceof final JsonArray jarr) {
+            // 包装为可序列化的 Container
+            converted = new JsonContainer(jarr.encode(), false);
+        } else {
+            // 其他实现了 Serializable 的 POJO 或基本类型
+            converted = value;
         }
+
+        final byte[] bytes = R2MO.serialize(converted);
         return Buffer.buffer(bytes);
     }
+
+    // ---------------- 私有辅助方法：Codec ----------------
 
     /**
      * 反序列化策略
@@ -88,9 +95,16 @@ public class RedisMemoAt<K, V> extends MemoAtBase<K, V> {
             return Ut.deserialize(buffer.toString(), this.options().classV());
         }
 
-        // 二进制反序列化 (R2MO 内部自带 try-catch)
-        // 如果出错返回 null，逻辑上视为 Cache Miss，无需额外处理
-        return (V) R2MO.deserialize(buffer.getBytes());
+        // 二进制反序列化
+        final Object raw = R2MO.deserialize(buffer.getBytes());
+
+        // 检查是否为 JSON 包装器，如果是则还原
+        if (raw instanceof JsonContainer) {
+            return (V) ((JsonContainer) raw).toOriginal();
+        }
+
+        // 普通对象直接返回
+        return (V) raw;
     }
 
     private String wrapKey(final K key) {
@@ -111,8 +125,6 @@ public class RedisMemoAt<K, V> extends MemoAtBase<K, V> {
         return Ut.deserialize(keyStr, kClass);
     }
 
-    // ---------------- 接口实现 ----------------
-
     @Override
     public Future<Kv<K, V>> put(final K key, final V value) {
         final String redisKey = this.wrapKey(key);
@@ -125,14 +137,12 @@ public class RedisMemoAt<K, V> extends MemoAtBase<K, V> {
             ttl = this.config.expiredAt().getSeconds();
         }
 
-        // 场景 1: 缓存空值
         if (value == null) {
             if (Boolean.TRUE.equals(this.config.getNullValue())) {
                 long nullTtl = this.config.nullValueAt().getSeconds();
                 if (nullTtl <= 0) {
                     nullTtl = 60;
                 }
-
                 final Request req = Request.cmd(Command.SETEX).arg(redisKey).arg(nullTtl).arg(NULL_BUFFER);
                 return Objects.requireNonNull(REDIS).send(req)
                     .onFailure(t -> log.error("[ PLUG ] ( Redis ) 写入空值异常: Key={}, Error={}", redisKey, t.getMessage()))
@@ -141,9 +151,8 @@ public class RedisMemoAt<K, V> extends MemoAtBase<K, V> {
             return Future.succeededFuture(Kv.create(key, null));
         }
 
-        // 场景 2: 正常缓存
         try {
-            // 这里调用 encode，如果 R2MO 返回 null 会抛出 RuntimeException 被这里捕获
+            // 调用修复后的 encode
             final Buffer binValue = this.encode(value);
             final Request req;
 
@@ -162,12 +171,14 @@ public class RedisMemoAt<K, V> extends MemoAtBase<K, V> {
         }
     }
 
+    // ---------------- 接口实现 (后续逻辑保持不变) ----------------
+
     @Override
     public Future<V> find(final K key) {
         final String redisKey = this.wrapKey(key);
         return Objects.requireNonNull(REDIS).send(Request.cmd(Command.GET).arg(redisKey))
             .onFailure(t -> log.error("[ PLUG ] ( Redis ) 读取缓存失败: Key={}, Error={}", redisKey, t.getMessage()))
-            .map(this::decode);
+            .map(this::decode); // 调用修复后的 decode
     }
 
     @Override
@@ -244,5 +255,25 @@ public class RedisMemoAt<K, V> extends MemoAtBase<K, V> {
             log.error("[ PLUG ] ( Redis ) SCAN 网络错误: {}", t.getMessage());
             promise.fail(t);
         });
+    }
+
+    /**
+     * 用于解决 Vert.x JsonObject/JsonArray 无法直接序列化的问题。
+     * 将其转为 String 存入，并在取出时根据 flag 还原。
+     */
+    private static class JsonContainer implements Serializable {
+        private static final long serialVersionUID = 1L;
+        private final String data;
+        private final boolean isObject; // true = JsonObject, false = JsonArray
+
+        JsonContainer(final String data, final boolean isObject) {
+            this.data = data;
+            this.isObject = isObject;
+        }
+
+        Object toOriginal() {
+            // 还原为 Vert.x 的对象
+            return this.isObject ? new JsonObject(this.data) : new JsonArray(this.data);
+        }
     }
 }

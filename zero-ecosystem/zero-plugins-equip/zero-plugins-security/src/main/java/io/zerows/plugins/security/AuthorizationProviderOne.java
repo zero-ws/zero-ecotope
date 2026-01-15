@@ -16,11 +16,11 @@ import java.util.Objects;
 /**
  * @author lang : 2025-10-29
  */
-class AuthorizationCommonProvider implements AuthorizationProvider {
+class AuthorizationProviderOne implements AuthorizationProvider {
 
     private final SecurityMeta meta;
 
-    public AuthorizationCommonProvider(final SecurityMeta meta) {
+    public AuthorizationProviderOne(final SecurityMeta meta) {
         this.meta = meta;
     }
 

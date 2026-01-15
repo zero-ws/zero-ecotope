@@ -15,7 +15,11 @@ public interface WallExecutor {
      */
     Future<User> authenticate(JsonObject credentials);
 
-    Future<JsonObject> authorize(User user);
+    default Future<JsonObject> authorize(final User user) {
+        return Future.succeededFuture(new JsonObject());
+    }
 
-    Future<JsonObject> resource(JsonObject params);
+    default Future<JsonObject> resource(final JsonObject params) {
+        return Future.succeededFuture(new JsonObject());
+    }
 }

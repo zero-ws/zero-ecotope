@@ -51,12 +51,12 @@ class SecurityProviderFactory {
      * @return 认证提供器
      */
     AuthenticationProvider providerOfAuthentication(final Set<SecurityMeta> metaSet) {
-        final SecurityProviderOr providerSet = this.providerOfCombine(metaSet);
+        final AuthenticationHandlerChain providerSet = this.providerOfCombine(metaSet);
         return providerSet.providerAll();
     }
 
-    private SecurityProviderOr providerOfCombine(final Set<SecurityMeta> metaSet) {
-        final SecurityProviderOr providerSet = new SecurityProviderOr();
+    private AuthenticationHandlerChain providerOfCombine(final Set<SecurityMeta> metaSet) {
+        final AuthenticationHandlerChain providerSet = new AuthenticationHandlerChain();
         if (Objects.isNull(metaSet) || metaSet.isEmpty()) {
             return providerSet;
         }
@@ -69,7 +69,7 @@ class SecurityProviderFactory {
         }
         // 自定义 401 Provider / 访问 @Wall 中的认证方法
         metaSet.stream().map(meta -> CC_PROVIDER_401.pick(
-            () -> new AuthenticationCommonProvider(this.vertxRef, meta), meta.id(this.vertxRef))
+            () -> new AuthenticationProviderOne(this.vertxRef, meta), meta.id(this.vertxRef))
         ).forEach(providerSet::addOfExtension);
         return providerSet;
     }
@@ -79,12 +79,12 @@ class SecurityProviderFactory {
         // 前置 Handler 验证
         this.ensurePreHandler(metaSet);
         // 提取前置验证器
-        final WallHandler chain = new AuthenticationWallHandler();
+        final WallHandler chain = new AuthenticationHandlerWall();
         if (metaSet.isEmpty()) {
             return null;
         }
         // 先构造 Provider
-        final SecurityProviderOr securitySet = this.providerOfCombine(metaSet);
+        final AuthenticationHandlerChain securitySet = this.providerOfCombine(metaSet);
         // 提取第一个内置创建 Handler
         final SecurityMeta metaFirst = metaSet.iterator().next();
         final AuthenticationHandler handler = AuthenticationNative
@@ -97,7 +97,7 @@ class SecurityProviderFactory {
         final List<SecurityMeta> sortedList = new ArrayList<>(metaSet);
         Collections.sort(sortedList);
         sortedList.stream().map(meta -> CC_HANDLER_401.pick(
-            () -> new AuthenticationCommonHandler(securitySet.providerAll(), meta),
+            () -> new AuthenticationHandlerOne(securitySet.providerAll(), meta),
             meta.id(this.vertxRef)
         )).forEach(chain::add);
         return chain;
@@ -119,7 +119,7 @@ class SecurityProviderFactory {
             return null;
         }
 
-        return AuthorizationCommonHandler.create(metaSet);
+        return AuthorizationHandlerOne.create(metaSet);
     }
 
     /**

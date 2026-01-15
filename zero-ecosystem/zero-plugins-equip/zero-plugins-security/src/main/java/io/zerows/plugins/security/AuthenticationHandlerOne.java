@@ -1,27 +1,28 @@
 package io.zerows.plugins.security;
 
 import io.r2mo.typed.exception.WebException;
-import io.r2mo.typed.exception.web._401UnauthorizedException;
 import io.vertx.core.Future;
 import io.vertx.core.http.HttpServerRequest;
+import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 import io.vertx.ext.auth.authentication.AuthenticationProvider;
 import io.vertx.ext.web.RoutingContext;
+import io.vertx.ext.web.Session;
 import io.vertx.ext.web.handler.impl.AuthenticationHandlerImpl;
+import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.security.SecurityMeta;
 import io.zerows.plugins.security.exception._80243Exception401NeedLogin;
-import io.zerows.sdk.security.WallExecutor;
 
 import java.util.Objects;
 
 /**
  * @author lang : 2025-10-30
  */
-class AuthenticationCommonHandler extends AuthenticationHandlerImpl<AuthenticationProvider> {
+class AuthenticationHandlerOne extends AuthenticationHandlerImpl<AuthenticationProvider> {
     private final SecurityMeta meta;
 
-    AuthenticationCommonHandler(final AuthenticationProvider provider,
-                                final SecurityMeta meta) {
+    AuthenticationHandlerOne(final AuthenticationProvider provider,
+                             final SecurityMeta meta) {
         super(provider);
         this.meta = meta;
     }
@@ -41,14 +42,19 @@ class AuthenticationCommonHandler extends AuthenticationHandlerImpl<Authenticati
         }
 
 
-        final WallExecutor executor = this.meta.getProxy();
-        if (Objects.isNull(executor)) {
-            return Future.failedFuture(new _401UnauthorizedException("[ PLUG ] 认证执行器未找到！"));
+        /*
+         * 之前的 Handler 已经创建好了 User 对象，证明此处之前的认证是成功的，接下来只需要调用的实际是
+         * WallExecutor 内置的授权方法来进行
+         * - 授权
+         * - 签名
+         * - 分发即可
+         * 所以此处暂时保留，若后续需要在 Handler 中进行额外的处理，可以在此处添加逻辑
+         */
+        final JsonObject principal = user.principal();
+        final Session session = context.session();
+        if (Objects.nonNull(session)) {
+            principal.put(KName.SESSION, session.id());
         }
-
-
-        // 可在认证过程中填充额外的信息
-        final SecurityCredentials credentials = new SecurityCredentials(this.meta, user);
-        return this.authProvider.authenticate(credentials);
+        return Future.succeededFuture(user);
     }
 }

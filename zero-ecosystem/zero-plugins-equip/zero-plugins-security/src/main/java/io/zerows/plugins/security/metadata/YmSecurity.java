@@ -20,8 +20,12 @@ import java.util.concurrent.ConcurrentMap;
 
 /**
  * <pre>
- *   vertx:
- *     security:           {@link YmSecurity}
+ *     security:                {@link YmSecurity}
+ *       # 授权部分 ---------------
+ *       authorization:
+ *         enabled: true
+ *       # 认证部分 ---------------
+ *       wall: /api
  *       config:
  *         master:
  *           type: jwt
@@ -70,6 +74,7 @@ public class YmSecurity implements Serializable {
     private Limit limit = new Limit();
     private Scope scope = new Scope();
     private YmSecurityCaptcha captcha;
+    private YmSecurityAuthorization authorization = new YmSecurityAuthorization();
     // 2. 核心目标：用来存储不同类型的安全配置
     // 注意：这里加 @JsonIgnore 是为了防止默认序列化行为冲突，我们将通过 getter/setter 或 AnyGetter 处理
     @JsonIgnore
@@ -87,6 +92,10 @@ public class YmSecurity implements Serializable {
 
     public boolean isCaptcha() {
         return Objects.nonNull(this.captcha) && this.captcha.isEnabled();
+    }
+
+    public boolean isAuthorization() {
+        return Objects.nonNull(this.authorization) && this.authorization.isEnabled();
     }
 
     public SecurityConfig extension(final SecurityType type) {
