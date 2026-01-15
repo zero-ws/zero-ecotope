@@ -2,7 +2,7 @@ package io.zerows.plugins.security.common;
 
 import io.r2mo.jaas.session.UserAt;
 import io.vertx.core.Future;
-import io.zerows.plugins.security.service.BasicLoginRequest;
+import io.zerows.plugins.security.basic.BasicLoginRequest;
 
 public interface AuthLoginStub {
 

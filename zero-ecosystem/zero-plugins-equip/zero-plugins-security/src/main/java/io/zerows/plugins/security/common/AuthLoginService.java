@@ -4,9 +4,9 @@ import cn.hutool.core.util.StrUtil;
 import io.r2mo.jaas.session.UserAt;
 import io.vertx.core.Future;
 import io.zerows.plugins.security.SecurityActor;
+import io.zerows.plugins.security.basic.BasicLoginRequest;
 import io.zerows.plugins.security.exception._80242Exception400CaptchaRequired;
 import io.zerows.plugins.security.metadata.YmSecurity;
-import io.zerows.plugins.security.service.BasicLoginRequest;
 import io.zerows.program.Ux;
 import io.zerows.support.Fx;
 

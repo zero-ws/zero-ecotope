@@ -6,10 +6,10 @@ import io.vertx.ext.auth.User;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.plugins.security.SecurityUser;
+import io.zerows.plugins.security.basic.BasicLoginRequest;
 import io.zerows.plugins.security.common.AuthLoginStub;
 import io.zerows.plugins.security.common.CaptchaStub;
 import io.zerows.plugins.security.exception._80216Exception403CaptchaProfile;
-import io.zerows.plugins.security.service.BasicLoginRequest;
 import io.zerows.support.Fx;
 import jakarta.inject.Inject;
 

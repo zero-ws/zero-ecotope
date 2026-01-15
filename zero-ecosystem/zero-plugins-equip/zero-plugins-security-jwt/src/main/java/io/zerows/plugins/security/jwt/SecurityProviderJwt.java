@@ -21,7 +21,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class SecurityProviderJwt implements SecurityProvider {
     @Override
-    public AuthenticationHandler configureHandler401(final Vertx vertxRef, final SecurityConfig config) {
+    public AuthenticationHandler configureHandler401(final Vertx vertxRef, final SecurityConfig config,
+                                                     final AuthenticationProvider authProvider) {
         final JsonObject options = config.options();
         final JWTAuth provider = (JWTAuth) this.configureProvider401(vertxRef, config);
         final String realm = Ut.valueString(options, YmSecuritySpec.jwt.options.realm);

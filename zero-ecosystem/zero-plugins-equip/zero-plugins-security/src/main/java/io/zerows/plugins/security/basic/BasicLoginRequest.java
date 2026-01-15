@@ -1,4 +1,4 @@
-package io.zerows.plugins.security.service;
+package io.zerows.plugins.security.basic;
 
 import cn.hutool.core.util.StrUtil;
 import io.r2mo.jaas.auth.LoginID;

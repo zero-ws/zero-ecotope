@@ -27,7 +27,8 @@ public interface SecurityProvider {
      */
     SecurityProvider SENTINEL = new SecurityProvider() {
         @Override
-        public AuthenticationHandler configureHandler401(final Vertx vertxRef, final SecurityConfig config) {
+        public AuthenticationHandler configureHandler401(final Vertx vertxRef, final SecurityConfig config,
+                                                         final AuthenticationProvider authProvider) {
             return null;
         }
 
@@ -41,7 +42,6 @@ public interface SecurityProvider {
      * {@link SPID} 中的值格式：Security/{securityType}，而且每种 SecurityType 对应唯一的实现类
      *
      * @param securityType 安全类型
-     *
      * @return 对应的安全扩展实现
      */
     static SecurityProvider of(final SecurityType securityType) {
@@ -59,7 +59,8 @@ public interface SecurityProvider {
         return cached == SENTINEL ? null : cached;
     }
 
-    AuthenticationHandler configureHandler401(Vertx vertxRef, SecurityConfig config);
+    AuthenticationHandler configureHandler401(Vertx vertxRef, SecurityConfig config,
+                                              AuthenticationProvider authProvider);
 
     AuthenticationProvider configureProvider401(Vertx vertxRef, SecurityConfig config);
 }

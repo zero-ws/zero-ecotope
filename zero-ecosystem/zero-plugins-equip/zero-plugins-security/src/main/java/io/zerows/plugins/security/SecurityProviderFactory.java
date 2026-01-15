@@ -3,23 +3,15 @@ package io.zerows.plugins.security;
 import io.r2mo.function.Fn;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Vertx;
-import io.vertx.ext.auth.ChainAuth;
 import io.vertx.ext.auth.authentication.AuthenticationProvider;
 import io.vertx.ext.web.handler.AuthenticationHandler;
 import io.vertx.ext.web.handler.AuthorizationHandler;
-import io.vertx.ext.web.handler.BasicAuthHandler;
 import io.vertx.ext.web.handler.ChainAuthHandler;
 import io.zerows.cosmic.plugins.security.exception._40080Exception500PreAuthentication;
 import io.zerows.epoch.annotations.Wall;
 import io.zerows.epoch.metadata.security.SecurityMeta;
-import io.zerows.platform.enums.SecurityType;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 构造核心的 Provider / Handler 的链式结构
@@ -52,29 +44,34 @@ class SecurityProviderFactory {
      *     1. 1 x 内置认证器（保证所有 {@link SecurityMeta} 中定义的 Type 是一致的
      *     2. N x 自定义认证器（保证所有 @Wall 中定义的认证方法都能被调用到）
      * </pre>
+     * 部分 Schema 中的 Provider 可以为空，但最终提供合并之后的 Provider 必须要一致，这样可以让 Provider 的创建
+     * 更加有意义，简单说 Handler 的创建必须依赖 Provider 来完成
      *
      * @param metaSet 安全元数据集合
-     *
      * @return 认证提供器
      */
     AuthenticationProvider providerOfAuthentication(final Set<SecurityMeta> metaSet) {
-        final ChainAuth chain = ChainAuth.all();
+        final SecurityProviderOr providerSet = this.providerOfCombine(metaSet);
+        return providerSet.providerAny();
+    }
+
+    private SecurityProviderOr providerOfCombine(final Set<SecurityMeta> metaSet) {
+        final SecurityProviderOr providerSet = new SecurityProviderOr();
         if (Objects.isNull(metaSet) || metaSet.isEmpty()) {
-            return chain;
+            return providerSet;
         }
         // 筛选一个出来做 401 Provider
         final SecurityMeta metaFirst = metaSet.iterator().next();
-        final AuthenticationProvider provider =
-            AuthenticationNative.createProvider(this.vertxRef, metaFirst);
+        final AuthenticationProvider provider = AuthenticationNative.createProvider(this.vertxRef, metaFirst);
         // 如果是 Basic 等，此处可能为空，为空则不加入链中，但后续有自定义认证器，所以创建 Handler 是无忧的
         if (Objects.nonNull(provider)) {
-            chain.add(provider);
+            providerSet.addOfVertx(provider);
         }
         // 自定义 401 Provider / 访问 @Wall 中的认证方法
         metaSet.stream().map(meta -> CC_PROVIDER_401.pick(
             () -> new AuthenticationCommonProvider(this.vertxRef, meta), meta.id(this.vertxRef))
-        ).forEach(chain::add);
-        return chain;
+        ).forEach(providerSet::addOfExtension);
+        return providerSet;
     }
 
 
@@ -82,19 +79,16 @@ class SecurityProviderFactory {
         // 前置 Handler 验证
         this.ensurePreHandler(metaSet);
         // 提取前置验证器
-        final ChainAuthHandler chain = ChainAuthHandler.all();
+        final ChainAuthHandler chain = ChainAuthHandler.any();
         if (metaSet.isEmpty()) {
             return null;
         }
         // 先构造 Provider
-        final AuthenticationProvider provider = this.providerOfAuthentication(metaSet);
+        final SecurityProviderOr securitySet = this.providerOfCombine(metaSet);
         // 提取第一个内置创建 Handler
         final SecurityMeta metaFirst = metaSet.iterator().next();
-        AuthenticationHandler handler =
-            AuthenticationNative.createHandler(this.vertxRef, metaFirst);
-        if (Objects.isNull(handler) && SecurityType.BASIC == metaFirst.getType()) {
-            handler = BasicAuthHandler.create(provider);
-        }
+        final AuthenticationHandler handler = AuthenticationNative
+            .createHandler(this.vertxRef, metaFirst, securitySet.providerOne(true));
         if (Objects.nonNull(handler)) {
             chain.add(handler);
         }
@@ -103,7 +97,7 @@ class SecurityProviderFactory {
         final List<SecurityMeta> sortedList = new ArrayList<>(metaSet);
         Collections.sort(sortedList);
         sortedList.stream().map(meta -> CC_HANDLER_401.pick(
-            () -> new AuthenticationCommonHandler(provider, meta),
+            () -> new AuthenticationCommonHandler(securitySet.providerAny(), meta),
             meta.id(this.vertxRef)
         )).forEach(chain::add);
         return chain;
@@ -117,7 +111,6 @@ class SecurityProviderFactory {
      * </pre>
      *
      * @param metaSet 安全元数据集合
-     *
      * @return 授权处理器
      */
     AuthorizationHandler handlerOfAuthorization(final Set<SecurityMeta> metaSet) {

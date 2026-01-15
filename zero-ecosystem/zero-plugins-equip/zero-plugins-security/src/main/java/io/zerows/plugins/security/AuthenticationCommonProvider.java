@@ -58,7 +58,12 @@ class AuthenticationCommonProvider implements AuthenticationProvider {
         if (Ut.isNil(session)) {
             return Future.failedFuture(new _401UnauthorizedException("[ PLUG ] 缺失认证会话信息！"));
         }
-        // 提取会话专用缓存
+        /*
+         * 会话缓存的提取
+         * - 加载缓存在认证的时候做
+         * - 写入缓存应该在登录接口中执行，简单说登录成功之后写入缓存，而并非在 Provider 验证的时候写入缓存
+         * 况且有一个特殊条件：Basic 认证模式下，登录接口并不存在
+         */
         final HMM<String, JsonObject> mmSession = HMM.of(session);
         return mmSession.find(KWeb.CACHE.User.AUTHENTICATE).compose(res -> {
             if (Ut.isNotNil(res)) {
@@ -69,33 +74,23 @@ class AuthenticationCommonProvider implements AuthenticationProvider {
 
 
             // 缓存中没有值，要重新认证
-            return this.userVerify(authJson).compose(verified -> {
-                if (!verified) {
+            return this.userVerify(authJson).compose(authorized -> {
+                if (Objects.isNull(authorized)) {
                     log.error("[ PLUG ] ( Secure ) 401 用户认证失败，session = {}", session);
                     return Future.failedFuture(new _401UnauthorizedException("[ PLUG ] 用户认证失败！"));
                 }
-
-
-                // 认证成功，写入缓存
-                log.info("[ PLUG ] ( Secure ) 401 用户认证成功，写入缓存，session = {}", session);
-                return mmSession.put(KWeb.CACHE.User.AUTHENTICATE, authJson)
-                    .compose(ignored -> Future.succeededFuture(User.create(authJson)));
+                return Future.succeededFuture(authorized);
             });
         });
     }
 
 
-    private Future<Boolean> userVerify(final JsonObject authJson) {
+    private Future<User> userVerify(final JsonObject authJson) {
         final WallExecutor executor = this.meta.getProxy();
         if (Objects.isNull(executor)) {
             return Future.failedFuture(new _401UnauthorizedException("[ PLUG ] 认证执行器未找到！"));
         }
-        return executor.authenticate(authJson).compose(res -> {
-            if (Objects.isNull(res)) {
-                return Future.succeededFuture(Boolean.FALSE);
-            }
-            return Future.succeededFuture(res);
-        });
+        return executor.authenticate(authJson);
     }
 
     private JsonObject valueCredentials(final Credentials credentials) {

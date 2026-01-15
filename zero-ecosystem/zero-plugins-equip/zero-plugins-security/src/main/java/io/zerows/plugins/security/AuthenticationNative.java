@@ -53,10 +53,11 @@ class AuthenticationNative {
         return Objects.isNull(provider) ? null : (T) provider.configureProvider401(vertxRef, config);
     }
 
-    static AuthenticationHandler createHandler(final Vertx vertxRef, final SecurityMeta meta) {
+    static AuthenticationHandler createHandler(final Vertx vertxRef, final SecurityMeta meta,
+                                               final AuthenticationProvider providerAuth) {
         final SecurityConfig config = SecurityManager.of().configOf(meta.getType(), vertxRef);
         final SecurityProvider provider = providerOf(vertxRef, meta);
-        return Objects.isNull(provider) ? null : provider.configureHandler401(vertxRef, config);
+        return Objects.isNull(provider) ? null : provider.configureHandler401(vertxRef, config, providerAuth);
     }
 
     private static SecurityProvider providerOf(final Vertx vertxRef, final SecurityMeta meta) {

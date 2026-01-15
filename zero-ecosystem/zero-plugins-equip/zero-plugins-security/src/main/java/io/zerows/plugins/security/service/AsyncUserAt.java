@@ -2,12 +2,22 @@ package io.zerows.plugins.security.service;
 
 import io.r2mo.jaas.auth.LoginRequest;
 import io.r2mo.jaas.session.UserAt;
+import io.r2mo.typed.cc.Cc;
+import io.r2mo.typed.enums.TypeLogin;
 import io.vertx.core.Future;
+import io.zerows.spi.HPI;
 
 /**
  * 根据 {@link LoginRequest} 执行不同加载逻辑，加载用户信息（异步版）
  */
 public interface AsyncUserAt {
+    Cc<String, AsyncUserAt> CC_SKELETON = Cc.openThread();
+
+    static AsyncUserAt of(final TypeLogin typeLogin) {
+        final String nameSPI = "UserAt/" + typeLogin.name();
+        return CC_SKELETON.pick(() -> HPI.findOneOf(AsyncUserAt.class), nameSPI);
+    }
+
     /**
      * 登录时专用加载用户信息专用接口，使用 Request 交换用户信息（访问数据库）
      *

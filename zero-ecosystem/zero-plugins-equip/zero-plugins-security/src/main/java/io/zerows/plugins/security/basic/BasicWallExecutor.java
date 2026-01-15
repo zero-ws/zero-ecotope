@@ -1,11 +1,10 @@
-package io.zerows.plugins.security.service;
+package io.zerows.plugins.security.basic;
 
-import io.vertx.core.Future;
+import io.r2mo.jaas.auth.LoginRequest;
 import io.vertx.core.json.JsonObject;
-import io.vertx.ext.auth.User;
 import io.zerows.epoch.annotations.Wall;
 import io.zerows.platform.enums.SecurityType;
-import io.zerows.sdk.security.WallExecutor;
+import io.zerows.plugins.security.service.AsyncWallExecutor;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -18,19 +17,10 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Wall(path = "/api/*", type = SecurityType.BASIC)
 @Slf4j
-public class BasicWallExecutor implements WallExecutor {
-    @Override
-    public Future<Boolean> authenticate(final JsonObject credentials) {
-        return null;
-    }
+public class BasicWallExecutor extends AsyncWallExecutor {
 
     @Override
-    public Future<JsonObject> authorize(final User user) {
-        return null;
-    }
-
-    @Override
-    public Future<JsonObject> resource(final JsonObject params) {
+    protected LoginRequest createRequest(final JsonObject credentials) {
         return null;
     }
 }
