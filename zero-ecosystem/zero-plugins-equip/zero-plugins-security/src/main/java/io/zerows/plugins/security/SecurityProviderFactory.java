@@ -3,6 +3,7 @@ package io.zerows.plugins.security;
 import io.r2mo.function.Fn;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Vertx;
+import io.vertx.ext.auth.ChainAuth;
 import io.vertx.ext.auth.authentication.AuthenticationProvider;
 import io.vertx.ext.web.handler.AuthenticationHandler;
 import io.vertx.ext.web.handler.AuthorizationHandler;
@@ -60,13 +61,16 @@ class SecurityProviderFactory {
         if (Objects.isNull(metaSet) || metaSet.isEmpty()) {
             return providerSet;
         }
-        // 筛选一个出来做 401 Provider
-        final SecurityMeta metaFirst = metaSet.iterator().next();
-        final AuthenticationProvider provider = AuthenticationNative.createProvider(this.vertxRef, metaFirst);
+        // 401 Provider 任意一个通过认证即可，复杂模式，Jwt / Basic 同时启用时非常有效
+        final ChainAuth chainAuth = ChainAuth.any();
+        metaSet.forEach(meta -> {
+            final AuthenticationProvider provider = AuthenticationNative.createProvider(this.vertxRef, meta);
+            if (Objects.nonNull(provider)) {
+                chainAuth.add(provider);
+            }
+        });
         // 如果是 Basic 等，此处可能为空，为空则不加入链中，但后续有自定义认证器，所以创建 Handler 是无忧的
-        if (Objects.nonNull(provider)) {
-            providerSet.addOfVertx(provider);
-        }
+        providerSet.addOfVertx(chainAuth);
         // 自定义 401 Provider / 访问 @Wall 中的认证方法
         metaSet.stream().map(meta -> CC_PROVIDER_401.pick(
             () -> new AuthenticationProviderOne(this.vertxRef, meta), meta.id(this.vertxRef))
