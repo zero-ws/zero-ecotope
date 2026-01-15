@@ -36,28 +36,29 @@ public class AxisSecure implements Axis {
     @Override
     public void mount(final RunServer server, final HBundle bundle) {
         /*
-         * Wall mounting for authorization
-         * Here create order set to remove duplicated order and re-generate the findRunning.
+         * 认证专用安全拦截器，Wall 带有 @Wall 注解的元数据信息，语义上是安全墙
+         * 此处执行流程：
+         * - 使用 Order 对 Handler 进行编排
+         * - 可支持多个 @Wall 注解在同一路径上并且共存
+         * - 支持 401 认证和 403 授权两种处理器
          *
-         * Default order: 0
-         *
-         * The matrix of wall
-         *
-         *      Wall 1           Wall 2             Wall 3
-         *      0                0                  0
-         *      1                1                  1
+         * Matrix 设计思想
+         *       Wall 1           Wall 2             Wall 3
+         *       0                0                  0
+         *       1                0                  1
+         *       0                1                  1
          */
         final ConcurrentMap<String, Set<SecurityMeta>> store = OCacheSecurity.entireWall();
         store.forEach((path, securityMeta) -> {
             if (!securityMeta.isEmpty()) {
                 /*
-                 * The handler of 401 of each group should be
-                 * 1. The path is the same
-                 * 2. If the `order = 0`, re-calculate to be sure not the same ( Orders.SECURE+ )
-                 * 3. Here are the set of Bolt
-                 * -- Empty: return null and skip
-                 * -- 1 size：return the single handler
-                 * -- n size: return the handler collection of ChainAuthHandler ( all )
+                 * 每一组 401 Provider：
+                 * - 每一组的 Provider 过滤的 path 是相同的
+                 * - 若 order = 0，则重新计算顺序，确保不冲突（ Orders.SECURE+ ）
+                 * 此处的执行集合会有三种：
+                 * - 空集合：返回 null，跳过
+                 * - 单一集合：返回单一 Handler
+                 * - 多元素集合：返回 ChainAuthHandler（全部）
                  */
                 // 构造 401 认证处理器
                 final ChainAuthHandler handler401 = this.provider.handlerOfAuthentication(server.refVertx(), securityMeta);
@@ -70,11 +71,11 @@ public class AxisSecure implements Axis {
 
 
                 /*
-                 * New design for 403 access issue here to implement RBAC mode
-                 * This design is optional plugin into zero system, you can enable this feature.
-                 * 403 access handler must be as following
-                 * 1. The uri is the same as 401, it means that the request must be passed to 401 handler first
-                 * 2. The order must be after 401 Orders.SECURE
+                 * 403 授权处理器设计说明
+                 * 1. 403 授权处理器必须在 401 认证处理器之后执行
+                 * 2. 403 授权处理器的路径必须和 401 认证处理器一致
+                 * 3. 403 授权处理器可以是单一处理器，也可以是链式处理器
+                 * 4. 403 授权处理器的执行顺序必须在 Orders.SECURE 之后
                  */
                 // 构造 403 授权处理器
                 final AuthorizationHandler handler403 = this.provider.handlerOfAuthorization(server.refVertx(), securityMeta);
@@ -84,9 +85,11 @@ public class AxisSecure implements Axis {
                         .failureHandler(EndurerAuthenticate.create());
                 }
                 if (IS_OUT.getAndSet(Boolean.FALSE)) {
-                    log.info("[ ZERO ] ( Secure ) \uD83D\uDD11 安全处理器选择：authenticate = {} / authorization = {}",
+                    log.info("[ ZERO ] ( Secure ) \uD83D\uDD11 安全处理器 {} / 选择：authenticate = {},authorization = {}",
+                        path,
                         Objects.isNull(handler401) ? null : handler401.getClass(),
-                        Objects.isNull(handler403) ? null : handler403.getClass());
+                        Objects.isNull(handler403) ? null : handler403.getClass()
+                    );
                 }
             }
         });

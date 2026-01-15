@@ -5,15 +5,19 @@ import io.vertx.ext.auth.authentication.AuthenticationProvider;
 import io.vertx.ext.web.handler.AuthenticationHandler;
 import io.zerows.epoch.metadata.security.SecurityConfig;
 import io.zerows.epoch.metadata.security.SecurityMeta;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * 内部 Provider 专用构造器，用于构造内部认证对应的 Provider 组件
  *
  * @author lang : 2025-10-29
  */
+@Slf4j
 class AuthenticationNative {
+    private static final AtomicBoolean IS_OUT = new AtomicBoolean(Boolean.TRUE);
 
     /**
      * 注意配置提取流程，此处配置提取流程主要是依赖 Provider / Consumer 的流程信息来处理
@@ -40,31 +44,36 @@ class AuthenticationNative {
      *
      * @param vertxRef Vertx 实例
      * @param meta     安全元信息
-     *
      * @return 认证提供者
      */
     @SuppressWarnings("unchecked")
     static <T extends AuthenticationProvider> T createProvider(final Vertx vertxRef, final SecurityMeta meta) {
         final SecurityConfig config = SecurityManager.of().configOf(meta.getType(), vertxRef);
-        if (Objects.isNull(config)) {
-            return null;
-        }
-        final SecurityProvider provider = SecurityProvider.of(config.type());
-        if (Objects.isNull(provider)) {
-            return null;
-        }
-        return (T) provider.configureProvider401(vertxRef, config);
+        final SecurityProvider provider = providerOf(vertxRef, meta);
+        return Objects.isNull(provider) ? null : (T) provider.configureProvider401(vertxRef, config);
     }
 
     static AuthenticationHandler createHandler(final Vertx vertxRef, final SecurityMeta meta) {
         final SecurityConfig config = SecurityManager.of().configOf(meta.getType(), vertxRef);
+        final SecurityProvider provider = providerOf(vertxRef, meta);
+        return Objects.isNull(provider) ? null : provider.configureHandler401(vertxRef, config);
+    }
+
+    private static SecurityProvider providerOf(final Vertx vertxRef, final SecurityMeta meta) {
+        final SecurityConfig config = SecurityManager.of().configOf(meta.getType(), vertxRef);
         if (Objects.isNull(config)) {
+            if (IS_OUT.getAndSet(Boolean.FALSE)) {
+                log.warn("[ PLUG ] ( Secure ) vertx.yml 配置缺失 / type = {}, 无法构造 SecurityProvider", meta.getType());
+            }
             return null;
         }
         final SecurityProvider provider = SecurityProvider.of(config.type());
         if (Objects.isNull(provider)) {
+            if (IS_OUT.getAndSet(Boolean.FALSE)) {
+                log.warn("[ PLUG ] ( Secure ) 未找到对应的 SecurityProvider / type = {}", config.type());
+            }
             return null;
         }
-        return provider.configureHandler401(vertxRef, config);
+        return provider;
     }
 }

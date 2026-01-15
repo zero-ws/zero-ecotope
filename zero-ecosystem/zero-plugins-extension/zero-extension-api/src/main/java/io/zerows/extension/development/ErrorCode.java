@@ -5,7 +5,7 @@ import io.r2mo.SourceError;
 public class ErrorCode {
 
     public static void main(final String[] args) {
-        SourceError.printExist(80241,
+        SourceError.printExist(80243,
             "io.zerows", "io.r2mo");
     }
 }

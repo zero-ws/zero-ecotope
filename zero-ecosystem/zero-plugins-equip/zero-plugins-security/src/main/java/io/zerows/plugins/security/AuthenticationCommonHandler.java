@@ -3,11 +3,13 @@ package io.zerows.plugins.security;
 import io.r2mo.typed.exception.WebException;
 import io.r2mo.typed.exception.web._401UnauthorizedException;
 import io.vertx.core.Future;
+import io.vertx.core.http.HttpServerRequest;
 import io.vertx.ext.auth.User;
 import io.vertx.ext.auth.authentication.AuthenticationProvider;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.impl.AuthenticationHandlerImpl;
 import io.zerows.epoch.metadata.security.SecurityMeta;
+import io.zerows.plugins.security.exception._80243Exception401NeedLogin;
 import io.zerows.sdk.security.WallExecutor;
 
 import java.util.Objects;
@@ -32,7 +34,9 @@ class AuthenticationCommonHandler extends AuthenticationHandlerImpl<Authenticati
          */
         final User user = context.user();
         if (Objects.isNull(user)) {
-            final WebException error = new _401UnauthorizedException("[ PLUG ] 权限不够！");
+            final HttpServerRequest request = context.request();
+            final String requestUri = request.method().name() + " " + request.uri();
+            final WebException error = new _80243Exception401NeedLogin(requestUri);
             return Future.failedFuture(error);
         }
 

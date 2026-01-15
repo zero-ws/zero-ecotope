@@ -6,7 +6,7 @@ import io.vertx.core.Future;
 import io.zerows.plugins.security.SecurityActor;
 import io.zerows.plugins.security.exception._80242Exception400CaptchaRequired;
 import io.zerows.plugins.security.metadata.YmSecurity;
-import io.zerows.plugins.security.service.UserLoginRequest;
+import io.zerows.plugins.security.service.BasicLoginRequest;
 import io.zerows.program.Ux;
 import io.zerows.support.Fx;
 
@@ -15,7 +15,7 @@ import java.util.Objects;
 public class AuthLoginService implements AuthLoginStub {
 
     @Override
-    public Future<UserLoginRequest> validateCaptcha(final UserLoginRequest request) {
+    public Future<BasicLoginRequest> validateCaptcha(final BasicLoginRequest request) {
         // 安全配置校验
         final YmSecurity security = SecurityActor.configuration();
         if (Objects.isNull(security)) {
@@ -36,7 +36,7 @@ public class AuthLoginService implements AuthLoginStub {
     }
 
     @Override
-    public Future<UserAt> login(final UserLoginRequest request) {
+    public Future<UserAt> login(final BasicLoginRequest request) {
         return null;
     }
 }

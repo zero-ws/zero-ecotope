@@ -27,15 +27,11 @@ public class EndurerAuthenticate implements Handler<RoutingContext> {
             final Throwable ex = event.failure();
             if (ex instanceof final WebException error) {
                 log.info("[ ZERO ] Web Exception: {} = {}", ex.getClass().getName(), ex.getMessage());
-                /*
-                 * XHeader bind
-                 */
                 Ux.debug(error, () -> error);
                 AckFlow.reply(event, Envelop.failure(error));
             } else {
                 // Other exception found
                 log.info("[ ZERO ] Exception: {} = {}", ex.getClass().getName(), ex.getMessage());
-                ex.printStackTrace();
                 AckFlow.reply(event, Envelop.failure(ex));
             }
         } else {

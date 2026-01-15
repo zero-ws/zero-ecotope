@@ -11,4 +11,5 @@ interface ERR {
     VertxE _80240 = VertxE.of(-80240).state(HttpResponseStatus.BAD_REQUEST);
     VertxE _80241 = VertxE.of(-80241).state(HttpResponseStatus.BAD_REQUEST);
     VertxE _80242 = VertxE.of(-80242).state(HttpResponseStatus.BAD_REQUEST);
+    VertxE _80243 = VertxE.of(-80243).state(HttpResponseStatus.UNAUTHORIZED);
 }

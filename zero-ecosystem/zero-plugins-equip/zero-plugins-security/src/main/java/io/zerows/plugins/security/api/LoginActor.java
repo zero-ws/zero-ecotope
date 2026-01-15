@@ -9,7 +9,7 @@ import io.zerows.plugins.security.SecurityUser;
 import io.zerows.plugins.security.common.AuthLoginStub;
 import io.zerows.plugins.security.common.CaptchaStub;
 import io.zerows.plugins.security.exception._80216Exception403CaptchaProfile;
-import io.zerows.plugins.security.service.UserLoginRequest;
+import io.zerows.plugins.security.service.BasicLoginRequest;
 import io.zerows.support.Fx;
 import jakarta.inject.Inject;
 
@@ -25,7 +25,7 @@ public class LoginActor {
     private AuthLoginStub loginStub;
 
     @Address(Addr.API_AUTH_LOGIN)
-    public Future<JsonObject> login(final UserLoginRequest request) {
+    public Future<JsonObject> login(final BasicLoginRequest request) {
 
         return request.requestValidated()// username, password 非空校验
             .compose(this.loginStub::validateCaptcha) // captcha / captchaId 可选非空校验

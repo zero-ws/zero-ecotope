@@ -14,7 +14,7 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class UserLoginRequest extends LoginRequest {
+public class BasicLoginRequest extends LoginRequest {
     public static final TypeLogin TYPE = TypeLogin.PASSWORD;
     private String username;
     private String password;
@@ -36,7 +36,7 @@ public class UserLoginRequest extends LoginRequest {
         return TYPE;
     }
 
-    public Future<UserLoginRequest> requestValidated() {
+    public Future<BasicLoginRequest> requestValidated() {
         if (StrUtil.isEmpty(this.username)) {
             return Fx.failOut(_80240Exception400UsernameRequired.class, LoginID.USERNAME);
         }
