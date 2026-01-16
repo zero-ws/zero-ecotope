@@ -11,6 +11,10 @@ import java.util.concurrent.ConcurrentMap;
  * <p>用于标识系统采用的认证 / 鉴权“墙”的类型。</p>
  */
 public enum SecurityType {
+    BASIC("basic"),        // 🔐 基本认证（Basic Auth）
+    JWT("jwt"),            // 🪪 基于 JWT 的无状态认证
+    LDAP("ldap"),          // 🗂️ LDAP 目录认证
+    OTP("otp"),            // ⏱️ 一次性口令（TOTP/HOTP）
     /*
      * 🧱 Zero 框架内置模式
      * 🔑 与配置文件中的 `rules` 键关联
@@ -19,11 +23,7 @@ public enum SecurityType {
      * 🧩 在 `provider/handler` 目录下提供了若干可复用模板
      */
     NONE("none"),          // 🚪 无认证（开放访问）
-    BASIC("basic"),        // 🔐 基本认证（Basic Auth）
-    JWT("jwt"),            // 🪪 基于 JWT 的无状态认证
     OAUTH2("oauth2"),      // 🌐 OAuth2 / OIDC 认证
-    LDAP("ldap"),          // 🗂️ LDAP 目录认证
-    OTP("otp"),            // ⏱️ 一次性口令（TOTP/HOTP）
     ABAC("abac"),          // 📏 基于属性的访问控制（ABAC）
     HT_PASSWD("htpasswd"), // 📄 Apache htpasswd 文件认证
     HT_DIGEST("htdigest"), // 📑 Apache htdigest 摘要认证
@@ -41,7 +41,9 @@ public enum SecurityType {
         Arrays.stream(SecurityType.values()).forEach(wall -> TYPE_MAP.put(wall.key(), wall));
     }
 
-    /** 🗝️ 对应配置中的键名（config key） */
+    /**
+     * 🗝️ 对应配置中的键名（config key）
+     */
     private transient final String configKey;
 
     SecurityType(final String configKey) {
@@ -52,7 +54,6 @@ public enum SecurityType {
      * 🔎 根据配置键名解析枚举
      *
      * @param configKey 配置中的键名
-     *
      * @return 命中的 SecurityType；未命中则返回 null
      */
     public static SecurityType from(final String configKey) {

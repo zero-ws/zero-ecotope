@@ -48,7 +48,7 @@ public class JwtSecurityProvider implements SecurityProvider {
         }
         final JsonObject options = config.options();
         if (IS_LOG.getAndSet(Boolean.FALSE)) {
-            log.info("🔐 / 启用JWT：{}", options.encode());
+            log.info("[ PLUG ] 🔐 / 启用JWT：{}", options.encode());
         }
         final JWTAuthOptions jwtOptions = new JWTAuthOptions(options);
         return CC_PROVIDER_401.pick(

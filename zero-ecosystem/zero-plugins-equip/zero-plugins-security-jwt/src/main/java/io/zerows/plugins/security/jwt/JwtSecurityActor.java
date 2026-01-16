@@ -25,7 +25,7 @@ public class JwtSecurityActor extends AbstractHActor {
         if (!isEnabled) {
             return Future.succeededFuture(Boolean.TRUE);
         }
-        this.vLog("[ Security ] JwtSecurityActor 初始化完成，配置：{}", config);
+        this.vLog("[ Security ] JWT / SecurityActor 初始化完成，配置：{}", config);
 
         TokenBuilderManager.of().registry(TokenType.JWT, JwtTokenBuilder::new);
         return Future.succeededFuture(Boolean.TRUE);
