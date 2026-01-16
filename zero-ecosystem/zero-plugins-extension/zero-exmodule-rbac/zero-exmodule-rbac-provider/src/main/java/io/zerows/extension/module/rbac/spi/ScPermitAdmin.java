@@ -3,6 +3,7 @@ package io.zerows.extension.module.rbac.spi;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.web.Account;
 import io.zerows.extension.module.rbac.component.ScClock;
 import io.zerows.extension.module.rbac.component.ScClockFactory;
 import io.zerows.extension.module.rbac.metadata.ScToken;
@@ -27,7 +28,7 @@ public class ScPermitAdmin implements ScPermit {
             return Ux.futureF();
         }
         // 拆分出来的 token 信息
-        final JsonObject extract = Ux.userToken(token);
+        final JsonObject extract = Account.userToken(token);
 
         // token / user
         final String user = extract.getString(KName.USER);

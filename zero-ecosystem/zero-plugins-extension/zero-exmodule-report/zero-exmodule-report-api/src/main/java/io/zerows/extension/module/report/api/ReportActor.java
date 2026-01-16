@@ -9,13 +9,13 @@ import io.vertx.ext.auth.User;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.web.Account;
 import io.zerows.extension.module.report.common.em.EmReport;
 import io.zerows.extension.module.report.exception._80700Exception400QueryParameter;
 import io.zerows.extension.module.report.exception._80701Exception404ReportMissing;
 import io.zerows.extension.module.report.servicespec.ReportInstanceStub;
 import io.zerows.extension.module.report.servicespec.ReportStub;
 import io.zerows.platform.constant.VName;
-import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import jakarta.inject.Inject;
 
@@ -45,7 +45,7 @@ public class ReportActor {
             // ERR-80701
             return FnVertx.failOut(_80701Exception404ReportMissing.class, reportId);
         }
-        final String userKey = Ux.userId(user);
+        final String userKey = Account.userId(user);
         query.put(KName.USER, userKey);
         return this.reportStub.buildInstance(reportId, query);
     }
@@ -55,7 +55,7 @@ public class ReportActor {
                                            final JsonObject data,
                                            final User user) {
         final JsonObject saveData = data.copy();
-        saveData.put(KName.CREATED_BY, Ux.userId(user));
+        saveData.put(KName.CREATED_BY, Account.userId(user));
         saveData.put(KName.CREATED_AT, Instant.now());
         saveData.put(KName.ACTIVE, Boolean.TRUE);
         saveData.put(KName.STATUS, EmReport.UcaStatus.ACTIVE.name());

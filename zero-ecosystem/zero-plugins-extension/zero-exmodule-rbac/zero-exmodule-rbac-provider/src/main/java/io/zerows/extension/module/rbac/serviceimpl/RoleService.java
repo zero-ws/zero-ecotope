@@ -6,6 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.epoch.store.jooq.DB;
+import io.zerows.epoch.web.Account;
 import io.zerows.extension.module.rbac.boot.MDRBACManager;
 import io.zerows.extension.module.rbac.common.ScAuthKey;
 import io.zerows.extension.module.rbac.domain.tables.daos.RRolePermDao;
@@ -80,7 +81,7 @@ public class RoleService implements RoleStub {
         view.setLanguage(role.getLanguage());
         view.setActive(true);
         view.setCreatedAt(LocalDateTime.now());
-        view.setCreatedBy(Ux.userId(user));
+        view.setCreatedBy(Account.userId(user));
 
         return DB.on(SViewDao.class).insertAsync(view).mapEmpty();
     }

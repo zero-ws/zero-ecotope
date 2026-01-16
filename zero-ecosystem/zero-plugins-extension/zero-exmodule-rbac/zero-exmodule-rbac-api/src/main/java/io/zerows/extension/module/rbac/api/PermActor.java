@@ -9,6 +9,7 @@ import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.XHeader;
 import io.zerows.epoch.store.jooq.DB;
+import io.zerows.epoch.web.Account;
 import io.zerows.extension.module.rbac.domain.tables.daos.RRolePermDao;
 import io.zerows.extension.module.rbac.domain.tables.pojos.SPermSet;
 import io.zerows.extension.module.rbac.servicespec.PermStub;
@@ -101,7 +102,7 @@ public class PermActor {
         final JsonArray removed = Ut.valueJArray(processed.getJsonArray("removed"));
         final JsonObject relation = Ut.valueJObject(processed.getJsonObject("relation"));
 
-        final String userKey = Ux.userId(user);
+        final String userKey = Account.userId(user);
 
         // SPermSet
         final SPermSet permSet = new SPermSet();
@@ -156,7 +157,7 @@ public class PermActor {
 
     @Address(Addr.Perm.DELETE)
     public Future<Boolean> delete(final String key, final User user) {
-        final String userKey = Ux.userId(user);
+        final String userKey = Account.userId(user);
         return this.stub.deleteAsync(key, userKey);
     }
 }

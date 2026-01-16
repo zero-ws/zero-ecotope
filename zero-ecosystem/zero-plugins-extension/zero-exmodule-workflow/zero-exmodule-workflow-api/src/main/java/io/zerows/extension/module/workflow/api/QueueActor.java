@@ -7,8 +7,8 @@ import io.vertx.ext.auth.User;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.metadata.XHeader;
 import io.zerows.epoch.store.jooq.DB;
+import io.zerows.epoch.web.Account;
 import io.zerows.extension.module.workflow.component.camunda.Io;
 import io.zerows.extension.module.workflow.component.transition.Vm;
 import io.zerows.extension.module.workflow.domain.tables.daos.WTicketDao;
@@ -31,6 +31,7 @@ import static io.zerows.extension.module.workflow.boot.Wf.LOG;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 @Queue
+@SuppressWarnings("all")
 public class QueueActor {
     @Inject
     private transient FlowStub flowStub;
@@ -129,14 +130,14 @@ public class QueueActor {
     }
 
     @Address(HighWay.Flow.BY_CODE)
-    public Future<JsonObject> fetchFlow(final String code, final XHeader header) {
-        final String sigma = header.getSigma();
+    public Future<JsonObject> fetchFlow(final String code, final io.zerows.epoch.metadata.XHeader header) {
+        final String sigma = header.toJson().getString(KName.SIGMA);
         return this.flowStub.fetchFlow(code, sigma);
     }
 
     @Address(HighWay.Queue.TASK_FORM)
     public Future<JsonObject> fetchForm(final JsonObject data,
-                                        final Boolean isPre, final XHeader header) {
+                                        final Boolean isPre, final io.zerows.epoch.metadata.XHeader header) {
         // 「Predicate Checking」ProcessDefinition must be existing here
         final String definitionId = data.getString(KName.Flow.DEFINITION_ID);
         final Io<Task> ioTask = Io.ioTask();
@@ -146,7 +147,7 @@ public class QueueActor {
         }
 
 
-        final String sigma = header.getSigma();
+        final String sigma = header.toJson().getString(KName.SIGMA);
         if (isPre) {
             // 「Start」
             return this.flowStub.fetchForm(definition, sigma);
@@ -177,7 +178,7 @@ public class QueueActor {
 
     @Address(HighWay.Flow.BY_TODO)
     public Future<JsonObject> fetchTodo(final String key, final User user) {
-        final String userId = Ux.userId(user);
+        final String userId = Account.userId(user);
         return this.taskStub.readPending(key, userId);
     }
 

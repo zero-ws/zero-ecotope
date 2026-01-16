@@ -10,10 +10,10 @@ import io.zerows.epoch.annotations.Me;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.XHeader;
+import io.zerows.epoch.web.Account;
 import io.zerows.extension.module.ambient.servicespec.DocBStub;
 import io.zerows.extension.module.ambient.servicespec.DocRStub;
 import io.zerows.extension.module.ambient.servicespec.DocWStub;
-import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import jakarta.inject.Inject;
 
@@ -66,7 +66,7 @@ public class DocActor {
 
     @Address(Addr.File.RENAME)
     public Future<JsonObject> rename(final JsonObject documentJ, final User user) {
-        final String userKey = Ux.userId(user);
+        final String userKey = Account.userId(user);
         documentJ.put(KName.UPDATED_BY, userKey);
         return this.writer.rename(documentJ);
     }
@@ -79,7 +79,7 @@ public class DocActor {
 
     @Address(Addr.Doc.DOCUMENT_TRASH)
     public Future<JsonArray> trashIn(final JsonArray documentA, final User user) {
-        final String userKey = Ux.userId(user);
+        final String userKey = Account.userId(user);
         Ut.itJArray(documentA).forEach(document -> document.put(KName.UPDATED_BY, userKey));
         return this.writer.trashIn(documentA);
     }
@@ -91,7 +91,7 @@ public class DocActor {
 
     @Address(Addr.Doc.DOCUMENT_ROLLBACK)
     public Future<JsonArray> trashOut(final JsonArray documentA, final User user) {
-        final String userKey = Ux.userId(user);
+        final String userKey = Account.userId(user);
         Ut.itJArray(documentA).forEach(document -> document.put(KName.UPDATED_BY, userKey));
         return this.writer.trashOut(documentA);
     }

@@ -5,6 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 import io.zerows.epoch.metadata.KField;
+import io.zerows.epoch.web.Account;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.crud.uca.IxMod;
 import io.zerows.mbse.metadata.KModule;
@@ -30,7 +31,7 @@ class PreAuditUpdatePre extends PreAuditAction {
         final User user = envelop.user();
         final KModule module = in.module();
         if (Objects.nonNull(user)) {
-            final String userId = Ux.userId(user);
+            final String userId = Account.userId(user);
             if (Ut.isNotNil(userId)) {
                 final KField field = module.getField();
                 /* Created */

@@ -12,6 +12,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.KView;
 import io.zerows.epoch.metadata.XHeader;
 import io.zerows.epoch.store.jooq.DB;
+import io.zerows.epoch.web.Account;
 import io.zerows.extension.module.rbac.common.ScOwner;
 import io.zerows.extension.module.rbac.domain.tables.daos.SPathDao;
 import io.zerows.extension.module.rbac.domain.tables.pojos.SPath;
@@ -101,7 +102,7 @@ public class RuleActor {
          *     }
          * }
          */
-        final String userKey = Ux.userId(user);
+        final String userKey = Account.userId(user);
         // CODE = ? AND SIGMA = ?
         final JsonObject condition = Ux.whereAnd();
         condition.put(KName.SIGMA, Ut.valueString(viewData, KName.SIGMA));

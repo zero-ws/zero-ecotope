@@ -9,6 +9,7 @@ import io.zerows.epoch.metadata.MMAdapt;
 import io.zerows.epoch.metadata.UArray;
 import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.epoch.store.jooq.DB;
+import io.zerows.epoch.web.Account;
 import io.zerows.platform.constant.VName;
 import io.zerows.program.Ux;
 import io.zerows.spi.HPI;
@@ -43,7 +44,7 @@ class KeEnv {
 
     static void auditJ(final JsonObject body, final User user) {
         if (Ut.isNotNil(body) && Objects.nonNull(user)) {
-            final String key = Ux.userId(user);
+            final String key = Account.userId(user);
             if (Ut.isNotNil(key)) {
                 body.put(KName.CREATED_BY, key);
                 body.put(KName.CREATED_AT, Instant.now());

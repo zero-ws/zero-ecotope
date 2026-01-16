@@ -1,18 +1,11 @@
 package io.zerows.program;
 
-import io.r2mo.jaas.session.UserAt;
-import io.r2mo.jaas.session.UserContext;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.shareddata.ClusterSerializable;
-import io.vertx.ext.auth.User;
-import io.vertx.ext.auth.authentication.Credentials;
-import io.vertx.ext.web.Session;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.web.Account;
 import io.zerows.platform.constant.VString;
-import io.zerows.platform.enums.SecurityType;
 import io.zerows.specification.modeling.HRecord;
 import io.zerows.support.Ut;
 
@@ -258,60 +251,7 @@ public final class Ux extends _Where {
     }
 
 
-    // --------------- Future of Map -----------------
-    public static String userId(final User user) {
-        return Account.userId(user);
-    }
-
     // NEW BEGIN -------------------------------------------------
-    // 新版用户相关的 API
-    public static UserAt userAt() {
-        return Account.userAt();
-    }
-
-    public static UserAt userAt(final User user) {
-        return Account.userAt(user);
-    }
-
-    public static UserContext userContext() {
-        return Account.userContext();
-    }
-
-    public static JsonObject userData(final Credentials credentials) {
-        return Account.userData(credentials);
-    }
-
-    public static JsonObject userToken(final String token) {
-        return Account.userToken(token);
-    }
-
-    public static JsonObject userToken(final String token, final SecurityType type) {
-        return Account.userToken(token, type);
-    }
-
-    public static String userToken(final JsonObject tokenData) {
-        return Account.userToken(tokenData);
-    }
-
-    public static String userToken(final String token, final String field) {
-        return Account.userToken(token, field);
-    }
-
-    public static User userVx(final UserAt userAt) {
-        return Account.userVx(userAt);
-    }
-
-    public static User userVx(final User user, final Session session) {
-        return Account.userVx(user, session);
-    }
-
-    public static String userId() {
-        return Account.userId(false);
-    }
-
-    public static <T> T userId(final boolean isUuid) {
-        return Account.userId(isUuid);
-    }
 
     // 暴露异步方法
     public static <T> Future<T> waitAsync(Supplier<T> executor) {

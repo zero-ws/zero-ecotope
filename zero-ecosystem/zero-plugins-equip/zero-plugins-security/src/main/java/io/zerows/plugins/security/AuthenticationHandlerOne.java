@@ -8,8 +8,8 @@ import io.vertx.ext.auth.authentication.AuthenticationProvider;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.impl.AuthenticationHandlerImpl;
 import io.zerows.epoch.metadata.security.SecurityMeta;
+import io.zerows.epoch.web.Account;
 import io.zerows.plugins.security.exception._80243Exception401NeedLogin;
-import io.zerows.program.Ux;
 
 import java.util.Objects;
 
@@ -48,7 +48,7 @@ class AuthenticationHandlerOne extends AuthenticationHandlerImpl<AuthenticationP
          * - 分发即可
          * 所以此处暂时保留，若后续需要在 Handler 中进行额外的处理，可以在此处添加逻辑
          */
-        final User logged = Ux.userVx(user, context.session());
+        final User logged = Account.userVx(user, context.session());
         return Future.succeededFuture(logged);
     }
 }

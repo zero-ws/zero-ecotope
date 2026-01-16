@@ -12,8 +12,8 @@ import io.vertx.ext.auth.authentication.UsernamePasswordCredentials;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.metadata.security.SecurityMeta;
+import io.zerows.epoch.web.Account;
 import io.zerows.plugins.cache.HMM;
-import io.zerows.program.Ux;
 import io.zerows.sdk.security.WallExecutor;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
@@ -53,7 +53,7 @@ class AuthenticationProviderOne implements AuthenticationProvider {
     @Override
     public Future<User> authenticate(final Credentials credentials) {
         // Fix-AUTH-001 提取不同的认证信息
-        final JsonObject authJson = Ux.userData(credentials);
+        final JsonObject authJson = Account.userData(credentials);
         // 提取缓存信息
         final String session = Ut.valueString(authJson, KName.SESSION);
         if (Ut.isNil(session)) {

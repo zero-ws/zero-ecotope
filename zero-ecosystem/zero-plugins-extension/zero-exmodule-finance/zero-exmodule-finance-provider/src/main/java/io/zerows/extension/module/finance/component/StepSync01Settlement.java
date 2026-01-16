@@ -7,9 +7,9 @@ import io.vertx.ext.auth.User;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.epoch.store.jooq.DB;
+import io.zerows.epoch.web.Account;
 import io.zerows.extension.module.finance.domain.tables.daos.FSettlementDao;
 import io.zerows.extension.module.finance.domain.tables.pojos.FSettlement;
-import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
 import java.time.LocalDateTime;
@@ -66,7 +66,7 @@ class StepSync01Settlement implements Step<User, FSettlement> {
         final LocalDateTime nowAt = LocalDateTime.now();
         settlement.setFinished(Boolean.TRUE);
         settlement.setFinishedAt(nowAt);
-        settlement.setUpdatedBy(Ux.userId(user));
+        settlement.setUpdatedBy(Account.userId(user));
         settlement.setUpdatedAt(nowAt);
     }
 }
