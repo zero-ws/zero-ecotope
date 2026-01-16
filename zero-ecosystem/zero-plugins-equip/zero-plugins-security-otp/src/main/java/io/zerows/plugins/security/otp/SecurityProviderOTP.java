@@ -20,10 +20,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class SecurityProviderOTP implements SecurityProvider {
     @Override
-    public AuthenticationHandler configureHandler401(final Vertx vertxRef, final SecurityConfig config) {
-        final HotpAuth provider = (HotpAuth) this.configureProvider401(vertxRef, config);
+    public AuthenticationHandler configureHandler401(final Vertx vertxRef, final SecurityConfig config,
+                                                     final AuthenticationProvider authProvider) {
         return CC_HANDLER_401.pick(
-            () -> OtpAuthHandler.create(provider),
+            () -> OtpAuthHandler.create((HotpAuth) authProvider),
             String.valueOf(config.hashCode())
         );
     }

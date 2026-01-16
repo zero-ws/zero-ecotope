@@ -3,6 +3,7 @@ package io.zerows.plugins.security;
 import io.vertx.ext.auth.User;
 import io.vertx.ext.auth.authorization.Authorization;
 import io.vertx.ext.auth.authorization.AuthorizationContext;
+import io.zerows.plugins.security.metadata.YmSecurity;
 
 import java.util.Objects;
 import java.util.Set;
@@ -15,6 +16,7 @@ import java.util.stream.Collectors;
  */
 class ProfileAuthorizationImpl implements ProfileAuthorization {
     private final ConcurrentMap<String, Set<String>> permissionMap = new ConcurrentHashMap<>();
+    private final YmSecurity security = SecurityActor.configuration();
 
     ProfileAuthorizationImpl(final ConcurrentMap<String, Set<String>> permissionMap) {
         Objects.requireNonNull(permissionMap);
@@ -33,6 +35,10 @@ class ProfileAuthorizationImpl implements ProfileAuthorization {
 
     @Override
     public boolean match(final AuthorizationContext context) {
+        if (!this.security.isAuthorization()) {
+            // 如果授权没打开直接返回 true，跳过授权
+            return true;
+        }
         Objects.requireNonNull(context);
         final User user = context.user();
         if (user != null) {
@@ -44,6 +50,10 @@ class ProfileAuthorizationImpl implements ProfileAuthorization {
 
     @Override
     public boolean verify(final Authorization otherAuthorization) {
+        if (!this.security.isAuthorization()) {
+            // 如果授权没打开直接返回 true，跳过授权
+            return true;
+        }
         Objects.requireNonNull(otherAuthorization);
         if (!(otherAuthorization instanceof final ProfileAuthorization profileAuthorization)) {
             return false;

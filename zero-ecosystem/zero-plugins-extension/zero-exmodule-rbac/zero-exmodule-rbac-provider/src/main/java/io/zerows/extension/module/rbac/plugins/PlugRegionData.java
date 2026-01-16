@@ -8,11 +8,12 @@ import io.zerows.cortex.extension.AbstractRegion;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.module.rbac.boot.Sc;
+import io.zerows.extension.module.rbac.common.ScAuthMsg;
 import io.zerows.extension.module.rbac.component.acl.region.CommonCosmo;
 import io.zerows.extension.module.rbac.component.acl.region.Cosmo;
 import io.zerows.extension.module.rbac.component.acl.region.SeekCosmo;
-import io.zerows.extension.module.rbac.common.ScAuthMsg;
 import io.zerows.program.Ux;
+import io.zerows.support.Fx;
 
 /*
  * Extension in RBAC module
@@ -44,7 +45,7 @@ public class PlugRegionData extends AbstractRegion {
                  */
                 return Ux.future(envelop);
             }
-        }).otherwise(Ux.otherwise(envelop));
+        }).otherwise(Fx.otherwiseFn(() -> envelop));
     }
 
     @Override
@@ -69,7 +70,7 @@ public class PlugRegionData extends AbstractRegion {
                  */
                 return Ux.future(response);
             }
-        }).otherwise(Ux.otherwise(response));
+        }).otherwise(Fx.otherwiseFn(() -> response));
     }
 
     private Cosmo cosmo(final JsonObject matrix) {

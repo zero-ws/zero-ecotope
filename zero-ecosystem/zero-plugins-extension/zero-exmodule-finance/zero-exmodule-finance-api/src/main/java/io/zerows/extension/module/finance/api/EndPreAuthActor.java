@@ -7,6 +7,7 @@ import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.DB;
+import io.zerows.epoch.web.Account;
 import io.zerows.extension.module.finance.common.FmConstant;
 import io.zerows.extension.module.finance.domain.tables.daos.FPreAuthorizeDao;
 import io.zerows.extension.module.finance.domain.tables.pojos.FPreAuthorize;
@@ -25,7 +26,7 @@ public class EndPreAuthActor {
     @Address(Addr.Settle.UNLOCK_AUTHORIZE)
     public Future<JsonArray> unlockAuthorize(final JsonArray authorized, final User user) {
         // Authorized Modification
-        final String userKey = Ux.keyUser(user);
+        final String userKey = Account.userId(user);
         Ut.itJArray(authorized).forEach(json -> {
             json.put(KName.UPDATED_AT, Instant.now());
             json.put(KName.UPDATED_BY, userKey);

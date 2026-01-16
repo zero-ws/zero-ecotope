@@ -7,6 +7,7 @@ import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.DB;
+import io.zerows.epoch.web.Account;
 import io.zerows.extension.module.ambient.domain.tables.daos.XAttachmentDao;
 import io.zerows.extension.skeleton.common.enums.FileStatus;
 import io.zerows.program.Ux;
@@ -26,7 +27,7 @@ public class FileActor {
         final JsonObject qrDefault = Ux.whereAnd();
         qrDefault.put(KName.STATUS, FileStatus.DONE.name());
         qrDefault.put(KName.ACTIVE, Boolean.TRUE);
-        qrDefault.put(KName.CREATED_BY, Ux.keyUser(user));
+        qrDefault.put(KName.CREATED_BY, Account.userId(user));
         final JsonObject qrCombine = Ut.irAndQH(query, "$DFT$", qrDefault);
         return DB.on(XAttachmentDao.class).searchJAsync(qrCombine);
     }

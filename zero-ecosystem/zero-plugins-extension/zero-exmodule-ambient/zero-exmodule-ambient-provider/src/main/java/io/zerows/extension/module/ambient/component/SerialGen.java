@@ -5,10 +5,11 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.epoch.store.jooq.DB;
+import io.zerows.extension.module.ambient.boot.At;
 import io.zerows.extension.module.ambient.domain.tables.daos.XNumberDao;
 import io.zerows.extension.module.ambient.domain.tables.pojos.XNumber;
-import io.zerows.extension.module.ambient.boot.At;
 import io.zerows.program.Ux;
+import io.zerows.support.Fx;
 
 import java.util.Objects;
 
@@ -36,7 +37,7 @@ public class SerialGen implements Serial {
                         final XNumber processed = At.serialAdjust(number, count);
                         return jq.updateAsync(processed)
                             .compose(nil -> Ux.future(new JsonArray(generated)));
-                    }).otherwise(Ux.otherwise(JsonArray::new));
+                    }).otherwise(Fx.otherwiseFn(JsonArray::new));
                 }
             });
         }

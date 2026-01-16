@@ -4,7 +4,6 @@ import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.LogO;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.module.report.common.RpConstant;
 import io.zerows.extension.module.report.common.em.EmReport;
@@ -63,17 +62,12 @@ public interface DataSet {
      *
      * @param params 读取参数
      * @param queryJ 查询配置
-     *
      * @return 返回读取的数据
      */
     Future<JsonArray> loadAsync(JsonObject params, JsonObject queryJ);
 
     default Future<JsonArray> loadAsync(final JsonObject params) {
         return this.loadAsync(params, null);
-    }
-
-    default LogO logger() {
-        return Ut.Log.database(this.getClass());
     }
 
     interface Tool {
@@ -88,7 +82,7 @@ public interface DataSet {
         }
 
         static Future<JsonArray> outputArray(final JsonObject params, final KpDataSet dataSet) {
-            /**
+            /*
              * 先分流 不能二义性
              *
              */
@@ -104,9 +98,9 @@ public interface DataSet {
                     parameters.put(KName.INPUT, params);
                     return queryComponent.dataAsync(dataSouce, parameters).compose(result -> {
                         if (Objects.isNull(result)) {
-                            return Ut.future(dataSouce);
+                            return Future.succeededFuture(dataSouce);
                         }
-                        return Ut.future(result);
+                        return Future.succeededFuture(result);
                     });
                 });
             }

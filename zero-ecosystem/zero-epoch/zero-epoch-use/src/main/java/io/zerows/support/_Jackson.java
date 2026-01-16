@@ -70,7 +70,7 @@ class _Jackson extends _It {
     }
 
     public static <T> JsonObject toJson(final T entity) {
-        return Json.toJObject(entity, "");
+        return Json.toJObject(entity);
     }
 
     public static <T> JsonObject toJson(final T entity, final String pojo) {
@@ -78,7 +78,7 @@ class _Jackson extends _It {
     }
 
     public static <T> JsonArray toJson(final List<T> list) {
-        return Json.toJArray(list, "");
+        return Json.toJArray(list);
     }
 
     public static <T> JsonArray toJson(final List<T> list, final String pojo) {

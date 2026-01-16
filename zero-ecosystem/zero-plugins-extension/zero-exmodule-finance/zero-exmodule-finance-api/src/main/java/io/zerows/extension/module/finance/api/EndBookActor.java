@@ -7,6 +7,7 @@ import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.DB;
+import io.zerows.epoch.web.Account;
 import io.zerows.extension.module.finance.domain.tables.daos.FBookDao;
 import io.zerows.extension.module.finance.domain.tables.pojos.FBook;
 import io.zerows.program.Ux;
@@ -24,7 +25,7 @@ public class EndBookActor {
     @Address(Addr.Settle.UP_BOOK)
     public Future<JsonArray> finalizeBook(final JsonArray books, final User user) {
         // Book Finalize ( Not Settlement )
-        final String userKey = Ux.keyUser(user);
+        final String userKey = Account.userId(user);
         Ut.itJArray(books).forEach(json -> {
             json.put(KName.UPDATED_AT, Instant.now());
             json.put(KName.UPDATED_BY, userKey);

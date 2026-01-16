@@ -3,7 +3,6 @@ package io.zerows.plugins.store.neo4j.sync;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.support.Ut;
 import io.zerows.plugins.store.neo4j.AbstractN4JSession;
 import io.zerows.plugins.store.neo4j.refine.N4J;
 import org.neo4j.driver.Session;
@@ -128,7 +127,7 @@ public class N4JSession extends AbstractN4JSession {
             commands.add(N4J.graphicReset(this.graph));
             return commands;
         });
-        return Ut.futureT();
+        return Future.succeededFuture(Boolean.TRUE);
     }
 
     @Override

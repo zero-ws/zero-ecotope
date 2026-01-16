@@ -10,8 +10,8 @@ import io.vertx.ext.stomp.ServerFrame;
 import io.vertx.ext.stomp.StompServerConnection;
 import io.vertx.ext.stomp.StompServerHandler;
 import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.web.Account;
 import io.zerows.plugins.websocket.stomp.socket.ServerWsHandler;
-import io.zerows.sdk.security.Token;
 import io.zerows.support.Ut;
 import jakarta.ws.rs.core.HttpHeaders;
 
@@ -109,7 +109,10 @@ class FrameConnector extends AbstractFrameHandler {
          * Token 验证流程，处理 401 基础验证信息
          */
         final String tokenString = authorization.split(" ")[1];
-        final JsonObject token = Token.decode(tokenString, this.config.getType());
+        final JsonObject token = Account.userToken(tokenString, this.config.getType());
+        if (Objects.isNull(token)) {
+            return new JsonObject();
+        }
         final JsonObject request = token.copy();
         request.put(KName.ACCESS_TOKEN, tokenString);
         request.put(KName.TOKEN, tokenString);

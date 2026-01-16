@@ -45,4 +45,16 @@ public class SecurityConfig implements Serializable {
         Optional.ofNullable(options)
             .ifPresent(optionOpt -> this.options.mergeIn(optionOpt, true));
     }
+
+    public <T> T option(final String field) {
+        return this.option(field, null);
+    }
+
+    @SuppressWarnings("unchecked")
+    public <T> T option(final String field, final T defaultValue) {
+        if (!this.options.containsKey(field)) {
+            return defaultValue;
+        }
+        return (T) this.options.getValue(field);
+    }
 }

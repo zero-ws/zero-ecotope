@@ -20,7 +20,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class SecurityProviderHtDigest implements SecurityProvider {
     @Override
-    public AuthenticationHandler configureHandler401(final Vertx vertxRef, final SecurityConfig config) {
+    public AuthenticationHandler configureHandler401(final Vertx vertxRef, final SecurityConfig config,
+                                                     final AuthenticationProvider authProvider) {
         throw new _501NotSupportException("[ PLUG ] Security/HT-DIGEST 不支持 401 Handler 构造");
     }
 
@@ -32,8 +33,8 @@ public class SecurityProviderHtDigest implements SecurityProvider {
 
         final String filename = Ut.valueString(options, YmSecuritySpec.htdigest.options.filename);
         return CC_PROVIDER_401.pick(
-                () -> HtdigestAuth.create(vertxRef, filename),
-                filename
+            () -> HtdigestAuth.create(vertxRef, filename),
+            filename
         );
     }
 }

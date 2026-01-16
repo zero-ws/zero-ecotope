@@ -2,13 +2,13 @@ package io.zerows.program;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.web.Envelop;
 import io.zerows.epoch.metadata.KView;
+import io.zerows.epoch.web.Envelop;
 
 /**
  * @author lang : 2023-06-11
  */
-class _Get extends _Dict {
+class _Get extends _From {
 
     // ---------------------- Request Data Extract --------------------------
     // -> Message<Envelop> -> Tool ( Interface mode )

@@ -19,7 +19,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class SecurityProviderLDAP implements SecurityProvider {
     @Override
-    public AuthenticationHandler configureHandler401(final Vertx vertxRef, final SecurityConfig config) {
+    public AuthenticationHandler configureHandler401(final Vertx vertxRef, final SecurityConfig config,
+                                                     final AuthenticationProvider authProvider) {
         throw new _501NotSupportException("[ PLUG ] Security/LDAP 不支持 401 Handler 构造");
     }
 

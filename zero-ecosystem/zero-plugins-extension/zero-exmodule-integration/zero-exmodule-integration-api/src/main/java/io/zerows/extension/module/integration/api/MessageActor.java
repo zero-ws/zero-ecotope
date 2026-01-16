@@ -9,6 +9,7 @@ import io.zerows.epoch.annotations.Me;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.XHeader;
+import io.zerows.epoch.web.Account;
 import io.zerows.extension.module.integration.servicespec.MessageStub;
 import io.zerows.extension.skeleton.common.enums.EmMessage;
 import io.zerows.program.Ux;
@@ -29,7 +30,7 @@ public class MessageActor {
                                         final XHeader header,
                                         final User user) {
         final JsonObject condition = Ux.whereAnd();
-        condition.put("sendTo", Ux.keyUser(user));
+        condition.put("sendTo", Account.userId(user));
         condition.put(KName.APP_ID, header.getAppId());
 
         final EmMessage.Type type = Ut.toEnum(typeStr, EmMessage.Type.class);
@@ -43,7 +44,7 @@ public class MessageActor {
                                           final JsonArray keys,
                                           final User user) {
         final EmMessage.Status status = Ut.toEnum(statusStr, EmMessage.Status.class);
-        return this.messageStub.updateStatus(keys, status, Ux.keyUser(user))
+        return this.messageStub.updateStatus(keys, status, Account.userId(user))
             .compose(Ux::futureA);
     }
 
@@ -54,7 +55,7 @@ public class MessageActor {
         final String messageId = Ut.valueString(data, "messageId");
         data.put(KName.NAME, messageId);
         data.put(KName.CODE, messageId);
-        return this.messageStub.addMessage(data, Ux.keyUser(user))
+        return this.messageStub.addMessage(data, Account.userId(user))
             .compose(Ux::futureJ);
     }
 

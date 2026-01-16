@@ -32,7 +32,6 @@ class StepGeneratorNorm extends StepGeneratorBase {
      * @param instance   新报表实例
      * @param request    请求数据
      * @param sourceData 源数据
-     *
      * @return 处理后的报表实例
      */
     @Override
@@ -60,6 +59,6 @@ class StepGeneratorNorm extends StepGeneratorBase {
             final String fieldDescription = Ut.valueString(instanceConfig, "description");
             this.parseAndExtract(request, fieldDescription, instance::setDescription);
         }
-        return Ut.future(instance);
+        return Future.succeededFuture(instance);
     }
 }

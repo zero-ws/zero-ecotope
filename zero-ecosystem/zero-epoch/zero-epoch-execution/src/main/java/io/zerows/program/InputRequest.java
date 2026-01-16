@@ -5,7 +5,6 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Session;
 import io.zerows.epoch.web.Envelop;
-import io.zerows.sdk.security.Token;
 import io.zerows.support.Ut;
 
 import java.time.Instant;
@@ -50,18 +49,6 @@ class InputRequest {
             return null;
         }
         return envelop.identifier(field);
-    }
-
-    static String requestToken(final String tokenString, final String field) {
-        if (Ut.isNil(tokenString)) {
-            return null;
-        }
-        String result = null;
-        final JsonObject token = Token.decodeJwt(tokenString);
-        if (Objects.nonNull(token)) {
-            result = token.getString(field);
-        }
-        return result;
     }
 
     static Object requestSession(

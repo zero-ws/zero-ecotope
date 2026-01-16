@@ -15,6 +15,7 @@ import io.zerows.extension.module.finance.servicespec.EndSettleRStub;
 import io.zerows.extension.module.finance.servicespec.EndTransStub;
 import io.zerows.extension.module.finance.servicespec.FetchStub;
 import io.zerows.program.Ux;
+import io.zerows.support.Fx;
 import io.zerows.support.Ut;
 import jakarta.inject.Inject;
 
@@ -138,7 +139,7 @@ public class FetchActor {
                         response.put("settlements", newSettlements);
                         return Ux.future(response);
                     });
-            }).otherwise(Ux.otherwise(new JsonObject()));
+            }).otherwise(Fx.otherwiseFn(JsonObject::new));
         });
     }
 

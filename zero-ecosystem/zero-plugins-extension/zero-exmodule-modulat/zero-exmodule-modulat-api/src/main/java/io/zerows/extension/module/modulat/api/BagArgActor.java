@@ -7,8 +7,8 @@ import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Me;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.web.Account;
 import io.zerows.extension.module.modulat.servicespec.BagArgStub;
-import io.zerows.program.Ux;
 import jakarta.inject.Inject;
 
 /**
@@ -34,7 +34,7 @@ public class BagArgActor {
     @Me
     public Future<JsonObject> saveBag(final String bagId, final JsonObject request,
                                       final User user) {
-        final String userKey = Ux.keyUser(user);
+        final String userKey = Account.userId(user);
         request.put(KName.UPDATED_BY, userKey);
         return this.bagArgStub.saveBag(bagId, request);
     }

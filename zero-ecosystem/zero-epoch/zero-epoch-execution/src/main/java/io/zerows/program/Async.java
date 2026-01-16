@@ -1,35 +1,19 @@
 package io.zerows.program;
 
 import io.vertx.core.Future;
-import io.vertx.core.Promise;
 import io.zerows.platform.constant.VValue;
 import io.zerows.platform.metadata.KRef;
 import io.zerows.support.Fx;
-import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.concurrent.CompletionStage;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 @Slf4j
 class Async {
-
-    static <T> Future<T> fromAsync(final CompletionStage<T> state) {
-        final Promise<T> promise = Promise.promise();
-        state.whenComplete((result, error) -> {
-            if (Objects.isNull(error)) {
-                promise.complete(result);
-            } else {
-                promise.fail(error);
-            }
-        });
-        return promise.future();
-    }
 
     static <T> Future<T> future(final T input, final Set<Function<T, Future<T>>> set) {
         final List<Future<T>> futures = new ArrayList<>();
@@ -90,22 +74,13 @@ class Async {
                                      * The step stopped
                                      */
                                     .compose(response::future)
-                                    .otherwise(Ut.otherwise(() -> response.add(json).get()));
+                                    .otherwise(Fx.otherwiseFn(response.add(json)::get));
                             }
-                        }).otherwise(Ut.otherwise(() -> response.get()));
+                        }).otherwise(Fx.otherwiseFn(response::get));
                     }
                     return first;
                 }
             }
         }
-    }
-
-    static <T> Function<Throwable, Future<T>> toErrorFuture(final Supplier<T> input) {
-        return ex -> {
-            if (Objects.nonNull(ex)) {
-                ex.printStackTrace();
-            }
-            return Future.succeededFuture(input.get());
-        };
     }
 }

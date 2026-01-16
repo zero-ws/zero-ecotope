@@ -35,7 +35,7 @@ class ProfileResourceImpl implements ProfileResource {
         final Future<JsonObject> resource = executor.resource(params);
         return resource.compose(result -> {
             if (Objects.isNull(result)) {
-                return Future.failedFuture(new _403ForbiddenException("[ PLUG ] 访问被禁止/拒绝！"));
+                return Future.failedFuture(new _403ForbiddenException("访问被禁止/拒绝！"));
             }
             // 需求权限
             final Authorization required = ProfileAuthorization.create(result);

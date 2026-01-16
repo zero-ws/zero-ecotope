@@ -91,6 +91,6 @@ public class ZeroScheduler extends AbstractVerticle {
                 agha.begin(mission);
             }
         }
-        return Ut.future();
+        return Future.succeededFuture();
     }
 }

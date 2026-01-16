@@ -4,6 +4,7 @@ import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.web.Account;
 import io.zerows.extension.module.rbac.boot.MDRBACManager;
 import io.zerows.extension.module.rbac.common.ScConstant;
 import io.zerows.extension.module.rbac.exception._80206Exception401TokenCounter;
@@ -13,7 +14,6 @@ import io.zerows.extension.module.rbac.metadata.ScConfig;
 import io.zerows.extension.module.rbac.metadata.ScToken;
 import io.zerows.platform.constant.VValue;
 import io.zerows.program.Ux;
-import io.zerows.sdk.security.Token;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
@@ -46,7 +46,7 @@ class ScClockToken extends ScClockBase<ScToken> {
 
     @Override
     public int configTtl() {
-        return CONFIG.getTokenExpired();
+        return CONFIG.getTokenExpired().intValue();
     }
 
 
@@ -114,11 +114,11 @@ class ScClockToken extends ScClockBase<ScToken> {
          * - token
          * - refreshToken
          */
-        final String vToken = Token.encodeJwt(tokenData);
+        final String vToken = Account.userToken(tokenData);
         final JsonObject refreshData = new JsonObject();
         refreshData.put(KName.USER, userId);
         refreshData.put(KName.ACCESS_TOKEN, vToken);
-        final String vRefresh = Token.encodeJwt(refreshData);
+        final String vRefresh = Account.userToken(refreshData);
         return token.token(vToken).refreshToken(vRefresh);
     }
 

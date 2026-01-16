@@ -43,9 +43,8 @@ class SecurityManager {
      * <pre>
      *     key = appId / appName 或 vertx hashCode
      *     1. 默认单实例场景下，vertx hashCode
-     *        vertx:
-     *          security:
-     *            ????
+     *        security:
+     *          ????
      *     2. 非持久化场景：App Name
      *        app:
      *          security:
@@ -61,7 +60,7 @@ class SecurityManager {
     private SecurityManager() {
     }
 
-    public static SecurityManager of() {
+    public static synchronized SecurityManager of() {
         return INSTANCE;
     }
 

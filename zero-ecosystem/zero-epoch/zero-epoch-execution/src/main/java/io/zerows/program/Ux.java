@@ -4,9 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.shareddata.ClusterSerializable;
-import io.vertx.ext.auth.User;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.metadata.security.TokenJwt;
 import io.zerows.platform.constant.VString;
 import io.zerows.specification.modeling.HRecord;
 import io.zerows.support.Ut;
@@ -170,24 +168,12 @@ public final class Ux extends _Where {
         return future(list);
     }
 
-    public static <T> Function<Throwable, Future<T>> futureE(final T input) {
-        return Async.toErrorFuture(() -> input);
-    }
-
-    public static <T> Function<Throwable, Future<T>> futureE(final Supplier<T> supplier) {
-        return Async.toErrorFuture(supplier);
-    }
-
     public static <T> Future<JsonArray> futureA(final List<T> list, final String pojo) {
         return Future.succeededFuture(Ut.toJson(list, pojo));
     }
 
     public static Future<JsonArray> futureA() {
         return futureA(new ArrayList<>(), VString.EMPTY);
-    }
-
-    public static Future<JsonArray> futureA(Throwable ex) {
-        return Async.<JsonArray>toErrorFuture(JsonArray::new).apply(ex);
     }
 
     public static <T> Future<JsonArray> futureA(final List<T> list) {
@@ -210,10 +196,6 @@ public final class Ux extends _Where {
 
     public static Future<JsonObject> futureJ() {
         return futureJ(new JsonObject(), VString.EMPTY);
-    }
-
-    public static Future<JsonObject> futureJ(Throwable ex) {
-        return Async.<JsonObject>toErrorFuture(JsonObject::new).apply(ex);
     }
 
     public static <T> Future<JsonObject> futureJ(final T entity) {
@@ -268,14 +250,8 @@ public final class Ux extends _Where {
         return futureG(item, "type");
     }
 
-    /*
-     * key part for extract data from environment
-     */
-    public static String keyUser(final User user) {
-        return TokenJwt.of(user).user();
-    }
 
-    // ---------------------------------- Children Utility
+    // NEW BEGIN -------------------------------------------------
 
     // 暴露异步方法
     public static <T> Future<T> waitAsync(Supplier<T> executor) {
@@ -286,6 +262,7 @@ public final class Ux extends _Where {
         return Task.asyncVirtual(executor);
     }
 
+    // NEW END -------------------------------------------------
     public static class Job {
         public static UxJob on() {
             return new UxJob();

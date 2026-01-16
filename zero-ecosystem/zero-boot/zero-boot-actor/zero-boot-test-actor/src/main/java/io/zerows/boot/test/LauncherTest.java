@@ -15,6 +15,7 @@ import io.zerows.program.Ux;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.spi.BootIo;
 import io.zerows.spi.HPI;
+import io.zerows.support.Fx;
 
 import java.util.Objects;
 import java.util.function.Supplier;
@@ -39,7 +40,8 @@ public class LauncherTest {
     }
 
     public static Future<PartyA> of(final Environment environment) {
-        return of(Ux.nativeVertx(), environment).otherwise(Ux.otherwise(null));
+        return of(Ux.nativeVertx(), environment)
+            .otherwise(Fx.otherwiseFn(null));
     }
 
     public static Future<PartyA> of(final Vertx vertx, final Environment environment) {

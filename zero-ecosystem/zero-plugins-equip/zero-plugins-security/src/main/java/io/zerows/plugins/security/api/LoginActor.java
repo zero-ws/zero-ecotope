@@ -5,11 +5,12 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
-import io.zerows.plugins.security.SecurityUser;
-import io.zerows.plugins.security.common.AuthLoginStub;
-import io.zerows.plugins.security.common.CaptchaStub;
+import io.zerows.epoch.web.Account;
+import io.zerows.plugins.security.basic.BasicLoginRequest;
+import io.zerows.plugins.security.basic.BasicLoginResponse;
 import io.zerows.plugins.security.exception._80216Exception403CaptchaProfile;
-import io.zerows.plugins.security.service.UserLoginRequest;
+import io.zerows.plugins.security.service.AuthLoginStub;
+import io.zerows.plugins.security.service.CaptchaStub;
 import io.zerows.support.Fx;
 import jakarta.inject.Inject;
 
@@ -25,23 +26,23 @@ public class LoginActor {
     private AuthLoginStub loginStub;
 
     @Address(Addr.API_AUTH_LOGIN)
-    public Future<JsonObject> login(final UserLoginRequest request) {
-
-        return request.requestValidated()// username, password 非空校验
-            .compose(this.loginStub::validateCaptcha) // captcha / captchaId 可选非空校验
-            .compose(validated -> this.captchaStub.validate(validated.getCaptchaId(), validated.getCaptcha()))
+    public Future<JsonObject> login(final BasicLoginRequest request) {
+        // username, password 非空校验
+        return request.requestValidated()
+            // captcha / captchaId 可选非空校验
+            .compose(this.captchaStub::validateRequired)
+            // 验证码校验
+            .compose(validated -> this.captchaStub.validate(validated.captchaId(), validated.captcha()))
+            // 登录处理
             .compose(nil -> this.loginStub.login(request))
-            .compose(userAt -> {
-                System.out.println(userAt.id());
-                return null;
-            });
+            .compose(userAt -> new BasicLoginResponse(userAt).response());
     }
 
     @Address(Addr.API_AUTH_CAPTCHA)
     public Future<JsonObject> captcha(final User user) {
         if (Objects.nonNull(user)) {
             // 80216 已登录用户不允许获取验证码
-            final String id = SecurityUser.id();
+            final String id = Account.userId(false);
             return Fx.failOut(_80216Exception403CaptchaProfile.class, id);
         }
         return this.captchaStub.generate();

@@ -8,6 +8,7 @@ import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Me;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.web.Account;
 import io.zerows.extension.module.tpl.service.MenuStub;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
@@ -24,14 +25,14 @@ public class MenuActor {
 
     @Address(Addr.Menu.MY_FETCH)
     public Future<JsonArray> fetchMy(final JsonObject condition, final User user) {
-        condition.put(KName.OWNER, Ux.keyUser(user));
+        condition.put(KName.OWNER, Account.userId(user));
         return this.menuStub.fetchMy(condition);
     }
 
     @Me
     @Address(Addr.Menu.MY_SAVE)
     public Future<JsonArray> saveMy(final JsonObject data, final User user) {
-        data.put(KName.OWNER, Ux.keyUser(user));
+        data.put(KName.OWNER, Account.userId(user));
         /* Condition Building */
         final JsonObject condition = Ux.whereAnd();
         // data -> condition

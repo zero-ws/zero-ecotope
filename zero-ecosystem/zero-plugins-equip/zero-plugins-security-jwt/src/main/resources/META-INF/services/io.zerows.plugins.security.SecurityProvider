@@ -1,1 +1,1 @@
-io.zerows.plugins.security.jwt.SecurityProviderJwt
+io.zerows.plugins.security.jwt.JwtSecurityProvider

@@ -7,9 +7,9 @@ import io.vertx.ext.auth.User;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.epoch.store.jooq.DB;
+import io.zerows.epoch.web.Account;
 import io.zerows.extension.module.finance.domain.tables.daos.FDebtDao;
 import io.zerows.extension.module.finance.domain.tables.pojos.FDebt;
-import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
 import java.math.BigDecimal;
@@ -59,7 +59,7 @@ class StepSync01Debt implements Step<User, FDebt> {
         // updatedBy / updatedAt
         // finished / finishedAt
         final LocalDateTime nowAt = LocalDateTime.now();
-        final String userKey = Ux.keyUser(user);
+        final String userKey = Account.userId(user);
 
         /*
          * finished = true

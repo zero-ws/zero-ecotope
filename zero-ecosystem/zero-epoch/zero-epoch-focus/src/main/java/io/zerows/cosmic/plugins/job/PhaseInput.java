@@ -134,7 +134,7 @@ class PhaseInput {
         } else {
             PhaseHelper.logOnce(mission, () ->
                 log.error("[ ZERO ] ( Job {} ) 任务出错终止，出错组件：{}", mission.getCode(), income.getClass().getName()));
-            return Ut.future(envelop);
+            return Future.succeededFuture(envelop);
         }
     }
 }

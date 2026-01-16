@@ -23,12 +23,13 @@ public class RbacWall implements WallExecutor {
     private transient AccreditStub accredit;
 
     @Override
-    public Future<Boolean> authenticate(final JsonObject data) {
+    public Future<User> authenticate(final JsonObject data) {
         final String token = data.getString(KName.ACCESS_TOKEN);
         final String user = data.getString(KName.USER);
         // No Cache
         log.info("[ MOD ] 验证用户数据和令牌 data = {} / token = {}", user, token);
-        return this.jwtStub.verify(user, token);
+        // return this.jwtStub.verify(user, token);
+        return null;
     }
 
     @Override

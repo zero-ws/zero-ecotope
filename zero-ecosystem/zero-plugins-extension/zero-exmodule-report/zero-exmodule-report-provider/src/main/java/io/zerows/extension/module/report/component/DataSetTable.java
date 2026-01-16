@@ -11,6 +11,7 @@ import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.module.report.domain.tables.pojos.KpDataSet;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
 
@@ -22,6 +23,7 @@ import java.util.Objects;
  *
  * @author lang : 2024-10-12
  */
+@Slf4j
 class DataSetTable extends DataSetBase {
     protected final MDConnect connect;
     protected final JsonObject children = new JsonObject();
@@ -53,7 +55,7 @@ class DataSetTable extends DataSetBase {
             return Ux.futureA();
         }
 
-        this.logger().info("Report processing for table = {}, Cond: {}",
+        log.info("[ XMOD ] ( RPT ) 报表执行结果：table = {} / 条件 = {}",
             this.connect.getTable(), parameters.encode());
         // 提取 UxJooq
         final ADB jq = DB.on(this.connect);

@@ -3,8 +3,8 @@ package io.zerows.plugins.security;
 import io.vertx.core.Vertx;
 import io.vertx.ext.auth.authentication.AuthenticationProvider;
 import io.vertx.ext.web.handler.AuthorizationHandler;
-import io.vertx.ext.web.handler.ChainAuthHandler;
 import io.zerows.epoch.metadata.security.SecurityMeta;
+import io.zerows.sdk.security.WallHandler;
 import io.zerows.sdk.security.WallProvider;
 
 import java.util.Set;
@@ -22,7 +22,7 @@ public class SecurityWallProvider implements WallProvider {
     }
 
     @Override
-    public ChainAuthHandler handlerOfAuthentication(final Vertx vertxRef, final Set<SecurityMeta> metaSet) {
+    public WallHandler handlerOfAuthentication(final Vertx vertxRef, final Set<SecurityMeta> metaSet) {
         return SecurityProviderFactory.of(vertxRef).handlerOfAuthentication(metaSet);
     }
 

@@ -33,7 +33,6 @@ class StepGeneratorAudit extends StepGeneratorBase {
      * @param instance   新报表实例
      * @param request    请求数据
      * @param sourceData 源数据
-     *
      * @return 处理后的报表实例
      */
     @Override
@@ -50,6 +49,6 @@ class StepGeneratorAudit extends StepGeneratorBase {
         if (Ut.isNotNil(metadata)) {
             instance.setMetadata(metadata.encode());
         }
-        return Ut.future(instance);
+        return Future.succeededFuture(instance);
     }
 }

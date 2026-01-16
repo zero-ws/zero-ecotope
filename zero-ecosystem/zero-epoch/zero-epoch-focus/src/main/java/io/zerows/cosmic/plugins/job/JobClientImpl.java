@@ -117,7 +117,7 @@ class JobClientImpl implements JobClient {
 
     @Override
     public Future<Mission> saveAsync(final Mission mission) {
-        return Ut.future(this.save(mission));
+        return Future.succeededFuture(this.save(mission));
     }
 
 
@@ -130,12 +130,12 @@ class JobClientImpl implements JobClient {
 
     @Override
     public Future<Mission> removeAsync(final String code) {
-        return Ut.future(this.remove(code));
+        return Future.succeededFuture(this.remove(code));
     }
 
     @Override
     public Future<Set<Mission>> saveAsync(final Set<Mission> missions) {
-        return Ut.future(this.save(missions));
+        return Future.succeededFuture(this.save(missions));
     }
 
     @Override
@@ -151,6 +151,6 @@ class JobClientImpl implements JobClient {
 
     @Override
     public Future<JsonObject> statusAsync(final String namespace) {
-        return Ut.future(this.status(namespace));
+        return Future.succeededFuture(this.status(namespace));
     }
 }

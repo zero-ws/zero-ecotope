@@ -119,7 +119,7 @@ public class InquirerWall implements Inquirer<Set<SecurityMeta>> {
 
 
             final Wall wall = clazz.getAnnotation(Wall.class);
-            final String duplicatedKey = HED.encryptSHA256(wall.order() + wall.path());
+            final String duplicatedKey = HED.encryptSHA256(wall.order() + wall.path() + wall.type());
             duplicated.add(duplicatedKey);
         }
 

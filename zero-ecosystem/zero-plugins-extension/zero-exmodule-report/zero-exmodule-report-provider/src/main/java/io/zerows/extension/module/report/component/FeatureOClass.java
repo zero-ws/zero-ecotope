@@ -25,12 +25,12 @@ class FeatureOClass implements FeatureO {
                                                           final KpFeature feature) {
         final String outComponentCls = feature.getOutComponent();
         if (Ut.isNil(outComponentCls)) {
-            return Ut.future(new ConcurrentHashMap<>());
+            return Future.succeededFuture(new ConcurrentHashMap<>());
         }
         final JsonObject outConfig = Ut.toJObject(feature.getOutConfig());
         final ROutComponent outComponent = CC_OUT.pick(() -> Ut.instance(outComponentCls), outComponentCls);
         if (Objects.isNull(outComponent)) {
-            return Ut.future(new ConcurrentHashMap<>());
+            return Future.succeededFuture(new ConcurrentHashMap<>());
         }
 
         final JsonObject parameters = new JsonObject();
@@ -38,9 +38,9 @@ class FeatureOClass implements FeatureO {
         parameters.put(KName.CONFIG, outConfig);
         return outComponent.outAsync(dataSource, parameters).compose(result -> {
             if (Objects.isNull(result)) {
-                return Ut.future(new ConcurrentHashMap<>());
+                return Future.succeededFuture(new ConcurrentHashMap<>());
             }
-            return Ut.future(result);
+            return Future.succeededFuture(result);
         });
     }
 }

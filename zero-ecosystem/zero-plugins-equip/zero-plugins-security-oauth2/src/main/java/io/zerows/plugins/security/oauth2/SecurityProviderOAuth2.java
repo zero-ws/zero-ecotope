@@ -22,12 +22,12 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class SecurityProviderOAuth2 implements SecurityProvider {
     @Override
-    public AuthenticationHandler configureHandler401(final Vertx vertxRef, final SecurityConfig config) {
+    public AuthenticationHandler configureHandler401(final Vertx vertxRef, final SecurityConfig config,
+                                                     final AuthenticationProvider authProvider) {
         final JsonObject options = config.options();
-        final OAuth2Auth provider = (OAuth2Auth) this.configureProvider401(vertxRef, config);
         final String callback = Ut.valueString(options, YmSecuritySpec.oauth2.options.callback);
         return CC_HANDLER_401.pick(
-            () -> OAuth2AuthHandler.create(vertxRef, provider, callback),
+            () -> OAuth2AuthHandler.create(vertxRef, (OAuth2Auth) authProvider, callback),
             String.valueOf(options.hashCode())
         );
     }

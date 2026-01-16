@@ -6,6 +6,7 @@ import io.zerows.cortex.sdk.HQBE;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.XHeader;
 import io.zerows.epoch.store.jooq.DB;
+import io.zerows.epoch.web.Account;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.module.ui.domain.tables.daos.UiViewDao;
 import io.zerows.extension.module.ui.domain.tables.pojos.UiView;
@@ -63,7 +64,7 @@ public class UiViewHQBE implements HQBE {
          * user
          * role for future usage
          */
-        args.put(KName.USER, Ux.keyUser(envelop.user()));
+        args.put(KName.USER, Account.userId(envelop.user()));
         return args;
     }
 
