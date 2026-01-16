@@ -56,8 +56,14 @@ class Task {
         Thread.ofVirtual().name("zero-vt-task").start(() -> {
             try {
                 // 在虚拟线程中，调用 Future.await() 是合法的
-                promise.complete(executor.get());
+                final T result = executor.get();
+                if (Objects.isNull(result)) {
+                    promise.complete();
+                } else {
+                    promise.complete(result);
+                }
             } catch (final Throwable e) {
+                log.error(e.getMessage(), e);
                 promise.fail(e);
             }
         });

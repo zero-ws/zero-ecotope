@@ -9,21 +9,21 @@ import io.vertx.ext.auth.impl.jose.JWT;
 import io.vertx.ext.auth.jwt.JWTAuth;
 import io.vertx.ext.auth.jwt.JWTAuthOptions;
 import io.zerows.cortex.management.StoreVertx;
-import io.zerows.cosmic.plugins.security.exception._40079Exception500SecurityType;
 import io.zerows.epoch.metadata.security.SecurityConfig;
-import io.zerows.platform.enums.SecurityType;
+import io.zerows.epoch.web.Token;
 import io.zerows.plugins.security.SecurityActor;
 import io.zerows.support.Ut;
 
 import java.util.Objects;
 
-class JwtToken {
+public class JwtToken implements Token {
     // 防止 JWT 的高频解码（速度很慢）
     private static final Cc<String, JsonObject> STORE_TOKEN = Cc.open();
+    private static final Cc<String, JwtToken> CC_TOKEN = Cc.openThread();
     private static JWTAuth PROVIDER;
     private final JWTAuthOptions options;
 
-    JwtToken() {
+    public JwtToken() {
         final SecurityConfig config = SecurityActor.configJwt();
         if (Objects.isNull(config)) {
             throw new _501NotSupportException("[ PLUG ] Jwt 配置不存在，无法执行 JWT 操作！");
@@ -35,6 +35,10 @@ class JwtToken {
         this.options = new JWTAuthOptions(options);
     }
 
+    static JwtToken of() {
+        return CC_TOKEN.pick(JwtToken::new);
+    }
+
     private JWTAuth provider() {
         if (Objects.isNull(PROVIDER)) {
             final Vertx vertx = StoreVertx.of().vertx();
@@ -43,15 +47,13 @@ class JwtToken {
         return PROVIDER;
     }
 
-    public String encode(final JsonObject payload, final SecurityType type) {
-        Fn.jvmKo(SecurityType.JWT != type,
-            _40079Exception500SecurityType.class, SecurityType.JWT, type);
+    @Override
+    public String encode(final JsonObject payload) {
         return Objects.requireNonNull(this.provider()).generateToken(payload);
     }
 
-    public JsonObject decode(final String token, final SecurityType type) {
-        Fn.jvmKo(SecurityType.JWT != type,
-            _40079Exception500SecurityType.class, SecurityType.JWT, type);
+    @Override
+    public JsonObject decode(final String token) {
         if (Objects.isNull(token)) {
             return new JsonObject();
         }

@@ -8,7 +8,6 @@ import io.zerows.component.module.AbstractHActor;
 import io.zerows.epoch.annotations.Actor;
 import io.zerows.epoch.metadata.security.SecurityConfig;
 import io.zerows.plugins.security.SecurityActor;
-import io.zerows.plugins.security.service.TokenBuilderAES;
 import io.zerows.specification.configuration.HConfig;
 
 import java.util.Objects;
@@ -28,7 +27,7 @@ public class JwtSecurityActor extends AbstractHActor {
         }
         this.vLog("[ Security ] JwtSecurityActor 初始化完成，配置：{}", config);
 
-        TokenBuilderManager.of().registry(TokenType.JWT, TokenBuilderAES::new);
+        TokenBuilderManager.of().registry(TokenType.JWT, JwtTokenBuilder::new);
         return Future.succeededFuture(Boolean.TRUE);
     }
 }
