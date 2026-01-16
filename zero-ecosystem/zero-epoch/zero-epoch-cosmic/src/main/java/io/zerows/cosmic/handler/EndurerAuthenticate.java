@@ -5,7 +5,6 @@ import io.vertx.core.Handler;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.cosmic.bootstrap.AckFlow;
 import io.zerows.epoch.web.Envelop;
-import io.zerows.program.Ux;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -27,7 +26,6 @@ public class EndurerAuthenticate implements Handler<RoutingContext> {
             final Throwable ex = event.failure();
             if (ex instanceof final WebException error) {
                 log.info("[ ZERO ] Web Exception: {} = {}", ex.getClass().getName(), ex.getMessage());
-                Ux.debug(error, () -> error);
                 AckFlow.reply(event, Envelop.failure(error));
             } else {
                 // Other exception found

@@ -2,6 +2,7 @@ package io.zerows.plugins.cache.caffeine;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
+import io.r2mo.typed.cc.Cc;
 import io.r2mo.typed.common.Kv;
 import io.r2mo.vertx.common.cache.MemoAtBase;
 import io.r2mo.vertx.common.cache.MemoOptions;
@@ -18,13 +19,15 @@ import java.util.Set;
 @Slf4j
 public class CaffeineMemoAt<K, V> extends MemoAtBase<K, V> {
 
+    private static final Cc<String, Cache<?, ?>> CC_CACHE = Cc.open();
     // 持有 Caffeine 的核心 Cache 实例
     private final Cache<K, V> cache;
 
+    @SuppressWarnings("unchecked")
     protected CaffeineMemoAt(final Vertx vertxRef, final MemoOptions<K, V> options) {
         super(vertxRef, options);
         // 在构造时直接初始化缓存实例
-        this.cache = this.initCache(options);
+        this.cache = (Cache<K, V>) CC_CACHE.pick(() -> this.initCache(options), options.fingerprint());
     }
 
     /**

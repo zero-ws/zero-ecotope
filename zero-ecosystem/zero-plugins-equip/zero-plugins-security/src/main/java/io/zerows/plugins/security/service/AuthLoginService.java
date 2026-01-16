@@ -41,11 +41,9 @@ public class AuthLoginService implements AuthLoginStub {
         // 提取 UserAt/{TYPE} 专用配置
         final AsyncUserAt userService = AsyncUserAt.of(request.type());
         // 直接执行登录（加载用户信息）
-        return userService.loadLogged(request).compose(userAt -> {
-            // 刷新缓存
-            final UserAt cached = UserSession.of().userAt(userAt);
-            // 响应信息
-            return Future.succeededFuture(cached);
-        });
+        return userService.loadLogged(request)
+            // 切换到 VT 中运行
+            .compose(userAt -> Ux.waitVirtual(() -> UserSession.of().userAt(userAt)))
+            .compose(Future::succeededFuture);
     }
 }

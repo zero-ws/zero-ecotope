@@ -53,7 +53,7 @@ class AoRefineSchema implements AoRefine {
             schemata.stream().map(this::saveSchema).forEach(futures::add);
             return Fx.combineA(futures)
                 .compose(nil -> Ux.future(appJson))
-                .otherwise(Ux.otherwise(() -> null));
+                .otherwise(Fx.otherwiseFn(null));
         };
     }
 
@@ -113,9 +113,9 @@ class AoRefineSchema implements AoRefine {
                 // Schema -> Key
                 combine.add(this.saveKey(schema, entity));
                 return Fx.compressA(combine)
-                    .compose(nil -> Ux.future(entity))
+                    .map(nil -> entity)
                     .compose(Ux::futureJ)
-                    .otherwise(Ux.otherwise(() -> null));
+                    .otherwise(Fx.otherwiseFn(() -> null));
             });
     }
 

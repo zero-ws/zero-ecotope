@@ -3,6 +3,7 @@ package io.zerows.boot.full.base;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.program.Ux;
+import io.zerows.support.Fx;
 
 /**
  *
@@ -13,7 +14,7 @@ public class AspectRecord extends AbstractAspect {
     public Future<JsonObject> beforeAsync(final JsonObject input,
                                           final JsonObject options) {
         return Ux.future(input, this.queue.beforePlugin(options))
-            .otherwise(Ux.otherwise(() -> input));
+            .otherwise(Fx.otherwiseFn(() -> input));
     }
 
     @Override
@@ -22,6 +23,6 @@ public class AspectRecord extends AbstractAspect {
         return Ux.future(input)
             .compose(processed -> Ux.future(processed, this.queue.afterPlugin(options)))    // Sync
             .compose(processed -> Ux.future(processed, this.queue.jobPlugin(options)))      // Async
-            .otherwise(Ux.otherwise(() -> input));
+            .otherwise(Fx.otherwiseFn(() -> input));
     }
 }

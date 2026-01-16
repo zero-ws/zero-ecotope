@@ -3,7 +3,6 @@ package io.zerows.cosmic.plugins.job;
 import io.vertx.core.Future;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.platform.metadata.KRef;
-import io.zerows.support.Ut;
 
 /*
  * Job income before, this income interface should provide Future<JobIn> to Job to consume
@@ -21,6 +20,6 @@ public interface JobIncome {
      */
     default Future<KRef> underway() {
         final KRef refer = new KRef();
-        return Ut.future(refer);
+        return Future.succeededFuture(refer);
     }
 }

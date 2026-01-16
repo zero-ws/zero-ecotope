@@ -14,7 +14,7 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * @author lang : 2023-06-11
  */
-class _Dict extends _Debug {
+class _Dict extends _Compare {
 
     // -> Dict for caculation
     /*

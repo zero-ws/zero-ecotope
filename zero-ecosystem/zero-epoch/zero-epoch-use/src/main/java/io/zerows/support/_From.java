@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonObject;
 /**
  * @author lang : 2023-06-19
  */
-class _From extends _Feature {
+class _From extends _Element {
     /*
      * String conversation
      * 1) fromBuffer

@@ -8,6 +8,7 @@ import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.module.rbac.component.acl.rapier.Quest;
 import io.zerows.platform.enums.EmAop;
 import io.zerows.program.Ux;
+import io.zerows.support.Fx;
 import io.zerows.support.Ut;
 
 import java.util.Objects;
@@ -57,7 +58,7 @@ public class SeekCosmo implements Cosmo {
 
                 return Ux.future(processed);
             })
-        ).otherwise(Ux.otherwise());
+        ).otherwise(Fx.otherwiseFn(Envelop::ok));
     }
 
     @Override
@@ -85,7 +86,7 @@ public class SeekCosmo implements Cosmo {
 
                 return Ux.future(processed);
             })
-        ).otherwise(Ux.otherwise());
+        ).otherwise(Fx.otherwiseFn(Envelop::ok));
     }
 
     private Future<Envelop> runAop(final Envelop envelop, final JsonObject matrix, final EmAop.Effect phase,

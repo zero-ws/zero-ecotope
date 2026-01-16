@@ -6,6 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.extension.crud.common.Ix;
 import io.zerows.platform.constant.VValue;
 import io.zerows.program.Ux;
+import io.zerows.support.Fx;
 import io.zerows.support.Ut;
 
 import java.util.List;
@@ -209,7 +210,7 @@ public class IxPanel {
                  * Here the outputFn should not be null
                  */
                 return outputFn.apply(firstR, secondR);
-            }).otherwise(Ux.otherwise(() -> null));
+            }).otherwise(Fx.otherwiseFn(null));
         }
     }
 }

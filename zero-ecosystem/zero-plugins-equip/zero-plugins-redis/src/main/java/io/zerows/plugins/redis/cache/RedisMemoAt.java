@@ -108,12 +108,12 @@ public class RedisMemoAt<K, V> extends MemoAtBase<K, V> {
     }
 
     private String wrapKey(final K key) {
-        return key == null ? null : this.config.getPrefix() + key;
+        return key == null ? null : this.config.getPrefix() + ":" + this.name() + ":" + key;
     }
 
     @SuppressWarnings("unchecked")
     private K unwrapKey(final String rawKey) {
-        final String prefix = this.config.getPrefix();
+        final String prefix = this.config.getPrefix() + ":" + this.name() + ":";
         if (rawKey == null || !rawKey.startsWith(prefix)) {
             return null;
         }
@@ -191,7 +191,7 @@ public class RedisMemoAt<K, V> extends MemoAtBase<K, V> {
 
     @Override
     public Future<Boolean> clear() {
-        return this.scanKeys(this.config.getPrefix() + "*")
+        return this.scanKeys(this.name() + "/" + this.config.getPrefix() + "@*")
             .compose(keys -> {
                 if (keys.isEmpty()) {
                     return Future.succeededFuture(Boolean.TRUE);
@@ -216,7 +216,7 @@ public class RedisMemoAt<K, V> extends MemoAtBase<K, V> {
 
     @Override
     public Future<Set<K>> keySet() {
-        return this.scanKeys(this.config.getPrefix() + "*")
+        return this.scanKeys(this.name() + "/" + this.config.getPrefix() + "@*")
             .map(rawKeys -> rawKeys.stream()
                 .map(this::unwrapKey)
                 .filter(Objects::nonNull)
@@ -225,7 +225,7 @@ public class RedisMemoAt<K, V> extends MemoAtBase<K, V> {
 
     @Override
     public Future<Integer> size() {
-        return this.scanKeys(this.config.getPrefix() + "*").map(Set::size);
+        return this.scanKeys(this.name() + "/" + this.config.getPrefix() + "@*").map(Set::size);
     }
 
     private Future<Set<String>> scanKeys(final String pattern) {
@@ -260,16 +260,10 @@ public class RedisMemoAt<K, V> extends MemoAtBase<K, V> {
     /**
      * 用于解决 Vert.x JsonObject/JsonArray 无法直接序列化的问题。
      * 将其转为 String 存入，并在取出时根据 flag 还原。
+     *
+     * @param isObject true = JsonObject, false = JsonArray
      */
-    private static class JsonContainer implements Serializable {
-        private static final long serialVersionUID = 1L;
-        private final String data;
-        private final boolean isObject; // true = JsonObject, false = JsonArray
-
-        JsonContainer(final String data, final boolean isObject) {
-            this.data = data;
-            this.isObject = isObject;
-        }
+    private record JsonContainer(String data, boolean isObject) implements Serializable {
 
         Object toOriginal() {
             // 还原为 Vert.x 的对象
@@ -277,3 +271,4 @@ public class RedisMemoAt<K, V> extends MemoAtBase<K, V> {
         }
     }
 }
+

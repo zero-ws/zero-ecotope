@@ -4,11 +4,11 @@ import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.support.Ut;
 import io.zerows.component.log.LogOf;
 import io.zerows.plugins.store.neo4j.refine.N4J;
 import io.zerows.plugins.store.neo4j.sync.GraphicAnalyzer;
 import io.zerows.plugins.store.neo4j.sync.N4JSession;
+import io.zerows.support.Ut;
 import org.neo4j.driver.Driver;
 import org.neo4j.driver.GraphDatabase;
 
@@ -154,7 +154,7 @@ public class Neo4jClientImpl implements Neo4jClient {
     @Override
     public Future<JsonObject> graphic(final JsonObject node, final Integer level) {
         if (Objects.isNull(node)) {
-            return Ut.future(N4J.graphicDefault());
+            return Future.succeededFuture(N4J.graphicDefault());
         } else {
             N4J.LOG.Node.info(this.getClass(), "Node found: {0}", node.encode());
             return this.analyzer.searchAsync(node, level);

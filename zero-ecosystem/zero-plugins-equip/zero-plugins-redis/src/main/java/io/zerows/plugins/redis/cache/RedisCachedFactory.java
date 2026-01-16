@@ -25,7 +25,6 @@ public class RedisCachedFactory implements CachedFactory {
     private static final Cc<String, MemoAt<?, ?>> CC_MEMO = Cc.openThread();
 
     @Override
-    @SuppressWarnings("unchecked")
     public <K, V> MemoAt<K, V> findConfigured(final Vertx vertx, final MemoOptions<K, V> options) {
         // 1. 解析配置
         final RedisYmConfig config = this.configOf(options);

@@ -36,7 +36,7 @@ public abstract class DataSetBase implements DataSet {
     protected Future<JsonArray> loadChildren(final JsonArray data, final JsonObject childrenJ) {
         final JsonObject configJ = Ut.valueJObject(childrenJ);
         if (Ut.isNil(configJ)) {
-            return Ut.future(data);
+            return Future.succeededFuture(data);
         }
         // children 迭代
         final ConcurrentMap<String, Future<JsonArray>> dataMap = new ConcurrentHashMap<>();

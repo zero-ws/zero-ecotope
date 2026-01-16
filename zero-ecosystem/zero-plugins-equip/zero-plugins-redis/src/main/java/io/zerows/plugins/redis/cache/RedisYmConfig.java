@@ -30,7 +30,7 @@ public class RedisYmConfig implements Serializable {
      * 1. 命名空间隔离，防止与其他业务 Key 冲突。
      * 2. 在执行 clear 操作时，仅通过 pattern 匹配删除该前缀的 Key，避免误删整个数据库。
      */
-    private String prefix = "ZEROWS:CACHE:";
+    private String prefix = "ZeroWs/Redis/Cache";
 
     /**
      * 默认缓存过期时间。

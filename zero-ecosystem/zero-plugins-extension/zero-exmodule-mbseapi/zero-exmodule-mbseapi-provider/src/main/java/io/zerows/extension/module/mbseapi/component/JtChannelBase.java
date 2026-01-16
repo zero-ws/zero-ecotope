@@ -3,7 +3,6 @@ package io.zerows.extension.module.mbseapi.component;
 import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
-import io.zerows.component.log.LogOf;
 import io.zerows.cosmic.plugins.job.metadata.Mission;
 import io.zerows.epoch.annotations.Contract;
 import io.zerows.epoch.constant.KWeb;
@@ -19,6 +18,7 @@ import io.zerows.platform.metadata.KDictConfig;
 import io.zerows.platform.metadata.KFabric;
 import io.zerows.program.Ux;
 import io.zerows.specification.modeling.HRecord;
+import io.zerows.support.Fx;
 import io.zerows.support.Ut;
 
 import java.util.Objects;
@@ -84,41 +84,30 @@ public abstract class JtChannelBase implements JtChannel {
                  * Instead of singleton here.
                  *  */
                 final JtComponent component = Ut.instance(componentClass);
-                if (Objects.nonNull(component)) {
-                    this.monitor.componentHit(componentClass, recordClass);
+                this.monitor.componentHit(componentClass, recordClass);
+                /*
+                 * Options without `mapping` here
+                 */
+                return this.initAsync(component, request)
                     /*
-                     * Initialized first and then
+                     * Contract here
+                     * 1) Definition in current channel
+                     * 2) Data came from request ( XHeader )
                      */
-                    Ux.debug();
+                    .compose(initialized -> JtChannelAnagogic.componentAsync(component, this.commercial, this::createFabric))
+                    .compose(initialized -> JtChannelAnagogic.componentAsync(component, envelop))
                     /*
-                     * Options without `mapping` here
+                     * Children initialized
                      */
-                    return this.initAsync(component, request)
-                        /*
-                         * Contract here
-                         * 1) Definition in current channel
-                         * 2) Data came from request ( XHeader )
-                         */
-                        .compose(initialized -> JtChannelAnagogic.componentAsync(component, this.commercial, this::createFabric))
-                        .compose(initialized -> JtChannelAnagogic.componentAsync(component, envelop))
-                        /*
-                         * Children initialized
-                         */
-                        .compose(initialized -> component.transferAsync(request))
-                        /*
-                         * Response here for future custom
-                         */
-                        .compose(actOut -> this.createResponse(actOut, envelop))
-                        /*
-                         * Otherwise;
-                         */
-                        .otherwise(Ux.otherwise());
-                } else {
+                    .compose(initialized -> component.transferAsync(request))
                     /*
-                     * singleton singleton error
+                     * Response here for future custom
                      */
-                    return FnVertx.failOut(_80407Exception501ChannelError.class, componentClass.getName());
-                }
+                    .compose(actOut -> this.createResponse(actOut, envelop))
+                    /*
+                     * Otherwise;
+                     */
+                    .otherwise(Fx.otherwiseFn(Envelop::ok));
             });
         }
     }
@@ -173,10 +162,6 @@ public abstract class JtChannelBase implements JtChannel {
      * Initialize component
      */
     public abstract Future<Boolean> initAsync(JtComponent component, ActIn request);
-
-    protected LogOf getLogger() {
-        return LogOf.get(this.getClass());
-    }
 
     // ------------- Rename configuration object -------------
     /*

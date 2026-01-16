@@ -13,11 +13,7 @@ import io.zerows.extension.module.report.domain.tables.pojos.KpDimension;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author lang : 2024-10-29
@@ -34,7 +30,7 @@ class DimProcTree extends DimProcBase {
         final JsonObject treeGroup = Ut.toJObject(dimension.getDataGroup());
         final EmDim.Type.Tree treeRegion = Ut.toEnum(Ut.valueString(treeGroup, "region"), EmDim.Type.Tree.class, null);
         if (Objects.isNull(treeRegion)) {
-            return Ut.future();
+            return Future.succeededFuture();
         }
 
         final JsonArray processed = this.dimBuild(source, treeRegion, treeGroup);
@@ -48,7 +44,7 @@ class DimProcTree extends DimProcBase {
             });
         }
 
-        return Ut.future(dimNorm);
+        return Future.succeededFuture(dimNorm);
     }
 
     private JsonArray dimBuild(final JsonArray data, final EmDim.Type.Tree mode,

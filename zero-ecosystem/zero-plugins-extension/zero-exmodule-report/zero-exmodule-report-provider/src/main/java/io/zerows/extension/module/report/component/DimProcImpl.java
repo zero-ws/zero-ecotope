@@ -80,9 +80,9 @@ class DimProcImpl extends DimProcBase {
                         parameters.put(KName.INPUT, params);
                         final Future<JsonArray> compose = queryComponent.dataAsync(dataSouce, parameters).compose(result -> {
                             if (Objects.isNull(result)) {
-                                return Ut.future(dataSouce);
+                                return Future.succeededFuture(dataSouce);
                             }
-                            return Ut.future(result);
+                            return Future.succeededFuture(result);
                         });
                         resultMap.put(kpDataSet.getKey(), compose);
                     } else {
@@ -111,7 +111,7 @@ class DimProcImpl extends DimProcBase {
         // 状态处理
         final EmReport.UcaStatus statusOf = Ut.toEnum(dimension.getStatus(), EmReport.UcaStatus.class, EmReport.UcaStatus.ACTIVE);
         if (EmReport.UcaStatus.ACTIVE != statusOf) {
-            return Ut.future();
+            return Future.succeededFuture();
         }
         // 选择处理器
         final DimProc processor = Objects.requireNonNull(SUPPLIER.get(typeOf)).apply(this.owner());

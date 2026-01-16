@@ -52,7 +52,7 @@ class AuthenticationProviderOne implements AuthenticationProvider {
     @Override
     public Future<User> authenticate(final Credentials credentials) {
         // Fix-AUTH-001 提取不同的认证信息
-        final JsonObject authJson = this.valueCredentials(credentials);
+        final JsonObject authJson = SecurityUser.toJObject(credentials);
         // 提取缓存信息
         final String session = Ut.valueString(authJson, KName.SESSION);
         if (Ut.isNil(session)) {
@@ -85,20 +85,5 @@ class AuthenticationProviderOne implements AuthenticationProvider {
                 return Future.succeededFuture(authorized);
             });
         });
-    }
-
-    private JsonObject valueCredentials(final Credentials credentials) {
-        final JsonObject authJson = credentials.toJson();
-        if (authJson.containsKey(KName.USERNAME)) {
-            // username -> session
-            authJson.put(KName.SESSION, authJson.getString(KName.USERNAME));
-        }
-        if (authJson.containsKey(KName.TOKEN)) {
-            // token -> session
-            authJson.put(KName.SESSION, authJson.getString(KName.TOKEN));
-            // token -> access_token
-            authJson.put(KName.ACCESS_TOKEN, authJson.getString(KName.TOKEN));
-        }
-        return authJson;
     }
 }

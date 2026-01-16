@@ -481,11 +481,11 @@ final class Compare {
             final List<Future<JsonArray>> futures = new ArrayList<>();
             final List<T> qAdd = compared.getOrDefault(ChangeFlag.ADD, new ArrayList<>());
             if (!qAdd.isEmpty()) {
-                futures.add(insertAsyncFn.apply(qAdd).compose(Ut::futureA));
+                futures.add(insertAsyncFn.apply(qAdd).map(Json::toJArray));
             }
             final List<T> qUpdate = compared.getOrDefault(ChangeFlag.UPDATE, new ArrayList<>());
             if (!qUpdate.isEmpty()) {
-                futures.add(updateAsyncFn.apply(qUpdate).compose(Ut::futureA));
+                futures.add(updateAsyncFn.apply(qUpdate).map(Json::toJArray));
             }
             return Fx.compressA(futures);
         }

@@ -38,7 +38,7 @@ class PhaseRunOn {
                 log.debug("[ ZERO ] ( Job {} ) 3. --> 注解 @On 的方法调用：{} 。", mission.getCode(), method.getName()));
             return this.execute(envelop, method, mission);
         } else {
-            return Ut.future(envelop);
+            return Future.succeededFuture(envelop);
         }
     }
 
@@ -49,7 +49,7 @@ class PhaseRunOn {
                 log.debug("[ ZERO ] ( Job {} ) 6. <-- 注解 @Off 的方法调用：{} 。", mission.getCode(), method.getName()));
             return this.execute(envelop, method, mission);
         } else {
-            return Ut.future(envelop);
+            return Future.succeededFuture(envelop);
         }
 
     }
@@ -68,19 +68,19 @@ class PhaseRunOn {
         } else {
             PhaseHelper.logOnce(mission, () ->
                 log.error("[ ZERO ] ( Job {} ) 任务出错终止，出错组件：{}", mission.getCode(), envelop.error().getClass().getName()));
-            return Ut.future(envelop);
+            return Future.succeededFuture(envelop);
         }
     }
 
     private <T> Future<Envelop> normalize(final T returnValue) {
         if (Objects.isNull(returnValue)) {
             // Return null
-            return Ut.future(Envelop.okJson());
+            return Future.succeededFuture(Envelop.okJson());
         }
         if (Envelop.class == returnValue.getClass()) {
             return Future.succeededFuture((Envelop) returnValue);
         } else {
-            return Ut.future(Envelop.success(returnValue));
+            return Future.succeededFuture(Envelop.success(returnValue));
         }
     }
 

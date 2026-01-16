@@ -25,6 +25,14 @@ class Json {
         return MMAdapt.of(pojo).mapTo(serialized);
     }
 
+    static <T> JsonObject toJObject(final T entity) {
+        return toJObject(entity, "");
+    }
+
+    static <T> JsonArray toJArray(final List<T> list) {
+        return toJArray(list, "");
+    }
+
     static <T> JsonArray toJArray(
         final List<T> list,
         final String pojo

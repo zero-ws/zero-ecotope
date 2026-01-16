@@ -1,1 +1,1 @@
-io.zerows.plugins.security.service.AuthUserCache
+io.zerows.plugins.security.service.AsyncUserCache

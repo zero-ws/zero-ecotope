@@ -12,6 +12,7 @@ import io.r2mo.vertx.common.cache.MemoAtSecurity;
 import io.vertx.core.Future;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
@@ -29,7 +30,7 @@ import java.util.UUID;
  *    - 接口：对接 io.r2mo.jaas.session.UserCache 的同步接口定义。
  *    - 目的：让同步业务代码能够透明地使用异步存储能力，屏蔽底层的 Future/Promise 复杂度。
  *
- * 2. 架构适配层 \uD83C\uDFD7\uFE0F
+ * 2. 架构适配层 \uD83C\uDFD7️
  *    UserCache 接口位于基础抽象层，定义为标准的同步 API 以简化业务逻辑开发。
  *    为了不破坏顶层接口的同步契约，本类承担了"桥接器"的角色：
  *    call(Sync) -> [ AuthUserCache ] -> await(Async) -> Store(Async)
@@ -47,7 +48,7 @@ import java.util.UUID;
  */
 @Slf4j
 @SPID(priority = 207)
-public class AuthUserCache implements UserCache {
+public class AsyncUserCache implements UserCache {
 
     private static final Cc<String, MemoAtSecurity> CC_FACTORY = Cc.openThread();
 
@@ -177,14 +178,25 @@ public class AuthUserCache implements UserCache {
 
     /**
      * <pre>
-     * 账号反查用户 \uD83D\uDD0D
+     * 智能用户查找 (Smart Lookup) \uD83D\uDD0D
      *
-     * 1. 根据标识 (username/mobile/email) 查找 UUID。
-     * 2. 再根据 UUID 查找 UserAt 详情。
+     * 本方法支持混合模式查找，自动识别输入参数类型（ID 或 账号）。
+     * 解决了前端可能传入 UUID 或 业务账号 (username/mobile/email) 的不确定性。
+     *
+     * \uD83D\uDD04 查找流程 (Priority Loop)：
+     *
+     * 1. 主键直连 (UUID Priority) \uD83C\uDD94
+     *    优先尝试将输入字符串解析为 UUID 并直接查找。
+     *    若解析成功且找到记录，则直接返回结果（高性能路径）。
+     *
+     * 2. 索引兜底 (Index Fallback) \uD83D\uDCC7
+     *    若步骤 1 未命中（不是 UUID 或 ID 不存在），则将输入视为业务账号。
+     *    通过 {@link MemoAtSecurity#userVector()} 索引反查对应的 UUID。
+     *    最终递归调用本方法获取 {@link UserAt} 详情。
      * </pre>
      *
-     * @param idOr 登录标识
-     * @return UserAt 用户详情
+     * @param idOr 用户主键 ID 或 登录账号 (username/mobile/email)
+     * @return UserAt 用户详情，若双重查找均未命中则返回 null
      */
     @Override
     public UserAt find(final String idOr) {
@@ -193,12 +205,24 @@ public class AuthUserCache implements UserCache {
         }
 
         // 1. 查找索引
-        final String uidStr = Future.await(this.factory().userVector().find(idOr));
-
-        if (uidStr == null) {
-            return null;
+        final UserAt found = this.find(UUID.fromString(idOr));
+        /*
+         * 修复查找不到的问题，输入的值可能是 id 也可能是其他标识如
+         * - username
+         * - mobile
+         * - email
+         * 查找顺序
+         * 1. 优先使用 id 查找
+         * 2. 其次使用索引查找
+         */
+        if (Objects.nonNull(found)) {
+            return found;
         }
 
+        final String uidStr = Future.await(this.factory().userVector().find(idOr));
+        if (Objects.isNull(uidStr)) {
+            return null;
+        }
         // 2. 递归查找详情
         return this.find(UUID.fromString(uidStr));
     }

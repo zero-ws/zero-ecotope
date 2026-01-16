@@ -170,24 +170,12 @@ public final class Ux extends _Where {
         return future(list);
     }
 
-    public static <T> Function<Throwable, Future<T>> futureE(final T input) {
-        return Async.toErrorFuture(() -> input);
-    }
-
-    public static <T> Function<Throwable, Future<T>> futureE(final Supplier<T> supplier) {
-        return Async.toErrorFuture(supplier);
-    }
-
     public static <T> Future<JsonArray> futureA(final List<T> list, final String pojo) {
         return Future.succeededFuture(Ut.toJson(list, pojo));
     }
 
     public static Future<JsonArray> futureA() {
         return futureA(new ArrayList<>(), VString.EMPTY);
-    }
-
-    public static Future<JsonArray> futureA(Throwable ex) {
-        return Async.<JsonArray>toErrorFuture(JsonArray::new).apply(ex);
     }
 
     public static <T> Future<JsonArray> futureA(final List<T> list) {
@@ -210,10 +198,6 @@ public final class Ux extends _Where {
 
     public static Future<JsonObject> futureJ() {
         return futureJ(new JsonObject(), VString.EMPTY);
-    }
-
-    public static Future<JsonObject> futureJ(Throwable ex) {
-        return Async.<JsonObject>toErrorFuture(JsonObject::new).apply(ex);
     }
 
     public static <T> Future<JsonObject> futureJ(final T entity) {
@@ -268,9 +252,6 @@ public final class Ux extends _Where {
         return futureG(item, "type");
     }
 
-    /*
-     * key part for extract data from environment
-     */
     public static String keyUser(final User user) {
         return TokenJwt.of(user).user();
     }

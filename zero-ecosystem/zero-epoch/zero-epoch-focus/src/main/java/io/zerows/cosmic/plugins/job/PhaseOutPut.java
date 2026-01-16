@@ -65,7 +65,7 @@ class PhaseOutPut {
              * For spec debug here, this code is very important
              */
             log.error(error.getMessage(), error);
-            return Ut.future(envelop);
+            return Future.succeededFuture(envelop);
         }
     }
 
@@ -100,7 +100,7 @@ class PhaseOutPut {
             PhaseHelper.logOnce(mission, () ->
                 log.error("[ ZERO ] ( Job {} ) 任务之前步骤出错，出错组件：{}", mission.getCode(), envelop.error().getClass().getName()));
 
-            return Ut.future(envelop);
+            return Future.succeededFuture(envelop);
         }
     }
 }
