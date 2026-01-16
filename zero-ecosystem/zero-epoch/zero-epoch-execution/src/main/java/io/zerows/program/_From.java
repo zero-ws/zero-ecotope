@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * @author lang : 2023-06-11
  */
-class _GetFrom extends _Get {
+class _From extends _Dict {
 
     public static <T> T fromJson(final JsonObject data, final Class<T> clazz) {
         return Ut.fromJson(data, clazz);

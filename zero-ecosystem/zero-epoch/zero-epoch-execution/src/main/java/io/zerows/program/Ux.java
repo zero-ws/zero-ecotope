@@ -1,10 +1,14 @@
 package io.zerows.program;
 
+import io.r2mo.jaas.session.UserAt;
+import io.r2mo.jaas.session.UserContext;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.shareddata.ClusterSerializable;
 import io.vertx.ext.auth.User;
+import io.vertx.ext.auth.authentication.Credentials;
+import io.vertx.ext.web.Session;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.security.TokenJwt;
 import io.zerows.platform.constant.VString;
@@ -252,11 +256,46 @@ public final class Ux extends _Where {
         return futureG(item, "type");
     }
 
+
+    // --------------- Future of Map -----------------
+    @Deprecated
     public static String keyUser(final User user) {
         return TokenJwt.of(user).user();
     }
 
-    // ---------------------------------- Children Utility
+    // NEW BEGIN -------------------------------------------------
+    // 新版用户相关的 API
+    public static UserAt userAt() {
+        return Logged.userAt();
+    }
+
+    public static UserAt userAt(final User user) {
+        return Logged.userAt(user);
+    }
+
+    public static UserContext userContext() {
+        return Logged.userContext();
+    }
+
+    public static JsonObject userCreds(final Credentials credentials) {
+        return Logged.userCreds(credentials);
+    }
+
+    public static User userVx(final UserAt userAt) {
+        return Logged.userVx(userAt);
+    }
+
+    public static User userVx(final User user, final Session session) {
+        return Logged.userVx(user, session);
+    }
+
+    public static String userId() {
+        return Logged.userId(false);
+    }
+
+    public static <T> T userId(final boolean isUuid) {
+        return Logged.userId(isUuid);
+    }
 
     // 暴露异步方法
     public static <T> Future<T> waitAsync(Supplier<T> executor) {
@@ -267,6 +306,7 @@ public final class Ux extends _Where {
         return Task.asyncVirtual(executor);
     }
 
+    // NEW END -------------------------------------------------
     public static class Job {
         public static UxJob on() {
             return new UxJob();

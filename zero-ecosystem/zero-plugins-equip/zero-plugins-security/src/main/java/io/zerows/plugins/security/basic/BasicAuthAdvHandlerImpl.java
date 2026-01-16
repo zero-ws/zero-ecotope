@@ -82,10 +82,7 @@ class BasicAuthAdvHandlerImpl extends HTTPAuthorizationHandler<AuthenticationPro
                 throw UNAUTHORIZED;
             }
             return userAt;
-        }).compose(userAt -> {
-
-            return Future.succeededFuture();
-        });
+        }).map(Ux::userVx);
     }
 
     private Future<User> authenticateTokenBasic(final RoutingContext context, final String header) {

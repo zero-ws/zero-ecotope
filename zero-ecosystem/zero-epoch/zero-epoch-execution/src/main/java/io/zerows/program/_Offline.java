@@ -1,15 +1,11 @@
 package io.zerows.program;
 
-import io.vertx.core.Future;
-import io.vertx.core.Handler;
-import io.vertx.core.Promise;
-import io.vertx.core.Vertx;
-import io.vertx.core.WorkerExecutor;
+import io.vertx.core.*;
 
 /**
  * @author lang : 2023-06-11
  */
-class _Offline extends _GetFrom {
+class _Offline extends _Get {
     // ---------------------- Agent mode usage --------------------------
 
     public static Vertx nativeVertx() {

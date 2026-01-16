@@ -5,7 +5,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 import io.zerows.epoch.annotations.Wall;
-import io.zerows.plugins.security.SecurityUser;
+import io.zerows.program.Ux;
 import io.zerows.sdk.security.WallExecutor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -33,7 +33,7 @@ public abstract class AsyncWallExecutor implements WallExecutor {
         }
 
         // 加载用户信息，直接做转换 UserAt -> User
-        return userService.loadLogged(request).map(SecurityUser::toUser);
+        return userService.loadLogged(request).map(Ux::userVx);
     }
 
     /**

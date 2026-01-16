@@ -3,15 +3,13 @@ package io.zerows.plugins.security;
 import io.r2mo.typed.exception.WebException;
 import io.vertx.core.Future;
 import io.vertx.core.http.HttpServerRequest;
-import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 import io.vertx.ext.auth.authentication.AuthenticationProvider;
 import io.vertx.ext.web.RoutingContext;
-import io.vertx.ext.web.Session;
 import io.vertx.ext.web.handler.impl.AuthenticationHandlerImpl;
-import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.security.SecurityMeta;
 import io.zerows.plugins.security.exception._80243Exception401NeedLogin;
+import io.zerows.program.Ux;
 
 import java.util.Objects;
 
@@ -50,11 +48,7 @@ class AuthenticationHandlerOne extends AuthenticationHandlerImpl<AuthenticationP
          * - 分发即可
          * 所以此处暂时保留，若后续需要在 Handler 中进行额外的处理，可以在此处添加逻辑
          */
-        final JsonObject principal = user.principal();
-        final Session session = context.session();
-        if (Objects.nonNull(session)) {
-            principal.put(KName.SESSION, session.id());
-        }
-        return Future.succeededFuture(user);
+        final User logged = Ux.userVx(user, context.session());
+        return Future.succeededFuture(logged);
     }
 }
