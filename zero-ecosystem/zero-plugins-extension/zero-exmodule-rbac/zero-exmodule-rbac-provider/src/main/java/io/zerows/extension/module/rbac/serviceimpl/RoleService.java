@@ -80,7 +80,7 @@ public class RoleService implements RoleStub {
         view.setLanguage(role.getLanguage());
         view.setActive(true);
         view.setCreatedAt(LocalDateTime.now());
-        view.setCreatedBy(Ux.keyUser(user));
+        view.setCreatedBy(Ux.userId(user));
 
         return DB.on(SViewDao.class).insertAsync(view).mapEmpty();
     }

@@ -53,7 +53,7 @@ class AuthenticationProviderOne implements AuthenticationProvider {
     @Override
     public Future<User> authenticate(final Credentials credentials) {
         // Fix-AUTH-001 提取不同的认证信息
-        final JsonObject authJson = Ux.userCreds(credentials);
+        final JsonObject authJson = Ux.userData(credentials);
         // 提取缓存信息
         final String session = Ut.valueString(authJson, KName.SESSION);
         if (Ut.isNil(session)) {

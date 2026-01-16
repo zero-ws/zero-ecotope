@@ -10,8 +10,9 @@ import io.vertx.ext.auth.User;
 import io.vertx.ext.auth.authentication.Credentials;
 import io.vertx.ext.web.Session;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.metadata.security.TokenJwt;
+import io.zerows.epoch.web.Account;
 import io.zerows.platform.constant.VString;
+import io.zerows.platform.enums.SecurityType;
 import io.zerows.specification.modeling.HRecord;
 import io.zerows.support.Ut;
 
@@ -258,43 +259,58 @@ public final class Ux extends _Where {
 
 
     // --------------- Future of Map -----------------
-    @Deprecated
-    public static String keyUser(final User user) {
-        return TokenJwt.of(user).user();
+    public static String userId(final User user) {
+        return Account.userId(user);
     }
 
     // NEW BEGIN -------------------------------------------------
     // 新版用户相关的 API
     public static UserAt userAt() {
-        return Logged.userAt();
+        return Account.userAt();
     }
 
     public static UserAt userAt(final User user) {
-        return Logged.userAt(user);
+        return Account.userAt(user);
     }
 
     public static UserContext userContext() {
-        return Logged.userContext();
+        return Account.userContext();
     }
 
-    public static JsonObject userCreds(final Credentials credentials) {
-        return Logged.userCreds(credentials);
+    public static JsonObject userData(final Credentials credentials) {
+        return Account.userData(credentials);
+    }
+
+    public static JsonObject userToken(final String token) {
+        return Account.userToken(token);
+    }
+
+    public static JsonObject userToken(final String token, final SecurityType type) {
+        return Account.userToken(token, type);
+    }
+
+    public static String userToken(final JsonObject tokenData) {
+        return Account.userToken(tokenData);
+    }
+
+    public static String userToken(final String token, final String field) {
+        return Account.userToken(token, field);
     }
 
     public static User userVx(final UserAt userAt) {
-        return Logged.userVx(userAt);
+        return Account.userVx(userAt);
     }
 
     public static User userVx(final User user, final Session session) {
-        return Logged.userVx(user, session);
+        return Account.userVx(user, session);
     }
 
     public static String userId() {
-        return Logged.userId(false);
+        return Account.userId(false);
     }
 
     public static <T> T userId(final boolean isUuid) {
-        return Logged.userId(isUuid);
+        return Account.userId(isUuid);
     }
 
     // 暴露异步方法

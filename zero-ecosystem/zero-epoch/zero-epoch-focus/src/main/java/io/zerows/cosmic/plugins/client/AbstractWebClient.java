@@ -2,7 +2,6 @@ package io.zerows.cosmic.plugins.client;
 
 import io.vertx.core.MultiMap;
 import io.zerows.platform.metadata.KIntegration;
-import io.zerows.sdk.security.Token;
 import org.apache.http.HttpHeaders;
 
 import java.util.Objects;
@@ -22,14 +21,14 @@ public abstract class AbstractWebClient {
 
     protected MultiMap headers() {
         final MultiMap headers = MultiMap.caseInsensitiveMultiMap();
-        final Token token = this.token();
+        final String token = this.token();
         if (Objects.nonNull(token)) {
-            headers.add(HttpHeaders.AUTHORIZATION, this.token().authorization());
+            headers.add(HttpHeaders.AUTHORIZATION, token);
         }
         return headers;
     }
 
-    public Token token() {
+    public String token() {
         return null;
     }
 }

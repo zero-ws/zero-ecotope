@@ -30,7 +30,7 @@ class PreAuditCreatePre extends PreAuditAction {
         final User user = envelop.user();
         final KModule module = in.module();
         if (Objects.nonNull(user)) {
-            final String userId = Ux.keyUser(user);
+            final String userId = Ux.userId(user);
             if (Ut.isNotNil(userId)) {
                 final KField field = module.getField();
                 /* Created */

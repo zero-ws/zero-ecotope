@@ -59,7 +59,7 @@ class StepSync01Debt implements Step<User, FDebt> {
         // updatedBy / updatedAt
         // finished / finishedAt
         final LocalDateTime nowAt = LocalDateTime.now();
-        final String userKey = Ux.keyUser(user);
+        final String userKey = Ux.userId(user);
 
         /*
          * finished = true

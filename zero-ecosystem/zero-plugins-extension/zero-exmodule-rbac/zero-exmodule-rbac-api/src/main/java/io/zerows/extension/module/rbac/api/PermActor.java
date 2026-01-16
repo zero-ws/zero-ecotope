@@ -101,7 +101,7 @@ public class PermActor {
         final JsonArray removed = Ut.valueJArray(processed.getJsonArray("removed"));
         final JsonObject relation = Ut.valueJObject(processed.getJsonObject("relation"));
 
-        final String userKey = Ux.keyUser(user);
+        final String userKey = Ux.userId(user);
 
         // SPermSet
         final SPermSet permSet = new SPermSet();
@@ -156,7 +156,7 @@ public class PermActor {
 
     @Address(Addr.Perm.DELETE)
     public Future<Boolean> delete(final String key, final User user) {
-        final String userKey = Ux.keyUser(user);
+        final String userKey = Ux.userId(user);
         return this.stub.deleteAsync(key, userKey);
     }
 }

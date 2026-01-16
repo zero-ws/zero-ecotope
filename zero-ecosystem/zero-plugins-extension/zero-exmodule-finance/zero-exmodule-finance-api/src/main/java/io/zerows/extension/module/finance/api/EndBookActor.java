@@ -24,7 +24,7 @@ public class EndBookActor {
     @Address(Addr.Settle.UP_BOOK)
     public Future<JsonArray> finalizeBook(final JsonArray books, final User user) {
         // Book Finalize ( Not Settlement )
-        final String userKey = Ux.keyUser(user);
+        final String userKey = Ux.userId(user);
         Ut.itJArray(books).forEach(json -> {
             json.put(KName.UPDATED_AT, Instant.now());
             json.put(KName.UPDATED_BY, userKey);

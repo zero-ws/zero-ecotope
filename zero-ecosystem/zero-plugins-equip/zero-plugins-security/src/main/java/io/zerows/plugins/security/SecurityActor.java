@@ -22,32 +22,35 @@ import io.zerows.specification.configuration.HConfig;
  *
  * @author lang : 2025-10-27
  */
-@Actor(value = "security")
+@Actor(value = "security", sequence = -160)
 public class SecurityActor extends AbstractHActor {
-    private static final SecurityManager MANAGER = SecurityManager.of();
 
     // ------------ Actor 提供的静态方法 ----------------
     public static SecurityConfig configOf(final SecurityType type) {
-        return MANAGER.configOf(type);
+        return manager().configOf(type);
     }
 
     public static SecurityConfig configJwt() {
-        return MANAGER.configJwt();
+        return manager().configJwt();
     }
 
     public static SecurityCaptcha configCaptcha() {
-        return MANAGER.configCaptcha();
+        return manager().configCaptcha();
     }
 
     public static YmSecurity configuration() {
-        return MANAGER.configuration();
+        return manager().configuration();
+    }
+
+    private static SecurityManager manager() {
+        return SecurityManager.of();
     }
 
     @Override
     protected Future<Boolean> startAsync(final HConfig config, final Vertx vertxRef) {
         this.vLog("[ Security ] SecurityActor 初始化完成，配置：{}", config);
         // 先注册配置信息
-        MANAGER.registryOf(config, vertxRef);
+        manager().registryOf(config, vertxRef);
 
         TokenBuilderManager.of().registry(TokenType.BASIC, TokenBuilderBasic::new);
         TokenBuilderManager.of().registry(TokenType.AES, TokenBuilderAES::new);

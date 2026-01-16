@@ -13,7 +13,6 @@ import io.zerows.extension.module.rbac.metadata.ScConfig;
 import io.zerows.extension.module.rbac.metadata.ScToken;
 import io.zerows.platform.constant.VValue;
 import io.zerows.program.Ux;
-import io.zerows.sdk.security.Token;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
@@ -114,11 +113,11 @@ class ScClockToken extends ScClockBase<ScToken> {
          * - token
          * - refreshToken
          */
-        final String vToken = Token.encodeJwt(tokenData);
+        final String vToken = Ux.userToken(tokenData);
         final JsonObject refreshData = new JsonObject();
         refreshData.put(KName.USER, userId);
         refreshData.put(KName.ACCESS_TOKEN, vToken);
-        final String vRefresh = Token.encodeJwt(refreshData);
+        final String vRefresh = Ux.userToken(refreshData);
         return token.token(vToken).refreshToken(vRefresh);
     }
 

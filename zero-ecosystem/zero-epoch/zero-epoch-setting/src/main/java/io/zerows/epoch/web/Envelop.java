@@ -17,7 +17,6 @@ import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.Session;
 import io.zerows.epoch.basicore.exception._40032Exception500IndexExceed;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.metadata.security.TokenJwt;
 import io.zerows.platform.enums.modeling.EmValue;
 import io.zerows.sdk.security.Acl;
 import io.zerows.support.Ut;
@@ -354,7 +353,7 @@ public class Envelop implements Serializable {
 
     // ------------------ Security Parth -------------------
     public String userId() {
-        return TokenJwt.of(this.user()).user();
+        return Account.userId(false);// TokenJwt.of(this.user()).user();
     }
 
     public User user() {
@@ -378,8 +377,7 @@ public class Envelop implements Serializable {
 
     public String token(final String field) {
         final String jwt = this.assist.principal(KName.ACCESS_TOKEN);
-        final JsonObject user = TokenJwt.of(jwt).data();
-        return user.getString(field);
+        return Account.userToken(jwt, field);
     }
 
     @Override

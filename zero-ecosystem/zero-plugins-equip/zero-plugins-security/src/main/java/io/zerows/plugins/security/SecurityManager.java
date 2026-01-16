@@ -60,7 +60,7 @@ class SecurityManager {
     private SecurityManager() {
     }
 
-    public static SecurityManager of() {
+    public static synchronized SecurityManager of() {
         return INSTANCE;
     }
 

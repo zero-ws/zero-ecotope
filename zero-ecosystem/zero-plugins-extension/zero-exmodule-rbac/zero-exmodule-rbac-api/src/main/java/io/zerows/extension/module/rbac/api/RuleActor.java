@@ -101,7 +101,7 @@ public class RuleActor {
          *     }
          * }
          */
-        final String userKey = Ux.keyUser(user);
+        final String userKey = Ux.userId(user);
         // CODE = ? AND SIGMA = ?
         final JsonObject condition = Ux.whereAnd();
         condition.put(KName.SIGMA, Ut.valueString(viewData, KName.SIGMA));

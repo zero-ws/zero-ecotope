@@ -26,7 +26,7 @@ public class FileActor {
         final JsonObject qrDefault = Ux.whereAnd();
         qrDefault.put(KName.STATUS, FileStatus.DONE.name());
         qrDefault.put(KName.ACTIVE, Boolean.TRUE);
-        qrDefault.put(KName.CREATED_BY, Ux.keyUser(user));
+        qrDefault.put(KName.CREATED_BY, Ux.userId(user));
         final JsonObject qrCombine = Ut.irAndQH(query, "$DFT$", qrDefault);
         return DB.on(XAttachmentDao.class).searchJAsync(qrCombine);
     }

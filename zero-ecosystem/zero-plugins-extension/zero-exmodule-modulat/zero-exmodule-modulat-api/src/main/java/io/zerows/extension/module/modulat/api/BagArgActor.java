@@ -34,7 +34,7 @@ public class BagArgActor {
     @Me
     public Future<JsonObject> saveBag(final String bagId, final JsonObject request,
                                       final User user) {
-        final String userKey = Ux.keyUser(user);
+        final String userKey = Ux.userId(user);
         request.put(KName.UPDATED_BY, userKey);
         return this.bagArgStub.saveBag(bagId, request);
     }

@@ -1,4 +1,4 @@
-package io.zerows.program;
+package io.zerows.epoch.web;
 
 import io.r2mo.jaas.element.MSUser;
 import io.r2mo.jaas.session.UserAt;
@@ -8,12 +8,22 @@ import io.vertx.ext.auth.User;
 import io.vertx.ext.auth.authentication.Credentials;
 import io.vertx.ext.web.Session;
 import io.zerows.epoch.constant.KName;
+import io.zerows.platform.enums.SecurityType;
+import io.zerows.support.Ut;
 
 import java.util.Objects;
 
-class Logged {
+public class Account {
     
-    static User userVx(final User user, final Session session) {
+    public static UserAt userAt() {
+        return null;
+    }
+
+    public static UserAt userAt(final User user) {
+        return null;
+    }
+
+    public static User userVx(final User user, final Session session) {
         // 引用提取，带副作用
         final JsonObject principal = user.principal();
         if (Objects.nonNull(principal) && Objects.nonNull(session)) {
@@ -22,15 +32,7 @@ class Logged {
         return user;
     }
 
-    static UserAt userAt() {
-        return null;
-    }
-
-    static UserAt userAt(final User user) {
-        return null;
-    }
-
-    static User userVx(final UserAt userAt) {
+    public static User userVx(final UserAt userAt) {
         if (Objects.isNull(userAt)) {
             return null;
         }
@@ -55,11 +57,41 @@ class Logged {
         return authUser;
     }
 
-    static <T> T userId(final boolean isUuid) {
+    public static <T> T userId(final boolean isUuid) {
         return null;
     }
 
-    static JsonObject userCreds(final Credentials credentials) {
+    public static String userId(final User user) {
+        return null;
+    }
+
+    public static JsonObject userToken(final String token) {
+        if (Ut.isNil(token)) {
+            return null;
+        }
+        return null;
+    }
+
+    public static JsonObject userToken(final String token, final SecurityType type) {
+        if (Ut.isNil(token)) {
+            return null;
+        }
+        return null;
+    }
+
+    public static String userToken(final JsonObject tokenData) {
+        if (Ut.isNil(tokenData)) {
+            return null;
+        }
+        return null;
+    }
+
+    public static String userToken(final String token, final String field) {
+        final JsonObject userJ = userToken(token);
+        return Ut.valueString(userJ, field);
+    }
+
+    public static JsonObject userData(final Credentials credentials) {
         final JsonObject authJson = credentials.toJson();
         if (authJson.containsKey(KName.USERNAME)) {
             // username -> session
@@ -74,7 +106,7 @@ class Logged {
         return authJson;
     }
 
-    static UserContext userContext() {
+    public static UserContext userContext() {
         return null;
     }
 }

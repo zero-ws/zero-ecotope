@@ -63,7 +63,7 @@ public class UiViewHQBE implements HQBE {
          * user
          * role for future usage
          */
-        args.put(KName.USER, Ux.keyUser(envelop.user()));
+        args.put(KName.USER, Ux.userId(envelop.user()));
         return args;
     }
 

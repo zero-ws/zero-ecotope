@@ -43,7 +43,7 @@ class KeEnv {
 
     static void auditJ(final JsonObject body, final User user) {
         if (Ut.isNotNil(body) && Objects.nonNull(user)) {
-            final String key = Ux.keyUser(user);
+            final String key = Ux.userId(user);
             if (Ut.isNotNil(key)) {
                 body.put(KName.CREATED_BY, key);
                 body.put(KName.CREATED_AT, Instant.now());

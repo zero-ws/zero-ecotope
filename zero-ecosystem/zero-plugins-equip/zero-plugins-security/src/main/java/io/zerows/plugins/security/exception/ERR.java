@@ -20,4 +20,6 @@ interface ERR {
 
     VertxE _80243 = VertxE.of(-80243).state(HttpResponseStatus.UNAUTHORIZED);
     VertxE _80244 = VertxE.of(-80244).state(HttpResponseStatus.UNAUTHORIZED);
+
+    VertxE _80245 = VertxE.of(-80245).state(HttpResponseStatus.NOT_FOUND);
 }

@@ -25,7 +25,7 @@ public class EndPreAuthActor {
     @Address(Addr.Settle.UNLOCK_AUTHORIZE)
     public Future<JsonArray> unlockAuthorize(final JsonArray authorized, final User user) {
         // Authorized Modification
-        final String userKey = Ux.keyUser(user);
+        final String userKey = Ux.userId(user);
         Ut.itJArray(authorized).forEach(json -> {
             json.put(KName.UPDATED_AT, Instant.now());
             json.put(KName.UPDATED_BY, userKey);

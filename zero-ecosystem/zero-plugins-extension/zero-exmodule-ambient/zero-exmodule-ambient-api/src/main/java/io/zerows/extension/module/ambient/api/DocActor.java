@@ -66,7 +66,7 @@ public class DocActor {
 
     @Address(Addr.File.RENAME)
     public Future<JsonObject> rename(final JsonObject documentJ, final User user) {
-        final String userKey = Ux.keyUser(user);
+        final String userKey = Ux.userId(user);
         documentJ.put(KName.UPDATED_BY, userKey);
         return this.writer.rename(documentJ);
     }
@@ -79,7 +79,7 @@ public class DocActor {
 
     @Address(Addr.Doc.DOCUMENT_TRASH)
     public Future<JsonArray> trashIn(final JsonArray documentA, final User user) {
-        final String userKey = Ux.keyUser(user);
+        final String userKey = Ux.userId(user);
         Ut.itJArray(documentA).forEach(document -> document.put(KName.UPDATED_BY, userKey));
         return this.writer.trashIn(documentA);
     }
@@ -91,7 +91,7 @@ public class DocActor {
 
     @Address(Addr.Doc.DOCUMENT_ROLLBACK)
     public Future<JsonArray> trashOut(final JsonArray documentA, final User user) {
-        final String userKey = Ux.keyUser(user);
+        final String userKey = Ux.userId(user);
         Ut.itJArray(documentA).forEach(document -> document.put(KName.UPDATED_BY, userKey));
         return this.writer.trashOut(documentA);
     }

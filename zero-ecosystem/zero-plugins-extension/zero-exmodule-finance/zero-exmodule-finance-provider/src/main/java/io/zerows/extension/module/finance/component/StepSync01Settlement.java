@@ -66,7 +66,7 @@ class StepSync01Settlement implements Step<User, FSettlement> {
         final LocalDateTime nowAt = LocalDateTime.now();
         settlement.setFinished(Boolean.TRUE);
         settlement.setFinishedAt(nowAt);
-        settlement.setUpdatedBy(Ux.keyUser(user));
+        settlement.setUpdatedBy(Ux.userId(user));
         settlement.setUpdatedAt(nowAt);
     }
 }

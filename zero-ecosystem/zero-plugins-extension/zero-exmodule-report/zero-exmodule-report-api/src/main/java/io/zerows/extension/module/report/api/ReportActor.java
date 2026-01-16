@@ -45,7 +45,7 @@ public class ReportActor {
             // ERR-80701
             return FnVertx.failOut(_80701Exception404ReportMissing.class, reportId);
         }
-        final String userKey = Ux.keyUser(user);
+        final String userKey = Ux.userId(user);
         query.put(KName.USER, userKey);
         return this.reportStub.buildInstance(reportId, query);
     }
@@ -55,7 +55,7 @@ public class ReportActor {
                                            final JsonObject data,
                                            final User user) {
         final JsonObject saveData = data.copy();
-        saveData.put(KName.CREATED_BY, Ux.keyUser(user));
+        saveData.put(KName.CREATED_BY, Ux.userId(user));
         saveData.put(KName.CREATED_AT, Instant.now());
         saveData.put(KName.ACTIVE, Boolean.TRUE);
         saveData.put(KName.STATUS, EmReport.UcaStatus.ACTIVE.name());
