@@ -19,12 +19,17 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * 🟢 认证墙 (Fail-Over 模式)
+ * 核心逻辑：Handler 之间是 OR 关系。只要有一个 Handler 认证成功，即视为通过。
+ * 解决痛点：防止 Basic Handler 因为看不懂 Bearer Token 而直接中断请求，导致 JWT Handler 无法执行。
+ */
 @Slf4j
 public class AuthenticationHandlerWall extends AuthenticationHandlerImpl<AuthenticationProvider> implements WallHandler {
+
     private static final AtomicInteger HANDLER_KEY_SEQ = new AtomicInteger();
     private final List<AuthenticationHandlerInternal> handlers = new ArrayList<>();
     private final String chainAuthHandlerKey;
-
     private AuthenticationHandlerInternal finalizer;
 
     public AuthenticationHandlerWall() {
@@ -45,17 +50,18 @@ public class AuthenticationHandlerWall extends AuthenticationHandlerImpl<Authent
     @Override
     public Future<User> authenticate(final RoutingContext context) {
         if (this.handlers.isEmpty()) {
+            // 没有配置任何处理器，直接通过（或者根据安全策略决定是否拒绝）
             return Future.succeededFuture();
         }
         final Promise<User> promise = Promise.promise();
 
-        // 1. 执行矩阵编排 (OR 逻辑)
-        // 初始调用时，错误为 null
+        // 1. 启动矩阵编排 (OR 逻辑迭代)
         this.iterate(0, context, promise, null);
 
-        // 2. 连接 Finalizer (AND 逻辑)
+        // 2. 连接 Finalizer (AND 逻辑，严出)
         return promise.future().compose(matrixUser -> {
             if (this.finalizer != null) {
+                // Finalizer 通常用于将 User 转换为业务 Account，或者做最后的统一校验
                 return this.finalizer.authenticate(context);
             }
             return Future.succeededFuture(matrixUser);
@@ -63,38 +69,57 @@ public class AuthenticationHandlerWall extends AuthenticationHandlerImpl<Authent
     }
 
     /**
-     * 递归迭代器
+     * 🟢 核心递归逻辑：Fail-Over 机制
+     * * @param idx       当前尝试的 Handler 索引
      *
-     * @param idx       当前索引
      * @param ctx       上下文
-     * @param promise   结果 Promise
-     * @param lastError 上一个 Handler 抛出的异常 (用于追踪链条断裂的真实原因)
+     * @param promise   整体结果 Promise
+     * @param lastError 上一个 Handler 失败的原因 (仅用于所有都失败时抛出)
      */
     private void iterate(final int idx, final RoutingContext ctx, final Promise<User> promise, final Throwable lastError) {
-        // 1. 终止条件：所有 Handler 都遍历完毕
+        // [终止条件]：所有 Handler 都尝试完毕，依然没有成功
         if (idx >= this.handlers.size()) {
-            // 🛑 核心修改：如果有捕获到异常，则抛出最后一次捕获的异常
-            // 如果没有任何异常（例如列表为空），则抛出默认 401
-            promise.fail(Objects.requireNonNullElseGet(lastError, () -> new _401UnauthorizedException("Authentication failed: No provider accepted the credentials.")));
+            // 🛑 核心修复点 🛑
+            // 不要直接把 lastError 抛给前端！
+            // 因为 lastError 往往是链条中最后一个 Handler（通常是 JWT）报出的格式错误，
+            // 它会覆盖掉前面 Handler (如 Basic) 真正有价值的错误（如密码错误）。
+
+            // 1. 记录日志供服务端排查 (可选)
+            if (lastError != null) {
+                log.debug("[ PLUG ] (Security) All auth handlers failed. Last error was: {}", lastError.getMessage());
+            }
+
+            // 2. 对前端返回统一的、通用的 401 错误
+            // 这样无论用户是用 Basic 还是 JWT，错了就是 "Authentication failed"，不会有歧义
+            promise.fail(new _401UnauthorizedException("Authentication failed: Invalid credentials."));
             return;
         }
 
         final AuthenticationHandlerInternal authHandler = this.handlers.get(idx);
+
+        // 🌟 关键点：使用 try-catch 包裹同步异常，使用 onComplete 处理异步结果
         try {
             authHandler.authenticate(ctx).onComplete(res -> {
                 if (res.succeeded()) {
-                    // 矩阵成功：设置 User，完成当前阶段
+                    // ✅ 成功：任意一个 Handler 成功，即视为整体成功！
+                    // 记录是哪个 Handler 成功的 (用于 postAuthentication)
                     ctx.put(this.chainAuthHandlerKey, idx);
+
                     final User verified = this.setAuthorized(ctx, res.result());
+                    // 立即完成，不再尝试后续 Handler
                     promise.complete(verified);
                 } else {
-                    // 矩阵失败：尝试下一个，并将当前失败的原因传递下去
-                    // 这样当循环结束时，如果全失败了，promise.fail 会拿到最后一个失败原因
+                    // ❌ 失败：当前 Handler 不认这个 Token (例如 Basic Handler 看到 Bearer Token)
+                    // 吞掉异常，继续尝试下一个 (idx + 1)
+                    if (log.isDebugEnabled()) {
+                        log.debug("[ PLUG ] ( Security ) Handler [{}] skipped due to error: {}",
+                            authHandler.getClass().getSimpleName(), res.cause().getMessage());
+                    }
                     this.iterate(idx + 1, ctx, promise, res.cause());
                 }
             });
         } catch (final Throwable t) {
-            // 捕获同步异常，同样传递下去
+            // ❌ 同步异常：也吞掉，继续尝试下一个
             this.iterate(idx + 1, ctx, promise, t);
         }
     }
@@ -110,9 +135,9 @@ public class AuthenticationHandlerWall extends AuthenticationHandlerImpl<Authent
         return user;
     }
 
-    // ... setAuthenticateHeader 和 postAuthentication 保持不变 ...
     @Override
     public boolean setAuthenticateHeader(final RoutingContext ctx) {
+        // 聚合所有 Handler 的 WWW-Authenticate 头
         boolean added = false;
         for (final AuthenticationHandlerInternal authHandler : this.handlers) {
             added |= authHandler.setAuthenticateHeader(ctx);
@@ -122,10 +147,12 @@ public class AuthenticationHandlerWall extends AuthenticationHandlerImpl<Authent
 
     @Override
     public void postAuthentication(final RoutingContext ctx) {
+        // 🌟 关键点：谁认证成功的，就由谁来处理后置逻辑
         final Integer idx = ctx.get(this.chainAuthHandlerKey);
         if (idx != null && idx >= 0 && idx < this.handlers.size()) {
             this.handlers.get(idx).postAuthentication(ctx);
         } else {
+            // 如果没有记录索引（可能是 session 恢复的 user），直接 next
             ctx.next();
         }
     }

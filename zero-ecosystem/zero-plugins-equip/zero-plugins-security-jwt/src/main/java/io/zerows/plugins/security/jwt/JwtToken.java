@@ -49,7 +49,7 @@ public class JwtToken implements Token {
 
     @Override
     public String encode(final JsonObject payload) {
-        return Objects.requireNonNull(this.provider()).generateToken(payload);
+        return Objects.requireNonNull(this.provider()).generateToken(payload, this.options.getJWTOptions());
     }
 
     @Override

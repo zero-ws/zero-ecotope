@@ -1,5 +1,6 @@
 package io.zerows.cortex.metadata;
 
+import io.r2mo.jaas.session.UserAt;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.MultiMap;
 import io.vertx.core.Vertx;
@@ -75,6 +76,8 @@ class ParameterAgent implements ParameterBuilder<RoutingContext> {
             returnValue = context.vertx().eventBus();
         } else if (ParameterPre.is(type, User.class)) {
             returnValue = context.user();
+        } else if (ParameterPre.is(type, UserAt.class)) {
+            returnValue = context.get(UserAt.class.getName());
         } else if (ParameterPre.is(type, Set.class)) {
             returnValue = new HashSet<>(context.fileUploads());
         } else if (ParameterPre.is(type, JsonArray.class)) {

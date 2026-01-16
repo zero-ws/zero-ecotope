@@ -17,11 +17,50 @@ import java.util.Objects;
 
 public class Account {
 
+    /**
+     * <pre>
+     * 🟢 提取用户会话
+     *
+     * 1. 🌐 使用场景：
+     *    在 Authenticated 的请求中，根据 `User` 对象获取 `UserAt` (会话操作句柄)。
+     *    用于后续的权限验证或用户信息获取。
+     *
+     * 2. 🎯 作用：
+     *    - 从 `User` 中提取 `userId`。
+     *    - 根据 `userId` 从 `UserSession` 中查找活跃会话。
+     *
+     * 3. ⚙️ 注意：
+     *    - 如果用户未登录或 Session 过期，可能返回 null。
+     * </pre>
+     *
+     * @param user Vert.x Web 上下文中的 User 对象
+     * @return UserAt 会话操作对象
+     */
     public static UserAt userAt(final User user) {
         final String userId = userId(user);
         return UserSession.of().find(userId);
     }
 
+    /**
+     * <pre>
+     * 🟢 注入 Session ID 到 Principal (带副作用)
+     *
+     * 1. 🌐 使用场景：
+     *    在认证成功后，将当前的 Web Session ID 绑定到 User 的 Principal 中。
+     *    使得 User 对象携带 Session 信息。
+     *
+     * 2. 🎯 作用：
+     *    - 这里修改了 `user.principal()` 的内容。
+     *    - 将 `KName.SESSION` 字段设置为 `session.id()`。
+     *
+     * 3. ⚙️ 注意：
+     *    - 这是一个由副作用的方法，会直接修改参数对象。
+     * </pre>
+     *
+     * @param user    认证后的用户对象
+     * @param session 当前的 Web Session
+     * @return 修改后的 User 对象
+     */
     public static User userVx(final User user, final Session session) {
         // 引用提取，带副作用
         final JsonObject principal = user.principal();
@@ -31,26 +70,77 @@ public class Account {
         return user;
     }
 
+    /**
+     * <pre>
+     * 🟢 构建 Vert.x User 对象
+     *
+     * 1. 🌐 使用场景：
+     *    根据内部的 `UserAt` 会话对象，反向构建 Vert.x 的 `User` 对象。
+     *    通常用于手动模拟登录状态或恢复上下文。
+     *
+     * 2. 🎯 作用：
+     *    - 提取 `UserAt` 中的身份信息。
+     *    - 构造 Principal (JSON)。
+     *    - 创建 Vert.x 的 User 实例。
+     * </pre>
+     *
+     * @param userAt 内部会话对象
+     * @return Vert.x User 实例
+     */
     public static User userVx(final UserAt userAt) {
         final JsonObject principal = userData(userAt);
         if (Objects.isNull(principal)) {
             return null;
         }
-        final User authUser = User.create(principal, userAt.data().data());
         /*
          * 后续处理，加载用户信息
          */
-        return authUser;
+        return User.create(principal, userAt.data().data());
     }
 
+    /**
+     * <pre>
+     * 🟢 提取用户 ID
+     *
+     * 1. 🌐 使用场景：
+     *    从 Vert.x 的 `User` 对象中快速获取用户唯一标识 (ID)。
+     *
+     * 2. 🎯 作用：
+     *    - 解析 principal JSON。
+     *    - 返回 `KName.ID` 字段。
+     * </pre>
+     *
+     * @param user Vert.x 用户对象
+     * @return 用户 ID 字符串
+     */
     public static String userId(final User user) {
         final JsonObject principal = user.principal();
         if (Ut.isNil(principal)) {
             return null;
         }
-        return principal.getString("sub");
+        return principal.getString(KName.ID);
     }
 
+    /**
+     * <pre>
+     * 🟢 构造用户 Principal 数据
+     *
+     * 1. 🌐 使用场景：
+     *    将内部领域模型 `UserAt` 转换为 JSON 格式的 Principal 数据。
+     *    用于 Vert.x 认证系统的数据交换。
+     *
+     * 2. 🎯 作用：
+     *    - 提取 Username, Password, ID。
+     *    - 注入 Habitus (租户/环境信息)。
+     *    - 注入 Session 标识。
+     *
+     * 3. ⚙️ 逻辑：
+     *    - 手动组装 JsonObject 以避免字段为 null 导致的异常。
+     * </pre>
+     *
+     * @param userAt 内部会话对象
+     * @return Principal JSON 数据
+     */
     public static JsonObject userData(final UserAt userAt) {
         if (Objects.isNull(userAt)) {
             return null;
@@ -73,6 +163,23 @@ public class Account {
         return principal;
     }
 
+    /**
+     * <pre>
+     * 🟢 凭证数据预处理
+     *
+     * 1. 🌐 使用场景：
+     *    在认证过程中，处理客户端提交的 `Credentials`。
+     *    标准化其中的字段名称。
+     *
+     * 2. 🎯 作用：
+     *    - 将 `username` 映射为 `session`。
+     *    - 将 `token` 映射为 `session` 和 `access_token`。
+     *    - 统一不同认证方式的字段差异。
+     * </pre>
+     *
+     * @param credentials 用户提交的凭证
+     * @return 处理后的 JSON 数据
+     */
     public static JsonObject userData(final Credentials credentials) {
         final JsonObject authJson = credentials.toJson();
         if (authJson.containsKey(KName.USERNAME)) {
@@ -88,6 +195,20 @@ public class Account {
         return authJson;
     }
 
+    /**
+     * <pre>
+     * 🟢 提取用户上下文 (保留接口)
+     *
+     * 1. 🌐 使用场景：
+     *    预留接口，用于将来从 User 对象中提取更复杂的上下文信息。
+     *
+     * 2. 🎯 作用：
+     *    - 目前暂未实现，直接返回 null。
+     * </pre>
+     *
+     * @param user Vert.x 用户对象
+     * @return 用户上下文
+     */
     public static UserContext userContext(final User user) {
         return null;
     }

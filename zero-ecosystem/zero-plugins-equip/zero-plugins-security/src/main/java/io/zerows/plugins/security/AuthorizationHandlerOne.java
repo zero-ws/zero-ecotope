@@ -36,10 +36,15 @@ class AuthorizationHandlerOne implements AuthorizationHandler {
         Collections.sort(metaList);
 
         final List<AuthorizationHandlerResource> handlerList = new ArrayList<>();
+        final Set<String> apis = new HashSet<>();
         for (final SecurityMeta meta : metaList) {
+            if (apis.contains(meta.getPath())) {
+                continue;
+            }
             final ProfileResource resource = ProfileResource.buildIn(meta);
             final AuthorizationHandlerResource handler = new AuthorizationHandlerResource(resource);
             handlerList.add(handler);
+            apis.add(meta.getPath());
         }
         return new AuthorizationHandlerOne(handlerList);
     }

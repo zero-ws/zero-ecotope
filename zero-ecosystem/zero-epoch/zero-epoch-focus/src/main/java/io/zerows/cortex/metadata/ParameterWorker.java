@@ -1,5 +1,6 @@
 package io.zerows.cortex.metadata;
 
+import io.r2mo.jaas.session.UserAt;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.MultiMap;
 import io.vertx.core.Vertx;
@@ -65,6 +66,8 @@ class ParameterWorker implements ParameterBuilder<Envelop> {
             returnValue = context.vertx().eventBus();
         } else if (ParameterPre.is(type, User.class)) {
             returnValue = envelop.user();
+        } else if (ParameterPre.is(type, UserAt.class)) {
+            returnValue = context.get(UserAt.class.getName());
         } else if (ParameterPre.is(type, Message.class)) {
             if (0 < extension.length && extension[0] instanceof Message<?>) {
                 returnValue = extension[0];

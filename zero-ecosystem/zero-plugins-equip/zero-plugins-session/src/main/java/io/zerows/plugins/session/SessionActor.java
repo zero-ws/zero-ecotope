@@ -2,6 +2,7 @@ package io.zerows.plugins.session;
 
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
+import io.vertx.core.http.CookieSameSite;
 import io.vertx.ext.web.handler.SessionHandler;
 import io.vertx.ext.web.sstore.SessionStore;
 import io.zerows.component.module.AbstractHActor;
@@ -33,13 +34,14 @@ public class SessionActor extends AbstractHActor {
      * 基本属性参考：<a href="https://vertx.io/blog/writing-secure-vert-x-web-apps/">Secure Session</a>
      *
      * @param vertx Vertx引用
-     *
      * @return SessionHandler
      */
     public static Future<SessionHandler> waitHandler(final Vertx vertx) {
         return waitStore(vertx).compose(store -> {
             final SessionHandler handler = SessionHandler.create(store)
-                .setCookieHttpOnlyFlag(true);
+                .setCookieHttpOnlyFlag(true)
+                .setCookieSecureFlag(true)
+                .setCookieSameSite(CookieSameSite.STRICT);
             return Future.succeededFuture(handler);
         });
     }

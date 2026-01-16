@@ -33,7 +33,8 @@ public abstract class AsyncWallExecutor implements WallExecutor {
         }
 
         // 加载用户信息，直接做转换 UserAt -> User
-        return userService.loadLogged(request).map(Account::userVx);
+        return userService.loadLogged(request)
+            .map(Account::userVx);
     }
 
     /**

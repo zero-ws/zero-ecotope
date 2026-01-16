@@ -23,6 +23,7 @@ import io.vertx.ext.web.handler.impl.HTTPAuthorizationHandler;
 import io.vertx.ext.web.impl.RoutingContextInternal;
 import io.vertx.ext.web.impl.Utils;
 import io.zerows.program.Ux;
+import lombok.extern.slf4j.Slf4j;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
@@ -41,6 +42,7 @@ import java.util.Objects;
  *    - 自动根据 Header 前缀分发认证逻辑。
  * </pre>
  */
+@Slf4j
 class BasicAuthAdvHandlerImpl extends HTTPAuthorizationHandler<AuthenticationProvider> implements BasicAuthAdvHandler {
     private static final WebException UNAUTHORIZED = new _401UnauthorizedException("权限认证失败，提供有效令牌！");
     private static final WebException BAD_REQUEST = new _400BadRequestException("错误的认证请求头格式！");

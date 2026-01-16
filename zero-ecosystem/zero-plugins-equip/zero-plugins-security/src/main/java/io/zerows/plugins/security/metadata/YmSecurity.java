@@ -110,11 +110,18 @@ public class YmSecurity implements Serializable {
 
     @Data
     public static class Limit implements Serializable {
+        // Session 数量
         private long session = 8192;
+        // Token 数量
         private long token = 4096;
+        // 验证码数量
+        private long authorize = 2048;
+        /*
+         * Session 超时时间（UserContext,UserAt,UserVector）
+         * Token 令牌超时时间
+         */
         private String expiredAt = "120m";
         private String refreshAt = "7d";
-        private long authorize = 2048;
         private List<String> types = new ArrayList<>();
 
         public Duration expiredAt() {

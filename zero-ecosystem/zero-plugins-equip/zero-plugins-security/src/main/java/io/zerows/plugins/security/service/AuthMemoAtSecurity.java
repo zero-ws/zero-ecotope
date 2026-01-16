@@ -55,7 +55,7 @@ class AuthMemoAtSecurity implements MemoAtSecurity {
     public MemoAt<String, UserAt> userAt() {
         final String name = UserCache.NAME_USER_AT + "/ASYNC:" + this.getClass().getName();
         return (MemoAt<String, UserAt>) CC_CACHE.pick(
-            () -> this.memoAt(name, String.class, UserAt.class, null),
+            () -> this.memoAt(name, String.class, UserAt.class, this.configLimit().expiredAt()),
             name
         );
     }
@@ -65,7 +65,7 @@ class AuthMemoAtSecurity implements MemoAtSecurity {
     public MemoAt<String, UserContext> userContext() {
         final String name = UserCache.NAME_USER_CONTEXT + "/ASYNC:" + this.getClass().getName();
         return (MemoAt<String, UserContext>) CC_CACHE.pick(
-            () -> this.memoAt(name, String.class, UserContext.class, null),
+            () -> this.memoAt(name, String.class, UserContext.class, this.configLimit().expiredAt()),
             name
         );
     }
@@ -75,7 +75,7 @@ class AuthMemoAtSecurity implements MemoAtSecurity {
     public MemoAt<String, String> userVector() {
         final String name = UserCache.NAME_USER_VECTOR + "/ASYNC:" + this.getClass().getName();
         return (MemoAt<String, String>) CC_CACHE.pick(
-            () -> this.memoAt(name, String.class, String.class, null),
+            () -> this.memoAt(name, String.class, String.class, this.configLimit().expiredAt()),
             name
         );
     }
@@ -84,9 +84,8 @@ class AuthMemoAtSecurity implements MemoAtSecurity {
     @SuppressWarnings("unchecked")
     public MemoAt<String, String> ofToken() {
         final String name = UserCache.NAME_TOKEN + "/ASYNC:" + this.getClass().getName();
-        final YmSecurity configSecurity = SecurityActor.configuration();
         return (MemoAt<String, String>) CC_CACHE.pick(
-            () -> this.memoAt(name, String.class, String.class, configSecurity.getLimit().expiredAt()),
+            () -> this.memoAt(name, String.class, String.class, this.configLimit().expiredAt()),
             name
         );
     }
@@ -95,11 +94,15 @@ class AuthMemoAtSecurity implements MemoAtSecurity {
     @SuppressWarnings("unchecked")
     public MemoAt<String, String> ofRefresh() {
         final String name = UserCache.NAME_REFRESH + "/ASYNC:" + this.getClass().getName();
-        final YmSecurity configSecurity = SecurityActor.configuration();
         return (MemoAt<String, String>) CC_CACHE.pick(
-            () -> this.memoAt(name, String.class, String.class, configSecurity.getLimit().refreshAt()),
+            () -> this.memoAt(name, String.class, String.class, this.configLimit().refreshAt()),
             name
         );
+    }
+
+    private YmSecurity.Limit configLimit() {
+        final YmSecurity configSecurity = SecurityActor.configuration();
+        return configSecurity.getLimit();
     }
 
     @Override

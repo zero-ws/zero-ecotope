@@ -6,13 +6,16 @@ import io.r2mo.jaas.element.MSUser;
 import io.r2mo.jaas.session.UserAt;
 import io.r2mo.jaas.session.UserCache;
 import io.r2mo.jaas.token.TokenBuilderBase;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.security.SecurityConfig;
 import io.zerows.plugins.security.SecurityActor;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.Duration;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
@@ -27,30 +30,22 @@ import java.util.UUID;
 @Slf4j
 public class JwtTokenBuilder extends TokenBuilderBase {
     // 标准 Claim
-    private static final String NAME_SUBJECT = "sub";
-    private static final String NAME_ISSUER = "iss";
-    private static final String NAME_AUDIENCE = "aud";
-    private static final String NAME_EXPIRE = "exp"; // 秒级时间戳
-    private static final String NAME_ISSUED_AT = "iat"; // 秒级时间戳
+    private static final String NAME_SUBJECT = "subject";                   // sub
+    private static final String NAME_ISSUER = "issuer";                     // iss
+    private static final String NAME_AUDIENCE = "audience";                 // aud
+    private static final String NAME_EXPIRE_SEC = "expiresInSeconds";       // exp
+    private static final String NAME_IAT = "noTimestamp";                   // iat
+    private static final String NAME_LEEWAY = "leeway";                     // leeway
     // 自定义扩展字段
     private static final String NAME_ADDON_DATA = "ext";
     /**
-     * 下边代码是 sa-token 必须的字段，否则会报错
-     * <pre>
-     * - eff 表示过期时间，sa-token 不标准的地方
-     * - loginType 表示登录方式，sa-token 必须要指定对应值
-     *   loginType = ZERO-JWT-TOKEN
-     * </pre>
-     * 后期可以将此处内容转换到 Client Agent 上实现客户端绑定
+     * 配置项
      */
-    private static final String NAME_EXPIRE_ALIAS = "eff";
-    // 此处的目的是和 Sa-Token 进行集成保持一致
-    private static final String NAME_LOGIN_TYPE = "loginType";          // Sa-Token 登录方式字段名
-    private static final String VALUE_LOGIN_TYPE = "ZERO-JWT-TOKEN";     // Sa-Token 登录方式值可支持的是 login
-
-    private static final String KEY_CFG_ISSUER = "issuer";
-    private static final String KEY_CFG_AUDIENCE = "audience";
-    private static final String KEY_CFG_EXPIRED_AT = "expiredAt";
+    private static final String KEY_CFG_ISSUER = "issuer";                  // issuer           , iss
+    private static final String KEY_CFG_AUDIENCE = "audience";              // audience         , aud
+    private static final String KEY_CFG_EXPIRED_AT = "expiredAt";           // expiredAt        , exp
+    private static final String KEY_CFG_IAT = "iat";                        // iat              , iat
+    private static final String KEY_CFG_LEEWAY = "leeway";                  // leeway           , leeway
     // 核心编解码器引用
     private final JwtToken codec;
 
@@ -177,25 +172,42 @@ public class JwtTokenBuilder extends TokenBuilderBase {
         final Duration duration = R2MO.toDuration(expires);
 
         final long nowMs = System.currentTimeMillis();
-        final long expMs = nowMs + duration.toMillis();
+        final long expS = Duration.ofMillis(nowMs + duration.toMillis()).toSeconds();
+
 
         final JsonObject tokenData = new JsonObject();
-        tokenData.put(NAME_SUBJECT, identifier);
-        tokenData.put(NAME_ISSUED_AT, nowMs);
-        tokenData.put(NAME_EXPIRE, expMs);
-        tokenData.put(NAME_EXPIRE_ALIAS, expMs); // <- 新增 eff 字段
-        // Fix Issue: loginType 无效
-        tokenData.put(NAME_LOGIN_TYPE, VALUE_LOGIN_TYPE);
+        // habitus / Fix: 用户会话标识缺失，无法获取缓存！
+        tokenData.put(KName.HABITUS, identifier);
+        // id      / Fix: 可调用 Account.userId(User user) 获取用户 ID
+        tokenData.put(KName.ID, identifier);
 
-        // issuer
+        // subject
+        tokenData.put(NAME_SUBJECT, identifier);
         final String issuer = config.option(KEY_CFG_ISSUER, null);
         if (StrUtil.isNotEmpty(issuer)) {
+            // issuer
             tokenData.put(NAME_ISSUER, issuer);
         }
-        final String audience = config.option(KEY_CFG_AUDIENCE, null);
-        if (StrUtil.isNotEmpty(audience)) {
-            tokenData.put(NAME_AUDIENCE, audience);
+        // expiresInSeconds
+        tokenData.put(NAME_EXPIRE_SEC, expS);
+        final Object audience = config.option(KEY_CFG_AUDIENCE, null);
+        final JsonArray audienceArr = new JsonArray();
+        if (audience instanceof final String audienceStr) {
+            Arrays.stream(audienceStr.split(",")).forEach(audienceArr::add);
+        } else if (audience instanceof final JsonArray audienceA) {
+            audienceArr.addAll(audienceA);
         }
+        // audience
+        tokenData.put(NAME_AUDIENCE, audienceArr);
+
+
+        // noTimestamp
+        final boolean iat = config.option(KEY_CFG_IAT, Boolean.FALSE);
+        tokenData.put(NAME_IAT, iat);
+        // leeway
+        final long leeway = config.option(KEY_CFG_LEEWAY, 0L);
+        tokenData.put(NAME_LEEWAY, leeway);
+
         final JsonObject additionalData = Ut.toJObject(data);
         if (Ut.isNotNil(additionalData)) {
             tokenData.put(NAME_ADDON_DATA, additionalData);
