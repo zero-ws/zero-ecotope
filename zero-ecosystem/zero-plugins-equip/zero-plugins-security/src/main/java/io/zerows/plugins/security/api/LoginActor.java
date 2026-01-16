@@ -30,7 +30,7 @@ public class LoginActor {
         // username, password 非空校验
         return request.requestValidated()
             // captcha / captchaId 可选非空校验
-            .compose(this.loginStub::validateCaptcha)
+            .compose(this.captchaStub::validateRequired)
             // 验证码校验
             .compose(validated -> this.captchaStub.validate(validated.captchaId(), validated.captcha()))
             // 登录处理

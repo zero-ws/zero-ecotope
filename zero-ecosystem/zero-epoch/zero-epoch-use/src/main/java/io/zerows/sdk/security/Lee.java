@@ -13,6 +13,7 @@ import java.util.function.Supplier;
  *
  * @author lang : 2025-10-29
  */
+@Deprecated
 public interface Lee {
     Cc<String, Lee> CC_LEE = Cc.openThread();
 

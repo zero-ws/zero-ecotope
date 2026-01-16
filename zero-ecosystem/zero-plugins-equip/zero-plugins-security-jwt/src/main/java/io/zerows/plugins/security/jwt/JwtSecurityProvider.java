@@ -14,15 +14,23 @@ import io.zerows.plugins.security.metadata.YmSecuritySpec;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 /**
  * @author lang : 2025-12-31
  */
 @SPID("Security/JWT")
 @Slf4j
-public class SecurityProviderJwt implements SecurityProvider {
+public class JwtSecurityProvider implements SecurityProvider {
+    private static final AtomicBoolean IS_LOG = new AtomicBoolean(Boolean.TRUE);
+
     @Override
     public AuthenticationHandler configureHandler401(final Vertx vertxRef, final SecurityConfig config,
                                                      final AuthenticationProvider authProvider) {
+        final boolean isEnabled = config.option("enabled", Boolean.FALSE);
+        if (!isEnabled) {
+            return null;
+        }
         final JsonObject options = config.options();
         final JWTAuth provider = (JWTAuth) this.configureProvider401(vertxRef, config);
         final String realm = Ut.valueString(options, YmSecuritySpec.jwt.options.realm);
@@ -34,8 +42,14 @@ public class SecurityProviderJwt implements SecurityProvider {
 
     @Override
     public AuthenticationProvider configureProvider401(final Vertx vertxRef, final SecurityConfig config) {
+        final boolean isEnabled = config.option("enabled", Boolean.FALSE);
+        if (!isEnabled) {
+            return null;
+        }
         final JsonObject options = config.options();
-        log.info("🔐 / 启用JWT：{}", options.encode());
+        if (IS_LOG.getAndSet(Boolean.FALSE)) {
+            log.info("🔐 / 启用JWT：{}", options.encode());
+        }
         final JWTAuthOptions jwtOptions = new JWTAuthOptions(options);
         return CC_PROVIDER_401.pick(
             () -> JWTAuth.create(vertxRef, jwtOptions),

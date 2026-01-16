@@ -1,11 +1,7 @@
 package io.zerows.sdk.security;
 
-import io.r2mo.typed.exception.web._501NotSupportException;
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.enums.SecurityType;
-import io.zerows.spi.HPI;
-
-import java.util.Objects;
 
 /**
  * {@link Token} 调用的静态工具类，可根据 {@link SecurityType} 类型创建不同的 Token 实例进行编解码动作，一般编
@@ -24,10 +20,10 @@ class TokenUtil {
     }
 
     private static Lee ofLee() {
-        final Lee lee = HPI.findOverwrite(Lee.class);
-        if (Objects.isNull(lee)) {
-            throw new _501NotSupportException("[ ZERO ] 为找到 Lee 编解码实现，无法执行操作！");
-        }
-        return lee;
+//        final Lee lee = HPI.findOverwrite(Lee.class);
+//        if (Objects.isNull(lee)) {
+//            throw new _501NotSupportException("[ ZERO ] 为找到 Lee 编解码实现，无法执行操作！");
+//        }
+        return null;
     }
 }

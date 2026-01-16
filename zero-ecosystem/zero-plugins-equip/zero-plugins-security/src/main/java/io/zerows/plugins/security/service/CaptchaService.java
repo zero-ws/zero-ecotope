@@ -3,6 +3,7 @@ package io.zerows.plugins.security.service;
 import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.LineCaptcha;
 import cn.hutool.core.codec.Base64;
+import cn.hutool.core.util.StrUtil;
 import io.r2mo.function.Fn;
 import io.r2mo.jaas.auth.CaptchaArgs;
 import io.r2mo.jaas.auth.CaptchaRequest;
@@ -12,13 +13,11 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.plugins.security.SecurityActor;
 import io.zerows.plugins.security.SecurityCaptcha;
-import io.zerows.plugins.security.exception._80200Exception401CaptchaWrong;
-import io.zerows.plugins.security.exception._80201Exception401CaptchaExpired;
-import io.zerows.plugins.security.exception._80212Exception500CaptchaDisabled;
-import io.zerows.plugins.security.exception._80213Exception500CaptchaGeneration;
+import io.zerows.plugins.security.exception.*;
 import io.zerows.plugins.security.metadata.YmSecurity;
 import io.zerows.plugins.security.metadata.YmSecurityCaptcha;
 import io.zerows.program.Ux;
+import io.zerows.support.Fx;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.ByteArrayOutputStream;
@@ -32,6 +31,27 @@ public class CaptchaService implements CaptchaStub {
     private static final String KEY_ID = "id";
     private static final String KEY_CODE = "code";
     private static final String KEY_IMAGE = "image";
+
+    @Override
+    public Future<CaptchaLoginRequest> validateRequired(final CaptchaLoginRequest request) {
+        // 安全配置校验
+        final YmSecurity security = SecurityActor.configuration();
+        if (Objects.isNull(security)) {
+            return Ux.future(request);
+        }
+        if (!security.isCaptcha()) {
+            return Ux.future(request);
+        }
+
+        // 启用了图片验证码
+        if (StrUtil.isEmpty(request.captchaId())) {
+            return Fx.failOut(_80242Exception400CaptchaRequired.class, "captchaId");
+        }
+        if (StrUtil.isEmpty(request.captcha())) {
+            return Fx.failOut(_80242Exception400CaptchaRequired.class, "captcha");
+        }
+        return Ux.future(request);
+    }
 
     /**
      * <pre>

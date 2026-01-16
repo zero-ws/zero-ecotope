@@ -30,13 +30,13 @@ import java.util.Objects;
  * @author lang : 2025-10-29
  */
 public class LeeJwt implements Lee {
-    private static final SecurityConfig CONFIG = SecurityActor.configJwt();
     // 防止 JWT 的高频解码（速度很慢）
     private static final Cc<String, JsonObject> STORE_TOKEN = Cc.open();
     private static JWTAuth PROVIDER;
     private final JWTAuthOptions options;
 
     public LeeJwt() {
+        final SecurityConfig CONFIG = SecurityActor.configJwt();
         if (Objects.isNull(CONFIG)) {
             throw new _501NotSupportException("[ PLUG ] Jwt 配置不存在，无法执行 JWT 操作！");
         }

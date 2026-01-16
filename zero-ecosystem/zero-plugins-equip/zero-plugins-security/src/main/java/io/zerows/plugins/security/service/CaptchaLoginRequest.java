@@ -1,6 +1,6 @@
 package io.zerows.plugins.security.service;
 
-public interface CaptchaRequest {
+public interface CaptchaLoginRequest {
 
     String captchaId();
 

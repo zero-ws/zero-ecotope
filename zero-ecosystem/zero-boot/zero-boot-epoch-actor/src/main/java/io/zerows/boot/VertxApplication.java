@@ -27,7 +27,6 @@ import io.zerows.epoch.management.OCacheClass;
 import io.zerows.platform.EnvironmentVariable;
 import io.zerows.platform.enums.VertxComponent;
 import io.zerows.platform.metadata.KRunner;
-import io.zerows.sdk.security.Lee;
 import io.zerows.sdk.security.WallProvider;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.app.HArk;
@@ -135,7 +134,6 @@ public class VertxApplication {
          * MOMO-001: SPI 监控注册
          */
         HPI.registry(
-            Lee.class,                  // 🔐 安全组件，提供系统安全验证和授权功能
             AtSession.class,            // 🧾 会话管理组件，处理用户会话和状态维护
             WallProvider.class,         // 🛡️ 安全提供者组件，实现具体的安全策略和防护机制
             FactoryDBAsync.class,       // 🚀 异步DBE，基于 Vert.x 提供异步数据库操作能力

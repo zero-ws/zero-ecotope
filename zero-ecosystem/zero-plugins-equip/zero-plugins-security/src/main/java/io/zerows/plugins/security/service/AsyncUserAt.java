@@ -9,6 +9,8 @@ import io.vertx.core.Future;
 import io.zerows.epoch.assembly.DiFactory;
 import io.zerows.spi.HPI;
 
+import java.util.Objects;
+
 /**
  * 根据 {@link LoginRequest} 执行不同加载逻辑，加载用户信息（异步版）
  */
@@ -19,10 +21,12 @@ public interface AsyncUserAt {
         final String nameSPI = "UserAt/" + typeLogin.name();
         return CC_SKELETON.pick(() -> {
             // SPI
-            final AsyncUserAt userService = HPI.findOneOf(AsyncUserAt.class);
-            // DI
-            final Injector injector = DiFactory.singleton().build();
-            injector.injectMembers(userService);
+            final AsyncUserAt userService = HPI.findOne(AsyncUserAt.class, nameSPI);
+            if (Objects.nonNull(userService)) {
+                // DI
+                final Injector injector = DiFactory.singleton().build();
+                injector.injectMembers(userService);
+            }
             return userService;
         }, nameSPI);
     }

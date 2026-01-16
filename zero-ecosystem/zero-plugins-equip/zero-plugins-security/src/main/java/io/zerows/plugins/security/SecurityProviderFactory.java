@@ -1,18 +1,17 @@
 package io.zerows.plugins.security;
 
-import io.r2mo.function.Fn;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Vertx;
 import io.vertx.ext.auth.ChainAuth;
 import io.vertx.ext.auth.authentication.AuthenticationProvider;
 import io.vertx.ext.web.handler.AuthenticationHandler;
 import io.vertx.ext.web.handler.AuthorizationHandler;
-import io.zerows.cosmic.plugins.security.exception._40080Exception500PreAuthentication;
-import io.zerows.epoch.annotations.Wall;
 import io.zerows.epoch.metadata.security.SecurityMeta;
 import io.zerows.sdk.security.WallHandler;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * 构造核心的 Provider / Handler 的链式结构
@@ -24,10 +23,12 @@ import java.util.*;
  *
  * @author lang : 2025-10-29
  */
+@Slf4j
 class SecurityProviderFactory {
     private static final Cc<String, SecurityProviderFactory> CC_CHAIN = Cc.openThread();
     private static final Cc<String, AuthenticationProvider> CC_PROVIDER_401 = Cc.openThread();
     private static final Cc<String, AuthenticationHandler> CC_HANDLER_401 = Cc.openThread();
+    private static final AtomicBoolean IS_PROVIDER = new AtomicBoolean(Boolean.TRUE);
     private final Vertx vertxRef;
 
     private SecurityProviderFactory(final Vertx vertxRef) {
@@ -75,13 +76,14 @@ class SecurityProviderFactory {
         metaSet.stream().map(meta -> CC_PROVIDER_401.pick(
             () -> new AuthenticationProviderOne(this.vertxRef, meta), meta.id(this.vertxRef))
         ).forEach(providerSet::addOfExtension);
+        if (IS_PROVIDER.getAndSet(Boolean.FALSE)) {
+            log.info("[ PLUG ] ( Secure ) Provider 数量：{}", providerSet.size());
+        }
         return providerSet;
     }
 
 
     WallHandler handlerOfAuthentication(final Set<SecurityMeta> metaSet) {
-        // 前置 Handler 验证
-        this.ensurePreHandler(metaSet);
         // 提取前置验证器
         final WallHandler chain = new AuthenticationHandlerWall();
         if (metaSet.isEmpty()) {
@@ -124,26 +126,5 @@ class SecurityProviderFactory {
         }
 
         return AuthorizationHandlerOne.create(metaSet);
-    }
-
-    /**
-     * 检查程序，此处检查程序对整个矩阵有所要求
-     * <pre>
-     *     1. 同一个路径下的 Pre 内置 Provider 只允许有一个，目前版本不可以混用
-     *     2. 先做内置认证，然后排序执行 {@link Wall} 中定义的多维认证
-     *     3. 多维认证过程中如果有任何一个认证失败，则直接返回失败
-     * </pre>
-     *
-     * @param metaSet 安全元数据集合
-     */
-    private void ensurePreHandler(final Set<SecurityMeta> metaSet) {
-        final Set<String> preSet = new HashSet<>();
-        final Set<String> pathSet = new HashSet<>();
-        metaSet.forEach(meta -> {
-            preSet.add(meta.idPre(this.vertxRef));
-            pathSet.add(meta.getPath());
-        });
-        final String path = pathSet.iterator().next();
-        Fn.jvmKo(1 != preSet.size(), _40080Exception500PreAuthentication.class, preSet.size(), path);
     }
 }

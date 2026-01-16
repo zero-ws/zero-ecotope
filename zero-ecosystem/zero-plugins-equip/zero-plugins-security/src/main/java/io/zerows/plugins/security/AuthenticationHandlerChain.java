@@ -12,6 +12,7 @@ import java.util.Objects;
 public class AuthenticationHandlerChain {
     private final ChainAuth authAll;
     private AuthenticationProvider baseProvider;
+    private int providers = 0;
 
     AuthenticationHandlerChain() {
         this.authAll = ChainAuth.all();
@@ -29,6 +30,7 @@ public class AuthenticationHandlerChain {
         if (Objects.isNull(provider)) {
             return;
         }
+        this.providers++;
         this.authAll.add(provider);
     }
 
@@ -41,5 +43,9 @@ public class AuthenticationHandlerChain {
 
     public AuthenticationProvider providerAll() {
         return this.authAll;
+    }
+
+    int size() {
+        return this.providers;
     }
 }
