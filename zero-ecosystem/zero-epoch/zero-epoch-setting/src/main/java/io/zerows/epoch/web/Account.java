@@ -102,7 +102,7 @@ public class Account {
      * @return Token 的有效载荷（Payload）
      */
     public static JsonObject userToken(final String token) {
-        return userToken(token, SecurityType.JWT);
+        return tokenOf().decode(token);
     }
 
     /**
@@ -128,7 +128,7 @@ public class Account {
         if (Ut.isNil(tokenData)) {
             return null;
         }
-        return Token.of(TokenType.JWT).encode(tokenData);
+        return tokenOf().encode(tokenData);
     }
 
     /**
@@ -160,6 +160,14 @@ public class Account {
         } else {
             return Token.of(TokenType.JWT).decode(token);
         }
+    }
+
+    private static Token tokenOf() {
+        Token token = Token.of(TokenType.JWT);
+        if (Objects.isNull(token)) {
+            token = Token.of(TokenType.AES);
+        }
+        return token;
     }
 
     /**
