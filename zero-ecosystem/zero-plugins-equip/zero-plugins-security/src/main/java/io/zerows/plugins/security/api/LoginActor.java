@@ -42,7 +42,7 @@ public class LoginActor {
     public Future<JsonObject> captcha(final User user) {
         if (Objects.nonNull(user)) {
             // 80216 已登录用户不允许获取验证码
-            final String id = Account.userId(false);
+            final String id = Account.userId(user);
             return Fx.failOut(_80216Exception403CaptchaProfile.class, id);
         }
         return this.captchaStub.generate();

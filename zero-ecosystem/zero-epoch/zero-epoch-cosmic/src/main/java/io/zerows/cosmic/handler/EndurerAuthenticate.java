@@ -24,6 +24,7 @@ public class EndurerAuthenticate implements Handler<RoutingContext> {
     public void handle(final RoutingContext event) {
         if (event.failed()) {
             final Throwable ex = event.failure();
+            log.error(ex.getMessage(), ex);
             if (ex instanceof final WebException error) {
                 log.info("[ ZERO ] Web Exception: {} = {}", ex.getClass().getName(), ex.getMessage());
                 AckFlow.reply(event, Envelop.failure(error));

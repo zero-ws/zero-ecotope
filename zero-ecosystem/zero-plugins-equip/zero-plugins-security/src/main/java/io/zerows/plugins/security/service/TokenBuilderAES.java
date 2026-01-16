@@ -19,12 +19,14 @@ public class TokenBuilderAES extends TokenBuilderBase {
         return this.generator.tokenGenerate(userAt.id().toString(), logged.token());
     }
 
+    /**
+     * ✅ [Optimized] Single-pass decryption and validation
+     */
     @Override
     public String accessOf(final String token) {
-        if (!this.generator.tokenValidate(token)) {
-            return null;
-        }
-        return this.generator.tokenSubject(token);
+        // 原来的写法是先 tokenValidate (解密1次) 再 tokenSubject (解密2次)
+        // 现在直接调用 validateAndExtract，只解密1次
+        return this.generator.validateAndExtract(token);
     }
 
     @Override

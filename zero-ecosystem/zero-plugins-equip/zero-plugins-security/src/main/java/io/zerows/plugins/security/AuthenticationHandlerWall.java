@@ -1,6 +1,6 @@
 package io.zerows.plugins.security;
 
-import io.vertx.core.Completable;
+import io.r2mo.typed.exception.web._401UnauthorizedException;
 import io.vertx.core.Future;
 import io.vertx.core.Promise;
 import io.vertx.ext.auth.User;
@@ -25,6 +25,8 @@ public class AuthenticationHandlerWall extends AuthenticationHandlerImpl<Authent
     private final List<AuthenticationHandlerInternal> handlers = new ArrayList<>();
     private final String chainAuthHandlerKey;
 
+    private AuthenticationHandlerInternal finalizer;
+
     public AuthenticationHandlerWall() {
         super(null);
         this.chainAuthHandlerKey = "__vertx.auth.chain.idx." + HANDLER_KEY_SEQ.getAndIncrement();
@@ -36,36 +38,65 @@ public class AuthenticationHandlerWall extends AuthenticationHandlerImpl<Authent
         return this;
     }
 
+    public synchronized void withFinalizer(final AuthenticationHandler finalizer) {
+        this.finalizer = (AuthenticationHandlerInternal) finalizer;
+    }
+
     @Override
     public Future<User> authenticate(final RoutingContext context) {
         if (this.handlers.isEmpty()) {
             return Future.succeededFuture();
         }
         final Promise<User> promise = Promise.promise();
-        this.iterate(0, context, null, promise);
-        return promise.future();
+
+        // 1. 执行矩阵编排 (OR 逻辑)
+        // 初始调用时，错误为 null
+        this.iterate(0, context, promise, null);
+
+        // 2. 连接 Finalizer (AND 逻辑)
+        return promise.future().compose(matrixUser -> {
+            if (this.finalizer != null) {
+                return this.finalizer.authenticate(context);
+            }
+            return Future.succeededFuture(matrixUser);
+        });
     }
 
-    private void iterate(final int idx, final RoutingContext ctx, final User result, final Completable<User> handler) {
-        // 1. 递归终止条件：所有 Handler 都遍历完毕
+    /**
+     * 递归迭代器
+     *
+     * @param idx       当前索引
+     * @param ctx       上下文
+     * @param promise   结果 Promise
+     * @param lastError 上一个 Handler 抛出的异常 (用于追踪链条断裂的真实原因)
+     */
+    private void iterate(final int idx, final RoutingContext ctx, final Promise<User> promise, final Throwable lastError) {
+        // 1. 终止条件：所有 Handler 都遍历完毕
         if (idx >= this.handlers.size()) {
-            // 返回最后一次成功的 User 对象
-            handler.complete(result, null);
+            // 🛑 核心修改：如果有捕获到异常，则抛出最后一次捕获的异常
+            // 如果没有任何异常（例如列表为空），则抛出默认 401
+            promise.fail(Objects.requireNonNullElseGet(lastError, () -> new _401UnauthorizedException("Authentication failed: No provider accepted the credentials.")));
             return;
         }
 
-        // 2. 获取当前 Handler
         final AuthenticationHandlerInternal authHandler = this.handlers.get(idx);
-        authHandler.authenticate(ctx).onComplete(res -> {
-            if (res.succeeded()) {
-                ctx.put(this.chainAuthHandlerKey, idx);
-                // 递归调用 iterate，执行 idx + 1 (下一个 Handler)
-                final User verified = this.setAuthorized(ctx, res.result());
-                this.iterate(idx + 1, ctx, verified, handler);
-            } else {
-                ctx.fail(res.cause());
-            }
-        });
+        try {
+            authHandler.authenticate(ctx).onComplete(res -> {
+                if (res.succeeded()) {
+                    // 矩阵成功：设置 User，完成当前阶段
+                    ctx.put(this.chainAuthHandlerKey, idx);
+                    final User verified = this.setAuthorized(ctx, res.result());
+                    promise.complete(verified);
+                } else {
+                    // 矩阵失败：尝试下一个，并将当前失败的原因传递下去
+                    // 这样当循环结束时，如果全失败了，promise.fail 会拿到最后一个失败原因
+                    this.iterate(idx + 1, ctx, promise, res.cause());
+                }
+            });
+        } catch (final Throwable t) {
+            // 捕获同步异常，同样传递下去
+            this.iterate(idx + 1, ctx, promise, t);
+        }
     }
 
     private User setAuthorized(final RoutingContext ctx, final User user) {
@@ -79,6 +110,7 @@ public class AuthenticationHandlerWall extends AuthenticationHandlerImpl<Authent
         return user;
     }
 
+    // ... setAuthenticateHeader 和 postAuthentication 保持不变 ...
     @Override
     public boolean setAuthenticateHeader(final RoutingContext ctx) {
         boolean added = false;
@@ -90,8 +122,8 @@ public class AuthenticationHandlerWall extends AuthenticationHandlerImpl<Authent
 
     @Override
     public void postAuthentication(final RoutingContext ctx) {
-        final Integer idx;
-        if ((idx = ctx.get(this.chainAuthHandlerKey)) != null) {
+        final Integer idx = ctx.get(this.chainAuthHandlerKey);
+        if (idx != null && idx >= 0 && idx < this.handlers.size()) {
             this.handlers.get(idx).postAuthentication(ctx);
         } else {
             ctx.next();

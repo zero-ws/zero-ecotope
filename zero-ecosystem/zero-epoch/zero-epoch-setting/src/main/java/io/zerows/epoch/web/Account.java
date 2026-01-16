@@ -3,6 +3,7 @@ package io.zerows.epoch.web;
 import io.r2mo.jaas.element.MSUser;
 import io.r2mo.jaas.session.UserAt;
 import io.r2mo.jaas.session.UserContext;
+import io.r2mo.jaas.session.UserSession;
 import io.r2mo.jaas.token.TokenType;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
@@ -17,7 +18,8 @@ import java.util.Objects;
 public class Account {
 
     public static UserAt userAt(final User user) {
-        return null;
+        final String userId = userId(user);
+        return UserSession.of().find(userId);
     }
 
     public static User userVx(final User user, final Session session) {
@@ -30,6 +32,26 @@ public class Account {
     }
 
     public static User userVx(final UserAt userAt) {
+        final JsonObject principal = userData(userAt);
+        if (Objects.isNull(principal)) {
+            return null;
+        }
+        final User authUser = User.create(principal, userAt.data().data());
+        /*
+         * 后续处理，加载用户信息
+         */
+        return authUser;
+    }
+
+    public static String userId(final User user) {
+        final JsonObject principal = user.principal();
+        if (Ut.isNil(principal)) {
+            return null;
+        }
+        return principal.getString("sub");
+    }
+
+    public static JsonObject userData(final UserAt userAt) {
         if (Objects.isNull(userAt)) {
             return null;
         }
@@ -47,19 +69,8 @@ public class Account {
         principal.put(KName.ID, user.getId().toString());
         // 鉴于旧版标识基本信息，此处还需要执行 habitus 对应的数据计算，此处 habitus 是后续执行过程中的核心
         principal.put(KName.HABITUS, user.getId().toString());
-        final User authUser = User.create(principal, userAt.data().data());
-        /*
-         * 后续处理，加载用户信息
-         */
-        return authUser;
-    }
-
-    public static <T> T userId(final boolean isUuid) {
-        return null;
-    }
-
-    public static String userId(final User user) {
-        return null;
+        principal.put(KName.SESSION, user.getUsername());
+        return principal;
     }
 
     public static JsonObject userData(final Credentials credentials) {

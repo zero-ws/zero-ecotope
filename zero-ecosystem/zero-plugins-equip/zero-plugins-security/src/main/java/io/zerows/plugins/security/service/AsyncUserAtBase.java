@@ -8,11 +8,17 @@ import io.r2mo.jaas.session.UserCache;
 import io.r2mo.jaas.session.UserSession;
 import io.r2mo.typed.enums.TypeLogin;
 import io.vertx.core.Future;
+import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.hashing.HashingStrategy;
+import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.constant.KWeb;
+import io.zerows.epoch.web.Account;
+import io.zerows.plugins.cache.HMM;
 import io.zerows.plugins.security.exception._80203Exception404UserNotFound;
 import io.zerows.plugins.security.exception._80204Exception401PasswordWrong;
 import io.zerows.plugins.security.exception._80244Exception401LoginTypeWrong;
 import io.zerows.support.Fx;
+import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.Duration;
@@ -49,11 +55,26 @@ public abstract class AsyncUserAtBase implements AsyncUserAt {
                 }
                 return Future.succeededFuture(verified);
             });
+        }).compose(userAt -> {
+            // 处理临时用户
+            final JsonObject userData = Account.userData(userAt);
+            final String ephemeral = Ut.valueString(userData, this.userCache());
+            if (Objects.isNull(ephemeral)) {
+                return Future.succeededFuture(userAt);
+            }
+            // 构造缓存
+            final HMM<String, JsonObject> mm = HMM.of(ephemeral);
+            return mm.put(KWeb.CACHE.User.AUTHENTICATE, userData)
+                .compose(nil -> Future.succeededFuture(userAt));
         });
     }
 
     public TypeLogin loginType() {
         return Objects.isNull(this.typeLogin) ? TypeLogin.PASSWORD : this.typeLogin;
+    }
+
+    protected String userCache() {
+        return KName.TOKEN;
     }
 
     @Override
