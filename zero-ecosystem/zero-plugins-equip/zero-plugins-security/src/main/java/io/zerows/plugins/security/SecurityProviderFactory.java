@@ -6,7 +6,6 @@ import io.vertx.ext.auth.ChainAuth;
 import io.vertx.ext.auth.authentication.AuthenticationProvider;
 import io.vertx.ext.web.handler.AuthenticationHandler;
 import io.vertx.ext.web.handler.AuthorizationHandler;
-import io.vertx.ext.web.handler.ChainAuthHandler;
 import io.zerows.epoch.metadata.security.SecurityMeta;
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,10 +25,10 @@ import java.util.concurrent.ConcurrentHashMap;
  *
  * 2. 🎯 核心逻辑：
  * 不论请求走哪条通道 (AES 还是 JWT)，原生校验通过后，
- * 都会强制执行 {@link AuthenticationProviderOne} 进行业务补位。
+ * 都会强制执行 {@link AuthenticationBackendProvider} 进行业务补位。
  *
  * 3. 🏁 最终收口：
- * 所有 Handler 执行完毕后，由 {@link AuthenticationHandlerOne} 统一进行 User -> Account 转换。
+ * 所有 Handler 执行完毕后，由 {@link AuthenticationBackendHandler} 统一进行 User -> Account 转换。
  * </pre>
  *
  * @author lang : 2025-10-29
@@ -58,10 +57,8 @@ class SecurityProviderFactory {
     /**
      * <pre>
      * 🟢 核心编排入口
-     *      ANY
-     *           |-- Handler (Type=Basic) ---- One，已经包含了 AES
-     *           |-- Handler (Type=JWT) ---- Native + One
-     *           |-- Handler (Type=LDAP) --- Native + One
+     *    1. 先构造 Provider 链
+     *       JWT 和 OAuth 内置，所以这两种只要包含了 Handler 内部就有了
      * </pre>
      */
     AuthenticationHandler handlerOfAuthentication(final Set<SecurityMeta> metaSet) {
@@ -69,30 +66,31 @@ class SecurityProviderFactory {
             return null;
         }
 
-        // 最外层的墙 (Handler 之间是 OR 关系)
-        final ChainAuthHandler branchAuth = ChainAuthHandler.any();
 
-        // 2. 循环编排每一种安全配置 (JWT, Basic, AES...)
-        for (final SecurityMeta meta : metaSet) {
-
-            // Step A: 构建 "严进" 的复合 Provider (Native + One)
-            final AuthenticationProvider provider = this.providerComposite(meta);
-
-            // Step B: 构建对应的 Handler (BasicAdv, JWT...) 绑定上面的 Provider
-            final AuthenticationHandler handler = this.handlerNative(meta, provider);
-
-            final String typeKey = String.valueOf(meta.getType());
-            if (LOGGED_TYPES.add(typeKey)) {
-                log.info("[ PLUG ] ( Security ) Loaded: Type={}, Handler={}", typeKey, handler.getClass().getSimpleName());
-            }
-
-            final ChainAuthHandler sequenceAuth = ChainAuthHandler.all();
-            sequenceAuth.add(handler);
-            // 最后强制执行 One Handler 进行业务补位
-            sequenceAuth.add(new AuthenticationHandlerOne(provider, meta));
-            branchAuth.add(sequenceAuth);
-        }
-        return branchAuth;
+//        // 最外层的墙 (Handler 之间是 OR 关系)
+//        final ChainAuthHandler branchAuth = ChainAuthHandler.any();
+//
+//        // 2. 循环编排每一种安全配置 (JWT, Basic, AES...)
+//        for (final SecurityMeta meta : metaSet) {
+//
+//            // Step A: 构建 "严进" 的复合 Provider (Native + One)
+//            final AuthenticationProvider provider = this.providerComposite(meta);
+//
+//            // Step B: 构建对应的 Handler (BasicAdv, JWT...) 绑定上面的 Provider
+//            final AuthenticationHandler handler = this.handlerNative(meta, provider);
+//
+//            final String typeKey = String.valueOf(meta.getType());
+//            if (LOGGED_TYPES.add(typeKey)) {
+//                log.info("[ PLUG ] ( Security ) Loaded: Type={}, Handler={}", typeKey, handler.getClass().getSimpleName());
+//            }
+//
+//            final ChainAuthHandler sequenceAuth = ChainAuthHandler.all();
+//            sequenceAuth.add(handler);
+//            // 最后强制执行 One Handler 进行业务补位
+//            sequenceAuth.add(new AuthenticationHandlerEnded(provider, meta));
+//            branchAuth.add(sequenceAuth);
+//        }
+        return null;
     }
 
     /**
@@ -110,42 +108,23 @@ class SecurityProviderFactory {
 
             if (Objects.isNull(nativeProvider)) {
                 // Native 为空就只有一个 Provider
-                return new AuthenticationProviderOne(this.vertxRef, meta);
+                return new AuthenticationBackendProvider(this.vertxRef, meta);
             }
 
             // Native 不为空则此处的 Provider 必须要做 AND 关系
             final ChainAuth compositeChain = ChainAuth.all();
             compositeChain.add(nativeProvider);
-            compositeChain.add(new AuthenticationProviderOne(this.vertxRef, meta));
+            compositeChain.add(new AuthenticationBackendProvider(this.vertxRef, meta));
             return compositeChain;
         }, meta.id(this.vertxRef));
     }
 
     /**
      * <pre>
-     * 🟢 Handler 构建
-     * </pre>
-     */
-    private AuthenticationHandler handlerNative(final SecurityMeta meta, final AuthenticationProvider provider) {
-        if (provider == null) {
-            return null;
-        }
-        return CC_HANDLER.pick(() -> {
-            // 尝试创建原生 Handler (内部包含你的 BasicAuthAdvHandlerImpl 逻辑)
-            final AuthenticationHandler handler = AuthenticationNative.createHandler(this.vertxRef, meta, provider);
-            if (handler != null) {
-                return handler;
-            }
-            // 降级兜底
-            return new AuthenticationHandlerOne(provider, meta);
-        }, meta.id(this.vertxRef));
-    }
-
-    /**
-     * <pre>
-     * 🟢 聚合 Provider (用于 Finalizer)
-     * 这里使用 ANY，因为 Finalizer 不关心你是从哪个 Handler 进来的，
-     * 只要有一个 Provider 能认领这个 User 即可 (实际上 Finalizer 主要靠 context.user() 判断)
+     *  🟢 聚合 Provider / 构造多条并行通道中复合型的 Provider
+     *     1. 先做 {@link SecurityMeta} 的过滤，只有特殊 WallType 才会进入对应的 Provider 逻辑
+     *     2. 除开 JWT 和 OAuth2，这两种内置的 Provider 会被自动加入 Handler，其他的都会被过滤掉
+     *     3. Provider x N + One 的结构搭建
      * </pre>
      */
     AuthenticationProvider providerOfAuthentication(final Set<SecurityMeta> metaSet) {
@@ -154,12 +133,18 @@ class SecurityProviderFactory {
         }
         final ChainAuth chain = ChainAuth.any();
         metaSet.forEach(meta -> {
-            final AuthenticationProvider subChain = this.providerComposite(meta);
+            final AuthenticationProvider subChain = AuthenticationNative.createProvider(this.vertxRef, meta);
             chain.add(subChain);
         });
         return chain;
     }
 
+    /**
+     * 🟢 授权处理器构建
+     *
+     * @param metaSet 安全元信息集合
+     * @return 授权处理器
+     */
     AuthorizationHandler handlerOfAuthorization(final Set<SecurityMeta> metaSet) {
         if (metaSet == null || metaSet.isEmpty()) {
             return null;

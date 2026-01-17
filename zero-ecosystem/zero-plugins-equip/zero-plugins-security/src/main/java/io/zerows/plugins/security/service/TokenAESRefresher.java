@@ -3,8 +3,8 @@ package io.zerows.plugins.security.service;
 import io.r2mo.jaas.session.UserCache;
 import io.r2mo.jaas.token.TokenBuilder;
 import io.zerows.epoch.metadata.security.SecurityConfig;
-import io.zerows.platform.enums.SecurityType;
 import io.zerows.plugins.security.SecurityActor;
+import io.zerows.plugins.security.SecurityConstant;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -28,7 +28,7 @@ public class TokenAESRefresher {
     }
 
     private SecurityConfig config() {
-        return SecurityActor.configOf(SecurityType.BASIC);
+        return SecurityActor.configOf(SecurityConstant.WALL_BASIC);
     }
 
     private boolean isDisabled() {

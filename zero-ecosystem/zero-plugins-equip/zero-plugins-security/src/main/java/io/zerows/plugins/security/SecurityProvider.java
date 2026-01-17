@@ -6,7 +6,6 @@ import io.vertx.core.Vertx;
 import io.vertx.ext.auth.authentication.AuthenticationProvider;
 import io.vertx.ext.web.handler.AuthenticationHandler;
 import io.zerows.epoch.metadata.security.SecurityConfig;
-import io.zerows.platform.enums.SecurityType;
 import io.zerows.spi.HPI;
 
 /**
@@ -14,8 +13,9 @@ import io.zerows.spi.HPI;
  *
  * @author lang : 2025-12-30
  */
+@Deprecated
 public interface SecurityProvider {
-    Cc<SecurityType, SecurityProvider> CC_EXTENSION = Cc.open();
+    Cc<String, SecurityProvider> CC_EXTENSION = Cc.open();
 
     Cc<String, AuthenticationProvider> CC_PROVIDER_401 = Cc.open();
     Cc<String, AuthenticationHandler> CC_HANDLER_401 = Cc.open();
@@ -41,19 +41,19 @@ public interface SecurityProvider {
     /**
      * {@link SPID} 中的值格式：Security/{securityType}，而且每种 SecurityType 对应唯一的实现类
      *
-     * @param securityType 安全类型
+     * @param wallType 安全类型
      * @return 对应的安全扩展实现
      */
-    static SecurityProvider of(final SecurityType securityType) {
+    static SecurityProvider of(final String wallType) {
         // 【核心修改2】使用哨兵模式
         final SecurityProvider cached = CC_EXTENSION.pick(() -> {
             // 1. 查找 SPI
-            final SecurityProvider found = HPI.findOne(SecurityProvider.class, "Security/" + securityType.name());
+            final SecurityProvider found = HPI.findOne(SecurityProvider.class, "Security/" + wallType);
 
             // 2. 如果没找到，返回哨兵，而不是 null
             // (因为 Cc/ConcurrentHashMap 不支持存 null，存 null 会导致下次还去查，导致日志刷屏)
             return found == null ? SENTINEL : found;
-        }, securityType);
+        }, wallType);
 
         // 3. 对外转换：如果是哨兵，说明其实是没找到，返回 null 给调用者
         return cached == SENTINEL ? null : cached;

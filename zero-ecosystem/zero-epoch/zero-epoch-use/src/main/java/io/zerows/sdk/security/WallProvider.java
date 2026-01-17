@@ -5,15 +5,15 @@ import io.vertx.ext.auth.authentication.AuthenticationProvider;
 import io.vertx.ext.web.handler.AuthenticationHandler;
 import io.vertx.ext.web.handler.AuthorizationHandler;
 import io.vertx.ext.web.handler.BasicAuthHandler;
+import io.zerows.epoch.annotations.Wall;
 import io.zerows.epoch.metadata.security.SecurityMeta;
-import io.zerows.platform.enums.SecurityType;
 
 import java.util.Set;
 
 /**
  * 此处的 Provider 会形成链式结构
  * <pre>
- *     1. 基础内置的 Provider，依靠 {@link SecurityType} 中的定义进行区分，进行首次认证
+ *     1. 基础内置的 Provider，依靠 {@link Wall} 中的定义进行区分，进行首次认证
  *     2. 用户自定义的 Provider，会排在后边进行二次认证，二次认证就要访问数据库等外部资源
  *        启用 {@link WallExecutor} 内置的方法进行调用
  * </pre>

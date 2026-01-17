@@ -27,7 +27,7 @@ class AuthorizationProviderOne implements AuthorizationProvider {
     @Override
     public String getId() {
         // 和 SecurityType 执行绑定，得到对应信息
-        return this.meta.getType().key();
+        return this.meta.getType();
     }
 
     /**

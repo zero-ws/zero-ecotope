@@ -12,7 +12,6 @@ import io.r2mo.typed.common.Kv;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.plugins.security.SecurityActor;
-import io.zerows.plugins.security.SecurityCaptcha;
 import io.zerows.plugins.security.exception.*;
 import io.zerows.plugins.security.metadata.YmSecurity;
 import io.zerows.plugins.security.metadata.YmSecurityCaptcha;
@@ -78,7 +77,7 @@ public class CaptchaService implements CaptchaStub {
      */
     @Override
     public Future<JsonObject> generate() {
-        final SecurityCaptcha captcha = SecurityActor.configCaptcha();
+        final CaptchaConfig captcha = SecurityActor.configCaptcha();
         Fn.jvmKo(Objects.isNull(captcha), _80212Exception500CaptchaDisabled.class);
         final YmSecurityCaptcha config = captcha.captchaConfig();
 
@@ -104,7 +103,7 @@ public class CaptchaService implements CaptchaStub {
      * 负责生成 ID、绘制图形、Base64 编码
      */
     private Map<String, String> execHeavyGeneration(final YmSecurityCaptcha config) {
-        final SecurityCaptcha securityCaptcha = SecurityActor.configCaptcha();
+        final CaptchaConfig captchaConfig = SecurityActor.configCaptcha();
         // A. 生成 ID
         final String captchaId = UUID.randomUUID().toString().replace("-", "");
 
@@ -113,8 +112,8 @@ public class CaptchaService implements CaptchaStub {
             config.getWidth(),
             config.getHeight()
         );
-        captcha.setGenerator(securityCaptcha.captchaGenerator());
-        captcha.setFont(securityCaptcha.captchaFont());
+        captcha.setGenerator(captchaConfig.captchaGenerator());
+        captcha.setFont(captchaConfig.captchaFont());
 
         // C. 转换输出 (耗时)
         try (final ByteArrayOutputStream out = new ByteArrayOutputStream()) {
@@ -147,7 +146,7 @@ public class CaptchaService implements CaptchaStub {
         }
         return Ux.waitVirtual(() -> {
             // 这里调用 await() 提取 captchaId
-            final SecurityCaptcha configCaptcha = SecurityActor.configCaptcha();
+            final CaptchaConfig configCaptcha = SecurityActor.configCaptcha();
             final CaptchaArgs arguments = Objects.requireNonNull(configCaptcha.captchaConfig()).forArguments();
             final String cached = UserCache.of().authorize(captchaId, arguments);
             if (Objects.isNull(cached)) {

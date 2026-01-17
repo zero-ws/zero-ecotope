@@ -1,4 +1,4 @@
-package io.zerows.plugins.security;
+package io.zerows.plugins.security.service;
 
 import cn.hutool.captcha.generator.CodeGenerator;
 import cn.hutool.captcha.generator.MathGenerator;
@@ -9,22 +9,22 @@ import io.zerows.plugins.security.metadata.YmSecurityCaptcha;
 import java.awt.*;
 import java.util.Objects;
 
-public class SecurityCaptcha {
-    private static final Cc<Integer, SecurityCaptcha> CC_CAPTCHA = Cc.open();
+public class CaptchaConfig {
+    private static final Cc<Integer, CaptchaConfig> CC_CAPTCHA = Cc.open();
     private final Cc<String, CodeGenerator> ccGenerator = Cc.openThread();
     private final Cc<String, Font> ccFont = Cc.openThread();
 
     private final YmSecurityCaptcha captchaConfig;
 
-    private SecurityCaptcha(final YmSecurityCaptcha captchaConfig) {
+    private CaptchaConfig(final YmSecurityCaptcha captchaConfig) {
         this.captchaConfig = captchaConfig;
     }
 
-    static SecurityCaptcha of(final YmSecurityCaptcha captcha) {
+    public static CaptchaConfig of(final YmSecurityCaptcha captcha) {
         if (Objects.isNull(captcha)) {
             return null;
         }
-        return CC_CAPTCHA.pick(() -> new SecurityCaptcha(captcha), captcha.hashCode());
+        return CC_CAPTCHA.pick(() -> new CaptchaConfig(captcha), captcha.hashCode());
     }
 
     public YmSecurityCaptcha captchaConfig() {

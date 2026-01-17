@@ -8,8 +8,8 @@ import io.r2mo.spi.SPI;
 import io.r2mo.typed.json.JBase;
 import io.r2mo.typed.json.JObject;
 import io.zerows.epoch.metadata.security.SecurityConfig;
-import io.zerows.platform.enums.SecurityType;
 import io.zerows.plugins.security.SecurityActor;
+import io.zerows.plugins.security.SecurityConstant;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.crypto.SecretKey;
@@ -39,7 +39,7 @@ public class TokenAESGenerator {
 
     // ================== 依赖 ==================
     private SecurityConfig config() {
-        return SecurityActor.configOf(SecurityType.BASIC);
+        return SecurityActor.configOf(SecurityConstant.WALL_BASIC);
     }
 
     private boolean isDisabled() {

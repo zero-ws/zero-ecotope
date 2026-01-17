@@ -16,11 +16,11 @@ import java.util.Objects;
 /**
  * @author lang : 2025-10-30
  */
-class AuthenticationHandlerOne extends AuthenticationHandlerImpl<AuthenticationProvider> {
+class AuthenticationBackendHandler extends AuthenticationHandlerImpl<AuthenticationProvider> {
     private final SecurityMeta meta;
 
-    AuthenticationHandlerOne(final AuthenticationProvider provider,
-                             final SecurityMeta meta) {
+    AuthenticationBackendHandler(final AuthenticationProvider provider,
+                                 final SecurityMeta meta) {
         super(provider);
         this.meta = meta;
     }

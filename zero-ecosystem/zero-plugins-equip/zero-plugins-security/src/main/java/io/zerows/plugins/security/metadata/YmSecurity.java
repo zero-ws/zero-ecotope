@@ -7,7 +7,6 @@ import io.r2mo.base.util.R2MO;
 import io.r2mo.jaas.token.TokenType;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.metadata.security.SecurityConfig;
-import io.zerows.platform.enums.SecurityType;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
@@ -80,12 +79,11 @@ public class YmSecurity implements Serializable {
     // 2. 核心目标：用来存储不同类型的安全配置
     // 注意：这里加 @JsonIgnore 是为了防止默认序列化行为冲突，我们将通过 getter/setter 或 AnyGetter 处理
     @JsonIgnore
-    private ConcurrentMap<SecurityType, SecurityConfig> extension = new ConcurrentHashMap<>();
+    private ConcurrentMap<String, SecurityConfig> extension = new ConcurrentHashMap<>();
 
     @JsonAnySetter
-    public void setExtension(final String key, final Object value) {
+    public void setExtension(final String type, final Object value) {
         // 转换
-        final SecurityType type = SecurityType.from(key);
         if (Objects.nonNull(type) && value instanceof Map<?, ?>) {
             final SecurityConfig configuration = new SecurityConfig(type, JsonObject.mapFrom(value));
             this.extension.put(type, configuration);
@@ -100,7 +98,7 @@ public class YmSecurity implements Serializable {
         return Objects.nonNull(this.authorization) && this.authorization.isEnabled();
     }
 
-    public SecurityConfig extension(final SecurityType type) {
+    public SecurityConfig extension(final String type) {
         return this.extension.getOrDefault(type, null);
     }
 

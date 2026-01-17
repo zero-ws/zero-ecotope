@@ -6,10 +6,10 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Wall;
 import io.zerows.epoch.metadata.security.SecurityConfig;
 import io.zerows.epoch.metadata.security.SecurityMeta;
-import io.zerows.platform.enums.SecurityType;
 import io.zerows.platform.management.StoreApp;
 import io.zerows.plugins.security.metadata.YmSecurity;
 import io.zerows.plugins.security.metadata.YmSecurityCaptcha;
+import io.zerows.plugins.security.service.CaptchaConfig;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.support.Ut;
@@ -94,30 +94,25 @@ class SecurityManager {
     }
 
     SecurityConfig configJwt() {
-        return SECURITY.extension(SecurityType.JWT);
+        return SECURITY.extension(SecurityConstant.WALL_JWT);
     }
 
-    SecurityConfig configJwt(final String appOr) {
-        final YmSecurity configuration = CC_SECURITY.get(appOr);
-        return configuration.extension(SecurityType.JWT);
-    }
-
-    SecurityConfig configOf(final SecurityType type) {
+    SecurityConfig configOf(final String type) {
         return SECURITY.extension(type);
     }
 
-    SecurityConfig configOf(final SecurityType type, final Vertx vertxRef) {
+    SecurityConfig configOf(final String type, final Vertx vertxRef) {
         final YmSecurity configuration = CC_SECURITY.get(String.valueOf(vertxRef.hashCode()));
         return configuration.extension(type);
     }
 
-    SecurityCaptcha configCaptcha() {
+    CaptchaConfig configCaptcha() {
         final YmSecurityCaptcha captcha = SECURITY.getCaptcha();
         if (Objects.isNull(captcha)) {
             log.warn("[ PLUG ] ( Secure ) 当前安全配置中未启用验证码配置，请检查相关配置！");
             return null;
         }
-        return SecurityCaptcha.of(SECURITY.getCaptcha());
+        return CaptchaConfig.of(SECURITY.getCaptcha());
     }
 
     YmSecurity configuration() {
