@@ -2,6 +2,7 @@ package io.zerows.sdk.security;
 
 import io.vertx.core.Vertx;
 import io.vertx.ext.auth.authentication.AuthenticationProvider;
+import io.vertx.ext.web.handler.AuthenticationHandler;
 import io.vertx.ext.web.handler.AuthorizationHandler;
 import io.vertx.ext.web.handler.BasicAuthHandler;
 import io.zerows.epoch.metadata.security.SecurityMeta;
@@ -25,7 +26,7 @@ public interface WallProvider {
 
     AuthenticationProvider providerOfAuthentication(Vertx vertxRef, Set<SecurityMeta> meta);
 
-    WallHandler handlerOfAuthentication(Vertx vertxRef, Set<SecurityMeta> metaSet);
+    AuthenticationHandler handlerOfAuthentication(Vertx vertxRef, Set<SecurityMeta> metaSet);
 
     AuthorizationHandler handlerOfAuthorization(Vertx vertxRef, Set<SecurityMeta> metaSet);
 }

@@ -8,7 +8,10 @@ import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.plugins.security.service.AuthLoginStub;
 import io.zerows.plugins.security.service.CaptchaStub;
+import io.zerows.plugins.security.service.TokenDynamicResponse;
 import jakarta.inject.Inject;
+
+import java.util.Objects;
 
 @Queue
 public class ApiLdapActor {
@@ -30,20 +33,17 @@ public class ApiLdapActor {
             .compose(nil -> this.validateLdap(request, vertx))
             // 生成登录响应验证
             .compose(nil -> this.loginStub.login(request))
-            .compose(userAt -> new LdapLoginResponse(userAt).response());
+            .compose(userAt -> new TokenDynamicResponse(userAt).response());
     }
 
     private Future<Boolean> validateLdap(final LdapLoginRequest request, final Vertx vertx) {
         // 凭证信息
         final UsernamePasswordCredentials creds = request.credentials();
         // 调用 LDAP 验证（显示调用）
-        return LdapManager.of(vertx).getProvider().authenticate(creds).compose(user -> {
+        return LdapManager.of(vertx).getProvider().authenticate(creds)
             // ✅ 认证成功！
             // LDAP 只负责告诉你“密码对了”，它不负责生成 Token。
             // 这里你需要自己生成 JWT。
-            final JsonObject principal = user.principal();
-
-            return Future.succeededFuture(true);
-        });
+            .map(Objects::nonNull);
     }
 }

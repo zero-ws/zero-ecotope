@@ -96,7 +96,17 @@ public class JwtTokenBuilder extends TokenBuilderBase {
         // 1. 确保用户已授权/数据完整 (调用父类逻辑)
         final MSUser logged = this.ensureAuthorized(userAt);
         // 2. 构造 Token Payload
+        final String identifier = userAt.id().toString();
         final JsonObject payload = this.tokenGenerate(userAt.id().toString(), logged.token());
+        if (Objects.isNull(payload)) {
+            return null;
+        }
+        // ------------------ 非标准属性
+        // habitus / Fix: 用户会话标识缺失，无法获取缓存！
+        payload.put(KName.HABITUS, identifier);
+        // id      / Fix: 可调用 Account.userId(User user) 获取用户 ID
+        payload.put(KName.ID, identifier);
+        // ---------------------------
         // 3. 编码生成 Token
         return this.codec.encode(payload);
     }
@@ -173,13 +183,7 @@ public class JwtTokenBuilder extends TokenBuilderBase {
 
         final long nowMs = System.currentTimeMillis();
         final long expS = Duration.ofMillis(nowMs + duration.toMillis()).toSeconds();
-
-
         final JsonObject tokenData = new JsonObject();
-        // habitus / Fix: 用户会话标识缺失，无法获取缓存！
-        tokenData.put(KName.HABITUS, identifier);
-        // id      / Fix: 可调用 Account.userId(User user) 获取用户 ID
-        tokenData.put(KName.ID, identifier);
 
         // subject
         tokenData.put(NAME_SUBJECT, identifier);
