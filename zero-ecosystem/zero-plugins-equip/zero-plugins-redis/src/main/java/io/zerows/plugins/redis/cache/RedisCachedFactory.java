@@ -35,7 +35,7 @@ public class RedisCachedFactory implements CachedFactory {
 
         // 2. 构造新的 MemoOptions
         // Redis 强依赖 TTL，这里将配置中的 expiredAt 注入到 options 中
-        final MemoOptions<K, V> optionsUpdated = options.of(config.expiredAt());
+        final MemoOptions<K, V> optionsUpdated = options.of(options.duration());
 
         // 将完整的 RedisYmConfig 注入，以便 RedisMemoAt 获取 prefix, nullValue 等配置
         optionsUpdated.configuration(config);

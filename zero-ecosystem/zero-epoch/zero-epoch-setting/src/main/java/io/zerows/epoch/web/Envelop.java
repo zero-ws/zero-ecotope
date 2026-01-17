@@ -353,7 +353,8 @@ public class Envelop implements Serializable {
 
     // ------------------ Security Parth -------------------
     public String userId() {
-        return Account.userId(false);// TokenJwt.of(this.user()).user();
+        final User user = this.assist.user();
+        return Account.userId(user);// TokenJwt.of(this.user()).user();
     }
 
     public User user() {

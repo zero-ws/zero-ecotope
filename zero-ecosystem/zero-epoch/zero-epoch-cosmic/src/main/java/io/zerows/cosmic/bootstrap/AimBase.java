@@ -117,15 +117,14 @@ public abstract class AimBase {
         try {
             // Monitor
             this.logger().debug("[ ZERO ] Web flow 执行器: {}", event.getAction());
-            {
-                final Session session = context.session();
-                if (Objects.nonNull(session)) {
-                    // Fix: 3.9.1 cookie error of null dot
-                    final Cookie cookie = context.request().getCookie(VValue.DEFAULT_SESSION);
-                    this.logger().debug("[ ZERO ] ( Session ) Path = {}, Session Id = {}, Cookie {}",
-                        context.request().path(),
-                        session.id(), Objects.isNull(cookie) ? null : cookie.getValue());
-                }
+            // Session
+            final Session session = context.session();
+            if (Objects.nonNull(session)) {
+                // Fix: 3.9.1 cookie error of null dot
+                final Cookie cookie = context.request().getCookie(VValue.DEFAULT_SESSION);
+                this.logger().debug("[ ZERO ] ( Session ) Path = {}, Session Id = {}, Cookie {}",
+                    context.request().path(),
+                    session.id(), Objects.isNull(cookie) ? null : cookie.getValue());
             }
             Fn.jvmAt(consumer);
         } catch (final WebException ex) {

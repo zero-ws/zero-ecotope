@@ -100,7 +100,7 @@ public final class AckFlow {
          * FIX: java.lang.IllegalStateException: Response is closed
          * 只有响应没有发送的时候才继续执行
          */
-        if (response.closed()) {
+        if (response.closed() || response.ended()) {
             // ❌️ 响应已关闭，直接中断
             return;
         }

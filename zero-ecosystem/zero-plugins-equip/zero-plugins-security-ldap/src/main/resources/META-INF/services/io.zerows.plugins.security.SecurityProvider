@@ -1,1 +1,1 @@
-io.zerows.plugins.security.ldap.SecurityProviderLDAP
+io.zerows.plugins.security.ldap.LdapSecurityProvider

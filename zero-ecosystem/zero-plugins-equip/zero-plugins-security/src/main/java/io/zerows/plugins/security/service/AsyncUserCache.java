@@ -128,9 +128,7 @@ public class AsyncUserCache implements UserCache {
         final var vectorCache = this.factory().userVector();
 
         // 循环同步写入
-        idKeys.forEach(idKey ->
-            Future.await(vectorCache.put(idKey, uidStr))
-        );
+        idKeys.forEach(idKey -> Future.await(vectorCache.put(idKey, uidStr)));
     }
 
     /**

@@ -70,7 +70,7 @@ class AuthenticationProviderOne implements AuthenticationProvider {
             if (Ut.isNotNil(res)) {
                 // 缓存中有值，可直接返回
                 log.info("[ PLUG ] ( Secure ) 401 用户认证命中缓存，session = {}", session);
-                return Future.succeededFuture(User.create(authJson));
+                return Future.succeededFuture(User.create(res));
             }
 
             final WallExecutor executor = this.meta.getProxy();

@@ -23,34 +23,25 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * AES Symmetric Encryption Token Generator (HED Static Implementation)
- * <p>
- * Features:
- * 1. Uses {@link HED} static methods for encryption/decryption.
- * 2. Implements AES-256 (GCM mode) via {@link LicSym.AlgLicenseAes#AES_256}.
- * 3. Uses {@link SecurityConfig} for silent configuration.
- * 4. Manages Key Derivation (String -> SecretKey) and Base64 encoding manually to adapt to HED API.
+ * AES 对称加密令牌生成器（HED 静态实现）
  *
  * @author lang
  */
 @Slf4j
 public class TokenAESGenerator {
 
-    // ================== Constants ==================
-
-    // Physical Fingerprint Prefix: r2a_
+    // ================== 常量 ==================
     public static final String TOKEN_PREFIX = "r2a_";
     private static final String NAME_SUBJECT = "sub";
-    private static final String NAME_EXPIRE = "exp"; // Timestamp in ms
+    private static final String NAME_EXPIRE = "exp"; // 时间戳（毫秒）
     private static final String NAME_ADDON_DATA = "ext";
-    // Algorithm Spec: AES-256 (Corresponds to GCM mode in HED implementation)
     private static final LicSym.AlgLicenseAes AES_SPEC = LicSym.AlgLicenseAes.AES_256;
 
-    // ================== Dependencies ==================\
+    // ================== 依赖 ==================
     private SecurityConfig config() {
         return SecurityActor.configOf(SecurityType.BASIC);
     }
-    
+
     private boolean isDisabled() {
         return !this.config().option("enabled", Boolean.TRUE);
     }
@@ -66,15 +57,13 @@ public class TokenAESGenerator {
     }
 
     /**
-     * Generate AES Token
+     * 生成 AES 令牌
      */
     public String tokenGenerate(final String identifier, final Map<String, Object> data) {
-        // 1. Check enabled status
         if (Objects.isNull(this.config()) || this.isDisabled()) {
             return null;
         }
 
-        // 2. Assemble Payload
         final long expMs = this.getAesExpiredMs();
         final Map<String, Object> payload = new HashMap<>(4);
         payload.put(NAME_SUBJECT, identifier);
@@ -84,23 +73,12 @@ public class TokenAESGenerator {
         }
 
         try {
-            // 3. Serialize (Map -> JSON String -> byte[])
             final JObject jsonObj = SPI.J().put(payload);
             final byte[] rawBytes = jsonObj.encode().getBytes(StandardCharsets.UTF_8);
-
-            // 4. Derive Key (String -> SecretKey)
-            // HED requires a SecretKey object, so we must convert the config string
             final SecretKey key = this.deriveSecretKey(this.getAesSecret());
-
-            // 5. HED Encrypt (byte[] -> byte[])
-            // Calls HEDBase.encrypt(byte[], SecretKey, AlgLicenseSpec)
             final byte[] encryptedBytes = HED.encrypt(rawBytes, key, AES_SPEC);
-
-            // 6. Encode (byte[] -> URL Safe Base64 String)
             final String base64Str = Base64.getUrlEncoder().withoutPadding().encodeToString(encryptedBytes);
-
             return TOKEN_PREFIX + base64Str;
-
         } catch (final Exception e) {
             log.error("AES Token generation failed", e);
             throw new RuntimeException("Token generation failed", e);
@@ -108,32 +86,62 @@ public class TokenAESGenerator {
     }
 
     /**
-     * Validate Token
+     * ✅ [优化] 一次性验证并提取主题
+     * <p>
+     * 只执行一次解密。检查结构、完整性 (AES-GCM) 和过期时间。
+     *
+     * @param token AES 令牌
+     * @return 如果有效且未过期，返回主题 (userId)；否则返回 null。
      */
-    public boolean tokenValidate(final String token) {
+    public String validateAndExtract(final String token) {
+        // 1. 快速格式检查
         if (this.isValidFormat(token)) {
-            return false;
+            return null;
         }
+
         try {
+            // 2. 耗时操作：解密 (包括通过 GCM Tag 进行完整性检查)
             final Map<String, Object> payload = this.decryptTokenToMap(token);
             if (payload == null) {
-                return false;
+                return null;
             }
-            // Check Expiration
+
+            // 3. 验证：过期检查
             final Object expObj = payload.get(NAME_EXPIRE);
             if (expObj instanceof Number) {
-                return System.currentTimeMillis() <= ((Number) expObj).longValue();
+                final long expireAt = ((Number) expObj).longValue();
+                if (System.currentTimeMillis() > expireAt) {
+                    return null; // 已过期
+                }
+            } else {
+                return null; // 缺少过期字段 = 无效
             }
-            return false;
+
+            // 4. 提取：返回主题
+            return (String) payload.get(NAME_SUBJECT);
+
         } catch (final Exception e) {
-            return false;
+            // 解密失败 (被篡改、错误的密钥或格式错误)
+            return null;
         }
     }
 
     /**
-     * Extract Subject
+     * 验证令牌（旧版/独立检查）
+     */
+    public boolean tokenValidate(final String token) {
+        // 内部使用优化后的方法以避免代码重复，
+        // 或者如果您需要不同的布尔逻辑，可以保持独立。
+        // 用于严格的布尔检查：
+        return this.validateAndExtract(token) != null;
+    }
+
+    /**
+     * 提取主题（旧版/独立检查）
      */
     public String tokenSubject(final String token) {
+        // 理想情况下，这也应该执行验证，否则可能会返回已过期的主题。
+        // 但如果需要兼容性，保留原始逻辑（仅解密并获取）。
         if (this.isValidFormat(token)) {
             return null;
         }
@@ -146,7 +154,7 @@ public class TokenAESGenerator {
     }
 
     /**
-     * Extract Extended Data
+     * 提取扩展数据
      */
     @SuppressWarnings("unchecked")
     public Map<String, Object> tokenData(final String token) {
@@ -161,7 +169,7 @@ public class TokenAESGenerator {
         }
     }
 
-    // ================== Private Helper Methods ==================
+    // ================== 私有辅助方法 ==================
 
     private boolean isValidFormat(final String token) {
         return this.isDisabled()
@@ -170,29 +178,15 @@ public class TokenAESGenerator {
     }
 
     private Map<String, Object> decryptTokenToMap(final String rawToken) throws Exception {
-        // 1. Remove Prefix
         final String base64Str = rawToken.substring(TOKEN_PREFIX.length());
-
-        // 2. Decode (URL Safe Base64 String -> byte[])
         final byte[] encryptedBytes = Base64.getUrlDecoder().decode(base64Str);
-
-        // 3. Derive Key
         final SecretKey key = this.deriveSecretKey(this.getAesSecret());
-
-        // 4. HED Decrypt (byte[] -> byte[])
-        // Calls HEDBase.decrypt(byte[], SecretKey, AlgLicenseSpec)
         final byte[] plainBytes = HED.decrypt(encryptedBytes, key, AES_SPEC);
-
-        // 5. Deserialize
         final String jsonPayload = new String(plainBytes, StandardCharsets.UTF_8);
         final JObject parsed = JBase.parse(jsonPayload);
         return parsed.toMap();
     }
 
-    /**
-     * Key Derivation Function (KDF)
-     * Converts arbitrary configuration string to AES-256 compliant 32-byte Key
-     */
     private SecretKey deriveSecretKey(final String configSecret) {
         try {
             final MessageDigest digest = MessageDigest.getInstance("SHA-256");

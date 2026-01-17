@@ -1,13 +1,22 @@
 package io.zerows.plugins.security.jwt;
 
+import cn.hutool.core.util.StrUtil;
+import io.r2mo.base.util.R2MO;
 import io.r2mo.jaas.element.MSUser;
 import io.r2mo.jaas.session.UserAt;
 import io.r2mo.jaas.session.UserCache;
 import io.r2mo.jaas.token.TokenBuilderBase;
-import io.r2mo.typed.cc.Cc;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.platform.enums.SecurityType;
+import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.metadata.security.SecurityConfig;
+import io.zerows.plugins.security.SecurityActor;
+import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
+import java.time.Duration;
+import java.util.Arrays;
+import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -18,15 +27,31 @@ import java.util.UUID;
  *
  * @author lang
  */
+@Slf4j
 public class JwtTokenBuilder extends TokenBuilderBase {
-
-    private static final Cc<String, JwtToken> CC_TOKEN = Cc.openThread();
+    // 标准 Claim
+    private static final String NAME_SUBJECT = "subject";                   // sub
+    private static final String NAME_ISSUER = "issuer";                     // iss
+    private static final String NAME_AUDIENCE = "audience";                 // aud
+    private static final String NAME_EXPIRE_SEC = "expiresInSeconds";       // exp
+    private static final String NAME_IAT = "noTimestamp";                   // iat
+    private static final String NAME_LEEWAY = "leeway";                     // leeway
+    // 自定义扩展字段
+    private static final String NAME_ADDON_DATA = "ext";
+    /**
+     * 配置项
+     */
+    private static final String KEY_CFG_ISSUER = "issuer";                  // issuer           , iss
+    private static final String KEY_CFG_AUDIENCE = "audience";              // audience         , aud
+    private static final String KEY_CFG_EXPIRED_AT = "expiredAt";           // expiredAt        , exp
+    private static final String KEY_CFG_IAT = "iat";                        // iat              , iat
+    private static final String KEY_CFG_LEEWAY = "leeway";                  // leeway           , leeway
     // 核心编解码器引用
     private final JwtToken codec;
 
     public JwtTokenBuilder() {
         // 初始化编解码器，LeeJwt 内部会自动读取 vertx.yaml 中的 security 配置
-        this.codec = CC_TOKEN.pick(JwtToken::new);
+        this.codec = JwtToken.of();
     }
 
     /**
@@ -40,19 +65,22 @@ public class JwtTokenBuilder extends TokenBuilderBase {
         if (Objects.isNull(token) || token.trim().isEmpty()) {
             return null;
         }
+        if (!this.tokenValidate(token)) {
+            return null;
+        }
         try {
             // 使用 LeeJwt 解码，如果验证失败内部通常会返回空 JsonObject 或抛出异常
-            final JsonObject payload = this.codec.decode(token, SecurityType.JWT);
+            final JsonObject payload = this.codec.decode(token);
 
             if (payload == null || payload.isEmpty()) {
                 return null;
             }
-
             // 检查过期时间 (Vert.x decode 方法通常已验证 exp，此处为双重保险或读取业务字段)
             // 提取 standard claim: sub
-            return payload.getString("sub");
+            return payload.getString(NAME_SUBJECT);
         } catch (final Exception e) {
             // 解码失败（签名错误、过期等）
+            log.error(e.getMessage(), e);
             return null;
         }
     }
@@ -67,25 +95,20 @@ public class JwtTokenBuilder extends TokenBuilderBase {
     public String accessOf(final UserAt userAt) {
         // 1. 确保用户已授权/数据完整 (调用父类逻辑)
         final MSUser logged = this.ensureAuthorized(userAt);
-
-        // 2. 构造 Payload
-        // Vert.x JWTAuth 会自动处理 "iat" (Issued At).
-        // "exp" (Expiration) 通常由配置决定，也可以在此处覆盖 options.setExpiresInSeconds
-        final JsonObject payload = new JsonObject();
-
-        // 标准字段
-        payload.put("sub", userAt.id().toString());
-
-        // 自定义字段：保持与 Spring 版一致的登录类型标识
-        payload.put("loginType", "R2MO-ZERO");
-
-        // 如果有扩展数据，从 userAt 或 MSUser 中提取放入 ext
-        // if (logged.getExtension() != null) {
-        //     payload.put("ext", logged.getExtension());
-        // }
-
+        // 2. 构造 Token Payload
+        final String identifier = userAt.id().toString();
+        final JsonObject payload = this.tokenGenerate(userAt.id().toString(), logged.token());
+        if (Objects.isNull(payload)) {
+            return null;
+        }
+        // ------------------ 非标准属性
+        // habitus / Fix: 用户会话标识缺失，无法获取缓存！
+        payload.put(KName.HABITUS, identifier);
+        // id      / Fix: 可调用 Account.userId(User user) 获取用户 ID
+        payload.put(KName.ID, identifier);
+        // ---------------------------
         // 3. 编码生成 Token
-        return this.codec.encode(payload, SecurityType.JWT);
+        return this.codec.encode(payload);
     }
 
     /**
@@ -96,17 +119,103 @@ public class JwtTokenBuilder extends TokenBuilderBase {
      */
     @Override
     public String refreshOf(final UserAt userAt) {
-        if (userAt == null || userAt.id() == null) {
+        this.ensureAuthorized(userAt);
+        // 提取配置信息
+        final SecurityConfig config = SecurityActor.configJwt();
+        if (Objects.isNull(config)) {
             return null;
         }
+        // 1. 生成一个安全的随机 Refresh Token
+        final String refreshToken = UUID.randomUUID().toString().replace("-", ""); // 移除 UUID 中的横线
 
-        // 1. 生成随机 Token (移除横线)
-        final String refreshToken = UUID.randomUUID().toString().replace("-", "");
+        // 2. 获取 UserCache 实例
+        final UserCache userCache = UserCache.of();
 
-        // 2. 存入缓存 (UserCache)
-        // 注意：UserCache.of() 需要确保在 Vert.x 环境中已正确初始化
-        UserCache.of().tokenRefresh(refreshToken, userAt.id());
+        // 3. 将 Refresh Token 与用户 ID 存储到缓存
+        userCache.tokenRefresh(refreshToken, userAt.id()); // 假设 userId 是 UUID 字符串
 
         return refreshToken;
+    }
+
+    private boolean tokenValidate(final String token) {
+        // 提取配置信息
+        final SecurityConfig config = SecurityActor.configJwt();
+        if (Objects.isNull(config)) {
+            return false;
+        }
+        if (token == null || token.trim().isEmpty()) {
+            return false;
+        }
+        try {
+            final JsonObject payload = this.codec.decode(token);
+            if (payload == null || payload.isEmpty()) {
+                return false;
+            }
+            // 额外校验 issuer / audience（如配置）
+            final String issuer = config.option(KEY_CFG_ISSUER, null);
+            if (StrUtil.isNotEmpty(issuer)) {
+                final String tokenIssuer = payload.getString(NAME_ISSUER);
+                if (!issuer.equals(tokenIssuer)) {
+                    return false;
+                }
+            }
+
+            final String audience = config.option(KEY_CFG_AUDIENCE, null);
+            if (StrUtil.isNotEmpty(audience)) {
+                final String tokenAudience = payload.getString(NAME_AUDIENCE);
+                return Objects.equals(audience, tokenAudience);
+            }
+            return true;
+        } catch (final Throwable ex) {
+            log.error(ex.getMessage(), ex);
+            return false;
+        }
+    }
+
+    private JsonObject tokenGenerate(final String identifier, final Map<String, Object> data) {
+        // 提取配置信息
+        final SecurityConfig config = SecurityActor.configJwt();
+        if (Objects.isNull(config)) {
+            return null;
+        }
+        final String expires = config.option(KEY_CFG_EXPIRED_AT, "2h");
+        final Duration duration = R2MO.toDuration(expires);
+
+        final long nowMs = System.currentTimeMillis();
+        final long expS = Duration.ofMillis(nowMs + duration.toMillis()).toSeconds();
+        final JsonObject tokenData = new JsonObject();
+
+        // subject
+        tokenData.put(NAME_SUBJECT, identifier);
+        final String issuer = config.option(KEY_CFG_ISSUER, null);
+        if (StrUtil.isNotEmpty(issuer)) {
+            // issuer
+            tokenData.put(NAME_ISSUER, issuer);
+        }
+        // expiresInSeconds
+        tokenData.put(NAME_EXPIRE_SEC, expS);
+        final Object audience = config.option(KEY_CFG_AUDIENCE, null);
+        final JsonArray audienceArr = new JsonArray();
+        if (audience instanceof final String audienceStr) {
+            Arrays.stream(audienceStr.split(",")).forEach(audienceArr::add);
+        } else if (audience instanceof final JsonArray audienceA) {
+            audienceArr.addAll(audienceA);
+        }
+        // audience
+        tokenData.put(NAME_AUDIENCE, audienceArr);
+
+
+        // noTimestamp
+        final boolean iat = config.option(KEY_CFG_IAT, Boolean.FALSE);
+        tokenData.put(NAME_IAT, iat);
+        // leeway
+        final long leeway = config.option(KEY_CFG_LEEWAY, 0L);
+        tokenData.put(NAME_LEEWAY, leeway);
+
+        final JsonObject additionalData = Ut.toJObject(data);
+        if (Ut.isNotNil(additionalData)) {
+            tokenData.put(NAME_ADDON_DATA, additionalData);
+        }
+        return tokenData;
     }
 }
