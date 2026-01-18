@@ -93,10 +93,6 @@ class SecurityManager {
         }, cacheKey);
     }
 
-    SecurityConfig configJwt() {
-        return SECURITY.extension(SecurityConstant.WALL_JWT);
-    }
-
     SecurityConfig configOf(final String type) {
         return SECURITY.extension(type);
     }

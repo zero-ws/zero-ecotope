@@ -145,7 +145,7 @@ public class LdapAuthenticationProvider implements AuthenticationProvider {
                     throw new CredentialValidationException("密码错误", e);
                 }
                 log.error("{} LDAP 通信异常: {}", LOG_PREFIX, errorMsg, e);
-                throw new CredentialValidationException("LDAP 服务异常", e);
+                throw new CredentialValidationException("LDAP 服务异常 / 通信异常", e);
             } finally {
                 this.closeQuietly(results);
                 this.closeQuietly(ctx);

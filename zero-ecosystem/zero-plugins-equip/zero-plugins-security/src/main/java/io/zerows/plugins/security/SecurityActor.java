@@ -34,7 +34,7 @@ public class SecurityActor extends AbstractHActor {
     }
 
     public static SecurityConfig configJwt() {
-        return manager().configJwt();
+        return manager().configOf(SecurityConstant.WALL_JWT);
     }
 
     public static CaptchaConfig configCaptcha() {
