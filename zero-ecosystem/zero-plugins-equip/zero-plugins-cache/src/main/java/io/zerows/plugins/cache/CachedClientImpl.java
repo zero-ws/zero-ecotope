@@ -17,7 +17,8 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.time.Duration;
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 /**
  * @author lang : 2026-01-02
@@ -28,7 +29,7 @@ class CachedClientImpl implements CachedClient {
 
     private static final Cc<String, CachedClient> CC_CLIENTS = Cc.openThread();
     private static final Cc<String, CachedFactory> CC_FACTORY = Cc.openThread();
-    private static final AtomicBoolean IS_LOG = new AtomicBoolean(Boolean.TRUE);
+    private static final ConcurrentMap<String, Boolean> MAP_LOG = new ConcurrentHashMap<>();
     private final transient Vertx vertx;
     private final MemoOptions<?, ?> baseOption;
 
@@ -102,11 +103,19 @@ class CachedClientImpl implements CachedClient {
         final String fingerprint = optionsWithTTL.fingerprint();
         final CachedFactory factory = CC_FACTORY.pick(() -> {
             final CachedFactory found = HPI.findOneOf(CachedFactory.class);
-            if (Objects.nonNull(found) && IS_LOG.getAndSet(Boolean.FALSE)) {
-                log.info("[ PLUG ] CachedFactory 实现类 = {}", found.getClass().getName());
+            if (Objects.nonNull(found)) {
+                MAP_LOG.computeIfAbsent(fingerprint, key -> {
+                    log.info("[ PLUG ] CachedFactory 实现类 = {}", found.getClass().getName());
+                    return Boolean.TRUE;
+                });
             }
             return found;
         }, fingerprint);
         return factory.findConfigured(this.vertx, optionsWithTTL);
+    }
+
+    @Override
+    public <K, V> MemoAt<K, V> memoAt() {
+        return this.memoAt(this.baseOption.duration());
     }
 }

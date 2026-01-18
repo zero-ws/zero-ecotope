@@ -173,10 +173,11 @@ public class Account {
         final JsonObject principal = new JsonObject();
         principal.put(KName.USERNAME, user.getUsername());
         principal.put(KName.PASSWORD, user.getPassword());
-        principal.put(KName.ID, user.getId().toString());
+        final String id = user.getId().toString();
+        principal.put(KName.ID, id);
         // 鉴于旧版标识基本信息，此处还需要执行 habitus 对应的数据计算，此处 habitus 是后续执行过程中的核心
-        principal.put(KName.HABITUS, user.getId().toString());
-        principal.put(KName.SESSION, user.getUsername());
+        principal.put(KName.HABITUS, id);
+        principal.put(KName.SESSION, id);
         return principal;
     }
 
