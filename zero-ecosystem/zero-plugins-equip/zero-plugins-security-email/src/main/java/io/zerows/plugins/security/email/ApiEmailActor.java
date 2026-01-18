@@ -10,6 +10,7 @@ import io.zerows.plugins.security.email.exception._80352Exception400EmailFormat;
 import io.zerows.plugins.security.email.exception._80353Exception500EmailSending;
 import io.zerows.plugins.security.service.AuthLoginStub;
 import io.zerows.plugins.security.service.CaptchaStub;
+import io.zerows.plugins.security.service.TokenDynamicResponse;
 import io.zerows.program.Ux;
 import io.zerows.support.Fx;
 import jakarta.inject.Inject;
@@ -46,8 +47,9 @@ public class ApiEmailActor {
     }
 
     @Address(ApiAddr.API_AUTH_EMAIL_LOGIN)
-    public Future<JsonObject> login(final JsonObject body) {
-
-        return Ux.futureJ();
+    public Future<JsonObject> login(final EmailLoginRequest request) {
+        return request.requestValidated()
+            .compose(verified -> this.loginStub.login(request))
+            .compose(userAt -> new TokenDynamicResponse(userAt).response());
     }
 }

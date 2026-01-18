@@ -91,11 +91,12 @@ public abstract class AsyncUserAtBase implements AsyncUserAt {
                                         final Duration duration) {
         final CaptchaArgs captchaArgs = CaptchaArgs.of(this.loginType(), duration);
         final String id = request.getId();
-        final String codeStored = UserCache.of().authorize(id, captchaArgs);
-        if (Objects.isNull(codeStored)) {
-            return Future.succeededFuture(Boolean.FALSE);
-        }
-        final String code = request.getCredential();
-        return Future.succeededFuture(codeStored.equals(code));
+        return Ux.waitVirtual(() -> UserCache.of().authorize(id, captchaArgs)).map(codeStored -> {
+            if (Objects.isNull(codeStored)) {
+                return Boolean.FALSE;
+            }
+            final String code = request.getCredential();
+            return codeStored.equals(code);
+        });
     }
 }
