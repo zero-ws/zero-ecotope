@@ -4,6 +4,7 @@ import io.r2mo.base.util.R2MO;
 import io.r2mo.jaas.session.UserAt;
 import io.r2mo.jaas.token.TokenBuilderManager;
 import io.r2mo.jaas.token.TokenType;
+import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.security.SecurityConfig;
@@ -30,14 +31,14 @@ public class JwtLoginResponse extends AsyncLoginResponse {
         this.expiresIn = duration.getSeconds();
     }
 
-    @Override
-    protected JsonObject responseData() {
+
+    public Future<JsonObject> response() {
         final JsonObject response = new JsonObject();
         response.put("tokenType", this.tokenType);
         response.put("expiresIn", this.expiresIn);
         response.put(KName.TOKEN, this.getToken());
         response.put("refreshToken", this.getRefreshToken());
-        return response;
+        return this.replyAsync(response);
     }
 
     @Override

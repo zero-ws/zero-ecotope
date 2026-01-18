@@ -69,11 +69,11 @@ public class SecuritySession {
     }
 
     public Future<JsonObject> authorized403(final RoutingContext context, final JsonObject waitFor) {
-        return this.authorized403(context)
+        return this.authorized(context)
             .put(KWeb.SESSION.AUTHORIZATION, waitFor, this.msExpiredAt());
     }
 
-    public HMM<String, JsonObject> authorized403(final RoutingContext context) {
+    public HMM<String, JsonObject> authorized(final RoutingContext context) {
         final String authorization = context.request().getHeader(HttpHeaders.AUTHORIZATION);
         final String token = authorization.split(" ")[1];
         return HMM.of(token);

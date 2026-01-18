@@ -4,6 +4,7 @@ import io.r2mo.jaas.element.MSUser;
 import io.r2mo.jaas.session.UserAt;
 import io.r2mo.jaas.token.TokenBuilderManager;
 import io.r2mo.jaas.token.TokenType;
+import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import lombok.Data;
@@ -20,13 +21,12 @@ public class BasicLoginResponse extends AsyncLoginResponse {
         this.username = user.getUsername();
     }
 
-    @Override
-    protected JsonObject responseData() {
+    public Future<JsonObject> response() {
         final JsonObject response = new JsonObject();
         response.put(KName.ID, this.getId());
         response.put(KName.TOKEN, this.getToken());
         response.put(KName.USERNAME, this.username);
-        return response;
+        return this.replyAsync(response);
     }
 
     @Override

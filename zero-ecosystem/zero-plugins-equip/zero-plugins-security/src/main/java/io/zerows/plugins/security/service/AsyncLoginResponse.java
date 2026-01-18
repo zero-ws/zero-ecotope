@@ -22,10 +22,8 @@ public abstract class AsyncLoginResponse extends LoginResponse {
         this.userAt = userAt;
     }
 
-    public Future<JsonObject> response() {
+    protected Future<JsonObject> replyAsync(final JsonObject response) {
         return SecuritySession.of().authorized401(this.userAt, this.getToken())
-            .map(user -> this.responseData());
+            .map(v -> response);
     }
-
-    protected abstract JsonObject responseData();
 }

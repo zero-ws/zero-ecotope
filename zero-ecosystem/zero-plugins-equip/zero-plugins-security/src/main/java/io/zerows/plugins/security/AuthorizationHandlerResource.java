@@ -145,7 +145,7 @@ class AuthorizationHandlerResource {
 
     private Future<Boolean> waitCached(final RoutingContext context, final User user) {
         final SecuritySession session = SecuritySession.of();
-        final HMM<String, JsonObject> mmUser = session.authorized403(context);
+        final HMM<String, JsonObject> mmUser = session.authorized(context);
         if (Objects.isNull(mmUser)) {
             return Future.succeededFuture(Boolean.FALSE);
         }
@@ -174,7 +174,7 @@ class AuthorizationHandlerResource {
 
     private Future<Boolean> waitCached(final RoutingContext context) {
         final SecuritySession session = SecuritySession.of();
-        final HMM<String, JsonObject> mmUser = session.authorized403(context);
+        final HMM<String, JsonObject> mmUser = session.authorized(context);
         if (Objects.isNull(mmUser)) {
             return Future.succeededFuture(Boolean.TRUE);
         }
