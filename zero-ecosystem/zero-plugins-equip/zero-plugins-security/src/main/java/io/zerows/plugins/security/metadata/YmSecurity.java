@@ -1,5 +1,6 @@
 package io.zerows.plugins.security.metadata;
 
+import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -98,8 +99,25 @@ public class YmSecurity implements Serializable {
         return Objects.nonNull(this.authorization) && this.authorization.isEnabled();
     }
 
+    /**
+     * 智能提取模式
+     * <pre>
+     *     1. 先按 type 直接提取
+     *     2. 然后根据 yaml 的键值提取配置
+     * </pre>
+     *
+     * @param type 类型
+     * @return 安全配置
+     */
     public SecurityConfig extension(final String type) {
-        return this.extension.getOrDefault(type, null);
+        if (StrUtil.isEmpty(type)) {
+            return null;
+        }
+        SecurityConfig found = this.extension.getOrDefault(type, null);
+        if (Objects.isNull(found)) {
+            found = this.extension.getOrDefault(type.toLowerCase(), null);
+        }
+        return found;
     }
 
     @Data

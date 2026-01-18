@@ -78,6 +78,11 @@ class AuthenticationHandlerGateway extends AuthenticationHandlerImpl<Authenticat
      *    - 强制注册 Default Security (Basic & AES) 到 `WALL_BASIC`。
      *    - 确保即使没有 SPI 扩展，系统也能处理基础认证。
      * </pre>
+     * 特殊数据结构
+     * <pre>
+     *     JWT   -> {@see JwtExtensionAuthentication}
+     *     BASIC -> {@link ExtensionAuthenticationBasic} / {@link ExtensionAuthenticationAES}
+     * </pre>
      *
      * @param provider 底层认证提供者 (Zero Security Guard)
      * @param metaSet  当前路径绑定的所有安全元数据
