@@ -12,6 +12,7 @@ import io.vertx.ext.auth.hashing.HashingStrategy;
 import io.zerows.plugins.security.exception._80203Exception404UserNotFound;
 import io.zerows.plugins.security.exception._80204Exception401PasswordWrong;
 import io.zerows.plugins.security.exception._80244Exception401LoginTypeWrong;
+import io.zerows.program.Ux;
 import io.zerows.support.Fx;
 import lombok.extern.slf4j.Slf4j;
 
@@ -70,8 +71,9 @@ public abstract class AsyncUserAtBase implements AsyncUserAt {
     // --------------- 子类必须实现的方法
     protected abstract Future<UserAt> findUser(String id);
 
+    // Could not run in worker thread.
     protected Future<UserAt> userAtEphemeral(final MSUser user) {
-        return Future.succeededFuture(UserSession.of().userAtEphemeral(user));
+        return Ux.waitVirtual(() -> UserSession.of().userAtEphemeral(user));
     }
 
     // --------------- 检查专用方法

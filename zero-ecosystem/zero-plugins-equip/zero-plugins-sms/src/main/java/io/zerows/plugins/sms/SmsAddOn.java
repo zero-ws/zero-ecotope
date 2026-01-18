@@ -11,11 +11,11 @@ import java.util.Objects;
 class SmsAddOn extends AddOnBase<SmsClient> {
     private static SmsAddOn INSTANCE;
 
-    protected SmsAddOn(Vertx vertx, HConfig config) {
+    protected SmsAddOn(final Vertx vertx, final HConfig config) {
         super(vertx, config);
     }
 
-    public static AddOn<SmsClient> of(Vertx vertx, HConfig config) {
+    static AddOn<SmsClient> of(final Vertx vertx, final HConfig config) {
         if (INSTANCE == null) {
             INSTANCE = new SmsAddOn(vertx, config);
         }
@@ -32,7 +32,7 @@ class SmsAddOn extends AddOnBase<SmsClient> {
     }
 
     @Override
-    protected SmsClient createInstanceBy(String name) {
-        return SmsClient.createClient(this.vertx(),this.config());
+    protected SmsClient createInstanceBy(final String name) {
+        return SmsClient.createClient(this.vertx(), this.config());
     }
 }
