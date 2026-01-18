@@ -11,7 +11,6 @@ import io.vertx.ext.auth.authentication.CredentialValidationException;
 import io.vertx.ext.auth.authentication.Credentials;
 import io.vertx.ext.auth.authentication.UsernamePasswordCredentials;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.web.Account;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
 
@@ -53,21 +52,18 @@ public class LdapAuthenticationProvider implements AuthenticationProvider {
 
     @Override
     public Future<User> authenticate(final Credentials credentials) {
-        final UsernamePasswordCredentials authInfo;
+        UsernamePasswordCredentials authInfo = null;
         try {
-            if (credentials instanceof UsernamePasswordCredentials) {
-                authInfo = (UsernamePasswordCredentials) credentials;
-            } else {
-                final JsonObject data = Account.userData(credentials);
-                authInfo = new UsernamePasswordCredentials(
-                    data.getString("username"),
-                    data.getString("password")
-                );
+            if (credentials instanceof final UsernamePasswordCredentials credentialsAccount) {
+                credentialsAccount.checkValid(null);
+                authInfo = credentialsAccount;
             }
-            authInfo.checkValid(null);
+            if (Objects.isNull(authInfo)) {
+                return Future.failedFuture(new CredentialValidationException("凭证类型不匹配，仅支持用户名/密码类型"));
+            }
         } catch (final RuntimeException e) {
             log.warn("{} 凭证格式校验失败: {}", LOG_PREFIX, e.getMessage());
-            return Future.failedFuture(new CredentialValidationException("凭证无效", e));
+            return Future.failedFuture(new CredentialValidationException("凭证格式无效", e));
         }
 
         final String username = authInfo.getUsername();

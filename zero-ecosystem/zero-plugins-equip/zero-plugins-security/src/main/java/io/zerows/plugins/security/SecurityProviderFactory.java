@@ -2,7 +2,6 @@ package io.zerows.plugins.security;
 
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Vertx;
-import io.vertx.ext.auth.ChainAuth;
 import io.vertx.ext.auth.authentication.AuthenticationProvider;
 import io.vertx.ext.web.handler.AuthenticationHandler;
 import io.vertx.ext.web.handler.AuthorizationHandler;
@@ -24,7 +23,7 @@ import java.util.Set;
  *
  * 2. 🎯 核心逻辑：
  * 不论请求走哪条通道 (AES 还是 JWT)，原生校验通过后，
- * 都会强制执行 {@link AuthenticationBackendProvider} 进行业务补位。
+ * 都会强制执行 {@link BackendProviderLogged} 进行业务补位。
  *
  * 3. 🏁 最终收口：
  * 所有 Handler 执行完毕后，由 {@link AuthenticationBackendHandler} 统一进行 User -> Account 转换。
@@ -77,19 +76,17 @@ class SecurityProviderFactory {
      *     2. 除开 JWT 和 OAuth2，这两种内置的 Provider 会被自动加入 Handler，其他的都会被过滤掉
      *     3. Provider x N + One 的结构搭建
      * </pre>
+     * 此处 Provider 只在 WebSocket 中使用，所以应该使用 Provider 的分流器，根据请求来执行不同的 Provider
      */
     AuthenticationProvider providerOfAuthentication(final Set<SecurityMeta> metaSet) {
         if (metaSet == null || metaSet.isEmpty()) {
             return null;
         }
-        // 先构造原生态的 SecurityMeta Provider 链 (OR 关系)
-        return CC_PROVIDER.pick(() -> {
-            final ChainAuth chain = ChainAuth.any();
-            metaSet.stream()
-                .map(meta -> new AuthenticationBackendProvider(this.vertxRef, meta))
-                .forEach(chain::add);
-            return chain;
-        }, String.valueOf(System.identityHashCode(metaSet)));
+        // 构造 Gateway Provider 进行分流处理
+        return CC_PROVIDER.pick(
+            () -> new AuthenticationProviderGateway(this.vertxRef, metaSet),
+            String.valueOf(System.identityHashCode(metaSet))
+        );
     }
 
     /**

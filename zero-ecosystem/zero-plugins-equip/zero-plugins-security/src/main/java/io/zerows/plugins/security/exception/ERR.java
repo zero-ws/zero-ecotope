@@ -22,4 +22,19 @@ interface ERR {
     VertxE _80244 = VertxE.of(-80244).state(HttpResponseStatus.UNAUTHORIZED);
 
     VertxE _80245 = VertxE.of(-80245).state(HttpResponseStatus.NOT_FOUND);
+
+    // Gateway Handler
+    VertxE _80246 = VertxE.of(-80246).state(HttpResponseStatus.NOT_FOUND);
+    VertxE _80247 = VertxE.of(-80247).state(HttpResponseStatus.BAD_REQUEST);
+
+    // Gateway Provider
+    VertxE _80248 = VertxE.of(-80248).state(HttpResponseStatus.NOT_FOUND);
+    VertxE _80249 = VertxE.of(-80249).state(HttpResponseStatus.CONFLICT);
+
+    // BackendProvider
+    VertxE _80250 = VertxE.of(-80250).state(HttpResponseStatus.UNAUTHORIZED);
+    VertxE _80251 = VertxE.of(-80251).state(HttpResponseStatus.UNAUTHORIZED);
+    VertxE _80252 = VertxE.of(-80252).state(HttpResponseStatus.UNAUTHORIZED);
+    VertxE _80253 = VertxE.of(-80253).state(HttpResponseStatus.NOT_FOUND);
+    VertxE _80254 = VertxE.of(-80254).state(HttpResponseStatus.UNAUTHORIZED);
 }

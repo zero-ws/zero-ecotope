@@ -1,8 +1,5 @@
 package io.zerows.plugins.security;
 
-import io.r2mo.typed.exception.WebException;
-import io.r2mo.typed.exception.web._400BadRequestException;
-import io.r2mo.typed.exception.web._401UnauthorizedException;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpHeaders;
@@ -14,11 +11,15 @@ import io.vertx.ext.auth.audit.SecurityAudit;
 import io.vertx.ext.auth.authentication.AuthenticationProvider;
 import io.vertx.ext.auth.authentication.Credentials;
 import io.vertx.ext.web.RoutingContext;
+import io.vertx.ext.web.Session;
 import io.vertx.ext.web.handler.HttpException;
 import io.vertx.ext.web.handler.impl.AuthenticationHandlerImpl;
 import io.vertx.ext.web.impl.RoutingContextInternal;
 import io.vertx.ext.web.impl.UserContextInternal;
 import io.zerows.epoch.metadata.security.SecurityMeta;
+import io.zerows.plugins.security.exception._80246Exception404ExtensionMiss;
+import io.zerows.plugins.security.exception._80247Exception400AuthorizationFormat;
+import io.zerows.plugins.security.service.AsyncUserCredentials;
 import io.zerows.spi.HPI;
 import lombok.extern.slf4j.Slf4j;
 
@@ -60,8 +61,6 @@ import java.util.concurrent.ConcurrentMap;
  */
 @Slf4j
 class AuthenticationHandlerGateway extends AuthenticationHandlerImpl<AuthenticationProvider> {
-    private static final WebException UNAUTHORIZED = new _401UnauthorizedException("权限认证失败，请提供有效令牌！");
-    private static final WebException BAD_REQUEST = new _400BadRequestException("错误的认证请求头格式！");
     private final ConcurrentMap<String, Set<ExtensionAuthentication>> extensionMap = new ConcurrentHashMap<>();
     private final ConcurrentMap<String, SecurityMeta> mapMeta = new ConcurrentHashMap<>();
 
@@ -122,6 +121,17 @@ class AuthenticationHandlerGateway extends AuthenticationHandlerImpl<Authenticat
      *      -> 将 Credentials 传递给 `provider.authenticate(creds)`。
      *      -> 由底层的 Realm/Store 进行真实的密码校验或令牌查找。
      * </pre>
+     * 此处网关的工作流程
+     * <pre>
+     *     1. 作为请求接受第一门卫，提取 Authorization 头。
+     *     2. 遍历所有注册的 ExtensionAuthentication 实现，调用 support() 方法寻找匹配者。
+     *     3. 找到匹配的 Extension 后，调用其 resolve() 方法尝试解析凭证。
+     *     4. 根据解析结果分两种情况处理：
+     *        - 如果解析结果包含已验证的 User 对象，直接通过认证。
+     *        - 如果解析结果仅包含 Credentials，则传递给底层的 AuthenticationProvider 进行验证。
+     *     5. 如果没有找到匹配的 Extension，或解析失败，返回 401 Unauthorized 错误。
+     *     6. 执行完 Provider 的 authenticate() 方法后，调用对应的 AuthenticationBackendHandler 进行最终的用户上下文设置。
+     * </pre>
      *
      * @param context RoutingContext 路由上下文
      */
@@ -131,12 +141,12 @@ class AuthenticationHandlerGateway extends AuthenticationHandlerImpl<Authenticat
         final String authorization = request.headers().get(HttpHeaders.AUTHORIZATION);
 
         if (authorization == null) {
-            return Future.failedFuture(UNAUTHORIZED);
+            return Future.failedFuture(SecurityConstant.UNAUTHORIZED);
         }
         try {
             final int idx = authorization.indexOf(' ');
             if (idx <= 0) {
-                return Future.failedFuture(BAD_REQUEST);
+                return Future.failedFuture(new _80247Exception400AuthorizationFormat(authorization));
             }
 
 
@@ -148,7 +158,7 @@ class AuthenticationHandlerGateway extends AuthenticationHandlerImpl<Authenticat
                 .orElse(null);
             if (Objects.isNull(found)) {
                 log.error("[ PLUG ] ( Security ) 未装配合法的 Extension 组件：{}", authorization);
-                return Future.failedFuture(UNAUTHORIZED);
+                return Future.failedFuture(new _80246Exception404ExtensionMiss(authorization));
             }
 
 
@@ -159,28 +169,42 @@ class AuthenticationHandlerGateway extends AuthenticationHandlerImpl<Authenticat
             final AuthenticationBackendHandler handler = AuthenticationBackendHandler.of(this.authProvider, meta);
 
             final Vertx vertx = context.vertx();
-            final SecurityAudit audit = ((RoutingContextInternal) context).securityAudit();
+            // 此处执行原生解析流程，内置 Provider 执行
             return found.resolve(params, vertx, meta)
-                .compose(authResult -> {
-                    if (authResult.isVerified()) {
-                        final User user = authResult.getUser();
-                        audit.user(user);
-                        /*
-                         * 提前设置，然后内置传入 null 直接提取 user
-                         */
-                        ((UserContextInternal) context.userContext()).setUser(user);
-                        return this.authProvider.authenticate(null);
-                    } else {
-                        final Credentials credentials = authResult.getCredentials();
-                        audit.credentials(credentials);
-                        return this.authProvider.authenticate(credentials);
-                    }
-                })
-                .compose(verified -> handler.authenticate(context))
-                .andThen(result -> audit.audit(Marker.AUTHENTICATION, result.succeeded()))
-                .recover(err -> Future.failedFuture(new HttpException(401, err)));
+                .compose(authResult -> this.authenticate(context, authResult))
+                .recover(err -> Future.failedFuture(new HttpException(401, err)))
+                .compose(verified -> handler.authenticate(context));
         } catch (final Throwable ex) {
             return Future.failedFuture(ex);
         }
+    }
+
+    private Future<User> authenticate(final RoutingContext context,
+                                      final ExtensionAuthenticationResult authResult) {
+        final SecurityAudit audit = ((RoutingContextInternal) context).securityAudit();
+
+
+        // 放置 Session ID 提供后续使用
+        final Session session = context.session();
+        if (session != null) {
+            Vertx.currentContext().put(SecurityConstant.KEY_SESSION, session.id());
+        }
+
+
+        // 根据结果进行分流处理
+        final Future<User> future;
+        if (authResult.isVerified()) {
+            final User user = authResult.getUser();
+            audit.user(user);
+            ((UserContextInternal) context.userContext()).setUser(user);
+
+            final Credentials credentials = new AsyncUserCredentials(user);
+            future = this.authProvider.authenticate(credentials);
+        } else {
+            final Credentials credentials = authResult.getCredentials();
+            audit.credentials(credentials);
+            future = this.authProvider.authenticate(credentials);
+        }
+        return future.andThen(result -> audit.audit(Marker.AUTHENTICATION, result.succeeded()));
     }
 }

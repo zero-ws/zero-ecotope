@@ -3,11 +3,7 @@ package io.zerows.support.base;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -28,11 +24,11 @@ final class TTo {
         }
     };
 
-    static boolean isPrimary(final Class<?> clazz) {
-        return TYPES.containsValue(clazz);
+    private TTo() {
     }
 
-    private TTo() {
+    static boolean isPrimary(final Class<?> clazz) {
+        return TYPES.containsValue(clazz);
     }
 
     static Class<?> toPrimary(final Class<?> source) {
@@ -43,7 +39,12 @@ final class TTo {
         if (TIs.isNil(literal) || Objects.isNull(clazz)) {
             return defaultEnum;
         }
-        return Enum.valueOf(clazz, literal);
+        try {
+            return Enum.valueOf(clazz, literal);
+        } catch (final IllegalArgumentException ex) {
+            // java.lang.IllegalArgumentException: No enum constant
+            return defaultEnum;
+        }
     }
 
     static List<String> toList(final JsonArray keys) {
