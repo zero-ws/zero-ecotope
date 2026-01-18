@@ -12,7 +12,11 @@ import io.vertx.ext.auth.authentication.TokenCredentials;
 import io.vertx.ext.web.handler.HttpException;
 import io.zerows.epoch.metadata.security.SecurityConfig;
 import io.zerows.epoch.metadata.security.SecurityMeta;
-import io.zerows.plugins.security.*;
+import io.zerows.plugins.security.ExtensionAuthentication;
+import io.zerows.plugins.security.SecurityActor;
+import io.zerows.plugins.security.SecurityConstant;
+import io.zerows.plugins.security.SecurityProvider;
+import io.zerows.plugins.security.service.AsyncSession;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
 
@@ -111,7 +115,7 @@ public class JwtExtensionAuthentication implements ExtensionAuthentication {
      * @return 异步结果，包含已认证的 User 对象
      */
     @Override
-    public Future<ExtensionAuthenticationResult> resolve(final JsonObject input, final Vertx vertx, final SecurityMeta meta) {
+    public Future<AsyncSession> resolve(final JsonObject input, final Vertx vertx, final SecurityMeta meta) {
         // Authorization 请求头提取
         final String authorization = Ut.valueString(input, HttpHeaders.AUTHORIZATION.toString());
         try {
@@ -138,11 +142,11 @@ public class JwtExtensionAuthentication implements ExtensionAuthentication {
 
             final TokenCredentials credentials = new TokenCredentials(token);
             final AuthenticationProvider provider = this.provider.configureProvider401(vertx, config);
-            return provider.authenticate(credentials).map(user -> {
-                if (Objects.isNull(user)) {
+            return provider.authenticate(credentials).map(authorized -> {
+                if (Objects.isNull(authorized)) {
                     throw UNAUTHORIZED;
                 }
-                return ExtensionAuthenticationResult.bindAsync(user);
+                return AsyncSession.bindAsync(authorized, authorization);
             });
         } catch (final Throwable e) {
             log.error(e.getMessage(), e);

@@ -11,6 +11,7 @@ import io.zerows.epoch.metadata.security.SecurityMeta;
 import io.zerows.plugins.cache.HMM;
 import io.zerows.plugins.security.exception._80250Exception401SessionNull;
 import io.zerows.plugins.security.exception._80251Exception401UserInvalid;
+import io.zerows.plugins.security.service.AsyncSession;
 import io.zerows.support.Ut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,9 +37,12 @@ public abstract class BackendProviderBase implements BackendProvider {
 
     @Override
     public Future<User> authenticate(final Credentials credentials) {
-        final String session = Vertx.currentContext().get(SecurityConstant.KEY_SESSION);
+        if (!(credentials instanceof final AsyncSession session)) {
+            return Future.failedFuture(new _80250Exception401SessionNull(credentials.toJson().encode()));
+        }
         final JsonObject credentialJ = credentials.toJson();
-        if (Ut.isNil(session)) {
+        final String sessionId = session.getSessionId();
+        if (Ut.isNil(sessionId)) {
             return Future.failedFuture(new _80250Exception401SessionNull(credentialJ.encode()));
         }
 
@@ -46,8 +50,8 @@ public abstract class BackendProviderBase implements BackendProvider {
         authJ.put(KName.SESSION, session);
         authJ.mergeIn(credentialJ, true);
         // 已经包含了会话基本信息，所以此处可直接提取
-        final HMM<String, JsonObject> mmSession = HMM.of(session);
-        return mmSession.find(KWeb.CACHE.User.AUTHENTICATE)
+        final HMM<String, JsonObject> mmSession = HMM.of(sessionId);
+        return mmSession.find(KWeb.SESSION.AUTHENTICATE)
             .compose(cached -> this.authenticate(authJ, cached))
             .compose(authorized -> {
                 if (Objects.isNull(authorized)) {

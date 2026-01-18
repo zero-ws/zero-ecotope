@@ -6,6 +6,7 @@ import io.r2mo.jaas.token.TokenType;
 import io.r2mo.jce.common.HED;
 import io.r2mo.jce.constant.LicSym;
 import io.r2mo.spi.SPI;
+import io.r2mo.typed.common.Kv;
 import io.r2mo.typed.json.JBase;
 import io.r2mo.typed.json.JObject;
 import io.zerows.epoch.metadata.security.SecurityConfig;
@@ -68,6 +69,8 @@ public class TokenAESGenerator {
         final Map<String, Object> payload = new HashMap<>(4);
         payload.put(NAME_SUBJECT, identifier);
         payload.put(NAME_EXPIRE, expMs);
+        // 防止混乱
+        payload.put("tokenType", TokenType.AES.name());
         if (data != null && !data.isEmpty()) {
             payload.put(NAME_ADDON_DATA, data);
         }
@@ -93,7 +96,7 @@ public class TokenAESGenerator {
      * @param token AES 令牌
      * @return 如果有效且未过期，返回主题 (userId)；否则返回 null。
      */
-    public String validateAndExtract(final String token) {
+    public Kv<String, TokenType> validateAndExtract(final String token) {
         // 1. 快速格式检查
         if (this.isValidFormat(token)) {
             return null;
@@ -118,8 +121,8 @@ public class TokenAESGenerator {
             }
 
             // 4. 提取：返回主题
-            return (String) payload.get(NAME_SUBJECT);
-
+            final String value = (String) payload.get(NAME_SUBJECT);
+            return Kv.create(value, TokenType.AES);
         } catch (final Exception e) {
             // 解密失败 (被篡改、错误的密钥或格式错误)
             return null;

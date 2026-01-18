@@ -10,6 +10,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.authentication.UsernamePasswordCredentials;
 import io.vertx.ext.web.impl.Utils;
 import io.zerows.epoch.metadata.security.SecurityMeta;
+import io.zerows.plugins.security.service.AsyncSession;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
 
@@ -94,7 +95,7 @@ public class ExtensionAuthenticationBasic implements ExtensionAuthentication {
      * @return Async Result with Credentials
      */
     @Override
-    public Future<ExtensionAuthenticationResult> resolve(final JsonObject input, final Vertx vertx, final SecurityMeta meta) {
+    public Future<AsyncSession> resolve(final JsonObject input, final Vertx vertx, final SecurityMeta meta) {
         // Authorization 请求头提取
         final String authorization = Ut.valueString(input, HttpHeaders.AUTHORIZATION.toString());
         // Basic 缺失 Provider
@@ -116,7 +117,7 @@ public class ExtensionAuthenticationBasic implements ExtensionAuthentication {
                 spass = null;
             }
             final UsernamePasswordCredentials credentials = new UsernamePasswordCredentials(suser, spass);
-            return Future.succeededFuture(ExtensionAuthenticationResult.bindAsync(credentials));
+            return Future.succeededFuture(AsyncSession.bindAsync(credentials, input));
         } catch (final Throwable e) {
             log.error(e.getMessage(), e);
             return Future.failedFuture(UNAUTHORIZED);

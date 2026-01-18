@@ -14,10 +14,10 @@ import io.r2mo.typed.exception.web._401UnauthorizedException;
  */
 public interface SecurityConstant {
     String K_PREFIX_SEC = "[ PLUG ] ( Security )";
-    String KEY_SESSION = "vertx-web.session-one";
     WebException UNAUTHORIZED = new _401UnauthorizedException("权限认证失败，令牌非法或已过期！");
     // ------------------ 内置 WallExecutor 信息
     String WALL_BASIC = "BASIC";
+    String WALL_AES = "AES";
     String WALL_JWT = "JWT";
     String WALL_LDAP = "LDAP";
 }

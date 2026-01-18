@@ -4,6 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.metadata.security.SecurityMeta;
+import io.zerows.plugins.security.service.AsyncSession;
 
 /**
  * <pre>
@@ -83,5 +84,5 @@ public interface ExtensionAuthentication {
      * @param meta  当前安全墙的元数据配置
      * @return 异步结果，包含解析后的 User 或 Credentials
      */
-    Future<ExtensionAuthenticationResult> resolve(JsonObject input, Vertx vertx, SecurityMeta meta);
+    Future<AsyncSession> resolve(JsonObject input, Vertx vertx, SecurityMeta meta);
 }

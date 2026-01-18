@@ -9,17 +9,16 @@ import io.vertx.ext.auth.User;
 import io.vertx.ext.auth.audit.Marker;
 import io.vertx.ext.auth.audit.SecurityAudit;
 import io.vertx.ext.auth.authentication.AuthenticationProvider;
-import io.vertx.ext.auth.authentication.Credentials;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.Session;
 import io.vertx.ext.web.handler.HttpException;
 import io.vertx.ext.web.handler.impl.AuthenticationHandlerImpl;
 import io.vertx.ext.web.impl.RoutingContextInternal;
-import io.vertx.ext.web.impl.UserContextInternal;
+import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.security.SecurityMeta;
 import io.zerows.plugins.security.exception._80246Exception404ExtensionMiss;
 import io.zerows.plugins.security.exception._80247Exception400AuthorizationFormat;
-import io.zerows.plugins.security.service.AsyncUserCredentials;
+import io.zerows.plugins.security.service.AsyncSession;
 import io.zerows.spi.HPI;
 import lombok.extern.slf4j.Slf4j;
 
@@ -137,6 +136,7 @@ class AuthenticationHandlerGateway extends AuthenticationHandlerImpl<Authenticat
      */
     @Override
     public Future<User> authenticate(final RoutingContext context) {
+
         final HttpServerRequest request = context.request();
         final String authorization = request.headers().get(HttpHeaders.AUTHORIZATION);
 
@@ -164,46 +164,40 @@ class AuthenticationHandlerGateway extends AuthenticationHandlerImpl<Authenticat
 
             // 参数构造
             final JsonObject params = new JsonObject();
-            params.put(HttpHeaders.AUTHORIZATION.toString(), authorization);    // 目前只需要此部分数据
+            {
+                params.put(HttpHeaders.AUTHORIZATION.toString(), authorization);    // 目前只需要此部分数据
+                final Session session = context.session();
+                params.put(KName.SESSION, session.id());
+            }
             final SecurityMeta meta = this.mapMeta.get(found.name());
-            final AuthenticationBackendHandler handler = AuthenticationBackendHandler.of(this.authProvider, meta);
 
             final Vertx vertx = context.vertx();
             // 此处执行原生解析流程，内置 Provider 执行
             return found.resolve(params, vertx, meta)
                 .compose(authResult -> this.authenticate(context, authResult))
                 .recover(err -> Future.failedFuture(new HttpException(401, err)))
-                .compose(verified -> handler.authenticate(context));
+                .compose(verified -> AuthenticationBackendHandler.of(this.authProvider, meta).authenticate(context));
         } catch (final Throwable ex) {
             return Future.failedFuture(ex);
         }
     }
 
     private Future<User> authenticate(final RoutingContext context,
-                                      final ExtensionAuthenticationResult authResult) {
+                                      final AsyncSession asyncSession) {
         final SecurityAudit audit = ((RoutingContextInternal) context).securityAudit();
 
-
-        // 放置 Session ID 提供后续使用
-        final Session session = context.session();
-        if (session != null) {
-            Vertx.currentContext().put(SecurityConstant.KEY_SESSION, session.id());
-        }
-
-
+        final SecuritySession session = SecuritySession.of();
+        audit.credentials(asyncSession);
         // 根据结果进行分流处理
         final Future<User> future;
-        if (authResult.isVerified()) {
-            final User user = authResult.getUser();
-            audit.user(user);
-            ((UserContextInternal) context.userContext()).setUser(user);
-
-            final Credentials credentials = new AsyncUserCredentials(user);
-            future = this.authProvider.authenticate(credentials);
+        if (asyncSession.isVerified()) {
+            // 带 Token
+            session.setAuthorized(context, asyncSession.getUser());
+            future = this.authProvider.authenticate(asyncSession);
         } else {
-            final Credentials credentials = authResult.getCredentials();
-            audit.credentials(credentials);
-            future = this.authProvider.authenticate(credentials);
+            // 匿名
+            future = this.authProvider.authenticate(asyncSession)
+                .map(authorized -> session.setAuthorized(context, authorized));
         }
         return future.andThen(result -> audit.audit(Marker.AUTHENTICATION, result.succeeded()));
     }

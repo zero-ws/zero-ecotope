@@ -148,11 +148,19 @@ class AuthorizationHandlerResource {
         if (Objects.isNull(mmUser)) {
             return Future.succeededFuture(Boolean.FALSE);
         }
-        return mmUser.find(KWeb.CACHE.User.AUTHORIZATION).compose(authorized -> {
+
+        final SecuritySession session = SecuritySession.of();
+        if (session.isAnonymous(context)) {
+            // BASIC 跳过
+            this.requestResume(context.request());
+            return Future.succeededFuture(Boolean.TRUE);
+        }
+        return mmUser.find(KWeb.SESSION.AUTHORIZATION).compose(authorized -> {
             final String requestId = this.requestResourceId(context);
             final JsonObject waitFor = Objects.isNull(authorized) ? new JsonObject() : authorized;
             waitFor.put(requestId, Boolean.TRUE);
-            return mmUser.put(KWeb.CACHE.User.AUTHORIZATION, waitFor).compose(nil -> {
+
+            return mmUser.put(KWeb.SESSION.AUTHORIZATION, waitFor, session.msExpired403()).compose(nil -> {
                 // 恢复请求处理
                 this.requestResume(context.request());
                 return Future.succeededFuture(Boolean.TRUE);
@@ -180,7 +188,7 @@ class AuthorizationHandlerResource {
         if (Objects.isNull(mmUser)) {
             return Future.succeededFuture(Boolean.TRUE);
         }
-        return mmUser.find(KWeb.CACHE.User.AUTHORIZATION).compose(res -> {
+        return mmUser.find(KWeb.SESSION.AUTHORIZATION).compose(res -> {
             // 初始化授权结果
             final JsonObject initialized = Objects.isNull(res) ? new JsonObject() : res;
             // 提取当前资源的资源标识

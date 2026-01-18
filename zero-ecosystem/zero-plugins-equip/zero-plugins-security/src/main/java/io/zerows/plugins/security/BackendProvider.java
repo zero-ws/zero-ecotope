@@ -15,7 +15,7 @@ public interface BackendProvider extends AuthenticationProvider {
         final TokenType typeToken = Ut.toEnum(type, TokenType.class, null);
         final String cacheKey = vertx.hashCode() + "@" + type + "/" + meta.hashCode();
         if (TokenType.BASIC == typeToken) {
-            return CC_SKELETON.pick(() -> new BackendProviderNoop(vertx, meta), cacheKey);
+            return CC_SKELETON.pick(() -> new BackendProviderAnonymous(vertx, meta), cacheKey);
         } else {
             return CC_SKELETON.pick(() -> new BackendProviderLogged(vertx, meta), cacheKey);
         }

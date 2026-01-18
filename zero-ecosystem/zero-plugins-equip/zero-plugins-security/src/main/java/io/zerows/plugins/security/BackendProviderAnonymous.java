@@ -17,8 +17,8 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.Objects;
 
 @Slf4j
-public class BackendProviderNoop extends BackendProviderBase {
-    BackendProviderNoop(final Vertx vertxRef, final SecurityMeta meta) {
+public class BackendProviderAnonymous extends BackendProviderBase {
+    BackendProviderAnonymous(final Vertx vertxRef, final SecurityMeta meta) {
         super(vertxRef, meta);
     }
 
@@ -31,7 +31,7 @@ public class BackendProviderNoop extends BackendProviderBase {
     protected Future<User> authenticate(final JsonObject credentialsJ, final JsonObject cachedJ) {
         if (Ut.isNotNil(cachedJ)) {
             final String session = Ut.valueString(credentialsJ, KName.SESSION);
-            return Future.failedFuture(new _80252Exception401CacheConfuse(session, KWeb.CACHE.User.AUTHENTICATE));
+            return Future.failedFuture(new _80252Exception401CacheConfuse(session, KWeb.SESSION.AUTHENTICATE));
         }
 
 

@@ -8,19 +8,11 @@ import io.r2mo.jaas.session.UserCache;
 import io.r2mo.jaas.session.UserSession;
 import io.r2mo.typed.enums.TypeLogin;
 import io.vertx.core.Future;
-import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.hashing.HashingStrategy;
-import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.constant.KWeb;
-import io.zerows.epoch.web.Account;
-import io.zerows.plugins.cache.HMM;
-import io.zerows.plugins.security.SecurityActor;
 import io.zerows.plugins.security.exception._80203Exception404UserNotFound;
 import io.zerows.plugins.security.exception._80204Exception401PasswordWrong;
 import io.zerows.plugins.security.exception._80244Exception401LoginTypeWrong;
-import io.zerows.plugins.security.metadata.YmSecurity;
 import io.zerows.support.Fx;
-import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.Duration;
@@ -57,31 +49,11 @@ public abstract class AsyncUserAtBase implements AsyncUserAt {
                 }
                 return Future.succeededFuture(verified);
             });
-        }).compose(userAt -> {
-            // 处理临时用户
-            final JsonObject userData = Account.userData(userAt);
-            final String ephemeral = Ut.valueString(userData, this.userCache());
-            if (Objects.isNull(ephemeral)) {
-                return Future.succeededFuture(userAt);
-            }
-            /*
-             * 加载 Token 的过期时间，Token 过期时间和用户缓存存在时间是一致的，所以此处要直接从配置中提取
-             * 并且写入到缓存中去！单位内置为秒
-             */
-            final YmSecurity security = SecurityActor.configuration();
-            final YmSecurity.Limit limit = security.getLimit();
-            final HMM<String, JsonObject> mm = HMM.of(ephemeral);
-            return mm.put(KWeb.CACHE.User.AUTHENTICATE, userData, limit.expiredAt().toSeconds())
-                .compose(nil -> Future.succeededFuture(userAt));
         });
     }
 
     public TypeLogin loginType() {
         return Objects.isNull(this.typeLogin) ? TypeLogin.PASSWORD : this.typeLogin;
-    }
-
-    protected String userCache() {
-        return KName.TOKEN;
     }
 
     @Override

@@ -2,10 +2,9 @@ package io.zerows.plugins.security.service;
 
 import io.r2mo.jaas.auth.LoginRequest;
 import io.r2mo.jaas.session.UserAt;
-import io.r2mo.jaas.session.UserSession;
 import io.vertx.core.Future;
+import io.zerows.plugins.security.SecuritySession;
 import io.zerows.plugins.security.exception._80245Exception404AuthService;
-import io.zerows.program.Ux;
 import io.zerows.support.Fx;
 
 import java.util.Objects;
@@ -21,8 +20,8 @@ public class AuthLoginService implements AuthLoginStub {
         }
         // 直接执行登录（加载用户信息）
         return userService.loadLogged(request)
-            // 切换到 VT 中运行
-            .compose(userAt -> Ux.waitVirtual(() -> UserSession.of().userAt(userAt)))
+            // 还有一步，权限 401 的基本表处理
+            .compose(SecuritySession.of()::setLogged)
             .compose(Future::succeededFuture);
     }
 }

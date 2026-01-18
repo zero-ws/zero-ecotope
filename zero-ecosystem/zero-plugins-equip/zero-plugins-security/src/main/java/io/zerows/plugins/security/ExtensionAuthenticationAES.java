@@ -11,8 +11,9 @@ import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpHeaders;
 import io.vertx.core.json.JsonObject;
-import io.vertx.ext.auth.authentication.UsernamePasswordCredentials;
 import io.zerows.epoch.metadata.security.SecurityMeta;
+import io.zerows.epoch.web.Account;
+import io.zerows.plugins.security.service.AsyncSession;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
@@ -107,7 +108,7 @@ public class ExtensionAuthenticationAES implements ExtensionAuthentication {
      * @return 异步结果，包含待验证的 Credentials
      */
     @Override
-    public Future<ExtensionAuthenticationResult> resolve(final JsonObject input, final Vertx vertx, final SecurityMeta meta) {
+    public Future<AsyncSession> resolve(final JsonObject input, final Vertx vertx, final SecurityMeta meta) {
         // Authorization 请求头提取
         final String authorization = Ut.valueString(input, HttpHeaders.AUTHORIZATION.toString());
         try {
@@ -132,19 +133,13 @@ public class ExtensionAuthenticationAES implements ExtensionAuthentication {
                  *
                  * 注意：这要求 MSUser 中的 password 是 AuthProvider 可识别的（明文或特定哈希）。
                  */
-                return Objects.isNull(userAt) ? null : userAt.logged();
-            }).map(user -> {
-                if (Objects.isNull(user)) {
-                    return null;
-                }
-                // 构造凭证，触发 AuthProvider 的 verify
-                return new UsernamePasswordCredentials(user.getUsername(), user.getPassword());
-            }).map(credentials -> {
-                if (Objects.isNull(credentials)) {
+                return Account.userVx(userAt);
+            }).map(authorized -> {
+                if (Objects.isNull(authorized)) {
                     // 用户不存在或会话丢失
                     throw UNAUTHORIZED;
                 }
-                return ExtensionAuthenticationResult.bindAsync(credentials);
+                return AsyncSession.bindAsync(authorized, authorization);
             });
         } catch (final Throwable e) {
             log.error(e.getMessage(), e);
