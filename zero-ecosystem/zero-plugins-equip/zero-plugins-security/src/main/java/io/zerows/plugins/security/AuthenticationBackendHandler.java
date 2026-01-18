@@ -1,5 +1,6 @@
 package io.zerows.plugins.security;
 
+import io.r2mo.typed.cc.Cc;
 import io.r2mo.typed.exception.WebException;
 import io.vertx.core.Future;
 import io.vertx.core.http.HttpServerRequest;
@@ -17,12 +18,19 @@ import java.util.Objects;
  * @author lang : 2025-10-30
  */
 class AuthenticationBackendHandler extends AuthenticationHandlerImpl<AuthenticationProvider> {
+    private static final Cc<String, AuthenticationBackendHandler> CC_HANDLER = Cc.openThread();
     private final SecurityMeta meta;
 
-    AuthenticationBackendHandler(final AuthenticationProvider provider,
-                                 final SecurityMeta meta) {
+    private AuthenticationBackendHandler(final AuthenticationProvider provider,
+                                         final SecurityMeta meta) {
         super(provider);
         this.meta = meta;
+    }
+
+    static AuthenticationBackendHandler of(final AuthenticationProvider provider,
+                                           final SecurityMeta meta) {
+        final String cacheKey = String.valueOf(System.identityHashCode(meta));
+        return CC_HANDLER.pick(() -> new AuthenticationBackendHandler(provider, meta), cacheKey);
     }
 
     @Override

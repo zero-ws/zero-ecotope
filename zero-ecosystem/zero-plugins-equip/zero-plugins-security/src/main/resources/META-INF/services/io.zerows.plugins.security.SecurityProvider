@@ -1,1 +1,1 @@
-io.zerows.plugins.security.basic.BasicSecurityProvider
+io.zerows.plugins.security.service.BasicSecurityProvider

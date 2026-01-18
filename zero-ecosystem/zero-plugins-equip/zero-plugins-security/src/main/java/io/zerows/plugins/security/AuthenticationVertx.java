@@ -16,7 +16,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * @author lang : 2025-10-29
  */
 @Slf4j
-class AuthenticationNative {
+class AuthenticationVertx {
     private static final AtomicBoolean IS_OUT = new AtomicBoolean(Boolean.TRUE);
 
     /**

@@ -11,7 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * <pre>
@@ -38,10 +37,7 @@ class SecurityProviderFactory {
 
     private static final Cc<String, SecurityProviderFactory> CC_FACTORY = Cc.openThread();
     private static final Cc<String, AuthenticationProvider> CC_PROVIDER = Cc.openThread();
-    private static final Cc<String, AuthenticationHandler> CC_HANDLER = Cc.openThread();
-
-    // 全局静态原子集合，用于跨线程日志去重，避免日志刷屏
-    private static final Set<String> LOGGED_TYPES = ConcurrentHashMap.newKeySet();
+    private static final Cc<String, AuthenticationHandlerGateway> CC_HANDLER = Cc.openThread();
 
     private final Vertx vertxRef;
 
@@ -65,58 +61,13 @@ class SecurityProviderFactory {
         if (metaSet == null || metaSet.isEmpty()) {
             return null;
         }
-
-
-//        // 最外层的墙 (Handler 之间是 OR 关系)
-//        final ChainAuthHandler branchAuth = ChainAuthHandler.any();
-//
-//        // 2. 循环编排每一种安全配置 (JWT, Basic, AES...)
-//        for (final SecurityMeta meta : metaSet) {
-//
-//            // Step A: 构建 "严进" 的复合 Provider (Native + One)
-//            final AuthenticationProvider provider = this.providerComposite(meta);
-//
-//            // Step B: 构建对应的 Handler (BasicAdv, JWT...) 绑定上面的 Provider
-//            final AuthenticationHandler handler = this.handlerNative(meta, provider);
-//
-//            final String typeKey = String.valueOf(meta.getType());
-//            if (LOGGED_TYPES.add(typeKey)) {
-//                log.info("[ PLUG ] ( Security ) Loaded: Type={}, Handler={}", typeKey, handler.getClass().getSimpleName());
-//            }
-//
-//            final ChainAuthHandler sequenceAuth = ChainAuthHandler.all();
-//            sequenceAuth.add(handler);
-//            // 最后强制执行 One Handler 进行业务补位
-//            sequenceAuth.add(new AuthenticationHandlerEnded(provider, meta));
-//            branchAuth.add(sequenceAuth);
-//        }
-        return null;
-    }
-
-    /**
-     * <pre>
-     * 🟢 复合 Provider 构建 ( 单条链路的内部逻辑 )
-     *
-     * 逻辑：ChainAuth.all() (AND 关系)
-     * 1. 先跑 Native：确保格式、签名、密码（含伪装）正确。
-     * 2. 再跑 One   ：确保 Session 在缓存/数据库中有效。
-     * </pre>
-     */
-    private AuthenticationProvider providerComposite(final SecurityMeta meta) {
-        return CC_PROVIDER.pick(() -> {
-            final AuthenticationProvider nativeProvider = AuthenticationNative.createProvider(this.vertxRef, meta);
-
-            if (Objects.isNull(nativeProvider)) {
-                // Native 为空就只有一个 Provider
-                return new AuthenticationBackendProvider(this.vertxRef, meta);
-            }
-
-            // Native 不为空则此处的 Provider 必须要做 AND 关系
-            final ChainAuth compositeChain = ChainAuth.all();
-            compositeChain.add(nativeProvider);
-            compositeChain.add(new AuthenticationBackendProvider(this.vertxRef, meta));
-            return compositeChain;
-        }, meta.id(this.vertxRef));
+        // 统一的 Provider
+        final AuthenticationProvider provider = this.providerOfAuthentication(metaSet);
+        // 构造 Gateway Handler
+        return CC_HANDLER.pick(
+            () -> new AuthenticationHandlerGateway(provider, metaSet),
+            String.valueOf(System.identityHashCode(metaSet))
+        );
     }
 
     /**
@@ -131,12 +82,14 @@ class SecurityProviderFactory {
         if (metaSet == null || metaSet.isEmpty()) {
             return null;
         }
-        final ChainAuth chain = ChainAuth.any();
-        metaSet.forEach(meta -> {
-            final AuthenticationProvider subChain = AuthenticationNative.createProvider(this.vertxRef, meta);
-            chain.add(subChain);
-        });
-        return chain;
+        // 先构造原生态的 SecurityMeta Provider 链 (OR 关系)
+        return CC_PROVIDER.pick(() -> {
+            final ChainAuth chain = ChainAuth.any();
+            metaSet.stream()
+                .map(meta -> new AuthenticationBackendProvider(this.vertxRef, meta))
+                .forEach(chain::add);
+            return chain;
+        }, String.valueOf(System.identityHashCode(metaSet)));
     }
 
     /**

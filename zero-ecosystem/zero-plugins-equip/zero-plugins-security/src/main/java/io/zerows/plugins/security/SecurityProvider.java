@@ -13,7 +13,6 @@ import io.zerows.spi.HPI;
  *
  * @author lang : 2025-12-30
  */
-@Deprecated
 public interface SecurityProvider {
     Cc<String, SecurityProvider> CC_EXTENSION = Cc.open();
 
@@ -48,6 +47,12 @@ public interface SecurityProvider {
         // 【核心修改2】使用哨兵模式
         final SecurityProvider cached = CC_EXTENSION.pick(() -> {
             // 1. 查找 SPI
+            /*
+             * 内置
+             * - Security/BASIC
+             * - Security/JWT
+             * - Security/LDAP
+             */
             final SecurityProvider found = HPI.findOne(SecurityProvider.class, "Security/" + wallType);
 
             // 2. 如果没找到，返回哨兵，而不是 null

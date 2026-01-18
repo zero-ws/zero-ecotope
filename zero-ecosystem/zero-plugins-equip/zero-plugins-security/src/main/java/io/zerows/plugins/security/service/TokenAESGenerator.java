@@ -2,6 +2,7 @@ package io.zerows.plugins.security.service;
 
 import cn.hutool.core.util.StrUtil;
 import io.r2mo.base.util.R2MO;
+import io.r2mo.jaas.token.TokenType;
 import io.r2mo.jce.common.HED;
 import io.r2mo.jce.constant.LicSym;
 import io.r2mo.spi.SPI;
@@ -31,7 +32,6 @@ import java.util.Objects;
 public class TokenAESGenerator {
 
     // ================== 常量 ==================
-    public static final String TOKEN_PREFIX = "r2a_";
     private static final String NAME_SUBJECT = "sub";
     private static final String NAME_EXPIRE = "exp"; // 时间戳（毫秒）
     private static final String NAME_ADDON_DATA = "ext";
@@ -78,7 +78,7 @@ public class TokenAESGenerator {
             final SecretKey key = this.deriveSecretKey(this.getAesSecret());
             final byte[] encryptedBytes = HED.encrypt(rawBytes, key, AES_SPEC);
             final String base64Str = Base64.getUrlEncoder().withoutPadding().encodeToString(encryptedBytes);
-            return TOKEN_PREFIX + base64Str;
+            return TokenType.TOKEN_PREFIX_AES + base64Str;
         } catch (final Exception e) {
             log.error("AES Token generation failed", e);
             throw new RuntimeException("Token generation failed", e);
@@ -174,11 +174,11 @@ public class TokenAESGenerator {
     private boolean isValidFormat(final String token) {
         return this.isDisabled()
             || !StrUtil.isNotEmpty(token)
-            || !token.startsWith(TOKEN_PREFIX);
+            || !token.startsWith(TokenType.TOKEN_PREFIX_AES);
     }
 
     private Map<String, Object> decryptTokenToMap(final String rawToken) throws Exception {
-        final String base64Str = rawToken.substring(TOKEN_PREFIX.length());
+        final String base64Str = rawToken.substring(TokenType.TOKEN_PREFIX_AES.length());
         final byte[] encryptedBytes = Base64.getUrlDecoder().decode(base64Str);
         final SecretKey key = this.deriveSecretKey(this.getAesSecret());
         final byte[] plainBytes = HED.decrypt(encryptedBytes, key, AES_SPEC);

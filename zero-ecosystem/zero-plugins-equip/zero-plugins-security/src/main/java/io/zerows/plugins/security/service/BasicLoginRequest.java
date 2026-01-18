@@ -1,4 +1,4 @@
-package io.zerows.plugins.security.basic;
+package io.zerows.plugins.security.service;
 
 import cn.hutool.core.util.StrUtil;
 import io.r2mo.jaas.auth.LoginID;
@@ -7,7 +7,6 @@ import io.r2mo.typed.enums.TypeLogin;
 import io.vertx.core.Future;
 import io.zerows.plugins.security.exception._80240Exception400UsernameRequired;
 import io.zerows.plugins.security.exception._80241Exception400PasswordRequired;
-import io.zerows.plugins.security.service.CaptchaLoginRequest;
 import io.zerows.program.Ux;
 import io.zerows.support.Fx;
 import lombok.Data;

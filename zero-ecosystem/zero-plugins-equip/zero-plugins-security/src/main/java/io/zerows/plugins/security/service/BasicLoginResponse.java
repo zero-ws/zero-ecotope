@@ -1,4 +1,4 @@
-package io.zerows.plugins.security.basic;
+package io.zerows.plugins.security.service;
 
 import io.r2mo.jaas.element.MSUser;
 import io.r2mo.jaas.session.UserAt;
@@ -7,7 +7,6 @@ import io.r2mo.jaas.token.TokenType;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.plugins.security.service.AsyncLoginResponse;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

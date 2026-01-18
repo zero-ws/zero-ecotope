@@ -1,10 +1,11 @@
-package io.zerows.plugins.security.basic;
+package io.zerows.plugins.security.service;
 
 import io.r2mo.typed.annotation.SPID;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.authentication.AuthenticationProvider;
 import io.vertx.ext.web.handler.AuthenticationHandler;
+import io.vertx.ext.web.handler.BasicAuthHandler;
 import io.zerows.epoch.metadata.security.SecurityConfig;
 import io.zerows.plugins.security.SecurityProvider;
 import io.zerows.plugins.security.metadata.YmSecuritySpec;
@@ -21,7 +22,7 @@ public class BasicSecurityProvider implements SecurityProvider {
         final JsonObject options = config.options();
         final String realm = Ut.valueString(options, YmSecuritySpec.basic.options.realm);
         return CC_HANDLER_401.pick(
-            () -> BasicAuthAdvHandler.create(authProvider, realm),
+            () -> BasicAuthHandler.create(authProvider, realm),
             String.valueOf(options.hashCode())
         );
     }

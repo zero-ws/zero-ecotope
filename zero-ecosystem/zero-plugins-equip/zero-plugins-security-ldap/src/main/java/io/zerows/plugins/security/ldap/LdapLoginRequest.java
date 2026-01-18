@@ -2,7 +2,7 @@ package io.zerows.plugins.security.ldap;
 
 import io.r2mo.typed.enums.TypeLogin;
 import io.vertx.ext.auth.authentication.UsernamePasswordCredentials;
-import io.zerows.plugins.security.basic.BasicLoginRequest;
+import io.zerows.plugins.security.service.BasicLoginRequest;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
