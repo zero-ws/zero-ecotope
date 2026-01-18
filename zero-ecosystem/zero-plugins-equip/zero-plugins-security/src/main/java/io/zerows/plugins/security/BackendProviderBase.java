@@ -50,7 +50,8 @@ public abstract class BackendProviderBase implements BackendProvider {
         authJ.put(KName.SESSION, session);
         authJ.mergeIn(credentialJ, true);
         // 已经包含了会话基本信息，所以此处可直接提取
-        final HMM<String, JsonObject> mmSession = HMM.of(sessionId);
+        final String token = credentials.toHttpAuthorization().split(" ")[1];
+        final HMM<String, JsonObject> mmSession = HMM.of(token);
         return mmSession.find(KWeb.SESSION.AUTHENTICATE)
             .compose(cached -> this.authenticate(authJ, cached))
             .compose(authorized -> {

@@ -3,7 +3,6 @@ package io.zerows.plugins.security.service;
 import io.r2mo.jaas.session.UserAt;
 import io.r2mo.jaas.token.TokenBuilderManager;
 import io.r2mo.jaas.token.TokenType;
-import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.plugins.security.SecurityActor;
@@ -25,12 +24,12 @@ public class TokenDynamicResponse extends AsyncLoginResponse {
     }
 
     @Override
-    public Future<JsonObject> response() {
+    protected JsonObject responseData() {
         final JsonObject response = new JsonObject();
         response.put(KName.ID, this.getId().toString());
         response.put(KName.TOKEN, this.getToken());
         response.put("refreshToken", this.getRefreshToken());
-        return Future.succeededFuture(response);
+        return response;
     }
 
     private TokenType determineTokenType() {

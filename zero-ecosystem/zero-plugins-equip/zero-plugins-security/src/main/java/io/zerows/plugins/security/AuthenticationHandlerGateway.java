@@ -192,12 +192,12 @@ class AuthenticationHandlerGateway extends AuthenticationHandlerImpl<Authenticat
         final Future<User> future;
         if (asyncSession.isVerified()) {
             // 带 Token
-            session.setAuthorized(context, asyncSession.getUser());
+            session.authorizedUser(context, asyncSession.getUser());
             future = this.authProvider.authenticate(asyncSession);
         } else {
             // 匿名
             future = this.authProvider.authenticate(asyncSession)
-                .map(authorized -> session.setAuthorized(context, authorized));
+                .map(authorized -> session.authorizedUser(context, authorized));
         }
         return future.andThen(result -> audit.audit(Marker.AUTHENTICATION, result.succeeded()));
     }

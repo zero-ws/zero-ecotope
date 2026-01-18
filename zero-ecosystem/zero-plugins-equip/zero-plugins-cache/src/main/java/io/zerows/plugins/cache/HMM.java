@@ -1,6 +1,7 @@
 package io.zerows.plugins.cache;
 
 import io.r2mo.jaas.session.UserAt;
+import io.r2mo.jce.common.HED;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
@@ -76,7 +77,8 @@ public class HMM<K, V> {
     @SuppressWarnings("all")
     public static <K, V> HMM<K, V> of(final String name) {
         final String nameHMM = Ut.isNil(name) ? HMM_DEFAULT : name;
-        return (HMM<K, V>) CC_MM.pick(() -> new HMM<>(nameHMM, false), nameHMM);
+        final String nameSHA = HED.encryptSHA256(nameHMM);
+        return (HMM<K, V>) CC_MM.pick(() -> new HMM<>(nameSHA, false), nameSHA);
     }
 
     /**
@@ -92,7 +94,8 @@ public class HMM<K, V> {
     @SuppressWarnings("all")
     public static <K, V> HMM<K, V> vertx(final String name) {
         final String nameHMM = Ut.isNil(name) ? HMM_DEFAULT : name;
-        return (HMM<K, V>) CC_MM.pick(() -> new HMM<>(nameHMM, true), nameHMM);
+        final String nameSHA = HED.encryptSHA256(nameHMM);
+        return (HMM<K, V>) CC_MM.pick(() -> new HMM<>(nameSHA, true), nameSHA);
     }
 
     public String name() {
@@ -112,7 +115,7 @@ public class HMM<K, V> {
             .compose(kv -> Future.succeededFuture(kv.value()));
     }
 
-    public Future<V> putMulti(Set<K> keys, final V value) {
+    public Future<V> putMulti(final Set<K> keys, final V value) {
         return this.putMulti(keys, value, Duration.ZERO);
     }
 

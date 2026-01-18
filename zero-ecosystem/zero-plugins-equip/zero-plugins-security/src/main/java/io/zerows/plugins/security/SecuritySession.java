@@ -54,13 +54,13 @@ public class SecuritySession {
         return TokenType.BASIC == type;
     }
 
-    public long msExpired403() {
+    public long msExpiredAt() {
         final String msExpired = this.security().getLimit().getExpiredAt();
         final Duration expiredAt = R2MO.toDuration(msExpired);
         return expiredAt.toSeconds();
     }
 
-    User setAuthorized(final RoutingContext context, final User recovered) {
+    User authorizedUser(final RoutingContext context, final User recovered) {
         if (Objects.isNull(recovered)) {
             return null;
         }
@@ -68,7 +68,18 @@ public class SecuritySession {
         return recovered;
     }
 
-    public Future<UserAt> setLogged(final UserAt userAt) {
+    public Future<JsonObject> authorized403(final RoutingContext context, final JsonObject waitFor) {
+        return this.authorized403(context)
+            .put(KWeb.SESSION.AUTHORIZATION, waitFor, this.msExpiredAt());
+    }
+
+    public HMM<String, JsonObject> authorized403(final RoutingContext context) {
+        final String authorization = context.request().getHeader(HttpHeaders.AUTHORIZATION);
+        final String token = authorization.split(" ")[1];
+        return HMM.of(token);
+    }
+
+    public Future<UserAt> authorized401(final UserAt userAt, final String token) {
         // 处理临时用户
         final JsonObject userData = Account.userData(userAt);
         final String ephemeral = Ut.valueString(userData, KName.ID);
@@ -79,10 +90,8 @@ public class SecuritySession {
          * 加载 Token 的过期时间，Token 过期时间和用户缓存存在时间是一致的，所以此处要直接从配置中提取
          * 并且写入到缓存中去！单位内置为秒
          */
-        final YmSecurity security = SecurityActor.configuration();
-        final YmSecurity.Limit limit = security.getLimit();
-        final HMM<String, JsonObject> mm = HMM.of(ephemeral);
-        return mm.put(KWeb.SESSION.AUTHENTICATE, userData, limit.expiredAt().toSeconds())
+        final HMM<String, JsonObject> mm = HMM.of(token);
+        return mm.put(KWeb.SESSION.AUTHENTICATE, userData, this.msExpiredAt())
             .compose(stored -> Ux.waitVirtual(() -> UserSession.of().userAt(userAt)));
     }
 }
