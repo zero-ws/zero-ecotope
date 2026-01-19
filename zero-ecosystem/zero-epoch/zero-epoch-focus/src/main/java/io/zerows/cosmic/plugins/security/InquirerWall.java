@@ -15,7 +15,6 @@ import io.zerows.epoch.configuration.Inquirer;
 import io.zerows.epoch.configuration.NodeStore;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.security.SecurityMeta;
-import io.zerows.platform.enums.SecurityType;
 import io.zerows.sdk.security.WallExecutor;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.support.Ut;
@@ -64,39 +63,12 @@ public class InquirerWall implements Inquirer<Set<SecurityMeta>> {
         meta.setOrder(wall.order());
         meta.setPath(wall.path());
 
-        final SecurityType type = this.verifyConfig(clazz, vertxRef);
-        meta.setType(type);
+        meta.setType(this.verifyConfig(clazz, vertxRef));
 
         final WallExecutor executor = PLUGIN.createInstance(clazz);
         meta.setProxy(executor);
         return meta;
     }
-    //
-    //    private KSecurity create(final Class<?> clazz) {
-    //        final KSecurity aegis = new KSecurity();
-    //        /*
-    //         * 「Validation」
-    //         * 1 - Proxy Creation with Wall Specification
-    //         * 2 - Wall Type & Aegis Item
-    //         ***/
-    //        this.verifyProxy(clazz, aegis);
-    //
-    //        final Annotation annotation = clazz.getAnnotation(Wall.class);
-    //        final String typeKey = Ut.invoke(annotation, "value");
-    //        this.verifyConfig(clazz, aegis, typeKey);
-    //        aegis.setPath(Ut.invoke(annotation, "path"));
-    //
-    //        /*
-    //         * AuthorizationHandler class here
-    //         */
-    //        final Class<?> handlerCls = Ut.invoke(annotation, "handler");
-    //        if (AuthorizationHandler.class.isAssignableFrom(handlerCls)) {
-    //            aegis.setHandler(handlerCls);
-    //        }
-    //        /* Verify */
-    //        return aegis;
-    //    }
-    //
 
     /**
      * 注，{@link Wall} 类不可以重复定义，此处的重复有两层含义
@@ -128,7 +100,7 @@ public class InquirerWall implements Inquirer<Set<SecurityMeta>> {
             wallClass.stream().map(Class::getName).collect(Collectors.toSet()));
     }
 
-    private SecurityType verifyConfig(final Class<?> target, final Vertx vertxRef) {
+    private String verifyConfig(final Class<?> target, final Vertx vertxRef) {
         final Wall wall = target.getAnnotation(Wall.class);
         final HConfig config = NodeStore.findInfix(vertxRef, "security");
         if (Objects.isNull(config)) {
@@ -144,10 +116,9 @@ public class InquirerWall implements Inquirer<Set<SecurityMeta>> {
         }
         final JsonObject configData = configJ.getJsonObject(configKey);
         final String typeStr = Ut.valueString(configData, KName.TYPE);
-        final SecurityType type = SecurityType.from(typeStr);
-        log.info("[ ZERO ] ( Secure ) Wall `{}` ( path = {} ) 使用了安全配置类型 {}", target.getName(), wall.path(), type);
+        log.info("[ ZERO ] ( Secure ) Wall `{}` ( path = {} ) 使用了安全配置类型 {}", target.getName(), wall.path(), typeStr);
 
-        Fn.jvmKo(Objects.isNull(type), _40040Exception400WallKeyMissing.class, configKey, target);
-        return type;
+        Fn.jvmKo(Objects.isNull(typeStr), _40040Exception400WallKeyMissing.class, configKey, target);
+        return typeStr;
     }
 }

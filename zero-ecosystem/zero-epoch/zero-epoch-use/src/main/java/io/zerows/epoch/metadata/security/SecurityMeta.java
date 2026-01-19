@@ -3,7 +3,6 @@ package io.zerows.epoch.metadata.security;
 import io.vertx.core.Vertx;
 import io.zerows.epoch.annotations.Wall;
 import io.zerows.epoch.constant.KWeb;
-import io.zerows.platform.enums.SecurityType;
 import io.zerows.sdk.security.WallExecutor;
 import io.zerows.specification.atomic.HCopier;
 import lombok.Data;
@@ -21,7 +20,7 @@ import java.util.Objects;
 public class SecurityMeta implements Serializable, Comparable<SecurityMeta>, HCopier<SecurityMeta> {
     private String path;
     private int order = KWeb.ORDER.SECURE;
-    private SecurityType type;
+    private String type;
     private WallExecutor proxy;
 
     private Class<?> handler;
@@ -48,7 +47,7 @@ public class SecurityMeta implements Serializable, Comparable<SecurityMeta>, HCo
         }
         return this.order == wall.order &&
             Objects.equals(this.path, wall.path) &&
-            this.type == wall.type &&
+            Objects.equals(this.type, wall.type) &&
             Objects.equals(this.proxy, wall.proxy);
     }
 

@@ -1,13 +1,6 @@
 package io.zerows.epoch.annotations;
 
-import io.zerows.platform.enums.SecurityType;
-
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
 /**
  * 🛡️ 安全墙注解，用于限制请求
@@ -57,7 +50,7 @@ public @interface Wall {
      * 3. 🔄 安全墙处理器序列应按 0,1,2,3... 触发。
      *    此标识需要多处理器模式。
      * </pre>
-     *
+     * <p>
      * 「新版本」:
      * <pre>
      * 1. 📁 该顺序可用于将你的安全墙按路径分组，这意味着当一个路径包含 n 个 Aegis 配置时，
@@ -70,5 +63,6 @@ public @interface Wall {
      */
     int order() default 0;          // VValue.ZERO;
 
-    SecurityType type() default SecurityType.NONE;  // 默认无认证
+
+    String type() default "NONE";        // 预留字段，未来可能会用到
 }

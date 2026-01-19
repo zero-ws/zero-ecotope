@@ -24,13 +24,12 @@ public class TokenDynamicResponse extends AsyncLoginResponse {
         CONFIG = SecurityActor.configuration();
     }
 
-    @Override
     public Future<JsonObject> response() {
         final JsonObject response = new JsonObject();
         response.put(KName.ID, this.getId().toString());
         response.put(KName.TOKEN, this.getToken());
         response.put("refreshToken", this.getRefreshToken());
-        return Future.succeededFuture(response);
+        return this.replyAsync(response);
     }
 
     private TokenType determineTokenType() {

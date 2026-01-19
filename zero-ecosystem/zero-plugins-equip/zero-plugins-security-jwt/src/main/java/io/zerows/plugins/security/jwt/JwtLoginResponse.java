@@ -31,16 +31,15 @@ public class JwtLoginResponse extends AsyncLoginResponse {
         this.expiresIn = duration.getSeconds();
     }
 
-    @Override
+
     public Future<JsonObject> response() {
         final JsonObject response = new JsonObject();
         response.put("tokenType", this.tokenType);
         response.put("expiresIn", this.expiresIn);
         response.put(KName.TOKEN, this.getToken());
         response.put("refreshToken", this.getRefreshToken());
-        return Future.succeededFuture(response);
+        return this.replyAsync(response);
     }
-
 
     @Override
     public String getToken(final UserAt userAt) {

@@ -43,13 +43,40 @@ public class RedisCachedFactory implements CachedFactory {
         return this.findBy(vertx, optionsUpdated);
     }
 
+    /**
+     * <pre>
+     * 🟢 构造 Redis 缓存组件
+     *
+     * 1. 🌐 为何追加 duration 到 fingerprint？
+     *    Redis 缓存组件在执行 SET 操作时，严强依赖配置中的 `TTL` (Time To Live)。
+     *    `CC_MEMO` 作为一个静态内存池，用于复用 `MemoAt` 实例以减少对象创建开销。
+     *    如果不将 duration 包含在从池中查找实例的 key (指纹) 中：
+     *
+     *    - ❌ 场景重现：
+     *      1. 模块 A 创建了名为 "UserCache" 的实例，TTL 配置为 60秒。
+     *      2. 模块 B 尝试获取名为 "UserCache" 的实例，TTL 配置为 3600秒 (1小时)。
+     *      3. 结果：模块 B 会错误地复用模块 A 创建的实例（因为名字相同）。
+     *      4. 后果：模块 B 存入的数据将在 60秒后失效，而不是预期的 1小时，导致严重的业务逻辑错误 (Cache Miss)。
+     *
+     *    - ✅ 解决方案：
+     *      Redis 组件的唯一性指纹必须由 `逻辑名称` + `过期时间` 共同决定。
+     *      Fingerprint = Name + "@" + Duration_Millis
+     *
+     * 2. 🎯 缓存池机制
+     *    利用 `CC_MEMO` 避免重复创建 RedisClient 包装器或重配置开销，但在多 TTL 场景下保持实例隔离。
+     * </pre>
+     *
+     * @param vertx   Vert.x 实例
+     * @param options 缓存配置选项
+     * @return Redis 缓存操作接口
+     */
     @Override
     @SuppressWarnings("unchecked")
     public <K, V> MemoAt<K, V> findBy(final Vertx vertx, final MemoOptions<K, V> options) {
         Objects.requireNonNull(options, "[ R2MO ] MemoOptions 不能为空！");
         // 指纹会包含 options 中的关键信息，确保配置变更后能生成新实例
-        final String fingerprint = options.fingerprint();
-
+        // Fix: 追加 Duration 作为 fingerprint，因为 Redis 强依赖 TTL
+        final String fingerprint = options.fingerprint() + "@" + options.duration().toMillis();
         return (MemoAt<K, V>) CC_MEMO.pick(
             () -> new RedisMemoAt<>(vertx, options),
             fingerprint

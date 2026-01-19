@@ -1,7 +1,6 @@
 package io.zerows.epoch.metadata.security;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.platform.enums.SecurityType;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;
@@ -13,8 +12,8 @@ import java.util.Optional;
 /**
  * 安全项相关的方法，根据配置初始化，此处初始化的维度是类型，简单说就是不同类型在配置中出现次数会不同
  * <pre>
- *     1. {@link SecurityType#BASIC}：无配置，固定算法
- *     2. {@link SecurityType#JWT}：当前应用运行时直接保留唯一配置
+ *     1. BASIC：无配置，固定算法
+ *     2. JWT：当前应用运行时直接保留唯一配置
  *        vertx:
  *          security:
  *            jwt:
@@ -37,11 +36,11 @@ public class SecurityConfig implements Serializable {
     @Setter(AccessLevel.NONE)
     private final String key;
     @Setter(AccessLevel.NONE)
-    private final SecurityType type;
+    private final String type;
 
-    public SecurityConfig(final SecurityType type, final JsonObject options) {
+    public SecurityConfig(final String type, final JsonObject options) {
         this.type = type;
-        this.key = type.key();
+        this.key = type + "@" + System.identityHashCode(options);
         Optional.ofNullable(options)
             .ifPresent(optionOpt -> this.options.mergeIn(optionOpt, true));
     }

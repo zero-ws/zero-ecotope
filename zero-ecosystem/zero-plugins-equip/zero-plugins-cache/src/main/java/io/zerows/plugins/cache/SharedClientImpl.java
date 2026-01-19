@@ -33,8 +33,8 @@ class SharedClientImpl implements SharedClient {
         final Class classV = SourceReflect.clazz(Ut.valueString(options, "classV"));
         final Integer size = Ut.valueInt(options, KName.SIZE, 0);
         this.baseOption = new MemoOptions<>(caller).name(name)
-                .classK(classK).classV(classV)
-                .size(size).extension(options);
+            .classK(classK).classV(classV)
+            .size(size).extension(options);
     }
 
     static SharedClient create(final Vertx vertx, final JsonObject options) {
@@ -66,5 +66,10 @@ class SharedClientImpl implements SharedClient {
          */
         final MemoOptions<K, V> optionsWithTTL = this.baseOption.of(expiredAt);
         return BaseClient.of(this.vertx, optionsWithTTL);
+    }
+
+    @Override
+    public <K, V> MemoAt<K, V> memoAt() {
+        return this.memoAt(this.baseOption.duration());
     }
 }

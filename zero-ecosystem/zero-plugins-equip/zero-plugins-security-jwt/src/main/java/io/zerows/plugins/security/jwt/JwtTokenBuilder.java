@@ -6,6 +6,8 @@ import io.r2mo.jaas.element.MSUser;
 import io.r2mo.jaas.session.UserAt;
 import io.r2mo.jaas.session.UserCache;
 import io.r2mo.jaas.token.TokenBuilderBase;
+import io.r2mo.jaas.token.TokenType;
+import io.r2mo.typed.common.Kv;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
@@ -62,6 +64,12 @@ public class JwtTokenBuilder extends TokenBuilderBase {
      */
     @Override
     public String accessOf(final String token) {
+        final Kv<String, TokenType> kv = this.accessOfType(token);
+        return Objects.isNull(kv) ? null : kv.key();
+    }
+
+    @Override
+    public Kv<String, TokenType> accessOfType(final String token) {
         if (Objects.isNull(token) || token.trim().isEmpty()) {
             return null;
         }
@@ -77,7 +85,8 @@ public class JwtTokenBuilder extends TokenBuilderBase {
             }
             // 检查过期时间 (Vert.x decode 方法通常已验证 exp，此处为双重保险或读取业务字段)
             // 提取 standard claim: sub
-            return payload.getString(NAME_SUBJECT);
+            final String value = payload.getString(NAME_SUBJECT);
+            return Kv.create(value, TokenType.JWT);
         } catch (final Exception e) {
             // 解码失败（签名错误、过期等）
             log.error(e.getMessage(), e);
@@ -187,6 +196,8 @@ public class JwtTokenBuilder extends TokenBuilderBase {
 
         // subject
         tokenData.put(NAME_SUBJECT, identifier);
+        // 防止混乱
+        tokenData.put("tokenType", TokenType.JWT.name());
         final String issuer = config.option(KEY_CFG_ISSUER, null);
         if (StrUtil.isNotEmpty(issuer)) {
             // issuer

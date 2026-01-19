@@ -6,9 +6,9 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Session;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.DB;
+import io.zerows.extension.module.rbac.common.ScAuthKey;
 import io.zerows.extension.module.rbac.component.ScClock;
 import io.zerows.extension.module.rbac.component.ScClockFactory;
-import io.zerows.extension.module.rbac.common.ScAuthKey;
 import io.zerows.extension.module.rbac.domain.tables.daos.SUserDao;
 import io.zerows.extension.module.rbac.domain.tables.pojos.SUser;
 import io.zerows.extension.module.rbac.exception._80227Exception404MobileNotFound;
@@ -71,7 +71,7 @@ public class SmsService implements SmsStub {
         final String mobile = Ut.valueString(params, KName.MOBILE);
         final String tplCode = Ut.valueString(params, "tpl");
         // Inject 注入在 Service 中可用，但 Infusion 只在 Actor 中可用
-        return SmsActor.ofClient().send(mobile, tplCode, request)
+        return SmsActor.ofClient().sendAsync(tplCode, request, mobile)
             // 2 分钟过期 = 120 秒
             .compose(nil -> this.cache.put(sessionId, smsCode))
             .compose(nil -> Ux.futureT());

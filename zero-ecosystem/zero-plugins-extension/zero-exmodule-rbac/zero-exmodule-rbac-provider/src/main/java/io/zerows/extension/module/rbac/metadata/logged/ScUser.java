@@ -33,7 +33,7 @@ public class ScUser {
 
     private ScUser(final String habitus) {
         this.habitus = habitus;
-        this.rapid = HMM.of(KWeb.CACHE.User.MY_HABITUS);
+        this.rapid = HMM.of(KWeb.SESSION.MY_HABITUS);
     }
 
     // ------------------------- Profile Method ------------------------

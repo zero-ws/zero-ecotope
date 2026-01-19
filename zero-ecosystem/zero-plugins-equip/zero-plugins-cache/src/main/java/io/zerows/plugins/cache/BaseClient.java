@@ -65,8 +65,8 @@ interface BaseClient {
         // 3. 托管/获取 MemoAt 实例
         // 使用 managedOptions 进行反射构造
         return (MemoAt<K, V>) CC_MEMO.pick(
-                () -> SourceReflect.instance(implCls, vertxRef, managedOptions),
-                keyCache
+            () -> SourceReflect.instance(implCls, vertxRef, managedOptions),
+            keyCache
         );
     }
 
@@ -80,9 +80,7 @@ interface BaseClient {
      */
     <K, V> MemoAt<K, V> memoAt(Duration expiredAt);
 
-    default <K, V> MemoAt<K, V> memoAt() {
-        return this.memoAt(Duration.ZERO);
-    }
+    <K, V> MemoAt<K, V> memoAt();
 
     // ------ 核心逻辑方法（接口实现）
 

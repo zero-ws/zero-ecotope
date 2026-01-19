@@ -21,5 +21,9 @@
             <artifactId>r2mo-xync-email</artifactId>
             <version>${r2mo.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.thymeleaf</groupId>
+            <artifactId>thymeleaf</artifactId>
+        </dependency>
     </dependencies>
 </project>

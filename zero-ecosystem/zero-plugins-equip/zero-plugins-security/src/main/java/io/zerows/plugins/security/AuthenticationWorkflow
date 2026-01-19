@@ -1,0 +1,12 @@
+AuthenticationHandlerGateway
+-- ( Session )
+-- ExtensionAuthentication | Token -> User
+    /- ExtensionAuthenticationAES
+    /- ExtensionAuthenticationBasic
+    /- JwtExtensionAuthentication
+   -- ( Session )
+   AuthenticationProviderGateway
+   -- BackendProviderLogged
+   -- BackendProviderAnonymous
+   -- ( User )
+-- AuthenticationBackendHandler

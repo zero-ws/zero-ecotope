@@ -109,7 +109,7 @@ class FrameConnector extends AbstractFrameHandler {
          * Token 验证流程，处理 401 基础验证信息
          */
         final String tokenString = authorization.split(" ")[1];
-        final JsonObject token = Account.userToken(tokenString, this.config.getType());
+        final JsonObject token = Account.userAuthorization(authorization);
         if (Objects.isNull(token)) {
             return new JsonObject();
         }

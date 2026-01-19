@@ -273,14 +273,12 @@ public interface KWeb {
 
         String UI_LAYOUT = "ZERO-CACHE-TPL";
 
-        interface User {
-            String MY_VIEW = "ZERO-CACHE-USER-VIEW";
+    }
 
-            String MY_HABITUS = "ZERO-CACHE-HABITUS";
-
-            String AUTHORIZATION = "ZERO-CACHE-403";
-
-            String AUTHENTICATE = "ZERO-CACHE-401";
-        }
+    interface SESSION {
+        String MY_VIEW = "ZERO-CACHE-USER-VIEW";
+        String MY_HABITUS = "ZERO-CACHE-HABITUS";
+        String AUTHORIZATION = "ZERO-CACHE-403";
+        String AUTHENTICATE = "ZERO-CACHE-401";
     }
 }

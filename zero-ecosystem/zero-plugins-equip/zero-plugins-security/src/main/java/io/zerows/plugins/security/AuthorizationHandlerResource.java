@@ -144,15 +144,23 @@ class AuthorizationHandlerResource {
     }
 
     private Future<Boolean> waitCached(final RoutingContext context, final User user) {
-        final HMM<String, JsonObject> mmUser = this.mmUser(user);
+        final SecuritySession session = SecuritySession.of();
+        final HMM<String, JsonObject> mmUser = session.authorized(context);
         if (Objects.isNull(mmUser)) {
             return Future.succeededFuture(Boolean.FALSE);
         }
-        return mmUser.find(KWeb.CACHE.User.AUTHORIZATION).compose(authorized -> {
+
+        if (session.isAnonymous(context)) {
+            // BASIC 跳过
+            this.requestResume(context.request());
+            return Future.succeededFuture(Boolean.TRUE);
+        }
+        return mmUser.find(KWeb.SESSION.AUTHORIZATION).compose(authorized -> {
             final String requestId = this.requestResourceId(context);
             final JsonObject waitFor = Objects.isNull(authorized) ? new JsonObject() : authorized;
             waitFor.put(requestId, Boolean.TRUE);
-            return mmUser.put(KWeb.CACHE.User.AUTHORIZATION, waitFor).compose(nil -> {
+
+            return session.authorized403(context, waitFor).compose(nil -> {
                 // 恢复请求处理
                 this.requestResume(context.request());
                 return Future.succeededFuture(Boolean.TRUE);
@@ -164,23 +172,13 @@ class AuthorizationHandlerResource {
         });
     }
 
-    private HMM<String, JsonObject> mmUser(final User user) {
-        if (Objects.isNull(user)) {
-            return null;
-        }
-        final JsonObject principal = user.principal();
-        final String habitus = principal.getString(KName.HABITUS);
-        Objects.requireNonNull(habitus, "[ PLUG ] 用户会话标识缺失，无法获取缓存！");
-        return HMM.of(habitus);
-    }
-
     private Future<Boolean> waitCached(final RoutingContext context) {
-        final User user = context.user();
-        final HMM<String, JsonObject> mmUser = this.mmUser(user);
+        final SecuritySession session = SecuritySession.of();
+        final HMM<String, JsonObject> mmUser = session.authorized(context);
         if (Objects.isNull(mmUser)) {
             return Future.succeededFuture(Boolean.TRUE);
         }
-        return mmUser.find(KWeb.CACHE.User.AUTHORIZATION).compose(res -> {
+        return mmUser.find(KWeb.SESSION.AUTHORIZATION).compose(res -> {
             // 初始化授权结果
             final JsonObject initialized = Objects.isNull(res) ? new JsonObject() : res;
             // 提取当前资源的资源标识
@@ -188,9 +186,9 @@ class AuthorizationHandlerResource {
             final boolean authorized = initialized.getBoolean(resource, Boolean.FALSE);
             if (authorized) {
                 // 跳过认证
-                final String session = user.principal().getString(KName.HABITUS);
-                log.info("[ PLUG ] ( Secure ) 403 用户授权命中缓存：session = {} / resource = {}",
-                    session, resource);
+                final User user = context.user();
+                final String logged = user.principal().getString(KName.HABITUS);
+                log.info("[ PLUG ] ( Secure ) 403 用户授权命中缓存：habitus = {} / resource = {}", logged, resource);
                 return Future.succeededFuture(Boolean.FALSE);
             } else {
                 // 等待认证

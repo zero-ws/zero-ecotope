@@ -3,8 +3,8 @@ package io.zerows.plugins.sms;
 import io.zerows.sdk.plugins.AddOn;
 import io.zerows.sdk.plugins.AddOnProvider;
 
-public class SmsProvider extends AddOnProvider<SmsClient> {
-    protected SmsProvider(AddOn<SmsClient> addOn) {
+class SmsProvider extends AddOnProvider<SmsClient> {
+    protected SmsProvider(final AddOn<SmsClient> addOn) {
         super(addOn);
     }
 }

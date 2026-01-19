@@ -2,10 +2,15 @@ package io.zerows.extension.development;
 
 import io.r2mo.SourceError;
 
+import java.util.Set;
+
 public class ErrorCode {
 
     public static void main(final String[] args) {
-        SourceError.printExist(80245,
-            "io.zerows", "io.r2mo");
+        Set.of(
+            81501,
+            81502
+        ).forEach(code -> SourceError.printExist(code,
+            "io.zerows", "io.r2mo"));
     }
 }

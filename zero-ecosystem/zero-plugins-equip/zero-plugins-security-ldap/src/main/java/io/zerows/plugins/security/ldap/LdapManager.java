@@ -8,6 +8,7 @@ import io.vertx.ext.auth.ChainAuth;
 import io.vertx.ext.auth.authentication.AuthenticationProvider;
 import io.vertx.ext.auth.ldap.LdapAuthentication;
 import io.vertx.ext.auth.ldap.LdapAuthenticationOptions;
+import io.zerows.plugins.security.SecurityChainAuth;
 import io.zerows.support.Ut;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -73,7 +74,7 @@ public class LdapManager {
 
         // 3. 创建责任链 (ChainAuth)
         // 无论是一个 query 还是多个，统一用 ChainAuth 封装，保持行为一致性
-        final ChainAuth chainAuth = ChainAuth.any();
+        final ChainAuth chainAuth = SecurityChainAuth.any();
 
         // 4. 判断是否启用 "搜索模式" (Search & Bind)
         // 依据：配置中是否存在 admin 和 password

@@ -41,7 +41,7 @@ public class SentryVerifier extends AimBase implements Sentry<RoutingContext> {
                 // 认证结果
                 final User logged = context.user();
                 if (Objects.nonNull(logged)) {
-                    // 有账号状态
+                    // 有账号状态，先做 Token 检查
                     Ux.waitVirtual(() -> Account.userAt(logged)).onComplete(res -> {
                         if (res.succeeded()) {
                             final UserAt userAt = res.result();
