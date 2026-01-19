@@ -5,9 +5,9 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
-import io.zerows.plugins.security.email.exception._80351Exception400EmailRequired;
-import io.zerows.plugins.security.email.exception._80352Exception400EmailFormat;
-import io.zerows.plugins.security.email.exception._80353Exception500EmailSending;
+import io.zerows.plugins.security.email.exception._80361Exception400EmailRequired;
+import io.zerows.plugins.security.email.exception._80362Exception400EmailFormat;
+import io.zerows.plugins.security.email.exception._80363Exception500EmailSending;
 import io.zerows.plugins.security.service.AuthLoginStub;
 import io.zerows.plugins.security.service.CaptchaStub;
 import io.zerows.plugins.security.service.TokenDynamicResponse;
@@ -33,14 +33,14 @@ public class ApiEmailActor {
         // email 非空 / 格式校验
         final String email = request.getEmail();
         if (Objects.isNull(email)) {
-            return Fx.failOut(_80351Exception400EmailRequired.class);
+            return Fx.failOut(_80361Exception400EmailRequired.class);
         }
         if (!R2MO.isEmail(email)) {
-            return Fx.failOut(_80352Exception400EmailFormat.class, email);
+            return Fx.failOut(_80362Exception400EmailFormat.class, email);
         }
         return this.emailStub.sendCaptcha(email).compose(sent -> {
             if (!sent) {
-                return Fx.failOut(_80353Exception500EmailSending.class, email);
+                return Fx.failOut(_80363Exception500EmailSending.class, email);
             }
             return Ux.futureT();
         });

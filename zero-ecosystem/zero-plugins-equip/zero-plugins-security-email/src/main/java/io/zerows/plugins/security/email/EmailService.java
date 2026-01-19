@@ -4,7 +4,6 @@ import io.r2mo.base.util.R2MO;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.plugins.email.EmailClient;
-import io.zerows.plugins.security.email.metadata.YmSecurityEmail;
 import io.zerows.plugins.security.service.AuthLoginStub;
 import io.zerows.support.Ut;
 import jakarta.inject.Inject;
@@ -14,7 +13,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 public class EmailService implements EmailStub {
-    private final YmSecurityEmail emailConfig = EmailSecurityActor.configOf();
+    private final EmailAuthConfig emailConfig = EmailAuthActor.configOf();
     @Inject
     private EmailClient emailClient;
 

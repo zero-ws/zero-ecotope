@@ -5,7 +5,7 @@ import io.r2mo.jaas.auth.LoginRequest;
 import io.r2mo.typed.enums.TypeLogin;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.plugins.security.email.exception._80351Exception400EmailRequired;
+import io.zerows.plugins.security.email.exception._80361Exception400EmailRequired;
 import io.zerows.plugins.security.exception._80241Exception400PasswordRequired;
 import io.zerows.support.Fx;
 import lombok.Data;
@@ -45,7 +45,7 @@ public class EmailLoginRequest extends LoginRequest {
 
     public Future<Void> requestValidated() {
         if (Objects.isNull(this.email)) {
-            return Fx.failOut(_80351Exception400EmailRequired.class);
+            return Fx.failOut(_80361Exception400EmailRequired.class);
         }
         if (Objects.isNull(this.captcha)) {
             return Fx.failOut(_80241Exception400PasswordRequired.class, "captcha");

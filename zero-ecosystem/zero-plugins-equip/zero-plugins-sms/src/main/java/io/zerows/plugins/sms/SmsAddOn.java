@@ -33,6 +33,7 @@ class SmsAddOn extends AddOnBase<SmsClient> {
 
     @Override
     protected SmsClient createInstanceBy(final String name) {
-        return SmsClient.createClient(this.vertx(), this.config());
+        final SmsConfig smsConfig = SmsManager.of().configOf(this.vertx(), this.config());
+        return SmsClient.createClient(this.vertx(), smsConfig);
     }
 }

@@ -12,7 +12,6 @@ import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Defer;
-import io.zerows.specification.configuration.HConfig;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,30 +24,35 @@ class EmailClientImpl implements EmailClient {
     private static final Cc<String, ForTpl> CC_TPL = Cc.openThread();
 
     private final EmailConfig serverConfig;
+    private final Vertx vertx;
 
-    EmailClientImpl(final Vertx vertx, final HConfig config) {
-        final JsonObject emailJ = config.options();
-        this.serverConfig = Ut.deserialize(emailJ, EmailConfig.class);
+    EmailClientImpl(final Vertx vertx, final EmailConfig serverConfig) {
+        this.vertx = vertx;
+        this.serverConfig = serverConfig;
+        // 账号检查
+    }
+
+    public Vertx vertx() {
+        return this.vertx;
     }
 
     @Override
-    public Future<JsonObject> sendAsync(final String template, final JsonObject params,
+    public Future<JsonObject> sendAsync(final String template, final JsonObject paramsJ,
                                         final Set<String> toSet) {
         // 1. 根据模板提取内容
-        final JObject paramMap = SPI.J();
-        paramMap.put(params.getMap());
+        final JObject params = Ut.valueJ(paramsJ);
         final ForTpl thymeleafTpl = CC_TPL.pick(EmailTpl::new);
-        final String contentHtml = thymeleafTpl.process(template, paramMap);
-        paramMap.put("content", contentHtml);
+        final String contentHtml = thymeleafTpl.process(template, params);
+        params.put("content", contentHtml);
 
         // 2. 根据配置发送邮件
         final UniProvider.Wait<EmailConfig> wait = UniProvider.waitFor(EmailWaitVertx::new);
-        final UniAccount account = wait.account(paramMap, this.serverConfig);
-        final UniContext context = wait.context(paramMap, this.serverConfig);
+        final UniAccount account = wait.account(params, this.serverConfig);
+        final UniContext context = wait.context(params, this.serverConfig);
 
 
         // 3. 消息构造（每次都构造新消息）
-        final UniMessage<String> message = wait.message(paramMap, this.serverConfig);
+        final UniMessage<String> message = wait.message(params, this.serverConfig);
         toSet.forEach(message::addTo);
 
         final UniProvider provider = CC_PROVIDER.pick(() -> SPI.findOne(UniProvider.class, "UNI_EMAIL"));

@@ -1,6 +1,9 @@
 package io.zerows.support.base;
 
 import io.r2mo.base.util.R2MO;
+import io.r2mo.spi.SPI;
+import io.r2mo.typed.json.JArray;
+import io.r2mo.typed.json.JObject;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.constant.VValue;
@@ -18,6 +21,16 @@ class _Value extends _To {
     protected _Value() {
     }
 
+    public static JObject valueJ(final JsonObject params) {
+        return SPI.J().put(params.getMap());
+    }
+
+    public static JArray valueA(final JsonArray params) {
+        final JArray array = SPI.A();
+        params.stream().forEach(array::add);
+        return array;
+    }
+
     /**
      * （计算过时区）获取当前时间，转换成 Date 值
      *
@@ -32,7 +45,6 @@ class _Value extends _To {
      * 最终的结果一定会返回一个可操作的JsonObject对象。
      *
      * @param inputJ 输入的JsonObject对象
-     *
      * @return 安全的JsonObject对象
      */
     public static JsonObject valueJObject(final JsonObject inputJ) {
@@ -44,7 +56,6 @@ class _Value extends _To {
      * 最终的结果一定会返回一个可操作的JsonArray对象。
      *
      * @param inputA 输入的JsonArray对象
-     *
      * @return 安全的JsonArray对象
      */
     public static JsonArray valueJArray(final JsonArray inputA) {
@@ -57,7 +68,6 @@ class _Value extends _To {
      *
      * @param inputJ 输入的JsonObject对象
      * @param isCopy 是否返回副本
-     *
      * @return 安全的JsonObject对象或副本
      */
     public static JsonObject valueJObject(final JsonObject inputJ, final boolean isCopy) {
@@ -70,7 +80,6 @@ class _Value extends _To {
      *
      * @param inputA 输入的JsonArray对象
      * @param isCopy 是否返回副本
-     *
      * @return 安全的JsonArray对象或副本
      */
 
@@ -83,7 +92,6 @@ class _Value extends _To {
      *
      * @param array JsonArray
      * @param field 字段名
-     *
      * @return JsonArray
      */
     public static JsonArray valueJArray(final JsonArray array, final String field) {
@@ -97,7 +105,6 @@ class _Value extends _To {
      *
      * @param inputJ JsonObject
      * @param field  字段名
-     *
      * @return JsonObject
      */
     public static JsonObject valueJObject(final JsonObject inputJ, final String field) {
@@ -113,7 +120,6 @@ class _Value extends _To {
      * @param inputJ JsonObject
      * @param field  字段名
      * @param isCopy 是否创建拷贝
-     *
      * @return JsonObject
      */
     public static JsonObject valueJObject(final JsonObject inputJ, final String field, final boolean isCopy) {
@@ -127,7 +133,6 @@ class _Value extends _To {
      *
      * @param inputJ JsonObject
      * @param field  字段名
-     *
      * @return JsonArray
      */
     public static JsonArray valueJArray(final JsonObject inputJ, final String field) {
@@ -139,7 +144,6 @@ class _Value extends _To {
      *
      * @param array JsonArray
      * @param field 字段名
-     *
      * @return Set<String>
      */
     public static Set<String> valueSetString(final JsonArray array, final String field) {
@@ -152,7 +156,6 @@ class _Value extends _To {
      * @param list     List<T>
      * @param executor 提取函数
      * @param <T>      T
-     *
      * @return Set<String>
      */
     public static <T> Set<String> valueSetString(final List<T> list, final Function<T, String> executor) {
@@ -164,7 +167,6 @@ class _Value extends _To {
      *
      * @param array JsonArray
      * @param field 字段名
-     *
      * @return Set<JsonArray>
      */
     public static Set<JsonArray> valueSetArray(final JsonArray array, final String field) {
@@ -178,7 +180,6 @@ class _Value extends _To {
      * @param list     列表
      * @param stringFn 转换函数
      * @param <T>      T
-     *
      * @return 字符串
      */
     public static <T> String valueFirst(final List<T> list, final Function<T, String> stringFn) {
@@ -190,7 +191,6 @@ class _Value extends _To {
      *
      * @param array JsonArray
      * @param field 字段名
-     *
      * @return String
      */
     public static String valueString(final JsonArray array, final String field) {
@@ -202,7 +202,6 @@ class _Value extends _To {
      *
      * @param json  JsonObject
      * @param field 字段名
-     *
      * @return String
      */
     public static String valueString(final JsonObject json, final String field) {
@@ -215,7 +214,6 @@ class _Value extends _To {
      * @param json         JsonObject
      * @param field        字段名
      * @param defaultValue 默认值
-     *
      * @return String
      */
     public static String valueString(final JsonObject json, final String field, final String defaultValue) {
@@ -227,7 +225,6 @@ class _Value extends _To {
      *
      * @param json  JsonObject
      * @param field 字段名
-     *
      * @return String
      */
     public static Integer valueInt(final JsonObject json, final String field) {
@@ -243,7 +240,6 @@ class _Value extends _To {
      *
      * @param json  JsonObject
      * @param field 字段名
-     *
      * @return String
      */
     public static Class<?> valueC(final JsonObject json, final String field) {
@@ -256,7 +252,6 @@ class _Value extends _To {
      * @param json         JsonObject
      * @param field        字段名
      * @param defaultClass 默认值
-     *
      * @return String
      */
     public static Class<?> valueC(final JsonObject json, final String field,
@@ -271,7 +266,6 @@ class _Value extends _To {
      * @param json         JsonObject
      * @param field        字段名
      * @param interfaceCls 接口类
-     *
      * @return String
      */
     public static Class<?> valueCI(final JsonObject json, final String field,
@@ -287,7 +281,6 @@ class _Value extends _To {
      * @param field        字段名
      * @param interfaceCls 接口类
      * @param defaultClass 默认值
-     *
      * @return String
      */
     public static Class<?> valueCI(final JsonObject json, final String field,
@@ -301,7 +294,6 @@ class _Value extends _To {
      * @param literal 字符串
      * @param type    类型
      * @param <T>     T
-     *
      * @return Class<?>
      */
     public static <T> T valueT(final String literal, final Class<?> type) {
@@ -316,7 +308,6 @@ class _Value extends _To {
      * @param field 字段名
      * @param type  类型
      * @param <T>   T
-     *
      * @return T
      */
     public static <T> T valueT(final JsonObject json, final String field, final Class<T> type) {
@@ -331,7 +322,6 @@ class _Value extends _To {
      * @param target 目标
      * @param source 源
      * @param fields 字段
-     *
      * @return JsonObject
      */
     public static JsonObject valueCopy(final JsonObject target, final JsonObject source, final String... fields) {
@@ -345,7 +335,6 @@ class _Value extends _To {
      * @param record JsonObject
      * @param from   from
      * @param to     to
-     *
      * @return JsonObject
      */
     public static JsonObject valueCopy(final JsonObject record, final String from, final String to) {
@@ -357,7 +346,6 @@ class _Value extends _To {
      *
      * @param target  目标
      * @param sources 源
-     *
      * @return JsonObject
      */
     public static JsonObject valueAppend(final JsonObject target, final JsonObject... sources) {
@@ -370,7 +358,6 @@ class _Value extends _To {
      *
      * @param target  目标
      * @param sources 源
-     *
      * @return JsonObject
      */
     public static JsonObject valueMerge(final JsonObject target, final JsonObject... sources) {
@@ -387,7 +374,6 @@ class _Value extends _To {
      * @param record JsonObject
      * @param field  字段名
      * @param value  默认值
-     *
      * @return JsonObject
      */
     public static JsonObject valueDefault(final JsonObject record, final String field, final Object value) {
@@ -402,7 +388,6 @@ class _Value extends _To {
      *
      * @param record JsonObject
      * @param field  字段名
-     *
      * @return JsonObject
      */
     public static JsonObject valueDefault(final JsonObject record, final String field) {
@@ -419,7 +404,6 @@ class _Value extends _To {
      *
      * @param json   JsonObject
      * @param fields 字段名
-     *
      * @return JsonObject（修改过的）
      */
     public static JsonObject valueToString(final JsonObject json, final String... fields) {
@@ -435,7 +419,6 @@ class _Value extends _To {
      *
      * @param array  JsonArray
      * @param fields 字段名
-     *
      * @return JsonArray（修改过的）
      */
     public static JsonArray valueToString(final JsonArray array, final String... fields) {
@@ -454,7 +437,6 @@ class _Value extends _To {
      *
      * @param json   JsonObject
      * @param fields 字段名
-     *
      * @return JsonObject（修改过的）
      */
     public static JsonObject valueToJObject(final JsonObject json, final String... fields) {
@@ -474,7 +456,6 @@ class _Value extends _To {
      *
      * @param array  JsonArray
      * @param fields 字段名
-     *
      * @return JsonArray（修改过的）
      */
     public static JsonArray valueToJArray(final JsonArray array, final String... fields) {
@@ -491,7 +472,6 @@ class _Value extends _To {
      * @param field 字段名
      * @param value 默认值
      * @param <T>   泛型
-     *
      * @return JsonObject
      */
     public static <T> JsonObject valueMerge(final JsonObject input,

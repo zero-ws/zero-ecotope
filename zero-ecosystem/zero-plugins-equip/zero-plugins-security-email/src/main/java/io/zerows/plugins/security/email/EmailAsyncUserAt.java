@@ -4,7 +4,6 @@ import io.r2mo.jaas.auth.LoginRequest;
 import io.r2mo.jaas.session.UserAt;
 import io.r2mo.typed.enums.TypeLogin;
 import io.vertx.core.Future;
-import io.zerows.plugins.security.email.metadata.YmSecurityEmail;
 import io.zerows.plugins.security.service.AsyncUserAtBase;
 
 public abstract class EmailAsyncUserAt extends AsyncUserAtBase {
@@ -14,7 +13,7 @@ public abstract class EmailAsyncUserAt extends AsyncUserAtBase {
 
     @Override
     public Future<Boolean> isMatched(final LoginRequest request, final UserAt userAt) {
-        final YmSecurityEmail config = EmailSecurityActor.configOf();
+        final EmailAuthConfig config = EmailAuthActor.configOf();
         return this.isMatched(request, userAt, config.expiredAt());
     }
 }

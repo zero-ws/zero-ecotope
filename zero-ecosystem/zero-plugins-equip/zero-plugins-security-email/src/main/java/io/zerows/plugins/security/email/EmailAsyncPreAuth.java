@@ -4,12 +4,11 @@ import cn.hutool.core.util.RandomUtil;
 import io.r2mo.typed.annotation.SPID;
 import io.r2mo.typed.common.Kv;
 import io.vertx.core.Future;
-import io.zerows.plugins.security.email.metadata.YmSecurityEmail;
 import io.zerows.plugins.security.service.AsyncPreAuth;
 
 @SPID("PreAuth/EMAIL")
 public class EmailAsyncPreAuth implements AsyncPreAuth {
-    private final YmSecurityEmail emailConfig = EmailSecurityActor.configOf();
+    private final EmailAuthConfig emailConfig = EmailAuthActor.configOf();
 
     @Override
     public Future<Kv<String, String>> authorize(final String identifier) {

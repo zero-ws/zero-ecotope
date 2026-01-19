@@ -33,6 +33,7 @@ class EmailAddOn extends AddOnBase<EmailClient> {
 
     @Override
     protected EmailClient createInstanceBy(final String name) {
-        return EmailClient.createClient(this.vertx(), this.config());
+        final EmailConfig emailServer = EmailManager.of().configOf(this.vertx(), this.config());
+        return EmailClient.createClient(this.vertx(), emailServer);
     }
 }

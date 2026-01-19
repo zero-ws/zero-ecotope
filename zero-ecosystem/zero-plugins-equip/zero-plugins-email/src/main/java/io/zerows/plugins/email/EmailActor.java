@@ -26,7 +26,9 @@ public class EmailActor extends AbstractHActor {
         final Provider<EmailClient> provider = new EmailProvider(addOn);
         DiRegistry.of().put(addOn.getKey(), provider);
         this.vLog("[ Email ] DI 提供者 Provider 注册：provider = {}, key = {}", provider, addOn.getKey());
-        final EmailClient client = ofClient();
+
+        EmailManager.of().configOf(vertxRef, config);
+        this.vLog("[ Email ] ----> 已启用邮件服务器！");
         return Future.succeededFuture(Boolean.TRUE);
     }
 }

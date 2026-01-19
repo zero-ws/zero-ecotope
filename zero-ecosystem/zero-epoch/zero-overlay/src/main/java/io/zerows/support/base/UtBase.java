@@ -39,7 +39,6 @@ public class UtBase extends _Value {
      *
      * @param pattern 格式化模板
      * @param args    参数
-     *
      * @return 格式化后的字符串
      */
     public static String fromMessage(final String pattern, final Object... args) {
@@ -53,7 +52,6 @@ public class UtBase extends _Value {
      * @param bundle 资源绑定对象
      * @param key    资源键
      * @param args   参数
-     *
      * @return 格式化后的字符串
      */
     public static String fromResource(final ResourceBundle bundle,
@@ -66,7 +64,6 @@ public class UtBase extends _Value {
      *
      * @param pattern 格式化模板
      * @param args    参数
-     *
      * @return 格式化后的字符串
      */
     public static String fromMessageB(final String pattern, final Object... args) {
@@ -85,9 +82,6 @@ public class UtBase extends _Value {
     public static <K, V> V pool(final ConcurrentMap<K, V> pool, final K key, final Supplier<V> poolFn) {
         return UPooled.pool(pool, key, poolFn);
     }
-
-
-    // ---------------- 转换函数：to - 转成 / from - 转入
 
     // ---------------- Jvm强化函数
     public static void requireNonNull(final Object... args) {
