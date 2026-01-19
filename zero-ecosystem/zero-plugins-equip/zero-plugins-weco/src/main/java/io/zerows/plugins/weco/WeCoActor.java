@@ -20,6 +20,27 @@ import java.util.Objects;
 @Actor(value = "weco", sequence = -160)
 @Slf4j
 public class WeCoActor extends AbstractHActor {
+
+    public static WeChatClient ofClientWeChat() {
+        return WeChatAddOn.of().createSingleton();
+    }
+
+    public static WeComClient ofClientWeCom() {
+        return WeComAddOn.of().createSingleton();
+    }
+
+    public static WeCoConfig.WeChatMp configOfWeChatMp() {
+        return WeCoAsyncManager.of().configOf().getWechatMp();
+    }
+
+    public static WeCoConfig.WeChatOpen configOfWeChatOpen() {
+        return WeCoAsyncManager.of().configOf().getWechatOpen();
+    }
+
+    public static WeCoConfig.WeComCp configOfWeComCp() {
+        return WeCoAsyncManager.of().configOf().getWecomCp();
+    }
+
     @Override
     protected Future<Boolean> startAsync(final HConfig config, final Vertx vertxRef) {
         if (Objects.isNull(config) || Ut.isNil(config.options())) {

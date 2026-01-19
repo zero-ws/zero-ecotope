@@ -17,7 +17,7 @@ import io.zerows.sdk.plugins.AddOn;
 @AddOn.Name("DEFAULT_WECOM_CLIENT")
 public interface WeComClient {
     static WeComClient createClient(final Vertx vertx, final WeCoConfig config) {
-        return null;
+        return new WeComClientImpl(vertx, config);
     }
 
     /**

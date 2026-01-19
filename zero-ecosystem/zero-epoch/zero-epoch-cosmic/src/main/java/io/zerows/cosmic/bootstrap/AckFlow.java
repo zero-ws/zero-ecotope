@@ -10,6 +10,7 @@ import io.vertx.ext.web.RoutingContext;
 import io.zerows.cortex.extension.PlugAuditor;
 import io.zerows.cortex.extension.PlugRegion;
 import io.zerows.cortex.webflow.Later;
+import io.zerows.epoch.annotations.Redirect;
 import io.zerows.epoch.basicore.WebEvent;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.web.Envelop;
@@ -93,7 +94,7 @@ public final class AckFlow {
         reply(context, envelop, mediaTypes, null);
     }
 
-    private static void reply(final RoutingContext context, final Envelop envelop,
+    private static void reply(final RoutingContext context, Envelop envelop,
                               final Set<MediaType> mediaTypes, final Method sessionAction) {
         final HttpServerResponse response = context.response();
         /*
@@ -103,6 +104,22 @@ public final class AckFlow {
         if (response.closed() || response.ended()) {
             // ❌️ 响应已关闭，直接中断
             return;
+        }
+
+        /*
+         * FIX: 追加新逻辑 / Redirect
+         */
+        if (sessionAction.isAnnotationPresent(Redirect.class)) {
+            final Object redirectUri = envelop.data();
+            if (redirectUri instanceof final String uri) {
+                log.info("[ ZERO ] --> 重定向到：{}", uri);
+                response.setStatusCode(302);
+                response.putHeader(HttpHeaders.LOCATION, uri);
+                response.end();
+                return;
+            } else {
+                envelop = Envelop.failure(new _500ServerInternalException("[ ZERO ] 重定向地址必须是字符串类型！"));
+            }
         }
 
 

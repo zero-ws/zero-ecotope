@@ -81,6 +81,9 @@ public class CorsOptions implements Serializable {
             .add(HttpHeaders.CONTENT_ENCODING.toString())
             .add(HttpHeaders.CONTENT_LENGTH.toString())
             .add(HttpHeaders.CONTENT_TYPE.toString())
+            /* 第三方对接 */
+            .add(HttpHeaders.EXPIRES.toString())
+            .add("expireSeconds")
             /* User defined header */
             .add(KWeb.HEADER.X_APP_ID)
             .add(KWeb.HEADER.X_APP_KEY)
@@ -124,7 +127,7 @@ public class CorsOptions implements Serializable {
 
     @Override
     public String toString() {
-        return "CorsConfig{" +
+        return "CorsOptions{" +
             "credentials=" + this.credentials +
             ", methods=" + this.methods +
             ", headers=" + this.headers +

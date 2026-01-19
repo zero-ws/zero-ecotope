@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>后端托管模式 - 登录测试 (JSON返回版)</title>
     <style>
         /* 样式保持不变 */
@@ -100,10 +100,10 @@
 
         <button class="btn" onclick="startTestFlow()">🚀 开始测试流程</button>
         <p id="loading-msg" style="color: gray; display: none;">正在初始化...</p>
-        <p id="error-msg" class="error"></p>
+        <p class="error" id="error-msg"></p>
     </div>
 
-    <div id="success-view" class="hidden">
+    <div class="hidden" id="success-view">
         <div class="step">
             <div class="step-title">第三步 (Callback & Token)</div>
             闭环完成！后端已通过 Redirect 将浏览器送回此页面，并携带了 Token。
@@ -119,10 +119,10 @@
 
 <script>
     // ================= 配置区域 =================
-    const API_HOST = 'http://localhost:9002';
+    const API_HOST = 'http://localhost:7085';
     const API_PATHS = {
-        INIT: '/security/auth/wecom-init',
-        QRCODE: '/security/auth/wecom-qrcode'
+        INIT: '/auth/wecom-init',
+        QRCODE: '/auth/wecom-qrcode'
     };
     // ===========================================
 
@@ -151,8 +151,7 @@
             // ==========================================
             loadingMsg.textContent = '1. 正在请求 Init 获取 State...';
             const initResponse = await fetch(`${API_HOST}${API_PATHS.INIT}?targetUrl=${targetUrl}`);
-            const initData = await initResponse.json();
-
+            const initData = (await initResponse.json()).data;
             if (!initData || !initData.state) {
                 throw new Error('Init 接口返回错误，未找到 state 字段');
             }
@@ -167,7 +166,7 @@
             // 注意：这里不是直接跳转，而是 fetch 请求数据
             const qrcodeApiUrl = `${API_HOST}${API_PATHS.QRCODE}?state=${initData.state}`;
             const qrResponse = await fetch(qrcodeApiUrl);
-            const qrData = await qrResponse.json();
+            const qrData = (await qrResponse.json()).data;
 
             console.log("QRCode 接口返回:", qrData);
 
