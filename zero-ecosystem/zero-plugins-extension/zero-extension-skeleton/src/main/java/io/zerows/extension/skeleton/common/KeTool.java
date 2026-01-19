@@ -1,6 +1,5 @@
 package io.zerows.extension.skeleton.common;
 
-import io.r2mo.base.dbe.Database;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
@@ -21,16 +20,6 @@ import java.util.function.BiFunction;
 
 @Slf4j
 class KeTool {
-
-    private static String DATABASE;
-
-    static String getCatalog() {
-        if (Ut.isNil(DATABASE)) {
-            final Database database = DBSActor.ofDatabase();
-            DATABASE = database.getInstance();
-        }
-        return DATABASE;
-    }
 
     static Configuration getConfiguration() {
         return ((DSLContext) DBSActor.ofContext()).configuration();

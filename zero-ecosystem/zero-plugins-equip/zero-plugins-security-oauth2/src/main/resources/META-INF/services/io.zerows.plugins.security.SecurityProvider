@@ -1,1 +1,1 @@
-io.zerows.plugins.security.oauth2.SecurityProviderOAuth2
+io.zerows.plugins.security.oauth2.OAuth2SecurityProvider

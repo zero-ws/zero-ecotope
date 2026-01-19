@@ -195,6 +195,11 @@ public interface KWeb {
          * 1,200,000
          */
         int COOKIE = 1_200_000;
+        
+        // 🟢 推荐插入位置：静态资源
+        // 放在 Body 之前，避免为静态文件解析 Body
+        // 放在 Secure 之前，确保企微验证文件、CSS、JS 等公开资源不被拦截
+        int STATIC = 1_250_000;
         /**
          * Body Order
          * 1,300,000

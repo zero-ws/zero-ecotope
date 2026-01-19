@@ -31,6 +31,55 @@ public class DBSActor extends AbstractHActor {
 
     private static final Cc<String, DBContext> CC_CONTEXT = Cc.open();
 
+    // -------------- 此处返回的是动态的 ---------------
+    public static DBS ofDBS(final Database database) {
+        final String key = String.valueOf(database.hashCode());
+        return DBMany.of().put(key, database);
+    }
+
+    public static DataSource ofDataSource(final Database database) {
+        return ofDBS(database).getDs();
+    }
+
+    // -------------- 下边全是返回默认的 ---------------
+    public static DBS ofDBS() {
+        return DBMany.of().get();
+    }
+
+    public static DBS ofDBS(final String name) {
+        return DBMany.of().get(name);
+    }
+
+    public static Database ofDatabase() {
+        return ofDBS().getDatabase();
+    }
+
+    public static String ofDatabaseCatalog() {
+        return ofDBS().getDatabase().getInstance();
+    }
+
+    public static DataSource ofDataSource() {
+        return ofDBS().getDs();
+    }
+
+    private static DBContext context() {
+        // TODO: DBE-EXTENSION / 未来可扩展更多数据库类型
+        //       目前仅支持 JooqDatabase 类型
+        return CC_CONTEXT.pick(
+            () -> HPI.findOne(DBContext.class, DBContext.DEFAULT_CONTEXT_SPID),
+            DBContext.DEFAULT_CONTEXT_SPID);
+    }
+
+    public static <T> T ofContext(final Database database) {
+        return context().context(database);
+    }
+
+    // -------------- Legacy模式下返回 Jooq 的操作 ---------------
+
+    public static <T> T ofContext() {
+        return ofContext(ofDatabase());
+    }
+
     @Override
     protected Future<Boolean> startAsync(final HConfig config, final Vertx vertxRef) {
         if (!(config instanceof final ConfigDS configDs)) {
@@ -64,36 +113,6 @@ public class DBSActor extends AbstractHActor {
             log.error(ex.getMessage(), ex);
         }
     }
-
-
-    // -------------- 此处返回的是动态的 ---------------
-    public static DBS ofDBS(final Database database) {
-        final String key = String.valueOf(database.hashCode());
-        return DBMany.of().put(key, database);
-    }
-
-    public static DataSource ofDataSource(final Database database) {
-        return ofDBS(database).getDs();
-    }
-
-    // -------------- 下边全是返回默认的 ---------------
-    public static DBS ofDBS() {
-        return DBMany.of().get();
-    }
-
-    public static DBS ofDBS(final String name) {
-        return DBMany.of().get(name);
-    }
-
-    public static Database ofDatabase() {
-        return ofDBS().getDatabase();
-    }
-
-    public static DataSource ofDataSource() {
-        return ofDBS().getDs();
-    }
-
-    // -------------- Legacy模式下返回 Jooq 的操作 ---------------
 
     /**
      * 此方法的核心逻辑
@@ -129,21 +148,5 @@ public class DBSActor extends AbstractHActor {
     private void configure(final DBS dbs, final Vertx vertx) {
         this.vLog("[ DBS ] 初始化 DBEx 数据库引擎：`{}`，懒加载。", dbs.getDatabase().getInstance());
         context().configure(dbs, vertx);
-    }
-
-    private static DBContext context() {
-        // TODO: DBE-EXTENSION / 未来可扩展更多数据库类型
-        //       目前仅支持 JooqDatabase 类型
-        return CC_CONTEXT.pick(
-            () -> HPI.findOne(DBContext.class, DBContext.DEFAULT_CONTEXT_SPID),
-            DBContext.DEFAULT_CONTEXT_SPID);
-    }
-
-    public static <T> T ofContext(final Database database) {
-        return context().context(database);
-    }
-
-    public static <T> T ofContext() {
-        return ofContext(ofDatabase());
     }
 }

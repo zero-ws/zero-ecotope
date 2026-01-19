@@ -3,10 +3,7 @@ package io.zerows.cosmic.bootstrap;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.ext.web.Router;
-import io.vertx.ext.web.handler.BodyHandler;
-import io.vertx.ext.web.handler.CorsHandler;
-import io.vertx.ext.web.handler.ResponseContentTypeHandler;
-import io.vertx.ext.web.handler.SessionHandler;
+import io.vertx.ext.web.handler.*;
 import io.zerows.cortex.metadata.RunServer;
 import io.zerows.cortex.sdk.Axis;
 import io.zerows.epoch.basicore.option.CorsOptions;
@@ -23,6 +20,10 @@ public class AxisCommon implements Axis {
 
     @Override
     public void mount(final RunServer server, final HBundle bundle) {
+        /*
+         * 静态资源处理器
+         */
+        this.mountStatic(server, bundle);
         /*
          * CSRF Handler 设置（默认关闭）
          * 根据配置加载 Session 部分，包括不同的 Session 实现
@@ -41,6 +42,30 @@ public class AxisCommon implements Axis {
          * 跨域处理
          */
         this.mountCors(server, bundle);
+    }
+
+    /**
+     * 挂载静态资源处理器
+     * 映射逻辑：
+     * 请求 <a href="http://localhost:8080/WW_verify_xxx.txt">WW_Verify???</a>
+     * -> 寻找 classpath:static/WW_verify_xxx.txt
+     */
+    private void mountStatic(final RunServer server, final HBundle bundle) {
+        final Router router = server.refRouter();
+
+        // 1. 创建静态资源处理器，指向 "static" 目录 (src/main/resources/static)
+        final StaticHandler staticHandler = StaticHandler.create("static")
+            .setIndexPage("index.html")    // 默认首页
+            .setCachingEnabled(true)       // 开启缓存
+            .setIncludeHidden(false)       // 不包含隐藏文件
+            .setDirectoryListing(false);   // 禁止列出目录
+
+        // 2. 【关键】挂载到根路径
+        // 这样 /WW_verify_SSUl57ztEGWh1t3Q.txt 就会自动去 static 目录下找
+        router.route("/*").order(KWeb.ORDER.STATIC).handler(staticHandler);
+
+        // 💡 提示：如果你的应用有 SPA (Vue/React) 的 404 回退逻辑 (index.html)，
+        // 务必确保上面的 staticHandler 在 SPA 处理器【之前】注册。
     }
 
     private void mountCors(final RunServer server, final HBundle bundle) {
