@@ -8,9 +8,8 @@ public class ErrorCode {
 
     public static void main(final String[] args) {
         Set.of(
-            80381,
-            80382,
-            80383
+            81501,
+            81502
         ).forEach(code -> SourceError.printExist(code,
             "io.zerows", "io.r2mo"));
     }

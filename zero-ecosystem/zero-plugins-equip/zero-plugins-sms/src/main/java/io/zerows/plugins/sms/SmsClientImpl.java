@@ -18,7 +18,7 @@ import java.util.Set;
 
 @Slf4j
 @Defer
-public class SmsClientImpl implements SmsClient {
+class SmsClientImpl implements SmsClient {
 
     private static final Cc<String, UniProvider> CC_PROVIDER = Cc.openThread();
     private final Vertx vertx;

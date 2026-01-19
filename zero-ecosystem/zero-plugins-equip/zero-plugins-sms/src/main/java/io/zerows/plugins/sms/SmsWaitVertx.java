@@ -27,7 +27,7 @@ import java.util.Objects;
  * @author lang : 2025-12-08
  */
 @Slf4j
-public class SmsWaitVertx implements UniProvider.Wait<SmsConfig> {
+class SmsWaitVertx implements UniProvider.Wait<SmsConfig> {
 
     // 账号缓存
     private static final Cc<String, UniAccount> CC_ACCOUNT = Cc.open();
