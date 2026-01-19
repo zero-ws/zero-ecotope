@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>WeChat QR Code Login</title>
     <style>
         body {
@@ -34,7 +34,7 @@
 <h1>Scan WeChat QR Code to Login</h1>
 
 <div id="qrcode-container">
-    <img id="qrcode-img" src="" alt="WeChat QR Code">
+    <img alt="WeChat QR Code" id="qrcode-img" src="">
 </div>
 
 <p id="status">Initializing...</p>
@@ -51,7 +51,7 @@
             statusParagraph.textContent = 'Requesting QR Code...';
 
             // 注意：你的后端 WeChatActionQrCode 要求 Header 中必须包含 expireSeconds
-            const response = await fetch('http://localhost:9002/security/auth/wechat-qrcode', {
+            const response = await fetch('http://localhost:7085/auth/wechat-qrcode', {
                 method: 'GET', // 或 POST，取决于你的 Controller 定义
                 headers: {
                     'expireSeconds': '300' // 必填：5分钟有效期
@@ -62,7 +62,7 @@
             const res = await response.json();
 
             // 兼容性处理：取 payload 或直接取 data (取决于你的 UniResponse 序列化格式)
-            const data = res.payload || res;
+            const data = res.data || res;
 
             if (data && data.qrUrl) {
                 // 核心修改：直接将 URL 赋值给 img src
@@ -87,7 +87,7 @@
     async function checkStatus() {
         if (!uuid) return;
         try {
-            const response = await fetch('http://localhost:9002/security/auth/wechat-status', {
+            const response = await fetch('http://localhost:7085/auth/wechat-status', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json' // 这里看你的 UniMessage 接收方式
@@ -98,7 +98,7 @@
             });
 
             const res = await response.json();
-            const data = res.payload || res;
+            const data = res.data || res;
 
             console.log('Status Check:', data);
 
@@ -109,7 +109,7 @@
                 // 根据后端 WeCoStatus 枚举判断
                 if (data.status === 'SUCCESS') {
                     clearInterval(checkStatusInterval);
-                    statusParagraph.textContent = 'Login Success! OpenID: ' + data.openId;
+                    statusParagraph.textContent = 'Login Success! Token: ' + data.token;
                     statusParagraph.style.color = 'green';
 
                     // TODO:在此处进行跳转或保存 Token

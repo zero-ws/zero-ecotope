@@ -9,7 +9,7 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.QueryParam;
 
 @EndPoint
-public interface ApiComAgent {
+public interface ApiWeCpAgent {
 
     @GET
     @Path("/auth/wecom-init")

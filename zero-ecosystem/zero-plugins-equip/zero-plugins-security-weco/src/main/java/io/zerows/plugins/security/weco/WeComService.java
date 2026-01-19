@@ -16,6 +16,7 @@ import io.zerows.plugins.weco.WeCoActor;
 import io.zerows.plugins.weco.WeCoAsyncSession;
 import io.zerows.plugins.weco.WeComClient;
 import io.zerows.plugins.weco.metadata.WeCoConfig;
+import io.zerows.support.Fx;
 import jakarta.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 
@@ -42,7 +43,7 @@ public class WeComService implements WeComStub {
         // 黑名单
         final String host = URI.create(targetUrl).getHost();
         if (Objects.isNull(host) || this.config.getBlockDomains().contains(host)) {
-            throw new _81554Exception401WeComBlocked(targetUrl);
+            return Fx.failOut(_81554Exception401WeComBlocked.class, targetUrl);
         }
         // 生成流程 ID（state）
         final String state = UUID.randomUUID().toString().replace("-", "");
@@ -77,7 +78,9 @@ public class WeComService implements WeComStub {
             }
 
             // 参照 WeChat 实现，此处校验失败抛出 501 Disabled 类型异常
-            Fn.jvmKo(Objects.isNull(userId), _81553Exception401WeComAuthFailure.class);
+            if (StrUtil.isEmpty(userId)) {
+                return Fx.failOut(_81553Exception401WeComAuthFailure.class);
+            }
 
             // 3. 填充身份标识
             // 这里会自动联动设置父类的 id = userId
@@ -86,11 +89,15 @@ public class WeComService implements WeComStub {
 
             return this.authStub.login(request);
         }).compose(userAt -> {
-            Fn.jvmKo(Objects.isNull(userAt), _81553Exception401WeComAuthFailure.class);
+            if (Objects.isNull(userAt)) {
+                return Fx.failOut(_81553Exception401WeComAuthFailure.class);
+            }
 
             final TokenDynamicResponse response = new TokenDynamicResponse(userAt);
             final String token = response.getToken();
-            Fn.jvmKo(StrUtil.isEmpty(token), _81553Exception401WeComAuthFailure.class);
+            if (StrUtil.isEmpty(token)) {
+                return Fx.failOut(_81553Exception401WeComAuthFailure.class);
+            }
             log.info("[ ZERO ] ( WeCo ) WeCom 认证通过, UserID: {}", (String) ref.get());
             final String sessionKey = WeCoSession.keyOf(request.getState());
             final String cached = WeCoSession.of().get(sessionKey, Duration.ofSeconds(this.config.getExpireSeconds()));

@@ -20,7 +20,7 @@ import io.zerows.sdk.plugins.AddOn;
 public interface WeChatClient {
 
     static WeChatClient createClient(final Vertx vertx, final WeCoConfig config) {
-        return null;
+        return new WeChatClientImpl(vertx, config);
     }
 
     /**

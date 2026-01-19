@@ -29,6 +29,10 @@ class WeComClientImpl implements WeComClient {
         this.config = config;
     }
 
+    public Vertx vertx() {
+        return this.vertx;
+    }
+
     @Override
     public Future<JsonObject> authUrl(final String redirectUri, final String state) {
         final JObject params = SPI.J();

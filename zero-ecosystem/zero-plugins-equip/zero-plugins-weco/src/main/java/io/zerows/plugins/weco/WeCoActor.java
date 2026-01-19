@@ -33,6 +33,10 @@ public class WeCoActor extends AbstractHActor {
         return WeCoAsyncManager.of().configOf().getWechatMp();
     }
 
+    public static WeCoConfig.WeChatOpen configOfWeChatOpen() {
+        return WeCoAsyncManager.of().configOf().getWechatOpen();
+    }
+
     public static WeCoConfig.WeComCp configOfWeComCp() {
         return WeCoAsyncManager.of().configOf().getWecomCp();
     }

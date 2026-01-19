@@ -63,7 +63,7 @@ public interface WeChatStub {
      * @param params 回调参数
      * @return 是否验证通过
      */
-    boolean checkEcho(WeArgsSignature params);
+    Future<Boolean> checkEcho(WeArgsSignature params);
 
 
     // ==========================================

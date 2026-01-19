@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Queue
 @Slf4j
-public class ApiComActor {
+public class ApiWeCpActor {
 
     @Inject
     private WeComStub comStub;
