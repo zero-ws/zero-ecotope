@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>zero-plugins-neo4j</artifactId>
-    <name>Zero::Plugins::🧩 - Store Neo4j</name>
+    <name>Zero::Plugins::🧩 - Neo4j</name>
     <dependencies>
         <dependency>
             <groupId>io.zerows</groupId>

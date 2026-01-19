@@ -69,6 +69,11 @@
                 <artifactId>zero-plugins-weco</artifactId>
                 <version>${revision}</version>
             </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-plugins-oauth2</artifactId>
+                <version>${revision}</version>
+            </dependency>
             <!-- ================= 静态插件 ================== -->
             <dependency>
                 <groupId>io.zerows</groupId>

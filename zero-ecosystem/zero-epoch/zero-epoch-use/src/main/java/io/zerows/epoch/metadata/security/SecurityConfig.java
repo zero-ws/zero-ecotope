@@ -40,7 +40,10 @@ public class SecurityConfig implements Serializable {
 
     public SecurityConfig(final String type, final JsonObject options) {
         this.type = type;
-        this.key = type + "@" + System.identityHashCode(options);
+        // 💡 改动点：使用 options.hashCode() (内容哈希)
+        // 这样只要配置内容一样，Key 就一样，完美支持缓存去重
+        final int contentHash = (options == null) ? 0 : options.hashCode();
+        this.key = type + "@" + contentHash;
         Optional.ofNullable(options)
             .ifPresent(optionOpt -> this.options.mergeIn(optionOpt, true));
     }

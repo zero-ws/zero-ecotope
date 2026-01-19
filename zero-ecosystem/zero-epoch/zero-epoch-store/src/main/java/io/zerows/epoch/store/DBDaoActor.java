@@ -49,7 +49,6 @@ public class DBDaoActor extends AbstractHActor {
      *
      * @param config   数据库配置（只是为了触发保证合法性）
      * @param vertxRef Vert.x 实例
-     *
      * @return 初始化结果
      */
     @Override
@@ -76,8 +75,8 @@ public class DBDaoActor extends AbstractHActor {
             final Class<?> pojoCls = pojoMap.get(table);
             final MDMeta meta = new MDMeta(daoCls, pojoCls);
             repository.add(meta);
-            vLog.append(String.format("%24s", table))
-                .append(" | \uD83C\uDF97️ ").append(String.format("%-80s", daoCls.getName()))
+            vLog.append(String.format("%32s", table))
+                .append(" | \uD83C\uDF97️ ").append(String.format("%-88s", daoCls.getName()))
                 .append(" \uD83E\uDED0 ").append(pojoCls.getName()).append("\n");
         });
         this.vLog(vLog.toString(), daoMap.size());

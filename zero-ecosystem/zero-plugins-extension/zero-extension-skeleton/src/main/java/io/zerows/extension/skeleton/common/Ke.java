@@ -9,6 +9,7 @@ import io.zerows.component.log.Log;
 import io.zerows.component.log.LogModule;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.Apt;
+import io.zerows.epoch.store.DBSActor;
 import io.zerows.specification.app.HArk;
 import io.zerows.specification.modeling.metadata.HMetaAtom;
 import org.jooq.Configuration;
@@ -30,7 +31,7 @@ public class Ke extends _Um {
      * 2. getConfiguration()
      */
     public static String getDatabase() {
-        return KeTool.getCatalog();
+        return DBSActor.ofDatabaseCatalog();
     }
 
     public static String getExtension(final String name) {

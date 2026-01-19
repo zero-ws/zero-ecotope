@@ -20,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @SPID("Security/OAUTH2")
 @Slf4j
-public class SecurityProviderOAuth2 implements SecurityProvider {
+public class OAuth2SecurityProvider implements SecurityProvider {
     @Override
     public AuthenticationHandler configureHandler401(final Vertx vertxRef, final SecurityConfig config,
                                                      final AuthenticationProvider authProvider) {

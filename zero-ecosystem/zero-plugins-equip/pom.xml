@@ -13,12 +13,16 @@
     <packaging>pom</packaging>
     <name>(POM) 📚️ - Zero::Plugins</name>
     <modules>
+        <!-- Cache -->
         <module>zero-plugins-cache</module>
+        <module>zero-plugins-cache-caffeine</module>
+        <module>zero-plugins-cache-ehcache</module>
         <module>zero-plugins-elasticsearch</module>
         <module>zero-plugins-email</module>
         <module>zero-plugins-excel</module>
         <module>zero-plugins-flyway</module>
         <module>zero-plugins-neo4j</module>
+        <module>zero-plugins-oauth2</module>
         <module>zero-plugins-redis</module>
         <module>zero-plugins-session</module>
         <module>zero-plugins-sms</module>
@@ -45,7 +49,5 @@
         <module>zero-plugins-monitor</module>
         <module>zero-plugins-monitor-hawtio</module>
         <module>zero-plugins-monitor-prometheus</module>
-        <module>zero-plugins-cache-ehcache</module>
-        <module>zero-plugins-cache-caffeine</module>
     </modules>
 </project>
