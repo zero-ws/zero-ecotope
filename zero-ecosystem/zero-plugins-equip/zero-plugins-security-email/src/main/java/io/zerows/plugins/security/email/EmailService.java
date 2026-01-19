@@ -29,11 +29,13 @@ public class EmailService implements EmailStub {
 
         final EmailLoginRequest request = new EmailLoginRequest();
         request.setId(email);
+        // 验证码
         return this.loginStub.authorize(request, expiredAt).compose(captcha -> {
             final JsonObject params = new JsonObject();
             params.put("subject", subject);
             params.put("expiredAt", R2MO.uiDate(expiredAt.toSeconds(), TimeUnit.SECONDS));
             params.put("captcha", captcha);
+            // 发送短信
             return this.emailClient.sendAsync(template, params, Set.of(email))
                 .map(sent -> Ut.valueString(sent, "success"))
                 .map(Boolean::parseBoolean);
