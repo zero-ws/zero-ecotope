@@ -1,5 +1,6 @@
 package io.zerows.plugins.weco.metadata;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.r2mo.base.exchange.NormProxy;
 import io.r2mo.xync.weco.wechat.WeChatCredential;
 import io.r2mo.xync.weco.wecom.WeComCredential;
@@ -58,16 +59,19 @@ public class WeCoConfig implements Serializable {
     /**
      * 微信公众号配置域
      */
+    @JsonProperty("wechat-mp")
     private WeChatMp wechatMp;
 
     /**
      * 微信开放平台配置域
      */
+    @JsonProperty("wechat-open")
     private WeChatOpen wechatOpen;
 
     /**
      * 企业微信配置域
      */
+    @JsonProperty("wecom-cp")
     private WeComCp wecomCp;
 
     public boolean isWeChatMp() {
@@ -94,6 +98,7 @@ public class WeCoConfig implements Serializable {
         /* 回调验证的 Token */
         private String token;
         /* 回调加密 Key（可选）*/
+        @JsonProperty("aes-key")
         private String aesKey;
         /* 二维码过期时间 */
         private Integer expireSeconds = 300;
@@ -119,6 +124,7 @@ public class WeCoConfig implements Serializable {
         /**
          * 网站应用回调地址
          **/
+        @JsonProperty("redirect-uri")
         private String redirectUri;
 
         public WeChatCredential credential() {
@@ -138,21 +144,28 @@ public class WeCoConfig implements Serializable {
         /**
          * 企业ID
          */
+        @JsonProperty("corp-id")
         private String corpId;
         /**
          * 应用ID
          */
+        @JsonProperty("agent-id")
         private Integer agentId;
         private String token;
+        @JsonProperty("aes-key")
         private String aesKey;
+
+        @JsonProperty("expire-seconds")
         private Integer expireSeconds = 300;
         /**
          * 企微回调地址
          **/
+        @JsonProperty("url-callback")
         private String urlCallback;
         /**
          * 黑名单地址
          **/
+        @JsonProperty("block-domains")
         private List<String> blockDomains = new ArrayList<>();
 
         /**

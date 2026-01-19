@@ -5,6 +5,7 @@ import io.r2mo.function.Fn;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
+import io.zerows.cortex.management.StoreVertx;
 import io.zerows.plugins.weco.exception._81501Exception500WeChatConfig;
 import io.zerows.plugins.weco.exception._81551Exception500WeComConfig;
 import io.zerows.plugins.weco.metadata.WeCoConfig;
@@ -39,7 +40,7 @@ class WeCoAsyncManager {
             if (!isWeChatOpen && !isWeChatMp && !isWeCom) {
                 log.warn("[ WeCo ] 模块已加载，但部分有效配置缺失 (wechat/wecom)。");
             }
-            return null;
+            return configuration;
         }, String.valueOf(vertx.hashCode()));
     }
 
@@ -102,5 +103,10 @@ class WeCoAsyncManager {
 
     WeCoConfig configOf(final Vertx vertx) {
         return CC_CONFIG.get(String.valueOf(vertx.hashCode()));
+    }
+
+    WeCoConfig configOf() {
+        final Vertx vertx = StoreVertx.of().vertx();
+        return this.configOf(vertx);
     }
 }
