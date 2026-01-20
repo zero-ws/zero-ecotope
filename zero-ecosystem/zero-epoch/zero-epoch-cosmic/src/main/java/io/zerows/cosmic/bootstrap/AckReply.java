@@ -32,7 +32,8 @@ class AckReply implements Ack {
     }
 
     @Override
-    public void handle(final Envelop envelop, final HttpServerResponse response, final Set<MediaType> mediaTypes) {
+    public void handle(final Envelop envelop, final HttpServerResponse response,
+                       final Set<MediaType> mediaTypes) {
         /* 📤 响应处理 */
         if (response.headWritten()) {
             // ❌️ 响应头已发送，直接跳出

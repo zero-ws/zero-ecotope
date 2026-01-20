@@ -64,12 +64,12 @@ public class JwtTokenBuilder extends TokenBuilderBase {
      */
     @Override
     public String accessOf(final String token) {
-        final Kv<String, TokenType> kv = this.accessOfType(token);
+        final Kv<String, TokenType> kv = this.tokenOf(token);
         return Objects.isNull(kv) ? null : kv.key();
     }
 
     @Override
-    public Kv<String, TokenType> accessOfType(final String token) {
+    public Kv<String, TokenType> tokenOf(final String token) {
         if (Objects.isNull(token) || token.trim().isEmpty()) {
             return null;
         }

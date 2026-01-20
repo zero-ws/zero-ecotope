@@ -10,6 +10,7 @@ import io.vertx.ext.web.RoutingContext;
 import io.zerows.cortex.extension.PlugAuditor;
 import io.zerows.cortex.extension.PlugRegion;
 import io.zerows.cortex.webflow.Later;
+import io.zerows.epoch.annotations.Format;
 import io.zerows.epoch.annotations.Redirect;
 import io.zerows.epoch.basicore.WebEvent;
 import io.zerows.epoch.constant.KWeb;
@@ -66,7 +67,7 @@ public final class AckFlow {
     }
 
     public static void reply(final RoutingContext context, final Envelop envelop) {
-        reply(context, envelop, new HashSet<>());
+        reply(context, envelop, new HashSet<>(), null);
     }
 
     public static void reply(final RoutingContext context, final Envelop envelop, final Supplier<Set<MediaType>> supplier) {
@@ -74,7 +75,7 @@ public final class AckFlow {
         if (Objects.isNull(produces)) {
             produces = new HashSet<>();
         }
-        reply(context, envelop, produces);
+        reply(context, envelop, produces, null);
     }
 
     public static void reply(final RoutingContext context, final Envelop envelop, final WebEvent event) {
@@ -87,15 +88,11 @@ public final class AckFlow {
                 produces = new HashSet<>();
             }
         }
-        reply(context, envelop, produces, Objects.isNull(event) ? null : event.getAction());
-    }
-
-    private static void reply(final RoutingContext context, final Envelop envelop, final Set<MediaType> mediaTypes) {
-        reply(context, envelop, mediaTypes, null);
+        reply(context, envelop, produces, event);
     }
 
     private static void reply(final RoutingContext context, Envelop envelop,
-                              final Set<MediaType> mediaTypes, final Method sessionAction) {
+                              final Set<MediaType> mediaTypes, final WebEvent event) {
         final HttpServerResponse response = context.response();
         /*
          * FIX: java.lang.IllegalStateException: Response is closed
@@ -106,10 +103,11 @@ public final class AckFlow {
             return;
         }
 
+        final Method sessionAction = event.getAction();
         /*
          * FIX: 追加新逻辑 / Redirect
          */
-        if (sessionAction.isAnnotationPresent(Redirect.class)) {
+        if (Objects.nonNull(sessionAction) && sessionAction.isAnnotationPresent(Redirect.class)) {
             final Object redirectUri = envelop.data();
             if (redirectUri instanceof final String uri) {
                 log.info("[ ZERO ] --> 重定向到：{}", uri);
@@ -171,8 +169,8 @@ public final class AckFlow {
              * 🐛 修复BUG：在旧工作流中，下面的代码不在`OAmbit`的compose中，异步会影响这里的响应数据，可能导致
              * 响应保持原始状态，并且ACL工作流无法正常处理响应数据序列化。
              */
-            Ack.of(context).handle(processed, response, mediaTypes);
-
+            final Format format = sessionAction.getDeclaredAnnotation(Format.class);
+            Ack.of(context).handle(processed.format(format), response, mediaTypes);
 
 
             /*

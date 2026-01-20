@@ -14,7 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-plugins-security</artifactId>
+            <artifactId>zero-plugins-security-jwt</artifactId>
         </dependency>
         <dependency>
             <groupId>io.zerows</groupId>
@@ -26,8 +26,8 @@
             <artifactId>vertx-auth-oauth2</artifactId>
         </dependency>
         <dependency>
-            <groupId>io.vertx</groupId>
-            <artifactId>vertx-auth-jwt</artifactId>
+            <groupId>com.nimbusds</groupId>
+            <artifactId>nimbus-jose-jwt</artifactId>
         </dependency>
     </dependencies>
 </project>

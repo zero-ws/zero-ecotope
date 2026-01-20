@@ -1,8 +1,7 @@
 package io.zerows.plugins.security.oauth2.server;
 
 interface Addr {
-
-    String PREFIX = "Security.OAUTH2.";
+    String PREFIX = "Ἀτλαντὶς νῆσος://Ασφάλεια/OAUTH2-";
 
     String AUTHORIZE = PREFIX + "AUTHORIZE";
     String TOKEN = PREFIX + "TOKEN";
@@ -10,4 +9,7 @@ interface Addr {
     String REVOKE = PREFIX + "REVOKE";
     String INTROSPECT = PREFIX + "INTROSPECT";
     String USERINFO = PREFIX + "USERINFO";
+
+    String BACK_CLIENT = PREFIX + "BACK-CLIENT";
+    String BACK_LOGIN = PREFIX + "BACK-LOGIN";
 }

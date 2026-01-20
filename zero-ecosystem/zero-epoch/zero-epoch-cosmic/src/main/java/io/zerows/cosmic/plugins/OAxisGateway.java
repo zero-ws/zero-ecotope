@@ -1,9 +1,8 @@
 package io.zerows.cosmic.plugins;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.component.log.LogO;
-import io.zerows.cosmic.bootstrap.AxisExtension;
 import io.zerows.cortex.sdk.Axis;
+import io.zerows.cosmic.bootstrap.AxisExtension;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
 
@@ -30,8 +29,4 @@ public interface OAxisGateway {
     }
 
     Axis getAxis(HBundle owner);
-
-    default LogO logger() {
-        return Ut.Log.websocket(this.getClass());
-    }
 }

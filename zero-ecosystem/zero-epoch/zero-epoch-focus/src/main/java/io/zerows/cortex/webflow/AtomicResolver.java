@@ -34,7 +34,7 @@ import java.util.concurrent.ConcurrentMap;
  * - default:                  {@link ResolverJson} (application/json)
  * - application/json:         {@link ResolverJson}
  * - application/octet-stream: {@link ResolverBuffer}
- * - multipart/form-data:      {@link ResolverForm}
+ * - multipart/form-data:      {@link ResolverUpload}
  * </pre>
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
@@ -45,7 +45,8 @@ class AtomicResolver {
             this.put("default", ResolverJson.class.getName());
             this.put(MediaType.APPLICATION_JSON, ResolverJson.class.getName());
             this.put(MediaType.APPLICATION_OCTET_STREAM, ResolverBuffer.class.getName());
-            this.put(MediaType.MULTIPART_FORM_DATA, ResolverForm.class.getName());
+            this.put(MediaType.MULTIPART_FORM_DATA, ResolverUpload.class.getName());
+            this.put(MediaType.APPLICATION_FORM_URLENCODED, ResolverForm.class.getName());
         }
     };
 

@@ -50,18 +50,18 @@ public class OAuth2ClientActor extends AbstractHActor {
             final List<Oauth2RegisteredClient> processed = new ArrayList<>();
             return db.insertAsync(compared.queueC())
                 .map(inserted -> {
-                    this.vLog("[ OAuth2 ] --> ADD / 新增：{}", inserted.size());
+                    this.vLog("[ OAuth2Client ] --> ADD / 新增：{}", inserted.size());
                     processed.addAll(inserted);
                     return true;
                 })
                 .compose(nil -> db.updateAsync(compared.queueU()))
                 .map(updated -> {
-                    this.vLog("[ OAuth2 ] --> UPDATE / 修改：{}", updated.size());
+                    this.vLog("[ OAuth2Client ] --> UPDATE / 修改：{}", updated.size());
                     processed.addAll(updated);
                     return processed;
                 });
         }).compose(processed -> {
-            this.vLog("[ OAuth2 ] 合计处理注册客户端数量：{}", processed.size());
+            this.vLog("[ OAuth2Client ] 合计处理注册客户端数量：{}", processed.size());
             return Future.succeededFuture(processed);
         });
     }

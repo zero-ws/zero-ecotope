@@ -21,6 +21,7 @@ class WingsJson extends WingsBase {
 
     @Override
     public void output(final HttpServerResponse response, final Envelop envelop) {
+        // 全局模式
         if (this.isFreedom()) {
             final String content = this.toFreedom(envelop);
             if (Objects.isNull(content)) {
@@ -38,13 +39,13 @@ class WingsJson extends WingsBase {
                 log.info("[ ZERO ] Freedom 模式已启用 successfully.");
                 response.end(content);
             }
-        } else {
-            /*
-             * Default String mode
-             * 1. Content-Type is `* / *` formatFail
-             * 2. Replied body directly
-             */
-            response.end(envelop.outString());
+            return;
         }
+        /*
+         * Default String mode
+         * 1. Content-Type is `* / *` formatFail
+         * 2. Replied body directly
+         */
+        response.end(envelop.outString());
     }
 }
