@@ -9,4 +9,5 @@ interface Addr {
     String REVOKE = PREFIX + "REVOKE";
     String INTROSPECT = PREFIX + "INTROSPECT";
     String USERINFO = PREFIX + "USERINFO";
+
 }

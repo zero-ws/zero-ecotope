@@ -5,13 +5,12 @@ import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.EndPoint;
 import io.zerows.epoch.annotations.Format;
 import jakarta.ws.rs.*;
-import jakarta.ws.rs.extension.BodyParam;
 
 @EndPoint
 public interface OAuth2Agent {
 
     @GET
-    @Path("/oauth2/authorize")
+    @Path(OAuth2Api.OAUTH2_AUTHORIZE)
     @Address(Addr.AUTHORIZE)
     JsonObject authorize(
         @QueryParam("response_type") String responseType,
@@ -22,7 +21,7 @@ public interface OAuth2Agent {
     );
 
     @POST
-    @Path("/oauth2/token")
+    @Path(OAuth2Api.OAUTH2_TOKEN)
     @Address(Addr.TOKEN)
     @Format(smart = true, freedom = true)
     JsonObject token(
@@ -61,23 +60,28 @@ public interface OAuth2Agent {
     );
 
     @GET
-    @Path("/oauth2/jwks")
+    @Path(OAuth2Api.OAUTH2_JWKS)
     @Address(Addr.JWKS)
     @Format(freedom = true)
     JsonObject jwks();
 
     @POST
-    @Path("/oauth2/revoke")
+    @Path(OAuth2Api.OAUTH2_REVOKE)
     @Address(Addr.REVOKE)
-    JsonObject revoke(@BodyParam JsonObject body);
+    @Format(freedom = true, smart = true)
+    JsonObject revoke(@HeaderParam("Authorization") String authorization,
+                      @FormParam("token") String token);
 
     @POST
-    @Path("/oauth2/introspect")
+    @Path(OAuth2Api.OAUTH2_INTROSPECT)
     @Address(Addr.INTROSPECT)
-    JsonObject introspect(@BodyParam JsonObject body);
+    @Format(freedom = true, smart = true)
+    JsonObject introspect(@HeaderParam("Authorization") String authorization,
+                          @FormParam("token") String token);
 
     @GET
-    @Path("/userinfo")
+    @Path(OAuth2Api.OAUTH2_USERINFO)
     @Address(Addr.USERINFO)
+    @Format(freedom = true)
     JsonObject userinfo(@HeaderParam("Authorization") String authorization);
 }
