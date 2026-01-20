@@ -7,7 +7,7 @@ import java.lang.reflect.Proxy;
 public class DiProxyInstance {
 
     private static final Cc<Class<?>, DiProxyInstance> CC_V_INSTANCE = Cc.open();
-    private transient final Class<?> interfaceCls;
+    private final Class<?> interfaceCls;
 
     private DiProxyInstance(final Class<?> interfaceCls) {
         this.interfaceCls = interfaceCls;

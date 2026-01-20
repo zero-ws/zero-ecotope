@@ -30,12 +30,12 @@ public class TokenBuilderAES extends TokenBuilderBase {
     public String accessOf(final String token) {
         // 原来的写法是先 tokenValidate (解密1次) 再 tokenSubject (解密2次)
         // 现在直接调用 validateAndExtract，只解密1次
-        final Kv<String, TokenType> kv = this.accessOfType(token);
+        final Kv<String, TokenType> kv = this.tokenOf(token);
         return Objects.isNull(kv) ? null : kv.key();
     }
 
     @Override
-    public Kv<String, TokenType> accessOfType(final String token) {
+    public Kv<String, TokenType> tokenOf(final String token) {
         return this.generator.validateAndExtract(token);
     }
 

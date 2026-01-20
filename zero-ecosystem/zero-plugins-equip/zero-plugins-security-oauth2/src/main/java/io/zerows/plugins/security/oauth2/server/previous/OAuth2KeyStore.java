@@ -1,4 +1,4 @@
-package io.zerows.plugins.security.oauth2.server.service;
+package io.zerows.plugins.security.oauth2.server.previous;
 
 import io.vertx.core.Vertx;
 import io.vertx.ext.auth.PubSecKeyOptions;

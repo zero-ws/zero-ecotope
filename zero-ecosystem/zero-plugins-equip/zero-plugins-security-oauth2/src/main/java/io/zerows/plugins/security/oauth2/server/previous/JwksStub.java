@@ -1,4 +1,4 @@
-package io.zerows.plugins.security.oauth2.server.service;
+package io.zerows.plugins.security.oauth2.server.previous;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;

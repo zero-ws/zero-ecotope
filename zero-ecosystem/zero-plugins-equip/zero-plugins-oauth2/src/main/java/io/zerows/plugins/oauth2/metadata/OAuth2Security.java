@@ -46,6 +46,12 @@ public class OAuth2Security implements Serializable {
     private String issuer = "https://www.zerows.io";
 
     /**
+     * 令牌类型
+     */
+    @JsonProperty("token-type")
+    private String tokenType = "Bearer";
+
+    /**
      * 是否启用资源服务器保护
      * YAML: resourceEnabled: true
      */

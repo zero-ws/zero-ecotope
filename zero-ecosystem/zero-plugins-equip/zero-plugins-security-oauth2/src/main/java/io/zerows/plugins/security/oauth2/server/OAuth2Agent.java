@@ -24,7 +24,41 @@ public interface OAuth2Agent {
     @POST
     @Path("/oauth2/token")
     @Address(Addr.TOKEN)
-    JsonObject token(@BodyParam JsonObject body);
+    @Format(smart = true, freedom = true)
+    JsonObject token(
+        // ---------------------------------------------------------
+        // 1. 核心参数 (Core)
+        // ---------------------------------------------------------
+        @FormParam("grant_type") String grantType,
+        @FormParam("scope") String scope,
+
+        // ---------------------------------------------------------
+        // 2. 授权码模式 & PKCE (Authorization Code)
+        // ---------------------------------------------------------
+        @FormParam("code") String code,
+        @FormParam("redirect_uri") String redirectUri,
+        @FormParam("code_verifier") String codeVerifier, // PKCE 专用
+
+        // ---------------------------------------------------------
+        // 3. 客户端身份 (Client Identity)
+        // 支持 Body 传参 (client_id, client_secret)
+        // 也支持 Header 传参 (Authorization: Basic ...)
+        // ---------------------------------------------------------
+        @FormParam("client_id") String clientId,
+        @FormParam("client_secret") String clientSecret,
+        @HeaderParam("Authorization") String authorization,
+
+        // ---------------------------------------------------------
+        // 4. 刷新令牌模式 (Refresh Token)
+        // ---------------------------------------------------------
+        @FormParam("refresh_token") String refreshToken,
+
+        // ---------------------------------------------------------
+        // 5. 密码模式 (Password - 仅作兼容，现代不推荐)
+        // ---------------------------------------------------------
+        @FormParam("username") String username,
+        @FormParam("password") String password
+    );
 
     @GET
     @Path("/oauth2/jwks")

@@ -35,7 +35,7 @@ public class JwtToken implements Token {
         this.options = new JWTAuthOptions(options);
     }
 
-    static JwtToken of() {
+    public static JwtToken of() {
         return CC_TOKEN.pick(JwtToken::new);
     }
 

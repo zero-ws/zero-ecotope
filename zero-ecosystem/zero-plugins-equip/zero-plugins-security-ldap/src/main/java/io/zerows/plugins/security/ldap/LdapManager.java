@@ -29,7 +29,7 @@ import java.util.Objects;
 @Slf4j
 public class LdapManager {
 
-    private static final String LOG_PREFIX = "[ ZERO ] ( LDAP ) ";
+    private static final String LOG_PREFIX = "[ PLUG ] ( LDAP ) ";
     private static final Cc<Integer, LdapManager> CC_MANAGER = Cc.open();
 
     private final Vertx vertxRef;
