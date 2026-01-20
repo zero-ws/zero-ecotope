@@ -3,14 +3,16 @@
 [![Maven Central](https://img.shields.io/maven-central/v/io.zerows/rachel-momo.svg?label=Rachel%20Momo&style=for-the-badge&color=blue)](https://mvnrepository.com/artifact/io.zerows/rachel-momo)  [![Maven Central](https://img.shields.io/maven-central/v/io.zerows/r2mo-rapid.svg?label=R2MO%20Rapid&style=for-the-badge&color=green)](https://mvnrepository.com/artifact/io.zerows/r2mo-rapid)
 Zero Waiting
 
-> For Rachel Momo
+> For [Rachel Momo](https://www.weibo.com/maoxiaotong0216)
 
-语雀：https://www.yuque.com/jiezizhu/r2mo
+![ZERO](docs/images/logo.jpeg)
 
 ## 0. 引导
 
-目前未发布正式版本，等手中项目全部迁移完成之后会发布 `1.0.0`
-正式版本，有兴趣的朋友可以参与测试，测试项目地址：<https://gitee.com/zero-ws/zero-rachel-momo>。
+- 文档：<https://www.yuque.com/jiezizhu/r2mo>
+- 示例：<https://gitee.com/zero-ws/zero-rachel-momo>
+
+---
 
 ### 0.1. 主页信息
 
