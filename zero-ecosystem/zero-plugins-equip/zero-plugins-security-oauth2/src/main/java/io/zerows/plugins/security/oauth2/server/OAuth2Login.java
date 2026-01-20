@@ -5,6 +5,7 @@ import io.vertx.core.Future;
 import io.vertx.ext.web.Session;
 import io.zerows.epoch.annotations.EndPoint;
 import io.zerows.epoch.annotations.Redirect;
+import io.zerows.plugins.oauth2.OAuth2Constant;
 import io.zerows.plugins.security.service.AsyncUserAt;
 import io.zerows.plugins.security.service.BasicLoginRequest;
 import jakarta.ws.rs.FormParam;
@@ -44,10 +45,18 @@ public class OAuth2Login {
             log.info("[ ZERO ] 用户登录成功: {}", username);
 
             // 3.1 写入 Session (HTTP 层面操作)
+            // ---------------------------------------------------------
+            // ✅ 核心修复：显式写入 Session
+            // ---------------------------------------------------------
+            // 只有放入 Session，下一次请求(AuthFilter)才能读到！
             if (session != null) {
-                session.put("user", userAt.id().toString());
-                // 防止会话固化
-                session.regenerateId();
+                // 存入 ID
+                session.put(OAuth2Constant.K_SESSION, userAt.id().toString());
+
+                // ⚠️ 暂时注释 regenerateId 防止版本冲突，等跑通后再开启
+                // context.session().regenerateId();
+            } else {
+                log.error("Session 是空的！无法保存登录状态！");
             }
 
             // 3.2 计算成功跳转地址

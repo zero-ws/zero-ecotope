@@ -13,7 +13,6 @@ import io.zerows.epoch.web.Filter;
 import io.zerows.specification.development.compiled.HBundle;
 import lombok.extern.slf4j.Slf4j;
 
-import java.lang.reflect.Method;
 import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
@@ -50,9 +49,6 @@ public class AxisFilter implements Axis {
         final Route route = runRoute.instance();
         route.handler(context -> {
             final WebEvent event = runRoute.refEvent();
-
-            final Method method = event.getAction();
-
             try {
                 final Filter filter = (Filter) event.getProxy();
                 // Init configure;
@@ -60,14 +56,26 @@ public class AxisFilter implements Axis {
                 // Extract Request/Response
                 final HttpServerRequest request = context.request();
                 final HttpServerResponse response = context.response();
-                filter.doFilter(request, response);
 
-                // Check whether called next or response
-                if (!response.ended()) {
-                    context.next();
-                }
+                // ✅ 核心修正：全异步调度
+                // 1. 移除了同步的 context.next()，防止与 HttpFilter 内部的自动 next 冲突
+                // 2. 挂载 onFailure 处理 Filter 内部抛出的异步异常
+                filter.doFilter(request, response).onFailure(ex -> {
+                    log.error("[ ZERO ] Filter 执行异常", ex);
+                    // 兜底保护：如果 Filter 报错且未结束响应，转交给 Vert.x 异常处理
+                    if (!response.ended()) {
+                        context.fail(ex);
+                    }
+                });
+
+                // ❌ 已删除旧代码：
+                // if (!response.ended()) { context.next(); }
+                // 现在的逻辑：是否 next 由 Filter 返回的 Future 完成后自行决定 (HttpFilter 基类负责)
+
             } catch (final Throwable ex) {
+                // 捕获 init 阶段或同步调用产生的 RuntimeException
                 log.error("[ ZERO ] JSR-340 机制异常", ex);
+                context.fail(ex);
             }
         });
     }

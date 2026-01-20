@@ -4,6 +4,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.EndPoint;
 import io.zerows.epoch.annotations.Format;
+import io.zerows.epoch.annotations.Redirect;
 import jakarta.ws.rs.*;
 
 @EndPoint
@@ -12,6 +13,7 @@ public interface OAuth2Agent {
     @GET
     @Path(AddrApi.OAUTH2_AUTHORIZE)
     @Address(Addr.AUTHORIZE)
+    @Redirect
     @Format(smart = true, freedom = true)
     JsonObject authorize(
         @QueryParam("response_type") String responseType,

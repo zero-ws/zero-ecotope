@@ -36,7 +36,7 @@ public class AuthService implements AuthStub {
     }
 
     @Override
-    public Future<JsonObject> authorizeAsync(final JsonObject request) {
+    public Future<String> authorizeAsync(final JsonObject request) {
         // 1. 提取参数
         final String responseType = request.getString(OAuth2Constant.RESPONSE_TYPE);
         final String clientId = request.getString(OAuth2Constant.CLIENT_ID);
@@ -123,8 +123,10 @@ public class AuthService implements AuthStub {
                             location.append("&state=").append(state);
                         }
 
+                        final String loggedUrl = location.toString();
+                        log.info("{} 最终重定向：{}", OAuth2Constant.K_PREFIX, loggedUrl);
                         // 返回 JSON 包含重定向地址 (Agent 层决定是直接 302 还是返回 JSON 给前端)
-                        return new JsonObject().put("location", location.toString());
+                        return loggedUrl;
                     });
             });
     }

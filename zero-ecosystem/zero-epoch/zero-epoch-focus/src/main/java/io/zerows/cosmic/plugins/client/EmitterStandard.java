@@ -20,11 +20,11 @@ import javax.net.ssl.SSLContext;
 import java.util.Objects;
 import java.util.function.Function;
 
-class StandardEmitter extends AbstractEmitter {
+class EmitterStandard extends EmitterBase {
 
     private transient CloseableHttpClient client;
 
-    StandardEmitter(final KIntegration integration) {
+    EmitterStandard(final KIntegration integration) {
         super(integration);
         /* Call initialize here */
         this.initialize();

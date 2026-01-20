@@ -14,6 +14,7 @@ package io.zerows.plugins.oauth2;
 public interface OAuth2Constant {
 
     String K_PREFIX = "[ PLUG ] ( OAuth2 )";
+    String K_SESSION = "user-context";
 
     // ---------------------------------------------------------
     // 1. 核心标准参数 (RFC 6749 Core)

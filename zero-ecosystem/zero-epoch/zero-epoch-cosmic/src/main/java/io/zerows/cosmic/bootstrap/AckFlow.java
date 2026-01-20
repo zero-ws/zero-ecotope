@@ -100,6 +100,7 @@ public final class AckFlow {
          */
         if (response.closed() || response.ended()) {
             // ❌️ 响应已关闭，直接中断
+            log.error("[ ZERO ] 响应已关闭，无法继续处理！");
             return;
         }
 

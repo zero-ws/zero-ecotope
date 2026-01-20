@@ -19,8 +19,8 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
-class LegacyEmitter extends AbstractEmitter {
-    LegacyEmitter(final KIntegration integration) {
+class EmitterLegacy extends EmitterBase {
+    EmitterLegacy(final KIntegration integration) {
         super(integration);
     }
 

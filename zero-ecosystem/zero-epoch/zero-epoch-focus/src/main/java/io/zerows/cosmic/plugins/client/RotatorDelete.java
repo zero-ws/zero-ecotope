@@ -4,9 +4,9 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.platform.metadata.KIntegration;
 import org.apache.http.client.methods.HttpDelete;
 
-public class DeleteRotator extends AbstractRotator {
+public class RotatorDelete extends RotatorBase {
 
-    DeleteRotator(final KIntegration integration) {
+    RotatorDelete(final KIntegration integration) {
         super(integration);
     }
 

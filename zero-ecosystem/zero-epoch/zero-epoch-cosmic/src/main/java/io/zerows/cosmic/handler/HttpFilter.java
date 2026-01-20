@@ -1,7 +1,7 @@
 package io.zerows.cosmic.handler;
 
 import io.r2mo.function.Fn;
-import io.vertx.core.VertxException;
+import io.vertx.core.Future;
 import io.vertx.core.http.Cookie;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServerRequest;
@@ -20,33 +20,45 @@ import java.util.stream.Collectors;
 
 /**
  * <pre>
- * 🛡️ 核心组件：HTTP 过滤器基类
+ * 🛡️ 核心组件：HTTP 过滤器基类 (HttpFilter)
  *
- * 🎯 作用：
- * 该类是所有自定义 HTTP 过滤器的父类，提供了丰富的基础功能。
- * 它实现了 `Filter` 接口，并负责与 Vert.x 的 `RoutingContext` 进行交互。
+ * 🎯 核心职责：
+ * 本类作为所有 HTTP 过滤器的父类，实现了 <b>模板方法模式 (Template Method)</b>。
+ * 它接管了复杂的流程控制，让开发者只需关注业务逻辑（放行还是拦截）。
  *
- * ⚡️ 核心功能：
- * 1. 上下文管理：自动注入和管理 `RoutingContext`。
- * 2. 数据传递：提供 `put/get` 方法在 Filter 链和 Agent 之间传递数据。
- * 3. 流程控制：实现了标准的 `doFilter` 模板方法，确立了 "执行 -> 异常处理 -> 放行" 的标准流程。
- * 4. 辅助工具：提供 Session、Cookie、Logger 等常用对象的快捷访问。
+ * ⚙️ 核心机制：
+ * 1. <b>智能调度 (Smart Dispatch)</b>：
+ * - 优先检查子类是否实现了异步方法 ({@code doAsyncXxx})。
+ * - 若未实现 (返回 null)，自动降级调用同步方法 ({@code doXxx}) 并将其包装为 Future。
  *
- * ⚙️ 执行流程：
- * init() -> doFilter() [doGet/doPost...] -> doFilterContinue() -> Next Filter/Handler
+ * 2. <b>自动编排 (Auto Orchestration)</b>：
+ * - 开发者无需手动调用 {@code context.next()}。
+ * - 当业务逻辑执行成功 (Future completed) 且响应未结束时，本类会自动触发 {@code next()}。
+ *
+ * 3. <b>双重保险 (Safety Guard)</b>：
+ * - 内置防重入锁 ({@code autoNextTriggered})，防止因并发或逻辑错误导致多次调用 {@code next()}。
+ * - 自动识别响应状态，若业务代码调用了 {@code response.end()}，自动停止流转。
  * </pre>
  */
 public abstract class HttpFilter implements Filter {
-    private boolean isNexted = false;
+
+    /**
+     * 内部流转标记，用于防止父类逻辑或子类手动调用导致重复触发 next()。
+     * 这解决了 Vert.x 中常见的 "Double Next" 问题。
+     */
+    private boolean autoNextTriggered = false;
+
+    /**
+     * 当前请求的路由上下文
+     */
     private RoutingContext context;
 
     /**
      * <pre>
-     * 🏁 初始化过滤器上下文
+     * 🏁 初始化上下文
      *
-     * 行为：
-     * 接收 Vert.x 的 `RoutingContext` 并保存，用于后续操作。
-     * 同时调用无参的 `init()` 供子类进行自定义初始化。
+     * 注入 Vert.x 的 RoutingContext，供后续流程使用。
+     * 同时调用无参的 {@link #init()} 供子类扩展。
      * </pre>
      *
      * @param context Vert.x 路由上下文
@@ -59,32 +71,154 @@ public abstract class HttpFilter implements Filter {
 
     /**
      * <pre>
-     * 💾 写入上下文数据
+     * 🚦 核心分发与编排逻辑 (Template Method)
      *
-     * 作用：
-     * 将键值对数据存储到 `RoutingContext` 中。
-     * 这些数据可以在后续的 Filter 或 Handler (Agent) 中被读取。
+     * 这是框架调用的主入口。它不包含具体业务逻辑，而是负责：
+     * 1. <b>Method 分发</b>：根据 HTTP Method 找到对应的处理方法。
+     * 2. <b>策略选择</b>：决定是直接执行异步任务，还是执行同步任务并 Bridge 成异步任务。
+     * 3. <b>结果处理</b>：
+     * - {@code onSuccess}: 进入 {@link #tryAutoNext} 尝试放行。
+     * - {@code onFailure}: 转交 {@link AckFailure} 进行统一异常响应。
      * </pre>
      *
-     * @param key   数据的键名
-     * @param value 数据的值
+     * @param request  HTTP 请求
+     * @param response HTTP 响应
+     * @return 统一的异步任务句柄
+     */
+    @Override
+    public Future<Void> doFilter(final HttpServerRequest request,
+                                 final HttpServerResponse response) {
+        final HttpMethod method = request.method();
+
+        Future<Void> task;
+
+        try {
+            // 1. 尝试调度：优先 Async，降级 Sync
+            if (HttpMethod.GET == method) {
+                task = this.dispatch(this.doAsyncGet(request, response), () -> this.doGet(request, response));
+            } else if (HttpMethod.POST == method) {
+                task = this.dispatch(this.doAsyncPost(request, response), () -> this.doPost(request, response));
+            } else if (HttpMethod.PUT == method) {
+                task = this.dispatch(this.doAsyncPut(request, response), () -> this.doPut(request, response));
+            } else if (HttpMethod.DELETE == method) {
+                task = this.dispatch(this.doAsyncDelete(request, response), () -> this.doDelete(request, response));
+            } else {
+                // 其他方法 (如 OPTIONS, HEAD) 默认视为成功，进入自动放行流程
+                task = Future.succeededFuture();
+            }
+        } catch (final Throwable ex) {
+            // 捕获分发过程中的同步异常（如 dispatch 内部错误）
+            task = Future.failedFuture(ex);
+        }
+
+        // 2. 自动编排 (Auto Orchestration)
+        return task
+            .onSuccess(v -> this.tryAutoNext(response)) // 成功：尝试自动下一级
+            .onFailure(ex -> AckFailure.of().reply(this.context, ex)); // 失败：交给异常处理
+    }
+
+    /**
+     * <pre>
+     * ⚖️ 调度器：异步优先策略
+     *
+     * 判断子类是否重写了异步方法 (返回非 null)。
+     * - 是：直接使用子类的 Future。
+     * - 否：将同步方法的 {@link Runnable} 包装成 {@link Future} 执行。
+     * </pre>
+     *
+     * @param asyncResult 子类异步方法的返回值 (可能为 null)
+     * @param syncRunner  对应的同步方法封装
+     * @return 统一的 Future 对象
+     */
+    private Future<Void> dispatch(final Future<Void> asyncResult, final Runnable syncRunner) {
+        // 如果子类重写了 doAsyncXxx (返回非null)，直接使用
+        if (asyncResult != null) {
+            return asyncResult;
+        }
+
+        // 否则执行同步方法，并将其“异步化”
+        // 这样可以捕获同步代码块中的 RuntimeException 并通过 Future 传递
+        return Future.future(promise -> {
+            try {
+                syncRunner.run();
+                promise.complete();
+            } catch (final Throwable e) {
+                promise.fail(e);
+            }
+        });
+    }
+
+    /**
+     * <pre>
+     * 🤖 自动编排核心 (Auto Pilot)
+     *
+     * 决定是否调用 {@code context.next()}。
+     * 只有同时满足以下条件才会放行：
+     * 1. 之前没有触发过 next (防重入)。
+     * 2. 响应对象没有结束 (未调用 end/close)。
+     *
+     * 💡 开发者提示：
+     * 如果你在业务逻辑中调用了 {@code response.end()}，此方法会自动感知并停止链条流转。
+     * </pre>
+     *
+     * @param response HTTP 响应对象
+     */
+    private void tryAutoNext(final HttpServerResponse response) {
+        // 双重保险：
+        // 1. 开发者如果已经在代码里手动调了 next (虽然不建议)，这里就不调了
+        // 2. 这里的标记是防止本方法被多次调用 (例如 Future 重复回调)
+        if (this.autoNextTriggered) {
+            return;
+        }
+
+        // 核心判断：开发者是否拦截了请求？
+        // 拦截标志 = response.end() / response.close()
+        // 此时响应已发送给客户端，不应继续执行后续 Handler
+        if (response.ended() || response.closed()) {
+            return;
+        }
+
+        // 标记并放行
+        this.autoNextTriggered = true;
+        this.context.next();
+    }
+
+    // =========================================================================
+    // 🛠️ 辅助工具
+    // =========================================================================
+
+    /**
+     * <pre>
+     * ⏭️ 手动放行 (Escape Hatch)
+     *
+     * ⚠️ 通常情况下，开发者不需要也不应该调用此方法。基类会自动处理。
+     * 仅在极其特殊的复杂异步场景下，需要提前手动放行时使用。
+     * 调用此方法会更新 {@code autoNextTriggered} 标记，阻止基类后续的自动放行。
+     * </pre>
+     */
+    protected void next() {
+        if (!this.autoNextTriggered && !this.context.response().ended()) {
+            this.autoNextTriggered = true;
+            this.context.next();
+        }
+    }
+
+    /**
+     * 向路由上下文中写入数据
+     *
+     * @param key   键
+     * @param value 值
      */
     protected void put(final String key, final Object value) {
         this.context.put(key, value);
     }
 
     /**
-     * <pre>
-     * 📖 读取上下文数据
+     * 从路由上下文中读取数据 (自动转型)
      *
-     * 作用：
-     * 从 `RoutingContext` 中获取指定键名的数据。
-     * 支持泛型自动转型。
-     * </pre>
-     *
-     * @param key 数据的键名
-     * @param <T> 数据类型
-     * @return 获取到的数据，若不存在则返回 null
+     * @param key 键
+     * @param <T> 目标类型
+     * @return 值，若无则返回 null
      */
     @SuppressWarnings("unchecked")
     protected <T> T get(final String key) {
@@ -93,103 +227,21 @@ public abstract class HttpFilter implements Filter {
     }
 
     /**
-     * <pre>
-     * 🚦 核心过滤逻辑执行器
-     *
-     * 行为：
-     * 1. 根据 HTTP Method 分发请求到 `doGet`, `doPost` 等方法。
-     * 2. 捕获执行过程中的所有异常，并转交给 `AckFailure` 进行统一处理。
-     * 3. 无论执行是否成功（除非响应已结束），都会尝试调用 `doFilterContinue` 继续执行链条。
-     *
-     * ⚠️ 注意：
-     * 这是模板方法，通常不需要子类覆盖，除非需要改变核心分发流程。
-     * </pre>
-     *
-     * @param request  HTTP 请求对象
-     * @param response HTTP 响应对象
-     * @throws VertxException Vert.x 异常
-     */
-    @Override
-    public void doFilter(final HttpServerRequest request,
-                         final HttpServerResponse response) throws VertxException {
-        final HttpMethod method = request.method();
-
-        try {
-            if (HttpMethod.GET == method) {
-                this.doGet(request, response);
-            } else if (HttpMethod.POST == method) {
-                this.doPost(request, response);
-            } else if (HttpMethod.PUT == method) {
-                this.doPut(request, response);
-            } else if (HttpMethod.DELETE == method) {
-                this.doDelete(request, response);
-            }
-            this.doFilterContinue(request, response);
-        } catch (final Throwable ex) {
-            // 直接抛出异常，转交 Handler
-            AckFailure.of().reply(this.context, ex);
-        }
-    }
-
-    /**
-     * <pre>
-     * ⏭️ 过滤器链流转控制
-     *
-     * 行为：
-     * 判断是否需要将请求传递给下一个处理器。
-     * 如果响应已经关闭（ended），或已经流转过（isNexted），则停止流转。
-     * 否则，调用 `context.next()` 驱动 Vert.x 路由链继续执行。
-     * </pre>
-     *
-     * @param request  HTTP 请求对象
-     * @param response HTTP 响应对象
-     */
-    private void doFilterContinue(final HttpServerRequest request,
-                                  final HttpServerResponse response) {
-        // If response end it means that it's not needed to move next.
-        if (this.isNexted) {
-            return;
-        }
-        if (response.ended()) {
-            return;
-        }
-
-        // 标记放行
-        this.isNexted = true;
-        this.context.next();
-    }
-
-    /**
-     * <pre>
-     * 📦 获取 Session 对象
-     *
-     * @return 当前请求关联的 Session
-     * </pre>
+     * 获取当前 Session
      */
     protected Session getSession() {
         return this.context.session();
     }
 
     /**
-     * <pre>
-     * 🧩 获取路由上下文
-     *
-     * @return 原始的 Vert.x RoutingContext 对象
-     * </pre>
+     * 获取原始 RoutingContext
      */
     protected RoutingContext getContext() {
         return this.context;
     }
 
     /**
-     * <pre>
-     * 🍪 获取 Cookies 集合
-     *
-     * 行为：
-     * 将请求中的 Cookie 列表转换为 Map 结构，方便按名称查找。
-     *
-     * @return Cookie 名称到 Cookie 对象的映射表
-     * </pre>
+     * 获取所有 Cookie (Map 形式)
      */
     protected Map<String, Cookie> getCookies() {
         return this.context.request()
@@ -199,28 +251,14 @@ public abstract class HttpFilter implements Filter {
     }
 
     /**
-     * <pre>
-     * 📝 获取日志记录器
-     *
-     * 行为：
-     * 根据当前类的实际类型获取 SLF4J Logger 实例。
-     *
-     * @return Logger 实例
-     * </pre>
+     * 获取当前类的 Logger 实例
      */
     protected Logger log() {
         return LoggerFactory.getLogger(this.getClass());
     }
 
     /**
-     * <pre>
-     * ⚙️ 自定义初始化钩子
-     *
-     * 作用：
-     * 供子类覆盖，用于执行特定的初始化逻辑。
-     * 在 `init(RoutingContext)` 中被自动调用。
-     * 默认实现会检查 context 是否为空，确保初始化流程正确。
-     * </pre>
+     * 子类初始化钩子，用于校验上下文是否注入成功
      */
     public void init() {
         Fn.jvmKo(Objects.isNull(this.context), _40051Exception500FilterContext.class);

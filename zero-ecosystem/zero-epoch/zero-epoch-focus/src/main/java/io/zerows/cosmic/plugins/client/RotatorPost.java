@@ -5,9 +5,9 @@ import io.zerows.platform.metadata.KIntegration;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 
-public class PostRotator extends AbstractRotator {
+public class RotatorPost extends RotatorBase {
 
-    PostRotator(final KIntegration integration) {
+    RotatorPost(final KIntegration integration) {
         super(integration);
     }
 
