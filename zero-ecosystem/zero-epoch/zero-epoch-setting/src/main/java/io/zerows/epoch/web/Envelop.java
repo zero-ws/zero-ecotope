@@ -15,6 +15,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.Session;
+import io.zerows.epoch.annotations.Format;
 import io.zerows.epoch.basicore.exception._40032Exception500IndexExceed;
 import io.zerows.epoch.constant.KName;
 import io.zerows.platform.enums.modeling.EmValue;
@@ -39,6 +40,7 @@ public class Envelop implements Serializable {
     /* Communicate Key in Event Bus, to identify the Envelop */
     private String key;
     private Acl acl;
+    private Format format;
     /*
      * Constructor for Envelop creation, two constructor for
      * 1) Success Envelop
@@ -173,6 +175,11 @@ public class Envelop implements Serializable {
     }
 
     // ------------------ Below are response Part -------------------
+    public Envelop format(final Format format) {
+        this.format = format;
+        return this;
+    }
+
     /* String */
     public String outString() {
         return this.outJson().encode();
@@ -180,7 +187,25 @@ public class Envelop implements Serializable {
 
     /* InJson */
     public JsonObject outJson() {
-        return Rib.outJson(this.data, this.error);
+        final JsonObject outJ = Rib.outJson(this.data, this.error);
+        // 为空直接返回
+        if (Objects.isNull(outJ)) {
+            return null;
+        }
+        // 不为空且不包含 data 字段，直接返回
+        if (!outJ.containsKey(KName.DATA)) {
+            return outJ;
+        }
+        // 格式处理
+        if (Objects.isNull(this.format)) {
+            return outJ;
+        }
+        if (this.format.freedom()) {
+            // 自由格式，特殊用途
+            return Ut.valueJObject(outJ, KName.DATA);
+        }
+
+        return outJ;
     }
 
     /* Buffer */

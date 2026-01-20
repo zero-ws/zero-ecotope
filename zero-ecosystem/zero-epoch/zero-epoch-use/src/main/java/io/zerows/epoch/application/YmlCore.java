@@ -1,8 +1,6 @@
 package io.zerows.epoch.application;
 
-import io.zerows.epoch.annotations.Infusion;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.constant.KPlugin;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.constant.VValue;
 import io.zerows.platform.enums.EmDS;
@@ -72,14 +70,6 @@ public interface YmlCore {
     }
 
     // vertx-inject.yml
-
-    /**
-     * {@link KPlugin}
-     * <pre><code>
-     *     - 内部扩展
-     *     - 外部扩展 {@link Infusion}
-     * </code></pre>
-     */
     interface inject extends YmlInject {
     }
 

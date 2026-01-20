@@ -4,10 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
-import io.zerows.plugins.security.oauth2.server.service.AuthorizeStub;
-import io.zerows.plugins.security.oauth2.server.service.JwksStub;
-import io.zerows.plugins.security.oauth2.server.service.TokenManageStub;
-import io.zerows.plugins.security.oauth2.server.service.TokenStub;
+import io.zerows.plugins.security.oauth2.server.service.*;
 import jakarta.inject.Inject;
 
 @Queue
@@ -22,6 +19,9 @@ public class OAuth2Actor {
     @Inject
     private TokenManageStub tokenManageStub;
 
+    @Inject
+    private MetaStub metaStub;
+
     @Address(Addr.AUTHORIZE)
     public Future<JsonObject> authorize(final String responseType, final String clientId, final String redirectUri, final String scope, final String state) {
         return this.authorizeStub.authorize(responseType, clientId, redirectUri, scope, state);
@@ -34,7 +34,7 @@ public class OAuth2Actor {
 
     @Address(Addr.JWKS)
     public Future<JsonObject> jwks(final JsonObject params) {
-        return this.jwksStub.jwks();
+        return this.metaStub.jwksAsync();
     }
 
     @Address(Addr.REVOKE)

@@ -3,11 +3,12 @@ package io.zerows.plugins.security.oauth2.server;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.EndPoint;
+import io.zerows.epoch.annotations.Format;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.extension.BodyParam;
 
 @EndPoint
-public interface ApiOAuth2Agent {
+public interface OAuth2Agent {
 
     @GET
     @Path("/oauth2/authorize")
@@ -28,6 +29,7 @@ public interface ApiOAuth2Agent {
     @GET
     @Path("/oauth2/jwks")
     @Address(Addr.JWKS)
+    @Format(freedom = true)
     JsonObject jwks();
 
     @POST
