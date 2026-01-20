@@ -75,13 +75,11 @@ public class ZeroHttpAgent extends AbstractVerticle {
              */
             Axis.ofOr(AxisExtension.class).mount(runServer, bundle);
 
-            /*
-             * 07. Swagger 挂载
-             */
-            Axis.ofOr(AxisSwagger.class).mount(runServer, bundle);
+            /* 不挂主路径 Swagger 挂载 */
+            // Axis.ofOr(AxisSwagger.class).mount(runServer, bundle);
 
             /*
-             * 08. 启动完成监听
+             * 07. 启动完成监听
              */
             Axis.ofOr(AxisStart.class).mount(runServer, bundle);
 

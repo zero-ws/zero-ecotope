@@ -12,6 +12,10 @@
     <artifactId>zero-plugins-oauth2</artifactId>
     <name>Zero::Plugins::🧩 - OAuth2</name>
     <dependencies>
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-epoch-cosmic</artifactId>
+        </dependency>
         <!-- Session Support -->
         <dependency>
             <groupId>io.zerows</groupId>
