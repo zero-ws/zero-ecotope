@@ -10,7 +10,7 @@ import io.zerows.epoch.annotations.Actor;
 import io.zerows.plugins.oauth2.OAuth2ServerActor;
 import io.zerows.plugins.oauth2.client.BuilderOfOAuth2KeyStore;
 import io.zerows.plugins.oauth2.metadata.OAuth2Security;
-import io.zerows.plugins.security.oauth2.server.OAuth2Api;
+import io.zerows.plugins.security.oauth2.server.AddrApi;
 import io.zerows.specification.configuration.HConfig;
 
 import java.util.Objects;
@@ -28,7 +28,7 @@ public class OAuth2AuthActor extends AbstractHActor {
         this.registrySecurity(vertxRef, oauth2J);
 
         // 路径注册日志
-        OAuth2Api.OAUTH2_APIS.forEach(api -> this.vLog("[ OA2Security ] {}", api));
+        AddrApi.OAUTH2_APIS.forEach(api -> this.vLog("[ OA2Security ] {}", api));
 
         return Future.succeededFuture(Boolean.TRUE);
     }

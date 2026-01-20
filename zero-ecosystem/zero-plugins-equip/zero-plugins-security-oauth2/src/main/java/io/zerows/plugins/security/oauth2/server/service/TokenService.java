@@ -13,6 +13,7 @@ import io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization;
 import io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient;
 import io.zerows.plugins.oauth2.metadata.OAuth2Credential;
 import io.zerows.plugins.oauth2.metadata.OAuth2GrantType;
+import io.zerows.plugins.security.oauth2.server.token.Granter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDateTime;
@@ -79,7 +80,7 @@ public class TokenService implements TokenStub {
             return DB.on(Oauth2AuthorizationDao.class)
                 .deleteByAsync(criteria)
                 .map(deleted -> {
-                    log.info("{} (Revoke) 撤销 Token: {}, 结果: {}", OAuth2Constant.K_PREFIX, StrUtil.hide(tokenValue, 4, 24), deleted);
+                    log.info("{} REVOKE 撤销 Token: {}, 结果: {}", OAuth2Constant.K_PREFIX, StrUtil.hide(tokenValue, 4, 24), deleted);
                     // 无论成功与否，RFC 7009 均要求返回 200 OK
                     return new JsonObject();
                 });
@@ -130,7 +131,7 @@ public class TokenService implements TokenStub {
                         response.put(OAuth2Constant.ACTIVE, false);
                     }
 
-                    log.info("{} Introspect / 检查 Token: {} -> active: {}", OAuth2Constant.K_PREFIX, StrUtil.hide(token, 4, 24), isActive);
+                    log.info("{} INTROSPECT / 检查 Token: {} -> active: {}", OAuth2Constant.K_PREFIX, StrUtil.hide(token, 4, 24), isActive);
                     return Future.succeededFuture(response);
                 });
         });

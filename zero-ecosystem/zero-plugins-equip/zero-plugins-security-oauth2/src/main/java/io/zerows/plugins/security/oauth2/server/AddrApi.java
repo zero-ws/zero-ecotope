@@ -3,7 +3,7 @@ package io.zerows.plugins.security.oauth2.server;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-public interface OAuth2Api {
+public interface AddrApi {
     String OAUTH2_AUTHORIZE = "/oauth2/authorize";
     String OAUTH2_TOKEN = "/oauth2/token";
     String OAUTH2_JWKS = "/oauth2/jwks";

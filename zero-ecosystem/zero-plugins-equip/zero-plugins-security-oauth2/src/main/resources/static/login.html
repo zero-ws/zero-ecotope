@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>OAuth2 统一认证</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-container {
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 380px;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-header h2 {
+            color: #1890ff;
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .form-item {
+            margin-bottom: 20px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #d9d9d9;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+            transition: all 0.3s;
+        }
+
+        .form-input:focus {
+            border-color: #40a9ff;
+            outline: 0;
+            box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+        }
+
+        .submit-btn {
+            width: 100%;
+            background-color: #1890ff;
+            color: #fff;
+            padding: 10px 0;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: #40a9ff;
+        }
+
+        /* [关键修改] 默认隐藏错误提示 */
+        .error-message {
+            display: none; /* 这里控制默认不显示 */
+            background-color: #fff2f0;
+            border: 1px solid #ffccc7;
+            padding: 8px 12px;
+            color: #ff4d4f;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            color: #8c8c8c;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <div class="login-header">
+        <h2>OAuth2 统一认证</h2>
+    </div>
+
+    <div class="error-message" id="error-box">
+        账号或密码错误，请重试
+    </div>
+
+    <form action="/login" method="post">
+        <input id="return_to_input" name="return_to" type="hidden" value="">
+
+        <div class="form-item">
+            <input autofocus class="form-input" name="username" placeholder="请输入账号" required type="text">
+        </div>
+        <div class="form-item">
+            <input class="form-input" name="password" placeholder="请输入密码" required type="password">
+        </div>
+        <button class="submit-btn" type="submit">登 录</button>
+    </form>
+
+    <div class="footer">
+        &copy; 2025 Security Framework
+    </div>
+</div>
+
+<script>
+    // 页面加载完成后执行
+    document.addEventListener('DOMContentLoaded', function () {
+        // 解析 URL 参数
+        const params = new URLSearchParams(window.location.search);
+
+        // 1. 处理错误显示
+        // 如果 URL 里包含 ?error=true (或者 error=任何值)，就显示错误框
+        if (params.get('error')) {
+            const errorBox = document.getElementById('error-box');
+            if (errorBox) {
+                errorBox.style.display = 'block';
+            }
+        }
+
+        // 2. 处理 return_to 参数透传
+        // 如果 URL 是 /login.html?return_to=/oauth2/authorize...
+        // 这里的代码会把 /oauth2/authorize... 填入 form 的隐藏 input 中
+        const returnTo = params.get('return_to');
+        if (returnTo) {
+            const hiddenInput = document.getElementById('return_to_input');
+            if (hiddenInput) {
+                hiddenInput.value = returnTo;
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

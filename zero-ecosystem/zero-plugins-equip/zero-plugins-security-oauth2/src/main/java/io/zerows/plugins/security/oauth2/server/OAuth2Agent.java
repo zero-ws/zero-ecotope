@@ -10,8 +10,9 @@ import jakarta.ws.rs.*;
 public interface OAuth2Agent {
 
     @GET
-    @Path(OAuth2Api.OAUTH2_AUTHORIZE)
+    @Path(AddrApi.OAUTH2_AUTHORIZE)
     @Address(Addr.AUTHORIZE)
+    @Format(smart = true, freedom = true)
     JsonObject authorize(
         @QueryParam("response_type") String responseType,
         @QueryParam("client_id") String clientId,
@@ -21,7 +22,7 @@ public interface OAuth2Agent {
     );
 
     @POST
-    @Path(OAuth2Api.OAUTH2_TOKEN)
+    @Path(AddrApi.OAUTH2_TOKEN)
     @Address(Addr.TOKEN)
     @Format(smart = true, freedom = true)
     JsonObject token(
@@ -60,27 +61,27 @@ public interface OAuth2Agent {
     );
 
     @GET
-    @Path(OAuth2Api.OAUTH2_JWKS)
+    @Path(AddrApi.OAUTH2_JWKS)
     @Address(Addr.JWKS)
     @Format(freedom = true)
     JsonObject jwks();
 
     @POST
-    @Path(OAuth2Api.OAUTH2_REVOKE)
+    @Path(AddrApi.OAUTH2_REVOKE)
     @Address(Addr.REVOKE)
     @Format(freedom = true, smart = true)
     JsonObject revoke(@HeaderParam("Authorization") String authorization,
                       @FormParam("token") String token);
 
     @POST
-    @Path(OAuth2Api.OAUTH2_INTROSPECT)
+    @Path(AddrApi.OAUTH2_INTROSPECT)
     @Address(Addr.INTROSPECT)
     @Format(freedom = true, smart = true)
     JsonObject introspect(@HeaderParam("Authorization") String authorization,
                           @FormParam("token") String token);
 
     @GET
-    @Path(OAuth2Api.OAUTH2_USERINFO)
+    @Path(AddrApi.OAUTH2_USERINFO)
     @Address(Addr.USERINFO)
     @Format(freedom = true)
     JsonObject userinfo(@HeaderParam("Authorization") String authorization);

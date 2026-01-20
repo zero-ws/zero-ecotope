@@ -11,6 +11,7 @@ import io.zerows.plugins.oauth2.OAuth2Constant;
 import io.zerows.plugins.oauth2.OAuth2ServerActor;
 import io.zerows.plugins.oauth2.metadata.OAuth2Credential;
 import io.zerows.plugins.oauth2.metadata.OAuth2Security;
+import io.zerows.plugins.security.oauth2.server.service.AuthStub;
 import io.zerows.plugins.security.oauth2.server.service.MetaStub;
 import io.zerows.plugins.security.oauth2.server.service.OAuthTool;
 import io.zerows.plugins.security.oauth2.server.service.TokenStub;
@@ -26,9 +27,12 @@ public class OAuth2Actor {
     @Inject
     private TokenStub tokenStub;
 
+    @Inject
+    private AuthStub authStub;
+
     @Address(Addr.AUTHORIZE)
-    public Future<JsonObject> authorize(final String responseType, final String clientId, final String redirectUri, final String scope, final String state) {
-        return null;
+    public Future<JsonObject> authorize(final JsonObject request) {
+        return this.authStub.authorizeAsync(request);
     }
 
     @Address(Addr.TOKEN)
@@ -45,7 +49,7 @@ public class OAuth2Actor {
     public Future<JsonObject> revoke(final JsonObject body) {
         final OAuth2Credential credential = this.extract(body);
         if (credential == null || !credential.isValid()) {
-            return Future.failedFuture(new _401UnauthorizedException(OAuth2Constant.K_PREFIX + " (Revoke) 客户端认证失败，缺失凭证"));
+            return Future.failedFuture(new _401UnauthorizedException(OAuth2Constant.K_PREFIX + " REVOKE / 客户端认证失败，缺失凭证"));
         }
         final String token = Ut.valueString(body, KName.TOKEN);
         if (StrUtil.isBlank(token)) {
@@ -60,7 +64,7 @@ public class OAuth2Actor {
         // 1. 客户端认证
         final OAuth2Credential credential = this.extract(body);
         if (credential == null || !credential.isValid()) {
-            return Future.failedFuture(new _401UnauthorizedException(OAuth2Constant.K_PREFIX + " (Revoke) 客户端认证失败，缺失凭证"));
+            return Future.failedFuture(new _401UnauthorizedException(OAuth2Constant.K_PREFIX + " INTROSPECT / 客户端认证失败，缺失凭证"));
         }
         final String token = Ut.valueString(body, KName.TOKEN);
         if (StrUtil.isBlank(token)) {

@@ -10,4 +10,6 @@ interface Addr {
     String INTROSPECT = PREFIX + "INTROSPECT";
     String USERINFO = PREFIX + "USERINFO";
 
+    String BACK_CLIENT = PREFIX + "BACK-CLIENT";
+    String BACK_LOGIN = PREFIX + "BACK-LOGIN";
 }

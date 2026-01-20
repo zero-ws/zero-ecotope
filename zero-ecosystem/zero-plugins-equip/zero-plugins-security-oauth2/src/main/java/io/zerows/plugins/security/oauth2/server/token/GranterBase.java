@@ -1,4 +1,4 @@
-package io.zerows.plugins.security.oauth2.server.service;
+package io.zerows.plugins.security.oauth2.server.token;
 
 import cn.hutool.core.util.StrUtil;
 import io.r2mo.base.util.R2MO;
@@ -16,6 +16,7 @@ import io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient;
 import io.zerows.plugins.oauth2.metadata.OAuth2Credential;
 import io.zerows.plugins.oauth2.metadata.OAuth2Security;
 import io.zerows.plugins.security.jwt.JwtToken;
+import io.zerows.plugins.security.oauth2.server.service.OAuthTool;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
 

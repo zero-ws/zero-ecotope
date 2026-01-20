@@ -1,4 +1,4 @@
-package io.zerows.plugins.security.oauth2.server.service;
+package io.zerows.plugins.security.oauth2.server.token;
 
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
@@ -15,6 +15,10 @@ public interface Granter {
     static Granter of(final OAuth2GrantType type) {
         if (OAuth2GrantType.CLIENT_CREDENTIALS == type) {
             return CC_SKELETON.pick(GranterClientCredentials::new, type.name());
+        }
+        // [新增] 注册 Authorization Code 模式
+        if (OAuth2GrantType.AUTHORIZATION_CODE == type) {
+            return CC_SKELETON.pick(GranterAuthorizationCode::new, type.name());
         }
         return null;
     }
