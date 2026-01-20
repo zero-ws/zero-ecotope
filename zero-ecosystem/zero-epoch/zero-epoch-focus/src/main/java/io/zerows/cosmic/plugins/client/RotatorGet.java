@@ -4,9 +4,9 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.platform.metadata.KIntegration;
 import org.apache.http.client.methods.HttpGet;
 
-public class GetRotator extends AbstractRotator {
+public class RotatorGet extends RotatorBase {
 
-    GetRotator(final KIntegration integration) {
+    RotatorGet(final KIntegration integration) {
         super(integration);
     }
 

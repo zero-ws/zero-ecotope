@@ -25,10 +25,10 @@ public interface Rotator {
     ConcurrentMap<HttpMethod, Function<KIntegration, Rotator>> POOL_ROTATOR_FN =
         new ConcurrentHashMap<HttpMethod, Function<KIntegration, Rotator>>() {
             {
-                this.put(HttpMethod.GET, GetRotator::new);
-                this.put(HttpMethod.DELETE, DeleteRotator::new);
-                this.put(HttpMethod.POST, PostRotator::new);
-                this.put(HttpMethod.PUT, PutRotator::new);
+                this.put(HttpMethod.GET, RotatorGet::new);
+                this.put(HttpMethod.DELETE, RotatorDelete::new);
+                this.put(HttpMethod.POST, RotatorPost::new);
+                this.put(HttpMethod.PUT, RotatorPut::new);
             }
         };
 

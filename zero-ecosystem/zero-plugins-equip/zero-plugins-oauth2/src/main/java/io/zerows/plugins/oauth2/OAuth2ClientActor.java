@@ -13,6 +13,7 @@ import io.zerows.plugins.oauth2.client.BuilderOfOAuth2Client;
 import io.zerows.plugins.oauth2.domain.tables.daos.Oauth2RegisteredClientDao;
 import io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient;
 import io.zerows.plugins.oauth2.metadata.OAuth2Config;
+import io.zerows.plugins.oauth2.metadata.OAuth2ConfigProvider;
 import io.zerows.specification.configuration.HConfig;
 
 import java.util.ArrayList;
@@ -21,6 +22,10 @@ import java.util.Optional;
 
 @Actor(value = "oauth2")
 public class OAuth2ClientActor extends AbstractHActor {
+    public static OAuth2ConfigProvider findProvider(final String clientId) {
+        return OAuth2Manager.of().findProvider(clientId);
+    }
+
     @Override
     protected Future<Boolean> startAsync(final HConfig config, final Vertx vertxRef) {
         // 使用 Optional 串联获取逻辑

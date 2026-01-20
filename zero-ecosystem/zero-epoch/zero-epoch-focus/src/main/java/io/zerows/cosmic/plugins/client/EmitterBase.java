@@ -19,11 +19,11 @@ import java.security.SecureRandom;
  * 1 - 认证相关，从 integration 中计算
  * 2 - 两种模式，HTTP 和 HTTPS
  */
-public abstract class AbstractEmitter implements Emitter {
+public abstract class EmitterBase implements Emitter {
 
     private final transient KIntegration integration;
 
-    public AbstractEmitter(final KIntegration integration) {
+    public EmitterBase(final KIntegration integration) {
         this.integration = integration;
     }
 

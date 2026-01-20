@@ -14,6 +14,7 @@ import io.vertx.ext.auth.User;
 import io.vertx.ext.web.FileUpload;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.Session;
+import io.vertx.ext.web.impl.UserContextInternal;
 import io.zerows.epoch.metadata.XHeader;
 
 import java.util.HashSet;
@@ -64,6 +65,8 @@ class ParameterAgent implements ParameterBuilder<RoutingContext> {
             final XHeader header = new XHeader();
             header.fromHeader(headers);
             returnValue = header;
+        } else if (ParameterPre.is(type, UserContextInternal.class)) {
+            returnValue = context.userContext();
         } else if (ParameterPre.is(type, Session.class)) {
             returnValue = context.session();
         } else if (ParameterPre.is(type, HttpServerRequest.class)) {

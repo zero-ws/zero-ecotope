@@ -31,7 +31,7 @@ public class OAuth2Actor {
     private AuthStub authStub;
 
     @Address(Addr.AUTHORIZE)
-    public Future<JsonObject> authorize(final JsonObject request) {
+    public Future<String> authorize(final JsonObject request) {
         return this.authStub.authorizeAsync(request);
     }
 

@@ -26,11 +26,11 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
-public abstract class AbstractRotator implements Rotator {
+public abstract class RotatorBase implements Rotator {
     private final transient KIntegration integration;
     private transient CloseableHttpClient client;
 
-    public AbstractRotator(final KIntegration integration) {
+    public RotatorBase(final KIntegration integration) {
         this.integration = integration;
     }
 

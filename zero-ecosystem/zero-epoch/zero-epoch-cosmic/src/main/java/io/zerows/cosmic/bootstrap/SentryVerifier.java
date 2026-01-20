@@ -61,6 +61,7 @@ public class SentryVerifier extends AimBase implements Sentry<RoutingContext> {
             } catch (final Throwable ex) {
                 // DEBUG: 特殊流程
                 log.error(ex.getMessage(), ex);
+                context.fail(ex);
             }
         };
     }

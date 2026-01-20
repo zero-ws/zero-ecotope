@@ -14,7 +14,7 @@ public interface CallbackAgent {
 
     @GET
     @Path("/oauth2/authorized/{clientId}")
-    @Format(smart = true)
+    @Format(smart = true, freedom = true)
     @Address(Addr.BACK_CLIENT)
     JsonObject handleCallback(@PathParam("clientId") String registrationId,
                               @QueryParam("code") String code,
