@@ -3,30 +3,28 @@ package io.zerows.extension.module.ambient.spi;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.DB;
-import io.zerows.extension.module.ambient.common.AtMsg;
+import io.zerows.extension.module.ambient.common.AtConstant;
 import io.zerows.extension.module.ambient.domain.tables.daos.XAppDao;
 import io.zerows.extension.module.ambient.domain.tables.pojos.XApp;
 import io.zerows.extension.skeleton.spi.ExInit;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.function.Function;
-
-import static io.zerows.extension.module.ambient.boot.At.LOG;
 
 /*
  * EmApp Initialization
  */
+@Slf4j
 public class ExInitApp implements ExInit {
-    private static final LogOf LOGGER = LogOf.get(ExInitApp.class);
 
     @Override
     public Function<JsonObject, Future<JsonObject>> apply() {
         return appJson -> {
-            LOG.App.info(LOGGER, AtMsg.INIT_APP, appJson.encode());
+            log.info("{} XApp 初始化: {}", AtConstant.K_PREFIX, appJson.encode());
             /* Deserialization */
             final XApp app = this.init(appJson);
             return DB.on(XAppDao.class)

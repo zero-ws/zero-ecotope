@@ -6,14 +6,14 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.KJoin;
 import io.zerows.epoch.metadata.KView;
 import io.zerows.epoch.web.Envelop;
+import io.zerows.extension.crud.common.IxConstant;
 import io.zerows.extension.crud.common.em.ApiSpec;
 import io.zerows.platform.enums.EmDS;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
-
-import static io.zerows.extension.crud.common.Ix.LOG;
 
 /**
  * Here are the new data structure for input data
@@ -24,8 +24,9 @@ import static io.zerows.extension.crud.common.Ix.LOG;
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
 public class IxRequest {
-    private final static String LOGGER_MOD = "active=\u001b[1;36m{0}\u001b[m, standby=\u001b[1;95m{1}\u001b[m, api={2}, view={3}";
+    private final static String LOGGER_MOD = "{} 模块路由: Active = \u001b[1;36m{}\u001b[m, StandBy = \u001b[1;95m{}\u001b[m, 接口 = {}, 视图 = {}";
     private final transient ApiSpec apiSpecification;
     // IxMod Calculation
     private transient IxMod active;
@@ -66,7 +67,6 @@ public class IxRequest {
      * </code></pre>
      *
      * @param envelop {@link Envelop} 请求的统一资源模型
-     *
      * @return {@link String} 返回解析的 module 信息
      */
     public String inputConnected(final Envelop envelop) {
@@ -155,7 +155,7 @@ public class IxRequest {
         /* 构造 standBy 的模型 */
         this.standBy = this.inputConnected(connected);
 
-        LOG.Web.info(this.getClass(), LOGGER_MOD,
+        log.info(LOGGER_MOD, IxConstant.K_PREFIX,
             this.active.module().identifier(),
             Objects.nonNull(this.standBy) ? this.standBy.module().identifier() : null,
             this.apiSpecification, this.view.view() + ":" + this.view.position());

@@ -9,21 +9,21 @@ import io.zerows.epoch.annotations.Validated;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.metadata.KView;
-import io.zerows.extension.crud.common.IxMsg;
+import io.zerows.extension.crud.common.IxConstant;
 import io.zerows.program.Ux;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.extension.BodyParam;
 import jakarta.ws.rs.extension.PointParam;
 import jakarta.ws.rs.extension.StreamParam;
-
-import static io.zerows.extension.crud.common.Ix.LOG;
+import lombok.extern.slf4j.Slf4j;
 
 /*
  * Export / Import file here for processing
  */
 @EndPoint
 @Path("/api")
+@Slf4j
 public class FileAgent {
 
     @Path("/{actor}/import")
@@ -37,7 +37,8 @@ public class FileAgent {
                                  @QueryParam(KName.TYPE) final String type) {
         /* File stored */
         final String filename = fileUpload.uploadedFileName();
-        LOG.Dao.info(this.getClass(), IxMsg.FILE_UPLOAD, fileUpload.fileName(), filename);
+        log.info("{} 文件信息，文件名 {} / 上传名 = {}",
+            IxConstant.K_PREFIX, fileUpload.fileName(), filename);
         final JsonObject parameters = new JsonObject();
         return Ux.toZip(actor, filename, module, parameters.put(KName.TYPE, type));
     }

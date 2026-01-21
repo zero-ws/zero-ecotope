@@ -6,6 +6,7 @@ import io.zerows.component.expression.Formula;
 import io.zerows.component.expression.Regulation;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.DB;
+import io.zerows.extension.module.ambient.common.AtConstant;
 import io.zerows.extension.module.ambient.common.em.TubeType;
 import io.zerows.extension.module.ambient.component.Tube;
 import io.zerows.extension.module.ambient.domain.tables.daos.XActivityRuleDao;
@@ -20,6 +21,7 @@ import io.zerows.spi.HPI;
 import io.zerows.spi.modeler.AtomNo;
 import io.zerows.support.Fx;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Comparator;
 import java.util.List;
@@ -30,11 +32,10 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.Function;
 
-import static io.zerows.extension.module.ambient.boot.At.LOG;
-
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
 public class UiValueRule implements UiValve {
 
     @Override
@@ -44,7 +45,7 @@ public class UiValueRule implements UiValve {
         if (Ut.irNil(criteria)) {
             return Ux.future(data);
         }
-        LOG.Tabb.info(this.getClass(), "Qr condition for ActivityRule: {0}", criteria.encode());
+        log.info("{} Activity Rule 中的 Qr 条件：{}", AtConstant.K_PREFIX, criteria.encode());
         /* Not Skip */
         final KRef ruleRef = new KRef();
         final KRef inputRef = new KRef();

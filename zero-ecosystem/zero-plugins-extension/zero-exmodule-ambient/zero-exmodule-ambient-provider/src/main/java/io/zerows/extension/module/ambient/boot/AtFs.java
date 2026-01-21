@@ -106,7 +106,7 @@ class AtFs {
                 final Set<String> files = new HashSet<>();
                 Ut.itJArray(local).forEach(each -> files.add(each.getString(KName.Attachment.FILE_PATH)));
                 HFS.of().rm(files);
-                log.info("{} 删除本地文件，数量：{}", AtConstant.K_PREFIX_AMB, files.size());
+                log.info("{} 删除本地文件，数量：{}", AtConstant.K_PREFIX, files.size());
                 return Ux.future(local);
             }, remote -> splitRun(remote, (directoryId, fileMap) -> HPI.of(ExIo.class).waitAsync(
                 io -> io.fsRemove(directoryId, fileMap).compose(removed -> Ux.future(remote)),
@@ -148,7 +148,7 @@ class AtFs {
             }
         });
         log.info("{} 数据拆分，目录文件数量：本地 = {}，远程 = {}",
-            AtConstant.K_PREFIX_AMB, dataL.size(), dataR.size());
+            AtConstant.K_PREFIX, dataL.size(), dataR.size());
         final List<Future<JsonArray>> futures = new ArrayList<>();
         if (Ut.isNotNil(dataL)) {
             futures.add(fnLocal.apply(dataL));

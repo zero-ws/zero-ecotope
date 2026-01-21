@@ -4,7 +4,6 @@ import io.vertx.core.Future;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.LogOf;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.constant.KName;
@@ -27,8 +26,6 @@ import java.util.List;
 @Queue
 @SuppressWarnings("all")
 public class FileActor {
-
-    private static final LogOf LOGGER = LogOf.get(FileActor.class);
 
     @Inject
     private transient ExcelClient client;
@@ -69,7 +66,7 @@ public class FileActor {
          * Here extract query by `criteria` node, it will be synced with
          * dynamic exporting here.
          **/
-        JsonObject criteria = Ut.valueJObject(condition.getJsonObject(VName.KEY_CRITERIA));
+        final JsonObject criteria = Ut.valueJObject(condition.getJsonObject(VName.KEY_CRITERIA));
         final IxPanel panel = IxPanel.on(request);
         final IxMod mod = request.active();
         return ViewHelper.fetchFull(request).runJ(request.dataV())

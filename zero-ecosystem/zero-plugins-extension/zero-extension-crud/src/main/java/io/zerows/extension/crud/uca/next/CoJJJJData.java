@@ -7,20 +7,21 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.destine.Conflate;
 import io.zerows.epoch.metadata.KJoin;
+import io.zerows.extension.crud.common.IxConstant;
 import io.zerows.extension.crud.uca.IxMod;
 import io.zerows.extension.crud.uca.IxReply;
 import io.zerows.mbse.metadata.KModule;
 import io.zerows.platform.enums.EmDS;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
-
-import static io.zerows.extension.crud.common.Ix.LOG;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
 class CoJJJJData implements Co<JsonObject, JsonObject, JsonObject, JsonObject> {
 
     private transient final IxMod in;
@@ -44,7 +45,7 @@ class CoJJJJData implements Co<JsonObject, JsonObject, JsonObject, JsonObject> {
 
             this.referenceInput(dataSt);
 
-            LOG.Web.info(this.getClass(), "Data In: {0}", dataSt.encode());
+            log.info("{} Data In / {}", IxConstant.K_PREFIX, dataSt.encode());
             return Ux.future(dataSt);
         } else {
             // There is no joined module join current
@@ -111,7 +112,7 @@ class CoJJJJData implements Co<JsonObject, JsonObject, JsonObject, JsonObject> {
             this.referenceOut(standBy);
 
             final JsonObject dataSt = conflate.treat(active, standBy, this.in.connectId());
-            LOG.Web.info(this.getClass(), "Data Out: {0}", dataSt.encode());
+            log.info("{} Data Out / {}", IxConstant.K_PREFIX, dataSt.encode());
             return Ux.future(dataSt);
         } else {
             // There is no joined module join current

@@ -8,21 +8,22 @@ import io.zerows.epoch.metadata.KTransform;
 import io.zerows.epoch.metadata.KTree;
 import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.extension.crud.common.Ix;
+import io.zerows.extension.crud.common.IxConstant;
 import io.zerows.mbse.metadata.KModule;
 import io.zerows.platform.constant.VString;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.Function;
 
-import static io.zerows.extension.crud.common.Ix.LOG;
-
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
 class TranTree implements Tran {
     private transient final boolean isFrom;
 
@@ -90,7 +91,7 @@ class TranTree implements Tran {
         final String keyField = keyValue.key();
         criteria.put(keyField + ",i", values);
         criteria.put(VString.EMPTY, Boolean.TRUE);
-        LOG.Web.info(this.getClass(), "Tree Transform Condition: {0}", criteria.encode());
+        log.info("{} 树转换条件 / {}", IxConstant.K_PREFIX, criteria.encode());
         final ADB jooq = Ix.jooq(in);
         return jooq.fetchJAsync(criteria).compose(source -> Ux.future(this.tree(source, keyValue)));
     }

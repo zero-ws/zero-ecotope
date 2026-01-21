@@ -2,7 +2,6 @@ package io.zerows.extension.module.rbac.component.acl.region;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.LogOf;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.module.rbac.boot.Sc;
 import io.zerows.extension.module.rbac.common.ScConstant;
@@ -22,9 +21,6 @@ import java.util.function.Supplier;
 
 @Slf4j
 class DataOut {
-
-    private static final LogOf LOGGER = LogOf.get(DataOut.class);
-
     /*
      * projection join result
      * RegionType.RECORD

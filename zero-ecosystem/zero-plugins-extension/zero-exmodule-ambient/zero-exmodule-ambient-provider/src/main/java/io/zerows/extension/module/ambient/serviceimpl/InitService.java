@@ -68,7 +68,7 @@ public class InitService implements InitStub {
         /* Prerequisite Extension */
         final ExPrerequisite prerequisite = Objects.requireNonNull(MANAGER.config()).ofPre();
         if (Objects.isNull(prerequisite)) {
-            log.info("{} `ExPrerequisite` 组件未配置：null", AtConstant.K_PREFIX_AMB);
+            log.info("{} `ExPrerequisite` 组件未配置：null", AtConstant.K_PREFIX);
             return Ux.future(new JsonObject());
         }
 
@@ -111,7 +111,7 @@ public class InitService implements InitStub {
     private Future<JsonObject> initDefined(final JsonObject input) {
         final ExInit initializer = Objects.requireNonNull(MANAGER.config()).ofInit();
         if (Objects.isNull(initializer)) {
-            log.info("{} `Init` 组件未配置，null", AtConstant.K_PREFIX_AMB);
+            log.info("{} `Init` 组件未配置，null", AtConstant.K_PREFIX);
             return Ux.future(input);
         }
         return initializer.apply().apply(input);

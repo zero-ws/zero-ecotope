@@ -37,7 +37,6 @@ class AtFsDir {
      *
      * @param attachment 附件信息
      * @param params     参数信息
-     *
      * @return {@link Future}
      */
     static Future<JsonArray> fileDir(final JsonArray attachment, final JsonObject params) {
@@ -155,8 +154,8 @@ class AtFsDir {
 
         String name = storePath.replace(rootPath, VString.EMPTY);
         name = Ut.ioPathRoot(name);
-        log.info("{} Zero 将重新初始化目录以尝试处理：{}", AtConstant.K_PREFIX_AMB, storePath);
-        log.info("{} 构建器参数：name = {}, type = {}, id = {}", AtConstant.K_PREFIX_AMB, name, type, appId);
+        log.info("{} Zero 将重新初始化目录以尝试处理：{}", AtConstant.K_PREFIX, storePath);
+        log.info("{} 构建器参数：name = {}, type = {}, id = {}", AtConstant.K_PREFIX, name, type, appId);
         return builder.initialize(appId, type, name);
     }
 }

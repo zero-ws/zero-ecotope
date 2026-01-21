@@ -3,15 +3,16 @@ package io.zerows.extension.crud.uca.next;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.zerows.component.destine.Conflate;
+import io.zerows.extension.crud.common.IxConstant;
 import io.zerows.extension.crud.uca.IxMod;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
-
-import static io.zerows.extension.crud.common.Ix.LOG;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
 class CoAAAAData implements Co<JsonArray, JsonArray, JsonArray, JsonArray> {
 
     private transient final IxMod in;
@@ -32,7 +33,7 @@ class CoAAAAData implements Co<JsonArray, JsonArray, JsonArray, JsonArray> {
                 final String key = this.in.module().getField().getKey();
                 Ut.itJArray(dataSt).forEach(json -> json.remove(key));
             }
-            LOG.Web.info(this.getClass(), "Data In: {0}", dataSt.encode());
+            log.info("{} Data In / {}", IxConstant.K_PREFIX, dataSt.encode());
             return Ux.future(dataSt);
         } else {
             // There is no joined module join current

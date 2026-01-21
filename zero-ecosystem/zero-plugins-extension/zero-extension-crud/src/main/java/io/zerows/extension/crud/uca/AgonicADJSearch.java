@@ -4,18 +4,19 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.crud.common.Ix;
+import io.zerows.extension.crud.common.IxConstant;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
-
-import static io.zerows.extension.crud.common.Ix.LOG;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
 class AgonicADJSearch implements Agonic {
     @Override
     public Future<JsonObject> runJAsync(final JsonObject input, final IxMod in) {
-        LOG.Filter.info(this.getClass(), "( Search ) Condition: {0}", input);
+        log.info("{} [ 搜索 ] 条件：{}", IxConstant.K_PREFIX, input);
 
         final Operate<JsonObject, JsonObject> operate = Operate.ofSearch();
         /* 内置做过 in.canJoin() 的判断，此处不再考虑连接的判断 */

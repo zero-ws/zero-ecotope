@@ -117,7 +117,7 @@ public class DocBuilder implements DocBStub {
         configuration.put(KName.STORE, storeRef);
 
         final ExArbor arbor = CC_ARBOR.pick(() -> Ut.instance(arborCls), arborCls.getName());
-        log.info("{} Arbor 组件：{}, 配置：{}", AtConstant.K_PREFIX_AMB, arborCls.getName(), configuration.encode());
+        log.info("{} Arbor 组件：{}, 配置：{}", AtConstant.K_PREFIX, arborCls.getName(), configuration.encode());
         return arbor.generate(input, configuration);
     }
 }

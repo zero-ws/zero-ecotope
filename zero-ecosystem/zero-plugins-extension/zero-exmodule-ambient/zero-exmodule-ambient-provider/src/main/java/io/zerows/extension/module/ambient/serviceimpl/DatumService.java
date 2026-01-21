@@ -5,18 +5,12 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.extension.module.ambient.component.Aide;
-import io.zerows.extension.module.ambient.component.AideApp;
-import io.zerows.extension.module.ambient.component.AideSigma;
-import io.zerows.extension.module.ambient.component.Serial;
-import io.zerows.extension.module.ambient.component.SerialGen;
-import io.zerows.extension.module.ambient.component.Tree;
-import io.zerows.extension.module.ambient.component.TreeApp;
-import io.zerows.extension.module.ambient.component.TreeSigma;
+import io.zerows.extension.module.ambient.common.AtConstant;
+import io.zerows.extension.module.ambient.component.*;
 import io.zerows.extension.module.ambient.servicespec.DatumStub;
+import lombok.extern.slf4j.Slf4j;
 
-import static io.zerows.extension.module.ambient.boot.At.LOG;
-
+@Slf4j
 public class DatumService implements DatumStub {
 
     private static final Cc<String, Aide> CC_AIDE = Cc.open();
@@ -101,7 +95,7 @@ public class DatumService implements DatumStub {
     // ------------------------ Number Generation
     @Override
     public Future<JsonArray> numberApp(final String appId, final String code, final Integer count) {
-        LOG.Flow.info(this.getClass(), "Serial Gen: id = {0}, code = {1}, count = {2}", appId, code, count);
+        log.info("{} 序号生成: id = {}, code = {}, count = {}", AtConstant.K_PREFIX, appId, code, count);
         // APP_ID = ? AND CODE = ?
         final JsonObject condition = new JsonObject();
         condition.put(KName.APP_ID, appId).put(KName.CODE, code);
@@ -113,7 +107,7 @@ public class DatumService implements DatumStub {
 
     @Override
     public Future<JsonArray> numberAppI(final String appId, final String identifier, final Integer count) {
-        LOG.Flow.info(this.getClass(), "Serial Gen: id = {0}, identifier = {1}, count = {2}", appId, identifier, count);
+        log.info("{} 序号生成: id = {}, identifier = {}, count = {}", AtConstant.K_PREFIX, appId, identifier, count);
         // APP_ID = ? AND IDENTIFIER = ?
         final JsonObject condition = new JsonObject();
         condition.put(KName.APP_ID, appId).put(KName.IDENTIFIER, identifier);
@@ -124,7 +118,7 @@ public class DatumService implements DatumStub {
 
     @Override
     public Future<JsonArray> numberSigma(final String sigma, final String code, final Integer count) {
-        LOG.Flow.info(this.getClass(), "Serial Gen: sigma = {0}, code = {1}, count = {2}", sigma, code, count);
+        log.info("{} 序号生成: sigma = {}, code = {}, count = {}", AtConstant.K_PREFIX, sigma, code, count);
         // SIGMA = ? AND CODE = ?
         final JsonObject condition = new JsonObject();
         condition.put(KName.SIGMA, sigma).put(KName.CODE, code);
@@ -135,7 +129,7 @@ public class DatumService implements DatumStub {
 
     @Override
     public Future<JsonArray> numberSigmaI(final String sigma, final String identifier, final Integer count) {
-        LOG.Flow.info(this.getClass(), "Serial Gen: sigma = {0}, identifier = {1}, count = {2}", sigma, identifier, count);
+        log.info("{} 序号生成: sigma = {}, identifier = {}, count = {}", AtConstant.K_PREFIX, sigma, identifier, count);
         // SIGMA = ? AND IDENTIFIER = ?
         final JsonObject condition = new JsonObject();
         condition.put(KName.SIGMA, sigma).put(KName.IDENTIFIER, identifier);
@@ -146,7 +140,7 @@ public class DatumService implements DatumStub {
 
     @Override
     public Future<Boolean> numberAppR(final String appId, final String code, final Long defaultValue) {
-        LOG.Flow.info(this.getClass(), "Serial Reset: id = {0}, code = {1}, default = {2}", appId, code, String.valueOf(defaultValue));
+        log.info("{} 序号重置: id = {}, code = {}, default = {}", AtConstant.K_PREFIX, appId, code, defaultValue);
 
         final JsonObject condition = new JsonObject();
         condition.put(KName.APP_ID, appId).put(KName.CODE, code);
@@ -157,7 +151,7 @@ public class DatumService implements DatumStub {
 
     @Override
     public Future<Boolean> numberSigmaR(final String sigma, final String code, final Long defaultValue) {
-        LOG.Flow.info(this.getClass(), "Serial Reset: sigma = {0}, code = {1}, default = {2}", sigma, code, String.valueOf(defaultValue));
+        log.info("{} 序号重置: sigma = {}, code = {}, default = {}", AtConstant.K_PREFIX, sigma, code, defaultValue);
 
         final JsonObject condition = new JsonObject();
         condition.put(KName.SIGMA, sigma).put(KName.CODE, code);

@@ -2,8 +2,10 @@ package io.zerows.extension.crud.uca.input;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.extension.crud.common.Ix;
+import io.zerows.extension.crud.common.IxConstant;
 import io.zerows.support.Ut;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.Instant;
 import java.util.Objects;
@@ -30,14 +32,18 @@ abstract class PreAuditAction implements Pre {
             final String by = config.getString(KName.BY);
             if (Ut.isNotNil(by)) {
                 /* Audit Process */
-                Ix.LOG.Dao.info(this.getClass(), "( Audit ) By -> \"{0}\" = {1}", by, userId);
+                this.log().info("{} Audit By 条件 -> \"{}\" = {}", IxConstant.K_PREFIX, by, userId);
                 data.put(by, userId);
             }
             final String at = config.getString(KName.AT);
             if (Ut.isNotNil(at)) {
-                Ix.LOG.Dao.info(this.getClass(), "( Audit ) At Field -> {0}", at);
+                this.log().info("{} Audit At 字段 -> {}", IxConstant.K_PREFIX, at);
                 data.put(at, Instant.now());
             }
         }
+    }
+
+    private Logger log() {
+        return LoggerFactory.getLogger(this.getClass());
     }
 }

@@ -11,6 +11,7 @@ import io.zerows.extension.crud.exception._80100Exception404ModuleMissing;
 import io.zerows.mbse.metadata.KModule;
 import io.zerows.platform.constant.VString;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
 
@@ -31,6 +32,7 @@ import java.util.Objects;
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
 public class IxMod {
     /**
      * 「实例」
@@ -79,11 +81,11 @@ public class IxMod {
             this.module = module;
         } catch (final WebException error) {
             // 自定义异常
-            Ix.LOG.Web.fatal(this.getClass(), error);
+            log.error(error.getMessage(), error);
             this.error = error;
         } catch (final Throwable error) {
             // JVM异常
-            Ix.LOG.Web.fatal(this.getClass(), error);
+            log.error(error.getMessage(), error);
             this.error = new _500ServerInternalException("[ R2MO ] JVM 异常: " + error.getMessage());
         }
     }
@@ -127,7 +129,6 @@ public class IxMod {
      * 连接点主函数
      *
      * @param in 被连接的 {@link IxMod} 对象
-     *
      * @return {@link IxMod}
      */
     public IxMod connected(final IxMod in) {
@@ -196,7 +197,6 @@ public class IxMod {
      * </code></pre>
      *
      * @param envelop {@link Envelop}
-     *
      * @return {@link IxMod}
      */
     public IxMod envelop(final Envelop envelop) {
