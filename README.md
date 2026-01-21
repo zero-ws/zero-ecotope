@@ -10,6 +10,7 @@ Zero Waiting
 ## 0. 引导
 
 - 文档：<https://www.yuque.com/jiezizhu/r2mo>
+    - [>> 快速开始](https://www.yuque.com/jiezizhu/r2mo/gs6qygvsorlgkxb2)
 - 示例：<https://gitee.com/zero-ws/zero-rachel-momo>
 
 ---
