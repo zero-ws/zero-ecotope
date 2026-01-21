@@ -5,13 +5,14 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.LogOf;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.module.rbac.boot.Sc;
-import io.zerows.extension.module.rbac.component.acl.rapid.Dwarf;
-import io.zerows.extension.module.rbac.common.ScAuthMsg;
+import io.zerows.extension.module.rbac.common.ScConstant;
 import io.zerows.extension.module.rbac.common.em.RegionType;
+import io.zerows.extension.module.rbac.component.acl.rapid.Dwarf;
 import io.zerows.platform.constant.VName;
 import io.zerows.platform.constant.VValue;
 import io.zerows.sdk.security.Acl;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -19,8 +20,7 @@ import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
-import static io.zerows.extension.module.rbac.boot.Sc.LOG;
-
+@Slf4j
 class DataOut {
 
     private static final LogOf LOGGER = LogOf.get(DataOut.class);
@@ -98,7 +98,7 @@ class DataOut {
                      * Analyze result for type here.
                      */
                     final RegionType type = analyzeRegion(responseJson);
-                    LOG.Auth.info(LOGGER, ScAuthMsg.REGION_TYPE, type, responseJson.encode());
+                    log.info("{} DataRegion 分析类型 = {}, 内容 = {}", ScConstant.K_PREFIX, type, responseJson.encode());
                     if (expected.contains(type)) {
                         consumer.accept(responseJson, type);
                     }

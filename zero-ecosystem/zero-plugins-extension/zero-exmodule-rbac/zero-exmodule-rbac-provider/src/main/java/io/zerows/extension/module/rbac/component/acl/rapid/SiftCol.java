@@ -2,18 +2,15 @@ package io.zerows.extension.module.rbac.component.acl.rapid;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.LogOf;
-import io.zerows.extension.module.rbac.common.ScAuthMsg;
+import io.zerows.extension.module.rbac.common.ScConstant;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import static io.zerows.extension.module.rbac.boot.Sc.LOG;
-
+@Slf4j
 class SiftCol {
-    private static final LogOf LOGGER = LogOf.get(SiftCol.class);
-
     /*
      * projection -> JsonObject
      */
@@ -24,7 +21,7 @@ class SiftCol {
          * If projection is empty, do nothing
          */
         if (!projection.isEmpty()) {
-            LOG.Auth.info(LOGGER, ScAuthMsg.REGION_PROJECTION, projection.encode());
+            log.info("{} DataRegion 列过滤 = {}", ScConstant.K_PREFIX, projection.encode());
             /*
              * The method is the same as backend of Jooq
              * ( In new version, Jooq logical is synced with current logical ), the projection is columns that

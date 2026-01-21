@@ -2,8 +2,8 @@ package io.zerows.extension.module.rbac.component.acl.rapid;
 
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonObject;
-import io.zerows.support.Ut;
 import io.zerows.extension.module.rbac.domain.tables.pojos.SVisitant;
+import io.zerows.support.Ut;
 
 /**
  * Quit Normalizer for Matrix ( View )

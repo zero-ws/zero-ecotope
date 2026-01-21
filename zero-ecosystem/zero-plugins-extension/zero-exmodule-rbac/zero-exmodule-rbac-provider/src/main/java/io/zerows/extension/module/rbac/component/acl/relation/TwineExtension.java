@@ -10,7 +10,7 @@ import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.module.rbac.boot.MDRBACManager;
 import io.zerows.extension.module.rbac.common.ScAuthKey;
-import io.zerows.extension.module.rbac.common.ScAuthMsg;
+import io.zerows.extension.module.rbac.common.ScConstant;
 import io.zerows.extension.module.rbac.domain.tables.daos.SUserDao;
 import io.zerows.extension.module.rbac.domain.tables.pojos.SUser;
 import io.zerows.extension.module.rbac.metadata.ScConfig;
@@ -22,6 +22,7 @@ import io.zerows.program.Ux;
 import io.zerows.spi.HPI;
 import io.zerows.support.Fx;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Collection;
 import java.util.List;
@@ -31,8 +32,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-
-import static io.zerows.extension.module.rbac.boot.Sc.LOG;
 
 /*
  * 关联关系：用户扩展组件
@@ -66,6 +65,7 @@ import static io.zerows.extension.module.rbac.boot.Sc.LOG;
  *   3.2）modelKey -> employeeId 为前端提供语义级消费
  *   3.3）initialize 为导入时的模板数据
  */
+@Slf4j
 class TwineExtension implements ScTwine<SUser> {
 
     private static final ScConfig CONFIG = MDRBACManager.of().config();
@@ -221,8 +221,8 @@ class TwineExtension implements ScTwine<SUser> {
      */
     private Future<JsonObject> runSingle(final SUser user, final Function<KQr, Future<JsonObject>> executor) {
         if (Objects.isNull(user)) {
-            /* Input SUser object is null, could not findRunning S_USER record in your database */
-            LOG.Web.info(this.getClass(), ScAuthMsg.EXTENSION_EMPTY + " Null SUser");
+            /* Input SUser object is null, could not S_USER record in your database */
+            log.info("{} 用户扩展信息 SUser 为空", ScConstant.K_PREFIX);
             return Ux.futureJ();
         }
 
@@ -232,7 +232,7 @@ class TwineExtension implements ScTwine<SUser> {
              * This branch means that MODEL_KEY is null, you could not do any Extension part.
              * Returned SUser json data formatFail only.
              */
-            LOG.Web.info(this.getClass(), ScAuthMsg.EXTENSION_EMPTY + " Null modelKey");
+            log.info("{} 用户扩展信息键 modelKey 为空", ScConstant.K_PREFIX);
             return Ux.futureJ(user);
         }
 
@@ -243,7 +243,7 @@ class TwineExtension implements ScTwine<SUser> {
          */
         final KQr qr = CONFIG.category(user.getModelId());
         if (Objects.isNull(qr) || !qr.valid()) {
-            LOG.Web.info(this.getClass(), ScAuthMsg.EXTENSION_EMPTY + " Extension {0} Null", user.getModelId());
+            log.info("{} 用户扩展信息 field = {} 为空", ScConstant.K_PREFIX, user.getModelId());
             return Ux.futureJ(user);
         }
 
@@ -254,7 +254,7 @@ class TwineExtension implements ScTwine<SUser> {
          * 2. Zero extension provide the configuration part and do executor
          * 3. Returned data formatFail is InJson of Extension
          */
-        LOG.Web.info(this.getClass(), ScAuthMsg.EXTENSION_BY_USER, user.getModelKey());
+        log.info("{} 用户扩展信息 / id = {}", ScConstant.K_PREFIX, user.getModelKey());
         return executor.apply(qr).compose(extensionJ -> {
             final JsonObject userJ = Ux.toJson(user);
             if (Ut.isNil(extensionJ)) {

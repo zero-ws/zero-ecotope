@@ -1,12 +1,12 @@
 package io.zerows.extension.module.rbac.component.authorization.extend;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.extension.module.rbac.metadata.logged.ProfileGroup;
-import io.zerows.extension.module.rbac.metadata.logged.ProfileRole;
-import io.zerows.extension.module.rbac.metadata.logged.ProfileType;
 import io.zerows.extension.module.rbac.component.authorization.Amalgam;
 import io.zerows.extension.module.rbac.component.authorization.Assembler;
 import io.zerows.extension.module.rbac.component.authorization.ScDetent;
+import io.zerows.extension.module.rbac.metadata.logged.ProfileGroup;
+import io.zerows.extension.module.rbac.metadata.logged.ProfileRole;
+import io.zerows.extension.module.rbac.metadata.logged.ProfileType;
 
 import java.util.List;
 

@@ -1,18 +1,14 @@
 package io.zerows.extension.module.rbac.component.authorization;
 
-import io.zerows.component.log.LogOf;
+import io.zerows.extension.module.rbac.common.ScConstant;
 import io.zerows.extension.module.rbac.metadata.logged.ProfileGroup;
 import io.zerows.extension.module.rbac.metadata.logged.ProfileRole;
 import io.zerows.support.Ut;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
-
-import static io.zerows.extension.module.rbac.boot.Sc.LOG;
 
 /*
  * Role Calculation
@@ -22,9 +18,8 @@ public class Amalgam {
 
     public static void logGroup(final Class<?> clazz,
                                 final List<ProfileRole> roles) {
-        final LogOf LOGGER = LogOf.get(clazz);
-        LOG.Auth.debug(LOGGER, "Group Selected: {0}, Size: {1}",
-            Ut.fromJoin(getGroups(roles)), String.valueOf(roles.size()));
+        final Logger logger = LoggerFactory.getLogger(clazz);
+        logger.info("{} 组选择 {} / 数量 {}", ScConstant.K_PREFIX, Ut.fromJoin(getGroups(roles)), String.valueOf(roles.size()));
     }
 
     public static List<ProfileRole> parent(final List<ProfileRole> roles,

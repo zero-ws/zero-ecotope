@@ -6,19 +6,19 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.KView;
 import io.zerows.epoch.metadata.security.DataBound;
+import io.zerows.extension.module.rbac.common.ScConstant;
+import io.zerows.extension.module.rbac.common.ScOwner;
 import io.zerows.extension.module.rbac.component.acl.rapier.Quinn;
 import io.zerows.extension.module.rbac.metadata.logged.ScUser;
-import io.zerows.extension.module.rbac.common.ScAuthMsg;
-import io.zerows.extension.module.rbac.common.ScOwner;
 import io.zerows.extension.skeleton.common.enums.OwnerType;
 import io.zerows.extension.skeleton.spi.UiAnchoret;
 import io.zerows.extension.skeleton.spi.UiApeakMy;
 import io.zerows.platform.constant.VName;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
-import static io.zerows.extension.module.rbac.boot.Sc.LOG;
-
+@Slf4j
 public class UiApeakMyColumn extends UiAnchoret<UiApeakMy> implements UiApeakMy {
 
     @Override
@@ -102,8 +102,9 @@ public class UiApeakMyColumn extends UiAnchoret<UiApeakMy> implements UiApeakMy 
         updatedData.put(VName.KEY_PROJECTION, updated.getJsonArray(VName.KEY_PROJECTION));
         updatedData.put(VName.KEY_CRITERIA, updated.getJsonObject(VName.KEY_CRITERIA));
         return user.view(dataKey, updatedData).compose(nil -> {
-            LOG.Auth.info(this.getLogger(), ScAuthMsg.REGION_FLUSH, habitus, dataKey,
-                nil.getJsonObject(dataKey, new JsonObject()).encodePrettily());
+            final JsonObject viewJ = nil.getJsonObject(dataKey, new JsonObject());
+            log.info("{} DataRegion 数据域刷新 -> dataKey = {}, habitus = {}, data = {}",
+                ScConstant.K_PREFIX, dataKey, habitus, viewJ.encodePrettily());
             return Ux.future(updated);
         });
     }

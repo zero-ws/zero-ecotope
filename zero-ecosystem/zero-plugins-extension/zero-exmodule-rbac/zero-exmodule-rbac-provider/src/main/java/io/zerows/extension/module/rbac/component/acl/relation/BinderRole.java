@@ -5,6 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.module.rbac.common.ScAuthKey;
+import io.zerows.extension.module.rbac.common.ScConstant;
 import io.zerows.extension.module.rbac.domain.tables.daos.RUserRoleDao;
 import io.zerows.extension.module.rbac.domain.tables.daos.SRoleDao;
 import io.zerows.extension.module.rbac.domain.tables.pojos.RUserRole;
@@ -12,16 +13,16 @@ import io.zerows.extension.module.rbac.domain.tables.pojos.SRole;
 import io.zerows.extension.module.rbac.domain.tables.pojos.SUser;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
-import static io.zerows.extension.module.rbac.boot.Sc.LOG;
-
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
 public class BinderRole extends AbstractBind<SRole> {
 
     BinderRole(final String sigma) {
@@ -63,8 +64,7 @@ public class BinderRole extends AbstractBind<SRole> {
                     /*
                      * Building relation ship
                      */
-                    LOG.Web.info(this.getClass(), "Will web username = {1}, role size = {0}",
-                        String.valueOf(roles.size()), user.getUsername());
+                    log.info("{} REL | 用户名 = {} / 角色数量 = {}", ScConstant.K_PREFIX, user.getUsername(), roles.size());
                 });
                 return Ux.future(relationList);
             })

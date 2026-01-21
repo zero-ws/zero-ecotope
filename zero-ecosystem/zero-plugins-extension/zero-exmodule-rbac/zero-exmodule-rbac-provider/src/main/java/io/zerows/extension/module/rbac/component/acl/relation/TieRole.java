@@ -7,22 +7,22 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.module.rbac.common.ScAuthKey;
-import io.zerows.extension.module.rbac.common.ScAuthMsg;
+import io.zerows.extension.module.rbac.common.ScConstant;
 import io.zerows.extension.module.rbac.domain.tables.daos.RUserRoleDao;
 import io.zerows.extension.module.rbac.domain.tables.pojos.RUserRole;
 import io.zerows.extension.skeleton.common.Ke;
 import io.zerows.extension.skeleton.spi.ScTie;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static io.zerows.extension.module.rbac.boot.Sc.LOG;
-
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
 public class TieRole implements ScTie<String, JsonArray> {
     @Override
     public Future<JsonArray> identAsync(final JsonObject userJ) {
@@ -38,7 +38,7 @@ public class TieRole implements ScTie<String, JsonArray> {
     @Override
     public Future<JsonArray> identAsync(final String userKey) {
         // Fetch related role
-        LOG.Auth.info(this.getClass(), ScAuthMsg.RELATION_USER_ROLE, userKey);
+        log.info("{} REL/查找关系 ( 用户 - 角色 ）/ 用户 id = {}", ScConstant.K_PREFIX, userKey);
         return Ke.umALink(ScAuthKey.F_USER_ID, userKey, RUserRoleDao.class);
     }
 

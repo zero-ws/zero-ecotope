@@ -10,6 +10,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.XHeader;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.epoch.web.Account;
+import io.zerows.extension.module.rbac.common.ScConstant;
 import io.zerows.extension.module.rbac.domain.tables.daos.RRolePermDao;
 import io.zerows.extension.module.rbac.domain.tables.pojos.SPermSet;
 import io.zerows.extension.module.rbac.servicespec.PermStub;
@@ -17,15 +18,15 @@ import io.zerows.extension.module.rbac.servicespec.RightsStub;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import jakarta.inject.Inject;
+import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDateTime;
-
-import static io.zerows.extension.module.rbac.boot.Sc.LOG;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 @Queue
+@Slf4j
 public class PermActor {
 
     @Inject
@@ -90,8 +91,7 @@ public class PermActor {
     public Future<JsonObject> saveDefinition(final JsonObject processed,
                                              final XHeader header, final User user) {
         final String sigma = header.getSigma();
-        LOG.Web.info(this.getClass(), "Permission Update: {0}, sigma = {1}",
-            processed.encode(), sigma);
+        log.info("{} 权限更新：{} / sigma = {}", ScConstant.K_PREFIX, processed.encode(), sigma);
 
         // Permission Data
         final JsonArray permissions = Ut.valueJArray(processed.getJsonArray(KName.DATA));

@@ -3,7 +3,6 @@ package io.zerows.extension.module.rbac.metadata;
 import io.r2mo.typed.common.MultiKeyMap;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.extension.module.rbac.component.ScClock;
 import io.zerows.platform.constant.VValue;
 import io.zerows.specification.atomic.HJson;
 
@@ -23,12 +22,12 @@ import java.util.Objects;
  * </code></pre>
  * 缓存中的数据对应的数据结构
  * <pre><code>
- *     1. {@link ScClock}
+ *     1. {@see ScClock}
  *        userKey = {@link MultiKeyMap}
  *                  userKey = ScToken
  *                  token = ScToken
  *        ( vector ), refresh_token = token 缓存中直接存
- *     2. {@link ScClock} 带有 TTL 设置，使用了 SharedMap 来存储，时间到了之后会过期
+ *     2. {@see ScClock} 带有 TTL 设置，使用了 SharedMap 来存储，时间到了之后会过期
  *     3. ScToken 多出来的两个属性
  *        - accessBytes / refreshBytes
  *        二进制格式的 token（比对专用）

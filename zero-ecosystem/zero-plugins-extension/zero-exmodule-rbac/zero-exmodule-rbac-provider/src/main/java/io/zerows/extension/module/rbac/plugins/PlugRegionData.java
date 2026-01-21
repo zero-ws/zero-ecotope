@@ -8,18 +8,20 @@ import io.zerows.cortex.extension.AbstractRegion;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.module.rbac.boot.Sc;
-import io.zerows.extension.module.rbac.common.ScAuthMsg;
+import io.zerows.extension.module.rbac.common.ScConstant;
 import io.zerows.extension.module.rbac.component.acl.region.CommonCosmo;
 import io.zerows.extension.module.rbac.component.acl.region.Cosmo;
 import io.zerows.extension.module.rbac.component.acl.region.SeekCosmo;
 import io.zerows.program.Ux;
 import io.zerows.support.Fx;
+import lombok.extern.slf4j.Slf4j;
 
 /*
  * Extension in RBAC module
  * 1) Region calculation
  * 2) Visitant calculation ( Extension More )
  */
+@Slf4j
 public class PlugRegionData extends AbstractRegion {
     private static final Cc<String, Cosmo> CC_COSMO = Cc.openThread();
 
@@ -33,7 +35,8 @@ public class PlugRegionData extends AbstractRegion {
         /* Get Critical parameters */
         return Sc.cacheView(context, envelop.habitus()).compose(matrix -> {
             if (this.isRegion(matrix)) {
-                this.logger().info(ScAuthMsg.REGION_BEFORE, context.request().path(), matrix.encode());
+                log.info("{} --> DataRegion 前置：uri = {}, region = {}",
+                    ScConstant.K_PREFIX, context.request().path(), matrix.encode());
                 /*
                  * Select cosmo by matrix
                  */
@@ -58,7 +61,7 @@ public class PlugRegionData extends AbstractRegion {
         /* Get Critical parameters */
         return Sc.cacheView(context, response.habitus()).compose(matrix -> {
             if (this.isRegion(matrix)) {
-                this.logger().info(ScAuthMsg.REGION_AFTER, matrix.encode());
+                log.info("{} <-- DataRegion 后置：{}", ScConstant.K_PREFIX, matrix.encode());
                 /*
                  * Select cosmo by matrix
                  */

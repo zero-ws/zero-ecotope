@@ -7,7 +7,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.Apt;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.module.rbac.boot.Sc;
-import io.zerows.extension.module.rbac.domain.tables.daos.OUserDao;
+import io.zerows.extension.module.rbac.common.ScConstant;
 import io.zerows.extension.module.rbac.domain.tables.daos.SUserDao;
 import io.zerows.extension.module.rbac.domain.tables.pojos.SUser;
 import io.zerows.extension.skeleton.common.Ke;
@@ -15,13 +15,13 @@ import io.zerows.platform.metadata.KRef;
 import io.zerows.program.Ux;
 import io.zerows.support.Fx;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static io.zerows.extension.module.rbac.boot.Sc.LOG;
-
+@Slf4j
 class IdcService extends AbstractIdc {
 
     IdcService(final String sigma) {
@@ -75,7 +75,7 @@ class IdcService extends AbstractIdc {
         final JsonObject condition = Ux.whereAnd();
         condition.put(KName.USERNAME + ",i", Ut.toJArray(Ut.valueSetString(compress, KName.USERNAME)));
         condition.put(KName.SIGMA, this.sigma);
-        LOG.Web.info(this.getClass(), "Unique filters: {0}", condition.encode());
+        log.info("{} 查询条件：{}", ScConstant.K_PREFIX, condition.encode());
         return DB.on(SUserDao.class).fetchJAsync(condition);
     }
 
@@ -87,8 +87,8 @@ class IdcService extends AbstractIdc {
                 compressed.add(each);
                 nameSet.add(KName.USERNAME);
             } else {
-                LOG.Web.info(this.getClass(), "User ( username = {0} ) duplicated and will be ignored: {1}",
-                    each.getString(KName.USERNAME), each.encode());
+                log.info("{} 用户 ( username = {} ) 重复，将自动忽略：{}",
+                    ScConstant.K_PREFIX, each.getString(KName.USERNAME), each.encode());
             }
         });
         return Ux.future(compressed);
@@ -98,11 +98,11 @@ class IdcService extends AbstractIdc {
         final KRef refer = new KRef();
         return this.model(userJson)
             .compose(processed -> Sc.valueAuth(processed, this.sigma))
-            .compose(DB.on(SUserDao.class)::insertAsync)
-            .compose(refer::future)
-            .compose(Sc::valueAuth)
-            .compose(DB.on(OUserDao.class)::insertAsync)
-            .compose(ou -> Ux.future(refer.get()));
+            .compose(DB.on(SUserDao.class)::insertAsync);
+        // .compose(refer::future)
+        // .compose(Sc::valueAuth)
+        // .compose(DB.on(OUserDao.class)::insertAsync)
+        // .compose(ou -> Ux.future(refer.get()));
     }
 
     private Future<List<SUser>> updateAsync(final JsonArray userJson) {

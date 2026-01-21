@@ -5,12 +5,12 @@ import io.vertx.ext.web.FileUpload;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.EndPoint;
 import io.zerows.epoch.annotations.Validated;
+import io.zerows.extension.module.rbac.common.ScConstant;
 import io.zerows.program.Ux;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.extension.StreamParam;
-
-import static io.zerows.extension.module.rbac.boot.Sc.LOG;
+import lombok.extern.slf4j.Slf4j;
 
 /*
  * User
@@ -21,6 +21,7 @@ import static io.zerows.extension.module.rbac.boot.Sc.LOG;
  */
 @EndPoint
 @Path("/api")
+@Slf4j
 public class FileAgent {
 
     @Path("/user/import")
@@ -29,7 +30,7 @@ public class FileAgent {
     public JsonObject importUser(@StreamParam @Validated final FileUpload fileUpload) {
         /* File stored */
         final String filename = fileUpload.uploadedFileName();
-        LOG.Web.info(this.getClass(), "User importing, filename = `{0}`, uploaded = `{1}`", fileUpload.fileName(), filename);
+        log.info("{} 用户导入 | 文件名：{} / 上传文件：{}", ScConstant.K_PREFIX, fileUpload.fileName(), filename);
         return Ux.toZip(filename);
     }
 }
