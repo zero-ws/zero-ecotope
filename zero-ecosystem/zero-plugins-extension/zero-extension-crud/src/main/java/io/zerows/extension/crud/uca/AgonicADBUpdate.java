@@ -7,18 +7,19 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.KField;
 import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.extension.crud.common.Ix;
+import io.zerows.extension.crud.common.IxConstant;
 import io.zerows.extension.crud.common.em.QrType;
 import io.zerows.extension.crud.uca.input.Pre;
 import io.zerows.platform.constant.VName;
 import io.zerows.platform.enums.typed.ChangeFlag;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
-
-import static io.zerows.extension.crud.common.Ix.LOG;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
 class AgonicADBUpdate implements Agonic {
 
     @Override
@@ -61,7 +62,6 @@ class AgonicADBUpdate implements Agonic {
      *
      * @param inputJ 输入的数据信息，查询条件
      * @param in     {@link IxMod} 模型信息
-     *
      * @return {@link Future} 异步记录结果
      */
     private Future<JsonObject> uniqueJAsync(final JsonObject inputJ, final IxMod in) {
@@ -109,12 +109,11 @@ class AgonicADBUpdate implements Agonic {
      *
      * @param inputJ 输入的数据信息（包含查询条件）
      * @param in     {@link IxMod} 模型信息
-     *
      * @return {@link Future} 异步记录结果
      */
     private Future<JsonArray> uniqueAAsync(final JsonObject inputJ, final IxMod in) {
         final JsonObject query = inputJ.getJsonObject(VName.KEY_CRITERIA);
-        LOG.Filter.info(this.getClass(), "( Mass Update ) Condition: {0}", query);
+        log.info("{} / 批量 Mass Update -> 条件：{}", IxConstant.K_PREFIX, query);
         final ADB jooq = Ix.jooq(in);
         return jooq.fetchJAsync(query);
     }

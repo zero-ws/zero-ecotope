@@ -6,6 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.component.compare.Vs;
 import io.zerows.component.expression.Playbook;
 import io.zerows.epoch.constant.KName;
+import io.zerows.extension.module.ambient.common.AtConstant;
 import io.zerows.extension.module.ambient.domain.tables.pojos.XActivity;
 import io.zerows.extension.module.ambient.domain.tables.pojos.XActivityRule;
 import io.zerows.extension.skeleton.common.Ke;
@@ -14,13 +15,13 @@ import io.zerows.program.Ux;
 import io.zerows.specification.modeling.HAtom;
 import io.zerows.specification.modeling.operation.HLoad;
 import io.zerows.support.Ut;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
 import java.util.function.Supplier;
-
-import static io.zerows.extension.module.ambient.boot.At.LOG;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
@@ -116,8 +117,7 @@ public abstract class TubeBase implements Tube {
         if (vs.isChange(dataO.getValue(field), dataN.getValue(field), field)) {
             return executor.get();
         } else {
-            LOG.Flow.info(this.getClass(), "The field = {0} of Atom (  identifier = {1} ) has not been changed!",
-                field, atom.identifier());
+            this.log().info("{} 字段 = {} / 模型 ( identifier = {} ) 无变更。", AtConstant.K_PREFIX, field, atom.identifier());
             return Ux.future(data);
         }
     }
@@ -133,9 +133,12 @@ public abstract class TubeBase implements Tube {
         if (!vs.isChange(dataO.getValue(field), dataN.getValue(field), field)) {
             return executor.get();
         } else {
-            LOG.Tabb.info(this.getClass(), "The field = {0} of Atom (  identifier = {1} ) has been changed!",
-                field, atom.identifier());
+            this.log().info("{} 字段 = {} / 模型 ( identifier = {} ) 已变更。", AtConstant.K_PREFIX, field, atom.identifier());
             return Ux.future(data);
         }
+    }
+
+    protected Logger log() {
+        return LoggerFactory.getLogger(this.getClass());
     }
 }

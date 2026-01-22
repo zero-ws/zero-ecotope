@@ -3,14 +3,17 @@
 [![Maven Central](https://img.shields.io/maven-central/v/io.zerows/rachel-momo.svg?label=Rachel%20Momo&style=for-the-badge&color=blue)](https://mvnrepository.com/artifact/io.zerows/rachel-momo)  [![Maven Central](https://img.shields.io/maven-central/v/io.zerows/r2mo-rapid.svg?label=R2MO%20Rapid&style=for-the-badge&color=green)](https://mvnrepository.com/artifact/io.zerows/r2mo-rapid)
 Zero Waiting
 
-> For Rachel Momo
+> For [Rachel Momo](https://www.weibo.com/maoxiaotong0216)
 
-语雀：https://www.yuque.com/jiezizhu/r2mo
+![ZERO](docs/images/logo.jpeg)
 
 ## 0. 引导
 
-目前未发布正式版本，等手中项目全部迁移完成之后会发布 `1.0.0`
-正式版本，有兴趣的朋友可以参与测试，测试项目地址：<https://gitee.com/zero-ws/zero-rachel-momo>。
+- 文档：<https://www.yuque.com/jiezizhu/r2mo>
+    - [>> 快速开始](https://www.yuque.com/jiezizhu/r2mo/gs6qygvsorlgkxb2)
+- 示例：<https://gitee.com/zero-ws/zero-rachel-momo>
+
+---
 
 ### 0.1. 主页信息
 
@@ -90,6 +93,7 @@ public class BasicApplication {
 - 📚️ 应用案例（ `app-rachel-momo` ）：
     - [x] ☘️ `app-spring-example`
         - [x] ☘️ `app-spring-auth`：Spring 安全认证专用 Demo。
+        - [x] ☘️ `app-spring-basic`：Spring 基础使用 Demo。
         - [x] ☘️ `app-spring-test`：Spring 基础应用 Demo。
     - [x] 🍓 `app-vertx-example`
         - [x] 🍓 `app-vertx-rapid`：Vert.x 基础应用。
@@ -97,7 +101,9 @@ public class BasicApplication {
         - [x] 🧊 `app-zero-basic`：Zero Core 最小化应用。
         - [x] 🧊 `app-zero-extension`：Zero Extension 扩展应用（带业务模块）。
         - [x] 🧊 `app-zero-module`：Zero 自定义模块化开发，扩展模块。
+        - [x] 🧊 `app-zero-secure`：Zero 安全测试模块。
         - [x] 🧊 `app-zero-service`：Zero 微服务应用。
+        - [x] 🧊 `app-zero-underway`：Zero 任务测试模块。
     - [x] 🐣 `app-unit-example`：公共模块。
         - [x] 🐣 `unit-zero-common`：单元测试基础
         - [x] 🐣 `unit-zero-config-l`：本地配置测试

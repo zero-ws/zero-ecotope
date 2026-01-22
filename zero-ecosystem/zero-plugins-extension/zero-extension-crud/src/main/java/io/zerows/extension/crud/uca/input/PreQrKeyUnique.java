@@ -3,19 +3,20 @@ package io.zerows.extension.crud.uca.input;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.extension.crud.common.IxConstant;
 import io.zerows.extension.crud.uca.IxMod;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.constant.VValue;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Set;
-
-import static io.zerows.extension.crud.common.Ix.LOG;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
 class PreQrKeyUnique implements Pre {
     @Override
     public Future<JsonObject> inJAsync(final JsonObject data, final IxMod in) {
@@ -24,7 +25,7 @@ class PreQrKeyUnique implements Pre {
 
         /* Each Unique */
         final JsonObject filters = this.condition(data, unique);
-        LOG.Filter.info(this.getClass(), "{0}", filters.encode());
+        log.info("{} 查询条件 By / {}", IxConstant.K_PREFIX, filters.encode());
         return Ux.future(filters);
     }
 

@@ -6,6 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.epoch.web.Envelop;
+import io.zerows.extension.module.rbac.common.ScConstant;
 import io.zerows.extension.module.rbac.common.ScOwner;
 import io.zerows.extension.module.rbac.domain.tables.daos.SResourceDao;
 import io.zerows.extension.module.rbac.domain.tables.pojos.SPacket;
@@ -13,6 +14,7 @@ import io.zerows.extension.module.rbac.domain.tables.pojos.SResource;
 import io.zerows.program.Ux;
 import io.zerows.support.Fx;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,11 +24,10 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
 
-import static io.zerows.extension.module.rbac.boot.Sc.LOG;
-
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
 class QuestAcl implements Quest {
     private final transient SyntaxRegion syntaxRegion;
     private final transient SyntaxAop syntaxAop;
@@ -91,7 +92,7 @@ class QuestAcl implements Quest {
             condition.put(KName.SIGMA, Ut.valueString(resourceData, KName.SIGMA));
             futureM.put(code, DB.on(SResourceDao.class).<SResource>fetchOneAsync(condition).compose(resource -> {
                 if (Objects.isNull(resource)) {
-                    LOG.View.info(this.getClass(), "Zero system could not findRunning the resource: {0}", code);
+                    log.info("{} Acl 没有查找到和资源匹配的记录 / {}", ScConstant.K_PREFIX, code);
                     return Ux.future();
                 }
                 return this.syncViews(resource, resourceData);

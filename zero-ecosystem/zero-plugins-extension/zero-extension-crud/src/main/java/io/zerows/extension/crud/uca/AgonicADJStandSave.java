@@ -8,20 +8,21 @@ import io.zerows.component.destine.Hymn;
 import io.zerows.epoch.metadata.KJoin;
 import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.extension.crud.common.Ix;
+import io.zerows.extension.crud.common.IxConstant;
 import io.zerows.extension.crud.uca.input.Pre;
 import io.zerows.mbse.metadata.KModule;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
-
-import static io.zerows.extension.crud.common.Ix.LOG;
 
 /**
  * 此方法主要位于
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
 class AgonicADJStandSave implements Agonic {
     private final transient IxMod module;
 
@@ -70,7 +71,6 @@ class AgonicADJStandSave implements Agonic {
      *
      * @param input 输入数据
      * @param in    {@link IxMod} 模型
-     *
      * @return {@link Future}
      */
     private Future<JsonObject> uniqueJAsync(final JsonObject input, final IxMod in) {
@@ -126,7 +126,7 @@ class AgonicADJStandSave implements Agonic {
             Conflate.ofQr(this.module.connect(), true);
         final JsonObject condition = conflate.treat(inputA, this.module.connectId());
 
-        LOG.Filter.info(this.getClass(), "( Batch ) By Joined: identifier: {0}, condition: {1}", in.module().identifier(), condition);
+        log.info("{} [ 批量 ] 连接点：identifier = {} / condition = {}", IxConstant.K_PREFIX, in.module().identifier(), condition);
         final ADB jooq = Ix.jooq(in);
         return jooq.fetchJAsync(condition);
     }

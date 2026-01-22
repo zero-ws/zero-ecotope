@@ -1,8 +1,8 @@
 package io.zerows.extension.module.rbac.component.authorization.detent;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.extension.module.rbac.metadata.logged.ProfileRole;
 import io.zerows.extension.module.rbac.component.authorization.ScDetent;
+import io.zerows.extension.module.rbac.metadata.logged.ProfileRole;
 
 import java.util.List;
 

@@ -7,16 +7,16 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.KView;
 import io.zerows.extension.crud.common.Ix;
-import io.zerows.extension.crud.common.IxMsg;
+import io.zerows.extension.crud.common.IxConstant;
 import io.zerows.extension.crud.uca.IxMod;
 import io.zerows.extension.skeleton.common.Ke;
 import io.zerows.program.Ux;
-
-import static io.zerows.extension.crud.common.Ix.LOG;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
 class PreQrKeyView implements Pre {
     @Override
     public Future<JsonObject> inJAsync(final JsonObject data, final IxMod in) {
@@ -26,7 +26,7 @@ class PreQrKeyView implements Pre {
             impactUri.key(),
             KView.smart(data.getValue(KName.VIEW))
         );
-        LOG.Dao.info(this.getClass(), IxMsg.CACHE_KEY_PROJECTION, sessionKey);
+        log.info("{} 更新缓存键 `{}` 中的列过滤信息！", IxConstant.K_PREFIX, sessionKey);
         data.put(KName.DATA_KEY, sessionKey);
         return Ux.future(data);
     }

@@ -2,22 +2,19 @@ package io.zerows.extension.crud.common;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.KField;
 import io.zerows.mbse.metadata.KModule;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static io.zerows.extension.crud.common.Ix.LOG;
-
+@Slf4j
 class IxSerialize {
-
-    private static final LogOf LOGGER = LogOf.get(IxSerialize.class);
 
     private static void serializeInternal(final JsonObject data, final KModule config) {
         /*
@@ -73,7 +70,7 @@ class IxSerialize {
 
     @SuppressWarnings("all")
     static <T> T deserializeT(final JsonObject data, final KModule config) {
-        LOG.Dao.info(LOGGER, "Normalized: \u001b[0;37m{0}\u001b[m", data.encode());
+        log.info("{} 标准化 Normalize 数据 / {}", IxConstant.K_PREFIX, data.encode());
         {
             /*
              * JsonObject / JsonArray must be converted to string
@@ -89,7 +86,7 @@ class IxSerialize {
         final T reference = Ut.isNil(pojo) ?
             Ux.fromJson(data, (Class<T>) config.getPojoCls()) :
             Ux.fromJson(data, (Class<T>) config.getPojoCls(), config.getPojo());
-        LOG.Dao.info(LOGGER, "Deserialized: {0}", reference);
+        log.info("{} 反序列化 Deserialized 结果 / {}", IxConstant.K_PREFIX, reference);
         return reference;
     }
 

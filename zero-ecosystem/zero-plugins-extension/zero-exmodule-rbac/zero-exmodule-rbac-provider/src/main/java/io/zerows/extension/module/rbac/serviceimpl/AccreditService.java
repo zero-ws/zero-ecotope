@@ -5,11 +5,9 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
-import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.security.DataBound;
 import io.zerows.extension.module.rbac.boot.Sc;
-import io.zerows.extension.module.rbac.common.ScAuthMsg;
 import io.zerows.extension.module.rbac.common.ScConstant;
 import io.zerows.extension.module.rbac.common.ScOwner;
 import io.zerows.extension.module.rbac.component.acl.rapier.Quinn;
@@ -28,13 +26,12 @@ import io.zerows.plugins.cache.HMM;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import jakarta.inject.Inject;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
 
-import static io.zerows.extension.module.rbac.boot.Sc.LOG;
-
+@Slf4j
 public class AccreditService implements AccreditStub {
-    private final static LogOf LOGGER = LogOf.get(AccreditService.class);
 
     @Inject
     private transient ActionStub stub;
@@ -158,7 +155,8 @@ public class AccreditService implements AccreditStub {
         if (actual < required) {
             return FnVertx.failOut(_80211Exception403ActionDinned.class, required, actual);
         } else {
-            LOG.Credit.debug(LOGGER, ScAuthMsg.CREDIT_LEVEL, action.getLevel(), resource.getLevel());
+            log.debug("{} Accredit Level ( action = {}, resource = {} )",
+                ScConstant.K_PREFIX, action.getLevel(), resource.getLevel());
             return Future.succeededFuture(resource);
         }
     }
@@ -172,7 +170,8 @@ public class AccreditService implements AccreditStub {
             final String requestUri = request.method() + " " + request.uri();
             return FnVertx.failOut(_80209Exception404ActionMissing.class, requestUri);
         } else {
-            LOG.Credit.debug(LOGGER, ScAuthMsg.CREDIT_ACTION, request.uriRequest(), request.method(), request.uri());
+            log.debug("{} Accredit action ( uri = `{}`, method = `{}`, normalizedUri = `{}` )",
+                ScConstant.K_PREFIX, request.uriRequest(), request.method(), request.uri());
             return Future.succeededFuture(action);
         }
     }
@@ -186,7 +185,7 @@ public class AccreditService implements AccreditStub {
             final String requestUri = request.method() + " " + request.uri();
             return FnVertx.failOut(_80210Exception404ResourceMissing.class, action.getResourceId(), requestUri);
         } else {
-            LOG.Credit.debug(LOGGER, ScAuthMsg.CREDIT_RESOURCE, resource.getKey());
+            log.debug("{} Accredit resource ( resource = `{}` )", ScConstant.K_PREFIX, resource.getKey());
             return Future.succeededFuture(resource);
         }
     }

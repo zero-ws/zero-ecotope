@@ -7,28 +7,29 @@ import io.zerows.cortex.metadata.WebRule;
 import io.zerows.cosmic.plugins.validation.Rigor;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.crud.common.Ix;
+import io.zerows.extension.crud.common.IxConstant;
 import io.zerows.extension.crud.uca.IxMod;
 import io.zerows.mbse.metadata.KModule;
 import io.zerows.platform.constant.VString;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ConcurrentMap;
 
-import static io.zerows.extension.crud.common.Ix.LOG;
-
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
 class PreCodex implements Pre {
     @Override
     public Future<JsonObject> inJAsync(final JsonObject data, final IxMod in) {
         /* 1.method, uri */
         final String key = this.getKey(data, in);
 
-        LOG.Verify.info(this.getClass(), "---> Rule: {0}", key);
+        log.info("{} ---> 验证规则 Key：{}", IxConstant.K_PREFIX, key);
 
         final ConcurrentMap<String, List<WebRule>> rules = Ix.getRules(key);
         if (!rules.isEmpty()) {
@@ -38,7 +39,7 @@ class PreCodex implements Pre {
             final Rigor rigor = Rigor.get(JsonObject.class);
             final WebException error = rigor.verify(rules, data);
             if (null != error) {
-                LOG.Verify.info(this.getClass(), "---> Error Code: {0}", String.valueOf(error.getCode()));
+                log.info("{} ---> 错误代码：{}", IxConstant.K_PREFIX, error.getCode());
                 return Future.failedFuture(error);
             }
         }

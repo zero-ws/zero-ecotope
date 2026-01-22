@@ -2,11 +2,9 @@ package io.zerows.plugins.store.neo4j;
 
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Vertx;
-import io.zerows.epoch.annotations.Infusion;
 import io.zerows.epoch.application.YmlCore;
 import io.zerows.sdk.plugins.Infix;
 
-@Infusion
 @SuppressWarnings("all")
 public class Neo4jInfix implements Infix {
 

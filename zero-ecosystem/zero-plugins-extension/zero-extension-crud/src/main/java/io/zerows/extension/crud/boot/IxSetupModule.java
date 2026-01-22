@@ -102,7 +102,6 @@ class IxSetupModule extends IxSetupBase<KModule> {
      *
      * @param module     模块定义
      * @param identifier 标识符
-     *
      * @return 初始化的默认值
      */
     @SuppressWarnings("all")
@@ -188,7 +187,7 @@ class IxSetupModule extends IxSetupBase<KModule> {
      *     appKey,         X-App-Key   应用程序密钥
      *     tenantId,        X-Tenant-Id 租户标识符
      * </code></pre>
-     *
+     * <p>
      * 处理的数据结构如下：
      * <pre><code>
      *     {
@@ -282,10 +281,10 @@ class IxSetupModule extends IxSetupBase<KModule> {
     public KModule map(final String actor) {
         final KModule module = MODULE_MAP.getOr(actor);
         if (Objects.isNull(module)) {
-            log.warn("{} Actor: identifier = `{}` 配置丢失!", IxConstant.K_PREFIX_CRUD, actor);
+            log.warn("{} Actor: identifier = `{}` 配置丢失!", IxConstant.K_PREFIX, actor);
             return null;
         } else {
-            log.info("{} Actor: identifier = `{}`", IxConstant.K_PREFIX_CRUD, actor);
+            log.info("{} Actor: identifier = `{}`", IxConstant.K_PREFIX, actor);
             return module;
         }
     }

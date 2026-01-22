@@ -5,6 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.module.rbac.common.ScAuthKey;
+import io.zerows.extension.module.rbac.common.ScConstant;
 import io.zerows.extension.module.rbac.domain.tables.daos.RUserGroupDao;
 import io.zerows.extension.module.rbac.domain.tables.daos.SGroupDao;
 import io.zerows.extension.module.rbac.domain.tables.pojos.RUserGroup;
@@ -12,16 +13,16 @@ import io.zerows.extension.module.rbac.domain.tables.pojos.SGroup;
 import io.zerows.extension.module.rbac.domain.tables.pojos.SUser;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
-import static io.zerows.extension.module.rbac.boot.Sc.LOG;
-
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
 public class BinderGroup extends AbstractBind<SGroup> {
 
     BinderGroup(final String sigma) {
@@ -52,8 +53,7 @@ public class BinderGroup extends AbstractBind<SGroup> {
                     /*
                      * Building relation ship
                      */
-                    LOG.Web.info(this.getClass(), "Will web username = {1}, group size = {0}",
-                        String.valueOf(groups.size()), user.getUsername());
+                    log.info("{} REL | 用户名 = {} / 组数量 = {}", ScConstant.K_PREFIX, user.getUsername(), groups.size());
                 });
                 return Ux.future(relationList);
             })

@@ -181,13 +181,13 @@
   },
   "left-ribbon": {
     "hiddenItems": {
+      "bases:新建数据库": false,
       "switcher:打开快速切换": false,
       "graph:查看关系图谱": false,
       "canvas:新建白板": false,
       "daily-notes:打开/创建今天的日记": false,
       "templates:插入模板": false,
       "command-palette:打开命令面板": false,
-      "bases:创建新数据库": false,
       "markdown-importer:打开 Markdown 格式转换器": false,
       "publish:发布更改": false,
       "audio-recorder:开始/结束录音": false,
@@ -200,6 +200,9 @@
   },
   "active": "ad17b47082cda379",
   "lastOpenFiles": [
+    "docs/images/logo.jpeg.sb-b752e07b-XFqRoX",
+    "docs/images/logo.jpeg",
+    "docs/images",
     "docs/dependency-r2mo-source.md",
     "docs/dependency-r2mo-compile.md",
     "docs/graph/design/App应用结构.md",
@@ -212,7 +215,6 @@
     "zero-ecosystem/zero-plugins-extension/zero-exmodule-rbac/zero-exmodule-rbac-provider/target/classes/io/zerows/extension/module/rbac/metadata/logged/ScRole.class",
     "zero-ecosystem/zero-plugins-extension/zero-exmodule-rbac/zero-exmodule-rbac-provider/target/classes/io/zerows/extension/module/rbac/component/ScClockBase.class",
     "zero-ecosystem/zero-plugins-extension/zero-exmodule-rbac/zero-exmodule-rbac-provider/target/classes/io/zerows/extension/module/rbac/component/ScClockSMS.class",
-    "zero-ecosystem/zero-plugins-extension/zero-exmodule-rbac/zero-exmodule-rbac-provider/target/classes/io/zerows/extension/module/rbac/component/ScClock.class",
     "docs/graph/design/App应用结构.excalidraw.md",
     "docs/graph/api/public/app_name_$name.md",
     "README.md",
@@ -244,7 +246,6 @@
     "docs/previous/image/request-mode4.png",
     "docs/previous/image/request-mode3.png",
     "docs/previous/image/request-mode2.png",
-    "docs/previous/image/request-mode1.png",
-    "docs/previous/image/minikube-dashboard.png"
+    "docs/previous/image/request-mode1.png"
   ]
 }

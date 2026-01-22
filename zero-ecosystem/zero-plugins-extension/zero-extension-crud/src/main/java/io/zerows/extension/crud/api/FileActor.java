@@ -4,19 +4,13 @@ import io.vertx.core.Future;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.LogOf;
 import io.zerows.epoch.annotations.Address;
-import io.zerows.epoch.annotations.Infusion;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.crud.common.Ix;
 import io.zerows.extension.crud.common.em.ApiSpec;
-import io.zerows.extension.crud.uca.Agonic;
-import io.zerows.extension.crud.uca.IxMod;
-import io.zerows.extension.crud.uca.IxPanel;
-import io.zerows.extension.crud.uca.IxRequest;
-import io.zerows.extension.crud.uca.Tran;
+import io.zerows.extension.crud.uca.*;
 import io.zerows.extension.crud.uca.input.Pre;
 import io.zerows.extension.crud.uca.next.Co;
 import io.zerows.mbse.metadata.KModule;
@@ -25,6 +19,7 @@ import io.zerows.plugins.excel.ExcelClient;
 import io.zerows.program.Ux;
 import io.zerows.specification.modeling.metadata.HMetaAtom;
 import io.zerows.support.Ut;
+import jakarta.inject.Inject;
 
 import java.util.List;
 
@@ -32,9 +27,7 @@ import java.util.List;
 @SuppressWarnings("all")
 public class FileActor {
 
-    private static final LogOf LOGGER = LogOf.get(FileActor.class);
-
-    @Infusion
+    @Inject
     private transient ExcelClient client;
 
     @Address(Addr.File.IMPORT)
@@ -73,7 +66,7 @@ public class FileActor {
          * Here extract query by `criteria` node, it will be synced with
          * dynamic exporting here.
          **/
-        JsonObject criteria = Ut.valueJObject(condition.getJsonObject(VName.KEY_CRITERIA));
+        final JsonObject criteria = Ut.valueJObject(condition.getJsonObject(VName.KEY_CRITERIA));
         final IxPanel panel = IxPanel.on(request);
         final IxMod mod = request.active();
         return ViewHelper.fetchFull(request).runJ(request.dataV())

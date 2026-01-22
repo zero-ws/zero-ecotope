@@ -7,8 +7,8 @@ import io.zerows.epoch.metadata.UObject;
 import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.module.rbac.boot.Sc;
-import io.zerows.extension.module.rbac.component.acl.relation.Junc;
 import io.zerows.extension.module.rbac.common.ScAuthKey;
+import io.zerows.extension.module.rbac.component.acl.relation.Junc;
 import io.zerows.extension.module.rbac.domain.tables.daos.OUserDao;
 import io.zerows.extension.module.rbac.domain.tables.daos.RUserGroupDao;
 import io.zerows.extension.module.rbac.domain.tables.daos.RUserRoleDao;
@@ -104,9 +104,9 @@ public class UserService implements UserStub {
         return DB.on(SUserDao.class).insertAsync(user)
             .compose(refer::future)
             // 创建认证信息
-            .compose(inserted -> Sc.valueAuth(inserted, params))
+            // .compose(inserted -> Sc.valueAuth(inserted, params))
             // Insert new OUser Record
-            .compose(oUser -> DB.on(OUserDao.class).insertAsync(oUser))
+            // .compose(oUser -> DB.on(OUserDao.class).insertAsync(oUser))
             // delete attribute: password from user information To avoid update to EMPTY string
             .compose(entity -> Ux.futureJ(refer.<SUser>get().setPassword(null)));
     }

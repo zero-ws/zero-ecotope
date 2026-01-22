@@ -3,10 +3,10 @@ package io.zerows.extension.crud.uca;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
+import io.zerows.extension.crud.common.IxConstant;
 import io.zerows.platform.constant.VString;
 import io.zerows.program.Ux;
-
-import static io.zerows.extension.crud.common.Ix.LOG;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 针对 COUNT 聚集的核心组件操作
@@ -22,6 +22,7 @@ import static io.zerows.extension.crud.common.Ix.LOG;
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
 class AgonicADJCount implements Agonic {
     @Override
     public Future<JsonObject> runJAsync(final JsonObject input, final IxMod in) {
@@ -29,7 +30,8 @@ class AgonicADJCount implements Agonic {
         if (!input.containsKey(VString.EMPTY)) {
             input.put(VString.EMPTY, Boolean.TRUE);
         }
-        LOG.Filter.info(this.getClass(), "( Count ) Condition: {0}", input);
+
+        log.info("{} / 统计 Count -> 条件：{}", IxConstant.K_PREFIX, input);
 
 
         final Operate<JsonObject, Long> operate = Operate.ofCount();

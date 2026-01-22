@@ -5,28 +5,29 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.DB;
-import io.zerows.extension.module.rbac.metadata.AclData;
-import io.zerows.extension.module.rbac.spi.ScConfineBuiltIn;
+import io.zerows.extension.module.rbac.common.ScConstant;
 import io.zerows.extension.module.rbac.component.acl.rapid.Dmx;
 import io.zerows.extension.module.rbac.component.acl.rapid.DmxColumn;
 import io.zerows.extension.module.rbac.component.acl.rapid.DmxQr;
 import io.zerows.extension.module.rbac.component.acl.rapid.DmxRow;
 import io.zerows.extension.module.rbac.domain.tables.daos.SVisitantDao;
 import io.zerows.extension.module.rbac.domain.tables.pojos.SVisitant;
+import io.zerows.extension.module.rbac.metadata.AclData;
+import io.zerows.extension.module.rbac.spi.ScConfineBuiltIn;
 import io.zerows.extension.skeleton.spi.ScConfine;
 import io.zerows.platform.constant.VValue;
 import io.zerows.platform.enums.EmSecure;
 import io.zerows.program.Ux;
 import io.zerows.sdk.security.Acl;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
-
-import static io.zerows.extension.module.rbac.boot.Sc.LOG;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
 class SyntaxAop {
     static final Cc<String, ScConfine> CC_FINITY = Cc.openThread();
 
@@ -78,7 +79,8 @@ class SyntaxAop {
         requestJ.put(KName.VIEW_ID, viewData.getString(KName.KEY));
         requestJ.put(KName.VIEW, viewData.getString(KName.NAME, VValue.DFT.V_VIEW));
         requestJ.put(KName.POSITION, viewData.getString(KName.POSITION, VValue.DFT.V_POSITION));
-        LOG.Visit.info(SyntaxAop.class, "Confine component input: {0}", requestJ.encode());
+
+        log.info("{} Confine 组件输入：{}", ScConstant.K_PREFIX, requestJ.encode());
         final ScConfine confine = CC_FINITY.pick(() -> Ut.instance(confineCls), confineCls.getName());
         return confine.restrict(requestJ, syntaxJ);
     }

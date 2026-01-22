@@ -6,8 +6,6 @@ import io.vertx.core.http.HttpMethod;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.aop.Aspect;
-import io.zerows.component.log.Log;
-import io.zerows.component.log.LogModule;
 import io.zerows.cortex.metadata.WebRule;
 import io.zerows.epoch.metadata.KField;
 import io.zerows.epoch.store.jooq.ADB;
@@ -40,7 +38,6 @@ public class Ix {
      * </code></pre>
      *
      * @param value 被解析的列值
-     *
      * @return {@link Kv} 列解析结果
      */
     public static Kv<String, String> onColumn(final Object value) {
@@ -57,7 +54,6 @@ public class Ix {
      * </code></pre>
      *
      * @param in {@link IxMod} 模型对象
-     *
      * @return {@link Kv} 影响的URI信息
      */
     public static Kv<String, HttpMethod> onImpact(final IxMod in) {
@@ -76,7 +72,6 @@ public class Ix {
      * 分组标识规则，分成若干组，第一位表示每一组的属性集
      *
      * @param field {@link KField} 字段定义信息
-     *
      * @return {@link JsonArray} 解析结果
      */
     public static JsonArray onMatrix(final KField field) {
@@ -93,7 +88,6 @@ public class Ix {
      * </code></pre>
      *
      * @param in {@link IxMod} 模型对象
-     *
      * @return {@link JsonObject} 解析结果
      */
     public static JsonObject onParameters(final IxMod in) {
@@ -105,7 +99,6 @@ public class Ix {
      *
      * @param active  当前激活的模块
      * @param columns 当前激活的模块的列信息
-     *
      * @return {@link HMetaAtom} 计算结果
      */
     public static HMetaAtom onAtom(final IxMod active, final JsonArray columns) {
@@ -126,7 +119,6 @@ public class Ix {
      * @param in        {@link IxMod} 模型对象
      * @param executors 执行链
      * @param <T>       输入类型
-     *
      * @return {@link Future} 执行结果
      */
     @SafeVarargs
@@ -176,7 +168,6 @@ public class Ix {
      * 返回单表操作的 {@link ADB} 对象，针对主模块的构造操作
      *
      * @param in {@link IxMod} 模块输入参数
-     *
      * @return {@link ADB} 操作对象
      */
     public static ADB jooq(final IxMod in) {
@@ -189,7 +180,6 @@ public class Ix {
      *
      * @param module  {@link KModule} 模块输入参数
      * @param envelop {@link Envelop} 请求的统一资源模型
-     *
      * @return {@link ADB} 操作对象
      */
     public static ADB jooq(final KModule module, final Envelop envelop) {
@@ -202,7 +192,6 @@ public class Ix {
      *
      * @param in      {@link IxMod} 模块输入参数
      * @param connect {@link KModule} 连接模块
-     *
      * @return {@link ADJ} 操作对象
      */
     public static ADJ join(final IxMod in, final KModule connect) {
@@ -229,18 +218,5 @@ public class Ix {
 
     public static String getColumnLabel() {
         return MDCRUDManager.of().getColumnLabel();
-    }
-
-    // --------------------------------- Logger Part
-    public interface LOG {
-
-        String MODULE = "Εκδήλωση";
-
-        LogModule Filter = Log.modulat(MODULE).extension("Filter");
-        LogModule Init = Log.modulat(MODULE).extension("Init");
-        LogModule Rest = Log.modulat(MODULE).extension("Rest");
-        LogModule Web = Log.modulat(MODULE).extension("Web");
-        LogModule Dao = Log.modulat(MODULE).extension("Dao");
-        LogModule Verify = Log.modulat(MODULE).extension("Verify");
     }
 }

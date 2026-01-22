@@ -5,17 +5,19 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
-import io.zerows.epoch.annotations.Infusion;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.web.Envelop;
+import io.zerows.extension.module.rbac.common.ScConstant;
 import io.zerows.extension.module.rbac.component.acl.relation.IdcStub;
 import io.zerows.plugins.excel.ExcelClient;
 import io.zerows.plugins.excel.metadata.ExRecord;
 import io.zerows.plugins.excel.metadata.ExTable;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
+import jakarta.inject.Inject;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -25,12 +27,11 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static io.zerows.extension.module.rbac.boot.Sc.LOG;
-
 @Queue
+@Slf4j
 public class FileActor {
 
-    @Infusion
+    @Inject
     private transient ExcelClient client;
 
     @Address(Addr.User.IMPORT)
@@ -64,8 +65,8 @@ public class FileActor {
                 final List<JsonObject> records = table.get().stream()
                     .filter(Objects::nonNull)
                     .map(ExRecord::toJson)
-                    .collect(Collectors.toList());
-                LOG.Web.info(this.getClass(), "Table: {0}, Records: {1}", table.getName(), String.valueOf(records.size()));
+                    .toList();
+                log.info("{} 表 {} / 记录数量 {}", ScConstant.K_PREFIX, table.getName(), String.valueOf(records.size()));
                 return records.stream();
             }).forEach(record -> {
                 /*
@@ -83,7 +84,7 @@ public class FileActor {
                     record.put(KName.LANGUAGE, KWeb.ARGS.V_LANGUAGE);
                     prepared.add(record);
                 } else {
-                    LOG.Web.warn(this.getClass(), "Ignored record: {0}", record.encode());
+                    log.warn("{} 忽略记录：{}", ScConstant.K_PREFIX, record.encode());
                 }
             });
             final String sigma = headers.getString(KName.SIGMA);

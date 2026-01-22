@@ -2,30 +2,27 @@ package io.zerows.extension.module.ambient.spi;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.DB;
-import io.zerows.extension.module.ambient.common.AtMsg;
+import io.zerows.extension.module.ambient.common.AtConstant;
 import io.zerows.extension.module.ambient.domain.tables.daos.XSourceDao;
 import io.zerows.extension.module.ambient.domain.tables.pojos.XSource;
 import io.zerows.extension.skeleton.spi.ExInit;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
 import java.util.UUID;
 import java.util.function.Function;
 
-import static io.zerows.extension.module.ambient.boot.At.LOG;
-
+@Slf4j
 public class ExInitSource implements ExInit {
-
-    private static final LogOf LOGGER = LogOf.get(ExInitSource.class);
 
     @Override
     public Function<JsonObject, Future<JsonObject>> apply() {
         return appJson -> {
-            LOG.App.info(LOGGER, AtMsg.INIT_SOURCE, appJson.encode());
+            log.info("{} XSource 初始化: {}", AtConstant.K_PREFIX, appJson.encode());
             /* X_SOURCE initialization */
             final JsonObject sourceJson = appJson.getJsonObject(KName.SOURCE);
             final XSource source = this.init(sourceJson, appJson);

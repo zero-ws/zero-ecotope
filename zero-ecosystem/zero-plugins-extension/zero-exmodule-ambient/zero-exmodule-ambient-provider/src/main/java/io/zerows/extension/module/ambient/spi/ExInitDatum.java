@@ -27,7 +27,7 @@ public class ExInitDatum implements ExInit {
     @Override
     public Function<JsonObject, Future<JsonObject>> apply() {
         return appJson -> {
-            log.info("{} 数据加载，应用配置：{}", AtConstant.K_PREFIX_AMB, appJson.encode());
+            log.info("{} 数据加载，应用配置：{}", AtConstant.K_PREFIX, appJson.encode());
             return this.doLoading(appJson)
                 /* Extension */
                 .compose(this::doExtension);
@@ -66,7 +66,7 @@ public class ExInitDatum implements ExInit {
             /* ExcelClient */
             final ExcelClient client = ExcelActor.ofClient();
             client.importAsync(filename, result -> {
-                log.info("{} 数据加载，文件源：{}", AtConstant.K_PREFIX_AMB, filename);
+                log.info("{} 数据加载，文件源：{}", AtConstant.K_PREFIX, filename);
                 if (result.succeeded()) {
                     final JsonObject endJ = new JsonObject();
                     endJ.put(filename, Result.SUCCESS.name());

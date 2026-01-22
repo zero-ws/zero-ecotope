@@ -3,8 +3,6 @@ package io.zerows.extension.module.ambient.component;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
-import io.zerows.component.log.LogO;
-import io.zerows.support.Ut;
 
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.Supplier;
@@ -23,8 +21,4 @@ public interface Cabinet<T> {
     }
 
     Future<ConcurrentMap<String, T>> loadAsync(final Vertx container);
-
-    default LogO logger() {
-        return Ut.Log.boot(this.getClass());
-    }
 }

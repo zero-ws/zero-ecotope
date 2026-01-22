@@ -12,6 +12,7 @@ import io.zerows.platform.enums.EmDS;
 import io.zerows.platform.metadata.KDictConfig;
 import io.zerows.program.Ux;
 import io.zerows.support.Fx;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,11 +20,10 @@ import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-import static io.zerows.extension.module.ambient.boot.At.LOG;
-
 /*
  * Dictionary implementation class
  */
+@Slf4j
 public class DictionaryAmbient implements Dictionary {
     private static final Cc<String, DatumStub> CC_DICT = Cc.openThread();
 
@@ -61,8 +61,8 @@ public class DictionaryAmbient implements Dictionary {
                 report.append("[ PT ] Dictionary Total：").append(dict.size());
                 dict.forEach((key, array) -> report
                     .append("\n\tkey = ").append(key)
-                    .append(", findRunning size = ").append(array.size()));
-                LOG.Flow.info(this.getClass(), report.toString());
+                    .append(", value size = ").append(array.size()));
+                log.info(report.toString());
                 return Ux.future(dict);
             });
         }

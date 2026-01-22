@@ -4,38 +4,14 @@ import io.zerows.cortex.sdk.HQBE;
 import io.zerows.epoch.boot.ConfigMod;
 import io.zerows.epoch.management.OCacheClass;
 import io.zerows.epoch.spi.Dictionary;
-import io.zerows.extension.skeleton.spi.ExActivity;
-import io.zerows.extension.skeleton.spi.ExApp;
-import io.zerows.extension.skeleton.spi.ExArbor;
-import io.zerows.extension.skeleton.spi.ExAtom;
-import io.zerows.extension.skeleton.spi.ExAttachment;
-import io.zerows.extension.skeleton.spi.ExIo;
-import io.zerows.extension.skeleton.spi.ExLinkage;
-import io.zerows.extension.skeleton.spi.ExModulat;
-import io.zerows.extension.skeleton.spi.ExOwner;
-import io.zerows.extension.skeleton.spi.ExSetting;
-import io.zerows.extension.skeleton.spi.ExTransit;
-import io.zerows.extension.skeleton.spi.ExUser;
-import io.zerows.extension.skeleton.spi.ScCredential;
-import io.zerows.extension.skeleton.spi.ScOrbit;
-import io.zerows.extension.skeleton.spi.ScPermit;
-import io.zerows.extension.skeleton.spi.ScRoutine;
-import io.zerows.extension.skeleton.spi.ScSeeker;
-import io.zerows.extension.skeleton.spi.UiApeak;
-import io.zerows.extension.skeleton.spi.UiApeakMy;
-import io.zerows.extension.skeleton.spi.UiForm;
-import io.zerows.extension.skeleton.spi.UiValve;
+import io.zerows.extension.skeleton.spi.*;
 import io.zerows.platform.constant.VString;
 import io.zerows.specification.development.HMaven;
 import io.zerows.spi.HPI;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -92,13 +68,15 @@ class ExBoot {
     static void vModule() {
         log.info("[ XMOD ]  加载模块 ID 集合：");
         final Set<Class<?>> scanned = OCacheClass.entireValue();
+        final Set<String> idSet = new TreeSet<>();
         scanned.forEach(item -> {
             if (Arrays.asList(item.getInterfaces()).contains(HMaven.class)) {
                 final String value = Ut.field(item, "BUNDLE_SYMBOLIC_NAME");
                 if (Objects.nonNull(value)) {
-                    log.info("[ XMOD ]    - {}", value);
+                    idSet.add(value);
                 }
             }
         });
+        idSet.forEach(value -> log.info("[ XMOD ]    - {}", value));
     }
 }

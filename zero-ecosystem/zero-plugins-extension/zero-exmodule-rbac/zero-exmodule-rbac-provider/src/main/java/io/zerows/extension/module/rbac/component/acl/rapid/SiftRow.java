@@ -2,21 +2,18 @@ package io.zerows.extension.module.rbac.component.acl.rapid;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.LogOf;
-import io.zerows.extension.module.rbac.common.ScAuthMsg;
+import io.zerows.extension.module.rbac.common.ScConstant;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
 import java.util.Set;
 
-import static io.zerows.extension.module.rbac.boot.Sc.LOG;
-
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
 class SiftRow {
-
-    private static final LogOf LOGGER = LogOf.get(SiftRow.class);
 
     static JsonObject onAcl(final JsonObject rows, final Set<String> visible) {
         final JsonObject result = new JsonObject();
@@ -44,7 +41,7 @@ class SiftRow {
              */
             result.addAll(input);
         } else {
-            LOG.Auth.info(LOGGER, ScAuthMsg.REGION_ROWS, rowData.encode());
+            log.info("{} DataRegion 行过滤 = {}", ScConstant.K_PREFIX, rowData.encode());
             input.stream().filter(Objects::nonNull)
                 .map(item -> (JsonObject) item)
                 .filter(item -> isMatch(item, rowData))

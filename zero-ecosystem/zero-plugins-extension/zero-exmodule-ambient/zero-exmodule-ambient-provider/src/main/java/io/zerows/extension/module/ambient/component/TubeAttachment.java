@@ -4,23 +4,24 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
+import io.zerows.extension.module.ambient.common.AtConstant;
 import io.zerows.extension.module.ambient.common.em.TubeType;
 import io.zerows.extension.module.ambient.domain.tables.pojos.XActivityRule;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.enums.typed.ChangeFlag;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-import static io.zerows.extension.module.ambient.boot.At.LOG;
-
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
 public class TubeAttachment extends TubeBase {
     @Override
     public Future<JsonObject> traceAsync(final JsonObject data, final XActivityRule rule) {
@@ -40,7 +41,7 @@ public class TubeAttachment extends TubeBase {
             }
         };
         final boolean isDiff = Ut.isDiff(fileN, fileO, fieldSet);
-        LOG.Tabb.info(this.getClass(), "附件检查：{0}", isDiff);
+        log.info("{} 附件检查 {}", AtConstant.K_PREFIX, isDiff);
         if (isDiff) {
             /*
              * data 中特殊构造 __message

@@ -65,13 +65,13 @@ public class MDAmbientActor extends MDModuleActor {
         final AtConfig config = this.manager().config();
         final boolean disabled = Ut.isNil(config.getFileIntegration());
         if (disabled) {
-            log.info("{} 文档平台已禁用 Document Platform Disabled !!", AtConstant.K_PREFIX_AMB);
+            log.info("{} 文档平台已禁用 Document Platform Disabled !!", AtConstant.K_PREFIX);
             return Future.succeededFuture(Boolean.TRUE);
         }
 
         final Set<Future<Boolean>> docStarter = new HashSet<>();
         ambient.app().forEach((k, v) -> {
-            log.info("{} 初始化文档平台 AppId = {}", AtConstant.K_PREFIX_AMB, k);
+            log.info("{} 初始化文档平台 AppId = {}", AtConstant.K_PREFIX, k);
             docStarter.add(this.startAsync(v, config));
         });
         return Fx.combineB(docStarter);
@@ -84,7 +84,7 @@ public class MDAmbientActor extends MDModuleActor {
         final HApp app = ark.app();
         final String appId = app.id(); // Ut.valueString(appJ, KName.KEY);
         return docStub.initialize(appId, config.getFileIntegration()).compose(initialized -> {
-            log.info("{} / AppId = {}, 目录数量 = {}", AtConstant.K_PREFIX_AMB, appId, initialized.size());
+            log.info("{} / AppId = {}, 目录数量 = {}", AtConstant.K_PREFIX, appId, initialized.size());
             return Ux.futureT();
         });
     }

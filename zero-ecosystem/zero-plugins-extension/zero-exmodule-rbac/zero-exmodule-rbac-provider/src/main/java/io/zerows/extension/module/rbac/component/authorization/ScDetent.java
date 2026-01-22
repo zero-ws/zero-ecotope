@@ -3,17 +3,10 @@ package io.zerows.extension.module.rbac.component.authorization;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.extension.module.rbac.metadata.logged.ProfileGroup;
-import io.zerows.extension.module.rbac.metadata.logged.ProfileRole;
 import io.zerows.extension.module.rbac.component.authorization.child.GcCritical;
 import io.zerows.extension.module.rbac.component.authorization.child.GcHorizon;
 import io.zerows.extension.module.rbac.component.authorization.child.GcOverlook;
-import io.zerows.extension.module.rbac.component.authorization.detent.ScDetentChild;
-import io.zerows.extension.module.rbac.component.authorization.detent.ScDetentExtend;
-import io.zerows.extension.module.rbac.component.authorization.detent.ScDetentGroup;
-import io.zerows.extension.module.rbac.component.authorization.detent.ScDetentInherit;
-import io.zerows.extension.module.rbac.component.authorization.detent.ScDetentParent;
-import io.zerows.extension.module.rbac.component.authorization.detent.ScDetentRole;
+import io.zerows.extension.module.rbac.component.authorization.detent.*;
 import io.zerows.extension.module.rbac.component.authorization.direct.GdCritical;
 import io.zerows.extension.module.rbac.component.authorization.direct.GdHorizon;
 import io.zerows.extension.module.rbac.component.authorization.direct.GdOverlook;
@@ -26,6 +19,8 @@ import io.zerows.extension.module.rbac.component.authorization.inherit.GiOverloo
 import io.zerows.extension.module.rbac.component.authorization.parent.GpCritical;
 import io.zerows.extension.module.rbac.component.authorization.parent.GpHorizon;
 import io.zerows.extension.module.rbac.component.authorization.parent.GpOverlook;
+import io.zerows.extension.module.rbac.metadata.logged.ProfileGroup;
+import io.zerows.extension.module.rbac.metadata.logged.ProfileRole;
 import io.zerows.program.Ux;
 
 import java.util.List;
