@@ -191,6 +191,11 @@ public class ZeroFs {
         return this.loader().inJObject(filepath);
     }
 
+    public JsonArray inJArray(final String filename) {
+        final String filepath = this.inPath(filename);
+        return this.loader().inJArray(filepath);
+    }
+
     public JsonObject inYamlJ(final String filename) {
         final String filepath = this.inPath(filename);
         return this.loader().inYamlJ(filepath);
@@ -220,6 +225,7 @@ public class ZeroFs {
         final String dirPath = this.inPath(directory);
         return this.loader().ioFiles(dirPath);
     }
+
 
     public List<String> inDirectories(final String directory) {
         final String dirPath = this.inPath(directory);

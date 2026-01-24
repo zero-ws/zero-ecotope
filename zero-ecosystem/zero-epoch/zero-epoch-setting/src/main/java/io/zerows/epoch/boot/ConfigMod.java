@@ -41,6 +41,8 @@ public interface ConfigMod {
 
     JsonObject inJObject(String filename);
 
+    JsonArray inJArray(String filename);
+
     InputStream inStream(String filename);
 
     List<String> ioDirectories(String directory);

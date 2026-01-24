@@ -75,8 +75,10 @@ class MakerIoEntity extends MakerIoBase<MDEntity> {
         // model/<identifier>/entity.json / 一旦定义了实体，此处必须包含 entity.json 文件
         final String idFile = Ut.ioPath("model/" + idOfDir, "entity.json");
         final JsonObject entityJ = this.io().inJObject(idFile);
+        String idColumnsFile = Ut.ioPath("model/" + idOfDir, "column.json");
+        JsonArray columnA = this.io().inJArray(idColumnsFile);
+
         // model/<identifier>/column.json
-        final JsonArray columnA = new JsonArray();
         final String idOfFile = Ut.valueString(entityJ, KName.IDENTIFIER);
 
 
