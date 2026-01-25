@@ -10,6 +10,7 @@ import io.r2mo.typed.cc.Cc;
 import io.r2mo.typed.common.Kv;
 import io.r2mo.vertx.common.cache.MemoAtSecurity;
 import io.vertx.core.Future;
+import io.zerows.program.Ux;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
@@ -401,10 +402,11 @@ public class AsyncUserCache implements UserCache {
         if (refreshToken == null || userId == null) {
             return;
         }
+        // FIX:在vertx中，异转同需要此处在其虚拟线程进行，否则会线程阻塞
+        Ux.waitVirtual(()-> Future.await(
+                 this.factory().ofRefresh().put(refreshToken, userId.toString())
+         ));
 
-        Future.await(
-            this.factory().ofRefresh().put(refreshToken, userId.toString())
-        );
     }
 
     /**
