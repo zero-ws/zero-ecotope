@@ -87,7 +87,8 @@ public class MDModuleRegistry {
      */
     public Future<HAmbient> withAmbient(final HConfig config, final Vertx vertxRef) {
         final HAmbient ambient = KPivot.running();
-        if (Objects.nonNull(ambient)) {
+        //FIX:暂时这样做,否则在后续步骤ambient.app 等于空数组
+        if (!ambient.app().isEmpty()) {
             return Future.succeededFuture(ambient);
         }
 
