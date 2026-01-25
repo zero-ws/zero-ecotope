@@ -49,6 +49,16 @@ public class ConfigModLocal implements ConfigMod {
     }
 
     @Override
+    public JsonArray inJArray(final String filename) {
+        final JArray contentA = STORE.inJson(filename);
+        if (UT.isEmpty(contentA)) {
+            return new JsonArray();
+        }
+        return contentA.data();
+    }
+
+
+    @Override
     public InputStream inStream(final String filename) {
         return STORE.inStream(filename);
     }

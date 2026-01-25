@@ -1,8 +1,18 @@
 package io.zerows.extension.module.modulat.component;
 
+import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import io.vertx.core.shareddata.ClusterSerializable;
+import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.store.jooq.DB;
+import io.zerows.extension.module.modulat.common.Bk;
+import io.zerows.extension.module.modulat.domain.tables.daos.BBagDao;
+import io.zerows.extension.module.modulat.domain.tables.pojos.BBag;
 import io.zerows.platform.enums.modeling.EmModel;
+import io.zerows.program.Ux;
+import org.jooq.Log;
 
 class ArkBag extends ArkBase {
     /*
@@ -11,21 +21,19 @@ class ArkBag extends ArkBase {
      *
      * 这种场景下会为所有的 modules 构造 ( Bag = App ) 的基础入口配置，而页面模型则会直接在
      */
-    // private static final Cc<String, JsonArray> ASYNC_BAG_DATA = Cc.open();
+    private static final Cc<String, Future<JsonArray>> ASYNC_BAG_DATA = Cc.openThread();
 
     @Override
     public Future<ClusterSerializable> modularize(final String appId,
                                                   final boolean open,
                                                   final EmModel.By by) {
-        // R2MO 有问题
-        //        return ASYNC_BAG_DATA.pick(() -> {
-        //            final JsonObject condition = this.buildQr(id, by);
-        //            condition.put(KName.ENTRY, Boolean.TRUE);
-        //            LOG.Spi.info(this.getClass(), "Modulat condition = {0}", condition.encode());
-        //            return Ux.Jooq.join(BBagDao.class).<BBag>fetchAsync(condition)
-        //                // JsonArray -> ClusterSerializable
-        //                .compose(Ux::futureA);
-        //        }, id).compose(Ux::future);
-        return null;
+       return ASYNC_BAG_DATA.pick(()->{
+           final JsonObject condition = this.buildQr(appId, by);
+           condition.put(KName.ENTRY, Boolean.TRUE);
+           Bk.LOG.Spi.info(this.getClass(), "Modulat condition = {0}", condition.encode());
+           return DB.on(BBagDao.class).<BBag>fetchAsync(condition)
+                    .compose(Ux::futureA);
+        },appId).compose(Ux::future);
+
     }
 }
