@@ -64,7 +64,6 @@ class MakerIoEntity extends MakerIoBase<MDEntity> {
      *
      * @param dir  子目录名称
      * @param args 参数
-     *
      * @return {@link MDEntity}
      */
     @Override
@@ -121,7 +120,6 @@ class MakerIoEntity extends MakerIoBase<MDEntity> {
             if (Objects.isNull(found)) {
                 log.warn("[ ZERO ] The daoCls = {} 无法找到 MDConnect, ", daoCls);
             }
-            Objects.requireNonNull(found);
         }
         return found;
     }
