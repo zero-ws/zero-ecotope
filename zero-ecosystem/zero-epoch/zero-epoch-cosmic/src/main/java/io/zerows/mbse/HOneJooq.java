@@ -2,7 +2,11 @@ package io.zerows.mbse;
 
 import io.vertx.core.MultiMap;
 import io.zerows.epoch.store.jooq.ADB;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.mbse.metadata.KModule;
+import io.zerows.support.Ut;
+
+import java.util.Objects;
 
 /**
  * 「直接访问器」
@@ -73,6 +77,18 @@ class HOneJooq implements HOne<ADB> {
         //        /* 「遗留系统」根据当前模块中的配置查看是否包含了 pojo 配置，若包含pojo配置需要执行绑定 */
         //        final String pojo = module.getPojo();
         //        dao.on(pojo);
-        return null;
+        // 1. 基础检查
+        Objects.requireNonNull(module, "[ ZERO ] 传入的 KModule 不可以为空！");
+        final Class<?> daoCls = module.getDaoCls();
+        Objects.requireNonNull(daoCls, "[ ZERO ] 传入的 KModule 中的 daoCls 不可以为空！");
+        // 2. 构造 ADB 对象
+        ADB dao = DB.on(daoCls);
+
+        // 3. 绑定 Pojo
+        final String pojo = module.getPojo();
+        if (Ut.isNotNil(pojo)) {
+            dao = DB.on(daoCls, pojo);
+        }
+        return dao;
     }
 }
