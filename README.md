@@ -9,20 +9,16 @@ Zero Waiting
 
 ## 0. 引导
 
-- 文档：<https://www.yuque.com/jiezizhu/r2mo>
+- 教程：<https://www.yuque.com/jiezizhu/r2mo>
     - [>> 快速开始](https://www.yuque.com/jiezizhu/r2mo/gs6qygvsorlgkxb2)
+- 教程地图：<https://kumu.io/LangYu1017/zero>
 - 示例：<https://gitee.com/zero-ws/zero-rachel-momo>
+
+![Zero Ecotope](docs/images/zero-ecotope.png)
 
 ---
 
-### 0.1. 主页信息
-
-- （后端）Zero Ecotope：<https://www.zerows.io>
-- （前端）Zero UI：<https://www.vertxui.cn>
-- （工具）Zero AI：<https://www.vertxai.cn>
-- （标准）Zero Schema：<https://www.vertx-cloud.cn>
-
-### 0.2. 新版说明
+### 0.1. 新版说明
 
 - 为兼容 Spring Boot 开发人员和 Vert.x
   开发人员，重新设计底层抽象框架：[Rapid R2MO](https://gitee.com/silentbalanceyh/r2mo-rapid)。
@@ -36,7 +32,7 @@ Zero Waiting
 - 提供快速脚手架初始化工具：[Zero Ai](https://www.vertxai.cn)。
 - 让 Spring 和 Vert.x（Zero）可无缝实现基于 Dubbo 的微服务通信。
 
-### 0.3. 场景说明
+### 0.2. 场景说明
 
 | 场景类型     | 后端                                                                | 前端                                                     |
 |----------|-------------------------------------------------------------------|--------------------------------------------------------|
@@ -109,24 +105,7 @@ public class BasicApplication {
         - [x] 🐣 `unit-zero-config-l`：本地配置测试
         - [x] 🐣 `unit-zero-config-r`：远程配置（Nacos）测试
 
-### 1.3. 项目初始化
-
-最新版：![npm version](https://img.shields.io/npm/v/zero-ai.svg)
-
-```bash
-# 安装自动化工具
-npm install -g zero-ai
-
-# 初始化 Spring 项目脚手架
-ai spring -n app-spring
-# 初始化 Zero 项目脚手架（开发中）
-ai app -n app-zero
-```
-
-- Windows 版本还在开发中。
-- Spring 脚手架只是基于 R2MO Rapid 的快速初始化，和 Zero 无关。
-
-### 1.4. Zero Extension 接口
+### 1.3. Zero Extension 接口
 
 地址：<https://zerows.apifox.cn/>
 
@@ -153,21 +132,9 @@ ai app -n app-zero
 - 🪼：数据库 DBE方法
 - 🧩：组件 / 插件 / SPI专用逻辑
 
-## 2. 相关文档
+## 2. 相关文档 |
 
-### 2.1. 相关链接
-
-版本比较旧，新版可直接参考测试项目中的 Demo。
-
-| 项                                                                      | 说明                                                                                                         |
-|------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------|
-| [Zero Ui](https://www.vertxui.cn)                                      | Zero Ui：基于 `React` 和 `Ant Design (Pro/g2/g6)` 的前端框架。                                                       |
-| [Zero Ai](https://www.vertxai.cn)                                      | Zero Ai：快速开发常用脚本工具箱、代码生成、数据生成、模拟请求等                                                                        |
-| [Zero Docs (英文)](https://onemsg.github.io/vertx-zero/)                 | 热心网友提供的一份在线文档：[onemsg](https://github.com/onemsg), 作者BLOG <https://juejin.cn/user/3597257778669592/posts>. |
-| [《Vert.x逐陆记》](https://lang-yu.gitbook.io/vert-x/)                      | 中文版Vert.x教程 ( In Progress，我很懒，只有前三章 )                                                                      |
-| [《Zero云平台白皮书》](https://www.vertx-cloud.cn/document/doc-web/index.html) | 开发实施手册：扩展模块、前端、云端、工具的工程化白皮书。                                                                               |
-
-### 2.2. 微信群
+### 2.1. 微信群
 
 使用: `445191171` 加作者微信，拉群.
 
