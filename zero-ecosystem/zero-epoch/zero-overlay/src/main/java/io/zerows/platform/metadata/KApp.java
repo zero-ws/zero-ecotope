@@ -23,12 +23,12 @@ import java.util.Objects;
 @Slf4j
 public class KApp implements HApp, HLog {
 
+    private final JsonObject configuration = new JsonObject();
+    private final JsonObject data = new JsonObject();
     private String id;
     private String name;
     private String ns;
     private String tenant;
-    private final JsonObject configuration = new JsonObject();
-    private final JsonObject data = new JsonObject();
 
     /**
      * 🎲 随机应用构造函数 - 临时开发场景
@@ -109,6 +109,10 @@ public class KApp implements HApp, HLog {
     private void initialize(final String name, final String tenant) {
         // 应用名称
         this.name = name;
+        // Fix: 应用 ID 无法加载的问题
+        if (Objects.isNull(this.id)) {
+            this.id = ENV.of().get(EnvironmentVariable.Z_APP_ID, (String) null);
+        }
         // 名空间
         this.ns = HApp.nsOf(name);
         // 租户信息

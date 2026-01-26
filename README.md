@@ -132,13 +132,13 @@ public class BasicApplication {
 - 🪼：数据库 DBE方法
 - 🧩：组件 / 插件 / SPI专用逻辑
 
-## 2. 相关文档 |
+---
 
-### 2.1. 微信群
+## 2. 微信交流
 
-使用: `445191171` 加作者微信，拉群.
+使用: `445191171` 或下方二维码加作者：
 
-<img src="https://raw.githubusercontent.com/zero-ws/zero-ecotope/master/docs/_image/chat.jpg" width="258" height="258" alt="作者微信"/>
+<img src="docs/images/wechat.png" width="258" height="258" alt="作者微信"/>
 
 ## DESIGNED IN CHINA（中国设计）
 
