@@ -49,11 +49,11 @@ import java.util.concurrent.ConcurrentMap;
  * --- 分段文档配置 ---
  * vertx:                                                                   # {@link InPreVertx}
  *   cloud:                                                                 # {@link ConcurrentMap}
- *     nacos:                                                               # {@link YmNacos}
- *       discovery:                                                         # {@link YmNacos.Discovery}
+ *     nacos:                                                               # {@see YmNacos}
+ *       discovery:                                                         # {@see YmNacos.Discovery}
  *         server-addr: ${vertx.cloud.nacos.server-addr}                    # <--- 🔗 服务发现地址
  *         namespace: ${vertx.cloud.nacos.config.namespace}                 # <--- 🔗 服务发现名空间
- *       config:                                                            # {@link YmNacos.Config}
+ *       config:                                                            # {@see YmNacos.Config}
  *         server-addr: ${vertx.cloud.nacos.server-addr}                    # <--- 🔗 Nacos 基本地址
  *         namespace: ${R2MO_NACOS_NS_APP}                                  # ---> 💻️ (R) R2MO_NACOS_NS_APP, 应用名空间
  *         prefix: ${vertx.application.name}                                # <--- 🔗 Nacos 配置前缀

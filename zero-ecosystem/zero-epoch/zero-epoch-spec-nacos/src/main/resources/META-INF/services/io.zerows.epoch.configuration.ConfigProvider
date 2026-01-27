@@ -1,1 +1,1 @@
-io.zerows.epoch.configuration.ConfigProviderNacos
+io.zerows.epoch.configuration.NacosConfigProvider

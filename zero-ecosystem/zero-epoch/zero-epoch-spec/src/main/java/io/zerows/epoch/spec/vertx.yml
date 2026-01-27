@@ -1,215 +1,365 @@
-# 类 YmBoot
+# =================================================================
+# 🚀 YmBoot Zero Framework 核心配置文件 (Final Complete Version)
 # -----------------------------------------------------------------
-# 🚀 启动专用配置
-boot:
-  pre: # ⚡ 预处理组件和配置 (应用启动前的初始化工作)
-    component: # 🔧 预处理组件列表
-    # 例如：数据源初始化、缓存预热、配置加载等组件
-    config: # 📋 预处理配置参数
-    # 预处理阶段的特定配置项，如初始化顺序、依赖关系等
-
-  on: # 🎯 启动组件和配置 (应用启动时的组件加载)
-    component: # 🔌 启动时激活的组件
-    # 例如：数据库连接池、消息队列、定时任务等核心组件
-    config: # 📋 启动配置参数
-    # 启动阶段的配置项，如启动顺序、启动超时时间等
+# 💡 版本说明：
+# 1. 结构：Server / Vertx (含Datasource/Redis/Flyway) / Security / Integrations
+# 2. 注释：已完整恢复新版关于 OAuth2 生命周期、策略建议及微信配置的详细说明。
+# 3. 脱敏：敏感信息已使用占位符处理。
+# =================================================================
 
 # -----------------------------------------------------------------
-# 🌐 服务器专用配置
+# 1. 🌐 服务器专用配置 (Server)
+# -----------------------------------------------------------------
 server:
-  port: ${Z_API_PORT:6083}                   # ---> 💻️ 服务端口
-  address: ${Z_API_HOST:0.0.0.0}             # ---> 💻️ 服务器绑定地址
-  options: # 🎯 此处结构直接对接 io.vertx.core.http.HttpServerOptions
-    ssl: ${Z_API_SSL}                        # 启用 HTTPS (环境变量控制)
-    useAlpn: true                            # 启用 ALPN 支持 HTTP/2
-    keyStoreOptions: # 🔐 SSL 密钥库配置
-      type: jks                              # 密钥库类型 (JKS/PKCS12/PFX)
-      path: keys/keystore-hotel.jks          # 密钥库文件路径
-      password: "app.hotel"                  # 密钥库访问密码
-
-  # ⚠️ 注意：新版本 WebSocket 只能在 HTTP Server 基础之上进行展开，等价于它无法支持独立的 Sock 服务，这种模式
-  # 下，WebSocket 端口必须与 HTTP 端口保持一致，所以会导致 Z_SOCK_PORT 失效，必须保证二者的一致性，
-  # 否则会报端口冲突错误
-  websocket: # 🌐 此处结构直接对接 io.zerows.epoch.spec.options.SockOptions
-    # publish: /ws/                          # 是否启用发布通道 (非安全)
-    component: io.zerows.plugins.websocket.stomp.handler.AxisStomp # 🎯 STOMP处理器组件
-    config: # 🎛️ Ares 组件用于扩展 (STOMP)
-      stomp:
-        port: ${Z_SOCK_PORT:6083}            # ---> 💻️ WebSocket 端口 -1 表示禁用 TCP (⚠️ 必须与HTTP端口一致)
-        secured: true                        # 🔒 启用安全提供程序 (STOMP安全认证)
-        websocketBridge: true                # 🌉 启用 WebSocket 桥接 (STOMP桥接模式)
-        websocketPath: /api/web-socket       # 🛣️ WebSocket 路径 (WebSocket访问路径)
-        # stomp:                             # 📡 STOMP 处理器配置 (STOMP协议细节)
-        # bridge:                            # 🌉 关于 `PermittedOptions` 的桥接配置 (权限桥接)
-        # handler:                           # 🎯 处理器配置 (不同处理器可能不同)
-
-# -----------------------------------------------------------------
-# ⚡ Vertx 主配置
-vertx:
+  port: ${Z_API_PORT:7185}                   # ---> 💻️ HTTP 服务端口
+  address: ${Z_API_HOST:0.0.0.0}
   session:
-    store-type: none                         # none/redis/jdbc/mongo
-    timeout: 30                              # 分钟
-    cookie:
-      name: ????
-      max-age: 1800
-  config:
-    import:
-      - # 针对 vertx-boot.yml 中的设置
-      # 🔐 Zero Web 专用配置
-    instance: # 🏗️ 节点实例配置
-      - name: 随机生成 -> 24位随机数           # 🏷️ 节点唯一标识
-        options: # 🎯 此处结构直接对接 io.vertx.core.VertxOptions
-        # Vertx运行时的各种选项配置
-    delivery: # 📨 消息传递配置
-      timeout: 180000                        # ⏱️ 消息传递超时时间(毫秒)
-    deployment: # 🚀 部署配置
-      instances: # 🏗️ 实例数量配置
-        worker: 64                           # ⚙️ Worker线程实例数
-        agent: 32                            # 🤖 Agent线程实例数
-    # 哪种 shared 配置
-    shared:
+    options:
+      httpOnly: true
+  options:
+    ssl: ${Z_API_SSL:false}
+    useAlpn: true
+  websocket:
+    config:
+      stomp:
+        port: ${Z_API_PORT:7185}             # ⚠️ 必须与 HTTP 端口一致
+        secured: true
+        websocketBridge: true
+        websocketPath: /api/web-socket
+
+# -----------------------------------------------------------------
+# 2. ⚡ Vert.x 核心容器 (Vertx)
+# -----------------------------------------------------------------
+vertx:
   application:
-    name:
-  mvc: # 对标 Spring MVC 配置做统一结构化
-    cors: # ⛓️ 跨域资源共享配置
-      allowed-origins: # 🌍 允许的跨域源列表
-        - "客户端跨域的地址信息"              # 例如: http://localhost:3000, https://example.com
-  # 🌐 Vertx 原生集群配置
-  cluster: # 🏗️ 集群配置
-    manager: 组件配置                         # 🎯 集群管理器组件
-    options: 选项配置                         # ⚙️ 集群配置选项
+    name: ${Z_APP:r2mo-app-momo}
 
-  # 🔒 Zero 专用安全配置
-  security: # 🛡️ 安全相关配置
-    wall: /api                              # 🚧 安全墙路径 (API安全边界)
-    jwt: # 🔐 JWT认证配置
-      options: # ⚙️ JWT选项配置
-        jwtOptions: # 🔑 JWT具体选项
-          algorithm: HS256                   # 🔐 签名算法 (HS256/RS256/ES256)
-        keyStore: # 🔐 密钥库配置
-          type: jceks                        # 🔑 密钥库类型 (JCEKS)
-          path: keys/keystore.jceks          # 📁 密钥库文件路径
-          password: zerows                   # 🔑 密钥库密码
+  # 🏗️ 线程池与实例配置
+  config:
+    instance:
+      - name: app-zero-secure-001
+        options:
+          maxEventLoopExecuteTime: 1200_000_000_000
+          maxWorkerExecuteTime: 1200_000_000_000
+          eventLoopPoolSize: 24              # 🚀 CPU * 2
+          workerPoolSize: 128                # 🚀 IO 密集型建议值
+          internalBlockingPoolSize: 32
 
-  # 🗄️ Zero 数据库专用配置（多数据源配置）
-  datasource: # 🗄️ 数据源配置
-    dynamic: # 🔄 动态多数据源配置
-      primary: master                        # 🎯 主数据源标识
-      strict: false                          # 🚫 严格模式 (true: 未指定数据源报错)
-      datasource: # 🏗️ 多数据源详细配置
-        master: # 🏆 主库配置 (写库)
-          url:                               # 🔗 数据库连接URL
-          username:                          # 👤 数据库用户名
-          password:                          # 🔑 数据库密码
-          instance:                          # 🏷️ 数据库实例标识
-          driver-class-name:                 # 🚗 JDBC驱动类名
-        master-history: # 📚 历史库配置 (历史数据)
-          url:                               # 🔗 历史库连接URL
-          username:                          # 👤 历史库用户名
-          password:                          # 🔑 历史库密码
-          instance:                          # 🏷️ 历史库实例标识
-          driver-class-name:                 # 🚗 历史库JDBC驱动类名
-        master-workflow: # 🔄 工作流库配置 (流程数据)
-          url:                               # 🔗 工作流库连接URL
-          username:                          # 👤 工作流库用户名
-          password:                          # 🔑 工作流库密码
-          instance:                          # 🏷️ 工作流库实例标识
-          driver-class-name:                 # 🚗 工作流库JDBC驱动类名
+    delivery:
+      timeout: 180_000
 
-    # 🎯 单数据源配置 (当不使用动态数据源时)
-    url:                                     # 🔗 数据库连接URL
-    username:                                # 👤 数据库用户名
-    password:                                # 🔑 数据库密码
-    driver-class-name:                       # 🚗 JDBC驱动类名
+    deployment:
+      worker:
+        instances: 32                        # 🚀 CPU * 2 ~ 4
+        workerPoolSize: 128
+      agent:
+        instances: 24                        # 🚀 必须 == eventLoopPoolSize
 
-    # 🏊‍♂️ 连接池配置
-    hikari: # 🎯 HikariCP 连接池配置
-      minimum-idle: 10                       # 🏊‍♂️ 最小空闲连接数
+  mvc:
+    cors:
+      allow-credentials: true
+      allowed-origins:
+        - "*"
 
-  # 🗄️ Redis 配置
-  data: # 🗄️ 数据存储配置
-    redis: # 🐘 Redis 缓存配置
-      host: 主机地址                          # 🖥️ Redis服务器主机地址
-      port: 端口号                            # 🔌 Redis服务器端口号
-      password: 密码                          # 🔑 Redis连接密码
-      database: 0                            # 🗃️ Redis数据库编号
-      timeout: 3000                          # ⏱️ 连接超时时间(毫秒)
+  # ---------------------------------------------------------------
+  # 2.1 🗄️ 数据源配置 (Datasource) - [In Vertx]
+  # ---------------------------------------------------------------
+  datasource:
+    dynamic:
+      primary: master
+      strict: false
+      datasource:
+        # 🏆 Master (新版配置)
+        master:
+          url: ${Z_DBS_URL:jdbc:mysql://ox.engine.cn:3306/DB_HOTEL_004?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true}
+          instance: ${Z_DBS_INSTANCE:DB_HOTEL_004}
+          hostname: ${vertx.datasource.hostname}
+          port: ${vertx.datasource.port}
+          username: ${vertx.datasource.username}
+          password: ${vertx.datasource.password}
+          driver-class-name: "com.mysql.cj.jdbc.Driver"
+
+        # 📚 History (旧版结构)
+        master-history:
+          url: ${Z_DBS_HIS_URL:jdbc:mysql://...}
+          username: ${Z_DBS_HIS_USER:root}
+          password: ${Z_DBS_HIS_PASS:root}
+          instance: ${Z_DBS_HIS_INSTANCE:DB_HIS}
+          driver-class-name: "com.mysql.cj.jdbc.Driver"
+
+        # 🔄 Workflow (旧版结构)
+        master-workflow:
+          url: ${Z_DBS_WF_URL:jdbc:mysql://...}
+          username: ${Z_DBS_WF_USER:root}
+          password: ${Z_DBS_WF_PASS:root}
+          instance: ${Z_DBS_WF_INSTANCE:DB_WF}
+          driver-class-name: "com.mysql.cj.jdbc.Driver"
+
+    hostname: ${Z_DB_HOST:ox.engine.cn}
+    port: ${Z_DB_PORT:3306}
+    username: ${Z_DB_APP_USER:r2mo}
+    password: ${Z_DB_APP_PASS:r2mo}
+    driver-class-name: "com.mysql.cj.jdbc.Driver"
+
+    hikari:
+      minimum-idle: 10
+
+  # ---------------------------------------------------------------
+  # 2.2 🗄️ Redis 配置 (Data) - [In Vertx]
+  # ---------------------------------------------------------------
+  data:
+    redis:
+      host: ${R2MO_REDIS_HOST:127.0.0.1}
+      port: ${R2MO_REDIS_PORT:6379}
+      password: ${R2MO_REDIS_PASS:password}
+      database: ${R2MO_REDIS_DB:0}
+      timeout: 3000
+
+  # ---------------------------------------------------------------
+  # 2.3 🔄 数据库迁移 (Flyway) - [In Vertx]
+  # ---------------------------------------------------------------
+  flyway:
+    enabled: true
+    locations:
+      - classpath:database/oauth2/${Z_DB_TYPE:MYSQL}/
+      - classpath:plugins/${vertx.application.name}/flyway/${Z_DB_TYPE:MYSQL}/
+      - classpath:plugins/${vertx.application.name}/database/${Z_DB_TYPE:MYSQL}/
+    encoding: UTF-8
+    sql-migration-prefix: V
+    sql-migration-separator: __
+    sql-migration-suffixes: .sql
+    validate-on-migrate: false
+    baseline-on-migrate: true
+    baseline-version: 1
+    clean-disabled: true
 
 # -----------------------------------------------------------------
-# 🔄 微服务通信
-dubbo: # 🌐 Dubbo 微服务配置
-  application: # 🏢 应用配置
-    name: ${vertx.application.name}          # 🏷️ 应用名称 (继承自vertx应用名)
-    qosPort: ???                            # 🎛️ QoS端口 (Dubbo监控端口)
-    serialize-check-status: DISABLE          # 🔒 序列化检查状态 (禁用以提高性能)
+# 3. 🛡️ 安全策略 (Security) - [Root Node]
+# -----------------------------------------------------------------
+security:
+  # 📌 LDAP 配置
+  ldap:
+    enabled: true
+    options:
+      url: ldap://localhost:10389
+      base: ou=system
+      username: uid=admin,ou=system
+      password: secret
+      user-query:
+        - "(uid={0})"
+        - "(mail={0})"
+      user-email: "mail"
+      user-id: "uid"
 
-  registry: # 📖 注册中心配置
-    address: nacos://                        # 🏛️ 注册中心地址 (Nacos)
-    parameters: # ⚙️ 注册中心参数
-      namespace:                             # 🌌 命名空间 (Nacos命名空间)
-      username:                              # 👤 注册中心用户名
-      password:                              # 🔑 注册中心密码
+  # 📌 验证码配置
+  captcha:
+    enabled: false
+  captcha-email:
+    length: 6
+    expiredAt: 300
+    subject: 登录验证码邮件
+  captcha-sms:
+    expiredAt: 60
+    length: 6
+    template: SMS_498945473
 
-  protocol: # 🌐 协议配置
-    name: dubbo                             # 🏷️ 协议名称 (Dubbo协议)
-    port: 20880                             # 🔌 服务端口 (Dubbo默认端口)
+  # 📌 基础安全
+  basic:
+    realm: "Realm Default Zero"
 
-  provider: # 🏭 服务提供者配置
-    serialization-security-check: false      # 🔒 序列化安全检查 (禁用以提高性能)
+  # 📌 JWT 配置
+  jwt:
+    enabled: true
+    options:
+      jwtOptions:
+        algorithm: HS256
+      keyStore:
+        type: jceks
+        path: keys/keystore.jceks
+        password: zerows
 
-  consumer: # 🛒 服务消费者配置
-    serialization-security-check: false      # 🔒 序列化安全检查 (禁用以提高性能)
+  # -----------------------------------------
+  # 📌 OAuth2服务端策略配置 (对应 OAuth2Configuration 类)
+  # -----------------------------------------
+  oauth2:
+    # 1. 基础开关
+    enabled: true             # 启用 OAuth2 模块
+    mode: JWT                 # 模式: JWT (无状态) | OIDC | OPAQUE
+    issuer: "https://auth.r2mo.io" # 发行者标识 (非常重要，对应 payload 的 iss)
+    resourceEnabled: true     # 是否作为资源服务器拦截请求
+
+    # 2. 生命周期管理 (Time-to-Live Policy)
+    # [新增] 授权码：极短，防止中间人拦截 (建议 5-10m)
+    authorizationCodeAt: 5m
+    # 访问令牌：中等，平衡体验与安全 (建议 30m-2h)
+    accessTokenAt: 2h
+    # 刷新令牌：长，用于维持登录态 (建议 7d-30d)
+    refreshTokenAt: 30d
+    # [新增] 设备码：用于 TV/IoT 设备登录 (建议 15m-30m)
+    deviceCodeAt: 15m
+    # [新增] 时间偏差：允许服务器时钟有 60秒 的误差
+    skew: 60
+
+    # 3. 令牌行为策略
+    # 建议设为 false (每次刷新都换新的 RefreshToken)，安全性更高
+    # 如果设为 true，Refresh Token 泄露后如果不手动撤销，黑客可以一直用
+    reuseRefreshToken: false
+
+    # 4. [新增] 密钥库配置 (Server 核心心脏)
+    # 必须生成 jks 文件放在 resources/keystore 目录下
+    keyStore:
+      type: jks                               # 类型: jks 或 pfx
+      path: "keys/oauth2.jks"                 # 路径: classpath 下
+      alias: "zero-jwt-key"                   # 别名: 生成证书时指定的 -alias
+      password: "${KEYSTORE_PASS:changeit}"   # 密码: 建议使用环境变量注入
+
+    # 5. OIDC 协议配置
+    oidc:
+      userClaims: true        # 是否在 UserInfo 端点返回自定义 Claims
+
+    # 6. 预置客户端 ID 列表
+    # 具体 Client 详情请配置在 JDBC 数据库或 oauth2.registration 中
+    clients: [ ]
 
 # -----------------------------------------------------------------
-# 🏢 业务配置
-app: # 🏢 应用业务配置
-  id: "???"                                 # 🏷️ 应用唯一标识
-  tenant: "???"                             # 🏢 租户标识 (多租户系统)
-  data: # 📊 业务数据配置
-    copyright: ""                           # 📝 版权信息
-  config: # ⚙️ 业务配置
-    demo: false                             # 🎮 演示模式开关 (true: 演示模式)
+# 4. 🔑 OAuth2 客户端注册 (Registration) - [Root Node]
+# -----------------------------------------------------------------
+oauth2:
+  endpoint: "http://${Z_API_HOST:localhost}:${Z_API_PORT:7185}/"
+  registration:
+    zero-desktop-app:
+      provider: zero-provider
+      client-id: zero-desktop-app
+      client-authentication-method: none
+      authorization-grant-type: authorization_code
+      redirect-uri: ${oauth2.endpoint}oauth2/authorized/zero-desktop-app
+      scope: openid,profile,email
+      client-name: ZERO Desktop Application
+      client-setting:
+        require-proof-key: true
+        require-authorization-consent: true
+
+    zero-web-app:
+      provider: zero-provider
+      client-id: zero-web-app
+      client-secret: "{bcrypt}$2a$10$XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" # [已脱敏]
+      client-authentication-method: client_secret_basic
+      authorization-grant-type: authorization_code
+      redirect-uri: ${oauth2.endpoint}oauth2/authorized/zero-web-app
+      scope: openid,profile,email,api.read,api.write
+      client-name: ZERO Web Application
+
+    # ==========================================
+    # 📌 [新增] 用于测试 client_credentials 的客户端
+    # ==========================================
+    zero-client-app:
+      provider: zero-provider
+      client-id: zero-client-app           # ID
+      client-secret: zero-client-secret    # 密码 (明文，适配你当前代码)
+      client-authentication-method: client_secret_basic
+      authorization-grant-type: client_credentials  # 关键：必须匹配代码逻辑
+      redirect-uri: ""                     # 机器模式不需要回调地址
+      scope: api:read,api:write            # 权限范围
+      client-name: ZERO Client Application
+
+  provider:
+    zero-provider:
+      # 使用完整的配置而不是依赖 issuer-uri
+      authorization-uri: ${oauth2.endpoint}/oauth2/authorize
+      token-uri: ${oauth2.endpoint}/oauth2/token
+      user-info-uri: ${oauth2.endpoint}/userinfo
+      jwk-set-uri: ${oauth2.endpoint}/oauth2/jwks
+      user-name-attribute: username
 
 # -----------------------------------------------------------------
-# 💾 存储配置
-storage: # 💾 文件存储配置
-# 文件上传、下载、存储相关的配置
-# 例如：本地存储路径、云存储配置、分布式文件系统等
+# 5. 🔌 第三方集成 (Integrations) - [Root Nodes]
+# -----------------------------------------------------------------
+# 📌 微信相关配置
+weco:
+  # 微信公众号配置
+  wechat-mp:
+    expire-seconds: 300
+    app-id: ${R2MO_WECHAT_MP_APP}
+    secret: ${R2MO_WECHAT_MP_SECRET}
+    token: ${R2MO_WECHAT_MP_TOKEN}
+  # 开放平台配置
+  # wechat-open:
+  #   app-id: ${R2MO_WECHAT_OPEN_APP}
+  #   secret: ${R2MO_WECHAT_OPEN_SECRET}
+  #   redirect-uri: https://jacque-nonbusiness-leslee.ngrok-free.dev/auth/wechat-callback
 
-# 🔄 Request / Response 执行专用插件配置
-plugins: # 🔄 执行处理器插件
-  io.zerows.extension.commerce.rbac.plugins.request.DataRegion: # 🌍 数据区域插件
-    prefix: /api/                           # 🛣️ API路径前缀
-  io.zerows.extension.commerce.rbac.plugins.request.AuditorPin: # 📋 审计插件
-    include: # 📝 需要审计的API路径列表
-      - /api/mcard/publish                  # 🎫 会员发卡 (需要审计记录)
-      - /api/order/standard/submit          # 📋 订单预定 (需要审计记录)
-      - /api/order/direct/submit            # 📋 直接预定/订单预定 (需要审计记录)
-      - /api/order/check-in/submit          # 🏨 办理入住 (需要审计记录)
-      - /api/order/check-in/tomorrow        # 🏨 续住 (需要审计记录)
-      - /api/hotel/book-mute                # 📖 哑房账本初始化（读写合一）(需要审计记录)
-      - /api/cancel-work/order              # ❌ 取消订单 (需要审计记录)
-      - /api/cancel-work/order-item         # ❌ 取消订单项 (需要审计记录)
-      - /api/cancel-work/schedule           # ❌ 取消排房/入住 (需要审计记录)
+  # 企业配置
+  wecom-cp:
+    corp-id: ${R2MO_WECOM_CORP_ID}
+    secret: ${R2MO_WECOM_SECRET}
+    agent-id: 1000002
+    url-callback: https://auth.r2mo.io/auth/wecom-login
 
-# 📊 Excel 处理配置
-excel: # 📊 Excel 文件处理配置
-  pen: "io.zerows.plugins.office.excel.tpl.BlueTpl" # 🎨 Excel模板处理器
-  temp: /tmp/                              # 🗂️ 临时文件目录
-  tenant: "init/environment.json"          # 🏢 租户初始化配置文件
-  # mapping 自动计算                        # 🗺️ 字段映射自动计算 (根据模板自动推导)
+# 📌 邮箱服务器（独立配置）
+email:
+  username: admin@example.com
+  password: ${R2MO_EMAIL_PASS}
+  smtp:
+    host: smtp.126.com
+    port: 465
+    ssl: true
+    timeout: 10000
 
-# 🔄 数据库迁移配置
-flyway: # 🔄 Flyway 数据库迁移工具配置
-# 专用 flyway 配置
-# 数据库版本管理、SQL脚本执行、数据库迁移等配置
+# 📌 短信验证（独立配置）
+sms:
+  access_id: ${R2MO_ALI_ID}
+  access_secret: ${R2MO_ALI_SECRET}
+  sign_name: "虞浪"
 
-# 📱 短信服务配置
-sms: # 📱 短信服务配置
-  aliyun: # 🌐 阿里云短信服务配置
-    domain:                                 # 🌐 API域名
-    region_id:                              # 🌍 地域ID
-    access_id:                              # 🔑 Access Key ID
-    access_secret:                          # 🔐 Access Key Secret
-    sign_name:                              # ✍️ 短信签名
-    tpl:                                    # 📋 短信模板配置
+# -----------------------------------------------------------------
+# 6. 🏢 业务与应用配置 (Business)
+# -----------------------------------------------------------------
+app:
+  id: "UUID-APP-ID-PLACEHOLDER"
+  ns: "io.zerows.apps"
+  tenant: "UUID-TENANT-ID-PLACEHOLDER"
+  data:
+    copyright: "R2MO Tech"
+  config:
+    demo: false
+
+storage:
+# type: local
+# path: /var/tmp/
+
+plugins:
+  io.zerows.extension.commerce.rbac.plugins.request.DataRegion:
+    prefix: /api/
+  io.zerows.extension.commerce.rbac.plugins.request.AuditorPin:
+    include:
+      - /api/mcard/publish
+      - /api/order/standard/submit
+      - /api/order/direct/submit
+      - /api/order/check-in/submit
+      - /api/cancel-work/order
+
+excel:
+  pen: "io.zerows.plugins.office.excel.tpl.BlueTpl"
+  temp: /tmp/
+  tenant: "init/environment.json"
+
+# -----------------------------------------------------------------
+# 7. ⚙️ 监控与任务 (System & Monitor)
+# -----------------------------------------------------------------
+job:
+  enabled: true
+
+cache:
+  ehcache:
+    expiredAt: 3m
+  caffeine:
+    expiredAt: 3m
+  redis:
+    expiredAt: 30s
+
+monitor:
+  server:
+    jmx-port: 7188
+    monitor-type: PROMETHEUS_GRAFANA
+    monitor-config:
+      port: 17190

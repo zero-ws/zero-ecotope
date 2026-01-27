@@ -18,74 +18,90 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
+ * YAML 编译器与占位符解析器
+ * <p>
+ * 核心功能：
+ * 1. 动态替换 YAML 中的 ${VAR} 占位符。
+ * 2. 支持两轮解析：先解析环境变量，再解析内部引用。
+ * 3. 自动清洗配置值中的多余引号，防止 Nacos 连接失败。
+ * 4. 线程安全的 SnakeYAML 使用方式。
+ * </p>
+ *
  * @author lang : 2025-12-18
  */
 class UCompiler {
 
-    // Pattern 是线程安全的，可以保持 static
+    // Pattern 是线程安全的，保持 static
     private static final Pattern PLACEHOLDER_PATTERN = Pattern.compile("\\$\\{([^}]+)\\}");
     private static final Jinjava JINJAVA = new Jinjava();
 
     static {
+        // 注册全局函数，如 R2_NOW()
         JINJAVA.getGlobalContext().registerFunction(
-            /*
-             * 函数表
-             * - R2_NOW()
-             */
             new ELFunctionDefinition("", "R2_NOW", DateUtil.class, "now")
         );
     }
-    // [删除] 移除 static 实例，因为它们非线程安全
-    // private static final Yaml YAML_PARSER = ...
-    // private static final DumperOptions DUMPER_OPTIONS = ...
 
+    /**
+     * 编译 YAML 字符串，解析其中的占位符
+     *
+     * @param input 原始 YAML 内容
+     * @return 解析后的 YAML 内容
+     */
     static String compileYml(final String input) {
         if (input == null || input.trim().isEmpty()) {
             return input;
         }
 
-        // [新增] 在方法内部创建 Yaml 实例（局部变量是线程安全的）
+        // 1. 创建局部的 Yaml 实例（SnakeYAML 非线程安全，必须局部创建）
         final Yaml yamlLoader = new Yaml(new SafeConstructor(new LoaderOptions()));
 
-        // 1. 解析所有文档并合并为一个 Map
+        // 2. 解析所有文档并合并为一个 Map
         final Map<String, Object> merged = new LinkedHashMap<>();
-        // 使用局部的 yamlLoader
         for (final Object doc : yamlLoader.loadAll(input)) {
             if (doc instanceof Map) {
+                //noinspection unchecked
                 mergeMaps(merged, (Map<String, Object>) doc);
             }
         }
 
-        // 2. 第一轮：解析安全表达式
+        // 3. 第一轮解析：解析安全表达式 (环境变量)
+        // safeOnly=true，遇到未定义的变量跳过不报错，留给下一轮或保留原样
         final Object firstPass = resolvePlaceholders(merged, true);
 
-        // 3. 构建全局字面量上下文
+        // 4. 构建全局字面量上下文 (用于解决内部引用，如 ${config.namespace})
         final Map<String, String> globalContext = new HashMap<>();
         extractLiteralValues(firstPass, "", globalContext);
 
-        // 4. 第二轮：解析剩余占位符
+        // 5. 第二轮解析：解析剩余占位符 (使用 Context)
         final Object secondPass = resolvePlaceholdersWithContext(firstPass, globalContext);
 
-        // [新增] 在方法内部创建 DumperOptions
+        // 6. 配置输出选项
         final DumperOptions dumperOptions = new DumperOptions();
-        dumperOptions.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
+        dumperOptions.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK); // 块状输出，易读
         dumperOptions.setIndent(2);
+        // 🟢 关键配置：使用 PLAIN 风格，尽量不给字符串加引号
+        dumperOptions.setDefaultScalarStyle(DumperOptions.ScalarStyle.PLAIN);
 
-        // 5. 输出为单文档 YAML
+        // 7. 输出为单文档 YAML
         return new Yaml(dumperOptions).dump(secondPass);
     }
 
+    /**
+     * Ansible 风格的模板渲染
+     */
     static String compileAnsible(final String content) {
         final ENV env = ENV.of();
         final Map<String, Object> params = new HashMap<>();
         env.vars().forEach(name -> params.put(name, env.get(name)));
-        // Jinjia 处理
         return JINJAVA.render(content, params);
     }
 
-    // ... 其余私有方法保持不变 ...
+    // ==================== 私有辅助方法 ====================
 
-    // ———————— 合并两个 Map（递归）———————
+    /**
+     * 递归合并两个 Map
+     */
     @SuppressWarnings("unchecked")
     private static void mergeMaps(final Map<String, Object> target, final Map<String, Object> source) {
         for (final Map.Entry<String, Object> entry : source.entrySet()) {
@@ -99,9 +115,9 @@ class UCompiler {
         }
     }
 
-    // ... (后面的 resolvePlaceholders, extractLiteralValues 等方法无需修改) ...
-
-    // 为了完整性，这里列出 resolvePlaceholders
+    /**
+     * 递归解析对象中的占位符 (无上下文)
+     */
     private static Object resolvePlaceholders(final Object obj, final boolean safeOnly) {
         if (obj instanceof String) {
             return resolveStringPlaceholders((String) obj, safeOnly);
@@ -121,12 +137,16 @@ class UCompiler {
         return obj;
     }
 
+    /**
+     * 解析单个字符串中的占位符 (无上下文)
+     */
     private static String resolveStringPlaceholders(final String value, final boolean safeOnly) {
         if (value == null || !value.contains("${")) {
             return value;
         }
         final Matcher matcher = PLACEHOLDER_PATTERN.matcher(value);
-        final StringBuilder sb = new StringBuilder();
+        // 注意：在 Java 9+ 中可以使用 StringBuilder，旧版本需用 StringBuffer
+        final StringBuffer sb = new StringBuffer();
         boolean changed = false;
         while (matcher.find()) {
             final String content = matcher.group(1);
@@ -135,6 +155,7 @@ class UCompiler {
                 resolved = resolvePlaceholder(content, safeOnly, null);
             } catch (final IllegalArgumentException e) {
                 if (safeOnly) {
+                    // 安全模式下保留原样
                     resolved = matcher.group(0);
                 } else {
                     throw e;
@@ -150,7 +171,9 @@ class UCompiler {
         return value;
     }
 
-    // ... 后续代码省略，逻辑不需要改动
+    /**
+     * 递归解析对象中的占位符 (带上下文)
+     */
     private static Object resolvePlaceholdersWithContext(final Object obj, final Map<String, String> context) {
         if (obj instanceof String) {
             return resolveStringWithContext((String) obj, context);
@@ -170,6 +193,9 @@ class UCompiler {
         return obj;
     }
 
+    /**
+     * 解析单个字符串中的占位符 (带上下文)
+     */
     private static String resolveStringWithContext(final String value, final Map<String, String> context) {
         if (value == null || !value.contains("${")) {
             return value;
@@ -178,6 +204,7 @@ class UCompiler {
         final StringBuffer sb = new StringBuffer();
         while (matcher.find()) {
             final String content = matcher.group(1);
+            // 这里非 safeOnly，如果找不到会报错（或者返回 null 视逻辑而定，此处沿用原逻辑）
             final String resolved = resolvePlaceholder(content, false, context);
             matcher.appendReplacement(sb, Matcher.quoteReplacement(resolved));
         }
@@ -185,30 +212,44 @@ class UCompiler {
         return sb.toString();
     }
 
+    /**
+     * 核心解析逻辑：查找变量值并清洗
+     */
     private static String resolvePlaceholder(final String content, final boolean safeOnly, final Map<String, String> context) {
         final int colonIndex = content.indexOf(':');
         final String key = colonIndex != -1 ? content.substring(0, colonIndex) : content;
         final String defaultValue = colonIndex != -1 ? content.substring(colonIndex + 1) : null;
+
+        // 1. 查环境变量
         String value = ENV.of().get(key);
         if (value != null) {
-            return value;
+            return clean(value); // 🟢 净化
         }
+
+        // 2. 查默认值
         if (defaultValue != null) {
-            return defaultValue;
+            return clean(defaultValue); // 🟢 净化
         }
+
+        // 3. 查上下文 (内部引用)
         if (!safeOnly && context != null) {
             value = context.get(key);
             if (value != null) {
-                return value;
+                return clean(value); // 🟢 净化
             }
         }
+
+        // 4. 无法解析的处理
         if (safeOnly) {
-            throw new IllegalArgumentException("skip");
+            throw new IllegalArgumentException("skip"); // 抛出异常由上层捕获，保留原占位符
         } else {
             throw new IllegalArgumentException("[ ZERO ] 占位符 '${" + content + "}' 无法解析，变量 '" + key + "' 未定义或输入丢失。");
         }
     }
 
+    /**
+     * 提取字面量值构建上下文 (Flatten)
+     */
     private static void extractLiteralValues(final Object obj, final String prefix, final Map<String, String> context) {
         if (obj instanceof Map) {
             for (final Map.Entry<?, ?> entry : ((Map<?, ?>) obj).entrySet()) {
@@ -216,11 +257,33 @@ class UCompiler {
                 extractLiteralValues(entry.getValue(), key, context);
             }
         } else if (obj instanceof List) {
+            // List 内部通常不作为引用源，跳过
         } else {
             final String value = String.valueOf(obj);
+            // 只有不包含占位符的确切值才放入上下文
             if (!value.contains("${")) {
                 context.put(prefix, value);
             }
         }
+    }
+
+    /**
+     * 🟢 净化值：循环去除首尾的引号
+     * 解决 export NS='"value"' 导致的解析错误
+     */
+    private static String clean(final String value) {
+        if (value == null) {
+            return null;
+        }
+        String result = value.trim();
+        // 循环去除，防止多层引号 '"value"'
+        while ((result.startsWith("\"") && result.endsWith("\"")) ||
+            (result.startsWith("'") && result.endsWith("'"))) {
+            if (result.length() < 2) {
+                break;
+            }
+            result = result.substring(1, result.length() - 1);
+        }
+        return result;
     }
 }

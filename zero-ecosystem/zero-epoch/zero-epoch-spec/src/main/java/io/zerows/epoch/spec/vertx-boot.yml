@@ -1,63 +1,40 @@
-# 近似于 spring boot 中的 bootstrap.yml
-vertx:
-  config:
-    import:
-      - optional:nacos:r2mo-app-shared?refreshEnabled=true
-      - optional:nacos:${vertx.application.name}?refreshEnabled=true       # 🪢
-  application:
-    name: ${Z_APP:r2mo-app-basic}                                         # ---> 💻️ 微服务模式才会使用
-
-# （ Cloud环境 ）Nacos 专用配置
----
 vertx:
   cloud:
     nacos:
-      discovery:
-        server-addr: ${vertx.cloud.nacos.server-addr}                      # 🪢
-        namespace: ${vertx.cloud.nacos.config.namespace}                   # 🪢
+      # ==========================================
+      # 1. 基础连接信息 (Global / Shared)
+      # 对应 Spring: spring.cloud.nacos.server-addr 等
+      # ==========================================
+      server-addr: ${R2MO_NACOS_ADDR:localhost:8848}       # ---> 💻️ Nacos 地址 (Source of Truth)
+      username: ${R2MO_NACOS_USER:nacos}                   # ---> 💻️ Nacos 用户名
+      password: ${R2MO_NACOS_PASS:nacos}                   # ---> 💻️ Nacos 密码
+      name: ${vertx.application.name}                      # 🪢 服务名称 (对应 spring.application.name)
+
+      # ==========================================
+      # 2. 配置中心 (Config)
+      # 对应 Spring: spring.cloud.nacos.config.*
+      # ==========================================
       config:
-        server-addr: ${vertx.cloud.nacos.server-addr}                      # 🪢
-        namespace: ${R2MO_NACOS_NS_APP}                                   # ---> 💻️ Nacos 命名空间
-        prefix: ${vertx.application.name}                                  # 🪢Nacos 配置前缀
-        file-extension: yaml                                              # Nacos 配置文件格式
-      server-addr: ${R2MO_NACOS_ADDR:localhost:8848}                      # ---> 💻️ Nacos 地址直接指定
-      username: ${R2MO_NACOS_USER:nacos}                                  # ---> 💻️ Nacos 用户名
-      password: ${R2MO_NACOS_PASS:nacos}                                  # ---> 💻️ Nacos 密码
-      name: ${vertx.application.name}                                      # 🪢Nacos 名称
-# 🎯 追加注释 - 设计规范与理念说明：
-#
-# 🎨 设计规范 (Design Specifications):
-#   • 配置格式兼容性：采用 Spring Boot 风格的占位符语法 ${VAR:default}
-#   • 属性命名约定：遵循 camelCase 和 dot.notation 的混合使用
-#   • 环境变量优先级：环境变量 > 配置文件 > 默认值
-#   • 配置分层管理：基础配置 + 云环境配置 + 业务配置分离
-#
-# 🧠 设计原理 (Design Principles):
-#   1. 🔄 无缝迁移原则：Spring Boot ↔ Vert.x 代码迁移零配置修改
-#   2. 🎯 开发者体验优先：降低学习曲线，提升开发效率
-#   3. ⚡ 渐进式增强：在现有习惯基础上增加新功能，而非推倒重来
-#   4. 🏗️ 架构一致性：保持与主流微服务架构的兼容性
-#
-# 💡 设计理念 (Design Philosophy):
-#   • 🤝 兼容性优先：技术选型服务于团队协作效率
-#   • 📚 降低认知负担：统一的配置习惯减少上下文切换成本
-#   • 🚀 快速上手：利用现有知识快速投入开发工作
-#   • 🔄 双向互通：支持 Spring Boot 项目向 Vert.x 的平滑迁移
-#   • 🎪 最小惊讶原则：配置方式符合开发者的预期行为
-#
-# 🎯 业务考量 (Business Considerations):
-#   - 💰 降低培训成本：无需重新学习全新的配置语法
-#   - ⏱️ 缩短上线时间：利用现有经验快速部署和调试
-#   - 🔄 降低维护成本：统一的配置管理减少运维复杂度
-#   - 👥 团队协作便利：不同技术栈背景的开发者都能快速上手
-#
-# 🛠️ 技术权衡 (Technical Trade-offs):
-#   - 优点：开发效率高、学习成本低、迁移成本小
-#   - 缺点：可能无法完全发挥 Vert.x 的原生特性优势
-#   - 决策：短期开发效率 > 长期技术优化空间
-#
-# 📊 最佳实践 (Best Practices):
-#   - 🏷️ 环境变量命名：统一使用 R2MO_ 前缀规范
-#   - 🔐 敏感信息处理：用户名密码等使用环境变量而非硬编码
-#   - 🏷️ 配置分层：基础服务配置 + 业务配置分离管理
-#   - 🔄 配置热更新：支持运行时配置动态刷新
+        server-addr: ${vertx.cloud.nacos.server-addr}      # 🪢 引用根节点地址
+        namespace: ${R2MO_NACOS_NS_APP}                    # ---> 💻️ Nacos 命名空间 (Tenant)
+        
+        # --- 核心定位 ---
+        prefix: ${vertx.cloud.nacos.name}                  # 🪢 DataID 前缀
+        file-extension: yaml                               # 🪢 文件格式
+        group: DEFAULT_GROUP                               # 🟢 [Spring对齐] 默认分组
+        
+        # --- 传输与性能 (新增对齐项) ---
+        encode: UTF-8                                      # 🟢 [Spring对齐] 编码格式
+        timeout: 3000                                      # 🟢 [Spring对齐] 读取与长轮询超时(ms)
+        refresh-enabled: true                              # 🟢 [Spring对齐] 开启配置热更新
+
+      # ==========================================
+      # 3. 服务发现 (Discovery)
+      # 对应 Spring: spring.cloud.nacos.discovery.*
+      # ==========================================
+      discovery:
+        server-addr: ${vertx.cloud.nacos.server-addr}      # 🪢 引用根节点地址
+        namespace: ${vertx.cloud.nacos.config.namespace}   # 🪢 强制与 Config 保持同一命名空间，防止环境脑裂
+        group: DEFAULT_GROUP                               # 🟢 [Spring对齐] 注册分组
+        enabled: true                                      # 🟢 [Spring对齐] 开启服务发现
+        register-enabled: true                             # 🟢 [Spring对齐] 是否注册自己

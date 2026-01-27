@@ -3,6 +3,7 @@ package io.zerows.epoch.boot;
 import cn.hutool.core.util.StrUtil;
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonArray;
+import io.zerows.epoch.configuration.ConfigLoad;
 import io.zerows.epoch.configuration.ConfigLogging;
 import io.zerows.epoch.spec.InPre;
 import io.zerows.epoch.spec.YmApplication;
@@ -53,7 +54,7 @@ class ZeroSource implements ZeroPower.Source {
         final YmConfiguration configuration;
         final HApp app;
         if (Objects.isNull(pre)) {
-            final io.zerows.epoch.configuration.ConfigLoad load = ZeroEquip.ofLocal();
+            final ConfigLoad load = ZeroEquip.ofLocal();
             app = new KApp();
 
             log.info("[ ZERO ] 本地 -> 加载配置文件…… ⚙️ {}", load.getClass().getName());
@@ -68,7 +69,7 @@ class ZeroSource implements ZeroPower.Source {
                 _41001Exception500AppNameMissing.class);
 
 
-            final io.zerows.epoch.configuration.ConfigLoad load = ZeroEquip.ofCloud(pre);
+            final ConfigLoad load = ZeroEquip.ofCloud(pre);
             app = new KApp(application.getName());
 
             log.info("[ ZERO ] 云端 -> 加载配置文件…… ⚙️ {}", load.getClass().getName());
