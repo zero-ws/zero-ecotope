@@ -13,7 +13,6 @@
     <name>(POM) 📚️ - Zero::Boot::Actor</name>
     <packaging>pom</packaging>
     <modules>
-        <module>zero-boot-cloud-actor</module>
         <module>zero-boot-extension-actor</module>
         <module>zero-boot-test-actor</module>
         <module>zero-boot-elastic-actor</module>

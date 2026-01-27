@@ -10,9 +10,11 @@ import io.zerows.specification.app.HApp;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
+import java.io.ByteArrayInputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @SPID("ConfigServer/nacos")// 必须的ID配置
 @Slf4j
@@ -33,11 +35,14 @@ public class NacosConfigProvider implements ConfigProvider {
 
         final List<NacosMeta> metaList = NacosRule.of().parseRule(configVertx.getImports(), app);
 
-        final List<JsonObject> waitFor = new ArrayList<>();
-        metaList.stream()
+        final String combined = metaList.stream()
             .map(metadata -> NacosClient.of().readConfig(metadata, options))
-            .forEach(waitFor::add);
-        return null;
+            .filter(str -> str != null && !str.isBlank())
+            .collect(Collectors.joining("\n---\n"));
+
+        final String parsedContent = Ut.compileYml(combined);
+        final JsonObject parsedObj = Ut.ioYaml(new ByteArrayInputStream(parsedContent.getBytes(StandardCharsets.UTF_8)));
+        return Ut.deserialize(parsedObj, YmConfiguration.class);
     }
 
     private void configureEnsure(final NacosOptions options, final InPreVertx.Config configVertx,

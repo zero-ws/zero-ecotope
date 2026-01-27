@@ -4,12 +4,9 @@ import com.alibaba.nacos.api.NacosFactory;
 import com.alibaba.nacos.api.PropertyKeyConst;
 import com.alibaba.nacos.api.config.ConfigService;
 import io.r2mo.typed.exception.web._500ServerInternalException;
-import io.vertx.core.json.JsonObject;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.ByteArrayInputStream;
-import java.nio.charset.Charset;
 import java.util.Properties;
 
 /**
@@ -26,7 +23,7 @@ import java.util.Properties;
 class NacosClientImpl implements NacosClient {
 
     @Override
-    public JsonObject readConfig(final NacosMeta meta, final NacosOptions serverOptions) {
+    public String readConfig(final NacosMeta meta, final NacosOptions serverOptions) {
         // 1. 准备连接属性
         final Properties properties = this.buildProperties(serverOptions);
 
@@ -50,34 +47,25 @@ class NacosClientImpl implements NacosClient {
             // 3. 拉取原始内容 (String)
             final String content = configService.getConfig(dataId, group, timeout);
             // 🔥🔥🔥【调试代码】打印出来看看，确认 Nacos 是否真的返回了数据
-            System.err.println(">>>>> [DEBUG NACOS] DataID: " + dataId);
-            System.err.println(">>>>> [DEBUG NACOS] Group:  " + group);
-            System.err.println(">>>>> [DEBUG NACOS] Content:\n" + content);
+            // System.err.println(">>>>> [DEBUG NACOS] DataID: " + dataId);
+            // System.err.println(">>>>> [DEBUG NACOS] Group:  " + group);
+            // System.err.println(">>>>> [DEBUG NACOS] Content:\n" + content);
             // 🔥🔥🔥 调试完记得删除
             // 4. 空值处理
             if (Ut.isNil(content)) {
                 if (meta.isOptional()) {
                     log.warn("[ ZERO ] ( Nacos ) 可选配置内容为空: {}", dataId);
-                    return new JsonObject();
+                    return null;
                 } else {
                     throw new _500ServerInternalException("Nacos 必选配置内容为空: " + dataId);
                 }
             }
-
-            // 5. 环境变量编译 (Reference: ZeroFs.getOrCreate)
-            // 允许远程配置中包含本地环境变量占位符，在此处进行“动态编译”
-            final String compiledContent = Ut.compileYml(content);
-
-            // 6. 核心委托：String -> InputStream -> JsonObject
-            // 使用配置指定的编码格式 (Default: UTF-8)
-            final String encoding = serverOptions.getConfig().getEncode();
-            return Ut.ioYaml(new ByteArrayInputStream(compiledContent.getBytes(Charset.forName(encoding))));
-
+            return content;
         } catch (final Exception e) {
             // 7. 异常处理
             if (meta.isOptional()) {
                 log.warn("[ ZERO ] ( Nacos ) 可选配置加载失败 [{}]: {}", dataId, e.getMessage());
-                return new JsonObject();
+                return null;
             }
 
             // 避免二次包装 RuntimeException
