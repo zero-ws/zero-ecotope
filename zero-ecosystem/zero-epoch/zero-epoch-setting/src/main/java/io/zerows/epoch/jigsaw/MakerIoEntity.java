@@ -2,10 +2,10 @@ package io.zerows.epoch.jigsaw;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.basicore.MDConnect;
-import io.zerows.epoch.basicore.MDEntity;
 import io.zerows.epoch.boot.ZeroFs;
 import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.web.MDConnect;
+import io.zerows.epoch.web.MDEntity;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
@@ -74,8 +74,8 @@ class MakerIoEntity extends MakerIoBase<MDEntity> {
         // model/<identifier>/entity.json / 一旦定义了实体，此处必须包含 entity.json 文件
         final String idFile = Ut.ioPath("model/" + idOfDir, "entity.json");
         final JsonObject entityJ = this.io().inJObject(idFile);
-        String idColumnsFile = Ut.ioPath("model/" + idOfDir, "column.json");
-        JsonArray columnA = this.io().inJArray(idColumnsFile);
+        final String idColumnsFile = Ut.ioPath("model/" + idOfDir, "column.json");
+        final JsonArray columnA = this.io().inJArray(idColumnsFile);
 
         // model/<identifier>/column.json
         final String idOfFile = Ut.valueString(entityJ, KName.IDENTIFIER);

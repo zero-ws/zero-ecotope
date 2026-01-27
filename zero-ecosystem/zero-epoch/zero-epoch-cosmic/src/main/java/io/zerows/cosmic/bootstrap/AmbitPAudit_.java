@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.cortex.extension.PlugAuditor;
-import io.zerows.epoch.configuration.ZeroPlugins;
+import io.zerows.epoch.jigsaw.ZeroPlugins;
 import io.zerows.epoch.web.Envelop;
 
 import java.util.Objects;

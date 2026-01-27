@@ -2,7 +2,7 @@ package io.zerows.epoch.boot;
 
 import io.r2mo.typed.cc.Cc;
 import io.zerows.epoch.assembly.DiFactory;
-import io.zerows.epoch.configuration.NodeNetwork;
+import io.zerows.epoch.jigsaw.NodeNetwork;
 import io.zerows.epoch.management.ORepository;
 import io.zerows.epoch.management.ORepositoryClass;
 import io.zerows.epoch.management.ORepositoryMeta;

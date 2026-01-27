@@ -1,7 +1,7 @@
 package io.zerows.epoch.jigsaw;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.epoch.basicore.MDConnect;
+import io.zerows.epoch.web.MDConnect;
 
 import java.util.Set;
 

@@ -13,7 +13,7 @@ import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.zerows.component.module.AbstractHActor;
 import io.zerows.epoch.annotations.Actor;
-import io.zerows.epoch.configuration.ConfigDS;
+import io.zerows.epoch.jigsaw.ConfigDS;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.spi.HPI;

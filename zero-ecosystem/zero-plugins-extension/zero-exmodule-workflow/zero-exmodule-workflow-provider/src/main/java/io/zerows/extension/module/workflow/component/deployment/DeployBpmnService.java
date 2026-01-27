@@ -1,8 +1,8 @@
 package io.zerows.extension.module.workflow.component.deployment;
 
 import io.vertx.core.Future;
-import io.zerows.epoch.basicore.MDWorkflow;
 import io.zerows.epoch.constant.KWeb;
+import io.zerows.epoch.web.MDWorkflow;
 import io.zerows.extension.module.workflow.boot.Wf;
 import io.zerows.extension.module.workflow.plugins.FlowSequenceListener;
 import io.zerows.extension.skeleton.common.KeConstant;

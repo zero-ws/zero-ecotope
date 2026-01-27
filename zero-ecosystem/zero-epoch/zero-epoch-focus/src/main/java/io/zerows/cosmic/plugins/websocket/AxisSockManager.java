@@ -2,8 +2,8 @@ package io.zerows.cosmic.plugins.websocket;
 
 import io.zerows.cortex.AxisSockFactory;
 import io.zerows.cortex.sdk.Axis;
-import io.zerows.epoch.configuration.NodeNetwork;
-import io.zerows.epoch.configuration.NodeStore;
+import io.zerows.epoch.jigsaw.NodeNetwork;
+import io.zerows.epoch.jigsaw.NodeStore;
 import io.zerows.specification.development.compiled.HBundle;
 
 import java.util.Objects;

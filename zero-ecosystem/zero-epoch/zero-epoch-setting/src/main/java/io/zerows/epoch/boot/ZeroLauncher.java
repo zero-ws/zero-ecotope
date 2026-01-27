@@ -7,7 +7,7 @@ import io.vertx.core.Future;
 import io.vertx.core.Promise;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Up;
-import io.zerows.epoch.boot.exception._40002Exception500UpClassInvalid;
+import io.zerows.epoch.spec.exception._40002Exception500UpClassInvalid;
 import io.zerows.platform.ENV;
 import io.zerows.platform.enums.EmApp;
 import io.zerows.platform.exception._11010Exception500BootIoMissing;
@@ -25,7 +25,9 @@ import java.util.function.Predicate;
 
 @Slf4j
 public class ZeroLauncher<T> {
-    /** 🔒 单例实例（无并发保护，外层需确保仅初始化一次） */
+    /**
+     * 🔒 单例实例（无并发保护，外层需确保仅初始化一次）
+     */
     private static final Cc<Class<?>, ZeroLauncher<?>> CC_LAUNCHER = Cc.open();
     private static final Cc<String, Pre<?>> CC_PRE = Cc.openThread();
     private static final Cc<String, Mod<?>> CC_MOD = Cc.openThread();
@@ -106,7 +108,6 @@ public class ZeroLauncher<T> {
      * @param bootCls 启动入口类（用于 {@link BootIo#energy(Class, String[])}） 📌
      * @param args    命令行参数（将被注入配置） 🧵
      * @param <T>     服务器/框架的核心实例类型
-     *
      * @return 池化单例 {@link ZeroLauncher} 实例 🔁
      */
     @SuppressWarnings("unchecked")
@@ -121,7 +122,6 @@ public class ZeroLauncher<T> {
      * @param args     命令行参数（将被注入配置） 🧵
      * @param <T>      服务器/框架的核心实例类型
      * @param verifyFn 容器验证函数
-     *
      * @return 池化单例 {@link ZeroLauncher} 实例 🔁
      */
     public static <T> ZeroLauncher<T> create(final Class<?> bootCls, final String[] args, final Predicate<T> verifyFn) {

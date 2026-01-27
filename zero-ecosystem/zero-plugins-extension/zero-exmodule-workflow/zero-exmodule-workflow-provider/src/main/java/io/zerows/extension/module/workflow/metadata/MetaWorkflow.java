@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.r2mo.base.dbe.Database;
 import io.vertx.core.json.JsonArray;
-import io.zerows.epoch.basicore.MDConfig;
+import io.zerows.epoch.web.MDConfig;
 import io.zerows.integrated.jackson.JsonArrayDeserializer;
 import io.zerows.integrated.jackson.JsonArraySerializer;
 import io.zerows.platform.metadata.KDS;

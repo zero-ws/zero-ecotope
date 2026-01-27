@@ -4,8 +4,8 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.cortex.metadata.WebRule;
 import io.zerows.epoch.annotations.Validated;
-import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.epoch.boot.ZeroFs;
+import io.zerows.epoch.web.MDConfiguration;
 import io.zerows.extension.crud.common.IxConfig;
 import io.zerows.extension.skeleton.common.KeConstant;
 import io.zerows.platform.constant.VString;
@@ -44,6 +44,7 @@ class IxSetupRule extends IxSetupBase<ConcurrentMap<String, List<WebRule>>> {
      */
     private static final String CFG_VALIDATOR = "codex/_crud/";
     private static final ZeroFs FS = ZeroFs.of();
+
     IxSetupRule(final IxConfig config) {
         super(config);
     }

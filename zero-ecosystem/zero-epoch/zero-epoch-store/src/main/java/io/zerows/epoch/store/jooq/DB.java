@@ -4,8 +4,8 @@ import io.r2mo.base.dbe.DBS;
 import io.r2mo.base.dbe.Join;
 import io.r2mo.base.dbe.common.DBRef;
 import io.r2mo.typed.common.Kv;
-import io.zerows.epoch.basicore.MDConnect;
 import io.zerows.epoch.store.DBSActor;
+import io.zerows.epoch.web.MDConnect;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -23,7 +23,6 @@ public class DB {
      * </ul>
      *
      * @param clazz DAO 类（通常为 jOOQ 生成的 *Dao 类）
-     *
      * @return 复用或新建的 {@link ADB} 实例
      */
     public static ADB on(final Class<?> clazz) {
@@ -47,7 +46,6 @@ public class DB {
      *
      * @param clazz    DAO 类（通常为 jOOQ 生成的 *Dao 类）
      * @param filename 映射文件名（用于解析字段映射）
-     *
      * @return 复用或新建的 {@link ADB} 实例
      */
     public static ADB on(final Class<?> clazz, final String filename) {
@@ -65,7 +63,6 @@ public class DB {
      *
      * @param clazz DAO 类（通常为 jOOQ 生成的 *Dao 类）
      * @param dbs   数据源描述对象 {@link DBS}
-     *
      * @return 复用或新建的 {@link ADB} 实例
      */
     public static ADB on(final Class<?> clazz, final DBS dbs) {
@@ -85,7 +82,6 @@ public class DB {
      * @param clazz    DAO 类（通常为 jOOQ 生成的 *Dao 类）
      * @param filename 映射文件名（用于解析字段映射）
      * @param dbs      数据源描述对象 {@link DBS}
-     *
      * @return 复用或新建的 {@link ADB} 实例
      */
     public static ADB on(final Class<?> clazz, final String filename, final DBS dbs) {
@@ -110,7 +106,6 @@ public class DB {
      * </ul>
      *
      * @param connect 封装 DAO 类与映射文件的连接描述（如：{@code connect.getDao()}、{@code connect.getPojoFile()}）
-     *
      * @return 复用或新建的 {@link ADB} 实例
      */
     public static ADB on(final MDConnect connect) {
@@ -135,7 +130,6 @@ public class DB {
      *
      * @param connect 封装 DAO 类与映射文件的连接描述（如：{@code connect.getDao()}、{@code connect.getPojoFile()}）
      * @param dbs     目标数据源描述对象（支持多数据源/租户切换）🔌
-     *
      * @return 复用或新建的 {@link ADB} 实例
      */
     public static ADB on(final MDConnect connect, final DBS dbs) {

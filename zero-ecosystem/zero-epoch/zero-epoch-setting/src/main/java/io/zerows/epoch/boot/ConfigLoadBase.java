@@ -8,10 +8,10 @@ import io.r2mo.typed.exception.web._500ServerInternalException;
 import io.r2mo.typed.json.JObject;
 import io.r2mo.typed.json.JUtil;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.basicore.YmApp;
-import io.zerows.epoch.basicore.YmApplication;
-import io.zerows.epoch.basicore.YmConfiguration;
-import io.zerows.epoch.basicore.exception._41001Exception500AppNameMissing;
+import io.zerows.epoch.spec.YmApp;
+import io.zerows.epoch.spec.YmApplication;
+import io.zerows.epoch.spec.YmConfiguration;
+import io.zerows.epoch.spec.exception._40001Exception500UpClassArgs;
 import io.zerows.specification.app.HApp;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
  * @author lang : 2025-10-10
  */
 @Slf4j
-abstract class ConfigLoadBase implements ConfigLoad {
+abstract class ConfigLoadBase implements io.zerows.epoch.configuration.ConfigLoad {
     protected static final JUtil UT = SPI.V_UTIL;
 
     /**
@@ -112,7 +112,7 @@ abstract class ConfigLoadBase implements ConfigLoad {
         // -41001 验证
         final YmApplication application = configuration.application();
         Fn.jvmKo(Objects.isNull(application) || StrUtil.isEmpty(application.getName()),
-            _41001Exception500AppNameMissing.class);
+            _40001Exception500UpClassArgs.class);
         app.name(application.getName());
     }
 }

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.basicore.MDConfig;
+import io.zerows.epoch.web.MDConfig;
 import io.zerows.integrated.jackson.JsonObjectDeserializer;
 import io.zerows.integrated.jackson.JsonObjectSerializer;
 import io.zerows.mbse.metadata.KQr;
@@ -63,13 +63,6 @@ public class ScConfig implements MDConfig {
 
     // ----------------- 令牌相关属性
     /**
-     * 令牌超时时间（分钟）
-     */
-    private Long tokenExpired = 30L;
-
-
-    // ----------------- 布尔开关
-    /**
      * RBAC 模型中是否支持 用户组 功能，目前整个平台系统中主要支持两种带有安全实体的模型
      * <pre><code>
      *     1. 用户 - 角色（模型）
@@ -89,6 +82,8 @@ public class ScConfig implements MDConfig {
      */
     private final Boolean supportGroup = Boolean.FALSE;
 
+
+    // ----------------- 布尔开关
     /**
      * 是否支持权限的二级缓存，基于 role = xxx 的方式，角色和权限的关联关系如
      * <pre><code>
@@ -97,7 +92,6 @@ public class ScConfig implements MDConfig {
      * 支持权限对应的二级缓存，有了二级缓存后，权限计算的 Profile 会变得相对复杂
      */
     private final Boolean supportSecondary = Boolean.FALSE;
-
     /**
      * 是否支持多应用模型，多应用模型和多租户模型区别
      * <pre><code>
@@ -109,7 +103,6 @@ public class ScConfig implements MDConfig {
      * </code></pre>
      */
     private final Boolean supportMultiApp = Boolean.TRUE;
-
     /**
      * 是否支持 zero-is 的集成管理模块，若支持集成管理模块，则会开启集成存储模式
      * <pre><code>
@@ -120,7 +113,6 @@ public class ScConfig implements MDConfig {
      * </code></pre>
      */
     private final Boolean supportIntegration = Boolean.FALSE;
-
     /**
      * 是否支持图片验证码
      * <pre><code>
@@ -129,13 +121,13 @@ public class ScConfig implements MDConfig {
      * </code></pre>
      */
     private final Boolean supportCaptcha = Boolean.FALSE;
-
-
-    // ----------------- 登录限制设置
     /**
      * 异常登录次数限制，如果您密码错误次数超过了此属性的设置，那么账号将被锁定
      */
     private final Integer verifyLimitation = null;
+
+
+    // ----------------- 登录限制设置
     /**
      * 启用登录限制之后会启用此属性，此属性表示登录限制的时间间隔，常用属性如
      * <pre><code>
@@ -145,9 +137,6 @@ public class ScConfig implements MDConfig {
      * 上述含义表示登录限制为 3 次，账号锁定之后会设置 300 秒（5分钟）时间来解锁账号
      */
     private final Integer verifyDuration = 300;
-
-
-    // ----------------- 安全实体 Qr 配置
     /**
      * 用于标识安全实体的专用限制
      * 1) User，用户标识
@@ -158,6 +147,13 @@ public class ScConfig implements MDConfig {
      * 6) Resource，资源标识
      */
     private final ScCondition condition = new ScCondition();
+
+
+    // ----------------- 安全实体 Qr 配置
+    /**
+     * 令牌超时时间（分钟）
+     */
+    private Long tokenExpired = 30L;
     /**
      * 默认初始化密码，如果您的密码是此密码，那么前端会跳转到密码修改页面
      */

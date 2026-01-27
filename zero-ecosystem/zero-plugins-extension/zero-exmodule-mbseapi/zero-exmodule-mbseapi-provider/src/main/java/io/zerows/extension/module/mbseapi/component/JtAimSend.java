@@ -10,7 +10,7 @@ import io.vertx.ext.web.RoutingContext;
 import io.zerows.cosmic.bootstrap.AckFlow;
 import io.zerows.cosmic.bootstrap.Ambit;
 import io.zerows.cosmic.bootstrap.AmbitNext;
-import io.zerows.epoch.configuration.NodeStore;
+import io.zerows.epoch.jigsaw.NodeStore;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.module.mbseapi.metadata.JtUri;
 

@@ -39,17 +39,23 @@
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
-                <artifactId>zero-epoch-setting</artifactId>
-                <version>${revision}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.zerows</groupId>
                 <artifactId>zero-epoch-store</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-epoch-use</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <!-- ================= 配置分离 ================== -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-epoch-setting</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-epoch-spec</artifactId>
                 <version>${revision}</version>
             </dependency>
             <!-- ================= 对接层 ================== -->

@@ -11,8 +11,8 @@ import io.zerows.cortex.metadata.WebRequest;
 import io.zerows.cortex.sdk.Aim;
 import io.zerows.cortex.sdk.Axis;
 import io.zerows.cosmic.handler.EndurerCommon;
-import io.zerows.epoch.basicore.WebEvent;
 import io.zerows.epoch.management.OCacheActor;
+import io.zerows.epoch.web.WebEvent;
 import io.zerows.specification.development.compiled.HBundle;
 import lombok.extern.slf4j.Slf4j;
 

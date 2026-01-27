@@ -2,7 +2,7 @@ package io.zerows.epoch.assembly;
 
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.DeploymentOptions;
-import io.zerows.epoch.configuration.NodeStore;
+import io.zerows.epoch.jigsaw.NodeStore;
 import lombok.extern.slf4j.Slf4j;
 
 /**

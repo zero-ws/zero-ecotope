@@ -3,7 +3,7 @@ package io.zerows.epoch.boot;
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.LoggerContext;
-import io.zerows.epoch.basicore.YmLogging;
+import io.zerows.epoch.spec.YmLogging;
 import org.slf4j.LoggerFactory;
 
 import java.util.Map;

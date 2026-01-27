@@ -2,8 +2,8 @@ package io.zerows.cortex.webflow;
 
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.basicore.YmSpec;
-import io.zerows.epoch.configuration.NodeStore;
+import io.zerows.epoch.jigsaw.NodeStore;
+import io.zerows.epoch.spec.YmSpec;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.platform.enums.EmApp;
 import io.zerows.specification.configuration.HConfig;

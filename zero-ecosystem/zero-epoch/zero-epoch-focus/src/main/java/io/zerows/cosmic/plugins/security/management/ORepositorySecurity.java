@@ -1,7 +1,7 @@
 package io.zerows.cosmic.plugins.security.management;
 
 import io.zerows.cosmic.plugins.security.InquirerWall;
-import io.zerows.epoch.configuration.Inquirer;
+import io.zerows.epoch.jigsaw.Inquirer;
 import io.zerows.epoch.management.OCacheClass;
 import io.zerows.epoch.management.ORepository;
 import io.zerows.epoch.metadata.security.SecurityMeta;

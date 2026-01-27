@@ -2,7 +2,7 @@ package io.zerows.cosmic.plugins.websocket.management;
 
 import io.zerows.cosmic.plugins.websocket.Remind;
 import io.zerows.cosmic.plugins.websocket.SockInquirer;
-import io.zerows.epoch.configuration.Inquirer;
+import io.zerows.epoch.jigsaw.Inquirer;
 import io.zerows.epoch.management.OCacheClass;
 import io.zerows.epoch.management.ORepository;
 import io.zerows.platform.management.AbstractAmbiguity;

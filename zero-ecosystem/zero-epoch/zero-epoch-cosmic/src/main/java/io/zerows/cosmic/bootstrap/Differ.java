@@ -3,7 +3,7 @@ package io.zerows.cosmic.bootstrap;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.cortex.sdk.Aim;
-import io.zerows.epoch.basicore.WebEvent;
+import io.zerows.epoch.web.WebEvent;
 import io.zerows.platform.annotations.meta.Memory;
 
 /**

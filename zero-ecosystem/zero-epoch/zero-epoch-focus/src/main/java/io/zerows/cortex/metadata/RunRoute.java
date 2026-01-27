@@ -3,7 +3,7 @@ package io.zerows.cortex.metadata;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.Route;
 import io.vertx.ext.web.Router;
-import io.zerows.epoch.basicore.WebEvent;
+import io.zerows.epoch.web.WebEvent;
 import io.zerows.platform.constant.VString;
 
 import java.io.Serializable;

@@ -1,8 +1,8 @@
 package io.zerows.epoch.management;
 
-import io.zerows.epoch.configuration.NodeNetwork;
-import io.zerows.epoch.configuration.Processor;
-import io.zerows.epoch.configuration.ProcessorNetwork;
+import io.zerows.epoch.jigsaw.NodeNetwork;
+import io.zerows.epoch.jigsaw.Processor;
+import io.zerows.epoch.jigsaw.ProcessorNetwork;
 import io.zerows.platform.management.AbstractAmbiguity;
 import io.zerows.platform.management.StoreSetting;
 import io.zerows.specification.configuration.HSetting;

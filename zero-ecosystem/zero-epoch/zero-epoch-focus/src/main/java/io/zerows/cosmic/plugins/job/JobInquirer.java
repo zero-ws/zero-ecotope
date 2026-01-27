@@ -3,7 +3,7 @@ package io.zerows.cosmic.plugins.job;
 import io.zerows.cosmic.plugins.job.metadata.Mission;
 import io.zerows.epoch.annotations.Job;
 import io.zerows.epoch.assembly.Extractor;
-import io.zerows.epoch.configuration.Inquirer;
+import io.zerows.epoch.jigsaw.Inquirer;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
 

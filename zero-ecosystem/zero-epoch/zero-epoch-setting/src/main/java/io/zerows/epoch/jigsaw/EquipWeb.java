@@ -1,9 +1,9 @@
 package io.zerows.epoch.jigsaw;
 
-import io.zerows.epoch.basicore.MDConfiguration;
-import io.zerows.epoch.basicore.MDId;
-import io.zerows.epoch.basicore.MDPage;
 import io.zerows.epoch.boot.ZeroFs;
+import io.zerows.epoch.web.MDConfiguration;
+import io.zerows.epoch.web.MDId;
+import io.zerows.epoch.web.MDPage;
 import io.zerows.platform.constant.VValue;
 
 import java.util.List;

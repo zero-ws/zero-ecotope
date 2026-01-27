@@ -1,6 +1,6 @@
 package io.zerows.epoch.management;
 
-import io.zerows.epoch.basicore.MDMeta;
+import io.zerows.epoch.web.MDMeta;
 import io.zerows.platform.management.AbstractAmbiguity;
 import io.zerows.specification.development.compiled.HBundle;
 import lombok.extern.slf4j.Slf4j;

@@ -6,10 +6,11 @@ import io.r2mo.typed.cc.Cc;
 import io.r2mo.typed.json.JObject;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.basicore.InPre;
-import io.zerows.epoch.basicore.MDId;
-import io.zerows.epoch.basicore.MDMod;
-import io.zerows.epoch.basicore.exception._41002Exception500ConfigConflict;
+import io.zerows.epoch.configuration.ConfigMod;
+import io.zerows.epoch.spec.InPre;
+import io.zerows.epoch.spec.exception._41002Exception500ConfigConflict;
+import io.zerows.epoch.web.MDId;
+import io.zerows.epoch.web.MDMod;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,9 +36,8 @@ public class ZeroFs {
     // ------ 成员变量
     private final MDId id;
     private final String mid;
-
-    private MDMod mod;
     private final transient HFS fs = HFS.of();
+    private MDMod mod;
 
     private ZeroFs(final MDId id) {
         this.id = id;
@@ -131,7 +131,7 @@ public class ZeroFs {
     private ConfigMod loader() {
         // 非模块处理
         if (MOD_CONTAINER.equals(this.mid)) {
-            return ConfigMod.of();
+            return ZeroEquip.of();
         }
 
 

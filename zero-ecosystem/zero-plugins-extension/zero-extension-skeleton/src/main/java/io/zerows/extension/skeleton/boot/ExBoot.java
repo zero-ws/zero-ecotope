@@ -1,7 +1,7 @@
 package io.zerows.extension.skeleton.boot;
 
 import io.zerows.cortex.sdk.HQBE;
-import io.zerows.epoch.boot.ConfigMod;
+import io.zerows.epoch.configuration.ConfigMod;
 import io.zerows.epoch.management.OCacheClass;
 import io.zerows.epoch.spi.Dictionary;
 import io.zerows.extension.skeleton.spi.*;

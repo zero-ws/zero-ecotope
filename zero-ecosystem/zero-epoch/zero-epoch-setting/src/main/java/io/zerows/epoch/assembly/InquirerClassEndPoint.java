@@ -1,7 +1,7 @@
 package io.zerows.epoch.assembly;
 
 import io.zerows.epoch.annotations.EndPoint;
-import io.zerows.epoch.configuration.Inquirer;
+import io.zerows.epoch.jigsaw.Inquirer;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Set;

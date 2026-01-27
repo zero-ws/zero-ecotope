@@ -4,8 +4,8 @@ import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.epoch.management.OCacheConfiguration;
+import io.zerows.epoch.web.MDConfiguration;
 import io.zerows.extension.skeleton.common.KeConstant;
 import io.zerows.platform.metadata.KPivot;
 import io.zerows.specification.app.HAmbient;
@@ -82,7 +82,6 @@ public class MDModuleRegistry {
      *
      * @param config   配置
      * @param vertxRef Vertx实例引用
-     *
      * @return 多个应用容器环境
      */
     public Future<HAmbient> withAmbient(final HConfig config, final Vertx vertxRef) {

@@ -1,8 +1,8 @@
 package io.zerows.cortex.webflow;
 
 import io.r2mo.typed.exception.WebException;
-import io.zerows.epoch.basicore.WebEvent;
 import io.zerows.epoch.web.Envelop;
+import io.zerows.epoch.web.WebEvent;
 
 /**
  * Mime resolution for web request
@@ -24,7 +24,6 @@ public interface Analyzer extends Income<Object[]> {
      *
      * @param envelop Input Request of uniform model
      * @param event   Event definition
-     *
      * @return Normalized Request
      * @throws WebException Common exception
      */

@@ -7,7 +7,7 @@ import io.zerows.cosmic.exception._40013Exception500ReturnType;
 import io.zerows.cosmic.exception._40042Exception500ChannelMulti;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Ipc;
-import io.zerows.epoch.basicore.WebEvent;
+import io.zerows.epoch.web.WebEvent;
 
 import java.lang.reflect.Method;
 

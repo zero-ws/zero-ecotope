@@ -3,11 +3,11 @@ package io.zerows.epoch.boot;
 import cn.hutool.core.util.StrUtil;
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonArray;
-import io.zerows.epoch.basicore.InPre;
-import io.zerows.epoch.basicore.YmApplication;
-import io.zerows.epoch.basicore.YmConfiguration;
-import io.zerows.epoch.basicore.YmSpec;
-import io.zerows.epoch.basicore.exception._41001Exception500AppNameMissing;
+import io.zerows.epoch.spec.InPre;
+import io.zerows.epoch.spec.YmApplication;
+import io.zerows.epoch.spec.YmConfiguration;
+import io.zerows.epoch.spec.YmSpec;
+import io.zerows.epoch.spec.exception._41001Exception500AppNameMissing;
 import io.zerows.platform.management.StoreApp;
 import io.zerows.platform.metadata.KApp;
 import io.zerows.specification.app.HApp;
@@ -52,7 +52,7 @@ class ZeroSource implements ZeroPower.Source {
         final YmConfiguration configuration;
         final HApp app;
         if (Objects.isNull(pre)) {
-            final ConfigLoad load = ConfigLoad.ofLocal();
+            final io.zerows.epoch.configuration.ConfigLoad load = ZeroEquip.ofLocal();
             app = new KApp();
 
             log.info("[ ZERO ] 本地 -> 加载配置文件…… ⚙️ {}", load.getClass().getName());
@@ -67,7 +67,7 @@ class ZeroSource implements ZeroPower.Source {
                 _41001Exception500AppNameMissing.class);
 
 
-            final ConfigLoad load = ConfigLoad.ofCloud(pre);
+            final io.zerows.epoch.configuration.ConfigLoad load = ZeroEquip.ofCloud(pre);
             app = new KApp(application.getName());
 
             log.info("[ ZERO ] 云端 -> 加载配置文件…… ⚙️ {}", load.getClass().getName());

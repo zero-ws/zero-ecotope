@@ -1,10 +1,10 @@
 package io.zerows.plugins.excel.component;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.basicore.MDConfiguration;
-import io.zerows.epoch.basicore.MDConnect;
-import io.zerows.epoch.basicore.MDId;
 import io.zerows.epoch.management.OCacheConfiguration;
+import io.zerows.epoch.web.MDConfiguration;
+import io.zerows.epoch.web.MDConnect;
+import io.zerows.epoch.web.MDId;
 import io.zerows.platform.enums.EmApp;
 import io.zerows.plugins.excel.ExcelConstant;
 import lombok.extern.slf4j.Slf4j;
@@ -33,7 +33,6 @@ public class ExcelEnvConnect implements ExcelEnv<Void> {
      * 新版配置过程中直接计算 unique 而不再采用之前的 mapping 配置来处理，通过计算来获取核心配置信息（自动加载）
      *
      * @param config 结构如上 excel 节点
-     *
      * @return 配置对象
      */
     @Override

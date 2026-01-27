@@ -1,8 +1,8 @@
 package io.zerows.epoch.jigsaw;
 
 import io.vertx.core.json.JsonArray;
-import io.zerows.epoch.basicore.MDConnect;
 import io.zerows.epoch.boot.ZeroFs;
+import io.zerows.epoch.web.MDConnect;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
 
@@ -14,7 +14,7 @@ import java.util.concurrent.ConcurrentMap;
  * <pre><code>
  *     model/connect.yml -> key = {@link MDConnect}
  * </code></pre>
- *
+ * <p>
  * 内置 Dao 的替换流程，如果 Dao 是表名则直接根据表名计算出最终的 Dao 并执行替换（新流程，减少配置）
  *
  * @author lang : 2024-05-12

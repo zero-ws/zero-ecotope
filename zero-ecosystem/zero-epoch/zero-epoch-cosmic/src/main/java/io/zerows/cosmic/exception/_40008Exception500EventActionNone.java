@@ -1,7 +1,7 @@
 package io.zerows.cosmic.exception;
 
 import io.r2mo.vertx.common.exception.VertxBootException;
-import io.zerows.epoch.basicore.WebEvent;
+import io.zerows.epoch.web.WebEvent;
 
 /**
  * @author lang : 2025-09-30

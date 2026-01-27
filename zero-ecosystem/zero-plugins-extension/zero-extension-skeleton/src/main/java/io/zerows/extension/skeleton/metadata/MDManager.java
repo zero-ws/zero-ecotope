@@ -1,6 +1,6 @@
 package io.zerows.extension.skeleton.metadata;
 
-import io.zerows.epoch.basicore.MDConfiguration;
+import io.zerows.epoch.web.MDConfiguration;
 import io.zerows.specification.development.compiled.HBundle;
 
 /**

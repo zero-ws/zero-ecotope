@@ -1,7 +1,7 @@
 package io.zerows.epoch.assembly;
 
 import io.zerows.epoch.annotations.Address;
-import io.zerows.epoch.basicore.WebReceipt;
+import io.zerows.epoch.web.WebReceipt;
 import io.zerows.support.Ut;
 
 import java.lang.reflect.Method;

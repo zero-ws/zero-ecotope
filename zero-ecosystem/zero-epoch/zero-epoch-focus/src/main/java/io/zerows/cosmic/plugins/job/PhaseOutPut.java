@@ -6,7 +6,7 @@ import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.eventbus.EventBus;
 import io.zerows.cosmic.plugins.job.metadata.Mission;
-import io.zerows.epoch.configuration.NodeStore;
+import io.zerows.epoch.jigsaw.NodeStore;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.platform.metadata.KRef;
 import io.zerows.support.Ut;

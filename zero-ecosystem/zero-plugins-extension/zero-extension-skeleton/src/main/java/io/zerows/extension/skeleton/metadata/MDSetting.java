@@ -2,8 +2,8 @@ package io.zerows.extension.skeleton.metadata;
 
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Vertx;
-import io.zerows.epoch.basicore.MDConfig;
-import io.zerows.epoch.configuration.NodeStore;
+import io.zerows.epoch.jigsaw.NodeStore;
+import io.zerows.epoch.web.MDConfig;
 import io.zerows.specification.configuration.HConfig;
 
 import java.util.function.Supplier;

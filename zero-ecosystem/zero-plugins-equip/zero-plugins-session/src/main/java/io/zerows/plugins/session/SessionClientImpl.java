@@ -5,7 +5,7 @@ import io.vertx.core.Vertx;
 import io.vertx.ext.web.Session;
 import io.vertx.ext.web.sstore.SessionStore;
 import io.zerows.epoch.annotations.Defer;
-import io.zerows.epoch.basicore.YmSpec;
+import io.zerows.epoch.spec.YmSpec;
 import io.zerows.specification.configuration.HConfig;
 import lombok.AccessLevel;
 import lombok.Setter;

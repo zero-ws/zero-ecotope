@@ -4,7 +4,7 @@ import io.reactivex.rxjava3.core.Observable;
 import io.vertx.ext.web.Route;
 import io.zerows.cortex.AxisSub;
 import io.zerows.cortex.metadata.RunRoute;
-import io.zerows.epoch.basicore.WebEvent;
+import io.zerows.epoch.web.WebEvent;
 import io.zerows.platform.constant.VString;
 import io.zerows.specification.development.compiled.HBundle;
 import jakarta.ws.rs.core.MediaType;

@@ -1,7 +1,7 @@
 package io.zerows.epoch.assembly;
 
 import io.zerows.epoch.annotations.Agent;
-import io.zerows.epoch.configuration.Inquirer;
+import io.zerows.epoch.jigsaw.Inquirer;
 import io.zerows.platform.enums.EmWeb;
 import io.zerows.support.Ut;
 

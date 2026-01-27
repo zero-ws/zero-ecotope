@@ -1,9 +1,9 @@
 package io.zerows.epoch.jigsaw;
 
 import io.vertx.core.json.JsonArray;
-import io.zerows.epoch.basicore.MDConnect;
-import io.zerows.epoch.basicore.MDMeta;
 import io.zerows.epoch.metadata.MMAdapt;
+import io.zerows.epoch.web.MDConnect;
+import io.zerows.epoch.web.MDMeta;
 import io.zerows.support.Ut;
 
 import java.util.HashSet;
@@ -22,7 +22,6 @@ class OnenessConnect implements Oneness<MDConnect> {
      * </code></pre>
      *
      * @param connect 连接对象 {@link MDConnect}
-     *
      * @return 主键
      */
     @Override

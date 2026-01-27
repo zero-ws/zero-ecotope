@@ -3,7 +3,7 @@ package io.zerows.epoch.boot;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.zerows.epoch.annotations.Actor;
-import io.zerows.epoch.configuration.NodeStore;
+import io.zerows.epoch.jigsaw.NodeStore;
 import io.zerows.epoch.management.OCacheClass;
 import io.zerows.specification.configuration.HActor;
 import io.zerows.specification.configuration.HConfig;

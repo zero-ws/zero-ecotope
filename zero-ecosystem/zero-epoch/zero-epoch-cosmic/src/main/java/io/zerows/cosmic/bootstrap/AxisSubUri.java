@@ -3,7 +3,7 @@ package io.zerows.cosmic.bootstrap;
 import io.vertx.ext.web.Route;
 import io.zerows.cortex.AxisSub;
 import io.zerows.cortex.metadata.RunRoute;
-import io.zerows.epoch.basicore.WebEvent;
+import io.zerows.epoch.web.WebEvent;
 import io.zerows.specification.development.compiled.HBundle;
 
 /**

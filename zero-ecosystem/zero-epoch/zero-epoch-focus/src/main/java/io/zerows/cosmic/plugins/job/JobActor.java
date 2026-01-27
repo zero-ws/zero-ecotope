@@ -5,7 +5,7 @@ import io.vertx.core.Vertx;
 import io.zerows.component.module.AbstractHActor;
 import io.zerows.cosmic.plugins.job.management.ORepositoryJob;
 import io.zerows.epoch.annotations.Actor;
-import io.zerows.epoch.configuration.NodeStore;
+import io.zerows.epoch.jigsaw.NodeStore;
 import io.zerows.epoch.management.ORepository;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HSetting;

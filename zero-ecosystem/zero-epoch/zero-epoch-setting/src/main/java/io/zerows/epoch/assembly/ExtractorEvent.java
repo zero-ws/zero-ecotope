@@ -8,7 +8,7 @@ import io.zerows.epoch.annotations.EndPoint;
 import io.zerows.epoch.annotations.Validated;
 import io.zerows.epoch.assembly.exception._40005Exception500EventSource;
 import io.zerows.epoch.assembly.exception._40036Exception500CodexMore;
-import io.zerows.epoch.basicore.WebEvent;
+import io.zerows.epoch.web.WebEvent;
 import io.zerows.support.Ut;
 import jakarta.ws.rs.Path;
 import lombok.extern.slf4j.Slf4j;

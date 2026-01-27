@@ -3,7 +3,7 @@ package io.zerows.cosmic.bootstrap;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.cortex.sdk.Aim;
 import io.zerows.cosmic.exception._40013Exception500ReturnType;
-import io.zerows.epoch.basicore.WebEvent;
+import io.zerows.epoch.web.WebEvent;
 import io.zerows.support.Ut;
 
 import java.lang.reflect.Method;

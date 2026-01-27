@@ -5,7 +5,7 @@ import io.vertx.core.Vertx;
 import io.zerows.cortex.management.StoreVertx;
 import io.zerows.cosmic.EnergyVertx;
 import io.zerows.cosmic.EnergyVertxService;
-import io.zerows.epoch.configuration.NodeNetwork;
+import io.zerows.epoch.jigsaw.NodeNetwork;
 import io.zerows.platform.management.StoreSetting;
 import io.zerows.specification.configuration.HEnergy;
 import io.zerows.specification.configuration.HLauncher;
