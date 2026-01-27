@@ -28,7 +28,6 @@ public class ENV implements HEnvironment, HLog {
     private static final ENVDev DEV = ENVDev.of();
 
     private ENV() {
-        // 私有构造函数，防止外部实例化
     }
 
     public static ENV of() {
@@ -43,21 +42,16 @@ public class ENV implements HEnvironment, HLog {
     }
 
     public void whenStart(final Class<?> clazz) {
-        /*
-         * 先初始化环境变量
-         * - Z_
-         * - AEON_
-         * - R2MO_
-         */
+        // 1. 初始化变量名
         this.whenNames();
 
-        // 开发环境变量加载
+        // 2. 加载 Properties 文件到 ENV_VARS (如果存在)
         this.whenDevelopment(clazz);
 
-        // [新增] 自动计算 JDBC URL
+        // 3. 自动计算
         this.whenAuto();
 
-        // 打印环境变量，只打印 ZERO 相关的变量
+        // 4. 打印 (数据源自 get() 方法，保证打印出的就是生效的)
         this.vLog();
     }
 
@@ -74,6 +68,7 @@ public class ENV implements HEnvironment, HLog {
         for (final String path : source.value()) {
             devMap.putAll(DEV.envLoad(path));
         }
+        // 这里调用的 setEnv 只会写入 ENV_VARS，不再污染 System Property
         devMap.forEach(this::setEnv);
     }
 
@@ -85,41 +80,62 @@ public class ENV implements HEnvironment, HLog {
         autoMap.forEach(this::setEnv);
     }
 
+    /**
+     * 关键改动：仅仅更新内部缓存和 Name 列表
+     * 移除 System.setProperty，防止将配置文件混淆为 JVM 启动参数
+     */
     private void setEnv(final String key, final String value) {
-        System.setProperty(key, value);
+        // System.setProperty(key, value); // <--- DELETE THIS
         ENV_VARS.put(key, value);
         NAMES.add(key);
     }
 
     // ========== Loaders (Public entry) ==========
 
-    /**
-     * 辅助判断是否存在 key
-     */
     private boolean contains(final String key) {
         return NAMES.contains(key);
     }
 
     // ========== HEnvironment ==========
 
+    /**
+     * 核心策略：通过读取顺序决定优先级 (Priority Chain)
+     * 1. JVM 参数 (-D) : 永远最高，方便运维紧急覆盖
+     * 2. ENV_VARS (配置文件) : 只要文件里定义了，就覆盖系统的
+     * 3. System Env (操作系统) : 兜底
+     */
     @Override
     public String get(final String key) {
         if (UtBase.isNil(key)) {
             return null;
         }
 
-        final String envValue = System.getenv(key);
-        if (UtBase.isNotNil(envValue)) {
-            this.setEnv(key, envValue);     // 回写保障！
-            return envValue;
+        // 1. Top Priority: JVM 启动参数 (-Dkey=value)
+        // 任何环境(Dev/Prod)下，只要启动命令里带了 -D，必须生效
+        String value = System.getProperty(key);
+        if (UtBase.isNotNil(value)) {
+            return value;
         }
 
-        final String sysValue = System.getProperty(key);
-        if (UtBase.isNotNil(sysValue)) {
-            this.setEnv(key, sysValue);     // 回写保障！
-            return sysValue;
+        // 2. High Priority: 配置文件 / 内部缓存
+        // 开发环境：Properties 文件会加载到这里，从而覆盖本地脏乱的 OS 环境变量
+        // 生产环境：通常没有 PropertySource，或者是空的，这里返回 null，继续往下走
+        value = ENV_VARS.get(key);
+        if (UtBase.isNotNil(value)) {
+            return value;
         }
-        return ENV_VARS.get(key);
+
+        // 3. Base Priority: 操作系统环境变量
+        // 开发环境：只有当配置文件没写这个 key 时，才读 OS 的
+        // 生产环境：因为 ENV_VARS 通常为空，自然而然就读到了 K8s/Docker 注入的 OS 变量
+        value = System.getenv(key);
+        if (UtBase.isNotNil(value)) {
+            // 这里可以回写 ENV_VARS 提升下次读取性能，但不建议回写 System.setProperty
+            this.setEnv(key, value);
+            return value;
+        }
+
+        return null;
     }
 
     @Override
@@ -127,18 +143,17 @@ public class ENV implements HEnvironment, HLog {
         return NAMES;
     }
 
-    // ========== 特殊处理：增强版变量解析 ==========
+    // ========== Log (保持不变) ==========
 
-    // 环境变量打印专用
     @Override
     @SuppressWarnings("unchecked")
     public ENV vLog() {
         final StringBuilder content = new StringBuilder();
         content.append("\n======= Zero Framework 环境变量 =======\n");
-
         final HEnvironment environment = ENV.of();
 
-        // 1. 打印 EnvironmentVariable.NAMES 中定义的标准变量
+        // 由于 vLog 调用的是 environment.get()，它会严格遵循上面的优先级逻辑
+        // 所以打印出来的一定是最终生效的值
         Arrays.stream(EnvironmentVariable.NAMES)
             .filter(StrUtil::isNotEmpty)
             .forEach(name -> {
@@ -148,8 +163,6 @@ public class ENV implements HEnvironment, HLog {
                 }
             });
 
-        // 2. 额外打印自动生成的 URL (因为 NAMES 数组中不包含 URL 的常量定义，只有 INSTANCE)
-        // 使用常量 EnvironmentVariable.DBS_URL / DBW_URL / DBH_URL
         Arrays.asList(
             EnvironmentVariable.DBS_URL,
             EnvironmentVariable.DBW_URL,
@@ -166,5 +179,4 @@ public class ENV implements HEnvironment, HLog {
         log.info("[ ZERO ] 运行环境：{}", message);
         return this;
     }
-    // ========== Reporter ==========
 }

@@ -6,6 +6,10 @@ import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpServer;
 import io.vertx.core.http.HttpServerOptions;
+import io.vertx.core.net.JksOptions;
+import io.vertx.core.net.KeyCertOptions;
+import io.vertx.core.net.PemKeyCertOptions;
+import io.vertx.core.net.PfxOptions;
 import io.zerows.cortex.management.StoreServer;
 import io.zerows.cortex.metadata.RunServer;
 import io.zerows.cortex.metadata.RunVertx;
@@ -17,6 +21,7 @@ import io.zerows.specification.development.compiled.HBundle;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * 【Standard Mode + L1/L2 Cache Architecture】
@@ -32,6 +37,7 @@ class StubServerService extends AbstractAmbiguity implements StubServer {
     // 🚀 L1 Cache: Netty 原生极速存储 (每个线程一个槽位)
     // 假设每个 Agent 线程只负责启动一个主 HTTP Server，这是 Vert.x 的标准模式。
     private static final FastThreadLocal<RunServer> FAST_CACHE = new FastThreadLocal<>();
+    private static final AtomicBoolean IS_SSL = new AtomicBoolean(Boolean.TRUE);
 
     StubServerService(final HBundle bundle) {
         super(bundle);
@@ -55,6 +61,13 @@ class StubServerService extends AbstractAmbiguity implements StubServer {
             host = "0.0.0.0";
         }
         final String serverName = host + ":" + serverOptions.getPort();
+
+
+        // ==========================================================
+        // 🔐 SSL Configuration Logging (Vert.x 5.x Compatible)
+        // ==========================================================
+        this.waitSSLEnabled(serverOptions);
+
 
         // ==========================================================
         // ⚡️ Step 1: L1 Cache (极速路径)
@@ -121,6 +134,48 @@ class StubServerService extends AbstractAmbiguity implements StubServer {
             // 发生异常时清理 L1，防止脏数据
             FAST_CACHE.remove();
             return Future.failedFuture(e);
+        }
+    }
+
+    private void waitSSLEnabled(final HttpServerOptions serverOptions) {
+        if (serverOptions.isSsl()) {
+            String keyStoreType = "Unknown";
+            String keyStorePath = "Unknown";
+
+            // Vert.x 5 统一通过 getKeyCertOptions() 获取配置对象
+            final KeyCertOptions options = serverOptions.getKeyCertOptions();
+
+            if (options != null) {
+                // 1. 检查 PKCS12 (.p12)
+                if (options instanceof PfxOptions) {
+                    keyStoreType = "PKCS12";
+                    keyStorePath = ((PfxOptions) options).getPath();
+                }
+                // 2. 检查 JKS (.jks)
+                else if (options instanceof JksOptions) {
+                    keyStoreType = "JKS";
+                    keyStorePath = ((JksOptions) options).getPath();
+                }
+                // 3. 检查 PEM (.pem / .key + .crt)
+                else if (options instanceof PemKeyCertOptions) {
+                    keyStoreType = "PEM";
+                    // PEM 可能配置了多个 key，这里取第一个作为标识
+                    keyStorePath = ((PemKeyCertOptions) options).getKeyPath();
+                }
+            }
+
+            // 处理 Value 模式 (非文件路径，直接传入 Buffer 的情况)
+            if (keyStorePath == null) {
+                keyStorePath = "(Loaded from Memory/Buffer)";
+            }
+
+            if (IS_SSL.getAndSet(Boolean.FALSE)) {
+                // 打印 SSL 关键摘要
+                log.info("[ ZERO ] ( SSL ) 🔐 Secure Mode Enabled | Type: {}, Path: {}, ClientAuth: {}",
+                    keyStoreType,
+                    keyStorePath,
+                    serverOptions.getClientAuth()); // NONE, REQUEST, REQUIRED
+            }
         }
     }
 }

@@ -1,6 +1,10 @@
 package io.zerows.epoch.spec;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.vertx.core.json.JsonObject;
+import io.zerows.integrated.jackson.JsonObjectDeserializer;
+import io.zerows.integrated.jackson.JsonObjectSerializer;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -31,6 +35,8 @@ import java.io.Serializable;
 public class YmServer implements Serializable, YmPriority {
     private int port = 6083;
     private String address = "0.0.0.0";
+    @JsonSerialize(using = JsonObjectSerializer.class)
+    @JsonDeserialize(using = JsonObjectDeserializer.class)
     private JsonObject options = new JsonObject();
     private YmSession session;
     private YmWebSocket websocket;
