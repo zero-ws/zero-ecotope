@@ -18,7 +18,7 @@
             <artifactId>zero-boot-epoch-actor</artifactId>
         </dependency>
         <!--
-        插件
+        ZERO插件
         - Excel 数据导入插件
         - 监控插件
         - Flyway 数据库 DDL 处理插件
@@ -40,12 +40,15 @@
             <groupId>io.zerows</groupId>
             <artifactId>zero-plugins-neo4j</artifactId>
         </dependency>
-        <!-- 代码生成开启 -->
+        <!--
+        R2MO插件
+        - 代码生成
+        - IO插件
+        -->
         <dependency>
             <groupId>io.zerows</groupId>
             <artifactId>r2mo-vertx-jooq-generate</artifactId>
         </dependency>
-        <!-- R2MO IO Local -->
         <dependency>
             <groupId>io.zerows</groupId>
             <artifactId>r2mo-io-local</artifactId>

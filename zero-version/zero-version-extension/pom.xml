@@ -18,6 +18,7 @@
             核心底层，无数据表
             - Skeleton 骨架：Zero 核心框架对接层
             - Crud 增删改查：核心管理层（操作标准化）
+            - Cloud 云端插件：配置中心、服务发现等云端能力
             - Api 接口规范：系统功能对外接口规范
             -->
             <dependency>
@@ -33,6 +34,11 @@
             <dependency>
                 <groupId>io.zerows</groupId>
                 <artifactId>zero-extension-api</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-extension-cloud</artifactId>
                 <version>${revision}</version>
             </dependency>
             <!--

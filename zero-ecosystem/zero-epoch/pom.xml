@@ -48,5 +48,6 @@
         <module>zero-epoch-execution</module>
         <module>zero-epoch-cosmic</module>
         <module>zero-epoch-adhoc</module>
+        <module>zero-epoch-spec-nacos</module>
     </modules>
 </project>

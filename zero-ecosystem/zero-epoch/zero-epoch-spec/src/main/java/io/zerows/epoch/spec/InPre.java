@@ -20,8 +20,4 @@ public class InPre implements Serializable {
     public YmApplication application() {
         return Objects.requireNonNull(this.vertx).getApplication();
     }
-
-    public YmCloud cloud() {
-        return Objects.requireNonNull(this.vertx).getCloud();
-    }
 }

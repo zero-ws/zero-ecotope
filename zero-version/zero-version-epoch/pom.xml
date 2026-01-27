@@ -58,6 +58,11 @@
                 <artifactId>zero-epoch-spec</artifactId>
                 <version>${revision}</version>
             </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-epoch-spec-nacos</artifactId>
+                <version>${revision}</version>
+            </dependency>
             <!-- ================= 对接层 ================== -->
             <dependency>
                 <groupId>io.zerows</groupId>

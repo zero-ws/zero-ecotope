@@ -19,6 +19,8 @@ import io.zerows.epoch.metadata.MMComponent;
 import io.zerows.epoch.spec.options.ClusterOptions;
 import io.zerows.epoch.spec.options.CorsOptions;
 
+import java.util.concurrent.ConcurrentMap;
+
 /**
  * 基本注释格式
  * <pre>
@@ -46,7 +48,7 @@ import io.zerows.epoch.spec.options.CorsOptions;
  * 🪐 访问 Nacos 的基本配置段，此处的配置段用于访问 Nacos 服务端，并且可直接从远程拉取配置信息
  * --- 分段文档配置 ---
  * vertx:                                                                   # {@link InPreVertx}
- *   cloud:                                                                 # {@link YmCloud}
+ *   cloud:                                                                 # {@link ConcurrentMap}
  *     nacos:                                                               # {@link YmNacos}
  *       discovery:                                                         # {@link YmNacos.Discovery}
  *         server-addr: ${vertx.cloud.nacos.server-addr}                    # <--- 🔗 服务发现地址
