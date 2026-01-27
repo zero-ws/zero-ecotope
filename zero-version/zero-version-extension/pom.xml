@@ -36,11 +36,6 @@
                 <artifactId>zero-extension-api</artifactId>
                 <version>${revision}</version>
             </dependency>
-            <dependency>
-                <groupId>io.zerows</groupId>
-                <artifactId>zero-extension-cloud</artifactId>
-                <version>${revision}</version>
-            </dependency>
             <!--
             - ERP
             - LBS

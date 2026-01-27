@@ -10,9 +10,9 @@ import java.util.function.BiConsumer;
 
 /**
  * ## 「Pojo」Criteria Object
- *
+ * <p>
  * ### 1. Intro
- *
+ * <p>
  * Criteria for condition set, the connector is and Advanced criteria will use tree mode, the flat mode is "AND"
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
@@ -50,7 +50,6 @@ public class Criteria implements Serializable {
      * Create new instance of criteria.
      *
      * @param data {@link io.vertx.core.json.JsonObject}
-     *
      * @return {@link Criteria}
      */
     public static Criteria create(final JsonObject data) {
@@ -69,7 +68,6 @@ public class Criteria implements Serializable {
     /**
      * @param fieldExpr {@link java.lang.String}
      * @param value     {@link java.lang.Object}
-     *
      * @return {@link Criteria}
      */
     public Criteria save(final String fieldExpr, final Object value) {
@@ -80,7 +78,6 @@ public class Criteria implements Serializable {
     /**
      * @param fieldExpr {@link java.lang.String}
      * @param value     {@link java.lang.Object}
-     *
      * @return {@link Criteria}
      */
     public Criteria update(final String fieldExpr, final Object value) {
@@ -90,7 +87,6 @@ public class Criteria implements Serializable {
 
     /**
      * @param fieldExpr {@link java.lang.String} Removed fieldExpr
-     *
      * @return {@link Criteria}
      */
     public Criteria remove(final String fieldExpr) {
@@ -108,7 +104,6 @@ public class Criteria implements Serializable {
 
     /**
      * @param fieldExpr {@link java.lang.String} Removed fieldExpr
-     *
      * @return {@link Criteria}
      */
     @SuppressWarnings("all")

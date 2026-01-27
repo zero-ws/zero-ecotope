@@ -32,7 +32,6 @@ class DataInputImpl implements DataInput {
      * @param params     参数
      * @param configureJ 配置
      * @param feature    特征
-     *
      * @return 返回值
      */
     @Override

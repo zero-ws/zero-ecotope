@@ -1,10 +1,10 @@
 package io.zerows.extension.module.mbsecore.boot;
 
 import io.vertx.core.json.JsonObject;
+import io.zerows.extension.module.mbsecore.domain.tables.pojos.MJoin;
 import io.zerows.extension.module.mbsecore.metadata.Model;
 import io.zerows.extension.module.mbsecore.metadata.builtin.DataAtom;
 import io.zerows.extension.module.mbsecore.metadata.data.DataRecord;
-import io.zerows.extension.module.mbsecore.domain.tables.pojos.MJoin;
 import io.zerows.specification.modeling.HRecord;
 import io.zerows.support.Ut;
 

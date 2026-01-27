@@ -10,11 +10,11 @@ import io.zerows.cosmic.plugins.job.metadata.Mission;
 import io.zerows.epoch.annotations.Contract;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.web.Envelop;
-import io.zerows.extension.module.mbsecore.boot.Ao;
-import io.zerows.extension.module.mbsecore.metadata.builtin.DataAtom;
 import io.zerows.extension.module.mbseapi.boot.Jt;
 import io.zerows.extension.module.mbseapi.domain.tables.pojos.IService;
 import io.zerows.extension.module.mbseapi.plugins.AbstractJob;
+import io.zerows.extension.module.mbsecore.boot.Ao;
+import io.zerows.extension.module.mbsecore.metadata.builtin.DataAtom;
 import io.zerows.platform.metadata.KRef;
 import io.zerows.program.Ux;
 import io.zerows.specification.modeling.HRule;
@@ -22,13 +22,13 @@ import io.zerows.specification.modeling.operation.HDao;
 
 /**
  * ## 「KIncome」顶层任务前置器
- *
+ * <p>
  * ### 1. 基本介绍
- *
+ * <p>
  * 任务执行流程`KIncome -> Channel -> Outcome`中的`KIncome`前置对象，在任务通道之前执行。
- *
+ * <p>
  * ### 2. 组件功能
- *
+ * <p>
  * - 实现了{@link JobIncome}接口。
  * - 从{@link AbstractJob}继承。
  * - 参数执行`$$__BODY__$$`数据封装，包含单记录和多记录两种数据结构。
@@ -71,7 +71,6 @@ public abstract class AbstractIncome extends AbstractJob implements JobIncome {
      *
      * @param array   {@link JsonArray} 数组数据。
      * @param request {@link Envelop} Zero统一数据请求模型。
-     *
      * @return {@link Future}<{@link Envelop}> 复刻后请求
      */
     protected Future<Envelop> output(final JsonArray array, final Envelop request) {
@@ -85,7 +84,6 @@ public abstract class AbstractIncome extends AbstractJob implements JobIncome {
      *
      * @param json    {@link JsonObject} 记录数据。
      * @param request {@link Envelop} Zero统一数据请求模型。
-     *
      * @return {@link Future}<{@link Envelop}> 复刻后请求
      */
     protected Future<Envelop> output(final JsonObject json, final Envelop request) {
@@ -96,7 +94,7 @@ public abstract class AbstractIncome extends AbstractJob implements JobIncome {
 
     /**
      * 成员函数，读取静态模型定义对象{@link DataAtom}。
-     *
+     * <p>
      * 该组件中的{@link DataAtom}模型定义对象是通过`I_SERVICE`直接构造，非合约提取。
      *
      * @return {@link DataAtom}计算过后的模型定义

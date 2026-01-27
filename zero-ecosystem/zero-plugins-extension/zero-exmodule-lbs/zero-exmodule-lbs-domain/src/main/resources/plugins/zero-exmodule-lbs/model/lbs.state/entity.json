@@ -1,12 +1,12 @@
 {
-    "name": "state",
-    "daoCls": "L_STATE",
-    "field": {
-        "unique": [
-            [
-                "code",
-                "sigma"
-            ]
-        ]
-    }
+  "name": "state",
+  "daoCls": "L_STATE",
+  "field": {
+    "unique": [
+      [
+        "code",
+        "sigma"
+      ]
+    ]
+  }
 }

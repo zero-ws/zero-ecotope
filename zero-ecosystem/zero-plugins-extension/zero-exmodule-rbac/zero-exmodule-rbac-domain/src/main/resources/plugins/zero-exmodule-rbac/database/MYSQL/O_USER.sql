@@ -6,30 +6,73 @@
 DROP TABLE IF EXISTS O_USER;
 CREATE TABLE IF NOT EXISTS O_USER
 (
-    `KEY`           VARCHAR(36) COMMENT '「key」- OAuth用户ID',
-    `REDIRECT_URI`  TEXT COMMENT '「redirectUri」- 回调重定向地址',
-    `CODE`          VARCHAR(36) COMMENT '「code」- 系统编号',
-    `CLIENT_SECRET` VARCHAR(64) COMMENT '「clientSecret」- 客户端密钥',
-    `CLIENT_ID`     VARCHAR(36) COMMENT '「clientId」- 客户端ID',
-    `GRANT_TYPE`    VARCHAR(32) COMMENT '「grantType」- 认证方式',
-    `SCOPE`         VARCHAR(64) COMMENT '「scope」- 对应名空间，以应用为中心',
-    `STATE`         VARCHAR(128) COMMENT '「state」- 客户端状态',
+    `KEY`
+    VARCHAR
+(
+    36
+) COMMENT '「key」- OAuth用户ID',
+    `REDIRECT_URI` TEXT COMMENT '「redirectUri」- 回调重定向地址',
+    `CODE` VARCHAR
+(
+    36
+) COMMENT '「code」- 系统编号',
+    `CLIENT_SECRET` VARCHAR
+(
+    64
+) COMMENT '「clientSecret」- 客户端密钥',
+    `CLIENT_ID` VARCHAR
+(
+    36
+) COMMENT '「clientId」- 客户端ID',
+    `GRANT_TYPE` VARCHAR
+(
+    32
+) COMMENT '「grantType」- 认证方式',
+    `SCOPE` VARCHAR
+(
+    64
+) COMMENT '「scope」- 对应名空间，以应用为中心',
+    `STATE` VARCHAR
+(
+    128
+) COMMENT '「state」- 客户端状态',
     -- ------------------------------ 公共字段 --------------------------------
-    `SIGMA`         VARCHAR(128) COMMENT '「sigma」- 用户组绑定的统一标识',
-    `LANGUAGE`      VARCHAR(10) COMMENT '「language」- 使用的语言',
-    `ACTIVE`        BIT COMMENT '「active」- 是否启用',
-    `METADATA`      TEXT COMMENT '「metadata」- 附加配置数据',
+    `SIGMA` VARCHAR
+(
+    128
+) COMMENT '「sigma」- 用户组绑定的统一标识',
+    `LANGUAGE` VARCHAR
+(
+    10
+) COMMENT '「language」- 使用的语言',
+    `ACTIVE` BIT COMMENT '「active」- 是否启用',
+    `METADATA` TEXT COMMENT '「metadata」- 附加配置数据',
 
     -- Auditor字段
-    `CREATED_AT`    DATETIME COMMENT '「createdAt」- 创建时间',
-    `CREATED_BY`    VARCHAR(36) COMMENT '「createdBy」- 创建人',
-    `UPDATED_AT`    DATETIME COMMENT '「updatedAt」- 更新时间',
-    `UPDATED_BY`    VARCHAR(36) COMMENT '「updatedBy」- 更新人',
+    `CREATED_AT` DATETIME COMMENT '「createdAt」- 创建时间',
+    `CREATED_BY` VARCHAR
+(
+    36
+) COMMENT '「createdBy」- 创建人',
+    `UPDATED_AT` DATETIME COMMENT '「updatedAt」- 更新时间',
+    `UPDATED_BY` VARCHAR
+(
+    36
+) COMMENT '「updatedBy」- 更新人',
 
-    `APP_ID`        VARCHAR(36) COMMENT '「appId」- 应用ID',
-    `TENANT_ID`     VARCHAR(36) COMMENT '「tenantId」- 租户ID',
-    PRIMARY KEY (`KEY`) USING BTREE
-);
+    `APP_ID` VARCHAR
+(
+    36
+) COMMENT '「appId」- 应用ID',
+    `TENANT_ID` VARCHAR
+(
+    36
+) COMMENT '「tenantId」- 租户ID',
+    PRIMARY KEY
+(
+    `KEY`
+) USING BTREE
+    );
 
 -- changeset Lang:ox-ouser-2
 -- Unique Key

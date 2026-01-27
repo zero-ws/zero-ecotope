@@ -29,7 +29,6 @@ public interface AdminAgent {
      * </code></pre>
      *
      * @param tenantId 租户ID
-     *
      * @return 应用列表
      */
     @Path("/apps/usable")

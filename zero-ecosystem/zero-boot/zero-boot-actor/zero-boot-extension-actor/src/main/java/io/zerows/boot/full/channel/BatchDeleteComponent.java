@@ -10,20 +10,20 @@ import io.zerows.mbse.metadata.ActOut;
 
 /**
  * ## 「Channel」批量删除通道
- *
+ * <p>
  * ### 1. 基本介绍
- *
+ * <p>
  * 不带任何<strong>集成功能</strong>的标准批量删除组件，支持如下功能：
- *
+ * <p>
  * - 根据`key`集合删除记录集
  * - 请求`DELETE /api/ox/batch/:identifier/delete`
- *
+ * <p>
  * ### 2. 通道详细
- *
+ * <p>
  * - 类型：ADAPTOR
- *
+ * <p>
  * ### 3. 请求格式
- *
+ * <p>
  * ```json
  * // <pre><code class="json">
  * [
@@ -32,9 +32,9 @@ import io.zerows.mbse.metadata.ActOut;
  * ]
  * // </code></pre>
  * ```
- *
+ * <p>
  * ### 4. 响应格式
- *
+ * <p>
  * ```json
  * // <pre><code class="json">
  * {
@@ -51,7 +51,6 @@ public class BatchDeleteComponent extends AbstractHMore {
      * 「Async」通道主方法
      *
      * @param request 通道的标准请求参数，类型{@link ActIn}。
-     *
      * @return 返回`{@link Future}<{@link ActOut}>`
      */
     @Override

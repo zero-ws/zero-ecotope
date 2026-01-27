@@ -8,23 +8,23 @@ import io.zerows.mbse.metadata.ActOut;
 
 /**
  * ## 「Channel」搜索通道
- *
+ * <p>
  * ### 1. 基本介绍
- *
+ * <p>
  * 不带任何<strong>集成功能</strong>的标准搜索通道，支持如下功能
- *
+ * <p>
  * - 查询不同于其他接口，直接从 request 中提取 query
  * - 请求`POST /api/ox/:identifier/search`
- *
+ * <p>
  * ### 2. 通道详细
- *
+ * <p>
  * - 类型：ADAPTOR
  * - Qr参数
- *
+ * <p>
  * ### 3. 请求格式
- *
+ * <p>
  * > 参考Zero查询引擎中的Qr标准格式。
- *
+ * <p>
  * ```json
  * // <pre><code class="json">
  * {
@@ -48,9 +48,9 @@ import io.zerows.mbse.metadata.ActOut;
  * }
  * // </code></pre>
  * ```
- *
+ * <p>
  * ### 4. 响应格式
- *
+ * <p>
  * ```json
  * // <pre><code class="json">
  * {
@@ -65,7 +65,7 @@ import io.zerows.mbse.metadata.ActOut;
  * }
  * // </code></pre>
  * ```
- *
+ * <p>
  * > 可支持服务端分页、查询、排序逻辑。
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
@@ -76,7 +76,6 @@ public class SearchComponent extends AbstractAdaptor {
      * 「Async」通道主方法
      *
      * @param request 通道的标准请求参数，类型{@link ActIn}。
-     *
      * @return 返回`{@link Future}<{@link ActOut}>`
      */
     @Override

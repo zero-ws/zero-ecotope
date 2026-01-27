@@ -5,7 +5,11 @@
 DROP TABLE IF EXISTS S_VISITANT;
 CREATE TABLE IF NOT EXISTS S_VISITANT
 (
-    `KEY`         VARCHAR(36) COMMENT '「key」- 限定记录ID',
+    `KEY`
+    VARCHAR
+(
+    36
+) COMMENT '「key」- 限定记录ID',
     /*
      * 视图ID，当前资源访问者绑定的视图ID，当视图本身出现了 visitant = true 时，则执行
      * 资源访问者操作提取视图相关信息，和管理部分的 Seeker 相对应，管理部分当资源是 virtual = true 时
@@ -22,9 +26,18 @@ CREATE TABLE IF NOT EXISTS S_VISITANT
      * -- 而读取当前数据时则直接使用 EAGER
      * 处于 DELAY 状态时，VIEW 中的 DataRegion 依旧生效
      */
-    `VIEW_ID`     VARCHAR(36) COMMENT '「viewId」- 视图访问者的读ID',
-    `MODE`        VARCHAR(36) COMMENT '「mode」- 模式，资源访问者继承于资源，可`替换/扩展`两种模式',
-    `PHASE`       VARCHAR(64) COMMENT '「phase」- 作用周期',
+    `VIEW_ID` VARCHAR
+(
+    36
+) COMMENT '「viewId」- 视图访问者的读ID',
+    `MODE` VARCHAR
+(
+    36
+) COMMENT '「mode」- 模式，资源访问者继承于资源，可`替换/扩展`两种模式',
+    `PHASE` VARCHAR
+(
+    64
+) COMMENT '「phase」- 作用周期',
 
     /*
      * 访问者类型决定了当前访问者如何处理视图相关信息
@@ -36,8 +49,14 @@ CREATE TABLE IF NOT EXISTS S_VISITANT
      * -- 在配置模式下，seekKey 描述的配置的 control 记录
      * -- 在记录读取下，seekKey 描述的是模型的 category 的主键
      **/
-    `TYPE`        VARCHAR(128) COMMENT '「type」- 访问者类型',
-    `IDENTIFIER`  VARCHAR(255) COMMENT '「identifier」- 动态类型中的模型ID',
+    `TYPE` VARCHAR
+(
+    128
+) COMMENT '「type」- 访问者类型',
+    `IDENTIFIER` VARCHAR
+(
+    255
+) COMMENT '「identifier」- 动态类型中的模型ID',
     /*
      * 关于 seekKey
      * 1) 动态建模中，通常资源访问会牵涉到 controlId
@@ -62,12 +81,15 @@ CREATE TABLE IF NOT EXISTS S_VISITANT
      * --- S_PATH绑定的资源操作（视图 + 资源访问者）
      * --- 上述分支出现在 resource 中的 virtual = true
      */
-    `SEEK_KEY`    VARCHAR(255) COMMENT '「seekKey」- 资源检索的唯一键',
+    `SEEK_KEY` VARCHAR
+(
+    255
+) COMMENT '「seekKey」- 资源检索的唯一键',
 
     -- 访问者的访问信息（列表）
-    `DM_ROW`      TEXT COMMENT '「dmRow」对应视图中 Rows',
-    `DM_QR`       TEXT COMMENT '「dmQr」对应视图中的 Criteria',
-    `DM_COLUMN`   TEXT COMMENT '「dmColumn」对应视图中的 Projection',
+    `DM_ROW` TEXT COMMENT '「dmRow」对应视图中 Rows',
+    `DM_QR` TEXT COMMENT '「dmQr」对应视图中的 Criteria',
+    `DM_COLUMN` TEXT COMMENT '「dmColumn」对应视图中的 Projection',
 
     -- 访问者的访问信息（表单）
     /*
@@ -80,27 +102,48 @@ CREATE TABLE IF NOT EXISTS S_VISITANT
      * 7）依赖属性集配置
      */
     `ACL_VISIBLE` TEXT COMMENT '「aclVisible」- 可见的属性集',
-    `ACL_VIEW`    TEXT COMMENT '「aclView」- 只读的属性集',
+    `ACL_VIEW` TEXT COMMENT '「aclView」- 只读的属性集',
     `ACL_VARIETY` TEXT COMMENT '「aclVariety」- 多样性的属性集，用于控制集合类型的属性',
-    `ACL_VOW`     TEXT COMMENT '「aclVow」- 引用类属性集',
-    `ACL_VERGE`   TEXT COMMENT '「aclVerge」- 依赖属性集',
+    `ACL_VOW` TEXT COMMENT '「aclVow」- 引用类属性集',
+    `ACL_VERGE` TEXT COMMENT '「aclVerge」- 依赖属性集',
 
     -- ------------------------------ 公共字段 --------------------------------
-    `SIGMA`       VARCHAR(128) COMMENT '「sigma」- 用户组绑定的统一标识',
-    `LANGUAGE`    VARCHAR(10) COMMENT '「language」- 使用的语言',
-    `ACTIVE`      BIT COMMENT '「active」- 是否启用',
-    `METADATA`    TEXT COMMENT '「metadata」- 附加配置数据',
+    `SIGMA` VARCHAR
+(
+    128
+) COMMENT '「sigma」- 用户组绑定的统一标识',
+    `LANGUAGE` VARCHAR
+(
+    10
+) COMMENT '「language」- 使用的语言',
+    `ACTIVE` BIT COMMENT '「active」- 是否启用',
+    `METADATA` TEXT COMMENT '「metadata」- 附加配置数据',
 
     -- Auditor字段
-    `CREATED_AT`  DATETIME COMMENT '「createdAt」- 创建时间',
-    `CREATED_BY`  VARCHAR(36) COMMENT '「createdBy」- 创建人',
-    `UPDATED_AT`  DATETIME COMMENT '「updatedAt」- 更新时间',
-    `UPDATED_BY`  VARCHAR(36) COMMENT '「updatedBy」- 更新人',
+    `CREATED_AT` DATETIME COMMENT '「createdAt」- 创建时间',
+    `CREATED_BY` VARCHAR
+(
+    36
+) COMMENT '「createdBy」- 创建人',
+    `UPDATED_AT` DATETIME COMMENT '「updatedAt」- 更新时间',
+    `UPDATED_BY` VARCHAR
+(
+    36
+) COMMENT '「updatedBy」- 更新人',
 
-    `APP_ID`      VARCHAR(36) COMMENT '「appId」- 应用ID',
-    `TENANT_ID`   VARCHAR(36) COMMENT '「tenantId」- 租户ID',
-    PRIMARY KEY (`KEY`) USING BTREE
-);
+    `APP_ID` VARCHAR
+(
+    36
+) COMMENT '「appId」- 应用ID',
+    `TENANT_ID` VARCHAR
+(
+    36
+) COMMENT '「tenantId」- 租户ID',
+    PRIMARY KEY
+(
+    `KEY`
+) USING BTREE
+    );
 
 -- changeset Lang:ox-visitant-2
 ALTER TABLE S_VISITANT

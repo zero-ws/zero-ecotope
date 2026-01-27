@@ -53,7 +53,6 @@ class HOneType implements HOne<ConcurrentMap<String, Class<?>>> {
      *
      * @param typedMap 原始类型表
      * @param point    连接点定义
-     *
      * @return 解析结果
      */
     private ConcurrentMap<String, Class<?>> typeSynonym(
@@ -87,7 +86,6 @@ class HOneType implements HOne<ConcurrentMap<String, Class<?>>> {
      * 此处是一个合并结果（扫描之后）。
      *
      * @param module {@link KModule} 模型对象
-     *
      * @return {@link ConcurrentMap} 类型的哈希表
      */
     private ConcurrentMap<String, Class<?>> typeModule(final KModule module) {

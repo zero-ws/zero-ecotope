@@ -44,7 +44,7 @@ import java.util.concurrent.ConcurrentMap;
  *     充当了上下文环境的应用/租户 请求信息，和 HArk 不同的点在于，当前静态中，可执行全局化调用，
  *     且请求产生时执行初始化，依赖 XHeader 中数据
  * </code></pre>
- *
+ * <p>
  * > 为了区别于 {@link HTenant} 和 {@link HOwner}
  * 此处的拼写改成 Tenement，具有多层租户含义，对应接口为 {@link HOI}
  *

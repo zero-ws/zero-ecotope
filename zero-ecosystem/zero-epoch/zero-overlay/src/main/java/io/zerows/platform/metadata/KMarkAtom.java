@@ -23,7 +23,7 @@ import java.util.function.Function;
  *     1. 直接修改 VAtom.Mark 中的标记信息，添加新的标记位
  *     2. 新版中 {@link Attribute} 和 {@link KMarkAtom} 都不需要更改
  * </code></pre>
- *
+ * <p>
  * 特定场景使用标记比直接使用属性的模式要方便，新版充当容器作用，则实现了标记位的动态扩展。
  * 更改时只需重写 {@link EmAttribute.Marker} 枚举类型即可追加新标记
  *

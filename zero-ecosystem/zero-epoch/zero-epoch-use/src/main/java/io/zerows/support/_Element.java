@@ -12,7 +12,7 @@ import java.util.function.Function;
  * @author lang : 2023-06-19
  */
 class _Element extends _ED {
-    
+
     /*
      * Array or List calculation
      * 1) elementAdd

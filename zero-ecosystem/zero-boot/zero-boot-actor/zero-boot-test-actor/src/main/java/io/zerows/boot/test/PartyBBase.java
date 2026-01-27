@@ -47,7 +47,6 @@ public abstract class PartyBBase implements PartyB {
      * 「Async」根据统一标识符异步构造某一个模型的字典翻译器
      *
      * @param identifier {@link String} 传入的模型统一标识符
-     *
      * @return `{@link Future}<{@link KFabric}>`
      */
     @Override
@@ -71,7 +70,6 @@ public abstract class PartyBBase implements PartyB {
      * ```
      *
      * @param identifier {@link String} 模型统一标识符
-     *
      * @return {@link MultiMap} 返回参数哈希表
      */
     private MultiMap input(final String identifier) {

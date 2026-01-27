@@ -53,16 +53,24 @@ import java.util.concurrent.ConcurrentMap;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 public class KJoin implements Serializable {
-    /** 做JOIN的目标模型的 identifier 属性 */
+    /**
+     * 做JOIN的目标模型的 identifier 属性
+     */
     private volatile String targetIndent;
 
-    /** 做JOIN的源相关配置，{@link Point} */
+    /**
+     * 做JOIN的源相关配置，{@link Point}
+     */
     private Point source;
 
-    /** 做JOIN的主从表模式下的主从表，{@link Point} */
+    /**
+     * 做JOIN的主从表模式下的主从表，{@link Point}
+     */
     private Point reference;
 
-    /** 做JOIN的目标模型（多个）对应的 {@link Point} 对应哈希表配置 **/
+    /**
+     * 做JOIN的目标模型（多个）对应的 {@link Point} 对应哈希表配置
+     **/
     private ConcurrentMap<String, Point> target = new ConcurrentHashMap<>();
 
     public String getTargetIndent() {
@@ -128,31 +136,43 @@ public class KJoin implements Serializable {
      * @author <a href="http://www.origin-x.cn">Lang</a>
      */
     public static class Point implements Serializable {
-        /** 模型标识符 */
+        /**
+         * 模型标识符
+         */
         @JsonIgnore
         private String identifier;
 
 
-        /** {@link EmModel.Join#CRUD} 专用：可解析的crud连接专用文件 */
+        /**
+         * {@link EmModel.Join#CRUD} 专用：可解析的crud连接专用文件
+         */
         private String crud;
 
 
-        /** {@link EmModel.Join#DAO} 专用：Java的类名，做直连JOIN专用 */
+        /**
+         * {@link EmModel.Join#DAO} 专用：Java的类名，做直连JOIN专用
+         */
         @JsonSerialize(using = ClassSerializer.class)
         @JsonDeserialize(using = ClassDeserializer.class)
         private Class<?> classDao;
 
 
-        /** {@link EmModel.Join#DEFINE} 专用： **/
+        /**
+         * {@link EmModel.Join#DEFINE} 专用：
+         **/
         @JsonSerialize(using = ClassSerializer.class)
         @JsonDeserialize(using = ClassDeserializer.class)
         private Class<?> classDefine;
 
 
-        /** 主键名 **/
+        /**
+         * 主键名
+         **/
         private String key;
 
-        /** 连接键名 **/
+        /**
+         * 连接键名
+         **/
         private String keyJoin;
 
         @JsonSerialize(using = JsonObjectSerializer.class)
@@ -285,7 +305,6 @@ public class KJoin implements Serializable {
          * </code></pre>
          *
          * @param identifier 模型标识符
-         *
          * @return {@link Point} 当前连接点引用
          */
         public Point indent(final String identifier) {

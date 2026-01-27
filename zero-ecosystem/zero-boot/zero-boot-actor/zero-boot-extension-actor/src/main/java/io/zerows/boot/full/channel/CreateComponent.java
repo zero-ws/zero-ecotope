@@ -10,20 +10,20 @@ import io.zerows.program.Ux;
 
 /**
  * ## 「Channel」创建记录通道
- *
+ * <p>
  * ### 1. 基本介绍
- *
+ * <p>
  * 不带任何<strong>集成功能</strong>的标准创建组件，支持如下功能：
- *
+ * <p>
  * - 传入数据，直接插入模型对应数据
  * - 请求`POST /api/ox/:identifier`
- *
+ * <p>
  * ### 2. 通道详细
- *
+ * <p>
  * - 类型：ADAPTOR
- *
+ * <p>
  * ### 3. 请求格式
- *
+ * <p>
  * ```json
  * // <pre><code class="json">
  * {
@@ -34,9 +34,9 @@ import io.zerows.program.Ux;
  * }
  * // </code></pre>
  * ```
- *
+ * <p>
  * ### 4. 响应格式
- *
+ * <p>
  * ```json
  * // <pre><code class="json">
  * {

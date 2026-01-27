@@ -1,12 +1,12 @@
 {
-    "name": "todo",
-    "daoCls": "W_TODO",
-    "field": {
-        "unique": [
-            [
-                "code",
-                "sigma"
-            ]
-        ]
-    }
+  "name": "todo",
+  "daoCls": "W_TODO",
+  "field": {
+    "unique": [
+      [
+        "code",
+        "sigma"
+      ]
+    ]
+  }
 }

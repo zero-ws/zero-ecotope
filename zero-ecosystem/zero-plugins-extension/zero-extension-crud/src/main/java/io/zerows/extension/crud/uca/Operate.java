@@ -46,7 +46,6 @@ public interface Operate<I, O> {
      * {@link Future} 类型中。
      *
      * @param in {@link IxMod} 模型
-     *
      * @return {@link Function} 函数
      */
     default Function<I, Future<O>> annexFn(final IxMod in) {

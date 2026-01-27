@@ -1,7 +1,12 @@
 package io.zerows.epoch.management;
 
 import io.zerows.epoch.annotations.QaS;
-import io.zerows.epoch.assembly.*;
+import io.zerows.epoch.assembly.InquirerForAgent;
+import io.zerows.epoch.assembly.InquirerForEvent;
+import io.zerows.epoch.assembly.InquirerForFilter;
+import io.zerows.epoch.assembly.InquirerForIpc;
+import io.zerows.epoch.assembly.InquirerForQaS;
+import io.zerows.epoch.assembly.InquirerForReceipt;
 import io.zerows.epoch.jigsaw.Inquirer;
 import io.zerows.epoch.metadata.environment.KSwitcher;
 import io.zerows.epoch.web.JointAction;

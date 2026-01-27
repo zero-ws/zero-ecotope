@@ -26,7 +26,6 @@ class JQPre {
      *
      * @param atom     {@link DataAtom} The model definition.
      * @param criteria {@link Criteria} the criteria object to stored query condition.
-     *
      * @return The new modified criteria
      */
     @SuppressWarnings("all")

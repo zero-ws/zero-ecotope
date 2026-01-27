@@ -22,10 +22,23 @@ CREATE TABLE IF NOT EXISTS UI_VISITOR
      *
      * 3. 唯一标识：identifier + page + path 可计算得到唯一的 control_id 值
      */
-    `IDENTIFIER`    VARCHAR(36) COMMENT '「identifier」- 维度1：标识模型',
-    `PAGE`          VARCHAR(36) COMMENT '「page」- 维度2：页面ID',
-    `PATH`          VARCHAR(128) COMMENT '「path」- 维度3：路径信息，view + position',
-    `TYPE`          VARCHAR(36) COMMENT '「type」- 维度4：操作类型：List / Form 或其他',
+    `IDENTIFIER`
+    VARCHAR
+(
+    36
+) COMMENT '「identifier」- 维度1：标识模型',
+    `PAGE` VARCHAR
+(
+    36
+) COMMENT '「page」- 维度2：页面ID',
+    `PATH` VARCHAR
+(
+    128
+) COMMENT '「path」- 维度3：路径信息，view + position',
+    `TYPE` VARCHAR
+(
+    36
+) COMMENT '「type」- 维度4：操作类型：List / Form 或其他',
 
 
     /*
@@ -33,23 +46,54 @@ CREATE TABLE IF NOT EXISTS UI_VISITOR
      * - controlId 负责消费和使用
      * - resourceId 负责管理
      */
-    `CONTROL_ID`    VARCHAR(36) COMMENT '「controlId」- 挂载专用的ID：List / Form 都可用',
-    `RESOURCE_ID`   VARCHAR(36) COMMENT '「resourceId」- 关联资源ID',
+    `CONTROL_ID` VARCHAR
+(
+    36
+) COMMENT '「controlId」- 挂载专用的ID：List / Form 都可用',
+    `RESOURCE_ID` VARCHAR
+(
+    36
+) COMMENT '「resourceId」- 关联资源ID',
 
     `RUN_COMPONENT` TEXT COMMENT '「runComponent」- 执行组件，扩展时专用',
     -- ------------------------------ 公共字段 --------------------------------
-    `SIGMA`         VARCHAR(128) COMMENT '「sigma」- 用户组绑定的统一标识',
-    `LANGUAGE`      VARCHAR(10) COMMENT '「language」- 使用的语言',
-    `ACTIVE`        BIT COMMENT '「active」- 是否启用',
-    `METADATA`      TEXT COMMENT '「metadata」- 附加配置数据',
+    `SIGMA` VARCHAR
+(
+    128
+) COMMENT '「sigma」- 用户组绑定的统一标识',
+    `LANGUAGE` VARCHAR
+(
+    10
+) COMMENT '「language」- 使用的语言',
+    `ACTIVE` BIT COMMENT '「active」- 是否启用',
+    `METADATA` TEXT COMMENT '「metadata」- 附加配置数据',
 
     -- Auditor字段
-    `CREATED_AT`    DATETIME COMMENT '「createdAt」- 创建时间',
-    `CREATED_BY`    VARCHAR(36) COMMENT '「createdBy」- 创建人',
-    `UPDATED_AT`    DATETIME COMMENT '「updatedAt」- 更新时间',
-    `UPDATED_BY`    VARCHAR(36) COMMENT '「updatedBy」- 更新人',
+    `CREATED_AT` DATETIME COMMENT '「createdAt」- 创建时间',
+    `CREATED_BY` VARCHAR
+(
+    36
+) COMMENT '「createdBy」- 创建人',
+    `UPDATED_AT` DATETIME COMMENT '「updatedAt」- 更新时间',
+    `UPDATED_BY` VARCHAR
+(
+    36
+) COMMENT '「updatedBy」- 更新人',
 
-    `APP_ID`        VARCHAR(36) COMMENT '「appId」- 应用ID',
-    `TENANT_ID`     VARCHAR(36) COMMENT '「tenantId」- 租户ID',
-    PRIMARY KEY (`IDENTIFIER`, `PAGE`, `PATH`, `TYPE`, `SIGMA`)
-);
+    `APP_ID` VARCHAR
+(
+    36
+) COMMENT '「appId」- 应用ID',
+    `TENANT_ID` VARCHAR
+(
+    36
+) COMMENT '「tenantId」- 租户ID',
+    PRIMARY KEY
+(
+    `IDENTIFIER`,
+    `PAGE`,
+    `PATH`,
+    `TYPE`,
+    `SIGMA`
+)
+    );

@@ -34,7 +34,6 @@ class ConflateAIo extends ConflateBase<JsonArray, JsonArray> {
      * @param active     主数据
      * @param assist     输入数据
      * @param identifier 识别符
-     *
      * @return {@link JsonArray} 返回的是一个数组，数组中的每一个元素都是一个 {@link JsonObject}，每一个元素都是
      */
     @Override

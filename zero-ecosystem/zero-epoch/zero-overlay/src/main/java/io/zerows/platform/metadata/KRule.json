@@ -1,24 +1,24 @@
 {
-    "record": [
-        "code",
-        "ipManage"
-    ],
-    "integration": [
-        "globalId",
-        "ipManage"
-    ],
-    "priority": [
-        "globalId",
-        "code",
-        [
-            "ipManage"
-        ]
-    ],
-    "strong": [
-        "globalId",
-        "code"
-    ],
-    "weak": [
-        "ipManage"
+  "record": [
+    "code",
+    "ipManage"
+  ],
+  "integration": [
+    "globalId",
+    "ipManage"
+  ],
+  "priority": [
+    "globalId",
+    "code",
+    [
+      "ipManage"
     ]
+  ],
+  "strong": [
+    "globalId",
+    "code"
+  ],
+  "weak": [
+    "ipManage"
+  ]
 }

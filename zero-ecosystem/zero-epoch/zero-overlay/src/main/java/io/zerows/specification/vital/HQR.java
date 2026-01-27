@@ -24,7 +24,6 @@ public interface HQR {
      *
      * @param data 传入数据
      * @param qr   查询引擎模板
-     *
      * @return 返回异步结果
      */
     Future<JsonObject> compile(JsonObject data, JsonObject qr);

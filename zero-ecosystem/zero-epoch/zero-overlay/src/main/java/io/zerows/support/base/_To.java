@@ -24,7 +24,6 @@ class _To extends _Serialize {
      * 根据传入类型将该类型转换成基本类型
      *
      * @param source 源类型
-     *
      * @return 基本类型
      */
     public static Class<?> toPrimary(final Class<?> source) {
@@ -37,7 +36,6 @@ class _To extends _Serialize {
      * @param clazz   枚举元类型
      * @param literal 字符串
      * @param <T>     枚举类型
-     *
      * @return 枚举
      */
     public static <T extends Enum<T>> T toEnum(final String literal, final Class<T> clazz) {
@@ -51,7 +49,6 @@ class _To extends _Serialize {
      * @param literal      字符串
      * @param defaultValue 默认值
      * @param <T>          枚举类型
-     *
      * @return 枚举
      */
     public static <T extends Enum<T>> T toEnum(final String literal, final Class<T> clazz, final T defaultValue) {
@@ -64,7 +61,6 @@ class _To extends _Serialize {
      * @param supplier 字符串提供者
      * @param clazz    枚举元类型
      * @param <T>      枚举类型
-     *
      * @return 枚举
      */
     public static <T extends Enum<T>> T toEnum(final Supplier<String> supplier, final Class<T> clazz) {
@@ -78,7 +74,6 @@ class _To extends _Serialize {
      * @param clazz        枚举元类型
      * @param defaultValue 默认值
      * @param <T>          枚举类型
-     *
      * @return 枚举
      */
     public static <T extends Enum<T>> T toEnum(final Supplier<String> supplier, final Class<T> clazz, final T defaultValue) {
@@ -89,7 +84,6 @@ class _To extends _Serialize {
      * 读取所有文件信息转换成压缩文件流
      *
      * @param fileSet 文件集合
-     *
      * @return 压缩文件流
      */
     public static Buffer toZip(final Set<String> fileSet) {
@@ -101,7 +95,6 @@ class _To extends _Serialize {
      *
      * @param message 对象
      * @param <T>     对象类型
-     *
      * @return 字节数组
      */
     public static <T> byte[] toBytes(final T message) {
@@ -112,7 +105,6 @@ class _To extends _Serialize {
      * 将 JsonArray 转换 Set<String>
      *
      * @param arrayA JsonArray
-     *
      * @return Set<String>
      */
     public static Set<String> toSet(final JsonArray arrayA) {
@@ -123,7 +115,6 @@ class _To extends _Serialize {
      * 将 JsonArray 转换 List<String>
      *
      * @param arrayA JsonArray
-     *
      * @return List<String>
      */
     public static List<String> toList(final JsonArray arrayA) {
@@ -134,7 +125,6 @@ class _To extends _Serialize {
      * 将 String 转换成 List<String>，默认逗号分割
      *
      * @param literal 字符串字面量
-     *
      * @return List<String>
      */
     public static List<String> toList(final String literal) {
@@ -146,7 +136,6 @@ class _To extends _Serialize {
      *
      * @param literal   字符串字面量
      * @param separator 分隔符
-     *
      * @return List<String>
      */
     public static List<String> toList(final String literal, final String separator) {
@@ -157,7 +146,6 @@ class _To extends _Serialize {
      * 将 String 转换成 Set<String>，默认逗号分割
      *
      * @param literal 字符串字面量
-     *
      * @return Set<String>
      */
     public static Set<String> toSet(final String literal) {
@@ -169,7 +157,6 @@ class _To extends _Serialize {
      *
      * @param literal   字符串字面量
      * @param separator 分隔符
-     *
      * @return Set<String>
      */
     public static Set<String> toSet(final String literal, final String separator) {
@@ -180,7 +167,6 @@ class _To extends _Serialize {
      * 将字符串字面量转换成 JsonArray
      *
      * @param literal 字符串字面量
-     *
      * @return JsonArray
      */
     public static JsonArray toJArray(final String literal) {
@@ -192,7 +178,6 @@ class _To extends _Serialize {
      *
      * @param set 集合
      * @param <T> 集合类型
-     *
      * @return JsonArray
      */
     public static <T> JsonArray toJArray(final Set<T> set) {
@@ -204,7 +189,6 @@ class _To extends _Serialize {
      *
      * @param list 集合
      * @param <T>  集合类型
-     *
      * @return JsonArray
      */
     public static <T> JsonArray toJArray(final List<T> list) {
@@ -216,7 +200,6 @@ class _To extends _Serialize {
      *
      * @param literal 字符串字面量
      * @param itemFn  转换函数
-     *
      * @return JsonArray
      */
     public static JsonArray toJArray(final String literal, final Function<JsonObject, JsonObject> itemFn) {
@@ -228,7 +211,6 @@ class _To extends _Serialize {
      *
      * @param array    JsonArray
      * @param executor 转换函数
-     *
      * @return JsonArray
      */
     public static JsonArray toJArray(final JsonArray array, final Function<JsonObject, JsonObject> executor) {
@@ -239,7 +221,6 @@ class _To extends _Serialize {
      * 智能转换，对对象进行类型判断，转换成 JsonArray
      *
      * @param value 对象
-     *
      * @return JsonArray
      */
     public static JsonArray toJArray(final Object value) {
@@ -251,7 +232,6 @@ class _To extends _Serialize {
      * （带非空检查）Map转换成 JsonObject
      *
      * @param map Map
-     *
      * @return JsonObject
      */
     public static JsonObject toJObject(final Map<String, Object> map) {
@@ -263,7 +243,6 @@ class _To extends _Serialize {
      *
      * @param literal 字符串字面量
      * @param itemFn  转换函数
-     *
      * @return JsonObject
      */
     public static JsonObject toJObject(final String literal, final Function<JsonObject, JsonObject> itemFn) {
@@ -274,7 +253,6 @@ class _To extends _Serialize {
      * 字符串转换成 JsonObject，如果有错默认返回空对象
      *
      * @param literal 字符串
-     *
      * @return JsonObject
      */
     public static JsonObject toJObject(final String literal) {
@@ -285,7 +263,6 @@ class _To extends _Serialize {
      * 智能转换，对对象进行类型判断
      *
      * @param value 对象
-     *
      * @return JsonObject
      */
     public static JsonObject toJObject(final Object value) {
@@ -296,7 +273,6 @@ class _To extends _Serialize {
      * 智能转换，将对象转换成 String 类型
      *
      * @param value 对象
-     *
      * @return String
      */
     public static String toString(final Object value) {
@@ -307,7 +283,6 @@ class _To extends _Serialize {
      * 只能转换，将对象转换成 Collection 类型
      *
      * @param value 对象
-     *
      * @return Collection
      */
     public static Collection<?> toCollection(final Object value) {

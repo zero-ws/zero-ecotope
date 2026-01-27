@@ -135,7 +135,6 @@ public class Jt {
      * 双通道模式下的数据库
      *
      * @param service 通道服务接口
-     *
      * @return 选择的数据库
      */
     public static Database toDatabase(final IService service) {

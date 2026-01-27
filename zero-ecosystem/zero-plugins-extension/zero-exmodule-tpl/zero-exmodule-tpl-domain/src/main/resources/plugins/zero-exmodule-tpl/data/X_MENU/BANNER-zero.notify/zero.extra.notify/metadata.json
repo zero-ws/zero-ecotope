@@ -1,4 +1,4 @@
 {
-    "confirm": true,
-    "plugin": "ExNotify"
+  "confirm": true,
+  "plugin": "ExNotify"
 }

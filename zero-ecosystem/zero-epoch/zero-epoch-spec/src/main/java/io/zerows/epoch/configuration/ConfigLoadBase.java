@@ -1,12 +1,10 @@
-package io.zerows.epoch.boot;
+package io.zerows.epoch.configuration;
 
 import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.r2mo.function.Fn;
-import io.r2mo.spi.SPI;
 import io.r2mo.typed.exception.web._500ServerInternalException;
 import io.r2mo.typed.json.JObject;
-import io.r2mo.typed.json.JUtil;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.spec.YmApp;
 import io.zerows.epoch.spec.YmApplication;
@@ -27,8 +25,7 @@ import java.util.stream.Collectors;
  * @author lang : 2025-10-10
  */
 @Slf4j
-abstract class ConfigLoadBase implements io.zerows.epoch.configuration.ConfigLoad {
-    protected static final JUtil UT = SPI.V_UTIL;
+public abstract class ConfigLoadBase implements ConfigLoad {
 
     /**
      * 步骤说明
@@ -58,7 +55,7 @@ abstract class ConfigLoadBase implements io.zerows.epoch.configuration.ConfigLoa
 
 
         // 步骤二：日志补充
-        ZeroLogging.configure(configuration.getLogging());
+        ConfigLogging.configure(configuration.getLogging());
 
 
         // 步骤三：扩展节点填充

@@ -28,7 +28,7 @@ import java.util.Set;
 public interface JobStore {
 
     default void initialize() {
-        
+
     }
 
     /**

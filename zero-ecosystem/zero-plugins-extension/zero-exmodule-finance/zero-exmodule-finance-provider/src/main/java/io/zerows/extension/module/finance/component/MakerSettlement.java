@@ -36,7 +36,6 @@ class MakerSettlement implements Maker<String, FSettlement> {
      *
      * @param data   输入数据
      * @param indent 序号
-     *
      * @return {@link FSettlement}
      */
     @Override

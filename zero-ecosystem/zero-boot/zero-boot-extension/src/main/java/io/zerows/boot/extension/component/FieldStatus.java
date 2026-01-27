@@ -2,17 +2,17 @@ package io.zerows.boot.extension.component;
 
 /**
  * ## 字段状态
- *
+ * <p>
  * ### 1. 基本介绍
- *
+ * <p>
  * 枚举常量，用于判断字段比对的最终结果。
- *
+ * <p>
  * - MATCH：界面配置和模型定义匹配（都包含并且合法）。
  * - INVALID：模型中有定义，但属性定义有错。
  * - REMAIN：`LIST/FORM`中有定义，但模型中丢失。
- *
+ * <p>
  * ### 2. 比对矩阵
- *
+ * <p>
  * |比对结果|UI配置|模型定义|
  * |:---|---|---|
  * |MATCH|OkOld|OkOld|

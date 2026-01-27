@@ -50,7 +50,6 @@ class _Net extends _Modeler {
      * 网络状态信息检查
      *
      * @param line 网络状态信息
-     *
      * @return JsonObject
      */
     public static JsonObject netStatus(final String line) {
@@ -61,7 +60,6 @@ class _Net extends _Modeler {
      * 计算网络标识
      *
      * @param url 网络地址
-     *
      * @return 网络标识
      */
     public static String netUri(final String url) {

@@ -15,7 +15,6 @@
     <modules>
         <!-- 扩展模块骨架 -->
         <module>zero-extension-skeleton</module>                           <!-- Skeleton -->
-        <module>zero-extension-cloud</module>                              <!-- Cloud -->
         <module>zero-extension-crud</module>                               <!-- CRUD 引擎 -->
         <module>zero-extension-api</module>                                <!-- API 规范 -->
 

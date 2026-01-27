@@ -9,7 +9,7 @@ import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-import static io.r2mo.vertx.jooq.shared.internal.VertxPojo.*;
+import static io.r2mo.vertx.jooq.shared.internal.VertxPojo.setOrThrow;
 
 /**
  * OAuth2 注册客户端表

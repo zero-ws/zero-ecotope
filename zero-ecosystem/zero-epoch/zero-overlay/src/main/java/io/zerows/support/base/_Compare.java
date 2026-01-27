@@ -20,7 +20,6 @@ class _Compare extends _Color {
      *
      * @param left  左边日期
      * @param right 右边日期
-     *
      * @return 是否相等
      */
     public static boolean isSame(final Date left, final Date right) {
@@ -32,7 +31,6 @@ class _Compare extends _Color {
      *
      * @param left  左对象
      * @param right 右对象
-     *
      * @return 是否相等
      */
     public static boolean isSame(final Object left, final Object right) {
@@ -46,7 +44,6 @@ class _Compare extends _Color {
      * @param field    字段
      * @param expected 期望值
      * @param <T>      期望值类型
-     *
      * @return 是否相同
      */
     public static <T> boolean isSame(final JsonObject record, final String field, final T expected) {
@@ -61,7 +58,6 @@ class _Compare extends _Color {
      * @param right    右边JsonArray
      * @param fields   比较的属性集合
      * @param sequence 是否考虑顺序
-     *
      * @return 是否相同
      */
     public static boolean isSame(final JsonArray left, final JsonArray right,
@@ -76,7 +72,6 @@ class _Compare extends _Color {
      * @param left   左边JsonArray
      * @param right  右边JsonArray
      * @param fields 比较的属性集合
-     *
      * @return 是否相同
      */
     public static boolean isSame(final JsonArray left, final JsonArray right,
@@ -90,7 +85,6 @@ class _Compare extends _Color {
      *
      * @param left  左边JsonArray
      * @param right 右边JsonArray
-     *
      * @return 是否相同
      */
     public static boolean isSame(final JsonArray left, final JsonArray right) {
@@ -105,7 +99,6 @@ class _Compare extends _Color {
      * @param right    右边JsonArray
      * @param fields   比较的属性集合
      * @param sequence 是否考虑顺序
-     *
      * @return 是否不同
      */
     public static boolean isDiff(final JsonArray left, final JsonArray right,
@@ -120,7 +113,6 @@ class _Compare extends _Color {
      * @param left   左边JsonArray
      * @param right  右边JsonArray
      * @param fields 比较的属性集合
-     *
      * @return 是否不同
      */
     public static boolean isDiff(final JsonArray left, final JsonArray right,
@@ -134,7 +126,6 @@ class _Compare extends _Color {
      *
      * @param left  左边JsonArray
      * @param right 右边JsonArray
-     *
      * @return 是否不同
      */
     public static boolean isDiff(final JsonArray left, final JsonArray right) {

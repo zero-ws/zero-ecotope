@@ -115,7 +115,6 @@ public class ElasticSearchHelper {
      *                 "field": "String",
      *                 ...
      *                 }
-     *
      * @return translated map object
      */
     Map<String, Object> mappingsBuilder(final ConcurrentMap<String, Class<?>> mappings) {

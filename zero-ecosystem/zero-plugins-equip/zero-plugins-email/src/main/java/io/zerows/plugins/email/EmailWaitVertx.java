@@ -1,7 +1,11 @@
 package io.zerows.plugins.email;
 
 import cn.hutool.core.util.StrUtil;
-import io.r2mo.base.exchange.*;
+import io.r2mo.base.exchange.NormMessage;
+import io.r2mo.base.exchange.UniAccount;
+import io.r2mo.base.exchange.UniContext;
+import io.r2mo.base.exchange.UniMessage;
+import io.r2mo.base.exchange.UniProvider;
 import io.r2mo.base.util.R2MO;
 import io.r2mo.function.Fn;
 import io.r2mo.typed.cc.Cc;

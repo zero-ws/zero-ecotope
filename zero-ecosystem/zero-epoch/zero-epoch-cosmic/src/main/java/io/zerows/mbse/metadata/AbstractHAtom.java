@@ -55,7 +55,9 @@ public abstract class AbstractHAtom implements HAtom {
         return this.model().ark();
     }
 
-    /** 返回当前 Model 中的所有属性集 */
+    /**
+     * 返回当前 Model 中的所有属性集
+     */
     @Override
     public Set<String> attribute() {
         return this.metadata.attribute();
@@ -66,7 +68,9 @@ public abstract class AbstractHAtom implements HAtom {
         return this.metadata.attribute(name);
     }
 
-    /** 返回 name = alias */
+    /**
+     * 返回 name = alias
+     */
     @Override
     public ConcurrentMap<String, String> alias() {
         return this.metadata.alias();
@@ -96,7 +100,9 @@ public abstract class AbstractHAtom implements HAtom {
         return result;
     }
 
-    /** 返回 Shape 对象 */
+    /**
+     * 返回 Shape 对象
+     */
     @Override
     public HMetaAtom shape() {
         return this.metadata.shape();
@@ -118,26 +124,34 @@ public abstract class AbstractHAtom implements HAtom {
 
     // ------------ 标识规则 ------------
 
-    /** 存储的规则 */
+    /**
+     * 存储的规则
+     */
     @Override
     public HRule ruleAtom() {
         return this.ruler.rule();
     }
 
 
-    /** 智能检索规则 */
+    /**
+     * 智能检索规则
+     */
     @Override
     public HRule ruleSmart() {
         return this.ruler.ruleSmart();
     }
 
-    /** 连接的规则 */
+    /**
+     * 连接的规则
+     */
     @Override
     public HRule rule() {
         return this.ruler.ruleDirect();
     }
 
-    /** 规则的链接 */
+    /**
+     * 规则的链接
+     */
     @Override
     @SuppressWarnings("unchecked")
     public <T extends HAtom> T rule(final HRule channelRule) {

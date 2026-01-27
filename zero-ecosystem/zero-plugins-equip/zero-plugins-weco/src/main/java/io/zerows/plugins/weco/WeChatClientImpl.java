@@ -1,6 +1,10 @@
 package io.zerows.plugins.weco;
 
-import io.r2mo.base.exchange.*;
+import io.r2mo.base.exchange.UniAccount;
+import io.r2mo.base.exchange.UniContext;
+import io.r2mo.base.exchange.UniMessage;
+import io.r2mo.base.exchange.UniProvider;
+import io.r2mo.base.exchange.UniResponse;
 import io.r2mo.spi.SPI;
 import io.r2mo.typed.cc.Cc;
 import io.r2mo.typed.json.JObject;

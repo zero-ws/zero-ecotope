@@ -1,13 +1,13 @@
 {
-    "query": {
-        "type": "zero.service.catalog"
-    },
-    "store": {
-        "runComponent": "io.zerows.extension.module.integration.component.FsReadOnly",
-        "initialize": {
-            "visitMode": [
-                "r"
-            ]
-        }
+  "query": {
+    "type": "zero.service.catalog"
+  },
+  "store": {
+    "runComponent": "io.zerows.extension.module.integration.component.FsReadOnly",
+    "initialize": {
+      "visitMode": [
+        "r"
+      ]
     }
+  }
 }

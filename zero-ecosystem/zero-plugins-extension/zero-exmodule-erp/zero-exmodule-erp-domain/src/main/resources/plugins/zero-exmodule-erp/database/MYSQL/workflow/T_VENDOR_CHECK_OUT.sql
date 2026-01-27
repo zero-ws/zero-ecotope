@@ -5,19 +5,29 @@ DROP TABLE IF EXISTS T_VENDOR_CHECK_OUT;
 CREATE TABLE IF NOT EXISTS T_VENDOR_CHECK_OUT
 (
 
-    `KEY`               VARCHAR(36) COMMENT '「key」- Ticket Primary Key',
+    `KEY`
+    VARCHAR
+(
+    36
+) COMMENT '「key」- Ticket Primary Key',
 
     `COMMENT_EXTENSION` LONGTEXT COMMENT '「commentExtension」- Extension Comment',
 
     -- SHARED
-    `CLASSIFICATION`    VARCHAR(64) COMMENT '「classification」- The ticket related income type',
+    `CLASSIFICATION` VARCHAR
+(
+    64
+) COMMENT '「classification」- The ticket related income type',
 
-    `START_AT`          DATETIME COMMENT '「startAt」- From',
-    `END_AT`            DATETIME COMMENT '「endAt」- To',
-    `DAYS`              INT COMMENT '「days」- Duration',
+    `START_AT` DATETIME COMMENT '「startAt」- From',
+    `END_AT` DATETIME COMMENT '「endAt」- To',
+    `DAYS` INT COMMENT '「days」- Duration',
 
     -- UNIQUE
-    `LEAVE_AT`          DATETIME COMMENT '「leaveAt」- To',
-    `REASON`            LONGTEXT COMMENT '「reason」- The reason to be done',
-    PRIMARY KEY (`KEY`)
+    `LEAVE_AT` DATETIME COMMENT '「leaveAt」- To',
+    `REASON` LONGTEXT COMMENT '「reason」- The reason to be done',
+    PRIMARY KEY
+(
+    `KEY`
 )
+    )

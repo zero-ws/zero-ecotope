@@ -35,7 +35,6 @@ public interface ExModulat {
      * </code></pre>
      *
      * @param appJson 应用 X_APP 表结构
-     *
      * @return 返回响应结构数据
      */
     default Future<JsonObject> extension(final JsonObject appJson) {
@@ -48,7 +47,6 @@ public interface ExModulat {
      * 直接输入 id
      *
      * @param appId 应用ID
-     *
      * @return 返回扩展配置数据
      */
     default Future<JsonObject> extension(final String appId) {

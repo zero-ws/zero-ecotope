@@ -22,7 +22,6 @@ public class EAnvoy {
      *
      * @param partyA     {@link PartyA} 作为入口参数
      * @param identifier 作为入口参数
-     *
      * @return {@link MultiMap}
      */
     public static MultiMap input(final PartyA partyA, final String identifier) {
@@ -33,7 +32,6 @@ public class EAnvoy {
      * 读取 {@link PartyA} 中的数据
      *
      * @param partyA {@link PartyA} 作为入口参数
-     *
      * @return {@link JsonObject}
      */
     public static JsonObject inputQr(final PartyA partyA) {

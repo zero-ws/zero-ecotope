@@ -32,7 +32,6 @@ interface BuilderConflate {
      * @param joinRef {@link KJoin} 组件引用
      * @param isArray 是否为数组
      * @param <I>     输入类型
-     *
      * @return {@link Conflate} 实例
      */
     static <I> Conflate<I, JsonObject> ofQr(final KJoin joinRef, final boolean isArray) {
@@ -56,7 +55,6 @@ interface BuilderConflate {
      *
      * @param joinRef {@link KJoin} 组件引用
      * @param isOut   方向是输出
-     *
      * @return {@link Conflate} 实例
      */
     static Conflate<JsonArray, JsonArray> ofJArray(final KJoin joinRef, final boolean isOut) {
@@ -78,7 +76,6 @@ interface BuilderConflate {
      *
      * @param joinRef {@link KJoin} 组件引用
      * @param isOut   方向是输出
-     *
      * @return {@link Conflate} 实例
      */
     static Conflate<JsonObject, JsonObject> ofJObject(final KJoin joinRef, final boolean isOut) {

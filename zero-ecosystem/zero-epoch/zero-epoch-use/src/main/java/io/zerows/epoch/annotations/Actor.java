@@ -2,7 +2,12 @@ package io.zerows.epoch.annotations;
 
 import io.zerows.specification.configuration.HConfig;
 
-import java.lang.annotation.*;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * 移除旧版的 Infix 架构，提取成最新版的 Actor 架构，每个不同的 Actor 在启动之后都会直接提取符合类型的客户端等相关信息

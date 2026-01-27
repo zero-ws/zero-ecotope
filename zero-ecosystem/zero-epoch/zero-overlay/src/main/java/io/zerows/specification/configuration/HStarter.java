@@ -13,7 +13,6 @@ public interface HStarter {
      * @param interfaceCls 核心组件类
      * @param vertx        Vertx实例
      * @param <C>          组件类型
-     *
      * @return 组件实例
      */
     <C> C starter(Class<?> interfaceCls, Vertx vertx);
@@ -25,7 +24,6 @@ public interface HStarter {
      * @param vertx        Vertx实例
      * @param defaultCls   默认类
      * @param <C>          组件类型
-     *
      * @return 组件实例
      */
     <C> C starter(Class<?> interfaceCls, Vertx vertx, Class<?> defaultCls);

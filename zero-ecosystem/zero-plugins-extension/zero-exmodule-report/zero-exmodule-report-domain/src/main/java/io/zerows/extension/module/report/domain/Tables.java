@@ -14,7 +14,7 @@ import io.zerows.extension.module.report.domain.tables.KpReportInstance;
 /**
  * Convenience access to all tables in ZDB.
  */
-@SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
+@SuppressWarnings({"all", "unchecked", "rawtypes", "this-escape"})
 public class Tables {
 
     /**

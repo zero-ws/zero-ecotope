@@ -5,15 +5,25 @@
 DROP TABLE IF EXISTS UI_VIEW;
 CREATE TABLE IF NOT EXISTS UI_VIEW
 (
-    `KEY`          VARCHAR(36) COMMENT '「key」- 查询记录ID',
+    `KEY`
+    VARCHAR
+(
+    36
+) COMMENT '「key」- 查询记录ID',
     /*
      * 此处需要说明的是 UI_VIEW 只挂载在 LIST 中，所以有几个维度需要说明
      * -- CODE值为当前系统内码，传参专用
      * -- NAME/POSITION对应的就是视图 SView 中的 NAME/POSITION
      */
-    `NAME`         VARCHAR(255) COMMENT '「name」- 视图名称，每个 MATRIX 对应一个视图',
-    `CODE`         VARCHAR(255) COMMENT '「code」- 系统编码',
-    `SORT`         INT COMMENT '「sort」- QR的顺序',
+    `NAME` VARCHAR
+(
+    255
+) COMMENT '「name」- 视图名称，每个 MATRIX 对应一个视图',
+    `CODE` VARCHAR
+(
+    255
+) COMMENT '「code」- 系统编码',
+    `SORT` INT COMMENT '「sort」- QR的顺序',
 
     /*
      * 追加维度
@@ -21,41 +31,80 @@ CREATE TABLE IF NOT EXISTS UI_VIEW
      * -- 按流程
      * 一个模型可能包含多个流程，此处做开放的新维度
      */
-    `IDENTIFIER`   VARCHAR(255) COMMENT '「identifier」- 模型标识符',
-    `WORKFLOW`     VARCHAR(255) COMMENT '「workflow」- 工作流名称',
+    `IDENTIFIER` VARCHAR
+(
+    255
+) COMMENT '「identifier」- 模型标识符',
+    `WORKFLOW` VARCHAR
+(
+    255
+) COMMENT '「workflow」- 工作流名称',
 
-    `VIEW`         VARCHAR(96) COMMENT '「view」- 视图名',
-    `POSITION`     VARCHAR(96) COMMENT '「position」- 当前视图的模块位置，比页面低一个维度',
+    `VIEW` VARCHAR
+(
+    96
+) COMMENT '「view」- 视图名',
+    `POSITION` VARCHAR
+(
+    96
+) COMMENT '「position」- 当前视图的模块位置，比页面低一个维度',
 
-    `TITLE`        VARCHAR(255) COMMENT '「title」- 视图标题，用户输入，可选择',
-    `PROJECTION`   TEXT COMMENT '「projection」- 该资源的列定义',
-    `CRITERIA`     TEXT COMMENT '「criteria」- 该资源的行查询',
-    `ROWS`         TEXT COMMENT '「rows」- 该资源针对保存的行进行过滤',
-    `UI_CONFIG`    LONGTEXT COMMENT '「uiConfig」- 界面配置',
+    `TITLE` VARCHAR
+(
+    255
+) COMMENT '「title」- 视图标题，用户输入，可选择',
+    `PROJECTION` TEXT COMMENT '「projection」- 该资源的列定义',
+    `CRITERIA` TEXT COMMENT '「criteria」- 该资源的行查询',
+    `ROWS` TEXT COMMENT '「rows」- 该资源针对保存的行进行过滤',
+    `UI_CONFIG` LONGTEXT COMMENT '「uiConfig」- 界面配置',
 
     /*
      * 多出一个维度是执行QR查询条件的特殊计算，计算结果要保证可支持
      * 排序，分页，列过滤几种
      */
-    `QR_COMPONENT` VARCHAR(255) COMMENT '「qrComponent」- 查询条件专用组件',
-    `QR_CONFIG`    TEXT COMMENT '「qrConfig」- 查询组件专用配置',
+    `QR_COMPONENT` VARCHAR
+(
+    255
+) COMMENT '「qrComponent」- 查询条件专用组件',
+    `QR_CONFIG` TEXT COMMENT '「qrConfig」- 查询组件专用配置',
 
     -- ------------------------------ 公共字段 --------------------------------
-    `SIGMA`        VARCHAR(128) COMMENT '「sigma」- 用户组绑定的统一标识',
-    `LANGUAGE`     VARCHAR(10) COMMENT '「language」- 使用的语言',
-    `ACTIVE`       BIT COMMENT '「active」- 是否启用',
-    `METADATA`     TEXT COMMENT '「metadata」- 附加配置数据',
+    `SIGMA` VARCHAR
+(
+    128
+) COMMENT '「sigma」- 用户组绑定的统一标识',
+    `LANGUAGE` VARCHAR
+(
+    10
+) COMMENT '「language」- 使用的语言',
+    `ACTIVE` BIT COMMENT '「active」- 是否启用',
+    `METADATA` TEXT COMMENT '「metadata」- 附加配置数据',
 
     -- Auditor字段
-    `CREATED_AT`   DATETIME COMMENT '「createdAt」- 创建时间',
-    `CREATED_BY`   VARCHAR(36) COMMENT '「createdBy」- 创建人',
-    `UPDATED_AT`   DATETIME COMMENT '「updatedAt」- 更新时间',
-    `UPDATED_BY`   VARCHAR(36) COMMENT '「updatedBy」- 更新人',
+    `CREATED_AT` DATETIME COMMENT '「createdAt」- 创建时间',
+    `CREATED_BY` VARCHAR
+(
+    36
+) COMMENT '「createdBy」- 创建人',
+    `UPDATED_AT` DATETIME COMMENT '「updatedAt」- 更新时间',
+    `UPDATED_BY` VARCHAR
+(
+    36
+) COMMENT '「updatedBy」- 更新人',
 
-    `APP_ID`       VARCHAR(36) COMMENT '「appId」- 应用ID',
-    `TENANT_ID`    VARCHAR(36) COMMENT '「tenantId」- 租户ID',
-    PRIMARY KEY (`KEY`) USING BTREE
-);
+    `APP_ID` VARCHAR
+(
+    36
+) COMMENT '「appId」- 应用ID',
+    `TENANT_ID` VARCHAR
+(
+    36
+) COMMENT '「tenantId」- 租户ID',
+    PRIMARY KEY
+(
+    `KEY`
+) USING BTREE
+    );
 
 -- changeset Lang:ui-view-2
 -- 业务集

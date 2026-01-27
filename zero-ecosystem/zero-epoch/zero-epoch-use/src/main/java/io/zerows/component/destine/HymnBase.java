@@ -40,7 +40,6 @@ public abstract class HymnBase<T> implements Hymn<T> {
      * 所以此处存在两个解析，主要根据 isRefer 执行判断
      *
      * @param dataJ {@link JsonObject} 输入的数据记录数据
-     *
      * @return {@link String} 解析出来的 identifier
      */
     protected String id(final JsonObject dataJ) {
@@ -88,7 +87,6 @@ public abstract class HymnBase<T> implements Hymn<T> {
      * </code></pre>
      *
      * @param dataJ {@link JsonObject} 输入的数据
-     *
      * @return {@link String} 解析出来的 identifier
      */
     private String idTarget(final JsonObject dataJ) {

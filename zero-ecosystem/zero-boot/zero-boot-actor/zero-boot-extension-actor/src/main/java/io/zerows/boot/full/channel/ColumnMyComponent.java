@@ -13,27 +13,27 @@ import io.zerows.spi.HPI;
 
 /**
  * ## 「Channel」我的列读取通道
- *
+ * <p>
  * ### 1. 基本介绍
- *
+ * <p>
  * 该通道又称为<strong>个人视图通道</strong>，不带任何<strong>集成功能</strong>的标准读取我的列组件，支持如下功能：
- *
+ * <p>
  * - 根据`identifier`读取我的可访问属性列数据。
  * - 该属性列构造会对全列数据执行过滤，实现表格的列过滤功能。
  * - 请求`GET /api/ox/columns/:identifier/my`
- *
+ * <p>
  * ### 2. 通道详细
- *
+ * <p>
  * - 类型：ADAPTOR
  * - 直接从`DataAtom`中读取模型标识符
  * - 内置调用了ServiceLoader通道`io.zerows.extension.mbse.ui.osgi.spi.ui.ApeakMy`
- *
+ * <p>
  * ### 3. 请求格式
- *
+ * <p>
  * 无请求体（Body）数据，直接传入identifier读取。
- *
+ * <p>
  * ### 4. 响应格式
- *
+ * <p>
  * ```json
  * // <pre><code class="json">
  * {
@@ -45,9 +45,9 @@ import io.zerows.spi.HPI;
  * }
  * // </code></pre>
  * ```
- *
+ * <p>
  * 由于<strong>我的列</strong>读取过程中会出现<strong>二种</strong>不同的后续逻辑，当前组件中多出了下边代码：
- *
+ * <p>
  * ```java
  * // <pre><code class="java">
  *     .compose(params -> Ux.channelAsync(ApeakMy.class,
@@ -56,7 +56,7 @@ import io.zerows.spi.HPI;
  *     ))
  * // </code></pre>
  * ```
- *
+ * <p>
  * 内置调用{@link Ox#viewMy Ox.viewMy}
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
@@ -67,7 +67,6 @@ public class ColumnMyComponent extends AbstractAdaptor {
      * 「Async」通道主方法
      *
      * @param request 通道的标准请求参数，类型{@link ActIn}。
-     *
      * @return 返回`{@link Future}<{@link ActOut}>`
      */
     @Override

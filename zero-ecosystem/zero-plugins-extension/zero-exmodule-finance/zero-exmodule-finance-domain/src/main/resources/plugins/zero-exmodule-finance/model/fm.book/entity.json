@@ -1,15 +1,15 @@
 {
-    "name": "fm-book",
-    "daoCls": "F_BOOK",
-    "field": {
-        "numbers": {
-            "serial": "NUM.ACCOUNT.BOOK"
-        },
-        "unique": [
-            [
-                "code",
-                "sigma"
-            ]
-        ]
-    }
+  "name": "fm-book",
+  "daoCls": "F_BOOK",
+  "field": {
+    "numbers": {
+      "serial": "NUM.ACCOUNT.BOOK"
+    },
+    "unique": [
+      [
+        "code",
+        "sigma"
+      ]
+    ]
+  }
 }

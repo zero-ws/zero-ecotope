@@ -34,7 +34,6 @@ public class EndSettleWService implements EndSettleWStub {
      *
      * @param body 结算数据
      * @param type 结算类型
-     *
      * @return 结算结果
      */
     @Override
@@ -73,7 +72,6 @@ public class EndSettleWService implements EndSettleWStub {
      *
      * @param body 结算数据
      * @param type 结算类型
-     *
      * @return 结算结果
      */
     @Override

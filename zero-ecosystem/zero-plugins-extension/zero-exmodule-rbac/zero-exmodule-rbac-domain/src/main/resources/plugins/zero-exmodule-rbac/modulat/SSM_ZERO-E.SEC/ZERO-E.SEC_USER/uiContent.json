@@ -1,4 +1,4 @@
 {
-    "pLoginWechat": true,
-    "pLoginSMS": true
+  "pLoginWechat": true,
+  "pLoginSMS": true
 }

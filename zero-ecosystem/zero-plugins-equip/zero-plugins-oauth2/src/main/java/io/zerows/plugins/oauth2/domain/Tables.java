@@ -12,7 +12,7 @@ import io.zerows.plugins.oauth2.domain.tables.Oauth2RegisteredClient;
 /**
  * Convenience access to all tables in ZDB.
  */
-@SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
+@SuppressWarnings({"all", "unchecked", "rawtypes", "this-escape"})
 public class Tables {
 
     /**

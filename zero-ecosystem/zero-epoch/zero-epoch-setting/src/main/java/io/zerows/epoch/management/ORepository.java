@@ -51,7 +51,9 @@ public interface ORepository {
     // ------------------- 初始化流程
     void whenStart(HSetting setting);
 
-    /** 单机版专用的快速方法，可直接在外层调用 */
+    /**
+     * 单机版专用的快速方法，可直接在外层调用
+     */
     @Deprecated
     default void whenStart() {
         final HSetting setting = OZeroStore.setting();

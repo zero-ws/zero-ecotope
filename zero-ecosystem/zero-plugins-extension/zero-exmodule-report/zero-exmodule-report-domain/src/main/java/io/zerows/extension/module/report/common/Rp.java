@@ -23,7 +23,6 @@ public final class Rp {
      *
      * @param mode   模式说明
      * @param params 参数
-     *
      * @return 解析之后的值
      */
     public static Object valueFormat(final String mode, final JsonObject params) {

@@ -1,12 +1,12 @@
 {
-    "name": "brand",
-    "daoCls": "E_BRAND",
-    "field": {
-        "unique": [
-            [
-                "code",
-                "sigma"
-            ]
-        ]
-    }
+  "name": "brand",
+  "daoCls": "E_BRAND",
+  "field": {
+    "unique": [
+      [
+        "code",
+        "sigma"
+      ]
+    ]
+  }
 }

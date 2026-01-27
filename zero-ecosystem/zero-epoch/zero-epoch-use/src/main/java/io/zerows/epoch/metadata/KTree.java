@@ -4,9 +4,9 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.support.Ut;
 import io.zerows.integrated.jackson.JsonObjectDeserializer;
 import io.zerows.integrated.jackson.JsonObjectSerializer;
+import io.zerows.support.Ut;
 
 import java.io.Serializable;
 
@@ -34,13 +34,21 @@ import java.io.Serializable;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 public class KTree implements Serializable {
-    /** 管理端属性名 */
+    /**
+     * 管理端属性名
+     */
     private String in;
-    /** 存储端属性名 **/
+    /**
+     * 存储端属性名
+     **/
     private String out = KName.KEY;
-    /** 当前属性中生效的字典属性 */
+    /**
+     * 当前属性中生效的字典属性
+     */
     private String field = "parentId";
-    /** 当前配置中支持查询条件对字典进行分区的区域配置信息 */
+    /**
+     * 当前配置中支持查询条件对字典进行分区的区域配置信息
+     */
     @JsonSerialize(using = JsonObjectSerializer.class)
     @JsonDeserialize(using = JsonObjectDeserializer.class)
     private JsonObject region = new JsonObject();
@@ -104,7 +112,6 @@ public class KTree implements Serializable {
      * </code></pre>
      *
      * @param parameters 传入的数据信息
-     *
      * @return 返回最终的查询条件
      */
     public JsonObject region(final JsonObject parameters) {

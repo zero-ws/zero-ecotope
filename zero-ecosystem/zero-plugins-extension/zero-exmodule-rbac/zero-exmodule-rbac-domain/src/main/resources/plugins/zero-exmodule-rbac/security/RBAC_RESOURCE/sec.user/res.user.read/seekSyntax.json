@@ -1,8 +1,8 @@
 {
-    "phase": "AFTER",
-    "data": {
-        "type": "RECORD",
-        "viewId": "`${viewId}`",
-        "identifier": "sec.user"
-    }
+  "phase": "AFTER",
+  "data": {
+    "type": "RECORD",
+    "viewId": "`${viewId}`",
+    "identifier": "sec.user"
+  }
 }

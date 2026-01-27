@@ -27,7 +27,6 @@ public interface MetaOn {
      * @param name  字段名称
      * @param alias 字段别名
      * @param type  字段类型
-     *
      * @return HMetaField
      */
     HMetaField field(String name, String alias, Class<?> type);

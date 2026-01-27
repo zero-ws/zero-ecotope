@@ -11,7 +11,11 @@ import org.flywaydb.core.api.configuration.FluentConfiguration;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * Flyway 11 配置构造器：

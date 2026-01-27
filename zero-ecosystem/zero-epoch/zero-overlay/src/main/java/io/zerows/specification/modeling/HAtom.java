@@ -15,7 +15,7 @@ import java.util.concurrent.ConcurrentMap;
  * -- Zero扩展框架建模（zero-atom中的动态建模方式）
  * -- Zero规范建模（EMF建模，依赖Ecore模型）
  * </code></pre>
- *
+ * <p>
  * 此处提供了所有基于Zero中支持的不同种类的模型定义：
  * <pre><code>
  * -- 动态模型：
@@ -64,7 +64,6 @@ public interface HAtom extends
      * 快速创建模型定义的专有方法，而且防止模型副本本身被改动。
      *
      * @param identifier 模型副本的标识符
-     *
      * @return 模型副本
      */
     HAtom copy(String identifier);
@@ -82,7 +81,6 @@ public interface HAtom extends
      * （Modeler）返回当前模型定义中的元模型消费信息，里面包含了消费层所需的真实模型定义
      *
      * @param <T> 模型类型
-     *
      * @return 消费模型信息
      */
     <T extends HModel> T model();
@@ -153,7 +151,6 @@ interface HAtomRule {
      *
      * @param rule 标识规则
      * @param <T>  标识规则类型
-     *
      * @return {@link HRule}
      */
     <T extends HAtom> T rule(HRule rule);
@@ -189,7 +186,6 @@ interface HAtomAttribute {
      * 返回当前模型指定的属性名 {@link HAttribute}
      *
      * @param name 属性名
-     *
      * @return 属性
      */
     HAttribute attribute(String name);

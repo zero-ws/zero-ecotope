@@ -89,7 +89,6 @@ public interface InMultiAgent {
      * </code></pre>
      *
      * @param data 输入数据
-     *
      * @return {@link JsonObject}
      */
     @POST

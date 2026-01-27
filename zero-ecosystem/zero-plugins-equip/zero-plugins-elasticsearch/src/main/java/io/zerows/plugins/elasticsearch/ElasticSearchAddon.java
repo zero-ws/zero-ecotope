@@ -11,11 +11,11 @@ import java.util.Objects;
 public class ElasticSearchAddon extends AddOnBase<ElasticSearchClient> {
     private static ElasticSearchAddon INSTANCE;
 
-    protected ElasticSearchAddon(Vertx vertx, HConfig config) {
+    protected ElasticSearchAddon(final Vertx vertx, final HConfig config) {
         super(vertx, config);
     }
 
-    public static AddOn<ElasticSearchClient> of(Vertx vertx, HConfig config) {
+    public static AddOn<ElasticSearchClient> of(final Vertx vertx, final HConfig config) {
         if (INSTANCE == null) {
             INSTANCE = new ElasticSearchAddon(vertx, config);
         }
@@ -32,7 +32,7 @@ public class ElasticSearchAddon extends AddOnBase<ElasticSearchClient> {
     }
 
     @Override
-    protected ElasticSearchClient createInstanceBy(String name) {
-        return ElasticSearchClient.createShared(this.vertx(),this.config());
+    protected ElasticSearchClient createInstanceBy(final String name) {
+        return ElasticSearchClient.createShared(this.vertx(), this.config());
     }
 }

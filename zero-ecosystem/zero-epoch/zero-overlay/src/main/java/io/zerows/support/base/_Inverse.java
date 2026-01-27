@@ -16,7 +16,6 @@ class _Inverse extends _From {
      * @param input 输入哈希表
      * @param <K>   输入哈希表的键类型
      * @param <V>   输入哈希表的值类型
-     *
      * @return 逆向哈希表
      */
     public static <K, V> ConcurrentMap<V, Integer> inverseCount(final ConcurrentMap<K, V> input) {
@@ -29,7 +28,6 @@ class _Inverse extends _From {
      * @param input 输入哈希表
      * @param <K>   输入哈希表的键类型
      * @param <V>   输入哈希表的值类型
-     *
      * @return 逆向哈希表
      */
     public static <K, V> ConcurrentMap<V, Set<K>> inverseSet(final ConcurrentMap<K, V> input) {

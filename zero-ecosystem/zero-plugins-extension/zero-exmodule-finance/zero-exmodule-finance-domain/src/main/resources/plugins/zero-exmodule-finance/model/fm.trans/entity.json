@@ -1,12 +1,12 @@
 {
-    "name": "trans",
-    "daoCls": "F_TRANS",
-    "field": {
-        "unique": [
-            [
-                "code",
-                "sigma"
-            ]
-        ]
-    }
+  "name": "trans",
+  "daoCls": "F_TRANS",
+  "field": {
+    "unique": [
+      [
+        "code",
+        "sigma"
+      ]
+    ]
+  }
 }

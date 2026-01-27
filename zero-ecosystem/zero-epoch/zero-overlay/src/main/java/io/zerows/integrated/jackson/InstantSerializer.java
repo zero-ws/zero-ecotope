@@ -11,7 +11,7 @@ import static java.time.format.DateTimeFormatter.ISO_INSTANT;
 
 /**
  * # 「Tp」Jackson Serializer
- *
+ * <p>
  * This serializer came from `vert.x` internally. In vert.x framework the datetime object will be converted to
  * `java.time.Instant` as uniform, in this situation it could provide developers to simplify `Date Format` processing
  * in json specification.

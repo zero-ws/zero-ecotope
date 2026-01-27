@@ -73,7 +73,7 @@ public abstract class MemoAtMap<K, V> extends MemoAtBase<K, V> {
         synchronized (this) {
             if (this.mapFuture == null) {
                 this.mapFuture = this.supplyMap()
-                        .onFailure(err -> log.error("[ PLUG ] 获取 AsyncMap 失败，名称: {}", this.name(), err));
+                    .onFailure(err -> log.error("[ PLUG ] 获取 AsyncMap 失败，名称: {}", this.name(), err));
             }
         }
         return this.mapFuture;
@@ -112,36 +112,36 @@ public abstract class MemoAtMap<K, V> extends MemoAtBase<K, V> {
     @Override
     public Future<Kv<K, V>> remove(final K key) {
         return this.getMap().compose(map ->
-                map.remove(key).map(val -> Kv.create(key, val))
+            map.remove(key).map(val -> Kv.create(key, val))
         );
     }
 
     @Override
     public Future<V> find(final K key) {
         return this.getMap().compose(map ->
-                // 出库后拷贝
-                map.get(key).map(this::copy)
+            // 出库后拷贝
+            map.get(key).map(this::copy)
         );
     }
 
     @Override
     public Future<Boolean> clear() {
         return this.getMap().compose(map ->
-                map.clear().map(true)
+            map.clear().map(true)
         );
     }
 
     @Override
     public Future<Set<K>> keySet() {
         return this.getMap().compose(map ->
-                map.keys().map(HashSet::new)
+            map.keys().map(HashSet::new)
         );
     }
 
     @Override
     public Future<Integer> size() {
         return this.getMap().compose(map ->
-                map.size().map(Integer::valueOf)
+            map.size().map(Integer::valueOf)
         );
     }
 }

@@ -35,7 +35,6 @@ final class OxTo {
      *
      * @param key        {@link String} 应用标识，可以是`id`、也可以是`sigma`
      * @param identifier {@link String} 模型统一标识符
-     *
      * @return {@link DataAtom} 模型定义对象
      */
     static DataAtom toAtom(final String key, final String identifier) {
@@ -56,7 +55,6 @@ final class OxTo {
      *
      * @param key        {@link String} 应用标识，可以是`id`、也可以是`sigma`
      * @param identifier {@link String} 模型统一标识符
-     *
      * @return {@link HDao} 数据库访问对象
      */
     static HDao toDao(final String key, final String identifier) {
@@ -67,14 +65,13 @@ final class OxTo {
 
     /**
      * 「Node」图节点数组格式化专用方法。
-     *
+     * <p>
      * 格式化判断：
-     *
+     * <p>
      * - 如果出现相同的`globalId`则直接忽略，先执行节点合并（按`globalId`执行压缩）。
      * - 每一个节点内部调用`toNode`重载方法（{@link JsonObject}类型处理）。
      *
      * @param nodeData {@link JsonArray} 待格式化的图节点数组
-     *
      * @return {@link JsonArray} 完成格式化的图节点数组
      */
     static JsonArray toNode(final JsonArray nodeData) {
@@ -108,7 +105,6 @@ final class OxTo {
      * </code></pre>
      *
      * @param nodeData {@link JsonObject} 待格式化的图节点对象
-     *
      * @return {@link JsonObject} 完成格式化的图节点
      */
     static JsonObject toNode(final JsonObject nodeData) {
@@ -128,11 +124,10 @@ final class OxTo {
 
     /**
      * 「Edge」图边数组格式化专用方法。
-     *
+     * <p>
      * > 内部调用`toEdge`的重载方法（{@link JsonObject}类型）。
      *
      * @param edgeData {@link JsonArray} 待格式化的边数据数组
-     *
      * @return {@link JsonArray} 已格式化的边数据数组
      */
     static JsonArray toEdge(final JsonArray edgeData) {
@@ -143,16 +138,15 @@ final class OxTo {
 
     /**
      * 「Edge」图边格式化专用方法
-     *
+     * <p>
      * 格式化细节：
-     *
+     * <p>
      * - 拷贝`sourceGlobalId`到`source`属性中。
      * - 拷贝`targetGlobalId`到`ofMain`属性中。
      * - 拷贝`type`边类型到`type`属性中。
      * - 将原始数据{@link JsonObject}拷贝到`data`属性中。
      *
      * @param edgeData {@link JsonObject} 待格式化的边对象
-     *
      * @return {@link JsonObject} 已格式化的边对象
      */
     static JsonObject toEdge(final JsonObject edgeData) {
@@ -166,13 +160,12 @@ final class OxTo {
 
     /**
      * 提取上下游关系合并到一起。
-     *
+     * <p>
      * - down：下游属性。
      * - up：上游属性。
      *
      * @param source 输入的源类型数据
      * @param <T>    输入的源中元素的Java类型
-     *
      * @return 拉平过后的关系信息
      */
     @SuppressWarnings("unchecked")

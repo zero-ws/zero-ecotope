@@ -4,10 +4,10 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.extension.module.mbsecore.metadata.Model;
-import io.zerows.extension.module.mbsecore.metadata.Schema;
 import io.zerows.extension.module.mbsecore.component.file.AoFile;
 import io.zerows.extension.module.mbsecore.component.file.FileReader;
+import io.zerows.extension.module.mbsecore.metadata.Model;
+import io.zerows.extension.module.mbsecore.metadata.Schema;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 

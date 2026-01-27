@@ -38,7 +38,6 @@ public interface HEntity extends HLife {
      * 语言级模型的属性信息，根据属性名称提取
      *
      * @param name 属性名
-     *
      * @return {@link HField}
      */
     HField field(String name);

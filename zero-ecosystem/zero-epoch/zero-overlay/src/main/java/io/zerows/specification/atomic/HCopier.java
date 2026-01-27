@@ -27,7 +27,6 @@ public interface HCopier<T> {
      * 拷贝当前对象，返回新的对象实例，泛型 T 限定了拷贝的类型的最终根类型
      *
      * @param <CHILD> 子类类型
-     *
      * @return 拷贝后的新对象
      */
     <CHILD extends T> CHILD copy();

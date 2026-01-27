@@ -1,7 +1,11 @@
 package io.zerows.epoch.management;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.web.*;
+import io.zerows.epoch.web.MDConfiguration;
+import io.zerows.epoch.web.MDConnect;
+import io.zerows.epoch.web.MDEntity;
+import io.zerows.epoch.web.MDId;
+import io.zerows.epoch.web.MDMeta;
 import io.zerows.platform.management.AbstractAmbiguity;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;

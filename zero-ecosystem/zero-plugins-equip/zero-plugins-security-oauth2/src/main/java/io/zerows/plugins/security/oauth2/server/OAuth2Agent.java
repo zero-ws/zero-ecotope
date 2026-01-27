@@ -5,7 +5,12 @@ import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.EndPoint;
 import io.zerows.epoch.annotations.Format;
 import io.zerows.epoch.annotations.Redirect;
-import jakarta.ws.rs.*;
+import jakarta.ws.rs.FormParam;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.HeaderParam;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.QueryParam;
 
 @EndPoint
 public interface OAuth2Agent {

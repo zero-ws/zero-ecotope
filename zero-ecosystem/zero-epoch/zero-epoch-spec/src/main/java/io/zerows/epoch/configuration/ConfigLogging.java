@@ -1,4 +1,4 @@
-package io.zerows.epoch.boot;
+package io.zerows.epoch.configuration;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * @author lang : 2025-10-06
  */
-public class ZeroLogging {
+public class ConfigLogging {
 
     /**
      * 初始化 SLF4J 日志级别（通过 Logback 实现）
@@ -52,20 +52,20 @@ public class ZeroLogging {
         boolean currentClassConfigured = false;
         for (final Map.Entry<String, String> entry : loggingConfig.entrySet()) {
             final String packageName = entry.getKey();
-            if (ZeroLogging.class.getName().startsWith(packageName)) {
+            if (ConfigLogging.class.getName().startsWith(packageName)) {
                 currentClassConfigured = true;
                 break;
             }
         }
 
         // 如果当前类或包没有被配置，或者当前类的级别仍为 null，设置为 DEBUG
-        final Logger currentClassLogger = loggerContext.getLogger(ZeroLogging.class.getName());
+        final Logger currentClassLogger = loggerContext.getLogger(ConfigLogging.class.getName());
         if (!currentClassConfigured || currentClassLogger.getLevel() == null) {
             currentClassLogger.setLevel(Level.DEBUG);
         }
 
         // 打印所有设置的日志级别
-        final Logger logger = loggerContext.getLogger(ZeroLogging.class.getName());
+        final Logger logger = loggerContext.getLogger(ConfigLogging.class.getName());
         logger.info("[ ZERO ] 日志级别配置详情：");
         for (final Map.Entry<String, String> entry : loggingConfig.entrySet()) {
             final String packageName = entry.getKey();
@@ -93,7 +93,7 @@ public class ZeroLogging {
             logger.setLevel(level);
         } catch (final IllegalArgumentException e) {
             // 如果日志级别无效，记录错误
-            final Logger defaultLogger = loggerContext.getLogger(ZeroLogging.class.getName());
+            final Logger defaultLogger = loggerContext.getLogger(ConfigLogging.class.getName());
             defaultLogger.error("[ ZERO ] 无效日志级别: {} 包名: {}", levelStr, packageName, e);
         }
     }

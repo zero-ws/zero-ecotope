@@ -24,7 +24,6 @@ class _It extends _Is {
      *
      * @param set 集合
      * @param <V> V
-     *
      * @return Stream
      */
     public static <V> Stream<V> itSet(final Set<V> set) {
@@ -36,7 +35,6 @@ class _It extends _Is {
      *
      * @param list 集合
      * @param <V>  V
-     *
      * @return Stream
      */
     public static <V> Stream<V> itList(final List<V> list) {
@@ -48,7 +46,6 @@ class _It extends _Is {
      * （带非空 null 检查）遍历 JsonArray，提取元素为 JsonObject 的类型，返回 Stream
      *
      * @param array JsonArray
-     *
      * @return Stream
      */
     public static Stream<JsonObject> itJArray(final JsonArray array) {
@@ -61,7 +58,6 @@ class _It extends _Is {
      * @param array JsonArray
      * @param clazz 元素类型
      * @param <T>   T
-     *
      * @return Stream
      */
     public static <T> Stream<T> itJArray(final JsonArray array, final Class<T> clazz) {
@@ -73,7 +69,6 @@ class _It extends _Is {
      *
      * @param array     JsonArray
      * @param predicate 过滤器
-     *
      * @return Stream
      */
     public static Stream<JsonObject> itJArray(final JsonArray array, final Predicate<JsonObject> predicate) {
@@ -106,7 +101,6 @@ class _It extends _Is {
      * （带非空 null 检查）遍历 JsonArray，提取元素为 String 的类型，返回 Stream
      *
      * @param array JsonArray
-     *
      * @return Stream
      */
     public static Stream<String> itJString(final JsonArray array) {
@@ -118,7 +112,6 @@ class _It extends _Is {
      *
      * @param array     JsonArray
      * @param predicate 过滤器
-     *
      * @return Stream
      */
     public static Stream<String> itJString(final JsonArray array, final Predicate<String> predicate) {
@@ -131,7 +124,6 @@ class _It extends _Is {
      * @param data     输入数据
      * @param executor 转换函数
      * @param <T>      T
-     *
      * @return T
      */
     public static <T> T itJson(final T data, final Function<JsonObject, T> executor) {
@@ -143,7 +135,6 @@ class _It extends _Is {
      *
      * @param input 输入数据
      * @param <T>   T
-     *
      * @return Stream
      */
     public static <T> Stream<Map.Entry<String, T>> itJObject(final JsonObject input) {
@@ -156,7 +147,6 @@ class _It extends _Is {
      * @param input 输入数据
      * @param clazz 类型
      * @param <T>   T
-     *
      * @return Stream
      */
     public static <T> Stream<Map.Entry<String, T>> itJObject(final JsonObject input, final Class<T> clazz) {

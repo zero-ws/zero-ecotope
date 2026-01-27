@@ -50,7 +50,6 @@ public interface Ir {
      * The implementation class name meaning is `IrQr` - Internal Reactive Query Engine
      *
      * @param data {@link io.vertx.core.json.JsonObject} json literal
-     *
      * @return {@link Ir} stored. ( simple criteria or qtree automatically )
      */
     static Ir create(final JsonObject data) {

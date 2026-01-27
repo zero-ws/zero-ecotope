@@ -18,9 +18,9 @@ import java.util.function.Function;
 
 /**
  * ## Reference Result Processor
- *
+ * <p>
  * ### 1. Intro
- *
+ * <p>
  * This class could combine the results based join the `rule` that defined.
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
@@ -32,7 +32,6 @@ class RayResult {
      * @param record     {@link HRecord} Result records
      * @param joinData   {@link java.util.concurrent.ConcurrentMap} Reference data map
      * @param joinResult {@link java.util.concurrent.ConcurrentMap} Reference rule map
-     *
      * @return {@link HRecord}
      */
     static HRecord combine(final HRecord record, final ConcurrentMap<String, JsonArray> joinData,
@@ -53,7 +52,6 @@ class RayResult {
      * @param records    {@link HRecord}[] Result records
      * @param joinData   {@link java.util.concurrent.ConcurrentMap} Reference data map
      * @param joinResult {@link java.util.concurrent.ConcurrentMap} Reference rule map
-     *
      * @return {@link HRecord}[]
      */
     static HRecord[] combine(final HRecord[] records,
@@ -129,7 +127,6 @@ class RayResult {
      *
      * @param data   {@link JsonArray}
      * @param result {@link RResult}
-     *
      * @return {@link java.util.concurrent.ConcurrentMap}
      */
     private static ConcurrentMap<String, RayAmb> groupData(final JsonArray data, final RResult result) {
@@ -188,7 +185,6 @@ class RayResult {
      *
      * @param joinData   {@link java.util.concurrent.ConcurrentMap} join data
      * @param joinResult {@link java.util.concurrent.ConcurrentMap} join result definition.
-     *
      * @return {@link java.util.concurrent.ConcurrentMap}
      */
     private static ConcurrentMap<String, JsonArray> compressData(

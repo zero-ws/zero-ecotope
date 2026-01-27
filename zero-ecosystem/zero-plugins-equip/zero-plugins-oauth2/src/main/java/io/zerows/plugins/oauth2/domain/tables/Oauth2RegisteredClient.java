@@ -8,12 +8,6 @@ import io.zerows.plugins.oauth2.domain.Indexes;
 import io.zerows.plugins.oauth2.domain.Keys;
 import io.zerows.plugins.oauth2.domain.Zdb;
 import io.zerows.plugins.oauth2.domain.tables.records.Oauth2RegisteredClientRecord;
-
-import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-
 import org.jooq.Condition;
 import org.jooq.Field;
 import org.jooq.Index;
@@ -32,119 +26,99 @@ import org.jooq.impl.DSL;
 import org.jooq.impl.SQLDataType;
 import org.jooq.impl.TableImpl;
 
+import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+
 
 /**
  * OAuth2 注册客户端表
  */
-@SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
+@SuppressWarnings({"all", "unchecked", "rawtypes", "this-escape"})
 public class Oauth2RegisteredClient extends TableImpl<Oauth2RegisteredClientRecord> {
-
-    private static final long serialVersionUID = 1L;
 
     /**
      * The reference instance of <code>ZDB.OAUTH2_REGISTERED_CLIENT</code>
      */
     public static final Oauth2RegisteredClient OAUTH2_REGISTERED_CLIENT = new Oauth2RegisteredClient();
-
-    /**
-     * The class holding records for this type
-     */
-    @Override
-    public Class<Oauth2RegisteredClientRecord> getRecordType() {
-        return Oauth2RegisteredClientRecord.class;
-    }
-
+    private static final long serialVersionUID = 1L;
     /**
      * The column <code>ZDB.OAUTH2_REGISTERED_CLIENT.ID</code>. 主键 ID（内部标识）
      */
     public final TableField<Oauth2RegisteredClientRecord, String> ID = createField(DSL.name("ID"), SQLDataType.VARCHAR(100).nullable(false), this, "主键 ID（内部标识）");
-
     /**
      * The column <code>ZDB.OAUTH2_REGISTERED_CLIENT.CLIENT_ID</code>. 客户端 ID
      */
     public final TableField<Oauth2RegisteredClientRecord, String> CLIENT_ID = createField(DSL.name("CLIENT_ID"), SQLDataType.VARCHAR(100).nullable(false), this, "客户端 ID");
-
     /**
      * The column <code>ZDB.OAUTH2_REGISTERED_CLIENT.CLIENT_ID_ISSUED_AT</code>.
      * 客户端 ID 签发时间
      */
     public final TableField<Oauth2RegisteredClientRecord, LocalDateTime> CLIENT_ID_ISSUED_AT = createField(DSL.name("CLIENT_ID_ISSUED_AT"), SQLDataType.LOCALDATETIME(0).nullable(false).defaultValue(DSL.field(DSL.raw("CURRENT_TIMESTAMP"), SQLDataType.LOCALDATETIME)), this, "客户端 ID 签发时间");
-
     /**
      * The column <code>ZDB.OAUTH2_REGISTERED_CLIENT.CLIENT_SECRET</code>.
      * 客户端密钥（可为空，例如 public client）
      */
     public final TableField<Oauth2RegisteredClientRecord, String> CLIENT_SECRET = createField(DSL.name("CLIENT_SECRET"), SQLDataType.VARCHAR(200), this, "客户端密钥（可为空，例如 public client）");
-
     /**
      * The column
      * <code>ZDB.OAUTH2_REGISTERED_CLIENT.CLIENT_SECRET_EXPIRES_AT</code>.
      * 客户端密钥过期时间
      */
     public final TableField<Oauth2RegisteredClientRecord, LocalDateTime> CLIENT_SECRET_EXPIRES_AT = createField(DSL.name("CLIENT_SECRET_EXPIRES_AT"), SQLDataType.LOCALDATETIME(0), this, "客户端密钥过期时间");
-
     /**
      * The column <code>ZDB.OAUTH2_REGISTERED_CLIENT.CLIENT_NAME</code>. 客户端显示名称
      */
     public final TableField<Oauth2RegisteredClientRecord, String> CLIENT_NAME = createField(DSL.name("CLIENT_NAME"), SQLDataType.VARCHAR(200).nullable(false), this, "客户端显示名称");
-
     /**
      * The column
      * <code>ZDB.OAUTH2_REGISTERED_CLIENT.CLIENT_AUTHENTICATION_METHODS</code>.
      * 客户端认证方式，逗号分隔
      */
     public final TableField<Oauth2RegisteredClientRecord, String> CLIENT_AUTHENTICATION_METHODS = createField(DSL.name("CLIENT_AUTHENTICATION_METHODS"), SQLDataType.VARCHAR(1000).nullable(false), this, "客户端认证方式，逗号分隔");
-
     /**
      * The column
      * <code>ZDB.OAUTH2_REGISTERED_CLIENT.AUTHORIZATION_GRANT_TYPES</code>.
      * 授权类型，逗号分隔
      */
     public final TableField<Oauth2RegisteredClientRecord, String> AUTHORIZATION_GRANT_TYPES = createField(DSL.name("AUTHORIZATION_GRANT_TYPES"), SQLDataType.VARCHAR(1000).nullable(false), this, "授权类型，逗号分隔");
-
     /**
      * The column <code>ZDB.OAUTH2_REGISTERED_CLIENT.REDIRECT_URIS</code>.
      * 授权回调地址列表，逗号分隔
      */
     public final TableField<Oauth2RegisteredClientRecord, String> REDIRECT_URIS = createField(DSL.name("REDIRECT_URIS"), SQLDataType.VARCHAR(2000), this, "授权回调地址列表，逗号分隔");
-
     /**
      * The column
      * <code>ZDB.OAUTH2_REGISTERED_CLIENT.POST_LOGOUT_REDIRECT_URIS</code>.
      * 登出回调地址列表，逗号分隔
      */
     public final TableField<Oauth2RegisteredClientRecord, String> POST_LOGOUT_REDIRECT_URIS = createField(DSL.name("POST_LOGOUT_REDIRECT_URIS"), SQLDataType.VARCHAR(2000), this, "登出回调地址列表，逗号分隔");
-
     /**
      * The column <code>ZDB.OAUTH2_REGISTERED_CLIENT.SCOPES</code>. Scope
      * 列表，逗号分隔
      */
     public final TableField<Oauth2RegisteredClientRecord, String> SCOPES = createField(DSL.name("SCOPES"), SQLDataType.VARCHAR(1000).nullable(false), this, "Scope 列表，逗号分隔");
-
     /**
      * The column <code>ZDB.OAUTH2_REGISTERED_CLIENT.CLIENT_SETTINGS</code>.
      * Client 级别设置（JSON 字符串）
      */
     public final TableField<Oauth2RegisteredClientRecord, String> CLIENT_SETTINGS = createField(DSL.name("CLIENT_SETTINGS"), SQLDataType.CLOB, this, "Client 级别设置（JSON 字符串）");
-
     /**
      * The column <code>ZDB.OAUTH2_REGISTERED_CLIENT.TOKEN_SETTINGS</code>.
      * Token 级别设置（JSON 字符串）
      */
     public final TableField<Oauth2RegisteredClientRecord, String> TOKEN_SETTINGS = createField(DSL.name("TOKEN_SETTINGS"), SQLDataType.CLOB, this, "Token 级别设置（JSON 字符串）");
-
     /**
      * The column <code>ZDB.OAUTH2_REGISTERED_CLIENT.TENANT_ID</code>. 租户
      * ID（多租户场景可用）
      */
     public final TableField<Oauth2RegisteredClientRecord, String> TENANT_ID = createField(DSL.name("TENANT_ID"), SQLDataType.VARCHAR(64), this, "租户 ID（多租户场景可用）");
-
     /**
      * The column <code>ZDB.OAUTH2_REGISTERED_CLIENT.APP_ID</code>. 应用
      * ID（多应用场景可用）
      */
     public final TableField<Oauth2RegisteredClientRecord, String> APP_ID = createField(DSL.name("APP_ID"), SQLDataType.VARCHAR(64), this, "应用 ID（多应用场景可用）");
-
     /**
      * The column <code>ZDB.OAUTH2_REGISTERED_CLIENT.EXT</code>. 扩展字段（业务自定义）
      */
@@ -179,6 +153,14 @@ public class Oauth2RegisteredClient extends TableImpl<Oauth2RegisteredClientReco
      */
     public Oauth2RegisteredClient() {
         this(DSL.name("OAUTH2_REGISTERED_CLIENT"), null);
+    }
+
+    /**
+     * The class holding records for this type
+     */
+    @Override
+    public Class<Oauth2RegisteredClientRecord> getRecordType() {
+        return Oauth2RegisteredClientRecord.class;
     }
 
     @Override

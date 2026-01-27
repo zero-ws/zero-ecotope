@@ -24,6 +24,6 @@ public final class EmModule {
     }
 
     public enum ActorType {
-        
+
     }
 }

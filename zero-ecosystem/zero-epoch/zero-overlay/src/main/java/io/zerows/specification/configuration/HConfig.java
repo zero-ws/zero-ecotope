@@ -45,7 +45,6 @@ public interface HConfig {
      *
      * @param classYm 目标类
      * @param <T>     返回值类型
-     *
      * @return 目标对象
      */
     <T> T options(Class<T> classYm);
@@ -57,7 +56,6 @@ public interface HConfig {
      *
      * @param field 字段名
      * @param value 字段值
-     *
      * @return {@link HConfig}
      */
     HConfig putOptions(String field, Object value);
@@ -67,7 +65,6 @@ public interface HConfig {
      *
      * @param field 字段名
      * @param <T>   返回值类型
-     *
      * @return 存在返回 true，否则返回 false
      */
     <T> T options(String field);
@@ -79,7 +76,6 @@ public interface HConfig {
      *
      * @param configKey 配置键
      * @param clazz     组件类
-     *
      * @return Fluent 模式的自身引用
      */
     default HConfig putExecutor(final String configKey, final Class<?> clazz) {
@@ -94,7 +90,6 @@ public interface HConfig {
      * 根据配置键获取反射组件
      *
      * @param configKey 配置键
-     *
      * @return 组件类
      */
     default Class<?> executor(final String configKey) {
@@ -153,7 +148,6 @@ public interface HConfig {
          * 启动参数绑定
          *
          * @param args 待绑定参数
-         *
          * @return 当前引用
          */
         default HOn<T> args(final String[] args) {

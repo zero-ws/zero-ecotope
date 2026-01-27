@@ -10,7 +10,7 @@ import io.zerows.support.base.UtBase;
  * @author lang : 2023-05-27
  */
 class AspectData {
-    
+
     @SuppressWarnings("all")
     static <T> Future<T> build(final T input, final T processed) {
         if (input instanceof JsonObject) {

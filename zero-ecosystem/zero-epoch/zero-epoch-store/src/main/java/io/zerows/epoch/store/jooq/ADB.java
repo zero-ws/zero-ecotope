@@ -43,35 +43,13 @@ public class ADB {
         this.metadata = this.dbe.metadata();
     }
 
-    public ConcurrentMap<String, Class<?>> metaTypes() {
-        if (Objects.isNull(this.metadata)) {
-            return new ConcurrentHashMap<>();
-        }
-        return this.metadata.metaTypes();
-    }
-
-    public String metaTable() {
-        final Table<?> table = this.metadata.metaTable();
-        if (Objects.isNull(table)) {
-            return "(Unknown)";
-        }
-        return table.getName();
-    }
-
-    public Class<?> metaEntity() {
-        return this.metadata.metaEntity();
-    }
-    // endregion
-
-    // region 最终构造包域，所以此方法的访问会被内部访问
-
     /**
      * 工厂方法：基于给定 DAO 类、数据源以及映射文件创建/复用 {@link ADB} 实例。🧩
      *
      * <p>流程：先通过映射文件 {@code filename} 构造字段映射向量 {@link R2Vector}，
      * 再用 {@link AsyncDBContext#cached(Class, DBS, R2Vector)} 生成缓存键，
      * 最终由 {@link ADB#CC_JOOQ#pick(java.util.function.Supplier, String)} 复用或创建实例。</p>
-     *
+     * <p>
      * 新版引入 {@link MMAdapt} 构造 {@link R2Vector} 实现完整的数据交换映射信息，因此有了此处的 pojoFile 之后，流程
      * 如
      * <pre>
@@ -91,7 +69,6 @@ public class ADB {
      * @param daoCls   DAO 类（通常为 jOOQ 生成的 *Dao 类）
      * @param dbs      数据源描述对象 {@link DBS}（连接信息、方言等）
      * @param filename 映射文件名（用于解析并构建 {@link R2Vector} 字段映射）；可指向类路径或绝对路径
-     *
      * @return 复用或新建的 {@link ADB} 实例
      */
     static ADB of(final Class<?> daoCls, final String filename, final DBS dbs) {
@@ -108,6 +85,28 @@ public class ADB {
     static ADB of(final Class<?> daoCls, final R2Vector vector, final DBS dbs) {
         final String cached = AsyncDBContext.cached(daoCls, dbs, vector);
         return CC_JOOQ.pick(() -> new ADB(daoCls, dbs, vector), cached);
+    }
+
+    public ConcurrentMap<String, Class<?>> metaTypes() {
+        if (Objects.isNull(this.metadata)) {
+            return new ConcurrentHashMap<>();
+        }
+        return this.metadata.metaTypes();
+    }
+    // endregion
+
+    // region 最终构造包域，所以此方法的访问会被内部访问
+
+    public String metaTable() {
+        final Table<?> table = this.metadata.metaTable();
+        if (Objects.isNull(table)) {
+            return "(Unknown)";
+        }
+        return table.getName();
+    }
+
+    public Class<?> metaEntity() {
+        return this.metadata.metaEntity();
     }
     // endregion
 

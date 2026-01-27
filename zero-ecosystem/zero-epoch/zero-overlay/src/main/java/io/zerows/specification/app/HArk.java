@@ -92,7 +92,6 @@ public interface HArk extends Function<HArk, HArk> {
      * 根据传入的 identifier 提供专用缓存键
      *
      * @param identifier 传入的 identifier
-     *
      * @return 缓存键
      */
     default String cached(final String identifier) {

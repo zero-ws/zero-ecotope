@@ -65,7 +65,6 @@ public class RGeneration implements Serializable {
      * 获取全局特征
      *
      * @param key 特征名
-     *
      * @return 返回特征
      */
     public KpFeature featureGlobal(final String key) {

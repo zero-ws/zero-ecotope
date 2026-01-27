@@ -1,7 +1,7 @@
 package io.zerows.extension.module.mbsecore.component.metadata;
 
-import io.zerows.platform.constant.VValue;
 import io.zerows.extension.module.mbsecore.component.jdbc.AoConnection;
+import io.zerows.platform.constant.VValue;
 
 public class CommonVerifier implements AoVerifier {
 

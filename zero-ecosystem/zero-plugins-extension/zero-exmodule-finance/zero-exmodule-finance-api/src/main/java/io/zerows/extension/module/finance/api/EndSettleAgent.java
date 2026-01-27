@@ -40,7 +40,6 @@ public interface EndSettleAgent {
      * </code></pre>
      *
      * @param body 传入的数据
-     *
      * @return 结算结果
      */
     @Path("/trans/direct")
@@ -56,7 +55,6 @@ public interface EndSettleAgent {
      * </code></pre>
      *
      * @param body 传入的数据
-     *
      * @return 结算结果
      */
     @Path("/trans/delay")
@@ -74,7 +72,6 @@ public interface EndSettleAgent {
      * </code></pre>
      *
      * @param body 传入的数据
-     *
      * @return 结算结果
      */
     @Path("/trans/debt")

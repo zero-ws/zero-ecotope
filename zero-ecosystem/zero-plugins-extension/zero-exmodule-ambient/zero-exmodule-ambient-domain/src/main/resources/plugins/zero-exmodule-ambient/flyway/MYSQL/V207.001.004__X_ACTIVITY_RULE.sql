@@ -46,21 +46,46 @@ CREATE TABLE IF NOT EXISTS X_ACTIVITY_RULE
      * -- UPDATE：变化
      * -- CHANGE：变化值
      */
-    `KEY`             VARCHAR(36) COMMENT '「key」- 规则主键',
-    `DEFINITION_KEY`  VARCHAR(128) COMMENT '「definitionKey」- 流程对应的 definitionKey，用于查询所有规则用',
-    `TASK_KEY`        VARCHAR(255) COMMENT '「taskKey」- 和待办绑定的taskKey',
-    `TYPE`            VARCHAR(64) COMMENT '「type」- 规则类型',
+    `KEY`
+    VARCHAR
+(
+    36
+) COMMENT '「key」- 规则主键',
+    `DEFINITION_KEY` VARCHAR
+(
+    128
+) COMMENT '「definitionKey」- 流程对应的 definitionKey，用于查询所有规则用',
+    `TASK_KEY` VARCHAR
+(
+    255
+) COMMENT '「taskKey」- 和待办绑定的taskKey',
+    `TYPE` VARCHAR
+(
+    64
+) COMMENT '「type」- 规则类型',
 
     /*
      * 只有两种
      * 1) 第一种，直接：$ {taskName} 模式构造流程名称
      * 2) 第二种，直接设置 typeName 为流程名称
      */
-    `RULE_NAME`       VARCHAR(255) COMMENT '「ruleName」- 规则名称，如果 type = ATOM 时读取，并设置到 typeName 中',
-    `RULE_ORDER`      BIGINT COMMENT '「ruleOrder」- 规则触发顺序，修正两个时间戳，生成时序号统一，先生成的规则排序在上边',
-    `RULE_NS`         VARCHAR(255) COMMENT '「ruleNs」- 规则所属主模型名空间',
-    `RULE_IDENTIFIER` VARCHAR(255) COMMENT '「ruleIdentifier」- 主模型ID',
-    `RULE_FIELD`      VARCHAR(128) COMMENT '「ruleField」- 主字段名',
+    `RULE_NAME` VARCHAR
+(
+    255
+) COMMENT '「ruleName」- 规则名称，如果 type = ATOM 时读取，并设置到 typeName 中',
+    `RULE_ORDER` BIGINT COMMENT '「ruleOrder」- 规则触发顺序，修正两个时间戳，生成时序号统一，先生成的规则排序在上边',
+    `RULE_NS` VARCHAR
+(
+    255
+) COMMENT '「ruleNs」- 规则所属主模型名空间',
+    `RULE_IDENTIFIER` VARCHAR
+(
+    255
+) COMMENT '「ruleIdentifier」- 主模型ID',
+    `RULE_FIELD` VARCHAR
+(
+    128
+) COMMENT '「ruleField」- 主字段名',
 
     /*
      * Message generated
@@ -68,34 +93,58 @@ CREATE TABLE IF NOT EXISTS X_ACTIVITY_RULE
      * -- 2) message + tpl, message with tpl ( parameters ) output final message
      */
     `RULE_EXPRESSION` LONGTEXT COMMENT '「ruleExpression」- 规则触发表达式 ( 可以是多个，JsonArray格式 )',
-    `RULE_TPL`        TEXT COMMENT '「ruleTpl」- 参数模板专用，JsonObject结构',
-    `RULE_CONFIG`     LONGTEXT COMMENT '「ruleConfig」- 规则对应的额外配置',
-    `RULE_MESSAGE`    TEXT COMMENT '「ruleMessage」- 输出消息专用, Ut.fromExpression解析（特殊解析）',
+    `RULE_TPL` TEXT COMMENT '「ruleTpl」- 参数模板专用，JsonObject结构',
+    `RULE_CONFIG` LONGTEXT COMMENT '「ruleConfig」- 规则对应的额外配置',
+    `RULE_MESSAGE` TEXT COMMENT '「ruleMessage」- 输出消息专用, Ut.fromExpression解析（特殊解析）',
 
     /*
      * 回调组件（触发规则时的 After 专用组件）
      */
-    `HOOK_COMPONENT`  VARCHAR(255) COMMENT '「hookComponent」-- 回调钩子组件',
-    `HOOK_CONFIG`     LONGTEXT COMMENT '「hookConfig」-- 回调钩子组件配置',
+    `HOOK_COMPONENT` VARCHAR
+(
+    255
+) COMMENT '「hookComponent」-- 回调钩子组件',
+    `HOOK_CONFIG` LONGTEXT COMMENT '「hookConfig」-- 回调钩子组件配置',
 
-    `LOGGING`         BIT DEFAULT NULL COMMENT '「logging」- 是否记录日志',
+    `LOGGING` BIT DEFAULT NULL COMMENT '「logging」- 是否记录日志',
 
     -- ------------------------------ 公共字段 --------------------------------
-    `SIGMA`           VARCHAR(128) COMMENT '「sigma」- 用户组绑定的统一标识',
-    `LANGUAGE`        VARCHAR(10) COMMENT '「language」- 使用的语言',
-    `ACTIVE`          BIT COMMENT '「active」- 是否启用',
-    `METADATA`        TEXT COMMENT '「metadata」- 附加配置数据',
+    `SIGMA` VARCHAR
+(
+    128
+) COMMENT '「sigma」- 用户组绑定的统一标识',
+    `LANGUAGE` VARCHAR
+(
+    10
+) COMMENT '「language」- 使用的语言',
+    `ACTIVE` BIT COMMENT '「active」- 是否启用',
+    `METADATA` TEXT COMMENT '「metadata」- 附加配置数据',
 
     -- Auditor字段
-    `CREATED_AT`      DATETIME COMMENT '「createdAt」- 创建时间',
-    `CREATED_BY`      VARCHAR(36) COMMENT '「createdBy」- 创建人',
-    `UPDATED_AT`      DATETIME COMMENT '「updatedAt」- 更新时间',
-    `UPDATED_BY`      VARCHAR(36) COMMENT '「updatedBy」- 更新人',
+    `CREATED_AT` DATETIME COMMENT '「createdAt」- 创建时间',
+    `CREATED_BY` VARCHAR
+(
+    36
+) COMMENT '「createdBy」- 创建人',
+    `UPDATED_AT` DATETIME COMMENT '「updatedAt」- 更新时间',
+    `UPDATED_BY` VARCHAR
+(
+    36
+) COMMENT '「updatedBy」- 更新人',
 
-    `APP_ID`          VARCHAR(36) COMMENT '「appId」- 应用ID',
-    `TENANT_ID`       VARCHAR(36) COMMENT '「tenantId」- 租户ID',
-    PRIMARY KEY (`KEY`) USING BTREE
-);
+    `APP_ID` VARCHAR
+(
+    36
+) COMMENT '「appId」- 应用ID',
+    `TENANT_ID` VARCHAR
+(
+    36
+) COMMENT '「tenantId」- 租户ID',
+    PRIMARY KEY
+(
+    `KEY`
+) USING BTREE
+    );
 
 -- changeset Lang:x-activity-rule-2
 ALTER TABLE X_ACTIVITY_RULE

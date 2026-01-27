@@ -31,7 +31,6 @@ public interface ReportAgent {
      * </code></pre>
      *
      * @param appId 应用ID
-     *
      * @return 报表清单
      */
     @GET
@@ -48,7 +47,6 @@ public interface ReportAgent {
      * </pre>
      *
      * @param query 查询条件
-     *
      * @return 报表实例
      */
     @POST

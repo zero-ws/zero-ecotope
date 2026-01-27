@@ -49,7 +49,6 @@ public class EndTransActor {
      * 这里的结算单处理信息是批量的。
      *
      * @param body 请求数据格式
-     *
      * @return 结算单处理结果
      */
     @Address(Addr.Trans.END_TRANS)

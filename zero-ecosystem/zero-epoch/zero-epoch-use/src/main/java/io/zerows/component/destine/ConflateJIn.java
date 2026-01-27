@@ -25,7 +25,6 @@ class ConflateJIn extends ConflateBase<JsonObject, JsonObject> {
      * @param active     主数据
      * @param assist     输入数据
      * @param identifier 被连接的 identifier
-     *
      * @return 处理完成后数据
      */
     @Override
@@ -58,7 +57,6 @@ class ConflateJIn extends ConflateBase<JsonObject, JsonObject> {
      *
      * @param active     主数据
      * @param identifier 模型标识符
-     *
      * @return 返回固定
      */
     @Override

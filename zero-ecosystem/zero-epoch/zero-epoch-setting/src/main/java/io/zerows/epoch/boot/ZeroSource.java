@@ -3,6 +3,7 @@ package io.zerows.epoch.boot;
 import cn.hutool.core.util.StrUtil;
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonArray;
+import io.zerows.epoch.configuration.ConfigLogging;
 import io.zerows.epoch.spec.InPre;
 import io.zerows.epoch.spec.YmApplication;
 import io.zerows.epoch.spec.YmConfiguration;
@@ -59,7 +60,7 @@ class ZeroSource implements ZeroPower.Source {
             configuration = load.configure(app);
         } else {
             // 日志处理（此处可保证启动前的日志信息）
-            ZeroLogging.configure(pre.getLogging());
+            ConfigLogging.configure(pre.getLogging());
 
             // -41001 验证
             final YmApplication application = pre.application();

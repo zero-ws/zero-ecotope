@@ -57,7 +57,7 @@ public class ExPos {
         final int colAcc = (colEnd - colStart);
         if (0 < rowAcc || 0 < colAcc) {
             log.debug("[ PLUG ] ( Excel ) 范围扫描: ( Row: {} ~ {}, Column: {} ~ {} )",
-                    rowStart, rowEnd, colStart, colEnd);
+                rowStart, rowEnd, colStart, colEnd);
             return new CellRangeAddress(rowStart, rowEnd, colStart, colEnd);
         } else {
             return null;

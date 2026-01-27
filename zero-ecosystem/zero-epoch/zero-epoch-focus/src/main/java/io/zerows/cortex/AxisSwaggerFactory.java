@@ -17,7 +17,7 @@ import io.zerows.specification.development.compiled.HBundle;
  *
  * @author lang : 2024-06-26
  */
-public interface AxisSwaggerFactory  {
+public interface AxisSwaggerFactory {
     /**
      * 提取路由挂载器
      *
@@ -30,5 +30,5 @@ public interface AxisSwaggerFactory  {
      *
      * @return 如果启用了则直接返回 true
      */
-    boolean isEnabled(HBundle owner,RunServer runServer);
+    boolean isEnabled(HBundle owner, RunServer runServer);
 }

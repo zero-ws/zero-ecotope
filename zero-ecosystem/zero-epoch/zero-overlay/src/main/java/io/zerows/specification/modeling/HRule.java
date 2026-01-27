@@ -33,7 +33,6 @@ public interface HRule extends Serializable {
      * 使用模型标识符提取该模型下的子标识规则
      *
      * @param identifier 模型标识符
-     *
      * @return 子标识规则
      */
     HRule child(String identifier);

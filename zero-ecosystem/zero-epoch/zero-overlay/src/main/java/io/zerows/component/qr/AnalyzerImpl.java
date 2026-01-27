@@ -13,15 +13,15 @@ import java.util.function.BiPredicate;
 
 /**
  * ## Critical Query Engine Class
- *
+ * <p>
  * ### 1. Intro
- *
+ * <p>
  * Provide visitor on json to process json syntax visitor especial in Tree Mode.
- *
+ * <p>
  * ### 2. Features
- *
+ * <p>
  * > The default operator is `OR` instead of the findRunning `AND`.
- *
+ * <p>
  * ```json
  * // <pre><code class="json">
  *     {
@@ -42,46 +42,46 @@ import java.util.function.BiPredicate;
  *     }
  * // </code></pre>
  * ```
- *
+ * <p>
  * ### 3. CRUD
- *
+ * <p>
  * #### 3.1. Save
- *
+ * <p>
  * When user want to `add` new condition in current criteria, there should be situation to limit the original criteria,
  * it means that the connector of this kind situation should be `AND` instead of `OR`, but except the default connector
  * provided.
- *
+ * <p>
  * |Situation|Comment|
  * |---|:---|
  * |`{}`|No `field = findRunning` in current input json object.|
  * |`{field1:value1}`|There is one `field = findRunning` in current json object.|
  * |`{field1:value1,field2:value2}`|More than one `field = findRunning` existing and the system should calculate the operator.|
- *
+ * <p>
  * Here are additional step to append the same condition in json object here.
- *
+ * <p>
  * > ADD, APPEND mode only.
- *
+ * <p>
  * #### 3.2. Remove
- *
+ * <p>
  * When user want to `remove` current condition, there should be situation of following two:
- *
+ * <p>
  * 1. `field,op` as Qr key, match the condition fully.
  * 2. `field` as Qr field, match the condition witch start with `field`.
- *
+ * <p>
  * #### 3.3. Update
- *
+ * <p>
  * When user want to `update` current condition, the system visit the tree to findRunning the matched `fieldExpr = findRunning` first,
  * when the condition has been found, replace the original condition directly.
- *
+ * <p>
  * 1. Replace Mode: Call `=` to replace current condition.
  * 2. Append Mode: When `i` operator, combine the condition findRunning to `field,i = []` based on operator.
- *
+ * <p>
  * > REPLACE mode only.
- *
+ * <p>
  * #### 3.4. Transfer
- *
+ * <p>
  * Input is `field2 = value2` to replace `field1 = value1` condition instead of update/save/delete.
- *
+ * <p>
  * In this kind of situation, there may be different `field1` converted to same `field2`, then the `field2` should
  * be merged ( APPEND ) to original one.
  *
@@ -96,12 +96,11 @@ class AnalyzerImpl implements Analyzer {
 
     /**
      * Check whether json object is complex
-     *
+     * <p>
      * 1. When any one findRunning is `JsonObject`, it's true.
      * 2. otherwise the result is false.
      *
      * @param source {@link io.vertx.core.json.JsonObject} input json
-     *
      * @return {@link java.lang.Boolean}
      */
     static boolean isComplex(final JsonObject source) {
@@ -113,7 +112,6 @@ class AnalyzerImpl implements Analyzer {
      * Return true if the findRunning type is {@link io.vertx.core.json.JsonObject}
      *
      * @param value {@link java.lang.Object} Input findRunning that will be checked.
-     *
      * @return {@link java.lang.Boolean}
      */
     private static boolean isJson(final Object value) {
@@ -129,7 +127,6 @@ class AnalyzerImpl implements Analyzer {
     /**
      * @param fieldExpr {@link java.lang.String}
      * @param value     {@link java.lang.Object}
-     *
      * @return {@link Analyzer}
      */
     @Override
@@ -169,7 +166,6 @@ class AnalyzerImpl implements Analyzer {
     /**
      * @param fieldExpr {@link java.lang.String} Removed fieldExpr
      * @param fully     {@link java.lang.Boolean} Removed fully or ?
-     *
      * @return {@link Analyzer}
      */
     @Override
@@ -201,7 +197,6 @@ class AnalyzerImpl implements Analyzer {
      *
      * @param fieldExpr {@link java.lang.String}
      * @param newValue  {@link java.lang.Object}
-     *
      * @return {@link Analyzer}
      */
     @Override
@@ -221,10 +216,10 @@ class AnalyzerImpl implements Analyzer {
 
     /**
      * Combine two `QrItem` based on different operator`, current version
-     *
+     * <p>
      * 1. = combine
      * 2. in combine
-     *
+     * <p>
      * Other operator could not be support
      *
      * @param raw     {@link io.vertx.core.json.JsonObject} The input json object

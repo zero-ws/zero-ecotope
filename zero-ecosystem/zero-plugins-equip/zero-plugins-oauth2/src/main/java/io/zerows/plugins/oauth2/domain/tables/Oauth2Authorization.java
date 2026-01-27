@@ -8,12 +8,6 @@ import io.zerows.plugins.oauth2.domain.Indexes;
 import io.zerows.plugins.oauth2.domain.Keys;
 import io.zerows.plugins.oauth2.domain.Zdb;
 import io.zerows.plugins.oauth2.domain.tables.records.Oauth2AuthorizationRecord;
-
-import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-
 import org.jooq.Condition;
 import org.jooq.Field;
 import org.jooq.Index;
@@ -33,244 +27,203 @@ import org.jooq.impl.DSL;
 import org.jooq.impl.SQLDataType;
 import org.jooq.impl.TableImpl;
 
+import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+
 
 /**
  * OAuth2 授权与 Token 信息表
  */
-@SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
+@SuppressWarnings({"all", "unchecked", "rawtypes", "this-escape"})
 public class Oauth2Authorization extends TableImpl<Oauth2AuthorizationRecord> {
-
-    private static final long serialVersionUID = 1L;
 
     /**
      * The reference instance of <code>ZDB.OAUTH2_AUTHORIZATION</code>
      */
     public static final Oauth2Authorization OAUTH2_AUTHORIZATION = new Oauth2Authorization();
-
-    /**
-     * The class holding records for this type
-     */
-    @Override
-    public Class<Oauth2AuthorizationRecord> getRecordType() {
-        return Oauth2AuthorizationRecord.class;
-    }
-
+    private static final long serialVersionUID = 1L;
     /**
      * The column <code>ZDB.OAUTH2_AUTHORIZATION.ID</code>. 主键 ID
      */
     public final TableField<Oauth2AuthorizationRecord, String> ID = createField(DSL.name("ID"), SQLDataType.VARCHAR(100).nullable(false), this, "主键 ID");
-
     /**
      * The column <code>ZDB.OAUTH2_AUTHORIZATION.REGISTERED_CLIENT_ID</code>.
      * 关联客户端 ID（OAUTH2_REGISTERED_CLIENT.ID）
      */
     public final TableField<Oauth2AuthorizationRecord, String> REGISTERED_CLIENT_ID = createField(DSL.name("REGISTERED_CLIENT_ID"), SQLDataType.VARCHAR(100).nullable(false), this, "关联客户端 ID（OAUTH2_REGISTERED_CLIENT.ID）");
-
     /**
      * The column <code>ZDB.OAUTH2_AUTHORIZATION.PRINCIPAL_NAME</code>.
      * 主体名称（通常为用户名 / userId）
      */
     public final TableField<Oauth2AuthorizationRecord, String> PRINCIPAL_NAME = createField(DSL.name("PRINCIPAL_NAME"), SQLDataType.VARCHAR(200).nullable(false), this, "主体名称（通常为用户名 / userId）");
-
     /**
      * The column
      * <code>ZDB.OAUTH2_AUTHORIZATION.AUTHORIZATION_GRANT_TYPE</code>. 授权类型
      */
     public final TableField<Oauth2AuthorizationRecord, String> AUTHORIZATION_GRANT_TYPE = createField(DSL.name("AUTHORIZATION_GRANT_TYPE"), SQLDataType.VARCHAR(100).nullable(false), this, "授权类型");
-
     /**
      * The column <code>ZDB.OAUTH2_AUTHORIZATION.AUTHORIZED_SCOPES</code>.
      * 授权范围（Scope 列表）
      */
     public final TableField<Oauth2AuthorizationRecord, String> AUTHORIZED_SCOPES = createField(DSL.name("AUTHORIZED_SCOPES"), SQLDataType.VARCHAR(1000), this, "授权范围（Scope 列表）");
-
     /**
      * The column <code>ZDB.OAUTH2_AUTHORIZATION.ATTRIBUTES</code>. 附加属性（JSON
      * 字符串）
      */
     public final TableField<Oauth2AuthorizationRecord, String> ATTRIBUTES = createField(DSL.name("ATTRIBUTES"), SQLDataType.CLOB(65535), this, "附加属性（JSON 字符串）");
-
     /**
      * The column <code>ZDB.OAUTH2_AUTHORIZATION.STATE</code>. state 参数值
      */
     public final TableField<Oauth2AuthorizationRecord, String> STATE = createField(DSL.name("STATE"), SQLDataType.VARCHAR(500), this, "state 参数值");
-
     /**
      * The column
      * <code>ZDB.OAUTH2_AUTHORIZATION.AUTHORIZATION_CODE_VALUE</code>. 授权码值
      */
     public final TableField<Oauth2AuthorizationRecord, String> AUTHORIZATION_CODE_VALUE = createField(DSL.name("AUTHORIZATION_CODE_VALUE"), SQLDataType.CLOB, this, "授权码值");
-
     /**
      * The column
      * <code>ZDB.OAUTH2_AUTHORIZATION.AUTHORIZATION_CODE_ISSUED_AT</code>.
      * 授权码签发时间
      */
     public final TableField<Oauth2AuthorizationRecord, LocalDateTime> AUTHORIZATION_CODE_ISSUED_AT = createField(DSL.name("AUTHORIZATION_CODE_ISSUED_AT"), SQLDataType.LOCALDATETIME(0), this, "授权码签发时间");
-
     /**
      * The column
      * <code>ZDB.OAUTH2_AUTHORIZATION.AUTHORIZATION_CODE_EXPIRES_AT</code>.
      * 授权码过期时间
      */
     public final TableField<Oauth2AuthorizationRecord, LocalDateTime> AUTHORIZATION_CODE_EXPIRES_AT = createField(DSL.name("AUTHORIZATION_CODE_EXPIRES_AT"), SQLDataType.LOCALDATETIME(0), this, "授权码过期时间");
-
     /**
      * The column
      * <code>ZDB.OAUTH2_AUTHORIZATION.AUTHORIZATION_CODE_METADATA</code>.
      * 授权码元数据（JSON 字符串）
      */
     public final TableField<Oauth2AuthorizationRecord, String> AUTHORIZATION_CODE_METADATA = createField(DSL.name("AUTHORIZATION_CODE_METADATA"), SQLDataType.CLOB(65535), this, "授权码元数据（JSON 字符串）");
-
     /**
      * The column <code>ZDB.OAUTH2_AUTHORIZATION.ACCESS_TOKEN_VALUE</code>.
      * 访问令牌值
      */
     public final TableField<Oauth2AuthorizationRecord, String> ACCESS_TOKEN_VALUE = createField(DSL.name("ACCESS_TOKEN_VALUE"), SQLDataType.CLOB, this, "访问令牌值");
-
     /**
      * The column <code>ZDB.OAUTH2_AUTHORIZATION.ACCESS_TOKEN_ISSUED_AT</code>.
      * 访问令牌签发时间
      */
     public final TableField<Oauth2AuthorizationRecord, LocalDateTime> ACCESS_TOKEN_ISSUED_AT = createField(DSL.name("ACCESS_TOKEN_ISSUED_AT"), SQLDataType.LOCALDATETIME(0), this, "访问令牌签发时间");
-
     /**
      * The column <code>ZDB.OAUTH2_AUTHORIZATION.ACCESS_TOKEN_EXPIRES_AT</code>.
      * 访问令牌过期时间
      */
     public final TableField<Oauth2AuthorizationRecord, LocalDateTime> ACCESS_TOKEN_EXPIRES_AT = createField(DSL.name("ACCESS_TOKEN_EXPIRES_AT"), SQLDataType.LOCALDATETIME(0), this, "访问令牌过期时间");
-
     /**
      * The column <code>ZDB.OAUTH2_AUTHORIZATION.ACCESS_TOKEN_METADATA</code>.
      * 访问令牌元数据（JSON 字符串）
      */
     public final TableField<Oauth2AuthorizationRecord, String> ACCESS_TOKEN_METADATA = createField(DSL.name("ACCESS_TOKEN_METADATA"), SQLDataType.CLOB(65535), this, "访问令牌元数据（JSON 字符串）");
-
     /**
      * The column <code>ZDB.OAUTH2_AUTHORIZATION.ACCESS_TOKEN_TYPE</code>.
      * 访问令牌类型（如 Bearer）
      */
     public final TableField<Oauth2AuthorizationRecord, String> ACCESS_TOKEN_TYPE = createField(DSL.name("ACCESS_TOKEN_TYPE"), SQLDataType.VARCHAR(100), this, "访问令牌类型（如 Bearer）");
-
     /**
      * The column <code>ZDB.OAUTH2_AUTHORIZATION.ACCESS_TOKEN_SCOPES</code>.
      * 访问令牌 Scope 列表
      */
     public final TableField<Oauth2AuthorizationRecord, String> ACCESS_TOKEN_SCOPES = createField(DSL.name("ACCESS_TOKEN_SCOPES"), SQLDataType.VARCHAR(1000), this, "访问令牌 Scope 列表");
-
     /**
      * The column <code>ZDB.OAUTH2_AUTHORIZATION.OIDC_ID_TOKEN_VALUE</code>. ID
      * Token 值
      */
     public final TableField<Oauth2AuthorizationRecord, String> OIDC_ID_TOKEN_VALUE = createField(DSL.name("OIDC_ID_TOKEN_VALUE"), SQLDataType.CLOB, this, "ID Token 值");
-
     /**
      * The column <code>ZDB.OAUTH2_AUTHORIZATION.OIDC_ID_TOKEN_ISSUED_AT</code>.
      * ID Token 签发时间
      */
     public final TableField<Oauth2AuthorizationRecord, LocalDateTime> OIDC_ID_TOKEN_ISSUED_AT = createField(DSL.name("OIDC_ID_TOKEN_ISSUED_AT"), SQLDataType.LOCALDATETIME(0), this, "ID Token 签发时间");
-
     /**
      * The column
      * <code>ZDB.OAUTH2_AUTHORIZATION.OIDC_ID_TOKEN_EXPIRES_AT</code>. ID Token
      * 过期时间
      */
     public final TableField<Oauth2AuthorizationRecord, LocalDateTime> OIDC_ID_TOKEN_EXPIRES_AT = createField(DSL.name("OIDC_ID_TOKEN_EXPIRES_AT"), SQLDataType.LOCALDATETIME(0), this, "ID Token 过期时间");
-
     /**
      * The column <code>ZDB.OAUTH2_AUTHORIZATION.OIDC_ID_TOKEN_METADATA</code>.
      * ID Token 元数据（JSON 字符串）
      */
     public final TableField<Oauth2AuthorizationRecord, String> OIDC_ID_TOKEN_METADATA = createField(DSL.name("OIDC_ID_TOKEN_METADATA"), SQLDataType.CLOB(65535), this, "ID Token 元数据（JSON 字符串）");
-
     /**
      * The column <code>ZDB.OAUTH2_AUTHORIZATION.OIDC_ID_TOKEN_CLAIMS</code>. ID
      * Token Claims（JSON 字符串）
      */
     public final TableField<Oauth2AuthorizationRecord, String> OIDC_ID_TOKEN_CLAIMS = createField(DSL.name("OIDC_ID_TOKEN_CLAIMS"), SQLDataType.CLOB(65535), this, "ID Token Claims（JSON 字符串）");
-
     /**
      * The column <code>ZDB.OAUTH2_AUTHORIZATION.REFRESH_TOKEN_VALUE</code>.
      * 刷新令牌值
      */
     public final TableField<Oauth2AuthorizationRecord, String> REFRESH_TOKEN_VALUE = createField(DSL.name("REFRESH_TOKEN_VALUE"), SQLDataType.CLOB, this, "刷新令牌值");
-
     /**
      * The column <code>ZDB.OAUTH2_AUTHORIZATION.REFRESH_TOKEN_ISSUED_AT</code>.
      * 刷新令牌签发时间
      */
     public final TableField<Oauth2AuthorizationRecord, LocalDateTime> REFRESH_TOKEN_ISSUED_AT = createField(DSL.name("REFRESH_TOKEN_ISSUED_AT"), SQLDataType.LOCALDATETIME(0), this, "刷新令牌签发时间");
-
     /**
      * The column
      * <code>ZDB.OAUTH2_AUTHORIZATION.REFRESH_TOKEN_EXPIRES_AT</code>. 刷新令牌过期时间
      */
     public final TableField<Oauth2AuthorizationRecord, LocalDateTime> REFRESH_TOKEN_EXPIRES_AT = createField(DSL.name("REFRESH_TOKEN_EXPIRES_AT"), SQLDataType.LOCALDATETIME(0), this, "刷新令牌过期时间");
-
     /**
      * The column <code>ZDB.OAUTH2_AUTHORIZATION.REFRESH_TOKEN_METADATA</code>.
      * 刷新令牌元数据（JSON 字符串）
      */
     public final TableField<Oauth2AuthorizationRecord, String> REFRESH_TOKEN_METADATA = createField(DSL.name("REFRESH_TOKEN_METADATA"), SQLDataType.CLOB(65535), this, "刷新令牌元数据（JSON 字符串）");
-
     /**
      * The column <code>ZDB.OAUTH2_AUTHORIZATION.USER_CODE_VALUE</code>. User
      * Code 值
      */
     public final TableField<Oauth2AuthorizationRecord, String> USER_CODE_VALUE = createField(DSL.name("USER_CODE_VALUE"), SQLDataType.CLOB, this, "User Code 值");
-
     /**
      * The column <code>ZDB.OAUTH2_AUTHORIZATION.USER_CODE_ISSUED_AT</code>.
      * User Code 签发时间
      */
     public final TableField<Oauth2AuthorizationRecord, LocalDateTime> USER_CODE_ISSUED_AT = createField(DSL.name("USER_CODE_ISSUED_AT"), SQLDataType.LOCALDATETIME(0), this, "User Code 签发时间");
-
     /**
      * The column <code>ZDB.OAUTH2_AUTHORIZATION.USER_CODE_EXPIRES_AT</code>.
      * User Code 过期时间
      */
     public final TableField<Oauth2AuthorizationRecord, LocalDateTime> USER_CODE_EXPIRES_AT = createField(DSL.name("USER_CODE_EXPIRES_AT"), SQLDataType.LOCALDATETIME(0), this, "User Code 过期时间");
-
     /**
      * The column <code>ZDB.OAUTH2_AUTHORIZATION.USER_CODE_METADATA</code>. User
      * Code 元数据（JSON 字符串）
      */
     public final TableField<Oauth2AuthorizationRecord, String> USER_CODE_METADATA = createField(DSL.name("USER_CODE_METADATA"), SQLDataType.CLOB(65535), this, "User Code 元数据（JSON 字符串）");
-
     /**
      * The column <code>ZDB.OAUTH2_AUTHORIZATION.DEVICE_CODE_VALUE</code>.
      * Device Code 值
      */
     public final TableField<Oauth2AuthorizationRecord, String> DEVICE_CODE_VALUE = createField(DSL.name("DEVICE_CODE_VALUE"), SQLDataType.CLOB, this, "Device Code 值");
-
     /**
      * The column <code>ZDB.OAUTH2_AUTHORIZATION.DEVICE_CODE_ISSUED_AT</code>.
      * Device Code 签发时间
      */
     public final TableField<Oauth2AuthorizationRecord, LocalDateTime> DEVICE_CODE_ISSUED_AT = createField(DSL.name("DEVICE_CODE_ISSUED_AT"), SQLDataType.LOCALDATETIME(0), this, "Device Code 签发时间");
-
     /**
      * The column <code>ZDB.OAUTH2_AUTHORIZATION.DEVICE_CODE_EXPIRES_AT</code>.
      * Device Code 过期时间
      */
     public final TableField<Oauth2AuthorizationRecord, LocalDateTime> DEVICE_CODE_EXPIRES_AT = createField(DSL.name("DEVICE_CODE_EXPIRES_AT"), SQLDataType.LOCALDATETIME(0), this, "Device Code 过期时间");
-
     /**
      * The column <code>ZDB.OAUTH2_AUTHORIZATION.DEVICE_CODE_METADATA</code>.
      * Device Code 元数据（JSON 字符串）
      */
     public final TableField<Oauth2AuthorizationRecord, String> DEVICE_CODE_METADATA = createField(DSL.name("DEVICE_CODE_METADATA"), SQLDataType.CLOB(65535), this, "Device Code 元数据（JSON 字符串）");
-
     /**
      * The column <code>ZDB.OAUTH2_AUTHORIZATION.TENANT_ID</code>. 租户 ID（可选）
      */
     public final TableField<Oauth2AuthorizationRecord, String> TENANT_ID = createField(DSL.name("TENANT_ID"), SQLDataType.VARCHAR(64), this, "租户 ID（可选）");
-
     /**
      * The column <code>ZDB.OAUTH2_AUTHORIZATION.APP_ID</code>. 应用 ID（多应用场景可用）
      */
     public final TableField<Oauth2AuthorizationRecord, String> APP_ID = createField(DSL.name("APP_ID"), SQLDataType.VARCHAR(64), this, "应用 ID（多应用场景可用）");
-
     /**
      * The column <code>ZDB.OAUTH2_AUTHORIZATION.EXT</code>. 扩展字段（业务自定义）
      */
@@ -303,6 +256,14 @@ public class Oauth2Authorization extends TableImpl<Oauth2AuthorizationRecord> {
      */
     public Oauth2Authorization() {
         this(DSL.name("OAUTH2_AUTHORIZATION"), null);
+    }
+
+    /**
+     * The class holding records for this type
+     */
+    @Override
+    public Class<Oauth2AuthorizationRecord> getRecordType() {
+        return Oauth2AuthorizationRecord.class;
     }
 
     @Override

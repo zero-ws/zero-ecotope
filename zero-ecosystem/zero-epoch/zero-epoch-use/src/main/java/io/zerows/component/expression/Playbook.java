@@ -15,22 +15,22 @@ import java.io.Serializable;
 
 /**
  * The design for playbook here
- *
+ * <p>
  * 1) The default variable for usage
  * - zo: Zero Old, the previous record of operation
  * - zn: Zero New, the current record of operation
  * - zw: Zero Workflow, the workflow definition here
  * - zt: Zero Toolkit, this toolkit could contain some functions and you can call `zt.xxx` to do execution, it will let expression more smart and dynamic
- *
+ * <p>
  * 2) The rule of playbook
  * - Check the condition for pre/post expression
  * - Eval the message/string for usage to output based on template
- *
+ * <p>
  * 3) Here are some specific data structure in the first version:
  * This structure is inner `zo/zn` instead of other situations and it's for workflow engine
- *
+ * <p>
  * The root data is ( Ticket / Extension / Todo )
- *
+ * <p>
  * // <pre><code class="json">
  *     {
  *         "user": {}       // The user map:  key = name ( real name )
@@ -38,15 +38,15 @@ import java.io.Serializable;
  *         "linkage": {}    // All Linkage Data, each data is InJson Array
  *     }
  * // </code></pre>
- *
+ * <p>
  * The normalized variable should be:
- *
+ * <p>
  * - zn.user:       user
  * - zn.record:     record
  * - zn.linkage:    linkage
- *
+ * <p>
  * If you use `zo`, it means the previous stored information.
- *
+ * <p>
  * Above data structure is for workflow engine only
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>

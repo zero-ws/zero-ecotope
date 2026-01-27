@@ -12,23 +12,23 @@ import java.util.function.Supplier;
 
 /**
  * # Activity/Changes Operation
- *
+ * <p>
  * The main record of info history ( Activity Record )
- *
+ * <p>
  * - key                    ( System Generated )
  * - serial                 ( System Generated )            - 「Workflow」,「Atom」
  * - type                   ( The Record type )
  * - description            ( Description )                 - 「Workflow」,「Atom」
- *
+ * <p>
  * - modelId                ( Modal identifier )
  * - modelKey               ( Model Related key )
  * - modelCategory          ( Model Category )
- *
+ * <p>
  * - taskName               ( Workflow Provided )           - 「Workflow」,「Atom」
  * - taskSerial             ( Workflow Provided )           - 「Workflow」,「Atom」
  * - recordOld              ( Old InJson )
  * - recordNew              ( New InJson )
- *
+ * <p>
  * - sigma                  ( InJson Provided )
  * - active                 ( InJson Provided )
  * - language               ( InJson Provided )
@@ -37,26 +37,26 @@ import java.util.function.Supplier;
  * - createdBy              ( Outer Current )               - 「Workflow」,「Atom」
  * - updatedAt              ( Outer Now )
  * - updatedBy              ( Outer Current )
- *
+ * <p>
  * The sub records of history ( ActivityChange Record )
- *
+ * <p>
  * - key                    ( System Generated )
  * - activityId             ( System Generated )
- *
+ * <p>
  * - type                   ( System Generated, ADD, UPDATE, DELETE )
  * - status                 ( CONFIRMED / PENDING / SYSTEM )
- *
+ * <p>
  * - fieldName              ( Came from Atom )
  * - fieldAlias             ( Came from Atom )
  * - fieldType              ( Came from Atom )
  * - valueOld               ( Came from Data )
  * - valueNew               ( Came from Data )
- *
+ * <p>
  * - sigma                  ( InJson Provided )
  * - language               ( InJson Provided )
  * - active                 ( InJson Provided )
  * - metadata               ( Empty )
- *
+ * <p>
  * - createdBy              ( Outer Current )
  * - createdAt              ( Outer Now )
  * - updatedBy              ( Outer Current )

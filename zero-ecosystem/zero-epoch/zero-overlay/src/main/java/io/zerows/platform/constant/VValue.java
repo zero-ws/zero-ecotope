@@ -7,7 +7,9 @@ import java.nio.charset.StandardCharsets;
  * @author lang : 2023/4/24
  */
 public interface VValue {
-    /** 默认值 */
+    /**
+     * 默认值
+     */
     String DEFAULT = "DEFAULT";
     String DEFAULT_BRANCH_MASTER = "master";       // 默认分支名
     String DEFAULT_SESSION = "vertx-web.session";
@@ -55,9 +57,13 @@ public interface VValue {
      * 3 - M_ 为建模专用常量
      */
     interface DFT {
-        /** 默认 byte[] 数组的构造尺寸 8192 字节 */
+        /**
+         * 默认 byte[] 数组的构造尺寸 8192 字节
+         */
         int SIZE_BYTE_ARRAY = 8 * 1024;
-        /** 系统默认编码方式 */
+        /**
+         * 系统默认编码方式
+         */
         Charset CHARSET = StandardCharsets.UTF_8;
 
         String ALGORITHM_RSA = "RSA";

@@ -1,12 +1,12 @@
 {
-    "name": "debt",
-    "daoCls": "F_DEBT",
-    "field": {
-        "unique": [
-            [
-                "code",
-                "sigma"
-            ]
-        ]
-    }
+  "name": "debt",
+  "daoCls": "F_DEBT",
+  "field": {
+    "unique": [
+      [
+        "code",
+        "sigma"
+      ]
+    ]
+  }
 }

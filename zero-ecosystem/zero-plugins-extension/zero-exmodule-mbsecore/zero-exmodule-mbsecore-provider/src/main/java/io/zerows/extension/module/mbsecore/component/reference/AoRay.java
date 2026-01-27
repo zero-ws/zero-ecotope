@@ -6,38 +6,38 @@ import io.zerows.specification.modeling.HRecord;
 
 /**
  * ## Reference Processor ( Ray )
- *
+ * <p>
  * ### 1. Intro
- *
+ * <p>
  * The field of `reference` calculation components, after all the data have been read, these components could process `reference` field based join the records.
- *
+ * <p>
  * Here are three categories of attribute's type:
- *
+ * <p>
  * 1. INTERNAL : The standard attribute that has been mapped to database.
  * 2. REFERENCE : The reference attribute that has been mapped to other dependency attributes.
  * 3. EXTERNAL : The reserved attribute that has been mapped to third-part system.
- *
+ * <p>
  * ### 2. Generic Tool
- *
+ * <p>
  * The `Tool` type should be two common object such as:
- *
+ * <p>
  * - {@link io.vertx.core.json.JsonObject} content of InJson Record, the core type is {@link HRecord}.
  * - {@link io.vertx.core.json.JsonArray} content of InJson Record[], the core type is {@link HRecord}[].
- *
+ * <p>
  * ### 3. Standard Mode
- *
+ * <p>
  * #### 3.1. INTERNAL
- *
+ * <p>
  * This kind of attribute support following features:
- *
+ * <p>
  * - It should be mapped to `X_ENTITY` fields instead of storing in other place.
  * - The data type must be based join database column type.
  * - `X_ENTITY` column type has been defined in abstract virtual layer to support <strong>Type Mapping</strong>.
- *
+ * <p>
  * #### 3.2. REFERENCE
- *
+ * <p>
  * This kind of attribute support following features:
- *
+ * <p>
  * 1. Complex Type: Such as `up` and `down`, the data format is {@link io.vertx.core.json.JsonObject}/{@link io.vertx.core.json.JsonArray}, calculated to the result here.
  * 2. Dependency Type: The type is calculated by other `INTERNAL` field.
  *
@@ -48,7 +48,6 @@ public interface AoRay<T> {
      * Bind the component to data model template {@link DataTpl}.
      *
      * @param tpl {@link DataTpl} The template that will be bind.
-     *
      * @return {@link AoRay} The component reference
      */
     AoRay<T> on(DataTpl tpl);
@@ -57,7 +56,6 @@ public interface AoRay<T> {
      * This method will modify the input {@link HRecord} element(s).
      *
      * @param input Input element of {@link HRecord} for single/multi
-     *
      * @return Return the modified data record(s).
      */
     T doRay(T input);

@@ -1,50 +1,50 @@
 {
-    "name": "floor",
-    "daoCls": "L_FLOOR",
-    "field": {
-        "unique": [
-            [
-                "code",
-                "sigma"
-            ]
-        ]
-    },
-    "transform": {
-        "fabric": {
-            "source": [
-                {
-                    "source": "ASSIST",
-                    "key": "location.tents",
-                    "component": "io.zerows.extension.commerce.lbs.osgi.spi.TentDict"
-                },
-                {
-                    "source": "ASSIST",
-                    "key": "location.floors",
-                    "component": "io.zerows.extension.commerce.lbs.osgi.spi.FloorDict"
-                },
-                {
-                    "source": "ASSIST",
-                    "key": "room.types",
-                    "component": "com.needee.spi.dict.RoomTypeDict"
-                }
-            ],
-            "epsilon": {
-                "tentId": {
-                    "source": "location.tents",
-                    "in": "name",
-                    "out": "key"
-                },
-                "floorId": {
-                    "source": "location.floors",
-                    "in": "name",
-                    "out": "key"
-                },
-                "roomTypeId": {
-                    "source": "room.types",
-                    "in": "name",
-                    "out": "key"
-                }
-            }
+  "name": "floor",
+  "daoCls": "L_FLOOR",
+  "field": {
+    "unique": [
+      [
+        "code",
+        "sigma"
+      ]
+    ]
+  },
+  "transform": {
+    "fabric": {
+      "source": [
+        {
+          "source": "ASSIST",
+          "key": "location.tents",
+          "component": "io.zerows.extension.commerce.lbs.osgi.spi.TentDict"
+        },
+        {
+          "source": "ASSIST",
+          "key": "location.floors",
+          "component": "io.zerows.extension.commerce.lbs.osgi.spi.FloorDict"
+        },
+        {
+          "source": "ASSIST",
+          "key": "room.types",
+          "component": "com.needee.spi.dict.RoomTypeDict"
         }
+      ],
+      "epsilon": {
+        "tentId": {
+          "source": "location.tents",
+          "in": "name",
+          "out": "key"
+        },
+        "floorId": {
+          "source": "location.floors",
+          "in": "name",
+          "out": "key"
+        },
+        "roomTypeId": {
+          "source": "room.types",
+          "in": "name",
+          "out": "key"
+        }
+      }
     }
+  }
 }

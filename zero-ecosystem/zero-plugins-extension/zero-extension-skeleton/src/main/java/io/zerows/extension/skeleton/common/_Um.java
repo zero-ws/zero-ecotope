@@ -173,7 +173,6 @@ class _Um extends _Key {
      * @param code       序列号定义
      * @param fnConsumer 序列号设置函数，此处设置函数针对每一个元素
      * @param <T>        泛型类型
-     *
      * @return {@link Future} 已经设置好的列表
      */
     public static <T> Future<List<T>> umIndent(final List<T> input, final String sigma,

@@ -1,7 +1,8 @@
 -- liquibase formatted sql
 
 SET NAMES utf8mb4;
-SET FOREIGN_KEY_CHECKS = 0;
+SET
+FOREIGN_KEY_CHECKS = 0;
 
 -- changeset Lang:h-team-1
 -- ----------------------------
@@ -27,7 +28,7 @@ CREATE TABLE `E_TEAM`
     `BIND_CONFIG`    LONGTEXT COMMENT '「bindConfig」- 绑定JSON详细配置',
 
     -- 特殊字段
-    
+
     -- ------------------------------ 公共字段 --------------------------------
     `SIGMA`          VARCHAR(128) COMMENT '「sigma」- 用户组绑定的统一标识',
     `LANGUAGE`       VARCHAR(10) COMMENT '「language」- 使用的语言',

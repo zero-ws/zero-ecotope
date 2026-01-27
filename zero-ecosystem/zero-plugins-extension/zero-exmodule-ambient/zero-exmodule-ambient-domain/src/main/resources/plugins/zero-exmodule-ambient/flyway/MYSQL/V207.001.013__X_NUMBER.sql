@@ -2,7 +2,8 @@
 
 -- changeset Lang:ox-number-1
 SET NAMES utf8mb4;
-SET FOREIGN_KEY_CHECKS = 0;
+SET
+FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
 -- Table structure for X_NUMBER
@@ -51,4 +52,4 @@ CREATE TABLE `X_NUMBER`
 ALTER TABLE X_NUMBER
     ADD UNIQUE (`APP_ID`, `IDENTIFIER`, `CODE`) USING BTREE;
 SET
-    FOREIGN_KEY_CHECKS = 1;
+FOREIGN_KEY_CHECKS = 1;

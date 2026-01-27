@@ -15,23 +15,23 @@ import java.util.Objects;
 
 /**
  * ## Result
- *
+ * <p>
  * ### 1. Intro
- *
+ * <p>
  * Processing result based on configuration `connect` defined, different situation could trigger different joining
- *
+ * <p>
  * Here are three critical concept:
- *
+ * <p>
  * 1. Name: Mapped to `X_ATTRIBUTE` field `NAME`, it's the model attribute name.
  * 2. SourceField: Mapped to stored field name.
  * 3. JoinField: it's defined by `connect` configuration.
- *
+ * <p>
  * ### 2. connect
- *
+ * <p>
  * #### 2.1. Single Pair
- *
+ * <p>
  * There is `connect` of {@link java.lang.String} defined in json configuration such as following segment.
- *
+ * <p>
  * ```json
  * // <pre><code class="json">
  *     {
@@ -39,20 +39,20 @@ import java.util.Objects;
  *     }
  * // </code></pre>
  * ```
- *
+ * <p>
  * > One to One/Many, join json object with JoinField ( Batch Mode )
- *
+ * <p>
  * 1. Pick data from stored data by `sourceField` name.
  * 2. Join data based on `joinField` in Batch mode, connect json object/array.
  * 3. Build new attribute key-pair `name = json object/array`.
- *
+ * <p>
  * > JoinField, SourceField, Name. Result: `name = JsonObject / JsonArray`.
- *
+ * <p>
  * #### 2.2. Multi Join
- *
+ * <p>
  * There is `connect` of {@link io.vertx.core.json.JsonObject} defined in json configuration such as following segment.
- *
- *
+ * <p>
+ * <p>
  * ```json
  * // <pre><code class="json">
  *     {
@@ -63,18 +63,18 @@ import java.util.Objects;
  *     }
  * // </code></pre>
  * ```
- *
+ * <p>
  * > One to One/Many, join json object with JoinFields ( Batch Mode )
- *
+ * <p>
  * 1. Pick data from stored data by `sourceField1` and `sourceField2` name.
  * 2. Join data based on `joinField1` and `joinField2` in Batch mode, connect json object/array.
  * 3. Build new attribute key-pair `name = json object/array`.
- *
+ * <p>
  * > JoinFields, SourceFields, Name. Result: `name = JsonObject / JsonArray`.
- *
- *
+ * <p>
+ * <p>
  * ### 3. K-V
- *
+ * <p>
  * 1. Left field is `sourceField` of stored record - `referenceField`.
  * 2. Right field is `joinField` of current record - `currentField`.
  *

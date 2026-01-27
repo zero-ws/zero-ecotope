@@ -33,7 +33,6 @@ public interface LogOf extends HLogger {
      * 常用的日志处理模式
      *
      * @param clazz 普通类
-     *
      * @return {@link LogOf}
      */
     static LogOf get(final Class<?> clazz) {

@@ -5,16 +5,20 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.zerows</groupId>
-        <artifactId>zero-plugins-extension</artifactId>
+        <artifactId>zero-boot-actor</artifactId>
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>zero-extension-cloud</artifactId>
-    <name>🧬 - Zero::Extension::Cloud</name>
+    <artifactId>zero-boot-cloud-actor</artifactId>
+    <name>✅️ - Zero::Boot::Cloud Actor</name>
     <dependencies>
         <dependency>
             <groupId>io.zerows</groupId>
             <artifactId>zero-extension-skeleton</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-extension-crud</artifactId>
         </dependency>
         <!--
         云端插件
@@ -25,4 +29,5 @@
             <artifactId>zero-epoch-spec-nacos</artifactId>
         </dependency>
     </dependencies>
+
 </project>

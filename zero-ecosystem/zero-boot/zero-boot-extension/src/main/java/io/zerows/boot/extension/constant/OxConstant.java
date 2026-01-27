@@ -46,9 +46,9 @@ public interface OxConstant {
     String RELATION_UP = "up";
     /**
      * <value>__VERTX_MASTER__</value>，图引擎中主图的代码信息，对应`cn.vertxup.graphic.domain.tables.pojos.GGraphic`中的`code`属性，`CODE`字段。
-     *
+     * <p>
      * CMDB中的拓扑图分三种：
-     *
+     * <p>
      * - 主图：master = true的图（一般一个CMDB系统只有一张主图）。
      * - 定义图：根据关系定义构造的拓扑图，`M_MODEL`和`M_RELATION`构造。
      * - 数据图：自由绘图，目前版本中根据`ci.device`和`rl.device.relation`两种模型构造的图。
@@ -57,17 +57,17 @@ public interface OxConstant {
 
     /**
      * ## 「内部类」配置项字段常量
-     *
+     * <p>
      * ### 1. 基本介绍
-     *
+     * <p>
      * CMDB定义了目前系统中常用的核心字段（OOB模板数据配置型，静态数据规范）。
-     *
+     * <p>
      * ### 2. 核心点
-     *
+     * <p>
      * #### 2.1. lifecycle
-     *
+     * <p>
      * lifecycle为配置项生命周期变量，参考`io.extension.cv.em.LifeCycle`枚举定义。
-     *
+     * <p>
      * |值|托管方|说明|
      * |---|---|:---|
      * |INNER|CMDB|CMDB内部流程（默认值）。|
@@ -76,18 +76,18 @@ public interface OxConstant {
      * |ONLINE|第三方|已上线的生命周期（不可删除）。|
      * |OFFLINE|第三方|已下线的生命周期（不可编辑），下线过后的配置项不可在CMDB中编辑。|
      * |DELETED|第三方|已删除，在CMDB中已下线会执行物理删除和历史备份，但第三方系统会产生DELETED的标记。|
-     *
+     * <p>
      * #### 2.2. confirmStatus
-     *
+     * <p>
      * confirmStatus用来表示配置项是否执行变更中，参考`io.zerows.epoch.bootplus.extension.operation.workflow.Commutator`接口定义。
-     *
+     * <p>
      * - `unconfirmed`：未确认状态，正在执行变更，不可消费。
      * - `confirmed`：已确认状态，可消费。
-     *
+     * <p>
      * #### 2.3. 三级分类
-     *
+     * <p>
      * CMDB中的配置项每个都有三个字段，对应类别字典`X_CATEGORY`：
-     *
+     * <p>
      * - categoryFirst：一级分类字段名。
      * - categorySecond：二级分类字段名。
      * - categoryThird：三级分类字段名。
@@ -126,18 +126,18 @@ public interface OxConstant {
 
     /**
      * ## 「内部类」关系字段常量
-     *
+     * <p>
      * ### 1. 基本介绍
-     *
+     * <p>
      * CMDB中的关系模型专用字段常量，主要分：
-     *
+     * <p>
      * - 关系源，上游，`SOURCE_`前缀。
      * - 目标源，下游，`TARGET_`前缀。
-     *
+     * <p>
      * ### 2. 维度定义
-     *
+     * <p>
      * 该类中针对上下游字段信息，定义了以下几个维度数据：
-     *
+     * <p>
      * - GlobalId：第三方集成专用标识字段，对应配置项中的`globalId`字段。
      * - Category：配置项的分类信息（叶级分类），优先使用`X_CATEGORY`中的值，其次直接使用第三方的类型定义值。
      * - Identifier：配置项的统一模型标识符，identifier字段。
@@ -169,9 +169,9 @@ public interface OxConstant {
         String SOURCE_NAME = "sourceName";
         /**
          * <value>source</value>，用于描述上游五个维度的前缀信息，方便程序执行上游属性提取。
-         *
+         * <p>
          * 示例使用代码：
-         *
+         * <p>
          * ```java
          * // <pre><code class="java">
          *     final Object sourceValue = relation.getEnd1CI().getPropertyValue(attrName);
@@ -205,9 +205,9 @@ public interface OxConstant {
         String TARGET_NAME = "targetName";
         /**
          * <value>ofMain</value>，用于描述下游五个维度的前缀信息，方便程序执行下游属性提取。
-         *
+         * <p>
          * 示例使用代码：
-         *
+         * <p>
          * ```java
          * // <pre><code class="java">
          *     final Object targetValue = relation.getEnd2CI().getPropertyValue(attrName);

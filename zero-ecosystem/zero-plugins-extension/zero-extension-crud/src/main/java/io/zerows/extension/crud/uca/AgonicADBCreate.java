@@ -51,7 +51,6 @@ class AgonicADBCreate implements Agonic {
      *
      * @param input 输入的数据信息，查询条件
      * @param in    {@link IxMod} 模型信息
-     *
      * @return {@link Future} 异步记录结果集
      */
     private Future<JsonObject> uniqueJAsync(final JsonObject input, final IxMod in) {

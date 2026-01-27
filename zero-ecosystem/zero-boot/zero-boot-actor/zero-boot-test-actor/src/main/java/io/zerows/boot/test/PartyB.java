@@ -71,7 +71,6 @@ public interface PartyB extends Party, HCopier<PartyB> {
      *
      * @param okA         {@link PartyA}
      * @param integration {@link KIntegration}
-     *
      * @return {@link PartyB}
      */
     static PartyB of(final PartyA okA, final KIntegration integration) {
@@ -124,7 +123,6 @@ public interface PartyB extends Party, HCopier<PartyB> {
      * 「Async」根据模型定义异步构造某一个模型的字典翻译器
      *
      * @param atom {@link DataAtom} 传入的模型定义对象`io.vertx.mod.argument.modeling.building.DataAtom`
-     *
      * @return {@link Future}
      */
     default Future<KFabric> fabric(final DataAtom atom) {
@@ -138,7 +136,6 @@ public interface PartyB extends Party, HCopier<PartyB> {
      * 「Async」根据统一标识符异步构造某一个模型的字典翻译器
      *
      * @param identifier {@link String} 传入的模型统一标识符
-     *
      * @return {@link Future}
      */
     Future<KFabric> fabric(String identifier);

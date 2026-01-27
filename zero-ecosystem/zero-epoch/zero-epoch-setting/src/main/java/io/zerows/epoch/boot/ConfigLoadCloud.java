@@ -2,8 +2,13 @@ package io.zerows.epoch.boot;
 
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.configuration.ConfigLoad;
 import io.zerows.epoch.configuration.ConfigProvider;
-import io.zerows.epoch.spec.*;
+import io.zerows.epoch.spec.InPre;
+import io.zerows.epoch.spec.InPreArgs;
+import io.zerows.epoch.spec.InPreVertx;
+import io.zerows.epoch.spec.YmCloud;
+import io.zerows.epoch.spec.YmConfiguration;
 import io.zerows.epoch.spec.exception._41003Exception500ConfigMissing;
 import io.zerows.epoch.spec.exception._41004Exception501ProviderNone;
 import io.zerows.specification.app.HApp;
@@ -14,7 +19,7 @@ import java.util.Objects;
 /**
  * @author lang : 2025-10-06
  */
-class ConfigLoadCloud implements io.zerows.epoch.configuration.ConfigLoad {
+class ConfigLoadCloud implements ConfigLoad {
     private final InPre entrance;
 
     ConfigLoadCloud(final InPre entrance) {
@@ -47,11 +52,11 @@ class ConfigLoadCloud implements io.zerows.epoch.configuration.ConfigLoad {
         Fn.jvmKo(Ut.isNil(options), _41003Exception500ConfigMissing.class, "vertx.cloud." + selected);
 
 
-        // 构造参数
+        // 构造参数，加载 CloudServer/nacos 配置提供器加载配置
         final InPreArgs args = new InPreArgs();
         args.configVertx(vertx.getConfig()).options(options);
         final ConfigProvider provider = ConfigProvider.of(selected);
         Fn.jvmKo(Objects.isNull(provider), _41004Exception501ProviderNone.class, selected);
-        return null;
+        return provider.configure(args, app);
     }
 }

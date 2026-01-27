@@ -22,12 +22,12 @@ import static io.zerows.extension.module.workflow.boot.Wf.LOG;
 /**
  * 1) Bind instance for Task seeking
  * 2) Fetch active Task
- *
+ * <p>
  * This interface will be used internal WProcess for different mode
- *
+ * <p>
  * 1. The WMove must be bind
  * 2. The ProcessInstance must be valid
- *
+ * <p>
  * * null findRunning when processed
  * * 「Related」
  * *  - traceId

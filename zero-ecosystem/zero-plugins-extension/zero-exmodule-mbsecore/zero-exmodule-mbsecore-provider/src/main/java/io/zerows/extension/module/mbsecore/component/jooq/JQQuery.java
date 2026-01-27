@@ -1,7 +1,7 @@
 package io.zerows.extension.module.mbsecore.component.jooq;
 
-import io.zerows.extension.module.mbsecore.metadata.data.DataEvent;
 import io.zerows.extension.module.mbsecore.component.metadata.AoSentence;
+import io.zerows.extension.module.mbsecore.metadata.data.DataEvent;
 import org.jooq.DSLContext;
 import org.jooq.SelectWhereStep;
 

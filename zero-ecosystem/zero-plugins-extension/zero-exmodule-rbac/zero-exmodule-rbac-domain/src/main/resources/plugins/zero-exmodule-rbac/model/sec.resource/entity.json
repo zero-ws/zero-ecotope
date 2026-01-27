@@ -1,12 +1,12 @@
 {
-    "name": "resource",
-    "daoCls": "S_RESOURCE",
-    "field": {
-        "unique": [
-            [
-                "code",
-                "sigma"
-            ]
-        ]
-    }
+  "name": "resource",
+  "daoCls": "S_RESOURCE",
+  "field": {
+    "unique": [
+      [
+        "code",
+        "sigma"
+      ]
+    ]
+  }
 }

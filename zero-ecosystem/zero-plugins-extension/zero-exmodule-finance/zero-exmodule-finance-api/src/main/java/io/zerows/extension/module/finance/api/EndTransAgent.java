@@ -95,7 +95,6 @@ public interface EndTransAgent {
      * </code></pre>
      *
      * @param body 请求数据
-     *
      * @return 交易结果
      */
     @Path("/trans-proc/debt")
@@ -118,7 +117,6 @@ public interface EndTransAgent {
      * 单独的结算单、应收/应退单中，而是独立在上层节点上，前端可直接计算，产生最终的交易单的主体内容。
      *
      * @param key 交易的唯一标识
-     *
      * @return 交易信息
      */
     @Path("/trans/:key")

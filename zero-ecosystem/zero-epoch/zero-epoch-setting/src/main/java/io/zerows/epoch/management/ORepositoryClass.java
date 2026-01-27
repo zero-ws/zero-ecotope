@@ -1,7 +1,18 @@
 package io.zerows.epoch.management;
 
-import io.zerows.epoch.annotations.*;
-import io.zerows.epoch.assembly.*;
+import io.zerows.epoch.annotations.Actor;
+import io.zerows.epoch.annotations.Agent;
+import io.zerows.epoch.annotations.EndPoint;
+import io.zerows.epoch.annotations.Queue;
+import io.zerows.epoch.annotations.Worker;
+import io.zerows.epoch.assembly.InquirerClassActor;
+import io.zerows.epoch.assembly.InquirerClassAddOn;
+import io.zerows.epoch.assembly.InquirerClassAgent;
+import io.zerows.epoch.assembly.InquirerClassEndPoint;
+import io.zerows.epoch.assembly.InquirerClassIpc;
+import io.zerows.epoch.assembly.InquirerClassQueue;
+import io.zerows.epoch.assembly.InquirerClassValidated;
+import io.zerows.epoch.assembly.InquirerClassWorker;
 import io.zerows.epoch.jigsaw.Inquirer;
 import io.zerows.platform.enums.VertxComponent;
 import io.zerows.platform.management.AbstractAmbiguity;

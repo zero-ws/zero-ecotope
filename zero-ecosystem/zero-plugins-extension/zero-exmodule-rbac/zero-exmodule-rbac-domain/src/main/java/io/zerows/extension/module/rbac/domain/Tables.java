@@ -4,7 +4,22 @@
 package io.zerows.extension.module.rbac.domain;
 
 
-import io.zerows.extension.module.rbac.domain.tables.*;
+import io.zerows.extension.module.rbac.domain.tables.OUser;
+import io.zerows.extension.module.rbac.domain.tables.RGroupRole;
+import io.zerows.extension.module.rbac.domain.tables.RRolePerm;
+import io.zerows.extension.module.rbac.domain.tables.RUserGroup;
+import io.zerows.extension.module.rbac.domain.tables.RUserRole;
+import io.zerows.extension.module.rbac.domain.tables.SAction;
+import io.zerows.extension.module.rbac.domain.tables.SGroup;
+import io.zerows.extension.module.rbac.domain.tables.SPacket;
+import io.zerows.extension.module.rbac.domain.tables.SPath;
+import io.zerows.extension.module.rbac.domain.tables.SPermSet;
+import io.zerows.extension.module.rbac.domain.tables.SPermission;
+import io.zerows.extension.module.rbac.domain.tables.SResource;
+import io.zerows.extension.module.rbac.domain.tables.SRole;
+import io.zerows.extension.module.rbac.domain.tables.SUser;
+import io.zerows.extension.module.rbac.domain.tables.SView;
+import io.zerows.extension.module.rbac.domain.tables.SVisitant;
 
 
 /**

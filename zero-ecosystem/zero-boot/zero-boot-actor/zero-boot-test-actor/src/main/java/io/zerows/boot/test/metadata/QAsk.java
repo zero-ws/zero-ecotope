@@ -15,15 +15,15 @@ import java.util.List;
 
 /**
  * ## 「Pojo」测试输入模型
- *
+ * <p>
  * ### 1. 基本介绍
- *
+ * <p>
  * 构造Ox平台模型专用的测试输入对象，它提供如下功能
- *
+ * <p>
  * - 存储{@link DataAtom}模型定义，引用某一类模型。
  * - 根据模型定义和JsonObject数据，构造{@link HRecord}记录。
  * - 根据模型定义和JsonArray数据，构造`{@link HRecord}[]`记录数组（批量）。
- *
+ * <p>
  * ### 2. 模拟数据格式
  *
  * <pre><code>
@@ -100,7 +100,6 @@ public class QAsk implements Serializable {
      *
      * @param atom {@link DataAtom} 模型定义引用
      * @param data {@link JsonObject} Json对象数据
-     *
      * @return {@link HRecord}
      */
     public static HRecord newRecord(final DataAtom atom, final JsonObject data) {

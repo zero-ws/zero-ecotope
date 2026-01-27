@@ -9,22 +9,26 @@ import java.util.Set;
 
 /**
  * ClassMatcherTrie 🌲
- *
+ * <p>
  * 高性能“前缀黑名单”匹配器（字符级 Trie + 前置去冗余）：
  * 1) 🧹 去重：过滤 null / 空白 / 重复前缀；
  * 2) ✂️ 去冗余：若存在更短的前缀 a 覆盖了更长的前缀 a.b.c...，仅保留 a 以降低匹配成本；
  * 3) 🌲 Trie：逐字符下降；遇到终止节点（end=true）立刻命中；中途断链则未命中；
  * 4) 💡 线程安全：构建后为只读结构；matches 为无锁读。
- *
+ * <p>
  * 说明：
  * - 本类只关心“是否命中任一前缀”，不关心具体前缀内容；
  * - 与 String.startsWith 黑名单行为一致（任一前缀匹配即命中）。
  */
 final class ClassMatcherTrie {
 
-    /** Trie 根节点（构建完成后只读） */
+    /**
+     * Trie 根节点（构建完成后只读）
+     */
     private final Node root;
-    /** 去冗余后的前缀数量（仅用于统计/日志） */
+    /**
+     * 去冗余后的前缀数量（仅用于统计/日志）
+     */
     private final int size;
 
     private ClassMatcherTrie(final Node root, final int size) {
@@ -116,12 +120,16 @@ final class ClassMatcherTrie {
         return cur.end; // 末尾是否落在终止节点
     }
 
-    /** 去冗余后前缀数量（用于统计/日志） */
+    /**
+     * 去冗余后前缀数量（用于统计/日志）
+     */
     int size() {
         return this.size;
     }
 
-    /** Trie 节点：分支较少，用普通 HashMap 即可，避免过度同步开销 */
+    /**
+     * Trie 节点：分支较少，用普通 HashMap 即可，避免过度同步开销
+     */
     private static final class Node {
         final Map<Character, Node> next = new HashMap<>(4);
         boolean end;

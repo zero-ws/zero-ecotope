@@ -27,26 +27,26 @@ import java.util.concurrent.ConcurrentMap;
 
 /**
  * ## 「Channel」导出通道
- *
+ * <p>
  * ### 1. 基本介绍
- *
+ * <p>
  * 不带任何<strong>集成功能</strong>的导出通道，支持如下功能
- *
+ * <p>
  * - 根据`identifier`执行数据导出
  * - 可输入导出的查询条件以及列条件
  * - 请求`POST /api/ox/:identifier/export`
- *
+ * <p>
  * > 导出格式是Excel二进制文件流。
- *
+ * <p>
  * ### 2. 通道详细
- *
+ * <p>
  * - 类型：ADAPTOR
  * - Qr参数中的`criteria`部分
- *
+ * <p>
  * ### 3. 请求格式
- *
+ * <p>
  * > 参考Zero查询引擎中的Qr标准格式。
- *
+ * <p>
  * ```json
  * // <pre><code class="json">
  * {
@@ -65,9 +65,9 @@ import java.util.concurrent.ConcurrentMap;
  * }
  * // </code></pre>
  * ```
- *
+ * <p>
  * ### 4. 响应格式
- *
+ * <p>
  * ```shell
  * // <pre><code>
  * ....（二进制数据）
@@ -82,7 +82,6 @@ public class ExportComponent extends AbstractAdaptor {
      * 「Async」通道主方法
      *
      * @param request 通道的标准请求参数，类型{@link ActIn}。
-     *
      * @return 返回`{@link Future}<{@link ActOut}>`
      */
     @Override

@@ -1,73 +1,73 @@
 {
-    "name": "employee",
-    "daoCls": "E_EMPLOYEE",
-    "field": {
-        "numbers": {
-            "workNumber": "NUM.EMPLOYEE"
-        },
-        "unique": [
-            [
-                "workNumber",
-                "sigma"
-            ]
-        ]
+  "name": "employee",
+  "daoCls": "E_EMPLOYEE",
+  "field": {
+    "numbers": {
+      "workNumber": "NUM.EMPLOYEE"
     },
-    "aop": {
-        "plugin.component.after": [
-            "io.zerows.extension.commerce.rbac.aop.AfterUserSync"
-        ],
-        "plugin.config": {
-            "io.vertx.mod.rbac.aop.AfterUserSync": {
-                "mapping": {
-                    "viceName": "realname",
-                    "viceMobile": "mobile",
-                    "viceEmail": "email"
-                },
-                "initialize": {
-                    "modelId": "employee"
-                }
-            }
-        }
-    },
-    "transform": {
-        "initial": {
-            "type": "`${type}`"
+    "unique": [
+      [
+        "workNumber",
+        "sigma"
+      ]
+    ]
+  },
+  "aop": {
+    "plugin.component.after": [
+      "io.zerows.extension.commerce.rbac.aop.AfterUserSync"
+    ],
+    "plugin.config": {
+      "io.vertx.mod.rbac.aop.AfterUserSync": {
+        "mapping": {
+          "viceName": "realname",
+          "viceMobile": "mobile",
+          "viceEmail": "email"
         },
-        "fabric": {
-            "source": [
-                {
-                    "source": "ASSIST",
-                    "key": "resource.departments",
-                    "component": "io.zerows.extension.commerce.erp.osgi.spi.dict.DepartmentDict"
-                },
-                {
-                    "source": "ASSIST",
-                    "key": "resource.companys",
-                    "component": "io.zerows.extension.commerce.erp.osgi.spi.dict.CompanyDict"
-                },
-                {
-                    "source": "ASSIST",
-                    "key": "resource.teams",
-                    "component": "io.zerows.extension.commerce.erp.osgi.spi.dict.TeamDict"
-                }
-            ],
-            "epsilon": {
-                "deptId": {
-                    "source": "resource.departments",
-                    "in": "name",
-                    "out": "key"
-                },
-                "companyId": {
-                    "source": "resource.companys",
-                    "in": "name",
-                    "out": "key"
-                },
-                "teamId": {
-                    "source": "resource.teams",
-                    "in": "name",
-                    "out": "key"
-                }
-            }
+        "initialize": {
+          "modelId": "employee"
         }
+      }
     }
+  },
+  "transform": {
+    "initial": {
+      "type": "`${type}`"
+    },
+    "fabric": {
+      "source": [
+        {
+          "source": "ASSIST",
+          "key": "resource.departments",
+          "component": "io.zerows.extension.commerce.erp.osgi.spi.dict.DepartmentDict"
+        },
+        {
+          "source": "ASSIST",
+          "key": "resource.companys",
+          "component": "io.zerows.extension.commerce.erp.osgi.spi.dict.CompanyDict"
+        },
+        {
+          "source": "ASSIST",
+          "key": "resource.teams",
+          "component": "io.zerows.extension.commerce.erp.osgi.spi.dict.TeamDict"
+        }
+      ],
+      "epsilon": {
+        "deptId": {
+          "source": "resource.departments",
+          "in": "name",
+          "out": "key"
+        },
+        "companyId": {
+          "source": "resource.companys",
+          "in": "name",
+          "out": "key"
+        },
+        "teamId": {
+          "source": "resource.teams",
+          "in": "name",
+          "out": "key"
+        }
+      }
+    }
+  }
 }

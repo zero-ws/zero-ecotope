@@ -11,11 +11,11 @@ import io.zerows.support.base.UtBase;
  *     <li>Zero Extension直接使用静态方式作为依赖接入应用中（通常是单机版）</li>
  *     <li>Zero Extension使用 `动态方式` 接入应用（基于OSGI规范），参考下边章节的 Bundle 专用目录规范</li>
  * </ol>
- *
+ * <p>
  * 在上述Zero Extension第一种静态接入模式中：由于模块本身会作为依赖的应用，所以需实现全路径唯一，且不可重复，因此针对横向的管理会很差，
  * 于是才有OSGI模式下的标准出现，本章节为第一种静态方式的依赖。直接参考：<a href="https://www.vertx-cloud.cn/document/doc-web/index.html#_%E8%B5%84%E6%BA%90%E7%BB%93%E6%9E%84">4.3.2.资源结构</a>。
  * </p>
- *
+ * <p>
  * Zero模块内的核心目录如（假设模块名称 `mod`）
  * <pre><code>
  *     - /action/{code}              （横向）安全，资源管理，code唯一
@@ -27,7 +27,7 @@ import io.zerows.support.base.UtBase;
  *     - /pojo/{identifier}          （横向）POJO映射配置，identifier为静态模型文件名
  *     - /workflow/{code}            （横向）工作流配置，code微工作流定义的键值
  * </code></pre>
- *
+ * <p>
  * 书写过程给中，小写是目录，大写是值，所有路径本身依靠小写来区分，基本命名规范
  * <pre><code>
  *     1. 目录本名直接使用小写命名

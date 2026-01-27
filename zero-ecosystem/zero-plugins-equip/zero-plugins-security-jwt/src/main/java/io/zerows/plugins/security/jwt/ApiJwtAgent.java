@@ -9,7 +9,7 @@ import jakarta.ws.rs.extension.BodyParam;
 
 @EndPoint
 public interface ApiJwtAgent {
-    
+
     @POST
     @Path("/auth/jwt-login")
     @Address(ApiAddr.API_AUTH_JWT_LOGIN)

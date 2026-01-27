@@ -132,7 +132,6 @@ public class RRule implements Serializable {
      * condition + record = 查询引擎结果（不同记录编译结果不同）
      *
      * @param record 单数据记录
-     *
      * @return 根据数据记录编译好的 Qr 条件
      */
     public JsonObject compile(final HRecord record) {
@@ -162,7 +161,6 @@ public class RRule implements Serializable {
      * conditions + record = 查询引擎结果（不同记录编译结果不同）
      *
      * @param records 多数据记录
-     *
      * @return 根据数据记录编译好的 Qr 条件
      */
     public JsonObject compile(final HRecord[] records) {

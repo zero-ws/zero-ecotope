@@ -14,9 +14,9 @@ import java.util.concurrent.ConcurrentMap;
 
 /**
  * ## Rule Applier
- *
+ * <p>
  * ### 1. Intro
- *
+ * <p>
  * This class validate each record related to current attribute.
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>

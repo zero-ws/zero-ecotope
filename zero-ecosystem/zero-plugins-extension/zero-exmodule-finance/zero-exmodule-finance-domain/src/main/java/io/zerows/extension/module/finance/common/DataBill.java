@@ -70,7 +70,6 @@ public class DataBill implements Serializable {
      * </code></pre>
      *
      * @param reduce 是否强校验
-     *
      * @return {@link io.vertx.core.json.JsonObject}
      */
     public Future<JsonObject> response(final boolean reduce) {

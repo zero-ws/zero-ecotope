@@ -40,7 +40,6 @@ public interface Hymn<T> {
      * 此处 Input 数据类型最终会影响解析的连接点相关信息
      *
      * @param input 输入数据
-     *
      * @return {@link KJoin.Point} 连接点
      */
     KJoin.Point pointer(T input);

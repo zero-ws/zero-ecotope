@@ -14,12 +14,31 @@ CREATE TABLE IF NOT EXISTS W_TICKET
      * - status（业务状态）
      * - type（单据类型，流程单据类型挂载到服务目录中，标识当前业务主单提供何种服务）
      */
-    `KEY`                 VARCHAR(36) COMMENT '「key」- 单据主键',
-    `SERIAL`              VARCHAR(255) COMMENT '「serial」- 单据编号，使用 X_NUMBER 生成',
-    `NAME`                VARCHAR(255) COMMENT '「name」- 单据标题',
-    `CODE`                VARCHAR(36) COMMENT '「code」- 单据系统编号（内码）',
-    `TYPE`                VARCHAR(36) COMMENT '「type」- 主单类型类型',
-    `PHASE`               VARCHAR(36) COMMENT '「phase」- 主单据所属阶段（状态描述，由于挂TODO，所以不使用status）',
+    `KEY`
+    VARCHAR
+(
+    36
+) COMMENT '「key」- 单据主键',
+    `SERIAL` VARCHAR
+(
+    255
+) COMMENT '「serial」- 单据编号，使用 X_NUMBER 生成',
+    `NAME` VARCHAR
+(
+    255
+) COMMENT '「name」- 单据标题',
+    `CODE` VARCHAR
+(
+    36
+) COMMENT '「code」- 单据系统编号（内码）',
+    `TYPE` VARCHAR
+(
+    36
+) COMMENT '「type」- 主单类型类型',
+    `PHASE` VARCHAR
+(
+    36
+) COMMENT '「phase」- 主单据所属阶段（状态描述，由于挂TODO，所以不使用status）',
 
     /*
      * Modeling Engine（建模管理）
@@ -39,15 +58,27 @@ CREATE TABLE IF NOT EXISTS W_TICKET
      * -- MODEL_CHILD 只有在 Model = N 的时候使用，在 Model = N 时，还依赖另外一张 T_?? 的单据表，单据中
      *    存储了主单没有的特殊信息，此时MODEL_CHILD中存储的是相关实体的主键集，为JsonArray格式
      */
-    `MODEL_ID`            VARCHAR(255) COMMENT '「modelId」- 关联的模型identifier，用于描述',
-    `MODEL_KEY`           VARCHAR(36) COMMENT '「modelKey」- 关联的模型记录ID，用于描述哪一个Model中的记录',
-    `MODEL_CATEGORY`      VARCHAR(128) COMMENT '「modelCategory」- 关联的category记录，只包含叶节点',
-    `MODEL_COMPONENT`     VARCHAR(255) COMMENT '「modelComponent」- 关联的待办组件记录',
+    `MODEL_ID` VARCHAR
+(
+    255
+) COMMENT '「modelId」- 关联的模型identifier，用于描述',
+    `MODEL_KEY` VARCHAR
+(
+    36
+) COMMENT '「modelKey」- 关联的模型记录ID，用于描述哪一个Model中的记录',
+    `MODEL_CATEGORY` VARCHAR
+(
+    128
+) COMMENT '「modelCategory」- 关联的category记录，只包含叶节点',
+    `MODEL_COMPONENT` VARCHAR
+(
+    255
+) COMMENT '「modelComponent」- 关联的待办组件记录',
     /*
      * 批量专用字段
      */
-    `MODEL_CHILD`         LONGTEXT COMMENT '「modelChild」- 关联多个模型的记录ID，JsonArray格式',
-    `QUANTITY`            INTEGER COMMENT '「quantity」- 数量信息，多个模型记录时统计模型总数',
+    `MODEL_CHILD` LONGTEXT COMMENT '「modelChild」- 关联多个模型的记录ID，JsonArray格式',
+    `QUANTITY` INTEGER COMMENT '「quantity」- 数量信息，多个模型记录时统计模型总数',
 
 
     /*
@@ -57,10 +88,19 @@ CREATE TABLE IF NOT EXISTS W_TICKET
      * - processId,     流程执行专用Key，标识当前主单目前处于哪个流程节点专用
      * - finished,      （主单是否执行完成）
      */
-    `FLOW_DEFINITION_KEY` VARCHAR(64) COMMENT '「flowDefinitionKey」- 流程定义的KEY, getProcessDefinitionKey',
-    `FLOW_DEFINITION_ID`  VARCHAR(64) COMMENT '「flowDefinitionId」- 流程定义的ID，getProcessDefinitionKey',
-    `FLOW_INSTANCE_ID`    VARCHAR(64) COMMENT '「flowInstanceId」- 流程定义的ID，getProcessId',
-    `FLOW_END`            BIT DEFAULT NULL COMMENT '「flowEnd」- 主单是否执行完成',
+    `FLOW_DEFINITION_KEY` VARCHAR
+(
+    64
+) COMMENT '「flowDefinitionKey」- 流程定义的KEY, getProcessDefinitionKey',
+    `FLOW_DEFINITION_ID` VARCHAR
+(
+    64
+) COMMENT '「flowDefinitionId」- 流程定义的ID，getProcessDefinitionKey',
+    `FLOW_INSTANCE_ID` VARCHAR
+(
+    64
+) COMMENT '「flowInstanceId」- 流程定义的ID，getProcessId',
+    `FLOW_END` BIT DEFAULT NULL COMMENT '「flowEnd」- 主单是否执行完成',
 
 
     /*
@@ -69,14 +109,32 @@ CREATE TABLE IF NOT EXISTS W_TICKET
      * - description：主单描述（用户自己填写）
      * - catalog：所属服务目录（绑定服务目录信息）
      */
-    `TITLE`               VARCHAR(1024) COMMENT '「title」- 主单业务标题',
-    `DESCRIPTION`         LONGTEXT COMMENT '「description」- 主单描述内容',
-    `CATALOG`             VARCHAR(36) COMMENT '「catalog」- 关联服务目录',
-    `CATEGORY`            VARCHAR(36) COMMENT '「category」- 业务类别',
-    `CATEGORY_SUB`        VARCHAR(36) COMMENT '「categorySub」- 子类别',
+    `TITLE` VARCHAR
+(
+    1024
+) COMMENT '「title」- 主单业务标题',
+    `DESCRIPTION` LONGTEXT COMMENT '「description」- 主单描述内容',
+    `CATALOG` VARCHAR
+(
+    36
+) COMMENT '「catalog」- 关联服务目录',
+    `CATEGORY` VARCHAR
+(
+    36
+) COMMENT '「category」- 业务类别',
+    `CATEGORY_SUB` VARCHAR
+(
+    36
+) COMMENT '「categorySub」- 子类别',
 
-    `OWNER`               VARCHAR(36) COMMENT '「owner」- 制单人/拥有者',
-    `SUPERVISOR`          VARCHAR(36) COMMENT '「supervisor」- 监督人',
+    `OWNER` VARCHAR
+(
+    36
+) COMMENT '「owner」- 制单人/拥有者',
+    `SUPERVISOR` VARCHAR
+(
+    36
+) COMMENT '「supervisor」- 监督人',
 
     /*
      * 主单核心人员信息
@@ -84,34 +142,73 @@ CREATE TABLE IF NOT EXISTS W_TICKET
      * - cancel, 终止人，有人直接中断该单据，则流程完结，直接设置该信息
      * - close, 关单人（谁完成该单据并关闭，如果有重开，则该值为最终关单人）
      */
-    `OPEN_BY`             VARCHAR(36) COMMENT '「openBy」- 开单人',
-    `OPEN_GROUP`          VARCHAR(36) COMMENT '「openGroup」- 开单组',
-    `OPEN_AT`             DATETIME COMMENT '「openAt」- 开单时间',
-    `CANCEL_BY`           VARCHAR(36) COMMENT '「cancelBy」- 中断人',
-    `CANCEL_AT`           DATETIME COMMENT '「cancelAt」- 中断时间',
+    `OPEN_BY` VARCHAR
+(
+    36
+) COMMENT '「openBy」- 开单人',
+    `OPEN_GROUP` VARCHAR
+(
+    36
+) COMMENT '「openGroup」- 开单组',
+    `OPEN_AT` DATETIME COMMENT '「openAt」- 开单时间',
+    `CANCEL_BY` VARCHAR
+(
+    36
+) COMMENT '「cancelBy」- 中断人',
+    `CANCEL_AT` DATETIME COMMENT '「cancelAt」- 中断时间',
 
-    `CLOSE_BY`            VARCHAR(36) COMMENT '「closeBy」- 关闭人',
-    `CLOSE_AT`            DATETIME COMMENT '「closeAt」- 关闭时间',
-    `CLOSE_SOLUTION`      LONGTEXT COMMENT '「closeSolution」- 关闭解决方案',
-    `CLOSE_CODE`          VARCHAR(255) COMMENT '「closeCode」- 关闭代码',
-    `CLOSE_KB`            VARCHAR(1024) COMMENT '「closeKb」- 关闭时KB链接地址',
+    `CLOSE_BY` VARCHAR
+(
+    36
+) COMMENT '「closeBy」- 关闭人',
+    `CLOSE_AT` DATETIME COMMENT '「closeAt」- 关闭时间',
+    `CLOSE_SOLUTION` LONGTEXT COMMENT '「closeSolution」- 关闭解决方案',
+    `CLOSE_CODE` VARCHAR
+(
+    255
+) COMMENT '「closeCode」- 关闭代码',
+    `CLOSE_KB` VARCHAR
+(
+    1024
+) COMMENT '「closeKb」- 关闭时KB链接地址',
 
     -- ------------------------------ 公共字段 --------------------------------
-    `SIGMA`               VARCHAR(128) COMMENT '「sigma」- 用户组绑定的统一标识',
-    `LANGUAGE`            VARCHAR(10) COMMENT '「language」- 使用的语言',
-    `ACTIVE`              BIT COMMENT '「active」- 是否启用',
-    `METADATA`            TEXT COMMENT '「metadata」- 附加配置数据',
+    `SIGMA` VARCHAR
+(
+    128
+) COMMENT '「sigma」- 用户组绑定的统一标识',
+    `LANGUAGE` VARCHAR
+(
+    10
+) COMMENT '「language」- 使用的语言',
+    `ACTIVE` BIT COMMENT '「active」- 是否启用',
+    `METADATA` TEXT COMMENT '「metadata」- 附加配置数据',
 
     -- Auditor字段
-    `CREATED_AT`          DATETIME COMMENT '「createdAt」- 创建时间',
-    `CREATED_BY`          VARCHAR(36) COMMENT '「createdBy」- 创建人',
-    `UPDATED_AT`          DATETIME COMMENT '「updatedAt」- 更新时间',
-    `UPDATED_BY`          VARCHAR(36) COMMENT '「updatedBy」- 更新人',
+    `CREATED_AT` DATETIME COMMENT '「createdAt」- 创建时间',
+    `CREATED_BY` VARCHAR
+(
+    36
+) COMMENT '「createdBy」- 创建人',
+    `UPDATED_AT` DATETIME COMMENT '「updatedAt」- 更新时间',
+    `UPDATED_BY` VARCHAR
+(
+    36
+) COMMENT '「updatedBy」- 更新人',
 
-    `APP_ID`              VARCHAR(36) COMMENT '「appId」- 应用ID',
-    `TENANT_ID`           VARCHAR(36) COMMENT '「tenantId」- 租户ID',
-    PRIMARY KEY (`KEY`) USING BTREE
-);
+    `APP_ID` VARCHAR
+(
+    36
+) COMMENT '「appId」- 应用ID',
+    `TENANT_ID` VARCHAR
+(
+    36
+) COMMENT '「tenantId」- 租户ID',
+    PRIMARY KEY
+(
+    `KEY`
+) USING BTREE
+    );
 -- changeset Lang:w-ticket-2
 -- 流程主单：W_TICKET
 ALTER TABLE W_TICKET

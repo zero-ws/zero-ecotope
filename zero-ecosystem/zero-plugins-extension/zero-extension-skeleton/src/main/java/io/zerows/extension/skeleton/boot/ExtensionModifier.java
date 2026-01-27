@@ -26,16 +26,24 @@ public class ExtensionModifier {
 
     // --- 配置常量 ---
 
-    /** 要添加的 Ke 类导入语句 */
+    /**
+     * 要添加的 Ke 类导入语句
+     */
     private static final String KE_IMPORT_STATEMENT = "import io.zerows.extension.skeleton.common.Ke;";
 
-    /** 硬编码的旧模式名 */
+    /**
+     * 硬编码的旧模式名
+     */
     private static final String OLD_SCHEMA_LITERAL = "\"ZDB\"";
 
-    /** 新的动态获取模式名的表达式 */
+    /**
+     * 新的动态获取模式名的表达式
+     */
     private static final String NEW_SCHEMA_EXPRESSION = "Ke.getDatabase()";
 
-    /** 默认使用的文件字符集 */
+    /**
+     * 默认使用的文件字符集
+     */
     private static final Charset DEFAULT_CHARSET = StandardCharsets.UTF_8;
 
 
@@ -50,7 +58,6 @@ public class ExtensionModifier {
      * 修改后的内容会写回到原文件中。
      *
      * @param filePath Zdb.java 文件的相对或绝对路径（例如："defaulta/Zdb.java"）。
-     *
      * @return 如果文件被成功修改或已符合要求则返回 true；如果因任何原因（IO错误、格式不符等）未能修改则返回 false。
      */
     public static boolean modifyZdbFile(final String filePath) {
@@ -120,7 +127,6 @@ public class ExtensionModifier {
      * （即已包含 Ke 导入且构造函数中已使用 Ke.getDatabase()）
      *
      * @param code 文件内容字符串。
-     *
      * @return 如果已符合要求返回 true，否则返回 false。
      */
     private static boolean isAlreadyModified(final String code) {
@@ -134,7 +140,6 @@ public class ExtensionModifier {
      *
      * @param originalCode   Zdb.java 文件的原始内容字符串。
      * @param sourceFilePath 源文件的路径（用于日志/错误报告）。
-     *
      * @return 修改后的内容字符串，如果修改失败则返回 null。
      */
     private static String applyModifications(final String originalCode, final String sourceFilePath) {
@@ -204,7 +209,6 @@ public class ExtensionModifier {
      * @param code           原始代码。
      * @param sourceFilePath 文件路径（用于日志）。
      * @param errorBuffer    用于收集此操作中发生的错误消息。
-     *
      * @return 替换后的代码，如果失败则原始代码不变。
      */
     private static String replaceSchemaName(final String code, final String sourceFilePath, final StringBuilder errorBuffer) {
@@ -263,7 +267,6 @@ public class ExtensionModifier {
      * 如果没有导入语句，则回退到包声明之后插入。
      *
      * @param code 源代码字符串。
-     *
      * @return 插入新导入语句的索引（字符位置），如果找不到合适的地方则返回 -1。
      */
     private static int findImportInsertPosition(final String code) {
@@ -298,7 +301,6 @@ public class ExtensionModifier {
      *
      * @param code       源代码字符串。
      * @param startIndex 开头大括号 '{' 之后的索引。
-     *
      * @return 对应的闭合大括号 '}' 的索引，如果未找到则返回 -1。
      */
     private static int findMatchingClosingBrace(final String code, final int startIndex) {

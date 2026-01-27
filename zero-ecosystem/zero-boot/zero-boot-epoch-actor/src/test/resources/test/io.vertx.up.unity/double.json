@@ -1,9 +1,9 @@
 {
-    "": true,
-    "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
-    "orderStatus,i": [
-        "Ordered",
-        "Scheduling",
-        "Scheduled"
-    ]
+  "": true,
+  "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+  "orderStatus,i": [
+    "Ordered",
+    "Scheduling",
+    "Scheduled"
+  ]
 }

@@ -35,7 +35,6 @@ public interface EndDebtStub {
      *
      * @param body 应收数据
      * @param user 用户信息
-     *
      * @return 应收结果
      */
     Future<List<FDebt>> updateAsync(JsonObject body, User user);

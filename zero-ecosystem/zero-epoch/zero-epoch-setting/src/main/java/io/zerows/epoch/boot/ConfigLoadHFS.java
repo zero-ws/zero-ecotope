@@ -1,5 +1,6 @@
 package io.zerows.epoch.boot;
 
+import io.zerows.epoch.configuration.ConfigLoadBase;
 import io.zerows.epoch.spec.YmConfiguration;
 import io.zerows.specification.app.HApp;
 import lombok.extern.slf4j.Slf4j;

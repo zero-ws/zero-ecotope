@@ -21,7 +21,6 @@ public interface HEnvironment {
      * 获取指定键的环境变量值
      *
      * @param key 环境变量的键
-     *
      * @return 环境变量的值，如果不存在则返回 null
      */
     String get(String key);

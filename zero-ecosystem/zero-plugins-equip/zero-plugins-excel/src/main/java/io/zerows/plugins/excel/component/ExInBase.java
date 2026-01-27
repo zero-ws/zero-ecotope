@@ -34,7 +34,6 @@ public abstract class ExInBase implements ExIn {
      *
      * @param dataCell {@link Cell} 实例
      * @param type     类型
-     *
      * @return 返回解析后的值
      */
     @SuppressWarnings("all")

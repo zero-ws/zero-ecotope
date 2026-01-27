@@ -34,7 +34,6 @@ public class QuotaMetricApp extends QuotaMetricBase {
      * 特定属性构造
      *
      * @param app 应用信息
-     *
      * @return 指标行
      */
     private MetricRow buildRow(final HApp app) {

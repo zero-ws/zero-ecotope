@@ -56,7 +56,6 @@ public class EndSettleRService implements EndSettleRStub {
      * </code></pre>
      *
      * @param keys 传入的结算单主键集合
-     *
      * @return JsonObject
      */
     @Override
@@ -90,7 +89,6 @@ public class EndSettleRService implements EndSettleRStub {
      * </code></pre>
      *
      * @param transId 交易ID
-     *
      * @return 结算单列表
      */
     @Override
@@ -156,7 +154,6 @@ public class EndSettleRService implements EndSettleRStub {
      * </code></pre>
      *
      * @param keys 传入的结算单主键集合
-     *
      * @return 返回“结算单”对应的状态信息
      */
     public Future<ConcurrentMap<String, JsonArray>> fetchStatus(final JsonArray keys) {

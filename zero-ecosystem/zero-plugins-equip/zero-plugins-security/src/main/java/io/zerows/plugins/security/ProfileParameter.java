@@ -48,7 +48,6 @@ class ProfileParameter {
      * </pre>
      *
      * @param context 路由上下文
-     *
      * @return 授权参数
      */
     static JsonObject build(final RoutingContext context) {

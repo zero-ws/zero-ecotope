@@ -28,7 +28,6 @@ class MakerBillItemTransfer implements Maker<List<FBillItem>, FBillItem> {
      *
      * @param data     忽略不急
      * @param itemFrom 旧数据信息
-     *
      * @return {@link FBillItem}
      */
     @Override

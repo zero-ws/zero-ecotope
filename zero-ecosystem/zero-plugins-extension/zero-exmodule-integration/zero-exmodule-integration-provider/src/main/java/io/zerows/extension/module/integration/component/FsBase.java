@@ -26,7 +26,6 @@ public abstract class FsBase implements Fs {
      *
      * @param data   传入的目录数据
      * @param config 传入的配置数据
-     *
      * @return 返回初始化后的数据
      */
     protected Future<JsonArray> initialize(final JsonArray data, final JsonObject config) {

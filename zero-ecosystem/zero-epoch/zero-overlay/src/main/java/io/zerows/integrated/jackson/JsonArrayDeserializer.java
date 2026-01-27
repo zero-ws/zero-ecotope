@@ -10,7 +10,7 @@ import java.io.IOException;
 
 /**
  * # 「Tp」Jackson Deserializer
- *
+ * <p>
  * Came from `vert.x` internally to support `io.vertx.core.json.JsonArray` deserialization, ignored.
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>

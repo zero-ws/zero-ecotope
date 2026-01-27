@@ -1,9 +1,9 @@
 package io.zerows.specification.vital;
 
 import io.zerows.platform.enums.EmApp;
-import io.zerows.specification.atomic.HBelong;
 import io.zerows.specification.app.HAmbient;
 import io.zerows.specification.app.HArk;
+import io.zerows.specification.atomic.HBelong;
 
 import java.util.function.Function;
 
@@ -43,7 +43,6 @@ public interface HOI extends HBelong, Function<HOI, HOI> {
      * 多层租户标识中返回子租户标识信息
      *
      * @param id 子租户标识
-     *
      * @return {@link HOI} 子租户标识信息
      */
     default HOI child(final String id) {

@@ -97,7 +97,6 @@ public class Is {
      * @param data       JsonArray 目录基础数据
      * @param storeField 目录字段
      * @param strict     严格模式和非严格模式
-     *
      * @return 从系统中读取的所有目录信息
      */
     public static Future<List<IDirectory>> directoryQr(final JsonArray data, final String storeField, final boolean strict) {
@@ -151,7 +150,7 @@ public class Is {
      *     - runComponent:   当前目录挂载的执行组件名称
      *     - storePath:      当前目录的基础存储路径
      * </code></pre>
-     *
+     * <p>
      * 注：storeRoot 部分是在加载时完成，所以storeRoot部分的数据会直接受到两部分内容影响
      * <pre><code>
      *     - 环境变量（新）：Z_SIS_STORE 中指定了初始化目录的根目录
@@ -168,7 +167,6 @@ public class Is {
      *
      * @param data   读取的目录基础数据
      * @param config 配置数据集
-     *
      * @return 返回同步完成的所有目录
      */
     public static Future<JsonArray> fsDocument(final JsonArray data, final JsonObject config) {

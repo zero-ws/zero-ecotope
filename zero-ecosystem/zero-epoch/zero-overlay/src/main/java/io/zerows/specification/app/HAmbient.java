@@ -73,7 +73,6 @@ public interface HAmbient {
      * @param name      模块名称
      * @param configCls 模块配置类
      * @param <T>       模块配置泛型
-     *
      * @return 模块配置
      */
     default <T> T extension(final String name, final Class<T> configCls) {
@@ -97,7 +96,6 @@ public interface HAmbient {
      * </code></pre>
      *
      * @param ark 应用容器
-     *
      * @return {@link HAmbient}
      */
     HAmbient registry(HArk ark);

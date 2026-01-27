@@ -57,7 +57,7 @@ import java.util.function.Consumer;
  *   <li>❌ 未发现实现：上层（如 KLauncher）应在 SPI 未找到实现时抛出清晰的异常（例如：{@code _11010Exception500BootIoMissing}）。</li>
  *   <li>📝 日志：在能量装配、路径解析、配置合并等关键节点输出可定位问题的日志。</li>
  * </ul>
- *
+ * <p>
  * {@link HBoot} 和 {@link HEnergy} 的协同工作原理
  * <pre>
  *     ZeroLauncher -> {@link BootIo} -> {@link HBoot} ( 启动组件集 )
@@ -116,7 +116,6 @@ public interface BootIo {
      * </pre>
      *
      * @param bootCls 启动类（通常是包含 main 函数的主类） 📌
-     *
      * @return 🧩 {@link HBoot} 启动配置组件
      */
     HBoot boot(Class<?> bootCls);
@@ -150,7 +149,6 @@ public interface BootIo {
      *
      * @param bootCls 启动类（通常用于定位配置根、计算扫描路径、确定归属应用等） 📌
      * @param args    启动参数（通常会合并进 {@link HEnergy}，并在上层注入到 {@code HConfig} 的 {@code "arguments"} 字段） 🧵
-     *
      * @return 组装完成且可用于后续流程的 {@link HEnergy} 实例（不应为 {@code null}） ⚡
      */
     HEnergy energy(Class<?> bootCls, String[] args);

@@ -10,20 +10,20 @@ import io.zerows.mbse.metadata.ActIn;
 
 /**
  * ## 「Channel」更新记录通道
- *
+ * <p>
  * ### 1. 基本介绍
- *
+ * <p>
  * 不带任何<strong>集成功能</strong>的标准更新组件，支持如下功能：
- *
+ * <p>
  * - 传入数据，更新模型对应数据
  * - 请求`PUT /api/ox/:identifier/:key`
- *
+ * <p>
  * ### 2. 通道详细
- *
+ * <p>
  * - 类型：ADAPTOR
- *
+ * <p>
  * ### 3. 请求格式
- *
+ * <p>
  * ```json
  * // <pre><code class="json">
  * {
@@ -34,9 +34,9 @@ import io.zerows.mbse.metadata.ActIn;
  * }
  * // </code></pre>
  * ```
- *
+ * <p>
  * ### 4. 响应格式
- *
+ * <p>
  * ```json
  * // <pre><code class="json">
  * {

@@ -27,7 +27,6 @@ public interface ElasticSearchClient {
      * findRunning index information
      *
      * @param index name of index
-     *
      * @return JsonObject for index information
      */
     JsonObject getIndex(String index);
@@ -39,7 +38,6 @@ public interface ElasticSearchClient {
      * @param numberOfShards   number of shards, default is 3
      * @param numberOfReplicas number of replicas, default is 2
      * @param mappings         fields were used to create index mapping
-     *
      * @return JsonObject like below
      * {
      * "isAcknowledged": true
@@ -55,7 +53,6 @@ public interface ElasticSearchClient {
      * @param index            name of index
      * @param numberOfShards   number of shards
      * @param numberOfReplicas number of replicas
-     *
      * @return JsonObject like below
      * {
      * "isAcknowledged": true
@@ -69,7 +66,6 @@ public interface ElasticSearchClient {
      * delete index by name
      *
      * @param index name of index
-     *
      * @return JsonObject like below
      * {
      * "isAcknowledged": true
@@ -84,7 +80,6 @@ public interface ElasticSearchClient {
      *
      * @param index      name of index
      * @param documentId document id
-     *
      * @return JsonObject like below
      * {
      * "index"; "",
@@ -101,7 +96,6 @@ public interface ElasticSearchClient {
      * @param index      name of index
      * @param documentId document id
      * @param source     json object of document
-     *
      * @return JsonObject like below
      * {
      * "index"; "",
@@ -121,7 +115,6 @@ public interface ElasticSearchClient {
      * @param index      name of index
      * @param documentId document id
      * @param source     json object of document
-     *
      * @return JsonObject like below
      * {
      * "index"; "",
@@ -140,7 +133,6 @@ public interface ElasticSearchClient {
      *
      * @param index      name of index
      * @param documentId document id
-     *
      * @return JsonObject like below
      * {
      * "index"; "",
@@ -164,7 +156,6 @@ public interface ElasticSearchClient {
      *               "from": 0, --- default is 0
      *               "size": 10 --- default is 10
      *               }
-     *
      * @return JsonObject like below
      * {
      * "status": "OK",

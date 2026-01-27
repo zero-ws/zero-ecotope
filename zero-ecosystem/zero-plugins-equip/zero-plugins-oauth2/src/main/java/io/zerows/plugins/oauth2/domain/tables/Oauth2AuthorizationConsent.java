@@ -8,11 +8,6 @@ import io.zerows.plugins.oauth2.domain.Indexes;
 import io.zerows.plugins.oauth2.domain.Keys;
 import io.zerows.plugins.oauth2.domain.Zdb;
 import io.zerows.plugins.oauth2.domain.tables.records.Oauth2AuthorizationConsentRecord;
-
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-
 import org.jooq.Condition;
 import org.jooq.Field;
 import org.jooq.Index;
@@ -32,59 +27,48 @@ import org.jooq.impl.DSL;
 import org.jooq.impl.SQLDataType;
 import org.jooq.impl.TableImpl;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+
 
 /**
  * OAuth2 授权同意（Consent）记录表
  */
-@SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
+@SuppressWarnings({"all", "unchecked", "rawtypes", "this-escape"})
 public class Oauth2AuthorizationConsent extends TableImpl<Oauth2AuthorizationConsentRecord> {
-
-    private static final long serialVersionUID = 1L;
 
     /**
      * The reference instance of <code>ZDB.OAUTH2_AUTHORIZATION_CONSENT</code>
      */
     public static final Oauth2AuthorizationConsent OAUTH2_AUTHORIZATION_CONSENT = new Oauth2AuthorizationConsent();
-
-    /**
-     * The class holding records for this type
-     */
-    @Override
-    public Class<Oauth2AuthorizationConsentRecord> getRecordType() {
-        return Oauth2AuthorizationConsentRecord.class;
-    }
-
+    private static final long serialVersionUID = 1L;
     /**
      * The column
      * <code>ZDB.OAUTH2_AUTHORIZATION_CONSENT.REGISTERED_CLIENT_ID</code>. 客户端
      * ID（OAUTH2_REGISTERED_CLIENT.ID）
      */
     public final TableField<Oauth2AuthorizationConsentRecord, String> REGISTERED_CLIENT_ID = createField(DSL.name("REGISTERED_CLIENT_ID"), SQLDataType.VARCHAR(100).nullable(false), this, "客户端 ID（OAUTH2_REGISTERED_CLIENT.ID）");
-
     /**
      * The column <code>ZDB.OAUTH2_AUTHORIZATION_CONSENT.PRINCIPAL_NAME</code>.
      * 主体名称（用户名 / userId）
      */
     public final TableField<Oauth2AuthorizationConsentRecord, String> PRINCIPAL_NAME = createField(DSL.name("PRINCIPAL_NAME"), SQLDataType.VARCHAR(200).nullable(false), this, "主体名称（用户名 / userId）");
-
     /**
      * The column <code>ZDB.OAUTH2_AUTHORIZATION_CONSENT.AUTHORITIES</code>.
      * 已同意的权限集合（逗号分隔）
      */
     public final TableField<Oauth2AuthorizationConsentRecord, String> AUTHORITIES = createField(DSL.name("AUTHORITIES"), SQLDataType.VARCHAR(1000).nullable(false), this, "已同意的权限集合（逗号分隔）");
-
     /**
      * The column <code>ZDB.OAUTH2_AUTHORIZATION_CONSENT.TENANT_ID</code>. 租户
      * ID（可选）
      */
     public final TableField<Oauth2AuthorizationConsentRecord, String> TENANT_ID = createField(DSL.name("TENANT_ID"), SQLDataType.VARCHAR(64), this, "租户 ID（可选）");
-
     /**
      * The column <code>ZDB.OAUTH2_AUTHORIZATION_CONSENT.APP_ID</code>. 应用
      * ID（多应用场景可用）
      */
     public final TableField<Oauth2AuthorizationConsentRecord, String> APP_ID = createField(DSL.name("APP_ID"), SQLDataType.VARCHAR(64), this, "应用 ID（多应用场景可用）");
-
     /**
      * The column <code>ZDB.OAUTH2_AUTHORIZATION_CONSENT.EXT</code>. 扩展字段（业务自定义）
      */
@@ -119,6 +103,14 @@ public class Oauth2AuthorizationConsent extends TableImpl<Oauth2AuthorizationCon
      */
     public Oauth2AuthorizationConsent() {
         this(DSL.name("OAUTH2_AUTHORIZATION_CONSENT"), null);
+    }
+
+    /**
+     * The class holding records for this type
+     */
+    @Override
+    public Class<Oauth2AuthorizationConsentRecord> getRecordType() {
+        return Oauth2AuthorizationConsentRecord.class;
     }
 
     @Override

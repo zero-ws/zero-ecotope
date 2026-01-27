@@ -1,8 +1,8 @@
 package io.zerows.extension.module.mbsecore.metadata.builtin;
 
 import io.zerows.extension.module.mbsecore.boot.Ao;
-import io.zerows.extension.module.mbsecore.metadata.Model;
 import io.zerows.extension.module.mbsecore.domain.tables.pojos.MAttribute;
+import io.zerows.extension.module.mbsecore.metadata.Model;
 import io.zerows.mbse.metadata.HAtomReference;
 import io.zerows.platform.enums.modeling.EmAttribute;
 import io.zerows.platform.metadata.RReference;
@@ -18,7 +18,7 @@ import java.util.Set;
 
 /**
  * ## Reference Calculation
- *
+ * <p>
  * {@link HAtomReference}
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>

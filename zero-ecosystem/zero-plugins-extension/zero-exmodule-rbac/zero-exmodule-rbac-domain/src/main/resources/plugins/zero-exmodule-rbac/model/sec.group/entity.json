@@ -1,17 +1,17 @@
 {
-    "name": "group",
-    "daoCls": "S_GROUP",
-    "field": {
-        "unique": [
-            [
-                "code",
-                "sigma"
-            ]
-        ]
-    },
-    "transform": {
-        "tree": {
-            "in": "name"
-        }
+  "name": "group",
+  "daoCls": "S_GROUP",
+  "field": {
+    "unique": [
+      [
+        "code",
+        "sigma"
+      ]
+    ]
+  },
+  "transform": {
+    "tree": {
+      "in": "name"
     }
+  }
 }

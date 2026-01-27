@@ -63,14 +63,14 @@ public interface HLife extends Serializable, HJson {
      *     多租户多应用项目      N                N                  sigma = tenantId
      *
      * </code></pre>
-     *
+     * <p>
      * 关于 sigma 值的基本原则如下：
      * <ul>
      *     <li>Tenant租户标识是基于 sigma 而存在的，在单租户多应用项目中例外</li>
      *     <li>应用表示分两部分：id 负责应用所属，appKey 负责私有、敏感、安全数据的应用标识（随机字符串）</li>
      *     <li>如果是多租户项目，那么一个 sigma 中可能包含多个 id，如：App1, App2, App3</li>
      * </ul>
-     *
+     * <p>
      * 此处的 namespace 名空间就是和应用直接绑定的，它控制了如下几种资源
      * <pre><code>
      *                             Zero Extension Module 中的表对应关系                标识字段
@@ -80,7 +80,7 @@ public interface HLife extends Serializable, HJson {
      *     4. 模型定义                 M_MODEL                                         namespace
      *     5. 接口/任务/服务组件        I_API / I_JOB / I_SERVICE                       namespace
      * </code></pre>
-     *
+     * <p>
      * 简单说：所有业务层相关的内容，包括项目、工作空间、版本库都以 namespace 为主
      *
      * @return 统一名空间
@@ -95,7 +95,7 @@ public interface HLife extends Serializable, HJson {
      *     Production:                  ofMain/                         生产环境
      *     Mockito:                     src/mock/resources/             测试环境
      * </code></pre>
-     *
+     * <p>
      * 每个目录中的结构基础规范如下：
      * <pre><code>
      * /atom/                           Modeler, 建模专用目录（后期的标准化配置目录）
@@ -116,7 +116,7 @@ public interface HLife extends Serializable, HJson {
      * /plugin/                         Module, 插件目录，不同插件使用
      * /workflow/                       Workflow, 工作流引擎配置目录
      * </code></pre>
-     *
+     * <p>
      * 项目运行时会创建三个核心的文件目录，用于放置项目本身的工程文件
      * <ul>
      *     <li>项目出厂设置：/init/workspace/，用于恢复所有项目的出厂设置专用目录。</li>

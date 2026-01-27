@@ -17,9 +17,19 @@
 DROP TABLE IF EXISTS S_PACKET;
 CREATE TABLE IF NOT EXISTS S_PACKET
 (
-    `KEY`           VARCHAR(36) COMMENT '「key」- 包信息',
-    `CODE`          VARCHAR(255) COMMENT '「code」- 关联的 PATH 表对应的 code',
-    `RESOURCE`      VARCHAR(255) COMMENT '「resource」- 关联的资源表对应的 code',
+    `KEY`
+    VARCHAR
+(
+    36
+) COMMENT '「key」- 包信息',
+    `CODE` VARCHAR
+(
+    255
+) COMMENT '「code」- 关联的 PATH 表对应的 code',
+    `RESOURCE` VARCHAR
+(
+    255
+) COMMENT '「resource」- 关联的资源表对应的 code',
 
     -- 当前资源记录影响的维度计算
     /*
@@ -46,9 +56,12 @@ CREATE TABLE IF NOT EXISTS S_PACKET
      *     }
      * }
      **/
-    `H_TYPE`        VARCHAR(16) COMMENT '「hType」- 行过滤类型',
-    `H_MAPPING`     LONGTEXT COMMENT '「hMapping」- 字段映射关系，存在转换时必须',
-    `H_CONFIG`      LONGTEXT COMMENT '「hConfig」- 字段附加配置',
+    `H_TYPE` VARCHAR
+(
+    16
+) COMMENT '「hType」- 行过滤类型',
+    `H_MAPPING` LONGTEXT COMMENT '「hMapping」- 字段映射关系，存在转换时必须',
+    `H_CONFIG` LONGTEXT COMMENT '「hConfig」- 字段附加配置',
 
     /*
      * projection 的变更，列配置
@@ -67,9 +80,12 @@ CREATE TABLE IF NOT EXISTS S_PACKET
      *     }
      * }
      */
-    `V_TYPE`        VARCHAR(16) COMMENT '「vType」- 列过滤类型',
-    `V_MAPPING`     LONGTEXT COMMENT '「vMapping」- 列字段映射关系，存在转换时必须',
-    `V_CONFIG`      LONGTEXT COMMENT '「vConfig」- 列配置',
+    `V_TYPE` VARCHAR
+(
+    16
+) COMMENT '「vType」- 列过滤类型',
+    `V_MAPPING` LONGTEXT COMMENT '「vMapping」- 列字段映射关系，存在转换时必须',
+    `V_CONFIG` LONGTEXT COMMENT '「vConfig」- 列配置',
 
     /*
      * criteria 的变更，核心配置
@@ -82,34 +98,61 @@ CREATE TABLE IF NOT EXISTS S_PACKET
      *     }
      * }
      */
-    `Q_TYPE`        VARCHAR(16) COMMENT '「qType」- 条件模板',
-    `Q_MAPPING`     LONGTEXT COMMENT '「qMapping」- 查询条件映射关系',
-    `Q_CONFIG`      LONGTEXT COMMENT '「qConfig」- 条件配置（界面配置相关）',
+    `Q_TYPE` VARCHAR
+(
+    16
+) COMMENT '「qType」- 条件模板',
+    `Q_MAPPING` LONGTEXT COMMENT '「qMapping」- 查询条件映射关系',
+    `Q_CONFIG` LONGTEXT COMMENT '「qConfig」- 条件配置（界面配置相关）',
 
     -- 保留设置（扩展自定义配置）
-    `RUN_COMPONENT` VARCHAR(255) COMMENT '「runComponent」- 自定义模式下的组件',
-    `RUN_CONFIG`    LONGTEXT COMMENT '「runConfig」- 运行专用配置',
+    `RUN_COMPONENT` VARCHAR
+(
+    255
+) COMMENT '「runComponent」- 自定义模式下的组件',
+    `RUN_CONFIG` LONGTEXT COMMENT '「runConfig」- 运行专用配置',
     -- 访问者定义（绑定的 resource 中 virtual = true）
     -- 当前资源记录影响的视图计算，和资源访问语法相同
-    `SEEK_SYNTAX`   LONGTEXT COMMENT '「seekSyntax」- 访问者语法',
-    `SEEK_CONFIG`   LONGTEXT COMMENT '「seekConfig」- 访问者配置',
+    `SEEK_SYNTAX` LONGTEXT COMMENT '「seekSyntax」- 访问者语法',
+    `SEEK_CONFIG` LONGTEXT COMMENT '「seekConfig」- 访问者配置',
 
     -- ------------------------------ 公共字段 --------------------------------
-    `SIGMA`         VARCHAR(128) COMMENT '「sigma」- 用户组绑定的统一标识',
-    `LANGUAGE`      VARCHAR(10) COMMENT '「language」- 使用的语言',
-    `ACTIVE`        BIT COMMENT '「active」- 是否启用',
-    `METADATA`      TEXT COMMENT '「metadata」- 附加配置数据',
+    `SIGMA` VARCHAR
+(
+    128
+) COMMENT '「sigma」- 用户组绑定的统一标识',
+    `LANGUAGE` VARCHAR
+(
+    10
+) COMMENT '「language」- 使用的语言',
+    `ACTIVE` BIT COMMENT '「active」- 是否启用',
+    `METADATA` TEXT COMMENT '「metadata」- 附加配置数据',
 
     -- Auditor字段
-    `CREATED_AT`    DATETIME COMMENT '「createdAt」- 创建时间',
-    `CREATED_BY`    VARCHAR(36) COMMENT '「createdBy」- 创建人',
-    `UPDATED_AT`    DATETIME COMMENT '「updatedAt」- 更新时间',
-    `UPDATED_BY`    VARCHAR(36) COMMENT '「updatedBy」- 更新人',
+    `CREATED_AT` DATETIME COMMENT '「createdAt」- 创建时间',
+    `CREATED_BY` VARCHAR
+(
+    36
+) COMMENT '「createdBy」- 创建人',
+    `UPDATED_AT` DATETIME COMMENT '「updatedAt」- 更新时间',
+    `UPDATED_BY` VARCHAR
+(
+    36
+) COMMENT '「updatedBy」- 更新人',
 
-    `APP_ID`        VARCHAR(36) COMMENT '「appId」- 应用ID',
-    `TENANT_ID`     VARCHAR(36) COMMENT '「tenantId」- 租户ID',
-    PRIMARY KEY (`KEY`) USING BTREE
-);
+    `APP_ID` VARCHAR
+(
+    36
+) COMMENT '「appId」- 应用ID',
+    `TENANT_ID` VARCHAR
+(
+    36
+) COMMENT '「tenantId」- 租户ID',
+    PRIMARY KEY
+(
+    `KEY`
+) USING BTREE
+    );
 
 -- changeset Lang:ox-packet-2
 -- Unique Key：独立唯一主键

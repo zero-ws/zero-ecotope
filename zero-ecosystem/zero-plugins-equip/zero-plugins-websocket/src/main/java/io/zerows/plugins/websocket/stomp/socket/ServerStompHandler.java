@@ -420,7 +420,6 @@ public class ServerStompHandler implements ServerWsHandler {
      * Return the authenticated user for this session.
      *
      * @param session session ID for the server connection.
-     *
      * @return the user provided by the {@link AuthenticationProvider} or null if not found.
      */
     @Override
@@ -437,7 +436,6 @@ public class ServerStompHandler implements ServerWsHandler {
      * Gets the destination with the given name..
      *
      * @param destination the destination
-     *
      * @return the {@link Destination}, {@code null} if not found.
      */
     @Override
@@ -479,7 +477,6 @@ public class ServerStompHandler implements ServerWsHandler {
      * Configures the STOMP server to act as a bridge with the Vert.x event bus.
      *
      * @param options the configuration options
-     *
      * @return the current {@link StompServerHandler}.
      * @see Vertx#eventBus()
      */
@@ -537,7 +534,6 @@ public class ServerStompHandler implements ServerWsHandler {
      * The handler will only be called if the connection supports heartbeats.
      *
      * @param handler the action to action when a `PING` needs to be sent.
-     *
      * @return the current {@link StompServerHandler}
      */
     @Override

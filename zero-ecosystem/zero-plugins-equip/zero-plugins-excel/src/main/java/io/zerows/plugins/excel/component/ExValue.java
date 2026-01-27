@@ -24,7 +24,6 @@ public interface ExValue {
      *
      * @param value    原始值
      * @param paramMap 参数表
-     *
      * @return 转换后的值
      */
     Object to(Object value, ConcurrentMap<String, String> paramMap);

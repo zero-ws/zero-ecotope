@@ -54,7 +54,6 @@ public interface MessageAgent {
      * </code></pre>
      *
      * @param data 站内信数据
-     *
      * @return 站内信数据
      */
     @Path("/message")

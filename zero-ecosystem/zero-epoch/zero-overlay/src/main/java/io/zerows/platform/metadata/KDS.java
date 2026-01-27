@@ -141,13 +141,13 @@ public class KDS {
      *   🏷️ 多应用/多租户环境：需要显式从某个应用（appOr）的 KDS 中取某个命名数据源
      *   🎛️ 跨上下文访问：调用方已知“应用标识 + 数据源名”，希望精确获取对应 Database
      * </pre>
-     *
+     * <p>
      * 🧠 行为说明
      * <pre>
      *   🔑 先通过 of(String) 获取目标应用的 KDS 实例，再以 name 索引其 DBS 并取出 Database
      *   ⚙️ 查找复杂度近似 O(1)，底层依赖 KDS 的并发映射与 DBMany 的集中管理
      * </pre>
-     *
+     * <p>
      * ⚠️ 注意/边界
      * <pre>
      *   ❗ 若目标应用未注册该数据源名，kds.findRunning(name) 可能返回 null，进而触发 NullPointerException
@@ -156,7 +156,6 @@ public class KDS {
      *
      * @param name  数据源名称（例如：master、master-history、master-workflow）
      * @param appOr 目标应用标识（可为 appName / appId / appKey / sigma 中任意一种键）
-     *
      * @return 目标应用中名为 name 的 {@link Database} 实例
      */
     public static Database findDatabase(final String name, final String appOr) {
@@ -171,13 +170,13 @@ public class KDS {
      *   ⚡ 单应用场景或已由环境变量（如 Z_APP）确定当前应用
      *   🧾 需要从本应用 KDS 中获取命名数据源（如默认库、历史库、工作流库）
      * </pre>
-     *
+     * <p>
      * 🧠 行为说明
      * <pre>
      *   🧷 通过 of() 基于环境上下文得到当前应用的 KDS，再以 name 获取 DBS → Database
      *   🏁 常与快捷方法 findCurrent() / findHistory() / findCamunda() 配合使用
      * </pre>
-     *
+     * <p>
      * ⚠️ 注意/边界
      * <pre>
      *   ❗ 若当前应用未注册该数据源名，kds.findRunning(name) 可能为 null，会导致 NullPointerException
@@ -185,7 +184,6 @@ public class KDS {
      * </pre>
      *
      * @param name 数据源名称（例如：master、master-history、master-workflow）
-     *
      * @return 当前应用中名为 name 的 {@link Database} 实例
      */
     public static Database findDatabase(final String name) {
@@ -200,7 +198,6 @@ public class KDS {
      * 注册数据源实例到当前 KDS 中
      *
      * @param dbs 数据源实例
-     *
      * @return 当前 KDS 实例
      */
     public KDS registry(final DBS dbs) {

@@ -29,7 +29,7 @@ import java.util.function.Function;
  *        填满，而是在分析过程中动态填充。
  *     4. 后期追加 EMF 中的元模型规范来完善此处的定义
  * </code></pre>
- *
+ * <p>
  * 元模型解析部分数据格式：
  * JsonObject 类型
  * // <pre><code class="json">

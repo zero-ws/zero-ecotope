@@ -5,9 +5,9 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.LogOf;
 import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.module.mbsecore.domain.tables.daos.MAttributeDao;
 import io.zerows.extension.module.mbsecore.domain.tables.pojos.MAttribute;
-import io.zerows.epoch.store.jooq.DB;
 import io.zerows.program.Ux;
 
 import java.util.List;

@@ -44,7 +44,7 @@ import java.util.Set;
  *     1. {@link HApp} 应用池
  *     2. {@link KTenement} 租户池
  * </code></pre>
- *
+ * <p>
  * 上下文环境在启动时会执行初始化，初始化过程中加载应用对应的配置信息
  * <pre><code>
  *     1. {@link HApp} 应用加载，加载过程中有不同流程
@@ -86,7 +86,6 @@ public interface HRegistry<T> {
      *
      * @param container 容器对象
      * @param config    配置信息
-     *
      * @return {@link Set<HArk>}
      */
     Set<HArk> registry(T container, HConfig config);
@@ -96,7 +95,6 @@ public interface HRegistry<T> {
      *
      * @param container 容器对象
      * @param config    配置信息
-     *
      * @return {@link Future}
      */
     default Future<Set<HArk>> registryAsync(final T container, final HConfig config) {

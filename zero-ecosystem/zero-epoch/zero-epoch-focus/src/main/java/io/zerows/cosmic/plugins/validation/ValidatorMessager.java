@@ -12,7 +12,11 @@ import org.hibernate.validator.internal.engine.messageinterpolation.parser.Token
 import org.hibernate.validator.internal.util.ConcurrentReferenceHashMap;
 import org.hibernate.validator.spi.resourceloading.ResourceBundleLocator;
 
-import java.util.*;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

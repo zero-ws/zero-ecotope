@@ -6,25 +6,37 @@ import java.util.Objects;
 
 /**
  * ## 「Pojo」属性报表
- *
+ * <p>
  * ### 1. 基本介绍
- *
+ * <p>
  * 属性报表专用数据结构。
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 public class FieldReport {
-    /** `UI_FORM / UI_LIST`中存储的identifier模型标识符。 */
+    /**
+     * `UI_FORM / UI_LIST`中存储的identifier模型标识符。
+     */
     private transient String identifier;
-    /** `UI_FORM / UI_LIST`中的编码字段`code`，系统编码。 */
+    /**
+     * `UI_FORM / UI_LIST`中的编码字段`code`，系统编码。
+     */
     private transient String control;
-    /** 模型名，`M_MODEL` 中定义属性的 name 字段。 **/
+    /**
+     * 模型名，`M_MODEL` 中定义属性的 name 字段。
+     **/
     private transient String attribute;
-    /** UI配置中属性名，`UI_FIELD`属性`name`，`UI_LIST`中的`dataIndex`，`UI_FORM`中的`field`。 **/
+    /**
+     * UI配置中属性名，`UI_FIELD`属性`name`，`UI_LIST`中的`dataIndex`，`UI_FORM`中的`field`。
+     **/
     private transient String uiField;
-    /** 控件类型：`FORM / LIST / NONE` */
+    /**
+     * 控件类型：`FORM / LIST / NONE`
+     */
     private transient ControlType type;
-    /** 字段匹配结果状态，{@link FieldStatus} */
+    /**
+     * 字段匹配结果状态，{@link FieldStatus}
+     */
     private transient FieldStatus status;
 
     /**

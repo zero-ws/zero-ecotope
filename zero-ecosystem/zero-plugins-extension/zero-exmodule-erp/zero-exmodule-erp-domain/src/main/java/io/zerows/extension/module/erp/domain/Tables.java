@@ -30,7 +30,7 @@ import io.zerows.extension.module.erp.domain.tables.TVendorHour;
 /**
  * Convenience access to all tables in ZDB.
  */
-@SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
+@SuppressWarnings({"all", "unchecked", "rawtypes", "this-escape"})
 public class Tables {
 
     /**

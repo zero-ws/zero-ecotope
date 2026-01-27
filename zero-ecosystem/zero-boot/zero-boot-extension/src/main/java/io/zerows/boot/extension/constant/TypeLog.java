@@ -2,20 +2,20 @@ package io.zerows.boot.extension.constant;
 
 /**
  * ## 日志类型
- *
+ * <p>
  * ### 1. 基本介绍
- *
+ * <p>
  * 日志类型枚举变量，用来设置日志类型，对应到：`X_LOG`表中的`TYPE`字段，该枚举值目前只被`io.zerows.epoch.bootplus.extension.operation.info`包中的日志器使用，
  * 支持<strong>同步</strong>和<strong>异步</strong>两种日志记录模式。
- *
+ * <p>
  * ### 2. 核心点
- *
+ * <p>
  * - 日志全部存储在`X_LOG`数据表中。
  * - 日志类型映射到`TYPE`字段，并且在日志管理中直接生成左侧的类型信息。
  * - 该数据类型目前只被`io.zerows.epoch.bootplus.extension.operation.info`中的日志器使用。
- *
+ * <p>
  * ### 3. 内部代码
- *
+ * <p>
  * ```java
  * // <pre><code class="java">
  *     // 数据库错误日志生成

@@ -28,7 +28,6 @@ class IoHelper {
 
     /**
      * @param combineData {@link JsonObject}
-     *
      * @return {@link ConcurrentMap}
      */
     static ConcurrentMap<String, OExpression> afterExpression(final JsonObject combineData) {
@@ -67,7 +66,6 @@ class IoHelper {
      * ```
      *
      * @param combineData {@link JsonObject}
-     *
      * @return {@link JsonObject}
      */
     static JsonObject configCompress(final JsonObject combineData) {
@@ -90,7 +88,6 @@ class IoHelper {
      * ```
      *
      * @param ruleKey {@link String}
-     *
      * @return {@link BiFunction}
      */
     static BiFunction<HRecord, JsonObject, JsonObject> compressFn(final String ruleKey) {
@@ -104,7 +101,6 @@ class IoHelper {
     /**
      * @param item   {@link JsonObject}
      * @param config {@link JsonObject}
-     *
      * @return {@link Object}
      */
     static Object end(final JsonObject item, final JsonObject config) {

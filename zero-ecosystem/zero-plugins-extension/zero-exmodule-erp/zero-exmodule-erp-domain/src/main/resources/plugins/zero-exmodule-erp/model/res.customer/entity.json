@@ -1,20 +1,20 @@
 {
-    "name": "customer",
-    "daoCls": "E_CUSTOMER",
-    "field": {
-        "numbers": {
-            "code": "NUM.CUSTOMER"
-        },
-        "unique": [
-            [
-                "taxCode",
-                "sigma"
-            ]
-        ]
+  "name": "customer",
+  "daoCls": "E_CUSTOMER",
+  "field": {
+    "numbers": {
+      "code": "NUM.CUSTOMER"
     },
-    "transform": {
-        "initial": {
-            "type": "`${type}`"
-        }
+    "unique": [
+      [
+        "taxCode",
+        "sigma"
+      ]
+    ]
+  },
+  "transform": {
+    "initial": {
+      "type": "`${type}`"
     }
+  }
 }

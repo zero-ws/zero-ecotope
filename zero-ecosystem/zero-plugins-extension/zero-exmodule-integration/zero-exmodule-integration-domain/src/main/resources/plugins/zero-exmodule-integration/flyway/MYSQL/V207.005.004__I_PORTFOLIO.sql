@@ -6,9 +6,19 @@
 DROP TABLE IF EXISTS I_PORTFOLIO;
 CREATE TABLE IF NOT EXISTS I_PORTFOLIO
 (
-    `KEY`              VARCHAR(36) COMMENT '「key」- 目录专用ID',
-    `NAME`             VARCHAR(255) COMMENT '「name」- 目录名称',
-    `CODE`             VARCHAR(255) COMMENT '「code」- 目录系统编码',
+    `KEY`
+    VARCHAR
+(
+    36
+) COMMENT '「key」- 目录专用ID',
+    `NAME` VARCHAR
+(
+    255
+) COMMENT '「name」- 目录名称',
+    `CODE` VARCHAR
+(
+    255
+) COMMENT '「code」- 目录系统编码',
 
     /*
      * -- CREATED,   新创建
@@ -16,10 +26,19 @@ CREATE TABLE IF NOT EXISTS I_PORTFOLIO
      * -- EXPIRED,   更新后
      * -- FAILURE,   连接失败
      */
-    `STATUS`           VARCHAR(255) COMMENT '「status」- 目录状态',
+    `STATUS` VARCHAR
+(
+    255
+) COMMENT '「status」- 目录状态',
     -- 目录类型，此处目录类型和集成类型一致，如 ldap / ldap 标识 LDAP 集成类型和目录类型
-    `TYPE`             VARCHAR(255) COMMENT '「type」- 目录类型',
-    `INTEGRATION_ID`   VARCHAR(36) COMMENT '「integrationId」- 是否关联集成配置，管理时直接同步',
+    `TYPE` VARCHAR
+(
+    255
+) COMMENT '「type」- 目录类型',
+    `INTEGRATION_ID` VARCHAR
+(
+    36
+) COMMENT '「integrationId」- 是否关联集成配置，管理时直接同步',
 
     /*
      * 目录的关联，使用
@@ -38,36 +57,66 @@ CREATE TABLE IF NOT EXISTS I_PORTFOLIO
      * 2）根据用户所配置的目录，可选择手动同步，如果是自动同步所有，则提取优先级比较高的数据作为核心数据
      * 3）I_PORTFOLIO 中存储的配置可提供子账号功能
      */
-    `OWNER_TYPE`       VARCHAR(20) COMMENT '「ownerType」- 关联主体类型',
-    `OWNER`            VARCHAR(36) COMMENT '「owner」- 关联主体主键',
+    `OWNER_TYPE` VARCHAR
+(
+    20
+) COMMENT '「ownerType」- 关联主体类型',
+    `OWNER` VARCHAR
+(
+    36
+) COMMENT '「owner」- 关联主体主键',
 
     /* runComponent 会直接消费对应的几个字段中存储的配置值 */
     -- 执行组件专用处理，加载基础规则
-    `RUN_COMPONENT`    TEXT COMMENT '「runComponent」- 执行组件，LDAP执行专用',
-    `RUN_CONFIG`       LONGTEXT COMMENT '「runConfig」- 执行组件额外配置',
+    `RUN_COMPONENT` TEXT COMMENT '「runComponent」- 执行组件，LDAP执行专用',
+    `RUN_CONFIG` LONGTEXT COMMENT '「runConfig」- 执行组件额外配置',
 
     -- 执行系统专用的数据内容
-    `DATA_KEY`         VARCHAR(512) COMMENT '「dataKey」- LDAP路径做完整标识',
-    `DATA_CONFIG`      LONGTEXT COMMENT '「dataConfig」- 数据基础配置',
-    `DATA_SECURE`      LONGTEXT COMMENT '「dataSecure」- 安全专用配置',
+    `DATA_KEY` VARCHAR
+(
+    512
+) COMMENT '「dataKey」- LDAP路径做完整标识',
+    `DATA_CONFIG` LONGTEXT COMMENT '「dataConfig」- 数据基础配置',
+    `DATA_SECURE` LONGTEXT COMMENT '「dataSecure」- 安全专用配置',
     `DATA_INTEGRATION` LONGTEXT COMMENT '「dataIntegration」- 绑定好过后，导入/导出数据专用配置',
 
     -- ------------------------------ 公共字段 --------------------------------
-    `SIGMA`            VARCHAR(128) COMMENT '「sigma」- 用户组绑定的统一标识',
-    `LANGUAGE`         VARCHAR(10) COMMENT '「language」- 使用的语言',
-    `ACTIVE`           BIT COMMENT '「active」- 是否启用',
-    `METADATA`         TEXT COMMENT '「metadata」- 附加配置数据',
+    `SIGMA` VARCHAR
+(
+    128
+) COMMENT '「sigma」- 用户组绑定的统一标识',
+    `LANGUAGE` VARCHAR
+(
+    10
+) COMMENT '「language」- 使用的语言',
+    `ACTIVE` BIT COMMENT '「active」- 是否启用',
+    `METADATA` TEXT COMMENT '「metadata」- 附加配置数据',
 
     -- Auditor字段
-    `CREATED_AT`       DATETIME COMMENT '「createdAt」- 创建时间',
-    `CREATED_BY`       VARCHAR(36) COMMENT '「createdBy」- 创建人',
-    `UPDATED_AT`       DATETIME COMMENT '「updatedAt」- 更新时间',
-    `UPDATED_BY`       VARCHAR(36) COMMENT '「updatedBy」- 更新人',
+    `CREATED_AT` DATETIME COMMENT '「createdAt」- 创建时间',
+    `CREATED_BY` VARCHAR
+(
+    36
+) COMMENT '「createdBy」- 创建人',
+    `UPDATED_AT` DATETIME COMMENT '「updatedAt」- 更新时间',
+    `UPDATED_BY` VARCHAR
+(
+    36
+) COMMENT '「updatedBy」- 更新人',
 
-    `APP_ID`           VARCHAR(36) COMMENT '「appId」- 应用ID',
-    `TENANT_ID`        VARCHAR(36) COMMENT '「tenantId」- 租户ID',
-    PRIMARY KEY (`KEY`) USING BTREE
-);
+    `APP_ID` VARCHAR
+(
+    36
+) COMMENT '「appId」- 应用ID',
+    `TENANT_ID` VARCHAR
+(
+    36
+) COMMENT '「tenantId」- 租户ID',
+    PRIMARY KEY
+(
+    `KEY`
+) USING BTREE
+    );
 -- changeset Lang:ox-o_portfolio-2
 ALTER TABLE I_PORTFOLIO
     ADD UNIQUE (`CODE`, `SIGMA`);

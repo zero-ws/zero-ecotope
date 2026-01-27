@@ -1,19 +1,19 @@
 {
-    "forest": {
-        "root": "resource.tree",
-        "isTree": true,
-        "tree": {
-            "title": "name"
-        }
-    },
-    "vectorField": "identifier",
-    "visitant": {
-        "type": "OP",
-        "phase": "EAGER"
-    },
-    "key": {
-        "aclVisible": "data"
-    },
-    "vector": {
+  "forest": {
+    "root": "resource.tree",
+    "isTree": true,
+    "tree": {
+      "title": "name"
     }
+  },
+  "vectorField": "identifier",
+  "visitant": {
+    "type": "OP",
+    "phase": "EAGER"
+  },
+  "key": {
+    "aclVisible": "data"
+  },
+  "vector": {
+  }
 }

@@ -1,7 +1,7 @@
 package io.zerows.plugins.swagger.management;
 
-import io.zerows.plugins.swagger.SwaggerData;
 import io.zerows.platform.management.AbstractAmbiguity;
+import io.zerows.plugins.swagger.SwaggerData;
 import io.zerows.specification.development.compiled.HBundle;
 
 /**

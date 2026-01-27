@@ -18,7 +18,6 @@ class _Modeler extends _It {
      * 建模专用转换，将记录转换成JsonObject
      *
      * @param records 记录
-     *
      * @return JsonObject
      */
 
@@ -35,7 +34,6 @@ class _Modeler extends _It {
      *
      * @param atom    模型原子
      * @param options 配置项
-     *
      * @return 缓存键
      */
 
@@ -47,7 +45,6 @@ class _Modeler extends _It {
      * 构造应用专用的缓存键，
      *
      * @param ark 应用配置容器 {@link HArk}
-     *
      * @return 缓存键
      */
 
@@ -64,7 +61,6 @@ class _Modeler extends _It {
      * </code></pre>
      *
      * @param id 租户ID
-     *
      * @return 租户ID
      */
 
@@ -84,7 +80,6 @@ class _Modeler extends _It {
      * </code></pre>
      *
      * @param ark 应用配置容器 {@link HArk}
-     *
      * @return 缓存键
      */
 
@@ -106,7 +101,6 @@ class _Modeler extends _It {
      *
      * @param ark  应用配置容器 {@link HArk}
      * @param mode 模式
-     *
      * @return 缓存键
      */
 
@@ -127,7 +121,6 @@ class _Modeler extends _It {
      * </code></pre>
      *
      * @param ark 应用配置容器 {@link HArk}
-     *
      * @return 缓存键
      */
 
@@ -149,7 +142,6 @@ class _Modeler extends _It {
      *
      * @param ark  应用配置容器 {@link HArk}
      * @param mode 模式
-     *
      * @return 缓存键
      */
 
