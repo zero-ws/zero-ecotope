@@ -1,8 +1,9 @@
 package io.zerows.epoch.configuration;
 
+import io.r2mo.io.common.HFS;
 import io.r2mo.typed.annotation.SPID;
 import io.r2mo.typed.exception.web._500ServerInternalException;
-import io.vertx.core.json.JsonObject;
+import io.r2mo.typed.json.JObject;
 import io.zerows.epoch.spec.InPreArgs;
 import io.zerows.epoch.spec.InPreVertx;
 import io.zerows.epoch.spec.YmConfiguration;
@@ -10,8 +11,6 @@ import io.zerows.specification.app.HApp;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.ByteArrayInputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -20,7 +19,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public class NacosConfigProvider implements ConfigProvider {
     @Override
-    public YmConfiguration configure(final InPreArgs config, final HApp app) {
+    public ConfigFs<YmConfiguration> configure(final InPreArgs config, final HApp app) {
         // 提取 Nacos 连接选项
         final NacosOptions options = config.optionsAs(NacosOptions.class);
 
@@ -33,6 +32,7 @@ public class NacosConfigProvider implements ConfigProvider {
         // 应用选项矫正
         options.applyOption();
 
+        // Nacos 配置连接
         final List<NacosMeta> metaList = NacosRule.of().parseRule(configVertx.getImports(), app);
 
         final String combined = metaList.stream()
@@ -41,8 +41,9 @@ public class NacosConfigProvider implements ConfigProvider {
             .collect(Collectors.joining("\n---\n"));
 
         final String parsedContent = Ut.compileYml(combined);
-        final JsonObject parsedObj = Ut.ioYaml(new ByteArrayInputStream(parsedContent.getBytes(StandardCharsets.UTF_8)));
-        return Ut.deserialize(parsedObj, YmConfiguration.class);
+        // 有内容，直接解析之后处理
+        final JObject parsed = HFS.of().ymlForJ(parsedContent);
+        return new ConfigFs<>(parsed, YmConfiguration.class);
     }
 
     private void configureEnsure(final NacosOptions options, final InPreVertx.Config configVertx,

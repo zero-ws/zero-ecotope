@@ -47,6 +47,10 @@ import java.util.Set;
  * 当前 {@link HActor} 不负责加载应用上下文环境，它所负责的主要是 Document Engine 的上下文初始化，也需要在 {@link HAmbient} 之后执行，所以
  * 即使：-ambient 模块是提供者，但它作为模块执行时主逻辑依旧是消费者。如果在微服务环境之下可直接更改 {@link MDModuleRegistry} 的实现逻辑来完成
  * 云环境的上下文对接，这样所有的模块都共享云环境中的核心上下文，而不需要单独更改。
+ * <pre>
+ *     配置块：
+ *
+ * </pre>
  *
  * @author lang : 2025-12-15
  */
@@ -63,6 +67,16 @@ public class MDAmbientActor extends MDModuleActor {
     @Override
     protected Future<Boolean> startAsync(final HAmbient ambient, final Vertx vertxRef) {
         final AtConfig config = this.manager().config();
+        // Document Engine 文档管理平台
+        return this.startDocAsync(ambient, config).compose(docDone -> {
+            // 核心注册模块
+            final HRegistry<HArk> registry = HRegistry.of(MID.REGISTRY_ID);
+            return Future.succeededFuture(Boolean.TRUE);
+        });
+    }
+
+    // -------------------- Only Office 文档管理平台 ---------------------
+    private Future<Boolean> startDocAsync(final HAmbient ambient, final AtConfig config) {
         final boolean disabled = Ut.isNil(config.getFileIntegration());
         if (disabled) {
             log.info("{} 文档平台已禁用 Document Platform Disabled !!", AtConstant.K_PREFIX);
@@ -72,16 +86,16 @@ public class MDAmbientActor extends MDModuleActor {
         final Set<Future<Boolean>> docStarter = new HashSet<>();
         ambient.app().forEach((k, v) -> {
             log.info("{} 初始化文档平台 AppId = {}", AtConstant.K_PREFIX, k);
-            docStarter.add(this.startAsync(v, config));
+            docStarter.add(this.startDocAsync(v, config));
         });
         return Fx.combineB(docStarter);
     }
 
-    private Future<Boolean> startAsync(final HArk ark, final AtConfig config) {
+    private Future<Boolean> startDocAsync(final HArk v, final AtConfig config) {
         // 此处提前调用 initialize 方法，此方法保证无副作用的多次调用即可
         final DocBStub docStub = PLUGIN.createSingleton(DocBuilder.class);
         // Here mapApp function extract `id`
-        final HApp app = ark.app();
+        final HApp app = v.app();
         final String appId = app.id(); // Ut.valueString(appJ, KName.KEY);
         return docStub.initialize(appId, config.getFileIntegration()).compose(initialized -> {
             log.info("{} / AppId = {}, 目录数量 = {}", AtConstant.K_PREFIX, appId, initialized.size());

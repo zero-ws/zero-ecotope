@@ -33,7 +33,7 @@ import java.util.Set;
  *
  * @author lang : 2023-06-06
  */
-@SPID(priority = 211)
+@SPID(priority = 211, value = "registry@ambient")
 public class RegistryExtension implements HRegistry<Vertx> {
     @Override
     public Set<HArk> registry(final Vertx container, final HConfig config) {

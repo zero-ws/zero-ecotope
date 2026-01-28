@@ -19,5 +19,5 @@ public interface ConfigProvider {
         return "ConfigServer/" + selected;
     }
 
-    YmConfiguration configure(InPreArgs config, HApp app);
+    ConfigFs<YmConfiguration> configure(InPreArgs config, HApp app);
 }

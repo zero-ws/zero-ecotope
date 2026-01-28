@@ -1,5 +1,6 @@
 package io.zerows.epoch.boot;
 
+import io.zerows.epoch.configuration.ConfigFs;
 import io.zerows.epoch.configuration.ConfigLoadBase;
 import io.zerows.epoch.spec.YmConfiguration;
 import io.zerows.specification.app.HApp;
@@ -27,8 +28,7 @@ class ConfigLoadHFS extends ConfigLoadBase {
             // 不存在 vertx.yml 的默认配置
             return YmConfiguration.createDefault();
         }
-        final YmConfiguration inConfiguration = fs.refT();
         // 双模式处理
-        return this.completeConfiguration(inConfiguration, fs.refJson(), app);
+        return this.completeConfiguration(fs.refT(), fs.refJson(), app);
     }
 }

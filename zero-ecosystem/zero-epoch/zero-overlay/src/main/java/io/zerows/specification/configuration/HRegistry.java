@@ -1,5 +1,6 @@
 package io.zerows.specification.configuration;
 
+import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.zerows.platform.metadata.KTenement;
 import io.zerows.specification.app.HAmbient;
@@ -9,6 +10,7 @@ import io.zerows.specification.app.HMod;
 import io.zerows.specification.cloud.HTenant;
 import io.zerows.specification.security.identity.HOwner;
 import io.zerows.specification.vital.HOI;
+import io.zerows.spi.HPI;
 
 import java.util.Set;
 
@@ -80,6 +82,13 @@ import java.util.Set;
  * @author lang : 2023-06-05
  */
 public interface HRegistry<T> {
+
+    Cc<String, HRegistry<?>> CC_REGISTRY = Cc.openThread();
+
+    @SuppressWarnings("unchecked")
+    static <T> HRegistry<T> of(final String spiId) {
+        return (HRegistry<T>) CC_REGISTRY.pick(() -> HPI.findOne(HRegistry.class, spiId), spiId);
+    }
 
     /**
      * 初始化上下文环境，生成当前上下文对应的 {@link HArk} 对象

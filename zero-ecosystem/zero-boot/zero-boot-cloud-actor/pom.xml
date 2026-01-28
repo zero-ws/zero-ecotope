@@ -28,6 +28,15 @@
             <groupId>io.zerows</groupId>
             <artifactId>zero-epoch-spec-nacos</artifactId>
         </dependency>
+        <!--
+        - 缓存 Redis 插件
+        server:
+          session:  -> 此处打开之后需要设置缓存存储的 AtSession 组件
+        -->
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-plugins-redis</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

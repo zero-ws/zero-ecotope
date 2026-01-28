@@ -62,7 +62,7 @@ class NacosRule {
                 continue;
             }
             // 此时传入的 rule 已经是处理过变量替换的纯字符串
-            log.info("[ ZERO ] ( Cloud ) 解析 Nacos 配置导入规则：{}", rule);
+            log.info("[ ZERO ] ( Nacos ) 解析 Nacos 配置导入规则：{}", rule);
             final NacosMeta meta = this.parseRule(rule);
             if (Objects.nonNull(meta)) {
                 result.add(meta);

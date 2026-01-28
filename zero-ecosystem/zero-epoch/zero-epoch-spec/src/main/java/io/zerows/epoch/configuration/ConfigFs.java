@@ -1,4 +1,4 @@
-package io.zerows.epoch.boot;
+package io.zerows.epoch.configuration;
 
 import io.r2mo.spi.SPI;
 import io.r2mo.typed.json.JObject;

@@ -2,7 +2,8 @@ package io.zerows.epoch.boot;
 
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.configuration.ConfigLoad;
+import io.zerows.epoch.configuration.ConfigFs;
+import io.zerows.epoch.configuration.ConfigLoadBase;
 import io.zerows.epoch.configuration.ConfigProvider;
 import io.zerows.epoch.spec.InPre;
 import io.zerows.epoch.spec.InPreArgs;
@@ -19,7 +20,7 @@ import java.util.Objects;
 /**
  * @author lang : 2025-10-06
  */
-class ConfigLoadCloud implements ConfigLoad {
+class ConfigLoadCloud extends ConfigLoadBase {
     private final InPre entrance;
 
     ConfigLoadCloud(final InPre entrance) {
@@ -45,7 +46,6 @@ class ConfigLoadCloud implements ConfigLoad {
          */
         final YmCloud cloud = vertx.getCloud();
         Fn.jvmKo(Objects.isNull(cloud) || cloud.isEmpty(), _41003Exception500ConfigMissing.class, "vertx.cloud");
-        final InPreVertx.Config config = vertx.getConfig();
         final String selected = vertx.getSelected();
         Fn.jvmKo(Ut.isNil(selected), _41003Exception500ConfigMissing.class, "vertx.selected");
         final JsonObject options = cloud.getItem(selected);
@@ -57,6 +57,8 @@ class ConfigLoadCloud implements ConfigLoad {
         args.configVertx(vertx.getConfig()).options(options);
         final ConfigProvider provider = ConfigProvider.of(selected);
         Fn.jvmKo(Objects.isNull(provider), _41004Exception501ProviderNone.class, selected);
-        return provider.configure(args, app);
+        final ConfigFs<YmConfiguration> fs = provider.configure(args, app);
+        // 双模式处理
+        return this.completeConfiguration(fs.refT(), fs.refJson(), app);
     }
 }
