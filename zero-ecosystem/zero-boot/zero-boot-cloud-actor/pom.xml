@@ -38,5 +38,4 @@
             <artifactId>zero-plugins-redis</artifactId>
         </dependency>
     </dependencies>
-
 </project>
