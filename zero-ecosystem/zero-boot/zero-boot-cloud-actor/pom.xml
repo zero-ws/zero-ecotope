@@ -37,18 +37,5 @@
             <groupId>io.zerows</groupId>
             <artifactId>zero-plugins-redis</artifactId>
         </dependency>
-        <!--
-        Boot专用
-        -->
-        <dependency>
-            <groupId>io.zerows</groupId>
-            <artifactId>zero-boot-inst-load</artifactId>
-            <version>${revision}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.zerows</groupId>
-            <artifactId>zero-boot-inst-menu</artifactId>
-            <version>${revision}</version>
-        </dependency>
     </dependencies>
 </project>
