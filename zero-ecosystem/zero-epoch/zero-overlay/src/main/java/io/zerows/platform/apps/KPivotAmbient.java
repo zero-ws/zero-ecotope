@@ -1,6 +1,6 @@
 package io.zerows.platform.apps;
 
-import io.r2mo.typed.cc.Cc;
+import io.r2mo.typed.common.MultiKeyMap;
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.constant.VName;
 import io.zerows.platform.constant.VValue;
@@ -11,16 +11,12 @@ import io.zerows.specification.app.HAmbient;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.app.HArk;
 import io.zerows.specification.app.HLot;
-import io.zerows.specification.atomic.HBelong;
-import io.zerows.specification.cloud.HFrontier;
-import io.zerows.specification.cloud.HGalaxy;
-import io.zerows.specification.cloud.HSpace;
 import io.zerows.support.base.UtBase;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Collection;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -79,8 +75,7 @@ class KPivotAmbient implements HAmbient {
     @Override
     public HArk running(final String key) {
         Objects.requireNonNull(key);
-        final String keyFind = this.context.findOr(key);
-        return this.context.running(keyFind);
+        return this.context.findOne(key);
     }
 
     /**
@@ -93,7 +88,7 @@ class KPivotAmbient implements HAmbient {
         if (EmApp.Mode.CUBE != this.mode) {
             throw new _60050Exception501NotSupport(this.getClass());
         }
-        return this.context.running();
+        return this.context.findOne();
     }
 
     @Override
@@ -130,108 +125,74 @@ class KPivotAmbient implements HAmbient {
 
     @Override
     public synchronized HAmbient registry(final HArk ark) {
-        // 1. 注册应用
-        this.mode = this.context.registry(ark);
-        // 2. 运行时绑定
-        this.context.registry(ark, this.mode);
+        this.context.registry(ark);
         return this;
     }
 
     /**
      * @author lang : 2023-06-06
      */
+    @Slf4j
     private static class Context {
 
-        private static final ConcurrentMap<String, String> VECTOR = new ConcurrentHashMap<>();
-        private static final Cc<String, HArk> CC_ARK = Cc.open();
+        private static final MultiKeyMap<HArk> STORED = new MultiKeyMap<>();
 
         Context() {
         }
 
-        /**
-         * 替换原始的 HES / HET / HLot 专用
-         * <pre><code>
-         *     构造向量表
-         *     name
-         *     ns           = cacheKey
-         *     id
-         *     appKey       = cacheKey
-         *     tenantId     = cacheKey
-         *     sigma        = cacheKey
-         * </code></pre>
-         *
-         * @param ark  HArk 应用配置容器
-         * @param mode EmApp.Mode 应用模式
-         */
-        void registry(final HArk ark, final EmApp.Mode mode) {
-            // 提取缓存键和应用程序引用
-            final String key = UtBase.keyApp(ark);
-            final HApp app = ark.app();
-
-            // 1. 基础规范：name / ns
-            final String ns = app.ns();
-            VECTOR.put(ns, key);
-            final String name = app.name();
-            VECTOR.put(name, key);
-
-            // 2. 扩展规范：code / appKey / id
-            final String code = app.option(VName.CODE);
-            Optional.ofNullable(code).ifPresent(each -> VECTOR.put(each, key));
-            final String appId = app.option(VName.APP_ID);
-            Optional.ofNullable(appId).ifPresent(each -> VECTOR.put(each, key));
-            final String appKey = app.option(VName.APP_KEY);
-            Optional.ofNullable(appKey).ifPresent(each -> VECTOR.put(each, key));
-
-            // 3. 选择规范：sigma / tenantId
-            if (EmApp.Mode.CUBE == mode) {
-                // 单租户 / 单应用，tenantId / sigma 可表示缓存键（唯一的情况）
-                final HLot hoi = ark.owner();
-                Optional.ofNullable(hoi).map(HBelong::owner).ifPresent(each -> VECTOR.put(each, key));
-                final String sigma = app.option(VName.SIGMA);
-                Optional.ofNullable(sigma).ifPresent(each -> VECTOR.put(each, key));
-            }
-        }
-
-        String findOr(final String key) {
-            return VECTOR.getOrDefault(key, null);
-        }
-
-        HArk running() {
-            final Collection<HArk> arks = CC_ARK.values();
+        HArk findOne() {
+            final Set<HArk> arks = STORED.values();
             if (VValue.ONE == arks.size()) {
                 return arks.iterator().next();
             }
             throw new _40103Exception500ConnectAmbient();
         }
 
-        HArk running(final String cacheKey) {
+        HArk findOne(final String cacheKey) {
             return Optional.ofNullable(cacheKey)
-                .map(CC_ARK::get)
+                .map(STORED::get)
                 .orElse(null);
         }
 
         ConcurrentMap<String, HArk> app() {
-            return CC_ARK.get();
+            return STORED.asMap();
         }
 
-        EmApp.Mode registry(final HArk ark) {
-            final String cacheKey = UtBase.keyApp(ark);
-            CC_ARK.put(cacheKey, ark);
-            // 注册结束后编织应用的上下文
-            // 环境中应用程序超过 1 个时才执行其他判断
-            final ConcurrentMap<String, HArk> store = CC_ARK.get();
-            final HBelong belong = ark.owner();
-            EmApp.Mode mode = EmApp.Mode.CUBE;
-            if (VValue.ONE < store.size()) {
-                if (belong instanceof HFrontier) {
-                    mode = EmApp.Mode.FRONTIER;        // Frontier
-                } else if (belong instanceof HGalaxy) {
-                    mode = EmApp.Mode.GALAXY;          // Galaxy
-                } else if (belong instanceof HSpace) {
-                    mode = EmApp.Mode.SPACE;           // Space
-                }
+        void registry(final HArk ark) {
+            if (Objects.isNull(ark) || Objects.isNull(ark.app())) {
+                log.warn("[ ZERO ] ( App ) 输入的 HArk 对象无效，无法注册！");
+                return;
             }
-            return mode;
+
+
+            // 0. 主 key
+            final String keyOfCache = UtBase.keyApp(ark);
+            final HApp app = ark.app();
+
+
+            // 1. 基础规范：name / ns
+            final String name = app.name();
+            final String ns = app.ns();
+
+
+            // 2. 扩展规范 code / appKey / id
+            final String code = app.option(VName.CODE);
+            final String appKey = app.option(VName.APP_KEY);
+            final String id = app.option(VName.APP_ID);
+
+
+            // 3. 选择规范 sigma / tenantId
+            final String sigma = app.option(VName.SIGMA);
+            final HLot lot = ark.owner();
+            final String tenantId = Optional.ofNullable(lot).map(HLot::owner).orElse(null);
+
+
+            // 填充存储
+            STORED.put(keyOfCache, ark,
+                name, ns,
+                code, appKey, id,
+                sigma, tenantId
+            );
         }
     }
 }
