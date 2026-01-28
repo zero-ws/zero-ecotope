@@ -1,18 +1,21 @@
-package io.zerows.platform.metadata;
+package io.zerows.platform.apps;
 
+import io.r2mo.typed.cc.Cc;
 import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
+import io.zerows.platform.constant.VName;
+import io.zerows.platform.enums.EmApp;
 import io.zerows.platform.exception._40104Exception409RegistryDuplicated;
 import io.zerows.specification.app.HAmbient;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.app.HArk;
+import io.zerows.specification.app.HLot;
 import io.zerows.specification.atomic.HBelong;
 import io.zerows.specification.cloud.HFrontier;
 import io.zerows.specification.cloud.HGalaxy;
 import io.zerows.specification.cloud.HSpace;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HRegistry;
-import io.zerows.specification.vital.HOI;
 import io.zerows.spi.HPI;
 import io.zerows.support.base.UtBase;
 
@@ -35,10 +38,11 @@ import java.util.stream.Collectors;
  */
 @SuppressWarnings("all")
 public class KPivot<T> {
+    private static final Cc<Integer, KPivot<?>> CC_PIVOT = Cc.open();
     /**
      * {@link HAmbient} 中存储了当前运行的上下文环境，该上下文环境中会包含对应的核心运行信息
      * 此信息可以替换原始架构中的主架构
-     * <pre><code>
+     * <pre>
      *     废弃的部分
      *     1. Core,     KApp / KTenant
      *     2. zero-jet, Ambient / AmbientEnvironment / JtApp
@@ -46,17 +50,35 @@ public class KPivot<T> {
      *     1. {@link HAmbient}
      *        key = {@link HArk}
      *               - {@link HApp}
-     *               - {@link DBS}
-     *                  - {@link Database}
+     *               - {@link io.r2mo.base.dbe.DBS}
+     *                  - {@link io.r2mo.base.dbe.Database}
      *               - {@link HBelong}
      *                  - {@link HFrontier}
      *                  - {@link HGalaxy}
      *                  - {@link HSpace}
      *     2. {@link HRegistry}
-     *        当前运行的 {@link HAmbient} 为一个单独的实例，也运行在单节点中
-     * </code></pre>
+     *        当前运行的 {@link HAmbient} 为一个单独的实例，也运行在单节点中，不同架构之下节点的性质根据 {@link EmApp} 来区分
+     * </pre>
+     * 模式相关的配置位于扩展配置中 vertx.yml
+     * <pre>
+     *     extension:
+     *       mode: {@link EmApp}
+     *        - 第一管理端/业务管理 {@link EmApp.Mode#CUBE}         app x 1 , tenant x 1    ( 默认值 )
+     *        - 第一管理端/应用管理 {@link EmApp.Mode#SPACE}        app x N , tenant x 1
+     *        - 第二管理端/租户管理 {@link EmApp.Mode#GALAXY}       app x N , tenant x N
+     *     app:
+     *       id:
+     *       ns:
+     *       tenant:
+     * </pre>
+     * zero-exmodule-ambient 在启动时会初始化当前运行的 {@link HAmbient} 对象，而此时绑定的 {@link HAmbient} 永远只有一个，所以追加的新版本在
+     * 此处执行启动连接
+     * <pre>
+     *     - X_APP      / 应用连接
+     *     - X_TENANT   / 租户连接
+     * </pre>
      */
-    private static final HAmbient RUNNING = KAmbient.of();
+    private static HAmbient RUNNING;
     private final T container;
     private final HRegistry<T> context;
 
@@ -64,7 +86,7 @@ public class KPivot<T> {
 
     private KPivot(final T container) {
         this.container = container;
-        this.context = new KRegistry<>();
+        this.context = new RegistryCommon<>();
         this.extension = HPI.findOneOf(HRegistry.class);
     }
 
@@ -74,16 +96,17 @@ public class KPivot<T> {
         }
     }
 
+    /**
+     * 每个容器对象对应一个 KPivot 实例的环境桥
+     *
+     * @param container 容器对象
+     * @param <T>       容器泛型
+     * @return 环境桥
+     */
+    @SuppressWarnings("unchecked")
     public static <T> KPivot<T> of(final T container) {
-        return new KPivot<>(container);
-    }
-
-    private static void fail(final Class<?> clazz,
-                             final HAmbient ambient) {
-        final ConcurrentMap<String, HArk> stored = ambient.app();
-        if (!stored.isEmpty()) {
-            throw new _40104Exception409RegistryDuplicated(stored.size());
-        }
+        Objects.requireNonNull(container, "[ ZERO ] 容器对象不能为 null !");
+        return (KPivot<T>) CC_PIVOT.pick(() -> new KPivot<>(container), System.identityHashCode(container));
     }
 
     private static Future<Boolean> failAsync(final Class<?> clazz,
@@ -99,7 +122,7 @@ public class KPivot<T> {
     private static Set<HArk> combine(final Set<HArk> sources, final Set<HArk> extensions) {
         sources.forEach(source -> {
             // 1. 先做租户过滤
-            final HOI owner = source.owner();
+            final HLot owner = source.owner();
             final List<HArk> ownerList = extensions.stream()
                 .filter(item -> item.owner().equals(owner))
                 .collect(Collectors.toList());
@@ -115,25 +138,33 @@ public class KPivot<T> {
         return Collections.synchronizedSet(sources);
     }
 
-    public Set<HArk> registry(final HConfig config) {
-        // 前置检查（注册拦截）
-        fail(getClass(), RUNNING);
-
-        Set<HArk> contextDefault = this.context.registry(this.container, config);
-        final Set<HArk> contextCombine = new HashSet<>();
-        if (Objects.nonNull(this.extension)) {
-            final Set<HArk> contextExtension = this.extension.registry(this.container, config);
-            contextCombine.addAll(combine(contextDefault, contextExtension));
-        }
-        contextCombine.forEach(RUNNING::registry);
-        return contextCombine;
-    }
-
+    /**
+     * 环境检查
+     * <pre>
+     *     extension:
+     *       environment: NORM
+     *       mode: CUBE
+     * </pre>
+     * 前置条件
+     * <pre>
+     *     1. 如果是 null 则表示纯容器模式
+     *     2. 如果非 null 则执行扩展注册流程
+     *     3. 根据 mode（默认 CUBE）执行不同的 {@link HAmbient} 初始化
+     * </pre>
+     * 纯容器模式下不配置 extension 部分，也不会执行任何 {@link HRegistry} 注册程序，应用管理过程中纯容器模式不依赖
+     * appId / tenantId 等维度信息，自我注册实现即可。
+     *
+     * @param config 配置
+     * @return 异步环境桥集合
+     */
     public Future<Set<HArk>> registryAsync(final HConfig config) {
-        // 纯容器模式
         if (Objects.isNull(config)) {
             return Future.succeededFuture(new HashSet<>());
         }
+        // APP-0021: 根据配置执行环境注册
+        this.registryAmbient(config);
+
+
         // 前置检查（异步注册拦截）
         return failAsync(getClass(), RUNNING).compose(nil -> FnVertx.<Set<HArk>, Set<HArk>, Set<HArk>>combineT(
             // 第一个异步结果
@@ -143,6 +174,26 @@ public class KPivot<T> {
             // 合并函数
             this::registryOut
         ));
+    }
+
+    private void registryAmbient(final HConfig config) {
+        EmApp.Mode mode = EmApp.Mode.CUBE;
+        if (Objects.isNull(config)) {
+            // 没有配置 extension
+            RUNNING = KPivotAmbient.of(mode);
+            return;
+        }
+        final String modeStr = config.options(VName.MODE);
+        if (UtBase.isNil(modeStr)) {
+            // extension.mode 未配置，使用默认值
+            RUNNING = KPivotAmbient.of(mode);
+            return;
+        }
+
+        mode = UtBase.toEnum(modeStr, EmApp.Mode.class, EmApp.Mode.CUBE);
+        RUNNING = KPivotAmbient.of(mode);
+
+        // 子流程，从 StoreApp 中提取 HApp 构造 HArk
     }
 
     // ------------------------ 私有部分 -----------------------

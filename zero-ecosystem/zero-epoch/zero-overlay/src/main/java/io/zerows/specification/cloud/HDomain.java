@@ -2,7 +2,7 @@ package io.zerows.specification.cloud;
 
 import io.zerows.platform.annotations.meta.One2One;
 import io.zerows.specification.atomic.HBoundary;
-import io.zerows.specification.security.identity.HAccount;
+import io.zerows.specification.security.HAccount;
 
 /**
  * 「应用标准用户」

@@ -2,8 +2,8 @@ package io.zerows.specification.configuration;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
+import io.zerows.platform.apps.KPivot;
 import io.zerows.platform.exception._80413Exception501NotImplement;
-import io.zerows.platform.metadata.KPivot;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;

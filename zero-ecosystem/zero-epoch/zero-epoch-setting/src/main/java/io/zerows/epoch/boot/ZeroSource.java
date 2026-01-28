@@ -10,8 +10,8 @@ import io.zerows.epoch.spec.YmApplication;
 import io.zerows.epoch.spec.YmConfiguration;
 import io.zerows.epoch.spec.YmSpec;
 import io.zerows.epoch.spec.exception._41001Exception500AppNameMissing;
+import io.zerows.platform.apps.KApp;
 import io.zerows.platform.management.StoreApp;
-import io.zerows.platform.metadata.KApp;
 import io.zerows.specification.app.HApp;
 import lombok.extern.slf4j.Slf4j;
 

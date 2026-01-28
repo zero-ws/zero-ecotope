@@ -5,15 +5,15 @@ import io.r2mo.typed.cc.Cc;
 import io.zerows.platform.constant.VString;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.app.HArk;
+import io.zerows.specification.app.HLot;
 import io.zerows.specification.development.compiled.HBundle;
-import io.zerows.specification.vital.HOI;
 
 /**
  * 应用对接器，底层会直接针对应用执行相关初始化，解析应用专用配置 vertx-app.yml，新配置
  * <pre><code>
  *     1. 所属：{@link HArk} 数据结构
  *             - {@link HApp} 应用 x 1
- *             - {@link HOI} 租户 x 1
+ *             - {@link HLot} 租户 x 1
  *             - {@link DBS} 数据库 x N
  *               - PRIMARY：  主数据库
  *               - HISTORY：  历史数据库

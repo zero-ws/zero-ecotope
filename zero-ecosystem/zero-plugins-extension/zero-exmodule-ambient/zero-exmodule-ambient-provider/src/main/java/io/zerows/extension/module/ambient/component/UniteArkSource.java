@@ -4,7 +4,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.module.ambient.domain.tables.pojos.XApp;
 import io.zerows.extension.module.ambient.domain.tables.pojos.XSource;
-import io.zerows.platform.metadata.KArk;
+import io.zerows.platform.apps.KArk;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.app.HArk;
 import io.zerows.support.Ut;

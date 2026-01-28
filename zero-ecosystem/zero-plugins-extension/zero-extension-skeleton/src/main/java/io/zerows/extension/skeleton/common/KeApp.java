@@ -2,7 +2,7 @@ package io.zerows.extension.skeleton.common;
 
 import io.vertx.core.MultiMap;
 import io.zerows.epoch.constant.KWeb;
-import io.zerows.platform.metadata.KPivot;
+import io.zerows.platform.apps.KPivot;
 import io.zerows.specification.app.HAmbient;
 import io.zerows.specification.app.HArk;
 import io.zerows.support.Ut;

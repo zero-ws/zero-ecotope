@@ -1,6 +1,6 @@
 package io.zerows.cortex.metadata;
 
-import io.zerows.platform.metadata.KApp;
+import io.zerows.platform.apps.KApp;
 
 import java.io.Serializable;
 

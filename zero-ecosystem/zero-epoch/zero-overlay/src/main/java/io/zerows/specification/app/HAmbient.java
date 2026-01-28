@@ -33,6 +33,8 @@ public interface HAmbient {
      */
     EmApp.Mode mode();
 
+    HAmbient mode(EmApp.Mode mode);
+
     /**
      * 不论单多，获取当前运行的所有信息
      * <pre><code>
@@ -101,4 +103,15 @@ public interface HAmbient {
     HAmbient registry(HArk ark);
 
     HAmbient registry(String extension, JsonObject configuration);
+
+    /**
+     * 判断当前 Ambient 环境是否就绪，就绪基本条件
+     * <pre>
+     *     1. HArk 容器中至少包含一个应用容器
+     *     2. HArk 容器中的应用包含的 HApp 信息检查通过
+     * </pre>
+     *
+     * @return 就绪返回 true，否则返回 false
+     */
+    boolean isReady();
 }

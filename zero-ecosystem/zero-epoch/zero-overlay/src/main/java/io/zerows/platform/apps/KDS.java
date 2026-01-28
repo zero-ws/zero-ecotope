@@ -1,4 +1,4 @@
-package io.zerows.platform.metadata;
+package io.zerows.platform.apps;
 
 import io.r2mo.base.dbe.DBMany;
 import io.r2mo.base.dbe.DBS;

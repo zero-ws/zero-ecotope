@@ -1,4 +1,4 @@
-package io.zerows.platform.metadata;
+package io.zerows.platform.apps;
 
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonObject;
@@ -10,12 +10,13 @@ import io.zerows.platform.exception._60050Exception501NotSupport;
 import io.zerows.specification.app.HAmbient;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.app.HArk;
+import io.zerows.specification.app.HLot;
 import io.zerows.specification.atomic.HBelong;
 import io.zerows.specification.cloud.HFrontier;
 import io.zerows.specification.cloud.HGalaxy;
 import io.zerows.specification.cloud.HSpace;
-import io.zerows.specification.vital.HOI;
 import io.zerows.support.base.UtBase;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Collection;
 import java.util.Objects;
@@ -33,45 +34,77 @@ import java.util.concurrent.ConcurrentMap;
  * 核心容器环境，表示单个容器环境，此容器环境中会包含
  * <pre>
  *     1. 一个环境上下文：{@link Context}
- *     2. 一个环境运行时：{@link Runtime}
- *     3. 一个核心配置对象
- *     4. 应用模式，对应：{@link EmApp.Mode}
+ *     2. 一个核心配置对象
+ *     3. 应用模式，对应：{@link EmApp.Mode}
  * </pre>
  *
  * @author lang : 2023-06-05
  */
-public class KAmbient implements HAmbient {
+@Slf4j
+class KPivotAmbient implements HAmbient {
     private final ConcurrentMap<String, JsonObject> configuration = new ConcurrentHashMap<>();
     private final Context context = new Context();
-    private final Runtime vector = new Runtime();
     private EmApp.Mode mode;
 
-    private KAmbient() {
-        this.mode = EmApp.Mode.CUBE;
+    private KPivotAmbient(final EmApp.Mode mode) {
+        this.mode = mode;
     }
 
-    public static HAmbient of() {
-        return new KAmbient();
+    static HAmbient of(final EmApp.Mode mode) {
+        return new KPivotAmbient(mode);
     }
 
+    /**
+     * 读取当前应用程序环境的基础模式
+     * <pre>
+     *    1. {@link EmApp.Mode#CUBE}            单租户 / 单应用
+     *    2. {@link EmApp.Mode#SPACE}           单租户 / 多应用模式
+     *    3. {@link EmApp.Mode#GALAXY}          多租户 / 多应用模式
+     *    4. {@link EmApp.Mode#FRONTIER}        边界星云模型
+     * </pre>
+     *
+     * @return {@link EmApp.Mode}
+     */
     @Override
     public EmApp.Mode mode() {
         return this.mode;
     }
 
     @Override
+    public HAmbient mode(final EmApp.Mode mode) {
+        this.mode = mode;
+        return this;
+    }
+
+    @Override
     public HArk running(final String key) {
         Objects.requireNonNull(key);
-        final String keyFind = this.vector.keyFind(key);
+        final String keyFind = this.context.findOr(key);
         return this.context.running(keyFind);
     }
 
+    /**
+     * 必须是单应用模式下才能调用此方法
+     *
+     * @return {@link HArk}
+     */
     @Override
     public HArk running() {
         if (EmApp.Mode.CUBE != this.mode) {
             throw new _60050Exception501NotSupport(this.getClass());
         }
         return this.context.running();
+    }
+
+    @Override
+    public boolean isReady() {
+        final ConcurrentMap<String, HArk> apps = this.context.app();
+        if (Objects.isNull(apps) || apps.isEmpty()) {
+            return false;
+        }
+        return apps.values().stream()
+            .map(HArk::app)
+            .anyMatch(Objects::nonNull);
     }
 
     @Override
@@ -100,18 +133,23 @@ public class KAmbient implements HAmbient {
         // 1. 注册应用
         this.mode = this.context.registry(ark);
         // 2. 运行时绑定
-        this.vector.registry(ark, this.mode);
+        this.context.registry(ark, this.mode);
         return this;
     }
 
     /**
-     * @author lang : 2023-06-07
+     * @author lang : 2023-06-06
      */
-    static class Runtime {
+    private static class Context {
+
         private static final ConcurrentMap<String, String> VECTOR = new ConcurrentHashMap<>();
+        private static final Cc<String, HArk> CC_ARK = Cc.open();
+
+        Context() {
+        }
 
         /**
-         * 替换原始的 HES / HET / HOI 专用
+         * 替换原始的 HES / HET / HLot 专用
          * <pre><code>
          *     构造向量表
          *     name
@@ -147,25 +185,15 @@ public class KAmbient implements HAmbient {
             // 3. 选择规范：sigma / tenantId
             if (EmApp.Mode.CUBE == mode) {
                 // 单租户 / 单应用，tenantId / sigma 可表示缓存键（唯一的情况）
-                final HOI hoi = ark.owner();
+                final HLot hoi = ark.owner();
                 Optional.ofNullable(hoi).map(HBelong::owner).ifPresent(each -> VECTOR.put(each, key));
                 final String sigma = app.option(VName.SIGMA);
                 Optional.ofNullable(sigma).ifPresent(each -> VECTOR.put(each, key));
             }
         }
 
-        String keyFind(final String key) {
+        String findOr(final String key) {
             return VECTOR.getOrDefault(key, null);
-        }
-    }
-
-    /**
-     * @author lang : 2023-06-06
-     */
-    static class Context {
-        private static final Cc<String, HArk> CC_ARK = Cc.open();
-
-        Context() {
         }
 
         HArk running() {

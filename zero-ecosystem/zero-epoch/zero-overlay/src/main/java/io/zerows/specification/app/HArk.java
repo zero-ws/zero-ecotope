@@ -2,10 +2,9 @@ package io.zerows.specification.app;
 
 import io.r2mo.base.dbe.DBS;
 import io.r2mo.base.dbe.Database;
+import io.zerows.platform.apps.KDS;
 import io.zerows.platform.constant.VName;
 import io.zerows.platform.constant.VString;
-import io.zerows.platform.metadata.KDS;
-import io.zerows.specification.vital.HOI;
 
 import java.util.Objects;
 import java.util.function.Function;
@@ -29,13 +28,13 @@ import java.util.function.Function;
  *         master-workflow  = {@link DBS}    工作流数据库
  *     - {@link Database}：当前默认数据库基础配置
  *
- *     - {@link HOI}：租户对接模型，此处接口为租户基本接口，内置树型结构如：
+ *     - {@link HLot}：租户对接模型，此处接口为租户基本接口，内置树型结构如：
  *       整体结构如：
- *         {@link HOI}
- *             id-01 = {@link HOI}
- *                     - id-0101 = {@link HOI}
- *                     - id-0102 = {@link HOI}
- *             id-02 = {@link HOI}
+ *         {@link HLot}
+ *             id-01 = {@link HLot}
+ *                     - id-0101 = {@link HLot}
+ *                     - id-0102 = {@link HLot}
+ *             id-02 = {@link HLot}
  * </pre>
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
@@ -57,9 +56,9 @@ public interface HArk extends Function<HArk, HArk> {
     /**
      * 当前应用所属的拥有者信息
      *
-     * @return {@link HOI} 拥有者
+     * @return {@link HLot} 拥有者
      */
-    default HOI owner() {
+    default HLot owner() {
         return null;
     }
 

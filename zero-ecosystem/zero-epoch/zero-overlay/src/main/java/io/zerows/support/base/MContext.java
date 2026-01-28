@@ -9,8 +9,8 @@ import io.zerows.platform.constant.VValue;
 import io.zerows.platform.enums.EmApp;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.app.HArk;
+import io.zerows.specification.app.HLot;
 import io.zerows.specification.modeling.HAtom;
-import io.zerows.specification.vital.HOI;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -27,7 +27,7 @@ class MContext {
     static String keyApp(final HArk ark) {
         Objects.requireNonNull(ark);
         final String ownerId = UtBase.keyOwner(Optional.ofNullable(ark.owner())
-            .map(HOI::owner).orElse(VValue.DEFAULT));
+            .map(HLot::owner).orElse(VValue.DEFAULT));
         final HApp app = ark.app();
         Objects.requireNonNull(app);
         return ownerId + VString.SLASH + app.ns() + VString.SLASH + app.name();
@@ -51,7 +51,7 @@ class MContext {
         }
 
         if (EmApp.Mode.CUBE != mode) {
-            final HOI belong = ark.owner();
+            final HLot belong = ark.owner();
             condition.put(VName.TENANT_ID, belong.owner());
         }
         return condition;
@@ -65,7 +65,7 @@ class MContext {
             condition.put(VName.NAMESPACE, app.ns());
         }
         if (EmApp.Mode.CUBE != mode) {
-            final HOI belong = ark.owner();
+            final HLot belong = ark.owner();
             condition.put(VName.TENANT_ID, belong.owner());
         }
         return condition;

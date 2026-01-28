@@ -1,10 +1,10 @@
-package io.zerows.platform.metadata;
+package io.zerows.platform.apps;
 
 import io.r2mo.base.dbe.DBS;
 import io.r2mo.base.dbe.Database;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.app.HArk;
-import io.zerows.specification.vital.HOI;
+import io.zerows.specification.app.HLot;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
@@ -17,12 +17,12 @@ import java.util.Objects;
 @Slf4j
 public class KArk implements HArk {
     private KDS kds;
-    private HOI owner;
+    private HLot owner;
     private HApp app;
 
     private KArk(final String name) {
         this.app = new KApp(name);
-        this.owner = new KTenement();
+        this.owner = new KTenant();
         this.kds = Objects.isNull(name) ? null : KDS.of(name);
     }
 
@@ -55,7 +55,7 @@ public class KArk implements HArk {
     }
 
     @Override
-    public HOI owner() {
+    public HLot owner() {
         return this.owner;
     }
 

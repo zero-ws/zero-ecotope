@@ -1,4 +1,4 @@
-package io.zerows.platform.metadata;
+package io.zerows.platform.apps;
 
 import cn.hutool.core.util.StrUtil;
 import io.vertx.core.json.JsonObject;

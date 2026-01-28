@@ -1,15 +1,16 @@
-package io.zerows.platform.metadata;
+package io.zerows.platform.apps;
 
+import io.r2mo.typed.annotation.SPID;
 import io.vertx.core.Future;
 import io.zerows.platform.enums.EmApp;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.app.HArk;
+import io.zerows.specification.app.HLot;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HRegistry;
 import io.zerows.specification.development.ncloud.HCube;
 import io.zerows.specification.development.program.HProject;
-import io.zerows.specification.security.identity.HOwner;
-import io.zerows.specification.vital.HOI;
+import io.zerows.specification.security.HOwner;
 import io.zerows.specification.vital.HRAD;
 
 import java.util.Set;
@@ -19,12 +20,12 @@ import java.util.Set;
  * 当前运行环境配置，内置于 Envelop 在绑定环境时执行，主要包含两个维度：
  * <pre><code>
  *     1. {@link HApp}
- *     2. {@link HOI}
+ *     2. {@link HLot}
  *     两个维度的核心表结构如下
- *                   HOI              HApp
+ *               {@link HLot}      {@link HApp}
  *     name           x                o
  *     code           x                o
- *     id          x                o
+ *     id             x                o
  *     appKey         x                o
  *     sigma          o                o       ( mode = CUBE )
  *     tenant         o                x
@@ -38,15 +39,15 @@ import java.util.Set;
  * </code></pre>
  * 根据当前启动之后注册的应用类型，可区分基础维度 sigma 是哪种
  * <pre><code>
- *     1. 「单机环境」{@link EmApp.Mode#CUBE}，sigma 只有一个，HOI 可以为 null（无租户）
+ *     1. 「单机环境」{@link EmApp.Mode#CUBE}，sigma 只有一个，HLot 可以为 null（无租户）
  *     2. 「多应用环境」{@link EmApp.Mode#SPACE}，sigma = tenant 租户
- *         HOI 此时只有一个，且 children 为空
+ *         {@link HLot} 此时只有一个，且 children 为空
  *     3. 「多层租户环境」{@link EmApp.Mode#SPACE}，sigma = tenant 租户
- *         HOI 此时只有一个，但 children 不为空
+ *         {@link HLot} 此时只有一个，但 children 不为空
  *     4. 「多租户环境」{@link EmApp.Mode#GALAXY}，sigma = 拥有者信息，而一个拥有者
- *         旗下会包含多个 tenant 租户信息，此时 HOI 不止一个，且 children 不做任何检查
- *     5. 「云租户」{@link EmApp.Mode#FRONTIER} 此时跳过 sigma 无等价维度，且 HOI 会
- *         包含多个，sigma 也包含多个，而且 HOI 部分会出现自租户映射信息
+ *         旗下会包含多个 tenant 租户信息，此时 {@link HLot} 不止一个，且 children 不做任何检查
+ *     5. 「云租户」{@link EmApp.Mode#FRONTIER} 此时跳过 sigma 无等价维度，且 {@link HLot} 会
+ *         包含多个，sigma 也包含多个，而且 {@link HLot} 部分会出现自租户映射信息
  *
  *     其中上述五个维度中，容器内部只会包含「单机环境」和「多应用环境」，一旦从租户开始分离则意味着要执行不同的
  *     容器管理，每个租户拥有独立的容器，每个容器绑定一个租户和一个应用 {@link HArk}，这就是应用配置容器存在的
@@ -72,7 +73,8 @@ import java.util.Set;
  *
  * @author lang : 2023-06-06
  */
-public class KRegistry<T> implements HRegistry<T> {
+@SPID(priority = 0)
+public class RegistryCommon<T> implements HRegistry<T> {
     @Override
     public Set<HArk> registry(final T container, final HConfig config) {
         return Set.of(KArk.of());

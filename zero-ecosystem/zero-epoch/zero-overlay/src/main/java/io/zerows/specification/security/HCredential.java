@@ -1,4 +1,4 @@
-package io.zerows.specification.security.identity;
+package io.zerows.specification.security;
 
 import io.zerows.platform.enums.EmSecure;
 
