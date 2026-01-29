@@ -83,7 +83,7 @@ public class ReportService implements ReportStub {
      */
     @Override
     public Future<JsonArray> buildData(final KpReport report, final JsonObject params) {
-        final String reportId = report.getKey();
+        final String reportId = report.getId();
         final String dsId = report.getDataSetId();
         if (Ut.isNil(dsId)) {
             // ERR-80702
@@ -140,7 +140,7 @@ public class ReportService implements ReportStub {
      */
     private Future<List<KpFeature>> featureOfAll(final KpReport report) {
         final JsonObject whereJ = Ux.whereAnd();
-        whereJ.put("reportId", report.getKey());
+        whereJ.put("reportId", report.getId());
         return DB.on(KpFeatureDao.class).fetchAsync(whereJ);
     }
 
@@ -169,7 +169,7 @@ public class ReportService implements ReportStub {
      */
     private Future<ConcurrentMap<String, RDimension>> reportOfDim(final KpReport report, final JsonObject params) {
         final JsonObject whereJ = Ux.whereAnd();
-        whereJ.put("reportId", report.getKey());
+        whereJ.put("reportId", report.getId());
         return DB.on(KpDimensionDao.class).<KpDimension>fetchAsync(whereJ).compose(dimensions -> {
             final DimProc processor = DimProc.of();
             return processor.dimAsync(params, dimensions);
