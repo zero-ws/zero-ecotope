@@ -48,7 +48,7 @@ public class PlotterTopology extends PlotterBase {
             condition.put(VString.EMPTY, Boolean.TRUE);
             return DB.on(XCategoryDao.class).<XCategory>fetchAndAsync(condition).compose(categories -> {
                 /* 读取不为 key 的 */
-                final Set<String> keys = categories.stream().map(XCategory::getKey).collect(Collectors.toSet());
+                final Set<String> keys = categories.stream().map(XCategory::getId).collect(Collectors.toSet());
                 final JsonObject criteria = new JsonObject();
                 criteria.put("categoryThird,!i", Ut.toJArray(keys));
                 /* 设备读取（节点） */

@@ -36,12 +36,10 @@ public class IndentName implements AtomId {
         return this.sourceMap().compose(map -> {
             final JsonObject inputCopy = input.copy();
             final Object data = inputCopy.getValue(KName.DATA);
-            if (data instanceof JsonObject) {
-                final JsonObject jsonRef = (JsonObject) data;
+            if (data instanceof final JsonObject jsonRef) {
                 this.resolveData(jsonRef, map, config);
                 inputCopy.put(KName.DATA, jsonRef);
-            } else if (data instanceof JsonArray) {
-                final JsonArray jsonRef = (JsonArray) data;
+            } else if (data instanceof final JsonArray jsonRef) {
                 Ut.itJArray(jsonRef).forEach(json -> this.resolveData(json, map, config));
                 inputCopy.put(KName.DATA, jsonRef);
             }
@@ -53,7 +51,7 @@ public class IndentName implements AtomId {
         final JsonObject condition = new JsonObject();
         condition.put(KName.TYPE, "ci.type");
         return DB.on(XCategoryDao.class).<XCategory>fetchAndAsync(condition)
-            .compose(categories -> Ux.future(Ut.elementMap(categories, XCategory::getName, XCategory::getKey)));
+            .compose(categories -> Ux.future(Ut.elementMap(categories, XCategory::getName, XCategory::getId)));
     }
 
     private void resolveData(final JsonObject data, final ConcurrentMap<String, String> dict, final JsonObject config) {

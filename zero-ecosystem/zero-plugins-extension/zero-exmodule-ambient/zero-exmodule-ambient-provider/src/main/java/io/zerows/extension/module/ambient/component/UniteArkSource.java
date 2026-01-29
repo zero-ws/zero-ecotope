@@ -30,8 +30,8 @@ public class UniteArkSource implements UniteArk<List<XSource>> {
              * id - Inner ambient environment to identify application.
              * appKey - Ox engine used as dynamic identifier here.
              */
-            normalized.put(KName.KEY, app.getKey());        // `key` fixed when `api` and `non-api` configuration
-            normalized.put(KName.APP_ID, app.getKey());
+            normalized.put(KName.KEY, app.getId());        // `key` fixed when `api` and `non-api` configuration
+            normalized.put(KName.APP_ID, app.getId());
             normalized.put(KName.APP_KEY, app.getAppKey());
             normalized.put(KName.SIGMA, app.getSigma());
         }

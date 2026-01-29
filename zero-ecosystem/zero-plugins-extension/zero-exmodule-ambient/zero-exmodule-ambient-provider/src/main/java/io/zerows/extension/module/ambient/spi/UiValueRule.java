@@ -91,14 +91,14 @@ public class UiValueRule implements UiValve {
                 final Queue<String> serialQ = serialMap.get(code);
                 final String serial = serialQ.poll();
 
-                ruleMap.put(rule.getKey(), params -> {
+                ruleMap.put(rule.getId(), params -> {
                     final TubeType type = Ut.toEnum(rule::getType, TubeType.class, null);
                     final Tube tube = Tube.instance(type);
                     params.put(KName.Flow.TRACE_SERIAL, serial);
                     return tube.traceAsync(params, rule);
                 });
             } else {
-                ruleMap.put(rule.getKey(), Ux::future);
+                ruleMap.put(rule.getId(), Ux::future);
             }
         });
         return ruleMap;
@@ -156,7 +156,7 @@ public class UiValueRule implements UiValve {
         /* Expression is Null, Ignored the rule triggered */
         rules.stream().filter(rule -> Objects.nonNull(rule.getRuleExpression())).forEach(rule -> {
             /* Formula Building */
-            final Formula formula = new Formula(rule.getKey());
+            final Formula formula = new Formula(rule.getId());
 
             // bind(tpl, config)
             final JsonObject tpl = Ut.toJObject(rule.getRuleTpl());

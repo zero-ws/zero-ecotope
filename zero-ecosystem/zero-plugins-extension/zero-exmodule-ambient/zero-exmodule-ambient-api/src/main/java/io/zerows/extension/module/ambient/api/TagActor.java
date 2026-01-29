@@ -9,9 +9,9 @@ import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.epoch.store.jooq.DB;
-import io.zerows.extension.module.ambient.domain.tables.daos.RTagObjectDao;
+import io.zerows.extension.module.ambient.domain.tables.daos.RTagEntityDao;
 import io.zerows.extension.module.ambient.domain.tables.daos.XTagDao;
-import io.zerows.extension.module.ambient.domain.tables.pojos.RTagObject;
+import io.zerows.extension.module.ambient.domain.tables.pojos.RTagEntity;
 import io.zerows.extension.module.ambient.servicespec.TagStub;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
@@ -45,7 +45,7 @@ public class TagActor {
                                           final String modelKey) {
         return this.stub.fetchAsync(modelId, modelKey)
             .compose(tagObjects -> {
-                final Set<String> keys = Ut.valueSetString(tagObjects, RTagObject::getTagId);
+                final Set<String> keys = Ut.valueSetString(tagObjects, RTagEntity::getTagId);
                 return Ux.future(Ut.toJArray(keys));
             })
             .compose(keySet -> DB.on(XTagDao.class).fetchInAsync(KName.KEY, keySet))
@@ -56,7 +56,7 @@ public class TagActor {
     public Future<JsonArray> linkAsync(final String modelId,
                                        final String modelKey,
                                        final JsonArray body) {
-        final ADB jq = DB.on(RTagObjectDao.class);
+        final ADB jq = DB.on(RTagEntityDao.class);
         // 先删除
         final JsonObject qr = Ux.whereAnd();
         qr.put("entityType", modelId);
@@ -73,7 +73,7 @@ public class TagActor {
             }).forEach(data::add);
 
             // 新建关联
-            final List<RTagObject> links = Ux.fromJson(data, RTagObject.class);
+            final List<RTagEntity> links = Ux.fromJson(data, RTagEntity.class);
             return jq.insertAsync(links);
         }).compose(Ux::futureA);
     }
@@ -86,6 +86,6 @@ public class TagActor {
         qr.put("entityType", modelId);
         qr.put(KName.ENTITY_ID, modelKey);
         qr.put("tagId", tagId);
-        return DB.on(RTagObjectDao.class).deleteByAsync(qr);
+        return DB.on(RTagEntityDao.class).deleteByAsync(qr);
     }
 }

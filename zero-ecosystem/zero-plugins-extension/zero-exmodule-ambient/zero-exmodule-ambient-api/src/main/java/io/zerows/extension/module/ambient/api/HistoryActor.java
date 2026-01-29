@@ -56,7 +56,7 @@ public class HistoryActor {
             if (Objects.isNull(activity)) {
                 return Ux.futureJ();
             } else {
-                return this.activityStub.fetchChanges(activity.getKey()).compose(changes -> {
+                return this.activityStub.fetchChanges(activity.getId()).compose(changes -> {
                     final JsonObject data = Ux.toJson(activity);
                     /*
                      * recordOld -> recordNew

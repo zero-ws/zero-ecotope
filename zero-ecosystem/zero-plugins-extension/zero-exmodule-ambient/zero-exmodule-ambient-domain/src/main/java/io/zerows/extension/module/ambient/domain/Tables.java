@@ -4,7 +4,7 @@
 package io.zerows.extension.module.ambient.domain;
 
 
-import io.zerows.extension.module.ambient.domain.tables.RTagObject;
+import io.zerows.extension.module.ambient.domain.tables.RTagEntity;
 import io.zerows.extension.module.ambient.domain.tables.XActivity;
 import io.zerows.extension.module.ambient.domain.tables.XActivityChange;
 import io.zerows.extension.module.ambient.domain.tables.XActivityRule;
@@ -26,91 +26,91 @@ import io.zerows.extension.module.ambient.domain.tables.XTenant;
 /**
  * Convenience access to all tables in ZDB.
  */
-@SuppressWarnings({"all", "unchecked", "rawtypes", "this-escape"})
+@SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
 public class Tables {
 
     /**
-     * The table <code>ZDB.R_TAG_OBJECT</code>.
+     * 标签-实体
      */
-    public static final RTagObject R_TAG_OBJECT = RTagObject.R_TAG_OBJECT;
+    public static final RTagEntity R_TAG_ENTITY = RTagEntity.R_TAG_ENTITY;
 
     /**
-     * The table <code>ZDB.X_ACTIVITY</code>.
+     * X_ACTIVITY
      */
     public static final XActivity X_ACTIVITY = XActivity.X_ACTIVITY;
 
     /**
-     * The table <code>ZDB.X_ACTIVITY_CHANGE</code>.
+     * X_ACTIVITY_CHANGE
      */
     public static final XActivityChange X_ACTIVITY_CHANGE = XActivityChange.X_ACTIVITY_CHANGE;
 
     /**
-     * The table <code>ZDB.X_ACTIVITY_RULE</code>.
+     * X_ACTIVITY_RULE
      */
     public static final XActivityRule X_ACTIVITY_RULE = XActivityRule.X_ACTIVITY_RULE;
 
     /**
-     * The table <code>ZDB.X_APP</code>.
+     * X_APP
      */
     public static final XApp X_APP = XApp.X_APP;
 
     /**
-     * The table <code>ZDB.X_ATTACHMENT</code>.
+     * X_ATTACHMENT
      */
     public static final XAttachment X_ATTACHMENT = XAttachment.X_ATTACHMENT;
 
     /**
-     * The table <code>ZDB.X_CATEGORY</code>.
+     * X_CATEGORY
      */
     public static final XCategory X_CATEGORY = XCategory.X_CATEGORY;
 
     /**
-     * The table <code>ZDB.X_LINKAGE</code>.
+     * X_LINKAGE
      */
     public static final XLinkage X_LINKAGE = XLinkage.X_LINKAGE;
 
     /**
-     * The table <code>ZDB.X_LOG</code>.
+     * X_LOG
      */
     public static final XLog X_LOG = XLog.X_LOG;
 
     /**
-     * The table <code>ZDB.X_MENU</code>.
+     * X_MENU
      */
     public static final XMenu X_MENU = XMenu.X_MENU;
 
     /**
-     * The table <code>ZDB.X_MODULE</code>.
+     * X_MODULE
      */
     public static final XModule X_MODULE = XModule.X_MODULE;
 
     /**
-     * The table <code>ZDB.X_NOTICE</code>.
+     * X_NOTICE
      */
     public static final XNotice X_NOTICE = XNotice.X_NOTICE;
 
     /**
-     * The table <code>ZDB.X_NUMBER</code>.
+     * X_NUMBER
      */
     public static final XNumber X_NUMBER = XNumber.X_NUMBER;
 
     /**
-     * The table <code>ZDB.X_SOURCE</code>.
+     * X_SOURCE
      */
     public static final XSource X_SOURCE = XSource.X_SOURCE;
 
     /**
-     * The table <code>ZDB.X_TABULAR</code>.
+     * X_TABULAR
      */
     public static final XTabular X_TABULAR = XTabular.X_TABULAR;
 
     /**
-     * The table <code>ZDB.X_TAG</code>.
+     * X_TAG
      */
     public static final XTag X_TAG = XTag.X_TAG;
 
     /**
-     * The table <code>ZDB.X_TENANT</code>.
+     * X_TENANT
      */
     public static final XTenant X_TENANT = XTenant.X_TENANT;
 }

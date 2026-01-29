@@ -60,7 +60,7 @@ class KoTool {
 
     private static XLog create(final Class<?> clazz, final DataAtom atom) {
         final XLog log = new XLog();
-        log.setKey(UUID.randomUUID().toString());
+        log.setId(UUID.randomUUID().toString());
         final LocalDateTime eventTime = LocalDateTime.now();
         log.setInfoAt(eventTime);
         log.setActive(Boolean.TRUE);

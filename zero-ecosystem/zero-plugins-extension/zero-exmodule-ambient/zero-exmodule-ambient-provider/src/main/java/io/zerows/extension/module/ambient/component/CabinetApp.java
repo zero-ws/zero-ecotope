@@ -26,7 +26,7 @@ public class CabinetApp implements Cabinet<XApp> {
         final XAppDao appDao = new XAppDao(configuration, container);
         return appDao.findAll().compose(apps -> {
             log.info("{} 应用初始化完成 = SUCCESS / 数量：{}", AtConstant.K_PREFIX, apps.size());
-            return Ux.future(Ut.elementMap(apps, XApp::getKey));
+            return Ux.future(Ut.elementMap(apps, XApp::getId));
         });
     }
 }

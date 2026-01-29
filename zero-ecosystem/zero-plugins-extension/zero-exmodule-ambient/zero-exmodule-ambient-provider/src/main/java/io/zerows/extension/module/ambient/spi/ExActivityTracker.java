@@ -71,7 +71,7 @@ public class ExActivityTracker implements ExActivity {
         Objects.requireNonNull(field);
         return this.fetchActivities(modelId, modelKey).compose(activities -> {
             final Set<String> activityIds = activities.stream()
-                .map(XActivity::getKey)
+                .map(XActivity::getId)
                 .collect(Collectors.toSet());
             final JsonObject criteria = new JsonObject();
             criteria.put("activityId,i", Ut.toJArray(activityIds));

@@ -132,7 +132,7 @@ class AuditorRunner {
                      * 关联设置和初始化状态信息
                      */
                     changeList.forEach(change -> {
-                        change.setActivityId(inserted.getKey());
+                        change.setActivityId(inserted.getId());
                         /*
                          * 待确认字段为 PENDING / 未设置字段为 CONFIRMED
                          * ATOM-02:
@@ -307,7 +307,7 @@ class AuditorRunner {
             final MAttribute attribute = model.dbAttribute(attributeName);
             final MField field = this.onField(attribute, model);
             final XActivityChange change = new XActivityChange();
-            change.setKey(UUID.randomUUID().toString());
+            change.setId(UUID.randomUUID().toString());
             change.setActive(Boolean.TRUE);
             change.setSigma(model.dbModel().getSigma());
             change.setLanguage(model.dbModel().getLanguage());
