@@ -1,5 +1,6 @@
 package io.zerows.platform.apps;
 
+import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.exception._40102Exception500CombineOwner;
 import io.zerows.specification.app.HAmbient;
@@ -58,6 +59,7 @@ import java.util.concurrent.ConcurrentMap;
  */
 class KTenant implements HLot {
 
+    private final static Cc<String, HLot> CC_TENANT = Cc.open();
     /**
      * 子租户容器，支持多级租户架构
      */
@@ -73,13 +75,15 @@ class KTenant implements HLot {
      */
     private final JsonObject data = new JsonObject();
 
-    public KTenant() {
-        this(null);
+    private KTenant(final String id) {
+        // 使用 UtBase 生成标准化的 Owner ID
+        this.id = id;
     }
 
-    public KTenant(final String id) {
-        // 使用 UtBase 生成标准化的 Owner ID
-        this.id = UtBase.keyOwner(id);
+    public static HLot getOrCreate(final String id) {
+        // 租户ID
+        final String tenantId = UtBase.keyOwner(id);
+        return CC_TENANT.pick(() -> new KTenant(tenantId), tenantId);
     }
 
     // ------------------- HBelong 接口实现 -------------------

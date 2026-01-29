@@ -26,7 +26,7 @@ public class CabinetSource implements Cabinet<List<XSource>> {
         final Configuration configuration = Ke.getConfiguration();
         final XSourceDao sourceDao = new XSourceDao(configuration, container);
         return sourceDao.findAll().compose(sources -> {
-            log.info("{} 数据源初始化完成 = SUCCESS / 数量：{}", AtConstant.K_PREFIX, sources.size());
+            log.info("{} 数据源加载 = SUCCESS / 数量：{}", AtConstant.K_PREFIX, sources.size());
             final ConcurrentMap<String, List<XSource>> grouped = Ut.elementGroup(sources, XSource::getAppId);
             return Ux.future(grouped);
         });

@@ -5,9 +5,9 @@ import io.vertx.core.Vertx;
 import io.zerows.epoch.annotations.Actor;
 import io.zerows.epoch.assembly.DI;
 import io.zerows.extension.module.ambient.common.AtConstant;
-import io.zerows.extension.module.ambient.component.UniteArkSource;
 import io.zerows.extension.module.ambient.serviceimpl.DocBuilder;
 import io.zerows.extension.module.ambient.servicespec.DocBStub;
+import io.zerows.extension.module.ambient.spi.RegistryExtension;
 import io.zerows.extension.skeleton.metadata.MDModuleActor;
 import io.zerows.extension.skeleton.metadata.MDModuleRegistry;
 import io.zerows.platform.apps.KPivot;
@@ -31,7 +31,7 @@ import java.util.Set;
  *     1. {@link MDModuleRegistry} 会在 {@link HActor} 启动过程中被调用
  *        -> 内部调用 {@link KPivot} 对 {@link HAmbient} 进行初始化，而且会调用 SPI 核心扩展组件
  *           -> {@link HRegistry} 基础上下文初始化，实现类固定 {@link RegistryCommon}
- *           -> {@link HRegistry} 扩展上下文初始化，实现类根据 SPI 定义中处理，当前模块初始化使用 {@link UniteArkSource} 执行
+ *           -> {@link HRegistry} 扩展上下文初始化，实现类根据 SPI 定义中处理，当前模块初始化使用 {@link RegistryExtension} 执行
  *     2. {@link MDModuleRegistry} 虽然每个模块会包含一个实例，但 {@link HAmbient} 的初始化只会执行一次
  *        -> {@link HAmbient} 中会包含多个 {@link HArk}
  *           name = {@link HArk}，内置 {@link HApp} 绑定关系

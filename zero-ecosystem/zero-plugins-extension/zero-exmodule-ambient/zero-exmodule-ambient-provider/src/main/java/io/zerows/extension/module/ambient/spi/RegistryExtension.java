@@ -6,13 +6,12 @@ import io.vertx.core.Vertx;
 import io.zerows.extension.module.ambient.component.Cabinet;
 import io.zerows.extension.module.ambient.component.CabinetApp;
 import io.zerows.extension.module.ambient.component.CabinetSource;
-import io.zerows.extension.module.ambient.component.UniteArk;
-import io.zerows.extension.module.ambient.component.UniteArkSource;
+import io.zerows.extension.module.ambient.component.CabinetTenant;
+import io.zerows.extension.module.ambient.component.CombineArk;
 import io.zerows.extension.module.ambient.domain.tables.pojos.XApp;
 import io.zerows.extension.module.ambient.domain.tables.pojos.XSource;
-import io.zerows.extension.module.ambient.management.OCacheArk;
+import io.zerows.extension.module.ambient.domain.tables.pojos.XTenant;
 import io.zerows.platform.exception._60050Exception501NotSupport;
-import io.zerows.program.Ux;
 import io.zerows.specification.app.HAmbient;
 import io.zerows.specification.app.HArk;
 import io.zerows.specification.configuration.HConfig;
@@ -48,14 +47,13 @@ public class RegistryExtension implements HRegistry<Vertx> {
             // id = XSource
             () -> Cabinet.<List<XSource>>of(CabinetSource::new).loadAsync(container),
             // 1 XApp + N XSource
-            (app, sources) -> Ux.future(
-                UniteArk.<List<XSource>>of(UniteArkSource::new).compile(app, sources)
+            CombineArk::buildAsync
+        ).compose(arkSet ->
+            // id = XTenant
+            Cabinet.<XTenant>of(CabinetTenant::new).loadAsync(container).compose(tenantMap ->
+                // 1 HArk + M XTenant ( Set Owner )
+                CombineArk.buildAsync(arkSet, tenantMap)
             )
-        ).compose(arkSet -> {
-            // 调用内置存储，新版 OSGI 环境专用
-            final OCacheArk cacheArk = OCacheArk.of();
-            cacheArk.add(arkSet);
-            return Ux.future(arkSet);
-        });
+        );
     }
 }

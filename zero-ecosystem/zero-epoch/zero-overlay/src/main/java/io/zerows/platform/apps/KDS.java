@@ -27,6 +27,9 @@ import java.util.concurrent.ConcurrentMap;
  *     1. master,               主数据库
  *     2. master-history,       主数据库的历史库
  *     3. master-workflow,      主数据库的工作流库
+ *     4. appId                 应用数据库
+ *     5. KDS                   存储了 XApp + XSource x N 的结构（内存处理）
+ *                              每个应用只有 一个 KDS 实例
  * </pre>
  * 数据源的不同类型已经不重要，只是需要知道其注册流程即可
  * <pre>

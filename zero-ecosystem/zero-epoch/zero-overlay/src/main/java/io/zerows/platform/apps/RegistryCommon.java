@@ -1,8 +1,12 @@
 package io.zerows.platform.apps;
 
+import io.r2mo.base.dbe.DBS;
 import io.r2mo.typed.annotation.SPID;
-import io.vertx.core.Future;
+import io.zerows.platform.EnvironmentVariable;
+import io.zerows.platform.constant.VName;
 import io.zerows.platform.enums.EmApp;
+import io.zerows.platform.management.StoreApp;
+import io.zerows.specification.app.HAmbient;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.app.HArk;
 import io.zerows.specification.app.HLot;
@@ -12,6 +16,8 @@ import io.zerows.specification.development.ncloud.HCube;
 import io.zerows.specification.development.program.HProject;
 import io.zerows.specification.security.HOwner;
 import io.zerows.specification.vital.HRAD;
+import io.zerows.support.base.UtBase;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Set;
 
@@ -74,14 +80,74 @@ import java.util.Set;
  * @author lang : 2023-06-06
  */
 @SPID(priority = 0)
+@Slf4j
 public class RegistryCommon<T> implements HRegistry<T> {
+    /**
+     * 单独应用模式下的注册器，默认不开启 zero-exmodule-ambient 时会使用此注册器
+     * 关键信息
+     * <pre>
+     *     - 根据启动过程先从 {@link StoreApp} 中提取当前应用信息
+     *     - 核心数据结构
+     *       app    - {@link HApp}
+     *                - id              {@link EnvironmentVariable#Z_APP_ID}
+     *                - name            {@link EnvironmentVariable#Z_APP}
+     *                - ns              {@link EnvironmentVariable#Z_NS}
+     *                - tenant          {@link EnvironmentVariable#Z_TENANT}
+     *                - data / config   应用基础信息和配置信息
+     *       kds    - {@link KDS}
+     *                - 内部可直接访问 {@link DBS}
+     *                - appId                   =  {@link DBS}
+     *                - master                  =  {@link DBS}
+     *                - master-workflow         =  {@link DBS}
+     *                - master-history          =  {@link DBS}
+     *       tenant - {@link HLot}
+     *                - id              {@link EnvironmentVariable#Z_TENANT}
+     *                - data            组户基础信息
+     * </pre>
+     * 场景分析
+     * <pre>
+     *     1. 单独运行（纯容器）/ 静态应用 x 1 / 静态租户 x 1
+     *        mode                      = {@link EmApp.Mode#CUBE}
+     *        - KDS 只可管理当前应用的数据源信息，非动态数据源
+     *        appId                     = {@link DBS}
+     *        master                    = {@link DBS}
+     *        master-workflow           = {@link DBS}
+     *        master-history            = {@link DBS}
+     *        xxxxxx                    = {@link DBS}
+     *     2. 扩展模块运行模式（ zero-exmodule-ambient ）
+     *        mode                      = {@link EmApp.Mode#SPACE} | {@link EmApp.Mode#GALAXY}
+     *        appId                     = {@link DBS}
+     *        master                    = {@link DBS}
+     *        master-workflow           = {@link DBS}
+     *        master-history            = {@link DBS}
+     *        {@link KDS} 中可包含多个数据源实例
+     *        - X_APP / X_SOURCE x N
+     * </pre>
+     *
+     * @param container 容器对象
+     * @param config    配置信息
+     * @return 注册一个完整应用集合
+     */
     @Override
     public Set<HArk> registry(final T container, final HConfig config) {
-        return Set.of(KArk.of());
-    }
+        // 如果只有一个应用，此处直接返回的就是当前应用
+        final HApp app = StoreApp.of().value();
+        if (!app.isLoad()) {
+            return Set.of();
+        }
+        final String modeStr = config.options(VName.MODE);
+        final EmApp.Mode mode = UtBase.toEnum(modeStr, EmApp.Mode.class, EmApp.Mode.CUBE);
 
-    @Override
-    public Future<Set<HArk>> registryAsync(final T container, final HConfig config) {
-        return Future.succeededFuture(this.registry(container, config));
+
+        // 初始化 Ambient
+        final HAmbient ambient = RegistryAmbient.of(mode);
+        log.info("[ ZERO ] ( App ) 主应用模式 mode = `{}` / name = `{}` / ns = `{}` | 托管者：{}",
+            mode, app.name(), app.ns(), System.identityHashCode(ambient));
+
+
+        // 注册应用容器
+        final HArk ark = KArk.of(app);
+        ambient.registry(ark);
+        return Set.of(ark);
     }
 }

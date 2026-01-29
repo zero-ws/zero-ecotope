@@ -3,9 +3,7 @@ package io.zerows.platform.apps;
 import io.r2mo.typed.cc.Cc;
 import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
-import io.zerows.platform.constant.VName;
 import io.zerows.platform.enums.EmApp;
-import io.zerows.platform.exception._40104Exception409RegistryDuplicated;
 import io.zerows.specification.app.HAmbient;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.app.HArk;
@@ -24,7 +22,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
 
 /**
@@ -36,7 +33,6 @@ import java.util.stream.Collectors;
  *
  * @author lang : 2023-06-06
  */
-@SuppressWarnings("all")
 public class KPivot<T> {
     private static final Cc<Integer, KPivot<?>> CC_PIVOT = Cc.open();
     /**
@@ -84,10 +80,11 @@ public class KPivot<T> {
 
     private final HRegistry<T> extension;
 
+    @SuppressWarnings("unchecked")
     private KPivot(final T container) {
         this.container = container;
         this.context = new RegistryCommon<>();
-        this.extension = HPI.findOneOf(HRegistry.class);
+        this.extension = (HRegistry<T>) HPI.findOneOf(HRegistry.class);
     }
 
     public static HAmbient running() {
@@ -107,16 +104,6 @@ public class KPivot<T> {
     public static <T> KPivot<T> of(final T container) {
         Objects.requireNonNull(container, "[ ZERO ] 容器对象不能为 null !");
         return (KPivot<T>) CC_PIVOT.pick(() -> new KPivot<>(container), System.identityHashCode(container));
-    }
-
-    private static Future<Boolean> failAsync(final Class<?> clazz,
-                                             final HAmbient ambient) {
-        final ConcurrentMap<String, HArk> stored = ambient.app();
-        if (!stored.isEmpty()) {
-            return Future.failedFuture(new _40104Exception409RegistryDuplicated(stored.size()));
-        } else {
-            return Future.succeededFuture(Boolean.TRUE);
-        }
     }
 
     private static Set<HArk> combine(final Set<HArk> sources, final Set<HArk> extensions) {
@@ -162,38 +149,16 @@ public class KPivot<T> {
             return Future.succeededFuture(new HashSet<>());
         }
         // APP-0021: 根据配置执行环境注册
-        this.registryAmbient(config);
-
-
-        // 前置检查（异步注册拦截）
-        return failAsync(getClass(), RUNNING).compose(nil -> FnVertx.<Set<HArk>, Set<HArk>, Set<HArk>>combineT(
+        return FnVertx.combineT(
             // 第一个异步结果
             () -> this.context.registryAsync(this.container, config),
             // 第二个异步结果
-            () -> this.registryExtension(config),
-            // 合并函数
+            () -> Objects.isNull(this.extension) ?
+                Future.succeededFuture(Set.of()) :
+                this.extension.registryAsync(this.container, config),
+            // 将构造好的 HArk 合并到一起
             this::registryOut
-        ));
-    }
-
-    private void registryAmbient(final HConfig config) {
-        EmApp.Mode mode = EmApp.Mode.CUBE;
-        if (Objects.isNull(config)) {
-            // 没有配置 extension
-            RUNNING = KPivotAmbient.of(mode);
-            return;
-        }
-        final String modeStr = config.options(VName.MODE);
-        if (UtBase.isNil(modeStr)) {
-            // extension.mode 未配置，使用默认值
-            RUNNING = KPivotAmbient.of(mode);
-            return;
-        }
-
-        mode = UtBase.toEnum(modeStr, EmApp.Mode.class, EmApp.Mode.CUBE);
-        RUNNING = KPivotAmbient.of(mode);
-
-        // 子流程，从 StoreApp 中提取 HApp 构造 HArk
+        );
     }
 
     // ------------------------ 私有部分 -----------------------
@@ -201,13 +166,5 @@ public class KPivot<T> {
         final Set<HArk> combine = combine(source, extension);
         combine.forEach(RUNNING::registry);
         return Future.succeededFuture(combine);
-    }
-
-    private Future<Set<HArk>> registryExtension(final HConfig config) {
-        if (Objects.isNull(this.extension)) {
-            return Future.succeededFuture();
-        } else {
-            return this.extension.registryAsync(this.container, config);
-        }
     }
 }

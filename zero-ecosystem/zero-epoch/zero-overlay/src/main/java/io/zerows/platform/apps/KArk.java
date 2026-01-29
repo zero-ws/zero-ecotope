@@ -20,18 +20,16 @@ public class KArk implements HArk {
     private HLot owner;
     private HApp app;
 
-    private KArk(final String name) {
-        this.app = new KApp(name);
-        this.owner = new KTenant();
-        this.kds = Objects.isNull(name) ? null : KDS.of(name);
+    private KArk(final HApp app) {
+        this.app = app;
+        this.owner = KTenant.getOrCreate(app.tenant());
+
+        final KDS kds = KDS.of(app.id());
+        this.kds = Objects.isNull(kds) ? KDS.of(app.name()) : kds;
     }
 
-    public static HArk of(final String name) {
-        return new KArk(name);
-    }
-
-    public static HArk of() {
-        return new KArk(null);
+    public static HArk of(final HApp app) {
+        return new KArk(app);
     }
 
     @Override
