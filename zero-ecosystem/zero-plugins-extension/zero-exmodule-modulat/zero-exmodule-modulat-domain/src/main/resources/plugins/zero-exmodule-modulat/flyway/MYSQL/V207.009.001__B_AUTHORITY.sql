@@ -1,87 +1,48 @@
--- liquibase formatted sql
+DROP TABLE IF EXISTS `B_AUTHORITY`;
+CREATE TABLE IF NOT EXISTS `B_AUTHORITY` (
+    -- ==================================================================================================
+    -- 🆔 1. 核心主键区 (Primary Key Strategy)
+    -- ==================================================================================================
+    `ID`              VARCHAR(36)   COLLATE utf8mb4_bin NOT NULL COMMENT '「id」- 主键',                      -- [主键] 采用 Snowflake/UUID，避开自增ID
 
--- changeset Lang:b-authority-1
-/*
- * BLOCK 中的资源定义完整记录
- * S_ACTION：安全操作记录
- * S_RESOURCE：和资源绑定的记录
- * S_PERMISSION：权限信息
- * S_VIEW：视图信息
- * （管理端）
- */
-DROP TABLE IF EXISTS B_AUTHORITY;
-CREATE TABLE IF NOT EXISTS B_AUTHORITY
-(
-    `KEY`
-    VARCHAR
-(
-    36
-) COMMENT '「key」- 主键',
-    `CODE` VARCHAR
-(
-    255
-) COMMENT '「name」- 系统内部编码', -- TYPE + BLOCK_CODE
-    `BLOCK_ID` VARCHAR
-(
-    36
-) COMMENT '「blockId」- 所属模块ID',
+    -- ==================================================================================================
+    -- 📝 2. 业务字段区 (Business Fields)
+    -- ==================================================================================================
+    `BLOCK_ID`        VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「blockId」- 所属模块ID',
+    `CODE`            VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「code」- 编号',
+    `LIC_ACTION`      LONGTEXT      COLLATE utf8mb4_bin COMMENT '「licAction」- 操作编码',
+    `LIC_PERMISSION`  LONGTEXT      COLLATE utf8mb4_bin COMMENT '「licPermission」- 所需权限集合',
+    `LIC_RESOURCE`    LONGTEXT      COLLATE utf8mb4_bin COMMENT '「licResource」- 资源编码',
+    `LIC_VIEW`        LONGTEXT      COLLATE utf8mb4_bin COMMENT '「licView」- 视图集合',
 
-    /*
-     * 这部分的区分
-     * - CORE, 核心资源（基本CRUD）
-     * - ASSIST，辅助资源（下拉、字典等）
-     * - CHILD，子操作资源
-     * - DEFINED，自定义资源（开发的新资源信息）
-     * 每一个 BLOCK 一定有 CORE，另外三个可选
-     */
-    `TYPE` VARCHAR
-(
-    64
-) COMMENT '「type」- 类型保留，单独区分',
+    -- ==================================================================================================
+    -- 🧩 3. 模型关联与多态 (Polymorphic Associations)
+    -- ==================================================================================================
+    `TYPE`            VARCHAR(64)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「type」- 类型',                -- [类型],
 
-    -- 只针对 code 字段
-    `LIC_RESOURCE` LONGTEXT COMMENT '「licResource」- 资源编码',
-    `LIC_ACTION` LONGTEXT COMMENT '「licAction」- 操作编码',
-    `LIC_PERMISSION` LONGTEXT COMMENT '「licPermission」- 所需权限集合',
-    `LIC_VIEW` LONGTEXT COMMENT '「licView」- 视图集合',
+    -- ==================================================================================================
+    -- ☁️ 4. 多租户与上下文属性 (Multi-Tenancy & Context)
+    -- ==================================================================================================
+    `SIGMA`           VARCHAR(128)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「sigma」- 统一标识',           -- [物理隔离] 核心分片键/顶层租户标识,
+    `TENANT_ID`       VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「tenantId」- 租户ID',            -- [业务隔离] SaaS 租户/具体公司标识,
+    `APP_ID`          VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「appId」- 应用ID',               -- [逻辑隔离] 区分同一租户下的不同应用,
+    -- --------------------------------------------------------------------------------------------------
+    `ACTIVE`          BIT(1)        DEFAULT NULL COMMENT '「active」- 是否启用',                              -- [状态] 1=启用/正常, 0=禁用/冻结,
+    `LANGUAGE`        VARCHAR(10)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「language」- 语言偏好',        -- [国际化] 如: zh_CN, en_US,
+    `METADATA`        TEXT          COLLATE utf8mb4_bin COMMENT '「metadata」- 元配置',                       -- [扩展] JSON格式，存储非结构化配置,
+    `VERSION`         VARCHAR(64)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「version」- 版本号',
+    -- ==================================================================================================
+    `CREATED_AT`      DATETIME      DEFAULT NULL COMMENT '「createdAt」- 创建时间',                           -- [审计] 创建时间
+    `CREATED_BY`      VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「createdBy」- 创建人',         -- [审计] 创建人
+    `UPDATED_AT`      DATETIME      DEFAULT NULL COMMENT '「updatedAt」- 更新时间',                           -- [审计] 更新时间
+    `UPDATED_BY`      VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「updatedBy」- 更新人',         -- [审计] 更新人
 
-    -- ------------------------------ 公共字段 --------------------------------
-    `SIGMA` VARCHAR
-(
-    128
-) COMMENT '「sigma」- 用户组绑定的统一标识',
-    `LANGUAGE` VARCHAR
-(
-    10
-) COMMENT '「language」- 使用的语言',
-    `ACTIVE` BIT COMMENT '「active」- 是否启用',
-    `METADATA` TEXT COMMENT '「metadata」- 附加配置数据',
+    -- ==================================================================================================
+    -- ⚡ 6. 索引定义 (Index Definition)
+    -- ==================================================================================================
+    PRIMARY KEY (`ID`) USING BTREE,
+    UNIQUE KEY `UK_B_AUTHORITY_CODE_BLOCK_ID` (`CODE`, `BLOCK_ID`) USING BTREE
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_bin COMMENT='B_AUTHORITY';
 
-    -- Auditor字段
-    `CREATED_AT` DATETIME COMMENT '「createdAt」- 创建时间',
-    `CREATED_BY` VARCHAR
-(
-    36
-) COMMENT '「createdBy」- 创建人',
-    `UPDATED_AT` DATETIME COMMENT '「updatedAt」- 更新时间',
-    `UPDATED_BY` VARCHAR
-(
-    36
-) COMMENT '「updatedBy」- 更新人',
-
-    `APP_ID` VARCHAR
-(
-    36
-) COMMENT '「appId」- 应用ID',
-    `TENANT_ID` VARCHAR
-(
-    36
-) COMMENT '「tenantId」- 租户ID',
-    PRIMARY KEY
-(
-    `KEY`
-) USING BTREE
-    );
--- changeset Lang:b-authority-2
-ALTER TABLE B_AUTHORITY
-    ADD UNIQUE (`CODE`, `BLOCK_ID`);
+-- 缺失公共字段：
+-- - VERSION (版本)

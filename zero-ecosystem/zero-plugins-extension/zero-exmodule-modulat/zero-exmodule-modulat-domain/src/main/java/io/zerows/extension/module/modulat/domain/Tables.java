@@ -14,31 +14,31 @@ import io.zerows.extension.module.modulat.domain.tables.BWeb;
 /**
  * Convenience access to all tables in ZDB.
  */
-@SuppressWarnings({"all", "unchecked", "rawtypes", "this-escape"})
+@SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
 public class Tables {
 
     /**
-     * The table <code>ZDB.B_AUTHORITY</code>.
+     * B_AUTHORITY
      */
     public static final BAuthority B_AUTHORITY = BAuthority.B_AUTHORITY;
 
     /**
-     * The table <code>ZDB.B_BAG</code>.
+     * B_BAG
      */
     public static final BBag B_BAG = BBag.B_BAG;
 
     /**
-     * The table <code>ZDB.B_BLOCK</code>.
+     * B_BLOCK
      */
     public static final BBlock B_BLOCK = BBlock.B_BLOCK;
 
     /**
-     * The table <code>ZDB.B_COMPONENT</code>.
+     * B_COMPONENT
      */
     public static final BComponent B_COMPONENT = BComponent.B_COMPONENT;
 
     /**
-     * The table <code>ZDB.B_WEB</code>.
+     * B_WEB
      */
     public static final BWeb B_WEB = BWeb.B_WEB;
 }

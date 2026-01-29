@@ -43,7 +43,7 @@ public class BagArgService implements BagArgStub {
             if (Objects.isNull(bag.getParentId())) {
                 /* Multi Bag Information */
                 final JsonObject criteria = Ux.whereAnd();
-                criteria.put(KName.PARENT_ID, bag.getKey());
+                criteria.put(KName.PARENT_ID, bag.getId());
                 criteria.put(KName.ACTIVE, Boolean.TRUE);
                 return jq.<BBag>fetchAsync(criteria).compose(query -> {
                     final ConcurrentMap<String, BBag> map = Ut.elementMap(query, BBag::getNameAbbr);
@@ -110,15 +110,15 @@ public class BagArgService implements BagArgStub {
             final JsonObject condition = Ux.whereAnd();
             if (Objects.isNull(bag.getParentId())) {
                 final JsonObject criteria = Ux.whereAnd();
-                criteria.put(KName.PARENT_ID, bag.getKey());
+                criteria.put(KName.PARENT_ID, bag.getId());
                 criteria.put(KName.ACTIVE, Boolean.TRUE);
                 return DB.on(BBagDao.class).<BBag>fetchAsync(criteria).compose(bags -> {
-                    final Set<String> keys = Ut.elementSet(bags, BBag::getKey);
+                    final Set<String> keys = Ut.elementSet(bags, BBag::getId);
                     condition.put(KName.App.BAG_ID + ",i", Ut.toJArray(keys));
                     return Ux.future(condition);
                 });
             } else {
-                condition.put(KName.App.BAG_ID, bag.getKey());
+                condition.put(KName.App.BAG_ID, bag.getId());
                 return Ux.future(condition);
             }
         }).compose(condition -> {

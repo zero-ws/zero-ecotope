@@ -26,7 +26,7 @@ class CombinerBlock implements Combiner<BBag, List<BBlock>> {
             data.mergeIn(uiContent, true);
         });
         // key for bag
-        data.put(KName.KEY_P, bag.getKey());
+        data.put(KName.KEY_P, bag.getId());
         // __metadata for definition
         data.put(KName.__.METADATA, metadata);
         // major data
