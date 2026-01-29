@@ -1,26 +1,20 @@
--- liquibase formatted sql
+DROP TABLE IF EXISTS `R_USER_GROUP`;
 
--- changeset Lang:ox-user-group-1
--- 关联表：R_USER_GROUP
-DROP TABLE IF EXISTS R_USER_GROUP;
-CREATE TABLE IF NOT EXISTS R_USER_GROUP
-(
-    `GROUP_ID`
-    VARCHAR
-(
-    36
-) COMMENT '「groupId」- 关联组ID',
-    `USER_ID` VARCHAR
-(
-    36
-) COMMENT '「userId」- 关联用户ID',
-    `PRIORITY` INTEGER COMMENT '「priority」- 组优先级',
-    PRIMARY KEY
-(
-    `GROUP_ID`,
-    `USER_ID`
-) USING BTREE
-    );
+CREATE TABLE IF NOT EXISTS `R_USER_GROUP` (
+    -- ==================================================================================================
+    -- 🔗 1. 关联主键区 (Composite Primary Key)
+    -- ==================================================================================================
+    `GROUP_ID`  VARCHAR(36)  COLLATE utf8mb4_bin NOT NULL COMMENT '「groupId」- 组ID',                        -- [主键] 关联 S_GROUP.ID (联合主键1)
+    `USER_ID`   VARCHAR(36)  COLLATE utf8mb4_bin NOT NULL COMMENT '「userId」- 账号ID',                       -- [主键] 关联 S_USER.ID (联合主键2)
 
-ALTER TABLE R_USER_GROUP
-    ADD INDEX IDX_R_USER_GROUP_USER_ID (`USER_ID`) USING BTREE;
+    -- ==================================================================================================
+    -- ⚙️ 2. 关系属性区 (Relationship Attributes)
+    -- ==================================================================================================
+    `PRIORITY`  INTEGER      DEFAULT 0 COMMENT '「priority」- 优先级',                                        -- [排序] 决定多组并存时的权限继承顺序 (数值越小优先级越高)
+
+    -- ==================================================================================================
+    -- ⚡ 7. 索引定义 (Index Definition)
+    -- ==================================================================================================
+    PRIMARY KEY (`GROUP_ID`, `USER_ID`) USING BTREE,                                                          -- [约束] 确保组与用户的唯一绑定关系
+    KEY `IDX_R_USER_GROUP_USER_ID` (`USER_ID`) USING BTREE                                                    -- [查询] 反查用户所属的组 (User -> Groups)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_bin COMMENT='账号 - 组';

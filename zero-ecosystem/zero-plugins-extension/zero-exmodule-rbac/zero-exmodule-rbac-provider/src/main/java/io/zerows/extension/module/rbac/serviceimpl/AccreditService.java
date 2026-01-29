@@ -185,7 +185,7 @@ public class AccreditService implements AccreditStub {
             final String requestUri = request.method() + " " + request.uri();
             return FnVertx.failOut(_80210Exception404ResourceMissing.class, action.getResourceId(), requestUri);
         } else {
-            log.debug("{} Accredit resource ( resource = `{}` )", ScConstant.K_PREFIX, resource.getKey());
+            log.debug("{} Accredit resource ( resource = `{}` )", ScConstant.K_PREFIX, resource.getId());
             return Future.succeededFuture(resource);
         }
     }

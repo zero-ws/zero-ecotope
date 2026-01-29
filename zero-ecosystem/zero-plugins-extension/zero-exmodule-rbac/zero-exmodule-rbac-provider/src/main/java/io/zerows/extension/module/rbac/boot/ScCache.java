@@ -23,7 +23,7 @@ class ScCache {
         // Each sigma has been mapped to single pool
         final String poolName = admitPool + VString.SLASH + path.getSigma() + VString.SLASH + suffix;
         final HMM<String, R> mmAdmit = HMM.of(poolName);
-        return mmAdmit.cached(path.getKey(), () -> executor.apply(path), 3600);
+        return mmAdmit.cached(path.getId(), () -> executor.apply(path), 3600);
     }
 
     static Future<JsonObject> view(final RoutingContext context, final String habitus) {

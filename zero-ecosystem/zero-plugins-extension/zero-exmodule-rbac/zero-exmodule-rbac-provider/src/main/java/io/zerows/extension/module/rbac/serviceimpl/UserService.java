@@ -54,7 +54,7 @@ public class UserService implements UserStub {
 
     @Override
     public Future<JsonObject> fetchAuthorized(final SUser query) {
-        return DB.on(OUserDao.class).fetchOneAsync(ScAuthKey.F_CLIENT_ID, query.getKey())
+        return DB.on(OUserDao.class).fetchOneAsync(ScAuthKey.F_CLIENT_ID, query.getId())
             .compose(Ux::futureJ)
             .compose(ouserJson -> {
                 final JsonObject userJson = Ut.serializeJson(query);
@@ -85,7 +85,7 @@ public class UserService implements UserStub {
     @Override
     public Future<JsonObject> updateInformation(final String userId, final JsonObject params) {
         final SUser user = Ux.fromJson(params, SUser.class);
-        user.setKey(userId);
+        user.setId(userId);
         return DB.on(SUserDao.class).updateAsync(userId, user)
             .compose(userInfo -> Junc.refExtension().identAsync(userInfo, params));
     }

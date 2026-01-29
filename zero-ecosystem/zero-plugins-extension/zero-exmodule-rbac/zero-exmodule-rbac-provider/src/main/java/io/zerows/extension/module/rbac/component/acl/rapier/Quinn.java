@@ -65,7 +65,7 @@ public interface Quinn {
      */
     default <T> Future<T> fetchAsync(final SResource resource, final ScOwner owner) {
         Objects.requireNonNull(resource);
-        return this.fetchAsync(resource.getKey(), owner);
+        return this.fetchAsync(resource.getId(), owner);
     }
 
     default <T> Future<T> saveAsync(final SResource resource, final ScOwner owner, final JsonObject data) {

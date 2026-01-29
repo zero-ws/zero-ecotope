@@ -163,7 +163,7 @@ public class PermService implements PermStub {
         return DB.on(SPermissionDao.class).<SPermission>fetchByIdAsync(key)
 
             /* Secondary Fetching, Fetch action here */
-            .compose(permission -> this.actionStub.fetchAction(permission.getKey())
+            .compose(permission -> this.actionStub.fetchAction(permission.getId())
 
                 /* futureJM to combine two result to JsonObject */
                 .compose(Ux.futureJM(permission, KName.ACTIONS))

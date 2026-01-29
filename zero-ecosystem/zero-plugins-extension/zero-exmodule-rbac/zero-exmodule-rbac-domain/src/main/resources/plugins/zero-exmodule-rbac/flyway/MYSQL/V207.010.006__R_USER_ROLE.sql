@@ -1,26 +1,20 @@
--- liquibase formatted sql
+DROP TABLE IF EXISTS `R_USER_ROLE`;
 
--- changeset Lang:ox-user-role-1
--- 关联表：R_USER_ROLE
-DROP TABLE IF EXISTS R_USER_ROLE;
-CREATE TABLE IF NOT EXISTS R_USER_ROLE
-(
-    `USER_ID`
-    VARCHAR
-(
-    36
-) COMMENT '「userId」- 关联用户ID',
-    `ROLE_ID` VARCHAR
-(
-    36
-) COMMENT '「roleId」- 关联角色ID',
-    `PRIORITY` INTEGER COMMENT '「priority」- 角色优先级',
-    PRIMARY KEY
-(
-    `USER_ID`,
-    `ROLE_ID`
-) USING BTREE
-    );
+CREATE TABLE IF NOT EXISTS `R_USER_ROLE` (
+    -- ==================================================================================================
+    -- 🔗 1. 关联主键区 (Composite Primary Key)
+    -- ==================================================================================================
+    `USER_ID`   VARCHAR(36)  COLLATE utf8mb4_bin NOT NULL COMMENT '「userId」- 账号ID',                       -- [主键] 关联 S_USER.ID (联合主键1)
+    `ROLE_ID`   VARCHAR(36)  COLLATE utf8mb4_bin NOT NULL COMMENT '「roleId」- 角色ID',                       -- [主键] 关联 S_ROLE.ID (联合主键2)
 
-ALTER TABLE R_USER_ROLE
-    ADD INDEX IDX_R_USER_ROLE_USER_ID (`USER_ID`) USING BTREE;
+    -- ==================================================================================================
+    -- ⚙️ 2. 关系属性区 (Relationship Attributes)
+    -- ==================================================================================================
+    `PRIORITY`  INTEGER      DEFAULT 0 COMMENT '「priority」- 优先级',                                        -- [排序] 决定多组并存时的权限继承顺序 (数值越小优先级越高)
+
+    -- ==================================================================================================
+    -- ⚡ 7. 索引定义 (Index Definition)
+    -- ==================================================================================================
+    PRIMARY KEY (`USER_ID`, `ROLE_ID`) USING BTREE,                                                           -- [约束] 确保用户与角色的唯一绑定关系
+    KEY `IDX_R_USER_ROLE_USER_ID` (`USER_ID`) USING BTREE                                                     -- [查询] 反查用户所属的角色 (User -> Roles)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_bin COMMENT='账号-角色';

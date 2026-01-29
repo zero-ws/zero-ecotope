@@ -42,7 +42,7 @@ public class ExUserEpic implements ExUser {
     @Override
     public Future<ConcurrentMap<String, String>> mapAuditor(final Set<String> keys) {
         return this.fetchList(keys).compose(results -> {
-            final ConcurrentMap<String, String> map = Ut.elementMap(results, SUser::getKey, SUser::getRealname);
+            final ConcurrentMap<String, String> map = Ut.elementMap(results, SUser::getId, SUser::getRealname);
             return Ux.future(map);
         });
     }
@@ -91,7 +91,7 @@ public class ExUserEpic implements ExUser {
         final JsonObject condition = new JsonObject();
         condition.put(KName.REAL_NAME + ",c", keyword);
         return DB.on(SUserDao.class).<SUser>fetchAsync(condition).compose(users -> {
-            final List<String> keys = users.stream().map(SUser::getKey).collect(Collectors.toList());
+            final List<String> keys = users.stream().map(SUser::getId).collect(Collectors.toList());
             return Ux.future(Ut.toJArray(keys));
         });
     }

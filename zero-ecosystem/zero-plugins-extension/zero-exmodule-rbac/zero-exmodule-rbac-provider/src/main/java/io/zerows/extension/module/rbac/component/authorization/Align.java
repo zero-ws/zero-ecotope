@@ -96,10 +96,10 @@ public class Align {
             return null;
         } else {
             final JsonObject groupData = new JsonObject();
-            groupData.put(ScAuthKey.F_GROUP_ID, group.getKey());
+            groupData.put(ScAuthKey.F_GROUP_ID, group.getId());
             groupData.put(ScAuthKey.PRIORITY, current.getPriority());
             /* GroupId */
-            final JsonArray roles = STUB.fetchRoleIds(group.getKey());
+            final JsonArray roles = STUB.fetchRoleIds(group.getId());
             groupData.put("role", roles);
             /* Don't forget to call init() method to set role related permissions. */
             return new ProfileGroup(groupData)

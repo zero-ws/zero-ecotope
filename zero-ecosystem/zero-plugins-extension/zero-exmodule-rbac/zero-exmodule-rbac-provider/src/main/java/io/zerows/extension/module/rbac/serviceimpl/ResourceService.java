@@ -40,7 +40,7 @@ public class ResourceService implements ResourceStub {
                 if (params.containsKey("action") && Ut.isNotNil(params.getJsonObject("action"))) {
                     final SAction sAction = Ux.fromJson(params.getJsonObject("action"), SAction.class);
                     // verify important fields
-                    sAction.setKey(Optional.ofNullable(sAction.getKey()).orElse(UUID.randomUUID().toString()))
+                    sAction.setId(Optional.ofNullable(sAction.getId()).orElse(UUID.randomUUID().toString()))
                         .setActive(Optional.ofNullable(sAction.getActive()).orElse(Boolean.TRUE))
                         .setResourceId(Optional.ofNullable(sAction.getResourceId()).orElse(resource.getString(KName.KEY)))
                         .setLevel(Optional.ofNullable(sAction.getLevel()).orElse(resource.getInteger("level")))

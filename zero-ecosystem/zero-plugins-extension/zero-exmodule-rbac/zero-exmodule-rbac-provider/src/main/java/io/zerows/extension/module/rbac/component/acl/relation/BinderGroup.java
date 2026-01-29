@@ -45,8 +45,8 @@ public class BinderGroup extends AbstractBind<SGroup> {
                     final List<SGroup> groups = roleMap.getOrDefault(user.getUsername(), new ArrayList<>());
                     Ut.itList(groups, (group, index) -> {
                         final RUserGroup relation = new RUserGroup();
-                        relation.setGroupId(group.getKey());
-                        relation.setUserId(user.getKey());
+                        relation.setGroupId(group.getId());
+                        relation.setUserId(user.getId());
                         relation.setPriority(index);
                         relationList.add(relation);
                     });
@@ -63,7 +63,7 @@ public class BinderGroup extends AbstractBind<SGroup> {
 
     @Override
     protected Function<SGroup, String> keyFn() {
-        return SGroup::getKey;
+        return SGroup::getId;
     }
 
     @Override

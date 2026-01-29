@@ -38,7 +38,7 @@ public class RuleService implements RuleStub {
          * 2. `parentId` is null
          * 3. Sort By `uiSort`
          */
-        return Sc.cachePath(input, path -> DB.on(SPathDao.class).fetchJAsync(KName.PARENT_ID, path.getKey())
+        return Sc.cachePath(input, path -> DB.on(SPathDao.class).fetchJAsync(KName.PARENT_ID, path.getId())
             .compose(children -> {
                 /*
                  * Extract `runComponent` to web `HValve` and then run it based join configured
@@ -95,7 +95,7 @@ public class RuleService implements RuleStub {
         if (Objects.isNull(input)) {
             return Ux.futureL();
         }
-        return Sc.cachePocket(input, path -> DB.on(SPathDao.class).<SPath>fetchAsync(KName.PARENT_ID, path.getKey())
+        return Sc.cachePocket(input, path -> DB.on(SPathDao.class).<SPath>fetchAsync(KName.PARENT_ID, path.getId())
             .compose(children -> {
                 // CODE IN (?, ?, ?) AND SIGMA = ?
                 final JsonObject condition = Ux.whereAnd()

@@ -43,7 +43,7 @@ public class QuinnView implements Quinn {
             final JsonObject qrData = Quinn.viewQr(resourceId, owner);
             qrData.mergeIn(viewData);
             final SView inserted = Ut.deserialize(qrData, SView.class);
-            inserted.setKey(UUID.randomUUID().toString());
+            inserted.setId(UUID.randomUUID().toString());
             inserted.setActive(Boolean.TRUE);
 
             // 此处没有 owner / ownerType（新建时需跟上）

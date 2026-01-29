@@ -72,7 +72,7 @@ class SyntaxRegion {
             // 多视图支持，整体形成一个 view - visitant 的完整结构（多叉树）
             // .put(KName.NAME, owner.view())
             // .put(KName.POSITION, owner.position())
-            .put(KName.RESOURCE_ID, resource.getKey());
+            .put(KName.RESOURCE_ID, resource.getId());
         return DB.on(SViewDao.class).<SView>fetchAsync(viewQr).compose(views -> {
             // metadata
             final JsonObject response = new JsonObject();
@@ -121,7 +121,7 @@ class SyntaxRegion {
         }).compose(responseJ -> {
             final Boolean virtual = Objects.isNull(resource.getVirtual()) ? Boolean.FALSE : resource.getVirtual();
             if (virtual) {
-                return DB.on(SVisitantDao.class).<SVisitant>fetchAsync(KName.VIEW_ID, view.getKey())
+                return DB.on(SVisitantDao.class).<SVisitant>fetchAsync(KName.VIEW_ID, view.getId())
                     .compose(visitants -> {
                         final JsonObject visitantJ = new JsonObject();
                         visitants.forEach(visitant -> visitantJ.put(visitant.getSeekKey(), Ux.toJson(visitant)));

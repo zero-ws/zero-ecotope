@@ -1,79 +1,45 @@
--- liquibase formatted sql
+DROP TABLE IF EXISTS `S_PERM_SET`;
+CREATE TABLE IF NOT EXISTS `S_PERM_SET` (
+    -- ==================================================================================================
+    -- 🆔 1. 核心主键区 (Primary Key Strategy)
+    -- ==================================================================================================
+    `ID`          VARCHAR(36)   COLLATE utf8mb4_bin NOT NULL COMMENT '「id」- 主键',                          -- [主键] 采用 Snowflake/UUID，避开自增ID
 
--- changeset Lang:ox-perm-set-1
--- 权限专用表：S_PERMISSION
-DROP TABLE IF EXISTS S_PERM_SET;
-CREATE TABLE IF NOT EXISTS S_PERM_SET
-(
-    `KEY`
-    VARCHAR
-(
-    36
-) COMMENT '「key」- 权限集ID',
-    `NAME` VARCHAR
-(
-    255
-) COMMENT '「name」- 权限集名称',
-    `CODE` VARCHAR
-(
-    255
-) COMMENT '「code」- 权限集关联权限代码',
+    -- ==================================================================================================
+    -- 📝 2. 业务字段区 (Business Fields)
+    -- ==================================================================================================
+    `CODE`        VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「code」- 编号',
+    `COMMENT`     TEXT          COLLATE utf8mb4_bin COMMENT '「comment」- 备注',
+    `NAME`        VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「name」- 名称',
 
-    -- 权限基础信息
-    -- 三层维度处理
-    -- 1）type，基本权限类型：系统权限，开发权限，业务权限
-    -- 2）name，权限集
-    -- 3）三级，直接在name中支持：<level1>/<level2>/<level3> 实现分类排序（约定，非必须）
-    `TYPE` VARCHAR
-(
-    255
-) COMMENT '「type」- 权限集类型',
+    -- ==================================================================================================
+    -- 🧩 3. 模型关联与多态 (Polymorphic Associations)
+    -- ==================================================================================================
+    `TYPE`        VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「type」- 类型',                    -- [类型],
 
-    -- 特殊字段
-    `COMMENT` TEXT COMMENT '「comment」- 权限集说明',
-    -- ------------------------------ 公共字段 --------------------------------
-    `SIGMA` VARCHAR
-(
-    128
-) COMMENT '「sigma」- 用户组绑定的统一标识',
-    `LANGUAGE` VARCHAR
-(
-    10
-) COMMENT '「language」- 使用的语言',
-    `ACTIVE` BIT COMMENT '「active」- 是否启用',
-    `METADATA` TEXT COMMENT '「metadata」- 附加配置数据',
+    -- ==================================================================================================
+    -- ☁️ 4. 多租户与上下文属性 (Multi-Tenancy & Context)
+    -- ==================================================================================================
+    `SIGMA`       VARCHAR(128)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「sigma」- 统一标识',               -- [物理隔离] 核心分片键/顶层租户标识,
+    `TENANT_ID`   VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「tenantId」- 租户ID',                -- [业务隔离] SaaS 租户/具体公司标识,
+    `APP_ID`      VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「appId」- 应用ID',                   -- [逻辑隔离] 区分同一租户下的不同应用,
+    -- --------------------------------------------------------------------------------------------------
+    `ACTIVE`      BIT(1)        DEFAULT NULL COMMENT '「active」- 是否启用',                                  -- [状态] 1=启用/正常, 0=禁用/冻结,
+    `LANGUAGE`    VARCHAR(10)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「language」- 语言偏好',            -- [国际化] 如: zh_CN, en_US,
+    `METADATA`    TEXT          COLLATE utf8mb4_bin COMMENT '「metadata」- 元配置',                           -- [扩展] JSON格式，存储非结构化配置,
+    `VERSION`     VARCHAR(64)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「version」- 版本号',
+    -- ==================================================================================================
+    `CREATED_AT`  DATETIME      DEFAULT NULL COMMENT '「createdAt」- 创建时间',                               -- [审计] 创建时间
+    `CREATED_BY`  VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「createdBy」- 创建人',             -- [审计] 创建人
+    `UPDATED_AT`  DATETIME      DEFAULT NULL COMMENT '「updatedAt」- 更新时间',                               -- [审计] 更新时间
+    `UPDATED_BY`  VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「updatedBy」- 更新人',             -- [审计] 更新人
 
-    -- Auditor字段
-    `CREATED_AT` DATETIME COMMENT '「createdAt」- 创建时间',
-    `CREATED_BY` VARCHAR
-(
-    36
-) COMMENT '「createdBy」- 创建人',
-    `UPDATED_AT` DATETIME COMMENT '「updatedAt」- 更新时间',
-    `UPDATED_BY` VARCHAR
-(
-    36
-) COMMENT '「updatedBy」- 更新人',
+    -- ==================================================================================================
+    -- ⚡ 6. 索引定义 (Index Definition)
+    -- ==================================================================================================
+    PRIMARY KEY (`ID`) USING BTREE,
+    UNIQUE KEY `UK_S_PERM_SET_NAME_CODE_SIGMA` (`NAME`, `CODE`, `SIGMA`) USING BTREE
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_bin COMMENT='S_PERM_SET';
 
-    `APP_ID` VARCHAR
-(
-    36
-) COMMENT '「appId」- 应用ID',
-    `TENANT_ID` VARCHAR
-(
-    36
-) COMMENT '「tenantId」- 租户ID',
-    PRIMARY KEY
-(
-    `KEY`
-) USING BTREE
-    );
-
--- changeset Lang:ox-perm-set-2
--- Unique Key：独立唯一键定义
--- 关于权限集说明
--- 1）同一个权限集中包含的权限不可重复
--- 2）资源定义好过后，权限集在新版本中作为过滤菜单处理
--- 3）管理界面的第一部分直接使用权限集和权限关联关系执行
-ALTER TABLE S_PERM_SET
-    ADD UNIQUE (`NAME`, `CODE`, `SIGMA`) USING BTREE;
+-- 缺失公共字段：
+-- - VERSION (版本)

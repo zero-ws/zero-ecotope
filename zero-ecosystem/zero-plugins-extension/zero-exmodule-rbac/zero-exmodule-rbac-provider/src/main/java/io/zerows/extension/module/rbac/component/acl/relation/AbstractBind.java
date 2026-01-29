@@ -61,7 +61,7 @@ public abstract class AbstractBind<T> implements IdcBinder<T> {
     }
 
     protected Future<Boolean> purgeAsync(final List<SUser> users, final Class<?> daoCls, final String field) {
-        final Set<String> userKeys = users.stream().map(SUser::getKey).collect(Collectors.toSet());
+        final Set<String> userKeys = users.stream().map(SUser::getId).collect(Collectors.toSet());
         final JsonObject condition = new JsonObject();
         /*
          * Remove old relation ship between ( role - user )
