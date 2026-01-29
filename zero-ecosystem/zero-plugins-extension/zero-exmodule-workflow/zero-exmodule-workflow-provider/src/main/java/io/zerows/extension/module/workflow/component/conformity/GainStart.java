@@ -20,7 +20,7 @@ public class GainStart extends AbstractGain {
         final WTodo todo = Ux.fromJson(params, WTodo.class);
 
         // 2. Connect Camunda
-        this.bridgeTask(todo, task, this.ticket.getKey());
+        this.bridgeTask(todo, task, this.ticket.getId());
 
         // 3. TraceOrder = 1 and of serial/code
         todo.setTraceOrder(1);

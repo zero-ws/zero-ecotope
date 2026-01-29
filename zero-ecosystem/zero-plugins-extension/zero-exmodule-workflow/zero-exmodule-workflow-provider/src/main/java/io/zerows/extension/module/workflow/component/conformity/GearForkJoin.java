@@ -55,7 +55,7 @@ public class GearForkJoin extends AbstractGear {
             final AtomicInteger seed = new AtomicInteger(1);
             generatedQ.forEach(generated -> {
                 // Duplicate entry 'da89a198-a9fb-40f8-a3cc-6a77df8cea22' for key 'PRIMARY'
-                generated.setKey(UUID.randomUUID().toString());
+                generated.setId(UUID.randomUUID().toString());
 
                 // 2. Serial Generation
                 generated.setSerialFork(String.valueOf(seed.getAndIncrement()));

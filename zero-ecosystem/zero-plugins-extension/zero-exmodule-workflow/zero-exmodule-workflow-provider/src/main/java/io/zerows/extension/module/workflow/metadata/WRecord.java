@@ -375,7 +375,7 @@ public class WRecord implements Serializable {
                     if (Objects.isNull(modelId)) {
                         return Ux.futureA();
                     }
-                    return activity.activities(modelId, this.ticket.getKey());
+                    return activity.activities(modelId, this.ticket.getId());
                 },
                 JsonArray::new
             ));
@@ -547,7 +547,7 @@ public class WRecord implements Serializable {
         Ut.valueToJObject(ticketJ, KName.MODEL_CHILD);
         // WTicket
         // traceKey <- key
-        ticketJ.put(KName.Flow.TRACE_KEY, this.ticket.getKey());
+        ticketJ.put(KName.Flow.TRACE_KEY, this.ticket.getId());
         response.mergeIn(ticketJ, true);
     }
 

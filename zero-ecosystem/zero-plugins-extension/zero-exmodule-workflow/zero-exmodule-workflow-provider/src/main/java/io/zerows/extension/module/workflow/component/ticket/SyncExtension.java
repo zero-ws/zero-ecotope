@@ -59,8 +59,8 @@ class SyncExtension extends AbstractSync {
          * W_TICKET JOIN W_XXX ON W_TICKET.KEY = W_XXX.KEY
          */
         final WTicket ticket = recordRef.ticket();
-        data.put(KName.KEY, ticket.getKey());
-        return tJq.fetchJOneAsync(KName.KEY, ticket.getKey()).compose(queryJ -> Ux.future(queryJ)
+        data.put(KName.KEY, ticket.getId());
+        return tJq.fetchJOneAsync(KName.KEY, ticket.getId()).compose(queryJ -> Ux.future(queryJ)
 
             // Before
             .compose(ticketJ -> UTL.beforeUpdate(ticketJ, recordRef))
@@ -81,7 +81,7 @@ class SyncExtension extends AbstractSync {
                     return tJq.insertJAsync(combineJ);
                 } else {
                     // Existing
-                    return tJq.updateJAsync(ticket.getKey(), combineJ);
+                    return tJq.updateJAsync(ticket.getId(), combineJ);
                 }
             })
 

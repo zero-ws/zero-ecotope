@@ -23,7 +23,7 @@ class GainGenerate extends AbstractGain {
         final WTodo generated = Ux.fromJson(params, WTodo.class);
         {
             // Key Remove ( Comment Clear )
-            generated.setKey(UUID.randomUUID().toString());
+            generated.setId(UUID.randomUUID().toString());
 
             // Comment Clear
             generated.setComment(null);

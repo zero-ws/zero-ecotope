@@ -36,7 +36,7 @@ public class UTicket {
         final WRecord generatedNew = UTL.recordU(wTransition);
 
         // AOP/Before
-        return UTL.beforeGenerate(record, generatedNew).compose(generated -> DB.on(WTicketDao.class).<WTicket>fetchByIdAsync(ticket.getKey())
+        return UTL.beforeGenerate(record, generatedNew).compose(generated -> DB.on(WTicketDao.class).<WTicket>fetchByIdAsync(ticket.getId())
 
             // Sync Ticket
             .compose(processed -> Sync.ticket(this.metadata).treatAsync(requestJ, generated, processed))
@@ -182,7 +182,7 @@ public class UTicket {
                  *  - category
                  *  - categorySub
                  */
-                ticket.setKey(normalized.getString(KName.Flow.TRACE_KEY));      // Connect ticket key
+                ticket.setId(normalized.getString(KName.Flow.TRACE_KEY));      // Connect ticket key
                 ticket.setFlowEnd(Boolean.FALSE);
                 final ProcessInstance instance = wTransition.instance();
                 ticket.setFlowInstanceId(instance.getId());
