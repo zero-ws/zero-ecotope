@@ -37,11 +37,11 @@ class OnenessConnect implements Oneness<MDConnect> {
         // 实体表，非 R_ 前缀
         final String pojoFile = connect.getPojoFile();
         if (Ut.isNil(pojoFile)) {
-            return connect.getKey();
+            return connect.getId();
         } else {
             // 带有 pojoFile 映射的主键
             final MMAdapt adapt = MMAdapt.of(pojoFile).ofType(connect.getDao());
-            return adapt.mapBy(connect.getKey());
+            return adapt.mapBy(connect.getId());
         }
     }
 

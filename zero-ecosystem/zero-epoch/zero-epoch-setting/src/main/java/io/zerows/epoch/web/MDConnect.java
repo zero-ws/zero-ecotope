@@ -30,7 +30,7 @@ public class MDConnect implements Serializable {
     @JsonDeserialize(using = JsonArrayDeserializer.class)
     private JsonArray unique;       // 唯一键列表（二维矩阵）
 
-    private String key;             // 主键字段名称
+    private String id;             // 主键字段名称
 
     @JsonIgnore
     private MDMeta meta;            // 元数据信息（此处要唯一）
@@ -67,7 +67,7 @@ public class MDConnect implements Serializable {
      * 简单计算
      * <pre><code>
      *     1. 关系模型 key 允许为空，不设置默认值
-     *     2. 实体模型，未配置的情况下返回 "key"
+     *     2. 实体模型，未配置的情况下返回 "id"
      * </code></pre>
      *
      * @return key
@@ -78,8 +78,8 @@ public class MDConnect implements Serializable {
 
 
         // 设置默认主键
-        if (meta.isEntity() && Objects.isNull(this.key)) {
-            this.key = KName.KEY;
+        if (meta.isEntity() && Objects.isNull(this.id)) {
+            this.id = KName.ID; // KName.KEY;
         }
 
         // 为空绑定时才执行此操作，不为空时可以直接获取
@@ -110,7 +110,7 @@ public class MDConnect implements Serializable {
             ", dao=" + this.dao +
             ", pojoFile='" + this.pojoFile + '\'' +
             ", unique=" + this.unique +
-            ", key='" + this.key + '\'' +
+            ", id='" + this.id + '\'' +
             '}';
     }
 }
