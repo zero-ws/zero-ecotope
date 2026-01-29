@@ -8,6 +8,10 @@ import io.zerows.extension.module.erp.domain.tables.EBrand;
 import io.zerows.extension.module.erp.domain.tables.EDept;
 import io.zerows.extension.module.erp.domain.tables.EEmployee;
 import io.zerows.extension.module.erp.domain.tables.ETeam;
+import io.zerows.extension.module.erp.domain.tables.RAssetShare;
+import io.zerows.extension.module.erp.domain.tables.RCompanyCustomer;
+import io.zerows.extension.module.erp.domain.tables.RTeamEmployee;
+
 import org.jooq.Index;
 import org.jooq.OrderField;
 import org.jooq.impl.DSL;
@@ -17,19 +21,22 @@ import org.jooq.impl.Internal;
 /**
  * A class modelling indexes of tables in ZDB.
  */
-@SuppressWarnings({"all", "unchecked", "rawtypes", "this-escape"})
+@SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
 public class Indexes {
 
     // -------------------------------------------------------------------------
     // INDEX definitions
     // -------------------------------------------------------------------------
 
-    public static final Index E_BRAND_IDX_E_BRAND_SIGMA = Internal.createIndex(DSL.name("IDX_E_BRAND_SIGMA"), EBrand.E_BRAND, new OrderField[]{EBrand.E_BRAND.SIGMA}, false);
-    public static final Index E_DEPT_IDX_E_DEPT_SIGMA = Internal.createIndex(DSL.name("IDX_E_DEPT_SIGMA"), EDept.E_DEPT, new OrderField[]{EDept.E_DEPT.SIGMA}, false);
-    public static final Index E_DEPT_IDX_E_DEPT_SIGMA_ACTIVE = Internal.createIndex(DSL.name("IDX_E_DEPT_SIGMA_ACTIVE"), EDept.E_DEPT, new OrderField[]{EDept.E_DEPT.SIGMA, EDept.E_DEPT.ACTIVE}, false);
-    public static final Index E_EMPLOYEE_IDX_E_EMPLOYEE_SIGMA = Internal.createIndex(DSL.name("IDX_E_EMPLOYEE_SIGMA"), EEmployee.E_EMPLOYEE, new OrderField[]{EEmployee.E_EMPLOYEE.SIGMA}, false);
-    public static final Index E_EMPLOYEE_IDX_E_EMPLOYEE_SIGMA_ACTIVE = Internal.createIndex(DSL.name("IDX_E_EMPLOYEE_SIGMA_ACTIVE"), EEmployee.E_EMPLOYEE, new OrderField[]{EEmployee.E_EMPLOYEE.SIGMA, EEmployee.E_EMPLOYEE.ACTIVE}, false);
-    public static final Index E_EMPLOYEE_IDX_E_EMPLOYEE_WORK_NUMBER = Internal.createIndex(DSL.name("IDX_E_EMPLOYEE_WORK_NUMBER"), EEmployee.E_EMPLOYEE, new OrderField[]{EEmployee.E_EMPLOYEE.WORK_NUMBER}, false);
-    public static final Index E_TEAM_IDX_E_TEAM_SIGMA = Internal.createIndex(DSL.name("IDX_E_TEAM_SIGMA"), ETeam.E_TEAM, new OrderField[]{ETeam.E_TEAM.SIGMA}, false);
-    public static final Index E_TEAM_IDX_E_TEAM_SIGMA_ACTIVE = Internal.createIndex(DSL.name("IDX_E_TEAM_SIGMA_ACTIVE"), ETeam.E_TEAM, new OrderField[]{ETeam.E_TEAM.SIGMA, ETeam.E_TEAM.ACTIVE}, false);
+    public static final Index E_BRAND_IDX_E_BRAND_SIGMA = Internal.createIndex(DSL.name("IDX_E_BRAND_SIGMA"), EBrand.E_BRAND, new OrderField[] { EBrand.E_BRAND.SIGMA }, false);
+    public static final Index E_DEPT_IDX_E_DEPT_SIGMA = Internal.createIndex(DSL.name("IDX_E_DEPT_SIGMA"), EDept.E_DEPT, new OrderField[] { EDept.E_DEPT.SIGMA }, false);
+    public static final Index E_DEPT_IDX_E_DEPT_SIGMA_ACTIVE = Internal.createIndex(DSL.name("IDX_E_DEPT_SIGMA_ACTIVE"), EDept.E_DEPT, new OrderField[] { EDept.E_DEPT.SIGMA, EDept.E_DEPT.ACTIVE }, false);
+    public static final Index E_EMPLOYEE_IDX_E_EMPLOYEE_SIGMA = Internal.createIndex(DSL.name("IDX_E_EMPLOYEE_SIGMA"), EEmployee.E_EMPLOYEE, new OrderField[] { EEmployee.E_EMPLOYEE.SIGMA }, false);
+    public static final Index E_EMPLOYEE_IDX_E_EMPLOYEE_SIGMA_ACTIVE = Internal.createIndex(DSL.name("IDX_E_EMPLOYEE_SIGMA_ACTIVE"), EEmployee.E_EMPLOYEE, new OrderField[] { EEmployee.E_EMPLOYEE.SIGMA, EEmployee.E_EMPLOYEE.ACTIVE }, false);
+    public static final Index E_EMPLOYEE_IDX_E_EMPLOYEE_WORK_NUMBER = Internal.createIndex(DSL.name("IDX_E_EMPLOYEE_WORK_NUMBER"), EEmployee.E_EMPLOYEE, new OrderField[] { EEmployee.E_EMPLOYEE.WORK_NUMBER }, false);
+    public static final Index E_TEAM_IDX_E_TEAM_SIGMA = Internal.createIndex(DSL.name("IDX_E_TEAM_SIGMA"), ETeam.E_TEAM, new OrderField[] { ETeam.E_TEAM.SIGMA }, false);
+    public static final Index E_TEAM_IDX_E_TEAM_SIGMA_ACTIVE = Internal.createIndex(DSL.name("IDX_E_TEAM_SIGMA_ACTIVE"), ETeam.E_TEAM, new OrderField[] { ETeam.E_TEAM.SIGMA, ETeam.E_TEAM.ACTIVE }, false);
+    public static final Index R_ASSET_SHARE_IDX_R_ASSET_SHARE_ENTITY = Internal.createIndex(DSL.name("IDX_R_ASSET_SHARE_ENTITY"), RAssetShare.R_ASSET_SHARE, new OrderField[] { RAssetShare.R_ASSET_SHARE.ENTITY_TYPE, RAssetShare.R_ASSET_SHARE.ENTITY_ID }, false);
+    public static final Index R_COMPANY_CUSTOMER_IDX_R_COMPANY_CUSTOMER_CUSTOMER_ID = Internal.createIndex(DSL.name("IDX_R_COMPANY_CUSTOMER_CUSTOMER_ID"), RCompanyCustomer.R_COMPANY_CUSTOMER, new OrderField[] { RCompanyCustomer.R_COMPANY_CUSTOMER.CUSTOMER_ID }, false);
+    public static final Index R_TEAM_EMPLOYEE_IDX_R_TEAM_EMPLOYEE_EMPLOYEE_ID = Internal.createIndex(DSL.name("IDX_R_TEAM_EMPLOYEE_EMPLOYEE_ID"), RTeamEmployee.R_TEAM_EMPLOYEE, new OrderField[] { RTeamEmployee.R_TEAM_EMPLOYEE.EMPLOYEE_ID }, false);
 }

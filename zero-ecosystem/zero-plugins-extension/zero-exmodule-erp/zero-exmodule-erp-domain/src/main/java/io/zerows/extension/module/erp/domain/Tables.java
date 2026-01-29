@@ -30,111 +30,111 @@ import io.zerows.extension.module.erp.domain.tables.TVendorHour;
 /**
  * Convenience access to all tables in ZDB.
  */
-@SuppressWarnings({"all", "unchecked", "rawtypes", "this-escape"})
+@SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
 public class Tables {
 
     /**
-     * The table <code>ZDB.E_ASSET</code>.
+     * E_ASSET
      */
     public static final EAsset E_ASSET = EAsset.E_ASSET;
 
     /**
-     * The table <code>ZDB.E_BRAND</code>.
+     * E_BRAND
      */
     public static final EBrand E_BRAND = EBrand.E_BRAND;
 
     /**
-     * The table <code>ZDB.E_COMPANY</code>.
+     * 公司
      */
     public static final ECompany E_COMPANY = ECompany.E_COMPANY;
 
     /**
-     * The table <code>ZDB.E_CONTRACT</code>.
+     * E_CONTRACT
      */
     public static final EContract E_CONTRACT = EContract.E_CONTRACT;
 
     /**
-     * The table <code>ZDB.E_CUSTOMER</code>.
+     * E_CUSTOMER
      */
     public static final ECustomer E_CUSTOMER = ECustomer.E_CUSTOMER;
 
     /**
-     * The table <code>ZDB.E_DEPT</code>.
+     * E_DEPT
      */
     public static final EDept E_DEPT = EDept.E_DEPT;
 
     /**
-     * The table <code>ZDB.E_EMPLOYEE</code>.
+     * 员工
      */
     public static final EEmployee E_EMPLOYEE = EEmployee.E_EMPLOYEE;
 
     /**
-     * The table <code>ZDB.E_IDENTITY</code>.
+     * E_IDENTITY
      */
     public static final EIdentity E_IDENTITY = EIdentity.E_IDENTITY;
 
     /**
-     * The table <code>ZDB.E_PROJECT</code>.
+     * E_PROJECT
      */
     public static final EProject E_PROJECT = EProject.E_PROJECT;
 
     /**
-     * The table <code>ZDB.E_TEAM</code>.
+     * E_TEAM
      */
     public static final ETeam E_TEAM = ETeam.E_TEAM;
 
     /**
-     * The table <code>ZDB.R_ASSET_SHARE</code>.
+     * 资产 - 实体共享
      */
     public static final RAssetShare R_ASSET_SHARE = RAssetShare.R_ASSET_SHARE;
 
     /**
-     * The table <code>ZDB.R_COMPANY_CUSTOMER</code>.
+     * 公司 - 客户
      */
     public static final RCompanyCustomer R_COMPANY_CUSTOMER = RCompanyCustomer.R_COMPANY_CUSTOMER;
 
     /**
-     * The table <code>ZDB.R_TEAM_EMPLOYEE</code>.
+     * 团队 - 员工
      */
     public static final RTeamEmployee R_TEAM_EMPLOYEE = RTeamEmployee.R_TEAM_EMPLOYEE;
 
     /**
-     * The table <code>ZDB.T_OA_ASSIGNMENT</code>.
+     * OA - 任务分配
      */
     public static final TOaAssignment T_OA_ASSIGNMENT = TOaAssignment.T_OA_ASSIGNMENT;
 
     /**
-     * The table <code>ZDB.T_OA_TRAINING</code>.
+     * OA - 培训记录
      */
     public static final TOaTraining T_OA_TRAINING = TOaTraining.T_OA_TRAINING;
 
     /**
-     * The table <code>ZDB.T_OA_TRIP</code>.
+     * OA - 差旅申请
      */
     public static final TOaTrip T_OA_TRIP = TOaTrip.T_OA_TRIP;
 
     /**
-     * The table <code>ZDB.T_OA_VACATION</code>.
+     * OA - 请假申请
      */
     public static final TOaVacation T_OA_VACATION = TOaVacation.T_OA_VACATION;
 
     /**
-     * The table <code>ZDB.T_VENDOR_ASSESSMENT</code>.
+     * 供应商 - 考核评估
      */
     public static final TVendorAssessment T_VENDOR_ASSESSMENT = TVendorAssessment.T_VENDOR_ASSESSMENT;
 
     /**
-     * The table <code>ZDB.T_VENDOR_CHECK_IN</code>.
+     * 供应商 - 入驻登记
      */
     public static final TVendorCheckIn T_VENDOR_CHECK_IN = TVendorCheckIn.T_VENDOR_CHECK_IN;
 
     /**
-     * The table <code>ZDB.T_VENDOR_CHECK_OUT</code>.
+     * 供应商 - 离场登记
      */
     public static final TVendorCheckOut T_VENDOR_CHECK_OUT = TVendorCheckOut.T_VENDOR_CHECK_OUT;
 
     /**
-     * The table <code>ZDB.T_VENDOR_HOUR</code>.
+     * 供应商 - 工时申报
      */
     public static final TVendorHour T_VENDOR_HOUR = TVendorHour.T_VENDOR_HOUR;
 }

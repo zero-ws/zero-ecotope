@@ -1,91 +1,88 @@
--- liquibase formatted sql
-
--- changeset Lang:e-asset-1
 DROP TABLE IF EXISTS `E_ASSET`;
-CREATE TABLE `E_ASSET`
-(
-    `KEY`             VARCHAR(36) COMMENT '「key」- 资产主键',
-    `NAME`            VARCHAR(255) COMMENT '「name」- 资产名称',
-    `CODE`            VARCHAR(255) COMMENT '「code」- 资产编号',
-    `TYPE`            VARCHAR(36) COMMENT '「type」- 资产类型',
-    `STATUS`          VARCHAR(36) COMMENT '「status」- 资产状态',
+CREATE TABLE IF NOT EXISTS `E_ASSET` (
+    -- ==================================================================================================
+    -- 🆔 1. 核心主键区 (Primary Key Strategy)
+    -- ==================================================================================================
+    `ID`               VARCHAR(36)     COLLATE utf8mb4_bin NOT NULL COMMENT '「id」- 主键',                   -- [主键] 采用 Snowflake/UUID，避开自增ID
 
-    -- 商品属性
-    `MODEL_NUMBER`    VARCHAR(255) COMMENT '「modelNumber」- 规格型号',
-    `UNIT`            VARCHAR(64) COMMENT '「unit」- 计量单位',
+    -- ==================================================================================================
+    -- 📝 2. 业务字段区 (Business Fields)
+    -- ==================================================================================================
+    `ACCOUNT_AT`       DATETIME        DEFAULT NULL COMMENT '「accountAt」- 入账时间',
+    `ACCOUNT_BY`       VARCHAR(36)     COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「accountBy」- 入账人',
+    `CODE`             VARCHAR(255)    COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「code」- 编号',
+    `COMMENT`          TEXT            COLLATE utf8mb4_bin COMMENT '「comment」- 备注',
+    `COMPANY_ID`       VARCHAR(36)     COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「companyId」- 所属公司',
+    `CUSTOMER_ID`      VARCHAR(36)     COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「customerId」- 供应商ID',
+    `DEPT_ID`          VARCHAR(36)     COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「deptId」- 所属部门',
+    `ENTER_AT`         DATETIME        DEFAULT NULL COMMENT '「enterAt」- 入库时间',
+    `ENTER_BY`         VARCHAR(36)     COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「enterBy」- 入库人',
+    `EXPIRED_AT`       DATETIME        DEFAULT NULL COMMENT '「expiredAt」- 到期时间',
+    `EXPIRED_COMMENT`  TEXT            COLLATE utf8mb4_bin COMMENT '「expiredComment」- 到期说明',
+    `K_ASSIGNMENT`     VARCHAR(36)     COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「kAssignment」- 折旧费用分配科目',
+    `K_CHANGE`         VARCHAR(36)     COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「kChange」- 资产变动对方科目',
+    `K_DEPRECATED`     VARCHAR(36)     COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「kDeprecated」- 累积折旧科目',
+    `K_DEVALUE`        VARCHAR(36)     COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「kDevalue」- 减值准备科目',
+    `K_FIXED`          VARCHAR(36)     COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「kFixed」- 固定资产科目',
+    `K_TAX`            VARCHAR(36)     COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「kTax」- 税金科目',
+    `MODEL_NUMBER`     VARCHAR(255)    COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「modelNumber」- 规格型号',
+    `NAME`             VARCHAR(255)    COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「name」- 名称',
+    `NUM`              BIGINT          DEFAULT NULL COMMENT '「num」- 资产数量',
+    `NUM_DEPRECATED`   BIGINT          DEFAULT NULL COMMENT '「numDeprecated」- 已折旧数量',
+    `NUM_DEPRECATING`  BIGINT          DEFAULT NULL COMMENT '「numDeprecating」- 预计折旧数量',
+    `NUM_USED`         BIGINT          DEFAULT NULL COMMENT '「numUsed」- 已使用数量',
+    `NUM_USING`        BIGINT          DEFAULT NULL COMMENT '「numUsing」- 预计使用数量',
+    `PARENT_ID`        VARCHAR(36)     COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「parentId」- 父节点',
+    `SCRAP_AT`         DATETIME        DEFAULT NULL COMMENT '「scrapAt」- 报废时间',
+    `SCRAP_BY`         VARCHAR(36)     COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「scrapBy」- 报废人',
+    `STORE_ID`         VARCHAR(36)     COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「storeId」- 所属仓库ID',
+    `UNIT`             VARCHAR(64)     COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「unit」- 计量单位',
+    `USED_AT`          DATETIME        DEFAULT NULL COMMENT '「usedAt」- 开始使用时间',
+    `USED_BY`          VARCHAR(64)     COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「usedBy」- 使用者',
+    `USED_STATUS`      VARCHAR(255)    COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「usedStatus」- 使用状态',
+    `USER_ID`          VARCHAR(36)     COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「userId」- 资产管理者',
+    `V_DEPRECATED_A`   DECIMAL(18, 2)  DEFAULT NULL COMMENT '「vDeprecatedA」- 累积折旧',
+    `V_DEPRECATED_M`   DECIMAL(18, 2)  DEFAULT NULL COMMENT '「vDeprecatedM」- 月折旧',
+    `V_DE_READY`       DECIMAL(18, 2)  DEFAULT NULL COMMENT '「vDeReady」- 减值准备',
+    `V_NET`            DECIMAL(18, 2)  DEFAULT NULL COMMENT '「vNet」- 净值',
+    `V_NET_AMOUNT`     DECIMAL(18, 2)  DEFAULT NULL COMMENT '「vNetAmount」- 净额',
+    `V_NET_JUNK`       DECIMAL(18, 2)  DEFAULT NULL COMMENT '「vNetJunk」- 净残值',
+    `V_ORIGINAL`       DECIMAL(18, 2)  DEFAULT NULL COMMENT '「vOriginal」- 原价值',
+    `V_TAX`            DECIMAL(18, 2)  DEFAULT NULL COMMENT '「vTax」- 税额',
+    `WAY_ACCORDING`    VARCHAR(64)     COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「wayAccording」- 折旧依据',
+    `WAY_CHANGE`       VARCHAR(64)     COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「wayChange」- 变动方式',
+    `WAY_DEPRECATE`    VARCHAR(64)     COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「wayDeprecate」- 折旧方式',
 
-    -- 数量信息
-    `NUM`             BIGINT COMMENT '「num」- 资产数量',
-    `NUM_DEPRECATING` BIGINT COMMENT '「numDeprecating」- 预计折旧数量',
-    `NUM_DEPRECATED`  BIGINT COMMENT '「numDeprecated」- 已折旧数量',
-    `NUM_USING`       BIGINT COMMENT '「numUsing」- 预计使用数量',
-    `NUM_USED`        BIGINT COMMENT '「numUsed」- 已使用数量',
+    -- ==================================================================================================
+    -- 🧩 3. 模型关联与多态 (Polymorphic Associations)
+    -- ==================================================================================================
+    `TYPE`             VARCHAR(36)     COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「type」- 类型',             -- [类型],
+    `STATUS`           VARCHAR(36)     COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「status」- 状态',
 
-    -- 变动，折旧，使用
-    `WAY_CHANGE`      VARCHAR(64) COMMENT '「wayChange」- 变动方式',
-    `WAY_DEPRECATE`   VARCHAR(64) COMMENT '「wayDeprecate」- 折旧方式',
-    `WAY_ACCORDING`   VARCHAR(64) COMMENT '「wayAccording」- 折旧依据',
-    `USED_AT`         DATETIME COMMENT '「usedAt」- 开始使用时间',
-    `USED_BY`         VARCHAR(64) COMMENT '「usedBy」- 使用者',
-    `USED_STATUS`     VARCHAR(255) COMMENT '「usedStatus」- 使用状态',
+    -- ==================================================================================================
+    -- ☁️ 4. 多租户与上下文属性 (Multi-Tenancy & Context)
+    -- ==================================================================================================
+    `SIGMA`            VARCHAR(128)    COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「sigma」- 统一标识',        -- [物理隔离] 核心分片键/顶层租户标识,
+    `TENANT_ID`        VARCHAR(36)     COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「tenantId」- 租户ID',         -- [业务隔离] SaaS 租户/具体公司标识,
+    `APP_ID`           VARCHAR(36)     COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「appId」- 应用ID',            -- [逻辑隔离] 区分同一租户下的不同应用,
+    -- --------------------------------------------------------------------------------------------------
+    `ACTIVE`           BIT(1)          DEFAULT NULL COMMENT '「active」- 是否启用',                           -- [状态] 1=启用/正常, 0=禁用/冻结,
+    `LANGUAGE`         VARCHAR(10)     COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「language」- 语言偏好',     -- [国际化] 如: zh_CN, en_US,
+    `METADATA`         TEXT            COLLATE utf8mb4_bin COMMENT '「metadata」- 元配置',                    -- [扩展] JSON格式，存储非结构化配置,
+    `VERSION`          VARCHAR(64)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「version」- 版本号',
+    -- ==================================================================================================
+    `CREATED_AT`       DATETIME        DEFAULT NULL COMMENT '「createdAt」- 创建时间',                        -- [审计] 创建时间
+    `CREATED_BY`       VARCHAR(36)     COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「createdBy」- 创建人',      -- [审计] 创建人
+    `UPDATED_AT`       DATETIME        DEFAULT NULL COMMENT '「updatedAt」- 更新时间',                        -- [审计] 更新时间
+    `UPDATED_BY`       VARCHAR(36)     COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「updatedBy」- 更新人',      -- [审计] 更新人
 
-    -- 价值属性
-    `V_ORIGINAL`      DECIMAL(18, 2) COMMENT '「vOriginal」- 原价值',
-    `V_TAX`           DECIMAL(18, 2) COMMENT '「vTax」- 税额',
-    `V_DE_READY`      DECIMAL(18, 2) COMMENT '「vDeReady」- 减值准备',
-    `V_NET_JUNK`      DECIMAL(18, 2) COMMENT '「vNetJunk」- 净残值',
-    `V_NET`           DECIMAL(18, 2) COMMENT '「vNet」- 净值',
-    `V_NET_AMOUNT`    DECIMAL(18, 2) COMMENT '「vNetAmount」- 净额',
-    `V_DEPRECATED_M`  DECIMAL(18, 2) COMMENT '「vDeprecatedM」- 月折旧',
-    `V_DEPRECATED_A`  DECIMAL(18, 2) COMMENT '「vDeprecatedA」- 累积折旧',
+    -- ==================================================================================================
+    -- ⚡ 6. 索引定义 (Index Definition)
+    -- ==================================================================================================
+    PRIMARY KEY (`ID`) USING BTREE,
+    UNIQUE KEY `UK_E_ASSET_NAME_SIGMA` (`NAME`, `SIGMA`) USING BTREE,
+    UNIQUE KEY `UK_E_ASSET_CODE_SIGMA` (`CODE`, `SIGMA`) USING BTREE
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_bin COMMENT='E_ASSET';
 
-    -- 财务属性
-    `K_FIXED`         VARCHAR(36) COMMENT '「kFixed」- 固定资产科目',
-    `K_DEPRECATED`    VARCHAR(36) COMMENT '「kDeprecated」- 累积折旧科目',
-    `K_ASSIGNMENT`    VARCHAR(36) COMMENT '「kAssignment」- 折旧费用分配科目',
-    `K_TAX`           VARCHAR(36) COMMENT '「kTax」- 税金科目',
-    `K_DEVALUE`       VARCHAR(36) COMMENT '「kDevalue」- 减值准备科目',
-    `K_CHANGE`        VARCHAR(36) COMMENT '「kChange」- 资产变动对方科目',
-
-    -- 供应商信息
-    `CUSTOMER_ID`     VARCHAR(36) COMMENT '「customerId」- 供应商ID',
-    `EXPIRED_AT`      DATETIME COMMENT '「expiredAt」- 到期时间',
-    `EXPIRED_COMMENT` TEXT COMMENT '「expiredComment」- 到期说明',
-
-    -- 关联属性
-    `USER_ID`         VARCHAR(36) COMMENT '「userId」- 资产管理者',
-    `STORE_ID`        VARCHAR(36) COMMENT '「storeId」- 所属仓库ID',
-    `DEPT_ID`         VARCHAR(36) COMMENT '「deptId」- 所属部门',
-    `COMPANY_ID`      VARCHAR(36) COMMENT '「companyId」- 所属公司',
-    `PARENT_ID`       VARCHAR(36) COMMENT '「parentId」- 上级资产',
-    `COMMENT`         TEXT COMMENT '「comment」- 资产备注',
-
-    -- 时间处理
-    `ENTER_AT`        DATETIME COMMENT '「enterAt」- 入库时间',
-    `ENTER_BY`        VARCHAR(36) COMMENT '「enterBy」- 入库人',
-    `ACCOUNT_AT`      DATETIME COMMENT '「accountAt」- 入账时间',
-    `ACCOUNT_BY`      VARCHAR(36) COMMENT '「accountBy」- 入账人',
-    `SCRAP_AT`        DATETIME COMMENT '「scrapAt」- 报废时间',
-    `SCRAP_BY`        VARCHAR(36) COMMENT '「scrapBy」- 报废人',
-
-    -- ------------------------------ 公共字段 --------------------------------
-    `SIGMA`           VARCHAR(128) COMMENT '「sigma」- 用户组绑定的统一标识',
-    `LANGUAGE`        VARCHAR(10) COMMENT '「language」- 使用的语言',
-    `ACTIVE`          BIT COMMENT '「active」- 是否启用',
-    `METADATA`        TEXT COMMENT '「metadata」- 附加配置数据',
-
-    -- Auditor字段
-    `CREATED_AT`      DATETIME COMMENT '「createdAt」- 创建时间',
-    `CREATED_BY`      VARCHAR(36) COMMENT '「createdBy」- 创建人',
-    `UPDATED_AT`      DATETIME COMMENT '「updatedAt」- 更新时间',
-    `UPDATED_BY`      VARCHAR(36) COMMENT '「updatedBy」- 更新人',
-
-    `APP_ID`          VARCHAR(36) COMMENT '「appId」- 应用ID',
-    `TENANT_ID`       VARCHAR(36) COMMENT '「tenantId」- 租户ID',
-    PRIMARY KEY (`KEY`) USING BTREE
-);
--- changeset Lang:e-asset-2
-ALTER TABLE E_ASSET
-    ADD UNIQUE (`NAME`, `SIGMA`);
-ALTER TABLE E_ASSET
-    ADD UNIQUE (`CODE`, `SIGMA`);
+-- 缺失公共字段：
+-- - VERSION (版本)
